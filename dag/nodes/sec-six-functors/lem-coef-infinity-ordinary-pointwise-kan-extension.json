@@ -31,9 +31,138 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a containing universe $\\mathcal V$ in which $\\mathcal B$ is small, and form $\\mathcal S_{\\mathcal V}$ and the functor categories in a further containing universe. This makes its mapping spaces $\\mathcal V$-small; it does not assert that $\\mathcal B$ has any new colimits. The object and arrow sets of $(u\\downarrow j)$ are subsets of the $\\mathcal U$-small sets of objects and arrows of $A,J$ and their products, so its nerve is $\\mathcal U$-small. Thus all local colimits used below exist by the original hypothesis. Set $\\mathcal X=\\operatorname{Fun}(N(J),\\mathcal B)$ and $\\mathcal Y=\\operatorname{Fun}(N(A),\\mathcal B)$; these are quasicategories by [lem-cbc-enhanced-functor-cone-calculus].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 6.4.9, size bookkeeping for its Yoneda proof. Only the scalar presheaf construction is performed in the enlarged universe."
+   }
+  },
+  {
+   "text": "The Hom bifunctor gives the covariant representables $Y(b)=\\operatorname{Map}_{\\mathcal B}(b,-)$ and a coherent functor $Y:\\mathcal B^{\\mathrm{op}}\\to\\mathcal T=\\operatorname{Fun}(\\mathcal B,\\mathcal S_{\\mathcal V})$. Apply the dual Yoneda evaluation theorem [lem-coef-infinity-pointwise-yoneda-evaluation] with $Q=Y(c)$: it identifies $\\operatorname{Map}_{\\mathcal T}(Y(b),Y(c))$ with $\\operatorname{Map}_{\\mathcal B}(c,b)$, with the actual map induced by precomposition. Hence $Y$ is fully faithful. Let $\\mathcal T_0$ be its full replete essential image. By [lem-coef-infinity-full-essential-image], $Y:\\mathcal B^{\\mathrm{op}}\\to\\mathcal T_0$ has a coherent inverse. Consequently its postcomposition on every functor category is an equivalence onto diagrams valued in $\\mathcal T_0$: postcompose with that inverse and with its two inverse transformations. The inclusion of this diagram category in $\\operatorname{Fun}(K,\\mathcal T)$ is full, since a simplex belongs to it exactly when all its vertex diagrams do. The mapping-space comparisons are equivalences by [lem-cbc-enhanced-functor-cone-calculus]. Opposites and mapping-space reversal use [lem-coef-infinity-relative-cone-equivalence](4).",
+   "uses": [
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-coef-infinity-pointwise-yoneda-evaluation",
+    "lem-coef-infinity-full-essential-image",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-relative-cone-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Yoneda embedding and fully faithful essential image in the proof of Proposition 6.4.9, p.298; use the opposite target."
+   }
+  },
+  {
+   "text": "Fix $F\\in\\mathcal Y$ and form the coherent diagram $YF:N(A)^{\\mathrm{op}}\\to\\mathcal T$. Apply [lem-coef-space-presheaf-right-kan-mapping-formula] with small universe $\\mathcal V$. Its right adjoint amplifies to the parameter $\\mathcal B$ by [lem-coef-parametric-universal-arrows]; transpose $\\operatorname{Fun}(\\mathcal B,\\operatorname{Fun}(N(A)^{\\mathrm{op}},\\mathcal S_{\\mathcal V}))$ to $\\operatorname{Fun}(N(A)^{\\mathrm{op}},\\mathcal T)$. We obtain $R_F:N(J)^{\\mathrm{op}}\\to\\mathcal T$ and a counit $u^*R_F\\to YF$, with\n$$R_F(j)(z)=\\operatorname{Map}_{\\mathcal P_A}(W_j,Q_{F,z}),\\quad W_j(a)=\\operatorname{Hom}_J(u(a),j),\\quad Q_{F,z}(a)=\\operatorname{Map}_{\\mathcal B}(F(a),z),$$\nup to the specified coherent natural equivalence; here $\\mathcal P_A=\\operatorname{Fun}(N(A)^{\\mathrm{op}},\\mathcal S_{\\mathcal V})$. The formula gives a coherent functor in $F,j,z$, since the scalar adjoint, evaluation and the Hom bifunctor are coherent functors. No limit or colimit in the enlarged universe is required of $\\mathcal B$.",
+   "uses": [
+    "lem-coef-space-presheaf-right-kan-mapping-formula",
+    "lem-coef-parametric-universal-arrows",
+    "lem-coef-infinity-hom-bifunctor-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Corollary 6.3.10, pp.291-292, and the parameter step of the proof of Proposition 6.4.9, p.298; Theorem 6.1.22, pp.273-274."
+   }
+  },
+  {
+   "text": "The category of elements of $W_j$ is exactly $(u\\downarrow j)$: its arrow equation is $\\alpha=\\alpha'u(r)$. Apply [lem-coef-discrete-weight-coherent-cocones] to identify $R_F(j)(z)$ with $\\operatorname{Map}_{\\operatorname{Fun}(N(u\\downarrow j),\\mathcal B)}(F\\pi,\\Delta z)$. Choose a colimiting cocone $\\lambda^j:F\\pi\\to\\Delta c_j$, whose existence follows from step 1. By the cocone criterion of [lem-cbc-enhanced-functor-cone-calculus], composition with $\\lambda^j$ gives an equivalence from $\\operatorname{Map}_{\\mathcal B}(c_j,z)$ to that cocone space, naturally in $z$. Thus $R_F(j)\\simeq Y(c_j)$ as objects of $\\mathcal T$. The equivalence is the map sending $h:c_j\\to z$ to the transformation with value $h\\lambda^j_{a,\\alpha}$ on $\\alpha\\in W_j(a)$; its higher simplices come from the stated naturality of the weight calculation and coherent composition. Therefore all vertices of $R_F$ lie in $\\mathcal T_0$.",
+   "uses": [
+    "lem-coef-discrete-weight-coherent-cocones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "The representability calculation in Proposition 6.4.9, p.298, with its opposite-category interpretation. The weighted calculation retains the whole cocone space."
+   }
+  },
+  {
+   "text": "Apply the inverse of $Y:\\mathcal B^{\\mathrm{op}}\\simeq\\mathcal T_0$ to $R_F$ and reverse opposites, obtaining $L_F:N(J)\\to\\mathcal B$. The counit of step 3 becomes $\\eta_F:F\\to u^*L_F$. For every $G\\in\\mathcal X$, full faithfulness on diagram categories from step 2 and the amplified scalar adjunction give\n$$\\operatorname{Map}_{\\mathcal X}(L_F,G)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(N(J)^{\\mathrm{op}},\\mathcal T)}(YG,R_F)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(N(A)^{\\mathrm{op}},\\mathcal T)}(Yu^*G,YF)\\simeq\\operatorname{Map}_{\\mathcal Y}(F,u^*G).$$\nThe first and last equivalences reverse mapping spaces via $Y$. The middle equivalence restricts and then postcomposes with the scalar counit. Reversing this formula identifies the composite with $h\\mapsto(u^*h)\\eta_F$, naturally in $G$. This supplies a universal arrow for each $F$, without assuming the choices $c_j$ were functorial. Apply the opposite/universal-arrow clause of [lem-coef-parametric-universal-arrows] to $u^*:\\mathcal X\\to\\mathcal Y$ with the full domain $\\mathcal Y$. It supplies the coherent left adjoint $u_!$ and unit, together with the mapping-space equivalence for arbitrary parameter simplicial sets in any containing universe. Both the constructed $\\eta_F$ and the adjunction unit are universal arrows. Their universal properties give inverse equivalences between $L_F$ and $u_!F$, identifying the two arrows: the composites correspond to the identity universal arrows. Coherent composition and the inverse homotopies use [lem-cbc-simplicial-composition-spine].",
+   "uses": [
+    "lem-coef-space-presheaf-right-kan-mapping-formula",
+    "lem-coef-parametric-universal-arrows",
+    "lem-coef-infinity-full-essential-image",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Complete the essential-image argument of Proposition 6.4.9, p.298, using universal arrows; Theorem 6.1.22 for parameter adjunctions."
+   }
+  },
+  {
+   "text": "We check the actual pointwise cocones, including their coherence. For $f:j\\to j'$, postcomposition gives $W_j\\to W_{j'}$ and hence restriction $R_F(j')\\to R_F(j)$. By naturality in the weight, this is restriction of cocones along $(u\\downarrow j)\\to(u\\downarrow j')$. The scalar counit at $a$ evaluates at $1_{u(a)}$, so its reversal makes $\\eta_{F,a}$ the leg labeled $(a,1_{u(a)})$. For $\\alpha:u(a)\\to j$, the map of weights $W_{u(a)}\\to W_j$ sends $1_{u(a)}$ to $\\alpha$; evaluation therefore identifies the leg indexed by $(a,\\alpha)$ with $L_F(\\alpha)\\eta_{F,a}$. This is an equality of the coherent evaluation maps, hence includes all comma simplices. Under the equivalence $Y(c_j)\\simeq R_F(j)$ in step 4 these are the chosen colimit legs. The equivalence of universal arrows in step 5 identifies the resulting cocones with those of $u_!F$; conjugating their mapping-space tests by this equivalence leaves them equivalences. This proves the pointwise formula, structure maps and unit as coherent natural equivalences. Restriction and evaluation of arbitrary parameters commute with these maps; the arbitrary-parameter assertion for the adjunction itself was supplied in step 5.",
+   "uses": [
+    "lem-coef-space-presheaf-right-kan-mapping-formula",
+    "lem-coef-discrete-weight-coherent-cocones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-simplicial-composition-spine",
+    "lem-coef-parametric-universal-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Cisinski (6.4.7.4)-(6.4.7.5), Proposition 6.4.8 and the proof of 6.4.9, pp.297-298; explicit evaluation formula for the unit."
+   }
+  },
+  {
+   "text": "For $\\theta:u\\to v$, define $t_j:W^v_j\\to W^u_j$ by $\\alpha\\mapsto\\alpha\\theta_a$. For an arrow $r:a\\to a'$, its compatibility is $\\alpha\\theta_{a'}u(r)=\\alpha v(r)\\theta_a$, the naturality equation for $\\theta$. Thus $t_j$ is a map of presheaves, and its element-category functor is exactly $(v\\downarrow j)\\to(u\\downarrow j)$. Precomposition induces $R^u_F\\to R^v_F$; applying the inverse of $Y$ reverses it to $v_!F\\to u_!F$. Its component at $j$ is the colimit map induced by that comma functor, by the weight naturality in step 6. At $a$ its composite with $\\eta^v_{F,a}$ is the $u$-colimit leg labeled $(a,\\theta_a)$, namely $(u_!F)(\\theta_a)\\eta^u_{F,a}$. This is the mate equation: the transformation is the adjunct, under $v_!\\dashv v^*$, of $F\\xrightarrow{\\eta^u}u^*u_!F\\xrightarrow{\\theta^*}v^*u_!F$. Consequently its right-adjoint mate is precisely $u^*\\to v^*$.",
+   "uses": [
+    "lem-coef-space-presheaf-right-kan-mapping-formula",
+    "lem-coef-discrete-weight-coherent-cocones",
+    "lem-coef-parametric-universal-arrows",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Comma postcomposition and the scalar right-adjoint formula of Corollary 6.3.10; the mate is checked by its counit/unit evaluation, not asserted without a calculation."
+   }
+  },
+  {
+   "text": "The compatibility in the last clause includes higher simplices. For composable $u\\xrightarrow{\\theta}v\\xrightarrow{\\psi}w$, the presheaf maps satisfy $t^{\\psi\\theta}_j(\\alpha)=\\alpha\\psi_a\\theta_a=t^{\\theta}_jt^{\\psi}_j(\\alpha)$, and $t^{1_u}_j$ is the identity. More generally, a simplex of $N\\operatorname{Fun}(A,J)$ is a composable string of such transformations; applying these same precomposition formulas defines a simplex of the presheaf functor category, since every face composes adjacent maps and every degeneracy inserts an identity. The Hom bifunctor, scalar right-adjoint construction and inverse on the full essential image are coherent functors, so applying them to this whole simplicial diagram supplies all faces, degeneracies and higher compatibility homotopies of the transformations $v_!\\to u_!$. Amplify throughout by the $F$ parameter using [lem-coef-parametric-universal-arrows]. Identifying this choice of extensions with the adjoints in step 5 uses its contractible universal-arrow space, hence retains all those parameter simplices. For empty $A$, all weights and comma diagrams are empty, their cocone spaces are points and $c_j$ is initial, exactly as required. For empty $J$, $A$ is also empty and both diagram categories are points. For $u=1_A$, $E_{W_j}=A_{/j}$ has terminal object $(j,1)$; [lem-coef-infinity-final-index-colimit] identifies the pointwise colimit with $F(j)$ and the identity unit. These checks add no nonemptiness assumption.",
+   "uses": [
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-coef-space-presheaf-right-kan-mapping-formula",
+    "lem-coef-parametric-universal-arrows",
+    "lem-coef-infinity-full-essential-image",
+    "lem-cbc-simplicial-composition-spine",
+    "lem-coef-infinity-final-index-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Functoriality of Corollary 6.3.10 and the parameter adjunction of Theorem 6.1.22; explicit simplicial coherence and edge cases."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-infinity-pointwise-yoneda-evaluation",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-space-presheaf-right-kan-mapping-formula",
+  "lem-coef-parametric-universal-arrows",
+  "lem-coef-discrete-weight-coherent-cocones",
+  "lem-cbc-simplicial-composition-spine",
+  "lem-coef-infinity-final-index-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Proposition 6.4.9, p.298, opposite-target Yoneda proof, written using Corollary 6.3.10 and the explicit discrete-weight cocone calculation; Theorem 6.1.22 for parameters. Extra mate and higher-simplex calculations are written out by the second reader."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -111,10 +240,24 @@
    "results": "{\"t\": \"2026-10-16T21:55:38Z\", \"tool\": \"leansearch\", \"query\": \"In an infinity category admitting colimits restriction along nerves has a pointwise left Kan extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.pointwiseLeftKanExtension\", \"CategoryTheory.Functor.isPointwiseLeftKanExtensionOfIsLeftKanExtension\", \"CategoryTheory.Functor.pointwiseLeftKanExtensionIsPointwiseLeftKanExtension\", \"CategoryTheory.Functor.pointwiseLeftKanExtension_obj\", \"CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtension\", \"CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt\", \"CategoryTheory.Functor.instIsLeftKanExtensionPointwiseLeftKanExtensionPointwiseLeftKanExtensionUnit\", \"CategoryTheory.Functor.HasPointwiseLeftKanExtension\"], \"digest\": \"19577f39942be8f5\"}",
    "date": "2026-10-16",
    "verdict": "No match. Second-reader search: Pointwise.lean:39-63 and Adjunction.lean:37-84 use ordinary Category instances; Subdivision.lean:35-75 constructs ordinary Kan extension in the category of simplicial sets, not coherent Kan extension in an arbitrary quasicategory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasicategory restriction adjoint mapping spaces coherent universal arrow",
+   "results": "{\"t\": \"2026-10-17T03:04:23Z\", \"tool\": \"leanfinder\", \"query\": \"quasicategory restriction adjoint mapping spaces coherent universal arrow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.nerveAdjunction\", \"SSet.Quasicategory.hornFilling\", \"SSet.Truncated.Quasicategory\\u2082\", \"SSet.Truncated.liftOfStrictSegal.f\\u2082\", \"SSet.Truncated.liftOfStrictSegal.app\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.Truncated.nerve\\u2082Adj\"], \"digest\": \"a6af8992058e2bb1\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match. The returned Kan-extension, presheaf and Coyoneda declarations require ordinary Category instances and Type-valued Hom sets. Read Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:33-103 and Mathlib/CategoryTheory/Yoneda.lean:39-90. They do not assert equivalences of spaces of coherent transformations into arbitrary quasicategories. The AlgebraicTopology grep hits are ordinary simplicial-object/coskeletal Kan extensions, or no hits as recorded; no quasicategorical declaration matches."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lanAdjunction\"",
+   "results": "{\"t\": \"2026-10-17T03:04:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"lanAdjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.lanAdjunction\", \"CategoryTheory.Functor.lanAdjunction_unit\", \"CategoryTheory.Functor.instIsIsoAppUnitLanAdjunctionOfHasPointwiseLeftKanExtension\", \"CategoryTheory.Functor.isIso_lanAdjunction_counit_app_iff\", \"CategoryTheory.Functor.lanAdjunction_counit_app\", \"CategoryTheory.Functor.lanUnit_app_whiskerLeft_lanAdjunction_counit_app_assoc\", \"CategoryTheory.Functor.lanUnit_app_whiskerLeft_lanAdjunction_counit_app\", \"CategoryTheory.Functor.lanUnit_app_app_lanAdjunction_counit_app_app_assoc\"], \"digest\": \"f33e581c6b3d8fa1\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match. The returned Kan-extension, presheaf and Coyoneda declarations require ordinary Category instances and Type-valued Hom sets. Read Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:33-103 and Mathlib/CategoryTheory/Yoneda.lean:39-90. They do not assert equivalences of spaces of coherent transformations into arbitrary quasicategories. The AlgebraicTopology grep hits are ordinary simplicial-object/coskeletal Kan extensions, or no hits as recorded; no quasicategorical declaration matches."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-coherent-diagram-coyoneda",
@@ -134,5 +277,34 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-ordinary-pointwise-kan-extension",
+  "worker": "stage1",
+  "summary": "Second reader replaced uncited theorem applications by the opposite-target Yoneda representability proof: scalar right Kan extension, discrete weights, local colimits, fully faithful essential image, universal arrows, and explicit unit/mate/coherence computations. Two smaller statement-only support nodes, no Mathlib leaves. Statement unchanged; arbitrary target size and all coherent parameters retained.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, displayed derived coefficient adjunction and inverse-limit calculation: pointwise left Kan extensions of coherent ordinary-indexed diagrams.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic quasicategory functor/cone or coherent composition calculus for the Yoneda calculation; no node of the biduality unit states this foundational interface, and no geometric unit step is replaced."
+   },
+   {
+    "node": "lem-cbc-simplicial-composition-spine",
+    "why": "Generic quasicategory functor/cone or coherent composition calculus for the Yoneda calculation; no node of the biduality unit states this foundational interface, and no geometric unit step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-composition-spine"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-4004de9d0",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-4004de9d0 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 8 steps, both new statement-only nodes, the full statements of all 11 cited nodes, and the unit and chapter records. I could not read Cisinski (online only; the review service blocks the network; WANTED still stands), so I checked the steps mathematically against the cited DAG statements. The item statement is unchanged against the live side DAG and nothing is weakened. Checks: the comma orientation alpha=alpha' u(r) equals the category of elements of W_j=Hom(u(-),j); R_F(j)(z)=Map(u^*h_j,Q_{F,z}); the three mapping-space equivalences in step 5 have the right variances, and the unit is (u^*h)eta_F; the leg at (a,alpha) is L(alpha)eta_a; theta's naturality gives v_!->u_!, with mate theta^*:u^*->v^*. Size: B is V-small, so the Hom bifunctor, Yoneda and weight nodes apply with (V,V'), and the comma categories are U-small. Edge cases A empty, J empty and u=id all hold. New node space-presheaf-right-kan-mapping-formula is true (Yoneda plus the adjunction; counit is evaluation at 1_{u(a)}). It is the item's universal case B=S^op, so it is strictly smaller, and the reduction to it in steps 2-8 is real work, not D1/D4 relabelling. Its future splitter must avoid space-yoneda-density, yoneda-presheaf-limits, presentable-infinity-adjoints, space-valued-pointwise-lan and infinity-yoneda-evaluation, all of which reach the item. New node discrete-weight-coherent-cocones is true (W = colim of h_a over E_W; I checked W empty, W representable and A a point). No duplicates found by rg or blueprint_refs (same_as [] is right). No cycle: none of the 11 proof_deps reaches the item. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus and lem-cbc-simplicial-composition-spine, which 158 and 11 existing sec-six-functors nodes already use the same way. Fix (form only): both new nodes get the missing blueprint.from.via (the item plus its via) and the brief section 3 fields proof [], proof_deps [], proof_origin null, mathlib_match null, in fixes/dag/nodes/sec-six-functors/. Statements are untouched.; 2 file(s) fixed by the reviewer"
  }
 }

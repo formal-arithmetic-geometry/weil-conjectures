@@ -3,24 +3,79 @@
  "blueprint": {
   "is": "sk-def-sp-trace",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Smooth trace",
- "statement": "Let $f:X\\to Y$ be smooth of pure relative dimension $d$, and let $\\Lambda$ be\nany admissible coefficient ring. We omit $\\Lambda$ from the notation and let\n$\\varepsilon_f(K):Rf_!f^!K\\to K$ be the counit of the adjunction\n$Rf_!\\dashv f^!$, restricted to $\\Dctf(X,\\Lambda)$ and $\\Dctf(Y,\\Lambda)$; it is a\nmorphism in $\\Dctf(Y,\\Lambda)$. For $K\\in\\Dctf(Y,\\Lambda)$, the *smooth trace*\nis the composite in $\\Dctf(Y,\\Lambda)$\n\n$$\n\\operatorname{Tr}_{f}(K):\\quad\nRf_!\\bigl(f^{*}K(d)[2d]\\bigr)\n\\xrightarrow{\\ Rf_!\\gamma_{f}(K)\\ }Rf_!f^!K\n\\xrightarrow{\\ \\varepsilon_{f}(K)\\ }K,\n$$\n\nwhere $\\gamma_f$ is the purity isomorphism.",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of characteristic $p>0$ with $p\\ne\\ell$. Let $X,Y$ be separated schemes of finite type over $k$, and let $f:X\\to Y$ be a separated finite-type $k$-morphism, as in [sk-def-sfb-dc-setting]. Suppose $f$ is smooth of pure relative dimension $d\\geq0$ [def-sbc-smooth-morphisms]. Let $\\Lambda\\in\\{A,\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E,\\overline{\\mathbf Q}_\\ell\\}$ be any admissible coefficient ring: $A$ is a finite commutative ring killed by a power of $\\ell$, and $E/\\mathbf Q_\\ell$ is finite with valuation ring $\\mathcal O_E$. Use the small pro-etale coefficient categories and $\\Dctf$ of [sk-def-sfb-constructible], the twists of [sk-def-sp-tate-twist], and the functors and purity isomorphism of [sk-thm-purity-transport]. Here $f^!$ is the restriction of the exceptional right adjoint of [sk-prop-sf-existence].\n\nWe omit $\\Lambda$ from the notation and let\n$\\varepsilon_f(K):Rf_!f^!K\\to K$ be the counit of the adjunction\n$Rf_!\\dashv f^!$, restricted to $\\Dctf(X,\\Lambda)$ and $\\Dctf(Y,\\Lambda)$; it is a\nmorphism in $\\Dctf(Y,\\Lambda)$. For $K\\in\\Dctf(Y,\\Lambda)$, the *smooth trace*\nis the composite in $\\Dctf(Y,\\Lambda)$\n\n$$\n\\operatorname{Tr}_{f}(K):\\quad\nRf_!\\bigl(f^{*}K(d)[2d]\\bigr)\n\\xrightarrow{\\ Rf_!\\gamma_{f}(K)\\ }Rf_!f^!K\n\\xrightarrow{\\ \\varepsilon_{f}(K)\\ }K,\n$$\n\nwhere $\\gamma_f$ is the purity isomorphism of [sk-thm-purity-transport].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-trace/_section.md",
   "place": "node sk-def-sp-trace, order 1834"
  },
  "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-sbc-smooth-morphisms",
+  "sk-def-sfb-constructible",
+  "sk-def-sp-tate-twist",
+  "sk-prop-sf-existence",
   "sk-thm-purity-transport"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "smooth.*[Tt]race|[Tt]race.*smooth|Rf_!.*f\\^!|purity.*counit",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: no Mathlib smooth-purity trace construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "smooth trace in six functors defined using purity and exceptional adjunction counit",
+   "results": "SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; CategoryTheory.ExponentiableMorphism.ev; CompHausLike.LocallyConstant.counit; CompHausLike.LocallyConstant.adjunction; AlgebraicGeometry.IsSmooth.casesOn; AlgebraicGeometry.IsSmooth.mk; SheafOfModules.pullbackObjUnitToUnit; AlgebraicGeometry.IsSmooth",
+   "date": "2026-10-17",
+   "verdict": "no match: returned generic adjunction, scheme-smoothness, sheaf, or linear-algebra declarations, not the project smooth trace"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit, DerivedCategory, smooth purity",
+   "results": "none (Loogle reported unknown identifier `smooth`)",
+   "date": "2026-10-17",
+   "verdict": "invalid query: Loogle rejected the unknown identifier smooth; not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "smooth trace defined as compact support pushforward of purity isomorphism followed by exceptional adjunction counit for admissible coefficients",
+   "results": "LinearMap.trace_eq_contract; LieModule.trace_comp_toEnd_genWeightSpace_eq; LinearMap.trace_eq_contract'; LinearMap.trace_eq_contract_apply; Algebra.trace_quotient_mk; LieModule.trace_toEnd_genWeightSpace; LinearMap.trace_comp_cycle'; LinearMap.trace_comp_cycle",
+   "date": "2026-10-17",
+   "verdict": "no match: returned generic adjunction, scheme-smoothness, sheaf, or linear-algebra declarations, not the project smooth trace"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptionalInverseImage|smoothTrace|purityIso",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no exact match: generic adjunction counits and their derived variants do not define the smooth-purity trace; no geometric hit in Mathlib"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction.counit\"",
+   "results": "CategoryTheory.Adjunction.counit; CategoryTheory.Adjunction.counit_naturality; CategoryTheory.Adjunction.counit_naturality_assoc; CategoryTheory.Adjunction.counit_isIso_of_R_fully_faithful; CategoryTheory.Adjunction.counitSplitMonoOfRFull; CategoryTheory.Adjunction.counit_epi_of_R_faithful; CategoryTheory.Adjunction.counit_isSplitMono_of_R_full; CategoryTheory.Adjunction.counitAsIsoOfIso",
+   "date": "2026-10-17",
+   "verdict": "no exact match: generic adjunction counits and their derived variants do not define the smooth-purity trace; no geometric hit in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image adjunction counit conjugated by a natural purity isomorphism on constructible complexes",
+   "results": "CategoryTheory.Adjunction.derived'_counit; CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derived_counit; CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_counit; CategoryTheory.Adjunction.derivedε_fac_app_assoc; LightCondSet.instIsIsoFunctorSequentialCounitSequentialAdjunction; CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+   "date": "2026-10-17",
+   "verdict": "no exact match: generic adjunction counits and their derived variants do not define the smooth-purity trace; no geometric hit in Mathlib"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -51,5 +106,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-def-sp-trace",
+  "worker": "stage1",
+  "summary": "Definition-only split, no new nodes or proof steps. Second reading made the implicit separated finite-type scheme setting and admissible coefficient rings explicit, using the precise domain of sk-prop-sf-existence as cited by sk-thm-purity-transport; added existing notion citations. The trace composite and every coefficient case are unchanged. Corrected invalid-query accounting and independently repeated Mathlib and duplicate searches.",
+  "blueprint": "Realizes node sk-def-sp-trace in literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-trace/_section.md (order 1834); the definition has no proof steps."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-597a96dc0",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-597a96dc0 (reviewer sub-agent of L); spot-checked: I read in full the item, the unit, the chapter and the main-20261015 sk-def-sp-trace/_section.md (order 1834; there is no master copy). The composite Tr_f(K)=ε_f(K)∘Rf_!γ_f(K) is the source's own, for every admissible Λ and every K∈Dctf(Y,Λ). The only change is a preamble that makes the setting explicit: k of characteristic p>0 with p≠ℓ, X and Y separated of finite type, f a separated finite-type k-morphism [sk-def-sfb-dc-setting]. This is forced, not added: sk-thm-purity-transport takes f^! from sk-prop-sf-existence, which is stated exactly in that setting, and it agrees with sk-def-purity-conv. No citer is narrowed: det-sp-trace-basic, lem-trf-local-term-point, det-sp-finite-general-ring and sk-prop-sp-trace-composition all sit inside it. Every notion is cited, and I read each one: def-sbc-smooth-morphisms (pure relative dimension), sk-def-sfb-constructible (Dctf for any condensed Λ, the same category as the adjoint and the purity theorem), sk-def-sp-tate-twist (ℓ invertible, covers A, Z_ℓ, O_E, Q_ℓ, E, Q̄_ℓ), sk-prop-sf-existence (Rf_!⊣f^! on Loc(Dctf)), and sk-thm-purity-transport (γ, f^! landing in Dctf(X), and Rf_! from Dctf(X) to Dctf(Y), so the counit is a morphism of Dctf(Y)). The arrow directions are correct. Edge cases checked: K=0, d=0, f=id, X empty, finite A. There are no new nodes, no proof steps, no tool_uses, no SGA and no cycle. def-pur-smooth-trace is a finite-coefficient specialization over F̄_q, not a duplicate. The two slopmaster2 smoothTrace declarations (PoincarePairing.lean:157 and Pairing.lean:110) take a supplied orientation, so neither can be attached. The searches are recorded honestly, with the invalid Loogle query marked as such. No fixes."
  }
 }

@@ -25,9 +25,127 @@
   "def-weil-residue-field",
   "def-weil-module-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an affine open $U=\\operatorname{Spec}A\\subseteq X$ containing $x$. The affine closed-immersion criterion gives $V=i^{-1}U=\\operatorname{Spec}B$, with a surjective $k$-algebra map $A\\twoheadrightarrow B$; write $J$ for its kernel and identify $B=A/J$. Put $N=J/J^2$, $M=B\\otimes_A\\Omega_{A/k}$ and $P=\\Omega_{B/k}$. The $B$-action on $N$ is $\\bar a[j]=[aj]$: changing a lift $a$ adds an element of $J^2$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01QO, lemma-closed-immersion; Tag 06AA, lemma-differentials-relative-immersion-smooth, reduction to affines"
+   }
+  },
+  {
+   "text": "Set $C=A/J^2$ and $K=J/J^2\\subset C$. The kernel of $C\\twoheadrightarrow B$ is $K$ and $K^2=0$, so $T=\\operatorname{Spec}B\\subset T'=\\operatorname{Spec}C$ is a first order thickening of affine $k$-schemes. Smoothness of $Z\\to\\operatorname{Spec}k$, in its infinitesimal lifting definition, lifts the inclusion $T=V\\to Z$ to a $k$-morphism $h:T'\\to Z$. Every point of $T'$ lies in $T$ topologically, since every prime contains $K$ (if $u^2=0$ then $u$ belongs to every prime). Thus $h^{-1}(V)=T'$. Restricting its continuous map and structure-sheaf map to the open subspace $V$ factors $h$ through $V$. Under the affine spectrum correspondence this factorization is a $k$-algebra map $\\sigma:B\\to C$ such that $\\pi\\sigma=\\mathrm{id}_B$, where $\\pi:C\\to B$ is the quotient. This applies the lifting property to the affine test schemes $T,T'$, and does not assume that a localized smooth algebra is finitely presented.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "def-sbc-smooth-morphisms",
+    "def-weil-open-immersion",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 04EX (definition-thickening) and 02H0 (definition-formally-smooth); the square-zero lifting used in the proof of Algebra Tag 02HP"
+   }
+  },
+  {
+   "text": "Apply the quotient differential sequence to $k\\to A\\to A/J=B$. It supplies well-defined $B$-linear maps $\\delta:N\\to M$, $[j]\\mapsto1\\otimes\\mathrm dj$, and $w:M\\to P$, $b\\otimes\\mathrm da\\mapsto b\\,\\mathrm d\\bar a$, with $w$ surjective and $\\ker w=\\operatorname{im}\\delta$. The cited statement gives precisely this right exactness; injectivity of $\\delta$ is proved next.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-differential-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RU, lemma-differential-seq, including the formulas for both maps"
+   }
+  },
+  {
+   "text": "For $a\\in A$ define $D(a)=(a\\bmod J^2)-\\sigma(\\bar a)\\in K=N$. It is additive and zero on $k$. In $C$ write $a\\bmod J^2=\\sigma(\\bar a)+D(a)$. Since $K^2=0$, multiplication gives $D(ab)=\\sigma(\\bar a)D(b)+\\sigma(\\bar b)D(a)=\\bar aD(b)+\\bar bD(a)$, where $C$ acts on $K$ through $B$. Thus $D$ is a $k$-derivation into the $A$-module $N$. The universal property of differentials gives a map $\\Omega_{A/k}\\to N$, and because $JN=0$ it extends to the $B$-linear map $\\tau:M\\to N$, $b\\otimes\\mathrm da\\mapsto bD(a)$. For $j\\in J$, $D(j)=[j]$, hence $\\tau\\delta=\\mathrm{id}_N$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02HP, lemma-differential-seq-split, derivation in the proof, applied after the square-zero lift; computation expanded"
+   }
+  },
+  {
+   "text": "The previous two steps give an explicit splitting. For $p\\in P$, choose $m\\in M$ with $w(m)=p$ and set $s(p)=m-\\delta\\tau(m)$. If $m'$ is another lift, $m-m'=\\delta(n)$ for some $n\\in N$, so the two values differ by $\\delta(n)-\\delta\\tau\\delta(n)=0$. This also proves that $s$ is $B$-linear. We have $ws=\\mathrm{id}_P$, $\\tau s=0$ and $\\delta\\tau+sw=\\mathrm{id}_M$. Consequently $M\\cong N\\oplus P$, by $m\\mapsto(\\tau m,wm)$ with inverse $(n,p)\\mapsto\\delta n+sp$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 06A8, lemma-differential-seq-smooth: split exactness, expanded by the retraction and the quotient sequence rather than used as a black box"
+   }
+  },
+  {
+   "text": "Give $\\kappa=\\kappa(z)$ its $B$-algebra structure through the germ map $B\\to S$ and the residue map $S\\to\\kappa$. Tensor the four splitting identities of the preceding step with $\\kappa$ over $B$. Functoriality of module base change preserves sums, composites and identities, so $\\delta\\otimes1$ still has left inverse $\\tau\\otimes1$, $w\\otimes1$ still has right inverse $s\\otimes1$, and $(\\delta\\otimes1)(\\tau\\otimes1)+(s\\otimes1)(w\\otimes1)=\\mathrm{id}$. For $v\\in\\ker(w\\otimes1)$ this last identity gives $v=(\\delta\\otimes1)(\\tau\\otimes1)(v)$. Thus $0\\to N\\otimes_B\\kappa\\to M\\otimes_B\\kappa\\to P\\otimes_B\\kappa\\to0$ is exact. No flatness of $\\kappa$ over $B$ is needed.",
+   "uses": [
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 06A8, lemma-differential-seq-smooth, split exactness; passage to an arbitrary module base change by the displayed splitting identities"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak q\\subset B$ correspond to $z$ and let $\\mathfrak p\\subset A$ be its inverse image. The affine stalk and Spec-map stalk formulas identify $R=A_{\\mathfrak p}$, $S=B_{\\mathfrak q}$ and $R\\to S$ with $a/t\\mapsto\\bar a/\\bar t$. The quotient-localization lemma gives $I=JR$ and $S=R/I$. Products of fractions show $I^2=J^2R$. Hence $(J/J^2)_{\\mathfrak q}\\cong I/I^2$ by $[j]/\\bar t\\mapsto[j/t]$. To check the inverse, every element of $I$ is $j/t$ after taking a common denominator; if $j/t\\in J^2R$, clearing the finitely many denominators gives $u j\\in J^2$ for some $u\\notin\\mathfrak p$, exactly the condition $[j]/\\bar t=0$ in the localized quotient. Balancing gives $N\\otimes_B\\kappa\\cong(I/I^2)\\otimes_S\\kappa$: denominators $\\bar t\\notin\\mathfrak q$ act by units on $\\kappa$, so the inverse to inserting the localization sends $([j]/\\bar t)\\otimes c$ to $[j]\\otimes\\bar t^{-1}c$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-spec-map-stalk-localization",
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CT, proposition-localize-quotient; Schemes Tag 01HV, lemma-spec-sheaves (6); conormal localization and tensor identification checked on fractions"
+   }
+  },
+  {
+   "text": "The affine description of the relative differential sheaf and the tilde-stalk localization formula identify $\\Omega_{X/k,x}=(\\Omega_{A/k})_{\\mathfrak p}$ and $\\Omega_{Z/k,z}=(\\Omega_{B/k})_{\\mathfrak q}$, with $\\mathrm da$ corresponding to the germ of $\\mathrm da$. Thus $M\\otimes_B\\kappa\\cong\\Omega_{X/k,x}\\otimes_R\\kappa$ by $(b\\otimes\\eta)\\otimes c\\mapsto\\eta_x\\otimes\\bar b c$, and $P\\otimes_B\\kappa\\cong\\Omega_{Z/k,z}\\otimes_S\\kappa$ by $\\eta\\otimes c\\mapsto\\eta_z\\otimes c$. Their inverses clear denominators as in the preceding step, e.g. $(\\eta/t)\\otimes c\\mapsto(1\\otimes\\eta)\\otimes\\bar t^{-1}c$. Under these identifications the arrows of the exact sequence in step 6 are the asserted canonical arrows. In particular, write $f\\in I$ as $j/t$ with $j\\in J$, $t\\notin\\mathfrak p$. The Leibniz rule gives $\\mathrm d(j/t)=t^{-1}\\mathrm dj-jt^{-2}\\mathrm dt$; the second term vanishes after tensoring with $\\kappa$ because $j$ has zero residue. The first arrow therefore sends $[f]\\otimes1$ to $\\mathrm df\\otimes1$. The second arrow sends the germ of $\\mathrm da$ to the germ of $\\mathrm d\\bar a$, and respects the same denominator rule, so it is exactly the map induced by $R\\to S$. This proves every clause.",
+   "uses": [
+    "def-sc-relative-differential-sheaf",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 06AA, lemma-differentials-relative-immersion-smooth; lemma-differentials-affine; Schemes Tag 01HV (7), lemma-spec-sheaves; arrow formulas checked on fractions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-kahler-differentials",
+  "def-sbc-first-order-thickening",
+  "def-sbc-smooth-morphisms",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-jacobi-zariski-differential-maps",
+  "def-weil-module-base-change",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-spec-map-stalk-localization",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "def-sc-relative-differential-sheaf",
+  "lem-weil-pbc-spec-tilde-stalk-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 06AA (lemma-differentials-relative-immersion-smooth), with affine proof expanded using Algebra Tags 00RU, 02HP, 06A8 and the infinitesimal lifting definition in More on Morphisms Tag 02H0; residue-field base change proved by the splitting identities."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -119,10 +237,52 @@
    "results": "25 hits: Mathlib/RingTheory/Kaehler/JacobiZariski.lean; Mathlib/RingTheory/Kaehler/JacobiZariski.lean; Mathlib/RingTheory/Kaehler/JacobiZariski.lean; Mathlib/RingTheory/Kaehler/JacobiZariski.lean; Mathlib/RingTheory/Kaehler/JacobiZariski.lean; Mathlib/RingTheory/Extension/ExtendScalars.lean; Mathlib/RingTheory/Extension/ExtendScalars.lean; Mathlib/RingTheory/Extension/Cotangent/Free.lean",
    "date": "2026-10-16",
    "verdict": "no exact match: iff_split_injection requires a formally smooth ambient algebra; the constituent conormal exactness results do not state this arbitrary-ambient scheme residue-field sequence"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, \"exact\"",
+   "results": "{\"t\": \"2026-10-17T03:11:03Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, \\\"exact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"KaehlerDifferential.exact_mapBaseChange_map\", \"KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange\", \"Algebra.Extension.exact_hCotangentι_cotangentComplex\", \"Algebra.Extension.exact_cotangentComplex_toKaehler\", \"Algebra.H1Cotangent.exact_map_δ\", \"Algebra.H1Cotangent.exact_δ_mapBaseChange\", \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"Algebra.Generators.H1Cotangent.exact_map_δ'\"], \"digest\": \"ba5faee722be32f0\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: scheme fibre conormal sequence is not a one-line specialization of the algebraic or morphism hits; existing quotient differential node reused"
+  },
+  {
+   "tool": "grep",
+   "query": "conormal|differential.*stalk",
+   "results": "{\"t\": \"2026-10-17T03:11:03Z\", \"tool\": \"grep\", \"query\": \"conormal|differential.*stalk\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: scheme fibre conormal sequence is not a one-line specialization of the algebraic or morphism hits; existing quotient differential node reused"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The conormal exact sequence for a closed immersion with smooth source remains short exact on residue fields",
+   "results": "{\"t\": \"2026-10-17T03:11:05Z\", \"tool\": \"leanfinder\", \"query\": \"The conormal exact sequence for a closed immersion with smooth source remains short exact on residue fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\", \"Algebra.H1Cotangent.exact_map_δ\", \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"Algebra.H1Cotangent.exact_δ_mapBaseChange\", \"Algebra.Generators.CotangentSpace.exact\"], \"digest\": \"9cb186f8342b0fb1\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: scheme fibre conormal sequence is not a one-line specialization of the algebraic or morphism hits; existing quotient differential node reused"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a surjective algebra map the cotangent module kernel modulo square maps to Kahler differentials and then quotient differentials with exact image kernel",
+   "results": "{\"t\": \"2026-10-17T03:12:29Z\", \"tool\": \"leanfinder\", \"query\": \"For a surjective algebra map the cotangent module kernel modulo square maps to Kahler differentials and then quotient differentials with exact image kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.ker_map_of_surjective\", \"KaehlerDifferential.kerCotangentToTensor_toCotangent\", \"KaehlerDifferential.range_kerCotangentToTensor\", \"retractionKerCotangentToTensorEquivSection\", \"Algebra.Extension.toKaehler_surjective\", \"KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange\", \"Algebra.Extension.cotangentComplex_mk\", \"KaehlerDifferential.kerTotal_map\"], \"digest\": \"3e8db6f402e95476\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: scheme fibre conormal sequence is not a one-line specialization of the algebraic or morphism hits; existing quotient differential node reused"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed immersion of schemes whose source is smooth over a field has an exact conormal sequence after taking a residue field fibre",
+   "results": "{\"t\": \"2026-10-17T03:12:59Z\", \"tool\": \"leansearch\", \"query\": \"A closed immersion of schemes whose source is smooth over a field has an exact conormal sequence after taking a residue field fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.mk\", \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\"], \"digest\": \"f447cc05f29032f5\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: scheme fibre conormal sequence is not a one-line specialization of the algebraic or morphism hits; existing quotient differential node reused"
+  },
+  {
+   "tool": "grep",
+   "query": "exact_kerCotangentToTensor_mapBaseChange|iff_split_injection|retractionKerCotangentToTensorEquivSection",
+   "results": "{\"t\": \"2026-10-17T03:13:08Z\", \"tool\": \"grep\", \"query\": \"exact_kerCotangentToTensor_mapBaseChange|iff_split_injection|retractionKerCotangentToTensorEquivSection\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Quotient.lean\", \"Mathlib/RingTheory/Smooth/Quotient.lean\", \"Mathlib/RingTheory/Smooth/Kaehler.lean\", \"Mathlib/RingTheory/Smooth/Kaehler.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\"], \"digest\": \"1429c8bd8f3d97e5\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match: scheme fibre conormal sequence is not a one-line specialization of the algebraic or morphism hits; existing quotient differential node reused"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-regular-immersion-linearization",
@@ -142,5 +302,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-conormal-sequence-smooth-immersion",
+  "worker": "stage1",
+  "summary": "Kept the full arbitrary-ambient statement. Reused the existing algebraic quotient differential sequence and affine/stalk lemmas; constructed the conormal retraction explicitly from a square-zero lift supplied by the definition of smoothness. Wrote the split sequence identities, their residue-field tensor base change and both arrow formulas. No new nodes or assumptions.",
+  "blueprint": "Realizes lem-pur-regular-immersion-linearization.proof.md, first paragraph, displayed fibre conormal short exact sequence, and the following sentence identifying the first map on the classes of the defining equations. The sk-prop-an unit route and all chapter/unit records are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q109-cc85a3a40",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-cc85a3a40 (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full, along with every cited statement. The delivery has no new nodes. The statement agrees with Stacks morphisms.tex:7429 (Tag 06AA), specialized to a closed immersion over k and taken at the fibre at z. X is arbitrary, Z is smooth and z need not be closed; both arrows are stated. I tested it on four cases: Spec k inside the dual numbers (characteristic 2 too), the origin of the cuspidal cubic y^2=x^3, the generic point of a line in A^2, and J=0. Step 1 uses parts (1) and (2) of the closed-immersion criterion leaf. Step 2 lifts through the formal-smoothness clause of def-sbc-smooth-morphisms on the affine first-order thickening Spec B in Spec A/J^2. The lift factors through V because K is nilpotent, and pi sigma = id. Step 3 is the Jacobi-Zariski leaf with (k,A,J); only the right exactness is taken from it. Step 4 is the 02HP derivation D(a)=(a mod J^2)-sigma(a-bar) (algebra.tex:34158); I checked the product calculation and tau delta = id. Steps 5-6 give the splitting identities, which survive tensoring with kappa by functoriality, so no flatness is needed. Step 7 is correct: affine-open stalk (c), the Spec-map stalk lemma and quotient localization give I=JR, and I checked the inverse of the conormal localization map. Step 8 is correct: tilde stalks identify the differentials, and d(j/t)=t^-1 dj - j t^-2 dt gives the first-arrow formula. proof_deps equals the union of the uses, and there is no cycle. Every theorem cited is a Mathlib leaf and the rest are definitions, so the sk-prop-an route is kept and no tool_uses are needed. Candidate duplicates are not the item: lem-weil-pbc-smooth-conormal-sequence-exact, lem-weil-pbc-separable-residue-cotangent-injective, lem-weil-pbc-square-zero-section-conormal-retraction (whose retraction is for B tensor Omega_C, not Omega_A) and lem-weil-pbc-smooth-ring-map-square-zero-lifting. The cited Stacks labels and tags resolve. No SGA is used and no target is touched. I made no changes."
  }
 }

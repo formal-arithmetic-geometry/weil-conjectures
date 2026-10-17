@@ -11,9 +11,74 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-operadic-approximation-restriction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $p:P\\to N(\\mathsf{Fin}_*)$. The definition of symmetric infinity operad in [lem-coef-operadic-approximation-restriction] agrees clause for clause with that used in [lem-coef-symmetric-inert-active-orthogonality]: an inner fibration, cocartesian inert lifts, fibre Segal equivalences, and output mapping-space products. In the fixed universe $P$ is small; alternatively regard that universe as the small one inside a containing universe. Apply the latter existing node to obtain the coherent triangle $h\\simeq ai$ for every edge $h$, and its displayed mapping-space equivalence for every inert $i:x\\to y$ and active $a:u\\to v$. The comparison sends $t$ to $(ti,at)$ with the associativity homotopy between $a(ti)$ and $(at)i$, exactly as required here. This uses only the existing node's statement, with no simultaneous functorial choice of all factorizations asserted.",
+   "uses": [
+    "lem-coef-operadic-approximation-restriction",
+    "lem-coef-symmetric-inert-active-orthogonality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definitions 2.1.2.1 and 2.1.2.3, Remark 2.1.2.2 and Propositions 2.1.2.4-2.1.2.5, printed pp. 178-179; reuse of the existing symmetric-operad factorization/orthogonality node."
+   }
+  },
+  {
+   "text": "For pointed maps $f:A_*\\to B_*$ and $g:B_*\\to C_*$, activeness gives $(gf)^{-1}(*)=f^{-1}(\\{*\\})=\\{*\\}$. If $f,g$ are inert and $c\\ne *$, its unique preimage $b$ under $g$ is non-basepoint and has a unique preimage under $f$; thus $gf$ is inert. Bijections satisfy both conditions. A simplicial functor sends the inverse edge and its two inverse triangles to inverse data, so an equivalence of $P$ maps to an isomorphism of finite pointed sets. Such an edge is $p$-cocartesian: for each $\\Lambda_0^n$ lifting problem with this distinguished edge, [lem-cbc-inner-fibration-equivalence-outer-horn-lift] supplies exactly the filler required by [def-coef-infinity-fibrations]. It is therefore inert as well as active. For two composable inert edges choose a composition triangle by the inner-horn axiom. Its composite is $p$-cocartesian by [lem-coef-infinity-cocartesian-composition-initiality], and its base map is inert by the finite-set calculation. Hence inert edges are closed under composition. Active edges are precisely edges whose images are active, as explicitly defined in [lem-coef-symmetric-inert-active-orthogonality], so their closure follows from the same base calculation. The cancellation theorem applies because $p$ is an inner fibration between quasicategories; no cocartesian lift of an active base arrow has been assumed.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-coef-operadic-approximation-restriction",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "lem-coef-symmetric-inert-active-orthogonality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Opposite dual of Proposition 2.4.1.7 and equivalence outer-horn lifting; explicit derivation of the closure clauses also recorded in Corollary 5.2.8.13."
+   }
+  },
+  {
+   "text": "Let $f:x\\to y$ and $f\\prime:x\\prime\\to y\\prime$ be equivalent objects of $\\operatorname{Fun}(\\Delta^1,P)$. Evaluation of an inverse and its two inverse triangles at each endpoint gives equivalences $e:x\\to x\\prime$ and $d:y\\to y\\prime$. The equivalence transformation is a map $\\Delta^1\\times\\Delta^1\\to P$. Its two triangles have a common diagonal $k:x\\to y\\prime$, and say $k\\simeq df$ and $k\\simeq f\\prime e$. If $f$ is inert, Step 2 shows that $d,e$ are cocartesian; the first triangle makes $k$ cocartesian, and cancellation of $e$ in the second triangle makes $f\\prime$ cocartesian, both by [lem-coef-infinity-cocartesian-composition-initiality]. In the base these same triangles give $p(f\\prime)=p(d)p(f)p(e)^{-1}$, because simplices in an ordinary nerve are commuting diagrams. Relabelling the source and target by these pointed bijections preserves both the singleton non-basepoint fibres and the condition that no non-basepoint is sent to the basepoint. Thus $p(f\\prime)$ is inert when $p(f)$ is inert and active when $p(f)$ is active. This proves preservation of each edge class by an equivalence of arrows; apply the same argument to the inverse transformation for the converse. Every choice of composite in Step 2 is likewise covered by this argument.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-operadic-approximation-restriction",
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 5.2.8.1 and Remark 5.2.8.2; arrow-equivalence invariance expanded using the two triangles of a coherent square and cocartesian cancellation."
+   }
+  },
+  {
+   "text": "Put $X=\\operatorname{Map}_P(x,u)$, $Y=\\operatorname{Map}_P(y,v)$ and $Z=\\operatorname{Map}_P(x,v)$. A point of $X\\times_Z^hY$ is a top arrow $b:x\\to u$, a bottom arrow $c:y\\to v$, and a specified path $H:ab\\simeq ci$. The path-space convention of [def-cbc-enhanced-diagrams-cones], with $Y$ in place of its specified point, gives exactly $X\\times_{Z,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,Z)\\times_{\\operatorname{ev}_1,Z}Y$ degree by degree. The homotopy fibre of the comparison in Step 1 over $(b,c,H)$ consists of $t:y\\to u$, paths $ti\\simeq b$ and $at\\simeq c$, and their compatibility with $H$, retaining all higher simplices. This is the coherent filler space, whose contractibility is precisely the last clause of [lem-coef-symmetric-inert-active-orthogonality]. Thus the two formulations in the item use the same homotopy data. There is no nonempty-arity restriction: the cited theorem includes arity zero, pointed bijections still satisfy the two base conditions for the one-point set, and $\\langle0\\rangle\\to\\langle n\\rangle$ is active for every $n$, covering nullary operations whenever they exist in $P$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-symmetric-inert-active-orthogonality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 2.1.2.4 and HTT Definition 5.2.8.1/Remark 5.2.8.2; unpacking of the mapping-space comparison and its homotopy fibres."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-operadic-approximation-restriction",
+  "lem-coef-symmetric-inert-active-orthogonality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Supporting operadic-envelope input in the dependency expansion of paragraph 2; argument uses existing DAG lemmas and HA/HTT read online, neither book archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -77,10 +142,45 @@
    "results": "{\"t\": \"2026-10-17T02:17:48Z\", \"tool\": \"grep\", \"query\": \"operad|inert.*active|active.*inert\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "No match: source grep restricted to Mathlib/AlgebraicTopology returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "operad|inert.*active|active.*inert",
+   "results": "{\"t\": \"2026-10-17T03:17:41Z\", \"tool\": \"grep\", \"query\": \"operad|inert.*active|active.*inert\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Tactic/Linter/FlexibleLinter.lean\", \"Mathlib/Tactic/Linter/FlexibleLinter.lean\", \"Mathlib/Algebra/NonAssoc/PreLie/Basic.lean\", \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\"], \"digest\": \"a7770e5c22bc9905\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read all returned hits. WeakFactorizationSystem.lean:28-38 concerns ordinary-category weak lifting, and SimplexCategory/GeneratorsRelations/EpiMono.lean:170-174 factors ordinary monotone maps. The other hits are quasicategory definitions, strict nerves or unrelated linter/bibliography text; none states this symmetric infinity-operadic theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inert and active edges of a symmetric infinity operad form an orthogonal factorization system",
+   "results": "{\"t\": \"2026-10-17T03:17:41Z\", \"tool\": \"leanfinder\", \"query\": \"Inert and active edges of a symmetric infinity operad form an orthogonal factorization system\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategoryGenRel.instHasFactorizationP_σP_δ\", \"SimplexCategoryGenRel.exists_P_σ_P_δ_factorization\", \"SimplexCategory.instHasStrongEpiMonoFactorisations\", \"CategoryTheory.MorphismProperty.IsWeakFactorizationSystem.hasFactorization\", \"CategoryTheory.MorphismProperty.IsWeakFactorizationSystem\", \"SimplexCategory.factor_δ_spec\", \"SimplexCategoryGenRel.P_σ\", \"HomotopicalAlgebra.FibrantBrownFactorization.i_r_assoc\"], \"digest\": \"d409caa9c2cb4227\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read all returned hits. WeakFactorizationSystem.lean:28-38 concerns ordinary-category weak lifting, and SimplexCategory/GeneratorsRelations/EpiMono.lean:170-174 factors ordinary monotone maps. The other hits are quasicategory definitions, strict nerves or unrelated linter/bibliography text; none states this symmetric infinity-operadic theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every edge of a symmetric infinity operad factors as an inert edge followed by an active edge with contractible filler spaces",
+   "results": "{\"t\": \"2026-10-17T03:17:41Z\", \"tool\": \"leansearch\", \"query\": \"Every edge of a symmetric infinity operad factors as an inert edge followed by an active edge with contractible filler spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategoryGenRel.instHasFactorizationP_σP_δ\", \"SSet.Edge.edge\", \"SSet.Truncated.HomotopicR.symm\", \"SSet.Edge.mk_edge\", \"SSet.Edge.toTruncated\", \"Quiver.Symmetrify.of_map\", \"SSet.Edge.id\", \"SSet.Edge.CompStruct.compId_simplex\"], \"digest\": \"174092d107ac8481\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read all returned hits. WeakFactorizationSystem.lean:28-38 concerns ordinary-category weak lifting, and SimplexCategory/GeneratorsRelations/EpiMono.lean:170-174 factors ordinary monotone maps. The other hits are quasicategory definitions, strict nerves or unrelated linter/bibliography text; none states this symmetric infinity-operadic theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FactorizationSystem\"",
+   "results": "{\"t\": \"2026-10-17T03:17:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"FactorizationSystem\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.IsWeakFactorizationSystem\", \"CategoryTheory.MorphismProperty.IsWeakFactorizationSystem.hasFactorization\", \"CategoryTheory.MorphismProperty.IsWeakFactorizationSystem.llp\", \"CategoryTheory.MorphismProperty.IsWeakFactorizationSystem.rlp\", \"CategoryTheory.MorphismProperty.IsWeakFactorizationSystem.mk\", \"CategoryTheory.MorphismProperty.IsWeakFactorizationSystem.mk'\", \"HomotopicalAlgebra.instIsMultiplicativeWeakEquivalencesOfIsWeakFactorizationSystemTrivialCofibrationsFibrationsOfIsStableUnderRetractsOfIsStableUnderComposition\", \"HomotopicalAlgebra.instRespectsIsoWeakEquivalencesOfIsWeakFactorizationSystemTrivialCofibrationsFibrationsOfIsStableUnderRetractsOfIsStableUnderComposition\"], \"digest\": \"c3f9d386a612b88e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read all returned hits. WeakFactorizationSystem.lean:28-38 concerns ordinary-category weak lifting, and SimplexCategory/GeneratorsRelations/EpiMono.lean:170-174 factors ordinary monotone maps. The other hits are quasicategory definitions, strict nerves or unrelated linter/bibliography text; none states this symmetric infinity-operadic theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Operations in a quasicategorical operad factor into projections followed by active maps and have unique coherent diagonals",
+   "results": "{\"t\": \"2026-10-17T03:18:09Z\", \"tool\": \"leanfinder\", \"query\": \"Operations in a quasicategorical operad factor into projections followed by active maps and have unique coherent diagonals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.IsStrictSegal\", \"SSet.StrictSegal\", \"SSet.StrictSegalCore\", \"SSet.quasicategory_of_filler\", \"CategoryTheory.Nerve.isStrictSegal\"], \"digest\": \"6044c6f4c21601a2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read all returned hits. WeakFactorizationSystem.lean:28-38 concerns ordinary-category weak lifting, and SimplexCategory/GeneratorsRelations/EpiMono.lean:170-174 factors ordinary monotone maps. The other hits are quasicategory definitions, strict nerves or unrelated linter/bibliography text; none states this symmetric infinity-operadic theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-active-operad-envelope-cocartesian",
@@ -107,5 +207,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operadic-inert-active-factorization",
+  "worker": "stage1",
+  "summary": "No statement change and no new nodes. Reused the existing same-unit symmetric inert-active factorization/orthogonality node, then proved equivalence containment and composition closure by the equivalence outer-horn and cocartesian cancellation lemmas. Proved arrow-equivalence invariance using the two actual triangles in a coherent square and cancellation, avoiding an implicit homotopy-invariance theorem. Expanded the exact path-space and filler data, including arity zero. No project declaration or Mathlib match was found.",
+  "blueprint": "The historical ancestor/via chain is retained: this item supports the active-operad envelope used in the monadic/free-module expansion of paragraph 2 of prop-coef-integral-exceptional-adjoint. That blueprint paragraph is a derived mapping-complex calculation and does not itself state the operadic lemma. Steps 1-4 realize the inert-active input named by the inherited blueprint.from.place; no unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "why": "Generic outer-horn lifting for equivalence edges under an inner fibration, used in Step 2 to deduce that equivalence edges are cocartesian. No same-unit cited statement supplies this equivalence-edge horn assertion; it supplements the existing cocartesian composition calculus without replacing a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NW-6698d0b19",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-6698d0b19 (reviewer sub-agent of L); spot-checked: I read the item, all four steps and every cited statement in full: symmetric-inert-active-orthogonality, operadic-approximation-restriction, the recognition node's operad definition, cocartesian-composition-initiality, the outer-horn lift node, def-coef-infinity-fibrations and def-cbc-enhanced-diagrams-cones. I also read the unit, the main-20261015 ancestor proof and the only node that cites this item. The statement is unchanged and true: it is HA Prop 2.1.2.4, with the closure and invariance clauses written out and nothing weakened. HA and HTT are not archived, so WANTED and proof_origin=agent are correct. No coefficient category or base-change morphism is involved, because the base is N(Fin_*). The orthogonality node (reviewed by Q63) already states the factorization and the orthogonality, and Q63 asked that this item be merged with it or cite it; this split cites it. No new nodes, so D1/D2 do not apply. A DFS over the dependencies of every cited node never reaches the item, so there is no cycle. Step 1: the operad definitions match clause by clause, and 'fixed universe' gives the 'small' the orthogonality node needs. Step 2: I checked the pointed-set calculations for composing active maps and composing inert maps. Equivalence edges are cocartesian because P is a quasicategory, so the Λ^n_0 filler from the outer-horn node is exactly the cocartesian definition. Inert edges are closed under composition by composition-initiality. Step 3: in the square Δ^1×Δ^1, both triangles respect the hypothesis that the first edge is cocartesian, and conjugating by pointed bijections preserves inert and active maps. Step 4 is a correct unpacking, and the orthogonality node states the contractible filler space itself. Small cases checked: ⟨0⟩→⟨n⟩ is active, ⟨n⟩→⟨0⟩ is inert, and bijections are both. Accepted tool_use: lem-cbc-inner-fibration-equivalence-outer-horn-lift (sk-prop-sf-cbc), a generic horn-lifting tool already accepted on composition-initiality. No SGA source. The Mathlib searches cover all three kinds (LeanSearch, Loogle/LeanFinder, grep) and none matches. No changes."
  }
 }

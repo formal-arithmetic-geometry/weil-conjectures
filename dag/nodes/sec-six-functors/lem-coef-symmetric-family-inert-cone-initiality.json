@@ -2,7 +2,7 @@
  "id": "lem-coef-symmetric-family-inert-cone-initiality",
  "kind": "statement",
  "title": "Initial inert extensions of a simplex to its output colors",
- "statement": "Use symmetric operadic families and inert edges of [def-coef-symmetric-operadic-family], joins of [def-coef-infinity-relative-cone], and coherent slices of [lem-coef-infinity-slice-right-fibration]. Let $M^\\otimes\\to T\\times N(\\mathrm{Fin}_*)$ be a small symmetric operadic family, and let $\\tau:\\Delta^r\\to M^\\otimes$ end at $d$ over $(t,\\langle s\\rangle)$. Let $I=\\{1,\\ldots,s\\}$ be discrete and map $\\Delta^r\\star I$ to $T\\times N(\\mathrm{Fin}_*)$ using the projection of $\\tau$ and the inert color projections of its last vertex; all new vertices have $T$-coordinate $t$. Form $X=M^\\otimes\\times_{T\\times N(\\mathrm{Fin}_*)}(\\Delta^r\\star I)$, let $\\bar\\tau$ be the lifted initial simplex, let $X_i$ be the fiber over $i\\in I$, and put $J_i=X_i\\times_X X_{\\bar\\tau/}$. Each $J_i$ is a quasicategory with an initial object: one is supplied by any extension of $\\tau$ whose last edge $d\\to d_i$ is a cocartesian inert lift of the $i$th color projection. Such an extension exists. Here initial means that its mapping space to every object of $J_i$ is contractible. The extension category $J=\\coprod_iJ_i$ is empty for $s=0$. The assertion holds for arbitrary $r\\geq0$ and imposes no limits or colimits in the fibers.",
+ "statement": "Use symmetric operadic families and inert edges of [def-coef-symmetric-operadic-family], joins of [def-coef-infinity-relative-cone], and coherent join coslices of [lem-cbc-relative-coslice-left-fibration]. Let $M^\\otimes\\to T\\times N(\\mathrm{Fin}_*)$ be a small symmetric operadic family, and let $\\tau:\\Delta^r\\to M^\\otimes$ end at $d$ over $(t,\\langle s\\rangle)$. Let $I=\\{1,\\ldots,s\\}$ be discrete and map $\\Delta^r\\star I$ to $T\\times N(\\mathrm{Fin}_*)$ using the projection of $\\tau$ and the inert color projections $\\rho_i:\\langle s\\rangle\\to\\langle1\\rangle$ of its last vertex; its $T$-coordinate is the $T$-projection of $\\tau$ composed with the map $\\Delta^r\\star I\\to\\Delta^r$ sending every $i\\in I$ to the last vertex $r$, so each edge from the last old vertex to $i$ lies over $(1_t,\\rho_i)$. Form $X=M^\\otimes\\times_{T\\times N(\\mathrm{Fin}_*)}(\\Delta^r\\star I)$, let $\\bar\\tau$ be the lifted initial simplex, let $X_i$ be the fiber over $i\\in I$, and put $J_i=X_i\\times_X X_{\\bar\\tau/}$. Each $J_i$ is a quasicategory with an initial object: one is supplied by any extension of $\\tau$ whose last edge $d\\to d_i$ is a cocartesian inert lift of the $i$th color projection. Such an extension exists. Here initial means that its mapping space to every object of $J_i$ is contractible. The extension category $J=\\coprod_iJ_i$ is empty for $s=0$. The assertion holds for arbitrary $r\\geq0$ and imposes no limits or colimits in the fibers.",
  "source": {
   "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
   "place": "Proof of Theorem 3.1.2.3, step (3), printed pp.340-341: the categories of extensions of a simplex to its output projections and their initial objects. September 18, 2017 edition inspected online. WANTED: archive in literature/. No Stacks tag states this quasicategorical assertion."
@@ -10,11 +10,88 @@
  "stmt_deps": [
   "def-coef-symmetric-operadic-family",
   "def-coef-infinity-relative-cone",
-  "lem-coef-infinity-slice-right-fibration"
+  "lem-cbc-relative-coslice-left-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $C=M^\\otimes$, $D=T\\times N(\\mathrm{Fin}_*)$, and denote the family projection by $p:C\\to D$. It is an inner fibration between quasicategories: it is a categorical fibration by [def-coef-symmetric-operadic-family], and every inner horn is a trivial cofibration by [lem-coef-joyal-model-structure]. For a fixed $i$, write $b_i=(t,\\langle1\\rangle)$ and $f_i=(1_t,\\rho_i):p(d)\\to b_i$. Let $\\beta_i:\\Delta^r\\star\\Delta^0\\to D$ be the restriction of the specified base join map to the output $i$, viewed as a vertex of $D_{p\\tau/}$. The coslice formula in [lem-cbc-relative-coslice-left-fibration] identifies\n$$J_i=C_{\\tau/}\\times_{D_{p\\tau/}}\\{\\beta_i\\}.$$\nIndeed, an $n$-simplex on either side is a map $\\Delta^r\\star\\Delta^n\\to C$ restricting to $\\tau$ and having base the map obtained from $\\beta_i$ by collapsing the whole last block to its cone vertex. On the original pullback $X$, the projection to $\\Delta^r\\star I$ is forced by its vertices: this join is the nerve of the poset obtained by putting each $i\\in I$ after $[r]$. The nerve of this poset is a quasicategory directly: the consecutive edges of an inner horn specify a weakly increasing chain of vertices (for a two-dimensional inner horn use transitivity), and that chain specifies a simplex restricting to every given face, since a poset nerve has at most one simplex with prescribed ordered vertices. Pulling back an inner-horn lifting problem for $X\\to\\Delta^r\\star I$ gives one for $p$, so this pullback map is an inner fibration by [def-coef-infinity-fibrations]; filling the base horn first also shows that $X$ is a quasicategory. Thus the identity fixes all mixed simplices and commutes with every simplicial operator; it is an equality of the prescribed coherent extension models.",
+   "uses": [
+    "def-coef-symmetric-operadic-family",
+    "lem-coef-joyal-model-structure",
+    "lem-cbc-relative-coslice-left-fibration",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Theorem 3.1.2.3, step (3), printed pp.340-341, definition of X and its output extension categories; explicit degreewise expansion."
+   }
+  },
+  {
+   "text": "The inclusion $j:\\{r\\}\\hookrightarrow\\Delta^r=N([r])$ is full, and for each vertex $a$ the comma category of arrows $a\\to j(r)$ is the nerve of the one-object, identity-only category, since there is exactly one arrow $a\\to r$. It is therefore a point and weakly contractible. Apply [lem-coef-cofinal-relative-join-slice-restriction] with this $j$, $u=\\tau$, and the inner fibration $p$ from step 1. It gives a trivial Kan fibration\n$$R:C_{\\tau/}\\longrightarrow C_{d/}\\times_{D_{p(d)/}}D_{p\\tau/}.$$\nSet $L_i=C_{d/}\\times_{D_{p(d)/}}\\{f_i\\}$. The map $L_i\\to C_{d/}\\times_{D_{p(d)/}}D_{p\\tau/}$ pairs its first coordinate with the constant simplex at $\\beta_i$. This is well-defined because restriction of $\\beta_i$ to the last old vertex and the cone vertex is $f_i$. Its pullback of $R$ is exactly the restriction $q_i:J_i\\to L_i$. Every boundary lifting problem for $q_i$ gives one for $R$; pair the resulting lift with the prescribed simplex of $L_i$. Thus $q_i$ lifts every boundary, including the empty boundary in dimension zero, as in [def-weil-pbc-trivial-kan-fibration].",
+   "uses": [
+    "lem-coef-cofinal-relative-join-slice-restriction",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.1.2.5, right-anodyne relative coslice restriction, applied through the existing cofinal restriction lemma to the terminal vertex of a simplex; HA proof p.341 initial-output assertion expanded."
+   }
+  },
+  {
+   "text": "By [lem-coef-infinity-cocartesian-composition-initiality], $L_i$ is a quasicategory. To see that $J_i$ is a quasicategory, project an inner horn in it to $L_i$, fill there, then lift that simplex relative to the original horn using $q_i$. The latter lift is justified by [lem-coef-infinity-monomorphism-boundary-cells]: a horn inclusion is a monomorphism and hence is built from boundary inclusions; solve the boundary lifting problems of $q_i$ one at a time, and take the union of the compatible solutions. This uses exactly the boundary lifting established in step 2 and the definition in [def-weil-pbc-trivial-kan-fibration]. Now [def-coef-symmetric-operadic-family] supplies a $p$-cocartesian lift $e_i:d\\to d_i$ of $f_i$ within the fiber at $t$, since $\\rho_i$ is inert. It is a vertex of $L_i$, and the dimension-zero lifting property of $q_i$ gives a vertex $B_i$ over it. This vertex is an extension of the entire original $\\tau$ over the fixed $\\beta_i$, with last edge exactly $e_i$. No existence of lifts over any other base edges is used.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "def-weil-pbc-trivial-kan-fibration",
+    "def-coef-symmetric-operadic-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Theorem 3.1.2.3, printed p.341, existence of initial output extensions; relative coslice boundary lifting gives exact extension of the fixed simplex."
+   }
+  },
+  {
+   "text": "Let $B\\in J_i$ be any vertex whose last edge $e=q_i(B)$ is $p$-cocartesian over $f_i$. The initial-lift clause of [lem-coef-infinity-cocartesian-composition-initiality] makes $e$ initial in $L_i$. Apply [lem-coef-infinity-relative-initial-boundary] to $L_i\\to\\Delta^0$: for every $n>0$, every boundary $\\partial\\Delta^n\\to L_i$ with first vertex $e$ extends. Given a boundary $a:\\partial\\Delta^n\\to J_i$ with first vertex $B$, extend $q_i a$ in $L_i$, and lift this extension through $q_i$ relative to $a$, using [def-weil-pbc-trivial-kan-fibration] and step 2. Hence all positive-dimensional boundaries in $J_i$ beginning at $B$ extend. Applying [lem-coef-infinity-relative-initial-boundary] to $J_i\\to\\Delta^0$ now proves that $\\operatorname{Map}_{J_i}(B,Z)\\to\\Delta^0$ is a weak homotopy equivalence for every $Z\\in J_i$. These spaces are contractible, which is precisely the required initiality. Both uses of the boundary criterion are legal because the domain is a quasicategory by step 3, so its map to a point is an inner fibration.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-infinity-relative-initial-boundary",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02WS",
+    "place": "Corollary 7.1.5.17, positive-boundary criterion, applied twice to expand the initiality assertion in HA proof of Theorem 3.1.2.3, printed p.341; HTT Remark 2.4.1.9, cocartesian dual."
+   }
+  },
+  {
+   "text": "Steps 3 and 4 show existence and initiality for each output and for every choice of cocartesian final edge. If $r=0$, the inclusion $\\{r\\}\\hookrightarrow\\Delta^r$ in step 2 is the identity and $q_i$ is the identity of $L_i$, so step 3 supplies the inert lift as an object of this very category, and step 4 proves its initiality directly there. If $s=0$, there are no indices $i$, and the degreewise coproduct $J=\\coprod_{i\\in\\varnothing}J_i$ is empty in every degree. The argument used only inert edge lifts, relative coslice restriction, and horn and boundary lifting; it imposed no limit or colimit condition on any fiber.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Theorem 3.1.2.3, printed pp.340-341, disjoint decomposition by outputs; zero-input and zero-dimensional cases expanded directly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-symmetric-operadic-family",
+  "lem-coef-joyal-model-structure",
+  "lem-cbc-relative-coslice-left-fibration",
+  "def-coef-infinity-fibrations",
+  "lem-coef-cofinal-relative-join-slice-restriction",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-infinity-relative-initial-boundary"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Historical derived coefficient-adjunction infrastructure; explicit expansion of the initial-output-extension assertion in HA proof of Theorem 3.1.2.3, printed pp.340-341, using HTT Proposition 2.1.2.5 and Remark 2.4.1.9 and Kerodon 02WS. These external sources were read online and are not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +127,59 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SimplexCategory.Truncated.initial_inclusion\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Truncated\", \"type\": \"∀ {n : ℕ} [NeZero n], (SimplexCategory.Truncated.inclusion n).Initial\", \"doc\": \"For any non-zero natural number $ n $, the inclusion functor from the truncated simplex category $ \\\\Delta_{\\\\leq n} $ (consisting of objects $[k]$ for $ k \\\\leq n $) to the full simplex category $ \\\\Delt\"}\n  {\"name\": \"SimplexCategory.Truncated.initial_incl\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Truncated\", \"type\": \"∀ {n m : ℕ} [NeZero n] (hm : n ≤ m), (SimplexCategory.Truncated.incl n m hm).Initial\", \"doc\": \"For natural numbers $n$ and $m$ with $n \\\\leq m$, the canonical inclusion functor from the truncated simplex category $\\\\Delta_{\\\\leq n}$ to $\\\\Delta_{\\\\leq m}$ is initial. This means that for every object\"}\n  {\"name\": \"CategoryTheory.Functor.Initial.instNonemptyCostructuredArrow\", \"module\": \"Mathlib/CategoryTheory/Limits/Final\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  (F : CategoryTheory.Functor C D) [F.Initial] (d : D), Nonempty (CategoryTheory.CostructuredArrow F d)\", \"doc\": \"For any initial functor $ F : C \\to D $ and any object $ d $ in $ D $, the costructured arrow category $ \\text{CostructuredArrow}(F, d) $ is non-empty. This means there exists at least one object $ (c, \"}\n  {\"name\": \"CategoryTheory.CostructuredArrow.initial_pre\", \"module\": \"Mathlib/CategoryTheory/Limits/Final\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {E : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} E] (T : CategoryTheory.Functor C D) [T.Initial]\\n  (S : CategoryTheory.Functor D E) (X : E), (CategoryTheory.CostructuredA\", \"doc\": \"If $ T : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is an initial functor and $ S : \\\\mathcal{D} \\\\to \\\\mathcal{E} $ is any functor, then the precomposition functor $ (T \\\\circ S \\\\downarrow X) \\\\to (S \\\\downarrow X) $ i\"}\n  {\"name\": \"AugmentedSimplexCategory.instHasInitial\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Basic\", \"type\": \"CategoryTheory.Limits.HasInitial AugmentedSimplexCategory\", \"doc\": \"The augmented simplex category, obtained by adjoining an initial object $[-1]$ to the simplex category $\\\\Delta$, has $[-1]$ as its initial object. This means there exists a unique morphism from $[-1]$\"}\n  {\"name\": \"CategoryTheory.Functor.Initial.homToLift\", \"module\": \"Mathlib/CategoryTheory/Limits/Final\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        (F : CategoryTheory.Functor C D) →\\n          [inst_2 : F.Initial] → (d : D) → F.obj (CategoryTheory.Functor.Initial.lift F d) ⟶ d\", \"doc\": \"For each object $ d $ in $ D $, this function provides a morphism from $ F(\\text{lift } F d) $ to $ d $, where $ \\text{lift } F d $ is an object in $ C $ such that there exists a morphism $ F(\\text{lift \"}\n  {\"name\": \"CategoryTheory.CostructuredArrow.initial_proj_of_isCofiltered\", \"module\": \"Mathlib/CategoryTheory/Filtered/Final\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  [CategoryTheory.IsCofilteredOrEmpty C] (T : CategoryTheory.Functor C D) [T.Initial] (Y : D),\\n  (CategoryTheory.CostructuredArrow.proj T Y).Initial\", \"doc\": \"Given a cofiltered or empty category $ \\\\mathcal{C} $, a functor $ T : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ that is initial, and any object $ Y $ in $ \\\\mathcal{D} $, the projection functor from the costructur\"}\n  {\"name\": \"CategoryTheory.Functor.Initial.lift\", \"module\": \"Mathlib/CategoryTheory/Limits/Final\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] → (F : CategoryTheory.Functor C D) → [F.Initial] → D → C\", \"doc\": \"For each object $ d $ in $ D $, this function selects an object $ c $ in $ C $ such that there exists a morphism $ F(c) \\\\to d $ in $ D $, using the non-emptiness of the costructured arrow category $ \\\\\"}",
    "date": "2026-10-17",
    "verdict": "No match: initial functors of ordinary categories and the initial object of AugmentedSimplexCategory have neither the specified relative join extension category nor inert cocartesian projection data."
+  },
+  {
+   "tool": "grep",
+   "query": "operadic|inert.*initial|initial.*cocartesian",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "No match. Read the hits: the IsCocartesian universal properties at Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:55-60 concern ordinary categories and unique hom-set factorizations, not quasicategorical join coslices and contractible mapping spaces. Truncated simplex category initial functors and bicategorical Kan lifts likewise do not state this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cocartesian lift is initial in the infinity category of lifts of an edge, and coherent simplex extensions restrict by a trivial Kan fibration",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Cocartesian\", \"type\": \"∀ {𝒮 : Type u₁} {𝒳 : Type u₂} {inst : CategoryTheory.Category.{v₁, u₁} 𝒮} {inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳}\\n  {p : CategoryTheory.Functor 𝒳 𝒮} {R S : 𝒮} {a b : 𝒳} {f : R ⟶ S} {φ : a ⟶ b} [self : p.IsCocartesian f φ],\\n  p.IsHomLift f φ\", \"doc\": \"If a morphism $\\\\phi : a \\\\to b$ in category $\\\\mathcal{X}$ is cocartesian over a morphism $f : R \\\\to S$ in category $\\\\mathcal{S}$ with respect to a functor $p : \\\\mathcal{X} \\\\to \\\\mathcal{S}$, then the fu\"}\n  {\"name\": \"CategoryTheory.Functor.IsCocartesian.universal_property\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Cocartesian\", \"type\": \"∀ {𝒮 : Type u₁} {𝒳 : Type u₂} {inst : CategoryTheory.Category.{v₁, u₁} 𝒮} {inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳}\\n  {p : CategoryTheory.Functor 𝒳 𝒮} {R S : 𝒮} {a b : 𝒳} (f : R ⟶ S) {φ : a ⟶ b} [self : p.IsCocartesian f φ] {b' : 𝒳}\\n  (φ' : a ⟶ b') [p.IsHomLift f φ'],\\n  ∃! χ, p.IsHomLift (Catego\", \"doc\": \"Given a functor $ p : \\\\mathcal{X} \\\\to \\\\mathcal{S} $, if $ \\\\varphi : a \\\\to b $ is a cocartesian morphism in $ \\\\mathcal{X} $ over $ f : R \\\\to S $ in $ \\\\mathcal{S} $, and $ \\\\varphi' : a \\\\to b' $ is a mor\"}\n  {\"name\": \"CategoryTheory.Functor.IsCocartesian.map.congr_simp\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Cocartesian\", \"type\": \"∀ {𝒮 : Type u₁} {𝒳 : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} 𝒮] [inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳]\\n  (p p_1 : CategoryTheory.Functor 𝒳 𝒮) (e_p : p = p_1) {R S : 𝒮} {a b : 𝒳} (f f_1 : R ⟶ S) (e_f : f = f_1)\\n  (φ φ_1 : a ⟶ b) (e_φ : φ = φ_1) [inst_2 : p.IsCocartesian f φ] {b' : 𝒳}\", \"doc\": \"Given equal functors $ p = p_1 : \\\\mathcal{X} \\\\to \\\\mathcal{S} $, equal morphisms $ f = f_1 : R \\\\to S $ in $ \\\\mathcal{S} $, equal cocartesian lifts $ \\\\varphi = \\\\varphi_1 : a \\\\to b $ in $ \\\\mathcal{X} $, \"}\n  {\"name\": \"CategoryTheory.Functor.IsCocartesian.map\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Cocartesian\", \"type\": \": b ⟶ b'\", \"doc\": \"Given a cocartesian morphism $\\\\varphi : a \\\\to b$ over $f : R \\\\to S$ in $\\\\mathcal{X}$, and a morphism $\\\\varphi' : a \\\\to b'$ lifting $f$, this is the unique morphism $\\\\chi : b \\\\to b'$ in $\\\\mathcal{X}$ l\"}\n  {\"name\": \"CategoryTheory.Bicategory.lanLiftIsKan\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Kan.HasKan\", \"type\": \"(f : b ⟶ a) (g : c ⟶ a) [HasLeftKanLift f g] : (lanLiftLeftLift f g).IsKan\", \"doc\": \"Given 1-cells $ f : b \\to a $ and $ g : c \\to a $ in a bicategory, if a left Kan lift of $ g $ along $ f $ exists, then this left Kan lift is universal. This means it serves as an initial object in the \"}\n  {\"name\": \"CategoryTheory.Functor.IsCocartesian.map_uniq\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Cocartesian\", \"type\": \"(ψ : b ⟶ b') [IsHomLift p (𝟙 S) ψ] (hψ : φ ≫ ψ = φ') : ψ = IsCocartesian.map p f φ φ'\", \"doc\": \"Given a cocartesian morphism $\\\\varphi : a \\\\to b$ over $f : R \\\\to S$ in $\\\\mathcal{X}$, and a morphism $\\\\varphi' : a \\\\to b'$ lifting $f$, any morphism $\\\\psi : b \\\\to b'$ lifting $\\\\text{id}_S$ satisfying \"}\n  {\"name\": \"CategoryTheory.Bicategory.lanLiftLeftLift\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Kan.HasKan\", \"type\": \"(f : b ⟶ a) (g : c ⟶ a) [HasLeftKanLift f g] : LeftLift f g\", \"doc\": \"Given 1-cells $ f : b \\to a $ and $ g : c \\to a $ in a bicategory, if a left Kan lift of $ g $ along $ f $ exists, then the left lift category $ \\text{LeftLift}(f, g) $ has an initial object. This initia\"}\n  {\"name\": \"CategoryTheory.Functor.IsCocartesian.ext\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Cocartesian\", \"type\": \"(φ : a ⟶ b) [IsCocartesian p f φ] {b' : 𝒳} (ψ ψ' : b ⟶ b') [IsHomLift p (𝟙 S) ψ] [IsHomLift p (𝟙 S) ψ']\\n  (h : φ ≫ ψ = φ ≫ ψ') : ψ = ψ'\", \"doc\": \"Given a cocartesian morphism $\\\\phi: a \\\\to b$ in a category $\\\\mathcal{X}$ over a morphism $f: R \\\\to S$ in $\\\\mathcal{S}$ with respect to a functor $p: \\\\mathcal{X} \\\\to \\\\mathcal{S}$, if two morphisms $\\\\ps\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read the hits: the IsCocartesian universal properties at Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:55-60 concern ordinary categories and unique hom-set factorizations, not quasicategorical join coslices and contractible mapping spaces. Truncated simplex category initial functors and bicategorical Kan lifts likewise do not state this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cocartesian\", \"initial\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-17",
+   "verdict": "No match. Read the hits: the IsCocartesian universal properties at Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:55-60 concern ordinary categories and unique hom-set factorizations, not quasicategorical join coslices and contractible mapping spaces. Truncated simplex category initial functors and bicategorical Kan lifts likewise do not state this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent extensions of a simplex over inert output projections have initial objects given by cocartesian lifts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SimplexCategory.Truncated.initial_incl\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Truncated\", \"type\": \"∀ {n m : ℕ} [NeZero n] (hm : n ≤ m), (SimplexCategory.Truncated.incl n m hm).Initial\", \"doc\": \"For natural numbers $n$ and $m$ with $n \\\\leq m$, the canonical inclusion functor from the truncated simplex category $\\\\Delta_{\\\\leq n}$ to $\\\\Delta_{\\\\leq m}$ is initial. This means that for every object\"}\n  {\"name\": \"SimplexCategory.Truncated.initial_inclusion\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Truncated\", \"type\": \"∀ {n : ℕ} [NeZero n], (SimplexCategory.Truncated.inclusion n).Initial\", \"doc\": \"For any non-zero natural number $ n $, the inclusion functor from the truncated simplex category $ \\\\Delta_{\\\\leq n} $ (consisting of objects $[k]$ for $ k \\\\leq n $) to the full simplex category $ \\\\Delt\"}\n  {\"name\": \"CategoryTheory.Functor.IsCocartesian.universal_property\", \"module\": \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian\", \"type\": \"∀ {𝒮 : Type u₁} {𝒳 : Type u₂} {inst : CategoryTheory.Category.{v₁, u₁} 𝒮} {inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳}\\n  {p : CategoryTheory.Functor 𝒳 𝒮} {R S : 𝒮} {a b : 𝒳} (f : R ⟶ S) {φ : a ⟶ b} [self : p.IsCocartesian f φ] {b' : 𝒳}\\n  (φ' : a ⟶ b') [p.IsHomLift f φ'],\\n  ∃! χ, p.IsHomLift (Catego\", \"doc\": \"Given a functor $ p : \\\\mathcal{X} \\\\to \\\\mathcal{S} $, if $ \\\\varphi : a \\\\to b $ is a cocartesian morphism in $ \\\\mathcal{X} $ over $ f : R \\\\to S $ in $ \\\\mathcal{S} $, and $ \\\\varphi' : a \\\\to b' $ is a mor\"}\n  {\"name\": \"CategoryTheory.Functor.IsCocartesian.ext\", \"module\": \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian\", \"type\": \"∀ {𝒮 : Type u₁} {𝒳 : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} 𝒮] [inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳]\\n  (p : CategoryTheory.Functor 𝒳 𝒮) {R S : 𝒮} {a b : 𝒳} (f : R ⟶ S) (φ : a ⟶ b) [p.IsCocartesian f φ] {b' : 𝒳}\\n  (ψ ψ' : b ⟶ b') [p.IsHomLift (CategoryTheory.CategoryStruct.id S) ψ]\", \"doc\": \"Given a cocartesian morphism $\\\\phi: a \\\\to b$ in a category $\\\\mathcal{X}$ over a morphism $f: R \\\\to S$ in $\\\\mathcal{S}$ with respect to a functor $p: \\\\mathcal{X} \\\\to \\\\mathcal{S}$, if two morphisms $\\\\ps\"}\n  {\"name\": \"CategoryTheory.Functor.IsStronglyCocartesian.universal_property\", \"module\": \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian\", \"type\": \"∀ {𝒮 : Type u₁} {𝒳 : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} 𝒮] [inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳]\\n  (p : CategoryTheory.Functor 𝒳 𝒮) {R S : 𝒮} {a b : 𝒳} (f : R ⟶ S) (φ : a ⟶ b) [p.IsStronglyCocartesian f φ] {S' : 𝒮}\\n  {b' : 𝒳} (g : S ⟶ S') (f' : R ⟶ S'),\\n  f' = CategoryTheory.C\", \"doc\": \"Given categories $\\\\mathcal{S}$ and $\\\\mathcal{X}$, a functor $p: \\\\mathcal{X} \\\\to \\\\mathcal{S}$, and a strongly cocartesian morphism $g: a \\\\to b$ in $\\\\mathcal{X}$ lifting $f: R \\\\to S$ in $\\\\mathcal{S}$, f\"}\n  {\"name\": \"CategoryTheory.Functor.IsCocartesian.map_uniq\", \"module\": \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian\", \"type\": \"∀ {𝒮 : Type u₁} {𝒳 : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} 𝒮] [inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳]\\n  (p : CategoryTheory.Functor 𝒳 𝒮) {R S : 𝒮} {a b : 𝒳} (f : R ⟶ S) (φ : a ⟶ b) [inst_2 : p.IsCocartesian f φ] {b' : 𝒳}\\n  (φ' : a ⟶ b') [inst_3 : p.IsHomLift f φ'] (ψ : b ⟶ b') [p.I\", \"doc\": \"Given a cocartesian morphism $\\\\varphi : a \\\\to b$ over $f : R \\\\to S$ in $\\\\mathcal{X}$, and a morphism $\\\\varphi' : a \\\\to b'$ lifting $f$, any morphism $\\\\psi : b \\\\to b'$ lifting $\\\\text{id}_S$ satisfying \"}\n  {\"name\": \"CategoryTheory.Functor.IsStronglyCocartesian.universal_property'\", \"module\": \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian\", \"type\": \"∀ {𝒮 : Type u₁} {𝒳 : Type u₂} {inst : CategoryTheory.Category.{v₁, u₁} 𝒮} {inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳}\\n  {p : CategoryTheory.Functor 𝒳 𝒮} {R S : 𝒮} {a b : 𝒳} (f : R ⟶ S) {φ : a ⟶ b} [self : p.IsStronglyCocartesian f φ]\\n  {b' : 𝒳} (g : S ⟶ p.obj b') (φ' : a ⟶ b') [p.IsHomLift (Catego\", \"doc\": \"For categories $\\\\mathcal{S}$ and $\\\\mathcal{X}$, a functor $p: \\\\mathcal{X} \\\\to \\\\mathcal{S}$, and a strongly cocartesian morphism $\\\\varphi: a \\\\to b$ in $\\\\mathcal{X}$ with respect to $f: R \\\\to S$ in $\\\\ma\"}\n  {\"name\": \"CategoryTheory.Functor.IsCocartesian.map\", \"module\": \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian\", \"type\": \"{𝒮 : Type u₁} →\\n  {𝒳 : Type u₂} →\\n    [inst : CategoryTheory.Category.{v₁, u₁} 𝒮] →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} 𝒳] →\\n        (p : CategoryTheory.Functor 𝒳 𝒮) →\\n          {R S : 𝒮} →\\n            {a b : 𝒳} →\\n              (f : R ⟶ S) → (φ : a ⟶ b) → [p.IsCocartesian f φ] → {b' : 𝒳\", \"doc\": \"Given a cocartesian morphism $\\\\varphi : a \\\\to b$ over $f : R \\\\to S$ in $\\\\mathcal{X}$, and a morphism $\\\\varphi' : a \\\\to b'$ lifting $f$, this is the unique morphism $\\\\chi : b \\\\to b'$ in $\\\\mathcal{X}$ l\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read the hits: the IsCocartesian universal properties at Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:55-60 concern ordinary categories and unique hom-set factorizations, not quasicategorical join coslices and contractible mapping spaces. Truncated simplex category initial functors and bicategorical Kan lifts likewise do not state this item."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCocartesian|IsStronglyCocartesian",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"line\": \"21\", \"text\": \"`IsCocartesian p f φ` expresses that `φ` is a co-Cartesian morphism lying over `f : R ⟶ S` with\"}\n  {\"file\": \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"line\": \"25\", \"text\": \"`IsStronglyCocartesian p f φ` expresses that `φ` is a strongly co-Cartesian morphism lying over `f`\"}\n  {\"file\": \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"line\": \"30\", \"text\": \"The constructor of `IsStronglyCocartesian` has been named `universal_property'`, and is mainly\"}\n  {\"file\": \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"line\": \"32\", \"text\": \"generally recommended to use the lemma `IsStronglyCocartesian.universal_property` instead. The\"}\n  {\"file\": \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"line\": \"55\", \"text\": \"class IsCocartesian : Prop where\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Read the hits: the IsCocartesian universal properties at Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:55-60 concern ordinary categories and unique hom-set factorizations, not quasicategorical join coslices and contractible mapping spaces. Truncated simplex category initial functors and bicategorical Kan lifts likewise do not state this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an inner fibration of quasicategories, extending a simplex along a cocartesian edge gives an initial object of its relative undercategory",
+   "results": "Second reader: service available; 8 hits. Top results: SSet.StrictSegal.isPointwiseRightKanExtensionAt, SSet.StrictSegal.isRightKanExtension, SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂, SSet.Truncated.rightExtensionInclusion, SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift, SSet.Quasicategory.hornFilling, SimplexCategory.Truncated.initial_inclusion, SSet.Truncated.rightExtensionInclusion_left",
+   "date": "2026-10-17",
+   "verdict": "No match. StrictSegal Kan extensions and Quasicategory.hornFilling do not assert initiality of coherent relative extension categories; the cocartesian and Under results apply to ordinary categories."
+  },
+  {
+   "tool": "grep",
+   "query": "under.*initial|initial.*under|cocartesian.*lift|Cocartesian.*lift",
+   "results": "Second reader: service available; 25 hits. Top results: Mathlib/Tactic/Linter/Style.lean, Mathlib/Algebra/Category/Ring/Adjunctions.lean, Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean, Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean, Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean",
+   "date": "2026-10-17",
+   "verdict": "No match. StrictSegal Kan extensions and Quasicategory.hornFilling do not assert initiality of coherent relative extension categories; the cocartesian and Under results apply to ordinary categories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-symmetric-operadic-left-horn-filling",
@@ -80,5 +206,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-symmetric-family-inert-cone-initiality",
+  "worker": "stage1",
+  "summary": "Expanded the inert-output extension argument into exact relative coslice restriction to the final vertex, existence by zero-dimensional lifting, and initiality by positive-boundary lifting. Reused existing cofinal restriction, cocartesian lift initiality and boundary calculus; created no nodes. Corrected the introductory slice citation to the coslice definition actually used, with no mathematical statement change. Checked r=0 and s=0 and retained the fixed base cone throughout. Second reading expanded the elementary poset-nerve horn filler and the r=0 conclusion, and independently repeated semantic and source searches.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 derived coefficient-adjunction infrastructure, through lem-coef-symmetric-operadic-left-horn-filling. Current main-20261015 proof has no separate operadic substep. Steps 1-4 expand HA proof of Theorem 3.1.2.3 step (3), pp.340-341, initial objects in each output component; step 5 handles the empty output and vertex cases.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-relative-coslice-left-fibration",
+    "why": "Step 1 uses its degreewise coherent join-coslice construction as a generic simplicial tool, filed in sk-prop-sf-cbc. The item unit has no alternate coslice construction; this is notation and infrastructure and does not replace a step of its geometric proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-relative-coslice-left-fibration"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-6a19566ce",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-6a19566ce (reviewer sub-agent of L); spot-checked: Read the item, all 3 statement deps, all 9 proof deps and the one citer in full. All five steps are correct. Step 1: the join Δ^r⋆I is a poset nerve, so the map to it is forced degreewise and J_i = C_{τ/}×_{D_{pτ/}}{β_i} exactly. Step 2: {r}⊂Δ^r is full and every comma of arrows a→r is Δ^0, so the coslice clause (not the dual) of lem-coef-cofinal-relative-join-slice-restriction applies; its pullback gives q_i: J_i→L_i=L(d,f_i), a trivial Kan fibration. Step 3: J_i is a quasicategory by the boundary-cell lifting; the inert lift from the family definition lies within M_t^⊗, so over (1_t,ρ_i), and q_i is surjective on vertices, which gives existence. Step 4: lem-coef-infinity-relative-initial-boundary is used twice over Δ^0 and proves initiality for every extension with a cocartesian last edge. Step 5: r=0, s=0, s=1 and degenerate τ checked. One fault fixed: the old statement fixed the new vertices at T-coordinate t but left the T-edge r→i free. For a general quasicategory T that edge need not be an equivalence, and then the existence clause can fail. The proof uses f_i=(1_t,ρ_i). The fix states that the T-coordinate is pr_T(pτ) composed with the collapse Δ^r⋆I→Δ^r (i↦r). This is forced in the only citer, where T=Δ^m. No hypothesis or conclusion is otherwise changed. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-symmetric-family-inert-cone-initiality.json. HA Thm 3.1.2.3 pp.340-341 is not archived locally, so I could not open it; I recognise the claim and verified it entirely through DAG statements. No SGA source is used. The duplicate grep (inert/initial/color projection/3.1.2.3) found no duplicate. There are no new nodes. Accepted tool_use: lem-cbc-relative-coslice-left-fibration (unit sk-prop-sf-cbc), used only for its degreewise coslice construction.; 1 file(s) fixed by the reviewer"
  }
 }
