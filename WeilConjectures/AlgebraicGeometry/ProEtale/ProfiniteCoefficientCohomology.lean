@@ -94,7 +94,7 @@ lemma shortExact_of_sections (T : ShortComplex (Sheaf J AddCommGrpCat.{u + 1}))
     exact (sheafToPresheaf J _).mono_of_mono_map this
   exact ShortComplex.ShortExact.mk' hT inferInstance inferInstance
 
-variable [DiscreteTopology A] [DiscreteTopology B]
+variable [DiscreteTopology B]
 
 /-- The inclusion of the kernel of a continuous homomorphism, as a continuous homomorphism. -/
 def kerSubtype (φ : ContinuousAddMonoidHom A B) :
@@ -108,11 +108,15 @@ lemma shortExact_continuousSheafMap (φ : ContinuousAddMonoidHom A B)
     (ShortComplex.mk (continuousSheafMap S (kerSubtype φ)) (continuousSheafMap S φ) (by
       apply Sheaf.hom_ext
       ext U f
-      exact ULift.ext _ _ (ContinuousMap.ext fun t ↦ (f.down t).2))).ShortExact := by
+      let f' : C(U.unop.left, φ.toAddMonoidHom.ker) := f.down
+      exact ULift.ext _ _ (ContinuousMap.ext fun t ↦ (f' t).2))).ShortExact := by
   have := epi_continuousSheafMap S φ hφ
   refine shortExact_of_sections _ (fun U x y h ↦ ?_) (fun U y hy ↦ ?_)
   · exact ULift.ext _ _ (ContinuousMap.ext fun t ↦ Subtype.ext
       (congrArg (fun f : ULift.{u + 1} C(U.unop.left, A) ↦ f.down t) h))
+  · let y' : C(U.unop.left, A) := y.down
+    have hy' (t : U.unop.left) : φ (y' t) = 0 :=
+      congrArg (fun f : ULift.{u + 1} C(U.unop.left, B) ↦ f.down t) hy
     exact ⟨ULift.up ⟨fun t ↦ ⟨y' t, hy' t⟩, by fun_prop⟩, rfl⟩
 
 /-- **Right exactness of the top cohomology.** For a surjection `φ : A ⟶ B` of discrete
