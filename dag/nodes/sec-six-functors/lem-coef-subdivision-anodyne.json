@@ -320,5 +320,23 @@
   "group": "Q106",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-8ce4de5b9 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item and its 7 steps, the report, and the statements of all six cited nodes (simplicial-set, colimit, nerve/horn defs; subdivision face-poset calculus; anodyne pushout-product leaf SSet.anodyneExtensions_pushoutObjObjι; lifting-class closure leaf). I also read Kerodon 00Z3 and 00Z9 online. They are not in literature/, so the WANTED line is correct. The statement matches 00Z3 exactly: arbitrary small simplicial sets, arbitrary anodyne f, no added hypothesis and nothing weakened. It is stated and proved in the DAG's convention, anodyne = left lifting property against Kan fibrations, so no comparison of conventions is hidden. Step 1 (00Z9 cube): I checked the isomorphism P(J) ≅ [1]×P(I), the rule for flags that avoid J, and the union and intersection; together they give exactly the leaf's pushout-product with {0}↪Δ^1 = Λ^1_0; I=∅ is fine. Step 2: the faces missing from the horn are exactly J and V, the face family is closed under nonempty subsets, and the calculus gives Sd Λ ≅ N(C∖{J,V}); n=1 is fine. Step 3: g: T↦T∪{k} is an order embedding, G∩A = N(g)N(P_-(J)), and pushout closure applies. Step 4: h is an order embedding onto C∖{{k}}, and the cover and the overlap D are correct; |J|=1 is fine. Step 5: the pushout-product with Λ^1_1, then pushout and composition closure, covers every n≥1 and every k, outer horns included. Steps 6–7: the adjoint transposition through the natural Sd–Ex Hom bijection gives Ex(p) Kan, then lifting for Sd(f); every filler equation checks. It replaces the weak-saturation step without a small-object argument and without circularity. There are no new nodes, no cycle (the only citer of the item is lem-coef-subdivision-ex-homotopy-adjunction) and no duplicate (rg over subdivision/anodyne/Sd). The route stays inside unit sk-prop-sf-biduality-general, using its leaves and its face-poset calculus. No SGA source is cited, the blueprint fields are correct and no tool_uses are needed. The base-change and coefficient-category check does not apply: this is not a target node. No fixes were needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-67b82c1b8",
+  "group": "NV",
+  "result": "pass",
+  "note": "SSet.subdivision_anodyne {X Y : SSet.{u}} (f) (hf : anodyneExtensions f) : anodyneExtensions (sd.map f) matches node and Kerodon 00Z3 clause by clause: Mathlib sd is the same functor the face-poset-calculus dep uses; anodyneExtensions = (fibrations).llp = J.rlp.llp (rfl), J covering every horn with n>=1 including outer horns, i.e. the node's LLP-against-Kan definition; sole hypothesis; full conclusion; universe arbitrary; no extra assumptions. Edge cases (empty, isos, n=1, I empty) fine. No duplicate: Mathlib AnodyneExtensions/Basic.lean:46 lists it as TODO. Node copy differs only in lean; statement verbatim; docstrings give source and blueprint plus the 7 proof steps; only sorry, no definitions; all proof deps imported; worker report and second reading present. nt_compile.py --json against side overlay: rc 0, no messages. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SubdivisionAnodyne",
+  "declaration": "SSet.subdivision_anodyne",
+  "file": "lean/Sheaf/AlgebraicTopology/SubdivisionAnodyne.lean",
+  "statement": "theorem subdivision_anodyne {X Y : SSet.{u}} (f : X ⟶ Y) (hf : anodyneExtensions f) : anodyneExtensions (sd.map f)",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

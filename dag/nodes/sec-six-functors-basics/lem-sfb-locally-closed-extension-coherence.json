@@ -26,7 +26,11 @@
   "def-weil-closed-immersion",
   "def-weil-open-immersion",
   "def-weil-presheaf-modules-sheafification",
-  "def-weil-extension-by-zero-presheaf"
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-strict-tower-operations",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
  ],
  "proof": [
   {
@@ -438,5 +442,41 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-190385e3e (reviewer sub-agent of L); spot-checked: Read the item's statement and all ten steps, the statements of all 28 cited nodes (all exist, none merged), the blueprint det-prop-scalar-six-pullback proof (2) in main-20261015, and the Stacks places proetale.tex 09AA/09BM/09BN/09AH, sites-modules.tex 03DI and schemes.tex 02V0. The statement is unchanged and I believe it is true. Both factors are exact (09BM needs a quasi-compact complement, which the Noetherian hypothesis gives); v_! has an invertible unit and c_* an invertible counit, so the termwise derived functors keep both. Tested: empty S, zero ring, identity immersion, closed point of A^1, nonreduced Z. Earlier faults are repaired: the false adjunction v_!c_*⊣c^{-1}v^{-1} is gone (E3); the conjugate lemma is used only for two genuine open left adjoints (C4); closed adjunction c^{-1}⊣c_* comes from the ringed-topoi module adjunction, with ringed-closed-counit making its counit invertible. Step 2: localization detection and the two Hom transpositions run in the right directions. Step 5: the shrinking via a closed complement factoring through V\\S is correct. Step 6: S→V∩V' is a base change of c, so no image-containment inference (avoids E3). Step 7: in the mixed interchange V is chosen with i^{-1}V=S, the boundary Z×_X D vanishes by i^{-1}j_!=0, θ is the transpose of λ^{-1}, and i^{-1}θ and k^{-1}θ are both isomorphisms; every arrow direction checked. Step 8 uses the 02V0 open-lifting square. Step 9: coherence follows from faithfulness of restriction. Step 10: derived descent via exact-functor factorization, termwise adjunction and the localization universal property (2) and (3). proof_deps equals the union of step uses and stmt_deps matches the statement. No new nodes, and no duplicate in the DAG (rg over locally-closed/extension/fully-faithful/associativ hits). The 12 declared tool_uses are generic black boxes and are accepted. Minor, no edit needed: Step 1 calls the coefficient map 'id' where it is really the site-composition isomorphism c^{-1}v^{-1}R≅(vc)^{-1}R, which the same step invokes; the report lists citations.json, which is not a delivered file. No fixes written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-832178dae",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Read the node, all 14 statement dependencies and the module; opened the exact dependency definitions (proEtaleSheafInverseImage, proEtaleRingInverseImageId/Comp as conjugateIsoEquiv mates of canonical pushforward/pullback comparisons, proEtaleRingCompositeCoefficients). The existential is not hollow: open extensions are fixed as left adjoints with unit normalization, closed extensions by the actual direct image and counit, mixed immersions through gamma fixed by normalized plus full faithfulness, and derived maps by termwise descent. Exactness, restriction iso, derived full faithfulness, the derived Hom bijection, both factorization orders, gamma, units and associativity are all present on modules and derived categories. Strict unit and associativity equalities of ringed arrows hold by coherence of the canonical inverse-image comparisons; open and closed normalizations are consistent for clopen arrows. No extra hypotheses on R, no universe equalities, Noetherian source bundles exclude nothing. One sorry, docstrings with source and blueprint, statement field verbatim, no dependency cycle, real Worker report and Second reading by Q88. nt_compile.py: exit 0, module 12.5 s, no errors. Minor only: two unused public imports."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallyClosedExtensionCoherence",
+  "declaration": "AlgebraicGeometry.Scheme.locallyClosedExtensionCoherence",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficients",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.identity",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.comp",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.pull",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.push",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.pullComp",
+   "AlgebraicGeometry.Scheme.LocallyClosedExtensionData",
+   "AlgebraicGeometry.Scheme.LocallyClosedExtensionData.derived",
+   "AlgebraicGeometry.Scheme.LocallyClosedExtensionData.closedOpenFactorization",
+   "AlgebraicGeometry.Scheme.LocallyClosedExtensionData.openClosedFactorization",
+   "AlgebraicGeometry.Scheme.LocallyClosedExtensionData.factorizationComparison",
+   "AlgebraicGeometry.Scheme.LocallyClosedExtensionData.Coherent",
+   "AlgebraicGeometry.Scheme.LocallyClosedExtensionData.DerivedCoherence",
+   "AlgebraicGeometry.Scheme.locallyClosedExtensionCoherence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyClosedExtensionCoherence.lean",
+  "statement": "theorem locallyClosedExtensionCoherence : ∃ E : LocallyClosedExtensionData.{u}, E.Coherent ∧ Nonempty E.DerivedCoherence",
+  "branch": "newtargets-dag",
+  "by": "Q88",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The helper structures package this node’s simultaneous witnesses and equations, with actual published module inverse/direct images and exact termwise derived functors. Pure open extension is specified by its adjunction (the equivalent characterization in the statement); pure closed extension uses the normalized actual counit. No arbitrary functor or conclusion is assumed. The added landed statement dependencies supply canonical coefficient identifications and the section-normalized ordinary inverse-image composition."
  }
 }

@@ -30,7 +30,10 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-constant-sheaf",
   "def-weil-abstract-derived-category",
-  "def-pur-localized-ringed-site"
+  "def-pur-localized-ringed-site",
+  "def-sf-site-constant-module-functor",
+  "def-sfb-site-derived-constant-module-functor",
+  "def-weil-pbc-ringed-derived-restriction"
  ],
  "proof": [
   {
@@ -300,5 +303,29 @@
   "group": "Q107",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-7c6a8a831 (reviewer sub-agent of L); spot-checked: I read the item in full: six steps, no new nodes. I read every cited statement and Stacks sites-cohomology at 08FL, 08FN, 08FP, 08FQ, 08FR and 09BD; the tags match tags/tags. The statement matches 09BD hypothesis by hypothesis. The representative supplies perfectness, the site is small by the DAG convention, the target G is unbounded as in 08FR(1), and nothing is weakened. It is unchanged and serves its parent lem-sfb-perfect-constant-derived-map-local exactly. Step 1: the finite-free retract comes from a generator surjection plus projective lifting; the constant module functor and finite-limit exactness of sheafification give it, and no freeness is assumed. Step 2: the right fraction s:B->E, f:B->G is correctly oriented. The cone convention agrees with def-weil-abstract-derived-category, and lem-pur-quasi-iso-cone-acyclic gives acyclicity. Step 3: I checked that restriction to the slice is exact (sectionwise kernels; forget is exact and faithful; epis are local surjections; slice coverings are coverings of C). The sheafification hypothesis is discharged, and the derived factorization gives psi|_V = Q(f|)Q(s|)^{-1}. Step 4: this is the proof of 08FN, with a basis lift on a common refinement; the map is natural by semilinearity and pLJ = r. Step 5: I recomputed d_C r^n = 0. Exactness gives C^{n-1} -> Z^n as an epi, and the finite descending induction from b to a is fully set up; the coverings compose by axiom (ii). Step 6: expanding the components gives d t = t d and id = du + ud + st, so Q(t) = Q(s)^{-1} and Q(f t) = psi|. Edge cases checked: zero complex, rank 0, the zero ring, nonfree R(1,0) over ZxZ, the one-point site, an empty covering of the final object, and unbounded B and G. proof_deps equals the union of uses. A duplicate search found only narrower nodes: the étale finite-free local-actual node and the scheme-stalk families. I accept the three declared tool uses (cone-acyclic, forgetful functor, common refinement) as generic black boxes. One remark only: the blueprint_update of the derived-category def drops the K(A) clause; Step 2 already cites the multiplicative-system node. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2188f9bb2",
+  "group": "Q113",
+  "result": "pass",
+  "note": "Read node, all 11 stmt_deps (incl. 3 added landed defs: site constant module functor, derived constant functor, ringed derived restriction), the module, report (Worker report + Second reading by Q113 present), dependency Lean (siteModuleHasDerivedCategory, ringedOverFunctor_exactGeneral, ringedDerivedRestrictionSized = overFunctor.mapDerivedCategory) and Stacks 09BD/08FR(1). Every clause matches: IsSiteForCoverings site with independent u,v; IsTerminal X; CommRing R at the recorded max u v size convention; termwise IsZero bound with a<=b; Module.Finite/Projective only; constant complex via siteConstantModuleFunctorGeneral.mapHomologicalComplex; arbitrary G; actual Presieve.ofArrows cover in J X (empty allowed); chain maps on overFunctor restrictions; Q(a) equals restricted psi conjugated by canonical mapDerivedCategoryFactors (inv source, hom target). Helpers are canonical real data with docstrings and listed; only the theorem is sorry. lean.statement equals the file signature exactly; node changed only in lean and stmt_deps, no cycle. nt_compile.py --json rc=0, module 5.6 s, no errors or warnings. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PerfectConstantLocalChainRepresentative",
+  "declaration": "CategoryTheory.exists_perfect_constant_local_chain_representative",
+  "declarations": [
+   "CategoryTheory.constantModuleCochainFunctor",
+   "CategoryTheory.moduleCochainRestriction",
+   "CategoryTheory.moduleCochainRestrictionQIso",
+   "CategoryTheory.exists_perfect_constant_local_chain_representative"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PerfectConstantLocalChainRepresentative.lean",
+  "statement": "theorem exists_perfect_constant_local_chain_representative {C : Type u} [Category.{v} C] (J : Precoverage C) (_hJ : J.IsSiteForCoverings) (X : C) (_hX : IsTerminal X) (R : Type (max u v)) [CommRing R] [siteModuleHasDerivedCategory.{u, v, wS} ((constantSheaf J.toGrothendieck RingCat.{max u v}).obj (RingCat.of R))] [∀ U : C, siteModuleHasDerivedCategory.{max u v, v, wU} (((constantSheaf J.toGrothendieck RingCat.{max u v}).obj (RingCat.of R)).over U)] (F : CochainComplex (ModuleCat.{max u v} R) ℤ) (_hbounded : ∃ a b : ℤ, a ≤ b ∧ ∀ q : ℤ, q < a ∨ b < q → IsZero (F.X q)) [∀ q : ℤ, Module.Finite R (F.X q)] [∀ q : ℤ, Module.Projective R (F.X q)] (G : CochainComplex (SheafOfModules.{max u v} ((constantSheaf J.toGrothendieck RingCat.{max u v}).obj (RingCat.of R))) ℤ) (ψ : DerivedCategory.Q.obj ((constantModuleCochainFunctor J.toGrothendieck R).obj F) ⟶ DerivedCategory.Q.obj G) : ∃ (I : Type (max u v)) (U : I → C) (f : ∀ i : I, U i ⟶ X), Presieve.ofArrows U f ∈ J X ∧ ∀ i : I, ∃ a : (moduleCochainRestriction ((constantSheaf J.toGrothendieck RingCat.{max u v}).obj (RingCat.of R)) (U i)).obj ((constantModuleCochainFunctor J.toGrothendieck R).obj F) ⟶ (moduleCochainRestriction ((constantSheaf J.toGrothendieck RingCat.{max u v}).obj (RingCat.of R)) (U i)).obj G, DerivedCategory.Q.map a = (moduleCochainRestrictionQIso ((constantSheaf J.toGrothendieck RingCat.{max u v}).obj (RingCat.of R)) (U i) ((constantModuleCochainFunctor J.toGrothendieck R).obj F)).inv ≫ (ringedDerivedRestrictionSized ((constantSheaf J.toGrothendieck RingCat.{max u v}).obj (RingCat.of R)) (U i)).map ψ ≫ (moduleCochainRestrictionQIso ((constantSheaf J.toGrothendieck RingCat.{max u v}).obj (RingCat.of R)) (U i) G).hom",
+  "branch": "newtargets-dag",
+  "by": "Q113",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

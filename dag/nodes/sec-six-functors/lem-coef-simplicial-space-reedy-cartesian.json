@@ -250,5 +250,33 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-d13191314 (reviewer sub-agent of L); spot-checked: I read the item and all four cited node statements in full. The Mathlib leaf source is AnodyneExtensions/PushoutProduct.lean:95-110, with anodyneExtensions defined in Basic.lean:65-75 as LLP against the horn-defined fibrations. The statement is byte-identical to the base node in the live tree and is true. Step 1: the latching colimit over proper surjections is injected onto the degenerate part by the uniqueness clause of 017R; n=0 gives the empty set. Step 2: the min-section delta gives A_n ∩ D_nB = D_nA, so the relative latching map is the union inclusion, and the Reedy criterion then applies; the forward direction comes from the objectwise-cofibration clause. Step 3: the pushout is the union of two subobjects meeting in A×C. Step 4: by the (C∩W,F) weak factorization system, trivial cofibrations are the anodyne maps, so the leaf applies degreewise; the factor-swap case was checked. Step 5: the tensor/Map and internal-hom Yoneda formulas are well typed and both round trips hold. Step 6: horns, then cu is a Reedy trivial cofibration, then the lift against p. Step 7: boundary maps including ∂Δ^0=∅; i trivial and p trivial are handled separately. No new nodes, no cycle, the route stays in the unit apart from Mathlib leaves, no SGA, and no tool_uses. Maintainer note, not a fault: the existing unsplit lem-coef-bisimplicial-reedy-division-calculus overlaps the cofibrations=monos and SM7 clauses. It lacks the cartesian clause, so it is not a duplicate. Rezk is not archived; the WANTED line and proof_origin=agent are correct. A late background duplicate search over the whole DAG found nothing new. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a4a36440b",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Clauses checked one by one against the node and Rezk 2.3-2.5. Cofibrations: leftClass over the opposites of surjections, matching simplex_reedy_structure and model_structure. Fibrations: reused IsReedyFibration (rightClass over the opposites of injections). Weak equivalences: degreewise Enhanced.IsWeakHomotopyEquivalence, the Kan dependency's weakEquivalenceStructure. Conjunct 1: cofibration iff injective in every bidegree, both directions. Conjunct 2: Mathlib Arrow.pushoutProduct; a test compile confirmed by rfl that its target is B ⊗ D, a degreewise product; both weak-equivalence alternatives are kept. Conjunct 3: mappingSpace is the ihom evaluated at outer [0], equal to Hom(A×cΔ^q,X); mappingPullback is the standard pullback.lift of restriction and postcomposition; conclusion is Kan fibration, plus weak equivalence when i or p is weak. No extra hypotheses or universe restriction. Edge cases covered: degree 0, empty spaces, identities, nonfibrant X and Y. lean.statement matches the file verbatim; all 7 declarations present; stmt_deps imported; one sorry; source and blueprint docstrings present; definitions have real data. nt_compile --json: rc 0, no warnings. No duplicate definition found. Maintainer note: do not add the proof-dependency import of this module to SegalCartesianExponent, because it would close an import cycle (listed in the worker report per §3(7)); stage 3 must move the shared definitions to a common module."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SimplicialSpaceReedyCartesian",
+  "declaration": "SSet.SegalSpace.reedy_cartesian_simplicial",
+  "declarations": [
+   "SSet.SegalSpace.mappingSpace",
+   "SSet.SegalSpace.mappingSpacePre",
+   "SSet.SegalSpace.mappingSpacePost",
+   "SSet.SegalSpace.mappingPullback",
+   "SSet.SegalSpace.IsReedyCofibration",
+   "SSet.SegalSpace.IsReedyWeakEquivalence",
+   "SSet.SegalSpace.reedy_cartesian_simplicial"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SimplicialSpaceReedyCartesian.lean",
+  "statement": "theorem reedy_cartesian_simplicial : (∀ (A B : SimplicialSpace.{u}) (i : A ⟶ B), IsReedyCofibration i ↔ ∀ n q : SimplexCategoryᵒᵖ, Function.Injective ((i.app n).app q)) ∧ (∀ (A B C D : SimplicialSpace.{u}) (i : A ⟶ B) (j : C ⟶ D), IsReedyCofibration i → IsReedyCofibration j → IsReedyCofibration (((CategoryTheory.MonoidalCategory.Arrow.pushoutProduct.obj (Arrow.mk i)).obj (Arrow.mk j)).hom) ∧ ((IsReedyWeakEquivalence i ∨ IsReedyWeakEquivalence j) → IsReedyWeakEquivalence (((CategoryTheory.MonoidalCategory.Arrow.pushoutProduct.obj (Arrow.mk i)).obj (Arrow.mk j)).hom))) ∧ (∀ (A B X Y : SimplicialSpace.{u}) (i : A ⟶ B) (p : X ⟶ Y), IsReedyCofibration i → IsReedyFibration p → Fibration (mappingPullback i p) ∧ ((IsReedyWeakEquivalence i ∨ IsReedyWeakEquivalence p) → Fibration (mappingPullback i p) ∧ Enhanced.IsWeakHomotopyEquivalence (mappingPullback i p)))",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded Reedy relative-latching and relative-matching classes, Kan fibrations, and realization-based weak equivalences. Reuses SimplicialSpace, constant, discreteRepresentable, the cartesian closed instance and IsReedyFibration already published in SegalCartesianExponent; no use of its downstream cartesian_exponent theorem. The mapping space is the degree-zero internal hom, whose simplices are the specified maps by adjunction and Yoneda. The mapping pullback is the canonical pullback lift, with commutativity supplied by internal-hom naturality."
  }
 }

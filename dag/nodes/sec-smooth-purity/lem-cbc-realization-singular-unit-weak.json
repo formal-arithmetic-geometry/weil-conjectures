@@ -239,5 +239,23 @@
   "group": "Q63",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-c0558b1d3 (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full, plus the full statements of the six cited nodes and the only citer, lem-cbc-kan-realization-mapping-classes. I checked the statement against Kerodon Tag 0142 (Thm 3.6.4.1), fetched online. Kerodon proves it by filtered colimits and cell induction; the split follows the classical Hovey 3.6.7 route instead (evaluation is a weak equivalence, then the triangle identity), and I checked that route myself. Hovey and Hatcher are not archived, so proof_origin=agent is correct. The statement is unchanged and not weakened: weak equivalence is read through realization, as def-cbc-enhanced-diagrams-cones defines it, and no Kan, nonemptiness or connectedness hypothesis is assumed. Checks by step: (1) evaluation is well defined on the realization relation, and eps∘|u_X|=id. (2) The horn filler f∘r comes from the horn-pair homeomorphism and the k-space adjunction, with m=1 and outer horns included. (3,4) Pointed maps Q_n→A correspond to boundary-constant maps; I verified that the barycentric formula H(alpha_*z, Σ_{theta(j)=1} z_j) is simplicial, descends to Q_n×Δ^1 and has the right ends, and the forward direction uses the cylinder node. (5) The Serre node's realization isomorphism for the Kan complex A gives eps_*∘rho_n=Phi_n; pi_0 holds because vertices of A are points and edges are paths. (6,7) I verified the attached-interval maps, both homotopies with every endpoint and the gluing at a=1/2, joint continuity via the currying node with I locally compact, and that both squares commute strictly. The moving-basepoint clause of lem-coef-homotopy-equivalence-weak then gives two genuine cancellations, so there is no 'transports' gap (E5). (8) Cancellation at every x, on pi_0, and in the empty case. No step cycles back to the item: none of the six dependency closures reaches it, and I confirmed the two nodes the worker avoided (lem-coef-homotopy-groups-basepoint-change, lem-coef-sset-gluing-filtered-equivalences) do reach it. A scan of the DAG found no node already stating this theorem. I accept the five declared tool_uses: generic topology nodes of sk-prop-sf-biduality-general used as black boxes, with no cbc route step replaced. No SGA source is cited, there are no new nodes, and the blueprint fields are filled. No fixes were made; review.md is written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-10061a1c8",
+  "group": "Q124",
+  "result": "pass",
+  "note": "Statement matches the node and Kerodon 0142/03X7: arbitrary X : SSet.{u}, no extra binders or instances. The canonical Mathlib unit sSetTopAdj.unit.app X is the characteristic map (sSetTopAdj_unit_app_app_down). The conclusion is the dependency's IsWeakHomotopyEquivalence: bijection on path components and bijective postcomposition on pi_r for all r>=1 at every realization point; it is neither weaker nor stronger. Edge cases (empty, disconnected, r=1) are covered. No definitions, proof only sorry, source and blueprint docstrings present, eight proof steps follow the node. Node differs from the live node only in lean, and the statement is verbatim in the file. Imports are the statement dependency (public) and the proof_deps modules, with no cycle. Report has real Worker report and Second reading by Q124 sections. nt_compile.py --json against the side overlay compiled the module in 1.5 s, exit 0, no errors or warnings reported. Only cosmetic finding: the report text says 'Theorem the project server' where 3.6.4.1/3.6.4.3 belong."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.RealizationSingularUnitWeak",
+  "declaration": "SSet.Enhanced.realization_singular_unit_weak",
+  "file": "lean/Sheaf/AlgebraicTopology/RealizationSingularUnitWeak.lean",
+  "statement": "theorem realization_singular_unit_weak (X : SSet.{u}) : IsWeakHomotopyEquivalence (sSetTopAdj.unit.app X)",
+  "branch": "newtargets-dag",
+  "by": "Q124",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

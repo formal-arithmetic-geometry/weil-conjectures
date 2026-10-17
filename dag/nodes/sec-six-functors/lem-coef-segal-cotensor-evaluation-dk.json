@@ -251,5 +251,30 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-e9262cf3c (reviewer sub-agent of L); spot-checked: Read the item in full, the seven cited statements, the parent and the unit sk-prop-sf-biduality-general. Also read Rezk at the cited place from the Rochester PDF (Lemma 12.4, §13.1 E, Proposition 13.8 first paragraph, Lemma 13.9 full proof, pp. 30-32). The statement is unchanged and agrees with Rezk 13.9. I tested it on empty W, the discrete nerve of BG (DK equivalence but not levelwise) and the discrete nerve of [1]. Steps 1-5 and 8 are correct: exponent-lemma fibrations; categorical contraction via h_i; classifier giving r_n as a weak equivalence onto V_eq; the two-triangle square, with d_2 T1 the source and d_0 T2 the target and s_1=(s_0,s_1), matching Rezk's square; identity-edge trivial fibrations, with all simplicial identities checked; two-out-of-six on 1_W, j, p_i. Fault (E5): step 6 identified hofib(T) with an iterated homotopy fiber 'by rearranging homotopy pullbacks' and called it an equality. That identification is not strict and no node states it. Repaired with existing same-unit nodes: T factors as a weak equivalence onto a union of components of M_B, through C_n ⊂ B_n, the pullback Q=A_0^2 ×_{C_0^2} C_1, right properness, two-out-of-three, and lem-coef-kan-fibration-arbitrary-base-fibers. Step 7 is adapted to this, and lem-coef-kan-homotopy-pullback-invariance is dropped from proof_deps. Minor fix: step 2 now justifies that U×E is a Segal space (cites the Reedy node). No cycle: the new citation's closure does not reach the item. No new nodes, no SGA, no off-unit citations, no tool_uses. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-segal-cotensor-evaluation-dk.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f04cad174",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Read the item node, 4 stmt_deps, proof-dep records, SegalCartesianExponent and SegalCategoricalEquivalence in full, and Rezk Lemma 13.9. The Lean matches clause by clause: hypothesis only IsSegal W (no completeness or universe restriction); conclusions W^E Segal, j DK, and p_i DK for both Bool endpoints. IsDwyerKanEquivalence is exactly homotopyFunctor equivalence plus mapping-fiber weak equivalences for all x,y. cotensorConstant/cotensorEvaluation are canonical adjunction transposes with real data. Edge cases (empty W, empty mapping fibers, non-complete spaces) admitted. Mapping fibers, homotopy category and E are reused from SegalCategoricalEquivalence; its reverse import is correctly omitted and listed under §3(7). Only the module, report and item lean field changed; statement verbatim; one sorry; lines <=100; docstrings with source, blueprint id and the 8 proof steps. nt_compile.py --json on the snapshot module: exit 0, no errors or warnings. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SegalCotensorEvaluationDK",
+  "declaration": "SSet.SegalSpace.cotensor_evaluation_dk",
+  "declarations": [
+   "SSet.SegalSpace.IsDwyerKanEquivalence",
+   "SSet.SegalSpace.cotensorConstant",
+   "SSet.SegalSpace.cotensorEvaluation",
+   "SSet.SegalSpace.cotensor_evaluation_dk"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SegalCotensorEvaluationDK.lean",
+  "statement": "theorem cotensor_evaluation_dk (W : SimplicialSpace.{u}) (hW : IsSegal W) : IsSegal ((ihom SSet.Segal.E).obj W) ∧ IsDwyerKanEquivalence (cotensorConstant W) ∧ ∀ i : Bool, IsDwyerKanEquivalence (cotensorEvaluation W i)",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded cartesian exponent and Segal condition. Reuses the explicit strict mapping fibers, homotopy-category functor, walking-isomorphism nerve and endpoints from SegalCategoricalEquivalence; no categorical-equivalence theorem is invoked. Constant and evaluation maps are canonical adjunction transposes, without extra assumptions or chosen maps."
  }
 }
