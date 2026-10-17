@@ -209,5 +209,29 @@
   "group": "Q123",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q123-f8cb1622b (reviewer sub-agent of L); spot-checked: Read the full item and all three new nodes. Verified Temkin §1.2, Remark 3.1.1, Lemmas 3.2.2 and 5.1(ii), and the Theorem 1.5 approximation argument; checked Stacks citations, both limit applications, density, field reflection, edge cases, duplicates, and route restrictions. No fixes required. Detailed review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StableModificationStabilityLocus",
+  "declaration": "AlgebraicGeometry.stable_modification_stability_locus",
+  "declarations": [
+   "AlgebraicGeometry.MultipointedCurve.BaseChange",
+   "AlgebraicGeometry.MultipointedCurve.BaseChangeHom",
+   "AlgebraicGeometry.stable_modification_stability_locus"
+  ],
+  "statement": "theorem stable_modification_stability_locus (U₀ : Scheme.{u}) [IsIntegral U₀] (t₀ : U₀ ⟶ Spec (.of (ULift.{u} ℤ))) [LocallyOfFiniteType t₀] [QuasiCompact t₀] (L : Type u) [Field L] [Algebra U₀.functionField L] [IsSepClosure U₀.functionField L] (x : RiemannZariski.ValuationPoint U₀ L (Spec.map (CommRingCat.ofHom (algebraMap U₀.functionField L)) ≫ U₀.fromSpecStalk (genericPoint U₀))) (X Y₀ : MultipointedCurve U₀) (g : Y₀.Hom X) [IsProper g.curve] [IsProper g.marking] (hX : Smooth (pullback.snd X.x (Spec.map (CommRingCat.ofHom (algebraMap U₀.functionField L)) ≫ U₀.fromSpecStalk (genericPoint U₀)))) (hD : Etale (pullback.snd X.d (Spec.map (CommRingCat.ofHom (algebraMap U₀.functionField L)) ≫ U₀.fromSpecStalk (genericPoint U₀)))) (hηcurve : IsIso (g.curveBaseChange (Spec.map (CommRingCat.ofHom (algebraMap U₀.functionField L)) ≫ U₀.fromSpecStalk (genericPoint U₀)))) (hηmark : IsIso (g.markingBaseChange (Spec.map (CommRingCat.ofHom (algebraMap U₀.functionField L)) ≫ U₀.fromSpecStalk (genericPoint U₀)))) (hV : ∃ (P' : Y₀.BaseChange x.centre) (Q' : X.BaseChange x.centre) (f' : MultipointedCurve.BaseChangeHom g x.centre P' Q'), f'.hom.IsStable (Spec.map (CommRingCat.ofHom x.V.subtype)) ∧ IsProper f'.hom.curve ∧ IsProper f'.hom.marking) : ∃ (U : RiemannZariski.QuasiModel U₀ L (Spec.map (CommRingCat.ofHom (algebraMap U₀.functionField L)) ≫ U₀.fromSpecStalk (genericPoint U₀))) (l : Spec (.of x.V) ⟶ U.X), l ≫ U.map = x.centre ∧ Spec.map (CommRingCat.ofHom x.V.subtype) ≫ l = U.generic ∧ ∃ (P' : Y₀.BaseChange U.map) (Q' : X.BaseChange U.map) (f' : MultipointedCurve.BaseChangeHom g U.map P' Q'), f'.hom.IsStable U.generic ∧ ∃ V : U.X.Opens, genericPoint U.X ∈ V ∧ IsIso (f'.hom.curveBaseChange V.ι) ∧ IsIso (f'.hom.markingBaseChange V.ι)",
+  "by": "Q115",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The two helper records retain the canonical pair and canonical curve/marking pullback maps while reusing the landed MultipointedCurve.Hom.IsStable predicate; the theorem then states the valuation-centred stable modification and its spread to an L-quasi-model, including a generic-containing base open on which both maps are isomorphisms.",
+  "file": "lean/Sheaf/AlgebraicGeometry/StableModificationStabilityLocus.lean",
+  "branch": "newtargets-dag"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7f697b6bf",
+  "group": "Q115",
+  "result": "fix",
+  "note": "Wrote review.md and two complete replacement files in fixes/. Mathematical declarations and signature are unchanged. Repaired H8 proof documentation, H9 proof imports, and H11 placeholder second reading. Original and replacement compile cleanly through scompile.py. Snapshot and branch head unchanged."
  }
 }

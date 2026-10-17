@@ -146,18 +146,18 @@
   "declaration": "Algebra.projective_of_geometricallyIntegral_fibres",
   "statement": "theorem projective_of_geometricallyIntegral_fibres\n    (R : Type u) (B : Type v) [CommRing R] [CommRing B] [Algebra R B]\n    [Algebra.FinitePresentation R B] (hflat : RingHom.Flat (algebraMap R B))\n    (hfibres : ∀ (p : Spec (.of R)) (K : Type (max u v w)) [Field K] [Algebra R K]\n      (ι : (Spec (.of R)).residueField p →+* K),\n      algebraMap R K =\n        ι.comp (((Scheme.ΓSpecIso (.of R)).inv ≫ (Spec (.of R)).Γevaluation p).hom) →\n      IsDomain (B ⊗[R] K)) :\n    Module.Projective R B",
   "branch": "newtargets-dag",
-  "by": "NJ",
-  "date": "2026-10-18",
+  "by": "Q100",
+  "date": "2026-10-17",
   "existing": true,
-  "note": "H4 repair by independent maintainer review: Tag 05FT already has a landed declaration on the immutable base. The domain-after-every-residue-field-extension hypothesis is equivalent to geometric integrality of the affine fibre spectrum, via affine tensor pullback and Spec of a domain. K ranges over max u v w, including w=0; R and B retain independent universes. Reuse that declaration and omit the delivered duplicate module. The local node retains its three-step noncircular source proof plan; the existing declaration docstring refers to this node, not to a second Lean theorem that must be introduced.",
-  "fixed_by": "NT-stage2-Codex-de470637f"
+  "note": "H4 repair by independent maintainer review: reuse the declaration already recorded on the immutable parent. Tag 05FT and algebra.tex Tag 05DX identify its domain-after-every-residue-field-extension hypothesis with geometric integrality of the affine fibre spectrum, via affine tensor pullback, tensor associativity, and Spec of a domain. Spec.residueFieldIso identifies the residue fields compatibly with the canonical R-map. Independent ring universes are retained; K ranges over max u v w, including w=0. The source three-step Noetherian approximation proof plan is unchanged. The existing theorem is the common interface of the two equivalent DAG formulations; its docstring reference to this node is not a dependency on a distinct Lean declaration. Drop the delivered duplicate module.",
+  "fixed_by": "NT-stage2-Codex-bf476403f"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-de470637f",
-  "group": "NJ",
+  "reviewer": "NT-stage2-Codex-bf476403f",
+  "group": "Q100",
   "result": "fix",
-  "note": "Reviewed the immutable delivery and reproduced both per-file compiles cleanly. Fixed H4 by reusing the already-landed equivalent Tag 05FT declaration, and H11 with a complete independent second-reading report. Complete fixes are under fixes/; findings and evidence are in review.md.; left out new module(s) lean/Sheaf/RingTheory/GeometricallyIntegralFibersProjective.lean (--drop-files, or a record fixed to existing: true)"
+  "note": "Reviewed immutable statements, dependencies, sources, universes and edge cases; both per-file compile reproductions passed. Complete fixes restore the existing equivalent declaration (H4) and supply an independent second reading (H11). Findings recorded in review.md; replacement files are in fixes/.; left out new module(s) lean/Sheaf/AlgebraicGeometry/LocalFibresIntegralProjective.lean (--drop-files, or a record fixed to existing: true)"
  }
 }

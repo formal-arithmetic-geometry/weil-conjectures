@@ -187,5 +187,28 @@
   "group": "Q30",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q30-e3652dcff (reviewer sub-agent of L); spot-checked: Full mathematical review completed; review.md records source checks, every proof step and new node, edge cases, route compliance, and repaired prior faults. No remaining errors or repairs."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleRelationQuotient",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etale_relation_quotient",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.relationQuotientMap",
+   "AlgebraicGeometry.AlgebraicSpace.etale_relation_quotient"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleRelationQuotient.lean",
+  "statement": "theorem etale_relation_quotient {S : Scheme.{u}} {R V : Over S} (s t : R ⟶ V) [Mono (prod.lift s t)] (hrel : ∀ T : Over S, Equivalence (fun a b : T ⟶ V ↦ ∃ r : T ⟶ R, r ≫ s = a ∧ r ≫ t = b)) [Etale s.left] [Etale t.left] (F : Sheaf (Scheme.fppfTopology.over S) (Type u)) (η : coequalizer (yoneda.map s) (yoneda.map t) ⟶ F.obj) (hη : ∀ G : Sheaf (Scheme.fppfTopology.over S) (Type u), Function.Bijective (fun g : F.obj ⟶ G.obj ↦ η ≫ g)) : IsAlgebraicSpace F ∧ IsEtale (relationQuotientMap s t F η) ∧ IsSurjective (relationQuotientMap s t F η) ∧ IsPullback (yoneda.map s) (yoneda.map t) (relationQuotientMap s t F η) (relationQuotientMap s t F η) ∧ (∀ (T : Over S) (x : F.obj.obj (op T)), ∃ C : Sieve T, C ∈ (Scheme.etaleTopology.over S) T ∧ ∀ (U : Over S) (f : U ⟶ T), C f → ∃ a : U ⟶ V, (relationQuotientMap s t F η).app (op U) a = F.obj.map f.op x) ∧ (∀ (G : Sheaf (Scheme.fppfTopology.over S) (Type u)) (f : yoneda.obj V ⟶ G.obj), yoneda.map s ≫ f = yoneda.map t ≫ f → ∃! g : F.obj ⟶ G.obj, relationQuotientMap s t F η ≫ g = f)",
+  "branch": "newtargets-dag",
+  "by": "Q81",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The quotient presheaf is the coequalizer of the Yoneda maps. F and its unit η are specified by the sheafification universal property at this presheaf; no global HasWeakSheafify assumption is imposed on the big site. IsPullback expresses that the canonical relation-to-kernel-pair map is an isomorphism. The final unique-factorization clause is the stated bijection on equalizing maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ffc835195",
+  "group": "Q81",
+  "result": "pass",
+  "note": "Statement, dependencies, source proof, edge cases, docstrings, canonical helper, route-pivot compliance, report sections, and scompile evidence all checked; no fixes required."
  }
 }
