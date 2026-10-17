@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.TensorProduct.IncludeLeftSubRight
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.GaloisCoverRank
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 
 /-!
 # The ring of functions of a Galois cover over an affine open
@@ -46,12 +47,6 @@ lemma Scheme.app_eq_of_isOpenImmersion {X : Scheme.{u}} {ι : Type*} {Y : ι →
     apply (ConcreteCategory.bijective_of_isIso ((f i).stalkMap y)).1
     rw [Scheme.Hom.germ_stalkMap_apply, Scheme.Hom.germ_stalkMap_apply, h i]
   exact h'
-
-/-- `appLE` only depends on the morphism. -/
-lemma Scheme.Hom.appLE_eq_of_eq {X X' : Scheme.{u}} {f f' : X ⟶ X'} (h : f = f') (U : X'.Opens)
-    (V : X.Opens) (e : V ≤ f ⁻¹ᵁ U) (e' : V ≤ f' ⁻¹ᵁ U) : f.appLE U V e = f'.appLE U V e' := by
-  subst h
-  rfl
 
 /-- `appLE` of the identity on an open is the identity. -/
 lemma Scheme.Hom.id_appLE_self {X : Scheme.{u}} (U : X.Opens) (e : U ≤ (𝟙 X) ⁻¹ᵁ U) :
@@ -115,18 +110,18 @@ def appSMul (g : G) (V : Y.Opens) : Γ(Z.P, Z.π ⁻¹ᵁ V) ⟶ Γ(Z.P, Z.π �
   (Z.smul g).appLE _ _ (Z.le_preimage_smul g V)
 
 lemma appSMul_one (V : Y.Opens) : Z.appSMul 1 V = 𝟙 _ := by
-  rw [appSMul, Scheme.Hom.appLE_eq_of_eq Z.one_smul (Z.π ⁻¹ᵁ V) (Z.π ⁻¹ᵁ V) _ le_rfl,
+  rw [appSMul, Scheme.Hom.appLE_eq_of_eq Z.one_smul (Z.π ⁻¹ᵁ V) (Z.π ⁻¹ᵁ V) _,
     Scheme.Hom.id_appLE_self]
 
 lemma appSMul_mul (g h : G) (V : Y.Opens) :
     Z.appSMul (g * h) V = Z.appSMul g V ≫ Z.appSMul h V := by
   rw [appSMul, appSMul, appSMul, Scheme.Hom.appLE_comp_appLE]
-  exact Scheme.Hom.appLE_eq_of_eq (Z.mul_smul g h) _ _ _ _
+  exact Scheme.Hom.appLE_eq_of_eq (Z.mul_smul g h) _ _ _
 
 lemma app_comp_appSMul (g : G) (V : Y.Opens) :
     Z.π.app V ≫ Z.appSMul g V = Z.π.app V := by
   rw [Scheme.Hom.app_eq_appLE, appSMul, Scheme.Hom.appLE_comp_appLE]
-  exact Scheme.Hom.appLE_eq_of_eq (Z.smul_π g) _ _ _ _
+  exact Scheme.Hom.appLE_eq_of_eq (Z.smul_π g) _ _ _
 
 lemma appSMul_app_apply (g : G) (V : Y.Opens) (a : Γ(Y, V)) :
     (Z.appSMul g V).hom ((Z.π.app V).hom a) = (Z.π.app V).hom a :=
@@ -298,8 +293,8 @@ lemma tmul_one_eq_one_tmul {V : Y.Opens} (hV : IsAffineOpen V) (x : Γ(Z.P, Z.π
     · have hle : Z.π ⁻¹ᵁ V ≤ Z.smul g ⁻¹ᵁ Z.π ⁻¹ᵁ V := Z.le_preimage_smul g V
       have hsW : ⊤ ≤ sg g ⁻¹ᵁ Z.π ⁻¹ᵁ V := hsnd g ▸ (fg g).top_le_preimage_comp b (by simp [b])
       rw [Scheme.Hom.app_top_appLE_apply, Scheme.Hom.app_top_appLE_apply,
-        Scheme.Hom.appLE_eq_of_eq (hfst g) _ _ _ (hsW.trans (Scheme.Hom.preimage_mono _ hle)),
-        Scheme.Hom.appLE_eq_of_eq (hsnd g) _ _ _ hsW,
+        Scheme.Hom.appLE_eq_of_eq (hfst g) _ _ _,
+        Scheme.Hom.appLE_eq_of_eq (hsnd g) _ _ _,
         ← Scheme.Hom.appLE_comp_appLE (sg g) (Z.smul g) _ _ ⊤ hle hsW]
       rw [CommRingCat.comp_apply]
       exact congrArg _ (hx g)
