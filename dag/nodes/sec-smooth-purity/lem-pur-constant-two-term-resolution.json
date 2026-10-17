@@ -15,9 +15,92 @@
   "def-pc-kflat-complex",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=\\mathbf Z_\\ell$, $B=\\mathbf Z/\\ell^N\\mathbf Z$, and $t=\\ell^N$. The first clause of [lem-weil-pbc-standard-quotients-perfect] gives the ordinary two-term resolution $[A\\xrightarrow{t}A]\\to B[0]$, with the quotient augmentation. Thus $0\\to A\\xrightarrow{t}A\\to B\\to0$ is exact. Regard this as a sequence of constant presheaves of $A$-modules on $\\mathcal C$: at each object it is the same exact sequence. By [lem-weil-pbc-site-r-module-presheaf-sheafification-exact], its sheafification is exact. By [def-weil-pbc-constant-sheaf] the resulting sequence is $0\\to R\\xrightarrow{t}R\\xrightarrow{q}Q\\to0$. All maps are $R$-linear, with the action obtained by sheafifying the constant $A$-actions. In the abelian module-sheaf category of [def-weil-sheaf-of-modules-category], this says that multiplication by $t$ has zero kernel and that $q$ exhibits $Q$ as its cokernel.",
+   "uses": [
+    "lem-weil-pbc-standard-quotients-perfect",
+    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EI, lemma-sheafification-exact, applied to the constant presheaf of rings A; ordinary coefficient resolution from the cited existing node"
+   }
+  },
+  {
+   "text": "By [lem-pc-sheaf-modules-tensor-closed], $R$ is the tensor unit, so tensoring with $R$ is naturally isomorphic to the identity and is exact. Tensoring with the zero sheaf is zero: sectionwise $M(U)\\otimes_{R(U)}0=0$, and its sheafification is zero by [def-pur-sheaf-tensor-product]. Thus $R$ and $0$ are flat by [def-pc-flat-sheaf-modules], and every term of $C$ is flat. Since $C^i=0$ for $i>0$, [lem-pc-bounded-above-flat-kflat-site] applies with upper bound $0$ and shows that $C$ is K-flat. Its hypotheses require only a ringed site and flat terms, both established here.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-flat-sheaf-modules",
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ, lemma-bounded-flat-K-flat; tensor unit as in sites-modules.tex Section 03EK"
+   }
+  },
+  {
+   "text": "Set $\\epsilon^0=q$ and $\\epsilon^i=0$ for $i\\ne0$. The relation $qt=0$ makes this a cochain map. The cohomology formula of [def-pc-acyclic-complex-modules] and Step 1 give $H^{-1}(C)=\\ker(t:R\\to R)=0$, $H^0(C)=\\operatorname{coker}(t:R\\to R)\\cong Q$, and zero in every other degree. The degree-zero cohomology map of $\\epsilon$ is exactly this cokernel identification, since it is induced by $q$. All other cohomology maps are between zero sheaves. Hence $\\epsilon:C\\to Q[0]$ is a quasi-isomorphism by [def-pc-quasi-iso-modules].",
+   "uses": [
+    "def-pc-acyclic-complex-modules",
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0115, definition-quasi-isomorphism-cochain; elementary two-term cohomology calculation"
+   }
+  },
+  {
+   "text": "For any $R$-module sheaf $L$, apply [lem-weil-pbc-independent-sheaf-tensor-colimits] to the cokernel diagram $R\\xrightarrow{t}R\\xrightarrow{q}Q\\to0$ of Step 1. This finite diagram is small in the module universe, as required, and the site is small. Tensoring with $L$ therefore identifies $L\\otimes_R Q$ with the cokernel of $1_L\\otimes t:L\\otimes_R R\\to L\\otimes_R R$. Use the unit isomorphism of [lem-pc-sheaf-modules-tensor-closed], explicitly $x\\otimes a\\mapsto ax$ with inverse $x\\mapsto x\\otimes1$. It takes $1_L\\otimes t$ to multiplication by $t$ on $L$, since $x\\otimes ta\\mapsto tax$. Consequently there is a unique isomorphism $\\phi:L\\otimes_R Q\\xrightarrow{\\sim}L/tL$ with $\\phi(1_L\\otimes q)(x\\otimes a)=a[x]$. Here $L/tL$ is the cokernel in the abelian sheaf category, rather than an assumed sectionwise quotient. This formula characterizes a map of cokernels, and its inverse is the map induced by $x\\mapsto x\\otimes\\overline1$. The two composites are identities because they agree after the respective cokernel projections. In particular, on pure tensors it is $x\\otimes\\bar a\\mapsto a[x]$, exactly the identification in the statement. This quotient identification uses no injectivity hypothesis on $L$.",
+   "uses": [
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EP, lemma-tensor-commute-colimits, item (2); Section 03EK tensor unit and the cokernel universal property"
+   }
+  },
+  {
+   "text": "By [def-pc-tensor-complex-sheaves], only bidegrees $(0,-1)$ and $(0,0)$ contribute to $\\operatorname{Tot}(L[0]\\otimes_R C)$. Under $x\\otimes a\\mapsto ax$ this is $[L\\xrightarrow{t}L]$ in degrees $-1,0$: the differential is $1_L\\otimes t$ and the sign is $(-1)^0=1$. The canonical augmentation is $1_L\\otimes\\epsilon$; its degree-zero map, followed by $\\phi$ of Step 4, sends $x$ to $[x]$. Now use the stated injectivity of $t:L\\to L$. The cohomology formula of [def-pc-acyclic-complex-modules] gives zero in degree $-1$, $L/tL$ in degree $0$, and zero elsewhere. The augmentation induces $\\phi^{-1}$ on degree-zero cohomology and the isomorphism between zero sheaves in all other degrees. It is therefore a quasi-isomorphism by [def-pc-quasi-iso-modules], proving the final clause with its specified map.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-acyclic-complex-modules",
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md",
+    "place": "Final derived-tensor compatibility sentence, expanded by the explicit total-tensor and cohomology calculations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-standard-quotients-perfect",
+  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "def-pc-acyclic-complex-modules",
+  "def-pc-quasi-iso-modules",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/lem-pur-finite-kummer-level.proof.md",
+  "place": "Displayed exact sequence and final derived-tensor compatibility sentence; agent expansion using exact sheafification and Stacks Tags 06YQ and 03EP"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -60,10 +143,66 @@
    "results": "{\"t\": \"2026-10-17T08:40:23Z\", \"tool\": \"grep\", \"query\": \"quotientTensorEquiv|tensorQuotientEquiv|quotient.*[Rr]esolution|[Rr]esolution.*quotient\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/TensorProduct/Quotient.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Quotient.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Quotient.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Quotient.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Quotient.lean\"], \"digest\": \"c471a95af2e07744\"}",
    "date": "2026-10-17",
    "verdict": "no match: generic quotient tensors, derived Tor or limit.post cover individual ingredients; none states the full ringed-site resolution/augmentation or scalar-and-tensor tower comparison in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "twoTerm|two_term|kFlat|KFlat",
+   "results": "{\"t\": \"2026-10-17T10:33:52Z\", \"tool\": \"grep\", \"query\": \"twoTerm|two_term|kFlat|KFlat\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: ordinary module tensor quotient equivalences do not give the ringed-site resolution, K-flatness and specified augmentation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A two term complex of constant l adic integer sheaves resolves the constant prime power quotient and its tensor augmentation is a quasi isomorphism for torsion free sheaves",
+   "results": "{\"t\": \"2026-10-17T10:33:52Z\", \"tool\": \"leansearch\", \"query\": \"A two term complex of constant l adic integer sheaves resolves the constant prime power quotient and its tensor augmentation is a quasi isomorphism for torsion free sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"quasiIso_of_isIso\", \"HomologicalComplex.instIsMultiplicativeQuasiIso\", \"CategoryTheory.ShortComplex.QuasiIso.isIso\", \"CategoryTheory.ShortComplex.quasiIso_of_isIso\", \"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app\", \"CategoryTheory.InjectiveResolution.instQuasiIsoIntι'\", \"CategoryTheory.Sheaf.isConstant_iff_mem_essImage\", \"CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'\"], \"digest\": \"2d93ae9b4cc10fd2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned generic quasi-isomorphism, constant-sheaf or module-flatness results do not state all clauses of this ringed-site lemma"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, HomologicalComplex.QuasiIso",
+   "results": "{\"t\": \"2026-10-17T10:33:52Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, HomologicalComplex.QuasiIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'HomologicalComplex.QuasiIso'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "query rejected: unknown identifier; not evidence of absence; other semantic and source searches cover the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a small ringed site the two term complex of constant Z_l sheaves with differential l^N is a K flat resolution of constant Z/l^N and tensoring with an l^N torsion free sheaf resolves its quotient",
+   "results": "{\"t\": \"2026-10-17T10:33:53Z\", \"tool\": \"leanfinder\", \"query\": \"On a small ringed site the two term complex of constant Z_l sheaves with differential l^N is a K flat resolution of constant Z/l^N and tensoring with an l^N torsion free sheaf resolves its quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.diagram\", \"CategoryTheory.Sheaf.H\", \"instAbelianCondensedMod\", \"Module.Flat.lTensor_shortComplex_exact\", \"SheafOfModules.instAbelian\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\"], \"digest\": \"4598730c29dccff5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned generic quasi-isomorphism, constant-sheaf or module-flatness results do not state all clauses of this ringed-site lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientTensorEquiv|tensorQuotientEquiv|lTensor_shortComplex_exact",
+   "results": "{\"t\": \"2026-10-17T10:34:58Z\", \"tool\": \"grep\", \"query\": \"quotientTensorEquiv|tensorQuotientEquiv|lTensor_shortComplex_exact\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/TensorProduct/Quotient.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Quotient.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Quotient.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Quotient.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Quotient.lean\"], \"digest\": \"c471a95af2e07744\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: ordinary module tensor quotient equivalences do not give the ringed-site resolution, K-flatness and specified augmentation"
+  },
+  {
+   "tool": "loogle",
+   "query": "PadicInt, ZMod",
+   "results": "{\"t\": \"2026-10-17T10:35:00Z\", \"tool\": \"loogle\", \"query\": \"PadicInt, ZMod\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PadicInt.toZMod\", \"PadicInt.val_toZMod_eq_zmodRepr\", \"PadicInt.toZModPow\", \"PadicInt.ker_toZMod\", \"PadicInt.residueField\", \"PadicInt.toZMod_eq_residueField_comp_residue\", \"PadicInt.toZMod_spec\", \"PadicInt.toZModPow_eq_iff_ext\"], \"digest\": \"d56eb2a853284bd4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: PadicInt quotient maps are coefficient-ring ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular element multiplication two term free resolution quotient module tensor gives quotient if multiplication is injective",
+   "results": "{\"t\": \"2026-10-17T10:35:01Z\", \"tool\": \"leanfinder\", \"query\": \"Regular element multiplication two term free resolution quotient module tensor gives quotient if multiplication is injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotSMulTop.quotSMulTopTensorEquivQuotSMulTop\", \"Module.Relations.Solution.isPresentationCoreTensor\", \"RingTheory.Sequence.IsWeaklyRegular.isWeaklyRegular_lTensor\", \"RingTheory.Sequence.IsWeaklyRegular.isWeaklyRegular_rTensor\", \"QuotSMulTop.tensorQuotSMulTopEquivQuotSMulTop\", \"rTensor.inverse_of_rightInverse\", \"QuotSMulTop.algebraMapTensorEquivTensorQuotSMulTop\", \"rTensor_mkQ\"], \"digest\": \"b64ca1996fef3d0e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned generic quasi-isomorphism, constant-sheaf or module-flatness results do not state all clauses of this ringed-site lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientTensorEquiv|tensorQuotientEquiv|quotSMulTopTensorEquiv",
+   "results": "{\"t\": \"2026-10-17T10:47:04Z\", \"tool\": \"grep\", \"query\": \"quotientTensorEquiv|tensorQuotientEquiv|quotSMulTopTensorEquiv\", \"sub\": \"LinearAlgebra/TensorProduct\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/TensorProduct/Quotient.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Quotient.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Quotient.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Quotient.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Quotient.lean\"], \"digest\": \"c471a95af2e07744\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: ordinary module tensor quotient equivalences do not give the ringed-site resolution, K-flatness and specified augmentation"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-finite-kummer-level",
@@ -84,5 +223,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-constant-two-term-resolution",
+  "worker": "stage1",
+  "summary": "Q20 retained the prior item statement and searches, checked current blueprint and existing node statements, and wrote five proof steps. The ordinary coefficient resolution is sheafified exactly, termwise flatness gives K-flatness, and preservation of cokernels identifies the tensor quotient before the final explicit two-term cohomology calculation. No new nodes are needed.",
+  "blueprint": "Expands the displayed coefficient exact sequence and the final derived-tensor compatibility sentence of lem-pur-finite-kummer-level.proof.md; does not use its separate claim that the inverse-limit Tate object is a locally constant line.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-standard-quotients-perfect",
+    "why": "Only the ordinary Z_l-module quotient resolution and its quotient augmentation are used; this coefficient algebra fact does not replace any geometric step of the purity unit."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Provides the tensor unit and its explicit unitor for modules on an arbitrary ringed site; the purity conventions do not prove this generic tensor calculus."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Provides bounded-above flat implies K-flat on an arbitrary ringed site, applied to the constructed two-term complex; this is a homological-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "why": "Provides preservation of the finite cokernel diagram by the sheaf tensor functor on the given small site; the purity conventions do not supply this general right exactness result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-standard-quotients-perfect",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-57b2b5073",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-57b2b5073 (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps, every cited statement, the parent lem-pur-finite-kummer-level (its step 6 uses this item) and the main-20261015 Kummer proof. In Stacks I checked 03EI (sites-modules l.874: any presheaf of rings, so it covers the constant presheaf Z_l), 03EP(2) (l.4013) and 06YQ lemma-bounded-flat-K-flat (sites-cohomology l.3120). The statement is unchanged, uses the discrete constant (Z_l)_C, and is true. Small cases: L=0, L=R with ell=2 and N=1 on the point site, L=(Q_l)_C, and torsion L for the identification all agree; L=Q shows the injectivity hypothesis is needed. Step 1 sheafifies the exact ordinary resolution and takes Mod(R) kernels and cokernels. Step 2: the unitor makes R flat, 0 is flat, and bounded-above flat implies K-flat. Step 3 (elementary): H^-1=ker t=0 and H^0=coker t=Q. Step 4: tensor preserves the finite cokernel diagram, and the unitor gives L tensor Q = L/tL by x tensor a-bar to a[x]. Step 5 (elementary): Tot is [L -t-> L] with sign +1, and the augmentation induces phi^{-1} on H^0. No new nodes, so no relabelling. The grep found no duplicate in the DAG. No SGA. I accept the four declared tool_uses: lem-weil-pbc-standard-quotients-perfect, lem-pc-sheaf-modules-tensor-closed, lem-pc-bounded-above-flat-kflat-site and lem-weil-pbc-independent-sheaf-tensor-colimits. Not a delivery fault: lem-pc-bounded-above-flat-kflat-site gives source tag 06YS, but the right tag is 06YQ; that is for maintenance. No fixes."
  }
 }

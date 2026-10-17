@@ -32,9 +32,133 @@
   "def-weil-pbc-cartesian-square",
   "def-weil-pbc-adjunction-mate"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "All calculations take place on the bounded-below etale-origin category of [def-sf-etale-origin-subcategory]. By [thm-sf-comp-composition], compact-support functors preserve this class and their composition maps can be computed after any compactification choices. Use the explicit tower formula [lem-trf-compact-composition-tower-formula] for these computations. Its proper mates and open compositors are fixed maps, so it determines the transformation, not just its isomorphism class. The compactification comparisons are the specified coherent ones of [prop-compactification-coherence-detailed].",
+   "uses": [
+    "def-sf-etale-origin-subcategory",
+    "thm-sf-comp-composition",
+    "lem-trf-compact-composition-tower-formula",
+    "prop-compactification-coherence-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), computation on trivial and Cartesian open compactification towers; Tag 0F7B (lemma-shriek-proper-and-open)"
+   }
+  },
+  {
+   "text": "First compute $\\alpha_{g,f}$ when $f,g$ are proper. In the tower formula choose $i=\\mathrm{id}_Y$, $q=g$, $a=\\mathrm{id}_X$, $p=f$. Then $V=X$, $b=c=\\mathrm{id}_X$, $r=f$. The open comparison $\\delta$ is the identity under the unit identifications by [lem-trf-open-square-exchange]. Its proper mate is $Rf_*\\varepsilon_f\\circ\\eta_f Rf_*=\\mathrm{id}_{Rf_*}$ by the triangle identity of [def-weil-pbc-proetale-operations]. Hence the tower formula reduces to the ordinary compositor $Rg_*Rf_*\\to R(gf)_*$. Thus $\\pi_{gf}\\alpha_{g,f}=c_{g,f}^{-1}(\\pi_g\\pi_f)$, where $c_{g,f}:R(gf)_*\\to Rg_*Rf_*$ is [lem-weil-derived-direct-image-composition].",
+   "uses": [
+    "lem-trf-compact-composition-tower-formula",
+    "lem-trf-open-square-exchange",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), computation on trivial and Cartesian open compactification towers; Tag 0F7B (lemma-shriek-proper-and-open)"
+   }
+  },
+  {
+   "text": "If $h,h'$ are proper, apply Step 2 to $(f,g)=(t_W,h')$ and $(h,t)$. Conjugating the definition of $\\chi$ by $\\pi_h,\\pi_{h'}$ cancels the intermediate $\\pi_{h't_W}=\\pi_{th}$ and the two proper comparisons already built into $\\chi$. The result is\n$$c_{t,h}\\circ c_{h',t_W}^{-1}:Rh'_*Rt_{W*}\\longrightarrow Rt_*Rh_*.$$\nThe canonical ordinary compositor is the adjunction-compatible one by [fix-prop-adjunctions](3); its conjugation to the pullback compositor fixes the units and counits. This proves clause 1 without a Cartesian hypothesis on the square.",
+   "uses": [
+    "fix-prop-adjunctions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), computation on trivial and Cartesian open compactification towers; Tag 0F7B (lemma-shriek-proper-and-open)"
+   }
+  },
+  {
+   "text": "Now let $h,h'$ be open and the square Cartesian. To compute $\\alpha_{h',t_W}$ choose the tower $i=h'$, $q=\\mathrm{id}_{X'}$, $a=h$, $p=t$. The pullback $V=X\\times_{X'}W'$ is identified with $W$ by the chosen Cartesian square, so $b=h$, $r=t_W$, $c=\\mathrm{id}_W$. The tower formula says that $\\alpha_{h',t_W}$ is $\\Gamma_Q:h'_!Rt_{W*}\\to Rt_*h_!$, with the indicated proper and identity-open identifications; the compositor $R\\mathrm{id}_*Rt_*\\simeq Rt_*$ with an identity is the identity by the unit clause of [lem-weil-derived-direct-image-composition], and $h_!\\mathrm{id}_!\\simeq h_!$ is the identity open compositor. For $\\alpha_{t,h}$ instead choose $i=\\mathrm{id}_X$, $q=t$, $a=h$, $p=\\mathrm{id}_X$. Then $V=X$, $b=\\mathrm{id}_X$, $r=\\mathrm{id}_X$, $c=h$, and the identity-square open comparison and its mate are identities (the restriction clause of [lem-trf-open-square-exchange] with $j=j'=\\mathrm{id}$, and the triangle identity for $\\mathrm{id}$). Both composites use the same compactification $(h,t)$ of $th=h't_W$. Consequently the explicit factors $\\pi_t\\alpha_{t,h}^{-1}\\alpha_{h',t_W}\\pi_{t_W}^{-1}$ defining $\\chi$ reduce to $\\Gamma_Q$, with no residual refinement automorphism.",
+   "uses": [
+    "lem-trf-compact-composition-tower-formula",
+    "def-weil-pbc-cartesian-square",
+    "lem-trf-open-square-exchange",
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), computation on trivial and Cartesian open compactification towers; Tag 0F7B (lemma-shriek-proper-and-open)"
+   }
+  },
+  {
+   "text": "Put $J=h_!$, $K=h^*$, $J'=h'_!$, $K'=h'^*$, $P=Lt^*$, $R=Rt_*$, $Q=Lt_W^*$ and $S=Rt_{W*}$. Let $u:1\\to KJ$, $u':1\\to K'J'$ be the open units, isomorphisms by [prop-weil-open-closed-recollement-adjunctions]. Let $c:KP\\to QK'$ be the pullback comparison. Write $\\delta:PJ'\\to JQ$ for the open comparison. Its restriction is the identity by [lem-trf-open-square-exchange], meaning precisely\n$$K(\\delta_M)=u_{QM}\\circ Q((u'_M)^{-1})\\circ c_{J'M}.$$\nTherefore $K(\\delta_M^{-1})u_{QM}=c_{J'M}^{-1}Q(u'_M)$. Hence $c^{-1}:QK'\\to KP$ is the mate [def-weil-pbc-adjunction-mate] of $\\delta^{-1}:JQ\\to PJ'$ under $J\\dashv K$, $J'\\dashv K'$. Indeed, that mate has components $KP(\\varepsilon'_M)\\circ K(\\delta^{-1}_{K'M})\\circ u_{QK'M}$; substituting the displayed identity at $K'M$ turns this into $KP(\\varepsilon'_M)\\circ c^{-1}_{J'K'M}\\circ Q(u'_{K'M})$, which by naturality of $c^{-1}$ in $\\varepsilon'_M$ equals $c^{-1}_M\\circ QK'(\\varepsilon'_M)\\circ Q(u'_{K'M})=c^{-1}_M$, by the triangle identity of $J'\\dashv K'$. This is the unit equation of [lem-pur-mate-unit-compatibility] read for $c^{-1}$. This checks the inverse direction as well as the two distinct open units.",
+   "uses": [
+    "prop-weil-open-closed-recollement-adjunctions",
+    "lem-trf-open-square-exchange",
+    "lem-pur-mate-unit-compatibility",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), computation on trivial and Cartesian open compactification towers; Tag 0F7B (lemma-shriek-proper-and-open)"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-iterated-square-mates] to $\\delta^{-1}:JQ\\to PJ'$: first take its mate under the two open adjunctions, which is $c^{-1}$ by Step 5, then its mate under $Q\\dashv S$ and $P\\dashv R$. The latter is exactly the specified $\\mathrm{Ex}:K'R\\to SK$ by [def-weil-pbc-adjunction-mate]. The iterated-mate identity identifies it with the conjugate of $\\delta^{-1}$ for $PJ'\\dashv K'R$ and $JQ\\dashv SK$. Conjugation reverses composition and preserves identity maps [def-weil-pbc-adjunction-conjugate], so this conjugate is invertible and its inverse is the conjugate of $\\delta$. In particular $\\mathrm{Ex}$ is invertible here because $\\delta$ is an isomorphism between left adjoints; no assertion about invertibility of arbitrary square mates is used.",
+   "uses": [
+    "lem-trf-iterated-square-mates",
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), computation on trivial and Cartesian open compactification towers; Tag 0F7B (lemma-shriek-proper-and-open)"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-iterated-square-mates] in the other order to $\\delta:PJ'\\to JQ$. Its mate under $Q\\dashv S$, $P\\dashv R$ is $\\Gamma_Q:J'S\\to RJ$, by the explicit formula in [lem-trf-compact-composition-tower-formula]. Taking its mate under $J'\\dashv K'$, $J\\dashv K$ gives the conjugate of $\\delta$, hence $\\mathrm{Ex}^{-1}:SK\\to K'R$ by Step 6. The mate-unit identity of [lem-pur-mate-unit-compatibility] for this second mate gives\n$$K'(\\Gamma_{Q,N})\\circ u'_{SN}=\\mathrm{Ex}^{-1}_{JN}\\circ S(u_N).$$\nThe left side is the ordinary $J'\\dashv K'$ transpose of $\\Gamma_{Q,N}$.",
+   "uses": [
+    "lem-trf-iterated-square-mates",
+    "lem-trf-compact-composition-tower-formula",
+    "lem-pur-mate-unit-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), computation on trivial and Cartesian open compactification towers; Tag 0F7B (lemma-shriek-proper-and-open)"
+   }
+  },
+  {
+   "text": "The open unit $u$ and $\\mathrm{Ex}$ are isomorphisms (Steps 5–6). Thus $\\lambda=S(u^{-1})\\circ\\mathrm{Ex}_J$ is invertible with\n$$\\lambda_N^{-1}=\\mathrm{Ex}_{JN}^{-1}\\circ S(u_N).$$\nBy Step 7 this is the transpose of $\\Gamma_{Q,N}=\\chi_N$ (Step 4). The inverse formula for the adjunction Hom bijection [prop-weil-open-closed-recollement-adjunctions] therefore gives\n$$\\chi_N=\\varepsilon_{h',Rt_*h_!N}\\circ h'_!(\\lambda_N^{-1}).$$\nAll equalities are natural in $N$ because the comparisons, units, counits and mate bijections used above are natural. This proves clause 2 as an equality of the specified natural transformations.",
+   "uses": [
+    "prop-weil-open-closed-recollement-adjunctions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), computation on trivial and Cartesian open compactification towers; Tag 0F7B (lemma-shriek-proper-and-open)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-etale-origin-subcategory",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-proetale-operations",
+  "fix-prop-adjunctions",
+  "lem-pur-mate-unit-compatibility",
+  "lem-trf-compact-composition-tower-formula",
+  "lem-trf-iterated-square-mates",
+  "lem-trf-open-square-exchange",
+  "lem-weil-derived-direct-image-composition",
+  "prop-compactification-coherence-detailed",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "thm-sf-comp-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7J and 0F7B: chosen tower specialization, followed by two explicit applications of iterated mates"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,10 +180,66 @@
    "results": "unavailable",
    "date": "2026-10-17",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "compact-support|lowerShriek|proper.*open",
+   "results": "{\"t\": \"2026-10-17T11:24:48Z\", \"tool\": \"grep\", \"query\": \"compact-support|lowerShriek|proper.*open\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary sheaf pushforward, abstract mates, or compactly supported functions, not the normalized derived compact-support tower formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "compact support composition comparison for proper and open square",
+   "results": "{\"t\": \"2026-10-17T11:24:49Z\", \"tool\": \"leansearch\", \"query\": \"compact support composition comparison for proper and open square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasCompactSupport.comp_homeomorph\", \"HasCompactSupport.comp_isClosedEmbedding\", \"HasCompactSupport.comp_left\", \"CompactlySupportedContinuousMap.compLeft\", \"HasCompactSupport.comp₂_left\", \"Function.support_comp_eq_preimage\", \"CompactlySupportedContinuousMap.comp\", \"HasCompactMulSupport.comp_isClosedEmbedding\"], \"digest\": \"46fff7ea7e7b6759\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary sheaf pushforward, abstract mates, or compactly supported functions, not the normalized derived compact-support tower formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory Adjunction mate natural transformation composition",
+   "results": "{\"t\": \"2026-10-17T11:24:49Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory Adjunction mate natural transformation composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `CategoryTheory`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical compact-support composition comparison proper square open closed normalization",
+   "results": "{\"t\": \"2026-10-17T11:24:57Z\", \"tool\": \"leanfinder\", \"query\": \"canonical compact-support composition comparison proper square open closed normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompactlySupportedContinuousMap.comp\", \"CompactlySupportedContinuousMap.coe_comp_to_continuous_fun\", \"CompactlySupportedContinuousMap.compLeft\", \"CompactlySupportedContinuousMap.comp_assoc\", \"hasCompactSupport_comp_left\", \"HasCompactSupport.comp_left\", \"CompactlySupportedContinuousMap.coe_compLeft\", \"TestFunction.coe_ofSupportedInLM\"], \"digest\": \"e13db8a7f52ae9ee\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary sheaf pushforward, abstract mates, or compactly supported functions, not the normalized derived compact-support tower formula"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|compactSupport|compact_support|proper.*open",
+   "results": "{\"t\": \"2026-10-17T11:33:24Z\", \"tool\": \"grep\", \"query\": \"shriek|compactSupport|compact_support|proper.*open\", \"sub\": \"Mathlib/AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary sheaf pushforward, abstract mates, or compactly supported functions, not the normalized derived compact-support tower formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "composition isomorphism for derived sheaf pushforward with proper support from compactifications",
+   "results": "{\"t\": \"2026-10-17T11:33:24Z\", \"tool\": \"leansearch\", \"query\": \"composition isomorphism for derived sheaf pushforward with proper support from compactifications\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app\", \"TopCat.Presheaf.Pushforward.comp\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp_hom_app_val_app\", \"SheafOfModules.pushforwardComp\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'\", \"SheafOfModules.pushforward_id_comp\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\"], \"digest\": \"7e4c298a401b810c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary sheaf pushforward, abstract mates, or compactly supported functions, not the normalized derived compact-support tower formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.TwoSquare",
+   "results": "{\"t\": \"2026-10-17T11:33:24Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.TwoSquare\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary sheaf pushforward, abstract mates, or compactly supported functions, not the normalized derived compact-support tower formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived sheaf direct image with compact support computed by a triangle of compactifications and proper open interchange",
+   "results": "{\"t\": \"2026-10-17T11:33:25Z\", \"tool\": \"leanfinder\", \"query\": \"derived sheaf direct image with compact support computed by a triangle of compactifications and proper open interchange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj\", \"TopCat.Sheaf.pullbackPushforwardAdjunction\", \"SheafOfModules.pushforward\", \"TopCat.Sheaf.pushforward\", \"CategoryTheory.Functor.sheafPushforwardContinuous\", \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'\", \"SheafOfModules.pushforwardNatIso\"], \"digest\": \"124ae8142233b012\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary sheaf pushforward, abstract mates, or compactly supported functions, not the normalized derived compact-support tower formula"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-proper-unit-localization-composition",
@@ -67,5 +247,54 @@
   "group": "Q74"
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-i-global-additivity"
+ "unit": "sk-i-global-additivity",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-compact-composition-proper-square-normalization",
+  "worker": "stage1",
+  "summary": "Retained the statement. Extracted the general compatible-tower computation of the specified pro-etale composition map, then computed the proper case with identity opens and the Cartesian open case using the same compactification (h,t). Expanded both iterated-mate calculations with separate open units to identify the transpose with lambda inverse.",
+  "blueprint": "Step 6, final paragraph: compatibility with the composition law on the open and closed compact localization pieces; the compactification-tower computation underlying that compatibility.",
+  "tool_uses": [
+   {
+    "node": "fix-prop-adjunctions",
+    "why": "Generic Adjunctions of the datum: used only for the adjunction, canonical compositor or witnessed compactification calculation stated in the cited proof step; the additivity unit has no substitute for this operation-level input."
+   },
+   {
+    "node": "lem-trf-open-square-exchange",
+    "why": "Generic Open-square exchange from restriction of direct image: used only for the adjunction, canonical compositor or witnessed compactification calculation stated in the cited proof step; the additivity unit has no substitute for this operation-level input."
+   },
+   {
+    "node": "lem-weil-derived-direct-image-composition",
+    "why": "Generic Composition of derived direct images: used only for the adjunction, canonical compositor or witnessed compactification calculation stated in the cited proof step; the additivity unit has no substitute for this operation-level input."
+   },
+   {
+    "node": "prop-compactification-coherence-detailed",
+    "why": "Generic Compactification coherence: used only for the adjunction, canonical compositor or witnessed compactification calculation stated in the cited proof step; the additivity unit has no substitute for this operation-level input."
+   },
+   {
+    "node": "prop-weil-open-closed-recollement-adjunctions",
+    "why": "Generic Adjunctions of the open-closed recollement: used only for the adjunction, canonical compositor or witnessed compactification calculation stated in the cited proof step; the additivity unit has no substitute for this operation-level input."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Generic The composition law for $Rf_!$: used only for the adjunction, canonical compositor or witnessed compactification calculation stated in the cited proof step; the additivity unit has no substitute for this operation-level input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "fix-prop-adjunctions",
+  "lem-trf-open-square-exchange",
+  "lem-weil-derived-direct-image-composition",
+  "prop-compactification-coherence-detailed",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "thm-sf-comp-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-68d465dc3",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-68d465dc3 (reviewer sub-agent of L); spot-checked: I read all of the item, the new node lem-trf-compact-composition-tower-formula, every cited statement and the proof of thm-sf-comp-composition. Sources checked: Stacks more-etale.tex Tag 0F7B (l. 2460, the K-injective proper/open map) and Tag 0F7J (l. 3159, the four-line tower computation). New node: correct types (V = Xbar x_Ybar Y gives a compactification (c,r); Gamma_Q is the def-weil-pbc-adjunction-mate of the open exchange delta). Its real content is that the transported etale gamma_Q equals the pro-etale proper mate. Not a duplicate: I searched rg for 0F7J and pro-etale tower/mate wording and compared lem-amb-unbounded-compact-support-comparisons (etale, unbounded), lem-cbc-complete-proetale-composition-pasting-coherence (strict towers) and others. It restates no clause of the item, has no cycle, and has blueprint from/via right. Item: statement unchanged and type-checked. Step 2: identity-open tower plus triangle identity gives pi_{gf} alpha = c^{-1}(pi_g pi_f). Step 3: I expanded chi = Rt_*(pi_h^{-1}) c_{t,h} c_{h',tW}^{-1} pi_{h'}. Step 4: both towers land on the same candidate (h,t), so chi = Gamma_Q. Steps 6-7: lem-trf-iterated-square-mates checked in both orders with explicit L/F roles; Ex is the conjugate of delta^{-1} and is invertible by def-weil-pbc-adjunction-conjugate. Step 7 unit identity Ex^{-1}_{JN} S(u_N) = K'(Gamma_N) u'_{SN} checked. Step 8: transpose and inverse Hom bijection checked. Small cases: identities, empty schemes, zero input. Accepted tool_uses: thm-sf-comp-composition, prop-compactification-coherence-detailed, lem-weil-derived-direct-image-composition, lem-trf-open-square-exchange, prop-weil-open-closed-recollement-adjunctions, fix-prop-adjunctions. No SGA. Two repairs in fixes/ (item file only): (1) Step 5 drew 'c^{-1} is the mate of delta^{-1}' from lem-pur-mate-unit-compatibility, which states only the forward direction (C3). I added def-weil-pbc-adjunction-mate and wrote the direct computation (naturality of c^{-1} plus the J'-|K' triangle identity). (2) Step 4 used identity direct-image and open compositors without a citation. I added lem-weil-derived-direct-image-composition and the identity-square justification. proof_deps still equals the union of uses.; 1 file(s) fixed by the reviewer"
+ }
 }
