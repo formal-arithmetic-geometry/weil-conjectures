@@ -38,8 +38,8 @@ Derived sections recovers the latter module complex by the affine equivalence.
 The extension/restriction adjunction on complexes identifies the transpose of
 the pullback unit with this comparison. Localization preserves this equation;
 uniqueness of left adjoints identifies the fixed extension adjunction. The
-identity hv identifies the underived sections comparison, and hr identifies
-its derived lift with r by the right-derived universal property. Thus the
+equation hr identifies the derived lift of the underived sections comparison v
+with r by the right-derived universal property. Thus the
 transpose in the statement is a composite of comparison isomorphisms. Neither
 flatness of the ring map nor boundedness of M is used. -/
 theorem affineExtensionSections_model_mate_isIso
@@ -51,8 +51,6 @@ theorem affineExtensionSections_model_mate_isIso
     (r : schemeDerivedDirectImage g ⋙ affineDerivedGlobalSections (𝟙 (Spec R)) ≅
       affineDerivedGlobalSections (𝟙 (Spec B)) ⋙
         (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory)
-    (hv : ∀ (M : SheafOfModules.{u} (moduleRings (Spec B).toRingedSpace))
-        (x : (affineGlobalSections (𝟙 (Spec B))).obj M), (v.hom.app M) x = x)
     (hr : ∀ J : HomotopyCategory
         (SheafOfModules.{u} (moduleRings (Spec B).toRingedSpace)) (ComplexShape.up ℤ),
       (Functor.rightDerivedFunctorCompUnit
@@ -93,7 +91,7 @@ theorem affineExtensionSections_model_mate_isIso
       SheafOfModules.{u} (moduleRings (Spec B).toRingedSpace))
         (Scheme.Modules.tensorPullback g)).Additive :=
     (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).left_adjoint_additive
-  obtain ⟨c, hc⟩ := exists_affineExtensionSections_underived_model g v hv
+  obtain ⟨c, hc⟩ := exists_affineExtensionSections_underived_model g v
   obtain ⟨a, b, hab⟩ := @exists_affineExtensionSections_model_factorization _ _ R B g v r hr
     c.hom hc hT hE hP M hM
   have : IsIso ((c.hom.mapHomologicalComplex (.up ℤ)).app M) := by

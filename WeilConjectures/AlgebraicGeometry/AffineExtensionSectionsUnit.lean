@@ -43,7 +43,7 @@ counit of the affine equivalence to obtain the required isomorphism.
 tensor pullback/direct image under tilde and sections. Their units agree.
 Descend this adjunction through localization. Uniqueness of left adjoints to
 the fixed derived restriction transports it to affineDerivedExtensionAdjunction.
-4. The underived identity hv and the right-derived-unit equation hr identify
+4. The right-derived-unit equation hr identifies
 its sections/direct-image comparison with the supplied r by right-derived
 uniqueness. Thus the transported isomorphism satisfies the displayed equation.
 The zero complex and identity ring map give the usual unit and impose no
@@ -57,8 +57,6 @@ theorem exists_affineExtensionSectionsUnit
     (r : schemeDerivedDirectImage g ⋙ affineDerivedGlobalSections (𝟙 (Spec R)) ≅
       affineDerivedGlobalSections (𝟙 (Spec B)) ⋙
         (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory)
-    (hv : ∀ (M : SheafOfModules.{u} (moduleRings (Spec B).toRingedSpace))
-        (x : (affineGlobalSections (𝟙 (Spec B))).obj M), (v.hom.app M) x = x)
     (hr : ∀ J : HomotopyCategory
         (SheafOfModules.{u} (moduleRings (Spec B).toRingedSpace)) (ComplexShape.up ℤ),
       (Functor.rightDerivedFunctorCompUnit
@@ -118,7 +116,7 @@ theorem exists_affineExtensionSectionsUnit
       SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace))
       (tilde.functor R)) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)
   have hmodel : IsIso (n (DerivedCategory.Q.obj (T.obj M))) := by
-    exact affineExtensionSections_model_mate_isIso g v r hv hr M hM
+    exact affineExtensionSections_model_mate_isIso g v r hr M hM
   have hniso : IsIso (n Q) := by
     have h := hn Q _ e.hom
     have he : IsIso (ΓB.map (L.map e.hom)) := by infer_instance

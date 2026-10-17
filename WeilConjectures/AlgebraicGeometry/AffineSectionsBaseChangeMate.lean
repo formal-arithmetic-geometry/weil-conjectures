@@ -115,7 +115,7 @@ theorem exists_affineSectionsBaseChangeMate
               d.hom.app L := by
   obtain ⟨t, b, z, d, v, r, ht, hb, hz, hd, hv, hr⟩ :=
     exists_affineSectionsCompositionComparisons f g
-  obtain ⟨a₀, ha₀⟩ := exists_affineExtensionSectionsUnit g v r hv hr
+  obtain ⟨a₀, ha₀⟩ := exists_affineExtensionSectionsUnit g v r hr
     ((schemeDerivedDirectImage f).obj E) hE
   let a := (affineDerivedExtension g).mapIso (b.app E).symm ≪≫ a₀
   have ha : (affineDerivedExtensionAdjunction g).unit.app
