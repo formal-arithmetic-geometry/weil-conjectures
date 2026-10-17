@@ -40,9 +40,13 @@ sections. It holds because filtered colimits of condensed abelian groups are com
 sectionwise on profinite sets (the coverings of `*_proét` being refined by finite ones), and
 sectionwise `ℚ̲̄_ℓ(S)` is the union of the subgroups `C(S, E)` of `C(S, ℚ̄_ℓ)` by definition.
 
-## Sorried input
+## Proof of the colimit comparison
 
-* `Profinite.isColimitPadicAlgClRingObjCocone`: `ℚ̲̄_ℓ = colim_E E̲`, see above.
+The comparison is proved sectionwise using the filtered-colimit criterion for types. Every
+section of `ℚ̲̄_ℓ` is represented by a continuous map into a finite subextension by definition,
+and the maps from `C(S, E)` are injective. The forgetful functor from abelian groups reflects
+these filtered colimits. Evaluation jointly reflects colimits of presheaves, and the fully
+faithful inclusion of sheaves into presheaves reflects colimits.
 
 -/
 
@@ -167,7 +171,28 @@ noncomputable def padicAlgClRingObjCocone : Cocone (padicSubfieldRingObjFunctor.
 filtered colimit of the condensed rings `E̲` of the finite subextensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, in
 condensed abelian groups. See the module docstring. -/
 noncomputable def isColimitPadicAlgClRingObjCocone :
-    IsColimit (padicAlgClRingObjCocone.{u} ℓ) :=
-  sorry
+    IsColimit (padicAlgClRingObjCocone.{u} ℓ) := by
+  have := preservesSmallestFilteredColimits_of_preservesFilteredColimits (forget Ab.{u + 1})
+  have : ReflectsColimitsOfShape (FiniteIntermediateField ℓ) (forget Ab.{u + 1}) :=
+    reflectsColimitsOfShape_of_reflectsIsomorphisms
+  refine isColimitOfReflects (sheafToPresheaf _ _) ?_
+  refine evaluationJointlyReflectsColimits _ fun S ↦
+    isColimitOfReflects (forget Ab.{u + 1}) ?_
+  refine Types.FilteredColimit.isColimitOf' _ _ ?_ ?_
+  · intro x
+    obtain ⟨⟨f, E, hE, hf⟩⟩ := x
+    refine ⟨⟨E, hE⟩, ULift.up (⟨fun x ↦ ⟨f x, hf x⟩,
+      f.continuous.subtype_mk _⟩ : C(S.unop, E)), ?_⟩
+    rfl
+  · intro E x y h
+    refine ⟨E, 𝟙 E, ?_⟩
+    obtain ⟨x⟩ := x
+    obtain ⟨y⟩ := y
+    have h' : ∀ t, (x t : PadicAlgCl ℓ) = y t := fun t ↦
+      congrArg (fun z : ULift.{u + 1} (PadicAlgCl.finiteIntermediateFieldValued ℓ S.unop) ↦
+        (z.down : C(S.unop, PadicAlgCl ℓ)) t) h
+    have : x = y := ContinuousMap.ext fun t ↦ Subtype.val_injective (h' t)
+    subst this
+    rfl
 
 end Profinite
