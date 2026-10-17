@@ -328,5 +328,28 @@
   "group": "N1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-869fcf15e (reviewer sub-agent of L); spot-checked: Read the item, all 27 cited statements, the parent (its step 2 is the only user) and Stacks 0GJQ/0EZU (etale-cohomology.tex l.19167 ff., l.16497 ff.). No SGA is cited. There are no new nodes. The statement is unchanged and true: smooth base change for X x_Y Y_(y) -> Y_(y) along the qcqs map T = Y_(y) x_{S_(s)} S_(t) -> Y_(y), followed by the 0EZU strict-local test at the lifted point, gives the sheaf case for any N-torsion F. That is the 0GJQ argument with an arbitrary sheaf in place of Z/n, honestly marked as agent-written. Truncation induction (triangle, base and step all stated), the scalar-forgetting comparison and conservativity carry it to bounded module complexes; constructibility is used only for boundedness. The coefficient category is the Lambda-module derived category, not silently identified with the abelian one. Small cases pass: empty S, h = id, t = s with c = id, L = 0, a shifted single sheaf. No duplicate found (0GJQ/local-acyclicity grep over the DAG; the smooth-local-acyclicity, locally-constant-torsion, geometric-fibre-test and nearby-smooth-source-exchange nodes all differ). I accept the 12 declared generic tool uses. One fault, fixed (E5/C3): Step 2 claimed the map E_(xi) ~ X_(x) -> A is h_(x) without showing that the middle isomorphism phi: A -> Y_(y) of lem-weil-pbc-strict-base-closed-point-localizations is the identity. Without it, neither V ~ X_{x,c} over S_(s) nor u = h_{x,c} follows. The fix adds the argument from the uniqueness clause (3) of lem-weil-pbc-strict-henselization-functoriality: the functorial map A_(a) -> Y_(y) and the canonical map j_A are both local, agree over Y and induce the identity on residue fields, so they are equal. It adds that citation to step 2 uses, proof_deps and split_report.tool_uses; the corrected node is under fixes/. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-db9152863",
+  "group": "N3",
+  "result": "pass",
+  "note": "Immutable delivery matches Proposition 0GJQ, uses canonical derived constructions, has permitted theorem sorry only, required report sections, and passes per-file scompile with server confirmation."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.SmoothSourceConstructibleLocalAcyclicity",
+  "declaration": "AlgebraicGeometry.Etale.smoothSourceConstructibleLocalAcyclicity",
+  "declarations": [
+   "AlgebraicGeometry.Etale.smoothSourceStrictLocalBaseChangeMap",
+   "AlgebraicGeometry.Etale.derivedGlobalSectionsPullbackMap",
+   "AlgebraicGeometry.Etale.smoothSourceConstructibleLocalAcyclicity"
+  ],
+  "file": "lean/Sheaf/TraceFormula/SmoothSourceConstructibleLocalAcyclicity.lean",
+  "statement": "theorem smoothSourceConstructibleLocalAcyclicity {X Y S : Scheme.{u}} [IsNoetherian S] (h : X ⟶ Y) (g : Y ⟶ S) [LocallyOfFinitePresentation g] [QuasiCompact g] [QuasiSeparated g] [Smooth h] [LocallyOfFinitePresentation h] [QuasiCompact h] [QuasiSeparated h] (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (m : ℤ) (hmΛ : (m : Λ) = 0) (hmS : IsUnit (m : Γ(S, ⊤))) (L : DerivedCategoryModule Λ Y) (hL : DerivedCategory.isBoundedConstructible Λ Y L) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X) {Ωt : Type u} [Field Ωt] [IsAlgClosed Ωt] (t : Spec (.of Ωt) ⟶ S) (c : Scheme.strictHenselizationScheme t ⟶ Scheme.strictHenselizationScheme ((x ≫ h) ≫ g)) : IsIso (derivedGlobalSectionsPullbackMap Λ (smoothSourceStrictLocalBaseChangeMap h g x t c) ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst (Scheme.strictHenselizationMap g (x ≫ h)) c ≫ Scheme.strictHenselizationStructuralMap (x ≫ h))).mapDerivedCategory.obj L)) ∧ ∀ (L' : DerivedCategoryModule Λ Y), DerivedCategory.isBoundedConstructible Λ Y L' → ∀ (φ : L ⟶ L'), (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (pullback (Scheme.strictHenselizationMap g (x ≫ h)) c)).map ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst (Scheme.strictHenselizationMap g (x ≫ h)) c ≫ Scheme.strictHenselizationStructuralMap (x ≫ h))).mapDerivedCategory.map φ) ≫ derivedGlobalSectionsPullbackMap Λ (smoothSourceStrictLocalBaseChangeMap h g x t c) ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst (Scheme.strictHenselizationMap g (x ≫ h)) c ≫ Scheme.strictHenselizationStructuralMap (x ≫ h))).mapDerivedCategory.obj L') = derivedGlobalSectionsPullbackMap Λ (smoothSourceStrictLocalBaseChangeMap h g x t c) ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst (Scheme.strictHenselizationMap g (x ≫ h)) c ≫ Scheme.strictHenselizationStructuralMap (x ≫ h))).mapDerivedCategory.obj L) ≫ (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (pullback (Scheme.strictHenselizationMap h x ≫ Scheme.strictHenselizationMap g (x ≫ h)) c)).map ((upperStar (ModuleCat.{u + 1} Λ) (smoothSourceStrictLocalBaseChangeMap h g x t c)).mapDerivedCategory.map ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst (Scheme.strictHenselizationMap g (x ≫ h)) c ≫ Scheme.strictHenselizationStructuralMap (x ≫ h))).mapDerivedCategory.map φ))",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-18",
+  "existing": false
  }
 }
