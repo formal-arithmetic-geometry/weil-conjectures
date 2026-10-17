@@ -147,7 +147,19 @@ theorem derivedComplete_rightDerivedLowerStar {X Y : Scheme.{u}} (f : X ⟶ Y) (
 /-- **`Rf_!` preserves derived completeness.** For a principal ideal `I` of a domain `Λ` and
 `f : X ⟶ Y` admitting a compactification, `Rf_!` carries objects of `D(X_ét, Λ)` that are
 derived complete for `I` to derived complete objects of `D(Y_ét, Λ)`. For `Y = Spec k` this
-says that `RΓ_c(X, K)` is derived complete. -/
+says that `RΓ_c(X, K)` is derived complete.
+
+**This statement is false as stated** (it is kept, as a `sorry`, because the integral projection
+formula of `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Integral` is built on it).
+With discrete coefficients on the small étale site, `j_!` does not preserve derived completeness:
+for `f : 𝔸¹ ⟶ Spec k` (`k` separably closed, `ℓ` invertible in `k`), `Λ = ℤ_ℓ` and the derived
+complete `K = R lim_n (Λ/ℓⁿ)_X`, the reduction of `Rf_! K` is `Λ/ℓ[-2]`, while `H²(Rf_! K)` is
+the colimit over étale neighbourhoods `U` of `∞ ∈ ℙ¹` of `H¹_cont(U ∖ ∞, ℤ_ℓ)`, which has infinite
+rank (a neighbourhood of positive genus contributes non-torsion classes that no smaller
+neighbourhood kills); a derived complete object with reduction `Λ/ℓ[-2]` would be `Λ[-2]`. The
+integral `Rf_!` of the blueprint (`def-weil-integral-rational-qbar-compact-support`) is the derived
+completion `R lim_n Rf_!(K ⊗ᴸ Λ/Iⁿ)`, which is derived complete by construction; this is the form
+used in `AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections_integral`. -/
 theorem derivedComplete_rightDerivedLowerShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasCompactification f] (K : 𝐃(X, Λ))
     (hK : DerivedCategory.derivedComplete X.smallEtaleTopology I K) :
