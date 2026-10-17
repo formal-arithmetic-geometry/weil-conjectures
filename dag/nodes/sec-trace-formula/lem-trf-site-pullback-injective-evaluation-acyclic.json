@@ -14,9 +14,66 @@
   "def-trf-geometric-morphism",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $F=g^{-1}I$. The continuous-cocontinuous adjunction theorem [lem-weil-pbc-continuous-cocontinuous-topos-adjunction] identifies the underlying set sheaf of $F$ with $V\\mapsto I(u(V))$, including restriction maps. This identification also respects the abelian group operations: apply the same inverse-image functor to the addition, zero and negation maps of $I$; its finite-product comparison identifies addition with the componentwise addition on $I(u(V))$. Thus $F(V)=I(u(V))$ as abelian groups, naturally in $V$.",
+   "uses": [
+    "lem-weil-pbc-continuous-cocontinuous-topos-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6X, lemma-pullback-injective-pre-limp, proof: the formula $g^{-1}=u^p$, using Sites Tag 00XR (lemma-when-shriek)."
+   }
+  },
+  {
+   "text": "Fix any covering $\\mathcal U=\\{U_t\\to U\\}_{t\\in T}$ of $\\mathcal C$. By continuity [def-weil-pbc-sites-and-cohomology](3), $u(\\mathcal U)=\\{u(U_t)\\to u(U)\\}_{t\\in T}$ is a covering of $\\mathcal D$. For a tuple $\\mathbf t=(t_0,\\ldots,t_n)$ write $W_{\\mathbf t}=U_{t_0}\\times_U\\cdots\\times_U U_{t_n}$ and $P_{\\mathbf t}=u(U_{t_0})\\times_{u(U)}\\cdots\\times_{u(U)}u(U_{t_n})$, with the choices of [def-weil-pbc-site-cech-complex]. The canonical comparison $c_{\\mathbf t}:u(W_{\\mathbf t})\\to P_{\\mathbf t}$ is invertible by induction on $n$: for $n=0$ it is the identity (up to the chosen product isomorphism); to append $t_n$, apply continuity (3)(b) to the original covering and the map $W_{(t_0,\\ldots,t_{n-1})}\\to U$, then use the preceding comparison. For each projection $\\delta_j$ omitting one factor, $c_{\\mathbf t\\setminus t_j}\\,u(\\delta_j)=\\delta_j\\,c_{\\mathbf t}$, because both sides have the same projections to every remaining factor and the product universal property makes such a map unique.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6X, proof: continuity sends a covering and all its iterated fibre products to the corresponding covering nerve; Sites Tag 00WV (definition-continuous)."
+   }
+  },
+  {
+   "text": "In degree $n\\ge0$, step 1 identifies $\\check{\\mathcal C}^n(\\mathcal U,F)$ with $\\prod_{\\mathbf t\\in T^{n+1}}I(u(W_{\\mathbf t}))$. Applying $I(c_{\\mathbf t}^{-1})$ componentwise gives an isomorphism to $\\prod_{\\mathbf t\\in T^{n+1}}I(P_{\\mathbf t})=\\check{\\mathcal C}^n(u(\\mathcal U),I)$. These are the groups and restriction differentials of [def-weil-pbc-site-cech-complex]. The projection identity of step 2, contravariance of $I$, and the restriction formula of step 1 show that each omitting-factor restriction commutes with these isomorphisms. Hence their alternating sums commute too, so we obtain an isomorphism of Cech complexes (both are zero in negative degrees). Its inverse induces inverse maps on kernels modulo images. Consequently $\\check H^p(\\mathcal U,F)\\cong\\check H^p(u(\\mathcal U),I)$. Since $I$ is an injective abelian sheaf on $\\mathcal D$ and $u(\\mathcal U)$ is a covering, [lem-weil-pbc-site-injective-cech-acyclic] makes the right side zero for every $p>0$. The common universe contains both small sites, their covering indices and the abelian-group values, as required by that lemma.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex",
+    "lem-weil-pbc-site-injective-cech-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6X, proof: equality of Cech cohomology under the nerve identification; its cited module-injective vanishing Tag 03FC specializes here to abelian-injective vanishing Tag 03AW (lemma-injective-trivial-cech)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-site-cech-vanishing-criterion] on $\\mathcal C$ with $\\mathcal B=\\operatorname{Ob}(\\mathcal C)$, $\\mathrm{Cov}$ the site's entire set of coverings, and the abelian sheaf $F$. All covering objects and all their iterated fibre products belong to $\\mathcal B$. The coverings in $\\mathrm{Cov}$ are cofinal, since any covering refines itself using the identity map on its index set and on each member. The required positive Cech vanishing for every covering is step 3. The criterion therefore gives $H^p(U,F)=0$ for every object $U$ and every $p>0$, with $H^p$ the ordinary right derived functor of evaluation specified in its statement. Substituting $F=g^{-1}I$ proves the assertion.",
+   "uses": [
+    "lem-weil-pbc-site-cech-vanishing-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6X, first proof sentence, applying Tag 03F9 (lemma-cech-vanish-collection) with all objects and all coverings."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-site-cech-complex",
+  "lem-weil-pbc-site-injective-cech-acyclic",
+  "lem-weil-pbc-site-cech-vanishing-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6X (lemma-pullback-injective-pre-limp), complete proof specialized to abelian sheaves: Tag 00XR inverse-image formula, continuity and the Cech nerve, Tag 03AW injective Cech vanishing, and Tag 03F9 Cech vanishing criterion."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -59,10 +116,52 @@
    "results": "{\"t\": \"2026-10-17T21:01:35Z\", \"tool\": \"leanfinder\", \"query\": \"Higher cohomology vanishes on a site for the precomposition of an injective abelian sheaf by a cover preserving cover lifting functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isLocallyInjective_of_isLocallyInjective\", \"CategoryTheory.preservesHomology_preadditiveYonedaObj_of_injective\", \"CategoryTheory.Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective\", \"CategoryTheory.Presheaf.isLocallyInjective_of_isLocallyInjective_fac\", \"CategoryTheory.Presheaf.isLocallyInjective_iff_of_fac\", \"CategoryTheory.Presheaf.isLocallyInjective_of_injective\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\"], \"digest\": \"e29a741816eac4ec\"}",
    "date": "2026-10-17",
    "verdict": "no match: local injectivity of a morphism and existence of the sheaf adjunction do not assert higher evaluation-cohomology vanishing of inverse images of injective objects."
+  },
+  {
+   "tool": "grep",
+   "query": "(cocontinuous|Cocontinuous).*(Injective|acyclic)|pre.?limp",
+   "results": "{\"t\": \"2026-10-17T21:15:57Z\", \"tool\": \"grep\", \"query\": \"(cocontinuous|Cocontinuous).*(Injective|acyclic)|pre.?limp\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/PreservesLocallyBijective.lean\"], \"digest\": \"a929289b584c55f2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: local injectivity concerns morphisms, sheaf adjunctions identify functors, and positive right-derived vanishing requires an injective input; none gives evaluation-acyclicity of this inverse image without the Cech argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Injective\", \"rightDerived\"",
+   "results": "{\"t\": \"2026-10-17T21:15:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"Injective\\\", \\\"rightDerived\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: local injectivity concerns morphisms, sheaf adjunctions identify functors, and positive right-derived vanishing requires an injective input; none gives evaluation-acyclicity of this inverse image without the Cech argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of an injective abelian sheaf along a continuous cocontinuous functor of sites has zero higher cohomology over every object",
+   "results": "{\"t\": \"2026-10-17T21:15:57Z\", \"tool\": \"leansearch\", \"query\": \"Pullback of an injective abelian sheaf along a continuous cocontinuous functor of sites has zero higher cohomology over every object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.pullback\", \"TopCat.Presheaf.pullback\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback\", \"CategoryTheory.Functor.sheafPullback\", \"SheafOfModules.pullback\", \"CategoryTheory.Functor.sheafPushforwardContinuous_obj_val_map\", \"TopCat.Sheaf.instIsLeftAdjointPullback\", \"CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility\"], \"digest\": \"deadbc28e9b2bd72\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: local injectivity concerns morphisms, sheaf adjunctions identify functors, and positive right-derived vanishing requires an injective input; none gives evaluation-acyclicity of this inverse image without the Cech argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image by a continuous and cocontinuous functor of small sites sends injective abelian sheaves to sheaves with vanishing positive derived evaluation at every object",
+   "results": "{\"t\": \"2026-10-17T21:15:58Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse image by a continuous and cocontinuous functor of small sites sends injective abelian sheaves to sheaves with vanishing positive derived evaluation at every object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"CategoryTheory.Presheaf.isLocallyInjective_of_whisker\", \"CategoryTheory.Presheaf.isLocallyInjective_whisker\", \"CategoryTheory.Presheaf.isLocallyInjective_whisker_iff\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"CategoryTheory.Presheaf.isLocallyInjective_presheafToSheaf_map_iff\"], \"digest\": \"158250dc46da3490\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: local injectivity concerns morphisms, sheaf adjunctions identify functors, and positive right-derived vanishing requires an injective input; none gives evaluation-acyclicity of this inverse image without the Cech argument."
+  },
+  {
+   "tool": "grep",
+   "query": "isZero_rightDerived_obj_injective_succ|sheafAdjunctionCocontinuous|injective.*[Cc]ech",
+   "results": "{\"t\": \"2026-10-17T21:16:53Z\", \"tool\": \"grep\", \"query\": \"isZero_rightDerived_obj_injective_succ|sheafAdjunctionCocontinuous|injective.*[Cc]ech\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/SheafEquiv.lean\"], \"digest\": \"a474ff5583cbe476\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: local injectivity concerns morphisms, sheaf adjunctions identify functors, and positive right-derived vanishing requires an injective input; none gives evaluation-acyclicity of this inverse image without the Cech argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a cover preserving and cover lifting functor of sites, restricting an injective abelian sheaf is acyclic for the sections functor on each site object",
+   "results": "{\"t\": \"2026-10-17T21:16:56Z\", \"tool\": \"leanfinder\", \"query\": \"For a cover preserving and cover lifting functor of sites, restricting an injective abelian sheaf is acyclic for the sections functor on each site object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isLocallyInjective_of_whisker\", \"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"CategoryTheory.Sheaf.isLocallyInjective_forget\", \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"CategoryTheory.Presheaf.isLocallyInjective_of_injective\", \"CategoryTheory.Presheaf.isLocallyInjective_forget\", \"CategoryTheory.Presheaf.isLocallyInjective_of_isLocallyInjective_fac\", \"CategoryTheory.Presheaf.isLocallyInjective_of_isLocallyInjective\"], \"digest\": \"59adec6076286ef3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: local injectivity concerns morphisms, sheaf adjunctions identify functors, and positive right-derived vanishing requires an injective input; none gives evaluation-acyclicity of this inverse image without the Cech argument."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-site-object-derived-sections-pullback",
@@ -91,5 +190,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-site-pullback-injective-evaluation-acyclic",
+  "worker": "stage1",
+  "summary": "Kept the statement and all five statement dependencies. Expanded Stacks 0D6X in four steps: the precomposition formula on abelian sheaves, preservation of the covering nerve by the definition of continuity, the explicit Cech-complex isomorphism and injective Cech vanishing, and the general-site Cech criterion with all objects and all coverings. Reused existing general-site nodes, with no new nodes. Checked the common universe, empty coverings and product choices. No assertion that inverse image preserves injectivity or total acyclicity is used.",
+  "blueprint": "Serves lem-trf-local-term-locality, current main-20261015 proof clause (1)/(2), normal-cone specialization, through the inherited Orgogozo/ph-etale comparison chain. This is precisely the pulled-back-injective evaluation-acyclicity input of the bounded-below 0DD8 objectwise comparison, not a change of the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+    "why": "General site-theoretic inverse-image precomposition formula (00XR), required in the 0D6X argument; the trace unit has no separate formula node."
+   },
+   {
+    "node": "lem-weil-pbc-site-injective-cech-acyclic",
+    "why": "Generic injective abelian-sheaf Cech vanishing (03AW), applied on the target site of u; it is the abelian specialization of the source proof's 03FC input."
+   },
+   {
+    "node": "lem-weil-pbc-site-cech-vanishing-criterion",
+    "why": "General-site Cech-to-ordinary-cohomology vanishing criterion (03F9), explicitly used by 0D6X; no trace-unit node supplies this general criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+  "lem-weil-pbc-site-injective-cech-acyclic",
+  "lem-weil-pbc-site-cech-vanishing-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q110-a0afc440b",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q110-a0afc440b (reviewer sub-agent of L); spot-checked: Read the complete split and cited statements; checked Stacks 0D6X, 00XR, 00WV, 03AW and 03F9. All four steps, coefficients, variance, edge cases and generic tool uses hold. No new nodes, duplicate, cycle or repair needed. Detailed checks are in review.md."
  }
 }
