@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-weil-reciprocal-roots-eigenvalues",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Reciprocal roots as eigenvalues",
@@ -15,33 +15,158 @@
  "stmt_deps": [
   "def-weil-ordinary-reciprocal-roots",
   "def-weil-frobenius-detailed",
-  "def-weil-smooth-proper-cohomological-family"
+  "def-weil-smooth-proper-cohomological-family",
+  "sk-def-cohfamily",
+  "def-weil-characteristic-polynomial",
+  "def-weil-root-multiplicity"
  ],
  "proof": [
   {
-   "text": "After scalar extension to $\\Qlb$, the operator $F_{i,\\ell}$ on\n$V_{i,\\ell}\\otimes_{\\Ql}\\Qlb$ has eigenvalues\n$\\lambda_1,\\ldots,\\lambda_m$ with $m=\\dim_{\\Ql}V_{i,\\ell}$, counted\nwith algebraic multiplicity, and over the algebraically closed field\n\n$$\n\\det(1-TF_{i,\\ell}\\mid V_{i,\\ell})\n=\\prod_{j=1}^{m}(1-\\lambda_jT).\n$$",
-   "uses": [],
-   "elementary": null
+   "text": "Fix an index $0\\leq i\\leq2d$ in the stated family, and abbreviate $K=\\Ql$, $L=\\Qlb$, $V=V_{i,\\ell}$, $F=F_{i,\\ell}$ and $P=P_{i,\\ell}$. By [prop-cohomological-finiteness], applied to the constant Weil sheaf with $E=K$ on the proper scheme $X_0$, $V$ is finite-dimensional and $F$ is an automorphism. Put $n=\\dim_K V$. The definition [def-weil-smooth-proper-cohomological-family] gives $P(T)=\\det(1-TF\\mid V)$. Write $\\chi(U)=\\det(U-F\\mid V)$ as in [def-weil-characteristic-polynomial], and $Q\\in L[U]$ for its coefficientwise image under $K\\hookrightarrow L$.",
+   "uses": [
+    "prop-cohomological-finiteness",
+    "def-weil-smooth-proper-cohomological-family",
+    "def-weil-characteristic-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-rootpurity/prop-weil-reciprocal-roots-eigenvalues.md",
+    "place": "Proof, first paragraph and determinant factorization"
+   }
   },
   {
-   "text": "By [def-weil-ordinary-reciprocal-roots], the same factorization\ndisplays the reciprocal roots of $P_{i,\\ell}$ with algebraic\nmultiplicity, so the reciprocal roots are precisely the $\\lambda_j$,\ni.e. exactly the eigenvalues of $F_{i,\\ell}$ in $\\Qlb$.",
+   "text": "By [lem-weil-charpoly-monic-degree], $\\chi$ is monic of degree $n$. The inclusion $K\\hookrightarrow L$ is injective, so [lem-weil-coefficientwise-extension-degree] gives that $Q$ is monic of degree $n$ as well. Apply [lem-weil-alg-closed-linear-factorization] to the nonzero polynomial $Q$ over the algebraically closed field $L$. Its leading coefficient is $1$, so $Q(U)=\\prod_{j=1}^{n}(U-\\lambda_j)$ for some $\\lambda_j\\in L$: the number of factors is $n$ because the product of $m$ monic linear factors has leading term $U^m$. This includes $n=0$, where $Q=1$ and the product is empty.",
    "uses": [
-    "def-weil-ordinary-reciprocal-roots"
+    "lem-weil-charpoly-monic-degree",
+    "lem-weil-coefficientwise-extension-degree",
+    "lem-weil-alg-closed-linear-factorization"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-rootpurity/prop-weil-reciprocal-roots-eigenvalues.md",
+    "place": "Proof, first paragraph and determinant factorization"
+   }
+  },
+  {
+   "text": "Each $\\lambda_j$ is nonzero. Indeed [lem-weil-endomorphism-invertible-iff-det-nonzero] gives $\\det F\\neq0$, and [lem-weil-charpoly-constant-coefficient-det] gives $\\det F=(-1)^n\\chi(0)$, hence $\\chi(0)\\neq0$. Its image $Q(0)$ is nonzero, by injectivity of $K\\hookrightarrow L$. But $Q(0)=\\prod_j(-\\lambda_j)$, so no factor $\\lambda_j$ can be zero.",
+   "uses": [
+    "lem-weil-endomorphism-invertible-iff-det-nonzero",
+    "lem-weil-charpoly-constant-coefficient-det",
+    "lem-weil-coefficientwise-extension-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-rootpurity/prop-weil-reciprocal-roots-eigenvalues.md",
+    "place": "Proof, first paragraph and determinant factorization"
+   }
+  },
+  {
+   "text": "By [lem-weil-reverse-charpoly-eq-reverse], $P=\\mathrm{rev}_n(\\chi)$. Applying the coefficient inclusion commutes with this reflection: both resulting polynomials have coefficient in degree $n-k$ equal to the image of $[U^k]\\chi$. Thus $P_L=\\mathrm{rev}_n(Q)$. Apply the finite-product clause of [lem-weil-polynomial-reflection-multiplicative] to the $n$ factors $U-\\lambda_j$, each with bound $1$. Since $\\mathrm{rev}_1(U-\\lambda_j)=1-\\lambda_jT$, this proves $P_L(T)=\\prod_{j=1}^n(1-\\lambda_jT)$. Here $P_L$ is the coefficientwise image of $P$.",
+   "uses": [
+    "lem-weil-reverse-charpoly-eq-reverse",
+    "lem-weil-polynomial-reflection-multiplicative",
+    "lem-weil-coefficientwise-extension-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-rootpurity/prop-weil-reciprocal-roots-eigenvalues.md",
+    "place": "Proof, first paragraph and determinant factorization"
+   }
+  },
+  {
+   "text": "The constant coefficient of this product is $1$, and its leading coefficient in degree $n$ is $\\prod_j(-\\lambda_j)\\neq0$ by step 3; hence $\\deg P_L=n$. Its reciprocal polynomial of [lem-weil-reciprocal-polynomial] is therefore $P_L^\\#=\\mathrm{rev}_n(P_L)=Q$: reflection twice sends the coefficient in degree $k$ to that in degree $n-(n-k)=k$, including when $n=0$. Consequently the reciprocal polynomial here is the characteristic polynomial over $L$, with no lost zero eigenvalues.",
+   "uses": [
+    "lem-weil-reciprocal-polynomial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-rootpurity/prop-weil-reciprocal-roots-eigenvalues.md",
+    "place": "Proof, first paragraph and determinant factorization"
+   }
+  },
+  {
+   "text": "By the reciprocal-root convention [def-weil-ordinary-reciprocal-roots], a reciprocal root is a nonzero $\\alpha$ with $P_L(\\alpha^{-1})=0$. Apply clauses 2 and 3 of [lem-weil-reciprocal-root-factorization] to $P_L$ over $L$ with the identity coefficient homomorphism. The factorization in step 4 has exactly $\\deg P_L=n$ nonzero factors, so its $\\lambda_j$ are precisely the reciprocal roots, with each $\\alpha$ occurring with multiplicity $m_\\alpha(P_L^\\#)=m_\\alpha(Q)$ by step 5. The convention in [sk-def-cohfamily] defines the eigenvalues after scalar extension as the roots in $L$ of the characteristic polynomial of $F$; algebraic multiplicity is their root multiplicity [def-weil-root-multiplicity]. Thus these are exactly the eigenvalues of $F\\otimes_K L$ on $V\\otimes_KL$, with the same algebraic multiplicities. This proves both the asserted identification and its determinant identity.",
+   "uses": [
+    "def-weil-ordinary-reciprocal-roots",
+    "lem-weil-reciprocal-root-factorization",
+    "sk-def-cohfamily",
+    "def-weil-root-multiplicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-rootpurity/prop-weil-reciprocal-roots-eigenvalues.md",
+    "place": "Proof, second paragraph: reciprocal-root convention and identification with eigenvalues"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-ordinary-reciprocal-roots"
+  "prop-cohomological-finiteness",
+  "def-weil-smooth-proper-cohomological-family",
+  "def-weil-characteristic-polynomial",
+  "lem-weil-charpoly-monic-degree",
+  "lem-weil-coefficientwise-extension-degree",
+  "lem-weil-alg-closed-linear-factorization",
+  "lem-weil-endomorphism-invertible-iff-det-nonzero",
+  "lem-weil-charpoly-constant-coefficient-det",
+  "lem-weil-reverse-charpoly-eq-reverse",
+  "lem-weil-polynomial-reflection-multiplicative",
+  "lem-weil-reciprocal-polynomial",
+  "def-weil-ordinary-reciprocal-roots",
+  "lem-weil-reciprocal-root-factorization",
+  "sk-def-cohfamily",
+  "def-weil-root-multiplicity"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-rootpurity/prop-weil-reciprocal-roots-eigenvalues.md",
-  "place": "## Proof"
+  "place": "Proof, both paragraphs; expanded using existing polynomial leaves and the current sk-def-cohfamily eigenvalue convention"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "charpolyRev|hasEigenvalue_iff_isRoot|isRoot.*charpoly",
+   "results": "15 hits including Module.End.hasEigenvalue_iff_isRoot_charpoly (Mathlib/LinearAlgebra/Eigenspace/Charpoly.lean:40), Matrix.charpolyRev (Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean:292), Matrix.reverse_charpoly (same file:294-295); reversal already has a DAG leaf.",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; generic polynomial and eigenvalue ingredients exist"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The roots of the characteristic polynomial are the eigenvalues of a linear map",
+   "results": "Eight hits including Module.End.hasEigenvalue_iff_isRoot_charpoly and mem_spectrum_iff_isRoot_charpoly (Mathlib.LinearAlgebra.Eigenspace.Charpoly), Matrix.charpoly and Matrix.eval_charpoly; generic endomorphisms, not the cohomological-family statement.",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; generic polynomial and eigenvalue ingredients exist"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.charpolyRev, Module.End.HasEigenvalue",
+   "results": "OK, 0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; generic polynomial and eigenvalue ingredients exist"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The reciprocal roots of det(1 - T f) for an invertible endomorphism of a finite dimensional vector space are its eigenvalues with algebraic multiplicity over an algebraically closed field",
+   "results": "Eight hits including Module.End.exists_eigenvalue, Module.End.finite_spectrum, Module.End.hasEigenvalue_iff_mem_spectrum and generalized-eigenvalue results; no full cohomological-family statement.",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; generic polynomial and eigenvalue ingredients exist"
+  },
+  {
+   "tool": "grep",
+   "query": "roots_reverse_of_monic|reverse_map|charpoly_map|charpoly_baseChange",
+   "results": "15 hits including LinearMap.charpoly_baseChange (Mathlib/LinearAlgebra/Charpoly/BaseChange.lean:23), Matrix.charpoly_map (Mathlib/LinearAlgebra/Matrix/Charpoly/Basic.lean:175); generic scalar-extension ingredients.",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; generic polynomial and eigenvalue ingredients exist"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The characteristic polynomial of an endomorphism over an algebraically closed field splits into linear factors whose roots are exactly eigenvalues",
+   "results": "Eight hits including Module.End.hasEigenvalue_iff_isRoot_charpoly, mem_spectrum_iff_isRoot_charpoly and existence and spectrum results; no full cohomological-family statement.",
+   "date": "2026-10-17",
+   "verdict": "no match for the item; generic polynomial and eigenvalue ingredients exist"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -72,5 +197,29 @@
   }
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-prop-rootpurity"
+ "unit": "sk-prop-rootpurity",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-weil-reciprocal-roots-eigenvalues",
+  "worker": "stage1",
+  "summary": "Expanded the imported two-paragraph argument into six checked steps, reusing existing finiteness, characteristic-polynomial, factorization and reflection nodes. Made invertibility and nonzero roots explicit, identified the reciprocal polynomial itself with the extended characteristic polynomial to account for multiplicities, and used the current blueprint eigenvalue convention. No new nodes or statement change. Searched the entire DAG, blueprint and project Lean and logged Mathlib searches; no exact project attachment or whole-item Mathlib match.",
+  "blueprint": "Steps 1-5 realize the first paragraph of this blueprint node and the initial determinant-factorization clause of sk-prop-rootpurity step 1; step 6 realizes the second paragraph. The weight estimate belongs to the parent unit and is not used here.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-reciprocal-polynomial",
+    "why": "Step 5 takes only the definition of the reciprocal polynomial P^# (via the actual degree, constant coefficient 1) from this generic polynomial lemma of unit sk-thm-rh; the route node lem-weil-reciprocal-root-factorization (sk-def-roots) states its clause 3 in terms of this same P^#, so no node of sk-prop-rootpurity's route gives it separately."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-reciprocal-polynomial"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q151-ab054a04f",
+  "group": "Q151",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-ab054a04f (reviewer sub-agent of L); spot-checked: I read the whole item: the statement (same in the master and main-20261015 blueprint, no blueprint_update, not weakened) and all six steps, each against the full statement of every node it cites, plus the unit sk-prop-rootpurity, the chapter record and both assumption leaves. The delivery has no new nodes. The mathematics is correct. Step 1: X_0 is proper, so it is separated and of finite type, and prop-cohomological-finiteness applied to the constant Weil sheaf with E=Q_l gives dim V finite and F an automorphism. Step 2: chi is monic of degree n; the inclusion Q_l -> Qbar_l is injective, so Q is monic of degree n; the algebraically closed factorization has c=1 and exactly n factors. Step 3: det F nonzero and det F = (-1)^n chi(0), so Q(0) is nonzero and every lambda_j is nonzero. Step 4: P = rev_n(chi), reflection of the product with bounds 1, and rev_1(U-lambda) = 1-lambda T. Step 5 (elementary): P_L^# = rev_n(rev_n Q) = Q. Step 6: clause 3 of lem-weil-reciprocal-root-factorization gives uniqueness, with algebraic multiplicities m_alpha(Q) under the sk-def-cohfamily eigenvalue convention. I tested n=0, diag(2,3), the irreducible U^2+1 (roots +-i only in Qbar_l), the Jordan block J_2(c), and F=0, which shows step 3 is needed; that case is excluded by the finiteness theorem, not by an added hypothesis. The coefficients are ordinary Q_l-cohomology throughout, with no Qbar_l-sheaf comparison. The rg search over dag/nodes found no duplicate, and the item is not in its own dependency closure, so there is no cycle. Batch-5 check: I accept the citation of prop-cohomological-finiteness. Finiteness of cohomology is a hypothesis of nt-assume-trace-formula (it assumes dualizability), not a result of it, and it is not given by nt-assume-poincare-duality (which only says PD_p is an isomorphism, proved upstream via Verdier exchange). The node's dependency closure reaches no nt-assume, nt-target, sk-thm-trace-*, sk-thm-trace-transport or sk-thm-poincare-duality node; its sec-trace-formula nodes are generic tools (open-square exchange, filtered localization). The item already reached this node through its existing stmt_dep def-weil-smooth-proper-cohomological-family, and sk-lem-finite is inside the route. Fixes, in fixes/dag/nodes/sec-zeta-weil/prop-weil-reciprocal-roots-eigenvalues.json: (C1) steps 3 and 4 now cite lem-weil-coefficientwise-extension-degree for Q(0)=phi(chi(0)) and for the coefficient map commuting with reflection; proof_deps is unchanged as a set. (C8) split_report.tool_uses now declares lem-weil-reciprocal-polynomial (unit sk-thm-rh, off route): step 5 uses it only for the definition of P^#, which the route node lem-weil-reciprocal-root-factorization also uses. I accept that tool use. Process note: I ran one read-only git log by mistake; nothing was written outside the review directory.; 1 file(s) fixed by the reviewer"
+ }
 }

@@ -11,9 +11,96 @@
   "def-coef-symmetric-operadic-family",
   "lem-cbc-strict-presentation-transport-representation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the subset-indexed formula for $R_{[m]}(D)$ from [lem-cbc-strict-presentation-transport-representation], now with $C=[m]$. An $n$-simplex is an order map $\\sigma:[n]\\to[m]$ and compatible maps $t_J$ into the value $D(\\sigma(\\max J))$ for every nonempty subset $J\\subseteq[n]$. Applying an order operator reindexes $\\sigma$ and the subsets, so the compatibility equations are preserved. The two projections are therefore simplicial: $t$ is the projection to $N([m])=\\Delta^m$, while $b$ is the pointed-map projection obtained by applying the structure map of the terminal value in each $t_J$ (the equations make this independent of $J$). On a constant $\\sigma=i$, all $t_J$ are restrictions of one simplex, so the vertex fibre is exactly $D(i)$ over $N(\\mathrm{Fin}_*)$.",
+   "uses": [
+    "lem-cbc-strict-presentation-transport-representation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Definition 3.2.5.2 and Remarks 3.2.5.4, 3.2.5.7; explicit subset-indexed relative-nerve formula"
+   }
+  },
+  {
+   "text": "Each $D(i)\\to N(\\mathrm{Fin}_*)$ is an inner fibration over the quasicategory $N(\\mathrm{Fin}_*)$, so every $D(i)$ is a quasicategory and the composite $[m]\\to\\mathsf{sSet}$ satisfies the hypothesis of [lem-cbc-strict-presentation-transport-representation]. That theorem gives that $t:R_{[m]}(D)\\to\\Delta^m$ is a cocartesian fibration with fibres $D(i)$, that an edge over $a\\le b$ is $t$-cocartesian exactly when its edge in $D(b)$ is an equivalence, and that transport along $a\\le b$ is $D(a\\to b)$; in particular the edge $c_x:x\\to D(a\\to b)x$ with $t_{\\{0,1\\}}$ the degenerate edge at $D(a\\to b)x$ is $t$-cocartesian, and its pointed-map projection $b(c_x)$ is an identity. Let $x\\in D(a)$, $y\\in D(b)$, $a\\le b$. Since $\\Delta^m$ is the nerve of a poset, its right-pinched mapping spaces are points (for $a\\le b$) or empty, and a mapping simplex between two vertices over the same $b$ projects to a constant simplex, so $\\operatorname{Map}_{R}(u,y)=\\operatorname{Map}_{D(b)}(u,y)$ for $u\\in D(b)$. The cocartesian mapping criterion [lem-coef-infinity-cocartesian-mapping-criterion] for $c_x$ and $t$ gives a homotopy pullback whose bottom row is $\\operatorname{Map}_{\\Delta^m}(b,b)\\to\\operatorname{Map}_{\\Delta^m}(a,b)$, a map of points; hence precomposition with $c_x$ is an equivalence $\\operatorname{Map}_{D(b)}(D(a\\to b)x,y)\\simeq\\operatorname{Map}_R(x,y)$. It is natural in $y$ (postcomposition) and commutes with the maps to $\\operatorname{Map}_{N(\\mathrm{Fin}_*)}$ because $b(c_x)$ is an identity and all transition maps are over $N(\\mathrm{Fin}_*)$. If $a>b$, a mapping simplex would project to an edge $a\\to b$ of $\\Delta^m$, which does not exist, so the mapping space is empty. Same-vertex mapping spaces are those of $D(i)$.",
+   "uses": [
+    "lem-cbc-strict-presentation-transport-representation",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Definition 3.2.5.2, Remark 3.2.5.7, Proposition 3.2.5.21; cocartesian mapping criterion"
+   }
+  },
+  {
+   "text": "Inner horns. Let $0<k<n$ and let a horn $\\Lambda^n_k\\to R_{[m]}(D)$ be given over an $n$-simplex $(\\beta,\\sigma)$ of $N(\\mathrm{Fin}_*)\\times\\Delta^m$. The horn supplies the data $t_J$ for every nonempty $J\\subseteq[n]$ except $J=[n]$ and $J=[n]\\setminus\\{k\\}$; both missing subsets have maximum $n$ because $k<n$. The maps $D(\\sigma(\\max J)\\to\\sigma(n))t_J$ for the faces $J=[n]\\setminus\\{i\\}$, $i\\ne k$, agree on overlaps by the compatibility equations, so they form a horn $\\Lambda^n_k\\to D(\\sigma(n))$, lying over $\\beta$ because every transition map commutes strictly with the projections to $N(\\mathrm{Fin}_*)$. Since $D(\\sigma(n))\\to N(\\mathrm{Fin}_*)$ is an inner fibration (the symmetric-operad convention of [lem-coef-operadic-approximation-restriction]), it has a filler $t_{[n]}$ over $\\beta$; put $t_{[n]\\setminus\\{k\\}}=t_{[n]}|$. All equations involving the new subsets hold by construction, so $(b,t)$ is an inner fibration, and $R_{[m]}(D)$ is a quasicategory. Inert lifts. Let $x\\in D(j)$ over $\\langle r\\rangle$ and let $\\alpha:\\langle r\\rangle\\to\\langle r'\\rangle$ be inert; let $e:x\\to x'$ be a $p_j$-cocartesian lift in $D(j)$, which exists because $D(j)$ is a symmetric infinity-operad. We show $e$ is $(b,t)$-cocartesian using [lem-coef-infinity-cocartesian-mapping-criterion]. For $z$ over parameter $c<j$ all four corners of the criterion square are empty (the parameter coordinate of the base mapping spaces is $\\operatorname{Map}_{\\Delta^m}(j,c)=\\varnothing$). For $c\\ge j$, the equivalences of Step 2 identify the criterion square for $e$ at $z$, over $N(\\mathrm{Fin}_*)\\times\\Delta^m$, with the criterion square for $D(j\\to c)e$ at $z$ in $D(c)$ over $N(\\mathrm{Fin}_*)$, since $\\operatorname{Map}_{\\Delta^m}(j,c)$ is a point. Because the transition maps preserve inert edges, $D(j\\to c)e$ is $p_c$-cocartesian, so this square is a homotopy pullback by the criterion. Hence $e$ is $(b,t)$-cocartesian over $(\\alpha,\\mathrm{id}_j)$, as the family definition [def-coef-symmetric-operadic-family] requires. Conversely, a family inert edge has parameter edge an equivalence of $\\Delta^m$, i.e. an identity, so it lies in some $D(j)$; for $z\\in D(j)$ its criterion square over $N(\\mathrm{Fin}_*)\\times\\Delta^m$ is literally its $p_j$-criterion square, so it is $p_j$-cocartesian. Thus the family inert edges are precisely the inert cocartesian edges of the vertex operads. Equivalences. The equivalences of $N(\\mathrm{Fin}_*)\\times\\Delta^m$ are the pairs $(\\alpha,\\mathrm{id}_j)$ with $\\alpha$ a bijection, which is inert. Its cocartesian lift $e:x\\to x'$ is an equivalence: the horn-lifting property of the cocartesian edge $e$ for $\\Lambda^2_0$ with edges $e$ and $\\mathrm{id}_x$, over the base $2$-simplex $(\\alpha,\\alpha^{-1},\\mathrm{id})$, gives $g:x'\\to x$ and a $2$-simplex witnessing $ge=\\mathrm{id}_x$; then $\\Lambda^3_0$ with $\\{0,1\\}=e$, faces this $2$-simplex and the degenerate $2$-simplices $s_1e,s_0e$, over the base $3$-simplex $(\\alpha,\\alpha^{-1},\\alpha)$, has a filler whose face $d_0$ witnesses $eg=\\mathrm{id}_{x'}$ ([def-coef-infinity-fibrations]). So $(b,t)$ is an inner fibration between quasicategories lifting equivalences with given source, hence a categorical (Joyal) fibration by [lem-coef-joyal-quasicategory-characterizations](1).",
+   "uses": [
+    "def-coef-symmetric-operadic-family",
+    "def-coef-infinity-fibrations",
+    "lem-cbc-strict-presentation-transport-representation",
+    "lem-coef-operadic-approximation-restriction",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-joyal-quasicategory-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT §3.2.5 relative-nerve horn description, together with HA Definition 2.3.2.10 and Proposition 2.3.2.11"
+   }
+  },
+  {
+   "text": "Fix $x$ over $(j,\\langle r\\rangle)$ and choose inert lifts $x\\to x_i$ over $\\rho_i$; by Step 3 every such lift lies in the fibre $D(j)$ and is $p_j$-cocartesian. Let $y$ lie over parameter $a$ and $\\langle k\\rangle$. If $a\\le j$, the equivalences of Step 2 (natural in the target, compatible with the projection to $N(\\mathrm{Fin}_*)$) identify $\\operatorname{Map}_R(y,x)$ and $\\operatorname{Map}_R(y,x_i)$ with $\\operatorname{Map}_{D(j)}(y',x)$ and $\\operatorname{Map}_{D(j)}(y',x_i)$, $y'=D(a\\to j)y$, while the base corners are $\\operatorname{Map}_{N(\\mathrm{Fin}_*)}(\\langle k\\rangle,-)\\times\\operatorname{Map}_{\\Delta^m}(a,j)$ with the second factor a point. Thus the square of the family definition becomes the symmetric-operad mapping-space Segal square of $D(j)$ for $y'$ and $x$, a homotopy pullback by the product axiom in [lem-coef-operadic-approximation-restriction], and its composition homotopy is transported along the same natural equivalences. If $a>j$, the two left corners are empty (both the total and the base mapping spaces have empty parameter coordinate); for $r\\ge1$ the right corners are empty too, and for $r=0$ they are points; in both cases the square is a homotopy pullback because its homotopy fibre product is empty. For $r=0$ and $a\\le j$ the products are points and the Segal axiom states that the left vertical map is an equivalence onto the corresponding base component, which is again the operad axiom.",
+   "uses": [
+    "def-coef-symmetric-operadic-family",
+    "lem-cbc-strict-presentation-transport-representation",
+    "lem-coef-operadic-approximation-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HA Definition 2.3.2.10 and Proposition 2.3.2.11; HTT §3.2.5 mapping-space description"
+   }
+  },
+  {
+   "text": "For an order map $\\beta:[l]\\to[m]$, pull back the displayed subset formula along $N(\\beta)$. An $n$-simplex is then an order map $[n]\\to[l]$ together with the same maps $t_J$ valued in $D(\\beta(\\sigma(\\max J)))$, which is exactly the formula for $R_{[l]}(D\\beta)$. The identifications commute with every simplicial operator and with both projections to $N(\\mathrm{Fin}_*)$ and the simplex base. The pullback compatibility in [lem-cbc-strict-presentation-transport-representation] therefore gives the asserted identification over both bases.",
+   "uses": [
+    "lem-cbc-strict-presentation-transport-representation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Remark 3.2.5.7 and Proposition 3.2.5.21; pullback of the relative-nerve formula"
+   }
+  },
+  {
+   "text": "Repeated vertices merely make some transition maps identities, and the same formula still applies. For $m=0$ the relative nerve is the single fibre $D(0)$. Empty fibres give empty vertex fibres and empty mixed mapping spaces, while zero arity gives the terminal product in the Segal square. Thus all listed edge cases are included without an extra existence or nonemptiness hypothesis.",
+   "uses": [
+    "def-coef-symmetric-operadic-family",
+    "lem-cbc-strict-presentation-transport-representation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Definition 3.2.5.2 and Remark 3.2.5.7; HA Definition 2.3.2.10 (zero-arity convention)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-strict-presentation-transport-representation",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "def-coef-symmetric-operadic-family",
+  "def-coef-infinity-fibrations",
+  "lem-coef-operadic-approximation-restriction",
+  "lem-coef-joyal-quasicategory-characterizations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Explicit relative-nerve and product-base verification following HTT §3.2.5 and HA §2.3.2; archival copy unavailable."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,7 +132,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-symmetric-operadic-mapping-cylinder",
@@ -72,5 +159,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-relative-nerve-symmetric-family",
+  "worker": "stage1",
+  "summary": "Retained the imported statement and split its proof into six steps. The first two use the existing explicit relative-nerve presentation for the subset formula, fibres, transport and mixed mapping spaces. The next two verify the product-base categorical fibration, inert lifts and the family mapping-space Segal squares directly from the symmetric-operad axioms. The fifth step proves strict pullback compatibility under order maps, and the final step checks repeated vertices, m=0, zero arity and empty fibres. No new node was needed: every non-elementary input is an existing statement dependency or the existing symmetric-operad convention.",
+  "blueprint": "Realizes the ancestor prop-coef-integral-exceptional-adjoint proof paragraph beginning “For K”, specifically the retained coherent free-module comparison and its HA relative-nerve construction (HTT Definition 3.2.5.2 and Remark 3.2.5.7; HA Definition 2.3.2.10 and Proposition 2.3.2.11).",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-strict-presentation-transport-representation",
+    "why": "The existing explicit relative-nerve construction and its cocartesian/mapping/pullback theorem are generic quasicategory infrastructure; this biduality unit has no replacement for that construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-strict-presentation-transport-representation"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-ce0e70acc",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-ce0e70acc (reviewer sub-agent of L); spot-checked: I read the item, the unit and chapter, all three cited statements, the cbc proof steps 1 and 7, and the parent's use. The statement is true and unchanged. Small cases checked: m=0; m=1 with D=N(Fin_*) and identity transition, giving N(Fin_*)xDelta^1; an empty D(0); repeated vertices; r=0 with a>j; reverse parameters. The inert-preserving hypothesis is needed exactly once, for global cocartesianness. HTT/HA are not archived (WANTED kept, proof by agent). No blueprint node and no DAG duplicate or generalization found; I compared kan-relative-nerve-left-fibration, relative-nerve-cylinder-contraction, operadic-collage-comparison and tuple-operad-incidence. I repaired three faults, rewriting proof steps 2-4 and proof_deps only, in fixes/dag/nodes/sec-six-functors/lem-coef-relative-nerve-symmetric-family.json. (1) C1/C4: steps 2 and 3 used an uncited 'cocartesian mapping criterion' while the DAG defines cocartesian edges by horn lifting; they now cite lem-coef-infinity-cocartesian-mapping-criterion (same unit). (2) E5/C3: step 3 never proved that fibre inert lifts are (b,t)-cocartesian, which the parent needs, and its isofibration and Joyal-fibration claims rested on vague wording. It now gives the explicit inner-horn filler in D(sigma(n)), global cocartesianness from the criterion plus Step 2 and inert preservation, the converse, and an equivalence lift by Lambda^2_0/Lambda^3_0 fillers. The Joyal-fibration conclusion cites lem-coef-joyal-quasicategory-characterizations(1) (same unit). (3) Step 4 said all four corners are empty for a>j, which is false at r=0 (the right corners are points); corrected. No cycle, all citations are in the unit, and I accept the tool use of lem-cbc-strict-presentation-transport-representation (unit sk-prop-sf-cbc), generic relative-nerve infrastructure.; 1 file(s) fixed by the reviewer"
  }
 }

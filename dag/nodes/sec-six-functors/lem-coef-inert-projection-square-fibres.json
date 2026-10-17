@@ -12,9 +12,105 @@
   "def-coef-left-module-operadic-encoding",
   "lem-coef-infinity-mapping-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\bar z=(\\langle t\\rangle,T)$. Since $\\theta$ is inert, each $1\\leq l\\leq t$ has a unique preimage $i(l)$, and $l\\mapsto i(l)$ bijects the output indices of $\\bar z$ with $R=\\{1,\\ldots,k\\}\\setminus J$. The definition of $\\mathsf{LM}^{\\otimes}$ in [def-coef-left-module-operadic-encoding] shows that their colours agree and that $\\bar\\rho_l\\theta=\\rho_{i(l)}$: both pointed maps select the same input, and the only nonempty ordered fibre is a singleton. Choose cocartesian colour projections $q_l:Z\\to Z_l$ over $\\bar\\rho_l$. The composite $q_lv$ is cocartesian by [lem-coef-infinity-cocartesian-composition-initiality], applied to a composition triangle. It and the specified projection $p_{i(l)}:Y\\to Y_{i(l)}$ lift the same base arrow with the same source. The initial-lift comparison in that same lemma gives an equivalence $e_l:Y_{i(l)}\\to Z_l$ in the colour fibre, together with the triangle $e_lp_{i(l)}\\simeq q_lv$. Only the given inert lifts have been used.",
+   "uses": [
+    "def-coef-left-module-operadic-encoding",
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.1.1.10(2), Remark 2.1.1.14, and Remarks 4.2.2.18, 4.2.2.21; agent-expanded relative mapping-square calculation."
+   }
+  },
+  {
+   "text": "Put $M=\\operatorname{Map}_{\\mathcal E}^{f}(X,Y)$, $N=\\operatorname{Map}_{\\mathcal E}^{\\theta f}(X,Z)$, and $P_j=\\operatorname{Map}_{\\mathcal E}^{\\rho_jf}(X,Y_j)$. Applying the mapping-space Segal condition of [def-coef-left-module-operadic-encoding] first to $Y$, then to $Z$, gives equivalences $M\\to\\prod_{j=1}^kP_j$ and $N\\to\\prod_{l=1}^t\\operatorname{Map}_{\\mathcal E}^{\\bar\\rho_l\\theta f}(X,Z_l)$. Postcomposition with $e_l$ identifies $P_{i(l)}$ with the $l$th factor of the latter product. Indeed an inverse equivalence in the colour fibre induces an inverse on these spaces, with the two inverse homotopies supplied by [lem-coef-infinity-hom-bifunctor-functoriality]; all maps and homotopies stay over the specified base arrow. Regroup the first product as $D_J\\times P_R$, where $D_J=\\prod_{j\\in J}P_j$ and $P_R=\\prod_{j\\in R}P_j$. We obtain equivalences $s:M\\simeq D_J\\times P_R$ and $t:N\\simeq P_R$.",
+   "uses": [
+    "def-coef-left-module-operadic-encoding",
+    "lem-coef-infinity-hom-bifunctor-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.1.1.10(2), Remark 2.1.1.14, and Remarks 4.2.2.18, 4.2.2.21; agent-expanded relative mapping-square calculation."
+   }
+  },
+  {
+   "text": "Under these comparisons, postcomposition $v_*:M\\to N$ is the projection to $P_R$, with its specified commutation homotopy. To check the $l$th coordinate before inverting the $e_l$-comparison, it is enough to compare $q_l(vb)$ and $e_l(p_{i(l)}b)$. Associativity and the triangle $q_lv\\simeq e_lp_{i(l)}$ identify these expressions for every $b$; [lem-coef-infinity-hom-bifunctor-functoriality] gives exactly these composition and naturality homotopies as coherent transformations of spaces. Thus the square with top $v_*$, bottom $\\mathrm{pr}_{P_R}$, and vertical equivalences $s,t$ commutes coherently. Its other coordinate $M\\to D_J$ is precisely projection along the discarded colour arrows.",
+   "uses": [
+    "lem-coef-infinity-hom-bifunctor-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.1.1.10(2), Remark 2.1.1.14, and Remarks 4.2.2.18, 4.2.2.21; agent-expanded relative mapping-square calculation."
+   }
+  },
+  {
+   "text": "Fix $h\\in N$ and write $h_R=t(h)$. Compare the cospans $M\\xrightarrow{v_*}N\\xleftarrow{h}*$ and $D_J\\times P_R\\xrightarrow{\\mathrm{pr}_{P_R}}P_R\\xleftarrow{h_R}*$. Their vertex maps are the equivalences $s,t,\\mathrm{id}_*$, and their span homotopies are the one just constructed and the constant one at $t(h)$. The path-pullback comparison in [lem-coef-infinity-kan-homotopy-coherent-cube-invariance] therefore gives an equivalence of homotopy fibres. Its path coordinate is obtained by applying $t$ to the original compatibility path $vb\\simeq h$ and adjoining the specified commutation homotopy. In particular this step retains the path rather than replacing it by an equality of components. The comparison to $D_J$ is still the discarded-output projection.",
+   "uses": [
+    "lem-coef-infinity-kan-homotopy-coherent-cube-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.1.1.10(2), Remark 2.1.1.14, and Remarks 4.2.2.18, 4.2.2.21; agent-expanded relative mapping-square calculation."
+   }
+  },
+  {
+   "text": "By the degreewise path-fibre definition of [def-cbc-enhanced-diagrams-cones], the fibre of $D_J\\times P_R\\to P_R$ at $h_R$ is exactly $D_J\\times Q$, where $Q=\\{\\gamma:\\Delta^1\\to P_R\\mid\\gamma(1)=h_R\\}$ includes the variable initial point and all higher simplices. The projection to $D_J$ has section given by the constant path at $h_R$. The formula $\\gamma(s)\\mapsto\\gamma(\\max(s,\\tau))$ gives a simplicial contraction of $Q$ to that path: the monotone map $[1]\\times[1]\\to[1]$ defined by maximum induces the required map of simplicial intervals, fixes the endpoint $1$, and at $\\tau=0,1$ gives the identity and the constant path. Apply this contraction on the second factor and the identity on $D_J$. The projection and section are thus simplicial homotopy inverses, so [lem-cbc-simplicial-homotopy-equivalence-weak] proves the required equivalence to $D_J$. This also works for an empty $D_J$ and for an empty set $J$, when its product is a point.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.1.1.10(2), Remark 2.1.1.14, and Remarks 4.2.2.18, 4.2.2.21; agent-expanded relative mapping-square calculation."
+   }
+  },
+  {
+   "text": "The resulting equivalence is the map from the original fibre to $D_J$ that sends $(b,\\gamma)$ to $(p_jb)_{j\\in J}$. It is defined using composition, the supplied projections, and projection off the path coordinate. These are coherent maps by [lem-coef-infinity-hom-bifunctor-functoriality]. Given any coherent parameter diagram of the data and its supplied cocartesian comparisons, the triangles of step 1 are comparisons in the lift categories of [lem-coef-infinity-cocartesian-composition-initiality]; applying the Hom functor retains their higher simplices. The maps to the retained products and the discarded products are consequently coherent natural transformations. Path-fibre formation is the explicit degreewise construction of [def-cbc-enhanced-diagrams-cones], so restriction in every simplicial parameter commutes with this map. Steps 4 and 5 prove it is an equivalence at every value; choices of inverses there are used only to verify this property. Hence no additional coherent inverse choices are needed to define the natural equivalence. For changes of colour projections with their cocartesian comparisons, the same triangles give its asserted compatibility.",
+   "uses": [
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.1.1.10(2), Remark 2.1.1.14, and Remarks 4.2.2.18, 4.2.2.21; agent-expanded relative mapping-square calculation."
+   }
+  },
+  {
+   "text": "For the final interpretation, apply [lem-coef-infinity-arrow-morphism-square] to the objects $u:X\\to Z_0$ and $v:Y\\to Z$ in $\\operatorname{Arr}(\\mathcal E)$. Its endpoint-compatible equivalence describes a morphism from $u$ to $v$ as $(b:X\\to Y,\\ a':Z_0\\to Z,\\ \\gamma:vb\\simeq a'u)$, including all higher simplices. Fixing $a'=a$ gives the fibre of $v_*$ at $au$. Apply the same formula to $L$ and use its naturality under $r$ to restrict to the specified base square with edges $f,g,\\eta,\\theta$. Because $L$ is the nerve of an ordinary category, its mapping spaces are discrete: a simplex with fixed endpoints is determined by its one arrow (all initial-face edges are identities). Thus over those four fixed arrows there is exactly the constant base compatibility when $\\theta f=g\\eta$, and no other base path is introduced. The remaining data are exactly $b$ over $f$ and its path $vb\\simeq au$ relative to that square. This is the left side with $h=au$, and its discarded-output map is the one already proved to be an equivalence.",
+   "uses": [
+    "lem-coef-infinity-arrow-morphism-square",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/06BZ",
+    "place": "Theorem 8.3.7.1, arrow-category specialization, as stated in lem-coef-infinity-arrow-morphism-square; restriction over the fixed ordinary base square is the explicit agent calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-left-module-operadic-encoding",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-infinity-arrow-morphism-square",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-infinity-kan-homotopy-coherent-cube-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Explicit relative proof from Definition 2.1.1.10(2) and Remark 2.1.1.14, with the coherent-square interpretation from Kerodon 06BZ. Both read online; archival copies WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +146,31 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Limits.prod.lift_fst_comp_snd_comp\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts\", \"type\": \"{W X Y Z : C} [HasBinaryProduct W Y] [HasBinaryProduct X Z] (g : W ⟶ X) (g' : Y ⟶ Z) :\\n  prod.lift (prod.fst ≫ g) (prod.snd ≫ g') = prod.map g g'\", \"doc\": \"In a category $\\\\mathcal{C}$ with binary products, for objects $W, X, Y, Z$ and morphisms $g : W \\\\to X$, $g' : Y \\\\to Z$, the morphism obtained by lifting the compositions $\\\\text{fst} \\\\circ g$ and $\\\\tex\"}\n  {\"name\": \"CategoryTheory.CartesianMonoidalCategory.lift_comp_fst_snd\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Basic\", \"type\": \"{X Y Z : C} (f : X ⟶ Y ⊗ Z) : lift (f ≫ fst _ _) (f ≫ snd _ _) = f\", \"doc\": \"In a Cartesian monoidal category $\\\\mathcal{C}$, for any morphism $f: X \\\\to Y \\\\times Z$, the unique lift of the compositions $f \\\\circ \\\\pi_1$ and $f \\\\circ \\\\pi_2$ (where $\\\\pi_1, \\\\pi_2$ are the canonical \"}\n  {\"name\": \"CategoryTheory.Limits.Pi.lift_π_assoc\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Products\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {β : Type w} {f : β → C}\\n  [inst_1 : CategoryTheory.Limits.HasProduct f] {P : C} (p : (b : β) → P ⟶ f b) (b : β) {Z : C} (h : f b ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (CategoryTheory.Limits.Pi.lift p)\\n      (CategoryTheory.CategoryStruct\", \"doc\": \"In a category $\\\\mathcal{C}$ with products, for any family of objects $f : \\\\beta \\\\to \\\\mathcal{C}$ and an object $P$ with morphisms $p_b : P \\\\to f(b)$ for each $b : \\\\beta$, the composition of the lifted\"}\n  {\"name\": \"CategoryTheory.Limits.biproduct.lift_π\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Biproducts\", \"type\": \"{f : J → C} [HasBiproduct f] {P : C} (p : ∀ b, P ⟶ f b) (j : J) : biproduct.lift p ≫ biproduct.π f j = p j\", \"doc\": \"In a category $\\\\mathcal{C}$ with biproducts, for a diagram $F : J \\\\to \\\\mathcal{C}$ and an object $P$ with morphisms $p_b : P \\\\to F(b)$ for all $b \\\\in J$, the composition of the lift morphism $\\\\text{li\"}\n  {\"name\": \"CategoryTheory.Equalizer.Presieve.Arrows.firstMap\", \"module\": \"Mathlib.CategoryTheory.Sites.EqualizerSheafCondition\", \"type\": \": FirstObj P X ⟶ SecondObj P X π\", \"doc\": \"The morphism from the product $\\\\prod_i P(\\\\text{op}(X_i))$ to the product $\\\\prod_{i,j} P(\\\\text{op}(P_i \\\\times_B P_j))$ constructed by lifting projections through the pullback's first component. For eac\"}\n  {\"name\": \"CategoryTheory.Limits.Fan.IsLimit.lift_proj_assoc\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Products\", \"type\": \"∀ {β : Type w} {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X : β → C} {c : CategoryTheory.Limits.Fan X}\\n  (d : CategoryTheory.Limits.Fan X) (hc : CategoryTheory.Limits.IsLimit c) (i : β) {Z : C} (h : X i ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (hc.lift d) (CategoryTheory.CategoryStruc\", \"doc\": \"For any type $\\\\beta$, category $\\\\mathcal{C}$, diagram $X : \\\\beta \\\\to \\\\mathcal{C}$, limit cone $c$ over $X$, another cone $d$ over $X$, and morphism $h : X(i) \\\\to Z$ in $\\\\mathcal{C}$, the composition o\"}\n  {\"name\": \"CategoryTheory.CommSq.LiftStruct.opEquiv_symm_apply\", \"module\": \"Mathlib.CategoryTheory.CommSq\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A B X Y : C} {f : A ⟶ X} {i : A ⟶ B} {p : X ⟶ Y}\\n  {g : B ⟶ Y} (sq : CategoryTheory.CommSq f i p g) (l : ⋯.LiftStruct),\\n  (CategoryTheory.CommSq.LiftStruct.opEquiv sq).symm l = l.unop\", \"doc\": \"Applying the inverse of the lifting structure equivalence between a commutative square and its opposite category to a lifting structure $ l $ yields the projection of $ l $ back to the original catego\"}\n  {\"name\": \"CategoryTheory.Limits.Pi.lift_π\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Products\", \"type\": \"{β : Type w} {f : β → C} [HasProduct f] {P : C} (p : ∀ b, P ⟶ f b) (b : β) : Pi.lift p ≫ Pi.π f b = p b\", \"doc\": \"For a family of objects $f(b)$ in a category $\\\\mathcal{C}$ with product $\\\\prod_{\\\\beta} f(b)$, and for any object $P$ with morphisms $p_b: P \\\\to f(b)$, the composition of the lifted morphism $P \\\\to \\\\pr\"}\n",
    "date": "2026-10-17",
    "verdict": "no match: inspected the hits; ordinary categorical module objects, strict Segal nerves, ordinary product identities and simplicial-set endofunctors do not state the relative infinity-operadic assertion. Read Mod.lean:21-66, StrictSegal.lean:520-537 and Monoidal/Cartesian/Basic.lean:270-278. The second semantic phrasing also gives no match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy fiber of postcomposition by an inert operadic projection is a product of discarded output operation spaces",
+   "results": "OK 8 hits; leading declarations: HomotopicalAlgebra.CofibrantObject.instIsStableUnderPostcompHomRel, HomologicalComplex.homotopyCofiber.inrX_sndX_assoc, HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations, SSet.Truncated.HomotopyCategory.BinaryProduct.inverse_comp_mapHomotopyCategory_fst, HomotopicalAlgebra.Cylinder.LeftHomotopy.postcomp, HomotopicalAlgebra.instFibrationFstOfIsFibrant, HomotopicalAlgebra.instIsMultiplicativeFibrations, HomotopicalAlgebra.instFibrationMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations",
+   "date": "2026-10-17",
+   "verdict": "no match: returned strict Segal simplicial-set identities, ordinary functors, model-category fibrations and complex-homotopy identities do not state the relative coloured operadic mapping-space assertion. Read SimplicialSet/Coskeletal.lean:88-108,169-176; StrictSegal.lean:353-359,525-537; Basic.lean:73-85. Two semantic phrasings were tried."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an infinity operad postcomposition with an inert cocartesian projection is the projection of the product decomposition of mapping spaces",
+   "results": "OK 8 hits; leading declarations: SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂, SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃, SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁, SSet.ι₀_snd, SSet.ι₁_snd, SSet.ι₀_snd_assoc, SSet.ι₁_snd_assoc, SSet.ι₀_fst_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: returned strict Segal simplicial-set identities, ordinary functors, model-category fibrations and complex-homotopy identities do not state the relative coloured operadic mapping-space assertion. Read SimplicialSet/Coskeletal.lean:88-108,169-176; StrictSegal.lean:353-359,525-537; Basic.lean:73-85. Two semantic phrasings were tried."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Segal decomposition of operadic mapping spaces turns an inert output map into restriction to retained coordinates and its homotopy fibers into complementary products",
+   "results": "OK 8 hits; leading declarations: SSet.StrictSegal.spineToSimplex_interval, CategoryTheory.Nerve.strictSegal, SSet.Truncated.StrictSegal.spineToSimplex_interval, SSet.StrictSegal.spineToSimplex_arrow, SSet.StrictSegalCore.map_mkOfSucc_zero_concat, SSet.StrictSegalCore.concat, SSet.StrictSegalCore.spineToSimplexAux, SSet.Truncated.StrictSegal.spineToDiagonal",
+   "date": "2026-10-17",
+   "verdict": "no match: returned strict Segal simplicial-set identities, ordinary functors, model-category fibrations and complex-homotopy identities do not state the relative coloured operadic mapping-space assertion. Read SimplicialSet/Coskeletal.lean:88-108,169-176; StrictSegal.lean:353-359,525-537; Basic.lean:73-85. Two semantic phrasings were tried."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-coherent-module-section-model",
@@ -78,5 +195,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-inert-projection-square-fibres",
+  "worker": "stage1",
+  "summary": "Proved the relative inert mapping-square fibre formula in seven steps without changing its statement. Reused the operadic mapping-space Segal axiom, cocartesian composition and lift comparisons, coherent Hom functoriality, coherent path-pullback invariance and the arrow mapping formula. Wrote the terminal-path contraction explicitly; kept compatibility paths, parameter simplices, arbitrary f and all empty cases. No new nodes or Mathlib leaves.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2: the coherent middle mapping-complex comparison, through the recorded ancestry down to lem-coef-coherent-module-section-model. This item supplies that section-model proof steps 4 and 5, the hidden inert projection calculation; it leaves the unit route unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "The generic realization consequence of an explicit simplicial homotopy inverse is used solely for the path-factor contraction; it replaces no unit route step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-d66aa836b",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-d66aa836b (reviewer sub-agent of L); spot-checked: PASS: I read the whole item. No faults, no fixes; review.md is in the run directory. STATEMENT: the hypotheses are exactly those of def-coef-left-module-operadic-encoding: an operadic fibration with only inert cocartesian lifts, f arbitrary, theta inert, v a cocartesian lift of theta, Map^b a homotopy fibre over b. I tested the cases theta=id (J empty, so the fibre is a point), target <0> (N contractible, every output discarded), k=0, an empty P_j (both sides empty) and a discrete coloured operad. The square orientation and the path direction vb to au agree with lem-coef-infinity-arrow-morphism-square. DUPLICATES: searched dag/nodes with rg for inert/discard near fibre and for hofib (about 50 hits); none states this relative LM fibre formula. STEPS: (1) the morphism conditions of LM force each retained output to keep its colour, and rho-bar_l theta equals rho_{i(l)} as base arrows; the 2-out-of-3 and initial-lift comparison clauses of cocartesian-composition-initiality give e_l and its triangle. (2) The mapping-space Segal clause applied to Y and Z, plus inversion of e_l over an identity via Hom-bifunctor, gives s and t. (3) Associativity and the triangle make v_* the projection, coherently. (4) The coherent-cube node compares the cospans; its auxiliary squares can be taken trivially (for example A=A'=empty), and h_R=t(h) holds strictly. (5) I checked the contraction by max(s,tau): it is monotone on [1]x[1], fixes the endpoint, and gives the identity at tau=0 and the constant path at tau=1; lem-cbc-simplicial-homotopy-equivalence-weak needs no Kan or nonempty hypothesis. (6) The natural map (b,gamma) to (p_j b) involves no choice of inverses. (7) The strict fibre over a of the path-pullback is exactly hofib_{au}(v_*); Arr(L) has discrete homotopy pullbacks, so no base path appears. ROUTE: no cycle (traversed 390 nodes). Every cited statement is in unit sk-prop-sf-biduality-general except lem-cbc-simplicial-homotopy-equivalence-weak; I accept that as a tool use, since it is a generic black box and 29 nodes already cite it. Not a target node, so the base-change and coefficient-category check does not apply. No SGA cited. SOURCES: Higher Algebra (Def. 2.1.1.10(2)) and Kerodon 06BZ are online only; WANTED is recorded and proof_origin is agent, which is correct."
  }
 }

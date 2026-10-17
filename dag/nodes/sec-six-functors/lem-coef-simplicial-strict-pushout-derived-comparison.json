@@ -12,9 +12,166 @@
   "lem-coef-simplicial-interval-lifting",
   "lem-coef-simplicial-derived-pushout-mapping"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The model structure in [lem-coef-simplicial-inversion-universal-property] has the generating cofibrations $I$ of [lem-coef-simplicial-interval-lifting]. The discrete walking arrow is $[1]=U(\\Delta^0)$. Its initial map is a composite of two new-object attachments $\\varnothing\\to\\{0\\}$, followed by the boundary-arrow attachment $U(\\partial\\Delta^0)=U(\\varnothing)\\to U(\\Delta^0)$. Thus $[1]$ is cofibrant. More explicitly, $U(\\varnothing)$ is the discrete category on two objects; the last attachment freely adjoins the one arrow, with no composable nonidentity pair. Generating cofibrations and their pushouts are cofibrations, and compositions are cofibrations by [lem-coef-lifting-class-closure]. For any trivial fibration, a lifting square against $\\varnothing\\to A$ is precisely one independent lifting square against $\\varnothing\\to[1]$ for each $v\\in V$. Choose these lifts and take their coproduct. The identical componentwise argument applied to $i:[1]\\to K$ shows that $j=\\coprod_Vi:A\\to B$ is a cofibration. Hence $A$ is cofibrant and $B$ is cofibrant by composition. This argument concerns disjoint source summands; it imposes no condition on their images in $D$.",
+   "uses": [
+    "lem-coef-simplicial-inversion-universal-property",
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.2.4(C) and the preceding generators, printed p.858; A.3.5.1, printed pp.891–892; elementary cell and lifting calculation"
+   }
+  },
+  {
+   "text": "Write $a:A\\to D$ for the specified attaching functor. Apply the functorial cofibration--trivial-fibration factorization of [lem-coef-reedy-model-structure] to obtain $A\\xrightarrow{k}\\widetilde D\\xrightarrow{p}D$, with $pk=a$, $k$ a cofibration and $p$ a trivial fibration. Since $A$ is cofibrant, composition closure [lem-coef-lifting-class-closure] makes $\\widetilde D$ cofibrant. Consequently $\\widetilde D\\leftarrow A\\xrightarrow{j}B$ consists of three cofibrant objects and two cofibrations. Its map $(p,1_A,1_B)$ to the original span is an objectwise weak equivalence. It is therefore a cofibrant replacement of that span in the convention of [lem-coef-simplicial-derived-pushout-mapping]. Set $H=\\widetilde D\\amalg_A B$; it represents the derived pushout. In particular no cofibrancy assumption on $D$ has entered.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-lifting-class-closure",
+    "lem-coef-simplicial-derived-pushout-mapping"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark A.3.5.2 and the cofibrant-source reduction in the proof of A.3.5.5; explicit relative factorization realizing that reduction"
+   }
+  },
+  {
+   "text": "Let $s:\\widetilde D\\to H$ and $t:D\\to P$ be the coprojections, and let $c:H\\to P$ be induced by $p,1_B$. The map $s$ is the pushout of the cofibration $j$ and hence a cofibration [lem-coef-lifting-class-closure]. The colimit universal property [def-weil-pbc-category-colimit] gives $P\\cong D\\amalg_{\\widetilde D}H$: compatible functors from $H,D$ are exactly compatible functors from $B,D$ agreeing on $A$. Use the generating family $I$ and its small-object factorization in [lem-coef-simplicial-interval-lifting]. Since the Bergner cofibrations are $I\\text{-cof}$ [lem-coef-simplicial-inversion-universal-property], $s$ is an arrow retract, with domain fixed, of an $I\\text{-cell}$ map $\\widetilde D\\to E$. Explicitly factor $s=qb$ with $b$ an $I\\text{-cell}$ map and $q$ $I\\text{-inj}$; lifting $s$ against $q$ gives $h:H\\to E$ with $hs=b$ and $qh=1_H$. We will prove that $E\\to D\\amalg_{\\widetilde D}E$ is a Dwyer--Kan equivalence.",
+   "uses": [
+    "lem-coef-lifting-class-closure",
+    "def-weil-pbc-category-colimit",
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-simplicial-inversion-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.2.4(C), retract-of-cell reduction; A.3.5.2 comparison square"
+   }
+  },
+  {
+   "text": "Well-order the cells in each coproduct of the chosen $I\\text{-cell}$ presentation and attach them one at a time. The colimit of these successive attachments is the simultaneous attachment, since a functor out of either is exactly an old functor and one extension per labelled cell [def-weil-pbc-category-colimit]. Write the resulting small continuous ordinal sequence as $C_0=\\widetilde D$, $C_\\theta=E$. Put $D_\\alpha=D\\amalg_{\\widetilde D}C_\\alpha$ and $v_\\alpha:C_\\alpha\\to D_\\alpha$. Universal properties make the second sequence continuous and identify each successor with the corresponding generator attached to $D_\\alpha$. We prove by ordinal induction that $v_\\alpha$ is a Dwyer--Kan equivalence; at zero it is $p$. For an isolated-object generator both categories acquire one new isolated object: its endomorphisms are $\\Delta^0$, all mixed mapping sets are empty, and its image is the new object. Thus the old local weak equivalences and essential-surjectivity witnesses, together with the identity of the new object, prove the inductive assertion in this case, by the Dwyer--Kan criterion of [lem-coef-simplicial-interval-cell-stability].",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-coef-simplicial-interval-cell-stability"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.2.4, printed pp.858–859, new-object case; explicit induction for the selected cell presentation"
+   }
+  },
+  {
+   "text": "For a boundary-arrow generator write $C=C_\\alpha$, $D'=D_\\alpha$, $v=v_\\alpha$, $O=\\operatorname{Ob}C$, $K_0=\\partial\\Delta^n$, $L=\\Delta^n$, and let $x,y\\in O$ be its endpoints. Form a category $Z$ with objects $O$ and $Z(w,z)=D'(vw,vz)$, with composition and identities from $D'$. Then $C\\to Z$ fixes objects and is a weak equivalence in $\\mathrm{sCat}_O$, since $v$ is locally a weak equivalence. The free-arrow adjunction [lem-coef-fixed-object-free-arrow-adjunction] identifies lifting against $F^O_{x,y}(K_0)\\to F^O_{x,y}(L)$ with boundary lifting in a specified mapping set. Every objectwise trivial Kan fibration has these lifts by [lem-coef-kan-quillen-right-proper]; hence that free-arrow map is a cofibration under the explicit fixed-object convention of [lem-coef-fixed-object-scat-left-proper]. Its pushout $C\\to C^+$ is a cofibration by [lem-coef-lifting-class-closure]. Here the fixed-object pushouts $C^+,Z^+$ agree with the corresponding $U(K_0)\\to U(L)$ attachments in variable-object simplicial categories by [lem-coef-scat-fixed-object-pushout-comparison]. Now fixed-object left properness [lem-coef-fixed-object-scat-left-proper] applied to $C\\to Z$ gives a local weak equivalence $C^+\\to Z^+$.",
+   "uses": [
+    "lem-coef-fixed-object-free-arrow-adjunction",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-fixed-object-scat-left-proper",
+    "lem-coef-lifting-class-closure",
+    "lem-coef-scat-fixed-object-pushout-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.2.4, printed pp.859–860, boundary-arrow case; fixed-object reduction of its mapping-space calculation"
+   }
+  },
+  {
+   "text": "Let $(D')^+$ be the same arrow attachment to $D'$ at $vx,vy$. For every $w,z\\in O$, the functor $Z^+\\to(D')^+$ induces an isomorphism of mapping simplicial sets from $(w,z)$ to $(vw,vz)$. Indeed apply the quotient-of-words statement of [lem-coef-scat-arrow-cell-word-filtration]. The length-zero terms are equal by definition of $Z$. For length $k\\geq1$, each old factor $Z(y,z)$, $Z(y,x)$, $Z(w,x)$ equals respectively $D'(vy,vz)$, $D'(vy,vx)$, $D'(vw,vx)$. The new factors are the same $L$, and the reduction relations are identical because composition in $Z$ is composition in $D'$. Hence the entire coproduct and its equivalence relation agree, even if $v$ identifies endpoints. Composing with the local weak equivalence in step 5 makes $C^+\\to(D')^+$ locally a weak equivalence. Arrow attachment adds no objects. Every object of $D'$ has an isomorphism in $\\pi_0D'$ to some $vw$ by induction; its image and inverse remain inverse after attachment. This proves essential surjectivity and hence the successor Dwyer--Kan equivalence [lem-coef-simplicial-interval-cell-stability].",
+   "uses": [
+    "lem-coef-scat-arrow-cell-word-filtration",
+    "lem-coef-simplicial-interval-cell-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.2.4, printed pp.859–860, explicit identical word presentations and essential-surjectivity argument"
+   }
+  },
+  {
+   "text": "At a nonzero limit $\\lambda\\leq\\theta$, the categories are unions of object sets and degreewise unions of mapping sets once each pair of objects has appeared. At successors the transitions are injective on objects and on old mapping sets: this is direct for an isolated object and is stated for arrow attachments in [lem-coef-scat-arrow-cell-word-filtration]. The union is a category because any finite list of objects or simplices appears at one common stage, where composition, identities and their equations are already defined. Its functors are exactly compatible stage functors, verifying the colimit property [def-weil-pbc-category-colimit]. Thus, for any two objects of $C_\\lambda$, choose a stage $\\beta<\\lambda$ containing both. Their mapping sets on the tail $[\\beta,\\lambda)$, and those of their images in $D_\\lambda$, form filtered diagrams; the maps are weak equivalences by induction. Apply [lem-coef-filtered-colimit-weak-equivalences] to obtain the required local weak equivalence at $\\lambda$. Each object of $D_\\lambda$ occurs at a stage and its essential-surjectivity witness there maps to a witness in the union. This proves the limit Dwyer--Kan equivalence [lem-coef-simplicial-interval-cell-stability]. Ordinal induction therefore gives the assertion at $\\theta$.",
+   "uses": [
+    "lem-coef-scat-arrow-cell-word-filtration",
+    "def-weil-pbc-category-colimit",
+    "lem-coef-filtered-colimit-weak-equivalences",
+    "lem-coef-simplicial-interval-cell-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark A.3.2.3 and Proposition A.3.2.4; continuous ordinal induction and filtered mapping-set colimits"
+   }
+  },
+  {
+   "text": "The maps $h:H\\to E$ and $q:E\\to H$ from step 3 commute with the maps from $\\widetilde D$ and satisfy $qh=1_H$. Pushout with $D$ gives maps $P\\to D\\amalg_{\\widetilde D}E\\to P$ with composite the identity, by uniqueness after restriction to $D$ and $H$ [def-weil-pbc-category-colimit]. Along with $h,q$, these exhibit $c:H\\to P$ as an arrow retract of the map $E\\to D\\amalg_{\\widetilde D}E$ proved a Dwyer--Kan equivalence in steps 4–7. Dwyer--Kan equivalences are retract closed by the statement of [lem-coef-simplicial-interval-cell-stability]. Thus $c$ is a Dwyer--Kan equivalence.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-coef-simplicial-interval-cell-stability"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.2.4(C), retract completion of the cell argument; Remark A.3.5.2"
+   }
+  },
+  {
+   "text": "In $h\\mathrm{sCat}$ the map $p$ is invertible, since this category is localization at Dwyer--Kan equivalences [lem-coef-simplicial-derived-pushout-mapping]. Equip $H$ with the derived structure morphism $u=s\\circ p^{-1}:D\\to H$. The strict equality $c\\circ s=t\\circ p$ gives $c\\circ u=t$. Hence the already invertible $c$ is a morphism under $D$, and its inverse is also under $D$, since $c^{-1}\\circ t=u$. This establishes the asserted isomorphism under $D$ for the displayed representative of the derived pushout. The convention and replacement-independence in [lem-coef-simplicial-derived-pushout-mapping] identify it with the canonical comparison for the derived pushout.",
+   "uses": [
+    "lem-coef-simplicial-derived-pushout-mapping"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.5.1–A.3.5.2; elementary localization of the comparison square, keeping its cocone"
+   }
+  },
+  {
+   "text": "For a map of labelled spans write its component functors as $f_D,f_A,f_B$. Functorial factorization of their commutative square $a\\to a'$ gives $\\widetilde f_D:\\widetilde D\\to\\widetilde D'$ with $\\widetilde f_D k=k'f_A$ and $p'\\widetilde f_D=f_Dp$ [lem-coef-reedy-model-structure]. The pushout universal property [def-weil-pbc-category-colimit] gives $f_H:H\\to H'$ and $f_P:P\\to P'$. Their restrictions to $\\widetilde D$ and $B$ show $c'f_H=f_Pc$: on $\\widetilde D$ this is the preceding equation for $p$, and on $B$ it is the common coprojection after $f_B$. Uniqueness in that universal property proves equality and its compatibility with identities and composition. Inverting $p,p'$ gives $p'^{-1}f_D=\\widetilde f_Dp^{-1}$, so $f_Hu=u'f_D$ as well. This is naturality under the changing source category. The maps of derived pushouts are precisely those supplied by the chosen functorial replacements; [lem-coef-simplicial-derived-pushout-mapping] supplies their replacement-independent interpretation in $h\\mathrm{sCat}$.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "def-weil-pbc-category-colimit",
+    "lem-coef-simplicial-derived-pushout-mapping"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.5.1, the functorial pushout construction; explicit comparison-square naturality in A.3.5.2"
+   }
+  },
+  {
+   "text": "If $V=\\varnothing$, then $A=B=\\varnothing$, $P=D$, $H=\\widetilde D$, $c=p$ and $u=p^{-1}$; the assertions reduce to the replacement isomorphism. For arbitrary nonempty small $V$, step 1 uses a small set of independent lifting problems. Step 2 factors every attaching functor, without an injectivity condition on objects or arrows. Steps 5–6 explicitly allow $x=y$ and $vx=vy$, so repeated labelled arrows, coincident endpoints, loops and identity attaching arrows are included. No mapping set is assumed Kan in the fixed-object left-properness theorem. Thus all the claimed degenerate and nonfibrant cases are covered by the same construction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.5.1: an arbitrary set and an arbitrary map to the set of arrows; small and degenerate cases of the construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-coef-filtered-colimit-weak-equivalences",
+  "lem-coef-fixed-object-free-arrow-adjunction",
+  "lem-coef-fixed-object-scat-left-proper",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-scat-arrow-cell-word-filtration",
+  "lem-coef-scat-fixed-object-pushout-comparison",
+  "lem-coef-simplicial-derived-pushout-mapping",
+  "lem-coef-simplicial-interval-cell-stability",
+  "lem-coef-simplicial-interval-lifting",
+  "lem-coef-simplicial-inversion-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Second paragraph, derived coefficient-adjunction foundation through the existing simplicial-localization ancestry. HTT A.3.5.1–A.3.5.2 comparison expanded by relative factorization and the A.3.2.4 cell argument, using existing acyclic fixed-object left properness and word presentation statements; HTT read online, local archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -36,10 +193,46 @@
    "results": "{\"t\": \"2026-10-17T15:10:19Z\", \"tool\": \"grep\", \"query\": \"ordinary.*derived.*pushout|strict.*localization|A\\\\\\\\.3\\\\\\\\.5\\\\\\\\.5\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Prod.lean\", \"Mathlib/CategoryTheory/Localization/Predicate.lean\"], \"digest\": \"2e25785f5b927cfc\"}",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*pushout|derived.*pushout|Bergner|left.?proper",
+   "results": "{\"t\": \"2026-10-17T15:47:42Z\", \"tool\": \"grep\", \"query\": \"homotopy.*pushout|derived.*pushout|Bergner|left.?proper\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean\"], \"digest\": \"6c65635d1779c527\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic model-category or cofibrant-localization results; no Bergner strict interval-pushout comparison",
+   "subdirectory": "AlgebraicTopology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "ordinary pushout along a cofibration computes homotopy pushout in a left proper model category",
+   "results": "{\"t\": \"2026-10-17T15:47:42Z\", \"tool\": \"leansearch\", \"query\": \"ordinary pushout along a cofibration computes homotopy pushout in a left proper model category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceInlOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.instWeakEquivalenceInrOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.ModelCategory.categoryWithCofibrations\", \"CategoryTheory.IsPushout.isColimit\", \"HomotopicalAlgebra.instCofibrationInrOfIsStableUnderCobaseChangeCofibrations\", \"HomotopicalAlgebra.AttachCells.pushouts_coproducts\"], \"digest\": \"a6f445e98937262d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic model-category or cofibrant-localization results; no Bergner strict interval-pushout comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.ModelCategory, CategoryTheory.Limits.pushout",
+   "results": "{\"t\": \"2026-10-17T15:47:42Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.ModelCategory, CategoryTheory.Limits.pushout\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.Cylinder.trans_I\", \"HomotopicalAlgebra.Cylinder.trans_π\", \"HomotopicalAlgebra.Cylinder.trans_i₀\", \"HomotopicalAlgebra.Cylinder.trans_i₁\"], \"digest\": \"b5dc36bf29a0e0ee\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic model-category or cofibrant-localization results; no Bergner strict interval-pushout comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a left proper model category a span with cofibrant central object and one cofibration computes the homotopy pushout by the ordinary pushout even when the other object is not cofibrant",
+   "results": "{\"t\": \"2026-10-17T15:47:43Z\", \"tool\": \"leanfinder\", \"query\": \"In a left proper model category a span with cofibrant central object and one cofibration computes the homotopy pushout by the ordinary pushout even when the other object is not cofibrant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.Cylinder.trans_I\", \"HomotopicalAlgebra.instWeakEquivalenceInrOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.instCofibrationInrOfIsCofibrant\", \"HomotopicalAlgebra.instWeakEquivalenceInlOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.instCofibrationInrOfIsStableUnderCobaseChangeCofibrations\", \"HomotopicalAlgebra.instCofibrationInlOfIsStableUnderCobaseChangeCofibrations\", \"HomotopicalAlgebra.instCofibrationInlOfIsCofibrant\"], \"digest\": \"3ee7ed0a4e6e8542\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic model-category or cofibrant-localization results; no Bergner strict interval-pushout comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bergner simplicial category strict localization by adjoining inverses is homotopy invariant under cofibrant replacement and is a homotopy pushout",
+   "results": "{\"t\": \"2026-10-17T15:47:54Z\", \"tool\": \"leanfinder\", \"query\": \"Bergner simplicial category strict localization by adjoining inverses is homotopy invariant under cofibrant replacement and is a homotopy pushout\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.HoCat\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\", \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\"], \"digest\": \"c9f8085714a3c2c2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic model-category or cofibrant-localization results; no Bergner strict interval-pushout comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-arrow-attachment-localization",
@@ -73,5 +266,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-strict-pushout-derived-comparison",
+  "worker": "stage1",
+  "summary": "Eleven steps: explicit cofibrant interval coproduct, relative replacement, retract-of-cell presentation of the comparison, isolated-object and boundary-arrow successors using fixed-object left properness and identical word quotients, filtered limit stages, retract completion, under-D equation, naturality and degenerate cases. No new nodes and no statement change. First dry run exposed cycles through global left properness and derived-adjunction foundations; replaced both citations by existing acyclic lower-level statements and expanded the needed cell argument.",
+  "blueprint": "Paragraph 2 and the displayed derived coefficient-adjunction/inverse-limit calculation of prop-coef-integral-exceptional-adjoint, through the recorded ancestry. Steps 1–8 supply the strict-versus-derived interval comparison (HTT A.3.5.1–A.3.5.2, expanded with A.3.2.4); steps 9–11 retain the cocone, natural maps and all labels."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N6-627f08abe",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-627f08abe (reviewer sub-agent of L); spot-checked: I read the item and all 13 cited statements in full and checked every step against them. The delivery adds no new nodes and leaves the statement unchanged. proof_deps equals the union of the step uses. All dependencies exist, none is merged, and all are in unit sk-prop-sf-biduality-general apart from def-weil-pbc-category-colimit, which is a definition and not part of the route. No tool_uses are needed. A BFS over 252 nodes reached from the dependencies finds no path back to the item. I confirmed that the global left-properness node lem-coef-scat-bergner-left-proper-pushouts depends on this item, so it could not be cited. The statement is true: it is Bergner left properness along j, which is a coproduct of cofibrations. I tested it with V empty (P=D), with D=[1] and a=id (P=K), and with loops or coincident endpoints. Step checks: (1) [1]=U(Δ0) is cofibrant from the generators in I, and coproduct lifting splits by components. (2) The functorial (C,F∩W) factorization comes from the model-category definition in the statement of the Reedy node. The span D̃←A→B satisfies the cofibrant-span convention of the derived-pushout node without assuming D cofibrant. (3) The lift of s=qb against the I-inj map q gives hs=b and qh=1, so s is a retract of an I-cell map with fixed domain. (4) The isolated-object successor case is correct. (5) Free-arrow adjunction plus boundary lifting gives a fixed-object cofibration. Fixed-object left properness applied to C→Z then gives C+→Z+; the pushouts are pasted correctly and agree with the variable-object attachments. (6) The word presentations of Z+ and (D')+ are identical factor by factor and relation by relation, even when v identifies objects, and essential surjectivity carries over. (7) At limit stages the transitions are injective, and the filtered-colimit lemma applies. (8) Retract closure of W makes c a Dwyer–Kan equivalence. (9) c∘u=t holds under D. (10) Naturality holds: f_H u = u' f_D after inverting p'. (11) The degenerate cases are covered. The source is HTT A.3.2.4 and A.3.5.1–A.3.5.5, which is not in literature/; the proof is marked agent-written and the report carries a WANTED line. No SGA source is used. I made no fixes and accepted no tool_uses."
  }
 }

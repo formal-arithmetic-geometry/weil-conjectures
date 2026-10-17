@@ -85,15 +85,38 @@
    }
   },
   {
-   "text": "For composable $\\alpha:\\langle n\\rangle\\to\\langle m\\rangle$ and $\\beta:\\langle m\\rangle\\to\\langle\\ell\\rangle$, let the block maps be $u_j:\\prod_{\\alpha(i)=j}c_i\\to d_j$ and $v_k:\\prod_{\\beta(j)=k}d_j\\to e_k$. On the indexing category over $[2]$, restriction of the exponential diagram gives at a final singleton $\\{k\\}$ the composite from the inverse image under $\\beta\\alpha$, through the value at $\\beta^{-1}\\{k\\}$ in the middle diagram, to $e_k$. The right-Kan mapping formula of [lem-coef-infinity-finite-poset-kan-extension] identifies the middle transformation, including its restriction maps, with its singleton components $u_j$. Consequently the composite block is\n$$\\prod_{\\beta(\\alpha(i))=k}c_i\\simeq\\prod_{\\beta(j)=k}\\prod_{\\alpha(i)=j}c_i\\xrightarrow{\\prod_j u_j}\\prod_{\\beta(j)=k}d_j\\xrightarrow{v_k}e_k.$$\nThe regrouping is the comparison preserving every original factor projection. An index sent to $*$ by either map occurs in no non-basepoint output block. This computes composition inside $P$ itself. By [lem-cbc-enhanced-relative-exponential] the simplicial operators are pullback and restriction. Explicitly, over a chain $\\sigma=(\\alpha_1,\\ldots,\\alpha_r)$ a simplex is a diagram $H$ on pairs $(t,S)$, $0\\leq t\\leq r$, with a crossing arrow $(t,S)\\to(u,T)$ precisely when $(\\alpha_u\\cdots\\alpha_{t+1})^{-1}T\\subseteq S$. For a monotone map $\\theta:[s]\\to[r]$, the restricted diagram has value $H(\\theta(t),S)$ and sends its crossing arrow to the crossing arrow of $H$ with those endpoints; the base arrow is $\\alpha_{\\theta(u)}\\cdots\\alpha_{\\theta(t)+1}$. A face deleting a middle vertex therefore composes the corresponding base maps and uses the triangle already in $H$; a degeneracy repeats a vertex and inserts an identity. The equality $(\\gamma\\beta)^{-1}T=\\beta^{-1}(\\gamma^{-1}T)$ identifies the subsets in these restrictions. Applying the natural right-Kan mapping equivalence to these actual restrictions supplies the block formulas and their higher homotopies on every face and degeneracy. The coherent homotopies here are those already present in the given simplex of $P\\subseteq Q$ and the natural mapping equivalences, with no comparison to another total category.",
+   "text": "Let $\\alpha:\\langle n\\rangle\\to\\langle m\\rangle$ and $\\beta:\\langle m\\rangle\\to\\langle\\ell\\rangle$ be composable, and write their block maps as $u_j:\\prod_{\\alpha(i)=j}c_i\\to d_j$ and $v_k:\\prod_{\\beta(j)=k}d_j\\to e_k$. Restrict the relative-exponential diagram over $[2]$ to the chain of cartesian indexing arrows ending at the final singleton $\\{k\\}$. The middle value is $g(\\beta^{-1}\\{k\\})$. The natural right-adjunction mapping equivalence of [lem-coef-infinity-finite-poset-kan-extension], applied to the transformation $\\alpha_!f\\to g$, computes its component at this subset from its singleton components: composing with the projection to $d_j$ gives $u_j$ after restriction to $f(\\alpha^{-1}\\{j\\})$. Thus the product universal property identifies that component with the product of the $u_j$, and the long edge has block\n$$\\prod_{\\beta(\\alpha(i))=k}c_i\\simeq\\prod_{\\beta(j)=k}\\prod_{\\alpha(i)=j}c_i\\xrightarrow{\\prod_j u_j}\\prod_{\\beta(j)=k}d_j\\xrightarrow{v_k}e_k.$$\nThe regrouping preserves each original factor projection. An index sent to $*$ by either map is absent from every output block. The triangle here is the actual restriction of the diagram defining the simplex in [lem-cbc-enhanced-relative-exponential].",
    "uses": [
-    "lem-cbc-enhanced-relative-exponential",
-    "lem-coef-infinity-finite-poset-kan-extension"
+    "lem-coef-infinity-finite-poset-kan-extension",
+    "lem-cbc-enhanced-relative-exponential"
    ],
    "elementary": false,
    "source": {
     "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
     "place": "Notation 2.4.1.2, Construction 2.4.1.4 and Proposition 2.4.1.5, printed pp. 284-285: properties of the specified product-diagram model only."
+   }
+  },
+  {
+   "text": "The higher simplex restriction formulas are definitional. Over a chain $\\sigma=(\\alpha_1,\\ldots,\\alpha_r)$, the indexing category has objects $(t,S)$ and an arrow $(t,S)\\to(u,T)$, $t\\leq u$, precisely when $(\\alpha_u\\cdots\\alpha_{t+1})^{-1}T\\subseteq S$. This follows by taking the ordinary-category pullback along $[r]\\to\\mathsf{Fin}_*$ and applying its nerve. By the simplicial-operator clause of [lem-cbc-enhanced-relative-exponential], restriction along $\\theta:[s]\\to[r]$ sends a diagram $H$ to the diagram with value $H(\\theta(t),S)$ and the same crossing arrow with those endpoints. Its base arrow is $\\alpha_{\\theta(u)}\\cdots\\alpha_{\\theta(t)+1}$. Deleting an intermediate vertex uses the corresponding triangle of $H$; repeating a vertex inserts an identity. The subsets agree because $(\\gamma\\beta)^{-1}T=\\beta^{-1}(\\gamma^{-1}T)$, and these rules commute with iterated restriction because composition of the monotone maps does.",
+   "uses": [
+    "lem-cbc-enhanced-relative-exponential"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Notation 2.4.1.2, Construction 2.4.1.4 and Proposition 2.4.1.5, printed pp. 284-285: properties of the specified product-diagram model only."
+   }
+  },
+  {
+   "text": "For the coherence assertion, invoke [lem-cbc-simplicial-composition-spine]: restriction to consecutive edges is a trivial Kan fibration, and its face and degeneracy maps give composition, identities, associativity and all coherent homotopies, naturally in simplicial functors. Apply this to $P$, already a quasicategory by step 3, and to $\\mathcal D$ for the indexing diagrams obtained by evaluation. Step 6 identifies their actual simplex restrictions; step 5 computes their composite block maps. The right-Kan unit, counit and mapping-space equivalences of [lem-coef-infinity-finite-poset-kan-extension] are natural on precisely the diagrams used here, since their local limits are the finite products verified in step 2. Applying these natural equivalences to the restrictions retains their homotopies as well as their components. Consequently the displayed block substitution and its identities, reassociations and higher compatibilities are those of the given simplices of $P\\subseteq Q$.",
+   "uses": [
+    "lem-cbc-simplicial-composition-spine",
+    "lem-coef-infinity-finite-poset-kan-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01PF",
+    "place": "Corollary 4.6.8.5, Remark 4.6.8.7, Construction 4.6.8.9 and Propositions 4.6.8.11-12; applied to the actual simplices of HA Construction 2.4.1.4."
    }
   },
   {
@@ -130,6 +153,7 @@
   "lem-coef-infinity-finite-poset-kan-extension",
   "lem-cbc-enhanced-functor-cone-calculus",
   "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-cbc-simplicial-composition-spine",
   "lem-coef-symmetric-monoidal-segal-classification"
  ],
  "proof_origin": {
@@ -291,10 +315,38 @@
    "results": "{\"t\": \"2026-10-17T01:49:14Z\", \"tool\": \"leansearch\", \"query\": \"Right Kan extensions from singleton subsets compute product diagrams in a quasicategory and their cocartesian block mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightKanExtension\", \"CategoryTheory.Functor.RightExtension.precomp\", \"CategoryTheory.Functor.ran\", \"CategoryTheory.Functor.IsRightKanExtension.mk\", \"CategoryTheory.Functor.isPointwiseRightKanExtensionOfIsRightKanExtension\", \"CategoryTheory.Functor.RightExtension\", \"CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion\", \"CategoryTheory.Functor.isLimitConeOfIsRightKanExtension\"], \"digest\": \"11eadd6e0dfcc259\"}",
    "date": "2026-10-17",
    "verdict": "no match: the hits concern ordinary categories, not the product-diagram quasicategory or its cocartesian fibration over N(Fin_*)."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?[Ee]xponential|[Cc]artesian.?[Ee]nvelope|ofHasFiniteProducts",
+   "results": "{\"t\": \"2026-10-17T15:59:15Z\", \"tool\": \"grep\", \"query\": \"relative.?[Ee]xponential|[Cc]artesian.?[Ee]nvelope|ofHasFiniteProducts\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean\"], \"digest\": \"b506224f25d6e96e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Limits/Constructions/Filtered.lean:194,262 and Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean:228; these concern ordinary categories. Simplicial-set Cartesian products are not the cartesian symmetric monoidal structure on an arbitrary quasicategory, and none of these declarations states the relative-exponential recognition theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite product diagrams in a quasicategory form a cocartesian fibration over finite pointed sets with block substitution composition",
+   "results": "{\"t\": \"2026-10-17T15:59:15Z\", \"tool\": \"leansearch\", \"query\": \"Finite product diagrams in a quasicategory form a cocartesian fibration over finite pointed sets with block substitution composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.ProductsFromFiniteCofiltered.liftToFinset\", \"CategoryTheory.Limits.ProductsFromFiniteCofiltered.liftToFinsetObj\", \"CategoryTheory.Limits.ProductsFromFiniteCofiltered.liftToFinsetObj_obj\", \"SSet.instFiniteTensorObj\", \"CategoryTheory.Limits.ProductsFromFiniteCofiltered.finiteSubproductsCone_π_app\", \"CategoryTheory.instIsCartesianCompOfIsFibered\", \"SSet.instFiniteObjOppositeSimplexCategoryTensorObj\", \"HomotopicalAlgebra.instFibrationMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\"], \"digest\": \"08821d6ddfd92bd9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Limits/Constructions/Filtered.lean:194,262 and Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean:228; these concern ordinary categories. Simplicial-set Cartesian products are not the cartesian symmetric monoidal structure on an arbitrary quasicategory, and none of these declarations states the relative-exponential recognition theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.CartesianMonoidalCategory.ofHasFiniteProducts",
+   "results": "{\"t\": \"2026-10-17T15:59:15Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.CartesianMonoidalCategory.ofHasFiniteProducts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.CartesianMonoidalCategory.ofHasFiniteProducts\"], \"digest\": \"b44e27b24b2c1440\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Limits/Constructions/Filtered.lean:194,262 and Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean:228; these concern ordinary categories. Simplicial-set Cartesian products are not the cartesian symmetric monoidal structure on an arbitrary quasicategory, and none of these declarations states the relative-exponential recognition theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cartesian symmetric monoidal infinity category of finite product diagrams is the full subcategory of a relative exponential over finite pointed sets",
+   "results": "{\"t\": \"2026-10-17T15:59:16Z\", \"tool\": \"leanfinder\", \"query\": \"The cartesian symmetric monoidal infinity category of finite product diagrams is the full subcategory of a relative exponential over finite pointed sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightProfinite.instCartesianMonoidalCategory\", \"SSet.instCartesianMonoidalCategory\", \"CategoryTheory.CartesianMonoidalCategory.ofHasFiniteProducts\", \"SSet.Truncated.instCartesianMonoidalCategory\", \"CategoryTheory.Dial.tensorUnitImpl\", \"CategoryTheory.Dial\", \"SSet.instFiniteTensorObj\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\"], \"digest\": \"41c97192bb94df85\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Limits/Constructions/Filtered.lean:194,262 and Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean:228; these concern ordinary categories. Simplicial-set Cartesian products are not the cartesian symmetric monoidal structure on an arbitrary quasicategory, and none of these declarations states the relative-exponential recognition theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-lax-cartesian-classification",
@@ -319,8 +371,8 @@
   "date": "2026-10-17",
   "item": "lem-coef-cartesian-envelope-product-diagram-recognition",
   "worker": "stage1",
-  "summary": "Returned-delivery repair, alternative 2: restated the item solely as properties of the specified product-diagram model P (HA Proposition 2.4.1.5). Retained and sharpened the six accepted model calculations, removed the invalid straightened-functor comparison and multiplication of choice spaces, and proved the Segal and full-subset evaluation assertions directly. The abstract comparison is isolated in the new statement-only general cartesian-structure uniqueness node, never used here. The existing parent must be repaired separately as detailed in report.md; its abstract-target classification cannot be used to prove this item or the uniqueness input it would need.",
-  "blueprint": "prop-coef-integral-exceptional-adjoint, current main-20261015 proof paragraph 2 (derived Hom / inverse-limit comparison), auxiliary coherent finite-product machinery through the retained via chain. No chapter or unit route is changed.",
+  "summary": "Repair of the 2026-10-17 dedicated re-split handoff: replaced former step 5 by the block-component calculation, a separate elementary calculation of simplex restrictions, and an explicit invocation of the existing coherent-composition spine theorem. Reused finite-poset Kan extension for the natural transformation comparison and the relative exponential for the simplicial operators. Every step is under 2000 characters. All other proof steps, the statement, source metadata and Lean binding are retained. No new nodes or Mathlib leaves are needed.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, main-20261015 proof paragraph 2 (derived Hom / inverse-limit adjunction), auxiliary finite-product coherence through the unchanged via chain; the same unit route is retained.",
   "source_correction": {
    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
    "place": "Notation 2.4.1.2, Construction 2.4.1.4 and Proposition 2.4.1.5, printed pp. 284-285: properties of the specified product-diagram model only."
@@ -334,20 +386,25 @@
    {
     "node": "lem-cbc-enhanced-functor-cone-calculus",
     "why": "Supplies functor-category/full-subcategory quasicategories, pointwise equivalences and invariance of mapping spaces; these generic foundations are needed for singleton restriction."
+   },
+   {
+    "node": "lem-cbc-simplicial-composition-spine",
+    "why": "Generic quasicategory theorem identifying face/degeneracy restrictions with coherent composition; it supplies the hidden higher-coherence claim in former step 5. This is independent foundational machinery, with no replacement of the unit route."
    }
   ]
  },
  "tool_uses": [
   "lem-cbc-enhanced-relative-exponential",
-  "lem-cbc-enhanced-functor-cone-calculus"
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-composition-spine"
  ],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q04-d96c4c5bb",
-  "group": "Q04",
+  "reviewer": "NT-cc-NS-12d0aa6c0",
+  "group": "NS",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-d96c4c5bb (reviewer sub-agent of L); spot-checked: I read the whole item (statement and steps 1-7), the new uniqueness node, every cited statement, the parent lem-coef-lax-cartesian-classification, the unit and chapter records, and the 01:10 UTC return. HA is not archived, so I checked against HA Notation 2.4.1.2, Construction 2.4.1.4, Prop 2.4.1.5, Def 2.4.0.1 and Cor 2.4.1.8-9 as I know them. The delivery follows the return's option 2: the item now states only the properties of the model P (P is a cocartesian fibration, P_n ~ D^n, block mapping spaces, composition, the cocartesian criterion, Segal maps, the evaluation functor pi). I found no gap in the steps. Small cases checked: n=0, n=1, the binary fold, maps to and from <0>, inert maps and permutations, and D = Set. The new node is true (HA Cor 2.4.1.9 restricted to equivalences, keeping the homotopy fiber over u). It is statement-only, not a duplicate, and not a clause of the item or the parent. Both proposed tool uses (relative exponential, functor-cone calculus) are accepted. Two fixes: (1) step 1 used that v is a cartesian fibration without checking it; I added the check (v is faithful; the factorization through (<n>, alpha^{-1}T) fills the 2-horn; higher horns follow from faithfulness), cited def-coef-infinity-fibrations and recomputed proof_deps. (2) Nothing cites the new uniqueness node yet, so it needs import_flags=['unreachable']; I added it. Maintainer actions needed: (a) the reviewed parent lem-coef-lax-cartesian-classification still takes P ~ D^x from this item in step 1 (and uses it in steps 2 and 5-7); after the merge that citation is a C4 fault, so reopen the parent. Non-circular order: classification for P, then comparison through the uniqueness node and the envelope statement, then remove the unreachable flag. (b) The item's maintainer-owned title and source.place still say 'identification with the cartesian envelope' (B5); install split_report.title_correction and source_correction.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-12d0aa6c0 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement and all nine steps. Former step 5 (2198 characters) is replaced by steps 5 to 7, of 1227, 938 and 993 characters. Steps 1-4 and former 6-7 (now 8-9), the statement, the Lean record and the blueprint fields are unchanged, checked against the side clone. There are no new nodes. I read the statement of every cited node. Step 5: the composite block is read off the 2-simplex chain (0,(βα)^{-1}{k})->(1,β^{-1}{k})->(2,{k}), and naturality with g a product diagram identifies the middle component with ∏u_j. Step 6 is a correctly elementary nerve-pullback and restriction calculation. Step 7 cites lem-cbc-simplicial-composition-spine, whose statement gives coherent composition, identities and associativity from faces and degeneracies, naturally in simplicial functors; this is exactly the coherence that former step 5 left implicit. I checked against HA Notation 2.4.1.2, Construction 2.4.1.4 and Proposition 2.4.1.5 (Γ^×, the reverse-inclusion fibre with A_{≥S} the singletons in S, the finite-products hypothesis); the statement matches and is not weakened. Edge cases: D=Set, empty blocks, n=0, m=0, the nullary active map, P_1≃D, inert maps and permutations. Graph checks: acyclic (the spine reaches 130 nodes, none of them the item), and proof_deps equals the union of all uses. Accepted tool_uses: relative-exponential, functor-cone-calculus and the spine. The spine is already a recorded tool of more than 20 nodes in sk-prop-sf-biduality-general and a statement dependency of its cocartesian mapping criterion. No fixes."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.CartesianEnvelopeProductDiagramRecognition",
