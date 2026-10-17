@@ -28,7 +28,8 @@
   "lem-pur-derived-change-of-rings",
   "lem-pur-sheaf-ring-derived-coefficient-adjunction",
   "lem-pod-point-sections-derived-reduction",
-  "lem-trf-point-sections-finite-reduction"
+  "lem-trf-point-sections-finite-reduction",
+  "def-trf-point-reduction-units"
  ],
  "proof": [
   {
@@ -357,5 +358,27 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-b2b38d0f2 (reviewer sub-agent of L); spot-checked: I read the item, all 10 steps, the statement of every cited node, the parent lem-trf-completed-stalk-frobenius-reduction (steps 4 and 6, which cite this item), blueprint main-20261015 prop-trf-rational-frobenius-integral-model.proof.md clause (4), and the Stacks sources. The delivery creates no new nodes. The statement and hypotheses are unchanged and no target is touched. proof_deps equals the union of the step uses. The blueprint from/via/same_as fields agree with the parent. No SGA source is cited. Stacks checked by label: 07A6 lemma-adjoint, 06YS lemma-K-flat-resolution, 06YQ lemma-bounded-flat-K-flat, 093J lemma-constant-exact, 093M lemma-completion-flat, 05RT lemma-acyclic, 00HD lemma-flat. Math checks: step 1 defines chi as the adjunct of Gamma(eta) on the one-point site (allowed, the adjunction node is stated for small sites). Step 2 gets exactness of 0->B->B->B'->0 from the finite-resolution clause of the completed-constant lemma in case (1), and lists the ideals (varpi^r) of A_b in case (2). Step 4 uses an unbounded K-flat model in case (1), which is right because the definition bounds only the reductions; case (2) uses the good truncation. Steps 5-6: t is injective on the terms and the cycle argument shows W/tW is acyclic; I verified it line by line. Step 7: the cyclic ideal test via J=(varpi^r) iso R/(varpi^{b-r}) is correct, including both endpoints. Step 9: adjunction clauses (1)/(2) apply to P and Q, which are K-flat with flat terms in both cases, so beta represents chi and chi is invertible. Step 10: naturality and uniqueness follow from the Hom bijection. Edge cases tested: N=0, a=b (t=0, chi is the identity), b=a=1, n=1, unbounded integral N. Route: only lem-weil-point-proetale-sections-exact is off-route, and it is declared. I accept all 12 declared tool_uses as generic tools that do not replace the sk-d-weil route. Duplicate search: lem-pod-derived-reduction-sheaf-resolution-independence is related but asserts only coherence, not invertibility or unit normalization. lem-trf-point-complex-scalar-extension covers a different domain (ctf, prime to p). Neither duplicates this item. Remark: chi is proved to be a unit-normalized natural isomorphism between the same functors. The finite node's successive-reduction compatibility is not re-proved here; the parent derives it in step 6 from this normalization, so its use is sound. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointReductionUnitNormalization",
+  "declaration": "WeilConjectures.pointReductionUnitNormalization",
+  "declarations": [
+   "WeilConjectures.pointReductionUnitNormalization"
+  ],
+  "file": "lean/Sheaf/Paper/PointReductionUnitNormalization.lean",
+  "statement": "theorem pointReductionUnitNormalization (hl : l ≠ D.p) : (∀ n : ℕ, ∃! χ : pointReductionTensorSections D l E n ≅ pointReductionSectionsTensor D l E n, Functor.whiskerLeft ((sfIntegralConstructible l E (Spec (.of D.k))).ι ⋙ (pointIntegralSections l E D.k).mapDerivedCategory) (pointUnitIntegralModuleUnit l E n) ≫ Functor.whiskerRight χ.hom (pointUnitIntegralDerivedRestriction l E n) = Functor.whiskerRight (Functor.whiskerLeft (sfIntegralConstructible l E (Spec (.of D.k))).ι (pointUnitIntegralSheafUnit D l E n)) (pointIntegralSections l E D.k).mapDerivedCategory ≫ Functor.whiskerLeft ((sfIntegralConstructible l E (Spec (.of D.k))).ι ⋙ scalarReductionDerivedExtension l E (Spec (.of D.k)) n) (pointUnitIntegralDerivedSectionsRestrictionIso D l E n).hom) ∧ ∀ (n j : ℕ) (hn : 1 ≤ n) (hj : 1 ≤ j) (hjn : j ≤ n), ∃! χ : (pointFiniteReductionBoundedAbove D.k l E n).ι ⋙ pointFiniteReductionSections D.k l E n ⋙ pointFiniteReductionModuleTensor l E n j hjn ≅ (pointFiniteReductionBoundedAbove D.k l E n).ι ⋙ pointFiniteReductionSheafTensor D.k l E n j hjn ⋙ pointFiniteReductionSections D.k l E j, Functor.whiskerLeft ((pointFiniteReductionBoundedAbove D.k l E n).ι ⋙ pointFiniteReductionSections D.k l E n) (pointUnitFiniteModuleUnit l E n j hjn) ≫ Functor.whiskerRight χ.hom (pointUnitFiniteDerivedModuleRestriction l E n j hjn) = Functor.whiskerRight (Functor.whiskerLeft (pointFiniteReductionBoundedAbove D.k l E n).ι (pointUnitFiniteSheafUnit D l E n j hjn)) (pointFiniteReductionSections D.k l E n) ≫ Functor.whiskerLeft ((pointFiniteReductionBoundedAbove D.k l E n).ι ⋙ pointFiniteReductionSheafTensor D.k l E n j hjn) (pointUnitFiniteDerivedSectionsRestrictionIso D l E n j hjn).hom",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Both coefficient cases use the recorded quotient functors and the actual scalar-extension units of def-trf-point-reduction-units. Equality of natural transformations is exactly the stated componentwise unit equation, with the canonical exact restriction/sections identity."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f195cf9f7",
+  "group": "Q50",
+  "result": "fix",
+  "note": "Mathematics accepted; both immutable Lean modules compile cleanly through scompile.py. review.md and a complete replacement report repair H1/H11’s missing substantive second reading and record reproduced compiler evidence. No Lean, node, or branch changes."
  }
 }

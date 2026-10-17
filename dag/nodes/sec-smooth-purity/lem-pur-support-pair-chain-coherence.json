@@ -194,5 +194,39 @@
   "group": "Q75",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-2b8cd1e81 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement (unchanged) and all 5 steps. I also read the parent thm-pur-with-support-exactness (Steps 7, 8 and 12 use the item) and the sibling lem-pur-support-pair-composition; there is no cycle. I checked the statement of every cited node: the two Mathlib leaves bounded-below-injectives-kinjective and kinjective-hom-derived, plus def-weil-pbc-sites-and-cohomology, def-weil-abstract-derived-category, def-sp-injective-resolutions and def-sp-left-exact-additive. Sources: Milne LEC Theorem 9.4, pp. 65-67, only asserts that the sequence is functorial in the pair, so proof_origin=agent is correct. Stacks derived.tex lemma-K-injective (070I) gives Hom_K = Hom_D into a K-injective complex. Steps 2-4 are correct; Steps 1 and 5 needed repair. Step 1 credited the square to naturality of the adjunction bijection. It actually comes from naturality of the sheaf map b at m together with u(m)s=tm'. I wrote out J(m')J(t)b_T=J(s)J(u(m))b_T=J(s)b_V I(m). Step 5 hid the composition identity behind 'agree after transport' (delivery error E5), and it claimed exactness of L where only additivity is used. I replaced it with the explicit composition identity: the adjoint of g'∘h∘L(g) is R(g')∘b∘g. The new text also lifts the identification to a homotopy equivalence g using the two leaves, uses that L(g) is a homotopy equivalence because L is additive, and writes out the transported representatives h∘Lg and g'∘h. The uses lists and proof_deps did not change. Edge cases checked: V=T, V'=T', the identity adjunction, z=0 and zero complexes. There are no new nodes and no duplicates (rg for restriction-kernel and adjoint candidates). The only proof dependencies are Mathlib leaves, so the route is not left and no tool_uses were accepted. No SGA source is cited, the statement is unchanged and nothing is weakened.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a3dc888cc",
+  "group": "Q118",
+  "result": "pass",
+  "note": "Statement, dependencies, docstrings, edge cases, source alignment, and exact Lean declarations checked; scompile.py compiled both sandbox and library files successfully."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SupportPairChainCoherence",
+  "declaration": "CategoryTheory.supportPairChainCoherence",
+  "declarations": [
+   "CategoryTheory.SupportPair",
+   "CategoryTheory.sectionFunctor",
+   "CategoryTheory.sectionFunctorPreservesZeroMorphisms",
+   "CategoryTheory.sectionRestriction",
+   "CategoryTheory.supportKernel",
+   "CategoryTheory.supportDiagram",
+   "CategoryTheory.BoundedBelow",
+   "CategoryTheory.degreewiseAdjoint",
+   "CategoryTheory.supportPairMapCondition",
+   "CategoryTheory.standardDerivedQ",
+   "CategoryTheory.supportOrdinaryMapCondition",
+   "CategoryTheory.supportCohomologyEqual",
+   "CategoryTheory.supportCohomologyIsIso",
+   "CategoryTheory.supportPairChainCoherence"
+  ],
+  "file": "lean/Sheaf/Paper/SupportPairChainCoherence.lean",
+  "statement": "theorem supportPairChainCoherence (u : C ⥤ D) [u.IsContinuous Jc Jd] (L : Sheaf Jc AddCommGrpCat ⥤ Sheaf Jd AddCommGrpCat) (adj : L ⊣ u.sheafPushforwardContinuous AddCommGrpCat Jc Jd) [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L] [HasDerivedCategory (Sheaf Jc AddCommGrpCat)] [HasDerivedCategory (Sheaf Jd AddCommGrpCat)] (P : SupportPair (C := C)) (P' : SupportPair (C := D)) (t : P'.T ⟶ u.obj P.T) (s : P'.V ⟶ u.obj P.V) (square : s ≫ u.map P.m = P'.m ≫ t) : ∀ (I : CochainComplex (Sheaf Jc AddCommGrpCat) ℤ) (K : CochainComplex (Sheaf Jd AddCommGrpCat) ℤ), (∀ h : (L.mapHomologicalComplex (ComplexShape.up ℤ)).obj I ⟶ K, (∃! φ : supportDiagram Jc P I ⟶ supportDiagram Jd P' K, supportPairMapCondition Jc Jd u L adj P P' t s h φ) ∧ (∀ (h' : (L.mapHomologicalComplex (ComplexShape.up ℤ)).obj I ⟶ K) (z : _root_.Homotopy h h'), ∃ (φ φ' : supportDiagram Jc P I ⟶ supportDiagram Jd P' K), supportPairMapCondition Jc Jd u L adj P P' t s h φ ∧ supportPairMapCondition Jc Jd u L adj P P' t s h' φ' ∧ ∃ (H₁ : _root_.Homotopy φ.τ₁ φ'.τ₁) (H₂ : _root_.Homotopy φ.τ₂ φ'.τ₂) (H₃ : _root_.Homotopy φ.τ₃ φ'.τ₃), ∀ i j : ℤ, H₁.hom i j ≫ (supportDiagram Jd P' K).f.f j = (supportDiagram Jc P I).f.f i ≫ H₂.hom i j ∧ H₂.hom i j ≫ (supportDiagram Jd P' K).g.f j = (supportDiagram Jc P I).g.f i ≫ H₃.hom i j ∧ H₂.hom i j = (sectionFunctor Jc P.T).map ((adj.homEquiv (I.X i) (K.X j)) (z.hom i j)) ≫ (sectionRestriction Jd t).app (K.X j) ∧ H₃.hom i j = (sectionFunctor Jc P.V).map ((adj.homEquiv (I.X i) (K.X j)) (z.hom i j)) ≫ (sectionRestriction Jd s).app (K.X j))) ∧ (∀ (hI : BoundedBelow I) (hK : BoundedBelow K) (hinjI : ∀ n : ℤ, Injective (I.X n)) (hinjK : ∀ n : ℤ, Injective (K.X n)), (∀ a : (standardDerivedQ (A := Sheaf Jd AddCommGrpCat)).obj ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj I) ⟶ (standardDerivedQ (A := Sheaf Jd AddCommGrpCat)).obj K, ∃ h : (L.mapHomologicalComplex (ComplexShape.up ℤ)).obj I ⟶ K, (standardDerivedQ (A := Sheaf Jd AddCommGrpCat)).map h = a) ∧ (∀ (h₁ h₂ : (L.mapHomologicalComplex (ComplexShape.up ℤ)).obj I ⟶ K), (standardDerivedQ (A := Sheaf Jd AddCommGrpCat)).map h₁ = (standardDerivedQ (A := Sheaf Jd AddCommGrpCat)).map h₂ → Nonempty (_root_.Homotopy h₁ h₂) ∧ ∀ (φ ψ : supportDiagram Jc P I ⟶ supportDiagram Jd P' K), supportPairMapCondition Jc Jd u L adj P P' t s h₁ φ → supportPairMapCondition Jc Jd u L adj P P' t s h₂ ψ → supportCohomologyEqual φ ψ) ∧ (∀ (I' : CochainComplex (Sheaf Jc AddCommGrpCat) ℤ) (K' : CochainComplex (Sheaf Jd AddCommGrpCat) ℤ) (hI' : BoundedBelow I') (hK' : BoundedBelow K') (hinjI' : ∀ n : ℤ, Injective (I'.X n)) (hinjK' : ∀ n : ℤ, Injective (K'.X n)) (g : I' ⟶ I) (g' : K ⟶ K'), IsIso ((standardDerivedQ (A := Sheaf Jc AddCommGrpCat)).map g) → IsIso ((standardDerivedQ (A := Sheaf Jd AddCommGrpCat)).map g') → ∀ (h : (L.mapHomologicalComplex (ComplexShape.up ℤ)).obj I ⟶ K) (h' : (L.mapHomologicalComplex (ComplexShape.up ℤ)).obj I' ⟶ K'), (standardDerivedQ (A := Sheaf Jd AddCommGrpCat)).map h' = (standardDerivedQ (A := Sheaf Jd AddCommGrpCat)).map ((L.mapHomologicalComplex (ComplexShape.up ℤ)).map g) ≫ (standardDerivedQ (A := Sheaf Jd AddCommGrpCat)).map h ≫ (standardDerivedQ (A := Sheaf Jd AddCommGrpCat)).map g' → ∀ (φ : supportDiagram Jc P I ⟶ supportDiagram Jd P' K) (ψ : supportDiagram Jc P I' ⟶ supportDiagram Jd P' K'), supportPairMapCondition Jc Jd u L adj P P' t s h φ → supportPairMapCondition Jc Jd u L adj P P' t s h' ψ → ∃ (α : supportDiagram Jc P I' ⟶ supportDiagram Jc P I) (β : supportDiagram Jd P' K ⟶ supportDiagram Jd P' K'), supportOrdinaryMapCondition Jc P g α ∧ supportOrdinaryMapCondition Jd P' g' β ∧ supportCohomologyIsIso α ∧ supportCohomologyIsIso β ∧ supportCohomologyEqual (α ≫ φ ≫ β) ψ))",
+  "branch": "newtargets-dag",
+  "by": "Q118",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
