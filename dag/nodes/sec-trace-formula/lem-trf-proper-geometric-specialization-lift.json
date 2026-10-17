@@ -2,7 +2,7 @@
  "id": "lem-trf-proper-geometric-specialization-lift",
  "kind": "statement",
  "title": "Proper surjections lift prescribed geometric specializations",
- "statement": "Let $p:T\\to S$ be a proper surjective morphism of schemes [def-weil-proper-morphism, def-weil-surjective-morphism]. Let $\\bar s:\\operatorname{Spec}\\Omega_s\\to S$ and $\\bar t:\\operatorname{Spec}\\Omega_t\\to S$ be geometric points [def-weil-geometric-point], and let $c:\\bar t\\Rightarrow\\bar s$ be a $2$-morphism between their associated points of the small etale topos [def-weil-pbc-etale-site, def-trf-geometric-morphism], in the direct-image convention of [lem-trf-oriented-product-universal]. Thus $c$ is a prescribed geometric specialization, not just a relation between the underlying Zariski points. There exist algebraically closed field extensions $\\Omega_s\\hookrightarrow\\Omega'_s$, $\\Omega_t\\hookrightarrow\\Omega'_t$, with induced maps $r_s:\\operatorname{Spec}\\Omega'_s\\to\\operatorname{Spec}\\Omega_s$ and $r_t:\\operatorname{Spec}\\Omega'_t\\to\\operatorname{Spec}\\Omega_t$, geometric points $\\bar s':\\operatorname{Spec}\\Omega'_s\\to T$ and $\\bar t':\\operatorname{Spec}\\Omega'_t\\to T$, and a specialization $c':\\bar t'\\Rightarrow\\bar s'$ on $T_{\\mathrm{Et}}$, such that\n$$p\\bar s'=\\bar s r_s,\\qquad p\\bar t'=\\bar t r_t.$$\nUnder the canonical isomorphisms of stalk functors furnished by these field extensions [lem-weil-pbc-geometric-point-morphism-stalk-bijection], the image $p c'$ is exactly $c$. All points, field extensions and topoi are taken in a common enlarged universe [def-weil-size-convention].",
+ "statement": "Let $p:T\\to S$ be a proper surjective morphism of schemes [def-weil-proper-morphism, def-weil-surjective-morphism]. Let $\\bar s:\\operatorname{Spec}\\Omega_s\\to S$ and $\\bar t:\\operatorname{Spec}\\Omega_t\\to S$ be geometric points [def-weil-geometric-point], and let $c:\\bar t\\Rightarrow\\bar s$ be a $2$-morphism between their associated points of the small etale topos [def-weil-pbc-etale-site, def-trf-geometric-morphism, lem-fix-geometric-stalk-topos-point], in the direct-image convention of [lem-trf-oriented-product-universal]. Thus $c$ is a prescribed geometric specialization, not just a relation between the underlying Zariski points. There exist algebraically closed field extensions $\\Omega_s\\hookrightarrow\\Omega'_s$, $\\Omega_t\\hookrightarrow\\Omega'_t$, with induced maps $r_s:\\operatorname{Spec}\\Omega'_s\\to\\operatorname{Spec}\\Omega_s$ and $r_t:\\operatorname{Spec}\\Omega'_t\\to\\operatorname{Spec}\\Omega_t$, geometric points $\\bar s':\\operatorname{Spec}\\Omega'_s\\to T$ and $\\bar t':\\operatorname{Spec}\\Omega'_t\\to T$, and a specialization $c':\\bar t'\\Rightarrow\\bar s'$ on $T_{\\mathrm{Et}}$, such that\n$$p\\bar s'=\\bar s r_s,\\qquad p\\bar t'=\\bar t r_t.$$\nUnder the canonical isomorphisms of stalk functors furnished by these field extensions [lem-weil-pbc-geometric-point-morphism-stalk-bijection], the image $p c'$ is exactly $c$. All points, field extensions and topoi are taken in a common enlarged universe [def-weil-size-convention].",
  "source": {
   "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
   "place": "Proof of Lemma 9.1.5, printed p. 21, assertion that every point lifts. Scheme-theoretic ingredients: literature/stacks-project/schemes.tex, Tag 01KE (lemma-lift-specializations-valuative), and literature/stacks-project/etale-cohomology.tex, Tag 0GJ5 (remark-can-lift). The prescribed specialization is retained by first passing to the strict localization at the target geometric point."
@@ -13,13 +13,143 @@
   "def-weil-geometric-point",
   "def-weil-pbc-etale-site",
   "def-trf-geometric-morphism",
+  "lem-fix-geometric-stalk-topos-point",
   "lem-trf-oriented-product-universal",
   "lem-weil-pbc-geometric-point-morphism-stalk-bijection",
   "def-weil-size-convention"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The point of $S_{\\mathrm{Et}}$ associated with a geometric point has the geometric stalk functor as inverse image. Take the inverse-image mate of $c$, namely $\\alpha:F_{\\bar s}\\to F_{\\bar t}$ natural in set sheaves $F$. For an affine pointed etale neighbourhood $(U,\\bar u_s)$ of $\\bar s$, the representable $h_U$ is a sheaf, and its geometric stalk is its set of geometric lifts. Thus $\\alpha_{h_U}(\\bar u_s)$ specifies a lift $\\bar u_t:\\operatorname{Spec}\\Omega_t\\to U$. Naturality in maps of pointed neighbourhoods makes these lifts compatible. The defining inverse-limit property of $B=S_{(\\bar s)}$ therefore gives a map $a:\\operatorname{Spec}\\Omega_t\\to B$ over $S$. This map retains the entire prescribed arrow: for $\\sigma\\in F(U)$, the sheaf map $h_U\\to F$, $v\\mapsto F(v)(\\sigma)$, and naturality give $\\alpha_F([U,\\bar u_s,\\sigma])=[U,\\bar u_t,\\sigma]$. Every germ has such an affine representative, since the affine neighbourhoods in the strict-local limit are initial. Hence $\\alpha$ is exactly the specialization obtained from $a$, on every set sheaf, not merely on representables.",
+   "uses": [
+    "def-trf-geometric-morphism",
+    "lem-fix-geometric-stalk-topos-point",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "lem-galois-stalk-representable",
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0GJ2 (section-specialization), 03O3 (lemma-representable-sheaf-fpqc), 04FM (lemma-stalk-gives-point); sites.tex Tag 00Y6 (lemma-points-recover). Explicit reconstruction of the prescribed arrow from representable germs."
+   }
+  },
+  {
+   "text": "Write $b:B\\to S$ for the structural map. Strict-henselization functoriality (1) says that $B$ is the spectrum of a strictly henselian local ring and gives a canonical lift $s_B:\\operatorname{Spec}\\Omega_s\\to B$ with $b s_B=\\bar s$, whose image $s_0$ is its closed point. Form $W=T\\times_S B$ with projections $q:W\\to B$ and $v:W\\to T$. The base change $q$ is surjective. It is closed: properness of $p$ includes universal closedness, whose definition applies to this base change. No finiteness or Noetherian hypothesis on $B$ is required.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-weil-pbc-strict-henselization-structural-map",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-surjective-base-change",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX (lemma-describe-etale-local-ring); morphisms.tex Tags 01S1 (lemma-base-change-surjective), 01W1 (definition-proper)."
+   }
+  },
+  {
+   "text": "Base change the surjection $q$ along $a:\\operatorname{Spec}\\Omega_t\\to B$. Its source $W_a$ is nonempty. Choose $z\\in W_a$ and let $\\Omega'_t$ be an algebraic closure of $\\kappa(z)$. The composite $\\Omega_t\\to\\kappa(z)\\to\\Omega'_t$ is an embedding of fields. The residue-field point of $z$ followed by $\\operatorname{Spec}\\Omega'_t\\to\\operatorname{Spec}\\kappa(z)$ and the projection to $W$ gives a geometric point $x_W$ with $q x_W=a r_t$, where $r_t:\\operatorname{Spec}\\Omega'_t\\to\\operatorname{Spec}\\Omega_t$. Write $x$ for its image in $W$.",
+   "uses": [
+    "lem-weil-pbc-surjective-base-change",
+    "lem-pc-algebraic-closure-exists-unique",
+    "def-weil-geometric-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01S1 (lemma-base-change-surjective); fields.tex Tag 09GT (theorem-existence-algebraic-closure); etale-cohomology.tex Tag 03PO (definition-geometric-point)."
+   }
+  },
+  {
+   "text": "The point $q(x)$ lies in $a(\\operatorname{Spec}\\Omega_t)$. Every point of a local spectrum specializes to its closed point: the prime corresponding to it is contained in the unique maximal ideal. So $q(x)\\leadsto s_0$, and since $q$ is closed, the closed-map specialization lemma gives $y\\in W$ with $x\\leadsto y$ and $q(y)=s_0$. To preserve the given field at $\\bar s$, form $P=\\operatorname{Spec}\\kappa(y)\\times_B\\operatorname{Spec}\\Omega_s$ using $s_B$. This is also the fibre product over $\\operatorname{Spec}\\kappa(s_0)$. The map $\\operatorname{Spec}\\Omega_s\\to\\operatorname{Spec}\\kappa(s_0)$ is surjective, so its base change $P\\to\\operatorname{Spec}\\kappa(y)$ is surjective and $P$ is nonempty. Choose $w\\in P$ and an algebraic closure $\\Omega'_s$ of $\\kappa(w)$. These choices give an embedding $\\Omega_s\\to\\Omega'_s$ and a geometric point $y_W:\\operatorname{Spec}\\Omega'_s\\to W$ over $y$ with $q y_W=s_B r_s$. In particular $x\\leadsto y$ and both endpoint field extensions are now fixed.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-trf-closed-map-specializing",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-pc-algebraic-closure-exists-unique",
+    "def-weil-geometric-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KC (lemma-specializations-lift), closed-map argument; morphisms.tex Tag 01S1; fields.tex Tag 09GT. The geometric endpoint enlargements are written explicitly."
+   }
+  },
+  {
+   "text": "Apply geometric-specialization strict-local lifting to the scheme $W$, the specialization $x\\leadsto y$, and the already chosen geometric points $x_W,y_W$. It gives $d:\\operatorname{Spec}\\Omega'_t\\to W_{(y_W)}$ whose composite with the structural map is exactly $x_W$. For every pointed affine etale neighbourhood $(V,\\bar v_y)$ of $y_W$, compose $d$ with the strict-local projection to obtain $\\bar v_x$. The rule $[V,\\bar v_y,\\tau]\\mapsto[V,\\bar v_x,\\tau]$ defines a natural map of set-sheaf stalks $F_{y_W}\\to F_{x_W}$: it respects the colimit relations because the limit projections commute with all pointed neighbourhood maps. Since the inverse images of the associated points are these stalk functors, by the mate convention this is a $2$-morphism $c_W:x_W\\Rightarrow y_W$ on $W_{\\mathrm{Et}}$. This constructs the geometric arrow upstairs without asserting that an arbitrary Zariski specialization determines one uniquely.",
+   "uses": [
+    "lem-weil-pbc-geometric-specialization-strict-local-lift",
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-geometric-stalks",
+    "def-trf-geometric-morphism",
+    "lem-fix-geometric-stalk-topos-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJ5 (remark-can-lift), followed by the germ construction in Tag 0GJ2 (section-specialization)."
+   }
+  },
+  {
+   "text": "Check the image of this arrow on $B$. Its endpoints are $q x_W=a r_t$ and $q y_W=s_B r_s$. For any sheaf of sets $G$ on $B_{\\mathrm{Et}}$, the closed geometric point $s_B r_s$ has a bijective global germ $\\Gamma(B,G)\\to G_{s_B r_s}$, by the strictly henselian sections-stalk theorem with $U=T=B$. A natural transformation from this closed stalk to $G_{a r_t}$ is unique: write an arbitrary closed germ as the germ of $\\gamma\\in\\Gamma(B,G)$, view $\\gamma$ as a sheaf map $1\\to G$, and apply naturality; the source and target stalks of $1$ are singletons, so the image must be the germ of $\\gamma$ at $a r_t$. The mate of $q c_W$ must therefore be this canonical restriction. This argument concerns all set sheaves and applies regardless of transcendence in either enlarged field.",
+   "uses": [
+    "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
+    "def-trf-geometric-morphism",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian), set-sheaf assertion; uniqueness follows explicitly by naturality for global sections."
+   }
+  },
+  {
+   "text": "Put $\\bar t'=v x_W$, $\\bar s'=v y_W$, and $c'=v c_W$. The fibre-product identity $p v=b q$ gives $p\\bar t'=\\bar t r_t$, $p\\bar s'=\\bar s r_s$ and $p c'=b(q c_W)$; by the composition rule the inverse image of $b\\circ z$ for a point $z$ of $B_{\\mathrm{Et}}$ is $z^{-1}b^{-1}$. Let $F$ be a sheaf of sets on $S_{\\mathrm{Et}}$, $(U,\\bar u_s)$ an affine pointed etale neighbourhood of $\\bar s$ and $\\sigma\\in F(U)$. Strict-henselization functoriality (1) gives $\\pi_U s_B=\\bar u_s$ for the limit projection $\\pi_U:B\\to U$, and step 1 gives $\\pi_U a=\\bar u_t$. Pull $b^*\\sigma\\in(b^{-1}F)(U\\times_SB)$ back along the section $(\\pi_U,\\mathrm{id}):B\\to U\\times_SB$ to $\\gamma\\in\\Gamma(B,b^{-1}F)$. Since $(\\pi_U,\\mathrm{id})s_Br_s=(\\bar u_sr_s,s_Br_s)$ and $(\\pi_U,\\mathrm{id})ar_t=(\\bar u_tr_t,ar_t)$, the etale inverse-image stalk germ bijection for $b$ identifies the germ of $\\gamma$ at $s_Br_s$ with $[U,\\bar u_sr_s,\\sigma]$ and its germ at $ar_t$ with $[U,\\bar u_tr_t,\\sigma]$. By step 6 the mate of $qc_W$ sends the first germ of $\\gamma$ to the second, so the mate of $pc'$ sends $[U,\\bar u_sr_s,\\sigma]$ to $[U,\\bar u_tr_t,\\sigma]$. The geometric-point morphism stalk-bijection theorem for $r_s$ and $r_t$ identifies these germs with $[U,\\bar u_s,\\sigma]$ and $[U,\\bar u_t,\\sigma]$, and by step 1 the second is $\\alpha_F$ of the first. Affine representatives exhaust the stalk (step 1), so the inverse-image mates agree, and $pc'=c$ as $2$-morphisms. Enlarge the common universe to contain the chosen fields and neighbourhood diagrams, as the size convention permits.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-trf-geometric-morphism",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+    "lem-weil-pbc-geometric-point-morphism-stalk-bijection",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04FN (remark-map-stalks); Tag 0GJ2 (section-specialization), germ formula; composition and mates in the geometric-morphism convention. Tag 03Q1 (lemma-stalk-pullback) for the inverse-image stalk identification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-geometric-morphism",
+  "lem-fix-geometric-stalk-topos-point",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "lem-galois-stalk-representable",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-surjective-base-change",
+  "def-weil-proper-morphism",
+  "lem-pc-algebraic-closure-exists-unique",
+  "def-weil-geometric-point",
+  "lem-trf-closed-map-specializing",
+  "lem-weil-pbc-geometric-specialization-strict-local-lift",
+  "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
+  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+  "lem-weil-pbc-geometric-point-morphism-stalk-bijection",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0GJ2, 0GJ5 and 03QO, assembled with the closed-map argument of schemes.tex Tag 01KC and base-change surjectivity 01S1. Expanded proof of the geometric-specialization assertion used by Orgogozo Lemma 9.1.5, printed p. 21."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +192,59 @@
    "results": "{\"t\": \"2026-10-17T18:18:09Z\", \"tool\": \"grep\", \"query\": \"specialization|SpecializingMap|geometric.?point\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean\"], \"digest\": \"45b553728c1a0425\"}",
    "date": "2026-10-17",
    "verdict": "no match: ValuativeCriterion.Existence.specializingMap (ValuativeCriterion.lean:115) and universallyClosed_eq_universallySpecializing concern Zariski specializations only. They do not lift a prescribed arrow of geometric etale points compatibly with its stalk maps; this is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations between geometric stalk functors on the etale site correspond to lifts of a geometric point to the strict henselization at the other point",
+   "results": "{\"t\": \"2026-10-17T18:38:30Z\", \"tool\": \"leanfinder\", \"query\": \"Natural transformations between geometric stalk functors on the etale site correspond to lifts of a geometric point to the strict henselization at the other point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.SheafedSpace.hom_stalk_ext\", \"AlgebraicGeometry.spread_out_of_isGermInjective\", \"AlgebraicGeometry.Scheme.stalkClosedPointTo_fromSpecStalk\", \"AlgebraicGeometry.SpecToEquivOfLocalRing_eq_iff\", \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo\", \"AlgebraicGeometry.Scheme.stalkClosedPointTo\", \"AlgebraicGeometry.over_def\", \"AlgebraicGeometry.Scheme.stalkMap_congr_point\"], \"digest\": \"6dcaa1a75f67282d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned scheme-stalk, etale-category and valuative-criterion declarations do not lift a prescribed arrow of geometric etale points; the specializingMap result only lifts underlying Zariski specializations. Read ValuativeCriterion.lean:115-138 and Morphisms/UniversallyClosed.lean:171."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, CategoryTheory.NatTrans",
+   "results": "{\"t\": \"2026-10-17T18:38:30Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Etale, CategoryTheory.NatTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned scheme-stalk, etale-category and valuative-criterion declarations do not lift a prescribed arrow of geometric etale points; the specializingMap result only lifts underlying Zariski specializations. Read ValuativeCriterion.lean:115-138 and Morphisms/UniversallyClosed.lean:171."
+  },
+  {
+   "tool": "grep",
+   "query": "specializ|strict.*hensel|geometric.?point",
+   "results": "{\"t\": \"2026-10-17T18:40:06Z\", \"tool\": \"grep\", \"query\": \"specializ|strict.*hensel|geometric.?point\", \"sub\": \"AlgebraicGeometry/ValuativeCriterion.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"115\", \"116\", \"119\", \"127\", \"134\"], \"digest\": \"4cae6fdd0bee368a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned scheme-stalk, etale-category and valuative-criterion declarations do not lift a prescribed arrow of geometric etale points; the specializingMap result only lifts underlying Zariski specializations. Read ValuativeCriterion.lean:115-138 and Morphisms/UniversallyClosed.lean:171."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper surjection lifts prescribed geometric specializations in the etale topos using strict henselizations",
+   "results": "{\"t\": \"2026-10-17T18:40:07Z\", \"tool\": \"leansearch\", \"query\": \"A proper surjection lifts prescribed geometric specializations in the etale topos using strict henselizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.stalkSpecializes\", \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"PrimeSpectrum.localizationMapOfSpecializes\", \"SpecializingMap\", \"RingHom.FormallyEtale\", \"TopCat.Presheaf.stalkSpecializes.congr_simp\", \"Algebra.FormallySmooth.comp_liftOfSurjective\", \"AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk\"], \"digest\": \"970e7189036f368c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned scheme-stalk, etale-category and valuative-criterion declarations do not lift a prescribed arrow of geometric etale points; the specializingMap result only lifts underlying Zariski specializations. Read ValuativeCriterion.lean:115-138 and Morphisms/UniversallyClosed.lean:171."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, Specializes",
+   "results": "{\"t\": \"2026-10-17T18:40:07Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsProper, Specializes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned scheme-stalk, etale-category and valuative-criterion declarations do not lift a prescribed arrow of geometric etale points; the specializingMap result only lifts underlying Zariski specializations. Read ValuativeCriterion.lean:115-138 and Morphisms/UniversallyClosed.lean:171."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper surjective morphism of schemes lifts every prescribed specialization between geometric etale points after extending their algebraically closed fields",
+   "results": "{\"t\": \"2026-10-17T18:40:08Z\", \"tool\": \"leanfinder\", \"query\": \"A proper surjective morphism of schemes lifts every prescribed specialization between geometric etale points after extending their algebraically closed fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.universallyClosed_eq_universallySpecializing\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.SurjectiveOnStalks\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\"], \"digest\": \"d59ff4d4dd80e093\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned scheme-stalk, etale-category and valuative-criterion declarations do not lift a prescribed arrow of geometric etale points; the specializingMap result only lifts underlying Zariski specializations. Read ValuativeCriterion.lean:115-138 and Morphisms/UniversallyClosed.lean:171."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every arrow between points of the small etale topos can be lifted along a proper surjective scheme morphism",
+   "results": "{\"t\": \"2026-10-17T18:40:09Z\", \"tool\": \"leanfinder\", \"query\": \"Every arrow between points of the small etale topos can be lifted along a proper surjective scheme morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.Etale\"], \"digest\": \"d7df658c0effcc25\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned scheme-stalk, etale-category and valuative-criterion declarations do not lift a prescribed arrow of geometric etale points; the specializingMap result only lifts underlying Zariski specializations. Read ValuativeCriterion.lean:115-138 and Morphisms/UniversallyClosed.lean:171."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-proper-base-change-coherent-conservative",
@@ -89,5 +268,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-proper-geometric-specialization-lift",
+  "worker": "stage1",
+  "summary": "Retained the full prescribed geometric-specialization statement. Reconstructed its strict-local lift using representable germs, performed the closed-map specialization argument, explicitly enlarged both endpoint fields, and proved preservation of the prescribed arrow by uniqueness of a transformation from the closed stalk over a strictly henselian local base. All ingredients already have DAG nodes; no new nodes or Mathlib leaves. No attachment found in the read-only project Lean source.",
+  "blueprint": "Realizes the existing ancestry through proper-base-change coherent conservativity and constructibility descent, at the ancestor normal-cone specialization/nearby-cycle constructibility input: expands the assertion in Orgogozo Lemma 9.1.5 (printed p. 21) that all oriented points lift. The chapter and unit route are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "why": "General scheme/etale-stalk tool used with its stated arbitrary-scheme hypotheses in the strict-local construction; it does not replace the unit normal-cone/constructibility route."
+   },
+   {
+    "node": "lem-galois-stalk-representable",
+    "why": "General scheme/etale-stalk tool used with its stated arbitrary-scheme hypotheses in the strict-local construction; it does not replace the unit normal-cone/constructibility route."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "General scheme/etale-stalk tool used with its stated arbitrary-scheme hypotheses in the strict-local construction; it does not replace the unit normal-cone/constructibility route."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "General scheme/etale-stalk tool used with its stated arbitrary-scheme hypotheses in the strict-local construction; it does not replace the unit normal-cone/constructibility route."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-specialization-strict-local-lift",
+    "why": "General scheme/etale-stalk tool used with its stated arbitrary-scheme hypotheses in the strict-local construction; it does not replace the unit normal-cone/constructibility route."
+   },
+   {
+    "node": "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
+    "why": "General scheme/etale-stalk tool used with its stated arbitrary-scheme hypotheses in the strict-local construction; it does not replace the unit normal-cone/constructibility route."
+   },
+   {
+    "node": "lem-fix-geometric-stalk-topos-point",
+    "why": "Identifies the inverse image of the point attached to a geometric point with the geometric stalk functor (steps 1, 5); generic topos-point tool, no node of sk-i-curve-zero states it."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+    "why": "Step 7: stalk of an etale inverse image of a set sheaf at a geometric point, with its germ formula; generic tool, not supplied by the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "lem-galois-stalk-representable",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-geometric-specialization-strict-local-lift",
+  "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
+  "lem-fix-geometric-stalk-topos-point",
+  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-5d5bb8f52",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-5d5bb8f52 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 7 steps, every cited statement, the parent step that uses the item, and Stacks 0GJ5, 0GJ2, 03QO, 04FN, 04HX, 04FM, 03O3, 00Y6, 01KC, 01S1, 01W1, 09GT, 03PO and 03Q1, with their labels checked in tags/tags. Orgogozo 9.1.5 is not local (filed as WANTED), so the proof is correctly marked by:agent. The statement is unchanged and not weakened. The convention is right: c is a direct-image arrow t̄=>s̄ whose mate is F_s̄ -> F_t̄, as in the parent's triples. The mathematics holds. Step 1 recovers a from c using representable stalks and the inverse limit, and the germ formula checks out. In steps 2-4, q is surjective and closed, P = κ(y) ⊗_{κ(s0)} Ω_s is nonempty, and Ω_s is kept. Step 5 applies the 0GJ5 node with its exact hypotheses. Step 6 proves uniqueness by naturality against γ:1->G, using the bijective global germ for set sheaves. Small cases tested: a Galois automorphism over a field with p=id (preserved), T empty (vacuous), and a strictly henselian base. FIX made three repairs: (B3) the statement and steps 1 and 5 now cite lem-fix-geometric-stalk-topos-point for 'associated point = stalk functor'; (C5) step 4 now cites the same-unit leaf lem-trf-closed-map-specializing instead of re-deriving it; (C1/C2) step 7 was marked elementary but needs the inverse-image stalk identification (Stacks 03Q1). It is rewritten with the section (π_U,id), π_U s_B=ū_s and π_U a=ū_t written out, cites lem-weil-pbc-sets-etale-inverse-image-stalk-germ, and is now non-elementary. proof_deps is recomputed and the graph stays acyclic. Accepted tool_uses: the six declared pbc/galois tools plus the two new ones. Note: the item has no lean_audit field; it was created without one by the parent split, not by this delivery.; 1 file(s) fixed by the reviewer"
  }
 }

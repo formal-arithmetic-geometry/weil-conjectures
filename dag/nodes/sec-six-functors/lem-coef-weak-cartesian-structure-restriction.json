@@ -11,9 +11,142 @@
   "def-coef-complete-algebroid",
   "lem-coef-symmetric-monoidal-segal-classification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First record consequences of the defining conditions on a weak Cartesian structure $H$. It inverts every cocartesian edge $u$ over an active map $\\langle n\\rangle\\to\\langle m\\rangle$: follow $u$ by a cocartesian fold to the unary fiber. The composite is cocartesian over $\\mu_n$, so both that composite and the second edge are inverted; cancellation gives the claim. This includes active unit insertions and the empty tuple. In particular, $H(\\mathbf1)$ is terminal, since the nullary fold identifies it with the terminal value of $H$ on the empty tuple. The unit and binary-tensor hypotheses on $C$ also give every finite tensor its canonical product cone, by induction: on mapping spaces each new binary tensor adds one product factor, and the base case is the terminal unit.",
+   "uses": [
+    "lem-coef-symmetric-monoidal-segal-classification",
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 2.4.1.6, printed pp. 287-290"
+   }
+  },
+  {
+   "text": "Restriction $h=H|_C$ preserves binary products with their actual legs. For $x=(c,d)$ let $s:x\\to c\\otimes d$ be a cocartesian fold. To check the first leg, put $z=(c,\\mathbf1)$, let $e:x\\to z$ be $(1_c,d\\to\\mathbf1)$ in the binary fiber, and let $v:c\\to z$ be the cocartesian active inclusion inserting the unit. The inert projection $r:z\\to c$ and fold followed by the unitor $q:z\\to c$ both compose with $v$ to the identity. Step 1 inverts $v$, hence $H(r)\\simeq H(q)$. The composite $re$ is the first inert leg of $x$, whereas $qe$ is $s$ followed by the canonical tensor projection $c\\otimes d\\to c$. Thus $h$ takes that projection to the first leg of the product cone $H(x)$ after the equivalence $H(s)$. Interchanging the two coordinates proves the other leg. Step 1 gives preservation of the terminal object. Iterating the mapping-space characterization of a binary product now proves preservation of every finite product cone, including any cone equivalent to these chosen ones.",
+   "uses": [
+    "lem-coef-symmetric-monoidal-segal-classification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 2.4.1.6, printed pp. 287-290"
+   }
+  },
+  {
+   "text": "Work in one enlarged universe in which the total operad, cylinder and all comma shapes are small. Use the cylinder $X$ and its full endpoint subcategories $A,B$ from [lem-coef-terminal-unit-active-comma]. Its unary level-zero fiber is the full subcategory $C\\subset A$. Define $E\\subset\\operatorname{Fun}(X,D)$ by requiring all vertical identity-base edges $\\gamma_x:(x,0)\\to(x,1)$ to be inverted and the level-one restriction to belong to $W$. Define $E_0\\subset\\operatorname{Fun}(A,D)$ by requiring unary restriction to preserve finite products and every cocartesian active edge to be inverted. Naturality along the vertical edges and steps 1-2 show that restriction $E\\to\\operatorname{Fun}(A,D)$ lands in $E_0$. All these are full subcategories, so their morphisms remain arbitrary coherent transformations.",
+   "uses": [
+    "lem-coef-terminal-unit-active-comma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 2.4.1.6, printed pp. 287-290"
+   }
+  },
+  {
+   "text": "Restriction $r:E\\to W$ is an equivalence. In fact, for every $(x,0)$, the comma category of arrows from $(x,0)$ into $B$ has initial object $\\gamma_x$: its mapping space into an arrow $(x,0)\\to(y,1)$ is contractible because the space of arrows $x\\to y$ is the same at level one and across the cylinder, and the required triangle is a factorization through the identity. At a level-one object the corresponding comma has its identity as initial object. Apply [lem-coef-relative-limit-initial-components] with one component and the map $D\\to *$: a cone on either comma is limiting exactly when its leg at that initial object is an equivalence. Consequently right Kan extension from $B$ is equivalent to inverting the vertical edges. The pointwise right Kan restriction theorem then gives a trivial Kan fibration onto all $\\operatorname{Fun}(B,D)$; restrict it over the full subcategory $W$. A section $s:W\\to E$ is precomposition with the projection $X\\to C^\\otimes$.",
+   "uses": [
+    "lem-coef-relative-limit-initial-components",
+    "lem-coef-relative-right-kan-universal-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 2.4.1.6, printed pp. 287-290"
+   }
+  },
+  {
+   "text": "For $x\\in A$ over $\\langle n\\rangle$, the comma category of arrows from $x$ to $C$ is the lift category of the single active base map $\\mu_n:\\langle n\\rangle\\to\\langle1\\rangle$. A cocartesian fold $s_x:x\\to t_x$ is initial there by [lem-coef-infinity-cocartesian-composition-initiality]. The one-component case of [lem-coef-relative-limit-initial-components] therefore says that $f:A\\to D$ is a right Kan extension from $C$ exactly when every $f(s_x)$ is an equivalence. This is equivalent to inverting all cocartesian active edges: one direction includes folds, and the other follows by composing any active edge with a fold as in step 1. Every functor on $C$ admits these pointwise extensions, since the required limits are evaluations at initial objects. Apply the right Kan restriction theorem and restrict over the finite-product-preserving functors. Thus $E_0\\to\\operatorname{Fun}^{\\mathrm{fp}}(C,D)$ is an equivalence of full infinity categories.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-relative-limit-initial-components",
+    "lem-coef-relative-right-kan-universal-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 2.4.1.6, printed pp. 287-290"
+   }
+  },
+  {
+   "text": "Fix $f\\in E_0$. The comma category from $A$ to $(x,1)$ has the terminal object $\\alpha_x:(x^+,0)\\to(x,1)$ by [lem-coef-terminal-unit-active-comma]. Thus every required pointwise colimit is evaluation at $x^+$ by [lem-coef-infinity-final-index-colimit]. Apply the right Kan restriction theorem to opposite categories (with target $D^{\\mathrm{op}}$ and base $*$). It supplies left Kan extensions of $f$ along $A\\subset X$, and restriction from the full subcategory $L\\subset\\operatorname{Fun}(X,D)$ of these extensions, with level-zero restriction in $E_0$, is an equivalence $L\\to E_0$. By the opposite of the one-component case of [lem-coef-relative-limit-initial-components] (target $D^{\\mathrm{op}}\\to *$; $\\alpha_x$ is initial in the opposite comma), a cocone on this comma is a colimit exactly when its leg at $\\alpha_x$ is an equivalence. Hence an extension $F$ lies in $L$ exactly when every $F(\\alpha_x)$ is an equivalence. No small colimit completeness of $D$ is used.",
+   "uses": [
+    "lem-coef-terminal-unit-active-comma",
+    "lem-coef-infinity-final-index-colimit",
+    "lem-coef-relative-limit-initial-components",
+    "lem-coef-relative-right-kan-universal-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 2.4.1.6, printed pp. 287-290"
+   }
+  },
+  {
+   "text": "We identify $L$ with $E$. Suppose first $F\\in L$, with $f=F|_A$. The active inclusion adding an empty output has a cocartesian lift $\\beta_x:(x,0)\\to(x^+,0)$, since its new coordinate is the tensor unit. Its composite with $\\alpha_x$ is the vertical edge $\\gamma_x$, up to the unit comparison. Both factors are inverted, the first by $f\\in E_0$ and the second by step 6. Hence $F(\\gamma_x)$ is an equivalence. For any active cocartesian $u:x\\to y$ at level one, the vertical naturality square compares $F(u)$ with $f(u)$ at level zero; its other two edges and $f(u)$ are equivalences. Thus $F(u)$ is an equivalence, giving in particular the fold condition for $F|_B$.",
+   "uses": [
+    "lem-coef-symmetric-monoidal-segal-classification",
+    "lem-coef-terminal-unit-active-comma"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 2.4.1.6, printed pp. 287-290"
+   }
+  },
+  {
+   "text": "It remains to verify the inert product cones for this $F|_B$. For each inert leg $x\\to x_j$, terminality of $\\alpha_{x_j}$ in its comma gives a coherent triangle $\\alpha_{x_j}\\eta_j\\simeq(x\\to x_j)\\alpha_x$ with $\\eta_j:x^+\\to x_j^+$ in $A$. Concretely its active base map sends $j$ to the retained coordinate and every other input, including the added unit, to the added unit output. The retained component is the identity on $x_j$; the other component is the terminal map to $\\mathbf1$. Under the equivalences $f(x^+)\\simeq h((\\bigotimes_i x_i)\\otimes\\mathbf1)$ and $f(x_j^+)\\simeq h(x_j\\otimes\\mathbf1)$ induced by folds, $f(\\eta_j)$ is $h$ of the canonical projection: folding that active block map tensors the identity on $x_j$ with the terminal maps on the other factors and then applies the unit constraints. These are exactly the defining tensor-product legs. Their source cone is a product by finite iteration of the hypothesis on $C$, and $h=f|_C$ preserves it since $f\\in E_0$. The displayed triangles, together with the equivalences $F(\\alpha_x)$ and $F(\\alpha_{x_j})$, identify this product cone with the required inert cone for $F|_B$. If $n=0$, $x^+=(\\mathbf1)$ and $h(\\mathbf1)$ is terminal, proving the empty cone as well. Thus $F\\in E$.",
+   "uses": [
+    "lem-coef-terminal-unit-active-comma",
+    "lem-coef-symmetric-monoidal-segal-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 2.4.1.6, printed pp. 287-290"
+   }
+  },
+  {
+   "text": "Conversely let $F\\in E$. Factor $\\alpha_x$ as the vertical edge at $x^+$ followed by the level-one cocartesian inert projection $\\delta_x:x^+\\to x$ dropping the added unit. The first factor is inverted by definition of $E$. The product cones for $F|_B$ identify $F(\\delta_x)$ with the projection from the product of $F(x)$ and $F(\\mathbf1)$ onto $F(x)$: projecting further to each color gives the same inert legs on both sides. Step 1 makes $F(\\mathbf1)$ terminal, so this projection is an equivalence by the mapping-space definition of product. This also works for $n=0$, where both the empty product and the unit value are terminal. Hence every $F(\\alpha_x)$ is an equivalence, so step 6 gives $F\\in L$. The equality $E=L$ is an equality of full subcategories, not just of their cores.",
+   "uses": [
+    "lem-coef-terminal-unit-active-comma"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 2.4.1.6, printed pp. 287-290"
+   }
+  },
+  {
+   "text": "Combine the equivalences $r:E\\to W$, $E=L\\to E_0$, and $E_0\\to\\operatorname{Fun}^{\\mathrm{fp}}(C,D)$. The section $s$ of $r$ is an equivalence: $rs$ is the identity and $r$ is an equivalence. Its composite with the other two restriction maps is exactly unary restriction $W\\to\\operatorname{Fun}^{\\mathrm{fp}}(C,D)$. This proves the assertion. Each Kan-extension comparison above is an equivalence of full functor infinity categories supplied by a trivial Kan fibration; it therefore retains every natural transformation and all higher simplices. The coherent pointwise equivalence criterion ensures the vertical comparisons used above are natural equivalences in these functor categories.",
+   "uses": [
+    "lem-coef-relative-right-kan-universal-restriction",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 2.4.1.6, printed pp. 287-290"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-symmetric-monoidal-segal-classification",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-terminal-unit-active-comma",
+  "lem-coef-relative-limit-initial-components",
+  "lem-coef-relative-right-kan-universal-restriction",
+  "lem-coef-infinity-final-index-colimit",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Agent-written details of the cylinder proof of Proposition 2.4.1.6, printed pp. 287-290; source read online but not archived locally (WANTED in report)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,10 +189,45 @@
    "results": "{\"t\": \"2026-10-17T18:25:53Z\", \"tool\": \"leanfinder\", \"query\": \"Weak cartesian structures, namely functors on a symmetric monoidal quasicategory taking inert projections to product cones and tensor fold cocartesian edges to equivalences, are determined fully faithfully by restriction to the unary fiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCartesian.ext\", \"CategoryTheory.Functor.IsCartesian.ext\", \"CategoryTheory.Functor.IsStronglyCocartesian.ext\", \"CategoryTheory.Functor.IsCocartesian.ext\", \"CategoryTheory.Functor.IsStronglyCartesian.map_uniq\", \"CategoryTheory.Functor.IsCartesian.map_uniq\", \"CategoryTheory.Functor.IsStronglyCartesian.isCartesian_of_isStronglyCartesian\", \"CategoryTheory.Functor.IsCocartesian.map_uniq\"], \"digest\": \"be457796904bde4b\"}",
    "date": "2026-10-17",
    "verdict": "no match: read all returned hits. Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean:833-969 concerns ordinary categories, including Monoidal.ofChosenFiniteProducts (944), Subsingleton F.Monoidal (947), and nonempty_monoidal_iff_preservesFiniteProducts (966). ExternalProduct/KanExtension.lean:35-105 concerns ordinary left Kan extensions; FiberedCategory/Cartesian.lean and Cocartesian.lean concern ordinary fibered categories. None states restriction of weak Cartesian structures on a quasicategorical total operad with all transformation spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "weak.?cartesian|nonempty_monoidal_iff_preservesFiniteProducts|rightKanExtension",
+   "results": "{\"t\": \"2026-10-17T18:42:48Z\", \"tool\": \"grep\", \"query\": \"weak.?cartesian|nonempty_monoidal_iff_preservesFiniteProducts|rightKanExtension\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Complete.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean\"], \"digest\": \"070e101ea491d6fb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: all hits read. Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean:945-969 gives ordinary monoidal structures on finite-product-preserving functors; the fibered-category hits and simplicial homotopy-category comparisons are ordinary categories. None states restriction for weak Cartesian structures on a symmetric monoidal quasicategory with all transformations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weak cartesian functors on a symmetric monoidal quasicategory are determined by finite product preserving functors on its underlying quasicategory",
+   "results": "{\"t\": \"2026-10-17T18:42:48Z\", \"tool\": \"leansearch\", \"query\": \"Weak cartesian functors on a symmetric monoidal quasicategory are determined by finite product preserving functors on its underlying quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Monoidal.nonempty_monoidal_iff_preservesFiniteProducts\", \"CategoryTheory.Functor.Monoidal.ofChosenFiniteProducts.congr_simp\", \"CategoryTheory.Functor.Monoidal.instPreservesFiniteProducts\", \"CategoryTheory.Functor.Monoidal.ofChosenFiniteProducts\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"CategoryTheory.Functor.Monoidal.whiskerRight_app_fst_assoc\", \"CategoryTheory.Functor.Monoidal.fst_app\", \"CategoryTheory.monoidalOfHasFiniteProducts.η_eq\"], \"digest\": \"967a71c3a5519106\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: all hits read. Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean:945-969 gives ordinary monoidal structures on finite-product-preserving functors; the fibered-category hits and simplicial homotopy-category comparisons are ordinary categories. None states restriction for weak Cartesian structures on a symmetric monoidal quasicategory with all transformations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Monoidal\", \"preservesFiniteProducts\"",
+   "results": "{\"t\": \"2026-10-17T18:42:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"Monoidal\\\", \\\"preservesFiniteProducts\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Monoidal.instPreservesFiniteProducts\", \"CategoryTheory.Functor.Monoidal.nonempty_monoidal_iff_preservesFiniteProducts\"], \"digest\": \"a12cb025f6b19caa\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: all hits read. Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean:945-969 gives ordinary monoidal structures on finite-product-preserving functors; the fibered-category hits and simplicial homotopy-category comparisons are ordinary categories. None states restriction for weak Cartesian structures on a symmetric monoidal quasicategory with all transformations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite product preserving functor on a cartesian symmetric monoidal infinity category extends uniquely coherently to a weak cartesian structure on its total operad",
+   "results": "{\"t\": \"2026-10-17T18:42:50Z\", \"tool\": \"leanfinder\", \"query\": \"A finite product preserving functor on a cartesian symmetric monoidal infinity category extends uniquely coherently to a weak cartesian structure on its total operad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.monoidalOfHasFiniteProducts.δ_eq\", \"CategoryTheory.Functor.Monoidal.instPreservesFiniteProducts\", \"CategoryTheory.Functor.EssImageSubcategory.lift_def\", \"CategoryTheory.Functor.OplaxMonoidal.ofChosenFiniteProducts\", \"CategoryTheory.monoidalOfHasFiniteProducts.instIsIsoδ\", \"CategoryTheory.Functor.Monoidal.ofChosenFiniteProducts\", \"CategoryTheory.Functor.Monoidal.nonempty_monoidal_iff_preservesFiniteProducts\", \"CategoryTheory.CartesianMonoidalCategory.ofHasFiniteProducts\"], \"digest\": \"ca4869c43bc9e3b1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: all hits read. Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean:945-969 gives ordinary monoidal structures on finite-product-preserving functors; the fibered-category hits and simplicial homotopy-category comparisons are ordinary categories. None states restriction for weak Cartesian structures on a symmetric monoidal quasicategory with all transformations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of weak Cartesian structures on a cartesian symmetric monoidal infinity category to the unary fiber is an equivalence of infinity categories including arbitrary natural transformations",
+   "results": "{\"t\": \"2026-10-17T18:42:51Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of weak Cartesian structures on a cartesian symmetric monoidal infinity category to the unary fiber is an equivalence of infinity categories including arbitrary natural transformations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFibers.instIsEquivalenceFibFiberInducedFunctor\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.instIsEquivalenceαCategoryObjLocallyDiscreteOppositeCatMkOpFiberForgetInducedFunctor\", \"CategoryTheory.prod.leftUnitor_isEquivalence\", \"SSet.Truncated.instCartesianMonoidalCategory\", \"CategoryTheory.prod.rightUnitor_isEquivalence\", \"SSet.hoFunctor.unitHomEquiv\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"CategoryTheory.cartesianClosedOfEquiv\"], \"digest\": \"9240cae018396b8d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: all hits read. Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean:945-969 gives ordinary monoidal structures on finite-product-preserving functors; the fibered-category hits and simplicial homotopy-category comparisons are ordinary categories. None states restriction for weak Cartesian structures on a symmetric monoidal quasicategory with all transformations."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cartesian-monoidal-structure-uniqueness",
@@ -87,5 +255,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-weak-cartesian-structure-restriction",
+  "worker": "stage1",
+  "summary": "Kept the full restriction statement, including nullary products and noninvertible transformations. Expanded the active-cylinder Kan-extension proof into ten steps, with one new statement-only terminal-unit comma lemma; reused the existing general pointwise Kan restriction, initial-evaluation and final-index results. Wrote out the actual product-leg comparisons and both directions of the left-Kan criterion. Read source and checked all cited statements, universe enlargement, small arities and search hits.",
+  "blueprint": "Auxiliary coherent cartesian comparison in the existing ancestry from prop-coef-integral-exceptional-adjoint, derived adjunction comparison; this supplies the HA restriction theorem used in cartesian-monoidal-structure-uniqueness. The blueprint ancestor does not itself contain the cylinder argument. No unit or chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic pointwise criterion for equivalences in coherent functor categories, used on the vertical natural comparisons; the unit supplies no separate functor-calculus statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NK-fba40dc56",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-fba40dc56 (reviewer sub-agent of L); spot-checked: I read the whole item, all 10 steps, the new node lem-coef-terminal-unit-active-comma and the statements of all 8 cited nodes. The item's statement matches HA Def 2.4.0.1, Def 2.4.1.1 and Prop 2.4.1.6, including nullary products, the fold mu_0 and full functor categories, so it is not weakened. HA is not archived locally; it is listed as WANTED and proof_origin is 'agent'. I recomputed the new node myself. The active factorization psi through pi_n is unique, and the comma fiber is Map_C(tensor of the discarded inputs, 1), which is contractible because the unit is terminal. Small cases: n=0 works, and with no discarded inputs the space is Map(1,1). Without the hypothesis it fails: in Ab with unit Z the space is Map(Z,Z)=Z. The node is statement-only, introduces all its own objects, and does not restate a clause of the item. I checked the duplicate candidates (cylinder slice and edge comparison, lax-cartesian classification, envelope recognition, composition-initiality, cocartesian-full-restriction) and none states this. Checked the step details: A and B are full in X, I is closed under composition, and the comma from (x,0) into level 1 has initial object gamma_x. The comma into the unary objects is L(x,mu_n), because mu_n is the only active map to <1>. In step 7, alpha_x composed with beta_x is equivalent to gamma_x, and in step 9, alpha_x is delta_x composed with gamma_{x^+}. In step 8, the folded eta_j is the canonical projection. In step 10, the equation rs=id makes s an equivalence. The tool_use of lem-cbc-enhanced-functor-cone-calculus (a generic pointwise criterion for equivalences) is accepted; every other citation is in the same unit. No SGA is cited. One repair: step 6 asserted that a cocone is colimiting iff its leg at the terminal alpha_x is invertible, but cited only final-index-colimit, which supplies a single colimit cocone. I added the opposite one-component case of lem-coef-relative-limit-initial-components to the step's text and uses; it was already in proof_deps. The corrected item JSON is in fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
  }
 }
