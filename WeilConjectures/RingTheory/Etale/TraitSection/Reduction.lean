@@ -147,7 +147,7 @@ theorem Algebra.TraitSection.mem_range_of_forall_smul_eq {B B₁ Bk L : Type*} [
   have : SMulCommClass G B L := ⟨fun g b x ↦ by
     rw [IsScalarTower.algebraMap_smul (A := Bk) b x |>.symm, smul_comm g]
     exact (IsScalarTower.algebraMap_smul (A := Bk) b (g • x))⟩
-  letI := rightTensorAction (B := B) (B₁ := B₁) (L := L) G
+  let := rightTensorAction (B := B) (B₁ := B₁) (L := L) G
   refine AlgHom.mem_range_map_of_forall_baseChange_eq (IsScalarTower.toAlgHom B Bk L)
     (fun g : G ↦ MulSemiringAction.toAlgHom B L g) (fun x hx ↦ ?_) y fun g ↦ ?_
   · obtain ⟨k, hk⟩ := hfix x hx

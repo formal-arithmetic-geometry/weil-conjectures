@@ -23,7 +23,7 @@ in the limit theorem `AlgebraicGeometry.Etale.higherDirectImage_limit`.
 The transition maps are in
 `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition`, the limit
 theorem in `...HigherDirectImage.Limit`, the cohomology presheaf and its consequences in
-`...HigherDirectImage.CohomologyPresheaf`, `...HigherDirectImage.FilteredColimit` and
+`...HigherDirectImage.CohomPresheaf`, `...HigherDirectImage.FilteredColimit` and
 `...HigherDirectImage.LocalVanishing`; this module imports all of them.
 
 ## Main definitions

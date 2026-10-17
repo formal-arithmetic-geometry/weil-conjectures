@@ -29,6 +29,7 @@ open Polynomial IsLocalRing TensorProduct
 namespace RingTheory.InvariantsDescent
 
 set_option maxHeartbeats 1600000 in
+-- the integral closures of the base-changed Kummer algebras are slow to elaborate
 /-- **Descent of étaleness of an integral closure along a tame Kummer cover.** See the module
 docstring. -/
 theorem etale_and_finite_integralClosure_of_kummer {R : Type*} [CommRing R] [IsNoetherianRing R]
@@ -56,11 +57,11 @@ theorem etale_and_finite_integralClosure_of_kummer {R : Type*} [CommRing R] [IsN
   let T' := integralClosure R' (R' ⊗[R] M)
   let T := integralClosure R M
   let Γ := Multiplicative (ZMod n)
-  letI := AdjoinRoot.kummerAction n π hζ
-  haveI : SMulCommClass Γ R R' := AdjoinRoot.smulCommClass_kummerAction n π hζ
-  haveI : Algebra.IsInvariant R R' Γ := AdjoinRoot.isInvariant_kummerAction n π hζ hu
-  letI := Algebra.IsInvariant.tensorAction (R := R) (R' := R') (M := M) Γ
-  letI := Algebra.IsInvariant.integralClosureAction (R := R) (R' := R') (M := M) Γ
+  let := AdjoinRoot.kummerAction n π hζ
+  have : SMulCommClass Γ R R' := AdjoinRoot.smulCommClass_kummerAction n π hζ
+  have : Algebra.IsInvariant R R' Γ := AdjoinRoot.isInvariant_kummerAction n π hζ hu
+  let := Algebra.IsInvariant.tensorAction (R := R) (R' := R') (M := M) Γ
+  let := Algebra.IsInvariant.integralClosureAction (R := R) (R' := R') (M := M) Γ
   -- the map `T → T'`
   have hmemT (t : T) : Algebra.TensorProduct.includeRight (t : M) ∈ T' :=
     (t.2.map (Algebra.TensorProduct.includeRight : M →ₐ[R] R' ⊗[R] M)).tower_top
@@ -70,7 +71,7 @@ theorem etale_and_finite_integralClosure_of_kummer {R : Type*} [CommRing R] [IsN
       map_mul' x y := Subtype.ext (map_mul _ _ _)
       map_zero' := Subtype.ext (map_zero _)
       map_add' x y := Subtype.ext (map_add _ _ _) }
-  letI : Algebra T T' := ι.toAlgebra
+  let : Algebra T T' := ι.toAlgebra
   have hι (t : T) : ((algebraMap T T' t : T') : R' ⊗[R] M) =
       Algebra.TensorProduct.includeRight (t : M) := rfl
   have : IsScalarTower R T T' := .of_algebraMap_eq fun r ↦ Subtype.ext <| by

@@ -44,12 +44,13 @@ theorem algHom_eq_of_forall_isMaximal (f g : S →ₐ[R] C)
   have : f s - g s ∈ Ideal.span {e} := hsp ▸ Ideal.subset_span ⟨s, rfl⟩
   rwa [he0, Ideal.span_singleton_eq_bot.2 rfl, Ideal.mem_bot] at this
 
+omit [Algebra R C] in
 /-- Variant of `Algebra.FormallyUnramified.algHom_eq_of_forall_isMaximal` for ring maps `f g`
 which agree on `R`. -/
 theorem ringHom_eq_of_forall_isMaximal (f g : S →+* C)
     (hfg : f.comp (algebraMap R S) = g.comp (algebraMap R S))
     (h : ∀ (m : Ideal C), m.IsMaximal → ∀ s, f s - g s ∈ m) : f = g := by
-  letI : Algebra R C := (f.comp (algebraMap R S)).toAlgebra
+  let : Algebra R C := (f.comp (algebraMap R S)).toAlgebra
   let f' : S →ₐ[R] C := { f with commutes' := fun _ ↦ rfl }
   let g' : S →ₐ[R] C := { g with commutes' := fun r ↦ (congr($hfg r)).symm }
   have := algHom_eq_of_forall_isMaximal f' g' h

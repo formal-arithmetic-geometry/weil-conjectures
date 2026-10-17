@@ -41,10 +41,10 @@ variable {R R' M : Type*} [CommRing R] [CommRing R'] [Algebra R R'] [CommRing M]
 noncomputable def tensorAlgAut : Γ →* (R' ⊗[R] M ≃ₐ[R] R' ⊗[R] M) where
   toFun g := Algebra.TensorProduct.congr (MulSemiringAction.toAlgEquiv R R' g) AlgEquiv.refl
   map_one' := by
-    refine AlgEquiv.coe_algHom_injective (Algebra.TensorProduct.ext' fun a m ↦ ?_)
+    refine AlgEquiv.coe_toAlgHom_injective (Algebra.TensorProduct.ext' fun a m ↦ ?_)
     simp
   map_mul' g h := by
-    refine AlgEquiv.coe_algHom_injective (Algebra.TensorProduct.ext' fun a m ↦ ?_)
+    refine AlgEquiv.coe_toAlgHom_injective (Algebra.TensorProduct.ext' fun a m ↦ ?_)
     simp [mul_smul]
 
 /-- The action of `Γ` on `R' ⊗[R] M` through the first factor. -/
@@ -116,7 +116,7 @@ theorem mem_range_includeRight_of_forall_smul_eq (hΓ : IsUnit (Fintype.card Γ 
     (x : R' ⊗[R] M)
     (hx : letI := tensorAction (R := R) (R' := R') (M := M) Γ; ∀ g : Γ, g • x = x) :
     x ∈ Set.range (Algebra.TensorProduct.includeRight : M →ₐ[R] R' ⊗[R] M) := by
-  letI := tensorAction (R := R) (R' := R') (M := M) Γ
+  let := tensorAction (R := R) (R' := R') (M := M) Γ
   let N : Submodule R (R' ⊗[R] M) :=
     LinearMap.range (Algebra.TensorProduct.includeRight : M →ₐ[R] R' ⊗[R] M).toLinearMap
   have key (y : R' ⊗[R] M) : ∑ g : Γ, g • y ∈ N := by
@@ -148,8 +148,8 @@ theorem exists_eq_includeRight_of_forall_smul_eq_integralClosure [Finite Γ]
     (hx : letI := integralClosureAction (R := R) (R' := R') (M := M) Γ; ∀ g : Γ, g • x = x) :
     ∃ t : integralClosure R M,
       Algebra.TensorProduct.includeRight (t : M) = (x : R' ⊗[R] M) := by
-  letI := integralClosureAction (R := R) (R' := R') (M := M) Γ
-  letI := tensorAction (R := R) (R' := R') (M := M) Γ
+  let := integralClosureAction (R := R) (R' := R') (M := M) Γ
+  let := tensorAction (R := R) (R' := R') (M := M) Γ
   obtain ⟨m, hm⟩ := mem_range_includeRight_of_forall_smul_eq hΓ (x : R' ⊗[R] M)
     fun g ↦ congr(Subtype.val $(hx g))
   have : Algebra.IsIntegral R R' := Algebra.IsInvariant.isIntegral R R' Γ

@@ -47,6 +47,7 @@ variable {A : Type*} [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] {ϖ :
   {K : Type*} [Field K] [Algebra A K] [IsFractionRing A K]
 
 set_option maxHeartbeats 1600000 in
+-- the base-changed Kummer algebras are slow to elaborate
 /-- **Points along a section after a tame Kummer base change.** See the module docstring. -/
 theorem exists_points_kummer (hϖ : Irreducible ϖ) (σ : R →ₐ[A] A) {k : ℕ}
     (χ : Fin k → (M →+* K))
@@ -125,7 +126,7 @@ theorem exists_points_kummer (hϖ : Irreducible ϖ) (σ : R →ₐ[A] A) {k : �
       obtain ⟨r, rfl⟩ := hσ'surj a
       exact ⟨residue R' r, ResidueField.map_residue σ' r⟩⟩
   -- the maps `Ξⱼ = σ' ⊗ χⱼ : R' ⊗[R] M → K₂`
-  letI : Algebra R K₂ := ((algebraMap A K₂).comp σ.toRingHom).toAlgebra
+  let : Algebra R K₂ := ((algebraMap A K₂).comp σ.toRingHom).toAlgebra
   have hRK₂ (r : R) : algebraMap R K₂ r = algebraMap A K₂ (σ r) := rfl
   let f : R' →ₐ[R] K₂ :=
     { (algebraMap A₂ K₂).comp σ' with
@@ -136,8 +137,7 @@ theorem exists_points_kummer (hϖ : Irreducible ϖ) (σ : R →ₐ[A] A) {k : �
         have := congr($(hχ j) r)
         simp only [RingHom.comp_apply] at this
         simp only [RingHom.toMonoidHom_eq_coe, OneHom.toFun_eq_coe, MonoidHom.toOneHom_coe,
-          MonoidHom.coe_coe, RingHom.coe_comp, Function.comp_apply, AlgHom.coe_toRingHom, this,
-          AlgHom.commutes]
+          MonoidHom.coe_coe, RingHom.coe_comp, Function.comp_apply, this]
         exact (Algebra.TensorProduct.includeRight.commutes (σ r)).trans rfl }
   let Ξ (j : Fin k) : R' ⊗[R] M →ₐ[R] K₂ :=
     Algebra.TensorProduct.lift f (g j) fun _ _ ↦ Commute.all _ _
@@ -154,7 +154,7 @@ theorem exists_points_kummer (hϖ : Irreducible ϖ) (σ : R →ₐ[A] A) {k : �
       IsIntegral.map_of_comp_eq σ' (Ξ j).toRingHom (RingHom.ext fun a ↦ (hΞalg j a).symm) t.2
     exact IsIntegrallyClosed.isIntegral_iff.1 hint
   choose ρ hρ using hmem
-  letI : Algebra R' A₂ := σ'.toAlgebra
+  let : Algebra R' A₂ := σ'.toAlgebra
   let ρh (j : Fin k) : integralClosure R' (R' ⊗[R] M) →ₐ[R'] A₂ :=
     { toFun := ρ j
       map_one' := hinjK₂ (by simp [hρ])
@@ -185,12 +185,12 @@ theorem exists_points_kummer (hϖ : Irreducible ϖ) (σ : R →ₐ[A] A) {k : �
   · intro j g t
     have hζR : algebraMap A R ζ ^ n = 1 := by rw [← map_pow, hζ, map_one]
     let Γ := Multiplicative (ZMod n)
-    letI := AdjoinRoot.kummerAction n (algebraMap A R ϖ) hζR
+    let := AdjoinRoot.kummerAction n (algebraMap A R ϖ) hζR
     have : SMulCommClass Γ R R' := AdjoinRoot.smulCommClass_kummerAction n (algebraMap A R ϖ) hζR
-    letI := AdjoinRoot.kummerAction n ϖ hζ
+    let := AdjoinRoot.kummerAction n ϖ hζ
     have : SMulCommClass Γ A A₂ := AdjoinRoot.smulCommClass_kummerAction n ϖ hζ
-    letI := Algebra.IsInvariant.tensorAction (R := A) (R' := A₂) (M := K) Γ
-    letI := Algebra.IsInvariant.tensorAction (R := R) (R' := R') (M := M) Γ
+    let := Algebra.IsInvariant.tensorAction (R := A) (R' := A₂) (M := K) Γ
+    let := Algebra.IsInvariant.tensorAction (R := R) (R' := R') (M := M) Γ
     -- `σ'` is equivariant
     have he1 (a : R') : σ' (g • a) = g • σ' a := by
       have key : σ'.comp (AdjoinRoot.kummerAut n (algebraMap A R ϖ) hζR g.toAdd).toRingHom =

@@ -11,7 +11,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.TStru
 public import WeilConjectures.SixFunctors.Etale.Gabber
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishingTorsion
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomPresheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapEtale
 
 /-!
