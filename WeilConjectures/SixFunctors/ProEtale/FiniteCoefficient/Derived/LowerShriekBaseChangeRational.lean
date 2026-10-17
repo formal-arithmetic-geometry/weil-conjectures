@@ -10,7 +10,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCo
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationRecollement
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekBaseChangeComplete
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ScalarExtension
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Shift
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Triangulated
 
 /-!
 # Compact-support base change over a finite extension of `ℚ_ℓ`
@@ -104,6 +104,29 @@ noncomputable abbrev integralOperation (F : 𝐃(X) ⥤ 𝐃(Y)) : 𝐃𝐜(X) �
   DerivedCategoryDerivedCompleteIntegral.ι _ l E ⋙ F ⋙
     DerivedCategoryDerivedCompleteIntegral.completion _ l E
 
+section
+
+variable (F : 𝐃(X) ⥤ 𝐃(Y))
+
+/-- The integral version of an operation commuting with shifts commutes with shifts. -/
+noncomputable instance commShift_integralOperation [F.CommShift ℤ] :
+    (integralOperation l E F).CommShift ℤ :=
+  inferInstanceAs ((DerivedCategoryDerivedCompleteIntegral.ι _ l E ⋙ F ⋙
+    DerivedCategoryDerivedCompleteIntegral.completion _ l E).CommShift ℤ)
+
+/-- The integral version of a triangulated operation is triangulated. -/
+instance isTriangulated_integralOperation [F.CommShift ℤ] [F.IsTriangulated] :
+    (integralOperation l E F).IsTriangulated :=
+  inferInstanceAs (DerivedCategoryDerivedCompleteIntegral.ι _ l E ⋙ F ⋙
+    DerivedCategoryDerivedCompleteIntegral.completion _ l E).IsTriangulated
+
+/-- The integral version of an `𝒪_E`-linear operation is `𝒪_E`-linear. -/
+instance linear_integralOperation [F.Linear 𝐎] : (integralOperation l E F).Linear 𝐎 :=
+  inferInstanceAs ((DerivedCategoryDerivedCompleteIntegral.ι _ l E ⋙ F ⋙
+    DerivedCategoryDerivedCompleteIntegral.completion _ l E).Linear 𝐎)
+
+end
+
 /-- The integral compact-support direct image `K ↦ (Rf_!(c) K)^ = R lim_n Rf_!(c) K_n` of a
 compactification `c` of `f` (blueprint `def-weil-integral-rational-qbar-compact-support`, at the
 integral stage). -/
@@ -158,21 +181,17 @@ noncomputable def integralRightDerivedLowerShriekOfCompactificationBaseChangeMap
       integralOperation l E (L((g')^*[ModuleCat.{u + 1} 𝐎]) ⋙
         Rf_!(c.ofIsPullback sq)[ModuleCat.{u + 1} 𝐎]) :=
   Functor.whiskerLeft (DerivedCategoryDerivedCompleteIntegral.ι _ l E)
-    ((Functor.associator _ _ _).hom ≫
-      completedRightDerivedLowerShriekOfCompactificationBaseChangeMap
-        (PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span.{w, u} l E) sq c ≫
-      (Functor.associator _ _ _).inv)
+    (Functor.whiskerRight
+      (rightDerivedLowerShriekOfCompactificationBaseChangeMap (ModuleCat.{u + 1} 𝐎) sq c)
+      (DerivedCategoryDerivedCompleteIntegral.completion _ l E))
 
 lemma integralRightDerivedLowerShriekOfCompactificationBaseChangeMap_app
     (sq : IsPullback g' f' f g) (c : Compactification f) (K : 𝐃𝐜(X)) :
     (integralRightDerivedLowerShriekOfCompactificationBaseChangeMap l E sq c).app K =
       (DerivedCategoryDerivedCompleteIntegral.completion _ l E).map
         ((rightDerivedLowerShriekOfCompactificationBaseChangeMap (ModuleCat.{u + 1} 𝐎) sq
-          c).app ((DerivedCategoryDerivedCompleteIntegral.ι _ l E).obj K)) := by
-  simp only [integralRightDerivedLowerShriekOfCompactificationBaseChangeMap,
-    Functor.whiskerLeft_app, NatTrans.comp_app, Functor.associator_hom_app,
-    Functor.associator_inv_app, Category.id_comp, Category.comp_id]
-  exact completedRightDerivedLowerShriekOfCompactificationBaseChangeMap_app _ sq c _
+          c).app ((DerivedCategoryDerivedCompleteIntegral.ι _ l E).obj K)) :=
+  rfl
 
 /-- The rational compact-support exchange map `Lg^* Rf_!(c) ⟶ Rf'_!(c') Lg'^*` on the rational
 stage `D_comp(X_proét, E)`, the transport to the rationalizations
@@ -217,7 +236,7 @@ theorem isIso_rationalRightDerivedLowerShriekOfCompactificationBaseChangeMap_app
       ((DerivedCategoryDerivedCompleteRational.fromIntegral _ l E).obj K)) := by
   have : ∀ n : ℕ, Finite (𝐎 ⧸ PadicAlgCl.maximalIdealShrink l E ^ n) := fun n ↦
     .of_equiv _ (Ideal.quotientEquiv _ _ (PadicAlgCl.shrinkRingEquiv l E)
-      (by rw [PadicAlgCl.maximalIdealShrink, Ideal.map_pow])).toEquiv
+      (by rw [PadicAlgCl.maximalIdealShrink, Ideal.map_pow]; rfl)).toEquiv
   have h := isIso_completedRightDerivedLowerShriekOfCompactificationBaseChangeMap_app
     (PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span.{w, u} l E) sq c _ K.2
     Kn η hη hKn

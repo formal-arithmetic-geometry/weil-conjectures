@@ -83,7 +83,8 @@ end General
 
 set_option hygiene false in
 /-- The coefficient category `ModuleCat 𝒪_E` of the integral stage `E`. -/
-local notation "𝐌" => ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))
+local notation "𝐌" =>
+  @ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E)) CommRing.toRing
 
 set_option hygiene false in
 /-- The coefficient category `ModuleCat 𝒪_{E'}` of the integral stage `E'`. The ring structure is
@@ -152,9 +153,15 @@ theorem hasProjectionFormula_extendScalars_of_derivedCompleteIntegral (f : X ⟶
     (hKt : Etale.DerivedCategory.finiteTorAmplitude 𝐌 X K₀)
     (hLc : Etale.DerivedCategory.boundedConstructible 𝐌 Y L₀)
     (hL : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E L₀)
-    (hLt : Etale.DerivedCategory.finiteTorAmplitude 𝐌 Y L₀) :
+    (hLt : Etale.DerivedCategory.finiteTorAmplitude 𝐌 Y L₀)
+    (hs : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E
+      (((Etale.derivedTensor 𝐌 Y).obj ((Etale.rightDerivedLowerShriek 𝐌 f).obj K₀)).obj L₀))
+    (ht : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E
+      ((Etale.rightDerivedLowerShriek 𝐌 f).obj
+        (((Etale.derivedTensor 𝐌 X).obj K₀).obj ((L(Etale.upperStar 𝐌 f)).obj L₀)))) :
     HasProjectionFormula 𝐌' f ((𝐍 X).obj K) ((𝐍 Y).obj L) := by
   have h := hasProjectionFormula_of_derivedCompleteIntegral l E f eK eL hKc hK hKt hLc hL hLt
+    hs ht
   exact hasProjectionFormula_extendScalars f K L h
 
 /-- Blueprints `sk-thm-sf-pf-proetale` and `thm-sf-pf-proetale`, the stage `ℚ̄_ℓ`.
@@ -181,12 +188,17 @@ theorem isIso_rationalization_map_projectionMap_extendScalars (f : X ⟶ Y)
     (hKt : Etale.DerivedCategory.finiteTorAmplitude 𝐌 X K₀)
     (hLc : Etale.DerivedCategory.boundedConstructible 𝐌 Y L₀)
     (hL : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E L₀)
-    (hLt : Etale.DerivedCategory.finiteTorAmplitude 𝐌 Y L₀) :
+    (hLt : Etale.DerivedCategory.finiteTorAmplitude 𝐌 Y L₀)
+    (hs : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E
+      (((Etale.derivedTensor 𝐌 Y).obj ((Etale.rightDerivedLowerShriek 𝐌 f).obj K₀)).obj L₀))
+    (ht : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E
+      ((Etale.rightDerivedLowerShriek 𝐌 f).obj
+        (((Etale.derivedTensor 𝐌 X).obj K₀).obj ((L(Etale.upperStar 𝐌 f)).obj L₀)))) :
     IsIso ((Rationalization.Q (nonZeroDivisors (Shrink.{u + 1} (PadicAlgCl.integers l E')))
       (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) 𝐌'))).map
         (((projectionMap 𝐌' f).app ((𝐍 X).obj K)).app ((𝐍 Y).obj L))) :=
   @Functor.map_isIso _ _ _ _ _ _ _ _
     (hasProjectionFormula_extendScalars_of_derivedCompleteIntegral l E E' f eK eL
-      hKc hK hKt hLc hL hLt)
+      hKc hK hKt hLc hL hLt hs ht)
 
 end AlgebraicGeometry.ProEtale
