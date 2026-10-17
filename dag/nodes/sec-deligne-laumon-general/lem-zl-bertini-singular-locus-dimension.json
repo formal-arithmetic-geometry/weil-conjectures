@@ -18,9 +18,116 @@
   "def-kun-topological-krull-dimension",
   "def-weil-pbc-morphism-to-projective-space-by-sections"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $Y=\\varnothing$, then $\\Sigma=\\varnothing$ and take $B=\\varnothing$. This includes $r=0$: generation by no sections forces every stalk of the invertible sheaf to be zero, so there are no points of $Y$. In this case $\\mathbf P(V)$ is empty (the usual interpretation of $\\mathbf P^{-1}$). Hence assume $Y\\ne\\varnothing$ and $r\\geq1$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-weil-pbc-generating-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0FD6, lemma-bertini, universal-family proof"
+   }
+  },
+  {
+   "text": "The standard affine charts of $\\mathbf P^{r-1}_k$ have finite type coordinate rings, hence Noetherian underlying spaces by [lem-wf-affine-noetherian-components]. Their finite union is Noetherian by [lem-kun-finite-union-noetherian]. An immersion is a homeomorphism onto its locally closed image, so [lem-sfb-noetherian-space-compact-subsets] implies that $Y$ is quasi-compact. Smoothness makes $Y$ locally of finite presentation, hence locally of finite type; quasi-compactness makes it finite type. The universal zero scheme is finite type: on an affine trivializing open $\\operatorname{Spec}A\\subseteq Y$ its ring is $A[x_1,\\ldots,x_r]/(\\sum x_if_i)$, generated over $k$ by generators of $A$ and the $x_i$. These finitely many charts show that $H_{\\mathrm{univ}}$ is finite type. The smooth locus of $q$ is open by the definition of smoothness at a point; thus $\\Sigma$ is closed. Give it the reduced closed subscheme structure. On each affine chart this is another quotient of the same finite type algebra, so $\\Sigma$ is finite type over $k$.",
+   "uses": [
+    "lem-wf-affine-noetherian-components",
+    "lem-kun-finite-union-noetherian",
+    "lem-sfb-noetherian-space-compact-subsets",
+    "def-weil-closed-immersion",
+    "def-sbc-smooth-morphisms",
+    "def-weil-finite-type-morphism",
+    "def-pc-zero-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0FD6, lemma-bertini, universal-family proof"
+   }
+  },
+  {
+   "text": "Cover $Y$ by affine opens $U$ on which $s_i=\\psi(v_i)$ trivializes $\\mathcal L$ and $\\Omega^1_{U/k}$ is free of rank $d$, using [lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension]. Applying its rank equality again at each point of $U$ gives $\\dim_u U=d$ everywhere, hence $\\dim U=d$. Take a finite such cover using quasi-compactness. Set $f_j=s_j/s_i$, so $f_i=1$. At any $y\\in U$, the immersion into the projective chart factors locally as a closed immersion into an open $W\\subseteq\\mathbf A^{r-1}_k$. Since $U$ is smooth, [lem-pur-conormal-sequence-smooth-immersion] makes $\\Omega_{W/k}\\otimes\\kappa(y)\\to\\Omega_{U/k}\\otimes\\kappa(y)$ surjective. The differentials of the affine coordinates generate the source: locally sections on $W$ are polynomial fractions, and $d(a/b)=b^{-1}da-ab^{-2}db$. Their images are $df_j(y)$, $j\\ne i$, by the coordinate description of the associated projective morphism. Consequently the residue-field map $E(y):\\kappa(y)^r\\to\\kappa(y)\\oplus(\\Omega^1_{U/k}\\otimes\\kappa(y))$, $e_j\\mapsto(f_j(y),df_j(y))$, is onto: $e_i$ gives $(1,0)$, and $e_j-f_j(y)e_i$ gives $(0,df_j(y))$. Its rank is therefore $d+1$, so $d+1\\leq r$.",
+   "uses": [
+    "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "lem-pur-conormal-sequence-smooth-immersion",
+    "def-weil-pbc-morphism-to-projective-space-by-sections",
+    "def-sc-relative-differential-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0FD6, lemma-bertini, universal-family proof"
+   }
+  },
+  {
+   "text": "On $\\mathbf A^r_k\\times_kU$ the universal equation is $F=\\sum_jx_jf_j$, and its differential relative to $\\mathbf A^r_k$ is $dF=\\sum_jx_jdf_j$. The ambient projection is smooth, being the base change of $U\\to\\operatorname{Spec}k$ by [lem-pc-proper-base-change](2). The relative differentials here are the pullback of $\\Omega^1_{U/k}$: on affine rings the derivations of $k[x]\\otimes_k A$ over $k[x]$ are exactly the $k$-derivations of $A$, extended $k[x]$-linearly. If $h\\in\\Sigma$ lies above $y\\in U$, the hypersurface criterion [lem-zl-hypersurface-nonzero-relative-differential] implies $dF(h)=0$, since otherwise $q$ would be smooth at $h$. Also $F(h)=0$ because $h\\in H_{\\mathrm{univ}}$. Thus $\\Sigma\\cap p^{-1}(U)$ is contained in the closed locus $K_U$ cut out by $F$ and the $d$ coefficients of $dF$. This is only a containment, and uses no flatness or smoothness assertion about the fibre at the zero coefficient vector.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-zl-hypersurface-nonzero-relative-differential",
+    "def-sc-relative-differential-sheaf",
+    "def-pc-zero-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0FD6, lemma-bertini, universal-family proof"
+   }
+  },
+  {
+   "text": "For every $y\\in U$, the fibre $(K_U)_y\\subseteq\\mathbf A^r_{\\kappa(y)}$ is cut out by the homogeneous linear equations $E(y)x=0$. Its matrix has rank $d+1$ by Step 3. Choose a nonzero maximal minor and solve for the corresponding $d+1$ variables; the other $r-d-1$ variables are free, giving $(K_U)_y\\cong\\mathbf A^{r-d-1}_{\\kappa(y)}$. The polynomial dimension formula [lem-sf-noetherian-polynomial-dimension], with the spectrum/ring identification [lem-weil-pbc-spec-topological-krull-dimension-ring], gives fibre dimension $r-d-1$. Here a field has dimension zero because its only prime is $(0)$. Since $U$ is affine finite type of dimension $d$ and $K_U$ is the closed subscheme defined by these finitely many equations in $\\mathbf A^r\\times U$, the fibre bound in [lem-zl-finite-type-fibre-image-dimension-bounds] gives $\\dim K_U\\leq d+(r-d-1)=r-1$. A closed subspace cannot increase dimension: a chain of irreducible closed subsets remains such a chain in its ambient space. Hence Step 4 gives $\\dim(\\Sigma\\cap p^{-1}(U))\\leq r-1$.",
+   "uses": [
+    "lem-sf-noetherian-polynomial-dimension",
+    "lem-weil-pbc-spec-topological-krull-dimension-ring",
+    "lem-zl-finite-type-fibre-image-dimension-bounds"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0FD6, lemma-bertini, universal-family proof"
+   }
+  },
+  {
+   "text": "These opens cover $\\Sigma$, so $\\dim\\Sigma\\leq r-1<r$. Explicitly, for a chain of irreducible closed subsets of $\\Sigma$, choose one of the opens meeting its smallest member. All members meet that open and their intersections remain irreducible and closed there; strictness is preserved, since a nonempty open in an irreducible space is dense and therefore cannot be contained in a proper closed subset. Thus every chain has length at most $r-1$. Apply the image inequality in [lem-zl-finite-type-fibre-image-dimension-bounds] to $q|_\\Sigma:\\Sigma\\to\\mathbf A^r_k$: $B=\\overline{q(\\Sigma)}$ has dimension at most $\\dim\\Sigma<r$. The polynomial dimension formula and the spectrum/ring identification give $\\dim\\mathbf A^r_k=r$, so $B$ is a proper closed subset containing $q(\\Sigma)$.",
+   "uses": [
+    "lem-zl-finite-type-fibre-image-dimension-bounds",
+    "lem-sf-noetherian-polynomial-dimension",
+    "lem-weil-pbc-spec-topological-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0FD6, lemma-bertini, universal-family proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-zero-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sc-invertible-module",
+  "def-sc-relative-differential-sheaf",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-generating-sections",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "lem-kun-finite-union-noetherian",
+  "lem-pc-proper-base-change",
+  "lem-pur-conormal-sequence-smooth-immersion",
+  "lem-sf-noetherian-polynomial-dimension",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "lem-weil-pbc-spec-topological-krull-dimension-ring",
+  "lem-wf-affine-noetherian-components",
+  "lem-zl-finite-type-fibre-image-dimension-bounds",
+  "lem-zl-hypersurface-nonzero-relative-differential"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0FD6, lemma-bertini; same first-order kernel and dimension route, with the non-flat fibre inference repaired by the relative hypersurface criterion and residue-field calculations in place of algebraic closure."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +156,38 @@
    "results": "Only generic smooth-locus and zero-locus declarations; no dimension estimate.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Bertini|universal.*hypersurface|singular.*locus",
+   "results": "{\"t\": \"2026-10-17T18:16:47Z\", \"tool\": \"grep\", \"query\": \"Bertini|universal.*hypersurface|singular.*locus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits: smoothness definitions, standard-smooth presentations and zero loci do not state the singular-incidence dimension bound.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dimension of singular locus of universal hyperplane family",
+   "results": "{\"t\": \"2026-10-17T18:16:48Z\", \"tool\": \"leansearch\", \"query\": \"Dimension of singular locus of universal hyperplane family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Real.dimH_univ_pi\", \"ProjectiveSpectrum.zeroLocus_univ\", \"AlgebraicGeometry.Scheme.zeroLocus_univ\", \"AlgebraicGeometry.Scheme.zeroLocus_eq_univ_iff_subset_nilradical\", \"Algebra.smoothLocus_eq_univ_iff\", \"AlgebraicGeometry.RingedSpace.zeroLocus\", \"Algebra.IsStandardSmooth.relativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\"], \"digest\": \"22a3b2a28e10d2a6\"}; Read the returned hits: smoothness definitions, standard-smooth presentations and zero loci do not state the singular-incidence dimension bound.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"bertini\"",
+   "results": "{\"t\": \"2026-10-17T18:16:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"bertini\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits: smoothness definitions, standard-smooth presentations and zero loci do not state the singular-incidence dimension bound.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bertini singular incidence dimension less than coefficient space dimension",
+   "results": "{\"t\": \"2026-10-17T18:17:15Z\", \"tool\": \"leanfinder\", \"query\": \"Bertini singular incidence dimension less than coefficient space dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.IsStandardSmooth.relativeDimension\", \"AmpleSet.of_one_lt_codim\", \"Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension\", \"ChevalleyThm.numBound\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"PrimeSpectrum.ConstructibleSetData.degBound\", \"char_dvd_card_solutions_of_add_lt\"], \"digest\": \"8de6f662f71e2f9d\"}; Read the returned hits: smoothness definitions, standard-smooth presentations and zero loci do not state the singular-incidence dimension bound.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-bertini-smooth-member",
@@ -71,5 +206,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-bertini-singular-locus-dimension",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Repaired the source proof at non-flat parameters by using only the implication nonzero relative differential gives a smooth hypersurface point. The non-smooth locus lies in the first-order linear kernel; its residue-field fibres have dimension r-d-1, giving dimension at most r-1 and a proper closed image closure. Two technical statement-only nodes created after DAG/blueprint/Lean/Mathlib searches. Empty Y and r=0 are handled explicitly. The first-order surjectivity detail is written out from the existing conormal sequence, avoiding an elementary new node.",
+  "blueprint": "proof, second paragraph: 'Tag 0FD6 on $X\\setminus S$, together with these finitely many derivative conditions, makes a general member smooth everywhere on $X$'; the universal-family dimension argument in Stacks 0FD6.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "why": "Generic smooth differential rank/fibre-dimension theorem supplies the affine rank d charts; no node of this unit gives it."
+   },
+   {
+    "node": "lem-pur-conormal-sequence-smooth-immersion",
+    "why": "Its exact cotangent sequence for a closed immersion with smooth source gives surjectivity onto the relative cotangent fibre. The unit has no replacement for this generic immersion tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "lem-pur-conormal-sequence-smooth-immersion"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NG-acbe1e76e",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-acbe1e76e (reviewer sub-agent of L); spot-checked: PASS: I read the item, both new nodes and every cited statement in full, with Stacks 0FD6 (varieties lemma-bertini), 0B2L (lemma-dimension-fibres-locally-algebraic) and 00T7 (algebra lemma-standard-smooth). The item statement and stmt_deps are unchanged from base. proof_deps equals the union of uses. No SGA citations. Source error: 0FD6 proves flatness only over an open U but uses 'q smooth at (x,v) iff H_v smooth at x' for every v. I confirmed the report's counterexample by hand: Y=A^1 with sections 1,t gives q=(-bt,b), which is not flat at the origin while H_0 is smooth. The repair uses only the true direction (nonzero relative dF gives smoothness), so Sigma lies in {F=dF=0}. This keeps the route and is openly marked agent. Steps 1-6: Step 1 handles empty Y and r=0. Step 2 gets quasi-compactness of Y from the Noetherian projective space plus the immersion, so Y is finite type. Step 3: free Omega charts with constant d; the conormal surjection; e_i gives (1,0) and e_j-f_je_i gives (0,df_j), so the rank is d+1 and d+1<=r. Step 4: smooth base change (lem-pc-proper-base-change(2), Lean-closed) and the hypersurface node, all hypotheses met. Step 5: fibres of K_U are A^{r-d-1} over kappa(y); the fibre bound gives dim K_U<=r-1. Step 6: the finite chain argument and the image-closure bound give dim B<r=dim A^r. New nodes: the hypersurface criterion is true (one Jacobian row added to a standard smooth presentation, then 00T7), tested on t-a, at and t^p-a. It is not a duplicate: the trf smooth-at-point criterion needs flatness and the RGCI Jacobian node needs a global presentation. The fibre/image dimension bounds are true via 0B2L(2)(a) on finitely many components and not a duplicate (I checked the zl lower-bound, kun dimension formula and sbc flat fibre-dimension nodes). Both are statement-only, with all three search kinds, correct blueprint.from/via and same_as []. I accept the two declared tool_uses: lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension and lem-pur-conormal-sequence-smooth-immersion. Not a target node. No fixes."
  }
 }

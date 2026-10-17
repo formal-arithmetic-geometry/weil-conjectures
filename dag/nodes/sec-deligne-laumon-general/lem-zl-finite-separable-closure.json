@@ -10,11 +10,48 @@
  "stmt_deps": [
   "def-pc-field-extension",
   "def-pc-geometrically-irreducible",
-  "def-weil-pbc-separable-algebraic-extension"
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-relative-separable-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the definition of the relative separable closure [def-weil-pbc-relative-separable-closure], k' is a subfield of K containing k and k'/k is separable algebraic. Let F be the separable algebraic closure of k' in K; by the same definition, applied to the extension K/k', F is a subfield of K containing k' and F/k' is separable algebraic. The separable-permanence theorem [lem-zl-separable-permanence], applied to the tower k ⊆ k' ⊆ F, shows that F/k is separable algebraic. So every element of F is separably algebraic over k and lies in k' by the definition of k'; hence F = k'. Thus every element of K that is separably algebraic over k' belongs to k'. The implication (2) ⇒ (1) of the equivalence [lem-zl-geometric-irreducibility-separable], applied to K/k', proves that K/k' is geometrically irreducible.",
+   "uses": [
+    "def-weil-pbc-relative-separable-closure",
+    "lem-zl-separable-permanence",
+    "lem-zl-geometric-irreducibility-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037Q proof, first paragraph (using Tag 0G33 and Fields Tag 09HB)"
+   }
+  },
+  {
+   "text": "Let k_alg be the algebraic closure of k in K. The finite-generation hypothesis and Fields Tag 037J give [k_alg : k] < infinity [lem-zl-finite-algebraic-closure]. Since every element of k' is algebraic over k, k' is an intermediate subfield of k_alg/k; a subfield of a finite-dimensional k-vector space is finite-dimensional over k. Hence [k' : k] is finite.",
+   "uses": [
+    "def-weil-relative-algebraic-closure",
+    "lem-zl-finite-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037Q proof, second paragraph (Fields Tag 037J)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-relative-separable-closure",
+  "lem-zl-separable-permanence",
+  "lem-zl-geometric-irreducibility-separable",
+  "def-weil-relative-algebraic-closure",
+  "lem-zl-finite-algebraic-closure"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 037Q proof, using Tag 0G33, Fields Tag 09HB and Fields Tag 037J"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,7 +83,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-deligne-laumon-general",
  "unit": "sk-i-dl-general-real",
  "created": {
@@ -66,5 +103,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-finite-separable-closure",
+  "worker": "stage1",
+  "summary": "Audited Tag 037Q. The geometric-irreducibility clause follows Tag 0G33 after applying separable permanence (Tag 09HB) to the relative separable closure k'; the finiteness clause follows Tag 037J for the algebraic closure of k in a finitely generated K and the elementary finite-dimensional subfield bound. Added statement-only support for Tag 037J and a Mathlib leaf for separable permanence.",
+  "blueprint": "Realizes the field-theoretic reduction paragraph of lem-zl-bertini-finite-cover-curve used by Tag 0G4D/0G4F, with the two clauses of Tag 037Q made explicit.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NO-20af9ad76",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-20af9ad76 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the sources: Stacks 037Q algebra.tex:11428, 0G33 algebra.tex:11392, 037J fields.tex:3584, 09HB fields.tex:1409. I also read the parent lem-zl-bertini-field-extension and the main-20261015 blueprint proof of lem-zl-bertini-finite-cover-curve. The item matches 037Q; assuming finite generation for the first clause too is harmless, and the parent's use has that hypothesis. Step 1 (separable closure, then 09HB, then 0G33 (2)=>(1)) and step 2 (037J, k' inside k_alg, then a subspace of a finite-dimensional space) are correct. Every route node is in the same unit or is a definition or Mathlib leaf, so no tool_uses are needed. lem-zl-finite-algebraic-closure (037J) is a correct, statement-only node; Mathlib has no 037J and no finiteness result for algebraicClosure. lem-zl-separable-permanence is a correct leaf: Algebra.IsSeparable.trans at SeparableDegree.lean:835, tagged stacks 09HB. rg over the whole DAG and blueprint finds no duplicate. Edge cases checked: K=k, finite separable, purely inseparable, Q(i)(t). Fixes: (1) both new nodes' blueprint.from.via now put the item in front (B9); (2) item step 1 now names the extension that permanence is applied to, the separable closure F of k' in K, and gets F=k'; (3) both new nodes recorded '0 hits' for their greps, which my re-runs show is false (for permanence the grep hits line 835 itself), so I replaced those results with what the re-runs returned. No statement was changed and no node was dropped.; 3 file(s) fixed by the reviewer"
  }
 }

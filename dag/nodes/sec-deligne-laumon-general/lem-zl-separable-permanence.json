@@ -1,0 +1,75 @@
+{
+ "id": "lem-zl-separable-permanence",
+ "kind": "statement",
+ "title": "Transitivity of separable algebraic extensions",
+ "statement": "Let $k\\subseteq E\\subseteq F$ be a tower of field extensions [def-pc-field-extension]. If $E/k$ and $F/E$ are separable algebraic extensions [def-weil-pbc-separable-algebraic-extension], then $F/k$ is a separable algebraic extension.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Tag 09HB (fields-lemma-separable-permanence), lines 1414--1432"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If E over k and F over E are separable algebraic field extensions, then F over k is separable algebraic",
+   "results": "Algebra.IsSeparable.trans (Mathlib/FieldTheory/SeparableDegree.lean:835); IsSeparable.of_algebra_isSeparable_of_isSeparable (Mathlib/FieldTheory/SeparableDegree); Algebra.isSeparable_tower_bot_of_isSeparable (Mathlib/FieldTheory/Separable).",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsSeparable tower_top",
+   "results": "0 hits; loogle reports unknown identifier tower_top.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSeparable.*trans|separable.*tower|isSeparable.*trans [Mathlib/FieldTheory]",
+   "results": "Reviewer re-ran this grep (2026-10-18) over the published Mathlib: 21 hits, among them Mathlib/FieldTheory/SeparableDegree.lean:835 `theorem Algebra.IsSeparable.trans` (tagged @[stacks 09HB]) and its use at line 848 and in PurelyInseparable/Basic.lean:487; the first record said '0 hits', which was wrong.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If E over k and F over E are separable algebraic field extensions, then F over k is separable algebraic",
+   "results": "Algebra.IsSeparable.trans (Mathlib.FieldTheory.SeparableDegree); Algebra.isSeparable_tower_bot_of_isSeparable and IsSeparable.of_algebra_isSeparable_of_isSeparable (Mathlib.FieldTheory.Separable).",
+   "date": "2026-10-18",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.IsSeparable.trans",
+  "file": "Mathlib/FieldTheory/SeparableDegree.lean",
+  "how": "specializes in one line: with the scalar tower k ⊆ E ⊆ F, Algebra.IsSeparable.trans (line 835) gives separability of F/k from Algebra.IsSeparable k E and Algebra.IsSeparable E F; in the field setting these predicates mean every element is separable algebraic, matching the stated separable-algebraic extensions.",
+  "line": 835
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-finite-separable-closure",
+  "date": "2026-10-18",
+  "group": "NO"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "field-theoretic reduction paragraph: separable algebraicity is transitive in the passage from k to the relative separable closure k' (Fields Tag 09HB)",
+   "via": [
+    "lem-zl-finite-separable-closure",
+    "lem-zl-bertini-field-extension",
+    "lem-zl-bertini-irreducible-member"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
