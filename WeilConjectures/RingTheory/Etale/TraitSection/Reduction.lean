@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.Ideal.Height
 public import Mathlib.RingTheory.Etale.Descent
 public import Mathlib.RingTheory.Finiteness.Descent
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import WeilConjectures.Mathlib.RingTheory.TotallySplit
 
 /-!
 # Tools for the reduction of the trait case to a base containing roots of unity
@@ -54,3 +55,30 @@ theorem Algebra.etale_and_finite_of_isLocalHom {R R₁ S : Type*} [CommRing R] [
   have : Module.FaithfullyFlat R R₁ := Module.FaithfullyFlat.of_flat_of_isLocalHom
   exact ⟨Algebra.Etale.of_etale_tensorProduct_of_faithfullyFlat R₁,
     Module.Finite.of_finite_tensorProduct_of_faithfullyFlat R₁⟩
+
+/-- **Invariants and flat base change.** If the common fixed points of a finite family `σ` of
+`S`-algebra endomorphisms of `L` are the elements of `S`, then for a flat `S`-algebra `T` the
+common fixed points of the base changes `𝟙 ⊗ σᵢ` on `T ⊗[S] L` are the elements of `T`. -/
+theorem AlgHom.mem_range_algebraMap_of_forall_baseChange_eq {S L T ι : Type*} [CommRing S]
+    [CommRing L] [Algebra S L] [CommRing T] [Algebra S T] [Module.Flat S T] [_root_.Finite ι]
+    (σ : ι → L →ₐ[S] L) (hfix : ∀ x, (∀ i, σ i x = x) → x ∈ Set.range (algebraMap S L))
+    (y : T ⊗[S] L) (hy : ∀ i, Algebra.TensorProduct.map (AlgHom.id T T) (σ i) y = y) :
+    y ∈ Set.range (algebraMap T (T ⊗[S] L)) := by
+  let z := (AlgHom.tensorFixedPointsEquiv T σ).symm ⟨y, AlgHom.mem_fixedPoints.2 hy⟩
+  have hz : (AlgHom.tensorFixedPointsEquiv T σ z : T ⊗[S] L) = y := by simp [z]
+  have key (w : T ⊗[S] AlgHom.fixedPoints σ) :
+      (AlgHom.tensorFixedPointsEquiv T σ w : T ⊗[S] L) ∈ Set.range (algebraMap T (T ⊗[S] L)) := by
+    induction w with
+    | zero => exact ⟨0, by simp⟩
+    | add w₁ w₂ h₁ h₂ =>
+      obtain ⟨a, ha⟩ := h₁
+      obtain ⟨b, hb⟩ := h₂
+      exact ⟨a + b, by rw [map_add, ha, hb, map_add, Subalgebra.coe_add]⟩
+    | tmul t a =>
+      obtain ⟨s, hs⟩ := hfix a (AlgHom.mem_fixedPoints.1 a.2)
+      refine ⟨s • t, ?_⟩
+      rw [AlgHom.coe_tensorFixedPointsEquiv_tmul, ← hs, Algebra.TensorProduct.algebraMap_apply,
+        Algebra.algebraMap_self, RingHom.id_apply, Algebra.algebraMap_eq_smul_one,
+        TensorProduct.smul_tmul]
+  rw [← hz]
+  exact key z
