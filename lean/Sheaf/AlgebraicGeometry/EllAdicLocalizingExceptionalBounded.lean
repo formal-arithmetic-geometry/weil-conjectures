@@ -10,6 +10,7 @@ import Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
 import Sheaf.Paper.CondensedQbarLfpLocalTriviality
 import Sheaf.Paper.IntegralLfpLocalTorsionCharts
 import Sheaf.Paper.IntegralLfpLocallyFreeResolution
+import Sheaf.AlgebraicGeometry.BoundedConstructibleLocalizingClosure
 
 /-! # Cohomological boundedness of the localizing exceptional object
 (blueprint: lem-sfb-adic-localizing-exceptional-bounded)

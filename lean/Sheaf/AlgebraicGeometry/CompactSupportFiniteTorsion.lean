@@ -27,6 +27,7 @@ import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import Sheaf.AlgebraicGeometry.ProperOpenInterchangeCoherence
 import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
+import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
 
 /-!
 # Compact-support base change with finite coefficients and arbitrary refinements

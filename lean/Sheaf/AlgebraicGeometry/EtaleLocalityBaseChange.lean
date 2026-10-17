@@ -20,6 +20,11 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 import Sheaf.AlgebraicGeometry.IsIsoIffOfJointlySurjectiveEtaleFamily
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.AlgebraicGeometry.SiteRestrictionExact
+import Sheaf.CategoryTheory.SiteMorphismComposition
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
+import WeilConjectures.SixFunctors.BaseChange.Etale
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Etale locality of base change

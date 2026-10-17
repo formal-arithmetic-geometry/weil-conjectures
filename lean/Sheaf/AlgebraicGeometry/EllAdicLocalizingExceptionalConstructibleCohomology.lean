@@ -10,6 +10,9 @@ import Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
 import Sheaf.Paper.CondensedQbarLfpLocalTriviality
 import Sheaf.Paper.IntegralLfpLocalTorsionCharts
 import Sheaf.Paper.IntegralLfpLocallyFreeResolution
+import Sheaf.AlgebraicGeometry.BoundedConstructibleLocalizingClosure
+import Sheaf.AlgebraicGeometry.EllAdicCondensedCoefficient
+import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
 
 /-! # Constructibility of the cohomology of the localizing exceptional object
 (blueprint: lem-sfb-adic-localizing-exceptional-cohomology)
