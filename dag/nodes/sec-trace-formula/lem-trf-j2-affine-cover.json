@@ -12,9 +12,95 @@
   "pqf-def-locnoeth",
   "def-exc-excellent-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an affine open $V\\subseteq X$ and put $R=\\mathcal O_X(V)$. By [pqf-lem-affine-open-locnoeth], $R$ is Noetherian. Let $R\\to B$ be any finite type algebra and put $Y=\\operatorname{Spec}B$. Under the affine identification $V\\cong\\operatorname{Spec}R$, its structure morphism is $h=\\operatorname{Spec}(R\\to B)$ [def-weil-affine-spectrum]. Apply [lem-weil-pbc-lft-pointwise-criterion]: for every point of $Y$, take the whole affine $Y$ as its source neighbourhood and the whole affine $V$ as the target neighbourhood. The resulting ring map on global sections is exactly the given finite type map $R\\to B$. Thus $h:Y\\to V$ is locally of finite type. This also covers $B=0$, where the pointwise condition is vacuous.",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-lft-pointwise-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 07R4 (lemma-J), (4) implies (1) followed by (1) implies (3), specialized to the finite type algebra B over an affine open V; Tags 01T1 (definition-finite-type) and 01T2 (lemma-locally-finite-type-characterize); Properties Tag 01OW (properties.tex, lemma-locally-Noetherian)."
+   }
+  },
+  {
+   "text": "The inclusion $j:V\\hookrightarrow X$ is an open immersion [def-weil-open-immersion]. It is an immersion: factor it as the identity of $V$ followed by $j$; the identity is a closed immersion because its underlying space is the whole closed subset $V$ and its sheaf map is the surjective identity [def-weil-closed-immersion]. Clause (2) of [lem-weil-pbc-immersion-base-change-lft] makes $j$ locally of finite type. Clause (e) of [lem-weil-pbc-proper-fp-permanence], applied to $h$ and $j$, makes $f=j\\circ h:Y\\to X$ locally of finite type. Since $X$ is locally Noetherian, [pqf-lem-locnoeth-lft] gives that $Y$ is locally Noetherian. Define $\\operatorname{Reg}(Y)=\\{y\\in Y:\\mathcal O_{Y,y}\\text{ is regular local}\\}$, using the regular-local-ring predicate of [def-weil-regular-scheme].",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-weil-pbc-proper-fp-permanence",
+    "pqf-lem-locnoeth-lft",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 07R4 (lemma-J), proof, first and last paragraphs; Tags 01T5 (lemma-immersion-locally-finite-type), 01T3 (lemma-composition-finite-type), 01T6 (lemma-finite-type-noetherian)."
+   }
+  },
+  {
+   "text": "The opens $f^{-1}(U_i)$ cover $Y$. For each $y\\in Y$, choose $i(y)$ with $f(y)\\in U_{i(y)}$ and apply [lem-weil-pbc-affine-opens-basis] inside the open $f^{-1}(U_{i(y)})$ to obtain an affine open $W_y$ with $y\\in W_y\\subseteq f^{-1}(U_{i(y)})$. These $W_y$ cover $Y$. Put $A_y=\\mathcal O_X(U_{i(y)})$ and $C_y=\\mathcal O_Y(W_y)$. Apply [lem-weil-pbc-lft-affine-pairs] to the locally finite type morphism $f$ and the actual affine pair $(W_y,U_{i(y)})$. It says that $A_y\\to C_y$ is of finite type. No intersection of two affine opens is asserted to be affine, and no finite subcover is needed.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 07R4 (lemma-J), proof, last paragraph: choose the affine cover V_j mapping into the U_i and apply Tag 01T2 (lemma-locally-finite-type-characterize); Schemes Tag 01IT (schemes.tex, lemma-basis-affine-opens)."
+   }
+  },
+  {
+   "text": "The ring $A_y$ is J-2 by hypothesis. Hence [def-exc-excellent-ring], applied to the finite type $A_y$-algebra $C_y$, says that the set $E_y=\\{\\mathfrak q\\in\\operatorname{Spec}C_y:(C_y)_{\\mathfrak q}\\text{ is regular local}\\}$ is open. Under the canonical affine identification of $W_y$ with $\\operatorname{Spec}C_y$, let $O_y\\subseteq W_y$ correspond to $E_y$. For $z\\in W_y$, clause (c) of [lem-weil-pbc-affine-open-stalk-localization], with ambient scheme $Y$ and affine open $W_y$, gives $(C_y)_{\\mathfrak q_z}\\cong\\mathcal O_{Y,z}$. Regular locality is unchanged by this ring isomorphism directly from [def-weil-regular-scheme]: an isomorphism identifies the maximal ideals and their generating sets, the ideals witnessing Noetherianity, and the prime chains measuring Krull dimension. Thus $z\\in O_y$ if and only if $z\\in\\operatorname{Reg}(Y)$, so $O_y=W_y\\cap\\operatorname{Reg}(Y)$. The set $O_y$ is open in $Y$ because it is open in the open subset $W_y$. Since the $W_y$ cover, $\\operatorname{Reg}(Y)=\\bigcup_{y\\in Y}O_y$ is open in $Y$. For empty $Y$ this is the empty union and is open as well.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 07R4 (lemma-J), proof, last paragraph, Reg(Y) intersect V_j = Reg(V_j); ring predicate: More on Algebra Tag 07P7 (more-algebra.tex, definition-J); stalk comparison: Schemes Tag 01HV (schemes.tex, lemma-spec-sheaves), part (6)."
+   }
+  },
+  {
+   "text": "Apply clause (c) of [lem-weil-pbc-affine-open-stalk-localization] once more to the whole affine open $Y=\\operatorname{Spec}B$ of $Y$. Its local ring at a prime $\\mathfrak q$ is $B_{\\mathfrak q}$, so the open subset $\\operatorname{Reg}(Y)$ just proved open is exactly the ring regular locus of $B$; the same direct invariance of regular locality under isomorphism uses [def-weil-regular-scheme]. We have therefore proved openness of the regular locus for every finite type $R$-algebra $B$. This is precisely the J-2 predicate of [def-exc-excellent-ring]. Since $V$ was arbitrary, every affine open has a J-2 coordinate ring, as required.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-regular-scheme",
+    "def-exc-excellent-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 07R4 (lemma-J), proof, second paragraph, passage from Spec(R) to finite type R-algebras; More on Algebra Tag 07P7 (more-algebra.tex, definition-J)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-affine-open-locnoeth",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-lft-pointwise-criterion",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-proper-fp-permanence",
+  "pqf-lem-locnoeth-lft",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-exc-excellent-ring",
+  "lem-weil-pbc-affine-open-stalk-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 07R4 (lemma-J), proof of (4) implies (1) and (1) implies (3), specialized directly to an arbitrary finite type algebra over the chosen affine open."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +136,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)],\\n  AlgebraicGeometry.IsLocallyNoetherian X ↔ ∀ (i : 𝒰.I₀), IsNoetherianRing ↑((𝒰.X i).presheaf.obj (Opposite.op ⊤))\", \"doc\": \"A scheme $X$ is locally Noetherian if and only if, for every affine open cover $\\\\{U_i\\\\}$ of $X$, the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is a Noetherian ring for each index $i$.\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianXScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.OpenCover} (i : U.I₀) [AlgebraicGeometry.IsLocallyNoetherian X],\\n  AlgebraicGeometry.IsLocallyNoetherian (U.X i)\", \"doc\": \"If a scheme $ X $ is locally Noetherian, then each open subscheme in an open cover of $ X $ is also locally Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} {S : ι → ↑X.affineOpens},\\n  ⨆ i, ↑(S i) = ⊤ →\\n    (∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i)))) → AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If a scheme $ X $ admits an affine open cover $ \\\\{S_i\\\\} $ such that the union of all $ S_i $ is $ X $ and each ring of global sections $ \\\\Gamma(S_i) $ is Noetherian, then $ X $ is a locally Noetherian\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} {S : ι → ↑X.affineOpens},\\n  ⨆ i, ↑(S i) = ⊤ →\\n    (AlgebraicGeometry.IsLocallyNoetherian X ↔ ∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i))))\", \"doc\": \"For a scheme $X$, if a family of affine open subsets $\\\\{S_i\\\\}$ covers $X$ (i.e., $\\\\bigcup_i S_i = X$), then $X$ is locally Noetherian if and only if the ring of global sections $\\\\Gamma(X, S_i)$ is a N\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_iff_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover),\\n  AlgebraicGeometry.IsLocallyNoetherian X ↔ ∀ (i : 𝒰.I₀), AlgebraicGeometry.IsLocallyNoetherian (𝒰.X i)\", \"doc\": \"A scheme $X$ is locally Noetherian if and only if every open subscheme in an open cover $\\\\mathcal{U}$ of $X$ is locally Noetherian, i.e., $X$ is locally Noetherian $\\\\iff \\\\forall i \\\\in \\\\mathcal{U}.I_0,\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianToScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} [AlgebraicGeometry.IsLocallyNoetherian X],\\n  AlgebraicGeometry.IsLocallyNoetherian ↑U\", \"doc\": \"If $X$ is a locally Noetherian scheme and $U$ is an open subscheme of $X$, then $U$ is also a locally Noetherian scheme. This follows from the fact that any open subset of a scheme inherits the local \"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {𝒰 : X.OpenCover} [Finite 𝒰.I₀] [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)],\\n  AlgebraicGeometry.IsNoetherian X ↔ ∀ (i : 𝒰.I₀), IsNoetherianRing ↑((𝒰.X i).presheaf.obj (Opposite.op ⊤))\", \"doc\": \"For a scheme $X$ with a finite affine open cover $\\\\{U_i\\\\}$, $X$ is Noetherian if and only if the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is a Noetherian ring for every $i$.\"}\n",
    "date": "2026-10-17",
    "verdict": "no match: the results concern Noetherianity, local finite type, affine opens, and open restrictions. None states openness of regular loci in every finite type algebra, or J-2 locality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally Noetherian scheme, if an affine open cover has J-2 coordinate rings then every affine open has a J-2 coordinate ring",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.isLocallyNoetherian_of_affine_cover; AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover; AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top; AlgebraicGeometry.IsLocallyNoetherian.component_noetherian; AlgebraicGeometry.instIsLocallyNoetherianXScheme; AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover; AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top; AlgebraicGeometry.IsLocallyNoetherian. All in Mathlib/AlgebraicGeometry/Noetherian.",
+   "date": "2026-10-18",
+   "verdict": "no match: the results concern Noetherianity, local finite type, affine opens, and open restrictions. None states openness of regular loci in every finite type algebra, or J-2 locality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"J2\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no match: the results concern Noetherianity, local finite type, affine opens, and open restrictions. None states openness of regular loci in every finite type algebra, or J-2 locality."
+  },
+  {
+   "tool": "grep",
+   "query": "J.?2.ring|IsJ2|regular.locus|regularLocus",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no match: the results concern Noetherianity, local finite type, affine opens, and open restrictions. None states openness of regular loci in every finite type algebra, or J-2 locality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme is J-2 if its affine charts have open regular locus after every finite type algebra extension",
+   "results": "[leansearch] OK 8 hit(s): AlgebraicGeometry.Scheme.mk.noConfusion (Mathlib.AlgebraicGeometry.Scheme); AlgebraicGeometry.isLocallyNoetherian_of_affine_cover; AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover; AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top; AlgebraicGeometry.IsLocallyNoetherian.mk (Mathlib.AlgebraicGeometry.Noetherian); AlgebraicGeometry.locallyOfFiniteType_iff (Mathlib.AlgebraicGeometry.Morphisms.FiniteType); AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme (Mathlib.AlgebraicGeometry.OpenImmersion); AlgebraicGeometry.IsAffineOpen (Mathlib.AlgebraicGeometry.AffineScheme).",
+   "date": "2026-10-18",
+   "verdict": "no match: the results concern Noetherianity, local finite type, affine opens, and open restrictions. None states openness of regular loci in every finite type algebra, or J-2 locality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Openness of the regular locus of every finite type algebra is a property that can be verified on an affine open cover of a locally Noetherian scheme",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.IsLocallyNoetherian; AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover; AlgebraicGeometry.instIsLocallyNoetherianXScheme; AlgebraicGeometry.isLocallyNoetherian_of_affine_cover; AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top; AlgebraicGeometry.isLocallyNoetherian_iff_openCover; AlgebraicGeometry.instIsLocallyNoetherianToScheme; AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover. All in Mathlib/AlgebraicGeometry/Noetherian.",
+   "date": "2026-10-18",
+   "verdict": "no match: the results concern Noetherianity, local finite type, affine opens, and open restrictions. None states openness of regular loci in every finite type algebra, or J-2 locality."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-excellent-scheme-affine-cover",
@@ -74,5 +195,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-j2-affine-cover",
+  "worker": "stage1",
+  "summary": "Verified Tag 07R4 and the J-2 definition 07P7. Proved the affine-cover implication by passing an arbitrary finite type algebra over an arbitrary affine open to X, refining its spectrum by affine charts over the given cover, and gluing the regular loci through the actual localization-to-stalk isomorphisms. Reused the existing pointwise and all-affine-pairs finite type criteria, immersion/composition permanence, Noetherianity, affine basis and stalk lemmas; no new nodes. The statement and ancestry are unchanged. No project declaration states the item exactly.",
+  "blueprint": "The existing ancestry identifies lem-trf-local-term-locality through generic-smooth-boundary preparation, projective inseparable spreading/normalization and excellent-scheme-affine-cover: Expose X, Theorem 3.5 proof, Step 5, excellence of the spread Y-prime and replacement of X. This split supplies the J-2 component needed to pass from the normalization charts to every affine open; it does not change the contracting-correspondence or unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-9483809dd",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-9483809dd (reviewer sub-agent of L); spot-checked: I read the item in full, all 15 cited node statements, the parent lem-trf-excellent-scheme-affine-cover and the unit sk-i-curve-zero. Sources read: Stacks morphisms.tex 07R4 (lemma-J), statement and whole proof, and more-algebra.tex 07P7 (definition-J). The statement is exactly 07R4 (4)=>(3) with the locally Noetherian hypothesis kept and nothing weakened. The source's 'S' in (4) means X, and the node records this. Step 1: the pointwise lft criterion, an iff whose condition holds with the whole affine pair (Y,V), gives h=Spec(R->B) locally of finite type, using the criterion's statement only. Step 2: id_V is a closed immersion, so j is an immersion; clause (2) of the immersion lemma makes j locally of finite type; clause (e) of proper-fp-permanence handles the composite; 01T6 makes Y locally Noetherian, which is harmless though not needed. Step 3: the affine basis inside f^{-1}(U_i), then the all-pairs criterion applied to (W_y,U_i), matching the last paragraph of the 07R4 proof. No intersection of affines is assumed affine and no finite subcover is used. Step 4: J-2 of A_y applied to C_y, then clause (c) of the stalk-localization lemma gives Reg(Y) ∩ W_y open, and the union is open. Step 5: the same identification for Y=Spec B gives the J-2 conclusion for an arbitrary finite type B. proof_deps equals the union of the step uses. Every cited statement is a Mathlib leaf and the rest are definitions, so there is no off-route use and tool_uses=[] is correct. No SGA is used. There are no new nodes. A grep of dag/nodes for J-2, 07R4, lemma-J and 'regular locus' found no duplicate. Edge cases checked: empty X (R=0), B=0, nonreduced B, infinite I. No fixes."
  }
 }
