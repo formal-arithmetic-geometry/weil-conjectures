@@ -1443,6 +1443,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorPullback
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.Datum
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.DepthTwo
+public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.GaloisCoverAction
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.GaloisCoverRank
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.GenericFibre
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.GenericPoint
@@ -3673,9 +3674,11 @@ public import WeilConjectures.RingTheory.Etale.Coordinates
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Diagonal
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Global
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Lift
+public import WeilConjectures.RingTheory.Etale.DepthTwo.LiftComplete
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Local
 public import WeilConjectures.RingTheory.Etale.DepthTwo.LocalToGlobal
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Rank
+public import WeilConjectures.RingTheory.Etale.DepthTwo.RegularQuotient
 public import WeilConjectures.RingTheory.Etale.DepthTwo.SmoothPurity
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Splitting
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Spreading
