@@ -157,10 +157,10 @@ include hϖ he hℓe in
 /-- Blueprint `lem-pur-finite-kummer-level`: Finite Kummer level of the Tate twist
 
 The freeness clause: let `R = 𝒪_E` be a discrete valuation ring finite over `ℤ_ℓ`, with
-uniformizer `ϖ` and `ℓ = (unit) · ϖ^e`, `e ≥ 1`, and let `N ≥ 1`. Then `A = R / ϖ^{e N}` (which equals
-`R / ℓ^N`, `span_pow_mul_eq_span_natCast_pow`) is a free `ℤ / ℓ^N`-module of rank `e f`, where
-`f` is the residue degree of `R` over `ℤ_ℓ`. The `ℤ / ℓ^N`-module structure on `A` is arbitrary
-(it is unique, `A` having characteristic `ℓ^N`, `charP_quotient_span_pow`). -/
+uniformizer `ϖ` and `ℓ = (unit) · ϖ^e`, `e ≥ 1`, and let `N ≥ 1`. Then `A = R / ϖ^{e N}`
+(which equals `R / ℓ^N`, `span_pow_mul_eq_span_natCast_pow`) is a free `ℤ / ℓ^N`-module of
+rank `e f`, where `f` is the residue degree of `R` over `ℤ_ℓ`. The `ℤ / ℓ^N`-module structure on
+`A` is arbitrary (it is unique, `A` having characteristic `ℓ^N`, `charP_quotient_span_pow`). -/
 theorem free_zmod_quotient_span_pow [Module.Finite ℤ_[ℓ] R] {N : ℕ} (hN : 0 < N)
     [Module (ZMod (ℓ ^ N)) (R ⧸ Ideal.span {ϖ ^ (e * N)})] :
     Module.Free (ZMod (ℓ ^ N)) (R ⧸ Ideal.span {ϖ ^ (e * N)}) ∧
