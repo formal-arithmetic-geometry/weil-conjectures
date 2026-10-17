@@ -58,19 +58,66 @@
    }
   },
   {
-   "text": "The integer $m=\\ell^N$ is prime to $\\operatorname{char}k$, by the finite-field datum. The sequence $0\\to F\\to\\mathbf G_m\\xrightarrow{m}\\mathbf G_m\\to0$ is short exact by [lem-sc-kummer-exact]. A lift exists: if $A\\cong R^r$, take $L=\\mathbf Z^r$ with its induced isomorphism $L/mL\\cong A$. Now let $L$ be any finite free abelian lift with a specified isomorphism $L/mL\\cong A$, and write $\\bar l$ for the image of $l$ in $A$. Choose a basis $b_1,\\ldots,b_s$ of $L$ and coordinate maps $b_j^*:L\\to\\mathbf Z$. Write abelian sheaf operations additively in the tensor formulas. For each of the abelian sheaves $G=F,\\mathbf G_m$, define $J_j:G\\to G\\otimes_{\\mathbf Z}L$ by $g\\mapsto g\\otimes b_j$ and $P_j:G\\otimes_{\\mathbf Z}L\\to G$ by $g\\otimes l\\mapsto b_j^*(l)g$, using the tensor definition of step 2. Then $P_jJ_h=\\delta_{jh}\\mathrm{id}_G$ and $\\sum_jJ_jP_j=\\mathrm{id}_{G\\otimes_{\\mathbf Z}L}$ by the basis expansion of $l$. These formulas identify the sequence tensored with $L$ with a finite direct sum of the ordinary Kummer sequence; its kernels are coordinatewise; a morphism out of the last direct sum that vanishes after the preceding map restricts to zero on each summand, because each ordinary last map is an epimorphism, and therefore is zero. Thus the last map is an epimorphism and the sequence is short exact. For $G=\\mathbf G_m$, additivity from step 1 shows that the canonical map\n$$\n\\alpha_L^q:H^q(G)\\otimes_{\\mathbf Z}L\\longrightarrow H^q(G\\otimes_{\\mathbf Z}L),\\qquad\nu\\otimes l\\longmapsto H^q(g\\mapsto g\\otimes l)(u)\n$$\nhas inverse $y\\mapsto\\sum_jH^q(P_j)(y)\\otimes b_j$: the composites are $\\sum_j b_j^*(l)u\\otimes b_j=u\\otimes l$ and $H^q(\\sum_jJ_jP_j)(y)=y$. The left-term identification $F\\otimes_{\\mathbf Z}L\\cong F\\otimes_R A$ sends $z\\otimes l$ to $z\\otimes\\bar l$. Its inverse sends $z\\otimes a$ locally to $z\\otimes l$ for any lift $l$ of $a$; changing $l$ by $ml_0$ changes this by $z\\otimes ml_0=mz\\otimes l_0=0$, and this formula respects the $R$-balancing relation by taking integer representatives of its scalars. For each $l\\in L$, the maps $g\\mapsto g\\otimes l$ on all three terms commute with the inclusion and multiplication by $m$, hence give a morphism from the ordinary Kummer sequence to the lifted sequence. Naturality of connecting maps from [lem-weil-pbc-right-derived-universal-delta-functor], with $\\partial_L^q$ denoting the lifted boundary precomposed with $\\alpha_L^q$ and followed by the left-term identification, gives\n$$\n\\partial_L^q(u\\otimes l)=H^{q+1}(i_{\\bar l})(\\partial^q(u))=\\beta_A^{q+1}(\\partial^q(u)\\otimes\\bar l).\n$$",
+   "text": "The integer $m=\\ell^N$ is prime to $\\operatorname{char}k$, by the finite-field datum, so [lem-sc-kummer-exact] makes $0\\to F\\to\\mathbf G_m\\xrightarrow{m}\\mathbf G_m\\to0$ short exact. A finite free integral lift exists: choose $A\\cong R^r$ and take $L=\\mathbf Z^r$. Now fix any finite free abelian $L$ with a specified isomorphism $L/mL\\cong A$; write $\\bar l$ for the image of $l$ in $A$. Choose a basis $b_1,\\ldots,b_s$ and coordinate maps $b_j^*:L\\to\\mathbf Z$. As in step 2, on every abelian sheaf $G$ the maps $J_j(g)=g\\otimes b_j$ and $P_j(g\\otimes l)=b_j^*(l)g$ obey $P_jJ_h=\\delta_{jh}\\mathrm{id}_G$ and $\\sum_jJ_jP_j=\\mathrm{id}$. Thus $G\\otimes_{\\mathbf Z}L\\cong G^{\\oplus s}$, naturally in $G$. All tensors use constant coefficient sheaves.",
    "uses": [
     "lem-sc-kummer-exact",
+    "def-pur-sheaf-tensor-product",
+    "def-kun-constant-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PL (lemma-kummer-sequence); integral basis maps from the finite-sum argument of the blueprint proof."
+   }
+  },
+  {
+   "text": "We justify exactness of the lifted sequence using a general sheaf theorem. Work over the constant ring sheaf $\\mathbf Z_C$. By the unit isomorphism of [lem-pc-sheaf-modules-tensor-closed], $G\\otimes_{\\mathbf Z_C}\\mathbf Z_C\\cong G$, so $\\mathbf Z_C$ is flat in the exact-functor sense of [def-pc-flat-sheaf-modules]. The chosen basis identifies $\\underline L$ with the coproduct of $s$ copies of $\\mathbf Z_C$. It is flat by [lem-pc-sites-modules-coproduct-flat], including when $s=0$. By the same definition of flatness, tensoring the short exact Kummer sequence with $\\underline L$ preserves short exactness. This is exactly the lifted sequence in the statement.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-flat-sheaf-modules",
+    "lem-pc-sites-modules-coproduct-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EO (lemma-internal-hom-adjoint-tensor) and Section 03EK; Tag 03ER (definition-flat), sheaf clause; Tag 03EU (lemma-colimits-flat), (2)."
+   }
+  },
+  {
+   "text": "For $G=\\mathbf G_m$, the integral version of the calculation in step 3 gives\n$$\\alpha_L^q:H^q(G)\\otimes_{\\mathbf Z}L\\longrightarrow H^q(G\\otimes_{\\mathbf Z}L),\\qquad u\\otimes l\\longmapsto H^q(g\\mapsto g\\otimes l)(u).$$\nIts inverse is $y\\mapsto\\sum_j H^q(P_j)(y)\\otimes b_j$. Indeed, the two composites are $\\sum_j b_j^*(l)u\\otimes b_j=u\\otimes l$ and $H^q(\\sum_jJ_jP_j)(y)=y$, using additivity from step 1. No torsion or $R$-action on $G$ is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015B (lemma-higher-derived-functors), (4): the integral basis calculation using additivity already established in step 1."
+   }
+  },
+  {
+   "text": "For the left term, apply [lem-weil-pbc-tensor-over-quotient-ring], clause (2), with the ordinary ring $\\mathbf Z$, ideal $(m)$, module $L$, and $R$-module $F(U)$, on each etale object $U$. It gives the natural identification $F(U)\\otimes_{\\mathbf Z}L\\cong F(U)\\otimes_R(L/mL)$, sending $z\\otimes l$ to $z\\otimes\\bar l$. These formulas define a sheaf isomorphism\n$$\\theta:F\\otimes_{\\mathbf Z}\\underline L\\xrightarrow{\\sim}F\\otimes_R\\underline A.$$\nPrecisely, locally sections of $\\underline L$ and $\\underline A$ have constant values by [def-kun-constant-sheaf]; apply the displayed module maps there. The inverse sends $z\\otimes a$ to $z\\otimes l$ for any integral lift $l$ of $a$. Changing $l$ by $ml_0$ changes this by $mz\\otimes l_0=0$. The module isomorphism ensures balancing; the formulas respect restrictions and agree on overlaps. The tensor universal property [lem-pc-sites-sheaf-tensor-bilinear-universal] therefore gives the sheaf morphisms, and their composites are identities on pure tensors. In particular $\\theta\\circ(g\\mapsto g\\otimes l)=i_{\\bar l}$ on $F$.",
+   "uses": [
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "def-kun-constant-sheaf",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK, bilinear universal property after Tag 0GMW (lemma-sheafification-tensor); ordinary quotient-ring identity: algebra.tex Tags 00D2 (lemma-tensor-with-bimodule), 00DF (lemma-tensor-product-exact)."
+   }
+  },
+  {
+   "text": "For each $l\\in L$, insertion $g\\mapsto g\\otimes l$ on all three terms is a morphism from the ordinary Kummer sequence to its short exact integral lift from step 5: it commutes with the inclusion and with multiplication by $m$. Let $\\delta_{\\mathrm{lift}}^q$ be that lifted sequence's cohomology boundary, and define\n$$\\partial_L^q=H^{q+1}(\\theta)\\circ\\delta_{\\mathrm{lift}}^q\\circ\\alpha_L^q.$$\nApply the naturality equality for connecting homomorphisms in [lem-weil-pbc-right-derived-universal-delta-functor] to this insertion morphism. Since $\\alpha_L^q(u\\otimes l)=H^q(g\\mapsto g\\otimes l)(u)$ and $\\theta$ carries the left insertion to $i_{\\bar l}$, it gives\n$$\\partial_L^q(u\\otimes l)=H^{q+1}(i_{\\bar l})(\\partial^q(u))=\\beta_A^{q+1}(\\partial^q(u)\\otimes\\bar l).$$",
+   "uses": [
     "lem-weil-pbc-right-derived-universal-delta-functor"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015B (lemma-higher-derived-functors), (4), naturality for the Kummer sequence; Kummer exactness supplied by the cited node."
+    "place": "Tag 015B (lemma-higher-derived-functors), (4), and Tag 05TE (lemma-right-derived-delta-functor); connecting-map naturality for the insertion morphism of short exact sequences."
    }
   },
   {
-   "text": "The formula in step 4 vanishes on $u\\otimes ml$. The canonical quotient $(H^q(\\mathbf G_m)\\otimes_{\\mathbf Z}L)/\\langle u\\otimes ml\\rangle$ is $H^q(\\mathbf G_m)\\otimes_{\\mathbf Z}(L/mL)$: the quotient map kills every $u\\otimes ml$, and maps from either quotient are exactly bilinear maps killing $(u,ml)$, by the universal property of the tensor product. Thus $\\partial_L^q$ descends to $\\partial_A^q$. The value on every pure tensor is $H^{q+1}(i_a)(\\partial^q(u))=\\beta_A^{q+1}(\\partial^q(u)\\otimes a)$. This expression depends only on $a$, not on $L$, its basis, or a lift of $a$; pure tensors generate the source, so it proves independence of all choices and the boundary compatibility in every degree. With $q=0$ it carries the ordinary Kummer class of a unit to its coefficient class. The proof also works for $A=0$, for the empty curve, and in degree zero.",
+   "text": "The formula in step 8 vanishes on $u\\otimes ml$. The canonical quotient $(H^q(\\mathbf G_m)\\otimes_{\\mathbf Z}L)/\\langle u\\otimes ml\\rangle$ is $H^q(\\mathbf G_m)\\otimes_{\\mathbf Z}(L/mL)$: the quotient map kills every $u\\otimes ml$, and maps from either quotient are exactly bilinear maps killing $(u,ml)$, by the universal property of the tensor product. Thus $\\partial_L^q$ descends to $\\partial_A^q$. The value on every pure tensor is $H^{q+1}(i_a)(\\partial^q(u))=\\beta_A^{q+1}(\\partial^q(u)\\otimes a)$. This expression depends only on $a$, not on $L$, its basis, or a lift of $a$; pure tensors generate the source, so it proves independence of all choices and the boundary compatibility in every degree. With $q=0$ it carries the ordinary Kummer class of a unit to its coefficient class. The proof also works for $A=0$, for the empty curve, and in degree zero.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -85,12 +132,17 @@
   "lem-weil-pbc-bounded-below-injectives-kinjective",
   "def-pur-sheaf-tensor-product",
   "def-kun-constant-sheaf",
-  "lem-sc-kummer-exact"
+  "lem-sc-kummer-exact",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-sites-modules-coproduct-flat",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-kummer-coefficient-base-change.md",
-  "place": "Imported finite-direct-sum proof and unit sk-prop-a1-kummer step 3, reconstructed because the local blueprint and Stacks sources are absent; checked against https://stacks.math.columbia.edu/tag/01FT, /015B, /05TE, /03EK and /03PL. Boundary clause corrected to use free integral lifts. Second reader also read the official raw Stacks .tex sources at labels lemma-higher-derived-functors, lemma-right-derived-delta-functor, section-cohomology-sheaves, section-tensor-product, lemma-kummer-sequence and definition-cohomological-delta-functor; no local source files were created."
+  "place": "Imported finite-direct-sum proof and unit sk-prop-a1-kummer step 3, reconstructed because the local blueprint and Stacks sources are absent; checked against https://stacks.math.columbia.edu/tag/01FT, /015B, /05TE, /03EK and /03PL. Boundary clause corrected to use free integral lifts. Second reader also read the official raw Stacks .tex sources at labels lemma-higher-derived-functors, lemma-right-derived-delta-functor, section-cohomology-sheaves, section-tensor-product, lemma-kummer-sequence and definition-cohomological-delta-functor; no local source files were created. NK repair 2026-10-17: local blueprint main-20261015 proof and local Stacks sources are now available and were read; former step 4 is decomposed with existing generic tool nodes for flat coproducts, tensor units, quotient-ring tensors and the bilinear sheaf tensor universal property."
  },
  "mathlib_searches": [
   {
@@ -197,10 +249,45 @@
    "results": "0 hits; ",
    "date": "2026-10-16",
    "verdict": "no exact match for the full etale coefficient comparison and Kummer boundary compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*tensor|tensor.*cohomology|[Kk]ummer",
+   "results": "0 hits; ; subdirectory CategoryTheory/Sites",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete Kummer coefficient comparison and its integral-lift boundary compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of sheaves commutes with tensoring by a finite free constant module",
+   "results": "8 hits; CategoryTheory.Sheaf.H, lTensorHomEquivHomLTensor, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, SheafOfModules.ιFree, SheafOfModules.free, SheafOfModules.Finite.forgetPreservesFiniteLimits",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete Kummer coefficient comparison and its integral-lift boundary compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"kummer\"",
+   "results": "8 hits; KummerExtension.«termK[_√_]», KummerDedekind.Ideal.irreducible_map_of_irreducible_minpoly, KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk, KummerDedekind.quotMapEquivQuotQuotMap, KummerDedekind.emultiplicity_factors_map_eq_emultiplicity, KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span, KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map, KummerDedekind.quotMapEquivQuotQuotMap_symm_apply",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete Kummer coefficient comparison and its integral-lift boundary compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale sheaf cohomology tensor finite free coefficients and Kummer connecting homomorphisms",
+   "results": "8 hits; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, Algebra.Generators.H1Cotangent.δ_eq, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.Generators.H1Cotangent.δ, Algebra.Extension.tensorCotangentSpace, Algebra.H1Cotangent.δ, Algebra.Generators.H1Cotangent.δ_map",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete Kummer coefficient comparison and its integral-lift boundary compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of abelian sheaves preserves finite biproducts and the naturality of connecting homomorphisms in a short exact sequence",
+   "results": "8 hits; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.ShortComplex.ShortExact.δ_apply', CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.ShortComplex.ShortExact.δ_apply, groupCohomology.map_cochainsFunctor_shortExact, CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply, CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply, CategoryTheory.Sheaf.instAddCommGroupH",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete Kummer coefficient comparison and its integral-lift boundary compatibility"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -238,15 +325,27 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-a1-kummer",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-pur-kummer-coefficient-base-change",
   "worker": "stage1",
-  "summary": "Rebased the split onto the current newtargets-dag baseline and re-read every cited dependency. The proof now states the R-balancing calculation that makes the canonical comparison map well-defined and the tensor universal-property argument that makes the descended boundary precise. The corrected integral-lift interpretation of Kummer-boundary compatibility, explicit finite-basis inverses, and all original hypotheses remain unchanged. Updated the correction audit to the current direct citers, including prop-pur-gm-relative-kummer step 5; retained the reported unsupported geometric-pullback citation in the orientation node.",
-  "blueprint": "Realizes this blueprint node's finite-direct-sum proof and its final boundary-naturality sentence, within unit sk-prop-a1-kummer step 3 (the free-coefficient alternative).",
+  "summary": "Dedicated repair of the 2026-10-17 long-step return. Kept the statement and Lean record byte-for-byte as JSON values, the finite-direct-sum route, original steps 1–3 and final argument. Replaced former step 4 by five short steps: integral-lift setup, exactness via existing flat-coproduct and tensor-unit nodes, the elementary integral basis inverse, the left-term comparison via the existing quotient-ring and sheaf tensor universal-property nodes, and the explicit connecting-map naturality square. No new node duplicates these existing tools. Every non-elementary step is below 2000 characters. Re-read all cited statements and local Stacks sources and refreshed the current direct-citer audit.",
+  "blueprint": "Realizes the blueprint proof's finite-direct-sum argument and final Kummer-boundary naturality sentence, as before; former step 4 is now steps 4–8. The integral-lift interpretation already in the statement avoids treating G_m as a Z/m-module. Unit sk-prop-a1-kummer step 3, free-coefficient alternative, is unchanged.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-right-derived-universal-delta-functor",
     "why": "General additivity and naturality of the cohomology delta-functor; a homological algebra tool for the finite-sum argument, not a replacement of any unit step. No node of this unit states this general theorem."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Only its tensor-unit isomorphism is used to establish flatness of the constant integral unit; this generic ringed-site tool does not replace any unit argument."
+   },
+   {
+    "node": "lem-pc-sites-modules-coproduct-flat",
+    "why": "Closure of flat sheaves under coproducts proves that the chosen finite free integral lift tensors exact sequences exactly; no node of the Kummer unit states that general ringed-site fact."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Its bilinear universal property realizes the quotient-ring tensor maps as actual sheaf maps; a generic site tensor tool, not a replacement route."
    }
   ],
   "statement_correction": {
@@ -262,25 +361,23 @@
      "id": "prop-pur-gm-relative-kummer",
      "holds": true,
      "note": "Current proof step 5 uses the finite-free coefficient comparison and preservation of the Kummer boundary, both retained. Step 1 establishes A free over Z/ell^N; the two curves are smooth separated curves over the algebraically closed datum field. Geometric-pullback naturality is proved independently in that citer step 3."
-    },
-    {
-     "id": "prop-pur-affine-line-orientation-base-change",
-     "holds": false,
-     "note": "Current proof step 1 still cites the item for geometric pullback of the Kummer class. Neither the imported nor the corrected coefficient-only statement supplies this; the pre-existing C4 mismatch requires a separate pullback-naturality input. This citer is not edited."
     }
    ]
   }
  },
  "tool_uses": [
-  "lem-weil-pbc-right-derived-universal-delta-functor"
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-sites-modules-coproduct-flat",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal"
  ],
  "reviewed": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NW-6052e931e",
-  "group": "NW",
+  "reviewer": "NT-cc-NK-92cd3d54a",
+  "group": "NK",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-6052e931e (reviewer sub-agent of L); spot-checked: Read the full item, five proof steps, cited statements, blueprint and Stacks sources. Verified the canonical coefficient map, integral-lift boundary correction, hypotheses and edge cases. No new nodes or repairs needed. Accepted the derived delta-functor tool use. Recorded the pre-existing orientation-citer C4 mismatch separately in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-92cd3d54a (reviewer sub-agent of L); spot-checked: I read the whole item and its 9 steps, the 11 cited statements, the master, main-20261015 and main-20261017 blueprint text (identical), unit sk-prop-a1-kummer, and Stacks 03EU(2) at sites-modules.tex:4342 and 03PL at etale-cohomology.tex:2842. Hypotheses: m=l^N with l!=p and k algebraically closed, so lem-sc-kummer-exact applies; under def-sc-curves a smooth separated curve may be empty or disconnected. Coefficient category: abelian sheaves on C_Et with the R-action on mu_m, the sheafified tensor with constant A, and K-injective cohomology, which step 1 reduces to R^q Gamma through the leaf. I checked the inverse formulas both ways in steps 3 and 6. Step 5: flatness follows from the unit isomorphism and the coproduct-flat node. Step 7: theta and its inverse come from quotient-ring clause (2) and the bilinear universal property; the inverse does not depend on the lift because mz=0 and its target is killed by m. Step 8: I recomputed the naturality square for the insertion morphism; it gives the boundary formula exactly. Step 9: the descent is elementary. Edge cases tested: A=0, q=0, empty C, disconnected C, and C=G_m. The statement is unchanged; its integral-lift correction is valid because G_m tensor Z/m is 0 as an etale sheaf. There are no new nodes and I found no duplicates. Accepted tool_uses: the delta-functor node, lem-pc-sheaf-modules-tensor-closed, lem-pc-sites-modules-coproduct-flat and lem-pc-sites-sheaf-tensor-bilinear-universal. Every step is under 2000 characters. No SGA source is used. One cosmetic issue left as is: stale 'local copy absent' source annotations. No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
