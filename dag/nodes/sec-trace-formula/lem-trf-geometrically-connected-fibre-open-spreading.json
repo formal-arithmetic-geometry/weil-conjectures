@@ -334,5 +334,23 @@
   "group": "Q09",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q09-7729a96ac (reviewer sub-agent of L); spot-checked: Read the complete item, all three new nodes, cited statements and Stacks sources 055W, 045U, 0570, 057I and 02LK. All nine steps preserve the hypotheses and recover the entire prescribed fibre open. No duplicates, circular dependencies, prohibited machinery or steps exceeding 2000 characters found. Accepted three declared geometric tool uses. Detailed checks written to review.md; no repairs needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-159bf4dd8",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Statement, dependencies, source proof, docstrings, edge cases, route-pivot compliance, report sections, and scompile.py local/server compilation all checked; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.GeometricallyConnectedFibreNeighbourhood",
+  "declaration": "AlgebraicGeometry.exists_geometricallyConnected_fibre_neighbourhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/GeometricallyConnectedFibreNeighbourhood.lean",
+  "statement": "theorem exists_geometricallyConnected_fibre_neighbourhood {Y S : Scheme.{u}} (h : Y ⟶ S) [Flat h] [LocallyOfFinitePresentation h] [QuasiCompact h] [QuasiSeparated h] [GeometricallyReduced h] (s : S) (T : (h.fiber s).Opens) [GeometricallyConnected (T.ι ≫ h.fiberToSpecResidueField s)] : ∃ (S₁ : Scheme.{u}) (a : S₁ ⟶ S) (s₁ : S₁) (hs : a s₁ = s), IsAffine S₁ ∧ Etale a ∧ IsIso (a.residueFieldMap s₁) ∧ ∃ V : (pullback h a).Opens, IsCompact (V : Set ↥(pullback h a)) ∧ GeometricallyConnected (V.ι ≫ pullback.snd h a) ∧ (pullback.snd h a).fiberι s₁ ⁻¹ᵁ V = (pullback.map (pullback.snd h a) (S₁.fromSpecResidueField s₁) h (S.fromSpecResidueField (a s₁)) (pullback.fst h a) (Spec.map (a.residueFieldMap s₁)) a (pullback.condition (f := h) (g := a)).symm (a.SpecMap_residueFieldMap_fromSpecResidueField s₁).symm ≫ eqToHom (congrArg h.fiber hs)) ⁻¹ᵁ T",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-18",
+  "existing": false
  }
 }
