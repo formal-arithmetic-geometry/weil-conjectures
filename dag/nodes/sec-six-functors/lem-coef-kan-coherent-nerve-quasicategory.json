@@ -31,9 +31,44 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-category-of-spaces"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "A horn map $\\Lambda_i^n\\to N_{\\mathrm{hc}}(A)$ specifies compatible enriched functors on its simplices. The colimit definition of $\\mathfrak C[-]$ in the cell-filtration statement therefore gives an enriched functor $F_0:\\mathfrak C[\\Lambda_i^n]\\to A$. Apply the cited finite filtration. Inductively suppose $F_r$ is defined on stage $r$. For each attached $U(\\Lambda_j^m)$, its composite with $F_r$ specifies two objects $x,y$ of $A$ and a map $\\Lambda_j^m\\to A(x,y)$. Since $m\\geq1$ and $A(x,y)$ is Kan, choose an extension $\\Delta^m\\to A(x,y)$. Together with the same two objects, this defines an enriched functor $U(\\Delta^m)\\to A$: its only composition conditions are the identity laws. For the finite coproduct choose one such extension for each component. The pushout universal property extends $F_r$ to $F_{r+1}$. Finite induction yields $F:\\mathfrak C[\\Delta^n]\\to A$ restricting to $F_0$. By the coherent-nerve definition this is the required simplex, and its restriction is the given horn. This proves the general assertion.",
+   "uses": [
+    "lem-coef-kan-coherent-nerve-cell-filtration",
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-category-of-spaces"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00LJ",
+    "place": "Theorem 2.4.5.1 (00LJ), via the hollow-cube description of Proposition 2.4.5.8 (00LR). The finite enriched horn-cell filtration is the agent-specified combinatorial refinement stated in the cited support node, not a filtration asserted by Theorem 2.4.5.1 itself."
+   }
+  },
+  {
+   "text": "For $A=\\mathbf{Kan}_{\\mathcal W}$, its mapping simplicial set from $S$ to $T$ is $\\operatorname{Fun}(S,T)$ by the cited definition. Apply lem-cbc-kan-functor-space-kan with $K=S$ and $Z=T$: both are $\\mathcal W$-small and $T$ is Kan. Thus every mapping simplicial set is Kan. The general assertion of step 1 applies in the ambient universe containing $\\mathcal W$, and the defining equality $\\mathcal S_{\\mathcal W}=N_{\\mathrm{hc}}(\\mathbf{Kan}_{\\mathcal W})$ gives the particular assertion.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "lem-cbc-kan-functor-space-kan"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00LJ",
+    "place": "Theorem 2.4.5.1 specialisation to Kan_W; mapping-space Kan property from the cited DAG lemma"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-kan-coherent-nerve-cell-filtration",
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces",
+  "lem-cbc-kan-functor-space-kan"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/00LJ",
+  "place": "Theorem 2.4.5.1 (Cordier–Porter); the horn-filtration argument is expanded in step 1 and the Kan_W specialization in step 2"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -48,10 +83,66 @@
    "results": "Quasicategory/StrictSegal.lean:34,101; Quasicategory/InnerFibration.lean:93-104; Quasicategory/Nerve.lean:32 (nerve of an ordinary category); Quasicategory/Basic.lean:54 (Kan complex is a quasicategory); AnodyneExtensions/Inner/PushoutProduct.lean:142-153 (internal Hom into a quasicategory)",
    "date": "2026-10-17",
    "verdict": "no match: no instance for the simplicial (homotopy coherent) nerve of a Kan-enriched simplicial category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the coherent nerve of a locally Kan simplicial category is a quasicategory",
+   "results": "CategoryTheory.Nerve.quasicategory; SSet.instQuasicategoryOfKanComplex; CategoryTheory.Nerve.isStrictSegal; CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂; CategoryTheory.Nerve.instIsCoskeletalNerveOfNatNat; SSet.Quasicategory; SSet.QCat; CategoryTheory.Nerve.nerveFunctor₂",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the locally Kan coherent-nerve quasicategory theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplicialNerve, Quasicategory, Kan",
+   "results": "0 hits; loogle: unknown identifier 'SimplicialNerve'",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the locally Kan coherent-nerve quasicategory theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "coherent nerve|SimplicialNerve|homotopy coherent",
+   "results": "Mathlib/AlgebraicTopology/SimplicialNerve.lean; Mathlib/AlgebraicTopology/SimplicialNerve.lean; Mathlib/AlgebraicTopology/SimplicialNerve.lean; Mathlib/AlgebraicTopology/SimplicialNerve.lean; Mathlib/AlgebraicTopology/SimplicialNerve.lean; searched Mathlib/AlgebraicTopology",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the locally Kan coherent-nerve quasicategory theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "homotopy coherent nerve of a locally Kan simplicial category has inner horn fillers",
+   "results": "SSet.Quasicategory.hornFilling; SSet.Quasicategory; SSet.quasicategory_of_filler; SSet.Quasicategory.hornFilling'; SSet.KanComplex.hornFilling; SSet.Quasicategory.mk; CategoryTheory.Nerve.quasicategory; CategoryTheory.SimplicialNerve",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the locally Kan coherent-nerve quasicategory theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homotopy coherent nerve locally Kan enriched simplicial category inner horn filler",
+   "results": "CategoryTheory.Nerve.quasicategory; CategoryTheory.Nerve.isStrictSegal; SSet.KanComplex.hornFilling; SSet.quasicategory_of_filler; CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂; SSet.Quasicategory.hornFilling; SSet.Truncated.HomotopyCategory.homToNerveMk; CategoryTheory.Nerve.strictSegal",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the locally Kan coherent-nerve quasicategory theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialNerve, SSet.Quasicategory",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the locally Kan coherent-nerve quasicategory theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "quasicategory.*SimplicialNerve|SimplicialNerve.*quasicategory",
+   "results": "0 hits; searched Mathlib/AlgebraicTopology",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the locally Kan coherent-nerve quasicategory theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "SimplicialNerve of a simplicial category with Kan mapping spaces is a quasicategory",
+   "results": "CategoryTheory.SimplicialNerve; SSet.Quasicategory; CategoryTheory.Nerve.quasicategory; SSet.instQuasicategoryOfKanComplex; CategoryTheory.nerve; SSet.quasicategory_of_filler; SSet.StrictSegal.quasicategory'; CategoryTheory.nerveFunctor",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the locally Kan coherent-nerve quasicategory theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -68,5 +159,29 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-kan-coherent-nerve-quasicategory",
+  "worker": "stage1",
+  "summary": "Retained the earlier finite-cell split and the unchanged item statement. Repaired the support lemma to define C[K] and U(X), cite the actual subset-poset definition, and omit explanatory proof text from its statement. Step 1 spells out the colimit, horn extension and pushout induction. Step 2 now cites the smaller existing Kan functor-space theorem directly. Reconciled the retained search records with actual logged commands and ran the missing support-lemma searches. The broader coherent-nerve comparison remains unusable because its closure contains this item. Second reading independently checked the sources, ran four new Mathlib queries, verified cube shellings in dimensions 1 through 4, expanded the filtration citation to include its actual attaching maps, and clarified the proof-step source attribution.",
+  "blueprint": "Realizes the quasicategory-property clause in proof paragraph 2 of prop-coef-integral-exceptional-adjoint (main-20261015), where the space category is used as a quasicategory for coherent transformations and pointwise equivalences.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-kan-functor-space-kan",
+    "why": "Step 2 uses the generic internal-Hom Kan theorem for K=S and Z=T. It is a simplicial-set tool from the cbc unit; no coefficient-specific route replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-kan-functor-space-kan"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N4-b771b9699",
+  "group": "N4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-b771b9699 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-kan-coherent-nerve-cell-filtration, all cited statements, the ancestor prop-coef-integral-exceptional-adjoint (main-20261015) and Mathlib SimplicialNerve.lean:1-40, which lists the locally-Kan quasicategory theorem as an open Project, so there is no Mathlib leaf. Kerodon and HTT are not in literature/. I checked Kerodon 00LJ / HTT 1.1.5.10 from my own knowledge and re-derived every combinatorial claim myself. Item: the statement matches 00LJ hypothesis by hypothesis (every mapping set Kan gives inner-horn filling), and the universe clause covers Kan_W. Step 1: by the colimit definition of C[K], a horn map gives F_0; the step uses the new node's statement only; Kan fillers exist since m>=1 and outer horns are allowed by def-cbc; a functor out of U(Delta^m) needs only the unit laws, also when x=y; the pushout induction is set up properly. Step 2: def-coef-infinity-category-of-spaces gives mapping sets Fun(S,T); lem-cbc-kan-functor-space-kan (a Mathlib leaf, SSet.instKanComplexObjIhom) with K=S, Z=T makes them Kan; the ambient universe is fine; the declared tool_use is accepted. No cycle: both new dependencies have no deps, and the cyclic lem-coef-coherent-nerve-comparison is rightly not cited. New node, true as stated: only Map(0,n) changes; it is the cube missing its interior and the face x_i=0, i.e. the box (boundary of cube^{n-2} in cube^{n-2}) pushout-product ({1} in Delta^1); this is a finite composite of horn attachments, some outer, which is why j ranges over 0..m. Since 0 has no incoming and n no outgoing maps, the pushouts along U(-) create no composites. Checked n=2 (Lambda^1_0) and n=3,i=1 (Lambda^2_1 then Lambda^2_2). B1-B7 pass: statement only; C[K] and U(X) defined inline; correct blueprint from/via; four kinds of search recorded. It does not restate the item (no Kan target, no nerve). Duplicate search: I read lem-coef-rigidification-boundary-cube (the boundary analogue, not horns), coherent-nerve-relative-cube-comparison, coherent-inner-anodyne-equivalences, pinched-cube-latching, coherent-fixed-vertex-cofibrations and coherent-nerve-comparison; none duplicates the new node or the item. No SGA source is used. No fixes."
  }
 }

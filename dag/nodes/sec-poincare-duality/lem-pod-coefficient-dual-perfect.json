@@ -3,45 +3,225 @@
  "blueprint": {
   "is": "lem-pod-coefficient-dual-perfect",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Perfectness is preserved by coefficient duality",
- "statement": "In the Poincare duality conventions of\nthis chapter, let $K\\in D^b_{ctf}(X,\\Lambda)$ be\nperfect over $\\Lambda_X$.\nThen its coefficient dual\n$K^\\vee=R\\mathcal Hom_X(K,\\Lambda_X)$, formed with the\nderived internal Hom,\nis perfect over $\\Lambda_X$ as well, and in particular\n$K^\\vee\\in \\hyperref[def-weil-finite-torsion-constructibility]{D^b_{ctf}(X,\\Lambda)}$.",
+ "statement": "In the Poincare duality conventions [def-pod-conventions], with $X$ and coefficient stage $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$ as fixed there, let $K\\in D^b_{ctf}(X,\\Lambda)$ [def-weil-finite-tor-amplitude] be perfect over $\\Lambda_X$ [def-pod-perfect-complex-on-x]. Then its coefficient dual $K^\\vee=R\\mathcal Hom_X(K,\\Lambda_X)$ [def-pod-coefficient-dual-on-x], formed with the coefficient-stage derived internal Hom [def-weil-derived-pullback-tensor-hom], is perfect over $\\Lambda_X$ as well, and $K^\\vee\\in D^b_{ctf}(X,\\Lambda)$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-def-ops/lem-pod-coefficient-dual-perfect.md",
   "place": "node lem-pod-coefficient-dual-perfect, order 2410"
  },
  "stmt_deps": [
-  "def-weil-finite-torsion-constructibility",
+  "def-pod-conventions",
+  "def-weil-finite-tor-amplitude",
+  "def-pod-perfect-complex-on-x",
+  "def-pod-coefficient-dual-on-x",
   "def-weil-derived-pullback-tensor-hom"
  ],
  "proof": [
   {
-   "text": "Being perfect over $\\Lambda_X$ is a local condition on the small\npro-etale site of $X$\n([def-pod-perfect-complex-on-x]), so it suffices to treat the case\nin which $K$ is a bounded complex $P^\\bullet$ of finite projective\n$\\Lambda_X$-modules. For a finite projective $\\Lambda_X$-module\n$P$ the dual $P^\\vee=\\mathcal Hom_X(P,\\Lambda_X)$ is again finite\nprojective, being the dual of a direct summand of a finite free module,\nand the canonical map $P^\\vee\\otimes^L_{\\Lambda_X}N\\to R\\mathcal Hom_X(P,N)$ of\n[lem-pod-finite-projective-tensor-hom] identifies\n$R\\mathcal Hom_X(P^\\bullet,\\Lambda_X)$ with the bounded complex\n$(P^\\bullet)^\\vee$ of finite projective $\\Lambda_X$-modules\n([def-pod-coefficient-dual-on-x]). Hence $K^\\vee$ is perfect\nover $\\Lambda_X$, and\n[prop-pod-perfect-local-model] gives\n$K^\\vee\\in D^b_{ctf}(X,\\Lambda)$.",
+   "text": "Use the coefficient-stage units and operations of [def-pod-coefficient-dual-on-x] and [def-weil-derived-pullback-tensor-hom], and put $H=R\\mathcal Hom_X(K,\\Lambda_X)$. First check its constructible domain. The constant coefficient object theorem [lem-weil-constant-coefficient-objects-constructible] puts $\\Lambda_X$ in $D^b_c$ at each stage, and identifies every finite reduction of the completed integral unit with $(A_{E,j})_X[0]$. At a finite stage, tensoring the unit with any module sheaf in degree zero is that sheaf, so its Tor interval is $[0,0]$. The same calculation for all integral reductions gives the uniform interval $[0,0]$. At either field stage $D^b_{ctf}=D^b_c$ by [def-weil-finite-tor-amplitude]. Hence $\\Lambda_X$ and the given $K$ both lie in $D^b_{ctf}$. Apply [thm-sf-ctf-stability] (ii) to these two inputs at finite coefficients. At integral coefficients apply its clause (vii), which states $D^b_c=D^b_{ctf}$ and preservation by internal Hom; the same clause transports preservation to $E$ and the common finite-stage $\\overline{\\mathbf Q}_\\ell$ category. Thus $H\\in D^b_{ctf}(X,\\Lambda)$ in every case. Here $X$ is separated of finite type over $k$ and $\\ell\\ne p$ by the fixed Poincare conventions; no properness, ambient exceptional adjoint, dimension-free Hom bound, or additional six-functor axiom is used.",
+   "uses": [
+    "def-pod-coefficient-dual-on-x",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-constant-coefficient-objects-constructible",
+    "def-weil-finite-tor-amplitude",
+    "thm-sf-ctf-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-def-ops/lem-pod-coefficient-dual-perfect.proof.md",
+    "place": "Final sentence (constructible finite-Tor conclusion), expanded using main-20261015 thm-sf-ctf-stability, clauses (ii) and (vii)."
+   }
+  },
+  {
+   "text": "For finite or integral coefficients put respectively $R=(A_{E,n})_X$ or $R=\\widehat{\\mathcal O}_{E,X}$. By [def-pod-perfect-complex-on-x] and [def-weil-site-perfect-complex], on a cover of every object of the small pro-etale site there is a bounded representative $P^\\bullet$ for $K$, with $P^r=0$ outside some $[a,b]$, each $P^r$ a direct summand of $R^{\\oplus m_r}$. Bounds and ranks may depend on the covering object. Restriction of module sheaves is exact by [lem-pur-site-restriction-module-adjunction-exact], and [lem-weil-pbc-ringed-internal-hom-exact-restriction] identifies $H|_U$ with $R\\mathcal Hom_{R|_U}(K|_U,R|_U)$. The integral internal Hom is the ambient ringed-site Hom over the completed sheaf, as specified in [def-weil-derived-pullback-tensor-hom]. Consequently it suffices to calculate this Hom for $P$ on each such slice; discrete constant $\\mathcal O_E$-sheaves are never substituted for the completed unit.",
    "uses": [
     "def-pod-perfect-complex-on-x",
-    "lem-pod-finite-projective-tensor-hom",
-    "def-pod-coefficient-dual-on-x",
-    "prop-pod-perfect-local-model"
+    "def-weil-site-perfect-complex",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-weil-derived-pullback-tensor-hom"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ (lemma-dual-perfect-complex), locality reduction; Tag 08JB (lemma-restriction-RHom-to-U)."
+   }
+  },
+  {
+   "text": "Write the degreewise splitting as $P^r\\xrightarrow{i_r}R^{\\oplus m_r}\\xrightarrow{p_r}P^r$ with $p_ri_r=1$. Precomposition gives $\\mathcal Hom_R(P^r,R)\\xrightarrow{p_r^*}\\mathcal Hom_R(R^{\\oplus m_r},R)\\xrightarrow{i_r^*}\\mathcal Hom_R(P^r,R)$ with $i_r^*p_r^*=1$. Evaluation on the standard basis identifies the middle sheaf with $R^{\\oplus m_r}$, compatibly with restriction. Thus each ordinary dual $(P^r)^\\vee$ is finite projective, with the displayed splitting; this is a calculation with finite tuples, including $m_r=0$, rather than a use of projectivity as an object of the global sheaf category. The sheaf-Hom construction is [def-pur-sheaf-hom].",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, finite-free/direct-summand calculation in the second paragraph of the proof."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-site-bounded-free-rhom-model] on the slice with first complex $P$ and second complex $R[0]$. Its hypotheses are satisfied: $P$ is bounded above with each term a displayed summand of a finite free sheaf, and $R[0]$ is bounded below. It represents $H|_U$ by the actual Hom complex $D=\\mathcal Hom_R^\\bullet(P,R[0])$. By [def-pur-hom-complex],\n$$D^j=\\mathcal Hom_R(P^{-j},R),\\qquad d_D^j(\\phi)=(-1)^{j+1}\\phi\\circ d_P^{-j-1}.$$\nHence $D$ is zero outside $[-b,-a]$, its differential squares to zero, and its terms are finite projective by step 3. There is only one nonzero Hom factor in each degree, so there is no infinite-product interchange. These local models prove site-perfectness of $H$ at finite and integral coefficients in [def-weil-site-perfect-complex]. The generic ringed-site Hom calculation is what justifies passage from an individual finite-projective term to a bounded complex; the degree-zero tensor-Hom lemma alone would not justify it.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "def-pur-hom-complex",
+    "def-weil-site-perfect-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JI (lemma-Rhom-complex-of-direct-summands-finite-free), specialized to the unit in degree zero; Tag 08JJ, strictly perfect dual calculation."
+   }
+  },
+  {
+   "text": "At $\\Lambda=E$ use the actual local models of [def-weil-site-perfect-complex] in the raw scalar-localized category [def-weil-rationalization-karoubi], using the same generic scalar localization [def-weil-linear-scalar-localization] for the ambient module-derived categories on slices; an integral representative of $K$ need not be site-perfect. Restrict the integral Hom construction and extend its action on maps linearly, as [def-weil-derived-pullback-tensor-hom] prescribes. The restriction and triangle properties of [lem-weil-pbc-ringed-internal-hom-exact-restriction] and the exact localization [lem-weil-linear-scalar-localization-triangulated] give these properties for the resulting rational functor $T(-)=R\\mathcal Hom(-,E_U)$. Locally choose the given bounded module-complex representative $P$ whose terms $F=P^r$ become actual summands of $E_U^{\\oplus m_r}$ in this localized category. For the completed integral unit $R_U$, choose $R_U[0]\\to I$ as in [def-pur-derived-internal-hom]. The comparison\n$$c_F:\\mathcal Hom_{R_U}(F,R_U)[0]\\longrightarrow\\mathcal Hom^\\bullet_{R_U}(F,I)$$\nis natural for module maps by precomposition. For $F=R_U^{\\oplus m}$ it is a quasi-isomorphism, since finite tuples preserve exactness (equivalently, apply [lem-weil-pbc-ringed-site-bounded-free-rhom-model] in degree zero). Extend this natural comparison linearly on maps. A rational splitting $i:F\\to E_U^{\\oplus m}$, $p:E_U^{\\oplus m}\\to F$, $pi=1$, is represented after clearing a common power of $\\varpi_E$ by actual integral module maps: this follows from the Hom-module formula in [def-weil-rationalization-karoubi] and the fully faithful degree-zero embedding [lem-weil-pbc-derived-single-fully-faithful]. Naturality therefore holds for $i$ and $p$. Thus $c_F$ is a retract of the invertible rational comparison $c_{R_U^{\\oplus m}}$, so is invertible. Explicitly, for a retract square of arrows $c_F$ and $c_G$, its inverse is the composite of the target inclusion, $c_G^{-1}$, and the source retraction. Moreover $T(F)$ is a summand of $T(E_U^{\\oplus m})=E_U^{\\oplus m}$ by applying the contravariant functor $T$ to $i,p$. Consequently the ordinary module $\\mathcal Hom_{R_U}(F,R_U)$ represents, after scalar localization, a finite-projective rational term. No splitting is lifted integrally, and no idempotent completion is taken.",
+   "uses": [
+    "def-weil-site-perfect-complex",
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-weil-linear-scalar-localization-triangulated",
+    "def-pur-derived-internal-hom",
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, finite-free/direct-summand argument, extended by the specified scalar localization; main-20261015 prop-sf-dualizable.proof.md, local dual model."
+   }
+  },
+  {
+   "text": "To pass from these rational terms to the bounded complex, form the integral module complex $D=\\mathcal Hom^\\bullet_{R_U}(P,R_U[0])$, with the reversed degrees and signed differential of step 4. Its comparison $D\\to\\mathcal Hom^\\bullet_{R_U}(P,I)$ is induced by $R_U[0]\\to I$ in [def-pur-derived-internal-hom]. We prove it invertible after scalar localization by descending induction on the finite stupid tails $P_{\\ge r}$. For $r=b+1$ both complexes are zero. The degreewise split sequence $0\\to P_{\\ge r+1}\\to P_{\\ge r}\\to P^r[-r]\\to0$ gives, after taking Hom, a morphism of short exact sequences by [lem-pc-stupid-tail-hom-short-exact], applied to the map $R_U[0]\\to I$. These give a morphism of distinguished triangles by [lem-weil-pbc-complex-ses-triangle], and remain distinguished after exact scalar localization [lem-weil-linear-scalar-localization-triangulated]. The comparison on the single term is $c_{P^r}$ shifted, invertible by step 5; that on the shorter tail is invertible by induction. The third comparison is invertible by [lem-sf-triangle-morphism-iso]. The connecting maps commute because these are the triangles of that specified morphism of short exact sequences, not arbitrary triangles with the same objects. In the Hom-complex formula [def-pur-hom-complex], the only boundary block is the signed transpose of $d_P^r$: in degree $j=-r-1$ it is $\\phi\\mapsto(-1)^r\\phi d_P^r$ on both sides. This also checks the convention for the connecting map. The induction proves that $D$, rationalized, represents $T(P)=H|_U$. It is bounded in $[-b,-a]$ and its terms are the actual rational finite-projective terms of step 5. Thus it is a model required by [def-weil-site-perfect-complex]. This argument uses a finite filtration and the specified Hom comparisons, rather than assuming that an arbitrary exact functor preserves a chosen chain-level totalization.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-pc-stupid-tail-hom-short-exact",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-linear-scalar-localization-triangulated",
+    "lem-sf-triangle-morphism-iso",
+    "def-pur-hom-complex",
+    "def-weil-site-perfect-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, bounded termwise-dual argument; Tag 08JC (lemma-RHom-triangulated). Functorial short-exact-sequence triangles: derived.tex Tag 0152 (lemma-derived-canonical-delta-functor)."
+   }
+  },
+  {
+   "text": "At $\\Lambda=\\overline{\\mathbf Q}_\\ell$, [def-weil-site-perfect-complex] supplies a site-perfect representative $K_E$ over some finite coefficient field $E$. By [lem-weil-constant-coefficient-objects-constructible] (3) the common-stage unit is $(\\overline{\\mathbf Q}_\\ell)_X=(E,E_X)$, independent of the stage, so it may be taken over the same field $E$. By the common-stage definition [def-weil-algebraically-closed-coefficients] and the internal-Hom formula in [def-weil-derived-pullback-tensor-hom], with compositum $EE=E$, $H$ is represented over that same field by $R\\mathcal Hom(K_E,E_X)$, which is rationally site-perfect by steps 5--6. If a further finite extension is used, [lem-weil-scalar-extension-exact-triangulated] preserves the finite cone constructions, while additivity and functoriality preserve each displayed equation $pi=1$ and finite sum of units. The internal-Hom and unit comparisons of [lem-fix-operation-reduction] identify the resulting scalar-extended dual with the dual at the larger field. Thus the models are compatible with the common-stage interpretation, and establish site-perfectness of $H$ at this last coefficient stage as well.",
+   "uses": [
+    "def-weil-site-perfect-complex",
+    "lem-weil-constant-coefficient-objects-constructible",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-scalar-extension-exact-triangulated",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-def-ops/lem-pod-coefficient-dual-perfect.proof.md",
+    "place": "Local dual-model argument at the common finite coefficient-field stage; main-20261015 prop-sf-dualizable.proof.md and coefficient-stage conventions."
+   }
+  },
+  {
+   "text": "Step 1 gives $H\\in D^b_{ctf}(X,\\Lambda)$, and steps 2--7 give its local bounded finite-projective models at the chosen coefficient stage. These are exactly perfectness over $\\Lambda_X$ in [def-pod-perfect-complex-on-x]. Since $H$ is the coefficient dual by [def-pod-coefficient-dual-on-x], both conclusions follow. No claim is made that local bounds are automatically uniform on arbitrary sites; the constructible and finite-Tor conclusion was supplied on the actual geometric domain in step 1.",
+   "uses": [
+    "def-pod-perfect-complex-on-x",
+    "def-pod-coefficient-dual-on-x"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-def-ops/lem-pod-coefficient-dual-perfect.proof.md",
+    "place": "Final sentence, with constructibility and finite Tor amplitude separately justified at all coefficient stages."
+   }
   }
  ],
  "proof_deps": [
-  "def-pod-perfect-complex-on-x",
-  "lem-pod-finite-projective-tensor-hom",
   "def-pod-coefficient-dual-on-x",
-  "prop-pod-perfect-local-model"
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "def-weil-finite-tor-amplitude",
+  "thm-sf-ctf-stability",
+  "def-pod-perfect-complex-on-x",
+  "def-weil-site-perfect-complex",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "def-pur-sheaf-hom",
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+  "def-pur-hom-complex",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "def-pur-derived-internal-hom",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "def-weil-linear-scalar-localization",
+  "lem-pc-stupid-tail-hom-short-exact",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sf-triangle-morphism-iso",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-weil-scalar-extension-exact-triangulated",
+  "lem-fix-operation-reduction"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-def-ops/lem-pod-coefficient-dual-perfect.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-def-ops/lem-pod-coefficient-dual-perfect.proof.md",
+  "place": "Complete local dual-model proof, expanded with Stacks Tags 08JB, 08JI, 08JJ and the already split coefficient-stage constructions. Constructibility uses the existing concrete preservation theorem."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "perfect.*dual|dual.*perfect|IsLocallyPerfect|constructibleFiniteTor",
+   "results": "{\"t\": \"2026-10-17T02:26:17Z\", \"tool\": \"grep\", \"query\": \"perfect.*dual|dual.*perfect|IsLocallyPerfect|constructibleFiniteTor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/Topology/Algebra/Module/PerfectPairing.lean\", \"Mathlib/Topology/Algebra/Module/TopDualPairing.lean\", \"Mathlib/Topology/Algebra/Module/TopDualPairing.lean\", \"Mathlib/Topology/Algebra/Module/TopDualPairing.lean\", \"Mathlib/Topology/Algebra/Module/TopDualPairing.lean\", \"Mathlib/LinearAlgebra/PerfectPairing/Basic.lean\", \"Mathlib/LinearAlgebra/PerfectPairing/Basic.lean\", \"Mathlib/LinearAlgebra/PerfectPairing/Basic.lean\"], \"digest\": \"f1cae62a74ebcd58\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coefficient dual preserves perfect bounded constructible complexes on a pro-etale site",
+   "results": "{\"t\": \"2026-10-17T02:26:18Z\", \"tool\": \"leansearch\", \"query\": \"Coefficient dual preserves perfect bounded constructible complexes on a pro-etale site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Perfection.map_apply_coe\", \"Perfection.coeff_map\", \"LinearMap.IsPerfPair.dualEval\", \"Module.DualBases.coeffs_apply\", \"Module.DualBases.coeffs\", \"Module.DualBases.coeffs.congr_simp\", \"Module.DualBases.basis_repr_apply\", \"Module.Basis.coe_dualBasis\"], \"digest\": \"cfc19e4b7bca9a31\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"dual\"",
+   "results": "{\"t\": \"2026-10-17T02:26:18Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, \\\"dual\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal dual of a perfect complex of module sheaves is again a bounded complex of finite projective sheaves",
+   "results": "{\"t\": \"2026-10-17T02:26:19Z\", \"tool\": \"leanfinder\", \"query\": \"Internal dual of a perfect complex of module sheaves is again a bounded complex of finite projective sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.dual_projective\", \"Ext\", \"CochainComplex.isKProjective_of_op\", \"CochainComplex.isKProjective_of_projective\", \"CochainComplex.IsKProjective\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CochainComplex.instIsKProjectiveObjIntShiftFunctor\", \"CochainComplex.isKProjective_of_iso\"], \"digest\": \"4c6a07e7729f5d78\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived internal Hom of a locally perfect complex of sheaves into the coefficient ring is locally perfect and bounded constructible with finite Tor amplitude",
+   "results": "{\"t\": \"2026-10-17T02:26:20Z\", \"tool\": \"leanfinder\", \"query\": \"The derived internal Hom of a locally perfect complex of sheaves into the coefficient ring is locally perfect and bounded constructible with finite Tor amplitude\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CategoryTheory.Sheaf.H\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isGE_Q_obj_iff\", \"CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE\", \"DerivedCategory.isLE_Q_obj_iff\", \"instAbelianLightCondMod\"], \"digest\": \"4c3b8e33607f74de\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dual_projective|dual_finite|isKProjective_of_projective",
+   "results": "{\"t\": \"2026-10-17T02:27:38Z\", \"tool\": \"grep\", \"query\": \"dual_projective|dual_finite|isKProjective_of_projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/CategoryTheory/Abelian/Projective/Ext.lean\", \"Mathlib/Combinatorics/Matroid/Dual.lean\"], \"digest\": \"2f1a86fd81acba2a\"}",
+   "date": "2026-10-17",
+   "verdict": "partial: ordinary finite-projective duals only; not the derived site-perfect and constructible assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsDualizable, CategoryTheory.ihom",
+   "results": "{\"t\": \"2026-10-17T02:27:38Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsDualizable, CategoryTheory.ihom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.IsDualizable'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -71,5 +251,84 @@
   }
  },
  "chapter": "sec-poincare-duality",
- "unit": "sk-def-ops"
+ "unit": "sk-def-ops",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pod-coefficient-dual-perfect",
+  "worker": "stage1",
+  "summary": "Expanded the local termwise-dual proof at all four coefficient stages, using existing generic ringed-site Hom, restriction, finite-tail and scalar-localization nodes. Separated the actual constructible/finite-Tor assertion from local perfectness and used the concrete internal-Hom preservation theorem with the coefficient unit. Clarified statement dependencies and removed the incorrect finite-torsion-definition hyperlink for D^b_ctf. No hypothesis or conclusion changed; no new nodes or Mathlib leaves. Finite-only upstream declarations do not cover the completed/localized/common-stage statement.",
+  "blueprint": "Steps 2--4 realize the first through penultimate sentences of main-20261015 lem-pod-coefficient-dual-perfect.proof.md (local perfect model, termwise dual and bounded dual complex). Steps 5--7 expand the same argument at the rational/common-field stages of the fixed conventions. Steps 1 and 8 realize its final D^b_ctf sentence, supplying both constructibility and finite Tor amplitude at every stage instead of applying the finite-coefficient local-model proposition beyond its statement. The parent sk-def-ops is a definition with no proof steps; no unit-level proof route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-constant-coefficient-objects-constructible",
+    "why": "The constant and completed units, their reductions and rational/common-stage images are constructible; the definition unit has no such theorem."
+   },
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Concrete internal-Hom preservation at finite, integral and both field stages supplies the constructible finite-Tor conclusion; no unit proof step is replaced."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic exact restriction of module sheaves permits the local-model calculation on slice sites."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic ringed-site Hom restriction and exactness in triangles; the unit only defines the operations."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "why": "Generic bounded-above finite-projective first argument and bounded-below second argument compute derived sheaf Hom by the explicit Hom complex."
+   },
+   {
+    "node": "lem-weil-linear-scalar-localization-triangulated",
+    "why": "Exact scalar localization carries the finite Hom-complex triangles to rational coefficients."
+   },
+   {
+    "node": "lem-weil-pbc-derived-single-fully-faithful",
+    "why": "Degree-zero derived maps of module sheaves are actual module maps, needed before extending the Hom comparison linearly."
+   },
+   {
+    "node": "lem-pc-stupid-tail-hom-short-exact",
+    "why": "Generic finite-tail Hom comparison gives the actual morphism of short exact sequences used in rational induction."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Functorial triangles of short exact sequences guarantee the connecting-map square in the bounded rational comparison."
+   },
+   {
+    "node": "lem-sf-triangle-morphism-iso",
+    "why": "Two invertible components in that morphism of triangles give the induction step."
+   },
+   {
+    "node": "lem-weil-scalar-extension-exact-triangulated",
+    "why": "Common-stage passage preserves the finite cone construction."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Internal-Hom and unit comparisons identify a scalar-extended dual with the coefficient dual at the enlarged field."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-constant-coefficient-objects-constructible",
+  "thm-sf-ctf-stability",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-pc-stupid-tail-hom-short-exact",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-scalar-extension-exact-triangulated",
+  "lem-fix-operation-reduction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-43ca4ce0b",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-43ca4ce0b (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all 8 steps, and every one of the 23 cited statements. I also read the blueprint statement and proof (main-20261015 and master) and Stacks 08JJ, 08JI and 08JB in sites-cohomology.tex. There are 0 new nodes and no SGA source.\n\nItem statement: faithful to the blueprint and not weakened. The D^b_ctf link now points to def-weil-finite-tor-amplitude, which defines D^b_ctf at all four stages; the old link defined only finite-stage D^b_c. The worker was right that the blueprint's prop-pod-perfect-local-model is finite-stage only and gives only bounded constructibility.\n\nStep 1: thm-sf-ctf-stability (ii) and (vii) give internal-Hom preservation at all four stages. The unit has Tor amplitude [0,0] by lem-weil-constant-coefficient-objects-constructible. X is separated of finite type over k and l is not p.\n\nSteps 2-4: restriction of RHom to slices (08JB) and the bounded Hom-complex model (08JI). I recomputed D^n = Hom(P^{-n},R), the differential (-1)^{n+1} f d_P and the support [-b,-a]. The dual of a summand is a summand.\n\nStep 5 (rational stage): c_F is natural and is a retract of an invertible comparison, so it is invertible. The rational splitting comes from actual module maps via full faithfulness in degree zero. No integral splitting and no Karoubi completion are used.\n\nStep 6: descending induction on stupid tails, giving a morphism of short exact sequences, then of triangles, preserved by localization, then two out of three. The base case is zero, and the boundary sign (-1)^r checks.\n\nStep 7 (common stage) and step 8 (assembly): correct.\n\nCycles: none. The closure of the 23 dependencies does not reach the item. I accept all 12 declared tool uses. prop-sf-dualizable and thm-sf-dual-perfect are not duplicates: they need a six-functor datum, which the item's setting does not supply.\n\nRepair: step 7 needs the common-stage unit to be (E,E_X) for the same field E as K_E, but did not cite the result that gives this. I added lem-weil-constant-coefficient-objects-constructible (3) to step 7's text and uses; proof_deps is unchanged. The corrected file is fixes/dag/nodes/sec-poincare-duality/lem-pod-coefficient-dual-perfect.json, and details are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
