@@ -12,7 +12,8 @@
   "def-weil-pbc-topos",
   "def-weil-pbc-constant-sheaf",
   "def-weil-sheaf-of-modules-category",
-  "def-trf-geometric-morphism"
+  "def-trf-geometric-morphism",
+  "lem-pe-constant-left-module-inverse-image"
  ],
  "proof": [
   {
@@ -285,5 +286,29 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-4e46492e4 (reviewer sub-agent of L); spot-checked: Read the mathematics and cited sources in full. Repaired the missing site-presentation prerequisite, reversed open-unit arrow, and incomplete point/adjunction calculations. Corrected the u=0/u=1 edge cases. Statement unchanged; no cycles, dropped machinery, or long non-elementary steps. Two corrected JSON files and detailed source checks are recorded in review.md.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.ToposComplementModuleStalks",
+  "declaration": "CategoryTheory.topos_complement_module_stalks",
+  "declarations": [
+   "CategoryTheory.ToposComplementModules.Lift",
+   "CategoryTheory.ToposComplementModules.IsCompositionComparison",
+   "CategoryTheory.ToposComplementModules.PointAssertion",
+   "CategoryTheory.topos_complement_module_stalks"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/ToposComplementModuleStalks.lean",
+  "statement": "theorem topos_complement_module_stalks : (∀ (C D : Type w) [SmallCategory C] [SmallCategory D] (J : GrothendieckTopology C) (K : GrothendieckTopology D) (Λ : Type w) [CommRing Λ] (f : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w))), Nonempty (ToposComplementModules.Lift Λ f)) ∧ (∀ (C D O : Type w) [SmallCategory C] [SmallCategory D] [SmallCategory O] (J : GrothendieckTopology C) (K : GrothendieckTopology D) (L : GrothendieckTopology O) (U : Sheaf J (Type w)), IsSubterminal U → ∀ (j : GeometricMorphism (Sheaf L (Type w)) (Sheaf J (Type w))) (k : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w))), (∃ e : Sheaf L (Type w) ≌ Over U, Nonempty (j.inverse ⋙ e.functor ≅ Over.star U)) → Nonempty k.direct.FullyFaithful → (∀ A : Sheaf J (Type w), k.direct.essImage A ↔ closedComplementObjects U A) → ∀ (Λ : Type w) [CommRing Λ], ∃ (dj : ToposComplementModules.Lift Λ j) (dk : ToposComplementModules.Lift Λ k) (jShriek : Modules L Λ ⥤ Modules J Λ) (adj : jShriek ⊣ dj.moduleFunctor) (openUnit : 𝟭 (Modules L Λ) ≅ jShriek ⋙ dj.moduleFunctor) (closedCounit : dk.moduleDirect ⋙ dk.moduleFunctor ≅ 𝟭 (Modules K Λ)), openUnit.hom = adj.unit ∧ closedCounit.hom = dk.moduleAdj.counit ∧ dk.moduleDirect.Full ∧ dk.moduleDirect.Faithful ∧ (∀ F : Modules J Λ, dk.moduleDirect.essImage F ↔ IsZero (dj.moduleFunctor.obj F)) ∧ (∀ G : Modules L Λ, IsZero (dk.moduleFunctor.obj (jShriek.obj G))) ∧ (∀ H : Modules K Λ, IsZero (dj.moduleFunctor.obj (dk.moduleDirect.obj H))) ∧ ToposComplementModules.PointAssertion U j k dj dk jShriek adj openUnit closedCounit)",
+  "branch": "newtargets-dag",
+  "by": "Q153",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1e9dd0d03",
+  "group": "Q153",
+  "result": "pass",
+  "note": "Statement, dependencies, source clauses, helpers, edge cases, docstrings, route-pivot compliance, compiler evidence, and required report sections checked; scompile and deliver2 dry run passed."
  }
 }

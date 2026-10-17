@@ -264,5 +264,23 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-740017213 (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes, cited statements, unit/chapter route, ILO VI 1.6, and exact Stacks tags 05GG, 00FN, 0316, 00IV, 00K8, 00KA, 00KQ, 00NP, 00NQ, 00KW. Checked all eight proof steps, hypotheses, edge cases, coefficient filtration, domain and dimension arguments, duplicate candidates, searches, blueprint ancestry, route restrictions, and no long-step violations. Wrote review.md; no repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FormalMonoidRingDimension",
+  "declaration": "AddMonoidAlgebra.formalMonoidRing_dimension",
+  "file": "lean/Sheaf/RingTheory/FormalMonoidRingDimension.lean",
+  "statement": "theorem formalMonoidRing_dimension (D : Type u) [CommRing D] [IsRegularLocalRing D] [IsAdicComplete (IsLocalRing.maximalIdeal D) D] (T : Type v) [AddCommMonoid T] (hfs : AlgebraicGeometry.IsFineSaturatedMonoid (Multiplicative T)) (hsharp : ∀ t : T, IsUnit (Multiplicative.ofAdd t) → t = 0) (a : Ideal (AddMonoidAlgebra D T)) (ha : a = Ideal.map (algebraMap D (AddMonoidAlgebra D T)) (IsLocalRing.maximalIdeal D) ⊔ Ideal.span {b | ∃ t : T, t ≠ 0 ∧ b = single t (1 : D)}) (L : Ideal (AdicCompletion a (AddMonoidAlgebra D T))) (hL : L = Ideal.span {b | ∃ t : T, t ≠ 0 ∧ b = AdicCompletion.of a (AddMonoidAlgebra D T) (single t (1 : D))}) : IsNoetherianRing (AdicCompletion a (AddMonoidAlgebra D T)) ∧ IsLocalRing (AdicCompletion a (AddMonoidAlgebra D T)) ∧ IsDomain (AdicCompletion a (AddMonoidAlgebra D T)) ∧ ringKrullDim (AdicCompletion a (AddMonoidAlgebra D T)) = ringKrullDim D + (Cardinal.toENat (Module.rank ℚ (TensorProduct ℤ ℚ (Additive (Algebra.GrothendieckGroup (Multiplicative T))))) : WithBot ℕ∞) ∧ ∃ e : (AdicCompletion a (AddMonoidAlgebra D T) ⧸ L) ≃ₐ[D] D, ∀ η : AdicCompletion a (AddMonoidAlgebra D T), e (Ideal.Quotient.mk L η) ∈ IsLocalRing.maximalIdeal D → e (Ideal.Quotient.mk L η) ∉ (IsLocalRing.maximalIdeal D) ^ 2 → Function.Injective (fun x : AdicCompletion a (AddMonoidAlgebra D T) => η * x) ∧ IsRegularLocalRing (D ⧸ Ideal.span {e (Ideal.Quotient.mk L η)}) ∧ ringKrullDim ((AdicCompletion a (AddMonoidAlgebra D T)) ⧸ Ideal.span {η}) + 1 = ringKrullDim D + (Cardinal.toENat (Module.rank ℚ (TensorProduct ℤ ℚ (Additive (Algebra.GrothendieckGroup (Multiplicative T))))) : WithBot ℕ∞) ∧ ringKrullDim (D ⧸ Ideal.span {e (Ideal.Quotient.mk L η)}) + 1 = ringKrullDim D",
+  "branch": "newtargets-dag",
+  "by": "Q155",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3b3d5f541",
+  "group": "Q155",
+  "result": "fix",
+  "note": "Mathematics, hypotheses, conclusions, universes, dependencies, sources and verbatim signature checked; per-file scompile passed without diagnostics. Repaired H1/H11 placeholder second reading with complete replacement report in fixes/lem-trf-formal-monoid-ring-dimension.report.md. Full findings recorded in review.md; Lean and node unchanged."
  }
 }

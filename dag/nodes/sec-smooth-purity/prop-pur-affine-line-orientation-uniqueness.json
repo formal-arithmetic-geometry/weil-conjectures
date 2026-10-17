@@ -351,5 +351,31 @@
   "group": "NX",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-5d02a69a6 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, the new lemma, every cited statement (with its blueprint_update), the main-20261015 sk-prop-a1 unit and the item proof, and the duplicate candidates. The new lemma is true. Its triangle is the etale closed-support triangle pushed forward by Rp_et,* using ps=id and pj=pi, then carried over by nu^* and the qcqs comparison; C = nu^* s^x B because B is bounded below. Its edge identity is the naturality of the edge map applied to d. I tested s=id, Y empty, B=0 and shifted B. It does not restate a clause of the item and duplicates no node. lem-pur-support-localization-triangle is the closest candidate, and the report did not mention it (C5 gap): it gives only the pro-etale supported-sections Rs^!, conditionally identified with a right adjoint on all of D^+, which the transported functor is not. Three repairable faults, all fixed in fixes/: (B, form) the new node lacked merged_into and lean_audit; both are added. (C4) step 2 took the etale model of A_X(1) on X from def-pur-affine-line-datum, which constructs one only on U; it now uses lem-pur-twist-sheaf-locally-free(4) and lem-sf-proetale-constructible-origin(ii), both declared in tool_uses. (E5/C4) step 4 assumed, without any cited statement, that pulling back a supported class in the Hom form of lem-pur-supported-hom is h^* followed by the finite exchange. I rewrote it: s_*m_a is multiplication by the global section p^{-1}a, which commutes with every morphism, so naturality of supported-hom and of the support pullback in the coefficient gives r_y(phi)=a_y r_y(pur_s). The finite-exchange, exchange-naturality, finite-direct-image-exact, inverse-image-modules-exact and comparison-direct-image citations are therefore removed from the step, proof_deps and tool_uses. Steps 1, 3, 5 and 6 are correct as written; the statement is unchanged and nothing is weakened. No SGA source. I accept the remaining off-unit tool_uses as generic black boxes. Details are in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityAffineLineOrientationUniqueness",
+  "declaration": "WeilConjectures.PurityFiniteSetting.affineLine_orientation_uniqueness",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.OrientationGeometricFamily",
+   "WeilConjectures.PurityFiniteSetting.OrientationRestrictionData",
+   "WeilConjectures.PurityFiniteSetting.orientationGeometricRestriction",
+   "WeilConjectures.PurityFiniteSetting.orientationNormalizedFamily",
+   "WeilConjectures.PurityFiniteSetting.affineLine_orientation_uniqueness"
+  ],
+  "file": "lean/Sheaf/Paper/PurityAffineLineOrientationUniqueness.lean",
+  "statement": "theorem affineLine_orientation_uniqueness (P : PurityFiniteSetting.{u}) (h : P.ramificationIndex ∣ P.level) (Y : Scheme.{u}) (a : Y ⟶ Spec (CommRingCat.of P.field.k)) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] : ∃ D : OrientationRestrictionData P h Y a, Function.Injective (P.orientationGeometricRestriction h D) ∧ ∃ m : P.derivedSheaf h Y false ⟶ P.gysinValue h Y, D.chart.support.hom (P.gysinHomToSections h Y m) = D.chart.coordinateBoundary P h a ∧ P.orientationGeometricRestriction h D m = P.orientationNormalizedFamily h D ∧ ∀ m' : P.derivedSheaf h Y false ⟶ P.gysinValue h Y, P.orientationGeometricRestriction h D m' = P.orientationNormalizedFamily h D → m' = m",
+  "branch": "newtargets-dag",
+  "by": "Q154",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The restriction is the recorded support chart followed by orientationSupportRestriction, with its canonical kernel-unit and root-line coefficient normalization. All chart and transport data are produced in the conclusion. Fibre residues are A-linear and fixed independently by the coordinate boundary. No normalized-rank-one-datum hypothesis, exceptional base-change isomorphism hypothesis, or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e0b6fce6a",
+  "group": "Q154",
+  "result": "pass",
+  "note": "Reviewed node, source, dependencies, Lean module, report, edge cases, route-pivot compliance, and docstrings. scompile.py passed in sandbox and library overlays; no substantive or mechanical faults found."
  }
 }
