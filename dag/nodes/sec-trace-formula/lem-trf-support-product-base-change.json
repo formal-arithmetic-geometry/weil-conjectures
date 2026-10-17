@@ -1,0 +1,70 @@
+{
+ "id": "lem-trf-support-product-base-change",
+ "kind": "statement",
+ "title": "Support-product comparison with base change along the other leg",
+ "statement": "Use the global finite-field and finite coefficient conventions of [def-trf-coefficient-conventions], so $k=\\overline{\\mathbf F}_q$, $s=\\operatorname{Spec}k$, $\\ell\\ne\\operatorname{char}k$, and $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$ with $n\\ge1$. Work with the geometric derived operations on $D^b_{ctf}(-,A)$, using the specified constructible exceptional adjunctions of [def-trf-admissibility]. All tensor products and pullbacks below are derived, with the signed symmetry of [def-weil-derived-pullback-tensor-hom].\n\nLet $B,U,V$ be separated finite-type $k$-schemes, let $f:U\\to B$, $g:V\\to B$ be separated finite-type morphisms, and put $T=U\\times_BV$ with projections $p:T\\to U$, $q:T\\to V$ and $t=fp=gq$. Write $A_W$ for the constant coefficient object on a scheme $W$, and use the constant-coefficient pullback identifications $Lp^*A_U\\cong A_T\\cong Lq^*A_V$. For compact-support base change in this Cartesian square write\n$$\nbc:Lg^*Rf_!A_U\\xrightarrow{\\sim}Rq_!Lp^*A_U,\\qquad\nbc':Lf^*Rg_!A_V\\xrightarrow{\\sim}Rp_!Lq^*A_V .\n$$\nLet\n$$\n\\mu:Rt_!A_T\\xrightarrow{\\sim}Rf_!A_U\\otimes Rg_!A_V\n$$\nbe the support-product isomorphism with $f$ as outer direct image, built exactly as follows: the inverse of the composition isomorphism $Rf_!Rp_!\\cong Rt_!$, then $A_T\\cong Lq^*A_V$, then $Rf_!(bc'^{-1}):Rf_!Rp_!Lq^*A_V\\to Rf_!Lf^*Rg_!A_V$, then insertion of the tensor unit $Lf^*Rg_!A_V\\cong A_U\\otimes Lf^*Rg_!A_V$ inside $Rf_!$, and finally the inverse of the projection transformation $\\operatorname{PF}_{f,A_U,Rg_!A_V}:Rf_!A_U\\otimes Rg_!A_V\\to Rf_!(A_U\\otimes Lf^*Rg_!A_V)$ of [def-sf-pf]. (This is the map $\\mu$ of [def-trf-supported-pairing], Step 2, for $c=f$, $\\bar d=g$, $e_C=p$, $e_D=q$.) For $N\\in D^b_{ctf}(B,A)$ let\n$$\n\\pi_N:N\\otimes Rg_!A_V\\xrightarrow{\\sim}Rg_!Lg^*N\n$$\nbe the signed symmetry $N\\otimes Rg_!A_V\\cong Rg_!A_V\\otimes N$, followed by $\\operatorname{PF}_{g,A_V,N}$ and the unit identification $A_V\\otimes Lg^*N\\cong Lg^*N$ inside $Rg_!$. Then\n$$\n\\pi_{Rf_!A_U}\\circ\\mu=Rg_!(bc^{-1})\\circ\\bigl(Rt_!A_T\\xrightarrow{\\sim}Rg_!Rq_!A_T=Rg_!Rq_!Lp^*A_U\\bigr),\n$$\nthe unnamed arrow being the inverse of the composition isomorphism $Rg_!Rq_!\\cong Rt_!$ followed by $A_T\\cong Lp^*A_U$. All arrows are the specified compact-support composition, exchange, projection and unit transformations, with their signed tensor symmetries; no properness of $f$ or $g$ is assumed. Here $Rf_!A_U\\in D^b_{ctf}(B,A)$ and $Rg_!A_V\\in D^b_{ctf}(B,A)$, so every projection transformation is applied in its stated domain ([thm-sf-kunneth-relative] gives the same comparison maps in the relative Künneth construction).",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-trace-class-diagonal-pairing.proof.md",
+  "place": "Step 4: the two constructions of Re_!A_F \\cong Rc_!A_C\\otimes R\\Delta_!A_X in the fixed square (via c and via \\Delta) agree, before taking exceptional adjoints"
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-trf-admissibility",
+  "def-weil-derived-pullback-tensor-hom",
+  "thm-sf-kunneth-relative",
+  "def-sf-pf",
+  "def-trf-supported-pairing"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A compact support relative Kunneth product with the constant sheaf becomes inverse base change after the projection formula",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardNatIso_inv. The hits concern ordinary sheaf pullback composition or Cartesian monoidal product projections. None compares these two compact-support support-product maps with the derived projection formula and exchange. No exact or one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative tensor product of compact support pushforwards is compatible with the two projections of a Cartesian square",
+   "results": "8 hits: CategoryTheory.CartesianMonoidalCategory.tensorμ_snd, CategoryTheory.CartesianMonoidalCategory.tensorμ_fst, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd, CategoryTheory.CartesianMonoidalCategory.tensorδ_snd, IsTensorProduct.map_mul, CategoryTheory.CartesianMonoidalCategory.lift_fst_comp_snd_comp, CategoryTheory.Over.tensorHom_left_fst, CategoryTheory.CartesianMonoidalCategory.tensorHom_snd. The hits concern ordinary sheaf pullback composition or Cartesian monoidal product projections. None compares these two compact-support support-product maps with the derived projection formula and exchange. No exact or one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"baseChange\"",
+   "results": "0 hits: . The hits concern ordinary sheaf pullback composition or Cartesian monoidal product projections. None compares these two compact-support support-product maps with the derived projection formula and exchange. No exact or one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]unneth|[Kk]ünneth|baseChange.*[Pp]rojection|[Pp]rojection.*baseChange",
+   "results": "0 hits: . The hits concern ordinary sheaf pullback composition or Cartesian monoidal product projections. None compares these two compact-support support-product maps with the derived projection formula and exchange. No exact or one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-trace-class-diagonal-pairing",
+  "date": "2026-10-17",
+  "group": "Q71"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-trace-class",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-trace-class-diagonal-pairing",
+   "place": "Step 4: the two constructions of Re_!A_F \\cong Rc_!A_C\\otimes R\\Delta_!A_X in the fixed square (via c and via \\Delta) agree, before taking exceptional adjoints",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

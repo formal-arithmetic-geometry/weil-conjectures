@@ -11,9 +11,118 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-space-transport-classification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $D=\\operatorname{Fun}(J,\\mathcal E)$, $a=\\Delta_Jx$, and $M_{x,p}=\\operatorname{Map}_D(a,p)$. Since $J$ is small and $\\mathcal E$ is a quasicategory, [lem-cbc-enhanced-functor-cone-calculus] makes $D$ a quasicategory and $M_{x,p}$ Kan. Initially work in a universe containing $\\mathcal U'$ as an element: $D$ and its mapping spaces fit there, so subsequent applications of coherent Hom functoriality to $D$ are legitimate. No local $\\mathcal U$-smallness of $D$ is assumed. Step 8 will descend the particular space $M_{x,p}$ to $\\mathcal U$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03MR",
+    "place": "Hom-functors in a sufficiently large universe; setup for the explicit comparison"
+   }
+  },
+  {
+   "text": "Let $U_D(a,p)=\\{a\\}\\times_{D,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,D)\\times_{\\operatorname{ev}_1,D}\\{p\\}$, as in [lem-coef-infinity-pinch-comparison]. Expanding the internal functor and pullback definitions in [def-cbc-enhanced-diagrams-cones], an $n$-simplex of this set is a map $h:J\\times\\Delta^n\\times\\Delta^1\\to\\mathcal E$ whose restriction at $0$ is constant at $x$ and whose restriction at $1$ is $p$ pulled back from $J$. An $n$-simplex of $\\Gamma_J(q_{x,p})$ is exactly the same map: its $J$ coordinate is prescribed, and its arrow coordinate is $h$. Sending one description to the other and back changes no value. Operators restrict the $\\Delta^n$ coordinate on both sides. Thus this is a simplicial isomorphism $c:U_D(a,p)\\cong\\Gamma_J(q_{x,p})$, not merely a bijection of vertices.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03MR",
+    "place": "Agent argument: exponential law expanded degree by degree for the specified internal functor"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-pinch-comparison] to the quasicategory $D$ from Step 1 and endpoints $a,p$. It gives a homotopy equivalence $j_D:M_{x,p}\\to U_D(a,p)$ between Kan complexes. Compose with $c$ from Step 2 to obtain the first equivalence. Explicitly, an $n$-simplex $\\sigma:J\\times\\Delta^{n+1}\\to\\mathcal E$ of $M_{x,p}$ goes to $h=\\sigma\\circ(\\mathrm{id}_J\\times\\rho_n)$, where $\\rho_n(t,0)=t$ and $\\rho_n(t,1)=n+1$. At $n=0$ this sends the edge $b:\\Delta_Jx\\to p$ to precisely its arrow-valued section. The same formula retains the entire higher simplex. In particular $\\Gamma_J(q_{x,p})$ is Kan.",
+   "uses": [
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01L5",
+    "place": "Proposition 4.6.5.10, right-pinch inclusion, applied to the internal functor category"
+   }
+  },
+  {
+   "text": "By [lem-coef-space-transport-classification], $H_{\\mathcal E}(x,-)$ classifies the source-fixed arrow left fibration. Its pullback along $p$ therefore represents $F_{x,p}$, with pullback compatibility giving exactly $q_{x,p}$. The constant functor $\\Delta_J*$ is represented by $J\\times*\\to J$, canonically $J\\to J$. Apply the mapping-space formula of that same node to these two representatives. Its right side is $\\operatorname{Fun}_{/J}(J,A_{x,p})=\\Gamma_J(q_{x,p})$ by its stated simplex formula. This gives the second displayed equivalence, read in the reverse direction. The node explicitly says that this mapping complex is Kan and that the equivalence preserves compositions, higher simplices and pullback of the base. Its hypotheses permit an arbitrary simplicial base $J$.",
+   "uses": [
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05QM",
+    "place": "Section-space model for transformations from the constant point, using the full transport comparison stated in the cited node"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-relative-hom-evaluation] in the containing universe of Step 1 with $K=J$, $C=D$, $B=\\mathcal E$, $i=\\Delta_J$, $t=\\mathrm{id}_{\\mathcal E}$, and $T:J\\times D\\to\\mathcal E$ the internal evaluation map. The equality $T(j,\\Delta_Jx)=x$ holds as a simplicial map on $J\\times\\mathcal E$, directly from the constant-diagram definition. The lemma therefore supplies a single coherent transformation $\\varepsilon_{x,p}:\\Delta_JH_D(\\Delta_Jx,p)\\to H_{\\mathcal E}(x,p(-))$, natural on $\\mathcal E^{\\mathrm{op}}\\times D$. Its explicit transport clause identifies the corresponding map over $J$ with $(j,\\sigma)\\mapsto\\sigma(j,-)\\circ\\rho_n$ for $\\sigma\\in M_{x,p,n}$. This is exactly the adjoint of $c j_D$ in Steps 2–3, as an identification of full mapping spaces over $J$. Thus their comparison admits coherent dependence on $x,p$. This application uses the lemma's relative identification, including all $J$-simplices; it does not deduce coherence from separate vertex evaluations. Combined with the two-input coherent comparison in Step 4, it proves the required parameter naturality. The lemma's universe compatibility allows the arrow comparison to be used with the original locally $\\mathcal U$-small Hom values. The actual arrow formula is unchanged by enlarging universes.",
+   "uses": [
+    "lem-coef-infinity-relative-hom-evaluation",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05R5",
+    "place": "Agent application of the relative Hom evaluation lemma to internal evaluation; Definition 7.4.2.2 identifies the additional compatibility that was missing in the returned split."
+   }
+  },
+  {
+   "text": "If $v:I\\to J$ is any map of small simplicial sets, the pullback of $q_{x,p}$ is $q_{x,pv}$: both have the same prescribed arrow coordinate and base coordinate. Restricting the section represented by $h$ replaces $h$ by $h\\circ(v\\times\\mathrm{id}_{\\Delta^n}\\times\\mathrm{id}_{\\Delta^1})$. This commutes strictly with $\\mathrm{id}\\times\\rho_n$. Thus Step 3 is compatible with restriction, also by the functor-naturality clause of [lem-coef-infinity-pinch-comparison] for $D\\to\\operatorname{Fun}(I,\\mathcal E)$. Step 4 is compatible with restriction by the pullback clause of [lem-coef-space-transport-classification]. Both conclusions hold on every simplex.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01L5",
+    "place": "Explicit naturality of the pinch map; transport base-change compatibility"
+   }
+  },
+  {
+   "text": "Fix $\\lambda:\\Delta_Jl\\to p$ and put $N=\\operatorname{Map}_{\\mathcal E}(x,l)$. The required map is $N\\xrightarrow{(\\Delta_J)_*}M_{x,\\Delta_Jl}\\xrightarrow{\\lambda\\circ-}M_{x,p}$. Applying the constant-diagram functor to right-pinched simplices gives the first arrow, with canonical composition as in [lem-coef-infinity-hom-bifunctor-functoriality] and [lem-coef-infinity-mapping-composition]. Apply the postcomposition naturality square of [lem-coef-infinity-relative-hom-evaluation] with $c=\\Delta_Jl$, $c'=p$, $u=\\lambda$, and the evaluation data of Step 5. After precomposing its upper-left corner by $\\Delta_JN$, it identifies the composite with $H_{\\mathcal E}(x,\\lambda)\\circ\\varepsilon_{x,\\Delta_Jl}\\circ\\Delta_J(\\Delta_J)_*$. The last two factors are the constant family at the identity map of $N$: their transport formula evaluates the constant arrow family $f$ at $j$, giving the same $f$ on every simplex of $J$. The lower map is the single coherent family of postcompositions along $\\lambda:J\\times\\Delta^1\\to\\mathcal E$. Hence the composite is $f\\mapsto(\\lambda_j\\circ f)_{j\\in J}$. The new lemma identifies this naturality square with its map of total spaces over $J$, including the $J\\times\\Delta^1$ data and arbitrary parameter simplices in $N$. It therefore gives the claimed map on the entire space, rather than only the vertex-fiber formula. Step 4 carries the same coherent square to the right-hand transformation space.",
+   "uses": [
+    "lem-coef-infinity-relative-hom-evaluation",
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05R5",
+    "place": "Agent application of the relative Hom evaluation postcomposition square; the new lemma isolates the transport compatibility over the entire indexing shape."
+   }
+  },
+  {
+   "text": "The fibers of $q_{x,p}$ are essentially $\\mathcal U$-small since they represent $H_{\\mathcal E}(x,p(j))$. As $J$ is $\\mathcal U$-small, [lem-coef-space-transport-classification] permits a $\\mathcal U$-small representative $q':A'\\to J$ of $F_{x,p}$. The full mapping comparison in that node identifies $\\Gamma_J(q')$ and $\\Gamma_J(q_{x,p})$ with the same mapping space from $\\Delta_J*$ to $F_{x,p}$; equivalently an equivalence between the representatives induces an equivalence on these section spaces. The simplices of $\\Gamma_J(q')$ form subsets of the sets of maps $J\\times\\Delta^n\\to A'$, so form a $\\mathcal U$-small simplicial set. It is Kan by the same node. This is the required small Kan model, without asserting that $A_{x,p}$ itself is small. If $J$ is empty, Step 2 has a unique map in each degree and the section space is a point; Steps 3 and 4 give the same answer for the other two spaces. For $J=\\Delta^0$ they reduce to the usual mapping space, which can be empty. More generally an empty fiber at a vertex prevents a section, and all the comparisons still apply: no cited statement requires nonempty fibers.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03MR",
+    "place": "Universe restriction for locally small Hom-functors (Variant 8.3.3.5); small transport representative and explicit section count"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-infinity-relative-hom-evaluation",
+  "lem-coef-space-transport-classification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01L5",
+  "place": "Agent proof of the arrow/section comparison. Repaired relative evaluation and cone-map identifications via lem-coef-infinity-relative-hom-evaluation; online Kerodon 05R5, 03MR, 01L5, 046J and 03PD distinguish this new relative input from single-functor naturality."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -49,10 +158,45 @@
    "results": "{\"t\": \"2026-10-17T08:05:38Z\", \"tool\": \"leanfinder\", \"query\": \"For a diagram p in an infinity category E and an object x, coherent transformations from the constant diagram x to p are the space of sections of the left fibration classified by Map E x p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"CategoryTheory.nerve\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.Nerve.isStrictSegal\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\", \"CategoryTheory.nerveFunctor\"], \"digest\": \"66e206fc75e2d656\"}",
    "date": "2026-10-17",
    "verdict": "no match: ordinary category sectionsEquivHom and compCoyonedaSectionsEquiv concern sets of natural transformations; nerve and simplicial-constant results do not compare coherent transformation spaces. Read Mathlib/CategoryTheory/Limits/Types/Yoneda.lean lines 31-44 and Mathlib/CategoryTheory/Yoneda.lean lines 1276-1288, and the quasicategory source hits."
+  },
+  {
+   "tool": "grep",
+   "query": "pinched|[Mm]apping[Ss]pace|[Ll]eft[Ff]ibration|sectionsEquivHom",
+   "results": "{\"t\": \"2026-10-17T09:03:48Z\", \"tool\": \"grep\", \"query\": \"pinched|[Mm]apping[Ss]pace|[Ll]eft[Ff]ibration|sectionsEquivHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Yoneda.lean\", \"Mathlib/CategoryTheory/Sites/GlobalSections.lean\", \"Mathlib/CategoryTheory/Sites/GlobalSections.lean\", \"Mathlib/CategoryTheory/Sites/GlobalSections.lean\"], \"digest\": \"e43dd2685d4cba5d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected logged hits; sectionsEquivHom and compCoyonedaSectionsEquiv are ordinary-category set equivalences (CategoryTheory/Yoneda.lean:1276 and CategoryTheory/Limits/Types/Yoneda.lean:33); quasicategory, nerve and simplicial-category sHom declarations do not state the coherent section comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent natural transformations from a constant diagram are sections of the diagram of mapping spaces in an infinity category",
+   "results": "{\"t\": \"2026-10-17T09:03:48Z\", \"tool\": \"leansearch\", \"query\": \"Coherent natural transformations from a constant diagram are sections of the diagram of mapping spaces in an infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sectionsEquivHom_apply_app\", \"CategoryTheory.Limits.compCoyonedaSectionsEquiv_apply_app\", \"CategoryTheory.Functor.sectionsEquivHom_naturality\", \"CategoryTheory.Functor.sectionsEquivHom\", \"CategoryTheory.Limits.compYonedaSectionsEquiv\", \"CategoryTheory.Limits.compCoyonedaSectionsEquiv\", \"CategoryTheory.Limits.limitCompCoyonedaIsoCone\", \"CategoryTheory.Limits.opCompYonedaSectionsEquiv_apply_app\"], \"digest\": \"c28388dfc5b2913b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected logged hits; sectionsEquivHom and compCoyonedaSectionsEquiv are ordinary-category set equivalences (CategoryTheory/Yoneda.lean:1276 and CategoryTheory/Limits/Types/Yoneda.lean:33); quasicategory, nerve and simplicial-category sHom declarations do not state the coherent section comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"section\"",
+   "results": "{\"t\": \"2026-10-17T09:03:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"section\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected logged hits; sectionsEquivHom and compCoyonedaSectionsEquiv are ordinary-category set equivalences (CategoryTheory/Yoneda.lean:1276 and CategoryTheory/Limits/Types/Yoneda.lean:33); quasicategory, nerve and simplicial-category sHom declarations do not state the coherent section comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasicategory E the mapping space from a constant diagram x to p is the space of sections of the left fibration of arrows from x to p",
+   "results": "{\"t\": \"2026-10-17T09:03:49Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasicategory E the mapping space from a constant diagram x to p is the space of sections of the left fibration of arrows from x to p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory.sHom\", \"SSet.Quasicategory\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.const\", \"CategoryTheory.nerve\", \"SSet.OneTruncation₂.Hom\", \"SSet.Quasicategory.hornFilling\", \"CategoryTheory.nerve.edgeMk\"], \"digest\": \"d2f36e5e0756b9bd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected logged hits; sectionsEquivHom and compCoyonedaSectionsEquiv are ordinary-category set equivalences (CategoryTheory/Yoneda.lean:1276 and CategoryTheory/Limits/Types/Yoneda.lean:33); quasicategory, nerve and simplicial-category sHom declarations do not state the coherent section comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural equivalence between the Hom Kan complex of constant functors and sections of a covariant representable mapping fibration, compatible with coherent precomposition and postcomposition",
+   "results": "{\"t\": \"2026-10-17T09:04:27Z\", \"tool\": \"leanfinder\", \"query\": \"Natural equivalence between the Hom Kan complex of constant functors and sections of a covariant representable mapping fibration, compatible with coherent precomposition and postcomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.compYonedaSectionsEquiv\", \"CategoryTheory.Limits.compCoyonedaSectionsEquiv\", \"CategoryTheory.Limits.opCompYonedaSectionsEquiv\", \"CategoryTheory.Limits.compCoyonedaSectionsEquiv_apply_app\", \"SSet.stdSimplex.objEquiv\", \"SSet.yonedaEquiv\", \"CategoryTheory.Limits.compYonedaSectionsEquiv_apply_app\", \"CategoryTheory.SimplicialCategory.homEquiv'\"], \"digest\": \"795d232d0b96c763\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected logged hits; sectionsEquivHom and compCoyonedaSectionsEquiv are ordinary-category set equivalences (CategoryTheory/Yoneda.lean:1276 and CategoryTheory/Limits/Types/Yoneda.lean:33); quasicategory, nerve and simplicial-category sHom declarations do not state the coherent section comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-yoneda-presheaf-limits",
@@ -77,5 +221,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-constant-source-section-comparison",
+  "worker": "stage1",
+  "summary": "Repair of returned Steps 5 and 7. Retained the statement, arrow/section currying, pinch equivalence, transport mapping comparison and size argument. Added one unsplit generic relative Hom evaluation lemma specifying the whole transport map and its coherent postcomposition square, then applied it to internal evaluation and the cone. One new node, no Mathlib leaves.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, master proof paragraph 2: first and last R Hom / R inverse-limit comparisons. This is the section-space identification extracted from Step 4 of lem-coef-infinity-yoneda-presheaf-limits. The main-20261015 ancestor (sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md) carries the same proof text, with the same second-paragraph R Hom / R inverse-limit display; this delivery retains its established ancestry and unit.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic quasicategory closure and Kan mapping-space calculus, needed for Fun(J,E); the integral-adjoint unit has no replacement for this simplicial tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-9fbf53d12",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-9fbf53d12 (reviewer sub-agent of L); spot-checked: Read the item, all 8 steps, the new node lem-coef-infinity-relative-hom-evaluation and every cited statement in full: def-cbc-enhanced-diagrams-cones, cone-calculus, pinch-comparison, space-transport-classification, hom-bifunctor-functoriality, mapping-composition. Also read the unit record and both versions of the ancestor prop-coef-integral-exceptional-adjoint. Kerodon is not archived, so I checked it online: 05R5 is Subsection 7.4.2 (Def 7.4.2.2, Warning 7.4.2.3, Prop 7.4.2.6, Cor 7.4.2.17) and 01L5 is Prop 4.6.5.10 (pinch inclusions are homotopy equivalences); both match the delivery. Step 2's currying is checked degreewise and is correct. Step 3 uses the stated ρ_n formula of the pinch node. Step 4 uses the transport node's pullback clause, the constant functor ↔ J×*→J, and the Fun_{/A} mapping formula, on an arbitrary base. In Step 5 the lemma's hypothesis holds: ev(j, Δ_J y) = y on all of J×E. Φ(k,h) = h(k(z),z,s) is well defined, and its adjoint is c∘j_D. Step 6: pullback and pinch naturality commute strictly. Step 7: I computed ε∘Δ_J(Δ_J)_* through Φ as id_J×j_E, the constant identity family, so the composite is H_E(x,λ), acting by λ_j∘− on all simplices. Step 8: the fibres U_E(x,p(j)) are essentially small, there is a small representative, and the edge cases (J empty, J a point, an empty fibre) are fine. The new node is statement-only and self-contained, with notions from its stmt_deps, six logged searches, and correct from/via/same_as. Small cases (K=Δ⁰ gives single-functor Hom functoriality; K=∅; a K-family of arrows from e; nerves) are consistent. It is a genuine generalization, strictly smaller than the item, with no equivalence assertion, and not a D1 restatement. I compared it against coherent-end-twisted-arrow-formula, dinatural-section-evaluation, spatial-mapping-interchange, parametric-discrete-yoneda, parameterized-evaluation-naturality, cone-straightening and pointwise-cocartesian-transport: no duplicate. There is no cycle. I accept the tool use of lem-cbc-enhanced-functor-cone-calculus (from unit sk-prop-sf-cbc, which the unit does not cite; it is a generic simplicial tool). The universe descent in Step 5, from W back to S_U through the universe-independent Fun_{/J} formula, is accepted. FIX: split_report.blueprint wrongly said the main-20261015 ancestor has no proof paragraph. sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md carries the same proof, so the sentence is corrected in fixes/dag/nodes/sec-six-functors/lem-coef-infinity-constant-source-section-comparison.json. Nothing else is changed.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -16,9 +16,157 @@
   "def-weil-proetale-locally-constant-sheaf",
   "def-weil-completed-integral-coefficients"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the displayed adjunction of the statement. Its unit is $m\\mapsto1\\otimes m$ and its counit is evaluation $b\\otimes x\\mapsto b\\,x|_U$. The tensor and constant-sheaf definitions give these maps on local generators; balancing and sheafification make them well-defined. The two triangle identities hold on $m$ and $b\\otimes m$, hence as sheaf maps. Exact-functor derived factorization applies to both functors by the assumed exactness. Apply the unit and counit termwise and localize: their naturality equations, including naturality with inverses of quasi-isomorphisms, and their triangle identities persist. Thus these are the actual derived adjunction maps. We use throughout that exact functors commute with cohomology.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-proetale-locally-constant-sheaf",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: extension/sections identification; exact localization expanded by the agent."
+   }
+  },
+  {
+   "text": "First take $R=A_{E,n}$, so $B=\\underline R$. The coefficient DVR has finite residue field; its filtration by $(\\varpi_E^j)$ has successive quotients isomorphic to that residue field by $a\\mapsto\\varpi_E^j a$, so $R$ is finite. For a finite $R$-module $M$, choose a finite generating set and a surjection $R^b\\to M$. Its kernel is a finite set, since $R^b$ is finite; taking all kernel elements as generators gives $R^a\\to R^b\\to M\\to0$ with $a,b$ finite. On finite free modules the unit is the identity under $\\Gamma(s,B)=R$. Naturality gives a morphism of this presentation to its image under the exact functor $\\Gamma L_R$; taking cokernels proves the unit for $M$. The sheaf tensor unit identifies $L_RM$ with $\\underline M$. This is locally constant on the single stratum $s$, with finite stalk $M$ by the constant-stalk lemma, so is constructible.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-finite-torsion-constructibility",
+    "lem-weil-proetale-constant-sheaf-stalk",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Finite-stage reconstruction: finite presentations and the single-stratum constructibility definition."
+   }
+  },
+  {
+   "text": "For a constructible finite-stage sheaf $F$, finite-ring constructible comparison writes $F\\cong\\nu_s^*G$ with $G$ constructible on $s_{\\mathrm{Et}}$. The algebraically closed-point theorem identifies $G$ canonically with the constant sheaf of $G(s)$. This identification respects addition and every scalar endomorphism by its naturality for those maps, so is an $R$-module identification. The comparison definition gives $(\\nu_{s,*}F)(s)=F(s)$, and the comparison unit gives $G\\cong\\nu_{s,*}\\nu_s^*G$; hence $G(s)=F(s)$. Pullback takes a constant sheaf to the constant sheaf with the same value: indeed maps from either to a sheaf $H$ are exactly maps from that value to $H(s)$, by the two adjunctions and the displayed formula for $\\nu_{s,*}$. Consequently $\\underline{F(s)}\\to F$ is an isomorphism. Its local formula is $x\\mapsto x|_U$, so after $L_RM=\\underline M$ it is precisely the evaluation counit.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+    "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+    "def-weil-pbc-site-comparison-morphism",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "def-weil-proetale-locally-constant-sheaf",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AK (lemma-compare-constructible), 099Y (lemma-compare-locally-constant); algebraically closed-point description as recorded in the cited node."
+   }
+  },
+  {
+   "text": "For $c$ with bounded finite cohomology, exactness identifies $\\mathcal H^i(L_Rc)$ with $L_RH^i(c)$, which is constructible by step 2 and zero outside the same interval. Thus $L_Rc\\in D^b_c(s,R)$. On cohomology the unit is the module unit of step 2, hence is invertible by the cohomological isomorphism criterion. For $C\\in D^b_c(s,R)$, point-sections finiteness gives bounded finite cohomology for $\\Gamma(s,C)$. On cohomology its counit is the sheaf counit of step 3, again an isomorphism. The same criterion proves the actual finite-stage derived counit invertible. In particular, a finite-stage constructible complex with zero sections is zero.",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology",
+    "def-weil-finite-torsion-constructibility",
+    "lem-weil-point-sections-finiteness",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Derived finite-stage reconstruction; cohomology upgrade of the previous two steps."
+   }
+  },
+  {
+   "text": "Now $R=\\mathcal O_E$. The valuation-ring lemma makes $R$ a DVR and a PID; the PID lemma makes it Noetherian. For any finitely generated $R$-module $M$, the finite-free-resolution lemma supplies a surjection $R^{b}\\to M$ whose kernel $N$ is the image of a finite free module, hence finitely generated. It is torsion-free: a nonzero scalar annihilating an element of $N\\subset R^b$ annihilates all its coordinates in the domain $R$, so that element is zero. The DVR torsion-free lemma makes $N$ finite free. Thus $0\\to N\\to R^b\\to M\\to0$ is a bounded finite-projective resolution. Apply perfect-cohomology assembly to the bounded finitely generated cohomology of $c$. By the definition of perfectness, $c$ has a bounded finite-projective representative $P$. This argument includes $M=0$ and the zero complex.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-pbc-finite-free-resolution-noetherian",
+    "lem-sc-dvr-fg-torsionfree-free",
+    "lem-sf-perfect-cohomology-assembly",
+    "def-pc-perfect-ring-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0AUW (lemma-dedekind-torsion-free-flat), 066U (lemma-cohomology-perfect); finite free resolutions: algebra.tex Tag 00LP."
+   }
+  },
+  {
+   "text": "The scheme $s=\\operatorname{Spec}k$ is noetherian and has dimension zero, and $\\ell$ is invertible in $k$. Apply the integral stratified-perfect characterization with the single stratum $s$, its identity cover, and the perfect complex $P$ of step 5. The constant sheaf of each term of $P$ is a direct summand of a finite free $\\underline R$-module sheaf, so tensor with it is exact. The bounded-flat K-flat lemma therefore applies to $\\underline P$, and its ordinary tensor computes the derived tensor, so $L_RP=B\\otimes_{\\underline R}\\underline P$ satisfies condition (ii) there. The characterization supplies membership in exactly the integral category of the statement, with completeness, compatible finite-stage étale origins and a uniform interval for reductions. The interval can be taken to contain the degrees of $P$, since its reduction has those same term degrees. Exactness gives $L_RP\\cong L_Rc$. On a finite free module the integral unit is the identity under $\\Gamma(s,B)=R$. A finite projective module is a direct summand of a finite free module; naturality with its inclusion and projection restricts this identity to that summand. The unit is therefore an isomorphism termwise on $P$, and by naturality and exact derived factorization also for $c$.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-pc-perfect-ring-complex",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-independent-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11; Proposition 6.8.11(3); single-stratum perfect model and the explicit uniform-bound clause in the cited characterization."
+   }
+  },
+  {
+   "text": "Let $C\\in D^b_c(s,R)$ and $c=\\Gamma(s,C)$. Sections finiteness places $c$ in the module category required in step 5. By step 6, $L_Rc$ is integral constructible and its unit $\\eta_c$ is invertible. The triangle identity $\\Gamma(\\epsilon_C)\\circ\\eta_c=\\mathrm{id}_c$ implies that $\\Gamma(\\epsilon_C)$ is invertible. Let $K$ be a cone of the actual counit $\\epsilon_C:L_Rc\\to C$. Cone-closure in the stratified-perfect characterization gives $K\\in D^b_c(s,R)$. Exactness of sections and the cohomology long exact sequence give $\\Gamma(s,K)=0$. For each $n$, the sections/reduction comparison applies to this $K$ and yields $\\Gamma(s,K\\otimes_R^L A_{E,n})\\cong\\Gamma(s,K)\\otimes_R^L A_{E,n}=0$. Each reduction is bounded constructible by the integral definition, so step 4 forces it to be zero. In the derived-completeness triangle of $K$, both products of reductions are now zero. Its cohomology long exact sequence gives $H^i(K)=0$ for every $i$; the cohomological criterion gives $K=0$. The cone triangle and that same exact sequence then make every $H^i(\\epsilon_C)$ invertible, so $\\epsilon_C$ is an isomorphism.",
+   "uses": [
+    "lem-weil-point-sections-finiteness",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-sf-derived-homology-long-exact",
+    "lem-pod-point-sections-derived-reduction",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-derived-complete",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Integral counit: triangle identity, sections/reduction comparison, finite reconstruction, and the completeness triangle."
+   }
+  },
+  {
+   "text": "For a module-complex map $f:c\\to c'$, the units satisfy $\\Gamma L_R(f)\\circ\\eta_c=\\eta_{c'}\\circ f$; for a sheaf-complex map $g:C\\to C'$, evaluation gives $g\\circ\\epsilon_C=\\epsilon_{C'}\\circ L_R\\Gamma(g)$ on every local generator $b\\otimes x$. These equations hold before localization and hence also for inverses of quasi-isomorphisms and their composites. They prove the requested naturality on the two derived categories, independently of any presentation or perfect representative chosen in the proof.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Naturality of the displayed unit and counit formulas."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-derived-complete",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-proetale-locally-constant-sheaf",
+  "lem-pod-point-sections-derived-reduction",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-perfect-cohomology-assembly",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-point-sections-finiteness",
+  "lem-weil-proetale-constant-sheaf-stalk",
+  "prop-weil-pbc-site-comparison-finite-level"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "second sentence: point-category identification by sections and extension of scalars"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +202,45 @@
    "date": "2026-10-17",
    "results": "8 hits: LightCondensed.underlying_obj; CompHausLike.LocallyConstantModule.functor_obj_val; CategoryTheory.evalEquiv; CompHausLike.LocallyConstantModule.functor; CategoryTheory.evalEquiv_symm_apply; LightCondensed.underlying; LightCondensed.underlying_map; CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_carrier",
    "verdict": "no match: generic categorical and module APIs, not the stated pro-etale comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constant coefficient extension and sections are inverse on constructible derived complexes on a geometric point",
+   "results": "Retained search output: CategoryTheory.constantSheafΓAdj, CondensedSet.LocallyConstant.functorFullyFaithful, AlgebraicGeometry.StructureSheaf.res_const, AlgebraicGeometry.StructureSheaf.res_const', ModuleCat.Tilde.const, CategoryTheory.Sheaf.ΓObjEquivHom, CategoryTheory.Sheaf.ΓNatIsoCoyoneda, AlgebraicGeometry.StructureSheaf.exists_const. ",
+   "date": "2026-10-17",
+   "verdict": "no match: these give general constant-sheaf adjunctions or condensed APIs, not the finite/integral constructible derived reconstruction stated here"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheafΓAdj|constantSheaf.*[Ee]quiv|[Cc]onstructible.*[Pp]oint",
+   "results": "Retained search output: Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean. ",
+   "date": "2026-10-17",
+   "verdict": "no match: these give general constant-sheaf adjunctions or condensed APIs, not the finite/integral constructible derived reconstruction stated here"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheaf, CategoryTheory.Adjunction",
+   "results": "Retained search output: CategoryTheory.constantSheafAdj, CategoryTheory.constantSheafΓAdj. ",
+   "date": "2026-10-17",
+   "verdict": "no match: these give general constant-sheaf adjunctions or condensed APIs, not the finite/integral constructible derived reconstruction stated here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension from coefficient modules and global sections reconstruct bounded constructible complexes on the pro-etale site of an algebraically closed field",
+   "results": "Retained search output: Condensed.profiniteSolid, Condensed.lanSheafProfinite, LightCondMod.ofSheafLightProfinite, Condensed.profiniteSolidification, Condensed.profiniteSolidCounit, Condensed.profiniteFree, LightCondensed.lanLightCondSet, CondensedMod.ofSheafProfinite. ",
+   "date": "2026-10-17",
+   "verdict": "no match: these give general constant-sheaf adjunctions or condensed APIs, not the finite/integral constructible derived reconstruction stated here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact extension of scalars left adjoint to sections has invertible unit on finite modules and counit on constructible complexes over a geometric point",
+   "results": "Retained search output: LightCondMod.LocallyConstant.adjunction, CondensedMod.LocallyConstant.adjunction, comonadicExtendScalars, Condensed.profiniteSolidCounit, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, LightCondensed.freeForgetAdjunction, ModuleCat.instIsLeftAdjointExtendScalars, Condensed.freeForgetAdjunction. ",
+   "date": "2026-10-17",
+   "verdict": "no match: these give general constant-sheaf adjunctions or condensed APIs, not the finite/integral constructible derived reconstruction stated here"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pod-point-dualizing-complex",
@@ -74,5 +257,86 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pod-point-sections-reconstruction",
+  "worker": "stage1",
+  "summary": "Continued the retained Q18 split against the unchanged current statement. Eight steps prove the explicit derived adjunction, finite-stage reconstruction, the integral finite-projective model and unit, the actual integral counit by its cone and sections/reduction comparison, and naturality. Corrected TeX escaping and missing citation interfaces. Reused existing DAG nodes throughout; no new nodes.",
+  "blueprint": [
+   "Second sentence of lem-pod-point-dualizing-complex.proof.md: computation over the coefficient ring, realized by finite and completed-integral extension/sections reconstruction."
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-constant-sheaf-stalk",
+    "why": "Finiteness of stalks of constant finite module sheaves. No node of sk-thm-sf-package supplies this generic ingredient; it supports its point-category identification without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+    "why": "The finite coefficient constructible comparison used only at the geometric point. No node of sk-thm-sf-package supplies this generic ingredient; it supports its point-category identification without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+    "why": "Canonical constant-sheaf description on the algebraically closed étale point. No node of sk-thm-sf-package supplies this generic ingredient; it supports its point-category identification without replacing the unit route."
+   },
+   {
+    "node": "prop-weil-pbc-site-comparison-finite-level",
+    "why": "Identifies the sections of an étale sheaf with those of its comparison pullback. No node of sk-thm-sf-package supplies this generic ingredient; it supports its point-category identification without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-point-sections-finiteness",
+    "why": "Places the section complexes in the module categories specified in the statement. No node of sk-thm-sf-package supplies this generic ingredient; it supports its point-category identification without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "The coefficient ring is a DVR/PID, needed for bounded finite-projective models. No node of sk-thm-sf-package supplies this generic ingredient; it supports its point-category identification without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-resolution-noetherian",
+    "why": "A finite free presentation with a finitely generated first kernel. No node of sk-thm-sf-package supplies this generic ingredient; it supports its point-category identification without replacing the unit route."
+   },
+   {
+    "node": "lem-sf-perfect-cohomology-assembly",
+    "why": "Assembles the bounded cohomology-module resolutions into a bounded perfect model. No node of sk-thm-sf-package supplies this generic ingredient; it supports its point-category identification without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Single-stratum perfect models are integral constructible, and the category is closed under cones. No node of sk-thm-sf-package supplies this generic ingredient; it supports its point-category identification without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Sections take the counit cone triangle to a distinguished triangle. No node of sk-thm-sf-package supplies this generic ingredient; it supports its point-category identification without replacing the unit route."
+   },
+   {
+    "node": "lem-pod-point-sections-derived-reduction",
+    "why": "Applies to the constructible counit cone to detect each finite reduction from sections. No node of sk-thm-sf-package supplies this generic ingredient; it supports its point-category identification without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-independent-bounded-flat-kflat",
+    "why": "A bounded complex of flat sheaf modules computes the derived tensor in the single-stratum perfect model. This is a generic homological tool absent from sk-thm-sf-package, and does not replace its route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-constant-sheaf-stalk",
+  "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "lem-weil-point-sections-finiteness",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-sf-perfect-cohomology-assembly",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-pod-point-sections-derived-reduction",
+  "lem-weil-pbc-independent-bounded-flat-kflat"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-4be1d0d18",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-4be1d0d18 (reviewer sub-agent of L); spot-checked: I read all 8 steps of the split, every cited node's statement, the blueprint place (second sentence of lem-pod-point-dualizing-complex.proof.md), Stacks 09AK, 099Y, 00LP, 0AUW(3), 066U and 06YQ at their labels, and Bhatt–Scholze Prop. 6.6.11 and 6.8.11(3). The coefficient categories are exactly the item's: in the integral case B is the completed sheaf (completed O_E sheaf on s), never the discrete constant sheaf. The comparison to def-weil-derived-complete-integral-detailed goes only through the explicit 'describes exactly' clause of the stratified-perfect characterization. Steps: (1) the explicit adjunction descends because both functors are exact, which the item assumes. (2) A_{E,n} is finite, a finite presentation gives the unit, and L_R M is constant with stalks M, hence constructible. (3) Finite-ring constructible origin, constancy on the algebraically closed point, and the finite comparison unit show the evaluation counit is an isomorphism; the triangle-identity check agrees. (4) The cohomology criterion gives the derived finite stage, so a constructible complex with zero sections is zero. (5) Over the DVR/PID, the 2-term finite-free resolution plus perfect-cohomology assembly gives P; I checked the torsion O_E/varpi^a case. (6) On the single stratum, the bounded flat complex is K-flat, which is condition (ii) of the characterization; the unit on projective summands is natural. (7) Triangle identity, cone closure, the sections/reduction comparison at N=K, step 4 and the completeness triangle give K=0. This also holds under the blueprint_update wording of def-weil-derived-complete. (8) Naturality is genuinely elementary. All hypotheses hold where used: Lambda finite; s noetherian, of dimension 0, with ell invertible; boundedness for K-flatness. The delivery adds no new nodes, has no cycle (transitive walk checked), uses single-backslash TeX, keeps every step under 2000 characters, and uses no SGA source. Route: every proof dependency is on the transitive route of sk-thm-sf-package except lem-pod-point-sections-derived-reduction (sk-thm-sf-compatibility). That is the only tool_use I accept: a black-box comparison at the point with no cycle. The other 11 declared tool_uses are already on the route and need no recording. I made no fixes."
  }
 }

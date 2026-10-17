@@ -17,9 +17,126 @@
   "def-weil-proetale-locally-constant-sheaf",
   "def-weil-proetale-geometric-stalk"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use [lem-pe-constant-left-module-inverse-image] for every geometric morphism in this proof. Its constant-ring comparison identifies the fixed-coefficient module inverse image with the underlying sheaf inverse image, compatibly with units and composition. For $f\\in\\{p,e\\}$, the structure map $c^f_\\Lambda:f^{-1}\\Lambda\\to\\Lambda$ of [def-weil-proetale-inverse-image] and the lemma's canonical ring-sheaf isomorphism both send each constant scalar section to the same scalar; as $f^{-1}\\Lambda$ is the sheafification of a presheaf whose sections are locally such constant scalars, the two ring maps coincide. Hence $c^f_\\Lambda$ is an isomorphism, and the module pullback $f^{-1}\\mathcal F\\otimes_{f^{-1}\\Lambda}\\Lambda$ of [def-weil-proetale-inverse-image], a tensor product along a ring isomorphism, is canonically the lemma's $f^*_\\Lambda\\mathcal F$. Thus the $p^*,e^*$ in the statement are the fixed-$\\Lambda$ functors used below, including their specified identification $e^*p^*\\cong\\operatorname{id}$. Let $\\nu_T:T_{\\mathrm{proet}}\\to T_{\\mathrm{et}}$ be [def-weil-pbc-site-comparison-morphism]. All subsequent inverse images are ordinary, not derived.",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image",
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, (2), (5), (6): fixed-ring structures, units and composition"
+   }
+  },
+  {
+   "text": "The finite ring $\\Lambda$ and the stated local constancy and finite geometric stalks of $M$ are exactly the hypotheses of [lem-sf-proetale-locally-constant-origin](b). Choose a lisse etale module sheaf $G$ on $S$ and an isomorphism $u:\\nu_S^*G\\xrightarrow{\\sim}M$. For every scheme $T$, [prop-weil-pbc-site-comparison-finite-level] says that the unit $\\eta:\\operatorname{id}\\to\\nu_{T,*}\\nu_T^*$ is invertible on module sheaves. Consequently $\\nu_T^*$ is fully faithful: under its adjunction, a morphism $\\nu_T^*A\\to\\nu_T^*B$ corresponds to a map $A\\to\\nu_{T,*}\\nu_T^*B$, and composing with $\\eta_B^{-1}$ gives a unique $A\\to B$. Naturality of $\\eta$ and the adjunction triangles show that its pullback is the original morphism. This uses only the ordinary unit assertion, not a derived comparison.",
+   "uses": [
+    "lem-sf-proetale-locally-constant-origin",
+    "prop-weil-pbc-site-comparison-finite-level"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099Y (lemma-compare-locally-constant) and 099T (lemma-fully-faithful); ordinary module adjunction"
+   }
+  },
+  {
+   "text": "Put $P=p_{\\mathrm{et}}^*G$. The natural comparison [lem-weil-pbc-comparison-pullback] and $p^*u$ identify $\\nu_X^*P$ with $p^*M$. Full faithfulness from Step 2 therefore transports $h$ to a unique etale module endomorphism $a:P\\to P$. Apply the same comparison to $e$. Its compatibility with composites and identity maps makes the composite comparison for $p\\circ e=\\operatorname{id}_S$ the identity comparison. Hence the hypothesis $e^*h=\\operatorname{id}_M$ becomes $\\nu_S^*(e_{\\mathrm{et}}^*a)=\\operatorname{id}_{\\nu_S^*G}$, conjugated by $u$. Faithfulness from Step 2 gives $e_{\\mathrm{et}}^*a=\\operatorname{id}_G$. The fixed scalar actions and module composition identifications here are those of Step 1.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-direct-image-comparison/lem-weil-pbc-comparison-pullback.proof.md",
+    "place": "Canonical pullback comparison; compatibility with composites and identities in the cited node statement"
+   }
+  },
+  {
+   "text": "For every scheme $V$, the projection $p_V:\\mathbf A^1_V\\to V$ has connected geometric fibres. Indeed [def-sbc-affine-space] identifies its fibre at $\\operatorname{Spec}\\Omega\\to V$ with $\\operatorname{Spec}\\Omega[t]$: the polynomial coordinate maps on both sides have the same universal property after base change. The ring $\\Omega[t]$ is a domain by [lem-weil-pbc-polynomial-ring-domain]. Thus $(0)$ is prime, and [lem-weil-pbc-spec-irreducible-closed-subsets-primes](1) says its point has closure $V((0))=\\operatorname{Spec}\\Omega[t]$. This spectrum is nonempty and connected: in a decomposition into two disjoint clopen subsets the generic point belongs to one of them, whose closedness then forces it to contain the whole spectrum. This verifies connectedness even when $V$ is nonreduced or has infinitely many components.",
+   "uses": [
+    "def-sbc-affine-space",
+    "lem-weil-pbc-polynomial-ring-domain",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ES, lemma-irreducible (1), applied to the zero prime of a polynomial domain; affine-space base change from its defining universal property"
+   }
+  },
+  {
+   "text": "Let $V\\to S$ be any etale object and set $X_V=X\\times_SV=\\mathbf A^1_V$, with unit section $e_V$. Write $G_V$ for the etale inverse image of $G$ to $V$. Base change is etale by [lem-weil-pbc-etale-base-change-finite-limits](1). By [lem-weil-pbc-sets-etale-inverse-image-restriction] and the composition comparisons [lem-weil-pbc-sets-etale-inverse-image-composition-units], $G(V)=\\Gamma(V,G_V)$ and $P(X_V)=\\Gamma(X_V,p_V^{-1}G_V)$ on underlying sets, with the unit $G(V)\\to P(X_V)$ equal to pullback of sections. For $b\\in\\Gamma(X_V,p_V^{-1}G_V)$, apply [lem-weil-pbc-etale-connected-fibres-section-compatible] to $p_V$, the underlying set sheaf of $G_V$, and $b$; Step 4 verifies its only geometric hypothesis. If $q_1,q_2:X_V\\times_VX_V\\to X_V$ are the projections, it gives $q_1^*b=q_2^*b$. Pull this equality back along $r=(\\operatorname{id}_{X_V},e_Vp_V)$. Since $q_1r=\\operatorname{id}$ and $q_2r=e_Vp_V$, the unit-compatible composition rule yields $b=p_V^*(e_V^*b)$. Conversely $e_V^*p_V^*c=c$ for every $c\\in\\Gamma(V,G_V)$ because $p_Ve_V=\\operatorname{id}_V$. Thus this unit on sections is bijective, with inverse $e_V^*$. No flat descent or assertion about points of the pro-etale topos is used.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-etale-connected-fibres-section-compatible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3H, lemma-sections-upstairs, final connected-fibre compatibility argument followed by the retraction (id,e_V p_V); Tag 03S2, restriction along an etale object"
+   }
+  },
+  {
+   "text": "For the module adjunction $p_{\\mathrm{et}}^*\\dashv p_{\\mathrm{et},*}$ of [def-weil-pbc-inverse-image], its unit at $G$ has component $G(V)\\to P(X_V)$ by the direct-image formula [def-weil-pbc-direct-image]. Step 1 identifies its underlying set map with the unit computed in Step 5. Every component is therefore a bijective linear map. Its inverse is linear (apply the bijective map to the proposed sum and scalar identities), and the component inverses are natural by multiplying each naturality square by the inverse component maps. Hence $\\eta_G:G\\xrightarrow{\\sim}p_{\\mathrm{et},*}P$ is an isomorphism of module sheaves.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3H, section bijection applied objectwise on the small etale site; ordinary module adjunction and direct-image formula"
+   }
+  },
+  {
+   "text": "Use the unit isomorphism of Step 6 to set $b=\\eta_G^{-1}\\circ p_{\\mathrm{et},*}(a)\\circ\\eta_G\\in\\operatorname{End}(G)$. Under $p_{\\mathrm{et}}^*\\dashv p_{\\mathrm{et},*}$ [def-weil-pbc-inverse-image], the adjoint of $a$ is $p_{\\mathrm{et},*}(a)\\circ\\eta_G=\\eta_G\\circ b$. Naturality of the unit identifies the latter with the adjoint of $p_{\\mathrm{et}}^*b$, so injectivity of the adjunction bijection gives $a=p_{\\mathrm{et}}^*b$. Pull back along $e$. The unit-compatible composition identification, which is module-linear by [lem-pe-constant-left-module-inverse-image], gives $b=e_{\\mathrm{et}}^*a=\\operatorname{id}_G$ by Step 3. Thus $a=\\operatorname{id}_P$.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, fixed-module inverse-image adjunction; naturality of its unit and the identity composite p e"
+   }
+  },
+  {
+   "text": "Finally $h$ is the conjugate of $\\nu_X^*a$ under the isomorphism of Step 3. Since $a=\\operatorname{id}_P$, this conjugate is $\\operatorname{id}_{p^*M}$, as required. If $S$ is empty all these section maps and morphisms are the unique ones, so the same argument includes that case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3H applied through Steps 4--7; final functoriality of identity maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-affine-space",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-proetale-inverse-image",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-sf-proetale-locally-constant-origin",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-connected-fibres-section-compatible",
+  "lem-weil-pbc-polynomial-ring-domain",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "prop-weil-pbc-site-comparison-finite-level"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A3H, final paragraph: connected-fibre compatibility; explicit retraction argument and adjunction calculation; finite local-system transfer by Tag 099Y"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +172,45 @@
    "results": "8 hit(s): AlgebraicGeometry.Scheme.Modules.pullbackId, AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.Scheme.Pullback.t_id, AlgebraicGeometry.AffineSpace.map_id, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom",
    "date": "2026-10-17",
    "verdict": "no match: the hits give affine-space maps, structure-sheaf pullbacks, constant-sheaf units or site definitions, not rigidity of endomorphisms of an affine-line pullback of a finite pro-etale local system"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Endomorphisms of a locally constant module sheaf pulled back to affine space are determined on the unit section",
+   "results": "8 hit(s): SheafOfModules.unitHomEquiv_apply_coe, CondensedMod.LocallyConstant.functorIsoDiscreteAux₁, PresheafOfModules.unitHomEquiv_apply_coe, CondensedSet.LocallyConstant.functorFullyFaithful, CompHausLike.LocallyConstant.unit_app, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CompHausLike.LocallyConstant.unitIso, Module.End",
+   "date": "2026-10-17",
+   "verdict": "no match: affine-space coordinate equivalences, structure-sheaf module maps, condensed locally constant functors and etale forgetful functors do not state affine-line rigidity of fixed-coefficient pro-etale local systems"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AffineSpace\", \"LocallyConstant\"",
+   "results": "0 hit(s): ",
+   "date": "2026-10-17",
+   "verdict": "no match: affine-space coordinate equivalences, structure-sheaf module maps, condensed locally constant functors and etale forgetful functors do not state affine-line rigidity of fixed-coefficient pro-etale local systems"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An endomorphism of the pullback of a finite locally constant pro-etale module sheaf to the affine line over an arbitrary scheme is determined by restriction to a section",
+   "results": "8 hit(s): AlgebraicGeometry.AffineSpace.homOverEquiv, AlgebraicGeometry.AffineSpace.homOfVector, AlgebraicGeometry.AffineSpace.hom_ext, AlgebraicGeometry.Scheme.Modules.hom_ext, AlgebraicGeometry.AffineSpace.homOfVector_over, AlgebraicGeometry.Scheme.Modules.hom_ext_iff, AlgebraicGeometry.AffineSpace.hom_ext_iff, AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly",
+   "date": "2026-10-17",
+   "verdict": "no match: affine-space coordinate equivalences, structure-sheaf module maps, condensed locally constant functors and etale forgetful functors do not state affine-line rigidity of fixed-coefficient pro-etale local systems"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*(endomorphism|rigidity)|AffineSpace.*LocallyConstant",
+   "results": "0 hit(s): ",
+   "date": "2026-10-17",
+   "verdict": "no match: affine-space coordinate equivalences, structure-sheaf module maps, condensed locally constant functors and etale forgetful functors do not state affine-line rigidity of fixed-coefficient pro-etale local systems"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of etale sheaves along a morphism with a section and connected geometric fibres is fully faithful",
+   "results": "8 hit(s): AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget, AlgebraicGeometry.Scheme.instHasPullbacksEtale, LightCondSet.LocallyConstant.functorFullyFaithful, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.instCategoryEtale",
+   "date": "2026-10-17",
+   "verdict": "no match: affine-space coordinate equivalences, structure-sheaf module maps, condensed locally constant functors and etale forgetful functors do not state affine-line rigidity of fixed-coefficient pro-etale local systems"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-pur-dnc-family-constancy",
@@ -75,5 +227,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-a1-pullback-endomorphism-rigidity",
+  "worker": "stage1",
+  "summary": "Kept the arbitrary-base statement and all original metadata. Proved the item using etale origin, the ordinary fully faithful comparison, and the connected-geometric-fibre compatibility pulled back along (id,e p). Wrote the unit isomorphism objectwise and the endomorphism adjunction calculation explicitly. No new nodes or Mathlib leaves. Checked all cited statements and empty, disconnected, nonreduced and nontrivial-monodromy cases.",
+  "blueprint": "Realizes prop-pur-dnc-family-constancy final locality/base-change clause, namely uniqueness of a normalized comparison after arbitrary B-prime -> B; this item is the sheaf rigidity needed after removing the common shift. The sk-thm-dnc gluing and lecture-notes purity route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic fixed-ring inverse-image and unit/composition comparison; needed to relate module pullbacks to set sections, not supplied by the DNC unit."
+   },
+   {
+    "node": "lem-sf-proetale-locally-constant-origin",
+    "why": "Generic finite-local-system etale origin over every scheme; supplies the arbitrary-base reduction used for the parent DNC base-change uniqueness clause."
+   },
+   {
+    "node": "prop-weil-pbc-site-comparison-finite-level",
+    "why": "Generic ordinary comparison unit isomorphism makes comparison pullback fully faithful on modules; no DNC construction is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic coherent intersite pullback comparison transfers the section normalization; not a replacement for the unit gluing argument."
+   },
+   {
+    "node": "lem-weil-pbc-polynomial-ring-domain",
+    "why": "Generic polynomial-domain fact verifies connectedness of affine-line geometric fibres; the DNC unit has no such commutative-algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "why": "Generic zero-prime closure calculation verifies connected fibres; no cohomological or DNC route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Generic etale base change makes X_V an etale object for the objectwise unit computation."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "why": "Generic set inverse-image restriction identifies the actual section sets at etale objects with global sections on their sites."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "why": "Generic composition comparison with section-unit compatibility justifies the two retraction equations, absent from the DNC unit."
+   },
+   {
+    "node": "lem-weil-pbc-etale-connected-fibres-section-compatible",
+    "why": "Generic connected-fibre compatibility is precisely the arbitrary-base black box required by the parent final uniqueness clause; the DNC unit finite-type lisse rigidity does not provide it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-sf-proetale-locally-constant-origin",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-polynomial-ring-domain",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-etale-connected-fibres-section-compatible"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N6-63cd13082",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-63cd13082 (reviewer sub-agent of L); spot-checked: I read the whole delivery and every cited node. Small cases (empty, disconnected and nonreduced bases, nontrivial monodromy, zero module or ring) all hold. Statement: unchanged, true, and exactly what Step 11 of prop-pur-dnc-family-constancy needs (arbitrary B', finite Lambda=A_{E,n}, fixed-Lambda pro-etale module sheaves). No target is involved, so no base-change morphism is at stake. Sources checked: Stacks 0A3H, whose final paragraph is the stalkwise geometric-fibre argument and matches lem-weil-pbc-etale-connected-fibres-section-compatible, which assumes no flatness or quasi-compactness; and Stacks 099Y (proetale.tex line 4121) for the etale origin of M. Steps: Step 2 meets the hypotheses of origin (b) and derives full faithfulness from the ordinary unit iso. Step 3 uses the identity/composite compatibility of comparison-pullback correctly. Step 4 proves A^1_Omega connected via the dense generic point of a domain, and def-weil-connected-scheme requires nonempty, which holds. Step 5's retraction (id, e_V p_V) argument is valid; lem-weil-pbc-etale-sections-flat-qc-connected-fibres could also be cited, but this is not a fault. Steps 6-8 are correct adjunction calculations. There are no new nodes. Duplicates: lem-pur-lisse-uniqueness and lem-pur-lisse-morphism-rigidity need a finite-type base, and lem-trf-constant-complex-a1-morphism-rigidity is only over an algebraically closed field, so same_as [] is right. I accept all ten tool_uses as generic black boxes; no SGA is cited. FIX: Step 1 equated the tensor-product module pullback of def-weil-proetale-inverse-image with the functor f^*_Lambda of lem-pe-constant-left-module-inverse-image without justification. I added the argument (both ring maps fix constant scalars, so c^f_Lambda is the canonical iso) and added def-weil-proetale-inverse-image to Step 1's uses and to proof_deps. The corrected item is in fixes/dag/nodes/sec-smooth-purity/; details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

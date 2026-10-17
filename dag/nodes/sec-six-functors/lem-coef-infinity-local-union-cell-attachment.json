@@ -1,0 +1,77 @@
+{
+ "id": "lem-coef-infinity-local-union-cell-attachment",
+ "kind": "statement",
+ "title": "Cell attachments in the directed-union collage",
+ "statement": "Use small simplicial sets and nerves from [def-cbc-enhanced-diagrams-cones], and the ordered join from [lem-coef-infinity-join-cocone-associativity]. Let $K$ be a small simplicial set, $I$ a small nonempty partially ordered set, and $(K_i)_{i\\in I}$ an increasing family of simplicial subsets of $K$. Let $M\\subseteq K\\star N(I)$ contain the pure $K$ and nerve simplices and exactly those mixed simplices $\\sigma\\star(i_0\\leq\\cdots\\leq i_n)$ for which $\\sigma\\in K_{i_0}$. For a simplicial subset $Y\\subseteq N(I)$ let $M_Y\\subseteq M$ contain $K$ and those pure upper or mixed simplices whose upper block lies in $Y$. Suppose $Y'=Y\\cup\\tau$, where $\\tau:\\Delta^n\\hookrightarrow N(I)$ is a nondegenerate strict chain $(i_0<\\cdots<i_n)$, $n\\geq1$, not in $Y$ and with $\\partial\\tau\\subseteq Y$. The natural map $K_{i_0}\\star\\Delta^n\\to M_{Y'}$ is degreewise injective, its intersection with $M_Y$ is exactly $K_{i_0}\\star\\partial\\Delta^n$, and the induced comparison $$M_Y\\amalg_{K_{i_0}\\star\\partial\\Delta^n}(K_{i_0}\\star\\Delta^n)\\longrightarrow M_{Y\\prime}$$ is an isomorphism of simplicial sets. At the vertex stage, $M_{N(I)^{(0)}}=K\\cup\\bigcup_i(K_i\\star\\{i\\})$, and two distinct local cones intersect only in $K_i\\cap K_j\\subseteq K$. These assertions include empty $K$ and empty $K_i$; no directedness or covering assumption is required.",
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+  "place": "Proof of Proposition 4.2.3.4, induction on the nondegenerate simplices of N(I), printed pp.249-251; explicit degreewise pushout calculation extracted for the returned step 2. Read online 2026-10-17; not archived in literature/ (WANTED)."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-join-cocone-associativity"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a directed family of simplicial subsets, the collage attachment over a chain is a pushout of K_i join simplex along its boundary",
+   "results": "{\"t\": \"2026-10-17T10:43:46Z\", \"tool\": \"leanfinder\", \"query\": \"For a directed family of simplicial subsets, the collage attachment over a chain is a pushout of K_i join simplex along its boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.MulticoequalizerDiagram\", \"SSet.Subcomplex.BicartSq.isPushout\", \"SSet.horn.isColimit\", \"SSet.horn₂₂.isPushout\", \"SSet.horn₂₁.isPushout\", \"SSet.horn₂₀.isPushout\", \"SSet.hasColimits\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\"], \"digest\": \"6cf2fa8d9e2bfcde\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Subcomplex.BicartSq.isPushout constructs a pushout once the lattice intersection and union identities are given; it does not calculate these identities or identify the collage cells."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"join\", \"boundary\"",
+   "results": "{\"t\": \"2026-10-17T10:43:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"join\\\", \\\"boundary\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"ModelWithCorners.boundaryless_disjointUnion\", \"ModelWithCorners.disjoint_interior_boundary\", \"ModelWithCorners.boundary_disjointUnion\"], \"digest\": \"98b52d01dac94ccf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: only manifold boundary/disjoint-union declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "join.*boundary|pushout.*simplicial",
+   "results": "{\"t\": \"2026-10-17T10:43:43Z\", \"tool\": \"grep\", \"query\": \"join.*boundary|pushout.*simplicial\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/PushoutProduct.lean\"], \"digest\": \"e68bc6f488bc172b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: AlgebraicTopology/PushoutProduct.lean discusses products, not the ordered-join collage intersection."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A collage of an increasing family of simplicial subsets is obtained by attaching each chain cell K_i join Delta^n along K_i join boundary Delta^n",
+   "results": "{\"t\": \"2026-10-17T10:43:39Z\", \"tool\": \"leansearch\", \"query\": \"A collage of an increasing family of simplicial subsets is obtained by attaching each chain cell K_i join Delta^n along K_i join boundary Delta^n\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"HomotopicalAlgebra.AttachCells.rec\", \"SSet.hasColimits\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"HomotopicalAlgebra.RelativeCellComplex.attachCells\", \"CategoryTheory.SmallObject.attachCellsιFunctorObj\"], \"digest\": \"b9294c3d3dd0833c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: AttachCells.rec and RelativeCellComplex.attachCells supply generic cell data, not this specific collage identification."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-infinity-directed-union-local-colimits",
+  "date": "2026-10-17",
+  "group": "Q95"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, the directed-union collage construction: for a chain of the nerve, the new mixed simplices are attached as K_{i_0} star Delta^n along K_{i_0} star partial Delta^n.",
+   "via": [
+    "lem-coef-infinity-directed-union-local-colimits",
+    "lem-coef-infinity-limits-products-pullbacks",
+    "lem-coef-spaces-kappa-limit-filtered-colimit",
+    "lem-coef-space-presheaf-presentability",
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -18,9 +18,61 @@
   "def-pc-fibre-product",
   "lem-sf-integral-compactification-system-realization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The open immersions $i,k_1$ are quasi-compact, as required by the existing proper/open projection-mate lemma. Indeed $\\operatorname{Spec}k$ is Noetherian (a field has only the ideals $0,k$), so [lem-weil-pbc-finite-type-over-noetherian] makes $V,Z$ Noetherian. For every affine open $H$ of either target, the inverse image under the respective open immersion is an open subscheme of that Noetherian target. It is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. This is exactly quasi-compactness of the open immersion. The other geometric hypotheses, commutativity and properness of $p,r$, are already assumed.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; properties.tex and topology.tex as quoted in the existing Noetherian-open leaf"
+   }
+  },
+  {
+   "text": "In case (a), compare the normalization with [lem-sf-proper-open-projection-mate]. Write $\\alpha:P_pJ_i\\to J_{k_1}P_r$ for its open-base-change map followed by projection onto the clopen component $s(U)$, and $g:J_iS_r\\to S_pJ_{k_1}$ for its proper-adjunction mate. By [def-weil-pbc-adjunction-mate] the $P_p\\dashv S_p$ transpose of $g_M$ is $J_{k_1}(\\varepsilon_{r,M})\\alpha_{S_rM}$. We check its open transpose: after the specified $\\lambda$ and $P_iJ_i\\cong1$, the $P_r\\dashv S_r$ transpose of $\\lambda_M P_i(g_M)$ is $\\varepsilon_{r,M}$. To see this, paste the adjunctions using [lem-weil-pbc-mate-pasting]. The open-base-change factor restricts to the identity by the unit normalization of [lem-sf-open-tensor-normalization]; the clopen projection restricts to $1$ on $s(U)$; and $P_sJ_s\\cong1$ removes its extension factor. The remaining arrow is precisely $\\varepsilon_{r,M}$, with $P_rP_i=P_{k_1}P_p$ and the direct-image compositor of $\\lambda$. The composite adjunction uses the pasted counit, so no scalar or automorphism is inserted. Injectivity of the adjunction correspondence gives $\\lambda_M P_i(g_M)=1_{S_rM}$. Consequently the $J_i\\dashv P_i$ transpose of $g_M$ is $\\lambda_M^{-1}$. This is also the defining transpose of $\\Gamma_M$, hence $g_M=\\Gamma_M$. This comparison uses only adjunction bijections and the stated normalization, not invertibility of $\\Gamma$.",
+   "uses": [
+    "lem-sf-proper-open-projection-mate",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Compactification-independence sentence and following open-restriction/mate calculation; normalization expanded by the agent"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-proper-open-projection-mate] with $(A,B,C,D,k)=(U,V,W,Z,k_1)$. In case (a) take $\\Lambda=A_n$; it is a finite commutative ring, $n\\ge1$. Step 1 verifies its quasi-compact-open hypotheses and Step 2 identifies its $\\gamma$ with our $\\Gamma$. Its $R_h$ is our $S_h$, its counit-defined $\\pi_h$ is exactly the morphism defined here, and its $\\delta_j$ is our $\\gamma_j$, both with the normalization of [lem-sf-open-tensor-normalization]. Its displayed equation, read with the two sides exchanged, is therefore precisely the required equation, including the pullback identification induced by $ir=pk_1$. In case (b) use the final paragraph of that same node: it states this identical equation for all unbounded strict semilinear coefficient systems, with the intrinsic $\\Gamma_Q$, as an equality before evaluation. That is exactly the intrinsic open-adjunction normalization specified here. The simultaneous system interpretation of [lem-coef-semilinear-derived-sections] supplies these system pullbacks, direct images, tensor and their adjunction transposes. Thus this application takes place in $D(\\mathscr S)$ itself. Neither case uses a projection isomorphism, a constructibility assumption, a bound, a cartesian square, or a test of morphism equality by finite evaluation.",
+   "uses": [
+    "lem-sf-proper-open-projection-mate",
+    "lem-sf-open-tensor-normalization",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Compactification-independence sentence, reduced to the existing proper/open tensor-mate identity"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-sf-proper-open-projection-mate",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-mate-pasting",
+  "lem-sf-open-tensor-normalization",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence and the following open restriction/counit-mate argument; reuse of the existing normalized proper/open projection-mate node"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,10 +122,45 @@
    "results": "Profinite.NobelingProof.GoodProducts.square_commutes; AdicCompletion.transitionMap_comp_eval; AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero; AlgebraicGeometry.Proj.awayMap_awayToSection; AlgebraicGeometry.Proj.SpecMap_awayMap_awayι; AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι; ModuleCat.Tilde.toOpen_res; AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι",
    "date": "2026-10-17",
    "verdict": "no match: the listed results do not state compatibility of proper/open interchange with the derived counit projection morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized proper open interchange commutes with counit-defined tensor projection maps on unbounded derived module sheaves and semilinear systems",
+   "results": "SheafOfModules.Presentation.map_π_eq; SheafOfModules.map_ιFree_mapFree_hom_assoc; SheafOfModules.ιFree_mapFree_inv_assoc; SheafOfModules.ιFree_mapFree_inv; LightCondensed.free_internallyProjective_iff_tensor_condition; Profinite.NobelingProof.GoodProducts.square_commutes; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.internallyProjective_iff_tensor_condition",
+   "date": "2026-10-17",
+   "verdict": "no match: generic monoidal adjunction, mate or tensor identities do not state the geometric interchange on derived sheaves and strict semilinear systems"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*open|interchange.*tensor|projectionMap_mate",
+   "results": "No hits (Mathlib/CategoryTheory)",
+   "date": "2026-10-17",
+   "verdict": "no match: generic monoidal adjunction, mate or tensor identities do not state the geometric interchange on derived sheaves and strict semilinear systems"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper open interchange is compatible with the tensor projection formula in derived categories",
+   "results": "CategoryTheory.CartesianMonoidalCategory.tensorμ_fst; CategoryTheory.CartesianMonoidalCategory.tensorμ_snd; CategoryTheory.CartesianMonoidalCategory.tensorδ_snd; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd; CategoryTheory.leftDistributor_hom_comp_biproduct_π; CategoryTheory.FreeMonoidalCategory.HomEquiv.tensorHom_comp_tensorHom; CategoryTheory.Over.tensorHom_left_fst; HomologicalComplex.ιTensorObj",
+   "date": "2026-10-17",
+   "verdict": "no match: generic monoidal adjunction, mate or tensor identities do not state the geometric interchange on derived sheaves and strict semilinear systems"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Counit tensor projection formula commutes with normalized extension by zero proper pushforward interchange",
+   "results": "CoalgCat.MonoidalCategoryAux.counit_tensorObj; TensorProduct.counit_def; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc; TensorProduct.counit_tmul; Bialgebra.TensorProduct.counit_eq_algHom_toLinearMap; CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryFst_mapPullbackAdj_counit_app; CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryToUnit_mapPullbackAdj_counit_app; CategoryTheory.ComonObj.comul_counit_hom",
+   "date": "2026-10-17",
+   "verdict": "no match: generic monoidal adjunction, mate or tensor identities do not state the geometric interchange on derived sheaves and strict semilinear systems"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mate of clopen component projection in a proper open square respects tensor product and projection morphisms",
+   "results": "CategoryTheory.frobeniusMorphism_mate; CategoryTheory.mateEquiv_square; CategoryTheory.coev_expComparison; CategoryTheory.frobeniusMorphism; LightCondensed.ihomPoints_symm_comp; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: generic monoidal adjunction, mate or tensor identities do not state the geometric interchange on derived sheaves and strict semilinear systems"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-fix-projection-compactification-comparison",
@@ -92,5 +179,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-proper-open-tensor-compatibility",
+  "worker": "stage1",
+  "summary": "Reused the existing proper/open projection-mate node, which states exactly the desired tensor identity for finite coefficients and strict semilinear systems. Verified quasi-compactness of the opens using existing Mathlib leaves and identified the finite proper-adjunction normalization with the prescribed open-adjunction normalization by transposition. No statement changes or new nodes. Recorded actual Mathlib searches, checked upstream partial etale/cartesian refinement declarations, and supplied verbatim citations.",
+  "blueprint": "The ancestor lem-fix-weil-operations proof, For an admissible exceptional adjoint paragraph, projection transformation equivariance sentence; the compactification-independence sentence and subsequent open restriction/counit-mate argument of prop-sf-pf-coherence. The bound unit sk-rem-sf-pf-done is a remark with no proof steps.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic unit-normalized open base-change and tensor comparisons are needed to identify the canonical arrows; the remark unit contains no such normalization statement."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Supplies the simultaneous system operations and adjunction transposes in the coefficient category specified by the item; used as a generic construction tool, without replacing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-open-tensor-normalization",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-81efa44a9",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-81efa44a9 (reviewer sub-agent of L); spot-checked: Read the full item (3 steps) and the full statement of every cited node: projection-mate, open-tensor-normalization, integral-compactification-system-realization, cbc-strict-tower-proper-open-calculus, def-exchange-projection, coef-semilinear-derived-sections, the two Noetherian Mathlib leaves, adjunction-mate and mate-pasting. Also read the unit sk-rem-sf-pf-done (a remark with no steps and uses []) and the blueprint prop-sf-pf-coherence.proof.md (compactification-independence sentence, then open restriction and counit transpose), which is the route the steps follow. Step 1: V and Z are Noetherian because they are finite type over a field, so open immersions into them are quasi-compact. Step 2: I redid the computation. Along i, the unit of p restricts to the unit of q. The restriction of beta_{i,p} along b is the identity (open-tensor-normalization with j=i, g=p, j'=b). The clopen projection restricts to the unit of s. So lambda P_i(g) = (S_r eps_r)(eta_r S_r) = 1 by the triangle identity, and therefore g = Gamma without assuming Gamma invertible. Step 3: A_n is a finite commutative ring. The projection-mate node's pi, delta and gamma match the item's pi, gamma_j and Gamma, and its equation is the item's with the sides swapped, checked term by term. For case (b), the realization node defines Gamma_Q intrinsically as the J_i-adjunct of lambda_Q^{-1}, with lambda_Q built exactly as the item's lambda, so no step-2 argument is needed there. Edge cases: identity horizontals, identity verticals, a refinement square with an extra clopen component, zero M or N, and empty U. No new nodes, no cycle (traversal of 12,414 dependencies does not reach the item), and no SGA cited. The item is a specialization of the existing unsplit node plus a genuine normalization identification, so it is not a D1/D2 relabelling; a maintainer may later consider merging. Accepted tool_uses: lem-sf-open-tensor-normalization and lem-coef-semilinear-derived-sections, both generic tools. No fixes made."
  }
 }

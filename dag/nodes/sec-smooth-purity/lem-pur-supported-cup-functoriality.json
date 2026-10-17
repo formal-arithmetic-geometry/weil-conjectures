@@ -31,19 +31,10 @@
    }
   },
   {
-   "text": "First work on the etale site. For $i:C\\hookrightarrow X$ write $P_C=i_*A_C$. For $v:X'\\to X$ there is a sheaf map $P_C\\to v_*P_{C'}$: on an etale $T\\to X$ pull a locally constant section on $C\\times_XT$ back to $C'\\times_XT$. Let $b_{v,C}:v^{-1}P_C\\to P_{C'}$ be its adjoint. Closed immersions are finite by [lem-weil-pbc-closed-immersion-finite]. Thus [lemma-weil-pbc-finite-stalk-formula] and [lem-weil-pbc-constant-sheaf-geometric-stalk] give stalk $A$ at a point on $C$, and $0$ off $C$. By [lem-weil-pbc-inverse-image-stalk-germ], the stalk of the source of $b_{v,C}$ at $\\bar x'$ is the stalk of $P_C$ at $v\\bar x'$, with the stated germ normalization. The stalk map is therefore $1_A$ on $C'$ and the unique map $0\\to0$ off $C'$. [lemma-weil-pbc-geometric-stalk-conservative] makes $b_{v,C}$ an isomorphism. This includes empty supports and nonreduced closed subschemes. If $v,w$ are composable, pulling a section back twice equals pulling it back along $vw$, so the $b$ maps satisfy the composition and identity equations under the canonical inverse-image composition comparisons.\nFor two supports put $I=C\\times_XD$. We now construct the etale auxiliary coefficient map, since the current [def-pur-supported-cup] specifies its pro-etale counterpart only. On every etale test object restrict sections of $P_C$ and $P_D$ to $I$ and multiply: $(s,t)\\mapsto s|_I t|_I$. This is balanced and commutes with restrictions, so the sheaf tensor universal property in [lem-pc-sheaf-modules-tensor-closed] gives $\\mu^{\\mathrm{et}}_{C,D}:P_C\\otimes_{A_X}P_D\\to P_I$. The scalar-ring tensor here agrees with the sheafification of the tensor over the constant ring $A$: every section of $A_X$ is locally a constant section, and therefore every $A_X$-balancing relation is locally an $A$-balancing relation, and conversely. Thus [lem-pod-etale-stalk-tensor-scalar] applies. At a geometric point on $I$, the map on stalks is $A\\otimes_A A\\to A$, multiplication; elsewhere one source factor and the target are zero. It is an isomorphism by stalk conservativity. The stalk identifications respect $A$-action because each germ map commutes with multiplication by constants. Each $P_C$ is flat: by [prop-weil-pbc-geometric-stalks-exact] and the tensor-stalk formula, tensoring an exact sequence with it has exact stalks, since its stalk is $0$ or $A$. Exactness is detected on stalks: the homology of the sequence has zero stalks by exactness of the stalk functors and is zero by conservativity applied to its map to zero. The bounded-above flat-complex assertion of [lem-pc-kflat-closure] makes these degree-zero models K-flat. Hence [lem-weil-pbc-site-derived-tensor-descent] gives the induced isomorphism $\\mu^{\\mathrm{et}}_{C,D}:P_C\\otimes_A^L P_D\\xrightarrow{\\sim}P_I$. Write it as $\\mu_{C,D}$ until site comparison in Step 6. Consequently the following identities hold: triple multiplication is independent of parentheses; exchanging the factors gives multiplication after the interchange $C\\times_XD\\cong D\\times_XC$; and $b_{v,I}\\,v^{-1}\\mu_{C,D}=\\mu_{C',D'}(b_{v,C}\\otimes b_{v,D})$, with the pullback tensor comparison understood. Each equality is an equality on local tensor generators, hence an equality of sheaf maps by the tensor universal property. These equalities pass to derived tensors: the etale $P_C$ are flat by the preceding stalk argument, so they are already degree-zero flat tensor models.",
+   "text": "First work on the etale site. For $i:C\\hookrightarrow X$ put $P_C=i_*A_C$. Apply [lem-pur-etale-closed-constant-tensor] with the finite ring $A$ of Step 1. Its specified $b_{v,C}$ is the adjoint of pullback of locally constant sections and is an isomorphism for every $v:X'\\to X$. Its identities and composition equations apply also to nonreduced and empty supports. The same lemma supplies flatness of every $P_C$ and the particular isomorphism $\\mu_{C,D}:P_C\\otimes_A^LP_D\\xrightarrow{\\sim}P_{C\\times_XD}$ induced by restriction and multiplication. Use these maps to define the etale analogue of the tensor-morphism construction in [def-pur-supported-cup], which itself is pro-etale. The associativity, symmetry and pullback equations for these source multiplications are exactly the equations in the cited lemma. They are the source equations used in Steps 4--6; they assert ordinary coefficient pullback and do not use exceptional base change.",
    "uses": [
-    "def-pur-supported-cup",
-    "lem-weil-pbc-closed-immersion-finite",
-    "lemma-weil-pbc-finite-stalk-formula",
-    "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "lem-pod-etale-stalk-tensor-scalar",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lem-pc-kflat-closure",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "lem-pur-etale-closed-constant-tensor",
+    "def-pur-supported-cup"
    ],
    "elementary": false,
    "source": {
@@ -67,14 +58,15 @@
    }
   },
   {
-   "text": "The etale supported-Hom interpretation in [lem-amb-closed-support-hom] writes an etale class as $\\alpha:P_C\\to A_X(r)[a]$. Since inverse image with constant coefficients is exact and additive by [prop-weil-pbc-inverse-image-modules-exact], define\n$$v^*\\alpha=\\tau_{v,r}[a]\\circ v^{-1}(\\alpha)\\circ b_{v,C}^{-1}:P_{C'}\\longrightarrow A_{X'}(r)[a],$$\nwhere $\\tau_{v,r}:v^{-1}A_X(r)\\xrightarrow{\\sim}A_{X'}(r)$ is Step 1 and the exact functor's shift identification is understood. This is the usual supported pullback, not an exceptional base-change isomorphism. Indeed on an injective resolution $A_X(r)\\to I$ a cocycle $P_C\\to I^a$ is a section of $I^a(X)$ vanishing on $X\\setminus C$: evaluate at the image of $1\\in A_X(X)$ under $A_X\\to P_C$. Pullback followed by a comparison map from $v^{-1}I$ to an injective resolution on $X'$ evaluates to the pullback of that section, because $b_{v,C}$ was defined by pulling back precisely these sections. The kernel assertion follows directly by applying $\\operatorname{Hom}(-,I^q)$ to $0\\to j_!A_U\\to A_X\\to P_C\\to0$ of [lem-weil-pbc-open-closed-short-exact], and using [lem-weil-pbc-extension-by-zero-adjunction] to identify the last Hom with $I^q(U)$. This proves agreement with the kernel-of-restriction map of [thm-pur-with-support-exactness]. The comparison-map computation is legitimate by [lem-weil-pbc-site-cohomology-pullback], and the preceding kernel calculation fixes the supported-Hom identification by evaluation at the image of $1$; its derived form is the displayed cone identification in [lem-amb-closed-support-hom]. Functoriality in the pair in [thm-pur-with-support-exactness] now gives compatibility with open restriction and all localization connecting maps. Alternatively a lift of a cocycle on the complement has boundary its differential in the support kernel, and applying the same chain comparison before or after this differential agrees. Step 2's composition equations for $b$, Step 1's equations for $\\tau$, and functoriality of inverse image give $(vw)^*=w^*v^*$ and $1^*=1$. For $C=X$, $P_C=A_X$ and $b$ is the constant-coefficient identification, so the formula is ordinary cohomology pullback.",
+   "text": "By [lem-amb-closed-support-hom] represent a class by $\\alpha:P_C\\to A_X(r)[a]$. Exact inverse image [prop-weil-pbc-inverse-image-modules-exact] defines\n$$v^*\\alpha=\\tau_{v,r}[a]\\circ v^{-1}(\\alpha)\\circ b_{v,C}^{-1}.$$\nHere $\\tau$ is Step 1 and $b$ is Step 2. To fix its normalization, apply $\\operatorname{Hom}(-,I^q)$, for injective $I^q$, to the source sequence of [lem-weil-pbc-open-closed-short-exact]. Evaluation at the image of $1$ identifies $\\operatorname{Hom}(P_C,I^q)$ with $\\ker(I^q(X)\\to I^q(U))$; the last Hom is $I^q(U)$ by [lem-weil-pbc-extension-by-zero-adjunction]. For $a<0$ both groups vanish, since the coefficients are degree-zero sheaves and supported cohomology is a right derived functor. For $a\\geq0$, [lem-weil-pbc-ext-exact-functor-cocycle] represents the displayed derived map by inverse image followed by the injective comparison. Evaluating at $1$ gives precisely pullback of a supported section, so [lem-weil-pbc-site-cohomology-pullback] identifies it with the usual kernel pullback. Functoriality of [thm-pur-with-support-exactness] now gives restriction and boundary compatibility. The equations for $b$ in Step 2 and for $\\tau$ in Step 1 give identities and composition. When $C=X$, $P_C=A_X$ and $b$ is the constant-ring identification, so the formula is ordinary pullback.",
    "uses": [
     "lem-amb-closed-support-hom",
     "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-site-cohomology-pullback",
-    "thm-pur-with-support-exactness",
     "lem-weil-pbc-open-closed-short-exact",
-    "lem-weil-pbc-extension-by-zero-adjunction"
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-ext-exact-functor-cocycle",
+    "lem-weil-pbc-site-cohomology-pullback",
+    "thm-pur-with-support-exactness"
    ],
    "elementary": false,
    "source": {
@@ -83,14 +75,11 @@
    }
   },
   {
-   "text": "Use $\\operatorname{cup}(\\alpha,\\beta)=t_{a,b}(\\alpha\\otimes^L\\beta)\\mu_{C,D}^{-1}$, the etale analogue of the pro-etale formula in [def-pur-supported-cup], with the etale source isomorphism proved in Step 2, followed by $A(r)\\otimes_A A(s)\\cong A(r+s)$; $t_{a,b}$ is induced on total complexes by the same convention as the current pro-etale definition: a tensor in $P[a]^p\\otimes Q[b]^q$ is sent to $(-1)^{bp}$ times that tensor in $(P\\otimes Q)[a+b]^{p+q}$. The two differential signs agree directly, and Step 3 descends this comparison. Thus the intersite identification below compares the specified shift maps as well as the coefficient multiplication. Additivity of sheaf tensor and the tensor bifunctor of [lem-weil-pbc-site-derived-tensor-descent] give $(\\alpha+\\alpha')\\otimes\\beta=\\alpha\\otimes\\beta+\\alpha'\\otimes\\beta$ and the analogous second-variable equation. Composition with $\\mu^{-1}$ and $t$ preserves sums, proving bilinearity. Both parenthesizations of three products are the composite from $P_{C\\cap D\\cap E}$ through $P_C\\otimes^L P_D\\otimes^L P_E$ and $\\alpha\\otimes^L\\beta\\otimes^L\\gamma$, followed by the common shift and twist multiplication: Step 2 identifies their source multiplications and Step 3 their tensor and shift constraints. This proves associativity.\nFor symmetry, equivalently write the classes as maps $P_C[-a]\\to A(r)$ and $P_D[-b]\\to A(s)$. The generators of these shifted source complexes lie in degrees $a$ and $b$. The cochain symmetry of Step 3 sends their tensor to $(-1)^{ab}$ times its interchange. The unshifted coefficient-source multiplication is symmetric by Step 2. Naturality of the same tensor symmetry therefore identifies the two products with sign $(-1)^{ab}$, followed by the stated interchange of the supports and the degree-zero twist lines. This is exactly the claimed graded symmetry, including negative integers (and the groups in negative degree for degree-zero coefficients are zero).\nFinally apply $v^{-1}$ to the displayed cup composite. Naturality of the tensor comparison gives $v^{-1}(\\alpha\\otimes\\beta)=v^{-1}\\alpha\\otimes v^{-1}\\beta$ after that comparison. Substitute Step 4's formula and Step 2's equation for $b_{v,C\\cap D}\\,v^{-1}\\mu_{C,D}$. The result is\n$$t'_{a,b}\\bigl((\\tau_r[a]v^{-1}\\alpha\\,b_{v,C}^{-1})\\otimes(\\tau_s[b]v^{-1}\\beta\\,b_{v,D}^{-1})\\bigr)(\\mu_{C',D'})^{-1},$$\nwhich is $v^*\\alpha\\cup v^*\\beta$. The shift and twist identifications in this substitution agree by Steps 1 and 3. This proves etale cup-pullback compatibility without any purity statement. For completeness, on three shifted factors of degrees $p,q,r$ and shifts $a,b,c$, the two successive shift identifications have exponents $bp+c(p+q)$ and $cq+(b+c)p$; these are equal, so the specified shift convention is associative.",
+   "text": "Use $\\operatorname{cup}(\\alpha,\\beta)=t_{a,b}(\\alpha\\otimes^L\\beta)\\mu_{C,D}^{-1}$, followed by $A(r)\\otimes_A A(s)\\cong A(r+s)$. This is the etale analogue of [def-pur-supported-cup], with Step 2's etale source isomorphism. Apply [lem-pur-shifted-tensor-morphism-calculus] to the flat sources $P_C,P_D$ and targets $A(r),A(s)$. Its $t_{a,b}$ uses the same sign $(-1)^{bp}$ as that definition. Its biadditivity gives bilinearity after composing with $\\mu^{-1}$. Its associativity equation, together with Step 2's associative source multiplication and Step 1's twist multiplication, makes the two triple products equal. Its symmetry equation gives $(-1)^{ab}$; Step 2 identifies the symmetric source maps, and the twist symmetry identifies the target with $A(r+s)$. This is the required graded symmetry, for all integer degrees.\nFor pullback, apply the same lemma with $u^*=v^{-1}$, exact by [prop-weil-pbc-inverse-image-modules-exact]. Its pullback equation identifies the image of $t_{a,b}(\\alpha\\otimes\\beta)$ with $t'_{a,b}(v^{-1}\\alpha\\otimes v^{-1}\\beta)$. Substitute Step 4's formula for each pulled-back class. Step 2's equation $b_{v,C\\cap D}v^{-1}\\mu_{C,D}=\\mu_{C',D'}(b_{v,C}\\otimes b_{v,D})$ cancels the source identifications. Step 1 identifies the twist targets. The resulting composite is exactly $v^*\\alpha\\cup v^*\\beta$.",
    "uses": [
     "def-pur-supported-cup",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-pc-tensor-complex-sheaves",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-asd-etale-finite-twist-pullback"
+    "lem-pur-shifted-tensor-morphism-calculus",
+    "prop-weil-pbc-inverse-image-modules-exact"
    ],
    "elementary": false,
    "source": {
@@ -116,20 +105,21 @@
    }
   },
   {
-   "text": "By [thm-weil-pbc-site-comparison] the functor $\\nu_X^*$ is fully faithful on $D^+$, for every scheme $X$ and finite ring $A$. Steps 1 and 6 identify respectively its images of $A_X(r)$ and $P_C$ with the corresponding pro-etale objects. Thus [lem-pur-supported-hom] and the etale supported-Hom description give isomorphisms between the supported groups on both sites for every $a$. They send $\\alpha$ to $\\nu_X^*(\\alpha)q_C^{-1}$, with the twist identification understood. [lem-weil-pbc-comparison-pullback] identifies the two orders of geometric pullback and comparison, including identities and compositions; on the sources $q_C$ and $b_{v,C}$ both mean pullback of the same local section. Hence this supported-group comparison commutes with the pullbacks of Step 4. It also identifies the localization connecting maps, as follows. For the complementary open $j:U\\hookrightarrow X$, the canonical comparison $\\nu_X^*j_{\\mathrm{et},!}A_U\\cong j_{\\mathrm{proet},!}A_U$ is fixed by their adjunctions: maps from either object to a sheaf $M$ are sections of $j^*M$ on $U$, since comparison direct image is evaluation on etale objects. This uses [lem-weil-pbc-extension-by-zero-adjunction] and [lem-cbc-proetale-extension-zero]; the identifications carry the counits to one another. The maps corresponding to the identity sections are inverse: applying either natural Hom bijection to their composite gives the identity, so injectivity of the bijection gives the identity composite. Applying exact $\\nu_X^*$ to the source short exact sequence $0\\to j_!A_U\\to A_X\\to P_C\\to0$ of [lem-weil-pbc-open-closed-short-exact] therefore gives that same exact sequence on the pro-etale site, by Step 6. Applying Hom into an injective resolution produces the localization sequence: $\\operatorname{Hom}(A_X,I^q)=I^q(X)$, $\\operatorname{Hom}(j_!A_U,I^q)=I^q(U)$, and $\\operatorname{Hom}(P_C,I^q)$ is the restriction kernel. Its connecting map takes a complement cocycle, lifts it to $I^q(X)$, and takes its differential in that kernel. This is the boundary in [thm-pur-with-support-exactness]. Exact comparison carries the source exact sequence, with its two specified arrows, to the same source exact sequence. Its induced derived Hom maps therefore commute with this boundary, equivalently by [lem-weil-pbc-complex-ses-long-exact-naturality]. Finally Step 3 and the equality of $\\mu$ in Step 6 identify the etale auxiliary cup with the actual pro-etale cup of [def-pur-supported-cup]. The tensor-shift convention specified in Step 5 is the one specified there, so this equality includes its sign. Every pro-etale class with these coefficients is an image of an etale class by the Hom bijection, so all the laws of Steps 4 and 5 hold for every pro-etale class, not only a selected collection of witnesses.",
+   "text": "Full faithfulness in [thm-weil-pbc-site-comparison], with Steps 1 and 6 and the Hom descriptions [lem-pur-supported-hom, lem-amb-closed-support-hom], gives a bijection on supported groups: $\\alpha\\mapsto\\nu_X^*(\\alpha)q_C^{-1}$, with twists identified. By [lem-weil-pbc-comparison-pullback] it commutes with geometric pullback: $q_C$ and $b_{v,C}$ both pull back the same local section.\nFor localization, use [lem-cbc-proetale-extension-zero-comparison] to identify $\\nu_X^*j^{\\mathrm{et}}_!A_U$ with $j^{\\mathrm{proet}}_!A_U$. This canonical comparison carries counits to counits: under the two adjunctions [lem-weil-pbc-extension-by-zero-adjunction, lem-cbc-proetale-extension-zero], both maps correspond to the identity of $A_U$, since comparison restricts on etale objects to the same sections. Step 6 identifies the other arrow $A_X\\to P_C$ by its value on $1$. Exact comparison [lem-sf-comparison-pullback-exact] therefore sends [lem-weil-pbc-open-closed-short-exact] to the identical source sequence on the pro-etale site. By [lem-weil-pbc-exact-functor-ses-triangle-image] it sends its connecting arrow to the connecting arrow with the same sign. Applying Hom into the coefficient object thus commutes with the localization boundary; Step 4's kernel evaluation and [thm-pur-with-support-exactness] fix its normalization.\nFinally [lem-pur-shifted-tensor-morphism-calculus] and Step 6's multiplication comparison identify the specified cup of [def-pur-supported-cup], including its shift sign, with the etale cup. Every pro-etale class is in the Hom bijection, so all laws in Steps 4--5 hold on both sites.",
    "uses": [
     "thm-weil-pbc-site-comparison",
     "lem-pur-supported-hom",
     "lem-amb-closed-support-hom",
     "lem-weil-pbc-comparison-pullback",
+    "lem-cbc-proetale-extension-zero-comparison",
     "lem-weil-pbc-extension-by-zero-adjunction",
     "lem-cbc-proetale-extension-zero",
-    "lem-weil-pbc-open-closed-short-exact",
-    "thm-pur-with-support-exactness",
-    "lem-weil-pbc-complex-ses-long-exact-naturality",
-    "def-pur-supported-cup",
     "lem-sf-comparison-pullback-exact",
-    "lem-cbc-comparison-pullback-sections"
+    "lem-weil-pbc-open-closed-short-exact",
+    "lem-weil-pbc-exact-functor-ses-triangle-image",
+    "thm-pur-with-support-exactness",
+    "lem-pur-shifted-tensor-morphism-calculus",
+    "def-pur-supported-cup"
    ],
    "elementary": false,
    "source": {
@@ -159,33 +149,30 @@
   "lem-asd-etale-finite-twist-pullback",
   "lem-pur-twist-sheaf-locally-free",
   "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+  "lem-sf-comparison-pullback-exact",
+  "lem-pur-etale-closed-constant-tensor",
   "def-pur-supported-cup",
-  "lem-weil-pbc-closed-immersion-finite",
-  "lemma-weil-pbc-finite-stalk-formula",
-  "lem-weil-pbc-constant-sheaf-geometric-stalk",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lemma-weil-pbc-geometric-stalk-conservative",
   "lem-pc-sheaf-modules-tensor-closed",
-  "lem-pod-etale-stalk-tensor-scalar",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "lem-pc-kflat-closure",
-  "lem-weil-pbc-site-derived-tensor-descent",
   "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pc-kflat-closure",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-amb-closed-support-hom",
   "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-site-cohomology-pullback",
-  "thm-pur-with-support-exactness",
   "lem-weil-pbc-open-closed-short-exact",
   "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-ext-exact-functor-cocycle",
+  "lem-weil-pbc-site-cohomology-pullback",
+  "thm-pur-with-support-exactness",
+  "lem-pur-shifted-tensor-morphism-calculus",
   "lem-cbc-comparison-pullback-sections",
   "def-weil-proetale-module-direct-image",
-  "lem-sf-comparison-pullback-exact",
   "thm-weil-pbc-site-comparison",
   "lem-pur-supported-hom",
   "lem-weil-pbc-comparison-pullback",
+  "lem-cbc-proetale-extension-zero-comparison",
   "lem-cbc-proetale-extension-zero",
-  "lem-weil-pbc-complex-ses-long-exact-naturality",
+  "lem-weil-pbc-exact-functor-ses-triangle-image",
   "lem-amb-kummer-any-base",
   "lem-weil-pbc-right-derived-universal-delta-functor"
  ],
@@ -274,7 +261,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-frame-independence",
@@ -296,7 +283,7 @@
   "date": "2026-10-17",
   "item": "lem-pur-supported-cup-functoriality",
   "worker": "stage1",
-  "summary": "Expanded the auxiliary supported Kummer functoriality statement into eight proof steps using existing generic nodes. Constructed the closed-constant pullback isomorphisms and checked the multiplication diagrams on sections; wrote the derived tensor sign and the cup-pullback substitution; compared supported source objects and localization boundaries on arbitrary schemes before transporting all classes to the pro-etale site. Proved the concrete Kummer identities from the actual Kummer short exact sequence without a freeness or divisibility assumption on the coefficient index. Statement unchanged; no new nodes or Mathlib leaves. Repair of the returned stale citation: reread the changed pro-etale-only supported-cup definition; corrected the site attribution in the statement, constructed and proved the etale coefficient isomorphism and flatness explicitly, and identified its multiplication and signed shift with the current pro-etale definition in Steps 6 and 7. No hypothesis or mathematical conclusion was weakened.",
+  "summary": "Repair of the human re-split return: preserve the statement, Lean-related fields and unflagged Steps 1, 3, 6, 8 byte-for-byte. Replace the four flagged Steps 2, 4, 5, 7 by short arguments citing two new unsplit lemmas (closed constant etale coefficient calculus and shifted derived tensor morphism calculus) and existing exact-functor cocycle, source-triangle and extension-zero comparison nodes. Retain the original stalk, kernel, tensor-sign and etale-to-pro-etale route; no statement change, no new definition and no Lean work.",
   "blueprint": "Realizes lem-pur-frame-independence, proof 'Unit multiples' (Kummer additivity and support boundary), 'Permutations' (even-degree sign), and restriction of the shear family to its two endpoints (supported pullback and cups).",
   "tool_uses": [
    {
@@ -310,26 +297,6 @@
    {
     "node": "lem-cbc-abelian-etale-proetale-cohomology-comparison",
     "why": "Generic sheaf, derived-tensor, cohomology, or site-comparison input used in step(s) 1, 6; the affine-line/Kummer unit does not reprove this general tool."
-   },
-   {
-    "node": "lem-weil-pbc-closed-immersion-finite",
-    "why": "Generic sheaf, derived-tensor, cohomology, or site-comparison input used in step(s) 2; the affine-line/Kummer unit does not reprove this general tool."
-   },
-   {
-    "node": "lemma-weil-pbc-finite-stalk-formula",
-    "why": "Generic sheaf, derived-tensor, cohomology, or site-comparison input used in step(s) 2; the affine-line/Kummer unit does not reprove this general tool."
-   },
-   {
-    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "why": "Generic sheaf, derived-tensor, cohomology, or site-comparison input used in step(s) 2; the affine-line/Kummer unit does not reprove this general tool."
-   },
-   {
-    "node": "lem-weil-pbc-inverse-image-stalk-germ",
-    "why": "Generic sheaf, derived-tensor, cohomology, or site-comparison input used in step(s) 2; the affine-line/Kummer unit does not reprove this general tool."
-   },
-   {
-    "node": "lemma-weil-pbc-geometric-stalk-conservative",
-    "why": "Generic sheaf, derived-tensor, cohomology, or site-comparison input used in step(s) 2; the affine-line/Kummer unit does not reprove this general tool."
    },
    {
     "node": "lem-pc-sheaf-modules-tensor-closed",
@@ -388,10 +355,6 @@
     "why": "Generic sheaf, derived-tensor, cohomology, or site-comparison input used in step(s) 7; the affine-line/Kummer unit does not reprove this general tool."
    },
    {
-    "node": "lem-weil-pbc-complex-ses-long-exact-naturality",
-    "why": "Generic sheaf, derived-tensor, cohomology, or site-comparison input used in step(s) 7; the affine-line/Kummer unit does not reprove this general tool."
-   },
-   {
     "node": "lem-amb-kummer-any-base",
     "why": "Generic sheaf, derived-tensor, cohomology, or site-comparison input used in step(s) 8; the affine-line/Kummer unit does not reprove this general tool."
    },
@@ -400,12 +363,16 @@
     "why": "Generic sheaf, derived-tensor, cohomology, or site-comparison input used in step(s) 8; the affine-line/Kummer unit does not reprove this general tool."
    },
    {
-    "node": "lem-pod-etale-stalk-tensor-scalar",
-    "why": "Step 2 constructs the auxiliary etale coefficient tensor and uses its stated map on pure-tensor germs; the unit has no tensor-stalk tool."
+    "node": "lem-weil-pbc-ext-exact-functor-cocycle",
+    "why": "Generic exact-functor or site-comparison tool replacing an inline argument in returned Steps 4 or 7; the Kummer unit has no version of this generic statement."
    },
    {
-    "node": "prop-weil-pbc-geometric-stalks-exact",
-    "why": "Step 2 proves flatness of the auxiliary etale source by detecting exactness on geometric stalks; no corresponding conservativity on pro-etale sheaves is assumed."
+    "node": "lem-weil-pbc-exact-functor-ses-triangle-image",
+    "why": "Generic exact-functor or site-comparison tool replacing an inline argument in returned Steps 4 or 7; the Kummer unit has no version of this generic statement."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Generic exact-functor or site-comparison tool replacing an inline argument in returned Steps 4 or 7; the Kummer unit has no version of this generic statement."
    }
   ]
  },
@@ -436,14 +403,17 @@
   "lem-amb-kummer-any-base",
   "lem-weil-pbc-right-derived-universal-delta-functor",
   "lem-pod-etale-stalk-tensor-scalar",
-  "prop-weil-pbc-geometric-stalks-exact"
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-ext-exact-functor-cocycle",
+  "lem-weil-pbc-exact-functor-ses-triangle-image",
+  "lem-cbc-proetale-extension-zero-comparison"
  ],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q17-282ac2d8e",
-  "group": "Q17",
+  "reviewer": "NT-cc-NE-435f47373",
+  "group": "NE",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-282ac2d8e (reviewer sub-agent of L); spot-checked: I read the whole item (statement and 8 steps), the statements of all 33 proof dependencies and 5 statement dependencies, Stacks 0FPL/0FPM (sites-cohomology.tex l.8422/8460, where 0FPM's proof is 'Omitted'), 0G78 (cohomology.tex l.8851), 03PL (etale-cohomology.tex l.2842) and 09XP, and the main-20261015 blueprint proof of lem-pur-frame-independence. That proof uses Kummer additivity in 'Unit multiples', the even-degree sign in 'Permutations', and supported pullback and cups at the endpoints of the shear family; the item supplies exactly these. The delivery adds no new nodes, so B1-B7 do not apply. There is no cycle and no SGA citation. Every statement used from outside the sk-prop-a1-kummer route is a generic tool declared in split_report.tool_uses, and I accept those tool uses. Recomputed by hand: the Koszul chain-map coefficients in Step 3; the shift associativity in Step 5 (bp+c(p+q)=cq+(b+c)p); and the graded symmetry, done independently (sigma_{b,a}∘s against s'∘sigma_{a,b} differ by (-1)^{ab}). Edge cases checked: C empty, C=X, C=D, disjoint supports, nonreduced supports, negative degrees, n=1 ramified. Step 2 uses the finite closed-immersion stalk formula correctly (the closed fibre is one point or empty), and Steps 4 and 6-8 use no exceptional base change and no quasi-compactness assumption. Duplicate search found no duplicate: supported-product-localization, support-site-comparison, kummer-additivity and def-sf-cup are all different statements. One fault, C4/C1: Step 1 concludes that the root comparison rho_X: nu^{-1}mu^et -> mu^proet is an isomorphism of pro-etale sheaves, and Step 7 needs this. But Step 1 cited only the cohomology comparison, which gives sections on etale objects only. I repaired it in fixes/dag/nodes/sec-smooth-purity/lem-pur-supported-cup-functoriality.json: I added lem-sf-comparison-pullback-exact(1) (nu^{-1}Lambda_et ≅ Lambda_proet for finite Lambda) to Step 1, with the argument that on each trivializing member rho is an R-linear map R->R sending 1 to 1. The tool_uses entry for that node now names steps 1, 6 and 7. The statement is unchanged.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-435f47373 (reviewer sub-agent of L); spot-checked: I read the full statement, all 8 steps and both new nodes, plus every cited statement. The repair of the human re-split return is sound. The statement is unchanged; steps 1, 3, 6 and 8 are unchanged and I reread them. Steps 2, 4, 5 and 7 are now 947-1612 characters and cite statements that say what the steps use. Step 2 takes the specified b, mu, flatness and the three equations from new node lem-pur-etale-closed-constant-tensor. Step 4 applies lem-weil-pbc-ext-exact-functor-cocycle with L=v^{-1}, which is exact by prop-weil-pbc-inverse-image-modules-exact(3), and alpha=b^{-1}; its q>=0 hypothesis is respected because a<0 is handled as vanishing. Evaluating at 1 gives eta then beta, matching lem-weil-pbc-site-cohomology-pullback on the kernel. Step 5 gets bilinearity, associativity, the (-1)^{ab} symmetry and pullback from new node lem-pur-shifted-tensor-morphism-calculus; I checked the symmetry composite with mu_{D,C}sigma=mu_{C,D} by hand. Step 7 uses site-comparison full faithfulness on D^+, lem-cbc-proetale-extension-zero-comparison with nu_U^*A_U=A_U, and the Mathlib leaf lem-weil-pbc-exact-functor-ses-triangle-image for the connecting arrow. Both new nodes are true. Closed-constant node: stalks are A or 0, so b and mu are isomorphisms and P_C is flat; I tested C empty, C=X, C=D, disjoint, non-reduced supports and A=0. Shifted node: t_{a,b} is a chain map; associativity exponents bp+c(p+q)=cq+(b+c)p; symmetry exponents bp+(p+a)(q+b) and pq+aq+ab agree for all model degrees; a=b=1 gives -1. Neither node is a duplicate or restates the item. lem-asd-supported-kummer-support-hom-naturality and lem-pur-supported-hom-pullback share only the exchange-isomorphism clause. Sources: Stacks 03Q1 (etale-cohomology.tex l.4649) and 0FPL/0FPM (sites-cohomology.tex l.8460, 0FPM proof omitted), honestly marked as agent refinements. Blueprint places are correct against main-20261015 lem-pur-frame-independence (Unit multiples, Permutations, Elementary shears). proof_deps equals the union of uses; there is no cycle and no SGA citation. I accept all off-route uses declared in split_report.tool_uses as generic tools, including the new ext-exact-functor-cocycle, cbc-proetale-extension-zero-comparison and exact-functor-ses-triangle-image. The merge should replace the item's stale maintainer tool_uses list. Cosmetic only: a mis-composed 'Kun̈neth' in the shifted node's from.place. No fixes."
  }
 }

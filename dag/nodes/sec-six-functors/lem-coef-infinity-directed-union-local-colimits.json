@@ -36,7 +36,7 @@
  ],
  "proof": [
   {
-   "text": "Form the following small simplicial subset $M\\subseteq K\\star N(I)$. It contains $K$ and $N(I)$; a mixed simplex is a simplex $\\sigma$ of $K$ followed by a chain $i_0\\leq\\cdots\\leq i_r$, and belongs to $M$ exactly when $\\sigma\\in K_{i_0}$. Deleting initial chain vertices preserves membership by monotonicity, and all other operators preserve it because every $K_i$ is a simplicial subset. In particular $K_i\\star\\{i\\}$ is the right cone on $K_i$. Replace each chosen coherent cocone by a join representative on this right cone. The fixed-boundary, fixed-vertex comparison in the cited join-cone lemma (applied to opposites) supplies these representatives with their specified equivalences to the chosen cocones; their vertices are still $c_i$. For the subset functor $F:i\\mapsto(K_i\\hookrightarrow K)$, this $M$ is exactly the simplicial set $K_F$ defined in [lem-coef-decomposition-local-colimit-cocones]: a compatible family of lifts of a lower simplex is uniquely determined by its membership in $K_{i_0}$. This identifies every pure and mixed summand and all their operators, not merely the vertices.",
+   "text": "Form the following small simplicial subset $M\\subseteq K\\star N(I)$. It contains $K$ and $N(I)$; a mixed simplex is a simplex $\\sigma$ of $K$ followed by a chain $i_0\\leq\\cdots\\leq i_r$, and belongs to $M$ exactly when $\\sigma\\in K_{i_0}$. Deleting initial chain vertices preserves membership by monotonicity, and all other operators preserve it because every $K_i$ is a simplicial subset. In particular $K_i\\star\\{i\\}$ is the right cone on $K_i$. Replace each chosen coherent cocone by a join representative on this right cone. The fixed-boundary, fixed-vertex comparison in the cited join-cone lemma (applied to opposites) supplies these representatives with their specified equivalences to the chosen cocones; their vertices are still $c_i$. The coherent cocone associated with each representative is equivalent to $\\lambda_i$ in the fixed-apex fiber, so it is again colimiting: an object of the cocone category equivalent to an initial object is initial, since composing with the equivalence gives equivalences of mapping spaces. For the subset functor $F:i\\mapsto(K_i\\hookrightarrow K)$, this $M$ is exactly the simplicial set $K_F$ defined in [lem-coef-decomposition-local-colimit-cocones]: a compatible family of lifts of a lower simplex is uniquely determined by its membership in $K_{i_0}$. This identifies every pure and mixed summand and all their operators, not merely the vertices.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones",
     "lem-coef-infinity-join-cone-calculus",
@@ -49,21 +49,75 @@
    }
   },
   {
-   "text": "Construct $q:M\\to\\mathcal E$ with $q|_K=p$ by adjoining the nondegenerate simplices of $N(I)$ in increasing dimension, and well ordering the simplices within each dimension. At a vertex $i$ attach the chosen map on $K_i\\star\\{i\\}$. At a positive-dimensional chain $\\tau=(i_0<\\cdots<i_n)$, the new part is the pushout attachment of $K_{i_0}\\star\\Delta^n$ along $K_{i_0}\\star\\partial\\Delta^n$: the map $K_{i_0}\\star\\Delta^n\\to M$ is injective because $\\tau$ is, the simplices over $\\tau$ itself are new, and the old simplices it meets are exactly those of $K_{i_0}\\star\\partial\\Delta^n$ (old simplices $\\sigma\\star\\rho$ with $\\rho$ in the face omitting $i_0$ and $\\sigma\\in K_{i_1}\\setminus K_{i_0}$ are not in its image). Its faces already occur, including its first-vertex cone, which is the chosen colimiting representative on $p|_{K_{i_0}}$. To extend over this cell, write $a=p|_{K_{i_0}}$ and let $J_a$ be the join slice of [lem-coef-join-slice-cocone-comparison], whose $m$-simplices are the maps $K_{i_0}\\star\\Delta^m\\to\\mathcal E$ restricting to $a$. Since $K_{i_0}\\star\\partial\\Delta^n$ is degreewise the union of the simplicial subsets $K_{i_0}\\star\\Delta^{F}$ over the proper faces $F$, with $K_{i_0}\\star\\Delta^F\\cap K_{i_0}\\star\\Delta^{F'}=K_{i_0}\\star\\Delta^{F\\cap F'}$, the map already given on $K_{i_0}\\star\\partial\\Delta^n$ is exactly a map $b:\\partial\\Delta^n\\to J_a$, and an extension over $K_{i_0}\\star\\Delta^n$ fixing it is exactly an extension of $b$ to $\\Delta^n$. By [lem-coef-join-slice-cocone-comparison], $J_a$ is a quasicategory (it is functor-equivalent to the cocone category) and its vertex $b(0)$ is initial, because its associated coherent cocone, read through $K_{i_0}\\times\\Delta^1\\to K_{i_0}\\star\\Delta^0$, is the chosen colimiting cocone. Apply [lem-coef-infinity-relative-initial-boundary] to the inner fibration $J_a\\to\\Delta^0$: $\\operatorname{Map}_{\\Delta^0}$ is a point, so being initial relative to $J_a\\to\\Delta^0$ means being initial, and its boundary-filling condition for $n\\geq1$, applied to the boundary map $b$ with first vertex $b(0)$ and the unique map $\\Delta^n\\to\\Delta^0$, extends $b$ to $\\Delta^n$ with the entire boundary fixed. This includes $K_{i_0}=\\varnothing$, where $J_a=\\mathcal E$ and $b(0)=c_{i_0}$ is initial. At a limit ordinal take the union of the already agreeing simplicial maps, degree by degree. Every simplex occurs, so this constructs $q$ on all of $M$. Put $c=q|_{N(I)}$. The triangle on a simplex of $K_i$ followed by $i\\leq j$ identifies the leg to $c_j$ with its composite through $c_i$; longer chains give the required higher compatibilities. Thus the transitions are induced by restriction of the chosen cocones.",
+   "text": "Apply [lem-coef-infinity-local-union-cell-attachment] to the collage $M$ of step 1. Start with $M_0=K\\cup\\bigcup_i(K_i\\star\\{i\\})$. Adjoin the positive-dimensional nondegenerate chains of $N(I)$ in increasing dimension, with a well ordering within each dimension. The cited statement identifies every successor inclusion as the pushout of $K_{i_0}\\star\\partial\\Delta^n\\hookrightarrow K_{i_0}\\star\\Delta^n$, with its exact old intersection. Its vertex-stage formula also shows that these stages exhaust $M$, taking degreewise unions at limit stages.",
    "uses": [
-    "def-cbc-enhanced-diagrams-cones",
-    "lem-coef-join-slice-cocone-comparison",
-    "lem-coef-infinity-relative-initial-boundary",
-    "lem-coef-infinity-monomorphism-boundary-cells"
+    "lem-coef-infinity-local-union-cell-attachment"
    ],
    "elementary": false,
    "source": {
     "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
-    "place": "Proof of Proposition 4.2.3.4, the induction on simplices of N(I): extension of a boundary in the cocone quasicategory from its initial first vertex"
+    "place": "Proof of Proposition 4.2.3.4, printed p.250, filtration by nerve simplices."
    }
   },
   {
-   "text": "Apply [lem-coef-decomposition-local-colimit-cocones] to the small ordinary category $I$, its subset functor $F$ and the particular extension $q$ of step 2. Its local cone $q\\iota_i$ is the chosen colimiting join representative on $K_i\\star\\{i\\}$, so its only local-colimit hypothesis holds for every $i$. The identification $M=K_F$ in step 1 identifies its actual restriction map with\n$$\\alpha_t:\\operatorname{Map}_{\\operatorname{Fun}(M,\\mathcal E)}(q,\\Delta_Mt)\\longrightarrow\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal E)}(p,\\Delta_Kt).$$\nThe cited statement makes this an equivalence, natural in $t$ and compatible with coherent postcomposition of cocones. Its hypotheses explicitly allow arbitrary simplicial subsets, including empty ones, and assume no colimits beyond the displayed local cocones.",
+   "text": "On $M_0$, use $p$ on $K$ and the chosen join representatives from step 1 on each $K_i\\star\\{i\\}$. The local cones intersect only on their bases in $K$, where every map is the restriction of $p$. Hence these degreewise maps agree on overlaps and define a simplicial map $q_0:M_0\\to\\mathcal E$, with each prescribed vertex $c_i$.",
+   "uses": [
+    "lem-coef-infinity-local-union-cell-attachment"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proof of Proposition 4.2.3.4, printed p.250, vertex case."
+   }
+  },
+  {
+   "text": "For any map already defined on an intermediate stage and extending $q_0$, consider a positive chain $\\tau=(i_0<\\cdots<i_n)$ and put $a=p|_{K_{i_0}}$. The natural sharp-join correspondence in [lem-coef-infinity-join-cocone-associativity], applied to $L=\\partial\\Delta^n$ and $L=\\Delta^n$, identifies its prescribed cell-boundary map with $b:\\partial\\Delta^n\\to J_a$ and identifies extensions, with that entire boundary fixed. Here $J_a=S_a(\\mathcal E)$ is the same join slice as in [lem-coef-join-slice-cocone-comparison].",
+   "uses": [
+    "lem-coef-infinity-join-cocone-associativity",
+    "lem-coef-join-slice-cocone-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proof of Proposition 4.2.3.4, printed p.250, transposition into the join slice."
+   }
+  },
+  {
+   "text": "The join-slice comparison makes $J_a$ a quasicategory and identifies $b(0)$ with the coherent cocone of the chosen join representative on $K_{i_0}\\star\\{i_0\\}$, since the first-vertex cone is in $M_0$ and the map extends $q_0$. That cocone is colimiting by step 1, so $b(0)$ is initial. Apply [lem-coef-infinity-relative-initial-boundary] to the inner fibration $J_a\\to\\Delta^0$: relative initiality here is initiality, as the base mapping space is a point. Its boundary criterion, for $n\\geq1$, supplies a filler $\\Delta^n\\to J_a$ fixing $b$. This includes $K_{i_0}=\\varnothing$, when $J_a=\\mathcal E$.",
+   "uses": [
+    "lem-coef-join-slice-cocone-comparison",
+    "lem-coef-infinity-relative-initial-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proof of Proposition 4.2.3.4, printed p.250, initial-first-vertex extension."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-local-union-transfinite-extension] to the filtration of step 2, initial subset $M_0$, and map $q_0$. Steps 4 and 5 give its extension hypothesis for every intermediate map restricting to $q_0$; step 2 supplies its pushouts and continuity. It therefore gives $q:M\\to\\mathcal E$ with $q|_{M_0}=q_0$, in particular $q|_K=p$ and all the prescribed local cone representatives fixed.",
+   "uses": [
+    "lem-coef-infinity-local-union-transfinite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proof of Proposition 4.2.3.4, printed p.250, transfinite compatible extensions."
+   }
+  },
+  {
+   "text": "Put $c=q|_{N(I)}$. The mixed triangles identify the leg to $c_j$ with its composite through $c_i$ whenever $i\\leq j$, and longer mixed simplices give the higher compatibilities. Since $q$ restricts to the chosen cone representatives on $K_i\\star\\{i\\}$, these are exactly the transitions induced by restriction of the chosen cocones.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+    "place": "Proof of Proposition 4.2.3.4, assembled diagram and its transitions."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-decomposition-local-colimit-cocones] to the small ordinary category $I$, its subset functor $F$ and the particular extension $q$ of step 6. Its local cone $q\\iota_i$ is the chosen colimiting join representative on $K_i\\star\\{i\\}$, so its only local-colimit hypothesis holds for every $i$. The identification $M=K_F$ in step 1 identifies its actual restriction map with\n$$\\alpha_t:\\operatorname{Map}_{\\operatorname{Fun}(M,\\mathcal E)}(q,\\Delta_Mt)\\longrightarrow\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal E)}(p,\\Delta_Kt).$$\nThe cited statement makes this an equivalence, natural in $t$ and compatible with coherent postcomposition of cocones. Its hypotheses explicitly allow arbitrary simplicial subsets, including empty ones, and assume no colimits beyond the displayed local cocones.",
    "uses": [
     "lem-coef-decomposition-local-colimit-cocones"
    ],
@@ -108,7 +162,7 @@
    }
   },
   {
-   "text": "Finally use $Hq:M\\to\\mathcal E'$ and the same simplicial collage. Its local cone maps are the images of the chosen ones and are colimiting by the stated hypothesis. Thus [lem-coef-decomposition-local-colimit-cocones] gives the counterpart of $\\alpha$ for $Hq$, while the right-anodyne inclusion from step 4 and [lem-coef-infinity-anodyne-cocones] give the counterpart of $\\beta$. Postcomposition sends the restriction span $(\\alpha_t,\\beta_t)$ to that span for $Hq$ and $H(t)$: both squares commute because restriction and postcomposition commute as simplicial maps. Their inverses therefore commute up to coherent equivalence. The local-cone representatives are also carried to representatives of the image cocones, since the join-to-transformation map is fixed on the indexing sets. This proves functor compatibility with assembly $Hc$. If $K_i$ is empty the required local cocone is an initial object and the cell extension of step 2 still applies, with $J_a=\\mathcal E$. If $K$ is empty, then every $K_i$ is empty and $M=N(I)$; the right-anodyne comparison is the identity, and the first restriction equivalence compares with the one-point space of empty cocones. Hence both empty cases are included and only the displayed local colimits have been used.",
+   "text": "Finally use $Hq:M\\to\\mathcal E'$ and the same simplicial collage. Its local cone maps are the images of the chosen ones and are colimiting by the stated hypothesis. Thus [lem-coef-decomposition-local-colimit-cocones] gives the counterpart of $\\alpha$ for $Hq$, while the right-anodyne inclusion from step 9 and [lem-coef-infinity-anodyne-cocones] give the counterpart of $\\beta$. Postcomposition sends the restriction span $(\\alpha_t,\\beta_t)$ to that span for $Hq$ and $H(t)$: both squares commute because restriction and postcomposition commute as simplicial maps. Their inverses therefore commute up to coherent equivalence. The local-cone representatives are also carried to representatives of the image cocones, since the join-to-transformation map is fixed on the indexing sets. This proves functor compatibility with assembly $Hc$. If $K_i$ is empty the required local cocone is an initial object and the cell extension of steps 4–6 still applies, with $J_a=\\mathcal E$. If $K$ is empty, then every $K_i$ is empty and $M=N(I)$; the right-anodyne comparison is the identity, and the first restriction equivalence compares with the one-point space of empty cocones. Hence both empty cases are included and only the displayed local colimits have been used.",
    "uses": [
     "lem-coef-decomposition-local-colimit-cocones",
     "lem-coef-infinity-anodyne-cocones",
@@ -125,9 +179,11 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-join-cone-calculus",
   "lem-coef-decomposition-local-colimit-cocones",
+  "lem-coef-infinity-local-union-cell-attachment",
+  "lem-coef-infinity-join-cocone-associativity",
   "lem-coef-join-slice-cocone-comparison",
   "lem-coef-infinity-relative-initial-boundary",
-  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-infinity-local-union-transfinite-extension",
   "lem-coef-directed-decomposition-right-anodyne",
   "lem-coef-infinity-anodyne-cocones",
   "lem-cbc-enhanced-functor-cone-calculus"
@@ -217,7 +273,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-limits-products-pullbacks",
@@ -242,8 +298,8 @@
   "date": "2026-10-17",
   "item": "lem-coef-infinity-directed-union-local-colimits",
   "worker": "stage1",
-  "summary": "Constructed the covering collage and coherent assembly cell by cell, extending each cell through the join slice of the existing join-slice comparison and the existing relative-initial boundary-filling lemma, then used the existing decomposition-local-colimit-cocones and directed-decomposition-right-anodyne nodes for the two natural restriction comparisons. Proved the leg, colimit and functor compatibilities without cocompleteness. No new node: the proposed finite-simplex attachment node was folded into step 2 by the maintainer reader, since it is a few-line consequence of existing nodes; an exact duplicate proposed join node had already been removed.",
-  "blueprint": "Proof paragraph 2, the mapping-complex adjunction infrastructure: Passing from the skeleta to their union in HTT Proposition 4.4.2.6, used in Proposition 4.4.2.7; local colimit comparison, with no assumption of all small colimits. The seven steps supply the local directed-union comparison needed in the inherited HTT skeletal colimit infrastructure.",
+  "summary": "Repaired the returned 2693-character cell-induction step with six short steps. Extracted the collage pushout/intersection calculation and transfinite extension with fixed initial data as two statement-only nodes; reused the existing sharp-join correspondence for boundary transposition. Statement and Lean record unchanged; all other proof steps retained, with numeric cross-references updated.",
+  "blueprint": "Inherited mapping-complex adjunction infrastructure below prop-coef-integral-exceptional-adjoint, proof paragraph 2. Steps 2–7 expand the assembly argument of HTT Proposition 4.2.3.4, printed p.250, without altering the remaining local-colimit and right-anodyne comparison route in steps 8–12.",
   "tool_uses": [
    {
     "node": "lem-cbc-enhanced-functor-cone-calculus",
@@ -255,12 +311,12 @@
   "lem-cbc-enhanced-functor-cone-calculus"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q108-851e8c83a",
-  "group": "Q108",
+  "reviewer": "NT-cc-Q95-b24d53300",
+  "group": "Q95",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-851e8c83a (reviewer sub-agent of L); spot-checked: Read the item, the new node, all seven cited node statements and the unit/chapter route. Also read the possible duplicates: relative-initial-boundary, join-slice-cocone-comparison, terminal-boundary-extension, fiber-cocone-simplex-extension, parameter-cone-extension, relative-join-simplex-extension, directed-cover-colimit-assembly (with proof), colimit-subdiagram-approximation and directed-cone-cover (with proof). Checked against HTT §4.2.3: Notation 4.2.3.1, Prop 4.2.3.4, Prop 4.2.3.8, Rem 4.2.3.9 and Cor 4.2.3.10. HTT is not archived and remains WANTED, so printed pages were not checked. The item statement is the directed-subset case of 4.2.3.10, with no cocompleteness, no weakening, and the empty K/K_i cases included. Tested: K=Δ¹ with I={0<1}; two points with I={0,1<2}; K=∅; some K_i empty. Step 1: M equals both cited K_F constructions degreewise and operatorwise; join representatives come from the fixed-boundary, fixed-vertex join-cone equivalence. Steps 3–7: every hypothesis of decomposition-local-colimit-cocones, directed-decomposition-right-anodyne and anodyne-cocones holds; the colimit criterion and H-compatibility are correct. No cycles. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus as a generic criterion. Fault (C1/C5): the new node lem-coef-infinity-universal-simplex-attachment is true but follows in a few lines from existing same-unit nodes, which the worker's search missed. These are lem-coef-join-slice-cocone-comparison (J_a is a quasicategory, and a vertex is initial iff its cocone is colimiting, L=∅ included) and lem-coef-infinity-relative-initial-boundary over Δ⁰ (an initial first vertex fills the boundary for n≥1). The parallel directed-cover-colimit-assembly step 2 makes the same calculation. Fixed: folded it into step 2 with an explicit pushout and join-slice identification, updated step 7, recomputed proof_deps, updated split_report.summary, and removed every citation of the dropped node. Note: the report says created.item was changed, but the file correctly keeps lem-coef-infinity-limits-products-pullbacks; left unchanged.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-b24d53300 (reviewer sub-agent of L); spot-checked: I read in full the item, its 12 steps, both new nodes and the statements of all 9 cited nodes. I also read the possible duplicates: directed-cover-colimit-assembly, transfinite-left-lifting, monomorphism-boundary-cells and weil-pbc-transfinite-recursion. Source is HTT 4.2.3.1/4.2.3.4/4.2.3.8-4.2.3.10. HTT is not archived and remains WANTED, the proof is marked agent, and I could not check printed pages. The route matches the HTT construction (K_F filtered over N(I), cellwise initial-vertex filling in the join slice, right-anodyne N(I)->K_F). Item statement unchanged and not weakened; empty K and K_i covered. Not a target node, so no base-change or coefficient-category issue. cell-attachment checked directly: injective because tau is a strict chain; tau∘alpha lies in Y iff alpha is not surjective, so the intersection is exactly K_{i0}*dDelta^n; the union over the intersection is a pushout; at the vertex stage the cones meet only in K. Tested on |I|=1, {0<1} with K_0 strictly inside K_1, K_0 empty, K empty. transfinite-extension is true by recursion with unions at limits. Its hypothesis restricted to g extending f_0 is genuinely needed by step 5, so it does not duplicate the unrestricted transfinite-left-lifting. Neither new node restates the item; both are statement-only with B1-B4 and blueprint fields correct. Steps 4-6 apply join-cocone-associativity (S_a(E)=J_a), join-slice initial-iff-colimiting and relative-initial-boundary over Delta^0 correctly. Steps 8-12 check out: hypotheses of decomposition-local-colimit-cocones, directed-decomposition-right-anodyne and anodyne-cocones verified. No cycle. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus. FIX, proof text only: steps 1 and 5 now say that each join representative's cocone is equivalent to lambda_i and so colimiting, which justifies 'b(0) initial' and step 8's hypothesis; the old text treated the representative as the chosen cocone itself. Corrected item file at fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",

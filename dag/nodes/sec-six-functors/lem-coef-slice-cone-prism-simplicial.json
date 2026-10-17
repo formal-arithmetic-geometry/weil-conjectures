@@ -9,11 +9,133 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-relative-cone",
   "def-coef-infinity-relative-join"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The stated operators make $L$ a simplicial set: if $\\widehat\\alpha:[l+1]\\to[m+1]$ extends $\\alpha$ by its new last vertex, then $\\widehat{1}=1$ and $\\widehat{\\alpha\\beta}=\\widehat\\alpha\\widehat\\beta$, and $\\tau\\widehat\\alpha$ still ends at $c$. The degreewise join formula of [def-coef-infinity-relative-cone] gives every $w\\in W_n$ a unique cut $-1\\leq r\\leq n$, a base simplex $\\tau$ when $r\\geq0$, and the unique final simplex of $\\Delta^0$. Under $\\alpha:[l]\\to[n]$ its new base block is the initial segment $\\alpha^{-1}\\{0,\\ldots,r\\}$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0302",
+    "place": "Proposition 7.3.5.5, final construction of gamma-minus: rho and rho-prime. Explicit degreewise extension over the right cone and operator checks supplied here."
+   }
+  },
+  {
+   "text": "The formulas $\\rho$ and $\\nu$ are monotone. For comparable $(t,j)\\leq(t',j')$, if $\\rho(t,j)=j$, its successor value is either $j'\\geq j$ or $r+1$. If $\\rho(t,j)=r+1$, then $t=t'=1$ and $\\epsilon(j')\\geq\\epsilon(j)=1$, so the successor value is also $r+1$. For $\\nu$, the indices with $j\\leq r$ and $\\epsilon(j)=0$ form an initial segment; on it $\\nu$ is the identity and afterwards is $r+1$. These ordinal maps define simplicial maps: on a $q$-simplex $(u:[q]\\to[1],v:[q]\\to[r])$ the first sends the pair to $k\\mapsto\\rho(u(k),v(k))$, which commutes with precomposition; the same observation applies to $\\nu$. Hence $\\tau\\rho$ is an $r$-simplex of the internal functor simplicial set of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0302",
+    "place": "Proposition 7.3.5.5, final construction of gamma-minus: rho and rho-prime. Explicit degreewise extension over the right cone and operator checks supplied here."
+   }
+  },
+  {
+   "text": "Let $b_r:[n]\\to[1]$ be $0$ on $[r]$ and $1$ on the final block, and let $z$ be the ordinary join simplex with initial block $\\tau\\rho$ and final block constant at $c$. The relative-join equation of [def-coef-infinity-relative-join] holds for $(z,(b_r,\\tau\\nu))$: on the initial block target evaluation of the arrow prism is $j\\mapsto\\tau\\rho(1,j)=\\tau\\nu(j)$, and on the final block $\\tau\\nu$ is the constant simplex at $\\tau(r+1)=c$. Thus this pair is an $n$-simplex of $J$. For $r=n$ the final block is empty and the same equation uses its formal degree $-1$ element. For $r=-1$ the pure $X$-inclusion gives $(z,(1,c_n))$, exactly the specified constant simplex.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-relative-join",
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0302",
+    "place": "Proposition 7.3.5.5, final construction of gamma-minus: rho and rho-prime. Explicit degreewise extension over the right cone and operator checks supplied here."
+   }
+  },
+  {
+   "text": "Fix $\\alpha:[l]\\to[n]$, suppose $r\\geq0$, and suppose the inverse-image base block is nonempty, with last index $r'$. Write $\\beta:[r']\\to[r]$ for $\\beta(k)=\\alpha(k)$ and $\\widehat\\beta:[r'+1]\\to[r+1]$ for its extension taking the last vertex to $r+1$. The restricted base is $\\tau'=\\tau\\widehat\\beta$, and the restricted interval is $\\epsilon'=\\epsilon\\alpha$. If $\\rho',\\nu'$ denote the displayed formulas for these restricted data, then\n$$\\widehat\\beta\\rho'(t,k)=\\rho(t,\\beta(k)),\\qquad \\widehat\\beta\\nu'(k)=\\nu(\\alpha(k)).$$\nFor the first identity, $t=1$ and $\\epsilon'(k)=1$ make both sides $r+1$; otherwise both are $\\alpha(k)$. For the second, when $k\\leq r'$ and $\\epsilon'(k)=0$ both are $\\alpha(k)$; all other cases make both $r+1$, since $k>r'$ implies $\\alpha(k)>r$.",
+   "uses": [
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0302",
+    "place": "Proposition 7.3.5.5, final construction of gamma-minus: rho and rho-prime. Explicit degreewise extension over the right cone and operator checks supplied here."
+   }
+  },
+  {
+   "text": "The identities of step 4 show equality of all coordinates after restriction. The initial arrow simplex becomes $\\tau\\rho(1\\times\\beta)=\\tau'\\rho'$, and the full target coordinate becomes $\\tau\\nu\\alpha=\\tau'\\nu'$. The final block remains constant at $c$, with the unique empty-block value when necessary, and its cut parameter is $b_r\\alpha=b_{r'}$. By the degreewise operator of [def-coef-infinity-relative-join], these are exactly the coordinates of $\\alpha^*G_n(\\epsilon,w)$, so they equal $G_l(\\epsilon\\alpha,\\alpha^*w)$. This includes $r=n$, $r'=l$, repeated values of $\\alpha$, and omitted vertices.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-relative-join",
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0302",
+    "place": "Proposition 7.3.5.5, final construction of gamma-minus: rho and rho-prime. Explicit degreewise extension over the right cone and operator checks supplied here."
+   }
+  },
+  {
+   "text": "If $r\\geq0$ but the inverse-image base block is empty, every $\\alpha(k)>r$, so $\\nu\\alpha$ is constant at $r+1$. Restriction deletes the entire arrow block and leaves the pure $X$-simplex $c_l$, including its constant target coordinate. This equals the rule for the new cut $r'=-1$. If already $r=-1$, restriction of a constant simplex is constant. Thus the operator equality holds for every monotone $\\alpha$, including those deleting either whole join block. Together with step 5 it proves all face and degeneracy equations and defines the asserted simplicial map $G$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-relative-join",
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0302",
+    "place": "Proposition 7.3.5.5, final construction of gamma-minus: rho and rho-prime. Explicit degreewise extension over the right cone and operator checks supplied here."
+   }
+  },
+  {
+   "text": "For a pointed simplicial map $h:(X,c)\\to(X',c')$, the slice map takes $\\tau$ to $h\\tau$, preserving the cut, and the induced arrow map is postcomposition by $h$. Therefore the initial prism becomes $(h\\tau)\\rho=h(\\tau\\rho)$, the target coordinate becomes $(h\\tau)\\nu=h(\\tau\\nu)$, and the final constant block becomes constant at $c'$. The induced relative-join map has exactly these coordinates by [def-coef-infinity-relative-join]. The pure-factor case is also preserved, proving naturality in all degrees.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-relative-join",
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0302",
+    "place": "Proposition 7.3.5.5, final construction of gamma-minus: rho and rho-prime. Explicit degreewise extension over the right cone and operator checks supplied here."
+   }
+  },
+  {
+   "text": "For a base vertex $e:a\\to c$, restrict to $\\Delta^1\\times\\{e\\}$. All its join cuts are pure initial cuts, so its image lies in the arrow factor. To compute its nondegenerate edge, take $n=r=1$, $\\epsilon(j)=j$, and let $\\tau$ be the degeneracy of $e$ given by $[2]\\to[1]$, $0,1\\mapsto0$ and $2\\mapsto1$. The arrow prism has value $a$ at $(0,0),(1,0),(0,1)$ and $c$ at $(1,1)$; as a simplicial map it is $e$ precomposed with the monotone map $(t,j)\\mapsto1$ exactly when $t=j=1$. At homotopy time $j=0$ its arrow is $1_a$; at $j=1$ it is $e$. Its source side $t=0$ is $1_a$ and its target side $t=1$ is $e$. This specifies the requested square, including its simplices, rather than just its vertices.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-relative-join",
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0302",
+    "place": "Proposition 7.3.5.5, final construction of gamma-minus: rho and rho-prime. Explicit degreewise extension over the right cone and operator checks supplied here."
+   }
+  },
+  {
+   "text": "On $\\Delta^1$ times the cone vertex every $w$ is pure final, so $r=-1$ in every degree. The rule is independent of $\\epsilon$ and always gives $i_X(c_n)$, the constant simplicial map at the pure $X$-vertex $c$. Every construction above used only precomposition, the explicit ordinal formulas, and degreewise joins and pullbacks; hence it applies to every pointed small simplicial set without any horn-filling hypothesis.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-relative-join",
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0302",
+    "place": "Proposition 7.3.5.5, final construction of gamma-minus: rho and rho-prime. Explicit degreewise extension over the right cone and operator checks supplied here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-relative-cone",
+  "def-coef-infinity-relative-join"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/0302",
+  "place": "Proposition 7.3.5.5, final rho/rho-prime construction; its claimed functoriality and extension across the cone are proved explicitly by ordinal identities here."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,10 +178,52 @@
    "results": "{\"t\": \"2026-10-17T08:43:12Z\", \"tool\": \"loogle\", \"query\": \"SSet, \\\"slice\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "No match: returned Cones.postcomposeId/extendId and SmallObject.epsilon concern ordinary categories; StrictSegal Kan-extension hits concern coskeletal simplicial objects, and PtSimplex.MulStruct/RelStruct hits concern Kan homotopy multiplication. Neither the right-slice relative join nor the displayed ordinal formula compatibility is stated. Focused AlgebraicTopology grep and both Loogle patterns found no match."
+  },
+  {
+   "tool": "grep",
+   "query": "slice.*cone|cone.*slice|relativeJoin|relative_join|prism",
+   "results": "{\"t\": \"2026-10-17T12:48:46Z\", \"tool\": \"grep\", \"query\": \"slice.*cone|cone.*slice|relativeJoin|relative_join|prism\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categorical cones, coskeleta, general interval inclusions or homotopies, and pointed Kan multiplication; none constructs the stated right-slice relative-join map. Source grep and Loogle found no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simplicial homotopy from identity arrows to arrows ending at a fixed vertex extends over the right slice cone",
+   "results": "{\"t\": \"2026-10-17T12:48:47Z\", \"tool\": \"leansearch\", \"query\": \"Simplicial homotopy from identity arrows to arrows ending at a fixed vertex extends over the right slice cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Cones.extendId_hom_hom\", \"CategoryTheory.Limits.Cocones.extendId_hom_hom\", \"CategoryTheory.Limits.Cones.extendId\", \"SSet.Truncated.HomotopyCategory.homMk_id\", \"CategoryTheory.SimplicialObject.Truncated.rightExtensionInclusion\", \"CategoryTheory.Limits.Cones.extendId_inv_hom\", \"SSet.RelativeMorphism.Homotopy.mk\", \"CategoryTheory.SimplicialObject.id_right\"], \"digest\": \"4ef8505a485a978d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categorical cones, coskeleta, general interval inclusions or homotopies, and pointed Kan multiplication; none constructs the stated right-slice relative-join map. Source grep and Loogle found no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet, \"prism\"",
+   "results": "{\"t\": \"2026-10-17T12:48:47Z\", \"tool\": \"loogle\", \"query\": \"SSet, \\\"prism\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categorical cones, coskeleta, general interval inclusions or homotopies, and pointed Kan multiplication; none constructs the stated right-slice relative-join map. Source grep and Loogle found no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Explicit ordinal prism on a right slice cone defines a natural simplicial map to the relative join of the arrow simplicial set and its target",
+   "results": "{\"t\": \"2026-10-17T12:48:57Z\", \"tool\": \"leanfinder\", \"query\": \"Explicit ordinal prism on a right slice cone defines a natural simplicial map to the relative join of the arrow simplicial set and its target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.ι₁\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"SSet.horn.ι\", \"SSet.horn.multicoequalizerDiagram\", \"SSet.ι₀\", \"SSet.PtSimplex.MulStruct.map\"], \"digest\": \"06f1487da813c5b1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categorical cones, coskeleta, general interval inclusions or homotopies, and pointed Kan multiplication; none constructs the stated right-slice relative-join map. Source grep and Loogle found no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet, \"slice\"",
+   "results": "{\"t\": \"2026-10-17T12:49:12Z\", \"tool\": \"loogle\", \"query\": \"SSet, \\\"slice\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categorical cones, coskeleta, general interval inclusions or homotopies, and pointed Kan multiplication; none constructs the stated right-slice relative-join map. Source grep and Loogle found no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monotone maps of finite ordinals defining a homotopy on an over simplicial set commute with all faces and degeneracies including empty join blocks",
+   "results": "{\"t\": \"2026-10-17T12:49:23Z\", \"tool\": \"leanfinder\", \"query\": \"Monotone maps of finite ordinals defining a homotopy on an over simplicial set commute with all faces and degeneracies including empty join blocks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.σ_naturality_apply\", \"SSet.RelativeMorphism.Homotopy.rel\", \"SSet.PtSimplex.MulStruct.δ_map_of_lt\", \"SSet.PtSimplex.RelStruct.δ_map_of_lt\", \"SSet.PtSimplex.MulStruct.δ_map_of_gt\", \"SSet.PtSimplex.RelStruct.δ_map_of_gt\", \"SSet.PtSimplex.MulStruct.δ_castSucc_castSucc_map\", \"SSet.PtSimplex.MulStruct.δ_castSucc_castSucc_map_assoc\"], \"digest\": \"508cc87c18ac2eb9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary categorical cones, coskeleta, general interval inclusions or homotopies, and pointed Kan multiplication; none constructs the stated right-slice relative-join map. Source grep and Loogle found no hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-arrow-join-geometry",
@@ -86,5 +250,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-slice-cone-prism-simplicial",
+  "worker": "stage1",
+  "summary": "Expanded the ordinal prism construction into nine explicit elementary steps, verifying the pullback equation, every simplicial operator including disappearance of whole blocks, pointed naturality and the two component requirements. Statement unchanged; no new nodes. No project attachment or Mathlib match found.",
+  "blueprint": "Realizes the slice-cone interpolation subargument extracted from the gamma-minus construction in proof step 9 of lem-coef-infinity-arrow-join-geometry, within the inherited ancestry of paragraph 2 (derived coefficient adjunction) of prop-coef-integral-exceptional-adjoint. No change of unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-55f47343d",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-55f47343d (reviewer sub-agent of L); spot-checked: I read in full the item, the definition statements it cites (def-cbc-enhanced-diagrams-cones, def-coef-infinity-relative-cone, def-coef-infinity-relative-join), the parent lem-coef-infinity-arrow-join-geometry (it uses the item in step 9) and the inherited unit. I read the source online: Kerodon 0302, Prop. 7.3.5.5, the gamma-minus construction. Its rho/rho' formulas are exactly the item's rho/nu with n=r. Kerodon writes the composites in the reverse order, and the item's tau.rho and tau.nu are correctly typed. Kerodon only asserts functoriality and the extension over the cone point, and the item proves both, so proof_origin=agent is right. I rechecked every step. Steps 1-2: the extended operators of L are functorial; rho and nu are monotone (an initial-segment argument) and define simplicial maps. Step 3: target evaluation of the prism equals tau.nu on [0,r], and the final block is constant at c; this covers r=n and r=-1. Steps 4-6: I recomputed the restriction identities, which rest on the fact that k<=r' exactly when alpha(k)<=r; I also checked the case where the whole base block disappears (nu.alpha constant at r+1). Step 7: naturality through the induced relative-join formula. Step 8: the square at e:a->c has values a,a,a,c, sides 1_a and e. Step 9: the apex maps to the constant c. The parent's endpoints follow from the stated formulas (constant epsilon=0 gives T_c, constant epsilon=1 gives T_c^-). My own enumeration covered n,l<=4, all cuts, all monotone epsilon and alpha: 13,241 cases, all passing. There are no new nodes. The duplicate search (rg for 0302, 7.3.5.5, slice cone, prism, right join cone; the fixed-source-prism, collage, cocone-extension and straightening nodes were read) found no duplicate and no restated clause. No cycle, no SGA, no coefficient category or base change, no tool_uses. One fix: stmt_deps gains def-coef-infinity-relative-cone, because the statement uses the join and W=L*Delta^0 defined there (B3); the statement text is unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

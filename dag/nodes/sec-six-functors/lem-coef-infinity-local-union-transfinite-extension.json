@@ -1,0 +1,76 @@
+{
+ "id": "lem-coef-infinity-local-union-transfinite-extension",
+ "kind": "statement",
+ "title": "Transfinite gluing of cellwise simplicial extensions",
+ "statement": "Use simplicial sets, simplicial subsets and simplicial maps from [def-cbc-enhanced-diagrams-cones]. Let $\\theta$ be a small ordinal and $(X_\\alpha)_{\\alpha\\leq\\theta}$ an increasing family of simplicial subsets of a small simplicial set $X_\\theta$, with $X_\\beta=\\bigcup_{\\alpha<\\beta}X_\\alpha$ for every nonzero limit ordinal $\\beta\\leq\\theta$. For each $\\alpha<\\theta$ let $A_\\alpha\\hookrightarrow B_\\alpha$ be any degreewise injective simplicial map, with a map $A_\\alpha\\to X_\\alpha$, and suppose the resulting square with bottom right corner $X_{\\alpha+1}$ is a pushout, so $X_{\\alpha+1}\\cong X_\\alpha\\amalg_{A_\\alpha}B_\\alpha$. Let $E$ be any simplicial set and $f_0:X_0\\to E$ a simplicial map. Suppose that for every $\\alpha<\\theta$ and every simplicial map $g:X_\\alpha\\to E$ whose restriction to $X_0$ is $f_0$, the composite $A_\\alpha\\to X_\\alpha\\xrightarrow{g}E$ extends to a simplicial map $B_\\alpha\\to E$. Then there are simplicial maps $f_\\alpha:X_\\alpha\\to E$ for all $\\alpha\\leq\\theta$, starting at the given $f_0$, such that $f_\\beta|_{X_\\alpha}=f_\\alpha$ whenever $\\alpha\\leq\\beta\\leq\\theta$. In particular $f_\\theta$ extends $f_0$. The assertion permits $\\theta=0$, empty $X_0$, and arbitrary coproducts of cell inclusions as $A_\\alpha\\hookrightarrow B_\\alpha$.",
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/highertopoi.pdf",
+  "place": "Proof of Proposition 4.2.3.4, printed p.250: transfinite construction with fixed initial data and union at limit stages; general pushout-cell formulation of the argument. Read online 2026-10-17; not archived in literature/ (WANTED)."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A map on a simplicial subset extends over a transfinite sequence of arbitrary pushout attachments if every attached cell map extends with the prescribed boundary",
+   "results": "{\"t\": \"2026-10-17T10:43:42Z\", \"tool\": \"leanfinder\", \"query\": \"A map on a simplicial subset extends over a transfinite sequence of arbitrary pushout attachments if every attached cell map extends with the prescribed boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RelativeCellComplex.attachCells\", \"HomotopicalAlgebra.RelativeCellComplex.toTransfiniteCompositionOfShape\", \"HomotopicalAlgebra.RelativeCellComplex.transfiniteCompositionOfShape\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.k\", \"HomotopicalAlgebra.RelativeCellComplex\", \"HomotopicalAlgebra.RelativeCellComplex.Cells.ι\", \"CategoryTheory.SmallObject.attachCellsOfSuccStructProp\", \"HomotopicalAlgebra.RelativeCellComplex.mk.inj\"], \"digest\": \"5dd8327620f1e3ed\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: RelativeCellComplex.attachCells supplies attachments, not extension with fixed initial data."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasLiftingProperty\", \"transfinite\"",
+   "results": "{\"t\": \"2026-10-17T10:43:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"HasLiftingProperty\\\", \\\"transfinite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.HasLiftingProperty.transfiniteComposition.SqStruct\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.sqFunctor\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.SqStruct.f'\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.SqStruct.map\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.sqFunctor_obj\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.SqStruct.ext\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.SqStruct.ext_iff\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.SqStruct.map_f'\"], \"digest\": \"cb4fa3797ba226f9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: HasLiftingProperty.transfiniteComposition hasLift requires successor lifting for all top maps; here the extension hypothesis is restricted to maps agreeing with a fixed f_0. Applying it in an undercategory needs a separate identification, so is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "hasLift|hasLiftingPropertyFixedBot_ι_app_bot",
+   "results": "{\"t\": \"2026-10-17T10:45:22Z\", \"tool\": \"grep\", \"query\": \"hasLift|hasLiftingPropertyFixedBot_ι_app_bot\", \"sub\": \"CategoryTheory/SmallObject\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean\", \"Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean\", \"Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean\", \"Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean\", \"Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean\", \"Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean\"], \"digest\": \"663cc29839861635\"}",
+   "date": "2026-10-17",
+   "verdict": "no match after reading Mathlib/CategoryTheory/SmallObject/TransfiniteCompositionLifting.lean:200-245: fixed-bottom lifting is still quantified over every top map, whereas this statement imposes fixed initial data."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Any map from the first simplicial subset in a continuous ordinal filtration extends to the union if every extension at a successor stage is possible",
+   "results": "{\"t\": \"2026-10-17T10:45:31Z\", \"tool\": \"leansearch\", \"query\": \"Any map from the first simplicial subset in a continuous ordinal filtration extends to the union if every extension at a successor stage is possible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialThickening.rec\", \"CategoryTheory.SimplicialThickening\", \"SSet.iSup_skeletonOfMono\", \"CategoryTheory.SmallObject.transfiniteCompositionOfShapeSuccStructPropιIteration\", \"IsFiltration.recOn\", \"SSet.Truncated.rightExtensionInclusion\", \"SSet.instIsStableUnderFilteredColimitsMonomorphisms\", \"Field.Emb.Cardinal.filtration\"], \"digest\": \"34bca1be7983413e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: iSup_skeletonOfMono and stability of monomorphisms under filtered colimits do not give the asserted compatible extensions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-infinity-directed-union-local-colimits",
+  "date": "2026-10-17",
+  "group": "Q95"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, passage from the cellwise extensions to the map on the union: well order the cells and take unions at limit ordinals.",
+   "via": [
+    "lem-coef-infinity-directed-union-local-colimits",
+    "lem-coef-infinity-limits-products-pullbacks",
+    "lem-coef-spaces-kappa-limit-filtered-colimit",
+    "lem-coef-space-presheaf-presentability",
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

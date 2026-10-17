@@ -11,9 +11,123 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-isofibration-exponentiation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Unfold the degreewise pullback from [def-cbc-enhanced-diagrams-cones]: an $n$-simplex of $E$ is $(a,c)$ with $y(a)=\\pi(c)$, and operators act on both coordinates. Thus $\\pi r=ys$ exactly. Given an inner horn in $E$, fill its $A$ coordinate to $a:\\Delta^n\\to A$. The $C$ coordinate of the horn and the bottom simplex $ya$ form an inner-horn lifting problem for $\\pi$. The inner-fibration condition in [lem-coef-infinity-isofibration-exponentiation] supplies $c:\\Delta^n\\to C$ with $\\pi c=ya$. The pair $(a,c)$ fills the original horn, so $E$ is a quasicategory. This conditional construction requires no vertex of $E$ when no horn map exists.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/033R",
+    "place": "Corollary 4.5.3.28, quasicategory condition expanded directly from inner-horn lifting."
+   }
+  },
+  {
+   "text": "Fix any small quasicategory $Q$ in the chosen universe. Write $F_X=\\operatorname{Fun}(Q,X)$ for $X=A,B,C,E$. The identity of a quasicategory is an isofibration: the bottom simplex or equivalence edge is itself a filler. Apply [lem-coef-infinity-isofibration-exponentiation] with the inclusion $\\varnothing\\hookrightarrow Q$ and each identity map. Since $\\operatorname{Fun}(\\varnothing,X)=\\Delta^0$, this proves that every $F_X$ is a quasicategory. Its terminal map $F_X\\to\\Delta^0$ is an isofibration: fill inner horns in $F_X$ and lift the constant equivalence by an identity edge. Therefore [lem-coef-infinity-core-kan-fibration] makes $F_X^\\simeq$ Kan. Put $U=F_A^\\simeq$, $G=F_B^\\simeq$, $V=F_C^\\simeq$, and $J=F_E^\\simeq$. Postcomposition induces simplicial maps $Y:U\\to G$, $v:V\\to G$, and $\\rho_Q:J\\to V$. Simplicial maps preserve equivalence edges because they preserve their inverses and both witness triangles.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-core-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01EZ",
+    "place": "Proposition 4.4.3.7 applied to the terminal maps of the functor quasicategories; exponential construction as in the existing exponentiation node."
+   }
+  },
+  {
+   "text": "Choose the quasi-inverse $z:B\\to A$ and coherent natural equivalences $\\eta:zy\\simeq\\operatorname{id}_A$, $\\epsilon:yz\\simeq\\operatorname{id}_B$ supplied by the hypothesis on $y$, using [def-cbc-enhanced-diagrams-cones]. Postcomposition by $y,z$ gives maps $Y_0:F_A\\to F_B$, $Z_0:F_B\\to F_A$. Whiskering $\\eta$ gives a homotopy $Z_0Y_0\\to\\operatorname{id}_{F_A}$: evaluated on $(f,q,t)$ it is $\\eta(f(q),t)$. This is simplicial since evaluation and composition commute with every operator. More explicitly, the simplicial map $\\operatorname{Fun}(A,A)\\to\\operatorname{Fun}(F_A,F_A)$ sends an $n$-simplex $a:A\\times\\Delta^n\\to A$ to $(f,t)\\mapsto(q\\mapsto a(f(q),t))$. It sends the chosen inverse edge and the two witness triangles for $\\eta$ to such witnesses for its whiskering. Whiskering $\\epsilon$ by the identical construction gives an equivalence edge $Y_0Z_0\\simeq\\operatorname{id}_{F_B}$. Thus these are actual coherent equivalences, including their inverse witnesses.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01DK",
+    "place": "Elementary evaluation/whiskering expansion of coherent natural equivalences; compare Theorem 4.4.4.4, without using its converse."
+   }
+  },
+  {
+   "text": "The homotopies in Step 3 restrict to simplicial homotopies on $U$ and $G$. Here is the edge check for the first one. Its component at a vertex $f$ is an equivalence, by applying evaluation at $f$ to its inverse witnesses. An edge of $U\\times\\Delta^1$ either stays at one endpoint or goes from $(f,0)$ to $(f',1)$ along an equivalence $a:f\\to f'$ in $U$. In the latter case the triangle with vertices $(f,0),(f',0),(f',1)$ shows that its image has class $[\\eta_Q(f')]\\,[Z_0Y_0(a)]$ in $hF_A$. Both factors are invertible. By [lem-coef-homotopy-category-triangle-calculus], an inverse class is represented by an edge and its two inverse equalities have triangle witnesses. Hence the image edge is an equivalence. Every edge of every image simplex is therefore an equivalence, so that simplex lies in the core by definition. The same check with $F_B$ and $\\epsilon_Q$ treats the other homotopy. Postcomposition by $z$ also preserves cores. Consequently $Y:U\\to G$ has a simplicial homotopy inverse; [lem-cbc-simplicial-homotopy-equivalence-weak] makes $Y$ a weak homotopy equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-homotopy-category-triangle-calculus",
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00UB",
+    "place": "Proposition 3.1.7.13, forward implication; the restriction to cores is the explicit triangle calculation here."
+   }
+  },
+  {
+   "text": "Use the path-space model $P(u,w)$ for a homotopy pullback specified in [lem-coef-kan-homotopy-pullback-invariance]. Compare the cospans $U\\xrightarrow{Y}G\\xleftarrow{v}V$ and $G\\xrightarrow{\\operatorname{id}}G\\xleftarrow{v}V$ by vertical maps $Y,\\operatorname{id}_G,\\operatorname{id}_V$. Their squares commute exactly, all objects are Kan by Step 2, and all vertical maps are weak homotopy equivalences by Step 4 or are identities. That node gives a weak homotopy equivalence $a:P(Y,v)\\to P(\\operatorname{id}_G,v)$, with formula $(u,w,\\gamma)\\mapsto(Yu,w,\\gamma)$. In particular this map preserves the $V$ coordinate.",
+   "uses": [
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/032B",
+    "place": "Proposition 3.4.0.9, applied with the middle and right vertical maps identities; path model Construction 3.4.0.3 (010B)."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-isofibration-pullback-limit] to $\\pi:C\\to B$ and $y:A\\to B$. It gives a weak homotopy equivalence $c:J\\to P(Y,v)$ whose path coordinate is constant. Also [lem-coef-kan-pullback-path-comparison], applied to $\\operatorname{id}_G:G\\to G$ and $v:V\\to G$, gives a weak homotopy equivalence $j:V\\to P(\\operatorname{id}_G,v)$, $w\\mapsto(vw,w,\\operatorname{const}_{vw})$. Its fibration hypothesis holds because the identity lifts every horn. Let $p:P(\\operatorname{id}_G,v)\\to V$ forget the first and path coordinates. The formula gives $pj=\\operatorname{id}_V$ and $pac=\\rho_Q$ as exact simplicial equalities. The model structure of [lem-coef-kan-quillen-model-right-proper-core] has the realization weak homotopy equivalences as its weak equivalences; its model axioms give composition and two-out-of-three. From $j$ and $pj=\\operatorname{id}$ it follows that $p$ is weak, and then $pac=\\rho_Q$ is weak. This proves the assertion for every $Q$ about the specified postcomposition map.",
+   "uses": [
+    "lem-coef-infinity-isofibration-pullback-limit",
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-kan-quillen-model-right-proper-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/033R",
+    "place": "Corollary 4.5.3.28 and the constant-path comparison, followed by composition and two-out-of-three for weak homotopy equivalences."
+   }
+  },
+  {
+   "text": "Take $Q=C$ in Step 6. Its map $\\rho_C:F_E^\\simeq\\to F_C^\\simeq$ is a weak homotopy equivalence of Kan complexes. By [lem-cbc-kan-whitehead-inverse], choose a simplicial inverse $b_C$ with the two simplicial homotopies in that statement. The vertex $t=b_C(\\operatorname{id}_C)$ is an actual simplicial functor $C\\to E$. Evaluating the homotopy $\\rho_C b_C\\to\\operatorname{id}$ at $\\operatorname{id}_C$ gives an edge $\\alpha:rt\\to\\operatorname{id}_C$ in the core of $\\operatorname{Fun}(C,C)$. Every core edge is an equivalence in that functor quasicategory, so $\\alpha$ is a coherent natural equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-kan-whitehead-inverse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00UB",
+    "place": "Proposition 3.1.7.13, converse, evaluated at the identity functor; this is the first half of the explicit inverse-detection argument."
+   }
+  },
+  {
+   "text": "Take $Q=E$ in Step 6 and apply [lem-cbc-kan-whitehead-inverse] to obtain $b_E:V\\to J$ and a homotopy $b_E\\rho_E\\to\\operatorname{id}_J$, now with $J=\\operatorname{Fun}(E,E)^\\simeq$, $V=\\operatorname{Fun}(E,C)^\\simeq$. Precomposing $\\alpha$ from Step 7 with $r$ gives an equivalence edge $rtr\\to r$ in $V$: precomposition sends both inverse witnesses to inverse witnesses. Applying $b_E$ gives an edge $b_E(rtr)\\to b_E(r)$ in $J$. Evaluating the homotopy at $tr$ and $\\operatorname{id}_E$ gives edges $b_E(rtr)\\to tr$ and $b_E(r)\\to\\operatorname{id}_E$ in $J$. These three edges are equivalences in $\\operatorname{Fun}(E,E)$. Compose their classes, reversing the first of the latter two edges, to obtain an isomorphism $tr\\to\\operatorname{id}_E$ in its homotopy category. By [lem-coef-homotopy-category-triangle-calculus] this class and its inverse have edge representatives and both inverse equations have triangle witnesses. Thus $tr\\simeq\\operatorname{id}_E$ coherently. Together with $rt\\simeq\\operatorname{id}_C$ this makes $r$ a functor equivalence as defined in [def-cbc-enhanced-diagrams-cones]. All the arguments apply when any category is empty; Whitehead and the definitions impose no nonemptiness condition.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-kan-whitehead-inverse",
+    "lem-coef-homotopy-category-triangle-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00UB",
+    "place": "Agent-expanded second half of inverse detection from the core tests, using Proposition 3.1.7.13; no uncited infinity-categorical Yoneda theorem is invoked."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-core-kan-fibration",
+  "lem-coef-homotopy-category-triangle-calculus",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-kan-quillen-model-right-proper-core",
+  "lem-cbc-kan-whitehead-inverse"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, coherent coefficient adjunction foundation. Agent expansion of the auxiliary pullback-equivalence step via functor cores and explicit inverse detection. Online reference: Kerodon Corollary 4.5.3.34 (03PM), specialized with isofibration legs pi and pi, other vertical maps identities, and equivalence y. Auxiliary sources: 033R, 032B and 00UB; not archived."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +177,45 @@
    "results": "Ordinary Cocone and IsColimit declarations only; no quasicategorical reindexing theorem.",
    "date": "2026-10-17",
    "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pullback of an equivalence of quasicategories along an isofibration is a functor equivalence",
+   "results": "{\"t\": \"2026-10-17T11:33:00Z\", \"tool\": \"leanfinder\", \"query\": \"The pullback of an equivalence of quasicategories along an isofibration is a functor equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.CategoricalPullback.functorEquiv\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence\", \"CategoryTheory.Limits.CategoricalPullback.functorEquiv_functor_obj_iso_hom_app\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence_functor\", \"CategoryTheory.Limits.CategoricalPullback.functorEquiv_functor_obj_iso_inv_app\", \"CategoryTheory.Limits.CategoricalPullback.functorEquiv_inverse_obj_obj_iso_hom\", \"HasFibers.instIsEquivalenceFibFiberInducedFunctor\", \"CategoryTheory.Limits.CategoricalPullback.functorEquiv_inverse_obj_obj_iso_inv\"], \"digest\": \"35ed18a0a71cb887\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary categorical pullbacks and abstract trivial-fibration stability do not state this theorem for quasicategories. Read Categorical/Basic.lean:306-354, ModelCategory/Instances.lean:113-170 and Quasicategory/StrictBicategory.lean:14-76 in the pinned Mathlib. The projection y is not assumed a fibration; generic trivial-fibration stability is insufficient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-17T11:33:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary categorical pullbacks and abstract trivial-fibration stability do not state this theorem for quasicategories. Read Categorical/Basic.lean:306-354, ModelCategory/Instances.lean:113-170 and Quasicategory/StrictBicategory.lean:14-76 in the pinned Mathlib. The projection y is not assumed a fibration; generic trivial-fibration stability is insufficient."
+  },
+  {
+   "tool": "grep",
+   "query": "isofibration|CategoricalFibration|modelCategoryJoyal|categoricalEquivalence",
+   "results": "{\"t\": \"2026-10-17T11:33:27Z\", \"tool\": \"grep\", \"query\": \"isofibration|CategoricalFibration|modelCategoryJoyal|categoricalEquivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary categorical pullbacks and abstract trivial-fibration stability do not state this theorem for quasicategories. Read Categorical/Basic.lean:306-354, ModelCategory/Instances.lean:113-170 and Quasicategory/StrictBicategory.lean:14-76 in the pinned Mathlib. The projection y is not assumed a fibration; generic trivial-fibration stability is insufficient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a weak equivalence between fibrant objects along a fibration is a weak equivalence",
+   "results": "{\"t\": \"2026-10-17T11:33:27Z\", \"tool\": \"leansearch\", \"query\": \"Pullback of a weak equivalence between fibrant objects along a fibration is a weak equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.trivialFibrations_sub_weakEquivalences\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.mem_trivialFibrations\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.instWeakEquivalenceOfIsWeakFactorizationSystemTrivialCofibrationsFibrationsOfIsStableUnderRetractsWeakEquivalencesOfIsIso\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff\"], \"digest\": \"853992fbecf73cde\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary categorical pullbacks and abstract trivial-fibration stability do not state this theorem for quasicategories. Read Categorical/Basic.lean:306-354, ModelCategory/Instances.lean:113-170 and Quasicategory/StrictBicategory.lean:14-76 in the pinned Mathlib. The projection y is not assumed a fibration; generic trivial-fibration stability is insufficient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasicategory equivalence strict pullback along categorical fibration preserves equivalences without right proper Joyal model structure",
+   "results": "{\"t\": \"2026-10-17T11:35:16Z\", \"tool\": \"leanfinder\", \"query\": \"Quasicategory equivalence strict pullback along categorical fibration preserves equivalences without right proper Joyal model structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.strictBicategory\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"SSet.StrictSegal.quasicategory\", \"CategoryTheory.Limits.CategoricalPullback.functorEquiv\", \"SSet.StrictSegal.quasicategory'\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"ce29839b65cf5a45\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary categorical pullbacks and abstract trivial-fibration stability do not state this theorem for quasicategories. Read Categorical/Basic.lean:306-354, ModelCategory/Instances.lean:113-170 and Quasicategory/StrictBicategory.lean:14-76 in the pinned Mathlib. The projection y is not assumed a fibration; generic trivial-fibration stability is insufficient."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-presheaf-ind-criterion",
@@ -93,5 +242,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-isofibration-pullback-equivalence",
+  "worker": "stage1",
+  "summary": "Eight steps establish the quasicategory condition and strict commuting identity, compare functor cores through the existing isofibration-pullback theorem and Kan homotopy-pullback invariance, and construct an actual quasi-inverse using two Whitehead inverses. No new nodes, no statement change, no Lean or compiler. Verified all cited statements, ancestry, empty cases and current dependency closures.",
+  "blueprint": "Proof paragraph 2, finite-coefficient mapping-complex adjunction: the cocomplete coefficient tensor foundation; bounded-colimit presentation used in step 6 of lem-coef-cocomplete-monoidal-tensor. This lemma supplies the presheaf recognition needed to identify its small-data relative completion with the compact-generator hull. Extracts the equivalence E→C in original proof step 2, including the functor-core homotopy-pullback and inverse-detection arguments. The steps realize precisely the equivalence of total categories extracted from original Step 2 of lem-coef-infinity-presheaf-ind-criterion, below the bounded-colimit and coefficient-tensor foundations.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "General simplicial-homotopy-to-realization weak-equivalence theorem; used only on the functor cores after their inverse homotopies have been explicitly restricted. No theorem of this unit states this realization fact."
+   },
+   {
+    "node": "lem-cbc-kan-whitehead-inverse",
+    "why": "General Whitehead theorem for Kan complexes; evaluated twice on core mapping tests to construct the specified inverse functor and its two equivalence transformations. No theorem of this unit supplies this simplicial Whitehead inverse."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-cbc-kan-whitehead-inverse"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NU-aa6936413",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-aa6936413 (reviewer sub-agent of L); spot-checked: I read the whole item: unchanged statement, 8 steps, no new nodes. I read the full statements of all 10 cited nodes, plus the proof and review of lem-coef-infinity-isofibration-pullback-limit and the parent's step 3. Source: Kerodon Cor. 4.5.3.34 (03PM), read online. It matches the worker's specialization (rows C->B<-A and C->B<-B, vertical maps id_C, id_B, y, isofibration legs pi). The proof is an agent expansion and is correctly marked by=agent. Step 1: horn filling in A, then lifting against the inner fibration pi, so E is a quasicategory and pi r = y s holds strictly. Step 2: exponentiation with the empty source and an identity isofibration, then core-kan-fibration, gives Kan cores. Step 3: whiskering is a simplicial map, so equivalence edges are preserved. Step 4: I rechecked the triangle (f,0),(f',0),(f',1), i.e. the 2-simplex (s_1 a, 001), and every other edge type; the homotopies stay in the core, so simplicial-homotopy-equivalence-weak applies. Step 5: homotopy-pullback-invariance with a=Y, b=id, c=id; both squares commute and the formula is as stated. Step 6: pullback-limit (it concludes a weak homotopy equivalence) gives J->P(Y,v); path-comparison applies with id_G as the Kan fibration; pj=id and pac=rho_Q; 2-out-of-3 comes from the Kan-Quillen model node. Steps 7-8: Kan Whitehead twice; t=b_C(id_C) and alpha: rt->id_C come from the core edge; edge directions in step 8 are right; triangle calculus turns the class tr->id_E into an equivalence edge. Edge cases: empty A/B/C, pi=id, y=id, discrete sets. The isofibration hypothesis is needed (counterexample in review.md). No cycle (149-node closure). No duplicate: isofibration-base-change needs y to be an isofibration over the base; Joyal nodes state no right properness; the item is not a restatement of pullback-limit. Accepted tool_uses: lem-cbc-simplicial-homotopy-equivalence-weak and lem-cbc-kan-whitehead-inverse, generic tools already recorded elsewhere in sec-six-functors. No SGA. Remark: the inherited item source (HTT 5.3.5.4) is only contextual; the direct source, Kerodon 03PM, is in proof_origin and the report. Not a target node. No fixes written."
  }
 }
