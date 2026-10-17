@@ -7,7 +7,7 @@
   "date": "2026-10-17",
   "group": "Q123"
  },
- "status": "unsplit",
+ "status": "split",
  "id": "lem-sfb-local-model-tor-bound-descent",
  "kind": "statement",
  "title": "Tor bounds descend from bounded flat local models",
@@ -27,9 +27,103 @@
   "def-pc-flat-sheaf-modules",
   "det-def-sfb-constructible-tor-amplitude"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $i$, identify $(V_i)_{\\mathrm{proét}}$ with $S_{\\mathrm{proét}}/V_i$ by [lem-weil-proetale-weakly-etale-localization](1). Under this site identification inverse image is restriction, with the section formula of [def-pur-localized-ringed-site]. The ring isomorphism $g_i^{-1}\\Gamma_S\\cong\\Gamma_{V_i}$ of [lem-sfb-alpha-iso] identifies module inverse image with restriction and transport of the ring action. Thus, for a module sheaf $F$, $(g_i^*F)(W\\to V_i)=F(W\\to S)$ after this coefficient identification. Here only clause (1) of the localization lemma is used; its constant-ring clauses are not applied to the condensed ring $\\Gamma$.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-pur-localized-ringed-site",
+    "lem-sfb-alpha-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098K (definition-big-small-proetale); sites.tex Tags 00XZ (section-localize), 00Y0 (definition-localize), and sites-modules.tex Tag 04IX (definition-localize-ringed-site)"
+   }
+  },
+  {
+   "text": "The functor $g_i^*$ is exact, as stipulated in the statement. By [lem-weil-pbc-exact-functor-complex-cohomology], $H^q(g_i^*A^\\bullet)\\cong g_i^*H^q(A^\\bullet)$ for every complex. In particular it preserves every quasi-isomorphism. Hence its termwise action induces $D(g_i^*)$ on the derived category. To identify this with $Lg_i^*$, choose for a representative $A^\\bullet$ a K-flat flat-term resolution $P^\\bullet\\to A^\\bullet$ using [lem-pc-kflat-resolution]. The computation in [lem-weil-pbc-ringed-topoi-derived-pullback] identifies $Lg_i^*A$ with the image of $g_i^*P^\\bullet$, and exactness makes $g_i^*P^\\bullet\\to g_i^*A^\\bullet$ a quasi-isomorphism. These comparison maps give $Lg_i^*A\\cong D(g_i^*)A$. Write both as $g_i^*A$ below.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY (lemma-derived-base-change); homology.tex Tag 010N (lemma-exact-functor); Tag 06YS (lemma-K-flat-resolution)"
+   }
+  },
+  {
+   "text": "Fix any $\\Gamma_S$-module $N$ in degree zero. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the ringed-topos morphism $g_i$ and the two objects $Q,N[0]$. Step 2 turns its derived pullbacks into exact inverse images and gives\n$$g_i^*(Q\\otimes^{\\mathbf L}_{\\Gamma_S}N)\\cong (g_i^*Q)\\otimes^{\\mathbf L}_{\\Gamma_{V_i}}(g_i^*N).$$\nUse the given isomorphism $g_i^*Q\\cong L_i^\\bullet$ in this bifunctor to replace the first factor by $L_i^\\bullet$. No flatness of $N$ is used.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product)"
+   }
+  },
+  {
+   "text": "Each $L_i^\\bullet$ is bounded above by $s$ and has flat terms. Therefore it is K-flat by [lem-pc-bounded-above-flat-kflat-site]. To compute its tensor with $g_i^*N$ using precisely an existing ringed-site statement, specialize the representative-computation clause of [lem-trf-site-derived-tensor-restriction] to $\\mathcal R=\\mathcal S=\\Gamma_{V_i}$, $\\varphi=\\mathrm{id}$, $H=Q_{\\Gamma_{V_i}}(L_i^\\bullet)$, and the K-flat flat-term representative $\\mathrm{id}:L_i^\\bullet\\to L_i^\\bullet$. That clause explicitly says that its left derived object is computed by $P\\otimes_{\\mathcal R}\\operatorname{Res}_\\varphi N$. For this identity ring map it is exactly $L_i^\\bullet\\otimes_{\\Gamma_{V_i}}g_i^*N$. Together with step 3 this is the asserted local isomorphism.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-trf-site-derived-tensor-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ (lemma-bounded-flat-K-flat) and Tag 06YU (definition-derived-tor and its preceding construction)"
+   }
+  },
+  {
+   "text": "By the total-complex formula [def-pc-tensor-complex-sheaves], tensoring $L_i^\\bullet$ with the degree-zero complex $g_i^*N$ has degree-$q$ term $L_i^q\\otimes_{\\Gamma_{V_i}}g_i^*N$. This term is zero whenever $q\\notin[r,s]$. Its degree-$q$ cohomology is then zero, since $\\ker(0\\to C^{q+1})/\\operatorname{im}(C^{q-1}\\to0)=0$ [def-weil-abstract-derived-category]. Put $F^q=H^q(Q\\otimes^{\\mathbf L}_{\\Gamma_S}N)$. Applying the cohomology comparison of [lem-weil-pbc-exact-functor-complex-cohomology] and the local isomorphism of step 4 gives $g_i^*F^q=0$ for every $i$ and every $q\\notin[r,s]$.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YL (section-flat), total tensor used before Lemma 06YM (lemma-derived-tor-exact); homology.tex Tag 010N (lemma-exact-functor)"
+   }
+  },
+  {
+   "text": "Fix $q\\notin[r,s]$ and an arbitrary object $W\\to S$ of the site. The covering axiom in [def-weil-pbc-sites-and-cohomology](1)(iii) gives the covering $\\{W\\times_SV_i\\to W\\}_i$. Step 1 and the restriction formula [def-pur-localized-ringed-site] give $F^q(W\\times_SV_i)=0$, since $F^q|_{V_i}=0$. For any $x\\in F^q(W)$, all its restrictions equal those of the zero section. The equalizer (in particular uniqueness) part of the sheaf condition in [def-weil-pbc-sites-and-cohomology](1) therefore gives $x=0$. Thus every section group of $F^q$ is zero, so $F^q=0$. The argument also works for an empty covering, by the empty equalizer sheaf condition. Since $N$ and $q\\notin[r,s]$ were arbitrary, this is exactly Tor amplitude in $[r,s]$ by [det-def-sfb-constructible-tor-amplitude](3).",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pur-localized-ringed-site",
+    "det-def-sfb-constructible-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00VH (definition-site), 00VM (definition-sheaf-sets), 00VR (definition-sheaf), 00Y0 (definition-localize)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-pur-localized-ringed-site",
+  "lem-sfb-alpha-iso",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-trf-site-derived-tensor-restriction",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-sites-and-cohomology",
+  "det-def-sfb-constructible-tor-amplitude"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+  "place": "Expansion of (2) Local models: termwise flat tensor computation and descent of the common Tor interval, using Stacks Tags 06YQ, 06YY, 07A4, 06YU and the sheaf condition."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -79,6 +173,41 @@
    "results": "AlgebraicGeometry.Flat.instMorphismRestrict; AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget; RingHom.Flat.propertyIsLocal; Module.isLocallyConstant_rankAtStalk; AlgebraicGeometry.Flat.instResLE; AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact; Module.flat_of_isLocalized_span; AlgebraicGeometry.flat_iff",
    "date": "2026-10-17",
    "verdict": "no match: the listed general APIs do not assert this local pro-etale sheaf statement"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|tor_amplitude|KFlat.*cover|cover.*KFlat",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: generic boundedness, sheaf categories or sheaf cohomology; no local flat-model Tor descent theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complex of module sheaves has Tor amplitude in a common interval if this holds after restriction to a covering family",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules, SheafOfModules.noConfusionType, SheafOfModules, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, TopCat.Presheaf.IsSheafOpensLeCover, AlgebraicGeometry.Scheme.Modules.restrict, SheafOfModules.QuasicoherentData.rec, SheafOfModules.hasLimit",
+   "date": "2026-10-17",
+   "verdict": "no match: generic boundedness, sheaf categories or sheaf cohomology; no local flat-model Tor descent theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitude\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: generic boundedness, sheaf categories or sheaf cohomology; no local flat-model Tor descent theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex of sheaves locally represented on a covering by flat complexes concentrated in degrees r to s has Tor amplitude in r to s",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isLE_Q_obj_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: generic boundedness, sheaf categories or sheaf cohomology; no local flat-model Tor descent theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to a covering of a ringed site detects vanishing of cohomology of the derived tensor of a bounded complex of flat sheaves with a module",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.Sheaf.cohomologyPresheaf, DerivedCategory.isGE_iff, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CategoryTheory.Sheaf.cohomologyPresheafFunctor, DerivedCategory.isLE_iff, DerivedCategory.isZero_of_isGE",
+   "date": "2026-10-17",
+   "verdict": "no match: generic boundedness, sheaf categories or sheaf cohomology; no local flat-model Tor descent theorem"
   }
  ],
  "mathlib_match": null,
@@ -90,5 +219,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-local-model-tor-bound-descent",
+  "worker": "stage1",
+  "summary": "Kept the statement and coefficient category unchanged. Expanded the local calculation using exact inverse image, the general ringed-topos tensor comparison, bounded-above-flat K-flatness, and the identity-ring specialization of an existing representative-computation lemma. Proved vanishing descent by separatedness on each base-changed cover. Reused all auxiliary facts: no new nodes. Corrected the 06YS/06YQ bibliographic mismatch only in this split and report.",
+  "blueprint": "det-prop-scalar-six-ctf.proof.md (2), finite-ring/field bullet: \"Q has Tor amplitude in the amplitude of Q_0, since tensoring with a complex of flat modules is computed termwise\". Steps 1–4 justify that calculation after restriction; steps 5–6 give the common global interval.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Only its generic site-equivalence clause identifies a cover object with a slice; this is a site-theoretic tool, not another coefficient-comparison route."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "The general condensed-ring coefficient isomorphism identifies module inverse image with restriction; the unit does not reprove Cartesian coefficients."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site resolutions identify derived and exact underived inverse image; no scalar-comparison argument is imported."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Generic K-flat computation of derived pullback, used only to identify it with the assumed exact inverse image."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic monoidality of derived pullback supplies the local tensor comparison required by the unit local-model argument."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic ringed-site K-flat criterion for the given bounded flat models; this is precisely the computational tool the blueprint suppresses."
+   },
+   {
+    "node": "lem-trf-site-derived-tensor-restriction",
+    "why": "Only its explicit K-flat representative-computation clause is specialized to the identity ring map; no Kunneth theorem or change of route is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-alpha-iso",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-trf-site-derived-tensor-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q119-7c04e99ad",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q119-7c04e99ad (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources, and unit/chapter route. All six steps are valid for arbitrary condensed coefficients; checked nonflat test modules, interval endpoints, and empty covers. No new nodes, duplicates, cycles, forbidden trace/duality dependencies, or long steps. Accepted seven generic tool uses. Delivery correctly uses 06YQ despite an inherited citation typo. Full findings are in review.md."
  }
 }

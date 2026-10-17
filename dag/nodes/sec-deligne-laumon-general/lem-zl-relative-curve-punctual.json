@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-zl-relative-curve-punctual",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Punctual upper bound in a relative affine curve",
- "statement": "Let $h:U_0\\to Y_0$ be smooth and separated with every nonempty\ngeometric fiber a smooth affine curve, and let $\\mathcal F$ be lisse\nand punctually $\\iota$-pure of weight $w$. Then every Frobenius\neigenvalue on the stalk of $R^ih_!\\mathcal F$ at a closed point $y$\nof degree $m$ has absolute value at most\n$(q^m)^{(w+i)/2}$, i.e. the punctual weight of\n$R^ih_!\\mathcal F$ at $y$ is at most $w+i$.",
+ "statement": "Let $Y_0$ be a separated $k_0$-scheme of finite type and let\n$h:U_0\\to Y_0$ be a morphism of $k_0$-schemes that is smooth of\nrelative dimension one, separated and quasi-compact, with affine\nfibres; thus every nonempty geometric fiber is a smooth affine curve.\nLet $\\mathcal F$ be a lisse Weil sheaf on $U_0$, punctually\n$\\iota$-pure of weight $w$, and let $i\\ge0$. Then every Frobenius\neigenvalue $\\alpha$ on the stalk of $R^ih_!\\mathcal F$ at a closed point\ny$ of degree $m$ satisfies $|\\iota(\\alpha)|\\le(q^m)^{(w+i)/2}$, i.e.\nthe punctual weight of $R^ih_!\\mathcal F$ at $y$ is at most $w+i$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-curve-punctual.md",
   "place": "node lem-zl-relative-curve-punctual, order 2839"
@@ -18,14 +18,18 @@
  ],
  "proof": [
   {
-   "text": "Compact-support base change [thm-cbc-qbar], applied to the\ncartesian square formed by the fiber $U_y\\to U_0$ and the point\n$y\\to Y_0$, identifies the stalk of $R^ih_!\\mathcal F$ at a\ngeometric point over $y$ with\n$H_c^i(U_{\\bar y},\\mathcal F|_{U_{\\bar y}})$. The restricted sheaf has\nweight $w$ relative to $q^m$ by the rescaling lemma\n[lem-tw-punctual-rescaling]. After a finite extension of\n$\\kappa(y)$, all geometric components of the affine fiber are\ndefined and geometrically connected. Apply the curve estimate\n[thm-a1-curve-upper] (the upper bound on a smooth geometrically\nconnected curve, with no condition at infinity) to each component.\nThe direct sum has the same bound, and\n[lem-a1-weight-bound-constant-extension] reflects it back to\n$\\kappa(y)$. This obtains the displayed bound.",
+   "text": "Fix a closed point $y\\in |Y_0|$ of degree $m$ and a geometric point $\\bar y$ above it. The compact-support base-change isomorphism [thm-cbc-qbar] for the Cartesian square formed by $U_{0,y}\\to U_0$ and $y\\to Y_0$ identifies the stalk of $R^ih_!\\mathcal F$ at $\\bar y$ with $H_c^i(U_{\\bar y},\\mathcal F|_{U_{\\bar y}})$. By [lem-tw-punctual-rescaling], the restriction is punctually pure of weight $w$ relative to $\\kappa(y)$, whose cardinality is $q^m$. Choose a finite extension $\\mathbf F_{q^{me}}/\\mathbf F_{q^m}$ over which the finitely many geometric connected components of the affine curve $U_{\\bar y}$ are defined. Each component is a smooth geometrically connected affine curve. Applying [thm-a1-curve-upper] to every component gives the bound $w+i$ for the eigenvalues of the $e$-th power of geometric Frobenius on the direct sum of their compactly supported cohomology groups. The direct sum has the same bound because its Frobenius action is block diagonal. Finally [lem-a1-weight-bound-constant-extension] descends this bound from $\\mathbf F_{q^{me}}$ to $\\mathbf F_{q^m}$, yielding $|\\iota(\\alpha)|\\le(q^m)^{(w+i)/2}$ and the equivalent punctual-weight assertion.",
    "uses": [
     "thm-cbc-qbar",
     "lem-tw-punctual-rescaling",
     "thm-a1-curve-upper",
     "lem-a1-weight-bound-constant-extension"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-curve-punctual.proof.md",
+    "place": "Proof, paragraph 1"
+   }
   }
  ],
  "proof_deps": [
@@ -36,12 +40,62 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-curve-punctual.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-curve-punctual.proof.md",
+  "place": "Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth separated relative affine curve over a finite field, compactly supported higher direct images of a lisse pure Weil sheaf have punctual weights at most w+i",
+   "results": "see searches.jsonl",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"Frobenius\"",
+   "results": "see searches.jsonl",
+   "date": "2026-10-17",
+   "verdict": "no match; query produced unknown identifier"
+  },
+  {
+   "tool": "grep",
+   "query": "HasWeightsAtMost|PunctuallyPure|higherLowerShriek [Mathlib/AlgebraicGeometry]",
+   "results": "see searches.jsonl",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weight upper bounds for compactly supported etale cohomology of smooth curves with pure lisse sheaves",
+   "results": "see searches.jsonl",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite type scheme over a finite field becomes a finite disjoint union of geometrically connected schemes after a finite extension of the field",
+   "results": "see searches.jsonl",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyConnected",
+   "results": "see searches.jsonl",
+   "date": "2026-10-17",
+   "verdict": "generalization: GeometricallyConnected concerns scheme morphisms, not Weil weights or cohomological bounds"
+  },
+  {
+   "tool": "grep",
+   "query": "geometricallyConnected|GeometricallyConnected [Mathlib/AlgebraicGeometry]",
+   "results": "see searches.jsonl",
+   "date": "2026-10-17",
+   "verdict": "generalization: geometric connectedness declarations only"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -751,5 +805,20 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-zl-relative-curve-punctual",
+  "worker": "stage1",
+  "summary": "Updated the imported item to the current main-20261015 statement, including the separated finite-type base, smooth relative dimension-one, separated quasi-compact morphism, affine fibres, and explicit degree-m point and eigenvalue bound. Rewrote its single proof step from the current blueprint proof: compact-support base change, residue-field rescaling, finite constant extension splitting into smooth geometrically connected affine components, the curve estimate componentwise, direct-sum bound, and descent of the bound. No new nodes were needed; the component and direct-sum observations are elementary consequences of the stated finite-type curve hypotheses and cited theorem statements.",
+  "blueprint": "Realizes the sole proof paragraph of lem-zl-relative-curve-punctual.proof.md: base-change identification, rescaling on the fibre, finite extension to geometrically connected components, application of thm-a1-curve-upper, and descent by lem-a1-weight-bound-constant-extension."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q125-72537f586",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q125-72537f586 (reviewer sub-agent of L); spot-checked: Reviewed the item, unit, chapter, current blueprint proof, Lean declaration, all four cited nodes, coefficient category, base-change square, edge cases, route, searches, and DAG duplicates. No mathematical or citation faults found; review.md records the checks."
  }
 }

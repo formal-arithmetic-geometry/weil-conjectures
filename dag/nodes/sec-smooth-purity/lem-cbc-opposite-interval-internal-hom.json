@@ -10,9 +10,93 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $r_j(t)=j-t$ on the underlying set $[j]$, so $u^{\\mathrm{rev}}=r_bur_a$ for $u:[a]\\to[b]$. This composite is monotone: $s\\leq t$ implies $a-t\\leq a-s$, hence $b-u(a-s)\\leq b-u(a-t)$. Cancellation of the two intervening reflections gives $(vu)^{\\mathrm{rev}}=v^{\\mathrm{rev}}u^{\\mathrm{rev}}$, $(\\mathrm{id})^{\\mathrm{rev}}=\\mathrm{id}$ and $(u^{\\mathrm{rev}})^{\\mathrm{rev}}=u$. Therefore the operators specified in the statement define $K^{\\mathrm{op}}$, and a simplicial map $f$ has $f^{\\mathrm{op}}$ with the same degreewise components; naturality follows from that of $f$ applied to $u^{\\mathrm{rev}}$. Applying opposite twice is identity. Here the standard-simplex operators and all map equalities are those of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/SimplexCategory/Rev.lean; Mathlib/AlgebraicTopology/SimplicialSet/Op.lean; Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean",
+    "place": "SimplexCategory.rev and rev_map_apply, lines 27-45; elementary reflection identities"
+   }
+  },
+  {
+   "text": "Fix $\\alpha:I\\times\\Delta^n\\to E$ and put $\\beta_m(i,\\theta)=\\alpha_m(i^{\\mathrm{rev}},\\theta^{\\mathrm{rev}})$. For $u:[l]\\to[m]$, naturality of $\\alpha$ and Step 1 give\n$$\\begin{aligned}E^{\\mathrm{op}}(u)\\beta_m(i,\\theta)&=E(u^{\\mathrm{rev}})\\alpha_m(i^{\\mathrm{rev}},\\theta^{\\mathrm{rev}})\\\\&=\\alpha_l(i^{\\mathrm{rev}}u^{\\mathrm{rev}},\\theta^{\\mathrm{rev}}u^{\\mathrm{rev}})\\\\&=\\alpha_l((iu)^{\\mathrm{rev}},(\\theta u)^{\\mathrm{rev}})=\\beta_l(iu,\\theta u).\\end{aligned}$$\nThus $\\beta$ is an actual simplicial map $I\\times\\Delta^n\\to E^{\\mathrm{op}}$, not merely a function on vertices. By the internal functor definition in [def-cbc-enhanced-diagrams-cones], it is an $n$-simplex of the required target.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/SimplexCategory/Rev.lean; Mathlib/AlgebraicTopology/SimplicialSet/Op.lean; Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean",
+    "place": "SSet.op_map, lines 55-58; naturality calculation for the explicit reversal formula"
+   }
+  },
+  {
+   "text": "For $\\sigma:[k]\\to[n]$, the operator of $\\sigma$ on $\\operatorname{Fun}(I,E)^{\\mathrm{op}}$ sends $\\alpha$ to $\\alpha\\circ(\\mathrm{id}_I\\times\\Delta(\\sigma^{\\mathrm{rev}}))$. The operator in the target is restriction by $\\mathrm{id}_I\\times\\Delta(\\sigma)$, by [def-cbc-enhanced-diagrams-cones]. On an arbitrary $l$-simplex $(i,\\tau)$ with $\\tau:[l]\\to[k]$, the latter restriction of $R_{E,n}(\\alpha)$ has value $\\alpha_l(i^{\\mathrm{rev}},(\\sigma\\tau)^{\\mathrm{rev}})=\\alpha_l(i^{\\mathrm{rev}},\\sigma^{\\mathrm{rev}}\\tau^{\\mathrm{rev}})$, exactly the value of $R_{E,k}$ on the former restriction. Hence the displayed degreewise maps form a simplicial map $R_E$, for faces and degeneracies alike.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/SimplexCategory/Rev.lean; Mathlib/AlgebraicTopology/SimplicialSet/Op.lean; Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean",
+    "place": "SSet.op_map; the internal-functor operators in def-cbc-enhanced-diagrams-cones"
+   }
+  },
+  {
+   "text": "The same formula gives its inverse. More explicitly, for $\\beta:I\\times\\Delta^n\\to E^{\\mathrm{op}}$ put $S_n(\\beta)_m(i,\\theta)=\\beta_m(i^{\\mathrm{rev}},\\theta^{\\mathrm{rev}})$, viewed in $E_m$. Step 2 applied to $E^{\\mathrm{op}}$ and Step 1 show that this is a simplicial map to $E$. Step 3 applied to $E^{\\mathrm{op}}$ shows that $R_{E^{\\mathrm{op}}}:\\operatorname{Fun}(I,E^{\\mathrm{op}})^{\\mathrm{op}}\\to\\operatorname{Fun}(I,E)$ is simplicial; taking its opposite gives exactly $S:\\operatorname{Fun}(I,E^{\\mathrm{op}})\\to\\operatorname{Fun}(I,E)^{\\mathrm{op}}$. For either composite its value at $(i,\\theta)$ is obtained by reversing both coordinates twice, so is the original value. Thus $S R_E$ and $R_E S$ are identities, proving the simplicial isomorphism.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/SimplexCategory/Rev.lean; Mathlib/AlgebraicTopology/SimplicialSet/Op.lean; Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean",
+    "place": "SSet.opFunctorCompOpFunctorIso, lines 88-94; double reversal calculated explicitly"
+   }
+  },
+  {
+   "text": "Let $c_a:[n]\\to[1]$ be constant at $a$. Endpoint evaluation on an $n$-simplex $h:I\\times\\Delta^n\\to E$ is $h_n(c_a,\\mathrm{id}_{[n]})$, by restriction to the vertex as in [def-cbc-enhanced-diagrams-cones]. Since $c_a^{\\mathrm{rev}}=c_{1-a}$ and $\\mathrm{id}^{\\mathrm{rev}}=\\mathrm{id}$, evaluation of $R_{E,n}(\\alpha)$ at $a$ is $\\alpha_n(c_{1-a},\\mathrm{id})$. This is the degree-$n$ value of $(\\operatorname{ev}_{1-a})^{\\mathrm{op}}$, proving both endpoint identities. For any simplicial map $p:E\\to B$, both $R_B\\operatorname{Fun}(I,p)^{\\mathrm{op}}$ and $\\operatorname{Fun}(I,p^{\\mathrm{op}})R_E$ take $(\\alpha;i,\\theta)$ to $p_m\\alpha_m(i^{\\mathrm{rev}},\\theta^{\\mathrm{rev}})$. This proves the stated strict naturality in $E$ and the compatibility with every $p$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/SimplexCategory/Rev.lean; Mathlib/AlgebraicTopology/SimplicialSet/Op.lean; Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean",
+    "place": "SSet.opFunctor_map, lines 51-53; vertex restriction and postcomposition calculated explicitly"
+   }
+  },
+  {
+   "text": "For a cospan $A\\xrightarrow{f}C\\xleftarrow{g}D$, write its degreewise pullback as $P_n=\\{(x,y)\\in A_n\\times D_n:f_n(x)=g_n(y)\\}$. The operator for $u:[m]\\to[n]$ on $P^{\\mathrm{op}}$ sends $(x,y)$ to $(A(u^{\\mathrm{rev}})x,D(u^{\\mathrm{rev}})y)$, exactly the operator on $A^{\\mathrm{op}}\\times_{C^{\\mathrm{op}}}D^{\\mathrm{op}}$. These equalities identify the projections as well. Thus opposite preserves the specified pullback by the identity on pairs. This is a calculation from the degreewise product and pullback conventions of [def-cbc-enhanced-diagrams-cones], with no limit-preservation theorem required.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/SimplexCategory/Rev.lean; Mathlib/AlgebraicTopology/SimplicialSet/Op.lean; Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean",
+    "place": "SSet.op and op_map; degreewise products in Monoidal.lean, lines 124-127; pullback calculated on pairs"
+   }
+  },
+  {
+   "text": "Let $P_a(p)=\\operatorname{Fun}(I,B)\\times_{\\operatorname{ev}_a,B}E$. Steps 5 and 6 define an isomorphism $T:P_0(p)^{\\mathrm{op}}\\to P_1(p^{\\mathrm{op}})$, $T_n(\\gamma,e)=(R_{B,n}(\\gamma),e)$: its defining equality is $\\operatorname{ev}_1R_B(\\gamma)=\\operatorname{ev}_0(\\gamma)=p_n(e)$ in the common degree-$n$ set. The inverse is $(\\eta,e)\\mapsto(S_{B,n}(\\eta),e)$, which satisfies the reverse equality by Step 5. Using the endpoint and naturality equalities of Step 5, for every $\\alpha$ one has\n$$T_n\\rho_0(p)^{\\mathrm{op}}_n(\\alpha)=(R_{B,n}(p\\alpha),\\alpha(0))=(p^{\\mathrm{op}}R_{E,n}(\\alpha),(R_{E,n}\\alpha)(1))=\\rho_1(p^{\\mathrm{op}})_nR_{E,n}(\\alpha).$$\nThis is the asserted identification of the actual corner maps. All constructions use only functions, their equalities and the degreewise conventions of [def-cbc-enhanced-diagrams-cones]. They require no horn fillers, no Kan hypothesis and no nonempty sets.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/SimplexCategory/Rev.lean; Mathlib/AlgebraicTopology/SimplicialSet/Op.lean; Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean",
+    "place": "Explicit corner-map calculation using the preceding endpoint, postcomposition and pullback equalities"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/AlgebraicTopology/SimplexCategory/Rev.lean; Mathlib/AlgebraicTopology/SimplicialSet/Op.lean; Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean",
+  "place": "Explicit coordinate calculation from SimplexCategory.rev, SSet.op and the internal-functor definition; no source theorem asserts all the endpoint and corner-map clauses."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +146,45 @@
    "results": "{\"t\": \"2026-10-17T08:35:27Z\", \"tool\": \"grep\", \"query\": \"closedComparison|ihomComparison|Closed.*Equiv|closed.*[Ee]quival|[Ii]so.*[Ii]hom|[Ii]hom.*[Ii]so\", \"sub\": \"CategoryTheory/Monoidal/Closed\", \"ok\": true, \"n_hits\": 22, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Types.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Types.lean\"], \"digest\": \"fe781365d0e79c71\"}",
    "date": "2026-10-17",
    "verdict": "no match: source read Op.lean:42-94, Monoidal.lean:124-127, and CategoryTheory/Monoidal/Closed/Functor.lean:55-154. These define the opposite and product/exponential comparisons, but do not give this interval formula with endpoint compatibility. A proof of the comparison and endpoint identifications is required, so this is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.op, CategoryTheory.expComparison",
+   "results": "{\"t\": \"2026-10-17T15:02:34Z\", \"tool\": \"loogle\", \"query\": \"SSet.op, CategoryTheory.expComparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits inspected; simplex reversal, opposite and standard-simplex primitives do not state the interval isomorphism together with its endpoint and corner-map identities. The explicit coordinate proof is required."
+  },
+  {
+   "tool": "grep",
+   "query": "op.*ihom|ihom.*op|op.*internalHom|internalHom.*op|op.*sHom|sHom.*op",
+   "results": "{\"t\": \"2026-10-17T15:02:34Z\", \"tool\": \"grep\", \"query\": \"op.*ihom|ihom.*op|op.*internalHom|internalHom.*op|op.*sHom|sHom.*op\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\"], \"digest\": \"30a6eeb710d7177f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits inspected; simplex reversal, opposite and standard-simplex primitives do not state the interval isomorphism together with its endpoint and corner-map identities. The explicit coordinate proof is required."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reversal of simplex order identifies opposite of the interval internal hom with the interval internal hom into the opposite simplicial set",
+   "results": "{\"t\": \"2026-10-17T15:02:35Z\", \"tool\": \"leansearch\", \"query\": \"Reversal of simplex order identifies opposite of the interval internal hom with the interval internal hom into the opposite simplicial set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategory.revEquivalence\", \"SimplicialObject.opEquivalence\", \"SimplexCategory.rev_map_apply\", \"SSet.opFunctor\", \"SSet.op_map\", \"SimplicialObject.opEquivalence_functor\", \"SSet.op\", \"CategoryTheory.simplicialCosimplicialEquiv_inverse_obj\"], \"digest\": \"ba17b5336ab19529\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits inspected; simplex reversal, opposite and standard-simplex primitives do not state the interval isomorphism together with its endpoint and corner-map identities. The explicit coordinate proof is required."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Opposite simplicial interval mapping object exchanges endpoint evaluations and commutes with pullbacks",
+   "results": "{\"t\": \"2026-10-17T15:02:35Z\", \"tool\": \"leanfinder\", \"query\": \"Opposite simplicial interval mapping object exchanges endpoint evaluations and commutes with pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.op_map\", \"SSet.op_σ\", \"SSet.opFunctor_map\", \"SSet.stdSimplex.map_apply\", \"SSet.opObjEquiv\", \"SimplexCategory.II_obj\", \"CategoryTheory.ComposableArrows.opEquivalence_functor_obj_map\", \"SSet.opFunctor\"], \"digest\": \"67e3fe195e48e260\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits inspected; simplex reversal, opposite and standard-simplex primitives do not state the interval isomorphism together with its endpoint and corner-map identities. The explicit coordinate proof is required."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The internal Hom simplicial set Fun(K,E) opposite is isomorphic to Fun(K opposite,E opposite) by reversing both simplex coordinates",
+   "results": "{\"t\": \"2026-10-17T15:03:09Z\", \"tool\": \"leanfinder\", \"query\": \"The internal Hom simplicial set Fun(K,E) opposite is isomorphic to Fun(K opposite,E opposite) by reversing both simplex coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory.homEquiv'\", \"SSet.yonedaEquiv\", \"SSet.op_map\", \"SSet.stdSimplex.objEquiv\", \"SSet.opFunctor\", \"SSet.op\", \"CategoryTheory.SimplicialCategory.sHom\", \"SSet.opFunctor_map\"], \"digest\": \"43b90d76cda82688\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits inspected; simplex reversal, opposite and standard-simplex primitives do not state the interval isomorphism together with its endpoint and corner-map identities. The explicit coordinate proof is required."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-right-fibration-space-fiber",
@@ -88,5 +207,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-opposite-interval-internal-hom",
+  "worker": "stage1",
+  "summary": "Q54 proved the explicit reversal formula on all simplex operators, constructed its inverse, computed endpoint evaluation and postcomposition, and identified pullbacks and corner maps on pairs. Every step is an elementary calculation from the cited definition, so no new node is needed. The statement is unchanged; no project declaration or full Mathlib match was found.",
+  "blueprint": "Serves the opening compactification-choice sentence of thm-cbc-finite-level-proetale, through the inherited enhanced cone/lift-space foundation. In the immediate parent lem-cbc-right-fibration-space-fiber, it supplies precisely Step 7: the opposite of the endpoint-zero corner is the endpoint-one corner after reversal. No change of the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q54-2b07508b0",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q54-2b07508b0 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited definition, source locations and unit/chapter route. All seven elementary calculations are valid, including endpoint reversal and the actual corner-map square. Independent finite tests passed. No new nodes, hidden lemmas, prohibited dependencies or repairs found. Detailed checks are in review.md."
  }
 }

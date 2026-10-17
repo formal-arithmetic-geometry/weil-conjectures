@@ -12,9 +12,151 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-simplicial-opposite-homotopy-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the finite model-axiom transport lemma to $E$ and the three inverse-image classes. Its hypotheses hold for the given model category $\\mathcal D$: the two weak factorization systems give the lifting and factorization axioms, and their classes are retract closed. Thus two-out-of-three, retract closure, both lifting assertions and both kinds of factorization hold in $\\mathcal C$. These assertions also identify the two weak factorization systems: for example, factor an arrow lifting against every trivial fibration as $pi$ with $i$ a cofibration and $p$ a trivial fibration; the lift against $p$ makes the arrow a retract of $i$. The reverse inclusion is the lifting axiom. The identical retract argument with the other factorization treats the other three lifting classes.",
+   "uses": [
+    "lem-coef-equivalence-finite-model-axioms",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/ModelCategory/Transport.lean",
+    "place": "ModelCategory.transport:39-71; retract characterization of the two lifting classes"
+   }
+  },
+  {
+   "text": "Use the natural Hom bijections for the quasi-inverse adjunctions $E\\dashv G$ and $G\\dashv E$. If $H:I\\to\\mathcal C$ is any small diagram, put $L=\\lim_I EH$ and $Q=\\operatorname{colim}_I EH$, which exist by completeness and cocompleteness of $\\mathcal D$. For every $X$, the bijection $\\operatorname{Hom}_{\\mathcal C}(X,GL)\\cong\\operatorname{Hom}_{\\mathcal D}(EX,L)$ identifies maps with cones from $EX$ to $EH$ and hence, by full faithfulness of $E$, with cones from $X$ to $H$. Dually $\\operatorname{Hom}_{\\mathcal C}(GQ,X)\\cong\\operatorname{Hom}_{\\mathcal D}(Q,EX)$ identifies maps with cocones from $H$ to $X$. Therefore $GL$ and $GQ$ supply all small limits and colimits in $\\mathcal C$. This also includes the empty diagram.",
+   "uses": [
+    "lem-weil-pbc-quasi-inverse-adjoint"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 001J (definition-equivalence-categories), 0037 (definition-adjoint); direct cone and cocone universal properties"
+   }
+  },
+  {
+   "text": "Choose the adjoint-equivalence unit $\\eta:1_{\\mathcal C}\\cong GE$ and counit $\\varepsilon:EG\\cong1_{\\mathcal D}$. For either given functorial factorization $Ef=p_f i_f$ through $Z_f$, define the factorization of $f:X\\to Y$ by\n$$X\\xrightarrow{G(i_f)\\eta_X}GZ_f\\xrightarrow{\\eta_Y^{-1}G(p_f)}Y.$$\nNaturality of $\\eta$ makes the composite $\\eta_Y^{-1}GE(f)\\eta_X=f$. The triangle identity gives $E\\eta_X=\\varepsilon_{EX}^{-1}$; naturality of $\\varepsilon$ then identifies the two image arrows with $\\varepsilon_{Z_f}^{-1}i_f$ and $p_f\\varepsilon_{Z_f}$. Their classes are those of $i_f,p_f$, since an isomorphism of arrows exhibits each arrow as a retract of the other and the classes are retract closed. A square from $f$ to $f'$ is sent to the chosen middle map $Z_f\\to Z_{f'}$ and then by $G$ to $GZ_f\\to GZ_{f'}$; naturality of $\\eta$ gives both required squares. Identity and composition follow from functoriality in $\\mathcal D$ and of $G$. Thus both factorizations in $\\mathcal C$ are functorial.",
+   "uses": [
+    "lem-weil-pbc-quasi-inverse-adjoint",
+    "lem-coef-equivalence-finite-model-axioms",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Quasi-inverse adjunctions, Tags 001J and 0037; explicit functorial factorization formula supplementing Mathlib transport"
+   }
+  },
+  {
+   "text": "Equivalences preserve initial and terminal objects, as the empty colimit and empty limit. Consequently $E(\\varnothing_{\\mathcal C}\\to X)$ and $E(X\\to1_{\\mathcal C})$ identify, up to isomorphism of arrows, with $\\varnothing_{\\mathcal D}\\to EX$ and $EX\\to1_{\\mathcal D}$. By the inverse-image definitions and isomorphism invariance from Step 3, $X$ is cofibrant exactly when $EX$ is cofibrant, and fibrant exactly when $EX$ is fibrant.",
+   "uses": [
+    "lem-galois-equivalence-preserves-limits",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038 (lemma-adjoint-exact), empty diagrams; definitions of fibrant and cofibrant"
+   }
+  },
+  {
+   "text": "For $i:A\\to B$ in $\\mathcal D$ and $p:X\\to Y$ in $\\mathcal C$, the adjunction $G\\dashv E$ sends a square $(a:GA\\to X,b:GB\\to Y)$ to its two adjoints $(\\bar a:A\\to EX,\\bar b:B\\to EY)$. Naturality says $pa=bG(i)$ exactly when $(Ep)\\bar a=\\bar b i$, and a filler $d:GB\\to X$ corresponds to $\\bar d:B\\to EX$ with precisely the two filler equations. Thus $G(i)$ lifts against $p$ if and only if $i$ lifts against $Ep$. Applying this to every $i\\in I$ gives $(G I)^{\\perp}=E^{-1}(I^{\\perp})$, the trivial fibrations of $\\mathcal C$; applying it to every $j\\in J$ gives $(G J)^{\\perp}$ equal to the fibrations of $\\mathcal C$. The left classes are uniquely determined by the right classes in a weak factorization system (Step 1). Hence $G(I),G(J)$ generate the two transported systems. They are sets because they are images of the given sets.",
+   "uses": [
+    "lem-weil-pbc-quasi-inverse-adjoint",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), naturality of the Hom bijection; direct generator test"
+   }
+  },
+  {
+   "text": "Apply invariance of local presentability to $E$ (in the direction from $\\mathcal D$ to $\\mathcal C$). Together with the two generating sets of Step 5, this proves combinatoriality in the stated convention.",
+   "uses": [
+    "lem-coef-equivalence-local-presentability",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Presentable/Adjunction.lean",
+    "place": "Equivalence.isLocallyPresentable:120-123"
+   }
+  },
+  {
+   "text": "Left properness means that pushing out a weak equivalence along a cofibration gives a weak equivalence. Let $w:A\\to B$ be a weak equivalence and $i:A\\to A'$ a cofibration of $\\mathcal C$. Equivalence preservation of colimits makes the image of the pushout square a pushout square in $\\mathcal D$. Its initial arrows are $Ew$ and $Ei$, a weak equivalence and a cofibration by definition. Left properness in $\\mathcal D$ makes the resulting map $EA'\\to E(B\\amalg_A A')$ a weak equivalence. Reflection by the inverse-image class proves the assertion in $\\mathcal C$.",
+   "uses": [
+    "lem-galois-equivalence-preserves-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038 (lemma-adjoint-exact); direct application of the given left properness"
+   }
+  },
+  {
+   "text": "Let $i:A\\to B$ be a morphism in $\\mathcal C$ and $j:K\\to L$ a simplicial map. The pushout product has source $(B\\otimes K)\\amalg_{A\\otimes K}(A\\otimes L)$ and target $B\\otimes L$. Apply $E$. Preservation of the pushout and the assumed tensor comparisons identify its source with $(EB\\otimes RK)\\amalg_{EA\\otimes RK}(EA\\otimes RL)$ and its target with $EB\\otimes RL$. Naturality of the tensor comparisons identifies the two legs and the two maps into the target with those induced by $Ei$ and $Rj$. The universal property therefore identifies the entire arrow, not just its endpoints:\n$$E(i\\mathbin\\square j)\\cong(Ei)\\mathbin\\square(Rj).$$",
+   "uses": [
+    "lem-galois-equivalence-preserves-limits",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038 (lemma-adjoint-exact), applied to the pushout-product cocone; direct tensor comparison"
+   }
+  },
+  {
+   "text": "If $i,j$ are cofibrations, $Ei$ and $Rj$ are cofibrations. The simplicial axiom in the given category $\\mathcal D$ makes $(Ei)\\mathbin\\square(Rj)$ a cofibration. It is trivial if $i$ is trivial (since $Ei$ is then trivial), or if $j$ is trivial (since $R$ preserves Kan weak equivalences). Step 8 and the inverse-image classes give exactly the same conclusions for $i\\mathbin\\square j$ in $\\mathcal C$. The specified enrichment, tensors and cotensors already satisfy the enriched composition and tensor-cotensor adjunctions by the coherence assumptions. Thus the only additional model condition is this pushout-product axiom, which has just been checked by applying $E$. No independent enrichment is substituted for the specified one.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, finite-coefficient mapping-complex adjunction: abstract simplicial transport deduction below the relative marked model"
+   }
+  },
+  {
+   "text": "The identity parameter equivalence satisfies the required conditions. For order reversal, the current opposite-calculus statement gives a covariant involution and states that opposite preserves and reflects Kan complexes and Kan fibrations; its degreewise action gives $(K\\times L)^{\\mathrm{op}}=K^{\\mathrm{op}}\\times L^{\\mathrm{op}}$ and $(\\Delta^0)^{\\mathrm{op}}=\\Delta^0$. The cartesian comparison maps are identities on components, so their associativity, symmetry and unit diagrams commute. Kan cofibrations are degreewise injections, which are unchanged by reversal. The existing opposite-subdivision lemma supplies preservation and reflection of weak homotopy equivalences via the natural barycentric-coordinate homeomorphism of realizations. Therefore this strong cartesian monoidal involution meets the hypotheses on $R$, and Steps 8–9 apply whenever the specified enrichment comparisons in the statement are supplied.",
+   "uses": [
+    "lem-coef-simplicial-opposite-homotopy-calculus",
+    "lem-coef-infinity-opposite-subdivision-kan-zigzag",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, finite mapping-complex adjunction: order-reversal convention; existing opposite and realization comparison statements"
+   }
+  },
+  {
+   "text": "Finally write the transported adjunction as $L:\\mathcal C_1\\rightleftarrows\\mathcal C_2:U$ and the given Quillen adjunction as $L':\\mathcal D_1\\rightleftarrows\\mathcal D_2:U'$. The assumed identification under the equivalences includes a natural isomorphism $E_2L\\cong L'E_1$. For a cofibration $i$ in $\\mathcal C_1$, the arrow $E_1i$ is a cofibration; hence $L'E_1i$ is one, and so is $E_2Li$. If $i$ is also a weak equivalence, $L'E_1i$ and $E_2Li$ are trivial cofibrations instead. Reflection by $E_2$ proves that $L$ preserves both cofibrations and trivial cofibrations. This is precisely the left-adjoint definition of a Quillen adjunction; the ordinary adjunction is already a hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, finite mapping-complex adjunction: direct check of the Quillen condition under the assumed identification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-equivalence-finite-model-axioms",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-weil-pbc-quasi-inverse-adjoint",
+  "lem-galois-equivalence-preserves-limits",
+  "lem-coef-equivalence-local-presentability",
+  "lem-coef-simplicial-opposite-homotopy-calculus",
+  "lem-coef-infinity-opposite-subdivision-kan-zigzag",
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, finite-coefficient mapping-complex adjunction before inverse limit; abstract model transport extracted through the item ancestry. Mathlib proves the finite model axioms and presentability; the remaining calculations are supplied here."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -99,10 +241,94 @@
    "results": "{\"t\": \"2026-10-17T08:35:11Z\", \"tool\": \"leanfinder\", \"query\": \"Transport a combinatorial left proper simplicial model category along an involutive equivalence preserving cofibrations weak equivalences and mapping objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instHasTwoOutOfThreePropertyOppositeWeakEquivalences\", \"HomotopicalAlgebra.instCategoryWithWeakEquivalencesOpposite\", \"HomotopicalAlgebra.instModelCategoryOpposite\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.CategoryWithCofibrations\", \"HomotopicalAlgebra.CategoryWithWeakEquivalences\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.weakEquivalences_op\"], \"digest\": \"2cf1ded3ee173905\"}",
    "date": "2026-10-17",
    "verdict": "no match for the complete statement: HomotopicalAlgebra.ModelCategory.transport (Transport.lean:39-76, read) supplies basic model axioms; CategoryTheory.Equivalence.isLocallyPresentable (Presentable/Adjunction.lean:120-123, read) supplies presentability. Neither states left properness, transfer of generating sets or twisted simplicial compatibility, so this is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a left proper combinatorial simplicial model category along an equivalence compatible with a monoidal equivalence of simplicial sets",
+   "results": "{\"t\": \"2026-10-17T13:11:41Z\", \"tool\": \"leanfinder\", \"query\": \"Transport a left proper combinatorial simplicial model category along an equivalence compatible with a monoidal equivalence of simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.Truncated.hoFunctor.monoidal\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.ModelCategory.cm1a\", \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"HomotopicalAlgebra.ModelCategory.cm1b\"], \"digest\": \"84bc4deac1c04f5c\"}",
+   "date": "2026-10-17",
+   "verdict": "partial matches only: model transport at Transport.lean:39-71 and local presentability at Presentable/Adjunction.lean:120-123 do not assert the generator, left proper, twisted simplicial or Quillen clauses. Exact subresults are cited as two Mathlib leaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.ModelCategory",
+   "results": "{\"t\": \"2026-10-17T13:11:42Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.ModelCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory\", \"HomotopicalAlgebra.ModelCategory.categoryWithCofibrations\", \"HomotopicalAlgebra.ModelCategory.categoryWithFibrations\", \"HomotopicalAlgebra.ModelCategory.categoryWithWeakEquivalences\", \"HomotopicalAlgebra.ModelCategory.cm1a\", \"HomotopicalAlgebra.ModelCategory.cm1b\", \"HomotopicalAlgebra.ModelCategory.cm2\", \"HomotopicalAlgebra.ModelCategory.cm3a\"], \"digest\": \"9db1e647f605debb\"}",
+   "date": "2026-10-17",
+   "verdict": "partial matches only: model transport at Transport.lean:39-71 and local presentability at Presentable/Adjunction.lean:120-123 do not assert the generator, left proper, twisted simplicial or Quillen clauses. Exact subresults are cited as two Mathlib leaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of categories transports a model structure and preserves local presentability",
+   "results": "{\"t\": \"2026-10-17T13:11:43Z\", \"tool\": \"leansearch\", \"query\": \"An equivalence of categories transports a model structure and preserves local presentability\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.isLocallyPresentable\", \"CategoryTheory.isCardinalPresentable_of_isEquivalence\", \"CategoryTheory.isCardinalPresentable_iff_of_isEquivalence\", \"CategoryTheory.Equivalence.isCardinalLocallyPresentable\", \"CategoryTheory.isCardinalPresentable_of_equivalence\", \"CategoryTheory.Monoidal.transportStruct\", \"CategoryTheory.Monoidal.instCategoryTransported\", \"CategoryTheory.Monoidal.transport\"], \"digest\": \"678b1dee56a0c796\"}",
+   "date": "2026-10-17",
+   "verdict": "partial matches only: model transport at Transport.lean:39-71 and local presentability at Presentable/Adjunction.lean:120-123 do not assert the generator, left proper, twisted simplicial or Quillen clauses. Exact subresults are cited as two Mathlib leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "ModelCategory.transport|isLocallyPresentable|[Ll]eftProper|[Cc]ombinatorial|[Ss]implicialModel",
+   "results": "{\"t\": \"2026-10-17T13:11:43Z\", \"tool\": \"grep\", \"query\": \"ModelCategory.transport|isLocallyPresentable|[Ll]eftProper|[Cc]ombinatorial|[Ss]implicialModel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/Coxeter/Basic.lean\", \"Mathlib/GroupTheory/Perm/Centralizer.lean\", \"Mathlib/LinearAlgebra/Matrix/Determinant/Bird/Correctness.lean\", \"Mathlib/Topology/MetricSpace/PiNat.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Transport.lean\", \"Mathlib/Analysis/Analytic/Composition.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean\"], \"digest\": \"e686e2f0f28a5ca7\"}",
+   "date": "2026-10-17",
+   "verdict": "partial matches only: model transport at Transport.lean:39-71 and local presentability at Presentable/Adjunction.lean:120-123 do not assert the generator, left proper, twisted simplicial or Quillen clauses. Exact subresults are cited as two Mathlib leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pulling back cofibrations fibrations and weak equivalences along a categorical equivalence gives a model category",
+   "results": "{\"t\": \"2026-10-17T13:12:33Z\", \"tool\": \"leanfinder\", \"query\": \"Pulling back cofibrations fibrations and weak equivalences along a categorical equivalence gives a model category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.instRespectsIsoWeakEquivalencesOfIsWeakFactorizationSystemTrivialCofibrationsFibrationsOfIsStableUnderRetractsOfIsStableUnderComposition\", \"HomotopicalAlgebra.ModelCategory\", \"HomotopicalAlgebra.ModelCategory.categoryWithFibrations\", \"HomotopicalAlgebra.FibrantBrownFactorization.instWeakEquivalencePTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.ModelCategory.categoryWithWeakEquivalences\", \"HomotopicalAlgebra.ModelCategory.categoryWithCofibrations\", \"HomotopicalAlgebra.instWeakEquivalencePCofibrationsTrivialFibrations\"], \"digest\": \"d89dd6722b6dee05\"}",
+   "date": "2026-10-17",
+   "verdict": "partial matches only: model transport at Transport.lean:39-71 and local presentability at Presentable/Adjunction.lean:120-123 do not assert the generator, left proper, twisted simplicial or Quillen clauses. Exact subresults are cited as two Mathlib leaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.ModelCategory.transport",
+   "results": "{\"t\": \"2026-10-17T13:12:34Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.ModelCategory.transport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.transport\"], \"digest\": \"4d03ac733a3f840f\"}",
+   "date": "2026-10-17",
+   "verdict": "partial matches only: model transport at Transport.lean:39-71 and local presentability at Presentable/Adjunction.lean:120-123 do not assert the generator, left proper, twisted simplicial or Quillen clauses. Exact subresults are cited as two Mathlib leaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "ModelCategory.transport along equivalence",
+   "results": "{\"t\": \"2026-10-17T13:12:34Z\", \"tool\": \"leansearch\", \"query\": \"ModelCategory.transport along equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Monoidal.Transported\", \"CategoryTheory.Equivalence.transportIsoSheafToPresheaf\", \"CategoryTheory.Monoidal.transportStruct\", \"CategoryTheory.Abelian.LeftResolution.transport\", \"CategoryTheory.Monoidal.instCategoryTransported\", \"CategoryTheory.Equivalence.transportAndSheafify\", \"CategoryTheory.Monoidal.instInhabitedTransported\", \"CategoryTheory.Monoidal.Transported.instMonoidalCategoryStruct\"], \"digest\": \"ffaa21c522ba673e\"}",
+   "date": "2026-10-17",
+   "verdict": "partial matches only: model transport at Transport.lean:39-71 and local presentability at Presentable/Adjunction.lean:120-123 do not assert the generator, left proper, twisted simplicial or Quillen clauses. Exact subresults are cited as two Mathlib leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "def ModelCategory.transport",
+   "results": "{\"t\": \"2026-10-17T13:12:34Z\", \"tool\": \"grep\", \"query\": \"def ModelCategory.transport\", \"sub\": \"AlgebraicTopology/ModelCategory/Transport.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"39\"], \"digest\": \"1e644128da90065c\"}",
+   "date": "2026-10-17",
+   "verdict": "partial matches only: model transport at Transport.lean:39-71 and local presentability at Presentable/Adjunction.lean:120-123 do not assert the generator, left proper, twisted simplicial or Quillen clauses. Exact subresults are cited as two Mathlib leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local presentability is invariant under equivalence of ordinary categories",
+   "results": "{\"t\": \"2026-10-17T13:13:04Z\", \"tool\": \"leanfinder\", \"query\": \"Local presentability is invariant under equivalence of ordinary categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.isLocallyPresentable\", \"CategoryTheory.Equivalence.isCardinalLocallyPresentable\", \"CategoryTheory.isCardinalPresentable_of_isEquivalence\", \"CategoryTheory.isCardinalPresentable_iff_of_isEquivalence\", \"CategoryTheory.isCardinalPresentable_of_equivalence\", \"CategoryTheory.Equivalence.isAccessibleCategory\", \"CategoryTheory.Equivalence.isCardinalAccessibleCategory\", \"CategoryTheory.Equivalence.hasCardinalFilteredGenerator\"], \"digest\": \"ee4bbbc71b6cf960\"}",
+   "date": "2026-10-17",
+   "verdict": "partial matches only: model transport at Transport.lean:39-71 and local presentability at Presentable/Adjunction.lean:120-123 do not assert the generator, left proper, twisted simplicial or Quillen clauses. Exact subresults are cited as two Mathlib leaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivalent categories are locally presentable at the same regular cardinal",
+   "results": "{\"t\": \"2026-10-17T13:13:05Z\", \"tool\": \"leansearch\", \"query\": \"Equivalent categories are locally presentable at the same regular cardinal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.isCardinalLocallyPresentable\", \"CategoryTheory.IsCardinalLocallyPresentable\", \"CategoryTheory.Equivalence.isLocallyPresentable\", \"CategoryTheory.isCardinalPresentable_iff_of_isEquivalence\", \"CategoryTheory.isCardinalPresentable_of_isEquivalence\", \"CategoryTheory.IsLocallyFinitelyPresentable\", \"CategoryTheory.IsCardinalLocallyPresentable.mk\", \"CategoryTheory.Equivalence.isAccessibleCategory\"], \"digest\": \"b3aa6d874f35a86b\"}",
+   "date": "2026-10-17",
+   "verdict": "partial matches only: model transport at Transport.lean:39-71 and local presentability at Presentable/Adjunction.lean:120-123 do not assert the generator, left proper, twisted simplicial or Quillen clauses. Exact subresults are cited as two Mathlib leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma isLocallyPresentable|lemma isCardinalLocallyPresentable",
+   "results": "{\"t\": \"2026-10-17T13:13:05Z\", \"tool\": \"grep\", \"query\": \"lemma isLocallyPresentable|lemma isCardinalLocallyPresentable\", \"sub\": \"CategoryTheory/Presentable/Adjunction.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"77\", \"110\", \"120\"], \"digest\": \"60889552080386c2\"}",
+   "date": "2026-10-17",
+   "verdict": "partial matches only: model transport at Transport.lean:39-71 and local presentability at Presentable/Adjunction.lean:120-123 do not assert the generator, left proper, twisted simplicial or Quillen clauses. Exact subresults are cited as two Mathlib leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "transport|[Ll]eftProper|[Cc]ombinatorial|[Ss]implicialModel",
+   "results": "{\"t\": \"2026-10-17T13:14:22Z\", \"tool\": \"grep\", \"query\": \"transport|[Ll]eftProper|[Cc]ombinatorial|[Ss]implicialModel\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Transport.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Transport.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Transport.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Transport.lean\"], \"digest\": \"460c7fcb5dc316c2\"}",
+   "date": "2026-10-17",
+   "verdict": "partial matches only: model transport at Transport.lean:39-71 and local presentability at Presentable/Adjunction.lean:120-123 do not assert the generator, left proper, twisted simplicial or Quillen clauses. Exact subresults are cited as two Mathlib leaves."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-marked-relative-cartesian-model",
@@ -129,5 +355,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-model-equivalence-transport",
+  "worker": "stage1",
+  "summary": "Preserved the statement and historical ancestry; separated the exact finite-model and local-presentability Mathlib leaves from explicit calculations for all small limits/colimits, functorial factors, generation, left properness, twisted simplicial pushout products and Quillen transport. Reused the existing opposite-realization comparison, with no duplicate opposite lemma. All new leaves and the item searched using logged commands, source read, and each cited statement checked.",
+  "blueprint": "Realizes the abstract model-transport foundation of former Step 14 of lem-coef-marked-relative-cartesian-model, through the recorded ancestry to prop-coef-integral-exceptional-adjoint, proof paragraph 2 (finite mapping-complex adjunction). No unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-infinity-opposite-subdivision-kan-zigzag",
+    "why": "Step 10 takes only preservation/reflection of weak homotopy equivalences by simplicial reversal. This existing realization comparison is a generic tool supplementing the Joyal/opposite calculus; the local transport unit supplies no separate realization theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-infinity-opposite-subdivision-kan-zigzag"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q122-8cd47ecd9",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q122-8cd47ecd9 (reviewer sub-agent of L); spot-checked: Read the mathematics in full and wrote review.md with checks for all eleven steps, both Mathlib leaves, cited statements, sources, edge cases, duplicate candidates, and target coefficient/base-change interfaces. No repairs needed; no prohibited trace/Poincaré dependencies or long steps found. Accepted step 10’s reversal-realization tool use."
  }
 }

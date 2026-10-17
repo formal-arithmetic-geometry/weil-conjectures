@@ -14,9 +14,183 @@
   "lem-coef-nonsymmetric-operads-presentability",
   "lem-coef-monoidal-block-projection-coherence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $D=\\operatorname{Cat}_\\infty$ and $H=\\operatorname{Fun}(\\Delta^1,D)$. The finite products in $D$ are products of categories, including $*=\\Delta^0$, by [lem-coef-cocartesian-straightening]. By [def-cbc-enhanced-cartesian-fibration] and [lem-coef-coherent-nerve-comparison], $\\operatorname{Map}_D(X,Y)\\simeq\\operatorname{Fun}(X,Y)^\\simeq$, naturally in $X,Y$ and compatibly with composition. The functor category $H$ is a quasicategory by [lem-cbc-enhanced-functor-cone-calculus]. These statements apply in containing universes, so neither $A$ nor $B$ needs internal finite products.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "def-cbc-enhanced-cartesian-fibration",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Sections 2.4.1-2.4.2; Cat_infinity convention and coherent-nerve mapping comparison supplied by the cited nodes."
+   }
+  },
+  {
+   "text": "For arrows $g_i:X_i\\to Y_i$ in $D$, take their product arrow $g:\\prod_iX_i\\to\\prod_iY_i$. Apply [lem-coef-infinity-arrow-morphism-square] to an arbitrary test arrow $h:U\\to V$. Its three mapping-space factors for $\\operatorname{Map}_H(h,g)$ are products of the corresponding factors for the $g_i$, by the product property in $D$. In the path model in that node, a point, a path, and every higher simplex in a finite product are exactly a tuple of such data. Therefore the comparison induced by the product projections is $\\operatorname{Map}_H(h,g)\\simeq\\prod_i\\operatorname{Map}_H(h,g_i)$. For the empty family all three factors and their path pullback are points. This proves the product universal property in $H$ and shows that both endpoint evaluations preserve finite products. In particular $f^{\\times r}$ has endpoints $A^r,B^r$, with arrow $f^r$, including $f^0:\\ast\\to\\ast$.",
+   "uses": [
+    "lem-coef-infinity-arrow-morphism-square",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 2.1.3.4; explicit product verification from the already stated interval-arrow mapping formula."
+   }
+  },
+  {
+   "text": "For $T=D$ or $H$ form $T^\\times$ by [lem-coef-cartesian-operadic-envelope], then pull back along the ordered-block map $\\operatorname{Cut}:\\Delta^{\\mathrm{op}}\\to\\mathsf{Fin}_*$ specified in [lem-coef-cartesian-associative-segal-comparison] (forgetting its ordered-fiber decoration). Base change is a cocartesian fibration by [lem-coef-cocartesian-straightening]. For $x=A,B,f$, take the full simplicial subcategory on the tuple $x^{[n]}=(x,\\ldots,x)$ in each degree. Full subcategories are quasicategories by [lem-cbc-enhanced-functor-cone-calculus]. Inner horn lifts over the base stay in this full subcategory, because all vertices already belong to it. The envelope formula restricts to\n$$\\operatorname{Map}^{\\alpha}(x^{[n]},x^{[m]})\\simeq\\prod_{j=1}^m\\operatorname{Map}_T(x^{s_j},x),\\quad s_j=a(j)-a(j-1).$$\nThe fiber in degree $n$ has one tuple object and mapping space the $n$th power of the unary mapping space; inert projections give the Segal equivalence, also for $n=0$. An inert arrow with identity singleton blocks gives a lift between the retained tuples. Its cocartesian mapping square is the coordinate identity on the displayed products, so [lem-coef-infinity-cocartesian-mapping-criterion] proves it is still cocartesian after restriction. The same product formula is the relative-limit axiom of [lem-coef-nonsymmetric-operads-presentability]. Thus these full tuple restrictions are ordinary nonsymmetric infinity operads.",
+   "uses": [
+    "lem-coef-cartesian-operadic-envelope",
+    "lem-coef-cartesian-associative-segal-comparison",
+    "lem-coef-cocartesian-straightening",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-nonsymmetric-operads-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 4.1.2.9; section 2.4.1 and Definition 4.1.3.2; direct verification of the tuple restriction."
+   }
+  },
+  {
+   "text": "In the $B$ tuple operad mark an edge over $\\alpha$ as retained when each of its output block operations belongs to $C_{s_j}$. Fullness and repleteness imply that $C_r^\\simeq$ is a union of components in $\\operatorname{Fun}(B^r,B)^\\simeq$: any path is a natural equivalence, so its other endpoint belongs to $C_r$, and fullness includes every higher simplex between such endpoints. The retained edges contain identities since $\\mathrm{id}_B\\in C_1$. They are closed under composition: the component at output $j$ of a composite substitutes the consecutive output operations feeding $j$ into its outer operation, and the stated closure assumption places that functor in $C_{a(b(j))-a(b(j-1))}$. This follows because the block lengths sum to $a(b(j))-a(b(j-1))$. Inputs outside the relevant interval are discarded, not substituted a second time. This includes an outer nullary operation and any empty inner block. Any equivalent representative of the composite is retained by repleteness.",
+   "uses": [
+    "lem-coef-cartesian-operadic-envelope",
+    "lem-coef-cartesian-associative-segal-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Ordered-block formula of Construction 4.1.2.9; composition formula of section 2.4.1, with the given C_r hypotheses."
+   }
+  },
+  {
+   "text": "Define $E_C(B)$ to contain precisely the simplices all of whose edges are retained in step 4. This is a simplicial subset. Given an inner horn over a base simplex, fill it in the $B$ tuple operad. If its dimension is at least three, every edge of the filler is already an edge of the horn. In dimension two the only new edge is a composite, and step 4 shows it is retained. Thus the restricted projection is an inner fibration. Its mapping spaces over $\\alpha$ are precisely the unions of components with the retained blocks, hence $\\prod_j C_{s_j}^\\simeq$; this assertion can also be checked in the right-pinched model, where all edges except the varying operation edges are identities. Identity singleton-block inert lifts are retained. Precomposing along such a lift changes only the names of the same consecutive blocks, so on each base-arrow fiber it is the identity of these products. By [lem-coef-infinity-cocartesian-mapping-criterion] these are cocartesian lifts in the restriction. The degree-$n$ fiber is the $n$th power of the unary fiber, and the displayed product gives the relative-limit axiom. These verify every condition in [lem-coef-nonsymmetric-operads-presentability], without assuming that the subcategory is full on unary operations.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-nonsymmetric-operads-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definitions 4.1.3.2 and 4.1.3.9; agent-written edge-restriction horn and Segal verification."
+   }
+  },
+  {
+   "text": "The two endpoint evaluations $H\\to D$ preserve products by step 2, so [lem-coef-cartesian-operadic-envelope] gives their coherent envelope functors, and restriction to tuples gives endpoint operad maps. Define $E_C(f)$ as the inverse image of the edge restriction defining $E_C(B)$ under target evaluation. Its inner horn fillers stay in this inverse image: for dimensions at least three all edges were supplied, and for dimension two the new target block is the retained composite of step 4. Its inert identity-block lifts are retained and its mapping products and Segal maps are the inverse-image products of step 3. The same cocartesian mapping-square check as in step 5 applies, using [lem-coef-infinity-cocartesian-mapping-criterion]. Hence it is an ordinary nonsymmetric infinity operad by [lem-coef-nonsymmetric-operads-presentability]. For an arbitrary inert cocartesian edge, its output blocks are invertible unary operations in the restricted unary category: compare its mapping square with the identity-block lift, over identity base arrows; the resulting precomposition equivalence gives an inverse in each unary factor. Conversely such inverses make every block mapping square an equivalence. Endpoint evaluation preserves these inverses, so it preserves all inert cocartesian edges. Thus restriction gives $p:E_C(f)\\to E_A$ and $q:E_C(f)\\to E_C(B)$.",
+   "uses": [
+    "lem-coef-cartesian-operadic-envelope",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-nonsymmetric-operads-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 2.1.3.4 and Definition 4.1.3.9; inverse-image operation restriction."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-arrow-morphism-square] to the arrows $f^r:A^r\\to B^r$ and $f:A\\to B$ in $D$. With the mapping-space identification of step 1 it gives\n$$\\operatorname{Map}_H(f^r,f)\\simeq\\operatorname{Fun}(A^r,A)^\\simeq\\times^h_{\\operatorname{Fun}(A^r,B)^\\simeq}\\operatorname{Fun}(B^r,B)^\\simeq.$$\nThe two maps are $u\\mapsto fu$ and $v\\mapsto vf^r$. The cited equivalence respects the joint endpoint projection, so restricting its second coordinate to the union of components $C_r^\\simeq$ gives exactly the asserted operation space of $E_C(f)$. Reversing its path coordinate if necessary writes it as $\\eta:vf^r\\simeq fu$. The unrestricted $A$ case and restricted $B$ case give the other two displayed operation spaces. Substitution in step 3 now gives all the asserted over-$\\alpha$ product formulas. Since the mapping space in the ordinary base $\\Delta^{\\mathrm{op}}$ is discrete, its fibers give the asserted disjoint-union formula for the total mapping space, including the empty output product.",
+   "uses": [
+    "lem-coef-infinity-arrow-morphism-square",
+    "def-cbc-enhanced-cartesian-fibration",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-cartesian-operadic-envelope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 2.1.3.4; Kerodon Tag 06BZ, the cited interval-arrow Hom formula, specialized to Cat_infinity."
+   }
+  },
+  {
+   "text": "Write an outer operation as $(u,v,\\eta:vf^k\\simeq fu)$ and its inner operations as $(u_i,v_i,\\eta_i:v_if^{r_i}\\simeq fu_i)$. Their composite has endpoints $u(u_1,\\ldots,u_k)$ and $v(v_1,\\ldots,v_k)$, and its comparison is the path\n$$v(v_1f^{r_1},\\ldots,v_kf^{r_k})\\xRightarrow{v(\\eta_1,\\ldots,\\eta_k)}v(fu_1,\\ldots,fu_k)\\xRightarrow{\\eta(u_1,\\ldots,u_k)}fu(u_1,\\ldots,u_k).$$\nThese are the restrictions of product and composition in $H$, as follows from the natural joint-endpoint comparison in [lem-coef-infinity-arrow-morphism-square] and the substitution formula of [lem-coef-cartesian-operadic-envelope]. Thus all higher substitution simplices are those of that envelope, rather than independently chosen pasting homotopies. The unary unit is its degenerate identity square $(\\mathrm{id}_A,\\mathrm{id}_B,\\mathrm{id}_f)$. If $k=0$ the first path uses the empty family and the second is the given nullary comparison. Endpoint evaluation restricts the very same simplices to their $u$ and $v$ coordinates, so it respects substitution in every dimension.",
+   "uses": [
+    "lem-coef-infinity-arrow-morphism-square",
+    "lem-coef-cartesian-operadic-envelope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 2.1.3.4 and section 2.4.1; explicit pasting formula inside the already constructed arrow envelope."
+   }
+  },
+  {
+   "text": "For $T=D,H$, first allow the color object $x\\in T$ to vary. Apply [lem-coef-colored-operation-section-reconstruction] to the ordinary symmetric associative operad and the pullback of $T^\\times$ to its operator category. The fibers, cocartesian lifts and output Segal formulas required there are the envelope formulas in step 3. Its operation data at $x$ are maps $x^r\\to x$ and all tree compatibilities. Equivalently restrict to planar sections by [lem-coef-cartesian-associative-segal-comparison]; this equivalence preserves the underlying object and all higher families. The ordered extension needed in the symmetric reconstruction merely reindexes each product into the operation's specified order: contraction concatenates those lists, so it recovers the same planar tree data and introduces no extra symmetry on $t_r$. At $x=A$ in $D$, maps $A^r\\to A$ are functors and coherence paths are natural equivalences by step 1. Hence the reconstructed data are exactly the unital planar operation systems of [lem-coef-monoidal-block-projection-coherence]. For $x=f$ in $H$, step 7 identifies each operation with a triple $(u,v,\\eta)$, and step 8 identifies its substitution. Consequently these reconstructed data are exactly two such systems and a coherent morphism along $f$. Requiring their target operations to lie in $C_r$ is precisely factorization through the restriction of step 6, since its higher simplices are retained whenever their operation edges are retained.",
+   "uses": [
+    "lem-coef-colored-operation-section-reconstruction",
+    "lem-coef-cartesian-associative-segal-comparison",
+    "lem-coef-cartesian-operadic-envelope",
+    "lem-coef-monoidal-block-projection-coherence",
+    "lem-coef-infinity-arrow-morphism-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definitions 4.1.3.16 and 4.1.3.9; reconstruction and associative--planar comparison with all parameter families."
+   }
+  },
+  {
+   "text": "Now impose the fixed color with its identification. The identity-only operad $J$ has tuple objects and only identity singleton-output components (its operator category is the inert subcategory of $\\Delta^{\\mathrm{op}}$); in particular it has no nullary single-output operation. An inert-preserving map from $J$ records a color and its inert tuple identifications. In the reconstruction theorem [lem-coef-colored-operation-section-reconstruction], these identifications have a contractible space of extensions once the color and its identification are specified. Therefore restriction to $J$ is the underlying-color functor on the cores of the section categories of step 9. The mapping space under $J$ is its homotopy fiber at the specified map $J\\to E$: explicitly it consists of an operadic map $\\mathsf{Ass}_{\\mathrm{pl}}\\to E$ and an identification of its restriction with that specified map, with every higher simplex of this identification. This is the dual comma mapping-space formula of [lem-cbc-enhanced-functor-cone-calculus], applied in the operad infinity category of [lem-coef-nonsymmetric-operads-presentability] to the one-point diagram at $J$. Thus it fixes $A$, respectively the arrow $f$, with its chosen identification. It does not take the quotient of the structure space by the equivalences of that object. Combining this fiber description with step 9 gives both claimed mapping-space interpretations, including the identified unary identity.",
+   "uses": [
+    "lem-coef-colored-operation-section-reconstruction",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-nonsymmetric-operads-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definitions 4.1.3.9 and 4.1.3.16; agent-written fixed-color undercategory interpretation using the cited comma formula."
+   }
+  },
+  {
+   "text": "The reconstruction statement [lem-coef-colored-operation-section-reconstruction] explicitly includes arbitrary simplicial parameters, restriction of parameters, projection to colors, and contractible spaces of reconstructions with their specified identifications. The comparison [lem-coef-cartesian-associative-segal-comparison] identifies the standard $r$-input operation with the active endpoint-preserving arrow $[r]\\to[1]$, also for $r=0$. Thus its corolla evaluation here is precisely the projection to step 7's operation space. All endpoint maps are induced by endpoint evaluation, so they forget to the two systems. Applying these parameter-compatible equivalences to a diagram and to a point with its specified identification identifies their homotopy fibers, by the path model of [def-cbc-enhanced-diagrams-cones]. This retains the tree contractions, graftings and identity/nullary data already supplied by reconstruction, with their whole higher simplices.",
+   "uses": [
+    "lem-coef-colored-operation-section-reconstruction",
+    "lem-coef-cartesian-associative-segal-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Section 4.1.3; parameter and corolla clauses of the cited reconstruction/comparison statements."
+   }
+  },
+  {
+   "text": "No existence of a nullary operation was presumed. If $C_0$ is empty, the restricted nullary space is empty and the corresponding space of unital systems is empty. If $A=\\varnothing$, then $E_A(0)=\\operatorname{Fun}(*,\\varnothing)^\\simeq=\\varnothing$, again excluding unital systems without excluding the operad. For an arbitrary $f$ the construction itself still exists, even when an operation-space homotopy pullback is empty. For an output-free base arrow, all mapping products are points; for $r=1$ the specified degenerate identity lies in the restriction by the hypothesis on $C_1$. Thus no nonemptiness, equivalence, full faithfulness, presentability, or internal-product hypothesis on $f,A,B$ has entered.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Boundary-case verification of the displayed construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-cocartesian-straightening",
+  "def-cbc-enhanced-cartesian-fibration",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-arrow-morphism-square",
+  "lem-coef-cartesian-operadic-envelope",
+  "lem-coef-cartesian-associative-segal-comparison",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-nonsymmetric-operads-presentability",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-colored-operation-section-reconstruction",
+  "lem-coef-monoidal-block-projection-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, coherent finite-level adjunction; explicit arrow-endomorphism operad auxiliary construction. Online HA and Kerodon checks recorded in report.md; their archives are WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -52,10 +226,54 @@
    "results": "{\"t\": \"2026-10-17T10:15:24Z\", \"tool\": \"leanfinder\", \"query\": \"The operad of a commuting arrow has operations homotopy commuting squares between the powers of that arrow and itself; composition is pasting squares\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CommSq.of_arrow\", \"CategoryTheory.Arrow.w\", \"CategoryTheory.Square.fromArrowArrowFunctor\", \"CategoryTheory.Square.fromArrowArrowFunctor'\", \"CategoryTheory.Arrow.homMk'\", \"CategoryTheory.Arrow.w_mk_right\", \"CategoryTheory.Arrow.squareToSnd\", \"CategoryTheory.Square.toArrowArrowFunctor'\"], \"digest\": \"331f46a2a476b471\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits are ordinary category/arrow/monoidal or simplicial-object declarations, not the quasicategorical planar operation-space construction or coherent transport assertion. Read CategoryTheory/Comma/Arrow.lean:29-65, Endomorphism.lean:15-52, Monoidal/Transport.lean:25-65, and AlgebraicTopology/SimplicialSet/NerveAdjunction.lean:20-65; these use ordinary categories or ordinary enriched nerves. Limits/Preserves/Bifunctor.lean:214-238 only proves an ordinary bifunctor colimit assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Operad\"",
+   "results": "{\"t\": \"2026-10-17T14:50:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"Operad\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read End.lean:35-53, Bicategory/End.lean:22-46, Monoidal/Functor.lean:620-640 and Endofunctor/Algebra.lean:39-44; the hits concern ordinary categories, bicategories or algebras of one endofunctor, with no planar infinity operad or fixed-color derived mapping space."
+  },
+  {
+   "tool": "grep",
+   "query": "endomorphism.*operad|operad.*endomorphism|PlanarOperad|nonsymmetric",
+   "results": "{\"t\": \"2026-10-17T14:50:45Z\", \"tool\": \"grep\", \"query\": \"endomorphism.*operad|operad.*endomorphism|PlanarOperad|nonsymmetric\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read End.lean:35-53, Bicategory/End.lean:22-46, Monoidal/Functor.lean:620-640 and Endofunctor/Algebra.lean:39-44; the hits concern ordinary categories, bicategories or algebras of one endofunctor, with no planar infinity operad or fixed-color derived mapping space.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A relative endomorphism nonsymmetric operad encodes coherent monoidal structures on an arrow with a fixed underlying functor",
+   "results": "{\"t\": \"2026-10-17T14:50:46Z\", \"tool\": \"leansearch\", \"query\": \"A relative endomorphism nonsymmetric operad encodes coherent monoidal structures on an arrow with a fixed underlying functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.endofunctorMonoidalCategory\", \"CategoryTheory.obj_μ_zero_app\", \"CategoryTheory.obj_η_app_assoc\", \"Monoid.End\", \"CategoryTheory.instMonoidalCategoryHom\", \"CategoryTheory.obj_ε_app_assoc\", \"CategoryTheory.Functor.CoreMonoidal\", \"CategoryTheory.Monad.ofMon\"], \"digest\": \"cb50e019ecf4385b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read End.lean:35-53, Bicategory/End.lean:22-46, Monoidal/Functor.lean:620-640 and Endofunctor/Algebra.lean:39-44; the hits concern ordinary categories, bicategories or algebras of one endofunctor, with no planar infinity operad or fixed-color derived mapping space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The endomorphism planar infinity operad of a functor has operations homotopy commuting squares between its powers and itself",
+   "results": "{\"t\": \"2026-10-17T14:50:46Z\", \"tool\": \"leanfinder\", \"query\": \"The endomorphism planar infinity operad of a functor has operations homotopy commuting squares between its powers and itself\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.EndMonoidal\", \"CategoryTheory.NatTrans.term_◫_\", \"CategoryTheory.SimplicialObject.whiskering\", \"CategoryTheory.SimplicialObject.Augmented.whiskering\", \"CategoryTheory.SimplicialObject\", \"CategoryTheory.nerve\", \"CategoryTheory.CosimplicialObject\", \"AlgebraicTopology.DoldKan.natTransP\"], \"digest\": \"05410304c42cb4bf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read End.lean:35-53, Bicategory/End.lean:22-46, Monoidal/Functor.lean:620-640 and Endofunctor/Algebra.lean:39-44; the hits concern ordinary categories, bicategories or algebras of one endofunctor, with no planar infinity operad or fixed-color derived mapping space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A space of unital associative algebra structures on a fixed object is a derived operadic mapping space under the trivial identity operad",
+   "results": "{\"t\": \"2026-10-17T14:51:36Z\", \"tool\": \"leanfinder\", \"query\": \"A space of unital associative algebra structures on a fixed object is a derived operadic mapping space under the trivial identity operad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Endofunctor.instInhabitedAlgebraId\", \"AlgCat.algebraObj\", \"CategoryTheory.Endofunctor.Algebra\", \"CategoryTheory.Monad.Algebra.Hom.instInhabited\", \"CategoryTheory.Monad.Algebra.A\", \"CategoryTheory.Monad.instInhabitedAlgebra\", \"CategoryTheory.Monad.Algebra\", \"CategoryTheory.Endofunctor.Algebra.a\"], \"digest\": \"38578332ed5e0450\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read End.lean:35-53, Bicategory/End.lean:22-46, Monoidal/Functor.lean:620-640 and Endofunctor/Algebra.lean:39-44; the hits concern ordinary categories, bicategories or algebras of one endofunctor, with no planar infinity operad or fixed-color derived mapping space."
+  },
+  {
+   "tool": "grep",
+   "query": "endofunctorMonoidalCategory|EndMonoidal|CoreMonoidal",
+   "results": "{\"t\": \"2026-10-17T14:51:36Z\", \"tool\": \"grep\", \"query\": \"endofunctorMonoidalCategory|EndMonoidal|CoreMonoidal\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean\"], \"digest\": \"5d5a64771a16a276\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read End.lean:35-53, Bicategory/End.lean:22-46, Monoidal/Functor.lean:620-640 and Endofunctor/Algebra.lean:39-44; the hits concern ordinary categories, bicategories or algebras of one endofunctor, with no planar infinity operad or fixed-color derived mapping space.",
+   "subdirectory": "CategoryTheory"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-planar-multilinear-extension",
@@ -82,5 +300,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-arrow-endomorphism-planar-operad",
+  "worker": "stage1",
+  "summary": "No exact project declaration or Mathlib match. Keep the statement and prove it using existing arrow mapping spaces, cartesian envelopes, ordinary nonsymmetric Segal axioms, coherent section reconstruction and the planar comparison. Explicitly verify the replete operation restriction by inner-horn lifting and output products; compute the arrow homotopy pullback; paste its comparison paths; and take the under-J fiber to retain the specified fixed color. No new nodes.",
+  "blueprint": "Realizes the arrow-operation encoding needed for reduced-input tree lifting in the ancestry of paragraph 2 of prop-coef-integral-exceptional-adjoint; the auxiliary node has no independent imported blueprint text. Its ancestor, via chain, chapter and unit are unchanged. Full blueprint searches for planar, arrow morphism and endomorphism gave no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic closure of functor/full subcategories and the dual comma homotopy-fiber formula; used as foundational tools for the arrow category and fixed-color undercategory, not as a replacement for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q54-daaf01d13",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q54-daaf01d13 (reviewer sub-agent of L); spot-checked: Read all twelve steps, every cited statement, unit/chapter route, and relevant HA, HTT, Kerodon and Gepner–Haugseng sources. Verified operation restrictions, arrow pullbacks, fixed-color fibers, nullary cases, duplicates and acyclicity. No forbidden batch-5 dependencies or oversized steps. Accepted functor-cone-calculus tool use. No fixes; detailed checks in review.md."
  }
 }
