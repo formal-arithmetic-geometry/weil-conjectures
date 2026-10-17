@@ -1,11 +1,108 @@
 {
  "chapter": "sec-smooth-base-change",
  "unit": "sk-def-bc",
- "status": "unsplit",
+ "status": "split",
  "mathlib_match": null,
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The universal property gives a canonical isomorphism \\(Y_U\\cong U\\times_B T_B\\), so the square for \\((f_U,g_B)\\) is Cartesian and \\(ce_U=ed\\). For the representative calculation below there is a canonical map\n\\[\n \\kappa:Y_U\\times_{T_B}(T_B\\times_BW)\\longrightarrow\n Y\\times_T(T\\times_SW)\n\\]\ninduced by \\(d:Y_U\\to Y\\), \\(c:T_B\\to T\\), and \\(\\mathrm{id}_W\\). This map is not asserted to be an isomorphism. For an object \\(Q\\to U\\) of \\(U_{\\mathrm{Et}}\\) and \\(W\\to B\\) etale with a map \\(Q\\to W\\) over \\(B\\), identify \\(Y_U\\times_UQ\\) with \\(Y\\times_XQ\\) (\\(Q\\) over \\(X\\) through \\(a\\)) by the canonical isomorphism [def-pc-fibre-product], and let \\(\\ell_{\\mathrm{glob}}=(\\mathrm{pr}_Y,(e\\,\\mathrm{pr}_Y,Q\\to W)):Y\\times_XQ\\to Y\\times_T(T\\times_SW)\\) and \\(\\ell_{\\mathrm{loc}}=(\\mathrm{pr}_{Y_U},(e_U\\mathrm{pr}_{Y_U},Q\\to W)):Y_U\\times_UQ\\to Y_U\\times_{T_B}(T_B\\times_BW)\\). Then \\(\\kappa\\circ\\ell_{\\mathrm{loc}}=(d\\,\\mathrm{pr}_{Y_U},(c\\,e_U\\mathrm{pr}_{Y_U},Q\\to W))=(\\mathrm{pr}_Y,(e\\,d\\,\\mathrm{pr}_{Y_U},Q\\to W))=\\ell_{\\mathrm{glob}}\\), using \\(ce_U=ed\\) and the uniqueness in the universal property of the fibre product. The commutativity \\(fa=bf_U\\) gives the required square maps, and the inverse-image composition comparisons are the canonical ones.",
+   "uses": [
+    "sbc-def-base-change-square",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-site-morphism-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZR, proof of lemma-base-change-local, fibre-product restriction identities"
+   }
+  },
+  {
+   "text": "Apply the slice-site localization comparison to \\(g:T\\to S\\) at \\(B\\to S\\) and to \\(h:Y\\to X\\) at \\(U\\to X\\). It gives the natural direct-image and inverse-image comparisons on the two slices, while the open-etale localization lemma identifies those slices with \\(B_{\\mathrm{Et}},U_{\\mathrm{Et}}\\). The set and abelian inverse-image/restriction lemmas then give the displayed natural maps \\(C_L\\) and \\(C_R\\), for both coefficient categories. At this stage these are only the canonical localization comparisons; no mate equality is being assumed.",
+   "uses": [
+    "lem-weil-pbc-slice-site-localization",
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-site-morphism-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZR, proof of lemma-base-change-local, restriction identities and Sites 03EF"
+   }
+  },
+  {
+   "text": "We record how \\(C_L\\) acts on a representative. A local representative of a section of \\(f_U^{-1}g_{B*}F_B\\) over \\(Q\\to U\\) is \\((W\\to B,\\ a:Q\\to U\\times_BW\\text{ over }U,\\ s_B)\\) with \\(s_B\\in F_B(T_B\\times_BW)\\); since \\(T_B\\times_BW\\cong T\\times_SW\\) canonically [def-pc-fibre-product] and \\(F_B=r_{T_B}F\\), \\(s_B\\) is the image of a unique \\(s\\in F(T\\times_SW)=(g_*F)(W\\to S)\\) under restriction along that isomorphism. Viewing \\(W\\) over \\(S\\) through \\(b\\), the global representative is \\((W\\to S,\\ a':Q\\to X\\times_SW,\\ s)\\), where \\(a'\\) has \\(X\\)-component \\(Q\\to U\\xrightarrow{a}X\\) and \\(W\\)-component that of \\(a\\). \\(C_L\\) carries the class of \\((W\\to S,a',s)\\) in \\((r_Uf^{-1}g_*F)(Q)\\) to the class of \\((W\\to B,a,s_B)\\): the first component of \\(C_L\\), \\(r_Uf^{-1}\\cong a^{-1}f^{-1}\\cong(fa)^{-1}=(bf_U)^{-1}\\cong f_U^{-1}b^{-1}\\cong f_U^{-1}r_B\\), sends \\(a'^*(f^*s)\\) to \\(a^*(f_U^*s)\\) by the unit formula \\(c_{f,g,F}(g^*(f^*s))=(f\\circ g)^*s\\) applied to both factorizations, together with the restriction formula \\(\\rho(j^*s)=s|\\) for the etale inverse images along \\(a\\) and \\(b\\) and naturality of these sheaf maps along \\(Q\\to(X\\times_SW)\\times_XU\\) and \\(W\\to W\\times_SB\\); the second component of \\(C_L\\) is, sectionwise at \\(W\\to B\\), restriction along \\(T_B\\times_BW\\cong T\\times_SW\\), sending \\(s\\) to \\(s_B\\). The same calculation applies to abelian sections, using the abelian composition and restriction isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-site-morphism-composition",
+    "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZR, proof of lemma-base-change-local, first restriction identity and unit compatibility"
+   }
+  },
+  {
+   "text": "Let \\(Q\\to U\\) be an object and \\((W\\to B,a,s_B)\\) a local representative as in step 3, with global representative \\((W\\to S,a',s)\\). Apply the set-valued sectionwise exchange node (for sheaves of sets) or the abelian one (for abelian sheaves) to the global square \\((f,g,h,e)\\), Cartesian by [sbc-def-base-change-square], at the object \\(Q\\to X\\): \\(r_U(\\beta_F)\\) sends the class of \\((W,a',s)\\) to \\(\\ell_{\\mathrm{glob}}^*(e^*s)\\in(e^{-1}F)(Y\\times_XQ)\\). Apply the same node to the local square \\((f_U,g_B,h_U,e_U)\\), Cartesian by step 1: \\(\\beta_{U,F_B}\\) sends the class of \\((W,a,s_B)\\) to \\(\\ell_{\\mathrm{loc}}^*(e_U^*s_B)\\in(e_U^{-1}F_B)(Y_U\\times_UQ)\\). Now compute \\(C_R\\). Its first component is, at \\(Q\\), restriction along \\(Y_U\\times_UQ\\cong Y\\times_XQ\\) (the direct images are evaluation on base-changed objects [def-weil-pbc-direct-image]). Its second component \\(r_{Y_U}e^{-1}F\\cong d^{-1}e^{-1}F\\cong(ed)^{-1}F=(ce_U)^{-1}F\\cong e_U^{-1}c^{-1}F\\cong e_U^{-1}F_B\\) sends \\(\\kappa^*(e^*s)\\) (a section over the object \\(Y_U\\times_{T_B}(T_B\\times_BW)\\) of \\(Y_{U,\\mathrm{Et}}\\)) to \\(e_U^*s_B\\): the restriction formulas for \\(d\\) and \\(c\\) and the unit formula of the composition isomorphisms for both factorizations of \\(ed=ce_U\\) identify both with the unit image of \\(s\\) for the composite, and \\(c^*s\\) corresponds to \\(s_B\\). Since \\(C_R\\) is a morphism of sheaves it commutes with restriction along the \\(Y_U\\)-morphism \\(\\ell_{\\mathrm{loc}}\\), and step 1 gives \\(\\kappa\\ell_{\\mathrm{loc}}=\\ell_{\\mathrm{glob}}\\). Hence\n\\[\n C_R\\bigl(\\ell_{\\mathrm{glob}}^*(e^*s)\\bigr)=\\ell_{\\mathrm{loc}}^*\\bigl(C_R(\\kappa^*e^*s)\\bigr)=\\ell_{\\mathrm{loc}}^*(e_U^*s_B),\n\\]\nthat is, \\(C_R\\circ r_U(\\beta_F)\\circ C_L^{-1}\\) and \\(\\beta_{U,F_B}\\) agree on the class of every local presheaf representative over every \\(Q\\to U\\). The abelian case is the same computation with the abelian composition and restriction isomorphisms.",
+   "uses": [
+    "lem-sbc-sets-underived-exchange-sectionwise",
+    "lem-weil-pbc-underived-exchange-sectionwise",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "sbc-def-base-change-square",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZR, proof of lemma-base-change-local, identification of the restricted base-change map with the local map"
+   }
+  },
+  {
+   "text": "The sheaf \\(f_U^{-1}g_{B*}F_B\\) is the sheafification of the presheaf of local representatives [lem-weil-pbc-sets-etale-inverse-image-composition-units], [def-weil-pbc-inverse-image]. Two morphisms of sheaves out of a sheafification that agree after composing with the canonical map from the presheaf are equal, by the uniqueness in the universal property [def-weil-pbc-sheafification]. Step 4 shows this agreement for \\(C_R\\circ r_U(\\beta_F)\\circ C_L^{-1}\\) and \\(\\beta_{U,F_B}\\), so they are equal; composing with the isomorphism \\(C_L\\) gives \\(C_R\\circ r_U(\\beta_F)=\\beta_{U,F_B}\\circ C_L\\). Both sides are composites of natural transformations in \\(F\\) (\\(\\beta\\), \\(C_L\\), \\(C_R\\) and \\(F\\mapsto F_B\\) are natural), so the identity is natural in \\(F\\).",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZR, proof of lemma-base-change-local, conclusion after the restriction identities"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-sheafification",
+  "lem-sbc-sets-underived-exchange-sectionwise",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction",
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-weil-pbc-slice-site-localization",
+  "lem-weil-pbc-underived-exchange-sectionwise",
+  "sbc-def-base-change-square"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EZR, label lemma-base-change-local, proof of (1), with the restriction identifications from Sites 03EF and the adjunction-transpose calculation"
+ },
  "created": {
   "by": "worker",
   "item": "sbc-lem-etale-locality",
@@ -37,72 +134,30 @@
  ],
  "mathlib_searches": [
   {
-   "tool": "leanfinder",
-   "query": "underived base change morphism compatible with etale localization",
-   "results": "8 hits: RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; no sheaf base-change-arrow theorem",
+   "tool": "grep",
+   "query": "baseChange|counit|localization",
+   "results": "0 hits in Mathlib/CategoryTheory/Sites",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "the canonical underived sheaf base change morphism commutes with restriction along etale maps",
+   "results": "8 hits: CategoryTheory.Sheaf.ΓRes, CategoryTheory.Sheaf.ΓRes_naturality, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_base, TopCat.Presheaf.map_restrict, CategoryTheory.Sheaf.ΓRes_map, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "CategoryTheory.NatTrans, Adjunction, counit",
-   "results": "0 hits; loogle: unknown identifier 'Adjunction'",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatTrans, baseChange",
+   "results": "0 hits; loogle: unknown identifier baseChange",
    "date": "2026-10-17",
    "verdict": "unavailable"
   },
   {
-   "tool": "grep",
-   "query": "baseChange|counit",
-   "results": "0 hits",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "base change arrow compatible with restriction",
-   "results": "8 hits: IsBaseChange.linearMapLeftRight, IsBaseChange.comp and related tensor-product results; no sheaf base-change-arrow theorem",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
    "tool": "leanfinder",
-   "query": "canonical base change morphism of sheaves of sets commutes with etale restrictions U to X and B to S for a factorization U to B",
-   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.map_appLE', AlgebraicGeometry.Scheme.Hom.map_appLE, AlgebraicGeometry.Scheme.Hom.naturality_assoc, AlgebraicGeometry.Scheme.Hom.map_appLE'_assoc, AlgebraicGeometry.Scheme.Hom.appLE_map, AlgebraicGeometry.Scheme.Hom.map_appLE_assoc, AlgebraicGeometry.Scheme.comp_appLE_assoc, AlgebraicGeometry.Scheme.Hom.naturality; none states the specified geometric arrow-localization identity.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Adjunction, \"counit\"",
-   "results": "12 hits: CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.ext_counit, CategoryTheory.Adjunction.ofNatIsoLeft_counit, CategoryTheory.Adjunction.ofNatIsoRight_counit, CategoryTheory.Adjunction.counit_naturality, CategoryTheory.Adjunction.counit_naturality_assoc, CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app; none states the specified geometric arrow-localization identity.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "baseChange|counit",
-   "results": "25 hits in CategoryTheory/Sites: Mathlib/CategoryTheory/Sites/Types.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/ConcreteSheafification.lean, Mathlib/CategoryTheory/Sites/Abelian.lean; none states the specified geometric arrow-localization identity.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "localization of a base change natural transformation for etale sheaves along two etale maps",
-   "results": "8 hits: CategoryTheory.Localization.lift₂NatTrans_app_app, CategoryTheory.Localization.liftNatTrans, CategoryTheory.Localization.natTrans₂_ext, CategoryTheory.Localization.Construction.natTransExtension, CategoryTheory.Localization.lift₂NatTrans, IsLocalization.Away.tensorEquiv, Algebra.Etale.baseChange, CategoryTheory.Localization.liftNatIso; none states the specified geometric arrow-localization identity.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Beck Chevalley mate natural transformation compatible with restriction of sheaves to slice sites",
-   "results": "8 hits: CategoryTheory.sheafComposeNatTrans, CategoryTheory.sheafComposeNatTrans_fac, CategoryTheory.GrothendieckTopology.overMapPullbackComp_hom_app_val_app, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map', CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map, CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq, CategoryTheory.sheafComposeNatIso, CategoryTheory.sheafComposeNatTrans_app_uniq; none states the specified geometric arrow-localization identity.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "Beck|mate|baseChange",
-   "results": "12 hits in CategoryTheory/Adjunction: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Opposites.lean, Mathlib/CategoryTheory/Adjunction/Opposites.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean; none states the specified geometric arrow-localization identity.",
+   "query": "underived base change arrow compatible with etale localization and restriction",
+   "results": "8 hits: RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.Etale.baseChange, Algebra.FormallyEtale.localization_map, StandardEtalePair.HasMap.map, RingHom.Etale.ofLocalizationSpanTarget, Algebra.FormallyEtale.localization_base",
    "date": "2026-10-17",
    "verdict": "no match"
   }
@@ -115,5 +170,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sbc-base-change-arrow-localization",
+  "worker": "stage1",
+  "summary": "Repaired every returned point. Added a statement-only set-valued sectionwise exchange node after Mathlib and DAG searches. Replaced the false target-identification claim by the canonical map kappa between the global and local representative targets, and proved its compatibility with the two induced maps. Corrected the representative bookkeeping: a is over U and the global representative maps to X x_S W. Split the long mate calculation into separate steps for C_L unit transport, the set/abelian sectionwise exchange formulas, and adjunction transposition.",
+  "blueprint": "sbc-lem-etale-locality proof, first paragraph: the two displayed restriction identities and the assertion that the restricted base-change map is the local map.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-slice-site-localization",
+    "why": "Generic direct-image and inverse-image localization comparison used to form C_L and C_R; the sk-def-bc route does not state this site theorem."
+   },
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Identifies each localized etale slice with the small etale site U_Et or B_Et; needed to interpret the comparisons as stated."
+   },
+   {
+    "node": "lem-weil-pbc-site-morphism-composition",
+    "why": "Canonical inverse-image composition and unit compatibility for the factorization fa=bf_U."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition",
+    "why": "Canonical composition isomorphism and unit characterization used in the representative transport."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "why": "Set-valued inverse-image composition and unit formulas used for the set-sheaf case."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "why": "Set-valued inverse image equals etale restriction and supplies the unit restriction formula."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Abelian inverse image equals etale restriction and supplies the abelian unit restriction formula."
+   },
+   {
+    "node": "lem-weil-pbc-underived-exchange-sectionwise",
+    "why": "Abelian sectionwise formula for the same representative calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-slice-site-localization",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-underived-exchange-sectionwise"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-cb25e3e5c",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-cb25e3e5c (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sbc-sets-underived-exchange-sectionwise, every cited statement, the parent sbc-lem-etale-locality with its main-20261015 blueprint_update and blueprint proof, and Stacks Tag 0EZR (etale-cohomology.tex, lemma-base-change-local, line 16307, proof of (1), via Sites 03EF). The item statement is true and unchanged. Its beta matches Stacks' base change map (the transpose of e^{-1}eps_g after theta). The set and abelian cases each use their own lemmas; neither coefficient category is identified with the other. Checked cases: identity maps, U=X with B=S, empty U, f_U an isomorphism. I verified kappa ell_loc = ell_glob componentwise using ce_U=ed; kappa is correctly not claimed to be an isomorphism. C_L comes from inverse-image composition (fa=bf_U) and C_R from the slice lemma at U, where u(U)=Y_U. The new node is the true set-valued analogue of lem-weil-pbc-underived-exchange-sectionwise: ell_a is well defined, an identity square gives plain restriction and V=empty gives singletons. It is not a duplicate: sk-def-exchange defines the set-level Ex^0 but gives no sectionwise formula. Three faults, all fixed in fixes/: (1) step 3 had C_L going the wrong way and never defined s_B; (2) step 5 relied on 'equality of adjuncts' when step 4 computes the maps themselves, so it is rewritten to use uniqueness of the sheafification factorization (def-weil-pbc-sheafification); (3) the new node's blueprint.from.via was [] and is now [item]. I also added missing citations: composition-units and inverse-image-composition in step 4 (for the identity kappa^*(e^*s)=e_U^*s_B), def-pc-fibre-product in steps 1 and 3, and def-pc-scheme in the new node's stmt_deps. In the new node, the representative now cites the set-valued presheaf inverse image. proof_deps was recomputed. I accepted eight generic site and inverse-image tool_uses and removed the entry for the new node, which is in the same unit. No SGA source is used.; 2 file(s) fixed by the reviewer"
  }
 }
