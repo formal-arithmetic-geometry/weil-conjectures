@@ -12,7 +12,13 @@
   "def-coef-infinity-fibrations",
   "lem-coef-space-transport-classification",
   "lem-coef-cocartesian-straightening",
-  "lem-coef-cat-infinity-colimits-cartesian-closure"
+  "lem-coef-cat-infinity-colimits-cartesian-closure",
+  "def-coef-infinity-presheaf-yoneda",
+  "lem-coef-infinity-limits-products-pullbacks",
+  "lem-coef-small-right-adjoint-diagram-compact-model",
+  "lem-coef-coherent-diagram-coyoneda",
+  "lem-coef-cat-infinity-opposite-involution",
+  "lem-coef-space-valued-straightening"
  ],
  "proof": [
   {
@@ -250,5 +256,49 @@
   "group": "NL",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-385735206 (reviewer sub-agent of L); spot-checked: I read GHN arXiv:1501.02161v3 online: Lemma 9.10 (1)-(4) with the proof of (1)-(2), Prop 6.9 and its testing-object proof, and §1.2 notation. I also read every cited statement in full, the unit and the chapter. The item statement is true in its enlarged size form (A U-small, G valued in Cat_V; Cat_V^op has U-small colimits, so free cocompletion applies). I checked it on A empty or a point, X empty, a point, two points, BG, and G=[1] for variance. The new node lem-coef-parametric-straightening-mapping-spaces is true and statement-only. It is strictly smaller than the item, not a restatement, and has no duplicate in the DAG or blueprint. Three faults, all repaired. (1) C1/C4, step 2: the step used, uncited, that a right fibration classified by X under space-valued transport is classified by iX under Cartesian straightening, coherently, and the same for the opposite fibration. No node states this. I added the statement-only node lem-coef-fibration-straightening-space-restriction (Lurie HTT 2.4.2.4 and §§2.2.1, 3.2.1, WANTED; implicit in GHN §9), created.item set to the item, and rewrote step 2 to cite it and the op involution. (2) C4, step 4: naturality in a was claimed from lem-coef-infinity-pointwise-yoneda-evaluation, which is pointwise in a. It now cites lem-coef-infinity-yoneda-evaluation, which is natural on D^op×P(D). (3) Step 5: the representable criterion needs P_V(A) to have V-small mapping spaces. It now cites lem-coef-infinity-presheaf-free-cocompletion. Steps 1, 3, 6 and 7 were checked and accepted; in step 3, currying is a natural isomorphism of Kan mapping complexes. Same unit throughout, no tool_uses, no SGA, no cycle. The new node records Mathlib grep only; LeanSearch/LeanFinder could not be run here.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartesianMapsPresheafExtension",
+  "declaration": "SSet.Enhanced.CartesianPresheafExtension.cartesian_maps_presheaf_extension",
+  "declarations": [
+   "SSet.Enhanced.CartesianPresheafExtension.base",
+   "SSet.Enhanced.CartesianPresheafExtension.presheaves",
+   "SSet.Enhanced.CartesianPresheafExtension.baseLift",
+   "SSet.Enhanced.CartesianPresheafExtension.yoneda",
+   "SSet.Enhanced.CartesianPresheafExtension.extensions",
+   "SSet.Enhanced.CartesianPresheafExtension.restriction",
+   "SSet.Enhanced.CartesianPresheafExtension.transportPresentation",
+   "SSet.Enhanced.CartesianPresheafExtension.rightRepresentative",
+   "SSet.Enhanced.CartesianPresheafExtension.sharpOver",
+   "SSet.Enhanced.CartesianPresheafExtension.transportArrow",
+   "SSet.Enhanced.CartesianPresheafExtension.cocartesianArrow",
+   "SSet.Enhanced.CartesianPresheafExtension.IsPrecomposition",
+   "SSet.Enhanced.CartesianPresheafExtension.IsPostcomposition",
+   "SSet.Enhanced.CartesianPresheafExtension.unstraighten",
+   "SSet.Enhanced.CartesianPresheafExtension.oppositeDiagram",
+   "SSet.Enhanced.CartesianPresheafExtension.mappingCategory",
+   "SSet.Enhanced.CartesianPresheafExtension.atPresheaf",
+   "SSet.Enhanced.CartesianPresheafExtension.atDiagram",
+   "SSet.Enhanced.CartesianPresheafExtension.categoryModel",
+   "SSet.Enhanced.CartesianPresheafExtension.mapModel",
+   "SSet.Enhanced.CartesianPresheafExtension.coefficientModel",
+   "SSet.Enhanced.CartesianPresheafExtension.IsMappingModel",
+   "SSet.Enhanced.CartesianPresheafExtension.cartesian_maps_presheaf_extension"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CartesianMapsPresheafExtension.lean",
+  "statement": "theorem cartesian_maps_presheaf_extension (A : SSet.{u}) [Quasicategory A] : ∃ hB : Quasicategory (base.{u, v} A).op, ∃ (T : TransportClassifier.{u, v} (base.{u, v} A) false), TransportClassificationClauses T ∧ ∀ (S : CocartesianStraightening.Statement.{max (u + 1) v}) (O : CatInfinity.{max (u + 1) v} ⟶ CatInfinity.{max (u + 1) v}), IsCatInfinityOpposite O → IsFunctorEquivalence (restriction.{u, v} A) ∧ ∃ (Mcart Mcocart : CocartesianStraightening.diagrams (base.{u, v} A).op ⟶ (extensions.{u, v} A).toSSet), AreNaturallyEquivalent (Mcart ≫ restriction A) (𝟙 _) ∧ AreNaturallyEquivalent (Mcocart ≫ restriction A) (𝟙 _) ∧ IsMappingModel T S hB O true Mcart ∧ IsMappingModel T S hB O false Mcocart ∧ AreNaturallyEquivalent Mcart Mcocart",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Both mapping constructions are maps on the entire coherent coefficient-diagram category into the full category of U-small-limit-preserving presheaf functors. Restriction along the published Yoneda is an equivalence of full functor categories. Cartesian maps are the opposite of cocartesian maps for the pointwise opposite diagram. Actual pre/postcomposition is normalized on every relative functor simplex. No smallness of the presheaf category is assumed. Includes the noncomputable Diagrams repair of the existing SpaceValuedStraightening prerequisite required by the unified smallSpaces presentation."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6e208fe11",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement clauses, dependencies, sources, universes, edge cases, docstrings, and verbatim signatures. Both immutable Lean files compiled through scompile.py with exit 0 and no diagnostics. No fixes required; branch head unchanged.; reverted the delivery's change of existing node(s) lem-coef-space-valued-straightening (--revert-nodes; kept as on newtargets-dag)"
  }
 }
