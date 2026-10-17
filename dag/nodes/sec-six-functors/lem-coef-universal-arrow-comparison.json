@@ -10,9 +10,67 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-coef-infinity-pinch-comparison], the right-pinched mapping spaces of $\\mathcal C$ and $\\mathcal D$ are Kan complexes in the containing universe. Apply [lem-coef-space-contractible-fiber-equivalence] to the assumed equivalence $\\Phi_{a'}$ and the vertex $\\eta'$. Its homotopy fiber is contractible. By the path-fiber definition in [def-cbc-enhanced-diagrams-cones], its vertices are exactly the pairs $(\\beta,H)$ with $\\beta:a\\to a'$ and $H:R(\\beta)\\circ\\eta\\simeq\\eta'$, with the full higher path data retained. In particular this space is nonempty: a weak equivalence to a point is bijective on components, so its realization is nonempty and hence it has a vertex. Fix any such pair; the remaining argument applies to every pair, not just a chosen preferred comparison.",
+   "uses": [
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-space-contractible-fiber-equivalence",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2: agent expansion of unit-compatible universal-arrow comparison, beneath the finite-coefficient adjunction"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-space-contractible-fiber-equivalence] also to $\\Phi'_a$ and the vertex $\\eta$. Choose a vertex of this contractible fiber as in Step 1. It supplies $\\gamma:a'\\to a$ and $H':R(\\gamma)\\circ\\eta'\\simeq\\eta$. Work on components of the Kan mapping spaces. By [lem-coef-infinity-mapping-composition] these components form the ordinary homotopy categories $h\\mathcal C$ and $h\\mathcal D$, with associative composition and identities. The simplicial functor $R$ preserves this composition: apply $R$ to a $2$-simplex witnessing a composite, and use the cited node's $2$-simplex composition rule; it also preserves degenerate identity edges. The assumptions on $\\Phi_a$ and $\\Phi'_{a'}$ imply that their induced functions on components are injective, by the definition of weak equivalence. Here the two compatibility paths give $[R\\beta][\\eta]=[\\eta']$ and $[R\\gamma][\\eta']=[\\eta]$.",
+   "uses": [
+    "lem-coef-space-contractible-fiber-equivalence",
+    "lem-coef-infinity-mapping-composition",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2: agent expansion of unit-compatible universal-arrow comparison, beneath the finite-coefficient adjunction"
+   }
+  },
+  {
+   "text": "Compute in $h\\mathcal D$, using associativity, units and the functoriality established in Step 2:\n$$[\\Phi_a(\\gamma\\beta)]=[R\\gamma][R\\beta][\\eta]=[R\\gamma][\\eta']=[\\eta]=[\\Phi_a(1_a)].$$\nInjectivity of $\\pi_0\\Phi_a$ gives $[\\gamma][\\beta]=[1_a]$ in $h\\mathcal C$. Similarly\n$$[\\Phi'_{a'}(\\beta\\gamma)]=[R\\beta][R\\gamma][\\eta']=[R\\beta][\\eta]=[\\eta']=[\\Phi'_{a'}(1_{a'})],$$\nso injectivity of $\\pi_0\\Phi'_{a'}$ gives $[\\beta][\\gamma]=[1_{a'}]$. These are calculations with the specified unit paths, not cancellation of $R$ as a faithful functor. The compositions and their component interpretation are those of [lem-coef-infinity-mapping-composition].",
+   "uses": [
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2: agent expansion of unit-compatible universal-arrow comparison, beneath the finite-coefficient adjunction"
+   }
+  },
+  {
+   "text": "Thus $[\\beta]$ is invertible in $h\\mathcal C$, with inverse $[\\gamma]$. The equivalence-edge criterion of [lem-coef-infinity-mapping-composition] makes $\\beta$ an equivalence in $\\mathcal C$. The component equalities just proved give homotopies $\\gamma\\beta\\simeq1_a$ and $\\beta\\gamma\\simeq1_{a'}$: in a Kan mapping space, vertices in the same component are joined by an edge, since horns compose successive edges and reverse edges. Together with $H'$ and the original $H$ this is all the asserted data. Since $(\\beta,H)$ was arbitrary, every comparison is an equivalence, and Step 1 already proved contractibility of the entire comparison space. Nothing here assembles $a,a'$ as functors or assumes an adjoint to $R$.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2: agent expansion of unit-compatible universal-arrow comparison, beneath the finite-coefficient adjunction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-space-contractible-fiber-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2: agent expansion of unit-compatible universal-arrow comparison, beneath the finite-coefficient adjunction"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +113,38 @@
    "results": "{\"t\": \"2026-10-17T08:34:19Z\", \"tool\": \"grep\", \"query\": \"IsUniversal|uniqueUpToIso\", \"sub\": \"CategoryTheory/Comma/StructuredArrow\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean\"], \"digest\": \"648f588b32e2a4c6\"}",
    "date": "2026-10-17",
    "verdict": "no match: read Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean:469-504 (IsUniversal, desc, fac, existsUnique), Mathlib/CategoryTheory/Adjunction/Unique.lean:36-57 (leftAdjointUniq and unit compatibility), and Mathlib/AlgebraicTopology/Quasicategory/{Basic,TwoTruncated}.lean. The first two concern ordinary categories and hom-set bijections; the latter gives horn filling and homotopy relations, not universal mapping-space comparisons. The second semantic phrasing returned ordinary Type-valued RepresentableBy.uniqueUpToIso, not space-valued quasicategorical universality. None states the contractible comparison space with its specified homotopy."
+  },
+  {
+   "tool": "grep",
+   "query": "IsUniversal|leftAdjointUniq|homotopyFiber",
+   "results": "{\"t\": \"2026-10-17T11:49:18Z\", \"tool\": \"grep\", \"query\": \"IsUniversal|leftAdjointUniq|homotopyFiber\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean\"], \"digest\": \"08177f888a8d9dda\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read StructuredArrow/Basic.lean:469-504 and the ordinary universal-arrow/pointwise Kan-extension declarations returned; no mapping-space or homotopy-fiber theorem is supplied."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness of representing objects for space valued functors on quasicategories with a specified universal element",
+   "results": "{\"t\": \"2026-10-17T11:49:18Z\", \"tool\": \"leansearch\", \"query\": \"Uniqueness of representing objects for space valued functors on quasicategories with a specified universal element\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.RepresentableBy.uniqueUpToIso\", \"CategoryTheory.Functor.RepresentableBy.uniqueUpToIso_hom\", \"CategoryTheory.Functor.CorepresentableBy.uniqueUpToIso\", \"CategoryTheory.Functor.IsRepresentedBy.mk\", \"CategoryTheory.Functor.IsRepresentedBy.rec\", \"CategoryTheory.Functor.CorepresentableBy.noConfusionType\", \"CategoryTheory.Functor.coreprx\", \"CategoryTheory.Functor.EffectivePresentation.noConfusion\"], \"digest\": \"5b29a1a6431bac91\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: RepresentableBy.uniqueUpToIso and CorepresentableBy.uniqueUpToIso concern Type-valued functors on ordinary categories; they do not state contractibility of the space of compatible comparisons in a quasicategory."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.StructuredArrow.IsUniversal",
+   "results": "{\"t\": \"2026-10-17T11:49:19Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.StructuredArrow.IsUniversal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.StructuredArrow.IsUniversal\", \"CategoryTheory.StructuredArrow.IsUniversal.desc\", \"CategoryTheory.StructuredArrow.IsUniversal.uniq\", \"CategoryTheory.StructuredArrow.IsUniversal.hom_desc\", \"CategoryTheory.StructuredArrow.IsUniversal.fac\", \"CategoryTheory.StructuredArrow.IsUniversal.existsUnique\", \"CategoryTheory.StructuredArrow.IsUniversal.fac_assoc\", \"CategoryTheory.StructuredArrow.IsUniversal.hom_ext\"], \"digest\": \"0212727cbd8ac45c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: StructuredArrow.IsUniversal and desc/fac/hom_ext/existsUnique (Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean:469-504, read) concern ordinary categories and equalities in hom sets, not quasicategories and compatibility paths."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two universal arrows to a functor of quasicategories have a contractible space of unit compatible comparisons and every comparison is an equivalence",
+   "results": "{\"t\": \"2026-10-17T11:49:22Z\", \"tool\": \"leanfinder\", \"query\": \"Two universal arrows to a functor of quasicategories have a contractible space of unit compatible comparisons and every comparison is an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.Quasicategory₂\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.Quasicategory\", \"SSet.instUniqueHomOneTruncation₂ObjTruncatedOfNatNatTruncationSimplexCategoryStdSimplexMk\", \"SSet.Truncated.HomotopyCategory₂.mk.inj\", \"SSet.Quasicategory.hornFilling\", \"CategoryTheory.Bicategory.LeftLift.IsKan.uniqueUpToIso_hom_right\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isUniversalOfIsRightKanExtension\"], \"digest\": \"4a3cb4cd0e23a50c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give quasicategory horn filling, ordinary bicategorical Kan lifts, or ordinary coskeletal universal arrows; none proves space-valued universal-arrow uniqueness or contractibility of the specified homotopy fiber."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-cocomplete-extensions",
@@ -84,5 +170,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-universal-arrow-comparison",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Four explicit steps apply existing contractible-homotopy-fiber and mapping-composition results, choose the reverse unit-compatible arrow, compute both inverse equations on components, and apply the equivalence-edge criterion. All supporting nodes already exist; no new nodes or Mathlib leaves.",
+  "blueprint": "Realizes proof paragraph 2 of prop-coef-integral-exceptional-adjoint, the finite-coefficient adjunction and compatibility of its specified units/counits; specifically the comparison argument extracted in step 6 of lem-coef-operadic-cocomplete-extensions.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q123-639eca75e",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q123-639eca75e (reviewer sub-agent of L); spot-checked: Read the item and all cited statements in full; checked Kerodon sources, blueprint ancestry, parent application, all four proof steps, edge cases, duplicates and dependency cycles. The fixed-object comparison proof is complete and preserves every hypothesis and conclusion. No new nodes, repairs or accepted off-unit tool uses. Detailed checks are in review.md."
  }
 }

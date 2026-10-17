@@ -3,41 +3,139 @@
  "blueprint": {
   "is": "lem-wf-additive-characters-h1",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Continuous $\\mathbf Z_\\ell$-characters are compatible finite-level classes",
- "statement": "Let $U_0/k_0$ be geometrically connected and separated of finite type,\nput $U=U_0\\times_{k_0}\\overline{k}_0$, and choose a geometric point\n$\\bar u\\to U$. Put $A_n=\\mathbf Z/\\ell^n\\mathbf Z$. There is a\nnatural Frobenius-equivariant isomorphism\n\n$$\n\\operatorname{Hom}_{\\mathrm{cont}}(\\pi_1(U,\\bar u),\\mathbf Z_\\ell)\n\\xrightarrow{\\sim}\n\\varprojlim_n H^1_{\\mathrm{\\acute et}}(U,A_n).\n\\tag{3.2}\n$$\n\nUnder the Weil-group action determined by a\ndegree-one lift $s$, Frobenius on the left is\n\n$$\nf\\longmapsto\\bigl[g\\longmapsto f(s^{-1}gs)\\bigr].\n$$\n\nThe cohomology and Weil-group conventions are those of\n[def-weil-pbc-etale-cohomology], [def-wf-weil-group].",
+ "statement": "Let $U_0/k_0$ be geometrically connected and separated of finite type,\nput $U=U_0\\times_{k_0}\\overline{k}_0$, and choose a geometric point\n$\\bar u\\to U$. Put $A_n=\\mathbf Z/\\ell^n\\mathbf Z$. There is a\nnatural Frobenius-equivariant isomorphism\n\n$$\n\\operatorname{Hom}_{\\mathrm{cont}}(\\pi_1(U,\\bar u),\\mathbf Z_\\ell)\n\\xrightarrow{\\sim}\n\\varprojlim_n H^1_{\\mathrm{\\acute et}}(U,A_n).\n\\tag{3.2}\n$$\n\nUnder the Weil-group action determined by a\ndegree-one lift $s$, Frobenius on the left is\n\n$$\nf\\longmapsto\\bigl[g\\longmapsto f(s^{-1}gs)\\bigr].\n$$\n\nThe cohomology and Weil-group conventions are those of\n[def-weil-pbc-etale-cohomology], [def-wf-weil-group].\nThe $\\ell$-adic integers carry the valuation topology of [def-weil-l-adic-numbers].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-additive-characters-h1.md",
   "place": "node lem-wf-additive-characters-h1, order 2619"
  },
  "stmt_deps": [
   "def-weil-pbc-etale-cohomology",
-  "def-wf-weil-group"
+  "def-wf-weil-group",
+  "def-weil-l-adic-numbers"
  ],
  "proof": [
   {
-   "text": "At level $n$, [lem-wf-finite-constant-h1-pi1] gives\n\n$$\nH^1(U,A_n)\\cong\n\\operatorname{Hom}_{\\mathrm{cont}}(\\pi_1(U,\\bar u),A_n).\n\\tag{3.3}\n$$\n\nIts naturality shows that the transition map is reduction modulo\n$\\ell^n$. A compatible family on the right of (3.3) gives, point by\npoint, a homomorphism to\n$\\varprojlim_nA_n=\\mathbf Z_\\ell$. It is continuous because the inverse\nimage of $\\ell^n\\mathbf Z_\\ell$ is the open kernel of its level-$n$\nreduction. Conversely, reducing a continuous $\\mathbf Z_\\ell$-valued\nhomomorphism gives such a family. This proves (3.2). The explicit\nWeil-descent computation in [lem-wf-finite-constant-h1-pi1], together\nwith [def-wf-weil-group], gives precomposition by\n$g\\mapsto s^{-1}gs$, which is the asserted Frobenius action.",
+   "text": "Put $\\Pi=\\pi_1(U,\\bar u)$ and give $A_n$ its discrete topology. For every $n\\geq1$, [lem-wf-finite-constant-h1-pi1] gives the natural group isomorphism $\\theta_n:H^1_{\\mathrm{\\acute et}}(U,A_n)\\longrightarrow\\operatorname{Hom}_{\\mathrm{cont}}(\\Pi,A_n)$. Apply its naturality to the coefficient homomorphism $c_n:A_{n+1}\\to A_n$: $\\theta_n(c_{n,*}x)=c_n\\circ\\theta_{n+1}(x)$. Thus taking $\\theta_n$ coordinatewise identifies the inverse limit in the assertion with the group of families $(f_n)$ of continuous homomorphisms satisfying $c_n\\circ f_{n+1}=f_n$. The inverse sends $(f_n)$ to $(\\theta_n^{-1}f_n)$; the displayed identity verifies its compatibility as well.",
+   "uses": [
+    "lem-wf-finite-constant-h1-pi1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-additive-characters-h1.proof.md",
+    "place": "Proof, equation (3.3) and coefficient naturality"
+   }
+  },
+  {
+   "text": "Write $\\rho_n:\\mathbf Z_\\ell\\to A_n$ for residue. To make pointwise lifting precise, let $R$ be the ring of tuples $(a_n)_{n\\geq0}$ with $a_n\\in\\mathbf Z/\\ell^n\\mathbf Z$ and compatible reductions; its operations are coordinatewise. The coordinate projections are unital ring homomorphisms and their compatibility is part of the definition of $R$. Apply [lem-exc-padic-residue-universal-property] to these projections to obtain a unital ring homomorphism $L:R\\to\\mathbf Z_\\ell$ with $\\rho_n(L(a))=a_n$. The same node says that residues separate points. Consequently $L((\\rho_n(z))_n)=z$, whereas $(\\rho_n(L(a)))_n=a$. In particular every compatible tuple has one and only one lift. The $n=0$ coordinate is the unique element of $\\mathbf Z/1\\mathbf Z$, so adjoining or forgetting it changes no compatible family indexed by $n\\geq1$.",
+   "uses": [
+    "lem-exc-padic-residue-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-additive-characters-h1.proof.md",
+    "place": "Proof, the pointwise identification of the residue limit with the adic integers"
+   }
+  },
+  {
+   "text": "The kernel and norm clauses of [lem-exc-padic-residue-universal-property] imply that $|x-y|_\\ell<\\ell^{-n}$ forces $\\rho_n(x)=\\rho_n(y)$. Therefore $\\rho_n$ is locally constant and hence continuous to discrete $A_n$. Given a continuous homomorphism $b:\\Pi\\to\\mathbf Z_\\ell$, set $f_n=\\rho_n\\circ b$. These are continuous homomorphisms. Residue compatibility in the same node gives $c_n\\circ f_{n+1}=f_n$. Applying the inverse of the coordinatewise identification in step 1 defines the claimed map $b\\mapsto(\\theta_n^{-1}(\\rho_n\\circ b))_n$.",
+   "uses": [
+    "lem-exc-padic-residue-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-additive-characters-h1.proof.md",
+    "place": "Proof, reduction of a continuous adic character"
+   }
+  },
+  {
+   "text": "Conversely, let $(f_n)$ be a compatible family from step 1. For $g\\in\\Pi$, define $b(g)=L((f_n(g))_n)$ using step 2. Each $f_n$ is a homomorphism, so $f_n(gh)=f_n(g)+f_n(h)$ and $f_n(1)=0$; either coordinatewise addition followed by the ring homomorphism $L$, or residue separation in [lem-exc-padic-residue-universal-property], gives $b(gh)=b(g)+b(h)$ and $b(1)=0$. To check continuity at an arbitrary $g_0$, fix $\\varepsilon>0$ and choose $n\\geq1$ with $\\ell^{-n}<\\varepsilon$. The set $V=f_n^{-1}(\\{f_n(g_0)\\})$ is an open neighbourhood of $g_0$. For $g\\in V$, $\\rho_n(b(g)-b(g_0))=0$, so the kernel and norm clauses of that node give $|b(g)-b(g_0)|_\\ell\\leq\\ell^{-n}<\\varepsilon$. This proves continuity everywhere, without assuming the source group discrete or finite.",
+   "uses": [
+    "lem-exc-padic-residue-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-additive-characters-h1.proof.md",
+    "place": "Proof, construction and continuity of the lifted character"
+   }
+  },
+  {
+   "text": "The two constructions are inverse: starting with $b$, the lifted character has exactly the residues of $b$ at every $g$, hence equals $b$ by [lem-exc-padic-residue-universal-property]; starting with $(f_n)$, the defining property of $L$ recovers each $f_n$. The map is additive because residue maps and the group isomorphisms $\\theta_n$ of [lem-wf-finite-constant-h1-pi1] are additive. For a morphism of pointed schemes, reductions commute with precomposition on fundamental groups, and the $\\theta_n$ commute with pullback by their naturality. Equality coordinatewise therefore proves the asserted naturality of the isomorphism.",
+   "uses": [
+    "lem-exc-padic-residue-universal-property",
+    "lem-wf-finite-constant-h1-pi1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-additive-characters-h1.proof.md",
+    "place": "Proof, conclusion of (3.2) and naturality"
+   }
+  },
+  {
+   "text": "Let $s$ be the degree-one lift in the Weil group of [def-wf-weil-group], and write $\\alpha(g)=s^{-1}gs$ on $\\Pi$. The explicit equivariance clause of [lem-wf-finite-constant-h1-pi1] states $\\theta_n(\\mathrm{Frob}(x_n))=\\theta_n(x_n)\\circ\\alpha$. For the class associated with $b$, its right side is $(\\rho_n\\circ b)\\circ\\alpha=\\rho_n\\circ(b\\circ\\alpha)$. Thus in every coordinate the Frobenius transform of the class of $b$ is the class of $b\\circ\\alpha$. Equality of inverse-limit elements is coordinatewise equality, proving Frobenius equivariance and exactly the formula $b\\mapsto[g\\mapsto b(s^{-1}gs)]$ in the statement. No inverse convention is changed.",
    "uses": [
     "lem-wf-finite-constant-h1-pi1",
     "def-wf-weil-group"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-additive-characters-h1.proof.md",
+    "place": "Proof, last sentence: explicit Weil-descent Frobenius action"
+   }
   }
  ],
  "proof_deps": [
   "lem-wf-finite-constant-h1-pi1",
+  "lem-exc-padic-residue-universal-property",
   "def-wf-weil-group"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-additive-characters-h1.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/lem-wf-additive-characters-h1.proof.md",
+  "place": "Full proof; residue universal-property specialization and continuity argument expanded"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "continuousMonoidHomEquiv|etale.*cohom|ext_of_toZModPow|lift_spec",
+   "results": "{\"t\": \"2026-10-17T12:47:33Z\", \"tool\": \"grep\", \"query\": \"continuousMonoidHomEquiv|etale.*cohom|ext_of_toZModPow|lift_spec\", \"sub\": \"NumberTheory/Padics\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Padics/RingHoms.lean\", \"Mathlib/NumberTheory/Padics/RingHoms.lean\", \"Mathlib/NumberTheory/Padics/RingHoms.lean\", \"Mathlib/NumberTheory/Padics/RingHoms.lean\", \"Mathlib/NumberTheory/Padics/RingHoms.lean\"], \"digest\": \"3cd67daf8819392e\"}",
+   "date": "2026-10-17",
+   "verdict": "Ingredients only: lift_spec at Mathlib/NumberTheory/Padics/RingHoms.lean:684 and ext_of_toZModPow at :713; signatures read. No cohomological character equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "First etale cohomology with p power constant coefficients classifies continuous p adic characters",
+   "results": "{\"t\": \"2026-10-17T12:47:33Z\", \"tool\": \"leansearch\", \"query\": \"First etale cohomology with p power constant coefficients classifies continuous p adic characters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.H1IsoOfIsTrivial\", \"cyclotomicCharacter.continuous\", \"PadicInt.continuousAddCharEquiv_symm_apply\", \"cyclotomicCharacter.toFun\", \"PadicInt.continuousAddCharEquiv_of_norm_mul_symm_apply\", \"PadicInt.continuousAddCharEquiv_apply\", \"groupCohomology.H1\", \"PadicInt.continuousAddCharEquiv\"], \"digest\": \"a51fef8c688a77c1\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: groupCohomology.H1IsoOfIsTrivial concerns algebraic group cohomology, not etale cohomology or continuous characters; PadicInt.continuousAddCharEquiv has the adic integers as source and a multiplicative character target. Source signatures read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PadicInt\", \"lift\"",
+   "results": "{\"t\": \"2026-10-17T12:47:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"PadicInt\\\", \\\"lift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"PadicInt.norm_lift\", \"PadicInt.coe_lift\", \"PadicInt.lift_self\", \"PadicInt.lift\", \"PadicInt.lift_spec\", \"PadicInt.lift_unique\", \"PadicInt.lift_sub_val_mem_span\"], \"digest\": \"5ccb09756c854bce\"}",
+   "date": "2026-10-17",
+   "verdict": "Ingredients only: PadicInt.lift, lift_spec and lift_unique (RingHoms.lean:658,684,693) concern ring-valued residues; they do not state the cohomological isomorphism. Reused through the existing Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous homomorphisms from an etale fundamental group to p adic integers are the inverse limit of first etale cohomology with ZMod prime power coefficients",
+   "results": "{\"t\": \"2026-10-17T12:47:41Z\", \"tool\": \"leanfinder\", \"query\": \"Continuous homomorphisms from an etale fundamental group to p adic integers are the inverse limit of first etale cohomology with ZMod prime power coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"InfiniteGalois.mulEquivToLimit_symm_continuous\", \"cyclotomicCharacter.toFun_apply\", \"InfiniteGalois.algEquivToLimit_continuous\", \"BDeRhamPlus\", \"cyclotomicCharacter.continuous\", \"InfiniteGalois.profiniteGalGrpIsoLimit\", \"InfiniteGalois.continuousMulEquivToLimit\", \"InfiniteGalois.algEquivToLimit\"], \"digest\": \"4e5cbae923aeadd3\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: returned inverse limits of Galois groups and cyclotomic characters, or continuousAddCharEquiv whose source is the adic integers and whose target is multiplicative. These do not identify the etale H1 tower."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous additive characters into p adic integers correspond to compatible continuous homomorphisms into integers modulo prime powers",
+   "results": "{\"t\": \"2026-10-17T12:47:43Z\", \"tool\": \"leanfinder\", \"query\": \"Continuous additive characters into p adic integers correspond to compatible continuous homomorphisms into integers modulo prime powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PadicInt.continuousAddCharEquiv_apply\", \"PadicInt.continuousAddCharEquiv\", \"PadicInt.continuousAddCharEquiv_symm_apply\", \"PadicInt.continuousAddCharEquiv_of_norm_mul_apply\", \"PadicInt.continuousAddCharEquiv_of_norm_mul_symm_apply\", \"PadicInt.continuousAddCharEquiv_of_norm_mul\", \"PadicInt.continuous_addChar_of_value_at_one\", \"PadicInt.addChar_of_value_at_one\"], \"digest\": \"12f7a8de706bf5d9\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: returned inverse limits of Galois groups and cyclotomic characters, or continuousAddCharEquiv whose source is the adic integers and whose target is multiplicative. These do not identify the etale H1 tower."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -61,5 +159,29 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-p-real-rankone"
+ "unit": "sk-p-real-rankone",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-wf-additive-characters-h1",
+  "worker": "stage1",
+  "summary": "Expanded finite-coefficient naturality, pointwise residue lifting, continuity in both directions, inverse maps, additivity, naturality and the exact Frobenius conjugation. Reused the existing Mathlib residue universal-property leaf; no new nodes. Added the definition citation for the valuation topology. The available Lean equivalence proves only the group-theoretic half.",
+  "blueprint": "Current main-20261015 proof: equation (3.3) and naturality (step 1); pointwise inverse-limit identification (step 2); reduction and continuity in both directions (steps 3–4); equation (3.2) and naturality (step 5); final Weil-descent sentence (step 6).",
+  "tool_uses": [
+   {
+    "node": "lem-exc-padic-residue-universal-property",
+    "why": "Existing Mathlib leaf supplies compatible ring-residue lifting, residue separation and the kernel/norm criterion; its application to the ring of compatible tuples is written out. This is a generic coefficient tool, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-padic-residue-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q69-ee1258955",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q69-ee1258955 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, source passages and unit/chapter route. All six steps correctly establish residue lifting, continuity, naturality and inverse-conjugation Frobenius equivariance. Small cases and duplicate candidates checked; residue tool use accepted. No new nodes or repairs. Detailed review written to review.md."
+ }
 }

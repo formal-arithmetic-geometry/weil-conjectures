@@ -11,9 +11,61 @@
   "def-weil-triangulated-category",
   "lem-weil-pbc-adjunction-of-natural-bijection"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $A\\in\\mathcal C$. Postcomposition with $a$ defines $q_A:\\operatorname{Hom}(FA,FGK)\\to\\operatorname{Hom}(FA,K)$. For $y:FA\\to K$, the composite $b\\circ y$ is zero by the assumed vanishing of $\\operatorname{Hom}(FA,B)$; clause (ii) of [lem-weil-pbc-hom-into-triangle-exact] supplies $h$ with $y=a\\circ h$. Thus $q_A$ is surjective. To prove injectivity, suppose $a\\circ h=a\\circ h\\prime$ and put $c=(h-h\\prime)[1]:FA[1]\\to(FGK)[1]$. The shift is additive [def-weil-triangulated-category], so $a[1]\\circ c=0$. Clause (iii) of the same exactness node gives $k:FA[1]\\to B$ with $c=d\\circ k$. Applying the inverse shift to $k$ gives a map $FA\\to B[-1]$, which is zero by the other vanishing assumption. Since shift and inverse shift are inverse equivalences and preserve zero, $k=0$, hence $c=0$ and $h=h\\prime$. Therefore $q_A$ is bijective for every $A$.",
+   "uses": [
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0149, lemma-representable-homological; use Hom(FA,-) exactness and its shifted segment. Tag 0145, definition-triangulated-category, additive invertible shift."
+   }
+  },
+  {
+   "text": "Write $\\Psi$ for the specified adjunction bijections and $u=\\Psi_{GK,K}(a)$. Full faithfulness makes $t\\mapsto F(t)$ a bijection $\\operatorname{Hom}_{\\mathcal C}(A,GK)\\to\\operatorname{Hom}_{\\mathcal T}(FA,FGK)$. Compose this bijection with $q_A$ of step 1 and then with $\\Psi_{A,K}$. The naturality formula in the first variable in [lem-weil-pbc-adjunction-of-natural-bijection] identifies the resulting bijection as $t\\mapsto\\Psi_{A,K}(a\\circ F(t))=u\\circ t$. The inverse-transpose formula in that same node also gives $a=\\Psi^{-1}_{GK,K}(u)=\\varepsilon_K\\circ F(u)$.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following paragraph, naturality of the Hom bijection and equivalent condition (3)."
+   }
+  },
+  {
+   "text": "Take $A=GK$ in the bijection $t\\mapsto u\\circ t$ of step 2. Surjectivity gives $v:GK\\to GK$ with $u\\circ v=1_{GK}$. Then $u\\circ(v\\circ u)=(u\\circ v)\\circ u=u=u\\circ1_{GK}$. Injectivity of the same bijection yields $v\\circ u=1_{GK}$. Thus $u$ is an isomorphism, and functoriality shows that $F(u)$ is invertible with inverse $F(v)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-support.proof.md",
+    "place": "First paragraph, final counit identification sentence; explicit elementary inverse argument filling in that identification."
+   }
+  },
+  {
+   "text": "Put $d\\prime=F(u)[1]\\circ d$. By step 2, the triple $(F(u),1_K,1_B)$ satisfies the first triangle-morphism square, since $a=\\varepsilon_K\\circ F(u)$; its second square is $b=b$, and its third square is exactly $d\\prime=F(u)[1]\\circ d$. Its componentwise inverse $(F(v),1_K,1_B)$ also commutes: $\\varepsilon_K=a\\circ F(v)$ and $F(v)[1]\\circ d\\prime=d$, by step 3 and functoriality of the shift. The two triples therefore give inverse triangle morphisms. The original triangle is distinguished by hypothesis, so its isomorphic triangle with arrows $(\\varepsilon_K,b,d\\prime)$ is distinguished by TR1 in [def-weil-triangulated-category]. This proves both the displayed triangle and the specified isomorphism, including its connecting map.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0145, definition-triangulated-category, triangle morphisms and TR1 closure under isomorphisms; blueprint support proof first paragraph, counit identification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-support.proof.md",
+  "place": "First paragraph, final counit identification sentence, expanded using Stacks Tags 0149, 0037 and 0145."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -152,10 +204,87 @@
    },
    "date": "2026-10-17",
    "verdict": "no match: generic adjunction, triangulated category or pro-etale infrastructure does not state this result"
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*(distTriang|orthogonal)|orthogonal.*counit|coyoneda_exact",
+   "results": {
+    "hits": 25,
+    "top": [
+     "Mathlib/CategoryTheory/Triangulated/Subcategory.lean",
+     "Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean",
+     "Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean",
+     "Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean",
+     "Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean",
+     "Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean",
+     "Mathlib/CategoryTheory/Triangulated/Orthogonal.lean",
+     "Mathlib/CategoryTheory/Triangulated/Orthogonal.lean"
+    ],
+    "note": "",
+    "subdirectory": "CategoryTheory/Triangulated"
+   },
+   "date": "2026-10-17",
+   "verdict": "partial matches: coyoneda_exact₂ and coyoneda_exact₁ supply Hom exactness already represented by lem-weil-pbc-hom-into-triangle-exact; Orthogonal.lean supplies other orthogonal-category facts, not this normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_counit",
+   "results": {
+    "hits": 1,
+    "top": [
+     "CategoryTheory.Adjunction.homEquiv_counit"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "partial match: Adjunction.homEquiv_counit gives only the transpose formula, already represented by lem-weil-pbc-adjunction-of-natural-bijection; it does not give invertibility or the triangle."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An orthogonal distinguished triangle with first vertex F G K identifies its first arrow with the adjunction counit through the invertible adjoint transpose",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.CoreUnitCounit.left_triangle",
+     "CategoryTheory.Adjunction.IsTriangulated.mk'",
+     "CategoryTheory.Adjunction.IsTriangulated.mk''",
+     "CategoryTheory.Adjunction.IsTriangulated",
+     "CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit",
+     "CategoryTheory.Adjunction.IsTriangulated.casesOn",
+     "CategoryTheory.Adjunction.left_triangle_components",
+     "CategoryTheory.Adjunction.mk"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: unit-counit identities and triangulated-adjunction structures do not include the orthogonal triangle normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalize a distinguished triangle F G K to K to B to the adjunction counit when F is fully faithful and Hom(F A,B) and Hom(F A,B[-1]) vanish",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.isTriangulated_leftAdjoint",
+     "CategoryTheory.Adjunction.isTriangulated_rightAdjoint",
+     "CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated",
+     "CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated",
+     "CategoryTheory.Adjunction.IsTriangulated.mk''",
+     "CategoryTheory.Adjunction.IsTriangulated",
+     "CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism",
+     "CategoryTheory.Adjunction.IsTriangulated.mk'"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: results concern triangulated adjoints or essential-image triangle completion; they do not state the orthogonal counit normalization with transpose and specified triangle isomorphism."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -181,5 +310,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-orthogonal-triangle-counit-normalization",
+  "worker": "stage1",
+  "summary": "Expanded orthogonal-triangle normalization into Hom exactness, natural adjunction transposition, an explicit two-sided inverse and an explicit triangle isomorphism. Statement preserved; all auxiliary results already exist as Mathlib leaves; no new nodes.",
+  "blueprint": "Realizes the first paragraph, final sentence of det-prop-closed-adjoint-constructible-support.proof.md identifying the localization triangle first arrow with the counit; the shifted orthogonality supplies injectivity and the connecting map is checked explicitly."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q38-5417a143e",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q38-5417a143e (reviewer sub-agent of L); spot-checked: Read the full item, report, route, dependency statements and cited Stacks/Mathlib passages. All four steps are valid, including shifted injectivity and the connecting-map direction. Checked small cases, duplicate candidates and dependency cycles. No new nodes, repairs or tool_uses. Detailed findings are in review.md."
  }
 }
