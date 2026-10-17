@@ -10,18 +10,122 @@
  "stmt_deps": [
   "def-trf-coefficient-conventions",
   "def-trf-correspondence",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-scheme-reduction",
+  "def-pc-reduced-scheme",
+  "def-weil-pbc-extension-by-zero",
   "def-weil-extension-by-zero",
   "def-weil-derived-direct-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-compact-support-direct-image-detailed",
   "lem-sf-proetale-constructible-origin",
-  "lem-cbc-open-closed-recollement",
-  "prop-functor-package",
-  "sbc-prop-extension-by-zero-and-arbitrary-base-change",
-  "i-topology",
-  "fix-prop-adjunctions"
+  "lem-cbc-open-closed-recollement"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $w:W\\to C$ and $p:W\\to Z$ for the projections and $r:Y\\to W$ for reduction, so $h_Z=wr$ and $c_1h_Z=ipr$. The fibre-product identity gives $d_1=pr$. Reduction has the same underlying points as $W$ by [def-weil-pbc-scheme-reduction], and $Y$ is reduced. Thus invariance implies $(c_2h_Z)(Y)\\subseteq i(Z)$; apply [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] to obtain $d_2:Y\\to Z$ with $id_2=c_2h_Z$. Both factorizations are unique: on an affine open of $X$ the closed immersion is the quotient $R\\to R/I$ of [def-weil-closed-immersion], and a map out of $R/I$ is determined by its composite with this surjection. These local uniqueness statements glue. This uses reducedness of the source $Y$, not any assertion that the second-leg square is Cartesian.",
+   "uses": [
+    "def-weil-pbc-cartesian-square",
+    "def-weil-pbc-scheme-reduction",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§1.5.6(a), reduced source of the restricted correspondence; Stacks 0356 (schemes-lemma-map-into-reduction), with the two legs interchanged"
+   }
+  },
+  {
+   "text": "Use the same finite constant ring $A$ on both sites. It is Noetherian because it is finite, and its additive exponent is a power of $\\ell\\ne p$. All schemes here are separated and finite type over $k$: closed subschemes and their reductions have affine coordinate rings which are quotients of the original finitely generated rings. The open $U$ is quasi-compact because $X$ is Noetherian, so it too is separated finite type over $k$. In particular all these schemes are qcqs. The equivalence [det-pe-finite-tor-comparison-noetherian] identifies their bounded constructible finite-Tor categories, rather than just bounded constructible categories. The canonical comparisons [det-ctf-finite-comparison-localizing] identify pullback, $Ri_*$, $j_!$, and the chosen-compactification $Rf_!$ on these objects. Thus comparisons computed in the pro-etale coefficient categories below give comparisons in the stated etale categories, and conversely. The preservation clauses (i), (iii), (iv) of [thm-sf-ctf-stability] apply to these separated finite-type maps, and clause (3) of [prop-functor-package] gives proper coincidence $Ri_!\\simeq Ri_*$. By [def-compact-support-direct-image-detailed], for an open immersion the compactification with identity proper factor computes $Rj_!$ as the exact $j_!$. Hence $K_U,K_Z,TK$ and $Rd_{1!}d_2^*i^*K$ belong to the indicated finite-Tor domains. No integral, rational or unbounded comparison is used.",
+   "uses": [
+    "det-pe-finite-tor-comparison-noetherian",
+    "det-ctf-finite-comparison-localizing",
+    "thm-sf-ctf-stability",
+    "prop-functor-package",
+    "def-compact-support-direct-image-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-finite-tor-comparison/sk-cor-pe-finite-tor-comparison-noetherian.md",
+    "place": "§§1.1 and 5.2.3, finite etale coefficient categories; comparison with the stipulated pro-etale reading"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-reduced-closed-basechange-mate] with $P=C$, $f=c_1$, $t=c_2$, $D=Y$, $g=h_Z$, and $d_1,d_2$ from Step 1. Its natural isomorphism $B_K$ is exactly the required $\\theta_K$. Explicitly, compact-support base change on the Cartesian $W$ square, then the reduction unit and composition, give\n$$i^*Rc_{1!}c_2^*K\\simeq Rp_!w^*c_2^*K\\simeq Rp_!Rr_!r^*w^*c_2^*K\\simeq Rd_{1!}d_2^*i^*K.$$\nThe middle isomorphism uses the invertible reduction unit from [i-topology]; compact-support composition is clause (3) of [prop-functor-package]. The last pullback identification uses $c_2wr=id_2$ and $pr=d_1$. These are natural transformations, so for every morphism $v:L\\to M$ in the finite-Tor category, writing $S=Rd_{1!}d_2^*$, they satisfy\n$$\\theta_M\\circ i^*T(v)=S(i^*v)\\circ\\theta_L.$$\nStep 2 permits the same calculation in the etale realization. The second-leg square need only commute.",
+   "uses": [
+    "lem-trf-reduced-closed-basechange-mate",
+    "i-topology",
+    "prop-functor-package"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§1.1.8(i), Cartesian up to nilpotents, and §1.5.6(a); §5.3.3, closed graded-map comparison; legs interchanged"
+   }
+  },
+  {
+   "text": "On the small etale sites form the Cartesian square for $i:Z\\to X$ and $j:U\\to X$. Its fibre product is empty, since the open and closed subsets are complementary. The module-sheaf exchange of [lem-weil-pbc-etale-shriek-base-change-modules], with $f=i$ and $\\Lambda=A$, gives $i^*j_!M\\simeq e_!M|_{\\varnothing}=0$ for every $A$-module sheaf $M$ on $U$, where $e:\\varnothing\\to Z$. The only sheaf of modules on the empty site is zero (the empty covering forces its terminal value to be the zero group). Exact inverse image [prop-weil-pbc-inverse-image-modules-exact] and the exact-functor realization in [lem-cbc-open-closed-recollement] let this natural sheaf isomorphism act degree by degree on a bounded complex. Therefore $i^*K_U=i^*j_!j^*K=0$, and consequently $i^*a$ is the zero morphism.",
+   "uses": [
+    "lem-weil-pbc-etale-shriek-base-change-modules",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-cbc-open-closed-recollement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.3.3, equation (5.2); module version of Stacks 03S6 (etale-cohomology-lemma-shriek-base-change)"
+   }
+  },
+  {
+   "text": "Choose a bounded complex $B$ of etale $A$-module sheaves representing $K$. In each degree [lem-weil-pbc-open-closed-short-exact] gives the exact sequence with the actual counit and unit\n$$0\\to j_!j^*B^n\\to B^n\\xrightarrow{\\eta_i}i_*i^*B^n\\to0.$$\nApply the exact module inverse image of [prop-weil-pbc-inverse-image-modules-exact]. Step 4 makes the first term zero, so $i^*\\eta_i:i^*B^n\\to i^*i_*i^*B^n$ is an isomorphism in every degree. These maps are a chain map by naturality of the unit; their inverses commute with differentials by multiplying that chain-map equation by the inverses. Thus $i^*\\eta_i$ is an isomorphism of complexes. By [lem-cbc-open-closed-recollement], $i_*$ is exact, $Ri_*$ is computed termwise, and the derived localization arrow $b$ is precisely the induced termwise unit. Hence $i^*b$ is an isomorphism for the specified arrow, not merely for a choice of an isomorphic localization triangle.",
+   "uses": [
+    "lem-weil-pbc-open-closed-short-exact",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-cbc-open-closed-recollement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Example 5.2.3, localization complex; Stacks 095L (etale-cohomology-lemma-ses-associated-to-open)"
+   }
+  },
+  {
+   "text": "Apply Step 3's naturality equation first to $a$ and then to $b$. It gives\n$$i^*T(a)=\\theta_K^{-1}S(i^*a)\\theta_{K_U}=0,$$\n$$i^*T(b)=\\theta_{K_Z}^{-1}S(i^*b)\\theta_K.$$\nHere $S$ sends a zero object to zero: in the chosen-compactification construction [def-compact-support-direct-image-detailed], inverse images and extension by zero send the zero complex to zero, and the zero K-injective resolution computes derived direct image of zero as zero. Thus it sends $i^*a$, whose source is zero, to zero. By Step 5, $S(i^*b)$ is invertible, since every functor sends an inverse pair to an inverse pair. The second display is therefore an isomorphism. The two equations also prove the requested compatibility with the displayed natural base-change identification.",
+   "uses": [
+    "def-compact-support-direct-image-detailed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.3.3, equation (5.2) and uniqueness of the closed graded map; naturality calculation written out"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "det-pe-finite-tor-comparison-noetherian",
+  "det-ctf-finite-comparison-localizing",
+  "thm-sf-ctf-stability",
+  "prop-functor-package",
+  "lem-trf-reduced-closed-basechange-mate",
+  "i-topology",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-cbc-open-closed-recollement",
+  "lem-weil-pbc-open-closed-short-exact",
+  "def-compact-support-direct-image-detailed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "§1.5.6(a), Example 5.2.3 and §5.3.3 (5.2), with the two legs interchanged; explicit naturality and termwise-localization argument using Stacks 0356, 03S6 and 095L."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,11 +168,46 @@
    "results": "8 hits: AlgebraicGeometry.Scheme.restrictRestrictComm, AlgebraicGeometry.arrowResLEAppIso, AlgebraicGeometry.morphismRestrictRestrictBasicOpen, AlgebraicGeometry.morphismRestrictRestrict, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict, AlgebraicGeometry.basicOpenIsoSpecAway_inv_homOfLE, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict",
    "date": "2026-10-17",
    "verdict": "no match: ordinary exact-functor/localization or scheme/topological results do not state this filtered sheaf or invariant-support comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a correspondence preserving a closed subset, restriction of compact support pushforward to the closed subset is the pushforward along the reduced closed correspondence, and localization induces an isomorphism on closed restriction",
+   "results": "8 hits: HasCompactMulSupport.comp_isClosedEmbedding, HasCompactSupport.comp_isClosedEmbedding, AlgebraicGeometry.morphismRestrictRestrictBasicOpen, AlgebraicGeometry.arrowResLEAppIso, AlgebraicGeometry.morphismRestrictRestrict, Function.locallyFinsuppWithin.restrictMonoidHom_apply, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, IsCompactOperator.codRestrict",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern topological support, scheme restrictions or ideal sheaves and stability of morphism properties; none states the derived compact-support comparison for an invariant correspondence and its localization maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"baseChange\"",
+   "results": "0 hits: none",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern topological support, scheme restrictions or ideal sheaves and stability of morphism properties; none states the derived compact-support comparison for an invariant correspondence and its localization maps."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomological.correspondence|invariant.*closed|compactSupport.*baseChange|baseChange.*compactSupport",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern topological support, scheme restrictions or ideal sheaves and stability of morphism properties; none states the derived compact-support comparison for an invariant correspondence and its localization maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariant closed support base change for a cohomological correspondence and its open closed localization triangle",
+   "results": "8 hits: AlgebraicGeometry.universallyClosed_isStableUnderBaseChange, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.UniversallyClosed.universally_isClosedMap, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange, AlgebraicGeometry.IsLocalIso.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern topological support, scheme restrictions or ideal sheaves and stability of morphism properties; none states the derived compact-support comparison for an invariant correspondence and its localization maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an invariant closed subscheme of a cohomological correspondence, compact support base change and invariance under reduction identify the induced correspondence on the closed subscheme",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.comapIso_inv_subschemeι_assoc, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_inv_subschemeι, AlgebraicGeometry.Scheme.IdealSheafData.support_map, AlgebraicGeometry.Scheme.zeroLocus_map_of_eq, AlgebraicGeometry.Scheme.IdealSheafData.support_comap, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern topological support, scheme restrictions or ideal sheaves and stability of morphism properties; none states the derived compact-support comparison for an invariant correspondence and its localization maps."
   }
  ],
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-invariant-localization-filtered-lift",
@@ -79,12 +218,86 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof paragraph (2): closed graded map in the invariant open--closed localization argument",
+   "place": "Proof paragraph (2) of lem-trf-local-term-locality: invariant open--closed trace additivity and restriction to c_1^{-1}(Z)_red in the contracting-correspondence argument; via the closed graded-map calculation of lem-trf-invariant-localization-filtered-lift, Step 5.",
    "via": [
     "lem-trf-invariant-localization-filtered-lift"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-invariant-closed-basechange-identification",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Six proof steps: reduced-source leg factorization, exact coefficient-domain comparison, the existing reduced-closed-fibre comparison, etale open vanishing, invertibility of the actual pulled-back localization unit, and its transport by naturality. Reused existing nodes and created none; retained inherited search records and appended five actual NP searches. Checked Varshavsky §§1.5.6 and 5.3.3, Stacks 0356/03S6/095L and all cited statements. No second-leg Cartesian hypothesis is introduced.",
+  "blueprint": "The current main-20261015 proof of lem-trf-local-term-locality, paragraph (2), invokes restriction to the reduced closed correspondence and trace additivity. This item supports precisely that restriction and the closed graded-map uniqueness calculation in its descendant lem-trf-invariant-localization-filtered-lift (Step 5). Steps 1 and 3 realize the reduced restriction; Steps 4--6 supply the open vanishing and closed localization isomorphism used in that calculation. The unit sk-i-curve-zero route remains the contracting-correspondence route; this is a supporting tool, not its key statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Generic scheme factorization criterion at Stacks 0356, used only to produce the second leg from set-theoretic invariance; no node of sk-i-curve-zero states it."
+   },
+   {
+    "node": "det-pe-finite-tor-comparison-noetherian",
+    "why": "Generic finite-Tor etale/pro-etale comparison, needed because constructible-origin alone does not identify Tor amplitude; no node of this unit states it."
+   },
+   {
+    "node": "det-ctf-finite-comparison-localizing",
+    "why": "Generic canonical comparison for pullback, direct image, open extension and compact-support operations; no node of this unit supplies the coefficient-site operation comparison."
+   },
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Generic preservation clauses (i),(iii),(iv) check the domains of the objects to which the reduced comparison is applied."
+   },
+   {
+    "node": "prop-functor-package",
+    "why": "Generic compact-support composition and proper coincidence, from the six-functor package already cited by the unit route."
+   },
+   {
+    "node": "lem-trf-reduced-closed-basechange-mate",
+    "why": "Existing general compact-support comparison on a reduced closed fibre; used as a tool with f=c_1 and t=c_2 after the independent geometric factorization, not as a new restatement of this item."
+   },
+   {
+    "node": "i-topology",
+    "why": "Generic reduction equivalence with the actual invertible unit, used to replace W by its reduction."
+   },
+   {
+    "node": "lem-weil-pbc-etale-shriek-base-change-modules",
+    "why": "Generic Stacks 03S6 module-sheaf exchange on the empty open/closed intersection, not a smooth-base-change assertion."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic exactness for etale constant-A module inverse image, needed to preserve the localization short exact sequence."
+   },
+   {
+    "node": "lem-cbc-open-closed-recollement",
+    "why": "Generic exact-functor realization of the etale localization unit b and exact closed direct image, so Step 5 concerns the specified derived arrow."
+   },
+   {
+    "node": "lem-weil-pbc-open-closed-short-exact",
+    "why": "Generic Stacks 095L degreewise localization sequence with actual unit and counit; this unit has no separate sheaf-theoretic version."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "det-pe-finite-tor-comparison-noetherian",
+  "det-ctf-finite-comparison-localizing",
+  "thm-sf-ctf-stability",
+  "prop-functor-package",
+  "lem-trf-reduced-closed-basechange-mate",
+  "i-topology",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-cbc-open-closed-recollement",
+  "lem-weil-pbc-open-closed-short-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NP-0414b4f0a",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-0414b4f0a (reviewer sub-agent of L); spot-checked: I read the whole delivery against the cited statements and the sources. It has one commit, changes only the item and its report, and creates no new nodes. The statement is inherited and not weakened, and it is true: compact-support base change computes i^*Rc1!c2^*K on the reduction of c_1^{-1}(Z), where c_2 lands in Z by invariance. So i^*T(j_!j^*K)=0, and since the cone of b is K_U[1], i^*T(b) is invertible. This matches Varshavsky §1.5.6(a), Example 5.2.3 and §5.3.3 (5.2) with the legs interchanged, and the main-20261015 lem-trf-local-term-locality proof paragraph (2). The source of the restriction is (C x_{c1,X} Z)_red, with no Cartesian condition on the second leg. Step by step: (1) Stacks 0356 (lemma-map-into-reduction, checked verbatim) needs only a reduced source; the factorizations are unique because a closed immersion is a monomorphism. (2) A is finite, hence Noetherian; all schemes are qcqs; det-pe-finite-tor-comparison-noetherian identifies the finite-Tor categories, det-ctf-finite-comparison-localizing supplies the comparisons for g^*, Rg_*, j_! and Rf_!, and the coefficient category is A_{E,n} on both sides. (3) Every hypothesis of lem-trf-reduced-closed-basechange-mate holds with P=C, f=c1, t=c2, g=h_Z and d2 from Step 1; its B_K is theta and is natural. That lemma is unsplit with no proof dependencies, so there is no cycle. (4) 03S6 in module form on the empty square Z x_X U gives i^*j_!=0 degreewise. (5) 095L in module form, exact i^*, and the termwise unit from lem-cbc-open-closed-recollement make i^*b invertible. (6) Elementary naturality, using S(0)=0. Small cases checked: Z empty, Z=X reduced, c1=Frobenius with c2=id (W nonreduced, Y a point), and c1=id with c2=Frobenius. My grep found no duplicate: the mate lemma is the more general tool, trace-triangle-compatibility is a different assertion, and the parent is not cited. The item restates no clause of its parent. I accept all eleven declared tool_uses: they are generic comparison and sheaf lemmas plus the sk-i-additivity mate, which the unit route reaches through localization additivity. No SGA is cited. The Mathlib searches are the five NP queries across four kinds; no match, so this is not a leaf. One nit is left unchanged: the inherited statement cites lem-sf-proetale-constructible-origin, which identifies only D^b_c, for the finite-Tor identification. Step 2 supplies the Tor-amplitude comparison, so the meaning is unaffected. No fixes were written."
  }
 }

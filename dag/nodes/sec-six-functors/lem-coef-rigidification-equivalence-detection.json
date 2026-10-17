@@ -46,33 +46,19 @@
    }
   },
   {
-   "text": "For $n\\geq2$ and $0<i<n$, compute the realization of the inner horn inclusion. Both enriched categories have objects $0,\\ldots,n$, and their mapping sets agree except from $0$ to $n$. Put $B=(\\Delta^1)^{n-1}$, with coordinate $t_j$ recording membership of the intermediate vertex $j$ in a subset. The exceptional mapping inclusion is $K\\hookrightarrow B$, where\n$$K=\\bigcup_{1\\leq j<n}\\{t_j=1\\}\\ \\cup\\ \\bigcup_{1\\leq j<n,\\ j\\ne i}\\{t_j=0\\}.$$\nTo see this directly from the colimit presentation, omitting an intermediate vertex $j\\ne i$ gives the face $t_j=0$; composing through an intermediate vertex $j$ gives $t_j=1$, since union of subsets is composition. Each factor of such a composition belongs to a proper interval contained in an allowed horn face. These exhaust the generators of the horn colimit; their overlaps impose exactly the common-face identifications. The proper intervals give unchanged mapping sets. Thus $\\mathfrak C[\\Lambda_i^n]\\to\\mathfrak C[\\Delta^n]$ is a pushout of $U(K)\\to U(B)$ along the functor selecting $0,n$. The current realization theorem preserves finite products in $\\mathcal K$, so $|B|$ is the product of the realized intervals. Its finite-limit clause identifies intersections of these coordinate faces, and its small-colimit clause identifies their union: add faces successively by the pushout of their intersection with the union already formed. These colimits in $\\mathcal K$ are the topological colimits. Each coordinate face and each intersection is a compact closed subspace of the finite cube. The union has the final topology for its finitely many closed faces: a subset is closed exactly when its intersections with all the faces are closed, since the union is finite. Thus the successive topological pushouts give exactly the displayed union with its subspace topology. In the realized cube, increasing coordinate $t_i$ linearly to $1$ is a deformation retraction of $|K|$ onto the face $t_i=1$; that face is a cube. Contract that face to its all-ones vertex and contract the entire cube $|B|$ to the same vertex. The constant map $|B|\\to|K|$ at that vertex is thus an inverse to the inclusion up to continuous homotopies. By [lem-coef-homotopy-groups-basepoint-change], this homotopy equivalence induces bijections on path components and isomorphisms on all homotopy groups at every basepoint. Therefore $K\\hookrightarrow B$ is a monomorphism and a weak homotopy equivalence, hence a Kan--Quillen trivial cofibration. The horn-retract description in the Kan--Quillen input expresses it as a retract of a relative horn-cell map. Applying $U$ expresses $U(K)\\to U(B)$ as a retract of attachments of the enriched horn maps in $J$: at every attachment there are just the fixed two objects and the indicated mapping set, so the fixed-object pushouts have exactly the original simplicial pushout as their $0$-to-$1$ mapping set. Hence the enriched inner-horn inclusion belongs to $J\\text{-cof}$. For $n=2$, $K$ is the endpoint $1$ of $\\Delta^1$; there are no inner horns in dimensions $0,1$.",
+   "text": "By [lem-coef-coherent-inner-anodyne-equivalences], for every inner anodyne map $u:A\\to B$ of small simplicial sets, with no quasicategory hypothesis on $A$ or $B$, $\\mathfrak C[u]$ is a Dwyer--Kan equivalence. Its $\\mathfrak C$ is the subset-poset simplex-colimit realization of the statement, and its Dwyer--Kan equivalences (weak homotopy equivalences on all mapping simplicial sets and an equivalence after $\\pi_0$) are those of [lem-coef-simplicial-interval-cell-stability]. An inner-horn-cell map, meaning a transfinite composite of pushouts of coproducts of inner horn inclusions $\\Lambda_i^n\\hookrightarrow\\Delta^n$ ($n\\geq2$, $0<i<n$), is inner anodyne: for maps $a_k:A_k\\to B_k$ and a map $\\coprod_{k\\in I}A_k\\to X$, the pushout of $\\coprod_ka_k$ along it is the transfinite composite, over a well-ordering of $I$, of the pushouts of the single maps $a_k$ attached one at a time (at a limit stage take the colimit of the earlier stages, which is the pushout along the coproduct over the earlier indices), and the class of inner anodyne maps is by definition closed under pushouts, small continuous transfinite compositions and arrow retracts. Hence $\\mathfrak C$ sends every inner-horn-cell map, and every arrow retract of one, to a Dwyer--Kan equivalence.",
    "uses": [
-    "lem-coef-simplicial-interval-lifting",
-    "lem-coef-kan-quillen-right-proper",
-    "lem-coef-realization-finite-limits",
-    "lem-coef-homotopy-groups-basepoint-change"
+    "lem-coef-coherent-inner-anodyne-equivalences",
+    "lem-coef-simplicial-interval-cell-stability"
    ],
    "elementary": false,
    "source": {
     "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
-    "place": "Lemma 2.2.5.2, explicit inner-horn cube calculation; elementary deformation of the cube"
+    "place": "Theorem 2.2.5.1 proof, via Lemma 2.2.5.2 (C carries inner anodyne maps to trivial cofibrations), as carried by the existing node lem-coef-coherent-inner-anodyne-equivalences"
    }
   },
   {
-   "text": "It follows that $\\mathfrak C$ sends every inner-horn-cell map to $J\\text{-cof}$. Here an inner-horn-cell map is a transfinite composite of pushouts of coproducts of inner horn inclusions. Indeed step 1 preserves all these colimits, and left lifting against $J\\text{-inj}$ is preserved by these operations: extend the filler over each attached cell and at a limit take the compatible colimit of the earlier fillers. Retracts preserve lifting by composing with their section and retraction. By the interval-lifting input every $J\\text{-cof}$ map is a retract of a $J\\text{-cell}$ map. Interval-cell stability and retract closure therefore show that $\\mathfrak C$ sends all inner-horn-cell maps, and their retracts, to Dwyer--Kan equivalences. This argument makes no local Kan assumption on the intermediate enriched categories.",
-   "uses": [
-    "lem-coef-simplicial-interval-lifting",
-    "lem-coef-simplicial-interval-cell-stability"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
-    "place": "Lemma 2.2.5.2, weak saturation argument, using the existing enriched small-object and cell-stability statements"
-   }
-  },
-  {
-   "text": "Apply the functorial cellular small-object factorization to the maps $S\\to\\Delta^0$ and $T\\to\\Delta^0$, using the set of inner horn inclusions. Simplicial colimits are degreewise set colimits, and each horn has finitely many nondegenerate simplices, so every map from a horn into a sequential union of these monomorphisms factors through a finite stage, with equalities also detected at a finite stage. Thus the smallness hypothesis holds with the regular cardinal $\\omega$. Obtain functorial inner-horn-cell inclusions $r_S:S\\to S'$ and $r_T:T\\to T'$ and a commutative square $r_T f=f' r_S$. The maps from $S',T'$ to the point lift all inner horns, so $S',T'$ are quasicategories. Inner horn inclusions are Joyal trivial cofibrations by the Joyal input. Their cell maps are trivial cofibrations as well: lift against any Joyal fibration cell by cell and use the weak factorization system. Hence $r_S,r_T$ are categorical equivalences in the testing convention, and step 3 shows that $\\mathfrak C[r_S],\\mathfrak C[r_T]$ are Dwyer--Kan equivalences. All attachments, including their indexing sets, stay in the original universe; only the testing categories may require the larger universe already specified in the item.",
+   "text": "Apply the functorial cellular small-object factorization to the maps $S\\to\\Delta^0$ and $T\\to\\Delta^0$, using the set of inner horn inclusions. Simplicial colimits are degreewise set colimits, and each horn has finitely many nondegenerate simplices, so every map from a horn into a sequential union of these monomorphisms factors through a finite stage, with equalities also detected at a finite stage. Thus the smallness hypothesis holds with the regular cardinal $\\omega$. Obtain functorial inner-horn-cell inclusions $r_S:S\\to S'$ and $r_T:T\\to T'$ and a commutative square $r_T f=f' r_S$. The maps from $S',T'$ to the point lift all inner horns, so $S',T'$ are quasicategories. Inner horn inclusions are Joyal trivial cofibrations by the Joyal input. Their cell maps are trivial cofibrations as well: lift against any Joyal fibration cell by cell and use the weak factorization system. Hence $r_S,r_T$ are categorical equivalences in the testing convention, and step 2 shows that $\\mathfrak C[r_S],\\mathfrak C[r_T]$ are Dwyer--Kan equivalences. All attachments, including their indexing sets, stay in the original universe; only the testing categories may require the larger universe already specified in the item.",
    "uses": [
     "lem-coef-small-object-cell-factorization",
     "def-cbc-enhanced-diagrams-cones",
@@ -98,7 +84,7 @@
    }
   },
   {
-   "text": "Under the two conditions at the end of step 5, $g$ is fully faithful in the right-mapping-space convention. Let $B_0$ be its full replete essential image. Apply [lem-coef-infinity-full-essential-image] to obtain a coherent inverse to $g:A\\to B_0$. Essential surjectivity of $hg$ says that every vertex of $B$ is isomorphic in $hB$ to some $g(x)$, hence equivalent to $g(x)$ in the quasicategory convention. Here, for a quasicategory $\\mathcal D$, the generated category $h\\mathcal D$ of the Joyal input is identified with the category of [lem-coef-infinity-mapping-composition] by the identity on vertices and edges: the latter respects degenerate edges and $2$-simplex relations by that node, it is full because every component is represented by an edge, and it is faithful because any word of edges equals a single edge by filling inner $2$-horns, while a $1$-simplex of a right-pinched mapping space is a $2$-simplex with edges $(\\mathrm{id}_x,u,u')$, imposing $u'=u$ in the generated category. By that node an edge has invertible class exactly when it is an equivalence edge. Consequently $B_0$ contains every vertex of $B$; since it is full, it contains every simplex and equals $B$. The supplied inverse is therefore a map $v:B\\to A$ with coherent inverse transformations. Conversely, a coherent inverse makes $g$ a functor equivalence; the enhanced-functor calculus then gives weak homotopy equivalences on all its mapping spaces. On homotopy categories the two inverse transformations give $hv\\,hg\\cong\\mathrm{id}$ and $hg\\,hv\\cong\\mathrm{id}$, so $hg$ is essentially surjective. Therefore, for maps between quasicategories, $\\mathfrak C[g]$ is Dwyer--Kan exactly when $g$ has a coherent inverse.",
+   "text": "Under the two conditions at the end of step 4, $g$ is fully faithful in the right-mapping-space convention. Let $B_0$ be its full replete essential image. Apply [lem-coef-infinity-full-essential-image] to obtain a coherent inverse to $g:A\\to B_0$. Essential surjectivity of $hg$ says that every vertex of $B$ is isomorphic in $hB$ to some $g(x)$, hence equivalent to $g(x)$ in the quasicategory convention. Here, for a quasicategory $\\mathcal D$, the generated category $h\\mathcal D$ of the Joyal input is identified with the category of [lem-coef-infinity-mapping-composition] by the identity on vertices and edges: the latter respects degenerate edges and $2$-simplex relations by that node, it is full because every component is represented by an edge, and it is faithful because any word of edges equals a single edge by filling inner $2$-horns, while a $1$-simplex of a right-pinched mapping space is a $2$-simplex with edges $(\\mathrm{id}_x,u,u')$, imposing $u'=u$ in the generated category. By that node an edge has invertible class exactly when it is an equivalence edge. Consequently $B_0$ contains every vertex of $B$; since it is full, it contains every simplex and equals $B$. The supplied inverse is therefore a map $v:B\\to A$ with coherent inverse transformations. Conversely, a coherent inverse makes $g$ a functor equivalence; the enhanced-functor calculus then gives weak homotopy equivalences on all its mapping spaces. On homotopy categories the two inverse transformations give $hv\\,hg\\cong\\mathrm{id}$ and $hg\\,hv\\cong\\mathrm{id}$, so $hg$ is essentially surjective. Therefore, for maps between quasicategories, $\\mathfrak C[g]$ is Dwyer--Kan exactly when $g$ has a coherent inverse.",
    "uses": [
     "lem-coef-infinity-full-essential-image",
     "lem-cbc-enhanced-functor-cone-calculus",
@@ -112,7 +98,7 @@
    }
   },
   {
-   "text": "For maps $g:A\\to B$ of quasicategories the testing condition is also equivalent to having a coherent inverse, as follows. If $v$ is such an inverse, precomposition by $v$ is an inverse to precomposition by $g$ on every $h\\operatorname{Fun}(-,Z)$: whisker the two inverse transformations to obtain the two natural isomorphisms. Conversely, the test with $Z=A$ supplies $v:B\\to A$ and an isomorphism $vg\\cong\\mathrm{id}_A$ in $h\\operatorname{Fun}(A,A)$. Postcomposing gives $gvg\\cong g$ in $h\\operatorname{Fun}(A,B)$. The test with $Z=B$ says that restriction $h\\operatorname{Fun}(B,B)\\to h\\operatorname{Fun}(A,B)$ is fully faithful; it therefore lifts this isomorphism to $gv\\cong\\mathrm{id}_B$. These are the coherent inverse transformations: in a quasicategory an isomorphism of objects in its homotopy category is represented by an equivalence edge, by the identification of step 6 and [lem-coef-infinity-mapping-composition], and the functor simplicial sets are quasicategories by the enhanced-functor calculus. The two particular testing categories are allowed in the sufficiently large universe. Combining with step 6 proves the required criterion for $g:A\\to B$ between quasicategories.",
+   "text": "For maps $g:A\\to B$ of quasicategories the testing condition is also equivalent to having a coherent inverse, as follows. If $v$ is such an inverse, precomposition by $v$ is an inverse to precomposition by $g$ on every $h\\operatorname{Fun}(-,Z)$: whisker the two inverse transformations to obtain the two natural isomorphisms. Conversely, the test with $Z=A$ supplies $v:B\\to A$ and an isomorphism $vg\\cong\\mathrm{id}_A$ in $h\\operatorname{Fun}(A,A)$. Postcomposing gives $gvg\\cong g$ in $h\\operatorname{Fun}(A,B)$. The test with $Z=B$ says that restriction $h\\operatorname{Fun}(B,B)\\to h\\operatorname{Fun}(A,B)$ is fully faithful; it therefore lifts this isomorphism to $gv\\cong\\mathrm{id}_B$. These are the coherent inverse transformations: in a quasicategory an isomorphism of objects in its homotopy category is represented by an equivalence edge, by the identification of step 5 and [lem-coef-infinity-mapping-composition], and the functor simplicial sets are quasicategories by the enhanced-functor calculus. The two particular testing categories are allowed in the sufficiently large universe. Combining with step 5 proves the required criterion for $g:A\\to B$ between quasicategories.",
    "uses": [
     "lem-coef-joyal-model-structure",
     "lem-cbc-enhanced-functor-cone-calculus",
@@ -126,7 +112,7 @@
    }
   },
   {
-   "text": "Apply step 7 to the replacement map $f':S'\\to T'$ of step 4. In the square $r_T f=f' r_S$, both vertical arrows are categorical equivalences and their coherent realizations are Dwyer--Kan equivalences. Two-out-of-three for categorical equivalences gives that $f$ is a categorical equivalence exactly when $f'$ is. Two-out-of-three for Dwyer--Kan equivalences gives that $\\mathfrak C[f]$ is Dwyer--Kan exactly when $\\mathfrak C[f']$ is. The equivalence for $f'$ therefore gives the desired equivalence for the original arbitrary simplicial map $f$.",
+   "text": "Apply step 6 to the replacement map $f':S'\\to T'$ of step 3. In the square $r_T f=f' r_S$, both vertical arrows are categorical equivalences and their coherent realizations are Dwyer--Kan equivalences. Two-out-of-three for categorical equivalences gives that $f$ is a categorical equivalence exactly when $f'$ is. Two-out-of-three for Dwyer--Kan equivalences gives that $\\mathfrak C[f]$ is Dwyer--Kan exactly when $\\mathfrak C[f']$ is. The equivalence for $f'$ therefore gives the desired equivalence for the original arbitrary simplicial map $f$.",
    "uses": [
     "lem-coef-joyal-model-structure",
     "lem-coef-simplicial-interval-cell-stability"
@@ -141,13 +127,12 @@
  "proof_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "lem-cbc-enhanced-functor-cone-calculus",
-  "lem-coef-homotopy-groups-basepoint-change",
+  "lem-coef-coherent-inner-anodyne-equivalences",
   "lem-coef-infinity-full-essential-image",
   "lem-coef-infinity-mapping-composition",
   "lem-coef-joyal-model-structure",
   "lem-coef-kan-quillen-right-proper",
   "lem-coef-pinched-rigidification-resolution",
-  "lem-coef-realization-finite-limits",
   "lem-coef-simplicial-interval-cell-stability",
   "lem-coef-simplicial-interval-lifting",
   "lem-coef-small-object-cell-factorization"
@@ -188,7 +173,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-coherent-nerve-comparison",
@@ -201,12 +186,12 @@
   "date": "2026-10-17",
   "item": "lem-coef-rigidification-equivalence-detection",
   "worker": "stage1",
-  "summary": "Revalidated the current realization statement after the landing refusal, refreshed all 21 citation quotes, and expanded the finite product/intersection/closed-face-union application in step 2. The current DAG supplies the Whitehead input through lem-coef-infinity-full-essential-image: step 6 explicitly identifies its full essential image with the codomain using essential surjectivity. Removed the unlanded duplicate child. Eight complete proof steps, unchanged item statement, zero new nodes; no Lean or compilation. Independent second reading by N9 added the explicit homotopy inverse for the horn-face union and cited the existing all-degree homotopy-invariance statement; all eight steps and their current dependency statements were checked.",
+  "summary": "Q46 repair of the human return: retained the statement and Lean record verbatim. The former non-elementary step 2 (the inner-horn computation, cube contraction and enriched lifting) is replaced by a citation of the existing reviewed same-unit node lem-coef-coherent-inner-anodyne-equivalences, which states that the coherent realization of every inner anodyne map is a Dwyer--Kan equivalence without quasicategory hypotheses; the new step 2 writes out why inner-horn-cell maps and their retracts are inner anodyne. Maintainer-reader fix: the two statement-only lemmas originally created for this (inner-horn cube pushout, realization of coordinate-face unions) re-derived that node's argument and were dropped. Remaining steps unchanged except cross-reference numbers. No Lean changes or compilation.",
   "blueprint": "Paragraph 2 of prop-coef-integral-exceptional-adjoint: the displayed coefficient-adjunction and inverse-limit calculation, together with the foundational rigidification criterion used by the finite-adjunction diagram realization.",
   "tool_uses": [
    {
     "node": "lem-cbc-enhanced-functor-cone-calculus",
-    "why": "Generic functor-quasicategory and mapping-space invariance under a coherent inverse in steps 6 and 7; the unit has no independent substitute, and the downstream coherent-nerve comparison is circular."
+    "why": "Generic functor-quasicategory and mapping-space invariance under a coherent inverse in steps 5 and 6; the unit has no independent substitute, and the downstream coherent-nerve comparison is circular."
    }
   ]
  },
@@ -214,12 +199,12 @@
   "lem-cbc-enhanced-functor-cone-calculus"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-N9-6dda53e2f",
-  "group": "N9",
+  "reviewer": "NT-cc-Q46-82dcaeb97",
+  "group": "Q46",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-6dda53e2f (reviewer sub-agent of L); spot-checked: I read the full item (8 steps), the full statement of every cited node, the parent lem-coef-coherent-nerve-comparison, and the HTT places 2.2.5.1(W), 2.2.5.2, 2.2.5.8, 2.2.2.7 and 2.2.4.1. HTT is not archived locally, so I checked those places from my own knowledge of the text. The statement is unchanged and matches HTT 2.2.5.1(W) with the hFun test; edge cases hold: empty to empty, empty to nonempty, identities. Step 2 is correct: in the cube, K is the boundary minus the open face t_i=0; innerness is used through the faces d_n and d_0; the raise-t_i retraction stays in |K| and n=2 gives the endpoint; U-attachments over two objects make U(K)->U(B) a J-cof map. Steps 1, 3, 4, 5 and 8 check against the cited statements; the Mathlib leaf applies with kappa=omega because horns are finite. One missing citation (C1/C2), repaired: steps 6 and 7 used 'isomorphic in the generated hB/hFun implies equivalence edge' with no node. That is the non-elementary Boardman-Vogt identification, and the second reading's justification for it was insufficient. Both steps now cite the same-unit lem-coef-infinity-mapping-composition (no cycle; full transitive-closure check), and step 6 writes out the comparison: relations respected, full, and faithful by reducing words with inner 2-horn fills plus the (id_x,u,u') 1-simplices of Map^R. Step 7 is now non-elementary, and proof_deps gains the node. I accept the declared tool_use of lem-cbc-enhanced-functor-cone-calculus: no node in the unit gives it, and the in-unit route would be circular. There are no new nodes and no SGA citations, and the blueprint same_as=[] is confirmed. The corrected file is fixes/dag/nodes/sec-six-functors/lem-coef-rigidification-equivalence-detection.json; details are in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-82dcaeb97 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and every cited statement in full. HTT is not archived locally, so the HTT 2.2.5.1(W)/2.2.5.2/2.2.5.8 places were checked from my own knowledge of the text. Both new statements are true. Inner-horn cube: Map(0,n) is the cube minus its interior and the face t_i=0; the faces d_k (k not i) give t_k=0, composites through j give t_j=1, and n=2,i=1 gives K={1}. Realization lemma: a compact-to-Hausdorff bijection, so a homeomorphism; m=0 and empty E behave as stated. Fault (C5/D1): steps 2-5 re-derive the existing reviewed same-unit node lem-coef-coherent-inner-anodyne-equivalences (Q74, 2026-10-17), which says C sends every inner anodyne map to a Dwyer-Kan equivalence, with no quasicategory hypothesis, using the same C and the same Dwyer-Kan notion. The item already reaches it transitively and it does not reach the item, so there is no cycle. The report set it aside wrongly, since the item uses only its Dwyer-Kan conclusion. Fix: steps 2-5 become one step that cites it plus interval-cell-stability and writes out why inner-horn-cell maps and their retracts are inner anodyne. Old steps 6-10 become 3-7 with cross-references renumbered. proof_deps is recomputed (homotopy-groups-basepoint-change dropped), and the step numbers in the split_report summary and tool_uses why text are updated. The statement, stmt_deps, lean record and the accepted tool use lem-cbc-enhanced-functor-cone-calculus are unchanged. The steps for replacement, the pinched comparison, the testing argument and two-out-of-three were checked against the cited statements, along with the empty, nonempty and identity cases.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-16",

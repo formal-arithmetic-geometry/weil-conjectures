@@ -13,9 +13,124 @@
   "lem-coef-subdivision-last-vertex-equivalence",
   "lem-coef-ex-infinity-finite-products"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\bar\\alpha=\\rho_n\\alpha\\rho_m$ for $\\alpha:[m]\\to[n]$. Reversing both orders makes $\\bar\\alpha$ monotone; $\\overline{\\alpha\\beta}=\\bar\\alpha\\bar\\beta$, $\\overline{1}=1$ and $\\bar{\\bar\\alpha}=\\alpha$. Thus $T^{\\mathrm{op}}(\\alpha)=T(\\bar\\alpha)$ defines an involutive functor, acting on maps by the same degreewise functions. Define $r_n:\\Delta^n\\to(\\Delta^n)^{\\mathrm{op}}$ on $m$-simplices by $\\gamma\\mapsto\\rho_n\\gamma\\rho_m$. For $\\beta:[l]\\to[m]$, $r_n(\\gamma\\beta)=(\\rho_n\\gamma\\rho_m)\\bar\\beta$, proving it is simplicial. The same formula gives its inverse after applying opposite. The image of $\\gamma$ omits vertex $a$ precisely when its reversed image omits $n-a$. By the horn description of [def-cbc-enhanced-diagrams-cones], $r_n$ restricts to $\\Lambda_i^n\\cong(\\Lambda_{n-i}^n)^{\\mathrm{op}}$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, supporting simplicial enhancement of the derived coefficient adjunction; explicit agent argument for opposite mapping-space comparison, extracted via lem-coef-infinity-relative-cone-equivalence, step 7."
+   }
+  },
+  {
+   "text": "Use the degreewise colimit presentation of $\\operatorname{Sd}$ in [lem-coef-subdivision-face-poset-calculus]. On the summand labelled by $t\\in T_n$ send a flag $(S_0\\subseteq\\cdots\\subseteq S_k)$ to $(\\rho_nS_0\\subseteq\\cdots\\subseteq\\rho_nS_k)$ in the summand labelled by the same underlying $t\\in(T^{\\mathrm{op}})_n$. Images remain nonempty and retain inclusion. If $\\alpha:[m]\\to[n]$ labels a simplex-category relation, its opposite relation is labelled by $\\bar\\alpha$ since $T^{\\mathrm{op}}(\\bar\\alpha)t=T(\\alpha)t$. The equality $\\rho_n\\alpha(S)=\\bar\\alpha(\\rho_mS)$ proves that the proposed maps respect this relation, hence descend to the colimit. Faces delete flag terms and degeneracies repeat them, so these maps are simplicial. Applying the construction twice fixes every subset and label, proving $\\eta_{T^{\\mathrm{op}}}\\eta_T=1$. A map $f:T\\to T'$ only replaces $t$ by $f(t)$, proving naturality.",
+   "uses": [
+    "lem-coef-subdivision-face-poset-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, supporting simplicial enhancement of the derived coefficient adjunction; explicit agent argument for opposite mapping-space comparison, extracted via lem-coef-infinity-relative-cone-equivalence, step 7."
+   }
+  },
+  {
+   "text": "The two maps $\\lambda_T$ and $\\lambda_{T^{\\mathrm{op}}}$ are weak homotopy equivalences by [lem-coef-subdivision-last-vertex-equivalence], which applies to every small simplicial set, with no Kan hypothesis. The middle arrow $\\eta_T$ is a simplicial isomorphism by Step 2. Its realization has inverse the realization of its simplicial inverse, so induces inverse functions on components and inverse maps on based homotopy groups by the definition in [def-cbc-enhanced-diagrams-cones]. It is therefore a weak homotopy equivalence. Naturality of $\\lambda$ is part of [lem-coef-subdivision-face-poset-calculus]. These give the first claimed natural zigzag.",
+   "uses": [
+    "lem-coef-subdivision-last-vertex-equivalence",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-subdivision-face-poset-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00YZ",
+    "place": "Proposition 3.3.4.8, applied at T and its opposite; the middle isomorphism is the explicit construction in Step 2. Kerodon tag, not a Stacks tag; read online, archival copy WANTED."
+   }
+  },
+  {
+   "text": "Let $R_n(t)_i=t_{n-i}$ on $|\\Delta^n|$. Define $H_T:|T^{\\mathrm{op}}|\\to|T|$ by $[u,t]\\mapsto[u,R_n(t)]$. For $\\alpha:[m]\\to[n]$, the coordinate-sum formula in [def-cbc-enhanced-diagrams-cones] gives $R_n|\\alpha|=|\\bar\\alpha|R_m$: the $j$th coordinate of both is $\\sum_{\\alpha(i)=n-j}t_i$. Thus the two representatives $(T^{\\mathrm{op}}(\\alpha)u,t)$ and $(u,|\\alpha|t)$ have images identified by the realization relation for $\\bar\\alpha$. Each map on $T_n\\times|\\Delta^n|$ is continuous, so the quotient topology gives a continuous descended map. The same construction with $T^{\\mathrm{op}}$ gives its inverse since $R_n^2=1$ and opposite is involutive. It is natural since a simplicial map changes $u$ and leaves $t$ unchanged.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, supporting simplicial enhancement of the derived coefficient adjunction; explicit agent argument for opposite mapping-space comparison, extracted via lem-coef-infinity-relative-cone-equivalence, step 7."
+   }
+  },
+  {
+   "text": "For $f:A\\to B$, Step 4 gives $H_B|f^{\\mathrm{op}}|=|f|H_A$. Postcomposition by homeomorphisms has inverse induced by their continuous inverses, on both components and all based homotopy groups. Consequently $f^{\\mathrm{op}}$ is a weak homotopy equivalence exactly when $f$ is, by [def-cbc-enhanced-diagrams-cones]. If $T$ is Kan, apply opposite to a horn map $\\Lambda_i^n\\to T^{\\mathrm{op}}$ and use the isomorphisms of Step 1 to obtain $\\Lambda_{n-i}^n\\to T$. Fill this horn in $T$, apply opposite to its filler, and precompose with $r_n$ to obtain a filler of the original horn. Its restriction is the original horn map because both reversal formulas square to the identity. This includes $i=0,n$ and $n=1$. Thus $T^{\\mathrm{op}}$ is Kan.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, supporting simplicial enhancement of the derived coefficient adjunction; explicit agent argument for opposite mapping-space comparison, extracted via lem-coef-infinity-relative-cone-equivalence, step 7."
+   }
+  },
+  {
+   "text": "Put $E=\\operatorname{Ex}^{\\infty}$. By [lem-coef-ex-infinity-finite-products], $EA$ is Kan and $j_A:A\\to EA$ is a natural weak homotopy equivalence for every $A$. For a weak homotopy equivalence $f:A\\to B$, naturality gives $(Ef)j_A=j_Bf$. In the model structure of [lem-coef-kan-quillen-model-right-proper-core], weak equivalences satisfy the model-category two-out-of-three axiom. Hence $j_Bf$ is a weak equivalence, and cancellation of the weak equivalence $j_A$ shows $Ef$ is a weak equivalence. This uses no Kan hypothesis on $A$ or $B$, in particular it applies to $A=\\operatorname{Sd}T$.",
+   "uses": [
+    "lem-coef-ex-infinity-finite-products",
+    "lem-coef-kan-quillen-model-right-proper-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00ZA",
+    "place": "Corollary 3.3.6.8: the natural-unit square and two-out-of-three; Propositions 3.3.6.7 and 3.3.6.9 supply the unit and Kan assertions. Read online; archive WANTED."
+   }
+  },
+  {
+   "text": "Apply Step 6 to $\\lambda_T$ and to $\\lambda_{T^{\\mathrm{op}}}\\eta_T$, which are weak equivalences by Step 3 and closure under composition in the model structure of [lem-coef-kan-quillen-model-right-proper-core]. The resulting arrows are exactly $E\\lambda_T$ and $E(\\lambda_{T^{\\mathrm{op}}}\\eta_T)$. The other two arrows are $j_T$ and $j_{T^{\\mathrm{op}}}$. All three middle objects are Kan by [lem-coef-ex-infinity-finite-products]; the two end objects are Kan by hypothesis and Step 5. This proves the displayed all-Kan zigzag. For every $f:T\\to T'$, naturality of $j,\\lambda,\\eta$ and functoriality of $E$ make each of its four squares commute. Take $f$ to be each projection $\\prod_aT_a\\to T_b$; opposite acts coordinatewise, so its product projection is the opposite projection. These are the required projection squares. Finally [lem-coef-ex-infinity-finite-products] gives the canonical comparison $E(\\prod_aT_a)\\to\\prod_aET_a$ as an isomorphism for finite families, including the empty family, with the stated projection equations. Only the induced maps $\\operatorname{Sd}(\\operatorname{pr}_b)$ were used.",
+   "uses": [
+    "lem-coef-ex-infinity-finite-products",
+    "lem-coef-kan-quillen-model-right-proper-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, supporting simplicial enhancement of the derived coefficient adjunction; explicit agent argument for opposite mapping-space comparison, extracted via lem-coef-infinity-relative-cone-equivalence, step 7."
+   }
+  },
+  {
+   "text": "We spell out interval reversal on the path data, using the internal functor definition in [def-cbc-enhanced-diagrams-cones]. For an $n$-simplex $h:\\Delta^1\\times\\Delta^n\\to W$ of $\\operatorname{Fun}(\\Delta^1,W)$, let $R(h):\\Delta^1\\times\\Delta^n\\to W^{\\mathrm{op}}$ be $h^{\\mathrm{op}}(r_1\\times r_n)$, identifying the opposite of a degreewise product with the product of opposites. Explicitly its value on $(\\beta,\\gamma)$ in degree $m$ is $h_m(\\rho_1\\beta\\rho_m,\\rho_n\\gamma\\rho_m)$. This is a simplicial map: restricting by $\\alpha:[l]\\to[m]$ in the target $W^{\\mathrm{op}}$ restricts $h$ by $\\bar\\alpha$, while $\\overline{\\beta\\alpha}=\\bar\\beta\\bar\\alpha$ and $\\overline{\\gamma\\alpha}=\\bar\\gamma\\bar\\alpha$. For a parameter operator $a:[k]\\to[n]$, the opposite functor-space operator sends $h$ to $h(1\\times\\bar a)$. The identity $\\overline{a\\gamma}=\\bar a\\bar\\gamma$ shows that applying $R$ to this equals $R(h)(1\\times a)$. Thus $R$ is a simplicial map from $\\operatorname{Fun}(\\Delta^1,W)^{\\mathrm{op}}$ to $\\operatorname{Fun}(\\Delta^1,W^{\\mathrm{op}})$. Double reversal fixes every $(\\beta,\\gamma)$, so it is an isomorphism. Its restrictions at $0,1$ are respectively the original restrictions at $1,0$, viewed in $W^{\\mathrm{op}}$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, supporting simplicial enhancement of the derived coefficient adjunction; explicit agent argument for opposite mapping-space comparison, extracted via lem-coef-infinity-relative-cone-equivalence, step 7."
+   }
+  },
+  {
+   "text": "An $n$-simplex of $P(u,v)^{\\mathrm{op}}$ is a triple $(x,h,y)$ with $h|_0=u(x)$ and $h|_1=v(y)$. Send it to $(y,R(h),x)$. Step 8 gives $R(h)|_0=v^{\\mathrm{op}}(y)$ and $R(h)|_1=u^{\\mathrm{op}}(x)$, so this is an $n$-simplex of $P(v^{\\mathrm{op}},u^{\\mathrm{op}})$. The outer coordinates restrict by the opposite operators, and the middle one does so by Step 8, proving the map is simplicial. Applying it a second time is the identity, so it is an isomorphism. Postcomposition of $h$ and application of maps to $x,y$ commute with the formula, proving naturality in the entire cospan. For a strictly commuting square with maps $a:Z\\to U$, $b:Z\\to V$, its constant-path comparison sends $z$ to $(a(z),c_{ua(z)},b(z))$. A constant path at an $n$-simplex $w$ has value $W(\\gamma)w$ on $(\\beta,\\gamma)$. Its reversed value is $W(\\bar\\gamma)w=W^{\\mathrm{op}}(\\gamma)w$, independent of $\\beta$. Thus reversal sends that triple to $(b(z),c_{v^{\\mathrm{op}}b(z)},a(z))$, exactly the constant-path comparison for the exchanged opposite square. Degreewise products and pullbacks are those of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, supporting simplicial enhancement of the derived coefficient adjunction; explicit agent argument for opposite mapping-space comparison, extracted via lem-coef-infinity-relative-cone-equivalence, step 7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-subdivision-face-poset-calculus",
+  "lem-coef-subdivision-last-vertex-equivalence",
+  "lem-coef-ex-infinity-finite-products",
+  "lem-coef-kan-quillen-model-right-proper-core"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, supporting simplicial enhancement of the derived coefficient adjunction; explicit agent argument for opposite mapping-space comparison, extracted via lem-coef-infinity-relative-cone-equivalence, step 7."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,10 +173,45 @@
    "results": "{\"t\": \"2026-10-17T09:32:16Z\", \"tool\": \"leansearch\", \"query\": \"Opposite simplicial sets have naturally homeomorphic realizations and a natural subdivision zigzag of weak equivalences with all Kan replacements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.op\", \"SSet.opEquivalence\", \"SimplicialObject.opEquivalence\", \"SSet.opObjEquiv\", \"MulOpposite.opHomeomorph\", \"SSet.opFunctor\", \"SimplicialObject.opFunctor\", \"SSet.op_map\"], \"digest\": \"1ee9f868aa9e3414\"}",
    "date": "2026-10-17",
    "verdict": "no match: read the hits; they state path-object constructions, categorical pullbacks, or the opposite categorical involution, not the specified Kan path-pullback or natural subdivision zigzag theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "opFunctor|subdivision|ExInfinity|ExInfty|realization.*op",
+   "results": "{\"t\": \"2026-10-17T11:53:35Z\", \"tool\": \"grep\", \"query\": \"opFunctor|subdivision|ExInfinity|ExInfty|realization.*op\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Op.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Op.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Op.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Op.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Op.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\"], \"digest\": \"4189fb9dddb66cef\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: opposite involution and basic sd/ex or finite combinatorial paths only; Op.lean:21-26 leaves realization as TODO; no complete theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric realization of the opposite simplicial set is homeomorphic by coordinate reversal and subdivision yields a natural Kan weak equivalence zigzag",
+   "results": "{\"t\": \"2026-10-17T11:53:35Z\", \"tool\": \"leansearch\", \"query\": \"Geometric realization of the opposite simplicial set is homeomorphic by coordinate reversal and subdivision yields a natural Kan weak equivalence zigzag\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.opFunctorCompOpFunctorIso\", \"SSet.op\", \"SSet.opFunctor\", \"SSet.toTop\", \"SSet.opFunctorCompOpFunctorIso_hom_app_app\", \"MulOpposite.opHomeomorph\", \"SSet.op_δ\", \"SSet.opObjEquiv\"], \"digest\": \"eecaf460f13ceb5f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: opposite involution and basic sd/ex or finite combinatorial paths only; Op.lean:21-26 leaves realization as TODO; no complete theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.opEquivalence",
+   "results": "{\"t\": \"2026-10-17T11:53:35Z\", \"tool\": \"loogle\", \"query\": \"SSet.opEquivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"SSet.opEquivalence\", \"SSet.opEquivalence_functor\", \"SSet.opEquivalence_inverse\", \"SSet.opEquivalence_counitIso\", \"SSet.opEquivalence_unitIso\"], \"digest\": \"644b6249be3e2116\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: opposite involution and basic sd/ex or finite combinatorial paths only; Op.lean:21-26 leaves realization as TODO; no complete theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Opposite simplicial sets admit a natural weak equivalence zigzag through subdivision and Ex infinity",
+   "results": "{\"t\": \"2026-10-17T11:53:36Z\", \"tool\": \"leanfinder\", \"query\": \"Opposite simplicial sets admit a natural weak equivalence zigzag through subdivision and Ex infinity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.opEquivalence\", \"SSet.opObjEquiv\", \"SSet.opEquivalence_functor\", \"SSet.opEquivalence_inverse\", \"SSet.opFunctorCompOpFunctorIso_hom_app_app\", \"SSet.opEquivalence_counitIso\", \"SSet.op\", \"SimplicialObject.opEquivalence\"], \"digest\": \"10b7fecce10c5e06\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: opposite involution and basic sd/ex or finite combinatorial paths only; Op.lean:21-26 leaves realization as TODO; no complete theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Barycentric coordinate reversal identifies realization of a simplicial set with realization of its opposite and reverses the endpoints of path pullbacks",
+   "results": "{\"t\": \"2026-10-17T11:55:09Z\", \"tool\": \"leanfinder\", \"query\": \"Barycentric coordinate reversal identifies realization of a simplicial set with realization of its opposite and reverses the endpoints of path pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Path.arrow\", \"SSet.spine\", \"SSet.spine_map_subinterval\", \"SSet.StrictSegal.spineToSimplex_interval\", \"SSet.Path.map_arrow\", \"SSet.StrictSegalCore.spineToSimplex\", \"SSet.StrictSegal.spineToSimplex_edge\", \"SSet.Path\"], \"digest\": \"ded54a3d621c151d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: opposite involution and basic sd/ex or finite combinatorial paths only; Op.lean:21-26 leaves realization as TODO; no complete theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-relative-cone-equivalence",
@@ -88,5 +238,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-opposite-subdivision-kan-zigzag",
+  "worker": "stage1",
+  "summary": "Kept every statement clause. Gave explicit flag-colimit descent, realization quotient homeomorphism, horn reversal, natural-unit two-out-of-three argument, and interval/parameter reversal on path triples. Reused the existing subdivision and Ex-infinity nodes; no new nodes or attachment. All citation statements read and quoted.",
+  "blueprint": "Paragraph 2 of prop-coef-integral-exceptional-adjoint, derived coefficient adjunction; via the retained relative-cone-equivalence step 7, supplies opposite mapping-space comparisons, a natural all-Kan zigzag commuting with product projections, and reversal of path-pullback comparisons. No change to the ancestor route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-6aae04892",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-6aae04892 (reviewer sub-agent of L); spot-checked: PASS, no fixes. The delivery has no new nodes; review.md has the per-step checks. All nine steps are correct from the cited statements: def-cbc-enhanced-diagrams-cones (horns, coordinate-sum realization, Fun(K,C)_n=Hom(K×Δ^n,C), degreewise pullbacks), face-poset-calculus (colimit Sd, natural λ), last-vertex-equivalence (any T, no Kan hypothesis; Kerodon 00YZ), ex-infinity-finite-products (Kan output, natural unit, finite-product comparisons including the terminal one) and the Kan-Quillen model core (two-out-of-three). Each cited node is in unit sk-prop-sf-biduality-general and the cited definition is a notion, so the route is in-unit and no tool_uses are accepted. Hand checks: the simplex categories of T and T^op match via α↦ᾱ, and ρ_nα(S)=ᾱ(ρ_mS) makes the flag reversal descend. R_n|α|=|ᾱ|R_m holds coordinatewise (both are Σ_{α(i)=n−j}t_i). Λ^n_i≅(Λ^n_{n−i})^op, including outer horns. Ex^∞ preserves weak equivalences by the unit square and two-out-of-three, with no Kan hypothesis on Sd T. In interval reversal the parameter operator a acts through ā, and endpoints 0 and 1 swap as the same simplex, with no false self-map of Δ^1 swapping vertices. Constant paths reverse to constant paths. Edge cases checked: empty T, Δ^0, Δ^1, n=1 outer horns, empty products, empty path pullback. A script verified 6,650 reversal identities in dimensions ≤3 with no failure. The dependency walk is acyclic and all cited nodes are split and unmerged. No duplicates: lem-coef-ex-comparison-weak-equivalence states only that j:X→Ex X is a weak equivalence, and lem-coef-infinity-op-mapping-reversal is a quasicategory consumer. Mathlib Op.lean leaves horn reversal and the realization identification as TODO, and there is no Ex^∞, so no leaf. Parent lem-coef-infinity-relative-cone-equivalence step 7 uses exactly the three delivered clauses. The item is not a target, so the base-change and coefficient checks do not apply. No SGA. The Kerodon tags are WANTED and proof_origin is agent, consistent with the existing cited nodes."
  }
 }

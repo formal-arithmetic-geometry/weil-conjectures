@@ -16,9 +16,82 @@
   "thm-sf-dual-base-change",
   "lem-sf-open-tensor-normalization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the normalized open-purity comparisons to write $Rj^!=Lj^*$ and $Rj'^!=Lj'^*$, transporting their adjunction maps as well. This is legitimate for the specified normalization: the open exceptional right adjoint is identified with the restriction right adjoint of extension by zero, not with an arbitrarily isomorphic functor. Set $J=Rj_!$, $R=Lj^*$, $K=Rj'_!$, $T=Lj'^*$, $P=Li^*$, $I=Ri_*$, $Q=Li_W^*$ and $H=Ri_{W*}$. Thus $J\\dashv R$, $K\\dashv T$, $P\\dashv I$, $Q\\dashv H$. Write $u:1\\to RJ$ and $u':1\\to TK$ for the open units, and $b:PJ\\xrightarrow{\\sim}KQ$ for compact-support exchange. The open-normalization statement, with $g=i$, supplies $\\theta:TP\\xrightarrow{\\sim}QR$ and says that $b_M^{-1}:KQM\\to PJM$ is the $K\\dashv T$ transpose of $\\theta_{JM}^{-1}\\circ Q(u_M)$. All these maps are on the finite coefficient domain in the question; the open-normalization theorem is valid even on the ambient derived module categories.",
+   "uses": [
+    "def-trf-admissibility",
+    "prop-functor-package",
+    "prop-exc-open-adjoint",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§0.3(a); open normalization as explicitly supplied in lem-sf-open-tensor-normalization (Stacks 0GL1 refinement)."
+   }
+  },
+  {
+   "text": "Put $B=A_C$ and $M=A_W$, and in the transported notation regard $a$ as $a:M\\to RB$. Let $e:JR\\to1$ be the open counit and put $r=e_B\\circ J(a):JM\\to B$. The triangle identity gives $R(r)\\circ u_M=a$: indeed naturality of $u$ rewrites $RJ(a)\\circ u_M$ as $u_{RB}\\circ a$, and $R(e_B)\\circ u_{RB}=1$. Identify $PB=A_F$. Since $v:B\\to IS$ is the $P\\dashv I$ transpose of $\\sigma:PB\\to S$, the composite-adjunction hom bijection shows that $q=R(v)\\circ a:M\\to RIS$ has $PJ\\dashv RI$ transpose $f=\\sigma\\circ P(r):PJM\\to S$. Explicitly its $J\\dashv R$ transpose is $v\\circ r$, and the $P\\dashv I$ transpose of this is $\\sigma\\circ P(r)$ by naturality of the counit.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-trf-admissibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§0.3(a); composite-adjunction formula of Stacks Tag 0DV0, lemma-compose-counits."
+   }
+  },
+  {
+   "text": "Apply dual base change to the square with $f=j$, $g=i$, $f'=j'$ and $g'=i_W$. Its inverse-conjugate description identifies the transported $\\beta_j:RI\\xrightarrow{\\sim}HT$ with the adjoint comparison for $b:PJ\\xrightarrow{\\sim}KQ$ under $PJ\\dashv RI$ and $KQ\\dashv HT$. Let $\\epsilon_1:PJRI\\to1$ and $\\epsilon_2:KQHT\\to1$ be the composite counits. The counit identity for the adjoint comparison is $\\epsilon_{2,S}\\circ b_{HTS}\\circ PJ(\\beta_{j,S})=\\epsilon_{1,S}$. Naturality of $b^{-1}$ therefore gives $\\epsilon_{2,S}\\circ KQ(\\beta_{j,S})=\\epsilon_{1,S}\\circ b^{-1}_{RIS}$. Consequently the $KQ\\dashv HT$ transpose of $\\beta_{j,S}\\circ q$ is\n$$\\epsilon_{2,S}\\circ KQ(\\beta_{j,S})\\circ KQ(q)=\\epsilon_{1,S}\\circ PJ(q)\\circ b_M^{-1}=f\\circ b_M^{-1}.$$\nHere the middle equality uses naturality of $b^{-1}$ at $q$, and the last is the defining counit formula for the transpose $f$ from Step 2. No ordinary proper base change is being substituted for this specified map.",
+   "uses": [
+    "thm-sf-dual-base-change",
+    "lem-trf-adjoint-mate",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; Tag 0DV0, lemma-compose-counits; instantiated using thm-sf-dual-base-change."
+   }
+  },
+  {
+   "text": "By the composite-adjunction hom bijection, the $Q\\dashv H$ transpose of $\\beta_{j,S}\\circ q:M\\to HTS$ is the $K\\dashv T$ transpose of $f\\circ b_M^{-1}$, namely\n$$T(f)\\circ T(b_M^{-1})\\circ u'_{QM}.$$\nThe inverse-exchange normalization in Step 1 says exactly that $T(b_M^{-1})\\circ u'_{QM}=\\theta_{JM}^{-1}\\circ Q(u_M)$. Substituting $f=\\sigma\\circ P(r)$ and using naturality of $\\theta$ at $r:JM\\to B$, the displayed map becomes\n$$T(\\sigma)\\circ TP(r)\\circ\\theta_{JM}^{-1}\\circ Q(u_M)=T(\\sigma)\\circ\\theta_B^{-1}\\circ Q(R(r)\\circ u_M)=T(\\sigma)\\circ\\theta_B^{-1}\\circ Q(a).$$\nThe last equality is the triangle computation in Step 2. This calculation uses the normalization of the inverse of $b$, with its actual open unit, so it determines the morphism itself.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor: open-normalization refinement stated in lem-sf-open-tensor-normalization; transposition uses Stacks 0DV0."
+   }
+  },
+  {
+   "text": "The constant-pullback identifications identify $QM$ and $TPB$ with $A_{F_W}$. Under them $\\theta_B^{-1}\\circ Q(a)$ is the identity of $A_{F_W}$: both the constant pullback map $a$ (after the normalized purity transport) and the pullback-composition comparison send the local coefficient unit $1$ to $1$, and these are morphisms of the rank-one coefficient module. Thus Step 4 is exactly $A_{F_W}\\simeq Lj'^*A_F\\xrightarrow{Lj'^*\\sigma}Lj'^*S$. Restoring the normalized comparison $Lj'^*S\\simeq Rj'^!S$ yields the asserted ordinary adjoint of $\\beta_{j,S}\\circ Rj^!v\\circ a$. The argument used the open adjunctions and their normalized exchange, and applies to arbitrary separated finite-type $i$ in the stated categories.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§0.3(a) and §1.2.2(a)-(b): ordinary adjunct and open restriction; explicit coefficient-unit computation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-admissibility",
+  "def-weil-pbc-composite-adjunction",
+  "lem-sf-open-tensor-normalization",
+  "lem-trf-adjoint-mate",
+  "prop-exc-open-adjoint",
+  "prop-functor-package",
+  "thm-sf-dual-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "Explicit adjunction calculation expanding §0.3(a), §1.2.2(a)-(b), using Stacks Tags 0B65 and 0DV0 and the existing open-normalization refinement. The paper does not print this calculation as a standalone lemma."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +127,52 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TopCat.Sheaf.extend_hom_app\", \"module\": \"Mathlib/Topology/Sheaves/SheafCondition/Sites\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X : TopCat} {ι : Type u_1} {B : ι → TopologicalSpace.Opens ↑X}\\n  (F : TopCat.Presheaf C X) (F' : TopCat.Sheaf C X) (h : TopologicalSpace.Opens.IsBasis (Set.range B))\\n  (α : (CategoryTheory.inducedFunctor B).op.comp F ⟶ (CategoryTheory.induced\", \"doc\": \"Given a basis $\\\\mathcal{B}$ for the topology on a space $X$, there is a natural equivalence between the hom-set of natural transformations $\\\\text{Hom}((\\\\text{inducedFunctor } \\\\mathcal{B})^{\\\\text{op}} \"}\n  {\"name\": \"ModuleCat.Tilde.res_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U V : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (i : V ⟶ U)\\n  (s : ↑(M.tildeInModuleCat.obj (Opposite.op U))) (x : ↥V),\\n  ↑((CategoryTheory.ConcreteCategory.hom (M.tildeInModuleCat.map i.op)) s) x = ↑s (i x)\", \"doc\": \"For open sets $U,V$ in $\\\\operatorname{Spec}(R)$ with inclusion $i:V\\\\to U$, the restriction map $\\\\widetilde{M}(U)\\\\to \\\\widetilde{M}(V)$ satisfies $(\\\\rho_{U\\\\supset V}(s))(x) = s(i(x))$ for all sections $\"}\n  {\"name\": \"ModuleCat.Tilde.toOpen_res\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U V : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (i : V ⟶ U),\\n  CategoryTheory.CategoryStruct.comp (ModuleCat.Tilde.toOpen M U) (M.tildeInModuleCat.map i.op) =\\n    ModuleCat.Tilde.toOpen M V\", \"doc\": \"For open subsets $U$ and $V$ of $\\\\operatorname{Spec}(R)$ with $V \\\\subseteq U$, the composition of the restriction map $\\\\widetilde{M}(U) \\\\to \\\\widetilde{M}(V)$ with the sheaf morphism induced by the inc\"}\n  {\"name\": \"ModuleCat.Tilde.res_const\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) (f : ↑M) (g : R)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (hu : ∀ x ∈ U, g ∈ x.asIdeal.primeCompl)\\n  (V : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (hv : ∀ x ∈ V, g ∈ x.asIdeal.primeCompl)\\n  (i\", \"doc\": \"For an $R$-module $M$ and its associated sheaf $\\\\widetilde{M}$ over $\\\\operatorname{Spec}(R)$, if $U \\\\supseteq V$ are open subsets where $g \\\\in R$ is invertible (i.e., $g$ lies in the complement of all\"}\n  {\"name\": \"CategoryTheory.Sheaf.ΓRes_map\", \"module\": \"Mathlib/CategoryTheory/Sites/GlobalSections\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} A] [inst_2 : CategoryTheory.HasWeakSheafify J A]\\n  [inst_3 : CategoryTheory.HasGlobalSectionsFunctor J A] (F : CategoryTheory.Sheaf J A) {V \", \"doc\": \"For a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, given objects $U, V$ in $\\\\mathcal{C}^{\\\\text{op}}$ and a morphism $f: U \\\\to V$ in $\\\\mathcal{C}^{\\\\text{op}}$ (corresponding to\"}\n  {\"name\": \"SheafOfModules.unitHomEquiv_symm_comp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : J.HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  {M N : SheafOfModules R} (s : M.sections) (p : M ⟶ N),\\n  CategoryTheory.Categor\", \"doc\": \"For any sheaf of modules $M$ and $N$ over a sheaf of rings $R$, any global section $s$ of $M$, and any morphism $p: M \\to N$, the composition of the inverse unit hom equivalence applied to $s$ followed\"}\n  {\"name\": \"TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst\", \"module\": \"Mathlib/Topology/Sheaves/CommRingCat\", \"type\": \"∀ {X : TopCat} (F : TopCat.Sheaf CommRingCat X) (U V : TopologicalSpace.Opens ↑X)\\n  (x : ↑(F.val.obj (Opposite.op (U ⊔ V)))),\\n  (↑((CategoryTheory.ConcreteCategory.hom (F.objSupIsoProdEqLocus U V).hom) x)).1 =\\n    (CategoryTheory.ConcreteCategory.hom (F.val.map (CategoryTheory.homOfLE ⋯).op)) x\", \"doc\": \"For a sheaf $ F $ on a topological space $ X $ and open subsets $ U, V \\\\subseteq X $, the first component of the isomorphism between $ F(U \\\\cup V) $ and the equalizer of $ F(U) \\\\times F(V) $ correspon\"}\n  {\"name\": \"CategoryTheory.Sheaf.natTransΓRes_app\", \"module\": \"Mathlib/CategoryTheory/Sites/GlobalSections\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (A : Type u₂)\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} A] [inst_2 : CategoryTheory.HasWeakSheafify J A]\\n  [inst_3 : CategoryTheory.HasGlobalSectionsFunctor J A] (U : Cᵒᵖ) (F : CategoryTheory.Shea\", \"doc\": \"For any sheaf $F$ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$ with respect to a Grothendieck topology $J$, and for any object $U$ in $\\\\mathcal{C}^\\\\text{op}$, the component of the natural \"}",
    "date": "2026-10-17",
    "verdict": "no match: ordinary scheme restriction, abstract adjunction or linear-algebra results do not state this normalized constructible six-operation comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Conjugate natural isomorphism between composite right adjoints carries adjoint maps to restriction of sections under open base change",
+   "results": "Search log: 8 hits; TopologicalSpace.Opens.mapComp, CategoryTheory.Adjunction.natIsoOfRightAdjointNatIso, CategoryTheory.Adjunction.natIsoOfLeftAdjointNatIso, CategoryTheory.Adjunction.ofNatIsoRight, CategoryTheory.conjugateEquiv_symm_iso, CategoryTheory.conjugateEquiv_apply_app, CategoryTheory.conjugateEquiv_comp_assoc, CategoryTheory.sheafComposeNatIso",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are abstract conjugation tools or ordinary scheme/topological restriction, not this normalized finite-Tor constructible six-operation comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*(apply|homEquiv)|homEquiv.*conjugate",
+   "results": "Search log: 13 hits; Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Adj.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Adj.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Adj.lean; subdirectory CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are abstract conjugation tools or ordinary scheme/topological restriction, not this normalized finite-Tor constructible six-operation comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv, CategoryTheory.Adjunction",
+   "results": "Search log: 12 hits; CategoryTheory.conjugateEquiv, CategoryTheory.conjugateEquiv_id, CategoryTheory.conjugateEquiv_iso, CategoryTheory.conjugateEquiv_of_iso, CategoryTheory.conjugateEquiv_symm_id, CategoryTheory.conjugateEquiv_symm_iso, CategoryTheory.conjugateEquiv_symm_of_iso, CategoryTheory.conjugateEquiv_adjunction_id",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are abstract conjugation tools or ordinary scheme/topological restriction, not this normalized finite-Tor constructible six-operation comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of the adjoint of a section along an open immersion equals its adjoint under the conjugate of extension by zero base change",
+   "results": "Search log: 8 hits; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.ofRestrict_app, AlgebraicGeometry.Scheme.Modules.restrict_map, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are abstract conjugation tools or ordinary scheme/topological restriction, not this normalized finite-Tor constructible six-operation comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley transformation for open restriction commutes with the hom set bijection of derived inverse image direct image adjunction on the constant sheaf",
+   "results": "Search log: 8 hits; CategoryTheory.constantSheafAdj_counit_w, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, TopCat.Sheaf.pullbackPushforwardAdjunction, AlgebraicGeometry.PresheafedSpace.ofRestrict_c_app, CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val, CategoryTheory.constantCommuteCompose, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are abstract conjugation tools or ordinary scheme/topological restriction, not this normalized finite-Tor constructible six-operation comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|dualBaseChange|open.*[Ee]xchange",
+   "results": "Search log: 0 hits; ; subdirectory CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are abstract conjugation tools or ordinary scheme/topological restriction, not this normalized finite-Tor constructible six-operation comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-trace-class-open-restriction",
@@ -76,5 +191,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-open-exchange-section-adjunct",
+  "worker": "stage1",
+  "summary": "Expanded the normalized inverse-conjugate exchange into composite transposes and an explicit open-unit/triangle calculation. Statement unchanged; no new nodes, no properness or ambient exceptional-adjoint hypothesis. Checked each cited statement and coefficient domain; no exact project Lean attachment found.",
+  "blueprint": "Realizes the open-support reduction in paragraphs (1)-(2) of lem-trf-local-term-locality through lem-trf-trace-class-open-restriction: ordinary adjoints of trace sections restrict by the specified open dual exchange. No unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "prop-functor-package",
+    "why": "Only its finite-stage normalized relative-dimension-zero smooth purity is used to identify open exceptional restriction with ordinary restriction. No node of sk-i-curve-zero states this generic comparison."
+   },
+   {
+    "node": "prop-exc-open-adjoint",
+    "why": "Identifies the right adjoint of open extension by zero with restriction on ordinary pro-etale derived module categories. No node of sk-i-curve-zero states this generic comparison."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Supplies the canonical open-unit formula for the inverse compact-support exchange, including the pullback-composition comparison. No node of sk-i-curve-zero states this generic comparison."
+   },
+   {
+    "node": "thm-sf-dual-base-change",
+    "why": "Identifies the specified dual exchange as the inverse conjugate of compact-support exchange under the two composite adjunctions. No node of sk-i-curve-zero states this generic comparison."
+   },
+   {
+    "node": "lem-trf-adjoint-mate",
+    "why": "Generic counit compatibility of the adjoint comparison is used in Step 3; it does not replace the trace-formula unit route. No node of sk-i-curve-zero states this generic comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-functor-package",
+  "prop-exc-open-adjoint",
+  "lem-sf-open-tensor-normalization",
+  "thm-sf-dual-base-change",
+  "lem-trf-adjoint-mate"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-2f40ba36a",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-2f40ba36a (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. There are no new nodes and no fixes. Orientation: the thm-sf-dual-base-change square with f=j, g=i, f'=j', g'=i_W gives b=Ex_!:PJ->KQ and beta_j:RI->HT. That beta_j is (Ex_!^{-1})^c, and the conjugate formula of def-weil-pbc-adjunction-conjugate equals the composite in lem-trf-adjoint-mate (1) with alpha=b, so Step 3's identification is literal. Step 2 is elementary and checked: the triangle identity gives R(r)u_M=a, and the transposes are v∘r and then σ∘P(r). Step 3 uses the counit clause ε2∘αG2∘F1β=ε1 plus naturality of b and b^{-1}; I checked every type. Step 4: the only type-correct reading of lem-sf-open-tensor-normalization's inverse-exchange normalization is T(b_M^{-1})u'_{QM}=θ^{-1}_{JM}Q(u_M); naturality of θ at r then gives T(σ)θ_B^{-1}Q(a). Step 5: these are degree-0 constant sheaves and the canonical isomorphisms send 1 to 1, so the map is the identity even when F_W is disconnected. The purity transport in Step 1 is fixed by the statement's own normalization (prop-functor-package clause 6 with r=0, and prop-exc-open-adjoint restricted to D^b_ctf), so it is not an E5 gap. No properness, internal-Hom restriction or stalk conservativity is used. Edge cases checked: j=id, W empty, σ=0. Varshavsky §0.3(a) and §1.2.2(a)-(b) (PDF pp.5-9) give the context, and proof_origin=agent is correct; no SGA source is used. No duplicate: lem-trf-open-square-exchange and lem-trf-open-extension-adjoint state different results, and the parent trace-class-open-restriction uses the conclusion as stated. I accept all five declared tool_uses: prop-functor-package, prop-exc-open-adjoint, lem-sf-open-tensor-normalization, thm-sf-dual-base-change and lem-trf-adjoint-mate. They are black-box six-functor or categorical tools that the unit sk-i-curve-zero does not provide, and the prop-functor-package declaration is redundant because sk-thm-sf-package is already on the route. The statement is unchanged and not weakened."
  }
 }
