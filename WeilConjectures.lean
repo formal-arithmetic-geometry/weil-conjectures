@@ -2148,6 +2148,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationReco
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AdjunctionShift
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.BaseChangeMate
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompConjugate
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompExact
@@ -4170,6 +4171,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.Lon
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.IntegralBaseChange
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Locality
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Theorem
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Unbounded
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Vanishing
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence

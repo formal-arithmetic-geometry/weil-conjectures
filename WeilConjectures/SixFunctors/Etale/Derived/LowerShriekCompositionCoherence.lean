@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionAssoc
+public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.SitePerfect
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMapsCoherence
 
 /-!
@@ -60,7 +62,8 @@ the identification of "the two tensor reassociations" in the blueprint proof of 
 the projection formula. -/
 theorem projectionMapAssociativity {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
     ProjectionMapAssociativity (ModuleCat.{u + 1} Λ) f :=
-  sorry
+  ⟨projectionMapOfCompactification_assoc (ModuleCat.{u + 1} Λ)
+    (HasCompactification.compactification f)⟩
 
 /-- Blueprints `sk-thm-sf-comp-composition`, `sk-prop-sf-pf-coherence` and `sk-thm-sf-package`
 (clause (2)): the composition law for `Rf_!` and its coherence with the projection formula and
@@ -103,19 +106,24 @@ theorem exists_rightDerivedLowerShriekCompIso :
           (E f g h w) (E f' g' h' w')) :=
   sorry
 
+omit [Finite Λ] in
 /-- Blueprint `def-weil-derived-pullback-tensor-hom`: Derived pullback, tensor product, and
 internal Hom.
 
 For an étale morphism `u : U ⟶ X`, the derived pullback commutes with the derived internal hom:
 the comparison `Lu^* RHom(M, N) ⟶ RHom(Lu^* M, Lu^* N)` of the monoidal functor `Lu^*`
-(`CategoryTheory.Functor.LaxMonoidal.ihomComparison`) is an isomorphism. The pullback along `u`
-is the restriction to the slice site `X_ét/U`, which has an exact left adjoint, so it preserves
-K-injective complexes, and the sheaf internal hom commutes with restriction to `U`. -/
+(`CategoryTheory.Functor.LaxMonoidal.ihomComparison`) is an isomorphism. The derived pullback
+`Lu^*` has the left adjoint `D(u_!)` (extension by zero along the étale `u`), and the comparison is
+the conjugate of the projection map `D(u_!)(Lu^* M ⊗ᴸ T) ⟶ M ⊗ᴸ D(u_!) T`, which is an isomorphism
+(`AlgebraicGeometry.Etale.isIso_projectionMap_derivedEtaleLowerShriek`). -/
 theorem isIso_ihomComparison_leftDerivedUpperStar_of_etale {U X : Scheme.{u}} (u : U ⟶ X)
     [Etale u] (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     letI := leftDerivedUpperStarMonoidal (ModuleCat.{u + 1} Λ) u
     IsIso (Functor.LaxMonoidal.ihomComparison L((u)^*[ModuleCat.{u + 1} Λ]) M).natTrans :=
-  sorry
+  letI := leftDerivedUpperStarMonoidal (ModuleCat.{u + 1} Λ) u
+  have := isIso_projectionMap_derivedEtaleLowerShriek (A := ModuleCat.{u + 1} Λ) u M
+  Functor.Monoidal.isIso_ihomComparison_of_isIso_projectionMap
+    (derivedEtaleLowerShriekLeftDerivedUpperStarAdjunction (A := ModuleCat.{u + 1} Λ) u) M
 
 end Etale
 

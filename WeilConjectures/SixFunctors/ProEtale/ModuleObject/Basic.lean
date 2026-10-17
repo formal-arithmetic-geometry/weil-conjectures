@@ -10,7 +10,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import Mathlib.Topology.LocallyConstant.Algebra
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap
+public import WeilConjectures.CategoryTheory.Monoidal.Conjugate
+public import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
+public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
+public import WeilConjectures.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 
@@ -143,7 +148,8 @@ open CategoryTheory Limits MonoidalCategory Opposite Functor.LaxMonoidal Functor
 group on the underlying set of `M` is flat, and surjects functorially onto `M`. -/
 instance AddCommGrpCat.hasFunctorialFlatResolution :
     Abelian.HasFunctorialFlatResolution Ab.{u} :=
-  sorry
+  Abelian.hasFunctorialFlatResolution_of_flat_separator _
+    AddCommGrpCat.isSeparator_tensorUnit (ObjectProperty.prop_unit _)
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -179,8 +185,20 @@ noncomputable def profiniteToScheme : Profinite.{u} ⥤ Scheme.{u} :=
 
 /-- `Spec LC(S, ℤ) ⟶ Spec ℤ` is weakly étale. See the module docstring. -/
 instance weaklyEtale_toSpecZ_profiniteToScheme (S : Profinite.{u}) :
-    WeaklyEtale (toSpecZ (profiniteToScheme.obj S)) :=
-  sorry
+    WeaklyEtale (toSpecZ (profiniteToScheme.obj S)) := by
+  let e : CommRingCat.of (LocallyConstant S ℤ) ≅
+      CommRingCat.of (LocallyConstant S (ULift.{u} ℤ)) :=
+    (LocallyConstant.congrRightRingEquiv ULift.ringEquiv.symm).toCommRingCatIso
+  have h : toSpecZ (profiniteToScheme.obj S) = Spec.map e.inv ≫
+      Spec.map (CommRingCat.ofHom (algebraMap (ULift.{u} ℤ) (LocallyConstant S (ULift.{u} ℤ)))) :=
+    specULiftZIsTerminal.hom_ext _ _
+  have h₁ : WeaklyEtale (Spec.map e.inv) := MorphismProperty.of_isIso @WeaklyEtale _
+  have h₂ : WeaklyEtale (Spec.map
+      (CommRingCat.ofHom (algebraMap (ULift.{u} ℤ) (LocallyConstant S (ULift.{u} ℤ))))) := by
+    rw [WeaklyEtale.Spec_iff, CommRingCat.hom_ofHom, RingHom.weaklyEtale_algebraMap_iff]
+    infer_instance
+  rw [h]
+  infer_instance
 
 /-- The functor `S ↦ Spec LC(S, ℤ)` from profinite sets to the pro-étale site of `Spec ℤ`. -/
 noncomputable def profiniteToProEt : Profinite.{u} ⥤ specZ.{u}.ProEt where
@@ -215,7 +233,7 @@ instance isContinuous_profiniteToProEt :
 docstring. -/
 instance hasLeftKanExtension_op_profiniteToProEt (F : Profinite.{u}ᵒᵖ ⥤ Ab.{u + 1}) :
     profiniteToProEt.op.HasLeftKanExtension F :=
-  sorry
+  inferInstance
 
 /-- The profinite test object `X[S] = Spec LC(S, ℤ) ×_{Spec ℤ} X = lim_i ∐_{S_i} X` over a
 scheme `X`, as a functor from profinite sets to the pro-étale site of `X`. -/
@@ -255,14 +273,27 @@ noncomputable instance laxMonoidal_pointLowerStar : pointLowerStar.{u}.LaxMonoid
 noncomputable instance oplaxMonoidal_pointUpperStar : pointUpperStar.{u}.OplaxMonoidal :=
   pointUpperStarLowerStarAdjunction.leftAdjointOplaxMonoidal
 
+/-- The comma categories of the opposite of `S ↦ Spec LC(S, ℤ)` are filtered, the functor being
+representably flat. -/
+instance isFiltered_costructuredArrow_op_profiniteToProEt (X : specZ.{u}.ProEtᵒᵖ) :
+    IsFiltered (CostructuredArrow profiniteToProEt.{u}.op X) :=
+  IsFiltered.of_equivalence (structuredArrowOpEquivalence _ (unop X))
+
+instance isConnected_costructuredArrow_op_profiniteToProEt (X : specZ.{u}.ProEtᵒᵖ) :
+    IsConnected (CostructuredArrow profiniteToProEt.{u}.op X) :=
+  IsFiltered.isConnected _
+
 /-- The inverse image `p^*` preserves the unit. See the module docstring. -/
-instance isIso_η_pointUpperStar : IsIso (η pointUpperStar.{u}) :=
-  sorry
+instance isIso_η_pointUpperStar : IsIso (η pointUpperStar.{u}) := by
+  unfold pointUpperStar
+  infer_instance
 
 /-- The inverse image `p^*` commutes with the tensor product. See the module docstring. -/
 instance isIso_δ_pointUpperStar (F G : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) :
     IsIso (δ pointUpperStar F G) :=
-  sorry
+  by
+  unfold pointUpperStar
+  infer_instance
 
 /-- The inverse image `p^*` is strong monoidal. -/
 noncomputable instance monoidal_pointUpperStar : pointUpperStar.{u}.Monoidal :=
@@ -347,11 +378,43 @@ noncomputable def upperStarFromPointComp :
     ((upperStarComp Ab.{u + 1} f (toSpecZ Y)).symm ≪≫
       eqToIso (congrArg (upperStar Ab.{u + 1}) (comp_toSpecZ f)))
 
+/-- The composition isomorphism `g_* ⋙ h_* ≅ (g ≫ h)_*` of pushforwards of abelian pro-étale
+sheaves is monoidal. -/
+instance isMonoidal_lowerStarComp_hom_ab {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R) :
+    NatTrans.IsMonoidal (ProEtale.lowerStarComp Ab.{u + 1} h₁ h₂).hom :=
+  inferInstanceAs (NatTrans.IsMonoidal (Functor.sheafPushforwardContinuousComp'
+    (eFG := (MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤) h₁ h₂).symm)
+    Ab.{u + 1} (Scheme.ProEt.topology R) (Scheme.ProEt.topology S)
+    (Scheme.ProEt.topology T)).hom)
+
+/-- The composition isomorphism `h₂^* ⋙ h₁^* ≅ (h₁ ≫ h₂)^*` of pullbacks of abelian pro-étale
+sheaves is monoidal: it is the conjugate of the monoidal composition isomorphism of
+pushforwards. -/
+instance isMonoidal_upperStarComp_inv_ab {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R) :
+    NatTrans.IsMonoidal (upperStarComp Ab.{u + 1} h₁ h₂).inv := by
+  have h₁' : @Adjunction.IsMonoidal _ _ _ _ _ _ _ _
+      (upperStarLowerStarAdjunction Ab.{u + 1} (h₁ ≫ h₂))
+      Functor.Monoidal.toOplaxMonoidal _ := by
+    exact isMonoidal_upperStarLowerStarAdjunction _ _
+  have h₂' : @Adjunction.IsMonoidal _ _ _ _ _ _ _ _
+      ((upperStarLowerStarAdjunction Ab.{u + 1} h₂).comp
+        (upperStarLowerStarAdjunction Ab.{u + 1} h₁))
+      Functor.Monoidal.toOplaxMonoidal _ := by
+    exact Adjunction.isMonoidal_comp _ _
+  exact isMonoidal_conjugateEquiv_symm _ _ (ProEtale.lowerStarComp Ab.{u + 1} h₁ h₂).inv
+
 /-- The comparison `f^* ∘ p_Y^* ≅ p_X^*` is a monoidal natural isomorphism. See the module
 docstring. -/
 instance isMonoidal_upperStarFromPointComp :
-    NatTrans.IsMonoidal (upperStarFromPointComp f).hom :=
-  sorry
+    NatTrans.IsMonoidal (upperStarFromPointComp f).hom := by
+  have h (g : X ⟶ specZ) (hg : f ≫ toSpecZ Y = g) :
+      NatTrans.IsMonoidal (eqToHom (congrArg (upperStar Ab.{u + 1}) hg)) := by
+    subst hg
+    exact inferInstanceAs (NatTrans.IsMonoidal (𝟙 _))
+  have := h _ (comp_toSpecZ f)
+  unfold upperStarFromPointComp
+  dsimp only [Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom, eqToIso.hom]
+  infer_instance
 
 /-- The comparison `α_f : f^* Λ_Y ≅ Λ_X` of the coefficient rings pulled back from the point,
 an isomorphism of ring objects of abelian sheaves on `X_proét`. -/

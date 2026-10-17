@@ -11,6 +11,7 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
 public import WeilConjectures.SixFunctors.Etale.Derived.CoextendScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
+public import WeilConjectures.SixFunctors.Etale.Derived.ReductionHom
 
 /-!
 # Integral coefficients: internal hom, exceptional adjoint and normalized towers
@@ -204,8 +205,28 @@ theorem nonempty_iso_reductionModIdeal_derivedHom (n : ℕ) {K L : 𝐃(X, Λ)}
     Nonempty ((reductionModIdeal Λ X (I ^ n)).obj
         (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj L) ≅
       (derivedRestrictScalars (Ideal.Quotient.mk (I ^ n)) X).obj
-        (((derivedHom (ModuleCat.{u + 1} (Λ ⧸ I ^ n)) X).obj (op Kn)).obj Ln)) :=
-  sorry
+        (((derivedHom (ModuleCat.{u + 1} (Λ ⧸ I ^ n)) X).obj (op Kn)).obj Ln)) := by
+  subst hI
+  have hφ : Function.Surjective (Ideal.Quotient.mk (Ideal.span {ϖ} ^ n)) :=
+    Ideal.Quotient.mk_surjective
+  have ha : RingHom.ker (Ideal.Quotient.mk (Ideal.span {ϖ} ^ n)) = Ideal.span {ϖ ^ n} := by
+    rw [Ideal.mk_ker, Ideal.span_singleton_pow]
+  obtain ⟨e₁⟩ := nonempty_iso_reductionModIdeal_derivedHom_obj hϖ n K L
+  obtain ⟨eK⟩ := nonempty_iso_derivedExtendScalars_of_isDerivedBaseChange hφ ha X hη
+  obtain ⟨eL⟩ := nonempty_iso_derivedExtendScalars_of_isDerivedBaseChange hφ ha X hη'
+  obtain ⟨e₂⟩ := nonempty_iso_derivedRestrictScalars_derivedExtendScalars hφ ha X L
+  let q := (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapIso
+    (Ideal.quotientEquivAlgOfEq Λ
+      (Ideal.mk_ker (I := Ideal.span {ϖ} ^ n))).toLinearEquiv.toModuleIso
+  let e₃ : (reductionModIdeal Λ X (Ideal.span {ϖ} ^ n)).obj L ≅
+      (derivedRestrictScalars (Ideal.Quotient.mk (Ideal.span {ϖ} ^ n)) X).obj Ln :=
+    (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj L).mapIso
+      ((_root_.DerivedCategory.singleFunctor _ 0).mapIso q)).symm ≪≫ e₂.symm ≪≫
+      (derivedRestrictScalars _ X).mapIso eL
+  exact ⟨e₁ ≪≫ ((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).mapIso e₃ ≪≫
+    (derivedHomRestrictScalarsIso hφ ha X K).app Ln ≪≫
+    (derivedRestrictScalars _ X).mapIso
+      (((derivedHom (ModuleCat.{u + 1} (Λ ⧸ Ideal.span {ϖ} ^ n)) X).mapIso eK.symm.op).app Ln)⟩
 
 include hϖ hI in
 /-- Blueprint `lem-coef-integral-hom-reduction`: Integral internal Hom and reduction.

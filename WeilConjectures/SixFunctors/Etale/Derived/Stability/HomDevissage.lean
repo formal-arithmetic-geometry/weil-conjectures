@@ -52,6 +52,8 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
+set_option maxHeartbeats 0 in
+-- the kernel check of the exact pairing is slow
 /-- A lisse flat sheaf `F` placed in degree `0` has a left dual in `D(X_ét, Λ)` lying in
 `Dctf(X, Λ)`: the termwise dual of the single complex, which is the lisse flat sheaf `[F, Λ_X]`
 in degree `0`. -/
@@ -125,7 +127,7 @@ def derivedHomConstructibleFiniteTor (X : Scheme.{u}) :
 
 instance : (derivedHomConstructibleFiniteTor Λ X).IsClosedUnderIsomorphisms where
   of_iso e hK L hL := (constructibleFiniteTor _ X).prop_of_iso
-    (((RHom(X)[ModuleCat.{u + 1} Λ]).mapIso e.op).app L) (hK L hL)
+    (((RHom(X)[ModuleCat.{u + 1} Λ]).mapIso e.op).app L).symm (hK L hL)
 
 instance : (derivedHomConstructibleFiniteTor Λ X).IsStableUnderRetracts where
   of_retract r hK L hL :=
@@ -134,12 +136,18 @@ instance : (derivedHomConstructibleFiniteTor Λ X).IsStableUnderRetracts where
         r := ((RHom(X)[ModuleCat.{u + 1} Λ]).map r.i.op).app L
         retract := by
           rw [← NatTrans.comp_app, ← Functor.map_comp, ← op_comp, r.retract, op_id,
-            Functor.map_id, NatTrans.id_app] }
+            CategoryTheory.Functor.map_id, NatTrans.id_app] }
       (hK L hL)
 
+set_option maxHeartbeats 0 in
+-- the kernel check of the instance is slow
 instance : (derivedHomConstructibleFiniteTor Λ X).IsTriangulated where
-  exists_zero := ⟨0, isZero_zero _, fun L _ ↦ (constructibleFiniteTor _ X).prop_of_isZero
-    (((RHom(X)[ModuleCat.{u + 1} Λ]).map_isZero (isZero_zero _).op).obj L)⟩
+  exists_zero := by
+    open ZeroObject in
+    exact ⟨0, isZero_zero _, fun L _ ↦ (constructibleFiniteTor _ X).prop_of_isZero
+      (letI := _root_.DerivedCategory.braidedCategory
+        (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+      MonoidalCategory.isZero_ihom_obj_of_isZero (isZero_zero _) L)⟩
   isStableUnderShiftBy a := ⟨fun K hK L hL ↦ (constructibleFiniteTor _ X).prop_of_iso
     ((derivedHomShiftIso _ K a).app L).symm
       (hK _ ((constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).le_shift (-a) _ hL))⟩

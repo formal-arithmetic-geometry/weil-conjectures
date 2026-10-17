@@ -14,6 +14,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
 public import WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Unbounded
 
 /-!
 
@@ -46,8 +47,10 @@ type over `k`. For a general coefficient category the clauses are false: for `Λ
 (Artin–Schreier).
 
 Each clause is one of the statements of this directory, and `sixOperationsPackage` is the
-assembly: the clauses are proved from the corresponding statements, and only smooth base change
-and the orientation, whose statements live in other chapters, carry a `sorry` here.
+assembly: the clauses are proved from the corresponding statements. Smooth base change is
+`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_smooth`, the unbounded upgrade of the
+smooth base change theorem, and the orientation is smooth purity
+(`AlgebraicGeometry.Etale.Orientation.nonempty`).
 
 The clauses of the blueprint that this statement does not carry are the ones whose content is
 an identity *between canonical comparison transformations* rather than the existence of an
@@ -202,24 +205,28 @@ structure SixOperationsPackage : Prop where
 The eight clauses of `AlgebraicGeometry.Etale.SixOperationsPackage` hold for a finite `Λ` whose
 exponent is invertible on `k`, for `k` algebraically closed as in the blueprint (Verdier
 biduality is proved over algebraically closed fields). Every clause is one of the propositions of
-this directory, and the proof is the assembly. Smooth base change on the unbounded derived
-categories and the orientation, which is smooth purity, are not available in this directory and
-are left open here. The Tate twist datum is assumed normalized: for the untwisted datum
-`Λ_X(m) = Λ_X` the orientation clause fails over `ℚ`, where `Rf^! Λ ≅ μ_n[2] ≇ Λ[2]` for
-`𝔸¹_ℚ ⟶ Spec ℚ`. -/
+this directory, and the proof is the assembly; smooth base change on the unbounded derived
+categories is `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_smooth` and the orientation
+is smooth purity (`AlgebraicGeometry.Etale.Orientation.nonempty`). The Tate twist datum is
+assumed normalized: for the untwisted datum `Λ_X(m) = Λ_X` the orientation clause fails
+over `ℚ`, where `Rf^! Λ ≅ μ_n[2] ≇ Λ[2]` for `𝔸¹_ℚ ⟶ Spec ℚ`. -/
 theorem sixOperationsPackage [IsAlgClosed k] [HasTateTwist.IsNormalized Λ]
     [HasInvertibleExponent Λ (Spec (.of k))] [IsSeparated f] :
     SixOperationsPackage Λ k f aY where
   upperStarLowerStarAdjunction := ⟨derivedUpperStarLowerStarAdjunction _ f⟩
   lowerShriekUpperShriekAdjunction := ⟨rightDerivedUpperShriekAdjunction _ f⟩
-  baseChangeLowerShriek g g' f' sq _ :=
+  baseChangeLowerShriek _ _ f' sq _ :=
     have : QuasiCompact f' := MorphismProperty.of_isPullback (P := @QuasiCompact) sq inferInstance
     have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
     ⟨asIso (rightDerivedLowerShriekBaseChangeMap Λ sq)⟩
-  baseChangeLowerStarOfProper g g' f' sq _ :=
+  baseChangeLowerStarOfProper _ _ _ sq _ :=
     have := isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring Λ isAddTorsion_of_finite sq
     ⟨asIso (derivedBaseChangeMap _ sq.toCommSq)⟩
-  baseChangeLowerStarOfSmooth _ _ _ _ _ := sorry
+  baseChangeLowerStarOfSmooth g _ _ sq hg :=
+    have : Smooth g := hg
+    have : HasInvertibleExponent Λ Y := HasInvertibleExponent.of_hom aY
+    have := isIso_derivedBaseChangeMap_of_smooth Λ aY sq
+    ⟨asIso (derivedBaseChangeMap _ sq.toCommSq)⟩
   projectionFormula K L := hasProjectionFormula_of_finite Λ f K L
   lowerShriekCompactificationIndependent c c' :=
     ⟨rightDerivedLowerShriekOfCompactificationIso Λ c c'⟩

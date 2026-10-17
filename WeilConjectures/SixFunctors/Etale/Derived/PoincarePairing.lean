@@ -464,6 +464,8 @@ variable {k : Type u} [Field k] [IsSepClosed k] {Λ : Type (u + 1)} [CommRing Λ
 
 /-- Blueprint `sk-thm-sf-identification`: The derived Poincaré pairing is the duality
 isomorphism.
+This is also blueprint `thm-pod-identification-of-the-comparison` (Identification of the
+Poincaré pairing with Verdier duality), the part asserting that `b_K^♯` is an isomorphism.
 
 **The derived Poincaré pairing is perfect in the point category.** Let `k` be separably closed,
 `a : X ⟶ Spec k` admit a compactification, `γ : V[2d] ≅ ω_X` be a purity isomorphism (from an
