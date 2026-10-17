@@ -5,12 +5,15 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Perfect
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.SixFunctors.Etale.Derived.DerivedComplete
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupportTorsion
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
+public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsComplete
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
@@ -43,8 +46,9 @@ At a finite coefficient ring `Λ` whose exponent is invertible on `k`:
 At the integral stage `𝒪_E`, for a derived complete `K` whose reductions `K ⊗ᴸ 𝒪_E/𝔪_Eⁿ` are
 bounded constructible of Tor amplitude in one common interval:
 
-- `AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections_integral`,
-  `AlgebraicGeometry.Etale.isPerfect_rightDerivedGlobalSections_integral` and the duals.
+- `AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections_integral` and its dual,
+  assuming moreover that `RΓ_c(X, K)` is derived complete (automatic for proper `X`);
+- `AlgebraicGeometry.Etale.isPerfect_rightDerivedGlobalSections_integral` and its dual.
 
 At the rational stage `E`, the cohomology of these complexes and of their duals tensored up to
 `E`:
@@ -69,6 +73,14 @@ compactification `X ⟶[j] X̄ ⟶[ā] Spec k` of `a_X`. Then `RΓ(X, K) ≅ RΓ
 finite Tor amplitude (`sk-thm-sf-direct-image-tor-amplitude`), so the compactly supported case
 applies to `Rj_* K` on `X̄`. The integral stage is reduced to its compactly supported case in
 the same way.
+
+At the integral stage, `RΓ_c(X, K) ⟶ϖ RΓ_c(X, K) ⟶ RΓ_c(X, K ⊗ᴸ 𝒪_E/ϖ)` is a distinguished
+triangle with perfect third vertex, and a derived complete complex with perfect reduction is
+perfect (Stacks 0CQG, `DerivedCategory.isPerfect_of_rightOrthogonal_of_isPerfect_obj₃`). The
+blueprint's integral `RΓ_c(X, K)` is the derived limit of the `RΓ_c(X, K ⊗ᴸ 𝒪_E/𝔪_Eⁿ)`, which
+is derived complete; the naive `RΓ_c(X, K) = RΓ(X̄, j_! K)` of the repository need not be, as
+`j_!` does not commute with derived limits, whence the completeness hypothesis. For `RΓ(X, K)`
+it holds automatically: `RΓ(X, K) = RΓ(X̄, Rj_* K)` and `Rj_*` preserves derived completeness.
 
 The rational stage `E = 𝒪_E[1/ℓ]` is the rationalization of the integral stage
 (`DerivedCategoryDerivedCompleteRational`), whose objects come from integral ones. There is no
@@ -226,18 +238,62 @@ variable [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ] [Finite (Λ �
 
 **`RΓ_c(X, K)` is perfect at the integral stage.** Let `Λ` be a Noetherian domain, complete for
 a principal ideal `I` with `Λ/I` finite of exponent invertible in `k`; this is the integral
-stage `Λ = 𝒪_E`, `I = 𝔪_E` for `E` finite over `ℚ_ℓ`. For `K ∈ D^b_c(X, Λ)`, the compactly
-supported cohomology `RΓ_c(X, K)` is a perfect complex of `Λ`-modules. Its reductions are the
-`RΓ_c(X, K ⊗ᴸ Λ/Iⁿ)`, perfect of one common amplitude by the finite stage
-`AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections`; and `RΓ_c(X, K)` is
-derived complete (`AlgebraicGeometry.Etale.derivedComplete_rightDerivedLowerShriek`), hence the
-derived limit of its reductions, which is perfect (the uniform-tower reconstruction
-`lem-weil-pbc-reconstruction-uniform-tower`). -/
+stage `Λ = 𝒪_E`, `I = 𝔪_E` for `E` finite over `ℚ_ℓ`. For `K ∈ D^b_c(X, Λ)` such that
+`Ra_{X!} K` is derived complete for `I`, the compactly supported cohomology `RΓ_c(X, K)` is a
+perfect complex of `Λ`-modules.
+
+The completeness hypothesis says that `RΓ_c(X, K)` is the integral stage of the blueprint: the
+derived limit of its reductions `RΓ_c(X, K ⊗ᴸ Λ/Iⁿ)` (the uniform-tower reconstruction
+`lem-weil-pbc-reconstruction-uniform-tower`). It holds when `a_X` is proper
+(`AlgebraicGeometry.Etale.derivedComplete_rightDerivedLowerShriek`), but not in general: the
+naive `Ra_{X!} = Rā_* j_!` of the repository does not commute with derived limits, and without
+the hypothesis the statement is false (for `X = 𝔸¹` and `K = R lim_n (ℤ/ℓⁿ)_X`, `H²_c(X, K)` is
+not finitely generated).
+
+For `I = (ϖ)` with `ϖ ≠ 0` there is a distinguished triangle
+`RΓ_c(X, K) ──ϖ──▶ RΓ_c(X, K) ⟶ RΓ_c(X, K ⊗ᴸ Λ/ϖ) ⟶ RΓ_c(X, K)⟦1⟧`, whose third vertex is
+perfect by the finite stage
+(`AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections_of_nsmul_eq_zero`), and
+`RΓ_c(X, K) = RΓ(Spec k, Ra_{X!} K)` is derived `ϖ`-complete; such a complex is perfect
+(Stacks 0CQG, `DerivedCategory.isPerfect_of_rightOrthogonal_of_isPerfect_obj₃`). For `I = 0`
+one has `K ≅ K ⊗ᴸ Λ/I`, and the finite stage applies directly. -/
 theorem isPerfect_compactlySupportedGlobalSections_integral (hI : I.IsPrincipal)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructibleIntegral I X K) :
-    ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K).IsPerfect :=
-  sorry
+    (hK : DerivedCategory.boundedConstructibleIntegral I X K)
+    (hc : _root_.DerivedCategory.derivedComplete (Spec (.of k)).smallEtaleTopology I
+      ((R(aX)_![ModuleCat.{u + 1} Λ]).obj K)) :
+    ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K).IsPerfect := by
+  obtain ⟨-, a, b, hab⟩ := hK
+  obtain ⟨m, hm0, hmΛ, hmk⟩ := HasInvertibleExponent.exists_isUnit_natCast (Λ := Λ ⧸ I)
+    (X := Spec (.of k))
+  have : NeZero m := ⟨hm0.ne'⟩
+  have hmI : (m : Λ) ∈ I ^ 1 := by
+    rw [pow_one, ← Ideal.Quotient.eq_zero_iff_mem, map_natCast]
+    exact hmΛ
+  -- the finite stage: `RΓ_c(X, K ⊗ᴸ Λ/I)` is perfect
+  have h₁ : ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj
+      ((reductionModIdeal Λ X (I ^ 1)).obj K)).IsPerfect :=
+    isPerfect_compactlySupportedGlobalSections_of_nsmul_eq_zero Λ aX _ m
+      (nsmul_id_reductionModIdeal hmI K) hmk ⟨(hab 0).1, a, b, (hab 0).2⟩
+  obtain ⟨ϖ, rfl⟩ := hI.principal
+  by_cases h0 : ϖ = 0
+  · -- `I = 0`: `K ≅ K ⊗ᴸ Λ/I`
+    subst h0
+    refine h₁.of_iso ((compactlySupportedGlobalSections _ aX).mapIso
+      (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).mapIso
+        ((_root_.DerivedCategory.singleFunctor _ 0).mapIso
+          ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapIso
+            (Submodule.quotEquivOfEqBot _ ?_).toModuleIso)) ≪≫ derivedTensorSingleUnitIso K))
+    rw [pow_one, Submodule.span_singleton_eq_bot]
+  have hϖ : ϖ ∈ nonZeroDivisors Λ := mem_nonZeroDivisors_of_ne_zero h0
+  obtain ⟨g, h, hT⟩ := exists_distinguished_smul_map_reductionModIdeal
+    (R(aX)_![ModuleCat.{u + 1} Λ] ⋙ rightDerivedGlobalSections (ModuleCat.{u + 1} Λ)
+      (Spec (.of k))) hϖ 1 K
+  rw [pow_one] at hT
+  exact _root_.DerivedCategory.isPerfect_of_rightOrthogonal_of_isPerfect_obj₃ hϖ
+    (IsAdicComplete.le_jacobson_bot _ (Submodule.mem_span_singleton_self ϖ)) hT
+    (rightDerivedGlobalSections_hom_eq_zero
+      ((_root_.DerivedCategory.derivedComplete_iff_rightOrthogonal hϖ rfl).1 hc)) h₁
 
 omit [IsSeparated aX] in
 /-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
@@ -247,7 +303,9 @@ omit [IsSeparated aX] in
 `RΓ(X, K)` is a perfect complex of `Λ`-modules. As at the finite stage, for a compactification
 `X ⟶[j] X̄ ⟶[ā] Spec k` of `a_X` one has `RΓ(X, K) ≅ RΓ_c(X̄, Rj_* K)`, and
 `Rj_* K ∈ D^b_c(X̄, Λ)`: `Rj_*` preserves derived completeness, commutes with the reductions,
-and carries Tor amplitude `[a, b]` to `[a, b + 2 dim X]`. -/
+and carries Tor amplitude `[a, b]` to `[a, b + 2 dim X]`. No completeness hypothesis on
+`RΓ(X, K)` is needed: `ā` being proper, `Rā_! Rj_* K ≅ Rā_* Rj_* K` is derived complete
+(`AlgebraicGeometry.Etale.derivedComplete_rightDerivedLowerShriek`). -/
 theorem isPerfect_rightDerivedGlobalSections_integral [QuasiCompact aX] (hI : I.IsPrincipal)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructibleIntegral I X K) :
@@ -282,7 +340,10 @@ theorem isPerfect_rightDerivedGlobalSections_integral [QuasiCompact aX] (hI : I.
       (DerivedCategory.torAmplitudeIn _ _ _ _).prop_of_iso (e.app K).symm
         (torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing _ aX c.g c.i c.comm.symm d hd a b
           _ hN hNY hbc hta)⟩
-  exact (isPerfect_compactlySupportedGlobalSections_integral I c.g hI _ hK').of_iso
+  have : IsProper c.g := c.isProper
+  exact (isPerfect_compactlySupportedGlobalSections_integral I c.g hI _ hK'
+    (derivedComplete_rightDerivedLowerShriek I hI c.g _
+      (derivedComplete_rightDerivedLowerStar I hI c.i K hc))).of_iso
     ((compactlySupportedGlobalSectionsIsoOfIsProper _ c.g).app _ ≪≫
       (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ c.i).app K)
 
@@ -291,10 +352,12 @@ theorem isPerfect_rightDerivedGlobalSections_integral [QuasiCompact aX] (hI : I.
 **The dual of `RΓ_c(X, K)` is perfect at the integral stage.** -/
 theorem isPerfect_ihom_compactlySupportedGlobalSections_integral (hI : I.IsPrincipal)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructibleIntegral I X K) :
+    (hK : DerivedCategory.boundedConstructibleIntegral I X K)
+    (hc : _root_.DerivedCategory.derivedComplete (Spec (.of k)).smallEtaleTopology I
+      ((R(aX)_![ModuleCat.{u + 1} Λ]).obj K)) :
     ((ihom ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K)).obj
       (𝟙_ _)).IsPerfect :=
-  (isPerfect_compactlySupportedGlobalSections_integral I aX hI K hK).ihom_unit
+  (isPerfect_compactlySupportedGlobalSections_integral I aX hI K hK hc).ihom_unit
 
 omit [IsSeparated aX] in
 /-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
@@ -320,7 +383,9 @@ complexes of `E`-vector spaces. This is flat extension of scalars from the integ
 theorem rationalHomology_globalSections [QuasiCompact aX] (hI : I.IsPrincipal)
     (E : Type*) [Field E] [Algebra Λ E]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructibleIntegral I X K) :
+    (hK : DerivedCategory.boundedConstructibleIntegral I X K)
+    (hc : _root_.DerivedCategory.derivedComplete (Spec (.of k)).smallEtaleTopology I
+      ((R(aX)_![ModuleCat.{u + 1} Λ]).obj K)) :
     ∀ C ∈ ({(compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K,
         (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj K,
         (ihom ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K)).obj (𝟙_ _),
@@ -334,9 +399,11 @@ theorem rationalHomology_globalSections [QuasiCompact aX] (hI : I.IsPrincipal)
   intro C hC
   simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hC
   rcases hC with rfl | rfl | rfl | rfl
-  · exact (isPerfect_compactlySupportedGlobalSections_integral I aX hI K hK).tensor_homology E
+  · exact (isPerfect_compactlySupportedGlobalSections_integral I aX hI K hK hc).tensor_homology
+      E
   · exact (isPerfect_rightDerivedGlobalSections_integral I aX hI K hK).tensor_homology E
-  · exact (isPerfect_ihom_compactlySupportedGlobalSections_integral I aX hI K hK).tensor_homology
+  · exact
+      (isPerfect_ihom_compactlySupportedGlobalSections_integral I aX hI K hK hc).tensor_homology
       E
   · exact (isPerfect_ihom_rightDerivedGlobalSections_integral I aX hI K hK).tensor_homology E
 
