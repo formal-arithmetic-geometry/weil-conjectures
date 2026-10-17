@@ -26,9 +26,125 @@
   "def-kun-topological-krull-dimension",
   "def-sc-generic-point"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-temkin-stable-modification] to $(C,H)\\to S$. The hypotheses of a multipointed curve are precisely the two flat finitely presented maps of pure relative dimensions $1,0$ and the closed immersion. The smooth generic curve with etale marking in its smooth locus is semistable. We obtain an integral excellent Noetherian $\\widetilde S$, a proper dominant generically finite $a:\\widetilde S\\to S$, a proper projective-bundle modification $b:\\widetilde C\\to C\\times_S\\widetilde S$, and a closed marking $\\widetilde H\\subset\\widetilde C$. In particular the cited statement supplies a map $d:\\widetilde H\\to H\\times_S\\widetilde S$ commuting with $b$, and both $b$ and $d$ induce isomorphisms on generic fibres. It also supplies the semistable multipointed family and its preservation by base change. Neither properness nor separatedness of $C\\to S$ is needed.",
+   "uses": [
+    "lem-trf-temkin-stable-modification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé X §3.2.2 and Theorem 3.4 Step 3, printed pp. 158, 160; Temkin §1.2 and Theorems 1.5, 1.1 (source URL read online)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-chow-noetherian] to $a:\\widetilde S\\to S$: properness includes separatedness and finite type. Obtain a proper surjection $\\pi:T\\to\\widetilde S$, an $S$-immersion $j:T\\to\\mathbf P^N_S$, and a dense open $V\\subset\\widetilde S$ such that $W:=\\pi^{-1}(V)\\to V$ is an isomorphism. By [lem-weil-pbc-proper-fp-permanence](a), $T\\to S$ is proper, so $T$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Thus every open of $T$ is quasi-compact, and $W\\hookrightarrow T$ is a quasi-compact immersion. Define $S'$ as its scheme-theoretic image. By [lem-weil-pbc-scheme-image-qc-kernel] this is a closed subscheme of $T$ with ideal the kernel of restriction to $W$; by [lemma-nagata-immersion-open-in-scheme-image], $W\\to S'$ is an open immersion with topologically and scheme-theoretically dense image. We identify it with $W$. This construction does not require $W$ to be dense in $T$.",
+   "uses": [
+    "lem-weil-pbc-chow-noetherian",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-scheme-image-qc-kernel",
+    "lemma-nagata-immersion-open-in-scheme-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0200, label lemma-chow-Noetherian; morphisms.tex Tag 01R8, label lemma-quasi-compact-scheme-theoretic-image. The image construction discards components outside the isomorphism open."
+   }
+  },
+  {
+   "text": "The scheme $S'$ is integral. Indeed, $W\\simeq V$ is a nonempty integral open and is dense in $S'$ by the preceding step. Thus $S'$ is irreducible. For an affine open $A=\\operatorname{Spec}R\\subset T$ meeting $S'$, write $I=\\ker(R\\to\\Gamma(A\\cap W,\\mathcal O_W))$. The kernel formula in [lem-weil-pbc-scheme-image-qc-kernel](1) identifies $S'\\cap A$ with $\\operatorname{Spec}(R/I)$. Density ensures $A\\cap W\\ne\\varnothing$. Sections on this nonempty open of an integral scheme inject into its function field, so $\\Gamma(A\\cap W,\\mathcal O_W)$ is a domain. Hence its subring $R/I$ is a domain. These affine opens cover $S'$, proving reducedness and integrality as in [def-pc-integral-scheme]. Put $q=\\pi|_{S'}:S'\\to\\widetilde S$. Since $\\pi^{-1}(V)=W$ and $W\\subset S'$, the restriction $q^{-1}(V)\\to V$ is the original isomorphism.",
+   "uses": [
+    "lem-weil-pbc-scheme-image-qc-kernel",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01R8, label lemma-quasi-compact-scheme-theoretic-image, kernel description; elementary domain and density argument."
+   }
+  },
+  {
+   "text": "Let $r=a\\circ q:S'\\to S$. The closed immersion $S'\\hookrightarrow T$ is proper, and composition with the proper $\\pi$ and $a$ makes $r$ proper by [lem-weil-pbc-proper-fp-permanence](a),(c). The composite $j':S'\\hookrightarrow T\\xrightarrow{j}\\mathbf P^N_S$ is an immersion by its part (e). The projection $\\mathbf P^N_S\\to S$ is proper by [lemma-nagata-projective-space-base-change-proper], hence separated. Since $r$ is proper, [lem-weil-pbc-proper-over-separated] makes $j'$ proper, and [lem-weil-pbc-proper-immersion-closed] makes it a closed immersion. Consequently $r$ is projective in the finite-projective-space sense [def-kun-projective]. Properness gives finite type, so [lem-weil-pbc-finite-type-over-noetherian] makes $S'$ Noetherian; on affine charts its finite-type coordinate algebras over excellent affine charts of $S$ are excellent by [lem-exc-finite-type-localization-excellent]. Thus $S'$ is excellent as well.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-proper-over-separated",
+    "lem-weil-pbc-proper-immersion-closed",
+    "def-kun-projective",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-exc-finite-type-localization-excellent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W3, 01W5 (proper composition and closed immersions), 01W6 label lemma-image-proper-scheme-closed; schemes.tex Tag 01IQ label lemma-immersion-when-closed. Projective space properness and excellence as in the cited nodes."
+   }
+  },
+  {
+   "text": "The map $r$ is dominant and finite over a dense open. To see the latter explicitly, choose a dense open $U\\subset S$ over which $a$ is finite. Since $\\widetilde S$ is integral and $a$ is dominant, the finite generic fibre is the spectrum of a finite domain over $\\kappa(\\eta)$, hence a field: $a^{-1}(\\eta)=\\{\\widetilde\\eta\\}$. The dense open $V$ contains $\\widetilde\\eta$. Properness means that $a$ is a closed map [def-weil-proper-morphism], so $F:=a(\\widetilde S\\setminus V)$ is closed and avoids $\\eta$. Over $U_0:=U\\setminus F$, all of $a^{-1}(U_0)$ lies in $V$ and $q$ is an isomorphism. Thus $r|_{r^{-1}(U_0)}$ identifies with the finite map $a|_{a^{-1}(U_0)}$. Moreover $q$ contains $V$ in its image and is dominant, and the generic point maps to $\\eta$, so $r$ is dominant. Thus $r$ is finite over a dense open, as required.",
+   "uses": [
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Theorem 3.4 Steps 3--4: alteration refinement. The dense-open finiteness verification is written here from the definition of properness and the finite generic fibre."
+   }
+  },
+  {
+   "text": "Form $C'=\\widetilde C\\times_{\\widetilde S}S'$ and $H'=\\widetilde H\\times_{\\widetilde S}S'$ using [def-pc-fibre-product]. Base-changing $b,d$ along $q$ gives a morphism of closed pairs $(m,n)$ to $(C,H)\\times_SS'$. The base-change clause of [lem-trf-temkin-stable-modification] gives the flat finitely presented pure-dimensional nodal curve, with etale closed marking in its relative smooth locus. To verify projective-bundle projectivity, write $b$ as a closed immersion into $\\operatorname{Proj}_B(\\operatorname{Sym}\\mathcal E)$ for $B=C\\times_S\\widetilde S$, as in [def-trf-projective-bundle-morphism]. Pull back to $B'=C\\times_SS'$. By [lemma-nagata-relative-proj-base-change-arbitrary], this Proj pulls back to $\\operatorname{Proj}_{B'}(g^*\\operatorname{Sym}\\mathcal E)$. The symmetric algebra on $g^*\\mathcal E$ is $g^*\\operatorname{Sym}\\mathcal E$: both represent linear maps from $g^*\\mathcal E$ into a commutative algebra. Finite generators of $\\mathcal E$ pull back to finite generators. The closed immersion pulls back by [lem-weil-pbc-proper-fp-permanence](b). This is the required projective-bundle factorization of $m$; the same part makes $m$ proper because $b$ is proper. As $q$ is an isomorphism over $V$, it identifies the generic point of $S'$ with that of $\\widetilde S$. The generic-fibre isomorphisms of both $b$ and $d$ therefore give the claimed generic-fibre isomorphisms of $m$ and $n:H'\\to H\\times_SS'$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-trf-temkin-stable-modification",
+    "def-trf-projective-bundle-morphism",
+    "lemma-nagata-relative-proj-base-change-arbitrary",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé X §3.2.2 and Theorem 3.4 Step 3 and first sentence of Step 4; relative Proj base-change comparison and closed-immersion base change as in the cited nodes. Relative Proj comparison: Stacks Tag 01O3, constructions.tex, label lemma-relative-proj-base-change; closed immersions: Tag 01QR, morphisms.tex, label lemma-base-change-closed-immersion."
+   }
+  },
+  {
+   "text": "Finally $n$ is proper. Put $B'=C\\times_SS'$ and $K=C'\\times_{B'}(H\\times_SS')$. Since $m$ is proper, $K\\to H\\times_SS'$ is proper by [lem-weil-pbc-proper-fp-permanence](b). The morphism of pairs gives $H'\\to K$; it is a closed immersion. Indeed, locally in $C'$, let $I$ be the ideal of $H'$ and $J$ that of $K$. The factorization says $J\\subseteq I$, and the map $\\mathcal O_{C'}/J\\to\\mathcal O_{C'}/I$ is surjective, giving the assertion by [def-weil-closed-immersion]. Parts (a),(c) of [lem-weil-pbc-proper-fp-permanence] now make the composite $n$ proper. The completed geometric-fibre local equation supplied by the Temkin node is exactly the at-worst-nodal condition in the item, and its smooth-locus marking gives the last condition. No degree condition was imposed, and the construction also covers the empty marking.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W3, 01W4, 01W5: composition-proper, base-change-proper, closed-immersion-proper; affine quotient description of a closed immersion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-projective",
+  "def-pc-fibre-product",
+  "def-pc-integral-scheme",
+  "def-trf-projective-bundle-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-trf-temkin-stable-modification",
+  "lem-weil-pbc-chow-noetherian",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-scheme-image-qc-kernel",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-nagata-relative-proj-base-change-arbitrary"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO Exposé X §3.2.2 and Theorem 3.4 Step 3, with the scheme-image Chow refinement, proper-immersion argument, dense-open finiteness and Proj base change written out during repair."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,7 +176,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-dejong-relative-marked-semistable",
@@ -84,5 +200,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-stable-modification-flat-curve-pair",
+  "worker": "stage1",
+  "summary": "Repaired all four returned faults: the Temkin input now includes the marking map and its generic isomorphism; the Chow refinement uses the schematic image of its isomorphism open without an unsupported density assumption; properness makes the immersion into finite projective space closed; arbitrary relative-Proj and closed-immersion base change are explicitly cited. Wrote out the common finite open and corrected the marking target to H times S-prime. The item statement and all inherited metadata are unchanged. Temkin §1.2 and Theorems 1.1, 1.5 were read online, confirming applicability to nonseparated nonproper curves; archival copy remains WANTED.",
+  "blueprint": "The seven steps retain the ILO Exposé X §3.2.2/Theorem 3.4 Step 3 stable-modification route and carry the projective Chow refinement, base change and proper marking verification; no unit-level route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-chow-noetherian",
+    "why": "The generic tool produces an immersion model of the proper alteration base, to refine its projectivity convention. This is a generic tool for the stable-modification argument; the curve-zero unit does not supply it."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Properness and closed immersions under composition and base change, and composition of immersions. This is a generic tool for the stable-modification argument; the curve-zero unit does not supply it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Finite-type models over the Noetherian base are Noetherian. This is a generic tool for the stable-modification argument; the curve-zero unit does not supply it."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-image-qc-kernel",
+    "why": "The schematic image exists and its affine ideal is the restriction kernel; the isomorphism open need not be dense in the whole Chow model. This is a generic tool for the stable-modification argument; the curve-zero unit does not supply it."
+   },
+   {
+    "node": "lemma-nagata-immersion-open-in-scheme-image",
+    "why": "A quasi-compact immersion is open and dense in its own schematic image, with no ambient density assumption. This is a generic tool for the stable-modification argument; the curve-zero unit does not supply it."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Finite projective space is proper and hence separated over the base. This is a generic tool for the stable-modification argument; the curve-zero unit does not supply it."
+   },
+   {
+    "node": "lem-weil-pbc-proper-over-separated",
+    "why": "The proper refined base maps properly into the separated finite projective space. This is a generic tool for the stable-modification argument; the curve-zero unit does not supply it."
+   },
+   {
+    "node": "lem-weil-pbc-proper-immersion-closed",
+    "why": "Properness upgrades the Chow immersion to a closed immersion. This is a generic tool for the stable-modification argument; the curve-zero unit does not supply it."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Finite-type affine charts over the excellent base remain excellent. This is a generic tool for the stable-modification argument; the curve-zero unit does not supply it."
+   },
+   {
+    "node": "lemma-nagata-relative-proj-base-change-arbitrary",
+    "why": "Arbitrary relative Proj base change preserves the projective-bundle factorization. This is a generic tool for the stable-modification argument; the curve-zero unit does not supply it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-chow-noetherian",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-scheme-image-qc-kernel",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-exc-finite-type-localization-excellent",
+  "lemma-nagata-relative-proj-base-change-arbitrary"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-a31fc4efd",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-a31fc4efd (reviewer sub-agent of L); spot-checked: PASS: the full delivery was read; no fixes and no dropped nodes. Item (7 steps) and the single new statement-only node lem-trf-temkin-stable-modification. Sources: (1) ILO X §3.2.2 (printed p.158): multipointed curves, explicitly not proper or separated. (2) ILO Theorem 3.4 Steps 1-4 (pp.159-161): Temkin 1.5 and 1.1 are applied after flattening, and semistability is preserved by base change. (3) Temkin arXiv:0707.3953 §1.2, read online and not archived: the multipointed-curve definition, modifications as compatible pairs (f_C,f_D), semistability, eta-modifications, Theorems 1.1 and 1.5. These confirm every clause of the new node: the marking map d with its eta-iso, projectivity of b, the alteration, nonseparated C allowed, base-change stability. Finite over a dense open and excellence of the alteration base are true consequences over a Noetherian base. (4) Stacks 0200 and the remark after it (replace by the scheme-theoretic closure of pi^-1(U)), plus 01R8, 01W6, 01IQ, 01O3, 01QR, 01W3-5, 07QU; all tag/label pairs verified. Step checks: Chow hypotheses hold (a proper). T is Noetherian, so the open immersion is quasi-compact. The scheme image with its kernel ideal is integral by the domain argument on affine charts using density. r is proper; the immersion into P^N_S is proper over separated, hence closed, so H-projective. S' is excellent by 07QU. The common finite open is valid (the generic fibre is one point, the image of the complement is closed and misses eta). Proj base change for an arbitrary morphism, Sym commutes with pullback, and the closed immersion pulls back. n is proper via K=m^-1(H x S'). Edge cases checked: empty H, field base, identity case, extra Chow components, nonempty generic marking, nonseparated C. Duplicate search over dag/nodes and both blueprint snapshots found nothing that states Temkin's theorem without a cycle; the new node does not restate the item, which adds H-projectivity, the integrality refinement and transport. Ten generic scheme tool_uses accepted (Chow, proper-fp permanence, finite type over Noetherian, scheme-image kernel, nagata open-in-image, P^n proper, proper over separated, proper immersion closed, excellence of finite type, relative Proj base change). No SGA, no cycle, item statement unchanged. WANTED: an archival Temkin copy (reported by the worker)."
  }
 }

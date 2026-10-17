@@ -12,76 +12,137 @@
   "def-coef-infinity-fibrations",
   "lem-coef-coherent-nerve-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-coef-infinity-cartesian-mapping-criterion] to the inner fibration p and its p-Cartesian edge e at the vertex a. It gives the homotopy-pullback square of right-pinched mapping spaces with upper horizontal map postcomposition by e, lower horizontal map postcomposition by p(e), and vertical maps induced by p. This is exactly the path-space homotopy-pullback convention used in the item.",
+   "uses": [
+    "lem-coef-infinity-cartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3, Cartesian mapping-square criterion (printed pp. 131-132)."
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-coherent-square-comparison-data] to $p,e,a$. Its square (i) is the right-pinched square of Step 1, homotopy cartesian there, and its comparison (i)$\\to$(ii) supplies corner maps induced by $\\alpha_E,\\alpha_B$, all weak homotopy equivalences, to the coherent-nerve square (ii). Writing the source square as $(f,g,u,v;H)$, the target as $(f',g',u',v';H')$ and the corner maps as $\\bar a,\\bar b,\\bar c,\\bar d$, the node supplies the side homotopies $L,M,N,O$ and the homotopy relative endpoints between the boundary paths $\\bar duf\\xrightarrow{\\bar dH}\\bar dvg\\xrightarrow{Og}v'\\bar cg\\xrightarrow{v'M}v'g'\\bar a$ and $\\bar duf\\xrightarrow{Nf}u'\\bar bf\\xrightarrow{u'L}u'f'\\bar a\\xrightarrow{H'\\bar a}v'g'\\bar a$. All corners are mapping spaces of quasicategories, hence Kan. Thus [lem-coef-infinity-kan-homotopy-coherent-cube-invariance] applies, and the coherent-nerve square (ii) is homotopy cartesian.",
+   "uses": [
+    "lem-cbc-coherent-square-comparison-data",
+    "lem-coef-infinity-kan-homotopy-coherent-cube-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3 and Theorem 2.2.5.1, comparison of the Cartesian mapping square through coherent nerve."
+   }
+  },
+  {
+   "text": "Use the comparison (iii)$\\to$(ii) of [lem-cbc-coherent-square-comparison-data]. The corners of the enriched square (iii) are Kan because $RD_E,RD_B$ are locally Kan; it commutes strictly because $Rp$ is a simplicial functor and $Rp(r_E[e])=r_B[pe]$ by naturality of $r$, so its commutation homotopy is constant. The node supplies the weak-equivalence corner maps (leg by leg of a zigzag), the side homotopies and the boundary-path homotopy relative endpoints to the coherent-nerve square (ii). Square (ii) is homotopy cartesian by Step 2, so [lem-coef-infinity-kan-homotopy-coherent-cube-invariance], which is stable under zigzags, makes square (iii) homotopy cartesian in its path-space sense with constant homotopy.",
+   "uses": [
+    "lem-cbc-coherent-square-comparison-data",
+    "lem-coef-infinity-kan-homotopy-coherent-cube-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1 and Proposition 2.4.4.3, locally Kan replacement and coherent transfer."
+   }
+  },
+  {
+   "text": "The replacement maps $r_E:D_E\\to RD_E$ and $r_B:D_B\\to RD_B$ are simplicial functors with $Rp\\,r_E=r_B\\,\\mathfrak C[p]$, so they commute strictly with both vertical maps and both enriched postcomposition maps. They are weak homotopy equivalences on all four mapping simplicial sets by the locally Kan replacement clause of [lem-coef-coherent-nerve-comparison]. For the Kan square (iii), [lem-coef-kan-fibrant-path-recognition] identifies the two-leg fibration-replacement notion with the path-space comparison after functorial Kan replacement; the replacement maps of the Kan corners are weak equivalences commuting strictly with the square, so by [lem-coef-infinity-kan-homotopy-coherent-cube-invariance] (all side homotopies constant) the path-space condition of Step 3 is the one for the replaced square, and square (iii) is homotopy cartesian in the two-leg sense. Then [lem-coef-kan-homotopy-cartesian-invariance] transfers homotopy cartesianness to the unreplaced enriched square of the item, and [lem-coef-kan-fibrant-path-recognition] again identifies this with the item's functorial Kan-replacement/path-space definition. Its corners, vertical maps and horizontal maps are exactly those displayed in the item.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-infinity-kan-homotopy-coherent-cube-invariance",
+    "lem-coef-kan-fibrant-path-recognition",
+    "lem-coef-kan-homotopy-cartesian-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1 and Proposition 2.4.4.3, transfer from locally Kan rigidification back to coherent realization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-coherent-square-comparison-data",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-infinity-cartesian-mapping-criterion",
+  "lem-coef-infinity-kan-homotopy-coherent-cube-invariance",
+  "lem-coef-kan-fibrant-path-recognition",
+  "lem-coef-kan-homotopy-cartesian-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+  "place": "Auxiliary categorical comparison: Cartesian mapping criterion followed by Q-realization comparison and coherent transfer to enriched composition."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
-   "query": "coherent.*mapping|cartesian.*mapping [Mathlib/AlgebraicTopology]",
-   "results": "{\"t\": \"2026-10-17T11:40:49Z\", \"tool\": \"grep\", \"query\": \"coherent.*mapping|cartesian.*mapping [Mathlib/AlgebraicTopology]\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "coherent.*mapping|cartesian.*mapping",
+   "results": "{\"t\": \"2026-10-17T13:02:11Z\", \"tool\": \"grep\", \"query\": \"coherent.*mapping|cartesian.*mapping\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: zero hits."
   },
   {
    "tool": "grep",
    "query": "rigidification|coherentRealization|cartesian.*mapping|mapping.*cartesian",
-   "results": "{\"t\": \"2026-10-17T11:56:07Z\", \"tool\": \"grep\", \"query\": \"rigidification|coherentRealization|cartesian.*mapping|mapping.*cartesian\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "results": "{\"t\": \"2026-10-17T13:02:11Z\", \"tool\": \"grep\", \"query\": \"rigidification|coherentRealization|cartesian.*mapping|mapping.*cartesian\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: zero hits."
   },
   {
    "tool": "leanfinder",
    "query": "A cartesian edge gives a homotopy pullback square of coherent realization mapping simplicial sets for an inner fibration of quasicategories",
-   "results": "{\"t\": \"2026-10-17T11:56:13Z\", \"tool\": \"leanfinder\", \"query\": \"A cartesian edge gives a homotopy pullback square of coherent realization mapping simplicial sets for an inner fibration of quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopicL.homotopicR\", \"SSet.Truncated.HomotopicR.homotopicL\", \"SSet.Quasicategory.hornFilling\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.Quasicategory.hornFilling'\", \"SSet.modelCategoryQuillen.J\", \"SSet.Truncated.Edge.CompStruct.ofHomotopyCategory₂Fac\", \"SSet.Quasicategory\"], \"digest\": \"e730e4c269756425\"}",
+   "results": "{\"t\": \"2026-10-17T13:02:17Z\", \"tool\": \"leanfinder\", \"query\": \"A cartesian edge gives a homotopy pullback square of coherent realization mapping simplicial sets for an inner fibration of quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopicL.homotopicR\", \"SSet.Truncated.HomotopicR.homotopicL\", \"SSet.Quasicategory.hornFilling\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.Quasicategory.hornFilling'\", \"SSet.modelCategoryQuillen.J\", \"SSet.Truncated.Edge.CompStruct.ofHomotopyCategory₂Fac\", \"SSet.Quasicategory\"], \"digest\": \"e730e4c269756425\"}",
    "date": "2026-10-17",
    "verdict": "no match: read the logged hits; they concern ordinary category nerves, truncated homotopy categories, basic quasicategories, or Kan-Quillen fibrations, not this coherent-realization mapping theorem."
   },
   {
    "tool": "leanfinder",
    "query": "Composition with a cartesian arrow after coherent realization is homotopy cartesian over the corresponding base mapping sets",
-   "results": "{\"t\": \"2026-10-17T11:56:12Z\", \"tool\": \"leanfinder\", \"query\": \"Composition with a cartesian arrow after coherent realization is homotopy cartesian over the corresponding base mapping sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCartesian.map_isHomLift\", \"CategoryTheory.Functor.IsStronglyCartesian.of_comp\", \"CategoryTheory.Functor.IsStronglyCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsStronglyCartesian.map_comp_map\", \"CategoryTheory.instIsCartesianCompOfIsFibered\", \"CategoryTheory.Functor.IsFibered.comp\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_comp\"], \"digest\": \"80ddc0bddfbe52cb\"}",
+   "results": "{\"t\": \"2026-10-17T13:02:15Z\", \"tool\": \"leanfinder\", \"query\": \"Composition with a cartesian arrow after coherent realization is homotopy cartesian over the corresponding base mapping sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCartesian.map_isHomLift\", \"CategoryTheory.Functor.IsStronglyCartesian.of_comp\", \"CategoryTheory.Functor.IsStronglyCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsStronglyCartesian.map_comp_map\", \"CategoryTheory.instIsCartesianCompOfIsFibered\", \"CategoryTheory.Functor.IsFibered.comp\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_comp\"], \"digest\": \"80ddc0bddfbe52cb\"}",
    "date": "2026-10-17",
    "verdict": "no match: read the logged hits; they concern ordinary category nerves, truncated homotopy categories, basic quasicategories, or Kan-Quillen fibrations, not this coherent-realization mapping theorem."
   },
   {
    "tool": "leanfinder",
    "query": "Postcomposition with a Cartesian edge induces a weak equivalence on coherent realization mapping simplicial sets",
-   "results": "{\"t\": \"2026-10-17T11:40:48Z\", \"tool\": \"leanfinder\", \"query\": \"Postcomposition with a Cartesian edge induces a weak equivalence on coherent realization mapping simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.Truncated.liftOfStrictSegal.naturalityProperty\", \"SSet.Edge.CompStruct.map\", \"CategoryTheory.nerve.homEquiv_comp\", \"SSet.RelativeMorphism.HomotopyClass.postcomp\", \"SSet.ι₁_comp\"], \"digest\": \"f15152b496ea5f5f\"}",
+   "results": "{\"t\": \"2026-10-17T13:02:19Z\", \"tool\": \"leanfinder\", \"query\": \"Postcomposition with a Cartesian edge induces a weak equivalence on coherent realization mapping simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.Truncated.liftOfStrictSegal.naturalityProperty\", \"SSet.Edge.CompStruct.map\", \"CategoryTheory.nerve.homEquiv_comp\", \"SSet.RelativeMorphism.HomotopyClass.postcomp\", \"SSet.ι₁_comp\"], \"digest\": \"f15152b496ea5f5f\"}",
    "date": "2026-10-17",
    "verdict": "no match: read the logged hits; they concern ordinary category nerves, truncated homotopy categories, basic quasicategories, or Kan-Quillen fibrations, not this coherent-realization mapping theorem."
   },
   {
    "tool": "leansearch",
    "query": "A Cartesian edge in a quasicategory gives weak equivalence after postcomposition on coherent realization hom sets",
-   "results": "{\"t\": \"2026-10-17T11:40:48Z\", \"tool\": \"leansearch\", \"query\": \"A Cartesian edge in a quasicategory gives weak equivalence after postcomposition on coherent realization hom sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopicL.congr_homotopyCategory₂HomMk\", \"HomotopicalAlgebra.CofibrantObject.instIsStableUnderPostcompHomRel\", \"CategoryTheory.nerve.homEquiv_edgeMk\", \"CategoryTheory.Localization.SmallShiftedHom.postcompEquiv\", \"SSet.Truncated.HomotopyCategory₂.homMk_surjective\", \"CategoryTheory.nerve.mk₁_homEquiv_apply\", \"SSet.Truncated.HomotopyCategory₂.Hom\", \"CategoryTheory.nerve.homEquiv_symm_apply\"], \"digest\": \"4343631b97eca511\"}",
+   "results": "{\"t\": \"2026-10-17T13:02:11Z\", \"tool\": \"leansearch\", \"query\": \"A Cartesian edge in a quasicategory gives weak equivalence after postcomposition on coherent realization hom sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopicL.congr_homotopyCategory₂HomMk\", \"HomotopicalAlgebra.CofibrantObject.instIsStableUnderPostcompHomRel\", \"CategoryTheory.nerve.homEquiv_edgeMk\", \"CategoryTheory.Localization.SmallShiftedHom.postcompEquiv\", \"SSet.Truncated.HomotopyCategory₂.homMk_surjective\", \"CategoryTheory.nerve.mk₁_homEquiv_apply\", \"SSet.Truncated.HomotopyCategory₂.Hom\", \"CategoryTheory.nerve.homEquiv_symm_apply\"], \"digest\": \"4343631b97eca511\"}",
    "date": "2026-10-17",
    "verdict": "no match: read the logged hits; they concern ordinary category nerves, truncated homotopy categories, basic quasicategories, or Kan-Quillen fibrations, not this coherent-realization mapping theorem."
   },
   {
    "tool": "leansearch",
    "query": "Homotopy cartesian square on rigidification hom simplicial sets induced by a cartesian edge",
-   "results": "{\"t\": \"2026-10-17T11:56:08Z\", \"tool\": \"leansearch\", \"query\": \"Homotopy cartesian square on rigidification hom simplicial sets induced by a cartesian edge\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.BinaryProduct.square\", \"SSet.horn₂₂.sq\", \"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk\", \"SSet.RelativeMorphism.Homotopy.h\", \"SSet.Truncated.HomotopyCategory₂.homMk\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_edge\", \"SSet.RelativeMorphism.Homotopy.ofEq_h\", \"SSet.Truncated.HomotopicL.congr_homotopyCategory₂HomMk\"], \"digest\": \"aca2c25370a2d11a\"}",
+   "results": "{\"t\": \"2026-10-17T13:02:11Z\", \"tool\": \"leansearch\", \"query\": \"Homotopy cartesian square on rigidification hom simplicial sets induced by a cartesian edge\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.BinaryProduct.square\", \"SSet.horn₂₂.sq\", \"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk\", \"SSet.RelativeMorphism.Homotopy.h\", \"SSet.Truncated.HomotopyCategory₂.homMk\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_edge\", \"SSet.RelativeMorphism.Homotopy.ofEq_h\", \"SSet.Truncated.HomotopicL.congr_homotopyCategory₂HomMk\"], \"digest\": \"aca2c25370a2d11a\"}",
    "date": "2026-10-17",
    "verdict": "no match: read the logged hits; they concern ordinary category nerves, truncated homotopy categories, basic quasicategories, or Kan-Quillen fibrations, not this coherent-realization mapping theorem."
   },
   {
    "tool": "loogle",
    "query": "\"SSet\", \"cartesian\"",
-   "results": "{\"t\": \"2026-10-17T11:56:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"cartesian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "results": "{\"t\": \"2026-10-17T13:02:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"cartesian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: zero hits."
   },
   {
    "tool": "loogle",
    "query": "SSet Cartesian edge mapping weak equivalence",
-   "results": "{\"t\": \"2026-10-17T11:40:49Z\", \"tool\": \"loogle\", \"query\": \"SSet Cartesian edge mapping weak equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Function expected at\\n  SSet\\nbut this term has type\\n  Type (?u.1 + 1)\\n\\nNote: Expected a function because this term is being applied to the argument\\n  Cartesian\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "results": "{\"t\": \"2026-10-17T13:02:11Z\", \"tool\": \"loogle\", \"query\": \"SSet Cartesian edge mapping weak equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Function expected at\\n  SSet\\nbut this term has type\\n  Type (?u.1 + 1)\\n\\nNote: Expected a function because this term is being applied to the argument\\n  Cartesian\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "unavailable: query rejected by Loogle; not evidence of absence; other searches cover the statement."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-mapping-simplex-universal-equivalence",
@@ -93,7 +154,7 @@
  "blueprint": {
   "from": {
    "node": "thm-cbc-finite-level-proetale",
-   "place": "Auxiliary categorical comparison: after the coherent-realization mapping-space comparison, a Cartesian edge induces a weak equivalence on enriched mapping simplicial sets by the Cartesian mapping criterion and the contractibility of the standard-simplex mapping posets.",
+   "place": "No categorical mapping-comparison sentence occurs in the 1089-byte ancestor proof; this auxiliary fact is the HTT Proposition 2.4.4.3 comparison required by the imported Cartesian mapping argument used by the citer.",
    "via": [
     "lem-cbc-mapping-simplex-universal-equivalence",
     "lem-cbc-cartesian-mapping-simplex-comparison",
@@ -104,5 +165,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-cbc-coherent-cartesian-postcomposition",
+  "worker": "stage1",
+  "summary": "Repair of the returned split: added a smaller comparison-data node that records the actual Kan replacement maps, the four side homotopies, and the relative-endpoint homotopy between the two boundary paths. Steps 2 and 3 now invoke that interface before applying coherent-cube invariance; they no longer promote homotopy-category postcomposition compatibility to strict commutation. The replacement square in Step 4 is strict and remains conditionally valid. The item statement and hypotheses are unchanged.",
+  "blueprint": "The ancestor proof contains no categorical-comparison sentence; this split realizes the HTT Proposition 2.4.4.3 auxiliary comparison required by the mapping-simplex citer. The new comparison-data node isolates the coherent witnesses that the earlier proof had left implicit.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-infinity-cartesian-mapping-criterion",
+    "why": "Generic quasicategorical Cartesian mapping criterion; the compact-support unit supplies no infinity-categorical mapping theorem."
+   },
+   {
+    "node": "lem-coef-coherent-nerve-comparison",
+    "why": "Generic coherent-nerve and locally Kan replacement comparison; no node in sk-prop-sf-cbc supplies it."
+   },
+   {
+    "node": "lem-coef-infinity-hom-bifunctor-functoriality",
+    "why": "Generic coherent Hom naturality supplies the higher composition witnesses and boundary-path homotopy; no node in sk-prop-sf-cbc supplies it."
+   },
+   {
+    "node": "lem-coef-infinity-kan-homotopy-coherent-cube-invariance",
+    "why": "Generic Kan coherent-cube transfer needed for the explicitly witnessed comparison squares."
+   },
+   {
+    "node": "lem-coef-kan-homotopy-cartesian-invariance",
+    "why": "Generic strict objectwise weak-equivalence invariance for the final replacement square."
+   },
+   {
+    "node": "lem-coef-kan-fibrant-path-recognition",
+    "why": "Generic identification of the two-leg and functorial-replacement path-space notions of homotopy cartesian square; no node in sk-prop-sf-cbc supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-infinity-cartesian-mapping-criterion",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-infinity-kan-homotopy-coherent-cube-invariance",
+  "lem-coef-kan-homotopy-cartesian-invariance",
+  "lem-coef-kan-fibrant-path-recognition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-f4a8efdaf",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-f4a8efdaf (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, the new node lem-cbc-coherent-square-comparison-data, every cited statement, unit sk-prop-sf-cbc, the ancestor proof thm-cbc-finite-level-proetale and six duplicate candidates. The item statement is unchanged and true; it is HTT 2.4.4.3 in coherent-realization form. HTT and Kerodon are not in literature/ and the worker records them as WANTED. This is not a target node, so the master-source base-change check does not apply, and no SGA is cited. Edge cases checked: p=id, B=Δ^0, empty mapping sets and degenerate e. Step 1 matches the hypotheses of lem-coef-infinity-cartesian-mapping-criterion. All four squares have Kan corners where cube invariance needs them. The new node is true, statement-only, strictly smaller than the item, asserts no pullback property and is not a duplicate. Three repairable faults, fixed in fixes/: (1) the boundary paths in the new node ended at v'b'a and v'c'a, and Step 2 ended both at v'c'a; the common endpoint is v'g'a. The letters a,b,c were also used both for vertices and for corner maps; they are now ā,b̄,c̄,d̄. (2) B2/E5: the new node called p a 'simplicial functor' and spoke of 'consecutive squares' without saying where the comparisons go. It now names squares (i), (ii), (iii), the comparisons (i)→(ii) and (iii)→(ii), the horizontal maps, and the fact that the coherent-nerve comparison may be a zigzag (cube invariance allows zigzags). (3) C1: Step 4 went from the path-space sense of Step 3 to the two-leg sense of lem-coef-kan-homotopy-cartesian-invariance and back to the item's definition without citing lem-coef-kan-fibrant-path-recognition. It now cites it, plus cube invariance with constant faces. proof_deps is updated and the added tool_use is declared. The newly cited nodes create no cycle. I accept tool uses lem-coef-infinity-cartesian-mapping-criterion, lem-coef-coherent-nerve-comparison, lem-coef-infinity-kan-homotopy-coherent-cube-invariance, lem-coef-kan-homotopy-cartesian-invariance and lem-coef-kan-fibrant-path-recognition: generic tools from sk-prop-sf-biduality-general. No target is weakened.; 2 file(s) fixed by the reviewer"
  }
 }
