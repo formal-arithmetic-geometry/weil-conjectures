@@ -12,8 +12,8 @@
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
-| `WeilConjectures.PoincareDuality.ProjectionFormula` | 2 | 5 | repair |
 | `Sheaf.Paper.IntegralResidueTensorRouteModel` | 11 | 1 | repair |
+| `WeilConjectures.PoincareDuality.ProjectionFormula` | 2 | 5 | repair |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 3 | disputed |
 | `WeilConjectures.PoincareDuality.Poincare` | 0 | 1 | proof |
 | `WeilConjectures.SmoothPurity.Defs` | 0 | 1 | proof |
