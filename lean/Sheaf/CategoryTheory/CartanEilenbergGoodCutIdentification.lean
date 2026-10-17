@@ -7,16 +7,16 @@ module
 
 public import Sheaf.CategoryTheory.CartanEilenbergPresentation
 public import Sheaf.CategoryTheory.FilteredComplexDecalageComplex
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
+public import Mathlib.Algebra.Homology.DerivedCategory.Plus
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.TotalComplexSymmetry
 
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 import Sheaf.CategoryTheory.MapGoodUpperTruncation
 import WeilConjectures.FromJoel.Algebra.Homology.Embedding.CochainComplex
-import all Sheaf.Algebra.Homology.UpperTruncationStepSES
+import all WeilConjectures.Algebra.Homology.UpperTruncationStepSES
 import Sheaf.CategoryTheory.CartanEilenbergAugmentationQuasiIso
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
 import Sheaf.CategoryTheory.CartanEilenbergGoodCutDecalage
 
 /-! # Identification of the good-cut total
@@ -42,7 +42,27 @@ private theorem cut_columns {K I : CochainComplex (CochainComplex B ℕ) ℤ}
     (e : K ⟶ I) (he : ∀ p, QuasiIso (e.f p))
     (hc : ∀ p, QuasiIso (HomologicalComplex.cyclesMap e p)) (q p : ℤ) :
     QuasiIso ((CochainComplex.truncLEMap e q).f p) := by
-  sorry
+  rcases lt_trichotomy p q with hp | hp | hp
+  · -- Below the cut, use naturality and the invertible truncation inclusions.
+    have : IsIso ((K.ιTruncLE q).f p) := K.isIso_ιTruncLE_f q p hp
+    have : IsIso ((I.ιTruncLE q).f p) := I.isIso_ιTruncLE_f q p hp
+    have : QuasiIso (e.f p) := he p
+    have hw := congrArg (fun f ↦ f.f p) (CochainComplex.ιTruncLE_naturality e q)
+    simp only [HomologicalComplex.comp_f] at hw
+    apply (quasiIso_iff_comp_right
+      ((CochainComplex.truncLEMap e q).f p) ((I.ιTruncLE q).f p)).mp
+    rw [hw]
+    infer_instance
+  · -- At the cut, the natural cycles identifications give an isomorphism of arrows.
+    subst p
+    exact (quasiIso_iff_of_arrow_mk_iso _ _
+      (Arrow.isoMk (K.truncLEXIsoCycles q) (I.truncLEXIsoCycles q)
+        (CochainComplex.truncLEXIsoCycles_naturality e q).symm)).mpr (hc q)
+  · -- Above the cut, the map is between zero complexes.
+    have : IsIso ((CochainComplex.truncLEMap e q).f p) :=
+      IsZero.isIso ((K.truncLE q).isZero_of_isStrictlyLE q p hp)
+        ((I.truncLE q).isZero_of_isStrictlyLE q p hp) _
+    infer_instance
 
 private theorem augmentation_exists
     {A : Type uB} [Category.{vB} A] [Abelian A] [IsGrothendieckAbelian.{vB} A]
