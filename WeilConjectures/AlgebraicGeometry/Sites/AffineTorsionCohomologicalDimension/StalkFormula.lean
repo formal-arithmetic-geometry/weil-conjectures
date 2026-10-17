@@ -65,7 +65,6 @@ variable (ι : W ⟶ S) {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of
 
 /-- A pointed étale neighbourhood of `s` in `W` is a pointed étale neighbourhood of `s ≫ ι` in
 `S`, by composing with the étale morphism `ι : W ⟶ S`. -/
-@[simps]
 noncomputable def neighborhoodCompEtale [Etale ι] :
     PointedEtaleNeighborhood s ⥤ PointedEtaleNeighborhood (s ≫ ι) where
   obj x :=
@@ -76,6 +75,14 @@ noncomputable def neighborhoodCompEtale [Etale ι] :
     CategoryTheory.Over.OverMorphism.ext (congrArg (fun g ↦ g.left) f.2)⟩
 
 end Helpers
+
+/-- `pullbackNeighborhoodMap` is compatible with composition. -/
+lemma pullbackNeighborhoodMap_comp {X S : Scheme.{u}} (h : X ⟶ S) {Ω : Type u} [Field Ω]
+    [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ S) {x y z : PointedEtaleNeighborhood s} (f : z ⟶ y)
+    (g : y ⟶ x) :
+    pullbackNeighborhoodMap h s f ≫ pullbackNeighborhoodMap h s g =
+      pullbackNeighborhoodMap h s (f ≫ g) := by
+  apply pullback.hom_ext <;> simp
 
 /-- **Vanishing of geometric stalks of higher direct images.** Let `h : X ⟶ S` be
 quasi-compact and quasi-separated, `F` an abelian étale sheaf on `X`, `ι : W ⟶ S` étale and
@@ -112,12 +119,12 @@ theorem isZero_upperStar_rightDerived_lowerStar_of_subsingleton_H {X S W : Schem
     have := hA i
     change QuasiSeparatedSpace (pullback h ((Φ.obj i).obj.1.hom ≫ ι) : Scheme.{u})
     exact quasiSeparatedSpace_of_quasiSeparated (pullback.snd h _)
-  haveI : ∀ {i j : I} (g : i ⟶ j), IsAffineHom (D.map g).left := fun {i j} g ↦
+  have : ∀ {i j : I} (g : i ⟶ j), IsAffineHom (D.map g).left := fun {i j} g ↦
     MorphismProperty.pullbackMap (P := @IsAffineHom) (MorphismProperty.id_mem _ X)
       (inferInstanceAs (IsAffineHom (Φ.map g).hom.1.left)) (by simp) (by simp)
   refine isZero_upperStar_rightDerived_lowerStar_of_forall_exists h (s ≫ ι) F q hq ?_
   intro x c
-  haveI : Etale x.1.hom := x.1.prop
+  have : Etale x.1.hom := x.1.prop
   let x' : PointedEtaleNeighborhood s :=
     ⟨Scheme.Etale.mk (pullback.snd x.1.hom ι), CategoryTheory.Over.homMk
       (pullback.lift x.2.left s (CategoryTheory.Over.w x.2)) (pullback.lift_snd _ _ _)⟩
@@ -127,7 +134,8 @@ theorem isZero_upperStar_rightDerived_lowerStar_of_subsingleton_H {X S W : Schem
   obtain ⟨a, ⟨fa⟩⟩ := AffinePointedEtaleNeighborhood.exists_hom s x'
   obtain ⟨⟨m, _, fm⟩⟩ : Nonempty (CostructuredArrow Φ a) := IsConnected.is_nonempty
   let f0 : (neighborhoodCompEtale ι s).obj ((AffinePointedEtaleNeighborhood.ι s).obj (Φ.obj m))
-      ⟶ x := (neighborhoodCompEtale ι s).map ((AffinePointedEtaleNeighborhood.ι s).map fm ≫ fa) ≫ e
+      ⟶ x :=
+    (neighborhoodCompEtale ι s).map ((AffinePointedEtaleNeighborhood.ι s).map fm ≫ fa) ≫ e
   have w0 : (D.obj m).hom = pullbackNeighborhoodMap h (s ≫ ι) f0 ≫ pullback.fst h x.1.hom := by
     simp [D]; rfl
   let c0 := Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1}
@@ -135,13 +143,19 @@ theorem isZero_upperStar_rightDerived_lowerStar_of_subsingleton_H {X S W : Schem
     q (cohomologyMap _ _ q c)
   obtain ⟨j, g, hg⟩ := (cohomologyMap_isColimit_of_isLimit F D cn hc q).2 m c0 (by
     have hinj := injective_sheafHMap_of_isIso ((upperStarComp AddCommGrpCat.{u + 1}
-      (cn.π.app m).left (D.obj m).hom cn.pt.hom (CategoryTheory.Over.w (cn.π.app m)).symm).app F).inv q
+      (cn.π.app m).left (D.obj m).hom cn.pt.hom
+      (CategoryTheory.Over.w (cn.π.app m)).symm).app F).inv q
     have := @Function.Injective.subsingleton _ _ _ hinj hcoh
     exact @Subsingleton.elim _ this _ _)
   refine ⟨_, (neighborhoodCompEtale ι s).map
     ((AffinePointedEtaleNeighborhood.ι s).map (Φ.map g)) ≫ f0, ?_⟩
   replace hg := (cohomologyMap_map_eq_zero_iff _ _ _ _).1 hg
-  rwa [← cohomologyMap_cohomologyMap_eq_zero_iff' (D.map g).left
-    (pullbackNeighborhoodMap h (s ≫ ι) f0) _ (by apply pullback.hom_ext <;> simp [D])]
+  have hDg : (D.map g).left = pullbackNeighborhoodMap h (s ≫ ι)
+      ((neighborhoodCompEtale ι s).map ((AffinePointedEtaleNeighborhood.ι s).map (Φ.map g))) :=
+    rfl
+  rw [hDg] at hg
+  exact (cohomologyMap_cohomologyMap_eq_zero_iff' _
+    (pullbackNeighborhoodMap h (s ≫ ι) f0) _
+    (pullbackNeighborhoodMap_comp h (s ≫ ι) _ f0) _ c).1 hg
 
 end AlgebraicGeometry.Etale

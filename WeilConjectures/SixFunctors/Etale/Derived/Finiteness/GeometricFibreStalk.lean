@@ -42,7 +42,6 @@ open Scheme
 
 namespace Etale
 
-
 section StrictLocal
 
 /-- **Stalks of higher direct images over a strictly henselian local base.** Let `A` be a

@@ -3905,6 +3905,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.AlgClosedField
 public import WeilConjectures.SixFunctors.Etale.Derived.BidualitySupport
 public import WeilConjectures.SixFunctors.Etale.Derived.BoundaryDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.ClosedPointSupport
+public import WeilConjectures.SixFunctors.Etale.Derived.ClosedSupportHom
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
 public import WeilConjectures.SixFunctors.Etale.Derived.CoextendScalars
@@ -3932,6 +3933,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Cohomological
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupportBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstructibleDirectImage
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CurveModel
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.ChangeOfBase
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.ClosedImmersion

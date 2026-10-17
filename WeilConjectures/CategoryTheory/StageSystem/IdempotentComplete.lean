@@ -16,7 +16,8 @@ If all the categories `C i` of a stage system are idempotent complete, so is the
 category is represented at some stage `n` by `u` with `u ≫ u = u` after a further transport, and
 the splitting of this idempotent at a finite stage gives a splitting of `e`. Consequently the
 functor `toKaroubi` from the pair category to its Karoubi envelope is an equivalence
-(blueprint `thm-weil-pbc-qbar-idempotent-complete`).
+(blueprint `thm-weil-pbc-qbar-idempotent-complete`). This is the property of the `ℚ̄_ℓ`-category
+`D^b_c(T, ℚ̄_ℓ)` deferred in its definition (blueprint `rem-ptr-weil-pbc-qbar-category-1`).
 
 ## Main statements
 

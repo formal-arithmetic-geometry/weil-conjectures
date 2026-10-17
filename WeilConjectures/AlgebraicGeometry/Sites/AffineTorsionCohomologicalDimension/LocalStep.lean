@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.MvPolynomial.Polynomial
 public import Mathlib.RingTheory.MvPolynomial.Basic
-public import WeilConjectures.ScratchCDBSH
+public import WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension.StrictHenselization
 public import WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension.SubalgebraLimit
 public import WeilConjectures.AlgebraicGeometry.Curve.TorsionCohomologicalDimension
 
@@ -118,8 +118,8 @@ theorem hasTorsionCohomologicalDimensionLE_strictHenselization_away {K : Type u}
     (hx : (Spec.preimage s).hom x = 0) {a : ℕ} (τ : Fin a → P)
     (hτ : ∀ f : MvPolynomial (Fin a) K, f ≠ 0 →
       (Spec.preimage s).hom (MvPolynomial.aeval τ f) ≠ 0) :
-    (Spec (.of (Localization.Away ((toStrictHenselization s).hom x)))).HasTorsionCohomologicalDimensionLE
-      (d - a) := by
+    HasTorsionCohomologicalDimensionLE
+      (Spec (.of (Localization.Away ((toStrictHenselization s).hom x)))) (d - a) := by
   classical
   set R := strictHenselization s
   set φ := (toStrictHenselization s).hom
@@ -141,7 +141,7 @@ theorem hasTorsionCohomologicalDimensionLE_strictHenselization_away {K : Type u}
   -- polynomials in the `τᵢ` are units of `R`
   have haeval (f : MvPolynomial (Fin a) K) :
       MvPolynomial.aeval (fun i ↦ φ (τ i)) f = φ (MvPolynomial.aeval τ f) :=
-    (MvPolynomial.aeval_algebraMap_apply (R := K) (S₁ := P) R τ f).symm
+    MvPolynomial.aeval_algebraMap_apply (A := P) (B := R) τ f
   have hτR (f : MvPolynomial (Fin a) K) (hf : f ≠ 0) :
       IsUnit (MvPolynomial.aeval (fun i ↦ φ (τ i)) f) := by
     rw [isUnit_iff_strictHenselizationEval_ne_zero, haeval, heval]
@@ -153,15 +153,15 @@ theorem hasTorsionCohomologicalDimensionLE_strictHenselization_away {K : Type u}
   -- `trdeg_K S = d`
   have hPS : Function.Injective (algebraMap P S) := (IsLocalization.injective S hpow).comp hφ
   have : Algebra.IsAlgebraic P R := isAlgebraic_strictHenselization s
-  have : Algebra.IsAlgebraic R S := IsLocalization.isAlgebraic (Submonoid.powers (φ x))
+  have : Algebra.IsAlgebraic R S := IsLocalization.isAlgebraic S (Submonoid.powers (φ x))
   have : Algebra.IsAlgebraic P S := Algebra.IsAlgebraic.trans P R S
   have : FaithfulSMul P S := (faithfulSMul_iff_algebraMap_injective P S).2 hPS
   have hKS : Algebra.trdeg K S = d := by
-    rw [← Algebra.trdeg_add_eq K P S, Algebra.trdeg_eq_zero (R := P) (A := S), add_zero,
+    rw [← trdeg_add_eq K P (A := S), trdeg_eq_zero (R := P) (A := S), add_zero,
       Algebra.trdeg_eq_of_ringKrullDim_eq K P hd]
   have had : a + 1 ≤ d := by
-    have := hind.cardinalMk_le_trdeg
-    rw [hKS, Cardinal.mk_fin] at this
+    have := hind.lift_cardinalMk_le_trdeg
+    rw [hKS, Cardinal.mk_fin, Cardinal.lift_natCast, Cardinal.lift_natCast] at this
     exact_mod_cast this
   -- the separably closed field `F ⊆ R`
   let k₀ := FractionRing (MvPolynomial (Fin a) K)
@@ -172,6 +172,59 @@ theorem hasTorsionCohomologicalDimensionLE_strictHenselization_away {K : Type u}
   let : Algebra k₀ R := θ.toAlgebra
   obtain ⟨F, _, _, _, _, _⟩ := exists_isSepClosed_of_henselianLocalRing k₀ R
   obtain ⟨ρ, hρX, hρC⟩ := exists_ratFunc_ringHom_of_mem_maximalIdeal (F := F) hxm S
-  sorry
+  let L := RatFunc F
+  let : Algebra L S := ρ.toAlgebra
+  let : Algebra K F := ((algebraMap k₀ F).comp (algebraMap K k₀)).toAlgebra
+  have hFR (c : k₀) : algebraMap F R (algebraMap k₀ F c) = θ c := by
+    rw [← IsScalarTower.algebraMap_apply]
+    rfl
+  have hθ (c : K) : θ (algebraMap K k₀ c) = φ (algebraMap K P c) := by
+    rw [IsScalarTower.algebraMap_apply K (MvPolynomial (Fin a) K) k₀, IsLocalization.lift_eq]
+    exact MvPolynomial.aeval_C _ _
+  have hKL (c : K) : algebraMap K L c = RatFunc.C (algebraMap K F c) := by
+    rw [RatFunc.algebraMap_apply, map_one, div_one, Polynomial.algebraMap_apply,
+      RatFunc.algebraMap_C]
+  have : IsScalarTower K L S := IsScalarTower.of_algebraMap_eq fun c ↦ by
+    change algebraMap R S (φ (algebraMap K P c)) = ρ (algebraMap K L c)
+    rw [hKL, hρC]
+    change _ = algebraMap R S (algebraMap F R (algebraMap k₀ F (algebraMap K k₀ c)))
+    rw [hFR, hθ]
+  -- `F(x)` has transcendence degree at least `a + 1` over `K`
+  have hfam : (IsScalarTower.toAlgHom K L S) ∘ (Fin.cons RatFunc.X (fun i ↦ RatFunc.C
+      (algebraMap k₀ F (algebraMap (MvPolynomial (Fin a) K) k₀ (MvPolynomial.X i)))) :
+        Fin (a + 1) → L) =
+      Fin.cons (algebraMap R S (φ x)) (fun i ↦ algebraMap R S (φ (τ i))) := by
+    ext i
+    refine Fin.cases ?_ (fun j ↦ ?_) i
+    · exact hρX
+    · change ρ _ = _
+      rw [Fin.cons_succ, Fin.cons_succ, hρC, hFR, IsLocalization.lift_eq]
+      exact congrArg (algebraMap R S) (MvPolynomial.aeval_X _ _)
+  have hindL := AlgebraicIndependent.of_comp _ (hfam ▸ hind)
+  have hL : ((a + 1 : ℕ) : Cardinal) ≤ Algebra.trdeg K L := by
+    have := hindL.lift_cardinalMk_le_trdeg
+    rwa [Cardinal.mk_fin, Cardinal.lift_natCast, Cardinal.lift_uzero] at this
+  have : FaithfulSMul L S := (faithfulSMul_iff_algebraMap_injective L S).2 ρ.injective
+  have hadd := trdeg_add_le (R := K) (S := L) (A := S)
+  rw [hKS] at hadd
+  have htr : Algebra.trdeg L S ≤ (d - a - 1 : ℕ) := by
+    obtain ⟨n, hn⟩ := Cardinal.lt_aleph0.1
+      (lt_of_le_of_lt le_add_self (hadd.trans_lt ((Cardinal.natCast_lt_aleph0 (n := d)))))
+    rw [hn] at hadd ⊢
+    have h2 := (add_le_add_left hL _).trans hadd
+    norm_cast at h2 ⊢
+    omega
+  refine HasTorsionCohomologicalDimensionLE.spec_of_forall_fg (L := L) S fun A hA ↦ ?_
+  have : Algebra.FiniteType L A := ⟨(Subalgebra.fg_top A).2 hA⟩
+  have hdim : ringKrullDim A ≤ (d - a - 1 : ℕ) :=
+    ringKrullDim_le_of_trdeg_le L A
+      ((trdeg_le_of_injective A.val Subtype.val_injective).trans htr)
+  have hlft : LocallyOfFiniteType (Spec.map (CommRingCat.ofHom (algebraMap L A))) := by
+    rw [HasRingHomProperty.Spec_iff (P := @LocallyOfFiniteType)]
+    exact RingHom.finiteType_algebraMap.2 inferInstance
+  have := IH (d - a - 1) (by omega) L 1 (hasTorsionCohomologicalDimensionLE_one_ratFunc F)
+    (Spec (.of A)) _ hlft inferInstance
+    ((PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim A).le.trans hdim)
+  rwa [show d - a - 1 + 1 = d - a by omega] at this
 
 end AlgebraicGeometry.Scheme

@@ -79,26 +79,6 @@ namespace Etale
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
 
-omit [Finite Λ] in
-/-- **Direct images of a finite direct sum.** If `Rf_*(Gⱼ[0])` has constructible homology
-sheaves for each member of a finite family `(Gⱼ)` of sheaves on `X`, so has `Rf_*((⨁ⱼ Gⱼ)[0])`:
-each `Hᵠ(Rf_*(-[0]))` is an additive functor, hence commutes with finite direct sums. -/
-lemma constructibleHomology_rightDerivedLowerStar_biproduct {X S : Scheme.{u}} (f : X ⟶ S)
-    {J : Type} [Finite J] (G : J → Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (hG : ∀ j, Etale.DerivedCategory.constructibleHomology (ModuleCat.{u + 1} Λ) S
-      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj
-        ((_root_.DerivedCategory.singleFunctor _ 0).obj (G j)))) :
-    Etale.DerivedCategory.constructibleHomology (ModuleCat.{u + 1} Λ) S
-      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj
-        ((_root_.DerivedCategory.singleFunctor _ 0).obj (⨁ G))) := by
-  intro q
-  let Φ := _root_.DerivedCategory.singleFunctor
-      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
-    R((f)_*[ModuleCat.{u + 1} Λ]) ⋙ _root_.DerivedCategory.homologyFunctor _ q
-  have (j : J) : IsConstructibleSheaf ((Φ.obj ∘ G) j) := hG j q
-  have : IsConstructibleSheaf (⨁ (Φ.obj ∘ G)) := IsConstructibleSheaf.biproduct _
-  exact IsConstructibleSheaf.of_iso (Φ.mapBiproduct G).symm
-
 /-- The case of an affine base of `thm-fin-projective-line-constructible`: every constructible
 sheaf `Q` on `ℙ¹_S` embeds into a finite direct sum `G = ⨁ᵢ (hᵢ)_* Mᵢ` of direct images of
 constant sheaves with finite values along finite morphisms `hᵢ : Yᵢ ⟶ ℙ¹_S`. Each `Yᵢ` is

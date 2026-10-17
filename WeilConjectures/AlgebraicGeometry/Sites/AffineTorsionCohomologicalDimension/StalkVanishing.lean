@@ -28,6 +28,9 @@ The proof is by dimension shifting: embedding `F` into an injective sheaf `I` wi
 `q - 1`, since the restrictions of `I` to the `X_V` are injective. In degree one, a germ of a
 section `σ` of `h_* Q` at `s` is a section of `Q` over some `X_V`; its coboundary dies on a
 smaller `X_{V'}`, so that `σ` lifts to `I` there, and the germ of `σ` in `R¹h_* F` vanishes.
+Since a sheaf on `Spec Ω` is zero as soon as its stalk at the identity point vanishes, and
+that stalk of `s^* G` is the geometric stalk `G_s`, everything is proved on geometric stalks
+(`AlgebraicGeometry.Etale.isZero_sheafFiber_rightDerived_lowerStar`).
 -/
 
 @[expose] public section
@@ -188,7 +191,8 @@ lemma ClassesDieLocally.cokernel (t : Spec (.of Ω) ⟶ S)
   have : Injective ((pullbackEtaleMap h f.1)^*[AddCommGrpCat.{u + 1}].obj
       ((pullback.fst h x.1.hom)^*[AddCommGrpCat.{u + 1}].obj T.X₂)) :=
     injective_upperStar_obj_of_etale_addCommGrp _ _
-  have hz0 : z = 0 := Subsingleton.elim (α := Sheaf.H ((pullbackEtaleMap h f.1)^*[AddCommGrpCat.{u + 1}].obj
+  have hz0 : z = 0 := Subsingleton.elim (α := Sheaf.H
+      ((pullbackEtaleMap h f.1)^*[AddCommGrpCat.{u + 1}].obj
       ((pullback.fst h x.1.hom)^*[AddCommGrpCat.{u + 1}].obj T.X₂)) (q + 1)) _ _
   rw [hz0, map_zero] at hz
   exact hz.symm
@@ -231,11 +235,13 @@ lemma surjective_sheafFiber_map_lowerStar (t : Spec (.of Ω) ⟶ S)
     ((congrArg (fun φ ↦ Sheaf.H.map φ 0 z) hθ.symm).trans
       (Sheaf.H.map_comp_apply (θ.inv.app T.X₂)
         ((pullback.fst h y.1.hom)^*[AddCommGrpCat.{u + 1}].map T.g) z))
-  have e₄ : pullbackSection h T.X₃ y.1 (T.g.hom.app _ τ) = pullbackSection h T.X₃ y.1
-      (T.X₃.obj.map ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ h).map f.1).op σ) := by
+  have e₄ : pullbackSection h T.X₃ y.1 (T.g.hom.app _ τ) =
+      pullbackSection h T.X₃ y.1
+        (T.X₃.obj.map ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ h).map f.1).op
+          σ) := by
     refine (pullbackSection_naturality h T.g y.1 τ).symm.trans ?_
     rw [hτ]
-    refine (Sheaf.H.equiv₀_naturality _ _).trans ?_
+    refine (Sheaf.H.equiv₀_naturality _ _ _).trans ?_
     refine (congrArg (fun w ↦ Sheaf.H.equiv₀ _ (Scheme.isTerminalEtale _) w) e₃.symm).trans ?_
     refine (congrArg (fun w ↦ Sheaf.H.equiv₀ _ (Scheme.isTerminalEtale _)
       (Sheaf.H.map (θ.inv.app T.X₃) 0 w)) hz').trans ?_
@@ -244,7 +250,8 @@ lemma surjective_sheafFiber_map_lowerStar (t : Spec (.of Ω) ⟶ S)
   have key : ((h)_*[AddCommGrpCat.{u + 1}].map T.g).hom.app (op y.1) τ =
       ((h)_*[AddCommGrpCat.{u + 1}].obj T.X₃).obj.map f.1.op σ :=
     (bijective_pullbackSection h T.X₃ y.1).1 e₄
-  refine ⟨(pointSmallEtale t).toPresheafFiber y.1 y.2 _ τ, ?_⟩
+  refine ⟨(pointSmallEtale t).toPresheafFiber y.1 y.2
+    ((h)_*[AddCommGrpCat.{u + 1}].obj T.X₂).obj τ, ?_⟩
   have e₁ := (pointSmallEtale t).toPresheafFiber_naturality_apply
     ((h)_*[AddCommGrpCat.{u + 1}].map T.g).hom y.1 y.2 τ
   have e₂ := (pointSmallEtale t).toPresheafFiber_w_apply f.1 y.2

@@ -123,7 +123,9 @@ lemma isIso_biproductLift_unit_sigmaι [Finite ι]
     have h0 := (Etale.isZero_upperStar_lowerStar_of_disjoint_range (ModuleCat.{u + 1} Λ)
       (Sigma.ι Y b) (Sigma.ι Y a)
         (Set.disjoint_left.2 fun x ⟨w, hw⟩ ⟨z, hz⟩ ↦
-          hab (congrArg Sigma.fst ((sigmaι_eq_iff Y a b z w).1 (hz.trans hw.symm)))) _)
+          hab (congrArg Sigma.fst ((sigmaι_eq_iff Y a b z w).1 (hz.trans hw.symm))))
+      ((Sigma.ι Y a)^*[ModuleCat.{u + 1} Λ].obj F))
+    simp only [P]
     rw [← hs]
     exact ((pointSmallEtale s).sheafFiber.map_isZero h0).of_iso
       ((upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) (Sigma.ι Y b) s).app _).symm
@@ -148,7 +150,8 @@ lemma isIso_biproductLift_unit_sigmaι [Finite ι]
   have hcomp : P.map φ ≫ (P.mapBiproduct _).hom = biproduct.lift fun a ↦ P.map
       ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (Sigma.ι Y a)).unit.app F) := by
     refine biproduct.hom_ext _ _ fun a ↦ ?_
-    simp [φ, ← Functor.map_comp]
+    simp only [φ, Category.assoc, Functor.mapBiproduct_hom]
+    erw [biproduct.lift_π, biproduct.lift_π, ← P.map_comp, biproduct.lift_π]
   have : IsIso (P.map φ) := by
     have : IsIso (P.map φ ≫ (P.mapBiproduct _).hom) := by
       rw [hcomp]
@@ -159,8 +162,6 @@ lemma isIso_biproductLift_unit_sigmaι [Finite ι]
     rw [← NatIso.naturality_2 ((pointSmallEtale _).uliftSheafFiberIso (ModuleCat.{u + 1} Λ)) φ]
     infer_instance
   exact this
-
-variable [Finite Λ]
 
 /-- **Direct images of a finite direct sum.** If `Rf_*(Gⱼ[0])` has constructible homology
 sheaves for each member of a finite family `(Gⱼ)` of sheaves on `X`, so has `Rf_*((⨁ⱼ Gⱼ)[0])`:
@@ -180,7 +181,8 @@ lemma constructibleHomology_rightDerivedLowerStar_biproduct {X S : Scheme.{u}} (
   have : IsConstructibleSheaf (⨁ (Φ.obj ∘ G ∘ e.symm)) := IsConstructibleSheaf.biproduct _
   have : IsConstructibleSheaf (⨁ (Φ.obj ∘ G)) :=
     IsConstructibleSheaf.of_iso (F := ⨁ (Φ.obj ∘ G ∘ e.symm))
-      (biproduct.whiskerEquiv e.symm fun _ ↦ Iso.refl _)
+      (biproduct.whiskerEquiv (f := Φ.obj ∘ G ∘ e.symm) (g := Φ.obj ∘ G) e.symm
+        fun _ ↦ Iso.refl _)
   exact IsConstructibleSheaf.of_iso (Φ.mapBiproduct G).symm
 
 /-- **Direct images from a finite disjoint union.** For `h : ∐ₐ Yₐ ⟶ S` and a sheaf `F` on
