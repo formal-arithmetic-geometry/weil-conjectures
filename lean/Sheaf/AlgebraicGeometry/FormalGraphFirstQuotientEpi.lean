@@ -7,10 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 
-import all Sheaf.AlgebraicGeometry.CoherentFormalModule
 import Sheaf.AlgebraicGeometry.FormalCompletionExact
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
-import Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelFactorization
+import Sheaf.AlgebraicGeometry.FormalGraphDiscrepancyZero
 import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Pullbacks
 
@@ -155,29 +154,6 @@ private theorem completed_kernel_lift {X : Scheme.{u}} [IsNoetherian X]
   exact ⟨v, hv⟩
 
 set_option backward.isDefEq.respectTransparency false in
-private theorem formal_zero_of_level {X : Scheme.{u}} [IsNoetherian X]
-    (J : X.IdealSheafData) (T U : CoherentFormalModule X J) (n : ℕ)
-    (hU : ∀ m : ℕ, IsZero (Scheme.idealModuleProduct
-      (Scheme.idealSheafPower J.toModulesι (n + 1)).2 (U.obj.obj (op m))))
-    (f : T ⟶ U) (hf : f.hom.app (op n) = 0) : f = 0 := by
-  have hs := (formalModule_annihilated_power_iff J U n).mp hU
-  have hhigh (m : ℕ) (hm : n ≤ m) : f.hom.app (op m) = 0 := by
-    have := hs m hm
-    apply (cancel_mono (U.obj.map (homOfLE hm).op)).mp
-    simpa only [hf, comp_zero, zero_comp] using (f.hom.naturality (homOfLE hm).op).symm
-  apply ObjectProperty.hom_ext
-  apply NatTrans.ext
-  funext a
-  obtain ⟨m⟩ := a
-  change f.hom.app (op m) = 0
-  by_cases hm : n ≤ m
-  · exact hhigh m hm
-  · have hmn : m ≤ n := by omega
-    have := formalTransition_epi T hmn
-    apply (cancel_epi (T.obj.map (homOfLE hmn).op)).mp
-    simpa only [hf, comp_zero, zero_comp] using f.hom.naturality (homOfLE hmn).op
-
-set_option backward.isDefEq.respectTransparency false in
 /-- The first projection of the finite comparison graph is surjective modulo J.
 No torsion condition on the comparison arrow is required for this closed-fibre assertion.
 
@@ -208,6 +184,54 @@ theorem formalGraph_first_quotient_epi
       pullback.snd a.hom a'.hom ≫ formalModuleQuotientπ J (n + 1) F'.obj -
         pullback.fst a.hom a'.hom ≫ formalModuleQuotientπ J (n + 1) F.obj ≫ t
     Epi (kernel.ι d ≫ pullback.fst a.hom a'.hom ≫ formalModuleQuotientπ J 1 F.obj) := by
-  sorry
+  let t : formalModuleQuotient J (n + 1) F.obj ⟶
+      formalModuleQuotient J (n + 1) F'.obj := θ.hom.app (op n)
+  let d₀ : pullback a.hom a'.hom ⟶ formalModuleQuotient J (n + 1) F'.obj :=
+    pullback.snd a.hom a'.hom ≫ formalModuleQuotientπ J (n + 1) F'.obj -
+      pullback.fst a.hom a'.hom ≫ formalModuleQuotientπ J (n + 1) F.obj ≫ t
+  change Epi (kernel.ι d₀ ≫ pullback.fst a.hom a'.hom ≫
+    formalModuleQuotientπ J 1 F.obj)
+  let P : CoherentModules X := ⟨pullback a.hom a'.hom, coherent_pullback a a'⟩
+  let p : P ⟶ F := ObjectProperty.homMk (pullback.fst a.hom a'.hom)
+  let q : P ⟶ F' := ObjectProperty.homMk (pullback.snd a.hom a'.hom)
+  have hpq : p ≫ a = q ≫ a' := by
+    apply ObjectProperty.hom_ext
+    exact pullback.condition
+  obtain ⟨g, hg₁, hg₂⟩ := completed_pullback_lift J a a' ((completion X J).obj F)
+    (𝟙 _) θ (by simpa [hpq] using hθ.symm)
+  let Q : CoherentModules X := ⟨formalModuleQuotient J (n + 1) F'.obj,
+    (formalCompletionSystem_coherent J F').1 n⟩
+  let d : P ⟶ Q := ObjectProperty.homMk d₀
+  have hz : g ≫ (completion X J).map d = 0 := by
+    have hz' := formalGraph_discrepancy_zero J p q g θ hg₁ hg₂ n
+    simpa [Q, d, d₀, t, p, q] using hz'
+  let K : CoherentModules X := ⟨kernel d.hom,
+    ((RingedSpace.coherent_kernel_cokernel_sum X.toRingedSpace).1
+      P.obj Q.obj d.hom P.property Q.property).1⟩
+  let i : K ⟶ P := ObjectProperty.homMk (kernel.ι d.hom)
+  obtain ⟨v, hv⟩ := completed_kernel_lift J d ((completion X J).obj F) g hz
+  have hii : i = ObjectProperty.homMk (kernel.ι d.hom) := rfl
+  have hvp : v ≫ (completion X J).map i ≫ (completion X J).map p = 𝟙 _ := by
+    rw [← Category.assoc, hii, hv, hg₁]
+  let r : formalModuleQuotient J 1 K.obj ⟶ formalModuleQuotient J 1 F.obj :=
+    formalModuleQuotientMap J (i.hom ≫ p.hom) (Nat.le_refl 1)
+  have hr : Epi r := by
+    let _ : IsSplitEpi r := IsSplitEpi.mk' ⟨v.hom.app (op 0), by
+      change v.hom.app (op 0) ≫ formalModuleQuotientMap J (i.hom ≫ p.hom)
+        (Nat.le_refl 1) = 𝟙 _
+      have he : formalModuleQuotientMap J (i.hom ≫ p.hom) (Nat.le_refl 1) =
+          ((completion X J).map (i ≫ p)).hom.app (op 0) := by rfl
+      rw [he]
+      simpa [Functor.map_comp, Category.assoc] using congrArg (fun z ↦ z.hom.app (op 0)) hvp⟩
+    infer_instance
+  have hπ : Epi (formalModuleQuotientπ J 1 K.obj) := by
+    change Epi (cokernel.π _)
+    infer_instance
+  have hfac : formalModuleQuotientπ J 1 K.obj ≫ r =
+      kernel.ι d₀ ≫ pullback.fst a.hom a'.hom ≫ formalModuleQuotientπ J 1 F.obj := by
+    simp [r, formalModuleQuotientMap, formalModuleQuotientπ, i, p, d, d₀,
+      Category.assoc]
+  rw [← hfac]
+  infer_instance
 
 end AlgebraicGeometry

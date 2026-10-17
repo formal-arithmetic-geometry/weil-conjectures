@@ -1,0 +1,156 @@
+{
+ "id": "lem-weil-pbc-formal-graph-discrepancy-zero",
+ "kind": "statement",
+ "title": "Vanishing of the completed formal graph discrepancy",
+ "statement": "Let X be a Noetherian scheme [pqf-def-locnoeth], J a quasi-coherent ideal, and P,F,Fprime coherent modules [pqf-def-coherent]. Use the completion and quotient constructions of [def-weil-pbc-coherent-formal-module]. Let p:P→F, q:P→Fprime, g:Fhat→Phat and theta:Fhat→Fprimehat satisfy g followed by phat=id and g followed by qhat=theta. For n≥0 put Q=Fprime/J^(n+1)Fprime, t=theta_n, and d=q followed by the quotient projection minus p followed by the quotient projection followed by t. Then g followed by the completed d is zero.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0889(1), affine comparison discrepancy calculation"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "The quotient Q is coherent and killed by J^(n+1). Every quotient Q/J^(m+1)Q inherits this annihilation: apply idealModuleProduct_quotient_comp_zero_iff to its epimorphic quotient projection and use the zero ideal-product inclusion of Q. Thus the completion of Q is uniformly annihilated by J^(n+1).",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel the epimorphic quotient projection of P to identify the level-n reduction of d with the reduction of q followed by Q→Q/J^(n+1)Q minus the reduction of p followed by t and that same projection. Evaluating the two projection equations for g at n makes these terms equal. Hence the completed discrepancy vanishes at n.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Uniform annihilation makes all target transitions from levels m≥n to n invertible by formalModule_annihilated_power_iff. Naturality propagates the zero component upward by canceling these monomorphisms. For m<n cancel the epimorphic source transition from n to m, using formalTransition_epi. Extensionality of natural transformations gives the desired zero map.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-formal-kernel-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-formal-kernel-factorization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F4",
+  "date": "2026-10-17",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0889(1), completed discrepancy calculation; proved in second reading using quotient annihilation, stabilization and formalTransition_epi"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "formal completion map zero from vanishing component",
+   "results": "No exact match.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "formalModuleQuotient completion zero",
+   "results": "No exact match.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "formalGraph discrepancy completion kernel",
+   "results": "No existing theorem found.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism between adic systems determined by one component when target killed by an ideal power",
+   "results": "Second reader: AdicCompletion.ext, ext_iff, map_ext variants; these are element/map extensionality, not this discrepancy calculation. Existing library stabilization and transition-epimorphy lemmas suffice.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"formalModuleQuotientMap\"",
+   "results": "Second reader: zero Mathlib matches.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "formal.*(zero|vanish)|annihilat.*quotient",
+   "results": "Second reader: Mathlib formal power series and quotient annihilators, no exact match. Direct rg of library roots finds formalModule_annihilated_power_iff, quotient helpers and formalTransition_epi, all used. FormalMapTorsionFiniteDetection has a related specialized zero-propagation argument but not this discrepancy theorem.",
+   "date": "2026-10-17",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalGraphFirstQuotientEpi",
+  "date": "2026-10-17",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-formal-graph-first-quotient-epi",
+   "place": "componentwise discrepancy substep",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalGraphDiscrepancyZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalGraphDiscrepancyZero.lean",
+  "declaration": "AlgebraicGeometry.formalGraph_discrepancy_zero",
+  "statement": "theorem formalGraph_discrepancy_zero\n    {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)\n    {F F' : CoherentModules X} {P : CoherentModules X}\n    (p : P ⟶ F) (q : P ⟶ F')\n    (g : (completion X J).obj F ⟶ (completion X J).obj P)\n    (θ : (completion X J).obj F ⟶ (completion X J).obj F')\n    (hp : g ≫ (completion X J).map p = 𝟙 _)\n    (hq : g ≫ (completion X J).map q = θ) (n : ℕ) :\n    let Q : CoherentModules X := ⟨formalModuleQuotient J (n + 1) F'.obj,\n      (formalCompletionSystem_coherent J F').1 n⟩\n    let t : formalModuleQuotient J (n + 1) F.obj ⟶\n        formalModuleQuotient J (n + 1) F'.obj := θ.hom.app (op n)\n    let d : P ⟶ Q := ObjectProperty.homMk\n      (q.hom ≫ formalModuleQuotientπ J (n + 1) F'.obj -\n        p.hom ≫ formalModuleQuotientπ J (n + 1) F.obj ≫ t)\n    g ≫ (completion X J).map d = 0",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-17"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261017T003421-L-3314908",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261017T003421-L-3314908",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
