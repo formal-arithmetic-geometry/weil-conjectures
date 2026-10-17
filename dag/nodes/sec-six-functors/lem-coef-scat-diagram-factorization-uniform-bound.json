@@ -13,9 +13,166 @@
   "lem-coef-simplicial-localization-comparison-calculus",
   "lem-coef-combinatorial-injective-diagram-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First identify the ground generating classes, using the actual statements of [lem-coef-simplicial-interval-lifting], [lem-coef-simplicial-interval-cell-stability] and [lem-coef-kan-quillen-right-proper]. RLP against $\\varnothing\\to\\{0\\}$ is exactly surjectivity on objects, and RLP against each $U(\\partial\\Delta^n)\\to U(\\Delta^n)$ is exactly the boundary lifting property for every mapping simplicial set; the latter is a trivial Kan fibration by [lem-coef-kan-quillen-right-proper]. Thus $I\\text{-inj}$ is the class of object-surjective maps with trivial Kan fibrations on mapping sets. The $J$-lifting tests give local Kan fibrations and lifting of invertible vertices. Consequently $I\\text{-inj}=W\\cap J\\text{-inj}$: an $I$-injective map is a DK equivalence by its object-surjectivity and mapping trivial fibrations, and it is $J$-injective because every $J$-generator is in $I\\text{-cof}$; conversely, for a map in $W\\cap J\\text{-inj}$, lift an isomorphism from the image of an object to any chosen target object and use the mapping weak equivalence plus Kan fibration to obtain the required trivial-fibration lifting. By the pushout/retract closure of [lem-coef-lifting-class-closure] and the ordinal closure of [lem-coef-transfinite-left-lifting] (coproduct fillers assemble componentwise), every $J\\text{-cof}$ is an $I\\text{-cof}$ since each generator is, and is in $W$ since it is a retract of a $J$-cell map. Conversely, factor an $I\\text{-cof}$ in $W$ by the $J$ small-object factorization. Its right factor is in $W\\cap J\\text{-inj}=I\\text{-inj}$ by two-out-of-three, and a lift exhibits the original map as an arrow retract of the left factor. Hence $I\\text{-cof}\\cap W=J\\text{-cof}$. These equalities identify the two ground model WFS and prove that its left classes are the $I$- and $J$-cofibrations, respectively, in any of the universes under discussion.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-simplicial-interval-cell-stability",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-lifting-class-closure",
+    "lem-coef-transfinite-left-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Bergner generators as in the item; HTT A.3.2 model recognition, independent of the diagram construction"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-scat-injective-universe-generators] to $D$ and the fixed Bergner sets $I,J$, obtaining $S_I,S_J$ in the original universe. Fix these sets once. Step 1 identifies the ground cofibrations as $I\\text{-cof}$ and its trivial cofibrations as $J\\text{-cof}$. By [lem-coef-combinatorial-injective-diagram-model], their objectwise classes in $\\mathcal C_{\\mathcal V}=\\operatorname{Fun}(D,\\mathrm{sCat}_{\\mathcal V})$ are the two injective left classes, and their right orthogonals are respectively injective trivial fibrations and injective fibrations. Thus the weak saturations of $S_I,S_J$ are exactly these left classes in every $\\mathcal V$. No generating family is chosen anew in the larger universe.",
+   "uses": [
+    "lem-coef-scat-injective-universe-generators",
+    "lem-coef-combinatorial-injective-diagram-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.2.8.2--3 and A.3.3.3; apply the two small generating sets separately"
+   }
+  },
+  {
+   "text": "For a diagram $A:D\\to\\mathrm{sCat}_{\\mathcal U}$, let its underlying data set be the disjoint union, over $d\\in D$, of its objects and all $n$-simplices of all $A(d)(x,y)$, for all $n\\geq0$ and all object pairs. Take the disjoint union of these sets for every source and target of $S_I\\cup S_J$, together with the set $S_I\\cup S_J$, $\\operatorname{Mor}(D)$ and $\\mathbb N$. This is a $\\mathcal U$-small set: every summation is indexed by a $\\mathcal U$-small set. By [lem-coef-small-family-regular-bound], choose an infinite regular $\\delta\\in\\mathcal U$ strictly larger than its cardinality. This one choice bounds both generating families, every one of their endpoint data sets, and all naturality and simplicial indices. It depends only on $D$ and the fixed generating data, because the sets in Step 2 do.",
+   "uses": [
+    "lem-coef-small-family-regular-bound"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.3 cardinal conditions (i)-(v); explicit single bound for the fixed endpoint data"
+   }
+  },
+  {
+   "text": "Every generating endpoint $A$ of Step 2 has $\\operatorname{Hom}(A,-)$ preserving $\\mathcal V$-small $\\delta$-filtered colimits, for every $\\mathcal V$. Here is the verification, including non-injective transition maps. Simplicial categories are models of a countable finite-limit sketch: sorts are objects and arrows in degree $n$, with source, target, identity, face and degeneracy maps, and composition defined on the pullback of source and target; the equations express simplicial functoriality, units and associativity. Thus [lem-coef-finite-limit-model-presentability] computes their filtered colimits on these sorts. Diagram colimits exist, since the injective model structure of [lem-coef-combinatorial-injective-diagram-model] includes cocompleteness of $\\operatorname{Fun}(D,\\mathrm{sCat}_{\\mathcal V})$, and they are computed pointwise: the objectwise colimits, with the maps induced by the arrows of $D$, form a cocone whose universal property [def-weil-pbc-category-colimit] holds because the induced map is unique in each component. A map from $A$ to such a colimit is an assignment on its data satisfying the operation equations and $D$-naturality. There are fewer than $\\delta$ elements and equations, by Step 3 and regularity. By [lem-weil-pbc-filtered-colimit-sets-elementwise], each assigned value is represented at a stage and each equation holds at a later stage. A cocone on these fewer than $\\delta$ witnesses gives one stage at which all assignments and equations hold, hence a map of diagrams. Two such maps with the same colimit image become equal after collecting fewer than $\\delta$ equality witnesses and taking another cocone. These are surjectivity and injectivity of the Hom-colimit comparison. The count uses only $A,D,\\delta$, not the size of the filtered index category.",
+   "uses": [
+    "lem-coef-finite-limit-model-presentability",
+    "lem-coef-combinatorial-injective-diagram-model",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.2.5(2); set-level verification of endpoint compactness uniform in the ambient universe"
+   }
+  },
+  {
+   "text": "Fix $K=I$ or $J$ and put $S=S_K$. For $s:A_s\\to B_s$ and an arrow $u:X\\to Y$ of $\\mathcal C_{\\mathcal V}$, let $Q_s(u)$ be the set of pairs $(a:A_s\\to X,b:B_s\\to Y)$ satisfying $ua=bs$. Form the pushout\n$$T(u)=X\\amalg_{\\coprod_{s\\in S}\\coprod_{Q_s(u)} A_s}\\coprod_{s\\in S}\\coprod_{Q_s(u)} B_s.$$\nThe upper attaching map on the $(s,a,b)$ summand is $a$; the map from the pushout to $Y$ is induced by $u$ and the corresponding $b$. Its composite with $X\\to T(u)$ is $u$. All square sets and coproducts are $\\mathcal V$-small. Existence of these colimits follows from [lem-coef-combinatorial-injective-diagram-model] and the universal cocone convention [def-weil-pbc-category-colimit]. For a square $(v,w):u\\to u'$, the rule $(a,b)\\mapsto(va,wb)$ induces the map of the two pushout spans. Uniqueness in the pushout universal property makes the induced $T(u)\\to T(u')$ compatible with both factor maps and makes it preserve identities and composition.",
+   "uses": [
+    "lem-coef-combinatorial-injective-diagram-model",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.2.5 proof, simultaneous attachment of all lifting squares"
+   }
+  },
+  {
+   "text": "Starting from $u_0=f:H\\to H'$, repeat Step 5 over the fixed target $H'$ through the ordinal $\\delta$: at a successor use $u_{\\alpha+1}:T(u_\\alpha)\\to H'$, and at each nonzero limit $\\beta\\leq\\delta$ take the colimit in the slice over $H'$. Set $E_S(f)=\\operatorname{dom}(u_\\delta)$. The recursion is available by [lem-weil-pbc-transfinite-recursion]; all ordinals and diagrams used belong to $\\mathcal V$, since $\\delta\\in\\mathcal U\\subseteq\\mathcal V$. The underlying colimit, with its map induced by the cocone to $H'$, is also the slice colimit: its universal map respects $H'$ since this is checked on every colimit leg. The colimit cocones supply the compatible structure maps. Apply the same recursion to a commuting square of inputs, using the maps of Step 5 at successors and the unique induced colimit map at limits. Induction proves identity and composition laws and compatibility with $H\\to E_S(f)\\to H'$ at every stage. Consequently these are functorial factorizations, with one construction for each of $S_I,S_J$.",
+   "uses": [
+    "lem-weil-pbc-transfinite-recursion",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.2.5 proof, transfinite sequence through a fixed regular ordinal"
+   }
+  },
+  {
+   "text": "Each map of $S$ belongs to the injective left class of Step 2. Each successor in the construction is a pushout of a coproduct of such maps. A coproduct of such maps has the left lifting property against their common right orthogonal, because fillers for its component squares assemble uniquely. By [lem-coef-lifting-class-closure] this property survives pushouts, and by [lem-coef-transfinite-left-lifting] it survives the continuous ordinal composite. In particular the resulting map lies in the appropriate injective left class identified in Step 2. For the right map $p:E_S(f)\\to H'$, consider a square with left side $s:A_s\\to B_s\\in S$. The ordinal of all $\\alpha<\\delta$ is $\\delta$-filtered: any fewer than $\\delta$ indices have supremum below $\\delta$. Step 4 therefore factors the square's top map through some stage $X_\\alpha$. Its bottom map to $H'$ and the stage map make a commutative square already at this stage, because all maps to $H'$ are the slice structure maps. The $(s,a,b)$ summand at stage $\\alpha+1$ supplies a filler $B_s\\to X_{\\alpha+1}$; composing into $E_S(f)$ supplies the requested filler.",
+   "uses": [
+    "lem-coef-lifting-class-closure",
+    "lem-coef-transfinite-left-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.2.5(1); smallness and the cell-by-cell lifting verification"
+   }
+  },
+  {
+   "text": "The right lifting property just proved against $S$ is equivalent to lifting against its weak saturation. Indeed, for a fixed right map $p$, its left lifting class is closed under pushouts and retracts by [lem-coef-lifting-class-closure], under transfinite composites by [lem-coef-transfinite-left-lifting], and under coproducts by assembling the component fillers. It also contains all isomorphisms (use the inverse as the diagonal). Thus if it contains $S$ it contains the entire weak saturation. The converse is inclusion of $S$ in that saturation. Step 2 now identifies the right maps for $S_I$ as injective trivial fibrations and those for $S_J$ as injective fibrations. The left maps of Step 7 are respectively injective cofibrations and injective trivial cofibrations. Denote these two middle-object functors by $E^c_{D,\\mathcal V}$ and $E^f_{D,\\mathcal V}$.",
+   "uses": [
+    "lem-coef-lifting-class-closure",
+    "lem-coef-transfinite-left-lifting",
+    "lem-coef-combinatorial-injective-diagram-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.2.5(1), A.2.8.2; identification of the two factorization classes"
+   }
+  },
+  {
+   "text": "For either $S$, the one-step construction in Step 5 preserves every $\\mathcal V$-small $\\delta$-filtered colimit of arrows. In fact\n$$Q_s(u)=\\operatorname{Hom}(A_s,X)\\times_{\\operatorname{Hom}(A_s,Y)}\\operatorname{Hom}(B_s,Y).$$\nStep 4 and [lem-weil-pbc-filtered-colimits-commute-finite-limits] show that $Q_s$ preserves these colimits. For each fixed object $A$, the copower $R\\mapsto\\coprod_R A$ preserves colimits of sets: maps from it to $Z$ are functions $R\\to\\operatorname{Hom}(A,Z)$, and maps from a colimit of sets are compatible families of such functions. This applies to both endpoints of each $s$. Coproduct over the fixed set $S$ also commutes with colimits, by [lem-pc-colimit-fubini] applied to a discrete index. Finally colimits of the pushout spans are pushouts of their colimits, by the same lemma with the fixed span category as second index. These observations apply to both the objects and the maps in Step 5, so prove preservation of its entire factorization diagram.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+    "lem-pc-colimit-fubini"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.2.5(2), preservation by the one-step square-attachment functor"
+   }
+  },
+  {
+   "text": "Induct on $\\alpha\\leq\\delta$ to prove preservation of $\\delta$-filtered colimits by the intermediate functor $f\\mapsto X_\\alpha(f)$. The case $0$ is the source evaluation on the arrow category, whose colimits are pointwise. At a successor, the arrow $X_\\alpha(f)\\to H'$ preserves the colimit by the induction hypothesis and pointwise computation, and Step 9 applies to it. At a limit, $X_\\beta(f)=\\operatorname{colim}_{\\alpha<\\beta}X_\\alpha(f)$; [lem-pc-colimit-fubini] interchanges this fixed ordinal colimit with the filtered one. All the indices are small in $\\mathcal V$. This proves preservation at $\\delta$, hence for both middle-object functors. The same $\\delta$ was used for the two sets; no larger cardinal is selected in this induction.",
+   "uses": [
+    "lem-coef-combinatorial-injective-diagram-model",
+    "lem-pc-colimit-fubini"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.1.2.5(2), successor and limit steps of the preservation induction"
+   }
+  },
+  {
+   "text": "For $\\mathcal V\\subseteq\\mathcal V'$, inclusion is fully faithful and preserves colimits of $\\mathcal V$-small diagrams of simplicial categories. To check the latter without assuming arbitrary colimits are sortwise, in degree $n$ form the ordinary category with objects the colimit of object sets and arrows generated by finite composable strings of arrows from the input categories, modulo their composition, identity and transition relations. This construction is $\\mathcal V$-small and its functors into any category, of either universe, are precisely the compatible cocones. Simplicial operators on generators induce the operators on the quotient; the object set is constant in degree. It is therefore a simplicial category with the required colimit universal property in either universe. The colimits in question exist by [lem-coef-simplicial-interval-lifting]. Ordinary functor-category colimits are pointwise, so the diagram-category comparison is pointwise as well. Hence the square sets $Q_s(u)$ are identical in the two universes for a smaller arrow $u$, and both pushout spans and their colimits in Step 5 agree canonically. Induction over the same ordinal $\\delta$, taking the canonical colimit isomorphism at limits, gives $\\iota E_{S,\\mathcal V}\\cong E_{S,\\mathcal V'}\\iota$. Each comparison respects the two structure maps and all input squares by the universal properties. This proves the requested natural isomorphisms for both $S$. The argument includes equality of universes. For $D=\\varnothing$ the construction is the unique factorization in the terminal diagram category; for $D=\\{*\\}$ it is a functorial Bergner factorization. Thus all stated cases use the same bound, independent of the ambient universe.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-combinatorial-injective-diagram-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.6.18 proof, universe invariance; explicit colimit presentation and induction on the common small-object sequence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-coef-combinatorial-injective-diagram-model",
+  "lem-coef-finite-limit-model-presentability",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-scat-injective-universe-generators",
+  "lem-coef-simplicial-interval-cell-stability",
+  "lem-coef-simplicial-interval-lifting",
+  "lem-coef-small-family-regular-bound",
+  "lem-coef-transfinite-left-lifting",
+  "lem-pc-colimit-fubini",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+  "lem-weil-pbc-transfinite-recursion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Proposition A.1.2.5(2), printed pp.790-791, after the bounded generation argument of Lemma A.3.3.3, printed pp.878-884; universe-bound discussion in the proof of Corollary A.3.6.18, printed p.905. Read online, not archived in literature/: the rank count and the universe comparison are explicit set-level arguments, with the common generating set obtained by choosing U-small representatives of the bounded compact diagrams. The bounded-generator input is isolated as a statement-only node."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -93,10 +250,59 @@
    "results": "{\"t\": \"2026-10-17T05:27:23Z\", \"tool\": \"leanfinder\", \"query\": \"Both functorial weak factorization systems of the injective model structure on diagrams of simplicial categories preserve sufficiently filtered colimits uniformly across universes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instIsStableUnderFilteredColimitsMonomorphisms\", \"CategoryTheory.Functor.Accessible.Limits.isColimitMapCocone.injective\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.instCofibrationMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"CategoryTheory.SmallObject.hasFunctorialFactorization\", \"CategoryTheory.SmallObject.preservesColimit\", \"CategoryTheory.SmallObject.functorialFactorizationData\", \"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument.preservesColimit\"], \"digest\": \"5ec4cf59ef7b0714\"}",
    "date": "2026-10-17",
    "verdict": "no match: read the returned signatures. The hits give ordinary model-category axioms, simplicial-set horn generators, generic small-object factorizations conditional on smallness, or preservation for an already accessible functor. None constructs an injective fibrant replacement on simplicial-category diagrams with a uniform bound in larger universes."
+  },
+  {
+   "tool": "grep",
+   "query": "Bergner|Dwyer.Kan|injective.*generat|generat.*injective",
+   "results": "{\"t\": \"2026-10-17T05:57:59Z\", \"tool\": \"grep\", \"query\": \"Bergner|Dwyer.Kan|injective.*generat|generat.*injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/DirichletCharacter/Basic.lean\", \"Mathlib/MeasureTheory/MeasurableSpace/CountablyGenerated.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Vanishing.lean\", \"Mathlib/Testing/Plausible/Functions.lean\", \"Mathlib/Testing/Plausible/Functions.lean\", \"Mathlib/Testing/Plausible/Functions.lean\", \"Mathlib/LinearAlgebra/BilinearForm/DualLattice.lean\", \"Mathlib/LinearAlgebra/BilinearForm/Properties.lean\"], \"digest\": \"8dad9ef48a912fa1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern injectivity of functions, modules and other unrelated objects, and the history paragraph of SmallObject/Basic.lean; none constructs injective diagram generators or Bergner factorizations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universe independent generating cofibrations and trivial cofibrations for injective diagrams in the Bergner model category",
+   "results": "{\"t\": \"2026-10-17T05:57:59Z\", \"tool\": \"leansearch\", \"query\": \"Universe independent generating cofibrations and trivial cofibrations for injective diagrams in the Bergner model category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.trivialCofibrations\", \"HomotopicalAlgebra.mem_trivialCofibrations_iff\", \"HomotopicalAlgebra.trivialCofibrations_sub_cofibrations\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"HomotopicalAlgebra.ModelCategory.instIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"HomotopicalAlgebra.ModelCategory.instIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.ModelCategory.mk'\"], \"digest\": \"54973fe3bb762380\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned signatures give ordinary model-category WFS, closure of cofibrations under coproducts, or cofibrations of simplicial sets as monomorphisms; they do not assert bounded generation of injective cofibrations of simplicial-category diagrams in larger universes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MorphismProperty\", \"Functor\", \"IsSmall\"",
+   "results": "{\"t\": \"2026-10-17T05:57:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"MorphismProperty\\\", \\\"Functor\\\", \\\"IsSmall\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the search returned 0 hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A small set of bounded objectwise cofibrations generates injective cofibrations of diagrams of simplicial categories in every larger universe",
+   "results": "{\"t\": \"2026-10-17T05:58:00Z\", \"tool\": \"leanfinder\", \"query\": \"A small set of bounded objectwise cofibrations generates injective cofibrations of diagrams of simplicial categories in every larger universe\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"HomotopicalAlgebra.isStableUnderCoproductsOfShape_cofibrations\", \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"SSet.modelCategoryQuillen.mono_of_cofibration\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.mem_cofibrations\"], \"digest\": \"79e4ef2396ffd36f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned signatures give ordinary model-category WFS, closure of cofibrations under coproducts, or cofibrations of simplicial sets as monomorphisms; they do not assert bounded generation of injective cofibrations of simplicial-category diagrams in larger universes"
+  },
+  {
+   "tool": "grep",
+   "query": "injectiveModel|InjectiveModel|Bergner|Dwyer.Kan",
+   "results": "{\"t\": \"2026-10-17T05:58:05Z\", \"tool\": \"grep\", \"query\": \"injectiveModel|InjectiveModel|Bergner|Dwyer.Kan\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the search returned 0 hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial injective diagram factorizations of simplicial categories preserve filtered colimits and commute with universe enlargement",
+   "results": "{\"t\": \"2026-10-17T05:58:06Z\", \"tool\": \"leanfinder\", \"query\": \"Functorial injective diagram factorizations of simplicial categories preserve filtered colimits and commute with universe enlargement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instIsStableUnderFilteredColimitsMonomorphisms\", \"CategoryTheory.IsFiltered.SmallFilteredIntermediate.factoring\", \"SimplexCategory.instHasStrongEpiMonoFactorisations\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"CategoryTheory.SmallObject.functorialFactorizationData\", \"SSet.Finite.instIsFinitelyPresentable\", \"CategoryTheory.SimplicialObject.instHasColimitsOfShape\"], \"digest\": \"a3e78b0a76dfbb33\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: SmallObject.functorialFactorizationData (IsCardinalForSmallObjectArgument.lean:460-473, read) assumes a suitable small generating class and cardinal. It does not construct injective diagram generators uniformly in larger universes or assert preservation by the middle-object functor. The other hits concern simplicial sets, simplicial objects or unrelated factorizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Objectwise weakly saturated classes in a functor category are generated by uniformly small diagrams between presentable objects",
+   "results": "{\"t\": \"2026-10-17T05:58:07Z\", \"tool\": \"leanfinder\", \"query\": \"Objectwise weakly saturated classes in a functor category are generated by uniformly small diagrams between presentable objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalFilteredGenerator.of_isDense\", \"CategoryTheory.MorphismProperty.isLocallyPresentable_isLocal\", \"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.presentable\", \"CategoryTheory.MorphismProperty.isClosedUnderColimitsOfShape_isLocal\", \"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"CategoryTheory.Limits.ColimitPresentation.isCardinalPresentable\", \"CategoryTheory.IsLocallyPresentable\", \"CategoryTheory.isCardinalPresentable_of_isColimit\"], \"digest\": \"8d671dc25e1ebe4c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the presentability and orthogonal-reflection hits concern Hom bijectivity against already specified small arrows, or ordinary presentable generators; they do not generate the objectwise weakly saturated class on simplicial-category diagrams, let alone uniformly across universes. Read OrthogonalReflection.lean:75-105."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-common-chunk-filtered-approximation",
@@ -136,5 +342,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-scat-diagram-factorization-uniform-bound",
+  "worker": "stage1",
+  "summary": "Retained the statement, source and inherited searches. Split the uniform factorization into common injective generators, a single endpoint-data rank bound, explicit square attachments through that regular ordinal, lifting and functoriality checks, a filtered-colimit induction, and the universe comparison. One new statement-only generation lemma isolates the non-elementary compatible-slice argument of HTT A.3.3.3, rather than restating a factorization clause. No Lean declaration matches either statement. The ground I/J-class identification is derived explicitly from the three existing generator/lifting statements, rather than being attributed to a localization statement that does not include it.",
+  "blueprint": "Paragraph 2 of prop-coef-integral-exceptional-adjoint, its derived coefficient-adjunction/inverse-limit comparison, through the inherited common-chunk foundation. Steps 1-4 supply the uniform replacement bound used in HTT A.3.6.18; Steps 5-10 implement A.1.2.5 for the two injective WFS; Step 11 realizes the universe-invariance sentence. No unit or chapter route was changed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-be05dbcf7",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-be05dbcf7 (reviewer sub-agent of L); spot-checked: I read the item, all 11 steps, the new node lem-coef-scat-injective-universe-generators and the statement of every cited node in full. I also checked the citer lem-coef-common-chunk-filtered-approximation; it uses the item exactly as stated. HTT is not under literature/: the worker recorded a WANTED line and set proof_origin.by=agent, and I judged the steps against the cited DAG statements. No SGA source is cited. Every cited statement is in the item's unit sk-prop-sf-biduality-general or is a Mathlib leaf or definition, so no tool_uses are needed. The item has no base-change morphism or coefficient category of its own. The statement is unchanged and checked on D empty, D terminal, equal universes and non-monic filtered transitions. Step 1 correctly derives the Bergner model structure: I-inj = W ∩ J-inj and I-cof ∩ W = J-cof, from interval-lifting, cell-stability and the Kan trivial-fibration criterion. Steps 2-11 are a correct bounded small-object argument: an uncountable regular delta in U, an elementwise presentability count, the delta-filtered stage factorization for right lifting, Fubini and copower preservation, and a canonical universe comparison by the degreewise category presentation. The new node is the true bounded-generation input (Beke/HTT A.2.8.3 with U-small representatives). It is self-contained and statement-only, and it is not a restatement of the item. It is not a duplicate: lem-coef-enriched-diagram-size-generation needs a simplicially tensored category and a fixed universe, and accessible-small-object-factorization, small-right-lifting-accessibility and finite-pattern-universe-comparison state different things. Fix (C4): Step 4 credited lem-coef-combinatorial-injective-diagram-model with pointwise diagram colimits, which its statement does not say. I replaced this with a short argument: existence from the model-category cocompleteness, and pointwise computation from the componentwise universal property. I added def-weil-pbc-category-colimit to Step 4's uses (it was already in proof_deps). Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-scat-diagram-factorization-uniform-bound.json.; 1 file(s) fixed by the reviewer"
  }
 }

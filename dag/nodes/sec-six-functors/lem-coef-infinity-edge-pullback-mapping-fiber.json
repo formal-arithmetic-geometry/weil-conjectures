@@ -27,11 +27,132 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-mapping-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First establish the exponentiation assertion of (1). A lifting square for $p_K$ against $\\Lambda_i^n\\hookrightarrow\\Delta^n$ is, by the displayed definition of $\\operatorname{Fun}$, a lifting square for $p$ against $K\\times\\Lambda_i^n\\hookrightarrow K\\times\\Delta^n$. The inner horn inclusion is inner anodyne: every inner fibration lifts it by definition. Apply [lem-coef-inner-anodyne-pushout-product] to this inclusion and $\\varnothing\\hookrightarrow K$; its pushout-product, after swapping factors, is exactly this product inclusion, so $p$ supplies the required lift. Thus $p_K$ is inner. The identical argument for $Q\\to\\Delta^0$, where $Q$ is any quasicategory, shows that $\\operatorname{Fun}(K,Q)$ is a quasicategory: an inner horn there is adjoint to a product horn in $Q$. Apply this to $Q=E,B$. No quasicategory condition on $K$ was used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-coef-inner-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent expansion of the middle mapping-complex comparison, paragraph 2: inner exponentiation needed for its mapping-space model; compare HTT 2.3.2.4-5."
+   }
+  },
+  {
+   "text": "The simplicial set $\\Delta^1$ is a quasicategory directly: a simplex in it is a nondecreasing string of zeros and ones; the consecutive edges of an inner horn force its vertex string to be nondecreasing, and that string supplies its filler. In a horn lifting square for $p_f:E_f\\to\\Delta^1$, the given map to $\\Delta^1$ and its composite with $f$ give a lifting square for $p$. Pair its filler with the given simplex of $\\Delta^1$ to get a filler for $p_f$. Consequently $p_f$ is inner. To fill an inner horn in $E_f$, first fill its projection in $\\Delta^1$, then lift this filler by $p_f$. This proves that $E_f$ is a quasicategory. Apply the exponentiation argument of step 1 to $E_f$ and $\\Delta^1$ to obtain their functor quasicategories.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent degreewise lifting argument for the edge-pullback reduction supporting paragraph 2."
+   }
+  },
+  {
+   "text": "For each $n$, a map $K\\times\\Delta^n\\to E_f$ is precisely a pair $(u,v)$ of maps to $E$ and $\\Delta^1$ with $p u=f v$. This follows by taking the two coordinates in the defining degreewise pullback; conversely such a pair is a simplicial map into it because every operator acts coordinatewise. Restricting on $\\Delta^n$ restricts both coordinates. This gives the asserted degreewise identification of functor simplicial sets in (1), including its projections.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent coordinate calculation for paragraph 2: functor simplicial sets preserve this specified pullback."
+   }
+  },
+  {
+   "text": "Put $q_n:\\Delta^{n+1}\\to\\Delta^1$ for the monotone map sending $0,\\ldots,n$ to $0$ and $n+1$ to $1$. An $n$-simplex of the mapping space in (2) is a map $v:K\\times\\Delta^{n+1}\\to\\Delta^1$ equal to $0$ on $K\\times\\Delta^{\\{0,\\ldots,n\\}}$ and $1$ on $K\\times\\{n+1\\}$. These conditions prescribe every vertex value. Every simplex of $\\Delta^1$ is uniquely determined by its ordered vertices, so they force $v=q_n\\operatorname{pr}_{\\Delta^{n+1}}$. This formula supplies such a map and is preserved by all right-pinched operators. If $K=\\varnothing$, the domain is empty and again there is exactly one map. Thus this mapping simplicial set is the one-point simplicial set. Composing its displayed simplex with $f$ gives precisely the $n$-fold degenerate simplex of the vertex $\\Delta_K f$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent calculation of the base mapping-space singleton in the edge-pullback comparison, paragraph 2."
+   }
+  },
+  {
+   "text": "Since $p_K$ is inner between quasicategories by step 1, [lem-coef-infinity-inner-mapping-fiber] applied to its vertices $A,Z$ proves that $\\pi$ is a Kan fibration. To check that its source and target are Kan as well, apply that same cited statement to $Q\\to\\Delta^0$ for $Q=\\operatorname{Fun}(K,E),\\operatorname{Fun}(K,B)$: this map is inner by the quasicategory horn condition, and the mapping space of the terminal quasicategory has one simplex in each degree. Thus its conclusion is exactly the Kan condition for each of the two mapping spaces. The same reasoning applies to the mapping space in $\\operatorname{Fun}(K,E_f)$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-inner-mapping-fiber"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent application of the existing general mapping-space fibration theorem in paragraph 2; compare HTT 2.4.4.1."
+   }
+  },
+  {
+   "text": "In degree $n$, use step 3 to write a simplex of $\\operatorname{Map}_{\\operatorname{Fun}(K,E_f)}((A,0),(Z,1))$ as a pair $(u,v)$ on $K\\times\\Delta^{n+1}$. The endpoint restrictions on $u$ are $A\\operatorname{pr}_K$ on the entire initial face and $Z$ on the last vertex, so $u$ is an $n$-simplex of $\\operatorname{Map}_{\\operatorname{Fun}(K,E)}(A,Z)$. Step 4 forces $v=q_n\\operatorname{pr}$. The remaining pullback equation is therefore $p u=fq_n\\operatorname{pr}$, exactly the equation that $\\pi(u)$ be the $n$-fold degeneracy of $\\Delta_K f$. Conversely a simplex $u$ satisfying this equation has the unique preimage $(u,q_n\\operatorname{pr})$. Both assignments commute with all operators because $q_n\\circ\\alpha^+=q_m$ for the last-vertex extension $\\alpha^+:[m+1]\\to[n+1]$. This proves the strict-fiber isomorphism of (3); its forward map is precisely postcomposition with $j$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent explicit inverse for the edge-pullback fiber identification supporting paragraph 2."
+   }
+  },
+  {
+   "text": "Set $U=\\operatorname{Map}_{\\operatorname{Fun}(K,E)}(A,Z)$ and $W=\\operatorname{Map}_{\\operatorname{Fun}(K,B)}(\\Delta_K b,\\Delta_K s)$. Step 5 verifies that $U,W$ are Kan and $u=\\pi:U\\to W$ is a Kan fibration. Apply [lem-coef-kan-pullback-path-comparison] with $V=\\Delta^0$ and $v$ the vertex $\\Delta_K f$. Its strict pullback is $\\pi^{-1}(\\Delta_K f)$ and its path pullback is exactly the homotopy fiber specified in the statement. Its actual comparison inserts the constant path; hence composing it with the isomorphism in step 6 gives exactly the asserted weak homotopy equivalence, with the requested direction and map.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent application of the general constant-path comparison in paragraph 2; Kerodon 0329 supplies this general theorem, not a Stacks tag."
+   }
+  },
+  {
+   "text": "For a map $a:L\\to K$, restriction sends $u$ to $u(a\\times\\mathrm{id})$. It sends the unique coordinate $q_n\\operatorname{pr}$ of step 6 to the same coordinate on $L\\times\\Delta^{n+1}$, and sends the base vertex to $\\Delta_L f$. Thus the forward and inverse strict-fiber maps commute with restriction. On homotopy fibers the induced map is $(u,\\gamma)\\mapsto(a^*u,a^*\\gamma)$; the constant path at $\\Delta_K f$ restricts to the constant path at $\\Delta_L f$. This proves the same commutation for the weak equivalences. Taking $K\\to\\Delta^0$ as the restriction map gives the claimed compatibility with $\\Delta_K$. Taking $K=\\Delta^0$ gives the last paragraph of the statement, since $\\operatorname{Fun}(\\Delta^0,Q)=Q$ degreewise.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent naturality of the specified maps in paragraph 2: restriction and constant diagrams."
+   }
+  },
+  {
+   "text": "For coherent composition use the triangle spaces $V$ and edge restrictions $\\theta,\\ell$ of [lem-coef-infinity-mapping-composition]. Applied in the two functor quasicategories, $j$ sends each triangle and all its parameter simplices to its image and commutes with $\\theta$ and $\\ell$, since these are restrictions. The right-pinch inclusions are natural by [lem-coef-infinity-pinch-comparison]; hence the formula for the canonical composition class in the former citation commutes with $j$ (invert the commuting $[\\theta]$ in the homotopy category). In particular this applies to precomposition by an edge $A'\\to A$ in $\\operatorname{Fun}(K,E_b)$ and postcomposition by an edge $Z\\to Z'$ in $\\operatorname{Fun}(K,E_s)$. For any parameter simplex of a triangle in $\\operatorname{Fun}(K,E_f)$, its base map $K\\times\\Delta^2\\times\\Delta^n\\to\\Delta^1$ has vertex labels $001$ for precomposition and $011$ for postcomposition. As in step 4, vertices determine every simplex of $\\Delta^1$, so it is the projection followed by that vertex word. Its $02$ edge is therefore $q_0$, and its image under $f$ is constant in the parameter at $\\Delta_K f$. For a higher string replace $\\Delta^2$ by $\\Delta^r$: the base is again the projection followed by its fixed monotone vertex word, and restricting to any face restricts that word. Thus every supplied higher witness has image over the prescribed degeneracies, and each output remains in the strict fiber of step 6. On each such output simplex $u$, the comparison is $(j_*u,\\operatorname{const}_{\\Delta_K f})$; restricting a witness restricts $j_*u$ and preserves this constant path. This proves the coherent compatibility in the path model. This is the statement's convention of taking the image of the chosen composite; no functor-independent strict choice of composition is needed. If $K$ is empty all these simplicial sets and maps are terminal.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent compatibility with chosen coherent composites for paragraph 2; Kerodon 01PF and the existing natural right-pinch comparison specify the composition convention."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-inner-anodyne-pushout-product",
+  "lem-coef-infinity-inner-mapping-fiber",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pinch-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, mapping-complex comparison: explicit edge-pullback mapping-space foundation. HTT and Kerodon consulted online but not archived; WANTED in report."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -39,10 +160,66 @@
    "results": "InnerFibration only in AlgebraicTopology/Quasicategory/InnerFibration.lean and AnodyneExtensions/Inner/{Basic,PushoutProduct}.lean; PushoutProduct.lean:137 has instance InnerFibration ((ihom X).map p) (inner exponentiation, clause (1) only). No hit for mapping spaces or homotopy fibers under AlgebraicTopology.",
    "date": "2026-10-17",
    "verdict": "no match: Mathlib has inner exponentiation (PushoutProduct.lean:137, a possible leaf for clause (1) when this node is split) but no right-pinched mapping spaces of quasicategories, no Kan fibration of relative mapping spaces and no edge-pullback fiber identification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an inner fibration of quasicategories, the mapping space in its pullback along an edge is the homotopy fiber of the map on mapping spaces, naturally for diagram categories",
+   "results": "{\"t\": \"2026-10-17T06:07:30Z\", \"tool\": \"leanfinder\", \"query\": \"For an inner fibration of quasicategories, the mapping space in its pullback along an edge is the homotopy fiber of the map on mapping spaces, naturally for diagram categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instFibrationSndOfIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.PathObject.instFibrationP₁\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"HomotopicalAlgebra.instFibrationFstOfIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.PathObject.trans_ι\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\"], \"digest\": \"7e546d4f509b037e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no declarations for relative right-pinched mapping spaces or their edge-pullback fibers; inner exponentiation is available and the existing general Mathlib leaf lem-coef-inner-anodyne-pushout-product is reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.InnerFibration",
+   "results": "{\"t\": \"2026-10-17T06:07:30Z\", \"tool\": \"loogle\", \"query\": \"SSet.InnerFibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.InnerFibration\", \"SSet.mem_innerFibrations\", \"SSet.quasicategory_of_innerFibration\", \"SSet.quasicategory_of_innerFibration_quasicategory\", \"SSet.InnerFibration.mem\", \"SSet.InnerFibration.mk\", \"SSet.innerFibration_iff\", \"SSet.quasicategory_iff_of_isTerminal\"], \"digest\": \"52f09c46625d2590\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no declarations for relative right-pinched mapping spaces or their edge-pullback fibers; inner exponentiation is available and the existing general Mathlib leaf lem-coef-inner-anodyne-pushout-product is reused."
+  },
+  {
+   "tool": "grep",
+   "query": "innerFibration|right.?pinched|mappingSpace|homotopyFiber|hofib",
+   "results": "{\"t\": \"2026-10-17T06:07:30Z\", \"tool\": \"grep\", \"query\": \"innerFibration|right.?pinched|mappingSpace|homotopyFiber|hofib\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\"], \"digest\": \"68f9223828c07882\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no declarations for relative right-pinched mapping spaces or their edge-pullback fibers; inner exponentiation is available and the existing general Mathlib leaf lem-coef-inner-anodyne-pushout-product is reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mapping spaces in the pullback of an inner fibration of quasicategories along an edge are homotopy fibers",
+   "results": "{\"t\": \"2026-10-17T06:07:30Z\", \"tool\": \"leansearch\", \"query\": \"Mapping spaces in the pullback of an inner fibration of quasicategories along an edge are homotopy fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.fibrations\", \"CategoryTheory.Functor.IsPreFibered.pullbackObj\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HasFibers.pullbackMap.isCartesian\", \"HomotopicalAlgebra.instFibrationPCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.instFibrationFstOfIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.fibrations_over_iff\"], \"digest\": \"4a9631ffb36a9f62\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no declarations for relative right-pinched mapping spaces or their edge-pullback fibers; inner exponentiation is available and the existing general Mathlib leaf lem-coef-inner-anodyne-pushout-product is reused."
+  },
+  {
+   "tool": "grep",
+   "query": "Map.*[Pp]ullback|[Pp]ullback.*Map|[Mm]orphism[Ss]pace|[Pp]inched",
+   "results": "{\"t\": \"2026-10-17T06:08:05Z\", \"tool\": \"grep\", \"query\": \"Map.*[Pp]ullback|[Pp]ullback.*Map|[Mm]orphism[Ss]pace|[Pp]inched\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no declarations for relative right-pinched mapping spaces or their edge-pullback fibers; inner exponentiation is available and the existing general Mathlib leaf lem-coef-inner-anodyne-pushout-product is reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inner fibration induces Kan fibrations on right pinched morphism spaces and these morphism spaces preserve strict simplicial pullbacks",
+   "results": "{\"t\": \"2026-10-17T06:08:05Z\", \"tool\": \"leanfinder\", \"query\": \"An inner fibration induces Kan fibrations on right pinched morphism spaces and these morphism spaces preserve strict simplicial pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.PathObject.instFibrationP₁\", \"HomotopicalAlgebra.PathObject.instFibrationP₀\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.PathObject.instIsFibrantP\", \"HomotopicalAlgebra.FibrantObject\"], \"digest\": \"32d732d0b3c836cb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no declarations for relative right-pinched mapping spaces or their edge-pullback fibers; inner exponentiation is available and the existing general Mathlib leaf lem-coef-inner-anodyne-pushout-product is reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For simplicial sets the exponential of a quasicategory preserves an inner fibration, and morphisms over a fixed arrow form the fiber of a map of Kan complexes",
+   "results": "{\"t\": \"2026-10-17T06:13:06Z\", \"tool\": \"leanfinder\", \"query\": \"For simplicial sets the exponential of a quasicategory preserves an inner fibration, and morphisms over a fixed arrow form the fiber of a map of Kan complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.instQuasicategoryOfKanComplex\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.Quasicategory\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"CategoryTheory.Nerve.quasicategory\"], \"digest\": \"7f21aa04da7015af\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search; semantic results concern general Kan fibrations, horns and quasicategories, while the source grep found no right-pinched relative mapping-space interface. The existing exponentiation ingredient remains sufficient; no new leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "right.?pinch|relative.?mapping|mapping[Ss]pace|homotopy[Ff]ib",
+   "results": "{\"t\": \"2026-10-17T06:13:14Z\", \"tool\": \"grep\", \"query\": \"right.?pinch|relative.?mapping|mapping[Ss]pace|homotopy[Ff]ib\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search; semantic results concern general Kan fibrations, horns and quasicategories, while the source grep found no right-pinched relative mapping-space interface. The existing exponentiation ingredient remains sufficient; no new leaf."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +236,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-edge-pullback-mapping-fiber",
+  "worker": "stage1",
+  "summary": "Nine-step proof with no new nodes. Reuses the existing Mathlib inner-anodyne pushout-product leaf, general inner-fibration mapping-space theorem, constant-path comparison, canonical composition and natural pinch comparison. Writes the strict-fiber isomorphism and all naturality formulas explicitly; checks empty K, degenerate f and empty mapping fibers. Statement unchanged; adds the existing composition-convention statement dependency. Second reader expanded parameterized higher composition witnesses using the fixed monotone base vertex word and the constant-path formula.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2, middle mapping-complex comparison: the inherited coherent-section/bar-resolution/local-relative-colimit foundation reduces to the pullback along one edge. Steps 1-5 establish its simplicial models, step 6 identifies the strict fiber, step 7 identifies its homotopy fiber, steps 8-9 verify restriction, constants and composition. This is a supporting agent-added foundation, not a lemma explicitly stated in that blueprint proof."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NW-aa93ed776",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-aa93ed776 (reviewer sub-agent of L); spot-checked: PASS, no changes; I wrote no fixes. I read the item in full: statement unchanged, 9 steps, no new nodes. I also read the full statements of every cited node: def-cbc-enhanced-diagrams-cones (right-pinched Map with last-vertex operators, and the hofib model), def-coef-infinity-fibrations, the Mathlib leaf lem-coef-inner-anodyne-pushout-product (SSet.innerAnodyneExtensions_pushoutObjObjι'), lem-coef-infinity-inner-mapping-fiber, lem-coef-kan-pullback-path-comparison, lem-coef-infinity-mapping-composition and lem-coef-infinity-pinch-comparison. Statement checks: (2) maps K×Δ^{n+1}→Δ^1 are fixed by their vertices, so the only one is q_n∘pr (also for K empty), and its image under f is the right-pinched degeneracy of Δ_Kf. (3) The strict fiber is matched by (u,q_n pr) and is compatible with operators since q_n∘α^+=q_m. The hofib is exactly P(π,Δ^0→W), so path-comparison applies; its hypotheses (U, W, Δ^0 Kan, π a Kan fibration) come from inner-mapping-fiber applied to p_K and to Q→Δ^0. (4) I checked myself that composition classes are natural under simplicial functors, using naturality of θ, ℓ and the pinch inclusion and cancelling the homotopy equivalence j'. Step 1 is the pushout-product of an inner horn with ∅⊂K. Small cases tested: K empty, E=B=Δ^1, f degenerate, p=id, and two isolated objects over Δ^1 (empty Map, no nonemptiness assumed). Route: all cited statements are in sk-prop-sf-biduality-general, plus definitions and a Mathlib leaf, so no tool_uses are needed. There is no coefficient category or base change in this simplicial lemma. Duplicate search over the DAG (edge pullback, strict fiber, HTT 2.3.2.5/2.4.4.1, isofibration exponentiation, cocartesian mapping criterion, pattern edge detection) found no node stating the item. HTT is not archived (WANTED); the proof is correctly marked by=agent against the main-20261015 blueprint proof of prop-coef-integral-exceptional-adjoint, paragraph 2. No SGA source is used. Mathlib searches cover leansearch, loogle, leanfinder and grep."
  }
 }

@@ -13,9 +13,113 @@
   "lem-coef-cocartesian-straightening",
   "lem-coef-cat-infinity-colimits-cartesian-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The Cartesian straightening equivalence used here is obtained from [lem-coef-cocartesian-straightening] as follows: send a Cartesian fibration $E\\to B$ to the cocartesian fibration $E^{\\mathrm{op}}\\to B^{\\mathrm{op}}$, straighten it, and postcompose the resulting diagram with the opposite-category functor $\\mathrm{op}:\\operatorname{Cat}_\\infty\\to\\operatorname{Cat}_\\infty$ of [lem-coef-cat-infinity-opposite-involution], which is an equivalence with $\\mathrm{op}\\circ\\mathrm{op}\\simeq\\mathrm{id}$ and satisfies $(A\\times A')^{\\mathrm{op}}=A^{\\mathrm{op}}\\times A'^{\\mathrm{op}}$; postcomposition with it is therefore an equivalence of the diagram categories, and it carries pointwise products to pointwise products. Its value is $(E_b^{\\mathrm{op}})^{\\mathrm{op}}=E_b$ and its transport is Cartesian transport. The second opposite is necessary: merely straightening $E^{\\mathrm{op}}$ would classify opposite fibers. Reversing ordered vertices interchanges the two outer-horn conditions of [def-coef-infinity-fibrations], and applying the procedure twice is the identity. Thus this is an equivalence on whole infinity categories, including their mapping spaces and base-change comparisons, rather than only an equivalence on objects.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-cat-infinity-opposite-involution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Proposition 6.9, Cartesian straightening; Section 1.2 notation; variance spelled out by the reader"
+   }
+  },
+  {
+   "text": "We check the Cartesian structure on $C\\times E_H\\to B$. The projection is an inner fibration: a relative inner horn amounts to an inner horn in $C$ and a relative one in $E_H$, which can be filled separately. If $e:x\\to y$ is a Cartesian lift, then $(\\mathrm{id}_c,e)$ is Cartesian: its dual mapping-space square from [lem-coef-infinity-cocartesian-mapping-criterion] is the Cartesian square for $e$ multiplied by the identity on $\\operatorname{Map}_C(d,c)$, for each testing object $(d,z)$. These edges give the required lifts. The same criterion gives the following elementary consequences of universal mapping squares: Cartesian edges with fixed target and fixed base arrow are unique up to equivalence over their source, a Cartesian edge over an identity is an equivalence in the fiber, and composing with an equivalence preserves the Cartesian condition. For the first assertion, the two universal squares give mutually inverse comparison maps over the identity by testing each lift against the other; the inverse equations follow by testing the composites against the same universal squares. Consequently an arbitrary edge $(v,e)$ is Cartesian exactly when $v$ is an equivalence and $e$ is Cartesian. Indeed compare it with the lift $(\\mathrm{id}_{c_1},\\widetilde e)$ with the same target: its vertical comparison is $(v,h)$, where $h$ compares $e$ with $\\widetilde e$. This is an equivalence precisely when both $v$ and $h$ are equivalences; this follows directly by projecting inverse triangles, or pairing the two inverses. The comparison criterion in $E_H$ says that $h$ is an equivalence precisely when $e$ is Cartesian.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Proposition 6.9, first testing-object comparison; product-edge verification expanded using HTT Proposition 2.4.4.3, opposite-category dual"
+   }
+  },
+  {
+   "text": "Put $Q=\\operatorname{Fun}^{\\mathrm{cart}}_B(E_H,E_G)$. By [lem-coef-marked-relative-cartesian-model], $Q$ is a quasicategory and its core is the mapping space of Cartesian fibrations over $B$. The exponential identity of [lem-coef-cat-infinity-colimits-cartesian-closure] restricts over $B$: in simplicial degree $n$ it sends $C\\times E_H\\times\\Delta^n\\to E_G$ to its curried family, with both base maps the projection through $E_H$. A functor $C\\to Q$ therefore gives a functor $C\\times E_H\\to E_G$ whose restriction at each vertex of $C$ preserves Cartesian edges. Conversely those restrictions specify exactly the vertex condition defining the full subcategory $Q$. To check the forward implication for every Cartesian edge, use step 2 and factor $(v,e)$ as $(v,\\mathrm{id})$ followed by $(\\mathrm{id},e)$, with $v$ an equivalence. The first image is an equivalence over an identity and the second is Cartesian, so their composite is Cartesian by the universal-square consequences in step 2. The reverse implication follows by restricting to $(\\mathrm{id}_c,e)$. Apply this currying also with any simplicial parameter $\\Delta^n$. It respects faces, degeneracies, identities and composition. A natural equivalence is sent to a natural equivalence because its inverse and both inverse triangles are sent to inverse data; the inverse currying has the identical property. Passing to cores thus identifies the whole mapping spaces, not just their vertices. Here [lem-coef-marked-point-cartesian-model] identifies $\\operatorname{Map}_{\\operatorname{Cat}_\\infty}(C,Q)$ with $\\operatorname{Fun}(C,Q)^\\simeq$, and the relative marked model identifies the right-hand core with $\\operatorname{Map}^{\\mathrm{cart}}_B(C\\times E_H,E_G)$. This proves the first displayed equivalence.",
+   "uses": [
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-cat-infinity-colimits-cartesian-closure",
+    "lem-coef-marked-point-cartesian-model",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Proposition 6.9, first testing-object comparison; coherent exponential and marked mapping-space models"
+   }
+  },
+  {
+   "text": "The constant fibration $C\\times B\\to B$ is the pullback of $C\\to *$; base-change naturality in [lem-coef-cocartesian-straightening], in the Cartesian variance of step 1, classifies it by $\\Delta C$. The product of it with $E_H$ in the infinity category of Cartesian fibrations over $B$ is $C\\times E_H\\to B$. To verify this product assertion on mapping spaces, a map from a Cartesian fibration $T\\to B$ into the product is a pair of maps over $B$, and it preserves Cartesian edges exactly when both components do, by step 2 applied to the constant factor; the same pairing works with every simplex in their cores. An equivalence preserves products: apply it to this mapping-space universal property and its inverse to an arbitrary testing object. Products in the diagram category are pointwise: apply [lem-coef-marked-sections-pointwise-limits] to the cocartesian fibration $\\operatorname{Cat}_\\infty\\times B^{\\mathrm{op}}\\to B^{\\mathrm{op}}$ with $T=B^{\\mathrm{op}}$, $g=\\mathrm{id}$, $W$ empty and $J$ the two-point discrete shape; the fiber $\\operatorname{Cat}_\\infty$ has binary products given by products of infinity categories by [lem-coef-cocartesian-straightening], so $\\operatorname{Fun}(B^{\\mathrm{op}},\\operatorname{Cat}_\\infty)$ has binary products computed at each vertex, with value $C\\times H(b)$. Straightening therefore sends the product to $(\\Delta C)\\times H$, with its specified projections. Full faithfulness of the equivalence of step 1, using the relative mapping-space model [lem-coef-marked-relative-cartesian-model], now identifies $\\operatorname{Map}^{\\mathrm{cart}}_B(C\\times E_H,E_G)$ with $\\operatorname{Map}_{\\operatorname{Fun}(B^{\\mathrm{op}},\\operatorname{Cat}_\\infty)}((\\Delta C)\\times H,G)$. This proves the second displayed equivalence.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-marked-relative-cartesian-model",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-cat-infinity-colimits-cartesian-closure",
+    "lem-coef-marked-sections-pointwise-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Proposition 6.9, middle and final testing-object displays; constant fibration obtained by pullback from the point"
+   }
+  },
+  {
+   "text": "For covariant $H,G:B\\to\\operatorname{Cat}_\\infty$, use [lem-coef-cocartesian-straightening] directly. The initial-horn condition of [def-coef-infinity-fibrations] on $C\\times E_H\\to B$ is filled componentwise. For a cocartesian lift $e:x\\to y$, its mapping square from [lem-coef-infinity-cocartesian-mapping-criterion], multiplied by the identity on $\\operatorname{Map}_C(c,d)$, proves that $(\\mathrm{id}_c,e)$ is cocartesian. Comparing any lift with this one by testing against their targets gives inverse vertical comparison maps; thus $(v,e)$ is cocartesian exactly when $v$ is an equivalence and $e$ is cocartesian. Currying over $B$ now restricts to cocartesian-preserving families: restriction tests $(\\mathrm{id},e)$, and for the converse factor $(v,e)$ as $(v,\\mathrm{id})$ followed by $(\\mathrm{id},e)$ and paste the cocartesian mapping squares. The exponential and both marked-model statements used in step 3 give the equivalence on cores in this variance as well, using the cocartesian clause of [lem-coef-marked-relative-cartesian-model]. Finally $C\\times B$ is again the pullback from the point, classified by $\\Delta C$; pairing maps over $B$ makes $C\\times E_H$ its product with $E_H$ among cocartesian fibrations. Straightening classifies this product by the product $(\\Delta C)\\times H$ in $\\operatorname{Fun}(B,\\operatorname{Cat}_\\infty)$, which is computed pointwise by [lem-coef-marked-sections-pointwise-limits] applied to $\\operatorname{Cat}_\\infty\\times B\\to B$ exactly as in step 4. Full faithfulness gives the desired mapping space in $\\operatorname{Fun}(B,\\operatorname{Cat}_\\infty)$, with no opposite on $G$ or on $C$.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-cat-infinity-colimits-cartesian-closure",
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-marked-point-cartesian-model",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-marked-sections-pointwise-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Proposition 6.9 with cocartesian variance; Section 1.2 and the direct cocartesian straightening equivalence"
+   }
+  },
+  {
+   "text": "Here are the compatibility and size checks for both comparisons. Precomposing the parameter by $a:C\\to C'$ corresponds under evaluation to precomposing the product map by $a\\times\\mathrm{id}_{E_H}$. Precomposition or postcomposition by a (co)Cartesian-preserving functor corresponds to composition of the evaluated map with that same functor; the two orders agree in every simplicial degree. Pullback along $b:B'\\to B$ uses the identification $b^*(C\\times E_H)=C\\times b^*E_H$ and restriction of the evaluated map. On the diagram side these operations are respectively $\\Delta a\\times H$, composition, and precomposition with $b^{\\mathrm{op}}$ (Cartesian) or $b$ (cocartesian). The base-change coherence of [lem-coef-cocartesian-straightening] and the natural exponential of [lem-coef-cat-infinity-colimits-cartesian-closure] identify these operations under straightening. Replacing any input map by a coherent simplex uses these same evaluation, restriction and product maps with its extra simplex factor; associativity of substitution makes their face and degeneracy restrictions agree. Hence transformations and higher simplices are retained, with the identity and composite comparisons. For size, classified total spaces are taken with the small representatives stipulated in [lem-coef-cocartesian-straightening]. For each $n$, the maps $E_H\\times\\Delta^n\\to E_G$ form a $\\mathcal V$-small set; the over-$B$ and edge-preservation conditions select subsets. The countable collection of these sets with its operators is $\\mathcal V$-small. The relative marked-model statement makes this simplicial set a quasicategory in either variance. Enlarging the universe changes none of these degreewise constructions or marked mapping spaces, by [lem-coef-marked-point-cartesian-model], and the exponential and straightening statements apply in the enlarged universes. This gives the asserted universe compatibility.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-cat-infinity-colimits-cartesian-closure",
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-marked-point-cartesian-model",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Proposition 6.9 naturality; Section 1.2 notation; degreewise coherence and universe checks written out by the reader"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-cat-infinity-colimits-cartesian-closure",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-marked-relative-cartesian-model",
+  "lem-coef-cat-infinity-opposite-involution",
+  "lem-coef-marked-sections-pointwise-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1501.02161v3",
+  "place": "Proposition 6.9 proof, read online independently 2026-10-17; expanded product-edge, covariant, coherence and size checks. Agent-written expansion because the source is not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +155,24 @@
    "results": "{\"t\": \"2026-10-17T05:20:21Z\", \"tool\": \"leanfinder\", \"query\": \"Straightening equivalence identifies mapping spaces between a product with a constant infinity category and an arbitrary diagram with maps into the cartesian functor infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\", \"CategoryTheory.SimplicialObject.cechNerveEquiv\", \"CategoryTheory.hoFunctor.isIso_prodComparison\", \"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\", \"CategoryTheory.SimplicialObject.cechNerveEquiv_apply\", \"CategoryTheory.hoFunctor.isIso_prodComparison_stdSimplex\", \"CategoryTheory.hoFunctor.instIsIsoCatProdComparisonSSetHoFunctorNerve\", \"SSet.hoFunctor.unitHomEquiv\"], \"digest\": \"0cea188acf02c5d7\"}",
    "date": "2026-10-17",
    "verdict": "no match: Read the returned signatures and Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean:50-80, Fibered.lean:49-75, Functor/KanExtension/Basic.lean:45-60, and AlgebraicTopology/Quasicategory/Basic.lean:34-43. IsCartesian/IsFibered concern ordinary categories with unique Hom-set lifts; StrictSegal and hoFunctor product comparison concern strict nerves and ordinary homotopy categories. None supplies mapping spaces of the infinity category of Cartesian fibrations or the parametrized coherent functor comparison. Two semantic phrasings were tried."
+  },
+  {
+   "tool": "grep",
+   "query": "unstraightening|straightening|Fun.*cart",
+   "results": "{\"t\": \"2026-10-17T06:13:30Z\", \"tool\": \"grep\", \"query\": \"unstraightening|straightening|Fun.*cart\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures concern ordinary category-valued or Type-valued functor Hom objects, not coherent functors or Cartesian fibrations of quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal hom of fibered categories and tensor by a constant category represents natural transformations under Grothendieck construction",
+   "results": "{\"t\": \"2026-10-17T06:13:32Z\", \"tool\": \"leanfinder\", \"query\": \"Internal hom of fibered categories and tensor by a constant category represents natural transformations under Grothendieck construction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.homObjEquiv\", \"CategoryTheory.Functor.closedIhom\", \"CategoryTheory.Functor.homObjEquiv_apply_app\", \"CategoryTheory.FunctorToTypes.functorHomEquiv\", \"CategoryTheory.Cat.ihom_obj\", \"CategoryTheory.Functor.ihom_map\", \"CategoryTheory.Functor.closedIhom_obj_obj\", \"CategoryTheory.FunctorToTypes.functorHomEquiv_apply_app\"], \"digest\": \"57dd2e0d80907ab8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures concern ordinary category-valued or Type-valued functor Hom objects, not coherent functors or Cartesian fibrations of quasicategories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cartesian-maps-presheaf-extension",
@@ -83,5 +201,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-parametric-straightening-mapping-spaces",
+  "worker": "stage1",
+  "summary": "Six-step zero-new-node proof: normalize Cartesian variance, verify product lifts by the existing mapping criterion, curry the preserving functor categories using the marked mapping-space models, identify the pointwise-product classifier by its product universal property, prove the cocartesian variance explicitly, and check coherence and sizes. Existing statement preserved.",
+  "blueprint": "Realizes the ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2 clause invoking the general parameter comparison of GHN Proposition 6.9, specifically its first mapping-space calculation and the Cartesian/covariant variants.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-950afdbe3",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-950afdbe3 (reviewer sub-agent of L); spot-checked: I read the item, all six steps, every cited statement, the unit/ancestry and the citer in full. GHN Prop 6.9 is not archived; it is still WANTED and proof_origin is agent. The statement is true in both variances and nothing in it is weakened. Small cases checked: B empty, C empty, C=Δ^0 (straightening full faithfulness), and C=Δ^1 (noninvertible parameter arrows allowed, Cartesian product edges need an invertible C-component). This is not a target node and no SGA source is used. There are no new nodes, no cycle, and no duplicate (lem-coef-unstraightening-external-products is a different, strict model-level statement). Every cited statement is in the item's unit, so no tool_uses are needed. Two missing citations, both repaired: (C1) step 1 used op: Cat_∞→Cat_∞ as an equivalence that preserves products without citing it, so it now cites the existing reviewed node lem-coef-cat-infinity-opposite-involution. (C1/E5) Steps 4 and 5 said 'products in the diagram category are pointwise … in each simplicial degree', which was uncited and not strict in the coherent-nerve model. They now cite lem-coef-marked-sections-pointwise-limits, applied to Cat_∞×B^(op)→B^(op) with T the base, g=id, W empty and J the two-point discrete shape; I checked those hypotheses. proof_deps is updated to the union of the uses. The whole corrected node is in fixes/dag/nodes/sec-six-functors/. Details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
