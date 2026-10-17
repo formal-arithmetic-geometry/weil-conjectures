@@ -56,7 +56,7 @@ private theorem exists_derivedPullback_standard_leftDerived
     (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) := HasDerivedCategory.standard _
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     E, hE, hEmap, hEadd, ε, hL, htri, hK⟩ :=
-      Classical.choose_spec (exists_derivedPullback f)
+      derivedPullback_spec f
   have hE' : E = Scheme.Modules.tensorPullback f :=
     CategoryTheory.Functor.ext hE (fun M N a ↦ hEmap a)
   have hP' : P = Scheme.Modules.tensorPullback f :=
@@ -145,7 +145,7 @@ pullback. Source: Stacks Project, Tags 06YJ and 05RU.
 
 Proof: the object and morphism formulas identify P with scheme tensor pullback.
 In the standard localization, unfold derivedPullback and take the counit and its
-left-derived universal property from exists_derivedPullback. Precompose and
+left-derived universal property from derivedPullback_spec. Precompose and
 postcompose by the localization equivalences defining derivedPullbackAcrossUniverses.
 Use the canonical factorization isomorphisms Qh ⋙ E ≅ Qh_standard for both schemes
 and the associators of functor composition to transport the counit to the displayed
