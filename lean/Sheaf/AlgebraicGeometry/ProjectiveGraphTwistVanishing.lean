@@ -12,17 +12,12 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.AffineOpenTwistVanishingIndependent
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import all Sheaf.AlgebraicGeometry.ProjectiveAmpleInvertible
-import WeilConjectures.AlgebraicGeometry.AmpleIso
+import all WeilConjectures.AlgebraicGeometry.ProjectiveAmpleInvertible
+import all WeilConjectures.AlgebraicGeometry.AmpleIso
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 import WeilConjectures.AlgebraicGeometry.NonvanishingTensorPullback
-import WeilConjectures.AlgebraicGeometry.ProjectiveAmpleInvertible
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 import WeilConjectures.AlgebraicGeometry.SectionNonvanishingZeroLocus
-import WeilConjectures.AlgebraicGeometry.TensorPullback
-import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Relative vanishing for the specified graph twist
 
@@ -38,8 +33,6 @@ open scoped AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] MvPolynomial.gradedAlgebra
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 private theorem projective_ample_affine (N : Type u) [Finite N]
     (S X : Scheme.{u}) [IsAffine S]
     (i : X ⟶ ℙ(N; S)) [IsClosedImmersion i] :
@@ -103,8 +96,6 @@ private theorem projective_ample_affine (N : Type u) [Finite N]
   change y ∈ U k ↔ y ∈ Scheme.Modules.nonvanishingLocus (L.tensorPow 1) (b.hom.app ⊤ (s k))
   rw [Scheme.Modules.nonvanishingLocus_iso b, ← hloc k]
   rfl
--/
-
 
 private theorem projective_ample_affine_pullback (N : Type u) [Finite N]
     (S X : Scheme.{u}) [IsAffine S]
@@ -115,7 +106,17 @@ private theorem projective_ample_affine_pullback (N : Type u) [Finite N]
       @IsAmple X ((pullback i).obj
         ((pullback (ProjectiveSpace.toProjInt N S)).obj
           (Proj.twist (MvPolynomial.homogeneousSubmodule N (ULift.{u} ℤ)) 1))) hL := by
-  sorry
+  classical
+  obtain ⟨hL, hample⟩ := projective_ample_affine N S X i
+  let M := Proj.twist (MvPolynomial.homogeneousSubmodule N (ULift.{u} ℤ)) 1
+  let ρ := ProjectiveSpace.toProjInt N S
+  let eρ := (Classical.choose (exists_tensorPullbackAdjunction ρ)).leftAdjointUniq
+    (pullbackPushforwardAdjunction ρ)
+  let ei := (Classical.choose (exists_tensorPullbackAdjunction i)).leftAdjointUniq
+    (pullbackPushforwardAdjunction i)
+  let e := ei.app ((tensorPullback ρ).obj M) ≪≫ (pullback i).mapIso (eρ.app M)
+  have hP : ((pullback i).obj ((pullback ρ).obj M)).IsInvertible := inferInstance
+  exact ⟨hP, (isAmple_iff_of_iso e).mp hample⟩
 
 /-- The graph twist is invertible and ample over affine opens of the base.
 Source: Stacks Project, Tags 02O5 and 01PS; the graph construction and pullback
@@ -136,7 +137,38 @@ private theorem graph_twist_isInvertible_and_affine_ample
       ∀ V : S.Opens, IsAffineOpen V →
         ∃ hV : (L.restrict (p ⁻¹ᵁ V).ι).IsInvertible,
           @IsAmple (p ⁻¹ᵁ V).toScheme (L.restrict (p ⁻¹ᵁ V).ι) hV := by
-  sorry
+  classical
+  let M := Proj.twist (MvPolynomial.homogeneousSubmodule N (ULift.{u} ℤ)) 1
+  let L := (pullback j).obj ((pullback (ProjectiveSpace.toProjInt N T)).obj M)
+  have hL : L.IsInvertible := inferInstance
+  refine ⟨hL, fun V hV ↦ ?_⟩
+  let i := ProjectiveSpace.liftBaseChange p j hj.symm
+  have hi : i ≫ (ℙ(N; S) ↘ S) = p := ProjectiveSpace.liftBaseChange_over _ _ _
+  let U := p ⁻¹ᵁ V
+  have hw : (p ∣_ V) ≫ V.ι = (U.ι ≫ i) ≫ (ℙ(N; S) ↘ S) := by
+    rw [Category.assoc, hi, morphismRestrict_ι]
+  let iV := ProjectiveSpace.liftBaseChange (p ∣_ V) (U.ι ≫ i) hw
+  have hcart : IsPullback U.ι (p ∣_ V) (i ≫ (ℙ(N; S) ↘ S)) V.ι := by
+    rw [hi]
+    exact (isPullback_morphismRestrict p V).flip
+  have hcart' := ProjectiveSpace.isPullback_liftBaseChange (p ∣_ V) hcart hw
+  have : IsClosedImmersion iV :=
+    MorphismProperty.of_isPullback hcart' inferInstance
+  have : IsAffine V.toScheme := hV
+  obtain ⟨hA, hample⟩ := projective_ample_affine_pullback N V.toScheme U.toScheme iV
+  let e : (pullback iV).obj ((pullback (ProjectiveSpace.toProjInt N V.toScheme)).obj M) ≅
+      L.restrict U.ι :=
+    (pullbackComp iV (ProjectiveSpace.toProjInt N V.toScheme)).app M ≪≫
+      (pullbackCongr (by
+        dsimp only [iV]
+        rw [ProjectiveSpace.liftBaseChange_toProjInt, Category.assoc]
+        dsimp only [i]
+        rw [ProjectiveSpace.liftBaseChange_toProjInt])).app M ≪≫
+      ((pullbackComp U.ι (j ≫ ProjectiveSpace.toProjInt N T)).app M).symm ≪≫
+      (pullback U.ι).mapIso ((pullbackComp j (ProjectiveSpace.toProjInt N T)).app M).symm ≪≫
+      ((restrictFunctorIsoPullback U.ι).app L).symm
+  have hR : (L.restrict U.ι).IsInvertible := IsInvertible.of_iso e
+  exact ⟨hR, (isAmple_iff_of_iso e).mp hample⟩
 
 /-- Relative Serre vanishing for the integral twist pulled back along a projective graph.
 
@@ -165,6 +197,34 @@ theorem exists_isZero_higherDirectImage_graph_twist
         (Proj.twist (MvPolynomial.homogeneousSubmodule N (ULift.{u} ℤ)) 1))
     ∃ n₀ : ℕ, ∀ n : ℕ, n₀ ≤ n → ∀ q : ℕ, 0 < q →
       IsZero ((higherDirectImage p q).obj (L.tensorPow n)) := by
-  sorry
+  classical
+  let L := (pullback j).obj
+    ((pullback (ProjectiveSpace.toProjInt N T)).obj
+      (Proj.twist (MvPolynomial.homogeneousSubmodule N (ULift.{u} ℤ)) 1))
+  obtain ⟨hL, hample⟩ := graph_twist_isInvertible_and_affine_ample g p N j hj
+  have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian p
+  let F : Y.Modules := MonoidalCategoryStruct.tensorUnit Y.Modules
+  have : SheafOfModules.IsInvertible.{u, u, u} F := IsInvertible.sheafOfModules_isInvertible F
+  have hF : RingedSpace.IsCoherent Y.toRingedSpace F :=
+    (isCoherent_iff_isQuasicoherent_and_isFiniteType Y F).mpr
+      ⟨inferInstance, inferInstance⟩
+  choose d hd using fun V : S.affineOpens ↦
+    exists_isZero_higherDirectImage_twist_on_affine_open p F hF L V.1 V.2
+      (hample V.1 V.2)
+  obtain ⟨s, hs⟩ := isCompact_univ.elim_finite_subcover
+    (fun V : S.affineOpens ↦ (V.1 : Set S)) (fun V ↦ V.1.isOpen) (by
+      intro x _
+      obtain ⟨_, ⟨V, hV, rfl⟩, hxV, _⟩ :=
+        S.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
+      exact Set.mem_iUnion.mpr ⟨⟨V, hV⟩, hxV⟩)
+  refine ⟨s.sup d, fun n hn q hq ↦ ?_⟩
+  have hz : IsZero ((higherDirectImage p q).obj (tensorObj F (L.tensorPow n))) := by
+    refine isZero_of_iSup_eq_top _ (fun V : s ↦ V.val.1) ?_
+      (fun V ↦ hd V.val n ((Finset.le_sup V.property).trans hn) q hq)
+    apply eq_top_iff.mpr
+    intro x _
+    obtain ⟨V, hV, hxV⟩ := Set.mem_iUnion₂.mp (hs (Set.mem_univ x))
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨V, hV⟩, hxV⟩
+  exact hz.of_iso ((higherDirectImage p q).mapIso (MonoidalCategory.leftUnitor _)).symm
 
 end AlgebraicGeometry.Scheme.Modules

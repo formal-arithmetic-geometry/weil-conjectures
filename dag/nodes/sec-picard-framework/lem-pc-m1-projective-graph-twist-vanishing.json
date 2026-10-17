@@ -18,7 +18,7 @@
  ],
  "proof": [
   {
-   "text": "Use the existing proved private helpers AlgebraicGeometry.tensorPullback_invertible and AlgebraicGeometry.homOfGlobalSection_appTop_one from ProjectiveAmpleInvertible, imported with import all; do not restate either helper. For any finite coordinate type, use the standard coordinate sections of the integral projective twist. Pulling their nonvanishing loci through the tensor-pullback adjunction identifies them with the inverse images of the standard affine charts. These charts cover the source, are affine over an affine base, and form a finite family. Their pulled-back sections, transported through the right unitor, witness ampleness with exponent one. Uniqueness of left adjoints identifies tensor pullback with ordinary pullback. This argument also treats the empty coordinate type, where the cover forces the source empty.",
+   "text": "Use the existing proved private helpers AlgebraicGeometry.tensorPullback_invertible and AlgebraicGeometry.homOfGlobalSection_appTop_one from WeilConjectures.AlgebraicGeometry.ProjectiveAmpleInvertible, imported with import all; do not restate either helper. For any finite coordinate type, use the standard coordinate sections of the integral projective twist. Pulling their nonvanishing loci through the tensor-pullback adjunction identifies them with the inverse images of the standard affine charts. These charts cover the source, are affine over an affine base, and form a finite family. Their pulled-back sections, transported through the right unitor, witness ampleness with exponent one. Uniqueness of left adjoints identifies tensor pullback with ordinary pullback. This argument also treats the empty coordinate type, where the cover forces the source empty.",
    "uses": [
     "lem-pc-module-pullback-adjunction",
     "lem-weil-pbc-section-nonvanishing-zero-locus",
@@ -30,11 +30,13 @@
    "elementary": false
   },
   {
-   "text": "Separatedness of g gives the closed graph lift over S. Restrict it to an affine open V and base change it to projective space over V. Apply the preceding chart argument there. The integral-model projection identities, pullback composition and restriction/pullback comparison identify this ample module with L restricted to p inverse-image V; transport ampleness across the resulting isomorphism.",
+   "text": "Separatedness of g gives the closed graph lift i = ProjectiveSpace.liftBaseChange p j hj.symm over S. For an affine open V, the morphism-restriction square is cartesian; ProjectiveSpace.isPullback_liftBaseChange identifies the lift iV over V as a base change of i, so it is a closed immersion. Apply the preceding affine projective chart argument to iV. The two liftBaseChange_toProjInt equations identify its composite with the integral projection with the restriction of j followed by the original integral projection. Pullback composition, pullbackCongr and restrictFunctorIsoPullback give an explicit isomorphism to L restricted to p inverse-image V. Transport invertibility and ampleness across it.",
    "uses": [
     "lem-sc-ample-iso",
     "def-nagata-projective-space-base-change",
-    "def-pc-module-pullback"
+    "def-pc-module-pullback",
+    "lemma-weil-pbc-chow-embedding-over-x",
+    "lemma-nagata-projective-space-base-change-pullback"
    ],
    "elementary": false
   },
@@ -64,13 +66,15 @@
   "def-pc-module-pullback",
   "pqf-lem-coherent-ft-locnoeth",
   "lem-pc-invertible-sheaf-instance",
-  "lem-pc-q3-affine-open-twist-vanishing-independent"
+  "lem-pc-q3-affine-open-twist-vanishing-independent",
+  "lemma-weil-pbc-chow-embedding-over-x",
+  "lemma-nagata-projective-space-base-change-pullback"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, coherent.tex",
-  "place": "Tag 02O5 graph-twist construction and Tag 02O1 finite-affine-cover proof",
-  "note": "Q3 made the coordinate-chart and finite-cover steps into Lean, generalized the existing ProjectiveAmpleInvertible coordinate proof to any finite coordinate type locally, and split only one affine-open vanishing step. No use of general proper coherence or the stronger ChowRelativeAmple theorem. Repair: removed both duplicate private helpers and used the originals through import all ProjectiveAmpleInvertible; the arbitrary-finite-coordinate chart argument remains local."
+  "place": "Tag 02O5 (proposition-proper-pushforward-coherent), graph-twist construction; Tag 02O1 (lemma-kill-by-twisting), affine localization and finite-cover argument",
+  "note": "F4 repaired the three proofs removed by upstream sync e47efb5a5 and restored the commented arbitrary-finite-coordinate helper. The original two proved private helpers are now imported from the source ProjectiveAmpleInvertible module, and nonvanishingLocus_iso is imported from the source AmpleIso module. The graph-restriction argument uses the source projective-space base-change API and an explicit ordinary-pullback composition isomorphism. The structure unit is given its source SheafOfModules.IsInvertible instance with explicit universes before inferring finite type. Existing affine-open twist vanishing and a finite affine cover prove the original unchanged conclusion; no new sorries or nodes."
  },
  "mathlib_searches": [
   {
@@ -177,13 +181,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-17",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "F4",
   "result": "pass",
-  "landing": "20261013T082406-L-1645201",
-  "kind": "interface",
+  "landing": "20261017T053259-L-3673863",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
