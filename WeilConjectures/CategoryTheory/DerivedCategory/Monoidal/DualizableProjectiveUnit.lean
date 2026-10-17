@@ -455,3 +455,157 @@ lemma finProj.isDualizable [MonoidalPreadditive C] [IsIdempotentComplete C] {P :
 end FinProj
 
 end CategoryTheory
+
+namespace DerivedCategory
+
+open Pretriangulated MonoidalClosed
+
+variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
+  [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+  [HasDerivedCategory.{v} C] [Abelian.HasFunctorialFlatResolution C]
+
+attribute [local instance] Abelian.hasFiniteBiproducts
+
+/-- In a distinguished triangle `T` with `T.obj₁` and `T.obj₂` vanishing above `b`, if `Hᵇ` of the
+first map is an epimorphism then `T.obj₃` vanishes above `b - 1`. -/
+lemma isLE_obj₃_of_distTriang (T : Triangle (DerivedCategory C)) (hT : T ∈ distTriang _)
+    (b : ℤ) (h₁ : T.obj₁.IsLE b) (h₂ : T.obj₂.IsLE b) (h : Epi ((homologyFunctor C b).map T.mor₁)) :
+    T.obj₃.IsLE (b - 1) := by
+  rw [isLE_iff]
+  intro k hk
+  have h0 : (homologyFunctor C k).map T.mor₂ = 0 := by
+    by_cases hkb : k = b
+    · subst hkb
+      exact (HomologySequence.epi_homologyMap_mor₁_iff T hT k).1 h
+    · exact (isZero_of_isLE T.obj₂ b k (by omega)).eq_of_src _ _
+  have he : Epi ((homologyFunctor C k).map T.mor₂) :=
+    (HomologySequence.epi_homologyMap_mor₂_iff T hT k (k + 1)).2
+      ((isZero_of_isLE T.obj₁ b (k + 1) (by omega)).eq_of_tgt _ _)
+  rw [h0] at he
+  exact (IsZero.iff_id_eq_zero _).2 ((cancel_epi (0 : (homologyFunctor C k).obj T.obj₂ ⟶ _)).1
+    (by simp))
+
+variable [Projective (𝟙_ C)]
+
+/-- If the unit of `C` is projective, there are no nonzero morphisms from the unit of `D(C)` to an
+object vanishing above `-1`. -/
+lemma hom_unit_eq_zero {X : DerivedCategory C} [X.IsLE (-1)]
+    (f : 𝟙_ (DerivedCategory C) ⟶ X) : f = 0 := by
+  have : Subsingleton ((singleFunctor C 0).obj (𝟙_ C) ⟶ X) :=
+    (homSingleEquivOfProjective (𝟙_ C) 0 X).subsingleton_congr.2
+      ⟨fun a b ↦ (isZero_of_isLE X (-1) 0 (by omega)).eq_of_tgt a b⟩
+  rw [← cancel_epi (singleFunctorObjUnitIso C).hom]
+  exact Subsingleton.elim _ _
+
+section Finite
+
+variable (hC : UnitFactorsThroughFiniteCoproducts C) (hT : UnitTensorFinite C)
+include hC hT
+
+/-- A dualizable object `K` vanishing above `b` has a top cohomology `Hᵇ(K)` which is a quotient of
+a finite direct sum `𝟙ʳ`: `K` is a retract of `Q(L)` for a complex `L` vanishing above `b` whose
+terms are quotients of some `𝟙ʳ`, and `Hᵇ(L)` is a quotient of `Lᵇ`. -/
+theorem exists_epi_homology_of_isDualizable {K : DerivedCategory C} (hK : IsDualizable K)
+    (b : ℤ) [K.IsLE b] :
+    ∃ (r : ℕ) (π : (⨁ fun _ : Fin r ↦ 𝟙_ C) ⟶ (homologyFunctor C b).obj K), Epi π := by
+  obtain ⟨_⟩ := hK
+  obtain ⟨M, _, ⟨e⟩⟩ := K.exists_iso_Q_obj_of_isLE b
+  obtain ⟨L, ι, _, -, -, -, -, hπ, w, hw⟩ :=
+    exists_retract_of_exactPairing_of_projective_unit hC hT K Kᘁ M e
+  have : L.IsStrictlyLE b := (CochainComplex.isStrictlyLE_iff L b).2 fun n hn ↦
+    IsZero.of_mono (ι.f n) (M.isZero_of_isStrictlyLE b n hn)
+  obtain ⟨r, π, _⟩ := hπ b
+  have : IsIso (L.iCycles b) := L.isIso_iCycles b (b + 1) (by simp)
+    ((L.isZero_of_isStrictlyLE b (b + 1) (by omega)).eq_of_tgt _ _)
+  let H := homologyFunctor C b
+  let ρ : Q.obj L ⟶ K := Q.map ι ≫ e.inv
+  have hwρ : w ≫ ρ = 𝟙 K := by simp [ρ, reassoc_of% hw]
+  have : Epi (H.map ρ) :=
+    (IsSplitEpi.mk' ⟨H.map w, by rw [← H.map_comp, hwρ, H.map_id]⟩).epi
+  exact ⟨r, π ≫ inv (L.iCycles b) ≫ L.homologyπ b ≫ ((homologyFunctorFactors C b).app L).inv ≫
+    H.map ρ, inferInstance⟩
+
+/-- A dualizable object is bounded: it is a retract of `Q(L)` for a bounded complex `L`. -/
+theorem bounded_of_isDualizable {K : DerivedCategory C} (hK : IsDualizable K) :
+    ∃ a b : ℤ, K.IsGE a ∧ K.IsLE b := by
+  obtain ⟨_⟩ := hK
+  obtain ⟨L, ι, _, a, b, _, _, -, w, hw⟩ :=
+    exists_retract_of_exactPairing_of_projective_unit hC hT K Kᘁ (Q.objPreimage K)
+      (Q.objObjPreimageIso K).symm
+  let H (i : ℤ) := homologyFunctor C i
+  have hret (i : ℤ) : (H i).map w ≫ (H i).map (Q.map ι ≫ (Q.objObjPreimageIso K).hom) = 𝟙 _ := by
+    rw [← Functor.map_comp, reassoc_of% hw]
+    simp
+  have (i : ℤ) : Mono ((H i).map w) := (IsSplitMono.mk' ⟨_, hret i⟩).mono
+  refine ⟨a, b, ?_, ?_⟩
+  · rw [isGE_iff]
+    intro i hi
+    exact IsZero.of_mono ((H i).map w)
+      ((L.exactAt_of_isGE a i hi).isZero_homology.of_iso ((homologyFunctorFactors C i).app L))
+  · rw [isLE_iff]
+    intro i hi
+    exact IsZero.of_mono ((H i).map w)
+      ((L.exactAt_of_isLE b i hi).isZero_homology.of_iso ((homologyFunctorFactors C i).app L))
+
+/-- A dualizable object has finite Tor amplitude: it and its dual are bounded above. -/
+theorem exists_torAmplitudeIn_of_isDualizable {K : DerivedCategory C} (hK : IsDualizable K) :
+    ∃ a b : ℤ, torAmplitudeIn C a b K := by
+  obtain ⟨_⟩ := hK
+  obtain ⟨_⟩ := nonempty_braidedCategory C
+  let := BraidedCategory.exactPairing_swap K Kᘁ
+  obtain ⟨-, b, -, _⟩ := bounded_of_isDualizable hC hT (K := K) ⟨inferInstance⟩
+  obtain ⟨-, b', -, _⟩ := bounded_of_isDualizable hC hT (K := Kᘁ) ⟨⟨K⟩⟩
+  exact ⟨-b', b, torAmplitudeIn_of_exactPairing_of_isLE (L := Kᘁ) b b'⟩
+
+/-- **Base case.** A dualizable object of Tor amplitude in `[b, b]` is `P[-b]` for a retract `P`
+of some `𝟙ʳ`. It is `Y[-b]` for `Y = Hᵇ(K)`, a quotient `π : 𝟙ʳ ⟶ Y`. Its dual `N` vanishes above
+`-b`, so maps `Y ⟶ X` are maps `𝟙 ⟶ X[-b] ⊗ N`; as the cone of `π[-b] ⊗ N` vanishes above `-1`,
+maps from `𝟙` lift along it, and the identity of `Y` lifts to a section of `π`. -/
+theorem exists_iso_single_of_torAmplitudeIn_single {K : DerivedCategory C} (hK : IsDualizable K)
+    (b : ℤ) (hKt : torAmplitudeIn C b b K) :
+    ∃ P : C, finProj C P ∧ Nonempty (K ≅ (singleFunctor C b).obj P) := by
+  obtain ⟨_, _⟩ := homologyConcentratedIn_of_torAmplitudeIn hKt
+  obtain ⟨Y, ⟨eY⟩⟩ := K.exists_iso_singleFunctor_obj_of_isGE_of_isLE b
+  obtain ⟨r, π, _⟩ := exists_epi_homology_of_isDualizable hC hT hK b
+  let B := ⨁ fun _ : Fin r ↦ 𝟙_ C
+  let S := singleFunctor C b
+  let π' : B ⟶ Y := π ≫ (homologyFunctor C b).map eY.hom ≫
+    ((singleFunctorCompHomologyFunctorIso C b).app Y).hom
+  obtain ⟨_⟩ := hK
+  obtain ⟨_⟩ := nonempty_braidedCategory C
+  let := BraidedCategory.exactPairing_swap K Kᘁ
+  have hN := homologyConcentratedIn_of_torAmplitudeIn
+    (torAmplitudeIn_of_exactPairing (K := K) (L := Kᘁ) hKt)
+  have : (Kᘁ).IsLE (-b) := hN.2
+  obtain ⟨Co, g, h, hTr⟩ := distinguished_cocone_triangle (S.map π')
+  have hepi : Epi ((homologyFunctor C b).map (S.map π')) := by
+    have e := (singleFunctorCompHomologyFunctorIso C b).hom.naturality π'
+    have : Epi ((S ⋙ homologyFunctor C b).map π' ≫
+        (singleFunctorCompHomologyFunctorIso C b).hom.app Y) := by
+      rw [e]
+      infer_instance
+    exact (epi_comp_iff_of_isIso _ _).1 this
+  have : (S.obj B).IsLE b := inferInstanceAs (((singleFunctor C b).obj B).IsLE b)
+  have : (S.obj Y).IsLE b := inferInstanceAs (((singleFunctor C b).obj Y).IsLE b)
+  have : Co.IsLE (b - 1) := isLE_obj₃_of_distTriang _ hTr b
+    (inferInstanceAs (((singleFunctor C b).obj B).IsLE b))
+    (inferInstanceAs (((singleFunctor C b).obj Y).IsLE b)) hepi
+  have : (Co ⊗ Kᘁ).IsLE (-1) := by
+    have := isLE_tensor Co Kᘁ (b - 1) (-b)
+    exact TStructure.t.isLE_of_le _ (b - 1 + -b) (-1) (by omega)
+  have hTr' := (tensorRight Kᘁ).map_distinguished _ hTr
+  let t := tensorRightHomEquiv (𝟙_ _) K Kᘁ (S.obj Y) ((λ_ K).hom ≫ eY.hom)
+  obtain ⟨s', hs'⟩ := Triangle.coyoneda_exact₂ _ hTr' t (hom_unit_eq_zero (X := Co ⊗ Kᘁ) _)
+  let g' := (tensorRightHomEquiv (𝟙_ _) K Kᘁ (S.obj B)).symm s'
+  have hg' : g' ≫ S.map π' = (λ_ K).hom ≫ eY.hom := by
+    apply (tensorRightHomEquiv (𝟙_ _) K Kᘁ (S.obj Y)).injective
+    rw [tensorRightHomEquiv_naturality, Equiv.apply_symm_apply]
+    exact hs'.symm
+  let σ := eY.inv ≫ (λ_ K).inv ≫ g'
+  have hσ : σ ≫ S.map π' = 𝟙 _ := by simp [σ, hg']
+  exact ⟨Y, ⟨r, ⟨{ i := S.preimage σ, r := π', retract := S.map_injective (by rw [S.map_comp, S.map_preimage, hσ, S.map_id]) }⟩⟩,
+    ⟨eY⟩⟩
+
+end Finite
+
+end DerivedCategory
