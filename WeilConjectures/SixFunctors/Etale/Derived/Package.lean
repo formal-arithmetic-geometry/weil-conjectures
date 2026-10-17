@@ -254,9 +254,16 @@ theorem sixOperationsPackage [IsAlgClosed k] [HasTateTwist.IsNormalized Λ]
     have : HasInvertibleExponent Λ Y := HasInvertibleExponent.of_hom aY
     obtain ⟨N, hN₀, hN, hNY⟩ := HasInvertibleExponent.exists_isUnit_natCast (Λ := Λ) (X := Y)
     have (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-        IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) :=
-      Etale.isIso_baseChange_app_of_smooth_of_isTorsionSheafOfInvertibleOrder Λ g sq K fun _ ↦
-        IsTorsionSheafOfInvertibleOrder.of_natCast_eq_zero Λ N hN₀.ne' hN hNY _
+        IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) := by
+      have h₀ := Etale.isIso_baseChange_app_of_smooth_of_isTorsionSheafOfInvertibleOrder Λ g sq K
+        fun _ ↦ IsTorsionSheafOfInvertibleOrder.of_natCast_eq_zero Λ N hN₀.ne' hN hNY _
+      -- `h₀` is stated with the Mathlib instance `IsGrothendieckAbelian (ModuleCat Λ)`, the goal
+      -- with the shortcut `ModuleCat.isGrothendieckAbelian_of_commRing`; comparing them directly
+      -- is a kernel deterministic timeout, so the instance is generalized first.
+      revert h₀
+      generalize ModuleCat.isGrothendieckAbelian_of_commRing Λ = i
+      intro h₀
+      exact (Subsingleton.elim _ i) ▸ h₀
     exact NatIso.isIso_of_isIso_app _
   projectionFormula K L := hasProjectionFormula_of_finite Λ f K L
   lowerShriekCompactificationIndependent c c' :=

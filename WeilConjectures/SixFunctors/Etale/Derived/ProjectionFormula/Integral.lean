@@ -86,14 +86,34 @@ open Scheme
 namespace Etale
 
 set_option hygiene false in
-/-- The coefficient category `ModuleCat 𝒪_E` of the integral stage. -/
-local notation "𝐌" => ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))
+/-- The coefficient category `ModuleCat 𝒪_E` of the integral stage. The ring structure is written
+as the one underlying the commutative ring structure, as in the statements of the lemmas for
+general commutative coefficient rings that are applied to it. -/
+local notation "𝐌" =>
+  @ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E)) CommRing.toRing
 
 variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra ℚ_[l] E]
   [Algebra E (PadicAlgCl l)] [IsScalarTower ℚ_[l] E (PadicAlgCl l)]
   [FiniteDimensional ℚ_[l] E] [Small.{u + 1} E]
 
 variable {X Y : Scheme.{u}}
+
+/-- The reconstruction step of the projection formula, for an arbitrary coefficient ring `Λ'`
+and a nonzerodivisor `ϖ`: if both sides of the projection map are derived `ϖ`-complete and its
+reduction modulo `ϖ` is an isomorphism, then the projection formula holds. -/
+theorem hasProjectionFormula_of_derivedComplete_of_isIso_reductionModIdeal {Λ' : Type (u + 1)}
+    [CommRing Λ'] {ϖ : Λ'} (hϖ : ϖ ∈ nonZeroDivisors Λ') (f : X ⟶ Y) [HasCompactification f]
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ')))
+    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ')))
+    (hs : _root_.DerivedCategory.derivedComplete Y.smallEtaleTopology (Ideal.span {ϖ})
+      (((derivedTensor (ModuleCat.{u + 1} Λ') Y).obj
+        ((R(f)_![ModuleCat.{u + 1} Λ']).obj K)).obj L))
+    (ht : _root_.DerivedCategory.derivedComplete Y.smallEtaleTopology (Ideal.span {ϖ})
+      ((R(f)_![ModuleCat.{u + 1} Λ']).obj (((derivedTensor (ModuleCat.{u + 1} Λ') X).obj K).obj
+        ((L((f)^*[ModuleCat.{u + 1} Λ'])).obj L))))
+    (hρ : IsIso ((reductionModIdeal Λ' Y (Ideal.span {ϖ})).map (projectionMapApp Λ' f K L))) :
+    HasProjectionFormula (ModuleCat.{u + 1} Λ') f K L :=
+  isIso_of_derivedComplete_of_isIso_reductionModIdeal hϖ _ hs ht hρ
 
 /-- **The reconstruction step of the projection formula at the integral stage.** If both sides
 `Rf_! K ⊗ᴸ L` and `Rf_!(K ⊗ᴸ Lf^* L)` of the projection map are derived complete for `𝔪_E`, and
@@ -117,14 +137,14 @@ theorem hasProjectionFormula_of_isIso_reductionModIdeal_map (f : X ⟶ Y) [HasCo
     PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span.{w, u} l E
   change _root_.DerivedCategory.derivedComplete _ (PadicAlgCl.maximalIdealShrink l E) _ at hs ht
   rw [hI] at hs ht hρ
-  exact isIso_of_derivedComplete_of_isIso_reductionModIdeal hϖ _ hs ht hρ
+  exact hasProjectionFormula_of_derivedComplete_of_isIso_reductionModIdeal hϖ f K L hs ht hρ
 
 /-- The quotients `𝒪_E ⧸ 𝔪_Eⁿ` are finite. -/
 lemma finite_quotient_maximalIdealShrink_pow (n : ℕ) :
     Finite (Shrink.{u + 1} (PadicAlgCl.integers l E) ⧸ PadicAlgCl.maximalIdealShrink l E ^ n) :=
   .of_equiv _ (Ideal.quotientEquiv (IsLocalRing.maximalIdeal (PadicAlgCl.integers l E) ^ n) _
     (PadicAlgCl.shrinkRingEquiv l E)
-    (by rw [PadicAlgCl.maximalIdealShrink, Ideal.map_pow])).toEquiv
+    (by rw [PadicAlgCl.maximalIdealShrink, Ideal.map_pow]; rfl)).toEquiv
 
 /-- Steps 1 and 2 of blueprint `sk-thm-sf-pf-adic`: the reduction of the projection map modulo
 `𝔪_E` is an isomorphism.

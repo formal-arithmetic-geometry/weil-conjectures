@@ -62,8 +62,11 @@ open Scheme
 namespace Etale
 
 set_option hygiene false in
-/-- The coefficient category `ModuleCat 𝒪_E` of the integral stage. -/
-local notation "𝐌" => ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))
+/-- The coefficient category `ModuleCat 𝒪_E` of the integral stage. The ring structure is written
+as the one underlying the commutative ring structure, as in the statements of the lemmas for
+general commutative coefficient rings that are applied to it. -/
+local notation "𝐌" =>
+  @ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E)) CommRing.toRing
 
 variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra ℚ_[l] E]
   [Algebra E (PadicAlgCl l)] [IsScalarTower ℚ_[l] E (PadicAlgCl l)]
