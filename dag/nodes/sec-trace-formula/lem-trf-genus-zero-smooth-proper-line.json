@@ -13,9 +13,99 @@
   "def-sc-curves",
   "def-sc-genus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-sc-smooth-connected-curve-local-rings], $C$ is integral, has a generic point $\\eta$ which is not closed, and has a closed point $P$. By [lem-kun-closed-point-field](a), $\\kappa(P)$ is finite over $k$. Every element of this finite extension has an irreducible minimal polynomial over the algebraically closed field $k$, hence a linear minimal polynomial. Thus $\\kappa(P)=k$, so $P$ is a $k$-rational point.",
+   "uses": [
+    "lem-sc-smooth-connected-curve-local-rings",
+    "lem-kun-closed-point-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C6U, proposition-projective-line, proof of (8): choose regular closed points; here one rational point suffices."
+   }
+  },
+  {
+   "text": "Use the divisor and associated-module convention of [def-sc-divisor]. Put $\\mathcal L=\\mathcal O_C([P])$. It is invertible by [lem-sc-divisor-module-local]. Its degree is $1$ by [def-sc-pic0]. For arbitrary closed points $Q,R$ (allowed to coincide), they too are rational by step 1's finite-residue-field argument. Put $\\mathcal L(-Q)=\\mathcal O_C([P]-[Q])$ and $\\mathcal L(-Q-R)=\\mathcal O_C([P]-[Q]-[R])$. These are invertible by the same local-module lemma, and have degrees $0$ and $-1$, respectively, by the divisor degree formula. Since $g=0$, all three degrees are at least $2g-1=-1$. Applying [lem-sc-riemann-roch-large-degree] separately to these three bundles gives\n$$h^0(\\mathcal L)=2,\\qquad h^0(\\mathcal L(-Q))=1,\\qquad h^0(\\mathcal L(-Q-R))=0.$$\nAll applications are on the given proper smooth connected curve over the given algebraically closed field.",
+   "uses": [
+    "def-sc-divisor",
+    "lem-sc-divisor-module-local",
+    "def-sc-pic0",
+    "lem-sc-riemann-roch-large-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C6U, proof of (8), degree-one divisor; Tag 0C6T, lemma-genus-zero-positive-degree, degree-one embedding, here obtained by the existing Riemann--Roch separation inputs."
+   }
+  },
+  {
+   "text": "Set $W=H^0(C,\\mathcal L)$. The valuation description in [lem-sc-divisor-module-local] identifies $H^0(C,\\mathcal L(-Q))\\subset W$ with the sections vanishing at $Q$ and $H^0(C,\\mathcal L(-Q-R))$ with those vanishing at both points when $Q\\ne R$, or to order at least two when $Q=R$. Indeed in a local generator of $\\mathcal L$, subtracting $[Q]$ multiplies its coefficient module by the maximal ideal $(t_Q)$, and subtracting $2[Q]$ multiplies it by $(t_Q^2)$. The dimension drops in step 2 therefore show: some section does not vanish at each $Q$; for $Q\\ne R$ a nonzero section in the one-dimensional space $H^0(C,\\mathcal L(-Q))$ does not vanish at $R$; and for $Q=R$ a nonzero section in that space has coefficient in $(t_Q)\\setminus(t_Q^2)$. The last coefficient has nonzero derivative on every nonzero tangent vector, since the DVR uniformizer gives a basis of $\\mathfrak m_Q/\\mathfrak m_Q^2$ over $\\kappa(Q)=k$. These are exactly the generation, point separation and tangent separation hypotheses for $W$; the DVR assertion is [lem-sc-smooth-connected-curve-local-rings].",
+   "uses": [
+    "lem-sc-divisor-module-local",
+    "lem-sc-smooth-connected-curve-local-rings"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C6T, degree-one very-ampleness conclusion: elementary verification of the hypotheses of the existing point-and-tangent separation criterion from the dimension drops."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-point-tangent-separation-closed-immersion] with $X=C$, $\\mathcal M=\\mathcal L$ and $V=W$. Properness is a hypothesis, invertibility was proved in step 2, and step 3 verifies all three separation conditions for every closed point and nonzero tangent vector. Choosing a basis of the two-dimensional $k$-space $W$ gives a closed immersion over $k$\n$$i:C\\hookrightarrow\\mathbf P(W^\\vee)=\\mathbf P^1_k.$$\nHere two homogeneous coordinates give exactly $\\mathbf P(\\{0,1\\};\\operatorname{Spec}k)$ of [def-nagata-projective-space-base-change]. This uses the criterion's actual closed-immersion conclusion, rather than inferring the size of an embedding from an unspecified very-ample presentation.",
+   "uses": [
+    "lem-sc-point-tangent-separation-closed-immersion",
+    "def-nagata-projective-space-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C6U, implication (6) implies (1), and Tag 0C6T: the degree-one complete linear system gives the closed immersion into projective one-space."
+   }
+  },
+  {
+   "text": "Write $Y=\\mathbf P(\\{0,1\\};\\operatorname{Spec}k)$. By [lem-weil-pbc-projective-space-standard-charts], its two standard opens are $\\operatorname{Spec}k[t]$ and $\\operatorname{Spec}k[s]$, with coordinates the respective homogeneous ratios. Their intersection has $s=t^{-1}$, so their zero primes are the same point $\\xi$, dense in both charts and hence in $Y$. Every other prime of $k[t]$ or $k[s]$ is generated by an irreducible polynomial, and is maximal; as $k$ is algebraically closed these are the rational points. Such a point is closed in $Y$: on its own chart it is closed, and on the other chart it is either absent or given by the corresponding reciprocal coordinate value. Thus $\\xi$ is the only nonclosed point of $Y$. By [def-weil-closed-immersion], $i$ is a homeomorphism onto a closed subset. The point $i(\\eta)$ is not closed in $Y$, since otherwise its inverse-image singleton $\\{\\eta\\}$ would be closed in $C$, contrary to step 1. Hence $i(\\eta)=\\xi$. The closed image of $i$ contains the dense point $\\xi$, so $i$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C6U, implication (6) implies (1): make explicit why a closed immersion of the curve into projective one-space is surjective."
+   }
+  },
+  {
+   "text": "On either standard affine chart $U=\\operatorname{Spec}A$ of $Y$, with $A=k[t]$ or $k[s]$ by [lem-weil-pbc-projective-space-standard-charts], [def-weil-closed-immersion] writes $i^{-1}(U)\\to U$ as $\\operatorname{Spec}(A/I)\\to\\operatorname{Spec}A$ for an ideal $I$. Surjectivity from step 5 means that the prime $(0)$ of the domain $A$ lies in $V(I)$; consequently $I\\subseteq(0)$ and $I=0$. Thus the restriction of $i$ over each of the two charts is an isomorphism. Their inverse maps agree on the overlap, since both are inverse to the same restricted map, and glue to an inverse of $i$. The inverse is over $k$ because $i$ is over $k$ and is invertible. This proves the required $k$-isomorphism $C\\cong\\mathbf P^1_k$.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C6U, implication (6) implies (1): affine ideal calculation proving that the surjective closed immersion is an isomorphism."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-kun-closed-point-field",
+  "def-sc-divisor",
+  "lem-sc-divisor-module-local",
+  "def-sc-pic0",
+  "lem-sc-riemann-roch-large-degree",
+  "lem-sc-point-tangent-separation-closed-immersion",
+  "def-nagata-projective-space-base-change",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0C6U (proposition-projective-line), proof of (8) and (6), and 0C6T (lemma-genus-zero-positive-degree). Source-guided degree-one proof using the existing Riemann--Roch and point/tangent-separation statements; the final chart arguments are written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +134,38 @@
    "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. The returned Weierstrass projective point operations and genus-one models do not classify arbitrary smooth proper genus-zero curves. Loogle genus and the source query returned no match.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "genus.*zero|genus.*0|projectiveLine",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Returned affine-space and Weierstrass-curve point facts do not classify arbitrary proper smooth genus-zero curves; genus name and local source searches have no hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A genus zero algebraic curve with a rational point is isomorphic to projective one space",
+   "results": "8 hits; top=['AlgebraicGeometry.AffineSpace.instIsIsoSchemeOverInferInstanceOverClassOfIsEmpty', 'WeierstrassCurve.Projective.Point.zero_point', 'WeierstrassCurve.Projective.Point.fromAffine_some_ne_zero', 'WeierstrassCurve.Affine.Point.instAddZeroClass', 'WeierstrassCurve.Affine.Point.instInhabited', 'WeierstrassCurve.Projective.Point.toAffineLift_eq', 'WeierstrassCurve.Projective.Point.fromAffine_zero', 'WeierstrassCurve.Projective.Point.instZeroOfNontrivial']; note=; digest=6037599aaae43af3. Returned affine-space and Weierstrass-curve point facts do not classify arbitrary proper smooth genus-zero curves; genus name and local source searches have no hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"genus\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Returned affine-space and Weierstrass-curve point facts do not classify arbitrary proper smooth genus-zero curves; genus name and local source searches have no hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every smooth proper connected genus zero curve over an algebraically closed field is isomorphic to the projective line",
+   "results": "8 hits; top=['WeierstrassCurve.Projective', 'WeierstrassCurve.toProjective', 'WeierstrassCurve.instInhabitedSubtypeIsElliptic', 'WeierstrassCurve.Projective.Point.toAffine_of_equiv', 'WeierstrassCurve.Projective.Point.fromAffine_some', 'WeierstrassCurve.exists_variableChange_of_j_eq', 'WeierstrassCurve.Projective.nonsingular_of_equiv', 'WeierstrassCurve.Projective.Point.toAffineAddEquiv_apply']; note=; digest=8057b3015f8d2bb6. Returned affine-space and Weierstrass-curve point facts do not classify arbitrary proper smooth genus-zero curves; genus name and local source searches have no hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-marked-nodal-dualizing-degrees",
@@ -74,5 +192,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-genus-zero-smooth-proper-line",
+  "worker": "stage1",
+  "summary": "Kept the statement and statement dependencies. Reused existing smooth-curve local structure, closed-point residue fields, divisor modules, degree, Riemann--Roch and point/tangent separation. Constructed a degree-one line bundle, computed the three spaces of sections explicitly, obtained a closed immersion into P1, and proved its surjectivity and isomorphism on the standard charts. No new nodes or Mathlib leaves.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Identifies the normalization of a genus-zero component with the projective line before applying the given stability exclusion. The split supplies precisely the auxiliary genus-zero normalization classification; it does not replace the semistable-modification or local-term route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-smooth-connected-curve-local-rings",
+    "why": "Smooth-curve local structure supplies a closed point, a nonclosed generic point and the DVR uniformizers; this is an algebraic-geometric tool for the semistable-component input, not a replacement of the local-term argument."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "The finite residue field of a closed point on a finite-type scheme makes the chosen point rational over algebraically closed k; the trace-formula unit provides no residue-field lemma."
+   },
+   {
+    "node": "lem-sc-divisor-module-local",
+    "why": "The explicit local module construction supplies invertible divisor modules and their first and second vanishing conditions; the trace-formula unit provides no such algebraic-curve lemma."
+   },
+   {
+    "node": "lem-sc-riemann-roch-large-degree",
+    "why": "The general Riemann--Roch dimension formula at degrees 1, 0 and -1 supplies the source degree-one linear-system argument; the trace-formula unit contains no coherent Riemann--Roch statement."
+   },
+   {
+    "node": "lem-sc-point-tangent-separation-closed-immersion",
+    "why": "The proper-scheme separation criterion supplies the closed immersion attached to the two-dimensional complete system; this is a generic algebraic-geometric tool, not a trace-formula route change."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "The arbitrary-base chart theorem identifies the specified base-change projective space with its polynomial-ring charts; finite-field-only line definitions would not suffice here."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-kun-closed-point-field",
+  "lem-sc-divisor-module-local",
+  "lem-sc-riemann-roch-large-degree",
+  "lem-sc-point-tangent-separation-closed-immersion",
+  "lem-weil-pbc-projective-space-standard-charts"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-dca88d2a1",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-dca88d2a1 (reviewer sub-agent of L); spot-checked: Read in full: the item, the statements of all 12 cited nodes plus the blueprint_updates of 5 of them, def-weil-pbc-morphism-to-projective-space-by-sections, the unit sk-i-curve-zero, the sec-trace-formula chapter record, and Stacks curves.tex 0C6U, proofs of (6) and (8). The statement is 0C6U (8)=>(1) for algebraically closed k; it is true and unchanged, and Spec k and the empty scheme are excluded by def-sc-curves. Step 1: the local-rings node and lem-kun-closed-point-field (a) make every closed point rational. Step 2: the degrees 1, 0 and -1 come from the deg formula of def-sc-pic0. The Riemann-Roch node needs only d>=2g-1=-1, so h^0=2,1,0; I checked d=-1 independently. Step 3: the local formula O(D)_Q=t^{-n}O_{C,Q} and the 1-dimensional m/m^2 of a DVR give hypotheses (0)-(2) of the separation lemma, including Q=R; elementary. Step 4: the separation lemma gives a closed immersion into P({0,1};Spec k) over k, which matches def-weil-pbc-morphism-to-projective-space-by-sections. Steps 5-6: in the standard charts of lem-weil-pbc-projective-space-standard-charts, the generic point is the only non-closed point, so the map is surjective; the chart ideals are therefore I=0 and the inverses glue. No cycle (the item is not in the closure of its dependencies). No duplicate: lem-asd-projective-line-genus-zero is the converse, and no blueprint node states the classification. No SGA source. No new nodes. I accept the 6 declared tool uses as generic algebraic-geometry black boxes. No fixes."
  }
 }

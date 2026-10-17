@@ -20,9 +20,94 @@
   "def-weil-etale-morphism",
   "def-pc-integral-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-pc-smooth-flat], $h$ is flat, and by [sbc-lem-smooth-geometrically-reduced] all its fibres are geometrically reduced. Its finite presentation is a hypothesis. Moreover $T$ is geometrically connected: for every field extension $L/\\kappa(s)$, $T_L$ is nonempty and irreducible by [def-pc-geometrically-irreducible, def-weil-irreducible-components]. If $T_L$ were partitioned into two nonempty clopen subsets, these would be two proper closed subsets covering it, contradicting irreducibility. This is exactly connectedness in [def-weil-connected-scheme]. Thus the flatness, finite-presentation, geometric-reducedness and geometric-connectedness hypotheses needed for the next step all hold.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-pc-geometrically-irreducible",
+    "def-weil-irreducible-components",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057J, proof, first application of Tag 055W; smooth specialization as in Tag 057K"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-geometrically-connected-fibre-open-spreading] to $h,s,T$. It supplies an affine elementary etale neighbourhood $(S_1,s_1)\\to(S,s)$ and a quasi-compact open $V\\subseteq Y\\times_S S_1$ whose fibres are geometrically connected, with $V_{s_1}=T\\times_{\\operatorname{Spec}\\kappa(s)}\\operatorname{Spec}\\kappa(s_1)$ as open subschemes of the designated fibre. In particular the residue-field map at $s_1$ is an isomorphism. Retain this neighbourhood and this entire open; it remains to prove geometric integrality of its fibres.",
+   "uses": [
+    "lem-trf-geometrically-connected-fibre-open-spreading"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057J, proof, first sentence; Tag 055W, label lemma-fibre-geometrically-connected-reduced"
+   }
+  },
+  {
+   "text": "The projection $Y\\times_S S_1\\to S_1$ is smooth by clause (2) of [lem-pc-proper-base-change], applied to $h$ and $a$. The inclusion of $V$ is an open immersion, so [lem-pc-open-immersion-smooth-composition] shows that $v:V\\to S_1$ is smooth. This uses no separatedness or Noetherian hypothesis on $S$ or $S_1$.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-pc-open-immersion-smooth-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057J, proof, sentence about the open of the base change; Morphisms Tags 01VB, 01VC and 01VA"
+   }
+  },
+  {
+   "text": "Fix $t\\in S_1$ and an arbitrary field extension $K/\\kappa(t)$. Put $C=V_t\\times_{\\operatorname{Spec}\\kappa(t)}\\operatorname{Spec}K$. By [def-pc-base-change] this is the base change of $v$ to $\\operatorname{Spec}K$, so its structure map $c:C\\to\\operatorname{Spec}K$ is smooth by clause (2) of [lem-pc-proper-base-change]. For every further extension $L/K$, the iterated-base-change identification of [def-pc-base-change] identifies $C_L$ with $(V_t)_L$. The latter is connected by step 2 and [def-pc-geometrically-irreducible]. Hence $c$ has geometrically connected fibres (the base has just one point) and $C$ is nonempty, using [def-weil-connected-scheme]. To check the base hypotheses of the next step, [lem-weil-pbc-spec-domain-stalks-function-field] applied to the domain $K$ shows that $\\operatorname{Spec}K$ is integral, its function field is $K$, and its only local ring is $K_{(0)}=K$. A field is integrally closed in its own fraction field, since every element of that fraction field already lies in the field. The one-point and residue-field description is also explicit in [def-weil-affine-spectrum].",
+   "uses": [
+    "def-pc-base-change",
+    "lem-pc-proper-base-change",
+    "def-pc-geometrically-irreducible",
+    "def-weil-connected-scheme",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057J, proof, final paragraph, applied after an arbitrary residue-field extension; Varieties Tag 056T and Properties Tag 033M"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-smooth-connected-generic-geometry-core] with base $\\operatorname{Spec}K$ and structure map $c$. For its generic-fibre datum use the cartesian identity base change $C\\times_{\\operatorname{Spec}K}\\operatorname{Spec}K\\cong C$, as in [def-pc-base-change]; the base function field and all remaining hypotheses were checked in step 4. Its conclusion that $C$ is integral is exactly what is needed. Because $t$ and $K/\\kappa(t)$ were arbitrary, [def-pc-geometrically-irreducible] says that every fibre $V_t$ is geometrically integral. The affine etale neighbourhood, residue-field isomorphism, quasi-compactness and exact equality of the prescribed open fibre remain those supplied in step 2, proving every clause.",
+   "uses": [
+    "lem-sbc-smooth-connected-generic-geometry-core",
+    "def-pc-base-change",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057J, proof, geometric connectedness plus geometric normality implies geometric integrality; Varieties Tag 056T and Properties Tag 033M"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-smooth-flat",
+  "sbc-lem-smooth-geometrically-reduced",
+  "def-pc-geometrically-irreducible",
+  "def-weil-irreducible-components",
+  "def-weil-connected-scheme",
+  "lem-trf-geometrically-connected-fibre-open-spreading",
+  "lem-pc-proper-base-change",
+  "lem-pc-open-immersion-smooth-composition",
+  "def-pc-base-change",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "def-weil-affine-spectrum",
+  "lem-sbc-smooth-connected-generic-geometry-core"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 057J, label lemma-normal-morphism-irreducible, smooth specialization used in Tag 057K; final connected-smooth-over-a-field argument supplied by the existing normal integral geometry lemma"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -58,10 +143,45 @@
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\"]}",
    "date": "2026-10-18",
    "verdict": "no match: standard smooth charts, etale stability and geometric-integrality definitions do not spread a specified open in an arbitrary fibre"
+  },
+  {
+   "tool": "grep",
+   "query": "of_smooth_of_geometricallyConnected|[Gg]eometrically[Rr]educed.*[Ss]mooth|[Ss]mooth.*[Gg]eometrically",
+   "results": "{\"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\"], \"digest\": \"58df306c935b9767\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern smooth affine charts, etale morphisms, spreading stalk maps or open subsets of an already integral scheme; no prescribed-fibre elementary etale spreading theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth finitely presented morphism and a geometrically irreducible open in a fibre admit an elementary etale neighbourhood and an open with geometrically integral fibres",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"Algebra.exists_etale_of_isEtaleAt\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"6626c23ec54ac745\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern smooth affine charts, etale morphisms, spreading stalk maps or open subsets of an already integral scheme; no prescribed-fibre elementary etale spreading theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyIrreducible\", \"Smooth\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern smooth affine charts, etale morphisms, spreading stalk maps or open subsets of an already integral scheme; no prescribed-fibre elementary etale spreading theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "spread a geometrically integral open of a smooth fibre along an elementary etale neighbourhood",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.spread_out_of_isGermInjective\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.spread_out_unique_of_isGermInjective\", \"AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.spread_out_unique_of_isGermInjective'\"], \"digest\": \"6d5250109b2bdde4\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern smooth affine charts, etale morphisms, spreading stalk maps or open subsets of an already integral scheme; no prescribed-fibre elementary etale spreading theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normal morphism finitely presented geometrically irreducible fibre open etale base change integral fibres",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\"], \"digest\": \"e1b095c0b00a4fde\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern smooth affine charts, etale morphisms, spreading stalk maps or open subsets of an already integral scheme; no prescribed-fibre elementary etale spreading theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-etale-finite-smooth-local-structure",
@@ -90,5 +210,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-geometrically-integral-fibre-neighbourhood",
+  "worker": "stage1",
+  "summary": "Checked Tags 057J, 057K and 055W. Split the smooth specialization through flat geometrically reduced connected-fibre spreading, then retained the open and upgraded its fibres to geometrically integral using smooth base change and the existing normal integral geometry theorem specialized to a field. Added only the genuinely more general flat/reduced spreading input 055W; reused the existing smooth open-composition Mathlib leaf and the exact existing geometric definitions. No statement change.",
+  "blueprint": "Realizes the 057J ingredient in the 057K elementary-etale finite-over-smooth step of the 057S horizontal-curve flatification route below lem-trf-local-term-locality, as recorded by the item ancestry. Steps 1-2 implement 057J first sentence; steps 3-5 implement its normal connected geometric-fibre argument in the smooth case.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-connected-generic-geometry-core",
+    "why": "Used only over Spec K to turn a nonempty smooth geometrically connected scheme into an integral scheme, the connected-normal geometric-fibre argument of 057J; it does not replace the elementary-etale spreading route and no statement of this unit supplies that generic geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-connected-generic-geometry-core"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-26269bc83",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-26269bc83 (reviewer sub-agent of L); spot-checked: Read in full against Stacks more-morphisms.tex: 055W (lemma-fibre-geometrically-connected-reduced), 057J (lemma-normal-morphism-irreducible) and the application in 057K. The item is unchanged. It is the smooth, finite-presentation case of 057J and matches every clause the parent lem-trf-etale-finite-smooth-local-structure uses. The new node lem-trf-geometrically-connected-fibre-open-spreading matches 055W hypothesis by hypothesis: flat, finite presentation spelled out as lfp+qc+qs, geometrically reduced fibres, T geometrically connected and nonempty. It also matches 055W's conclusions: affine elementary etale neighbourhood written out, quasi-compact V, every fibre nonempty and geometrically connected, exact fibre equality. It is statement-only, cites its notions, records three kinds of search, and is no duplicate of lem-sbc-flat-reduced-etale-connected-charts, the section-component nodes or the parent. Step checks: (1) the smooth-flat leaf and smooth-geometrically-reduced give 055W's hypotheses, and geometrically irreducible implies geometrically connected is written out from the definitions; (2) the new node is applied; (3) the smooth clause (2) of lem-pc-proper-base-change plus the open-immersion leaf make V->S_1 smooth; (4) C=(V_t)_K is smooth, the iterated base change in def-pc-base-change makes C geometrically connected and nonempty, and Spec K is integral and normal by lem-weil-pbc-spec-domain-stalks-function-field(2); (5) the conclusion 'C integral' of lem-sbc-smooth-connected-generic-geometry-core, used as a statement only with the identity as generic fibre, holds for every K, so V_t is geometrically integral. Every cited unit (sk-thm-picard-rr, sk-def-smooth, sk-prop-input-spreading) is on sk-i-curve-zero's transitive route; the declared tool use of the core node is accepted. Graph is acyclic. Tested S=Spec k (V=T) and a connected nodal curve (connected but not integral). No fixes."
  }
 }
