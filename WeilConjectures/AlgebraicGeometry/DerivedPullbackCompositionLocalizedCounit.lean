@@ -25,8 +25,8 @@ set_option backward.defeqAttrib.useBackward true
 universe u w
 open CategoryTheory
 namespace AlgebraicGeometry
-attribute [local irreducible] Scheme.Modules.tensorPullback
-  DerivedCategory.Qh canonicalDerivedPullbackComposition
+attribute [local irreducible] Scheme.Modules.tensorPullback DerivedCategory.Qh
+  canonicalDerivedPullbackComposition
 attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
 attribute [local implicit_reducible] Scheme.Modules.Hom Scheme.Modules.instCategory
   Scheme.Modules.instAbelian HomotopyCategory DerivedCategory
