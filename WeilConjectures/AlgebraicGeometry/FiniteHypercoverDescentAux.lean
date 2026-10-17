@@ -68,17 +68,35 @@ lemma Scheme.compactSpace_quasiSeparatedSpace_of_isColimit {ι : Type*} [Finite 
 
 /-- The apex of a finite coproduct in `X.Etale` of quasi-compact quasi-separated schemes is
 quasi-compact and quasi-separated. -/
-lemma Scheme.Etale.compactSpace_quasiSeparatedSpace_of_isColimit {X : Scheme.{u}} {ι : Type*}
+lemma Scheme.Etale.compactSpace_quasiSeparatedSpace_of_isColimit {X : Scheme.{u}} {ι : Type}
     [Finite ι] {Y : ι → X.Etale} {Z : X.Etale} (f : ∀ k, Y k ⟶ Z)
     (hs : IsColimit (Cofan.mk Z f))
     (hY : ∀ k, CompactSpace (Y k).left ∧ QuasiSeparatedSpace (Y k).left) :
     CompactSpace Z.left ∧ QuasiSeparatedSpace Z.left := by
-  have hs' := isColimitCofanMkObjOfIsColimit (Scheme.Etale.forget X ⋙ Over.forget X) Y Z f hs
-  have : ∀ k, CompactSpace ((Scheme.Etale.forget X ⋙ Over.forget X).obj (Y k)) :=
-    fun k ↦ (hY k).1
-  have : ∀ k, QuasiSeparatedSpace ((Scheme.Etale.forget X ⋙ Over.forget X).obj (Y k)) :=
-    fun k ↦ (hY k).2
-  exact Scheme.compactSpace_quasiSeparatedSpace_of_isColimit _ hs'
+  let Yl : ι → Scheme.{u} := fun k ↦ (Y k).left
+  let W : X.Etale := MorphismProperty.Over.mk ⊤ (Sigma.desc fun k ↦ ((Y k).hom : Yl k ⟶ X))
+    (IsZariskiLocalAtSource.sigmaDesc fun k ↦ (Y k).prop)
+  let ιW : ∀ k, Y k ⟶ W := fun k ↦
+    MorphismProperty.Over.homMk (Sigma.ι Yl k) (by simp [W])
+  have hW : IsColimit (Cofan.mk W ιW) := mkCofanColimit _
+    (fun s ↦ MorphismProperty.Over.homMk (Sigma.desc fun k ↦ (s.inj k).left) (by
+      apply Sigma.hom_ext
+      intro k
+      simp only [Sigma.ι_desc_assoc, W, MorphismProperty.Over.mk_hom, Sigma.ι_desc]
+      exact MorphismProperty.Over.w (s.inj k)))
+    (fun s k ↦ by ext; simp [ιW])
+    (fun s m hm ↦ by
+      ext
+      apply Sigma.hom_ext
+      intro k
+      simpa [ιW] using congrArg (fun φ ↦ φ.left) (hm k))
+  let e := (Scheme.Etale.forget X ⋙ Over.forget X).mapIso (hs.coconePointUniqueUpToIso hW)
+  have : ∀ k, CompactSpace (Yl k) := fun k ↦ (hY k).1
+  have : ∀ k, QuasiSeparatedSpace (Yl k) := fun k ↦ (hY k).2
+  obtain ⟨h₁, h₂⟩ := Scheme.compactSpace_quasiSeparatedSpace_of_isColimit (Sigma.ι Yl)
+    (coproductIsCoproduct Yl)
+  have h : W.left ≃ₜ Z.left := e.inv.homeomorph
+  exact ⟨h.compactSpace, (quasiSeparatedSpace_congr h).mp h₂⟩
 
 /-- An étale scheme over a quasi-compact quasi-separated base whose underlying space is
 quasi-compact and quasi-separated is qcqs étale. -/
@@ -86,7 +104,8 @@ lemma isQcqsEtale_of_compactSpace {X : Scheme.{u}} [CompactSpace X] [QuasiSepara
     (Z : X.Etale) [CompactSpace Z.left] [QuasiSeparatedSpace Z.left] :
     IsQcqsEtale ((Scheme.Etale.forget X).obj Z) :=
   ⟨Z.prop, inferInstanceAs (LocallyOfFinitePresentation Z.hom),
-    inferInstanceAs (QuasiCompact Z.hom), inferInstanceAs (QuasiSeparated Z.hom)⟩
+    quasiCompact_of_compactSpace (Y := X) Z.hom,
+    QuasiSeparated.of_quasiSeparatedSpace (Y := X) Z.hom⟩
 
 instance SimplexCategory.Truncated.finite (r : ℕ) : Finite (SimplexCategory.Truncated r) :=
   Finite.of_injective (fun Δ : SimplexCategory.Truncated r ↦
@@ -98,7 +117,8 @@ instance SimplexCategory.Truncated.finite (r : ℕ) : Finite (SimplexCategory.Tr
 
 instance SimplexCategory.Truncated.finite_op (r : ℕ) :
     Finite (SimplexCategory.Truncated r)ᵒᵖ :=
-  Finite.of_equiv _ (opEquiv _).symm
+  Finite.of_injective (fun Δ : (SimplexCategory.Truncated r)ᵒᵖ ↦ Δ.unop)
+    (fun _ _ h ↦ Opposite.unop_injective h)
 
 instance SimplexCategory.Truncated.finite_hom {r : ℕ} (a b : SimplexCategory.Truncated r) :
     Finite (a ⟶ b) :=
@@ -149,6 +169,7 @@ private lemma eqToHom_pullbackComp_left_fst {X Y Z : Scheme.{u}} (f : X ⟶ Y) (
   subst hf
   simp only [eqToHom_refl, NatTrans.id_app, Category.id_comp]
   simp [Over.pullbackComp, Over.mapComp, conjugateIsoEquiv, conjugateEquiv]
+  exact (Category.id_comp _).trans (Category.id_comp _)
 
 @[reassoc (attr := simp)]
 lemma overPullbackCompIso_hom_app_left_fst {i j k : I} (h : j ⟶ i) (g : k ⟶ j)
@@ -171,10 +192,12 @@ lemma overPullbackStageIso_comp {i j k : I} (h : j ⟶ i) (g : k ⟶ j) (U : Ove
           (overPullbackStageIso D c h).hom.app U := by
   ext : 1
   apply pullback.hom_ext
-  · simp only [overPullbackStageIso_hom_app_left_fst, Over.comp_left, Category.assoc,
-      Over.pullback_map_left, pullback.lift_fst_assoc]
-    rw [overPullbackCompIso_hom_app_left_fst]
-  · simp [overPullbackStageIso_hom_app_left_snd]
+  · simp only [Over.comp_left, Category.assoc, Over.pullback_map_left,
+      overPullbackStageIso_hom_app_left_fst, overPullbackStageIso_hom_app_left_fst_assoc,
+      pullback.lift_fst_assoc, overPullbackCompIso_hom_app_left_fst]
+  · simp only [Over.comp_left, Category.assoc, Over.pullback_map_left,
+      overPullbackStageIso_hom_app_left_snd, overPullbackStageIso_hom_app_left_snd_assoc,
+      pullback.lift_snd]
 
 end Transport
 
@@ -195,7 +218,8 @@ theorem stageEventually_whiskerRight_eq {C : Type*} [Category* C] [Finite C] {i 
       Functor.whiskerRight ψ (Over.pullback (c.π.app i))) :
     StageEventually i (fun _ h ↦ Functor.whiskerRight φ (Over.pullback (D.map h)) =
       Functor.whiskerRight ψ (Over.pullback (D.map h))) := by
-  refine (StageEventually.finite_forall (fun a : C ↦ ?_)).mono fun _ _ H ↦ ?_
+  refine (StageEventually.finite_forall (Q := fun a _ h ↦ (Over.pullback (D.map h)).map (φ.app a) =
+      (Over.pullback (D.map h)).map (ψ.app a)) fun a ↦ ?_).mono fun _ _ H ↦ ?_
   · obtain ⟨_, _, _, _⟩ := hF a
     obtain ⟨_, _, _, _⟩ := hG a
     exact stageEventually_overPullback_map_eq D hc _ _ (φ.app a) (ψ.app a)
@@ -250,10 +274,10 @@ theorem exists_natTrans_descent {C : Type*} [Category* C] [Finite C]
     simp only [reassoc_of% n1, reassoc_of% n3, Category.assoc, n2]
   · have n1 := (overPullbackStageIso D c g).hom.naturality (ψ₁ a)
     simp only [Functor.comp_map] at n1
-    simp only [overPullbackStageIso_comp, Functor.map_comp, Category.assoc,
-      ← Functor.map_comp_assoc, Iso.inv_hom_id_app, Functor.comp_obj, Functor.map_id,
-      Category.id_comp]
-    simp only [Functor.map_comp, Category.assoc, reassoc_of% n1, hψ₁]
+    rw [overPullbackStageIso_comp, overPullbackStageIso_comp]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [← Functor.map_comp_assoc (Over.pullback (c.π.app j₂)) (τ.inv.app (G.obj a)),
+      Iso.inv_hom_id_app, Functor.map_id, Category.id_comp, reassoc_of% n1, hψ₁]
 
 end Finite
 

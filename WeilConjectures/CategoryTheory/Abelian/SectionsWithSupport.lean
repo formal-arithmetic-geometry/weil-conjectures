@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
@@ -170,6 +171,63 @@ noncomputable def kernelIso (M : 𝒳) :
     kernel (adjJ.unit.app M) ≅ iLow.obj ((functor adjI adjJ h₀ hdet).obj M) :=
   have := isIso_unit_app_of_isZero adjI adjJ h₀ hdet (isZero_upperStar_kernel adjJ M)
   asIso (adjI.unit.app (kernel (adjJ.unit.app M)))
+
+/-- `Γ_Z` is additive, being right adjoint to an additive functor. -/
+instance additive_functor : (functor adjI adjJ h₀ hdet).Additive :=
+  (adjunction adjI adjJ h₀ hdet).right_adjoint_additive
+
+section Injective
+
+variable {jShriek : 𝒱 ⥤ 𝒳} (adjS : jShriek ⊣ jUp) [IsIso adjS.unit]
+
+include adjI h₀ hdet in
+/-- The comparison `j_! V ⟶ j_* V`, adjoint to the inverse of the counit `j^* j_* V ≅ V`, is a
+monomorphism when `j_!` is exact, `i^* j_! = 0`, and `i^*`, `j^*` jointly detect zero objects. -/
+lemma mono_comparison [PreservesFiniteLimits jShriek] [jShriek.Additive]
+    (h₁ : ∀ V, IsZero (iUp.obj (jShriek.obj V))) (V : 𝒱) :
+    Mono ((adjS.homEquiv _ _).symm (inv (adjJ.counit.app V))) := by
+  set m := (adjS.homEquiv _ _).symm (inv (adjJ.counit.app V))
+  have hm : adjS.unit.app V ≫ jUp.map m = inv (adjJ.counit.app V) :=
+    (adjS.homEquiv_unit _ _ m).symm.trans ((adjS.homEquiv _ _).apply_symm_apply _)
+  have : IsIso (jUp.map m) := by
+    have : IsIso (adjS.unit.app V ≫ jUp.map m) := by rw [hm]; infer_instance
+    exact IsIso.of_isIso_comp_left (adjS.unit.app V) _
+  refine Preadditive.mono_of_isZero_kernel m (hdet _ ?_
+    ((isZero_kernel_of_mono (jUp.map m)).of_iso (PreservesKernel.iso jUp m)))
+  have hz : IsZero (iUp.obj (jShriek.obj V)) := h₁ V
+  exact IsZero.of_mono (iUp.map (kernel.ι m)) hz
+
+include adjI h₀ hdet adjS in
+/-- Blueprint `det-lem-formal-closed-support-adjunction` (3): for an injective object `I`, the
+unit `I ⟶ j_* j^* I` is an epimorphism (indeed a split epimorphism). The counit
+`j_! j^* I ⟶ I` extends along the monomorphism `j_! j^* I ⟶ j_* j^* I` to `s : j_* j^* I ⟶ I`,
+and `s` followed by the unit is the identity, `j_*` being fully faithful. -/
+lemma epi_unit_app_of_injective [PreservesFiniteLimits jShriek] [jShriek.Additive]
+    (h₁ : ∀ V, IsZero (iUp.obj (jShriek.obj V))) (I : 𝒳) [Injective I] :
+    Epi (adjJ.unit.app I) := by
+  set V := jUp.obj I
+  set m := (adjS.homEquiv _ _).symm (inv (adjJ.counit.app V))
+  have := mono_comparison adjI adjJ h₀ hdet adjS h₁ V
+  let c : jShriek.obj V ⟶ I := adjS.counit.app I
+  let s : jLow.obj V ⟶ I := Injective.factorThru c m
+  have hs : m ≫ s = adjS.counit.app I := Injective.comp_factorThru c m
+  have hm : adjS.unit.app V ≫ jUp.map m = inv (adjJ.counit.app V) :=
+    (adjS.homEquiv_unit _ _ m).symm.trans ((adjS.homEquiv _ _).apply_symm_apply _)
+  have hc : adjS.unit.app V ≫ jUp.map (adjS.counit.app I) = 𝟙 _ :=
+    adjS.right_triangle_components I
+  -- `j^* s` is the counit of `j^* ⊣ j_*`
+  have hjs : jUp.map s = adjJ.counit.app V := by
+    have h := congrArg (fun φ ↦ adjS.unit.app V ≫ φ) (congrArg jUp.map hs)
+    rw [Functor.map_comp, ← Category.assoc, hm, hc] at h
+    rw [← cancel_epi (inv (adjJ.counit.app V)), h, IsIso.inv_hom_id]
+  -- `s ≫ unit = 𝟙`, by full faithfulness of `j_*`
+  have hsplit : s ≫ adjJ.unit.app I = 𝟙 _ := by
+    apply (adjJ.homEquiv _ _).symm.injective
+    simp [Adjunction.homEquiv_counit, hjs]
+    rfl
+  exact epi_of_epi_fac hsplit
+
+end Injective
 
 end Sheaves
 

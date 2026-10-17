@@ -281,10 +281,188 @@ include FA CA in
 omit [(presheafToSheaf X.smallEtaleTopology A).PreservesHomology] in
 lemma epi_freeSheaf_map_augmentation :
     Epi ((freeSheaf Free).map (terminal.from (U.simplicial _⦋0⦌))) := by
-  have := U.isLocallySurjective_augmentation Free
+  have : Presheaf.IsLocallySurjective X.smallEtaleTopology
+      (((Functor.whiskeringRight X.Etaleᵒᵖ (Type (w + 1)) A).obj Free).map
+        (uliftYoneda.{w + 1}.map (terminal.from (U.simplicial _⦋0⦌)))) :=
+    U.isLocallySurjective_augmentation Free
   exact Presheaf.epi_presheafToSheaf_map_of_isLocallySurjective X.smallEtaleTopology _
 
 end Sheaf
+
+
+section Sections
+
+variable [HasSheafify X.smallEtaleTopology A] [X.smallEtaleTopology.WEqualsLocallyBijective A]
+  [X.smallEtaleTopology.HasSheafCompose (forget A)]
+  [(presheafToSheaf X.smallEtaleTopology A).PreservesHomology]
+  [(forget A).PreservesMonomorphisms]
+  (adj : Free ⊣ forget A)
+
+include hsub in
+omit [Abelian A] in
+lemma zero_apply_of_sub {X Y : A} (x : ToType X) : (0 : X ⟶ Y) x = 0 := by
+  have := hsub (0 : X ⟶ Y) 0 x
+  rw [sub_zero, sub_self] at this
+  exact this
+
+include hsub in
+omit [Abelian A] in
+lemma add_apply_of_sub {X Y : A} (f g : X ⟶ Y) (x : ToType X) : (f + g) x = f x + g x := by
+  have h : f + g = f - (0 - g) := by abel
+  rw [h, hsub, hsub, zero_apply_of_sub hsub]
+  abel
+
+/-- Evaluation at an element, as an additive map. -/
+noncomputable def evalAddHom {X Y : A} (x : ToType X) : (X ⟶ Y) →+ ToType Y where
+  toFun f := f x
+  map_zero' := zero_apply_of_sub hsub x
+  map_add' f g := add_apply_of_sub hsub f g x
+
+/-- Morphisms `Free[V]^# ⟶ I` are the sections of `I` over `V`. -/
+noncomputable def sectionsEquiv (I : Sheaf X.smallEtaleTopology A) (V : X.Etale) :
+    ((freeSheaf Free).obj V ⟶ I) ≃ ToType (I.obj.obj (op V)) :=
+  ((sheafificationAdjunction X.smallEtaleTopology A).homEquiv _ _).trans
+    (((adj.whiskerRight X.Etaleᵒᵖ).homEquiv _ _).trans uliftYonedaEquiv.{w + 1})
+
+lemma sectionsEquiv_apply (I : Sheaf X.smallEtaleTopology A) (V : X.Etale)
+    (φ : (freeSheaf Free).obj V ⟶ I) :
+    sectionsEquiv Free adj I V φ =
+      (toSheafify X.smallEtaleTopology _ ≫ φ.hom).app (op V)
+        (adj.unit.app _ (ULift.up (𝟙 V))) := by
+  rw [sectionsEquiv, Equiv.trans_apply, Equiv.trans_apply, Adjunction.homEquiv_unit,
+    Adjunction.homEquiv_unit]
+  rfl
+
+lemma sectionsEquiv_naturality (I : Sheaf X.smallEtaleTopology A) {V V' : X.Etale}
+    (f : V' ⟶ V) (φ : (freeSheaf Free).obj V ⟶ I) :
+    sectionsEquiv Free adj I V' ((freeSheaf Free).map f ≫ φ) =
+      I.obj.map f.op (sectionsEquiv Free adj I V φ) := by
+  simp only [sectionsEquiv, Equiv.trans_apply]
+  erw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_left]
+  exact (uliftYonedaEquiv_naturality _ f.op).symm
+
+include hsub in
+lemma sectionsEquiv_add (I : Sheaf X.smallEtaleTopology A) (V : X.Etale)
+    (φ ψ : (freeSheaf Free).obj V ⟶ I) :
+    sectionsEquiv Free adj I V (φ + ψ) =
+      sectionsEquiv Free adj I V φ + sectionsEquiv Free adj I V ψ := by
+  rw [sectionsEquiv_apply, sectionsEquiv_apply, sectionsEquiv_apply]
+  rw [← add_apply_of_sub hsub]
+  congr 1
+  rw [NatTrans.comp_app, NatTrans.comp_app, NatTrans.comp_app, ← Preadditive.comp_add]
+  rfl
+
+/-- `sectionsEquiv` as an additive equivalence. -/
+noncomputable def sectionsAddEquiv (I : Sheaf X.smallEtaleTopology A) (V : X.Etale) :
+    ((freeSheaf Free).obj V ⟶ I) ≃+ ToType (I.obj.obj (op V)) :=
+  { sectionsEquiv Free adj I V with map_add' := sectionsEquiv_add Free hsub adj I V }
+
+lemma sectionsEquiv_d (I : Sheaf X.smallEtaleTopology A) (p : ℕ)
+    (φ : (freeSheaf Free).obj (U.simplicial _⦋p⦌) ⟶ I) :
+    sectionsAddEquiv Free hsub adj I (U.simplicial _⦋p + 1⦌)
+        ((U.freeSheafComplex Free).d (p + 1) p ≫ φ) =
+      ((AlgebraicTopology.alternatingCofaceMapComplex A).obj
+        (U.simplicial.rightOp ⋙ I.obj)).d p (p + 1)
+          (sectionsAddEquiv Free hsub adj I (U.simplicial _⦋p⦌) φ) := by
+  rw [AlgebraicTopology.alternatingFaceMapComplex_obj_d,
+    AlgebraicTopology.AlternatingFaceMapComplex.objD, Preadditive.sum_comp]
+  simp only [Preadditive.zsmul_comp, map_sum, map_zsmul]
+  have hC : ((AlgebraicTopology.alternatingCofaceMapComplex A).obj
+      (U.simplicial.rightOp ⋙ I.obj)).d p (p + 1) =
+        AlgebraicTopology.AlternatingCofaceMapComplex.objD (U.simplicial.rightOp ⋙ I.obj) p := by
+    simp [AlgebraicTopology.alternatingCofaceMapComplex,
+      AlgebraicTopology.AlternatingCofaceMapComplex.obj]
+  rw [hC, AlgebraicTopology.AlternatingCofaceMapComplex.objD]
+  change _ = evalAddHom hsub _ (∑ i : Fin (p + 2), _)
+  simp only [map_sum, map_zsmul]
+  refine Finset.sum_congr rfl fun i _ ↦ ?_
+  congr 1
+  exact sectionsEquiv_naturality Free adj I (U.simplicial.δ i) φ
+
+include hsub hfin adj in
+/-- For an injective sheaf `I`, the complex of sections `I(U_•)` is a resolution of `I(X)`. -/
+theorem injective_section_cohomology
+    (hexact : ∀ S : ShortComplex A, (∀ x₂ : ToType S.X₂, S.g x₂ = 0 → ∃ x₁, S.f x₁ = x₂) →
+      S.Exact)
+    (I : Sheaf X.smallEtaleTopology A) [Injective I] :
+    Function.Injective (I.obj.map (terminal.from (U.simplicial.obj (op ⦋0⦌))).op) ∧
+      (∀ s : ToType (I.obj.obj (op (U.simplicial.obj (op ⦋0⦌)))),
+        ((AlgebraicTopology.alternatingCofaceMapComplex A).obj
+          (U.simplicial.rightOp ⋙ I.obj)).d 0 1 s = 0 ↔
+            s ∈ Set.range (I.obj.map (terminal.from (U.simplicial.obj (op ⦋0⦌))).op)) ∧
+      ∀ p : ℕ, 0 < p → IsZero
+        (((AlgebraicTopology.alternatingCofaceMapComplex A).obj
+          (U.simplicial.rightOp ⋙ I.obj)).homology p) := by
+  have := U.epi_freeSheaf_map_augmentation Free
+  let e := fun V ↦ sectionsAddEquiv Free hsub adj I V
+  have key : ∀ φ : (freeSheaf Free).obj (⊤_ X.Etale) ⟶ I,
+      I.obj.map (terminal.from (U.simplicial.obj (op ⦋0⦌))).op (e _ φ) =
+        e _ ((freeSheaf Free).map (terminal.from (U.simplicial.obj (op ⦋0⦌))) ≫ φ) :=
+    fun φ ↦ (sectionsEquiv_naturality Free adj I _ φ).symm
+  refine ⟨?_, ?_, ?_⟩
+  · intro s t h
+    obtain ⟨φ, rfl⟩ := (e _).surjective s
+    obtain ⟨ψ, rfl⟩ := (e _).surjective t
+    rw [key, key] at h
+    rw [(cancel_epi _).1 ((e _).injective h)]
+  · intro s
+    obtain ⟨φ, rfl⟩ := (e _).surjective s
+    have hex := U.freeSheafComplex_exact_zero Free hsub hfin
+    constructor
+    · intro hs
+      have h1 : (U.freeSheafComplex Free).d 1 0 ≫ φ = 0 := by
+        apply (e _).injective
+        rw [map_zero]
+        exact (sectionsEquiv_d U Free hsub adj I 0 φ).trans hs
+      refine ⟨e _ (hex.descToInjective φ h1), ?_⟩
+      rw [key]
+      congr 1
+      exact hex.comp_descToInjective φ h1
+    · rintro ⟨t, ht⟩
+      obtain ⟨ψ, rfl⟩ := (e _).surjective t
+      rw [key] at ht
+      obtain rfl := (e _).injective ht
+      rw [← sectionsEquiv_d U Free hsub adj I 0, ← Category.assoc,
+        U.freeSheafComplex_d_comp_augmentation Free, zero_comp, map_zero]
+  · intro p hp
+    obtain ⟨m, rfl⟩ : ∃ m, p = m + 1 := ⟨p - 1, by omega⟩
+    refine HomologicalComplex.ExactAt.isZero_homology ?_
+    rw [HomologicalComplex.exactAt_iff' _ m (m + 1) (m + 2) (by simp) (by simp)]
+    apply hexact
+    intro s hs
+    obtain ⟨φ, rfl⟩ := (e _).surjective s
+    have h1 : (U.freeSheafComplex Free).d (m + 2) (m + 1) ≫ φ = 0 := by
+      apply (e _).injective
+      rw [map_zero]
+      exact (sectionsEquiv_d U Free hsub adj I (m + 1) φ).trans hs
+    have hL := U.freeSheafComplex_exactAt Free hsub hfin m
+    rw [HomologicalComplex.exactAt_iff' _ (m + 2) (m + 1) m (by simp) (by simp)] at hL
+    refine ⟨e _ (hL.descToInjective φ h1), ?_⟩
+    refine (sectionsEquiv_d U Free hsub adj I m _).symm.trans ?_
+    congr 1
+    exact hL.comp_descToInjective φ h1
+
+include hsub hfin in
+/-- The augmented free complex of a split étale hypercover is exact after sheafification. -/
+theorem quasiIso_augmentation :
+    QuasiIso (AlgebraicTopology.AlternatingFaceMapComplex.ε.app
+      ((SimplicialObject.Augmented.whiskeringObj X.Etale _ (freeSheaf Free)).obj
+        (U.simplicial.augmentOfIsTerminal (terminalIsTerminal (C := X.Etale))))) := by
+  refine ⟨fun n ↦ ?_⟩
+  cases n with
+  | zero =>
+    rw [ChainComplex.quasiIsoAt₀_iff, ShortComplex.quasiIso_iff_of_zeros']
+    · refine ⟨?_, ?_⟩
+      · refine (ShortComplex.exact_iff_of_iso ?_).1 (U.freeSheafComplex_exact_zero Free hsub hfin)
+        exact ShortComplex.isoMk (Iso.refl _) (Iso.refl _) (Iso.refl _) (by simp) (by simp)
+      · have := U.epi_freeSheaf_map_augmentation Free
+        simpa using this
+    all_goals simp
+  | succ n =>
+    rw [quasiIsoAt_iff_exactAt' _ _ (ChainComplex.exactAt_succ_single_obj _ _)]
+    exact U.freeSheafComplex_exactAt Free hsub hfin n
+
+end Sections
 
 end Free
 

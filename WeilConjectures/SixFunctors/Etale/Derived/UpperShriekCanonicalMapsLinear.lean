@@ -168,6 +168,33 @@ noncomputable def rightDerivedLowerStarLinearCounit
   inv (((rightDerivedLowerStarProjectionMap A f).app ω).app N) ≫
     ((derivedTensor A Y).map t).app N ≫ (derivedTensorLeftUnitor A Y N).hom
 
+/-- The inverse projection formula of `Rf_*`, through `Rf_! ≅ Rf_*`. -/
+lemma projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar_comp_inv
+    (ω : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    ((projectionMap A f).app ω).app N ≫
+        (rightDerivedLowerShriekIsoRightDerivedLowerStar A f).hom.app
+          (((derivedTensor A X).obj ω).obj ((L((f)^*[A])).obj N)) ≫
+        inv (((rightDerivedLowerStarProjectionMap A f).app ω).app N) =
+      ((derivedTensor A Y).map ((rightDerivedLowerShriekIsoRightDerivedLowerStar A f).hom.app
+          ω)).app N := by
+  rw [reassoc_of% (projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar f ω N),
+    IsIso.hom_inv_id, Category.comp_id]
+
+/-- The linear counits of `Rf_!` and `Rf_*` correspond under `Rf_! ≅ Rf_*`. -/
+lemma rightDerivedLowerShriekIsoRightDerivedLowerStar_hom_app_comp_linearCounit
+    (ω : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (t : (R((f)_*[A])).obj ω ⟶ 𝟙_ _) (N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    (rightDerivedLowerShriekIsoRightDerivedLowerStar A f).hom.app
+        (((derivedTensor A X).obj ω).obj ((L((f)^*[A])).obj N)) ≫
+      rightDerivedLowerStarLinearCounit f ω t N =
+    rightDerivedLowerShriekLinearCounit f ω
+      ((rightDerivedLowerShriekIsoRightDerivedLowerStar A f).hom.app ω ≫ t) N := by
+  rw [← cancel_epi (((projectionMap A f).app ω).app N), rightDerivedLowerShriekLinearCounit,
+    IsIso.hom_inv_id_assoc, rightDerivedLowerStarLinearCounit,
+    reassoc_of% (projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar_comp_inv f ω N),
+    Functor.map_comp, NatTrans.comp_app, Category.assoc]
+
 /-- An adjunction `Rf_* ⊣ (N ↦ ω ⊗ᴸ Lf^* N)` of a proper morphism with the linear counit
 attached to `t : Rf_* ω ⟶ Λ_Y` is, through `Rf_! ≅ Rf_*`, an adjunction
 `Rf_! ⊣ (N ↦ ω ⊗ᴸ Lf^* N)` with the linear counit attached to `Rf_! ω ≅ Rf_* ω ⟶ Λ_Y`. -/
@@ -177,7 +204,11 @@ theorem exists_rightDerivedLowerShriek_adjunction_of_rightDerivedLowerStar
     (hadj : ∀ N, adj.counit.app N = rightDerivedLowerStarLinearCounit f ω t N) :
     ∃ (t' : (R(f)_![A]).obj ω ⟶ 𝟙_ _) (adj' : R(f)_![A] ⊣ L((f)^*[A]) ⋙ (derivedTensor A X).obj ω),
       ∀ N, adj'.counit.app N = rightDerivedLowerShriekLinearCounit f ω t' N := by
-  sorry
+  refine ⟨(rightDerivedLowerShriekIsoRightDerivedLowerStar A f).hom.app ω ≫ t,
+    adj.ofNatIsoLeft (rightDerivedLowerShriekIsoRightDerivedLowerStar A f).symm, fun N ↦ ?_⟩
+  rw [Adjunction.ofNatIsoLeft_counit, NatTrans.comp_app, Functor.whiskerLeft_app, Iso.symm_inv,
+    hadj]
+  exact rightDerivedLowerShriekIsoRightDerivedLowerStar_hom_app_comp_linearCounit f ω t N
 
 end Proper
 

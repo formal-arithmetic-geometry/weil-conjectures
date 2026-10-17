@@ -393,44 +393,48 @@ lemma exists_iso_forget_restrictSupportedClass
           ((R(i₂)_![ModuleCat.{u + 1} Λ]).map (supportedTranspose Λ i₂ β) ≫
             (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i₂).counit.app L₂) ≫
           τ.hom := by
-  set A := ModuleCat.{u + 1} Λ
   set u₂ := supportedRestrictionMap Λ i₂
-  set v := (leftDerivedUpperStarConstantComplexIso Λ e).inv ≫ (L((e)^*[A])).map u₂
-  have hsupp : IsSupported Λ b ((L((e)^*[A])).obj ((R(i₂)_![A]).obj (constantComplex Λ Z₂))) :=
+  set v := (leftDerivedUpperStarConstantComplexIso Λ e).inv ≫
+    (L((e)^*[ModuleCat.{u + 1} Λ])).map u₂
+  have hsupp : IsSupported Λ b ((L((e)^*[ModuleCat.{u + 1} Λ])).obj
+      ((R(i₂)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ Z₂))) :=
     isZero_leftDerivedUpperStar_openComplement_obj Λ e i₂ b g hg _
   have hub := isIso_leftDerivedUpperStar_map_supportedRestrictionMap Λ b
-  have hv : IsIso ((L((b)^*[A])).map v) := by
+  have hv : IsIso ((L((b)^*[ModuleCat.{u + 1} Λ])).map v) := by
     have := isIso_leftDerivedUpperStar_map_supportedRestrictionMap Λ i₂
-    have h₂ : IsIso ((L((i₂)^*[A]) ⋙ L((g)^*[A])).map u₂) :=
-      inferInstanceAs (IsIso ((L((g)^*[A])).map ((L((i₂)^*[A])).map u₂)))
-    have h₁ : IsIso ((L((e)^*[A]) ⋙ L((b)^*[A])).map u₂) :=
-      (NatIso.isIso_map_iff ((leftDerivedUpperStarComp A b e (g ≫ i₂) hg.w).symm ≪≫
-        leftDerivedUpperStarComp A g i₂) u₂).2 h₂
-    have : IsIso ((L((b)^*[A])).map ((L((e)^*[A])).map u₂)) := h₁
+    have h₂ : IsIso ((L((i₂)^*[ModuleCat.{u + 1} Λ]) ⋙ L((g)^*[ModuleCat.{u + 1} Λ])).map u₂) :=
+      inferInstanceAs (IsIso ((L((g)^*[ModuleCat.{u + 1} Λ])).map
+        ((L((i₂)^*[ModuleCat.{u + 1} Λ])).map u₂)))
+    have h₁ : IsIso ((L((e)^*[ModuleCat.{u + 1} Λ]) ⋙ L((b)^*[ModuleCat.{u + 1} Λ])).map u₂) :=
+      (NatIso.isIso_map_iff
+        ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) b e (g ≫ i₂) hg.w).symm ≪≫
+        leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) g i₂) u₂).2 h₂
+    have : IsIso ((L((b)^*[ModuleCat.{u + 1} Λ])).map
+        ((L((e)^*[ModuleCat.{u + 1} Λ])).map u₂)) := h₁
     simp only [v, Functor.map_comp]
     infer_instance
   obtain ⟨σ, hσ⟩ := exists_iso_comp_eq Λ b (isSupported_rightDerivedLowerShriek Λ b _) hsupp
     (supportedRestrictionMap Λ b) v hub hv
   refine ⟨σ, ?_⟩
-  have hψ : supportedRestriction A e i₂ b g hg L₂ L₂' τ ≫
-      (rightDerivedUpperShriekAdjunction A b).counit.app L₂' =
-        (L((e)^*[A])).map ((rightDerivedUpperShriekAdjunction A i₂).counit.app L₂) ≫ τ.hom :=
-    (existsUnique_supportedRestriction A e i₂ b g hg L₂ L₂' τ).exists.choose_spec
-  have hβ' : u₂ ≫ (R(i₂)_![A]).map (supportedTranspose Λ i₂ β) = β :=
+  have hψ : supportedRestriction (ModuleCat.{u + 1} Λ) e i₂ b g hg L₂ L₂' τ ≫
+      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) b).counit.app L₂' =
+        (L((e)^*[ModuleCat.{u + 1} Λ])).map
+          ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i₂).counit.app L₂) ≫ τ.hom :=
+    (existsUnique_supportedRestriction (ModuleCat.{u + 1} Λ) e i₂ b g hg L₂ L₂' τ).exists
+      |>.choose_spec
+  have hβ' : u₂ ≫ (R(i₂)_![ModuleCat.{u + 1} Λ]).map (supportedTranspose Λ i₂ β) = β :=
     supportedRestrictionMap_comp_map_supportedTranspose Λ i₂ β
-  have key : (R(b)_![A]).map (supportedTranspose Λ b
-      (restrictSupportedClass A e i₂ b g hg (leftDerivedUpperStarConstantComplexIso Λ e).inv τ
-        β)) =
-      σ.hom ≫ (L((e)^*[A])).map ((R(i₂)_![A]).map (supportedTranspose Λ i₂ β)) ≫
-        supportedRestriction A e i₂ b g hg L₂ L₂' τ := by
+  have key : (R(b)_![ModuleCat.{u + 1} Λ]).map (supportedTranspose Λ b
+      (restrictSupportedClass (ModuleCat.{u + 1} Λ) e i₂ b g hg
+        (leftDerivedUpperStarConstantComplexIso Λ e).inv τ β)) =
+      σ.hom ≫ (L((e)^*[ModuleCat.{u + 1} Λ])).map
+        ((R(i₂)_![ModuleCat.{u + 1} Λ]).map (supportedTranspose Λ i₂ β)) ≫
+        supportedRestriction (ModuleCat.{u + 1} Λ) e i₂ b g hg L₂ L₂' τ := by
     apply (bijective_supportedRestrictionMap_comp Λ b _).1
     dsimp only
     rw [supportedRestrictionMap_comp_map_supportedTranspose, ← Category.assoc, hσ]
     simp only [v, restrictSupportedClass, Category.assoc, ← Functor.map_comp_assoc, hβ']
-  rw [key, Category.assoc, Category.assoc]
-  erw [hψ]
-  simp only [Functor.map_comp, Category.assoc]
-  rfl
+  rw [key, Category.assoc, Category.assoc, hψ, Functor.map_comp, Category.assoc]
 
 end Restriction
 
