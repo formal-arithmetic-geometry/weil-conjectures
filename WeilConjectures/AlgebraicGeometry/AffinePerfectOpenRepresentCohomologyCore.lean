@@ -62,8 +62,6 @@ private theorem chain_augmentation_compatibility
   simp [koszulOpenDiagonal, Finsupp.linearCombination_single,
     ← pow_add, show b - a + (a + 1) = b + 1 by omega]
 
--- The fixed interface retains E, although these structural facts are independent of E.
-set_option linter.unusedVariables false in
 /-- Intermediate finite Koszul structural facts; source Tags 08CX and 08DC.
 (blueprint: lem-sc-affine-perfect-open-represent-cohomology-core) -/
 theorem affine_perfect_open_represent_cohomology_core
@@ -73,8 +71,7 @@ theorem affine_perfect_open_represent_cohomology_core
     [∀ V : (Spec (.of A)).Opens, HasDerivedCategory.{wMain}
       (SheafOfModules.{uMain} ((moduleRings (Spec (.of A)).toRingedSpace).over V))]
     [HasDerivedCategory.{wMain}
-      (SheafOfModules.{uMain} (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))]
-    (E : schemeDerivedQCohCategory (Spec (.of A))) :
+      (SheafOfModules.{uMain} (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))] :
     (∀ e : ℕ, ∃ δ : koszulOpenKoszulObject A r f e ⟶
       (koszulOpenObject A r f e)⟦(1 : ℤ)⟧,
       Triangle.mk (koszulOpenUnit A r f e) (koszulOpenKoszulUnit A r f e) δ ∈

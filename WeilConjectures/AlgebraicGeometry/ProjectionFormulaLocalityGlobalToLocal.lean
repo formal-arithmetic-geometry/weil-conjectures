@@ -11,6 +11,12 @@ public import WeilConjectures.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+
+/-! # Projection formula locality: global to local
+
+If the projection-formula map is an isomorphism, it stays an isomorphism after restriction
+to every open (Stacks Project, Lemma 36.22.1, Tag 08EU). -/
+
 @[expose] public section
 universe u w v
 open CategoryTheory CategoryTheory.MonoidalCategory AlgebraicGeometry

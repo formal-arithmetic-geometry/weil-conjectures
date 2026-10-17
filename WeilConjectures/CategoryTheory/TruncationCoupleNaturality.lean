@@ -107,10 +107,10 @@ private lemma lift_naturality
     t ≫ (Localization.fac H hH L).hom.app N) (τD.naturality c)
   simpa [τD, Localization.liftNatTrans_app, Localization.fac, Category.assoc] using h.symm
 
+omit [IsGrothendieckAbelian.{v} A] in
 private lemma trunc_inverts (q : ℤ) :
     (HomologicalComplex.quasiIso A (ComplexShape.up ℤ)).IsInvertedBy
       ((ComplexShape.embeddingUpIntLE q).truncLEFunctor A ⋙ DerivedCategory.Q) := by
-  have _ := (inferInstance : IsGrothendieckAbelian.{v} A)
   intro K N s hs
   have : QuasiIso s := hs
   apply (DerivedCategory.isIso_Q_map_iff_quasiIso A _).2
@@ -124,6 +124,7 @@ private noncomputable def truncMap {K N : CochainComplex.Plus A}
     (Localization.lift _ (trunc_inverts q) DerivedCategory.Q).map c ≫
       (Localization.fac _ (trunc_inverts q) DerivedCategory.Q).hom.app N.obj
 
+omit [IsGrothendieckAbelian.{v} A] in
 private lemma single_map_eq {K N : CochainComplex.Plus A}
     (c : DerivedCategory.Q.obj K.obj ⟶ DerivedCategory.Q.obj N.obj) (q : ℤ)
     (hH : (HomologicalComplex.quasiIso A (ComplexShape.up ℤ)).IsInvertedBy
@@ -133,7 +134,6 @@ private lemma single_map_eq {K N : CochainComplex.Plus A}
         (Localization.lift _ hH DerivedCategory.Q).map c ≫
           (Localization.fac _ hH DerivedCategory.Q).hom.app N.obj =
       (DerivedCategory.singleFunctor A q).map (homologyMap c q) := by
-  have _ := (inferInstance : IsGrothendieckAbelian.{v} A)
   let e : DerivedCategory.Q ⋙ (DerivedCategory.homologyFunctor A q ⋙
       DerivedCategory.singleFunctor A q) ≅
       ((HomologicalComplex.homologyFunctor A (ComplexShape.up ℤ) q ⋙
@@ -178,11 +178,11 @@ private noncomputable def triangleMap {K N : CochainComplex.Plus A}
       comm₂ := squares.2.1
       comm₃ := squares.2.2 }
 
+omit [IsGrothendieckAbelian.{v} A] in
 private lemma truncMap_comp_inclusion {K N : CochainComplex.Plus A}
     (c : DerivedCategory.Q.obj K.obj ⟶ DerivedCategory.Q.obj N.obj) (q : ℤ) :
     truncMap c q ≫ DerivedCategory.Q.map (N.obj.ιTruncLE q) =
       DerivedCategory.Q.map (K.obj.ιTruncLE q) ≫ c := by
-  have _ := (inferInstance : IsGrothendieckAbelian.{v} A)
   let τ := Functor.whiskerRight ((ComplexShape.embeddingUpIntLE q).ιTruncLENatTrans A)
     DerivedCategory.Q
   have h := lift_naturality (HomologicalComplex.quasiIso A (ComplexShape.up ℤ))
@@ -203,6 +203,7 @@ private noncomputable def bridgeMap (L M : CochainComplex.Plus A)
     (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B r).map a ≫
       (bridgeIso F M r).hom
 
+omit [IsGrothendieckAbelian.{v} B] in
 private lemma abutment_aux (L M : CochainComplex.Plus A)
     {X Y : DerivedCategory A} (a : DerivedCategory.Q.obj L.obj ⟶
       DerivedCategory.Q.obj M.obj) (iL : DerivedCategory.Q.obj L.obj ⟶ X)
@@ -218,12 +219,12 @@ private lemma abutment_aux (L M : CochainComplex.Plus A)
         (bridgeIso F L n).inv ≫
         (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B n).map iL ≫
         (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B n).map c := by
-  have _ := (inferInstance : IsGrothendieckAbelian.{v} B)
   subst r
   simp only [bridgeMap, eqToHom_refl, Category.id_comp, Category.assoc,
     Iso.hom_inv_id_assoc]
   rw [← Functor.map_comp, ← Functor.map_comp, h]
 
+omit [IsGrothendieckAbelian.{v} B] in
 private lemma bridge_square (L M L' M' : CochainComplex.Plus A)
     (a : DerivedCategory.Q.obj L.obj ⟶ DerivedCategory.Q.obj M.obj)
     (b : DerivedCategory.Q.obj L'.obj ⟶ DerivedCategory.Q.obj M'.obj)
@@ -237,12 +238,12 @@ private lemma bridge_square (L M L' M' : CochainComplex.Plus A)
         eqToHom (congrArg (fun t ↦ F.rightDerivedCohomologyWithResolution L'
           (CochainComplex.grothendieckKInjectiveResolutionChoice L'.obj) t) hrs) ≫
         bridgeMap F L' M' b s := by
-  have _ := (inferInstance : IsGrothendieckAbelian.{v} B)
   subst s
   simp only [bridgeMap, eqToHom_refl, Category.comp_id, Category.id_comp,
     Category.assoc, Iso.hom_inv_id_assoc]
   rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc, h]
 
+omit [IsGrothendieckAbelian.{v} A] in
 private lemma truncMap_transport {K N : CochainComplex.Plus A}
     (c : DerivedCategory.Q.obj K.obj ⟶ DerivedCategory.Q.obj N.obj)
     (q q' : ℤ) (h : q = q') :
@@ -250,10 +251,10 @@ private lemma truncMap_transport {K N : CochainComplex.Plus A}
         truncMap c q' =
       truncMap c q ≫
         DerivedCategory.Q.map (eqToHom (congrArg (fun r ↦ N.obj.truncLE r) h)) := by
-  have _ := (inferInstance : IsGrothendieckAbelian.{v} A)
   subst q'
   simp only [eqToHom_refl, Functor.map_id, Category.id_comp, Category.comp_id]
 
+omit [IsGrothendieckAbelian.{v} A] in
 private lemma alpha_square {K N : CochainComplex.Plus A}
     (c : DerivedCategory.Q.obj K.obj ⟶ DerivedCategory.Q.obj N.obj) (q : ℤ) :
     truncMap c q ≫ DerivedCategory.Q.map
@@ -263,7 +264,6 @@ private lemma alpha_square {K N : CochainComplex.Plus A}
         (eqToHom (congrArg (fun r ↦ K.obj.truncLE r)
           (by omega : q = (q + 1) - 1)) ≫ transition K (q + 1)) ≫
         truncMap c (q + 1) := by
-  have _ := (inferInstance : IsGrothendieckAbelian.{v} A)
   have h := (triangleMap c (q + 1)).comm₁
   change DerivedCategory.Q.map (transition K (q + 1)) ≫ truncMap c (q + 1) =
     truncMap c ((q + 1) - 1) ≫ DerivedCategory.Q.map (transition N (q + 1)) at h
@@ -271,6 +271,7 @@ private lemma alpha_square {K N : CochainComplex.Plus A}
   rw [← Category.assoc, ← truncMap_transport c q ((q + 1) - 1) (by omega),
     Category.assoc, ← h]
 
+omit [IsGrothendieckAbelian.{v} B] in
 private lemma boundary_aux (L M L' M' : CochainComplex.Plus A)
     (a : DerivedCategory.Q.obj L.obj ⟶ DerivedCategory.Q.obj M.obj)
     (b : DerivedCategory.Q.obj L'.obj ⟶ DerivedCategory.Q.obj M'.obj) (n m s : ℤ)
@@ -292,7 +293,6 @@ private lemma boundary_aux (L M L' M' : CochainComplex.Plus A)
         eqToHom (congrArg (fun t ↦ F.rightDerivedCohomologyWithResolution L'
           (CochainComplex.grothendieckKInjectiveResolutionChoice L'.obj) t) hms) ≫
         bridgeMap F L' M' b s := by
-  have _ := (inferInstance : IsGrothendieckAbelian.{v} B)
   subst s
   simp only [bridgeMap, eqToHom_refl, Category.id_comp, Category.comp_id,
     Category.assoc, Iso.hom_inv_id_assoc]
@@ -313,6 +313,7 @@ private noncomputable def eMap {K N : CochainComplex.Plus A}
       ((DerivedCategory.singleFunctor A q).map (homologyMap c q)) ≫
         (bridgeIso F (cohomologyComplex N q) (p + q)).hom
 
+omit [IsGrothendieckAbelian.{v} B] in
 /-- Naturality of the raw maps, the canonical abutment inclusion and the first
 shift comparison. This concerns two fixed complexes and a single derived morphism;
 no exactness, lower bound, choice of representatives, or invertibility of abutment
@@ -354,7 +355,6 @@ theorem raw_naturality (K N : CochainComplex.Plus A)
         (DerivedCategory.singleFunctor A 0 ⋙ F.rightDerivedFunctor ⋙
           DerivedCategory.homologyFunctor B p).map (homologyMap c q)) := by
   -- Retain the original Grothendieck hypothesis on B in the public interface.
-  have _ := (inferInstance : IsGrothendieckAbelian.{v} B)
   refine ⟨dMap F c, eMap F c, ?_, ?_, ?_, ?_, ?_⟩
   · intro p q
     simpa only [dMap, alpha, bridgeMap, D, Functor.comp_map, Category.assoc] using

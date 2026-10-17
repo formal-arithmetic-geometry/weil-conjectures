@@ -12,6 +12,12 @@ public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
+
+/-! # Projection formula locality: local to global
+
+If the projection-formula map is an isomorphism after restriction to every member of an open
+cover, it is an isomorphism (Stacks Project, Lemma 36.22.1, Tag 08EU). -/
+
 @[expose] public section
 universe u w v
 open CategoryTheory CategoryTheory.MonoidalCategory AlgebraicGeometry

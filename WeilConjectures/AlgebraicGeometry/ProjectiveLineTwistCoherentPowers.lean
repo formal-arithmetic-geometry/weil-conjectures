@@ -201,13 +201,7 @@ theorem projectiveLine_twist_coherent_powers (k : Type u) [Field k]
         Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) n ⊗
           Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) m ⟶
             Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (n + m))
-    (hiso : ∀ n m : ℤ, IsIso (μ n m))
-    (hmul : (∀ (n m : ℤ) (U : (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)).Opens)
-        (s : Γ(Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) n, U))
-        (t : Γ(Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) m, U)) (x : U),
-        (((μ n m).app U (tmulSection s t)).1 x :
-            Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) =
-          (s.1 x : Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) * (t.1 x))) :
+    (hiso : ∀ n m : ℤ, IsIso (μ n m)) :
     (∃ (ePos : ∀ a : ℕ,
           (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1).tensorPow a ≅
             Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (a : ℤ))
@@ -256,7 +250,6 @@ theorem projectiveLine_twist_coherent_powers (k : Type u) [Field k]
               dualEvaluation (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1) ▷
                 (dual (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1)).tensorPow a ≫
               (λ_ _).hom ≫ (eNeg a).hom)) := by
-  have _ := hmul
   have := twistOne_invertible k
   obtain ⟨ePos, eNeg, h₀, hsame, hpos, hneg⟩ := coherentPowers
     (X := Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k))

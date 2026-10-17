@@ -32,7 +32,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry
 
-namespace KoszulRestrictionConstruction
+section
 
 open ExteriorAlgebra
 
@@ -193,7 +193,7 @@ private theorem tensorKoszul_d_zero (A : Type u) [CommRing A]
       ((ExteriorAlgebra.koszulComplex A r (fun k ↦ (g k : A))).d i j) = 0
     rw [hz, Functor.map_zero]
 
-end KoszulRestrictionConstruction
+end
 
 /-- An augmented comparison of quotient resolutions carries compatible Koszul test
 cycles to each other. This is a chain-level statement: it mentions neither Tor
@@ -258,7 +258,7 @@ theorem exists_koszul_restriction_test_cycles
   let TA := (tensorRight (ModuleCat.of A (A ⧸ I))).mapHomologicalComplex (.down ℕ)
   let TB := (tensorRight (ModuleCat.of B (B ⧸ J))).mapHomologicalComplex (.down ℕ)
   obtain ⟨aA, haA⟩ := koszul_augmentation_lift_exists A I n g P
-  have hdata := KoszulRestrictionConstruction.normalized_koszulBaseChangeIso
+  have hdata := normalized_koszulBaseChangeIso
     A B n (fun j ↦ (g j : A))
   have hgen : algebraMap A B ∘ (fun j ↦ (g j : A)) = (fun j ↦ (g' j : B)) := by
     funext j
@@ -317,9 +317,9 @@ theorem exists_koszul_restriction_test_cycles
   let yB : (TB.obj KB).X n :=
     exteriorPower.ιMulti B n (fun j ↦ Finsupp.single j 1) ⊗ₜ[B] (1 : B ⧸ J)
   let cA := (TA.obj KA).iCyclesIso n ((ComplexShape.down ℕ).next n) rfl
-    (KoszulRestrictionConstruction.tensorKoszul_d_zero A I n g _ _)
+    (tensorKoszul_d_zero A I n g _ _)
   let cB := (TB.obj KB).iCyclesIso n ((ComplexShape.down ℕ).next n) rfl
-    (KoszulRestrictionConstruction.tensorKoszul_d_zero B J n g' _ _)
+    (tensorKoszul_d_zero B J n g' _ _)
   let zA := cA.inv yA
   let zB := cB.inv yB
   have hzA : (TA.obj KA).iCycles n zA = yA := by
