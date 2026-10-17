@@ -19,7 +19,10 @@ public import Mathlib.Algebra.Regular.SMul
 
 import WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselRootFiniteEtaleModel
 import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteStrictHenselianAlgebraEtaleSection
-import WeilConjectures.AlgebraicGeometry.StrictHenselizationCompatibility
+import WeilConjectures.AlgebraicGeometry.StrictHenselization
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
+import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
+import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # A section on a punctured root cover over the strict henselization

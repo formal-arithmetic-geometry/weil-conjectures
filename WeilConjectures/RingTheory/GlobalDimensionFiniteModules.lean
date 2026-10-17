@@ -13,6 +13,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.Algebra.Module.ULift
 import WeilConjectures.RingTheory.WellOrderedUnionProjectiveDimension
 import WeilConjectures.RingTheory.CyclicGlobalDimension
+import WeilConjectures.RingTheory.BoundedProjectiveResolutionDimension
 
 /-!
 # Testing global dimension on finite and cyclic modules
@@ -64,7 +65,7 @@ theorem hasGlobalDimensionLE_iff_finite_iff_cyclic (R : Type u) [CommRing R] (n 
     hasGlobalDimensionLE_of_cyclic R n
   have hGF : HasGlobalDimensionLE.{u, max u v} R n → P := by
     intro h M hM
-    exact h M
+    exact (hasGlobalDimensionLE_iff R n).1 h M
   have hFC : P → C := by
     intro h I
     apply h

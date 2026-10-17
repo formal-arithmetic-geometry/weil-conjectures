@@ -119,7 +119,6 @@ field-extension pullback.
 **Form of the statement.** The statement asserts the existence of additive
 isomorphisms of the two stalks with closed-fibre cohomology that make the
 exchange square commute.
-(blueprint: `lemma-weil-pbc-p1-exchange-geometric-stalk`) 
 (blueprint: lemma-weil-pbc-p1-exchange-geometric-stalk)
 -/
 theorem Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine

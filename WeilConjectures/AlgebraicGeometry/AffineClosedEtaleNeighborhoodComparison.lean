@@ -43,7 +43,9 @@ private theorem cohomologyMap_comp_leg {Z T S X : Scheme.{u}} (kk : Z ⟶ T) (ι
             (cohomologyMap ι (((v)^*[AddCommGrpCat.{u + 1}]).obj G) q y))) =
       Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} (kk ≫ ι) v i hs).inv.app G) q
         (cohomologyMap (kk ≫ ι) (((v)^*[AddCommGrpCat.{u + 1}]).obj G) q y) := by
-  rw [cohomologyMap_map, (cohomologyPullbackFunctorial kk ι
+  rw [cohomologyMap_map]
+  dsimp only [Functor.comp_obj]
+  rw [(cohomologyPullbackFunctorial kk ι
     (((v)^*[AddCommGrpCat.{u + 1}]).obj G) q).2.1, ← Sheaf.H.map_comp_apply,
     ← Sheaf.H.map_comp_apply]
   congr 2
@@ -72,6 +74,91 @@ private theorem cohomologyMap_bijective_of_iso {Y W : Scheme.{u}} (k : Y ⟶ W)
       _ = _ := cohomologyMap_map k q ef.hom (Sheaf.H.map ef.inv q x)
   rw [heq]
   exact (hiso (((k)^*[AddCommGrpCat.{u + 1}]).mapIso ef)).comp (h.comp (hiso ef.symm))
+
+/-- The comparison of `Etale.affine_closed_etale_neighborhood_comparison` from a presentation
+of the closed subscheme by a cofiltered system of étale neighbourhoods `Y a` with limit `T`,
+the continuity cocone on `T`, and bijectivity of pullback along `Z ≅ Z' ⟶ T`. -/
+private theorem neighborhood_comparison_of_presentation {X Z Z' T : Scheme.{u}}
+    (i : Z ⟶ X) (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ)
+    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
+    (Y : I → Scheme.{u}) (v : ∀ a, Y a ⟶ X) (w : ∀ {a b : I}, (a ⟶ b) → (Y b ⟶ Y a))
+    (hw : ∀ {a b : I} (f : a ⟶ b), v b = w f ≫ v a) (hev : ∀ a, Etale (v a))
+    (t : T ⟶ X) (ι : ∀ a, T ⟶ Y a) (hι : ∀ a, t = ι a ≫ v a)
+    (hιw : ∀ {a b : I} (f : a ⟶ b), ι b ≫ w f = ι a)
+    (e : Z ≅ Z') (k : Z' ⟶ T) (hi : i = e.hom ≫ k ≫ t)
+    (hk : Function.Bijective (cohomologyMap k (((t)^*[AddCommGrpCat.{u + 1}]).obj G) q))
+    (H : I ⥤ AddCommGrpCat.{u + 1})
+    (eH : ∀ a, H.obj a ≅
+      AddCommGrpCat.of (Sheaf.H (((v a)^*[AddCommGrpCat.{u + 1}]).obj G) q))
+    (hH : ∀ {a b : I} (f : a ⟶ b), H.map f =
+      (eH a).hom ≫
+        AddCommGrpCat.ofHom (cohomologyMap (w f) (((v a)^*[AddCommGrpCat.{u + 1}]).obj G) q) ≫
+        AddCommGrpCat.ofHom (Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} (w f) (v a)
+          (v b) (hw f)).inv.app G) q) ≫ (eH b).inv)
+    (B : Cocone H) (hB_col : IsColimit B)
+    (eB : B.pt ≅ AddCommGrpCat.of (Sheaf.H (((t)^*[AddCommGrpCat.{u + 1}]).obj G) q))
+    (hB : ∀ a, B.ι.app a ≫ eB.hom =
+      (eH a).hom ≫
+        AddCommGrpCat.ofHom (cohomologyMap (ι a) (((v a)^*[AddCommGrpCat.{u + 1}]).obj G) q) ≫
+        AddCommGrpCat.ofHom (Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} (ι a) (v a)
+          t (hι a)).inv.app G) q)) :
+    ∃ (I : Type u) (_ : Preorder I) (_ : IsDirected I (· ≤ ·)) (_ : Nonempty I)
+      (Y : I → Scheme.{u}) (v : ∀ a, Y a ⟶ X) (w : ∀ {a b : I}, (a ⟶ b) → (Y b ⟶ Y a))
+      (hw : ∀ {a b : I} (f : a ⟶ b), v b = w f ≫ v a)
+      (s : ∀ a, Z ⟶ Y a) (hs : ∀ a, i = s a ≫ v a),
+      (∀ a, Etale (v a)) ∧ (∀ {a b : I} (f : a ⟶ b), s b ≫ w f = s a) ∧
+      ∃ (H : I ⥤ AddCommGrpCat.{u + 1})
+        (eH : ∀ a, H.obj a ≅
+          AddCommGrpCat.of (Sheaf.H (((v a)^*[AddCommGrpCat.{u + 1}]).obj G) q)),
+        (∀ {a b : I} (f : a ⟶ b), H.map f =
+          (eH a).hom ≫
+            AddCommGrpCat.ofHom (cohomologyMap (w f) (((v a)^*[AddCommGrpCat.{u + 1}]).obj G) q) ≫
+            AddCommGrpCat.ofHom (Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} (w f) (v a)
+              (v b) (hw f)).inv.app G) q) ≫ (eH b).inv) ∧
+        ∃ (c : Cocone H) (_ : Nonempty (IsColimit c))
+          (e : c.pt ≅ AddCommGrpCat.of (Sheaf.H (((i)^*[AddCommGrpCat.{u + 1}]).obj G) q)),
+          ∀ a, c.ι.app a ≫ e.hom =
+            (eH a).hom ≫
+              AddCommGrpCat.ofHom
+                (cohomologyMap (s a) (((v a)^*[AddCommGrpCat.{u + 1}]).obj G) q) ≫
+              AddCommGrpCat.ofHom (Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} (s a) (v a)
+                i (hs a)).inv.app G) q) := by
+  let kk := e.hom ≫ k
+  have hi' : i = kk ≫ t := by rw [hi, Category.assoc]
+  let s : ∀ a, Z ⟶ Y a := fun a ↦ kk ≫ ι a
+  have hs (a : I) : i = s a ≫ v a := by simp only [hi', hι a, s, Category.assoc]
+  have hiso {W : Scheme.{u}} {F F' : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}}
+      (α : F ≅ F') : Function.Bijective (Sheaf.H.map α.hom q) :=
+    Function.bijective_iff_has_inverse.mpr ⟨Sheaf.H.map α.inv q,
+      fun x ↦ by rw [← Sheaf.H.map_comp_apply, α.hom_inv_id, Sheaf.H.map_id_apply],
+      fun x ↦ by rw [← Sheaf.H.map_comp_apply, α.inv_hom_id, Sheaf.H.map_id_apply]⟩
+  let tG := ((t)^*[AddCommGrpCat.{u + 1}]).obj G
+  have hkk : Function.Bijective (cohomologyMap kk tG q) := by
+    have heq : ⇑(cohomologyMap kk tG q) =
+        ⇑(Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} e.hom k).inv.app tG) q) ∘
+          ⇑(cohomologyMap e.hom (((k)^*[AddCommGrpCat.{u + 1}]).obj tG) q) ∘
+          ⇑(cohomologyMap k tG q) := by
+      funext x
+      simp only [Function.comp_apply]
+      rw [(cohomologyPullbackFunctorial e.hom k tG q).2.1 x, ← Sheaf.H.map_comp_apply,
+        Iso.hom_inv_id_app, Sheaf.H.map_id_apply]
+    rw [heq]
+    exact (hiso ((upperStarComp AddCommGrpCat.{u + 1} e.hom k).app tG).symm).comp
+      ((cohomologyMap_bijective e.hom _ q).comp hk)
+  let φ : Sheaf.H tG q →+ Sheaf.H (((i)^*[AddCommGrpCat.{u + 1}]).obj G) q :=
+    (Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} kk t i hi').inv.app G) q).comp
+      (cohomologyMap kk tG q)
+  have hφ : Function.Bijective φ :=
+    (hiso ((upperStarComp AddCommGrpCat.{u + 1} kk t i hi').app G).symm).comp hkk
+  let E : B.pt ≅ AddCommGrpCat.of (Sheaf.H (((i)^*[AddCommGrpCat.{u + 1}]).obj G) q) :=
+    eB ≪≫ (AddEquiv.ofBijective φ hφ).toAddCommGrpIso
+  refine ⟨I, inferInstance, inferInstance, inferInstance, Y, v, w, hw, s, hs, hev,
+    fun f ↦ by simp only [s, Category.assoc, hιw f], H, eH, hH, B, ⟨hB_col⟩, E, ?_⟩
+  intro a
+  have hE : E.hom = eB.hom ≫ AddCommGrpCat.ofHom φ := rfl
+  rw [hE, ← Category.assoc, hB a]
+  refine AddCommGrpCat.ext fun x ↦ ?_
+  exact cohomologyMap_comp_leg kk (ι a) (v a) t i (hι a) hi' (hs a) G q _
 
 /-- Cohomology on a closed subscheme of an affine scheme is the filtered colimit of
 cohomology on its affine étale neighbourhoods, for a torsion sheaf of modules, with all maps
@@ -135,52 +222,13 @@ theorem Etale.affine_closed_etale_neighborhood_comparison
   obtain ⟨hcol⟩ := Etale.nonempty_isColimit_etale_cohomology_spec_ring_colimit
     R c hc X G v wv t wt q H eH hH B eB hB
   let k := Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk K))
-  let kk := e.hom ≫ k
-  have hi' : i = kk ≫ t := by rw [hi, Category.assoc]
-  let s : ∀ a, Z ⟶ Spec (R.obj a) := fun a ↦ kk ≫ Spec.map (c.ι.app a)
-  have hs (a : I) : i = s a ≫ v a := by simp only [hi', wt a, s, kk, Category.assoc]
-  have hiso {W : Scheme.{u}} {F F' : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}}
-      (α : F ≅ F') : Function.Bijective (Sheaf.H.map α.hom q) :=
-    Function.bijective_iff_has_inverse.mpr ⟨Sheaf.H.map α.inv q,
-      fun x ↦ by rw [← Sheaf.H.map_comp_apply, α.hom_inv_id]; simp,
-      fun x ↦ by rw [← Sheaf.H.map_comp_apply, α.inv_hom_id]; simp⟩
-  let tG := ((t)^*[AddCommGrpCat.{u + 1}]).obj G
-  have hk : Function.Bijective (cohomologyMap k tG q) := by
+  have hk : Function.Bijective (cohomologyMap k (((t)^*[AddCommGrpCat.{u + 1}]).obj G) q) := by
     let F := ((t)^*[ModuleCat.{u + 1} Λ]).obj J
     have hgab := bijective_cohomologyMap_of_henselianRing Λ K F q
     obtain ⟨ef⟩ := pullback_forget_modules_iso Λ t J
     exact cohomologyMap_bijective_of_iso k ef q hgab
-  have hkk : Function.Bijective (cohomologyMap kk tG q) := by
-    have heq : ⇑(cohomologyMap kk tG q) =
-        ⇑(Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} e.hom k).inv.app tG) q) ∘
-          ⇑(cohomologyMap e.hom (((k)^*[AddCommGrpCat.{u + 1}]).obj tG) q) ∘
-          ⇑(cohomologyMap k tG q) := by
-      funext x
-      simp only [Function.comp_apply]
-      rw [(cohomologyPullbackFunctorial e.hom k tG q).2.1 x, ← Sheaf.H.map_comp_apply,
-        Iso.hom_inv_id_app]
-      rw [Sheaf.H.map_id_apply]
-    rw [heq]
-    exact (hiso ((upperStarComp AddCommGrpCat.{u + 1} e.hom k).app tG).symm).comp
-      ((cohomologyMap_bijective e.hom _ q).comp hk)
-  let φ : Sheaf.H tG q →+ Sheaf.H (((i)^*[AddCommGrpCat.{u + 1}]).obj G) q :=
-    (Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} kk t i hi').inv.app G) q).comp
-      (cohomologyMap kk tG q)
-  have hφ : Function.Bijective φ :=
-    (hiso ((upperStarComp AddCommGrpCat.{u + 1} kk t i hi').app G).symm).comp hkk
-  let E : B.pt ≅ AddCommGrpCat.of (Sheaf.H (((i)^*[AddCommGrpCat.{u + 1}]).obj G) q) :=
-    eB ≪≫ (AddEquiv.ofBijective φ hφ).toAddCommGrpIso
-  refine ⟨I, inferInstance, inferInstance, inferInstance, fun a ↦ Spec (R.obj a), v,
-    fun f ↦ Spec.map (R.map f), fun f ↦ wv _ _ f, s, hs, hev, ?_, H, eH,
-    fun f ↦ hH _ _ f, B, ⟨hcol⟩, E, ?_⟩
-  · intro a b f
-    simp only [s, Category.assoc, ← Spec.map_comp, c.w f]
-  · intro a
-    have hE : E.hom = eB.hom ≫ AddCommGrpCat.ofHom φ := rfl
-    rw [hE, ← Category.assoc, hB a]
-    ext x
-    simp only [AddCommGrpCat.hom_comp, AddCommGrpCat.hom_ofHom, AddMonoidHom.coe_comp,
-      Function.comp_apply, φ]
-    exact cohomologyMap_comp_leg kk (Spec.map (c.ι.app a)) (v a) t i (wt a) hi' (hs a) G q _
+  exact neighborhood_comparison_of_presentation i G q (fun a ↦ Spec (R.obj a)) v
+    (fun f ↦ Spec.map (R.map f)) (fun f ↦ wv _ _ f) hev t (fun a ↦ Spec.map (c.ι.app a)) wt
+    (fun f ↦ by rw [← Spec.map_comp, c.w f]) e k hi hk H eH (fun f ↦ hH _ _ f) B hcol eB hB
 
 end AlgebraicGeometry

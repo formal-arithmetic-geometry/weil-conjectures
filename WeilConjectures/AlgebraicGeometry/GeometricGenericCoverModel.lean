@@ -137,8 +137,9 @@ space and have the asserted geometrically irreducible traces on all field fibres
 Their generic traces identify with A_i, giving the generic intersection implication.
 For an empty index type use Tag 054W to make the whole pulled-back total space empty;
 the geometric irreducibility and intersection assertions are then vacuous.
-In Lean the empty-index case is the private lemma above. In the nonempty-index case, the compatible étale model theorem supplies the embedding a
-and its field-base-change identifications. Set C_i = closure (a '' A_i). The
+In Lean the empty-index case is the private lemma above. In the nonempty-index case,
+the compatible étale model theorem supplies the embedding a and its field-base-change
+identifications. Set C_i = closure (a '' A_i). The
 embedding and closedness of A_i prove a⁻¹(C_i) = A_i. Use the closed-family shrinking
 theorem and the existing closed-cover shrinking theorem; intersect their opens.
 Pullback pasting proves the field-fibre assertion on this restricted model, and the

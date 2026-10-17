@@ -196,7 +196,6 @@ holds for the inclusion of a nonempty open subscheme.
 The blueprint states this for a finite abelian group `E`; the proof (the strict henselisation
 of a normal local ring is a normal domain, so the generic fibre of `Spec 𝒪ˢʰ_{Y,ȳ}` is
 irreducible) applies to an arbitrary value `M`.
-(blueprint: `lem-weil-pbc-normal-constant-generic`) 
 (blueprint: lem-weil-pbc-normal-constant-generic)
 -/
 @[stacks 09Z5]
@@ -250,7 +249,6 @@ By Stacks 095N, `F` is a cokernel of a map between finite sums of extensions by 
 along étale maps from affine schemes; these are finitely presentable
 (`AlgebraicGeometry.Etale.isFinitelyPresentable_etaleLowerShriek_constantSheaf`, by Stacks 0738),
 and finitely presentable objects are closed under finite colimits.
-(blueprint: `lem-weil-pbc-constructible-finitely-presented`) 
 (blueprint: lem-weil-pbc-constructible-finitely-presented)
 -/
 @[stacks 09Z4]
@@ -284,7 +282,6 @@ theorem Etale.isFinitelyPresentable_of_isConstructibleSheaf [IsNoetherianRing Λ
 `Λ`-modules `C` on a Noetherian scheme `U` admits a monomorphism
 `C ⟶ ⨁ᵢ (hᵢ)_* Mᵢ` into a finite direct sum of pushforwards of constant sheaves with finitely
 generated values `Mᵢ` along finite morphisms `hᵢ : Vᵢ ⟶ U`, for `Λ` noetherian.
-(blueprint: `lem-weil-pbc-constructible-finite-pushforward-noetherian`) 
 (blueprint: lem-weil-pbc-constructible-finite-pushforward-noetherian)
 -/
 @[stacks 09Z6]
@@ -400,7 +397,6 @@ The blueprint takes `U'` to be a stage `U_λ` of an inverse system `U = lim U_λ
 schemes with affine transition maps; only the stage is used afterwards, so the inverse system
 is not recorded. That the pullback of the embedding is an embedding of `C` is
 `AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar`.
-(blueprint: `lem-weil-pbc-constructible-finite-pushforward-approximation`) 
 (blueprint: lem-weil-pbc-constructible-finite-pushforward-approximation)
 -/
 theorem Etale.exists_isNoetherian_mono_biproduct_lowerStar [IsNoetherianRing Λ] {U : Scheme.{u}}
@@ -424,7 +420,6 @@ theorem Etale.exists_isNoetherian_mono_biproduct_lowerStar [IsNoetherianRing Λ]
 generated values `Mᵢ` along finite and finitely presented morphisms `hᵢ : Vᵢ ⟶ U`, for `Λ`
 noetherian. The blueprint states this for torsion sheaves, over a finite ring `Λ`, where the
 `Mᵢ` are finite.
-(blueprint: `lemma-weil-pbc-constructible-finite-pushforward`) 
 (blueprint: lemma-weil-pbc-constructible-finite-pushforward)
 -/
 @[stacks 09Z7]

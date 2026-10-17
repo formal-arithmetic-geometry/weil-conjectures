@@ -116,7 +116,6 @@ already dies on some `D_μ`, `λ ⟶ μ`. The compatibility with the pullback al
 extension is the naturality `AlgebraicGeometry.Etale.cohomologyMap_map` of the pullback maps.
 The statement holds for arbitrary (not only torsion) abelian sheaves and small filtered
 categories.
-(blueprint: `lemma-weil-pbc-curve-filtered-cohomology`) 
 (blueprint: lemma-weil-pbc-curve-filtered-cohomology)
 -/
 @[stacks 03Q6]
@@ -291,7 +290,6 @@ cohomology sequences (and their pullbacks along a field extension) pass vanishin
 and bijectivity to the middle term, the hypotheses of the assertions being inherited by
 subsheaves and quotients, constructibility for subsheaves since `Λ` is noetherian; for `C₈` one uses
 `H³(X, F₁) = 0`, i.e. `C₁(X, F₁)`.
-(blueprint: `lemma-weil-pbc-eight-curve-devissage`) 
 (blueprint: lemma-weil-pbc-eight-curve-devissage)
 -/
 theorem IsCurve.Assertions.of_shortExact [IsNoetherianRing Λ] {k : Type u} [Field k]
@@ -458,7 +456,6 @@ sheaf of `F` as the filtered colimit of its constructible subsheaves
 (`AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered`), splits a constructible sheaf into
 its primary parts and dévisses an `r`-primary one along `0 → F[r] → F → F/F[r] → 0`
 (`AlgebraicGeometry.IsCurve.Assertions.of_shortExact`).
-(blueprint: `lem-weil-pbc-curve-constructible-reduction`) 
 (blueprint: lem-weil-pbc-curve-constructible-reduction)
 -/
 theorem IsCurve.bijective_cohomologyMap_of_forall_isReduced {k : Type u} [Field k]
@@ -561,7 +558,6 @@ The proof is that of `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_foral
 run for all eight assertions simultaneously: reduction to `C_red`, constructible approximation
 and continuity of cohomology, primary decomposition, and induction on the exponent along
 `0 → F[ℓ] → F → F/F[ℓ] → 0` using `AlgebraicGeometry.IsCurve.Assertions.of_shortExact`.
-(blueprint: `lemma-weil-pbc-curve-constructible-primary-reduction`) 
 (blueprint: lemma-weil-pbc-curve-constructible-primary-reduction)
 -/
 theorem IsCurve.Assertions.of_forall_isReduced [Finite Λ] {k : Type u} [Field k]
@@ -609,7 +605,6 @@ equivalent to those for `j_! j^* F`: the open–closed sequence `0 → j_! j^* F
 has third term
 supported on the zero-dimensional complement `Z` of `U`, whose cohomology is concentrated in
 degree zero and invariant under field extension.
-(blueprint: `lemma-weil-pbc-curve-dense-open-reduction`) 
 (blueprint: lemma-weil-pbc-curve-dense-open-reduction)
 -/
 theorem IsCurve.exists_dense_assertions_iff_lowerShriek [Finite Λ] {k : Type u} [Field k]
@@ -646,7 +641,6 @@ algebraically closed field `k` and `F` a constructible sheaf of `Λ`-modules kil
 `C(C, F) ↔ ∀ a, C(C, j_{a,!}(F|_{U_a}))`. This combines the open–closed sequence
 `0 → j_! j^* F → F → i_* i^* F → 0`, the assertions on the zero-dimensional `Z`, the
 decomposition `j_! j^* F = ⨁_a j_{a,!}(F|_{U_a})` and dévissage.
-(blueprint: `lem-weil-pbc-curve-dense-open-localization`) 
 (blueprint: lem-weil-pbc-curve-dense-open-localization)
 -/
 theorem IsCurve.exists_dense_assertions_iff_forall_lowerShriek [Finite Λ] {k : Type u}
@@ -754,7 +748,6 @@ assertions for `j_! 𝐅_ℓ` on `X` follow from those for `j'_! 𝐅_ℓ` on th
 preserves cohomology, and the normalisation exact sequence
 `AlgebraicGeometry.exists_mono_lowerShriek_constantModSheaf_lowerStar` has a third term whose
 cohomology is concentrated in degree zero and invariant under field extension.
-(blueprint: `lemma-weil-pbc-curve-normalization-constant`) 
 (blueprint: lemma-weil-pbc-curve-normalization-constant)
 -/
 theorem IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite_coefficients {k : Type u}
