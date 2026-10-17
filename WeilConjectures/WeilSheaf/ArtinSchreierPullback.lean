@@ -66,6 +66,16 @@ lemma affineLine.homOfSection_comp_artinSchreierMap (a : Γ(X, ⊤)) :
   · simp [affineLine.homOfSection, affineLine.artinSchreierMap]
   · simp [affineLine.artinSchreierMap, affineLine.homOfSection]
 
+omit [Finite k₀] in
+/-- The composite of a morphism `φ : Y ⟶ X` over `k₀` with the function `a : X ⟶ 𝔸¹` is the
+function `φ^* a`. -/
+lemma affineLine.comp_homOfSection {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
+    (φ : Y ⟶ X) [φ.IsOver (Spec (CommRingCat.of k₀))] (a : Γ(X, ⊤)) :
+    φ ≫ affineLine.homOfSection k₀ a = affineLine.homOfSection k₀ (φ.appTop a) := by
+  rw [affineLine.homOfSection, affineLine.homOfSection, AffineSpace.comp_homOfVector,
+    comp_over]
+  rfl
+
 end HomOfSection
 
 
@@ -147,13 +157,11 @@ noncomputable def WeilSheaf.upperStarArtinSchreierMapImageHom :
         (image (WeilSheaf.artinSchreierIdempotent ψ)) ⟶
       WeilSheaf.adicConstant k₀ l (affineLine k₀) :=
   WeilSheaf.homMkOfFrobeniusStr (affineLine.artinSchreierImageEvalModHom l ψ) (by
-    rw [affineLine.artinSchreierImageEvalModHom_hom, WeilSheaf.frobeniusStr_upperStar,
-      ← cancel_epi ((ProEtale.upperStarComp (WeilCoefficients.{u} l)
-        (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom ĀS).hom.app _)]
+    rw [affineLine.artinSchreierImageEvalModHom_hom, WeilSheaf.frobeniusStr_upperStar]
     simp only [Category.assoc]
-    erw [Iso.hom_inv_id_app_assoc]
-    convert affineLine.artinSchreierImageEval_frobenius ψ using 2
-    all_goals rfl)
+    exact (Iso.eq_inv_comp ((ProEtale.upperStarComp (WeilCoefficients.{u} l)
+      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom ĀS).app _)).2
+      (affineLine.artinSchreierImageEval_frobenius ψ))
 
 instance : IsIso (WeilSheaf.upperStarArtinSchreierMapImageHom ψ) := by
   have : IsIso (affineLine.artinSchreierImageEvalModHom l ψ).hom := by

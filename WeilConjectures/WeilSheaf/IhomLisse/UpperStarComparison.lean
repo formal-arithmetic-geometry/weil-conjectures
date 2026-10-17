@@ -284,7 +284,8 @@ lemma isIso_adicUpperStarIhomComparison_biproduct {n : ℕ} (M : Fin n → AdicS
         Mod.ihomMapAddHom _ _ ((g)^*ᵃ[l].map (∑ i, biproduct.π M i ≫ biproduct.ι M i)) := by
       rw [Functor.map_sum, map_sum]
       rfl
-    rw [h, biproduct.total, Functor.map_id, Mod.ihomMapAddHom_apply, Mod.ihomMap_id]
+    rw [h, biproduct.total, CategoryTheory.Functor.map_id, Mod.ihomMapAddHom_apply,
+      Mod.ihomMap_id]
     rfl
 
 end Comparison
@@ -303,11 +304,26 @@ lemma AdicSheaf.isIso_of_isIso_upperStar {X : Scheme.{u}} {ι : Type*} {W : ι �
       (isZero_cokernel_of_epi ((p i)^*ᵃ[l].map f)).of_iso (PreservesCokernel.iso (p i)^*ᵃ[l] f))
   exact isIso_of_mono_of_epi f
 
-/-- If `a ≫ b ≫ c` is an isomorphism and `a`, `c` are, so is `b`. -/
-private lemma isIso_of_isIso_comp_comp {C : Type*} [Category C] {P Q R S : C} (a : P ⟶ Q)
-    (b : Q ⟶ R) (c : R ⟶ S) [IsIso a] [IsIso c] [IsIso (a ≫ b ≫ c)] : IsIso b := by
+/-- In a commutative square `a ≫ b ≫ c = d ≫ e ≫ f` of which all sides but `b` are
+isomorphisms, so is `b`. -/
+private lemma isIso_of_comp_comp_eq {C : Type*} [Category C] {P Q R S Q' R' : C} (a : P ⟶ Q)
+    (b : Q ⟶ R) (c : R ⟶ S) (d : P ⟶ Q') (e : Q' ⟶ R') (f : R' ⟶ S) [IsIso a] [IsIso c]
+    [IsIso d] [IsIso e] [IsIso f] (h : a ≫ b ≫ c = d ≫ e ≫ f) : IsIso b := by
+  have : IsIso (a ≫ b ≫ c) := by
+    rw [h]
+    infer_instance
   have : IsIso (b ≫ c) := IsIso.of_isIso_comp_left a _
   exact IsIso.of_isIso_comp_right b c
+
+/-- In a commutative square `a ≫ b ≫ c = d ≫ e ≫ f` of which all sides but `d` are
+isomorphisms, so is `d`. -/
+private lemma isIso_of_comp_comp_eq' {C : Type*} [Category C] {P Q R S Q' R' : C} (a : P ⟶ Q)
+    (b : Q ⟶ R) (c : R ⟶ S) (d : P ⟶ Q') (e : Q' ⟶ R') (f : R' ⟶ S) [IsIso a] [IsIso b]
+    [IsIso c] [IsIso e] [IsIso f] (h : a ≫ b ≫ c = d ≫ e ≫ f) : IsIso d := by
+  have : IsIso (d ≫ e ≫ f) := by
+    rw [← h]
+    infer_instance
+  exact IsIso.of_isIso_comp_right d (e ≫ f)
 
 /-- **The pullback of the internal hom out of a lisse sheaf is the internal hom out of the
 pullback**: for `M` lisse the comparison `g^* 𝓗om(M, N) ⟶ 𝓗om(g^* M, g^* N)` is an
@@ -317,10 +333,10 @@ theorem IsAdicLisseSheaf.isIso_adicUpperStarIhomComparison {Y Z : Scheme.{u}} (g
     IsIso (adicUpperStarIhomComparison l g M N) := by
   obtain ⟨R, hR, hRM⟩ := hM
   obtain ⟨κ, V, v, rfl⟩ := R.exists_eq_ofArrows
-  have (k : κ) : WeaklyEtale (v k) :=
+  have hv (k : κ) : WeaklyEtale (v k) :=
     Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ hR (.mk k)
-  have (k : κ) : WeaklyEtale (pullback.fst g (v k)) :=
-    MorphismProperty.pullback_fst _ _ ‹WeaklyEtale (v k)›
+  have hp (k : κ) : WeaklyEtale (pullback.fst g (v k)) :=
+    MorphismProperty.pullback_fst _ _ (hv k)
   refine AdicSheaf.isIso_of_isIso_upperStar (fun k ↦ pullback.fst g (v k))
     (Precoverage.mem_coverings_of_isPullback v hR g _ _
       fun k ↦ IsPullback.of_hasPullback g (v k)) _ fun k ↦ ?_
@@ -331,32 +347,17 @@ theorem IsAdicLisseSheaf.isIso_adicUpperStarIhomComparison {Y Z : Scheme.{u}} (g
       (fun _ : Fin n ↦ AdicSheaf.unit l (V k)) N'
     exact isIso_adicUpperStarIhomComparison_of_iso _ e N'
   have hqv : IsIso (adicUpperStarIhomComparison l (pullback.snd g (v k) ≫ v k) M N) := by
-    have := adicUpperStarIhomComparison_comp (v k) (pullback.snd g (v k)) M N
-    have : IsIso ((Mod.ihomMap (M := (pullback.snd g (v k))^*ᵃ[l].obj ((v k)^*ᵃ[l].obj M))
-        ((adicUpperStarComp l (pullback.snd g (v k)) (v k)).inv.app M)).app
-          ((pullback.snd g (v k) ≫ v k)^*ᵃ[l].obj N)) := Mod.isIso_ihomMap_app _ _
-    have : IsIso (adicUpperStarIhomComparison l (pullback.snd g (v k) ≫ v k) M N ≫
-        (Mod.ihomMap (M := (pullback.snd g (v k))^*ᵃ[l].obj ((v k)^*ᵃ[l].obj M))
-          ((adicUpperStarComp l (pullback.snd g (v k)) (v k)).inv.app M)).app _ ≫
-        (AdicSheaf.ihom ((pullback.snd g (v k))^*ᵃ[l].obj ((v k)^*ᵃ[l].obj M))).map
-          ((adicUpperStarComp l (pullback.snd g (v k)) (v k)).hom.app N)) := by
-      rw [← this]
-      infer_instance
-    exact IsIso.of_isIso_comp_right _ (_ ≫ _)
+    have := Mod.isIso_ihomMap_app
+      ((adicUpperStarComp l (pullback.snd g (v k)) (v k)).inv.app M)
+      ((pullback.snd g (v k) ≫ v k)^*ᵃ[l].obj N)
+    exact isIso_of_comp_comp_eq' _ _ _ _ _ _
+      (adicUpperStarIhomComparison_comp (v k) (pullback.snd g (v k)) M N)
   have hpg : IsIso (adicUpperStarIhomComparison l (pullback.fst g (v k) ≫ g) M N) := by
     rw [pullback.condition]
     exact hqv
-  have := adicUpperStarIhomComparison_comp g (pullback.fst g (v k)) M N
-  have : IsIso ((Mod.ihomMap (M := (pullback.fst g (v k))^*ᵃ[l].obj ((g)^*ᵃ[l].obj M))
-      ((adicUpperStarComp l (pullback.fst g (v k)) g).inv.app M)).app
-        ((pullback.fst g (v k) ≫ g)^*ᵃ[l].obj N)) := Mod.isIso_ihomMap_app _ _
-  have : IsIso ((adicUpperStarComp l (pullback.fst g (v k)) g).hom.app
-      ((AdicSheaf.ihom M).obj N) ≫
-        (pullback.fst g (v k))^*ᵃ[l].map (adicUpperStarIhomComparison l g M N) ≫
-          adicUpperStarIhomComparison l (pullback.fst g (v k)) ((g)^*ᵃ[l].obj M)
-            ((g)^*ᵃ[l].obj N)) := by
-    rw [this]
-    infer_instance
-  exact isIso_of_isIso_comp_comp _ _ _
+  have := Mod.isIso_ihomMap_app ((adicUpperStarComp l (pullback.fst g (v k)) g).inv.app M)
+    ((pullback.fst g (v k) ≫ g)^*ᵃ[l].obj N)
+  exact isIso_of_comp_comp_eq _ _ _ _ _ _
+    (adicUpperStarIhomComparison_comp g (pullback.fst g (v k)) M N)
 
 end AlgebraicGeometry.ProEtale

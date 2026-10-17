@@ -120,16 +120,6 @@ theorem nonempty_iso_fourierTransform_comp_fourierTransform_inv
   obtain ⟨eInv⟩ := nonempty_iso_artinSchreierOf_inv ψ ((affineTripleProduct.proj₂₃ k₀).appTop m)
   obtain ⟨eMul⟩ := nonempty_iso_tensorObj_artinSchreierOf ψ
     (-(affineTripleProduct.proj₂₃ k₀).appTop m) ((affineTripleProduct.proj₁₂ k₀).appTop m)
-  obtain ⟨eT₁⟩ := WeilComplex.nonempty_iso_tensorLisse_of_iso
-    (eqToIso (congrArg (WeilSheaf.upperStar (affineTripleProduct.proj₁₂ k₀)).obj (hK ψ)) ≪≫
-      eG₁)
-    (ProEtale.IsAdicLisseSheaf.upperStar _ (isLisse_fourierKernel ψ))
-    (isLisse_artinSchreierOf ψ _)
-  obtain ⟨eT₂⟩ := WeilComplex.nonempty_iso_tensorLisse_of_iso
-    (eqToIso (congrArg (WeilSheaf.upperStar (affineTripleProduct.proj₂₃ k₀)).obj (hK ψ⁻¹)) ≪≫
-      eG₂ ≪≫ eInv)
-    (ProEtale.IsAdicLisseSheaf.upperStar _ (isLisse_fourierKernel ψ⁻¹))
-    (isLisse_artinSchreierOf ψ _)
   sorry
 
 end AlgebraicGeometry
