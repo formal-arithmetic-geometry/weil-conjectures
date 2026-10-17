@@ -1,69 +1,87 @@
 {
-  "id": "def-mg-weil-semisimplification",
-  "blueprint": {
-    "is": "def-mg-weil-semisimplification",
-    "from": null,
-    "same_as": null
+ "id": "def-mg-weil-semisimplification",
+ "blueprint": {
+  "is": "def-mg-weil-semisimplification",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "definition",
+ "title": "Semisimplification of a Weil representation",
+ "statement": "For a composition series\n$V_\\bullet$, the *semisimplification* is\n\n$$\nV^{\\mathrm{ss}}:=\\bigoplus_{i=1}^{t}V_i/V_{i-1}.\n$$\n\nThat its isomorphism class does not depend on the chosen composition\nseries is recorded with the other properties of this construction; the\nmultiset of its simple summands is the composition-factor multiset of\n[lem-mg-jordan-holder].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-r-linear-library/def-mg-weil-semisimplification.md",
+  "place": "node def-mg-weil-semisimplification, order 2540"
+ },
+ "stmt_deps": [
+  "lem-mg-jordan-holder",
+  "def-mg-weil-composition-series"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 2540,
+ "blueprint_uses": [
+  "def-mg-weil-composition-series"
+ ],
+ "uses_not_cited": [
+  "def-mg-weil-composition-series"
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
-  "kind": "definition",
-  "title": "Semisimplification of a Weil representation",
-  "statement": "For a composition series\n$V_\\bullet$, the *semisimplification* is\n\n$$\nV^{\\mathrm{ss}}:=\\bigoplus_{i=1}^{t}V_i/V_{i-1}.\n$$\n\nThat its isomorphism class does not depend on the chosen composition\nseries is recorded with the other properties of this construction; the\nmultiset of its simple summands is the composition-factor multiset of\n[lem-mg-jordan-holder].",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-r-linear-library/def-mg-weil-semisimplification.md",
-    "place": "node def-mg-weil-semisimplification, order 2540"
-  },
-  "stmt_deps": [
-    "lem-mg-jordan-holder",
-    "def-mg-weil-composition-series"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses"
-  ],
-  "blueprint_kind": "definition",
-  "blueprint_order": 2540,
-  "blueprint_uses": [
-    "def-mg-weil-composition-series"
-  ],
-  "uses_not_cited": [
-    "def-mg-weil-composition-series"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "Representation.CompositionSeries.semisimplification",
-          "module": "WeilConjectures.RepresentationTheory.CompositionSeries",
-          "lines": [
-            251,
-            258
-          ],
-          "kind": "def",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "Representation.CompositionSeries.semisimplification",
+     "module": "WeilConjectures.RepresentationTheory.CompositionSeries",
+     "lines": [
+      251,
+      258
+     ],
+     "kind": "def",
+     "sorry": false
     }
-  },
-  "chapter": "sec-algebraic-groups-lie-algebras",
-  "unit": "sk-r-linear-library",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "For a composition series\n$V_\\bullet$, the *semisimplification* is\n\n$$\nV^{\\mathrm{ss}}:=\\bigoplus_{i=1}^{t}V_i/V_{i-1}.\n$$\n\nIts isomorphism class does not depend on the chosen composition series,\nand the multiset of its simple summands is the multiset of composition\nfactors (Jordan–Hölder).",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+   ],
+   "missing": [],
+   "open": []
   }
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-r-linear-library",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "For a composition series\n$V_\\bullet$, the *semisimplification* is\n\n$$\nV^{\\mathrm{ss}}:=\\bigoplus_{i=1}^{t}V_i/V_{i-1}.\n$$\n\nIts isomorphism class does not depend on the chosen composition series,\nand the multiset of its simple summands is the multiset of composition\nfactors (Jordan–Hölder).",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "lean": {
+  "module": "WeilConjectures.RepresentationTheory.CompositionSeries",
+  "declaration": "Representation.CompositionSeries.semisimplification",
+  "statement": "noncomputable def semisimplification :\n    Representation k W (⨁ (i : Fin s.length), ((s.series i.succ).toSubmodule ⧸\n      (s.series i.castSucc).toSubmodule.comap (s.series i.succ).toSubmodule.subtype)) :=",
+  "branch": "slopmaster2",
+  "by": "Q146",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "The current published source (read with scompile.py --source) defines precisely the direct sum of the successive quotient representations of the recorded Representation.CompositionSeries. The factor index Fin s.length is zero-based, so factor i is V_(i+1)/V_i. The same module supplies isIrreducible_directSumSummand and isInternal_semisimplification, and nonempty_semisimplification_equiv proves independence up to representation equivalence using the recorded jordanHolder. Thus the current blueprint_update clauses are covered too. The construction is generic in a group representation admitting a composition series and specializes without change to the finite-dimensional Weil representation of the dependency node; no alternate definition or extra hypothesis is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e5cd5b5af",
+  "group": "Q146",
+  "result": "pass",
+  "note": "Existing semisimplification declaration matches the node and dependencies; edge cases, docstrings, route-pivot status, and source declarations checked. Reproducible dry-run compilation passed."
+ }
 }
