@@ -72,3 +72,102 @@ lemma Adjunction.counit_eqToHom_family {M : Type*} (L : M → C ⥤ D) (R : M �
   simp
 
 end CategoryTheory
+
+namespace CategoryTheory
+
+variable {C₁ C₂ C₃ : Type*} [Category C₁] [Category C₂] [Category C₃]
+
+/-- **Functoriality of pushforwards of sections**, abstractly. Let `f^* ⊣ f_*`, `f_! ⊣ f^!`
+(and the same for `g` and `F = f ≫ g`) be adjunctions with identifications `f_! ≅ f_*`, units
+`ε_f : 𝟙₁ ≅ f^* 𝟙₂` and "dualizing" isomorphisms `f^! ω₂ ≅ ω₁`. The pushforward of
+`γ : 𝟙₁ ⟶ ω₁` along `f` is
+`𝟙₂ ⟶ f_* f^* 𝟙₂ ⟶ f_* ω₁ ≅ f_! ω₁ ≅ f_! f^! ω₂ ⟶ ω₂`. If the composition isomorphisms of the
+four functors are compatible with the units, the identifications `f_! ≅ f_*` and the
+dualizing isomorphisms, then pushing forward along `f` and then `g` is pushing forward along
+`F`. -/
+lemma pushforward_comp_aux {fU : C₂ ⥤ C₁} {fL : C₁ ⥤ C₂} (af : fU ⊣ fL) {fS : C₁ ⥤ C₂}
+    {fR : C₂ ⥤ C₁} (bf : fS ⊣ fR) (If : fS ≅ fL)
+    {gU : C₃ ⥤ C₂} {gL : C₂ ⥤ C₃} (ag : gU ⊣ gL) {gS : C₂ ⥤ C₃} {gR : C₃ ⥤ C₂} (bg : gS ⊣ gR)
+    (Ig : gS ≅ gL)
+    {FU : C₃ ⥤ C₁} {FL : C₁ ⥤ C₃} (aF : FU ⊣ FL) {FS : C₁ ⥤ C₃} {FR : C₃ ⥤ C₁} (bF : FS ⊣ FR)
+    (IF : FS ≅ FL)
+    (cU : FU ≅ gU ⋙ fU) (cS : fL ⋙ gL ≅ FL)
+    (hcS : cS.inv = conjugateEquiv aF (ag.comp af) cU.inv)
+    (cL : FS ≅ fS ⋙ gS)
+    (hI : ∀ K, cL.hom.app K ≫ Ig.hom.app (fS.obj K) ≫ gL.map (If.hom.app K) =
+      IF.hom.app K ≫ cS.inv.app K)
+    {e₁ : C₁} {e₂ : C₂} {e₃ : C₃} (εf : e₁ ≅ fU.obj e₂) (εg : e₂ ≅ gU.obj e₃)
+    (εF : e₁ ≅ FU.obj e₃) (hε : cU.hom.app e₃ ≫ fU.map εg.inv ≫ εf.inv = εF.inv)
+    {ω₁ : C₁} {ω₂ : C₂} {ω₃ : C₃} (df : fR.obj ω₂ ≅ ω₁) (dg : gR.obj ω₃ ≅ ω₂)
+    (dF : FR.obj ω₃ ≅ ω₁)
+    (hd : cL.hom.app ω₁ ≫ gS.map (fS.map df.inv ≫ bf.counit.app ω₂) ≫ gS.map dg.inv ≫
+      bg.counit.app ω₃ = FS.map dF.inv ≫ bF.counit.app ω₃)
+    (γ : e₁ ⟶ ω₁) :
+    ag.unit.app e₃ ≫ gL.map (εg.inv ≫ af.unit.app e₂ ≫
+        fL.map (εf.inv ≫ γ) ≫ If.inv.app ω₁ ≫ fS.map df.inv ≫ bf.counit.app ω₂) ≫
+      Ig.inv.app ω₂ ≫ gS.map dg.inv ≫ bg.counit.app ω₃ =
+    aF.unit.app e₃ ≫ FL.map (εF.inv ≫ γ) ≫ IF.inv.app ω₁ ≫ FS.map dF.inv ≫
+      bF.counit.app ω₃ := by
+  have hu := unit_conjugateEquiv aF (ag.comp af) cU.inv e₃
+  rw [← hcS] at hu
+  simp only [Adjunction.comp_unit_app, Functor.comp_map] at hu
+  have hI' : cS.inv.app ω₁ ≫ gL.map (If.inv.app ω₁) ≫ Ig.inv.app (fS.obj ω₁) =
+      IF.inv.app ω₁ ≫ cL.hom.app ω₁ := by
+    rw [← cancel_epi (IF.hom.app ω₁), Iso.hom_inv_id_app_assoc, ← reassoc_of% (hI ω₁),
+      ← gL.map_comp_assoc, Iso.hom_inv_id_app, Functor.map_id, Category.id_comp,
+      Iso.hom_inv_id_app, Category.comp_id]
+  have hε' : cU.inv.app e₃ ≫ εF.inv = fU.map εg.inv ≫ εf.inv := by
+    rw [← hε, Iso.inv_hom_id_app_assoc]
+  have key : εg.inv ≫ af.unit.app e₂ ≫ fL.map (εf.inv ≫ γ) =
+      af.unit.app _ ≫ fL.map (cU.inv.app e₃) ≫ fL.map (εF.inv ≫ γ) := by
+    have h := af.unit.naturality εg.inv
+    simp only [Functor.id_map, Functor.comp_map] at h
+    rw [reassoc_of% h, ← fL.map_comp, ← fL.map_comp, ← reassoc_of% hε']
+  rw [← hd, ← reassoc_of% hI', cS.inv.naturality_assoc, reassoc_of% hu,
+    ← Ig.inv.naturality_assoc (fS.map df.inv ≫ bf.counit.app ω₂), reassoc_of% key]
+  simp only [Functor.map_comp, Functor.comp_map, Functor.id_obj, Category.assoc]
+
+end CategoryTheory
+
+namespace CategoryTheory
+
+variable {C₁ C₂ C₃ C₄ : Type*} [Category C₁] [Category C₂] [Category C₃] [Category C₄]
+
+/-- **Associativity of conjugate composition isomorphisms.** Let `L_m ⊣ R_m` be a family of
+adjunctions `C₁ ⥤ C₄` indexed by `m : M`, and `L_f ⊣ R_f`, `L_g ⊣ R_g`, `L_h ⊣ R_h`,
+`L_{fg} ⊣ R_{fg}`, `L_{gh} ⊣ R_{gh}` adjunctions between `C₁, …, C₄`. If composition
+isomorphisms `L_{m₁} ≅ L_{fg} ⋙ L_h`, `L_{fg} ≅ L_f ⋙ L_g`, `L_{m₂} ≅ L_f ⋙ L_{gh}` and
+`L_{gh} ≅ L_g ⋙ L_h` of the left adjoints satisfy the associativity equation, for `m₁ = m₂`,
+then so do their conjugates, the composition isomorphisms of the right adjoints. -/
+lemma conjugateIsoEquiv_assoc_aux {M : Type*} (L : M → C₁ ⥤ C₄) (R : M → C₄ ⥤ C₁)
+    (adj : ∀ m, L m ⊣ R m) {m₁ m₂ : M} (hm : m₁ = m₂)
+    {Lf : C₁ ⥤ C₂} {Rf : C₂ ⥤ C₁} (af : Lf ⊣ Rf) {Lg : C₂ ⥤ C₃} {Rg : C₃ ⥤ C₂} (ag : Lg ⊣ Rg)
+    {Lh : C₃ ⥤ C₄} {Rh : C₄ ⥤ C₃} (ah : Lh ⊣ Rh) {Lfg : C₁ ⥤ C₃} {Rfg : C₃ ⥤ C₁}
+    (afg : Lfg ⊣ Rfg) {Lgh : C₂ ⥤ C₄} {Rgh : C₄ ⥤ C₂} (agh : Lgh ⊣ Rgh)
+    (cfg : Lfg ≅ Lf ⋙ Lg) (cgh : Lgh ≅ Lg ⋙ Lh) (c₁ : L m₁ ≅ Lfg ⋙ Lh)
+    (c₂ : L m₂ ≅ Lf ⋙ Lgh)
+    (h : ∀ K, c₁.hom.app K ≫ Lh.map (cfg.hom.app K) =
+      eqToHom (congrArg (fun m ↦ (L m).obj K) hm) ≫ c₂.hom.app K ≫ cgh.hom.app (Lf.obj K))
+    (K' : C₄) :
+    (conjugateIsoEquiv (adj m₁) (afg.comp ah) c₁.symm).hom.app K' ≫
+        (conjugateIsoEquiv afg (af.comp ag) cfg.symm).hom.app (Rh.obj K') =
+      eqToHom (congrArg (fun m ↦ (R m).obj K') hm) ≫
+        (conjugateIsoEquiv (adj m₂) (af.comp agh) c₂.symm).hom.app K' ≫
+        Rf.map ((conjugateIsoEquiv agh (ag.comp ah) cgh.symm).hom.app K') := by
+  subst hm
+  simp only [eqToHom_refl, Category.id_comp] at h ⊢
+  have hL : Functor.whiskerRight cfg.inv Lh ≫ c₁.inv =
+      (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft Lf cgh.inv ≫ c₂.inv := by
+    ext K
+    simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+      Functor.whiskerLeft_app, Category.id_comp]
+    rw [← cancel_epi (Lh.map (cfg.hom.app K)), ← cancel_epi (c₁.hom.app K),
+      ← Lh.map_comp_assoc, Iso.hom_inv_id_app, Functor.map_id, Category.id_comp,
+      Iso.hom_inv_id_app, reassoc_of% (h K), Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app]
+  have e := congrArg (fun τ ↦ (conjugateEquiv (adj m₁) ((af.comp ag).comp ah) τ).app K') hL
+  rw [← conjugateEquiv_comp _ (afg.comp ah), ← conjugateEquiv_comp _ (af.comp (ag.comp ah)),
+    ← conjugateEquiv_comp _ (af.comp agh), conjugateEquiv_associator_hom,
+    conjugateEquiv_whiskerRight, conjugateEquiv_whiskerLeft] at e
+  simpa using e
+
+end CategoryTheory
