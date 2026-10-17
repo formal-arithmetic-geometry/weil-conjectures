@@ -327,15 +327,23 @@
   ]
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-44fbb80d4",
-  "group": "NV",
+  "reviewer": "NT-stage2-cc-92dfaba50",
+  "group": "Q39",
   "result": "pass",
-  "note": "Statement, dependencies, source alignment, edge cases, docstrings, report sections, and canonical maps checked; scompile.py passed both overlay and library checks.",
-  "statement_corrected": true
+  "note": "Signature byte-identical to the previously reviewed and landed statement, restored after sync e47; only imports (now the recorded modules of the statement and proof dependencies), the proof docstring (matches the node's current 5 steps) and the lean record change. Checked every clause against the node and blueprint 1436: IsPullback square, D+ abelian K, a<=b, vanishing outside [a,b], tE = H^{p+q}(Ex on H^q(K)[-q]) as the E2 hypothesis, ten couple identifications, E-infinity map pinned by cycle and cokernel squares, every H^n, final IsIso. No extra hypotheses; universes u and u+1 per site convention. lean.statement verbatim; one sorry; no definitions; docstrings carry the source and blueprint tag. hypercohomology-filtrations is no longer imported but was never used in the signature (truncation-exact-couples record covers the couples). nt_compile.py: exit 0, 2.0 s, no warnings; a negative control showed errors are reported; axioms only the standard three plus sorryAx."
  },
- "lean": {},
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteRangeComparison",
+  "declaration": "AlgebraicGeometry.Etale.finite_range_exchange_comparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteRangeComparison.lean",
+  "statement": "theorem finite_range_exchange_comparison {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g) (K : _root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (a b : ℤ) (_hab : a ≤ b) (_hK : ∀ q : ℤ, q < a ∨ b < q → IsZero ((_root_.DerivedCategory.Plus.homologyFunctor _ q).obj K)) (_h₂ : ∀ p q : ℤ, IsIso (tE (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq) K p q)) : (∃ P Q : BigradedExactCouple (Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1}) 0, P.D = D (truncationPhi f g) K ∧ Q.D = D (truncationPsi g' f') K ∧ ∃ hPE : P.E = E (truncationPhi f g) K, ∃ hQE : Q.E = E (truncationPsi g' f') K, HEq P.alpha (alpha (truncationPhi f g) K) ∧ HEq Q.alpha (alpha (truncationPsi g' f') K) ∧ HEq P.f (CategoryTheory.TruncationExchange.f (truncationPhi f g) K) ∧ HEq Q.f (CategoryTheory.TruncationExchange.f (truncationPsi g' f') K) ∧ HEq P.g (CategoryTheory.TruncationExchange.g (truncationPhi f g) K) ∧ HEq Q.g (CategoryTheory.TruncationExchange.g (truncationPsi g' f') K) ∧ ∃ L : LimitSubobjects P, ∃ M : LimitSubobjects Q, ∃ z : ∀ p q : ℤ, (L.Z p q : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1}) ⟶ (M.Z p q : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1}), ∃ tInf : ∀ p q : ℤ, P.pageInfinity L p q ⟶ Q.pageInfinity M p q, (∀ p q : ℤ, z p q ≫ (M.Z p q).arrow = (L.Z p q).arrow ≫ eqToHom (congrFun (congrFun hPE p) q) ≫ tE (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq) K p q ≫ eqToHom (congrFun (congrFun hQE p) q).symm) ∧ (∀ p q : ℤ, cokernel.π (Subobject.ofLE _ _ (limitBoundary_le_cycle P L p q)) ≫ tInf p q = z p q ≫ cokernel.π (Subobject.ofLE _ _ (limitBoundary_le_cycle Q M p q))) ∧ (∀ p q : ℤ, IsIso (tInf p q))) ∧ (∀ n : ℤ, IsIso ((_root_.DerivedCategory.Plus.homologyFunctor _ n).map ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app K))) ∧ IsIso ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app K)",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-17",
+  "existing": false
+ },
  "reviewed_proof": {
   "date": "2026-10-16",
   "by": "L",

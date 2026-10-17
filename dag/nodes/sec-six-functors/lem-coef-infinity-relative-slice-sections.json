@@ -29,7 +29,9 @@
  "stmt_deps": [
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "def-cbc-enhanced-cartesian-fibration",
+  "lem-coef-infinity-arrow-target-right-fibration"
  ],
  "proof": [
   {
@@ -323,5 +325,43 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aa1b137bd",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: hypotheses (Quasicategory C, IsLocallySmall C, IsSmall K, replete fullSubcomplex D, no extra assumption, universe convention of def-coef-presentable-infinity-category); E_D as real pullbacks; inner fibration plus IsCocartesianEdge lifts over an arbitrary base; fibre isos normalized on the arrow maps; transport as coherent cocartesian family with IsSlicePostcomposition (true via HTT 2.4.7.11); sectionSSet is a quasicategory and isomorphic to comma(true), normalized on the source coordinate and on every n-simplex by double uncurry; essential-smallness implication; source creation for fixedTargetArrows (strict lift and iff); postcomposition existence; closure clause (preservation holds because T commutes strictly with the source projection). Edge cases empty K/D/C, empty shape, degenerate edges, P=True covered. Node changes only lean and stmt_deps; the two added stmt_deps are landed nodes with lean records (allowed) and create no cycle. lean.statement byte-identical; all 17 declarations present; one sorry; no hollow definitions; docstrings carry source place and blueprint tag. nt_compile.py: rc 0, 2.1 s, no messages. Only finding: garbled HTT numbers in report.md prose (cosmetic)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeSliceSections",
+  "declaration": "SSet.Enhanced.relative_slice_sections",
+  "declarations": [
+   "SSet.Enhanced.relativeSourceArrows",
+   "SSet.Enhanced.relativeSourceArrow",
+   "SSet.Enhanced.relativeSourceTarget",
+   "SSet.Enhanced.relativeSlice",
+   "SSet.Enhanced.relativeSliceProjection",
+   "SSet.Enhanced.relativeSliceArrow",
+   "SSet.Enhanced.relativeSliceSource",
+   "SSet.Enhanced.fullSourceSlice",
+   "SSet.Enhanced.fullSourceSliceSource",
+   "SSet.Enhanced.fullSourceSliceArrow",
+   "SSet.Enhanced.IsSlicePostcomposition",
+   "SSet.Enhanced.relativeSliceComma",
+   "SSet.Enhanced.relativeSliceCommaSource",
+   "SSet.Enhanced.relativeSliceCommaTransformation",
+   "SSet.Enhanced.relativeSliceFiberInclusion",
+   "SSet.Enhanced.RelativeSliceTransport",
+   "SSet.Enhanced.relative_slice_sections"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeSliceSections.lean",
+  "statement": "theorem relative_slice_sections {C K : SSet.{max (u + 1) v}} [Quasicategory C] (P : C _⦋0⦌ → Prop) (h_replete : ∀ (a b : C _⦋0⦌) (e : C.Edge a b), P a → IsEquivalenceEdge C e.edge → P b) (h_local : SSet.Presentability.IsLocallySmall.{u, max (u + 1) v} C) (h_small : SSet.Presentability.IsSmall.{u, max (u + 1) v} K) (p : K ⟶ C) : (InnerFibration (relativeSliceProjection P p) ∧ ∀ (a : (relativeSlice P p) _⦋0⦌) (b : K _⦋0⦌) (e : K.Edge ((relativeSliceProjection P p).app _ a) b), ∃ s : (relativeSlice P p) _⦋1⦌, (relativeSlice P p).δ 1 s = a ∧ (relativeSliceProjection P p).app _ s = e.edge ∧ IsCocartesianEdge (relativeSliceProjection P p) (SSet.yonedaEquiv.symm s)) ∧ (∃ i : ∀ k : K _⦋0⦌, fiber (relativeSliceProjection P p) k ≅ fullSourceSlice C P (p.app _ k), (∀ k : K _⦋0⦌, (i k).hom ≫ fullSourceSliceArrow C P (p.app _ k) = relativeSliceFiberInclusion P p k ≫ relativeSliceArrow P p) ∧ ∀ (k l : K _⦋0⦌) (e : K.Edge k l), RelativeSliceTransport P p i e) ∧ Quasicategory (sectionSSet (relativeSliceProjection P p)) ∧ (∃ i : sectionSSet (relativeSliceProjection P p) ≅ relativeSliceComma P p, i.hom ≫ relativeSliceCommaSource P p = pullback.fst _ _ ≫ (ihom K).map (relativeSliceSource P p) ∧ ∀ (n : ℕ) (s : (sectionSSet (relativeSliceProjection P p)) _⦋n⦌), MonoidalClosed.uncurry (MonoidalClosed.uncurry (SSet.yonedaEquiv.symm s ≫ i.hom ≫ relativeSliceCommaTransformation P p)) = (α_ K Δ[1] Δ[n]).inv ≫ ((β_ K Δ[1]).hom ▷ Δ[n]) ≫ (α_ Δ[1] K Δ[n]).hom ≫ MonoidalClosed.uncurry (MonoidalClosed.uncurry (SSet.yonedaEquiv.symm s ≫ pullback.fst _ _) ≫ relativeSliceArrow P p)) ∧ (SSet.Presentability.IsEssentiallySmall.{u, max (u + 1) v} (fullSubcomplex C P).toSSet → SSet.Presentability.IsEssentiallySmall.{u, max (u + 1) v} (sectionSSet (relativeSliceProjection P p)) ∧ SSet.Presentability.IsEssentiallySmall.{u, max (u + 1) v} ((ihom K).obj (fullSubcomplex C P).toSSet)) ∧ (∀ (x : C _⦋0⦌) (J : SSet.{max (u + 1) v}) (F : J ⟶ fixedTargetArrows C x), (∀ t : (coconeCategory (F ≫ fixedTargetSource C x)) _⦋0⦌, IsColimiting (F ≫ fixedTargetSource C x) t → ∃ c : (coconeCategory F) _⦋0⦌, CategoryTheory.Spaces.mappedCocone (fixedTargetSource C x) F c = t ∧ IsColimiting F c) ∧ ((∃ t : (coconeCategory (F ≫ fixedTargetSource C x)) _⦋0⦌, IsColimiting (F ≫ fixedTargetSource C x) t) → ∀ c : (coconeCategory F) _⦋0⦌, IsColimiting F c ↔ IsColimiting (F ≫ fixedTargetSource C x) (CategoryTheory.Spaces.mappedCocone (fixedTargetSource C x) F c))) ∧ (∀ (x y : C _⦋0⦌) (f : C.Edge x y), ∃ T : fullSourceSlice C P x ⟶ fullSourceSlice C P y, IsSlicePostcomposition P f T) ∧ (∀ J : SSet.{max (u + 1) v}, (∀ F : J ⟶ C, ∃ t : (coconeCategory F) _⦋0⦌, IsColimiting F t) → (∀ (F : J ⟶ (fullSubcomplex C P).toSSet) (t : (coconeCategory (F ≫ (fullSubcomplex C P).ι)) _⦋0⦌), IsColimiting (F ≫ (fullSubcomplex C P).ι) t → P t.1.1) → (∀ x : C _⦋0⦌, (∀ F : J ⟶ fullSourceSlice C P x, ∃ c : (coconeCategory F) _⦋0⦌, IsColimiting F c) ∧ (∀ (F : J ⟶ fullSourceSlice C P x) (c : (coconeCategory F) _⦋0⦌), IsColimiting F c ↔ IsColimiting (F ≫ fullSourceSliceSource C P x) (CategoryTheory.Spaces.mappedCocone (fullSourceSliceSource C P x) F c))) ∧ (∀ (x y : C _⦋0⦌) (f : C.Edge x y) (T : fullSourceSlice C P x ⟶ fullSourceSlice C P y), IsSlicePostcomposition P f T → ∀ (F : J ⟶ fullSourceSlice C P x) (c : (coconeCategory F) _⦋0⦌), IsColimiting F c → IsColimiting (F ≫ T) (CategoryTheory.Spaces.mappedCocone T F c)))",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the published presentability, sectionSSet, fullSubcomplex, fixedTargetArrows, coherent comma and mappedCocone interfaces. Relative-slice helpers are real pullback constructions; normalized isomorphisms and coherent square families specify fibers, all section simplices and postcomposition. The cocartesian clause spells out the recorded horn conditions for an arbitrary simplicial base, without assuming it a quasicategory. No statement correction, new node or dependency repair."
  }
 }
