@@ -87,7 +87,6 @@ variable {Z U X S : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
   [QuasiCompact v] (L : AdicSheaf l S) [Fact (IsAdicLisseSheaf L)]
   {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]
 
-set_option maxHeartbeats 1000000 in
 include hij in
 /-- Blueprint `det-lem-constructible-ext-continuity-stratum`: **continuity of `Hom` out of
 `a_! L`.** For a filtered diagram `(K_i)` of complexes of sheaves of `ℚ̄_ℓ,X`-modules vanishing in
@@ -175,6 +174,51 @@ theorem isContinuousOn_stratum (K : I ⥤ CochainComplex (AdicSheaf l X) ℤ) (b
     exact Functor.isIso_colimitDesc_comp_of_preserves (K := ((K ⋙ DerivedCategory.Q) ⋙ RJ) ⋙
       DerivedCategory.homologyFunctor _ q)
       (c := (DerivedCategory.homologyFunctor _ q).mapCocone (RJ.mapCocone s0)) Ψsh (hB' q)
-  sorry
+  -- Step 3: the supported localization triangle `i_* RΓ_Z K ⟶ K ⟶ Rj_* j^* K ⟶`
+  let h₀ := isZero_adicUpperStar_obj_adicLowerStar_obj (l := l) i j hij.disjoint
+  let hdet := AdicSheaf.isZero_of_isZero_adicUpperStar_of_isCompl (l := l) i j hij
+  let TF := SectionsWithSupport.triangleFunctor (adicUpperStarLowerStarAdjunction l i)
+    (adicUpperStarLowerStarAdjunction l j) h₀ hdet
+  let e₂ : TF ⋙ Ψ.mapTriangle ⋙ Triangle.π₂ ≅ Ψ :=
+    Functor.isoWhiskerRight (SectionsWithSupport.triangleFunctorπ₂Iso _ _ h₀ hdet) Ψ ≪≫
+      Ψ.leftUnitor
+  let e₃ : TF ⋙ Ψ.mapTriangle ⋙ Triangle.π₃ ≅ RJ ⋙ Ψ :=
+    Functor.isoWhiskerRight (SectionsWithSupport.triangleFunctorπ₃Iso _ _ h₀ hdet) Ψ
+  have h₃ : (adicHypercohomology (l := l) S).IsContinuousOn
+      ((TF ⋙ Ψ.mapTriangle ⋙ Triangle.π₁).mapCocone s0) :=
+    Functor.IsContinuousOn.of_triangle₁ ((K ⋙ DerivedCategory.Q) ⋙ TF ⋙ Ψ.mapTriangle)
+      (fun _ ↦ Ψ.map_distinguished _
+        (SectionsWithSupport.triangleFunctor_obj_distinguished _ _ _ _ _))
+      ((TF ⋙ Ψ.mapTriangle).mapCocone s0)
+      (Ψ.map_distinguished _ (SectionsWithSupport.triangleFunctor_obj_distinguished _ _ _ _ _))
+      ((Functor.isContinuousOn_mapCocone_iff_of_iso e₂ s0).2 h₁)
+      ((Functor.isContinuousOn_mapCocone_iff_of_iso e₃ s0).2 h₂)
+  -- Step 4: `Ψ(i_* RΓ_Z K) ≅ 𝓗om(L, v^* RΓ_Z K)`
+  let RΓ := (adicSectionsWithSupport l i j hij).rightDerivedFunctor
+  let ε : (i)_*ᵃ[l] ⋙ Ψsh ≅ (v)^*ᵃ[l] ⋙ AdicSheaf.ihom L :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (asIso (adicUpperStarLowerStarAdjunction l i).counit) _ ≪≫
+      Functor.leftUnitor _
+  let eΨ : ((i)_*ᵃ[l]).mapDerivedCategory ⋙ Ψ ≅
+      ((v)^*ᵃ[l]).mapDerivedCategory ⋙ (AdicSheaf.ihom L).mapDerivedCategory :=
+    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫ Functor.mapDerivedCategoryNatIso ε ≪≫
+      Functor.mapDerivedCategoryCompIso _ _
+  let e₁ : TF ⋙ Ψ.mapTriangle ⋙ Triangle.π₁ ≅
+      RΓ ⋙ ((v)^*ᵃ[l]).mapDerivedCategory ⋙ (AdicSheaf.ihom L).mapDerivedCategory :=
+    Functor.isoWhiskerRight (SectionsWithSupport.triangleFunctorπ₁Iso _ _ h₀ hdet) Ψ ≪≫
+      Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft RΓ eΨ
+  have h₄ := (Functor.isContinuousOn_mapCocone_iff_of_iso e₁ s0).1 h₃
+  -- Step 5: through the adjunctions `L ⊗ - ⊣ 𝓗om(L, -)`, `v_! ⊣ v^*` and `i_* ⊣ RΓ_Z`
+  have h₅ := isContinuousOn_preadditiveCoyoneda_of_adjunction
+    (derivedTensorLeftIhomAdjunction L)
+    ((DerivedCategory.singleFunctor (AdicSheaf l S) 0).obj (Mod.regular _))
+    ((RΓ ⋙ ((v)^*ᵃ[l]).mapDerivedCategory).mapCocone s0) h₄
+  have h₆ := isContinuousOn_preadditiveCoyoneda_of_iso
+    (singleIsoMapDerivedCategoryTensorLeftSingleRegular L).symm _ h₅
+  have h₇ := isContinuousOn_preadditiveCoyoneda_of_adjunction
+    (adicDerivedOpenImmersionLowerShriekAdjunction v)
+    ((DerivedCategory.singleFunctor (AdicSheaf l S) 0).obj L) (RΓ.mapCocone s0) h₆
+  exact isContinuousOn_preadditiveCoyoneda_of_adjunction
+    (adicDerivedSectionsWithSupportAdjunction l i j hij) _ s0 h₇
 
 end AlgebraicGeometry.ProEtale

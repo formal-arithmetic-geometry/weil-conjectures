@@ -120,13 +120,15 @@ variable (k₀ l) in
 noncomputable def ProEtaleWeilSheaf.derivedUpperStarLeftAdjointAdjunction :
     (ProEtaleWeilSheaf.upperStarLeftAdjoint k₀ l j).mapDerivedCategory ⊣
       (ProEtaleWeilSheaf.upperStar k₀ l j).mapDerivedCategory :=
-  (ProEtaleWeilSheaf.upperStarLeftAdjointAdjunction k₀ l j).mapDerivedCategoryRightDerivedAdjunction.ofNatIsoRight
+  (ProEtaleWeilSheaf.upperStarLeftAdjointAdjunction k₀ l
+    j).mapDerivedCategoryRightDerivedAdjunction.ofNatIsoRight
     (ProEtaleWeilSheaf.upperStar k₀ l j).rightDerivedFunctorIsoMapDerivedCategory
 
 /-- The unit of `D(j_!) ⊣ D(j^*)` is invertible: `D(j^*) ∘ D(j_!) ≅ D(j^* j_!) ≅ 𝟭`, so `D(j_!)` is
 fully faithful. -/
 instance : IsIso (ProEtaleWeilSheaf.derivedUpperStarLeftAdjointAdjunction k₀ l j).unit := by
-  have h := (ProEtaleWeilSheaf.derivedUpperStarLeftAdjointAdjunction k₀ l j).fullyFaithfulLOfCompIsoId
+  have h :=
+    (ProEtaleWeilSheaf.derivedUpperStarLeftAdjointAdjunction k₀ l j).fullyFaithfulLOfCompIsoId
     ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
       Functor.mapDerivedCategoryNatIso
         (asIso (ProEtaleWeilSheaf.upperStarLeftAdjointAdjunction k₀ l j).unit).symm ≪≫
@@ -167,7 +169,8 @@ theorem ProEtaleWeilSheaf.exists_distTriang_openClosed
   -- `i^* g` is invertible, since `i^* j_! j^* M = 0`
   have hgi : IsIso (iU.map g) := by
     refine (Triangle.isZero₁_iff_isIso₂ _ (iU.map_distinguished _ hT)).1 ?_
-    have h0 (F : ProEtaleWeilSheaf k₀ l U) : IsZero ((ProEtaleWeilSheaf.upperStarLeftAdjoint k₀ l j ⋙
+    have h0 (F : ProEtaleWeilSheaf k₀ l U) :
+        IsZero ((ProEtaleWeilSheaf.upperStarLeftAdjoint k₀ l j ⋙
         ProEtaleWeilSheaf.upperStar k₀ l i).obj F) :=
       ProEtaleWeilSheaf.isZero_upperStar_obj_upperStarLeftAdjoint_obj j i hij.symm.disjoint F
     exact (Functor.isZero_mapDerivedCategory_obj
@@ -191,7 +194,8 @@ theorem ProEtaleWeilSheaf.exists_distTriang_openClosed
     rw [reassoc_of% this, ← Functor.map_comp, IsIso.hom_inv_id, CategoryTheory.Functor.map_id,
       Category.comp_id]
   refine ⟨e.inv ≫ h, isomorphic_distinguished _ hT _ ?_⟩
-  have he' : adj.unit.app M ≫ e.inv = g := by rw [← he, Category.assoc, e.hom_inv_id, Category.comp_id]
+  have he' : adj.unit.app M ≫ e.inv = g := by
+    rw [← he, Category.assoc, e.hom_inv_id, Category.comp_id]
   refine Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) e.symm ?_ ?_ ?_
   · exact (Category.comp_id _).trans (Category.id_comp _).symm
   · exact he'.trans (Category.id_comp _).symm

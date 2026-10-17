@@ -74,7 +74,8 @@ theorem IsAdicLisseSheaf.mono_tensorLeft_map {F : AdicSheaf l X} (hF : IsAdicLis
     have := Mod.mono_tensorLeft_map_of_iso_biproduct e ((g i)^*ᵃ[l].map f)
     exact mono_comp' (IsIso.mono_of_iso ((adicUpperStarTensorLeftIso l (g i) F).app M).hom)
       (mono_comp' this (IsIso.mono_of_iso ((adicUpperStarTensorLeftIso l (g i) F).app N).inv))
-  exact (isZero_kernel_of_mono ((g i)^*ᵃ[l].map ((Mod.tensorLeft F).map f))).of_iso (PreservesKernel.iso (g i)^*ᵃ[l] _)
+  exact (isZero_kernel_of_mono ((g i)^*ᵃ[l].map ((Mod.tensorLeft F).map f))).of_iso
+    (PreservesKernel.iso (g i)^*ᵃ[l] _)
 
 /-- **Tensoring with a lisse sheaf is exact**: it is right exact as a left adjoint, and it
 preserves monomorphisms (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.mono_tensorLeft_map`). -/
@@ -118,7 +119,8 @@ variable {Z U X S : Scheme.{u}}
 noncomputable def adicDerivedOpenImmersionLowerShriekAdjunction :
     ((v)_!ᵃ[l]).mapDerivedCategory ⊣ ((v)^*ᵃ[l]).mapDerivedCategory :=
   have := (adicOpenImmersionLowerShriekAdjunction l v).leftAdjoint_preservesColimits
-  (adicOpenImmersionLowerShriekAdjunction l v).mapDerivedCategoryRightDerivedAdjunction.ofNatIsoRight
+  (adicOpenImmersionLowerShriekAdjunction l
+    v).mapDerivedCategoryRightDerivedAdjunction.ofNatIsoRight
     ((v)^*ᵃ[l]).rightDerivedFunctorIsoMapDerivedCategory
 
 /-- The object `L` of `D(S_proét, ℚ̄_ℓ)` placed in degree `0` is `L ⊗ ℚ̄_ℓ,S`. -/

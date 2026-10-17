@@ -20,7 +20,7 @@ Let `j : U ⟶ X` be an open immersion of `k₀`-schemes, and let `U ⟶[a] W �
 compactification of `j`: an open immersion `a` followed by a proper morphism `g`, with `W`
 Noetherian. For `M` in the derived category of pro-étale Weil sheaves on `U`, the restriction
 of `Rg_* (a_! M)` to `U` is `M` again
-(`AlgebraicGeometry.ProEtaleWeilSheaf.nonempty_upperStar_rightDerivedLowerStar_extensionByZero_iso`).
+(`ProEtaleWeilSheaf.nonempty_upperStar_rightDerivedLowerStar_extensionByZero_iso`).
 This is the part of the identification of the direct image with compact support `Rj_!` with the
 extension by zero which only uses open base change.
 
@@ -31,7 +31,8 @@ the section `s : U ⟶ V` of `q` induced by `a` is a closed immersion; it is als
 immersion. Let `θ : a_! M ⟶ Ra_* M` be the transpose of `a^* a_! M ≅ M`. Its cone `E` vanishes on
 `V`: on `s(U)` because `a^* θ` is invertible, and on the complement `O` of `s(U)` because both
 `a_! M` and `Ra_* M` vanish there, the latter by open base change, `O` missing `a(U)`. By open
-base change (`AlgebraicGeometry.ProEtaleWeilSheaf.isZero_upperStar_rightDerivedLowerStar_of_isPullback`),
+base change
+(`ProEtaleWeilSheaf.isZero_upperStar_rightDerivedLowerStar_of_isPullback`),
 `j^* Rg_* E = 0`, so `j^* Rg_* θ` is invertible, and `j^* Rg_* Ra_* M ≅ j^* Rj_* M ≅ M`.
 
 Open base change is reduced, through the forgetful functor, which reflects zero objects, to open
@@ -282,7 +283,8 @@ theorem ProEtaleWeilSheaf.nonempty_upperStar_rightDerivedLowerStar_extensionByZe
       ((ProEtaleWeilSheaf.lowerStar k₀ l a).rightDerivedFunctor.obj M) ≅
         (ProEtaleWeilSheaf.lowerStar k₀ l j).rightDerivedFunctor.obj M :=
     (Functor.rightDerivedFunctorCompIso' _ _ (ProEtaleWeilSheaf.lowerStarCompIso k₀ l a g)).app M ≪≫
-      (Functor.rightDerivedFunctorNatIso (ProEtaleWeilSheaf.lowerStarCongr (k₀ := k₀) (l := l) hag)).app M
+      (Functor.rightDerivedFunctorNatIso
+        (ProEtaleWeilSheaf.lowerStarCongr (k₀ := k₀) (l := l) hag)).app M
   have : IsIso (ProEtaleWeilSheaf.derivedUpperStarLowerStarAdjunction k₀ l j).counit :=
     Adjunction.isIso_mapDerivedCategoryRightDerivedAdjunction_counit _
   exact ⟨asIso ((ProEtaleWeilSheaf.upperStar k₀ l j).mapDerivedCategory.map

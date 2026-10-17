@@ -197,7 +197,7 @@ noncomputable def ihomIsoTensorLeftFree (n : ℕ) :
         simp
       · simp
     simp_rw [this]
-    simp only [Finset.sum_ite_eq, Finset.sum_ite_eq', Finset.mem_univ, if_true]
+    simp only [Finset.sum_ite_eq, Finset.mem_univ, if_true]
     exact sum_ihomMap_ι_comp_ihomMap_π _
   inv_hom_id := by
     rw [Preadditive.sum_comp]
@@ -215,7 +215,7 @@ noncomputable def ihomIsoTensorLeftFree (n : ℕ) :
         simp
       · simp
     simp_rw [this]
-    simp only [Finset.sum_ite_eq, Finset.sum_ite_eq', Finset.mem_univ, if_true]
+    simp only [Finset.sum_ite_eq', Finset.mem_univ, if_true]
     exact sum_tensorLeftMap_π_comp_tensorLeftMap_ι _
 
 end IhomFree

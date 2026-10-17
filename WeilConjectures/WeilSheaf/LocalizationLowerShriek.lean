@@ -19,7 +19,7 @@ of pro-étale Weil sheaves on `X` is the extension by zero `j_! M`
 (`AlgebraicGeometry.ProEtaleWeilSheaf.nonempty_rightDerivedLowerStar_extensionByZero_iso`).
 
 Indeed `j^* N ≅ M`
-(`AlgebraicGeometry.ProEtaleWeilSheaf.nonempty_upperStar_rightDerivedLowerStar_extensionByZero_iso`),
+(`ProEtaleWeilSheaf.nonempty_upperStar_rightDerivedLowerStar_extensionByZero_iso`),
 and `i^* N = 0` by proper base change
 (`AlgebraicGeometry.ProEtale.isZero_adicUpperStar_rightDerivedLowerStar_of_isProper`, on the
 geometric fibers), the restriction of `a_! M` to `g⁻¹(Z)` being zero. So the open–closed
@@ -177,8 +177,9 @@ theorem ProEtaleWeilSheaf.nonempty_rightDerivedLowerStar_extensionByZero_iso
   have hiso := (Triangle.isZero₃_iff_isIso₁ _ hw).1 h₃
   obtain ⟨e⟩ := ProEtaleWeilSheaf.nonempty_upperStar_rightDerivedLowerStar_extensionByZero_iso
     (k₀ := k₀) (l := l) j a g hag M
-  exact ⟨(@asIso _ _ _ _ ((ProEtaleWeilSheaf.derivedUpperStarLeftAdjointAdjunction k₀ l j).counit.app
-    N) hiso).symm ≪≫ (ProEtaleWeilSheaf.upperStarLeftAdjoint k₀ l j).mapDerivedCategory.mapIso e⟩
+  exact ⟨(@asIso _ _ _ _
+    ((ProEtaleWeilSheaf.derivedUpperStarLeftAdjointAdjunction k₀ l j).counit.app N) hiso).symm ≪≫
+    (ProEtaleWeilSheaf.upperStarLeftAdjoint k₀ l j).mapDerivedCategory.mapIso e⟩
 
 end Compactification
 

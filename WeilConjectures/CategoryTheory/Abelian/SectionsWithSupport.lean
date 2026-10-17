@@ -126,7 +126,7 @@ noncomputable def homEquiv (A : 𝒵) (M : 𝒳) :
       simp only [Functor.FullyFaithful.map_preimage]
       have : kernel.lift (adjJ.unit.app M) (iLow.map g ≫
           inv (adjI.unit.app (kernel (adjJ.unit.app M))) ≫ kernel.ι _)
-          (by simp [comp_unit_app_eq_zero adjI adjJ h₀]) =
+          (by simp) =
           iLow.map g ≫ inv (adjI.unit.app (kernel (adjJ.unit.app M))) := by
         ext; simp
       simp [this] }
@@ -326,7 +326,8 @@ theorem nonempty_iso_upperStar_fib (K : DerivedCategory 𝒳) {F : DerivedCatego
   have hFF := fullyFaithfulMapDerivedCategoryILow adjI
   have := hFF.full
   have := hFF.faithful
-  let e₁ : F ≅ iLow.mapDerivedCategory.obj ((functor adjI adjJ h₀ hdet).rightDerivedFunctor.obj K) :=
+  let e₁ : F ≅
+      iLow.mapDerivedCategory.obj ((functor adjI adjJ h₀ hdet).rightDerivedFunctor.obj K) :=
     (shiftFunctor _ (1 : ℤ)).preimageIso (Triangle.π₃.mapIso e)
   have : IsIso (derivedUpperLowerAdjunctionI adjI).counit :=
     (derivedUpperLowerAdjunctionI adjI).counit_isIso_of_R_fully_faithful

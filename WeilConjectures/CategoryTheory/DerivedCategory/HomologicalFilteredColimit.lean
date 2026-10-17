@@ -104,7 +104,8 @@ end Transport
 
 /-- Truncation `τ^{≤ m}` preserves the continuity of cohomology. -/
 lemma IsHomologyContinuousOn.truncLE {G : I ⥤ DerivedCategory 𝒜} {s : Cocone G}
-    (hs : IsHomologyContinuousOn s) (m : ℤ) : IsHomologyContinuousOn ((t.truncLE m).mapCocone s) := by
+    (hs : IsHomologyContinuousOn s) (m : ℤ) :
+    IsHomologyContinuousOn ((t.truncLE m).mapCocone s) := by
   intro q
   change IsIso (colimit.desc ((G ⋙ t.truncLE m) ⋙ homologyFunctor 𝒜 q)
     ((homologyFunctor 𝒜 q).mapCocone ((t.truncLE m).mapCocone s)))
@@ -130,7 +131,8 @@ lemma IsHomologyContinuousOn.truncLE {G : I ⥤ DerivedCategory 𝒜} {s : Cocon
 
 /-- Truncation `τ^{≥ m}` preserves the continuity of cohomology. -/
 lemma IsHomologyContinuousOn.truncGE {G : I ⥤ DerivedCategory 𝒜} {s : Cocone G}
-    (hs : IsHomologyContinuousOn s) (m : ℤ) : IsHomologyContinuousOn ((t.truncGE m).mapCocone s) := by
+    (hs : IsHomologyContinuousOn s) (m : ℤ) :
+    IsHomologyContinuousOn ((t.truncGE m).mapCocone s) := by
   intro q
   change IsIso (colimit.desc ((G ⋙ t.truncGE m) ⋙ homologyFunctor 𝒜 q)
     ((homologyFunctor 𝒜 q).mapCocone ((t.truncGE m).mapCocone s)))
@@ -199,7 +201,7 @@ theorem isContinuousOn_of_isGE
   have key (m : ℤ) (hm : b - 1 ≤ m) : ∀ {G : I ⥤ DerivedCategory 𝒜} (s : Cocone G),
       (∀ i, (G.obj i).IsGE b) → (∀ i, (G.obj i).IsLE m) → s.pt.IsGE b → s.pt.IsLE m →
         IsHomologyContinuousOn s → H.IsContinuousOn s := by
-    induction m, hm using Int.le_induction with
+    induction m, hm using Int.leInduction with
     | base =>
       intro G s hG hG' hpt hpt' _ n
       have hz (X : DerivedCategory 𝒜) (h₁ : X.IsGE b) (h₂ : X.IsLE (b - 1)) : IsZero X :=
@@ -210,13 +212,13 @@ theorem isContinuousOn_of_isGE
     | succ m hm ih =>
       intro G s hG hG' hpt hpt' hs
       have h₁ : H.IsContinuousOn ((t.truncLE m).mapCocone s) :=
-        ih ((t.truncLE m).mapCocone s) (fun i ↦ by haveI := hG i; dsimp; infer_instance)
-          (fun i ↦ by dsimp; infer_instance) (by haveI := hpt; dsimp; infer_instance)
+        ih ((t.truncLE m).mapCocone s) (fun i ↦ by have := hG i; dsimp; infer_instance)
+          (fun i ↦ by dsimp; infer_instance) (by have := hpt; dsimp; infer_instance)
           (by dsimp; infer_instance) (hs.truncLE m)
       have h₃ : H.IsContinuousOn ((t.truncGE (m + 1)).mapCocone s) :=
         hbase (m + 1) ((t.truncGE (m + 1)).mapCocone s) (fun i ↦ by dsimp; infer_instance)
-          (fun i ↦ by haveI := hG' i; dsimp; infer_instance) (by dsimp; infer_instance)
-          (by haveI := hpt'; dsimp; infer_instance) (hs.truncGE (m + 1))
+          (fun i ↦ by have := hG' i; dsimp; infer_instance) (by dsimp; infer_instance)
+          (by have := hpt'; dsimp; infer_instance) (hs.truncGE (m + 1))
       exact Functor.IsContinuousOn.of_triangle₂ (G ⋙ t.triangleLEGE m (m + 1) rfl)
         (fun i ↦ t.triangleLEGE_distinguished m (m + 1) rfl _)
         ((t.triangleLEGE m (m + 1) rfl).mapCocone s)
@@ -224,11 +226,11 @@ theorem isContinuousOn_of_isGE
   intro n
   by_cases hn : n + 1 ≤ b
   · exact isIso_colimitDesc_of_isZero _
-      (fun i ↦ hvan n _ (by haveI := hG i; exact t.isGE_of_ge _ (n + 1) b hn))
-      (hvan n _ (by haveI := hpt; exact t.isGE_of_ge _ (n + 1) b hn))
+      (fun i ↦ hvan n _ (by have := hG i; exact t.isGE_of_ge _ (n + 1) b hn))
+      (hvan n _ (by have := hpt; exact t.isGE_of_ge _ (n + 1) b hn))
   · have h := key n (by omega) ((t.truncLE n).mapCocone s)
-      (fun i ↦ by haveI := hG i; dsimp; infer_instance) (fun i ↦ by dsimp; infer_instance)
-      (by haveI := hpt; dsimp; infer_instance) (by dsimp; infer_instance) (hs.truncLE n) n
+      (fun i ↦ by have := hG i; dsimp; infer_instance) (fun i ↦ by dsimp; infer_instance)
+      (by have := hpt; dsimp; infer_instance) (by dsimp; infer_instance) (hs.truncLE n) n
     have hι (X : DerivedCategory 𝒜) := isIso_shift_map_truncLEι hvan n X
     refine (isIso_colimitDesc_iff_of_iso' (I := I) (F₁ := (G ⋙ t.truncLE n) ⋙ H.shift n)
       (F₂ := G ⋙ H.shift n)
@@ -307,8 +309,8 @@ lemma isContinuousOn_of_isGE_of_isLE
       (h₄ : Y.IsLE m) (f : X ⟶ Y) :
       f ≫ (e Y h₃ h₄).hom = (e X h₁ h₂).hom ≫ (singleFunctor 𝒜 m).map
         ((homologyFunctor 𝒜 m).map f) := by
-    haveI := h₁
-    haveI := h₂
+    have := h₁
+    have := h₂
     refine hom_ext_of_isGE_of_isLE (X := X) m ?_
     rw [← cancel_mono (ε.hom.app _)]
     have hn := ε.hom.naturality ((homologyFunctor 𝒜 m).map f)

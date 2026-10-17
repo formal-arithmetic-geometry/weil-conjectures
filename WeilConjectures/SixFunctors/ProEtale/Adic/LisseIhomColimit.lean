@@ -45,7 +45,8 @@ lemma preservesColimitsOfShape_of_cover {D : Type*} [Category D] {J : Type (u + 
   have hφ (i : ι) : IsIso ((g i)^*ᵃ[l].map φ) := by
     have hc := isColimitOfPreserves (F ⋙ (g i)^*ᵃ[l]) (colimit.isColimit K)
     let ψ := colimit.desc (K ⋙ F ⋙ (g i)^*ᵃ[l]) ((F ⋙ (g i)^*ᵃ[l]).mapCocone (colimit.cocone K))
-    have : IsIso ψ := inferInstanceAs (IsIso ((colimit.isColimit _).coconePointUniqueUpToIso hc).hom)
+    have : IsIso ψ :=
+      inferInstanceAs (IsIso ((colimit.isColimit _).coconePointUniqueUpToIso hc).hom)
     have h' : (g i)^*ᵃ[l].map φ = (preservesColimitIso (g i)^*ᵃ[l] (K ⋙ F)).hom ≫ ψ := by
       rw [← Iso.inv_comp_eq]
       apply colimit.hom_ext

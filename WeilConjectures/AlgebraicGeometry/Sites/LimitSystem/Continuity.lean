@@ -297,6 +297,26 @@ theorem isContinuousAt_zero (S : SystemData D c) (hS : S.Laws) : S.IsContinuousA
     simp only [sec, ← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp] at h'
     erw [hid, op_id, CategoryTheory.Functor.map_id] at h'
     exact h'
+  have hsec_zero {i₀ j : I} (f : i₀ ⟶ j) : sec f 0 = 0 := by
+    simp only [sec, map_zero]
+  have hsec_transition {i₀ j k : I} (f : i₀ ⟶ j) (a : j ⟶ k) (z : Sheaf.H (S.F j) 0) :
+      (S.stageTransition f a).hom.app (op (MorphismProperty.Over.mk ⊤ (𝟙 (D.obj (op i₀)))
+        (MorphismProperty.id_mem _ _))) (sec f z) = sec (f ≫ a) (S.transitionH a 0 z) := by
+    let T₀ : (D.obj (op i₀)).Etale :=
+      MorphismProperty.Over.mk ⊤ (𝟙 _) (MorphismProperty.id_mem _ _)
+    have hΦ : IsTerminal ((D.map a.op).Etale.obj (⊤_ (D.obj (op j)).Etale)) :=
+      IsTerminal.isTerminalObj _ _ terminalIsTerminal
+    simp only [sec, stageTransition, pushTransition, ObjectProperty.FullSubcategory.comp_hom,
+      NatTrans.comp_app, ConcreteCategory.comp_apply, lowerStar_map_hom_app,
+      lowerStarComp_hom_app_hom_app]
+    rw [equiv₀_transitionH]
+    have hη := NatTrans.naturality_apply ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}
+      (D.map a.op)).unit.app (S.F j)).hom (terminal.from
+        ((MorphismProperty.Over.pullback @Etale ⊤ (D.map f.op)).obj T₀)).op
+        (Sheaf.H.equiv₀ _ terminalIsTerminal z)
+    erw [hη, ← NatTrans.naturality_apply (S.φ a).hom, ← NatTrans.naturality_apply (S.φ a).hom]
+    congr 1
+    exact presheaf_map_map_of_isTerminal _ hΦ _ _ _ _ _
   refine ⟨fun x ↦ ?_, fun i y hy ↦ ?_⟩
   · obtain ⟨k⟩ := ‹Nonempty I›
     let T₀ : (D.obj (op k)).Etale :=
@@ -332,7 +352,36 @@ theorem isContinuousAt_zero (S : SystemData D c) (hS : S.Laws) : S.IsContinuousA
       ← NatTrans.naturality_apply (S.eG j).inv.hom]
     congr 2
     exact presheaf_map_map_of_isTerminal _ hΦ _ _ _ _ _
-  · sorry
+  · let T₀ : (D.obj (op i)).Etale :=
+      MorphismProperty.Over.mk ⊤ (𝟙 _) (MorphismProperty.id_mem _ _)
+    have : CompactSpace T₀.left := inferInstanceAs (CompactSpace (D.obj (op i)))
+    have : QuasiSeparatedSpace T₀.left := inferInstanceAs (QuasiSeparatedSpace (D.obj (op i)))
+    have ht : (S.stageMap (𝟙 i)).hom.app (op T₀) (sec (𝟙 i) y) = 0 := by
+      have hΦ : IsTerminal ((c.π.app (op i)).Etale.obj (⊤_ (D.obj (op i)).Etale)) :=
+        IsTerminal.isTerminalObj _ _ terminalIsTerminal
+      have h₀ := congrArg (Sheaf.H.equiv₀ _ terminalIsTerminal) hy
+      rw [equiv₀_toLimitH, map_zero] at h₀
+      have h₁ := congrArg (S.L.pt.obj.map (terminal.from
+        ((MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i))).obj T₀)).op) h₀
+      rw [map_zero] at h₁
+      erw [← NatTrans.naturality_apply (S.L.ι.app i).hom,
+        ← NatTrans.naturality_apply (S.eG i).inv.hom] at h₁
+      simp only [sec, stageMap, limitComparison, ObjectProperty.FullSubcategory.comp_hom,
+        NatTrans.comp_app, ConcreteCategory.comp_apply, lowerStar_map_hom_app,
+        lowerStarComp_hom_app_hom_app]
+      have hη := NatTrans.naturality_apply ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}
+        (c.π.app (op i))).unit.app (S.F i)).hom (terminal.from
+          ((MorphismProperty.Over.pullback @Etale ⊤ (D.map (𝟙 i).op)).obj T₀)).op
+          (Sheaf.H.equiv₀ _ terminalIsTerminal y)
+      erw [hη]
+      convert h₁ using 3
+      exact presheaf_map_map_of_isTerminal _ hΦ _ _ _ _ _
+    obtain ⟨k, a, l, b, hab⟩ := S.exists_stageTransition_stageTransition_app_eq_zero hc T₀
+      (𝟙 i) _ ht
+    rw [hsec_transition, hsec_transition] at hab
+    refine ⟨l, a ≫ b, ?_⟩
+    rw [hS.transitionH_comp]
+    exact hsec_inj _ (hab.trans (hsec_zero _).symm)
 
 end Zero
 
