@@ -234,5 +234,27 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-4cdc910ce (reviewer sub-agent of L); spot-checked: Read the item and both new nodes in full; checked all eleven proof steps against cited statements and Stacks sources, adjunction directions, topology hypotheses, duplicate candidates, edge cases, and route constraints. No long steps, cycles, target weakening, or repairs needed. Detailed findings are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.ToposComplementFactorization",
+  "declaration": "CategoryTheory.topos_complement_factorization",
+  "declarations": [
+   "CategoryTheory.closedComplementObjects",
+   "CategoryTheory.topos_complement_factorization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/ToposComplementFactorization.lean",
+  "statement": "theorem topos_complement_factorization {E : Type u} [Category.{v} E] (hE : IsGrothendieckTopos.{w} E) (u : E) (hu : IsSubterminal u) : ∃ (products : HasBinaryProducts E), IsGrothendieckTopos.{w} (@closedComplementObjects E _ products u).FullSubcategory ∧ IsGrothendieckTopos.{w} (Over u) ∧ ∃ (j : GeometricMorphism (Over u) E) (k : GeometricMorphism (@closedComplementObjects E _ products u).FullSubcategory E), Nonempty (j.inverse ≅ @Over.star E _ u products) ∧ Nonempty (k.direct ≅ (@closedComplementObjects E _ products u).ι) ∧ Nonempty j.direct.FullyFaithful ∧ Nonempty k.direct.FullyFaithful ∧ ∀ (H : Type uH) [Category.{vH} H], IsGrothendieckTopos.{w} H → ((∀ (a : GeometricMorphism H E), (∃ (b : GeometricMorphism H (@closedComplementObjects E _ products u).FullSubcategory), Nonempty ((b.comp k).direct ≅ a.direct)) ↔ Nonempty (IsInitial (a.inverse.obj u))) ∧ (∀ (b d : GeometricMorphism H (@closedComplementObjects E _ products u).FullSubcategory), Function.Bijective (fun τ : b.direct ⟶ d.direct ↦ Functor.whiskerRight τ k.direct))) ∧ ((∀ (a : GeometricMorphism H E), (∃ (b : GeometricMorphism H (Over u)), Nonempty ((b.comp j).direct ≅ a.direct)) ↔ Nonempty (IsTerminal (a.inverse.obj u))) ∧ (∀ (b d : GeometricMorphism H (Over u)), Function.Bijective (fun τ : b.direct ⟶ d.direct ↦ Functor.whiskerRight τ j.direct)))",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2d19dda93",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Wrote review.md. Checked every statement clause, dependency interfaces, sources, universes, edge cases, docstrings, and route-pivot compliance. lean.statement matches verbatim; scompile.py passed both probes without diagnostics. No fixes needed."
  }
 }

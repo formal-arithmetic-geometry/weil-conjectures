@@ -29,7 +29,10 @@
   "def-weil-exceptional-inverse-image",
   "def-pur-affine-line-datum",
   "def-pur-support-cohomology",
-  "def-weil-finite-tor-amplitude"
+  "def-weil-finite-tor-amplitude",
+  "lem-pur-supported-hom-pullback",
+  "lem-pur-support-comparison-boundary",
+  "def-exc-open-complement-bound"
  ],
  "proof": [
   {
@@ -432,5 +435,31 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityAffineLineOrientation",
+  "declaration": "WeilConjectures.PurityFiniteSetting.affineLine_orientation",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.OrientationSupportData",
+   "WeilConjectures.PurityFiniteSetting.OrientationSupportData.coordinateBoundary",
+   "WeilConjectures.PurityFiniteSetting.orientationInputPullback",
+   "WeilConjectures.PurityFiniteSetting.orientationSupportRestriction",
+   "WeilConjectures.PurityFiniteSetting.affineLine_orientation"
+  ],
+  "file": "lean/Sheaf/Paper/PurityAffineLineOrientation.lean",
+  "statement": "theorem affineLine_orientation (P : PurityFiniteSetting.{u}) (h : P.ramificationIndex ∣ P.level) (Y : Scheme.{u}) (a : Y ⟶ Spec (CommRingCat.of P.field.k)) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] : finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Y ((finiteCoefficientIntrinsicRealization Y P.Ring).mapDerivedCategory.obj (P.derivedSheaf h Y false)) ∧ finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Y ((finiteCoefficientIntrinsicRealization Y P.Ring).mapDerivedCategory.obj (P.gysinValue h Y)) ∧ (∀ q : ℤ, q ≠ 0 → IsZero ((DerivedCategory.homologyFunctor (ProSheaves P Y) q).obj (P.gysinValue h Y))) ∧ (∃ (hj : QuasiCompact (openImmersion Y)) (c : ℕ), @Scheme.HasOpenComplementCondition P.Coefficient inferInstance inferInstance (Punctured Y) (Line Y) (openImmersion Y) inferInstance hj c) ∧ ∃ D : OrientationSupportData P h Y, ∃ m : P.derivedSheaf h Y false ⟶ P.gysinValue h Y, D.support.hom (P.gysinHomToSections h Y m) = D.coordinateBoundary P h a ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] [Algebra P.field.k Ω] (y : Spec (CommRingCat.of Ω) ⟶ Y) (_hy : y ≫ a = Spec.map (CommRingCat.ofHom (algebraMap P.field.k Ω))), ∃ D' : OrientationSupportData P h (Spec (CommRingCat.of Ω)), ∃ p : proEtaleSupportHomTransport P (zeroSection Y) (zeroSection (Spec (CommRingCat.of Ω))) (AffineSpace.map (ULift.{u} (Fin 1)) y), ∃ ρ : P.gysinSupport h (Spec (CommRingCat.of Ω)) ≅ ModuleCat.of P.Coefficient P.Coefficient, ρ.hom (D'.coordinateBoundary P h (Spec.map (CommRingCat.ofHom (algebraMap P.field.k Ω)))) = 1 ∧ ρ.hom (P.orientationSupportRestriction h y p (D.support.hom (P.gysinHomToSections h Y m))) = 1",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded Gysin object and its normalized support identification. The auxiliary chart packages that identification with the snake-normalized boundary; the derived kernel restriction and root-line coefficient pullback are explicit composites of published canonical maps. Fibre normalization uses an A-linear residue isomorphism fixed by the fibre coordinate boundary, independently of the restricted global morphism. Both source and target are asserted finite-Tor constructible in the intrinsic realization, hence the displayed ambient morphism belongs to its full subcategory. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b86e086c8",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Wrote review.md. Checked sources, all 14 statement dependencies, canonical maps, hypotheses, conclusions, universes, edge cases, docstrings, and route-pivot compliance. Signature matches verbatim; scompile passed sandbox and library checks without diagnostics. No fixes required."
  }
 }

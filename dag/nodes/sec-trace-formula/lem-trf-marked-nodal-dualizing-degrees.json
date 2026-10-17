@@ -26,7 +26,11 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-regular-sequence",
   "def-weil-pbc-sheaf-ext",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "def-trf-multipointed-curve-modification",
+  "def-trf-nodal-dualizing-datum",
+  "def-pc-module-pullback",
+  "def-a1-relative-differentials-pullback-map"
  ],
  "proof": [
   {
@@ -331,5 +335,31 @@
   "group": "Q83",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-516e809f6 (reviewer sub-agent of L); spot-checked: I read the whole item, its 8 steps and the 4 new nodes. I checked every cited node's statement and the Stacks sources 0B6V, 0E2Y, 0C6U (8)⇒(1), 0C4D/0C4E and the 00SA/00SP/00SV/00SY/03H0 tags. Temkin's PDF is absent locally (WANTED is recorded and the proof is marked agent-written), so I checked that mathematics myself. The statement is unchanged and the definitions match the sibling Temkin nodes. Steps 1 and 3–8 are correct, and I checked the hypotheses of every lemma they apply. Step 7 is right that a rational point is closed, that the contracted 1-dimensional Z is a whole component, and that a component meeting nothing else would be a clopen proper contracted component. Step 8's genus cases (self-node gives 2 branches plus a separate boundary node; with no self-node, Z is P1 and stability gives at least 3 special points) are correct. Small cases: an exceptional P1 with one node is excluded by stability; with two marks it has degree 1; a genus-1 tail has degree 1; a rational self-nodal component has degree 1; the identity elliptic curve makes no claim. New nodes: all are true, self-contained, statement-only, unsplit, with correct blueprint.from/via and four kinds of search, and none duplicates an existing node. I proved no-isolated-contracted myself: Stein factorization plus upper semicontinuity of fibre dimension on V'=Spec f_*O_Y. The adjunction node holds because codimension c in a CM fibre gives relative regularity. Genus-zero is 0C6U (8)⇒(1). The normalization node is the classical branch-pole formula and cites the adjunction node in stmt_deps. None restates the item: the degree formula and positivity are proved in steps 5–8. FIX (C1): step 2 used, without citing it, that a principal localization of a global complete intersection is again one (Stacks 00SA). This is needed to turn the fibre's lci cover into hypothesis (3) of the syntomic-at-prime lemma on the chart's fibre ring F. I added the existing node lem-weil-pbc-global-complete-intersection-principal-localization to step 2's text and uses, and updated proof_deps, the source place and split_report.tool_uses. I accept all declared tool_uses as generic Picard, curve and commutative-algebra tools. No node is dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MarkedNodalDualizingDegrees",
+  "declaration": "AlgebraicGeometry.marked_nodal_dualizing_degrees",
+  "declarations": [
+   "AlgebraicGeometry.markedNodalLine",
+   "AlgebraicGeometry.markedNodalComponentDegree",
+   "AlgebraicGeometry.markedNodalComponentGenus",
+   "AlgebraicGeometry.markedNodalBranches",
+   "AlgebraicGeometry.MarkedNodalDualizingDegreesData",
+   "AlgebraicGeometry.marked_nodal_dualizing_degrees"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/MarkedNodalDualizingDegrees.lean",
+  "statement": "theorem marked_nodal_dualizing_degrees (T : Scheme.{u}) [IsIntegral T] [IsNoetherian T] (C P : MultipointedCurve T) (η : T) (hη : IsGenericPoint η Set.univ) (hgenericCurve : Smooth (C.x.fiberToSpecResidueField η)) (hgenericMarking : Etale (C.d.fiberToSpecResidueField η)) (f : P.Hom C) (hstable : f.IsStable (T.fromSpecResidueField η)) : ∃ D : MarkedNodalDualizingDegreesData P, ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (z : Spec (.of Ω) ⟶ C.X) (Z : Scheme.{u}) [IsIntegral Z] (j : Z ⟶ pullback f.curve z), IsClosedImmersion j → Set.range j ∈ irreducibleComponents (pullback (C := Scheme) f.curve z) → topologicalKrullDim Z = 1 → 0 < markedNodalComponentDegree Ω Z (j ≫ pullback.fst f.curve z) (j ≫ pullback.snd f.curve z) (markedNodalLine P D.omega)",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d2db37789",
+  "group": "N9",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, definitions, edge cases, route-pivot constraints, report sections, and scompile.py per-file compilation all verified."
  }
 }

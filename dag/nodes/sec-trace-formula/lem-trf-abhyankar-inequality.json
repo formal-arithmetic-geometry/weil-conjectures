@@ -10,7 +10,8 @@
  },
  "stmt_deps": [
   "def-weil-field",
-  "def-kun-transcendence-degree"
+  "def-kun-transcendence-degree",
+  "def-trf-rational-rank"
  ],
  "proof": [
   {
@@ -254,5 +255,29 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-9204b1373 (reviewer sub-agent of L); spot-checked: Read all eight proof steps and cited statements; checked Temkin Lemma 2.1.2, Stacks 0ASH/030F/030G, route, duplicates, and edge cases. Mathematics is correct. Corrected one inherited Loogle error verdict from “no match” to “unavailable”; statement and proof unchanged. Whole corrected JSON and review.md written. Review records an accidental read-only git invocation.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.AbhyankarInequality",
+  "declaration": "ValuationSubring.abhyankar_inequality",
+  "file": "lean/Sheaf/FieldTheory/AbhyankarInequality.lean",
+  "statement": "theorem abhyankar_inequality (F : Type u) (K : Type v) [Field F] [Field K] [Algebra F K] (hfg : (⊤ : IntermediateField F K).FG) (A : ValuationSubring K) : AddCommGroup.rationalRank (Additive ((Kˣ ⧸ A.unitGroup) ⧸ ((QuotientGroup.mk' A.unitGroup).comp (Units.map (algebraMap F K).toMonoidHom)).range)) + @Algebra.trdeg (IsLocalRing.ResidueField (A.comap (algebraMap F K))) (IsLocalRing.ResidueField A) _ _ (A.comapResidueFieldMap (algebraMap F K)).toAlgebra ≤ Algebra.trdeg F K",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "ValuationSubring.comapInclusion",
+   "ValuationSubring.comapInclusion_isLocalHom",
+   "ValuationSubring.comapResidueFieldMap",
+   "ValuationSubring.abhyankar_inequality"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-671179884",
+  "group": "Q15",
+  "result": "fix",
+  "note": "Mathematics, dependencies, universes, and verbatim signatures verified; both immutable Lean modules compile through scompile.py. H11 repaired with a complete replacement report in fixes/lem-trf-abhyankar-inequality.report.md. Full findings recorded in review.md. Branch unchanged."
  }
 }

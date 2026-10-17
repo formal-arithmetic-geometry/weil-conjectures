@@ -208,5 +208,24 @@
   "group": "Q19",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q19-9d26cb6bc (reviewer sub-agent of L); spot-checked: The mathematics and all six proof steps check against Stacks Tag 0DD7, including unbounded complexes and local annihilators; no route, duplicate, or hypothesis faults found. The new helper omits required lean_audit metadata despite its verified sorry-free declaration attachment. Corrected JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-injective-abelian-sheaf-divisible.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TorsionInjectiveSubcomplex",
+  "declaration": "CategoryTheory.Sheaf.torsion_injective_subcomplex",
+  "file": "lean/Sheaf/CategoryTheory/TorsionInjectiveSubcomplex.lean",
+  "statement": "theorem torsion_injective_subcomplex {C : Type u} [Category.{v} C] (J : Precoverage C) (_hJ : J.IsSiteForCoverings) [HasSheafify J.toGrothendieck AddCommGrpCat.{max u v t}] (I : CochainComplex (Sheaf J.toGrothendieck AddCommGrpCat.{max u v t}) ℤ) (hI : ∀ r : ℤ, Injective (I.X r)) (hH : ∀ r : ℤ, ∀ (U : C) (s : ((HomologicalComplex.homology I r).obj.obj (Opposite.op U))), ∃ (R : Presieve U), R ∈ J U ∧ ∀ (V : C) (f : V ⟶ U), R f → ∃ n : ℕ, 0 < n ∧ n • (HomologicalComplex.homology I r).obj.map f.op s = 0) : ∃ (T : CochainComplex (Sheaf J.toGrothendieck AddCommGrpCat.{max u v t}) ℤ) (j : T ⟶ I), (∀ r : ℤ, Mono (j.f r)) ∧ (∀ (r : ℤ) (U : C) (s : (I.X r).obj.obj (Opposite.op U)), ((∃ t : (T.X r).obj.obj (Opposite.op U), (j.f r).hom.app (Opposite.op U) t = s) ↔ ∃ (R : Presieve U), R ∈ J U ∧ ∀ (V : C) (f : V ⟶ U), R f → ∃ n : ℕ, 0 < n ∧ n • (I.X r).obj.map f.op s = 0)) ∧ QuasiIso j",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-Codex-c3bc05bf3"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c3bc05bf3",
+  "group": "N5",
+  "result": "fix",
+  "note": "Statement and dependencies match Tag 0DD7; original fails H8 because theorem docstring lacks stepwise proof/dependency citations. Complete compiling replacement is in fixes/lean/Sheaf/CategoryTheory/TorsionInjectiveSubcomplex.lean."
  }
 }

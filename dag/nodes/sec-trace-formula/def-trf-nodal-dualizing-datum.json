@@ -1,0 +1,122 @@
+{
+ "id": "def-trf-nodal-dualizing-datum",
+ "kind": "definition",
+ "title": "Jacobian-normalized dualizing datum of a relative nodal curve",
+ "status": "split",
+ "statement": "Let $p:Y\\to T$ be a morphism of schemes [def-pc-scheme]. A regular affine curve presentation consists of affine opens $U\\subset Y$, $V\\subset T$ with $p(U)\\subset V$, an integer $c\\ge0$, a surjection $q:R[x_0,\\ldots,x_c]\\to B$ with $R=\\Gamma(V,\\mathcal O_T)$, $B=\\Gamma(U,\\mathcal O_Y)$, whose coefficient map is induced by $p$, and an ordered regular sequence $f_1,\\ldots,f_c$ [def-weil-pbc-regular-sequence] generating its kernel. A nodal dualizing datum on an $\\mathcal O_Y$-module $\\omega$ consists of invertibility [def-sc-invertible-module], a fundamental-class morphism $\\alpha:\\Omega^1_{Y/T}\\to\\omega$ (relative differentials are [def-weil-pbc-kahler-differentials]), coverage of $Y$ by such presentations, and the following normalization in every such presentation. There is a $B$-linear isomorphism $e:\\Gamma(U,\\omega)\\simeq B$ such that, for every polynomial $a$, $e(\\alpha(dq(a)))=q(\\det(\\partial(f_1,\\ldots,f_c,a)/\\partial(x_0,\\ldots,x_c)))$. In addition, for the immersion $i:U\\to\\operatorname{Spec}R[x_0,\\ldots,x_c]$ one has $i_*(\\omega|_U)\\simeq\\mathcal Ext^c(i_*\\mathcal O_U,\\mathcal O)$ [def-weil-pbc-sheaf-ext], with the second argument identified with the top relative differential module by the ordered coordinate volume form; restriction uses [def-pc-module-pullback]. The Jacobian normalization specifies the adjunction transitions on overlaps, including on a nonseparated source.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-regular-sequence",
+  "def-sc-invertible-module",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-sheaf-ext",
+  "def-pc-module-pullback"
+ ],
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "§1.2, printed p. 2: local complete-intersection and Koszul construction of omega; determinant normalization of the fundamental class"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "relative canonical sheaf local complete intersection fundamental class Jacobian determinant",
+   "results": "Eight hits on Jacobians, differentials and smooth presentations, no relative adjunction line or normalized fundamental-class datum.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "relative dualizing line fundamental class complete intersection Jacobian determinant",
+   "results": "Eight hits on Algebra.SubmersivePresentation Jacobians and their algebraic identities, no dualizing datum.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizingSheaf|dualizingModule|AdjunctionLine|NodalDualizingDatum in Mathlib, WeilConjectures, lean/Sheaf; blueprint_refs.py search relative dualizing; rg relative dualizing dag/nodes",
+   "results": "No duplicate. Existing DAG theorem lem-trf-flat-lci-canonical-adjunction describes the construction but has no declaration. RelativeDifferentialsPullbackMap and SheafExt provide the reused differential-generator and Ext operations. blueprint search returns only etale coefficient dualizing complexes (different notion).",
+   "date": "2026-10-17",
+   "verdict": "new definition; reuse existing operations"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-marked-nodal-dualizing-degrees",
+  "date": "2026-10-17",
+  "group": "N9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The relative lci adjunction line, its local Ext description and canonical gluing",
+   "via": [
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalDualizingDatum",
+  "declaration": "AlgebraicGeometry.NodalDualizingDatum",
+  "declarations": [
+   "AlgebraicGeometry.NodalCanonicalPresentation",
+   "AlgebraicGeometry.NodalCanonicalPresentation.ambient",
+   "AlgebraicGeometry.NodalCanonicalPresentation.immersion",
+   "AlgebraicGeometry.NodalCanonicalPresentation.jacobian",
+   "AlgebraicGeometry.NodalCanonicalPresentation.ext",
+   "AlgebraicGeometry.NodalDualizingDatum"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalDualizingDatum.lean",
+  "statement": "structure NodalDualizingDatum {Y T : Scheme.{u}} (p : Y ⟶ T) (omega : Y.Modules)",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d2db37789",
+  "group": "N9",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d2db37789",
+  "group": "N9",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, definitions, edge cases, route-pivot constraints, report sections, and scompile.py per-file compilation all verified."
+ }
+}
