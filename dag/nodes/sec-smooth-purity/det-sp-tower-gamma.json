@@ -63,11 +63,11 @@
    }
   },
   {
-   "text": "We construct a morphism in the derived category of strict towers, rather than assuming that a compatible family of arbitrary derived morphisms lifts. By the chart formula of [det-sp-tower-gluing](1), $\\omega_{f,\\bullet}[-2d]$ has cohomology only in degree zero. Alternatively its evaluations do, by step 1; exact, jointly conservative evaluation in the abelian tower category [det-sp-coefficient-towers-abelian] detects the vanishing of each other cohomology sheaf. Put $W_\\bullet=H^0(\\omega_{f,\\bullet}[-2d])$. Truncating a representing complex to degrees at most zero and then projecting to its zeroth cohomology gives quasi-isomorphisms, hence $W_\\bullet[0]\\simeq\\omega_{f,\\bullet}[-2d]$; these are the standard truncations of [def-sbc-standard-tstructure-derived-category]. At each level, $a_n[-2d]$ is a unique map of sheaves $R_{n,X}(d)\\to W_n$ by [lem-weil-pbc-derived-single-fully-faithful]. Write $\\alpha_n:R_{n,X}(d)\\to W_n$ for these sheaf isomorphisms, $q_{n,m}$ for the Tate quotient transition, and $t^W_{n,m}$ for the transition of $W_\\bullet$. By [det-sp-coefficient-towers-abelian](3), the reduction map of $W_\\bullet[0]$ is induced by $t^W_{n,m}$. Each $W_n$ is locally free of rank one via $\\alpha_n$, so its derived reduction is its ordinary tensor reduction by [det-sp-scalar-extension-functor](3). Consequently step 2, after removing the shift and using full faithfulness, reads $t^W_{n,m}\\circ\\alpha_n=\\alpha_m\\circ q_{n,m}$ as an equality of semilinear sheaf maps. Multiplying this equality by the two inverses gives $\\alpha_m^{-1}\\circ t^W_{n,m}=q_{n,m}\\circ\\alpha_n^{-1}$. By [sk-def-sp-coefficient-towers] they therefore define an actual map of tower sheaves $R_{\\bullet,X}(d)\\to W_\\bullet$. Its inverse family also commutes with transitions, so it is an isomorphism of tower sheaves. Shifting by $[2d]$ gives $a_\\bullet$ in clause (1), with exactly the prescribed finite levels.",
+   "text": "We construct a morphism in the derived category of strict towers, rather than assuming that a compatible family of arbitrary derived morphisms lifts. By the chart formula of [det-sp-tower-gluing](1), $\\omega_{f,\\bullet}[-2d]$ has cohomology only in degree zero. Alternatively its evaluations do, by step 1; exact, jointly conservative evaluation in the abelian tower category [det-sp-coefficient-towers-abelian] detects the vanishing of each other cohomology sheaf. Put $W_\\bullet=H^0(\\omega_{f,\\bullet}[-2d])$. By [lem-sf-derived-concentrated-single] at degree zero, $W_\\bullet[0]\\simeq\\omega_{f,\\bullet}[-2d]$. At each level, $a_n[-2d]$ is a unique map of sheaves $R_{n,X}(d)\\to W_n$ by [lem-weil-pbc-derived-single-fully-faithful]. Write $\\alpha_n:R_{n,X}(d)\\to W_n$ for these sheaf isomorphisms, $q_{n,m}$ for the Tate quotient transition, and $t^W_{n,m}$ for the transition of $W_\\bullet$. By [det-sp-coefficient-towers-abelian](3), the reduction map of $W_\\bullet[0]$ is induced by $t^W_{n,m}$. Each $W_n$ is locally free of rank one via $\\alpha_n$, so its derived reduction is its ordinary tensor reduction by [det-sp-scalar-extension-functor](3). Consequently step 2, after removing the shift and using full faithfulness, reads $t^W_{n,m}\\circ\\alpha_n=\\alpha_m\\circ q_{n,m}$ as an equality of semilinear sheaf maps. Multiplying this equality by the two inverses gives $\\alpha_m^{-1}\\circ t^W_{n,m}=q_{n,m}\\circ\\alpha_n^{-1}$. By [sk-def-sp-coefficient-towers] they therefore define an actual map of tower sheaves $R_{\\bullet,X}(d)\\to W_\\bullet$. Its inverse family also commutes with transitions, so it is an isomorphism of tower sheaves. Shifting by $[2d]$ gives $a_\\bullet$ in clause (1), with exactly the prescribed finite levels.",
    "uses": [
     "det-sp-tower-gluing",
     "det-sp-coefficient-towers-abelian",
-    "def-sbc-standard-tstructure-derived-category",
+    "lem-sf-derived-concentrated-single",
     "lem-weil-pbc-derived-single-fully-faithful",
     "sk-def-sp-coefficient-towers",
     "det-sp-scalar-extension-functor"
@@ -79,27 +79,59 @@
    }
   },
   {
-   "text": "First verify that the source of the desired transpose belongs to the domain of the tower adjunction. Choose common Tor bounds $[a,b]$ for $K_\\bullet$. By [lem-sf-pullback-tor-amplitude], its pullback has constructible levels of Tor amplitude $[a,b]$. By [lem-pur-twist-sheaf-locally-free] and [def-coefficient-twists-detailed], $R_{n,X}(d)$ is a constructible locally free line (for $d=0$ the coefficient unit, and for $d>0$ the $d$-fold tensor power of the Tate line). Local trivialization shows that twisting retains the Tor interval, and shifting by $[2d]$ changes it to $[a-2d,b-2d]$. Testing the Tor bound on the coefficient unit gives the same cohomological bound. Thus $P_\\bullet=f^*_\\bullet K_\\bullet(d)[2d]$ belongs to the uniform constructible finite-Tor tower category. By the orientation of step 3, $f^*_\\bullet K_\\bullet\\otimes^L\\omega_{f,\\bullet}\\simeq P_\\bullet$, so this tensor object is also in the adjunction domain. Form the tower projection-formula/counit composite in the statement and take its adjoint transpose. This is a genuine tower map, since [det-sp-tower-shriek-levels](2a) supplies the tower projection formula and [det-sp-tower-gluing] supplies the tower adjunction. Its finite etale-origin hypotheses hold as follows. A field is Noetherian (its only ideals are zero and the whole field), so [lem-weil-pbc-finite-type-over-noetherian] makes X and Y Noetherian and quasi-compact, and [lem-weil-pbc-locally-noetherian-quasi-separated] makes them quasi-separated. Each R_n is a finite, hence Noetherian, ring. The equivalence in [det-pe-finite-tor-comparison-noetherian] therefore supplies a bounded constructible finite-Tor etale-origin witness for every intrinsic finite-Tor level. In particular, the coefficient unit and $\\omega_{f,\\bullet}$ have finite-Tor constructible levels, the latter being the shifted Tate line by step 1, and $K_\\bullet$ is in the stated finite-Tor tower category. Under evaluation the transpose is the finite transpose: write it as $G_\\bullet(h)\\circ\\eta_\\bullet$ for the displayed composite $h$ and use [det-sp-tower-gluing](3), including compatibility of units and counits. The tower projection map evaluates to the finite projection map by [det-sp-tower-shriek-levels]. The finite transpose is exactly $\\theta_{f,K_n}$ of [def-pur-co-smoothness]. Therefore composing with $1\\otimes a_\\bullet$ and the twist reassociation gives at level $n$ exactly $\\gamma_{f,R_n}(K_n)$ of [def-pur-smooth-purity-map]. Naturality follows by applying the functorial adjunction bijection to the natural projection-formula/counit composite; composing with the fixed orientation and natural twist reassociation preserves that naturality.",
+   "text": "Choose common Tor bounds $[a,b]$ for $K_\\bullet$. At every level $R_n=A_{E,en}$, [lem-sf-pullback-tor-amplitude] applies to the separated finite-type morphism $f$ and the bounded constructible finite-Tor complex $K_n$. It gives constructible $f_{R_n}^*K_n$ with Tor interval $[a,b]$. The interval is independent of $n$, since the cited assertion preserves the specified interval, not just existence of some finite interval.",
    "uses": [
-    "det-sp-tower-shriek-levels",
-    "det-sp-tower-gluing",
-    "def-pur-co-smoothness",
-    "def-pur-smooth-purity-map",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "det-pe-finite-tor-comparison-noetherian",
-    "lem-sf-pullback-tor-amplitude",
-    "lem-pur-twist-sheaf-locally-free",
-    "def-coefficient-twists-detailed"
+    "lem-sf-pullback-tor-amplitude"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
-    "place": "(2), the tower transpose and identification of its levels"
+    "place": "(2), domain of the transpose: finite pullback preservation"
    }
   },
   {
-   "text": "Every level of the map in step 4 is an isomorphism by [thm-pur-finite-coefficient-smooth-purity], applied at index $en$. The source category membership and the common shifted Tor and cohomological bounds were verified before the transpose in step 4. The target is in the same tower category by [det-sp-tower-gluing]. The level conservativity of [det-sp-tower-shriek-levels](3) now makes the already constructed map an isomorphism in the ambient tower derived category, and hence in the full subcategory $\\Dctf(X_{\\mathrm{proét}},\\mathcal O_E/\\ell^\\bullet)$ of [sk-def-sp-normalized-towers]: both its source and target have constructible levels and cohomological and Tor amplitude bounds independent of the level. No reduction-isomorphism condition is needed for this subcategory. This proves every assertion of clause (2); preservation of the normalized subcategory is proved in steps 6-7.",
+   "text": "By [lem-pur-twist-sheaf-locally-free](3)-(4) and [def-coefficient-twists-detailed], $R_{n,X}(d)$ is a constructible locally free line: the unit if $d=0$, and a tensor power of the Tate line if $d>0$. Locally trivializing this line identifies tensoring with it with the identity, so it preserves the Tor interval $[a,b]$ and constructibility. Shifting by $[2d]$ changes the interval to $[a-2d,b-2d]$; testing the Tor bound on the coefficient unit gives the same cohomological bound. Thus $P_\\bullet=f^*_\\bullet K_\\bullet(d)[2d]$ lies in the uniform constructible finite-Tor tower category [sk-def-sp-normalized-towers]. Step 3 identifies $Q_\\bullet=f^*_\\bullet K_\\bullet\\otimes^L\\omega_{f,\\bullet}$ with $P_\\bullet$, so $Q_\\bullet$ is also in the tower adjunction domain.",
+   "uses": [
+    "lem-pur-twist-sheaf-locally-free",
+    "def-coefficient-twists-detailed",
+    "sk-def-sp-normalized-towers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+    "place": "(2), domain of the transpose: Tate line and uniform shifted bounds"
+   }
+  },
+  {
+   "text": "The finite-etale-origin hypotheses of [det-sp-tower-shriek-levels](2a) hold. A field is Noetherian because its only ideals are zero and the whole field. By [lem-weil-pbc-finite-type-over-noetherian], $X,Y$ are Noetherian, hence quasi-compact, and [lem-weil-pbc-locally-noetherian-quasi-separated] makes them quasi-separated. Every $R_n$ is a finite, hence Noetherian, ring. The equivalence of [det-pe-finite-tor-comparison-noetherian] therefore supplies a bounded constructible finite-Tor etale-origin witness for each intrinsic finite-Tor level of $K_\\bullet$ and of $\\omega_{f,\\bullet}$ (the latter is a shifted Tate line by step 1). Steps 3 and 5 give common lower cohomological bounds. These are precisely the two input towers required for the projection formula; compatible choices of the witnesses are not required.",
+   "uses": [
+    "det-sp-tower-shriek-levels",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "det-pe-finite-tor-comparison-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+    "place": "(2), hypotheses of the tower projection formula: qcqs and etale-origin witnesses"
+   }
+  },
+  {
+   "text": "Use [det-sp-tower-shriek-levels](2a) to form the tower projection-formula/counit composite $h:F_\\bullet Q_\\bullet\\to K_\\bullet$ displayed in the statement. The adjunction of [det-sp-tower-gluing] defines its transpose $t=G_\\bullet(h)\\circ\\eta_\\bullet(Q_\\bullet)$. By clause (3) of that node, evaluation carries $G_\\bullet$, its unit and its counit to the finite ones; the projection map evaluates to the finite projection map by [det-sp-tower-shriek-levels](2a). Hence $t_n=f^!_{R_n}(h_n)\\circ\\eta_{R_n}(Q_n)=\\theta_{f,K_n}$, the specified transpose in [def-pur-co-smoothness]. Composing $t$ with $1\\otimes a_\\bullet$ and twist reassociation constructs an actual tower map $\\gamma_{f,\\bullet}(K_\\bullet)$ whose level is exactly the map of [def-pur-smooth-purity-map]. Naturality follows from the natural adjunction bijection applied to the natural projection-formula/counit composite, then composition with the fixed orientation and natural twist reassociation. This constructs the map before testing its evaluations.",
+   "uses": [
+    "det-sp-tower-shriek-levels",
+    "det-sp-tower-gluing",
+    "def-pur-co-smoothness",
+    "def-pur-smooth-purity-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+    "place": "(2), tower transpose, finite evaluation formula and naturality"
+   }
+  },
+  {
+   "text": "Every level of the map in step 7 is an isomorphism by [thm-pur-finite-coefficient-smooth-purity], applied at index $en$. The source category membership and the common shifted Tor and cohomological bounds were verified before the transpose in steps 4-5. The target is in the same tower category by [det-sp-tower-gluing]. The level conservativity of [det-sp-tower-shriek-levels](3) now makes the already constructed map an isomorphism in the ambient tower derived category, and hence in the full subcategory $\\Dctf(X_{\\mathrm{proét}},\\mathcal O_E/\\ell^\\bullet)$ of [sk-def-sp-normalized-towers]: both its source and target have constructible levels and cohomological and Tor amplitude bounds independent of the level. No reduction-isomorphism condition is needed for this subcategory. This proves every assertion of clause (2); preservation of the normalized subcategory is proved in steps 9-10.",
    "uses": [
     "thm-pur-finite-coefficient-smooth-purity",
     "det-sp-tower-gluing",
@@ -127,7 +159,7 @@
    }
   },
   {
-   "text": "Let $K_\\bullet$ be normalized and put $P_\\bullet=f^*_\\bullet K_\\bullet(d)[2d]$. Its reduction maps are $f_{R_m}^*(\\rho^K_{n,m})(d)[2d]$ under the canonical coefficient identifications: pullback commutes with derived coefficient extension by [lem-pur-derived-pullback-tensor-iso], the twist reduction is [det-sp-scalar-extension-functor](3), and shifts commute termwise. These maps are isomorphisms; the common bounds and constructibility were checked in step 4. For $G_\\bullet K_\\bullet$, [det-sp-tower-gluing](3) gives\n$$\\rho^{GK}_{n,m}=f_{R_m}^!(\\rho^K_{n,m})\\circ c_{n,m}(K_n).$$\nBy [det-sp-reduction-compatibilities](3), whose purity maps are, by [det-sp-finite-general-ring](2)-(3) as in step 2, the maps $\\gamma_{f,R}$ of [def-pur-smooth-purity-map] used in steps 4-5, followed by naturality in $K$ of $\\gamma_{f,R_m}$ ([det-sp-finite-general-ring](3); equivalently the argument of the last sentence of step 4 at one level), applied to $\\rho^K_{n,m}:(K_n)_{R_m}\\to K_m$, where $(K_n)_{R_m}\\in\\Dctf$ by [det-sp-scalar-extension-functor](2),\n$$\\begin{aligned}\n\\rho^{GK}_{n,m}\\circ(\\gamma_{f,R_n}(K_n))_{R_m}\n&=f_{R_m}^!(\\rho^K_{n,m})\\circ\\gamma_{f,R_m}((K_n)_{R_m})\\\\\n&=\\gamma_{f,R_m}(K_m)\\circ f_{R_m}^*(\\rho^K_{n,m})(d)[2d].\n\\end{aligned}$$\nAll three factors other than $\\rho^{GK}_{n,m}$ are isomorphisms by steps 5 and the normalization of $K_\\bullet$, so the displayed equation explicitly expresses $\\rho^{GK}_{n,m}$ as a composite of isomorphisms. Its common cohomological and Tor bounds are those of $P_\\bullet$ via step 5. This proves levelwise constructibility, level-independent cohomological and Tor bounds, and all reduction isomorphisms required by the current definition [sk-def-sp-normalized-towers], completing clause (3).",
+   "text": "Let $K_\\bullet$ be normalized and put $P_\\bullet=f^*_\\bullet K_\\bullet(d)[2d]$. Its reduction maps are $f_{R_m}^*(\\rho^K_{n,m})(d)[2d]$ under the canonical coefficient identifications: pullback commutes with derived coefficient extension by [lem-pur-derived-pullback-tensor-iso], the twist reduction is [det-sp-scalar-extension-functor](3), and shifts commute termwise. These maps are isomorphisms; the common bounds and constructibility were checked in steps 4-5. For $G_\\bullet K_\\bullet$, [det-sp-tower-gluing](3) gives\n$$\\rho^{GK}_{n,m}=f_{R_m}^!(\\rho^K_{n,m})\\circ c_{n,m}(K_n).$$\nBy [det-sp-reduction-compatibilities](3), whose purity maps are, by [det-sp-finite-general-ring](2)-(3) as in step 2, the maps $\\gamma_{f,R}$ of [def-pur-smooth-purity-map] used in steps 7-8, followed by naturality in $K$ of $\\gamma_{f,R_m}$ ([det-sp-finite-general-ring](3); equivalently the argument of the last sentence of step 7 at one level), applied to $\\rho^K_{n,m}:(K_n)_{R_m}\\to K_m$, where $(K_n)_{R_m}\\in\\Dctf$ by [det-sp-scalar-extension-functor](2),\n$$\\begin{aligned}\n\\rho^{GK}_{n,m}\\circ(\\gamma_{f,R_n}(K_n))_{R_m}\n&=f_{R_m}^!(\\rho^K_{n,m})\\circ\\gamma_{f,R_m}((K_n)_{R_m})\\\\\n&=\\gamma_{f,R_m}(K_m)\\circ f_{R_m}^*(\\rho^K_{n,m})(d)[2d].\n\\end{aligned}$$\nAll three factors other than $\\rho^{GK}_{n,m}$ are isomorphisms by steps 8 and the normalization of $K_\\bullet$, so the displayed equation explicitly expresses $\\rho^{GK}_{n,m}$ as a composite of isomorphisms. Its common cohomological and Tor bounds are those of $P_\\bullet$ via step 8. This proves levelwise constructibility, level-independent cohomological and Tor bounds, and all reduction isomorphisms required by the current definition [sk-def-sp-normalized-towers], completing clause (3).",
    "uses": [
     "lem-pur-derived-pullback-tensor-iso",
     "det-sp-scalar-extension-functor",
@@ -151,23 +183,23 @@
   "det-sp-reduction-compatibilities",
   "det-sp-scalar-extension-functor",
   "det-sp-tower-gluing",
+  "det-sp-finite-general-ring",
   "det-sp-coefficient-towers-abelian",
-  "def-sbc-standard-tstructure-derived-category",
+  "lem-sf-derived-concentrated-single",
   "lem-weil-pbc-derived-single-fully-faithful",
   "sk-def-sp-coefficient-towers",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-pur-twist-sheaf-locally-free",
+  "def-coefficient-twists-detailed",
+  "sk-def-sp-normalized-towers",
   "det-sp-tower-shriek-levels",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-locally-noetherian-quasi-separated",
   "det-pe-finite-tor-comparison-noetherian",
-  "lem-sf-pullback-tor-amplitude",
-  "lem-pur-twist-sheaf-locally-free",
-  "def-coefficient-twists-detailed",
   "thm-pur-finite-coefficient-smooth-purity",
-  "sk-def-sp-normalized-towers",
   "det-sp-reduction-direct-image",
   "det-sp-tower-bound-uniform",
-  "lem-pur-derived-pullback-tensor-iso",
-  "det-sp-finite-general-ring"
+  "lem-pur-derived-pullback-tensor-iso"
  ],
  "proof_origin": {
   "by": "agent",
@@ -209,10 +241,45 @@
    "results": "3 hits: Mathlib/FieldTheory/NormalizedTrace.lean, Mathlib/FieldTheory/NormalizedTrace.lean, Mathlib/FieldTheory/NormalizedTrace.lean; only normalized field traces, not sheaf towers or exceptional inverse images.",
    "date": "2026-10-16",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*pullback|smooth.*purity|normalized.*tower|Tate.*twist",
+   "results": "3 hits: Mathlib/FieldTheory/NormalizedTrace.lean, Mathlib/FieldTheory/NormalizedTrace.lean, Mathlib/FieldTheory/NormalizedTrace.lean. Read the returned types: these concern ordinary scheme smoothness, underived sheaf pullback, compiler purity, or field traces; none states tower exceptional smooth purity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "smooth exceptional pullback on inverse systems of finite torsion sheaves equals shifted twisted pullback",
+   "results": "8 hits: CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, TopCat.Sheaf.pullback, SheafOfModules.pullback, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pullback, CategoryTheory.pullbackShiftFunctorZero_inv_app, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit. Read the returned types: these concern ordinary scheme smoothness, underived sheaf pullback, compiler purity, or field traces; none states tower exceptional smooth purity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"purity\"",
+   "results": "12 hits: Lean.Compiler.LCNF.Purity, Lean.Compiler.LCNF.tacticPurity_tac, Lean.Compiler.LCNF.Purity.impure, Lean.Compiler.LCNF.Purity.pure, Lean.Compiler.LCNF.instDecidableEqPurity, Lean.Compiler.LCNF.instHashablePurity, Lean.Compiler.LCNF.instInhabitedPurity, Lean.Compiler.LCNF.instToStringPurity. Read the returned types: these concern ordinary scheme smoothness, underived sheaf pullback, compiler purity, or field traces; none states tower exceptional smooth purity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "smooth purity orientation on derived towers of finite coefficient sheaves",
+   "results": "8 hits: AlgebraicGeometry.IsSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.Smooth, Algebra.smoothLocus_eq_compl_support_inter, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, Algebra.Smooth.flat. Read the returned types: these concern ordinary scheme smoothness, underived sheaf pullback, compiler purity, or field traces; none states tower exceptional smooth purity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck duality smooth exceptional inverse image Tate twist shifted pullback for coefficient towers",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, SheafOfModules.pullbackIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom. Read the returned types: these concern ordinary scheme smoothness, underived sheaf pullback, compiler purity, or field traces; none states tower exceptional smooth purity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-sp-integral-adjunction-bijection",
@@ -225,8 +292,8 @@
   "date": "2026-10-17",
   "item": "det-sp-tower-gamma",
   "worker": "stage1",
-  "summary": "Repaired the earlier three-step draft into seven steps. The orientation is assembled in the abelian tower heart using the purity compatibility at the coefficient unit and the existing fully faithful single-complex embedding. The tensor map is constructed before testing its levels; normalization includes explicit reduction squares and uniform Tor bounds. No new nodes are needed. Second reading makes the semilinear transition square and its inverse explicit, and verifies uniform source bounds before using the restricted adjunction. Current second reading corrects step 5 to conclude isomorphy in the uniform constructible category for arbitrary input towers; normalization is established separately in steps 6-7. Maintainer reading (2026-10-17) adds det-sp-finite-general-ring to steps 2 and 7: the purity maps of det-sp-reduction-compatibilities are defined through its orientation, and its clauses (2)-(3) identify them with the def-pur-smooth-purity-map maps at index en.",
-  "blueprint": "Gamma proof (1) is realized by steps 1-3; (2) by steps 4-5; (3) by steps 6-7. These supply the Normalization and Purity paragraphs of the blueprint ancestor det-sp-integral-adjunction-bijection.",
+  "summary": "Repaired the earlier three-step draft into seven steps. The orientation is assembled in the abelian tower heart using the purity compatibility at the coefficient unit and the existing fully faithful single-complex embedding. The tensor map is constructed before testing its levels; normalization includes explicit reduction squares and uniform Tor bounds. No new nodes are needed. Second reading makes the semilinear transition square and its inverse explicit, and verifies uniform source bounds before using the restricted adjunction. Current second reading corrects step 5 to conclude isomorphy in the uniform constructible category for arbitrary input towers; normalization is established separately in steps 6-7. Maintainer reading (2026-10-17) adds det-sp-finite-general-ring to steps 2 and 7: the purity maps of det-sp-reduction-compatibilities are defined through its orientation, and its clauses (2)-(3) identify them with the def-pur-smooth-purity-map maps at index en. Q75 repair of the dedicated 2026-10-17 long-step return: replaced old step 4 by steps 4-7 for finite pullback bounds, elementary twist/shift bounds, etale-origin hypotheses, and the evaluated transpose formula. Each non-elementary claim is an application of the existing cited statement, so no duplicate nodes were created. Reused the existing Mathlib leaf lem-sf-derived-concentrated-single for the heart concentration in step 3. Statement and Lean records unchanged; every proof step is under 2000 characters.",
+  "blueprint": "Ancestor det-sp-integral-adjunction-bijection, Normalization and Purity paragraphs; main-20261015 gamma proof (1) is realized by steps 1-3, (2) by steps 4-8, and (3) by steps 9-10. The original route is retained, and old step 4 is refined by citing the existing finite-pullback, Tate-line, finite-Tor site-comparison, and tower-operation interfaces separately.",
   "tool_uses": [
    {
     "node": "lem-sf-pullback-tor-amplitude",
@@ -283,12 +350,12 @@
   "det-sp-finite-general-ring"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q24-eba599b6a",
-  "group": "Q24",
+  "reviewer": "NT-cc-Q75-6f70f99ea",
+  "group": "Q75",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-eba599b6a (reviewer sub-agent of L); spot-checked: I read the delivery in full: the item's 3 clauses and 7 steps (it creates no new nodes), all 38 cited statements and their blueprint_updates, and the main-20261015 gamma statement and proof. The statement matches the source in the same coefficient category: the ordinary derived category of O_E/l^n towers, with R_n = A_{E,en}. The only change is the source's direction slip (a goes from twist to omega), which I checked against thm-pur-diagonal-dualizing-object and the def-pur-smooth-purity-map update. Nothing is weakened. Step 1: at the unit, the projection map pi_p = Rp_*(eps) o eta = 1, so theta at the unit is the identity. Step 3 builds a real map of tower sheaves in the heart, using exact evaluation, truncation, full faithfulness and the rank-one reduction. Step 4 checks every hypothesis of tower-shriek-levels(2a), and the qcqs and Noetherian conditions for det-pe-finite-tor-comparison-noetherian. Step 5 checks the finite purity hypotheses at index en and applies conservativity. Step 6 checks the pinned b map and the [a,b+2d] bound. Step 7's reduction equation is solved using only isomorphisms. Fault fixed: steps 2 and 7 use det-sp-reduction-compatibilities(3), whose purity map is built from the det-sp-finite-general-ring orientation. Matching it with the def-pur-smooth-purity-map map at index en, and getting finite naturality, needs det-sp-finite-general-ring(2)-(3), which the delivery did not cite. I added it to steps 2 and 7, proof_deps and tool_uses. Accepted tool uses: thm-pur-diagonal-dualizing-object, thm-pur-finite-coefficient-smooth-purity and det-sp-finite-general-ring (unit sk-thm-smooth-purity); the other declared tool uses are on the route anyway. There is no cycle and no SGA citation. Small cases checked: d=0, f=id, empty X, n=m, ramified E, and a zero-transition tower.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-6f70f99ea (reviewer sub-agent of L); spot-checked: I read the whole delivery and changed nothing. The statement matches main-20261015 gamma (1)-(3) in the same coefficient category, the ordinary derived category D(Tow) of strict towers with R_n=O_E/l^n=A_{E,en}. The only change from the source is the direction slip: the item composes with 1⊗a, which matches the arrow of thm-pur-diagonal-dualizing-object (omega to twist) and the Pi^{-1} factor of def-pur-smooth-purity-map. Nothing is weakened. There are no new nodes, proof_deps equals the union of the uses, no cited node depends on the item, and no SGA source is cited. Steps 4-7 replace the old long step 4. Step 4: lem-sf-pullback-tor-amplitude applies at every level and keeps the interval [a,b]; its D^b_c is the same stratified constructibility the tower definition uses. Step 5 (twist and shift bounds, cohomological bound from Tor amplitude tested on the unit) is genuinely elementary. Step 6: every hypothesis of tower-shriek-levels(2a) holds. X and Y are qcqs by 01T6 and 01OY, R_n is Noetherian, and the witnesses come from the equivalence in det-pe-finite-tor-comparison-noetherian. Wording slip, harmless: step 6 credits steps 3 and 5 with the lower bounds, but the bound for K comes from its tower-category membership. Step 7: t=G(h)∘eta is formed on the domain checked in step 5, and its levels are theta of def-pur-co-smoothness. Step 3 now uses the leaf lem-sf-derived-concentrated-single, which matches Mathlib TStructure.lean:189 exists_iso_singleFunctor_obj_of_isGE_of_isLE; full faithfulness rests on Stacks 06XS (derived.tex:8713). Steps 1-3 and 8-10 (unit transpose is the identity, the reduction-compatibilities(3) equation, finite purity at index en with conservativity, b-factorization with the [a,b+2d] bound, solving the reduction equation) still check against their cited statements. Accepted tool uses: thm-pur-diagonal-dualizing-object, thm-pur-finite-coefficient-smooth-purity, det-sp-finite-general-ring and lem-sf-pullback-tor-amplitude; the other declared ones are on the route. Small cases checked: d=0, f=id, empty X, n=m, ramified E, a zero-transition tower and a nonflat quotient."
  },
  "lean_audit": {
   "master": {

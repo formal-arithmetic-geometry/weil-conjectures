@@ -76,7 +76,35 @@
    }
   },
   {
-   "text": "Finite product preservation lets us apply inverse image to every ring operation and every ring identity, giving the displayed operations. The commutative-ring adjunction is the cited lifting. For arbitrary rings retain both distributive identities and omit only multiplicative commutativity. Here is the operation check, valid for either choice. Write L=f inverse, R=f star, lambda_F:L(F^n) to (LF)^n and rho_G:R(G^n) to (RG)^n for the product comparisons. For an n-ary operation t and adjoint maps alpha:LF to G and beta=R(alpha) eta_F, the adjoint of alpha L(t_F) is beta t_F by naturality of eta; the adjoint of t_G alpha^n lambda_F is R(t_G) rho_G^{-1} beta^n, since rho_{LF} R(lambda_F) eta_{F^n}=eta_F^n and rho is natural. Thus alpha preserves t exactly when beta does. For n=0 use the terminal-object comparisons. This checks addition, zero, negation, multiplication and one, so the adjunction restricts to ring homomorphisms, with its original unit and counit.\n\nTo verify also the ring-colimit description, let P(U) be the colimit in rings over I_U opposite. A ring presheaf map P to G assigns to each coprojection F(V) to P(U), indexed by phi:U to u_f(V), a ring map F(V) to G(U). For beta:F to G composed with u_f these maps are G(phi) beta_V. They form a cocone: for a:V to V' with u_f(a) phi=phi', naturality gives G(phi) beta_V F(a)=G(phi') beta_{V'}. Conversely evaluate the cocone at U=u_f(V), phi=id to recover beta_V. Naturality in U shows that the map at any phi is G(phi) beta_V, so these assignments are inverse and natural. Sheafification then gives the ring adjunction. Both this construction and the lifted set inverse image are left adjoint to the identical ring direct image; the maps corresponding to their units are inverse, because their composites correspond to those same units under the two adjunction bijections. This gives the claimed canonical equivalence without assuming that arbitrary ring colimits are computed on underlying sets.\n\nThe presheaf map defining rho is natural since restrictions of constant sections are constant sections. Sheafification extends it uniquely, and the counit formula defines its adjoint c.",
+   "text": "Finite product preservation lets us apply inverse image to every ring operation and every ring identity, giving the displayed operations. The commutative-ring adjunction is the cited lifting. For arbitrary rings retain both distributive identities and omit only multiplicative commutativity. Write L=f inverse, R=f star, lambda_F:L(F^n) to (LF)^n and rho_G:R(G^n) to (RG)^n for the product comparisons. For an n-ary operation t and adjoint maps alpha:LF to G and beta=R(alpha) eta_F, the adjoint of alpha L(t_F) is beta t_F by naturality of eta; the adjoint of t_G alpha^n lambda_F is R(t_G) rho_G^{-1} beta^n, since rho_{LF} R(lambda_F) eta_{F^n}=eta_F^n and rho is natural. Thus alpha preserves t exactly when beta does. For n=0 use the terminal-object comparisons. This checks addition, zero, negation, multiplication and one, so the adjunction restricts to ring homomorphisms, with its original unit and counit.",
+   "uses": [
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi; Tag 0H7J, example-constant-sheaf"
+   }
+  },
+  {
+   "text": "To verify the ring-colimit description, let P(U) be the colimit in rings over I_U opposite. A ring presheaf map P to G assigns to each coprojection F(V) to P(U), indexed by phi:U to u_f(V), a ring map F(V) to G(U). For beta:F to G composed with u_f these maps are G(phi) beta_V. They form a cocone: for a:V to V' with u_f(a) phi=phi', naturality gives G(phi) beta_V F(a)=G(phi') beta_{V'}. Conversely evaluate the cocone at U=u_f(V), phi=id to recover beta_V. Naturality in U shows that the map at any phi is G(phi) beta_V, so these assignments are inverse and natural. Sheafification then gives the ring adjunction. Both this construction and the lifted set inverse image are left adjoint to the identical ring direct image; the maps corresponding to their units are inverse, because their composites correspond to those same units under the two adjunction bijections. This gives the claimed canonical equivalence without assuming that arbitrary ring colimits are computed on underlying sets.",
+   "uses": [
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi; Tag 0H7J, example-constant-sheaf"
+   }
+  },
+  {
+   "text": "The presheaf map defining rho is natural since restrictions of constant sections are constant sections. Sheafification extends it uniquely, and the counit formula defines its adjoint c.",
    "uses": [
     "lem-weil-pbc-left-exact-site-inverse-image-tensor",
     "lem-weil-pbc-adjunction-lifts-group-ring-objects",
@@ -210,7 +238,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -235,16 +263,16 @@
   "date": "2026-10-14",
   "item": "def-weil-proetale-inverse-image",
   "worker": "stage1",
-  "summary": "Made all constructions and their supporting dependencies explicit. Fixed the omitted opposite indexing category and corrected the inverse-image source tag (06UM is pullback maps, not presheaf inverse image). Reused existing DAG results throughout; no new nodes. Supplied five well-definedness steps for the claims embedded in this definition. Second reading supplied the continuity equalizer and ring-colimit universal-property checks; left generic-tool approval to the maintainer.",
+  "summary": "Retained the existing complete five-part construction split, revalidated every dependency and source, and divided the prior 2156-character ring step into three explicit steps (operation/adjunction check, ring-colimit universal property, and constant-ring structure map) to expose its subarguments for long-step review. No new nodes.",
   "blueprint": "Realizes the inverse-image notion used in def-weil-ordinary-compact-cohomology statement through def-weil-constant-weil-structure; no unit route is changed."
  },
  "reviewed": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NN-dfe87e1f2",
-  "group": "NN",
+  "reviewer": "NT-cc-Q30-f6c53df8f",
+  "group": "Q30",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-dfe87e1f2 (reviewer sub-agent of L); spot-checked: Reviewed the item, all cited DAG statements, unit route, and source locations. All five steps and edge cases check; no new nodes or repairs are needed. Generic cross-unit tools are listed for merge recording."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-f6c53df8f (reviewer sub-agent of L); spot-checked: Read in full: the item, all 14 cited node statements, and the sources (Stacks proetale 09A5 l.4675; sites 00X6, 00VC/00WX, 00YV l.10473 incl. non-commutative rings, 0H7J; sites-modules 03D2 l.1020; tags 094T/094U/022D). The module pullback f^{-1}F tensor_{f^{-1}A_Y} A_X matches blueprint main-20261015 def-weil-derived-pullback-tensor-hom. The delivery only re-splits an already split and reviewed node: the 2156-char ring step becomes steps 4-6 (every step now under 2000 chars). Statement and deps are unchanged, proof_deps equals the union of uses, and there are no new nodes. Step checks: weakly etale and fpqc base change give coverings; final object and fibre products are preserved, so the left-exact site lemma applies in the right direction; continuity follows from the u_f(V_i x_V V_j) identification; I_U and the colimit over I_U^op are verbatim the continuous-functor lemma (variance checked); the step-4 adjoint computation (rho_{LF} R(lambda) eta = eta^n) is correct and extends the commutative lifting lemma to all rings as in 00YV; the step-5 universal property and the two-left-adjoints comparison are correct; rho naturality and c = epsilon o f^{-1} rho are correct; the step-7 module action is exactly 03D2's proof. Edge cases tested: f = id, X empty, A = 0, nullary operations, non-commutative rings. The duplicate search found only nodes that cite this item or state generic/narrower facts. Accepted tool uses: lem-weil-pbc-left-exact-site-inverse-image-tensor (00X6) and lem-weil-pbc-adjunction-lifts-group-ring-objects (00YV). The inherited unit binding to sk-def-sf-admissible is wrong but maintainer-owned; the report correctly flags it for maintenance. No SGA used. No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
