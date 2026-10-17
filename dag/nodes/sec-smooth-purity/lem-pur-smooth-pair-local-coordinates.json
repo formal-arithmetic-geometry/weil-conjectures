@@ -322,5 +322,28 @@
   "group": "Q10",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-2b7a3e32a (reviewer sub-agent of L); spot-checked: I read every step of the item and both new nodes in full, against Stacks 0FUE (more-morphisms.tex, lemma-etale-local-structure), 067U, 0FUD with the proof of lemma-relative-regular-immersion-flat-in-neighbourhood, and 0CEP. Statement: identical to the base (checked read-only); its hypotheses and conclusions match 0FUE one for one, and it also covers the parent lem-pur-divisor-class's use in the local ring at y. Steps 1-9: checked against every cited statement. The fibre-criterion hypotheses (00R7) and the miracle-flatness hypotheses (00R4: regular, Cohen-Macaulay, dimension equality) hold; the dimension count uses 00KW and 07QP; the final etaleness uses 00U6 after Nakayama. Edge cases b=0, a=0, Y=X and empty Y are all fine. New node lem-pur-smooth-pair-regular-immersion is true (067U plus the definition of a regular immersion, 063J). It is strictly smaller than the item and duplicates no existing node; the closest candidates are over a perfect field or treat only diagonals. New node lem-pur-relative-regular-equations-base-change is the true form of 0FUD: it restricts to primes containing the equations, which the source states loosely. Tested on Z[x]/x base-changed to F_p and on the excluded case Z with f=2. Repairs in fixes/dag/nodes/sec-smooth-purity/lem-pur-smooth-pair-local-coordinates.json: (C4) step 8 cited def-weil-unramified-morphism for vanishing differentials, but that node defines unramified through the diagonal; replaced by the fact that the fibre is affine and etale (02GO), so its differentials vanish by the affine etale comparison lem-weil-pbc-etale-ring-map-iff-etale-affine, and removed the old citation from uses and proof_deps. (E1) Step 2 did not re-derive that R->A and R->B are smooth, flat and finitely presented after shrinking the base to W'; added one sentence with the step-1 citations. Accepted seven tool uses of generic algebra from sk-thm-p1, recorded in split_report.tool_uses: lem-weil-pbc-smooth-ring-map-iff-smooth-affine, -smooth-fibre-regular-local, -smooth-over-field-regular-local, -regular-local-generators-regular-sequence, -etale-fibre-discrete-separable-points, -miracle-flatness, -criterion-flatness-fibre. No SGA is used and no node is dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5dcae1ccb",
+  "group": "Q85",
+  "result": "pass",
+  "note": "Only the node's lean field changed; lean.statement matches the file signature verbatim. Clause-by-clause match with Stacks 0FUE and the node: Smooth p/q, IsClosedImmersion i with i≫p=q, y; ∃ a b, U ∋ i y, Etale h over S, IsPullback v (pullback.snd i U.ι) zeroLastCoordinates h (scheme-theoretic inverse image), Etale v, ker.ideal W = span of the last b coordinate pullbacks and IsWeaklyRegular on every affine W. Both are true on all affines (flat base change from R[t]); weak regularity is the node's nonzerodivisor definition and is needed on affines missing V. Helper zeroLastCoordinates is a real homOfVector map with correct Fin.addCases/natAdd indexing, not a duplicate of Mathlib reindex. Edge cases (empty Y/X/S, a=0, b=0, Y=X) and universes are fine; sorry-only proof, source and blueprint docstrings, nine proof steps present; report sections present. nt_compile.py --json on the snapshot file: exit 0, 2.4 s, no errors or warnings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothPairLocalCoordinates",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_etale_smooth_pair_coordinates",
+  "declarations": [
+   "AlgebraicGeometry.AffineSpace.zeroLastCoordinates",
+   "AlgebraicGeometry.Scheme.Hom.exists_etale_smooth_pair_coordinates"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothPairLocalCoordinates.lean",
+  "statement": "theorem Scheme.Hom.exists_etale_smooth_pair_coordinates {S X Y : Scheme.{u}} (p : X ⟶ S) (q : Y ⟶ S) (i : Y ⟶ X) [Smooth p] [Smooth q] [IsClosedImmersion i] (hi : i ≫ p = q) (y : Y) : ∃ (a b : ℕ) (U : X.Opens) (_ : i y ∈ U) (h : U.toScheme ⟶ AffineSpace (ULift.{u} (Fin (a + b))) S) (v : pullback i U.ι ⟶ AffineSpace (ULift.{u} (Fin a)) S), Etale h ∧ h ≫ (AffineSpace (ULift.{u} (Fin (a + b))) S ↘ S) = U.ι ≫ p ∧ IsPullback v (pullback.snd i U.ι) (AffineSpace.zeroLastCoordinates S a b) h ∧ Etale v ∧ ∀ W : U.toScheme.affineOpens, (pullback.snd i U.ι).ker.ideal W = Ideal.span (Set.range (fun j : Fin b ↦ U.toScheme.presheaf.map (homOfLE (le_top : W.1 ≤ ⊤)).op (h.appTop (AffineSpace.coord S (ULift.up (Fin.natAdd a j)))))) ∧ RingTheory.Sequence.IsWeaklyRegular Γ(U.toScheme, W) (List.ofFn (fun j : Fin b ↦ U.toScheme.presheaf.map (homOfLE (le_top : W.1 ≤ ⊤)).op (h.appTop (AffineSpace.coord S (ULift.up (Fin.natAdd a j))))))",
+  "branch": "newtargets-dag",
+  "by": "Q85",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper constructs the exact coordinate-subspace inclusion using AffineSpace.homOfVector, rather than assuming an arbitrary map. The ideal sheaf is specified on every affine open. IsWeaklyRegular there expresses successive nonzerodivisors, including opens disjoint from V; at points of V its final quotient is nonzero, giving the usual regular sequence."
  }
 }

@@ -205,5 +205,35 @@
   "group": "Q44",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-5aedea7f3 (reviewer sub-agent of L); spot-checked: I read the item, all nine steps and the full statements of all seven cited nodes. Dwyer–Kan is not in literature/, so I fetched the scan read-only into /tmp and read printed p.269 (1.4(iv)–(vii), diagonal nerve), p.277 (7.3–7.5) and p.279 (9.1, and 9.2: 'If V in sO-Cat is cofibrant, then V->V[V^-1] induces NV ~ N(V[V^-1])'). The item statement matches 9.2 hypothesis by hypothesis: fixed O, cofibrant V, degreewise completion, diagonal nerve, no pi_0-groupoid condition. It is unchanged, and the archive stays WANTED with proof_origin agent. Step 1: the degree-q cell pushouts freely adjoin the surjections [q]->[m] as edges, colimits are degreewise, and the lift against the trivial fibration gives the retract; this is supported by the statement of the sorted-model node. Steps 2–4: the normal form, the identification (b|u)=P(T_b) and the tree argument are correct and elementary, including loops and parallel edges. Step 5: I checked the leaf-retraction naturality in both orientations against the nerve-natural node. Step 6: the filtered-colimit hypotheses hold on the small nonempty directed poset of finite rooted subtrees. Step 7: the Quillen A left-aspherical clause applies. Step 8: the exchanged-direction diagonal clause applies, and the retract squares follow from naturality. Step 9: the retract inverse and its basepoints check out. Small cases checked: empty O, identity-only category, one edge, one loop, parallel edges, isolated objects. There are no new nodes. proof_deps equals the union of the step uses, every dependency is in the unit sk-prop-sf-biduality-general, there is no cycle or merged dependency (167 nodes traversed), no SGA citation and no tool_uses. The existing lem-coef-free-category-groupoid-nerve states the ordinary claim of Steps 2–7, but citing it would close a cycle, so the inline proof is correct; I noted for the maintainer that its route could be reproved from these steps. No changes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-00b117650",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Statement matches node and Dwyer–Kan Prop. 9.2 clause by clause: Fixed O on a small type O; hcof = fixedCofibrations O (discreteInclusion A), the lifting property against mappingwise trivial fibrations, same class as the sorted-model cofibrations and no stronger; G(C) = degreewise Mathlib FreeGroupoid via Grpd.free with the adjunction unit as comparison; conclusion is SSet.Enhanced.IsWeakHomotopyEquivalence of the existing diagonalNerveMap of that unit. No pi0/Kan/nonempty/connected assumptions. Edge cases checked: empty O, p=0, loops, parallel arrows, empty mapping sets. Single universe u as in the landed Fixed. Only the lean record changed and its statement matches the file verbatim. Imports follow stages/2 rule 7. Report has Worker report and Second reading by Q98; docstrings carry source and blueprint and all nine proof steps; only the theorem is sorry. nt_compile.py --json in the local side overlay: rc=0, no errors or warnings. Cosmetic: three B(V) helpers unused by the statement."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.CofibrantCompletionNerveEquivalence",
+  "declaration": "SSet.Bergner.cofibrant_completion_nerve_equivalence",
+  "declarations": [
+   "SSet.Bergner.degree",
+   "SSet.Bergner.degreeDiagram",
+   "SSet.Bergner.groupoidDegreeDiagram",
+   "SSet.Bergner.degreewiseCompletion",
+   "SSet.Bergner.bisimplicialNerve",
+   "SSet.Bergner.groupoidBisimplicialNerve",
+   "SSet.Bergner.completionNerveMap",
+   "SSet.Bergner.diagonalCompletionNerveMap",
+   "SSet.Bergner.cofibrant_completion_nerve_equivalence"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/CofibrantCompletionNerveEquivalence.lean",
+  "statement": "theorem cofibrant_completion_nerve_equivalence {O : Type u} (A : Fixed O) (hcof : fixedCofibrations O (discreteInclusion A)) : SSet.Enhanced.IsWeakHomotopyEquivalence (diagonalCompletionNerveMap A)",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The ordinary degree category and its operators reuse CofibrantSimplicialInversion.Degree and CoherentNerve.degreeRestriction. The diagonal comparison is the existing TwoSidedSimplicialGrothendieck.diagonalNerveMap specialized to the canonical degreewise free-groupoid unit. The explicit bisimplicial helpers use the node’s order (nerve degree p, mapping degree q). Cofibrancy is directly the existing fixedCofibrations predicate on discreteInclusion."
  }
 }

@@ -224,5 +224,24 @@
   "worker": "maintenance-Q26",
   "summary": "Extracts exactly the already reviewed first six foundational model/right-proper proof steps of lem-coef-kan-quillen-right-proper. The coherent-localization conclusion stays on the parent; no Quillen B input is used.",
   "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, with the original inherited technical-foundation ancestry retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5643c31bd",
+  "group": "NG",
+  "result": "fix",
+  "note": "Statement checked clause by clause against the node and Hovey 3.2.2-3.2.3, 3.6.4-3.6.5 and 2.4.18: model structure with realization weak equivalences (Enhanced.IsWeakHomotopyEquivalence), monomorphisms, horn RLP, functorial factorizations, fibrant objects = Kan complexes, trivial fibrations = boundary RLP including n=0 (Mathlib I covers every n), mono <= boundary-cell composites, trivial cofibrations = retracts of horn-cell composites, and right properness via pullback.fst p w with arbitrary bases. No extra hypotheses; universe u only; a compiled test shows it equals the first 10 conjuncts of the parent right_proper_kan_quillen. Gates: sorry only, docstrings complete with all six steps, statement verbatim, both report sections present, only the item's lean field changed. Delivered file compiles cleanly. F1 (fixed): the module publicly imported the parent KanQuillenRightProper for weakEquivalenceStructure, while the parent node lists this item in proof_deps, so the parent's stage-3 import of this module would be a cycle. The fix drops the parent import, publicly imports EnhancedDiagramsCones plus ModelCategory.Basic, SimplicialSet.KanComplex and HasPullback, and states the same weak-equivalence structure inline via letI (no new declaration); the other nine clauses are byte-identical. The fixed module compiles cleanly; a test confirms the fixed statement and the parent's weakEquivalenceStructure forms are definitionally the same in both directions; a parent copy that imports the core compiles. Fixes: fixes/KanQuillenModelRightProperCore.lean and fixes/lem-coef-kan-quillen-model-right-proper-core.report.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.KanQuillenModelRightProperCore",
+  "declaration": "SSet.KanQuillen.right_proper_kan_quillen_core",
+  "file": "lean/Sheaf/AlgebraicTopology/KanQuillenModelRightProperCore.lean",
+  "statement": "theorem right_proper_kan_quillen_core : letI : CategoryWithWeakEquivalences SSet.{u} := ⟨fun _ _ f ↦ Enhanced.IsWeakHomotopyEquivalence f⟩ (∃ m : ModelCategory SSet.{u}, m.categoryWithFibrations = (inferInstance : CategoryWithFibrations SSet.{u}) ∧ m.categoryWithCofibrations = (inferInstance : CategoryWithCofibrations SSet.{u}) ∧ m.categoryWithWeakEquivalences = (inferInstance : CategoryWithWeakEquivalences SSet.{u})) ∧ HasFunctorialFactorization (trivialCofibrations SSet.{u}) (fibrations SSet.{u}) ∧ HasFunctorialFactorization (cofibrations SSet.{u}) (trivialFibrations SSet.{u}) ∧ (cofibrations SSet.{u} = monomorphisms SSet.{u}) ∧ (fibrations SSet.{u} = modelCategoryQuillen.J.rlp) ∧ (∀ X : SSet.{u}, IsFibrant X ↔ KanComplex X) ∧ (trivialFibrations SSet.{u} = modelCategoryQuillen.I.rlp) ∧ (monomorphisms SSet.{u} ≤ transfiniteCompositions.{u} (coproducts.{u} modelCategoryQuillen.I).pushouts) ∧ (trivialCofibrations SSet.{u} = (transfiniteCompositions.{u} (coproducts.{u} modelCategoryQuillen.J).pushouts).retracts) ∧ (∀ (E B B' : SSet.{u}) (p : E ⟶ B) (w : B' ⟶ B), Fibration p → Enhanced.IsWeakHomotopyEquivalence w → Enhanced.IsWeakHomotopyEquivalence (pullback.fst p w))",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-5643c31bd"
  }
 }

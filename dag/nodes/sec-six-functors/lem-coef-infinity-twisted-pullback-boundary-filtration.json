@@ -170,5 +170,31 @@
   "group": "N1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-ae850234f (reviewer sub-agent of L); spot-checked: I read the item in full, its only dependency def-cbc-enhanced-diagrams-cones (whose horn clause, the union of the faces other than the i-th, is what step 4 uses), the parent lem-coef-infinity-twisted-pullback-identity-initial (it uses only the statement), and the unit and chapter. The source is Kerodon 03JW, Prop. 8.1.2.1, read online; it is not in literature/, so proof_origin agent plus WANTED is correct. The statement matches the source on every point: basic subsets (a)/(b), K_0, the priority, prioritized, the order by nondecreasing priority then cardinality, the horn intersection Lambda^d_k, and S_m=V_n. It is unchanged and not weakened. Step 2: S\\{i} is nonbasic but not prioritized, and an earlier containing S_{q'} would force S_{q'}=S_q. Step 3: if i'<i, adding i' gives an earlier set; if i'=i, T itself is earlier because it is smaller. Step 4: the intersection is the union of the faces other than the k-th, which is the horn by the cited definition. Step 5: V_n is last. All five are correct, the elementary flags are justified, and proof_deps is exactly the union of uses. My own exhaustive enumeration for n=1..5 compared every subface (not only codimension-one) under random tie orders and passed. Counts 4/13/40/121/364 match the report; k=d never occurs and d>=1 always holds. There are no new nodes, so B and D1 are vacuous. lem-coef-twisted-arrow-join-horn concerns a different subcomplex and inner anodyne maps, so it is not a duplicate. No SGA, no tool_uses, no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-19a37f355",
+  "group": "Q123",
+  "result": "pass",
+  "note": "Read node, dep def-cbc-enhanced-diagrams-cones (+module: horn is Mathlib SSet.horn), Kerodon 03JW place, delivered module, report (real Worker report + Second reading by Q123). Every clause matches: IsBasic (nonempty, lower block or misses a pair {i,2n+1-i}), priority (sup of reflected upper vertices = node max), IsPrioritized, enumeration (injective, range = prioritized, monotone priority, card within equal priority, no extra tie hypothesis), stage = K_q with index shift, horn identity as preimage along isoOfRepresentableBy(faceRepresentableBy e).hom ≫ face.ι = σ_q^{-1}K_{q-1}, S_last = univ, stage m = ⊤. Edge cases: empty set excluded, m=0 impossible, d≥1, outer horn k=0 allowed, universe u explicit and unrestricted. Brute-force script on the exact Lean formulas checked every subface at every attachment for n=1..4 under 3 tie orders: pass (counts 4/13/40/121). Gates: no hollow defs, source+blueprint docstrings, single sorry, statement verbatim, 5 declarations listed, no pro-etale, no duplicate. nt_compile.py --json per-file local overlay: rc=0, clean, 1.4 s. Only cosmetic: report text 'Proposition the project server' scrub artifact for 8.1.2.1 (Lean docstrings correct). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.TwistedArrowBoundaryFiltration",
+  "declaration": "SSet.TwistedArrowBoundary.horn_filtration",
+  "declarations": [
+   "SSet.TwistedArrowBoundary.IsBasic",
+   "SSet.TwistedArrowBoundary.priority",
+   "SSet.TwistedArrowBoundary.IsPrioritized",
+   "SSet.TwistedArrowBoundary.stage",
+   "SSet.TwistedArrowBoundary.horn_filtration"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/TwistedArrowBoundaryFiltration.lean",
+  "statement": "theorem horn_filtration (n : ℕ) (hn : 1 ≤ n) (m : ℕ) (S : Fin m → Finset (Fin (2 * n + 2))) (hS : Function.Injective S) (hEnum : ∀ T : Finset (Fin (2 * n + 2)), (∃ a : Fin m, S a = T) ↔ IsPrioritized n T) (hPriority : Monotone (fun a ↦ priority n (S a))) (hCard : ∀ a b : Fin m, a ≤ b → priority n (S a) = priority n (S b) → (S a).card ≤ (S b).card) : (∀ (a : Fin m) (d : ℕ) (e : Fin (d + 1) ≃o ↥(S a)) (k : Fin (d + 1)), (e k).val.val = priority n (S a) → (stage.{u} n S a.val).preimage ((stdSimplex.isoOfRepresentableBy (stdSimplex.faceRepresentableBy (S a) d e)).hom ≫ (stdSimplex.face (S a)).ι) = horn d k) ∧ (∃ last : Fin m, last.val + 1 = m ∧ S last = Finset.univ) ∧ stage.{u} n S m = ⊤",
+  "branch": "newtargets-dag",
+  "by": "Q123",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The auxiliary definitions spell out notions defined inline by this same node. The intersection is the inverse image along the ordered face isomorphism, as in Kerodon 03JW. Fin m indexes the paper's S_1,...,S_m by a.val+1."
  }
 }
