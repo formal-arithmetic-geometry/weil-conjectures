@@ -52,6 +52,7 @@ public import WeilConjectures.Algebra.Homology.BifunctorLinear
 public import WeilConjectures.Algebra.Homology.BifunctorMappingConeNaturality
 public import WeilConjectures.Algebra.Homology.DerivedCategory.AdicTower
 public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.ChgUniv
+public import WeilConjectures.Algebra.Homology.DerivedCategory.HomologyDevissage
 public import WeilConjectures.Algebra.Homology.DerivedCategory.MappingConeCoimage
 public import WeilConjectures.Algebra.Homology.DerivedCategory.PerfectTower
 public import WeilConjectures.Algebra.Homology.DerivedCategory.ProjectiveHom
@@ -3042,7 +3043,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyDevissage
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjective
@@ -3515,7 +3515,6 @@ public import WeilConjectures.Mathlib.RingTheory.IntegralClosure.IsIntegralClosu
 public import WeilConjectures.Mathlib.RingTheory.Invariant.Profinite
 public import WeilConjectures.Mathlib.RingTheory.IsTensorProduct
 public import WeilConjectures.Mathlib.RingTheory.Kaehler.Basic
-public import WeilConjectures.Mathlib.RingTheory.KrullDimension.FiniteType
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Zero
@@ -3600,8 +3599,6 @@ public import WeilConjectures.Mathlib.Topology.ExtremallyDisconnected
 public import WeilConjectures.Mathlib.Topology.Inseparable
 public import WeilConjectures.Mathlib.Topology.JacobsonSpace
 public import WeilConjectures.Mathlib.Topology.KrullDimension
-public import WeilConjectures.Mathlib.Topology.KrullDimension.Open
-public import WeilConjectures.Mathlib.Topology.KrullDimension.Specialization
 public import WeilConjectures.Mathlib.Topology.LocallyClosed
 public import WeilConjectures.Mathlib.Topology.LocallyConstant.Algebra
 public import WeilConjectures.Mathlib.Topology.Maps.Basic
@@ -3781,6 +3778,7 @@ public import WeilConjectures.RingTheory.Kaehler.TraceIdempotent
 public import WeilConjectures.RingTheory.Kaehler.TraceMap
 public import WeilConjectures.RingTheory.KaehlerDifferentialsPolynomialExtension
 public import WeilConjectures.RingTheory.KernelCokernelAnnihilatedModIdeal
+public import WeilConjectures.RingTheory.KrullDimension.FiniteType
 public import WeilConjectures.RingTheory.LiftIdempotentUpstairs
 public import WeilConjectures.RingTheory.LiftMonicCoprimeFactorizationEtale
 public import WeilConjectures.RingTheory.LiftMonicCoprimeFactorizationEtaleCore
@@ -4537,6 +4535,8 @@ public import WeilConjectures.Topology.InverseImagePresheafModule
 public import WeilConjectures.Topology.InverseImageRegularExtension
 public import WeilConjectures.Topology.InverseImageRegularModule
 public import WeilConjectures.Topology.InverseImageStalk
+public import WeilConjectures.Topology.KrullDimension.Open
+public import WeilConjectures.Topology.KrullDimension.Specialization
 public import WeilConjectures.Topology.LocallyConstantGermEvaluation
 public import WeilConjectures.Topology.LocallyConstantMapsGluing
 public import WeilConjectures.Topology.LocallyConstantMapsPresheaf

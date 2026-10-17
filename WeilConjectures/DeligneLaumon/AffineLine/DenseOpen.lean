@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import Mathlib.RingTheory.Polynomial.Basic
+public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.Irreducible
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Irreducible
@@ -107,11 +108,8 @@ theorem Scheme.Opens.isSeparated [IsSeparated (X ↘ Spec (.of k₀))] :
 structure morphism is universally open. -/
 theorem irreducibleSpace_geometricFiber_of_smooth (Y : Scheme.{u}) [Y.Over (Spec (.of k₀))]
     [GeometricallyIrreducible (Y ↘ Spec (.of k₀))] [Smooth (Y ↘ Spec (.of k₀))] :
-    IrreducibleSpace (Y ↘ Spec (.of k₀)).geometricFiber := by
-  have : IrreducibleSpace (Scheme.specAlgebraicClosure k₀).left :=
-    inferInstanceAs (IrreducibleSpace (Spec (.of (AlgebraicClosure k₀))))
-  exact inferInstanceAs (IrreducibleSpace ↥(pullback (C := Scheme.{u})
-    (Y ↘ Spec (.of k₀)) (Scheme.specAlgebraicClosure k₀).hom))
+    IrreducibleSpace (Y ↘ Spec (.of k₀)).geometricFiber :=
+  Scheme.Hom.irreducibleSpace_geometricFiber _
 
 end Opens
 

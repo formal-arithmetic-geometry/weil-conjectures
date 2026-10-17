@@ -13,8 +13,7 @@ public import WeilConjectures.DeligneLaumon.Reduction.AffineCurve
 
 If `C₀` is a smooth affine curve and `G` is a lisse Weil sheaf on `C₀`, punctually `ι`-pure of
 weight `w`, then `H_c^2(C, G)` has weights at most `w + 2` (blueprint `lem-a1-curve-hc2-bound`).
-For geometrically connected `C₀` this is the coinvariant description of `H_c^2`; in general it
-follows from the purity of `H_c^2` on a smooth affine curve which need not be geometrically
+It follows from the purity of `H_c^2` on a smooth affine curve which need not be geometrically
 connected (`AlgebraicGeometry.isPureOfWeightOver_compactlySupportedCohomology_two_of_isAffine`),
 after a constant twist.
 
@@ -70,11 +69,11 @@ theorem isPureOfWeightOver_compactlySupportedCohomology_two_of_norm_eq
     _ = (Nat.card k₀ : ℝ) ^ ((v + 2) / 2) := by
         rw [← Real.rpow_add hq, add_div]
 
--- the proof does not use that `C₀` is not geometrically connected
-set_option linter.unusedVariables false in
-/-- The case of `AlgebraicGeometry.WeilSheaf.hasWeightsAtMostOver_compactlySupportedCohomology_two`
-of a smooth affine curve which is not geometrically connected: then `H_c^2(C, G)` still has
-weights at most `w + 2`.
+end WeilSheaf
+
+/-- *Top compact-support bound on a curve.* If `C₀` is a smooth affine curve and `G` is a lisse
+Weil sheaf on `C₀`, punctually `ι`-pure of weight `w`, then `H_c^2(C, G)` has weights at most
+`w + 2`.
 
 The blueprint proof splits `C₀` into its connected components, and a connected component with
 field of constants `k₁ = 𝔽_{q^d}` into the `d` geometrically connected curves over `k₁` which make
@@ -85,9 +84,9 @@ of weight zero on a smooth affine curve, not necessarily geometrically connected
 (`AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_compactlySupportedCohomology_two_of_norm_eq`).
 If `G` has no local Frobenius eigenvalue at all, it is punctually pure of the weights `0` and
 `-2` at once, so `H_c^2(C, G)` is pure of the weights `2` and `0` at once and has no Frobenius
-eigenvalue. -/
-theorem hasWeightsAtMostOver_compactlySupportedCohomology_two_of_not_geometricallyConnected
-    (hC : ¬ GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀)))
+eigenvalue.
+(blueprint: `lem-a1-curve-hc2-bound`) -/
+theorem WeilSheaf.hasWeightsAtMostOver_compactlySupportedCohomology_two
     (ι : PadicAlgCl l →+* ℂ) (G : WeilSheaf k₀ l C) (hG : G.IsLisse) {w : ℝ}
     (hw : G.IsPunctuallyPureOfWeight ι w) :
     (G.compactlySupportedCohomology 2).HasWeightsAtMostOver k₀ ι (w + 2) := by
@@ -117,23 +116,5 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_two_of_not_geometrical
     norm_num at h
     rw [h, Nat.cast_one] at hq
     exact (lt_irrefl _ hq).elim
-
-end WeilSheaf
-
-/-- *Top compact-support bound on a curve.* If `C₀` is a smooth affine curve and `G` is a lisse
-Weil sheaf on `C₀`, punctually `ι`-pure of weight `w`, then `H_c^2(C, G)` has weights at most
-`w + 2`. For `C₀` geometrically connected, `H_c^2(C, G)` is the Tate twist `(-1)` of the geometric
-coinvariants of `G`, which are pure of weight `w`, so it is pure of weight `w + 2`
-(`WeilSheaf.IsPunctuallyPureOfWeight.isPureOfWeightOver_compactlySupportedCohomology_two`);
-the general case reduces to this one over the fields of constants of the connected components.
-(blueprint: `lem-a1-curve-hc2-bound`) -/
-theorem WeilSheaf.hasWeightsAtMostOver_compactlySupportedCohomology_two
-    (ι : PadicAlgCl l →+* ℂ) (G : WeilSheaf k₀ l C) (hG : G.IsLisse) {w : ℝ}
-    (hw : G.IsPunctuallyPureOfWeight ι w) :
-    (G.compactlySupportedCohomology 2).HasWeightsAtMostOver k₀ ι (w + 2) := by
-  by_cases hC : GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))
-  · exact (hw.isPureOfWeightOver_compactlySupportedCohomology_two hG).hasWeightsAtMostOver
-  · exact hasWeightsAtMostOver_compactlySupportedCohomology_two_of_not_geometricallyConnected hC
-      ι G hG hw
 
 end AlgebraicGeometry

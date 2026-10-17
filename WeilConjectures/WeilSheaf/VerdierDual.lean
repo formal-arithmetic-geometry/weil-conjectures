@@ -221,7 +221,8 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- **The internal hom out of a lisse sheaf** (blueprint: `lem-sf-hom-finite-projective`): for
 a lisse Weil sheaf `P`, a locally free `ℚ̄_ℓ,X̄`-module of finite rank, and a Weil complex `N`,
-the canonical map `P^∨ ⊗ N ⟶ RHom(P, N)` is an isomorphism. -/
+`P^∨ ⊗ N` and `RHom(P, N)` are isomorphic. The blueprint asserts that the canonical map
+`P^∨ ⊗ N ⟶ RHom(P, N)` is an isomorphism; only the existence of an isomorphism is stated here. -/
 theorem nonempty_tensorLisse_dual_iso_derivedHom (P : WeilSheaf k₀ l X) (hP : P.IsLisse)
     (N : WeilComplex k₀ l X) :
     Nonempty (((tensorLisse (P.dual hP) hP.dual).obj N).obj ≅
