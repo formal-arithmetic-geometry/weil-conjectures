@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-weight-purity-ordinary",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Purity of ordinary cohomology",
@@ -13,32 +13,90 @@
   "place": "node prop-weight-purity-ordinary, order 2875"
  },
  "stmt_deps": [
-  "prop-weight-purity"
+  "prop-weight-purity",
+  "def-weil-frobenius-module-weights"
  ],
  "proof": [
   {
-   "text": "Clause (4) of [thm-weil-deligne-purity] states that the\ngeometric-Frobenius module $H^i(X,\\Qlb)$ of the situation of\n[prop-weight-purity] is $\\iota$-pure of weight $i$, in the sense\nof [def-weil-frobenius-module-weights].",
+   "text": "Use exactly the finite-field datum, prime $\\ell\\ne p$, coefficient field $\\Qlb$, isomorphism $\\iota$, smooth proper geometrically connected scheme $X_0$ of pure dimension $d$, geometric fiber $X$, and global geometric Frobenius fixed in the situation of the statement. Clause (3) of [lem-weil-smooth-proper-purity-hypotheses] applies to this datum and shows that both $H^j(X,\\Qlb)$ and $H_c^j(X,\\Qlb)$ are finite-dimensional $\\Qlb$-vector spaces with the induced global geometric-Frobenius actions, for every integer $j$. These supply the finiteness and action requirements used in Step 2; no finiteness assumption is added to the item.",
+   "uses": [
+    "lem-weil-smooth-proper-purity-hypotheses"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-input-weights/prop-weight-purity-ordinary.md",
+    "place": "Proof, application of clause (4) of thm-weil-deligne-purity; explicit verification of its hypotheses"
+   }
+  },
+  {
+   "text": "Fix any integer $i$ with $0\\le i\\le2d$. Apply [thm-weil-deligne-purity] to the same $p,a,q,k_0,k,\\ell,\\Qlb,\\iota,X_0,X,d$ and the same global geometric Frobenius. Its smoothness, properness, geometric connectedness and pure-dimension hypotheses are those in the situation of the statement. The exceptional-adjoint admissibility, the chosen dualizing Weil complex with underlying object $Ra_X^!\\Qlb$, and its canonical functorial Weil lift are also already assumed in that situation. Step 1 supplies finite-dimensionality of all the displayed cohomology groups. Thus every hypothesis of the theorem holds. Project its fourth conclusion: $(H^i(X,\\Qlb),F_{\\Qlb})$ is $\\iota$-pure of weight $i$. This is precisely the finite-dimensional Frobenius-module weight predicate of [def-weil-frobenius-module-weights], with the same coefficient isomorphism $\\iota$ and base $q$. Since $i$ was arbitrary in the required interval, the assertion follows.",
    "uses": [
     "thm-weil-deligne-purity",
-    "prop-weight-purity",
     "def-weil-frobenius-module-weights"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-input-weights/prop-weight-purity-ordinary.md",
+    "place": "Proof, application of clause (4) of thm-weil-deligne-purity; explicit verification of its hypotheses"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-smooth-proper-purity-hypotheses",
   "thm-weil-deligne-purity",
-  "prop-weight-purity",
   "def-weil-frobenius-module-weights"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-input-weights/prop-weight-purity-ordinary.md",
-  "place": "## Proof"
+  "place": "Proof; expanded the source projection argument by explicitly discharging the finiteness hypothesis using the existing hypotheses lemma"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsPureOfWeight|[Dd]eligne|[Ff]robenius.*[Cc]ohom|[Cc]ohom.*[Ff]robenius",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: no FrobeniusModule or IsPureOfWeight in Mathlib; only integral EllAdicCohomology and an unrelated Deligne bibliographic reference"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth proper variety over a finite field has Frobenius eigenvalues on degree i ell-adic cohomology of complex absolute value q^(i/2)",
+   "results": "8 hits: FiniteField.Extension.frob, FiniteField.Extension.frob_apply, WittVector.StandardOneDimIsocrystal.frobenius_apply, FiniteField.frobeniusAlgHom_apply, FiniteField.coe_frobeniusAlgEquivOfAlgebraic, minpoly.frobenius_of_isSeparable, FiniteField.frobeniusAlgEquivOfAlgebraic, FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic",
+   "date": "2026-10-17",
+   "verdict": "no match: finite-field Frobenius automorphisms and isocrystals do not assert cohomological purity"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.EllAdicCohomology",
+   "results": "3 hits: AlgebraicGeometry.Scheme.EllAdicCohomology, AlgebraicGeometry.Scheme.instAddCommGroupEllAdicCohomology, AlgebraicGeometry.Scheme.instSubsingletonEllAdicCohomologyOfIsEmptyCarrierCarrierCommRingCat",
+   "date": "2026-10-17",
+   "verdict": "no match: EllAdicCohomology and its additive-group/empty-scheme instances define integral cohomology only; read Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:75-85"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth proper geometrically connected variety over a finite field, ordinary ell-adic cohomology H^i is pure of weight i for geometric Frobenius",
+   "results": "8 hits: WittVector.isocrystal_classification, IsArithFrobAt.arithFrobAt, WittVector.IsocrystalEquiv.mk.inj, WittVector.instIsocrystalStandardOneDimIsocrystal, WittVector.IsocrystalEquiv.frob_equivariant, IsArithFrobAt.exists_of_isInvariant, WittVector.StandardOneDimIsocrystal, WittVector.Isocrystal",
+   "date": "2026-10-17",
+   "verdict": "no match: returned Witt-vector isocrystals and arithmetic Frobenius at prime ideals, not smooth-proper cohomological purity"
+  },
+  {
+   "tool": "grep",
+   "query": "EllAdicCohomology|FrobeniusModule|IsPureOfWeight",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: no FrobeniusModule or IsPureOfWeight in Mathlib; only integral EllAdicCohomology and an unrelated Deligne bibliographic reference"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Deligne purity theorem: eigenvalues of geometric Frobenius acting on the i-th etale cohomology of a smooth projective variety over F_q have absolute value q to the i over two",
+   "results": "8 hits: IsArithFrobAt.arithFrobAt, FiniteField.orderOf_frobeniusAlgHom, IsArithFrobAt.exists_of_isInvariant, FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic, FiniteField.frobeniusAlgHom_apply, FiniteField.frobeniusAlgEquiv_apply, FiniteField.frobenius_pow, AlgHom.IsArithFrobAt.apply_of_pow_eq_one",
+   "date": "2026-10-17",
+   "verdict": "no match: returned Witt-vector isocrystals and arithmetic Frobenius at prime ideals, not smooth-proper cohomological purity"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -65,5 +123,21 @@
   }
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-input-weights"
+ "unit": "sk-input-weights",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-weight-purity-ordinary",
+  "worker": "stage1",
+  "summary": "Kept the statement exactly. Read the original proof and current blueprint (same statement, no proof in current snapshot), and checked each hypothesis of Deligne smooth-proper purity. Its explicit finite-dimensionality requirement was missing from the imported projection argument; discharged it using clause (3) of the existing lem-weil-smooth-proper-purity-hypotheses. Added the Frobenius-module weight definition to statement dependencies. No new nodes; no statement dispute or route change. Searched the full blueprint, DAG, project Lean, and Mathlib; the abstract TraceDatum purity theorem has additional hypotheses and is not an attachment.",
+  "blueprint": "The sole paragraph under Proof of prop-weight-purity-ordinary, projecting clause (4) of thm-weil-deligne-purity; realizes clauses (4)-(5) of unit sk-input-weights by this existing packaged theorem.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-f28546833",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-f28546833 (reviewer sub-agent of L); spot-checked: Read the item in full; it has no new nodes. The statement is verbatim the same in the master and main-20261015 blueprints, and both proofs consist of one sentence: clause (4) of thm-weil-deligne-purity. Step 1: lem-weil-smooth-proper-purity-hypotheses clause (3) is in the same unit. Its hypotheses (finite-field datum, l!=p, the algebraically closed Qlbar coefficient category, X0 smooth, proper, geometrically connected of pure dimension d) are exactly the ones fixed in prop-weight-purity. It gives finite-dimensional H^i and H^i_c for every i, which discharges the theorem's explicit finiteness hypothesis that the blueprint's one-sentence proof leaves unstated. Step 2: I checked every hypothesis of thm-weil-deligne-purity against prop-weight-purity: p, a, q, k0, k, l, Qlbar, iota, X0, X, d, g_X, the constant Weil object on the small pro-etale site, admissibility, and the dualizing Weil complex with For(omega)=Ra^!Qlbar and its canonical Weil lift. All of them are present. The cohomology conventions agree: RGamma=Fib_s(Ra_*), per def-weil-ordinary-compact-cohomology. F_Qlbar, the scalar extension of F_l, is the same as the theorem's induced operator, because def-weil-global-geometric-frobenius defines the operator only at finite stages and def-weil-algebraically-closed-coefficients builds Qlbar objects from finite stages. Clause (4) is exactly the def-weil-frobenius-module-weights predicate with the same q and iota. That definition belongs to another unit but is only a notion, so the route stays in unit sk-input-weights, as in the unit's own proof of clauses (4)-(5). No tool_uses, no SGA. A read-only traversal finds no cycle; the only node that cites the item is prop-weight-purity-roots. cor-zl-purity-smooth-proper is a strict generalization in another unit, not a duplicate, so same_as=[] is defensible. Small cases check out: d=0 (H^0=Qlbar with F=id), i=2d (eigenvalue q^d), an elliptic curve with i=1 (Hasse bound), and zero groups (the condition holds vacuously). proof_deps is exactly the union of the steps' uses; the one added stmt_dep, def-weil-frobenius-module-weights, is correct. delivery-errors A-F all pass. No fixes were written."
+ }
 }
