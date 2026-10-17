@@ -3700,7 +3700,11 @@ public import WeilConjectures.RingTheory.Etale.TraitSection
 public import WeilConjectures.RingTheory.Etale.TraitSection.BaseChange
 public import WeilConjectures.RingTheory.Etale.TraitSection.Core
 public import WeilConjectures.RingTheory.Etale.TraitSection.Descent
+public import WeilConjectures.RingTheory.Etale.TraitSection.KummerAbhyankar
+public import WeilConjectures.RingTheory.Etale.TraitSection.KummerFibre
 public import WeilConjectures.RingTheory.Etale.TraitSection.KummerIntegralClosure
+public import WeilConjectures.RingTheory.Etale.TraitSection.KummerLocalization
+public import WeilConjectures.RingTheory.Etale.TraitSection.KummerPurity
 public import WeilConjectures.RingTheory.Etale.TraitSection.Points
 public import WeilConjectures.RingTheory.Etale.TraitSection.Reduction
 public import WeilConjectures.RingTheory.Etale.TraitSection.ReductionProof

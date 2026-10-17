@@ -9,6 +9,8 @@ public import WeilConjectures.RingTheory.Etale.TraitSection.KummerIntegralClosur
 public import WeilConjectures.RingTheory.Etale.TraitSection.Points
 public import WeilConjectures.RingTheory.Etale.Abhyankar
 public import WeilConjectures.RingTheory.Etale.DepthTwo.SmoothPurity
+public import WeilConjectures.RingTheory.Etale.TraitSection.KummerAbhyankar
+public import WeilConjectures.RingTheory.Etale.TraitSection.KummerPurity
 
 /-!
 # Étaleness of the normalization at a section over a trait containing roots of unity
@@ -55,10 +57,12 @@ section `ε`. -/
 noncomputable abbrev sectionLocalization (ε : B →ₐ[A] A) : Type u :=
   Localization.AtPrime ((maximalIdeal A).comap ε)
 
-include Bk in
 set_option maxHeartbeats 3200000 in
-/-- **The normalization after the tame Kummer base change is finite étale** at the section.
-(Gap: purity over `A₂` and Abhyankar's lemma, see the module docstring.) -/
+-- Purity and Abhyankar over `B₂ = B ⊗[A] A₂` and the comparison with `R'` are slow.
+omit [IsNoetherianRing B] in
+include Bk in
+/-- **The normalization after the tame Kummer base change is finite étale** at the section:
+by purity over `A₂` and Abhyankar's lemma, see the module docstring. -/
 theorem etale_finite_integralClosure_kummer (ε : B →ₐ[A] A) (G : Type*) [Group G] [Finite G]
     [MulSemiringAction G L] [SMulCommClass G Bk L]
     (hfix : ∀ x : L, (∀ g : G, g • x = x) → x ∈ Set.range (algebraMap Bk L))
@@ -70,10 +74,90 @@ theorem etale_finite_integralClosure_kummer (ε : B →ₐ[A] A) (G : Type*) [Gr
     Algebra.Etale R' (integralClosure R' (R' ⊗[R] (R ⊗[B] L))) ∧
       Module.Finite R' (integralClosure R' (R' ⊗[R] (R ⊗[B] L))) ∧
       Module.finrank R' (integralClosure R' (R' ⊗[R] (R ⊗[B] L))) ≤ Nat.card G := by
-  sorry
+  have hn0 : Nat.card G ≠ 0 := Nat.card_pos.ne'
+  have : NeZero (Nat.card G) := ⟨hn0⟩
+  let R := sectionLocalization A ε
+  let R' := AdjoinRoot (X ^ Nat.card G - C (algebraMap A R ϖ))
+  -- `A₂ = A[t] ⧸ (tⁿ - ϖ)` is a discrete valuation ring with uniformizer `t`
+  let A₂ := AdjoinRoot (X ^ Nat.card G - C ϖ)
+  have : IsDomain A₂ := (AdjoinRoot.isAdjoinRoot _).isDomain_of_X_pow_sub_C hϖ hn0
+  have : IsDiscreteValuationRing A₂ :=
+    (AdjoinRoot.isAdjoinRoot _).isDiscreteValuationRing_of_X_pow_sub_C hϖ hn0
+  have hm₂ : maximalIdeal A₂ = Ideal.span {AdjoinRoot.root (X ^ Nat.card G - C ϖ)} := by
+    rw [(AdjoinRoot.isAdjoinRoot _).maximalIdeal_eq_span_root hϖ hn0,
+      AdjoinRoot.isAdjoinRoot_root_eq_root]
+  have hroot : AdjoinRoot.root (X ^ Nat.card G - C ϖ) ^ Nat.card G = algebraMap A A₂ ϖ := by
+    have h := AdjoinRoot.mk_self (f := X ^ Nat.card G - C ϖ)
+    rw [map_sub, map_pow, AdjoinRoot.mk_X, AdjoinRoot.mk_C, sub_eq_zero] at h
+    exact h
+  -- `B₂ = B ⊗[A] A₂`, smooth over `A₂`
+  let B₂ := B ⊗[A] A₂
+  let : Algebra A₂ B₂ := Algebra.TensorProduct.rightAlgebra
+  let eB : B₂ ≃ₐ[A₂] A₂ ⊗[A] B :=
+    AlgEquiv.ofRingEquiv (f := (Algebra.TensorProduct.comm A B A₂).toRingEquiv) fun a ↦ rfl
+  have : Algebra.Smooth A₂ B₂ := Algebra.Smooth.of_equiv eB.symm
+  -- `B_K₂ = B₂ ⊗[B] B_K` is the localization of `B₂` at the nonzero elements of `A₂`
+  let Bk₂ := B₂ ⊗[B] Bk
+  have hinjA : Function.Injective (algebraMap A A₂) :=
+    AdjoinRoot.injective_algebraMap_X_pow_sub_C (Nat.card G) ϖ
+  have hR (r : A) (hr : r ∈ nonZeroDivisors A) : algebraMap A A₂ r ∈ nonZeroDivisors A₂ :=
+    mem_nonZeroDivisors_of_ne_zero fun h ↦ nonZeroDivisors.ne_zero hr
+      (hinjA (h.trans (map_zero _).symm))
+  have hdvd (a : A₂) (ha : a ∈ nonZeroDivisors A₂) :
+      ∃ r ∈ nonZeroDivisors A, a ∣ algebraMap A A₂ r := by
+    have hm : algebraMap A A₂ ϖ ∈ maximalIdeal A₂ := by
+      rw [← hroot, hm₂]
+      exact Ideal.pow_mem_of_mem _ (Ideal.mem_span_singleton_self _) _ (Nat.pos_of_ne_zero hn0)
+    obtain ⟨m, hm, hm0⟩ := IsDiscreteValuationRing.exists_dvd_algebraMap
+      (fun h ↦ hϖ.ne_zero (hinjA (h.trans (map_zero _).symm))) hm (nonZeroDivisors.ne_zero ha)
+    exact ⟨ϖ ^ m, mem_nonZeroDivisors_of_ne_zero fun h ↦ hm0 (by rw [h, map_zero]), hm⟩
+  have : IsLocalization (Algebra.algebraMapSubmonoid B₂ (nonZeroDivisors A₂)) Bk₂ :=
+    Algebra.TraitSection.isLocalization_tensor_of_dvd hdvd hR
+  -- the cover `L₂ = B₂ ⊗[B] L` of `B_K₂`
+  let L₂ := Algebra.TraitSection.kummerCover A B L (Nat.card G) ϖ
+  let : Algebra Bk₂ L₂ :=
+    (Algebra.TraitSection.coverMap (B := B) (B₁ := B₂) (Bk := Bk) (L := L)).toRingHom.toAlgebra
+  have : IsScalarTower B₂ Bk₂ L₂ := .of_algebraMap_eq fun x ↦
+    ((Algebra.TraitSection.coverMap (B := B) (B₁ := B₂) (Bk := Bk) (L := L)).commutes x).symm
+  obtain ⟨hE₂, hF₂, hrk₂⟩ :=
+    Algebra.TraitSection.etale_finite_cover (B := B) (B₁ := B₂) (Bk := Bk) (L := L)
+  have : Algebra.Etale Bk₂ L₂ := hE₂
+  have : Module.Finite Bk₂ L₂ := hF₂
+  -- Abhyankar's lemma at the generic points of the closed fibre, then purity
+  have H (Q : Ideal B₂) [Q.IsPrime]
+      (hQ : Q ∈ ((maximalIdeal A₂).map (algebraMap A₂ B₂)).minimalPrimes) :
+      Algebra.Etale (Localization.AtPrime Q)
+          (Localization.AtPrime Q ⊗[B₂] integralClosure B₂ L₂) ∧
+        Module.Finite (Localization.AtPrime Q)
+          (Localization.AtPrime Q ⊗[B₂] integralClosure B₂ L₂) := by
+    rw [hm₂, Ideal.map_span, Set.image_singleton,
+      Algebra.TensorProduct.right_algebraMap_apply] at hQ
+    exact Algebra.TraitSection.etale_finite_localization_integralClosure_kummer (Bk := Bk) G hfix
+      hrank hG hϖ Q hQ
+  let := AdjoinRoot.tensorXPowSubCAlgebra (B := B) (T := R) (Nat.card G) ϖ
+  have := AdjoinRoot.isScalarTower_tensorXPowSubCAlgebra (B := B) (T := R) (Nat.card G) ϖ
+  have := AdjoinRoot.isLocalization_tensorXPowSubC (B := B) (T := R) (Nat.card G) ϖ
+    ((maximalIdeal A).comap ε).primeCompl
+  obtain ⟨hE, hF, hk⟩ := RingTheory.DepthTwo.etale_finite_tensor_integralClosure_of_minimalPrimes
+    (R₀ := A₂) (B := B₂) (Bk := Bk₂) (L := L₂) (fun p ↦ (hrk₂ _ hrank p).le) H R'
+  -- comparison with the integral closure of `R'`
+  let e := TensorProduct.integralClosureTensorEquivOfIsLocalization (B := B) (B₂ := B₂) (T := R)
+    (D := R') ((maximalIdeal A).comap ε).primeCompl L
+  refine ⟨.of_equiv e, .equiv e.toLinearEquiv, ?_⟩
+  have : Algebra.Smooth R' (R' ⊗[B₂] integralClosure B₂ L₂) := inferInstance
+  have : Module.Flat R' (R' ⊗[B₂] integralClosure B₂ L₂) := Algebra.Smooth.flat _ _
+  have : Module.Free R' (R' ⊗[B₂] integralClosure B₂ L₂) := Module.free_of_flat_of_isLocalRing
+  have h := congrFun
+    (Module.rankAtStalk_eq_finrank_of_free (R := R') (M := R' ⊗[B₂] integralClosure B₂ L₂))
+    ⟨maximalIdeal R', inferInstance⟩
+  rw [Pi.natCast_apply, Nat.cast_id] at h
+  rw [← e.toLinearEquiv.finrank_eq, ← h]
+  exact hk _
 
-include Bk in
 set_option maxHeartbeats 3200000 in
+-- The comparison of the points along the section with the Kummer action is slow.
+omit [Algebra.Smooth A B] [IsNoetherianRing B] [Algebra.Etale Bk L] in
+include Bk in
 /-- **The points along the section** split the closed fibre of the normalization after the tame
 Kummer base change, and are invariant under the Kummer action
 (`Algebra.TraitSection.exists_points_kummer`). -/
@@ -112,7 +196,7 @@ theorem exists_points_integralClosure_kummer (ε : B →ₐ[A] A) (G : Type*) [G
         change σ₀ (algebraMap A R a) = _
         rw [IsScalarTower.algebraMap_apply A B R, hσB]
         simp }
-  letI : Algebra B K := ((algebraMap A K).comp ε.toRingHom).toAlgebra
+  let : Algebra B K := ((algebraMap A K).comp ε.toRingHom).toAlgebra
   let f₁ : R →ₐ[B] K :=
     { (algebraMap A K).comp σ.toRingHom with
       commutes' := fun b ↦ by
@@ -153,7 +237,9 @@ theorem exists_points_integralClosure_kummer (ε : B →ₐ[A] A) (G : Type*) [G
   exact Algebra.TraitSection.exists_points_kummer hϖ σ χ hχ hχinj hζ
 
 set_option synthInstance.maxHeartbeats 400000 in
+-- The base change to `R'` and the Kummer descent need deep instance synthesis.
 set_option maxHeartbeats 3200000 in
+-- The base change to `R'` and the Kummer descent are slow to elaborate.
 include Bk in
 /-- **Étaleness of the normalization at a section over a trait containing the `|G|`-th roots of
 unity.** See the module docstring. -/
