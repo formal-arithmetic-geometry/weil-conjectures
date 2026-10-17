@@ -133,7 +133,34 @@ lemma ProEtale.adicLowerStarUnitIso_transport {Z Z' : Scheme.{u}} (θ : Z ≅ Z'
     adicLowerStarUnitIso_comp (l := l) G θ, adicLowerStarUnitIso_comp (l := l) θ G']
   simp only [adicLowerStarSquareIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Category.assoc, Iso.inv_hom_id_app_assoc]
-  exact adicLowerStarCongr_hom_app_comp_adicLowerStarUnitIso_hom (e := θ ≪≫ G') (e' := G ≪≫ θ) h
+  exact _ ≫= adicLowerStarCongr_hom_app_comp_adicLowerStarUnitIso_hom (l := l) (e := θ ≪≫ G')
+    (e' := G ≪≫ θ) h
+
+/-- `ProEtale.adicLowerStarCongr_hom_app_comp_adicLowerStarId_hom_app_unit` for the inverse of an
+automorphism. -/
+lemma ProEtale.adicLowerStarCongr_hom_app_comp_adicLowerStarId_hom_app_unit_inv {X : Scheme.{u}}
+    (A : X ≅ X) (h : A.inv = 𝟙 X) :
+    (adicLowerStarCongr l h).hom.app _ ≫ (adicLowerStarId l X).hom.app (AdicSheaf.unit l X) =
+      (adicLowerStarUnitIso l A.symm).hom :=
+  adicLowerStarCongr_hom_app_comp_adicLowerStarId_hom_app_unit A.symm h
+
+/-- `ProEtale.adicLowerStarUnitIso_comp'` for inverses of automorphisms. -/
+lemma ProEtale.adicLowerStarUnitIso_comp_inv {X : Scheme.{u}} (A B C : X ≅ X)
+    (h : C.inv = A.inv ≫ B.inv) :
+    (adicLowerStarCongr l h).hom.app _ ≫ (adicLowerStarComp l A.inv B.inv).inv.app _ ≫
+        (B.inv)_*ᵃ[l].map (adicLowerStarUnitIso l A.symm).hom ≫
+          (adicLowerStarUnitIso l B.symm).hom =
+      (adicLowerStarUnitIso l C.symm).hom :=
+  adicLowerStarUnitIso_comp' A.symm B.symm C.symm h
+
+/-- `ProEtale.adicLowerStarUnitIso_transport` for inverses of automorphisms. -/
+lemma ProEtale.adicLowerStarUnitIso_transport_inv {Z Z' : Scheme.{u}} (θ : Z ≅ Z') (G : Z ≅ Z)
+    (G' : Z' ≅ Z') (h : θ.hom ≫ G'.inv = G.inv ≫ θ.hom) :
+    (G'.inv)_*ᵃ[l].map (adicLowerStarUnitIso l θ).inv ≫
+        (adicLowerStarSquareIso l h).hom.app (AdicSheaf.unit l Z) ≫
+        (θ.hom)_*ᵃ[l].map (adicLowerStarUnitIso l G.symm).hom =
+      (adicLowerStarUnitIso l G'.symm).hom ≫ (adicLowerStarUnitIso l θ).inv :=
+  adicLowerStarUnitIso_transport θ G.symm G'.symm h
 
 end Unit
 
@@ -308,7 +335,8 @@ lemma adicConstant_frobeniusPowIso (X : Scheme.{u}) [X.Over (Spec (CommRingCat.o
     rw [frobeniusPowIso_zero (adicConstant k₀ l X) h0]
     simp only [Iso.trans_hom, Iso.app_hom]
     dsimp only [adicConstant_carrier]
-    exact adicLowerStarCongr_hom_app_comp_adicLowerStarId_hom_app_unit _ h0
+    exact adicLowerStarCongr_hom_app_comp_adicLowerStarId_hom_app_unit_inv
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0) h0
   | succ m ih =>
     ext1
     have hs : ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (m + 1)).inv =
@@ -318,7 +346,10 @@ lemma adicConstant_frobeniusPowIso (X : Scheme.{u}) [X.Over (Spec (CommRingCat.o
     rw [frobeniusPowIso_succ (adicConstant k₀ l X) m hs, ih, adicConstant_str]
     simp only [Iso.trans_hom, Iso.app_hom, Iso.symm_hom, Functor.mapIso_hom, Category.assoc]
     dsimp only [adicConstant_carrier]
-    exact adicLowerStarUnitIso_comp' _ _ _ _
+    exact adicLowerStarUnitIso_comp_inv
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m)
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (m + 1)) hs
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   {k₀' : Type u} [Field k₀'] [Finite k₀'] {X' : Scheme.{u}}
@@ -339,7 +370,10 @@ def adicConstantTransportIso :
       adicConstant_frobeniusPowIso, transportCommIso_eq, adicConstant_str]
     simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Iso.symm_hom]
     dsimp only [adicConstant_carrier]
-    exact adicLowerStarUnitIso_transport θ _ _ _)
+    exact adicLowerStarUnitIso_transport_inv θ
+      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r)
+      (X' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius
+      (hom_comp_geometricGaloisFrobenius_inv θ r hθ))
 
 lemma adicConstantTransportIso_hom_hom_f :
     (adicConstantTransportIso (l := l) θ r hθ).hom.hom.f = (adicLowerStarUnitIso l θ).inv :=
