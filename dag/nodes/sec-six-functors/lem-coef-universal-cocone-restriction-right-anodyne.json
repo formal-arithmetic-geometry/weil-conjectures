@@ -13,9 +13,125 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-right-anodyne"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $D_B=\\operatorname{Fun}(B,\\mathcal E)$ and $D_A=\\operatorname{Fun}(A,\\mathcal E)$, and let $R:D_B\\to D_A$ be restriction along $i$. By the internal functor and cocone conventions of [def-cbc-enhanced-diagrams-cones], $R$ carries the constant diagram $\\Delta_B e$ strictly to $\\Delta_A e$, and the coherent cocone quasicategories are the source-fixed arrow constructions over these constant-diagram functors, retaining all higher simplices. The mapping-space colimit criterion in [lem-cbc-enhanced-functor-cone-calculus] therefore tests a cocone by the right-pinched maps $\\operatorname{Map}_{\\mathcal E}(e,t)\\to\\operatorname{Map}_{D_B}(H,\\Delta_Bt)$, naturally in $t$ and in all higher simplices; [lem-coef-infinity-pinch-comparison] identifies these right-pinched mapping spaces with the corresponding fixed-endpoint arrow mapping spaces up to a natural homotopy equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.1.1.8, setup of the actual cocone restriction functor and its mapping-space formulation; Definitions 4.1.1.1 and 4.1.1.3(4)."
+   }
+  },
+  {
+   "text": "Assume that $i$ is right anodyne. The coherent cocone mapping-space clause of [lem-coef-infinity-anodyne-cocones], applied to the diagram $H$ and each vertex $t$ of $\\mathcal E$, says that restriction induces an equivalence $\\operatorname{Map}_{D_B}(H,\\Delta_Bt)\\simeq\\operatorname{Map}_{D_A}(Hi,\\Delta_At)$, naturally in $t$ and compatibly with postcomposition. The right-pinched mapping spaces used by the cone criterion agree with the fixed-endpoint arrow model through the natural equivalence [lem-coef-infinity-pinch-comparison]. The cocone projections to $\\mathcal E$ are left fibrations: they are the source-fixed arrow projection in the functor quasicategories, pulled back along the constant-diagram functors, and the opposite of the target-fixed right fibration in [lem-coef-infinity-arrow-target-right-fibration]. Pullback preserves the horn lifting property: compose a horn square with the pullback projection, fill upstairs, and pair the filler with its prescribed base simplex. By [lem-coef-space-transport-classification], these left fibrations and their restriction map correspond to two space-valued functors on $\\mathcal E$ and a coherent transformation between them. Its components are precisely the fiber equivalences just obtained. The componentwise-equivalence assertion of [lem-cbc-enhanced-functor-cone-calculus] makes this transformation an equivalence. Transport classification carries its inverse and the two inverse homotopies back to maps over $\\mathcal E$; forgetting the base exhibits a quasi-inverse to restriction. Hence $\\mathcal E_{H/}\\to\\mathcal E_{Hi/}$ is a functor equivalence over $\\mathcal E$, with no fullness or colimit assumption.",
+   "uses": [
+    "lem-coef-infinity-anodyne-cocones",
+    "lem-coef-infinity-arrow-target-right-fibration",
+    "lem-coef-space-transport-classification",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.1.1.3(4) and Proposition 4.1.1.7, right-anodyne direction; the fiberwise cocone-category argument is written using the transport classification."
+   }
+  },
+  {
+   "text": "Conversely assume that the actual cocone restriction functor $F:\\mathcal E_{H/}\\to\\mathcal E_{Hi/}$ is a functor equivalence for every $\\mathcal E,H$. A colimiting cocone $\\lambda$ is initial by [def-cbc-enhanced-diagrams-cones]. Choose a quasi-inverse $G$ to $F$. For every cocone $z$ in the target, the mapping-space assertion of [lem-cbc-enhanced-functor-cone-calculus] and the equivalence $FGz\\simeq z$ give $\\operatorname{Map}(F\\lambda,z)\\simeq\\operatorname{Map}(F\\lambda,FGz)\\simeq\\operatorname{Map}(\\lambda,Gz)$, which is contractible. Hence $F\\lambda$ is initial and is the restricted colimiting cocone, with the same apex because $F$ is literal restriction over $\\mathcal E$. Thus $i$ is final in the sense of [lem-coef-infinity-cofinality-space-test]. That node also gives weak contractibility of the oriented coherent commas $(b\\downarrow i)$, whose arrows are $b\\to i(a)$. Only preservation of colimiting cocones is needed below.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-cofinality-space-test",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Proposition 4.1.1.8, (2) => (3), printed p.226: preservation of initial objects. The optional comma consequence is Kerodon Theorem 7.2.3.1 (02NY) and Remark 7.2.3.2 (02NZ), as stated in lem-coef-infinity-cofinality-space-test."
+   }
+  },
+  {
+   "text": "We now prove the right-fibration section criterion used in the cofinality implication. Let $q:E\\to B$ be any right fibration and let $q_A:E\\times_B A\\to A$ be its pullback. By the dual right-fibration classification in [lem-coef-space-transport-classification], $q$ is represented by a coherent diagram $m_q:B^{\\mathrm{op}}\\to\\mathcal S$ and $q_A$ by its restriction to $A^{\\mathrm{op}}$. The section-limit theorem [lem-coef-right-fibration-section-limit] identifies $\\Gamma_B(q)=\\operatorname{Fun}_{/B}(B,E)$ and $\\Gamma_A(q_A)=\\operatorname{Fun}_{/A}(A,E\\times_B A)$ with the limit objects of these transports, including all higher simplices. Regard $m_q$ as a diagram $B\\to\\mathcal S^{\\mathrm{op}}$. The evaluation limit cone with apex $L=\\Gamma_B(q)$ is a colimiting cocone in $\\mathcal S^{\\mathrm{op}}$. Step 3 makes its restriction a colimiting cocone, so the restricted evaluation cone is a limit cone on $m_q|_{A^{\\mathrm{op}}}$ with the same apex $L$. The section-limit theorem supplies another limit cone on that diagram with apex $L_A=\\Gamma_A(q_A)$. Its restriction-naturality identifies the cone comparison with the actual map $r:L\\to L_A$ sending a section to its restriction. For every space $X$, the cone criterion of [lem-cbc-enhanced-functor-cone-calculus] identifies postcomposition $\\operatorname{Map}(X,L)\\to\\operatorname{Map}(X,L_A)$ with an equivalence, because both maps to the same space of cones are equivalences. At $X=L_A$ this gives $t:L_A\\to L$ with $rt\\simeq1$; at $X=L$ injectivity on components then gives $tr\\simeq1$. Thus the actual restriction $r$ is an equivalence of Kan complexes, including when either section space is empty. Thus restriction along $i$ has the right-fibration section property for every $q$.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-right-fibration-section-limit",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.1.1.8, implication (3) => (1), printed pp.226-227; Definition 4.1.1.1 and Remark 4.1.1.2."
+   }
+  },
+  {
+   "text": "In simplicial sets small colimits are formed degreewise, so they exist. A right horn has finitely many nondegenerate simplices. A map from it into a continuous $\\omega$-chain of monomorphisms is determined by finitely many images and relations: all images occur in a common finite stage, and the finitely many relations hold in a common later stage; equality of two such maps is likewise detected at a finite stage. Pushouts and coproducts of horn inclusions remain monomorphisms degreewise. This verifies the smallness hypothesis of [lem-coef-small-object-cell-factorization] with $\\kappa=\\aleph_0$. Factor the degreewise injective map $i:A\\hookrightarrow B$ by the small-object factorization [lem-coef-small-object-cell-factorization] for the set $I=\\{\\Lambda^n_j\\hookrightarrow\\Delta^n\\mid n\\ge1,\\ 0<j\\le n\\}$ of right horns: $$A\\xrightarrow{f}N\\xrightarrow{g}B.$$ By [def-coef-infinity-right-anodyne], the $I$-cell map $f$ is right anodyne: a coproduct $\\coprod_{k\\in K}(\\Lambda_k\\hookrightarrow\\Delta_k)$ of right horns, with $K$ well ordered, is the transfinite composite of the successive pushouts of the single horns $\\Lambda_k\\hookrightarrow\\Delta_k$ along the stage reached so far (continuous at limit stages, since colimits are degreewise), so pushouts of coproducts of right horns and their transfinite composites lie in the class, while the $I$-lifting property of $g$ is exactly that $g$ is a right fibration by [def-coef-infinity-fibrations]. The simplicial set $N$ is a quasicategory: map an inner horn in $N$ to $B$, fill it in $B$, then lift that filler using $g$. Pullbacks of right fibrations are right fibrations by pairing a filler with the prescribed base simplex. For a right fibration $q:E\\to B$, pull back along $g$ and apply [lem-coef-infinity-right-fibration-exponentiation] to the right-anodyne map $f$; taking the strict fiber over the prescribed base maps gives a trivial Kan fibration $\\Gamma_N(g^*q)\\to\\Gamma_A(i^*q)$. The composite $\\Gamma_B(q)\\to\\Gamma_A(i^*q)$ is an equivalence by Step 4, so two-out-of-three gives that $\\Gamma_B(q)\\to\\Gamma_N(g^*q)$ is an equivalence. Hence $g$ has the same right-fibration section property.",
+   "uses": [
+    "lem-coef-small-object-cell-factorization",
+    "def-coef-infinity-right-anodyne",
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-right-fibration-exponentiation",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 4.1.1.12 and the proof of Proposition 4.1.1.3(4), printed pp.224-228; Appendix A.1.2 small-object factorization."
+   }
+  },
+  {
+   "text": "For $q=g:N\\to B$, Step 5 gives an equivalence $\\Gamma_B(g)\\to\\Gamma_N(g^*g)$. Here $\\Gamma_N(g^*g)$ is the space of maps $N\\to N$ over $B$, and contains $1_N$; it is not the space of sections of $g$ over $B$. Both section spaces are Kan by [lem-coef-right-fibration-section-limit], since Step 5 proved that $N$ is a quasicategory. Surjectivity on components gives a section $s:B\\to N$ and a homotopy over $B$ from $sg$ to $1_N$. The strict fiber $N_b$ is Kan: pull $g$ back to $\\{b\\}$, and apply the same section-limit theorem over $\\Delta^0$, whose section space is exactly $N_b$. Restricting the homotopy to $N_b$ contracts its identity to the constant map at $s(b)$; this vertex exists for every $b$ because $gs=1_B$. Therefore [lem-coef-right-fibration-contractible-fibers] makes $g$ a trivial Kan fibration. To obtain a section relative to $A$, use the relative boundary-cell filtration of $i$ supplied by [lem-coef-infinity-monomorphism-boundary-cells]. Start with $f:A\\to N$. At stage zero use surjectivity of $g$ on vertices; at each positive-dimensional stage the boundary lifting property [def-weil-pbc-trivial-kan-fibration] extends the already constructed map across each boundary cell over its prescribed simplex in $B$. The pushout property assembles the chosen lifts, and their compatible colimit defines a map on $B$. This constructs $s_0:B\\to N$ with $s_0i=f$ and $gs_0=1_B$, also when $A$ or $B$ is empty. The arrow maps $(1_A,s_0):i\\to f$ and $(1_A,g):f\\to i$ have composite $1_i$, exhibiting $i$ as an arrow retract of $f$. Closure under retracts in [def-coef-infinity-right-anodyne] proves that $i$ is right anodyne.",
+   "uses": [
+    "lem-coef-right-fibration-contractible-fibers",
+    "def-coef-infinity-right-anodyne",
+    "lem-coef-right-fibration-section-limit",
+    "def-weil-pbc-trivial-kan-fibration",
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollaries 4.1.1.11-12 and Proposition 4.1.1.3(4), printed pp.224-225; right-fibration section and retract argument."
+   }
+  },
+  {
+   "text": "The two implications establish the stated if-and-only-if. Every construction is made in a containing universe, and the restriction map is the literal precomposition map on coherent cocones; the naturality and higher-simplex clauses follow from the strict identity $R\\Delta_B=\\Delta_A$ and the composition compatibility in [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.1.1.8, naturality of the restriction criterion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "def-coef-infinity-right-anodyne",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-anodyne-cocones",
+  "lem-coef-infinity-arrow-target-right-fibration",
+  "lem-coef-infinity-cofinality-space-test",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-infinity-right-fibration-exponentiation",
+  "lem-coef-right-fibration-contractible-fibers",
+  "lem-coef-right-fibration-section-limit",
+  "lem-coef-small-object-cell-factorization",
+  "lem-coef-space-transport-classification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Proposition 4.1.1.8, conditions (1) and (2), with Definitions 4.1.1.1 and 4.1.1.3(4); the right-fibration converse is expanded via the transport and lifting descriptions. Online source read; archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -58,10 +174,24 @@
    "results": "{\"t\": \"2026-10-17T04:59:42Z\", \"tool\": \"leanfinder\", \"query\": \"Cofinal simplicial inclusions characterized by restriction on categories of cones for every target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.initial_iff_isCofiltered_costructuredArrow\", \"CategoryTheory.SmallObject.coconeOfLE\", \"CategoryTheory.IsCofiltered.iff_cone_nonempty\", \"CategoryTheory.IsCofiltered.cone\", \"CategoryTheory.isCofiltered_costructuredArrow_of_isCofiltered_of_exists\", \"CategoryTheory.IsCofiltered.cone_nonempty\", \"CategoryTheory.Functor.IsEventuallyConstantTo.cone\", \"CategoryTheory.IsCofiltered.of_cone_nonempty\"], \"digest\": \"ec870417c1917264\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second reading returned only ordinary category initiality, cofilteredness, and cone constructions. These signatures do not discuss quasicategories or right horn saturation."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAnodyne|right_anodyne|cofinal.*Quasicategory|Quasicategory.*cofinal",
+   "results": "{\"t\": \"2026-10-17T06:28:34Z\", \"tool\": \"grep\", \"query\": \"rightAnodyne|right_anodyne|cofinal.*Quasicategory|Quasicategory.*cofinal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: independent second-reader search. The grep returned no right-anodyne/cofinal quasicategory interface; LeanFinder returned ordinary TopCat partial sections, sheaf cocones and condensed/profinite colimit comparisons, which have neither quasicategories nor right-horn saturation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of coherent cocones detects cofinal inclusions via spaces of sections of right fibrations",
+   "results": "{\"t\": \"2026-10-17T06:28:36Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of coherent cocones detects cofinal inclusions via spaces of sections of right fibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.partialSections.nonempty\", \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"TopCat.coconeOfCoconeForget\", \"TopCat.Presheaf.whiskerIsoMapGenerateCocone\", \"Condensed.isColimitLocallyConstantPresheaf\", \"LightProfinite.Extend.cocone\", \"skyscraperPresheafCocone\", \"Profinite.Extend.cocone\"], \"digest\": \"84758c50806f871c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: independent second-reader search. The grep returned no right-anodyne/cofinal quasicategory interface; LeanFinder returned ordinary TopCat partial sections, sheaf cocones and condensed/profinite colimit comparisons, which have neither quasicategories nor right-horn saturation."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-coinitial-monomorphism-left-anodyne",
@@ -71,7 +201,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, derived coefficient mapping-complex adjunction before R lim; operadic free extension in the fixed-object rectification chain: the operadic Kan-extension existence and parameter extension used to make the derived adjunction coherent. This prerequisite supplies source-cell presentation for the operadic outer-horn problem. Local source-cell cone comparison: Contractible incoming commas imply a left-anodyne monomorphism. Universal cocone restriction test used after applying the comma criterion to the opposite inclusion.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: universal cocone restriction criterion in the operadic coherent-diagram infrastructure, after the comma comparison and before the derived adjunction calculation.",
    "via": [
     "lem-coef-coinitial-monomorphism-left-anodyne",
     "lem-coef-operadic-family-cell-presentation",
@@ -89,5 +219,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-universal-cocone-restriction-right-anodyne",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by removing the parent-restatement node. The right-anodyne converse now follows the HTT factorization route: the universal cocone hypothesis gives the right-fibration section equivalence via transport and section limits; right-horn small-object factorization yields a right-anodyne map followed by a right fibration; the latter has contractible fibers and is a trivial fibration, so the original inclusion is an arrow retract. Added the missing pinch comparison citation in Step 2 and retained the arbitrary degreewise-injective statement without fullness. Second reading expands initial-object preservation, the canonical section-limit comparison, finite-horn smallness, the Kan section homotopy, and relative boundary lifts; statement unchanged.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: universal cocone restriction criterion in the operadic coherent-diagram infrastructure, after the comma comparison and before the derived adjunction calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Steps 1-4 take from its statement only the generic cone/cocone mapping-space criterion, the componentwise-equivalence criterion for transformations, and mapping-space invariance under functor equivalences; these are generic quasicategory tools of sk-prop-sf-cbc that no node of sk-prop-sf-biduality-general states, and the unit route is not replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-72969ff5d",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-72969ff5d (reviewer sub-agent of L); spot-checked: HTT is not in literature/, so I fetched the PDF (2017 version, /tmp/q06htt) and read §4.1.1, pp.223-228: Def 4.1.1.1, Prop 4.1.1.3(1)-(4) and its proof, Lemma 4.1.1.5, Prop 4.1.1.7, Prop 4.1.1.8 and its proof, Cor 4.1.1.9-4.1.1.12. The statement is true and unchanged: it is 4.1.1.8 (1)<=>(2) combined with 4.1.1.3(4), specialized to quasicategories, with no fullness or colimit-existence hypothesis. It uses the project's arrow-model cocone categories; Step 2 proves the forward direction directly in that model. Small cases checked: id (including the empty one), the empty set into a point (fails on both sides; discrete two-object E), the horn {1} into Delta^1 (holds), {0} into Delta^1 (fails, with E=[1] and H=id), and the non-full wide subcategory {0->2, 1->2} of [2] (final). Steps: (1) setup with the pinch comparison, correct. (2) Fibres of the cocone category are U_D(H, Delta t); the anodyne-cocones equivalence and pinch naturality give a fibrewise equivalence, and the left fibration plus classification and the componentwise criterion give a functor equivalence (HTT 4.1.1.7/4.1.1.8). (3) Equivalences preserve initial objects (HTT (2)=>(3)). (4) The section-limit cone in S, read as a colimit cocone in S^op, is preserved by Step 3; Yoneda then makes the actual restriction an equivalence. The transport-classification citation is redundant but not wrong, and there is no cycle. (5) Small-object factorization with kappa = aleph_0; N is a quasicategory; exponentiation applied along f, then 2-of-3. (6) Follows HTT 4.1.1.11 word for word: contractible Kan fibres make g a trivial fibration; the boundary-cell lift gives s0; i is a retract of f. (7) Elementary. proof_deps equals the union of step uses; no cycles; no SGA. No new nodes. Duplicate candidates checked: cofinal-mono-right-anodyne (full, one direction), right-anodyne-lifting-characterization, terminal-anodyne, equivalence-section-restriction, cofinal-relative-join-slice-restriction; none is a duplicate and none is a restated parent clause. FIX: (a) Step 5 claimed I-cell maps are right anodyne 'by the definition', but the definition does not close the class under coproducts; I added the one-line argument that a well-ordered coproduct of horns is a transfinite composite of single-horn pushouts. (b) Accepted tool_use lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc, outside the route; used only for its generic mapping-space, componentwise and initial-object criteria), declared in split_report.tool_uses. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-universal-cocone-restriction-right-anodyne.json.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -12,9 +12,115 @@
   "lem-coef-cocartesian-straightening",
   "lem-coef-cartesian-operadic-envelope"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the intrinsic mapping-space convention for cocartesian functors in [lem-coef-cocartesian-straightening], which also supplies a simplicial cocartesian representative after replacement over the base. The finite-product-preserving functor $p$ induces the coherent functor $P=p^\\times$ by [lem-coef-cartesian-operadic-envelope]. For an edge $u:x=(e_i)_{i=1}^r\\to y=(f_j)_{j=1}^s$ over $\\alpha$, put $x_j=\\prod_{\\alpha(i)=j}e_i$ and write its blocks as $u_j:x_j\\to f_j$. Identify $p(x_j)$ with $\\prod_{\\alpha(i)=j}p(e_i)$ by the specified product comparison. For a test tuple $z=(z_k)_{k=1}^t$ the envelope formula gives\n$$\\operatorname{Map}_{E^\\times}(y,z)\\simeq\\coprod_{\\beta:\\langle s\\rangle\\to\\langle t\\rangle}\\prod_{k=1}^t\\operatorname{Map}_E\\!\\left(\\prod_{\\beta(j)=k}f_j,z_k\\right).$$\nIndeed a right-pinched simplex maps to a simplex in the nerve of $\\mathsf{Fin}_*$ with constant initial face, hence has one fixed pointed-map label; this partitions the mapping space degreewise. The same applies to $x$ and to $B^\\times$. Composition takes the label $\\beta$ to $\\beta\\alpha$ and uses the block-substitution formula of the cited envelope node. All formulas are natural equivalences of spaces with their composition maps.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-cartesian-operadic-envelope",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Chu--Haugseng, Free algebras through Day convolution, Proposition 6.7(ii) and Corollary 6.8, printed pp. 14-15; direct verification using the existing cartesian-envelope mapping formula."
+   }
+  },
+  {
+   "text": "The binary product hypothesis implies closure of $p$-cocartesian edges under every nonempty finite product: for a singleton there is nothing to prove, and adjoining one factor is exactly the binary hypothesis. The nullary product of arrows is $\\mathrm{id}_{1_E}$; its precomposition square has horizontal identities, so it is cocartesian by the intrinsic criterion of [lem-coef-cocartesian-straightening]. Thus this closure includes empty products without assuming that every arrow from a terminal object is cocartesian. Changing a product cone by its projection-preserving equivalence changes the mapping-space squares by equivalences and therefore does not change their pullback property.",
+   "uses": [
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Chu--Haugseng, Free algebras through Day convolution, Proposition 6.7(ii) and Corollary 6.8, printed pp. 14-15; direct verification using the existing cartesian-envelope mapping formula."
+   }
+  },
+  {
+   "text": "Suppose all $u_j$ are $p$-cocartesian. Fix a pointed map $\\beta:\\langle s\\rangle\\to\\langle t\\rangle$ and put $J_k=\\{j:\\beta(j)=k\\}$, $a_k=\\prod_{j\\in J_k}x_j$, $c_k=\\prod_{j\\in J_k}f_j$, and $v_k=\\prod_{j\\in J_k}u_j:a_k\\to c_k$. Step 2 makes every $v_k$ cocartesian, including $v_k=\\mathrm{id}_{1_E}$ if $J_k$ is empty. Regrouping the disjoint input blocks identifies $a_k\\simeq\\prod_{\\beta\\alpha(i)=k}e_i$. The intrinsic criterion of [lem-coef-cocartesian-straightening] therefore gives, for each $k$, the homotopy-pullback square\n$$\\begin{matrix}\\operatorname{Map}_E(c_k,z_k)&\\longrightarrow&\\operatorname{Map}_E(a_k,z_k)\\\\ \\downarrow&&\\downarrow\\\\ \\operatorname{Map}_B(p(c_k),p(z_k))&\\longrightarrow&\\operatorname{Map}_B(p(a_k),p(z_k)).\\end{matrix}$$\nTaking the finite product of these squares gives the square on the $\\beta$-part of the envelope cocartesian test: [lem-coef-cartesian-operadic-envelope] identifies its top map with precomposition by $u$, and likewise in $B$. This finite-product assertion follows directly in the path-pullback model of [def-cbc-enhanced-diagrams-cones]: a path in a product is a tuple of paths, so the path pullback of product maps is the product of their path pullbacks, and the product of the comparison equivalences has the product of their inverses. It also holds for $t=0$.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-cartesian-operadic-envelope",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Chu--Haugseng, Free algebras through Day convolution, Proposition 6.7(ii) and Corollary 6.8, printed pp. 14-15; direct verification using the existing cartesian-envelope mapping formula."
+   }
+  },
+  {
+   "text": "Assemble the squares of step 3 over all $\\beta$. In the total path pullback\n$$\\operatorname{Map}_{E^\\times}(x,z)\\mathbin{\\times^h_{\\operatorname{Map}_{B^\\times}(Px,Pz)}}\\operatorname{Map}_{B^\\times}(Py,Pz),$$\na point of the second factor has a label $\\beta$. A path identifying its composite with $P(u)$ to the image of a point of the first factor forces that first point to have label $\\beta\\alpha$, since the pointed-map labels are discrete. Thus this pullback is the coproduct over $\\beta$ of precisely the path pullbacks in step 3. The upper-left space $\\operatorname{Map}_{E^\\times}(y,z)$ has the same decomposition by step 1. The comparison is consequently a coproduct of equivalences, with inverses defined on the same summands, and is an equivalence. This proves the total cocartesian square for every tuple $z$, hence $u$ is $P$-cocartesian by [lem-coef-cocartesian-straightening]. No injectivity of $\\beta\\mapsto\\beta\\alpha$ is needed: distinct $\\beta$ remain distinct summands in the second factor.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-cartesian-operadic-envelope",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Chu--Haugseng, Free algebras through Day convolution, Proposition 6.7(ii) and Corollary 6.8, printed pp. 14-15; direct verification using the existing cartesian-envelope mapping formula."
+   }
+  },
+  {
+   "text": "Conversely suppose $u$ is $P$-cocartesian. For each $j\\in\\{1,\\ldots,s\\}$ and each $z\\in E$, test its intrinsic square on the one-term tuple $(z)$ and restrict the lower-left mapping space to the summand labeled by the inert projection $\\rho_j:\\langle s\\rangle\\to\\langle1\\rangle$ selecting $j$. The path-pullback description and the discrete labels of step 1 restrict the upper-left space to that same label and the upper-right space to label $\\rho_j\\alpha$. The envelope formula identifies the resulting square with\n$$\\begin{matrix}\\operatorname{Map}_E(f_j,z)&\\xrightarrow{\\circ u_j}&\\operatorname{Map}_E(x_j,z)\\\\ \\downarrow&&\\downarrow\\\\ \\operatorname{Map}_B(p(f_j),p(z))&\\xrightarrow{\\circ p(u_j)}&\\operatorname{Map}_B(p(x_j),p(z)).\\end{matrix}$$\nRestricting a pullback to a union of these discrete summands is again a pullback: its path model simply retains those summands and the inverse comparison restricts to them. The square is therefore a homotopy pullback for every $z$, so $u_j$ is $p$-cocartesian by [lem-coef-cocartesian-straightening]. When $s=0$ there is no condition; step 4 already proves every edge to the empty tuple cocartesian.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-cartesian-operadic-envelope",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Chu--Haugseng, Free algebras through Day convolution, Proposition 6.7(ii) and Corollary 6.8, printed pp. 14-15; direct verification using the existing cartesian-envelope mapping formula."
+   }
+  },
+  {
+   "text": "Given $(e_i)$ and a base tuple arrow with blocks $b_j$, use the cocartesian lifting property of $p$ on the object $x_j=\\prod_{\\alpha(i)=j}e_i$ and on the arrow $p(x_j)\\simeq\\prod_{\\alpha(i)=j}p(e_i)\\xrightarrow{b_j}b'_j$. It gives $u_j:x_j\\to(b_j)_!x_j$ over that arrow. The coherent envelope mapping formula of [lem-coef-cartesian-operadic-envelope] realizes this tuple of blocks as an edge over the given tuple arrow (retaining its specified identification in the base). Steps 3-4 prove it $P$-cocartesian. Every object and every outgoing base arrow admit this construction, so $P$ is a cocartesian fibration in the intrinsic convention of [lem-coef-cocartesian-straightening]; its comparison with the simplicial convention supplies the corresponding representative. All higher coherences already belong to the functor $p^\\times$ constructed in the envelope node; this argument proves a property of its arrows rather than attempting to reconstruct a functor from binary operations. Empty $\\alpha$-blocks use $x_j=1_E$ and $p(1_E)\\simeq1_B$, so the lifting property applies there as well.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-cartesian-operadic-envelope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Chu--Haugseng, Free algebras through Day convolution, Proposition 6.7(ii) and Corollary 6.8, printed pp. 14-15; direct verification using the existing cartesian-envelope mapping formula."
+   }
+  },
+  {
+   "text": "Define $F:\\Delta^{\\mathrm{op}}\\to\\mathsf{Fin}_*$ by $F([r])=\\langle r\\rangle$ and $F(a^{\\mathrm{op}})(i)=j$ when $a(j-1)<i\\leq a(j)$, and $*$ otherwise. The intervals are disjoint. Identities give singleton intervals. For $a:[s]\\to[r]$ and $b:[t]\\to[s]$, the consecutive union of intervals indexed by $b(k-1)<j\\leq b(k)$ is exactly $\\{a(b(k-1))+1,\\ldots,a(b(k))\\}$, including the empty case. Thus $F(a^{\\mathrm{op}})$ followed by $F(b^{\\mathrm{op}})$ equals $F((a\\circ b)^{\\mathrm{op}})$, including every discarded index. This proves it is a functor; its nerve retains all chains and their face and degeneracy maps. For $[0]$, the tuple is empty, and a constant $a$ produces empty output blocks.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Chu--Haugseng Example 3.2, printed p. 5; explicit ordered-block composition verification."
+   }
+  },
+  {
+   "text": "Put $E_F=E^\\times\\times_{N(\\mathsf{Fin}_*)}N(\\Delta^{\\mathrm{op}})$ and define $B_F$ similarly, using infinity-categorical pullbacks. Then $E_F\\simeq E^\\times\\times_{B^\\times}B_F$ by the defining data of these pullbacks. Base-change compatibility of [lem-coef-cocartesian-straightening] shows $E_F\\to B_F$ is cocartesian and its transports are the same transports over the image arrows in $B^\\times$. In particular step 6 supplies lifts with exactly the stated interval blocks. For completeness the entire block criterion, including necessity, can be checked without assuming reflection of cocartesian arrows under an arbitrary functor: repeat steps 1-5 with labels the ordinal maps instead of pointed maps. The mapping spaces are now decomposed over the discrete hom sets of $\\Delta^{\\mathrm{op}}$, and composition is the same block substitution by step 7 and [lem-coef-cartesian-operadic-envelope]. Sufficiency uses the same finite products $v_k$. For necessity, the opposite of $[1]\\to[s]$, $0\\mapsto j-1$, $1\\mapsto j$, selects the singleton block $j$, so the test in step 5 again gives exactly the square for $u_j$. Thus an edge of the pullback is cocartesian exactly when its blocks are $p$-cocartesian, including nullary blocks and discarded end intervals.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-cartesian-operadic-envelope",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Chu--Haugseng, Free algebras through Day convolution, Proposition 6.7(ii) and Corollary 6.8, printed pp. 14-15; direct verification using the existing cartesian-envelope mapping formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-cartesian-operadic-envelope",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/2006.08269",
+  "place": "Proposition 6.7(ii) and Corollary 6.8, printed pp. 14-15; direct mapping-space proof of the cartesian special case and its block criterion, rather than the general-pattern criterion cited in that proof."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +157,46 @@
    "results": "{\"t\": \"2026-10-17T05:56:52Z\", \"tool\": \"leanfinder\", \"query\": \"Finite product cocartesian edge criterion for a functor between cartesian symmetric monoidal envelopes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.monoidalOfHasFiniteProducts.δ_eq\", \"CategoryTheory.CartesianMonoidalCategory.prodComparison\", \"CategoryTheory.Functor.EssImageSubcategory.lift_def\", \"CategoryTheory.Functor.Monoidal.nonempty_monoidal_iff_preservesFiniteProducts\", \"CategoryTheory.Functor.OplaxMonoidal.ofChosenFiniteProducts\", \"CategoryTheory.Functor.Monoidal.instPreservesFiniteProducts\", \"CategoryTheory.Functor.OplaxMonoidal.δ_of_cartesianMonoidalCategory\", \"CategoryTheory.Functor.Monoidal.μ_of_cartesianMonoidalCategory\"], \"digest\": \"07fd73600ac67557\"}",
    "date": "2026-10-17",
    "verdict": "no match: Cartesian/Basic.lean:937-969 and OfHasFiniteProducts.lean:20-30 concern ordinary product preserving monoidal functors. No hit states the infinity-categorical fibration of cartesian envelopes or its block lift criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "cocartesian|coCartesian|CoCartesian|cartesian.*envelope",
+   "results": "{\"t\": \"2026-10-17T06:22:25Z\", \"tool\": \"grep\", \"query\": \"cocartesian|coCartesian|CoCartesian|cartesian.*envelope\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/CategoryTheory/Monoidal/OfHasFiniteProducts.lean\", \"Mathlib/CategoryTheory/Monoidal/OfHasFiniteProducts.lean\"], \"digest\": \"91a483950b001010\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read FiberedCategory/Cocartesian.lean:48-77 and Monoidal/Cartesian/Basic.lean:937-969; these are ordinary categories, not quasicategorical envelopes, and do not state the item.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cocartesian arrows between finite product monoidal envelopes are exactly the arrows with cocartesian component block maps",
+   "results": "{\"t\": \"2026-10-17T06:22:26Z\", \"tool\": \"leansearch\", \"query\": \"Cocartesian arrows between finite product monoidal envelopes are exactly the arrows with cocartesian component block maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsCocartesian.casesOn\", \"CategoryTheory.Functor.IsCocartesian.mk\", \"CategoryTheory.Functor.IsStronglyCocartesian.comp\", \"CategoryTheory.Functor.Monoidal.ofChosenFiniteProducts.congr_simp\"], \"digest\": \"a1e089f64d94368f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read FiberedCategory/Cocartesian.lean:48-77 and Monoidal/Cartesian/Basic.lean:937-969; these are ordinary categories, not quasicategorical envelopes, and do not state the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsFibered",
+   "results": "{\"t\": \"2026-10-17T06:22:26Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsFibered\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsFibered\", \"CategoryTheory.Functor.IsFibered.toIsPreFibered\", \"CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_isCartesian\", \"CategoryTheory.Functor.IsFibered.of_exists_isStronglyCartesian\", \"CategoryTheory.instIsCartesianCompOfIsFibered\", \"CategoryTheory.Functor.IsFibered.comp\", \"CategoryTheory.Functor.IsFibered.mk\", \"CategoryTheory.Functor.IsFibered.pullbackPullbackIso\"], \"digest\": \"a78334d0bc4c490c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read FiberedCategory/Cocartesian.lean:48-77 and Monoidal/Cartesian/Basic.lean:937-969; these are ordinary categories, not quasicategorical envelopes, and do not state the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A product preserving cocartesian fibration induces a cocartesian fibration between cartesian symmetric monoidal infinity categories",
+   "results": "{\"t\": \"2026-10-17T06:22:27Z\", \"tool\": \"leanfinder\", \"query\": \"A product preserving cocartesian fibration induces a cocartesian fibration between cartesian symmetric monoidal infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.cartesianMonoidalCategory\", \"CategoryTheory.Functor.chosenProd\", \"CategoryTheory.CartesianMonoidalCategory.prodComparison\", \"CategoryTheory.Functor.EssImageSubcategory.lift_def\", \"CategoryTheory.Functor.Monoidal.μ_of_cartesianMonoidalCategory\", \"SSet.instCartesianMonoidalCategory\", \"CategoryTheory.Functor.Monoidal.instPreservesFiniteProducts\", \"CategoryTheory.Functor.OplaxMonoidal.δ_of_cartesianMonoidalCategory\"], \"digest\": \"f8db1a55d37ff2e9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read FiberedCategory/Cocartesian.lean:48-77 and Monoidal/Cartesian/Basic.lean:937-969; these are ordinary categories, not quasicategorical envelopes, and do not state the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of finite tuples over a cocartesian fibration has cocartesian lifts computed by products followed by transport",
+   "results": "{\"t\": \"2026-10-17T06:22:28Z\", \"tool\": \"leanfinder\", \"query\": \"The category of finite tuples over a cocartesian fibration has cocartesian lifts computed by products followed by transport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Functor.IsStronglyCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsCocartesian.map_uniq\"], \"digest\": \"04111f9e13bedab3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read FiberedCategory/Cocartesian.lean:48-77 and Monoidal/Cartesian/Basic.lean:937-969; these are ordinary categories, not quasicategorical envelopes, and do not state the item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-day-relative-exponential-model",
@@ -81,5 +223,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cartesian-envelope-cocartesian-criterion",
+  "worker": "stage1",
+  "summary": "Verified the statement against Chu--Haugseng Corollary 6.8 and Proposition 6.7(ii). Gave a direct block mapping-space proof using the existing envelope and intrinsic straightening statements, with explicit sufficiency, necessity, nullary products, lifts, and ordered-block pullback. No new nodes or attachment; unchanged statement. Re-ran all search kinds and a second semantic phrasing; only ordinary categorical analogues were found.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2: finite-coefficient mapping-complex adjunction before R lim. This item is the cartesian-envelope cocartesian criterion required by the coherent Day-model descendant; its eight steps realize that foundation without changing the unit or ancestor route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N0-b95cce926",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-b95cce926 (reviewer sub-agent of L); spot-checked: I read the whole item, all eight steps, and the full statements of lem-coef-cocartesian-straightening, lem-coef-cartesian-operadic-envelope and def-cbc-enhanced-diagrams-cones. Chu-Haugseng (arXiv:2006.08269) is not in literature/, so I fetched it read-only into /tmp. Corollary 6.8 (p.15) has exactly the item's hypotheses: finite products in E and B, p preserves them, binary products of p-cocartesian edges are p-cocartesian. Proposition 6.7(ii) and its proof (pp.14-15) give the lift as block product then p-transport. Example 3.2 (p.5) is the ordered-block functor. The iff-criterion and the Delta^op pullback go beyond Corollary 6.8 and are proved directly, so proof_origin=agent is correct. Step checks: step 1 splits the mapping spaces by pointed-map label, which is valid because Fin_* has discrete hom-sets. Step 2 closes cocartesian edges under finite products, with the nullary case the identity of 1_E; it is elementary. Steps 3-4: the blocks regroup disjointly, composing with P(u) sends the beta-summand to the beta-alpha-summand without needing injectivity, and the comparison is a product, then a coproduct, of equivalences. Step 5 proves necessity by testing against a one-term tuple and the inert rho_j. Step 6 builds lifts for every object and every arrow, including empty blocks. Step 7: I recomputed the composition of interval blocks; the direction matches Example 3.2. Step 8 uses pasting of pullbacks, and necessity again comes from the singleton block given by [1]->[s]. Small cases: E->* reduces to the envelope node's criterion that component maps are equivalences; the identity fibration and s=0, t=0, r=0 are consistent. No new nodes. No cycle (the 537-node closure does not contain the item). Not a duplicate: lem-coef-cartesian-monoidal-straightening repeats the argument inside its proof, but its statement only asserts the lax monoidal structure; it could later cite this item. Route: every cited statement is in the same unit, and the off-unit node is a definition, so no tool_uses. The current blueprint has no matching node, so same_as=[] is right. Searches cover LeanSearch, LeanFinder and grep; one Loogle query failed with an unknown identifier but is recorded as 'no match' (minor wording only). No SGA. The statement is unchanged and this is not a target node. No fixes."
  }
 }
