@@ -20,6 +20,8 @@ public import WeilConjectures.WeilSheaf.FourierTraceAux
 
 @[expose] public section
 
+set_option profiler true
+
 universe u
 
 open CategoryTheory Limits
@@ -35,6 +37,25 @@ theorem WeilSheaf.upperStar_eq_of_eq {X Y : Scheme.{u}} [X.Over (Spec (CommRingC
     (WeilSheaf.upperStar f : WeilSheaf k₀ l Y ⥤ _) = WeilSheaf.upperStar g := by
   subst h
   rfl
+
+omit [Finite k₀] in
+/-- The multiplication `μ : 𝔸² ⟶ 𝔸¹` is the morphism defined by the function `x y`. -/
+theorem affinePlane.mul_eq_homOfSection :
+    affinePlane.mul k₀ = affineLine.homOfSection k₀
+      ((affinePlane.fst k₀).appTop (AffineSpace.coord _ PUnit.unit) *
+        (affinePlane.snd k₀).appTop (AffineSpace.coord _ PUnit.unit)) := by
+  refine AffineSpace.hom_ext ?_ fun _ ↦ ?_
+  · rw [affinePlane.mul, affineLine.homOfSection, AffineSpace.homOfVector_over]
+  · rw [affinePlane.mul, affineLine.homOfSection, AffineSpace.homOfVector_appTop_coord]
+
+/-- The Fourier kernel `μ^* ℒ_ψ` is the Artin–Schreier sheaf `ℒ_ψ(x y)` of the function `x y`. -/
+theorem fourierKernel_eq_artinSchreierOf (ψ : AddChar k₀ (PadicAlgCl l)) :
+    fourierKernel ψ = artinSchreierOf ψ
+      ((affinePlane.fst k₀).appTop (AffineSpace.coord _ PUnit.unit) *
+        (affinePlane.snd k₀).appTop (AffineSpace.coord _ PUnit.unit)) := by
+  rw [fourierKernel, artinSchreierOf]
+  exact Functor.congr_obj (WeilSheaf.upperStar_eq_of_eq affinePlane.mul_eq_homOfSection) _
+
 
 /-- **`FT_{ψ⁻¹} ∘ FT_ψ` on the triple product** (blueprint `lem-fd-kernel-composition`,
 `sk-lem-kernel-composition`, without forming the convolution kernel). On `𝔸³` with points
@@ -107,19 +128,6 @@ theorem nonempty_iso_fourierTransform_comp_fourierTransform_inv
       map_mul _ _ _
     rw [e₁, e₂, e₃, h₁₂₃]
     ring
-  -- the two kernels pulled back to `𝔸³`
-  have hmul : affinePlane.mul k₀ = affineLine.homOfSection k₀ m := by
-    refine AffineSpace.hom_ext ?_ fun _ ↦ ?_
-    · rw [affinePlane.mul, affineLine.homOfSection, AffineSpace.homOfVector_over]
-    · rw [affinePlane.mul, affineLine.homOfSection, AffineSpace.homOfVector_appTop_coord]
-  have hK (φ : AddChar k₀ (PadicAlgCl l)) : fourierKernel φ = artinSchreierOf φ m := by
-    rw [fourierKernel, artinSchreierOf]
-    exact Functor.congr_obj (WeilSheaf.upperStar_eq_of_eq hmul) _
-  obtain ⟨eG₁⟩ := nonempty_iso_upperStar_artinSchreierOf (affineTripleProduct.proj₁₂ k₀) ψ m
-  obtain ⟨eG₂⟩ := nonempty_iso_upperStar_artinSchreierOf (affineTripleProduct.proj₂₃ k₀) ψ⁻¹ m
-  obtain ⟨eInv⟩ := nonempty_iso_artinSchreierOf_inv ψ ((affineTripleProduct.proj₂₃ k₀).appTop m)
-  obtain ⟨eMul⟩ := nonempty_iso_tensorObj_artinSchreierOf ψ
-    (-(affineTripleProduct.proj₂₃ k₀).appTop m) ((affineTripleProduct.proj₁₂ k₀).appTop m)
   sorry
 
 end AlgebraicGeometry

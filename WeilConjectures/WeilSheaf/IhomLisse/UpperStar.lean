@@ -81,4 +81,35 @@ lemma upperStar_obj_str_hom_hom (P : ProEtaleWeilSheaf k₀ l Y) :
     Functor.whiskerRight_app, Category.assoc]
   rfl
 
+/-- **Pullbacks of compatible pairings are compatible.** A pairing `e : P ⊗ Q ⟶ R` of the
+underlying sheaves of pro-étale Weil sheaves compatible with their Weil structures induces the
+compatible pairing `φ̄^* P ⊗ φ̄^* Q ⟶ φ̄^*(P ⊗ Q) ⟶ φ̄^* R`. -/
+theorem upperStar_pairing_str (P Q R : ProEtaleWeilSheaf k₀ l Y)
+    (e : P.carrier.X ⊗ Q.carrier.X ⟶ R.carrier.X)
+    (h : (P.str.hom.hom ⊗ₘ Q.str.hom.hom) ≫ e =
+      μ ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
+          P.carrier.X Q.carrier.X ≫
+        ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map e ≫
+          R.str.hom.hom) :
+    (((upperStar k₀ l φ).obj P).str.hom.hom ⊗ₘ ((upperStar k₀ l φ).obj Q).str.hom.hom) ≫
+        (μ (Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*[WeilCoefficients.{u} l]
+          P.carrier.X Q.carrier.X ≫
+          (Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*[_].map e) =
+      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
+          ((Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*[_].obj P.carrier.X)
+          ((Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*[_].obj Q.carrier.X) ≫
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map
+          (μ (Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*[WeilCoefficients.{u} l]
+            P.carrier.X Q.carrier.X ≫
+            (Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*[_].map e) ≫
+          ((upperStar k₀ l φ).obj R).str.hom.hom := by
+  have hψ := NatTrans.IsMonoidal.tensor (τ := (upperStarFrobeniusExchangeIso l φ).hom)
+    P.carrier.X Q.carrier.X
+  have nψ := (upperStarFrobeniusExchangeIso l φ).hom.naturality e
+  simp only [Functor.LaxMonoidal.comp_μ, Functor.comp_map, Functor.comp_obj] at hψ nψ
+  rw [upperStar_obj_str_hom_hom, upperStar_obj_str_hom_hom, upperStar_obj_str_hom_hom,
+    ← tensorHom_comp_tensorHom_assoc, μ_natural_assoc, ← Functor.map_comp, h]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← reassoc_of% hψ, reassoc_of% nψ]
+
 end AlgebraicGeometry.ProEtaleWeilSheaf

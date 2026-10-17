@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.EvaluationPairing
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Transpose
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHomEvaluation
@@ -75,10 +76,14 @@ lemma AdicSheaf.reflectsIsomorphisms_upperStar {W Y : Scheme.{u}} (π : W ⟶ Y)
 lemma AdicSheaf.uncurryHom_ihomRegularIso_inv (W : Scheme.{u}) :
     Mod.uncurryHom (Mod.ihomRegularIso.inv.app (AdicSheaf.unit l W)) =
       MonObj.mul (X := adicConstantSheaf l W) := by
-  rw [Mod.uncurryHom, Mod.evaluation_regular, ← comp_whiskerRight_assoc, ← Mod.comp_hom',
-    Iso.inv_hom_id_app]
-  erw [id_whiskerRight, Category.id_comp]
-  exact IsCommMonObj.mul_comm _
+  have hc : (Mod.ihomRegularIso.inv.app (AdicSheaf.unit l W) ≫
+      Mod.ihomRegularIso.hom.app _).hom = 𝟙 _ := by
+    rw [Iso.inv_hom_id_app]
+    rfl
+  rw [Mod.comp_hom'] at hc
+  rw [Mod.uncurryHom, Mod.evaluation_regular]
+  erw [← comp_whiskerRight_assoc, hc, id_whiskerRight, Category.id_comp]
+  exact IsCommMonObj.mul_comm (adicConstantSheaf l W)
 
 /-- **A criterion for a curried pairing to be an isomorphism.** Let `κ : M ⟶ 𝓗om(D, N)` and
 let `π` be a quasi-compact surjective weakly étale morphism. If `π^* M`, `π^* D`, `π^* N` are
@@ -97,23 +102,30 @@ theorem isIso_of_upperStar_uncurry_eq_mul {Y W : Scheme.{u}} (π : W ⟶ Y) [Wea
       (AdicSheaf.unit l W) :=
     (adicUpperStarIhomIso l π D).app N ≪≫ (AdicSheaf.ihom ((π)^*ᵃ[l].obj D)).mapIso eN ≪≫
       (Mod.ihomMapIso eD.symm).app _
-  have key : eM.inv ≫ (π)^*ᵃ[l].map κ ≫ e.hom = Mod.ihomRegularIso.inv.app _ := by
-    apply Mod.uncurryHom_injective
-    rw [AdicSheaf.uncurryHom_ihomRegularIso_inv, ← h]
+  have key : eM.inv ≫ (π)^*ᵃ[l].map κ ≫ e.hom =
+      Mod.ihomRegularIso.inv.app (AdicSheaf.unit l W) := by
+    refine Mod.uncurryHom_injective
+      (Eq.trans ?_ (AdicSheaf.uncurryHom_ihomRegularIso_inv W).symm)
+    rw [← h]
     simp only [e, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom]
-    change Mod.uncurryHom (((eM.inv ≫ (π)^*ᵃ[l].map κ ≫ (adicUpperStarIhomIso l π D).hom.app N) ≫
+    change Mod.uncurryHom (((eM.inv ≫ (π)^*ᵃ[l].map κ ≫
+      (adicUpperStarIhomIso l π D).hom.app N) ≫
       (AdicSheaf.ihom ((π)^*ᵃ[l].obj D)).map eN.hom) ≫ (Mod.ihomMap eD.inv).app _) = _
     rw [Mod.uncurryHom_comp_ihomMap, Mod.uncurryHom_comp_ihom_map, Mod.uncurryHom_comp,
       Mod.uncurryHom_comp, Mod.uncurryHom, adicUpperStarIhomIso_evaluation, tensorHom_def',
       Category.assoc, Functor.map_comp]
-    erw [μ_natural_left_assoc]
-    rfl
+    have hn := μ_natural_left (π)^*[WeilCoefficients.{u} l] κ.hom D.X
+    change _ ≫ _ ≫ ((π)^*[WeilCoefficients.{u} l].map κ.hom ▷
+      (π)^*[WeilCoefficients.{u} l].obj D.X ≫
+        μ (π)^*[WeilCoefficients.{u} l] ((AdicSheaf.ihom D).obj N).X D.X ≫ _) ≫ _ = _
+    rw [reassoc_of% hn]
+    simp only [Category.assoc]
   have : IsIso ((π)^*ᵃ[l].map κ) := by
-    have h' : (π)^*ᵃ[l].map κ = eM.hom ≫ Mod.ihomRegularIso.inv.app _ ≫ e.inv := by
-      rw [← key]
-      simp
-    rw [h']
-    infer_instance
+    have h₁ : IsIso (eM.inv ≫ (π)^*ᵃ[l].map κ ≫ e.hom) := by
+      rw [key]
+      infer_instance
+    have h₂ : IsIso ((π)^*ᵃ[l].map κ ≫ e.hom) := IsIso.of_isIso_comp_left eM.inv _
+    exact IsIso.of_isIso_comp_right _ e.hom
   exact isIso_of_reflects_iso κ (π)^*ᵃ[l]
 
 end AlgebraicGeometry.ProEtale

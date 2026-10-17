@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.FourierInversion.Defs
-public import WeilConjectures.WeilSheaf.Isotypic
 public import WeilConjectures.WeilSheaf.SplitTorsor
 
 /-!
@@ -31,6 +30,36 @@ universe u
 open CategoryTheory Limits
 
 namespace AlgebraicGeometry
+
+namespace ProEtale
+
+variable {Z W Z' W' : Scheme.{u}} {π : W ⟶ Z} {G : Type u} [Finite G] {τ : G → (W ≅ W)}
+  {hτ : ∀ g, (τ g).hom ≫ π = π}
+
+/-- Split torsors are stable under base change: if `π` is split by the `τ_g` and `π'` is the
+base change of `π` along `q`, with automorphisms `τ'_g` lying over the `τ_g`, then `π'` is split
+by the `τ'_g`. -/
+lemma IsTorsorSplit.of_isPullback' (hsplit : IsTorsorSplit π τ hτ) {π' : W' ⟶ Z'}
+    {p : W' ⟶ W} {q : Z' ⟶ Z} (sq : IsPullback p π' π q) (τ' : G → (W' ≅ W'))
+    (hτ' : ∀ g, (τ' g).hom ≫ π' = π') (hp : ∀ g, (τ' g).hom ≫ p = p ≫ (τ g).hom) :
+    IsTorsorSplit π' τ' hτ' := by
+  have : IsIso (Sigma.desc fun g : G ↦ pullback.lift (f := π) (g := π) (𝟙 W) (τ g).hom
+    (by simp [hτ]) : ∐ (fun _ : G ↦ W) ⟶ pullback π π) := hsplit
+  have h₁ := FinitaryPreExtensive.isIso_sigmaDesc_lift_comp π (fun g ↦ (τ g).hom) hτ p
+  have hP : IsPullback (pullback.fst π' π') (pullback.snd π' π' ≫ p) (p ≫ π) π := by
+    have := (IsPullback.of_hasPullback π' π').flip.paste_horiz sq
+    rw [← sq.w] at this
+    exact this.flip
+  suffices IsIso (Sigma.desc (fun g : G ↦ pullback.lift (f := π') (g := π') (𝟙 _) (τ' g).hom
+      (by simp [hτ'])) ≫ hP.isoPullback.hom) from IsIso.of_isIso_comp_right _ hP.isoPullback.hom
+  convert h₁ using 1
+  refine Sigma.hom_ext _ _ fun g ↦ ?_
+  simp only [colimit.ι_desc_assoc, colimit.ι_desc, Cofan.mk_ι_app]
+  apply pullback.hom_ext
+  · simp
+  · simp [hp]
+
+end ProEtale
 
 variable (k₀ : Type u) [Field k₀] [Finite k₀]
 
@@ -362,7 +391,7 @@ lemma isTorsorSplit_artinSchreierPlaneCover (f : planeIndex → Γ(X, ⊤)) :
     ProEtale.IsTorsorSplit (artinSchreierPlaneCover.π f)
       (artinSchreierPlaneCover.translation f)
       (artinSchreierPlaneCover.translation_comp_π f) :=
-  (isTorsorSplit_planeArtinSchreierMap k₀).of_isPullback
+  (isTorsorSplit_planeArtinSchreierMap k₀).of_isPullback'
     (IsPullback.of_hasPullback (planeSection k₀ f) (planeArtinSchreierMap k₀)).flip _ _
     (artinSchreierPlaneCover.translation_comp_coord f)
 

@@ -90,7 +90,7 @@ theorem ProEtaleWeilSheaf.homToIhom_comm (M D N : ProEtaleWeilSheaf k₀ l X)
   apply Mod.hom_ext_of_evaluation (D := D.carrier)
   rw [← cancel_epi (Fr.obj M.carrier.X ◁ D.str.hom.hom), comp_whiskerRight_assoc,
     whisker_exchange_assoc, ← tensorHom_def'_assoc, he, comp_whiskerRight_assoc,
-    ← tensorHom_def_assoc]
+    ← tensorHom_def'_assoc]
   erw [hκ]
   rw [μ_natural_left_assoc, ← Fr.map_comp_assoc]
 

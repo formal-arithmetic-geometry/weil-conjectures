@@ -84,10 +84,10 @@ lemma lowerStar_map_lowerStarDeckAction_comp_lowerStarExchangeStr {X Y : Scheme.
 
 
 /-- Exchange morphisms of commuting pairs of automorphisms commute. -/
-lemma lowerStarExchangeStr_comm {X Y : Scheme.{u}} (g : X ⟶ Y) (a b a' b' : _)
+lemma lowerStarExchangeStr_comm {X Y : Scheme.{u}} (g : X ⟶ Y) (a : X ≅ X) (b : Y ≅ Y)
+    (a' : X ≅ X) (b' : Y ≅ Y)
     (hg : g ≫ b.inv = a.inv ≫ g) (hg' : g ≫ b'.inv = a'.inv ≫ g)
-    (haa' : (a : X ≅ X).inv ≫ (a' : X ≅ X).inv = a'.inv ≫ a.inv)
-    (hbb' : (b : Y ≅ Y).inv ≫ (b' : Y ≅ Y).inv = b'.inv ≫ b.inv) :
+    (haa' : a.inv ≫ a'.inv = a'.inv ≫ a.inv) (hbb' : b.inv ≫ b'.inv = b'.inv ≫ b.inv) :
     (b'.inv)_*[WeilCoefficients.{u} l].map (lowerStarExchangeStr (l := l) g a b hg) ≫
         lowerStarExchangeStr g a' b' hg' =
       ((lowerStarComp _ b.inv b'.inv ≪≫ lowerStarCongr _ hbb' ≪≫
