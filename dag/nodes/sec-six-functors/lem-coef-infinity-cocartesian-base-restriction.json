@@ -200,5 +200,23 @@
   "group": "Q48",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-72be915ee (reviewer sub-agent of L); spot-checked: I read the item and the 4 cited node statements in full: def-cbc-enhanced-diagrams-cones, def-coef-infinity-fibrations, lem-coef-infinity-cocartesian-composition-initiality and lem-cbc-inner-fibration-equivalence-outer-horn-lift. I also read the citer's step, the unit sk-prop-sf-biduality-general and the chapter. The delivery adds no new nodes. The statement is true. It is consistent with the citer's use (T=Delta^1, h=rho_i, degenerate edges lifted degenerately). I tested T=Delta^0 (r-cocartesian edges are the equivalences of E_b), empty T, empty fibres and nerves of ordinary categories. The image-edge lift hypothesis is needed for reflection and is not superfluous. Step 1 (pairing inner fillers) and steps 2 and 3 (pairing Lambda_0^n fillers over h beta; existence from the hypothesis) are correct and fairly marked elementary. In step 4 I checked that a morphism from e~ to v in L((t,x),alpha) is a 2-simplex with edges e~, c, v over s_1 alpha, and that the cited node's initiality clause and its target-equivalence-in-fibre clause give c as an equivalence in P_{t'}. Applying j gives inverse data for j(c). In step 5 the initial-horn clause of the outer-horn tool makes j(c) p-cocartesian. With e p-cocartesian, the composition clause in the correct orientation then gives j(v) p-cocartesian. proof_deps equals the union of the uses. No SGA source is used. LeanSearch, Loogle, LeanFinder and grep searches are all recorded with no match. I accept the tool use of lem-cbc-inner-fibration-equivalence-outer-horn-lift: it is a generic quasicategory lemma used as a black box, and the same tool use was already accepted for composition-initiality. On duplicates, the nearest node is the unsplit lem-coef-cocartesian-local-global; its first clause is the Delta^1 single-source special case of this item's iff, so it is not a duplicate. Its future split can cite this item. HTT and Kerodon are not archived and I had no network, so I checked the mathematics rather than the cited pages. The WANTED entry and proof_origin.by=agent are correctly recorded. This is not a target node, so the base-change and coefficient checks do not apply. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityCocartesianBaseRestriction",
+  "declaration": "SSet.Enhanced.cocartesian_base_restriction",
+  "file": "lean/Sheaf/CategoryTheory/InfinityCocartesianBaseRestriction.lean",
+  "statement": "theorem cocartesian_base_restriction {E B T : SSet.{u}} (p : E ⟶ B) (h : T ⟶ B) [Quasicategory E] [Quasicategory B] [Quasicategory T] (hp : InnerFibration p) (hlift : ∀ (t : T.obj (op ⦋0⦌)) (x : E.obj (op ⦋0⦌)) (α : T.obj (op ⦋1⦌)), T.δ 1 α = t → p.app (op ⦋0⦌) x = h.app (op ⦋0⦌) t → ∃ e : E.obj (op ⦋1⦌), E.δ 1 e = x ∧ p.app (op ⦋1⦌) e = h.app (op ⦋1⦌) α ∧ IsCocartesianEdge p (SSet.yonedaEquiv.symm e)) : Quasicategory (pullback h p) ∧ cocartesianFibrationOver (pullback.fst h p) ∧ (∀ v : Δ[1] ⟶ pullback h p, IsCocartesianEdge (pullback.fst h p) v ↔ IsCocartesianEdge p (v ≫ pullback.snd h p))",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8d10f12ba",
+  "group": "NG",
+  "result": "fix",
+  "note": "Mathematics, dependencies, universes, edge cases, docstrings, and verbatim statement pass; scompile.py reproduction succeeded. Wrote review.md and complete fixes/lem-coef-infinity-cocartesian-base-restriction.report.md correcting the H11 second-reading placeholder and damaged source references. No Lean or node changes; branch head unchanged."
  }
 }

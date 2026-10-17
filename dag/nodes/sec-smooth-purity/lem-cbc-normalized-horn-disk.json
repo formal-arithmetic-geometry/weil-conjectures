@@ -253,5 +253,32 @@
   "group": "Q79",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-59949aae3 (reviewer sub-agent of L); spot-checked: I read all of it: AGENTS, stage 1, the brief, GOAL, dag-sync, delivery-errors A-F, the packet, the report, the item JSON, and the full statements of the three cited nodes. I also read the parent lem-cbc-simplicial-module-model (its step 3 uses exactly the K->K+D^n identification) and lem-cbc-disk-lifting-surjective (same D^n convention). Source checks: Stacks simplicial.tex lines 5668-5685 (the horn paragraph before definition-kan, 08NU), and the tag mappings 08NU, 017V and 0FKI, which are correct. The delivery has no new nodes and the statement is unchanged; it is not a duplicate or a restated clause. All five steps are correct. Step 1: horn strings are those omitting some j!=k, so A is a subcomplex. Step 2: injective on the free basis; the preimage is N(delta_j)q_{n-1}^{-1}(v0), using the stated naturality of q, not its proof. Step 3: the boundary of t is sigma*u+h, and n=1 is handled. Step 4: A_n=0, and the inverse (a-sigma*c*h, sigma*c) checks in both directions using only sigma^2=1, so it holds over any ring. Step 5: composition and retraction. Small cases tested: n=1 with k=0,1 and n=2 with k=0,1,2. One repairable fault (C7/route): the statement and step 1 cited the off-unit statement node lem-coef-kan-quillen-right-proper only for the definition of a horn, which the item's own unit gives in def-cbc-enhanced-diagrams-cones in exactly the form used. I replaced that citation in the statement, stmt_deps, step 1 uses and proof_deps, and removed split_report.tool_uses (no off-unit citation is left, so I accepted no tool use). The cycle check is clean. The corrected file is fixes/dag/nodes/sec-smooth-purity/lem-cbc-normalized-horn-disk.json; review.md has the details.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.NormalizedHornDisk",
+  "declaration": "AlgebraicTopology.NormalizedSimplex.normalized_horn_disk",
+  "declarations": [
+   "AlgebraicTopology.NormalizedSimplex.normalizedFreeChains",
+   "AlgebraicTopology.NormalizedSimplex.hornChains",
+   "AlgebraicTopology.NormalizedSimplex.simplexChains",
+   "AlgebraicTopology.NormalizedSimplex.hornInclusion",
+   "AlgebraicTopology.NormalizedSimplex.hornDisk",
+   "AlgebraicTopology.NormalizedSimplex.normalized_horn_disk"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/NormalizedHornDisk.lean",
+  "statement": "theorem normalized_horn_disk (Λ : Type u) [CommRing Λ] (d : DiagonalData Λ) (n : ℕ) (k : Fin (n + 2)) : ∃ e : simplexChains Λ n ≅ d.P.obj ⦋n + 1⦌, (∀ (r : ℕ) (x : (simplexChains Λ n).X r), (e.hom.f r) x = ((NormalizedMooreComplex.objX ((SSet.stdSimplex.obj ⦋n + 1⦌) ⋙ ModuleCat.free Λ) r).arrow x).sum (fun σ c ↦ if h : StrictMono (SSet.stdSimplex.asOrderHom σ) then c • d.basisP (n + 1) r (OrderEmbedding.ofStrictMono _ h) else 0)) ∧ IsSplitMono (hornInclusion Λ n k) ∧ (∃ φ : hornChains Λ n k ⊞ hornDisk Λ n ≅ simplexChains Λ n, biprod.inl ≫ φ.hom = hornInclusion Λ n k) ∧ (∀ r : ℕ, LinearMap.range (((hornInclusion Λ n k) ≫ e.hom).f r).hom = Submodule.span Λ {x | ∃ σ : String (n + 1) r, (∃ j : Fin (n + 2), j ≠ k ∧ j ∉ Set.range σ) ∧ x = d.basisP (n + 1) r σ}) ∧ (∃ (bTop : Module.Basis Unit Λ ((cokernel (hornInclusion Λ n k)).X (n + 1))) (bFace : Module.Basis Unit Λ ((cokernel (hornInclusion Λ n k)).X n)), bTop () = ((cokernel.π (hornInclusion Λ n k)).f (n + 1)) ((e.inv.f (n + 1)) (d.basisP (n + 1) (n + 1) (OrderIso.refl _).toOrderEmbedding)) ∧ bFace () = ((cokernel.π (hornInclusion Λ n k)).f n) ((e.inv.f n) (d.basisP (n + 1) n (Fin.succAboveOrderEmb k))) ∧ (∀ r : ℕ, r ≠ n + 1 → r ≠ n → IsZero ((cokernel (hornInclusion Λ n k)).X r)) ∧ ((cokernel (hornInclusion Λ n k)).d (n + 1) n) (bTop ()) = ((-1 : Λ) ^ k.val) • bFace ())",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "All positive dimensions are represented as n+1. The existing DiagonalData fixes the string model; the comparison is specified by the quotient formula on actual normalized free simplex chains. Quotient basis vectors are the classes of the top string and omitted face, retaining the sign (-1)^k."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1a872e760",
+  "group": "Q07",
+  "result": "fix",
+  "note": "Mathematics, dependency declarations, edge cases, universes, and verbatim signature pass; both scompile.py checks passed without diagnostics. Replaced the H11 second-reading placeholder with a complete report in fixes/lem-cbc-normalized-horn-disk.report.md. Full findings are in review.md; no Lean or JSON changes."
  }
 }

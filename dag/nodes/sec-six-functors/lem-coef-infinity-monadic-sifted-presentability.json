@@ -280,5 +280,25 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-177b3ee49 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, the statement of every cited node, the citer lem-coef-operadic-algebra-presentability step 2, and the ancestor blueprint proof. I could not open HTT or Gepner–Haugseng myself: they are not archived (the report lists them as WANTED) and network access is blocked. So every step and both new statements were checked mathematically instead. In particular, I could not confirm the exact numbering HTT 5.5.8.15/5.5.8.16 for the fact that sifted colimits plus finite coproducts give cocompleteness; the fact itself is true by the Bousfield–Kan formula. Step 1: the cardinal arithmetic is right (lambda <= theta < 2^theta < kappa, mu^nu <= (2^theta)^theta = 2^theta). Step 2: the projection K x V -> K satisfies the hypotheses of local-transport-section-colimits (inner fibration, equivalence lifts, cocartesian over edges, identity transport), and that node states existence of the colimit. Step 3: the comparison is over C, so the free functors agree by the mapping-space adjunctions and Yoneda, and the bar resolution transports. Steps 4, 5 and 8 are correct elementary mapping-space calculations; step 5 applies the opposite parametric universal-arrow clause to the diagonal on tuples of free objects. Step 7: rho-filtered implies filtered implies sifted, via the spaces comparison at aleph_0 including the empty product. Step 9: the hull hypotheses (local smallness, cocompleteness from step 6, compactness from step 8) all hold, the free objects and bar realizations lie in the hull, so the hull is all of D. New node sifted-coproduct-cocompleteness is true, self-contained, and not the existing small-colimit-generation node (which assumes all coproducts and pushouts). New node compact-generated-filtered-hull is true (Ind_kappa extension is fully faithful and has a restricted-Yoneda right adjoint because E is locally small) and is not accessible-ind-colimit-extension (which assumes the ambient category presentable). Edge cases checked: empty K, empty G, terminal E, the empty category and nonempty spaces for the initial-object hypothesis. Every cited node is in the item's unit; there are no tool uses and no cycle (470-node closure). This is not a target node, so the base-change and coefficient-category check does not apply. No SGA source is cited. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityMonadicSiftedPresentability",
+  "declaration": "SSet.Presentability.infinity_monadic_sifted_presentability",
+  "statement": "theorem infinity_monadic_sifted_presentability : (∀ (K : SSet.{u}), IsSmall.{u, u} K → [SSet.Quasicategory K] → ∀ (V : SSet.{max (u + 1) v}), [SSet.Quasicategory V] → IsPresentable.{u, v} V → IsPresentable.{u, v} ((ihom (SSet.uliftFunctor.{max (u + 1) v, u}.obj K)).obj V)) ∧ ∀ (C D : SSet.{max (u + 1) v}) [SSet.Quasicategory C] [SSet.Quasicategory D], IsPresentable.{u, v} C → IsLocallySmall.{u, max (u + 1) v} D → ∀ (F : C ⟶ D) (U : D ⟶ C), Nonempty (HomotopicalAlgebra.ModelInfinity.CoherentAdjunction F U) → HasSmallSiftedColimits.{u, v} D → (∀ (J : SSet.{u}) (_hJ : IsSmall.{u, u} J) [SSet.Quasicategory J], SSet.Enhanced.IsInfinitySifted J → SSet.Enhanced.PreservesInfinityColimitsOfShape (SSet.uliftFunctor.{max (u + 1) v, u}.obj J) U) → ∀ (T : SSet.Enhanced.CoherentMonad C), SSet.Enhanced.coherentMonadFunctor T = F ≫ U → ∀ (comparison : D ⟶ SSet.Enhanced.coherentMonadModules T), comparison ≫ SSet.Enhanced.coherentModuleForget T = U → SSet.Enhanced.IsFunctorEquivalence comparison → IsPresentable.{u, v} D",
+  "branch": "newtargets-dag",
+  "by": "Q151",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/CategoryTheory/InfinityMonadicSiftedPresentability.lean",
+  "note": "Maintainer second reading: removed the inferred functor-quasicategory hypothesis; restored explicit local smallness of D; expanded the ten-step proof docstring and imported published proof dependencies. Equivalence with coherent modules over C is the monadicity certificate: uniqueness of left adjoints identifies its monad with the induced coherent monad up to equivalence; the underlying-endofunctor equation alone is not used as that identification.",
+  "fixed_by": "NT-stage2-Codex-c2f08ec75"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c2f08ec75",
+  "group": "Q151",
+  "result": "fix",
+  "note": "Complete fixes and review.md written. Restored D’s local smallness, removed redundant hypothesis, expanded proof documentation/imports, and supplied a real second reading. Original and corrected modules compile cleanly through scompile.py; branch unchanged."
  }
 }

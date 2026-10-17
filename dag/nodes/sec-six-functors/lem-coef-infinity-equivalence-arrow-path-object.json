@@ -249,5 +249,41 @@
   "group": "Q160",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-60e4b9a9f (reviewer sub-agent of L); spot-checked: I read the item and all five steps in full, plus the full statements of the two cited nodes: lem-coef-marked-point-cartesian-model (same unit) and def-cbc-enhanced-diagrams-cones (a definition). I also read the citer lem-coef-infinity-functor-pushout (steps 7, 8 and 10), the sibling lem-coef-infinity-pullback-mapping-space and the unit record. Step 1: by the adjunction and the product marking, V_n consists of the maps Δ^n×Δ^1→C whose vertical edges are equivalences; after swapping the factors this is exactly the def node's full subcategory of Fun(Δ^1,C). Step 2: (∂Δ^1)^♯ has only degenerate edges, so X^B = X×X and restriction is evaluation at the two endpoints. Step 3: the lifting problem transposes to an extension along j□i. This uses three clauses of the model node: the pushout product is trivial when one factor is, C^♮ is fibrant, and fibrations are defined by lifting against trivial cofibrations. Step 4: the pushout product of j with ∅→J makes X^J fibrant, and the fibrant-object characterization then gives W=V^♮. Step 5: functors preserve equivalence witnesses, the universe clause comes from the model node, and the empty case holds because Δ^n×Δ^1 is never empty. Small cases tested: Δ^0, N([1]) (V≅N([1]), endpoint map is the diagonal), discrete C and empty C. Searching the DAG found no duplicate or generalization, the item is not a restated clause of the model node, there are no new nodes, no off-unit tools and no SGA. HTT is not archived locally, so it is flagged WANTED and the proof is marked agent-written; every non-elementary use rests on node statements that agree with HTT 3.1.3 and 3.1.4.1/3.1.4.3. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.EquivalenceArrowPathObject",
+  "declaration": "SSet.Marked.equivalence_arrow_path_object",
+  "declarations": [
+   "SSet.Marked.equivalenceArrowPostApp",
+   "SSet.Marked.equivalenceArrowPost_naturality",
+   "SSet.Marked.equivalenceArrowPost_marked",
+   "SSet.Marked.equivalenceArrowPost",
+   "SSet.Marked.equivalenceArrowPost_id",
+   "SSet.Marked.equivalenceArrowPost_comp",
+   "SSet.Marked.equivalenceArrowFunctor",
+   "SSet.Marked.equivalenceArrowEndpointApp",
+   "SSet.Marked.equivalenceArrowEndpoint_naturality",
+   "SSet.Marked.equivalenceArrowEndpoint_marked",
+   "SSet.Marked.equivalenceArrowEndpoint",
+   "SSet.Marked.equivalenceArrowEndpoints_marked",
+   "SSet.Marked.equivalenceArrowEndpoints",
+   "SSet.Marked.equivalence_arrow_path_object"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/EquivalenceArrowPathObject.lean",
+  "statement": "theorem equivalence_arrow_path_object (C : SSet.{u}) [Quasicategory C] : (∃ e : (equivalenceArrowFunctor.obj (natural C)).underlying ≅ (Enhanced.equivalenceDiagrams (Δ[1] : SSet.{u}) C).toSSet, ∀ (n m : SimplexCategoryᵒᵖ) (h : (equivalenceArrowFunctor.obj (natural C)).underlying.obj n) (a : n ⟶ m) (x : (Δ[1] : SSet.{u}).obj m), ((e.hom.app n h).val.app m a) x = h.val.app m (x, stdSimplex.objEquiv.symm a.unop)) ∧ equivalenceArrowFunctor.obj (natural C) = natural (equivalenceArrowFunctor.obj (natural C)).underlying ∧ (cof ⊓ weak).rlp (equivalenceArrowEndpoints (natural C)) ∧ (∀ (D : SSet.{u}) [Quasicategory D] (F : C ⟶ D), ∃ f : natural C ⟶ natural D, f.val = F ∧ equivalenceArrowFunctor.map f ≫ equivalenceArrowEndpoints (natural D) = equivalenceArrowEndpoints (natural C) ≫ productMap f f)",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded marked internal Hom and full coherent functor subcategory. The sharp-interval functor and endpoint maps are explicit degreewise constructions; the comparison isomorphism is uniquely normalized on every simplex. Fibrations use the recorded (cof ⊓ weak).rlp criterion, without choosing a model structure.",
+  "fixed_by": "NT-stage2-Codex-b5d8a566f"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b5d8a566f",
+  "group": "Q05",
+  "result": "fix",
+  "note": "Mathematics, dependencies, universes and edge cases checked. Repaired H6 local proofs, H1/H11 missing substantive second reading, and report source labels. Complete replacement module, Lean record and report supplied; compiler checks passed."
  }
 }
