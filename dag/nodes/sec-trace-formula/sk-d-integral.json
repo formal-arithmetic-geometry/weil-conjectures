@@ -3,25 +3,85 @@
  "blueprint": {
   "is": "sk-d-integral",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-trf-borel-moore-pushforward",
+   "def-trf-integration"
+  ]
  },
  "kind": "definition",
  "title": "Borel–Moore sections and integration",
- "statement": "A Borel–Moore section on a geometric scheme $T$ is\n$\\alpha:A_T\\to\\omega_T$ in the derived category.\nFor proper $h:T\\to T'$ over $s$, define $h_*\\alpha$ by\n\n$$\nA_{T'}\\longrightarrow Rh_*h^*A_{T'}\\simeq Rh_*A_T\\xrightarrow{Rh_*\\alpha}Rh_*\\omega_T\n\\simeq Rh_!h^!\\omega_{T'}\\xrightarrow{\\varepsilon_h^!}\\omega_{T'}.\n$$\n\nIf $T$ is proper over $s$, set $\\int_T\\alpha=(a_T)_*\\alpha$, read through the\nnormalization $\\omega_s\\simeq A_s$ as an element of $\\operatorname{End}(A_s)=A$.",
+ "statement": "Fix the finite coefficient datum and geometric schemes of [sk-d-setup]: $k=\\overline{\\mathbf F}_q$, $s=\\operatorname{Spec}k$, $\\ell\\ne\\operatorname{char}(k)$, and $A=\\mathcal O_E/\\varpi^n$ for $n\\geq1$. Work with a fixed geometric operation package [sk-d-six], on the ordinary small pro-etale derived categories $D(T,A)$ and their full subcategories $D^b_{ctf}(T,A)$. All inverse images below are derived. For a geometric scheme $a_T:T\\to s$, let $A_T$ be its constant coefficient sheaf in degree zero [def-weil-derived-pullback-tensor-hom], and let $\\omega_T\\in D^b_{ctf}(T,A)$ be the dualizing object supplied by the package. A Borel–Moore section on $T$ is a morphism $\\alpha:A_T\\to\\omega_T$ in $D(T,A)$.\n\nFor a proper $s$-morphism $h:T\\to T'$ between geometric schemes, put $a_T=a_{T'}h$. The proper map $h$ is compactifiable [def-nagata-compactifiable], using its factorization as the identity open immersion followed by $h$ itself. Write $c_h:h^*A_{T'}\\xrightarrow{\\sim}A_T$ for the monoidal unit isomorphism, $P_h:Rh_*\\xrightarrow{\\sim}Rh_!$ for the inverse of the package's proper comparison, and $d_h:h^!\\omega_{T'}\\xrightarrow{\\sim}\\omega_T$ for its dualizing-composition isomorphism. The unit $\\eta_h$ of $h^*\\dashv Rh_*$ is evaluated at $A_{T'}$; the counit $\\varepsilon_h^!$ of the constructible adjunction $Rh_!\\dashv h^!$ is evaluated at $\\omega_{T'}$. Define the pushforward by the composite\n$$\n\\begin{aligned}\nh_*\\alpha:\\ A_{T'}&\\xrightarrow{\\eta_h}Rh_*h^*A_{T'}\n\\xrightarrow{Rh_*(c_h)}Rh_*A_T\n\\xrightarrow{Rh_*(\\alpha)}Rh_*\\omega_T\\\\\n&\\xrightarrow{P_h(\\omega_T)}Rh_!\\omega_T\n\\xrightarrow{Rh_!(d_h^{-1})}Rh_!h^!\\omega_{T'}\n\\xrightarrow{\\varepsilon_h^!(\\omega_{T'})}\\omega_{T'}.\n\\end{aligned}\n$$\nThese are precisely the adjunction and comparison components of [sk-d-six]. Their constructible-domain conditions hold: $A_T$ is bounded constructible by [lem-weil-constant-coefficient-objects-constructible], has Tor amplitude $[0,0]$ since it is the tensor unit, and hence belongs to $D^b_{ctf}(T,A)$ [def-weil-finite-tor-amplitude]; the package already places $\\omega_T$ and $\\omega_{T'}$ in these full subcategories. Thus every ambient section $\\alpha$ is a morphism in the subcategory where the comparisons and exceptional counit are defined. No ambient unbounded exceptional adjunction is required.\n\nIf $T$ is proper over $s$, let $n_s:\\omega_s\\xrightarrow{\\sim}A_s$ be the normalization of [sk-d-six] and form\n$$\nv_\\alpha=n_s\\circ(a_T)_*\\alpha\\ \\in\\operatorname{End}_{D(s,A)}(A_s).\n$$\nRead this endomorphism as the scalar $\\int_T\\alpha\\in A$. Explicitly, the finite-coefficient point functor $\\operatorname{Fib}_s$ of [def-weil-finite-coefficient-point] is termwise sections and sends $A_s$ to $A[0]$. Its equivalence property [lem-weil-point-fibre-equivalence] identifies this endomorphism group with $\\operatorname{End}_{D(A\\text{-}\\mathrm{Mod})}(A[0])=A$. The scalar is $H^0(\\operatorname{Fib}_s(v_\\alpha))(1)$, with $H^0$ as in [def-weil-abstract-derived-category]. This is the meaning of $\\int_T\\alpha=(a_T)_*\\alpha$ through $\\omega_s\\simeq A_s$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-integral/_section.md",
   "place": "node sk-d-integral, order 2625"
  },
  "stmt_deps": [
   "sk-d-setup",
-  "sk-d-six"
+  "sk-d-six",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-nagata-compactifiable",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-coefficient-point",
+  "lem-weil-point-fibre-equivalence",
+  "def-weil-abstract-derived-category"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "borelMoore|dualizing|exceptional.*counit",
+   "results": "0 hits; Mathlib subdirectory AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheaf pushforward, adjunction identities, or measure theory do not give the specified proper exceptional Borel–Moore composite"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Borel-Moore integration is pushforward of a section to the base",
+   "results": "8 hits: SheafOfModules.pushforwardSections; AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj; MeasureTheory.FiniteMeasure.mapCLM; AlgebraicGeometry.Scheme.Modules.instAdditivePushforward; MeasureTheory.FiniteMeasure.mapHom; MeasureTheory.Measure.map_apply; AlgebraicGeometry.Scheme.Modules.pushforward_map_app; MeasureTheory.VectorMeasure.map",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheaf pushforward, adjunction identities, or measure theory do not give the specified proper exceptional Borel–Moore composite"
+  },
+  {
+   "tool": "loogle",
+   "query": "borelMoorePushforward, GeometricOperations.integral",
+   "results": "0 hits; loogle: unknown identifier 'borelMoorePushforward'",
+   "date": "2026-10-17",
+   "verdict": "query rejected: unknown identifier; not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Borel-Moore sections and integration along proper morphisms in derived category",
+   "results": "8 hits: SheafOfModules.pushforwardSections_coe; SheafOfModules.pushforwardSections_unitHomEquiv; SheafOfModules.pushforwardComp_inv_app_val_app; SheafOfModules.pushforwardSections; topCatToSheafCompHausLike_map_val_app; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app; SheafOfModules.pushforwardComp_hom_app_val_app; AlgebraicGeometry.Scheme.Modules.pushforwardComp",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheaf pushforward, adjunction identities, or measure theory do not give the specified proper exceptional Borel–Moore composite"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom from constant sheaf to dualizing object pushed forward by proper morphism using adjunction unit and counit",
+   "results": "8 hits: SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.unitToPushforwardObjUnit_val_app_apply; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pushforwardSections_unitHomEquiv",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheaf pushforward, adjunction identities, or measure theory do not give the specified proper exceptional Borel–Moore composite"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit, CategoryTheory.Adjunction.counit",
+   "results": "12 hits: CategoryTheory.Adjunction.toEquivalence; CategoryTheory.Adjunction.toEquivalence_functor; CategoryTheory.Adjunction.toEquivalence_inverse; CategoryTheory.Adjunction.left_triangle_components; CategoryTheory.Adjunction.right_triangle_components; CategoryTheory.Functor.isEquivalence_of_isRightAdjoint; CategoryTheory.Adjunction.left_triangle_components_assoc; CategoryTheory.Adjunction.right_triangle_components_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheaf pushforward, adjunction identities, or measure theory do not give the specified proper exceptional Borel–Moore composite"
+  },
+  {
+   "tool": "grep",
+   "query": "def pushforwardSections|pushforwardSections_unitHomEquiv",
+   "results": "3 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; Mathlib subdirectory Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-17",
+   "verdict": "no match: generic sheaf pushforward, adjunction identities, or measure theory do not give the specified proper exceptional Borel–Moore composite"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -64,5 +124,21 @@
     "AlgebraicGeometry.ProEtale.GeometricOperations.borelMoorePushforward"
    ]
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-d-integral",
+  "worker": "stage1",
+  "summary": "Definition-only split with no new nodes. Expanded the imported composite into the specified ordinary unit, monoidal unit, ordinary direct image of the section, inverse proper comparison, inverse dualizing-composition comparison under Rh_!, and constructible exceptional counit. Retained the abstract geometric-operation-package setting, made the full D^b_ctf input domain explicit, and specified the scalar through the existing finite-point equivalence. Existing concrete definitions cover the same two clauses at finite coefficients and are recorded in blueprint.same_as. No proof steps or whole-item theorem are introduced. Lean source declarations implement the formal section, pushforward and End(A_s)-valued integral without local sorry, but do not state the finite-point scalar identification. The supplied historical sorry map records open dependencies that have since changed in the current checkout and cannot certify current transitive closure; no finished whole-item attachment is claimed.",
+  "blueprint": "Realizes all paragraphs of main-20261015 sk-d-integral/_section.md, order 2625: Borel–Moore sections, the displayed proper pushforward composite, and integration using the normalization at s. The abstract item itself carries the full unit; the existing def-trf-borel-moore-pushforward and def-trf-integration give its expanded concrete finite-coefficient clauses. The unit has no proof steps. No source hypothesis or route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NC-68a59dad1",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-68a59dad1 (reviewer sub-agent of L); spot-checked: Pass with no fixes, no dropped nodes and no tool_uses. Full checks are in review.md. I compared the item clause by clause with main-20261015 sk-d-integral/_section.md (order 2625). It keeps the source's composite and spells out each '≃' as a named sk-d-six component. c_h is the monoidal unit iso of the strong monoidal h^*. P_h is the inverse of the proper comparison Rf_! ≃ Rf_*, evaluated at ω_T in D^b_ctf. Rh_!(d_h^{-1}) uses the inverse of the dualizing-composition iso. ε^! is the counit at ω_{T'} of the constructible Rh_! ⊣ h^!, never an ambient adjoint. All directions and domains are correct. Rh_* is used only on bounded objects. The coefficient category is the finite A = O_E/ϖ^n on the ordinary pro-étale D(T,A), the same as in def-trf-borel-moore-pushforward and def-trf-integration. The item is not a target, so the base-change comparison does not apply. (id_T, h) is a compactification under def-nagata-compactification (quasi-compact open immersion followed by proper). It is used only for compactifiability, not as the chosen compactification. A_T ∈ D^b_ctf follows from lem-weil-constant-coefficient-objects-constructible clause 1, Tor amplitude [0,0] and ℓ invertible; this is true but strictly surplus. For the integral, v_α = n_s∘(a_T)_*α. Fib_s = Γ(s,−) sends A_s to A[0], and full faithfulness from lem-weil-point-fibre-equivalence gives End = A with scalar H^0(Fib_s v_α)(1). No field hypothesis is needed. Edge cases checked: h = id (coherences give the identity), T = s, T empty, α = 0, n = 1 and n > 1. The statement's citations equal its 9 stmt_deps, all present and unmerged. There is no cycle: a 13307-node traversal does not return to the item. There are no new nodes. An rg for Borel–Moore finds only the recorded same_as pair def-trf-borel-moore-pushforward and def-trf-integration as other definitions. The unit changes only realized/realized_by, and the item itself carries the whole unit. The Mathlib searches cover all three kinds (one rejected Loogle query is labelled as such). The slopmaster2 declarations return End(A_s), not the scalar, so leaving them unattached is right. No SGA source is used. Process note: I ran one read-only git status by mistake; it changed nothing."
  }
 }
