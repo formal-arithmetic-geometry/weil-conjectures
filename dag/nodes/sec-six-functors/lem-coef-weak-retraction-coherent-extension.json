@@ -10,9 +10,89 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First fix the entire given weak-retraction triangle $f:\\operatorname{Ret}\\to\\mathcal E$. By the nerve convention of [def-cbc-enhanced-diagrams-cones], a simplex of $N(R)$ is a string of composable arrows; it is nondegenerate exactly when none is an identity. For $m\\geq1$, define $T_m\\subseteq N(R)$ to contain the simplices whose nondegenerate strings have at most $m$ occurrences of the object $X$. Removing an identity does not affect the resulting nondegenerate string. Faces compose or delete arrows and cannot increase its number of $X$-vertices, so $T_m$ is a simplicial subset. A nondegenerate string with at most one $X$ is exactly a face of $Y\\xrightarrow{s}X\\xrightarrow{r}Y$ (or the vertex $Y$). Thus $T_1=\\operatorname{Ret}$. Every string is finite, so $\\bigcup_{m\\geq1}T_m=N(R)$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 4.4.5.2 and proof of Proposition 4.4.5.6, definition of Ret(m); expanded directly as strings in the nerve; read online, archival copy WANTED; no matching Stacks tag"
+   }
+  },
+  {
+   "text": "For $m\\geq2$, let $\\tau_m:\\Delta^{2m}\\to N(R)$ be the alternating string $Y\\xrightarrow{s}X\\xrightarrow{r}Y\\xrightarrow{s}\\cdots\\xrightarrow{r}Y$, and put $J_m=\\{1,3,\\ldots,2m-1\\}$ and $K_m=\\bigcup_{q\\in J_m}\\Delta^{[2m]\\setminus\\{q\\}}$. A face missing an odd vertex has at most $m-1$ occurrences of $X$, so $\\tau_m(K_m)\\subseteq T_{m-1}$. A face retaining all odd vertices has $m$ occurrences of $X$ and an optional $Y$ before, between, or after them. Its consecutive arrows are $e$ between adjacent $X$ vertices, $r$ from $X$ to $Y$, and $s$ from $Y$ to $X$, so none is an identity. Distinct choices of optional even vertices give distinct nondegenerate strings. Conversely, a nondegenerate string with exactly $m$ occurrences of $X$ has no adjacent $Y$ vertices, since the only $Y$ endomorphism is $1_Y$; its intervening and endpoint $Y$ vertices give exactly this unique choice. Hence $\\tau_m$ bijects the nondegenerate simplices outside $K_m$ with those of $T_m$ outside $T_{m-1}$. For degenerate simplices the same assertion follows by inserting identities at the specified positions. The map from the degreewise pushout $T_{m-1}\\amalg_{K_m}\\Delta^{2m}$ to $T_m$ is therefore bijective in every degree and respects all operators. This proves the required pushout identification without assuming $\\tau_m$ is injective on $K_m$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition 4.4.5.6, pushout square for Ret(m-1) into Ret(m), with its nerve-string verification written out; read online, archival copy WANTED; no matching Stacks tag"
+   }
+  },
+  {
+   "text": "Suppose inductively that $f_{m-1}:T_{m-1}\\to\\mathcal E$ has been chosen, starting with $f_1=f$. The subset $J_m$ has the gap $1<2<3$, with $1,3\\in J_m$ and $2\\notin J_m$. Apply [lem-coef-gapped-face-inner-horn-presentation] with $n=2m$, $J=J_m$, and $Q=\\mathcal E$ to the map $f_{m-1}\\tau_m|_{K_m}$. It gives $g_m:\\Delta^{2m}\\to\\mathcal E$ agreeing with that map on all of $K_m$. The pushout identification proved in step 2 now glues $g_m$ and $f_{m-1}$ to a simplicial map $f_m:T_m\\to\\mathcal E$ whose restriction is exactly $f_{m-1}$. This constructs the compatible sequence by induction on $m$.",
+   "uses": [
+    "lem-coef-gapped-face-inner-horn-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition 4.4.5.6, application of Lemma 4.4.5.8 to the odd-vertex subset; Corollary 4.4.5.7, extension; read online, archival copy WANTED; no matching Stacks tag"
+   }
+  },
+  {
+   "text": "Define $F$ on a simplex of $N(R)$ to be its image under any $f_m$ with that simplex in $T_m$. The exact restriction equalities make this independent of $m$. Since each $T_m$ is a simplicial subset and each $f_m$ is a simplicial map, $F$ commutes with every face and degeneracy. It is therefore a coherent functor in the sense of [def-cbc-enhanced-diagrams-cones]. On $T_1=\\operatorname{Ret}$ it equals the original $f$ exactly. In particular it retains the given two edges and their entire triangle. Only a union of small simplicial sets and a recursive choice of horn fillers was used; no colimits in $\\mathcal E$ were assumed.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proof of Proposition 4.4.5.6, infinite union Ret(1) into Ret(2) into ..., and Corollary 4.4.5.7; read online, archival copy WANTED; no matching Stacks tag"
+   }
+  },
+  {
+   "text": "For the first formulation, fill the inner $2$-horn with successive edges $a:v\\to u$ and $b:u\\to v$, obtaining a triangle with long edge $c:v\\to v$. The homotopy-category composition statement of [lem-coef-infinity-mapping-composition] identifies $[c]=[b][a]$, so the hypothesis gives $[c]=[1_v]$ in the right-pinched mapping space. That space is Kan by [lem-coef-infinity-pinch-comparison]. By [lem-coef-kan-realization-serre], realization components of this Kan complex are exactly vertices modulo finite edge zigzags. In a Kan complex a finite edge zigzag can be made into one oriented edge: reverse an edge by filling an outer $2$-horn with an identity edge, and concatenate edges by filling an inner $2$-horn. Thus choose an edge from $1_v$ to $c$ in this mapping space. By the right-pinched definition in [def-cbc-enhanced-diagrams-cones], it is a triangle with successive edges $(1_v,c)$ and long edge $1_v$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-kan-realization-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 4.4.5 opening retraction criterion and Remark 4.4.5.5; expanded using existing mapping-space composition and Kan comparison nodes; read online, archival copy WANTED; no matching Stacks tag"
+   }
+  },
+  {
+   "text": "Use vertices $(v,v,u,v)$ of a $3$-simplex. Prescribe its face $d_0$ to be the triangle $(a,b,c)$ just chosen, its face $d_2$ to be the triangle $(1_v,c,1_v)$ just chosen, and its face $d_3$ to be the degeneracy of $a$ with successive edges $(1_v,a)$ and long edge $a$. Their common edges agree: they form an inner horn $\\Lambda^3_1\\to\\mathcal E$. By the quasicategory definition of [def-cbc-enhanced-diagrams-cones], fill this horn. The remaining face $d_1$ is a triangle with successive edges $(a,b)$ and long edge $1_v$. Since this last edge is degenerate, its map $\\Delta^2\\to\\mathcal E$ factors through the quotient $\\operatorname{Ret}$ collapsing that edge. Apply steps 1-4 to this map. The extension has $F(X)=u$, $F(Y)=v$, $F(s)=a$ and $F(r)=b$, as required.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 4.4.5 opening criterion and Remark 4.4.5.5, explicit inner-horn conversion to a weak-retraction triangle; read online, archival copy WANTED; no matching Stacks tag"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-gapped-face-inner-horn-presentation",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-kan-realization-serre"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Definition 4.4.5.2, Proposition 4.4.5.6, Lemma 4.4.5.8 and Corollary 4.4.5.7, printed pp.303-306 (PDF pp.320-323), read online. Agent expansion of the nerve pushout and initial homotopy conversion; no local archive, WANTED in report."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,7 +145,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-retract-colimit",
@@ -94,5 +174,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-weak-retraction-coherent-extension",
+  "worker": "stage1",
+  "summary": "Kept the full statement and prescribed-triangle clause. Expanded HTT Ret(m) as a nerve-string filtration, verified its pushout degreewise, extended recursively using the one new finite gapped-face horn lemma, and took an exact union. Converted the original homotopy relation to a triangle using existing Kan mapping-space and composition nodes, with the explicit inner 3-horn. Checked sources, edge cases, all cited statements, duplicate searches and actual Mathlib search hits.",
+  "blueprint": "Supports the integral exceptional-adjoint mapping-complex construction through the recorded compact-model and retract-colimit ancestry: the weak-retraction coherence part of HTT Section 4.4.5. Steps 1-4 realize HTT Proposition 4.4.5.6 and Corollary 4.4.5.7; steps 5-6 spell out the initial retraction criterion. The nearest imported ancestor is prop-coef-integral-exceptional-adjoint, mapping-complex adjunction before R lim."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-7478a02dc",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-7478a02dc (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-gapped-face-inner-horn-presentation and every cited statement (def-cbc-enhanced-diagrams-cones, lem-coef-infinity-mapping-composition, lem-coef-infinity-pinch-comparison, lem-coef-kan-realization-serre) in full, plus the parent's use of the item. HTT §4.4.5 is not in the local literature: it is correctly reported as WANTED with proof_origin agent. Because I could not open the source, I proved the statements myself. New node: I proved it true by pairing each S⊇J (with j∉S) against S∪{j} and attaching in order of increasing |S|. Each attaching map is exactly the horn at j, which is inner because i<j<k. Tested on n=2 J={0,2} (Λ²₁), n=3 J={0,3}, and n=4 J={1,3}. The gap hypothesis excludes the false outer cases. It is statement-only, self-contained, carries 8 logged searches, and no DAG duplicate turned up (rg plus reading 7 nearby inner-horn and filtration nodes). It does not restate any clause of the item. Steps 1–2: nondegenerate simplices of N(R) are words with no YY; T_1 = Ret = Δ²/Δ^{02}; the pushout T_{m-1}∐_{K_m}Δ^{2m} = T_m is bijective in each degree. Step 3: the new node applies with n=2m and gap 1<2<3. Step 4: the union is a simplicial map. Step 5: the right-pinched orientation, checked against def-cbc, gives the edge 1_v→c as the triangle (1_v,c;1_v). Step 6: the Λ³₁ faces on (v,v,u,v) agree on shared edges, and the filler's d₁ has edges (a,b;1_v), which factors through Ret. Same unit throughout, no tool_uses, no SGA, proof_deps match the step uses, no changes made."
  }
 }

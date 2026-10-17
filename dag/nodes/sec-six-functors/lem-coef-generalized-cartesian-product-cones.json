@@ -12,9 +12,150 @@
   "lem-coef-operadic-algebra-presentability",
   "lem-coef-cartesian-operadic-envelope"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Realize the cartesian envelope by the product-diagram subcategory P of [lem-coef-cartesian-envelope-product-diagram-recognition], identified with the envelope in [lem-coef-cartesian-operadic-envelope]. Its coherent full-subset evaluation is Pi. Pull back along the stated ordered-block functor; pullback preserves the lifting properties in [def-coef-infinity-fibrations]. The evaluation formula is exactly the product and block-map formula of the statement. If H preserves inert edges, its inert projections are cocartesian in P, so their evaluations are the product projections and Pi H satisfies the required product cones, including terminal values in degree zero. Composition with Pi is a functor on the full functor categories, not just on objects.",
+   "uses": [
+    "lem-coef-cartesian-envelope-product-diagram-recognition",
+    "lem-coef-cartesian-operadic-envelope",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Proposition 5.1 and Lemma 5.15; forward direction using the existing product-diagram model"
+   }
+  },
+  {
+   "text": "Here is an auxiliary indexing category for constructing the inverse without a hypothesis on the arity-one fibre. Let P_n be the finite path with vertices 0,...,n and edges (i-1,i). A subgraph K consists of a subset of vertices and of edges whose endpoints are included; allow the empty subgraph and isolated vertices. For a monotone map a:[s] to [r], let a_!L be the union of the vertex images and the entire closed intervals [a(j-1),a(j)] for edges (j-1,j) of L. This operation preserves unions and satisfies (ab)_!=a_!b_!: both sides replace each edge by the interval between its composite endpoint images. Form the ordinary category with objects ([r],K), and a single arrow over [r] to [s] when a_!L is contained in K. Its projection to Delta-op is a cartesian fibration: the cartesian lift with target ([s],L) has source ([r],a_!L). Pull it back along p to obtain a quasicategory D. Let I be its full subcategory of nonempty connected subgraphs, namely closed intervals [a,b], including a=b. The same description shows I is a quasicategory, since a_! preserves nonempty intervals. These assertions follow directly from the horn and cartesian-edge definitions of [def-coef-infinity-fibrations]: the subgraph coordinate in a lift is forced by interval image and containment, and the remaining lifting problem is in M. The full-interval section s:M to I is fully faithful, since every base arrow satisfies its containment condition.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Agent construction of a path-subgraph indexing category; refinement of the auxiliary diagram argument in Lemmas 5.14-5.15"
+   }
+  },
+  {
+   "text": "For an interval object t=(m,[a,b]) of I choose an inert cocartesian projection m to m_[a,b] over the opposite of the interval inclusion the ordinal of length b-a to [r]. It gives an arrow t to s(m_[a,b]) in I. For every x in M this arrow induces an equivalence Map_M(m_[a,b],x) to Map_I(t,s(x)). Indeed a base map represented by c:[k] to [r] occurs on the right exactly when its whole image is in [a,b]; it then factors uniquely as the inclusion [a,b] followed by the translated map to the ordinal of length b-a. On each such base-arrow fibre the equivalence is precisely [lem-coef-infinity-cocartesian-mapping-criterion]. The base mapping spaces are discrete, so taking their disjoint union gives the displayed equivalence. The opposite universal-arrow assertion of [lem-coef-parametric-universal-arrows] now supplies a coherent left adjoint r:I to M to the fully faithful s, with r(m,[a,b])=m_[a,b], unit t to sr(t), and equivalence rs to id. Thus for F in Mon_M(B), G=Fr is an actual coherent interval diagram. In particular G takes the unit t to sr(t) to an equivalence. This is a construction of coherent interval restrictions, not an assertion that independently chosen operation maps automatically extend to higher simplices.",
+   "uses": [
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-parametric-universal-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Agent generalized extension: coherent inert restriction by cocartesian universality, in place of assuming the cartesian-pattern hypothesis of Proposition 5.1"
+   }
+  },
+  {
+   "text": "Compute the limit needed to right Kan extend G from I to D. Fix e=(m,K), and let J_e=I times_D D_(e/) be the full coherent comma category of arrows from e to interval objects. Let A_e be its full subcategory whose targets are full intervals s(x). For an object e to t of J_e, the unit eta_t of Step 3 gives an arrow from it to e to t to sr(t), which lies in A_e. Precomposition with this arrow is an equivalence on mapping spaces into every object e to s(x) of A_e: these mapping spaces are the homotopy fibres of Map_I(sr(t),s(x)) and Map_I(t,s(x)) over the given point of Map_D(e,s(x)), and precomposition with eta_t identifies the two total spaces by the universal property of Step 3 and full faithfulness of s, compatibly with the maps to Map_D(e,s(x)). The diagram G|J_e carries each such arrow to G(eta_t), an equivalence by Step 3. Hence [lem-coef-reflection-inverting-limit-restriction] applies: a cone on G|J_e is limiting exactly when its restriction to A_e is, and limits of G|J_e exist exactly when those of G|A_e do. Now A_e is a disjoint union over the connected components C of K. An object e to s(x) represented by c:[k] to [r] belongs to the unique C containing the connected nonempty interval c_!P_k. In its component the inert projection e to s(m_C) is initial: factoring c through C is unique in the base, and the space of lifts of this factorization is contractible by [lem-coef-infinity-cocartesian-mapping-criterion]. There are no simplices between different components, since a triangle keeps its image inside the component of its first arrow. By [lem-coef-relative-limit-initial-components], applied to B over the point, the limit of G|A_e is the finite product of the values G(s(m_C)), equivalently F(m_C), over the components C of K. If K is empty J_e and A_e are empty and this limit is terminal, as that lemma includes the empty index set. This is an existence proof for the required limits using finite products only.",
+   "uses": [
+    "lem-coef-reflection-inverting-limit-restriction",
+    "lem-coef-relative-limit-initial-components",
+    "lem-coef-parametric-universal-arrows",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Agent comma-category calculation completing the generalized extension of Lemma 5.14"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-relative-right-kan-universal-restriction] to the full inclusion I in D, with target B over the point. The map B to the point is an isofibration since B is a quasicategory and identities lift the only equivalence of the point. Step 4 supplies every required limit cone. Restriction from such extensions is a trivial Kan fibration, including transformations and prescribed higher boundaries; lifting simplex by simplex along boundary inclusions, starting from the empty simplicial set, it has a strict section sigma from the full subcategory of admissible interval diagrams. Since every Fr with F in Mon_M(B) is admissible by Step 4, put Ghat=sigma(Fr), a coherent right Kan extension of G depending functorially on F. Its value at (m,K) is the product over components C of K of F(m_C). For any component with edges, the product-cone hypothesis on F gives F(m_C) as the product of F(m_i) over those edges, because composite inert projections agree with those from m. For an isolated vertex, F(m_C) is terminal by the degree-zero hypothesis. Thus Ghat(m,K) is canonically the product over edges i of K of F(m_i), with all these identifications respecting their cones. Put E=M times_(N(Fin_*)) N(Gamma^times), where Gamma^times is the subset category in [lem-coef-cartesian-envelope-product-diagram-recognition]. There is a functor v:E to D sending (m,S) to the graph with all vertices and edges S. For an arrow over a:[s] to [r], the condition a_!(all vertices, edges T) contained in (all vertices, edges S) says exactly that every input in a^{-1}(T) lies in S. Therefore it is exactly the arrow condition in E. The relative-exponential identity of [lem-cbc-enhanced-relative-exponential] turns Ghat v into a coherent functor H_F:M to Q over Fin_*. Its fibre diagrams are product diagrams by the value computation, so it factors through P, and its base factorization gives H_F:M to B^times over Delta-op.",
+   "uses": [
+    "lem-coef-relative-right-kan-universal-restriction",
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-cartesian-envelope-product-diagram-recognition",
+    "lem-cbc-enhanced-relative-exponential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Agent right Kan extension and relative-exponential construction, following the architecture of Lemmas 5.14-5.15"
+   }
+  },
+  {
+   "text": "The construction has exactly the advertised block formula. For u:m to m-prime over the opposite of a:[s] to [r], fix output j. The target interval [j-1,j] has image C=[a(j-1),a(j)]. Applying the coherent r to the corresponding interval arrow gives m_C to m-prime_j; the unit of Step 3 identifies its composite from m with the jth inert projection after u. Applying F and the product identification for m_C gives the block map from the product of F(m_i) for a(j-1)<i<=a(j) to F(m-prime_j). The cone computation of Steps 4-5 gives this same map in H_F; the mapping-space formula of [lem-coef-cartesian-envelope-product-diagram-recognition] reads it as the jth block component. When a(j-1)=a(j), m_C is an object over [0] and its F-value is terminal, so this also constructs the nullary operation. If u is inert cocartesian, every target block is a singleton and its induced arrow m_C to m-prime_j is an equivalence: both projections from m are cocartesian over the identical singleton selector, and their universal mapping-space equivalences identify their targets. Applying F therefore gives equivalences on all block maps. The envelope's cocartesian criterion proves H_F preserves inert edges. Here inert means a cocartesian edge over an inert base map, as in [lem-coef-operadic-algebra-presentability]; no claim is made for arbitrary edges over inert base maps.",
+   "uses": [
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-cartesian-envelope-product-diagram-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Agent block-map computation and inert check, corresponding to Lemma 5.15; includes vertex blocks"
+   }
+  },
+  {
+   "text": "On the full-interval section s:M to I to D, the restriction equivalence of the right Kan extension identifies Ghat s with Frs, hence with F. The graph v(m,{1,...,r}) is this full interval. Therefore the relative-exponential evaluation identifies Pi H_F with F, naturally on all of M and on transformations and higher simplices. This is the specified product-cone identification; its naturality follows from the extension's coherent counit, not from choosing equalities on mapping-space components.",
+   "uses": [
+    "lem-coef-relative-right-kan-universal-restriction",
+    "lem-coef-parametric-universal-arrows",
+    "lem-cbc-enhanced-relative-exponential",
+    "lem-coef-cartesian-envelope-product-diagram-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Agent comparison for a product-cone functor, completing the first inverse of Lemma 5.14"
+   }
+  },
+  {
+   "text": "For the other comparison start with an inert-preserving H and put F=Pi H. Evaluation of H gives a diagram on E. Forgetting the isolated vertices defines w:D to E, (m,K) to (m,edges(K)); the arrow condition holds because the edges of a_!L are exactly the ordered-block inverse image of edges(L). Let T_H:D to B be evaluation composed with w. T_H carries each unit (m,[a,b]) to s(m_[a,b]) to an equivalence: it evaluates the cocartesian edge H(m to m_[a,b]) on a cartesian arrow of Gamma-times, which [lem-cbc-enhanced-relative-exponential] and [lem-coef-cartesian-envelope-product-diagram-recognition] send to an equivalence, including terminal values for a=b. Hence T_H(eta) identifies T_H|_I with T_H s r=Fr=G. T_H is right Kan extended from I: at e=(m,K), T_H also carries the reflection arrows of Step 4 in J_e to equivalences, so by [lem-coef-reflection-inverting-limit-restriction] and [lem-coef-relative-limit-initial-components] its canonical cone is limiting once its restriction to the initial objects s(m_C) is. That restriction is the map from H(m)(edges K) to the product over C of H(m_C)(all edges), which through the product cones of H(m) and these cocartesian transports is the regrouping of the product over the edges of K by components; isolated vertices give terminal factors. So it is limiting. Restriction R to T is an equivalence of full infinity categories with section sigma by [lem-coef-relative-right-kan-universal-restriction], so T_H is equivalent to sigma(T_H|_I), hence to Ghat=sigma(Fr), compatibly with the interval identification. Since wv is the identity of E, T_H v is the evaluation of H and Ghat v that of H_F; applying the bijection of [lem-cbc-enhanced-relative-exponential] to M times Delta^1 turns this equivalence into a transformation from H_(Pi H) to H over Fin_*, whose components are fibrewise equivalences; it is an equivalence by [lem-cbc-enhanced-functor-cone-calculus]. All choices are made by functors of H, so this is natural in H.",
+   "uses": [
+    "lem-coef-reflection-inverting-limit-restriction",
+    "lem-coef-relative-limit-initial-components",
+    "lem-coef-relative-right-kan-universal-restriction",
+    "lem-coef-parametric-universal-arrows",
+    "lem-cbc-enhanced-relative-exponential",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-cartesian-envelope-product-diagram-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Agent comparison for an inert-preserving functor, completing the second inverse of Lemma 5.14"
+   }
+  },
+  {
+   "text": "Assembly. Composition with Pi is a functor Phi from inert-preserving functors to Mon_M(B) (Step 1). F to H_F is a functor Psi: precomposition with r, the section sigma, restriction along v and the relative-exponential bijection applied to M times Delta^n are all simplicial maps (Steps 3-5). Step 7 gives a natural equivalence Phi Psi to id and Step 8 one from Psi Phi to id; their components are equivalences, so by [lem-cbc-enhanced-functor-cone-calculus] Phi is an equivalence of full infinity categories with quasi-inverse Psi, which has the advertised block formula by Step 6. Contractibility: the space of inverse lifts of a specified F with its product-cone identification is the homotopy fibre of the map of cores induced by Phi over F; Phi induces an equivalence of cores, so this fibre is contractible. Naturality: for an inert-preserving operad map u:M' to M, restriction along u commutes strictly with Phi. For a finite-product-preserving h:B to B', postcomposition with h carries product diagrams to product diagrams, hence P into P' and the pullback B-times into B'-times, preserving cocartesian edges by the block-map criterion of [lem-coef-cartesian-envelope-product-diagram-recognition]; full-subset evaluation commutes strictly with it, so again Phi commutes with h. Because Phi is an equivalence commuting with u and h, the quasi-inverses commute with them up to the canonical equivalences obtained from the unit and counit, with their higher compatibilities. No colimits in B, terminality of M_[0], or cocartesian active lifts are used.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-cartesian-envelope-product-diagram-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Agent assembly of the equivalence, contractibility and naturality; compare Remark 5.16"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-cartesian-envelope-product-diagram-recognition",
+  "lem-coef-cartesian-operadic-envelope",
+  "def-coef-infinity-fibrations",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-operadic-algebra-presentability",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-parametric-universal-arrows",
+  "lem-coef-reflection-inverting-limit-restriction",
+  "lem-coef-relative-limit-initial-components",
+  "lem-coef-relative-right-kan-universal-restriction",
+  "lem-cbc-enhanced-relative-exponential",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/2006.08269",
+  "place": "Proposition 5.1, Lemmas 5.14-5.15 and Remark 5.16 for cartesian patterns; independent agent extension using interval restrictions, path-subgraph comma limits, and right Kan extension. The paper is not asserted to cover the generalized hypotheses verbatim."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -86,10 +227,17 @@
    "results": "{\"t\": \"2026-10-17T02:22:58Z\", \"tool\": \"grep\", \"query\": \"Quasicategory.*Day|[Dd]ay.*[Oo]perad|[Ii]nfinity.*[Cc]artesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: fresh independent second-reading search. Read Mathlib/CategoryTheory/Monoidal/DayConvolution.lean:58-95, DayConvolution/Closed.lean:35-82 and Cartesian/Basic.lean:937-969. The hits require ordinary Category/MonoidalCategory instances and use ordinary Hom sets; no declaration states the relative-exponential or generalized-operad assertion. The fresh quasicategory/Day/operad grep has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right Kan extension of interval diagrams to subgraphs of a path gives products over connected components",
+   "results": "{\"t\": \"2026-10-17T04:24:25Z\", \"tool\": \"leanfinder\", \"query\": \"Right Kan extension of interval diagrams to subgraphs of a path gives products over connected components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux\\u2082\", \"CategoryTheory.SmallObject.SuccStruct.extendToSuccRestrictionLEIso\", \"CategoryTheory.Limits.WalkingMultispan.inclusionOfLinearOrder\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux\\u2081\", \"CategoryTheory.SmallObject.SuccStruct.extendToSucc_map\", \"CategoryTheory.SimplicialThickening.instCategoryPath\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\"], \"digest\": \"af3ad613816c5f40\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. Read the returned StrictSegal types and Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean:14-50,186-226. These are right Kan extensions of Type-valued ordinary simplicial objects, expressing 2-coskeletality, not coherent product-cone reconstruction in arbitrary quasicategories. The remaining displayed hits concern ordinary successor extensions and multispans."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-day-convolution",
@@ -115,5 +263,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-generalized-cartesian-product-cones",
+  "worker": "stage1",
+  "summary": "Second reading repairs an inapplicable space-valued-colour operation lemma and unsupported higher-coherence and contractibility claims. Eight steps construct coherent interval restrictions by universal arrows, compute path-subgraph comma limits, right Kan extend, and recover the product-diagram envelope by relative exponentiation. No new nodes or leaves; no statement change. Maintainer reader fix (2026-10-17): the cone retraction along the reflective subcategory A_e, proved inline in Step 4 and repeated in Step 8, is now the statement-only lemma lem-coef-reflection-inverting-limit-restriction; the disjoint-component product is cited from lem-coef-relative-limit-initial-components (replacing lem-coef-infinity-final-index-colimit); the long Step 8 is split into Steps 8 and 9; the off-unit tool uses are declared.",
+  "blueprint": "The ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2 calls for product-cone reconstruction in a cartesian target. Steps 1-8 realize that comparison, including a written generalized extension of the cartesian-pattern source argument.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "The item explicitly uses quasicategory, coherent mapping-space and universe conventions; these generic notions come from the CBC unit."
+   },
+   {
+    "node": "lem-cbc-enhanced-relative-exponential",
+    "why": "Steps 5, 7 and 8 use only its simplicial mapping bijection and its cocartesian-edge criterion to pass between diagrams on M times_Fin* Gamma-times and functors into the relative exponential; the in-unit recognition lemma is itself stated through it and no node of this unit gives the bijection."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Steps 8 and 9 use only that a transformation of coherent diagrams with equivalence components is an equivalence; a generic quasicategory fact, not a replacement for a step of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-relative-exponential",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-92a683545",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-92a683545 (reviewer sub-agent of L); spot-checked: I read the item, all 11 cited statements, the unit sk-prop-sf-biduality-general (it cites only sk-def-sf-operations and sk-prop-sf-rf-shriek-preservation), the chapter, and the main-20261015 proof of the blueprint ancestor prop-coef-integral-exceptional-adjoint. Chu-Haugseng 2006.08269 and HA are not archived locally, so I could not check the cited place; the node marks itself as an agent extension, so I checked the mathematics myself. The statement is true and unchanged: I tested r=0 and r=1, an inert selector and a collapsed block (nullary operation). The checks that matter: the cut functor; a_! preserves unions and (ab)_!=a_!b_!; the cartesian lift and the full faithfulness of s; the coherent left adjoint r through the dual universal-arrow clause, with discrete base mapping spaces; v and w respect arrows because edges(a_!L) is the cut preimage alpha^{-1}(edges L), and wv=id; inert preservation through cocartesian uniqueness; Pi H_F = F r s = F. Duplicate check: lem-coef-lax-cartesian-classification is the symmetric cocartesian case, not a duplicate. Long step 8 (2404 characters) hides a lemma. It says 'repeat the cone retraction R_e of Step 4' for a second functor, and that argument has its own hypothesis: a bare restriction of limits along the final reflective inclusion A_e is false (J={0->1}, A={1}); it works only because the diagram inverts the reflection. It also packs in the assembly, contractibility and naturality. Fixes, three faults: (1) C1/D5: new statement-only node lem-coef-reflection-inverting-limit-restriction (rg and blueprint search found no existing node; Mathlib grep finds only the ordinary-category initial_of_adjunction at Limits/Final.lean:144), cited in Steps 4 and 8; step 8 split into 8 and 9, all steps now under 2000 characters; Step 5 now names a strict section sigma so F->H_F is a functor; Step 9 proves naturality strictly through the product-diagram model. (2) Missing citation: the components, initial objects and product step, including empty K, is now cited from the existing node lem-coef-relative-limit-initial-components, which replaces lem-coef-infinity-final-index-colimit. (3) C8: added tool_uses for lem-cbc-enhanced-relative-exponential and lem-cbc-enhanced-functor-cone-calculus. All three tool uses are accepted, including def-cbc-enhanced-diagrams-cones. proof_deps equals the union of uses, every cited id exists, and there is no cycle. The new node's Mathlib search is grep only, because LeanSearch and LeanFinder were not available here.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }

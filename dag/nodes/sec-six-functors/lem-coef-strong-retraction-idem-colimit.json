@@ -10,9 +10,103 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=R|_{\\{X\\}}$ and let $v:A\\to R$ be the ordinary inclusion, so $j=N(v)$. Also let $w:\\mathbf1\\to R$ send the unique object to $Y$, and write $k=N(w):\\Delta^0\\to N(R)$. The ordinary transformation $\\eta:\\mathrm{id}_R\\to\\mathrm{const}_Y$ with components $\\eta_X=r$ and $\\eta_Y=1_Y$ is natural: for $e$ its equation is $re=r$, for $r$ it is $1_Yr=r$, and for $s$ it is $rs=1_Y$. The identity arrows give the remaining equations. Its nerve is a map $N(R)\\times\\Delta^1\\to N(R)$, since in degree $n$ a functor $[n]\\to R\\times[1]$ is exactly a pair of functors to the two factors. Postcomposition with $F$ defines a coherent cocone $\\mu:F\\to\\Delta_{N(R)}F(Y)$. Its restrictions are $\\mu j=\\lambda_F$ and $\\mu k=1_{F(Y)}$, including all higher simplices, because the two restricted ordinary transformations are respectively the component-$r$ transformation in the statement and the identity transformation.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 4.4.5.2; Proposition 4.4.5.12, explicit form of the cocone"
+   }
+  },
+  {
+   "text": "Compute the ordinary comma categories using the convention that a morphism from $a:b\\to X$ to $a':b\\to X$ is $h:X\\to X$ with $ha=a'$. In $(X\\downarrow v)$ the objects are $a=1_X$ and $b=e$; their hom sets are $\\operatorname{Hom}(a,a)=\\{1_X\\}$, $\\operatorname{Hom}(a,b)=\\{e\\}$, $\\operatorname{Hom}(b,a)=\\varnothing$, and $\\operatorname{Hom}(b,b)=\\{1_X,e\\}$. In $(Y\\downarrow v)$ there is just the object $s$, with endomorphisms $1_X,e$, since $es=s$. For $w$, the category $(X\\downarrow w)$ has the single object $r$ and its identity; $(Y\\downarrow w)$ has the single object $1_Y$ and its identity. Thus the latter two nerves are exactly $\\Delta^0$. These calculations use only the displayed composition table of $R$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 4.4.5.11, the two comma categories; terminal-object case used to expand Proposition 4.4.5.12"
+   }
+  },
+  {
+   "text": "Both comma nerves for $v$ are weakly contractible by explicit simplicial contractions. For $B=(X\\downarrow v)$, the arrows $1_X:a\\to a$ and $e:a\\to b$ give a natural transformation $\\mathrm{const}_a\\to\\mathrm{id}_B$: naturality for the arrow $a\\to b$ is $e1_X=e$, and for each endomorphism $h\\in\\{1_X,e\\}$ of $b$ it is $he=e$. For $B=(Y\\downarrow v)$, the component $e:s\\to s$ gives a transformation $\\mathrm{id}_B\\to\\mathrm{const}_s$, since $e1_X=e$ and $ee=e$. Each transformation is a functor $B\\times[1]\\to B$, so taking its nerve gives a simplicial homotopy between the identity and the constant map at the indicated object, by the degreewise product identity from step 1. Let $p:N(B)\\to\\Delta^0$ and let $q$ select that object. Then $pq=1_{\\Delta^0}$ and $qp$ is simplicially homotopic to $1_{N(B)}$. Apply [lem-cbc-simplicial-homotopy-equivalence-weak] to $p,q$, using the constant homotopy on $\\Delta^0$. Hence $p$ is a weak homotopy equivalence; no Kan hypothesis on these nerves is needed.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemmas 4.4.5.9-4.4.5.11; explicit contraction replacing the cone-retract proof of Lemma 4.4.5.10"
+   }
+  },
+  {
+   "text": "All ordinary categories just used are small. Apply the ordinary-nerve clause of [lem-coef-infinity-cofinality-space-test]: for both $j=N(v)$ and $k=N(w)$ their coherent comma quasicategories are weakly contractible, by steps 2-3. The target $N(R)$ has exactly the two vertices $X,Y$, so these are all the required tests. The coherent comma criterion [lem-coef-infinity-cofinal-comma-criterion] therefore applies to both inclusions. In particular, for either inclusion any given cocone on an $N(R)$-diagram is colimiting if and only if its restriction is colimiting. The containing universe may be enlarged to contain $\\mathcal E$ and both functor categories; the indexing nerves remain small. Neither application requires any colimits to exist in $\\mathcal E$.",
+   "uses": [
+    "lem-coef-infinity-cofinality-space-test",
+    "lem-coef-infinity-cofinal-comma-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 4.4.5.11 and Theorem 4.1.3.1; Proposition 4.1.1.8, restriction of a prescribed cocone"
+   }
+  },
+  {
+   "text": "For the point-indexed diagram with value $F(Y)$, the identity cocone is colimiting. Indeed $\\operatorname{Fun}(\\Delta^0,\\mathcal E)=\\mathcal E$ degree by degree, so the map on cocones with any fixed vertex $z$ is composition with $1_{F(Y)}$ on $\\operatorname{Map}_{\\mathcal E}(F(Y),z)$. By the unital assertion of [lem-coef-infinity-mapping-composition] this map is simplicially homotopic to the identity. It is a weak homotopy equivalence by [lem-cbc-simplicial-homotopy-equivalence-weak], taking the proposed inverse to be the identity. The mapping-space criterion for cocones, the dual assertion of [lem-cbc-enhanced-functor-cone-calculus], now makes this identity cocone colimiting in the coherent comma sense of the statement.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition",
+    "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.4.5.12, expansion of the terminal-vertex colimit assertion; mapping-space cocone criterion"
+   }
+  },
+  {
+   "text": "The cocone $\\mu$ of step 1 restricts along $k$ to exactly the identity cocone of step 5. Apply the reflection direction of [lem-coef-infinity-cofinal-comma-criterion] for $k$, whose comma hypothesis was checked in step 4. This proves that this particular $\\mu$, with its specified component $r$ at $X$, is a colimiting cocone on $F$. Apply the preservation direction of the same theorem for $j$. Its restriction $\\mu j=\\lambda_F$ is therefore colimiting, with vertex $F(Y)$. This proves the assertion for the stated cocone rather than only the existence of some cocone with that vertex.",
+   "uses": [
+    "lem-coef-infinity-cofinal-comma-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.4.5.12, cofinal restriction from the final-vertex cocone, with its last assertion expanded"
+   }
+  },
+  {
+   "text": "Apply the dual mapping-space criterion in [lem-cbc-enhanced-functor-cone-calculus] to $\\lambda_F$. For each $z\\in\\mathcal E$ it gives exactly the equivalence $\\operatorname{Map}_{\\mathcal E}(F(Y),z)\\to\\operatorname{Map}_{\\operatorname{Fun}(I,\\mathcal E)}(H,\\Delta_I z)$ induced by composition with $\\lambda_F$. Conversely that criterion identifies this condition with being colimiting in the coherent cocone category. Every cocone used above was constructed explicitly from $F$ or was the identity cocone on one object; no other colimits in $\\mathcal E$ have been assumed.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.4.5.12; mapping-space formulation of its colimit cocone"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-infinity-cofinality-space-test",
+  "lem-coef-infinity-cofinal-comma-criterion",
+  "lem-coef-infinity-mapping-composition",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Definition 4.4.5.2, Lemmas 4.4.5.9-4.4.5.11 and Proposition 4.4.5.12, printed pp.304,307 (PDF pp.321,324). Online source read; no archive in literature/. The finite comma calculations, contractions and prescribed-cocone argument expand that proof."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +156,59 @@
    "results": "{\"t\": \"2026-10-17T04:20:55Z\", \"tool\": \"grep\", \"query\": \"Idem|retract|split\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"35cc29356b4d24f6\"}",
    "date": "2026-10-17",
    "verdict": "No match. The sole grep hit is the derived IsStableUnderRetracts property of innerFibrations in AlgebraicTopology/Quasicategory/InnerFibration.lean:66; it is stability of an ordinary morphism class and does not assert a coherent retraction extension or colimit."
+  },
+  {
+   "tool": "grep",
+   "query": "Idem|idempotent|retract",
+   "results": "{\"t\": \"2026-10-17T04:54:04Z\", \"tool\": \"grep\", \"query\": \"Idem|idempotent|retract\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean\"], \"digest\": \"35cc29356b4d24f6\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Returned declarations concern ordinary categories: IsIdempotentComplete (CategoryTheory/Idempotents/Basic.lean:52-68), split coforks (CategoryTheory/Limits/Shapes/Equalizers.lean:1354-1360,1400-1408), or degreewise coproduct splittings (AlgebraicTopology/SimplicialObject/Split.lean:225-234). The quasicategory hit is stability of inner fibrations under ordinary retracts (AlgebraicTopology/Quasicategory/InnerFibration.lean:61-66). None gives the coherent Idem-indexed colimit in an arbitrary quasicategory. The broad Equalizers grep was narrowed in the last logged grep to read the actual split-cofork candidates."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coherently split idempotent has an absolute colimit in an infinity category",
+   "results": "{\"t\": \"2026-10-17T04:54:04Z\", \"tool\": \"leansearch\", \"query\": \"A coherently split idempotent has an absolute colimit in an infinity category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.splitEpiOfIdempotentOfIsColimitCofork_section_\", \"CategoryTheory.Limits.splitEpiOfIdempotentOfIsColimitCofork.congr_simp\", \"CategoryTheory.Limits.splitEpiOfIdempotentOfIsColimitCofork\", \"CategoryTheory.Limits.splitEpiOfIdempotentCoequalizer\", \"CategoryTheory.IsIdempotentComplete.idempotents_split\", \"CategoryTheory.Limits.isSplitEpiCoequalizes\", \"CategoryTheory.Limits.splitMonoOfIdempotentEqualizer\", \"CategoryTheory.IsIdempotentComplete.mk\"], \"digest\": \"235daba2ef3bce71\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Returned declarations concern ordinary categories: IsIdempotentComplete (CategoryTheory/Idempotents/Basic.lean:52-68), split coforks (CategoryTheory/Limits/Shapes/Equalizers.lean:1354-1360,1400-1408), or degreewise coproduct splittings (AlgebraicTopology/SimplicialObject/Split.lean:225-234). The quasicategory hit is stability of inner fibrations under ordinary retracts (AlgebraicTopology/Quasicategory/InnerFibration.lean:61-66). None gives the coherent Idem-indexed colimit in an arbitrary quasicategory. The broad Equalizers grep was narrowed in the last logged grep to read the actual split-cofork candidates."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIdempotentComplete",
+   "results": "{\"t\": \"2026-10-17T04:54:06Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsIdempotentComplete\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.IsIdempotentComplete\", \"CategoryTheory.Idempotents.isIdempotentComplete_of_abelian\", \"CategoryTheory.Idempotents.instIsIdempotentCompleteOpposite\", \"CategoryTheory.Idempotents.isIdempotentComplete_of_isIdempotentComplete_opposite\", \"CategoryTheory.Idempotents.isIdempotentComplete_iff_opposite\", \"CategoryTheory.Idempotents.Equivalence.isIdempotentComplete\", \"CategoryTheory.Idempotents.isIdempotentComplete_iff_of_equivalence\", \"CategoryTheory.Idempotents.isIdempotentComplete_iff_hasEqualizer_of_id_and_idempotent\"], \"digest\": \"6403d2b89dd78483\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Returned declarations concern ordinary categories: IsIdempotentComplete (CategoryTheory/Idempotents/Basic.lean:52-68), split coforks (CategoryTheory/Limits/Shapes/Equalizers.lean:1354-1360,1400-1408), or degreewise coproduct splittings (AlgebraicTopology/SimplicialObject/Split.lean:225-234). The quasicategory hit is stability of inner fibrations under ordinary retracts (AlgebraicTopology/Quasicategory/InnerFibration.lean:61-66). None gives the coherent Idem-indexed colimit in an arbitrary quasicategory. The broad Equalizers grep was narrowed in the last logged grep to read the actual split-cofork candidates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent functor from the walking retraction to a quasicategory exhibits its retract object as the colimit of the walking idempotent diagram",
+   "results": "{\"t\": \"2026-10-17T04:54:07Z\", \"tool\": \"leanfinder\", \"query\": \"A coherent functor from the walking retraction to a quasicategory exhibits its retract object as the colimit of the walking idempotent diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplicialObject.Splitting.isColimit'\", \"SimplicialObject.Splitting.isColimit\", \"CategoryTheory.Limits.ReflexiveCofork.isColimitEquiv\", \"SSet.horn.isColimit\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"SimplicialObject.Splitting.ofIso_isColimit'\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\", \"SSet.StrictSegal.isRightKanExtension\"], \"digest\": \"834615c1ee157a7f\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Returned declarations concern ordinary categories: IsIdempotentComplete (CategoryTheory/Idempotents/Basic.lean:52-68), split coforks (CategoryTheory/Limits/Shapes/Equalizers.lean:1354-1360,1400-1408), or degreewise coproduct splittings (AlgebraicTopology/SimplicialObject/Split.lean:225-234). The quasicategory hit is stability of inner fibrations under ordinary retracts (AlgebraicTopology/Quasicategory/InnerFibration.lean:61-66). None gives the coherent Idem-indexed colimit in an arbitrary quasicategory. The broad Equalizers grep was narrowed in the last logged grep to read the actual split-cofork candidates."
+  },
+  {
+   "tool": "grep",
+   "query": "isSplitEpiCoequalizes|splitEpiOfIdempotentOfIsColimitCofork|isColimit",
+   "results": "{\"t\": \"2026-10-17T04:54:21Z\", \"tool\": \"grep\", \"query\": \"isSplitEpiCoequalizes|splitEpiOfIdempotentOfIsColimitCofork|isColimit\", \"sub\": \"CategoryTheory/Limits/Shapes/Equalizers.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"451\", \"460\", \"485\", \"490\", \"491\"], \"digest\": \"20e116683f965030\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Returned declarations concern ordinary categories: IsIdempotentComplete (CategoryTheory/Idempotents/Basic.lean:52-68), split coforks (CategoryTheory/Limits/Shapes/Equalizers.lean:1354-1360,1400-1408), or degreewise coproduct splittings (AlgebraicTopology/SimplicialObject/Split.lean:225-234). The quasicategory hit is stability of inner fibrations under ordinary retracts (AlgebraicTopology/Quasicategory/InnerFibration.lean:61-66). None gives the coherent Idem-indexed colimit in an arbitrary quasicategory. The broad Equalizers grep was narrowed in the last logged grep to read the actual split-cofork candidates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Absolute colimits of coherent idempotents are computed by retract objects in arbitrary infinity categories",
+   "results": "{\"t\": \"2026-10-17T04:54:24Z\", \"tool\": \"leanfinder\", \"query\": \"Absolute colimits of coherent idempotents are computed by retract objects in arbitrary infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Idempotents.Karoubi.retract\", \"CategoryTheory.Idempotents.instIsIdempotentCompleteKaroubi\", \"CategoryTheory.Idempotents.instIsIdempotentCompleteSimplicialObject\", \"CategoryTheory.Idempotents.isIdempotentComplete_of_abelian\", \"CategoryTheory.IsIdempotentComplete.idempotents_split\", \"CategoryTheory.Limits.splitEpiOfIdempotentOfIsColimitCofork_section_\", \"CategoryTheory.Limits.splitEpiOfIdempotentOfIsColimitCofork\", \"CategoryTheory.IsIdempotentComplete\"], \"digest\": \"a800e302307884db\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Returned declarations concern ordinary categories: IsIdempotentComplete (CategoryTheory/Idempotents/Basic.lean:52-68), split coforks (CategoryTheory/Limits/Shapes/Equalizers.lean:1354-1360,1400-1408), or degreewise coproduct splittings (AlgebraicTopology/SimplicialObject/Split.lean:225-234). The quasicategory hit is stability of inner fibrations under ordinary retracts (AlgebraicTopology/Quasicategory/InnerFibration.lean:61-66). None gives the coherent Idem-indexed colimit in an arbitrary quasicategory. The broad Equalizers grep was narrowed in the last logged grep to read the actual split-cofork candidates."
+  },
+  {
+   "tool": "grep",
+   "query": "isSplitEpiCoequalizes|splitEpiOfIdempotentOfIsColimitCofork",
+   "results": "{\"t\": \"2026-10-17T04:54:46Z\", \"tool\": \"grep\", \"query\": \"isSplitEpiCoequalizes|splitEpiOfIdempotentOfIsColimitCofork\", \"sub\": \"CategoryTheory/Limits/Shapes/Equalizers.lean\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"1341\", \"1354\", \"1400\", \"1412\"], \"digest\": \"4a57886a3106ef82\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. Returned declarations concern ordinary categories: IsIdempotentComplete (CategoryTheory/Idempotents/Basic.lean:52-68), split coforks (CategoryTheory/Limits/Shapes/Equalizers.lean:1354-1360,1400-1408), or degreewise coproduct splittings (AlgebraicTopology/SimplicialObject/Split.lean:225-234). The quasicategory hit is stability of inner fibrations under ordinary retracts (AlgebraicTopology/Quasicategory/InnerFibration.lean:61-66). None gives the coherent Idem-indexed colimit in an arbitrary quasicategory. The broad Equalizers grep was narrowed in the last logged grep to read the actual split-cofork candidates."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-retract-colimit",
@@ -77,7 +220,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, finite-coefficient mapping-complex adjunction before R lim (supporting operadic-algebra presentability via the presentable Cartesian fibration theorem), through step 3 of lem-coef-small-right-adjoint-diagram-compact-model (the compact-object diagram F_0 and H = Ind^R F_0^op); GHN arXiv:1501.02161v3 proof of Theorem 10.3, final paragraph, and Definition 10.4. Supporting the representability of all lambda-compact Ind objects: HTT 5.5.7.8–5.5.7.10 use idempotent completeness, automatic for uncountable lambda because the walking idempotent is countable. In the supporting retract-closure argument: HTT Section 4.4.5, coherence of a weak retraction and its countable walking-idempotent colimit. HTT Definition 4.4.5.2 and Proposition 4.4.5.12 with its proof, printed pp.304,307 (PDF pp.321,324); I is Idem and N(R) is Idem+. The slice over Y identifies with N(R) and its I-restriction with I, giving precisely the displayed colimit cocone. Corollary 4.4.5.14 records effectivity. Read online; no local archive or matching Stacks tag.",
+   "place": "Proof paragraph 2, finite-coefficient mapping-complex adjunction before R lim (supporting operadic-algebra presentability via the presentable Cartesian fibration theorem), through step 3 of lem-coef-small-right-adjoint-diagram-compact-model (the compact-object diagram F_0 and H = Ind^R F_0^op); GHN arXiv:1501.02161v3 proof of Theorem 10.3, final paragraph, and Definition 10.4. Supporting the representability of all lambda-compact Ind objects: HTT 5.5.7.8–5.5.7.10 use idempotent completeness, automatic for uncountable lambda because the walking idempotent is countable. In the supporting retract-closure argument: HTT Section 4.4.5, coherence of a weak retraction and its countable walking-idempotent colimit. HTT Definition 4.4.5.2 and Proposition 4.4.5.12 with its proof, printed pp.304,307 (PDF pp.321,324); I is Idem and N(R) is Idem+. The slice over Y identifies with N(R) and its I-restriction with I, giving precisely the displayed colimit cocone. Corollary 4.4.5.14 records effectivity. Read online; no local archive or matching Stacks tag. This split supplies the cofinality and prescribed colimit-cocone calculation for that supporting retract-closure argument.",
    "via": [
     "lem-coef-infinity-retract-colimit",
     "lem-coef-compact-model-pr-duality",
@@ -94,5 +237,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-strong-retraction-idem-colimit",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Reused the existing quasicategorical cofinality, ordinary-comma comparison, simplicial homotopy and cocone-calculus nodes. Computed both comma categories, contracted their nerves explicitly, and proved the actual component-r cocone colimiting by comparison with its identity restriction at Y. No new nodes.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, finite-coefficient mapping-complex adjunction before R lim; through the recorded presentability/compact-model/retract-closure ancestry. Steps 1-3 realize the walking-retraction/coherent-idempotent indexing calculation (HTT 4.4.5.9-11); steps 4-7 realize its colimit cocone and universal mapping-space property (HTT 4.4.5.12). No unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Generic simplicial homotopy-equivalence test used for the two explicit comma contractions and the identity-composition map. It supplies the realization-level conclusion, which the finite composition table alone does not state."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic mapping-space criterion for coherent comma cocones, used on the point-indexed identity cocone and on the final displayed mapping-space assertion. No node of this unit replaces this foundational cocone test."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-6d5732414",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-6d5732414 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the full statements of the 6 cited nodes, the comma-criterion proof's pullback model, and the parent retract-colimit. There are no new nodes. R is the walking retraction, and its composition table is associative and closed. Step 1: I checked naturality of eta (re=r, 1r=r, rs=1) and the restrictions mu j=lambda_F and mu k=1. Step 2: I recomputed the comma categories: (X|v) has Hom(1,e)={e}, Hom(e,1)=empty and End(e)={1,e}; (Y|v)={s} with endomorphisms {1,e}; the two w-commas are points. Step 3: the contractions are natural (he=e, ee=e), and the cited homotopy lemma applies with no Kan hypothesis. Step 4: space-test (3) is the same strict pullback that the comma criterion's step 1 identifies with its infinity-pullback hypothesis; reviewed siblings use the same passage. Step 5: the identity cocone is colimiting by the unital clause of mapping-composition. Step 6: reflection along k and preservation along j hold for the specified cocone. Step 7: the dual cone-calculus criterion applies. Edge cases (constant F, ordinary split idempotent, empty E) are fine. HTT is not archived (WANTED, origin=agent); I verified the mathematics directly. I accept the tool_uses for the cbc simplicial-homotopy and cone-calculus nodes. An rg search found no duplicate. No SGA is used, the item is not a target, and no fixes were written. Cosmetic only: the letter b is used for two things in step 2."
  }
 }
