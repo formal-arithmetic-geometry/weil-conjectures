@@ -13,29 +13,30 @@
  },
  "proof": [
   {
-   "text": "The canonical scalar pull comparison is the inverse adjunction mate of exact restriction/pullback. Transpose the desired derived extension-counit identity on X. The two transposes are the ordinary restriction/pullback square followed by the extension unit, by the defining unit compatibility of the derived extension adjunction and exact restriction. Injectivity of the adjunction hom-equivalence proves counit compatibility at P.",
+   "text": "Use the proved private mate-model, derived-unit and restriction-factor identities in IntegralResidueScalarCounitModel. These calculations use the generic derived-functor factorization and adjunction formulas. Transpose with the derived scalar-extension adjunction, apply its defining unit factorization and the ordinary scalar-unit identity, and use naturality of the exact restriction factor to prove extension-counit compatibility for every homotopy complex P. This uses no flatness assumption on P and no theorem or private declaration from IntegralResiduePullFlatModel.",
    "uses": [
     "new-integral-residue-pull-square-data",
-    "new-integral-residue-derived-pull-square"
+    "new-integral-residue-derived-pull-square",
+    "new-integral-residue-pull-ordinary-unit"
    ],
    "elementary": false
   },
   {
-   "text": "Expand tensorPresentationDerivedCounit as extension counit, exact restriction comparison, and the ordinary balanced-tensor presentation. Use the preceding identity and the inverse scalar pull comparison to reduce to the ordinary tensor square.",
+   "text": "Invert the derived scalar pull isomorphism and apply exact restriction. Naturality of the restriction/pullback comparison and its factorization identify the restricted counit square. Expand the tensor-presentation counit into extension counit, exact restriction factor and ordinary tensor presentation.",
    "uses": [
     "lem-weil-pbc-integral-reduction-tensor"
    ],
    "elementary": false
   },
   {
-   "text": "The coefficient e is restriction/pullback on the residue regular module followed by the inverse monoidal unit. After faithfully forgetting module actions and precomposing with the balanced tensor coequalizer epimorphism, both ordinary maps act identically on coefficient and module arguments; coefficient naturality gives balancing. The coequalizer property gives equality degreewise; naturality permits passage through homotopy and Qh.",
+   "text": "Apply the ordinary homotopy tensor normalization to P and map its equality through Qh. This is the complete ordinary balanced-tensor part of the argument, including the coefficient isomorphism eH and the single-tensor comparison.",
    "uses": [
-    "new-integral-residue-ordinary-monoidal"
+    "new-integral-residue-ordinary-tensor-normalization"
    ],
    "elementary": false
   },
   {
-   "text": "Reassociate the normalized composite: it is LF applied to the Y presentation counit, the exact-F counit, then Qh of the ordinary single/tensor comparison and ordinary oplax map. This is precisely tensorModelMap. No counit or tensor-model comparison is inverted.",
+   "text": "Naturality of the exact integral pullback counit at the Y tensor presentation identifies the resulting composite with the definition of tensorModelMap. No counit or tensor-model map is inverted.",
    "uses": [
     "new-integral-residue-tensor-model"
    ],
@@ -45,17 +46,18 @@
  "proof_deps": [
   "new-integral-residue-pull-square-data",
   "new-integral-residue-derived-pull-square",
+  "new-integral-residue-pull-ordinary-unit",
   "lem-weil-pbc-integral-reduction-tensor",
-  "new-integral-residue-ordinary-monoidal",
+  "new-integral-residue-ordinary-tensor-normalization",
   "new-integral-residue-tensor-model"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "A2",
+  "group": "E1",
   "date": "2026-10-17",
-  "document": "Bhatt--Scholze and the existing derived-functor constructions",
+  "document": "Bhatt--Scholze and existing derived-functor constructions",
   "place": "Remark 6.8.15 and proof of Lemma 6.5.9(5), p. 51; explicit formal normalization by derived counits (agent calculation, not a separate statement in the paper)",
-  "note": "Repair after upstream synchronization: the ordinary restricted-regular pullback isomorphism is constructed generically and referred to by name; the local pullback counit uses the existing typed residueExchangeUpperStarCounit. These are the same constructed maps as in the retained delivery. The theorem remains a named open obligation with its complete proof in words."
+  "note": "Lean proof completes the derived adjunction/counit calculation and the final tensor-model comparison. The ordinary balanced-tensor square and its passage to homotopy are also fully proved in this delivery. The coefficient isomorphism definition is moved unchanged to the ordinary square module and publicly reexported. Repair of return H10: the previously imported private mate/factor helpers and their private dependencies are copied from the reviewed historical proof into this module. The flat-model proof dependency is removed; the public statement is unchanged."
  },
  "mathlib_searches": [
   {
@@ -156,12 +158,11 @@
   "file": "lean/Sheaf/Paper/IntegralResidueScalarCounitModel.lean",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_scalarCounit_model",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_scalarCounit_model",
-   "AlgebraicGeometry.ProEtale.CondensedRing.residueOrdinaryRestrictedRegularPullIso"
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_scalarCounit_model"
   ],
   "statement": "theorem integralResidue_scalarCounit_model {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (P : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})\n      (condensedRingObj (integralCoeff ℓ E) Y)) (.up ℤ)) :\n    let F := (f)^*⟦integralCoeff ℓ E⟧\n    let B := residueExchangeOrdinaryCoefficient ℓ E Y\n    let B' := residueExchangeOrdinaryCoefficient ℓ E X\n    let A := Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)\n    let SX := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (coefficientMap (integralReductionMap ℓ E) X)\n    letI := residueOrdinaryUpperStarMonoidal A f\n    let e : F.obj B ≅ B' :=\n      residueOrdinaryRestrictedRegularPullIso (integralCoeff ℓ E) A\n        (integralReductionMap ℓ E) f\n    let eH : (F.mapHomotopyCategory (.up ℤ)).obj (Functor.tensorModelCoefficient B) ≅\n      Functor.tensorModelCoefficient B' := (F.mapHomotopyCategoryFactors (.up ℤ)).app\n        ((CochainComplex.singleFunctor _ 0).obj B) ≪≫\n      (HomotopyCategory.quotient _ (.up ℤ)).mapIso\n        ((F.mapCochainComplexSingleFunctor 0).app B ≪≫\n          (HomologicalComplex.single _ (.up ℤ) 0).mapIso e)\n    let φX := coefficientMap (integralReductionMap ℓ E) X\n    let H := residueExchangeReduction ℓ E X ⋙ residueExchangeRestriction ℓ E X\n    let εX : DerivedCategory.Qh ⋙ H ⟶\n        (tensorLeft B').mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh := by\n      unfold H B' residueExchangeOrdinaryCoefficient\n        residueExchangeReduction integralReduction residueExchangeRestriction\n      exact Mod.tensorPresentationDerivedCounit φX\n    let M := DerivedCategory.Qh.obj P\n    let a : (residueExchangeUpperStar (integralCoeff ℓ E) f).obj M ⟶\n        DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj P) :=\n      (residueExchangeUpperStarCounit (integralCoeff ℓ E) f).app P\n    (residueExchangeRestrictPullIso ℓ E f).hom.app\n          ((residueExchangeReduction ℓ E Y).obj M) ≫\n      (residueExchangeRestriction ℓ E X).map\n        (((residueExchangePullComparisons ℓ E).pull f).inv.app M) ≫\n      H.map a ≫\n      εX.app\n        ((F.mapHomotopyCategory (.up ℤ)).obj P) ≫\n      DerivedCategory.Qh.map\n        ((homotopyTensorSingleIso B').inv.app ((F.mapHomotopyCategory (.up ℤ)).obj P) ≫\n          eH.inv ▷ (F.mapHomotopyCategory (.up ℤ)).obj P) =\n      residueExchangeTensorModelMap ℓ E f P",
   "branch": "sheaf-dag",
-  "by": "A2",
+  "by": "E1",
   "date": "2026-10-17"
  },
  "reviewed": {
@@ -177,11 +178,11 @@
  "reviewed_proof": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A2",
+  "reviewer": "C-55e26",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261017T024325-L-1172589",
+  "landing": "20261017T063346-L-528999",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item theorem statement byte-identical to published; moved residueOrdinaryRestrictedRegularPullIso identical signature/body, declared in change record; 3 delivered modules + 2 direct importers compile without errors/warnings (900 s limit, load ~80-91); axioms propext/Classical.choice/Quot.sound plus sorryAx inherited from upstream (no sorry in delivery); node lean.statement and proof_deps consistent with Lean; H10 fixed"
  }
 }

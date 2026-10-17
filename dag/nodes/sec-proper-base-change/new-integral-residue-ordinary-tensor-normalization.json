@@ -1,0 +1,139 @@
+{
+ "id": "new-integral-residue-ordinary-tensor-normalization",
+ "kind": "statement",
+ "title": "Degreewise ordinary tensor normalization descends to the homotopy category",
+ "statement": "For any morphism φ:Λ→A of commutative condensed ring objects, scheme morphism f:X→Y, and homotopy complex P of Λ_Y-modules, use the ordinary module square and coefficient e of [new-integral-residue-ordinary-tensor-square], the tensor presentation of [lem-weil-pbc-integral-reduction-tensor], and tensorModelCoefficient of [new-integral-residue-tensor-model]. Let B,Bprime be the restricted regular A-modules, F integral pullback, and eH the homotopy image of e using the map-single comparison. On P, inverse restriction/pullback, restriction of inverse scalar pullback, tensor presentation on X, inverse tensor-single comparison for Bprime and tensoring eH inverse equal Fh of the Y tensor presentation and inverse tensor-single comparison, followed by the homotopy oplax tensor map. This equality assumes no flatness and involves no derived categories.",
+ "stmt_deps": [
+  "new-integral-residue-ordinary-tensor-square",
+  "lem-weil-pbc-integral-reduction-tensor",
+  "new-integral-residue-tensor-model"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15 and proof of Lemma 6.5.9(5), p. 51; explicit formal normalization by derived counits (agent calculation, not a separate statement in the paper)"
+ },
+ "proof": [
+  {
+   "text": "Represent P by a cochain complex K. Apply the ordinary module square in each degree; the natural transformations provide commutation with the differentials. Apply the quotient functor to obtain the corresponding homotopy equality.",
+   "uses": [
+    "new-integral-residue-ordinary-tensor-square",
+    "lem-weil-pbc-integral-reduction-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arbitrary additive monoidal functor F and coefficient isomorphism e:F(B)≅Bprime, expand the inverse tensor-single comparison on a quotient object. At the complex level, compare the two composites on each tensor summand using the inverse-image tensorator naturality and the map-single isomorphism in degree zero. Map this equality through the quotient, whose monoidal tensor comparison and map-homotopy factors are the identity on representatives.",
+   "uses": [
+    "new-integral-residue-tensor-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Combine the degreewise scalar equality with this generic tensor-single identity and cancel tensoring the homotopy coefficient isomorphism with its inverse. Reassemble functorial composition.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "new-integral-residue-ordinary-tensor-square",
+  "lem-weil-pbc-integral-reduction-tensor",
+  "new-integral-residue-tensor-model"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "E1",
+  "date": "2026-10-17",
+  "document": "Bhatt--Scholze and the existing scalar extension and monoidal constructions",
+  "place": "Remark 6.8.15 and Lemma 6.5.9(5), p. 51",
+  "note": "Ordinary module and homotopy calculations isolated from the derived counit calculation; no target or coefficient construction changed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of extension of scalars agrees with the balanced tensor product comparison for module objects over a sheaf of commutative rings",
+   "results": "[leanfinder] OK 8 hit(s): SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackIso, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-17",
+   "verdict": "The SheafOfModules results use a different module model. The transport tensorator identity is used with the library balanced-tensor comparisons; no result states this fixed square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Monoidal.transport_δ",
+   "results": "[loogle] OK 1 hit(s): CategoryTheory.Functor.Monoidal.transport_δ",
+   "date": "2026-10-17",
+   "verdict": "The SheafOfModules results use a different module model. The transport tensorator identity is used with the library balanced-tensor comparisons; no result states this fixed square."
+  },
+  {
+   "tool": "grep",
+   "query": "extendComapTensorIso|mapModComapMonoidal|tensorComparison_π",
+   "results": "[grep] OK 0 hit(s): ",
+   "date": "2026-10-17",
+   "verdict": "The SheafOfModules results use a different module model. The transport tensorator identity is used with the library balanced-tensor comparisons; no result states this fixed square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the isomorphism between tensoring cochain complexes with a single complex and degreewise tensoring under a monoidal functor",
+   "results": "[leansearch] OK 8 hit(s): CategoryTheory.Functor.Monoidal.μNatIso_hom_app, CategoryTheory.Functor.Monoidal.μNatIso, Mathlib.Tactic.Monoidal.naturality_tensorHom, CategoryTheory.Functor.Monoidal.commTensorRight, CategoryTheory.Functor.CoreMonoidal.μIso_hom_natural_right_assoc, CochainComplex.mapBifunctorShift₁Iso_hom_naturality₁, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.NatTrans.tensor_naturality",
+   "date": "2026-10-17",
+   "verdict": "The results supply general monoidal, scalar-extension or single-functor constructions, rather than the fixed ordinary and homotopy comparison of this node. The needed comparison is fully proved here from the library constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResidueScalarCounitModel",
+  "date": "2026-10-17",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Passage from the ordinary balanced-tensor square to its homotopy tensor-model normalization",
+   "via": [
+    "new-integral-residue-scalar-counit-model",
+    "new-integral-residue-scalar-geometry-component",
+    "new-integral-residue-scalar-route-model",
+    "new-integral-residue-tensor-geometry",
+    "new-integral-residue-projection-normalization",
+    "lem-weil-pbc-integral-residue-comparisons",
+    "lem-weil-pbc-integral-residue-exchange",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResidueOrdinaryTensorNormalization",
+  "file": "lean/Sheaf/Paper/IntegralResidueOrdinaryTensorNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.residueOrdinaryTensorPull_homotopy",
+  "statement": "theorem residueOrdinaryTensorPull_homotopy\n    (Λ A : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] [MonObj A] [IsCommMonObj A]\n    (φ : Λ ⟶ A) [IsMonHom φ] {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (P : HomotopyCategory\n      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))\n      (.up ℤ)) :\n    let F := (f)^*⟦Λ⟧\n    let TY := Mod.extendScalars (coefficientMap φ Y)\n    let SX := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (coefficientMap φ X)\n    let SY := Mod.comap (D := Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})\n      (coefficientMap φ Y)\n    let B := SY.obj (Mod.regular (condensedRingObj A Y))\n    let B' := SX.obj (Mod.regular (condensedRingObj A X))\n    let FP := (F.mapHomotopyCategory (.up ℤ)).obj P\n    let TP := (TY.mapHomotopyCategory (.up ℤ)).obj P\n    let _ := residueOrdinaryUpperStarMonoidal Λ f\n    let e : F.obj B ≅ B' :=\n      residueOrdinaryRestrictedRegularPullIso Λ A φ f\n    let eH : (F.mapHomotopyCategory (.up ℤ)).obj (Functor.tensorModelCoefficient B) ≅\n        Functor.tensorModelCoefficient B' :=\n      (F.mapHomotopyCategoryFactors (.up ℤ)).app\n        ((CochainComplex.singleFunctor _ 0).obj B) ≪≫\n      (HomotopyCategory.quotient _ (.up ℤ)).mapIso\n        ((F.mapCochainComplexSingleFunctor 0).app B ≪≫\n          (HomologicalComplex.single _ (.up ℤ) 0).mapIso e)\n    (NatTrans.mapHomotopyCategory (comapUpperStarIso φ f).inv (.up ℤ)).app TP ≫\n      (SX.mapHomotopyCategory (.up ℤ)).map\n        ((NatTrans.mapHomotopyCategory (pullIso φ f).inv (.up ℤ)).app P) ≫\n      (Mod.tensorPresentationHomotopyIso (coefficientMap φ X)).hom.app FP ≫\n      (homotopyTensorSingleIso B').inv.app FP ≫ eH.inv ▷ FP =\n    (F.mapHomotopyCategory (.up ℤ)).map\n        ((Mod.tensorPresentationHomotopyIso (coefficientMap φ Y)).hom.app P ≫\n          (homotopyTensorSingleIso B).inv.app P) ≫\n      ((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app\n        (Functor.tensorModelCoefficient B)).app P",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-17"
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "C-55e26",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261017T063346-L-528999",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "C-55e26",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261017T063346-L-528999",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical to published; moved residueOrdinaryRestrictedRegularPullIso identical signature/body, declared in change record; 3 delivered modules + 2 direct importers compile without errors/warnings (900 s limit, load ~80-91); axioms propext/Classical.choice/Quot.sound plus sorryAx inherited from upstream (no sorry in delivery); node lean.statement and proof_deps consistent with Lean; H10 fixed"
+ }
+}

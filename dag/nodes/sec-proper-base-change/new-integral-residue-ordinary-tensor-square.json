@@ -1,0 +1,149 @@
+{
+ "id": "new-integral-residue-ordinary-tensor-square",
+ "kind": "statement",
+ "title": "The ordinary scalar pull square agrees with balanced tensor pullback",
+ "statement": "For any morphism φ:Λ→A of commutative condensed ring objects, any scheme morphism f:X→Y, and any ordinary Λ_Y-module M, use extension, restriction, and ordinary upper-star from [new-integral-residue-pull-ordinary-unit]. Let B be the regular A_Y-module restricted to Λ_Y. Let e:f*B≅A_X restricted to Λ_X be inverse restriction/pullback on the regular module followed by the inverse monoidal unit of A-pullback, using [new-integral-residue-ordinary-monoidal]. With t the extension/restriction balanced-tensor isomorphism of [lem-weil-pbc-integral-reduction-tensor], the inverse restriction comparison at TY(M), followed by SX of the inverse scalar pull comparison and then tX at f*M, equals f*(tY at M), followed by the ordinary oplax tensor map for B,M and e tensor identity. The statement is for ordinary modules, and assumes no flatness or nonempty site.",
+ "stmt_deps": [
+  "new-integral-residue-pull-ordinary-unit",
+  "new-integral-residue-ordinary-monoidal",
+  "lem-weil-pbc-integral-reduction-tensor"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15 and proof of Lemma 6.5.9(5), p. 51; explicit formal normalization by derived counits (agent calculation, not a separate statement in the paper)"
+ },
+ "proof": [
+  {
+   "text": "The ordinary scalar unit identity determines the inverse scalar comparison on the extension unit. Forget module actions and use the inverse forget/pullback isomorphisms to express this as an equality of underlying sheaf maps.",
+   "uses": [
+    "new-integral-residue-pull-ordinary-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply pullback to the extension projection. The projection is residue-ring action after tensoring the extension unit. Pullback of the action, linearity of the inverse scalar comparison, and the preceding unit equality identify it with the ambient inverse-image tensorator, the coefficient pullback isomorphism tensor the underlying module identification, and the extension projection on X.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The constructed ordinary monoidal tensorator has precisely the analogous formula on the relative tensor projection. Its monoidal unit gives the same coefficient pullback isomorphism after the forgetful identifications.",
+   "uses": [
+    "new-integral-residue-ordinary-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Under the extension/restriction tensor presentation, extension projections become relative tensor projections. Naturality of the forget/pullback isomorphism and tensoring e show the two composites agree after the epimorphism obtained by applying inverse image to the extension projection. Cancel this epimorphism and use faithfulness of forgetting actions. The argument covers the zero module and empty scheme without additional assumptions.",
+   "uses": [
+    "lem-weil-pbc-integral-reduction-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-integral-residue-pull-ordinary-unit",
+  "new-integral-residue-ordinary-monoidal",
+  "lem-weil-pbc-integral-reduction-tensor"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "E1",
+  "date": "2026-10-17",
+  "document": "Bhatt--Scholze and the existing scalar extension and monoidal constructions",
+  "place": "Remark 6.8.15 and Lemma 6.5.9(5), p. 51",
+  "note": "Fully proved in Lean in this session. Generic action/projection identities avoid unfolding the tensor coequalizers during the final comparison; no statement or construction was weakened."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of extension of scalars agrees with the balanced tensor product comparison for module objects over a sheaf of commutative rings",
+   "results": "[leanfinder] OK 8 hit(s): SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackIso, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-17",
+   "verdict": "The SheafOfModules results use a different module model. The transport tensorator identity is used with the library balanced-tensor comparisons; no result states this fixed square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Monoidal.transport_δ",
+   "results": "[loogle] OK 1 hit(s): CategoryTheory.Functor.Monoidal.transport_δ",
+   "date": "2026-10-17",
+   "verdict": "The SheafOfModules results use a different module model. The transport tensorator identity is used with the library balanced-tensor comparisons; no result states this fixed square."
+  },
+  {
+   "tool": "grep",
+   "query": "extendComapTensorIso|mapModComapMonoidal|tensorComparison_π",
+   "results": "[grep] OK 0 hit(s): ",
+   "date": "2026-10-17",
+   "verdict": "The SheafOfModules results use a different module model. The transport tensorator identity is used with the library balanced-tensor comparisons; no result states this fixed square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of extension of scalars agrees with the balanced tensor product comparison for module objects over sheaves of commutative rings",
+   "results": "[leansearch] OK 8 hit(s): PresheafOfModules.pullback, SheafOfModules.pullback, ModuleCat.ExtendScalars.obj', PresheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, AlgebraicGeometry.Scheme.Modules.pullback",
+   "date": "2026-10-17",
+   "verdict": "The results supply general monoidal, scalar-extension or single-functor constructions, rather than the fixed ordinary and homotopy comparison of this node. The needed comparison is fully proved here from the library constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResidueScalarCounitModel",
+  "date": "2026-10-17",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Ordinary balanced-tensor normalization in the counit calculation for the residue base-change square",
+   "via": [
+    "new-integral-residue-scalar-counit-model",
+    "new-integral-residue-scalar-geometry-component",
+    "new-integral-residue-scalar-route-model",
+    "new-integral-residue-tensor-geometry",
+    "new-integral-residue-projection-normalization",
+    "lem-weil-pbc-integral-residue-comparisons",
+    "lem-weil-pbc-integral-residue-exchange",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResidueOrdinaryTensorSquare",
+  "file": "lean/Sheaf/Paper/IntegralResidueOrdinaryTensorSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.residueOrdinaryTensorPull_module",
+  "statement": "theorem residueOrdinaryTensorPull_module\n    (Λ A : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] [MonObj A] [IsCommMonObj A]\n    (φ : Λ ⟶ A) [IsMonHom φ] {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :\n    let F := (f)^*⟦Λ⟧\n    let TY := Mod.extendScalars (coefficientMap φ Y)\n    let SX := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (coefficientMap φ X)\n    let SY := Mod.comap (D := Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})\n      (coefficientMap φ Y)\n    let B := SY.obj (Mod.regular (condensedRingObj A Y))\n    let e := residueOrdinaryRestrictedRegularPullIso Λ A φ f\n    letI := residueOrdinaryUpperStarMonoidal Λ f\n    (comapUpperStarIso φ f).inv.app (TY.obj M) ≫\n      SX.map ((pullIso φ f).inv.app M) ≫\n      (Mod.extendComapTensorIso (coefficientMap φ X)).hom.app (F.obj M) =\n    F.map ((Mod.extendComapTensorIso (coefficientMap φ Y)).hom.app M) ≫\n      Functor.OplaxMonoidal.δ F B M ≫ e.hom ▷ F.obj M",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-17",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueOrdinaryTensorPull_module",
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueOrdinaryRestrictedRegularPullIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "C-55e26",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261017T063346-L-528999",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "C-55e26",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261017T063346-L-528999",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical to published; moved residueOrdinaryRestrictedRegularPullIso identical signature/body, declared in change record; 3 delivered modules + 2 direct importers compile without errors/warnings (900 s limit, load ~80-91); axioms propext/Classical.choice/Quot.sound plus sorryAx inherited from upstream (no sorry in delivery); node lean.statement and proof_deps consistent with Lean; H10 fixed"
+ }
+}
