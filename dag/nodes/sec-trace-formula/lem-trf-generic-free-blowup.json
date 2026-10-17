@@ -14,11 +14,174 @@
   "def-weil-pbc-module-finite-type-presentation",
   "def-weil-pbc-scheme-conventions",
   "def-nagata-admissible-blowup",
-  "def-trf-module-strict-transform"
+  "def-trf-module-strict-transform",
+  "def-pc-integral-scheme",
+  "def-pc-scheme-fibre",
+  "def-sc-generic-point",
+  "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We may make finitely many successive $U$-admissible blowups and at the end regard their composite as one: [lem-trf-module-admissible-blowup-calculus] (1) identifies both the composite blowup and the successive module strict transforms. Its (2) preserves quasi-coherence, finite type and qcqs of the base. The hypotheses over $U$ are unchanged, since the transform agrees with the original module there. The base-changed family is still affine (on affine charts its ring is a tensor product), flat by [lem-weil-pbc-flat-morphism-base-change], and of finite presentation by [lem-weil-pbc-finite-presentation-base-change-composition] (1). A new fibre is an extension of the corresponding old fibre by a residue-field extension, so is geometrically integral by the stated every-field-extension hypothesis.",
+   "uses": [
+    "lem-trf-module-admissible-blowup-calculus",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-finite-presentation-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tags 0811, first paragraph, and 080Y, remark-successive-blowups."
+   }
+  },
+  {
+   "text": "For $u\\in U$ let $\\xi_u$ be the unique generic point of the integral fibre and set $r(u)=\\dim_{\\kappa(\\xi_u)}(\\mathcal F_{\\xi_u}\\otimes\\kappa(\\xi_u))$. At this point the fibre local ring is a field: on a domain affine chart it is the localization at the zero prime, its fraction field. Thus the fibre stalk is flat. The assumed relative flatness and finite presentation on $X_U$ allow [lem-trf-flat-fibre-free-neighbourhood] to give a neighbourhood $W\\subset X_U$ of $\\xi_u$ where $\\mathcal F$ is free of rank $r(u)$. By [lem-weil-pbc-flat-lfp-open], $f(W)$ is open. For $v\\in f(W)$ the nonempty open $W_v$ contains the generic point of the irreducible fibre $X_v$, so $r(v)=r(u)$. Hence $r$ is locally constant. Quasi-compactness of $U$ gives finitely many values and a finite partition into quasi-compact clopen rank strata $U_i$.",
+   "uses": [
+    "lem-trf-flat-fibre-free-neighbourhood",
+    "lem-weil-pbc-flat-lfp-open",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0811, second paragraph; Tag 080Q, lemma-flat-and-free-at-point-fibre."
+   }
+  },
+  {
+   "text": "Choose a finite-type quasi-coherent ideal with zero set $S\\setminus U$ using [lemma-nagata-qc-open-complement-ideal-exists], and blow it up. By [det-nagata-boundary-divisor-cartier] its exceptional ideal is invertible, its zero set is exactly the complement of $U$, and $U$ is scheme-theoretically dense. We retain the names $S,U,X,\\mathcal F$ for the transformed data. The divisor and its invertibility persist under further admissible blowups by that same statement. This preliminary reduction is made before separating ranks, so that the existing separation-of-closures result suffices.",
+   "uses": [
+    "lemma-nagata-qc-open-complement-ideal-exists",
+    "det-nagata-boundary-divisor-cartier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 080Y, third paragraph, applied in Tag 0811, last paragraph."
+   }
+  },
+  {
+   "text": "For one stratum $U_i$ and the union of the other strata, apply the construction [def-nagata-separate-constructible-closed] and its theorem [lemma-nagata-separate-constructible-closed], with open $U$. These subsets are disjoint, closed and constructible in $U$: each is clopen and quasi-compact, with quasi-compact complement. Their inverse-image closures in the new base are disjoint. By [lemma-nagata-admissible-blowup-preserves-density], their union is the whole base, since it is a finite closed union containing the dense open $U$. Thus each closure is open as well as closed. Repeat globally for each remaining stratum against the union of the others; preimages preserve the earlier clopen separations. There are only finitely many strata. We obtain a finite disjoint decomposition of the base into qcqs open-and-closed pieces, each meeting $U$ in a single rank stratum. If $U$ is empty, its scheme-theoretic density makes the base empty and the conclusion already holds.",
+   "uses": [
+    "def-nagata-separate-constructible-closed",
+    "lemma-nagata-separate-constructible-closed",
+    "lemma-nagata-admissible-blowup-preserves-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0811, rank separation paragraph, using the existing separation-of-closures theorem and the density reduction of Tag 080Y."
+   }
+  },
+  {
+   "text": "Cover these pieces by finitely many affine opens $W_j=\\operatorname{Spec}R_j$ on which the invertible boundary ideal has a generator $h_j$ which is a nonzerodivisor. This follows from [lemma-nagata-invertible-ideal-is-effective-cartier] and [def-nagata-effective-cartier-ideal]; finite choice of charts uses quasi-compactness. Then $U\\cap W_j=D(h_j)$ and the generic rank there is a fixed integer $r_j$. Write $X_{W_j}=\\operatorname{Spec}B_j$ since $f$ is affine, and $\\mathcal F|_{X_{W_j}}=\\widetilde N_j$. The ring map $R_j\\to B_j$ is finitely presented by [lem-weil-pbc-lfp-affine-opens-finite-presentation], and flat: [def-weil-flat-morphism] makes the structure-module stalks relatively flat, and the affine-section equivalence in [def-pc-scheme-module-flat-over] gives flatness of $B_j$ over $R_j$. By [lem-weil-pbc-quasi-coherent-finite-type-affine], $N_j$ is finite and $(N_j)_{h_j}$ is finitely presented. Step 2 gives freeness of rank $r_j$ at every generic point over $D(h_j)$. These are precisely all the hypotheses of the affine helper.",
+   "uses": [
+    "lemma-nagata-invertible-ideal-is-effective-cartier",
+    "def-nagata-effective-cartier-ideal",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "def-weil-flat-morphism",
+    "def-pc-scheme-module-flat-over"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0811, last paragraph; Tag 01WS, lemma-characterize-effective-Cartier-divisor."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-affine-generic-rank-blowup] to $(R_j,B_j,N_j,h_j,r_j)$ and obtain the finite ideal $I_j$ with $V(I_j)=V(h_j)$. Its blowup $T_j\\to W_j$ is admissible by [def-nagata-admissible-blowup]. The charts $\\operatorname{Spec}R_j[I_j/a]$ for a finite set of generators $a$ cover it by [prop-nagata-affine-blowup-chart-cover]. On each such chart the strict-transform module is $(N_j\\otimes_{R_j}R_j[I_j/a])/a$-power torsion: by [def-trf-module-strict-transform] its kernel is sections vanishing off the exceptional set, which on this chart is $D(a)$; by the fraction equality in [def-weil-pbc-module-localization], those are exactly sections killed by some power of $a$. For every prime of the chart base the helper supplies a principal open $D(g)$, meeting that fibre, on which the module is free of rank $r_j$. The union of all these opens is an open $V_j\\subset X_{T_j}$ mapping onto $T_j$, and the strict transform is finite locally free on $V_j$.",
+   "uses": [
+    "lem-trf-affine-generic-rank-blowup",
+    "def-nagata-admissible-blowup",
+    "prop-nagata-affine-blowup-chart-cover",
+    "def-trf-module-strict-transform",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tags 0810 and 0811, affine conclusion; Tag 080D, definition-strict-transform, and its affine description."
+   }
+  },
+  {
+   "text": "For each $j$, extend $T_j\\to W_j$ to a $U$-admissible blowup $E_j\\to S$ using [def-nagata-extended-admissible-blowup] and [lemma-nagata-extend-admissible-blowup]. The opens $W_j$ are quasi-compact, and $U\\cap W_j$ is quasi-compact because $S$ is quasi-separated and both opens are quasi-compact. The theorem identifies $E_j|_{W_j}$ with $T_j$. Restriction of the strict-transform quotient to an open is the quotient defined on that open, so $E_j$ has the good locus $V_j$ over $W_j$.",
+   "uses": [
+    "def-nagata-extended-admissible-blowup",
+    "lemma-nagata-extend-admissible-blowup",
+    "def-trf-module-strict-transform"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 080Y, final paragraph; Tag 080M, lemma-extend-admissible-blowups."
+   }
+  },
+  {
+   "text": "Here is the finite common-refinement argument rather than a new lemma. For two admissible centres $J,K$, [def-nagata-blowup-product-comparison] defines the iterated blowup as first blowing up $J$, then the extended ideal $K\\mathcal O_{\\operatorname{Bl}_J S}$. By [thm-nagata-blowup-product-ideal] this iterated blowup is the blowup of $JK$. The second centre is finite type (pull back its finitely many local generators) and is the unit ideal over $U$, so the map to $\\operatorname{Bl}_J S$ is itself admissible by [def-nagata-admissible-blowup]. Interchanging $J,K$ gives the same assertion for the other map. Iterate this binary construction over the finite family $E_j$: at each stage use the product of the centres already treated with the next centre. It gives one $U$-admissible blowup $T\\to S$ and maps $T\\to E_j$ which are composites of admissible blowups; [lem-trf-module-admissible-blowup-calculus] (1) makes each composite an admissible blowup and identifies the successive module transforms.",
+   "uses": [
+    "def-nagata-blowup-product-comparison",
+    "thm-nagata-blowup-product-ideal",
+    "def-nagata-admissible-blowup",
+    "lem-trf-module-admissible-blowup-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 080Y, final paragraph; expansion of Tag 080N, lemma-dominate-admissible-blowups."
+   }
+  },
+  {
+   "text": "Restrictions of the comparison blowups to the relevant opens are still admissible blowups: [def-nagata-blowup-flat-base-change-map] and [thm-nagata-blowup-flat-base-change] identify them with blowups in the restricted ideals. Open immersions are flat because their local ring maps are isomorphisms. Pull $V_j$ back along $T|_{W_j}\\to T_j=E_j|_{W_j}$. On $V_j$, its finite locally free module is flat over $T_j$: locally its module is $B^{\\oplus r_j}$ with $B$ flat over the base ring, so tensoring an injection gives a direct sum of injections. Flatness of the base-changed family is supplied by [lem-weil-pbc-flat-morphism-base-change]. Apply [lem-trf-module-admissible-blowup-calculus] (2) to this restricted module: its next strict transform is its ordinary pullback, which is still free in the pulled-back trivializations. Its (1) identifies this module with the final strict transform of $\\mathcal F$. The pulled-back open still surjects onto $T|_{W_j}$ by [lem-weil-pbc-surjective-base-change]. Their union $V$ is open, its image is all of $T$ because the $W_j$ cover $S$, and the final transform is finite locally free on it. Finally calculus (1) combines $T\\to S$ with all preliminary blowups into the required single blowup of the original base.",
+   "uses": [
+    "def-nagata-blowup-flat-base-change-map",
+    "thm-nagata-blowup-flat-base-change",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-trf-module-admissible-blowup-calculus",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0811, last paragraph, with the local-to-global argument of Tag 080Y."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-module-admissible-blowup-calculus",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-trf-flat-fibre-free-neighbourhood",
+  "lem-weil-pbc-flat-lfp-open",
+  "def-pc-integral-scheme",
+  "lemma-nagata-qc-open-complement-ideal-exists",
+  "det-nagata-boundary-divisor-cartier",
+  "def-nagata-separate-constructible-closed",
+  "lemma-nagata-separate-constructible-closed",
+  "lemma-nagata-admissible-blowup-preserves-density",
+  "lemma-nagata-invertible-ideal-is-effective-cartier",
+  "def-nagata-effective-cartier-ideal",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "def-weil-flat-morphism",
+  "def-pc-scheme-module-flat-over",
+  "lem-trf-affine-generic-rank-blowup",
+  "def-nagata-admissible-blowup",
+  "prop-nagata-affine-blowup-chart-cover",
+  "def-trf-module-strict-transform",
+  "def-weil-pbc-module-localization",
+  "def-nagata-extended-admissible-blowup",
+  "lemma-nagata-extend-admissible-blowup",
+  "def-nagata-blowup-product-comparison",
+  "thm-nagata-blowup-product-ideal",
+  "def-nagata-blowup-flat-base-change-map",
+  "thm-nagata-blowup-flat-base-change",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0811, lemma-flatten-module-pre; Tag 080Y, remark-successive-blowups. The boundary is principalized before separating ranks, allowing reuse of the existing separation-of-closures theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +217,115 @@
    "results": "[grep] OK 0 hit(s); ; none states the generic free blowup assertion. Full responses retained in search-results/generic-free-blowup-grep.txt.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Admissible blowup makes a finite type module free on an open meeting every geometrically integral fibre",
+   "results": "{\"t\": \"2026-10-17T18:52:28Z\", \"tool\": \"leanfinder\", \"query\": \"Admissible blowup makes a finite type module free on an open meeting every geometrically integral fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.ZariskisMainProperty\", \"Module.FinitePresentation.exists_free_localizedModule_powers\", \"Algebra.QuasiFinite.of_isIntegral_of_finiteType\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"Module.Finite.of_isLocalized_maximal\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.QuasiFiniteAt\", \"RingHom.QuasiFinite.of_isIntegral_of_finiteType\"], \"digest\": \"b2177f26512da8e3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The free-locus localization lemmas do not construct a base blowup or a module strict transform. No exact geometric generic-free blowup theorem was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic freeness on each integral fibre after a U admissible modification of base",
+   "results": "{\"t\": \"2026-10-17T18:53:02Z\", \"tool\": \"leanfinder\", \"query\": \"Generic freeness on each integral fibre after a U admissible modification of base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.ZariskisMainProperty.of_isIntegral\", \"Algebra.ZariskisMainProperty\", \"Module.comap_freeLocus_le\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"instHasGoingDownOfIsDomainOfFaithfulSMulOfIsIntegralOfIsIntegrallyClosed\", \"Algebra.ZariskisMainProperty.restrictScalars\", \"Module.mem_freeLocus_iff_tensor\", \"Module.mem_freeLocus\"], \"digest\": \"8ea3954cf759e933\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The free-locus localization lemmas do not construct a base blowup or a module strict transform. No exact geometric generic-free blowup theorem was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Preliminary blowing up of the base gives a fibrewise nonempty locally free locus of a coherent sheaf",
+   "results": "{\"t\": \"2026-10-17T18:52:28Z\", \"tool\": \"leansearch\", \"query\": \"Preliminary blowing up of the base gives a fibrewise nonempty locally free locus of a coherent sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.basicOpen_subset_freeLocus_iff\", \"AlgebraicGeometry.StructureSheaf.instInhabitedLocalizations\", \"AlgebraicGeometry.IsAffineOpen.isLocalization_of_eq_basicOpen\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.mk\", \"AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.imageBasicOpen\", \"AlgebraicGeometry.instIsPreimmersionFiberι\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\"], \"digest\": \"f9aaf015b81b86ec\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The free-locus localization lemmas do not construct a base blowup or a module strict transform. No exact geometric generic-free blowup theorem was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"strictTransform\"",
+   "results": "{\"t\": \"2026-10-17T18:52:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"strictTransform\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The free-locus localization lemmas do not construct a base blowup or a module strict transform. No exact geometric generic-free blowup theorem was found."
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|strict_transform|flattening",
+   "results": "{\"t\": \"2026-10-17T18:52:32Z\", \"tool\": \"grep\", \"query\": \"strictTransform|strict_transform|flattening\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Combinatorics/Enumerative/Composition.lean\", \"Mathlib/Data/Matrix/Block.lean\", \"Mathlib/Geometry/Convex/ConvexSpace/Defs.lean\", \"Mathlib/Geometry/Convex/ConvexSpace/Defs.lean\", \"Mathlib/Geometry/Convex/ConvexSpace/Defs.lean\", \"Mathlib/Geometry/Convex/ConvexSpace/Defs.lean\", \"Mathlib/Geometry/Convex/ConvexSpace/Defs.lean\"], \"digest\": \"73c9ca1b843ee459\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The free-locus localization lemmas do not construct a base blowup or a module strict transform. No exact geometric generic-free blowup theorem was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Admissible blowup makes a finite type module free on an open meeting every geometrically integral fibre",
+   "results": "{\"t\": \"2026-10-17T18:52:28Z\", \"tool\": \"leanfinder\", \"query\": \"Admissible blowup makes a finite type module free on an open meeting every geometrically integral fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.ZariskisMainProperty\", \"Module.FinitePresentation.exists_free_localizedModule_powers\", \"Algebra.QuasiFinite.of_isIntegral_of_finiteType\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"Module.Finite.of_isLocalized_maximal\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.QuasiFiniteAt\", \"RingHom.QuasiFinite.of_isIntegral_of_finiteType\"], \"digest\": \"b2177f26512da8e3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The free-locus localization lemmas do not construct a base blowup or a module strict transform. No exact geometric generic-free blowup theorem was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic freeness on each integral fibre after a U admissible modification of base",
+   "results": "{\"t\": \"2026-10-17T18:53:02Z\", \"tool\": \"leanfinder\", \"query\": \"Generic freeness on each integral fibre after a U admissible modification of base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.ZariskisMainProperty.of_isIntegral\", \"Algebra.ZariskisMainProperty\", \"Module.comap_freeLocus_le\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"instHasGoingDownOfIsDomainOfFaithfulSMulOfIsIntegralOfIsIntegrallyClosed\", \"Algebra.ZariskisMainProperty.restrictScalars\", \"Module.mem_freeLocus_iff_tensor\", \"Module.mem_freeLocus\"], \"digest\": \"8ea3954cf759e933\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The free-locus localization lemmas do not construct a base blowup or a module strict transform. No exact geometric generic-free blowup theorem was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Preliminary blowing up of the base gives a fibrewise nonempty locally free locus of a coherent sheaf",
+   "results": "{\"t\": \"2026-10-17T18:52:28Z\", \"tool\": \"leansearch\", \"query\": \"Preliminary blowing up of the base gives a fibrewise nonempty locally free locus of a coherent sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.basicOpen_subset_freeLocus_iff\", \"AlgebraicGeometry.StructureSheaf.instInhabitedLocalizations\", \"AlgebraicGeometry.IsAffineOpen.isLocalization_of_eq_basicOpen\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.mk\", \"AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.imageBasicOpen\", \"AlgebraicGeometry.instIsPreimmersionFiberι\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\"], \"digest\": \"f9aaf015b81b86ec\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The free-locus localization lemmas do not construct a base blowup or a module strict transform. No exact geometric generic-free blowup theorem was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"strictTransform\"",
+   "results": "{\"t\": \"2026-10-17T18:52:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"strictTransform\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The free-locus localization lemmas do not construct a base blowup or a module strict transform. No exact geometric generic-free blowup theorem was found."
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|strict_transform|flattening",
+   "results": "{\"t\": \"2026-10-17T18:52:32Z\", \"tool\": \"grep\", \"query\": \"strictTransform|strict_transform|flattening\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Combinatorics/Enumerative/Composition.lean\", \"Mathlib/Data/Matrix/Block.lean\", \"Mathlib/Geometry/Convex/ConvexSpace/Defs.lean\", \"Mathlib/Geometry/Convex/ConvexSpace/Defs.lean\", \"Mathlib/Geometry/Convex/ConvexSpace/Defs.lean\", \"Mathlib/Geometry/Convex/ConvexSpace/Defs.lean\", \"Mathlib/Geometry/Convex/ConvexSpace/Defs.lean\"], \"digest\": \"73c9ca1b843ee459\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The free-locus localization lemmas do not construct a base blowup or a module strict transform. No exact geometric generic-free blowup theorem was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Admissible blowup makes a finite type module free on an open meeting every geometrically integral fibre",
+   "results": "{\"t\": \"2026-10-17T18:52:28Z\", \"tool\": \"leanfinder\", \"query\": \"Admissible blowup makes a finite type module free on an open meeting every geometrically integral fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.ZariskisMainProperty\", \"Module.FinitePresentation.exists_free_localizedModule_powers\", \"Algebra.QuasiFinite.of_isIntegral_of_finiteType\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"Module.Finite.of_isLocalized_maximal\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.QuasiFiniteAt\", \"RingHom.QuasiFinite.of_isIntegral_of_finiteType\"], \"digest\": \"b2177f26512da8e3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The free-locus localization lemmas do not construct a base blowup or a module strict transform. No exact geometric generic-free blowup theorem was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic freeness on each integral fibre after a U admissible modification of base",
+   "results": "{\"t\": \"2026-10-17T18:53:02Z\", \"tool\": \"leanfinder\", \"query\": \"Generic freeness on each integral fibre after a U admissible modification of base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.ZariskisMainProperty.of_isIntegral\", \"Algebra.ZariskisMainProperty\", \"Module.comap_freeLocus_le\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"instHasGoingDownOfIsDomainOfFaithfulSMulOfIsIntegralOfIsIntegrallyClosed\", \"Algebra.ZariskisMainProperty.restrictScalars\", \"Module.mem_freeLocus_iff_tensor\", \"Module.mem_freeLocus\"], \"digest\": \"8ea3954cf759e933\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The free-locus localization lemmas do not construct a base blowup or a module strict transform. No exact geometric generic-free blowup theorem was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Preliminary blowing up of the base gives a fibrewise nonempty locally free locus of a coherent sheaf",
+   "results": "{\"t\": \"2026-10-17T18:52:28Z\", \"tool\": \"leansearch\", \"query\": \"Preliminary blowing up of the base gives a fibrewise nonempty locally free locus of a coherent sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.basicOpen_subset_freeLocus_iff\", \"AlgebraicGeometry.StructureSheaf.instInhabitedLocalizations\", \"AlgebraicGeometry.IsAffineOpen.isLocalization_of_eq_basicOpen\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.mk\", \"AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.imageBasicOpen\", \"AlgebraicGeometry.instIsPreimmersionFiberι\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\"], \"digest\": \"f9aaf015b81b86ec\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The free-locus localization lemmas do not construct a base blowup or a module strict transform. No exact geometric generic-free blowup theorem was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"strictTransform\"",
+   "results": "{\"t\": \"2026-10-17T18:52:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"strictTransform\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The free-locus localization lemmas do not construct a base blowup or a module strict transform. No exact geometric generic-free blowup theorem was found."
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|strict_transform|flattening",
+   "results": "{\"t\": \"2026-10-17T18:52:32Z\", \"tool\": \"grep\", \"query\": \"strictTransform|strict_transform|flattening\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Combinatorics/Enumerative/Composition.lean\", \"Mathlib/Data/Matrix/Block.lean\", \"Mathlib/Geometry/Convex/ConvexSpace/Defs.lean\", \"Mathlib/Geometry/Convex/ConvexSpace/Defs.lean\", \"Mathlib/Geometry/Convex/ConvexSpace/Defs.lean\", \"Mathlib/Geometry/Convex/ConvexSpace/Defs.lean\", \"Mathlib/Geometry/Convex/ConvexSpace/Defs.lean\"], \"digest\": \"73c9ca1b843ee459\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: The free-locus localization lemmas do not construct a base blowup or a module strict transform. No exact geometric generic-free blowup theorem was found."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-flattening-module-by-admissible-blowup",
@@ -84,5 +352,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-generic-free-blowup",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0811 into nine steps, with two statement-only inputs (080Q fibre criterion and 0810 affine helper). Reused the existing separation-of-closures theorem after principalizing the boundary and wrote the common refinement induction from the existing product-blowup isomorphism. Checked every citation and all hypotheses; statement unchanged.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 proof paragraph 3: apply lemma-flatten-module-pre before subtracting a free module. This split realizes the preliminary generic-free blowup used in Stacks 0815, expanding Stacks 0811 along its rank/decomposition/affine-helper route.",
+  "tool_uses": [
+   {
+    "node": "det-nagata-boundary-divisor-cartier",
+    "why": "Generic scheme or module tool used in the Stacks 0811 reductions; no node of this unit states this input, and it does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-nagata-boundary-divisor-cartier"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-a6d37aaf8",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-a6d37aaf8 (reviewer sub-agent of L); spot-checked: I read all of it. The item's statement matches Stacks 0811 (flat.tex lemma-flatten-module-pre) hypothesis by hypothesis and is not weakened. New lem-trf-flat-fibre-free-neighbourhood is exactly 080Q (more-morphisms.tex lemma-flat-and-free-at-point-fibre). New lem-trf-affine-generic-rank-blowup is exactly 0810 (lemma-helper-blowup-affine-space). Its rewordings are equivalent to the source: q_p as the preimage of the zero prime of B⊗κ(p) equals pB, and 'g nonzero in the fibre ring' equals g∉p'S', both because B/pB is flat over R/p. I tested 0810 on R=k with N=B/(x); on R=k[t] with N=B/(tx) and I=(t); and on nilpotent h. I tested 080Q on r=0 and on a dual-numbers counterexample without relative flatness. rg over dag/nodes finds no existing node for 080Q, 0810 or the same statements. Both children are strictly smaller than the item and do not restate any of its clauses. Steps 1-9 match the cited statements: rank strata via 080Q and flat-lfp-open; the boundary made Cartier before the existing separation-of-closures theorem, with density preserved so the closures are clopen; the affine hypotheses (finite presentation, flatness via def-pc-scheme-module-flat-over, finiteness via the qc-affine lemma); 0810 on the charts, where the strict transform is the a-power torsion quotient; the extension lemma (also valid under its blueprint_update); the product-ideal common refinement (elementary, acceptable); flat base change of the blowups and calculus (1)/(2) for gluing. One implicit point in step 6: D(g) meets the fibre because the fibre ring is a domain. It is elementary, so I made no change. The dependency graph is acyclic. Everything is on the route except det-nagata-boundary-divisor-cartier, a declared tool use that I accept. No SGA, no fixes, no dropped nodes."
  }
 }
