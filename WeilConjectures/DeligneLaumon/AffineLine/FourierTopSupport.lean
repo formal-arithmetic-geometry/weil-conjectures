@@ -96,11 +96,13 @@ lemma eq_zero_of_isLE_of_isGE {K L : WeilComplex k₀ l X} (f : K ⟶ L) {a b : 
     rw [Functor.map_zero]
     exact _root_.DerivedCategory.TStructure.t.zero (X := K.obj) (Y := L.obj) _ a b hab)
 
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- A Weil sheaf placed in degree zero is `≥ 0`. -/
 lemma isGE_toComplex_obj (G : WeilSheaf k₀ l X) : (WeilSheaf.toComplex.obj G).obj.IsGE 0 :=
   (isGE_iff_isZero_homologySheaf _ 0).2 fun _ ha ↦
     isZero_homologySheaf_singleComplex ha.ne G
 
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- A Weil sheaf placed in degree `n`, as the shift `G[-n]`, is `≥ n`. -/
 lemma isGE_shift_toComplex_obj (G : WeilSheaf k₀ l X) (n : ℤ) :
     ((WeilSheaf.toComplex.obj G)⟦-n⟧).obj.IsGE n :=

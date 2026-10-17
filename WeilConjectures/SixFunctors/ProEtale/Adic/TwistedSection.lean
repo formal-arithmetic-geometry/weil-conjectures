@@ -85,7 +85,8 @@ lemma factorGerm_eq_globalSectionsTransport {P W Y : Scheme.{u}} {w : W ⟶ Y} {
 the restriction along `s`. -/
 lemma globalSectionsToUpperStar_app_comp_germ {P Y : Scheme.{u}} {s : P ⟶ Y} {y : P ⟶ P}
     (h : y ≫ s = s) (F : Sheaf (Scheme.ProEt.topology Y) A) :
-    (globalSectionsToUpperStar A s).app F ≫ factorGerm A h F = (globalSectionsToUpperStar A s).app F := by
+    (globalSectionsToUpperStar A s).app F ≫ factorGerm A h F =
+      (globalSectionsToUpperStar A s).app F := by
   rw [factorGerm, ← Category.assoc, ← globalSectionsToUpperStar_comp, Category.assoc,
     ← Functor.map_comp]
   simp only [upperStarFactor, Iso.trans_inv, NatTrans.comp_app, Iso.hom_inv_id_app_assoc,
@@ -136,7 +137,8 @@ lemma globalSectionsTransport_comp_germ {S Y Y' : Scheme.{u}} {L : Type u} [Fiel
   let A := WeilCoefficients.{u} l
   have hσ' : σ ≫ π = π ≫ 𝟙 S := by rw [hσ, Category.comp_id]
   have hg' : g ≫ w = w ≫ 𝟙 Y := by rw [hg, Category.comp_id]
-  rw [factorGerm_eq_globalSectionsTransport A hσ hσ', factorGerm_eq_globalSectionsTransport A hg hg']
+  rw [factorGerm_eq_globalSectionsTransport A hσ hσ',
+    factorGerm_eq_globalSectionsTransport A hg hg']
   have h₁ : (σ ≫ z') ≫ w = π ≫ (𝟙 S ≫ z) := by
     rw [Category.assoc, hz, ← Category.assoc, hσ, Category.id_comp]
   have h₂ : (z' ≫ g) ≫ w = π ≫ (z ≫ 𝟙 Y) := by

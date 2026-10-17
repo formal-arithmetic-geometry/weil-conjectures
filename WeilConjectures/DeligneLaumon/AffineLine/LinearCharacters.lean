@@ -18,7 +18,7 @@ For `a ∈ k̄` let `ℒ_{ψ(a x)} = (a ·)^* ℒ_ψ` be the geometric linear Ar
 - `ℒ_{ψ(a x)}|_Ū` has rank one, hence is an irreducible local system
   (`AlgebraicGeometry.isIrreducibleAdicLocalSystem_upperStar_geometricSMul_artinSchreier`);
 - for `a ≠ b` the restrictions `ℒ_{ψ(a x)}|_Ū` and `ℒ_{ψ(b x)}|_Ū` are not isomorphic
-  (`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.isEmpty_iso_upperStar_geometricSMul_artinSchreier`):
+  (`WeilSheaf.LisseOnDenseOpen.isEmpty_iso_upperStar_geometricSMul_artinSchreier`):
   tensoring an isomorphism with `ℒ_{ψ(-b x)}` would make `ℒ_{ψ((a - b) x)}|_Ū` constant, but it is
   not even a quotient of a constant sheaf on the punctured disc at `∞`
   (`AlgebraicGeometry.affineLine.not_epi_upperStar_laurentPoint_artinSchreierImage`).
@@ -71,8 +71,10 @@ noncomputable def affinePlane.geometricPair (a b : AlgebraicClosure k₀) :
     (g := (Scheme.specAlgebraicClosure k₀).hom)
     (pullback.lift (f := affineLine k₀ ↘ Spec (CommRingCat.of k₀))
       (g := affineLine k₀ ↘ Spec (CommRingCat.of k₀))
-      (affineLine.geometricSMul k₀ a ≫ (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberProj)
-      (affineLine.geometricSMul k₀ b ≫ (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberProj)
+      (affineLine.geometricSMul k₀ a ≫
+        (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberProj)
+      (affineLine.geometricSMul k₀ b ≫
+        (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberProj)
       (by simp only [Category.assoc, Scheme.Hom.geometricFiber_condition,
         affineLine.geometricSMul_comp_geometricFiberToAlgebraicClosure_assoc]))
     (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure (by
@@ -226,7 +228,8 @@ theorem finrank_geometricStalkFunctor_upperStar_geometricSMul_artinSchreier
   have h₄ := ProEtale.finrank_geometricStalkFunctor_upperStar (affineLine.geometricSMul k₀ 0) L
     (s ≫ g)
   have h₅ : Module.finrank (PadicAlgCl l) ((WeilCoefficients.toModuleCat l).obj
-      ((ProEtale.geometricStalkFunctor l (s ≫ g)).obj ((affineLine.geometricSMul k₀ 0)^*ᵃ[l].obj L))) =
+      ((ProEtale.geometricStalkFunctor l (s ≫ g)).obj
+        ((affineLine.geometricSMul k₀ 0)^*ᵃ[l].obj L))) =
       Module.finrank (PadicAlgCl l) ((WeilCoefficients.toModuleCat l).obj
         ((ProEtale.geometricStalkFunctor l (s ≫ g)).obj (ProEtale.AdicSheaf.unit l _))) :=
     ((ProEtale.geometricStalkFunctor l (s ≫ g) ⋙
