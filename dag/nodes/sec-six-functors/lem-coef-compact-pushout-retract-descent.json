@@ -24,7 +24,7 @@
  },
  "kind": "statement",
  "title": "Compact pushout presentations survive arrow retracts",
- "statement": "Fix a universe $\\mathcal U$; small means $\\mathcal U$-small. Let $\\tau\\in\\mathcal U$ be an uncountable regular cardinal, where regular means that a union of fewer than $\\tau$ sets each of cardinality less than $\\tau$ has cardinality less than $\\tau$. A category is $\\tau$-filtered if every diagram with fewer than $\\tau$ morphisms has a cocone. An object is $\\tau$-presentable if its Hom functor preserves small $\\tau$-filtered colimits. Let $\\mathcal A$ be an ordinary category with small Hom sets and all small colimits [def-weil-pbc-category-colimit], generated under small $\\tau$-filtered colimits by a small family of $\\tau$-presentable objects. A pushout means a colimit of a span. Let $u:P\\to Q$ be a morphism between $\\tau$-presentable objects. Let $g:V\\to W$ be its pushout along some $P\\to V$. Suppose $g':V'\\to W'$ is a retract of $g$ in the arrow category: there are commuting squares $s:g'\\to g$ and $r:g\\to g'$ with $rs=1_{g'}$ (the arrow category has arrows as objects and commuting squares as morphisms). There exist $\\tau$-presentable objects $P',Q'$, a map $u':P'\\to Q'$ and a map $P'\\to V'$ such that $g'$ is a pushout of $u'$ along that map and $u'$ belongs to the weakly saturated closure of $\\{u\\}$. Here the weakly saturated closure is the smallest arrow class containing $u$ and all isomorphisms and closed under pushouts, small continuous transfinite compositions and arrow retracts; continuous means that each nonzero limit stage is the colimit of its predecessors. No presentability of $V,V',W,W'$ is assumed.",
+ "statement": "Fix a universe $\\mathcal U$; small means $\\mathcal U$-small. Let $\\tau\\in\\mathcal U$ be an uncountable regular cardinal, where regular means that a union of fewer than $\\tau$ sets each of cardinality less than $\\tau$ has cardinality less than $\\tau$. A category is $\\tau$-filtered if every diagram with fewer than $\\tau$ morphisms has a cocone. An object is $\\tau$-presentable if its Hom functor preserves small $\\tau$-filtered colimits. Let $\\mathcal A$ be an ordinary category with small Hom sets and all small colimits [def-weil-pbc-category-colimit], with a small family of $\\tau$-presentable objects such that every object is the colimit of a small $\\tau$-filtered diagram of objects of this family. A pushout means a colimit of a span. Let $u:P\\to Q$ be a morphism between $\\tau$-presentable objects. Let $g:V\\to W$ be its pushout along some $P\\to V$. Suppose $g':V'\\to W'$ is a retract of $g$ in the arrow category: there are commuting squares $s:g'\\to g$ and $r:g\\to g'$ with $rs=1_{g'}$ (the arrow category has arrows as objects and commuting squares as morphisms). There exist $\\tau$-presentable objects $P',Q'$, a map $u':P'\\to Q'$ and a map $P'\\to V'$ such that $g'$ is a pushout of $u'$ along that map and $u'$ belongs to the weakly saturated closure of $\\{u\\}$. Here the weakly saturated closure is the smallest arrow class containing $u$ and all isomorphisms and closed under pushouts, small continuous transfinite compositions and arrow retracts; continuous means that each nonzero limit stage is the colimit of its predecessors. No presentability of $V,V',W,W'$ is assumed.",
  "source": {
   "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
   "place": "HTT Lemma A.1.5.10, printed pp. 805-806; read online 2026-10-17, not archived in literature/. No Stacks tag states this result."
@@ -32,9 +32,102 @@
  "stmt_deps": [
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write the components of the arrow retraction as $s_0:V'\\to V$, $r_0:V\\to V'$, $s_1:W'\\to W$, $r_1:W\\to W'$. Form $Y=V'\\amalg_V W$ using $r_0$ and $g$, with maps $h:V'\\to Y$ and $k:W\\to Y$. The pushout universal property [def-weil-pbc-category-colimit] identifies $h$ with the pushout of $u$ along $P\\to V\\xrightarrow{r_0}V'$. The maps $g'$ and $r_1$ induce $b:Y\\to W'$, since $g'r_0=r_1g$. Put $c=ks_1:W'\\to Y$. Then $bc=r_1s_1=1$, $cg'=kgs_0=hr_0s_0=h$, and $bh=g'$. Hence $e=cb:Y\\to Y$ is idempotent and $eh=h$. From now on write $X=V'$, $a:P\\to X$ for the new attaching map, so $Y=X\\amalg_P Q$, and retain the specified split image $X\\xrightarrow{g'}W'$ of $h$. This changes neither $u$ nor the desired conclusion.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT A.1.5.10, first paragraph of proof: reduction to a common source"
+   }
+  },
+  {
+   "text": "By the hypothesis on $\\mathcal A$, choose a small $\\tau$-filtered diagram of objects $X_i$ of the given family with colimit $X$; each $X_i$ is $\\tau$-presentable. Apply [lem-coef-cardinal-filtered-poset-reindex] to replace the index category by a small $\\tau$-filtered poset $I$, preserving the specified cocone $x_i:X_i\\to X$. Since $P$ is $\\tau$-presentable, $\\operatorname{Hom}(P,X)=\\operatorname{colim}_i\\operatorname{Hom}(P,X_i)$; the representative clause of [lem-weil-pbc-filtered-colimit-sets-elementwise] gives $i_0$ and $a_{i_0}:P\\to X_{i_0}$ representing $a$. Restrict to $I_{\\geq i_0}$ and put $a_i=t_{i_0i}a_{i_0}$. This tail remains small and $\\tau$-filtered: any fewer than $\\tau$ indices together with $i_0$ have an upper bound. It still presents $X$: a cocone on the tail extends to $i$ by choosing $j\\geq i,i_0$ and composing $X_i\\to X_j$ with its component; a common upper bound proves independence and compatibility. Thus there is a compatible attaching map $P\\to X_i$ at every stage.",
+   "uses": [
+    "lem-coef-cardinal-filtered-poset-reindex",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT A.1.5.10, second paragraph: filtered presentation under the compact source"
+   }
+  },
+  {
+   "text": "Set $Y_i=X_i\\amalg_P Q$, with structure maps $h_i:X_i\\to Y_i$, $d_i:Q\\to Y_i$, transitions $v_{ij}:Y_i\\to Y_j$ and maps $\\lambda_i:Y_i\\to Y$. The cocone $(Y,(\\lambda_i))$ is colimiting: a compatible family $Y_i\\to Z$ is precisely a compatible family $X_i\\to Z$ and a single $Q\\to Z$ agreeing on $P$. Indeed all the $Q$ components agree because any two indices have a common upper bound. Such data are precisely a map $X\\to Z$ and a map $Q\\to Z$ agreeing on $P$, hence precisely a map $Y\\to Z$ by [def-weil-pbc-category-colimit]. Each $Y_i$ is $\\tau$-presentable by [lem-coef-ordinary-small-colimit-presentable], applied to the finite span $X_i\\leftarrow P\\to Q$. No presentability of $X$ or $Y$ is asserted.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-coef-ordinary-small-colimit-presentable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT A.1.5.10, second paragraph: pushout-stage presentation and presentability"
+   }
+  },
+  {
+   "text": "Let $d:Q\\to Y$ be the pushout map. By $\\tau$-presentability of $Q$ and the representative clause of [lem-weil-pbc-filtered-colimit-sets-elementwise], the map $ed:Q\\to Y$ factors as $\\lambda_i j$ with $j:Q\\to Y_i$. The two maps $ju,h_ia_i:P\\to Y_i$ become equal in $Y$, because $\\lambda_i ju=edu=eha=ha=\\lambda_i h_ia_i$. Apply the same node's eventual-equality clause to the diagram $k\\mapsto\\operatorname{Hom}(P,Y_k)$, using $\\tau$-presentability of $P$, to obtain $k\\geq i$ with $v_{ik}ju=v_{ik}h_ia_i=h_kt_{ik}a_i=h_ka_k$, where $t_{ik}:X_i\\to X_k$ is the transition. Set $j_k=v_{ik}j$; then $\\lambda_kj_k=ed$ and $j_ku=h_ka_k$. Replace $i,j$ by $k,j_k$. The pushout property now defines $e_i:Y_i\\to Y_i$ with $e_ih_i=h_i$ and $e_id_i=j$. On the two pushout legs one checks $\\lambda_i e_i=e\\lambda_i$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT A.1.5.10, second paragraph: factor the endomorphism and enforce the attaching equation"
+   }
+  },
+  {
+   "text": "For $k\\geq i$, define $e_k:Y_k\\to Y_k$ by $e_kh_k=h_k$ and $e_kd_k=v_{ik}j$. Its attaching equation follows from that of $j$, and checking on the legs gives $e_kv_{ik}=v_{ik}e_i$ and $\\lambda_ke_k=e\\lambda_k$. The maps $e_ij,j:Q\\to Y_i$ have equal composites to $Y$, since $\\lambda_i e_i j=e\\lambda_i j=e^2d=ed=\\lambda_i j$. By $\\tau$-presentability of $Q$ and the eventual-equality clause of [lem-weil-pbc-filtered-colimit-sets-elementwise], choose $k\\geq i$ with $v_{ik}e_ij=v_{ik}j$. It follows that $e_k^2d_k=e_kv_{ik}j=v_{ik}e_ij=v_{ik}j=e_kd_k$, while $e_k^2h_k=h_k=e_kh_k$. The pushout property therefore gives $e_k^2=e_k$. Relabel this stage $i$. This explicitly supplies the source's 'enlarging once more': it does not assume that the transition maps are monomorphisms.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT A.1.5.10, end of printed p. 805 and beginning of p. 806: descend idempotence"
+   }
+  },
+  {
+   "text": "Split the idempotent without assuming idempotent completeness: take its coequalizer $q:Y_i\\to Q'$ of $e_i$ and $1_{Y_i}$ [def-weil-pbc-category-colimit]. Since $e_i^2=e_i$, there is $t:Q'\\to Y_i$ with $tq=e_i$. Also $qtq=qe_i=q$; coequalizer maps are epimorphisms directly by uniqueness in their universal property, so $qt=1$. The object $Q'$ is $\\tau$-presentable by [lem-coef-ordinary-small-colimit-presentable], since this coequalizer is a finite colimit of copies of the $\\tau$-presentable object $Y_i$. Put $P'=X_i$ and $u'=qh_i:P'\\to Q'$. The equalities $tu'=e_ih_i=h_i$ and $qt=1$ exhibit $u'$ as an arrow retract of $h_i$, with identity maps on $X_i$. As $h_i$ is a pushout of $u$, closure under pushouts and arrow retracts puts $u'$ in the weakly saturated closure of $\\{u\\}$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-coef-ordinary-small-colimit-presentable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT A.1.5.10, printed p. 806: split the finite-stage idempotent and obtain presentability and weak saturation"
+   }
+  },
+  {
+   "text": "The desired square has top $u':X_i\\to Q'$, left $x_i:X_i\\to X=V'$, bottom $g':X\\to W'$, and right $\\delta=b\\lambda_it:Q'\\to W'$. It commutes: $\\delta q=b\\lambda_i e_i=b e\\lambda_i=b\\lambda_i$, hence $\\delta u'=b\\lambda_i h_i=g'x_i$. Verify its pushout property explicitly [def-weil-pbc-category-colimit]. Given $z:X\\to Z$ and $w:Q'\\to Z$ with $zx_i=wu'$, the pushout square $X_i\\to Y_i$, $X\\to Y$ gives a unique $F:Y\\to Z$ with $Fh=z$ and $F\\lambda_i=wq$. To check this pushout assertion directly, maps $z:X\\to Z$ and $f_i:Y_i\\to Z$ with $zx_i=f_ih_i$ give $z$ and $f_id_i:Q\\to Z$ agreeing on $P$, since $za=zx_ia_i=f_ih_ia_i=f_id_iu$. The pushout $Y=X\\amalg_P Q$ supplies a unique $F$ with $Fh=z$ and $Fd=f_id_i$; its restrictions to the two legs of $Y_i$ give $F\\lambda_i=f_i$. Conversely any $F$ gives this compatible pair, proving the assertion. Apply it with $f_i=wq$. Now $Fe=F$: their restrictions to $X$ agree as $eh=h$, and their restrictions to $Y_i$ agree as $e\\lambda_i=\\lambda_ie_i$ and $qe_i=q$. Thus $Fc:W'\\to Z$ satisfies $(Fc)g'=z$ and $(Fc)\\delta=Fcb\\lambda_it=Fe\\lambda_it=wqt=w$. For uniqueness, if $l:W'\\to Z$ satisfies these two equations, then $lb:Y\\to Z$ has restrictions $z$ on $X$ and $wq$ on $Y_i$ (use $b\\lambda_i=\\delta q$), so $lb=F$ and $l=lbc=Fc$. This proves the required pushout, and completes all clauses with the original source $V'$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT A.1.5.10, final paragraph: write out why the split-image square is still a pushout"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-coef-cardinal-filtered-poset-reindex",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-coef-ordinary-small-colimit-presentable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT A.1.5.10, printed pp. 805-806, consulted online; not archived in literature/. The split spells out the finite-stage equalities and the universal property."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -98,10 +191,66 @@
    "results": "{\"t\": \"2026-10-16T23:39:36Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.RetractArrow, \\\"pushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "Second reading: no match. LeanFinder returns presentability of object retracts and closure of lifting classes. Read Presentable/Retracts.lean:28-47 and SmallObject/Basic.lean:117-131: neither constructs a compact arrow representing a prescribed retract of a compact-arrow pushout. The targeted grep and Loogle query have no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "retract|Retract",
+   "results": "{\"t\": \"2026-10-17T00:37:05Z\", \"tool\": \"grep\", \"query\": \"retract|Retract\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/Retracts.lean\", \"Mathlib/CategoryTheory/Presentable/Retracts.lean\", \"Mathlib/CategoryTheory/Presentable/Retracts.lean\", \"Mathlib/CategoryTheory/Presentable/Retracts.lean\", \"Mathlib/CategoryTheory/Presentable/Retracts.lean\", \"Mathlib/CategoryTheory/Presentable/CardinalFilteredPresentation.lean\"], \"digest\": \"e7496878f054c843\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned types and read Presentable/Retracts.lean:28-47, Presentable/Limits.lean:185-208 and MorphismProperty/Limits.lean:65-85. Presentability of a retract is only a subsidiary fact; pushouts and their stability do not descend a specified retract to a compact-stage arrow. The second semantic phrasing returned unrelated compact-topological results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Retract of a pushout of a morphism between presentable objects descends to a presentable morphism",
+   "results": "{\"t\": \"2026-10-17T00:37:05Z\", \"tool\": \"leansearch\", \"query\": \"Retract of a pushout of a morphism between presentable objects descends to a presentable morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.pushouts\", \"CategoryTheory.MorphismProperty.pushouts_le\", \"CategoryTheory.Retract.isCardinalPresentable\", \"CategoryTheory.Retract\", \"CategoryTheory.MorphismProperty.of_pushout_inr_of_descendsAlong\", \"CategoryTheory.MorphismProperty.IsStableUnderRetracts.of_retract\", \"CategoryTheory.instIsStableUnderRetractsIsCardinalPresentable\", \"CategoryTheory.MorphismProperty.instIsStableUnderCobaseChangePushouts\"], \"digest\": \"4ba061b31b38e3c1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned types and read Presentable/Retracts.lean:28-47, Presentable/Limits.lean:185-208 and MorphismProperty/Limits.lean:65-85. Presentability of a retract is only a subsidiary fact; pushouts and their stability do not descend a specified retract to a compact-stage arrow. The second semantic phrasing returned unrelated compact-topological results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a locally presentable category an arrow retract of a pushout of a morphism between presentable objects is again a pushout of a presentable morphism in its weak saturation",
+   "results": "{\"t\": \"2026-10-17T00:37:05Z\", \"tool\": \"leanfinder\", \"query\": \"In a locally presentable category an arrow retract of a pushout of a morphism between presentable objects is again a pushout of a presentable morphism in its weak saturation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.IsCardinalForSmallObjectArgument.hasPushouts\", \"CategoryTheory.instIsStableUnderRetractsIsCardinalPresentable\", \"CategoryTheory.SmallObject.hasPushouts\", \"CategoryTheory.Retract.isCardinalPresentable\", \"CategoryTheory.ObjectProperty.ColimitOfShape.isCardinalPresentable\", \"CategoryTheory.isClosedUnderColimitsOfShape_isCardinalPresentable\", \"CategoryTheory.MorphismProperty.isClosedUnderColimitsOfShape_isLocal\", \"CategoryTheory.Limits.ColimitPresentation.isCardinalPresentable\"], \"digest\": \"ac976949ae0d8a3f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned types and read Presentable/Retracts.lean:28-47, Presentable/Limits.lean:185-208 and MorphismProperty/Limits.lean:65-85. Presentability of a retract is only a subsidiary fact; pushouts and their stability do not descend a specified retract to a compact-stage arrow. The second semantic phrasing returned unrelated compact-topological results."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.RetractArrow, CategoryTheory.IsCardinalPresentable",
+   "results": "{\"t\": \"2026-10-17T00:37:05Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.RetractArrow, CategoryTheory.IsCardinalPresentable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned types and read Presentable/Retracts.lean:28-47, Presentable/Limits.lean:185-208 and MorphismProperty/Limits.lean:65-85. Presentability of a retract is only a subsidiary fact; pushouts and their stability do not descend a specified retract to a compact-stage arrow. The second semantic phrasing returned unrelated compact-topological results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split idempotent on a pushout of a compact map descends to a compact stage",
+   "results": "{\"t\": \"2026-10-17T00:37:05Z\", \"tool\": \"leanfinder\", \"query\": \"A split idempotent on a pushout of a compact map descends to a compact stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsCompactOpenCovered.of_comp\", \"CompHausLike.hasPullbacksOfInclusions\", \"CompHausLike.HasExplicitPullbacksOfInclusions\", \"CompactT2.ExtremallyDisconnected.projective\", \"CompHausLike.coproductIsColimit\", \"CompHausLike.HasExplicitPullbacksOfInclusions.hasProp\", \"CompHausLike.finitaryExtensive\", \"CompactT2.Projective\"], \"digest\": \"cff872c344227743\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned types and read Presentable/Retracts.lean:28-47, Presentable/Limits.lean:185-208 and MorphismProperty/Limits.lean:65-85. Presentability of a retract is only a subsidiary fact; pushouts and their stability do not descend a specified retract to a compact-stage arrow. The second semantic phrasing returned unrelated compact-topological results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cobase changes of morphisms with presentable domain and codomain closed under arrow retracts",
+   "results": "{\"t\": \"2026-10-17T01:08:49Z\", \"tool\": \"leanfinder\", \"query\": \"Cobase changes of morphisms with presentable domain and codomain closed under arrow retracts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.IsStableUnderComposition.ind_of_preIndSpreads\", \"CategoryTheory.instIsStableUnderRetractsIsCardinalPresentable\", \"CategoryTheory.MorphismProperty.ind_iff_exists\", \"CategoryTheory.MorphismProperty.llp_isStableUnderCobaseChange\", \"CategoryTheory.MorphismProperty.IsStableUnderCobaseChange\", \"CategoryTheory.MorphismProperty.isClosedUnderColimitsOfShape_isLocal\", \"CategoryTheory.MorphismProperty.rlp_isStableUnderBaseChange\", \"CategoryTheory.MorphismProperty.instCodescendsAlongOfIsStableUnderCobaseChangeOfHasOfPostcompPropertyOfRespectsLeft\"], \"digest\": \"cbac168208050dc2\"}",
+   "date": "2026-10-17",
+   "verdict": "Second reader: no whole-result match. Read MorphismProperty/Ind.lean:68-75,151-179: finite accessibility or PreIndSpreads are additional assumptions and do not give this cardinal-presentable retract descent. Presentable/Retracts.lean:28-47 proves only presentability of object retracts. The Loogle and targeted grep searches returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RetractArrow\", \"pushout\"",
+   "results": "{\"t\": \"2026-10-17T01:08:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"RetractArrow\\\", \\\"pushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "Second reader: no whole-result match. Read MorphismProperty/Ind.lean:68-75,151-179: finite accessibility or PreIndSpreads are additional assumptions and do not give this cardinal-presentable retract descent. Presentable/Retracts.lean:28-47 proves only presentability of object retracts. The Loogle and targeted grep searches returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "retract.*[Pp]ushout|[Pp]ushout.*retract|[Ii]dempotent",
+   "results": "{\"t\": \"2026-10-17T01:08:55Z\", \"tool\": \"grep\", \"query\": \"retract.*[Pp]ushout|[Pp]ushout.*retract|[Ii]dempotent\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "Second reader: no whole-result match. Read MorphismProperty/Ind.lean:68-75,151-179: finite accessibility or PreIndSpreads are additional assumptions and do not give this cardinal-presentable retract descent. Presentable/Retracts.lean:28-47 proves only presentability of object retracts. The Loogle and targeted grep searches returned no hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-weak-saturation-tree-presentation",
@@ -109,5 +258,20 @@
   "group": "Q15"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-compact-pushout-retract-descent",
+  "worker": "stage1",
+  "summary": "Checked the exact HTT A.1.5.10 statement and gave its common-source, compact-stage idempotent proof with all equality and pushout details. Reused three existing Mathlib leaves and the colimit definition; no new nodes. No Lean attachment and no statement change.",
+  "blueprint": "Auxiliary ordinary-category input under the existing model-recognition chain serving prop-coef-integral-exceptional-adjoint: the paragraph beginning For K in D^b_c(X,R), derived coefficient adjunction before its first displayed inverse-limit comparison. Preserves the inherited unit and ancestry; implements HTT A.1.5.10 used in the tree-presentation step, rather than altering the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-d1aad4431",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-d1aad4431 (reviewer sub-agent of L); spot-checked: I read the whole item, all 7 steps, the 4 cited nodes (def-weil-pbc-category-colimit and three Mathlib leaves: cardinal-filtered-poset-reindex at Directed.lean:528 plus Final.lean:294, filtered-colimit-sets-elementwise, ordinary-small-colimit-presentable at Limits.lean:185) and the parent lem-coef-weak-saturation-tree-presentation, whose step 9 is the only citer. HTT A.1.5.10 is not in literature/; I read it, printed pp. 805-806, in a local 2012 HTT PDF left in /tmp by another review, so its provenance is unverified. Hypotheses and all three conclusions match; requiring tau uncountable is a harmless specialization, and no endpoint compactness is added. I recomputed every equation. Step 1: bc=1, cg'=h, bh=g', so e=cb is idempotent with eh=h. Step 4: lambda_i ju = edu = eha = ha. Step 5: e_k v_ik = v_ik e_i on both legs, and e_k^2 = e_k with no monic transition maps assumed. Step 6: coequalizer gives tq=e_i and qt=1; u' is an arrow retract of h_i, which is a pushout of u, so u' is in wsat({u}). Step 7: delta q = b lambda_i via be=b; Fe=F; mediator Fc; uniqueness l=lbc. Small cases (u an isomorphism, Sets with empty->point, empty index, tau=aleph_1) all hold. No new nodes, no duplicate (grep for A.1.5.10 and retract+pushout over dag/nodes), no cycle, no off-route use, no tool_uses needed, no SGA. FIX: the hypothesis 'generated under small tau-filtered colimits by a small family' could be read as iterated closure, while step 2 needs every object to be a single tau-filtered colimit of the family (otherwise an E1 gap). I rewrote it with the meaning of HTT Def 5.4.2.1, word for word the hypothesis the parent already assumes, so the citer is unaffected, and aligned step 2's first sentence. The whole corrected node is in fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
+ }
 }

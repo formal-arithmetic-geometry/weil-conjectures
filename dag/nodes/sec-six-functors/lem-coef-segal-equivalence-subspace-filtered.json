@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, coherent finite-stage mapping adjunction; finite-data calculus used by Proposition 3.3.2 of Gepner–Haugseng: recognizing equivalences from a finite inverse witness before computing mapping-space colimits.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, coherent finite-stage mapping adjunction; finite inverse witnesses are represented at a common filtered stage before the mapping-space colimit calculation.",
    "via": [
     "lem-coef-cat-infinity-filtered-finite-calculus",
     "lem-coef-filtered-operadic-unstraightening",
@@ -31,9 +31,70 @@
   "def-coef-presentable-infinity-category",
   "lem-coef-complete-segal-quasicategory-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the Segal-space conventions in [lem-coef-complete-segal-quasicategory-comparison]: composition is induced by the Segal equivalences, and invertibility means a two-sided inverse up to composition homotopies. A simplicial map preserves identities, composition and those homotopies, so it preserves equivalence edges. Put A_i=(X_i)_eq and B_i=(X_i)_1. The inclusions form a coherent diagram A_i→B_i and induce A=colim_i A_i→B=colim_i B_i=X_1, factoring through X_eq.",
+   "uses": [
+    "lem-coef-complete-segal-quasicategory-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/9811037",
+    "place": "Sections 5.3–5.8 for inverse witnesses; agent finite-pullback argument using filtered finite-limit exactness"
+   }
+  },
+  {
+   "text": "For a Segal object $Y$, construct its finite inverse-witness space explicitly, using homotopy limits throughout. Put $U=Y_0\\times Y_0$, with coordinates $(x,y)$. In spaces over $U$, let $F$ and $G$ be the pullbacks of $Y_1\\to Y_0^2$ along $(x,y)\\mapsto(x,y)$ and $(x,y)\\mapsto(y,x)$, and put $P=F\\times_U G$. Let $T_x$ and $T_y$ be the pullbacks of the vertex map $Y_2\\to Y_0^3$ along $(x,y)\\mapsto(x,y,x)$ and $(x,y)\\mapsto(y,x,y)$. Consecutive edges define maps $T_x\\to P$ and $T_y\\to P$, ordering the edges of the second map as $(f,g)$ rather than $(g,f)$. Put $T=T_x\\times_P T_y$. Define $L_x$ and $L_y$ by pulling $Y_1\\to Y_0^2$ back along $(x,y)\\mapsto(x,x)$ and $(x,y)\\mapsto(y,y)$, and put $H=L_x\\times_U L_y$. The two middle faces define $T\\to H$, and the two degeneracies define a section $e:U\\to H$. Now set $V(Y)=T\\times_H U$, with these maps, in spaces over $U$. Its points are $f:x\\to y$, $g:y\\to x$, two triangle lifts, and paths in the fixed-endpoint mapping spaces from their composite edges to $s_0(x)$ and $s_0(y)$. The Segal condition makes the triangle-lift maps equivalences over $P$; the composition and two-sided-inverse convention of [lem-coef-complete-segal-quasicategory-comparison] therefore says that the image of $V(Y)\\to Y_1$ meets exactly the equivalence components. Every displayed object is obtained by finitely many products and homotopy pullbacks from $Y_0,Y_1,Y_2$, and every displayed map comes from simplicial operators, diagonals or permutations. Thus $V$ is functorial on coherent diagrams without choosing composition maps. No contractibility of the inverse-witness space is asserted.",
+   "uses": [
+    "lem-coef-complete-segal-quasicategory-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/9811037",
+    "place": "Sections 5.3–5.8 for inverse witnesses; agent finite-pullback argument using filtered finite-limit exactness"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-spaces-kappa-limit-filtered-colimit] with κ=aleph_0 to each of the finitely many products and pullbacks defining V. The hypothesis is exactly the given filteredness of I, and the pointwise colimit hypothesis identifies the three inputs with X_0,X_1,X_2, compatibly with their face and degeneracy maps. Consequently colim_i V(X_i)→V(X) is an equivalence compatible with the maps to X_1. Every component of a colimit of spaces is represented at a stage: π_0 preserves colimits because maps from a space to a discrete set are exactly functions on its components (apply the colimit universal property to all discrete targets). Concretely, the resulting set colimit is the quotient of the disjoint union of the component sets by the relations induced by arrows of I, so each component of V(X) comes from some V(X_i). Step 2 implies that every equivalence component of X_1 is met by A→X_1.",
+   "uses": [
+    "lem-coef-spaces-kappa-limit-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/9811037",
+    "place": "Sections 5.3–5.8 for inverse witnesses; agent finite-pullback argument using filtered finite-limit exactness"
+   }
+  },
+  {
+   "text": "Each A_i is a union of components of B_i, so its diagonal A_i→A_i×^h_{B_i}A_i is an equivalence. Apply [lem-coef-spaces-kappa-limit-filtered-colimit] at κ=aleph_0 to this pullback diagram. It identifies colim_i(A_i×^h_{B_i}A_i) with A×^h_B A; hence the diagonal A→A×^h_B A is an equivalence. This says every homotopy fiber T of A→B is empty or contractible: if t∈T, the diagonal equivalence T→T×T makes the first projection an equivalence with contractible fiber at t, and that fiber is T. Therefore A→B identifies A with a union of whole components of B, rather than merely giving a bijection on selected points.",
+   "uses": [
+    "lem-coef-spaces-kappa-limit-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/math/9811037",
+    "place": "Sections 5.3–5.8 for inverse witnesses; agent finite-pullback argument using filtered finite-limit exactness"
+   }
+  },
+  {
+   "text": "By step 1 this union is contained in X_eq. By step 3 it meets every component of X_eq, and step 4 says it contains each component it meets with its entire homotopy type. Hence A→X_eq is an equivalence. All maps were constructed from the same degree-one cocone, so this is the stated canonical equivalence over X_1. The construction allows empty edge spaces and non-injective transition maps, and never assumes completeness or discreteness. A filtered I is nonempty by definition; this is the only index nonemptiness used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/math/9811037",
+    "place": "Sections 5.3–5.8 for inverse witnesses; agent finite-pullback argument using filtered finite-limit exactness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-complete-segal-quasicategory-comparison",
+  "lem-coef-spaces-kappa-limit-filtered-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/math/9811037",
+  "place": "Sections 5.1, 5.3, 5.5 and 5.7, Lemma 5.8, for the Segal inverse convention only. The filtered-colimit argument and finite witness construction are written here by the agent, using the statement of lem-coef-spaces-kappa-limit-filtered-colimit (HTT Proposition 5.3.3.3). No theorem of Rezk is claimed to state the filtered-colimit assertion."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -90,10 +151,31 @@
    "results": "{\"t\": \"2026-10-16T22:51:16Z\", \"tool\": \"leanfinder\", \"query\": \"A filtered homotopy colimit of Segal spaces preserves the subspace of isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegalCore\", \"SSet.StrictSegal.ofCore\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.StrictSegal.truncation\", \"SSet.StrictSegal.isStrictSegal\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.StrictSegalCore.mk.inj\"], \"digest\": \"17788936b30f6c75\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits concern StrictSegal simplicial sets and ordinary category nerves; Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:443 defines StrictSegalCore as finite composition data, not the subspace of invertible edges of a Segal space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The maximal subgroupoid or core preserves filtered colimits of infinity categories",
+   "results": "{\"t\": \"2026-10-17T01:08:07Z\", \"tool\": \"leanfinder\", \"query\": \"The maximal subgroupoid or core preserves filtered colimits of infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Subgroupoid.IsWide\", \"CategoryTheory.Subgroupoid\", \"CategoryTheory.ObjectProperty.isFiltered_costructuredArrow_colimitsCardinalClosure_ι\", \"CategoryTheory.Subgroupoid.instCompleteLattice\", \"CategoryTheory.Subgroupoid.coe\", \"CategoryTheory.Subgroupoid.instTop\", \"CategoryTheory.coreCategory\", \"CategoryTheory.IsFiltered.instIsFilteredOrEmptyFullSubcategoryFilteredClosure\"], \"digest\": \"0f5abe53891448ab\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. The returned declarations concern ordinary groupoids, corepresentable cocones or ordinary filtered categories; none states the coherent Segal-space equivalence-subspace comparison. The homotopy-colimit/SegalSpace source grep returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*[Cc]olimit|[Cc]olimit.*homotopy|SegalSpace",
+   "results": "{\"t\": \"2026-10-17T01:08:16Z\", \"tool\": \"grep\", \"query\": \"homotopy.*[Cc]olimit|[Cc]olimit.*homotopy|SegalSpace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. The returned declarations concern ordinary groupoids, corepresentable cocones or ordinary filtered categories; none states the coherent Segal-space equivalence-subspace comparison. The homotopy-colimit/SegalSpace source grep returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Core\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-17T01:08:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"Core\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsColimit.ofCorepresentableBy\", \"CategoryTheory.Limits.IsColimit.corepresentableBy\", \"CategoryTheory.Functor.CoconeTypes.IsColimitCore\", \"CategoryTheory.Functor.CoconeTypes.IsColimit.isColimitCore\", \"CategoryTheory.Functor.CoconeTypes.IsColimitCore.down\", \"CategoryTheory.Functor.CoconeTypes.IsColimitCore.isColimit\", \"CategoryTheory.Functor.CoconeTypes.IsColimitCore.desc\", \"CategoryTheory.Functor.CoconeTypes.IsColimit.isColimitCore_desc\"], \"digest\": \"6f5a395b0168422f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. The returned declarations concern ordinary groupoids, corepresentable cocones or ordinary filtered categories; none states the coherent Segal-space equivalence-subspace comparison. The homotopy-colimit/SegalSpace source grep returned no hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cat-infinity-filtered-finite-calculus",
@@ -101,5 +183,20 @@
   "group": "Q87"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-segal-equivalence-subspace-filtered",
+  "worker": "stage1",
+  "summary": "Five-step finite inverse-witness proof. Filtered finite-limit exactness transports the finite witness space and preserves the diagonal characterization of a union of components. This proves the whole-space comparison over X_1, without introducing a redundant finite-data node.",
+  "blueprint": "Expands the finite inverse-witness argument required by the coherent finite-stage mapping calculation in proof paragraph 2 of prop-coef-integral-exceptional-adjoint."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-4024b51f2",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-4024b51f2 (reviewer sub-agent of L); spot-checked: Read everything in full: AGENTS, stages/1-dag, brief-stage1, GOAL, dag-sync, delivery-errors A-F, packet and report, the item, the full statements of the cited nodes lem-coef-complete-segal-quasicategory-comparison, lem-coef-spaces-kappa-limit-filtered-colimit (HTT 5.3.3.3), def-cbc-enhanced-diagrams-cones and def-coef-presentable-infinity-category, the citer lem-coef-cat-infinity-filtered-finite-calculus step 2, and the unit sk-prop-sf-biduality-general. The delivery adds no new nodes and leaves the statement unchanged. Both cited nodes are in the same unit, so there are no tool_uses, and there is no SGA and no cycle. The statement is true. Its hypothesis that the colimit is Segal follows anyway from finite-limit exactness, is harmless, and the citer checks it. Small cases checked: empty diagram, N->N nerves, BN->BZ->BZ with invertibility appearing late, and a group mapping to the trivial group. Step 1: a simplicial map preserves invertibility, by the comparison node's conventions. Step 2: I recomputed the witness space V=T x_H U. The triangles over (x,y,x) and (y,x,y) have correctly ordered edges. The pullback over U is fibrewise, so V records homotopies with fixed endpoints in Map(x,x) and Map(y,y). Its image is exactly Y_eq, and V is a finite limit of Y0, Y1, Y2. Step 3: HTT 5.3.3.3 at aleph_0 gives colim V(X_i) = V(X). pi_0 commutes with colimits, so every component of X_eq is hit from some stage. Step 4: exactness for the cospan gives the diagonal equivalence A -> A x_B A. The fibre argument then shows A -> X_1 is a monomorphism, an inclusion of whole components. Step 5: A equals X_eq over X_1, by the canonical map. No duplicate of this statement exists in the DAG. The Rezk source is online-only and only gives conventions; the proof is marked as agent-written and the WANTED line is recorded. No fixes were made."
+ }
 }
