@@ -66,19 +66,51 @@
    }
   },
   {
-   "text": "Let $M=\\{\\partial\\Delta^m\\hookrightarrow\\Delta^m:m\\geq0\\}$. Define a small set $\\Lambda_0$ consisting of all inner horns and the maps $e_\\varepsilon\\square b$ for $b\\in M$, $\\varepsilon=0,1$; define $\\Lambda_{r+1}=\\{\\delta\\square a:a\\in\\Lambda_r\\}$, and let $\\mathrm{An}$ be the weakly saturated closure of $\\bigcup_{r\\geq0}\\Lambda_r$. All generators belong to $\\mathcal T$ by steps 2-3, so $\\mathrm{An}\\subseteq\\mathcal T$. This is a small generating set of monomorphisms in the input universe, since it is a countable union of small sets and uses only small products and pushouts. We verify the two interval axioms of [lem-coef-presheaf-cylinder-model-recognition]. By [lem-coef-infinity-monomorphism-boundary-cells], every monomorphism is built from boundary inclusions by coproducts, pushouts and countable composition. For a fixed map $v$, the operation $v\\square(-)$ preserves these colimit attachments and retracts: degreewise product with a fixed set preserves colimits, and the pushout formula gives the corresponding pushout for each attachment. More explicitly, along an increasing chain $K_\\alpha$ with final union $L$, filter the source-to-target map for $v:U\\to V$ by $(V\\times K_\\alpha)\\cup(U\\times L)$; the successor attachment is a pushout of $v\\square(K_\\alpha\\to K_{\\alpha+1})$, and limits are unions. A cobase change of a map gives a cobase change of its pushout product by the same union formula. Thus $e_\\varepsilon\\square j\\in\\mathrm{An}$ for every monomorphism $j$. For the second axiom, each generator $a\\in\\Lambda_r$ satisfies $\\delta\\square a\\in\\Lambda_{r+1}\\subseteq\\mathrm{An}$. The displayed filtration with $v=\\delta$ expresses the pushout product of a composite of cell attachments as successive pushouts of the pushout products of those attachments, with unions at limit stages. Cobase changes are carried to cobase changes by the union formula above. Functoriality carries a section-retraction pair of arrows to a section-retraction pair, so retracts are preserved as well. Closure of $\\mathrm{An}$ under these operations therefore gives $\\delta\\square a\\in\\mathrm{An}$ for every $a\\in\\mathrm{An}$. Coproducts can be expressed as composites of the individual pushouts after well-ordering the small indexing set.",
+   "text": "Let $M=\\{\\partial\\Delta^m\\hookrightarrow\\Delta^m:m\\geq0\\}$. Let $\\Lambda_0$ consist of the inner horns and $e_\\varepsilon\\square b$ for $b\\in M$, $\\varepsilon=0,1$; put $\\Lambda_{r+1}=\\{\\delta\\square a:a\\in\\Lambda_r\\}$ and $\\mathrm{An}=\\operatorname{wsat}(\\bigcup_{r\\geq0}\\Lambda_r)$. Here weak saturation has the meaning specified by [lem-coef-presheaf-cylinder-model-recognition]. The family $\\Lambda_0$ is indexed by the countable sets of pairs $(n,i)$ with $0<i<n$ and $(m,\\varepsilon)$. Each subsequent family is an image of the preceding small indexing set; its objects use finite products and pushouts of small sets degreewise. Their countable union is small in the input universe. Each pushout product is a monomorphism since its domain is the union of two subsets of its target. Thus this is a small family of monomorphisms.",
    "uses": [
-    "lem-coef-presheaf-cylinder-model-recognition",
+    "lem-coef-presheaf-cylinder-model-recognition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Example 2.4.13, equations (2.4.13.1)-(2.4.13.3), printed pp. 54-55; the existing saturation node supplies the hidden cellular arguments."
+   }
+  },
+  {
+   "text": "Every member of $\\Lambda_0$ lies in $\\mathcal T$ by step 2. If every member of $\\Lambda_r$ lies in $\\mathcal T$, step 3 applied with the monomorphism $\\delta$ puts every member of $\\Lambda_{r+1}$ in $\\mathcal T$; permutation of product factors identifies $a\\square\\delta$ with $\\delta\\square a$. Induction gives $\\bigcup_r\\Lambda_r\\subseteq\\mathcal T$. Weak saturation of $\\mathcal T$ from step 3 then gives $\\mathrm{An}\\subseteq\\mathcal T$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Example 2.4.13, equations (2.4.13.1)-(2.4.13.3), printed pp. 54-55; the existing saturation node supplies the hidden cellular arguments."
+   }
+  },
+  {
+   "text": "Fix an endpoint inclusion $e_\\varepsilon$. Apply [lem-coef-infinity-right-anodyne-saturation] with $W=\\mathrm{An}$ and fixed first map $e_\\varepsilon$: the class $Q_\\varepsilon=\\{j\\text{ monic}:e_\\varepsilon\\square j\\in\\mathrm{An}\\}$ is weakly saturated. It contains every boundary inclusion because $e_\\varepsilon\\square b\\in\\Lambda_0$. By [lem-coef-infinity-monomorphism-boundary-cells], every monomorphism is a countable composite of pushouts of small coproducts of boundaries. A coproduct of maps in a weakly saturated class is a composite of their individual cobase changes, after well-ordering the small index set. Hence every monomorphism belongs to $Q_\\varepsilon$, proving the endpoint interval axiom.",
+   "uses": [
+    "lem-coef-infinity-right-anodyne-saturation",
     "lem-coef-infinity-monomorphism-boundary-cells"
    ],
    "elementary": false,
    "source": {
     "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
-    "place": "Example 2.4.13, with the generating set taken to be all inner horns; the recursive generators and both closure axioms are checked explicitly."
+    "place": "Example 2.4.13, equations (2.4.13.1)-(2.4.13.3), printed pp. 54-55; the existing saturation node supplies the hidden cellular arguments."
    }
   },
   {
-   "text": "Apply [lem-coef-presheaf-cylinder-model-recognition] to presheaves on the simplex category, the interval $J$ and the class $\\mathrm{An}$ of step 4. The endpoint union $\\Delta^0\\amalg\\Delta^0\\to J$ is a monomorphism, because its degreewise images are the distinct constant simplices at 0 and 1. The needed interval axioms were verified in step 4. The naive fibrant objects are precisely the quasicategories. Indeed $\\mathrm{An}$ contains all inner horns, so a naive fibrant object fills them. Conversely, for a quasicategory $C$ and $a:U\\hookrightarrow V$ in $\\mathrm{An}\\subseteq\\mathcal T$, the map $C^V\\to C^U$ is surjective on vertices by [def-weil-pbc-trivial-kan-fibration]; hence every map $U\\to C$ extends strictly over $V$. This is exactly the required terminal-map lifting property. We have therefore constructed a model structure with monomorphism cofibrations, fibrant objects the quasicategories, and weak equivalences $W_J$ detected by bijectivity of $[B,C]_J\\to[A,C]_J$ for every quasicategory $C$. The bracket denotes maps modulo finite chains of $J$-homotopies, as defined in the recognition node. Every inner horn is a trivial cofibration, since it belongs to $\\mathrm{An}$.",
+   "text": "The endpoint union $\\delta:\\Delta^0\\amalg\\Delta^0\\hookrightarrow J$ is monic: in each degree its images are the distinct constant simplices at $0$ and $1$. By [lem-coef-infinity-right-anodyne-saturation], applied with $W=\\mathrm{An}$ and fixed first map $\\delta$, the class $Q=\\{a\\text{ monic}:\\delta\\square a\\in\\mathrm{An}\\}$ is weakly saturated. It contains every generator $a\\in\\Lambda_r$, since $\\delta\\square a\\in\\Lambda_{r+1}$. Therefore it contains their weakly saturated closure $\\mathrm{An}$. This proves the second interval axiom $\\delta\\square\\mathrm{An}\\subseteq\\mathrm{An}$ required by [lem-coef-presheaf-cylinder-model-recognition].",
+   "uses": [
+    "lem-coef-infinity-right-anodyne-saturation",
+    "lem-coef-presheaf-cylinder-model-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Example 2.4.13, equations (2.4.13.1)-(2.4.13.3), printed pp. 54-55; the existing saturation node supplies the hidden cellular arguments."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-presheaf-cylinder-model-recognition] to presheaves on the simplex category, the interval $J$ and the class $\\mathrm{An}$ of step 4. The endpoint union $\\Delta^0\\amalg\\Delta^0\\to J$ is a monomorphism, because its degreewise images are the distinct constant simplices at 0 and 1. The needed interval axioms were verified in steps 6-7. The naive fibrant objects are precisely the quasicategories. Indeed $\\mathrm{An}$ contains all inner horns, so a naive fibrant object fills them. Conversely, for a quasicategory $C$ and $a:U\\hookrightarrow V$ in $\\mathrm{An}\\subseteq\\mathcal T$, the map $C^V\\to C^U$ is surjective on vertices by [def-weil-pbc-trivial-kan-fibration]; hence every map $U\\to C$ extends strictly over $V$. This is exactly the required terminal-map lifting property. We have therefore constructed a model structure with monomorphism cofibrations, fibrant objects the quasicategories, and weak equivalences $W_J$ detected by bijectivity of $[B,C]_J\\to[A,C]_J$ for every quasicategory $C$. The bracket denotes maps modulo finite chains of $J$-homotopies, as defined in the recognition node. Every inner horn is a trivial cofibration, since it belongs to $\\mathrm{An}$.",
    "uses": [
     "lem-coef-presheaf-cylinder-model-recognition",
     "def-cbc-enhanced-diagrams-cones",
@@ -103,7 +135,7 @@
    }
   },
   {
-   "text": "The model structure constructed in step 5, together with $W_J=W$ from step 6, has exactly the cofibrations, weak equivalences and fibrations required by the statement. The two weak factorization systems and their functorial factorizations, as well as two-out-of-three and retract closure, are the explicit conclusions of [lem-coef-presheaf-cylinder-model-recognition]. The factorizations stay in the input universe. Its fibrant-object assertion combined with the terminal lifting calculation in step 5 gives the required if and only if for quasicategories, and the last sentence of step 5 gives every inner horn as a trivial cofibration. Completeness and cocompleteness are also literal: degreewise set limits and colimits carry induced simplicial operators, and the universal properties are verified degreewise.",
+   "text": "The model structure constructed in step 8, together with $W_J=W$ from step 9, has exactly the cofibrations, weak equivalences and fibrations required by the statement. The two weak factorization systems and their functorial factorizations, as well as two-out-of-three and retract closure, are the explicit conclusions of [lem-coef-presheaf-cylinder-model-recognition]. The factorizations stay in the input universe. Its fibrant-object assertion combined with the terminal lifting calculation in step 8 gives the required if and only if for quasicategories, and the last sentence of step 8 gives every inner horn as a trivial cofibration. Completeness and cocompleteness are also literal: degreewise set limits and colimits carry induced simplicial operators, and the universal properties are verified degreewise.",
    "uses": [
     "lem-coef-presheaf-cylinder-model-recognition"
    ],
@@ -132,6 +164,7 @@
   "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
   "def-weil-pbc-trivial-kan-fibration",
   "lem-coef-presheaf-cylinder-model-recognition",
+  "lem-coef-infinity-right-anodyne-saturation",
   "lem-coef-infinity-monomorphism-boundary-cells"
  ],
  "proof_origin": {
@@ -212,7 +245,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-shape-categorification",
@@ -224,17 +257,17 @@
   "date": "2026-10-17",
   "item": "lem-coef-joyal-model-structure",
   "worker": "stage1",
-  "summary": "Repaired C6/D4, D1/D2 and E5 by replacing the returned accessibility and relative-equivalence route with a Cisinski cylinder construction. Removed all three unlanded returned children and added two strictly supporting statement-only nodes: generic presheaf interval recognition and quasicategory invertible-interval extension. Wrote the generators, saturation, both interval axioms, terminal injective characterization, Yoneda comparison and finite-data universe argument explicitly. No change to the statement from the returned version; no external model comparison or model-dependent accessibility assertion is used.",
-  "blueprint": "Proof paragraph 2, finite coefficient mapping-complex adjunction before R lim: Theorem 2.2.5.1 (Joyal model structure), Corollary 2.2.5.4 and Proposition 1.2.7.3",
+  "summary": "Repaired the returned 2245-character step 4 by replacing it with four short steps on the identical recursive-cylinder route. The existing generic Cartesian pushout-product saturation node now supplies both hidden cellular-closure arguments, and the existing boundary-cell node supplies the monomorphism presentation. Smallness is an explicit elementary indexing calculation. The other seven original steps are retained, with only their cross-references renumbered. The item statement, statement dependencies, source, proof origin and Lean record are unchanged. No new node is needed; discarded the interrupted attempt's duplicate and elementary proposed nodes from the delivery while preserving them in sandbox scratch.",
+  "blueprint": "Proof paragraph 2, finite coefficient mapping-complex adjunction before R lim: Theorem 2.2.5.1 (Joyal model structure), Corollary 2.2.5.4 and Proposition 1.2.7.3; original step 4 is now steps 4-7, still verifying Example 2.4.13 on the same supporting route.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q65-1144ef9e0",
-  "group": "Q65",
+  "reviewer": "NT-cc-Q79-a2418193e",
+  "group": "Q79",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-1144ef9e0 (reviewer sub-agent of L); spot-checked: PASS: I read the whole delivery and made no changes; review.md is written in the run directory. Item statement (the Joyal model structure with categorical equivalences tested on hFun) is unchanged and not weakened. Cisinski's cylinder route is now model-independent. Step 1: C^K is a quasicategory by inner-anodyne pushout-product transposition. Steps 2-3: the class T of monos whose exponential maps are trivial Kan contains inner horns and e_eps□mono, is weakly saturated and is closed under □mono, including m=0, which gives vertex surjectivity. Step 4: the explicit generators and the cell-filtration argument check An1 and An2 (Cisinski 2.4.11/2.4.13). Step 5: the endpoints of J are disjoint, and naive fibrant objects are exactly the quasicategories. Step 6: a single J-homotopy is the same as an isomorphism in h(C^K), so W is contained in W_J. The converse goes through a Yoneda argument with s, ps~1, sp~1, and J-homotopies giving natural isomorphisms; it uses no rigidification and no HTT 2.2.5.8, so the earlier circularity is gone. Step 7: assembly. Step 8: a finite-data, small-subquasicategory argument gives universe invariance. New node lem-coef-presheaf-cylinder-model-recognition matches Cisinski 2.4.10-2.4.19 hypothesis by hypothesis; it is true, self-contained and generic, and is not the perfect-class recognition node. New node lem-coef-quasicategory-invertible-interval: J is the walking-isomorphism nerve. Isomorphism in hD holds iff there is a J-map (inverse triangles with degenerate long edges in one direction; Joyal extension in the other), and endpoint evaluation is trivial Kan (Cisinski 3.5.13 with h(J,C)=Fun(J,C)). Both are true, including for empty C. Every cited node is a definition, a Mathlib leaf or in the item's unit, so tool_uses is empty and accepted. The dependency closure (16 nodes) does not contain the item. Duplicate candidates read and rejected: isofibration-exponentiation, parameter-cone-extension, coherent-nerve-comparison, simplicial-interval-localization/lifting, terminal-anodyne, sset-anodyne-pushout-product, model-localization-homotopy-classes. No SGA source is used. This is not a target node, so the base-change and coefficient-category check does not apply."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-a2418193e (reviewer sub-agent of L); spot-checked: I read the item in full, all 11 steps, every cited statement (including all steps of the saturation and recognition nodes) and Cisinski CatLR §2.4 (Ex. 2.4.13, Def. 2.4.11, Thm. 2.4.19). This is a repair with no new nodes; statement, stmt_deps, source and lean are unchanged. The old step 4 is now steps 4-7. Steps 4-5: An = wsat(∪Λ_r), with Λ_0 = inner horns ∪ e_ε□∂Δ^m and Λ_{r+1} = δ□Λ_r, matching Ex. 2.4.13. The family is small, and An ⊆ T follows by induction from steps 2-3, using the swap isomorphism. Step 6: the saturation node's θ_{e_ε,j} is exactly the recognition node's e_ε□j. With W = An and i = e_ε mono, Q_ε is weakly saturated and contains every boundary inclusion including m=0. By the boundary-cell Mathlib leaf (ω-chain, coproducts handled as well-ordered cobase changes), every mono is in Q_ε, which gives An1. Step 7: δ is mono, and Q = {a: δ□a ∈ An} contains every Λ_r, hence An, which gives An2. Steps 6-7 use the cited statements, not their proofs. Steps 1-3 and 8-11 are unchanged and correct. Edge cases checked: empty C, m=0, isomorphisms, zero-length chains, pushouts along non-injective maps. All cited theorems are in the item's unit or are Mathlib leaves, so tool_uses is []. The 67-node dependency closure has no cycle, and proof_deps equals the union of the step uses. There is no duplicate or restated clause, and no SGA source. The item is not a target node, so the base-change check does not apply. Cisinski remains WANTED. I made no fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
