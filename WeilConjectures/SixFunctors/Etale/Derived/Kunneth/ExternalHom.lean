@@ -55,6 +55,8 @@ namespace AlgebraicGeometry
 
 open Scheme
 
+open _root_.AlgebraicGeometry.Etale.DerivedCategory
+
 namespace Etale
 
 section Braided
@@ -166,7 +168,7 @@ lemma range_eq_compl_range_of_isPullback {Y Q Z U ZQ UQ : Scheme.{u}} {i : Z ⟶
 complementary open immersion `j`, a morphism `f` of `D(X_ét, Λ)` is an isomorphism as soon as
 `Rj^! f` and `Ri^! f` are: by the supported localization triangle
 `Ri_! Ri^! ⟶ 𝟭 ⟶ Rj_* Lj^* ⟶`, and `Rj^! ≅ Lj^*`. -/
-theorem isIso_of_isIso_rightDerivedUpperShriek_map {Z X U : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X)
+theorem isIso_of_isIso_rightDerivedUpperShriek_map_of_range_eq_compl {Z X U : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X)
     [IsClosedImmersion i] [HasCompactification i] [IsOpenImmersion j] [HasCompactification j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
     {M N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (f : M ⟶ N)
@@ -236,6 +238,7 @@ theorem isIso_externalIhomMap_of_forall_exactPairing {Z₂ : Scheme.{u}} (c₂ :
   have : IsNoetherian Y := { __ := LocallyOfFiniteType.isLocallyNoetherian (ι ≫ c₁) }
   obtain ⟨V, hVd, hV⟩ := exists_dense_open_exactPairing Λ hE
   obtain ⟨D, -, ⟨hD⟩⟩ := hV V le_rfl
+  have : TopologicalSpace.NoetherianSpace V := V.ι.isOpenEmbedding.isInducing.noetherianSpace
   have : QuasiCompact V.ι := ⟨fun U _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
   have : HasCompactification V.ι := (Compactification.ofIsOpenImmersion V.ι).hasCompactification
   -- the base changes of the open immersion `V ⟶ Y` and of its closed complement
@@ -249,7 +252,7 @@ theorem isIso_externalIhomMap_of_forall_exactPairing {Z₂ : Scheme.{u}} (c₂ :
   have : IsClosedImmersion (pullback.snd V.closedComplement q₁) :=
     MorphismProperty.of_isPullback sqC ‹_›
   have : LocallyOfFiniteType (ι ≫ c₁) := inferInstance
-  refine isIso_of_isIso_rightDerivedUpperShriek_map Λ (pullback.snd V.closedComplement q₁)
+  refine isIso_of_isIso_rightDerivedUpperShriek_map_of_range_eq_compl Λ (pullback.snd V.closedComplement q₁)
     (pullback.snd V.ι q₁) (range_eq_compl_range_of_isPullback (by simp) sqC sqV) _ ?_ ?_
   · -- the open part: `E` has a left dual on `V`
     rw [isIso_map_externalIhomMap_iff_of_isPullback Λ k (ι ≫ c₁) c₂ sqQ V.ι sqV]

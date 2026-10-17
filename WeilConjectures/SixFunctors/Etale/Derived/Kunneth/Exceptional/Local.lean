@@ -252,6 +252,7 @@ theorem isExceptionalKunneth_of_isClosedImmersion {T S : Scheme.{u}} (i : T ⟶ 
     fun N M ↦ (isIsoRightDerivedUpperShriekTensorMap_iff _ _ _).2
       (isIso_rightDerivedUpperShriekTensorMap_pullback_of_isClosedImmersion Λ b c sqP i sq N M)⟩
 
+omit [HasInvertibleExponent Λ (Spec (.of k))] in
 /-- **Composition.** The exceptional Künneth property is stable under composition, by the
 composition laws of the base change maps
 (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_comp_iff`) and of the
@@ -319,8 +320,10 @@ theorem IsExceptionalKunneth.of_jointlySurjective {T S : Scheme.{u}} (g : T ⟶ 
     obtain ⟨i, y, hy⟩ := hu (q' z)
     obtain ⟨t, -, ht⟩ := Scheme.Pullback.exists_preimage_pullback (f := u i) (g := q') y z hy
     exact ⟨i, t, ht⟩
-  have (i : ι) : HasCompactification (u i) := (Compactification.ofIsOpenImmersion _).hasCompactification
-  have (i : ι) : HasCompactification (v i) := (Compactification.ofIsOpenImmersion _).hasCompactification
+  have (i : ι) : HasCompactification (u i) :=
+    (Compactification.ofIsOpenImmersion _).hasCompactification
+  have (i : ι) : HasCompactification (v i) :=
+    (Compactification.ofIsOpenImmersion _).hasCompactification
   have (i : ι) : HasCompactification (v i ≫ h) := .of_isPullback (sqi i)
   have (i : ι) : QuasiCompact (v i ≫ h) := MorphismProperty.of_isPullback (sqi i) inferInstance
   have hθ (i : ι) := isIso_dualizingComplexTensorMapOfIsIso_of_smoothOfRelativeDimension Λ (v i) 0
@@ -348,7 +351,7 @@ lemma exists_isClosedImmersion_affineSpace {X Y : Scheme.{u}} [IsAffine X] [IsAf
     ∃ (s : Type u) (_ : Finite s) (c : X ⟶ 𝔸(s; Y)),
       IsClosedImmersion c ∧ c ≫ 𝔸(s; Y) ↘ Y = f := by
   have hft : f.appTop.hom.FiniteType := HasRingHomProperty.appTop @LocallyOfFiniteType f ‹_›
-  letI := f.appTop.hom.toAlgebra
+  let := f.appTop.hom.toAlgebra
   obtain ⟨t, ht⟩ := hft.out
   refine ⟨t, inferInstance, AffineSpace.homOfVector f (fun x : t ↦ x.1),
     AffineSpace.isClosedImmersion_homOfVector f _ ?_, AffineSpace.homOfVector_over f _⟩
