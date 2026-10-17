@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
-import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-!
 # Descent of lissity along a surjective etale map
@@ -126,7 +125,7 @@ theorem isLisseEtaleSheafOfSets_of_etale_surjective_pullback
           (NatIso.op (MorphismProperty.Over.mapComp
             (Q := ⊤) (𝒰.map_prop i) (inferInstance : Etale p)).symm) F.obj)
     exact Sheaf.isConstant_congr (𝒰.X i).smallEtaleTopology c
-  · refine isFiniteSheaf_of_finite_algClosed_stalks _ fun Ω _ _ s ↦ ?_
+  · intro Ω _ _ s
     obtain ⟨t, ht⟩ := p.surjective (s default)
     obtain ⟨a, ha, _⟩ := exists_fac_of_etale_of_isSepClosed p s t ht
     obtain ⟨c, hc, _⟩ := AlgebraicGeometry.etaleSetInverseImageStalkGerm Y T p F Ω a
