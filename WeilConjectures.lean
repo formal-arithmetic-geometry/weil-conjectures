@@ -4605,6 +4605,7 @@ public import WeilConjectures.Topology.TopologicalFilteredCohomology
 public import WeilConjectures.TraceFormula.Basic
 public import WeilConjectures.TraceFormula.BorelMoore
 public import WeilConjectures.TraceFormula.CompactCohomology
+public import WeilConjectures.TraceFormula.CompactPullback
 public import WeilConjectures.TraceFormula.Correspondence
 public import WeilConjectures.TraceFormula.Dualizing
 public import WeilConjectures.TraceFormula.FixedPoint
