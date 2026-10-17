@@ -328,5 +328,30 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-9b496466f (reviewer sub-agent of L); spot-checked: Barwick's paper is not in literature/, so I fetched it read-only, extracted the text in /tmp and checked it. Definition 4.2, Lemmas 4.5-4.6 and Theorem 4.7 with its proof (pp. 42-44) match the item, whose statement is unchanged: left proper combinatorial N, S-local fibrant objects, derived-mapping S-equivalences, same cofibrations, left proper combinatorial result, and the Quillen universal property of 4.2.1. Lemma 4.6 does not assume left properness, which matches the accessibility node. I checked each step. Step 3: the lift h in the square (a, 1_B) satisfies hc=a and ph=1, so c is a retract of a. Step 4: the pushout step is a base change of an equivalence. At a limit stage the opposite ordinal has 0 as terminal object, so its nerve is contractible and the homotopy limit of the constant diagram is evaluation at 0; the proof uses this correctly rather than claiming the limit equals the value at 0. Step 5: Smith hypotheses (i)-(v) are matched to steps 3, 4, 2 and 1, with C^square equal to the old trivial fibrations, inside W_0 and hence W. Step 6 is the left-properness argument by factor-and-pushout. Step 7: old frames are also new frames, so the same Hom complexes compute both mapping spaces. Step 8: Yoneda on pi_0 gives gu=1 and ug=1, then the detection lemma and an actual retraction prove the reverse fibrancy implication. Step 9: GY is local through the derived adjunction and detection applied to F(Qs). Step 10: the lift gives ra=1 and pr=q, so p is a retract of q, and the Quillen fibrant test finishes. proof_deps equals the union of uses. Both new nodes are true, are statement-only, are not duplicates (checked against model-weak-equivalences-accessible, accessible-arrow-inverse-image, small-right-lifting-accessibility, cofibrant-colimit-comparison, model-colimit-localization-comparison, sifted-good-diagram-calculus and perfect-weak-equivalence-model-recognition), and do not restate clauses of the item. Their searches cover all three kinds and their created/blueprint fields are correct. I accept the eight declared tool_uses: generic model-category tools from sk-prop-sf-biduality-general. No SGA source; no target, base-change morphism or coefficient category is affected. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a9c6c4919",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Statement, dependencies, definitions, docstrings, source, edge cases, report sections, and scompile evidence checked; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.GeneralBousfieldLocalization",
+  "declaration": "HomotopicalAlgebra.GeneralBousfield.general_bousfield_localization",
+  "declarations": [
+   "HomotopicalAlgebra.GeneralBousfield.IsFrameOrthogonal",
+   "HomotopicalAlgebra.GeneralBousfield.IsLocal",
+   "HomotopicalAlgebra.GeneralBousfield.localEquivalences",
+   "HomotopicalAlgebra.GeneralBousfield.general_bousfield_localization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/GeneralBousfieldLocalization.lean",
+  "statement": "theorem general_bousfield_localization {M : Type u} [Category.{v} M] [m : ModelCategory M] [HasLimits M] [HasColimits M] (_hM : CombinatorialModelCategory.{u, v, v} M) (_hLeft : (weakEquivalences M).IsStableUnderCobaseChangeAgainst (cofibrations M)) (I : Type v) (s : I → Arrow M) : ∃ L : ModelCategory M, @CombinatorialModelCategory.{u, v, v} M inferInstance L ∧ L.categoryWithWeakEquivalences.weakEquivalences.IsStableUnderCobaseChangeAgainst L.categoryWithCofibrations.cofibrations ∧ L.categoryWithCofibrations.cofibrations = m.categoryWithCofibrations.cofibrations ∧ L.categoryWithWeakEquivalences.weakEquivalences = localEquivalences m s ∧ (∀ Z : M, L.categoryWithFibrations.fibrations (terminal.from Z) ↔ IsLocal m s Z) ∧ (∃ (R : M ⥤ M) (η : 𝟭 M ⟶ R), ∀ X : M, L.categoryWithCofibrations.cofibrations (η.app X) ∧ L.categoryWithWeakEquivalences.weakEquivalences (η.app X) ∧ L.categoryWithFibrations.fibrations (terminal.from (R.obj X))) ∧ (∀ (X Y : M) (f : X ⟶ Y), m.categoryWithCofibrations.cofibrations f → L.categoryWithCofibrations.cofibrations f) ∧ (∀ (X Y : M) (f : X ⟶ Y), m.categoryWithCofibrations.cofibrations f → m.categoryWithWeakEquivalences.weakEquivalences f → L.categoryWithCofibrations.cofibrations f ∧ L.categoryWithWeakEquivalences.weakEquivalences f) ∧ ∀ (T : Type u') [Category.{v'} T] [ModelCategory T] [HasLimits T] [HasColimits T] (F : M ⥤ T) (G : T ⥤ M), (F ⊣ G) → (∀ (X Y : M) (f : X ⟶ Y), m.categoryWithCofibrations.cofibrations f → Cofibration (F.map f)) → (∀ (X Y : M) (f : X ⟶ Y), m.categoryWithCofibrations.cofibrations f → m.categoryWithWeakEquivalences.weakEquivalences f → Cofibration (F.map f) ∧ WeakEquivalence (F.map f)) → ∀ (Q : M ⥤ M) (ε : Q ⟶ 𝟭 M), (∀ X : M, m.categoryWithCofibrations.cofibrations (initial.to (Q.obj X)) ∧ m.categoryWithWeakEquivalences.weakEquivalences (ε.app X)) → (∀ i : I, IsIso ((weakEquivalences T).Q.map (F.map (Q.map (s i).hom)))) → (∀ (X Y : M) (f : X ⟶ Y), L.categoryWithCofibrations.cofibrations f → Cofibration (F.map f)) ∧ (∀ (X Y : M) (f : X ⟶ Y), L.categoryWithCofibrations.cofibrations f → L.categoryWithWeakEquivalences.weakEquivalences f → Cofibration (F.map f) ∧ WeakEquivalence (F.map f))",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Unenriched derived orthogonality uses the recorded CosimplicialFrame and actual frameHomPre on every compatible cofibrant framed representative. The augmentation equation fixes the original arrow. The explicit original model m remains fixed underneath the existential localized model L. Combinatoriality includes both functorial factorizations; the ordinary localization tests the left derived functor on cofibrant replacements. No statement correction, new node or dependency repair."
  }
 }
