@@ -332,7 +332,18 @@ private theorem restrict_pull_fac {X Y : Scheme.{u}} (f : X ⟶ Y)
         DerivedCategory.Qh.map
           ((NatTrans.mapHomotopyCategory
             (comapUpperStarIso (integralReductionMap ℓ E) f).inv (.up ℤ)).app N) := by
-  sorry
+  unfold residueExchangeRestrictPullIso residueExchangeUpperStarCounit
+    residueExchangeRestriction residueExchangeUpperStar
+    leftDerivedUpperStarIsoMapDerivedCategory
+  dsimp only [id_eq]
+  have h := exactLeftSquareFac
+    (Mod.comap (coefficientMap (integralReductionMap ℓ E) Y))
+    ((f)^*⟦integralCoeff ℓ E⟧)
+    ((f)^*⟦Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)⟧)
+    (Mod.comap (coefficientMap (integralReductionMap ℓ E) X))
+    (comapUpperStarIso (integralReductionMap ℓ E) f) N
+  simpa only [derivedComapUpperStarIso, Iso.trans_symm, Iso.symm_symm_eq,
+    Iso.trans_assoc] using h
 
 
 
