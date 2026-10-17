@@ -11,9 +11,97 @@
   "def-coef-complete-algebroid",
   "lem-coef-symmetric-monoidal-segal-classification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The terminal unit and the binary product cones give finite products in $\\mathcal A$ and $\\mathcal B$: induct on arity, using $\\operatorname{Map}(t,(a_1\\otimes\\cdots\\otimes a_{n-1})\\otimes a_n)\\simeq\\prod_{i=1}^n\\operatorname{Map}(t,a_i)$; arity zero is the terminal unit. For either given structure $\\mathcal C^\\otimes$ and any finite-product target $\\mathcal D$, use $W(\\mathcal C^\\otimes,\\mathcal D)$ as defined in the restriction lemma. Lax-cartesian classification identifies lax functors $H:\\mathcal C^\\otimes\\to\\mathcal D^\\times$ with coherent functors $F:\\mathcal C^\\otimes\\to\\mathcal D$ satisfying its inert product-cone condition. This identification is on whole infinity categories, retaining transformations and higher homotopies; it is not merely a tuplewise mapping-space calculation.",
+   "uses": [
+    "lem-coef-weak-cartesian-structure-restriction",
+    "lem-coef-lax-cartesian-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.4.0.1; Definition 2.4.1.1; Proposition 2.4.1.7"
+   }
+  },
+  {
+   "text": "Under this classification, $H$ is strong exactly when $F$ belongs to $W(\\mathcal C^\\otimes,\\mathcal D)$. For a cocartesian fold $x\\to\\bigotimes_i c_i$, the sole block map of $H$ is $\\prod_iF(c_i)\\simeq F(x)\\to F(\\bigotimes_i c_i)$ by lax-cartesian classification, so the envelope's cocartesian criterion says it is cocartesian exactly when this last arrow is an equivalence. For a general cocartesian edge $e:x\\to y$ over $\\alpha:\\langle n\\rangle\\to\\langle m\\rangle$, compose with each inert output projection $y\\to y_j$. Factor the resulting base map as the inert selector onto $\\alpha^{-1}(j)$ followed by its fold, and choose cocartesian lifts. Composition and uniqueness of cocartesian lifts identify this composite with the chosen selector followed by the cocartesian fold, up to an equivalence in the final fiber. Since $H$ already preserves inert lifts, its $j$th block is the fold block above. Thus all blocks are equivalences when $F$ is weak Cartesian, and the envelope criterion makes $H(e)$ cocartesian. Conversely a strong $H$ passes the fold test. Empty blocks use the nullary fold; when $m=0$ the block test is vacuous. Restricting the classification to these full subcategories therefore gives $\\operatorname{Fun}^{\\otimes}(\\mathcal C^\\otimes,\\mathcal D^\\times)\\simeq W(\\mathcal C^\\otimes,\\mathcal D)$, including all transformations.",
+   "uses": [
+    "lem-coef-lax-cartesian-classification",
+    "lem-coef-cartesian-operadic-envelope",
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 2.4.1.7, strong-functor restriction; Definition 2.4.1.1"
+   }
+  },
+  {
+   "text": "Apply the weak-Cartesian restriction theorem to the given $\\mathcal C^\\otimes$ and $\\mathcal D$. Its cartesian hypotheses are exactly the terminal-unit and canonical binary-product hypotheses checked in step 1. Combining it with step 2 yields an equivalence of infinity categories\n$$R_{\\mathcal C,\\mathcal D}:\\operatorname{Fun}^{\\otimes}(\\mathcal C^\\otimes,\\mathcal D^\\times)\\simeq\\operatorname{Fun}^{\\mathrm{fp}}(\\mathcal C,\\mathcal D).$$\nThis functor is restriction itself: the lax classification identifies the unary restriction of $H$ with $F|_{\\mathcal C}$ and the restriction theorem then restricts $F$. In particular it is fully faithful on all transformation spaces and essentially surjective onto all finite-product-preserving functors. This is the missing coherent extension argument; no associative-algebra/Segal-monoid comparison is used.",
+   "uses": [
+    "lem-coef-weak-cartesian-structure-restriction",
+    "lem-coef-lax-cartesian-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 2.4.1.6 and the factorization in the proof of Corollary 2.4.1.8"
+   }
+  },
+  {
+   "text": "For $\\mathcal C=\\mathcal A$ and $\\mathcal C=\\mathcal B$, apply $R_{\\mathcal C,\\mathcal C}$ to the identity functor, which preserves finite products. Essential surjectivity gives a strong functor $v_{\\mathcal C}:\\mathcal C^\\otimes\\to\\mathcal C^\\times$ with a specified equivalence of its unary restriction with $\\mathrm{id}_{\\mathcal C}$. It is an equivalence: since it commutes with inert projections, its fiber component over $\\langle n\\rangle$ is identified by the Segal equivalences with $(v_{\\mathcal C}|_{\\mathcal C})^n$, including the terminal zero fiber. Every component is consequently an equivalence. Symmetric-monoidal Segal classification represents $v_{\\mathcal C}$ as a transformation of the classifying diagrams, and the pointwise-equivalence theorem makes that transformation an equivalence. Its inverse under the same classification is strong. We have therefore constructed actual strong equivalences from both arbitrary cartesian structures to their product models, without treating a mapping-space formula as a coherent functor.",
+   "uses": [
+    "lem-coef-weak-cartesian-structure-restriction",
+    "lem-coef-lax-cartesian-classification",
+    "lem-coef-symmetric-monoidal-segal-classification",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Corollary 2.4.1.8(3), using its proof through Propositions 2.4.1.6-2.4.1.7"
+   }
+  },
+  {
+   "text": "Postcomposition with the constructed $v_{\\mathcal B}$ gives an equivalence from strong functors $\\mathcal A^\\otimes\\to\\mathcal B^\\otimes$ to strong functors $\\mathcal A^\\otimes\\to\\mathcal B^\\times$: an inverse is postcomposition with its strong inverse, and the unit and counit are whiskered with each input functor. Compose this equivalence with $R_{\\mathcal A,\\mathcal B}$ from step 3. Because $v_{\\mathcal B}|_{\\mathcal B}\\simeq\\mathrm{id}_{\\mathcal B}$ was specified, the composite is naturally equivalent to the restriction functor into $\\operatorname{Fun}^{\\mathrm{fp}}(\\mathcal A,\\mathcal B)$. Thus this restriction is an equivalence of infinity categories. A strong functor whose unary restriction $u$ is an equivalence is itself an equivalence: its Segal fiber components are $u^n$, so the same pointwise-equivalence argument as in step 4 applies. Conversely any monoidal equivalence restricts to an equivalence. Finally every underlying equivalence preserves finite products: with inverse $w$, the identities $\\operatorname{Map}_{\\mathcal B}(b,u(\\prod_i a_i))\\simeq\\operatorname{Map}_{\\mathcal A}(w(b),\\prod_i a_i)\\simeq\\prod_i\\operatorname{Map}_{\\mathcal B}(b,u(a_i))$ verify the product cone, also for the empty family.",
+   "uses": [
+    "lem-coef-weak-cartesian-structure-restriction",
+    "lem-coef-lax-cartesian-classification",
+    "lem-coef-symmetric-monoidal-segal-classification",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Corollary 2.4.1.9, restriction to arbitrary cartesian target structures"
+   }
+  },
+  {
+   "text": "Pass to the maximal subgroupoids in step 5 and retain just those objects whose underlying functor is an equivalence. The equivalence of functor infinity categories identifies exactly these objects, by the equivalence detection in step 5. This is the asserted equivalence $\\operatorname{Eq}^{\\otimes}(\\mathcal A^\\otimes,\\mathcal B^\\otimes)\\simeq\\operatorname{Eq}(\\mathcal A,\\mathcal B)$ on spaces, including invertible transformations and all higher simplices. Its homotopy fiber at a specified $u$ is contractible: apply an inverse equivalence of spaces to identify the fiber with that of the identity at $u$, whose points are pairs $(u',\\gamma:u'\\simeq u)$ and whose path-space contraction ends at $(u,\\mathrm{id})$. The specified comparison with $u$ is part of this fiber throughout. The contractibility used here follows from full faithfulness and essential surjectivity of restriction, rather than the envelope's space of construction choices.",
+   "uses": [
+    "lem-coef-symmetric-monoidal-segal-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Corollaries 2.4.1.8-2.4.1.9, equivalence spaces and their homotopy fibers"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-cartesian-operadic-envelope",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-lax-cartesian-classification",
+  "lem-coef-symmetric-monoidal-segal-classification",
+  "lem-coef-weak-cartesian-structure-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Definition 2.4.0.1, Propositions 2.4.1.6-2.4.1.7 and proof of Corollaries 2.4.1.8-2.4.1.9; online source read, not archived (WANTED)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -80,7 +168,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cartesian-envelope-product-diagram-recognition",
@@ -110,5 +198,21 @@
  },
  "import_flags": [
   "unreachable"
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-cartesian-monoidal-structure-uniqueness",
+  "worker": "stage1",
+  "summary": "Repair of the return at d36496ae20. Replaced the unsupported product-model identification and associative-Segal argument by HA Proposition 2.4.1.6 as one new statement-only prerequisite, used with the existing lax-cartesian classification. Proved the strongness criterion on each block, constructed actual strong equivalences to the canonical product models, and proved full faithfulness before passing to equivalence spaces and contracting the homotopy fiber. Statement unchanged; retained previous Mathlib searches.",
+  "blueprint": "The inherited ancestor proof paragraph 2 uses coherent cartesian-monoidal comparison through its recorded auxiliary chain. The new prerequisite isolates the weak-Cartesian restriction theorem needed to justify that auxiliary comparison; no chapter or unit route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NE-cd5d35285",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-cd5d35285 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-weak-cartesian-structure-restriction, every cited node's statement, the unit record and the B–F rules. I did not open HA itself: it is not archived in literature/ and the reviewer has no network. The HA places (Def 2.4.0.1, Def 2.4.1.1, Prop 2.4.1.6, Prop 2.4.1.7, Cor 2.4.1.8–2.4.1.9) were checked against my knowledge of HA §2.4.1, and the WANTED line and proof_origin.by=agent stand. The new node is HA Prop 2.4.1.6 (restriction from weak Cartesian structures to Fun^fp is an equivalence for a cartesian source). Its hypotheses and both conditions match Def 2.4.1.1, including n=0. It holds on the test cases C=*, meet-semilattice posets and a nonterminal constant functor. It is a statement only, unsplit, with three kinds of logged search and correct blueprint from/via. No DAG node states 2.4.1.6, 2.4.1.8 or 2.4.1.9 besides the item; I checked the envelope, product-diagram, cocartesian-criterion, generalized-product-cone, associative-Segal, straightening, operation-morphism and the two cylinder nodes, which come from HA 2.3.3.23. The new node does not restate a clause of the item. Steps: (1) gives finite products by induction and lax classification on whole categories. (2) proves strong iff weak Cartesian block by block, using the fold-comparison formula from lax classification, the envelope's cocartesian criterion and composition/uniqueness of cocartesian lifts; empty blocks and m=0 are handled. (3) composes with the new node to get restriction Fun^⊗(C^⊗,D^×)≃Fun^fp. (4) builds strong v_C:C^⊗→C^× over id; its components are u^n, so Segal classification plus pointwise equivalences make it invertible. (5) uses postcomposition with v_B to show restriction is an equivalence (Cor 2.4.1.8), detects equivalences, and shows underlying equivalences preserve products, including the empty product. (6) passes to cores and equivalence objects and contracts the homotopy fibre. Every cited statement says what its step uses. proof_deps equals the union of uses. All statement nodes cited are in unit sk-prop-sf-biduality-general; no tool_uses. The returned points (E5/C3/C4) are repaired. No fixes, no dropped nodes."
+ }
 }
