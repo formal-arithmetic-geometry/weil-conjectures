@@ -168,5 +168,23 @@
   "group": "Q31",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-db4b87d94 (reviewer sub-agent of L); spot-checked: I read the item in full, the two cited definition nodes (def-weil-formal-power-series and def-weil-power-series-exponential, both Mathlib leaves), the parent prop-trace-determinant step 2, and the unit sk-thm-tracetodeterminant. I checked Milne LEC Thm 27.6 proof p.156: the line '(move the inner sum outside)' is exactly the finite-family clause with exponents (-1)^r, used without proof. I also checked Milne section 26 p.151 and Deligne Weil I (1.5) p.276. The statement holds over any commutative Q-algebra, and the parent needs only a char-0 field. Nothing is added or weakened. Step 1 is a correct finite calculation: truncate each series at degree N, which the exponential node allows because U^r is divisible by T^r; expand with binomial coefficients; reindex l=r-k and add the zero terms with k+l>N; then take the Cauchy product of the truncations. Step 2 gives exp(0)=1 and a two-sided inverse by commutativity. Step 3 does the induction on n>=0, the case of negative exponents, and the induction over finite index sets, with all base cases written out. I tested by exact rational computation up to degree 6 on random U and W: exp(U+W)=exp(U)exp(W), exp(U)exp(-U)=1 and exp(3U)=exp(U)^3 all hold. The zero, empty-family, singleton and exponent 0/±1 cases also hold. There are no new nodes, so B and D are vacuous. Duplicate searches of dag/nodes and of both blueprint trees found none, so same_as=[] is correct. No off-unit citation, so no tool_uses. No SGA citation. I read Mathlib RingTheory/PowerSeries/Exp.lean lines 55-165: exp_mul_exp_eq_exp_add covers constant rescalings only, so the 'no match' verdict is correct. One harmless remark: the report mentions citations.json and searches.jsonl, which are not in the commit. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PowerSeries.ExpSubstHom",
+  "declaration": "PowerSeries.exp_subst_hom",
+  "file": "lean/Sheaf/RingTheory/PowerSeries/ExpSubstHom.lean",
+  "statement": "theorem exp_subst_hom (R : Type u) [CommRing R] [Algebra ℚ R] : (exp R).subst (0 : PowerSeries R) = 1 ∧ (∀ (U W : PowerSeries R), constantCoeff U = 0 → constantCoeff W = 0 → (exp R).subst (U + W) = (exp R).subst U * (exp R).subst W) ∧ (∀ (U : PowerSeries R), constantCoeff U = 0 → ∃ e : (PowerSeries R)ˣ, (e : PowerSeries R) = (exp R).subst U ∧ (exp R).subst (-U) = ((e⁻¹ : (PowerSeries R)ˣ) : PowerSeries R)) ∧ (∀ (I : Type v) [Fintype I] (U : I → PowerSeries R) (ε : I → ℤ), (∀ i : I, constantCoeff (U i) = 0) → ∃ e : I → (PowerSeries R)ˣ, (∀ i : I, (e i : PowerSeries R) = (exp R).subst (U i)) ∧ (exp R).subst (∑ i : I, ε i • U i) = ((∏ i : I, e i ^ ε i : (PowerSeries R)ˣ) : PowerSeries R))",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-494139f52",
+  "group": "N9",
+  "result": "pass",
+  "note": "Read the node, both Mathlib-leaf deps, module ExpSubstHom.lean, the report (Worker report + Second reading by N9) and check-brief2. Statement matches every clause: commutative Q-algebra only; constantCoeff=0 domain; exp(0)=1; additivity; unique unit witness with exp(-U)=e^{-1}; finite family over (I : Type v) [Fintype I] with integer powers in the unit group, empty I included. Compiled rfl test shows (exp R).subst U = subst U (exp R), i.e. U substituted into exp. Edge cases (zero ring, nilpotents, empty family, eps 0/±1) fine. No duplicate: Mathlib exp_mul_exp_eq_exp_add only rescales by constants. Gates: no defs, single sorry, source/blueprint docstrings with proof steps, lean.statement verbatim, node differs from repo only in lean, lines <=100. nt_compile.py --json compiles clean (1.3-2.1 s). No findings."
  }
 }

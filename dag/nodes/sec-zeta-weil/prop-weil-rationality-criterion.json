@@ -144,5 +144,23 @@
   "result": "pass"
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-prop-criterion"
+ "unit": "sk-prop-criterion",
+ "lean": {
+  "module": "WeilConjectures.ZetaLinearAlgebra.RationalityCriterion",
+  "declaration": "PowerSeries.tfae_exists_normalized_fraction",
+  "statement": "theorem tfae_exists_normalized_fraction (f : K⟦X⟧) :\n    List.TFAE\n      [∃ A B : K[X], B.coeff 0 = 1 ∧ f * (B : K⟦X⟧) = (A : K⟦X⟧),\n        BddAbove (Set.range fun x : Σ r : ℕ, (Fin r → ℕ) × (Fin r → ℕ) =>\n          ((hankel f).submatrix x.2.1 x.2.2).rank),\n        ∃ m d : ℕ, 1 ≤ d ∧ ∃ a : Fin d → K,\n          ∀ n, m ≤ n → coeff (n + d) f + ∑ i, a i * coeff (n + i) f = 0]",
+  "branch": "slopmaster2",
+  "by": "Q71",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Exact upstream three-condition rationality criterion. The BddAbove range over arbitrary finite index maps is equivalent to bounded ranks of finite square submatrices: injective selections are included, and repetitions or permutations cannot increase rank. The commutative field multiplication makes f * B = A equivalent to Q C = P."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f46e319a9",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Delivery adds only an existing:true lean record (PowerSeries.tfae_exists_normalized_fraction, upstream WeilConjectures.ZetaLinearAlgebra.RationalityCriterion, branch slopmaster2) plus a report with real Worker report and Second reading by Q71 sections. Checked clause by clause against the node and the blueprint source (order 2889): Field K in any universe and f : K⟦X⟧; (1) f*B=A with B.coeff 0=1 is QC=P since multiplication is commutative; (2) the BddAbove bound on submatrix ranks of PowerSeries.hankel over arbitrary maps is equivalent to the recorded hankelRank_lt_top_iff over increasing lists (embeddings are maps; repeated or permuted indices do not raise rank; pad to a common square size), with no second Hankel notion; (3) m, d natural with 1<=d, a : Fin d -> K, recurrence for n>=m; List.TFAE in the node's order. Edge cases C=0, polynomial series, d=1, m=0, empty submatrix, any characteristic and universe are covered. lean.statement matches the source verbatim; stmt_deps complete. lcompile check against the live build compiled with exit 0; axioms propext/Classical.choice/Quot.sound, no sorryAx. No findings."
+ }
 }

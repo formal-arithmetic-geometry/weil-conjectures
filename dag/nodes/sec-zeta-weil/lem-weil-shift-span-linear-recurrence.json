@@ -144,5 +144,23 @@
   "group": "Q45",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-0de9ff443 (reviewer sub-agent of L); spot-checked: I read the item, the unit sk-prop-criterion, the parent prop-weil-rationality-criterion (step 2 is its only use of the item), all six stmt_deps (each is a Mathlib leaf), and lem-weil-independent-family-card-le-dimension (Mathlib leaf LinearIndependent.fintype_card_le_finrank). I also read the main-20261015 blueprint proof, second paragraph; its text is the same as master's ## Proof. Milne LEC p.157 quotes Bourbaki Algèbre IV.5 Ex.3 without a proof. The statement is true and is not weakened: arbitrary field and sequence, 1<=d<=max(dim V,1), and the same sign convention as def-weil-eventual-linear-recurrence. Small cases checked: c=0; (1,1,...); (1,0,0,...); (0,1,0,...); Fibonacci. Step 1 (D=0 gives V=0, take d=1, a_0=0) is fine. Step 2 had one gap: 'by minimality R_0..R_{d-1} are independent' does not cover d=1, because minimality over d>=1 says nothing about R_0 alone, and it fails if R_0=0. The blueprint treats R_0=0 as a separate case. Fixed in fixes/dag/nodes/sec-zeta-weil/lem-weil-shift-span-linear-recurrence.json, step 2 text only: D>0 gives V nonzero, so some c_n is nonzero, so R_0=c is nonzero; independence of R_0..R_{d-1} then holds for d=1 by this and for d>=2 by minimality; d<=D comes from R_0..R_D being dependent. Steps 3 and 4 (nonzero leading coefficient, normalize, read coordinate n with m=0) are elementary and correct. proof_deps equals the union of the uses. No new nodes. No duplicate found in the DAG: lem-weil-linear-recurrence-shift-span is the converse, and lem-weil-rational-series-finite-shift-span is a different equivalence in another unit. No off-unit non-leaf citation, so no tool_uses are needed or accepted. No SGA is cited. This is not a target node, so no base-change or coefficient-category check applies.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ShiftSpanLinearRecurrence",
+  "declaration": "exists_linearRecurrence_of_finiteDimensional_shiftSpan",
+  "file": "lean/Sheaf/Paper/ShiftSpanLinearRecurrence.lean",
+  "statement": "theorem exists_linearRecurrence_of_finiteDimensional_shiftSpan {K : Type u} [Field K] (c : ℕ → K) [FiniteDimensional K (shiftSpan K c)] : ∃ d : ℕ, 1 ≤ d ∧ d ≤ max (Module.finrank K (shiftSpan K c)) 1 ∧ ∃ a : Fin d → K, (fun s : ℕ ↦ c (d + s)) + (∑ i : Fin d, a i • (fun s : ℕ ↦ c ((i : ℕ) + s))) = 0 ∧ (LinearRecurrence.mk d (fun i ↦ -a i)).IsSolution c",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0e0cc52ea",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Read node, 6 stmt_deps, blueprint master Proof para 2 (+main-20261015), upstream seqShift/shiftSpan/iterate_seqShift_apply, module and report. All 9 clauses exact: Field K in arbitrary universe u, c : ℕ → K, shiftSpan = span of all R_j (c (s+j) = c (j+s)), FiniteDimensional, 1 ≤ d ≤ max finrank 1, a : Fin d → K, the relation in ℕ → K, IsSolution with -a (m=0 sign convention). Edge cases c=0, constant, (1,0,..), (0,1,0,..), Fibonacci, any char all fine. Only a sorry proof, no definitions; source/blueprint docstrings with all 4 proof steps; existing:false correct (upstream theorem lacks the bound); node differs from the shared node only in lean; lean.statement verbatim. nt_compile --json: rc 0, 4.5 s, no diagnostics. No findings."
  }
 }
