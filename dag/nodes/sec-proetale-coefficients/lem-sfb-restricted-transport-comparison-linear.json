@@ -1,0 +1,103 @@
+{
+ "id": "lem-sfb-restricted-transport-comparison-linear",
+ "kind": "statement",
+ "title": "Linearity of a monoidal comparison after iterated transport and scalar restriction",
+ "statement": "Let $\\mathcal C,\\mathcal D,\\mathcal E$ be monoidal categories [def-sfb-monoidal-category], and let $F:\\mathcal C\\to\\mathcal D$, $G:\\mathcal D\\to\\mathcal E$, $H:\\mathcal C\\to\\mathcal E$ be lax monoidal functors (functors with natural tensor and unit maps satisfying the associativity and unit identities). Give $GF$ the composite lax monoidal structure, with tensor map $G(\\mu^F_{U,V})\\circ\\mu^G_{FU,FV}$ and unit $G(\\varepsilon^F)\\circ\\varepsilon^G$.\nLet $e:GF\\Rightarrow H$ be a monoidal natural transformation: for all $U,V$,\n$$e_{U\\otimes V}\\circ G(\\mu^F_{U,V})\\circ\\mu^G_{FU,FV}=\\mu^H_{U,V}\\circ(e_U\\otimes e_V),\\qquad e_{\\mathbf1}\\circ G(\\varepsilon^F)\\circ\\varepsilon^G=\\varepsilon^H.$$\nLet $A,B,B'$ be monoid objects of $\\mathcal C,\\mathcal D,\\mathcal E$, respectively, and let $\\psi:B\\to FA$, $\\psi':B'\\to GB$, $\\varphi:B'\\to HA$ be morphisms of monoid objects [sk-def-sfb-ring-object], where the image monoids have the structures induced by the lax monoidal functors. Assume\n$$\\varphi=e_A\\circ G(\\psi)\\circ\\psi'.$$\nFor an $A$-module object $M$ [sk-def-sfb-module-objects], form the $B'$-modules\n$$L(M)=\\operatorname{Res}_{\\psi'}\\operatorname{mapMod}(G)\\operatorname{Res}_{\\psi}\\operatorname{mapMod}(F)(M),\\qquad R(M)=\\operatorname{Res}_{\\varphi}\\operatorname{mapMod}(H)(M),$$\nusing [def-sfb-modobj-transport] and [def-sfb-modobj-restriction]. Then $e_M:GFM\\to HM$ is $B'$-linear from $L(M)$ to $R(M)$; explicitly, writing $a_M$ and $b_M$ for their actions,\n$$e_M\\circ a_M=b_M\\circ(1_{B'}\\otimes e_M).$$",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/sk-def-sfb-module-pushforward-pullback.proof.md",
+  "place": "Pushforward-composition sentence, generic linearity argument; exact project declaration CategoryTheory.Functor.act_comp_app_of_isMonoidal, WeilConjectures/Mathlib/CategoryTheory/Monoidal/Mod.lean:416-432."
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category",
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-module-objects",
+  "def-sfb-modobj-transport",
+  "def-sfb-modobj-restriction"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "act_comp_app_of_isMonoidal|mapMod|mapModComap",
+   "results": "Mathlib/CategoryTheory/Monoidal/Mon.lean:856, mapMod TODO only; no declaration.",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give scalar restriction, monoid transport, or ordinary linear functors; none states linearity of a monoidal comparison between these iterated internal-module transports"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monoidal natural isomorphism lifts to internal module objects with compatible restriction of scalars",
+   "results": "CategoryTheory.Mod_.scalarRestriction, CategoryTheory.Functor.Monoidal.coreMonoidalTransport, CategoryTheory.Functor.Monoidal.transport, ModuleCat.restrictScalarsCongr, CategoryTheory.Mon.mkIso, CategoryTheory.Functor.mapGrpNatIso, CategoryTheory.Functor.mapMonNatIso, CategoryTheory.isMonHom_ofIso",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give scalar restriction, monoid transport, or ordinary linear functors; none states linearity of a monoidal comparison between these iterated internal-module transports"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod_, NatTrans.IsMonoidal",
+   "results": "loogle: unknown identifier 'NatTrans.IsMonoidal'",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give scalar restriction, monoid transport, or ordinary linear functors; none states linearity of a monoidal comparison between these iterated internal-module transports"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "monoidal natural isomorphism between lax monoidal functors induces an isomorphism of transported internal module objects after compatible restriction of scalars",
+   "results": "CategoryTheory.Functor.Monoidal.transport_μ, CategoryTheory.Functor.Monoidal.coreMonoidalTransport_μIso_hom, CategoryTheory.Functor.Monoidal.transport_δ, CategoryTheory.Functor.Monoidal.natTransIsMonoidal_of_transport, CategoryTheory.Mod_.comap_obj_mod, CategoryTheory.Mod_.scalarRestriction, CategoryTheory.Mod_.comap, CategoryTheory.Functor.Monoidal.transport_μ_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give scalar restriction, monoid transport, or ordinary linear functors; none states linearity of a monoidal comparison between these iterated internal-module transports"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod_.comap",
+   "results": "CategoryTheory.Mod_.comap",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give scalar restriction, monoid transport, or ordinary linear functors; none states linearity of a monoidal comparison between these iterated internal-module transports"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation of lax monoidal functors is linear on internal modules when ring maps into the transported rings commute with its component at the ring",
+   "results": "CategoryTheory.monoidalLinearOfFaithful, Rep.linearization_μ_hom, CategoryTheory.MonoidalLinear.ofFaithful, CategoryTheory.Functor.mapLinearMap, Rep.linearization_δ_hom, CategoryTheory.Functor.mapAction_linear, CategoryTheory.Mod_.comap_map_hom, Action.functorCategoryEquivalence_linear",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give scalar restriction, monoid transport, or ordinary linear functors; none states linearity of a monoidal comparison between these iterated internal-module transports"
+  },
+  {
+   "tool": "grep",
+   "query": "mapMonNatIso|scalarRestriction|def comap",
+   "results": "Read Mon.lean:917-920 (monoids, not modules), Mod.lean:363-411 (restriction and its functor, no comparison between transported modules).",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits give scalar restriction, monoid transport, or ordinary linear functors; none states linearity of a monoidal comparison between these iterated internal-module transports"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "sk-def-sfb-module-pushforward-pullback",
+  "date": "2026-10-17",
+  "group": "Q115"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-module-pushforward-pullback",
+ "lean_candidates": [
+  {
+   "name": "CategoryTheory.Functor.act_comp_app_of_isMonoidal",
+   "module": "WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod",
+   "lines": [
+    416,
+    432
+   ],
+   "kind": "lemma",
+   "sorry": false,
+   "note": "Exact statement, reversing diagrammatic composition; source read at lines 413-432. Archived sorry map 7d675a26 records s=false, ts=false (archived lines 413-432). The new node is statement-only pending maintainer attachment; this split does not set closed audit metadata."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "sk-def-sfb-module-pushforward-pullback",
+   "place": "Proof, pushforward composition sentence: lifting the monoidal abelian-sheaf comparison through module transport and scalar restriction; the linearity calculation formerly inline in split step 4.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

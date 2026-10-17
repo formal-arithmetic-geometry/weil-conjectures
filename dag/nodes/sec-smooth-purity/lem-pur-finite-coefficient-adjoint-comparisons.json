@@ -144,21 +144,18 @@
    }
   },
   {
-   "text": "For an affine-space projection pi:A^r_V\\toV, apply det-sp-reduction-exceptional to the smooth morphism pi and the map A\\toB. Its statement covers every map of finite commutative ell-primary rings, so it covers both the nonflat quotient A_m\\toA_n and the finite-free R/t^n\\toS/t^nS. It says that the counit-transposed coefficient comparison for pi is invertible, and specifies its chart value as the canonical tensor reassociation of pi^*(-)(r)[2r]. This is the current blueprint's Kummer/projective-line construction, not a conclusion that arbitrary mates of isomorphisms are isomorphisms. Identify the finite pro-etale compact-support functor in that node with our F_pi: both are Rg_*j_! for the same standard compactification. The coefficient comparison used there is b of det-sp-reduction-direct-image. Its statement defines the proper part as the counit transpose after coefficient extension, followed by the open-extension tensor comparison, so it is exactly our pro-etale q. Separately, lem-weil-pbc-comparison-direct-image-canonical-mate says that the etale/pro-etale direct-image comparison is the specified site-comparison counit transpose. Together with tensor-pullback compatibility, mate-pasting, and the open/proper compact-support comparison, this identifies the site-transport of the ordinary-etale q of Step 4 with that same pro-etale q: transposing either composite leaves the same proper counit tensored with B, followed by the same open-extension tensor map. The right adjoint in Step 7 and the finite right adjoint in det-sp-reduction-exceptional are right adjoints of this same functor on the full bounded constructible finite-Tor subcategories. Uniqueness of right adjoints gives the unique counit-preserving identification between them. Under this identification the defining equation for the comparison is exactly epsilon_B F_B(b_pi)=T epsilon_A q_pi^{-1}; injectivity of the adjunction transpose therefore identifies the invertible comparison with b_pi. This proves the projection case on the pro-etale constructible category. To obtain the ordinary-etale assertion used for the local factorization in Step 10, transport through the finite constructible site equivalences of Step 7. Tensor-pullback compatibility carries T to T, compact-support site comparison carries F to F, and the transported Hom bijection carries the actual counits and their transposes to one another. Thus it carries the ordinary-etale b_pi to this pro-etale comparison, and full faithfulness reflects its invertibility. The case r=0 is the identity adjunction and tensor reassociation.",
+   "text": "For the smooth affine-space projection $\\pi:\\mathbf A^r_V\\to V$, apply det-sp-reduction-exceptional to $A\\to B$. Step 1 verifies its finite commutative $\\ell$-primary hypotheses for both coefficient maps. It gives an invertible pro-etale coefficient mate characterized by the displayed counit-transpose equation, with chart value the tensor reassociation of $\\pi^*(-)(r)[2r]$. Use the same standard compactification for both functors. The site/coefficient square and the counit-transport clause of lem-sp-et-proet-coefficient-compatibility identify the ordinary-etale projection map of Step 4, after site transport, with the named pro-etale coefficient map in that equation. Its hypotheses hold by Steps 1, 4 and 7: the schemes are separated finite type over $k$, and the inputs and exceptional outputs are bounded constructible finite-Tor. By det-sp-et-proet-adjunction-transfer the transported counit is $\\nu_V^*(\\epsilon_A^{\\mathrm{et}})\\circ c_{\\pi,A}^{-1}$, exactly the counit used in Step 7. Apply det-sp-unique-right-adjoint to identify its right adjoint with the one used in det-sp-reduction-exceptional, preserving this counit. Under these identifications the invertible mate satisfies $\\epsilon_B F_B(b_\\pi)=T\\epsilon_A q_\\pi^{-1}$; uniqueness of the adjunction transpose makes it our specified $b_\\pi$. The cited site/coefficient square carries this equation back to the ordinary-etale equation. Full faithfulness of the site equivalences of Step 7 reflects invertibility, giving the ordinary-etale projection case needed in Step 10. For $r=0$ these are the identity adjunction and tensor reassociation.",
    "uses": [
     "det-sp-reduction-exceptional",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-sp-et-proet-coefficient-compatibility",
+    "det-sp-et-proet-adjunction-transfer",
     "det-sp-unique-right-adjoint",
-    "lem-weil-pbc-mate-pasting",
-    "thm-weil-pbc-site-comparison",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sf-class-compact-support-comparison",
-    "det-sp-reduction-direct-image"
+    "thm-weil-pbc-site-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Charts and uniqueness of counit transposes, applied only to the smooth affine-space factor; ordinary-etale transport is supplied explicitly here."
+    "place": "Charts and uniqueness of transposes; the site/coefficient square is the separately cited lem-sp-et-proet-coefficient-compatibility, and the transported counit is det-sp-et-proet-adjunction-transfer."
    }
   },
   {
@@ -263,9 +260,9 @@
   "thm-weil-pbc-site-comparison",
   "lem-sf-class-compact-support-comparison",
   "det-sp-reduction-exceptional",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "det-sp-et-proet-adjunction-transfer",
   "det-sp-unique-right-adjoint",
-  "det-sp-reduction-direct-image",
   "lem-exc-closed-support-triangle",
   "lem-sf-triangle-morphism-iso",
   "lem-kun-04ca",
@@ -326,10 +323,45 @@
    "results": "[\"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\"]",
    "date": "2026-10-16",
    "verdict": "no match: returned general categorical mates or ordinary module/sheaf adjunctions; none states geometric exceptional finite-coefficient preservation and comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek|exceptionalPullback|mateEquiv_counit",
+   "results": "[\"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\"]",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern abstract mates, ordinary sheaf pullback/pushforward adjunctions, or exact-functor derived constructions; none states the finite exceptional coefficient theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "right adjoint to compactly supported etale direct image and finite coefficient base change",
+   "results": "[\"CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"SheafOfModules.instIsRightAdjointPushforward\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"PresheafOfModules.instIsRightAdjointPushforwardIdFunctorOppositeRingCat\", \"CompHausLike.LocallyConstant.counit_app_val\", \"PresheafOfModules.instIsRightAdjointPushforward\"]",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern abstract mates, ordinary sheaf pullback/pushforward adjunctions, or exact-functor derived constructions; none states the finite exceptional coefficient theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "[\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"]",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern abstract mates, ordinary sheaf pullback/pushforward adjunctions, or exact-functor derived constructions; none states the finite exceptional coefficient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite coefficient exceptional adjunction commutes with derived scalar extension for constructible etale sheaves",
+   "results": "[\"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.PullbackConstruction.adjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\"]",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern abstract mates, ordinary sheaf pullback/pushforward adjunctions, or exact-functor derived constructions; none states the finite exceptional coefficient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived exceptional inverse image preserves bounded constructible finite Tor complexes and canonical counits under coefficient reduction",
+   "results": "[\"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.mapDerivedCategory\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\"]",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits concern abstract mates, ordinary sheaf pullback/pushforward adjunctions, or exact-functor derived constructions; none states the finite exceptional coefficient theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-condensed-exceptional-reconstruction",
   "by": "worker",
@@ -341,7 +373,7 @@
   "date": "2026-10-17",
   "item": "lem-pur-finite-coefficient-adjoint-comparisons",
   "worker": "stage1",
-  "summary": "Thirteen-step arbitrary-field finite-coefficient proof using existing nodes only. Replaced the inherited large finite-field coefficient-extension citation by the DVR, finite-quotient, and DVR finite-free algebra facts; retained the current smooth coefficient-mate theorem on affine-space factors, identified the exact counit-normalized mates through site comparison and uniqueness, then used closed-support triangles and local affine embeddings for arbitrary f. Corrected the restriction-of-scalars map to Z -> A and removed the obsolete torsion-trace route. On repair re-reading, supplied an explicit finite-generation proof for S over R using finite S/tS and completeness, and cited the existing absolute-value uniqueness and completeness leaves. The local closed/smooth coefficient argument is sourced to Bhatt–Scholze 6.7.17–18 with current-blueprint smooth input.",
+  "summary": "Q12 dedicated long-step repair: retain the statement and twelve other proof steps verbatim; replace the 2585-character Step 8 by an application of the existing site/coefficient compatibility square and adjunction-transfer theorem, followed by counit-preserving uniqueness. No new nodes: the hidden comparison arguments already have exact DAG statements. All step citations reread; fresh item Mathlib searches logged with msearch.py.",
   "blueprint": "Finite-coefficient prerequisite for thm-pur-rational-and-qbar-purity and sk-thm-purity-transport: uses the current sk-lem-sp-reduction-exceptional chart comparison, the projective-line/diagonal affine model of sk-prop-an, and site comparison; extends to arbitrary f by closed support and local affine factorization. The smooth comparison follows the current Kummer/diagonal/DNC route.",
   "tool_uses": [
    {
@@ -483,6 +515,14 @@
    {
     "node": "lem-asd-etale-finite-twist-pullback",
     "why": "Step 6 uses its ordinary-etale local rank-one and locally constant conclusion for twists, needed to preserve flat constructible finite-Tor objects on the affine-space factor."
+   },
+   {
+    "node": "lem-sp-et-proet-coefficient-compatibility",
+    "why": "Step 8 uses its specified site/coefficient square and counit-identity transport, instead of reproving this geometric comparison inline. No node of the transport unit supplies that named square."
+   },
+   {
+    "node": "det-sp-et-proet-adjunction-transfer",
+    "why": "Step 8 uses its explicit transported counit formula to compare the two finite adjunctions; this is a generic site-equivalence tool, preserving the smooth chart route."
    }
   ]
  },
@@ -522,15 +562,17 @@
   "lem-weil-valued-dvr-finite-quotients",
   "lem-sc-dvr-fg-torsionfree-free",
   "det-sp-reduction-direct-image",
-  "lem-asd-etale-finite-twist-pullback"
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "det-sp-et-proet-adjunction-transfer"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q25-7f1c3872c",
-  "group": "Q25",
+  "reviewer": "NT-cc-Q12-ba4b5101c",
+  "group": "Q12",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-7f1c3872c (reviewer sub-agent of L); spot-checked: I read the whole 13-step split and the statements of all 40 proof and 12 statement dependencies, and checked the sources: main-20261015 sk-lem-sp-reduction-exceptional (statement and chart proof via the Kummer class, P1 diagonal and iterated P1 integration) and Bhatt–Scholze 6.7.17–6.7.18 (pp. 57–58: factor locally into a closed immersion and a smooth map, then use the closed-support triangle). The delivery has no new nodes. proof_deps equals the union of the step uses. Nothing cites SGA, and the DAG stays acyclic. Hypotheses checked: 0F10(1) needs no bound on cd(k). The projection lemma's D^- input, finite presentation and uniform bound hold. thm-amb-vector-bundle-purity and lem-sf-class-compact-support-comparison apply to the DVR-quotient rings A_n and S/t^nS=S/v^{en}. The Step 7 Hom chain uses only bounded objects. det-sp-reduction-exceptional covers every finite ℓ-primary map, including the non-flat quotient. Its counit-transpose map c, with b from det-sp-reduction-direct-image, equals the item's b_pi via det-sp-unique-right-adjoint and the canonical-mate site comparison. In Step 9 the fibre map is i_*(b_i) by the transpose equation. I redid the Step 11 unit identity and it holds. Step 1 gives a correct finite-generation proof of S over R. Small cases checked (identity, r=0, a point in A^1 with Z/ℓ²→Z/ℓ, e=1, empty X): no counterexample. Accepted the declared tool_uses. Observations for the maintainer: det-prop-scalar-six-exceptional and det-sfb-coefficient-comparisons-exceptional state related coefficient mates for the Loc(Dctf) adjoint. They are not duplicates created by this split, and neither depends on the item. The maintainer-owned top-level tool_uses still lists lem-coef-finite-free-extension, which the split no longer cites; replace it with the accepted list at merge. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-ba4b5101c (reviewer sub-agent of L); spot-checked: PASS: Step 8 is the only mathematical change. A read-only comparison with the side-DAG base shows the statement, stmt_deps and Steps 1-7 and 9-13 are byte-identical; there are no new nodes. The old 2585-character inline argument is replaced by four cited statements, all read in full. (1) det-sp-reduction-exceptional applies to the smooth pi:A^r_V->V for any finite l-primary A->B, including the nonflat A_m->A_n and R/t^n->S/t^nS. Its source is main-20261015 sk-lem-sp-reduction-exceptional.proof (Kummer class, P1 diagonal, P1 integration), not the SGA route. (2) lem-sp-et-proet-coefficient-compatibility states the square through delta that identifies the site-transported etale beta (= Step 3/4 q) with the pro-etale b of det-sp-reduction-direct-image, plus its counit-transport clause; its hypotheses are met by Steps 1, 6 and 7. (3) det-sp-et-proet-adjunction-transfer (proof source read) needs nu^* equivalences on Dctf (Step 7) and G preserving Dctf (Step 6). It gives the counit nu^*(eps)c^{-1}, which is Step 7's: lem-sf-class-compact-support-comparison is the inverse of the same canonical mate. (4) det-sp-unique-right-adjoint: transposes correspond under the counit-compatible isomorphism, so b_pi equals c and is invertible. Invertibility comes from the chart theorem, not from mates of isomorphisms. Checks: proof_deps equals the union of uses; a transitive-closure check shows no cycle; no SGA citation; target not weakened. Small cases (identity map, r=0, A^1 with Z/l^2->Z/l, ramified e>1, empty V) give no counterexample. Accepted tool_uses: lem-sp-et-proet-coefficient-compatibility, det-sp-et-proet-adjunction-transfer, det-sp-reduction-exceptional, det-sp-unique-right-adjoint. Maintainer: the top-level tool_uses still lists lem-coef-finite-free-extension; replace it with the accepted split_report list at merge. No fixes."
  },
  "lean_audit": {
   "master": {
