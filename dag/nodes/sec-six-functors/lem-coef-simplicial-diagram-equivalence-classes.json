@@ -276,5 +276,46 @@
    "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2 (derived coefficient adjunction before the displayed RHom/Rlim calculation), via enriched-diagram rectification. Steps 1-4 supply the restricted class comparison used in its Step 4; Steps 5-8 supply the unrestricted comparison and naturality used in its Step 3. The new span path-object node supplies the path object underlying Steps 2-3."
   }
  },
- "lead_note": "2026-10-17 Q59 maintenance: statement unchanged except the citation supplying Bergner terminology. Reopened stage 1 because the previous decomposition closes the Q59 foundation cycle. The historical proof and review are retained in maintenance_retracted_split for reuse and audit, but are not active proof dependencies. Re-split by the direct enriched-model route in HTT A.3.4.10/A.3.4.12; use the independent simplicial projective/localization calculus for SM7 and Bergner notions, not the full coherent-nerve/straightening theorem. Check the complete dependency closure including the Q59 item before review. See coord/maintenance/maint-Q59-1792218170.md."
+ "lead_note": "2026-10-17 Q59 maintenance: statement unchanged except the citation supplying Bergner terminology. Reopened stage 1 because the previous decomposition closes the Q59 foundation cycle. The historical proof and review are retained in maintenance_retracted_split for reuse and audit, but are not active proof dependencies. Re-split by the direct enriched-model route in HTT A.3.4.10/A.3.4.12; use the independent simplicial projective/localization calculus for SM7 and Bergner notions, not the full coherent-nerve/straightening theorem. Check the complete dependency closure including the Q59 item before review. See coord/maintenance/maint-Q59-1792218170.md.",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialDiagramEquivalenceClasses",
+  "declaration": "CategoryTheory.simplicial_diagram_equivalence_classes",
+  "file": "lean/Sheaf/CategoryTheory/SimplicialDiagramEquivalenceClasses.lean",
+  "statement": "theorem simplicial_diagram_equivalence_classes (C : Type (max u w)) [Category.{u} C] [ModelCategory C] [SimplicialCategory C] (T : SimplicialTensorCotensor C) (hC : CombinatorialModelCategory.{max u w, u, u} C) (hSM7 : SimplicialModelLocalization.SatisfiesSM7 C) : Nonempty (SimplicialDiagramEquivalenceClassesStatement C T hC hSM7)",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.modelWeakEquivalenceStep",
+   "CategoryTheory.modelObjectSetoid",
+   "CategoryTheory.modelObjectClasses",
+   "CategoryTheory.diagramObjectClasses",
+   "CategoryTheory.diagramInChunk",
+   "CategoryTheory.diagramWeakEquivalenceStep",
+   "CategoryTheory.chunkObjectSetoid",
+   "CategoryTheory.chunkObjectClasses",
+   "CategoryTheory.diagramULiftEnrichment",
+   "CategoryTheory.diagramULiftFunctor",
+   "CategoryTheory.diagramLargeSimplicialCategory",
+   "CategoryTheory.diagramBergnerLocalization",
+   "CategoryTheory.bergnerHom",
+   "CategoryTheory.bergnerCofibrant",
+   "CategoryTheory.diagramBifibrantFunctor",
+   "CategoryTheory.diagramChunkBifibrantFunctor",
+   "CategoryTheory.chunkBifibrantInclusion",
+   "CategoryTheory.diagramRestrictionObject",
+   "CategoryTheory.SimplicialDiagramEquivalenceClassesStatement",
+   "CategoryTheory.simplicial_diagram_equivalence_classes"
+  ],
+  "note": "Second reading repaired the chunk target and subtype quotient, canonical representative/restriction/inclusion formulas, the unrestricted projective-cofibrancy restriction in the zigzag test, and the trivial-fibration lifting condition. Target objects have universe max u w, while indices and mapping simplicial sets remain in u; real object-set ULift constructions and the general Mathlib localization avoid any size or calculus-of-fractions hypothesis. The TeX statement and proof are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f0a1de53c",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Read node, 3 stmt-dep modules (SimplicialProjectiveModelCalculus, SimplicialSmallChunks, CoherentNerveComparison + infrastructure), HTT A.3.4.9/A.3.4.10/A.3.4.12 pp.888-890 from local PDF, delivered module and report (Worker report + Second reading by Q04 present). All clauses faithful: zigzag EqvGen quotient over the objectwise-weq projective model; Mathlib MorphismProperty.Q localization of EnrichedCat.{u,u+1,max u w} at the dependency's DwyerKanEquivalence (same Hom(I,A^cf) as the node's hsCat via the node's path-object argument); unrestricted bijection with normalization on pointwise-bifibrant reps (HTT A.3.4.12 proof); naturality by actual precomposition; bergnerCofibrant equivalent to BergnerModelData cofibrancy; chunk subtype quotient with U-internal zigzags (consistent with A.3.4.10); inclusion compatibility; zigzag iff with no projective hypotheses. No hollow defs, sole sorry is the main theorem, docstrings/source/blueprint present, lean.statement verbatim, 20 declarations match the file, no statement_change. nt_compile --json: rc=0, no errors or warnings. Probe compile: new Category instance agrees with sCatCategory under with_reducible_and_instances rfl, statement instantiates at C:Type(u+1) and C:Type u, axioms only sorryAx+standard. Minor non-fault: bergnerCofibrant restates BergnerModelData cofibrancy in concrete, equivalent form."
+ }
 }
