@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-!
 # Constructibility after forgetting module structure
@@ -66,7 +67,7 @@ private theorem finiteLocallyConstant_underlyingSets {Λ : Type (u + 1)}
       (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).obj
       (G.over (d.cover.etalePrecoverageToEtale i))).IsConstant _
     infer_instance
-  · intro Ω _ _ s
+  · refine isFiniteSheaf_of_finite_algClosed_stalks _ fun Ω _ _ s ↦ ?_
     let P := pointSmallEtale s
     let M := (P.sheafFiber (A := ModuleCat.{u + 1} Λ)).obj G
     let : Module.Finite Λ M := (ModuleCat.isFinitelyGenerated_iff M).mp
@@ -122,11 +123,11 @@ theorem isConstructibleEtaleSheafOfSets_of_module
     exact Sheaf.isConstant_congr _
       (((S.domain k).smallEtaleTopology.overPullback (Type (u + 1))
         (𝒰.etalePrecoverageToEtale i)).mapIso e.symm)
-  · intro Ω _ _ s
+  · refine isFiniteSheaf_of_finite_algClosed_stalks _ fun Ω _ _ s ↦ ?_
     have hfinite : Finite ((pointSmallEtale s).sheafFiber.obj
         ((sheafCompose (S.domain k).smallEtaleTopology
           (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).obj G)) :=
-      hUG.2 Ω s
+      hUG.finite_sheafFiber Ω s
     exact @Finite.of_equiv _ _ hfinite
       (((pointSmallEtale s).sheafFiber (A := Type (u + 1))).mapIso e).toEquiv.symm
 
