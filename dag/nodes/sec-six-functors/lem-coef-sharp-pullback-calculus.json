@@ -113,5 +113,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b86bed82b",
+  "group": "Q24",
+  "result": "pass",
+  "note": "I checked rezk_diagonal_sharp against the node clause by clause and all match: SSet.{u} with one universe; realization weak equivalences; IsHomotopyCartesian replaces both legs over the original base and fixes the comparison by its projections, which also forces commutativity, and right properness makes this match the fibrant-replacement wording; IsSharp tests every T->B; h_rows covers every m; h_squares covers every opposite arrow with corners matching p.naturality; the diagonal is Functor.diag whiskered into uncurry.map p, giving (X_q)_q; no Kan, Reedy or Nonempty hypothesis. The supplied calculus dependency matches all 8 clauses of its node and each is true; its record changes only lean. Neither the path-model IsHomotopyPullbackSquare (Kan corners only) nor SheafFlatModel.IsHomotopyPullback is the same notion. The item record changes only stmt_deps (calculus added, no cycle) and lean; both statements are verbatim in their files; no hollow definitions; exactly two sorry theorems; source and blueprint docstrings present; all nine proof steps in the docstring; report has both required sections. nt_compile.py --json on both files: rc 0, no errors or warnings; a deliberately broken control copy did report its error. Residual: Rezk's paper is not reachable from this server, so its numbering was not checked here."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SharpPullbackCalculus",
+  "declaration": "SSet.sharp_pullback_calculus",
+  "declarations": [
+   "SSet.IsHomotopyCartesian",
+   "SSet.IsSharp",
+   "SSet.sharp_pullback_calculus"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SharpPullbackCalculus.lean",
+  "statement": "theorem sharp_pullback_calculus (E B : SSet.{u}) (p : E ⟶ B) : (IsSharp p ↔ ∀ (A A' : SSet.{u}) (a : A ⟶ B) (a' : A' ⟶ B) (v : A ⟶ A') (w : v ≫ a' = a), Enhanced.IsWeakHomotopyEquivalence v → Enhanced.IsWeakHomotopyEquivalence (pullback.map p a p a' (𝟙 E) v (𝟙 B) (by simp) (by simpa using w.symm))) ∧ (IsSharp p → ∀ (T : SSet.{u}) (t : T ⟶ B), IsSharp (pullback.snd p t)) ∧ (IsSharp p → ∀ K : SSet.{u}, IsSharp (prod.map p (𝟙 K))) ∧ (∀ (E' B' : SSet.{u}) (a : E' ⟶ E) (p' : E' ⟶ B') (b : B' ⟶ B) (w : a ≫ p = p' ≫ b), IsSharp p → (IsHomotopyCartesian a p' p b ↔ Enhanced.IsWeakHomotopyEquivalence (pullback.lift a p' w))) ∧ (∀ (E' B' : SSet.{u}) (a : E' ⟶ E) (p' : E' ⟶ B') (b : B' ⟶ B) (w : a ≫ p = p' ≫ b), IsSharp p → IsSharp p' → IsHomotopyCartesian a p' p b → ∀ (T : SSet.{u}) (t : T ⟶ B'), Enhanced.IsWeakHomotopyEquivalence (pullback.map p' t p (t ≫ b) a (𝟙 T) b w.symm (by simp)) ∧ IsHomotopyCartesian (pullback.fst p' t ≫ a) (pullback.snd p' t) p (t ≫ b)) ∧ (∀ (E' E'' B' B'' : SSet.{u}) (a : E' ⟶ E) (a' : E'' ⟶ E') (p' : E' ⟶ B') (p'' : E'' ⟶ B'') (b : B' ⟶ B) (b' : B'' ⟶ B'), IsSharp p → IsSharp p' → IsSharp p'' → IsHomotopyCartesian a p' p b → IsHomotopyCartesian a' p'' p' b' → IsHomotopyCartesian (a' ≫ a) p'' p (b' ≫ b)) ∧ (∀ (E' B' : SSet.{u}) (a : E' ⟶ E) (p' : E' ⟶ B') (b : B' ⟶ B), IsSharp p → IsSharp p' → IsHomotopyCartesian a p' p b → ∀ K : SSet.{u}, IsHomotopyCartesian (prod.map a (𝟙 K)) (prod.map p' (𝟙 K)) (prod.map p (𝟙 K)) (prod.map b (𝟙 K))) ∧ (IsSharp p → ∀ (K L : SSet.{u}) (k : K ⟶ L), IsHomotopyCartesian (prod.map (𝟙 E) k) (prod.map p (𝟙 K)) (prod.map p (𝟙 L)) (prod.map (𝟙 B) k))",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "No lean record or mathlib_match was present, so neither the sharp-map notion nor its homotopy-cartesian-square predicate was available. This prerequisite module states the entire existing node and gives its two predicates as real definitions using the recorded realization weak equivalences and horn-defined Kan fibrations. Rezk Section 2.3 computes homotopy pullbacks by replacing both legs, valid without original Kan objects in this right proper model structure. Added under the human 2026-10-16 instruction to supply genuine unstated prerequisites in the same delivery."
  }
 }

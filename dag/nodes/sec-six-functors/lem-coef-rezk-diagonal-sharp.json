@@ -31,7 +31,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-kan-quillen-right-proper"
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-sharp-pullback-calculus"
  ],
  "proof": [
   {
@@ -222,5 +223,27 @@
   "group": "Q108",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-3476194d2 (reviewer sub-agent of L); spot-checked: Read in full: the item lem-coef-rezk-diagonal-sharp (all 9 steps), both new nodes (lem-coef-sharp-pullback-calculus and lem-coef-sharp-special-colimit-gluing), the cited statements (nondegenerate decomposition = Stacks 017R Mathlib leaf, kan-quillen-right-proper, def-cbc-enhanced-diagrams-cones), the parent's use of the item, the blueprint ancestor and the unit. The source, Rezk's sharp-maps paper, is not archived (WANTED is recorded) and could not be reached from this server (ECONNREFUSED), so I checked the mathematics myself rather than against Rezk's text. Steps: step 1 is the Reedy-skeleton pushout F_n = F_{n-1} ⊔_{A_n} C_n, elementary from 017R per vertical degree. In step 4, sigma_T has jump set T, images intersect in the (T∩T')-image, the colimit maps injectively onto L_n and the latching maps are the monos L_{|T|} → Z_{|T|}. In steps 5 and 6 the cocones agree with the attaching maps (Z(d_T beta)z and Z(sigma_T alpha)y). Steps 7 and 8 use gluing(2) with the correct mono legs, and the two relative-cocone uses are separate. Step 9 is a sequence of monos plus pasting. proof_deps equals the union of uses; reachability recomputed, no cycle. New nodes: every calculus clause checked true in right-proper Kan-Quillen. Gluing cases (1)-(3) are the special shapes whose strict colimits are homotopy colimits; the relative clause follows via W_i = V_i ×_H E, universal colimits in sSet and homotopy invariance of cofibrant colimits. Edge cases checked: S empty, singleton, n=1 and n=2. Both nodes are statement-only, introduce their objects, define their notions inline, have single TeX escapes and all three search kinds, and are not restatements or DAG duplicates (checked kan-pullback-fibration-invariance, infinity-homotopy-pullback-pasting, space-universal-colimits-cartesian-pushouts, enriched-diagram-homotopy-descent, sset-gluing-filtered-equivalences, marked-sharp nodes). Unit route unchanged; accepted tool_use: lem-weil-pbc-simplicial-set-nondegenerate-decomposition (Mathlib leaf, generic). Not a target node; no SGA. No fixes. Residual: Rezk's numbering (Prop 2.7 vs the blueprint's 2.2) is unchecked because the source is not available here. One read-only git log was run by mistake; nothing was modified."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b86bed82b",
+  "group": "Q24",
+  "result": "pass",
+  "note": "I checked rezk_diagonal_sharp against the node clause by clause and all match: SSet.{u} with one universe; realization weak equivalences; IsHomotopyCartesian replaces both legs over the original base and fixes the comparison by its projections, which also forces commutativity, and right properness makes this match the fibrant-replacement wording; IsSharp tests every T->B; h_rows covers every m; h_squares covers every opposite arrow with corners matching p.naturality; the diagonal is Functor.diag whiskered into uncurry.map p, giving (X_q)_q; no Kan, Reedy or Nonempty hypothesis. The supplied calculus dependency matches all 8 clauses of its node and each is true; its record changes only lean. Neither the path-model IsHomotopyPullbackSquare (Kan corners only) nor SheafFlatModel.IsHomotopyPullback is the same notion. The item record changes only stmt_deps (calculus added, no cycle) and lean; both statements are verbatim in their files; no hollow definitions; exactly two sorry theorems; source and blueprint docstrings present; all nine proof steps in the docstring; report has both required sections. nt_compile.py --json on both files: rc 0, no errors or warnings; a deliberately broken control copy did report its error. Residual: Rezk's paper is not reachable from this server, so its numbering was not checked here."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.RezkDiagonalSharp",
+  "declaration": "SSet.rezk_diagonal_sharp",
+  "declarations": [
+   "SSet.rezk_diagonal_sharp"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/RezkDiagonalSharp.lean",
+  "statement": "theorem rezk_diagonal_sharp (X Y : SimplexCategoryᵒᵖ ⥤ SSet.{u}) (p : X ⟶ Y) (h_rows : ∀ m : SimplexCategoryᵒᵖ, IsSharp (p.app m)) (h_squares : ∀ (m n : SimplexCategoryᵒᵖ) (a : m ⟶ n), IsHomotopyCartesian (X.map a) (p.app m) (p.app n) (Y.map a)) : IsSharp (whiskerLeft (Functor.diag SimplexCategoryᵒᵖ) (Functor.uncurry.map p))",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The diagonal is Mathlib uncurrying followed by categorical diagonal precomposition. Sharpness and homotopy-cartesianness use the prerequisite calculus module supplied in this delivery; no Kan or Reedy hypothesis is added."
  }
 }
