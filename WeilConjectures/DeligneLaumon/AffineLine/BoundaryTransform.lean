@@ -165,7 +165,7 @@ theorem nonempty_iso_fourierTransform_derivedLowerShriek_of_isPullback
           ((tensorLisse L hL).mapIso e₅ ≪≫ tensorLisseObjToComplexIso L hL E'))
   -- Step 3: `Rπ_! G` is the sheaf `π_* G` in degree zero
   have hneg (r : ℤ) (hr : r < 0) : IsZero ((homologySheaf r).obj Kπ) :=
-    isZero_homologySheaf_derivedLowerShriek_toComplex_of_neg π G hr
+    WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg (f := π) G hr
   have hpos (r : ℕ) (hr : 0 < r) : IsZero ((homologySheaf r).obj Kπ) :=
     isZero_higherLowerShriek_of_quasiFinite π r hr G
   let eP := derivedLowerShriekObjIsoDerivedLowerStar π (WeilSheaf.toComplex.obj G)
