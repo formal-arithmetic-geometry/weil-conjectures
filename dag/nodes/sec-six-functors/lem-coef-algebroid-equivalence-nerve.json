@@ -28,7 +28,7 @@
  ],
  "proof": [
   {
-   "text": "The finite-set algebroids $E^n$ and their maps are defined in [def-coef-complete-algebroid]. Precomposition reverses the cosimplicial operators and gives the stated simplicial space. The definition of completeness there is exactly that $I_0(C)\\to|I_\\bullet(C)|$ is an equivalence. Step 3 will identify its evaluation map $I_0(C)\\to U(C)$ naturally as an equivalence, which then gives the asserted completeness criterion.",
+   "text": "The finite-set algebroids $E^n$ and their maps are defined in [def-coef-complete-algebroid]. Precomposition reverses the cosimplicial operators and gives the stated simplicial space. The definition of completeness there is exactly that $I_0(C)\\to|I_\\bullet(C)|$ is an equivalence. Step 5 will identify its evaluation map $I_0(C)\\to U(C)$ naturally as an equivalence, which then gives the asserted completeness criterion.",
    "uses": [
     "def-coef-complete-algebroid"
    ],
@@ -39,14 +39,20 @@
    }
   },
   {
-   "text": "Reduce the enriched calculations to spaces as follows. At the terminal monoidal category, [lem-coef-algebroid-segal-localization-model] states that $\\mathcal S=P(*)$ is presentably monoidal and that cartesian product preserves small colimits separately. Apply [lem-coef-infinity-presheaf-free-cocompletion] with the terminal category: its presheaf category is $\\mathcal S$, so the object $\\mathbf1\\in\\mathcal V$ extends to the colimit-preserving functor $T(K)=\\operatorname{colim}_K\\mathbf1$. The mapping-space colimit criterion of [lem-coef-infinity-yoneda-presheaf-limits] gives $\\operatorname{Map}_{\\mathcal V}(T(K),v)\\simeq\\operatorname{Map}_{\\mathcal S}(K,\\operatorname{Map}_{\\mathcal V}(\\mathbf1,v))$. Thus $T\\dashv R$ with $R(v)=\\operatorname{Map}_{\\mathcal V}(\\mathbf1,v)$. Separate preservation of colimits by tensor gives $T(K)\\otimes T(L)\\simeq\\operatorname{colim}_{K\\times L}(\\mathbf1\\otimes\\mathbf1)\\simeq T(K\\times L)$ and $T(*)\\simeq\\mathbf1$. For coherence, apply the free-cocompletion equivalence successively in each variable: restriction of separately colimit-preserving functors $\\mathcal S^r\\to\\mathcal V$ to the tuple $(*,\\ldots,*)$ is fully faithful, including transformations and higher simplices. Both sides of every iterated tensor comparison preserve colimits separately. Thus the unit constraints on $\\mathbf1$ extend uniquely up to contractible choice to these comparisons, and the associativity, unit diagrams and their higher compatibilities extend along the same fully faithful restrictions. The displayed comparison is an equivalence because its restriction is the unit-constraint equivalence; this also follows directly from the displayed colimit calculation. Construct the required enriched mapping adjunction without appealing to completion. Postcomposition with the strong monoidal $T$ and its adjoint lax monoidal $R$ gives $T_*$ and $R_*$, with $R_*C(x,y)=R(C(x,y))$ and unchanged object spaces. First construct the object-space mapping formula independently of equivalence nerves. The total category in [def-coef-complete-algebroid] is the Grothendieck construction of $X\\mapsto\\operatorname{Alg}_X(\\mathcal V)$, with pullback given by precomposition. Enlarge the ambient universe to contain the category of original-small spaces and all its algebra fibers, and enlarge once more to form their category of fibrations; the object spaces themselves stay original-small. Apply [lem-coef-cocartesian-straightening] to $X\\mapsto\\operatorname{Alg}_X(\\mathcal V)^{\\mathrm{op}}$ over $\\mathcal S^{\\mathrm{op}}$, then take opposites. This identifies the defined total category with a Cartesian fibration, whose Cartesian lift of $\\phi:X\\to Y$ with target $B$ is $\\phi^*B\\to B$, represented by the identity of $\\phi^*B$. The $K=\\Delta^0$ case of [lem-coef-infinity-pointwise-cocartesian-transport], applied to its opposite, gives the mapping-space fiber formula. The construction applies to both $\\mathcal V$ and $\\mathcal S$, and is natural under coefficient postcomposition since this commutes with restriction. For algebroids $A$ over $X$ and $B$ over $Y$, this formula identifies the fibers of $\\operatorname{Map}(T_*A,B)$ and $\\operatorname{Map}(A,R_*B)$ over $\\phi:X\\to Y$ with $\\operatorname{Map}_{\\operatorname{Alg}_X(\\mathcal V)}(T_*A,\\phi^*B)$ and $\\operatorname{Map}_{\\operatorname{Alg}_X(\\mathcal S)}(A,R_*\\phi^*B)$. By [lem-coef-many-object-operad-accessibility], restriction along $\\Delta_X^{\\mathrm{op}}\\to q(X)=L_{\\mathrm{gen}}\\Delta_X^{\\mathrm{op}}$ identifies these algebra categories naturally with algebras over the small ordinary nonsymmetric operad $q(X)$. Apply [lem-coef-operadic-change-enrichment] to $T\\dashv R$ and this operad. It supplies natural equivalences of the displayed fibers, commuting coherently with restriction in $X$ and with the units and counits. Explicitly, the forward map sends $k$ to $R_*(k)\\eta_A$, and its inverse sends $h$ to $\\varepsilon_B T_*(h)$; they preserve the object-space map $\\phi$, since the algebra unit and counit fix the object space. The restriction compatibility makes these maps defined on the total mapping spaces over $\\operatorname{Map}_{\\mathcal S}(X,Y)$, with all higher simplices. Over the identity of this base their fibers are equivalences, so [lem-coef-spaces-homotopy-fiber-detection] gives the equivalence of total mapping spaces, naturally in $A,B$. This is precisely the mapping-space adjunction required here. Since $T(*)=\\mathbf1$, it sends each coarse space-enriched algebroid $E_A^{\\mathcal S}$ to $E_A^{\\mathcal V}$. Therefore, naturally in finite sets $A$ and algebroids $C$,\n$$\\operatorname{Map}(E_A^{\\mathcal V},C)\\simeq\\operatorname{Map}(E_A^{\\mathcal S},R_*C).$$",
+   "text": "Let $\\mathcal T$ be the terminal monoidal category. By [lem-coef-algebroid-segal-localization-model], $P(\\mathcal T)=\\mathcal S$ is presentably monoidal; its Day tensor is cartesian product. Apply the extension clause of [lem-coef-operadic-day-convolution] to the strong monoidal functor $\\mathcal T\\to\\mathcal V$ selecting the tensor unit with its unit constraints. It gives a colimit-preserving strong monoidal $T:\\mathcal S\\to\\mathcal V$, with $T(*)\\simeq\\mathbf1$, and its lax monoidal right adjoint $R(v)=\\operatorname{Map}_{\\mathcal V}(\\mathbf1,v)$. This uses the cited monoidal extension theorem, including its coherence, rather than inferring monoidality from an objectwise tensor comparison.",
    "uses": [
-    "lem-coef-infinity-presheaf-free-cocompletion",
-    "lem-coef-infinity-yoneda-presheaf-limits",
     "lem-coef-algebroid-segal-localization-model",
-    "lem-coef-many-object-operad-accessibility",
-    "lem-coef-operadic-change-enrichment",
-    "lem-coef-spaces-homotopy-fiber-detection",
+    "lem-coef-operadic-day-convolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Example 4.3.20; monoidal Yoneda extension as stated in the cited Day-convolution node."
+   }
+  },
+  {
+   "text": "Construct the object-space mapping formula without using equivalence nerves. For either coefficient category $\\mathcal B=\\mathcal V$ or $\\mathcal S$, [def-coef-complete-algebroid] defines the total category of the restriction functor $X\\mapsto\\operatorname{Alg}_X(\\mathcal B)$. Enlarge universes so that the space category and all these fibers are small in the universe to which straightening is applied. Apply [lem-coef-cocartesian-straightening] to $X\\mapsto\\operatorname{Alg}_X(\\mathcal B)^{\\mathrm{op}}$ over $\\mathcal S^{\\mathrm{op}}$, then take opposites. The resulting Cartesian Grothendieck construction is the defined total category: its arrows are exactly pairs $(\\phi,A\\to\\phi^*B)$ with their coherent simplices. Its Cartesian lift to $B$ over $\\phi:X\\to Y$ is $\\phi^*B\\to B$, represented by the identity of $\\phi^*B$. The opposite, $K=\\Delta^0$ case of [lem-coef-infinity-pointwise-cocartesian-transport] therefore identifies the homotopy fiber over $\\phi$ of $\\operatorname{Map}(A,B)\\to\\operatorname{Map}_{\\mathcal S}(X,Y)$ with $\\operatorname{Map}_{\\operatorname{Alg}_X(\\mathcal B)}(A,\\phi^*B)$. These comparisons are natural under coefficient postcomposition, which commutes with restriction.",
+   "uses": [
     "def-coef-complete-algebroid",
     "lem-coef-cocartesian-straightening",
     "lem-coef-infinity-pointwise-cocartesian-transport"
@@ -54,13 +60,27 @@
    "elementary": false,
    "source": {
     "document": "https://arxiv.org/html/1312.3178v4",
-    "place": "Example 4.3.20, Definition 5.1.10 and Proposition 5.1.11; the strong monoidal structure is checked by the displayed colimit calculation.; ordinary-operadic mapping adjunction: Proposition A.5.11, with Lemma 4.3.19 for assembly over object spaces; Cartesian straightening and its opposite mapping-fiber formula, HTT 3.2.0.1 and 2.4.4.2, with ambient-universe enlargement"
+    "place": "Lemma 4.3.19, mapping-fiber calculation; straightening and Cartesian mapping-fiber criterion, as stated in the cited nodes."
    }
   },
   {
-   "text": "In [lem-coef-algebroid-segal-localization-model], take the small monoidal category to be the terminal category and take the coefficient localization set empty. Then $P(*)=\\mathcal S$, its Day tensor is cartesian product (both sides at the only object are the product of values), and $Q_*$ is the full category of Segal spaces. The stated equivalence identifies $R_*C$ with a Segal space $W_C$, with $(W_C)_0=U(C)$ and $(W_C)(x,y)=\\operatorname{Map}_{\\mathcal V}(\\mathbf1,C(x,y))$. Under this same explicit object-and-mapping-object identification, $E_A^{\\mathcal S}$ has $(n+1)$-tuples of objects $A^{n+1}$ in degree $n$, with the uniquely prescribed composites: it is $dG_A$ for $G_A=N(\\mathcal I_A)$. Full faithfulness of that equivalence now turns Step 2 into $\\operatorname{Map}(E_A^{\\mathcal V},C)\\simeq\\operatorname{Map}_{\\mathcal P_\\Delta}(dG_A,W_C)$. These equivalences respect every finite-set map, evaluation on edges, units and composition. For a singleton $A$, $dG_A$ is the constant point simplicial space, which is the free diagram $[0]!*$ on $[0]\\in\\Delta^{\\mathrm{op}}$, since there is exactly one map $[n]\\to[0]$ in $\\Delta$. The free-diagram mapping equivalence in [lem-coef-coherent-diagram-coyoneda], with $I=\\Delta^{\\mathrm{op}}$ and $\\mathcal B=\\mathcal S$, gives $\\operatorname{Map}(dG_A,W_C)\\simeq\\operatorname{Map}(*,(W_C)_0)\\simeq U(C)$. Its map is evaluation at that vertex. Hence $I_0(C)\\simeq U(C)$ naturally; applying the Step 1 definition proves the completeness assertion.",
+   "text": "Postcomposition with $T$ and $R$ gives $T_*$ and $R_*$, with unchanged object spaces and $R_*C(x,y)=\\operatorname{Map}_{\\mathcal V}(\\mathbf1,C(x,y))$. For each $X$, replace $\\Delta_X^{\\mathrm{op}}$ by the small ordinary operad $q(X)=L_{\\mathrm{gen}}\\Delta_X^{\\mathrm{op}}$ using [lem-coef-many-object-operad-accessibility]. The restriction-natural adjunction in [lem-coef-operadic-change-enrichment] gives $T_X\\dashv R_X$ on these fibers, with their algebra units, counits and triangle homotopies. Since postcomposition commutes with restriction, $R_*$ preserves the Cartesian lifts of Step 3. Thus $R_*^{\\mathrm{op}}$ is a cocartesian-edge-preserving functor over $\\mathcal S^{\\mathrm{op}}$, and its fiber functors have specified right adjoints $T_X^{\\mathrm{op}}$. Apply [lem-coef-cocartesian-relative-right-adjoint] and take opposites. This gives $T_*\\dashv R_*$ over $\\mathcal S$: the fiber units and counits assemble on the defined total categories because they commute coherently with operad restriction, and their triangle homotopies assemble for the same reason. In particular the left functor is the postcomposition $T_*$, with these algebra transformations, not merely an assignment on fibers. For a nonempty finite set $A$, let $E_A$ denote $E^{|A|-1}$ with its objects relabelled by $A$. Strong monoidality identifies $T_*E_A^{\\mathcal S}\\simeq E_A^{\\mathcal V}$, including units and all finite-set maps. Hence naturally in $A,C$,\n$$\\operatorname{Map}(E_A^{\\mathcal V},C)\\simeq\\operatorname{Map}(E_A^{\\mathcal S},R_*C).$$",
+   "uses": [
+    "lem-coef-many-object-operad-accessibility",
+    "lem-coef-operadic-change-enrichment",
+    "lem-coef-cocartesian-relative-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Lemma 4.3.19, Example 4.3.20, Definition 5.1.10 and Proposition 5.1.11; restriction-natural fiber adjunction assembled by the cited relative-adjoint theorem."
+   }
+  },
+  {
+   "text": "In [lem-coef-algebroid-segal-localization-model], take the small monoidal category to be the terminal category and take the coefficient localization set empty. Then $P(*)=\\mathcal S$, its Day tensor is cartesian product (both sides at the only object are the product of values), and $Q_*$ is the full category of Segal spaces. The stated equivalence identifies $R_*C$ with a Segal space $W_C$, with $(W_C)_0=U(C)$ and $(W_C)(x,y)=\\operatorname{Map}_{\\mathcal V}(\\mathbf1,C(x,y))$. Under this same explicit object-and-mapping-object identification, $E_A^{\\mathcal S}$ has $(n+1)$-tuples of objects $A^{n+1}$ in degree $n$, with the uniquely prescribed composites: it is $dG_A$ for $G_A=N(\\mathcal I_A)$. Full faithfulness of that equivalence now turns Step 4 into $\\operatorname{Map}(E_A^{\\mathcal V},C)\\simeq\\operatorname{Map}_{\\mathcal P_\\Delta}(dG_A,W_C)$. These equivalences respect every finite-set map, evaluation on edges, units and composition. For a singleton $A$, $dG_A$ is the constant point simplicial space, which is the free diagram $[0]!*$ on $[0]\\in\\Delta^{\\mathrm{op}}$, since there is exactly one map $[n]\\to[0]$ in $\\Delta$. The free-diagram mapping equivalence in [lem-coef-coherent-diagram-coyoneda], with $I=\\Delta^{\\mathrm{op}}$ and $\\mathcal B=\\mathcal S$, gives $\\operatorname{Map}(dG_A,W_C)\\simeq\\operatorname{Map}(*,(W_C)_0)\\simeq U(C)$. Its map is evaluation at that vertex. Hence $I_0(C)\\simeq U(C)$ naturally; applying the Step 1 definition proves the completeness assertion.",
    "uses": [
     "lem-coef-algebroid-segal-localization-model",
+    "def-coef-segal-presheaf-localization",
     "lem-coef-coherent-diagram-coyoneda"
    ],
    "elementary": false,
@@ -70,21 +90,29 @@
    }
   },
   {
-   "text": "Fix finite sets $A$, $a\\in A$ and $b\\notin A$. By [lem-coef-coarse-nerve-gluing] the inclusion $G_A\\amalg_{G_a}G_{\\{a,b\\}}\\to G_{A\\cup\\{b\\}}$ is inner anodyne. Here inner-anodyne maps induce mapping-space equivalences into $W_C$ by the following induction, using [lem-coef-labelled-spine-prism-horn-calculus] at terminal coefficients. By the free-diagram equivalence of [lem-coef-coherent-diagram-coyoneda] with $I=\\Delta^{\\mathrm{op}}$ and $\\mathcal B=\\mathcal S$, $d\\Delta^n=[n]!*$ since $\\operatorname{Hom}_\\Delta([k],[n])=(\\Delta^n)_k$, so $\\operatorname{Map}(d\\Delta^n,W_C)\\simeq(W_C)_n$ by evaluation; with the pointwise-colimit criterion used below, mapping the spine (glued from $d\\Delta^1$ along $d\\Delta^0$ by injections) into $W_C$ gives $(W_C)_1\\times_{(W_C)_0}\\cdots\\times_{(W_C)_0}(W_C)_1$. In dimension two the inner horn is the spine. In dimension $m>2$, the spine-to-inner-horn inclusion is a finite composite of pushouts of inner horns of dimensions less than $m$, so by induction its restriction on mapping spaces is an equivalence. The spine-to-simplex restriction is an equivalence by the Segal condition; two-out-of-three therefore proves the inner-horn-to-simplex restriction is an equivalence. The same conclusion is closed under pushouts, transfinite compositions and retracts: a pushout along a degreewise injection is a homotopy pushout after passage from sets to discrete spaces (in each degree, the graph presenting the pushout has a tree as each component), and an increasing transfinite union is its homotopy colimit. By [lem-coef-infinity-yoneda-presheaf-limits], these colimits are pointwise and mapping out turns them into limits; limits and retracts of equivalences are equivalences. Thus mapping the coarse inclusion above into $W_C$ gives an equivalence, with no extra locality prerequisite. The displayed pushout remains a pushout in simplicial spaces: it is pointwise a pushout of discrete sets along injections, hence also a homotopy pushout (its components are trees with contractible realizations). Pointwise computation and conversion of a colimit to a limit under contravariant representables are supplied by [lem-coef-infinity-yoneda-presheaf-limits]. Hence\n$$\\operatorname{Map}(dG_{A\\cup\\{b\\}},W_C)\\simeq\\operatorname{Map}(dG_A,W_C)\\times_{(W_C)_0}\\operatorname{Map}(dG_{\\{a,b\\}},W_C).$$\nFor $[n]=S\\cup T$ with $S\\cap T=\\{a\\}$, list the vertices of $T\\setminus\\{a\\}$. Induct on their number, starting with $T=\\{a\\}$ where restriction is the identity. The displayed one-vertex attachment formula successively identifies the restriction for $S\\cup T$ with $\\operatorname{Map}(dG_S,W_C)$ times, over the common vertex, one two-object factor for each listed vertex. Applying the same attachments starting from $\\{a\\}$ identifies that product of two-object factors with $\\operatorname{Map}(dG_T,W_C)$. Associativity of the pullback therefore gives exactly the claimed $I_S(C)\\times_{I_{S\\cap T}(C)}I_T(C)$. Coarse nerves admit all permutations of their labels, so the pivot need not be an endpoint of the increasing ordering. The comparison itself is the original restriction map; the temporary enumeration is used only to prove it is an equivalence.",
+   "text": "Fix a nonempty finite set $A$, $a\\in A$ and $b\\notin A$. By [lem-coef-coarse-nerve-gluing], the inclusion $G_A\\amalg_{G_{\\{a\\}}}G_{\\{a,b\\}}\\to G_{A\\cup\\{b\\}}$ is inner anodyne. Apply [lem-coef-segal-space-inner-anodyne-locality] to the Segal space $W_C$ of Step 5. It identifies restriction along this inclusion as an equivalence of mapping spaces. The displayed degreewise pushout also becomes a pushout of simplicial spaces after applying $d$: in each degree both legs are injections of sets, and writing them as $B=A_0\\amalg B'$ and $D=A_0\\amalg D'$ gives their pushout $A_0\\amalg B'\\amalg D'$. Mapping these discrete spaces to any space gives the pullback of products with the same decomposition, so this is also a homotopy pushout. Pointwise colimits and the conversion of a colimit into a limit by contravariant mapping spaces are supplied by [lem-coef-infinity-yoneda-presheaf-limits]. Since $G_{\\{a\\}}$ is the vertex, Step 5 now gives the canonical restriction equivalence\n$$\\operatorname{Map}(dG_{A\\cup\\{b\\}},W_C)\\simeq\\operatorname{Map}(dG_A,W_C)\\times_{(W_C)_0}\\operatorname{Map}(dG_{\\{a,b\\}},W_C).$$",
    "uses": [
     "lem-coef-coarse-nerve-gluing",
-    "lem-coef-labelled-spine-prism-horn-calculus",
-    "lem-coef-infinity-yoneda-presheaf-limits",
-    "lem-coef-coherent-diagram-coyoneda"
+    "lem-coef-segal-space-inner-anodyne-locality",
+    "lem-coef-infinity-yoneda-presheaf-limits"
    ],
    "elementary": false,
    "source": {
     "document": "https://arxiv.org/html/1312.3178v4",
-    "place": "Theorem 5.2.5 and Corollary 5.2.7: elementary-attachment induction; the Segal-locality argument uses the terminal specialization of the cited lower-dimensional spine-to-horn filtration. The lower-dimensional induction follows Haugseng, On the tensor product of enriched infinity-categories, arXiv:2311.13362v1, Corollaries 6.5 and 6.6."
+    "place": "Theorem 5.2.5, one-vertex attachment, using Haugseng 2311.13362v1 Corollary 6.6 for Segal locality."
    }
   },
   {
-   "text": "Apply [lem-coef-segal-inverse-evaluation] to $W_C$. The two-object coarse nerve $G_{\\{0,1\\}}$ in Step 3 is its walking isomorphism $E$, so evaluation gives $I_1(C)\\simeq(W_C)_{\\mathrm{inv}}$ over $U(C)^2$. Pull back over $(x,y)$ and use Step 3's identification of the mapping space to obtain the stated union of invertible components of $\\operatorname{Map}_{\\mathcal V}(\\mathbf1,C(x,y))$. A map $E^1\\to C$ together with identifications of its endpoints with $(x,y)$ is exactly a point of this homotopy fiber; these endpoint identifications are paths, not strict equalities. Under the coefficient adjunction and Segal comparison, its edge is a map $\\mathbf1\\to C(x,y)$ invertible in $hW_C$, hence admitting a reverse arrow and both unit homotopies. Conversely Rezk evaluation says that every such invertible edge extends through $E^1$ with a contractible space of coherent choices. Thus these are precisely object equivalences in the enriched category. This proves the assertion for the whole fiber space, not merely a bijection on its components.",
+   "text": "For $[n]=S\\cup T$ with $S\\cap T=\\{a\\}$, induct on the number of vertices of $T\\setminus\\{a\\}$. When $T=\\{a\\}$ restriction is the identity. For the induction step, attach one new vertex $b$ at the common pivot $a$ and use the restriction equivalence of Step 6. After all attachments it identifies $\\operatorname{Map}(dG_{S\\cup T},W_C)$ with $\\operatorname{Map}(dG_S,W_C)$ times one two-object factor for every vertex of $T\\setminus\\{a\\}$, all over $(W_C)_0$. The same attachments starting with $\\{a\\}$ identify the product of those two-object factors with $\\operatorname{Map}(dG_T,W_C)$. Associativity of the pullback gives $I_n(C)\\simeq I_S(C)\\times_{I_{S\\cap T}(C)}I_T(C)$ by Step 5. Coarse nerves admit all permutations of their labels, so this also holds when the pivot is not an endpoint in the inherited ordering. The canonical comparison is always the stated restriction map; enumeration only proves it is an equivalence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 5.2.5, first paragraph, and Corollary 5.2.7."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-segal-inverse-evaluation] to $W_C$. The two-object coarse nerve $G_{\\{0,1\\}}$ in Step 5 is its walking isomorphism $E$, so evaluation gives $I_1(C)\\simeq(W_C)_{\\mathrm{inv}}$ over $U(C)^2$. Pull back over $(x,y)$ and use Step 5's identification of the mapping space to obtain the stated union of invertible components of $\\operatorname{Map}_{\\mathcal V}(\\mathbf1,C(x,y))$. A map $E^1\\to C$ together with identifications of its endpoints with $(x,y)$ is exactly a point of this homotopy fiber; these endpoint identifications are paths, not strict equalities. Under the coefficient adjunction and Segal comparison, its edge is a map $\\mathbf1\\to C(x,y)$ invertible in $hW_C$, hence admitting a reverse arrow and both unit homotopies. Conversely Rezk evaluation says that every such invertible edge extends through $E^1$ with a contractible space of coherent choices. Thus these are precisely object equivalences in the enriched category. This proves the assertion for the whole fiber space, not merely a bijection on its components.",
    "uses": [
     "lem-coef-segal-inverse-evaluation",
     "def-coef-complete-algebroid"
@@ -96,7 +124,7 @@
    }
   },
   {
-   "text": "Let $F:C\\to D$ be fully faithful. Its mapping-object equivalences induce equivalences of spaces $H_C(x,y)=\\operatorname{Map}(\\mathbf1,C(x,y))\\simeq H_D(Fx,Fy)$. They preserve units and compositions, so they preserve invertibility. Conversely, if the image of $\\alpha\\in H_C(x,y)$ has an inverse, lift this inverse to $\\beta\\in H_C(y,x)$. The equations for its two composites lift on components through the equivalences $H_C(x,x)\\simeq H_D(Fx,Fx)$ and $H_C(y,y)\\simeq H_D(Fy,Fy)$, giving $\\beta\\alpha=1_x$ and $\\alpha\\beta=1_y$ in the homotopy category. Thus $F$ reflects invertibility as well. Restricting an equivalence of spaces to the corresponding unions of components is an equivalence (it restricts the bijection on components and retains every based homotopy group). Step 5 identifies these restrictions with exactly the required maps on $I_1$ fibers.",
+   "text": "Let $F:C\\to D$ be fully faithful. Its mapping-object equivalences induce equivalences of spaces $H_C(x,y)=\\operatorname{Map}(\\mathbf1,C(x,y))\\simeq H_D(Fx,Fy)$. They preserve units and compositions, so they preserve invertibility. Conversely, if the image of $\\alpha\\in H_C(x,y)$ has an inverse, lift this inverse to $\\beta\\in H_C(y,x)$. The equations for its two composites lift on components through the equivalences $H_C(x,x)\\simeq H_D(Fx,Fx)$ and $H_C(y,y)\\simeq H_D(Fy,Fy)$, giving $\\beta\\alpha=1_x$ and $\\alpha\\beta=1_y$ in the homotopy category. Thus $F$ reflects invertibility as well. Restricting an equivalence of spaces to the corresponding unions of components is an equivalence (it restricts the bijection on components and retains every based homotopy group). Step 8 identifies these restrictions with exactly the required maps on $I_1$ fibers.",
    "uses": [
     "def-coef-complete-algebroid"
    ],
@@ -107,7 +135,7 @@
    }
   },
   {
-   "text": "By Step 4 and [lem-coef-space-geometric-descent], $I_\\bullet(C)$ and $I_\\bullet(D)$ are effective groupoids. Thus $U(C)\\to I(C)$ and $U(D)\\to I(D)$ are surjective on components, and $I_1(D)\\simeq U(D)\\times_{I(D)}U(D)$. If every object of $D$ is equivalent to an image, each component of $I(D)$ consequently meets the image of $I(C)$. Conversely, if $\\pi_0I(F)$ is surjective, lift any target component first to $U(C)$ using its surjection on components. Equality of its image with the component of an object $d$ means a path in $I(D)$ from that image to $d$; effectivity identifies this path with a point of the corresponding $I_1(D)$ fiber, hence with an object equivalence by Step 5. This proves the equivalence between the two formulations; [def-coef-complete-algebroid] defines essential surjectivity by the component formulation.",
+   "text": "By Step 7 and [lem-coef-space-geometric-descent], $I_\\bullet(C)$ and $I_\\bullet(D)$ are effective groupoids. Thus $U(C)\\to I(C)$ and $U(D)\\to I(D)$ are surjective on components, and $I_1(D)\\simeq U(D)\\times_{I(D)}U(D)$. If every object of $D$ is equivalent to an image, each component of $I(D)$ consequently meets the image of $I(C)$. Conversely, if $\\pi_0I(F)$ is surjective, lift any target component first to $U(C)$ using its surjection on components. Equality of its image with the component of an object $d$ means a path in $I(D)$ from that image to $d$; effectivity identifies this path with a point of the corresponding $I_1(D)$ fiber, hence with an object equivalence by Step 8. This proves the equivalence between the two formulations; [def-coef-complete-algebroid] defines essential surjectivity by the component formulation.",
    "uses": [
     "lem-coef-space-geometric-descent",
     "def-coef-complete-algebroid"
@@ -119,7 +147,7 @@
    }
   },
   {
-   "text": "Put $A=I(C)$, $B=I(D)$ and $f=I(F)$. Effectivity identifies the path spaces of $A$ between points of $U(C)$ with the corresponding fibers of $I_1(C)$, and similarly for $B$. Hence Step 6 gives equivalences on these path spaces. Apply the final descent criterion of [lem-coef-space-geometric-descent] to the square with top row $A\\xrightarrow{f}B$ and bottom row $A\\times A\\xrightarrow{f\\times f}B\\times B$, whose vertical maps are diagonals. The map $U(C)^2\\to A^2$ is surjective on components; over any of its points the fiber comparison is exactly the path-space equivalence just proved. Descent therefore makes its comparison $A\\to A\\times_B A$ an equivalence. For any $b\\in B$, the homotopy fiber $H$ of $f$ consequently has diagonal $H\\to H\\times H$ an equivalence. If $F$ is also essentially surjective, Step 7 makes each such $H$ nonempty. Choose $h\\in H$; a homotopy inverse to the diagonal gives $\\mathrm{pr}_1\\simeq\\mathrm{pr}_2$ on $H\\times H$, and restriction along $z\\mapsto(z,h)$ contracts $H$ to $h$. Every fiber of $f$ is therefore contractible, so [lem-coef-space-contractible-fiber-equivalence] implies that $I(F)$ is an equivalence. If $B$ is empty, so is $A$; the same criterion is vacuous and still applies.",
+   "text": "Put $A=I(C)$, $B=I(D)$ and $f=I(F)$. Effectivity identifies the path spaces of $A$ between points of $U(C)$ with the corresponding fibers of $I_1(C)$, and similarly for $B$. Hence Step 9 gives equivalences on these path spaces. Apply the final descent criterion of [lem-coef-space-geometric-descent] to the square with top row $A\\xrightarrow{f}B$ and bottom row $A\\times A\\xrightarrow{f\\times f}B\\times B$, whose vertical maps are diagonals. The map $U(C)^2\\to A^2$ is surjective on components; over any of its points the fiber comparison is exactly the path-space equivalence just proved. Descent therefore makes its comparison $A\\to A\\times_B A$ an equivalence. For any $b\\in B$, the homotopy fiber $H$ of $f$ consequently has diagonal $H\\to H\\times H$ an equivalence. If $F$ is also essentially surjective, Step 10 makes each such $H$ nonempty. Choose $h\\in H$; a homotopy inverse to the diagonal gives $\\mathrm{pr}_1\\simeq\\mathrm{pr}_2$ on $H\\times H$, and restriction along $z\\mapsto(z,h)$ contracts $H$ to $h$. Every fiber of $f$ is therefore contractible, so [lem-coef-space-contractible-fiber-equivalence] implies that $I(F)$ is an equivalence. If $B$ is empty, so is $A$; the same criterion is vacuous and still applies.",
    "uses": [
     "lem-coef-space-geometric-descent",
     "lem-coef-space-contractible-fiber-equivalence"
@@ -131,9 +159,10 @@
    }
   },
   {
-   "text": "Suppose $F:C\\to D$ is fully faithful and $f=U(F):X\\to Y$ is an equivalence. In the total-category description of [def-coef-complete-algebroid], write $F$ as $C\\xrightarrow{\\alpha}f^*D\\to D$. Its vertical factor $\\alpha$ is a map of $\\Delta_X^{\\mathrm{op}}$-algebras with equivalences at all colors $(x,x')$, by full faithfulness. Since $\\mathcal V$ is presentably monoidal and $\\Delta_X^{\\mathrm{op}}$ is small, the conservativity clause of [lem-coef-operadic-colorwise-sifted-colimits] says that $\\alpha$ is an equivalence. The second factor is the Cartesian lift constructed in Step 2. For every testing algebroid $T$, its mapping-space square over $\\operatorname{Map}(U(T),X)\\to\\operatorname{Map}(U(T),Y)$ is a homotopy pullback by the mapping-square clause of [lem-coef-cocartesian-straightening], applied to opposites. The bottom map is an equivalence, hence so is $\\operatorname{Map}(T,f^*D)\\to\\operatorname{Map}(T,D)$. Composing with $\\alpha$ gives an equivalence $\\operatorname{Map}(T,C)\\to\\operatorname{Map}(T,D)$. At $T=D$, lift $1_D$ to $G:D\\to C$, giving $FG\\simeq1_D$. At $T=C$, the images of $GF$ and $1_C$ agree up to homotopy, so the mapping-space equivalence gives $GF\\simeq1_C$. These homotopies exhibit $F$ as an equivalence, without completeness.",
+   "text": "Suppose $F:C\\to D$ is fully faithful and $f=U(F):X\\to Y$ is an equivalence. In the total-category description of [def-coef-complete-algebroid], write $F$ as $C\\xrightarrow{\\alpha}f^*D\\to D$. Its vertical factor $\\alpha$ is a map of $\\Delta_X^{\\mathrm{op}}$-algebras with equivalences at all colors $(x,x')$, by full faithfulness. By [lem-coef-many-object-operad-accessibility], $\\Delta_X^{\\mathrm{op}}$ is a generalized nonsymmetric infinity operad, small since $X$ is small, with colors $X^2$. Since $\\mathcal V$ is presentably monoidal, the conservativity clause of [lem-coef-operadic-colorwise-sifted-colimits] says that $\\alpha$ is an equivalence. The second factor is the Cartesian lift constructed in Step 3. For every testing algebroid $T$, its mapping-space square over $\\operatorname{Map}(U(T),X)\\to\\operatorname{Map}(U(T),Y)$ is a homotopy pullback by the mapping-square clause of [lem-coef-cocartesian-straightening], applied to opposites. The bottom map is an equivalence, hence so is $\\operatorname{Map}(T,f^*D)\\to\\operatorname{Map}(T,D)$. Composing with $\\alpha$ gives an equivalence $\\operatorname{Map}(T,C)\\to\\operatorname{Map}(T,D)$. At $T=D$, lift $1_D$ to $G:D\\to C$, giving $FG\\simeq1_D$. At $T=C$, the images of $GF$ and $1_C$ agree up to homotopy, so the mapping-space equivalence gives $GF\\simeq1_C$. These homotopies exhibit $F$ as an equivalence, without completeness.",
    "uses": [
     "def-coef-complete-algebroid",
+    "lem-coef-many-object-operad-accessibility",
     "lem-coef-operadic-colorwise-sifted-colimits",
     "lem-coef-cocartesian-straightening"
    ],
@@ -144,7 +173,7 @@
    }
   },
   {
-   "text": "For an object equivalence $\\alpha:x\\to y$, Step 5 supplies a reverse arrow $\\beta:y\\to x$ and the two inverse homotopies. Composition and units are those of the algebroid in [def-coef-complete-algebroid]. Precomposition by $\\alpha$ on $C(y,z)\\to C(x,z)$ has inverse precomposition by $\\beta$; associativity identifies their composites with composition by $\\alpha\\beta$ or $\\beta\\alpha$, and the inverse equations and unit homotopies identify these with identity maps of the enriched mapping objects themselves. For postcomposition, let $a:C(z,x)\\to C(z,y)$ and $b:C(z,y)\\to C(z,x)$ be composition with $\\alpha$ and $\\beta$. Associativity gives $ba\\simeq(\\beta\\alpha)_*$ and $ab\\simeq(\\alpha\\beta)_*$. The inverse equations $\\beta\\alpha\\simeq1_x$ and $\\alpha\\beta\\simeq1_y$, followed by the unit homotopies, identify these composites with $1_{C(z,x)}$ and $1_{C(z,y)}$. Thus $a$ and $b$ exhibit $C(z,x)\\simeq C(z,y)$. This proves the assertion in $\\mathcal V$, rather than only after applying $\\operatorname{Map}(\\mathbf1,-)$.",
+   "text": "For an object equivalence $\\alpha:x\\to y$, Step 8 supplies a reverse arrow $\\beta:y\\to x$ and the two inverse homotopies. Composition and units are those of the algebroid in [def-coef-complete-algebroid]. Precomposition by $\\alpha$ on $C(y,z)\\to C(x,z)$ has inverse precomposition by $\\beta$; associativity identifies their composites with composition by $\\alpha\\beta$ or $\\beta\\alpha$, and the inverse equations and unit homotopies identify these with identity maps of the enriched mapping objects themselves. For postcomposition, let $a:C(z,x)\\to C(z,y)$ and $b:C(z,y)\\to C(z,x)$ be composition with $\\alpha$ and $\\beta$. Associativity gives $ba\\simeq(\\beta\\alpha)_*$ and $ab\\simeq(\\alpha\\beta)_*$. The inverse equations $\\beta\\alpha\\simeq1_x$ and $\\alpha\\beta\\simeq1_y$, followed by the unit homotopies, identify these composites with $1_{C(z,x)}$ and $1_{C(z,y)}$. Thus $a$ and $b$ exhibit $C(z,x)\\simeq C(z,y)$. This proves the assertion in $\\mathcal V$, rather than only after applying $\\operatorname{Map}(\\mathbf1,-)$.",
    "uses": [
     "def-coef-complete-algebroid"
    ],
@@ -166,17 +195,18 @@
  ],
  "proof_deps": [
   "def-coef-complete-algebroid",
-  "lem-coef-infinity-presheaf-free-cocompletion",
-  "lem-coef-infinity-yoneda-presheaf-limits",
   "lem-coef-algebroid-segal-localization-model",
-  "lem-coef-many-object-operad-accessibility",
-  "lem-coef-operadic-change-enrichment",
-  "lem-coef-spaces-homotopy-fiber-detection",
+  "lem-coef-operadic-day-convolution",
   "lem-coef-cocartesian-straightening",
   "lem-coef-infinity-pointwise-cocartesian-transport",
+  "lem-coef-many-object-operad-accessibility",
+  "lem-coef-operadic-change-enrichment",
+  "lem-coef-cocartesian-relative-right-adjoint",
+  "def-coef-segal-presheaf-localization",
   "lem-coef-coherent-diagram-coyoneda",
   "lem-coef-coarse-nerve-gluing",
-  "lem-coef-labelled-spine-prism-horn-calculus",
+  "lem-coef-segal-space-inner-anodyne-locality",
+  "lem-coef-infinity-yoneda-presheaf-limits",
   "lem-coef-segal-inverse-evaluation",
   "lem-coef-space-geometric-descent",
   "lem-coef-space-contractible-fiber-equivalence",
@@ -185,7 +215,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
-  "place": "Proof paragraph 2: foundational enriched mapping-complex calculus on the inherited chain. Expanded from Gepner-Haugseng Sections 4.3-4.4 and 5.1-5.3, and Rezk Sections 5-6, 10-11, read online; archival copies WANTED in report.md."
+  "place": "Proof paragraph 2: foundational equivalence-nerve calculus along the inherited completion/tensor/localization ancestry. The argument follows Gepner–Haugseng Sections 4.3–4.4 and 5.1–5.3, Rezk Sections 5–6 and 11, and Haugseng Corollary 6.6, read online; archival copies WANTED in report.md."
  },
  "mathlib_searches": [
   {
@@ -271,10 +301,45 @@
    "results": "{\"t\": \"2026-10-16T18:32:15Z\", \"tool\": \"leansearch\", \"query\": \"The nerve of equivalences in an enriched infinity category is an effective groupoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"CategoryTheory.Functor.instEffectivelyEnoughOfIsEquivalence\", \"CategoryTheory.nerveEquiv\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.nerve.homEquiv_apply\", \"CategoryTheory.nerve.homEquiv\", \"CategoryTheory.nerve.homEquiv_id\", \"CategoryTheory.Nerve.isStrictSegal\"], \"digest\": \"a9eb36e5acb04a03\"}",
    "date": "2026-10-17",
    "verdict": "no match: nerveFunctor.fullyfaithful and Nerve.isStrictSegal concern ordinary category nerves; QCat.catEnrichedOrdinaryCategory uses homotopy categories of simplicial internal Homs. None states the equivalence nerve theorem for operadic algebroids. Read Enriched/Basic.lean:58 and Quasicategory/StrictBicategory.lean:48-58."
+  },
+  {
+   "tool": "grep",
+   "query": "algebroid|SegalSpace|equivalenceNerve|complete.*Segal",
+   "results": "{\"t\": \"2026-10-17T07:20:08Z\", \"tool\": \"grep\", \"query\": \"algebroid|SegalSpace|equivalenceNerve|complete.*Segal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/LieRinehartAlgebra/Defs.lean\"], \"digest\": \"40e397c2a6144fb4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category nerves and StrictSegal simplicial sets do not state the equivalence-nerve theorem for operadic algebroids. The algebroid grep hit is only the Lie–Rinehart introductory comment. Read the returned declaration types."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The nerve of equivalences in an enriched infinity category is an effective groupoid",
+   "results": "{\"t\": \"2026-10-17T07:20:08Z\", \"tool\": \"leansearch\", \"query\": \"The nerve of equivalences in an enriched infinity category is an effective groupoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"CategoryTheory.Functor.instEffectivelyEnoughOfIsEquivalence\", \"CategoryTheory.nerveEquiv\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.nerve.homEquiv_apply\", \"CategoryTheory.nerve.homEquiv\", \"CategoryTheory.nerve.homEquiv_id\", \"CategoryTheory.Nerve.isStrictSegal\"], \"digest\": \"a9eb36e5acb04a03\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category nerves and StrictSegal simplicial sets do not state the equivalence-nerve theorem for operadic algebroids. The algebroid grep hit is only the Lie–Rinehart introductory comment. Read the returned declaration types."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedCategory\", \"nerve\"",
+   "results": "{\"t\": \"2026-10-17T07:20:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedCategory\\\", \\\"nerve\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category nerves and StrictSegal simplicial sets do not state the equivalence-nerve theorem for operadic algebroids. The algebroid grep hit is only the Lie–Rinehart introductory comment. Read the returned declaration types."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence nerve of an operadically enriched infinity category is an effective groupoid and fully faithful essentially surjective maps induce equivalences",
+   "results": "{\"t\": \"2026-10-17T07:20:11Z\", \"tool\": \"leanfinder\", \"query\": \"Equivalence nerve of an operadically enriched infinity category is an effective groupoid and fully faithful essentially surjective maps induce equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.nerveFunctor.full\", \"SSet.OneTruncation₂.nerveEquiv\", \"SSet.OneTruncation₂.nerveHomEquiv\", \"CategoryTheory.nerve.instFullCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.nerveFunctorCompHoFunctorIso\"], \"digest\": \"f5dd75a908ee0d66\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category nerves and StrictSegal simplicial sets do not state the equivalence-nerve theorem for operadic algebroids. The algebroid grep hit is only the Lie–Rinehart introductory comment. Read the returned declaration types."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Classifying space of equivalences of a weak enriched category and Rezk completeness",
+   "results": "{\"t\": \"2026-10-17T07:20:44Z\", \"tool\": \"leanfinder\", \"query\": \"Classifying space of equivalences of a weak enriched category and Rezk completeness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.catEnrichedOrdinaryCategory\", \"SSet.QCat\", \"CategoryTheory.enrichedCategoryTypeEquivCategory\", \"CategoryTheory.categoryOfEnrichedCategoryType\", \"CategoryTheory.CatEnrichedOrdinary.toBase\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"SSet.QCat.bicategory\", \"CategoryTheory.CatEnriched.instStrict\"], \"digest\": \"ae6358f73993a523\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category nerves and StrictSegal simplicial sets do not state the equivalence-nerve theorem for operadic algebroids. The algebroid grep hit is only the Lie–Rinehart introductory comment. Read the returned declaration types."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-algebroid-completion",
@@ -287,16 +352,17 @@
   "date": "2026-10-17",
   "item": "lem-coef-algebroid-equivalence-nerve",
   "worker": "stage1",
-  "summary": "Retained all statement clauses and two searched statement-only prerequisites. Repaired against the current DAG: no space-unit node is used, and both enrichment-change-adjunction and the now-split object-space-fibration depend on this item, so neither is cited. Step 2 constructs its object-space mapping formula from Cartesian straightening and opposite transport; step 3 proves degree-zero evaluation using the existing free-diagram adjunction; step 5 interprets object equivalences using Rezk evaluation; step 9 uses colorwise conservativity and the constructed Cartesian lift; step 10 uses the inverse homotopies obtained in step 5. No new nodes are added by the repair. Second reading removes the redundant Segal inner-anodyne locality node: step 4 proves it by the existing labelled spine-to-horn filtration and weak saturation, and step 5 explicitly retains endpoint paths in its homotopy fiber.",
-  "blueprint": "Realizes the foundational equivalence-nerve calculus under prop-coef-integral-exceptional-adjoint proof paragraph 2, finite coefficient derived mapping-complex adjunction before R lim, through the inherited completion/tensor/localization ancestry. Current main-20261015 proof source read; historical blueprint ancestry and unit retained. The unit key node is not this item; no unit realization fields changed."
+  "summary": "Kept every statement clause and inherited search record. Replaced the long inline construction of the monoidal space-to-coefficient adjunction by the existing Day-extension theorem and relative-adjoint theorem; isolated its Cartesian-fibration specialization as an application of the existing straightening and mapping-fiber statements. Extracted the independent Segal-space inner-anodyne locality lemma from the other long step as one searched statement-only prerequisite. The coarse-nerve groupoid induction, Rezk evaluation, inverse lifting, effective-groupoid descent, object-space equivalence detection and enriched composition arguments stay in this item. All steps cite statements, not proofs of nodes.",
+  "blueprint": "Realizes the foundational equivalence-nerve calculus under prop-coef-integral-exceptional-adjoint proof paragraph 2, finite coefficient derived mapping-complex adjunction before R lim, through the inherited completion/tensor/localization ancestry. Current main-20261015 proof source read; historical blueprint ancestry and unit retained. The unit key node is not this item; no unit realization fields changed.",
+  "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NW-01876af93",
-  "group": "NW",
+  "reviewer": "NT-cc-Q49-a0b21e3e6",
+  "group": "Q49",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-01876af93 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, all 16 cited statements plus def-coef-segal-presheaf-localization, Gepner–Haugseng arXiv:1312.3178v4 (§5.1–5.3, Theorem 5.2.5 with its full filtration proof) and Rezk math/9811037 (§5.5, §5.7, Theorem 6.2, Proposition 11.1). The item statement is identical to the base node and is not weakened. All dependencies are in unit sk-prop-sf-biduality-general, no tool_uses are needed, the step uses match proof_deps, and my own closure check found no cycle; none of the five nodes that cite the item is reached. lem-coef-coarse-nerve-gluing is exactly the inclusion proved inner anodyne in GH Theorem 5.2.5 (G_N glued to G_{N,N+1} along G_{N}, into G_{N+1}), relabelled with a=N; I checked |A|=1 and A={a,c}. lem-coef-segal-inverse-evaluation is Rezk Theorem 6.2 for noncomplete Segal spaces; I checked empty W, discrete nerves, monoids and group nerves. Neither new node is a duplicate: I compared them with complete-segal-dk-levelwise, rezk-explicit-completion, complete-segal-quasicategory-comparison, quasicategory-invertible-interval and the inner-anodyne/spine nodes. Neither restates a clause of the item. Steps 1–3 and 5–11 pass: step 6 lifts inverses, step 8 uses the descent diagonal plus the contractible-fiber criterion, step 9 uses colorwise conservativity plus the Cartesian lift. Fix (C1/C4): step 4 used Map(dΔ^n,W)≃W_n and the spine's mapping space, which is the free-diagram/Yoneda lemma that infinity-yoneda-presheaf-limits does not state. I added lem-coef-coherent-diagram-coyoneda (already in proof_deps) to step 4's uses, with one sentence, in fixes/dag/nodes/sec-six-functors/lem-coef-algebroid-equivalence-nerve.json. No other changes.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-a0b21e3e6 (reviewer sub-agent of L); spot-checked: I read the item's 14 steps, the new node, all 17 cited statements plus def-cbc-enhanced-diagrams-cones, the unit record and the ancestor blueprint proof (paragraph 2). I also read Haugseng 2311.13362v1 §6 online (Definitions 6.1-6.3, Proposition 6.4, Corollaries 6.5-6.6 and the proof of 6.6). The new node lem-coef-segal-space-inner-anodyne-locality is true: it is Corollary 6.6 with C terminal, and d keeps the weak saturation because inner anodyne maps are monomorphisms, so the pushouts are along injections, transfinite compositions are filtered colimits, and retracts are kept. I tested it on W empty, a noncomplete group nerve and Λ^2_1. It is not a duplicate of the nine adjacent Segal, horn and spine nodes, it does not restate a clause of the item, it is statement-only, and it meets B1-B7. Each item step is supported by the statement it cites. Points checked: the opposite and cartesian bookkeeping in steps 3-4 (T_* ⊣ R_* via the relative-adjoint node); E_A^S = dG_A (a levelwise-discrete Segal space is the nerve of the coarse category); [0]_!* is the constant point; the pivot induction in step 7; E = G_{0,1} in step 8; the diagonal descent square and nonempty contractible fibres in step 11. There is no cycle: the closure of all 18 cited nodes avoids the item. All citations are in the unit, so no tool_uses. FIX (C1/C4): step 12 applied colorwise conservativity, which needs Δ_X^op to be a small generalized nonsymmetric ∞-operad, but no cited statement said so. I added lem-coef-many-object-operad-accessibility to its uses with one sentence; it was already in proof_deps. The corrected file is fixes/dag/nodes/sec-six-functors/lem-coef-algebroid-equivalence-nerve.json. Gepner-Haugseng and Rezk are not archived in literature/; I judged those steps against the cited DAG statements. The stale 2026-10-16 'reviewed' field on the item is left untouched for the maintainer.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {
