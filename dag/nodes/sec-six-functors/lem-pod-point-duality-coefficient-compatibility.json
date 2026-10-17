@@ -1,0 +1,102 @@
+{
+ "id": "lem-pod-point-duality-coefficient-compatibility",
+ "kind": "statement",
+ "title": "Point dualizing identification is compatible with coefficient change",
+ "statement": "Use the Poincare duality conventions [def-pod-conventions] at a coefficient stage $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$, and put $s=\\operatorname{Spec}k$. Let $C\\in D^b_{ctf}(s,\\Lambda)$, with constructibility and finite Tor amplitude as in [def-weil-finite-tor-amplitude]. Put $F_\\Lambda=\\operatorname{Fib}_s$ [def-weil-finite-coefficient-point], $c=F_\\Lambda C$, $D_sC=R\\mathcal Hom_s(C,\\omega_{s,\\Lambda})$ [def-weil-derived-pullback-tensor-hom], and let\n$$j_{\\Lambda,C}:F_\\Lambda(D_sC)\\xrightarrow{\\sim}c^\\vee$$\nbe the specified identification of [lem-pod-point-dualizing-complex], where $c^\\vee=R\\operatorname{Hom}_\\Lambda(c,\\Lambda)$. Let $Q$ be finite reduction $A_{E,n}\\to A_{E,m}$ ($1\\leq m\\leq n$), integral reduction $\\mathcal O_E\\to A_{E,n}$, integral scalar extension for a finite coefficient-field extension, rationalization, or extension at a common finite field stage. On point sheaves use the stipulated coefficient functor $Q_s$ and on coefficient modules use $q$. Write\n$$t_{Q,B}:q(F_\\Lambda B)\\xrightarrow{\\sim}F_{\\Lambda'}(Q_sB)$$\nfor the canonical sections/coefficient comparison, natural in $B\\in D^b_{ctf}(s,\\Lambda)$: for $\\mathcal O_E\\to A_{E,n}$ it is the sections/derived-reduction isomorphism of [lem-pod-point-sections-derived-reduction]; for integral scalar extension and for extension at a common finite field stage it is the inverse of the sections scalar-extension isomorphism $\\varphi$ of [lem-weil-point-sections-scalar-extension] (rationalized in the latter case); for rationalization it is the identity, $F_E$ being $\\Gamma(s,-)\\otimes_{\\mathcal O_E}E$ by [def-weil-finite-coefficient-point]; for $A_{E,n}\\to A_{E,m}$ it is the map $\\Gamma(s,B)\\otimes^L_{A_{E,n}}A_{E,m}\\to\\Gamma(s,B\\otimes^L_{A_{E,n}}A_{E,m})$ induced by tensoring sections, whose invertibility on $D^b_{ctf}(s,A_{E,n})$ is part of the present assertion. Its compatibility with the unit and tensor constraints is that of [lem-sf-point-fibre-derived-tensor]. Let $\\delta_{Q,C}:Q_s(D_sC)\\to D_s(Q_sC)$ be the canonical internal-Hom comparison using the identity-adjunction coefficient comparison $Q_s\\omega_{s,\\Lambda}\\cong\\omega_{s,\\Lambda'}$, and let $b_{Q,c}:q(c^\\vee)\\to(qc)^\\vee$ be the canonical derived module-dual comparison. The site comparisons are those of [lem-fix-operation-reduction] on its domains and the finite-Tor comparisons of [thm-sf-ctf-stability]. Then\n$$t_{Q,C}^{\\vee}\\circ j_{\\Lambda',Q_sC}\\circ F_{\\Lambda'}(\\delta_{Q,C})\\circ t_{Q,D_sC}\n=b_{Q,c}\\circ q(j_{\\Lambda,C}).$$\nBoth sides are morphisms from $q(F_\\Lambda D_sC)$ to $(qc)^\\vee$; $t_{Q,C}^{\\vee}$ is precomposition by $t_{Q,C}$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
+  "place": "second paragraph, site-perfect compatibility"
+ },
+ "stmt_deps": [
+  "def-pod-conventions",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-coefficient-point",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pod-point-dualizing-complex",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-fix-operation-reduction",
+  "thm-sf-ctf-stability",
+  "lem-pod-point-sections-derived-reduction",
+  "lem-weil-point-sections-scalar-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "At an algebraically closed point the canonical identification between the internal dual and coefficient dual commutes with finite coefficient reduction and scalar extension for site-perfect complexes",
+   "results": "LinearMap.IsPerfPair.dualEval; IsBaseChange.toDual; IsBaseChange.toDualBaseChange; no declaration states the sheaf-theoretic point comparison",
+   "date": "2026-10-17",
+   "verdict": "no match: algebraic dual base-change lemmas do not state the derived point comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Point fibre duality identification commutes with coefficient reduction and scalar extension",
+   "results": "WeierstrassCurve.Affine.Point.map_map; PrimeSpectrum.preimageEquivFiber_symm_apply_coe; WeierstrassCurve.Affine.Point.map_baseChange; no relevant declaration",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern scheme or field base change, not point duality"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Dual.baseChange, IsBaseChange.toDualBaseChange",
+   "results": "no hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Dual.*baseChange|baseChange.*Dual|dual.*scalar [Mathlib/LinearAlgebra]",
+   "results": "Mathlib/LinearAlgebra/Dual/BaseChange.lean:19,22,25,44; these are ordinary finite-module dual base-change declarations and do not state the derived point comparison",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module results are insufficient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a bounded constructible finite Tor complex on the pro etale site of a geometric point, the canonical identification of its internal dual with the coefficient module dual commutes with coefficient reduction and scalar extension",
+   "results": "CharacterModule.dual_rTensor_conj_homEquiv; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; FGModuleCat.FGModuleCatEvaluation_apply; ordinary algebraic tensor/evaluation formulas, no derived point comparison",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.MonoidalFunctor",
+   "results": "0 hits; unknown identifier 'CategoryTheory.MonoidalFunctor'",
+   "date": "2026-10-17",
+   "verdict": "no match: pattern did not resolve"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizingComplex|coefficientDual|point.*dual.*(reduc|scalar) [Mathlib/AlgebraicGeometry]",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a constructible finite Tor complex at an algebraically closed point, evaluation of the internal derived dual commutes with reduction and scalar extension through the canonical sections tensor maps",
+   "results": "IsBaseChange.toDualBaseChange_tmul; IsBaseChange.dual; IsBaseChange.toDualBaseChange; LinearMap.IsPerfPair.dualEval; Module.Dual.eval; FGModuleCat.FGModuleCatEvaluation; ordinary module results only",
+   "date": "2026-10-17",
+   "verdict": "no match: no derived point-duality coefficient square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "thm-pod-global-verdier-duality",
+  "date": "2026-10-17",
+  "group": "Q24"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "thm-pod-global-verdier-duality",
+   "place": "second paragraph, site-perfect compatibility: the point dualizing identification and its coefficient comparisons commute with finite reduction and scalar extension",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
