@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.RingTheory.TensorProduct.IncludeLeftSubRight
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.GaloisCoverRank
 
 /-!
@@ -57,6 +58,43 @@ lemma Scheme.Hom.id_appLE_self {X : Scheme.{u}} (U : X.Opens) (e : U ≤ (𝟙 X
     (𝟙 X : X ⟶ X).appLE U U e = 𝟙 _ := by
   simp only [Scheme.Hom.appLE, Scheme.Hom.id_app, Category.id_comp]
   exact X.presheaf.map_id _
+
+/-- Every point of a coproduct of schemes lies in one of the summands. -/
+lemma exists_sigmaι_eq {σ : Type*} [Small.{u} σ] (g : σ → Scheme.{u}) (x : (∐ g :)) :
+    ∃ i y, Sigma.ι g i y = x := by
+  obtain ⟨y, hy⟩ := (sigmaOpenCover g).covers x
+  exact ⟨_, y, hy⟩
+
+/-- If `m` maps everything into `U`, so does `f ≫ m`. -/
+lemma Scheme.Hom.top_le_preimage_comp {X X' Y : Scheme.{u}} (f : X ⟶ X') (m : X' ⟶ Y)
+    {U : Y.Opens} (e : ⊤ ≤ m ⁻¹ᵁ U) : ⊤ ≤ (f ≫ m) ⁻¹ᵁ U := by
+  rw [top_le_iff] at e ⊢
+  rw [Scheme.Hom.comp_preimage, e, Scheme.Hom.preimage_top]
+
+/-- Pulling back along `f` a section pulled back along `m` is pulling back along `f ≫ m`. -/
+lemma Scheme.Hom.app_top_appLE_apply {X X' Y : Scheme.{u}} (f : X ⟶ X') (m : X' ⟶ Y)
+    (U : Y.Opens) (e : ⊤ ≤ m ⁻¹ᵁ U) (s : Γ(Y, U)) :
+    (f.app ⊤).hom ((m.appLE U ⊤ e).hom s) =
+      ((f ≫ m).appLE U ⊤ (f.top_le_preimage_comp m e)).hom s := by
+  have h : f.appLE ⊤ ⊤ (by simp) = f.app ⊤ := by
+    simp [Scheme.Hom.appLE]
+  rw [← Scheme.Hom.appLE_comp_appLE f m U ⊤ ⊤ e (by simp), h]
+  rfl
+
+lemma IsAffineOpen.fromSpec_appLE_top {X : Scheme.{u}} {U : X.Opens} (hU : IsAffineOpen U)
+    (e : ⊤ ≤ hU.fromSpec ⁻¹ᵁ U) :
+    hU.fromSpec.appLE U ⊤ e = (Scheme.ΓSpecIso Γ(X, U)).inv := by
+  rw [Scheme.Hom.appLE, hU.fromSpec_app_self, Category.assoc, ← Functor.map_comp,
+    Subsingleton.elim (_ ≫ _) (𝟙 _), CategoryTheory.Functor.map_id, Category.comp_id]
+
+lemma IsAffineOpen.appLE_SpecMap_fromSpec {X : Scheme.{u}} {U : X.Opens} (hU : IsAffineOpen U)
+    {R : CommRingCat.{u}} (r : Γ(X, U) ⟶ R) (e : ⊤ ≤ (Spec.map r ≫ hU.fromSpec) ⁻¹ᵁ U) :
+    (Spec.map r ≫ hU.fromSpec).appLE U ⊤ e ≫ (Scheme.ΓSpecIso R).hom = r := by
+  have h : (Spec.map r).appLE ⊤ ⊤ (by simp) = (Spec.map r).appTop := by
+    simp [Scheme.Hom.appLE]
+  rw [← Scheme.Hom.appLE_comp_appLE (Spec.map r) hU.fromSpec U ⊤ ⊤ (by simp) (by simp),
+    hU.fromSpec_appLE_top, h, Category.assoc, Scheme.ΓSpecIso_naturality,
+    Iso.inv_hom_id_assoc]
 
 namespace Scheme.GaloisCover
 
@@ -208,6 +246,86 @@ theorem rankAtStalk_app_eq {V : Y.Opens} (hV : IsAffineOpen V) (p : PrimeSpectru
   have := Fintype.ofFinite G
   rw [hrank, Nat.card_eq_fintype_card, ← Module.finrank_linearMap_self Ω Ω A]
   exact ((linearIndependent_toLinearMap Ω A Ω).comp ψg hinj).fintype_card_le_finrank
+
+
+/-- A function on `π⁻¹ V` fixed by all `appSMul g` is equal to its two pullbacks to
+`Spec (L ⊗[A] L)`. -/
+lemma tmul_one_eq_one_tmul {V : Y.Opens} (hV : IsAffineOpen V) (x : Γ(Z.P, Z.π ⁻¹ᵁ V))
+    (hx : ∀ g : G, (Z.appSMul g V).hom x = x) :
+    letI := (Z.π.app V).hom.toAlgebra
+    x ⊗ₜ[Γ(Y, V)] (1 : Γ(Z.P, Z.π ⁻¹ᵁ V)) = 1 ⊗ₜ x := by
+  let := (Z.π.app V).hom.toAlgebra
+  have := Z.isFinite
+  have hW : IsAffineOpen (Z.π ⁻¹ᵁ V) := hV.preimage Z.π
+  let R : CommRingCat.{u} := .of (Γ(Z.P, Z.π ⁻¹ᵁ V) ⊗[Γ(Y, V)] Γ(Z.P, Z.π ⁻¹ᵁ V))
+  let iL : Γ(Z.P, Z.π ⁻¹ᵁ V) ⟶ R := CommRingCat.ofHom Algebra.TensorProduct.includeLeftRingHom
+  let iR : Γ(Z.P, Z.π ⁻¹ᵁ V) ⟶ R :=
+    CommRingCat.ofHom Algebra.TensorProduct.includeRight.toRingHom
+  let a : Spec R ⟶ Z.P := Spec.map iL ≫ hW.fromSpec
+  let b : Spec R ⟶ Z.P := Spec.map iR ≫ hW.fromSpec
+  have hab : a ≫ Z.π = b ≫ Z.π := by
+    have h1 : Z.π.app V ≫ iL = Z.π.app V ≫ iR := by
+      ext r
+      exact Algebra.TensorProduct.tmul_one_eq_one_tmul (A := Γ(Z.P, Z.π ⁻¹ᵁ V))
+        (B := Γ(Z.P, Z.π ⁻¹ᵁ V)) r
+    simp only [a, b, Category.assoc, ← IsAffineOpen.SpecMap_appLE_fromSpec Z.π hV hW le_rfl,
+      ← Scheme.Hom.app_eq_appLE, ← Spec.map_comp_assoc, h1]
+  have := Z.isIso_sigmaDesc
+  let e := asIso (Sigma.desc fun g : G ↦
+    pullback.lift (f := Z.π) (g := Z.π) (Z.smul g) (𝟙 Z.P) (by simp [Z.smul_π]))
+  let t := pullback.lift a b hab
+  let fg (g : G) := pullback.fst t (Sigma.ι (fun _ : G ↦ Z.P) g ≫ e.hom)
+  let sg (g : G) := pullback.snd t (Sigma.ι (fun _ : G ↦ Z.P) g ≫ e.hom)
+  have hfst (g : G) : fg g ≫ a = sg g ≫ Z.smul g := by
+    have := congrArg (· ≫ pullback.fst Z.π Z.π) (pullback.condition (f := t)
+      (g := Sigma.ι (fun _ : G ↦ Z.P) g ≫ e.hom))
+    simpa [t, e, fg, sg] using this
+  have hsnd (g : G) : fg g ≫ b = sg g := by
+    have := congrArg (· ≫ pullback.snd Z.π Z.π) (pullback.condition (f := t)
+      (g := Sigma.ι (fun _ : G ↦ Z.P) g ≫ e.hom))
+    simpa [t, e, fg, sg] using this
+  have key : (a.appLE (Z.π ⁻¹ᵁ V) ⊤ (by simp [a])).hom x =
+      (b.appLE (Z.π ⁻¹ᵁ V) ⊤ (by simp [b])).hom x := by
+    refine Scheme.app_eq_of_isOpenImmersion fg (fun y ↦ ?_) fun g ↦ ?_
+    · obtain ⟨g, z, hz⟩ := exists_sigmaι_eq (fun _ : G ↦ Z.P) (e.inv (t y))
+      obtain ⟨w, hw, -⟩ := Scheme.Pullback.exists_preimage_pullback (f := t)
+        (g := Sigma.ι (fun _ : G ↦ Z.P) g ≫ e.hom) y z (by
+          rw [Scheme.Hom.comp_apply, hz, ← Scheme.Hom.comp_apply, e.inv_hom_id]
+          rfl)
+      exact ⟨g, w, hw⟩
+    · have hle : Z.π ⁻¹ᵁ V ≤ Z.smul g ⁻¹ᵁ Z.π ⁻¹ᵁ V := Z.le_preimage_smul g V
+      have hsW : ⊤ ≤ sg g ⁻¹ᵁ Z.π ⁻¹ᵁ V := hsnd g ▸ (fg g).top_le_preimage_comp b (by simp [b])
+      rw [Scheme.Hom.app_top_appLE_apply, Scheme.Hom.app_top_appLE_apply,
+        Scheme.Hom.appLE_eq_of_eq (hfst g) _ _ _ (hsW.trans (Scheme.Hom.preimage_mono _ hle)),
+        Scheme.Hom.appLE_eq_of_eq (hsnd g) _ _ _ hsW,
+        ← Scheme.Hom.appLE_comp_appLE (sg g) (Z.smul g) _ _ ⊤ hle hsW]
+      rw [CommRingCat.comp_apply]
+      exact congrArg _ (hx g)
+  have hL := congr(($(hW.appLE_SpecMap_fromSpec iL (by simp))).hom x)
+  have hR := congr(($(hW.appLE_SpecMap_fromSpec iR (by simp))).hom x)
+  rw [CommRingCat.comp_apply] at hL hR
+  exact hL.symm.trans ((congrArg _ key).trans hR)
+
+/-- **The invariants of a Galois cover.** For a Galois cover `Z` of `Y` with group `G` and an
+affine open `V ⊆ Y`, a function on `π⁻¹ V` invariant under `G` comes from `Γ(Y, V)`: it agrees
+with its translate on `Spec (L ⊗[A] L) ⟶ P ×_Y P ≅ ∐_{g ∈ G} P`, and `A → L` is faithfully
+flat. -/
+theorem mem_range_app_of_forall_smul_eq {V : Y.Opens} (hV : IsAffineOpen V)
+    (x : Γ(Z.P, Z.π ⁻¹ᵁ V)) (hx : letI := Z.galoisAction V; ∀ g : G, g • x = x) :
+    x ∈ Set.range (Z.π.app V).hom := by
+  let := (Z.π.app V).hom.toAlgebra
+  have := Z.isFinite
+  have := Z.etale
+  have hW : IsAffineOpen (Z.π ⁻¹ᵁ V) := hV.preimage Z.π
+  have : Algebra.Etale Γ(Y, V) Γ(Z.P, Z.π ⁻¹ᵁ V) := by
+    have := HasRingHomProperty.appLE @Etale Z.π inferInstance ⟨_, hV⟩ ⟨_, hW⟩ le_rfl
+    rwa [← Scheme.Hom.app_eq_appLE] at this
+  have : Module.FaithfullyFlat Γ(Y, V) Γ(Z.P, Z.π ⁻¹ᵁ V) :=
+    .of_comap_surjective (Z.comap_surjective_app hV)
+  have hE := Algebra.IsEffective.of_faithfullyFlat Γ(Y, V) Γ(Z.P, Z.π ⁻¹ᵁ V)
+  refine hE.eqLocus_includeLeft_includeRight.le ?_
+  exact Z.tmul_one_eq_one_tmul hV x fun g ↦ by
+    simpa [galoisAction_smul] using hx g⁻¹
 
 end Scheme.GaloisCover
 
