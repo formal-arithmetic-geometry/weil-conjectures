@@ -193,5 +193,23 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-3ebd05449 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full: def-weil-open-immersion, def-weil-pbc-direct-image (including its module clause), def-weil-pbc-inverse-image, lem-weil-pbc-extension-by-zero-adjunction, lem-weil-pbc-inverse-image-composition (1)-(3), the module-linear node and prop-weil-pbc-inverse-image-modules-exact. I also read the citing parent's Step 3, which uses exactly theta_l∘c = rho_k(theta_j)∘theta_k. Sources checked: Stacks 03EH lemma-relocalize (sites.tex l.5455), 03S3 and the following text on restriction (etale-cohomology.tex l.11361-11420), and 03D8 (sites-modules.tex l.1236). The proof origin is correctly marked agent. The statement is well-typed. theta is canonical because (T, T≅T×_Y W) is initial in the presheaf-pullback index category. The coefficients are a general commutative Lambda with the constant sheaf, and the parent's finite Lambda is a special case. I tested id j and id k, V empty, G=0 and Lambda=0. I recomputed Steps 1-4 by hand. Step 1 is the strict equality from the definition. Step 2 gives the adjunction and the unit s↦s|_{S_W}. Step 3 shows theta carries the inverse-image unit to that unit through the generators (s, S_W→S). Step 4: both sides send s to s|_{S_U×_U V}; naturality of d at theta_l and cancellation give the clause (2) unit equation for h, so h=c by uniqueness. The module linearity of theta holds at presheaf level, and the abelian uniqueness gives h=c anyway. Each step uses only the cited statements, never their proofs. There are no new nodes. An rg search of the DAG found no duplicate, and the item is not a restated clause of its parent. The Mathlib searches are retained, and restrictFunctorComp concerns O_X-modules, not etale Lambda-sheaves. I accept the three tool_uses (extension-by-zero adjunction, which is Lean closed; inverse-image-composition; module-linear) as generic canonical-comparison tools. No SGA source is cited, A-F are clean, and no fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Etale.OpenInverseImageRestrictionComposition",
+  "declaration": "AlgebraicGeometry.Etale.openInverseImageRestrictionComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/Etale/OpenInverseImageRestrictionComposition.lean",
+  "statement": "theorem openInverseImageRestrictionComposition {Λ : Type (u + 1)} [CommRing Λ] {V U X : Scheme.{u}} (k : V ⟶ U) (j : U ⟶ X) [IsOpenImmersion k] [IsOpenImmersion j] (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : (Etale.openImmersionRestriction (ModuleCat.{u + 1} Λ) k).obj ((Etale.openImmersionRestriction (ModuleCat.{u + 1} Λ) j).obj G) = (Etale.openImmersionRestriction (ModuleCat.{u + 1} Λ) (k ≫ j)).obj G ∧ (@Etale.upperStarComp (ModuleCat.{u + 1} Λ) _ _ (ModuleCat.isGrothendieckAbelian_of_commRing Λ) _ _ _ k j (k ≫ j) rfl).inv.app G ≫ (@Etale.upperStarIsoOpenImmersionRestriction (ModuleCat.{u + 1} Λ) _ _ (ModuleCat.isGrothendieckAbelian_of_commRing Λ) _ _ (k ≫ j)).hom.app G = (@Etale.upperStarIsoOpenImmersionRestriction (ModuleCat.{u + 1} Λ) _ _ (ModuleCat.isGrothendieckAbelian_of_commRing Λ) _ _ k).hom.app ((@Etale.upperStar (ModuleCat.{u + 1} Λ) _ _ (ModuleCat.isGrothendieckAbelian_of_commRing Λ) _ _ j).obj G) ≫ (Etale.openImmersionRestriction (ModuleCat.{u + 1} Λ) k).map ((@Etale.upperStarIsoOpenImmersionRestriction (ModuleCat.{u + 1} Λ) _ _ (ModuleCat.isGrothendieckAbelian_of_commRing Λ) _ _ j).hom.app G)",
+  "branch": "newtargets-dag",
+  "by": "Q104",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c97de56c6",
+  "group": "Q104",
+  "result": "pass",
+  "note": "Review recorded in review.md. Checked the immutable statement, dependencies, canonical maps, sources, universes, edge cases, docstrings and records. Snapshot module compiled successfully through scompile.py with no diagnostics. No fixes required; branch head unchanged."
  }
 }

@@ -249,14 +249,19 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-4e6963de3",
-  "group": "Q89",
-  "result": "pass",
-  "note": "Checked every clause against the node: Face and RelationPoset (tail condition as membership in both sets for every j > i, equivalent to equal tail intersections, with product order), CoordinateSpace (p_i=q_i=1, equal tails, unitInterval subspace topology), the homeomorphism fixed by both barycentric coordinate formulas on every simplex and parameter (all simplices included, so not arbitrary), the continuous face chart c fixed by its formula, and both projection identities via nerveMap first/second. Weight-vertex convention checked against toTopHomeo naturality. No added assumptions or universe restriction. Edge cases n=i=0, i=0, i=n, zero weights and degenerate chains covered. Docstrings carry source and blueprint, the six proof steps are in the theorem docstring, only the main theorem is sorry, lean.statement matches the file verbatim, statement dependency imported publicly and proof dependency privately, no new nodes or statement change, no duplicate in live lean/Sheaf. Second-reading section is the standard post-2026-10-17 wording. nt_compile.py --json: module 11.7 s, rc 0, no errors or warnings. No findings."
+  "reviewer": "NT-stage2-Codex-a21e0d421",
+  "group": "Q09",
+  "result": "fix",
+  "note": "Reviewed source, dependencies, declarations, edge cases and both clean per-file compiles. Complete fixes reuse the exact existing theorem and drop the duplicate module, resolving H4/H8/H9. Findings and compiler evidence are recorded in review.md.; left out new module(s) lean/Sheaf/SixFunctors/CoefficientCubeRelationRealization.lean (--drop-files, or a record fixed to existing: true)"
  },
  "lean": {
+  "existing": true,
   "module": "Sheaf.AlgebraicTopology.CubeRelationRealization",
   "declaration": "SSet.CubeRelation.realization",
+  "statement": "theorem realization (n : ℕ) (i : Fin (n + 1)) : ∃ (h : |nerve (RelationPoset n i)| ≃ₜ CoordinateSpace n i) (c : C(|nerve (Face n i)|, Fin (n + 1) → unitInterval)), (∀ (r : ℕ) (σ : (nerve (RelationPoset n i)) _⦋r⦌) (t : |SSet.stdSimplex.obj ⦋r⦌|) (j : Fin (n + 1)), (((h (SSet.toTop.map (SSet.yonedaEquiv.symm σ) t)).val.1 j : unitInterval) : ℝ) = ∑ a : Fin (r + 1), (⦋r⦌.toTopHomeo t) a * (if j ∈ (σ.obj a).val.1.val then 1 else 0) ∧ (((h (SSet.toTop.map (SSet.yonedaEquiv.symm σ) t)).val.2 j : unitInterval) : ℝ) = ∑ a : Fin (r + 1), (⦋r⦌.toTopHomeo t) a * (if j ∈ (σ.obj a).val.2.val then 1 else 0)) ∧ (∀ (r : ℕ) (σ : (nerve (Face n i)) _⦋r⦌) (t : |SSet.stdSimplex.obj ⦋r⦌|) (j : Fin (n + 1)), ((c (SSet.toTop.map (SSet.yonedaEquiv.symm σ) t) j : unitInterval) : ℝ) = ∑ a : Fin (r + 1), (⦋r⦌.toTopHomeo t) a * (if j ∈ (σ.obj a).val then 1 else 0)) ∧ (∀ x : |nerve (RelationPoset n i)|, c (SSet.toTop.map (nerveMap (first n i)) x) = (h x).val.1 ∧ c (SSet.toTop.map (nerveMap (second n i)) x) = (h x).val.2)",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-17",
   "declarations": [
    "SSet.CubeRelation.Face",
    "SSet.CubeRelation.RelationPoset",
@@ -265,12 +270,7 @@
    "SSet.CubeRelation.CoordinateSpace",
    "SSet.CubeRelation.realization"
   ],
-  "file": "lean/Sheaf/AlgebraicTopology/CubeRelationRealization.lean",
-  "statement": "theorem realization (n : ℕ) (i : Fin (n + 1)) : ∃ (h : |nerve (RelationPoset n i)| ≃ₜ CoordinateSpace n i) (c : C(|nerve (Face n i)|, Fin (n + 1) → unitInterval)), (∀ (r : ℕ) (σ : (nerve (RelationPoset n i)) _⦋r⦌) (t : |SSet.stdSimplex.obj ⦋r⦌|) (j : Fin (n + 1)), (((h (SSet.toTop.map (SSet.yonedaEquiv.symm σ) t)).val.1 j : unitInterval) : ℝ) = ∑ a : Fin (r + 1), (⦋r⦌.toTopHomeo t) a * (if j ∈ (σ.obj a).val.1.val then 1 else 0) ∧ (((h (SSet.toTop.map (SSet.yonedaEquiv.symm σ) t)).val.2 j : unitInterval) : ℝ) = ∑ a : Fin (r + 1), (⦋r⦌.toTopHomeo t) a * (if j ∈ (σ.obj a).val.2.val then 1 else 0)) ∧ (∀ (r : ℕ) (σ : (nerve (Face n i)) _⦋r⦌) (t : |SSet.stdSimplex.obj ⦋r⦌|) (j : Fin (n + 1)), ((c (SSet.toTop.map (SSet.yonedaEquiv.symm σ) t) j : unitInterval) : ℝ) = ∑ a : Fin (r + 1), (⦋r⦌.toTopHomeo t) a * (if j ∈ (σ.obj a).val then 1 else 0)) ∧ (∀ x : |nerve (RelationPoset n i)|, c (SSet.toTop.map (nerveMap (first n i)) x) = (h x).val.1 ∧ c (SSet.toTop.map (nerveMap (second n i)) x) = (h x).val.2)",
-  "branch": "newtargets-dag",
-  "by": "Q89",
-  "date": "2026-10-17",
-  "existing": false,
-  "note": "The auxiliary declarations construct exactly the face poset, relation poset, its two projections, and the coordinate subspace introduced in this node. The theorem specifies the homeomorphism and face chart on every characteristic simplex, together with both projection identities; no map is chosen from a mere existence theorem."
+  "note": "H4 repair: use the already recorded exact SSet.CubeRelation.realization in Sheaf.AlgebraicTopology.CubeRelationRealization. Its face and relation posets, coordinate subspace, characteristic-simplex formulas, continuous face chart and both projection identities state this node. Drop the duplicate delivered SixFunctors module.",
+  "fixed_by": "NT-stage2-Codex-a21e0d421"
  }
 }
