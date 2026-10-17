@@ -269,5 +269,23 @@
   "group": "Q99",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-e2e865135 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, unit sk-lem-universal-datum, and Stacks etale-cohomology.tex Remark 0F02 and Lemmas 0F03/0F04 (lines 16838-16990). I also read the Lean statements and proofs of mono_baseChangeHomologyMap and mono_cokernelMap in CriticalMap.lean. The item statement is unchanged: the fixed-base, arbitrary-commutative-ring form of 0F04. Step 1 is correct: the unit's stalk map has a left inverse, from the stalk-germ lemma with f=pi and the restriction map r. By surjectivity the image geometric points cover T, so detect-mono applies. Module monicity follows by faithful forgetting. Step 2 conjugates the actual canonical arrows by the isomorphisms A and B. Step 3 has every hypothesis present: fixed-base BC(p,Lambda,q-1), q>=1, g qcqs. Step 4 is elementary: a mono into zero, then epi plus mono gives iso. lem-sbc-fixed-base-critical-map is true. The 0F03 proof uses BC only in degree q-1, for the same g and the sheaves I and Q, and R^q g_* of an injective Lambda-module sheaf vanishes. Its clause (2) follows from F in G in I. It properly generalizes lem-sbc-module-bc-injectivity and sbc-lem-bc-injectivity, which assume universal BC, and fixed-base BC does not give universal BC (sbc-lem-fixed-base-not-universal), so it is not a duplicate. lem-sbc-integral-test-pushforward-arrow is true: integral pushforward is exact, the integral underived exchange applies, and vertical pasting gives the square. It is the arrow-level form of the three identifications in the 0F04 proof. It differs from lem-sbc-integral-pushforward-base-change-arrow (that node changes the base, not the test scheme) and is strictly smaller than the item. Edge cases checked: q=1, Lambda=0, F=0, pi=id, empty T, r<0, and non-surjective pi (in which case the item fails, as expected). The three off-unit citations are closed nodes or a Mathlib leaf; I accept the declared tool_uses. No SGA source is used. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6f830663e",
+  "group": "NJ",
+  "result": "pass",
+  "note": "The delivery only adds the item's lean record (existing:true) pointing at the upstream theorem AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isIntegralHom_of_surjective; the recorded statement is copied exactly from IntegralBaseChange.lean, starting at line 141. Clause by clause the Lean matches the node: BC(p,Λ,q-1) is the fixed-base BaseChangeProperty (Defs.lean:199), q≥1, g quasi-compact and quasi-separated, π integral (IsIntegralHom) and surjective (Function.Surjective π.base, the field of Surjective), the squares are IsPullback as in sk-def-bc, F is a sheaf of Λ-modules, F' is upperStar, and both hypothesis and conclusion are IsIso of the canonical baseChangeHomologyMap. No extra hypotheses; Λ : Type (u+1) is the project convention shared with sk-def-bc. Edge cases q=1, Λ=0, F=0, π=id and empty schemes are admitted. Report has both required sections; the diff changes no other field. lcompile.py check: compiles, signature as recorded. Non-blocking: sorryAx in the theorem's axiom closure comes from two integral base-change inputs, a stage-3 matter already noted in lean_candidates."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.IntegralBaseChange",
+  "declaration": "AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isIntegralHom_of_surjective",
+  "statement": "theorem Etale.isIso_baseChangeHomologyMap_of_isIntegralHom_of_surjective (q : ℤ) (hq : 1 ≤ q)\n    (hprev : Etale.BaseChangeProperty Λ p (q - 1)) [QuasiCompact g] [QuasiSeparated g]\n    (sq : IsPullback e h g p) (π : T' ⟶ T) [IsIntegralHom π] (hπ : Function.Surjective π.base)\n    (sq' : IsPullback e' h' (π ≫ g) p) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (hF : IsIso (Etale.baseChangeHomologyMap Λ sq' q ((π)^*[ModuleCat.{u + 1} Λ].obj F))) :\n    IsIso (Etale.baseChangeHomologyMap Λ sq q F)",
+  "branch": "slopmaster2",
+  "by": "NJ",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Exact source declaration: its fixed-base Etale.BaseChangeProperty hypothesis, q ≥ 1, qcqs g, integral and surjective π, Cartesian squares, module sheaf F and inverse-image pullback hypothesis, and canonical degree-q base-change isomorphism conclusion match this node. The source notation (π)^* is Etale.upperStar, the recorded inverse-image dependency."
  }
 }
