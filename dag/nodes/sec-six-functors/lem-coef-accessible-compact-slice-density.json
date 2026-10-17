@@ -28,7 +28,8 @@
  },
  "stmt_deps": [
   "def-coef-presentable-infinity-category",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-final-index-colimit"
  ],
  "proof": [
   {
@@ -265,5 +266,35 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-b72bf9469 (reviewer sub-agent of L); spot-checked: I read the item, all 14 cited node statements, the unit record and the report in full; there are no new nodes and I made no fixes. The statement is unchanged and correct: it is the standard result from HTT 5.4.2.2, Lemma 5.4.2.4 and Cor. 5.3.5.4. Every citer uses only the clauses the statement gives. Edge cases checked: empty C, terminal C and kappa = aleph_0 all hold. Step 1: the compact-stage factorization gives a homotopy retract of a generator, and the size calculus gives essential smallness of retracts. Step 2: relative-slice-sections with K = Delta^0 is exactly D_{/x}, and it is essentially small. Step 3: the poset node's cocomplete-target restriction is handled correctly. The poset node is applied only to diagrams into spaces, giving space-test (2) and then (3). The comma criterion, which needs no colimits in the target, then transfers the colimit of the presentation in C. The join-cone dual gives the join cocone p-bar. Step 4: compact-relative-cocone-factorization applies with K' empty, r = p-bar and apex x. All its hypotheses hold, and K*Delta^1 = (K*Delta^0)*Delta^0 gives a cocone in the slice, which proves kappa-filteredness including K empty. Step 5: the cone-calculus fiber formula with K a point is correct, as a cone rather than a cocone. Compactness, the constant-diagram clause and commutation of filtered colimits with the finite cospan give a contractible fiber of id_B. Step 6: space-test (4) gives (3), and the comma criterion then shows the tautological cocone is colimiting with apex x. Minor points, all acceptable: slice-arrow-equivalence and the spaces lemmas are applied with the universe shifted to U', and they are size-agnostic statements. The kappa-filteredness of N(A) follows elementarily from the upper-bound property of the poset. I accept the tool use lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc, which this unit's route does not reach); it is a generic foundation. No cycle: I checked the 380-node closure of the cited nodes. A duplicate search over the DAG for HTT 5.4.2.2/5.3.5.4 and compact-slice wording found nothing that states this result. HTT is not in literature/; the proof is marked agent-written and the WANTED line is recorded. No SGA source is cited and no target is touched. One report inaccuracy: the second reading says it changed created.item, but the file keeps lem-coef-accessible-diagram-presentations, which is correct for this existing node."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AccessibleCompactSliceDensity",
+  "declaration": "SSet.Presentability.accessible_compact_slice_density",
+  "declarations": [
+   "SSet.Presentability.compactSourceApex",
+   "SSet.Presentability.compactSourceArrow",
+   "SSet.Presentability.compactObjects",
+   "SSet.Presentability.compactSourceSlice",
+   "SSet.Presentability.compactSourceProjection",
+   "SSet.Presentability.compactSourceTautologicalEdge",
+   "SSet.Presentability.compactSourceTautologicalHomotopy",
+   "SSet.Presentability.IsTautologicalCocone",
+   "SSet.Presentability.accessible_compact_slice_density"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/AccessibleCompactSliceDensity.lean",
+  "statement": "theorem accessible_compact_slice_density (κ : Cardinal.{u}) (hκ : κ.IsRegular) (C : SSet.{max (u + 1) v}) [SSet.Quasicategory C] (hC : IsKappaAccessible C κ) : IsEssentiallySmall.{u} (compactObjects (C := C) κ).toSSet ∧ ∀ (x : C _⦋0⦌), IsEssentiallySmall.{u} (compactSourceSlice (C := C) κ x) ∧ ∃ (hSlice : SSet.Quasicategory (compactSourceSlice (C := C) κ x)), @IsKappaFiltered.{u, max (u + 1) v} κ (compactSourceSlice (C := C) κ x) hSlice ∧ ∃ (t : (SSet.Enhanced.coconeCategory (compactSourceProjection (C := C) κ x)) _⦋0⦌), IsTautologicalCocone (C := C) κ x t ∧ SSet.Enhanced.IsColimiting (compactSourceProjection (C := C) κ x) t",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-635b112e3"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-635b112e3",
+  "group": "Q48",
+  "result": "fix",
+  "note": "Mathematics correct against node and HTT 5.4.2.2/5.4.2.4/5.3.5.4. H3 fault fixed: both IsEssentiallySmall clauses left the small universe unconstrained, so Lean added free universe params u_3,u_4 (checked via #check with pp.universes) and the theorem claimed essential smallness in every universe, which is false in general. Fixed to IsEssentiallySmall.{u}; theorem now has only universes u,v. Also replaced calculusApex/calculusCommaArrow (from lem-cbc-enhanced-functor-cone-calculus, not a stmt_dep, only a proof tool_use) with module-local compactSourceApex/compactSourceArrow built from def-cbc commaSubcomplex.ι ≫ fst/snd, rfl-equal to the old ones; dropped the EnhancedFunctorConeCalculus import. fixes/: full module, lean-record.json (declarations + verbatim statement), report.md with fix section. Checked: every clause, tautological cocone fully pinned (apex and coherent homotopy, endpoint conventions), empty K, kappa=aleph0, empty C, no added hypotheses, item diff limited to lean plus a permitted stmt_deps addition (final-index-colimit), dependency nodes unchanged, no duplicates in Mathlib/side/slopmaster2, no hollow defs, sorry only, docstrings, lines <=100. Delivered and fixed files both compile with no errors or warnings via nt_compile.py."
  }
 }
