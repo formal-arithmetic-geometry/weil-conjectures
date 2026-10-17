@@ -1,0 +1,96 @@
+{
+ "id": "lem-sf-etale-stratified-stalk-identification",
+ "kind": "statement",
+ "title": "Derived geometric stalk of a constant local model",
+ "statement": "Let $f:U\\to X$ be a morphism of schemes [def-pc-scheme] and $A$ a commutative ring. Use the small etale sites [def-weil-pbc-etale-site], their constant-$A$ module sheaves [def-weil-sheaf-of-modules-category, def-weil-pbc-constant-sheaf], and the derived categories [def-weil-abstract-derived-category]. Let $K\\in D(X_{\\mathrm{et}},A)$ and let $E^\\bullet$ be a cochain complex of $A$-modules; write $\\underline{E^\\bullet}_U$ for its termwise constant sheaf complex [def-kun-constant-sheaf]. Suppose an isomorphism $\\alpha:f^{-1}K\\xrightarrow{\\sim}\\underline{E^\\bullet}_U$ is given, where $f^{-1}$ is the exact constant-coefficient module inverse image [prop-weil-pbc-inverse-image-modules-exact]. For every geometric point $\\bar u:\\operatorname{Spec}\\Omega\\to U$, with $\\Omega$ algebraically closed [def-weil-geometric-point], put $\\bar x=f\\circ\\bar u$. Applying the exact stalk functor termwise to representatives of $\\alpha$ gives an $A$-linear isomorphism $K_{\\bar x}\\xrightarrow{\\sim}E^\\bullet$ in $D(A)$ [def-weil-pbc-geometric-stalks]. Here $K_{\\bar x}$ is the derived object obtained by termwise geometric stalks; its coefficient ring is identified with $A$ by the constant-section stalk map. No boundedness, finiteness, constructibility or Tor-amplitude hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09BI (lemma-connected-ctf-locally-constant), proof: the constant ring complexes on overlapping etale cover members are identified by a geometric stalk. Agent extraction of this derived-stalk comparison, using exact stalks and module-linear inverse-image composition."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-abstract-derived-category",
+  "def-kun-constant-sheaf",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constant.*stalk|stalk.*constant",
+   "results": "none; digest 4f53cda18c2baa0c",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived stalk of a constant complex of modules on the small etale site is the original ring complex; inverse image stalks commute with a scheme morphism",
+   "results": "smoothSheafCommRing.ι_forgetStalk_inv_apply; smoothSheafCommRing.ι_forgetStalk_inv; smoothSheafCommRing.ι_forgetStalk_hom; smoothSheafCommRing.ι_forgetStalk_hom_apply; ModuleCat.Tilde.stalkIso_hom; smoothSheafCommRing.forgetStalk; ModuleCat.Tilde.stalkIso; AlgebraicGeometry.LocallyRingedSpace.toStalk_stalkMap_toΓSpec; digest 4d23a0c2626b0f04",
+   "date": "2026-10-17",
+   "verdict": "no match: scheme structure-sheaf, Zariski/module-localization or manifold stalk results do not identify constant-coefficient derived etale stalks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"constant\"",
+   "results": "Module.isLocallyConstant_rankAtStalk; Module.isLocallyConstant_rankAtStalk_freeLocus; Module.Free.away_of_finite_of_flat_of_rankAtStalk_constant; digest 8b9d209a4b6a7887",
+   "date": "2026-10-17",
+   "verdict": "no match: scheme structure-sheaf, Zariski/module-localization or manifold stalk results do not identify constant-coefficient derived etale stalks"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*(mapHomologicalComplex|mapDerivedCategory)|(mapHomologicalComplex|mapDerivedCategory).*stalk",
+   "results": "none; digest 4f53cda18c2baa0c",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact geometric stalks of constant etale module complexes recover the original module complex naturally under inverse image",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; TopCat.Presheaf.stalkPullbackIso; AlgebraicGeometry.stalkClosedPointIso_inv; AlgebraicGeometry.PresheafedSpace.stalkMap.isIso; ModuleCat.Tilde.toStalk; AlgebraicGeometry.Scheme.Hom.stalkMap_inv_hom_apply; TopCat.Presheaf.stalkPullbackInv; AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_hom_app; digest c9a24d67d6732680",
+   "date": "2026-10-17",
+   "verdict": "no match: scheme structure-sheaf, Zariski/module-localization or manifold stalk results do not identify constant-coefficient derived etale stalks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"mapHomologicalComplex\"",
+   "results": "none; digest 4f53cda18c2baa0c",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given an isomorphism between an inverse image derived etale complex and a termwise constant module complex, taking a geometric stalk identifies the ring complex with the original complex stalk",
+   "results": "ModuleCat.Tilde.stalkIso_hom; smoothSheafCommRing.ι_forgetStalk_inv_apply; smoothSheafCommRing.ι_forgetStalk_inv; ModuleCat.Tilde.stalkIso; ModuleCat.Tilde.stalkIso_inv; AlgebraicGeometry.StructureSheaf.stalkIso_hom; AlgebraicGeometry.germ_stalkClosedPointIso_hom; AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv; digest e162ca41775a07f2",
+   "date": "2026-10-17",
+   "verdict": "no match: scheme structure-sheaf, Zariski/module-localization or manifold stalk results do not identify constant-coefficient derived etale stalks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-etale-smooth-stratified-ctf",
+  "date": "2026-10-17",
+  "group": "Q51"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "thm-weil-etale-geometric-biduality",
+   "place": "Proof paragraph 3: \"Preservation from [lem-weil-verdier-preservation-strata] makes ... bounded constructible\"; supplies the smooth-stratum devissage needed to prove that preservation over every field occurring in the simultaneous induction of paragraph 1. Extracted from the supporting smooth-stratum proof, former step 7: identify a constant ring complex on an etale cover member with the geometric stalk of the original complex.",
+   "via": [
+    "lem-sf-etale-smooth-stratified-ctf"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -12,9 +12,107 @@
   "def-coef-infinity-fibrations",
   "lem-coef-symmetric-operadic-fibration-recognition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Suppose $v$ is $q$-cocartesian. Each $\\pi_j$ is $q$-cocartesian by hypothesis, so the composition assertion of [lem-coef-infinity-cocartesian-composition-initiality] makes $\\pi_jv$ $q$-cocartesian. This applies to any of the specified coherent composites: its assertion concerns a $2$-simplex, not a strictly associative choice of composition.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.1.1.10; cocartesian composition for the forward implication"
+   }
+  },
+  {
+   "text": "Conversely assume that all $\\pi_jv$ are $q$-cocartesian. Since $\\alpha$ is inert, the operad axiom in [lem-coef-symmetric-operadic-fibration-recognition] supplies a $q$-cocartesian lift $u:a\\to c$ of $\\alpha$. Apply the defining cocartesian lifting property of [def-coef-infinity-fibrations] to $\\Lambda^2_0$: the given edges are $u:a\\to c$ and $v:a\\to b$, and the base triangle has edges $\\alpha,\\mathrm{id}_{\\langle m\\rangle},\\alpha$. Its filler gives $h:c\\to b$ in the strict fiber $Q_{\\langle m\\rangle}$ and a triangle $hu\\simeq v$. This uses no lifting over active maps.",
+   "uses": [
+    "lem-coef-symmetric-operadic-fibration-recognition",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 2.1.2.9, comparison from a chosen inert lift; expand its construction by the cocartesian outer horn"
+   }
+  },
+  {
+   "text": "Choose cocartesian projections $\\kappa_j:c\\to c_j$. Their transports and the prescribed $\\pi_j:b\\to b_j$ give the Segal functor $T:Q_{\\langle m\\rangle}\\to Q_{\\langle1\\rangle}^{m}$. To specify its action coherently, let $I_m$ be the ordinary category with objects $o,1,\\ldots,m$ and only nonidentity arrows $o\\to j$, and map its nerve to $S$ by $o\\mapsto\\langle m\\rangle$, $j\\mapsto\\langle1\\rangle$ and $o\\to j\\mapsto\\rho_j$. The pullback of $q$ is a cocartesian fibration: inner lifting is inherited degreewise; a globally cocartesian lift of a cone leg remains cocartesian in the pullback, because its outer-horn filler pairs with the prescribed base simplex. Identity edges have degenerate cocartesian lifts by [lem-coef-infinity-cocartesian-composition-initiality]. Straightening [lem-coef-cocartesian-straightening] therefore supplies the transport functors with all coherences, and hence edges $h_j=T_j(h):c_j\\to b_j$ over $\\mathrm{id}_{\\langle1\\rangle}$ and coherent squares $h_j\\kappa_j\\simeq\\pi_jh$. The chosen lifts can represent this transport, with the contractible classification choices allowed by the straightening statement. The operad Segal axiom says exactly that $T$ is a functor equivalence.",
+   "uses": [
+    "lem-coef-symmetric-operadic-fibration-recognition",
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.1.1.10 and Remark 2.1.1.14; coherent colour transport used in Remark 2.1.2.9"
+   }
+  },
+  {
+   "text": "Put $u_j=\\kappa_ju:a\\to c_j$. Cocartesian composition makes $u_j$ cocartesian. Both $u_j$ and $\\pi_jv$ lie over the same map $\\rho_j\\alpha$; the latter is cocartesian by the converse hypothesis. The triangle of step 2 and the transport square of step 3 give $h_ju_j\\simeq\\pi_jv$, including its compatibility over the base triangle. Composition and its associativity here are the coherent mapping composition of [lem-coef-infinity-mapping-composition]. Thus $h_j$ with this triangle is a morphism from $u_j$ to $\\pi_jv$ in $L(a,\\rho_j\\alpha)$ of [lem-coef-infinity-cocartesian-composition-initiality]. Both objects are initial by that node. Its comparison assertion says that forgetting this morphism's triangle yields an equivalence of targets in $Q_{\\langle1\\rangle}$. This underlying morphism is $h_j$, so every component of $T(h)$ is an equivalence.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 2.1.2.9 and Theorem 2.3.3.23(1), converse; compare the two cocartesian lifts of each projected inert map"
+   }
+  },
+  {
+   "text": "The tuple of inverse edges for the $h_j$, with the tuples of their two inverse triangles, is an inverse for $T(h)$ in the degreewise product quasicategory. Let $U$ be a quasi-inverse to the Segal functor $T$ and $\\eta:UT\\simeq\\mathrm{id}$. Functors preserve inverse triangles, so $UT(h)$ is an equivalence. Naturality gives $[h]=[\\eta_b][UT(h)][\\eta_c]^{-1}$ in the homotopy category of $Q_{\\langle m\\rangle}$. The mapping-composition node identifies invertible component classes with equivalence edges, so $h$ is an equivalence in this fiber. This is an explicit inverse calculation from the definitions of product and functor equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 2.1.1.14 and Remark 2.1.2.9; elementary reflection of equivalences by the specified Segal equivalence"
+   }
+  },
+  {
+   "text": "The inverse of $h$ in the fiber is also an inverse in $Q$. For every $z\\in Q$, precomposition by $h$ on mapping spaces is a homotopy equivalence: precomposition by its inverse is a homotopy inverse by the associativity, unit laws and inverse triangles in [lem-coef-infinity-mapping-composition]. In the square of [lem-coef-infinity-cocartesian-mapping-criterion], the bottom map for $h$ is the identity, since $q(h)=\\mathrm{id}_{\\langle m\\rangle}$. Such a square with an equivalence on top is a homotopy pullback: the path pullback along an identity retracts onto the other object by sending a path $\\gamma$ starting at the specified image to $t\\mapsto\\gamma(st)$, with $s$ decreasing from $1$ to $0$; its free endpoint moves to that image. Hence the criterion makes $h$ $q$-cocartesian. Cocartesian composition in the triangle $hu\\simeq v$ now makes $v$ $q$-cocartesian.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 2.1.2.9; conclude from the equivalence comparison and cocartesian composition"
+   }
+  },
+  {
+   "text": "If $m=0$, the Segal equivalence in step 3 is $Q_{\\langle0\\rangle}\\simeq\\Delta^0$. There are no $j$ in step 4. In step 5 the tuple and both inverse triangles are the unique ones in the empty product, so $T(h)$ is an equivalence and the same quasi-inverse calculation proves that $h$ is an equivalence. Steps 2 and 6 still apply to the unique inert pointed map $\\langle n\\rangle\\to\\langle0\\rangle$, including $n=0$. If $n=0<m$ there is no inert $\\alpha$, since an output would have no preimage. When $n=m=1$ the calculation is just comparison with one projection. Thus the proof neither assumes a nonempty output family nor introduces a nonexistent projection.",
+   "uses": [
+    "lem-coef-symmetric-operadic-fibration-recognition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.1.1.10 and Remark 2.1.1.14; explicit nullary and smallest-arity checks"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-symmetric-operadic-fibration-recognition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Definition 2.1.1.10, Remark 2.1.1.14, Remark 2.1.2.9 and Theorem 2.3.3.23(1), converse. Read online 2026-10-17. Expanded comparison-via-Segal proof using existing cocartesian composition/initiality and straightening nodes; WANTED archive in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +141,45 @@
    "results": "{\"t\": \"2026-10-17T08:29:40Z\", \"tool\": \"leansearch\", \"query\": \"In a symmetric infinity operad inertness of an arrow is detected by composing with the color projections of its target.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplicialObject.Splitting.comp_PInfty_eq_zero_iff\", \"HomotopicalAlgebra.PrepathObject.symm_ι\", \"SimplicialObject.Splitting.PInfty_comp_πSummand_id\", \"IsSymmOp\", \"HomotopicalAlgebra.Precylinder.symm_π\", \"CategoryTheory.StructuredArrow.isCoseparating_inverseImage_proj\", \"HomotopicalAlgebra.PathObject.symm\", \"HomotopicalAlgebra.Cylinder.symm\"], \"digest\": \"294b318307fe8d87\"}",
    "date": "2026-10-17",
    "verdict": "no match: inertia groups, nerves, and ordinary fibered-category declarations do not state symmetric infinity-operad inertness detection"
+  },
+  {
+   "tool": "grep",
+   "query": "operad|inert.*cocartesian|cocartesian.*projection",
+   "results": "{\"t\": \"2026-10-17T12:10:28Z\", \"tool\": \"grep\", \"query\": \"operad|inert.*cocartesian|cocartesian.*projection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/NonAssoc/PreLie/Basic.lean\", \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\"], \"digest\": \"fd86d48dbea6a9e4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category cocartesian universal properties and strict Segal nerves do not state quasicategorical operadic detection; read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:85-150. Loogle Operad has no hits; grep gives bibliography mentions only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An arrow over an inert pointed map in an infinity operad is cocartesian if all composites with output projections are cocartesian",
+   "results": "{\"t\": \"2026-10-17T12:10:28Z\", \"tool\": \"leansearch\", \"query\": \"An arrow over an inert pointed map in an infinity operad is cocartesian if all composites with output projections are cocartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsCocartesian.casesOn\", \"CategoryTheory.Functor.IsCocartesian.ext\", \"CategoryTheory.Functor.IsCocartesian.mk\", \"CategoryTheory.Functor.IsCocartesian.of_iso_comp\", \"CategoryTheory.Functor.IsCocartesian.recOn\"], \"digest\": \"f79a2dd5693078f3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category cocartesian universal properties and strict Segal nerves do not state quasicategorical operadic detection; read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:85-150. Loogle Operad has no hits; grep gives bibliography mentions only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Operad\"",
+   "results": "{\"t\": \"2026-10-17T12:10:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"Operad\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category cocartesian universal properties and strict Segal nerves do not state quasicategorical operadic detection; read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:85-150. Loogle Operad has no hits; grep gives bibliography mentions only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a symmetric infinity operad cocartesian inert edges are detected after all target color projections",
+   "results": "{\"t\": \"2026-10-17T12:10:29Z\", \"tool\": \"leanfinder\", \"query\": \"In a symmetric infinity operad cocartesian inert edges are detected after all target color projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.map_uniq\", \"CategoryTheory.Functor.IsStronglyCocartesian.ext\", \"CategoryTheory.Functor.IsCocartesian.map_uniq\", \"CategoryTheory.Functor.IsCocartesian.ext\", \"CategoryTheory.Functor.IsCocartesian.codomainUniqueUpToIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_comp\"], \"digest\": \"027593f9634894eb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category cocartesian universal properties and strict Segal nerves do not state quasicategorical operadic detection; read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:85-150. Loogle Operad has no hits; grep gives bibliography mentions only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Segal equivalence for an infinity operad detects equivalences in the fiber componentwise and hence detects cocartesian lifts over inert maps",
+   "results": "{\"t\": \"2026-10-17T12:12:09Z\", \"tool\": \"leanfinder\", \"query\": \"Segal equivalence for an infinity operad detects equivalences in the fiber componentwise and hence detects cocartesian lifts over inert maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.IsStrictSegal\", \"SSet.StrictSegal\", \"SSet.StrictSegal.isStrictSegal\", \"SSet.StrictSegalCore\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"SSet.StrictSegal.quasicategory\"], \"digest\": \"c16cb6cb78fa8eb4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category cocartesian universal properties and strict Segal nerves do not state quasicategorical operadic detection; read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:85-150. Loogle Operad has no hits; grep gives bibliography mentions only."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-symmetric-weak-approximation-algebras",
@@ -74,5 +207,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-symmetric-inert-projection-detection",
+  "worker": "stage1",
+  "summary": "Kept the statement, dependencies and ancestry; proved both directions using a chosen inert lift, coherent colour transport, initiality of projected cocartesian lifts, and explicit reflection of equivalences by the Segal functor. Checked nullary outputs. No new nodes or Mathlib leaves.",
+  "blueprint": "Inherited prop-coef-integral-exceptional-adjoint proof paragraph 2, finite-coefficient derived mapping-complex comparison, through the recorded weak-approximation ancestry: this input proves exactly the output-projection test used in Theorem 2.3.3.23(1), converse condition (i). Steps 2-6 expand the lift comparison and step 7 realizes its nullary case."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-fe050ae5a",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-fe050ae5a (reviewer sub-agent of L); spot-checked: Pass with no changes; fixes/ is empty. Sources: HA is not archived and the report carries a WANTED line for it, so I fetched the public PDF and read Def. 2.1.1.10, Rem. 2.1.1.14, Rem. 2.1.2.9 and the proof of Thm 2.3.3.23(1)(a). The proof follows Rem. 2.1.2.9 exactly: compare v with a cocartesian lift of the inert map, then check each colour projection of the comparison. In the proof of 2.3.3.23(1)(a), the reduction to 'each F0(C)->F0(Ci) is inert' is the parent's use in its step 11. Small cases of the statement: for m=0 the fibre over <0> is a point, since the recognition node takes the empty product to be terminal, so the arity-zero clause is true. For n=0<m no inert map exists. n=m=1 and the ordinary coloured-operad nerve both agree with the statement. Steps: in step 1 the composition node is applied with the first edge v cocartesian, the right way round. Step 2 fills the outer horn of dimension 2 with u on edge 01 over the degenerate triangle (alpha, id, alpha), so h lies in the strict fibre. In step 3 the pullback over N(I_m) is a cocartesian fibration, and straightening supplies the colour transports with the chosen lifts, within its contractible choices; I accept this use of 'transport'. Step 4 uses the comparison clause of the initiality statement for two initial cocartesian lifts over rho_j alpha; the clause is in the statement, not borrowed from the node's proof. Step 5 is elementary: an equivalence is reflected through the quasi-inverse. In step 6 the mapping spaces of N(Fin_*) are discrete, so the bottom map of the criterion square is literally the identity; the criterion then makes h cocartesian, and composition makes v cocartesian. Step 7 handles the arity cases correctly. All citations are in unit sk-prop-sf-biduality-general apart from definitions, so no tool_uses are needed. No new nodes and no SGA source. The nearest 'inert' nodes in the DAG are not duplicates. proof_deps equals the union of the step uses. The statement is not weakened."
  }
 }
