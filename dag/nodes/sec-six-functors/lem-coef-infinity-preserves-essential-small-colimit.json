@@ -63,7 +63,9 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-relative-cone"
+  "def-coef-infinity-relative-cone",
+  "def-coef-presentable-infinity-category",
+  "lem-coef-local-fiber-relative-colimit-test"
  ],
  "mathlib_searches": [
   {
@@ -150,5 +152,27 @@
   "group": "Q17",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-67db10f1a (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item node, the report, both cited nodes in full, both stmt_deps, the size convention and the parent step that cites the item. It is one commit with no new node. proof_deps equals the union of the step uses, blueprint.from and same_as are filled, and no SGA source is cited. The statement is true (cofinality invariance of colimits) and matches how the parent step in lem-coef-infinity-intermediate-presheaf-kan uses it. It is not a target, so there is no base-change morphism or coefficient category to check. Step 1: absolute-terminal makes C->Delta^0 an inner fibration and identifies p-colimit with colimiting. The hypotheses of relative-cone-equivalence clause (2) hold: an inner fibration, an equivalence e:K_0->K, and pf=g|_K trivially. Its particular-q sentence gives that q e^triangleright is colimiting. Step 2 is elementary: K_0 is U-small, so the hypothesis on H applies, and Hq_0=(Hq)e^triangleright. Step 3 uses the reflect direction of clause (2) for Z->Delta^0, so the given cocone Hq itself is colimiting. The universe reading is consistent: the cited nodes' 'small' refers to the containing universe the item fixes, and U-smallness is used only for K_0. Small cases checked: empty K (H preserves initial objects), e=id, and K large but equivalent to Delta^0. I read Kerodon 02XT online (Prop. 7.2.2.9 for left cofinal e, via Cor. 7.2.2.2, 02XQ, which preserves and reflects U-limits). Clause (2) is its colimit dual. There is no archival copy, so the WANTED stands. rg over dag/nodes found no duplicate; presheaf-free-cocompletion is a different statement. There is no cycle, both cited nodes are in the same unit, and no tool_uses are needed. No changes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c9126ab63",
+  "group": "Q146",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable statement, all statement dependencies, source passages, exact cocone formulas, universes, edge cases, docstrings and verbatim signature. Per-file sandbox and library compilation reproduced cleanly through scompile.py. No defects or fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityPreservesEssentialSmallColimit",
+  "declaration": "SSet.Enhanced.preserves_essential_small_colimit",
+  "file": "lean/Sheaf/CategoryTheory/InfinityPreservesEssentialSmallColimit.lean",
+  "statement": "theorem preserves_essential_small_colimit {C Z : SSet.{max u v}} [Quasicategory C] [Quasicategory Z] (H : C ⟶ Z) (hH : Presentability.PreservesColimitsIn H (fun I _ _ ↦ Presentability.IsSmall.{u, max u v} I)) (K : SSet.{max u v}) [Quasicategory K] (hK : Presentability.IsEssentiallySmall.{u, max u v} K) (q : rightJoinCone K ⟶ C) (hq : ∃ d : (coconeCategory (rightJoinConeInclusion K ≫ q)) _⦋0⦌, IsRightJoinInducedCocone q d ∧ IsColimiting (rightJoinConeInclusion K ≫ q) d) : ∃ d : (coconeCategory (rightJoinConeInclusion K ≫ q ≫ H)) _⦋0⦌, IsRightJoinInducedCocone (q ≫ H) d ∧ IsColimiting (rightJoinConeInclusion K ≫ q ≫ H) d",
+  "declarations": [
+   "SSet.Enhanced.preserves_essential_small_colimit"
+  ],
+  "branch": "newtargets-dag",
+  "by": "Q146",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of return at 141f9d58a3f4, H3/H4: quantify over the specified right-join diagram q and its induced coherent cocone, using the landed IsRightJoinInducedCocone formula for the actual apex and all cylinder simplices. The conclusion asserts colimitingness of that same induced cocone for q ≫ H. Use the existing Presentability.PreservesColimitsIn for small-colimit preservation. Add the landed owner lem-coef-local-fiber-relative-colimit-test to stmt_deps and import it; import both recorded proof-dependency modules. No natural-language statement correction or dependency restatement."
  }
 }
