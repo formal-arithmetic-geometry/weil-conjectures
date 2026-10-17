@@ -95,7 +95,8 @@ theorem torAmplitude_of_quasiCoherent_tests (X : Scheme.{uT}) [QuasiSeparatedSpa
     have hqc : schemeDerivedQCohProperty U.toScheme (R.mapDerivedCategory.obj E) :=
       (schemeDerivedQCoh_openRestriction_iff X U E).2 (fun n ↦ by
         have := hE n
-        exact SheafOfModules.isQuasicoherent_over _ U)
+        exact SheafOfModules.isQuasicoherent_over ((DerivedCategory.homologyFunctor
+          (SheafOfModules.{uT} (moduleRings X.toRingedSpace)) n).obj E) U)
     apply affineQCoh_torAmplitude_detection U.toScheme _ hqc a b hab
     intro F hF i hi
     have := hF
