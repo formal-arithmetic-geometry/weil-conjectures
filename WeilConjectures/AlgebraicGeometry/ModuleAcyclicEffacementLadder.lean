@@ -106,7 +106,7 @@ theorem Etale.exists_module_acyclic_effacement_ladder
   have hUS : (S.map U).ShortExact := hS.map_of_exact U
   obtain ⟨hY, δX, δY, _, _, _, _, hEX, hEY, _, _, hδ⟩ :=
     pullbackCohomology_longExact_ladder i (S.map U) hUS
-  obtain ⟨I, hI, hcomp⟩ := moduleValued_injective_cohomology_comparison X r S.X₂
+  obtain ⟨I, hI, -, hcomp⟩ := moduleValued_injective_cohomology_comparison X r S.X₂
   have : Injective I := hI
   have hzero := Scheme.isZero_rightDerived_etale_toSheaf_of_injective X
     (ULift.{u} (ZMod r)) I (Scheme.Etale.mk (𝟙 X)) (q + 1) (Nat.zero_lt_succ q)
