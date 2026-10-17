@@ -13,9 +13,128 @@
   "lem-coef-cocartesian-straightening",
   "def-coef-infinity-relative-cone"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $L=K^{\\triangleleft}$ and for $T=L,K$ (using the inclusion $K\\hookrightarrow L$), let $\\mathcal S_T=\\operatorname{Fun}_{/L}(T,E)$ denote all sections over $T$, i.e. the strict fiber of $\\operatorname{Fun}(T,E)\\to\\operatorname{Fun}(T,L)$ over the inclusion $T\\hookrightarrow L$. The cocartesian fibration $q_p$ is a Joyal fibration by [lem-coef-cocartesian-joyal-fibration], hence an isofibration by [lem-coef-joyal-quasicategory-characterizations](1). Apply [lem-coef-infinity-isofibration-exponentiation] to $\\varnothing\\hookrightarrow K$ and to $K\\hookrightarrow L$ with $q_p:E\\to L$: both corner maps are isofibrations between quasicategories. The first is $\\operatorname{Fun}(K,E)\\to\\operatorname{Fun}(K,L)$; its strict fiber $\\mathcal S_K$ over a vertex is a quasicategory, since an inner horn in the fiber lies over a degenerate simplex. Pull the second corner map back along $\\mathcal S_K\\to\\operatorname{Fun}(K,E)\\times_{\\operatorname{Fun}(K,L)}\\operatorname{Fun}(L,L)$, $a\\mapsto(a,1_L)$. The resulting map is exactly $R:\\mathcal S_L\\to\\mathcal S_K$, and $\\mathcal S_L$ is a quasicategory as a pullback of an inner fibration over the quasicategory $\\mathcal S_K$. By [lem-coef-joyal-quasicategory-characterizations](1) the corner map is a Joyal fibration, i.e. has the right lifting property against all injective categorical equivalences; this property is stable under pullback, so $R$ is a Joyal fibration between quasicategories. Applying (1) again, now to $R$ itself, $R$ is an inner fibration that lifts every equivalence edge of $\\mathcal S_K$ with any prescribed source to an edge that is an equivalence in $\\mathcal S_L$ (not merely in $\\operatorname{Fun}(L,E)$). Thus $R$ is an isofibration of quasicategories.",
+   "uses": [
+    "lem-coef-cocartesian-joyal-fibration",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-infinity-isofibration-exponentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.0.26, categorical-fibration assertion; HTT Proposition 3.3.1.7 and Kerodon Proposition 4.4.5.1 supply the all-section corner map"
+   }
+  },
+  {
+   "text": "The cocartesian sections form a replete full subcategory of each $\\mathcal S_T$. Indeed an equivalence $a\\simeq b$ in $\\mathcal S_T$ is an equivalence in $\\operatorname{Fun}(T,E)$ (the inclusion carries the inverse and its two witnessing $2$-simplices along), hence pointwise an equivalence by [lem-cbc-enhanced-functor-cone-calculus]. For an edge $e:t\\to t'$, its naturality square identifies $a(e)$ and $b(e)$ up to equivalences of their endpoints over identity base edges. In the mapping-space square of [lem-coef-infinity-cocartesian-mapping-criterion], pre- and postcomposition by these endpoint equivalences induce equivalences on the two upper spaces (their inverses are composition with the inverse edges, using [lem-coef-infinity-mapping-composition]); the lower spaces are unchanged. Homotopy-pullback invariance [lem-coef-kan-homotopy-pullback-invariance] therefore says that $a(e)$ is cocartesian exactly when $b(e)$ is. The full subcategories $\\Gamma,\\Gamma_K$ are quasicategories by the functor-category calculus. An inner-horn lift for $R$ with all given vertices in $\\Gamma$ has all its vertices in $\\Gamma$ and so lies in this full subcategory. An equivalence lift for $R$ starting in $\\Gamma$ ends there by repleteness. Hence $r:\\Gamma\\to\\Gamma_K$ is an isofibration, with the specified source-lifting property.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.0.26, justification of the categorical-fibration assertion on the full cocartesian-section subcategories"
+   }
+  },
+  {
+   "text": "For $T=L$ or $K$, write $E_T=E\\times_L T$, $\\chi_T=\\chi|_T$, and $\\Gamma_T$ for its cocartesian sections. The straightening theorem identifies this pullback with $\\chi_T$. For every small quasicategory $A$, section currying and straightening give natural equivalences\n$$\\operatorname{Map}_{\\operatorname{Cat}_\\infty}(A,\\Gamma_T)\\simeq\\operatorname{Fun}(A,\\Gamma_T)^\\simeq\\simeq\\operatorname{Map}_{\\operatorname{coCart}(T)}(T\\times A,E_T)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(T,\\operatorname{Cat}_\\infty)}(\\Delta_T A,\\chi_T).$$\nHere [lem-coef-marked-point-cartesian-model] supplies the mapping-space model for $\\operatorname{Cat}_\\infty$; [lem-cbc-cocartesian-section-currying] supplies currying with arbitrary transformations and identifies $T\\times A$ with the constant classifying diagram; [lem-coef-cocartesian-straightening] supplies the last equivalence. The evaluation $T\\times\\Gamma_T\\to E_T$ therefore gives a cone $\\lambda_T:\\Delta_T\\Gamma_T\\to\\chi_T$. The displayed equivalence is exactly postcomposition with this cone, by the evaluation clause of currying. The cone mapping-space criterion of [lem-cbc-enhanced-functor-cone-calculus] proves that $\\lambda_T$ is limiting. The cited restriction compatibilities identify the map of these cones for $K\\hookrightarrow L$ with the actual restriction $r$. This uses neither a strict diagram nor an ordinary indexing category.",
+   "uses": [
+    "lem-coef-marked-point-cartesian-model",
+    "lem-cbc-cocartesian-section-currying",
+    "lem-coef-cocartesian-straightening",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT proof of Proposition 3.3.3.1, the derived diagonal/section adjunction, and Corollary 3.3.3.2; direct assembly of existing mapping-space comparisons"
+   }
+  },
+  {
+   "text": "Let $v$ be the new vertex of $L=\\Delta^0\\star K$. The join construction gives a coherent transformation $\\eta:\\Delta_L v\\to1_L$: on a simplex of $L$ it uses the same simplex with an initial vertex $v$ inserted; at $v$ its component is the identity. Thus $\\chi\\eta$ is a cone on $\\chi$ with apex $\\chi(v)$. For every $A$, evaluation at $v$ sends a transformation $\\beta:\\Delta_L A\\to\\chi$ to $\\beta_v:A\\to\\chi(v)$. Its inverse sends $a$ to $(\\chi\\eta)\\circ\\Delta_La$. One composite is the identity because $\\eta_v=1_v$; the other is coherently equivalent to the identity by the naturality of $\\beta$ on $\\eta$. This calculation is on coherent transformations with all parameter simplices, so gives inverse maps of their mapping spaces. The cone criterion of [lem-cbc-enhanced-functor-cone-calculus] makes $\\chi\\eta$ limiting. Together with step 3, uniqueness of limiting cones from the same calculus shows that evaluation $e_v:\\Gamma\\to E_v\\simeq\\chi(v)$ is an equivalence. Its compatibility with the cones follows from the evaluation and transport compatibilities in section currying and straightening.",
+   "uses": [
+    "def-coef-infinity-relative-cone",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-cocartesian-section-currying",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Corollary 3.3.3.2, proof, evaluation at the initial vertex (opposite convention); explicit contraction of the left join cone"
+   }
+  },
+  {
+   "text": "The boundary of $\\lambda_L$ is the cone obtained by composing $r$ with $\\lambda_K$, by step 3. Under $e_v$ of step 4, this is precisely the cone $\\chi(v)\\to\\chi|_K$ supplied by $\\chi$. Since $\\lambda_K$ is limiting, this cone is limiting if and only if its comparison $\\Gamma\\xrightarrow{r}\\Gamma_K$ is an equivalence: the cone mapping-space criterion identifies its tests with $\\operatorname{Map}(A,r)$, and the fully faithful Yoneda functor of [lem-coef-infinity-yoneda-presheaf-limits] detects equivalences. Explicitly, if all these maps are equivalences, testing $A=\\Gamma_K$ gives a right inverse to $r$, and testing $A=\\Gamma$ then gives the other inverse identity; [lem-coef-infinity-mapping-composition] identifies these identities with equivalence in $\\operatorname{Cat}_\\infty$. The converse follows by composing with a quasi-inverse. This proves the first equivalence without the relative-limit hypothesis.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.0.26, first equivalence, expanded using the section/diagonal comparison of HTT 3.3.3.1"
+   }
+  },
+  {
+   "text": "Now assume every cocartesian section, viewed in $X$, is a $q$-limit diagram. Fix $s',s\\in\\Gamma$. For $T=L,K$, the map $\\operatorname{Fun}(T,X)\\to\\operatorname{Fun}(T,C)$ is an inner fibration: an inner-horn lifting problem is adjoint to the pushout-product of that horn with $\\varnothing\\hookrightarrow T$, which is inner anodyne by [lem-coef-inner-anodyne-pushout-product]. Consequently its induced maps on mapping spaces are Kan fibrations by [lem-coef-infinity-inner-mapping-fiber]. Apply the defining relative-limit square [def-coef-infinity-relative-cone] for $s$ to the source test diagram $s'$. Denote its four corners by $A,B,C_0,D$ in upper-left, upper-right, lower-left, lower-right order; it gives $A\\simeq B\\times_D^h C_0$. Take its homotopy fiber over $1_p\\in C_0$. Homotopy-pullback pasting gives\n$$\\operatorname{hofib}_{1_p}(A\\to C_0)\\simeq\\operatorname{hofib}_{1_{p|_K}}(B\\to D).$$\nBy [lem-coef-kan-pullback-path-comparison] these are the strict fibers of the Kan fibrations above. Degreewise, a right-pinched mapping simplex belongs to that strict fiber exactly when its projected diagram is constant at $p$ (respectively $p|_K$). Thus they are $\\operatorname{Map}_{\\mathcal S_L}(s',s)$ and $\\operatorname{Map}_{\\mathcal S_K}(s'|_K,s|_K)$, and the equivalence is restriction. Fullness of $\\Gamma$ and $\\Gamma_K$ leaves these mapping spaces unchanged. Hence $r$ is fully faithful.",
+   "uses": [
+    "lem-coef-inner-anodyne-pushout-product",
+    "lem-coef-infinity-inner-mapping-fiber",
+    "def-coef-infinity-relative-cone",
+    "lem-coef-infinity-homotopy-pullback-pasting",
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.0.26, mapping-space argument; relative universality in the precise form of Kerodon 7.1.6.19(2)"
+   }
+  },
+  {
+   "text": "Under the same hypothesis, full faithfulness is now established. By [lem-coef-infinity-full-essential-image], $r$ is an equivalence exactly when it is essentially surjective: if its full essential image is all of $\\Gamma_K$, the cited quasi-inverse is a quasi-inverse to $r$; the other direction follows from a quasi-inverse. Essential surjectivity means that for each $t\\in\\Gamma_K$ there are $s\\in\\Gamma$ and an equivalence $r(s)\\to t$. The isofibration proved in steps 1-2 lifts this very edge with source $s$, to an equivalence $s\\to\\widetilde s$ with $r(\\widetilde s)=t$ exactly. Conversely an exact extension witnesses essential surjectivity using the identity. Combining this with step 5 proves the final equivalence. If $K=\\varnothing$, then $L=\\Delta^0$, $\\Gamma=E_v$, and $\\Gamma_K=\\Delta^0$. For $t,s\\in E_v$, the relative-limit square identifies the mapping space in the fiber, namely the strict fiber of $\\operatorname{Map}_X(t,s)\\to\\operatorname{Map}_C(p(v),p(v))$ over $1_{p(v)}$, with a point. Thus every object of $E_v$ is terminal in the fiber, and full faithfulness follows, and exact extension is precisely nonemptiness of $E_v$, which makes it equivalent to the terminal category. If $E_v$ is empty, the relative-limit hypothesis is vacuous and both the limit assertion and exact extension fail. Thus the empty case is included.",
+   "uses": [
+    "lem-coef-infinity-full-essential-image",
+    "def-coef-infinity-relative-cone",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "B.0.26, essential-surjectivity versus surjectivity-on-vertices argument, including the empty indexing shape"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-cocartesian-joyal-fibration",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-cbc-cocartesian-section-currying",
+  "lem-coef-cocartesian-straightening",
+  "def-coef-infinity-relative-cone",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-inner-anodyne-pushout-product",
+  "lem-coef-infinity-inner-mapping-fiber",
+  "lem-coef-infinity-homotopy-pullback-pasting",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-infinity-full-essential-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Remark B.0.26, printed p.1469, following the online source; HTT Proposition 3.3.3.1 proof and Corollary 3.3.3.2, printed pp.214-216. Sources are not archived in literature/; the mapping-space and exact-lift expansions are written explicitly from existing DAG interfaces."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,10 +191,45 @@
    "results": "[loogle] OK 0 hit(s)",
    "date": "2026-10-17",
    "verdict": "no match: The hits concern limits in ordinary categories or the ordinary category SSet, not limits in Cat-infinity, section restriction, or exact extensions."
+  },
+  {
+   "tool": "grep",
+   "query": "cocartesian.*section|coCartesian.*section|section.*limit",
+   "results": "{\"t\": \"2026-10-17T04:20:24Z\", \"tool\": \"grep\", \"query\": \"cocartesian.*section|coCartesian.*section|section.*limit\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned hits concern ordinary categories or Type-valued strict sections, not cocartesian sections of quasicategories, relative limit diagrams or source-prescribed equivalence lifts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Limits of infinity categories and cocartesian sections of a cocartesian fibration",
+   "results": "{\"t\": \"2026-10-17T04:20:24Z\", \"tool\": \"leansearch\", \"query\": \"Limits of infinity categories and cocartesian sections of a cocartesian fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Types.limitEquivSections_apply\", \"CategoryTheory.Limits.Types.limitEquivSections\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.mk\", \"CategoryTheory.Limits.Types.isLimitEquivSections\", \"CategoryTheory.Cat.HasLimits.limitConeIsLimit\", \"CategoryTheory.Limits.Types.limNatIsoSectionsFunctor\"], \"digest\": \"a38cf43d5399dc6e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned hits concern ordinary categories or Type-valued strict sections, not cocartesian sections of quasicategories, relative limit diagrams or source-prescribed equivalence lifts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cocartesian\", \"section\"",
+   "results": "{\"t\": \"2026-10-17T04:20:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cocartesian\\\", \\\"section\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned hits concern ordinary categories or Type-valued strict sections, not cocartesian sections of quasicategories, relative limit diagrams or source-prescribed equivalence lifts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of cocartesian sections over a left cone is fully faithful when all sections are relative limit diagrams",
+   "results": "{\"t\": \"2026-10-17T04:20:36Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of cocartesian sections over a left cone is fully faithful when all sections are relative limit diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Cones.functoriality_full\", \"CategoryTheory.CostructuredArrow.full_map₂\", \"CategoryTheory.Limits.Cocones.functoriality_full\", \"CategoryTheory.MorphismProperty.instFullCostructuredArrowTopOverToOver\", \"CategoryTheory.CostructuredArrow.instFullOverToOver\", \"CategoryTheory.CostructuredArrow.instFullCompObjPostOfFaithful\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian\"], \"digest\": \"4981e2dedcf3a07e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned hits concern ordinary categories or Type-valued strict sections, not cocartesian sections of quasicategories, relative limit diagrams or source-prescribed equivalence lifts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cocartesian fibration over a cone classifies a limit diagram if restriction of cocartesian sections is an equivalence",
+   "results": "{\"t\": \"2026-10-17T04:20:36Z\", \"tool\": \"leanfinder\", \"query\": \"A cocartesian fibration over a cone classifies a limit diagram if restriction of cocartesian sections is an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.CostructuredArrow.CreatesConnected.isLimitRaiseCone\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.codomainUniqueUpToIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.universal_property\", \"CategoryTheory.Functor.IsCocartesian.universal_property\", \"CategoryTheory.Functor.IsStronglyCocartesian.universal_property'\", \"CategoryTheory.Functor.IsStronglyCocartesian.map\"], \"digest\": \"7e313b5b8de8e39b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned hits concern ordinary categories or Type-valued strict sections, not cocartesian sections of quasicategories, relative limit diagrams or source-prescribed equivalence lifts."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-pattern-anodyne-lifting-products",
@@ -103,5 +257,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cocartesian-cone-limit-section-test",
+  "worker": "stage1",
+  "summary": "No new nodes. Expanded HA B.0.26 into all-section isofibration, repleteness, section/diagonal mapping-space comparison, cone-vertex evaluation, the limit test, strict mapping-space fiber proof of full faithfulness, and source-prescribed exact extension. Reused the general cocartesian-section currying theorem rather than generalizing the ordinary-index section-limit node. Statement and hypotheses are unchanged; empty indexing shape checked. Fresh searches use the logged search command; no project attachment or Mathlib match.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, finite-coefficient mapping-complex adjunction before the derived inverse limit. Via the inherited pattern/model-structure chain, steps 1-5 justify HA B.0.26 limit recognition and steps 6-7 justify replacing limit recognition by actual section extension in the pattern generator proof. No change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-cocartesian-section-currying",
+    "why": "Generic simplicial currying for cocartesian sections over an arbitrary small quasicategory; supplies the existing mapping comparison, without the strict ordinary-index hypothesis of the section-limit node. It is a tool within the marked-model construction, not a replacement for the integral-duality route."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic functor-category quasicategory, pointwise-equivalence and universal cone mapping-space calculus; used as foundational tools, not as another geometric or coefficient route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-cocartesian-section-currying",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-54686880e",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-54686880e (reviewer sub-agent of L); spot-checked: Read the whole item, all 21 cited statements, and HA Remark B.0.26 (p.1469; I fetched the PDF read-only to /tmp and extracted its text). The statement matches the remark clause by clause and is unchanged; the source allows any simplicial set K_alpha while the node takes a small quasicategory, which predates this delivery. The delivery has no new nodes, proof_deps equals the union of the step uses, every cited id exists and is unmerged, and nothing in the dependency closure reaches the item, so there is no cycle. No duplicate in the DAG: lem-cbc-cocartesian-sections-limit needs a strict functor on an ordinary category, and lem-coef-cocartesian-section-colimits is about colimits. Steps 3-7 are correct as written. In step 4 the cone-point contraction L x Delta^1 -> L exists and the square beta(H,pr2) gives the naturality claimed. Step 5 correctly identifies the boundary cone with lambda_K after r. In step 6 the strict fiber of the right-pinched space over 1_p is Map_{S_L}(s',s) because E = X x_C L, and the path comparison applies since one leg is a Kan fibration. Step 7 handles exact extension and the empty-K case correctly. Small cases checked: K a point, where r is the transport f_! and the extra hypothesis makes f_! fully faithful; K empty with nonempty and empty fiber. Accepted tool_uses: lem-cbc-cocartesian-section-currying and lem-cbc-enhanced-functor-cone-calculus, both generic tools that replace no step of the unit. FIX in step 1: the lifted equivalence was only shown to be an equivalence in Fun(L,E), not in the fiber S_L, and nothing showed that S_K and S_L are quasicategories. Now S_K is the fiber over a vertex of an inner fibration, S_L is a pullback over it, R is a Joyal fibration because that class is stable under pullback, and characterization (1) applied to R gives equivalences in S_L. The uses are unchanged. Step 2 gains the elementary remark that an equivalence in S_T is one in Fun(T,E). The corrected item is in fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
  }
 }

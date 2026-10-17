@@ -14,9 +14,81 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-regular-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since every $f_j\\in\\mathfrak m$, we have $J\\subseteq\\mathfrak m$, so $1\\notin J$ and $C=A/J\\ne0$. The Jacobson radical is $\\mathfrak m$, since this is the unique maximal ideal. For $0\\leq i\\leq b$ put $I_i=(f_1,\\ldots,f_i)$ and $B_i=A/I_i$; let $q_i:A\\to B_i$ be the quotient map and put $\\overline J_i=(q_i(f_{i+1}),\\ldots,q_i(f_b))$. The module $B_i$ is finite over $A$: every class is $a\\cdot q_i(1)$. Because $q_i(f_j)=0$ for $j\\leq i$, the images of all the generators of $J$ generate precisely $\\overline J_i$. Thus $J^nB_i=\\overline J_i^{\\,n}$ as additive subgroups of $B_i$ for every $n\\geq0$: expand products of $n$ generators, with the case $n=0$ giving $B_i$. Also $B_i/\\overline J_i=C$: both send a representative $a$ to its class modulo $J$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 061S, lemma-quasi-regular-regular, setup and quotient stages of its induction; Tag 00IQ, lemma-intersection-powers-ideal-module (2), Jacobson hypothesis."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-quasi-regular-prefix-quotient] to the assumed canonical graded isomorphism, for each $0\\leq i<b$. It gives a canonical graded isomorphism\n$$\\Phi_i:C[T_{i+1},\\ldots,T_b]\\xrightarrow{\\sim}\\operatorname{gr}_{\\overline J_i}(B_i),\\qquad T_j\\longmapsto[q_i(f_j)]_1.$$\nThe coefficient identification and the prefix quotients are exactly those introduced in Step 1. No regularity of any prefix is assumed in this application.",
+   "uses": [
+    "lem-pur-quasi-regular-prefix-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 061R, lemma-truncate-quasi-regular, and 061S, lemma-quasi-regular-regular, last paragraph."
+   }
+  },
+  {
+   "text": "Fix $0\\leq i<b$. Apply [lem-weil-pbc-krull-intersection-jacobson] with ring $A$, ideal $J$, and finite $A$-module $B_i$. Its hypotheses hold: $A$ is Noetherian, $J\\subseteq\\mathfrak m$ is contained in its Jacobson radical, and $B_i$ is cyclic by Step 1. Hence $\\bigcap_{n\\geq0}J^nB_i=0$, equivalently $\\bigcap_{n\\geq0}\\overline J_i^{\\,n}=0$. For $x\\ne0$ in $B_i$, choose the least $n$ such that $x\\notin\\overline J_i^{\\,n}$. Since $\\overline J_i^{\\,0}=B_i$, we have $n\\geq1$; writing $r=n-1$ gives $x\\in\\overline J_i^{\\,r}\\setminus\\overline J_i^{\\,r+1}$. Thus its initial class $\\xi=[x]_r$ is nonzero in degree $r$ of the associated graded ring.",
+   "uses": [
+    "lem-weil-pbc-krull-intersection-jacobson",
+    "def-weil-pbc-associated-graded-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 061S, lemma-quasi-regular-regular, first paragraph; Tag 00IQ, lemma-intersection-powers-ideal-module (2), which generalizes the cited Tag 00IP, lemma-intersect-powers-ideal-module-zero."
+   }
+  },
+  {
+   "text": "Let $P=\\Phi_i^{-1}(\\xi)$, a nonzero homogeneous polynomial of degree $r$. Multiplication by the variable $T_{i+1}$ is injective even if $C$ has zero divisors: it sends each coefficient at exponent $\\alpha$ to that at $\\alpha+e_{i+1}$, and distinct exponents remain distinct. Hence $T_{i+1}P\\ne0$. The homogeneous multiplication formula gives\n$$0\\ne\\Phi_i(T_{i+1}P)=[q_i(f_{i+1})]_1\\,[x]_r=[q_i(f_{i+1})x]_{r+1}.$$\nConsequently $q_i(f_{i+1})x\\ne0$. Since this holds for every nonzero $x\\in B_i$, multiplication by $f_{i+1}$ on $A/(f_1,\\ldots,f_i)$ has zero kernel and is injective (apply the zero-kernel assertion to the difference of two elements with equal products).",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-associated-graded-ring-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 061S, lemma-quasi-regular-regular, nonzero initial-form argument; Tag 061N, equation-quasi-regular, multiplication by a variable."
+   }
+  },
+  {
+   "text": "Step 4 gives exactly the required injectivity on every successive quotient, for $i=0,\\ldots,b-1$. Step 1 gives the remaining condition $A/(f_1,\\ldots,f_b)=C\\ne0$. By [def-weil-pbc-regular-sequence] these conditions mean that $f_1,\\ldots,f_b$ is an $A$-regular sequence. If $b=0$, there are no injectivity conditions, $J=0$, and the last condition is $A\\ne0$, which is assumed; hence the same conclusion holds for the empty sequence.",
+   "uses": [
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 061S, lemma-quasi-regular-regular, conclusion using Tag 00LF, definition-regular-sequence; empty-sequence case made explicit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-regular-sequence",
+  "lem-pur-quasi-regular-prefix-quotient",
+  "lem-weil-pbc-associated-graded-ring-structure",
+  "lem-weil-pbc-krull-intersection-jacobson"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 061S, lemma-quasi-regular-regular, using Tag 061R, lemma-truncate-quasi-regular. The source induction is written by applying its initial-form argument separately to every prefix quotient, using Tag 00IQ (2) over A on the cyclic module A/I_i."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,10 +138,38 @@
    "results": "{\"t\": \"2026-10-17T04:11:28Z\", \"tool\": \"grep\", \"query\": \"Adic.*[Gg]rad|[Gg]rad.*[Aa]dic|IsRegular.*[Gg]rad|[Gg]rad.*IsRegular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Harmonic/Int.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\"], \"digest\": \"9ac8e8c8ad0740f5\"}",
    "date": "2026-10-17",
    "verdict": "No exact match: the two hits are a bibliography URL and a graded-radical import; neither states an associated-graded regular-sequence criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a Noetherian local ring polynomial associated graded algebra implies regular sequence",
+   "results": "{\"t\": \"2026-10-17T04:30:24Z\", \"tool\": \"leanfinder\", \"query\": \"In a Noetherian local ring polynomial associated graded algebra implies regular sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\", \"RingTheory.Sequence.IsRegular\", \"RingTheory.Sequence.isRegular_iff\", \"RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev\", \"RingTheory.Sequence.IsRegular.toIsWeaklyRegular\"], \"digest\": \"411504cc096f96e2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits assume weak regularity or concern Rees algebras, regular local rings or permutations; none derives regularity from the canonical polynomial associated graded isomorphism. Mathlib/RingTheory/Regular/RegularSequence.lean:21 lists quasi-regular sequences as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?regular|IsRegular.*[Gg]rad",
+   "results": "{\"t\": \"2026-10-17T04:30:24Z\", \"tool\": \"grep\", \"query\": \"quasi.?regular|IsRegular.*[Gg]rad\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Regular/RegularSequence.lean\"], \"digest\": \"e93f847680f4c3f4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits assume weak regularity or concern Rees algebras, regular local rings or permutations; none derives regularity from the canonical polynomial associated graded isomorphism. Mathlib/RingTheory/Regular/RegularSequence.lean:21 lists quasi-regular sequences as TODO."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a local Noetherian ring, if the associated graded of the ideal generated by f_i is the polynomial algebra on their initial forms then the f_i form a regular sequence",
+   "results": "{\"t\": \"2026-10-17T04:30:42Z\", \"tool\": \"leansearch\", \"query\": \"In a local Noetherian ring, if the associated graded of the ideal generated by f_i is the polynomial algebra on their initial forms then the f_i form a regular sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsNoetherianRingSubtypePolynomialMemSubalgebraReesAlgebra\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"RingTheory.Sequence.IsRegular\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"IsLocalRing.isRegular_of_perm\", \"RingTheory.Sequence.IsWeaklyRegular.of_isLocalizedModule\", \"RingTheory.Sequence.IsWeaklyRegular.mk\", \"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\"], \"digest\": \"71fccb502b8faf22\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits assume weak regularity or concern Rees algebras, regular local rings or permutations; none derives regularity from the canonical polynomial associated graded isomorphism. Mathlib/RingTheory/Regular/RegularSequence.lean:21 lists quasi-regular sequences as TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegular\", \"Noetherian\"",
+   "results": "{\"t\": \"2026-10-17T04:30:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRegular\\\", \\\"Noetherian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"IsRegularLocalRing.toIsNoetherian\", \"IsRegularRing.toIsNoetherian\"], \"digest\": \"4d7063cd9ad0c153\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits assume weak regularity or concern Rees algebras, regular local rings or permutations; none derives regularity from the canonical polynomial associated graded isomorphism. Mathlib/RingTheory/Regular/RegularSequence.lean:21 lists quasi-regular sequences as TODO."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-relative-regular-equations-base-change",
@@ -81,7 +181,7 @@
  "blueprint": {
   "from": {
    "node": "lem-pur-divisor-class",
-   "place": "Proof, first sentence: local frames require regular equations; in the relative regular-equation input to the smooth-pair coordinates, Tag 063U converts the quasi-regular equations on the Noetherian local fibre to regular equations by Tag 061S.",
+   "place": "Proof, opening sentence: 'Use the frame class of [def-pur-frame-class]'; the regular local equations needed by that frame construction are supplied through lem-pur-smooth-pair-local-coordinates and lem-pur-relative-regular-equations-base-change. Here the Tag 061S input uses Tag 061R to pass to each prefix quotient.",
    "via": [
     "lem-pur-relative-regular-equations-base-change",
     "lem-pur-smooth-pair-local-coordinates"
@@ -89,5 +189,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-quasi-regular-noetherian-local",
+  "worker": "stage1",
+  "summary": "Read Stacks 061S, 061R, 061P, 061N and 00IQ (2). Kept the statement unchanged. Added only the strictly smaller prefix-quotient quasi-regularity input 061R; reused the existing Krull-intersection Mathlib leaf and the existing associated-graded multiplication theorem. Wrote out finiteness, the Jacobson condition, the least failed filtration degree, variable injectivity by coefficients, and the empty case. No project attachment or exact Mathlib match was found.",
+  "blueprint": "Proof, opening sentence: 'Use the frame class of [def-pur-frame-class]'; the regular local equations needed by that frame construction are supplied through lem-pur-smooth-pair-local-coordinates and lem-pur-relative-regular-equations-base-change. Here the Tag 061S input uses Tag 061R to pass to each prefix quotient.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-associated-graded-ring-structure",
+    "why": "Its homogeneous multiplication formula supplies the product of initial forms in Step 4. This is a generic commutative-algebra construction, not an alternative geometric purity route; no statement of this unit provides the formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-associated-graded-ring-structure"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-041caf600",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-041caf600 (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks algebra.tex lines 16855-17085 (061N, 061P, 061R, 061S); no fixes were written. Item: it is 061S with M=A, and the quasi-regular hypothesis is correctly expanded as the canonical isomorphism A/J[T] -> gr_J(A). The statement is unchanged and not weakened, and b=0 is handled through 1!=0. New node lem-pur-quasi-regular-prefix-quotient: it is 061R with M=A over an arbitrary ring, and it is true (the source proof needs no extra hypothesis). B_i/Jbar_i = C holds because I_i is inside J. It is statement-only, introduces all its objects, cites the defining nodes, has five recorded searches, blueprint.from is lem-pur-divisor-class and same_as is [] (blueprint grep for quasi-regular/061R/061S found nothing). It is strictly smaller than the item, which still needs Krull intersection and the initial-form argument. Duplicate search: grep for 061R found only the two delivery files. The nearby nodes are different statements: regular-sequence-graded-polynomial is the converse, quasi-regular-flat-quotient-base-change needs flatness that fails for R'=A/I_i, and the two conormal-basis nodes give only degree one. Step 1: J inside m gives C!=0, B_i is cyclic hence finite, J^nB_i = Jbar_i^n. Step 2: the new node gives a graded isomorphism Phi_i with no prefix regularity assumed, so nothing is circular. Step 3: the Mathlib Krull leaf is applied over A (Noetherian, J inside the Jacobson radical m, B_i finite); the least n with x not in Jbar^n has n>=1, so [x]_r!=0. Step 4: T_{i+1} acts injectively on coefficients over any C, and the product formula (clause 2 of lem-weil-pbc-associated-graded-ring-structure) gives [f x]_{r+1}!=0. Step 5: both clauses of the regular-sequence definition hold, with the indices right. Small cases: k[[x]] passes; k[x,y]_(x,y)/(xy) with f=x, the repeated generator (x,x), and k[eps]/(eps^2) all fail the hypothesis, as they must. For the new node, i=0, i=b, the zero ring and k[[x,y]] with i=1 all check out. The parent's citing step meets exactly the item's hypotheses. Route: everything is in unit sk-prop-a1-kummer, with no SGA. I accept the tool use of lem-weil-pbc-associated-graded-ring-structure (from sk-thm-p1) as a generic commutative-algebra black box."
  }
 }
