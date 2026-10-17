@@ -10,11 +10,56 @@
  "stmt_deps": [
   "def-weil-pbc-module-localization",
   "def-weil-residue-field",
-  "def-weil-affine-spectrum"
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-flat-ring-map",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-geometrically-irreducible",
+  "def-weil-finitely-generated-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix p∈Spec(R), localize the base to R_p and put A_p=A⊗_R R_p. Flatness and finite presentation localize, and geometric integrality of the fibres is unchanged by this base change. The prime ξ_p becomes the prime mA_p for the maximal ideal m=pR_p, and the hypotheses say that N_{ξ_p} is R_p-flat and that α has an isomorphism on the residue field at mA_p. Apply [lem-trf-local-generic-basis-universal-injective] with q=mA_p. It gives that the localized map α_p:A_p^{⊕r}→N_p is R_p-universally injective (and also that the localized cokernel is flat at ξ_p).",
+   "uses": [
+    "lem-trf-local-generic-basis-universal-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I3, lemma-induction-step, localization to each R_p and implication (1)⇒(2)."
+   }
+  },
+  {
+   "text": "Fix q∈Spec(A) lying over p∈Spec(R). Every element of R∖p maps into A∖q, so M_q=(M_p)_q for the A_p-modules M_p=M⊗_R R_p, and α_q is the localization at q of α_p. Let L be an R_p-module. Then L⊗_{R_p}N_q=(L⊗_{R_p}N_p)⊗_{A_p}(A_p)_q and similarly for A_q^{⊕r}, and (A_p)_q is a flat A_p-module (localization is exact), so injectivity of L⊗_{R_p}α_p from the preceding step gives injectivity of L⊗_{R_p}α_q; thus α_q is R_p-universally injective (this is Algebra Tag 05CM, lemma-universally-injective-localize, part (1), written out). As q was arbitrary, [lem-trf-universal-injective-check-stalks] applies to R→A and α in the direction from the localized maps to the global one: L⊗_Rα is injective for every R-module L. Thus α is universally injective over R.",
+   "uses": [
+    "lem-trf-universal-injective-check-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CL, lemma-universally-injective-check-stalks, applied after the local 05I3 argument."
+   }
+  },
+  {
+   "text": "Let q∈Spec(A) lie over p. If N_q is R_p-flat, apply [lem-trf-local-generic-basis-universal-injective] to R_p→A_p (flat, finitely presented, with geometrically integral fibres by the preceding steps), the finite A_p-module N_p, the same α_p and the prime qA_p over pR_p; its residue-field hypothesis is the fixed isomorphism α⊗κ(ξ_p), so (coker α_p)_{qA_p}=H_q is R_p-flat. Conversely, assume H_q is R_p-flat. By the preceding step α_q:A_q^{⊕r}→N_q is R_p-universally injective, so for every R_p-module L the row 0→L⊗A_q^{⊕r}→L⊗N_q→L⊗H_q→0 (tensor over R_p) is exact: on the right by right exactness of the tensor product, on the left by universal injectivity. The module A_q is R_p-flat: A_q is a flat A-module and A is R-flat, so A_q is R-flat, and for R_p-modules L'→L tensoring over R_p agrees with tensoring over R. Let L'→L be an injection of R_p-modules and compare the two exact rows. Take x∈L'⊗N_q mapping to 0 in L⊗N_q. Its image in L'⊗H_q maps to 0 in L⊗H_q, hence is 0 by flatness of H_q; so x is the image of some y∈L'⊗A_q^{⊕r}. The image of y in L⊗A_q^{⊕r} maps to 0 in L⊗N_q, hence is 0 by left exactness of the lower row, and then y=0 by flatness of A_q^{⊕r}. So x=0 and N_q is R_p-flat (this is the first assertion of Algebra Tag 00HM, lemma-flat-ses, written out). Hence N_q is flat if and only if H_q is flat.",
+   "uses": [
+    "lem-trf-local-generic-basis-universal-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05I3, lemma-induction-step, implication (1)⇒(2) and (5)⇒(1), after localization at q; Algebra lemma-flat-ses for the extension."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-local-generic-basis-universal-injective",
+  "lem-trf-universal-injective-check-stalks"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05I3, lemma-induction-step; globalization by Algebra Tag 05CL."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,7 +98,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-flattening-module-by-admissible-blowup",
@@ -65,7 +110,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 proof paragraph 3: universal injectivity of alpha and equivalence of flatness with its cokernel.",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL.",
    "via": [
     "lem-trf-flattening-module-by-admissible-blowup",
     "lem-trf-flattening-by-admissible-blowup",
@@ -80,5 +125,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-free-subtraction-flatness",
+  "worker": "stage1",
+  "summary": "Split the global generic-basis subtraction statement into the local Tag 05I3 criterion and the Tag 05CL stalkwise universal-injectivity criterion. The proof localizes at every base prime, applies the local criterion at the fibre generic prime to obtain universal injectivity, globalizes by checking tensor kernels on A-localizations, and then applies the local criterion at each q for the forward flatness implication; the reverse implication is the flat short-exact-sequence diagram chase. The statement and all hypotheses are unchanged. Maintainer reader (cc review, 2026-10-18): wrote out the localization of universal injectivity in step 2 and the flat-extension diagram chase in step 3; dropped the uncited new Tag 05FT projectivity node (it is an input of the later split of the local criterion, not of this item).",
+  "blueprint": "Realizes the free-subtraction step in the ancestor lem-trf-local-term-locality route, namely the Stacks 05I3 paragraph used by lem-trf-flattening-module-by-admissible-blowup, together with its Algebra 05CL globalization."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-f67067743",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-f67067743 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, the cited definition nodes, the citer lem-trf-flattening-module-by-admissible-blowup (steps 8 and 10), and Stacks 05I3 (full proof), 05CL, 05CM, 00HM and 05FT. The mathematics is correct and the item statement is unchanged; it matches 05I3 applied over each R_p plus 05CL (4)=>(1). Small cases checked: R=0, r=0, H_q=0, and R=k[t], A=R[x], N=A/(t), where the flatness hypothesis at xi fails as it should. Step 1: the hypotheses of the local node hold over R_p at q=pA_p=xi_p. Step 2: 05CL is applied in the right direction. Step 3: the local node gives the forward implication and a flat-extension argument gives the converse. The local node is exactly 05I3 (1)=>(2) and is strictly smaller than the item, so it is not a D1 restatement. The stalk node is 05CL (1)<=>(4). The rg search found no duplicates and there are no off-unit citations. Repairs: (1) the 05FT projectivity node is cited by no node, since the item proof does not use it and statement-only nodes cannot, so it is dropped; (2) step 2's 'preserved by further localization' (05CM) and step 3's 'standard diagram chase' (00HM) are now written out as elementary arguments (E5/C2); (3) the local node now cites def-weil-affine-spectrum and def-weil-pbc-module-localization for Spec and N_q (B3). No SGA source used, no tool_uses.; 2 file(s) fixed by the reviewer"
  }
 }
