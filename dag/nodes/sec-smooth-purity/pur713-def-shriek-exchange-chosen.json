@@ -3,26 +3,146 @@
  "blueprint": {
   "is": "pur713-def-shriek-exchange-chosen",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Compact-support exchange into the chosen compactification",
- "statement": "Under Input “Comparison of compactifications, finite coefficients” (`pur713-input-comparison`, in [sk-def-sf-exchanges]), for the Cartesian square $\\square$ define\n\n$$\n\\operatorname{Ex}^{\\circ}_{!,\\square,\\mathcal O_E/\\varpi^n}:=(\\theta_{c',\\mathcal O_E/\\varpi^n}Lg'^*_{\\mathcal O_E/\\varpi^n})\\circ\\operatorname{Ex}_{!,\\square,\\mathcal O_E/\\varpi^n}:\nLg^*_{\\mathcal O_E/\\varpi^n}Rf_{!,\\mathcal O_E/\\varpi^n}\\longrightarrow Rf'_{!,\\mathcal O_E/\\varpi^n}Lg'^*_{\\mathcal O_E/\\varpi^n},\n$$\n\nwith $\\operatorname{Ex}_{!,\\square}$ of Definition [pur713-def-shriek-exchange] and $c'$ the base change of $c_f$ (Definition [pur713-def-base-changed-compactification]). It is invertible at $K$ if and only if $\\operatorname{Ex}_{!,\\square,K}$ is, because $\\theta_{c'}$ is an isomorphism.",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$, a uniformizer $\\varpi$, and $n\\geq1$, and put $A=\\mathcal O_E/\\varpi^n$ [def-weil-l-adic-coefficient-extension]. Use the small pro-etale sites and the derived categories $D(T_{\\mathrm{proet}},A)=D(\\Sh(T_{\\mathrm{proet}},A))$ of sheaves of modules over the constant sheaf of rings $A_T$ [def-weil-pbc-proetale-site], the same categories as in [pur713-def-shriek-exchange] and [def-weil-extension-by-zero], and their ordinary unbounded pullbacks and direct images [def-weil-pbc-proetale-operations], with the canonical identifications $u^{-1}A_V\\cong A_U$ of the constant coefficient sheaves. Let\n$$\n\\begin{array}{ccc}\nX'&\\xrightarrow{g'}&X\\\\\nf'\\downarrow&&\\downarrow f\\\\\nY'&\\xrightarrow{g}&Y\n\\end{array}\n$$\nbe a Cartesian square of schemes [def-weil-pbc-cartesian-square], with $f$ separated of finite type [def-weil-scheme-morphism-properties]. Choose compactifications $c_f=(j,p)$ of $f$ and $c_{f'}=(j_{f'},p_{f'})$ of $f'$; a compactification of $h$ means a factorization $h=r i$ with $i$ a quasi-compact open immersion and $r$ proper [def-nagata-compactification]. Let $c'=(j',p')$ be the base change of $c_f$ [pur713-def-base-changed-compactification]. For any of these compactifications $d=(i,r)$ write $R_{d,A}=Rr_{*,A}\\mathrm D(i_{!,A})$, where $\\mathrm D(i_{!,A})$ is induced by applying the exact extension-by-zero functor [def-weil-extension-by-zero, lem-cbc-proetale-extension-zero] termwise and using its factorization through the derived localizations [lem-weil-pbc-exact-functor-derived-factorization]; set $Rf_{!,A}=R_{c_f,A}$ and $Rf'_{!,A}=R_{c_{f'},A}$.\n\nAssume the comparison input named “Comparison of compactifications, finite coefficients” in the source, namely a specified natural isomorphism\n$$\n\\theta_{c',A}:R_{c',A}\\xrightarrow{\\sim}R_{c_{f'},A}=Rf'_{!,A}\n$$\non $D(X'_{\\mathrm{proet}},A)$. This is supplied comparison data, rather than an assertion here that such an isomorphism exists on the entire ambient category. Let\n$$\n\\operatorname{Ex}_{!,\\square,A}:Lg_A^*Rf_{!,A}\\longrightarrow R_{c',A}Lg'^*_A\n$$\nbe the auxiliary-compactification exchange of [pur713-def-shriek-exchange]. Define the compact-support exchange into the chosen compactification by\n$$\n\\operatorname{Ex}^{\\circ}_{!,\\square,A}\n:=(\\theta_{c',A}Lg'^*_A)\\circ\\operatorname{Ex}_{!,\\square,A}:\nLg_A^*Rf_{!,A}\\longrightarrow Rf'_{!,A}Lg'^*_A.\n$$\nThis is a natural transformation of functors $D(X_{\\mathrm{proet}},A)\\to D(Y'_{\\mathrm{proet}},A)$. At every $K\\in D(X_{\\mathrm{proet}},A)$ its component is invertible if and only if $\\operatorname{Ex}_{!,\\square,A,K}$ is invertible, because $\\theta_{c',A,Lg'^*_AK}$ is an isomorphism.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/pur713-def-shriek-exchange-chosen.md",
   "place": "node pur713-def-shriek-exchange-chosen, order 2358"
  },
  "stmt_deps": [
-  "sk-def-sf-exchanges",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-extension-by-zero",
+  "lem-cbc-proetale-extension-zero",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "pur713-def-base-changed-compactification",
   "pur713-def-shriek-exchange",
-  "pur713-def-base-changed-compactification"
+  "def-weil-pbc-cartesian-square",
+  "def-weil-scheme-morphism-properties",
+  "def-nagata-compactification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "Put $F=Lg_A^*Rf_{!,A}$, $G=R_{c',A}Lg'_A^*$ and $H=Rf'_{!,A}Lg'_A^*$. The current statement of [pur713-def-shriek-exchange] defines $Rf_{!,A}=Rp_{*,A}\\mathrm D(j_{!,A})$ and $R_{c',A}=Rp'_{*,A}\\mathrm D(j'_{!,A})$ on the full unbounded pro-etale derived categories and supplies the auxiliary natural transformation $\\alpha:F\\to G$ between these composites. These are exactly the functors used here, with the base-changed compactification $c'$ as the auxiliary target. The comparison input supplies $\\theta:R_{c',A}\\cong Rf'_{!,A}$, so its component $t_K=\\theta_{Lg'_A^*K}$ has source $G(K)$ and target $H(K)$. Define $\\beta_K=t_K\\alpha_K$. For $a:K\\to L$, naturality gives $H(a)\\beta_K=H(a)t_K\\alpha_K=t_LG(a)\\alpha_K=t_L\\alpha_LF(a)=\\beta_LF(a)$. Thus these components define exactly the displayed natural transformation.",
+   "uses": [
+    "pur713-def-shriek-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/pur713-def-shriek-exchange-chosen.md",
+    "place": "displayed definition and final invertibility sentence"
+   }
+  },
+  {
+   "text": "For a fixed $K$, write $\\alpha=\\operatorname{Ex}_{!,\\square,A,K}$ and $t=\\theta_{c',A,Lg'_A^*K}$, so $\\beta=t\\alpha$, with $\\alpha:F(K)\\to G(K)$ and $t:G(K)\\xrightarrow{\\sim}H(K)$ as in step 1. If $\\alpha$ is invertible, the map $s=\\alpha^{-1}t^{-1}$ satisfies $s\\beta=\\alpha^{-1}t^{-1}t\\alpha=1_{F(K)}$ and $\\beta s=t\\alpha\\alpha^{-1}t^{-1}=1_{H(K)}$. Conversely, if $\\beta$ is invertible, put $r=\\beta^{-1}t$. Then $r\\alpha=\\beta^{-1}t\\alpha=\\beta^{-1}\\beta=1_{F(K)}$ and $\\alpha r=t^{-1}\\beta\\beta^{-1}t=1_{G(K)}$, using $\\alpha=t^{-1}\\beta$. Thus $r$ is inverse to $\\alpha$, proving both directions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/pur713-def-shriek-exchange-chosen.md",
+    "place": "displayed definition and final invertibility sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pur713-def-shriek-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/pur713-def-shriek-exchange-chosen.md",
+  "place": "definition and last sentence; explicit componentwise verification of the blueprint formula"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "shriek|compactSupport|compact_support|compactification",
+   "results": "0 hits: ; Mathlib subdirectory CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match for the specified pro-etale compactification exchange"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support base change natural transformation followed by comparison of compactifications for derived categories of sheaves",
+   "results": "8 hits: SheafOfModules.pushforwardNatTrans_app_val_app, SheafOfModules.pullbackComp, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, CategoryTheory.NatTrans.onPresheaf, TopCat.Sheaf.pushforwardForgetIso, CategoryTheory.Functor.rightDerivedNatTrans, SheafOfModules.pushforwardNatTrans, CategoryTheory.Functor.sheafPushforwardContinuousNatTrans",
+   "date": "2026-10-17",
+   "verdict": "no match for the specified pro-etale compactification exchange"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso, CategoryTheory.NatTrans",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-17",
+   "verdict": "invalid query (unknown identifier); no absence conclusion drawn; corrected CategoryTheory.Functor.isoWhiskerLeft query recorded separately"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a cartesian square of schemes, define finite coefficient compact support base change into a chosen compactification by postcomposing the auxiliary exchange map with the compactification comparison isomorphism.",
+   "results": "8 hits: AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.IsAffineOpen.isCompact_pullback_inf, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_map_preimage_eq_map_preimage, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd, AlgebraicGeometry.pullbackSpecIso_hom_fst', AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo",
+   "date": "2026-10-17",
+   "verdict": "no match for the specified pro-etale compactification exchange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Whisker a natural isomorphism on the left by a functor and compose with a natural transformation to change its target; postcomposition by an isomorphism preserves and reflects invertibility.",
+   "results": "8 hits: CategoryTheory.Functor.isoWhiskerLeft, CategoryTheory.Functor.isIso_whiskerLeft, CategoryTheory.Functor.isoWhiskerRight, CategoryTheory.Functor.isIso_whiskerRight, CategoryTheory.Functor.isoWhiskerLeft_hom, CategoryTheory.Functor.isoWhiskerRight_hom, CategoryTheory.Functor.isoWhiskerLeft_trans, CategoryTheory.Functor.isoWhiskerRight_trans",
+   "date": "2026-10-17",
+   "verdict": "generic whiskering infrastructure only; no match for the specified pro-etale compactification exchange"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.isoWhiskerLeft",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.isoWhiskerLeft'",
+   "date": "2026-10-17",
+   "verdict": "invalid query (unknown identifier); no absence conclusion drawn; corrected CategoryTheory.Functor.isoWhiskerLeft query recorded separately"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|compactSupport|compact_support|compactification|isoWhiskerLeft",
+   "results": "25 hits: Mathlib/Dynamics/FixedPoints/Support.lean, Mathlib/NumberTheory/ModularForms/Cusps.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean, Mathlib/AlgebraicGeometry/ColimitsOver.lean, Mathlib/AlgebraicGeometry/ColimitsOver.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the specified pro-etale compactification exchange"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isoWhiskerLeft",
+   "results": "12 hits: CategoryTheory.Functor.isoWhiskerLeft, CategoryTheory.Functor.isoWhiskerLeft_refl, CategoryTheory.Functor.isoWhiskerLeft_symm, CategoryTheory.Functor.isoWhiskerLeft_hom, CategoryTheory.Functor.isoWhiskerLeft_inv, CategoryTheory.Functor.isoWhiskerLeft_trans, CategoryTheory.Functor.triangleIso, CategoryTheory.Functor.isoWhiskerLeft_trans_isoWhiskerRight",
+   "date": "2026-10-17",
+   "verdict": "generic whiskering infrastructure only; no match for the specified pro-etale compactification exchange"
+  },
+  {
+   "tool": "grep",
+   "query": "def isoWhiskerLeft|isIso_comp_right_iff",
+   "results": "4 hits: Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Whiskering.lean, Mathlib/CategoryTheory/Iso.lean; Mathlib subdirectory CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match for the specified pro-etale compactification exchange"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_comp_left_iff|isIso_comp_right_iff|def isoWhiskerLeft",
+   "results": "17 hits: Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Iso.lean, Mathlib/CategoryTheory/Iso.lean, Mathlib/CategoryTheory/Whiskering.lean, Mathlib/CategoryTheory/Limits/Final.lean, Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomologyZero.lean",
+   "date": "2026-10-17",
+   "verdict": "generic categorical infrastructure only; no geometric pro-etale compactification exchange definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a natural transformation between functors, compose it vertically with a natural isomorphism; prove a component is an isomorphism precisely when its composite is.",
+   "results": "8 hits: CategoryTheory.NatIso.trans_app, CategoryTheory.NatIso.cancel_natIso_hom_right_assoc, CategoryTheory.NatIso.hcomp, CategoryTheory.Functor.isIso_whiskerRight, CategoryTheory.Functor.isIso_whiskerLeft, CategoryTheory.NatTrans.isIso_app_iff_of_iso, CategoryTheory.Functor.isoWhiskerRight, CategoryTheory.Functor.isoWhiskerLeft",
+   "date": "2026-10-17",
+   "verdict": "generic categorical infrastructure only; no geometric pro-etale compactification exchange definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Changing the codomain functor of a natural transformation by a natural isomorphism, with isomorphisms detected componentwise after composition.",
+   "results": "8 hits: CategoryTheory.NatIso.ofComponents, CategoryTheory.NatTrans.naturality_1, CategoryTheory.NatTrans.naturality_2, CategoryTheory.NatTrans.isIso_app_iff_of_iso, CategoryTheory.MorphismProperty.functorCategory_isomorphisms, CategoryTheory.NatIso.ofComponents_hom_app, CategoryTheory.NatIso.ofComponents.app, CategoryTheory.NatIso.isIso_app_of_isIso",
+   "date": "2026-10-17",
+   "verdict": "generic natural-transformation and componentwise isomorphism infrastructure only; not the specified geometric pro-etale chosen-compactification exchange"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -48,5 +168,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "pur713-def-shriek-exchange-chosen",
+  "worker": "stage1",
+  "summary": "No new nodes. Made the source's assumed comparison input explicit because its named label is absent from the current cited section; retained its conditional status, direction, finite coefficient category, chosen-target formula and invertibility equivalence. Added two elementary componentwise verification steps, rather than creating a node for a clause of the definition. Removed sk-def-sf-exchanges as a purported definition of the missing input and cited the actual coefficient, module, operation and extension definitions. Searched both project source trees and Mathlib; no exact project attachment or Mathlib match. Repair of the returned delivery: re-read every current statement dependency, aligned step 1 with the updated auxiliary-exchange statement, replaced its stale verbatim citation, and cited the existing exact-functor derived-factorization Mathlib leaf for the degreewise extension construction. Retained the supplied-comparison hypothesis, original searches and elementary inverse argument; no new nodes.",
+  "blueprint": "main-20261015 pur713-def-shriek-exchange-chosen: opening comparison-input hypothesis is expanded as supplied natural-isomorphism data; the display and its auxiliary/base-changed-compactification sentence are realized by the typed composite and step 1; the final invertibility sentence is checked in step 2. This definition supports the compact-support exchange inverted in the unit's counit calculation; no unit route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NL-b7f3b316c",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-b7f3b316c (reviewer sub-agent of L); spot-checked: I read in full the item, the main-20261015 source and its sibling sources (the auxiliary exchange and the base-changed compactification), all of sk-def-sf-exchanges/_section.md, every cited node's statement, and the one consumer, pur9-cs-def-bc. The source's input pur713-input-comparison is dangling: a search of the whole blueprint and DAG finds it only in consumers. Making theta an explicitly supplied natural isomorphism R_{c'} to R_{c_{f'}} on D(X'_proet,A) is the right repair and weakens nothing, since the source already says 'Under Input'. No existing node can supply theta: prop-compactification-coherence-detailed covers only the etale-origin domain and lem-weil-pbc-etale-shriek-compactification-independence only etale D^+. The composite, its direction and the invertibility clause match the source. Ex_! is the current parent statement unchanged (Ex_* followed by Rp'_*(b)). Step 1's naturality uses only the parent's statement and theta's naturality. Step 2's four inverse identities are correct. Edge cases checked: K=0, empty X, theta=id, identity square, n=1, proper f. There are no new nodes and no duplicates; pur713-def-shriek-exchange-module is the module-object version of the parent. Fixed three small faults in statement and stmt_deps (fixes/dag/nodes/sec-smooth-purity/pur713-def-shriek-exchange-chosen.json). (1) Coefficient category, E4: the item used def-weil-pbc-proetale-modules, whose ring sheaf is (U -> Cont(pi0,A))^#, while the parent's Ex and the j_! it uses live over the constant sheaf A_T of def-weil-pbc-proetale-site. Replaced the citation with def-weil-pbc-proetale-site and stated the constant-sheaf identifications. (2) Compactification: the item allowed any open immersion, but pur713-def-base-changed-compactification takes c in the sense of def-nagata-compactification (quasi-compact open immersion). Aligned the item and cited that node. (3) B3: cited def-weil-pbc-cartesian-square and def-weil-scheme-morphism-properties. Also changed 'in particular' to 'namely' so the definition depends only on the stated theta. Proof, blueprint fields and searches are unchanged; the statement's citations equal stmt_deps; no tool_uses, no drop_nodes.; 1 file(s) fixed by the reviewer"
  }
 }
