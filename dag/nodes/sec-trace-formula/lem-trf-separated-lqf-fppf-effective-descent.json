@@ -16,9 +16,119 @@
   "def-weil-proper-morphism",
   "pqf-def-quasifinite"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathcal P(f)$ mean that $f$ is separated and locally quasi-finite. It is invariant under isomorphism, and [lem-weil-pbc-separated-lqf-base-change] gives stability under arbitrary base change. Check finite coproducts using [lem-weil-pbc-scheme-coproduct-family]: the summands of both source and target are disjoint clopen pieces. Over the target summand $B_j$ the coproduct morphism is exactly $Y_j\\to B_j$, so its affine neighbourhoods give the local quasi-finiteness condition in [pqf-def-quasifinite]. The fibre square of the coproduct morphism is the disjoint union of $Y_j\\times_{B_j}Y_j$; its diagonal is the union of the diagonals of the summands. This is a closed immersion because on each open-and-closed piece it is that closed immersion, with the same restricted structure sheaf, which is the separatedness condition in [def-weil-proper-morphism]. The empty coproduct has empty diagonal and no points, so both properties hold there too.",
+   "uses": [
+    "lem-weil-pbc-separated-lqf-base-change",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "pqf-def-quasifinite",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02W8, lemma-separated-locally-quasi-finite-morphisms-fppf-descend, first paragraph, permanence hypotheses for 02W3"
+   }
+  },
+  {
+   "text": "By [lem-trf-fppf-family-affine-effectivity-reduction] and step 1, it remains to prove effectiveness for a single flat surjective finite-presentation morphism $p:A\\to B$ of affine schemes. Fix any such $p$ and a datum $(V,\\phi)$ with $V\\to A$ separated and locally quasi-finite. This singleton is an fpqc covering: for any affine open in $B$, [lem-pc-fppf-affine-refinement] applied to the restricted singleton fppf cover supplies finitely many affine opens upstairs whose images cover it, precisely [def-weil-pbc-fpqc-covering]. The restriction is an fppf cover by the covering-base-change axiom of the site [def-pc-fppf-site].",
+   "uses": [
+    "lem-trf-fppf-family-affine-effectivity-reduction",
+    "lem-pc-fppf-affine-refinement",
+    "def-weil-pbc-fpqc-covering",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02W8, lemma-separated-locally-quasi-finite-morphisms-fppf-descend, first paragraph, reduction to a flat surjective finite-presentation affine cover"
+   }
+  },
+  {
+   "text": "For every affine open $C\\subset V$, let $r_C:C\\times_B A\\to V$ be the restriction of $\\phi$ followed by the projection $A\\times_B V\\to V$, and put $W_C=r_C(C\\times_B A)$. This is open: $r_C$ is an open immersion followed by the isomorphism $\\phi$ and a base change of the flat finite-presentation morphism $p$, which is open by [lem-weil-pbc-flat-lfp-open]. It is quasi-compact: $C\\times_B A$ is affine by [lem-weil-pbc-fibre-product-affine-spectra], hence quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], and its continuous image is quasi-compact (pull back any open cover and take a finite subcover). The restriction of $\\phi$ to the diagonal of $A\\times_B A$ is the identity: the cocycle on the triple diagonal says an invertible map equals its square. Therefore $C\\subset W_C$. The affine opens cover $V$ by [lem-weil-pbc-affine-opens-basis], so the $W_C$ cover $V$.",
+   "uses": [
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-affine-opens-basis",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02W8, lemma-separated-locally-quasi-finite-morphisms-fppf-descend, second paragraph, construction and topology of the saturated opens"
+   }
+  },
+  {
+   "text": "The cocycle makes $W_C$ invariant, as follows. Regard $\\phi$ as transport from one $A$-coordinate to another. For a test scheme $Z$, a map $v:Z\\to W_C$, and a second map $b:Z\\to A$ over $B$, pull back the surjection $r_C:C\\times_B A\\to W_C$ along $v$. Its projection $Z'\\to Z$ is surjective by [lem-weil-pbc-surjective-base-change]. On $Z'$ the map $v$ is the transport of a map $c:Z'\\to C$ from its $A$-coordinate to the current coordinate. Transporting once more to $b$ gives, by the cocycle, exactly the transport of $c$ directly to $b$, which lies in $W_C$ by its definition as the image of $r_C$. Since $Z'\\to Z$ is surjective, the transported map on $Z$ also has image in $W_C$ and factors through this open. Interchanging the two coordinates gives the reverse inclusion; the cocycle with a repeated coordinate makes these transports inverse. Thus $\\phi$ restricts to an isomorphism $W_C\\times_B A\\simeq A\\times_B W_C$, satisfies the same cocycle, and the inclusion $W_C\\to V$ intertwines every transport.",
+   "uses": [
+    "lem-weil-pbc-surjective-base-change",
+    "def-pd-descent-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02W8, lemma-separated-locally-quasi-finite-morphisms-fppf-descend, second paragraph, equality phi(W times A)=A times W from the cocycle"
+   }
+  },
+  {
+   "text": "Each $W_C\\to A$ remains separated and locally quasi-finite: the diagonal is the restriction of the closed diagonal of $V\\to A$ to $W_C\\times_A W_C$, and [lem-weil-pbc-lqf-restriction-to-opens] gives local quasi-finiteness for its source-open restriction. Its source is quasi-compact by step 3 and its target is affine, hence quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]; [lem-weil-pbc-qcqs-morphism-permanence](1) therefore makes $W_C\\to A$ quasi-compact. It is locally of finite type by [lem-weil-pbc-lqf-locally-finite-type]. Consequently [lemma-nagata-quasi-affine-morphism-of-quasi-finite] applies with all four hypotheses and makes $W_C\\to A$ quasi-affine. This uses no finite-presentation assertion for $V\\to A$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "pqf-def-quasifinite",
+    "lem-weil-pbc-lqf-restriction-to-opens",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-lqf-locally-finite-type",
+    "lemma-nagata-quasi-affine-morphism-of-quasi-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02W8, lemma-separated-locally-quasi-finite-morphisms-fppf-descend, second paragraph, saturated open is separated quasi-finite and hence quasi-affine (02LR)"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-quasi-affine-fpqc-effective-descent] to the fpqc singleton $p$ of step 2 and to each restricted datum on $W_C$ from step 4. Step 5 supplies its quasi-affine hypothesis, so all these restricted data are effective. Now [lem-pd-effective-invariant-open-cover] applies: the $W_C$ are an open covering, their inclusions intertwine transport by step 4, and their data are effective. It makes the datum on $V$ effective. This proves the affine case required in step 2 and hence, by the reduction there, proves the item for the original arbitrary fppf covering family.",
+   "uses": [
+    "lem-trf-quasi-affine-fpqc-effective-descent",
+    "lem-pd-effective-invariant-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02W8, lemma-separated-locally-quasi-finite-morphisms-fppf-descend, end of second paragraph and final paragraph, quasi-affine descent (0247) and invariant-open gluing (0AP4)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-separated-lqf-base-change",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "pqf-def-quasifinite",
+  "def-weil-proper-morphism",
+  "lem-trf-fppf-family-affine-effectivity-reduction",
+  "lem-pc-fppf-affine-refinement",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-fppf-site",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-pd-descent-datum",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-lqf-restriction-to-opens",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lemma-nagata-quasi-affine-morphism-of-quasi-finite",
+  "lem-trf-quasi-affine-fpqc-effective-descent",
+  "lem-pd-effective-invariant-open-cover"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 02W8, full proof; Tags 02W3, 02LR, 0247 and 0AP4 as indicated by its references. The cocycle saturation calculation is expanded in step 4."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +164,38 @@
    "results": "7 hits: Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every descent datum of separated locally quasi-finite schemes relative to an fppf covering is effective",
+   "results": "{\"t\": \"2026-10-17T21:13:34Z\", \"tool\": \"leanfinder\", \"query\": \"Every descent datum of separated locally quasi-finite schemes relative to an fppf covering is effective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"CategoryTheory.Functor.instEffectiveEpiEffectiveEpiOver\", \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"CategoryTheory.Pseudofunctor.IsStack.essSurj_of_sieve\", \"CategoryTheory.coherentTopology.exists_effectiveEpiFamily_iff_mem_induced\", \"CategoryTheory.Precoherent.pullback\", \"CategoryTheory.isSheaf_coherent\"], \"digest\": \"e7fca94efcd1add7\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective fppf descent of separated locally quasi-finite schemes",
+   "results": "{\"t\": \"2026-10-17T21:13:30Z\", \"tool\": \"leansearch\", \"query\": \"Effective fppf descent of separated locally quasi-finite schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\"], \"digest\": \"398103c67a402bcc\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fppf|effective.*descent|LocallyQuasiFinite",
+   "results": "{\"t\": \"2026-10-17T21:13:30Z\", \"tool\": \"grep\", \"query\": \"fppf|effective.*descent|LocallyQuasiFinite\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\"], \"digest\": \"75a462865888bb07\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DescentDatum\"",
+   "results": "{\"t\": \"2026-10-17T21:09:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"DescentDatum\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-etale-affine-quotient-representable",
@@ -87,5 +225,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-separated-lqf-fppf-effective-descent",
+  "worker": "stage1",
+  "summary": "Follow Tag 02W8 in six steps: verify the property hypotheses, reduce via the fppf-family form of 02W3, form quasi-compact open saturations of affine opens, prove invariance by explicit transport and surjective base change, apply the existing quasi-finite/quasi-affine theorem, descend quasi-affine pieces and glue using the existing invariant-open effectiveness theorem. Two new unsplit statements, 02W3 for fppf families and 0247 for singleton fpqc covers. Statement unchanged; no finite-presentation hypothesis on the object is inserted.",
+  "blueprint": "Realizes the effective-descent geometric input in the existing Tag 0265 quotient-presentation subargument below lem-trf-local-term-locality. The historical from/via chain is retained. The six steps supply Tag 02W8 where the parent lem-trf-etale-affine-quotient-representable uses it in steps 4 and 7.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-separated-lqf-base-change",
+    "why": "Generic base-change stability needed to verify the hypothesis of 02W3; no permanence theorem in this unit replaces it."
+   },
+   {
+    "node": "lem-pc-fppf-affine-refinement",
+    "why": "Generic finite affine refinement checks that the chosen affine fppf singleton is fpqc."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic compact-source/quasi-separated-target criterion makes each saturated open quasi-compact over A."
+   },
+   {
+    "node": "lem-weil-pbc-lqf-locally-finite-type",
+    "why": "Supplies the finite-type hypothesis required by the existing quasi-affine criterion in precisely the Stacks locally quasi-finite convention."
+   },
+   {
+    "node": "lem-weil-pbc-lqf-restriction-to-opens",
+    "why": "Generic restriction theorem in the Stacks affine-local convention, used for W_C to A."
+   },
+   {
+    "node": "lem-pd-effective-invariant-open-cover",
+    "why": "Generic 0AP4 gluing of effective invariant open data, exactly the final reference in Tag 02W8."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-separated-lqf-base-change",
+  "lem-pc-fppf-affine-refinement",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lem-weil-pbc-lqf-restriction-to-opens",
+  "lem-pd-effective-invariant-open-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q52-44cc7c805",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q52-44cc7c805 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, all cited node statements, the chapter/unit route, and Stacks Tags 02W8, 02W3, 0247, 02LR, and 0AP4. The six-step split matches the source with hypotheses preserved; saturation openness, invariance, quasi-affineness, fpqc descent, and gluing are supported. Edge cases and duplicate searches were checked. No route-pivot or SGA violation, long-step issue, statement error, or repair is needed."
  }
 }

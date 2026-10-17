@@ -1,0 +1,89 @@
+{
+ "id": "lem-trf-curve-degree-tensor-additive",
+ "kind": "statement",
+ "title": "Degree is additive on tensor products of invertible modules on proper schemes of dimension at most one",
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ be a scheme proper over $k$ [def-weil-proper-morphism] of topological Krull dimension at most one [def-kun-topological-krull-dimension], and let $\\mathcal L,\\mathcal M$ be invertible $\\mathcal O_X$-modules [def-sc-invertible-module]. With tensor product as in [def-pur-sheaf-tensor-product] and degree $\\deg_k(\\mathcal F)=\\chi(X,\\mathcal F)-\\chi(X,\\mathcal O_X)$ for an invertible module as in [def-pc-degree-line-bundle], one has $\\deg_k(\\mathcal L\\otimes_{\\mathcal O_X}\\mathcal M)=\\deg_k(\\mathcal L)+\\deg_k(\\mathcal M)$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0AYX, lemma-degree-tensor-product, rank-one specialization."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-proper-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-degree-line-bundle"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a proper scheme of dimension at most one over a field the Euler characteristic degree of a tensor product of invertible sheaves is the sum of their degrees",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CommRing.Pic.mk_tensor\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {M : Type u_5} {N : Type u_6} [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\\n  [inst_3 : AddCommMonoid N] [inst_4 : Module R N] [inst_5 : Module.Invertible R M] [inst_6 : Module.Invertible R N],\\n  CommRing.Pic.mk R (TensorProduct R M N) = CommRing.Pic.mk R M \", \"doc\": \"For any invertible $ R $-semimodules $ M $ and $ N $, the class of their tensor product $ M \\\\otimes_R N $ in the Picard group $ \\\\mathrm{Pic}(R) $ is equal to the product of their individual classes, i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  Nontrivial ↑T.tensor\", \"doc\": \"For any pullback triplet in the category of schemes with morphisms $f: X \\\\to S$ and $g: Y \\\\to S$, the pushout $T.tensor$ in the category of commutative rings constructed from the residue field maps is\"}\n  {\"name\": \"AlgebraicGeometry.instBraidedCategoryScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"CategoryTheory.BraidedCategory AlgebraicGeometry.Scheme\", \"doc\": \"The category of schemes is endowed with the structure of a braided category. This structure is derived from its Cartesian monoidal structure, where the braiding isomorphism for two schemes $X$ and $Y$\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x : AlgebraicGeometry.Scheme.Pullback.Triplet f g},\\n  AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr ⋯ = CategoryTheory.Iso.refl x.tensor\", \"doc\": \"For any pullback triplet $T$ in the category of schemes, applying the tensor congruence construction to the reflexive equality $T = T$ yields the identity isomorphism on the associated tensor pushout \"}\n  {\"name\": \"Module.rankAtStalk_tensorProduct_of_isScalarTower\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Flat R M]\\n  [Module.Finite R M] {S : Type u_1} [inst_5 : CommRing S] [inst_6 : Algebra R S] (N : Type u_2)\\n  [inst_7 : AddCommGroup N] [inst_8 : Module R N] [inst_9 : Module S N] [inst_10 : IsSc\", \"doc\": \"Given commutative rings $R$ and $S$ with $S$ an $R$-algebra, an $S$-module $N$ that is finitely generated and flat over $S$ with compatible $R$-action (via scalar tower), and a prime ideal $\\\\mathfrak{\"}\n  {\"name\": \"Module.rankAtStalk_tensorProduct\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Flat R M]\\n  [Module.Finite R M] (N : Type u_1) [inst_5 : AddCommGroup N] [inst_6 : Module R N] [Module.Finite R N]\\n  [Module.Flat R N], Module.rankAtStalk (TensorProduct R M N) = Module.rankAtSt\", \"doc\": \"For modules $M$ and $N$ over a commutative semiring $R$, if both are finitely generated and flat, then the rank of their tensor product $M \\\\otimes_R N$ at the stalk corresponding to a prime ideal $\\\\ma\"}\n  {\"name\": \"CommRing.Pic.mul_eq_tensor\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] (M N : CommRing.Pic R),\\n  M * N = CommRing.Pic.mk R (TensorProduct R M.AsModule N.AsModule)\", \"doc\": \"For any commutative semiring $ R $ and elements $ M, N $ in the Picard group $ \\\\mathrm{Pic}(R) $, the group multiplication satisfies $ M \\\\cdot N = [M \\\\otimes_R N] $, where $ [M \\\\otimes_R N] $ denotes \"}\n  {\"name\": \"AlgebraicGeometry.Proj.mul_apply\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {V : (TopologicalSpace.Opens ↑(ProjectiveSpectrum.top 𝒜))ᵒᵖ}\\n  (s t : ↑((AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf 𝒜).val.obj V)) (x : ↥(Opp\", \"doc\": \"The structure sheaf on the projective spectrum of a graded ring assigns to each open set $ U $ the ring of sections locally represented by homogeneous fractions $ r/s $, where $ s $ is a homogeneous e\"}\nRead the returned statements: no statement of this node or one-line generalization. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Degree of a tensor product of line bundles on a proper curve is additive",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PiTensorProduct.piTensorHomMapFun₂_add\", \"module\": \"Mathlib.LinearAlgebra.PiTensorProduct\", \"type\": \"(φ ψ : ⨂[R] i, s i →ₗ[R] t i →ₗ[R] t' i) : piTensorHomMapFun₂ (φ + ψ) = piTensorHomMapFun₂ φ + piTensorHomMapFun₂ ψ\", \"doc\": \"For a commutative semiring $ R $ and families of $ R $-modules $ s_i $, $ t_i $, $ t'_i $, the linear map $ \\\\pi\\\\text{TensorHomMapFun}_2 $ associated to the tensor product of bilinear maps satisfies $ \"}\n  {\"name\": \"RatFunc.intDegree_mul\", \"module\": \"Mathlib.FieldTheory.RatFunc.Degree\", \"type\": \"{x y : RatFunc K} (hx : x ≠ 0) (hy : y ≠ 0) : intDegree (x * y) = intDegree x + intDegree y\", \"doc\": \"For any non-zero rational functions $x$ and $y$ over a commutative ring $K$, the integer degree of their product satisfies $\\\\deg_{\\\\mathbb{Z}}(x \\\\cdot y) = \\\\deg_{\\\\mathbb{Z}}(x) + \\\\deg_{\\\\mathbb{Z}}(y)$,\"}\n  {\"name\": \"LinearMap.lTensor_add\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basic\", \"type\": \"(f g : N →ₗ[R] P) : (f + g).lTensor M = f.lTensor M + g.lTensor M\", \"doc\": \"For any two linear maps $ f, g : N \\\\to P $ over a commutative semiring $ R $, the tensor product linear map induced by $ f + g $ acting on $ M \\\\otimes_R N $ is equal to the sum of the tensor product l\"}\n  {\"name\": \"HomogeneousLocalization.NumDenSameDeg.deg_mul\", \"module\": \"Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization\", \"type\": \"(c1 c2 : NumDenSameDeg 𝒜 x) : (c1 * c2).deg = c1.deg + c2.deg\", \"doc\": \"For any two elements $c_1$ and $c_2$ in the homogeneous localization with same-degree numerators and denominators, the degree of their product $c_1 \\\\cdot c_2$ equals the sum of their individual degree\"}\n  {\"name\": \"MvPolynomial.degreeOf_mul_eq\", \"module\": \"Mathlib.Algebra.MvPolynomial.NoZeroDivisors\", \"type\": \"(hp : p ≠ 0) (hq : q ≠ 0) : degreeOf n (p * q) = degreeOf n p + degreeOf n q\", \"doc\": \"For non-zero multivariate polynomials $ p $ and $ q $, the total degree of their product in a variable $ n $ is equal to the sum of their individual total degrees in $ n $, i.e., $\\\\deg_n(pq) = \\\\deg_n(\"}\n  {\"name\": \"PiTensorProduct.add_tprodCoeff'\", \"module\": \"Mathlib.LinearAlgebra.PiTensorProduct\", \"type\": \"(z₁ z₂ : R) (f : Π i, s i) : tprodCoeff R z₁ f + tprodCoeff R z₂ f = tprodCoeff R (z₁ + z₂) f\", \"doc\": \"For scalars $z_1, z_2 \\\\in R$ and a fixed family $f : \\\\prod_{i} s_i$, the sum of the elementary tensors $z_1 \\\\otimes f$ and $z_2 \\\\otimes f$ in the tensor product $\\\\bigotimes_R s_i$ equals the elementar\"}\n  {\"name\": \"Polynomial.degree_prod\", \"module\": \"Mathlib.Algebra.Polynomial.BigOperators\", \"type\": \"[Nontrivial R] : (∏ i ∈ s, f i).degree = ∑ i ∈ s, (f i).degree\", \"doc\": \"For a non-trivial commutative semiring $ R $ and a finite set $ s $, the degree of the product of polynomials $ f(i) $ for $ i \\\\in s $ is equal to the sum of the degrees of each $ f(i) $. Formally, $ \"}\n  {\"name\": \"HomogeneousLocalization.NumDenSameDeg.deg_add\", \"module\": \"Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization\", \"type\": \"(c1 c2 : NumDenSameDeg 𝒜 x) : (c1 + c2).deg = c1.deg + c2.deg\", \"doc\": \"For any two elements $ c_1 $ and $ c_2 $ in the homogeneous localization structure with numerators and denominators of the same degree, the degree of their sum $ c_1 + c_2 $ is equal to the sum of the\"}\nRead the returned statements: no statement of this node or one-line generalization. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"degree_tensor\"",
+   "results": "[loogle] OK 0 hit(s)\nRead the returned statements: no statement of this node or one-line generalization. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "degree_tensor|degree.*tensor|tensor.*degree",
+   "results": "[grep] OK 0 hit(s)\nRead the returned statements: no statement of this node or one-line generalization. The grep was restricted to Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Euler characteristic on a proper one dimensional scheme satisfies chi(L tensor M) plus chi(O) equals chi(L) plus chi(M) for invertible modules",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CommRing.Pic.mk_tensor\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {M : Type u_5} {N : Type u_6} [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\\n  [inst_3 : AddCommMonoid N] [inst_4 : Module R N] [inst_5 : Module.Invertible R M] [inst_6 : Module.Invertible R N],\\n  CommRing.Pic.mk R (TensorProduct R M N) = CommRing.Pic.mk R M \", \"doc\": \"For any invertible $ R $-semimodules $ M $ and $ N $, the class of their tensor product $ M \\\\otimes_R N $ in the Picard group $ \\\\mathrm{Pic}(R) $ is equal to the product of their individual classes, i\"}\n  {\"name\": \"CommRing.Pic.mul_eq_tensor\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] (M N : CommRing.Pic R),\\n  M * N = CommRing.Pic.mk R (TensorProduct R M.AsModule N.AsModule)\", \"doc\": \"For any commutative semiring $ R $ and elements $ M, N $ in the Picard group $ \\\\mathrm{Pic}(R) $, the group multiplication satisfies $ M \\\\cdot N = [M \\\\otimes_R N] $, where $ [M \\\\otimes_R N] $ denotes \"}\n  {\"name\": \"CommRing.Pic.mapAlgebra_apply\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R] (A : Type u_7) [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  (M : CommRing.Pic R), (CommRing.Pic.mapAlgebra R A) M = CommRing.Pic.mk A (TensorProduct R A M.AsModule)\", \"doc\": \"For a commutative semiring $ R $, an $ R $-algebra $ A $, and an element $ [M] $ in the Picard group $ \\\\mathrm{Pic}(R) $, the group homomorphism $ \\\\mathrm{Pic}(R) \\\\to \\\\mathrm{Pic}(A) $ sends $ [M] $ t\"}\n  {\"name\": \"CommRing.Pic.mapAlgebra\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) →\\n  [inst : CommSemiring R] →\\n    (A : Type u_7) → [inst_1 : CommSemiring A] → [Algebra R A] → CommRing.Pic R →* CommRing.Pic A\", \"doc\": \"For a commutative semiring $ R $ and an $ R $-algebra $ A $, this defines a group homomorphism from the Picard group $ \\\\mathrm{Pic}(R) $ to $ \\\\mathrm{Pic}(A) $. It maps each isomorphism class of inver\"}\n  {\"name\": \"Module.Invertible.instTensorProduct_1\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) (M : Type v) (A : Type u_4) [inst : CommSemiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\\n  [Module.Invertible R M] [inst_4 : CommSemiring A] [inst_5 : Algebra R A], Module.Invertible A (TensorProduct R A M)\", \"doc\": \"The tensor product $ A \\\\otimes_R M $ is an invertible module over the algebra $ A $. This instance asserts that when $ A $ is a commutative semiring and $ M $ is an $ A $-module, the tensor product $ \"}\n  {\"name\": \"Module.Invertible.instTensorProduct\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) (M : Type v) (N : Type u_1) [inst : CommSemiring R] [inst_1 : AddCommMonoid M] [inst_2 : AddCommMonoid N]\\n  [inst_3 : Module R M] [inst_4 : Module R N] [Module.Invertible R M] [Module.Invertible R N],\\n  Module.Invertible R (TensorProduct R M N)\", \"doc\": \"If $ N $ is an invertible module over a commutative semiring $ R $, then the tensor product $ M \\\\otimes_R N $ is also an invertible $ R $-module for any module $ M $.\"}\n  {\"name\": \"Submodule.mulExact_unitsToPic_mapAlgebra\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) (A : Type u_4) [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  [inst_3 : FaithfulSMul R A], Function.MulExact ⇑(Submodule.unitsToPic R A) ⇑(CommRing.Pic.mapAlgebra R A)\", \"doc\": \"The group homomorphism from the Picard group of $ R $ to the Picard group of $ A $, induced by an $ R $-algebra structure, satisfies the multiplicative exactness condition with respect to the monoid h\"}\n  {\"name\": \"CommRing.Pic.instAddCommGroupAsModule\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u_7) → [inst : CommRing R] → (M : CommRing.Pic R) → AddCommGroup M.AsModule\", \"doc\": \"For any commutative ring $ R $ and any invertible module $ M $ in the Picard group $ \\\\mathrm{Pic}(R) $, the underlying additive structure of $ M $ forms an additive commutative group. This instance as\"}\nRead the returned statements: no statement of this node or one-line generalization. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-proper-integral-curve-ample-degree",
+  "date": "2026-10-18",
+  "group": "Q55"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Supporting input: the proper integral curve degree criterion (0B5X). In the 0B5X proof this is the tensor-product degree formula used to pass from the degree of a positive tensor power to the degree of the line bundle and to obtain linear Euler-characteristic growth.",
+   "via": [
+    "lem-trf-proper-integral-curve-ample-degree",
+    "lem-trf-fibre-degree-ample-criterion",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

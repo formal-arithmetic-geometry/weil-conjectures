@@ -16,9 +16,168 @@
   "def-weil-pbc-ample-invertible-module",
   "def-pc-degree-line-bundle"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The scheme $C$ is nonempty by [def-pc-integral-scheme]. Properness includes finite type and separatedness [def-weil-proper-morphism], so $C$ is a variety in the sense of [def-pc-curve]. The field $k$ is Noetherian: its only ideals are $0$ and $(1)$ [def-weil-pbc-noetherian-ring]. Thus [lem-weil-pbc-finite-type-over-noetherian] makes $C$ Noetherian. By [pqf-lem-coherent-ft-locnoeth], $\\mathcal O_C$ and every invertible module are coherent: locally each is free of rank one [def-sc-invertible-module]. Finite type over a field and properness therefore meet the Noetherian hypotheses used below.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-weil-proper-morphism",
+    "def-pc-curve",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-coherent-ft-locnoeth",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B5X, preliminary proper-curve and finiteness hypotheses; Properties Tag 01OV and Cohomology of Schemes Tag 01XZ"
+   }
+  },
+  {
+   "text": "Write $d=\\deg_k(\\mathcal N)$. By [def-weil-pbc-ample-invertible-module], each $\\mathcal N^{\\otimes n}$ is invertible, including $\\mathcal N^{\\otimes0}=\\mathcal O_C$. The degree definition [def-pc-degree-line-bundle] gives $\\deg_k(\\mathcal O_C)=0$. Induction using [lem-trf-curve-degree-tensor-additive] gives $\\deg_k(\\mathcal N^{\\otimes n})=nd$ for every $n\\ge0$: the induction step adds $d$ to the preceding degree. Rearranging the definition of degree gives $\\chi(C,\\mathcal N^{\\otimes n})=nd+\\chi(C,\\mathcal O_C)$.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "def-pc-degree-line-bundle",
+    "lem-trf-curve-degree-tensor-additive"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B5X, tensor-power degree and Euler-characteristic identities; Tag 0AYX"
+   }
+  },
+  {
+   "text": "First assume $\\mathcal N$ ample. The field $K=\\Gamma(C,\\mathcal O_C)$ is a finite extension of $k$ by [lem-pc-h0-proper-variety], since Step 1 showed $C$ is a proper variety. If $C$ were affine, it would be $\\operatorname{Spec}K$ [def-weil-affine-spectrum], a one-point space of dimension zero [def-kun-topological-krull-dimension], contrary to $\\dim C=1$. Choose a point of $C$. The ampleness definition [def-weil-pbc-ample-invertible-module] supplies $n\\ge1$ and a section $s$ with that point in the affine open $C_s$. Hence $s\\ne0$ and $C_s\\ne C$, since $C$ is not affine. Applying [lem-trf-curve-section-degree-positivity] to $\\mathcal N^{\\otimes n}$ gives $nd>0$ by Step 2, whence $d>0$.",
+   "uses": [
+    "lem-pc-h0-proper-variety",
+    "def-weil-affine-spectrum",
+    "def-kun-topological-krull-dimension",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-trf-curve-section-degree-positivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B5X, forward implication; Tag 0B40, nonzero section with a zero"
+   }
+  },
+  {
+   "text": "For the converse assume $d>0$. By [lem-pc-coherent-hi], the coherent modules $\\mathcal N^{\\otimes n}$ on proper $C/k$ have finite-dimensional cohomology. Since $C$ is Noetherian of dimension one, [lem-sc-noetherian-cohomology-above-dimension] kills their cohomology in degrees above one. Thus [def-pc-euler-characteristic] and Step 2 give $h^0(C,\\mathcal N^{\\otimes n})=nd+\\chi(C,\\mathcal O_C)+h^1(C,\\mathcal N^{\\otimes n})\\ge nd+\\chi(C,\\mathcal O_C)$, which is unbounded as $n\\to\\infty$. Choose any nonempty affine open $U\\subseteq C$. By [lem-sc-affine-complement-finite-on-integral-curve], its complement is a finite set $\\{x_1,\\ldots,x_t\\}$. Each $x_i$ is closed: in an integral dimension-one scheme a non-generic point with a distinct specialization would give the chain $\\overline{\\{y\\}}\\subsetneq\\overline{\\{x_i\\}}\\subsetneq C$, contrary to the dimension definition [def-kun-topological-krull-dimension]; the generic point exists by [lem-weil-pbc-scheme-sober]. Since $C/k$ is finite type, [lem-kun-closed-point-field] gives $[\\kappa(x_i):k]<\\infty$.",
+   "uses": [
+    "lem-pc-coherent-hi",
+    "lem-sc-noetherian-cohomology-above-dimension",
+    "def-pc-euler-characteristic",
+    "lem-sc-affine-complement-finite-on-integral-curve",
+    "def-kun-topological-krull-dimension",
+    "lem-weil-pbc-scheme-sober",
+    "lem-kun-closed-point-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B5X, reverse implication, growth of sections and choice of finite boundary"
+   }
+  },
+  {
+   "text": "Choose $n\\ge1$ with $h^0(C,\\mathcal N^{\\otimes n})>\\sum_i[\\kappa(x_i):k]$. Evaluation at the $x_i$ is a $k$-linear map to $\\bigoplus_i(\\mathcal N^{\\otimes n})_{x_i}\\otimes\\kappa(x_i)$, whose dimension is that sum because each fibre has dimension one over $\\kappa(x_i)$ [def-sc-invertible-module]. Its kernel is nonzero by the dimension inequality. Take a nonzero section $s$ in the kernel, so $s$ vanishes at every boundary point. Consequently $C_s\\subseteq U$, using the fibrewise definition of $C_s$ [def-weil-pbc-ample-invertible-module]. By [lem-sc-affine-cap-section-open], $C_s=U\\cap C_s$ is affine. This produces a fixed $n\\ge1$ and nonzero $s\\in\\Gamma(C,\\mathcal N^{\\otimes n})$ with affine nonvanishing locus. No surjectivity of the evaluation map was required.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-sc-affine-cap-section-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B5X, evaluation kernel and affine nonvanishing locus; Properties Tag 01PV"
+   }
+  },
+  {
+   "text": "Let $\\mathcal I\\subseteq\\mathcal O_C$ be any quasi-coherent ideal. It is coherent by [lem-weil-pbc-coherent-kernel-cokernel-locnoeth](2), since $C$ is locally Noetherian and $\\mathcal O_C$ is coherent. Put $\\mathcal F_e=\\mathcal I\\otimes\\mathcal N^{\\otimes en}$ for $e\\ge0$. These are coherent because locally the invertible factor is $\\mathcal O_C$ [def-sc-invertible-module]. The nonzero section $s$ has nonzero generic value: on a trivializing open where it is nonzero its coefficient injects into the function field by [lem-sc-integral-scheme-stalks-in-function-field]. Hence its coefficient at every stalk is nonzero, by that same injection. Multiplication by $s$ on each $\\mathcal F_e$ is injective: after trivializing, it is multiplication by a nonzero element on the ideal $\\mathcal I_x$ in the domain $\\mathcal O_{C,x}$. It is an isomorphism on $C_s$. Thus $0\\to\\mathcal F_e\\xrightarrow{s}\\mathcal F_{e+1}\\to\\mathcal Q_e\\to0$ is exact, with coherent cokernel by [lem-weil-pbc-coherent-kernel-cokernel-locnoeth](1). Its support is contained in $C\\setminus C_s$, which omits the generic point and has dimension at most zero: any strict chain there would extend by $C$ to a length-two chain [def-kun-topological-krull-dimension].",
+   "uses": [
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "def-sc-invertible-module",
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B5X, injective section-multiplication sequence and zero-dimensional cokernels"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-chi-zero-dim-support](1) to each coherent $\\mathcal Q_e$ on the proper $k$-scheme $C$: Step 6 verified its support dimension at most zero, so $H^1(C,\\mathcal Q_e)=0$. The long exact sequence explicitly supplied by [pqf-def-cohomology] for the short exact sequence in Step 6 gives a surjection $H^1(C,\\mathcal F_e)\\twoheadrightarrow H^1(C,\\mathcal F_{e+1})$ for every $e\\ge0$. Composing these maps shows that $H^1(C,\\mathcal I)\\to H^1(C,\\mathcal F_e)$ is surjective for every $e$.",
+   "uses": [
+    "lem-pc-chi-zero-dim-support",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B5X, surjectivity on first cohomology; Cohomology of Schemes Tag 0B3J"
+   }
+  },
+  {
+   "text": "The vector space $H^1(C,\\mathcal I)$ is finite-dimensional by [lem-pc-coherent-hi], since $C/k$ is proper and $\\mathcal I$ is coherent. Apply [lem-sc-section-affine-open-kills-cohomology] with $X=C$, $L=\\mathcal N^{\\otimes n}$, $F=\\mathcal I$, and $p=1$: $C$ is quasi-compact and quasi-separated by Step 1 and [lem-weil-pbc-locally-noetherian-quasi-separated], $L$ is invertible, and $C_s$ is affine by Step 5. Each element of a finite basis is killed by some power of multiplication by $s$. Choose $E\\ge1$ at least all these exponents (take $E=1$ for the zero vector space). The map $H^1(C,\\mathcal I)\\to H^1(C,\\mathcal F_E)$ kills the basis and hence is zero. It is also surjective by Step 7, so $H^1(C,\\mathcal I\\otimes\\mathcal N^{\\otimes En})=0$. The exponent $En$ is positive and may depend on $\\mathcal I$, exactly as required.",
+   "uses": [
+    "lem-pc-coherent-hi",
+    "lem-sc-section-affine-open-kills-cohomology",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B5X, finite basis and eventual annihilation; Cohomology of Schemes Tag 01XR"
+   }
+  },
+  {
+   "text": "Step 8 applies to every quasi-coherent ideal of $\\mathcal O_C$. The field $k$ is Noetherian by Step 1, $C\\to\\operatorname{Spec}k$ is proper by hypothesis, and $\\mathcal N$ is invertible. Therefore [lem-trf-ideal-twist-vanishing-implies-ample] with $R=k$ gives absolute ampleness of $\\mathcal N$. Together with Step 3 this proves the equivalence, with the original degree and without imposing smoothness or geometric integrality.",
+   "uses": [
+    "lem-trf-ideal-twist-vanishing-implies-ample"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B5X, final application of Cohomology of Schemes Tag 0B5U, implication (3) => (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-pc-curve",
+  "def-pc-degree-line-bundle",
+  "def-pc-euler-characteristic",
+  "def-pc-integral-scheme",
+  "def-sc-invertible-module",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-proper-morphism",
+  "lem-kun-closed-point-field",
+  "lem-pc-chi-zero-dim-support",
+  "lem-pc-coherent-hi",
+  "lem-pc-h0-proper-variety",
+  "lem-sc-affine-cap-section-open",
+  "lem-sc-affine-complement-finite-on-integral-curve",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sc-section-affine-open-kills-cohomology",
+  "lem-trf-curve-degree-tensor-additive",
+  "lem-trf-curve-section-degree-positivity",
+  "lem-trf-ideal-twist-vanishing-implies-ample",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-scheme-sober",
+  "pqf-def-cohomology",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B5X, lemma-ample-curve, both directions; finite-basis and stalk-injectivity details expanded."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -75,10 +234,52 @@
    "results": "0 hits; returned names: none. Read the returned statements: none states the ampleness/degree criterion or finite-surjective ampleness equivalence. All hits concern general scheme morphisms, normalization, quasi-affineness, sheaf pullback, or polynomial degree.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible sheaf on a proper integral curve over any field is ample if and only if its Euler characteristic degree is positive",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S) ↔ IsEmpty ↥S ∨ IsEmpty n\", \"doc\": \"The structure morphism of the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$ is an integral morphism if and only if the base scheme $S$ is empty or the type $n$ is empty.\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X] [Nonempty ↥X]\\n  [IsDomain ↑(X.presheaf.obj (Opposite.op ⊤))], AlgebraicGeometry.IsIntegral X\", \"doc\": \"If $X$ is a non-empty affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is an integral domain, then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine S],\\n  AlgebraicGeometry.IsAffine (AlgebraicGeometry.AffineSpace n S)\", \"doc\": \"If $ S $ is an affine scheme, then the affine space $ \\\\mathbb{A}^n_S $ over $ S $ is also affine. This instance asserts that when the base scheme $ S $ satisfies the affineness condition, the construc\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X] [IsReduced ↑(X.presheaf.obj (Opposite.op ⊤))],\\n  AlgebraicGeometry.IsReduced X\", \"doc\": \"If $X$ is an affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is reduced (i.e., contains no nonzero nilpotent elements), then the scheme $X$ itself is reduced (i.e., all its lo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A property of a scheme indicating that it is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"Let $ P $ be a morphism property on schemes that is Zariski-local at the source and contains identity morphisms. For any compact scheme $ X $, there exists an affine scheme $ Y $ and a surjective morp\"}\nRead the returned statements: no statement of this node or one-line generalization. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Positive degree characterizes ampleness of line bundles on proper integral singular curves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Polynomial.Monic.degree_pos\", \"module\": \"Mathlib.Algebra.Polynomial.Degree.Operations\", \"type\": \": 0 < degree p ↔ p ≠ 1\", \"doc\": \"For a monic polynomial $ p $, the degree of $ p $ is greater than 0 if and only if $ p $ is not the constant polynomial 1.\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ_pos\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.DivisionPolynomial.Degree\", \"type\": \"{n : ℤ} (hn : 2 < n.natAbs) (h : (n : R) ≠ 0) : 0 < (W.preΨ n).natDegree\", \"doc\": \"For a Weierstrass curve $ W $ over a commutative ring $ R $, if $ n $ is an integer with $ |n| > 2 $ and $ n \\neq 0 $ in $ R $, then the natural degree of the pre-division polynomial $ \\\\Psi_n $ associa\"}\n  {\"name\": \"minpoly.degree_pos\", \"module\": \"Mathlib.FieldTheory.Minpoly.Basic\", \"type\": \"[Nontrivial B] (hx : IsIntegral A x) : 0 < degree (minpoly A x)\", \"doc\": \"If $ x $ is an element of $ B $ that is integral over $ A $, and $ B $ is a non-trivial ring, then the degree of the minimal polynomial $ \\\\minpoly_A(x) $ of $ x $ over $ A $ satisfies $ 0 < \\\\deg(\\\\minp\"}\n  {\"name\": \"WeierstrassCurve.natDegree_ΨSq_pos\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.DivisionPolynomial.Degree\", \"type\": \"[NoZeroDivisors R] {n : ℤ} (hn : 1 < n.natAbs) (h : (n : R) ≠ 0) : 0 < (W.ΨSq n).natDegree\", \"doc\": \"For a Weierstrass curve $W$ over a ring $R$ with no zero divisors, if $n$ is an integer with $|n| > 1$ and $n \\\\neq 0$ in $R$, then the natural degree of the squared division polynomial $\\\\Psi^{(n)}(X)$\"}\n  {\"name\": \"Polynomial.degree_pos_of_irreducible\", \"module\": \"Mathlib.Algebra.Polynomial.FieldDivision\", \"type\": \"(hp : Irreducible p) : 0 < p.degree\", \"doc\": \"If a polynomial $ p $ is irreducible, then its degree is strictly positive, i.e., $ 0 < \\\\deg(p) $.\"}\n  {\"name\": \"LaurentPolynomial.degree\", \"module\": \"Mathlib.Algebra.Polynomial.Laurent\", \"type\": \"(f : R[T;T⁻¹]) : WithBot ℤ\", \"doc\": \"The degree of a Laurent polynomial $ f $ is defined as the maximum element of its support (the set of integer exponents with non-zero coefficients), or the bottom element $ \\\\bot $ if the polynomial is\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ'_pos\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.DivisionPolynomial.Degree\", \"type\": \"{n : ℕ} (hn : 2 < n) (h : (n : R) ≠ 0) : 0 < (W.preΨ' n).natDegree\", \"doc\": \"For a Weierstrass curve $ W $ over a commutative ring $ R $, if $ n $ is a natural number satisfying $ 2 < n $ and $ n \\neq 0 $ in $ R $, then the natural degree of the pre-normalized division polynomi\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ₄_pos\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.DivisionPolynomial.Degree\", \"type\": \"(h : (2 : R) ≠ 0) : 0 < W.preΨ₄.natDegree\", \"doc\": \"If $2 \\\\neq 0$ in the ring $R$, then the natural degree of the fourth pre-division polynomial $\\\\Psi_4$ associated with a Weierstrass curve over $R$ is positive.\"}\nRead the returned statements: no statement of this node or one-line generalization. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\"",
+   "results": "[loogle] OK 0 hit(s)\nRead the returned statements: no statement of this node or one-line generalization. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ample|Ample",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean\", \"line\": \"24\", \"text\": \"  If 2 is invertible in the ring (for example, if it is a field of characteristic ≠ 2),\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean\", \"line\": \"35\", \"text\": \"  If 2 and 3 are invertible in the ring (for example, if it is a field of characteristic ≠ 2 or 3),\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"8\", \"text\": \"-- these `ModuleCat` instances are only used by the `example` below, which `shake` cannot see\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"154\", \"text\": \"example (R : Type u) [Ring R] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Affine.lean\", \"line\": \"24\", \"text\": \"this can be used to show that the `P`-site admits sheafification. For an example,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Limits.lean\", \"line\": \"725\", \"text\": \"example {U X Y : Scheme.{u}} (f : U ⟶ X) (g : U ⟶ Y)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"line\": \"493\", \"text\": \"example (R : CommRingCat) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"line\": \"18\", \"text\": \"For example, if `X` is irreducible then this will give back the original scheme `X`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean\", \"line\": \"45\", \"text\": \"example : IsZariskiLocalAtTarget (isomorphisms Scheme) := inferInstance\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\", \"line\": \"22\", \"text\": \"Typical examples of this are affine morphisms (where `Q` is trivial), finite morphisms\"}\nRead the returned statements: no statement of this node or one-line generalization. The grep was restricted to Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Line bundle ampleness on a projective integral one dimensional scheme is equivalent to degree greater than zero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A) {m : ℕ},\\n  f ∈ 𝒜 m → 0 < m → CategoryTheory.IsIso (AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec 𝒜 f)\", \"doc\": \"The morphism of locally ringed spaces from the basic open set $ D_+(f) $ in the projective spectrum $ \\\\text{Proj}(A) $ to the affine spectrum $ \\\\text{Spec}(A_f) $ is an isomorphism, induced by the $ \\\\\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A) {m : ℕ},\\n  f ∈ 𝒜 m → 0 < m → AlgebraicGeometry.IsAffineOpen (AlgebraicGeometry.Proj.basicOpen 𝒜 f)\", \"doc\": \"For a homogeneous element $ f $ in a graded ring $ \\\\mathcal{A} $, the basic open set $ D_+(f) $ in the projective spectrum $ \\\\operatorname{Proj}(\\\\mathcal{A}) $ is an affine open subset, meaning it is \"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ},\\n  f ∈ 𝒜 m → 0 < m → CategoryTheory.IsIso (AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec 𝒜 f).base\", \"doc\": \"For a homogeneous element $ f $ of positive degree $ m $ in a graded ring $ A $, the continuous base map underlying the morphism from the basic open set $ D_+(f) \\\\subseteq \\\\operatorname{Proj}(A) $ to \"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.projIsoSpec\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m\", \"doc\": \"For a graded ring $ \\\\mathcal{A} $ and a homogeneous element $ f $ of positive degree $ m $, the morphism of locally ringed spaces from the basic open set $ D_+(f) \\\\subseteq \\\\text{Proj}(\\\\mathcal{A}) $ \"}\n  {\"name\": \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.ValuativeCriterion.Existence (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$ satisfies the valuative criterion for existence, provided t\"}\n  {\"name\": \"AlgebraicGeometry.Proj.basicOpen_one\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.Proj.basicOpen 𝒜 1 = ⊤\", \"doc\": \"The basic open set in the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ defined by the homogeneous element $1$ is equal to the entire space, i.e., $D_+(1) = \\\\operatorname{Proj}(\\\\mathcal{A})$.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\nRead the returned statements: no statement of this node or one-line generalization. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(IsAmple|isAmple|ample|ampleness)\\b",
+   "results": "[grep] OK 0 hit(s)\nRead the returned statements: no statement of this node or one-line generalization. The grep was restricted to Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-fibre-degree-ample-criterion",
@@ -106,5 +307,94 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-proper-integral-curve-ample-degree",
+  "worker": "stage1",
+  "summary": "Expanded the complete Stacks 0B5X proof over an arbitrary field, keeping its integral proper dimension-one hypotheses and Euler-characteristic degree. Reused existing finiteness, affine-open and cohomology nodes; created only degree tensor additivity, section positivity, and the general ideal-twist ampleness converse. Project Lean candidates require smoothness or other extra hypotheses and cannot attach. All new nodes searched by four tools and two semantic phrasings, sources and every citation checked; no statement correction needed.",
+  "blueprint": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Supporting input: the proper integral curve degree criterion (0B5X).",
+  "tool_uses": [
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Generic scheme or coherent-cohomology input in the Stacks 0B5X proper-curve proof, not a replacement of the unit route; no same-unit node supplies this statement."
+   },
+   {
+    "node": "lem-pc-chi-zero-dim-support",
+    "why": "Generic scheme or coherent-cohomology input in the Stacks 0B5X proper-curve proof, not a replacement of the unit route; no same-unit node supplies this statement."
+   },
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "Generic scheme or coherent-cohomology input in the Stacks 0B5X proper-curve proof, not a replacement of the unit route; no same-unit node supplies this statement."
+   },
+   {
+    "node": "lem-pc-h0-proper-variety",
+    "why": "Only clause (1), the field of global functions on a proper variety, rules out affineness; this is a generic curve input to the existing ampleness route."
+   },
+   {
+    "node": "lem-sc-affine-cap-section-open",
+    "why": "Generic scheme or coherent-cohomology input in the Stacks 0B5X proper-curve proof, not a replacement of the unit route; no same-unit node supplies this statement."
+   },
+   {
+    "node": "lem-sc-affine-complement-finite-on-integral-curve",
+    "why": "Generic scheme or coherent-cohomology input in the Stacks 0B5X proper-curve proof, not a replacement of the unit route; no same-unit node supplies this statement."
+   },
+   {
+    "node": "lem-sc-integral-scheme-stalks-in-function-field",
+    "why": "Generic scheme or coherent-cohomology input in the Stacks 0B5X proper-curve proof, not a replacement of the unit route; no same-unit node supplies this statement."
+   },
+   {
+    "node": "lem-sc-noetherian-cohomology-above-dimension",
+    "why": "Generic scheme or coherent-cohomology input in the Stacks 0B5X proper-curve proof, not a replacement of the unit route; no same-unit node supplies this statement."
+   },
+   {
+    "node": "lem-sc-section-affine-open-kills-cohomology",
+    "why": "Generic section-annihilation of positive cohomology is exactly the Stacks 01XR input to the fixed curve-degree route."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "why": "Generic scheme or coherent-cohomology input in the Stacks 0B5X proper-curve proof, not a replacement of the unit route; no same-unit node supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme or coherent-cohomology input in the Stacks 0B5X proper-curve proof, not a replacement of the unit route; no same-unit node supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic scheme or coherent-cohomology input in the Stacks 0B5X proper-curve proof, not a replacement of the unit route; no same-unit node supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-sober",
+    "why": "Generic scheme or coherent-cohomology input in the Stacks 0B5X proper-curve proof, not a replacement of the unit route; no same-unit node supplies this statement."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic scheme or coherent-cohomology input in the Stacks 0B5X proper-curve proof, not a replacement of the unit route; no same-unit node supplies this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-closed-point-field",
+  "lem-pc-chi-zero-dim-support",
+  "lem-pc-coherent-hi",
+  "lem-pc-h0-proper-variety",
+  "lem-sc-affine-cap-section-open",
+  "lem-sc-affine-complement-finite-on-integral-curve",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sc-section-affine-open-kills-cohomology",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-scheme-sober",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q55-3ade7efef",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q55-3ade7efef (reviewer sub-agent of L); spot-checked: Read the full item, all three new nodes, cited DAG statements, unit route, Stacks sources (Tags 0B5X, 0AYX, 0B40, 0B5U), and delivery instructions. Checked every proof step, hypotheses, edge cases, searches, duplicates, and route restrictions. No mathematical or structural fault found; review.md records the detailed checks."
  }
 }

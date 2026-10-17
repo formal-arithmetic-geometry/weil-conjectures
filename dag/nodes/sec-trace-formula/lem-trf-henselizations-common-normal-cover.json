@@ -10,11 +10,63 @@
  "stmt_deps": [
   "def-weil-pbc-normal-ring",
   "def-weil-pbc-localization-at-prime",
-  "def-weil-pbc-henselization-at-prime"
+  "def-weil-pbc-henselization-at-prime",
+  "lem-trf-normal-polynomial-surjection"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-normal-polynomial-surjection] to the underlying commutative ring A. We obtain a set J, the normal integral domain P=Z[x_j:j in J], and a surjective map pi:P \\to A.",
+   "uses": [
+    "lem-trf-normal-polynomial-surjection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030A together with the polynomial-ring presentation used in the quotient reduction of Huebner--Schmidt Theorem 6.3, p. 13."
+   }
+  },
+  {
+   "text": "For each i, let q_i=pi^{-1}(p_i). Surjectivity makes q_i prime. The canonical map P_{q_i} \\to A_{p_i} is the localization of the quotient map P \\to A; it is local and surjective by [lem-weil-pbc-localization-at-prime-of-quotient], whose statement identifies the target with the quotient of P_{q_i} by the extended kernel ideal.",
+   "uses": [
+    "lem-weil-pbc-localization-at-prime-of-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CT, localization of a quotient at the inverse-image prime."
+   }
+  },
+  {
+   "text": "Let I_i be the kernel ideal of P_{q_i} \\to A_{p_i}; it lies in the maximal ideal because the map is local. Apply Tag 05WQ, recorded as [lem-trf-henselization-quotient-at-prime], to the local ring P_{q_i} and I_i. It says that P_{q_i}^h/I_iP_{q_i}^h is the ordinary henselization of A_{p_i}; hence the quotient map P_{q_i}^h \\to A_{p_i}^h is local and surjective.",
+   "uses": [
+    "lem-trf-henselization-quotient-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05WQ, Lemma quotient-henselization, lines 43616--43624."
+   }
+  },
+  {
+   "text": "The maps in Step 3 are induced from pi and the localization maps, so their composites with P_{q_i} \\to P_{q_i}^h and A_{p_i} \\to A_{p_i}^h agree with the structural maps. Thus they are compatible with pi and with the henselization structure maps. The construction is independent for the two primes, and no finite-generation hypothesis on A was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05WQ, functorial quotient map and the universal structure maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-normal-polynomial-surjection",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-trf-henselization-quotient-at-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05WQ (lines 43616--43624), Tag 00CT, and the quotient reduction in Huebner--Schmidt Theorem 6.3, p. 13."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,7 +112,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-artin-join-theorem-6-3",
@@ -72,20 +124,28 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "algebra.tex Tag 05WQ (lemma-quotient-henselization), together with the polynomial-ring normal-domain presentation of a ring; precise auxiliary form of the quotient reduction in Huebner--Schmidt Theorem 6.3, printed p. 13. The combined common-cover statement is an agent-formulated auxiliary lemma, not the wording of Tag 05WQ.",
+   "place": "Theorem 6.3, quotient reduction to a normal domain: choose a normal polynomial-domain cover of A, localize at the inverse-image primes, and apply quotient compatibility of ordinary henselizations.",
    "via": [
-    "lem-trf-artin-join-theorem-6-3",
-    "lem-trf-artin-henselian-tensor-residue-dichotomy",
-    "lem-trf-artin-tensor-etale-acyclic",
-    "lem-trf-gabber-nearby-cycle-dimension-bound",
-    "lem-trf-gabber-strict-local-torsion-bound",
-    "lem-trf-finite-type-torsion-universal-star",
-    "lem-trf-good-oriented-nearby-kunneth",
-    "lem-trf-specialization-external-product",
-    "lem-trf-trace-specialization"
+    "lem-trf-henselizations-common-normal-cover",
+    "lem-trf-artin-join-theorem-6-3"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-henselizations-common-normal-cover",
+  "worker": "stage1",
+  "summary": "Split the common-cover lemma into the normal polynomial-domain presentation of an arbitrary commutative ring and the Stacks quotient-henselization lemma. The item proof then localizes the quotient at each inverse-image prime and applies Tag 05WQ; all maps are explicitly local, surjective, and compatible.",
+  "blueprint": "Realizes Theorem 6.3 p. 13's quotient reduction to a normal domain, including its polynomial presentation and ordinary-henselization quotient step."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q54-a2d0e4dae",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q54-a2d0e4dae (reviewer sub-agent of L); spot-checked: Read all required instructions, packet, report, item, new nodes, cited nodes, unit route, blueprint proof, and source locations. Statements and hypotheses match Tags 030A and 05WQ; localization, henselization, compatibility, edge cases, duplicate checks, searches, route restrictions, and DAG acyclicity all pass. Review written to review.md."
  }
 }

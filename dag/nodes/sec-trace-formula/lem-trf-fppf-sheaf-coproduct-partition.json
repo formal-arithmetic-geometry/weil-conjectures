@@ -15,9 +15,136 @@
   "def-weil-open-immersion",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the small universe-sized model of the site specified in [def-weil-size-convention]. Define the presheaf $P$ by $P(V)=\\coprod_{i\\in I}G_i(V)$, with restrictions preserving the label $i$. By [lem-trf-sieve-set-sheafification-exists], its sheafification $C=P^\\#$ exists. For any sheaf $H$, a natural map $P\\to H$ is exactly a family of natural maps $G_i\\to H$, by evaluating on the labelled pairs $(i,s)$. The sheafification adjunction therefore gives $\\operatorname{Hom}(C,H)=\\prod_i\\operatorname{Hom}(G_i,H)$. This is precisely the coproduct universal property [def-weil-pbc-category-colimit], with $c_i(s)=\\eta(i,s)$. This argument works also for empty $I$.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-trf-sieve-set-sheafification-exists",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WI (lemma-colimit-sheaves), its left-adjoint argument; Tag 00ZM (proposition-sheafification-adjoint-topology)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-site-sheafification-sections-local], every $a\\in C(T)$ is represented on an fppf covering $\\{g_\\alpha:U_\\alpha\\to T\\}$ by labelled sections $(i_\\alpha,s_\\alpha)$ of $P$. Also, if $c_i(s)=c_j(t)$ on a scheme $V$, that lemma gives an fppf covering on which $(i,s)$ and $(j,t)$ are equal in $P$. If $i=j$, the sheaf equalizer condition [def-weil-pbc-sites-and-cohomology] implies $s=t$. Hence every $c_i$ is injective on every section set; componentwise cancellation also proves it is monic. If $i\\ne j$, no member of this further covering can exist, since equality of labelled pairs would imply $i=j$. Thus it is the empty covering; joint surjectivity [def-pc-fppf-site] forces $V$ empty. Every sheaf has one section over the empty scheme, by its empty covering and the same equalizer condition.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0F15 (lemma-coproduct-sheaves-open-and-closed), local representatives and empty mixed intersections; sites.tex Tag 00WK"
+   }
+  },
+  {
+   "text": "The images $g_\\alpha(U_\\alpha)$ are open by [lem-weil-pbc-flat-lfp-open], since covering morphisms are flat and locally of finite presentation [def-pc-fppf-site]. When $i_\\alpha\\ne i_\\beta$, the restrictions of $a$ to $U_\\alpha\\times_TU_\\beta$ are simultaneously in the two different summands, so Step 2 makes this fibre product empty. Their images in $T$ are disjoint: indeed let $W=g_\\alpha(U_\\alpha)$ with its open subscheme structure [def-weil-open-immersion]. The factorization $U_\\alpha\\to W$ is surjective. Its base change along $U_\\beta\\times_TW\\to W$ is surjective by [lem-weil-pbc-surjective-base-change], while its source is $U_\\alpha\\times_TU_\\beta$ (the fibre-product universal property [def-pc-fibre-product]). It follows that $U_\\beta\\times_TW$ is empty. This scheme is the inverse image open of $W$ in $U_\\beta$, proving the claimed disjointness.",
+   "uses": [
+    "lem-weil-pbc-flat-lfp-open",
+    "def-pc-fppf-site",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-surjective-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0F15, disjoint open images; morphisms.tex Tag 01UA (lemma-fppf-open) and Tag 01S1 (lemma-base-change-surjective)"
+   }
+  },
+  {
+   "text": "For each $i$ put $T_i=\\bigcup_{\\alpha:i_\\alpha=i}g_\\alpha(U_\\alpha)$, with its open subscheme structure [def-weil-open-immersion]. Step 3 shows these opens are pairwise disjoint, and joint surjectivity of the covering [def-pc-fppf-site] shows that they cover $T$. Each $T_i$ is also closed because its complement is the union of all the other $T_j$. This is a scheme coproduct decomposition: a family of maps $T_i\\to Y$ glues uniquely to $T\\to Y$ by [lem-weil-pbc-scheme-morphism-gluing], since all mixed intersections are empty. Thus the disjoint open inclusions have the required coproduct universal property, with arbitrary empty pieces allowed.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-pc-fppf-site",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0F15, the decomposition into disjoint opens; Tag 02WO (lemma-representable-sheaf-coproduct-sheaves), the resulting scheme decomposition"
+   }
+  },
+  {
+   "text": "Base change the covering $\\{U_\\alpha\\to T\\}$ to $T_i$. By the site axiom [def-weil-pbc-sites-and-cohomology], this is an fppf covering. Its members with label $i$ are $U_\\alpha$ and its other members are empty, by Step 3. On two members with label $i$, the sections $s_\\alpha,s_\\beta$ have equal images under $c_i$, since both images restrict $a$; their restrictions agree by the injectivity proved in Step 2. Supply the unique $G_i$ section on every empty member. The sheaf equalizer condition therefore glues these sections uniquely to $a_i\\in G_i(T_i)$. The same condition for $C$ gives $c_i(a_i)=a|_{T_i}$, since this equality holds on the pulled-back covering.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0F15, the verification omitted after the clopen decomposition: glue the local sections using the sheaf condition"
+   }
+  },
+  {
+   "text": "Suppose $T=\\coprod_iV_i$ is another clopen partition and $b_i\\in G_i(V_i)$ satisfies $c_i(b_i)=a|_{V_i}$. On $T_i\\cap V_j$, these equalities identify sections coming from labels $i$ and $j$. For $i\\ne j$ Step 2 forces this open scheme to be empty. Since the $V_j$ cover $T$, this gives $T_i\\subseteq V_i$; reversing the two partitions gives $V_i\\subseteq T_i$. The open subschemes coincide, and then $a_i=b_i$ by the injectivity of $c_i$. Thus the partition and its sections are unique, independently of all choices of local representatives.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0F15, uniqueness in the omitted fibre-product verification"
+   }
+  },
+  {
+   "text": "Fix $i$ and a test scheme $Z$. A section of $h_T\\times_CG_i$ on $Z$ is a pair $(b,s)$ with $b:Z\\to T$, $s\\in G_i(Z)$ and $c_i(s)=b^*a$; this is the sectionwise fibre-product equation. On the inverse image open $Z_j=b^{-1}(T_j)$, it identifies $c_i(s|_{Z_j})$ with $c_j(b^*a_j)$. Step 2 makes $Z_j$ empty for $j\\ne i$. The $Z_j$ cover $Z$, so $b^{-1}(T_i)=Z$, and $b$ factors uniquely through the open subscheme $T_i$ [def-weil-open-immersion]: its underlying map has image in that open and its structure-sheaf map restricts there. Injectivity of $c_i$ then forces $s$ to be the pullback of $a_i$. Conversely every $Z\\to T_i$ gives such a pair. These assignments are inverse and commute with precomposition in $Z$, since both use only composition and restriction of sections. They give the natural identification $h_{T_i}\\simeq h_T\\times_CG_i$, and hence the asserted cartesian square. Here a section $a$ gives the natural transformation $h_T\\to C$ explicitly by $b\\mapsto b^*a$, so no additional identification theorem is being assumed.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0F15, complete verification of the omitted assertion that the open represents the summand pullback"
+   }
+  },
+  {
+   "text": "For $b:Z\\to T$, inverse images of the $T_i$ form a disjoint clopen cover of $Z$, and the restrictions of the $a_i$ satisfy the equations for $b^*a$ by naturality of $c_i$. Step 6 identifies them with its unique partition and component sections. Conversely, for any disjoint clopen partition and sections in its summands, apply $c_i$ to the sections. They agree on mixed intersections because those are empty and $C(\\varnothing)$ is a singleton (Step 2). These sections glue uniquely to a section of $C(T)$ by the sheaf condition [def-weil-pbc-sites-and-cohomology]. Open coverings are fppf coverings [def-pc-fppf-site]; Step 6 recovers exactly the prescribed partition and sections.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pc-fppf-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 0F15, restriction and sheaf gluing of the clopen pieces"
+   }
+  },
+  {
+   "text": "Finally let $I=\\varnothing$. Then $P(V)=\\varnothing$ for every $V$. If $a\\in P^\\#(T)$ existed, its local representatives supplied by [lem-weil-pbc-site-sheafification-sections-local] would require a section of $P$ on every covering member. Thus the covering has no members, and joint surjectivity [def-pc-fppf-site] forces $T=\\varnothing$. When $T=\\varnothing$, the empty covering and the sheaf condition [def-weil-pbc-sites-and-cohomology] give exactly one section of $C$. This proves the stated empty-index formula and also accounts for the empty partition in every earlier clause.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-pc-fppf-site",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "sites.tex Tag 00WK (lemma-sections-sheafification), applied to the empty presheaf; topologies.tex Tag 021L"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "lem-trf-sieve-set-sheafification-exists",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pc-fppf-site",
+  "lem-weil-pbc-flat-lfp-open",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-surjective-base-change",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 0F15 (lemma-coproduct-sheaves-open-and-closed), extended from binary to small set-indexed coproducts; the omitted pullback verification is written out, using sites.tex Tags 00WI and 00WK."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,10 +180,45 @@
    "results": "8 hits; read: AlgebraicGeometry.Scheme.coprodPresheafObjIso, TopCat.Sheaf.existsUnique_gluing', AlgebraicGeometry.coprodOpenCover, AlgebraicGeometry.sigmaOpenCover, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, AlgebraicGeometry.Scheme.OpenCover.ext_elem, TopCat.Presheaf.IsGluing, TopCat.Presheaf.section_ext",
    "date": "2026-10-18",
    "verdict": "no match: scheme coproduct/open-cover results, module-presheaf coproducts and Zariski sheaf-condition comparisons do not give representability of summand pullbacks of arbitrary fppf sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "coproduct.*(sheaf|fppf)|sheaf.*coproduct|sheaf.*partition",
+   "results": "{\"t\": \"2026-10-17T21:12:35Z\", \"tool\": \"grep\", \"query\": \"coproduct.*(sheaf|fppf)|sheaf.*coproduct|sheaf.*partition\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\"], \"digest\": \"af625248220d1a87\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: hits give scheme coproducts, structure-sheaf sections on scheme coproducts, generic sheaf colimits, or module-presheaf coproducts, not the clopen scheme-test partition for arbitrary fppf sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullbacks of summands of a coproduct of fppf sheaves are represented by clopen subschemes",
+   "results": "{\"t\": \"2026-10-17T21:12:35Z\", \"tool\": \"leansearch\", \"query\": \"Pullbacks of summands of a coproduct of fppf sheaves are represented by clopen subschemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.instHasPullback\", \"AlgebraicGeometry.Scheme.instHasPullbacksIsOpenImmersion\", \"AlgebraicGeometry.Scheme.Pullback.instHasPullbacks\", \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1\", \"AlgebraicGeometry.IsOpenImmersion.hasPullback_of_right\", \"AlgebraicGeometry.Scheme.Pullback.v\", \"AlgebraicGeometry.Scheme.pullback_map_isOpenImmersion\", \"AlgebraicGeometry.IsOpenImmersion.hasPullback_of_left\"], \"digest\": \"1dd31bc227b6044e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: hits give scheme coproducts, structure-sheaf sections on scheme coproducts, generic sheaf colimits, or module-presheaf coproducts, not the clopen scheme-test partition for arbitrary fppf sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"coproduct\"",
+   "results": "{\"t\": \"2026-10-17T21:12:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"coproduct\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.freeYonedaCoproduct\", \"PresheafOfModules.instEpiFromFreeYonedaCoproduct\", \"PresheafOfModules.fromFreeYonedaCoproduct\", \"PresheafOfModules.ιFreeYonedaCoproduct\", \"PresheafOfModules.ι_fromFreeYonedaCoproduct\", \"PresheafOfModules.ι_fromFreeYonedaCoproduct_assoc\", \"PresheafOfModules.freeYonedaCoproductMk\", \"PresheafOfModules.ι_fromFreeYonedaCoproduct_apply\"], \"digest\": \"c167a828c5a62f6b\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: hits give scheme coproducts, structure-sheaf sections on scheme coproducts, generic sheaf colimits, or module-presheaf coproducts, not the clopen scheme-test partition for arbitrary fppf sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of a coproduct of sheaves on the fppf site of a scheme correspond to open and closed partitions with sections of the summands",
+   "results": "{\"t\": \"2026-10-17T21:12:37Z\", \"tool\": \"leanfinder\", \"query\": \"Sections of a coproduct of sheaves on the fppf site of a scheme correspond to open and closed partitions with sections of the summands\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.coprodPresheafObjIso\", \"AlgebraicGeometry.sigmaOpenCover_f\", \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val\", \"AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_fst\", \"AlgebraicGeometry.sigmaOpenCover_X\", \"AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_snd\", \"AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_fst_assoc\", \"AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_snd_assoc\"], \"digest\": \"fdadac58845b916a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: hits give scheme coproducts, structure-sheaf sections on scheme coproducts, generic sheaf colimits, or module-presheaf coproducts, not the clopen scheme-test partition for arbitrary fppf sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary coproduct of fppf sheaves is obtained by gluing labelled sections on disjoint open subsets of test schemes",
+   "results": "{\"t\": \"2026-10-17T21:12:57Z\", \"tool\": \"leanfinder\", \"query\": \"An arbitrary coproduct of fppf sheaves is obtained by gluing labelled sections on disjoint open subsets of test schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall\", \"AlgebraicGeometry.instHasCoproductsOfShapeOverSchemeTopMorphismPropertyOfSmall\", \"CategoryTheory.Sheaf.instHasFiniteCoproducts\", \"AlgebraicGeometry.sigmaOpenCover_f\", \"AlgebraicGeometry.instHasFiniteCoproductsOverSchemeTopMorphismProperty\", \"AlgebraicGeometry.nonempty_isColimit_cofanMk_of\", \"AlgebraicGeometry.Scheme.Cover.sigma_X\", \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk\"], \"digest\": \"f7043491d57384fb\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: hits give scheme coproducts, structure-sheaf sections on scheme coproducts, generic sheaf colimits, or module-presheaf coproducts, not the clopen scheme-test partition for arbitrary fppf sheaves"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-algebraic-space-coproduct",
@@ -86,5 +248,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-fppf-sheaf-coproduct-partition",
+  "worker": "stage1",
+  "summary": "Checked the whole statement against Stacks 0F15 and 02WO and the local sheafification description 00WK. Constructed the coproduct by adjunction, proved monicity and empty mixed overlaps from local equality, formed the clopen pieces using open fppf images and surjective base change, glued the component sections, and verified uniqueness, the cartesian squares, arbitrary restriction, the converse, and empty I. No statement change and no new nodes.",
+  "blueprint": "Supports the algebraic-space coproduct in the polarized-scheme etale-descent auxiliary route below lem-trf-local-term-locality: supplies the scheme-test partition and the omitted pullback verification for the coproduct atlas and diagonal. Retains the item's historical ancestry and unit binding.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic local-representative and local-equality theorem for sheafification on any site; this unit has no other node stating those properties, needed for labels and the empty-index case."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q14-0b9f75a3c",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q14-0b9f75a3c (reviewer sub-agent of L); spot-checked: Read the complete item, unit/chapter route, cited DAG statements, and Stacks sources 0F15, 02WO, 00WI, and 00WK. Verified all nine proof steps, hypotheses, empty and infinite-index edge cases, fppf openness, base-change morphisms, coefficient category, Mathlib searches, and route compliance. Wrote review.md; no repairs needed."
  }
 }
