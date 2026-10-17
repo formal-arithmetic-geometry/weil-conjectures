@@ -1,267 +1,583 @@
 {
-  "id": "prop-fd-zero-extension-comparison",
-  "blueprint": {
-    "is": "prop-fd-zero-extension-comparison",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "The zero-extension comparison",
-  "statement": "In the conventions of [rem-dl-a1-conventions], let\n$j:U_0\\hookrightarrow A_0$ be a dense open immersion with finite\ncomplement $S_0$, and let $\\mathcal M$ be a nonzero irreducible lisse\nWeil sheaf on $U_0$ which is constituent-nonexceptional in the sense of\n[def-a1-constituent-nonexceptional] and punctually $\\iota$-pure of\nweight $w$. Let $j':U'_0\\hookrightarrow A'_0$ and $\\mathcal M'$ be as in\n[prop-a1-fourier-middle-extension], so that\n$\\operatorname{FT}_\\psi\\bigl((j_*\\mathcal M)[1]\\bigr)\\cong\n(j'_*\\mathcal M')[1]$ for the transform of [def-fd-transform], and put\n\n$$\n\\mathcal B:=j_*\\mathcal M/j_!\\mathcal M ,\n$$\n\nwith $j_*$ the middle extension of [def-wf-middle-extension]. Then there\nare Weil sheaves $\\mathcal G$ and $\\mathcal B'$ on the dual line $A'_0$\nsuch that\n\n$$\n\\operatorname{FT}_\\psi\\bigl(j_!\\mathcal M[1]\\bigr)\\cong\\mathcal G[1],\n\\qquad\n\\operatorname{FT}_\\psi(\\mathcal B)\\cong\\mathcal B'[1],\n\\qquad\n0\\longrightarrow\\mathcal B'\\longrightarrow\\mathcal G\\longrightarrow\nj'_*\\mathcal M'\\longrightarrow0 .\n$$\n\nThe correction $\\mathcal B'$ is lisse on the entire dual line $A'_0$, and\nit has weights at most $w$: for every closed point $y$ of $A'_0$ and\nevery eigenvalue $\\alpha$ of the local Frobenius $F_y$ on\n$\\mathcal B'_{\\bar y}$,\n\n$$\n|\\iota(\\alpha)|^2\\le q_y^{\\,w}.\n$$\n\nIn particular the transform of $j_!\\mathcal M[1]$ is a sheaf shifted by\none without assuming geometric irreducibility of $\\mathcal M$ or\nunramifiedness at infinity.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-correction/prop-fd-zero-extension-comparison.md",
-    "place": "node prop-fd-zero-extension-comparison, order 2768"
-  },
-  "stmt_deps": [
-    "def-a1-constituent-nonexceptional",
-    "prop-a1-fourier-middle-extension",
-    "def-fd-transform",
-    "def-wf-middle-extension"
-  ],
-  "proof": [
-    {
-      "text": "*Step 1: the boundary sheaf.* The map $j_!\\mathcal M\\to j_*\\mathcal M$ is\nan isomorphism over $U_0$ and $j_!\\mathcal M$ has zero stalks on $S_0$,\nso it is injective and $\\mathcal B$ vanishes on $U_0$. Hence\n$\\mathcal B$ is supported on the finite reduced closed subscheme $S_0$,\nand\n\n$$\n\\mathcal B\\cong\\bigoplus_{s\\in S_0}i_{s*}E_s,\n\\qquad E_s:=(j_*\\mathcal M)_{\\bar s},\n$$\n\nwhere $i_s:s\\hookrightarrow A_0$ is the inclusion of the closed point\n$s$ and $E_s$ is the boundary stalk with its Frobenius $F_s$, a\nfinite-dimensional Weil module of the residue field $k(s)$ of degree\n$d(s)$ over $k_0$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Step 2: the transform of a boundary point.* Fix $s\\in S_0$ and a Weil\nmodule $E$ of $k(s)$. Put $A'_s:=s\\times_{k_0}A'_0=A'_0\\otimes_{k_0}k(s)$,\nlet $i'_s:A'_s\\hookrightarrow A_0\\times A'_0$ be the base change of $i_s$\nalong the first projection $p_1$, let $\\pi_s=p_2\\circ i'_s:A'_s\\to A'_0$\nbe the base change of $\\operatorname{Spec}k(s)\\to\\operatorname{Spec}k_0$,\nwhich is finite étale of degree $d(s)$, and let\n$q_s:A'_s\\to s$ be the projection. Pullback commutes with direct image\nalong the closed immersion $i_s$, so $p_1^*i_{s*}E\\cong i'_{s*}q_s^*E$,\nand the projection formula for the closed immersion $i'_s$ gives\n$i'_{s*}q_s^*E\\otimes\\mathcal K_\\psi\\cong\ni'_{s*}\\bigl(q_s^*E\\otimes i'^*_s\\mathcal K_\\psi\\bigr)$ for the kernel\n$\\mathcal K_\\psi$ of [def-fd-kernel]. The pairing restricted to\n$A'_s$ is the linear function $f_s:\\xi\\mapsto s\\xi$, so\n$\\mathcal L_s:=i'^*_s\\mathcal K_\\psi=f_s^*\\mathcal L_\\psi$ is the\nArtin–Schreier sheaf of [def-fd-artin-schreier-sheaf] attached to\n$s\\xi$, a lisse sheaf of rank one. Since\n$p_{2!}\\,i'_{s*}=(p_2 i'_s)_!=\\pi_{s!}=\\pi_{s*}$, the last because\n$\\pi_s$ is finite, the definition [def-fd-transform] gives\n\n$$\n\\operatorname{FT}_\\psi(i_{s*}E)\\cong\n\\pi_{s*}\\bigl(q_s^*E\\otimes\\mathcal L_s\\bigr)[1].\n$$\n\nThis is the computation of the second formula of [lem-fd-first-formula]\n(the case $s=0$, $E=\\overline{\\mathbf Q}_\\ell$) at a general closed\npoint. As the transform is additive, Step 1 gives\n$\\operatorname{FT}_\\psi(\\mathcal B)\\cong\\mathcal B'[1]$ with\n\n$$\n\\mathcal B':=\\bigoplus_{s\\in S_0}\n\\pi_{s*}\\bigl(q_s^*E_s\\otimes\\mathcal L_s\\bigr).\n$$",
-      "uses": [
-        "def-fd-kernel",
-        "def-fd-artin-schreier-sheaf",
-        "def-fd-transform",
-        "lem-fd-first-formula"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 3: $\\mathcal B'$ is lisse.* Each $q_s^*E_s\\otimes\\mathcal L_s$ is\nlisse on $A'_s$. After the base change to $k$, the finite étale map\n$\\pi_s$ becomes the projection\n$A'\\times\\operatorname{Hom}_{k_0}(k(s),k)\\to A'$ from a disjoint union\nof $d(s)$ copies of $A'$, so the direct image becomes a direct sum of\n$d(s)$ lisse sheaves on $A'$. Hence each summand, and $\\mathcal B'$,\nis lisse on the whole dual line.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Step 4: the weights of $\\mathcal B'$.* Since $\\mathcal M$ is\npunctually pure of weight $w$, it is punctually of weights at most $w$ in\nthe sense of [def-weil-punctual-weights], and the boundary\nsemicontinuity [lem-wf-boundary-semicontinuity] on the curve $A_0$ with\n$\\beta=w$ gives $|\\iota(\\mu)|^2\\le q_s^{\\,w}$ for every eigenvalue $\\mu$\nof $F_s$ on $E_s$.\n\nFix $s\\in S_0$, put $\\mathcal F_s:=q_s^*E_s\\otimes\\mathcal L_s$, and let\n$z$ be a closed point of $A'_s$ of degree $n$ over $k_0$. Its image in\n$s$ gives $d(s)\\mid n$, and the local Frobenius $F_z$ acts on the stalk\nof $q_s^*E_s$ as $F_s^{\\,n/d(s)}$, whose eigenvalues are the\n$(n/d(s))$-th powers of those of $F_s$ and so have squared modulus at\nmost $q_s^{\\,wn/d(s)}=q^{wn}$. On the rank-one stalk of\n$\\mathcal L_s=f_s^*\\mathcal L_\\psi$ the operator $F_z$ acts as\n$F_u^{\\,n/d(u)}$, where $u=f_s(z)$ is the image closed point of the line;\nby [lem-fd-as-trace] $F_u$ acts by the $p$-th root of unity\n$\\psi(\\operatorname{Tr}_{\\kappa(u)/k_0}(u))$. Hence every\neigenvalue of $F_z$ on $(\\mathcal F_s)_{\\bar z}$ has squared\n$\\iota$-modulus at most $q^{wn}$.\n\nNow let $y$ be a closed point of $A'_0$ with geometric point $\\bar y$.\nThe stalk of the finite direct image is the sum over the geometric\npoints of $A'_s$ above $\\bar y$,\n\n$$\n(\\pi_{s*}\\mathcal F_s)_{\\bar y}=\\bigoplus_{\\bar z\\mapsto\\bar y}\n(\\mathcal F_s)_{\\bar z},\n$$\n\nand $F_y$ permutes these summands. Its orbits correspond to the closed\npoints $z$ of $A'_s$ above $y$; if the orbit of $\\bar z$ has length $e$,\nthen $z$ has degree $n=e\\,d(y)$ and $F_y^{\\,e}$ maps the summand at\n$\\bar z$ to itself, acting there as $F_z$. Let $\\alpha$ be an eigenvalue\nof $F_y$ with eigenvector $v=(v_{\\bar z})$, and choose $\\bar z$ with\n$v_{\\bar z}\\ne0$, of orbit length $e$. Since $F_y^{\\,e}$ preserves each\nsummand of that orbit, comparing components of $F_y^{\\,e}v=\\alpha^ev$\ngives $F_zv_{\\bar z}=\\alpha^ev_{\\bar z}$. By the previous paragraph\n$|\\iota(\\alpha)|^{2e}\\le q^{we\\,d(y)}$, that is\n$|\\iota(\\alpha)|^2\\le q_y^{\\,w}$. An eigenvalue of $F_y$ on the finite\ndirect sum $\\mathcal B'_{\\bar y}$ is an eigenvalue on one of its\nsummands, which proves the weight bound.",
-      "uses": [
-        "def-weil-punctual-weights",
-        "lem-wf-boundary-semicontinuity",
-        "lem-fd-as-trace"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 5: concentration and the exact sequence.* The short exact sequence\n$0\\to j_!\\mathcal M\\to j_*\\mathcal M\\to\\mathcal B\\to0$ of Step 1 gives a\ndistinguished triangle\n$j_!\\mathcal M[1]\\to(j_*\\mathcal M)[1]\\to\\mathcal B[1]\\to$. The transform\nis an exact triangulated functor by [thm-fd-transform-well-defined];\nby [prop-a1-fourier-middle-extension] and Step 2, and after rotation,\nthis gives a distinguished triangle\n\n$$\n\\mathcal B'[1]\\longrightarrow K\\longrightarrow(j'_*\\mathcal M')[1]\n\\longrightarrow\\mathcal B'[2],\n\\qquad K:=\\operatorname{FT}_\\psi\\bigl(j_!\\mathcal M[1]\\bigr).\n$$\n\nBoth outer terms have a single cohomology sheaf, in degree $-1$. The\nlong exact sequence of cohomology sheaves therefore gives\n$\\mathcal H^aK=0$ for $a\\ne-1$, so $K\\cong\\mathcal G[1]$ with\n$\\mathcal G:=\\mathcal H^{-1}K$, and in degree $-1$ it reads\n\n$$\n0=\\mathcal H^{-2}\\bigl((j'_*\\mathcal M')[1]\\bigr)\\to\\mathcal B'\\to\n\\mathcal G\\to j'_*\\mathcal M'\\to\\mathcal H^{0}\\bigl(\\mathcal B'[1]\\bigr)=0,\n$$\n\nwhich is the asserted exact sequence. All objects and maps carry the Weil\nstructure, since the transform and the triangles are formed in the Weil\ncategory.",
-      "uses": [
-        "thm-fd-transform-well-defined",
-        "prop-a1-fourier-middle-extension"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-fd-kernel",
-    "def-fd-artin-schreier-sheaf",
-    "def-fd-transform",
-    "lem-fd-first-formula",
-    "def-weil-punctual-weights",
-    "lem-wf-boundary-semicontinuity",
-    "lem-fd-as-trace",
-    "thm-fd-transform-well-defined",
-    "prop-a1-fourier-middle-extension"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-correction/prop-fd-zero-extension-comparison.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_remark",
-    "lean_multiple"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 2768,
-  "blueprint_uses": [
-    "def-a1-constituent-nonexceptional",
-    "def-fd-artin-schreier-sheaf",
-    "def-fd-kernel",
-    "def-fd-transform",
-    "def-weil-punctual-weights",
+ "id": "prop-fd-zero-extension-comparison",
+ "blueprint": {
+  "is": "prop-fd-zero-extension-comparison",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The zero-extension comparison",
+ "statement": "In the conventions of [rem-dl-a1-conventions], let $\\psi$ be a\nnontrivial additive character of $k_0$, let\n$j:U_0\\hookrightarrow A_0$ be a dense open immersion with finite\ncomplement $S_0$, and let $\\mathcal M$ be a nonzero irreducible lisse\nWeil sheaf on $U_0$ (irreducible among lisse Weil sheaves: its only lisse\nWeil subsheaves are $0$ and $\\mathcal M$) which is constituent-nonexceptional in the sense of\n[def-a1-constituent-nonexceptional] and punctually $\\iota$-pure of\nweight $w$. Let $j':U'_0\\hookrightarrow A'_0$ be a dense open immersion\ninto the dual line and $\\mathcal M'$ a lisse Weil sheaf on $U'_0$ such\nthat $\\operatorname{FT}_\\psi\\bigl((j_*\\mathcal M)[1]\\bigr)\\cong\n(j'_*\\mathcal M')[1]$ for the integral-transform formula of [def-fd-transform], interpreted\nin the adic coefficient convention of [def-fourier-set] (such\ndata exist by [prop-a1-fourier-middle-extension]), and put\n\n$$\n\\mathcal B:=j_*\\mathcal M/j_!\\mathcal M ,\n$$\n\nwith $j_*$ the middle extension of [def-wf-middle-extension]. Then there\nare Weil sheaves $\\mathcal G$ and $\\mathcal B'$ on the dual line $A'_0$\nsuch that\n\n$$\n\\operatorname{FT}_\\psi\\bigl(j_!\\mathcal M[1]\\bigr)\\cong\\mathcal G[1],\n\\qquad\n\\operatorname{FT}_\\psi(\\mathcal B)\\cong\\mathcal B'[1],\n\\qquad\n0\\longrightarrow\\mathcal B'\\longrightarrow\\mathcal G\\longrightarrow\nj'_*\\mathcal M'\\longrightarrow0 .\n$$\n\nThe correction $\\mathcal B'$ is lisse on the entire dual line $A'_0$, and\nit has weights at most $w$: for every closed point $y$ of $A'_0$ and\nevery eigenvalue $\\alpha$ of the local Frobenius $F_y$ on\n$\\mathcal B'_{\\bar y}$,\n\n$$\n|\\iota(\\alpha)|^2\\le q_y^{\\,w}.\n$$\n\nIn particular the transform of $j_!\\mathcal M[1]$ is a sheaf shifted by\none without assuming geometric irreducibility of $\\mathcal M$ or\nunramifiedness at infinity.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-correction/prop-fd-zero-extension-comparison.md",
+  "place": "node prop-fd-zero-extension-comparison, order 2768"
+ },
+ "stmt_deps": [
+  "rem-dl-a1-conventions",
+  "def-fd-additive-character",
+  "def-a1-constituent-nonexceptional",
+  "def-fd-transform",
+  "def-wf-middle-extension",
+  "def-weil-punctual-weights",
+  "def-pod-lisse-l-adic-sheaves",
+  "prop-a1-fourier-middle-extension",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-fourier-set"
+ ],
+ "proof": [
+  {
+   "text": "Coefficient convention and equivariance. Work in the common-stage $\\overline{\\mathbf Q}_\\ell$ category: choose a finite coefficient field $E$ containing the character values and representatives of the finitely many objects, Weil maps and inverses used below. Enlarge $E$ for any further finite diagram. The scalar-extension and descent clause of [prop-functor-package] permits all the calculations at this stage and their passage to $\\overline{\\mathbf Q}_\\ell$. The Weil lifts in [prop-weil-operations] make pullback, tensor, proper/compact-support direct image, their comparison maps, and ordinary cohomology Frobenius-equivariant. Thus every isomorphism below is an isomorphism of Weil objects; we do not replace a Weil sheaf on a finite field by the invariants of its Frobenius. In particular the constructibility of $Rj_*\\mathcal M$ follows from the direct-image clause, and its degree-zero truncation $P:=j_*\\mathcal M=\\mathcal H^0(Rj_*\\mathcal M)$ is an ordinary constructible Weil sheaf by [prop-constructible-truncations].\nHere FT means the integral-transform formula of [def-fd-transform] formed with the adic operations of [def-fourier-set], with shift [1]. Its kernel is lisse rank one and finite Tor by [prop-kernel-lisse]. Thus the constructible-domain clauses of [prop-functor-package] apply successively to pullback, tensor with that kernel, and compact-support direct image. Each is an exact triangulated derived functor, so this composite preserves distinguished triangles and finite direct sums. This constructs the required adic functor directly; no identification with discrete E-module sheaves on the small étale site, and no application of the updated finite-ring well-definedness theorem at E, is made.",
+   "uses": [
+    "prop-functor-package",
+    "prop-weil-operations",
+    "prop-constructible-truncations",
     "def-wf-middle-extension",
-    "lem-fd-as-trace",
-    "lem-fd-first-formula",
-    "lem-wf-boundary-semicontinuity",
-    "prop-a1-fourier-middle-extension",
-    "rem-dl-a1-conventions",
-    "thm-fd-transform-well-defined"
-  ],
-  "lean": {
-    "module": "WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension",
-    "declaration": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection",
-    "branch": "slopmaster2",
-    "line": 128,
-    "sorry_free": false,
-    "body_lines": 7,
-    "others": [
-      {
-        "module": "WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension",
-        "declaration": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_fourierCorrection",
-        "branch": "slopmaster2",
-        "line": 83,
-        "sorry_free": false,
-        "body_lines": 1
-      },
-      {
-        "module": "WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension",
-        "declaration": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection.isLisse",
-        "branch": "slopmaster2",
-        "line": 94,
-        "sorry_free": false,
-        "body_lines": 1
-      },
-      {
-        "module": "WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension",
-        "declaration": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection.hasWeightsAtMost",
-        "branch": "slopmaster2",
-        "line": 103,
-        "sorry_free": false,
-        "body_lines": 1
-      }
-    ],
-    "sorry_free_note": "corrected by L 14:55 UTC: the imported flag was shallow; the declaration rests on sorried declarations transitively (sorry map slopmaster2_71d63dcf, d edges); not attachable"
+    "def-fourier-set",
+    "def-fd-transform",
+    "prop-kernel-lisse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-correction/prop-fd-zero-extension-comparison.proof.md",
+    "place": "Coefficient and Weil conventions; adic interpretation in def-fourier-set and the constructible domains of prop-functor-package"
+   }
   },
-  "blueprint_lean": [
+  {
+   "text": "The boundary object. Put $i:S_0\\hookrightarrow A_0$ for the reduced closed complement, and apply [prop-sf-open-closed-triangle-all-stages] to the ordinary sheaf $P$. Since $j^*P=\\mathcal M$, this is the triangle\n$$j_!\\mathcal M\\longrightarrow P\\longrightarrow i_*i^*P\\longrightarrow j_!\\mathcal M[1].$$\nFor degree-zero preservation, [det-sf-open-closed-sequence-ring-sheaf] gives exact $j_!$ and $i_*$ on modules over the completed coefficient sheaf, and [det-sf-open-closed-pullback-limits] gives exact $i^*$. The rational heart is the essential image of the integral heart under the t-exact localization in [prop-weil-localized-tstructure]; together with scalar-compatible truncations (Step 1), these same exact sheaf operations give $j_!=Rj_!$ and $i_*=Ri_*$ on our heart. All quasi-compactness hypotheses hold for the complement of finitely many points on the affine line. The long exact sequence supplied by clause (5) of [lem-weil-heart-short-exact-triangles] therefore gives a short exact sequence of these sheaves: its preceding and following cohomology terms vanish. Its cokernel is $\\mathcal B=i_*i^*P$. Decompose the finite reduced scheme as $S_0=\\coprod_s s$, with $s=\\operatorname{Spec}\\kappa(s)$, and write $\\mathcal E_s=i_s^*P$. Sheaf sections over a finite disjoint union are the product of the sections on the components, which in an additive category is the finite direct sum. Thus\n$$\\mathcal B=\\bigoplus_s i_{s*}\\mathcal E_s.$$\nThe geometric stalk of $\\mathcal E_s$ at a chosen lift is $E_s=P_{\\bar s}$, with local Frobenius $F_s$ and degree $d(s)=[\\kappa(s):k_0]$. Keeping $\\mathcal E_s$ as a Weil sheaf on $s$ retains all its conjugate geometric stalks and their cyclic transport.",
+   "uses": [
+    "prop-sf-open-closed-triangle-all-stages",
+    "def-wf-middle-extension",
+    "lem-weil-heart-short-exact-triangles",
+    "det-sf-open-closed-sequence-ring-sheaf",
+    "det-sf-open-closed-pullback-limits",
+    "prop-weil-localized-tstructure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-correction/prop-fd-zero-extension-comparison.proof.md",
+    "place": "Step 1: boundary sheaf and decomposition over closed points"
+   }
+  },
+  {
+   "text": "Geometry at a boundary point. Set $A'_s=s\\times_{k_0}A'_0$, with projections $q_s:A'_s\\to s$ and $\\pi_s:A'_s\\to A'_0$, and let $i'_s=(i_s,\\operatorname{id}):A'_s\\hookrightarrow A_0\\times A'_0$. The finite-field extension $\\kappa(s)/k_0$ is separable by [lem-sfb-finite-field-galois-frobenius], so its spectrum map is étale by [lem-weil-pbc-finite-separable-extension-etale]. Base change preserves étaleness and finiteness by [lem-weil-pbc-etale-scheme-base-change, lem-weil-pbc-finite-morphism-permanence]. Consequently $\\pi_s$ is finite étale; its degree is $d(s)$, since $\\kappa(s)[\\xi]$ is free of that rank over $k_0[\\xi]$. Put\n$$\\mathcal L_s=i_s'^*\\mathcal K_\\psi=f_s^*\\mathcal L_\\psi,\\qquad f_s:A'_s\\to A_0,\\quad \\xi\\mapsto s\\xi,$$\nwhere $s$ in the formula is the residue of the affine coordinate in $\\kappa(s)$. This follows from [def-fd-kernel]. By [prop-kernel-lisse] this is lisse of rank one. The geometric restriction of $\\mathcal E_s$ is constant on each of the finitely many point components; hence its pullback is lisse. In the lisse-adic convention [def-pod-lisse-l-adic-sheaves], pulling back each finite-level locally constant sheaf and tensoring its local constant modules shows that\n$$\\mathcal F_s:=q_s^*\\mathcal E_s\\otimes\\mathcal L_s$$\nis lisse, with finite-dimensional stalks. The rank-one kernel is locally free, so this tensor is also the derived tensor used in the transform.",
+   "uses": [
+    "lem-sfb-finite-field-galois-frobenius",
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-fd-kernel",
+    "prop-kernel-lisse",
+    "def-pod-lisse-l-adic-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-correction/prop-fd-zero-extension-comparison.proof.md",
+    "place": "Steps 2--3: the maps over s and the lisse kernel with coefficient module"
+   }
+  },
+  {
+   "text": "Compute the punctual transform, with arbitrary residue degree. Closed immersions are proper by [lem-weil-pbc-closed-immersion-proper], and $\\pi_s$ is proper by [lem-weil-pbc-finite-proper]. Apply the proper base-change clause of [prop-functor-package] to the square formed by $p_1$, $i_s$, $i'_s$ and $q_s$, obtaining\n$$p_1^*Ri_{s*}\\mathcal E_s\\simeq Ri'_{s*}q_s^*\\mathcal E_s.$$\nThe projection-formula clause for $i'_s$ applies with the finite-Tor second factor $\\mathcal K_\\psi$ (as [prop-kernel-lisse] states), and gives\n$$Ri'_{s*}q_s^*\\mathcal E_s\\otimes^L\\mathcal K_\\psi\\simeq Ri'_{s*}\\mathcal F_s.$$\nFinally the composition and proper-coincidence clauses give $Rp_{2!}Ri'_{s*}=R(p_2i'_s)_!=R\\pi_{s!}=R\\pi_{s*}$. Substitution in [def-fd-transform], with rank $r=1$, proves\n$$\\operatorname{FT}_\\psi(i_{s*}\\mathcal E_s)\\simeq R\\pi_{s*}\\mathcal F_s[1].$$\nThis calculates the closed-point formula directly; the origin-only formula is not used for a nonrational point.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-finite-proper",
+    "prop-functor-package",
+    "prop-kernel-lisse",
+    "def-fd-transform"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-correction/prop-fd-zero-extension-comparison.proof.md",
+    "place": "Step 2: proper base change, projection formula, composition, and the shift [1]"
+   }
+  },
+  {
+   "text": "Construct the correction. The finite étale pushforward theorem [lem-a1-finite-map-lisse] applies to $\\pi_s$ and the lisse Weil sheaf $\\mathcal F_s$; it identifies $R\\pi_{s*}\\mathcal F_s$ with the ordinary lisse sheaf $\\pi_{s*}\\mathcal F_s$. Set\n$$\\mathcal B':=\\bigoplus_{s\\in S_0}\\pi_{s*}\\mathcal F_s.$$\nA finite sum of lisse sheaves is lisse: at each finite coefficient level take a common refinement of their finitely many local trivializations and add their constant modules. This remains true upon rationalization and finite coefficient extension. The exact adic Fourier functor constructed in Step 1 is additive; its finite direct-sum comparison applied to Step 2 and the calculation in Step 4 yields\n$$\\operatorname{FT}_\\psi(\\mathcal B)\\simeq\\mathcal B'[1].$$\nAll schemes in the finite étale theorem are separated of finite type over $k_0$, and its derived and ordinary pushforwards have the same coefficient convention fixed in Step 1.",
+   "uses": [
+    "lem-a1-finite-map-lisse",
+    "def-pod-lisse-l-adic-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-correction/prop-fd-zero-extension-comparison.proof.md",
+    "place": "Steps 2--3: definition, transform and lissity of B-prime"
+   }
+  },
+  {
+   "text": "Bound the boundary stalks. Purity gives $|\\iota(\\mu_x)|^2=q_x^w$, hence the inequality $|\\iota(\\mu_x)|^2\\le q_x^w$, on $U_0$. Apply [lem-wf-boundary-semicontinuity] with $X_0=A_0$ and $\\beta=w$. Its hypotheses hold: $A_0$ is a smooth separated geometrically connected curve; $U_0$ is dense with finite complement; and the nonzero lisse sheaf $\\mathcal M$ has positive rank. Therefore every eigenvalue $\\mu$ of $F_s$ on $E_s$ satisfies\n$$|\\iota(\\mu)|^2\\le q_s^w=q^{w d(s)}.$$\nOnly this punctual inequality is used. The finite-filtration definition of mixedness in [def-weil-punctual-weights] is not identified with a bare eigenvalue bound.",
+   "uses": [
+    "def-weil-punctual-weights",
+    "lem-wf-boundary-semicontinuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-correction/prop-fd-zero-extension-comparison.proof.md",
+    "place": "Step 4, first paragraph: boundary semicontinuity"
+   }
+  },
+  {
+   "text": "Bound the coefficient module on $A'_s$. For a closed point $z$ of $A'_s$, let $n=[\\kappa(z):k_0]$ and $r=n/d(s)$. The residue inclusion $\\kappa(s)\\hookrightarrow\\kappa(z)$ gives this positive integer. The pullback Weil map on $q_s^*\\mathcal E_s$ is the pullback of that on $\\mathcal E_s$ by [prop-weil-operations]. In the iterated definition [def-weil-local-frobenius-trace], the degree-$n$ return is thus $r$ degree-$d(s)$ returns. The rational local-power statement [lem-trf-rational-local-frobenius-powers], at a common finite coefficient field, identifies its operator up to conjugacy with $F_s^r$; its hypothesis on reductions is satisfied by a free lattice on the geometric point components. It does not require a Frobenius-stable lattice. If $\\nu$ is an eigenvalue of $F_s^r$, factor $T^r-\\nu=\\prod_i(T-\\mu_i)$ over $\\overline{\\mathbf Q}_\\ell$. If every $F_s-\\mu_i$ were invertible, so would their product $F_s^r-\\nu$ be. Thus some $\\mu_i$ is an eigenvalue of $F_s$ and $\\nu=\\mu_i^r$. Step 6 gives\n$$|\\iota(\\nu)|^2\\le q^{wn}.$$\nThis argument also covers a nondiagonalizable $F_s$.",
+   "uses": [
+    "prop-weil-operations",
+    "def-weil-local-frobenius-trace",
+    "lem-trf-rational-local-frobenius-powers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-correction/prop-fd-zero-extension-comparison.proof.md",
+    "place": "Step 4, second paragraph: residue degrees and powers on the coefficient stalk"
+   }
+  },
+  {
+   "text": "Bound the kernel twist for the arbitrary character in the hypothesis. Additivity of $\\psi$ and characteristic $p$ give $\\psi(a)^p=\\psi(pa)=1$ for every $a\\in k_0$. The multiplication and inverse isomorphisms of [prop-kernel-lisse] give\n$$\\mathcal K_\\psi^{\\otimes p}\\cong\\mathcal K_{\\psi^p}=\\mathcal K_1\\cong\\mathbf 1.$$\nFor the last identification, the same multiplication formula gives $\\mathcal K_1\\cong\\mathcal K_\\psi\\otimes\\mathcal K_{\\psi^{-1}}$, and the inverse formula identifies the latter with the tensor unit. These are isomorphisms of the kernel sheaves over $k_0$, hence respect their Weil structures. Pull back along $i'_s$ to obtain $\\mathcal L_s^{\\otimes p}\\cong\\mathbf1$. If $\\zeta$ is its rank-one local Frobenius eigenvalue at a closed point $z$ of degree $n$, tensor functoriality of the Weil map ([def-wf-tensor-product, prop-weil-operations]) gives $\\zeta^p=1$. Thus $|\\iota(\\zeta)|=1$ by [lem-tw-root-of-unity-modulus]. Tensoring this rank-one operator with that of $q_s^*\\mathcal E_s$ multiplies every eigenvalue in Step 7 by $\\zeta$. Therefore every eigenvalue $\\lambda$ of $F_z$ on $(\\mathcal F_s)_{\\bar z}$ satisfies\n$$|\\iota(\\lambda)|^2\\le q^{wn}.$$\nThis uses no trace-character parametrization and applies to every nontrivial additive $\\psi$ allowed in the statement.",
+   "uses": [
+    "prop-kernel-lisse",
+    "def-wf-tensor-product",
+    "prop-weil-operations",
+    "lem-tw-root-of-unity-modulus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-correction/prop-fd-zero-extension-comparison.proof.md",
+    "place": "Step 4: weight-zero kernel factor; finite tensor-order argument from the multiplication and inverse clauses of prop-kernel-lisse"
+   }
+  },
+  {
+   "text": "Identify the finite-fibre return operators in the rational Weil category. Fix a closed point $y$ of $A'_0$ and an embedding of $\\kappa(y)$ in $k$. The scheme $Z_0=A'_s\\times_{A'_0}\\operatorname{Spec}\\kappa(y)$ is finite over $k_0$. Proper base change in [prop-functor-package] identifies the stalk of $R\\pi_{s*}\\mathcal F_s$ at the chosen lift of $y$ with the cohomology of the corresponding geometric fibre. The finite scheme has cohomology only in degree zero by [lem-a1-finite-boundary-cohomology]. Apply [lem-a1-finite-weil-sections-decomposition] to $Z_0$ with the restricted sheaf, and take the summand indexed by that embedding of $\\kappa(y)$. Its evaluation isomorphism gives\n$$ (\\pi_{s*}\\mathcal F_s)_{\\bar y}\\simeq\\bigoplus_{\\bar z\\mapsto\\bar y}(\\mathcal F_s)_{\\bar z}.$$\nThe comparisons are Weil-equivariant by [prop-weil-operations]. Hence $F_y$ is the restriction of the degree-$d(y)$ iterate of global Frobenius on these sections. The cyclic permutation of $d(z)$ lifts in the finite-sections theorem, restricted to this fibre, has length $e=d(z)/d(y)$ under that iterate. Its displayed return identity $F^{d(z)}=F_z$ on the component at $\\bar z$ gives exactly\n$$F_y^e|_{(\\mathcal F_s)_{\\bar z}}=F_z.$$\nThis is an application of already stated proper base change and finite-scheme evaluation, rather than an unstated extension of the ordinary étale finite-stalk formula to adic coefficients.",
+   "uses": [
+    "prop-functor-package",
+    "lem-a1-finite-boundary-cohomology",
+    "lem-a1-finite-weil-sections-decomposition",
+    "prop-weil-operations",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-correction/prop-fd-zero-extension-comparison.proof.md",
+    "place": "Step 4, last two paragraphs: finite direct-image stalks and Frobenius cycles"
+   }
+  },
+  {
+   "text": "Finish the weight estimate by components. Let $\\alpha$ be an eigenvalue of $F_y$ on $(\\pi_{s*}\\mathcal F_s)_{\\bar y}$, and choose an eigenvector $v$ and a nonzero component $v_{\\bar z}$. If the orbit of that component has length $e$, Step 9 identifies the component of $F_y^ev=\\alpha^ev$ as $F_zv_{\\bar z}=\\alpha^ev_{\\bar z}$. Thus $\\alpha^e$ is an eigenvalue of $F_z$. Since $d(z)=e d(y)$, Step 8 gives\n$$|\\iota(\\alpha)|^{2e}\\le q^{w e d(y)},\\qquad |\\iota(\\alpha)|^2\\le q_y^w.$$\nOn the finite sum $\\mathcal B'$ its Frobenius preserves the summands indexed by $s$; projecting an eigenvector to a nonzero summand reduces to this calculation. This proves the asserted punctual upper bound at every $y$, without any semisimplicity assumption.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-correction/prop-fd-zero-extension-comparison.proof.md",
+    "place": "Step 4, final paragraph: eigenvector argument and the normalized bound"
+   }
+  },
+  {
+   "text": "Transform the boundary triangle and take ordinary cohomology. Rotate the triangle of Step 2 to\n$$\\mathcal B\\longrightarrow j_!\\mathcal M[1]\\longrightarrow P[1]\\longrightarrow\\mathcal B[1].$$\nBy the exact adic Fourier construction in Step 1, its Fourier transform is distinguished. The isomorphism in the hypothesis for the supplied partner $(j',\\mathcal M')$, and Step 5, identify it with\n$$\\mathcal B'[1]\\longrightarrow K\\longrightarrow(j'_*\\mathcal M')[1]\\longrightarrow\\mathcal B'[2],\\qquad K=\\operatorname{FT}_\\psi(j_!\\mathcal M[1]).$$\nUse the ordinary long exact cohomology sequence, clause (5) of [lem-weil-heart-short-exact-triangles], for the standard t-structure at $\\overline{\\mathbf Q}_\\ell$ supplied by [prop-constructible-truncations]. Thus the cohomological functor is being used on the actual common-stage category, not an unidentified category of discrete coefficient sheaves. Both outside terms are sheaves shifted by one, so $\\mathcal H^a K=0$ for $a\\ne-1$. The degree-$-1$ segment is\n$$0=\\mathcal H^{-2}((j'_*\\mathcal M')[1])\\longrightarrow\\mathcal B'\\longrightarrow\\mathcal G\\longrightarrow j'_*\\mathcal M'\\longrightarrow\\mathcal H^0(\\mathcal B'[1])=0,$$\nwhere $\\mathcal G=\\mathcal H^{-1}K$. Shifting this triangle by $[-1]$, both outside terms lie in the standard heart. Clause (2) of the same heart lemma puts $K[-1]$ in that heart, where $H^0$ is the identity. Hence $K\\simeq\\mathcal G[1]$. Truncation and every arrow lift to Weil objects by [prop-weil-operations]. This gives the required ordinary short exact sequence and the other comparison isomorphism. No geometric irreducibility or condition at infinity was used.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles",
+    "prop-constructible-truncations",
+    "prop-weil-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-correction/prop-fd-zero-extension-comparison.proof.md",
+    "place": "Step 5: rotated transformed triangle, ordinary cohomology and G"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-functor-package",
+  "prop-weil-operations",
+  "prop-constructible-truncations",
+  "def-wf-middle-extension",
+  "def-fourier-set",
+  "def-fd-transform",
+  "prop-kernel-lisse",
+  "prop-sf-open-closed-triangle-all-stages",
+  "lem-weil-heart-short-exact-triangles",
+  "det-sf-open-closed-sequence-ring-sheaf",
+  "det-sf-open-closed-pullback-limits",
+  "prop-weil-localized-tstructure",
+  "lem-sfb-finite-field-galois-frobenius",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "def-fd-kernel",
+  "def-pod-lisse-l-adic-sheaves",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-finite-proper",
+  "lem-a1-finite-map-lisse",
+  "def-weil-punctual-weights",
+  "lem-wf-boundary-semicontinuity",
+  "def-weil-local-frobenius-trace",
+  "lem-trf-rational-local-frobenius-powers",
+  "def-wf-tensor-product",
+  "lem-tw-root-of-unity-modulus",
+  "lem-a1-finite-boundary-cohomology",
+  "lem-a1-finite-weil-sections-decomposition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-correction/prop-fd-zero-extension-comparison.proof.md",
+  "place": "Steps 1--5, expanded with six-functor, finite-scheme evaluation and local-Frobenius-power interfaces; the kernel weight-zero argument uses its finite tensor order"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Fourier|ArtinSchreier|WeilSheaf",
+   "results": "no hits; subdirectory AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration states the étale Fourier--Deligne boundary comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fourier Deligne transform of a skyscraper sheaf is a lisse Artin Schreier sheaf shifted by one",
+   "results": "hits: FourierTransform.fourierₗ, FourierTransform.mk, FourierTransform.fourier, FourierTransform, FourierTransform.fourierInvₗ, FourierTransform.term𝓕, FourierTransform.recOn, FourierTransform.fourierEquiv_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration states the étale Fourier--Deligne boundary comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "Fourier, Sheaf",
+   "results": "no hits; loogle: unknown identifier 'Fourier'",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state the étale Fourier--Deligne boundary comparison; the first Loogle query used an unrecognized identifier"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fourier Deligne transform extension by zero middle extension punctual boundary correction lisse Weil sheaf weights",
+   "results": "hits: CategoryTheory.Sheaf.H, Condensed.lanSheafProfinite, LightCondensed.lanLightCondSet, CompHausLike.LocallyConstantModule.functor, CategoryTheory.Presheaf.coherentExtensiveEquivalence_functor_map_val, LightCondAb.ofSheafLightProfinite, LightCondMod.ofSheafLightProfinite, TopCat.Sheaf.extend_hom_app",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration states the étale Fourier--Deligne boundary comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Deligne|Schreier|WeilSheaf|[Ff]ourier.*[Ss]heaf",
+   "results": "hits: Mathlib/FieldTheory/KummerExtension.lean, Mathlib/NumberTheory/LSeries/MellinEqDirichlet.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean, Mathlib/Combinatorics/Quiver/Schreier.lean, Mathlib/Combinatorics/Quiver/Schreier.lean, Mathlib/Combinatorics/Quiver/Schreier.lean, Mathlib/Combinatorics/Quiver/Schreier.lean, Mathlib/Combinatorics/Quiver/Schreier.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration states the étale Fourier--Deligne boundary comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.Sheaf",
+   "results": "hits: AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val, AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv, AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom, AlgebraicGeometry.Scheme.AffineEtale.sheafEquiv, AlgebraicGeometry.Scheme.instAbelianSheafAffineEtaleTopology, AlgebraicGeometry.Scheme.instAbelianSheafEtaleSmallEtaleTopology, AlgebraicGeometry.Scheme.instIsEquivalenceSheafEtaleSmallEtaleTopologyAffineEtaleTopologySheafPushforwardContinuousSpec",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration states the étale Fourier--Deligne boundary comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an etale derived category the exponential integral transform sends a finite support sheaf to a local system shifted by one",
+   "results": "hits: LightCondMod.LocallyConstant.functorIsoDiscrete, CondensedMod.LocallyConstant.functorIsoDiscrete, CompHausLike.LocallyConstantModule.functor, LightCondMod.LocallyConstant.functorIsoDiscreteComponents, CompHausLike.LocallyConstant.functorIso, CondensedMod.LocallyConstant.functorIsoDiscreteComponents, LightCondMod.LocallyConstant.functor, LightCondMod.LocallyConstant.functorIsoDiscreteAux₂",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration states the étale Fourier--Deligne boundary comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "cites_remark",
+  "lean_multiple"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2768,
+ "blueprint_uses": [
+  "def-a1-constituent-nonexceptional",
+  "def-fd-artin-schreier-sheaf",
+  "def-fd-kernel",
+  "def-fd-transform",
+  "def-weil-punctual-weights",
+  "def-wf-middle-extension",
+  "lem-fd-as-trace",
+  "lem-fd-first-formula",
+  "lem-wf-boundary-semicontinuity",
+  "prop-a1-fourier-middle-extension",
+  "rem-dl-a1-conventions",
+  "thm-fd-transform-well-defined"
+ ],
+ "lean": {
+  "module": "WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension",
+  "declaration": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection",
+  "branch": "slopmaster2",
+  "line": 128,
+  "sorry_free": false,
+  "body_lines": 7,
+  "others": [
+   {
+    "module": "WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension",
+    "declaration": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_fourierCorrection",
+    "branch": "slopmaster2",
+    "line": 83,
+    "sorry_free": false,
+    "body_lines": 1
+   },
+   {
+    "module": "WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension",
+    "declaration": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection.isLisse",
+    "branch": "slopmaster2",
+    "line": 94,
+    "sorry_free": false,
+    "body_lines": 1
+   },
+   {
+    "module": "WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension",
+    "declaration": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection.hasWeightsAtMost",
+    "branch": "slopmaster2",
+    "line": 103,
+    "sorry_free": false,
+    "body_lines": 1
+   }
+  ],
+  "sorry_free_note": "corrected by L 14:55 UTC: the imported flag was shallow; the declaration rests on sorried declarations transitively (sorry map slopmaster2_71d63dcf, d edges); not attachable"
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection",
+  "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_fourierCorrection",
+  "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection.isLisse",
+  "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection.hasWeightsAtMost"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "proof_split_by": "labels",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
     "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection",
     "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_fourierCorrection",
     "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection.isLisse",
     "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection.hasWeightsAtMost"
-  ],
-  "blueprint_tags": [
-    "latex:proposition"
-  ],
-  "proof_split_by": "labels",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection",
-        "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_fourierCorrection",
-        "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection.isLisse",
-        "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection.hasWeightsAtMost"
-      ]
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection",
-          "module": "WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension",
-          "lines": [
-            102,
-            148
-          ],
-          "kind": "structure",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_fourierCorrection",
-          "module": "WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension",
-          "lines": [
-            150,
-            160
-          ],
-          "kind": "theorem",
-          "sorry": true
-        },
-        {
-          "name": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection.isLisse",
-          "module": "WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension",
-          "lines": [
-            162,
-            168
-          ],
-          "kind": "theorem",
-          "sorry": true
-        },
-        {
-          "name": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection.hasWeightsAtMost",
-          "module": "WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension",
-          "lines": [
-            170,
-            178
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [
-        "AlgebraicGeometry.LAdicWeilSheaf.LisseOnDenseOpen.FourierCorrection",
-        "AlgebraicGeometry.LAdicWeilSheaf.LisseOnDenseOpen.nonempty_fourierCorrection",
-        "AlgebraicGeometry.LAdicWeilSheaf.LisseOnDenseOpen.FourierCorrection.isLisse",
-        "AlgebraicGeometry.LAdicWeilSheaf.LisseOnDenseOpen.FourierCorrection.hasWeightsAtMost"
-      ],
-      "open": [
-        {
-          "name": "AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine",
-          "module": "WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar",
-          "lines": [
-            405,
-            415
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        }
-      ]
-    }
+   ]
   },
-  "chapter": "sec-deligne-laumon-a1",
-  "unit": "sk-p-dl-a1-correction",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "In the conventions of [rem-dl-a1-conventions], let $\\psi$ be a\nnontrivial additive character of $k_0$, let\n$j:U_0\\hookrightarrow A_0$ be a dense open immersion with finite\ncomplement $S_0$, and let $\\mathcal M$ be a nonzero irreducible lisse\nWeil sheaf on $U_0$ (irreducible among lisse Weil sheaves: its only lisse\nWeil subsheaves are $0$ and $\\mathcal M$) which is constituent-nonexceptional in the sense of\n[def-a1-constituent-nonexceptional] and punctually $\\iota$-pure of\nweight $w$. Let $j':U'_0\\hookrightarrow A'_0$ be a dense open immersion\ninto the dual line and $\\mathcal M'$ a lisse Weil sheaf on $U'_0$ such\nthat $\\operatorname{FT}_\\psi\\bigl((j_*\\mathcal M)[1]\\bigr)\\cong\n(j'_*\\mathcal M')[1]$ for the transform of [def-fd-transform] (such\ndata exist by [prop-a1-fourier-middle-extension]), and put\n\n$$\n\\mathcal B:=j_*\\mathcal M/j_!\\mathcal M ,\n$$\n\nwith $j_*$ the middle extension of [def-wf-middle-extension]. Then there\nare Weil sheaves $\\mathcal G$ and $\\mathcal B'$ on the dual line $A'_0$\nsuch that\n\n$$\n\\operatorname{FT}_\\psi\\bigl(j_!\\mathcal M[1]\\bigr)\\cong\\mathcal G[1],\n\\qquad\n\\operatorname{FT}_\\psi(\\mathcal B)\\cong\\mathcal B'[1],\n\\qquad\n0\\longrightarrow\\mathcal B'\\longrightarrow\\mathcal G\\longrightarrow\nj'_*\\mathcal M'\\longrightarrow0 .\n$$\n\nThe correction $\\mathcal B'$ is lisse on the entire dual line $A'_0$, and\nit has weights at most $w$: for every closed point $y$ of $A'_0$ and\nevery eigenvalue $\\alpha$ of the local Frobenius $F_y$ on\n$\\mathcal B'_{\\bar y}$,\n\n$$\n|\\iota(\\alpha)|^2\\le q_y^{\\,w}.\n$$\n\nIn particular the transform of $j_!\\mathcal M[1]$ is a sheaf shifted by\none without assuming geometric irreducibility of $\\mathcal M$ or\nunramifiedness at infinity.",
-    "proof": [
-      {
-        "text": "*Step 1: the boundary sheaf.* The map $j_!\\mathcal M\\to j_*\\mathcal M$ is\nan isomorphism over $U_0$ and $j_!\\mathcal M$ has zero stalks on $S_0$,\nso it is injective and $\\mathcal B$ vanishes on $U_0$. Hence\n$\\mathcal B$ is supported on the finite reduced closed subscheme $S_0$,\nand\n\n$$\n\\mathcal B\\cong\\bigoplus_{s\\in S_0}i_{s*}E_s,\n\\qquad E_s:=(j_*\\mathcal M)_{\\bar s},\n$$\n\nwhere $i_s:s\\hookrightarrow A_0$ is the inclusion of the closed point\n$s$ and $E_s$ is the boundary stalk with its Frobenius $F_s$, a\nfinite-dimensional Weil module of the residue field $k(s)$ of degree\n$d(s)$ over $k_0$.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "*Step 2: the transform of a boundary point.* Fix $s\\in S_0$ and a Weil\nmodule $E$ of $k(s)$. Put $A'_s:=s\\times_{k_0}A'_0=A'_0\\otimes_{k_0}k(s)$,\nlet $i'_s:A'_s\\hookrightarrow A_0\\times A'_0$ be the base change of $i_s$\nalong the first projection $p_1$, let $\\pi_s=p_2\\circ i'_s:A'_s\\to A'_0$\nbe the base change of $\\operatorname{Spec}k(s)\\to\\operatorname{Spec}k_0$,\nwhich is finite étale of degree $d(s)$, and let\n$q_s:A'_s\\to s$ be the projection. Pullback commutes with direct image\nalong the closed immersion $i_s$, so $p_1^*i_{s*}E\\cong i'_{s*}q_s^*E$,\nand the projection formula for the closed immersion $i'_s$ gives\n$i'_{s*}q_s^*E\\otimes\\mathcal K_\\psi\\cong\ni'_{s*}\\bigl(q_s^*E\\otimes i'^*_s\\mathcal K_\\psi\\bigr)$ for the kernel\n$\\mathcal K_\\psi$ of [def-fd-kernel]. The pairing restricted to\n$A'_s$ is the linear function $f_s:\\xi\\mapsto s\\xi$, so\n$\\mathcal L_s:=i'^*_s\\mathcal K_\\psi=f_s^*\\mathcal L_\\psi$ is the\nArtin–Schreier sheaf of [def-fd-artin-schreier-sheaf] attached to\n$s\\xi$, a lisse sheaf of rank one. Since\n$p_{2!}\\,i'_{s*}=(p_2 i'_s)_!=\\pi_{s!}=\\pi_{s*}$, the last because\n$\\pi_s$ is finite, the definition [def-fd-transform] gives\n\n$$\n\\operatorname{FT}_\\psi(i_{s*}E)\\cong\n\\pi_{s*}\\bigl(q_s^*E\\otimes\\mathcal L_s\\bigr)[1].\n$$\n\nThis is the computation of the second formula of [lem-fd-first-formula]\n(the case $s=0$, $E=\\overline{\\mathbf Q}_\\ell$) at a general closed\npoint. As the transform is additive, Step 1 gives\n$\\operatorname{FT}_\\psi(\\mathcal B)\\cong\\mathcal B'[1]$ with\n\n$$\n\\mathcal B':=\\bigoplus_{s\\in S_0}\n\\pi_{s*}\\bigl(q_s^*E_s\\otimes\\mathcal L_s\\bigr).\n$$",
-        "uses": [
-          "def-fd-kernel",
-          "def-fd-artin-schreier-sheaf",
-          "def-fd-transform",
-          "lem-fd-first-formula"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Step 3: $\\mathcal B'$ is lisse.* Each $q_s^*E_s\\otimes\\mathcal L_s$ is\nlisse on $A'_s$. After the base change to $k$, the finite étale map\n$\\pi_s$ becomes the projection\n$A'\\times\\operatorname{Hom}_{k_0}(k(s),k)\\to A'$ from a disjoint union\nof $d(s)$ copies of $A'$, so the direct image becomes a direct sum of\n$d(s)$ lisse sheaves on $A'$. Hence each summand, and $\\mathcal B'$,\nis lisse on the whole dual line.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "*Step 4: the weights of $\\mathcal B'$.* Since $\\mathcal M$ is\npunctually pure of weight $w$, it is punctually of weights at most $w$ in\nthe sense of [def-weil-punctual-weights], and the boundary\nsemicontinuity [lem-wf-boundary-semicontinuity] on the curve $A_0$ with\n$\\beta=w$ gives $|\\iota(\\mu)|^2\\le q_s^{\\,w}$ for every eigenvalue $\\mu$\nof $F_s$ on $E_s$.\n\nFix $s\\in S_0$, put $\\mathcal F_s:=q_s^*E_s\\otimes\\mathcal L_s$, and let\n$z$ be a closed point of $A'_s$ of degree $n$ over $k_0$. Its image in\n$s$ gives $d(s)\\mid n$, and the local Frobenius $F_z$ acts on the stalk\nof $q_s^*E_s$ as $F_s^{\\,n/d(s)}$, whose eigenvalues are the\n$(n/d(s))$-th powers of those of $F_s$ and so have squared modulus at\nmost $q_s^{\\,wn/d(s)}=q^{wn}$. On the rank-one stalk of\n$\\mathcal L_s=f_s^*\\mathcal L_\\psi$ the operator $F_z$ acts as\n$F_u^{\\,n/d(u)}$, where $u=f_s(z)$ is the image closed point of the line;\nby [lem-fd-as-trace] $F_u$ acts by the $p$-th root of unity\n$\\psi(\\operatorname{Tr}_{\\kappa(u)/k_0}(u))$. Hence every\neigenvalue of $F_z$ on $(\\mathcal F_s)_{\\bar z}$ has squared\n$\\iota$-modulus at most $q^{wn}$.\n\nNow let $y$ be a closed point of $A'_0$ with geometric point $\\bar y$.\nThe stalk of the finite direct image is the sum over the geometric\npoints of $A'_s$ above $\\bar y$,\n\n$$\n(\\pi_{s*}\\mathcal F_s)_{\\bar y}=\\bigoplus_{\\bar z\\mapsto\\bar y}\n(\\mathcal F_s)_{\\bar z},\n$$\n\nand $F_y$ permutes these summands. Its orbits correspond to the closed\npoints $z$ of $A'_s$ above $y$; if the orbit of $\\bar z$ has length $e$,\nthen $z$ has degree $n=e\\,d(y)$ and $F_y^{\\,e}$ maps the summand at\n$\\bar z$ to itself, acting there as $F_z$. Let $\\alpha$ be an eigenvalue\nof $F_y$ with eigenvector $v=(v_{\\bar z})$, and choose $\\bar z$ with\n$v_{\\bar z}\\ne0$, of orbit length $e$. Since $F_y^{\\,e}$ preserves each\nsummand of that orbit, comparing components of $F_y^{\\,e}v=\\alpha^ev$\ngives $F_zv_{\\bar z}=\\alpha^ev_{\\bar z}$. By the previous paragraph\n$|\\iota(\\alpha)|^{2e}\\le q^{we\\,d(y)}$, that is\n$|\\iota(\\alpha)|^2\\le q_y^{\\,w}$. An eigenvalue of $F_y$ on the finite\ndirect sum $\\mathcal B'_{\\bar y}$ is an eigenvalue on one of its\nsummands, which proves the weight bound.",
-        "uses": [
-          "def-weil-punctual-weights",
-          "lem-wf-boundary-semicontinuity",
-          "lem-fd-as-trace"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Step 5: concentration and the exact sequence.* The short exact sequence\n$0\\to j_!\\mathcal M\\to j_*\\mathcal M\\to\\mathcal B\\to0$ of Step 1 gives a\ndistinguished triangle\n$j_!\\mathcal M[1]\\to(j_*\\mathcal M)[1]\\to\\mathcal B[1]\\to$. The transform\nis an exact triangulated functor by [thm-fd-transform-well-defined];\nby [prop-a1-fourier-middle-extension] and Step 2, and after rotation,\nthis gives a distinguished triangle\n\n$$\n\\mathcal B'[1]\\longrightarrow K\\longrightarrow(j'_*\\mathcal M')[1]\n\\longrightarrow\\mathcal B'[2],\n\\qquad K:=\\operatorname{FT}_\\psi\\bigl(j_!\\mathcal M[1]\\bigr).\n$$\n\nBoth outer terms have a single cohomology sheaf, in degree $-1$. The\nlong exact sequence of cohomology sheaves therefore gives\n$\\mathcal H^aK=0$ for $a\\ne-1$, so $K\\cong\\mathcal G[1]$ with\n$\\mathcal G:=\\mathcal H^{-1}K$, and in degree $-1$ it reads\n\n$$\n0=\\mathcal H^{-2}\\bigl((j'_*\\mathcal M')[1]\\bigr)\\to\\mathcal B'\\to\n\\mathcal G\\to j'_*\\mathcal M'\\to\\mathcal H^{0}\\bigl(\\mathcal B'[1]\\bigr)=0,\n$$\n\nwhich is the asserted exact sequence. All objects and maps carry the Weil\nstructure, since the transform and the triangles are formed in the Weil\ncategory.",
-        "uses": [
-          "thm-fd-transform-well-defined",
-          "prop-a1-fourier-middle-extension"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection",
+     "module": "WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension",
+     "lines": [
+      102,
+      148
+     ],
+     "kind": "structure",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_fourierCorrection",
+     "module": "WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension",
+     "lines": [
+      150,
+      160
+     ],
+     "kind": "theorem",
+     "sorry": true
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection.isLisse",
+     "module": "WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension",
+     "lines": [
+      162,
+      168
+     ],
+     "kind": "theorem",
+     "sorry": true
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection.hasWeightsAtMost",
+     "module": "WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension",
+     "lines": [
+      170,
+      178
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.LAdicWeilSheaf.LisseOnDenseOpen.FourierCorrection",
+    "AlgebraicGeometry.LAdicWeilSheaf.LisseOnDenseOpen.nonempty_fourierCorrection",
+    "AlgebraicGeometry.LAdicWeilSheaf.LisseOnDenseOpen.FourierCorrection.isLisse",
+    "AlgebraicGeometry.LAdicWeilSheaf.LisseOnDenseOpen.FourierCorrection.hasWeightsAtMost"
+   ],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar",
+     "lines": [
+      405,
+      415
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    }
+   ]
   }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-correction",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "In the conventions of [rem-dl-a1-conventions], let $\\psi$ be a\nnontrivial additive character of $k_0$, let\n$j:U_0\\hookrightarrow A_0$ be a dense open immersion with finite\ncomplement $S_0$, and let $\\mathcal M$ be a nonzero irreducible lisse\nWeil sheaf on $U_0$ (irreducible among lisse Weil sheaves: its only lisse\nWeil subsheaves are $0$ and $\\mathcal M$) which is constituent-nonexceptional in the sense of\n[def-a1-constituent-nonexceptional] and punctually $\\iota$-pure of\nweight $w$. Let $j':U'_0\\hookrightarrow A'_0$ be a dense open immersion\ninto the dual line and $\\mathcal M'$ a lisse Weil sheaf on $U'_0$ such\nthat $\\operatorname{FT}_\\psi\\bigl((j_*\\mathcal M)[1]\\bigr)\\cong\n(j'_*\\mathcal M')[1]$ for the transform of [def-fd-transform] (such\ndata exist by [prop-a1-fourier-middle-extension]), and put\n\n$$\n\\mathcal B:=j_*\\mathcal M/j_!\\mathcal M ,\n$$\n\nwith $j_*$ the middle extension of [def-wf-middle-extension]. Then there\nare Weil sheaves $\\mathcal G$ and $\\mathcal B'$ on the dual line $A'_0$\nsuch that\n\n$$\n\\operatorname{FT}_\\psi\\bigl(j_!\\mathcal M[1]\\bigr)\\cong\\mathcal G[1],\n\\qquad\n\\operatorname{FT}_\\psi(\\mathcal B)\\cong\\mathcal B'[1],\n\\qquad\n0\\longrightarrow\\mathcal B'\\longrightarrow\\mathcal G\\longrightarrow\nj'_*\\mathcal M'\\longrightarrow0 .\n$$\n\nThe correction $\\mathcal B'$ is lisse on the entire dual line $A'_0$, and\nit has weights at most $w$: for every closed point $y$ of $A'_0$ and\nevery eigenvalue $\\alpha$ of the local Frobenius $F_y$ on\n$\\mathcal B'_{\\bar y}$,\n\n$$\n|\\iota(\\alpha)|^2\\le q_y^{\\,w}.\n$$\n\nIn particular the transform of $j_!\\mathcal M[1]$ is a sheaf shifted by\none without assuming geometric irreducibility of $\\mathcal M$ or\nunramifiedness at infinity.",
+  "proof": [
+   {
+    "text": "*Step 1: the boundary sheaf.* The map $j_!\\mathcal M\\to j_*\\mathcal M$ is\nan isomorphism over $U_0$ and $j_!\\mathcal M$ has zero stalks on $S_0$,\nso it is injective and $\\mathcal B$ vanishes on $U_0$. Hence\n$\\mathcal B$ is supported on the finite reduced closed subscheme $S_0$,\nand\n\n$$\n\\mathcal B\\cong\\bigoplus_{s\\in S_0}i_{s*}E_s,\n\\qquad E_s:=(j_*\\mathcal M)_{\\bar s},\n$$\n\nwhere $i_s:s\\hookrightarrow A_0$ is the inclusion of the closed point\n$s$ and $E_s$ is the boundary stalk with its Frobenius $F_s$, a\nfinite-dimensional Weil module of the residue field $k(s)$ of degree\n$d(s)$ over $k_0$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 2: the transform of a boundary point.* Fix $s\\in S_0$ and a Weil\nmodule $E$ of $k(s)$. Put $A'_s:=s\\times_{k_0}A'_0=A'_0\\otimes_{k_0}k(s)$,\nlet $i'_s:A'_s\\hookrightarrow A_0\\times A'_0$ be the base change of $i_s$\nalong the first projection $p_1$, let $\\pi_s=p_2\\circ i'_s:A'_s\\to A'_0$\nbe the base change of $\\operatorname{Spec}k(s)\\to\\operatorname{Spec}k_0$,\nwhich is finite étale of degree $d(s)$, and let\n$q_s:A'_s\\to s$ be the projection. Pullback commutes with direct image\nalong the closed immersion $i_s$, so $p_1^*i_{s*}E\\cong i'_{s*}q_s^*E$,\nand the projection formula for the closed immersion $i'_s$ gives\n$i'_{s*}q_s^*E\\otimes\\mathcal K_\\psi\\cong\ni'_{s*}\\bigl(q_s^*E\\otimes i'^*_s\\mathcal K_\\psi\\bigr)$ for the kernel\n$\\mathcal K_\\psi$ of [def-fd-kernel]. The pairing restricted to\n$A'_s$ is the linear function $f_s:\\xi\\mapsto s\\xi$, so\n$\\mathcal L_s:=i'^*_s\\mathcal K_\\psi=f_s^*\\mathcal L_\\psi$ is the\nArtin–Schreier sheaf of [def-fd-artin-schreier-sheaf] attached to\n$s\\xi$, a lisse sheaf of rank one. Since\n$p_{2!}\\,i'_{s*}=(p_2 i'_s)_!=\\pi_{s!}=\\pi_{s*}$, the last because\n$\\pi_s$ is finite, the definition [def-fd-transform] gives\n\n$$\n\\operatorname{FT}_\\psi(i_{s*}E)\\cong\n\\pi_{s*}\\bigl(q_s^*E\\otimes\\mathcal L_s\\bigr)[1].\n$$\n\nThis is the computation of the second formula of [lem-fd-first-formula]\n(the case $s=0$, $E=\\overline{\\mathbf Q}_\\ell$) at a general closed\npoint. As the transform is additive, Step 1 gives\n$\\operatorname{FT}_\\psi(\\mathcal B)\\cong\\mathcal B'[1]$ with\n\n$$\n\\mathcal B':=\\bigoplus_{s\\in S_0}\n\\pi_{s*}\\bigl(q_s^*E_s\\otimes\\mathcal L_s\\bigr).\n$$",
+    "uses": [
+     "def-fd-kernel",
+     "def-fd-artin-schreier-sheaf",
+     "def-fd-transform",
+     "lem-fd-first-formula"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 3: $\\mathcal B'$ is lisse.* Each $q_s^*E_s\\otimes\\mathcal L_s$ is\nlisse on $A'_s$. After the base change to $k$, the finite étale map\n$\\pi_s$ becomes the projection\n$A'\\times\\operatorname{Hom}_{k_0}(k(s),k)\\to A'$ from a disjoint union\nof $d(s)$ copies of $A'$, so the direct image becomes a direct sum of\n$d(s)$ lisse sheaves on $A'$. Hence each summand, and $\\mathcal B'$,\nis lisse on the whole dual line.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 4: the weights of $\\mathcal B'$.* Since $\\mathcal M$ is\npunctually pure of weight $w$, it is punctually of weights at most $w$ in\nthe sense of [def-weil-punctual-weights], and the boundary\nsemicontinuity [lem-wf-boundary-semicontinuity] on the curve $A_0$ with\n$\\beta=w$ gives $|\\iota(\\mu)|^2\\le q_s^{\\,w}$ for every eigenvalue $\\mu$\nof $F_s$ on $E_s$.\n\nFix $s\\in S_0$, put $\\mathcal F_s:=q_s^*E_s\\otimes\\mathcal L_s$, and let\n$z$ be a closed point of $A'_s$ of degree $n$ over $k_0$. Its image in\n$s$ gives $d(s)\\mid n$, and the local Frobenius $F_z$ acts on the stalk\nof $q_s^*E_s$ as $F_s^{\\,n/d(s)}$, whose eigenvalues are the\n$(n/d(s))$-th powers of those of $F_s$ and so have squared modulus at\nmost $q_s^{\\,wn/d(s)}=q^{wn}$. On the rank-one stalk of\n$\\mathcal L_s=f_s^*\\mathcal L_\\psi$ the operator $F_z$ acts as\n$F_u^{\\,n/d(u)}$, where $u=f_s(z)$ is the image closed point of the line;\nby [lem-fd-as-trace] $F_u$ acts by the $p$-th root of unity\n$\\psi(\\operatorname{Tr}_{\\kappa(u)/k_0}(u))$. Hence every\neigenvalue of $F_z$ on $(\\mathcal F_s)_{\\bar z}$ has squared\n$\\iota$-modulus at most $q^{wn}$.\n\nNow let $y$ be a closed point of $A'_0$ with geometric point $\\bar y$.\nThe stalk of the finite direct image is the sum over the geometric\npoints of $A'_s$ above $\\bar y$,\n\n$$\n(\\pi_{s*}\\mathcal F_s)_{\\bar y}=\\bigoplus_{\\bar z\\mapsto\\bar y}\n(\\mathcal F_s)_{\\bar z},\n$$\n\nand $F_y$ permutes these summands. Its orbits correspond to the closed\npoints $z$ of $A'_s$ above $y$; if the orbit of $\\bar z$ has length $e$,\nthen $z$ has degree $n=e\\,d(y)$ and $F_y^{\\,e}$ maps the summand at\n$\\bar z$ to itself, acting there as $F_z$. Let $\\alpha$ be an eigenvalue\nof $F_y$ with eigenvector $v=(v_{\\bar z})$, and choose $\\bar z$ with\n$v_{\\bar z}\\ne0$, of orbit length $e$. Since $F_y^{\\,e}$ preserves each\nsummand of that orbit, comparing components of $F_y^{\\,e}v=\\alpha^ev$\ngives $F_zv_{\\bar z}=\\alpha^ev_{\\bar z}$. By the previous paragraph\n$|\\iota(\\alpha)|^{2e}\\le q^{we\\,d(y)}$, that is\n$|\\iota(\\alpha)|^2\\le q_y^{\\,w}$. An eigenvalue of $F_y$ on the finite\ndirect sum $\\mathcal B'_{\\bar y}$ is an eigenvalue on one of its\nsummands, which proves the weight bound.",
+    "uses": [
+     "def-weil-punctual-weights",
+     "lem-wf-boundary-semicontinuity",
+     "lem-fd-as-trace"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 5: concentration and the exact sequence.* The short exact sequence\n$0\\to j_!\\mathcal M\\to j_*\\mathcal M\\to\\mathcal B\\to0$ of Step 1 gives a\ndistinguished triangle\n$j_!\\mathcal M[1]\\to(j_*\\mathcal M)[1]\\to\\mathcal B[1]\\to$. The transform\nis an exact triangulated functor by [thm-fd-transform-well-defined];\nby [prop-a1-fourier-middle-extension] and Step 2, and after rotation,\nthis gives a distinguished triangle\n\n$$\n\\mathcal B'[1]\\longrightarrow K\\longrightarrow(j'_*\\mathcal M')[1]\n\\longrightarrow\\mathcal B'[2],\n\\qquad K:=\\operatorname{FT}_\\psi\\bigl(j_!\\mathcal M[1]\\bigr).\n$$\n\nBoth outer terms have a single cohomology sheaf, in degree $-1$. The\nlong exact sequence of cohomology sheaves therefore gives\n$\\mathcal H^aK=0$ for $a\\ne-1$, so $K\\cong\\mathcal G[1]$ with\n$\\mathcal G:=\\mathcal H^{-1}K$, and in degree $-1$ it reads\n\n$$\n0=\\mathcal H^{-2}\\bigl((j'_*\\mathcal M')[1]\\bigr)\\to\\mathcal B'\\to\n\\mathcal G\\to j'_*\\mathcal M'\\to\\mathcal H^{0}\\bigl(\\mathcal B'[1]\\bigr)=0,\n$$\n\nwhich is the asserted exact sequence. All objects and maps carry the Weil\nstructure, since the transform and the triangles are formed in the Weil\ncategory.",
+    "uses": [
+     "thm-fd-transform-well-defined",
+     "prop-a1-fourier-middle-extension"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-fd-zero-extension-comparison",
+  "worker": "stage1",
+  "summary": "Followed blueprint_update main-20261015. Made the character binder and irreducible-lisse meaning explicit as in that source. Expanded the boundary point computation with actual proper base change, projection and composition inputs; cited lisse finite étale pushforward, boundary semicontinuity, common-stage finite-scheme evaluation and local Frobenius powers. Kept the punctual bound distinct from mixedness, and proved concentration by the transformed triangle. No new nodes: all non-elementary inputs already occur in the DAG. Maintainer repair: corrected the source pointer, made the adic Fourier convention and its exact-composite construction explicit, and replaced the fixed-character trace citation by the finite tensor-order kernel argument valid for arbitrary psi.",
+  "blueprint": "Current blueprint proof Step 1 is delivery Steps 1--2; Step 2 is Steps 3--5; Step 3 is Steps 3 and 5; Step 4 is Steps 6--10; Step 5 is Step 11. The unit statement and both unit proof steps are realized by this item.",
+  "tool_uses": [
+   {
+    "node": "prop-functor-package",
+    "why": "Common-stage scalar descent, constructibility, proper base change, projection formula, composition and proper coincidence; generic six-functor interfaces required by blueprint Step 2, not a replacement for the unit Fourier argument."
+   },
+   {
+    "node": "prop-weil-operations",
+    "why": "Weil lifts and Frobenius equivariance of operations, comparison maps and ordinary cohomology."
+   },
+   {
+    "node": "prop-constructible-truncations",
+    "why": "Standard truncations at E and Qbar_l, their scalar compatibility and recovery of a sheaf from concentration in one degree."
+   },
+   {
+    "node": "prop-sf-open-closed-triangle-all-stages",
+    "why": "Weil-equivariant localization for the ordinary middle-extension sheaf at rational coefficients."
+   },
+   {
+    "node": "lem-a1-finite-map-lisse",
+    "why": "Finite étale direct image of a lisse rational Weil sheaf is an ordinary lisse sheaf; used for the explicitly constructed correction summands."
+   },
+   {
+    "node": "lem-wf-boundary-semicontinuity",
+    "why": "The boundary weight inequality is precisely the input from sk-p-real-semi prescribed by the unit."
+   },
+   {
+    "node": "lem-trf-rational-local-frobenius-powers",
+    "why": "Degree-normalized local Frobenius powers at E, with no Frobenius-stable-lattice assumption; generic stalk tool needed for pullback along q_s and f_s."
+   },
+   {
+    "node": "lem-a1-finite-boundary-cohomology",
+    "why": "Vanishing outside degree zero for the finite k0-scheme which is the fibre over a closed point."
+   },
+   {
+    "node": "lem-a1-finite-weil-sections-decomposition",
+    "why": "Natural stalk evaluation and cyclic Frobenius return formula on that finite scheme; avoids treating an ordinary étale stalk lemma as an adic one."
+   },
+   {
+    "node": "lem-tw-root-of-unity-modulus",
+    "why": "The scalar Artin--Schreier Frobenius values and their powers have complex modulus one."
+   },
+   {
+    "node": "prop-kernel-lisse",
+    "why": "The Fourier kernel is lisse rank one and of finite Tor amplitude, the exact hypothesis of the projection formula."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Generic input for 2, 11; its statement supplies the indicated geometry, trace or cohomology fact, not a different Fourier proof route."
+   },
+   {
+    "node": "det-sf-open-closed-sequence-ring-sheaf",
+    "why": "Generic input for 2; its statement supplies the indicated geometry, trace or cohomology fact, not a different Fourier proof route."
+   },
+   {
+    "node": "det-sf-open-closed-pullback-limits",
+    "why": "Generic input for 2; its statement supplies the indicated geometry, trace or cohomology fact, not a different Fourier proof route."
+   },
+   {
+    "node": "prop-weil-localized-tstructure",
+    "why": "Generic input for 2; its statement supplies the indicated geometry, trace or cohomology fact, not a different Fourier proof route."
+   },
+   {
+    "node": "lem-sfb-finite-field-galois-frobenius",
+    "why": "Generic input for 3; its statement supplies the indicated geometry, trace or cohomology fact, not a different Fourier proof route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-separable-extension-etale",
+    "why": "Generic input for 3; its statement supplies the indicated geometry, trace or cohomology fact, not a different Fourier proof route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Generic input for 3; its statement supplies the indicated geometry, trace or cohomology fact, not a different Fourier proof route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Generic input for 3; its statement supplies the indicated geometry, trace or cohomology fact, not a different Fourier proof route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic input for 4; its statement supplies the indicated geometry, trace or cohomology fact, not a different Fourier proof route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Generic input for 4; its statement supplies the indicated geometry, trace or cohomology fact, not a different Fourier proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-functor-package",
+  "prop-weil-operations",
+  "prop-constructible-truncations",
+  "prop-sf-open-closed-triangle-all-stages",
+  "lem-a1-finite-map-lisse",
+  "lem-wf-boundary-semicontinuity",
+  "lem-trf-rational-local-frobenius-powers",
+  "lem-a1-finite-boundary-cohomology",
+  "lem-a1-finite-weil-sections-decomposition",
+  "lem-tw-root-of-unity-modulus",
+  "prop-kernel-lisse",
+  "lem-weil-heart-short-exact-triangles",
+  "det-sf-open-closed-sequence-ring-sheaf",
+  "det-sf-open-closed-pullback-limits",
+  "prop-weil-localized-tstructure",
+  "lem-sfb-finite-field-galois-frobenius",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-finite-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NW-76f7b29c9",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-76f7b29c9 (reviewer sub-agent of L); spot-checked: Read all eleven steps, cited statements, sources and unit route. Repaired three faults: stale source pointer, finite-ring theorem used at adic coefficients, and fixed-character trace lemma used for arbitrary ψ. Preserved all conclusions; verified base-change maps, Frobenius cycles and edge cases. Corrected JSON and detailed review.md written.; 1 file(s) fixed by the reviewer"
+ }
 }

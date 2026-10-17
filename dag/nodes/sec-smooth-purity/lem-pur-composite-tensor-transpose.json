@@ -13,48 +13,96 @@
   "def-weil-pbc-composite-adjunction",
   "def-sfb-projection-formula"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $h∈\\{f,g,c\\}$, the definition of $\\tau^h_B$ says that its inverse adjunction transpose is the composite $P_h(S_hB\\otimes W_h)\\xrightarrow{\\pi^h_{B,W_h}}B\\otimes P_hW_h\\xrightarrow{1\\otimes\\epsilon_{h,\\mathbf1}}B\\otimes\\mathbf1\\xrightarrow{\\rho_B}B$. This is exactly the defining Hom-bijection equation, with the displayed associators and unitors included.",
+   "uses": [
+    "def-sfb-projection-formula",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
+    "place": "Second paragraph, sentence on transposing the two tensor transformations; adjunction transpose convention from Stacks Tag 0037."
+   }
+  },
+  {
+   "text": "Transpose $\\tau^f_{G_gK}\\circ(S_f\\tau^g_K\\otimes1_W)$ successively through the composite Hom-bijection of [def-weil-pbc-composite-adjunction]. First transpose the outer $\\tau^f$: by the defining equation in Step 1 this inserts $\\pi^f_{S_gK\\otimes V,W}$, then $1\\otimes\\epsilon_{f,\\mathbf1}$, and then the right unitor. The remaining $\\tau^g_K$ transposes in the same way, inserting $\\pi^g_{K,V}$ and $1\\otimes\\epsilon_{g,\\mathbf1}$. Naturality of the projection families and the associativity/unit coherence equations in [def-sfb-projection-formula] move the comparison maps through the tensor factors, so the resulting composite is precisely\\n$$P_gP_fN\\xrightarrow{P_g\\pi^f_{S_gK\\otimes V,W}}P_g((S_gK\\otimes V)\\otimes P_fW)\\xrightarrow{P_g(1\\otimes\\epsilon_{f,\\mathbf1})}P_g(S_gK\\otimes V)\\xrightarrow{\\pi^g_{K,V}}K\\otimes P_gV\\xrightarrow{1\\otimes\\epsilon_{g,\\mathbf1}}K,$$\\nwith the stated unit constraints.",
+   "uses": [
+    "def-sfb-projection-formula",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
+    "place": "Second paragraph, sentence on transposing the two tensor transformations and composing the two counits in adjunction order."
+   }
+  },
+  {
+   "text": "For $\\tau^c_K\\circ(1_{S_cK}\\otimes q)$, use $q=\\tau^f_V$ and transpose through the composite adjunction. The defining equation for $\\tau^c_K$ gives the composite projection $\\pi^c_{K,M}=\\pi^g_{K,P_fM}\\circ P_g(\\pi^f_{S_gK,M})$, while the composite counit is $\\epsilon^c_K=\\epsilon_{g,K}\\circ P_g(\\epsilon_{f,G_gK})$ by [def-weil-pbc-composite-adjunction]. Substituting $M=W$ and then the defining transpose equation for $q$ produces the same four-arrow composite displayed in Step 2; the associativity and unit constraints are exactly those stipulated in [def-sfb-projection-formula].",
+   "uses": [
+    "def-sfb-projection-formula",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
+    "place": "Second paragraph, sentence on the same projection formula and the same two counits in their adjunction order."
+   }
+  },
+  {
+   "text": "The inverse transpose for the composite Hom-bijection is injective. Steps 2 and 3 show that the two displayed morphisms have the same inverse transpose, namely the displayed composite from $P_gP_fN$ to $K$; therefore the two morphisms are equal. No invertibility of $W_h$, $q$, or any $\\tau^h$ is used, and the same argument applies after restricting to any full domains on which the stated adjunctions, projection maps, and coherence equations are defined.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
+    "place": "Second paragraph, conclusion after the transpose calculation; Stacks Tag 0037 adjunction bijections."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-projection-formula",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
+  "place": "Second paragraph, expanded direct transpose calculation; adjunction convention from Stacks Tag 0037."
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "comp_counit_app|projection.*[Tt]ranspose|[Tt]ranspose.*projection|[Tt]ensor.*[Cc]ounit",
-   "results": "20 hits: Mathlib/CategoryTheory/Monoidal/Hopf_.lean, Mathlib/CategoryTheory/Monoidal/Hopf_.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean, Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean, Mathlib/CategoryTheory/Monoidal/Comon_.lean, Mathlib/CategoryTheory/Monoidal/Comon_.lean",
+   "tool": "leanfinder",
+   "query": "double transpose of tensor-counit maps for composite adjunctions with projection formulas",
+   "results": "8 hits: CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Adjunction.ε_comp_map_ε, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.mateEquiv_counit, CategoryTheory.Adjunction.ε_comp_map_ε_assoc, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.map_ε_comp_counit_app_unit; these concern lax/oplax monoidal adjunctions or generic mates and do not state this two-projection-formula calculation.",
    "date": "2026-10-17",
-   "verdict": "no match: comp_counit_app computes only the composite counit; map_μ_comp_counit_app_tensor requires an oplax/lax monoidal adjunction and states a different tensor map. Neither states the double-transpose calculation for projection formulas relative to separate strong monoidal functors"
+   "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.counit",
-   "results": "3 hits: CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.comp_counit_app_assoc, CategoryTheory.Adjunction.comp_counit",
+   "results": "3 hits: CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.comp_counit_app_assoc, CategoryTheory.Adjunction.comp_counit; these compute only the composite counit and do not state the double-transpose identity.",
    "date": "2026-10-17",
-   "verdict": "no match: comp_counit_app computes only the composite counit; map_μ_comp_counit_app_tensor requires an oplax/lax monoidal adjunction and states a different tensor map. Neither states the double-transpose calculation for projection formulas relative to separate strong monoidal functors"
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "comp_counit_app|projection.*transpose|transpose.*projection|tensor.*counit [Mathlib/CategoryTheory]",
+   "results": "20 hits in Mathlib/CategoryTheory: Adjunction/Basic.lean comp_counit_app; Adjunction/Mates.lean; Monoidal/Closed/Functor.lean; Monoidal/NaturalTransformation.lean; Monoidal/Comon_.lean and Hopf_.lean. No declaration states the present abstract lemma.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "The tensor action on the right adjoint to a functor with projection formula respects composite adjunctions by the composite counit formula",
-   "results": "8 hits: CategoryTheory.Bicategory.Adjunction.compCounit, CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.comp_counit, CategoryTheory.FunctorToTypes.adj, CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.CoreUnitCounit.counit, CategoryTheory.Functor.closedCounit, CategoryTheory.Adjunction.comp_counit_app",
+   "query": "The double adjoint transpose of composite tensor counit maps equals the iterated projection formulas followed by counits",
+   "results": "8 hits: CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.comp_counit, TensorProduct.adjoint_map, Bicategory.Adjunction.comp_counit, ContinuousLinearMap.adjoint_comp, TensorProduct.counit_def, Coalgebra.lTensor_counit_comp_comul, Bicategory.Adjunction.compCounit; none states this projection-formula identity.",
    "date": "2026-10-17",
-   "verdict": "no match: comp_counit_app computes only the composite counit; map_μ_comp_counit_app_tensor requires an oplax/lax monoidal adjunction and states a different tensor map. Neither states the double-transpose calculation for projection formulas relative to separate strong monoidal functors"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "For two adjunctions with coherent projection formulas, compute the double adjoint transpose of the composite tensor-counit maps using the two counits in order",
-   "results": "8 hits: CategoryTheory.Adjunction.ε_comp_map_ε, CategoryTheory.mateEquiv_counit, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Adjunction.ε_comp_map_ε_assoc, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.map_ε_comp_counit_app_unit, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.map_ε_comp_counit_app_unit_assoc",
-   "date": "2026-10-17",
-   "verdict": "no match: comp_counit_app computes only the composite counit; map_μ_comp_counit_app_tensor requires an oplax/lax monoidal adjunction and states a different tensor map. Neither states the double-transpose calculation for projection formulas relative to separate strong monoidal functors"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "In monoidal categories a projection formula and right adjoint define a tensor transformation S B tensor G one to G B; the double transpose of two such transformations equals the iterated projection isomorphisms followed by counits",
-   "results": "8 hits: CategoryTheory.frobeniusMorphism, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.tensorRightAdjunction, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Monoidal.Reflective.instIsIsoMapTensorHomAppUnit, CategoryTheory.tensorLeftAdjunction",
-   "date": "2026-10-17",
-   "verdict": "no match: comp_counit_app computes only the composite counit; map_μ_comp_counit_app_tensor requires an oplax/lax monoidal adjunction and states a different tensor map. Neither states the double-transpose calculation for projection formulas relative to separate strong monoidal functors"
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-pur-cohomological-smoothness",
@@ -71,5 +119,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-composite-tensor-transpose",
+  "worker": "stage1",
+  "summary": "Confirmed that no finished Lean declaration states this abstract composite-transpose lemma. Kept the statement and its four defining dependencies, and expanded the blueprint's abbreviated sentence into four explicit elementary steps: transpose each component through the two adjunctions, expand the composite projection and counit, and conclude by injectivity of the composite Hom bijection. No new DAG nodes were needed; all non-elementary notions are supplied by existing definition nodes.",
+  "blueprint": "Realizes the second paragraph of thm-pur-cohomological-smoothness.proof.md, specifically the sentence that the two tensor transformations agree after transposition by the projection formula and the two counits in adjunction order; the Stacks Tag 0037 convention fixes the transpose direction."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q90-164710851",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q90-164710851 (reviewer sub-agent of L); spot-checked: Read the complete stage instructions, packet/report, item, cited definitions, unit/chapter route, and exact current blueprint source. The composite adjunction types, projection maps, counits, transpose calculation, coherence conditions, restricted-domain clause, and edge cases all check. Four elementary steps correctly expand the blueprint’s abbreviated composition argument; no new nodes, duplicates, cycles, route violations, or hidden non-elementary lemmas were found. Wrote review.md. The report mentions citations.json, absent from the packet, but independently verified all cited statements directly."
  }
 }

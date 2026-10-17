@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-weight-separation",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Weight separation",
@@ -15,33 +15,83 @@
  "stmt_deps": [
   "def-weil-finite-field-fiber",
   "def-weil-geometric-hypotheses",
-  "def-weil-punctual-weights",
-  "def-weil-smooth-proper-cohomological-family"
- ],
- "proof": [
-  {
-   "text": "Let $\\beta\\in\\Qlb$ be a common ordinary root of $P_{i,\\ell}$ and\n$P_{j,\\ell}$ with $i\\ne j$. Then $\\alpha=\\beta^{-1}$ is a\nreciprocal root of both polynomials in the sense of\n[def-weil-ordinary-reciprocal-roots], so the assumed absolute\nvalue condition gives $|\\iota(\\alpha)|=q^{i/2}=q^{j/2}$, hence\n$i=j$, a contradiction. Thus distinct $P_{i,\\ell}$ have no common\nordinary root, and since every $P_{i,\\ell}$ has constant coefficient\none, they are coprime in $\\Qlb[T]$; consequently the parity products\n$N_\\ell,D_\\ell$ of [def-weil-parity-products] are coprime and\nhave constant coefficient one. The assumed trace-to-determinant\nidentity for the point-count zeta series of\n[def-weil-point-counts-zeta],\n\n$$\nZ(X_0,T)=\\prod_{i=0}^{2d}P_{i,\\ell}(T)^{(-1)^{i+1}},\n$$\n\ngroups the odd-degree factors into $N_\\ell(T)$ and the even-degree\nfactors into $D_\\ell(T)$, giving $Z(X_0,T)=N_\\ell(T)/D_\\ell(T)$\nafter coefficient extension to $\\Ql[[T]]$. Every ordinary root of\n$N_\\ell$ is an ordinary root of exactly one $P_{j,\\ell}$ with $j$\nodd, and its reciprocal satisfies the assumed absolute value condition\nwith weight $j$; hence the submultiset of ordinary roots of $N_\\ell$\nwhose reciprocal satisfies $|\\iota(\\alpha)|=q^{i/2}$ is exactly the\nordinary root multiset of $P_{i,\\ell}$ for $i$ odd, and the\ncorresponding assertion with $D_\\ell$ holds for $i$ even, which is the\nasserted more precise multiset identification.",
-   "uses": [
-    "def-weil-ordinary-reciprocal-roots",
-    "def-weil-parity-products",
-    "def-weil-point-counts-zeta"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
+  "def-weil-smooth-proper-cohomological-family",
   "def-weil-ordinary-reciprocal-roots",
   "def-weil-parity-products",
   "def-weil-point-counts-zeta"
  ],
+ "proof": [
+  {
+   "text": "Fix $i\\ne j$ and suppose that $\\beta\\in\\Qlb$ is a common ordinary root of\n$P_{i,\\ell}$ and $P_{j,\\ell}$. By [def-weil-ordinary-reciprocal-roots],\n$\\beta\\ne0$ and $\\alpha=\\beta^{-1}$ is a reciprocal root of both factors.\nThe assumed weight condition therefore gives\n$|\\iota(\\alpha)|=q^{i/2}=q^{j/2}$. Since $q=p^a>1$ for the prime $p$ and\n$a\\ge1$ in [def-weil-finite-field-fiber], the function\n$n\\mapsto q^{n/2}$ is strictly increasing on the integers, so this equality\nforces $i=j$, a contradiction. Thus distinct factors have no common ordinary\nroot. Regard the coefficient extensions of $P_{i,\\ell}$ and $P_{j,\\ell}$ as\npolynomials over the algebraically closed field $\\Qlb$; applying\n[lem-zeta-coprime-no-common-root] to the absence of a common evaluation zero\nshows that they are coprime in $\\Qlb[T]$.",
+   "uses": [
+    "def-weil-finite-field-fiber",
+    "def-weil-ordinary-reciprocal-roots",
+    "lem-zeta-coprime-no-common-root"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-separation/prop-weight-separation.proof.md",
+    "place": "proof paragraph, expanded into four steps"
+   }
+  },
+  {
+   "text": "Let $O$ and $E$ be the finite odd and even index sets in the definition\n[def-weil-parity-products], so that $N_\\ell=\\prod_{i\\in O}P_{i,\\ell}$ and\n$D_\\ell=\\prod_{j\\in E}P_{j,\\ell}$. For a fixed odd $i$, Step 1 gives\n$\\operatorname{IsCoprime}(P_{i,\\ell},P_{j,\\ell})$ for every even $j$; applying\n[lem-zeta-coprime-product] (and symmetry of coprimality) gives\n$\\operatorname{IsCoprime}(P_{i,\\ell},D_\\ell)$. Applying the same finite-product\nlemma over all odd $i$ gives\n$\\operatorname{IsCoprime}(N_\\ell,D_\\ell)$. The smooth-proper family has\n$P_{i,\\ell}(0)=1$ for every $i$ by\n[def-weil-smooth-proper-cohomological-family], and the constant coefficient of\na finite product is the product of the constant coefficients; hence\n$N_\\ell(0)=D_\\ell(0)=1$.",
+   "uses": [
+    "lem-zeta-coprime-product",
+    "def-weil-parity-products",
+    "def-weil-smooth-proper-cohomological-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-separation/prop-weight-separation.proof.md",
+    "place": "proof paragraph, expanded into four steps"
+   }
+  },
+  {
+   "text": "The assumed trace-to-determinant identity is\n$Z(X_0,T)=\\prod_{i=0}^{2d}P_{i,\\ell}(T)^{(-1)^{i+1}}$ in $\\Ql(T)$, where\n$Z(X_0,T)$ is the point-count series of [def-weil-point-counts-zeta]. By the\nparity definitions, $(-1)^{i+1}=1$ for odd $i$ and $-1$ for even $i$, so the\nfinite product is $N_\\ell(T)D_\\ell(T)^{-1}$. Step 2 gives $D_\\ell(0)=1$;\ntherefore $D_\\ell$, regarded in $\\Ql[[T]]$, is a unit by\n[lem-weil-power-series-unit-constant-coefficient]. The rational-function\nidentity consequently has the Taylor expansion\n$Z(X_0,T)=N_\\ell(T)/D_\\ell(T)$ in $\\Ql[[T]]$, which is the asserted\ncoefficient-extension statement.",
+   "uses": [
+    "def-weil-point-counts-zeta",
+    "def-weil-parity-products",
+    "lem-weil-power-series-unit-constant-coefficient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-separation/prop-weight-separation.proof.md",
+    "place": "proof paragraph, expanded into four steps"
+   }
+  },
+  {
+   "text": "For each $j$, [lem-weil-reciprocal-root-factorization] factors the coefficient\nextension of $P_{j,\\ell}$ over $\\Qlb$ as a finite product\n$\\prod_{\\alpha\\in R_j}(1-\\alpha T)$, where $R_j$ is its reciprocal-root\nmultiset with algebraic multiplicities. Multiplying these factorizations over\nall odd (respectively even) indices gives a factorization of $N_\\ell$\n(respectively $D_\\ell$) by the multiset union of the $R_j$. The uniqueness\nclause of the same node identifies this union with the reciprocal-root\nmultiset of the parity product, including multiplicities. By Step 1 no\nordinary root occurs in two distinct factors, and the assumed weight condition\nputs every element of $R_j$ at absolute value $q^{j/2}$. Since $q>1$, the\nvalues $q^{j/2}$ are distinct; filtering the reciprocal roots of $N_\\ell$ by\n$|\\iota(\\alpha)|=q^{i/2}$ therefore selects exactly $R_i$ when $i$ is odd,\nand the analogous filtering of $D_\\ell$ selects exactly $R_i$ when $i$ is\neven. Inverting the reciprocal-root bijection from\n[def-weil-ordinary-reciprocal-roots] gives the asserted ordinary-root\nmultiset identifications.",
+   "uses": [
+    "lem-weil-reciprocal-root-factorization",
+    "def-weil-ordinary-reciprocal-roots"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-separation/prop-weight-separation.proof.md",
+    "place": "proof paragraph, expanded into four steps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-ordinary-reciprocal-roots",
+  "lem-zeta-coprime-no-common-root",
+  "lem-zeta-coprime-product",
+  "def-weil-parity-products",
+  "def-weil-smooth-proper-cohomological-family",
+  "def-weil-point-counts-zeta",
+  "lem-weil-power-series-unit-constant-coefficient",
+  "lem-weil-reciprocal-root-factorization"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-separation/prop-weight-separation.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-separation/prop-weight-separation.proof.md",
+  "place": "## Proof (expanded from the single paragraph)"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -78,5 +128,21 @@
   }
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-prop-separation"
+ "unit": "sk-prop-separation",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-weight-separation",
+  "worker": "stage1",
+  "summary": "Checked the imported statement against the master and main-20261015 blueprint copies; no project declaration states it. Kept the statement, removed the unused punctual-weights dependency, and added the root, parity-product, and point-count notions that the statement explicitly uses. Expanded the one imported proof paragraph into four steps. Created two Mathlib leaves for the algebraic facts hidden in that paragraph: the algebraically closed root criterion for coprimality and finite-product preservation of coprimality. The proof uses the existing reciprocal-root factorization node to preserve multiplicities and the existing power-series unit lemma for the passage from the rational identity to its formal-series expansion. Small cases checked: d=0 (N=1, D=P_0), d=1 with empty odd/even factors where applicable, repeated reciprocal roots, and a pair of equal-weight factors (only equal indices are allowed).",
+  "blueprint": "The single proof paragraph of literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-separation/prop-weight-separation.proof.md: Step 1 realizes the common-root contradiction and coprimality sentence; Step 2 realizes the parity-product coprimality and constant-term sentence; Step 3 realizes grouping the trace-to-determinant product into N_l/D_l; Step 4 realizes the final root-multiset assertion with multiplicities.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q97-ff2ca2195",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q97-ff2ca2195 (reviewer sub-agent of L); spot-checked: Full mathematics and route audit passed. One repair is required: lem-zeta-coprime-product incorrectly identifies generic semiring IsCoprime with the field-only polynomial coprimality definition. Corrected whole JSON is in fixes/dag/nodes/sec-zeta-weil/lem-zeta-coprime-product.json; review.md records all source and edge-case checks.; 1 file(s) fixed by the reviewer"
+ }
 }

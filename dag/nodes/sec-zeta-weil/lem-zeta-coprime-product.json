@@ -1,0 +1,70 @@
+{
+ "id": "lem-zeta-coprime-product",
+ "kind": "statement",
+ "title": "Finite products preserve coprimality",
+ "statement": "Let $R$ be a commutative semiring, let $I$ be a type, let $x\\in R$, let $s:I\\to R$, and let $t$ be a finite subset of $I$. If\n\n$$\n\\forall i\\in t,\\;\\operatorname{IsCoprime}(s(i),x),\n$$\n\nthen\n\n$$\n\\operatorname{IsCoprime}\\left(\\prod_{i\\in t}s(i),x\\right).\n$$\n\nHere $\\operatorname{IsCoprime}$ is the generic Mathlib coprimality predicate; when $R$ is a polynomial ring over a field, it is the polynomial coprimality notion of [def-weil-coprime-polynomials].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-separation/prop-weight-separation.md",
+  "place": "proof, first paragraph: \"consequently the parity products $N_\\ell,D_\\ell$ ... are coprime\""
+ },
+ "stmt_deps": [
+  "def-weil-coprime-polynomials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite product of elements each coprime to x is coprime to x",
+   "results": "8 hits: IsCoprime.prod_left, IsCoprime.prod_right, Nat.Coprime.prod_left, IsRelPrime.prod_right, Nat.Coprime.prod_right, IsRelPrime.prod_left, IsCoprime.prod_right_iff, Nat.coprime_fintype_prod_left_iff",
+   "date": "2026-10-17",
+   "verdict": "match: IsCoprime.prod_left is exact"
+  },
+  {
+   "tool": "leansearch",
+   "query": "coprimality of a finite product from pairwise coprimality",
+   "results": "8 hits: IsCoprime.prod_left, IsCoprime.prod_right, IsRelPrime.prod_right, IsCoprime.prod_left_iff, pairwise_coprime_iff_coprime_prod, pairwise_isRelPrime_iff_isRelPrime_prod, Nat.Coprime.prod_right, IsCoprime.prod_right_iff",
+   "date": "2026-10-17",
+   "verdict": "match: IsCoprime.prod_left is exact"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCoprime.prod_left",
+   "results": "1 hit: IsCoprime.prod_left, Mathlib.RingTheory.Coprime.Lemmas, type `{R} {I} [CommSemiring R] {x} {s} {t} (h : ∀ i ∈ t, IsCoprime (s i) x) : IsCoprime (∏ i ∈ t, s i) x`",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem IsCoprime.prod_left",
+   "results": "2 hits: Mathlib/RingTheory/Coprime/Lemmas.lean:76 theorem IsCoprime.prod_left; Mathlib/RingTheory/Coprime/Lemmas.lean:87 theorem IsCoprime.prod_left_iff",
+   "date": "2026-10-17",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsCoprime.prod_left",
+  "file": "Mathlib/RingTheory/Coprime/Lemmas.lean",
+  "how": "exact",
+  "line": 76
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "prop-weight-separation",
+  "date": "2026-10-17",
+  "group": "Q97"
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-separation",
+ "blueprint": {
+  "from": {
+   "node": "prop-weight-separation",
+   "place": "proof, first paragraph: \"consequently the parity products $N_\\ell,D_\\ell$ ... are coprime\"",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

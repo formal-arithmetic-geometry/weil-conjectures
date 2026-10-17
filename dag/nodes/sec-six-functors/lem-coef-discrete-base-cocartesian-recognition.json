@@ -11,9 +11,93 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-cocartesian-straightening"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in a containing universe where all the specified simplicial sets are small. Write $M(a,b)=\\operatorname{Map}_{\\mathcal X}(a,b)$. From the nerve and right-pinched definitions in [def-cbc-enhanced-diagrams-cones], $\\operatorname{Map}_{NC}(c,d)$ is the constant simplicial set $\\operatorname{Hom}_C(c,d)$: a pinched simplex is a string of identities at $c$ followed by a single arrow to $d$. A space over this discrete set is the disjoint union of its strict fibres, and these are its homotopy fibres, because every path in a discrete space is constant. Also $p$ is an inner fibration in the specified simplicial presentation. Indeed, fill any inner horn in $\\mathcal X$ using its quasicategory property. The image of this filler agrees with the prescribed simplex in $NC$: an inner horn contains the consecutive-edge spine, including both edges when $n=2$, and a nerve simplex is determined uniquely by that spine. This verifies the relative lifting condition of [def-coef-infinity-fibrations], without assuming it of the original map.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Theorem 4.21, proof, discrete-base setup; elementary nerve and horn expansion from the definitions"
+   }
+  },
+  {
+   "text": "Fix $f:c\\to d$, $x\\in D_c$, a target vertex $i_e(z)$, and $g:d\\to e$. Put $a=i_c(x)$, $b=i_d(f_!x)$ and $t=i_e(z)$. Denote the assumed comparison by $q_{k,v,w}:\\operatorname{Map}_{D_{\\mathrm{target}(k)}}(k_!v,w)\\to M(i(v),i(w))_k$. The equality $g_!(f_!x)=(gf)_!x$ identifies the domains of $q_{g,f_!x,z}$ and $q_{gf,x,z}$. For a variable $h$ in this common mapping space, associativity of the canonical mapping-space composition and its dependence on the component of an edge, as stated in [lem-coef-infinity-mapping-composition], give\n$$u_{f,x}^*q_{g,f_!x,z}(h)=(i_e(h)u_{g,f_!x})u_{f,x}\\simeq i_e(h)(u_{g,f_!x}u_{f,x})\\simeq i_e(h)u_{gf,x}=q_{gf,x,z}(h).$$\nThe second homotopy uses exactly the specified compositional triangle. These are homotopies of maps on the whole mapping space, not merely identities on components: restrict the associativity homotopy and then the precomposition class along the edges of that triangle. Endpoint coherence is part of the assumptions. The base is discrete, so all these homotopies stay in the component $gf$. Both $q$ maps are equivalences by hypothesis. Cancelling their bijections on components and isomorphisms on based homotopy groups proves that the actual precomposition map $M(b,t)_g\\to M(a,t)_{gf}$ is an equivalence.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Theorem 4.21, proof, final two-out-of-three argument, with Proposition 4.20 replaced by the assumed mapping comparisons"
+   }
+  },
+  {
+   "text": "For the fixed $f,x,t$ of Step 2 consider the canonical precomposition square\n$$\\begin{matrix}M(b,t)&\\xrightarrow{u_{f,x}^*}&M(a,t)\\\\ \\downarrow&&\\downarrow\\\\ \\operatorname{Hom}_C(d,e)&\\xrightarrow{g\\mapsto gf}&\\operatorname{Hom}_C(c,e).\\end{matrix}$$\nIts commutativity homotopy is forced over the discrete lower right corner: functoriality sends composition to composition, and a path in that corner is constant. By the path-space definition in [def-cbc-enhanced-diagrams-cones], the homotopy pullback of the other three corners is therefore\n$$P=\\coprod_{g\\in\\operatorname{Hom}_C(d,e)}M(a,t)_{gf}.$$\nThe comparison $M(b,t)\\to P$ decomposes, using Step 1, into exactly the maps $M(b,t)_g\\to M(a,t)_{gf}$ proved equivalent in Step 2. Thus it is an equivalence: on components it is the disjoint union of the component bijections, and at each base point its homotopy-group maps are those of the corresponding summand. Empty summands are allowed. Distinct $g$ with the same composite $gf$ remain distinct summands of $P$; no cancellation property of $f$ is being used. This proves the homotopy-pullback condition for every target, since the vertex-surjectivity hypothesis writes every vertex as $i_e(z)$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Theorem 4.21, proof, componentwise homotopy-pullback test over the discrete Hom sets; the disjoint-union calculation is written out"
+   }
+  },
+  {
+   "text": "Step 3 is exactly the intrinsic mapping-square condition in [lem-coef-cocartesian-straightening], so every specified $u_{f,x}$ is intrinsically $p$-cocartesian. For a simplicial representative, Step 1 shows that $p$ is inner, and [lem-coef-infinity-cocartesian-mapping-criterion] identifies that very square condition with the horn-cocartesian condition, without requiring other lifts. For every vertex $a\\in\\mathcal X$ choose a presentation $a=i_c(x)$ supplied by the hypothesis. Since $p i_c=c$, its base is $c$. Each outgoing base edge is an arrow $f:c\\to d$, and $u_{f,x}$ is now a horn-cocartesian lift of it. Hence the definition in [def-coef-infinity-fibrations] makes $p$ a simplicial cocartesian fibration. In particular it supplies the representative promised by the statement. This verifies the representative rather than using an inner-fibration assumption not present in the item.",
+   "uses": [
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Theorem 4.21, proof, application of HTT Proposition 2.4.4.3 (dual); intrinsic and horn notions matched by existing DAG statements"
+   }
+  },
+  {
+   "text": "Fix $c$ and form the degreewise fibre $F_c=\\mathcal X\\times_{NC}\\{c\\}$ of [def-coef-infinity-fibrations]. It is a quasicategory: an inner horn over the constant simplex at $c$ fills by the inner-fibration property proved in Step 1. The equality $p i_c=c$ factors $i_c$ through a functor $j_c:D_c\\to F_c$. Every vertex of $F_c$ is $i_d(y)$ for some $d,y$; applying $p$ gives $d=c$, so after this equality it is $j_c(y)$. For $x,y\\in D_c$, the right-pinched definition of [def-cbc-enhanced-diagrams-cones] gives a degreewise equality\n$$\\operatorname{Map}_{F_c}(j_cx,j_cy)=M(i_cx,i_cy)_{1_c}:$$\na pinched simplex lies in $F_c$ exactly when its image is the constant simplex at $c$, and its image in $NC$ is determined by its final arrow. The assumed comparison at $f=1_c$, together with $(1_c)_!x=x$ and $u_{1_c,x}=1_{i_cx}$, identifies the induced map of $j_c$ with this equivalence (precomposition with the identity has the unit homotopy of [lem-coef-infinity-mapping-composition]). Thus $j_c$ is fully faithful. Apply [lem-coef-infinity-full-essential-image] to $j_c$. Its full replete essential image equals all of $F_c$, since every vertex was already in its image and a full subcategory contains every simplex on its vertices. The coherent quasi-inverse supplied by that node therefore proves $D_c\\simeq F_c$, including all mapping spaces and coherent inverse transformations.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3881v4",
+    "place": "Agent expansion of the intrinsic-fibre clause extracted from Theorem 4.21; equivalence criterion: Kerodon Theorem 4.8.4.1 (01JX), via the existing full-essential-image node"
+   }
+  },
+  {
+   "text": "By Step 4 the strict presentation $p$ is a simplicial cocartesian fibration. The fibre/base-change assertion of [lem-coef-cocartesian-straightening] says precisely that its simplicial fibre $F_c$ represents the infinity-categorical pullback $\\mathcal X\\times_{NC}\\{c\\}$. Compose the equivalence $j_c$ from Step 5 with that canonical pullback comparison. The result is the canonical functor of the statement: both projections are $i_c$ and the constant map to $c$, with the specified equality $p i_c=c$. It is an equivalence as a composite of equivalences. The conclusion is consequently about the intrinsic fibre, independently of a presentation; no arbitrary strict pullback of a nonfibrant presentation has been identified with an intrinsic one. Empty fibres cause no exception, since all preceding horn and mapping-space arguments allow empty simplicial sets.",
+   "uses": [
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Intrinsic/simplicial fibre comparison as stated in lem-coef-cocartesian-straightening; agent assembly with the explicit strict-fibre equivalence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-full-essential-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3881v4",
+  "place": "Theorem 4.21, proof, mapping-component argument. Nerve, horn and strict-fibre calculations expanded from the definitions; intrinsic fibres and coherent quasi-inverses are supplied by existing DAG statements. Haugseng and HTT are read online, not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +133,45 @@
    "results": "{\"t\": \"2026-10-17T08:38:59Z\", \"tool\": \"leansearch\", \"query\": \"Recognize a cocartesian infinity category over an ordinary category by equivalences on mapping space components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsCocartesian.casesOn\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsCocartesian.mk\", \"CategoryTheory.Functor.IsCocartesian.recOn\", \"CategoryTheory.Functor.IsCocartesian.of_iso_comp\", \"CategoryTheory.Functor.IsCocartesian.rec\", \"CategoryTheory.Functor.IsCocartesian.map.congr_simp\"], \"digest\": \"78707b7414c5fb72\"}",
    "date": "2026-10-17",
    "verdict": "no match: read the returned declarations and their source. They concern ordinary-category cocartesian arrows, ordinary categorical localizations or nerves; none states this coherent infinity-category comparison. Read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:48-82, CategoryTheory/FiberedCategory/Grothendieck.lean:40-86, CategoryTheory/Localization/Predicate.lean:44-80, CategoryTheory/Localization/Opposite.lean:28-60 and CategoryTheory/Adjunction/Whiskering.lean:28-41."
+  },
+  {
+   "tool": "grep",
+   "query": "cocartesian|coCartesian|mappingSpace",
+   "results": "{\"t\": \"2026-10-17T11:37:39Z\", \"tool\": \"grep\", \"query\": \"cocartesian|coCartesian|mappingSpace\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary IsCocartesian and IsStronglyCocartesian use Hom-set universal properties (Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-74); nerve and QCat results supply only primitives (Quasicategory/InnerFibration.lean:62-74; StrictBicategory.lean:50-72). Read these declarations; none gives the quasicategorical mapping-component recognition or intrinsic-fibre equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cocartesian arrows in a quasicategory characterized by homotopy pullbacks of mapping spaces",
+   "results": "{\"t\": \"2026-10-17T11:37:40Z\", \"tool\": \"leansearch\", \"query\": \"Cocartesian arrows in a quasicategory characterized by homotopy pullbacks of mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsCocartesian.universal_property\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.mk\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_comp\", \"CategoryTheory.Functor.IsCocartesian.fac\"], \"digest\": \"8acca54acdeb3366\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary IsCocartesian and IsStronglyCocartesian use Hom-set universal properties (Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-74); nerve and QCat results supply only primitives (Quasicategory/InnerFibration.lean:62-74; StrictBicategory.lean:50-72). Read these declarations; none gives the quasicategorical mapping-component recognition or intrinsic-fibre equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCocartesian\", \"Quasicategory\"",
+   "results": "{\"t\": \"2026-10-17T11:37:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCocartesian\\\", \\\"Quasicategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary IsCocartesian and IsStronglyCocartesian use Hom-set universal properties (Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-74); nerve and QCat results supply only primitives (Quasicategory/InnerFibration.lean:62-74; StrictBicategory.lean:50-72). Read these declarations; none gives the quasicategorical mapping-component recognition or intrinsic-fibre equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Recognize a cocartesian fibration of infinity categories over an ordinary category from equivalences on each mapping space component and identify its fibers",
+   "results": "{\"t\": \"2026-10-17T11:37:42Z\", \"tool\": \"leanfinder\", \"query\": \"Recognize a cocartesian fibration of infinity categories over an ordinary category from equivalences on each mapping space component and identify its fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian.codomainUniqueUpToIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsCocartesian.of_iso_comp\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_iso\", \"CategoryTheory.Functor.IsStronglyCocartesian\"], \"digest\": \"41a2d2372c1df6e1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary IsCocartesian and IsStronglyCocartesian use Hom-set universal properties (Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-74); nerve and QCat results supply only primitives (Quasicategory/InnerFibration.lean:62-74; StrictBicategory.lean:50-72). Read these declarations; none gives the quasicategorical mapping-component recognition or intrinsic-fibre equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasicategory over the nerve of a category with chosen universal lifts is a coCartesian fibration and its fibre is the category of objects above that vertex",
+   "results": "{\"t\": \"2026-10-17T11:37:43Z\", \"tool\": \"leanfinder\", \"query\": \"A quasicategory over the nerve of a category with chosen universal lifts is a coCartesian fibration and its fibre is the category of objects above that vertex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.strictSegal\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.nerve.functorOfNerveMap\", \"CategoryTheory.nerve\"], \"digest\": \"5ca43f7ffd6ebe99\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary IsCocartesian and IsStronglyCocartesian use Hom-set universal properties (Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-74); nerve and QCat results supply only primitives (Quasicategory/InnerFibration.lean:62-74; StrictBicategory.lean:50-72). Read these declarations; none gives the quasicategorical mapping-component recognition or intrinsic-fibre equivalence."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-grothendieck-fibre-localization",
@@ -77,5 +196,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-discrete-base-cocartesian-recognition",
+  "worker": "stage1",
+  "summary": "Six steps explicitly calculate precomposition on each base-arrow component, assemble the discrete-base homotopy pullback, apply the existing horn/intrinsic criterion, identify strict fibres using the identity comparison and full essential image, and identify those with intrinsic fibres. No new nodes and no statement change. Logged five fresh Mathlib searches and retained the inherited records.",
+  "blueprint": "Realizes the ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2, the coherent finite-coefficient adjunction before derived inverse limit, through the inherited fibrewise-localization chain. The exact supporting argument is Haugseng Theorem 4.21 proof, discrete-base component calculation, with the inherited intrinsic-fibre clause expanded."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q32-2755e1bd8",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q32-2755e1bd8 (reviewer sub-agent of L); spot-checked: Read the full item, six proof steps, cited node statements, Haugseng Theorem 4.21, HTT Proposition 2.4.4.3 dual, Kerodon 01JX, unit/chapter route, DAG guidance, and report. Verified hypotheses, mapping-component two-out-of-three argument, discrete-base homotopy pullback, intrinsic cocartesian recognition, fibre equivalence, edge cases, duplicate searches, acyclicity, and prohibited-route constraints. No new nodes or repairs are needed. Review written to review.md."
  }
 }

@@ -11,9 +11,76 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-joyal-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "In the degreewise coproduct, every face and degeneracy preserves the label. In particular all vertices of a simplex have its label, and an edge cannot join different labels. Every inner horn has a connected edge graph: for $n=2$ it is the two-edge spine, and for $n\\geq3$ it contains every edge of $\\Delta^n$. Thus a map $\\Lambda_k^n\\to X$ has all vertices in one $X_i$; every simplex of the horn then has that same label, so the entire map factors through $X_i$. Fill it there and include the filler in $X$. This proves that $X$ is a quasicategory; the identical argument proves it for $Y$. If a coproduct is empty there is no map from an inner horn into it, so its horn condition is vacuous. The degreewise coproducts are small because the index set and all summands are small in the fixed universe.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent-written horn argument from the simplicial and inner-horn definitions; compare the quasicategory convention used in section 3.6."
+   }
+  },
+  {
+   "text": "Suppose each $f_i$ is a categorical equivalence. Clause (2) of [lem-coef-joyal-quasicategory-characterizations] supplies a simplicial map $g_i:Y_i\\to X_i$ and equivalence edges $\\alpha_i:g_if_i\\to\\operatorname{id}_{X_i}$ and $\\beta_i:f_ig_i\\to\\operatorname{id}_{Y_i}$ in the corresponding functor simplicial sets. Choose these data for the small family. Include, for each equivalence edge, its inverse edge and the two $2$-simplices witnessing the inverse equations, as specified in [def-cbc-enhanced-diagrams-cones]. These witnesses are maps $X_i\\times\\Delta^r\\to X_i$ or $Y_i\\times\\Delta^r\\to Y_i$, with $r=1,2$, whose face equations are the inverse equations.",
+   "uses": [
+    "lem-coef-joyal-quasicategory-characterizations",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Remark 3.6.5, Corollary 3.6.6 and Theorem 3.6.8, printed pp.114-116; specialization of the existing quasi-inverse characterization."
+   }
+  },
+  {
+   "text": "Set $g(i,y)=(i,g_i(y))$ in every simplicial degree. Simplicial operators preserve $i$, so this defines $g:Y\\to X$. For every $r$, the degreewise bijection $X\\times\\Delta^r=\\coprod_i(X_i\\times\\Delta^r)$ sends $((i,x),t)$ to $(i,(x,t))$ and commutes with every simplicial operator. Assemble the maps for $\\alpha_i$, their inverses and both triangular witnesses by this bijection and the coproduct inclusions. Every face equation holds on each summand and therefore on the coproduct. They give an equivalence edge $gf\\to\\operatorname{id}_X$ in $\\operatorname{Fun}(X,X)$. The same construction gives $fg\\to\\operatorname{id}_Y$ in $\\operatorname{Fun}(Y,Y)$, retaining its inverse and both triangle witnesses. Step 1 supplies the quasicategory hypotheses, so clause (2) of [lem-coef-joyal-quasicategory-characterizations] proves that $f$ is a categorical equivalence.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-joyal-quasicategory-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent-written assembly of simplicial quasi-inverse data, using Corollary 3.6.6 and Theorem 3.6.8, printed pp.114-116."
+   }
+  },
+  {
+   "text": "Conversely suppose $f$ is a categorical equivalence. By step 1 and clause (2) of [lem-coef-joyal-quasicategory-characterizations], choose a simplicial quasi-inverse $g:Y\\to X$ and equivalence edges $\\alpha:gf\\to\\operatorname{id}_X$, $\\beta:fg\\to\\operatorname{id}_Y$, with inverse edges and both inverse triangles. At a vertex $y\\in Y_i$, evaluation of $\\beta$ gives an edge from $f(g(y))$ to $y$ in $Y$. Its endpoints have the same label, namely $i$. Since $f$ preserves labels, $g(y)$ has label $i$. For any simplex $s$ of $Y_i$, a vertex of $g(s)$ is $g$ of a vertex of $s$, hence has label $i$; the whole simplex $g(s)$ consequently lies in $X_i$. Thus $g$ restricts to a simplicial map $g_i:Y_i\\to X_i$, and compatibility with faces and degeneracies follows from that of $g$. This argument uses no connectedness of $Y_i$.",
+   "uses": [
+    "lem-coef-joyal-quasicategory-characterizations",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent-written label restriction of the quasi-inverse supplied by Corollary 3.6.6 and Theorem 3.6.8, printed pp.114-116."
+   }
+  },
+  {
+   "text": "Restrict the maps defining $\\alpha$, its inverse and the two inverse triangles to $X_i\\times\\Delta^r$, for $r=1,2$. Each vertex of each such domain is sent into $X_i$: the functors at the vertices of the parameter simplex are $gf$ or $\\operatorname{id}_X$, whose restrictions both preserve label $i$ by step 4. Every simplex of the domain has a vertex, and its image has the label of that vertex, so each restricted map factors through $X_i$. The restricted face equations are unchanged, giving an equivalence edge $g_if_i\\to\\operatorname{id}_{X_i}$ in $\\operatorname{Fun}(X_i,X_i)$. Restrict $\\beta$, its inverse and both triangles to $Y_i\\times\\Delta^r$ in exactly the same way: their vertex functors are $fg$ and $\\operatorname{id}_Y$, so all image vertices have label $i$. This gives an equivalence edge $f_ig_i\\to\\operatorname{id}_{Y_i}$. Clause (2) of [lem-coef-joyal-quasicategory-characterizations] now proves each $f_i$ is a categorical equivalence. Empty summands cause no restriction problem: a simplicial set with no vertices has no simplices, so all parameter maps with empty source are the unique empty maps. If $Y_i$ has a vertex, step 4 supplies a vertex in $X_i$; if $X_i$ has a vertex, $f_i$ supplies one in $Y_i$. Finally for $I=\\varnothing$ both total objects are empty and the unique map is its own quasi-inverse with the unique (degenerate) equivalence witnesses. Thus the proof includes every stated empty case.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-joyal-quasicategory-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent-written restriction of the inverse edge and its triangle witnesses, followed by Corollary 3.6.6 and Theorem 3.6.8, printed pp.114-116."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-joyal-quasicategory-characterizations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Degreewise labelled-coproduct proof written here from the quasi-inverse characterization (Remark 3.6.5, Corollary 3.6.6 and Theorem 3.6.8). HA, proof of Theorem B.0.20, printed p.1485, explains the edge-pullback accessibility application; it does not state this auxiliary comparison as a named theorem. Both sources read online; archival copies are WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +116,52 @@
    "results": "{\"t\": \"2026-10-17T08:42:35Z\", \"tool\": \"leanfinder\", \"query\": \"A map over a discrete set between infinity categories is an equivalence precisely when its restrictions to the individual fibers are equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.piEquivalenceFunctorDiscrete\", \"instIsEquivalenceLightDiagram'LightDiagramToLightFunctor\", \"CategoryTheory.ConnectedComponents.typeToCatHomEquiv\", \"CategoryTheory.instIsEquivalenceDecomposedDecomposedTo\", \"CategoryTheory.Equivalence.induced\", \"HasFibers.instIsEquivalenceFibFiberInducedFunctor\", \"SimplexCategory.SkeletalFunctor.isEquivalence\", \"CategoryTheory.Functor.asEquivalence\"], \"digest\": \"9cb3125dae9d73d6\"}",
    "date": "2026-10-17",
    "verdict": "no match: read Quasicategory/Basic.lean:33-78 (ordinary inner horn fillers), CategoryTheory/Join/Basic.lean (join of ordinary categories), and ModelCategory/Instances.lean:253-270. The Sigma.map weak-equivalence instance additionally requires each component map to be a cofibration and gives only the forward implication, so is not the stated iff for arbitrary simplicial maps. Other hits concern equivalences of sets or ordinary categories, not Joyal categorical equivalences and their componentwise detection."
+  },
+  {
+   "tool": "grep",
+   "query": "coprod.*(quasicategory|categoricalEquiv)|categoricalEquiv.*coprod|coproduct.*quasicategor",
+   "results": "{\"t\": \"2026-10-17T11:36:58Z\", \"tool\": \"grep\", \"query\": \"coprod.*(quasicategory|categoricalEquiv)|categoricalEquiv.*coprod|coproduct.*quasicategor\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary category equivalences or isomorphisms, not categorical equivalences of quasicategories. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:33-78, CategoryTheory/Join/Basic.lean:633-653 and AlgebraicTopology/ModelCategory/Instances.lean:253-270; the Sigma.map weak-equivalence instance requires component cofibrations and supplies only preservation, not the claimed iff for arbitrary maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A label preserving map of coproducts of infinity categories is an equivalence if and only if each component is an equivalence",
+   "results": "{\"t\": \"2026-10-17T11:36:59Z\", \"tool\": \"leansearch\", \"query\": \"A label preserving map of coproducts of infinity categories is an equivalence if and only if each component is an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.FormalCoproduct.isoOfComponents\", \"CategoryTheory.Limits.Sigma.map_isIso\", \"CategoryTheory.Limits.FormalCoproduct.isoOfComponents_hom_f\", \"CategoryTheory.Sum.Swap.isEquivalence\", \"CategoryTheory.Limits.coprod.mapIso\", \"CategoryTheory.Limits.isIso_coprod\", \"CategoryTheory.Limits.Sigma.reindex\", \"CategoryTheory.Limits.hasCoproduct_of_equiv_of_iso\"], \"digest\": \"0ca634c7e640f097\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary category equivalences or isomorphisms, not categorical equivalences of quasicategories. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:33-78, CategoryTheory/Join/Basic.lean:633-653 and AlgebraicTopology/ModelCategory/Instances.lean:253-270; the Sigma.map weak-equivalence instance requires component cofibrations and supplies only preservation, not the claimed iff for arbitrary maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Quasicategory",
+   "results": "{\"t\": \"2026-10-17T11:36:59Z\", \"tool\": \"loogle\", \"query\": \"SSet.Quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.Quasicategory\", \"SSet.instQuasicategoryOfKanComplex\", \"SSet.quasicategory_of_hasLiftingProperty\", \"SSet.Quasicategory.hasLiftingProperty\", \"SSet.quasicategory_iff_hasLiftingProperty\", \"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.Quasicategory.mk\"], \"digest\": \"9c4099b45a4b423f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary category equivalences or isomorphisms, not categorical equivalences of quasicategories. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:33-78, CategoryTheory/Join/Basic.lean:633-653 and AlgebraicTopology/ModelCategory/Instances.lean:253-270; the Sigma.map weak-equivalence instance requires component cofibrations and supplies only preservation, not the claimed iff for arbitrary maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A categorical equivalence between labelled disjoint unions of quasicategories is equivalent to a categorical equivalence on each summand",
+   "results": "{\"t\": \"2026-10-17T11:37:00Z\", \"tool\": \"leanfinder\", \"query\": \"A categorical equivalence between labelled disjoint unions of quasicategories is equivalent to a categorical equivalence on each summand\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Join.isEquivalenceMapPair\", \"CategoryTheory.instIsEquivalenceDecomposedDecomposedTo\", \"CategoryTheory.Join.mapPairEquiv\", \"CategoryTheory.decomposedEquiv\", \"CategoryTheory.Discrete.sumEquiv\", \"CategoryTheory.Sum.Swap.isEquivalence\", \"CategoryTheory.Limits.Sigma.whiskerEquiv\", \"CategoryTheory.Discrete.sumEquiv_functor_obj\"], \"digest\": \"7f6f57806c8fb89a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary category equivalences or isomorphisms, not categorical equivalences of quasicategories. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:33-78, CategoryTheory/Join/Basic.lean:633-653 and AlgebraicTopology/ModelCategory/Instances.lean:253-270; the Sigma.map weak-equivalence instance requires component cofibrations and supplies only preservation, not the claimed iff for arbitrary maps."
+  },
+  {
+   "tool": "grep",
+   "query": "weakEquivalence.*[Ss]igma|[Ss]igma.*weakEquivalence|WeakEquivalence.*map",
+   "results": "{\"t\": \"2026-10-17T11:38:13Z\", \"tool\": \"grep\", \"query\": \"weakEquivalence.*[Ss]igma|[Ss]igma.*weakEquivalence|WeakEquivalence.*map\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Instances.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Instances.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CategoryWithCofibrations.lean\"], \"digest\": \"de34f28f0d8ff4b5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary category equivalences or isomorphisms, not categorical equivalences of quasicategories. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:33-78, CategoryTheory/Join/Basic.lean:633-653 and AlgebraicTopology/ModelCategory/Instances.lean:253-270; the Sigma.map weak-equivalence instance requires component cofibrations and supplies only preservation, not the claimed iff for arbitrary maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor over a discrete set between infinity categories is an equivalence exactly when every fiber functor is an equivalence",
+   "results": "{\"t\": \"2026-10-17T11:38:14Z\", \"tool\": \"leanfinder\", \"query\": \"A functor over a discrete set between infinity categories is an equivalence exactly when every fiber functor is an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.piEquivalenceFunctorDiscrete\", \"instIsEquivalenceLightDiagram'LightDiagramToLightFunctor\", \"HasFibers.instIsEquivalenceFibFiberInducedFunctor\", \"SimplexCategory.SkeletalFunctor.isEquivalence\", \"CategoryTheory.instIsEquivalenceDecomposedDecomposedTo\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.instIsEquivalenceαCategoryObjLocallyDiscreteOppositeCatMkOpFiberForgetInducedFunctor\", \"CategoryTheory.piEquivalenceFunctorDiscrete_functor_obj\", \"instIsEquivalenceLightProfiniteLightDiagramLightProfiniteToLightDiagram\"], \"digest\": \"deedb29985b849cf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary category equivalences or isomorphisms, not categorical equivalences of quasicategories. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:33-78, CategoryTheory/Join/Basic.lean:633-653 and AlgebraicTopology/ModelCategory/Instances.lean:253-270; the Sigma.map weak-equivalence instance requires component cofibrations and supplies only preservation, not the claimed iff for arbitrary maps."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-categorical-pattern-model-calculus",
@@ -79,5 +188,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-quasicategory-labelled-coproduct-equivalences",
+  "worker": "stage1",
+  "summary": "Proved closure of quasicategories under degreewise labelled coproducts by connected inner horns. Used the existing exact quasi-inverse characterization to assemble component inverses and to force a global inverse to preserve labels, then restricted the actual inverse-edge and triangle witnesses. Checked empty indices and summands, disconnected summands, fixed universes, sources, attachment absence and Mathlib candidates. Statement unchanged; no new nodes.",
+  "blueprint": "Realizes the auxiliary categorical-pattern accessibility comparison in the ancestry of prop-coef-integral-exceptional-adjoint, proof paragraph 2 (finite-coefficient mapping-complex adjunction before R lim). Specifically expands the retained lem-coef-categorical-pattern-model-calculus step applying a coproduct over base edges to detect edgewise equivalences; the ancestor blueprint does not itself assert this separate helper."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q76-df2d1f92e",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q76-df2d1f92e (reviewer sub-agent of L); spot-checked: Read all required instructions, packet/report, item, cited nodes, unit/chapter route, and Cisinski/HA source passages. The five-step labelled-coproduct proof is correct, handles empty and disconnected cases, has no hidden long step, duplicate, cycle, route violation, or missing citation. No new nodes or fixes are needed; review.md records the checks."
  }
 }
