@@ -214,10 +214,14 @@ lemma map_mem_pairRight (i : Finset (A ⊕ B)) (x : pairLeft K A B i) : φ x ∈
   exact Algebra.adjoin_mono Set.subset_union_right hx
 
 /-- The morphism of diagrams `pairLeft ⟶ pairRight` induced by `φ`. -/
-@[simps]
 def pairHom : diagramOfMonotone (pairLeft K A B) ⟶ diagramOfMonotone (pairRight φ) where
   app i := CommRingCat.ofHom
     ((φ.comp (pairLeft K A B i).val).codRestrict _ (map_mem_pairRight φ i)).toRingHom
+
+@[simp]
+lemma pairHom_app_apply (i : Finset (A ⊕ B)) (x : pairLeft K A B i) :
+    ((pairHom φ).app i x : B) = φ x :=
+  rfl
 
 lemma finiteType_pairLeft (i : Finset (A ⊕ B)) : Algebra.FiniteType K (pairLeft K A B i) :=
   (Subalgebra.fg_iff_finiteType _).1 ⟨i.preimage Sum.inl Sum.inl_injective.injOn, by
@@ -313,7 +317,7 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_of_field {K : Type u} [Fiel
   have hh₀ (i : I) : h ≫ cX.π.app i = cY.π.app i ≫ hD.app i := by
     refine (hX i).hom_ext ?_ ?_
     · rw [Category.assoc, Category.assoc, h₁' i]
-      simp [cX, cY]
+      rw [pullbackConstCone_π_app_fst, pullbackConstCone_π_app_fst]
     · rw [Category.assoc, Category.assoc, h₂' i, e₁ i, reassoc_of% (e₂ i), ← ht, sq.w_assoc]
   have hpD (i : I) : QuasiCompact (pD.app i) :=
     MorphismProperty.of_isPullback (P := @QuasiCompact) (hX i) ‹_›
@@ -370,7 +374,8 @@ noncomputable def Scheme.isLimitConeSpecOfMonotone (Z : Scheme.{u}) [IsAffine Z]
   refine (isLimitOfPreserves Scheme.Spec
     (Subalgebra.isColimitCoconeOfMonotone F hcov).op).ofIsoLimit (Cone.ext Z.isoSpec.symm ?_)
   intro i
-  exact (Z.isoSpec_inv_toSpecΓ_assoc (Spec.map (CommRingCat.ofHom (F i.unop).val.toRingHom))).symm
+  exact (Z.isoSpec_inv_toSpecΓ_assoc
+    (Spec.map (CommRingCat.ofHom (F i.unop).val.toRingHom))).symm
 
 /-- The general form of blueprint `lem-kun-0f1i-normal`, for given `K`-algebra structures on
 `Γ(S')` and `Γ(T)` compatible with `s` and `t`; see
@@ -413,7 +418,7 @@ theorem Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine_of_algebra {K : T
     rw [← Spec.map_comp, ← Spec.map_comp]
     congr 2
     ext x
-    exact (hφ _).symm
+    simp [hφ]
   have (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) : LocallyOfFiniteType (w.app i) :=
     HasRingHomProperty.Spec_iff.2
       (RingHom.finiteType_algebraMap.2 (Subalgebra.finiteType_pairLeft i.unop))
