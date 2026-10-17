@@ -12,9 +12,152 @@
   "def-coef-infinity-fibrations",
   "lem-coef-cocartesian-straightening"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a universe containing $B,Z,C$ and all functor categories used below, and a further universe for $\\mathrm{Cat}_\\infty$. Define $V_C$ in degree $n$ by pairs $(\\sigma,h)$ with $\\sigma:\\Delta^n\\to B$ and $h:\\Delta^n\\times_B Z\\to C$; operators restrict both maps. Apply [lem-cbc-enhanced-relative-exponential] with $S=B$, its Cartesian total category equal to $Z$, and $\\mathscr A=C$. It states that this very simplicial object is a quasicategory, its projection $v$ is a cocartesian fibration, its fibre at $b$ is $\\operatorname{Fun}(Z_b,C)$, and an edge is cocartesian precisely when its uncurried functor inverts the Cartesian edges of the edge pullback. Thus the data have been constructed degreewise, with their fibration and edge properties supplied by an existing theorem.",
+   "uses": [
+    "lem-cbc-enhanced-relative-exponential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Definition 7.2, dual variance; HTT Corollary 3.2.2.13 specialized to a constant target"
+   }
+  },
+  {
+   "text": "For $t:T\\to B$, apply the relative-Hom bijection of [lem-cbc-enhanced-relative-exponential] to $T\\times\\Delta^r$, mapped to $B$ through $t$. A map over $B$ from this object to $V_C$ is exactly a map $(T\\times\\Delta^r)\\times_B Z\\to C$. Reordering the last domain gives $(T\\times_B Z)\\times\\Delta^r$. These are precisely the $r$-simplices of $\\operatorname{Fun}_B(T,V_C)$ and $\\operatorname{Fun}(T\\times_B Z,C)$, respectively, by [def-cbc-enhanced-diagrams-cones]. Restriction along every simplex operator commutes with this reordering. We therefore have an isomorphism of simplicial sets, stronger than the asserted equivalence. Its right side is a quasicategory by [lem-cbc-enhanced-functor-cone-calculus], which applies to any small simplicial set as domain; hence its left side is one too. Restricting to a vertex $a$ gives exactly the functor $s(a):Z_{t(a)}\\to C$. Taking $T=V_C$ and the identity over $B$ also constructs the universal evaluation $e:V_C\\times_B Z\\to C$.",
+   "uses": [
+    "lem-cbc-enhanced-relative-exponential",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Definition 7.2, relative-Hom formula with an arbitrary transformation parameter"
+   }
+  },
+  {
+   "text": "For $u:T'\\to T$ over $B$, the two ways of applying the last bijection and restriction both send $H$ to $H\\circ(u\\times_B1_Z\\times1_{\\Delta^r})$. Postcomposing by $C\\to C'$ likewise commutes with it. For a base map $a:B'\\to B$ put $Z'=B'\\times_B Z$. Over a simplex $\\sigma:\\Delta^n\\to B'$, both $a^*V_C$ and the relative exponential for $Z'\\to B'$ have exactly the data $h:\\Delta^n\\times_B Z\\to C$, with the same operators. Thus they are canonically isomorphic over $B'$. These identities commute with parameter simplices, and substitutions compose literally. This proves the claimed naturality in $T$, base change, and $C$, with all higher simplices.",
+   "uses": [
+    "lem-cbc-enhanced-relative-exponential",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Definition 7.2; agent degreewise naturality calculation"
+   }
+  },
+  {
+   "text": "The mapping-square theorem [lem-coef-infinity-cocartesian-mapping-criterion] converts horn-cocartesian edges to the intrinsic criterion assumed by the pointwise transport theorem. We compute transport as a functor, rather than only on objects. Fix $f:b\\to b'$ and put $A=\\operatorname{Fun}(Z_b,C)$. Apply [lem-coef-infinity-pointwise-cocartesian-transport] to $p^{\\mathrm{op}}$, with diagram shape $Z_{b'}^{\\mathrm{op}}$, its fibre inclusion as source diagram, and the constant transformation $f^{\\mathrm{op}}$. Reversing simplices gives a coherent Cartesian lift family $\\lambda:Z_{b'}\\times\\Delta^1\\to Z$ from $f^*$ to the fibre inclusion. Here ordinal reversal exchanges the initial and final horns in [def-coef-infinity-fibrations]. Apply the same transport theorem to $v$, with shape $A$, its fibre inclusion, and the constant transformation $f$. This gives $L:A\\times\\Delta^1\\to V_C$ with cocartesian interval edges, ending in a functor $f_!^v:A\\to\\operatorname{Fun}(Z_{b'},C)$. Pairing $L(F,t)$ with $\\lambda(z,t)$ and applying $e$ gives a map $A\\times Z_{b'}\\times\\Delta^1\\to C$. At its endpoints it evaluates $F(f^*z)$ and $(f_!^vF)(z)$. Every interval edge is an equivalence by the edge criterion of [lem-cbc-enhanced-relative-exponential]. The componentwise equivalence criterion of [lem-cbc-enhanced-functor-cone-calculus] therefore gives a natural equivalence $(-)\\circ f^*\\simeq f_!^v$, including all transformations in $F$ and $z$.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "def-coef-infinity-fibrations",
+    "lem-cbc-enhanced-relative-exponential",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Proposition 7.3, dualized; agent universal-evaluation computation of transport"
+   }
+  },
+  {
+   "text": "For $\\sigma:\\Delta^n\\to B$ put $Y=\\Delta^n\\times_B Z$. It is Cartesian by [lem-coef-relative-marked-anodyne-calculus]. Apply opposite pointwise transport, justified by [lem-coef-infinity-cocartesian-mapping-criterion], to $Y^{\\mathrm{op}}$ with shape $Y^{\\mathrm{op}}$ and the transformation from its projection to constant $0$ in $(\\Delta^n)^{\\mathrm{op}}$. It gives $R:Y\\to Y_0$ and a Cartesian transformation $\\iota R\\to1_Y$ over $0\\to i$. On $Y_i$, $R$ is transport along $0\\to i$. Put $A=\\operatorname{Fun}(Y_0,C)$. Apply [lem-coef-infinity-pointwise-cocartesian-transport] to $v_\\sigma$ with shape $A\\times\\Delta^n$, source $(F,i)\\mapsto(0,F)$ and base transformation $0\\to i$. This gives $L:A\\times\\Delta^n\\times\\Delta^1\\to V_C$ with endpoint $W(F,i)$ and cocartesian interval edges. For $i\\to j$, the square of $L$ has degenerate upper edge and cocartesian sides; its two triangles and [lem-coef-infinity-cocartesian-composition-initiality] imply that the lower edge is cocartesian. Pair $L(F,i,t)$ with the Cartesian lift $\\lambda(y,t)$ of $0\\to i$ for $y\\in Y_i$ and apply $e$. This defines a map $A\\times Y\\times\\Delta^1\\to C$ with endpoints $F(Ry)$ and $W(F,i)(y)$. Each interval edge is an equivalence by [lem-cbc-enhanced-relative-exponential], since its $V_C$ edge is cocartesian and its $Z$ edge Cartesian. Currying and [lem-cbc-enhanced-functor-cone-calculus] give a coherent natural equivalence of these two $A\\times Y$ diagrams. Restricting to $A\\times Y_i$ identifies $W(-,i)$ with precomposition by $R|_{Y_i}$ on every transformation simplex.",
+   "uses": [
+    "lem-coef-relative-marked-anodyne-calculus",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-cbc-enhanced-relative-exponential",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Proposition 7.3, simplexwise comparison; agent parameterized lift argument"
+   }
+  },
+  {
+   "text": "For $\\theta:[m]\\to[n]$, restricting the preceding construction replaces transport from $0$ by transport first from $0$ to $\\theta(0)$ and then within $\\sigma\\theta$. The successive-transport clause of [lem-coef-infinity-pointwise-cocartesian-transport] compares their composite with the restricted transport. These comparisons can be made coherently relative to their boundaries. Indeed [lem-coef-infinity-cocartesian-arrow-projection] gives a trivial Kan fibration from cocartesian lifts to base arrows with prescribed sources; every vertex is liftable here. Apply it also to the functor-category fibrations supplied by pointwise transport. For the Cartesian lifts use their opposites, prescribing targets. Induct on parameter-simplex dimension: fix the degenerate lift data by restriction; on each nondegenerate simplex its already chosen faces give the boundary upstairs, while the prescribed base transformation and source diagram give the simplex downstairs. Boundary lifting extends the family with those exact faces. It also extends comparisons between lift families by including their comparison parameter. Thus the two composite transports on a triangle have a compatible comparison, and every higher simplex extends its already fixed comparisons on all faces. Applying the single evaluation $e$ to these families gives compatible equivalences from Step 5; precomposition on the other side is the coherent internal-Hom operation of [lem-coef-cat-infinity-colimits-cartesian-closure]. Hence the entire transport diagram is $b\\mapsto\\operatorname{Fun}(Z_b,C)$ with $f\\mapsto(-)\\circ f^*$. By [lem-coef-cocartesian-straightening] this identifies the classifier of $v$, including higher simplices. Applying its contractible classification-choice clause to $p^{\\mathrm{op}}$ identifies any initially specified coherent transport with the lift model used here.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-infinity-cocartesian-arrow-projection",
+    "lem-coef-cat-infinity-colimits-cartesian-closure",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Proposition 7.3 and its dual as used in Corollary 9.9(2); agent coherent lift comparison"
+   }
+  },
+  {
+   "text": "Let $t:T\\to B$ be cocartesian and let $H:T\\times_B Z\\to C$ correspond to $s$ under Step 2. For a $t$-cocartesian edge $\\eta:a\\to a'$, restrict $s$ and $H$ along $\\eta$. The relative-exponential edge criterion says that $s(\\eta)$ is $v$-cocartesian exactly when $H$ sends to equivalences all edges of the pullback $\\Delta^1\\times_B Z$ which are Cartesian over $\\Delta^1$. Pullback stability and detection in [lem-coef-relative-marked-anodyne-calculus] identify these with the edges whose $Z$-coordinate is $p$-Cartesian. Over the nondegenerate edge of $\\Delta^1$ they are precisely the pairs $(\\eta,\\epsilon)$ in the statement. Over either constant endpoint, a Cartesian edge is an equivalence in the fibre: its opposite is cocartesian over an identity, and the mapping-square criterion in [lem-coef-cocartesian-straightening] says that precomposition by it is an equivalence for every test object; testing its source and target gives an inverse. Functors preserve the inverse-triangle witnesses, so these endpoint edges automatically map to equivalences. Therefore the nondegenerate pairs give exactly the required test. Applying it to every $\\eta$ proves both directions of cocartesian preservation. For a single edge of $V_C$, use the identity cocartesian fibration of $\\Delta^1$ over the base edge; Step 3 gives the required base-change identification.",
+   "uses": [
+    "lem-cbc-enhanced-relative-exponential",
+    "lem-coef-relative-marked-anodyne-calculus",
+    "lem-coef-cocartesian-straightening",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Proof of Proposition 9.12, the paragraph explicitly unpacking HTT Corollary 3.2.2.13"
+   }
+  },
+  {
+   "text": "For quasicategorical $T$, the strict pullback in the statement represents the infinity-categorical one. Indeed [lem-coef-cocartesian-joyal-fibration] applies to Cartesian fibrations as well and makes $p$ a Joyal fibration. By [lem-coef-joyal-quasicategory-characterizations](1) it is an isofibration of quasicategories. Apply [lem-coef-infinity-isofibration-pullback-limit] to $p$ and $t$: it identifies the degreewise square with a pullback in $\\mathrm{Cat}_\\infty$, tested on cores of all functor categories. No fibration condition on $t$ is needed.",
+   "uses": [
+    "lem-coef-cocartesian-joyal-fibration",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "HTT categorical-fibration pullback convention; agent application of the existing strict-pullback theorem"
+   }
+  },
+  {
+   "text": "If $T$ is merely a simplicial set, interpret its infinity category by a Joyal fibrant presentation. Factor $t$ as $T\\xrightarrow{j}\\widetilde T\\to B$ with $j$ a trivial cofibration and the second map a fibration, using [lem-coef-joyal-model-structure]. Since $B$ is fibrant, so is $\\widetilde T$. The opposite $p^{\\mathrm{op}}$ is cocartesian. Categorical equivalences are invariant under ordinal reversal: the degreewise identity $\\operatorname{Fun}(K^{\\mathrm{op}},D)\\cong\\operatorname{Fun}(K,D^{\\mathrm{op}})^{\\mathrm{op}}$ converts the defining $h\\operatorname{Fun}(-,D)$ tests into each other, and reversing inner horns shows $D^{\\mathrm{op}}$ quasicategorical. Apply [lem-coef-cocartesian-categorical-base-change] to $p^{\\mathrm{op}}$ and $j^{\\mathrm{op}}$, then reverse back. It follows that $T\\times_B Z\\to\\widetilde T\\times_B Z$ is a categorical equivalence. Step 8 identifies the latter with the infinity-categorical pullback of the presented objects. Thus the former is a simplicial presentation of the same pullback. The simplicial isomorphism of Step 2, and hence the asserted section equivalence, was already valid for arbitrary $T$ before this interpretation.",
+   "uses": [
+    "lem-coef-joyal-model-structure",
+    "def-coef-infinity-fibrations",
+    "lem-coef-cocartesian-categorical-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Definition 7.2; agent extension of the pullback interpretation to arbitrary simplicial parameters"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-enhanced-relative-exponential",
+  "lem-coef-cat-infinity-colimits-cartesian-closure",
+  "lem-coef-cocartesian-categorical-base-change",
+  "lem-coef-cocartesian-joyal-fibration",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-infinity-cocartesian-arrow-projection",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-relative-marked-anodyne-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1501.02161v3",
+  "place": "Definition 7.2, Proposition 7.3 and its dual in Corollary 9.9(2), and the proof of Proposition 9.12; HTT Corollary 3.2.2.13. Both sources read online 2026-10-17, not archived in literature/. Agent proof uses the existing relative exponential and parameterized transport statements instead of GHN weighted-colimit infrastructure."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +193,45 @@
    "results": "{\"t\": \"2026-10-17T04:10:33Z\", \"tool\": \"leanfinder\", \"query\": \"Grothendieck construction of a functor to infinity categories and its dual classifies parametrized functor categories with cocartesian edge criterion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Grothendieck\", \"CategoryTheory.Grothendieck.ιCompFunctorFrom\", \"CategoryTheory.Grothendieck.pre\", \"CategoryTheory.Grothendieck.grothendieckTypeToCatInverse\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.domainCartesianLift\", \"CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceFunctor\", \"CategoryTheory.Pseudofunctor.CoGrothendieck\", \"CategoryTheory.Grothendieck.compAsSmallFunctorEquivalence_functor\"], \"digest\": \"e7fce857e4b8269b\"}",
    "date": "2026-10-17",
    "verdict": "no match: The returned declarations concern ordinary CategoryTheory categories and Type-valued presheaves. Read Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean:613-615 (overEquivPresheafCostructuredArrow), FiberedCategory/Cartesian.lean:50-80 (IsCartesian, IsStronglyCartesian), Grothendieck.lean:73 and 605 (ordinary construction and functorFrom), and Limits/Types/Limits.lean:197 (limitEquivSections). None asserts the coherent quasicategory theorem; AlgebraicTopology/Quasicategory/Basic.lean:34-43 only defines Quasicategory. No one-line specialization gives the statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relative functor category out of a Cartesian fibration is a cocartesian fibration classified by precomposition and sections over T are functors from T times_B Z",
+   "results": "{\"t\": \"2026-10-17T05:23:39Z\", \"tool\": \"leanfinder\", \"query\": \"A relative functor category out of a Cartesian fibration is a cocartesian fibration classified by precomposition and sections over T are functors from T times_B Z\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.instIsCartesianCompOfIsFibered\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Functor.IsPreFibered\", \"CategoryTheory.Functor.IsPreFibered.pullbackMap.IsCartesian\", \"CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_isCartesian\"], \"digest\": \"5da980d1da5cdc15\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-105 and Fibered.lean:46-110 (ordinary Category instances), MorphismProperty/Representable.lean:469-476 (unrelated ordinary representability), AlgebraicTopology/Quasicategory/StrictBicategory.lean:49-70 (homotopy-category enrichment), and CategoryTheory/Enriched/FunctorCategory.lean:60-100 (ordinary enriched functors). None is the dependent internal Hom of a Cartesian quasicategory fibration or states the coherent classifier and relative section equivalence. Second semantic phrasing checked too."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsCartesian, CategoryTheory.Functor.IsCocartesian, CategoryTheory.Grothendieck",
+   "results": "{\"t\": \"2026-10-17T05:23:40Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsCartesian, CategoryTheory.Functor.IsCocartesian, CategoryTheory.Grothendieck\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-105 and Fibered.lean:46-110 (ordinary Category instances), MorphismProperty/Representable.lean:469-476 (unrelated ordinary representability), AlgebraicTopology/Quasicategory/StrictBicategory.lean:49-70 (homotopy-category enrichment), and CategoryTheory/Enriched/FunctorCategory.lean:60-100 (ordinary enriched functors). None is the dependent internal Hom of a Cartesian quasicategory fibration or states the coherent classifier and relative section equivalence. Second semantic phrasing checked too."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A relative functor category out of a Cartesian fibration is a cocartesian fibration with transport by precomposition and has a section equivalence with functors on the fiber product",
+   "results": "{\"t\": \"2026-10-17T05:23:40Z\", \"tool\": \"leansearch\", \"query\": \"A relative functor category out of a Cartesian fibration is a cocartesian fibration with transport by precomposition and has a section equivalence with functors on the fiber product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsFibered.of_exists_isStronglyCartesian\", \"CategoryTheory.Functor.IsFibered.toIsPreFibered\", \"CategoryTheory.instIsCartesianCompOfIsFibered\", \"HasFibers.instIsEquivalenceFibFiberInducedFunctor\", \"HasFibers.noConfusion\", \"HasFibers.noConfusionType\", \"CategoryTheory.Functor.IsFibered\", \"HasFibers.mk\"], \"digest\": \"ce9f223e6b3a15e5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-105 and Fibered.lean:46-110 (ordinary Category instances), MorphismProperty/Representable.lean:469-476 (unrelated ordinary representability), AlgebraicTopology/Quasicategory/StrictBicategory.lean:49-70 (homotopy-category enrichment), and CategoryTheory/Enriched/FunctorCategory.lean:60-100 (ordinary enriched functors). None is the dependent internal Hom of a Cartesian quasicategory fibration or states the coherent classifier and relative section equivalence. Second semantic phrasing checked too."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dependent internal Hom of a Cartesian family of quasicategories into C has covariant precomposition transport and an enriched section adjunction",
+   "results": "{\"t\": \"2026-10-17T05:41:15Z\", \"tool\": \"leanfinder\", \"query\": \"The dependent internal Hom of a Cartesian family of quasicategories into C has covariant precomposition transport and an enriched section adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.Enriched.FunctorCategory.precompEnrichedHom'\", \"CategoryTheory.Enriched.FunctorCategory.precompEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.HasEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.HasFunctorEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.enrichedHomπ\", \"CategoryTheory.Enriched.FunctorCategory.functorEnrichedHom\", \"CategoryTheory.Enriched.FunctorCategory.instHasEnrichedHomUnderCompMapForget\"], \"digest\": \"9920dd3786e5bc02\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-105 and Fibered.lean:46-110 (ordinary Category instances), MorphismProperty/Representable.lean:469-476 (unrelated ordinary representability), AlgebraicTopology/Quasicategory/StrictBicategory.lean:49-70 (homotopy-category enrichment), and CategoryTheory/Enriched/FunctorCategory.lean:60-100 (ordinary enriched functors). None is the dependent internal Hom of a Cartesian quasicategory fibration or states the coherent classifier and relative section equivalence. Second semantic phrasing checked too."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dependent exponential of simplicial sets over a base: a cartesian fibration induces a covariant family of quasicategory-valued internal homs",
+   "results": "{\"t\": \"2026-10-17T05:52:38Z\", \"tool\": \"leanfinder\", \"query\": \"Dependent exponential of simplicial sets over a base: a cartesian fibration induces a covariant family of quasicategory-valued internal homs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory.sHom\", \"SSet.instMonoidalClosed\", \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"SSet.QCat.bicategory\", \"SSet.instCartesianMonoidalCategory\", \"SSet.Augmented\", \"SSet.QCat\", \"SSet.Truncated.instMonoidalClosed\"], \"digest\": \"b0f7560a881a4e63\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader read SimplicialCategory/Basic.lean:58-70 (sHom and sHomFunctor), SimplicialSet/Monoidal.lean (global cartesian closed structure), and Quasicategory/StrictBicategory.lean:49-70 (QCat enrichment/bicategory). These are global enriched internal Homs, not relative exponentials over a Cartesian fibration, and do not state the classifier or its relative section comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-ghn-ind-presheaf-cartesian-realization",
@@ -81,5 +259,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-relative-functor-cocartesian-classifier",
+  "worker": "stage1",
+  "summary": "Second-read nine-step split using the existing relative exponential, degreewise currying and naturality, explicit parameterized evaluation to compute precomposition transport, relative-boundary lift comparisons for all higher coherences, the paired-edge criterion, and the pullback interpretation for quasicategorical and arbitrary simplicial T. No new nodes or Mathlib leaves. Statement retained; no Lean or compilation.",
+  "blueprint": "Inherited ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, the coherent finite-coefficient mapping-complex adjunction before derived inverse limit, through lem-coef-ghn-ind-presheaf-cartesian-realization. Main-20261015 has the same displayed mapping-complex calculation under sk-thm-sf-package. Steps 1-3 realize the relative-Hom prerequisite, 4-6 its coherent precomposition classifier, 7 the paired-edge criterion, and 8-9 its pullback interpretation. Historical ancestry and maintainer-owned unit preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-relative-exponential",
+    "why": "Generic relative-exponential construction and edge criterion (HTT 3.2.2.13), with no unit-specific replacement."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic quasicategory closure and componentwise equivalence test for coherent functor categories, needed for evaluation comparisons."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-relative-exponential",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NS-a1b77e698",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-a1b77e698 (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps and the full statements of all 16 cited nodes. The delivery has no new nodes. The statement is retained. It is HTT Cor. 3.2.2.13 with constant target C, which is the dual variance of GHN Def. 7.2/Prop. 7.3 as used in Cor. 9.9(2). Neither source is archived in literature/; the report records WANTED for both and proof_origin.by=agent. Variance checked: f:b->b' gives f^*:Z_{b'}->Z_b, so (-)∘f^* is covariant, matching cocartesian V_C. Small cases checked: Z empty, p=id, C empty, T empty, degenerate edges. Step checks: Steps 1-2 are exactly the construction and relative-Hom bijection of lem-cbc-enhanced-relative-exponential at K=T×Δ^r; functor-cone calculus allows any simplicial domain T, so the sections form a simplicial isomorphism. Step 3 is literal degreewise naturality, correctly marked elementary. Step 4: pointwise transport applies to p^op and to v once the mapping criterion converts the horn conditions; the universal evaluation of paired lifts gives F(f^*z)->(f_!F)(z), inverted by the edge criterion. Step 5: 0 is final in (Δ^n)^op, and composition-initiality 2-of-3 cancellation is used correctly. Step 6: the trivial Kan fibration of arrow-projection makes the lift choices coherent; straightening's transport-image and contractible-choice clauses identify the classifier. This step is the least detailed but adequate. Step 7: relative marked-anodyne pullback detection reduces the criterion to the pairs (η,ε); Cartesian edges over identities are equivalences. Step 8: Cartesian implies Joyal fibration implies isofibration, then the isofibration pullback-limit node applies with no hypothesis on t. Step 9: Joyal factorization plus categorical base change applied to p^op. proof_deps equals the union of the uses; all dependencies exist and none is merged; no cycle. A DAG rg found no duplicate: relative-exponential is a strict sub-statement, and the item is not a restated clause of its parent lem-coef-ghn-ind-presheaf-cartesian-realization, which uses it at C=S. Accepted tool_uses: lem-cbc-enhanced-relative-exponential and lem-cbc-enhanced-functor-cone-calculus, both generic quasicategory tools with no replacement in unit sk-prop-sf-biduality-general. No SGA is cited. No fixes were made."
  }
 }

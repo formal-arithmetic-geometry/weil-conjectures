@@ -30,20 +30,190 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-mapping-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\iota:A\\hookrightarrow J$ denote the given full inclusion. Fullness identifies $\\operatorname{Map}_A(a,a')$ with $\\operatorname{Map}_J(\\iota a,\\iota a')$. The supplied edge $u_j:j\\to\\iota(a_j)$ therefore satisfies exactly the universal-arrow hypothesis for the functor $\\iota$: for every $a\\in A$, precomposition with $u_j$ is the displayed equivalence. Applying [lem-coef-infinity-local-adjoint-criterion] gives a coherent left adjoint $L:J\\to A$, a unit $\\eta:\\mathrm{id}_J\\to\\iota L$, a counit $\\epsilon:L\\iota\\to\\mathrm{id}_A$, and the adjunction triangles, together with the natural mapping-space equivalences induced by $\\eta$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-local-adjoint-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02FV",
+    "place": "Proposition 6.2.6.1, local universal-arrow criterion; fullness is the definition of the stated full subcategory"
+   }
+  },
+  {
+   "text": "Compare any two universal arrows $v:j\\to\\iota(b)$ and $w:j\\to\\iota(c)$. Their mapping-space equivalences give edges $t:b\\to c$ and $s:c\\to b$ with $\\iota(t)v\\simeq w$ and $\\iota(s)w\\simeq v$. Associativity gives $\\iota(st)v\\simeq v$ and $\\iota(ts)w\\simeq w$. Injectivity on components of the respective universal mapping equivalences gives $[s][t]=1_b$ and $[t][s]=1_c$. By [lem-coef-infinity-mapping-composition], $t,s$ are equivalences. Applying this to $v=\\eta_j$, $w=u_j$ shows $\\Gamma(u_j)\\simeq\\Gamma(\\iota t)\\Gamma(\\eta_j)$ with $t$ an equivalence. Functors preserve inverse-triangle witnesses, so $\\Gamma(\\eta_j)$ is an equivalence. Also, for $j=\\iota(a)$, the identity arrow to $\\iota(a)$ is universal by fullness. Comparing it with $\\eta_{\\iota(a)}$ shows that this unit component is an equivalence. The triangle $\\iota(\\epsilon_a)\\eta_{\\iota(a)}\\simeq1$ makes $\\iota(\\epsilon_a)$ its inverse. Fullness puts that inverse and its two witnessing triangles in $A$, so $\\epsilon_a$ is an equivalence. These comparisons need only component bijections, not functorial choices of $t,s$.",
+   "uses": [
+    "lem-coef-infinity-local-adjoint-criterion",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02FV",
+    "place": "Universal-arrow comparison written by the second reader from the mapping equivalences of 02F1 and the composition calculus of 01PF; the counit uses the first adjunction triangle."
+   }
+  },
+  {
+   "text": "Put $\\alpha=\\Gamma\\eta:\\Gamma\\to\\Gamma\\iota L$. By the componentwise criterion of [lem-cbc-enhanced-functor-cone-calculus], it has a coherent inverse $\\beta$ with inverse-triangle witnesses. Let $P_A=(\\Delta_A\\downarrow\\Gamma\\iota)$ and let $p:P_A\\to\\mathcal C$ be the apex projection. The pullback definition supplies a universal cone family on $A\\times P_A\\times\\Delta^1$, from $p$ to $\\Gamma\\iota$. Whisker this family with $L$ and append $\\beta$ (constant in $P_A$). These are a map $(J\\times P_A)\\times\\Lambda_1^2\\to\\mathcal C$. The inner horn inclusion is inner anodyne by its defining lifting property. Apply [lem-coef-inner-anodyne-pushout-product] with $\\varnothing\\hookrightarrow J\\times P_A$ and fill against $\\mathcal C\\to\\Delta^0$. The long edge defines a single simplicial family from $p$ to $\\Gamma$, hence, by the explicit cone pullback, a functor $E:P_A\\to(\\Delta_J\\downarrow\\Gamma)$ over $\\mathcal C$. On objects its formula is $E(\\mu)=\\beta\\circ(\\mu L)$. Its values on all simplices are restrictions of this one filler; no independently chosen pointwise composites are asserted to be functorial. Denote the restriction functor by $R$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-inner-anodyne-pushout-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean",
+    "place": "Lines 103-109, innerAnodyneExtensions_pushoutObjObjι', applied to the inner horn and the empty-to-parameter monomorphism; agent construction of the inverse cone functor."
+   }
+  },
+  {
+   "text": "For a cone $\\lambda:\\Delta_Jx\\to\\Gamma$, naturality along $\\eta$ gives a square with equation $\\alpha\\lambda\\simeq(\\lambda\\iota)L$ in $\\operatorname{Fun}(J,\\mathcal C)$. Pasting $\\beta$ gives\n$$ER(\\lambda)=\\beta\\circ(\\lambda\\iota)L\\simeq\\beta\\alpha\\lambda\\simeq\\lambda.$$\nTo retain the cone compatibilities, perform this pasting on the universal $J$-cone family, with its entire cone category as parameter. The square is the restriction of that evaluation family along $\\eta$; the second homotopy is the chosen inverse triangle of $\\beta,\\alpha$. The composition and associativity fillings are supplied by [lem-cbc-simplicial-composition-spine] and [lem-coef-inner-anodyne-pushout-product]. Cancellation can be filled relative to the apex and the fixed $\\Gamma$ endpoint by [lem-cbc-invertible-prism-extension]: the short edges being cancelled are $\\alpha$ or $\\beta$ at the diagram endpoint and identities at the apex, all equivalences. Thus the pasted homotopy is a coherent cone transformation $ER\\simeq\\mathrm{id}$ over the identity of the apex. Reversing the inverse triangles supplies its inverse. Using the full parameter family makes these transformations natural on morphisms and higher simplices, not only on cone objects.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-simplicial-composition-spine",
+    "lem-coef-inner-anodyne-pushout-product",
+    "lem-cbc-invertible-prism-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01DP",
+    "place": "Lemma 4.4.4.8 for cancellation prisms relative to their fixed faces; 01PF for coherent pasting. Agent calculation of E R from naturality along the unit."
+   }
+  },
+  {
+   "text": "For $\\mu:\\Delta_Ax\\to\\Gamma\\iota$, naturality along $\\epsilon:L\\iota\\to\\mathrm{id}_A$ gives\n$$\\mu\\simeq(\\Gamma\\iota\\epsilon)\\circ(\\mu L\\iota).$$\nThe first adjunction triangle gives $(\\Gamma\\iota\\epsilon)\\circ(\\alpha\\iota)\\simeq1_{\\Gamma\\iota}$. Since $\\alpha\\iota$ is an equivalence with inverse $\\beta\\iota$, paste its inverse triangle on the right to get $\\Gamma\\iota\\epsilon\\simeq\\beta\\iota$. Consequently\n$$RE(\\mu)=(\\beta\\iota)\\circ(\\mu L\\iota)\\simeq\\mu.$$\nUse the universal $A$-cone family with parameter $P_A$ in this calculation. The naturality square comes from its evaluation on $\\epsilon$, and the comparison of the two inverse edges comes from the specified adjunction triangle and the inverse triangle of $\\alpha\\iota$. The coherent composition, inner-prism and invertible-prism fillings cited here give the pasting relative to the apex and the fixed $\\Gamma\\iota$ endpoint. All short edges cancelled are equivalences by Step 2. Reversing these inverse homotopies gives the inverse cone transformation. This yields $RE\\simeq\\mathrm{id}$ as a coherent natural equivalence of cone functors. Together with Step 4, $E$ is a quasi-inverse to restriction.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-local-adjoint-criterion",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-simplicial-composition-spine",
+    "lem-coef-inner-anodyne-pushout-product",
+    "lem-cbc-invertible-prism-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01DP",
+    "place": "Lemma 4.4.4.8 for the relative inverse/cancellation prisms; 02F1 and the adjunction triangle for the displayed comparison. Agent calculation of R E from naturality along the counit."
+   }
+  },
+  {
+   "text": "By [lem-cbc-enhanced-functor-cone-calculus], an equivalence of quasicategories induces equivalences on all mapping spaces. Hence the cone equivalence just constructed preserves and reflects terminal objects: essential surjectivity tests mapping spaces from every source, and a space equivalent to a contractible space is contractible. By [def-cbc-enhanced-diagrams-cones], terminal cones are exactly limiting cones. Thus every cone is limiting if and only if its restriction is, and a limiting cone exists on one side if and only if one exists on the other. If $J$ is empty, its full subcategory $A$ is empty, and both cone categories are canonically $\\mathcal C$; restriction is the identity and a limit means a terminal object of $\\mathcal C$, without assuming one exists. If $A$ is empty, the existence of $a_j$ in the hypotheses forces $J$ empty as well.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, cone-restriction argument after the reflective replacement; explicit whiskering construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-local-adjoint-criterion",
+  "lem-coef-infinity-mapping-composition",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-inner-anodyne-pushout-product",
+  "lem-cbc-simplicial-composition-spine",
+  "lem-cbc-invertible-prism-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Agent cone-restriction argument: universal-arrow criterion; comparison of reflection arrows; inverse on the universal cone family with inner horn filling; the two quasi-inverse identities proved separately from unit naturality and counit naturality."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
-   "query": "grep -rn -E 'initial_of_adjunction|final_of_adjunction|initial_of_isLeftAdjoint' and grep -rln -i 'limit|adjoint|initial' over Mathlib/CategoryTheory/Limits/Final.lean and Mathlib/AlgebraicTopology/Quasicategory/",
-   "results": "Mathlib/CategoryTheory/Limits/Final.lean:130 final_of_adjunction, :144 initial_of_adjunction, :157-160 instances, :709-791 limits along initial functors (all ordinary categories, Hom sets); Quasicategory/Basic.lean and InnerFibration.lean mention none of limits, adjoints or cones of quasicategories",
+   "query": "initial_of_adjunction|conesEquiv_functor|reflective|Quasicategory|cone",
+   "results": "25 hits, led by Mathlib/CategoryTheory/CofilteredSystem.lean and Mathlib/CategoryTheory/Adjunction/FullyFaithfulLimits.lean; no coherent quasicategory cone theorem",
    "date": "2026-10-17",
-   "verdict": "no match: ordinary-category cofinality only; no coherent cone categories of quasicategories. LeanSearch and LeanFinder were not available on this review machine; the queue search should add them."
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Limits of a quasicategory valued diagram inverting a pointwise reflection are computed on the reflective full subcategory",
+   "results": "CategoryTheory.hasLimit_of_reflective; CategoryTheory.hasLimitsOfShape_of_reflective; CategoryTheory.Limits.isLimitOfReflects; ordinary-category results only",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Initial.conesEquiv_functor, CategoryTheory.Limits.IsLimit, Quasicategory",
+   "results": "0 hits; unknown identifier Quasicategory",
+   "date": "2026-10-17",
+   "verdict": "no match: invalid query, followed by corrected Loogle search"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A full subcategory inclusion of a quasicategory with a universal reflection edge at every object computes limits of diagrams that invert those edges",
+   "results": "SSet.Truncated.hasLimits; SSet.hasLimits; CategoryTheory.Limits.createsLimitFullSubcategoryInclusion; strict Segal right Kan declarations; no target theorem",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "hasLimit_of_reflective|conesEquiv_functor|initial_of_adjunction [CategoryTheory/Monad]",
+   "results": "Mathlib/CategoryTheory/Monad/Limits.lean:337,345,380; ordinary reflective-category limit theorem only",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reflective full subcategory computes limits of any diagram whose reflection units are sent to isomorphisms",
+   "results": "CategoryTheory.Limits.reflectsLimit_of_reflectsIsomorphisms; reflectsLimits_of_reflectsIsomorphisms; hasLimit_of_reflective; ordinary-category results only",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.hasLimit_of_reflective, CategoryTheory.Limits.createsLimitFullSubcategoryInclusion",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a diagram along an initial or reflective subcategory preserves and reflects limiting coherent cones when all reflection morphisms map to equivalences",
+   "results": "CategoryTheory.Functor.Initial.reflectsLimitsOfShape_of_initial; CategoryTheory.Limits.isLimitOfReflects; createsLimitOfReflectsIso; ordinary-category results only",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "initial_of_adjunction|conesEquiv|cone.*[Rr]estrict|[Rr]estrict.*cone",
+   "results": "{\"t\": \"2026-10-17T05:51:46Z\", \"tool\": \"grep\", \"query\": \"initial_of_adjunction|conesEquiv|cone.*[Rr]estrict|[Rr]estrict.*cone\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Final.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/Over/Products.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/Over/Products.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/Over/Products.lean\"], \"digest\": \"56c2da4307c28b43\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent reading of Final.lean:144,645-650, Adjunction/Limits.lean:170-173,297-346 and Monad/Limits.lean:337-346. These require ordinary Category instances and set-valued Hom or cone categories, not arbitrary quasicategories and coherent cone families."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction to a fully faithful inclusion gives equivalent categories of cones when the diagram inverts the unit",
+   "results": "{\"t\": \"2026-10-17T05:51:47Z\", \"tool\": \"leanfinder\", \"query\": \"An adjunction to a fully faithful inclusion gives equivalent categories of cones when the diagram inverts the unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.conesIso\", \"CategoryTheory.Adjunction.conesIsoComponentInv\", \"CategoryTheory.Adjunction.conesIsoComponentHom\", \"CategoryTheory.Functor.mapConeInv\", \"CategoryTheory.Adjunction.functorialityLeftAdjoint\", \"CategoryTheory.WithTerminal.coneEquiv\", \"CategoryTheory.Functor.mapConeMapConeInv\", \"CategoryTheory.Functor.Initial.conesEquiv\"], \"digest\": \"89d1029d06e81805\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent reading of Final.lean:144,645-650, Adjunction/Limits.lean:170-173,297-346 and Monad/Limits.lean:337-346. These require ordinary Category instances and set-valued Hom or cone categories, not arbitrary quasicategories and coherent cone families."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Initial",
+   "results": "{\"t\": \"2026-10-17T05:51:55Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.Initial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Initial\", \"CategoryTheory.Functor.initial_fromPUnit_of_isInitial\", \"CategoryTheory.Functor.Initial.lift\", \"CategoryTheory.Functor.initial_of_isLeftAdjoint\", \"CategoryTheory.IsCofiltered.of_initial\", \"CategoryTheory.IsCofilteredOrEmpty.of_initial\", \"CategoryTheory.Functor.Initial.instNonemptyCostructuredArrow\", \"CategoryTheory.Functor.initial_of_adjunction\"], \"digest\": \"6e2cc54f9de89bf8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent reading of Final.lean:144,645-650, Adjunction/Limits.lean:170-173,297-346 and Monad/Limits.lean:337-346. These require ordinary Category instances and set-valued Hom or cone categories, not arbitrary quasicategories and coherent cone families."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Precomposition by a left adjoint gives an equivalence on cone categories, and a full reflective inclusion does so for diagrams sending its unit to isomorphisms",
+   "results": "{\"t\": \"2026-10-17T05:53:14Z\", \"tool\": \"leansearch\", \"query\": \"Precomposition by a left adjoint gives an equivalence on cone categories, and a full reflective inclusion does so for diagrams sending its unit to isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CostructuredArrow.preEquivalence\", \"CategoryTheory.Functor.instIsEquivalenceLeftExtensionCompPrecomp\", \"CategoryTheory.Functor.LeftExtension.isUniversalPrecomp₂Equiv\", \"CategoryTheory.Functor.LeftExtension.isUniversalPrecompEquiv\", \"CategoryTheory.Comma.isEquivalence_preLeft\", \"CategoryTheory.Limits.Cocones.precomposeEquivalence\", \"CategoryTheory.Limits.Cones.functorialityEquivalence\", \"CategoryTheory.Adjunction.conesIso\"], \"digest\": \"5ffb9460d0bcf984\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent reading of Final.lean:144,645-650, Adjunction/Limits.lean:170-173,297-346 and Monad/Limits.lean:337-346. These require ordinary Category instances and set-valued Hom or cone categories, not arbitrary quasicategories and coherent cone families."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,5 +230,39 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-reflection-inverting-limit-restriction",
+  "worker": "stage1",
+  "summary": "Six-step cone-retraction proof, independently read: universal-arrow comparison on components, coherent inverse on the universal cone family, separate unit and counit calculations for the two composites, and transfer of terminality. Second reading fills the inverse-map check and higher-coherence justification using existing horn/prism calculus. No statement change or new node.",
+  "blueprint": "Realizes the agent statement for the cone-retraction argument used in lem-coef-generalized-cartesian-product-cones Steps 4 and 8, as located in prop-coef-integral-exceptional-adjoint.proof.md.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "The proof uses its componentwise criterion for equivalences of coherent transformations and its mapping-space characterization of terminal coherent cones; this generic cone calculus is outside the item's unit."
+   },
+   {
+    "node": "lem-cbc-simplicial-composition-spine",
+    "why": "Coherent composition and associativity on universal cone families are generic quasicategory tools, not an alternative route for the coefficient unit."
+   },
+   {
+    "node": "lem-cbc-invertible-prism-extension",
+    "why": "Relative cancellation pastings in the two inverse cone transformations use its invertible-prism extension with equivalence short edges; generic simplicial tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-composition-spine",
+  "lem-cbc-invertible-prism-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N8-82d23b2de",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-82d23b2de (reviewer sub-agent of L); spot-checked: I read the item, all six steps, the full statements of all 7 cited nodes, the unit sk-prop-sf-biduality-general, the callers in parent lem-coef-generalized-cartesian-product-cones Steps 4 and 8, and paragraph 2 of the blueprint ancestor prop-coef-integral-exceptional-adjoint.proof.md (main-20261015). The item is an agent lemma, correctly marked by=agent; it is not a target node and cites no SGA. The statement is true: L is a left adjoint, hence initial, and Gamma ≃ Gamma iota L. The inversion hypothesis is needed, as the counterexample J=C={0<1}, A={1} shows. I tested a terminal-object J, a span J (where the hypothesis correctly fails), empty J and empty A. Step 1 matches the local-adjoint criterion exactly through fullness. Step 2's pi0 comparison is valid: Gamma eta_j and epsilon_a are equivalences. Step 3's filler is a valid pushout-product of Lambda^2_1 with the empty set inside J×P_A against C→Δ^0, and it lands in the strict cone pullback. In Steps 4 and 5 I checked both naturality squares (η: αλ≃(λι)L; ε: Γιε∘μLι≃μ) and the identity Γιε≃βι from the first triangle; the coherence is handled on universal families with inner-horn fillings. Step 6 transfers terminality correctly. There are no new nodes, and my rg search found no duplicate: the ordinary-category analogues and the nerve-only right-adjoint-reindexing node do not cover a coherent comma quasicategory. I accept the tool_uses of lem-cbc-enhanced-functor-cone-calculus, lem-cbc-simplicial-composition-spine and lem-cbc-invertible-prism-extension; they are generic sk-prop-sf-cbc tools already accepted on sibling nodes of this unit. No fixes were made."
  }
 }

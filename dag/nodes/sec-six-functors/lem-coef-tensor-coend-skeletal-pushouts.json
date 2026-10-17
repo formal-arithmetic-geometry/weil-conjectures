@@ -12,9 +12,192 @@
   "def-coef-simplicial-tensor-cotensor",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use composition order $vu=v\\circ u$. The tensor representing isomorphism on vertices is $\\mathcal C(A\\otimes K,T)\\cong\\operatorname{Hom}_{\\mathrm{sSet}}(K,\\underline{\\operatorname{Map}}(A,T))$. For $u:K\\to K'$, precomposition on the right defines $1\\otimes u:A\\otimes K\\to A\\otimes K'$. Identity, composition and commutation with $f\\otimes1$ follow by applying this bijection: both sides are the same precomposition map. Thus the two variables give a bifunctor. This uses precisely the representing isomorphism and its naturality, without any model-category axiom.",
+   "uses": [
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Formula (3.2), printed p.9; skeletal pushout in the proof of Theorem 3.5, printed p.10; tensor adjunctions in Section 19.1, printed p.90. The categorical universal-property calculation below is agent-written; the source leaves the pushout verification unstated."
+   }
+  },
+  {
+   "text": "The tensor preserves the small colimits needed in each variable, directly by their universal properties. For a small diagram $(A_i)$, the tensor/cotensor adjunction identifies maps $(\\operatorname{colim}_i A_i)\\otimes K\\to T$ with maps $\\operatorname{colim}_i A_i\\to T^K$, hence with compatible families $A_i\\to T^K$, hence with compatible families $A_i\\otimes K\\to T$. For a small diagram $(K_i)$ in simplicial sets, maps $A\\otimes\\operatorname{colim}_i K_i\\to T$ are compatible families $K_i\\to\\underline{\\operatorname{Map}}(A,T)$, hence compatible families $A\\otimes K_i\\to T$. These bijections preserve all cocone maps, which proves the required colimit properties. They also show that tensoring an initial object in either variable is initial.",
+   "uses": [
+    "def-coef-simplicial-tensor-cotensor",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Formula (3.2), printed p.9; skeletal pushout in the proof of Theorem 3.5, printed p.10; tensor adjunctions in Section 19.1, printed p.90. The categorical universal-property calculation below is agent-written; the source leaves the pushout verification unstated."
+   }
+  },
+  {
+   "text": "Here is the boundary gluing calculation used below, written from its definition as a union. An $m$-simplex of $\\partial\\Delta^n$ is a non-surjective monotone map $\\phi:[m]\\to[n]$. Its image, listed increasingly, gives a proper injection $\\delta:[a]\\hookrightarrow[n]$ and a surjection $p:[m]\\twoheadrightarrow[a]$ with $\\phi=\\delta p$. A family of simplicial maps $h_\\delta:\\Delta^a\\to Z$ compatible under inclusions of proper faces determines the value $h_\\delta(p)$ on $\\phi$. If another face contains the image of $\\phi$, the image face includes into it, so compatibility gives the same value. For $\\beta:[l]\\to[m]$, the image of $\\phi\\beta$ is a subface of the image of $\\phi$; the same compatibility gives $h(\\phi\\beta)=Z(\\beta)h(\\phi)$. Thus the formula defines a unique simplicial map from the boundary. Taking $Z=\\underline{\\operatorname{Map}}(A,T)$ and using the tensor bijection, maps $A\\otimes\\partial\\Delta^n\\to T$ are exactly compatible maps $A\\otimes\\Delta^a\\to T$ for the proper injective faces. For $n=0$ the family is empty, as is the boundary.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Formula (3.2), printed p.9; skeletal pushout in the proof of Theorem 3.5, printed p.10; tensor adjunctions in Section 19.1, printed p.90. The categorical universal-property calculation below is agent-written; the source leaves the pushout verification unstated."
+   }
+  },
+  {
+   "text": "Write $q_a^N:X_a\\otimes\\Delta^a\\to R_N(X)$ for the coequalizer summand maps, and abbreviate $q_a=q_a^{n-1}$ when $a<n$. The coequalizer universal property says that maps $R_N(X)\\to T$ are precisely families $t_a:X_a\\otimes\\Delta^a\\to T$, $a\\leq N$, satisfying\n$$t_a(X(\\alpha)\\otimes1)=t_b(1\\otimes\\Delta^\\alpha)\\quad(\\alpha:[a]\\to[b],\\ a,b\\leq N).$$\nThis is the equality on each summand of the two parallel arrows, so no extra coend theorem is invoked. The maps $q_a^{N+1}$ with $a\\leq N$ satisfy these equations and therefore induce the truncation map $R_N\\to R_{N+1}$. All index categories are small: finite ordinal objects and their finite hom sets, the countable simplex category, and the natural-number order.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Formula (3.2), printed p.9; skeletal pushout in the proof of Theorem 3.5, printed p.10; tensor adjunctions in Section 19.1, printed p.90. The categorical universal-property calculation below is agent-written; the source leaves the pushout verification unstated."
+   }
+  },
+  {
+   "text": "For each proper surjection $\\theta:[n]\\twoheadrightarrow[a]$ put $D_\\theta=q_a(1\\otimes\\Delta^\\theta):X_a\\otimes\\Delta^n\\to R_{n-1}$. If $\\theta=\\rho\\theta'$ with $\\rho:[a']\\twoheadrightarrow[a]$, the relation of Step 4 for $\\rho$ gives\n$$D_\\theta=q_a(1\\otimes\\Delta^\\rho)(1\\otimes\\Delta^{\\theta'})=q_{a'}(X(\\rho)\\otimes1)(1\\otimes\\Delta^{\\theta'})=D_{\\theta'}(X(\\rho)\\otimes1).$$\nBoth $a,a'<n$, as required for that relation. These are exactly the arrows of the stated latching diagram, with its specified contravariant direction. The colimit property of $L_nX$ and Step 2 give the unique map $D:L_nX\\otimes\\Delta^n\\to R_{n-1}$ with these components.",
+   "uses": [
+    "def-weil-pbc-simplicial-object",
+    "def-coef-simplicial-tensor-cotensor",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Formula (3.2), printed p.9; skeletal pushout in the proof of Theorem 3.5, printed p.10; tensor adjunctions in Section 19.1, printed p.90. The categorical universal-property calculation below is agent-written; the source leaves the pushout verification unstated."
+   }
+  },
+  {
+   "text": "For every proper injection $\\delta:[a]\\hookrightarrow[n]$ put $E_\\delta=q_a(X(\\delta)\\otimes1):X_n\\otimes\\Delta^a\\to R_{n-1}$. If $\\delta=\\delta'\\gamma$ with $\\gamma:[a]\\hookrightarrow[b]$ and $a,b<n$, contravariant functoriality and the lower-degree relation for $\\gamma$ give\n$$E_\\delta=q_a(X(\\gamma)\\otimes1)(X(\\delta')\\otimes1)=q_b(1\\otimes\\Delta^\\gamma)(X(\\delta')\\otimes1)=E_{\\delta'}(1\\otimes\\Delta^\\gamma).$$\nStep 3 therefore glues these maps uniquely to $E:X_n\\otimes\\partial\\Delta^n\\to R_{n-1}$. This also checks all face intersections, since their nonempty image faces are objects of this same proper-face family.",
+   "uses": [
+    "def-weil-pbc-simplicial-object",
+    "def-weil-pbc-simplicial-set",
+    "def-coef-simplicial-tensor-cotensor",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Formula (3.2), printed p.9; skeletal pushout in the proof of Theorem 3.5, printed p.10; tensor adjunctions in Section 19.1, printed p.90. The categorical universal-property calculation below is agent-written; the source leaves the pushout verification unstated."
+   }
+  },
+  {
+   "text": "The maps $D$ and $E$ agree on $L_nX\\otimes\\partial\\Delta^n$. By the latching colimit property and Step 3 it suffices to check a surjection $\\theta:[n]\\twoheadrightarrow[a]$ and a proper face $\\delta:[b]\\hookrightarrow[n]$. On $X_a\\otimes\\Delta^b$ their composites are respectively\n$$q_a(1\\otimes\\Delta^{\\theta\\delta})\\quad\\text{and}\\quad q_b(X(\\delta)X(\\theta)\\otimes1)=q_b(X(\\theta\\delta)\\otimes1).$$\nThey agree by Step 4 for $\\theta\\delta:[b]\\to[a]$, whose two degrees are strictly below $n$. This includes the case where $\\theta\\delta$ is neither injective nor surjective. Hence the pushout defining $B_n$ supplies precisely the upper arrow described in the statement.",
+   "uses": [
+    "def-weil-pbc-simplicial-object",
+    "def-coef-simplicial-tensor-cotensor",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Formula (3.2), printed p.9; skeletal pushout in the proof of Theorem 3.5, printed p.10; tensor adjunctions in Section 19.1, printed p.90. The categorical universal-property calculation below is agent-written; the source leaves the pushout verification unstated."
+   }
+  },
+  {
+   "text": "The canonical map $B_n\\to X_n\\otimes\\Delta^n$ uses $\\lambda_n\\otimes1$ on the latching summand and the boundary inclusion on the face summand; they agree on their common source by bifunctoriality. The proposed square commutes. On $X_a\\otimes\\Delta^n$ in the latching summand its equality is the degree-$n$ coequalizer relation for $\\theta:[n]\\twoheadrightarrow[a]$; on $X_n\\otimes\\Delta^a$ in the boundary summand it is the relation for $\\delta:[a]\\hookrightarrow[n]$. Steps 2 and 3 and the defining pushout show that these tests determine the maps on $B_n$. Thus the displayed four edges form a commutative square.",
+   "uses": [
+    "def-coef-simplicial-tensor-cotensor",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Formula (3.2), printed p.9; skeletal pushout in the proof of Theorem 3.5, printed p.10; tensor adjunctions in Section 19.1, printed p.90. The categorical universal-property calculation below is agent-written; the source leaves the pushout verification unstated."
+   }
+  },
+  {
+   "text": "Fix any target object $T$, a map $f:R_{n-1}\\to T$, and $g:X_n\\otimes\\Delta^n\\to T$. Put $t_a=fq_a$ for $a<n$ and $t_n=g$. By the pushout definition of $B_n$, its latching colimit, and Step 3, the equality of $f$ and $g$ after restriction to $B_n$ is equivalent to exactly the equations\n$$t_n(X(\\theta)\\otimes1)=t_a(1\\otimes\\Delta^\\theta),\\qquad t_n(1\\otimes\\Delta^\\delta)=t_a(X(\\delta)\\otimes1)$$\nfor every proper surjection $\\theta:[n]\\twoheadrightarrow[a]$ and proper injection $\\delta:[a]\\hookrightarrow[n]$. Necessity follows by restriction; sufficiency follows from uniqueness of the maps on each colimit and then on its pushout. These equations add just the surjection and injection relations involving degree $n$ to the relations already satisfied below degree $n$.",
+   "uses": [
+    "def-coef-simplicial-tensor-cotensor",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Formula (3.2), printed p.9; skeletal pushout in the proof of Theorem 3.5, printed p.10; tensor adjunctions in Section 19.1, printed p.90. The categorical universal-property calculation below is agent-written; the source leaves the pushout verification unstated."
+   }
+  },
+  {
+   "text": "These equations imply every remaining relation of $R_n$, including all nonidentity endomorphisms of $[n]$. Indeed any monotone $\\alpha:[a]\\to[b]$ factors as $\\alpha=\\delta\\theta$ by listing its image increasingly, with $\\theta:[a]\\twoheadrightarrow[k]$ and $\\delta:[k]\\hookrightarrow[b]$. Here $k\\leq\\min(a,b)\\leq n$. The relation for $\\theta$ is already known if $a<n$, and otherwise is a surjection equation of Step 9 or the identity equation. Similarly the relation for $\\delta$ is known if $b<n$, and otherwise is an injection equation or the identity. Their composite is\n$$t_a(X(\\alpha)\\otimes1)=t_a(X(\\theta)\\otimes1)(X(\\delta)\\otimes1)=t_k(1\\otimes\\Delta^\\theta)(X(\\delta)\\otimes1)=t_b(1\\otimes\\Delta^\\delta)(1\\otimes\\Delta^\\theta)=t_b(1\\otimes\\Delta^\\alpha).$$\nThe middle interchange is tensor bifunctoriality. Conversely every relation of Step 9 is among the relations of $R_n$.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "def-weil-pbc-simplicial-object",
+    "def-coef-simplicial-tensor-cotensor",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Formula (3.2), printed p.9; skeletal pushout in the proof of Theorem 3.5, printed p.10; tensor adjunctions in Section 19.1, printed p.90. The categorical universal-property calculation below is agent-written; the source leaves the pushout verification unstated."
+   }
+  },
+  {
+   "text": "By Step 4, the extended family $(t_a)_{a\\leq n}$ now induces a unique $h:R_n\\to T$. It restricts to $g$ on the degree-$n$ summand and to $f$ on $R_{n-1}$, the latter equality being checked on each $q_a$, $a<n$. Any such $h$ has these same components, hence is equal to this one by the coequalizer property. Together with Step 8, this is exactly the pushout universal property of the square in the statement. The argument establishes existence and uniqueness for every target $T$, rather than assuming a pre-existing skeletal-filtration comparison.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Formula (3.2), printed p.9; skeletal pushout in the proof of Theorem 3.5, printed p.10; tensor adjunctions in Section 19.1, printed p.90. The categorical universal-property calculation below is agent-written; the source leaves the pushout verification unstated."
+   }
+  },
+  {
+   "text": "For $n=0$, the latching category and proper-face family are empty. Hence $L_0X$ and $X_0\\otimes\\partial\\Delta^0$ are initial by Step 2, $B_0$ is initial, and $R_{-1}$ is initial by definition. The only endomorphism of $[0]$ is its identity, so both arrows of the defining $R_0$ coequalizer coincide and $R_0\\cong X_0\\otimes\\Delta^0$. Thus the same square is a pushout in degree zero as well. No argument presumes a nonempty latching category.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "def-coef-simplicial-tensor-cotensor",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Formula (3.2), printed p.9; skeletal pushout in the proof of Theorem 3.5, printed p.10; tensor adjunctions in Section 19.1, printed p.90. The categorical universal-property calculation below is agent-written; the source leaves the pushout verification unstated."
+   }
+  },
+  {
+   "text": "Let $R_\\infty=\\operatorname{colim}_{N\\geq0}R_N$. The full coend summand maps give compatible maps $R_N\\to|X|$, hence $c:R_\\infty\\to|X|$. Conversely the component $X_a\\otimes\\Delta^a\\to R_a\\to R_\\infty$ satisfies the full coend relation for every $\\alpha:[a]\\to[b]$: choose $N=\\max(a,b)$ and use that relation in $R_N$, then compose to $R_\\infty$. Hence the full coequalizer gives $d:|X|\\to R_\\infty$. On every full coend summand $cd$ is the identity. On every summand of each $R_N$, $dc$ followed by $R_N\\to R_\\infty$ equals that same map. The coequalizer uniqueness and then the sequential-colimit uniqueness therefore give $cd=1$ and $dc=1$. This proves the claimed isomorphism with its specified comparison map.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Formula (3.2), printed p.9; skeletal pushout in the proof of Theorem 3.5, printed p.10; tensor adjunctions in Section 19.1, printed p.90. The categorical universal-property calculation below is agent-written; the source leaves the pushout verification unstated."
+   }
+  },
+  {
+   "text": "For a natural transformation $u:X\\to Y$, the maps $u_a\\otimes1$ respect the coequalizer relations because $u_aX(\\alpha)=Y(\\alpha)u_b$. They induce all truncation and full-coend maps. On every latching component, $u_nX(\\theta)=Y(\\theta)u_a$ gives the induced latching map; on every boundary face, $u_aX(\\delta)=Y(\\delta)u_n$ gives compatibility of the face attaching map. The colimit and pushout uniqueness give the commuting maps of the displayed squares. The comparison $c$ of Step 13 commutes with $u$ on every summand, and so does its inverse by uniqueness. This proves both asserted naturality clauses. Only the stated tensor/cotensor and colimit hypotheses have been used.",
+   "uses": [
+    "def-weil-pbc-simplicial-object",
+    "def-coef-simplicial-tensor-cotensor",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+    "place": "Formula (3.2), printed p.9; skeletal pushout in the proof of Theorem 3.5, printed p.10; tensor adjunctions in Section 19.1, printed p.90. The categorical universal-property calculation below is agent-written; the source leaves the pushout verification unstated."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-simplicial-tensor-cotensor",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+  "place": "Formula (3.2), printed p.9; skeletal pushout in the proof of Theorem 3.5, printed p.10; tensor adjunctions in Section 19.1, printed p.90. The categorical universal-property calculation below is agent-written; the source leaves the pushout verification unstated."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +240,52 @@
    "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/FintypeCat.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.CategoryTheory.Skeletal\"}\n  {\"file\": \"Mathlib/CategoryTheory/FintypeCat.lean\", \"line\": \"159\", \"text\": \"skeletal category equivalent to `FintypeCat.{u}`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/FintypeCat.lean\", \"line\": \"186\", \"text\": \"theorem is_skeletal : Skeletal Skeleton.{u} := fun X Y ⟨h⟩ =>\"}\n  {\"file\": \"Mathlib/CategoryTheory/FintypeCat.lean\", \"line\": \"246\", \"text\": \"  skel := Skeleton.is_skeletal\"}\n  {\"file\": \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"line\": \"24\", \"text\": \"so we can think of it as a preorder. However as it is not skeletal, it is not yet a partial order.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"line\": \"26\", \"text\": \"`Subobject X` will be defined as the skeletalization of `MonoOver X`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"line\": \"61\", \"text\": \"This isn't skeletal, so it's not a partial order.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Skeletal.lean\", \"line\": \"16\", \"text\": \"Define skeletal categories as categories in which any two isomorphic objects are equal.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Skeletal.lean\", \"line\": \"41\", \"text\": \"/-- A category is skeletal if isomorphic objects are equal. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Skeletal.lean\", \"line\": \"42\", \"text\": \"def Skeletal : Prop :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Skeletal.lean\", \"line\": \"45\", \"text\": \"/-- `IsSkeletonOf C D F` says that `F : D ⥤ C` exhibits `D` as a skeletal full subcategory of `C`,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Skeletal.lean\", \"line\": \"46\", \"text\": \"in particular `F` is a (strong) equivalence and `D` is skeletal.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Subobject/Basic.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.CategoryTheory.Skeletal\"}\n  {\"file\": \"Mathlib/CategoryTheory/Subobject/Basic.lean\", \"line\": \"23\", \"text\": \"so we can think of it as a preorder. However as it is not skeletal, it is not a partial order.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Subobject/Basic.lean\", \"line\": \"111\", \"text\": \"lemma skeletal (X : C) : Skeletal (Subobject X) := ThinSkeleton.skeletal\"}\n  {\"file\": \"Mathlib/CategoryTheory/Subobject/Basic.lean\", \"line\": \"176\", \"text\": \"  Subobject.skeletal _ ⟨((equivMonoOver X).unitIso.app _).symm⟩\"}\n  {\"file\": \"Mathlib/CategoryTheory/Subobject/Basic.lean\", \"line\": \"497\", \"text\": \"because the categories are thin and skeletal.) -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Subobject/Limits.lean\", \"line\": \"104\", \"text\": \"  refine skeletal _ ⟨iso_of_both_ways (homOfFactors ?_) (homOfFactors ?_)⟩\"}\n  {\"file\": \"Mathlib/CategoryTheory/EssentiallySmall.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.CategoryTheory.Skeletal\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Skeleton.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.CategoryTheory.Skeletal\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Skeleton.lean\", \"line\": \"36\", \"text\": \"/-- If `C` is monoidal and skeletal, it is a monoid.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Skeleton.lean\", \"line\": \"38\", \"text\": \"abbrev monoidOfSkeletalMonoidal (hC : Skeletal C) : Monoid C where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Skeleton.lean\", \"line\": \"45\", \"text\": \"/-- If `C` is braided and skeletal, it is a commutative monoid. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Skeleton.lean\", \"line\": \"46\", \"text\": \"abbrev commMonoidOfSkeletalBraided [BraidedCategory C] (hC : Skeletal C) : CommMonoid C :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Skeleton.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.CategoryTheory.Skeletal\"}\n",
    "date": "2026-10-17",
    "verdict": "no match: read SimplicialObject/Basic.lean (ordinary skeleton by Kan extension), SingularSet.lean:66-85 (topological realization of simplicial sets), SimplicialSet/Skeleton.lean:425-446 (boundary cells for sets), and Reedy/Basic.lean:21-25 (model-structure TODO). None states the latching pushout formula for a tensor coend in a general cocomplete simplicially tensored category."
+  },
+  {
+   "tool": "grep",
+   "query": "latching|coend|realization|skeletal",
+   "results": "{\"t\": \"2026-10-17T05:43:36Z\", \"tool\": \"grep\", \"query\": \"latching|coend|realization|skeletal\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplexCategory/Defs.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean\"], \"digest\": \"55d665b7de092d50\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary skeletons or simplicial-set cells, or general coends; the pinned simplicial category source still lists simplicial tensors as a TODO. None states the arbitrary-category tensor-coend latching pushout."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Skeletal filtration of the tensor realization of any simplicial object attaches the latching pushout product with a simplex boundary",
+   "results": "{\"t\": \"2026-10-17T05:43:37Z\", \"tool\": \"leansearch\", \"query\": \"Skeletal filtration of the tensor realization of any simplicial object attaches the latching pushout product with a simplex boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.toTop\", \"SSet.skeleton_succ\", \"CategoryTheory.SimplicialObject.IsCoskeletal.mk\", \"SSet.Truncated.sk.fullyFaithful\", \"CategoryTheory.SimplicialObject.IsCoskeletal\", \"SSet.StrictSegal.isCoskeletal'\", \"CategoryTheory.SimplicialObject.sk\", \"CategoryTheory.SimplicialObject.Truncated.sk.fullyFaithful\"], \"digest\": \"8b527c4a32c44f71\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary skeletons or simplicial-set cells, or general coends; the pinned simplicial category source still lists simplicial tensors as a TODO. None states the arbitrary-category tensor-coend latching pushout."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject\", \"pushout\"",
+   "results": "{\"t\": \"2026-10-17T05:43:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialObject\\\", \\\"pushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary skeletons or simplicial-set cells, or general coends; the pinned simplicial category source still lists simplicial tensors as a TODO. None states the arbitrary-category tensor-coend latching pushout."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The truncated tensor coend of a simplicial object has skeletal pushout squares given by its latching map and the boundary of the standard simplex",
+   "results": "{\"t\": \"2026-10-17T05:43:37Z\", \"tool\": \"leanfinder\", \"query\": \"The truncated tensor coend of a simplicial object has skeletal pushout squares given by its latching map and the boundary of the standard simplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Truncated.instHasColimits\", \"CategoryTheory.SimplicialObject.Truncated.instHasColimitsOfShape\", \"CategoryTheory.SimplicialObject.Truncated.sk\", \"CategoryTheory.SimplicialObject.sk\", \"SSet.Truncated.hasColimits\", \"CategoryTheory.SimplicialObject.cosk\", \"CategoryTheory.SimplicialObject.instIsLeftKanExtensionOppositeTruncatedSimplexCategoryObjSkAppTruncatedUnitSkAdjTruncation\", \"CategoryTheory.SimplicialObject.Truncated.cosk\"], \"digest\": \"64f4393c840a2913\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary skeletons or simplicial-set cells, or general coends; the pinned simplicial category source still lists simplicial tensors as a TODO. None states the arbitrary-category tensor-coend latching pushout."
+  },
+  {
+   "tool": "grep",
+   "query": "coend|latching|boundary.*(colimit|pushout)",
+   "results": "{\"t\": \"2026-10-17T05:44:01Z\", \"tool\": \"grep\", \"query\": \"coend|latching|boundary.*(colimit|pushout)\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Types/End.lean\", \"Mathlib/CategoryTheory/Limits/Types/End.lean\", \"Mathlib/CategoryTheory/Limits/Types/End.lean\", \"Mathlib/CategoryTheory/Limits/Types/End.lean\", \"Mathlib/CategoryTheory/Limits/Types/End.lean\", \"Mathlib/CategoryTheory/Limits/Chosen/End.lean\", \"Mathlib/CategoryTheory/Limits/Chosen/End.lean\", \"Mathlib/CategoryTheory/Limits/Chosen/End.lean\"], \"digest\": \"da500697b8b08422\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary skeletons or simplicial-set cells, or general coends; the pinned simplicial category source still lists simplicial tensors as a TODO. None states the arbitrary-category tensor-coend latching pushout."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric realization coend restricted to degrees at most n is obtained by pushing out the product of the nth latching morphism with the standard simplex boundary",
+   "results": "{\"t\": \"2026-10-17T05:44:02Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric realization coend restricted to degrees at most n is obtained by pushing out the product of the nth latching morphism with the standard simplex boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.sk\", \"SSet.cosk\", \"SSet.Truncated.cosk\", \"SSet.horn.isColimit\", \"CategoryTheory.SimplicialObject.sk\", \"SSet.horn.multicoequalizerDiagram\", \"CategoryTheory.Arrow.cechConerve_obj\", \"CategoryTheory.SimplicialObject.cosk\"], \"digest\": \"41a73a453007d92b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary skeletons or simplicial-set cells, or general coends; the pinned simplicial category source still lists simplicial tensors as a TODO. None states the arbitrary-category tensor-coend latching pushout."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-reedy-realization-prism",
@@ -92,5 +317,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-tensor-coend-skeletal-pushouts",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Gave a direct fourteen-step universal-property proof: tensor colimit preservation, explicit boundary gluing, latching and face attaching maps, their mixed overlap, all-operator image factorization, pushout extension and uniqueness, degree zero, sequential comparison with explicit inverse, and naturality. No new nodes: every auxiliary calculation is written out from the cited definitions, without invoking a separate non-elementary theorem. Searches find no exact project or Mathlib attachment.",
+  "blueprint": "Realizes the existing ancestry place in prop-coef-integral-exceptional-adjoint, proof paragraph 2 beginning 'For K', the finite-level mapping-complex foundation: the skeletal-coend calculation used by the Reedy realization prism. No unit or chapter route changes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N2-170bd7484",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-170bd7484 (reviewer sub-agent of L); spot-checked: Read the item, all 14 steps, the four cited definitions (simplicial set, simplicial object, colimit, simplicial tensor/cotensor), the parent lem-coef-reedy-realization-prism step 1, and Dugger's Primer. Dugger is not in literature/; I fetched the PDF read-only and ran pdftotext into /tmp. Source places confirmed: formula (3.2) on printed p.9; Sk_n coequalizer, colim = |X| and the latching/boundary pushout square in the proof of Theorem 3.5 on printed p.10; tensor adjunctions in §19.1 on printed p.90. Dugger's latching object is a union of degeneracy images in Top. The item uses the categorical latching colimit over proper surjections instead, which is the correct generalization, and marks the proof as agent-written. The statement is true for an arbitrary simplicial object with no cofibrancy, and nothing in it is weakened. I recomputed every step: arrow directions in the latching diagram; D_theta = D_theta'(X(rho) ⊗ 1); E_delta = E_delta'(1 ⊗ Delta^gamma); the mixed overlap through the relation for theta∘delta in degrees below n; agreement on B_n is equivalent to the surjection and injection equations; the epi-mono factorization covers all relations of R_n, including endomorphisms of [n]; unique extension; n = 0; the explicit inverse for colim R_N ≅ |X|; naturality. Small cases tested: n = 0; constant X gives R_1 = R_0; the discrete Delta^1 gives R_1 = Delta^1; latching maps need not be monic. Only definitions are cited (two Mathlib-status, one in the item's own unit), so there is no route issue and no tool_uses are needed. Duplicate check: grepped dag/nodes for latching, skeletal and coend, and read six candidates in full (full-coend realization, Reedy model structure, direct weak factorization systems, coherent-realization relative cells, bisimplicial Reedy calculus, cofibrant colimit comparison); none states this lemma. All four kinds of Mathlib search are recorded, with no match. No new nodes, no SGA, no changes."
  }
 }
