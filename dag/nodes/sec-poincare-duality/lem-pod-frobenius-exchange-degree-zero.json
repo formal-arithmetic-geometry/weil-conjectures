@@ -28,9 +28,99 @@
   "def-weil-ordinary-compact-cohomology",
   "def-weil-finite-coefficient-point"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the Frobenius-square lemma, $g$ and $h$ are scheme isomorphisms, $ag=ha$, and the square is Cartesian. For a pro-etale test object $u:U\\to s$, the Cartesian identification is $d_U:Y\\times_{s,a,u}U\\xrightarrow{\\sim}Y\\times_{s,a,hu}U$, $(y,v)\\mapsto(g(y),v)$. Inverse image along an isomorphism is exact site relabelling, and finite-coefficient module pullback is this relabelling with the constant coefficient action transported. Thus the comparison $j^u_N$ is termwise $x\\mapsto x\\otimes1$, its inverse is the displayed $\\lambda^u_N$, and all source and target identifications in the first equality are canonical.",
+   "uses": [
+    "lem-weil-frobenius-square-cartesian",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
+    "place": "Step 2; explicit power-square and site relabelling calculation"
+   }
+  },
+  {
+   "text": "Choose a K-injective complex $I$ representing $M$. The exact inverse images along the scheme isomorphisms preserve the relevant complexes, and a right adjoint of an exact functor preserves K-injectives, so $a_*I$ and the pulled-back complexes represent the derived operations. The exchange in [def-weil-frobenius-square-exchange] is the derived adjunction mate; the fraction characterization of the pre-derived adjunction identifies its degree-zero map with the underived chain map whose transpose is $a^{-1}h^{-1}a_*I\\to g^{-1}a^{-1}a_*I\\to g^{-1}I$. Applying the canonical right-derived-zero identification $\\mathcal H^0(Ra_*M)=a_*M$ and the inverse comparisons $\\lambda^h,\\lambda^g$ gives $a_*(\\lambda^g_M)\\circ\\mathcal H^0(e_M)\\circ(\\lambda^h_{a_*M})^{-1}=B_M$. Exactness of $\\Gamma(s,-)$ identifies this sheaf-level calculation with the corresponding degree-zero calculation on sections.",
+   "uses": [
+    "def-weil-frobenius-square-exchange",
+    "def-weil-derived-direct-image",
+    "lem-weil-isomorphism-derived-pullback",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
+    "place": "Step 2; finite-level K-injective and derived-mate calculation"
+   }
+  },
+  {
+   "text": "For $N=Ra_*M$, the point transport is, by its definition, $\\iota_N=\\Gamma(s,j^h_{a_*M})\\circ\\sigma_{a_*M}$ after the canonical degree-zero identification. Since sections on $s$ are exact, taking $\\mathrm H^0$ commutes with evaluation and gives $\\mathrm H^0(\\iota_{Ra_*M})=\\Gamma(s,j^h_{a_*M})\\circ\\sigma_{a_*M}$, with no additional derived correction.",
+   "uses": [
+    "def-weil-frobenius-point-transport",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
+    "place": "Step 2; explicit evaluation of the restriction--insertion--pullback point transport"
+   }
+  },
+  {
+   "text": "Evaluate the underived mate on the final object. The map $\\sigma_{a_*M}$ first restricts a section along $(s\\xrightarrow h s)\\to(s\\xrightarrow{\\rm id}s)$ and inserts it into the inverse-image colimit. The colimit adjunction formula for pro-etale inverse image says that the counit in the transpose of $B_M$ is restriction along the corresponding Cartesian map. At the final object of $Y$, the composite of this map with the square identification $d_s$ is exactly $(Y\\xrightarrow gY)\\to(Y\\xrightarrow{\\rm id}Y)$. Therefore the resulting section is the restriction--insertion definition of $p_{g,M}$, and $\\Gamma(s,B_M)\\circ\\sigma_{a_*M}=p_{g,M}$. This uses only final objects and the constant coefficient action, so it does not assume a $k$-linear Frobenius map.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "def-weil-proetale-module-direct-image",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00VE and 00WX, colimit adjunction formula for inverse image and its counit"
+   }
+  },
+  {
+   "text": "Finally, compose the first equality with the degree-zero point-transport equality. Because $(\\lambda^h_{a_*M})^{-1}=j^h_{a_*M}$, exactness of sections gives $$\\Gamma(Y,\\lambda^g_M)\\circ\\mathrm H^0(\\tau_M)=\\Gamma(s,B_M)\\circ\\sigma_{a_*M}.$$ The preceding step identifies the right-hand side with $p_{g,M}$, proving the final formula. The calculation is unchanged for $M=0$, for $Y=\\operatorname{Spec}k$, and for disconnected $Y$ because every map was computed objectwise on the sites.",
+   "uses": [
+    "def-weil-frobenius-cohomology-transport",
+    "def-weil-ordinary-compact-cohomology",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
+    "place": "Step 2; composition of the exchange and point-transport maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-direct-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-coefficient-point",
+  "def-weil-frobenius-cohomology-transport",
+  "def-weil-frobenius-point-transport",
+  "def-weil-frobenius-square-exchange",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-proetale-inverse-image",
+  "def-weil-proetale-module-direct-image",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-frobenius-square-cartesian",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
+  "place": "Step 2, expanded degree-zero derived mate and point-transport calculation"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -76,7 +166,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pod-frobenius-fixes-unit-section",
@@ -88,12 +178,28 @@
  "blueprint": {
   "from": {
    "node": "prop-cohomological-finiteness",
-   "place": "Proof Step 7, final paragraph: 'the geometric Frobenius acts as the identity on this group, since the Weil structure of the constant Weil sheaf is the identity on the constants'; Degree-zero Frobenius exchange is the underived section-pullback mate",
+   "place": "Proof Step 7, final paragraph: degree-zero Frobenius exchange and explicit point-transport calculation used before the constant-sheaf specialization",
    "via": [
     "lem-pod-frobenius-fixes-unit-section"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-pod-frobenius-exchange-degree-zero",
+  "worker": "stage1",
+  "summary": "Split the general separated finite-type degree-zero statement into the Frobenius-square relabelling, the derived-to-underived mate calculation on a K-injective model, the explicit point-transport evaluation, the colimit-counit computation of the section pullback, and their composition. No new node was needed: all non-elementary inputs are existing adjunction, pro-etale, derived-pullback, exact-sections, and Frobenius-square nodes.",
+  "blueprint": "Realizes prop-cohomological-finiteness, Proof Step 7 final paragraph, by supplying the degree-zero exchange and restriction--insertion calculation used by the constant-sheaf specialization.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NL-8f32988dc",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-8f32988dc (reviewer sub-agent of L); spot-checked: I read the whole item, which has 5 steps and no new nodes, together with every cited statement, Stacks 07A7 (sites-cohomology remark-base-change), and Step 7 of the main-20261015 prop-cohomological-finiteness proof (the blueprint.from place). No SGA source is cited. The base-change map is the specified ambient mate of def-weil-frobenius-square-exchange (1) at finite pro-etale A_{E,n} level; it is not a chosen base-change isomorphism. lambda is defined explicitly and I checked that it is the two-sided inverse of kappa=j (x -> x⊗1). Step 2: g^{-1} is right adjoint to its exact quasi-inverse g_*, so g^*I is K-injective. La^* is modelled termwise, and the pre-derived adjunction fraction formula then gives H^0(e_M) as the underived mate. Step 4: I recomputed this independently. x in M(Y) is restricted to W=Y x_{a,h} s, and Y -> W, y -> (gy, ay), is an isomorphism over Y that turns pr_1 into g. So the colimit class equals the insertion at (Y -g-> Y), which is p_{g,M}. Step 5 is correctly elementary. Edge cases checked: M=0, Y empty, Y=s, and disconnected Y. The extra hypothesis Ra_*M in D^b_c is verified by the parent at its point of use. No duplicate: lem-trf-graph-frobenius-point-exchange needs Y proper and ctf coefficients, and lem-sbc-base-change-homology-zero-underived is étale and only covers H^0. The item is not a restatement of its parent's clause. All 16 proof_deps lie on the sk-lem-finite route (checked by script), so no tool_uses are needed. proof_deps equals the union of the steps' uses. No fixes."
  }
 }
