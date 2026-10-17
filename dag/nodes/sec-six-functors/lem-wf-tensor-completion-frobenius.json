@@ -16,9 +16,93 @@
   "def-weil-pbc-intrinsic-completion",
   "def-wf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the integral-category identification of [lem-weil-pbc-integral-stratified-perfect-characterization] on the geometric fibre in the coefficient conventions of [def-wf-weil-category]. It identifies the two integral full subcategories inside the same derived category over $B$, with the same reduction functors. Here $W$ is noetherian and finite-dimensional, being of finite type over a field; it is quasi-compact and quasi-separated since it is separated and of finite type, and $\\ell$ is invertible since $\\ell\\ne p$. Thus [lem-fix-constructible-tensor-completion] applies: $T=M\\otimes_B^L N$ is complete, and its canonical quotient-tower completion map $\\chi^{\\mathrm{quot}}$ is an isomorphism natural in both arguments.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-wf-weil-category",
+    "lem-fix-constructible-tensor-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Penultimate sentence: equivariance for Weil complexes; ordinary/completed tensor prerequisite exposed by the item creator"
+   }
+  },
+  {
+   "text": "Write $C(-)=(-)^{\\wedge}_{\\mathrm{Kos}}$ and $\\eta_A:A\\to C(A)$ for the functor and unit represented by [def-weil-pbc-intrinsic-completion]. The unit is natural by [lem-weil-pbc-ringed-koszul-completion-reflector]. Apply [lem-weil-pbc-constant-completion-equivalence] with the constant Noetherian ring $R$, ideal $(\\varpi)$ and completed ring sheaf $B$. The hypotheses on the coefficient quotients hold: by [lem-weil-l-adic-extension-integers-dvr], $R$ is a DVR and has finite residue field; hence $R/(\\varpi)$ is finite (so additive torsion), and each $R/(\\varpi^n)$ is finite. Multiplication by $\\varpi^n$ gives the two-term finite-free resolution $0\\to R\\xrightarrow{\\varpi^n}R\\to R/(\\varpi^n)\\to0$, so every quotient is perfect over $R$. The same DVR statement makes $R$ Noetherian (indeed a PID). That theorem's last paragraph identifies Koszul and quotient-tower completions over $B$, respecting their units. Hence transporting $\\chi^{\\mathrm{quot}}$ through this identification is precisely $\\eta_T:T\\to C(T)$. This is the $\\chi$ in the statement and $C(T)$ is the tensor of [def-wf-tensor-product]. In particular $\\chi$ is an isomorphism natural in $M,N$. The comparison theorem, rather than the definition alone, justifies this identification.",
+   "uses": [
+    "def-weil-pbc-intrinsic-completion",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-wf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Penultimate sentence: equivariance for Weil complexes; ordinary/completed tensor prerequisite exposed by the item creator"
+   }
+  },
+  {
+   "text": "Put $H=\\Phi_W^*$ before completion and rationalization. By [def-wf-weil-category] this is exact coefficient transport. Use precisely the chain models specified in [def-wf-tensor-product]: flat-term K-flat $U,V$, $A=\\operatorname{Tot}(U\\otimes_B V)$ and $A'=\\operatorname{Tot}(HU\\otimes_B HV)$. Write $a:HA\\to A'$ for the ordinary tensor comparison and $b:HC(A)\\to C(A')$ for its completed comparison. The coefficient identification sends $\\varpi$ to $\\varpi$, so its map $H[B\\xrightarrow{\\varpi^m}B]\\to[B\\xrightarrow{\\varpi^m}B]$ preserves the degree-zero inclusion $\\iota_m$. Consequently the component of the product map applied to $H(1_A\\otimes\\iota_m)$ is $(1_{A'}\\otimes\\iota_m)a$. In the mapping-fiber formula of [def-weil-pbc-intrinsic-completion], $\\eta_A$ is $z\\mapsto((z\\otimes\\iota_m)_m,0)$. The map $b$ uses the product comparison on both summands, so it preserves this zero second component. Thus, as actual chain maps, $bH(\\eta_A)=\\eta_{A'}a$. The stated comparisons represent these maps on the derived category, giving\n$$\\widehat\\mu_{\\Phi_W}\\,\\Phi_W^*(\\chi_{M,N})=\\chi_{\\Phi_W^*M,\\Phi_W^*N}\\,\\mu^{\\mathrm{ord}}_{\\Phi_W}.$$\nThis calculation uses the specified strict models, without inferring equality of maps merely from their finite reductions.",
+   "uses": [
+    "def-wf-weil-category",
+    "def-wf-tensor-product",
+    "def-weil-pbc-intrinsic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Penultimate sentence: equivariance for Weil complexes; ordinary/completed tensor prerequisite exposed by the item creator"
+   }
+  },
+  {
+   "text": "Let $v=\\varphi_M\\otimes_B^L\\varphi_N$ be the ordinary tensor map from $\\Phi_W^*M\\otimes_B^L\\Phi_W^*N$ to $T$. Its completed tensor map is $C(v)$ by [def-wf-tensor-product]. Naturality of the unit [lem-weil-pbc-ringed-koszul-completion-reflector] gives $\\chi_{M,N}v=C(v)\\chi_{\\Phi_W^*M,\\Phi_W^*N}$. Compose with $\\mu^{\\mathrm{ord}}_{\\Phi_W}$ and substitute Step 3:\n$$\\chi_{M,N}v\\mu^{\\mathrm{ord}}_{\\Phi_W}=C(v)\\widehat\\mu_{\\Phi_W}\\Phi_W^*(\\chi_{M,N}).$$\nThe left side is $\\chi\\varphi_T$ and the right side is $\\varphi_{\\widehat T}\\Phi_W^*(\\chi)$. This is exactly the morphism condition in [def-wf-weil-category]. Its inverse is a Weil morphism too: multiply this equation on the left by $\\chi^{-1}$ and on the right by $\\Phi_W^*(\\chi^{-1})$. Thus the underlying isomorphism is an isomorphism of Weil pairs. For this to be a morphism of the Weil category, both ends must be bounded constructible: by clause 2 of [lem-pur-integral-operations-preserve-constructible] (applied with $f=\\operatorname{id}_W$; $\\ell$ is invertible on $W$ by Step 1), $M\\widehat\\otimes^L_{\\mathcal O_E}N\\in D^b_c(W,\\mathcal O_E)$, and $\\widehat T$ and $T$ are isomorphic to it through Step 2 and $\\chi^{\\mathrm{quot}}$; Step 1 identifies this category with the one of [def-wf-weil-category].",
+   "uses": [
+    "def-wf-tensor-product",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "def-wf-weil-category",
+    "lem-pur-integral-operations-preserve-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Penultimate sentence: equivariance for Weil complexes; ordinary/completed tensor prerequisite exposed by the item creator"
+   }
+  },
+  {
+   "text": "Raw rationalization [def-weil-pbc-rational-category] retains objects and localizes Hom groups. The tensor convention of [def-wf-tensor-product] sends $(u/\\varpi^r,v/\\varpi^s)$ to the integral tensor map divided by $\\varpi^{r+s}$, and $\\varphi_T$ is read with the same convention. Therefore the naturality and Step 4 equations hold also for rational Weil maps: write $\\varphi_M=u/\\varpi^r$, $\\varphi_N=v/\\varpi^s$ with integral numerators, apply the integral equality of Steps 3--4 to $u\\otimes v$ (Step 4 used only naturality, so the numerators need not be isomorphisms), and divide by $\\varpi^{r+s}$. For the common-stage clause, let $M$ be given at $E$ and $N$ at $F$, and choose a finite intermediate $L\\supseteq E,F$ as in [def-wf-weil-category]. Its transition functors give Weil complexes $T_{L/E}M$, $T_{L/F}N$ at $L$; their underlying objects are objects of the integral category at $L$, since rationalization keeps objects. Steps 1--4 and the rational argument just given, with $L$ in place of $E$, give the equation at $L$. Then $[L,\\chi]$ and $[L,\\chi^{-1}]$ are morphisms of the common-stage Weil category, and its identity and composition rules make them mutually inverse.",
+   "uses": [
+    "def-weil-pbc-rational-category",
+    "def-wf-tensor-product",
+    "def-wf-weil-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Penultimate sentence: equivariance for Weil complexes; ordinary/completed tensor prerequisite exposed by the item creator"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-rational-category",
+  "def-wf-tensor-product",
+  "def-wf-weil-category",
+  "lem-fix-constructible-tensor-completion",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-ringed-koszul-completion-reflector"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Sentence: Its equivariance for Weil complexes is the equivariance of the projection transformation in [lem-fix-weil-operations]."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -47,10 +131,61 @@
    "results": "8 hits including CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso and AdicCompletion.ofTensorProduct_naturality; no project theorem.",
    "date": "2026-10-17",
    "verdict": "generalization: generic monoidal/Frobenius naturality only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical ordinary derived tensor to completed tensor comparison is natural and commutes with geometric Frobenius pullback",
+   "results": "AdicCompletion.ofTensorProduct_naturality; AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo; AdicCompletion.ofTensorProduct_tmul; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; AdicCompletion.ofTensorProduct",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary algebraic adic completion or generic module pullback, not this derived constructible completed-sheaf Weil comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, AdicCompletion, Frobenius",
+   "results": "loogle: unknown identifier 'Frobenius'",
+   "date": "2026-10-17",
+   "verdict": "invalid query; superseded by AdicCompletion.ofTensorProduct_naturality search"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius|completion|derived.*tensor",
+   "results": "Mathlib/Algebra/Polynomial/Expand.lean; Mathlib/Algebra/Polynomial/Expand.lean; Mathlib/Algebra/Polynomial/Expand.lean; Mathlib/Algebra/Polynomial/Expand.lean; Mathlib/Algebra/Polynomial/Expand.lean; Mathlib/Algebra/CharP/Reduced.lean; Mathlib/Algebra/CharP/Reduced.lean; Mathlib/Algebra/CharP/Reduced.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary algebraic adic completion or generic module pullback, not this derived constructible completed-sheaf Weil comparison",
+   "subdirectory": "Algebra"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical comparison between ordinary derived tensor and completed derived tensor is natural and Frobenius equivariant",
+   "results": "AdicCompletion.ofTensorProduct_naturality; AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian; CategoryTheory.frobeniusMorphism; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary algebraic adic completion or generic module pullback, not this derived constructible completed-sheaf Weil comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion.ofTensorProduct_naturality",
+   "results": "AdicCompletion.ofTensorProduct_naturality",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary algebraic adic completion or generic module pullback, not this derived constructible completed-sheaf Weil comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "completion unit of derived complete sheaf tensor product commutes with an exact inverse image equivalence and tensor structure",
+   "results": "SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; AdicCompletion.ofTensorProduct_naturality; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pushforwardSections_unitHomEquiv; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary algebraic adic completion or generic module pullback, not this derived constructible completed-sheaf Weil comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*complet|complet.*derived|Weil.*tensor|tensor.*Weil",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary algebraic adic completion or generic module pullback, not this derived constructible completed-sheaf Weil comparison",
+   "subdirectory": "CategoryTheory"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "fix-prop-projection-formula",
@@ -67,5 +202,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-wf-tensor-completion-frobenius",
+  "worker": "stage1",
+  "summary": "Five-step split, no new nodes. Verified the integral quotient/Koszul comparison hypotheses for R and identified the ordinary/completed comparison using existing completion results; proved preservation of the completion unit by the explicit Frobenius transport chain map, derived equivariance by unit naturality, and checked rationalization/common-field coherence. Statement unchanged; no project Lean attachment.",
+  "blueprint": "Realizes the sentence in fix-prop-projection-formula.proof.md that equivariance for Weil complexes is the equivariance of the projection transformation in [lem-fix-weil-operations]. The ordinary/completed tensor identification and its Frobenius compatibility are the prerequisite exposed by that sentence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Identifies the integral conventions inside the same completed-ring derived category; the present unit supplies no coefficient-category comparison."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Generic naturality of the completion unit used for the tensor morphism; no projection-formula argument is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Generic completed-coefficient Koszul/quotient comparison respecting the units; needed to identify the actual comparison map."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic coefficient-ring structure supplies Noetherianity for the completion theorem."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Generic preservation of integral bounded constructibility by completed tensor, needed so that T and its completion are objects of the Weil category; the projection-formula unit supplies no such statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-pur-integral-operations-preserve-constructible"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NF-3680884d5",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-3680884d5 (reviewer sub-agent of L); spot-checked: Read in full: the item, all five steps, every cited statement, def-pur-integral-derived-operations and the parent fix-prop-projection-formula steps 13–15. Checked against the main-20261015 blueprint sentence 'Its equivariance for Weil complexes is the equivariance of the projection transformation in [lem-fix-weil-operations]'. There are no new nodes. The statement is true and unchanged. Coefficients are the completed Ô_{E,W} on the small pro-étale site with raw rationalization, and Frobenius is coefficient transport along Φ=id×Spec(z↦z^{1/q}); def-wf-weil-category and def-wf-tensor-product agree on both. Edge cases checked: unit object, zero objects, identity Weil maps, E=L. Step 1: W is finite type over k, so noetherian, finite-dimensional and qcqs, and ℓ≠p is invertible; this meets the hypotheses of the integral-characterization lemma and of lem-fix-constructible-tensor-completion. Step 2: R is a DVR, hence Noetherian; constant-completion-equivalence (last paragraph) identifies the Koszul and quotient-tower completions over B, respecting the units. Step 3: checked against the explicit μ construction in def-wf-tensor-product. c(1)=1 and c(ϖ)=ϖ, so bH(η_A)=η_{A'}a holds as chain maps. Step 4: unit naturality plus Step 3 gives χφ_T=φ_{T̂}Φ^*(χ). Fixed two faults. (1) C1/E1, step 4: the claim 'morphism in the Weil category' needs T and T̂ to be bounded constructible, and nothing cited this. Added clause 2 of lem-pur-integral-operations-preserve-constructible with f=id_W, plus a tool_use for it. (2) C3/C4, step 5: the common-field half claimed component formulas for the isomorphisms of lem-pur-integral-operations-scalar-extension. That node is unsplit and its statement only says the isomorphisms exist. Rewrote the step: pass to L⊇E,F by the transition functors of def-wf-weil-category, apply Steps 1–4 and the rational argument at L, and use the colimit category's identity and composition rules. Dropped lem-weil-finite-free-completed-scalar-comparison and lem-pur-integral-operations-scalar-extension from uses, proof_deps and tool_uses. Accepted tool_uses: integral-stratified-perfect-characterization, ringed-koszul-completion-reflector, constant-completion-equivalence, l-adic-extension-integers-dvr and preserve-constructible. No duplicate found (lem-fix-weil-operations, def-wf-automorphism-completed-transport and lem-sf-proper-open-tensor-compatibility checked). No cycle and no SGA citation.; 1 file(s) fixed by the reviewer"
  }
 }
