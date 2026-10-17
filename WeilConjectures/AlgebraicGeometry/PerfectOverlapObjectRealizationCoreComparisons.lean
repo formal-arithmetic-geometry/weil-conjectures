@@ -432,7 +432,7 @@ these associators and natural isomorphisms. -/
 theorem openSiteReturn_overlap_triangle (X : Scheme.{u}) {W U : X.Opens}
     (i : W ⟶ U) :
     let PU := (schemeOpenRestriction X U).mapDerivedCategory
-    let PW := (schemeOpenRestriction X W).mapDerivedCategory
+    let _PW := (schemeOpenRestriction X W).mapDerivedCategory
     let LU := (overlapSiteInverse U).mapDerivedCategory
     let LW := (overlapSiteInverse W).mapDerivedCategory
     let SP := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i).mapDerivedCategory
