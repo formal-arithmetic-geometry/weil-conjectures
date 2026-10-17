@@ -12,9 +12,81 @@
   "def-trf-oriented-nearby-cycles",
   "def-weil-finite-type-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Each $f_i$ is locally of finite type by [def-weil-finite-type-morphism], and $\\Lambda$ is torsion because $m\\Lambda=0$. Thus [lem-trf-finite-type-torsion-universal-star] supplies condition (*) universally for both $f_i$. It also applies to $f:T_1\\times_BT_2\\to B$: on affine charts finite-type algebras $A[u_1,\\ldots,u_r]/I$ and $A[v_1,\\ldots,v_s]/J$ have tensor product $A[u_1,\\ldots,u_r,v_1,\\ldots,v_s]/(I,J)$, so $f$ is locally of finite type. The input complexes are bounded, hence in $D^-$. The tensor product of the two inputs need not be bounded below; the universal (*) hypotheses allow the unbounded local description used next.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-trf-finite-type-torsion-universal-star"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-kunneth-nearby-cycles-appendix.pdf",
+    "place": "Definition A.1 and Remark A.2, pp. 1--2; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Fix a geometric point $x$ of $T$, and denote its images in $T_i$ and $B$ by $x_i$ and $b$. Put $S=B_{(b)}$, $X_i=(T_i)_{(x_i)}$, $X=T_{(x)}$, $g_i:X_i\\to S$, $a:X\\to X_1$, $d:X\\to X_2$, and $g=g_1a=g_2d$. Write $A=L_1|_{X_1}$ and $C=L_2|_{X_2}$. Here $X$ is the strict localization at $x$ of $X_1\\times_SX_2$, not the whole fibre product. By [lem-trf-oriented-nearby-strict-local-description], it suffices to show that the canonical local map\n$$c_x:Rg_{1*}A\\otimes_\\Lambda^LRg_{2*}C\\longrightarrow Rg_*(a^*A\\otimes_\\Lambda^Ld^*C)$$\nis an isomorphism for every $x$. The node identifies precisely this map with the restriction of the comparison specified by [def-trf-oriented-nearby-cycles], including its ordinary-comparison and lax-tensor components.",
+   "uses": [
+    "lem-trf-oriented-nearby-strict-local-description",
+    "def-trf-oriented-nearby-cycles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-kunneth-nearby-cycles-appendix.pdf",
+    "place": "Proof of Theorem A.3, pp. 2--3; local PDF WANTED."
+   }
+  },
+  {
+   "text": "The two goodness hypotheses and [lem-trf-oriented-nearby-strict-local-description] give localized base-change invariance for $(g_1,A)$ and $(g_2,C)$. Applying the latter to the essentially Cartesian square with top map $d:X\\to X_2$ and bottom map $g_1:X_1\\to S$ gives\n$$e:g_1^*Rg_{2*}C\\xrightarrow{\\sim}Ra_*d^*C.$$\nThe same node gives localized base-change invariance for $(a,d^*C)$. Indeed, $a$ is the strict localization of the base change of $f_2$ to $X_1$, and pasting another essentially Cartesian square gives a localized base change of $(g_2,C)$. All three direct images $g_1,g_2,a$ have finite cohomological dimension by [lem-trf-finite-type-torsion-universal-star]. Since $C$ is bounded, $Rg_{2*}C\\in D^-$: if $\\mathcal H^q(C)=0$ for $q>r$ and the cohomological-dimension bound is $N$, the finite truncation filtration of $C$ has pieces $\\mathcal H^q(C)[-q]$, whose direct images vanish above $q+N$, so $Rg_{2*}C$ vanishes above $r+N$. Also $A$ and $d^*C$ are bounded, because inverse image on constant-coefficient modules is exact.",
+   "uses": [
+    "lem-trf-oriented-nearby-strict-local-description",
+    "lem-trf-finite-type-torsion-universal-star"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-kunneth-nearby-cycles-appendix.pdf",
+    "place": "Proof of Theorem A.3, pp. 2--3; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-strict-local-base-invariant-projection] first to $(g_1,A,M=Rg_{2*}C)$ and then to $(a,d^*C,M=A)$. The bounds and localized base-change invariance were checked in step 3. The composite\n$$\\begin{aligned}\nRg_{1*}A\\otimes^LRg_{2*}C\n&\\xrightarrow{\\mathrm{PF}_{g_1}}Rg_{1*}(A\\otimes^Lg_1^*Rg_{2*}C)\\\\\n&\\xrightarrow{Rg_{1*}(1\\otimes e)}Rg_{1*}(A\\otimes^LRa_*d^*C)\\\\\n&\\xrightarrow{Rg_{1*}(\\mathrm{PF}_a)}Rg_{1*}Ra_*(a^*A\\otimes^Ld^*C)\\\\\n&\\simeq Rg_*(a^*A\\otimes^Ld^*C)\n\\end{aligned}$$\nis an isomorphism. In the third arrow the tensor symmetries put $d^*C$ in the direct-image slot of the projection formula. The last identification uses the composite adjunction $g^*=a^*g_1^*\\dashv Rg_{1*}Ra_*$: composing the two Hom adjunction bijections shows this is the right adjoint of $g^*$, and hence identifies it canonically with $Rg_*$.",
+   "uses": [
+    "lem-trf-strict-local-base-invariant-projection",
+    "def-kun-projection-formula-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-kunneth-nearby-cycles-appendix.pdf",
+    "place": "Proof of Theorem A.3, pp. 2--3; local PDF WANTED."
+   }
+  },
+  {
+   "text": "This composite is $c_x$, not merely an unspecified isomorphism between its source and target. Under $g^*\\dashv Rg_*$ its adjunct is\n$$a^*g_1^*Rg_{1*}A\\otimes^Ld^*g_2^*Rg_{2*}C\\xrightarrow{a^*\\varepsilon_{g_1,A}\\otimes d^*\\varepsilon_{g_2,C}}a^*A\\otimes^Ld^*C.$$\nTo check it, expand each projection morphism as the adjoint of counit tensor identity [def-kun-projection-formula-map]. The exchange $e$ is the adjoint of $a^*g_1^*Rg_{2*}C=d^*g_2^*Rg_{2*}C\\to d^*C$, so $\\varepsilon_a\\circ a^*e=d^*\\varepsilon_{g_2,C}$. The composite-adjunction counit is $\\varepsilon_a\\circ a^*\\varepsilon_{g_1}$. Substitution leaves exactly the displayed tensor of two counits; the tensor symmetries in step 4 cancel. By [lem-trf-oriented-nearby-strict-local-description] this is also the adjunct defining the restricted oriented comparison. Equality of adjuncts gives equality of maps. Thus all restricted comparisons are isomorphisms, and the joint conservativity in that node proves the original comparison is an isomorphism.",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "lem-trf-oriented-nearby-strict-local-description"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-kunneth-nearby-cycles-appendix.pdf",
+    "place": "Proof of Theorem A.3, pp. 2--3; local PDF WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-trf-finite-type-torsion-universal-star",
+  "lem-trf-oriented-nearby-strict-local-description",
+  "def-trf-oriented-nearby-cycles",
+  "lem-trf-strict-local-base-invariant-projection",
+  "def-kun-projection-formula-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-kunneth-nearby-cycles-appendix.pdf",
+  "place": "Proof of Theorem A.3, pp. 2--3: strict-local reduction, factorization into base change and projection formulas; Definition A.1 and Remark A.2 for the hypotheses. Local PDF WANTED (read online only, not in literature/); marked agent per brief-stage1 section 4 until the document is obtained."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,7 +139,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-specialization-external-product",
@@ -87,5 +159,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-good-oriented-nearby-kunneth",
+  "worker": "stage1",
+  "summary": "Second reading repaired a circular appeal to the theorem being split: the five-step proof uses strict-local reduction, localized base change, two ordinary projection formulas and an explicit counit calculation identifying the specified comparison. Retained and sharpened the universal finiteness input; added only the local-description and ordinary projection-formula statements, neither asserting any Kunneth isomorphism.",
+  "blueprint": "Realizes the normal-cone external-product step of the proof of (1) and (2) of lem-trf-local-term-locality, via lem-trf-trace-specialization and lem-trf-specialization-external-product; establishes its conditional oriented comparison by Zheng’s local proof."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-f71b674e0",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-f71b674e0 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and every cited statement in full: def-trf-oriented-nearby-cycles, def-kun-projection-formula-map, finite-type, geometric point, strict henselization, derived categories and fibre product. I also read unit sk-i-curve-zero and chapter sec-trace-formula. Zheng's appendix is not in literature/ (WANTED) and the review service blocks network access, so I could not open Def. A.1, Rem. A.2 or Thm. A.3 myself. Instead I checked the Gabber finiteness background in the local ILO volume (XVIII-A Thm 1.1 and Cor 1.4, XVIII-B 4.1.1, XI §4 with Prop 4.4) and re-derived every step and new statement. Item: the statement is unchanged and the comparison and coefficient category are exactly those of def-trf-oriented-nearby-cycles. Steps 1-5 check out. X=T_(x) is the strict localization of X_1×_S X_2. The square (g_1,d,a) is essentially Cartesian, so goodness gives e, and the stability clause gives localized invariance for (a,d^*C). Rg_{2*}C is in D^- by the finite-cd truncation argument. Both projection-formula applications meet all hypotheses. I recomputed the step-5 adjunct and get a^*ε_{g1,A}⊗d^*ε_{g2,C}, matching the restricted β⊗β followed by μ. No step uses the Künneth isomorphism, so the split is not circular. New nodes: strict-local-description is correct, and it rightly restricts to local squares; with non-local base maps the criterion would be false. For the projection node I re-derived a proof sketch (constant, closed, j_!, then finite via Zariski's Main Theorem, then D^- by resolution and truncation), so it is true. universal-star is a cited Gabber input whose bound passes small-case checks. Caveat: universal-star does not require m to be invertible, and I could not check that case against the source; every use here has m invertible on B. None of the three restates the item. My duplicate search over dag/nodes found no duplicates; trait-nearby-base-change, specialization-external-product, sf-projection-finite-constant and the lem-kun projection formulas (which assume proper or a field base) all differ. The route stays in the unit (def-kun-projection-formula-map is only a definition), no SGA is cited, and no tool_uses are needed. FIX: in the item, proof_origin.by changes from document to agent, because the source PDF is WANTED (brief-stage1 §4; 329 of the 331 WANTED proof origins in the DAG are marked agent). The corrected file is fixes/dag/nodes/sec-trace-formula/lem-trf-good-oriented-nearby-kunneth.json.; 1 file(s) fixed by the reviewer"
  }
 }
