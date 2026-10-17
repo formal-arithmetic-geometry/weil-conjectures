@@ -15,7 +15,8 @@
   "lem-asd-etale-finite-twist-pullback",
   "lem-amb-affine-space-top-trace",
   "def-amb-etale-compact-support",
-  "lem-amb-unbounded-compact-support-comparisons"
+  "lem-amb-unbounded-compact-support-comparisons",
+  "def-amb-affine-trace-tower"
  ],
  "proof": [
   {
@@ -223,5 +224,38 @@
   "group": "Q84",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-ba8fcba3f (reviewer sub-agent of L); spot-checked: I read all of it: the item's five steps, the full statement of every cited node (including the blueprint_update texts for thm-nagata-noetherian, def-amb-etale-compact-support, def-pc-scheme and def-sbc-affine-space), and the source, main-20261015 sk-prop-sp-orientation-vector-bundle.proof.md Step 1. Statement, stmt_deps, blueprint, chapter, unit and created are byte-identical to the side-DAG base; only the proof fields, split_report and searches were added, so nothing was weakened. Step 1: def-amb-affine-trace-tower gives the Noetherian, separated finite-type and N-invertible hypotheses over P. Nagata gives a compactification, and def-nagata-compactification already makes its open immersion quasi-compact (the worker's extra quasi-compactness argument is also correct). Step 2: L_P is a shifted locally free sheaf, so it lies in D^+. The action lemma supplies the automorphism, its identity normalization and the actual-map base-change equation. Tate composition coherence makes the base-changed coefficient map the canonical one. The unbounded comparison lemma restricts to the thm-cbc-finite-torsion exchange that both the action and trace lemmas use. The trace lemma gives that t_P is invertible and that t_T C_u = u^*t_P. Step 3: full faithfulness for Mod(A_P) and linearity give multiplication by a section b, and the constant-sheaf lemma turns b into a Zariski-locally constant function. That pullback of such a section is composition with the map is left implicit, but it is a two-line local fact. Step 4: A^d_K is a nonempty domain spectrum, hence connected; b is 1 on the zero section by the identity normalization; residue-field fibres cover P (the affine-chart prime argument is correct); so b = 1. Step 5: base change along a gives exactly z -> z-a, and I checked each equality in the chain before cancelling the isomorphism C_a. Edge cases d=0, a=0, S empty and A=0 all hold. Duplicates: lem-pur-affine-translation-trace states the same equality only for separated finite-type schemes over k with A_{E,n}, so it is strictly narrower and the parent needs the Noetherian, finite-ring form. No other node states this. There is no cycle and no SGA citation. Every cited statement node lies on the transitive route of sk-i-curve-zero; the one exception is the Mathlib leaf lem-sfb-noetherian-space-compact-subsets. The five declared tool_uses are all generic black boxes, so I accept them, although they are redundant. No new nodes and no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-19d293c2c",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Checked packet, source, statement and dependencies, declarations/docstrings, edge cases, duplicate searches, and authorized scompile evidence; no fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AmbientAffineTranslationTrace",
+  "declaration": "AlgebraicGeometry.Etale.ambientAffineTranslationTrace",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ambientAffineTranslationIso",
+   "AlgebraicGeometry.Etale.ambientAffineTranslation",
+   "AlgebraicGeometry.Etale.ambientAffineTranslation_lineSquare",
+   "AlgebraicGeometry.Etale.ambientAffineLineRightExpansion",
+   "AlgebraicGeometry.Etale.ambientAffineLineRightSquare",
+   "AlgebraicGeometry.Etale.ambientAffineTranslationTateStep",
+   "AlgebraicGeometry.Etale.ambientAffineTranslationTate",
+   "AlgebraicGeometry.Etale.ambientAffineTranslationLineExchange",
+   "AlgebraicGeometry.Etale.ambientAffineTranslationExchange",
+   "AlgebraicGeometry.Etale.ambientAffineTraceTransport",
+   "AlgebraicGeometry.Etale.ambientAffineTraceDatum",
+   "AlgebraicGeometry.Etale.ambientAffineTranslationTrace"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AmbientAffineTranslationTrace.lean",
+  "statement": "theorem ambientAffineTranslationTrace (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) (a : Fin d → Γ(S, ⊤)) : ambientAffineTranslationExchange A S d a ((affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S)) ≫ (affineTraceLeft A S d).map (ambientAffineTranslationTate A N hA (ambientAffineTraceTransport N hN A hA) S hS d a).hom ≫ affineTraceCounit A N hA (ambientAffineTraceTransport N hN A hA) (ambientAffineTraceDatum N hN A hA) S hS d = affineTraceCounit A N hA (ambientAffineTraceTransport N hN A hA) (ambientAffineTraceDatum N hN A hA) S hS d",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded coordinate-tower model of affine space, its shifted Tate object, and its actual counit. The translation, exchange, and Tate identification are explicit recursive composites, never arbitrary map binders. Normalized roots/pure-tensor transport and normalized projective-line Kummer data are selected from the dependency theorem; their normalization determines the maps used here. The line-square helper states the coordinate restriction of the Cartesian translation squares in this node."
  }
 }

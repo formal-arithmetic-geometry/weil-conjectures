@@ -236,19 +236,24 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-66df5a176",
-  "group": "Q26",
+  "reviewer": "NT-stage2-Codex-81795a4f9",
+  "group": "Q131",
   "result": "pass",
-  "note": "Statement, dependencies, source alignment, helper construction, docstrings, edge cases, report sections, and reproducible per-file compilation all checked successfully."
+  "note": "Independent review completed; exact statement/dependencies/source checked, canonical helper verified, edge cases and docstrings checked, and scompile.py reproduced cleanly."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.Curve.NonzeroDifferentialGenericallyEtale",
-  "declaration": "AlgebraicGeometry.nonzero_differential_iff_exists_nonempty_etale_open",
-  "file": "lean/Sheaf/AlgebraicGeometry/Curve/NonzeroDifferentialGenericallyEtale.lean",
-  "statement": "theorem nonzero_differential_iff_exists_nonempty_etale_open {k : Type u} [Field k] (X Y : Over (Spec (.of k))) [IsIntegralCurve X.hom] [IsIntegralCurve Y.hom] [Smooth X.hom] [Smooth Y.hom] (h : X ⟶ Y) : Y.hom.relativeDifferentialsPullbackMap h.left ≫ (Scheme.Hom.relativeDifferentialsCongr (h.left ≫ Y.hom) h.w).hom ≠ 0 ↔ ∃ V : X.left.Opens, (V : Set X.left).Nonempty ∧ Etale (V.ι ≫ h.left)",
+  "module": "Sheaf.AlgebraicGeometry.NonzeroDifferentialGenericallyEtale",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.cotangentMap_ne_zero_iff_exists_etale_open",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.cotangentMap",
+   "AlgebraicGeometry.Scheme.Hom.cotangentMap_ne_zero_iff_exists_etale_open"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NonzeroDifferentialGenericallyEtale.lean",
+  "statement": "theorem Scheme.Hom.cotangentMap_ne_zero_iff_exists_etale_open {k : Type u} [Field k] {X Y : Scheme.{u}} (pX : X ⟶ Spec (.of k)) (pY : Y ⟶ Spec (.of k)) [IsIntegralCurve pX] [IsIntegralCurve pY] [Smooth pX] [Smooth pY] (h : X ⟶ Y) (w : h ≫ pY = pX) : h.cotangentMap pX pY w ≠ 0 ↔ ∃ V : X.Opens, (V : Set X).Nonempty ∧ Etale (V.ι ≫ h)",
   "branch": "newtargets-dag",
-  "by": "Q26",
+  "by": "Q131",
   "date": "2026-10-17",
-  "existing": false
+  "existing": false,
+  "note": "The helper constructs the canonical map from the existing universal derivation and the section-normalized tensor-pullback adjunction. It contains no postponed data. The theorem states Stacks 0C1C (1) iff (4)."
  }
 }
