@@ -54,6 +54,7 @@ public import WeilConjectures.Algebra.Homology.BifunctorMappingConeNaturality
 public import WeilConjectures.Algebra.Homology.DerivedCategory.AdicTower
 public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.ChgUniv
 public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.TowerLimit
+public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.TowerLimitIso
 public import WeilConjectures.Algebra.Homology.DerivedCategory.HomologyDevissage
 public import WeilConjectures.Algebra.Homology.DerivedCategory.MappingConeCoimage
 public import WeilConjectures.Algebra.Homology.DerivedCategory.PerfectTower
@@ -165,6 +166,7 @@ public import WeilConjectures.Algebra.LimitFinitePresentation.Core
 public import WeilConjectures.Algebra.Module.AdicCompletionStableRanges
 public import WeilConjectures.Algebra.Module.QuotientPrimaryComponentNoTorsion
 public import WeilConjectures.Algebra.Module.ReesKernelGenerators
+public import WeilConjectures.Algebra.Module.InverseLimitFinite
 public import WeilConjectures.Algebra.Module.RationalPerfectPairing
 public import WeilConjectures.Algebra.Module.TorsionSubmoduleFlatBaseChangeIso
 public import WeilConjectures.Algebra.PopescuLiftNilpotent
