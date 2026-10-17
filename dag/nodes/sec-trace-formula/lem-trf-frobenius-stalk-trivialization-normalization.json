@@ -14,11 +14,114 @@
   "lem-pur-frobenius-trivialization-pullback",
   "lem-trf-proetale-pullback-stalk-coherence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Frobenius is natural on characteristic-$p$ schemes: for every scheme map $a:U\\to T$, its maps on sections satisfy $a^\\sharp(f^{p^b})=a^\\sharp(f)^{p^b}$, and both Frobenius maps are identities on underlying spaces. Thus $aF_U^b=F_T^ba$ by [def-weil-absolute-frobenius-scheme]. The field map $x\\mapsto x^{p^b}$ on $k$ is injective, since $(x-y)^{p^b}=0$ implies $x=y$, and surjective, since $t^{p^b}-c$ has a root in the algebraically closed field $k$. Hence $\\delta=F_s^b$ is an automorphism, including $\\delta=1$ for $b=0$. In particular $F_X^bz=z\\delta$ and $F_V^bv=v\\delta$ for every geometric lift $v:s\\to V$.",
+   "uses": [
+    "def-weil-absolute-frobenius-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0F6W, lemma-relative-frobenius-weakly-etale; agent deduction of the specified adjoint trivialization on represented germs"
+   }
+  },
+  {
+   "text": "First work with a sheaf $M$ on a characteristic-$p$ scheme $T$. Put $P=(F_T^b)^*$, $Q=(F_T^b)_*$ and $B(V)=V\\times_{T,F_T^b}T$. By [lem-pur-frobenius-trivialization-pullback], $R_V=(F_V^b,h):V\\to B(V)$ is the specified natural isomorphism for each weakly etale $h:V\\to T$. Thus the specified direct-image trivialization is $d_M:QM\\to M$, with $d_M(V)=M(R_V)$. Let $\\eta:M\\to QPM$ be the unit of the module adjunction [def-weil-pbc-proetale-operations]. Apply [lem-weil-pbc-conjugate-iso-unit-equation] with $(L_1,R_1)=(P,Q)$, $(L_2,R_2)=(\\mathrm{id},\\mathrm{id})$, and right-adjoint comparison $d^{-1}$. The adjoint trivialization in the statement is characterized by $Q(\\tau_M)\\eta_M=d_M^{-1}$. Evaluated at $V$, this says that the pullback-unit section $\\eta_{M,V}(a)\\in PM(B(V))$ is sent by $\\tau_M$ to $M(R_V^{-1})(a)\\in M(B(V))$. The coefficient identification preserves constant sections by [prop-weil-pbc-proetale-constant-ring-map], so these are $A$-linear section maps with no scalar factor.",
+   "uses": [
+    "lem-pur-frobenius-trivialization-pullback",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "prop-weil-pbc-proetale-constant-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0F6W, lemma-relative-frobenius-weakly-etale; agent deduction of the specified adjoint trivialization on represented germs"
+   }
+  },
+  {
+   "text": "Take a geometric point $u:s\\to T$ and a germ $[V,v,a]\\in M_{F_T^bu}$, so $hv=F_T^bu=u\\delta$. By the inverse formula in [lem-trf-proetale-pullback-stalk-coherence], $c_{F_T^b,u,M}^{-1}$ represents this germ by the pullback-unit section of $PM$ on $B(V)$ at the lift $w=(v,u)$. We use the order $V\\times_TT$ here; swapping the factors in the cited comparison keeps these two projections. Step 1 gives $h(v\\delta^{-1})=u$ and $F_V^b(v\\delta^{-1})=v$, hence $R_V(v\\delta^{-1})=(v,u)=w$. The fibre-product universal property [def-pc-fibre-product] and invertibility of $R_V$ give $R_V^{-1}w=v\\delta^{-1}$. Step 2 therefore sends the germ to $[B(V),w,M(R_V^{-1})(a)]$. The pointed morphism $R_V^{-1}:(B(V),w)\\to(V,v\\delta^{-1})$ identifies this with $[V,v\\delta^{-1},a]$ by the defining germ relation in [def-weil-proetale-geometric-stalk].",
+   "uses": [
+    "lem-trf-proetale-pullback-stalk-coherence",
+    "def-pc-fibre-product",
+    "def-weil-proetale-geometric-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0F6W, lemma-relative-frobenius-weakly-etale; agent deduction of the specified adjoint trivialization on represented germs"
+   }
+  },
+  {
+   "text": "For any scheme automorphism $\\beta$ of $s$, precomposition sends a pointed neighbourhood $(V,v)$ of $u$ to $(V,v\\beta)$ of $u\\beta$, leaving site arrows and sections unchanged. A relation $[V',v',a']=[V,v,M(e)(a')]$ with $ev=v'$ remains a relation because $e(v\\beta)=v'\\beta$. Thus [def-weil-proetale-geometric-stalk] defines $r_{u,\\beta,M}$ on the quotient, with inverse $r_{u\\beta,\\beta^{-1},M}$. The maps preserve sums and $A$-multiplication: the same pointed common refinement and the same section operations can be precomposed with $\\beta$. For a sheaf map $f:M\\to M'$, both orders send $[V,v,a]$ to $[V,v\\beta,f_V(a)]$, so $r$ is natural. In Step 3 the resulting map is exactly $r_{u\\delta,\\delta^{-1},M}$.",
+   "uses": [
+    "def-weil-proetale-geometric-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0F6W, lemma-relative-frobenius-weakly-etale; agent deduction of the specified adjoint trivialization on represented germs"
+   }
+  },
+  {
+   "text": "Specialize Step 3 to $T=s$, $u=\\mathrm{id}_s$ and $M=N$. It gives the first formula $[V,v,a]\\mapsto[V,v\\delta^{-1},a]$ under $c_{\\delta,\\mathrm{id}_s,N}$. Specialize it to $T=X$, $u=z$ and $M=H$; since $F_X^bz=z\\delta$, it gives $(\\tau_X^{(b)}{}_H)_z\\,c_{F_X^b,z,H}^{-1}=r_{z\\delta,\\delta^{-1},H}$. These are equalities of maps, since every germ has a representative in the colimit of [def-weil-proetale-geometric-stalk]. Step 4 proves naturality of the right side; naturality of the left side is also part of [lem-trf-proetale-pullback-stalk-coherence] and of the specified natural transformation [lem-pur-frobenius-trivialization-pullback].",
+   "uses": [
+    "def-weil-proetale-geometric-stalk",
+    "lem-trf-proetale-pullback-stalk-coherence",
+    "lem-pur-frobenius-trivialization-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0F6W, lemma-relative-frobenius-weakly-etale; agent deduction of the specified adjoint trivialization on represented germs"
+   }
+  },
+  {
+   "text": "Apply the pullback naturality statement of [lem-pur-frobenius-trivialization-pullback] to $z:s\\to X$. With its specified composition comparison $C:Lz^*L(F_X^b)^*\\to L\\delta^*Lz^*$, it gives $\\tau_s^{(b)}{}_{Lz^*H}\\circ C_H=Lz^*(\\tau_X^{(b)}{}_H)$. Take the stalk at $\\mathrm{id}_s$. The composition equation for $c$ in [lem-trf-proetale-pullback-stalk-coherence] identifies the two source stalks with $H_{F_X^bz}=H_{z\\delta}$. Its reparametrization equation, applied to $t=z$, $u=\\delta$ and the field automorphism inducing $\\delta^{-1}$, reads $r_{z\\delta,\\delta^{-1},H}c_{z,\\delta,H}=c_{z,\\mathrm{id}_s,H}r_{\\delta,\\delta^{-1},Lz^*H}$. Thus it identifies the target maps from Steps 3--5 as well. This proves the asserted compatibility through the specified composition comparisons; it does not replace those comparisons by arbitrary isomorphisms.",
+   "uses": [
+    "lem-pur-frobenius-trivialization-pullback",
+    "lem-trf-proetale-pullback-stalk-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0F6W, lemma-relative-frobenius-weakly-etale; agent deduction of the specified adjoint trivialization on represented germs"
+   }
+  },
+  {
+   "text": "Apply Steps 2--6 in every degree of a bounded complex. All section maps commute with the differentials by their naturality, so the displayed germ equations are equalities of chain maps. The module pullbacks are exact and their derived pullbacks are the termwise functors by [def-weil-pbc-proetale-operations]. The cited Frobenius trivialization is the termwise one by [lem-pur-frobenius-trivialization-pullback], and [lem-trf-proetale-pullback-stalk-coherence] supplies the stalk comparisons, composition equalities and reparametrizations after localization. Consequently these chain maps give the specified maps in the ordinary derived categories. Parts (2) and (3) of [lem-weil-pbc-localization-universal-property] carry their naturality and equalities to the localization. No resolution choice changes the formula. For $b=0$, $R_V$, $\\delta$, and both germ reparametrizations are identities, consistent with $\\tau^{(0)}=1$.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-pur-frobenius-trivialization-pullback",
+    "lem-trf-proetale-pullback-stalk-coherence",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0F6W, lemma-relative-frobenius-weakly-etale; agent deduction of the specified adjoint trivialization on represented germs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-absolute-frobenius-scheme",
+  "lem-pur-frobenius-trivialization-pullback",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-trf-proetale-pullback-stalk-coherence",
+  "def-pc-fibre-product",
+  "def-weil-proetale-geometric-stalk",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0F6W, lemma-relative-frobenius-weakly-etale; agent deduction of the specified adjoint trivialization on represented germs"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-local-frobenius-conjugacy",
@@ -65,15 +168,79 @@
    "results": "[leansearch] OK 8 hit(s); TopCat.Presheaf.stalkPullbackHom; TopCat.Presheaf.stalkPullbackInv; TopCat.Presheaf.germ_stalkPullbackInv; TopCat.Presheaf.stalkPullbackIso; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; Trivialization.pullback; FiberBundle.pullback_trivializationAt'; TopCat.Presheaf.germToPullbackStalk",
    "date": "2026-10-17",
    "verdict": "no match: topological/structure-sheaf stalks, ordinary scheme pullbacks, finite-set Galois fibres, or Witt-vector/Frobenius results do not state the ordinary pro-etale coefficient-complex comparison and its specified germ normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius.*stalk|stalk.*frobenius|frobenius.*trivial|trivial.*frobenius",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hit signatures concern Zariski structure-sheaf stalks or general sheaf adjunctions, not the specified relative-Frobenius pro-etale germ formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "relative Frobenius isomorphism induces canonical trivialization on geometric stalks of sheaves",
+   "results": "8 hits: AlgebraicGeometry.PresheafedSpace.stalkMap.stalkIso, ModuleCat.Tilde.stalkIso, TopCat.Presheaf.sheafifyStalkIso, AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso, AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_hom_app, TopCat.Presheaf.isIso_of_stalkFunctor_map_iso, AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_inv_eq_germ_apply, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.stalk_iso",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hit signatures concern Zariski structure-sheaf stalks or general sheaf adjunctions, not the specified relative-Frobenius pro-etale germ formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"stalk\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hit signatures concern Zariski structure-sheaf stalks or general sheaf adjunctions, not the specified relative-Frobenius pro-etale germ formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Absolute Frobenius canonical inverse image trivialization sends a geometric stalk germ to its inverse Frobenius reparametrization",
+   "results": "8 hits: AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv, AlgebraicGeometry.germ_stalkClosedPointIso_hom, AlgebraicGeometry.germ_stalkClosedPointIso_hom_assoc, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec, ModuleCat.Tilde.stalkToFiberLinearMap_germ, AlgebraicGeometry.Scheme.fromSpecStalk_appTop, ModuleCat.Tilde.toOpen_germ_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hit signatures concern Zariski structure-sheaf stalks or general sheaf adjunctions, not the specified relative-Frobenius pro-etale germ formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf inverse image isomorphism adjoint to restriction along relative Frobenius evaluates at an inverse reparametrized geometric point",
+   "results": "8 hits: AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app, AlgebraicGeometry.Scheme.restrictFunctorΓ, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.freeFunctorCompPullbackIso, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.arrowResLEAppIso",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hit signatures concern Zariski structure-sheaf stalks or general sheaf adjunctions, not the specified relative-Frobenius pro-etale germ formula."
   }
  ],
  "blueprint": {
   "from": {
    "node": "lem-trf-local-frobenius-conjugacy",
-   "place": "Proof (3): identifying the local Frobenius with the one-circuit transport via prop-trf-scheme-galois-comparison; extracted normalized relative-Frobenius germ argument from returned proof step 6.",
+   "place": "Proof (3): specified absolute-Frobenius trivialization in the scheme--Galois comparison used to identify stalk transport; explicit inverse-reparametrization calculation on relative-Frobenius pointed neighbourhoods.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-frobenius-stalk-trivialization-normalization",
+  "worker": "stage1",
+  "summary": "Kept the statement. Computed the specified adjoint trivialization on pullback-unit sections using the existing unit-equation lemma, then evaluated its inverse relative-Frobenius map on pointed lifts. Wrote the quotient, naturality, pullback-composition and localization checks explicitly. Reused existing nodes throughout; no new nodes.",
+  "blueprint": "Realizes proof (3) of lem-trf-local-frobenius-conjugacy, the normalization implicit in its use of prop-trf-scheme-galois-comparison: the specified relative Frobenius produces inverse reparametrization on germs, and that exact map commutes with pullback.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-frobenius-trivialization-pullback",
+    "why": "Uses the existing canonical relative-Frobenius trivialization and its pullback naturality as a generic sheaf-theoretic tool; the unit has no replacement for its normalized construction."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Uses only canonical preservation of constant coefficient sections and invertibility for a finite ring, to make the germ formula A-linear; a generic coefficient-identification tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-frobenius-trivialization-pullback",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-0228fd840",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-0228fd840 (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps and every cited node statement in full. I also read Stacks more-morphisms Tag 0F6W (lemma-relative-frobenius-weakly-etale) and the main-20261015 blueprint proofs of prop-trf-scheme-galois-comparison and lem-trf-local-frobenius-conjugacy (3). The statement is unchanged; its hypotheses (finite commutative A, any characteristic-p X) match lem-pur-frobenius-trivialization-pullback and lem-trf-proetale-pullback-stalk-coherence, and the coefficient category is the ordinary pro-etale constant-sheaf one. Step 2: I checked the adjunction direction independently. With (L1,R1)=(P,Q), (L2,R2)=(id,id) and delta=d^{-1}, Q(tau)eta=d^{-1}, so the unit section goes to M(R_V^{-1})a; the mate convention cannot change this. Step 3: R_V(v delta^{-1})=(v,u), and h R_V^{-1}=pr_T, so R_V^{-1} is a pointed T-morphism and the germ relation gives [V,v delta^{-1},a]. Step 6: I redid the full chase from the reparametrization equation (t=z, u=delta, Spec alpha=delta^{-1}), the two composition equations and lem-pur pullback naturality with u=z; it closes. Step 7 is termwise and passes to the derived category by parts (2) and (3) of the localization node. Edge cases checked: b=0; X=s with z=id; the constant sheaf on V=s, v=delta; the direction of delta^{-1}; nonreduced X; A=0. There are no new nodes and no cycle (transitive check), and no duplicate in the DAG (0F6W, Frobenius and stalk greps; closest are lem-trf-absolute-frobenius-site, the coefficient-naturality lemmas and lem-trf-local-frobenius-transport-normalization, none of which states this formula). Both declared tool_uses (lem-pur, prop-weil-pbc-proetale-constant-ring-map) are accepted; they lie in the unit route anyway (sk-thm-sf-package directly, sk-thm-properbasechange transitively). No fixes."
  }
 }
