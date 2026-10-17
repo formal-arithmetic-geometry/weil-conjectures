@@ -11,9 +11,76 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $r=b\\circ a$. This is an inner fibration: given an inner-horn lifting problem for $r$, first apply $a$ to its upper horn and fill over its given base simplex using the inner fibration $b$. This gives a simplex in $D$ with the prescribed $a$-image of the horn. Lift this simplex with the original horn using $a$. The resulting simplex in $A$ solves the original problem. Thus the cartesian mapping-space criterion applies to $a$, $b$ and $r$, with exactly the quasicategory hypotheses in the statement.",
+   "uses": [
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01TU",
+    "place": "Corollary 5.1.2.6 (1), proof: mapping-space diagram, bottom square, transitivity and varying the test object. Online source, archival copy WANTED."
+   }
+  },
+  {
+   "text": "Fix a vertex $z\\in A$. Write $M_C(x,y)=\\operatorname{Map}_C(x,y)$ in the specified right-pinched convention. These are Kan complexes by [lem-coef-infinity-pinch-comparison]. Form the stacked diagram $$\\begin{array}{ccc}M_A(z,u)&\\xrightarrow{h\\circ-}&M_A(z,v)\\\\ \\downarrow a_*&&\\downarrow a_*\\\\ M_D(az,au)&\\xrightarrow{a(h)\\circ-}&M_D(az,av)\\\\ \\downarrow b_*&&\\downarrow b_*\\\\ M_B(rz,ru)&\\xrightarrow{r(h)\\circ-}&M_B(rz,rv).\\end{array}$$ The postcomposition maps and their coherent commutation with $a_*,b_*$ are supplied by [lem-coef-infinity-hom-bifunctor-functoriality], whose action in the second variable is canonical postcomposition. Use those naturality squares, and take their concatenated commutation homotopy for the outer rectangle. The vertical composite is $r_*$: in degree $n$ both composites send a simplex $\\sigma:\\Delta^{n+1}\\to A$ to $b\\circ a\\circ\\sigma$. Composing the coherent natural transformations for $a_*$ and $b_*$ therefore supplies the functor-induced square for $r$ with this concatenated homotopy. In particular this is a coherent diagram of spaces, not just a diagram of component sets.",
+   "uses": [
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-infinity-hom-bifunctor-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01TU",
+    "place": "Corollary 5.1.2.6 (1), proof: mapping-space diagram, bottom square, transitivity and varying the test object. Online source, archival copy WANTED."
+   }
+  },
+  {
+   "text": "The hypothesis says that $a(h):a(u)\\to a(v)$ is $b$-cartesian. Apply [lem-coef-infinity-cartesian-mapping-criterion] to $p=b$, $s=a(h)$ and the test vertex $a(z)\\in D$. It says exactly that the lower square in step 2 is a homotopy pullback. This uses no lifting-existence hypothesis for any other edge of $D$.",
+   "uses": [
+    "lem-coef-infinity-cartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01TU",
+    "place": "Corollary 5.1.2.6 (1), proof: mapping-space diagram, bottom square, transitivity and varying the test object. Online source, archival copy WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-homotopy-pullback-pasting] to the diagram of step 2 read with its two coordinates interchanged: its top row is $M_A(z,u)\\to M_D(az,au)\\to M_B(rz,ru)$ and its bottom row is $M_A(z,v)\\to M_D(az,av)\\to M_B(rz,rv)$. The right square is the lower square of step 2 and is a homotopy pullback by step 3. The cited pasting theorem, including its specified-homotopy clause, gives that the left square is a homotopy pullback if and only if the outer rectangle is. In the original orientation these are precisely the upper square and outer rectangle of step 2; the latter uses the concatenated homotopy specified there.",
+   "uses": [
+    "lem-coef-infinity-homotopy-pullback-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01TU",
+    "place": "Corollary 5.1.2.6 (1), proof: mapping-space diagram, bottom square, transitivity and varying the test object. Online source, archival copy WANTED."
+   }
+  },
+  {
+   "text": "The equivalence of step 4 holds for every vertex $z\\in A$. Hence the upper squares are homotopy pullbacks for all such $z$ if and only if the outer rectangles are. Apply [lem-coef-infinity-cartesian-mapping-criterion] first to $(a,h)$ and then to $(r,h)$, using the inner-fibration verification in step 1. These two universally quantified conditions are respectively that $h$ is $a$-cartesian and that $h$ is $r$-cartesian. This proves both directions of the asserted equivalence.",
+   "uses": [
+    "lem-coef-infinity-cartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01TU",
+    "place": "Corollary 5.1.2.6 (1), proof: mapping-space diagram, bottom square, transitivity and varying the test object. Online source, archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-infinity-cartesian-mapping-criterion",
+  "lem-coef-infinity-homotopy-pullback-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01TU",
+  "place": "Corollary 5.1.2.6 (1), proof: mapping-space diagram, bottom square, transitivity and varying the test object. Online source, archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +116,45 @@
    "results": "{\"t\": \"2026-10-17T07:36:23Z\", \"tool\": \"leanfinder\", \"query\": \"An edge over a cartesian edge is cartesian for the first functor exactly when cartesian for the composite in infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsCartesianCompOfIsFibered\", \"CategoryTheory.Functor.IsStronglyCartesian.of_comp\", \"CategoryTheory.Functor.IsStronglyCartesian.comp\", \"CategoryTheory.Functor.IsFibered.comp\", \"CategoryTheory.Functor.IsStronglyCartesian.map_comp_map\", \"CategoryTheory.Functor.IsStronglyCartesian.map_comp_map_assoc\", \"CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_isCartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_comp\"], \"digest\": \"41f48eb63b8349aa\"}",
    "date": "2026-10-17",
    "verdict": "no match: returned IsFibered.comp and IsStronglyCartesian.of_comp/comp concern one ordinary-category functor and composition of two arrows, not two inner fibrations of quasicategories. Read Mathlib/CategoryTheory/FiberedCategory/Fibered.lean:45-100 and Cartesian.lean:288-340. Quasicategory/StrictBicategory.lean:15-79 only gives a bicategory; TwoTruncated.lean:80-140 gives transitivity of edge homotopy, not cartesian edges. Loogle returned no hits. No one-line specialization states this lemma."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For inner fibrations p C to D and q D to E of quasicategories, if p(e) is q-cartesian then e is p-cartesian if and only if e is q p-cartesian",
+   "results": "{\"t\": \"2026-10-17T08:42:44Z\", \"tool\": \"leanfinder\", \"query\": \"For inner fibrations p C to D and q D to E of quasicategories, if p(e) is q-cartesian then e is p-cartesian if and only if e is q p-cartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsFibered.comp\", \"CategoryTheory.Functor.IsStronglyCartesian.of_comp\", \"CategoryTheory.instIsCartesianCompOfIsFibered\", \"CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_isCartesian\", \"CategoryTheory.Functor.IsStronglyCartesian.comp\", \"CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_exists_isCartesian\", \"CategoryTheory.Functor.IsStronglyCartesian.isCartesian_of_isStronglyCartesian\", \"CategoryTheory.Functor.IsStronglyCartesian.map_comp_map\"], \"digest\": \"06fa780cd1902b7f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Fibered.lean:45-100 and Cartesian.lean:288-340. The returned cartesian results compose two arrows over a single ordinary-category functor, not two inner fibrations of quasicategories. Quasicategory/StrictBicategory.lean:15-79 constructs a bicategory and TwoTruncated.lean:80-140 proves edge-homotopy transitivity. Loogle has no hits. No declaration states this item or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"cartesian\"",
+   "results": "{\"t\": \"2026-10-17T08:42:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"cartesian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Fibered.lean:45-100 and Cartesian.lean:288-340. The returned cartesian results compose two arrows over a single ordinary-category functor, not two inner fibrations of quasicategories. Quasicategory/StrictBicategory.lean:15-79 constructs a bicategory and TwoTruncated.lean:80-140 proves edge-homotopy transitivity. Loogle has no hits. No declaration states this item or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]artesian|[Cc]ocartesian|[Tt]ransitiv",
+   "results": "{\"t\": \"2026-10-17T08:42:44Z\", \"tool\": \"grep\", \"query\": \"[Cc]artesian|[Cc]ocartesian|[Tt]ransitiv\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"71366fa3762cacc4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Fibered.lean:45-100 and Cartesian.lean:288-340. The returned cartesian results compose two arrows over a single ordinary-category functor, not two inner fibrations of quasicategories. Quasicategory/StrictBicategory.lean:15-79 constructs a bicategory and TwoTruncated.lean:80-140 proves edge-homotopy transitivity. Loogle has no hits. No declaration states this item or specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartesian edge transitivity for composite inner fibrations of infinity categories",
+   "results": "{\"t\": \"2026-10-17T08:42:45Z\", \"tool\": \"leansearch\", \"query\": \"Cartesian edge transitivity for composite inner fibrations of infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsCartesianCompOfIsFibered\", \"CategoryTheory.Functor.IsStronglyCartesian.of_comp\", \"CategoryTheory.Functor.IsFibered.mk\", \"HomotopicalAlgebra.instFibrationCompOfIsStableUnderCompositionFibrations\", \"CategoryTheory.Functor.IsCartesian\", \"CategoryTheory.Functor.IsFibered.comp\", \"SSet.Truncated.Edge.comp\", \"CategoryTheory.Equivalence.trans\"], \"digest\": \"e2371f01e7bd0ddf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Fibered.lean:45-100 and Cartesian.lean:288-340. The returned cartesian results compose two arrows over a single ordinary-category functor, not two inner fibrations of quasicategories. Quasicategory/StrictBicategory.lean:15-79 constructs a bicategory and TwoTruncated.lean:80-140 proves edge-homotopy transitivity. Loogle has no hits. No declaration states this item or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An edge over a cartesian edge is cartesian for the first functor exactly when cartesian for the composite in infinity categories",
+   "results": "{\"t\": \"2026-10-17T08:42:58Z\", \"tool\": \"leanfinder\", \"query\": \"An edge over a cartesian edge is cartesian for the first functor exactly when cartesian for the composite in infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsCartesianCompOfIsFibered\", \"CategoryTheory.Functor.IsStronglyCartesian.of_comp\", \"CategoryTheory.Functor.IsStronglyCartesian.comp\", \"CategoryTheory.Functor.IsFibered.comp\", \"CategoryTheory.Functor.IsStronglyCartesian.map_comp_map\", \"CategoryTheory.Functor.IsStronglyCartesian.map_comp_map_assoc\", \"CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_isCartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_comp\"], \"digest\": \"41f48eb63b8349aa\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Fibered.lean:45-100 and Cartesian.lean:288-340. The returned cartesian results compose two arrows over a single ordinary-category functor, not two inner fibrations of quasicategories. Quasicategory/StrictBicategory.lean:15-79 constructs a bicategory and TwoTruncated.lean:80-140 proves edge-homotopy transitivity. Loogle has no hits. No declaration states this item or specializes to it in one line."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-cartesian-fibration-pullback",
@@ -81,5 +183,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-cartesian-edge-transitivity",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Split the mapping-space proof of Kerodon 01TU (1) into five steps; reuse the existing cartesian mapping criterion, homotopy pullback pasting, natural Hom action and pinch comparison. Composite inner lifting is written out. No new nodes and no Mathlib leaves. Repeated the item searches with the required logged command and read the ordinary-category hits.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, the displayed derived coefficient adjunction via coherent finite adjunction diagrams; technical relative-join step in the pointwise Kan mapping-space construction of lem-coef-infinity-fiberwise-relative-join. 02ZR equation (7.22), the cartesian fibration on its lower-right pullback and the componentwise cartesian-edge criterion. The transitivity input in Kerodon 02VV, first proof paragraph, applying Corollary 5.1.2.6 to special edges. Current main-20261015 ancestor: sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md, paragraph 2, displayed mapping-complex adjunction. This is a generic infinity-categorical foundation below that argument, not a new geometric route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q149-b80f04379",
+  "group": "Q149",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-b80f04379 (reviewer sub-agent of L); spot-checked: I read the whole item, all five steps and the statement of every cited node: def-cbc-enhanced-diagrams-cones, def-coef-infinity-fibrations, pinch-comparison, hom-bifunctor-functoriality, cartesian-mapping-criterion (including all ten of its proof steps) and homotopy-pullback-pasting. I also read the parent's step that uses the item and the unit record sk-prop-sf-biduality-general. Source: I read Kerodon 01TU (Cor. 5.1.2.6) online. Its assertion (1) is the cartesian version for inner fibrations of simplicial sets, so the item is that assertion restricted to quasicategories, with every hypothesis the same. Its proof (bottom square by 5.1.2.1, pasting by 3.4.1.11, then vary the test object) is what steps 3-5 follow. Small cases I tested: nerves of ordinary categories (where it is the classical strongly-cartesian cancellation), B a point (equivalences), and a=id or b=id (both trivially true). Empty mapping spaces are allowed by every cited node. Step 1 (a composite of inner fibrations is inner) really is elementary. The hom-bifunctor hypotheses hold because def-weil-size-convention gives universes U∈V. Step 3 needs only the forward direction of the criterion at the vertex a(z). Step 4's transposed use of pasting is fine, because the DAG defines a homotopy pullback square without fixing an orientation. One coherence point I checked and accept: the criterion's proof models the postcomposition square by a strict slice roof, while the item uses the Hom-bifunctor naturality squares. Both are the canonical postcomposition square and the item treats them the same way in steps 3 and 5, so this does not use a proof in place of a statement. Delivery-errors A-F: the delivery has one commit and creates no new nodes. I found no duplicate in the DAG (the closest, lem-coef-infinity-cocartesian-composition-initiality, is a different statement), and the item is not a clause of its parent. There is no cycle, every cited statement is in the item's own unit, no tool_uses are needed, and no SGA source is used. Kerodon/HTT are online only, so proof_origin agent with WANTED archives is right. I wrote no fixes."
  }
 }

@@ -47,18 +47,38 @@
    }
   },
   {
-   "text": "We first give the common degeneracy-removal argument. Suppose $X$ is a small simplicial set every nondegenerate simplex of which is a monomorphism. Let $\\mathsf S(X)$ be its simplex category, as explicitly defined in [lem-coef-simplex-last-vertex-cocone-equivalence], and let $B_X$ be its full subcategory of nondegenerate simplices. An arrow into a nondegenerate simplex is uniquely determined by its composite into $X$, since that target simplex is degreewise injective. Between nondegenerate simplices its simplex operator must be injective: a nontrivial surjective factor would make its source degenerate. Consequently there is at most one arrow between any two objects of $B_X$. Ordering them by existence of this arrow is antisymmetric, since arrows in both directions force equal dimensions and hence identity monotone operators. Thus $B_X$ is a poset. By [lem-weil-pbc-simplicial-set-nondegenerate-decomposition], every simplex $\\sigma$ has a unique presentation $\\sigma=\\bar\\sigma\\Delta(s_\\sigma)$ with $s_\\sigma$ surjective and $\\bar\\sigma$ nondegenerate. For any arrow $\\alpha:\\sigma\\to\\tau$ with $\\tau$ nondegenerate, factor $\\alpha=t_\\alpha\\circ s_\\alpha$ as its surjective image factor $s_\\alpha:[n]\\twoheadrightarrow[r]$ followed by its injective image inclusion $t_\\alpha:[r]\\hookrightarrow[m]$. The simplex $\\tau\\Delta(t_\\alpha)$ is nondegenerate: it is a monomorphism, and a degenerate simplex cannot be degreewise injective. Uniqueness of nondegenerate decomposition applied to $\\sigma=\\tau\\Delta(t_\\alpha)\\Delta(s_\\alpha)$ now gives $s_\\alpha=s_\\sigma$ and $\\tau\\Delta(t_\\alpha)=\\bar\\sigma$. This is the unique factorization $\\sigma\\xrightarrow{s_\\sigma}\\bar\\sigma\\xrightarrow{t_\\alpha}\\tau$. Hence $(\\sigma\\downarrow B_X)$ has the initial object $(\\bar\\sigma,s_\\sigma)$. The natural transformation from the constant functor at this object to the identity contracts its nerve by [lem-coef-nerve-natural-homotopy-equivalence]. To identify the infinity-categorical comma used below, put $C=\\mathsf S(X)$. The nerve $N(C_{\\sigma/})\\to N(C)$ is an isofibration: composition in an ordinary category fills all inner horns, and an isomorphism $t:c\\to c\\prime$ lifts at an object $\\sigma\\to c$ by composition to $\\sigma\\to c\\prime$, with its inverse lifting the inverse isomorphism. The strict pullback $N(B_X)\\times_{N(C)}N(C_{\\sigma/})$ is exactly the nerve of the ordinary comma just contracted. By [lem-coef-infinity-isofibration-pullback-limit], this strict pullback computes the infinity-categorical pullback in [lem-coef-infinity-cofinal-comma-criterion]. Thus its comma hypothesis holds for the nerve of $i_X:B_X\\hookrightarrow\\mathsf S(X)$. Apply [lem-coef-infinity-cofinal-comma-criterion] to get the universal equivalence $R_{N(i_X)}$ on cocone mapping spaces. Both index objects are nerves of small ordinary categories; no quasicategory assertion about $X$ was used.",
+   "text": "We first give the common degeneracy-removal argument. Suppose $X$ is a small simplicial set every nondegenerate simplex of which is a monomorphism. Let $\\mathsf S(X)$ be its simplex category and $B_X$ its full subcategory on nondegenerate simplices. By [lem-coef-nondegenerate-simplex-face-poset], $B_X$ is a poset and every arrow from a simplex $\\sigma$ to a nondegenerate simplex factors uniquely through its nondegenerate ancestor $\\bar\\sigma$.",
    "uses": [
-    "lem-coef-simplex-last-vertex-cocone-equivalence",
-    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
-    "lem-coef-nerve-natural-homotopy-equivalence",
-    "lem-coef-infinity-isofibration-pullback-limit",
+    "lem-coef-nondegenerate-simplex-face-poset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Variant 4.2.3.15, step (5), printed p. 256; degeneracy-removal construction."
+   }
+  },
+  {
+   "text": "For each simplex $\\sigma$, [lem-coef-nondegenerate-simplex-comma-initial] says that $N(\\sigma\\downarrow B_X)$ is weakly contractible and that $(\\bar\\sigma,s_\\sigma)$ is an initial object of its ordinary comma category. The contraction in terms of the retained nerve-homotopy input is explicit: the unique arrows from the initial object give a natural transformation from the constant functor at it to the identity (naturality follows because both composites are the unique arrow from that object). The other composite with the one-point category is the identity, so [lem-coef-nerve-natural-homotopy-equivalence] gives the claimed contraction.",
+   "uses": [
+    "lem-coef-nondegenerate-simplex-comma-initial",
+    "lem-coef-nerve-natural-homotopy-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Variant 4.2.3.15, step (5), printed p. 256; comma contractibility."
+   }
+  },
+  {
+   "text": "Let $C=\\mathsf S(X)$ and $i_X:B_X\\hookrightarrow C$. By [lem-coef-simplex-nerve-comma-pullback], the coherent comma $N(B_X)\\times^h_{N(C)}N(C_{\\sigma/})$ is represented by the weakly contractible nerve of $(\\sigma\\downarrow B_X)$. Thus the hypotheses of [lem-coef-infinity-cofinal-comma-criterion] hold for $N(i_X)$, and that criterion gives the universal cocone-restriction equivalence $R_{N(i_X)}$. No quasicategory assertion about $X$ is used.",
+   "uses": [
+    "lem-coef-simplex-nerve-comma-pullback",
     "lem-coef-infinity-cofinal-comma-criterion"
    ],
    "elementary": false,
    "source": {
     "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
-    "place": "HTT Variant 4.2.3.15, step (5), and Variant 4.2.3.16, first paragraph; the adjunction/comma argument is written out using Stacks 017R, lemma-splitting-simplicial-sets, for unique degeneracy decomposition. Online primary source read 2026-10-17; archival copy WANTED in report.md. No Stacks tag is asserted."
+    "place": "HTT Proposition 4.1.1.8 and Variant 4.2.3.15, step (5), printed pp. 225-226 and 256."
    }
   },
   {
@@ -86,7 +106,7 @@
    }
   },
   {
-   "text": "Apply the degeneracy-removal argument of step 2 to this $X$, and write $B=B_X$. Let $d=\\ell_X:N(\\mathsf S(X))\\to X$; [lem-coef-simplex-last-vertex-cocone-equivalence] gives the equivalence $R_d$. With $e=N(i_X):N(B)\\to N(\\mathsf S(X))$, step 2 gives the equivalence $R_e$. Define the required actual simplicial map to be\n$$\\varphi=a\\circ b\\circ c\\circ d\\circ e:N(B)\\longrightarrow K.$$\nFor every fixed $\\mathcal E,p,T$, restriction along this map is exactly the composite of the five restrictions $R_a,R_b,R_c,R_d,R_e$ applied to their successively restricted diagrams. By step 1 it is an equivalence. This constructs the map and its restriction property before imposing a cardinal estimate; no colimit of $p$ has been chosen.",
+   "text": "Apply the degeneracy-removal argument of steps 2–4 to this $X$, and write $B=B_X$. Let $d=\\ell_X:N(\\mathsf S(X))\\to X$; [lem-coef-simplex-last-vertex-cocone-equivalence] gives the equivalence $R_d$. With $e=N(i_X):N(B)\\to N(\\mathsf S(X))$, step 4 gives the equivalence $R_e$. Define the required actual simplicial map to be\n$$\\varphi=a\\circ b\\circ c\\circ d\\circ e:N(B)\\longrightarrow K.$$\nFor every fixed $\\mathcal E,p,T$, restriction along this map is exactly the composite of the five restrictions $R_a,R_b,R_c,R_d,R_e$ applied to their successively restricted diagrams. By step 1 it is an equivalence. This constructs the map and its restriction property before imposing a cardinal estimate; no colimit of $p$ has been chosen.",
    "uses": [
     "lem-coef-simplex-last-vertex-cocone-equivalence"
    ],
@@ -109,7 +129,7 @@
    }
   },
   {
-   "text": "It remains to handle $\\kappa=\\aleph_0$. By the definition in [def-coef-presentable-infinity-category], $K$ has finitely many nondegenerate simplices. Apply [lem-coef-finite-embedded-simplex-resolution] to obtain a finite simplicial set $Q$ and $q:Q\\to K$, with all nondegenerate simplices of $Q$ monomorphisms and with $R_q$ a universal equivalence. Apply step 2 with $X=Q$ and put $B=B_Q$. Its objects are exactly the nondegenerate simplices of $Q$, so $B$ is finite, including the possible empty case. By [lem-coef-simplex-last-vertex-cocone-equivalence], the map $\\ell_Q:N(\\mathsf S(Q))\\to Q$ has universal restriction equivalences. Define\n$$\\varphi=q\\circ\\ell_Q\\circ N(i_Q):N(B)\\longrightarrow K.$$\nIts restriction map is the composite $R_{N(i_Q)}R_{\\ell_Q}R_q$, so steps 1 and 2 give exactly the displayed equivalence in the item. This uses a finite resolution before forming the face poset; the countably infinite degeneracy category itself is never claimed finite.",
+   "text": "It remains to handle $\\kappa=\\aleph_0$. By the definition in [def-coef-presentable-infinity-category], $K$ has finitely many nondegenerate simplices. Apply [lem-coef-finite-embedded-simplex-resolution] to obtain a finite simplicial set $Q$ and $q:Q\\to K$, with all nondegenerate simplices of $Q$ monomorphisms and with $R_q$ a universal equivalence. Apply steps 2–4 with $X=Q$ and put $B=B_Q$. Its objects are exactly the nondegenerate simplices of $Q$, so $B$ is finite, including the possible empty case. By [lem-coef-simplex-last-vertex-cocone-equivalence], the map $\\ell_Q:N(\\mathsf S(Q))\\to Q$ has universal restriction equivalences. Define\n$$\\varphi=q\\circ\\ell_Q\\circ N(i_Q):N(B)\\longrightarrow K.$$\nIts restriction map is the composite $R_{N(i_Q)}R_{\\ell_Q}R_q$, so steps 1–4 give exactly the displayed equivalence in the item. This uses a finite resolution before forming the face poset; the countably infinite degeneracy category itself is never claimed finite.",
    "uses": [
     "def-coef-presentable-infinity-category",
     "lem-coef-finite-embedded-simplex-resolution",
@@ -136,16 +156,18 @@
  ],
  "proof_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-presentable-infinity-category",
   "lem-cbc-enhanced-functor-cone-calculus",
-  "lem-coef-finite-embedded-simplex-resolution",
-  "lem-coef-infinity-cofinal-comma-criterion",
-  "lem-coef-infinity-isofibration-pullback-limit",
-  "lem-coef-injective-simplex-cocone-restriction",
+  "lem-coef-nondegenerate-simplex-face-poset",
+  "lem-coef-nondegenerate-simplex-comma-initial",
   "lem-coef-nerve-natural-homotopy-equivalence",
-  "lem-coef-simplex-first-vertex-cocone-equivalence",
+  "lem-coef-simplex-nerve-comma-pullback",
+  "lem-coef-infinity-cofinal-comma-criterion",
   "lem-coef-simplex-last-vertex-cocone-equivalence",
-  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+  "lem-coef-simplex-first-vertex-cocone-equivalence",
+  "lem-coef-injective-simplex-cocone-restriction",
+  "def-coef-presentable-infinity-category",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+  "lem-coef-finite-embedded-simplex-resolution"
  ],
  "proof_origin": {
   "by": "agent",
@@ -239,7 +261,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -261,8 +283,8 @@
   "date": "2026-10-17",
   "item": "lem-coef-infinity-poset-nerve-cofinal-replacement",
   "worker": "stage1",
-  "summary": "Expanded the uncountable five-map simplex-category construction and the separate finite embedded-simplex resolution, wrote out nondegenerate normalization via initial comma objects and the cardinal estimates, retained the item statement, and searched four strictly intermediate source lemmas. No Lean attachment was found.",
-  "blueprint": "The ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2, derived mapping-limit adjunction, via the existing chain through presentability and the poset cone test. The immediate place is the converse in HTT Remark 5.3.1.12 invoked in Proposition 5.3.5.15(a): steps 3-6 realize Variant 4.2.3.15; steps 2 and 7 realize Variant 4.2.3.16; steps 1 and 8 give the precise cocone mapping-space formulation.",
+  "summary": "Repaired the returned long second proof step by extracting three strictly smaller statement-only lemmas: the nondegenerate simplex subcategory and unique factorization, initiality/contractibility of its comma categories, and the strict-to-coherent nerve pullback comparison. The item statement and Lean record are unchanged; all remaining proof steps and the HTT route are retained.",
+  "blueprint": "The ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2, derived mapping-limit adjunction, via the existing chain through presentability and the poset cone test. The immediate place is the converse in HTT Remark 5.3.1.12 invoked in Proposition 5.3.5.15(a): the new nodes expand the degeneracy-removal and comma-identification subarguments of Variant 4.2.3.15 step (5), while the repaired item steps retain the five-map construction and finite case.",
   "tool_uses": [
    {
     "node": "lem-cbc-enhanced-functor-cone-calculus",
@@ -276,10 +298,10 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q34-92ff1e6ae",
-  "group": "Q34",
+  "reviewer": "NT-cc-N6-3e262e21a",
+  "group": "N6",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-92ff1e6ae (reviewer sub-agent of L); spot-checked: I read all eight steps of the item, the four new nodes and the statement of every cited node. The item statement is unchanged and is exactly what lem-coef-filtered-poset-cone-test uses. HTT is not in literature/, so the WANTED line and proof_origin=agent are correct; I checked each claim mathematically. Step 2: B_X is a poset; the initial object (σ̄,s_σ) of the comma follows from the uniqueness clause of the Mathlib-leaf decomposition lemma; contractibility uses a non-invertible natural transformation, which the cited nerve lemma allows; strict and homotopy comma agree by the isofibration pullback lemma; the comma-criterion hypotheses hold for nerves. Steps 3-5: the composite a∘b∘c∘d∘e composes correctly, and I checked the direction of the first-vertex functor and that it is a functor on the opposite. Step 4: the embedded-simplex argument holds, since injective self-maps of [n] are identities. Step 6: the count μ=max(ℵ0,λ)<κ is right for uncountable κ. Step 7: the finite route goes through the finite resolution and B=B_Q is finite. Small-case tests of the new nodes: the last-vertex node at Δ^0 and N([1]); the first-vertex node, whose comma is S(N(c/C))^op and contractible; the injective-simplex node, whose comma is the semi-simplicial simplex category of Δ^n (this is HTT 6.5.3.7); the finite-resolution node, e.g. Sd²X, plus the empty cases. All four are true, statement-only and strictly smaller than the item. I found no duplicates after reading the subdivision, cofinal, cofinality-space-test, anodyne-cocone, colimit-subdiagram and decomposition nodes, and there is no cycle. I accept the declared tool use of lem-cbc-enhanced-functor-cone-calculus: only its generic statement that Fun(K,E) has Kan mapping spaces is used. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-3e262e21a (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 10 steps, all three new nodes, the statement of every cited node, and HTT 4.2.3.14–4.2.3.16 (pp. 254–256). Repaired steps 2–4 spell out HTT 4.2.3.15 step (5) and 4.2.3.16 (∗) without changing the route. The item statement is unchanged and not weakened. face-poset: true. With α = i∘e, τΔ(i) is mono, hence nondegenerate, so decomposition uniqueness gives e = s_σ; thinness follows from injectivity of τ; the one-vertex circle shows the hypothesis is needed. Mathlib's Nonsingular.lean (existsUnique_of_le, monoOfLE) covers only mono face operators, so this is not a leaf. comma-initial: (σ̄, s_σ) is initial by the factorization and because s_σ is epi; tested on Δ^0. nerve-comma-pullback: the criterion's fat source-fixed slice of the nerve N(C) is still isomorphic to N(C_{σ/}), because functors [n]×[1]→C with the bottom row the identity chain at σ are exactly chains under σ. The projection is an isofibration, since inner horn fillers in nerves are unique and every edge lifts. The strict pullback is N(σ↓B) because B is full, and isofibration-pullback-limit gives the Cat∞ pullback. Step 4 meets the criterion's hypotheses: both sides are small nerves and weak contractibility is invariant under equivalence. Steps 5–10 re-checked: the composite's maps line up, μ = max(ℵ0, λ) < κ, and the finite case goes through the nonsingular resolution. proof_deps equals the union of uses; no cycle; all citations stay in the unit except the decomposition Mathlib leaf and the already declared cbc functor-cone tool use, which I accept. No duplicate after reading the subdivision-face-poset, finite-embedded-resolution, cofinal-relative-join-slice and undercategory-model nodes. The new nodes are statement-only and self-contained, with all three search kinds and correct blueprint from/via. Minor: step 3 repeats the comma-initial contractibility, which is harmless. Process slip: I ran one read-only git log -1 by mistake, which changed nothing. No fixes."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.InfinityPosetNerveCofinalReplacement",
