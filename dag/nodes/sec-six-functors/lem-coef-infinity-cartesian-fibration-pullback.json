@@ -59,18 +59,16 @@
    }
   },
   {
-   "text": "First derive the transitivity fact needed here from existing nodes. For inner fibrations $a:A\\to D$, $b:D\\to B$ and an edge $h:u\\to v$ with $a(h)$ $b$-cartesian, take opposites as explicitly constructed in step 2. For each vertex $w$ of $A^{\\mathrm{op}}$, consider the three rows\n$$\\begin{array}{ccc}\n\\operatorname{Map}_{A^{\\mathrm{op}}}(u,w)&\\longrightarrow&\\operatorname{Map}_{A^{\\mathrm{op}}}(v,w)\\\\\n\\downarrow&&\\downarrow\\\\\n\\operatorname{Map}_{D^{\\mathrm{op}}}(a(u),a(w))&\\longrightarrow&\\operatorname{Map}_{D^{\\mathrm{op}}}(a(v),a(w))\\\\\n\\downarrow&&\\downarrow\\\\\n\\operatorname{Map}_{B^{\\mathrm{op}}}(ba(u),ba(w))&\\longrightarrow&\\operatorname{Map}_{B^{\\mathrm{op}}}(ba(v),ba(w)).\n\\end{array}$$\nThe horizontal maps are precomposition by $h^{\\mathrm{op}}$, $a(h)^{\\mathrm{op}}$, and $ba(h)^{\\mathrm{op}}$. Use the composition construction of [lem-coef-infinity-mapping-composition]: applying $a$ or $b$ to the same fixed-vertex triangle gives the square's commutation homotopy; applying $ba$ gives its concatenation. The cocartesian criterion of [lem-coef-infinity-cocartesian-mapping-criterion] makes the bottom square a homotopy pullback by the hypothesis on $a(h)$. After transposing the diagram, [lem-coef-infinity-homotopy-pullback-pasting] says the top square is a homotopy pullback if and only if the outer rectangle is. Apply the criterion for every $w$ and undo ordinal reversal: $h$ is $a$-cartesian if and only if it is $ba$-cartesian. Thus this local fact needs no new node.\n\nCall an edge $e=(e_0,e_1)$ special when each $e_i$ is $q_i$-cartesian. For a special edge, $F_1(e_1)$ is $r$-cartesian by hypothesis. Apply this derived transitivity fact to $F_1:E_1\\to H$ and $r:H\\to S$. They are inner fibrations, and $rF_1=q_1$; since $e_1$ is $q_1$-cartesian, the reverse implication says that it is $F_1$-cartesian. It follows directly that $e$ is $\\pi$-cartesian: project an outer-horn problem for $e$ over a prescribed simplex $a:\\Delta^n\\to E_0$ to $E_1$, fill it using cartesianness of $e_1$ over $F_0a$, and pair its filler with $a$. The resulting pair has exactly the prescribed boundary and image. Now $\\pi(e)=e_0$ is $q_0$-cartesian. Apply this derived transitivity fact to $\\pi,q_0$, inner by step 1, to conclude that $e$ is $q$-cartesian.",
+   "text": "Call an edge $e=(e_0,e_1)$ special when each $e_i$ is $q_i$-cartesian. For a special edge, $F_1(e_1)$ is $r$-cartesian by hypothesis. Apply [lem-coef-infinity-cartesian-edge-transitivity] to $F_1:E_1\\to H$ and $r:H\\to S$. They are inner fibrations, and $rF_1=q_1$; since $e_1$ is $q_1$-cartesian, the reverse implication says that it is $F_1$-cartesian. It follows directly that $e$ is $\\pi$-cartesian: project an outer-horn problem for $e$ over a prescribed simplex $a:\\Delta^n\\to E_0$ to $E_1$, fill it using cartesianness of $e_1$ over $F_0a$, and pair its filler with $a$. The resulting pair has exactly the prescribed boundary and image. Now $\\pi(e)=e_0$ is $q_0$-cartesian. Apply [lem-coef-infinity-cartesian-edge-transitivity] to $\\pi,q_0$, inner by step 1, to conclude that $e$ is $q$-cartesian.",
    "uses": [
     "def-cbc-enhanced-diagrams-cones",
     "def-coef-infinity-fibrations",
-    "lem-coef-infinity-mapping-composition",
-    "lem-coef-infinity-cocartesian-mapping-criterion",
-    "lem-coef-infinity-homotopy-pullback-pasting"
+    "lem-coef-infinity-cartesian-edge-transitivity"
    ],
    "elementary": false,
    "source": {
     "document": "https://kerodon.net/tag/02VV",
-    "place": "First proof paragraph, special edges are cartesian. Transitivity (Kerodon 01TU, proof) is derived here by mapping-square pasting from existing nodes; the outer-horn pullback argument is written directly."
+    "place": "First proof paragraph, special edges are cartesian; Corollary 5.1.2.6 (Kerodon 01TU) is now a cited statement-only node. The pullback outer-horn argument is written directly."
    }
   },
   {
@@ -119,9 +117,7 @@
   "def-coef-infinity-fibrations",
   "lem-coef-infinity-cocartesian-composition-initiality",
   "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
-  "lem-coef-infinity-mapping-composition",
-  "lem-coef-infinity-cocartesian-mapping-criterion",
-  "lem-coef-infinity-homotopy-pullback-pasting",
+  "lem-coef-infinity-cartesian-edge-transitivity",
   "lem-coef-infinity-core-kan-fibration"
  ],
  "proof_origin": {
@@ -255,10 +251,52 @@
    "results": "{\"t\": \"2026-10-17T01:15:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"cartesian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "Second reading: no match. The semantic hits are ordinary CategoryTheory.Functor.IsCartesian/IsStronglyCartesian properties, read in Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean:45-82, 288-340 and Fibered.lean:45-100. They do not state a quasicategorical strict-pullback theorem. Loogle has no result; the Quasicategory grep finds only a comment on cartesian closure in StrictBicategory.lean:28. Transitivity is instead derived from existing DAG statements in step 3."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict pullback of cartesian fibrations of quasicategories over a common base with an isofibration comparison and componentwise cartesian edges",
+   "results": "{\"t\": \"2026-10-17T07:32:39Z\", \"tool\": \"leanfinder\", \"query\": \"Strict pullback of cartesian fibrations of quasicategories over a common base with an isofibration comparison and componentwise cartesian edges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFibers.pullbackMap.isCartesian\", \"CategoryTheory.Functor.IsPreFibered.pullbackMap.IsCartesian\", \"CategoryTheory.Functor.IsFibered.pullbackPullbackIso\", \"CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_isCartesian\", \"HasFibers.mkPullback\", \"HasFibers.pullbackMap\", \"CategoryTheory.Functor.IsPreFibered.pullbackObj\", \"CategoryTheory.Functor.IsPreFibered.pullbackMap\"], \"digest\": \"29146c91567477a4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic results are ordinary CategoryTheory fibered-category declarations, or generic stability of a supplied model-category fibration class; none gives the strict quasicategorical pullback and componentwise horn-cartesian criterion. Read Fibered.lean:45-100, Cartesian.lean:288-340 and Quasicategory/StrictBicategory.lean:15-79. Focused grep and quoted-name Loogle returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet, Cartesian, Quasicategory",
+   "results": "{\"t\": \"2026-10-17T07:32:42Z\", \"tool\": \"loogle\", \"query\": \"SSet, Cartesian, Quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Cartesian'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No usable match: query was rejected with loogle: unknown identifier 'Cartesian'. Repaired by the later quoted-name Loogle query, which returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]artesian[Ff]ibration|[Ii]so[Ff]ibration|[Cc]artesian.*[Pp]ullback",
+   "results": "{\"t\": \"2026-10-17T07:32:42Z\", \"tool\": \"grep\", \"query\": \"[Cc]artesian[Ff]ibration|[Ii]so[Ff]ibration|[Cc]artesian.*[Pp]ullback\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic results are ordinary CategoryTheory fibered-category declarations, or generic stability of a supplied model-category fibration class; none gives the strict quasicategorical pullback and componentwise horn-cartesian criterion. Read Fibered.lean:45-100, Cartesian.lean:288-340 and Quasicategory/StrictBicategory.lean:15-79. Focused grep and quoted-name Loogle returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of cartesian fibrations of infinity categories along an isofibration preserving cartesian edges",
+   "results": "{\"t\": \"2026-10-17T07:32:43Z\", \"tool\": \"leansearch\", \"query\": \"Pullback of cartesian fibrations of infinity categories along an isofibration preserving cartesian edges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCartesian.of_comp_iso\", \"CategoryTheory.IsPullback.of_iso'\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"CategoryTheory.Functor.IsFibered.toIsPreFibered\", \"CategoryTheory.Functor.IsPreFibered.pullbackObj\", \"HasFibers.pullbackMap.isCartesian\", \"CategoryTheory.Functor.IsPreFibered.pullbackMap\", \"CategoryTheory.Functor.IsPreFibered.pullbackMap.IsCartesian\"], \"digest\": \"ec503f4b38462727\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic results are ordinary CategoryTheory fibered-category declarations, or generic stability of a supplied model-category fibration class; none gives the strict quasicategorical pullback and componentwise horn-cartesian criterion. Read Fibered.lean:45-100, Cartesian.lean:288-340 and Quasicategory/StrictBicategory.lean:15-79. Focused grep and quoted-name Loogle returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Cartesian\"",
+   "results": "{\"t\": \"2026-10-17T07:35:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"Cartesian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic results are ordinary CategoryTheory fibered-category declarations, or generic stability of a supplied model-category fibration class; none gives the strict quasicategorical pullback and componentwise horn-cartesian criterion. Read Fibered.lean:45-100, Cartesian.lean:288-340 and Quasicategory/StrictBicategory.lean:15-79. Focused grep and quoted-name Loogle returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fiber product of fibered infinity categories is fibered if one functor is a categorical fibration and both functors preserve cartesian morphisms",
+   "results": "{\"t\": \"2026-10-17T07:35:19Z\", \"tool\": \"leanfinder\", \"query\": \"The fiber product of fibered infinity categories is fibered if one functor is a categorical fibration and both functors preserve cartesian morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFibers.mkPullback\", \"CategoryTheory.instIsCartesianCompOfIsFibered\", \"CategoryTheory.Functor.IsFibered.comp\", \"HasFibers.pullbackMap.isCartesian\", \"CategoryTheory.Functor.IsFibered.toIsPreFibered\", \"CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_isCartesian\", \"CategoryTheory.Functor.IsPreFibered.pullbackMap.IsCartesian\", \"HomotopicalAlgebra.instFibrationSndOfIsStableUnderBaseChangeFibrations\"], \"digest\": \"d81fd8b5de981e38\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic results are ordinary CategoryTheory fibered-category declarations, or generic stability of a supplied model-category fibration class; none gives the strict quasicategorical pullback and componentwise horn-cartesian criterion. Read Fibered.lean:45-100, Cartesian.lean:288-340 and Quasicategory/StrictBicategory.lean:15-79. Focused grep and quoted-name Loogle returned no hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-relative-join-simplex-extension",
@@ -271,7 +309,7 @@
   "date": "2026-10-17",
   "item": "lem-coef-infinity-cartesian-fibration-pullback",
   "worker": "stage1",
-  "summary": "Kept the full imported statement and its isofibration hypothesis. Wrote strict inner-horn lifts, special-edge construction, exact component adjustment via the core Kan fibration, and the comparison proving the converse. Second reading folded transitivity into step 3 using the existing opposite-dual cocartesian mapping criterion and homotopy-pullback pasting. Zero new nodes, zero Mathlib leaves; no project declaration matches. Maintainer reading made the isofibration hypothesis explicit (the lift of an equivalence must itself be an equivalence, as in Kerodon's isofibration and in lem-coef-infinity-core-kan-fibration); with a mere lift the edge criterion fails.",
+  "summary": "Q54 rechecked and retained the full statement and six-step Kerodon 02VV proof, including the corrected equivalence-lifting isofibration hypothesis. Extracted the 2259-character third step's independent transitivity subclaim as the statement-only node lem-coef-infinity-cartesian-edge-transitivity under the 2026-10-17 long-step rule; the item now applies it twice. Rechecked all cited statements and strict equalities, source/target orientations and empty/identity cases. Added exact per-step citation quotes and logged real Mathlib searches. One new unsplit node, zero Mathlib leaves; no project declaration matches.",
   "blueprint": "Realizes the auxiliary cartesian pullback in the relative-join simplex-extension step serving paragraph 2 of prop-coef-integral-exceptional-adjoint, rather than replacing the finite-coefficient adjunction route.",
   "tool_uses": [
    {
@@ -291,10 +329,10 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q61-263dffde1",
-  "group": "Q61",
+  "reviewer": "NT-cc-Q54-def2c09fb",
+  "group": "Q54",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-263dffde1 (reviewer sub-agent of L); spot-checked: I read all six steps and the full statements of all 8 cited nodes. Each step is correct. Step 2: ordinal reversal turns the cocartesian composition and initial-comparison clauses into the cartesian ones, with the comparison equivalence in the fibre over the degenerate base simplex. Step 3: the transitivity argument (cocartesian mapping criterion plus homotopy-pullback pasting) holds; all objects are quasicategories and the bottom square is a homotopy pullback by hypothesis. Step 4: the target-prescribed lift is the Lambda^1_1 horn of the core Kan fibration, and the inner horn over sigma gives exact equality of images. Step 6: fibre inverse witnesses project to ambient equivalences. One fault, repaired: the statement said F_1 'lifts equivalence edges with prescribed source' without requiring the lift to be an equivalence, and under that reading the edge criterion is false. Counterexample over S=[1]: E_1 has fibre C={f:0'->1', g, gf=id, fg=e not id} over 0, mapping to J={a~b} by f->i, g->i^{-1}, e->id. Every isomorphism lifts with prescribed source, but not to an isomorphism. Then P=E_0 x_H E_1 is isomorphic to [1], so its edge is q-cartesian, while its E_1 component, which factors through f, is not q_1-cartesian. The fix restates the hypothesis as Kerodon's isofibration (the lift is an equivalence edge). This is what step 4 needs from lem-coef-infinity-core-kan-fibration and what the parent, relative-join-simplex-extension step 4, supplies through a Joyal fibration (joyal-quasicategory-characterizations (1)). I also added one sentence to split_report.summary. The corrected item is in fixes/dag/nodes/sec-six-functors/. There are no new nodes (the worker's transitivity node was folded into step 3) and no dependency cycle (closure of 148 nodes). An rg search found no duplicate among localization-cartesian-pullback-pushout, cartesian-base-equivalence-invariance, relative-exponential-restriction and pointwise-cocartesian-transport. I accept both tool_uses (def-cbc-enhanced-diagrams-cones and lem-cbc-inner-fibration-equivalence-outer-horn-lift from sk-prop-sf-cbc). The source, Kerodon 02VV, is not archived, so agent origin and the WANTED line are correct; no SGA is used.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-def2c09fb (reviewer sub-agent of L); spot-checked: I read the item, the one new node and the full statements of all five cited nodes. Online I read Kerodon 02VV (Prop 5.1.4.21, statement and proof outline) and 01TU (Cor 5.1.2.6). The item's statement is unchanged from the version Q61 reviewed and the Lean statement: it is 02VV for quasicategories, with the isofibration hypothesis requiring an equivalence lift, and nothing is weakened. All six steps check. Step 1: strict horn fills along F_1 and q_0 make P a quasicategory and pi, q inner. Step 2: reversing simplices turns the cocartesian composition and initial-comparison clauses into the cartesian ones, with the comparison triangle (u,g,h) over s_0 alpha. Step 3: the new lemma is applied with (a,b)=(F_1,r), then a direct outer-horn fill shows e is pi-cartesian, then it is applied with (a,b)=(pi,q_0); all hypotheses are present. Step 4: the core Kan fibration lifts the Lambda^1_1 horn over v exactly, and an inner fill over sigma gives F_1(e'_1)=F_0(e_0). Step 5 is the definition. Step 6: the fibre equivalence projects to ambient equivalences, which with the composition clause make every q-cartesian edge special. All steps are under 2000 characters and proof_deps equals the union of uses. The new node lem-coef-infinity-cartesian-edge-transitivity is exactly 01TU(1) for quasicategories. It is statement-only, self-contained, has correct definition deps, five real searches and blueprint from/via/same_as=[]. I tested it on a=id, b=id, degenerate h, empty A and ordinary nerves. It is a genuine lemma because the a-cartesian direction needs the mapping-space argument, and it does not restate a clause of the item. An rg search over the DAG (01TU, 5.1.2.6, transitivity, composite-cartesian) and reading the statements of eleven candidate nodes found no duplicate or one-line generalization. There is no cycle. I accept the base's two tool uses (def-cbc-enhanced-diagrams-cones, lem-cbc-inner-fibration-equivalence-outer-horn-lift). No SGA is used, and the item is not a target, so no base-change morphism or coefficient category is involved. No fixes."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.CartesianFibrationPullback",
