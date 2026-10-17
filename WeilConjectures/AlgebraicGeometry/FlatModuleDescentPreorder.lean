@@ -9,6 +9,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.IsFlatOver
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.AlgebraicGeometry.FlatModuleDescentPreorderStage
 import WeilConjectures.AlgebraicGeometry.RelativelyFlatModulePullback
@@ -92,7 +93,7 @@ theorem exists_eventually_isFlatOver_of_isPullback_limit_preorder
     simpa [d, e, aj, bj, gj, gk, t, ← Spec.map_comp, ← R.map_comp] using h
   obtain ⟨δ⟩ := Scheme.Modules.nonempty_tensorPullbackComp d aj
   have hcomp : ((Scheme.Modules.tensorPullback (d ≫ aj)).obj M).IsFlatOver e :=
-    flatOver_of_iso e (δ.app M) hbase
+    hbase.of_iso (δ.app M).symm
   exact (isFlatOver_tensorPullback_iff_of_isPullback hpaste hq M).mp hcomp
 
 end AlgebraicGeometry

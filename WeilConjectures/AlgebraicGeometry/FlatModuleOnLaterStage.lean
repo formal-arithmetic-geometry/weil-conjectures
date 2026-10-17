@@ -9,6 +9,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.IsFlatOver
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import WeilConjectures.AlgebraicGeometry.FinitePresentationModuleMapDescent
 import WeilConjectures.AlgebraicGeometry.FlatModuleDescentAffineCharts
@@ -52,25 +53,13 @@ private theorem flatOver_restrict
       Category.comp_id]
   exact congrArg (fun t : Γ(T, V.1) ⟶ Γ(Q, U'.1) ↦ (M.smul (t.hom r)).hom m) hring
 
-private theorem flatOver_of_iso
-    {X S : Scheme.{u}} (f : X ⟶ S) {M N : X.Modules} (eMN : M ≅ N)
-    (hflat : N.IsFlatOver f) : M.IsFlatOver f := by
-  intro V U e
-  let φ := (f.appLE V.1 U.1 e).hom
-  let : Module Γ(S, V.1) Γ(M, U.1) := Module.compHom _ φ
-  let : Module Γ(S, V.1) Γ(N, U.1) := Module.compHom _ φ
-  have : Module.Flat Γ(S, V.1) Γ(N, U.1) := hflat V U e
-  let E := (ModuleCat.restrictScalars φ).mapIso
-    ((SheafOfModules.evaluation (R := X.ringCatSheaf) (Opposite.op U.1)).mapIso eMN)
-  exact (Module.Flat.equiv_iff E.toLinearEquiv).mpr (hflat V U e)
-
 private theorem flatOver_tensorPullback_iso
     {P Q T : Scheme.{u}} (e : P ≅ Q) (b : Q ⟶ T) (M : Q.Modules)
     (hflat : M.IsFlatOver b) :
     ((Scheme.Modules.tensorPullback e.hom).obj M).IsFlatOver (e.hom ≫ b) := by
   obtain ⟨adj⟩ := Scheme.Modules.nonempty_tensorPullbackAdjunction e.hom
   let δ := adj.leftAdjointUniq (Scheme.Modules.restrictAdjunction e.hom)
-  exact flatOver_of_iso _ (δ.app M) (flatOver_restrict e.hom b M hflat)
+  exact (flatOver_restrict e.hom b M hflat).of_iso (δ.app M).symm
 
 private theorem flatOver_of_cartesian_model
     {P Q X S T : Scheme.{u}} {f : X ⟶ S} {g : T ⟶ S}
@@ -91,7 +80,7 @@ private theorem flatOver_of_cartesian_model
     eqToIso (congrArg (fun k ↦ Scheme.Modules.tensorPullback k) ha.symm) ≪≫ δ
   have hP := flatOver_tensorPullback_iso e b'
     ((Scheme.Modules.tensorPullback a').obj M) hflat
-  apply flatOver_of_iso b (δ'.app M)
+  refine Scheme.Modules.IsFlatOver.of_iso (δ'.app M).symm ?_
   simpa only [Functor.comp_obj, hb] using hP
 
 -- Tag 05LY: use the acyclic chart and algebra interfaces from the FlatModuleDescent proof.
@@ -203,7 +192,7 @@ theorem exists_flat_module_on_later_stage
   let g : Over.mk (c.π.app (Opposite.op i)) ⟶
       Over.mk (Spec.map (R.map (homOfLE hij))) :=
     Over.homMk (c.π.app (Opposite.op j)) (c.w (homOfLE hij).op)
-  have hflat := flatOver_of_iso (pullback.snd fi (c.π.app (Opposite.op i))) eN hM
+  have hflat := hM.of_iso eN.symm
   have hflat' := flatOver_of_cartesian_model
     (IsPullback.of_hasPullback fj (c.π.app (Opposite.op j)))
     (isPullback_baseChangeMap fi g) N hflat
