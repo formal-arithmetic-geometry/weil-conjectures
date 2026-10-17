@@ -1,0 +1,92 @@
+{
+ "id": "lem-per-tate-twist-lisse-line",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "proof, second paragraph: 'The twist $(d)$ is lisse of rank one, hence support-preserving'",
+   "via": [
+    "lem-per-tate-twist-support-condition"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The Tate twist line is a rank-one lisse adic sheaf and twisting is the lisse tensor",
+ "statement": "Let $\\ell$ be a prime and let $X$ be a separated noetherian scheme of finite dimension on which $\\ell$ is invertible [def-weil-pbc-scheme-conventions], fix an algebraic closure $\\overline{\\mathbf Q}_\\ell$ of $\\mathbf Q_\\ell$ and $m\\in\\mathbf Z$. For a finite extension $E/\\mathbf Q_\\ell$ inside $\\overline{\\mathbf Q}_\\ell$ with valuation ring $\\mathcal O_E$, uniformizer $\\varpi_E$ and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension], let $T_{E,n}=A_{E,n,X}(m)$ be the étale Tate sheaf of [def-asd-finite-etale-tate-sheaf] on the small étale site $X_{\\mathrm{et}}$ [def-weil-pbc-etale-site], formed with $N=\\ell^n$ (which kills $A_{E,n}$). Then:\n\n1. Reduction modulo $\\varpi_E^n$ (with $u\\mapsto u^\\ell$ on roots of unity, and for $m<0$ through the dual) gives isomorphisms $T_{E,n+1}\\otimes_{A_{E,n+1}}A_{E,n}\\xrightarrow{\\sim}T_{E,n}$, and each $T_{E,n}$ is étale locally isomorphic to the constant sheaf $A_{E,n,X}$. Hence $\\mathcal T_E=(T_{E,n})_{n\\ge1}$ is a lisse $\\mathcal O_E$-sheaf of rank one in the sense of [def-pod-lisse-l-adic-sheaves], and $\\mathcal T=(E,\\mathcal T_E\\otimes E)$ is a lisse $\\overline{\\mathbf Q}_\\ell$-sheaf whose fibre $\\mathcal T_{\\bar x}$ [def-pod-lisse-adic-fibre-functors] at every geometric point $\\bar x$ of $X$ [def-weil-geometric-point] is a one-dimensional $\\overline{\\mathbf Q}_\\ell$-vector space; up to canonical isomorphism $\\mathcal T$ does not depend on $E$.\n\n2. With $\\nu_X:X_{\\mathrm{proet}}\\to X_{\\mathrm{et}}$ the comparison morphism [def-weil-pbc-site-comparison-morphism], there are isomorphisms $\\nu_X^{*}T_{E,n}\\cong A_{E,n}(m)_X$ with the finite-level twists of [def-coefficient-twists-detailed], compatible with the transition maps, and $\\varprojlim_n\\nu_X^{*}T_{E,n}\\cong\\mathcal O_E(m)_X$. Thus the object of $D^b_c(X,\\overline{\\mathbf Q}_\\ell)$ [def-weil-pbc-qbar-category] given by $\\mathcal T$ in degree zero, namely $\\mathcal O_E(m)_X$ rationalized and taken at the finite stage $E$, is the twist object $\\overline{\\mathbf Q}_{\\ell,X}(m)$ of [def-coefficient-twists-detailed].\n\n3. For every $K\\in D^b_c(X,\\overline{\\mathbf Q}_\\ell)$ the Tate twist $K(m)=K\\otimes^L_{\\Lambda_X}\\Lambda(m)$ of [def-coefficient-twists-detailed] is naturally isomorphic to the tensor product $K\\otimes^L\\mathcal T$ of [def-weil-derived-pullback-tensor-hom] (the completed integral tensor product, rationalized and extended to a common finite stage); in particular, on an integral representative the uncompleted derived tensor product with the invertible line $\\mathcal O_E(m)_X$ is already derived complete and agrees with the completed one.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Corollary 5.1.5 (finite-level local systems on the pro-étale site are the étale ones), Definition 6.8.3 and Proposition 6.8.4(1) (lisse $\\mathcal O_E$-sheaves are the inverse systems of their reductions), Remark 6.8.15 (operations); agent-formulated for the twist line of this DAG",
+  "external": [
+   {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-smooth-pullback-t-exact.proof.md",
+    "place": "second paragraph: 'The twist $(d)$ is lisse of rank one'"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-asd-finite-etale-tate-sheaf",
+  "def-weil-pbc-etale-site",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-pod-lisse-adic-fibre-functors",
+  "def-weil-geometric-point",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-coefficient-twists-detailed",
+  "def-weil-pbc-qbar-category",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rg -io 'tate.?twist|rootsOfUnity.*sheaf|lisse' Mathlib/ (mathlib of ~/weil-conjectures-sheaf/lean)",
+   "results": "3 files, all case-insensitive false hits on 'lIsSe' (Data/Rel/Separated.lean, Topology/MetricSpace/MetricSeparated.lean, Topology/MetricSpace/Cover.lean)",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l 'rootsOfUnity' Mathlib/AlgebraicGeometry Mathlib/CategoryTheory/Sites",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tate twist sheaf is a rank one lisse l-adic sheaf",
+   "results": "not run: LeanSearch is not reachable from the review service",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tate twist sheaf is a rank one lisse l-adic sheaf and twisting is tensor with it",
+   "results": "not run: LeanFinder is not reachable from the review service",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-per-tate-twist-support-condition",
+  "date": "2026-10-18",
+  "group": "Q97"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

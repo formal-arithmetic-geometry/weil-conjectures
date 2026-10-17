@@ -22,9 +22,52 @@
   "def-coefficient-twists-detailed",
   "def-weil-derived-cohomology-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $L=\\overline{\\mathbf Q}_{\\ell,X}(m)$. The scheme $X$ is separated of finite type over a field, hence noetherian of finite dimension, and $\\ell$ is invertible on $X$ because $D^b_c(X,\\overline{\\mathbf Q}_\\ell)$ of [def-weil-pbc-qbar-category] is defined only for such schemes. By [lem-per-tate-twist-lisse-line] (clauses 1 and 2), $L$ is, in degree zero, the lisse $\\overline{\\mathbf Q}_\\ell$-sheaf $\\mathcal T$ of rank one in the adic sense, with one-dimensional fibre $\\mathcal T_{\\bar x}=L_{\\bar x}$ at every geometric point, and by its clause 3 the twist $M(m)$ of [def-coefficient-twists-detailed] is naturally isomorphic to $M\\otimes^L\\mathcal T$ formed with the completed operations. Apply [lem-per-adic-lisse-cohomology-calculus] to $K=M$ and $\\mathcal L=\\mathcal T$. It gives $M\\otimes^L\\mathcal T\\in D^b_c(X,\\overline{\\mathbf Q}_\\ell)$, hence $M(m)\\in D^b_c(X,\\overline{\\mathbf Q}_\\ell)$, and, for every $a$, a natural isomorphism $\\mathcal H^a(M(m))\\cong\\mathcal H^a(M)\\otimes L$, whose geometric-point fibre is $\\mathcal H^a(M)_{\\bar x}\\otimes_{\\overline{\\mathbf Q}_\\ell}L_{\\bar x}$ with $L_{\\bar x}$ one-dimensional.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "lem-per-tate-twist-lisse-line",
+    "lem-per-adic-lisse-cohomology-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-smooth-pullback-t-exact.proof.md",
+    "place": "second paragraph, first sentence: the twist is lisse of rank one"
+   }
+  },
+  {
+   "text": "For any geometric point $\\bar x$, tensoring a $\\overline{\\mathbf Q}_\\ell$-vector space with the one-dimensional space $L_{\\bar x}$ is an isomorphism onto a vector space of the same dimension, and it is zero exactly when the original vector space is zero. The fibre description in Step 1 therefore gives, for every $a$, equality of the loci where the stalks of $\\mathcal H^a(M(m))$ and $\\mathcal H^a(M)$ are nonzero. Taking closures in the definition of support yields $\\operatorname{Supp}\\mathcal H^a(M(m))=\\operatorname{Supp}\\mathcal H^a(M)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-smooth-pullback-t-exact.proof.md",
+    "place": "second paragraph: 'hence support-preserving'"
+   }
+  },
+  {
+   "text": "The support condition [def-per-support-condition] is a conjunction of dimension inequalities for these supports. Since Step 2 gives equality for every cohomological index, all its inequalities hold for $M$ exactly when they hold for $M(m)$. Thus $\\operatorname{SuppCon}(M)$ holds if and only if $\\operatorname{SuppCon}(M(m))$ holds.",
+   "uses": [
+    "def-per-support-condition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-smooth-pullback-t-exact.proof.md",
+    "place": "second paragraph: support preservation applied to the support condition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coefficient-twists-detailed",
+  "def-per-support-condition",
+  "lem-per-adic-lisse-cohomology-calculus",
+  "lem-per-tate-twist-lisse-line"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-smooth-pullback-t-exact.proof.md",
+  "place": "second paragraph, from the lisse rank-one twist through support preservation"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -46,10 +89,38 @@
    "results": "not run: the search services are not reachable from the review service",
    "date": "2026-10-18",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tate twist of a constructible l-adic complex preserves supports of cohomology sheaves",
+   "results": "8 hits: DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.instIsLEObjSingleFunctor, DerivedCategory.isLE_iff, DerivedCategory.isGE_iff (Mathlib/Algebra/Homology/DerivedCategory/TStructure)",
+   "date": "2026-10-18",
+   "verdict": "no match: generic derived-category t-structure support, no Tate twists or sheaf supports"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, CategoryTheory.Functor.PreservesHomology, tensor",
+   "results": "0 hits; loogle: unknown identifier 'tensor'",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|tateTwist|support.*tensor|tensor.*support (Mathlib)",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tate twist of a l-adic derived complex preserves support of every cohomology sheaf",
+   "results": "8 hits: HomologicalComplex.isSupported_of_iso, CochainComplex.isStrictlyGE_shift, CochainComplex.isStrictlyGE_of_iso, HomologicalComplex.IsSupported.mk, HomologicalComplex.map_isStrictlySupported, HomologicalComplex.isStrictlySupported_of_iso, CochainComplex.isLE_shift, CochainComplex.isGE_shift",
+   "date": "2026-10-18",
+   "verdict": "no match: homological-complex support and shift lemmas, no Tate twist or geometric support"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +137,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-tate-twist-support-condition",
+  "worker": "stage1",
+  "summary": "Split the imported support-preservation clause into the rank-one twist/cohomology calculation, the fibrewise support equality, and the final support-condition equivalence. Reused the existing adic lisse cohomology calculus and the locally-free twist statement; no new nodes were needed. The statement and hypotheses are unchanged. Reviewer repair (Q97 maintainer reader, 2026-10-18): Step 1 cited lem-pur-twist-sheaf-locally-free (m=1, pro-etale locally free, another unit) for the claim that the twist line of every m is a lisse adic rank-one sheaf and that the twist is the lisse tensor of the calculus; neither is stated there. The statement-only node lem-per-tate-twist-lisse-line now carries this, and Step 1 cites it.",
+  "blueprint": "The three steps realize the second-paragraph sentence that the twist is lisse of rank one and hence support-preserving, followed by its application to the support condition."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-eef900c34",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-eef900c34 (reviewer sub-agent of L); spot-checked: I read the item, its unit and chapter, the parent lem-per-smooth-pullback-t-exact, the main-20261015 proof (second paragraph: 'The twist (d) is lisse of rank one, hence support-preserving'), lem-per-lisse-tensor-permanence, the full statement of every cited node, and Bhatt–Scholze §6.8 (Definition 6.8.3, Proposition 6.8.4). The item's statement is true and unweakened. Its coefficient category is the adic common-stage D^b_c of def-weil-pbc-qbar-category; X separated of finite type over a field is noetherian and finite-dimensional, and ℓ is invertible because the category is only defined for such X. Edge cases m=0, m<0, X empty, zero stalk and empty support (dim = -∞) all pass. Steps 2 and 3 are correct and elementary: tensoring with a one-dimensional space is zero exactly when the original is zero, and the support condition is the verbatim inequality set of def-per-support-condition. Step 1 had a gap (C4/E5). It cited lem-pur-twist-sheaf-locally-free, which states only the m=1 integral pro-étale locally free line, for two claims that lemma does not make: (a) Qbar_ell(m) is, for every m, a rank-one lisse adic sheaf in the sense of def-pod-lisse-l-adic-sheaves (an inverse system of étale lisse sheaves); (b) the twist of def-coefficient-twists-detailed, a plain derived tensor, equals the completed tensor that lem-per-adic-lisse-cohomology-calculus uses. That citation was also outside the unit's route and had no tool_use declared. No existing node states (a) and (b): I checked prop-weil-twist-preserves, det-def-sp-tate-twist-locally-free, lem-tw-lisse-rational-realization (only over F̄_q) and lem-asd-finite-etale-twist-line, and a blueprint search found nothing. FIX: I added the statement-only node lem-per-tate-twist-lisse-line (same unit, created.item = this item, blueprint.from = parent proof second paragraph, via [item], same_as []). Its source is Bhatt–Scholze Corollary 5.1.5, Definition 6.8.3, Proposition 6.8.4(1) and Remark 6.8.15. Its Mathlib record holds only the grep searches that ran; LeanSearch and LeanFinder are recorded as unavailable on this machine. I tested it for m=0 and m<0, the Kummer transition maps (ℓ^n kills A_{E,n}), and agreement of the plain and completed tensor for an invertible line. I rewrote item Step 1 to cite the new node and the calculus, and kept proof_deps equal to the union of the step uses. The statement is unchanged and there is no cycle. No tool_uses are accepted or needed. No SGA source is cited. The report mentions a citations.json that is not in the packet; this is a discrepancy only. Files: fixes/dag/nodes/sec-deligne-laumon-a1/{lem-per-tate-twist-lisse-line,lem-per-tate-twist-support-condition}.json; details in review.md.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }
