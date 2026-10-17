@@ -301,5 +301,23 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-c4527c3c8 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and the statement of every cited node against Stacks: topologies.tex section ph (0DBD, 0DBE, the full statement and proof of 0DBF, 0DBG, 0DBH, 0DBI, 0DBJ), 021N, more-morphisms 0CP0 with its proof and 0DBT, and limits lemma-chow-finite-type, which needs only a qcqs base. All step-source tags were checked in tags/tags and are correct. The 10 steps are correct. Steps 3-7 build an auxiliary topology J_* tested on affines, check its three axioms (transitivity through the 0DBF(2) child, applied to affine levels as it requires), show J_ph is contained in J_* by checking the generators, and show the reverse by standard family plus upward closure plus transitivity. They also derive the affine criterion, the basis and locality. Step 8 goes from etale to fppf to the 0CP0 child; 0CP0 is applied only on affine A, which is qcqs, and finite implies proper gives a standard family, then Step 7 finishes. Steps 9-10 cover Zariski-is-etale and the empty and size cases. Edge cases tested: T empty, m=0, identity covers. Both new nodes match 0DBF(2) and 0CP0 hypothesis by hypothesis. They are strictly smaller real lemmas, not clauses of the item, and statement-only. Grep for the tags, labels, standard ph and dominate finds no duplicate. Every off-unit citation is a mathlib leaf, so no tool_uses are needed. The parent lem-trf-ph-etale-comparison-hypotheses uses only what the item states. Not a target, so no base-change or coefficient issue, and no SGA citation. Fix: lem-trf-fppf-finite-surjective-refinement now cites def-weil-surjective-morphism for 'surjective', in the statement and stmt_deps (B3).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PhAffineStandardSieveBasis",
+  "declaration": "AlgebraicGeometry.Scheme.ph_affine_standard_sieve_basis",
+  "file": "lean/Sheaf/AlgebraicGeometry/PhAffineStandardSieveBasis.lean",
+  "statement": "theorem ph_affine_standard_sieve_basis (S : Scheme.{u}) : (∀ (T : Over S), IsAffine T.left → ∀ (R : Sieve T), R ∈ phTopology S T ↔ ∃ (W : Over S) (p : W ⟶ T), IsProper p.left ∧ Function.Surjective p.left ∧ ∃ (m : ℕ) (U : Fin m → W.left.Opens), (∀ k, IsAffineOpen (U k)) ∧ (⨆ k, U k) = ⊤ ∧ ∀ k, R ((Over.homMk (U k).ι : Over.mk ((U k).ι ≫ W.hom) ⟶ W) ≫ p)) ∧ (∀ (T : Over S) (R : Sieve T) (I : Type (u + 1)) (A : I → Over S) (a : ∀ i, A i ⟶ T), (∀ i, IsAffine (A i).left) → (∀ i, IsOpenImmersion (a i).left) → (∀ x : T.left, ∃ (i : I) (y : (A i).left), (a i).left y = x) → (R ∈ phTopology S T ↔ ∀ i, R.pullback (a i) ∈ phTopology S (A i))) ∧ (∀ (T : Over S) (I : Type (u + 1)) (E : I → Over S) (e : ∀ i, E i ⟶ T), (∀ i, Etale (e i).left) → (∀ x : T.left, ∃ (i : I) (y : (E i).left), (e i).left y = x) → Sieve.generate (Presieve.ofArrows E e) ∈ phTopology S T) ∧ (∀ (T : Over S) (I : Type (u + 1)) (U : I → Over S) (f : ∀ i, U i ⟶ T), (∀ i, IsOpenImmersion (f i).left) → (∀ x : T.left, ∃ (i : I) (y : (U i).left), (f i).left y = x) → ∀ i, Etale (f i).left)",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dfb0d12f4",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Read node, all 7 stmt deps, phTopology source (sInf over topologies containing Zariski-family and proper-surjective-singleton sieves, I : Type (u+1)), Stacks 0DBD/0DBG text. Only the item node's lean field changed; other node files byte-identical. Clause 1 matches 0DBD exactly (proper surjective p, Fin m affine opens covering W, R contains restrictions; probe: arrow.left = (U k).ι ≫ p.left by rfl); empty T/m=0 handled, nonempty T excludes m=0. Clause 2 affine-open locality for arbitrary T without finiteness; clause 3 étale jointly surjective -> covering (0DBT); clause 4 open immersion -> étale (probe by instances). Basis-on-affines is rendered by clause 1. Universes consistent with phTopology (Type (u+1)), no extra hypotheses, statement verbatim, docstrings with tags/blueprint and all 10 proof steps, only sorry, no defs. nt_compile --json: rc 0, 2.6 s, clean; error reporting verified with a failing probe. Non-blocking: 'Second reading by Q23' is the standard 2026-10-17 stub."
  }
 }

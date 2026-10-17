@@ -7,7 +7,7 @@
  },
  "kind": "statement",
  "title": "Independence of the K-injective resolution",
- "statement": "Let $T$ be a scheme, $\\Lambda$ a commutative ring and\n$K\\in D(T_{\\Et},\\Lambda)$, and let $K\\to I$ and $K\\to J$ be two\nK-injective\nresolutions of $K$. Then any comparison $I\\to J$ over $K$\ninduces an isomorphism $\\Gamma(T_{\\Et},I)\\to\\Gamma(T_{\\Et},J)$ in\n$D(\\Lambda)$; consequently $\\RGamma(T_{\\Et},K)$ of\n[def-kun-rgamma-unbounded] is independent, up to canonical\nisomorphism, of the chosen K-injective resolution.",
+ "statement": "Let $T$ be a scheme, $\\Lambda$ a commutative ring, and $K\\in D(T_{\\Et},\\Lambda)$. Choose a cochain complex $C$ representing $K$, specified by an isomorphism $e:Q(C)\\cong K$ in the derived category, and let $s:C\\to I$ and $t:C\\to J$ be K-injective resolutions of $C$ in the category of sheaves of $\\Lambda$-modules on $T_{\\Et}$. Then every comparison $f:I\\to J$ with $s\\,f$ homotopic to $t$ induces an isomorphism of the derived-category images of the termwise global-sections map $\\Gamma(T_{\\Et},f)$ in $D(\\Lambda)$; any two such comparisons induce the same morphism in $D(\\Lambda)$. Consequently the object $\\RGamma(T_{\\Et},K)$ of [def-kun-rgamma-unbounded] is independent, up to canonical isomorphism, of the chosen representative, resolutions, and comparisons.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-rgamma-unbounded-well-defined.md",
   "place": "node lem-kun-rgamma-unbounded-well-defined, order 1662"
@@ -171,5 +171,47 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-e1398c657 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, source places, and unit/chapter route. Verified all four steps, constant-ring module coefficients, comparison uniqueness and cocycles, and small cases including a noninvertible chain map that is a homotopy equivalence. No new nodes, missing citations, or dependency cycles; no target weakened. Concrete checks recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RGammaUnboundedWellDefined",
+  "declaration": "AlgebraicGeometry.Etale.rgamma_unbounded_well_defined",
+  "file": "lean/Sheaf/AlgebraicGeometry/RGammaUnboundedWellDefined.lean",
+  "statement": "theorem rgamma_unbounded_well_defined (Λ : Type (u + 1)) [CommRing Λ] (T : Scheme.{u}) (K : DerivedCategoryModule Λ T) (C I J : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ) (e : DerivedCategory.Q.obj C ≅ K) (s : C ⟶ I) (t : C ⟶ J) (hs : CochainComplex.IsKInjectiveResolution T Λ s) (ht : CochainComplex.IsKInjectiveResolution T Λ t) : (∀ (f : I ⟶ J), Nonempty (Homotopy (s ≫ f) t) → IsIso (DerivedCategory.Q.map (((Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapHomologicalComplex (ComplexShape.up ℤ)).map f))) ∧ (∀ (f g : I ⟶ J), Nonempty (Homotopy (s ≫ f) t) → Nonempty (Homotopy (s ≫ g) t) → DerivedCategory.Q.map (((Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapHomologicalComplex (ComplexShape.up ℤ)).map f) = DerivedCategory.Q.map (((Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapHomologicalComplex (ComplexShape.up ℤ)).map g)) ∧ (∀ (C' I' : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ) (e' : DerivedCategory.Q.obj C' ≅ K) (s' : C' ⟶ I'), CochainComplex.IsKInjectiveResolution T Λ s' → (∃ f : I ⟶ I', e.inv ≫ DerivedCategory.Q.map s ≫ DerivedCategory.Q.map f = e'.inv ≫ DerivedCategory.Q.map s') ∧ ∀ (f g : I ⟶ I'), e.inv ≫ DerivedCategory.Q.map s ≫ DerivedCategory.Q.map f = e'.inv ≫ DerivedCategory.Q.map s' → e.inv ≫ DerivedCategory.Q.map s ≫ DerivedCategory.Q.map g = e'.inv ≫ DerivedCategory.Q.map s' → IsIso (DerivedCategory.Q.map (((Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapHomologicalComplex (ComplexShape.up ℤ)).map f)) ∧ DerivedCategory.Q.map (((Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapHomologicalComplex (ComplexShape.up ℤ)).map f) = DerivedCategory.Q.map (((Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapHomologicalComplex (ComplexShape.up ℤ)).map g))",
+  "branch": "newtargets-dag",
+  "by": "Q113",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-e6e27c391"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e6e27c391",
+  "group": "Q113",
+  "result": "fix",
+  "note": "Delivered Lean rendered only clauses (1) iso of Q(Γ f) for comparisons over C and (2) independence of the comparison; the node's corrected 'consequently' clause (canonical independence of representative, resolutions and comparisons, node proof step 4) was missing and K, e were vacuous (H3). fixes/RGammaUnboundedWellDefined.lean adds a third conjunct: for any second representative e' : Q C' ≅ K with K-injective resolution s', a comparison f : I ⟶ I' over K (e.inv ≫ Q s ≫ Q f = e'.inv ≫ Q s') exists, and every such f gives IsIso Q(Γ f), the same for all such f; identity and cocycle equations follow. Docstring now carries all four proof steps. Report fix appends a maintainer section. Statement correction (representative C, e, s, t) accepted; citer audit of 2 DAG citers holds (leray-bdd is blueprint_uses only). Deps checked (IsKInjectiveResolution = QuasiIso ∧ IsKInjective, DerivedCategoryModule with Λ : Type (u+1) project encoding, Sheaf.Γ mathlib_match, DerivedCategory). No extra hypotheses, universes bound, edge cases covered, no duplicate, sorry only. nt_compile --json: delivered and fixed files both clean (3.3 s); elaborated type of the fixed theorem confirmed.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-17",
+  "by": "Q113 stage 2",
+  "old_statement": "Let $T$ be a scheme, $\\Lambda$ a commutative ring and\n$K\\in D(T_{\\Et},\\Lambda)$, and let $K\\to I$ and $K\\to J$ be two\nK-injective\nresolutions of $K$. Then any comparison $I\\to J$ over $K$\ninduces an isomorphism $\\Gamma(T_{\\Et},I)\\to\\Gamma(T_{\\Et},J)$ in\n$D(\\Lambda)$; consequently $\\RGamma(T_{\\Et},K)$ of\n[def-kun-rgamma-unbounded] is independent, up to canonical\nisomorphism, of the chosen K-injective resolution.",
+  "source": {
+   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-rgamma-unbounded-well-defined.md",
+   "place": "Node statement and proof: choose a cochain representative C of K and write the resolutions as s:C→I and t:C→J."
+  },
+  "citers": [
+   {
+    "id": "lem-trf-derived-cech-diagram-functorial-modules",
+    "holds": true,
+    "note": "Uses the lemma only for the induced isomorphism after applying termwise global sections to K-injective comparisons; the corrected representative-level interface supplies this."
+   },
+   {
+    "id": "lem-trf-finite-base-cech-hypercohomology",
+    "holds": true,
+    "note": "Uses the lemma as a tool to identify derived global-sections computations from K-injective resolutions; its bounded-below representative data remains compatible."
+   }
+  ],
+  "what": "The original prose binds K as an object of the derived category but then writes K→I and K→J as maps of cochain complexes. A K-injective resolution is a quasi-isomorphism from a representative cochain complex C, and a comparison is over C (or over K only after choosing an identification Q(C) ≅ K). The correction introduces C, the representative identification e, and maps s,t, while retaining the comparison, global-sections isomorphism, and canonical-independence clauses."
  }
 }

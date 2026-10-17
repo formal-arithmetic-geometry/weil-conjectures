@@ -147,5 +147,24 @@
   "group": "Q21",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-51a95ab8f (reviewer sub-agent of L); spot-checked: Read the item, all 4 new nodes, every cited node's statement and the sources. Stacks more-algebra 0AFZ l.36780-36797 (proof: 05N5, then 00O7, then 0AFY, then 0AFX det), 0AFX l.36464, K_0 recalled at l.36458, 0B8I l.36118, algebra 05N5 l.31490 (1) with I=0 and S={f^n}. The item's hypotheses match 0AFZ through 0B8I/00NX; no SGA used. Route: sk-thm-p1 (unit of the cited pbc nodes) is in the transitive uses of sk-i-curve-zero, so no tool use is needed. Fixed 3 faults in fixes/: (C1) step 3 used the regular-local projective-resolution bound with no node; it now cites the existing lem-weil-pbc-regular-local-finite-module-resolution (00O7) plus def-weil-regular-scheme (Noetherian local, needed by stage3-b4). (B3) lem-trf-invertible-module-k0-class and lem-trf-k0-class-trivial-invertible used 'invertible S-module', 'determinant homomorphism' and 'Pic(S)', which no node defines; restated with explicit hypotheses: finitely generated projective with an explicit finite free resolution gives [L]=sum(-1)^i r_i [S], and finitely generated projective with rank-one localizations and [L]=n[S] gives L≅S. Both are true (split resolutions; det[L]=L, det(n[S])=S per 0AFX) and were tested on S=0, a field, a Dedekind ring and Z×Z. Item step 1 no longer relies on 0B8I. (B3) def-trf-k0-group now cites finite generation and has the correct source place (section-determinants, not perfect-K-group); localized-finite-module-spread now cites R_f and M_f in its text. Item tested on f=0, f a unit and dim 0; rank one is essential. No duplicates found by rg for the tags and key words; no cycle; not a target node; nothing weakened; no drops.; 5 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularLocalPicardZero",
+  "declaration": "RingTheory.regularLocalPicardZero",
+  "file": "lean/Sheaf/RingTheory/RegularLocalPicardZero.lean",
+  "statement": "theorem regularLocalPicardZero (A : Type u) [CommRing A] [IsRegularLocalRing A] (f : A) (P : Type v) [AddCommGroup P] [Module (Localization.Away f) P] [Module.Finite (Localization.Away f) P] [Module.Projective (Localization.Away f) P] (hP : ∀ (q : Ideal (Localization.Away f)) [q.IsPrime], Nonempty (LocalizedModule q.primeCompl P ≃ₗ[Localization.AtPrime q] Localization.AtPrime q)) : Nonempty (P ≃ₗ[Localization.Away f] Localization.Away f)",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-98c14c7d0"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-98c14c7d0",
+  "group": "Q04",
+  "result": "fix",
+  "note": "Statement matches node and Stacks 0AFZ (with 0B8I/00NX) clause by clause: IsRegularLocalRing A, arbitrary f, Localization.Away f, P Module.Finite+Module.Projective, every prime localization LocalizedModule q.primeCompl P ≃ₗ Localization.AtPrime q (free rank one), conclusion Nonempty (P ≃ₗ A_f). No extra hypotheses; universes u,v independent; lean.statement verbatim; edge cases f=0 (A_f=0), f unit, dim 0 covered. Node diff vs base: only the lean record. No Mathlib/project duplicate (PicardGroup.lean only has local rings). Docstrings, sorry-only proof and report sections all OK. One fault fixed: the stated proof dependency lem-trf-localized-finite-module-spread (Sheaf.RingTheory.LocalizedFiniteModuleSpread, on the base 68044a170c) was not imported (H9/rule 7); fixes/RegularLocalPicardZero.lean adds that import. nt_compile: delivered and fixed files compile with no errors; a broken control copy errors, confirming the tool reports failures."
  }
 }

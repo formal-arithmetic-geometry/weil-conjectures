@@ -268,5 +268,23 @@
   "group": "Q14",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-8539adb99 (reviewer sub-agent of L); spot-checked: I read all of Stacks algebra.tex Tag 0G31 (lemma-geometrically-irreducible-base-change-transcendental), both directions, plus 0G32. The statement agrees with 0G31: the forward direction is iterated over finitely many variables with r=0 allowed, and the converse is for one variable. The only change from the pre-delivery wording is that 'for one transcendental variable' is now written as 'K(t)/k(t) for one indeterminate t over K'; the mathematics is the same and nothing was weakened. The added stmt_deps (algebraic independence, rational function field) are correct. I read the statements of all 20 cited nodes; each is a Mathlib or definition leaf, none is merged, so the route needs no tool_uses and no cycle is possible. I checked each step. Step 2: K⊗_k k(t) ≅ S_0^{-1}K[T], with the maps checked; elementary is justified. Step 3: R→K(t) is a localization, so A⊗_R K(t) ≅ K(t)⊗_{k(t)}F, with the balancing checked, and B is nonzero by the nontrivial-tensor leaf. Step 4: the unique minimal prime p of A avoids M, so p lies in Spec B and Spec B is irreducible. Step 5: the induction has its claim, base and step, and t_{i+1} is transcendental over K_i. Step 6: S_0^{-1}k'[T] embeds in k'(t). Step 7: field flatness (the clause in the statement of lem-pc-flat-field) twice gives C ↪ D ≅ K(t)⊗_{k(t)}E ↪ B', which is exactly the injection 0G31 omits. Step 8: minimal-prime lifting plus the dense-range criterion make the target irreducible. Small cases checked: K=k, C/R (reducible on both sides) and an inseparable p-th-root extension. No step assumes reducedness. There are no new nodes. 0G32 (add-transcendental) is a different node that is not cited, and I found no other 0G31 duplicate in the DAG. The parent lem-zl-bertini-field-extension uses only what the statement gives. Blueprint ancestry and same_as=[] are correct, no SGA is cited, and the Mathlib searches cover all three kinds. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.GeometricIrreducibilityTranscendental",
+  "declaration": "AlgebraicGeometry.geometricallyIrreducible_transcendental_extension",
+  "file": "lean/Sheaf/FieldTheory/GeometricIrreducibilityTranscendental.lean",
+  "statement": "theorem geometricallyIrreducible_transcendental_extension {k K : Type u} [Field k] [Field K] [Algebra k K] : (GeometricallyIrreducible (Spec.map (CommRingCat.ofHom (algebraMap k K))) → ∀ (Ω : Type (max u v)) [Field Ω] [Algebra k Ω] [Algebra K Ω] [IsScalarTower k K Ω] (r : ℕ) (t : Fin r → Ω), AlgebraicIndependent K t → GeometricallyIrreducible (Spec.map (CommRingCat.ofHom (IntermediateField.inclusion (IntermediateField.adjoin_le_iff.mpr (IntermediateField.subset_adjoin K (Set.range t))) : IntermediateField.adjoin k (Set.range t) →ₐ[k] (IntermediateField.adjoin K (Set.range t)).restrictScalars k).toRingHom))) ∧ (GeometricallyIrreducible (Spec.map (CommRingCat.ofHom (RatFunc.mapRingHom (Polynomial.mapRingHom (algebraMap k K)) (nonZeroDivisors_le_comap_nonZeroDivisors_of_injective _ (Polynomial.map_injective _ (algebraMap k K).injective))))) → GeometricallyIrreducible (Spec.map (CommRingCat.ofHom (algebraMap k K))))",
+  "branch": "newtargets-dag",
+  "by": "Q85",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-67e0f514c",
+  "group": "Q85",
+  "result": "pass",
+  "note": "Read node, Stacks 0G31 (algebra.tex), 5 stmt deps, module and report. Only the lean field changed vs live/side; lean.statement verbatim in file. Forward conjunct: GeometricallyIrreducible of Spec.map(algebraMap k K) implies, for all Ω : Type (max u v) with tower k→K→Ω, r : ℕ, t : Fin r → Ω AlgebraicIndependent over K, GeometricallyIrreducible of the canonical IntermediateField.inclusion adjoin k (range t) → adjoin K (range t), which equals k(t)→K(t) by aevalEquivField. r=0 allowed (probe: adjoin = ⊥). Converse: RatFunc.mapRingHom (coefficient map) k(t)→K(t), separate premise. No extra assumptions, universes bound, no definitions, sole proof by sorry (axioms: sorryAx + standard), docstrings carry source, blueprint id and 8 proof steps. nt_compile.py --json at library path: clean, exit 0; a probe with a false lemma showed the tool reports errors. Informational: the 'Second reading by Q85' section is the author's self-reading; no correction needed."
  }
 }

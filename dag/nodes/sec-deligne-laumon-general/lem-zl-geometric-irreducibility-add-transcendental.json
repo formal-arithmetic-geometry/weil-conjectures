@@ -127,5 +127,23 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-608fc147c (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks algebra.tex Tag 0G32 (l.11377-11389). It states the same thing, hypothesis by hypothesis: tower M⊆L⊆K, L/M geometrically irreducible, x∈K transcendental over L, conclusion L(x)/M(x) geometrically irreducible. The only step cites the forward clause of the existing same-unit node lem-zl-geometric-irreducibility-transcendental (Tag 0G31, l.11340-11374) with its K set to L, its k set to M and the one-element family {x}. That family is algebraically independent over L exactly because x is transcendental over L, and the output is literally L(x)/M(x). This matches the source's proof, which is a one-line reduction to 0G31. The cited node's r-variable form follows from 0G31 by induction, and the item needs only r=1. Stacks proves that direction completely (the 'details omitted' are in the converse). Edge cases: M=L gives a trivial conclusion. M=R, L=C shows the hypothesis is needed. If x is algebraic over L, M(x) need not lie in L(x), so the transcendence hypothesis is needed too. The parent lem-zl-bertini-field-extension uses the item with M=K_0, L=K_0(ξ1,θ1), x=ξ2, and that instance is valid. The delivery has no new nodes. The cited node is unsplit, so there is no cycle. The blueprint snapshots have no node stating 0G31 or 0G32, so same_as [] is correct. Searching dag/nodes found no duplicate. The step stays on the unit route, no tool_uses are needed and no SGA is cited. Proof_deps equals the union of uses, and proof_origin cites the document. Minor: the report calls the item 'imported', but it was created by NR for lem-zl-bertini-field-extension; this needs no change."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.GeometricIrreducibilityAddTranscendental",
+  "declaration": "AlgebraicGeometry.geometricallyIrreducible_adjoin_transcendental",
+  "file": "lean/Sheaf/FieldTheory/GeometricIrreducibilityAddTranscendental.lean",
+  "statement": "theorem geometricallyIrreducible_adjoin_transcendental {M L K : Type u} [Field M] [Field L] [Field K] [Algebra M L] [Algebra L K] [Algebra M K] [IsScalarTower M L K] (hLM : GeometricallyIrreducible (Spec.map (CommRingCat.ofHom (algebraMap M L)))) (x : K) (hx : Transcendental L x) : GeometricallyIrreducible (Spec.map (CommRingCat.ofHom (algebraMap (IntermediateField.adjoin M ({x} : Set K)) (IntermediateField.adjoin (IntermediateField.adjoin M ({x} : Set K)) (Set.range (algebraMap L K))))))",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-50380392d",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Delivery = new module Sheaf/FieldTheory/GeometricIrreducibilityAddTranscendental.lean, new report (Worker report + Second reading by Q67), node changed only in lean. Checked against Stacks algebra.tex Tag 0G32 l.11377-11389: tower M⊆L⊆K as Field/Algebra/IsScalarTower, hLM = GeometricallyIrreducible (Spec.map (algebraMap M L)) matching the def-pc-geometrically-irreducible record and sibling modules, hx = Transcendental L x, conclusion = GeometricallyIrreducible of the canonical algebraMap M⟮x⟯ → adjoin M⟮x⟯ (range L) = L(x); no extra or missing clauses. Edge cases M=L, any characteristic, inseparable L/M covered; one universe u is the project convention, not a restriction of substance. No duplicate in Mathlib or the side lean; proof dep 0G31 has no Lean record and needs no import. lean.statement verbatim in file; docstrings carry Tag 0G32, blueprint id and the proof step; sorry only (#print axioms shows sorryAx). nt_compile.py --json on the snapshot file: rc 0, 2.3 s, no errors or warnings; probe #check confirms signature, no unbound variables."
  }
 }

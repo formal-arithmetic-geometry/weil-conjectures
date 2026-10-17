@@ -203,5 +203,33 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-8893b2108 (reviewer sub-agent of L); spot-checked: I read the item and all six new nodes in full, and checked them against Stacks 0G4D (more-morphisms.tex l.8907-9009) and the lemmas it cites: algebra.tex 0G31 (l.11341), 0G32, 0G33, 037Q, 037N, and fields.tex 030N. The item statement matches 0G4D hypothesis by hypothesis and nothing is weakened. I tested small cases (n=1 forces trdeg K>=2; K=k(u,v), n=2 with a purely transcendental answer; delta=0 excluded). Steps 1-9 follow the proof. sigma_a is an automorphism preserving K_0 and K_2. In the pigeonhole step sigma_a(theta) lies in K'_2 (two lines, so elementary is acceptable) and a_1!=a_2. The tower in step 5 meets the hypotheses of the transcendental, subextension and add-transcendental lemmas. Step 6 uses direction (1)=>(2) of 0G33. In the finite-field case, independence over k(t) holds via coefficients in t, steps 2-6 are repeated over k(t) without circularity, and descent uses 0G31 (2)=>(1). The parent's application with n=r-1 matches. No duplicates: I grepped the DAG for 0G31/0G32/0G33/037N/037Q and keyword searches only found different statements; the existing 030N nodes state existence of a primitive element, not finiteness of intermediate fields. I read the Mathlib leaf at PrimitiveElement.lean l.209 (exists_primitive_element) and l.305 (finite_intermediateField_of_exists_primitive_element); the IsAlgebraic hypothesis is an inferred instance. All nodes are in the same unit, there are no tool_uses, and nothing cites SGA. Fixes, all in new-node files only: (1) B9: blueprint.from.via on all six new nodes set to [lem-zl-bertini-field-extension, lem-zl-bertini-irreducible-member]; (2) B4: lem-zl-geometric-irreducibility-separable had an unclosed $k., and its source place now names the full 0G33 equivalence; (3) B6/B7: lem-zl-finite-intermediate-fields recorded a false grep result ('0 hits'); I reran the grep and recorded the real hits, and how now gives lines 204/209/305. The item file is unchanged.; 6 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.BertiniFieldExtension",
+  "declaration": "FieldTheory.bertini_field_extension",
+  "declarations": [
+   "FieldTheory.bertiniOmega",
+   "FieldTheory.bertiniCoordinate",
+   "FieldTheory.bertiniXi",
+   "FieldTheory.bertiniDelta",
+   "FieldTheory.bertiniFamily",
+   "FieldTheory.bertiniBaseField",
+   "FieldTheory.bertini_field_extension"
+  ],
+  "file": "lean/Sheaf/FieldTheory/BertiniFieldExtension.lean",
+  "statement": "theorem bertini_field_extension (k K : Type u) [Field k] [Field K] [Algebra k K] (hfg : (⊤ : IntermediateField k K).FG) (hgeom : GeometricallyIrreducible (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (n : ℕ) (hn : 1 ≤ n) (g : Fin n → K) (hc : ∃ c : Fin n → k, AlgebraicIndependent k (bertiniFamily k K n g c)) : GeometricallyIrreducible (Spec.map (CommRingCat.ofHom (algebraMap (bertiniBaseField k K n g) (bertiniOmega K n))))",
+  "branch": "newtargets-dag",
+  "by": "Q137",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The six helpers construct the precise fraction field, coordinates, two linear forms, ordered family, and generated subfield in this statement, using FractionRing, MvPolynomial.X, Fin.lastCases and IntermediateField.adjoin. No arbitrary choice or new geometric-irreducibility predicate is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-da5609a85",
+  "group": "Q137",
+  "result": "pass",
+  "note": "Matches node and Stacks 0G4D (more-morphisms.tex l.8905-8922) clause by clause: Field/Algebra k K, IntermediateField FG (field generation), Mathlib GeometricallyIrreducible on Spec.map algebraMap, n>=1, Omega=FractionRing(MvPolynomial (Fin n) K), real MvPolynomial.X coordinates, existential c with AlgebraicIndependent of the ordered family (x,xi,delta), conclusion over IntermediateField.adjoin k (x,xi). Probe confirmed family ordering by simp, IsScalarTower k K Omega, axioms only sorryAx+standard, no unbound variables; single universe u is the standard Spec setting, equivalent to the dependency definition. Edge cases n=0 excluded, n=1 and c=0 vacuous, nonvacuous example checked, finite k kept. Helpers non-hollow; docstrings carry source, blueprint id and all 9 proof steps; proof is sorry only; node copy differs only in lean; lean.statement verbatim. nt_compile.py --json: module 2.8 s and both project proof imports clean. Notes only: kun-trdeg record lists only Algebra.trdeg, not AlgebraicIndependent; second-reading section is the author's self-check."
  }
 }

@@ -245,5 +245,23 @@
   "group": "Q17",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-cf70b9876 (reviewer sub-agent of L); spot-checked: Read the item and all ten steps in full, every cited node's statement, and Stacks algebra.tex at 00ND, 0AAI (full proof), definition-ring-CM, 0337, 00ON, 00LK and 00OP. The statement matches 00ND, with a CM ring meaning depth = dim at every prime localization, and is restricted to finitely many variables. It is unchanged and not weakened. Steps checked: Step 2 is finite-type Noetherian with the presentation A[x]/(0). Step 3 gets flatness from the free monomial basis via projective-module-flat. Step 4 gets a flat local map A_p->B_q, Noetherian by the flat-local-ring-maps clauses, and the closed fibre F = B_q/pB_q. Step 5 gives F = k[X]_Q with Q = W^{-1}(q/pB), which avoids the old A/p-versus-kappa(p) error. Step 6 splits on the PID: Q=0 or Q nonzero, and proves Q maximal by cancellation. Step 7: Q=0 gives a field, with depth 0 = dim 0. Step 8: Q nonzero gives dim 1 by 00OP (n=1), depth >= 1 from h/1, and depth <= 1 by 00LK with Supp = Spec F. Step 9: the depth formula 0337 and the height formula 00ON have the same fibre, and the induction hypothesis then gives depth = dim. Tested on Z with q = (p), (p,X), (X) and 0, on fields, on the zero ring and on k[e]/(e^2). No new nodes, and an rg search found no duplicate. review_split.py passes. Three sk-thm-p1 nodes (flat-local-depth-formula, depth-le-support-dimension, polynomial-ring-maximal-localization-dimension) are accepted as generic tool uses. No SGA is cited and no fixes were needed. One read-only git status was run by mistake; nothing was changed."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialAlgebraCohenMacaulay",
+  "declaration": "MvPolynomial.isNoetherianRing_and_local_depth_eq_dimension",
+  "file": "lean/Sheaf/RingTheory/PolynomialAlgebraCohenMacaulay.lean",
+  "statement": "theorem isNoetherianRing_and_local_depth_eq_dimension {R : Type u} [CommRing R] [IsNoetherianRing R] (hCM : ∀ (p : Ideal R) [p.IsPrime], (IsLocalRing.depth (R := Localization.AtPrime p) (Localization.AtPrime p) : WithBot ℕ∞) = ringKrullDim (Localization.AtPrime p)) (n : ℕ) : IsNoetherianRing (MvPolynomial (Fin n) R) ∧ ∀ (q : Ideal (MvPolynomial (Fin n) R)) [q.IsPrime], (IsLocalRing.depth (R := Localization.AtPrime q) (Localization.AtPrime q) : WithBot ℕ∞) = ringKrullDim (Localization.AtPrime q)",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e2750e87",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 00ND/definition-ring-CM clause by clause: Noetherian R with depth=dim at every prime localization; for all n, MvPolynomial (Fin n) R Noetherian and depth=dim at every prime. No extra hypotheses, single universe u, quantifiers in node order; lean.statement verbatim in file; node differs from side clone only in lean field. Uses recorded IsLocalRing.depth (Sheaf.RingTheory.Depth) and Mathlib ringKrullDim/Localization.AtPrime/MvPolynomial; hCM form identical to consumer CohenMacaulayRingUniversallyCatenary.of_local_depth_eq_dimension. Edge cases R=0, n=0, coercion ℕ∞→WithBot ℕ∞ fine. No definitions, one sorry theorem, source/blueprint docstrings with ten-step proof. nt_compile.py --json clean (rc 0, 2.6 s); deliberately broken /tmp variant confirmed compiler active and printed expected signature. Second-reading section uses the standard post-2026-10-17 sentence present in 452 landed reports; not treated as a fault."
  }
 }

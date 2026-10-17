@@ -161,5 +161,23 @@
   "group": "Q11",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-afba95132 (reviewer sub-agent of L); spot-checked: Read in full: the item, every cited node statement, Stacks algebra.tex 11207-11253 (definition-geometrically-irreducible and Tag 037N lemma-subalgebra-geometrically-irreducible with its proof), and more-morphisms.tex 8969-8975 (Tag 0G4D, the 'as a subextension' use). The statement change only writes 'K/k' out as 'Spec K over k'; hypotheses and conclusion are the same and the target is not weakened. The citer lem-zl-bertini-field-extension Steps 5 and 8 already use it in that form. Step 1 is elementary: from def-pc-field-extension, L into K is an injective unital map compatible with k. Step 2 applies assertion (1) of the existing same-unit node lem-zl-geometric-irreducibility-subalgebra-colimit. Every hypothesis matches (k a field, commutative unital k-algebras, injective k-compatible u, the same Spec-based definition), and only its statement is used. That node has empty proof_deps, so there is no cycle. No new nodes. The only duplicate is that general node, which is a generalization and is correctly cited. Small cases checked: L=k, L=K, Q(x^2) in Q(x), C over R (hypothesis fails), and the inseparable case F_p(t)(t^(1/p)) (irreducible but nonreduced; no separability assumed). Blueprint from/via and place are correct (paragraph 3 of lem-zl-bertini-finite-cover-curve, through 0G4F/0G4D); same_as is []; no SGA cited; tool_uses is [] and none is needed. Mathlib searches cover all three kinds and are plausible. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricallyIrreducibleSubextension",
+  "declaration": "AlgebraicGeometry.geometricallyIrreducible_spec_subextension",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricallyIrreducibleSubextension.lean",
+  "statement": "theorem geometricallyIrreducible_spec_subextension {k L K : Type u} [Field k] [Field L] [Field K] [Algebra k L] [Algebra k K] [Algebra L K] [IsScalarTower k L K] (hK : GeometricallyIrreducible (Spec.map (CommRingCat.ofHom (algebraMap k K)))) : GeometricallyIrreducible (Spec.map (CommRingCat.ofHom (algebraMap k L)))",
+  "branch": "newtargets-dag",
+  "by": "Q143",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dfa3e6940",
+  "group": "Q143",
+  "result": "pass",
+  "note": "Lean signature matches node clause by clause: [Field k/L/K] [Algebra k L] [Algebra k K] [Algebra L K] [IsScalarTower k L K] encodes the tower; hypothesis and conclusion are Mathlib GeometricallyIrreducible on Spec.map (CommRingCat.ofHom (algebraMap k K/L)), the recorded def-pc-geometrically-irreducible. No extra hypotheses; single universe u forced by Spec.map/geometrically convention. Agrees with Stacks 037N(1) and side geometricallyIrreducible_spec_of_injective. Edge cases L=k, L=K, inseparable, R in C, zero ring checked. lean.statement verbatim equal to file; docstrings carry source place, blueprint tag and two-step proof; sorry only; no definitions, no duplicate. nt_compile --json against side overlay: rc 0, no errors or warnings (2.1-2.5 s). Report has Worker report and Second reading by Q143. Minor only: unused CommAlgCat.Basic import; report mentions Scheme.Over though signature uses structure morphism directly. No fixes."
  }
 }

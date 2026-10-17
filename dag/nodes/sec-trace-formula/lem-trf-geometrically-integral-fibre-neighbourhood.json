@@ -234,5 +234,23 @@
   "group": "Q64",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-26269bc83 (reviewer sub-agent of L); spot-checked: Read in full against Stacks more-morphisms.tex: 055W (lemma-fibre-geometrically-connected-reduced), 057J (lemma-normal-morphism-irreducible) and the application in 057K. The item is unchanged. It is the smooth, finite-presentation case of 057J and matches every clause the parent lem-trf-etale-finite-smooth-local-structure uses. The new node lem-trf-geometrically-connected-fibre-open-spreading matches 055W hypothesis by hypothesis: flat, finite presentation spelled out as lfp+qc+qs, geometrically reduced fibres, T geometrically connected and nonempty. It also matches 055W's conclusions: affine elementary etale neighbourhood written out, quasi-compact V, every fibre nonempty and geometrically connected, exact fibre equality. It is statement-only, cites its notions, records three kinds of search, and is no duplicate of lem-sbc-flat-reduced-etale-connected-charts, the section-component nodes or the parent. Step checks: (1) the smooth-flat leaf and smooth-geometrically-reduced give 055W's hypotheses, and geometrically irreducible implies geometrically connected is written out from the definitions; (2) the new node is applied; (3) the smooth clause (2) of lem-pc-proper-base-change plus the open-immersion leaf make V->S_1 smooth; (4) C=(V_t)_K is smooth, the iterated base change in def-pc-base-change makes C geometrically connected and nonempty, and Spec K is integral and normal by lem-weil-pbc-spec-domain-stalks-function-field(2); (5) the conclusion 'C integral' of lem-sbc-smooth-connected-generic-geometry-core, used as a statement only with the identity as generic fibre, holds for every K, so V_t is geometrically integral. Every cited unit (sk-thm-picard-rr, sk-def-smooth, sk-prop-input-spreading) is on sk-i-curve-zero's transitive route; the declared tool use of the core node is accepted. Graph is acyclic. Tested S=Spec k (V=T) and a connected nodal curve (connected but not integral). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.GeometricallyIntegralFibreNeighbourhood",
+  "declaration": "AlgebraicGeometry.exists_geometricallyIntegral_fibre_neighbourhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/GeometricallyIntegralFibreNeighbourhood.lean",
+  "statement": "theorem exists_geometricallyIntegral_fibre_neighbourhood {Y S : Scheme.{u}} (h : Y ⟶ S) [Smooth h] [LocallyOfFinitePresentation h] [QuasiCompact h] [QuasiSeparated h] (s : S) (T : (h.fiber s).Opens) [GeometricallyIrreducible (T.ι ≫ h.fiberToSpecResidueField s)] : ∃ (S₁ : Scheme.{u}) (a : S₁ ⟶ S) (s₁ : S₁) (hs : a s₁ = s), IsAffine S₁ ∧ Etale a ∧ IsIso (a.residueFieldMap s₁) ∧ ∃ V : (pullback h a).Opens, IsCompact (V : Set ↥(pullback h a)) ∧ GeometricallyIntegral (V.ι ≫ pullback.snd h a) ∧ (pullback.snd h a).fiberι s₁ ⁻¹ᵁ V = (pullback.map (pullback.snd h a) (S₁.fromSpecResidueField s₁) h (S.fromSpecResidueField (a s₁)) (pullback.fst h a) (Spec.map (a.residueFieldMap s₁)) a (pullback.condition (f := h) (g := a)).symm (a.SpecMap_residueFieldMap_fromSpecResidueField s₁).symm ≫ eqToHom (congrArg h.fiber hs)) ⁻¹ᵁ T",
+  "branch": "newtargets-dag",
+  "by": "Q90",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6004173c9",
+  "group": "Q90",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 057J (smooth case via 056W) clause by clause: Smooth+LFP+QC+QS, any point s, T an open of h.fiber s geometrically irreducible over κ(s); conclusions affine S₁, étale a, a s₁ = s, residue map an isomorphism, IsCompact V, GeometricallyIntegral (V.ι ≫ snd), and the fibre equality via the canonical pullback.map comparison plus eqToHom transport along hs. Edge cases ok (empty S/T, nonempty fibres forced by integrality); single universe u is the recorded geometric-property reading and is equivalent. No defs, one sorry, source and blueprint docstrings with the 5 proof steps, lean.statement verbatim, no duplicate in Mathlib or side/slopmaster2. nt_compile --json: rc=0, 4.3 s, no errors; a broken copy gives an error, so the compile check is real. Minor: LFP is redundant given Smooth, kept on purpose."
  }
 }

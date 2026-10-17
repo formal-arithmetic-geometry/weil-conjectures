@@ -225,5 +225,23 @@
   "group": "Q42",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-a47cc2153 (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes and every cited statement in full. Orgogozo (author draft) is not archived locally, so I fetched it from the URL the item records and read §8.1 (pp. 17–18), §8.3 and Lemmas 9.1.1–9.1.5 (pp. 19–21). I also read Gabber travaux XI 2.4–2.5 for coherence of oriented products. The four steps follow the 9.1.5 proof exactly: (1) v is coherent and conservative; (2) |v*F| = v⁻¹|F|, by the constant-Λ exact inverse-image clause of def-trf-oriented-nearby-cycles, then constructible ⇒ coherent on V_{f_T}; (3) coherence is reflected along v; (4) coherent ⇒ constructible on V_f. All hypotheses are checked: S Noetherian and f of finite presentation give the qcqs schemes §8.1 needs, T is Noetherian by 01T6, f_T is of finite presentation by 01TS, and Λ is finite throughout. I proved the reflection lemma myself (finite subcover after u⁻¹, then conservativity on the image, for both quasi-compactness and quasi-separation). I checked point lifting for proper surjective p: a point of T over f(x̄) inside T×_S S_(s̄) specialises to the closed fibre. I checked that a locally constant underlying set sheaf with finite Λ gives a locally constant module. Small cases: identity, empty, zero module, infinite constant module, non-surjective p. No false statements, no restated clauses, no cycle, and no duplicates (rg over the DAG and blueprint main-20261015). Two fixes: def-trf-coherent-topos now cites def-trf-geometric-morphism and def-weil-pbc-topos instead of 'def-weil-pbc-ringed-topos-morphism after forgetting rings'; lem-trf-proper-base-change-coherent-conservative had a stale wrong tag 01TQ in blueprint.from.place, now 01TS. No tool_uses. The Orgogozo PDF should be archived in literature/.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PsiConstructibilityDescent",
+  "declaration": "AlgebraicGeometry.OrientedNearbyCycles.constructibility_descent",
+  "statement": "theorem constructibility_descent {X S T : Scheme.{u}} [IsLocallyNoetherian S] [CompactSpace S] (f : X ⟶ S) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (Λ : Type v) [CommRing Λ] [Finite Λ] (p : T ⟶ S) [IsProper p] [Surjective p] (F : (vanishingDatum.{u, v} f).modules (Coeff.{u, v} Λ)) (_hF : IsConstructibleVanishing (pullback.snd f p) Λ (((squareModules f (pullback.snd f p) (pullback.fst f p) p (pullback.condition (f := f) (g := p))).modulePull (Coeff.{u, v} Λ)).obj F)) : IsConstructibleVanishing f Λ F",
+  "branch": "newtargets-dag",
+  "by": "Q72",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/Paper/PsiConstructibilityDescent.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-731f808e7",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Item statement matches node clause by clause: IsLocallyNoetherian+CompactSpace S; LocallyOfFinitePresentation+QuasiCompact+QuasiSeparated f (01TP convention); Λ Type v CommRing Finite with v independent of u; F arbitrary in (vanishingDatum f).modules (Coeff Λ); p IsProper+Surjective; hypothesis on squareModules f (pullback.snd) (pullback.fst) p pullback.condition modulePull, with direction V_f→V_{f_T} checked in Site.Morphism.modulePull and squareLift; conclusion IsConstructibleVanishing f Λ F. Statement fields verbatim. §1(B) module OrientedConstructibleSheafVanishing is justified: largeTriples(etaleBaseChange 𝟙) with a RingCat constant ring vs the Triples(𝟭) vanishing site with a CommRingCat constant ring. It has real canonical data (first projection V×_S S→V, Comma.map normalization, restrictScalars/constantRingModuleRestriction/precompose/sheafify/inverse of constant_ring_module_sheaves) and applies the original IsConstructible unchanged; no sorry, no hollow definition, no duplication. Docstrings carry source and blueprint; no downstream imports or extra assumptions; only the item is sorry. Base files have no drift on the tip. nt_compile --json on both snapshot files, run twice: rc 0, no diagnostics (5.6 s, 3.1 s); sorry warnings are off in the lakefile and error reporting was checked. Edge cases: empty S/X, zero F, Λ=0, p identity, infinite F all covered; non-surjective p excluded. The second reading is the author self-check under the direct-delivery convention. Non-blocking: the dependency record now names only the vanishing specialization; general IsConstructible stays landed, and no existing citer record uses it."
  }
 }

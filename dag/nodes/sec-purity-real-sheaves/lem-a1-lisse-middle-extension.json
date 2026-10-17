@@ -347,5 +347,38 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-a7c95954c (reviewer sub-agent of L); spot-checked: Read the whole delivery: one commit with the item and its report, no new nodes, so A1-A5 hold. The statement is the blueprint claim (master order 2645, same in main-20261015) with conventions made explicit (F_q, smooth of pure dimension 1, dense open immersion, def-pod adic lisse convention, ordinary underived j_*); no hypothesis added, nothing weakened. Coefficient category: same levelwise adic reading as def-wf-middle-extension (reviewed by Q122) and as unit Step 3 ('j_* of an adic sheaf is formed levelwise'); not a target node, so no base-change morphism to check. Small cases: j=id, empty C_0, F=0, disconnected A^1 with two pieces, a non-free Z/l over Z/l^2 module, the Kummer unipotent sheaf. A nodal curve and a non-dense U_0 are counterexamples, so smoothness and density are both needed. Step checks: S1 def-pod clauses 1/2/4 give finite-ring lisse levels, and C_0 is Noetherian, separated with l invertible. S2: Noetherian (leaf); lem-sc-smooth-normal applies over F_q (statement says any field, def-sc-curves' blueprint_update allows any field, closed Lean Regular.lean:208 holds for any Field with dim<=1); rem-pc-regular-normal's 033M clause matches properties.tex lemma-normal-Noetherian; splitting into components fixes the unit's false 'smooth implies integral' for disconnected C_0 within its route. S3: fin2's hypotheses hold; finite implies finite type is written out, so P is Noetherian. S4: lem-fin-etale-normal-components applies to P_a over C_a (Noetherian source, normal integral base); density of V_b via the open-map leaf; Q_b give an etale covering. S5: clause 2 of the etale-inverse-image-restriction lemma makes the unit the restriction map; lem-fin-normal-constant-open-image's hypotheses hold (rests on Stacks 09Z5(2), checked). S6: gluing over the cover, really elementary. S7: transition identity t_n v_{n+1}=v_n(j_*j^*t_n) checks, inverses pass to E and Qbar, naturality covers Weil data. No duplicate found (rg over dag/nodes; lem-wf-dense-open-pi1-surjective cites this item, so it is rightly not used); no cycle; no SGA. Accepted tool_uses: lem-sc-smooth-normal, rem-pc-regular-normal, fin2-lem-lisse-trivialized-finite-etale, lem-fin-etale-normal-components, lem-fin-normal-constant-open-image, lem-weil-pbc-etale-inverse-image-restriction. Batch-5 flag: def-pod-lisse-l-adic-sheaves is the general Weil II 1.1.1 definition; its 103-node closure has no trace-formula, trace-transport or batch-4 node, only itself and the definition def-pod-ring-scalar-extension from PD, and def-wf-middle-extension already cites it. It is outside the assumptions, so no RETURN. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LisseDenseOpenRecovery",
+  "declaration": "AlgebraicGeometry.Scheme.isIso_curveLisseRecoveryUnit",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.MiddleExtensionCurve.whole",
+   "AlgebraicGeometry.Scheme.curveLisseRecoveryStage",
+   "AlgebraicGeometry.Scheme.curveLisseRecoveryModel",
+   "AlgebraicGeometry.Scheme.curveLisseRecoveryDiagram",
+   "AlgebraicGeometry.Scheme.curveLisseRecoveryDiagramUnit",
+   "AlgebraicGeometry.Scheme.curveLisseRecoveryRealization",
+   "AlgebraicGeometry.Scheme.curveLisseRecoveryRealization_mem",
+   "AlgebraicGeometry.Scheme.curveLisseRecoverySource",
+   "AlgebraicGeometry.Scheme.curveLisseRecoveryTarget",
+   "AlgebraicGeometry.Scheme.curveLisseRecoveryPairFunctor",
+   "AlgebraicGeometry.Scheme.curveLisseRecoveryUnit",
+   "AlgebraicGeometry.Scheme.isIso_curveLisseRecoveryUnit"
+  ],
+  "file": "lean/Sheaf/Paper/LisseDenseOpenRecovery.lean",
+  "statement": "theorem isIso_curveLisseRecoveryUnit (F : c.whole.LisseSheaf l hl Qbar) : IsIso (curveLisseRecoveryUnit l Qbar c hl F)",
+  "branch": "newtargets-dag",
+  "by": "Q132",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical helpers construct the actual ordinary unit on the recorded integral model and its image under the existing middle-extension realization, rationalization and finite-stage inclusion. No finite-coefficient substitution for the algebraic-coefficient statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fe8652a6b",
+  "group": "Q132",
+  "result": "pass",
+  "note": "Node diff only adds lean; lean.statement verbatim (file 719-720); all 12 declarations listed. Clause match: FiniteFieldDatum/l prime/hl/Qbar Type(u+1) as in the recorded curveMiddleExtension; geometry = the existing MiddleExtensionCurve bundle, no extra hypotheses; F : c.whole.LisseSheaf = LisseAlgebraicSheaf on all of C (whole is a real U:=C, j:=id construction); unit = actual levelwise Etale.upperStarLowerStarAdjunction unit (whiskerRight ℕᵒᵖ), ordinary Etale.lowerStar, realized by the def-wf-middle-extension pipeline (middleExtensionLevelFunctor, lim, single 0, pbcStageLocalization, StageSystem.ι); conclusion IsIso in pbcQbarCategory, neither stronger nor weaker. No hollow defs; only two sorry theorems (_mem, true and no data choice, same pattern as the accepted middleExtensionIntegralComplex_mem; main thm), both with proof docstrings; docstrings carry source place and blueprint tag; universes unchanged; no pro-etale substitute. Edge cases empty/id/disconnected/F=0/n=0/torsion checked. nt_compile.py --json on snapshot vs side overlay: rc 0, no errors, 7.6 s (run twice). Minor: worker search omitted upstream ProEtale IsAdicLisseSheaf and WeilSheaf.IsLisse recovery theorems; they use other coefficient models, so not duplicates and attaching them would be a forbidden pro-etale substitution; no action needed."
  }
 }

@@ -254,5 +254,47 @@
   "group": "Q55",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-14d20c1ea (reviewer sub-agent of L); spot-checked: I read the whole item: the statement and all 8 steps, both new nodes, every cited statement, the parent's Steps 9-10, the unit sk-prop-a1-kummer, and Stacks 093X (sites-cohomology l.1962), 01DU (injectives l.880-1014), 0139 (homology l.7138) and conventions.tex l.51. The statement is unchanged and true. Its coefficients are Mod(A_C) with A commutative, compared with Ab(C) by forgetting scalars, which is what the parent's Steps 9-10 use. Small cases agree: m=id, a W covered by the empty family, A=0, A=Z, and Z/2 on the one-point site (an injective module whose abelian sheaf is not injective). Every step checks against its citations. In Step 4 the long exact sequence gives 0->S(VI)->I(T)->I(W)->H^1->H^1(T,VI)=0, and 093X surjectivity kills H^1. In Step 6, q_T and q_W are quasi-isomorphisms by naturality of alpha, since alpha is an isomorphism at VL (by lem-pe) and at J (clause 2). In Step 7 the five-term window has isomorphisms at positions 1, 2, 4 and 5. Step 8 gets canonicity from the K-injective Hom bijection. I accept the declared tool uses (lem-pe, the 03FD comparison, colimits-forgetful) as generic. Two faults, both repaired in fixes/. (1) The new 093X node claimed to allow noncommutative ring sheaves, but Stacks takes all rings commutative (conventions.tex:51). It is now restricted to commutative ring sheaves; the item only needs A_C and Z_C. (2) The new 01DU node has the same problem. Once restricted to commutative rings, it is just two existing nodes combined: lem-pur-ringed-site-grothendieck-abelian (reviewed) and the Mathlib leaf lem-weil-pbc-grothendieck-functorial-injective-embedding. I dropped it. Step 1 now cites those two nodes, proof_deps is updated, and lem-pur-ringed-site-grothendieck-abelian is added to split_report.tool_uses. There is no cycle and nothing else cites the dropped node. No SGA is used.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ModuleRestrictionKernelComparison",
+  "declaration": "CategoryTheory.ModuleRestrictionKernel.moduleRestrictionKernelComparison",
+  "declarations": [
+   "CategoryTheory.ModuleRestrictionKernel.S",
+   "CategoryTheory.ModuleRestrictionKernel.S₀",
+   "CategoryTheory.ModuleRestrictionKernel.sAdditiveProof",
+   "CategoryTheory.ModuleRestrictionKernel.sAdditive",
+   "CategoryTheory.ModuleRestrictionKernel.s₀AdditiveProof",
+   "CategoryTheory.ModuleRestrictionKernel.s₀Additive",
+   "CategoryTheory.ModuleRestrictionKernel.sLeftExact",
+   "CategoryTheory.ModuleRestrictionKernel.s₀LeftExact",
+   "CategoryTheory.ModuleRestrictionKernel.kernelIdentityObj",
+   "CategoryTheory.ModuleRestrictionKernel.kernelIdentity_naturality",
+   "CategoryTheory.ModuleRestrictionKernel.kernelIdentity",
+   "CategoryTheory.ModuleRestrictionKernel.moduleEnoughInjectivesProof",
+   "CategoryTheory.ModuleRestrictionKernel.moduleEnoughInjectives",
+   "CategoryTheory.ModuleRestrictionKernel.comparison",
+   "CategoryTheory.ModuleRestrictionKernel.row",
+   "CategoryTheory.ModuleRestrictionKernel.compute",
+   "CategoryTheory.ModuleRestrictionKernel.kernelComplexIdentity",
+   "CategoryTheory.ModuleRestrictionKernel.forgetCompute",
+   "CategoryTheory.ModuleRestrictionKernel.kernelMap",
+   "CategoryTheory.ModuleRestrictionKernel.evaluationComplexIdentity",
+   "CategoryTheory.ModuleRestrictionKernel.evaluationMap",
+   "CategoryTheory.ModuleRestrictionKernel.moduleRestrictionKernelComparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ModuleRestrictionKernelComparison.lean",
+  "statement": "theorem moduleRestrictionKernelComparison [Mono m] : (∀ (I : Modules J A), Injective I → Function.Surjective ((restriction J A m).app I)) ∧ (∀ (I : Modules J A), Injective I → ∀ q : ℕ, 0 < q → IsZero (((S₀ J m).rightDerived q).obj ((V J A).obj I))) ∧ IsIso (comparison J A m) ∧ (Functor.whiskerRight (S J A m).toRightDerivedZero (v A) ≫ Functor.rightDerivedBaseChange (kernelIdentity J A m).hom 0 = (kernelIdentity J A m).hom ≫ Functor.whiskerLeft (V J A) (S₀ J m).toRightDerivedZero) ∧ (∀ (K : DerivedCategory.Plus (Modules J A)) (L : CochainComplex.Plus (Modules J A)) (N : CochainComplex.Plus (Sheaf J AddCommGrpCat.{u})) (_hL : ∀ i : ℤ, Injective (L.obj.X i)) (_hN : ∀ i : ℤ, Injective (N.obj.X i)) (eL : DerivedCategory.Plus.Q.obj L ≅ K) (eN : DerivedCategory.Plus.Q.obj N ≅ (V J A).mapDerivedCategoryPlus.obj K) (q : (V J A).mapCochainComplexPlus.obj L ⟶ N) (_hq : QuasiIso q.hom) (_he : (V J A).mapDerivedCategoryPlus.map eL.hom ≫ eN.inv = (V J A).mapDerivedCategoryPlusFactorsh.hom.app ((HomotopyCategory.Plus.quotient (Modules J A)).obj L) ≫ DerivedCategory.Plus.Q.map q), (∀ i : ℤ, (row J m ((V J A).obj (L.obj.X i))).ShortExact ∧ (row J m (N.obj.X i)).ShortExact ∧ (S₀ J m).map (q.hom.f i) ≫ (row J m (N.obj.X i)).f = (row J m ((V J A).obj (L.obj.X i))).f ≫ (G₀ J T).map (q.hom.f i) ∧ (G₀ J T).map (q.hom.f i) ≫ (row J m (N.obj.X i)).g = (row J m ((V J A).obj (L.obj.X i))).g ≫ (G₀ J W).map (q.hom.f i)) ∧ QuasiIso (kernelMap J A m L N q).hom ∧ QuasiIso (evaluationMap J A T L N q).hom ∧ QuasiIso (evaluationMap J A W L N q).hom ∧ (forgetCompute J A (S J A m) L ≫ (v A).mapDerivedCategoryPlus.map ((S J A m).rightDerivedFunctorPlus.map eL.hom) ≫ (comparison J A m).app K = DerivedCategory.Plus.Q.map (kernelMap J A m L N q) ≫ compute (S₀ J m) N ≫ (S₀ J m).rightDerivedFunctorPlus.map eN.hom) ∧ (∀ U : C, U = T ∨ U = W → forgetCompute J A (G J A U) L ≫ (v A).mapDerivedCategoryPlus.map ((G J A U).rightDerivedFunctorPlus.map eL.hom) ≫ (LeftModuleDerivedEvaluation.comparison J A U).app K = DerivedCategory.Plus.Q.map (evaluationMap J A U L N q) ≫ compute (G₀ J U) N ≫ (G₀ J U).rightDerivedFunctorPlus.map eN.hom))",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9760ee62e",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: 093X surjectivity, positive-degree S^ab-acyclicity, IsIso of comparison := rightDerivedFunctorPlusBaseChange kernelIdentity.hom (built like lem-pe's), degree-0 normalization, and the arbitrary L/N/q/eL/eN clause with row exactness, both row squares, three quasi-isos and the two derived-equality normalizations. The representative equation was checked by hand via _fac, the direction of _he and unit naturality. Common universe u with free w; HasWeakSheafify is inferable (probe), so no stronger hypothesis; no flatness or V-injectivity. Edge cases m=id, A=0, A=Z, Z/2 on the point, empty site. Real data for S, S₀, kernelIdentity, comparison, row, compute, forgetCompute, kernelMap, evaluationMap; all theorems sorry; docstrings have source and blueprint, main docstring has Steps 1-8. No duplicate notion (only scheme-specific support kernels exist). Imports equal the recorded modules. lean.statement verbatim and 23 declarations present; non-lean node fields equal the side clone. Report has a Worker report and a real Second reading by Q34. nt_compile --json on the snapshot: rc=0, 14.3 s, clean; probe confirmed real elaboration, axioms include sorryAx, #check matches."
  }
 }

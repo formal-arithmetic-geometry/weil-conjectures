@@ -235,5 +235,31 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-acbe1e76e (reviewer sub-agent of L); spot-checked: PASS: I read the item, both new nodes and every cited statement in full, with Stacks 0FD6 (varieties lemma-bertini), 0B2L (lemma-dimension-fibres-locally-algebraic) and 00T7 (algebra lemma-standard-smooth). The item statement and stmt_deps are unchanged from base. proof_deps equals the union of uses. No SGA citations. Source error: 0FD6 proves flatness only over an open U but uses 'q smooth at (x,v) iff H_v smooth at x' for every v. I confirmed the report's counterexample by hand: Y=A^1 with sections 1,t gives q=(-bt,b), which is not flat at the origin while H_0 is smooth. The repair uses only the true direction (nonzero relative dF gives smoothness), so Sigma lies in {F=dF=0}. This keeps the route and is openly marked agent. Steps 1-6: Step 1 handles empty Y and r=0. Step 2 gets quasi-compactness of Y from the Noetherian projective space plus the immersion, so Y is finite type. Step 3: free Omega charts with constant d; the conormal surjection; e_i gives (1,0) and e_j-f_je_i gives (0,df_j), so the rank is d+1 and d+1<=r. Step 4: smooth base change (lem-pc-proper-base-change(2), Lean-closed) and the hypersurface node, all hypotheses met. Step 5: fibres of K_U are A^{r-d-1} over kappa(y); the fibre bound gives dim K_U<=r-1. Step 6: the finite chain argument and the image-closure bound give dim B<r=dim A^r. New nodes: the hypersurface criterion is true (one Jacobian row added to a standard smooth presentation, then 00T7), tested on t-a, at and t^p-a. It is not a duplicate: the trf smooth-at-point criterion needs flatness and the RGCI Jacobian node needs a global presentation. The fibre/image dimension bounds are true via 0B2L(2)(a) on finitely many components and not a duplicate (I checked the zl lower-bound, kun dimension formula and sbc flat fibre-dimension nodes). Both are statement-only, with all three search kinds, correct blueprint.from/via and same_as []. I accept the two declared tool_uses: lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension and lem-pur-conormal-sequence-smooth-immersion. Not a target node. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BertiniSingularLocusDimension",
+  "declaration": "AlgebraicGeometry.bertini_singularLocus_dimension_lt",
+  "declarations": [
+   "AlgebraicGeometry.bertiniParameterMap",
+   "AlgebraicGeometry.bertiniUniversalSection",
+   "AlgebraicGeometry.bertiniUniversalIdeal",
+   "AlgebraicGeometry.bertiniUniversalProjection",
+   "AlgebraicGeometry.bertini_singularLocus_dimension_lt"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/BertiniSingularLocusDimension.lean",
+  "statement": "theorem bertini_singularLocus_dimension_lt {k : Type u} [Field k] {Y : Scheme.{u}} (f : Y ⟶ Spec (CommRingCat.of k)) [Smooth f] (L : Y.Modules) [L.IsInvertible] {V : Type u} [AddCommGroup V] [Module k V] {I : Type u} [Fintype I] (b : Module.Basis I k V) (ψ : V →+ Γ(L, ⊤)) (_hlinear : ∀ (c : k) (v : V), ψ (c • v) = f.appTop ((Scheme.ΓSpecIso (CommRingCat.of k)).inv c) • ψ v) (hgen : Epi (L.freeHomEquiv.symm (fun i ↦ (SheafOfModules.unitHomEquiv L) (Scheme.Modules.homOfGlobalSection L (ψ (b i)))))) [IsImmersion (ProjectiveSpace.homOfGeneratingSections I f L (fun i ↦ (SheafOfModules.unitHomEquiv L) (Scheme.Modules.homOfGlobalSection L (ψ (b i)))) hgen)] : topologicalKrullDim {h : (bertiniUniversalIdeal f L (fun i ↦ ψ (b i))).subscheme | ¬ ∃ U : (bertiniUniversalIdeal f L (fun i ↦ ψ (b i))).subscheme.Opens, h ∈ U ∧ Smooth (U.ι ≫ bertiniUniversalProjection f L (fun i ↦ ψ (b i)))} < (Fintype.card I : WithBot ℕ∞) ∧ ∃ B : Set (Spec (CommRingCat.of (MvPolynomial I k))), IsClosed B ∧ B ≠ Set.univ ∧ (bertiniUniversalProjection f L (fun i ↦ ψ (b i))) '' {h | ¬ ∃ U : (bertiniUniversalIdeal f L (fun i ↦ ψ (b i))).subscheme.Opens, h ∈ U ∧ Smooth (U.ι ≫ bertiniUniversalProjection f L (fun i ↦ ψ (b i)))} ⊆ B",
+  "branch": "newtargets-dag",
+  "by": "Q139",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helpers construct the coefficient structure map, the actual universal sum of pulled-back sections, its recorded zero-scheme ideal and its projection. Sigma is expressed literally by the absence of an open neighbourhood with smooth restricted projection. A finite basis indexed by I gives r = Fintype.card I; the scalar law spells out k-linearity on top-open sections without selecting a second scalar structure."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-72d1110fc",
+  "group": "Q139",
+  "result": "pass",
+  "note": "I read the node, all 9 statement-dependency records, the exact declarations (homOfGeneratingSections, Hom.zeroLocus, homOfGlobalSection, tensorSectionsUnit, Smooth, topologicalKrullDim) and Stacks varieties.tex lemma-bertini 0FD6 with the family-of-divisors Situation. Every hypothesis and both conclusion clauses match the node with no extra assumptions: k-linear psi via an additive map plus the scalar law through f.appTop; generation by the recorded Epi form; IsImmersion of the canonical morphism; A^r = Spec MvPolynomial I k; the universal section is sum x_i pr^*psi(b_i); H_univ is the recorded zero scheme; Sigma is literally the set of points with no open neighbourhood where q is smooth; dim Sigma < card I; a closed proper B contains q(Sigma). The Classical.choose unit of tensorSectionsUnit only changes s_univ by an O-linear automorphism, so the zero scheme and Sigma are canonical. Edge cases (empty Y, r=0, r=1 non-flat point) and universes checked. No duplicate notion (BertiniSmoothMember has no universal family; the inline section family avoids a cyclic import). The four helpers have real data and source/blueprint docstrings, the proof is only sorry, the lean.statement is verbatim and all declarations exist. The delivery changes only the new module and the node's lean field. The report has a Worker report and the standard Second reading section. nt_compile.py: clean, 3.9 s; axioms propext/sorryAx/Classical.choice/Quot.sound; a control copy with an injected error showed the error. No findings."
  }
 }

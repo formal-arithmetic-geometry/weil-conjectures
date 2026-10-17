@@ -165,5 +165,23 @@
   "group": "N0",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-1ce5b3271 (reviewer sub-agent of L); spot-checked: Read the delivery in full; the full report is in review.md. Item: the statement is unchanged and true. Steps 1-4 and 6 are correct and elementary: A=V∩K is a valuation ring (Stacks 052L), I_V∩A=I by the common-divisor argument, √(q_V) is a prime contracting to q (binomial and y^{2n}=(xy)^n c^n checks), and the order isomorphism carries over to heights, including the infinite case. Step 5 correctly uses only the statement of the new node: x^n=au gives a∈A and x∈p ⇔ a∈q, so P(p∩A)=p. proof_deps equals the union of the uses, there is no cycle and there are no off-unit uses (no tool_uses). New node lem-trf-valuation-value-group-torsion: true (ultrametric tie of two terms in a polynomial relation). Tested on V=E, E=K, a ramified DVR, a purely inseparable extension and rank 2. It is strictly smaller than the item and restates no clause of it. B1-B9 are fine. The source Stacks 0ASJ (more-algebra.tex l.37480), first proof paragraph, was read and supports the node. No duplicate in the DAG statements or the blueprint (searched valuation ring, value group, height, Abhyankar). No Mathlib match: primeSpectrumOrderEquiv works within a single field. The original source, the Temkin PDF, is absent; WANTED is recorded and the proof origin is correctly marked agent. Not a target node, so the base-change and coefficient checks do not apply. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ValuationAlgebraicHeight",
+  "declaration": "ValuationSubring.primeSpectrum_comap_orderIso_of_isAlgebraic",
+  "file": "lean/Sheaf/RingTheory/ValuationAlgebraicHeight.lean",
+  "statement": "theorem primeSpectrum_comap_orderIso_of_isAlgebraic (K : Type u) (E : Type v) [Field K] [Field E] [Algebra K E] [Algebra.IsAlgebraic K E] (V : ValuationSubring E) : (∃ e : PrimeSpectrum V ≃o PrimeSpectrum (V.comap (algebraMap K E)), ∀ p : PrimeSpectrum V, e p = PrimeSpectrum.comap ((algebraMap K E).restrict (V.comap (algebraMap K E)) V (fun _ hx ↦ hx)) p) ∧ ringKrullDim V = ringKrullDim (V.comap (algebraMap K E))",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1a913beed",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Delivery adds only the lean record, module Sheaf/RingTheory/ValuationAlgebraicHeight.lean (one theorem, sorry) and the report with both sections. Every clause matches the node: [Field K][Field E][Algebra K E][Algebra.IsAlgebraic K E] per the dependency records; V : ValuationSubring E (equivalent to the nonzero-element form); A = V.comap (algebraMap K E), a valuation subring by construction; the order isomorphism Spec V ≃o Spec A must equal PrimeSpectrum.comap of RingHom.restrict (witness is definitional); ringKrullDim equality in WithBot ℕ∞ keeps the infinite case. Universes independent; statement field verbatim. Edge cases E=K, V=E, infinite degree/height, char p: ok. Proof dep lem-trf-valuation-value-group-torsion is in the delivered tree with no lean record, so correctly not imported. No Mathlib or side duplicate. Docstrings carry source place, blueprint tag and all six proof steps. nt_compile.py --json on the snapshot file: clean in 2.7 s, no errors or warnings."
  }
 }

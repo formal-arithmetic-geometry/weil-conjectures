@@ -186,5 +186,23 @@
   "group": "Q84",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-b278d0354 (reviewer sub-agent of L); spot-checked: I read the item in full; this is a PASS with no fixes. The statement is exactly Stacks Algebra Tag 0584(2) (algebra-lemma-flatness-descends-more-general, algebra.tex ~8930) with R=A, S=B, S'=C, M=N: hypotheses one for one, nothing added or dropped. The delivery has no new nodes. The three cited definitions (flat via injections, faithfully flat via exactness of complexes, tensor product with universal property, generators and f⊗id) are Mathlib leaves, and each says what the step uses. Step 1: the complex 0→P→Q, together with C⊗_B 0=0, gives that faithful flatness both preserves and reflects injectivity. Step 2: I re-derived that the interchange C⊗_B(U⊗_A N)≅U⊗_A(C⊗_B N) and its inverse are well defined, that both composites fix the generating pure tensors, and that the naturality square holds on generators. It is routine and acceptable as elementary. Steps 3 and 4 are correct and not circular; faithful-flatness reflection is used only in the converse. Edge cases checked: N=0; B=C; B=0; A=Z, B=Z/2, C=B[t], N=B (both sides non-flat, as the lemma says); and without faithful flatness (Z→Q, N=Z/2) the converse fails, so the hypothesis is needed. No duplicates: 00HJ, 039V and the tensor-cancel node in the DAG are different statements. Mathlib's Flat.of_flat_tensorProduct and iff_flat_tensorProduct (FaithfullyFlat/Basic.lean:588-603) compare flatness over two different rings, R and S, so they are not this statement. Only definitions are used, so there is no route issue and no tool_uses. The blueprint via is consistent with the parent, and no SGA source is used. One minor inaccuracy in the report: it lists citations.json and searches.jsonl as written, but neither is in the delivery."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatnessFaithfullyFlatExtension",
+  "declaration": "Module.Flat.iff_flat_tensorProduct_of_faithfullyFlat_extension",
+  "file": "lean/Sheaf/RingTheory/FlatnessFaithfullyFlatExtension.lean",
+  "statement": "theorem iff_flat_tensorProduct_of_faithfullyFlat_extension {A : Type u} {B : Type v} {C : Type w} {N : Type t} [CommRing A] [CommRing B] [CommRing C] [Algebra A B] [Algebra B C] [Algebra A C] [IsScalarTower A B C] [AddCommGroup N] [Module A N] [Module B N] [IsScalarTower A B N] [Module.FaithfullyFlat B C] : Module.Flat A N ↔ Module.Flat A (C ⊗[B] N)",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-54f8a0066",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Statement matches Stacks Algebra 0584(2) (R=A,S=B,S'=C,M=N) clause by clause: CommRing A B C, Algebra A B/B C/A C with IsScalarTower A B C, B-module N with Module A N and IsScalarTower A B N, Module.FaithfullyFlat B C, conclusion Module.Flat A N ↔ Module.Flat A (C ⊗[B] N). No extra hypotheses; four independent universes, all bound. Compile check confirmed A acts on c ⊗ n through A→B on the C factor. lean.statement verbatim equal to the file signature; no statement_change. Docstrings carry the source place, the blueprint tag and the four proof steps; proof is sorry only; no definitions. Edge cases N=0, B=C, B=0, A=0, Z/2 non-flat example and Z→Q faithfulness example all agree. Mathlib iff_flat_tensorProduct/of_flat_tensorProduct compare flatness over different rings, so they are not duplicates; no collision in side or slopmaster2. Compiled the snapshot via nt_compile.py --json: clean in 2.0 s; a deliberately false example confirmed real elaboration. Report has a real Worker report; the Second-reading section records the 2026-10-17 policy. No findings."
  }
 }

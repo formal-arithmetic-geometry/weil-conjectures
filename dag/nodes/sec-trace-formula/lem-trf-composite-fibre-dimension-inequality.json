@@ -161,5 +161,23 @@
   "group": "NL",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-6ba910d24 (reviewer sub-agent of L); spot-checked: I read Stacks 02JS (morphisms.tex l.5396-5420), 02FX and Algebra 00OM/00ON (algebra.tex l.27391ff), and checked every cited node statement. The item is exactly the first assertion of 02JS, with no flatness; its statement is unchanged. The four steps follow the 02JS proof: the affine reduction, 02FX applied to the three finite-type neighbourhoods given by lem-sbc-composite-fibre-local-models, then 00OM applied to the local map A=O_{Y_t,y} -> B=O_{X_t,x} with q=m_B over p=m_A, then the trdeg tower and regrouping. The regrouping needs no finiteness because addition in {0,..,inf} is monotone. The new node is verbatim 00OM. I tested it on k[t]->k, k->k[x], and the non-flat k[t]->k[t,x]/(tx) (1<=2). No DAG or blueprint node states 00OM: only the 00ON flat-equality leaf exists, which does not apply here, so the node is not a duplicate and does not restate the item. One fault, B8/C5: Mathlib has the node exactly as Ideal.height_le_height_add_of_liesOver (RingTheory/Ideal/KrullsHeightTheorem.lean:424-427, @[stacks 00OM]). The worker's searches were the item's queries copied over, and their verdict that Mathlib has 'no base-fibre-total inequality' is false. Fixed in fixes/dag/nodes/sec-trace-formula/lem-trf-local-fibre-ring-dimension-inequality.json: status mathlib, mathlib_match with a how (height form directly, dimension form via IsLocalization.AtPrime.ringKrullDim_eq_height), statement given in height form plus the equivalent 00OM dimension form like the 00ON leaf lem-weil-pbc-flat-height-formula, search verdicts corrected and my real grep added. The item is unchanged. Other-unit tools (lem-kun-dimension-formula, lem-sbc-composite-fibre-local-models) are left for the maintainer to record; I accepted no tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompositeFibreDimensionInequality",
+  "declaration": "AlgebraicGeometry.composite_fibre_dimension_at_point_le",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompositeFibreDimensionInequality.lean",
+  "statement": "theorem composite_fibre_dimension_at_point_le {X Y T : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ T) [LocallyOfFiniteType f] [LocallyOfFiniteType g] (x : X) : topologicalKrullDimAt ((f ≫ g).asFiber x) ≤ topologicalKrullDimAt (f.asFiber x) + topologicalKrullDimAt (g.asFiber (f x))",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f12665444",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 02JS first assertion (morphisms.tex l.5395-5405) clause by clause: Scheme.{u} X Y T, f:X⟶Y, g:Y⟶T, [LocallyOfFiniteType f] [LocallyOfFiniteType g] only, conclusion topologicalKrullDimAt ((f≫g).asFiber x) ≤ topologicalKrullDimAt (f.asFiber x) + topologicalKrullDimAt (g.asFiber (f x)); no flatness/QC/Noetherian; asFiber is the canonical point (Mathlib Fiber.lean:116); consistent with landed flat sibling; lean.statement verbatim; commit touches only module, node lean record, report; docstrings carry 02JS, blueprint id and 4-step proof; sorry only (axioms: sorryAx + standard); report has Worker report and the standard Second reading section; edge cases (empty X, identities, non-flat strict case, non-QC, generic points, universes) fine; nt_compile --json clean (rc=0, 2.4 s), control run confirms the tool reports errors. No findings."
  }
 }

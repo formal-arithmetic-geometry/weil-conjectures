@@ -253,5 +253,50 @@
   "group": "Q37",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-c88db89a6 (reviewer sub-agent of L); spot-checked: I read all seven steps, the full statement of each of the eight cited nodes, the parent lem-sf-etale-generic-hom-triangle (its steps 1-4 use exactly the component formula, the naturality in E and the shift square stated here), the unit sk-prop-sf-biduality-general and the chapter sec-six-functors. Stacks sources checked: sites-modules 0GMX remark-pullback-internal-hom (it only constructs the map, so the item rightly claims no isomorphism), 03EL, 03EO and 04JC, and sites-cohomology 0A8X (differential d_M f-(-1)^n f d_L). I re-derived the step-2 naturality [Fa,Fb]q=qF[a,b] by transposing both sides. I recomputed both sides of the step-6 source-shift chain-map identity; both equal (-1)^{m(n+1)} d_I f^{p-m} - (-1)^{mn+n} f^{p+1-m} d_E^p. The step-7 compatibility comes down to (-1)^{mn} q F(pi^{E[m],I}_{n,p-m}) on both sides. Small cases tested: m=0, m=+-1, E=I=A[0], g=id, zero complexes and characteristic 2. Hypotheses checked: the tensor-pullback lemma's topos, ring-map and size conditions are supplied by prop-weil-pbc-inverse-image-modules-exact (1)-(3) and def-weil-size-convention. Product existence comes from the statement of def-pur-hom-complex, and F is never moved through a product. There are no new nodes. The duplicate candidates (lem-pur-isomorphism-inverse-image-tensor-hom, lem-pur-ringed-site-finite-free-dual-pullback, def-sf-evaluation-hom-site-comparison, lem-sfb-ringed-site-duality-maps, lem-weil-pbc-ringed-internal-hom-exact-restriction, lem-sf-etale-generic-perfect-hom) all state something different. I accept the three tool_uses as generic infrastructure: lem-weil-pbc-ringed-topoi-module-pullback-tensor, lem-pc-sheaf-modules-tensor-closed and prop-weil-pbc-inverse-image-modules-exact. No SGA is cited, the blueprint fields are consistent, and the statement is retained without weakening. Only cosmetic notes, so no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.EtaleHomComplexPullback",
+  "declaration": "CategoryTheory.etaleHomComplexPullback",
+  "declarations": [
+   "CategoryTheory.etaleHomRing",
+   "CategoryTheory.EtaleHomModule",
+   "CategoryTheory.EtaleHomComplex",
+   "CategoryTheory.etaleHomBaseChange_continuous",
+   "CategoryTheory.etaleHomRingMap",
+   "CategoryTheory.etaleHomPushforward_isRightAdjoint",
+   "CategoryTheory.etaleHomPullback",
+   "CategoryTheory.etaleHomPullback_additive",
+   "CategoryTheory.etaleHomPullbackAdjunction",
+   "CategoryTheory.etaleHomUnit",
+   "CategoryTheory.etaleHomTensor",
+   "CategoryTheory.etaleHomTensorEquiv_exists",
+   "CategoryTheory.etaleHomTensorEquiv",
+   "CategoryTheory.etaleHomEval",
+   "CategoryTheory.etaleHomTensorPullback_exists",
+   "CategoryTheory.etaleHomTensorPullback",
+   "CategoryTheory.etaleHomPullbackComparison",
+   "CategoryTheory.homProjection",
+   "CategoryTheory.etaleHomDegreeEval",
+   "CategoryTheory.homComplexPullbackComparison_exists",
+   "CategoryTheory.homComplexPullbackComparison",
+   "CategoryTheory.etaleHomSourceShift_exists",
+   "CategoryTheory.etaleHomSourceShift",
+   "CategoryTheory.etaleHomComplexPullback"
+  ],
+  "file": "lean/Sheaf/SixFunctors/EtaleHomComplexPullback.lean",
+  "statement": "theorem etaleHomComplexPullback {X X' : Scheme.{u}} (g : X' ⟶ X) (A : CommRingCat.{u + 1}) (E I : EtaleHomComplex X A) : (∀ (n p q : ℤ) (hpq : p + n = q), (homComplexPullbackComparison g A E I).f n ≫ homProjection _ _ n p q hpq = etaleHomTensorEquiv _ _ _ ((etaleHomTensorPullback g A ((homComplex (R := etaleHomRing X A) E I).X n) (E.X p)).inv ≫ (etaleHomPullback g A).map (etaleHomDegreeEval E I n p q hpq))) ∧ (∀ (E₁ E₂ I₁ I₂ : EtaleHomComplex X A) (a : E₁ ⟶ E₂) (b : I₁ ⟶ I₂), ((etaleHomPullback g A).mapHomologicalComplex (ComplexShape.up ℤ)).map (((homComplexFunctor (R := etaleHomRing X A)).map a.op).app I₁ ≫ ((homComplexFunctor (R := etaleHomRing X A)).obj (op E₁)).map b) ≫ homComplexPullbackComparison g A E₁ I₂ = homComplexPullbackComparison g A E₂ I₁ ≫ ((homComplexFunctor (R := etaleHomRing X' A)).map (((etaleHomPullback g A).mapHomologicalComplex (ComplexShape.up ℤ)).map a).op).app (((etaleHomPullback g A).mapHomologicalComplex (ComplexShape.up ℤ)).obj I₁) ≫ ((homComplexFunctor (R := etaleHomRing X' A)).obj (op (((etaleHomPullback g A).mapHomologicalComplex (ComplexShape.up ℤ)).obj E₁))).map (((etaleHomPullback g A).mapHomologicalComplex (ComplexShape.up ℤ)).map b)) ∧ (∀ m : ℤ, homComplexPullbackComparison g A (E⟦m⟧) I ≫ ((homComplexFunctor (R := etaleHomRing X' A)).map (((etaleHomPullback g A).mapCochainComplexShiftIso m).inv.app E).op).app (((etaleHomPullback g A).mapHomologicalComplex (ComplexShape.up ℤ)).obj I) ≫ (etaleHomSourceShift (((etaleHomPullback g A).mapHomologicalComplex (ComplexShape.up ℤ)).obj E) (((etaleHomPullback g A).mapHomologicalComplex (ComplexShape.up ℤ)).obj I) m).hom = ((etaleHomPullback g A).mapHomologicalComplex (ComplexShape.up ℤ)).map (etaleHomSourceShift E I m).hom ≫ ((etaleHomPullback g A).mapCochainComplexShiftIso (-m)).hom.app (homComplex (R := etaleHomRing X A) E I) ≫ (shiftFunctor _ (-m)).map (homComplexPullbackComparison g A E I))",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of f9df200ab151: actual small-etale constant-ring module pullback; uniquely normalized tensor comparison and evaluation adjunction fix canonical q; signed source-shift data and transported chain-map equality; explicit object, morphism and section universes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9595fb98f",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Read the node, all 8 stmt_deps records, the module (24 declarations), the report and the exact dependency declarations (etaleConstantRingInverseImageComparison: 5th witness is the uniquely normalized gamma, the same gamma along which the dependency's LM is adjoint, so etaleHomPullback = Mathlib pullback is canonically LM; homComplex_projections_exists: IsLimit fan with the Stacks differential). Clauses: (1) component formula = transpose of T.inv >> F(ev_{n,p}) verbatim; (2) naturality over all a:E1->E2, b:I1->I2 with correct variance; (3) s' . c_{E[m],I} = c[-m] . F(s) via mapCochainComplexShiftIso; s pinned by (-1)^{mn} f^{p-m}, chain-map identity recomputed. Helpers etaleHomTensorEquiv_exists / etaleHomTensorPullback_exists are true, uniquely normalized universe-generalizations of the single-universe tensorClosed / module_pullback_tensor_iso (sec. 1(B)/missing-helper rule); no hollow def, 7 sorries all whole theorem proofs. Universes Scheme.{u}, CommRingCat.{u+1} as in the dependency, no extra hypotheses; edge cases m=0, m<0, char 2, zero/empty fine. lean.statement verbatim, declarations list exact, only lean changed vs shared node. nt_compile.py (--json, snapshot text) clean, exit 0, 26.9 s/24.1 s (sorry warnings off in lakefile; error output verified by probe). Minor only: three record-only unused imports; Second-reading section is a thin worker self-check."
  }
 }

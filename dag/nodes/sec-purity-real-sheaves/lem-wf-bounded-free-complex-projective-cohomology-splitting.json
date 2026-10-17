@@ -219,5 +219,23 @@
   "group": "Q93",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-1cd02b32c (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's statement and all 8 steps, the three cited Mathlib-leaf definitions (free module, projective module, abstract derived category), the source paragraph in main-20261015 lem-wf-curve-finite-level-pd.proof.md lines 23-32, and how the parent's steps 2 and 4 use the item. The statement matches the base version apart from added notion references and an explicit definition of contractible; nothing was weakened. The steps follow the source: split L^i onto B^{i+1}, split Z^i onto H^i, and descend from B^{b+1}=0, with the induction set up correctly. I checked the inverse maps alpha_i, that alpha_{i+1}^{-1} d alpha_i sends (u,h,c) to (c,0,0), the shift convention, the disk homotopy and the quasi-isomorphism by projection. Small cases checked: R=Z with Z->Z^2; R=Z/6 with multiplication by 2 (projective but not free summands); Z/4 with multiplication by 2 (correctly excluded by the hypothesis); zero cases. There are no new nodes. The candidate duplicates (lem-trf-field-complex-cohomology-splitting, lem-pc-finite-free-split-top-cancellation, the pod field lemmas) cover different statements. No route problems, tool uses or SGA citations. The fix: step 8 went from Q(L)≅Q(S) to the direct sum in D(R) without saying that Q is additive and commutes with shifts. I added one sentence citing the already-cited def-weil-abstract-derived-category (Mathlib DerivedCategory/Basic.lean:146 and :158). The corrected item is in fixes/dag/nodes/sec-purity-real-sheaves/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.BoundedFreeProjectiveCohomologySplitting",
+  "declaration": "CochainComplex.exists_bounded_free_projective_cohomology_splitting",
+  "file": "lean/Sheaf/Algebra/Homology/BoundedFreeProjectiveCohomologySplitting.lean",
+  "statement": "theorem exists_bounded_free_projective_cohomology_splitting {R : Type u} [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{v} R)] (L : CochainComplex (ModuleCat.{v} R) ℤ) (hbounded : ∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero (L.X i)) (hfree : ∀ i : ℤ, ∃ n : ℕ, Nonempty (Module.Basis (Fin n) R (L.X i))) (hprojective : ∀ i : ℤ, Module.Projective R (L.homology i)) : ∃ s : Finset ℤ, (∀ i : ℤ, i ∉ s → IsZero (L.homology i) ∧ IsZero (image (L.d i (i + 1)))) ∧ Nonempty ((DerivedCategory.Q.obj L) ≅ ∐ (fun i : s ↦ ((DerivedCategory.singleFunctor (ModuleCat.{v} R) 0).obj (L.homology i.1))⟦-i.1⟧)) ∧ Nonempty (L ≅ ((∐ (fun i : s ↦ (HomologicalComplex.single (ModuleCat.{v} R) (ComplexShape.up ℤ) i.1).obj (L.homology i.1))) ⨿ (∐ (fun i : s ↦ HomologicalComplex.double (𝟙 (image (L.d i.1 (i.1 + 1)))) (c := ComplexShape.up ℤ) (i₀ := i.1) (i₁ := i.1 + 1) rfl)))) ∧ ∀ i : ℤ, Nonempty (Homotopy (𝟙 (HomologicalComplex.double (𝟙 (image (L.d i (i + 1)))) (c := ComplexShape.up ℤ) (i₀ := i) (i₁ := i + 1) rfl)) 0)",
+  "branch": "newtargets-dag",
+  "by": "Q135",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-58ab6f71d",
+  "group": "Q135",
+  "result": "pass",
+  "note": "Read node, source (lem-wf-curve-finite-level-pd.proof.md l.23-32), 3 Mathlib-leaf deps, module, report, commit diff (3 files, node only gains lean field). Every clause matches exactly: CommRing R, CochainComplex (ModuleCat.{v} R) ℤ, bounded via IsZero outside [a,b], finite free via Module.Basis (Fin n), Module.Projective on L.homology, finite support s covering H^i and image d^i, derived iso to ∐ singleFunctor 0 (H^i)⟦-i⟧ (shift puts H^i in degree i), complex iso to singles ⨿ double(𝟙 (image d^i)) in degrees i,i+1 (Double.lean puts X₀ in i₀), Homotopy (𝟙 double) 0 = id=dh+hd. No extra assumptions or universe equalities. Edge cases: zero complex, zero ring, negative degrees, projective non-free (Z/6) included; Z/4 excluded. Gates met: no definitions, only sorry, source/blueprint docstrings and 8-step proof docstring, Mathlib imports only, lean.statement verbatim, no collisions. Report: real Worker report; Second reading is the accepted 2026-10-17 stock text. nt_compile.py --json: clean, 1.9 s, rerun 3.0 s; a broken-copy control confirmed errors are reported. No findings."
  }
 }
