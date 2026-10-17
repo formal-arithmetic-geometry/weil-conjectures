@@ -14,7 +14,8 @@
   "def-weil-pbc-normal-ring",
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-localization-at-prime",
-  "def-sc-discrete-valuation-ring"
+  "def-sc-discrete-valuation-ring",
+  "def-trf-complete-toric-model"
  ],
  "proof": [
   {
@@ -358,5 +359,24 @@
   "group": "Q38",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q38-38e5fe92b (reviewer sub-agent of L); spot-checked: Read the complete item, report, route, every cited DAG statement, and cited literature. All 18 proof steps are mathematically valid with hypotheses checked, edge cases tested, searches and tool uses verified, and no duplicates, route violations, SGA citations, weakened targets, or repairs found. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompleteToricFacetValuations",
+  "declaration": "ToricMonoid.complete_toric_facet_valuations",
+  "file": "lean/Sheaf/RingTheory/CompleteToricFacetValuations.lean",
+  "statement": "theorem complete_toric_facet_valuations (P : Type u) [AddCommMonoid P] (hfs : AlgebraicGeometry.IsFineSaturatedMonoid (Multiplicative P)) (hsharp : ∀ q : P, IsUnit (Multiplicative.ofAdd q) → q = 0) (n : ℕ) (R : Type w) [CommRing R] [IsDomain R] [IsIntegrallyClosed R] (z : P → R) (hmodel : IsCompleteModel.{u, v, w} P n R z) : IsNoetherianRing R ∧ (∀ q : P, z q ≠ 0) ∧ Set.Finite {F : Set (RationalSpace P) | IsFacet P F} ∧ ∃ (ν : Facet P → Lattice P →+ ℤ) (h : Facet P → RationalSpace P →ₗ[ℚ] ℚ), (∀ F : Facet P, IsPrimitiveNormal F (ν F) ∧ (∀ μ : Lattice P →+ ℤ, IsPrimitiveNormal F μ → μ = ν F) ∧ IsRationalExtension (ν F) (h F) ∧ F.val = {v | v ∈ cone P ∧ h F v = 0}) ∧ (cone P : Set (RationalSpace P)) = {v | ∀ F : Facet P, 0 ≤ h F v} ∧ Function.Injective (boundaryIdeal z) ∧ (∀ F : Facet P, (boundaryIdeal z F).IsPrime ∧ boundaryIdeal z F ≠ ⊥ ∧ ∀ Q : Ideal R, Q.IsPrime → Q < boundaryIdeal z F → Q = ⊥) ∧ (∀ Q : Ideal R, (Q.IsPrime ∧ Q ≠ ⊥ ∧ (∀ J : Ideal R, J.IsPrime → J < Q → J = ⊥) ∧ ∃ q : P, z q ∈ Q) ↔ ∃ F : Facet P, Q = boundaryIdeal z F) ∧ (∀ (F : Facet P) [hp : (boundaryIdeal z F).IsPrime], IsDiscreteValuationRing (Localization.AtPrime (boundaryIdeal z F)) ∧ ∀ [hdvr : IsDiscreteValuationRing (Localization.AtPrime (boundaryIdeal z F))] (q : P), -WithZero.log ((IsDiscreteValuationRing.maximalIdeal (Localization.AtPrime (boundaryIdeal z F))).valuation (FractionRing R) (algebraMap R (FractionRing R) (z q))) = ν F (latticePoint q)) ∧ (Subsingleton P → IsEmpty (Facet P) ∧ Subsingleton (RationalSpace P) ∧ Set.range (boundaryIdeal z) = ∅ ∧ (cone P : Set (RationalSpace P)) = Set.univ)",
+  "branch": "newtargets-dag",
+  "by": "Q147",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-5d7e51bb2"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5d7e51bb2",
+  "group": "Q147",
+  "result": "fix",
+  "note": "Statement matches the node clause by clause: fs/sharp hypotheses use the recorded predicates; IsCompleteModel gives both coefficient cases (IsCohenRing includes Nat.Prime p; completion ideal (m_L, z^q (q≠0), t); theta-p in the completed chart ideal); normal domain uses the recorded inline form; conclusions cover Noetherian, z q ≠ 0, finitely many facets, unique primitive normals, half-space cone, injective boundary ideals that are prime, nonzero and height one, the exact height-one classification, DVR localization, and the normalized valuation -log v(z q) = ν_F(q) (uniformizer value one); the P=0 clause is present; universes u, v, w independent and bound. Edge cases P=0, n=0, q=0, field, Cohen with P=0 checked. Both modules compile clean with nt_compile.py --json (rc 0, about 2 s each; a negative control produced an error). No hollow definitions; only the theorem is sorry; the local monomial is kept to avoid a future import cycle with CompleteToricKatoRecognition. The new node's blueprint via matches blueprint_refs.chain. Fixed (merge_delivery dry run not run): H8 missing docstrings (16 of 17 model declarations, module source places, theorem proof steps) via docstring-only replacement Lean files with signatures verbatim, recompiled clean; H12 vague statement of def-trf-complete-toric-model replaced by self-contained TeX and a precise source place; H1/H11 non-reading second-reading section replaced by a clause-by-clause reading in the fixed report."
  }
 }
