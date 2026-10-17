@@ -9,7 +9,9 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-marked-point-cartesian-model"
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-infinity-source-gluing",
+  "lem-coef-kan-homotopy-pullback-invariance"
  ],
  "proof": [
   {
@@ -204,5 +206,44 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-542f99226 (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full, the full statements of both cited nodes (lem-coef-marked-point-cartesian-model, which is in this item's unit, and def-cbc-enhanced-diagrams-cones), the parent's steps 7-9 and lem-coef-infinity-equivalence-arrow-path-object (it supplies the endpoint-fibration hypothesis, with the same W), the unit record, and blueprint prop-coef-integral-exceptional-adjoint paragraph 2. HTT 3.1.3 and Cor 3.1.4.4 are not archived, so I could not read them at the cited place. The worker recorded WANTED and set proof_origin to agent; no step depends on HTT beyond what the cited marked-model statement says. Step 1: B is fibrant coordinatewise, the lift uses only the hypothesized fibration p, and fibrant objects are exactly the C^natural, so H = R^natural. Step 2: the Kan property comes from the simplicial structure (pushout-product axiom, every object cofibrant) and the stated Kan enrichment; it is correctly marked non-elementary. Step 3: the internal-Hom property, then (Delta^n)^sharp x I^sharp = (Delta^n x I)^sharp from the product-marking rule, then the tensor adjunction with tensor A x K^sharp, give Fun(I,M). Step 4: the degreewise marked pullback plus currying turns the endpoint equations into f_*x = ev_0 gamma and g_*y = ev_1 gamma, with uncurrying as inverse. Step 5: naturality in Q and in strictly commuting cospan maps is direct pre- and postcomposition. Step 6: universe stability holds, and 'path-space homotopy pullback' is literally the displayed model (def-cbc convention). Edge cases checked: Q empty gives a point on both sides; C empty or disjoint discrete images give empty on both sides; C a point gives the product mapping complex; degree 0 checked. No new nodes and no duplicate in the DAG (grep of Map^sharp/ev_0 and homotopy-pullback nodes). The statement is unchanged and not weakened, and no SGA source is used. No tool_uses and no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.InfinityPullbackMappingSpace",
+  "declaration": "SSet.Marked.infinity_pullback_mapping_space",
+  "declarations": [
+   "SSet.Marked.intervalProductFst",
+   "SSet.Marked.intervalProductSnd",
+   "SSet.Marked.intervalPair",
+   "SSet.Marked.intervalInsert",
+   "SSet.Marked.intervalEvaluation",
+   "SSet.Marked.intervalEndpoints",
+   "SSet.Marked.IntervalCospan",
+   "SSet.Marked.intervalPullback",
+   "SSet.Marked.intervalPullbackBase",
+   "SSet.Marked.intervalPullbackPath",
+   "SSet.Marked.intervalMappingTarget",
+   "SSet.Marked.intervalMappingPath",
+   "SSet.Marked.intervalMappingPre",
+   "SSet.Marked.intervalReassociate",
+   "SSet.Marked.intervalCurriedSimplex",
+   "SSet.Marked.intervalMappingPost",
+   "SSet.Marked.IntervalPullbackMappingStatement",
+   "SSet.Marked.infinity_pullback_mapping_space"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/InfinityPullbackMappingSpace.lean",
+  "statement": "theorem infinity_pullback_mapping_space : (∀ O : CartesianModelStatement.{u}, Nonempty (IntervalPullbackMappingStatement O)) ∧ (∀ O : CartesianModelStatement.{max u v}, Nonempty (IntervalPullbackMappingStatement O))",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The comparison is pinned on both projections and by the full simplicial currying formula for the interval path. Naturality includes the actual induced strict pullback map, characterized on its base and uncurried path coordinates. The comparison assertion is repeated at max u v using exactly the same universe-polymorphic formulas. Naturally fibrant marked objects encode precisely the node's naturally marked quasicategories; all functors preserve this marking. The complete-category limit construction is determined by its universal property, not an arbitrary existence choice. Added landed nodes supply the existing path-model pullback and its canonical maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-39b7af849",
+  "group": "NH",
+  "result": "pass",
+  "note": "Statement, dependencies, definitions, edge cases, docstrings, and universe behavior checked; scompile.py passed sandbox and library checks."
  }
 }
