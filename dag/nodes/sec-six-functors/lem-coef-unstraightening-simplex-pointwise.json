@@ -62,17 +62,17 @@
    }
   },
   {
-   "text": "Let $p:V\\to\\mathrm{id}$ be induced by $p_m:Q^m\\to\\Delta^m$ from [lem-coef-pinched-cube-latching], so that $p_X([z,q])=z(p_m(q))$. This is well-defined and natural because the $p_m$ commute with every monotone map. Each $p_{\\Delta^m}=p_m$ is a weak homotopy equivalence: $Q^m$ is weakly contractible by the cited node, and the realization of $\\Delta^m$ is its ordinary topological simplex, which contracts by $(t,a)\\mapsto(1-a)t+ae_0$. The latter realization identification sends $[\\alpha,t]$ to $\\alpha_*t$ and has inverse $t\\mapsto[\\mathrm{id},t]$, by the quotient relation in [def-cbc-enhanced-diagrams-cones]. Two-out-of-three in the Kan model of Step 4 now applies. We prove that $p_X$ is a weak homotopy equivalence for every $X$. It holds for $\\varnothing$, since $V(\\varnothing)=\\varnothing$. Induct on the bound $d$ for the dimension of a simplicial set, starting with bound $-1$ for the empty set. The relative skeletal presentation of [lem-coef-infinity-monomorphism-boundary-cells], applied to $\\varnothing\\hookrightarrow X$, attaches all nondegenerate $d$-simplices to the $(d-1)$-skeleton along their boundaries. After applying $V$, this remains a pushout; the coproduct of boundary maps is a monomorphism by Step 4. The three maps comparing the two attaching spans are weak homotopy equivalences: the old skeleton and the copies of $\\partial\\Delta^d$ by the induction hypothesis, and the copies of $Q^d\\to\\Delta^d$ by the simplex case. Coproducts of weak homotopy equivalences are weak homotopy equivalences directly from the realization definition: the realization quotient of a disjoint union is the disjoint union of the realizations; its path components are the disjoint unions of theirs, and a based cube or a based cube homotopy has connected domain and stays in its chosen open-and-closed summand. Apply the pushout assertion of [lem-coef-sset-gluing-filtered-equivalences] to these spans. This proves the induction step, including $d=0$ with empty boundaries. For arbitrary $X$, the same skeletal presentation expresses $X$ as the colimit of its finite-dimensional skeleta indexed by the small directed poset $\\mathbb N$. The colimit-preserving $V$ gives the corresponding colimit of $V$ of the skeleta. The filtered-colimit assertion of [lem-coef-sset-gluing-filtered-equivalences] applied to the natural maps $p$ proves the result for $X$. All coproducts and index sets are small in a sufficiently large fixed universe.",
+   "text": "Let $p:V\\to\\mathrm{id}$ be induced by the cosimplicial maps $p_m:Q^m\\to\\Delta^m$ of [lem-coef-pinched-cube-latching], with $p_X([z,q])=z(p_m(q))$. Since $\\max\\alpha(I)=\\alpha(\\max I)$ for monotone $\\alpha$, the $p_m$ are compatible with monotone maps, so $p_X$ is well defined on the coend relations and natural in $X$. Under the identification $V(\\Delta^m)\\cong Q^m$ of Step 4, $p_{\\Delta^m}([\\alpha,q])=\\alpha(p_k(q))=p_m(Q(\\alpha)q)$, so $p_{\\Delta^m}=p_m$. Its source is weakly contractible by [lem-coef-pinched-cube-latching]; its target is weakly contractible because its realization is a contractible space by [lem-coef-standard-simplex-realization-contraction], so the map to the point induces a bijection on path components and trivial groups at every basepoint. Hence $p_m$ is a weak homotopy equivalence by two-out-of-three in [lem-coef-kan-quillen-right-proper]. Now apply [lem-coef-sset-cellular-comparison], taking its two functors to be $V$ and the identity and its transformation to be $p$: Step 4 proved that $V$ preserves all small colimits and sends monomorphisms to cofibrations, i.e. to monomorphisms, and the identity functor does both. Its simplex hypothesis is the case just proved, for every $m\\geq0$. Thus $p_X$ is a weak homotopy equivalence for every small simplicial set $X$, including $X=\\varnothing$; the skeletal induction, coproduct and directed-union arguments are inside that statement.",
    "uses": [
     "lem-coef-pinched-cube-latching",
-    "def-cbc-enhanced-diagrams-cones",
-    "lem-coef-infinity-monomorphism-boundary-cells",
-    "lem-coef-sset-gluing-filtered-equivalences"
+    "lem-coef-standard-simplex-realization-contraction",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-sset-cellular-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
-    "place": "Proposition 2.2.2.7 and its cellular proof; arbitrary coproduct and sequential skeletal-union details supplied explicitly, using the existing gluing/filtered-colimit lemma."
+    "place": "Proposition 2.2.2.7 and Remark 2.2.2.8; same cellular route, with the simplex contraction a Mathlib leaf and the generic cellular-detection argument an independent statement-only node."
    }
   },
   {
@@ -101,12 +101,12 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-coherent-inner-anodyne-equivalences",
   "lem-coef-cone-presheaf-adjunction",
-  "lem-coef-infinity-monomorphism-boundary-cells",
   "lem-coef-kan-quillen-right-proper",
   "lem-coef-pinched-cube-latching",
   "lem-coef-quillen-derived-counit-criterion",
   "lem-coef-simplicial-boundary-collapse-test",
-  "lem-coef-sset-gluing-filtered-equivalences"
+  "lem-coef-sset-cellular-comparison",
+  "lem-coef-standard-simplex-realization-contraction"
  ],
  "proof_origin": {
   "by": "agent",
@@ -193,7 +193,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-unstraightening-homotopy-descent",
@@ -228,16 +228,16 @@
   "date": "2026-10-17",
   "item": "lem-coef-unstraightening-simplex-pointwise",
   "worker": "stage1",
-  "summary": "Statement unchanged. Seven-step zero-new-node split: a coned right horn is an inner horn; simplexwise mixed cone functors prove strict base-change and pinched-cube fiber formulas; coend boundary evaluation, skeletal gluing and the existing derived-counit criterion prove that the specified K to Sing_Q K map is a weak homotopy equivalence for Kan K. Checked the statements of every cited node, dependency closures for cycles, empty and degree-zero cases, whole-DAG/blueprint duplicates, project attachments and logged Mathlib searches. No Lean written or compiled.",
+  "summary": "Repair of the human 2026-10-17 long-step return. Statement, statement dependencies, Lean record, blueprint ancestry and the other six proof steps unchanged. Replaced only Step 5 by a short application of an independent general cellular-comparison statement, and a Mathlib leaf for simplex realization and contractibility. The original cellular route is retained. Each new node is statement-only with real logged Mathlib searches; all original searches and the earlier report are retained. Maintainer-reader fix: the separate disjoint-union comparison node was dropped from this delivery, since Step 5 uses the cellular statement as a black box and does not rely on it.",
   "blueprint": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, paragraph 2 and the displayed derived coefficient-adjunction / inverse-limit comparison. Supplies the independent coherent-diagram foundation in the recorded homotopy-descent ancestry: right-horn preservation, strict restriction, and vertex comparisons. It does not replace a geometric step of the unit."
  },
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q75-1f777f4d0",
-  "group": "Q75",
+  "reviewer": "NT-cc-Q05-5c19b9a3c",
+  "group": "Q05",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-1f777f4d0 (reviewer sub-agent of L); spot-checked: I read the item and all seven steps in full, and the full statements of all nine cited nodes. None of the cited nodes' dependencies reach back to the item (226 nodes checked), and every cited statement is in unit sk-prop-sf-biduality-general (def-cbc is a definition). The delivery has no new nodes and needs no tool_uses or fixes. Step 1: I checked that P=D∪_H(H⋆Δ^0)=Λ_i^{n+1}, so 0<i≤n gives an inner horn, including n=1, i=1. The inner-anodyne node gives the Dwyer–Kan equivalence that the last clause of cone-presheaf-adjunction requires. Step 2: transformations L_S(σ)→F are the same as cone functors into the collage E_F, and they match for σ=uτ (elementary unwinding, accepted). Step 3: the vertex fiber reduces to C[J^m] and Q^m. Step 4: boundary-collapse-test applies because L_mQ→Q^m is injective and Q^m is contractible. Step 5 (2443 chars): it is one skeletal induction, so it may stay. It uses the gluing lemma with monomorphisms on the right legs, then the colimit over ℕ. Its two inline facts (the realization of Δ^m is contractible; coproducts of weak equivalences are weak equivalences) are two-line consequences of the realization definition. rg found no existing node for either fact or for the cellular-induction lemma. Step 6: the counit criterion applies, and ε_K V(τ_K)=p_K holds exactly with p_{RK}V(τ_K)=τ_K p_K, so the specified map z↦z∘p_m is a weak equivalence. Step 7: naturality and edge cases (empty S, T and K; m=0) hold. The statement is unchanged and not weakened, and Kan is assumed only where needed. HTT is not in the local literature: it is recorded as WANTED with proof_origin.by=agent, and I checked the statement against HTT 2.2.1.1/§2.2.2 from my knowledge only. No SGA is used."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-5c19b9a3c (reviewer sub-agent of L); spot-checked: FIX: I read the item, all three new nodes, every cited statement and the Mathlib lines in full. Step 5 cited a new coproduct node it does not need, so I drop that node. Full checks are in review.md. Item statement: unchanged, not weakened; Kan is assumed only where needed. Route: all cited statements are in unit sk-prop-sf-biduality-general (def-cbc is a definition); none of their dependency closures reaches the item; no tool_uses. Step 1: P=D∪_H(H⋆Δ^0)=Λ^{n+1}_i is inner for 0<i≤n, including n=1,i=1. The inner-anodyne node then gives the Dwyer–Kan equivalence that the last clause of cone-presheaf-adjunction needs. Steps 2–3: the collage and pinched-cone unwinding match the T_a/U_S definitions and Q^m=𝔠[J^m](x,y). Step 4: V(∂Δ^m)=L_mQ is mono and Q^m is weakly contractible, so boundary-collapse-test applies; horn lifting for Sing_Q K follows by adjunction. Step 6: I checked ε_K V(τ_K)=p_K and p_{RK}V(τ_K)=τ_K p_K, so the specified τ_K is a weak homotopy equivalence. Step 7: edge cases (empty S, T, K; m=0) hold. New leaf lem-coef-standard-simplex-realization-contraction is accepted. Its four declarations exist at the cited lines: SimplexCategory.toTopHomeo (TopAdj.lean:40–42), Convex.contractibleSpace (Contractible.lean:34–37), convex_stdSimplex and single_mem_stdSimplex (StdSimplex.lean:42/81), Homeomorph.contractibleSpace (Contractible.lean:87–89). New unsplit node lem-coef-sset-cellular-comparison is true and accepted. I checked it by skeletal induction with the existing gluing/filtered-colimit node and the boundary-cell leaf, on P=Q=id, X=∅, d=0 and unbounded dimension. It is not a restatement of the item and not a duplicate of infinity-cellular-natural-equivalence, which is about categorical equivalences. Dropped: lem-coef-realization-disjoint-union-comparison. Its statement is true, but Step 5 uses the cellular node as a black box and does not rely on it. Where the cellular node's own proof needs coproducts, they follow in a few lines from the existing independent lem-coef-sset-gluing-filtered-equivalences (or from lem-coef-bousfield-kan-comparison-calculus with a discrete index category). Its extra homeomorphism and π_0/π_r clauses are needed nowhere. Fix file: fixes/dag/nodes/sec-six-functors/lem-coef-unstraightening-simplex-pointwise.json. In it, Step 5 is rewritten (1421 chars) without that citation; it now justifies naturality and p_{Δ^m}=p_m, spells out weak contractibility of Δ^m, and renames the cellular node's functors to avoid a clash with Q^m. proof_deps is the union of uses again and the split_report summary is amended. No SGA is used; HTT stays WANTED with proof_origin agent.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",

@@ -1,0 +1,77 @@
+{
+ "id": "lem-pur-completed-coefficient-pushforward-comparison",
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "fix-prop-adjunctions",
+  "date": "2026-10-17",
+  "group": "Q89"
+ },
+ "title": "Completed-coefficient pushforward restriction and strict reduction towers",
+ "statement": "Fix distinct primes $p,\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $A=\\mathcal O_E$ and uniformizer $t$, and put $A_n=A/(t^n)$ for $n\\geq1$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be any morphism of schemes, using the small pro-etale sites with their small-skeleton convention [def-weil-pbc-proetale-site]. For $W=X,Y$ set $R_W=\\varprojlim_n(A_n)_W$, the completed coefficient sheaf [def-weil-completed-integral-coefficients], and let $\\underline A_W$ denote the constant sheaf [def-weil-pbc-constant-sheaf]. Use the structural maps $f^{-1}R_Y\\to R_X$ induced by the finite projections, and the canonical identifications $f^{-1}\\underline A_Y=\\underline A_X$ and $f^{-1}(A_n)_Y=(A_n)_X$ [def-weil-pbc-completed-pullback]. Let $D(B)$ be the ordinary unbounded derived category of sheaves of modules over the ring sheaf $B$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Write $U_W:D(R_W)\\to D(\\underline A_W)$ and $V_{W,n}:D((A_n)_W)\\to D(R_W)$ for termwise restriction of scalars [def-pc-sheaf-restrict-scalars]. Denote the K-injective total derived direct images for these ringed topoi by $F_R=Rf_{*,R}$, $F_A=Rf_{*,\\underline A}$ and $F_n=Rf_{*,A_n}$ [lem-weil-pbc-ringed-topoi-derived-pushforward-composition].\n\nThere are canonical natural isomorphisms\n$$U_YF_R\\xrightarrow{\\sim}F_AU_X,\\qquad F_RV_{X,n}\\xrightarrow{\\sim}V_{Y,n}F_n.$$\nTheir normalization compares the two factorizations of the same composite morphism of ringed topoi, using the K-injective derived-composition comparisons of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. For $m\\geq n$, the latter comparisons commute with coefficient restriction along $A_m\\to A_n$, with the coherence for successive restrictions and quotient maps. For a strict complex of coefficient systems $(M_n)_n$, with $M_n$ an $(A_n)_X$-module complex and transition maps linear through $A_{n+1}\\to A_n$, this compatibility is a comparison of derived strict-diagram functors after restriction to $R_X$-module towers, not only an equality of evaluated arrows. Here strict towers and their derived inverse limits are interpreted by [lem-weil-ringed-tower-pushforward-limit-comparison].\n\nIf $K\\in D(R_X)$ is derived $t$-complete [def-weil-derived-complete], form its strict reduction system $K_n=K\\otimes^L_{R_X}(A_n)_X$ on one flat-term K-flat representative, with the quotient transitions [def-weil-integral-reduction-tower]. Then $F_RK$ is derived $t$-complete and the preceding comparisons give a canonical natural isomorphism\n$$F_RK\\xrightarrow{\\sim}R\\varprojlim_n V_{Y,n}F_nK_n.$$\nThe right side is obtained by applying total derived direct image to the strict restricted reduction tower and then total derived inverse limit. Under this comparison its $n$-th projection is $F_R$ of $K\\to V_{X,n}K_n$, followed by the displayed coefficient-restriction comparison. Finally $U_YF_RK\\cong F_AU_XK$ identifies the direct image on complete $R$-modules with the direct image on complete constant-$A$ modules under the equivalences of [lem-weil-pbc-constant-completion-equivalence].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition; Tag 0A07, lemma-Rf-commutes-with-Rlim, first proof on tower ringed topoi; combined with proetale.tex Tag 099N, lemma-pushforward-Noetherian-case (1),(4). The coherent completed/constant coefficient comparison is the extracted argument of fix-prop-adjunctions proof Step 1, not a verbatim single Stacks lemma."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "def-weil-derived-complete",
+  "def-weil-integral-reduction-tower",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of ringed topoi derived direct image commutes coherently with restriction from completed adic coefficient sheaves to constant coefficients and finite quotient coefficient towers",
+   "results": "AdicCompletion.transitionMap_comp_reduceModIdeal, eval_comp_of, map_comp: ordinary algebraic completion maps, not derived ringed-topos restriction or strict coefficient systems.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image of sheaves of modules commutes with restriction of scalars, compatibly with coefficient quotient transitions and inverse limit projections",
+   "results": "PresheafOfModules.pushforward_obj_map_apply'; SheafOfModules.restrictScalars; ordinary sheaf pullback adjunction. No derived completed-coefficient tower comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardComp",
+   "results": "SheafOfModules.pushforwardComp and conjugateEquiv_pullbackComp_inv. Read PushforwardContinuous.lean:139-151: underived sheaf composition only.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardComp|restrictScalars",
+   "results": "Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:139, ChangeOfRings.lean:36. No derived completed/constant coefficient comparison; source read.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-adjunctions",
+   "place": "Proof Step 1, integral derived adjunction: identify its right adjoint under constant-to-completed coefficient transport and the strict finite-reduction tower.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

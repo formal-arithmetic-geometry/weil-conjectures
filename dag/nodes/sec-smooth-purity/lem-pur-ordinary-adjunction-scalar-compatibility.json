@@ -1,0 +1,87 @@
+{
+ "id": "lem-pur-ordinary-adjunction-scalar-compatibility",
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "fix-prop-adjunctions",
+  "date": "2026-10-17",
+  "group": "Q89"
+ },
+ "title": "Scalar compatibility of the ordinary completed adjunction",
+ "statement": "Fix distinct primes $p,\\ell$, the field $k=\\overline{\\mathbf F}_q$ of characteristic $p$, and finite coefficient fields $E\\subset L$ inside $\\overline{\\mathbf Q}_\\ell$, with valuation rings $\\mathcal O_E\\subset\\mathcal O_L$ and chosen uniformizers [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be a separated finite-type morphism between finite-type $k$-schemes [def-weil-scheme-morphism-properties]. Work on the small pro-etale sites [def-weil-pbc-proetale-site]. For $B=E,L$ and $W=X,Y$, write $R_{B,W}=\\widehat{\\mathcal O}_{B,W}$ [def-weil-completed-integral-coefficients] and let $\\mathcal D_{B,W}$ be the full category of derived-complete $R_{B,W}$-module complexes [def-weil-derived-complete, def-weil-abstract-derived-category]. Put $P_B=Lf^*_{\\mathrm{comp},B}$ as in [def-weil-pbc-completed-pullback], and let $F_B=Rf_{*,R_B}$ be ordinary ringed-topos derived direct image. Let\n$$h_B:\\operatorname{Hom}(P_BM,K)\\xrightarrow{\\sim}\\operatorname{Hom}(M,F_BK)$$\nbe the canonical completed adjunction bijection: transport the constant-coefficient completion/ordinary-adjunction composite of [lem-sp-completed-pullback-adjunction] through [lem-weil-pbc-constant-completion-equivalence], with right-functor identification [lem-pur-completed-coefficient-pushforward-comparison]. This fixes the bijection independently of any constructible restriction.\n\nFor $W=X,Y$, write $C_W(-)=-\\otimes^L_{R_{E,W}}R_{L,W}$ for scalar extension. On complete inputs this is the strict-tower integral scalar extension under the canonical comparison of [lem-weil-finite-free-completed-scalar-comparison]. Use precisely the canonical comparisons of [prop-weil-pbc-scalar-extension],\n$$a:C_XP_E\\xrightarrow{\\sim}P_LC_Y,\\qquad b:C_YF_E\\xrightarrow{\\sim}F_LC_X.$$\nThe bijections $h_B$ and their inverses are $\\mathcal O_B$-linear. For $M\\in\\mathcal D_{E,Y}$, $K\\in\\mathcal D_{E,X}$, $u:P_EM\\to K$ and $v:M\\to F_EK$, one has\n$$h_L\\bigl(C_X(u)\\circ a_M^{-1}\\bigr)=b_K\\circ C_Y\\bigl(h_E(u)\\bigr),$$\n$$h_L^{-1}\\bigl(b_K\\circ C_Y(v)\\bigr)=C_X\\bigl(h_E^{-1}(v)\\bigr)\\circ a_M^{-1}.$$\nThese equalities use the given tensor/completion and ringed-topos comparisons, and respect identity extensions and towers $E\\subset L\\subset L'$ under their tensor associators. On bounded constructible objects [def-weil-derived-complete-integral-detailed], raw scalar localization [def-weil-rationalization-karoubi] gives the same equalities for the localized bijections and rational scalar extension. Consequently, for the common finite-stage Hom sets of [def-weil-algebraically-closed-coefficients], taking the $h_B$-adjunct or inverse adjunct of a representative is independent of the common finite coefficient field and of the representative.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
+  "place": "Proof Step 1, derived ordinary adjunction and coefficient transport; extracted finite-free scalar-naturality argument of the reviewed DAG proof step 3. Completed adjunction input: Stacks Tag 099N, proetale-lemma-pushforward-Noetherian-case (2),(5). Finite-free completed coefficient presentation: Bhatt-Scholze, Lemma 6.8.2(1), pp. 58-59. The compatibility is an agent-derived consequence, not a verbatim theorem in those sources."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-completed-pullback",
+  "lem-sp-completed-pullback-adjunction",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "prop-weil-pbc-scalar-extension",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical completed pullback direct image adjunction Hom bijection commutes with finite free extension of adic coefficient rings and rationalization",
+   "results": "SheafOfModules.pullbackPushforwardAdjunction; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars; neither concerns completed adic derived adjunction compatibility.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Hom equivalence of a completed inverse image direct image adjunction is natural under finite free change of coefficient rings; the scalar extension comparison commutes with adjunction units and counits",
+   "results": "ModuleCat.homEquiv_extendScalarsComp and extendRestrictScalarsAdj concern module scalar adjunctions, not completed derived site adjunctions.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive linear adjunction commutes with finite free coefficient extension through matrices and rationalization",
+   "results": "Earlier logged search read: moritaEquivalenceMatrix, IsBaseChange.endHom_toMatrix, MatrixModCat.fromMatrixLinear_apply_coe. Matrix/category equivalences do not state adic adjunction compatibility.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "homEquiv, comp_homEquiv and unit/counit formulas. These give abstract adjunction identities, without adic coefficient comparisons.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*(linear|add)|map.*homEquiv|homEquiv.*map",
+   "results": "CategoryTheory/Adjunction/Additive.lean:52-75 gives homAddEquiv and additivity; Basic.lean:227-244 gives naturality. Read these sources; no completed coefficient extension equation.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-adjunctions",
+   "place": "Proof Step 1, rational and algebraically closed coefficient passage: compatibility of the ordinary Hom bijections with finite coefficient extension.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
