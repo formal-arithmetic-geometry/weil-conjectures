@@ -95,7 +95,8 @@
   "def-pc-tensor-complex-sheaves",
   "def-weil-derived-limit",
   "lem-weil-tower-category-levelwise-abelian",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-pur-principal-koszul-quotient-towers"
  ],
  "mathlib_searches": [
   {
@@ -196,5 +197,29 @@
   "group": "N5",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-a8b025a3f (reviewer sub-agent of L); spot-checked: I read all of the mathematics. Both parts of the item are true for an arbitrary ringed site with a regular global section t. Part 1: t^m is injective, so Q_m->B_m[0] is a quasi-isomorphism. K-flatness keeps P tensor the acyclic cone acyclic, so a is a quasi-isomorphism levelwise and therefore an isomorphism in D(Tow) and after Rlim. Part 2: TR3 plus lemma-weil-pbc-r-lim-levelwise-isomorphism gives phi with a_m pr_m p_V phi = c_m. Edge cases checked: t a unit (forces K=0), O=0, m=1, P=O[0]; the regularity hypothesis is needed. Sources checked: algebraization.tex l.1091 lemma-derived-completion-koszul (0A0E, the r=1 case), sites-cohomology.tex l.5067 lemma-derived-limit-is-ok (0941), and tag 0H9J exists. Not a duplicate of lemma-weil-pbc-koszul-quotient-limit, lem-weil-pbc-ringed-koszul-completion-reflector or lem-weil-pbc-constant-completion-equivalence, which cover constant Noetherian coefficients or the reflector. No SGA is cited. Fix (C1 exception, D1/D4 in spirit): the new node lem-pur-regular-element-koszul-quotient is a three-line fact that step 1 re-proves in full before citing it. I folded it into step 1, now elementary, and dropped the node. I removed it from the item's stmt_deps (the statement text never cited it), and step 2 now cites step 1. Step 4 is rewritten to give the TR3 direction explicitly, citing def-weil-triangulated-category, with the lemma's hypotheses matched. proof_deps and split_report are updated; the statement is unchanged. The recorded tool use of lemma-weil-pbc-r-lim-levelwise-isomorphism is accepted; lem-weil-pbc-ringed-strict-tower-homotopy-limit (same pbc unit) is likewise a generic tool.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0204bc339",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Statement, dependencies, canonical constructions, route-pivot compliance, edge cases, docstrings, and all three per-file scompile checks passed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DerivedCompleteKoszulReconstruction",
+  "declaration": "CategoryTheory.derivedComplete_koszul_reconstruction",
+  "declarations": [
+   "CategoryTheory.koszulRlim",
+   "CategoryTheory.koszulCompletion",
+   "CategoryTheory.derivedComplete_koszul_reconstruction"
+  ],
+  "file": "lean/Sheaf/Paper/DerivedCompleteKoszulReconstruction.lean",
+  "statement": "theorem derivedComplete_koszul_reconstruction (t : (SheafOfModules.unit 𝓞).sections) (hreg : Mono (globalSectionMultiplication R t)) (P : CochainComplex 𝒜 ℤ) (hP : CochainComplex.IsKFlatIndependentCoefficients P) : let V := koszulTensorTower R P t let U := reductionTensorTower R P t let a := koszulTensorTowerComparison R P t let aC := koszulTowerComplexMap R a let VD := fun m : ℕ ↦ DerivedCategory.Q.{w}.obj (V.obj (op m)) let UD := fun m : ℕ ↦ DerivedCategory.Q.{w}.obj (U.obj (op m)) let aD := fun m : ℕ ↦ DerivedCategory.Q.{w}.map (a.app (op m)) let v := fun m : ℕ ↦ DerivedCategory.Q.{w}.map (V.map (homOfLE (Nat.le_succ m)).op) let u := fun m : ℕ ↦ DerivedCategory.Q.{w}.map (U.map (homOfLE (Nat.le_succ m)).op) (∀ m : ℕ, QuasiIso (a.app (op m))) ∧ QuasiIso aC ∧ IsIso (DerivedCategory.Q.{w}.map aC) ∧ IsIso ((koszulRlim R).map (DerivedCategory.Q.{w}.map aC)) ∧ ((koszulRlim R).map (DerivedCategory.Q.{w}.map (koszulTowerComplexMap R (koszulStrictAugmentation R P t))) ≫ (koszulRlim R).map (DerivedCategory.Q.{w}.map aC) = (koszulRlim R).map (DerivedCategory.Q.{w}.map (koszulTowerComplexMap R (koszulStrictAugmentation R P t ≫ a)))) ∧ ∃ (_hV : HasProduct VD) (_hU : HasProduct UD) (pV : koszulCompletion R P t ⟶ ∏ᶜ VD) (δV : ∏ᶜ VD ⟶ (koszulCompletion R P t)⟦(1 : ℤ)⟧), IsDerivedLimitTriangle v (koszulCompletion R P t) pV δV ∧ IsIso (Limits.Pi.map aD) ∧ ∀ (K : DerivedCategory.{w} 𝒜) (e : DerivedCategory.Q.{w}.obj P ≅ K) (pU : K ⟶ ∏ᶜ UD) (δU : ∏ᶜ UD ⟶ K⟦(1 : ℤ)⟧), IsDerivedLimitTriangle u K pU δU → (∀ m : ℕ, pU ≫ Limits.Pi.π UD m = e.inv ≫ DerivedCategory.Q.{w}.map (koszulRepresentativeQuotient R P t m)) → ∃ φ : K ≅ koszulCompletion R P t, (∀ m : ℕ, φ.hom ≫ pV ≫ Limits.Pi.π VD m ≫ aD m = e.inv ≫ DerivedCategory.Q.{w}.map (koszulRepresentativeQuotient R P t m)) ∧ φ.hom ≫ pV ≫ Limits.Pi.map aD = pU ∧ Limits.Pi.map aD ≫ δU = δV ≫ φ.inv⟦(1 : ℤ)⟧'",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Returned H3/H4/H12 repair: actual canonical strict t/id and quotient towers; recorded independent-coefficient K-flatness and canonical sheaf tensor; total right derived strict limit selected by its universal property from the repaired dependency; component equations through e.inv and the connecting equation for the same constructed phi. The unsupported saved statement_change is withdrawn and the current main statement is retained verbatim. Tensor order Q_m tensor P is the symmetric model of P tensor Q_m. Timeout repair of e2328281005d: use the exact augmentation naturality theorem directly and restrict the tower comparison simplification to the explicit ofOpSequence successor-map rewrite, avoiding broad simp over cone/tensor tower data."
  }
 }

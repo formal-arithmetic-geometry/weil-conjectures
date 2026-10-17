@@ -19,7 +19,8 @@
   "def-weil-geometric-fibre",
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-multivariate-power-series",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "def-trf-multipointed-curve-modification"
  ],
  "proof": [
   {
@@ -224,5 +225,23 @@
   "group": "Q91",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-7e12cdc27 (reviewer sub-agent of L); spot-checked: I read the item, the four new nodes, every cited node's statement, the unit sk-i-curve-zero, the chapter record and the parent's use of the item (temkin-stable-modification Step 5). The item statement and stmt_deps are byte-identical to the side-DAG base, so nothing is weakened. Temkin arXiv:0707.3953v3 is not in literature/ and network access is blocked, so I could not open it. I checked every Temkin-sourced claim mathematically instead; the place numbers are unverified, and the maintainer should promote the PDF. Step checks: (1) the equalizer of the separated f_2 is closed, and the torsion-free lemma with L=O gives B -> B_(A\\0) injective, so the ideal vanishes. (2) The diagram node's outputs (normal finite-type T0, stability, reducedness, dense isomorphism open U0) cover everything later steps use. (3) Y_i0 over T0 is flat, finitely presented and has nodal (reduced) fibres, so it is eta-normal. (4) Base change keeps the pair multipointed with smooth/etale generic fibres, the source semistable and the maps stable and proper; the preimage of U0 is schematically dense by flatness, and the valuation node applies in both directions. (5) The domination node's hypotheses and its valuation quantifier match exactly; Step 1 then gives gh=1 and hg=1. (6) The markings factor by the ideal argument and the monomorphism, and the affine pieces glue by Step 1. New nodes: limit plus normalization argument checked (A_lambda normalization is finite and inside A because A is normal). Eta-normality tested on R[x,y]/(xy-pi) and V[x,a/x]. The valuation comparison for arbitrary K holds: V->W is faithfully flat, height is preserved, and the two pullbacks agree on W(x)_V W by flatness and separatedness, so fpqc descent applies; tested at height 0 and on a DVR blow-up. Domination tested with S a field and S of dimension 1. None of the new nodes duplicates an existing node or restates the item (rg over dag/nodes). The tool uses lem-sc-flat-invertible-sections-torsion-free and lem-weil-pbc-proper-fp-permanence (a Mathlib leaf) are accepted. FIX (C1): Step 6 used flat-generic injectivity uncited and was marked elementary; it now cites lem-sc-flat-invertible-sections-torsion-free and is marked non-elementary. Corrected item in fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1a28979d9",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Statement, source clauses, dependencies, proof-step citations, docstrings, edge cases, route-pivot gate, and immutable scompile.py sandbox/server compilation all checked; only the expected theorem sorry remains."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.StableModificationUniquenessNormal",
+  "declaration": "AlgebraicGeometry.Temkin.stableModificationUniquenessNormal",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/StableModificationUniquenessNormal.lean",
+  "statement": "theorem stableModificationUniquenessNormal {T : Scheme.{u}} [IsIntegral T] [CompactSpace T] [QuasiSeparatedSpace T] (hT : ∀ x : T, IsDomain (T.presheaf.stalk x) ∧ IsIntegrallyClosed (T.presheaf.stalk x)) (C : MultipointedCurve T) (hX : Smooth (pullback.snd C.x T.fromSpecFunctionField)) (hD : Etale (pullback.snd C.d T.fromSpecFunctionField)) {C₁ C₂ : MultipointedCurve T} (f₁ : C₁.Hom C) (f₂ : C₂.Hom C) (hf₁ : f₁.IsStable T.fromSpecFunctionField) (hf₂ : f₂.IsStable T.fromSpecFunctionField) : ∃! α : (C₁.X ≅ C₂.X) × (C₁.D ≅ C₂.D), α.2.hom ≫ C₂.i = C₁.i ≫ α.1.hom ∧ α.1.hom ≫ f₂.curve = f₁.curve ∧ α.2.hom ≫ f₂.marking = f₁.marking",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

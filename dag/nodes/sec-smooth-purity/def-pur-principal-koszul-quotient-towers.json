@@ -1,0 +1,128 @@
+{
+ "id": "def-pur-principal-koszul-quotient-towers",
+ "kind": "definition",
+ "title": "Canonical principal Koszul and quotient towers with tensor augmentations",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a small site relative to the module universe and $\\mathcal O$ a sheaf of commutative rings, with $\\mathcal A=\\operatorname{Mod}(\\mathcal O)$ [def-weil-sheaf-of-modules-category], and let $t\\in\\Gamma(\\mathcal C,\\mathcal O)$. For $m\\geq1$ define $Q_m=[\\mathcal O\\xrightarrow{t^m}\\mathcal O]$ in degrees $-1,0$ as the mapping cone on $\\mathcal O[0]$ [def-weil-abstract-derived-category], $B_m=\\operatorname{coker}(t^m)$, and $\\epsilon_m:Q_m\\to B_m[0]$ by zero on the shifted source and the quotient on the degree-zero target. Give $Q_{m+1}\\to Q_m$ components $(t,1)$ and $B_{m+1}\\to B_m$ the map induced by the identity on $\\mathcal O$; the $\\epsilon_m$ commute with these transitions and hence define a strict tower map [def-weil-inverse-system]. For every cochain complex $P$ use the canonical total tensor [def-pc-tensor-complex-sheaves] to form $V_m=Q_m\\otimes P$, $U_m=B_m[0]\\otimes P$, and $a_m=\\epsilon_m\\otimes1_P$, with their induced strict transitions. These are the symmetric models of $P\\otimes Q_m$ and $P\\otimes B_m[0]$. Define the canonical maps $P\\to V_m$ by $P\\xrightarrow{\\lambda^{-1}}\\mathcal O[0]\\otimes P\\to Q_m\\otimes P$, and $P\\to U_m$ by tensoring the quotient projection. Their components insert $1\\otimes x$ in the degree $(0,i)$ summand and commute with differentials; they are compatible with transitions and $a_m$, so the first family is a map from the constant strict tower on $P$ and its composite with $a$ is the second. A tower of cochain complexes and its morphisms are regarded degreewise as a cochain complex and morphism in $\\operatorname{Fun}(\\mathbf N^{op},\\mathcal A)$. No regularity of $t$ or K-flatness of $P$ is needed to define this data.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-inverse-system",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul, the principal negative-degree Koszul tower; the cone-to-quotient map and its tensor augmentations, and sites-cohomology.tex Tag 0941 for strict towers."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical strict principal Koszul cone and quotient towers of sheaf module complexes with their tensor augmentations",
+   "results": "[leansearch] OK 8 hit(s): HomologicalComplex.isLimitOfEval; SheafOfModules.presentationOfIsCokernelFree; HomologicalComplex.HasTensor; IsLocalRing.instIsScalarTowerResidueFieldCotangentSpace; SheafOfModules.freeCofan; CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat; SheafOfModules.IsQuasicoherent.casesOn; HomologicalComplex.instHasTensorOfHasTensorX",
+   "date": "2026-10-17",
+   "verdict": "no exact match; reuse Mathlib cone, cokernel, tensor and sequence APIs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict principal Koszul cone to quotient tower comparison for a sheaf of commutative rings",
+   "results": "[leanfinder] OK 8 hit(s): SheafOfModules.Presentation.map_π_eq; SheafOfModules.relationsOfIsCokernelFree; SheafOfModules.Presentation.map; SheafOfModules.relationsOfIsCokernelFree_I; SheafOfModules.relationsOfIsCokernelFree_s; SheafOfModules.presentationOfIsCokernelFree; localCohomology.diagram; SheafOfModules.presentationOfIsCokernelFree_relations",
+   "date": "2026-10-17",
+   "verdict": "no match: presentations of sheaves and ring local cohomology, not the strict Koszul/quotient pair"
+  },
+  {
+   "tool": "grep",
+   "query": "principalKoszul|principalReduction|koszulTensorTower (Mathlib Algebra/Homology; source WeilConjectures; side lean/Sheaf); DAG Koszul/tower and blueprint_refs search quotient tower",
+   "results": "msearch Mathlib: [grep] OK 0 hit(s). Source and side rg: no matching declarations. DAG finds def-weil-pbc-ringed-koszul-system (positive factors and Hom-dual tower, coefficient/site universes equal), and the current reconstruction item; the former has no quotient tower or principal negative mapping-cone model. IntrinsicKoszulCompletion is only for constant Noetherian coefficients on a scheme. No existing node defines this principal cone-to-quotient pair. blueprint_refs.py search quotient tower: 5 matches, def-weil-pbc-intrinsic-completion, lem-weil-pbc-finite-reduction-reconstruction, lemma-weil-pbc-koszul-quotient-limit, lemma-weil-pbc-perfect-projection-formula, prop-weil-pbc-koszul-reconstruction; all specialize to Noetherian/constant coefficient schemes and do not define this arbitrary-site pair.",
+   "date": "2026-10-17",
+   "verdict": "no exact match; reuse Mathlib cone, cokernel, tensor and sequence APIs"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-derived-complete-koszul-reconstruction",
+  "date": "2026-10-17",
+  "group": "Q51"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "The canonical strict principal Koszul and quotient tensor towers in the integral/common-stage reconstruction.",
+   "via": [
+    "lem-pur-derived-complete-koszul-reconstruction",
+    "lem-pur-integral-operations-scalar-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.PrincipalKoszulQuotientTowers",
+  "declaration": "CategoryTheory.koszulTensorTowerComparison",
+  "file": "lean/Sheaf/Algebra/Homology/PrincipalKoszulQuotientTowers.lean",
+  "statement": "def koszulTensorTowerComparison (P : CochainComplex 𝒜 ℤ) (t : (SheafOfModules.unit 𝓞).sections) : koszulTensorTower R P t ⟶ reductionTensorTower R P t",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.endoPow",
+   "CategoryTheory.globalSectionMultiplication",
+   "CategoryTheory.principalKoszul",
+   "CategoryTheory.principalQuotient",
+   "CategoryTheory.principalReduction",
+   "CategoryTheory.principalAugmentation",
+   "CategoryTheory.principalKoszul_transition_square",
+   "CategoryTheory.principalKoszulTransition",
+   "CategoryTheory.principalQuotient_transition_zero",
+   "CategoryTheory.principalReductionTransition",
+   "CategoryTheory.principalAugmentation_naturality",
+   "CategoryTheory.principalKoszulTower",
+   "CategoryTheory.principalReductionTower",
+   "CategoryTheory.principalTowerComparison",
+   "CategoryTheory.koszulTowerComplex",
+   "CategoryTheory.koszulTowerComplexMap",
+   "CategoryTheory.koszulTensorFunctor",
+   "CategoryTheory.koszulTensorUnitComponent",
+   "CategoryTheory.koszulTensorUnitComponent_comm",
+   "CategoryTheory.koszulTensorUnitInclusion",
+   "CategoryTheory.koszulTensorTower",
+   "CategoryTheory.reductionTensorTower",
+   "CategoryTheory.koszulTensorTowerComparison",
+   "CategoryTheory.koszulRepresentativeQuotient",
+   "CategoryTheory.koszulRepresentativeAugmentation",
+   "CategoryTheory.koszulRepresentativeAugmentation_quotient",
+   "CategoryTheory.koszulRepresentativeAugmentation_naturality",
+   "CategoryTheory.koszulStrictAugmentation"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0204bc339",
+  "group": "Q51",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0204bc339",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Statement, dependencies, canonical constructions, route-pivot compliance, edge cases, docstrings, and all three per-file scompile checks passed."
+ }
+}
