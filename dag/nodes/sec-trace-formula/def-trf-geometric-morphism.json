@@ -1,0 +1,103 @@
+{
+ "id": "def-trf-geometric-morphism",
+ "kind": "definition",
+ "title": "Geometric morphisms of topoi and their 2-morphisms",
+ "status": "split",
+ "statement": "Let $\\mathcal E,\\mathcal F$ be categories. A geometric-morphism datum $f:\\mathcal E\\to\\mathcal F$ consists of functors $f^{-1}:\\mathcal F\\to\\mathcal E$ and $f_*:\\mathcal E\\to\\mathcal F$, an adjunction $f^{-1}\\dashv f_*$, and preservation of finite limits by $f^{-1}$. When $\\mathcal E,\\mathcal F$ are Grothendieck topoi [def-weil-pbc-topos] in the size convention [def-weil-size-convention], this is a geometric morphism of topoi. For geometric morphisms $a:\\mathcal E\\to\\mathcal F$ and $b:\\mathcal F\\to\\mathcal G$, their composite has inverse image $a^{-1}b^{-1}$ and direct image $b_*a_*$, with the composite adjunction. A $2$-morphism $f\\Rightarrow g$ is a natural transformation $f_*\\to g_*$. Its inverse-image mate is the corresponding transformation $g^{-1}\\to f^{-1}$ under adjunction; a direct-image natural isomorphism gives its corresponding inverse-image natural isomorphism.",
+ "stmt_deps": [
+  "def-weil-pbc-topos",
+  "def-weil-size-convention"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé XI §1.1 (morphisms of topoi) and §§1.3–1.4 (composition and direct-image convention for 2-morphisms); Stacks Project sites.tex, Tag 00XA (definition-topos)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "geometric morphism of topoi left exact left adjoint",
+   "results": "8 generic hits, including CategoryTheory.HasSheafify.isLeftExact, CategoryTheory.LeftExactFunctor, CategoryTheory.constantSheafΓAdj, and CategoryTheory.Presheaf.isLeftAdjoint_of_preservesColimits; no bundled geometric-morphism structure.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric morphism of topoi adjunction left exact inverse image",
+   "results": "8 hits: TopCat.Presheaf.pushforwardPullbackAdjunction; TopCat.Sheaf.instIsLeftAdjointPullback; TopCat.Sheaf.pullbackPushforwardAdjunction; TopCat.Sheaf.instIsRightAdjointPushforward; CategoryTheory.Functor.sheafAdjunctionContinuous; LightCondSet.topCatAdjunction; CategoryTheory.Functor.sheafAdjunctionCocontinuous; CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous. These construct particular adjunctions, not the general geometric-morphism datum.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricMorphism|geometricMorphism|orientedProduct",
+   "results": "msearch over Mathlib CategoryTheory: 0 hits. Direct rg over WeilConjectures, lean/Sheaf and dag/lean_names_upstream.json: no hits. The separate RingedToposMorphism has additional ring and module data.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-oriented-product-universal",
+  "date": "2026-10-17",
+  "group": "Q160"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Normal-cone specialization, external-product comparison: geometric morphisms and their 2-morphisms in the universal property of the oriented product used to define oriented nearby cycles.",
+   "via": [
+    "lem-trf-oriented-product-universal",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.GeometricMorphism",
+  "declaration": "CategoryTheory.GeometricMorphism",
+  "file": "lean/Sheaf/CategoryTheory/Sites/GeometricMorphism.lean",
+  "statement": "structure GeometricMorphism (E : Type u₁) (F : Type u₂) [Category.{v₁} E] [Category.{v₂} F]",
+  "branch": "newtargets-dag",
+  "by": "Q160",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.GeometricMorphism",
+   "CategoryTheory.GeometricMorphism.comp",
+   "CategoryTheory.GeometricMorphism.inverseMate",
+   "CategoryTheory.GeometricMorphism.inverseIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dfc6aa488",
+  "group": "Q160",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dfc6aa488",
+  "group": "Q160",
+  "result": "pass",
+  "note": "Statement field unchanged; only lean and stmt_deps changed (new node def-trf-geometric-morphism added). Checked every clause against ILO XI 1.1-1.7 (PDF pp.177-180). Comma-category triples; coverings (a)/(b)/(c) as iso-closure generating the same topology (type-c pullback orientation checked); projections via natural isos pi1/pi2; tau's inverse mate pinned on representables exactly as ILO 1.3/1.5 (r^-1 then the evident map); Theorem 1.4 with unique compatible gamma; (1.a) as IsPullback with canonical maps, stated for all compatible lifts (true by uniqueness), and I checked that the square commutes; Def 1.7 as equivalence with any universal quadruple, provable since P is in the test universe class (universe order verified with pp.universes). New node GeometricMorphism matches Stacks 00XA, has real fields, correct comp/mates; no duplicate in Mathlib, project or slopmaster2 (RingedToposMorphism carries extra ring data). No hollow definitions, only the main theorem uses sorry, docstrings/blueprint tags present, lean.statement verbatim, 15 declarations listed. nt_compile.py on both files: rc=0, no errors, no warnings. Report has Worker report and the Second reading section (2026-10-17 policy note). Remarks, no action: IsContinuous hypotheses redundant but faithful to the node; two unused public imports."
+ }
+}

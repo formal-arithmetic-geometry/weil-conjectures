@@ -24,7 +24,8 @@
   "def-weil-pbc-ringed-topos-morphism",
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-topos",
-  "def-weil-pbc-sheafification"
+  "def-weil-pbc-sheafification",
+  "def-trf-geometric-morphism"
  ],
  "proof": [
   {
@@ -437,5 +438,40 @@
   "group": "Q37",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-20d9f6124 (reviewer sub-agent of L); spot-checked: I read the item, all ten steps and the statements of all 13 cited nodes. I also read ILO Travaux de Gabber, Exposé XI §§1.1–1.10 (printed pp. 171–175, PDF pp. 177–181) in full. Statement: it matches ILO XI hypothesis by hypothesis — 1.1 (sites, triples, coverings (a)-(c); the item makes explicit the factorization in (c) that ILO leaves implicit), 1.3 (p1, p2 and τ as a map of direct images), Theorem 1.4, formula (1.a) of 1.6, and Definition 1.7. It is unchanged and not weakened, and no coefficient category or base-change morphism enters. I recomputed every step. Step 1: the final object, componentwise pullbacks, and base change of (c) (W'×_W W0 = W0×_{gV0}g(V'×_V V0)) are correct. Step 2: the diagonal of a type-(c) arrow is again type (c), so descent along it means bijectivity (ILO Lemma 1.2). Step 3: the hypotheses of the site inverse-image lemma (Stacks 00X6) hold for k1 and k2. Step 4: (gp2)_*M(V)=M(G_V), and r_V is type (c). Step 5: D_Z=T_V×_{G_V}B and Z=C_Z×_{T_V}D_Z, with C_Z→A type (c), which proves ILO Lemma 1.5. Step 6: H preserves finite limits. Step 7: type (a)/(b) families pull back to jointly epimorphic families, and the type-(c) cancellation is correct without assuming the naturality square of t is cartesian. Step 8: the generator-site lemma and the extension lemma apply. One reading is needed: 'present E on any small site' must mean a site in the sense of def-weil-pbc-sites-and-cohomology (Stacks 00VH), which is how the morphism definition types E; with that, the hypotheses hold. Step 9: H(T_V) projections recover t, which gives α and β. Step 10: uniqueness and site independence. Edge cases: punctual sites, f=g=id, V'=V and empty covers all work. Checks: no new nodes; no duplicate in the DAG (rg for oriented product, vanishing topos, topos of triples) and none in Mathlib; no cycle; no SGA citation; proof_deps equals the union of the step uses. Accepted tool_uses: lem-weil-pbc-left-exact-site-inverse-image-tensor and lem-weil-pbc-site-of-sheaf-generators, both generic site tools from unit sk-thm-properbasechange. The three Mathlib-leaf entries in tool_uses are unnecessary but harmless. No fixes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dfc6aa488",
+  "group": "Q160",
+  "result": "pass",
+  "note": "Statement field unchanged; only lean and stmt_deps changed (new node def-trf-geometric-morphism added). Checked every clause against ILO XI 1.1-1.7 (PDF pp.177-180). Comma-category triples; coverings (a)/(b)/(c) as iso-closure generating the same topology (type-c pullback orientation checked); projections via natural isos pi1/pi2; tau's inverse mate pinned on representables exactly as ILO 1.3/1.5 (r^-1 then the evident map); Theorem 1.4 with unique compatible gamma; (1.a) as IsPullback with canonical maps, stated for all compatible lifts (true by uniqueness), and I checked that the square commutes; Def 1.7 as equivalence with any universal quadruple, provable since P is in the test universe class (universe order verified with pp.universes). New node GeometricMorphism matches Stacks 00XA, has real fields, correct comp/mates; no duplicate in Mathlib, project or slopmaster2 (RingedToposMorphism carries extra ring data). No hollow definitions, only the main theorem uses sorry, docstrings/blueprint tags present, lean.statement verbatim, 15 declarations listed. nt_compile.py on both files: rc=0, no errors, no warnings. Report has Worker report and the Second reading section (2026-10-17 policy note). Remarks, no action: IsContinuous hypotheses redundant but faithful to the node; two unused public imports."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.OrientedProductUniversal",
+  "declaration": "CategoryTheory.OrientedProduct.universal",
+  "file": "lean/Sheaf/CategoryTheory/Sites/OrientedProductUniversal.lean",
+  "statement": "theorem universal (J₁ : Pretopology C₁) (J₂ : Pretopology C₂) (K : Pretopology D) [F.IsContinuous K.toGrothendieck J₁.toGrothendieck] [G.IsContinuous K.toGrothendieck J₂.toGrothendieck] (f : GeometricMorphism (Sheaf J₁.toGrothendieck (Type u)) (Sheaf K.toGrothendieck (Type u))) (g : GeometricMorphism (Sheaf J₂.toGrothendieck (Type u)) (Sheaf K.toGrothendieck (Type u))) (ηF : associated K.toGrothendieck ⋙ f.inverse ≅ F ⋙ associated J₁.toGrothendieck) (ηG : associated K.toGrothendieck ⋙ g.inverse ≅ G ⋙ associated J₂.toGrothendieck) : ∃ (p₁ : GeometricMorphism (Sheaf (topology J₁ J₂ F G) (Type u)) (Sheaf J₁.toGrothendieck (Type u))) (p₂ : GeometricMorphism (Sheaf (topology J₁ J₂ F G) (Type u)) (Sheaf J₂.toGrothendieck (Type u))) (π₁ : associated J₁.toGrothendieck ⋙ p₁.inverse ≅ first F G ⋙ associated (topology J₁ J₂ F G)) (π₂ : associated J₂.toGrothendieck ⋙ p₂.inverse ≅ second F G ⋙ associated (topology J₁ J₂ F G)) (τ : (p₂.comp g).direct ⟶ (p₁.comp f).direct), IsUniversal.{u, e, ve} f g p₁ p₂ τ ∧ HasLiftFormula.{u, e, ve} F G J₁ J₂ K f g ηF ηG p₁ p₂ π₁ π₂ τ ∧ (∀ (Q : Type (u + 1)) [Category.{u} Q], IsGrothendieckTopos.{u} Q → ∀ (q₁ : GeometricMorphism Q (Sheaf J₁.toGrothendieck (Type u))) (q₂ : GeometricMorphism Q (Sheaf J₂.toGrothendieck (Type u))) (σ : (q₂.comp g).direct ⟶ (q₁.comp f).direct), IsUniversal.{u, u + 1, u} f g q₁ q₂ σ → ∃ (h : GeometricMorphism Q (Sheaf (topology J₁ J₂ F G) (Type u))) (α : (h.comp p₁).direct ≅ q₁.direct) (β : (h.comp p₂).direct ≅ q₂.direct), paste f g p₁ p₂ τ h q₁ q₂ α β = σ ∧ h.direct.IsEquivalence ∧ ∀ (h' : GeometricMorphism Q (Sheaf (topology J₁ J₂ F G) (Type u))) (α' : (h'.comp p₁).direct ≅ q₁.direct) (β' : (h'.comp p₂).direct ≅ q₂.direct), paste f g p₁ p₂ τ h' q₁ q₂ α' β' = σ → ∃! γ : h.direct ≅ h'.direct, Functor.isoWhiskerRight γ p₁.direct ≪≫ α' = α ∧ Functor.isoWhiskerRight γ p₂.direct ≪≫ β' = β) ∧ ∀ V : D, ∃ (_ : IsIso ((associated (topology J₁ J₂ F G)).map (toFirst F G (middle F G V)))), (GeometricMorphism.inverseMate τ).app ((associated K.toGrothendieck).obj V) = p₁.inverse.map (ηF.hom.app V) ≫ π₁.hom.app (F.obj V) ≫ inv ((associated (topology J₁ J₂ F G)).map (toFirst F G (middle F G V))) ≫ (associated (topology J₁ J₂ F G)).map (toSecond F G (middle F G V)) ≫ π₂.inv.app (G.obj V) ≫ p₂.inverse.map (ηG.inv.app V)",
+  "branch": "newtargets-dag",
+  "by": "Q160",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.OrientedProduct.Triples",
+   "CategoryTheory.OrientedProduct.generators",
+   "CategoryTheory.OrientedProduct.topology",
+   "CategoryTheory.OrientedProduct.associated",
+   "CategoryTheory.OrientedProduct.firstTriple",
+   "CategoryTheory.OrientedProduct.secondTriple",
+   "CategoryTheory.OrientedProduct.first",
+   "CategoryTheory.OrientedProduct.second",
+   "CategoryTheory.OrientedProduct.toFirst",
+   "CategoryTheory.OrientedProduct.toSecond",
+   "CategoryTheory.OrientedProduct.middle",
+   "CategoryTheory.OrientedProduct.paste",
+   "CategoryTheory.OrientedProduct.IsUniversal",
+   "CategoryTheory.OrientedProduct.HasLiftFormula",
+   "CategoryTheory.OrientedProduct.universal"
+  ]
  }
 }
