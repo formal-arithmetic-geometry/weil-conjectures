@@ -3058,6 +3058,7 @@ public import WeilConjectures.Mathlib.Algebra.Module.LocalizedModule.Exact
 public import WeilConjectures.Mathlib.Algebra.Module.Presentation.Tensor
 public import WeilConjectures.Mathlib.Algebra.Module.SpanRankOperations
 public import WeilConjectures.Mathlib.Algebra.Module.StablyFree.Basic
+public import WeilConjectures.Mathlib.Algebra.Module.Submodule.Defs
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion.Basic
 public import WeilConjectures.Mathlib.Algebra.MvPolynomial.Basic
@@ -3507,6 +3508,7 @@ public import WeilConjectures.Mathlib.RingTheory.PiTensorProduct
 public import WeilConjectures.Mathlib.RingTheory.PicardGroup
 public import WeilConjectures.Mathlib.RingTheory.Polynomial.Cyclotomic.Basic
 public import WeilConjectures.Mathlib.RingTheory.Polynomial.Quotient
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Basic
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Derivative
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Expand
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Inverse

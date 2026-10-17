@@ -11,6 +11,7 @@ public import Mathlib.LinearAlgebra.Charpoly.Basic
 public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 public import Mathlib.RingTheory.PowerSeries.Inverse
 public import Mathlib.RingTheory.PowerSeries.Trunc
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Basic
 
 @[expose] public section
 
