@@ -262,11 +262,14 @@ theorem isLocalRing_of_mem_maximalIdeal [NeZero n] (hπ : π ∈ IsLocalRing.max
   exact IsLocalRing.of_unique_max_ideal ⟨_, hmax, fun P hP ↦
     (hmax.eq_of_le hP.ne_top (ker_residueX_pow_sub_C_le n π hπ P).2).symm⟩
 
-lemma root_mem_maximalIdeal [NeZero n] (hπ : π ∈ IsLocalRing.maximalIdeal R) :
-    letI := isLocalRing_of_mem_maximalIdeal n π hπ
+/-- `R[t] ⧸ (tⁿ - π)` is local when `π` lies in the maximal ideal of the local ring `R`. -/
+instance [NeZero n] [Fact (π ∈ IsLocalRing.maximalIdeal R)] :
+    IsLocalRing (AdjoinRoot (X ^ n - C π)) :=
+  isLocalRing_of_mem_maximalIdeal n π Fact.out
+
+lemma root_mem_maximalIdeal [NeZero n] [Fact (π ∈ IsLocalRing.maximalIdeal R)] :
     root (X ^ n - C π) ∈ IsLocalRing.maximalIdeal (AdjoinRoot (X ^ n - C π)) :=
-  letI := isLocalRing_of_mem_maximalIdeal n π hπ
-  (ker_residueX_pow_sub_C_le n π hπ _).1
+  (ker_residueX_pow_sub_C_le n π Fact.out _).1
 
 end Local
 
