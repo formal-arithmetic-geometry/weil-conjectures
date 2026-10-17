@@ -15813,3 +15813,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:32 L: merged deliver/F3/Sheaf.AlgebraicGeometry.ChowTwistFiniteCohomology (stage 3; reviewer PASS; first push; landing 20261017T053258-L-3673626 (proof); batch 20261017T053254; modules 1; new nodes 0)
 - 05:32 L: merged deliver/F4/Sheaf.AlgebraicGeometry.ProjectiveGraphTwistVanishing (stage 3; reviewer PASS; first push; landing 20261017T053259-L-3673863 (proof); batch 20261017T053254; modules 1; new nodes 0)
 - 05:37 L: returned deliver/E1/Sheaf.Paper.IntegralResidueScalarCounitModel (reviewer RETURN: (reviewer C-16ac5, head 16ac5fa73) H10 (does not compile): lean/Sheaf/Paper/IntegralResidueScalarCounitModel.lean fails )
+- 05:42 L: returned deliver/B3/WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence (reviewer RETURN: (the landing tools, head cf7892dc2) the delivery did not land: refused by tools/import_prune_check.py for lean/WeilConje)
