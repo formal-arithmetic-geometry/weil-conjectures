@@ -36,13 +36,14 @@
  ],
  "proof": [
   {
-   "text": "The standing finite-type-over-a-field setting is [sk-def-sfb-dc-setting]. Its schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], applied to the structure morphism to the spectrum of a field (a field is Noetherian since its only ideals are zero and itself). Open subschemes are Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Closed subschemes are locally Noetherian because their affine rings are quotients of Noetherian rings: an ascending chain of quotient ideals lifts to one in the original ring. They are quasi-compact as closed subsets of a quasi-compact space. Factoring a locally closed immersion as closed into an open therefore shows that its source is Noetherian. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal], the underlying spaces are topologically Noetherian. Every open subset is quasi-compact: otherwise a cover without a finite subcover gives, by successively adding a member, a strictly increasing chain of opens, contradicting the descending condition on their closed complements. Applying this inside each open subset proves that open immersions are quasi-compact. We use coefficient module sheaves, not sheaves over the discrete constant field: [sk-prop-sfb-qlbar-colimit-x] identifies $E_X$ with $\\cO_{E,X}[1/\\ell]$ and $\\QbarX$ with $\\varinjlim_E E_X$.",
+   "text": "The standing finite-type-over-a-field setting is [sk-def-sfb-dc-setting]. Its schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], applied to the structure morphism to the spectrum of a field (a field is Noetherian since its only ideals are zero and itself). Open subschemes are Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Closed subschemes are locally Noetherian because their affine rings are quotients of Noetherian rings: an ascending chain of quotient ideals lifts to one in the original ring. They are quasi-compact as closed subsets of a quasi-compact space. Factoring a locally closed immersion as closed into an open therefore shows that its source is Noetherian. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal], the underlying spaces are topologically Noetherian. Every open subset is quasi-compact: otherwise a cover without a finite subcover gives, by successively adding a member, a strictly increasing chain of opens, contradicting the descending condition on their closed complements. Applying this inside each open subset proves that open immersions are quasi-compact. We use coefficient module sheaves, not sheaves over the discrete constant field: [sk-prop-sfb-qlbar-colimit-x] identifies $E_X$ with $\\cO_{E,X}[1/\\ell]$ and $\\QbarX$ with $\\varinjlim_E E_X$. The scheme is quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated], so the qcqs hypothesis for the constructibility and Tor-amplitude nodes is satisfied.",
    "uses": [
     "sk-def-sfb-dc-setting",
     "lem-weil-pbc-finite-type-over-noetherian",
     "sk-prop-sfb-qlbar-colimit-x",
     "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
    ],
    "elementary": false,
    "source": {
@@ -64,8 +65,13 @@
    }
   },
   {
-   "text": "For $a=i\\circ u$ through the closure, use the module extension by zero $u_!$ of [def-sfb-module-open-lower-shriek]. The coefficient identifications and exact inverse image are [sk-prop-sfb-cartesian-coefficients]. Apply [lem-weil-pbc-proetale-ringed-open-closed] with ring sheaf $\\Lambda_X$ to $i$ and its complementary open: $i_*$ is exact, since that open is quasi-compact by step 1. The same node gives exactness of $u_!$. Consequently $a_!=i_*u_!$ is exact. Applied to a complex $K$, exactness gives $H^n(a_!K)=a_!H^n(K)$, by preserving the kernel and image of each differential. It therefore preserves quasi-isomorphisms and descends to the localization $D(S,\\Lambda)\\to D(X,\\Lambda)$, without taking a resolution.",
+   "text": "Let $a\\colon S\\hookrightarrow X$ be a locally closed immersion, so $a=w\\circ c$ with $c\\colon S\\to W$ a closed immersion and $w\\colon W\\hookrightarrow X$ an open immersion. By step 1, $S$ is Noetherian, so $a^{-1}(V)$ is quasi-compact for every affine open $V\\subseteq X$; and $a$ is a monomorphism, so its diagonal is an isomorphism. Thus $a$ is quasi-compact and quasi-separated. Let $\\overline S=\\operatorname{SIm}(a)$ be its scheme-theoretic closure [def-nagata-scheme-theoretic-closure], with closed immersion $i\\colon\\overline S\\hookrightarrow X$ and factor map $u=a^{\\mathrm{im}}\\colon S\\to\\overline S$, $a=i\\circ u$ [def-nagata-scheme-image-factor]. By [lemma-nagata-scheme-image-ideal-qc] the underlying set of $\\overline S$ is the closure of $a(S)$. Since $S\\times_XW=S$ and the base change of $a$ to $W$ is $c$, [lemma-nagata-scheme-image-restrict-open] gives $\\overline S\\times_XW\\cong\\operatorname{SIm}(c)$ over $W$, and [lemma-nagata-scheme-image-of-closed-immersion] identifies $\\operatorname{SIm}(c)$ with $S$ through $c^{\\mathrm{im}}$. Hence $u$ is an isomorphism of $S$ onto the open subscheme $\\overline S\\cap W$ of $\\overline S$, i.e. an open immersion. This is the factorization through the closure used in the statement. Use the module extension by zero $u_!$ of [def-sfb-module-open-lower-shriek]; that definition records that $u_!$ is exact. The coefficient identifications $i^{-1}\\Lambda_X\\cong\\Lambda_{\\overline S}$, $u^{-1}\\Lambda_{\\overline S}\\cong\\Lambda_S$ and exact inverse image are [sk-prop-sfb-cartesian-coefficients]. Apply [lem-weil-pbc-proetale-ringed-open-closed] with ring sheaf $\\Lambda_X$ to $i$ and its complementary open: $i_*$ is exact, since that open is quasi-compact by step 1. Consequently $a_!=i_*u_!$ is exact. Applied to a complex $K$, exactness gives $H^n(a_!K)=a_!H^n(K)$, by preserving the kernel and image of each differential. It therefore preserves quasi-isomorphisms and descends to the localization $D(S,\\Lambda)\\to D(X,\\Lambda)$, without taking a resolution.",
    "uses": [
+    "def-nagata-scheme-theoretic-closure",
+    "def-nagata-scheme-image-factor",
+    "lemma-nagata-scheme-image-ideal-qc",
+    "lemma-nagata-scheme-image-restrict-open",
+    "lemma-nagata-scheme-image-of-closed-immersion",
     "def-sfb-module-open-lower-shriek",
     "sk-prop-sfb-cartesian-coefficients",
     "lem-weil-pbc-proetale-ringed-open-closed"
@@ -101,7 +107,7 @@
    }
   },
   {
-   "text": "Fix the universe for the sites and coefficient modules. The hypotheses of [det-lem-coefficient-heart-small] hold: $X$ is Noetherian and $\\Lambda$ is one of the two specified fields. That statement supplies a set of isomorphism classes of constructible sheaves. Selecting one representative of each gives a small full subcategory equivalent to $\\Cons(X,\\Lambda)$, which is precisely essential smallness. This citation includes the required control of gluing between strata; separate descent data on the strata alone would not determine the global sheaf.",
+   "text": "Fix the universe for the sites and coefficient modules. The hypotheses of [det-lem-coefficient-heart-small] hold: $X$ is Noetherian and $\\Lambda$ is one of the two specified fields. That statement supplies a set of isomorphism classes of constructible sheaves. Selecting one representative of each gives a small full subcategory equivalent to $\\Cons(X,\\Lambda)$, which is precisely essential smallness; its Hom-sets are sets because module sheaves on the fixed small site have set-sized morphism sets in that universe. This citation includes the required control of gluing between strata; separate descent data on the strata alone would not determine the global sheaf.",
    "uses": [
     "det-lem-coefficient-heart-small"
    ],
@@ -124,20 +130,47 @@
    }
   },
   {
-   "text": "For the curve assertion, there are finitely many irreducible components by [lem-weil-pbc-noetherian-finitely-many-components]. Each component $C$ has a unique generic point $\\eta$ by [lem-sc-scheme-sober]. Let $S$ be its adapted stratum. Write $S=O\\cap D$ with $O$ open and $D$ closed. Since $\\eta\\in D$, one has $C\\subseteq D$. Removing the other components from $O$ gives an open neighborhood $W_\\eta$ of $\\eta$ in $X$ contained in $C\\cap O\\subseteq S$. Here containment in $S$ is initially set-theoretic. Put $T=W_\\eta\\times_X S$: $T\\to W_\\eta$ is a surjective closed immersion, and $F|_T$ is lisse by [det-lem-coefficient-heart-common-stratification](2). To infer lisseness on $W_\\eta$ without assuming reducedness, apply [new-lem-weil-pbc-proetale-surjective-closed-cover-refinement] to a pro-étale trivializing cover of $T$. It gives a pro-étale cover $\\{B_b\\to W_\\eta\\}$ whose closed base changes $T_b=B_b\\times_{W_\\eta}T$ map to members of that trivializing cover; hence $F|_{T_b}$ is finite free. Apply [lem-weil-pbc-proetale-ringed-open-closed] to $T_b\\to B_b$ with empty complementary open. Its short exact sequence gives $M\\simeq i_*i^*M$ for every module sheaf $M$, and its counit gives $i^*i_*\\simeq\\mathrm{id}$. Thus restriction is an equivalence of module categories. By [sk-prop-sfb-cartesian-coefficients], it sends $\\Lambda_{B_b}^r$ to $\\Lambda_{T_b}^r$. Full faithfulness therefore lifts the isomorphism $F|_{T_b}\\simeq\\Lambda_{T_b}^r$ and its inverse to an isomorphism $F|_{B_b}\\simeq\\Lambda_{B_b}^r$. This proves that $F$ is lisse on $W_\\eta$. Their union $U$ is dense and $L=F|_U$ is lisse, because lisseness is local for open covers. The closed complement $Z$ contains no generic point of a component. It has dimension at most zero: a strict chain of irreducible closed subsets in $Z$, extended to a component of $X$, would otherwise give a chain of length at least two in a curve. The underlying space of $X$ is Noetherian by step 1 and is $T_0$: if two points have the same closure, both are generic points of that irreducible closed subset, so [lem-sc-scheme-sober] makes them equal. Thus [lem-sc-zero-dim-noetherian-closed-finite] applies to the closed subset $Z$ and gives finitely many points, all closed in $X$. Finally [lem-weil-pbc-proetale-ringed-open-closed], with $u:U\\hookrightarrow X$, $i:Z\\hookrightarrow X$, and $G=i^*F$, gives $0\\to u_!L\\to F\\to i_*G\\to0$. Its identity $u^*i_*=0$ shows the last term is supported on $Z$. No algebraic closedness of the ground field, smoothness, or irreducibility is needed.",
+   "text": "For the curve assertion, choose an adapted stratification of $F$. There are finitely many irreducible components by [lem-weil-pbc-noetherian-finitely-many-components]. Each component $C$ has a unique generic point $\\eta$ by [lem-sc-scheme-sober]. If its adapted stratum has image $S=O\\cap D$, with $O$ open and $D$ closed, then $\\eta\\in D$ implies $C\\subseteq D$. Remove the other components from $O$ to get an open neighborhood $W_\\eta$ of $\\eta$ contained set-theoretically in $S$. This does not assert a scheme factorization through $S$. Instead form $T=W_\\eta\\times_X S$. Its projection $t:T\\to W_\\eta$ is an immersion by [lem-weil-pbc-immersion-base-change-lft]. It is surjective by [lem-weil-pbc-fibre-product-points]: the residue field of an immersion at a point is that of its image (localization for an open immersion, quotient for a closed immersion), so the residue-field tensor product above each $w\\in W_\\eta$ is $\\kappa(w)$ and has a prime. A surjective immersion is closed, since its factorization as closed into an open has that open equal to the entire target. The projection $T\\to S$ is an open immersion, and $F|_T$ is lisse by [det-lem-coefficient-heart-common-stratification](2).",
    "uses": [
     "lem-weil-pbc-noetherian-finitely-many-components",
-    "det-lem-coefficient-heart-common-stratification",
-    "lem-sc-zero-dim-noetherian-closed-finite",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-sc-scheme-sober"
+    "lem-sc-scheme-sober",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-weil-pbc-fibre-product-points",
+    "det-lem-coefficient-heart-common-stratification"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart.proof.md",
-    "place": "Final curve specialization, with the generic-open construction and localization sequence"
+    "place": "Final curve specialization: generic neighborhoods; immersion base change and fibre-product points (Stacks Tags 01JY, 01JT)"
+   }
+  },
+  {
+   "text": "Fix one of the surjective closed immersions $t:T\\to W_\\eta$ from step 8 and a pro-étale covering $C$ trivializing $F|_T$. By [new-lem-weil-pbc-proetale-surjective-closed-cover-refinement] there is a pro-étale cover $\\{B_b\\to W_\\eta\\}$ such that $T_b=B_b\\times_{W_\\eta}T$ maps over $T$ to a member of $C$. Hence $F|_{T_b}$ is finite free. The map $t_b:T_b\\to B_b$ is a surjective closed immersion by [lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism]. Its coefficient-module pullback is an equivalence by [new-lem-weil-pbc-condensed-surjective-closed-equivalence]. Moreover [sk-prop-sfb-cartesian-coefficients] identifies $t_b^*(\\Lambda_{B_b}^r)$ with $\\Lambda_{T_b}^r$. Thus the isomorphism $t_b^*(F|_{B_b})\\simeq t_b^*(\\Lambda_{B_b}^r)$ and its inverse lift by fullness; faithfulness makes the two lifted composites identities. This gives $F|_{B_b}\\simeq\\Lambda_{B_b}^r$. The cover $B$ proves $F$ lisse on $W_\\eta$, without any reducedness assumption. Their union $U$ is open and dense, since it contains every component's generic point. These open neighborhoods and their pro-étale trivializing covers together cover $U$, so $L=F|_U$ is lisse.",
+   "uses": [
+    "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
+    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "new-lem-weil-pbc-condensed-surjective-closed-equivalence",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart.proof.md",
+    "place": "Final curve specialization: descent of finite free local models across surjective closed immersions; Stacks Tags 09AB and 09AH"
+   }
+  },
+  {
+   "text": "Give $Z=X\\setminus U$ its reduced closed subscheme structure, which exists by [lem-weil-pbc-reduced-induced-closed-subscheme]. Its closed underlying subset contains no generic point of an irreducible component. It has dimension at most zero: if two distinct nonempty irreducible closed subsets of $Z$ formed a strict chain, adjoining a component of $X$ containing the larger one would give a strict chain of length two in a curve. The last inclusion is strict because $Z$ misses that component's generic point. The space $X$ is Noetherian by step 1 and $T_0$ by [lem-sc-scheme-sober]: two points with equal closure would be two generic points of the same irreducible closed subset. Therefore [lem-sc-zero-dim-noetherian-closed-finite] makes $Z$ finite, with each of its points closed in $X$. For $u:U\\hookrightarrow X$ and $i:Z\\hookrightarrow X$, the open immersion is quasi-compact by step 1. Apply [lem-weil-pbc-proetale-ringed-open-closed] to $\\Lambda_X$, using [sk-prop-sfb-cartesian-coefficients] to identify its inverse-image rings with $\\Lambda_U$ and $\\Lambda_Z$. With $G=i^*F$ it gives $0\\to u_!L\\to F\\to i_*G\\to0$. Its identity $u^*i_*=0$ gives the stated support. This covers reducible and nonreduced curves, the zero sheaf and an empty complement; for $X=\\varnothing$ take $U=X$ and the zero sequence.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sc-scheme-sober",
+    "lem-sc-zero-dim-noetherian-closed-finite",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart.proof.md",
+    "place": "Final curve specialization: zero-dimensional closed complement and the localization sequence; Stacks Tags 01J3, 09AH"
    }
   }
  ],
@@ -147,9 +180,15 @@
   "sk-prop-sfb-qlbar-colimit-x",
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
   "sk-def-sfb-constructible",
   "det-lem-coefficient-heart-closure",
   "det-def-localizing-closure-ctf-equals-bc",
+  "def-nagata-scheme-theoretic-closure",
+  "def-nagata-scheme-image-factor",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lemma-nagata-scheme-image-restrict-open",
+  "lemma-nagata-scheme-image-of-closed-immersion",
   "def-sfb-module-open-lower-shriek",
   "sk-prop-sfb-cartesian-coefficients",
   "lem-weil-pbc-proetale-ringed-open-closed",
@@ -157,9 +196,14 @@
   "det-lem-coefficient-heart-small",
   "det-lem-coefficient-heart-filtration",
   "lem-weil-pbc-noetherian-finitely-many-components",
-  "lem-sc-zero-dim-noetherian-closed-finite",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-fibre-product-points",
   "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
-  "lem-sc-scheme-sober"
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "new-lem-weil-pbc-condensed-surjective-closed-equivalence",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sc-zero-dim-noetherian-closed-finite"
  ],
  "proof_origin": {
   "by": "agent",
@@ -229,10 +273,45 @@
    "results": "20 hits in Mathlib/Condensed/Discrete: Colimit.lean, LocallyConstant.lean, Module.lean, Characterization.lean. Read Module.lean lines 14–62.",
    "date": "2026-10-16",
    "verdict": "no match: locally constant discrete condensed modules, not the stratified pro-etale field-coefficient category"
+  },
+  {
+   "tool": "grep",
+   "query": "ConstructibleSheaf|IsConstructible|Lisse|ProEtale",
+   "results": "25 hits; top files: Mathlib/Topology/Constructible.lean; Mathlib/Topology/MetricSpace/MetricSeparated.lean; Mathlib/Topology/MetricSpace/Cover.lean; Mathlib/Data/Rel/Separated.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: constructible subsets of topological spaces and scheme-image theorems, not constructible module sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible sheaves on a Noetherian scheme are an essentially small abelian category and have a finite filtration by extension by zero of locally free sheaves",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Abelian",
+   "results": "SheafOfModules.instAbelian; CategoryTheory.sheafIsAbelian; CategoryTheory.instAdditiveSheafConstantSheaf; CategoryTheory.presheafToSheaf_additive; CategoryTheory.Sheaf.instIsGrothendieckAbelian; CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall; AlgebraicGeometry.Scheme.instAbelianSheafAffineEtaleTopology; AlgebraicGeometry.Scheme.instAbelianSheafEtaleSmallEtaleTopology",
+   "date": "2026-10-17",
+   "verdict": "no match: ambient sheaf-module abelian instances, without constructibility, essential smallness, or filtration"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaves of p-adic field modules on the pro-etale site form an essentially small abelian category and admit finite filtrations by lisse sheaves extended by zero",
+   "results": "LightCondensed.instIsGrothendieckAbelianLightCondMod; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CondensedMod.ofSheafProfinite; LightCondMod.ofSheafLightProfinite; CondensedMod.ofSheafCompHaus; CondensedMod.IsSolid; instAbelianLightCondMod; instAbelianCondensedMod",
+   "date": "2026-10-17",
+   "verdict": "no match: condensed-module constructions and ambient abelian categories do not state the stratified pro-étale field-coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The full subcategory of sheaves locally constant of finite rank on a finite partition into locally closed subschemes is closed under extensions and has a filtration by extension by zero",
+   "results": "CompHausLike.LocallyConstantModule.functor; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; CondensedMod.ofSheafStonean; CondensedMod.ofSheafProfinite; CompHausLike.LocallyConstantModule.functor_obj_val; CondensedMod.ofSheafCompHaus; LightCondMod.ofSheafLightProfinite; Condensed.finFree",
+   "date": "2026-10-17",
+   "verdict": "no match: condensed-module constructions and ambient abelian categories do not state the stratified pro-étale field-coefficient assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -262,8 +341,8 @@
   "date": "2026-10-17",
   "item": "sk-lem-coefficient-heart",
   "worker": "stage1",
-  "summary": "Reused all four existing coefficient-heart detail nodes. Made standing Noetherian and retrocompact hypotheses explicit, separated local closure arguments, retained coefficient normalization, supplied the exact locally closed extension construction and the curve specialization. No new nodes and no Lean attachment. Second reading supplied existing Noetherian topology/open-subscheme and scheme-sobriety citations and wrote their elementary consequences. Returned-delivery repair: rebased owned split fields onto the current shared node, reread every cited statement, and revalidated step 7 against the revised filtration statement (non-strict inclusions and closure-defined extension by zero). Updated its verbatim quote; no new node or statement change. Latest landing-return repair: supplied the current unit file with exactly the requested realization fields; compared all 25 direct dependencies against returned snapshot 8717402c4e with no changed inputs. Retry 2026-10-17: independently reread all 25 unchanged direct statement inputs and revalidated every citation; verified that the unit file changes only realized and realized_by. No mathematical statement change.",
-  "blueprint": "Steps 1–3 justify the introductory coefficient/local-model/extension conventions; steps 4–5 realize proof (1); step 6 realizes (2); step 7 realizes (3) using the existing detailed formula; step 8 verifies the final curve assertion.",
+  "summary": "Reused all four existing coefficient-heart detail nodes. Made standing Noetherian and retrocompact hypotheses explicit, separated local closure arguments, retained coefficient normalization, supplied the exact locally closed extension construction and the curve specialization. No new nodes and no Lean attachment. Second reading supplied existing Noetherian topology/open-subscheme and scheme-sobriety citations and wrote their elementary consequences. Returned-delivery repair: rebased owned split fields onto the current shared node, reread every cited statement, and revalidated step 7 against the revised filtration statement (non-strict inclusions and closure-defined extension by zero). Updated its verbatim quote; no new node or statement change. Latest landing-return repair: supplied the current unit file with exactly the requested realization fields; compared all 25 direct dependencies against returned snapshot 8717402c4e with no changed inputs. Retry 2026-10-17: independently reread all 25 unchanged direct statement inputs and revalidated every citation; verified that the unit file changes only realized and realized_by. No mathematical statement change. Q41 continuation: retained the existing split and historical searches; rebuilt the missing delivery report and verbatim citations. The 2548-character final step was audited and refactored into three explicit arguments, citing existing immersion base-change, fibre-product-point, surjective-closed base-change and coefficient-module equivalence nodes instead of hiding these facts inline. Added the existing qcqs and reduced-closed-subscheme tools for their actual uses. No new node, attachment, statement change, or route change.",
+  "blueprint": "Steps 1–3 justify the introductory coefficient/local-model/extension conventions; steps 4–5 realize unit proof (1); step 6 realizes (2); step 7 realizes (3); steps 8–10 give the final curve specialization, with explicit scheme-structure and nonreduced checks.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-finite-type-over-noetherian",
@@ -288,6 +367,42 @@
    {
     "node": "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
     "why": "Lifts trivializing covers across the surjective closed immersions arising when a generic neighborhood is contained only set-theoretically in its stratum; avoids assuming reduced schemes."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic scheme tool verifying the qcqs hypothesis of the constructible and Tor-amplitude statements."
+   },
+   {
+    "node": "lem-weil-pbc-immersion-base-change-lft",
+    "why": "Generic immersion base-change tool used to form the actual scheme over a generic neighborhood, without inferring factorization from image containment."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-points",
+    "why": "Generic description of fibre-product points verifies surjectivity over the generic neighborhood."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "why": "Generic stability of surjective closed immersions under arbitrary base change; needed for each trivializing-cover base change."
+   },
+   {
+    "node": "new-lem-weil-pbc-condensed-surjective-closed-equivalence",
+    "why": "Generic equivalence for the actual condensed coefficient-module categories lifts finite free trivializations from a surjective closed subscheme."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic construction supplies an actual closed subscheme structure on the finite curve complement."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic Noetherianity of open subschemes, used for all locally closed strata."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Generic passage from scheme Noetherianity to the topological descending-chain condition needed by local lisse closure."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Generic uniqueness of scheme generic points, used to construct neighborhoods and verify the T0 hypothesis."
    }
   ]
  },
@@ -297,15 +412,24 @@
   "lem-weil-pbc-noetherian-finitely-many-components",
   "lem-sc-zero-dim-noetherian-closed-finite",
   "det-def-localizing-closure-ctf-equals-bc",
-  "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement"
+  "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "new-lem-weil-pbc-condensed-surjective-closed-equivalence",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sc-scheme-sober"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q68-7376906c0",
-  "group": "Q68",
+  "reviewer": "NT-cc-Q41-dbf9a8853",
+  "group": "Q41",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q68-7376906c0 (reviewer sub-agent of L); spot-checked: Read the complete mathematics, all 25 direct dependency statements, blueprint route, and cited source passages. Verified all eight steps, coefficient conventions, exact master base-change morphism, nonreduced curve argument, filtration edge cases, unit realization, and absence of dependency cycles. The master-category realization remains an explicit separate obligation. No repairs needed; concrete checks and accepted tool uses are recorded in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-dbf9a8853 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, its 10 steps, every cited statement, the blueprint unit sk-lem-coefficient-heart, and Bhatt–Scholze §6.8 (Lemma 6.8.2, Def 6.8.3, Cor 6.8.5, Def 6.8.6, Lemma 6.8.7, proof of Cor 6.8.9). The statement is the verbatim blueprint statement and is unchanged. The coefficient category is modules over p_X^*Λ for the condensed E or Q̄ℓ, the same construction as the upperStar used in step 9. The delivery creates no new node, cites no SGA, has no cycle (DFS checked after the fix), and the unit realization is correct. Steps 1, 2 and 4–10 check against the cited statements. The curve steps 8–10 handle nonreduced and reducible curves, set-theoretic containment through T=W_η×_X S (no E3 error), the dim≤0 argument for the complement, and the X=∅ and F=0 edge cases. One repairable fault, C1 in step 3: the factorization of a locally closed immersion as an open immersion into a closed subscheme with underlying set the closure was used without a citation. I repaired it with existing Lean-closed scheme-image nodes: def-nagata-scheme-theoretic-closure, def-nagata-scheme-image-factor, lemma-nagata-scheme-image-ideal-qc, lemma-nagata-scheme-image-restrict-open and lemma-nagata-scheme-image-of-closed-immersion, with the qcqs hypothesis checked. Exactness of u_! is now cited from def-sfb-module-open-lower-shriek instead of a misapplied open–closed lemma. In step 6 I added the small Hom-sets needed for essential smallness. proof_deps were recomputed (29 ids, all existing and unmerged). I accept the 15 declared tool_uses, all generic scheme, topology or module facts. The whole corrected file is at fixes/dag/nodes/sec-six-functors-basics/sk-lem-coefficient-heart.json; the details are in review.md.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {

@@ -14,9 +14,98 @@
   "def-pur-hom-complex",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\epsilon(t)=(-1)^t$ for integers $t$. All formulas below are morphisms of restricted module sheaves over each object $U$ and commute with further restriction. For $f\\in T(C[m])^q$, reindexing makes $f$ a map of degree $q-m$ from $C$ to $I$. The Hom differential [def-pur-hom-complex] gives $d f=d_I f-\\epsilon(q+m)f d_C$. Set $s_{C,m}(f)=\\epsilon(mq)f$. Both $s_{C,m}(df)$ and $d_{T(C)[-m]}s_{C,m}(f)$ are\n$$\\epsilon(mq+m)d_I f-\\epsilon(mq+q)f d_C.$$\nThus $s_{C,m}$ is a chain map. Its inverse multiplies a reindexed degree-$q$ element by the same sign. For a chain map $a:C\\to C'$, precomposition with $a[m]$ before reindexing and with $a$ afterwards produces the identical family $\\epsilon(mq)f a$; this proves naturality.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), differential formula; derived.tex Tag 014E (definition-cone). Explicit agent calculation filling the omission in Tag 08JC (lemma-RHom-triangulated)."
+   }
+  },
+  {
+   "text": "For $g\\in T^2(C[1])^p$ and $y\\in T(C)^r$, view $y$ without sign in $T(C)[-1]^{r+1}$ and in $T(C[1])^{r+1}$. The inverse of $s_{C,1}$ sends the first copy to $\\epsilon(r+1)y$. Since $T$ acts by precomposition [def-pur-hom-complex], $T(s_{C,1})^{-1}(g)$ evaluated there equals $\\epsilon(r+1)g(y)$. Step 1 applied to the complex $T(C)$ and $m=-1$ multiplies a degree-$p$ element by $\\epsilon(p)$. Including the defining leading minus sign gives\n$$ (\\chi_Cg)(y)=-\\epsilon(p)\\epsilon(r+1)g(y)=\\epsilon(p+r)g(y). $$\nThis also verifies the domains of the composite: $T(s_{C,1})^{-1}$ lands in $T(T(C)[-1])$, and $s_{T(C),-1}$ lands in $T^2(C)[1]$. It is a natural chain isomorphism as a composite of the natural chain isomorphisms of step 1 and their images under $T$.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), differential formula; derived.tex Tag 014E (definition-cone). Explicit agent calculation filling the omission in Tag 08JC (lemma-RHom-triangulated)."
+   }
+  },
+  {
+   "text": "Put $v=T(u):X\\to Y$. By the cone definition [def-weil-abstract-derived-category], a degree-$q$ map $E\\to I$ is uniquely a pair $(x,y)$ with $x\\in X^q$ and $y\\in Y^{q-1}$: its component sends $(b,a)$ to $x(b)+y(a)$. The inverse decomposition takes restrictions to the two summands. This assertion uses no interchange of infinite sums and products: a map from each binary direct sum is determined by two restrictions, and the inverse family is given by addition in each degree. Substituting $d_E(b,a)=(d_Bb+u(a),-d_Aa)$ in the Hom differential gives\n$$ d_{T(E)}(x,y)=(d_Xx,\\ d_Yy+\\epsilon(q+1)v(x)). $$\nIndeed, the second component is $d_Iy+\\epsilon(q)y d_A-\\epsilon(q)x u$, while the first is $d_Ix-\\epsilon(q)x d_B$.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), differential formula; derived.tex Tag 014E (definition-cone). Explicit agent calculation filling the omission in Tag 08JC (lemma-RHom-triangulated)."
+   }
+  },
+  {
+   "text": "Apply the same binary-summand decomposition to $\\operatorname{Hom}(T(E)^q,I^{q+p})$. A degree-$p$ element has the unique components $(\\alpha,\\beta)$ in the statement, with $g(x,y)=\\alpha_q(x)+\\beta_{q-1}(y)$. Denote its differential by $(\\alpha',\\beta')$. Evaluate $d_Ig-\\epsilon(p)g d_{T(E)}$ using step 3, first on $(x,0)$ in degree $q$ and then on $(0,y)$ in degree $r+1$. It gives\n$$\\alpha'_q=d_I\\alpha_q-\\epsilon(p)\\alpha_{q+1}d_X^q+\\epsilon(p+q)\\beta_qv^q,$$\n$$\\beta'_r=d_I\\beta_r-\\epsilon(p)\\beta_{r+1}d_Y^r.$$\nHere $\\alpha$ has degree $p$ as a map $X\\to I$, while the reindexed $\\beta$ has degree $p+1$ as a map $Y\\to I$. These formulas are direct expansions of [def-pur-hom-complex]; they do not assume exactness of an infinite product.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), differential formula; derived.tex Tag 014E (definition-cone). Explicit agent calculation filling the omission in Tag 08JC (lemma-RHom-triangulated)."
+   }
+  },
+  {
+   "text": "Set $\\gamma_r=\\epsilon(p+r)\\beta_r$. Since $T^2u=T(v)$ is precomposition with $v$ [def-pur-hom-complex], step 4 gives $\\alpha'=d_{T(X)}\\alpha+(T(v)\\gamma)$. For the second component of $\\theta_u(dg)$ the same step gives\n$$\\epsilon(p+1+r)\\beta'_r=\\epsilon(p+r+1)d_I\\beta_r+\\epsilon(r)\\beta_{r+1}d_Y^r=-\\bigl(d_{T(Y)}\\gamma\\bigr)_r.$$\nThus $\\theta_u(dg)=(d_{T(X)}\\alpha+T(v)\\gamma,-d_{T(Y)}\\gamma)$, exactly the differential in $\\operatorname{Cone}(T^2u)$ [def-weil-abstract-derived-category]. Its inverse in degree $p$ is $(\\alpha,\\gamma)\\mapsto(\\alpha,\\beta)$ with $\\beta_r=\\epsilon(p+r)\\gamma_r$. The two composites are identity maps since $\\epsilon(p+r)^2=1$. Consequently $\\theta_u$ is a chain isomorphism.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), differential formula; derived.tex Tag 014E (definition-cone). Explicit agent calculation filling the omission in Tag 08JC (lemma-RHom-triangulated)."
+   }
+  },
+  {
+   "text": "For a commutative square $b u=u'a$ with $a:A\\to A'$ and $b:B\\to B'$, the cone map $h:E\\to E'$ is $h(b_0,a_0)=(b(b_0),a(a_0))$. Substituting the cone differentials shows $d_{E'}h=h d_E$, using exactly $bu=u'a$ and the chain-map equations for $a,b$. By precomposition [def-pur-hom-complex], $T(h)$ sends $(x',y')$ to $(T(b)x',T(a)y')$. Hence $T^2(h)$ sends $(\\alpha,\\beta)$ to $(\\alpha\\circ T(b),\\beta\\circ T(a))$ componentwise. The second component after applying $\\theta_{u'}$ is $\\epsilon(p+r)\\beta_r\\circ T(a)^r$, which equals the second component after applying $\\theta_u$ followed by the cone map $(T^2b,T^2a[1])$; their first components also agree. This proves the asserted naturality. The cone map on the target is a chain map by the same displayed cone calculation, since $T^2$ preserves the square by twice precomposing.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), differential formula; derived.tex Tag 014E (definition-cone). Explicit agent calculation filling the omission in Tag 08JC (lemma-RHom-triangulated)."
+   }
+  },
+  {
+   "text": "The map $T(i):T(E)\\to X$ is $(x,y)\\mapsto x$ by precomposition [def-pur-hom-complex], so $T^2(i)$ sends $\\alpha$ to $(\\alpha,0)$ and $\\theta_uT^2(i)$ is the cone inclusion. Next $T(-\\pi):T(A[1])\\to T(E)$ sends a degree-$q$ element $z$ to $(0,-z)$, with $z$ reindexed as an element of $Y^{q-1}$. Thus $T^2(-\\pi)(\\alpha,\\beta)$ evaluated on $z$ is $-\\beta_{q-1}(z)$. For $y\\in Y^r$, step 2 now gives\n$$\\bigl(\\chi_A T^2(-\\pi)(\\alpha,\\beta)\\bigr)(y)=-\\epsilon(p+r)\\beta_r(y)=-\\gamma_r(y).$$\nThis is precisely $-\\pi_{T^2u}\\theta_u(\\alpha,\\beta)$ by the cone projection of [def-weil-abstract-derived-category]. Equality on all restricted sheaf maps proves the two arrow equations. All constructions used binary summands, reindexing, and multiplication by signs, so there is no boundedness, flatness, or K-injectivity requirement.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), differential formula; derived.tex Tag 014E (definition-cone). Explicit agent calculation filling the omission in Tag 08JC (lemma-RHom-triangulated)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A8X (section-hom-complexes) and Tag 08JC (lemma-RHom-triangulated); explicit signed calculation with derived.tex Tag 014E (definition-cone)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -66,10 +155,38 @@
    "results": "CochainComplex.mappingCone.ofHom_desc; CochainComplex.mappingCone.inl_v_descCochain_v; CochainComplex.cm5b.i_f_comp_assoc; CochainComplex.mappingCone.mapHomologicalComplexXIso_eq; CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom; CochainComplex.mappingCone.inl_v_triangle_mor₃_f; HomotopyCategory.spectralObjectMappingCone_δ'_app; CochainComplex.mappingCone.homologySequenceδ_triangleh",
    "date": "2026-10-17",
    "verdict": "no match: generic cone cochains and degreewise additive-functor comparisons do not state the signed double internal-Hom comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Double Hom complex preserves mapping cones by an explicit signed natural isomorphism",
+   "results": "CochainComplex.mappingCone.mapHomologicalComplexXIso'.congr_simp; CochainComplex.mappingCone.mapHomologicalComplexXIso'; CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom; CochainComplex.mappingCone.mapHomologicalComplexIso; CochainComplex.mappingCone.mapHomologicalComplexXIso; CochainComplex.mappingCone.shiftIso; CochainComplex.mappingCone.descHomotopy; CochainComplex.mappingCone.mapTriangleIso",
+   "date": "2026-10-17",
+   "verdict": "no match: the candidates concern cone cochains or a degreewise additive functor; double internal Hom is not degreewise application of such a functor and the signed formulas and arrow identities are not stated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Double internal Hom into a fixed cochain complex carries a mapping cone to the cone of the double Hom map with signed shift compatibility",
+   "results": "CochainComplex.mappingCone.descCochain; CochainComplex.MappingConeCompHomotopyEquiv.hom; CochainComplex.mappingConeCompTriangle_mor₁; CochainComplex.mappingConeCompTriangle_mor₂; CochainComplex.mappingCone.liftCochain; CochainComplex.mappingCone.desc; CochainComplex.mappingCone.ofHom_desc; CochainComplex.mappingCone.liftCochain_descCochain",
+   "date": "2026-10-17",
+   "verdict": "no match: the candidates concern cone cochains or a degreewise additive functor; double internal Hom is not degreewise application of such a functor and the signed formulas and arrow identities are not stated."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplexIso|descCochain|liftCochain",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean; Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean; Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean; Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean; Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean; inspected MappingCone.lean:321 (descCochain), 439 (liftCochain), 639 (mapHomologicalComplexIso).",
+   "date": "2026-10-17",
+   "verdict": "no match: the candidates concern cone cochains or a degreewise additive functor; double internal Hom is not degreewise application of such a functor and the signed formulas and arrow identities are not stated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The contravariant Hom complex into I applied twice admits a chain isomorphism T squared Cone u to Cone T squared u with Koszul signs",
+   "results": "CochainComplex.mappingCone.mapHomologicalComplexIso; CochainComplex.mappingCone.mapHomologicalComplexXIso'; CochainComplex.mappingCone.mapHomologicalComplexXIso; CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv; CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom; CochainComplex.mappingCone.mapHomologicalComplexXIso_eq; CochainComplex.mappingCone.rotateTrianglehIso; CochainComplex.mappingCone.rotateHomotopyEquiv",
+   "date": "2026-10-17",
+   "verdict": "no match: the candidates concern cone cochains or a degreewise additive functor; double internal Hom is not degreewise application of such a functor and the signed formulas and arrow identities are not stated."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-duality-pairing",
@@ -86,5 +203,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-double-hom-cone-comparison",
+  "worker": "stage1",
+  "summary": "Checked the exact shift, double-Hom and cone signs directly from the existing Hom and cone definitions. Seven component calculations prove all clauses, naturality and both arrow equations without new nodes or resolution hypotheses. Mathlib and project searches found no exact attachment or leaf.",
+  "blueprint": "Realizes the fourth sentence of lem-weil-duality-pairing.proof.md: internal Hom is triangulated with standard shift and Koszul signs; this supplies its double-application cone comparison.",
+  "tool_uses": [
+   {
+    "node": "def-pur-hom-complex",
+    "why": "Generic definition of the internal Hom differential and componentwise precomposition; no definition in this unit replaces it."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Generic cone, shift, inclusion and projection conventions; this calculation uses only the explicitly stated cone definition, not derived exactness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pur-hom-complex",
+  "def-weil-abstract-derived-category"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q158-e10aee1bf",
+  "group": "Q158",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-e10aee1bf (reviewer sub-agent of L); spot-checked: I read all seven steps and checked every sign from the cited definitions. def-pur-hom-complex gives d(f)=d_M f-(-1)^n f d_L (Stacks sites-cohomology 0A8X, l.8590). def-weil-abstract-derived-category gives the cone [[d_L,f],[0,-d_K]] with i and p (Stacks derived 014E, l.2479) and the shift differential -d. Step 1: s_{C,m} is a chain map, since both routes give eps(mq+m)d_I f - eps(mq+q) f d_C, for every integer m. Step 2: the composite's domains match, and the value is -eps(p)eps(r+1)=eps(p+r). Step 3: T(Cone)^q = X^q (+) Y^{q-1}, with second differential component d_Y y + eps(q+1)v x. Step 4: the cross term of T^2(E) is eps(p+q)beta_q v. Step 5: gamma_r=eps(p+r)beta_r gives exactly the cone differential (alpha,gamma) -> (d alpha + T(v)gamma, -d gamma). Step 6: h=b(+)a is a chain map and the naturality square commutes componentwise. Step 7: T^2(i) alpha=(alpha,0), and chi_A T^2(-pi) gives -gamma, which is -pi theta. This matches the parent lem-weil-duality-pairing steps 5-6, including (-1)^{(p+1)t}. I checked negative shifts, u=0, u=id, zero complexes and characteristic 2. No boundedness, flatness or K-injectivity is used. The statement is not weakened. Sites-cohomology 08JC says 'Details omitted', and the item writes those details out (D5); proof_origin agent is correct. There are no new nodes. Duplicate candidates read: lem-sc-hom-complex-mapping-cone(-differential) is covariant; lem-pur-derived-internal-hom-shift-* is derived-level; lem-sf-hom-triangulated (the node blueprint main-20261015 cites in the parent's 4th sentence) is etale, derived-level and leaves the signs unspecified. None is a duplicate. Only definition nodes are cited, so the route is fine. The two declared tool_uses are definitions; they are accepted but unnecessary. from.place is checked against main-20261015 proof.md and same_as is []. Six Mathlib searches are recorded, with the failed Loogle query recorded as unavailable. No SGA source is used. One fragility, not a fault: the main-20261015 blueprint_update of def-weil-abstract-derived-category drops the cone convention, but the item states the convention itself. The item has no lean_audit field, inherited from Q28's creation. No fixes were made."
  }
 }
