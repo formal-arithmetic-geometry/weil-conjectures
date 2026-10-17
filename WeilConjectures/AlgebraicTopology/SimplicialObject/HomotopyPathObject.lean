@@ -147,6 +147,45 @@ noncomputable def pathSpace : SimplicialObject C where
     · rw [unop_comp, pathMapObj_pathH, Category.assoc, pathMapObj_pathH, pathMap, pathMap,
         ← Category.assoc, pathMapObj_pathH, pathMap, Category.assoc, ← Functor.map_comp,
         ← op_comp, prism_comp, comp_toOrderHom, OrderHom.comp_coe, Function.comp_apply]
-      rfl
+
+lemma pathSpace_map_pathH {m n : ℕ} (θ : ⦋m⦌ ⟶ ⦋n⦌) (k : Fin (m + 1)) :
+    (pathSpace a b).map θ.op ≫ pathH a b m k =
+      pathH a b n (θ.toOrderHom k) ≫ V.map (prism θ k).op :=
+  pathMapObj_pathH a b θ k
+
+/-- The projection of the path space to `U`. -/
+@[simps]
+noncomputable def pathProj : pathSpace a b ⟶ U where
+  app Δ := pathU a b Δ.unop.len
+  naturality _ _ θ := pathMapObj_pathU a b θ.unop
+
+/-- The tautological homotopy on the path space. -/
+noncomputable def pathHomotopy : Homotopy (pathProj a b ≫ a) (pathProj a b ≫ b) where
+  h {n} j := pathH a b n j
+  h_zero_comp_δ_zero n := pathH_zero a b n
+  h_last_comp_δ_last n := pathH_last a b n
+  h_succ_comp_δ_castSucc_of_lt {n} i j hij := by
+    change _ = (pathSpace a b).map (SimplexCategory.δ i).op ≫ pathH a b n j
+    rw [pathSpace_map_pathH, δ_apply_of_le i j (by simpa [Fin.le_def] using hij),
+      prism_δ_of_le i j (by simpa [Fin.le_def] using hij)]
+    rfl
+  h_succ_comp_δ_castSucc_succ {n} j := by
+    rw [Fin.succ_castSucc]
+    exact isPathFamily_pathH a b (n + 1) j
+  h_castSucc_comp_δ_succ_of_lt {n} i j hji := by
+    change _ = (pathSpace a b).map (SimplexCategory.δ i).op ≫ pathH a b n j
+    rw [pathSpace_map_pathH, δ_apply_of_lt i j (by simpa [Fin.lt_def] using hji),
+      prism_δ_of_lt i j (by simpa [Fin.lt_def] using hji)]
+    rfl
+  h_comp_σ_castSucc_of_le {n} i j hij := by
+    change _ = (pathSpace a b).map (SimplexCategory.σ i).op ≫ pathH a b (n + 1) j.succ
+    rw [pathSpace_map_pathH, σ_apply_succ_of_le i j (Fin.le_def.1 hij),
+      prism_σ_of_le i j (Fin.le_def.1 hij)]
+    rfl
+  h_comp_σ_succ_of_lt {n} i j hji := by
+    change _ = (pathSpace a b).map (SimplexCategory.σ i).op ≫ pathH a b (n + 1) j.castSucc
+    rw [pathSpace_map_pathH, σ_apply_castSucc_of_ge i j (Fin.le_def.1 hji),
+      prism_σ_of_ge i j (Fin.le_def.1 hji)]
+    rfl
 
 end CategoryTheory.SimplicialObject

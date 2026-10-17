@@ -286,6 +286,7 @@ lemma isHyperHContinuousAt_singleFunctor (hs : SingleContinuity D c)
   ((hs F (n + -a)).shift (-a)).of_iso
     (((DerivedCategory.singleFunctors _).shiftIso (-a) a 0 (by omega)).app F)
 
+omit [IsCofiltered I] in
 lemma isHyperHContinuousAt_of_isGE_of_isLE_self (hs : SingleContinuity D c) (a : ℤ)
     (K : DerivedCategory (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})) [K.IsGE a]
     [K.IsLE a] (n : ℤ) : IsHyperHContinuousAt D c K n := by

@@ -47,7 +47,7 @@ lemma isLeftAdjoint_forget₂_moduleCat :
   exact Functor.isLeftAdjoint_of_iso e
 
 /-- Taking underlying abelian sheaves is additive. -/
-instance additive_sheafCompose_forget₂' {X : Scheme.{u}} :
+lemma additive_sheafCompose_forget₂' {X : Scheme.{u}} :
     (sheafCompose X.smallEtaleTopology
       (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).Additive where
   map_add := by
@@ -55,7 +55,7 @@ instance additive_sheafCompose_forget₂' {X : Scheme.{u}} :
     rfl
 
 /-- Taking underlying abelian sheaves preserves finite limits. -/
-instance preservesFiniteLimits_sheafCompose_forget₂' {X : Scheme.{u}} :
+lemma preservesFiniteLimits_sheafCompose_forget₂' {X : Scheme.{u}} :
     PreservesFiniteLimits (sheafCompose X.smallEtaleTopology
       (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})) := by
   have : PreservesFiniteLimits (sheafCompose X.smallEtaleTopology
@@ -65,7 +65,7 @@ instance preservesFiniteLimits_sheafCompose_forget₂' {X : Scheme.{u}} :
   exact preservesFiniteLimits_of_reflects_of_preserves _ (sheafToPresheaf _ _)
 
 /-- Taking underlying abelian sheaves preserves finite colimits. -/
-instance preservesFiniteColimits_sheafCompose_forget₂ {X : Scheme.{u}} :
+lemma preservesFiniteColimits_sheafCompose_forget₂ {X : Scheme.{u}} :
     PreservesFiniteColimits (sheafCompose X.smallEtaleTopology
       (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})) := by
   have := isLeftAdjoint_forget₂_moduleCat (Λ := Λ)
@@ -80,6 +80,8 @@ instance preservesFiniteColimits_sheafCompose_forget₂ {X : Scheme.{u}} :
   exact preservesFiniteColimits_of_natIso
     (sheafToPresheafCompWhiskeringRightCompPresheafToSheafIso _ _)
 
+attribute [local instance] additive_sheafCompose_forget₂'
+  preservesFiniteLimits_sheafCompose_forget₂' preservesFiniteColimits_sheafCompose_forget₂
 
 /-- The cohomology of an étale sheaf of `Λ`-modules vanishes if and only if the cohomology of its
 underlying abelian sheaf vanishes. -/

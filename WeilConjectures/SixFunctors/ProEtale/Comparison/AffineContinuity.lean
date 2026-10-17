@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.LimitSystem.DerivedContinuity
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.SiteComparison
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
 
 /-!
@@ -109,15 +109,41 @@ private lemma bijective_mk₀_comp {C : Type*} [Category C] [HasShift C ℤ]
     simpa [ShiftedHom.mk₀_comp] using this
   · simp [ShiftedHom.mk₀_comp]
 
+/-- `D(ν^*)` is bijective on morphisms between bounded below complexes. -/
+lemma bijective_comparisonUpperStar_mapDerivedCategory_map_of_isGE {U : Scheme.{u}}
+    (P M : DerivedCategory (Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1})) (a b : ℤ)
+    [P.IsGE b] [M.IsGE a] :
+    Function.Bijective (fun g : P ⟶ M ↦
+      (comparisonUpperStar AddCommGrpCat.{u + 1} U).mapDerivedCategory.map g) := by
+  let P' : DerivedCategory.Plus (Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
+    ⟨P, b, inferInstance⟩
+  let M' : DerivedCategory.Plus (Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
+    ⟨M, a, inferInstance⟩
+  let e₁ := Equiv.ofBijective _ ((ObjectProperty.fullyFaithfulι _).map_bijective P' M')
+  have h₂ := (fullyFaithfulComparisonUpperStarMapDerivedCategoryPlus
+    AddCommGrpCat.{u + 1} U).map_bijective P' M'
+  have h₃ := (ObjectProperty.fullyFaithfulι _).map_bijective
+    ((comparisonUpperStar AddCommGrpCat.{u + 1} U).mapDerivedCategoryPlus.obj P')
+    ((comparisonUpperStar AddCommGrpCat.{u + 1} U).mapDerivedCategoryPlus.obj M')
+  have key : (fun g : P ⟶ M ↦
+      (comparisonUpperStar AddCommGrpCat.{u + 1} U).mapDerivedCategory.map g) =
+      (fun x ↦ DerivedCategory.Plus.ι.map
+        ((comparisonUpperStar AddCommGrpCat.{u + 1} U).mapDerivedCategoryPlus.map x)) ∘
+        e₁.symm := by
+    funext g
+    conv_lhs => rw [← e₁.apply_symm_apply g]
+    rfl
+  rw [key]
+  exact (h₃.comp h₂).comp e₁.symm.bijective
+
 /-- `Hⁿ(U_ét, L) ⟶ Hⁿ(U_proét, ν^* L)` is bijective for bounded below `L`. -/
 lemma bijective_shiftedHom_map_comparisonUpperStar {U : Scheme.{u}}
-    (P L : DerivedCategory (Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1})) (a n : ℤ)
-    [L.IsGE a] :
+    (P L : DerivedCategory (Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1})) (a b n : ℤ)
+    [P.IsGE b] [L.IsGE a] :
     Function.Bijective (fun x : ShiftedHom P L n ↦
       x.map (comparisonUpperStar AddCommGrpCat.{u + 1} U).mapDerivedCategory) := by
-  have hplus : DerivedCategory.TStructure.t.plus (L⟦n⟧) :=
-    ⟨a - n, DerivedCategory.TStructure.t.isGE_shift L a n (a - n) (by omega)⟩
-  have h := bijective_comparisonUpperStar_mapDerivedCategory_map P (L⟦n⟧) hplus
+  have : (L⟦n⟧).IsGE (a - n) := DerivedCategory.TStructure.t.isGE_shift L a n (a - n) (by omega)
+  have h := bijective_comparisonUpperStar_mapDerivedCategory_map_of_isGE P (L⟦n⟧) (a - n) b
   have e (x : ShiftedHom P L n) :
       x.map (comparisonUpperStar AddCommGrpCat.{u + 1} U).mapDerivedCategory =
         (comparisonUpperStar AddCommGrpCat.{u + 1} U).mapDerivedCategory.map x ≫
@@ -131,7 +157,8 @@ lemma bijective_shiftedHom_map_comparisonUpperStar {U : Scheme.{u}}
       ((comparisonUpperStar AddCommGrpCat.{u + 1} U).mapDerivedCategory.commShiftIso n).inv.app L)
     refine ⟨g, ?_⟩
     simp only at hg ⊢
-    rw [e, hg, Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+    rw [e, hg, Category.assoc, Iso.inv_hom_id_app]
+    exact Category.comp_id _
 
 /-- Blueprint `det-sf-comparison-affine-continuity`: Pro-étale cohomology of a pro-étale affine.
 
@@ -154,6 +181,6 @@ theorem proEtaleHyperH_affine_continuity {X : Scheme.{u}} {I : Type u} [SmallCat
   exact (bijective_mk₀_comp (comparisonUnitSheafIso c.pt.left) n).comp
     ((bijective_shiftedHom_comp_mk₀
       ((mapDerivedCategoryComparisonUpperStarRestrictIso c.pt.hom).app K).symm n).comp
-    (bijective_shiftedHom_map_comparisonUpperStar _ _ a n))
+    (bijective_shiftedHom_map_comparisonUpperStar _ _ a 0 n))
 
 end AlgebraicGeometry.ProEtale
