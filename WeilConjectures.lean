@@ -2717,6 +2717,7 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.JacobianKummer
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LFunction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LinearAlgebra
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LisseRepAbelian
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LisseWeilSheafTensor
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalPolynomial
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystems
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystemsExact
@@ -2727,11 +2728,13 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Operations
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Purity
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.RankOne
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Rankin
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.RealizationNatural
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Restriction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Semicontinuity
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafBoundaryPurity
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafCoinvariants
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafRepresentation
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafRepresentationTensor
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafSections
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafSemicontinuity
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafWeightOperations
@@ -2740,6 +2743,7 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentation
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationData
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationDual
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationFunctor
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationSections
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationStalk
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationTensor

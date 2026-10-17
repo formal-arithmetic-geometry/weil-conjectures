@@ -41,6 +41,11 @@ Frobenius induced by the degree-one lift `γ`
 - `AlgebraicGeometry.WeilGroup.exists_weilSheaf_of_isLisse`: the lisse Weil sheaf of a lisse
   representation, with its stalks and its geometric coinvariants.
 
+The natural forms of the identification of the equivalence with the Weil fundamental
+representation and of its tensor compatibility (an isomorphism of bifunctors, and the unit) are
+`AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_tensor_of_lisseMonodromy` in
+`WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafRepresentationTensor`.
+
 ## Implementation notes
 
 The Weil fundamental representation of `def-wf-fundamental-representation` is the geometric
