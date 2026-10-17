@@ -2,7 +2,7 @@
  "id": "lem-trf-finite-base-cech-hypercohomology",
  "kind": "statement",
  "title": "Natural bounded-below finite-cover etale hypercohomology descent",
- "statement": "Let $\\Lambda$ be a commutative ring and $p:Z\\to Y$ a finite surjective morphism of schemes [def-weil-finite-integral-morphism, def-weil-surjective-morphism]. All complexes are sheaves of modules over the constant ring sheaf $\\Lambda$ on the small etale site, and all pullbacks are the exact inverse images [def-weil-sheaf-of-modules-category, def-weil-pbc-etale-site, def-weil-pbc-derived-inverse-image]. Let $a\\in\\mathbf Z$ and $K\\in D^{\\ge a}(Y_{\\mathrm{Et}},\\Lambda)$ [def-weil-abstract-derived-category]. Write $Z_q=Z^{\\times_Y(q+1)}$ and $p_q:Z_q\\to Y$. There is a natural augmentation quasi-isomorphism\n$$R\\Gamma(Y,K)\\xrightarrow{\\sim}\\operatorname{Tot}_{q\\ge0}R\\Gamma(Z_q,p_q^*K).$$\nHere the right hand side is represented by compatible bounded-below cochain resolutions, with internal degrees at least $a$ and Cech degree $q\\ge0$, alternating coface differential $\\delta$, and total differential $\\delta+(-1)^q d$. The total has finite diagonals. Its Cech filtration gives a convergent spectral sequence $E_1^{q,j}=H^j(Z_q,p_q^*K)\\Rightarrow H^{q+j}(Y,K)$ with $q\\ge0$ and $j\\ge a$, finite filtration on each abutment, and stationary terms in each bidegree. Negative $j$ are allowed.\n\nFor every morphism $h:Y'\\to Y$, put $Z'=Y'\\times_YZ$, $K'=h^*K$ and $Z'_q=Y'\\times_YZ_q$. The restriction maps induce a morphism between these augmented resolved Cech diagrams. The square between $R\\Gamma(Y,K)\\to R\\Gamma(Y',K')$ and the two totalizations commutes in $D(\\operatorname{Mod}\\Lambda)$. Its column-$q$ map is precisely $R\\Gamma(Z_q,p_q^*K)\\to R\\Gamma(Z'_q,(p'_q)^*K')$ induced by restriction. No assertion that this column map or its cohomology is an isomorphism is made.",
+ "statement": "Let $\\Lambda$ be a commutative ring and $p:Z\\to Y$ a finite surjective morphism of schemes [def-weil-finite-integral-morphism, def-weil-surjective-morphism]. All complexes are in the Grothendieck abelian category of sheaves of modules over the constant ring sheaf $\\Lambda$ on the small etale site, and all pullbacks are the exact inverse images [def-weil-sheaf-of-modules-category, def-weil-pbc-etale-site, def-weil-pbc-derived-inverse-image, lem-weil-pbc-module-sheaves-grothendieck-abelian]. Derived sections and cohomology mean the module-valued functors of [def-kun-rgamma-unbounded]. Let $a\\in\\mathbf Z$ and $K\\in D^{\\ge a}(Y_{\\mathrm{Et}},\\Lambda)$ [def-weil-abstract-derived-category]. Write $Z_q=Z^{\\times_Y(q+1)}$ and $p_q:Z_q\\to Y$. There is a natural augmentation quasi-isomorphism\n$$R\\Gamma(Y,K)\\xrightarrow{\\sim}\\operatorname{Tot}_{q\\ge0}R\\Gamma(Z_q,p_q^*K).$$\nHere the right hand side is represented by compatible bounded-below cochain resolutions, with internal degrees at least $a$ and Cech degree $q\\ge0$, alternating coface differential $\\delta$, and total differential $\\delta+(-1)^q d$. The total has finite diagonals. Its Cech filtration gives a convergent spectral sequence $E_1^{q,j}=H^j(Z_q,p_q^*K)\\Rightarrow H^{q+j}(Y,K)$ with $q\\ge0$ and $j\\ge a$, finite filtration on each abutment, and stationary terms in each bidegree. Negative $j$ are allowed.\n\nFor every morphism $h:Y'\\to Y$, put $Z'=Y'\\times_YZ$, $K'=h^*K$ and $Z'_q=Y'\\times_YZ_q$. The restriction maps induce a morphism between these augmented resolved Cech diagrams. The square between $R\\Gamma(Y,K)\\to R\\Gamma(Y',K')$ and the two totalizations commutes in $D(\\operatorname{Mod}\\Lambda)$. Its column-$q$ map is precisely $R\\Gamma(Z_q,p_q^*K)\\to R\\Gamma(Z'_q,(p'_q)^*K')$ induced by restriction. No assertion that this column map or its cohomology is an isomorphism is made.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 09Z2, lemma-cohomological-descent-finite: exact augmented finite-cover resolution and its natural maps. Bounded-below constant-module and change-of-scheme extension by the same resolution construction, with finite diagonals; derivation in report.md."
@@ -14,80 +14,164 @@
   "def-weil-pbc-etale-site",
   "def-weil-pbc-derived-inverse-image",
   "def-weil-abstract-derived-category",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "def-kun-rgamma-unbounded",
+  "def-sbc-standard-tstructure-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Represent $K\\in D^{\\ge a}$ by a complex $F$ with $F^j=0$ for $j<a$, using the equivalent strictly supported representative in the standard t-structure. Put $C_q=p_{q*}p_q^{-1}F$, with augmentation $C_{-1}=F$. Exact module inverse image identifies $p_q^{-1}F$ with $p_q^*K$ in the derived category. The module Čech augmentation lemma gives exactness of $0\\to F^j\\to C_0^j\\to C_1^j\\to\\cdots$ for each $j$, before any injective replacement. Apply the augmentation quasi-isomorphism criterion to this unreplaced bicomplex, with complex index $s=j$ and resolution index $r=q$. Its rows are quasi-isomorphic to $F^j[0]$, and vanish for $j<a$. The map $F\\to\\operatorname{Tot}C$ is the augmentation into the $q=0$ diagonal summand, so the criterion gives a quasi-isomorphism. The total differential is $\\delta+(-1)^q d$.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-trf-finite-cech-augmentation-modules",
+    "lem-sp-cartan-eilenberg-augmentation-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09Z2, exact augmented resolution; homology.tex Tag 0133, lemma-double-complex-gives-resolution, applied to the unreplaced rows"
+   }
+  },
+  {
+   "text": "The category $\\mathcal A=\\operatorname{Mod}(Y_{\\mathrm{Et}},\\Lambda)$ is Grothendieck abelian, hence has functorial injective embeddings. Apply the bounded functorial injective-resolution theorem to choose one natural quasi-isomorphism $\\eta:V\\to I(V)$ on all bounded-below complexes. Set $J_q=I(C_q)$ and also $J_{-1}=I(F)$. Every $J_q^j$ is injective and is zero for $j<a$. Apply this single functor to each coface and codegeneracy, and then take alternating sums of the resulting cofaces to define the horizontal differential. The cosimplicial identities still hold, so its square is zero; each coface is a chain map, so it commutes with $d$. Naturality of $\\eta$ gives a map of augmented bicomplexes $C\\to J$. We do not assert exactness of the horizontal rows of $J$, or assume $I$ additive. The horizontal differential on $J$ is the sum of the resolved cofaces, not $I$ of their sum.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "lem-weil-pbc-grothendieck-functorial-injective-embedding",
+    "lem-weil-pbc-functorial-bounded-injective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0141, lemma-functorial-injective-resolutions and remark-match; apply to the complete augmented cosimplicial diagram"
+   }
+  },
+  {
+   "text": "We now compare totals in the sheaf category $\\mathcal A$, independently of exactness of the replaced rows. Form the double complex $E_q=\\operatorname{Cone}(C_q\\xrightarrow{\\eta_q}J_q)$. Every vertical column is acyclic, and $E_q^j=J_q^j\\oplus C_q^{j+1}$ vanishes for $j<a-1$. Translate the internal index by $a-1$ and apply the first spectral sequence of the double-complex theorem in the abelian category $\\mathcal A$. Its $E_1$ page is zero, so its finite abutment filtration has zero graded pieces; hence $\\operatorname{Tot}E$ is acyclic. Identify it with $\\operatorname{Cone}(\\operatorname{Tot}C\\to\\operatorname{Tot}J)$: on the summand in horizontal degree $q$, use $(b,c)\\mapsto(b,(-1)^q c)$. Substituting in $\\delta+(-1)^q d$ gives the ordinary cone differential, including the minus sign on the horizontal differential of the shifted $C$ summand. Thus $\\operatorname{Tot}C\\to\\operatorname{Tot}J$ is a quasi-isomorphism of sheaf complexes. This only relabels the vertical degrees; the sign $(-1)^q$ is unchanged.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 0130 and 0132: first spectral sequence in an arbitrary abelian category; cone-total signs written explicitly"
+   }
+  },
+  {
+   "text": "Consequently $F\\to\\operatorname{Tot}J$ is a quasi-isomorphism. In total degree $n$, only $0\\le q\\le n-a$ contribute, so $\\operatorname{Tot}J$ is bounded below and has injective terms: for a monomorphism, extend a map to each of the finitely many injective summands and combine the extensions. The bounded-below-injectives clause of the K-injective theorem makes $\\operatorname{Tot}J$ and $I(F)$ K-injective. Hence they compute $R\\Gamma(Y,K)$. Their augmentation map is a quasi-isomorphism (its composite with $F\\to I(F)$ is the preceding quasi-isomorphism), and the K-injective sections-comparison theorem shows that applying sections represents its derived isomorphism. Apply the additive mapped-total isomorphism to $\\Gamma(Y,-)$ with indices $(s,r)=(j,q)$ and bound $s\\ge a$: $\\Gamma(Y,\\operatorname{Tot}J)\\cong\\operatorname{Tot}_{q\\ge0}\\Gamma(Y,J_q)$. Each $J_q$ is a bounded-below injective resolution of $C_q$. The finite-pushforward module Leray identification gives $R\\Gamma(Y,C_q)\\cong R\\Gamma(Z_q,p_q^{-1}F)$. This proves the stated augmentation quasi-isomorphism with compatible column representatives having internal degree at least $a$.",
+   "uses": [
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "lem-sp-cartan-eilenberg-mapped-total",
+    "lem-trf-derived-sections-finite-pushforward-modules",
+    "def-kun-rgamma-unbounded",
+    "lem-kun-rgamma-unbounded-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015J, lemma-two-ss-complex-functor, total and mapped-total remarks; bounded-below injective complexes are K-injective (the existing 079P node clause)"
+   }
+  },
+  {
+   "text": "Filter $\\operatorname{Tot}\\Gamma(Y,J)$ by Čech degree $q$. The filtered-complex construction has initial graded differential the vertical differential. Reindex $j$ as $j-a\\ge0$ and apply the first double-complex spectral sequence in $\\operatorname{Mod}\\Lambda$. Under the finite-pushforward identifications of Step 4 its first page is $E_1^{q,j}=H^j(Z_q,p_q^*K)$, and the augmentation identifies its abutment with $H^{q+j}(Y,K)$. Translating the index back retains every integer $j\\ge a$, including negative $j$ when $a<0$. The double-complex theorem supplies stabilization and a finite image filtration; explicitly in total degree $n$ the only possible horizontal indices satisfy $0\\le q\\le n-a$. This is relabeling of the vertical index and total degree, with the same differentials and the same sign $(-1)^q$. We invoke the theorem's convergence statement itself, not the argument of the module-only Čech cone lemma.",
+   "uses": [
+    "lem-sp-filtered-complex-associated-spectral-sequence-construction",
+    "thm-sp-double-complex-spectral-sequences",
+    "def-sp-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 012K, 0130 and 0132; shifted first-quadrant double complex and finite image filtration"
+   }
+  },
+  {
+   "text": "For $h:Y'\\to Y$, write $F'=h^{-1}F$, $C'_q=p'_{q*}(p'_q)^{-1}F'$, and $J'_q=I'(C'_q)$. Exact module inverse image keeps the bound $a$. Construct $b_q:h^{-1}C_q\\to C'_q$ as the mate of the counit along the Cartesian square of $p_q$ and $h$, using $(p'_q)^{-1}h^{-1}=g_q^{-1}p_q^{-1}$ and $g_q^{-1}p_q^{-1}F=(p'_q)^{-1}h^{-1}F$. At the augmentation set $b_{-1}=\\mathrm{id}_{F'}$. For a projection $r:Z_{q+1}\\to Z_q$ and its base change $r'$, a section represented on an etale $U\\to Y$ is sent by either composite to its pullback on $U'\\times_{Y'}Z'_{q+1}$: the equality is $g_q r'=r g_{q+1}$, and functoriality of restriction gives equality of the two section maps. Such local representatives generate inverse image after sheafification, so this checks each coface square. Repeated-coordinate maps and the identity section give the identical check for codegeneracies and augmentation. We use these canonical mate maps only; their invertibility is not needed. Apply the resolved-diagram roof node to $A=C$, $B=C'$ and $b$. It supplies the actual coface-compatible zigzag $\\Gamma I(C)\\to\\Gamma I'(h^{-1}I(C))\\leftarrow\\Gamma I'(h^{-1}C)\\to\\Gamma I'(C')$, including the augmentation. All its internal degrees are at least $a$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-trf-derived-cech-diagram-functorial-modules",
+    "lem-trf-derived-sections-finite-pushforward-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0141 and remark-match; coface naturality of the Čech augmentation of etale-cohomology.tex Tag 09Z2; unit/counit mate construction"
+   }
+  },
+  {
+   "text": "The backward arrow in Step 6 is a quasi-isomorphism in each column. Apply the module-valued Čech cone-comparison statement to this very map: all column cones are acyclic, so its vanishing conclusion for every integer $r$ makes the cone on the total map acyclic. Thus the zigzag defines a morphism of the augmented total diagrams in $D(\\operatorname{Mod}\\Lambda)$. At column $q$, the roof node identifies it with restriction along $h$ followed by $R\\Gamma(b_q)$. The explicit unit/counit compatibility square in the finite-pushforward module Leray node identifies this composite with restriction along $g_q:Z'_q\\to Z_q$. At augmentation degree $-1$ the same roof is precisely $R\\Gamma(Y,K)\\to R\\Gamma(Y',h^*K)$. Each arrow of the roof already commutes with augmentation, so after inverting its backward total quasi-isomorphism the required square commutes. This is a roof of actual double-complex maps, so no choice of unrelated morphisms in the derived category of individual columns is totalized.",
+   "uses": [
+    "lem-trf-bounded-below-cech-cone-comparison",
+    "lem-trf-derived-cech-diagram-functorial-modules",
+    "lem-trf-derived-sections-finite-pushforward-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0132, finite-diagonal cone comparison applied as a statement to the backward map; derived.tex Tag 0141 for the compatible diagram roof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-rgamma-unbounded",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-sp-filtration",
+  "def-weil-abstract-derived-category",
+  "lem-kun-rgamma-unbounded-well-defined",
+  "lem-sp-cartan-eilenberg-augmentation-quasi-iso",
+  "lem-sp-cartan-eilenberg-mapped-total",
+  "lem-sp-filtered-complex-associated-spectral-sequence-construction",
+  "lem-trf-bounded-below-cech-cone-comparison",
+  "lem-trf-derived-cech-diagram-functorial-modules",
+  "lem-trf-derived-sections-finite-pushforward-modules",
+  "lem-trf-finite-cech-augmentation-modules",
+  "lem-weil-pbc-functorial-bounded-injective-resolution",
+  "lem-weil-pbc-grothendieck-functorial-injective-embedding",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "thm-sp-double-complex-spectral-sequences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09Z2, extended from sheaves to bounded-below complexes using the Cartan--Eilenberg and finite-diagonal spectral-sequence constructions"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Bounded below etale cohomology of a scheme is computed by the Cech descent spectral sequence of a finite surjective proper cover",
-   "results": "AlgebraicGeometry.Scheme.smallEtaleTopology; Scheme.etaleTopology; ExistsHomHomCompEqCompAux limits; no finite-cover Cech spectral-sequence theorem.",
+   "query": "lem-trf-finite-base-cech-hypercohomology: finite etale Cech descent for bounded below Lambda module sheaf complexes",
+   "results": "8 hits; top declarations/files: SheafOfModules.isFinitePresentation, SheafOfModules.Presentation.IsFinite, SheafOfModules.IsFinitePresentation, SheafOfModules.IsFiniteType, LightCondAb.ofSheafLightProfinite, LightCondMod.ofSheafLightProfinite, CategoryTheory.Sheaf.cohomologyPresheaf, CondensedMod.ofSheafProfinite; digest 287ba188711f2f7d",
    "date": "2026-10-18",
-   "verdict": "no match"
+   "verdict": "no match: hits are generic infrastructure and do not state this node"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-finite-base-cech-hypercohomology: derived global sections of a finite surjective Cech nerve with module coefficients",
+   "results": "8 hits; top declarations/files: CategoryTheory.cechNerveTerminalFrom, CategoryTheory.Arrow.cechNerve, SheafOfModules.Finite.hasFiniteLimits, CategoryTheory.Arrow.augmentedCechNerve, CategoryTheory.CechNerveTerminalFrom.wideCospan.limitCone, CategoryTheory.SimplicialObject.augmentedCechNerve_obj_hom_app, SheafOfModules.GeneratingSections.IsFiniteType.finite, CategoryTheory.Sheaf.isLimitConeΓ; digest c46121cef932e2f0",
+   "date": "2026-10-18",
+   "verdict": "no match: hits are generic infrastructure and do not state this node"
   },
   {
    "tool": "loogle",
-   "query": "Cech descent spectral sequence etale cohomology finite cover",
-   "results": "0 hits; unknown identifier Cech",
+   "query": "lem-trf-finite-base-cech-hypercohomology, CechNerve",
+   "results": "0 hits; top declarations/files: ; digest 4f53cda18c2baa0c",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "Cech|hypercover|spectral sequence",
-   "results": "Mathlib CategoryTheory/Sites has hypercover and sheaf-condition APIs (CoverPreserving.lean, Hypercover, CoproductSheafCondition), but no derived etale Cech descent spectral sequence with the stated tube terms.",
+   "query": "lem-trf-finite-base-cech-hypercohomology|CechNerve",
+   "results": "5 hits; top declarations/files: Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean, Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean, Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean, Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean, Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean; digest ef1b82adb1c28863",
    "date": "2026-10-18",
-   "verdict": "no match",
-   "subdirectory": "CategoryTheory/Sites"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Bounded below etale cohomology of a scheme is computed by the Cech descent spectral sequence of a finite surjective proper cover",
-   "results": "Scheme.smallEtaleTopology; Scheme.etaleTopology; AlgebraicGeometry.QuasiCompactCover.of_finite; QuasiCompactCover.homCover; no derived Cech spectral sequence theorem.",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Etale cohomological descent for a bounded below complex of constant ring module sheaves along a finite surjective morphism with natural Cech totalization",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instEpiSheafAddCommGrpCatGShortComplex\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), CategoryTheory.Epi S.shortComplex.g\", \"doc\": \"In the category of sheaves on a Grothendieck topology with values in additive commutative groups, the differential $ g $ from the second to third object in the Mayer-Vietoris short complex is an epimo\"}\n  {\"name\": \"Algebra.FormallyEtale.instForallOfFinite\", \"module\": \"Mathlib/RingTheory/Etale/Pi\", \"type\": \"∀ {R : Type u_1} {I : Type u_2} (A : I → Type u_3) [inst : CommRing R] [inst_1 : (i : I) → CommRing (A i)]\\n  [inst_2 : (i : I) → Algebra R (A i)] [Finite I] [∀ (i : I), Algebra.FormallyEtale R (A i)],\\n  Algebra.FormallyEtale R ((i : I) → A i)\", \"doc\": \"If $ I $ is a finite set and each algebra $ A_i $ over a commutative ring $ R $ is formally étale, then the product algebra $ \\\\prod_{i \\\\in I} A_i $ is also formally étale over $ R $.\"}\n  {\"name\": \"Algebra.IsStandardEtale.of_surjective\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ (R : Type u_4) (S : Type u_5) (T : Type u_6) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [Algebra.IsStandardEtale R S] [Algebra.Etale R T] (f : S →ₐ[R] T),\\n  Function.Surjective ⇑f → Algebra.IsStandardEtale R T\", \"doc\": \"If $ S $ is a standard étale $ R $-algebra, $ T $ is an étale $ R $-algebra, and there exists a surjective $ R $-algebra homomorphism $ f : S \\to T $, then $ T $ is also a standard étale $ R $-algebra.\"}\n  {\"name\": \"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preregular C]\\n  [inst_2 : CategoryTheory.FinitaryExtensive C]\\n  {F : CategoryTheory.Functor ℕᵒᵖ (CategoryTheory.Sheaf (CategoryTheory.coherentTopology C) (Type v))}\\n  {c : CategoryTheory.Limits.Cone F} (hc : CategoryTh\", \"doc\": \"In the coherent topology on a precoherent category, if a morphism between sheaves is locally surjective, then the projection at the zeroth component is also locally surjective.\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.Exact\", \"doc\": \"Given a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, the associated short complex in the category of sheaves on $ \\\\mathcal{C} $ with values in\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: returned signatures are component/finiteness infrastructure, ordinary Cech nerves, homological bounds or mapping-cone infrastructure, not this statement"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The augmented derived sections of a finite surjective Cech nerve compute derived global sections and commute with restriction along a morphism of augmented schemes",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The functor constructs a mapping from the over category over $ D(i') $ to the category of schemes by first applying the post-composition with $ D $, then taking the pullback along the affine open imme\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For each index $ j $ in the zeroth component of the affine refinement cover $ \\\\mathcal{U}_D $, this constructs a cone over the diagram $ A.D'(j) $ by first applying the pullback functor along the affi\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For each index $ j $ in the zeroth component of the affine refinement cover $ \\\\mathcal{U}_D $, the cone $ A.c' j $ constructed via the pullback along the affine open immersion $ \\\\mathcal{U}_D(j) \\\\to D\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"A morphism $ i' \\to i $ in the index category $\\\\mathcal{I}$, chosen to ensure compatibility of the induced morphism $X \\to \\\\varprojlim D$ with the diagonal cover's open subsets. This morphism satisfies \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj i)] [AlgebraicGeometry.LocallyOfFiniteType f]\\n \", \"doc\": \"Given a diagram $ D: \\\\mathcal{I} \\\\to \\\\text{Sch} $ of schemes, a natural transformation from $ D $ to the constant diagram at $ S $, and a morphism $ X \\\\to S $, there exists an index $ j $ in the refin\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.g\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The morphism $ g $ maps the object $ D(i') $ in the diagram to the pullback of $ f $ with itself, constructed by composing the diagram's morphism $ D(h_{i'i}) $ with the unique lift provided by the pu\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.cechNerveEquiv\", \"module\": \"Mathlib/AlgebraicTopology/CechNerve\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 :\\n        ∀ (n : ℕ) (f : CategoryTheory.Arrow C),\\n          CategoryTheory.Limits.HasWidePullback f.right (fun x => f.left) fun x => f.hom] →\\n      (X : CategoryTheory.SimplicialObject.Augmented C) →\\n        (F : CategoryTheory\", \"doc\": \"An equivalence between morphisms from an augmented simplicial object $X$ to an arrow $F$ in the category $\\\\mathcal{C}$ and morphisms from $X$ to the augmented Čech nerve of $F$. This bijection is esta\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: returned signatures are component/finiteness infrastructure, ordinary Cech nerves, homological bounds or mapping-cone infrastructure, not this statement"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"Cech\"",
-   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Lean.MessageData.maxTraceChildren\", \"module\": \"Lean.Message\", \"type\": \" : Lean.Option ℕ\", \"doc\": \"Maximum number of trace node children to display by default to prevent slowdowns from rendering. In\\nthe info view, more children can be expanded interactively.\"}\n  {\"name\": \"Lean.Widget.LazyTraceChildren\", \"module\": \"Lean.Widget.InteractiveDiagnostic\", \"type\": \" : Type\", \"doc\": \"\"}\n  {\"name\": \"Lean.Widget.instTypeNameLazyTraceChildren\", \"module\": \"Lean.Widget.InteractiveDiagnostic\", \"type\": \" : TypeName Lean.Widget.LazyTraceChildren\", \"doc\": \"\"}\n  {\"name\": \"Lean.Widget.LazyTraceChildren.indent\", \"module\": \"Lean.Widget.InteractiveDiagnostic\", \"type\": \" (self : Lean.Widget.LazyTraceChildren) : ℕ\", \"doc\": \"\"}\n  {\"name\": \"Lean.Widget.LazyTraceChildren.children\", \"module\": \"Lean.Widget.InteractiveDiagnostic\", \"type\": \" (self : Lean.Widget.LazyTraceChildren) : Array (Lean.Server.WithRpcRef Lean.MessageData)\", \"doc\": \"\"}\n  {\"name\": \"Lean.Widget.LazyTraceChildren.mk\", \"module\": \"Lean.Widget.InteractiveDiagnostic\", \"type\": \" (indent : ℕ) (children : Array (Lean.Server.WithRpcRef Lean.MessageData)) : Lean.Widget.LazyTraceChildren\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.cechNerveTerminalFrom\", \"module\": \"Mathlib.AlgebraicTopology.CechNerve\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasFiniteProducts C] (X : C) : CategoryTheory.SimplicialObject C\", \"doc\": \"Given an object `X : C`, the natural simplicial object sending `⦋n⦌` to `Xⁿ⁺¹`.\"}\n  {\"name\": \"CategoryTheory.CechNerveTerminalFrom.wideCospan\", \"module\": \"Mathlib.AlgebraicTopology.CechNerve\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasTerminal C] (ι : Type w) (X : C) : CategoryTheory.Functor (CategoryTheory.Limits.WidePullbackShape ι) C\", \"doc\": \"The diagram `Option ι ⥤ C` sending `none` to the terminal object and `some j` to `X`.\"}\n  {\"name\": \"CategoryTheory.CechNerveTerminalFrom.hasLimit_wideCospan\", \"module\": \"Mathlib.AlgebraicTopology.CechNerve\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasTerminal C] (ι : Type w) [CategoryTheory.Limits.HasFiniteProducts C] [Finite ι] (X : C) : CategoryTheory.Limits.HasLimit (CategoryTheory.CechNerveTerminalFrom.wideCospan ι X)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.CechNerveTerminalFrom.wideCospan.limitCone\", \"module\": \"Mathlib.AlgebraicTopology.CechNerve\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasTerminal C] (ι : Type w) [CategoryTheory.Limits.HasFiniteProducts C] [Finite ι] (X : C) : CategoryTheory.Limits.LimitCone (CategoryTheory.CechNerveTerminalFrom.wideCospan ι X)\", \"doc\": \"The product `Xᶥ` is the vertex of a limit cone on `wideCospan ι X`.\"}\n  {\"name\": \"CategoryTheory.CechNerveTerminalFrom.hasWidePullback'\", \"module\": \"Mathlib.AlgebraicTopology.CechNerve\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasTerminal C] (ι : Type w) [CategoryTheory.Limits.HasFiniteProducts C] [Finite ι] (X : C) : CategoryTheory.Limits.HasWidePullback (⊤_ C) (fun x => X) fun x => CategoryTheory.Limits.terminal.from X\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.CechNerveTerminalFrom.uniqueToWideCospanNone\", \"module\": \"Mathlib.AlgebraicTopology.CechNerve\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasTerminal C] (ι : Type w) (X Y : C) : Unique (Y ⟶ (CategoryTheory.CechNerveTerminalFrom.wideCospan ι X).obj none)\", \"doc\": \"\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: returned signatures are component/finiteness infrastructure, ordinary Cech nerves, homological bounds or mapping-cone infrastructure, not this statement"
-  },
-  {
-   "tool": "grep",
-   "query": "descent|spectralSequence",
-   "results": "[grep] OK 0 hit(s)",
-   "date": "2026-10-17",
-   "verdict": "no match: returned signatures are component/finiteness infrastructure, ordinary Cech nerves, homological bounds or mapping-cone infrastructure, not this statement",
-   "subdirectory": "AlgebraicGeometry/Sites"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Finite surjective Cech nerve computes bounded below etale hypercohomology naturally",
-   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.CosimplicialObject.cechConerve\", \"module\": \"Mathlib.AlgebraicTopology.CechNerve\", \"type\": \": Arrow C ⥤ CosimplicialObject C\", \"doc\": \"The Cech nerve construction defines a functor from the arrow category of a category $\\\\mathcal{C}$ to the category of cosimplicial objects in $\\\\mathcal{C}$. For each morphism $f : X \\\\to Y$ in $\\\\mathcal\"}\n  {\"name\": \"CategoryTheory.Arrow.cechConerve\", \"module\": \"Mathlib.AlgebraicTopology.CechNerve\", \"type\": \": CosimplicialObject C\", \"doc\": \"For a morphism $ f : X \\to Y $ in a category $\\\\mathcal{C}$, the Cech nerve constructs a cosimplicial object where each level $n$ is the wide pushout of $f$ indexed by $[n] = \\\\{0, 1, \\\\dots, n\\\\}$. Specif\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.cechNerve\", \"module\": \"Mathlib.AlgebraicTopology.CechNerve\", \"type\": \": Arrow C ⥤ SimplicialObject C\", \"doc\": \"The functor from the arrow category of a category $\\\\mathcal{C}$ to the category of simplicial objects in $\\\\mathcal{C}$, which maps each morphism $f: X \\\\to Y$ to its Čech nerve (a simplicial object con\"}\n  {\"name\": \"CategoryTheory.cechNerveTerminalFrom\", \"module\": \"Mathlib.AlgebraicTopology.CechNerve\", \"type\": \"{C : Type u} [Category.{v} C] [HasFiniteProducts C] (X : C) : SimplicialObject C\", \"doc\": \"For a category $\\\\mathcal{C}$ with finite products and an object $X \\\\in \\\\mathcal{C}$, this defines the Cech nerve simplicial object where: \\n- The $n$-th object is the product of $X$ with itself $n+1$ t\"}\n  {\"name\": \"CategoryTheory.Arrow.cechNerve\", \"module\": \"Mathlib.AlgebraicTopology.CechNerve\", \"type\": \": SimplicialObject C\", \"doc\": \"For a category $\\\\mathcal{C}$ and a morphism $f: X \\\\to Y$ in $\\\\mathcal{C}$, the Čech nerve is a simplicial object in $\\\\mathcal{C}$ where the $n$-th object is the $(n+1)$-fold wide pullback of $f$ along\"}\n  {\"name\": \"CategoryTheory.Arrow.augmentedCechNerve\", \"module\": \"Mathlib.AlgebraicTopology.CechNerve\", \"type\": \": SimplicialObject.Augmented C\", \"doc\": \"For a category $\\\\mathcal{C}$ and a morphism $f: X \\\\to Y$ in $\\\\mathcal{C}$, the augmented Čech nerve is an augmented simplicial object in $\\\\mathcal{C}$ whose underlying simplicial object is the Čech ne\"}\n  {\"name\": \"CategoryTheory.Arrow.cechConerve_obj\", \"module\": \"Mathlib.AlgebraicTopology.CechNerve\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (f : CategoryTheory.Arrow C)\\n  [inst_1 : ∀ (n : ℕ), CategoryTheory.Limits.HasWidePushout f.left (fun x => f.right) fun x => f.hom]\\n  (n : SimplexCategory),\\n  f.cechConerve.obj n = CategoryTheory.Limits.widePushout f.left (fun x => f.right) fun\", \"doc\": \"For a morphism $ f : X \\to Y $ in a category $\\\\mathcal{C}$, the object at level $n$ of the Cech nerve cosimplicial object is the wide pushout of $f$ indexed by the ordinal $[n] = \\\\{0, 1, \\\\dots, n\\\\}$. T\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.cechNerve_obj\", \"module\": \"Mathlib.AlgebraicTopology.CechNerve\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  [inst_1 :\\n    ∀ (n : ℕ) (f : CategoryTheory.Arrow C),\\n      CategoryTheory.Limits.HasWidePullback f.right (fun x => f.left) fun x => f.hom]\\n  (f : CategoryTheory.Arrow C), CategoryTheory.SimplicialObject.cechNerve.obj f = f.cechNerve\", \"doc\": \"For any morphism $f: X \\to Y$ in a category $\\\\mathcal{C}$, the object component of the Čech nerve functor sends $f$ to its Čech nerve simplicial object, which is constructed as the sequence of iterated\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: returned signatures are component/finiteness infrastructure, ordinary Cech nerves, homological bounds or mapping-cone infrastructure, not this statement"
+   "verdict": "no match: hits are generic infrastructure and do not state this node",
+   "subdirectory": "CategoryTheory"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nearby-finite-base-descent",
@@ -110,5 +194,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finite-base-cech-hypercohomology",
+  "worker": "stage1",
+  "summary": "Repaired every returned point: exact Čech rows are used only before replacement; bounded functorial injective resolutions preserve the common lower bound and all cofaces; the sheaf-level column-cone spectral sequence proves total comparison; finite-diagonal injective totals are K-injective; mapped-total and module-valued finite-pushforward Leray compute the columns. Base restriction is a common-resolution roof of actual augmented cosimplicial complexes with a columnwise quasi-isomorphic backward map. Its total comparison now applies the module cone node as a statement. The Leray support statement gives a precise canonical-mate compatibility square and needs no finite base-change isomorphism. Stale tool uses were removed and all off-unit proof tools declared.",
+  "blueprint": "The finite-surjective Čech descent supporting lem-trf-local-term-locality through lem-trf-nearby-finite-base-descent: Steps 1–4 prove augmentation/derived totalization, Step 5 convergence with the original integer lower bound, Steps 6–7 restriction compatibility. Three retained support nodes give exact module augmentation, finite-pushforward comparison, and a generic resolved-diagram roof. The existing definition def-kun-rgamma-unbounded supplies module derived sections, so the duplicate sandbox definition was dropped.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-cartan-eilenberg-augmentation-quasi-iso",
+    "why": "Applies only to the unreplaced exact Čech rows to identify their sheaf total. This is a generic tool, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-sp-cartan-eilenberg-mapped-total",
+    "why": "Additivity commutes with the finite diagonal sums for sections of the replaced total. This is a generic tool, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-sp-filtered-complex-associated-spectral-sequence-construction",
+    "why": "Identifies the initial graded differential of the Čech filtration. This is a generic tool, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-functorial-bounded-injective-resolution",
+    "why": "Supplies one strict functorial resolution with injective terms and preservation of every lower bound. This is a generic tool, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-grothendieck-functorial-injective-embedding",
+    "why": "Supplies the embedding hypothesis required by the bounded functorial resolution theorem. This is a generic tool, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Establishes the Grothendieck module coefficient category, rather than the abelian-sheaf category. This is a generic tool, not a replacement of a unit step."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exact module inverse image, adjunction and canonical coefficient identifications used throughout. This is a generic tool, not a replacement of a unit step."
+   },
+   {
+    "node": "prop-weil-pbc-kinjective-resolutions-exist",
+    "why": "The bounded-below-injective clause supplies K-injectivity of the finite-diagonal total. This is a generic tool, not a replacement of a unit step."
+   },
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "Generic abelian-category spectral sequence supplies both the sheaf-level acyclic-cone comparison and convergence. This is a generic tool, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-kun-rgamma-unbounded-well-defined",
+    "why": "A comparison between the two K-injective resolutions of F induces an isomorphism after sections; this module-valued tool is not supplied by the trace-formula unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-cartan-eilenberg-augmentation-quasi-iso",
+  "lem-sp-cartan-eilenberg-mapped-total",
+  "lem-sp-filtered-complex-associated-spectral-sequence-construction",
+  "lem-weil-pbc-functorial-bounded-injective-resolution",
+  "lem-weil-pbc-grothendieck-functorial-injective-embedding",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-kun-rgamma-unbounded-well-defined"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-5cd4358bf",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-5cd4358bf (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and the three new nodes in full, plus every cited node's statement. Sources checked at the cited place: Stacks 09Z2 (etale-cohomology.tex l.8412-8487), 03QP, and derived.tex 0141 with remark-match; tags 015M/015J/0133/0130/0132/012K/0959 were resolved through tags/tags. Step 1 applies the Cartan-Eilenberg augmentation criterion only to the unreplaced exact rows, which needs no injectivity. Step 2 uses the bounded functorial resolution, with hypotheses supplied by the Grothendieck and embedding nodes; I checked that naturality gives the bicomplex map. Step 3: the column-cone double complex is first-quadrant after the shift, so thm-sp gives an acyclic total; the sign map is checked. Step 4: the finite-diagonal total of injectives is K-injective by the 079P clause; I checked that I(F)->Tot J is a chain map (I(d0 e)=I(d1 e)) and that kun-well-defined applies; mapped-total needs only additivity. Step 5: Čech degree is the first filtration index, and the reindexing j-a and the finite range 0<=q<=n-a are checked. Steps 6-7: b_q is node 2's mate; the roof's v is a columnwise quasi-iso, so the cone-comparison lemma applies; node 2's square gives the column map as res_g. New nodes are all true and not duplicates. Node 1 is the module form of 09Z2's exactness assertion; the existing 09Z2 hits are set-level degree-0 descent nodes. Node 2: p_* is exact, preserves injectives through its exact left adjoint, and the square holds; the existing Leray nodes are abelian or Z/n only. Node 3 is a generic roof lemma, not a clause of the parent. Form checks: blueprint from/via are correct, searches are recorded in three kinds, no SGA is cited, and proof_deps equal the union of uses. I accept all 10 declared tool_uses as generic homological tools. Edge cases tested: empty Y, Z=Y, split cover, a purely inseparable cover and negative a. Note for the parent, lem-trf-nearby-finite-base-descent step 5: the item's restriction map on resolved diagrams is a roof with a columnwise quasi-iso backward arrow. Applying the cone lemma to it needs one standard extra line (a homotopy fibre product). No changes made."
  }
 }
