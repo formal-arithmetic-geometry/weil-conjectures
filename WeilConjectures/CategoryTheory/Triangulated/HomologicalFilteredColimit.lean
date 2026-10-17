@@ -37,20 +37,20 @@ variable {I A : Type*} [Category I] [Category A] [Abelian A] [HasColimitsOfShape
   [HasExactColimitsOfShape I A]
 
 lemma exact_flip_comp_colim {n : ℕ} (S : I ⥤ ComposableArrows A n) (hS : ∀ i, (S.obj i).Exact) :
-    (S.flip ⋙ colim : ComposableArrows A n).Exact := by
-  have hc : (S.flip : ComposableArrows (I ⥤ A) n).IsComplex :=
+    ComposableArrows.Exact (S.flip ⋙ colim : ComposableArrows A n) := by
+  have hc : ComposableArrows.IsComplex (S.flip : ComposableArrows (I ⥤ A) n) :=
     ⟨fun k hk ↦ by
       ext j
       exact (hS j).toIsComplex.zero k hk⟩
   refine ⟨⟨fun k hk ↦ ?_⟩, fun k hk ↦ ?_⟩
   · change colim.map _ ≫ colim.map _ = 0
     rw [← Functor.map_comp, hc.zero k hk, Functor.map_zero]
-  · have hex : (hc.sc k hk).Exact := by
+  · have hex : (ComposableArrows.sc (S.flip : ComposableArrows (I ⥤ A) n) hc k hk).Exact := by
       rw [ShortComplex.exact_iff_isZero_homology, Functor.isZero_iff]
       intro j
-      rw [((hc.sc k hk).mapHomologyIso ((evaluation I A).obj j)).symm.isZero_iff,
-        ← ShortComplex.exact_iff_isZero_homology]
-      exact (hS j).exact k hk
+      exact IsZero.of_iso ((ShortComplex.exact_iff_isZero_homology _).1 ((hS j).exact k hk))
+        ((ComposableArrows.sc (S.flip : ComposableArrows (I ⥤ A) n) hc k hk).mapHomologyIso
+          ((evaluation I A).obj j)).symm
     exact hex.map colim
 
 end ComposableArrows
@@ -76,13 +76,23 @@ noncomputable def homologySequenceComposableArrows₅Functor (n₀ n₁ : ℤ) (
   map {T T'} φ := homMk₅ ((F.shift n₀).map φ.hom₁) ((F.shift n₀).map φ.hom₂)
     ((F.shift n₀).map φ.hom₃) ((F.shift n₁).map φ.hom₁) ((F.shift n₁).map φ.hom₂)
     ((F.shift n₁).map φ.hom₃)
-    (by dsimp; rw [← Functor.map_comp, ← Functor.map_comp, φ.comm₁])
-    (by dsimp; rw [← Functor.map_comp, ← Functor.map_comp, φ.comm₂])
-    (by dsimp; rw [F.homologySequenceδ_naturality])
-    (by dsimp; rw [← Functor.map_comp, ← Functor.map_comp, φ.comm₁])
-    (by dsimp; rw [← Functor.map_comp, ← Functor.map_comp, φ.comm₂])
-  map_id T := by ext k; fin_cases k <;> simp
-  map_comp φ ψ := by ext k; fin_cases k <;> simp
+    (by
+      change (F.shift n₀).map T.mor₁ ≫ _ = _ ≫ (F.shift n₀).map T'.mor₁
+      rw [← Functor.map_comp, ← Functor.map_comp, φ.comm₁])
+    (by
+      change (F.shift n₀).map T.mor₂ ≫ _ = _ ≫ (F.shift n₀).map T'.mor₂
+      rw [← Functor.map_comp, ← Functor.map_comp, φ.comm₂])
+    (by
+      change F.homologySequenceδ T n₀ n₁ h ≫ _ = _ ≫ F.homologySequenceδ T' n₀ n₁ h
+      exact (F.homologySequenceδ_naturality T T' φ n₀ n₁ h).symm)
+    (by
+      change (F.shift n₁).map T.mor₁ ≫ _ = _ ≫ (F.shift n₁).map T'.mor₁
+      rw [← Functor.map_comp, ← Functor.map_comp, φ.comm₁])
+    (by
+      change (F.shift n₁).map T.mor₂ ≫ _ = _ ≫ (F.shift n₁).map T'.mor₂
+      rw [← Functor.map_comp, ← Functor.map_comp, φ.comm₂])
+  map_id T := by apply hom_ext₅ <;> exact Functor.map_id _ _
+  map_comp φ ψ := by apply hom_ext₅ <;> exact Functor.map_comp _ _ _
 
 variable [HasExactColimitsOfShape I A] {F}
 
@@ -99,8 +109,10 @@ noncomputable def colimitHomologySequenceComparison (n₀ n₁ : ℤ) (h : n₀ 
     (((evaluation _ A).obj k).mapCocone ((F.homologySequenceComposableArrows₅Functor n₀ n₁
       h).mapCocone s))
   naturality k k' f := by
-    ext i
-    simp [← NatTrans.naturality]
+    apply colimit.hom_ext
+    intro i
+    erw [ι_colimMap_assoc, colimit.ι_desc, colimit.ι_desc_assoc]
+    exact ((F.homologySequenceComposableArrows₅Functor n₀ n₁ h).map (s.ι.app i)).naturality f
 
 include hT hs in
 /-- **Two out of three**: continuity on the first and third vertices of a colimit of triangles
@@ -114,23 +126,96 @@ lemma IsContinuousOn.of_triangle₂ (h₁ : F.IsContinuousOn (Triangle.π₁.map
       (T ⋙ F.homologySequenceComposableArrows₅Functor n₀ n₁ h)
       (fun i ↦ F.homologySequenceComposableArrows₅_exact _ (hT i) n₀ n₁ h)
   have hex' (n₀ n₁ : ℤ) (h : n₀ + 1 = n₁) := F.homologySequenceComposableArrows₅_exact _ hs n₀ n₁ h
-  have hm : Mono (colimit.desc (Triangle.π₂.mapCocone s).diagram ⋙ F.shift n
+  have hm : Mono (colimit.desc ((T ⋙ Triangle.π₂) ⋙ F.shift n)
       ((F.shift n).mapCocone (Triangle.π₂.mapCocone s))) := by
-    have := ComposableArrows.Abelian.mono_of_epi_of_mono_of_mono'' (k := 2) (by omega)
+    have := Abelian.mono_of_epi_of_mono_of_mono'' (k := 2) (by omega)
       (hex (n - 1) n (by omega)) (hex' (n - 1) n (by omega))
       (colimitHomologySequenceComparison T s (n - 1) n (by omega)) 2 3 4 5 rfl rfl rfl rfl
       (by have := h₃ (n - 1); exact this.epi_of_iso) (by have := h₁ n; exact this.mono_of_iso)
       (by have := h₃ n; exact this.mono_of_iso)
     exact this
-  have he : Epi (colimit.desc (Triangle.π₂.mapCocone s).diagram ⋙ F.shift n
+  have he : Epi (colimit.desc ((T ⋙ Triangle.π₂) ⋙ F.shift n)
       ((F.shift n).mapCocone (Triangle.π₂.mapCocone s))) := by
-    have := ComposableArrows.Abelian.epi_of_epi_of_epi_of_mono'' (k := 0) (by omega)
+    have := Abelian.epi_of_epi_of_epi_of_mono'' (k := 0) (by omega)
       (hex n (n + 1) rfl) (hex' n (n + 1) rfl)
       (colimitHomologySequenceComparison T s n (n + 1) rfl) 0 1 2 3 rfl rfl rfl rfl
       (by have := h₁ n; exact this.epi_of_iso) (by have := h₃ n; exact this.epi_of_iso)
       (by have := h₁ (n + 1); exact this.mono_of_iso)
     exact this
   exact isIso_of_mono_of_epi _
+
+section Transport
+
+variable {B : Type*} [Category B] [HasColimitsOfShape I B]
+
+omit [HasColimitsOfShape I A] [HasExactColimitsOfShape I A] in
+/-- The comparison map `colim_i K(G i) ⟶ K(s.pt)` is an isomorphism for one cocone if and only if
+it is for an isomorphic cocone over an isomorphic diagram. -/
+lemma isIso_colimitDesc_iff_of_iso {G G' : I ⥤ C} (α : G ≅ G') {s : Cocone G}
+    {s' : Cocone G'} (β : s.pt ≅ s'.pt) (hβ : ∀ i, s.ι.app i ≫ β.hom = α.hom.app i ≫ s'.ι.app i)
+    (K : C ⥤ B) :
+    IsIso (colimit.desc (G ⋙ K) (K.mapCocone s)) ↔
+      IsIso (colimit.desc (G' ⋙ K) (K.mapCocone s')) := by
+  have h : colimit.desc (G ⋙ K) (K.mapCocone s) =
+      (HasColimit.isoOfNatIso (Functor.isoWhiskerRight α K)).hom ≫
+        colimit.desc (G' ⋙ K) (K.mapCocone s') ≫ K.map β.inv := by
+    apply colimit.hom_ext
+    intro i
+    simp only [colimit.ι_desc, Functor.mapCocone_ι_app, HasColimit.isoOfNatIso_ι_hom_assoc,
+      Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, colimit.ι_desc_assoc,
+      Functor.comp_obj, ← Functor.map_comp]
+    congr 1
+    rw [← Category.assoc, ← hβ, Category.assoc, β.hom_inv_id]
+    exact (Category.comp_id _).symm
+  rw [h]
+  constructor
+  · intro _
+    have : IsIso (colimit.desc (G' ⋙ K) (K.mapCocone s') ≫ K.map β.inv) :=
+      IsIso.of_isIso_comp_left (HasColimit.isoOfNatIso (Functor.isoWhiskerRight α K)).hom _
+    exact IsIso.of_isIso_comp_right _ (K.map β.inv)
+  · intro _
+    infer_instance
+
+omit [HasColimitsOfShape I A] [HasExactColimitsOfShape I A] in
+/-- The comparison map for `K` is an isomorphism if and only if it is for an isomorphic
+functor `K'`. -/
+lemma isIso_colimitDesc_iff_of_natIso {G : I ⥤ C} (s : Cocone G) {K K' : C ⥤ B} (e : K ≅ K') :
+    IsIso (colimit.desc (G ⋙ K) (K.mapCocone s)) ↔
+      IsIso (colimit.desc (G ⋙ K') (K'.mapCocone s)) := by
+  have h : colimit.desc (G ⋙ K) (K.mapCocone s) =
+      (HasColimit.isoOfNatIso (Functor.isoWhiskerLeft G e)).hom ≫
+        colimit.desc (G ⋙ K') (K'.mapCocone s) ≫ e.inv.app s.pt := by
+    apply colimit.hom_ext
+    intro i
+    simp
+  rw [h]
+  constructor
+  · intro _
+    have : IsIso (colimit.desc (G ⋙ K') (K'.mapCocone s) ≫ e.inv.app s.pt) :=
+      IsIso.of_isIso_comp_left (HasColimit.isoOfNatIso (Functor.isoWhiskerLeft G e)).hom _
+    exact IsIso.of_isIso_comp_right _ (e.inv.app s.pt)
+  · intro _
+    infer_instance
+
+end Transport
+
+omit [HasExactColimitsOfShape I A] in
+/-- Continuity on a cocone implies continuity on its shifts. -/
+lemma IsContinuousOn.shift {G : I ⥤ C} {s : Cocone G} (hs : F.IsContinuousOn s) (a : ℤ) :
+    F.IsContinuousOn ((shiftFunctor C a).mapCocone s) := by
+  intro n
+  have := hs (a + n)
+  exact (isIso_colimitDesc_iff_of_natIso s (F.shiftIso a n (a + n) rfl).symm).1 this
+
+include hT hs in
+/-- **Two out of three**: continuity on the second and third vertices of a colimit of triangles
+implies continuity on the first. -/
+lemma IsContinuousOn.of_triangle₁ (h₂ : F.IsContinuousOn (Triangle.π₂.mapCocone s))
+    (h₃ : F.IsContinuousOn (Triangle.π₃.mapCocone s)) :
+    F.IsContinuousOn (Triangle.π₁.mapCocone s) :=
+  IsContinuousOn.of_triangle₂ (T ⋙ Pretriangulated.invRotate C)
+    (fun i ↦ inv_rot_of_distTriang _ (hT i)) ((Pretriangulated.invRotate C).mapCocone s)
+    (inv_rot_of_distTriang _ hs) (h₃.shift (-1)) h₂
 
 end Functor
 

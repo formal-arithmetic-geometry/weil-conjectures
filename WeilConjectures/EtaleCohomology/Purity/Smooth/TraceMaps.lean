@@ -29,9 +29,9 @@ this input, twisted by `(1)[2]`, as an argument:
 
 ## Implementation notes
 
-The composition isomorphisms of compactly supported direct images, the projection formula and
-the symmetry of the derived tensor product are only available as `Nonempty` statements in the
-library; the recursive definitions use chosen isomorphisms (`Nonempty.some`) for them.
+The composition isomorphisms of compactly supported direct images and the projection formula
+are only available as `Nonempty` statements in the library; the definitions use chosen
+isomorphisms (`Nonempty.some`) for them.
 -/
 
 @[expose] public section
@@ -162,12 +162,17 @@ projective line over every scheme on which the exponent of `Λ` is invertible. -
 abbrev ProjectiveLineInputs : Type (u + 1) :=
   ∀ (S : Scheme.{u}) [HasInvertibleExponent Λ S], ProjectiveLineInput Λ S
 
+/-- The type `Rp_{c!} Λ(c)[2c] ⟶ Λ_S` of the affine-space traces. -/
+def AffineSpaceTraceType (c : ℕ) (S : Scheme.{u}) [HasInvertibleExponent Λ S] :
+    Type (u + 1) :=
+  (R(𝔸(ULift.{u} (Fin c); S) ↘ S)_![ModuleCat.{u + 1} Λ]).obj
+    ((twistShift Λ 𝔸(ULift.{u} (Fin c); S) c).obj (constantComplex Λ 𝔸(ULift.{u} (Fin c); S))) ⟶
+      constantComplex Λ S
+
 /-- The affine-space trace in dimension zero: the identification `Rp_{0!} Λ ≅ Λ_S` along the
 isomorphism `p_0 : 𝔸⁰_S ≅ S`. -/
 noncomputable def affineSpaceTraceZero (S : Scheme.{u}) [HasInvertibleExponent Λ S] :
-    (R(𝔸(ULift.{u} (Fin 0); S) ↘ S)_![ModuleCat.{u + 1} Λ]).obj
-        ((twistShift Λ 𝔸(ULift.{u} (Fin 0); S) ((0 : ℕ) : ℤ)).obj
-          (constantComplex Λ 𝔸(ULift.{u} (Fin 0); S))) ⟶ constantComplex Λ S :=
+    AffineSpaceTraceType Λ 0 S :=
   haveI : HasCompactification (asIso (𝔸(ULift.{u} (Fin 0); S) ↘ S)).hom :=
     inferInstanceAs (HasCompactification (𝔸(ULift.{u} (Fin 0); S) ↘ S))
   (nonempty_iso_rightDerivedLowerShriek_twistShift_of_iso Λ
@@ -177,13 +182,8 @@ noncomputable def affineSpaceTraceZero (S : Scheme.{u}) [HasInvertibleExponent �
 /-- The inductive step of the affine-space trace: from a trace `tr` of `𝔸^c_S`, the trace of
 `𝔸^{c+1}_S ≅ 𝔸¹_{𝔸^c_S}`, the affine-line trace over `𝔸^c_S` followed by `tr`. -/
 noncomputable def affineSpaceTraceSucc (c : ℕ) (S : Scheme.{u}) [HasInvertibleExponent Λ S]
-    (e : ProjectiveLineInput Λ 𝔸(ULift.{u} (Fin c); S))
-    (tr : (R(𝔸(ULift.{u} (Fin c); S) ↘ S)_![ModuleCat.{u + 1} Λ]).obj
-        ((twistShift Λ 𝔸(ULift.{u} (Fin c); S) c).obj
-          (constantComplex Λ 𝔸(ULift.{u} (Fin c); S))) ⟶ constantComplex Λ S) :
-    (R(𝔸(ULift.{u} (Fin (c + 1)); S) ↘ S)_![ModuleCat.{u + 1} Λ]).obj
-        ((twistShift Λ 𝔸(ULift.{u} (Fin (c + 1)); S) (c + 1 : ℕ)).obj
-          (constantComplex Λ 𝔸(ULift.{u} (Fin (c + 1)); S))) ⟶ constantComplex Λ S :=
+    (e : ProjectiveLineInput Λ 𝔸(ULift.{u} (Fin c); S)) (tr : AffineSpaceTraceType Λ c S) :
+    AffineSpaceTraceType Λ (c + 1) S :=
   (nonempty_iso_rightDerivedLowerShriek_twistShift_affineSpace_succ Λ c S).some.hom ≫
     (R(𝔸(ULift.{u} (Fin c); S) ↘ S)_![ModuleCat.{u + 1} Λ]).map ((twistShift Λ _ c).map
       (affineLineTrace Λ 𝔸(ULift.{u} (Fin c); S) e)) ≫ tr
@@ -196,42 +196,13 @@ identification `Rp_{0!} Λ ≅ Λ_S` along the isomorphism `p_0 : 𝔸⁰_S ≅ 
 identification `Rp_{c+1,!} Λ(c + 1)[2(c + 1)] ≅ Rp_{c!}((Rq_! Λ(1)[2])(c)[2c])` along
 `𝔸^{c+1}_S ≅ 𝔸¹_{𝔸^c_S}`, followed by `Rp_{c!}` of the affine-line trace `∫_q` over `𝔸^c_S`
 twisted by `(c)[2c]`, and by `∫_{p_c}`. -/
-noncomputable def affineSpaceTrace (E : ProjectiveLineInputs Λ) (c : ℕ) :
-    ∀ (S : Scheme.{u}) [HasInvertibleExponent Λ S],
-      (R(𝔸(ULift.{u} (Fin c); S) ↘ S)_![ModuleCat.{u + 1} Λ]).obj
-        ((twistShift Λ 𝔸(ULift.{u} (Fin c); S) c).obj
-          (constantComplex Λ 𝔸(ULift.{u} (Fin c); S))) ⟶ constantComplex Λ S :=
-  Nat.rec (motive := fun c ↦ ∀ (S : Scheme.{u}) [HasInvertibleExponent Λ S],
-      (R(𝔸(ULift.{u} (Fin c); S) ↘ S)_![ModuleCat.{u + 1} Λ]).obj
-        ((twistShift Λ 𝔸(ULift.{u} (Fin c); S) c).obj
-          (constantComplex Λ 𝔸(ULift.{u} (Fin c); S))) ⟶ constantComplex Λ S)
-    (fun S _ ↦ affineSpaceTraceZero Λ S)
-    (fun c ih S _ ↦ affineSpaceTraceSucc Λ c S (E _) (ih S)) c
+noncomputable def affineSpaceTrace (E : ProjectiveLineInputs Λ) :
+    (c : ℕ) → ∀ (S : Scheme.{u}) [HasInvertibleExponent Λ S], AffineSpaceTraceType Λ c S
+  | 0 => fun S _ ↦ affineSpaceTraceZero Λ S
+  | c + 1 => fun S _ ↦ affineSpaceTraceSucc Λ c S (E 𝔸(ULift.{u} (Fin c); S))
+      (affineSpaceTrace E c S)
 
 end AffineSpace
-
-/-- The chosen identification `Rπ_!(Lπ^* K (c)[2c]) ≅ Rπ_!(Λ_V(c)[2c]) ⊗ K`, from the symmetry
-of the tensor product, the twisting object and the projection formula. -/
-theorem nonempty_iso_rightDerivedLowerShriek_twistShift_leftDerivedUpperStar {V Z : Scheme.{u}}
-    [HasInvertibleExponent Λ V] [HasInvertibleExponent Λ Z] (π : V ⟶ Z) [HasCompactification π]
-    (c : ℤ) (K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Nonempty ((R(π)_![ModuleCat.{u + 1} Λ]).obj
-        ((twistShift Λ V c).obj ((L((π)^*[ModuleCat.{u + 1} Λ])).obj K)) ≅
-      ((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj
-        ((R(π)_![ModuleCat.{u + 1} Λ]).obj ((twistShift Λ V c).obj (constantComplex Λ V)))).obj
-          K) := by
-  set A := ModuleCat.{u + 1} Λ
-  obtain ⟨β⟩ := nonempty_iso_derivedTensor_flip A V
-  obtain ⟨pf⟩ := nonempty_iso_rightDerivedLowerShriek_comp_derivedTensorRight A π K
-    (fun M ↦ hasProjectionFormula_of_finite Λ _ M _)
-  -- `(Lπ^* K ⊗ Λ(c))[2c] ≅ ((Λ ⊗ Λ(c))[2c]) ⊗ Lπ^* K`
-  let e : (twistShift Λ V c).obj ((L((π)^*[A])).obj K) ≅
-      ((derivedTensor A V).obj ((twistShift Λ V c).obj (constantComplex Λ V))).obj
-        ((L((π)^*[A])).obj K) :=
-    (shiftFunctor _ (2 * c)).mapIso ((β.app _).app _ ≪≫
-      ((derivedTensor A V).mapIso (derivedTensorLeftUnitor A V _).symm).app _) ≪≫
-    ((((derivedTensor A V).flip.obj ((L((π)^*[A])).obj K)).commShiftIso (2 * c)).app _).symm
-  exact ⟨(R(π)_![A]).mapIso e ≪≫ (pf.app _).symm⟩
 
 /-- Blueprint `pur9-def-purity-comparison`: The purity comparison
 
@@ -239,22 +210,24 @@ For a morphism `π : V ⟶ Z` with a compactly supported direct image and an int
 `∫_π : Rπ_! Λ_V(c)[2c] ⟶ Λ_Z` (for a vector bundle, the trace of the bundle; for `𝔸^c_B`, the
 affine-space trace `AlgebraicGeometry.Etale.affineSpaceTrace`), the purity comparison
 
-`γ_{π,K} : Lπ^* K (c)[2c] ⟶ Rπ^! K`
+`γ_{π,K} : Lπ^* K (c)[2c] = Λ_V(c)[2c] ⊗ᴸ Lπ^* K ⟶ Rπ^! K`
 
 is the morphism corresponding under `Rπ_! ⊣ Rπ^!` to
-`Rπ_!(Lπ^* K (c)[2c]) ≅ Rπ_!(Λ_V(c)[2c]) ⊗ K ⟶ Λ_Z ⊗ K ≅ K`, the first isomorphism being the
-symmetry of the tensor product and the projection formula
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_twistShift_leftDerivedUpperStar`).
--/
+`Rπ_!(Λ_V(c)[2c] ⊗ᴸ Lπ^* K) ≅ Rπ_!(Λ_V(c)[2c]) ⊗ᴸ K ⟶ Λ_Z ⊗ᴸ K ≅ K`, the first isomorphism
+being the projection formula (`AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`). The
+source is written `Λ_V(c)[2c] ⊗ᴸ Lπ^* K`, the form in which the blueprint applies the projection
+formula. -/
 noncomputable def purityComparison {V Z : Scheme.{u}} [HasInvertibleExponent Λ V]
-    [HasInvertibleExponent Λ Z] (π : V ⟶ Z) [HasCompactification π] (c : ℤ)
+    (π : V ⟶ Z) [HasCompactification π] (c : ℤ)
     (tr : (R(π)_![ModuleCat.{u + 1} Λ]).obj ((twistShift Λ V c).obj (constantComplex Λ V)) ⟶
       constantComplex Λ Z)
     (K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    (twistShift Λ V c).obj ((L((π)^*[ModuleCat.{u + 1} Λ])).obj K) ⟶
+    ((derivedTensor (ModuleCat.{u + 1} Λ) V).obj ((twistShift Λ V c).obj
+        (constantComplex Λ V))).obj ((L((π)^*[ModuleCat.{u + 1} Λ])).obj K) ⟶
       (R(π)^![ModuleCat.{u + 1} Λ]).obj K :=
   (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) π).homEquiv _ _
-    ((nonempty_iso_rightDerivedLowerShriek_twistShift_leftDerivedUpperStar Λ π c K).some.hom ≫
+    (((nonempty_iso_rightDerivedLowerShriek_comp_derivedTensorRight (ModuleCat.{u + 1} Λ) π K
+        (fun M ↦ hasProjectionFormula_of_finite Λ _ M _)).some.app _).inv ≫
       ((derivedTensor (ModuleCat.{u + 1} Λ) Z).map tr).app K ≫
         (derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) Z K).hom)
 
