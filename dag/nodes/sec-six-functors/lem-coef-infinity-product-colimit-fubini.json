@@ -275,5 +275,34 @@
   "group": "Q137",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-c14b1e699 (reviewer sub-agent of L); spot-checked: I read the item in full: an unchanged statement, 8 proof steps and no new nodes. I also read the full statements of def-cbc-enhanced-diagrams-cones, lem-cbc-enhanced-functor-cone-calculus, lem-coef-parametric-universal-arrows and lem-cbc-simplicial-composition-spine, the parent's Fubini step, the unit and chapter records, and paragraph 2 of the main-20261015 proof of prop-coef-integral-exceptional-adjoint. Step 2 instantiates the parametric node correctly: its dual clause with T=Delta_T and D_0=D_T, whose universal arrows are exactly the dual cone criterion, giving Phi with the correct variance. Step 4 handles an arbitrary prescribed (L,tau): it gets a from Phi_{K,J}, shows each a_j is an equivalence because both cocones are initial, then uses the componentwise criterion and inverse precomposition from composition-spine. Step 5 is a chain of mapping-space equivalences followed by the dual criterion, and the leg lambda_j o tau_{j,k} is correct. Step 6 uses only the J-colimit of L_0. Step 7 applies the dual formula with the large parameter P=D, which the node allows through universe enlargement. Step 8 handles parameters by literal restriction. Small cases tested: J=K=Delta^0; J=Delta^1 with K two points; K empty with J nonempty, where L_0 is the constant diagram at an initial object and step 5 shows its colimit is initial; J empty. I found no hypothesis used that is not in force, and no step relies on a cited node's proof. The DAG has no quasicategorical Fubini duplicate: lem-pc-colimit-fubini is ordinary-categorical. There is no cycle. I accept both declared tool_uses, cone-calculus and composition-spine, as generic sk-prop-sf-cbc foundations used as black boxes. The proof is agent-written with WANTED Chu-Haugseng and Kerodon sources, uses no SGA, and involves no target, coefficient category or base-change morphism. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-71176ec35",
+  "group": "NR",
+  "result": "fix",
+  "note": "Mathematics, dependencies, universes, edge cases, and verbatim signature accepted; immutable module compiled cleanly. review.md records all checks. Complete replacement report in fixes/ supplies the required independent second reading, replacing the author's self-check. Branch and snapshot unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityProductColimitFubini",
+  "declaration": "SSet.Enhanced.infinity_product_colimit_fubini",
+  "declarations": [
+   "SSet.Enhanced.ProductColimit.ColimitVertex",
+   "SSet.Enhanced.ProductColimit.ColimitFamily",
+   "SSet.Enhanced.ProductColimit.rowInclusion",
+   "SSet.Enhanced.ProductColimit.InnerColimits",
+   "SSet.Enhanced.ProductColimit.triangleFace",
+   "SSet.Enhanced.ProductColimit.Composite",
+   "SSet.Enhanced.ProductColimit.Comparison",
+   "SSet.Enhanced.ProductColimit.Order",
+   "SSet.Enhanced.infinity_product_colimit_fubini"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityProductColimitFubini.lean",
+  "statement": "theorem infinity_product_colimit_fubini (J K : SSet.{u}) [Quasicategory J] [Quasicategory K] (C : SSet.{max u v}) [Quasicategory C] (hJ : ∀ F : SSet.uliftFunctor.{v}.obj J ⟶ C, ∃ t : (coconeCategory F) _⦋0⦌, IsColimiting F t) (hK : ∀ F : SSet.uliftFunctor.{v}.obj K ⟶ C, ∃ t : (coconeCategory F) _⦋0⦌, IsColimiting F t) : ProductColimit.Order (SSet.uliftFunctor.{v}.obj J) (SSet.uliftFunctor.{v}.obj K) C ∧ ProductColimit.Order (SSet.uliftFunctor.{v}.obj K) (SSet.uliftFunctor.{v}.obj J) C",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
