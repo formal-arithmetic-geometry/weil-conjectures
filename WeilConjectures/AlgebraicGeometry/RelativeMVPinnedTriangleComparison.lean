@@ -84,10 +84,7 @@ theorem relativeMV_pinned_triangle_comparison
     (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')
     (φ : (derivedPullback g').obj K ⟶ K')
     [IsAffine S] [IsAffine S'] [QuasiCompact f] [QuasiSeparated f]
-    (hK : schemeDerivedQCohProperty X K) (hK' : schemeDerivedQCohProperty X' K')
-    (U V : X.Opens)
-    (hUqc : IsCompact (U : Set X)) (hVqc : IsCompact (V : Set X))
-    (hUVqc : IsCompact ((U ⊓ V : X.Opens) : Set X)) (hcover : U ⊔ V = ⊤) :
+    (U V : X.Opens) (hcover : U ⊔ V = ⊤) :
     let a := relativeMVLocalArrow f f' g g' hpull K K' φ
     let aX := relativeMVGlobalArrow f f' g g' hpull K K' φ
     ∃ (δ : (a (U ⊓ V)).left ⟶ aX.left⟦(1 : ℤ)⟧)
@@ -108,7 +105,7 @@ theorem relativeMV_pinned_triangle_comparison
     relativeMV_pinned_vertex_comparisons f f' g g' hpull K K' φ U V
   obtain ⟨d, d', csF, csG, _, _, hT, hT', hd⟩ :=
     derivedBaseChange_mayerVietoris_connectingSquare f f' g g' hpull K K'
-      hK hK' φ U V hUqc hVqc hUVqc hcover
+      φ U V hcover
   let F := schemeDerivedDirectImage f ⋙ derivedPullback g
   let G := schemeDerivedDirectImage f'
   let := csF

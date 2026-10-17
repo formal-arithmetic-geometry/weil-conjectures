@@ -178,9 +178,7 @@ theorem IsConnectedCurve.constant_proper_degree_coordinates
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]
     (c : Compactification f) [IsConnectedCurve c.g] [Smooth c.g]
-    (_hfin : (Set.range c.i.base)ᶜ.Finite)
-    (_hclosed : ∀ x ∈ (Set.range c.i.base)ᶜ, IsClosed ({x} : Set c.Z))
-    (n : ℕ) [NeZero n] (_hn : (n : k) ≠ 0)
+    (n : ℕ) [NeZero n] (hn : (n : k) ≠ 0)
     (r : ∀ q : ℕ, Sheaf.H (C.constantZMod n) q →+
         Sheaf.H ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).constantZMod n) q)
     (hr : (∀ q : ℕ, r q =
@@ -233,8 +231,8 @@ theorem IsConnectedCurve.constant_proper_degree_coordinates
   have : IsProper g := inferInstanceAs (IsProper (pullback.snd f b))
   have hnK : (n : K) ≠ 0 := by
     simpa only [map_natCast] using
-      (map_ne_zero (algebraMap k K)).mpr _hn
-  obtain ⟨d, hd⟩ := proper_kummer_degree_coordinates_aux f n _hn
+      (map_ne_zero (algebraMap k K)).mpr hn
+  obtain ⟨d, hd⟩ := proper_kummer_degree_coordinates_aux f n hn
   obtain ⟨dK, hdK⟩ := proper_kummer_degree_coordinates_aux g n hnK
   let e := (t 2).trans d
   let eK := (tK 2).trans dK
@@ -250,10 +248,10 @@ theorem IsConnectedCurve.constant_proper_degree_coordinates
     simpa only [eK, AddEquiv.trans_apply, AddEquiv.apply_symm_apply] using hdK hnD L
   refine ⟨hgenus, e, eK, ?_, he, heK⟩
   have hnC : IsUnit (n : Γ(C, ⊤)) := by
-    simpa using _hn.isUnit.map ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom
+    simpa using hn.isUnit.map ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom
   have hnD : IsUnit (n : Γ(D, ⊤)) := by
     simpa using hnK.isUnit.map ((Scheme.ΓSpecIso (.of K)).inv ≫ g.appTop).hom
-  have hnat := (constant_kummer_baseChange_naturality f c _hfin _hclosed n _hn
+  have hnat := (constant_kummer_baseChange_naturality f c n hn
     r hr ζ hζ hζK t tK ht htK).2.1 hnC hnD
   have := IsCurve.subsingleton_cohomologicalBrauerGroup_of_smooth f
   have hsurj : Function.Surjective (C.kummerδ₁ n hnC) := by

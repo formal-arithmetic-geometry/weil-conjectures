@@ -71,14 +71,9 @@ theorem relativeMV_canonicalTriangles
     (hpull : IsPullback g' f' f g)
     [IsAffine S] [IsAffine S'] [QuasiCompact f] [QuasiSeparated f]
     (K : schemeDerivedCategory X)
-    (hK : schemeDerivedQCohProperty X K)
     (K' : schemeDerivedCategory X')
-    (hK' : schemeDerivedQCohProperty X' K')
     (φ : (derivedPullback g').obj K ⟶ K')
-    (U V : X.Opens)
-    (hUqc : IsCompact (U : Set X)) (hVqc : IsCompact (V : Set X))
-    (hUVqc : IsCompact ((U ⊓ V : X.Opens) : Set X))
-    (hcover : U ⊔ V = ⊤)
+    (U V : X.Opens) (hcover : U ⊔ V = ⊤)
  :
     let a : X.Opens → Arrow (schemeDerivedCategory S') := fun W ↦
       Arrow.mk (schemeDerivedBaseChangeMap (W.ι ≫ f)
@@ -112,8 +107,8 @@ theorem relativeMV_canonicalTriangles
   classical
   let a := relativeMVLocalArrow f f' g g' hpull K K' φ
   let aX := relativeMVGlobalArrow f f' g g' hpull K K' φ
-  have h := relativeMV_boundary_completion f f' g g' hpull K K' φ hK hK'
-    U V hUqc hVqc hUVqc hcover
+  have h := relativeMV_boundary_completion f f' g g' hpull K K' φ
+    U V hcover
   let δ := Classical.choose h
   have h' := Classical.choose_spec h
   let δ' := Classical.choose h'

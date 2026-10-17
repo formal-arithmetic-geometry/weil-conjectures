@@ -178,7 +178,7 @@ theorem exists_cartesianHigherImage_finite_raw_assembly
     (D : I ⥤ Over (Spec (.of k)))
     [∀ i, QuasiCompact (D.obj i).hom] [∀ i, QuasiSeparated (D.obj i).hom]
     [∀ {i j : I} (a : i ⟶ j), IsAffineHom (D.map a).left]
-    (c : Cone D) (hc : IsLimit ((Over.forget _).mapCone c))
+    (c : Cone D)
     [QuasiCompact c.pt.hom] [QuasiSeparated c.pt.hom]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [QuasiCompact f] [QuasiSeparated f]
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -208,7 +208,6 @@ theorem exists_cartesianHigherImage_finite_raw_assembly
               (D.map a).left (Over.w (D.map a)).symm
               ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) = 0 := by
   classical
-  have _ := hc
   choose j a ha using hkill
   obtain ⟨l, b, d, hd⟩ := IsCofiltered.wideCospan a
   refine ⟨l, b, fun t ↦ ?_⟩

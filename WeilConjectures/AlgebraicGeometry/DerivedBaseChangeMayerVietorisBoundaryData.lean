@@ -156,12 +156,9 @@ Source: Stacks Tags 08BV and 0DJ9
 theorem mvBoundary_canonical_data
     {X S X' S' : Scheme.{u}} [IsAffine S] [IsAffine S']
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
-    [QuasiCompact f] [QuasiSeparated f] (hsq : IsPullback g' f' f g)
+    [QuasiCompact f] [QuasiSeparated f]
     (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')
-    (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))
-    (hUV : IsCompact ((U ⊓ V : X.Opens) : Set X)) (hcover : U ⊔ V = ⊤)
-    (hK : schemeDerivedQCohProperty X K) (hK' : schemeDerivedQCohProperty X' K')
-    (ψ : (derivedPullback g').obj K ⟶ K') :
+    (U V : X.Opens) (hcover : U ⊔ V = ⊤) :
     let δ := mvCanonicalBoundary X U V (U ⊓ V) rfl hcover K
     let δ' := mvCanonicalBoundary X' (g' ⁻¹ᵁ U) (g' ⁻¹ᵁ V) (g' ⁻¹ᵁ (U ⊓ V))
       (Scheme.Hom.preimage_inf g').symm
@@ -184,13 +181,6 @@ theorem mvBoundary_canonical_data
         distTriang (schemeDerivedCategory S') ∧
       (@Functor.mapTriangle _ _ _ _ _ _ (schemeDerivedDirectImage f') csG).obj T' ∈
         distTriang (schemeDerivedCategory S') := by
-  have _ := hsq
-  have _ := hU
-  have _ := hV
-  have _ := hUV
-  have _ := hK
-  have _ := hK'
-  have _ := ψ
   dsimp only
   have hT := pinned_boundary_distinguished X U V (U ⊓ V)
     (homOfLE inf_le_left) (homOfLE inf_le_right) rfl hcover K
@@ -206,64 +196,6 @@ theorem mvBoundary_canonical_data
   refine ⟨hT, hT', ?_, ?_⟩
   · exact (schemeDerivedDirectImage f ⋙ derivedPullback g).map_distinguished _ hT
   · exact (schemeDerivedDirectImage f').map_distinguished _ hT'
-
-set_option synthInstance.maxSize 2048 in
-set_option backward.isDefEq.respectTransparency false in
-/-- Existence of both canonical boundary morphisms and shift structures, together
-with distinguishedness of the two cover triangles and their images.  The
-compatibility equation is deliberately omitted; it is the separate remaining
-part of the connecting-square argument.
-Source: Stacks Project, Tags 08BV and 0DJ9.
-(blueprint: lem-pc-rf-mv-base-change-connecting-square-data).
-Proof: choose K-injective representatives with injective terms, apply the
-short-exact Mayer--Vietoris presentation to each cover, and transport the
-connecting morphism from `triangleOfSES` across the comparison isomorphisms.
-For each cover put δ = eC.inv ≫ triangleOfSESδ hS ≫ e.hom[1].
-The two presentation identities and cancellation of eC.hom with eC.inv give
-an isomorphism from triangleOfSES hS to the displayed cover triangle. Transport
-its distinguishedness using this isomorphism. Inverse image preserves the cover
-and intersection; uniqueness of arrows in the opens category identifies the
-mapped inclusions. Use mvCanonicalPullbackShift_triangulated for the pinned
-adjunction-mate shift, compose with the triangulated direct image, and apply
-map_distinguished to both cover triangles. -/
-theorem mvBoundary_data
-    {X S X' S' : Scheme.{u}} [IsAffine S] [IsAffine S']
-    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
-    [QuasiCompact f] [QuasiSeparated f] (hsq : IsPullback g' f' f g)
-    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')
-    (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))
-    (hUV : IsCompact ((U ⊓ V : X.Opens) : Set X)) (hcover : U ⊔ V = ⊤)
-    (hK : schemeDerivedQCohProperty X K) (hK' : schemeDerivedQCohProperty X' K')
-    (ψ : (derivedPullback g').obj K ⟶ K') :
-    ∃ (δ : (schemeDerivedDirectImage (U ⊓ V).ι).obj
-          ((schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory.obj K) ⟶ K⟦(1 : ℤ)⟧)
-      (δ' : (schemeDerivedDirectImage (g' ⁻¹ᵁ (U ⊓ V)).ι).obj
-          ((schemeOpenRestriction X' (g' ⁻¹ᵁ (U ⊓ V))).mapDerivedCategory.obj K') ⟶
-          K'⟦(1 : ℤ)⟧)
-      (csF : (schemeDerivedDirectImage f ⋙ derivedPullback g).CommShift ℤ)
-      (csG : (schemeDerivedDirectImage f').CommShift ℤ),
-      let T := mvBaseChangeTriangle X U V (U ⊓ V) (homOfLE inf_le_left)
-        (homOfLE inf_le_right) (mvOpenRestrictionAdjunction X U)
-        (mvOpenRestrictionAdjunction X V) (mvOpenRestrictionAdjunction X (U ⊓ V)) K δ
-      let T' := mvBaseChangeTriangle X' (g' ⁻¹ᵁ U) (g' ⁻¹ᵁ V)
-        (g' ⁻¹ᵁ (U ⊓ V)) ((Opens.map g'.base).map (homOfLE (inf_le_left : U ⊓ V ≤ U)))
-        ((Opens.map g'.base).map (homOfLE (inf_le_right : U ⊓ V ≤ V)))
-        (mvOpenRestrictionAdjunction X' (g' ⁻¹ᵁ U))
-        (mvOpenRestrictionAdjunction X' (g' ⁻¹ᵁ V))
-        (mvOpenRestrictionAdjunction X' (g' ⁻¹ᵁ (U ⊓ V))) K' δ'
-      T ∈ distTriang (schemeDerivedCategory X) ∧
-      T' ∈ distTriang (schemeDerivedCategory X') ∧
-      (@Functor.mapTriangle _ _ _ _ _ _
-        (schemeDerivedDirectImage f ⋙ derivedPullback g) csF).obj T ∈
-        distTriang (schemeDerivedCategory S') ∧
-      (@Functor.mapTriangle _ _ _ _ _ _ (schemeDerivedDirectImage f') csG).obj T' ∈
-        distTriang (schemeDerivedCategory S') := by
-  refine ⟨mvCanonicalBoundary X U V (U ⊓ V) rfl hcover K,
-    mvCanonicalBoundary X' (g' ⁻¹ᵁ U) (g' ⁻¹ᵁ V) (g' ⁻¹ᵁ (U ⊓ V))
-      (Scheme.Hom.preimage_inf g').symm
-      (by rw [← Scheme.Hom.preimage_sup, hcover, Scheme.Hom.preimage_top]) K',
-    mvCanonicalSourceShift f g, mvCanonicalTargetShift f', ?_⟩
-  exact mvBoundary_canonical_data f f' g g' hsq K K' U V hU hV hUV hcover hK hK' ψ
 
 /-- Compatibility of the specifically constructed SES boundaries for the specifically
 constructed adjunction-compatible shifts. There are no arbitrary boundary or shift
@@ -291,9 +223,7 @@ theorem mvBoundary_equation
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
     [QuasiCompact f] [QuasiSeparated f] (hsq : IsPullback g' f' f g)
     (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')
-    (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))
-    (hUV : IsCompact ((U ⊓ V : X.Opens) : Set X)) (hcover : U ⊔ V = ⊤)
-    (hK : schemeDerivedQCohProperty X K) (hK' : schemeDerivedQCohProperty X' K')
+    (U V : X.Opens) (hcover : U ⊔ V = ⊤)
     (ψ : (derivedPullback g').obj K ⟶ K') :
     let δ := mvCanonicalBoundary X U V (U ⊓ V) rfl hcover K
     let δ' := mvCanonicalBoundary X' (g' ⁻¹ᵁ U) (g' ⁻¹ᵁ V) (g' ⁻¹ᵁ (U ⊓ V))
@@ -309,11 +239,6 @@ theorem mvBoundary_equation
       mvBaseChangeOpenMap f f' g g' hsq.w K K' ψ (U ⊓ V) ≫
         (schemeDerivedDirectImage f').map δ' ≫
         (letI := csG; (schemeDerivedDirectImage f').commShiftIso (1 : ℤ)).hom.app K' := by
-  have _ := hU
-  have _ := hV
-  have _ := hUV
-  have _ := hK
-  have _ := hK'
   dsimp only
   let := mvCanonicalPullbackShift g'
   rw [mvCanonicalBaseChange_shift f f' g g' hsq.w _ K K' ψ (1 : ℤ)]

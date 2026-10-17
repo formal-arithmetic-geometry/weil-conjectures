@@ -91,7 +91,7 @@ theorem affineGlobalHomBaseChange_factorization
           (schemeGlobalDerivedHomOver (pullback.snd f g)).obj
             (op ((derivedPullback (pullback.fst f g)).obj M),
               (derivedPullback (pullback.fst f g)).obj K),
-        affineGlobalHomBaseChangeMap f g M K hM hK =
+        affineGlobalHomBaseChangeMap f g M K =
           a.hom ≫ Γ.map (schemeDerivedBaseChangeMap f (pullback.snd f g) g
             (pullback.fst f g) pullback.condition H) ≫ b.hom := by
   classical
@@ -103,7 +103,7 @@ theorem affineGlobalHomBaseChange_factorization
         (derivedPullback (pullback.fst f g)).obj K)
   let Γ := affineDerivedGlobalSections (𝟙 (Spec B))
   obtain ⟨adj, bS, bT, t, γ, s, c, hadj, hbS, hbT, ht, hγ, hs, hc, hφ⟩ :=
-    Classical.choose_spec (exists_globalHomPullbackComparison f g M K hM hK)
+    Classical.choose_spec (exists_globalHomPullbackComparison f g M K)
   subst adj
   have hbSfun := funext hbS
   have hbTfun := funext hbT
@@ -130,7 +130,7 @@ theorem affineGlobalHomBaseChange_factorization
           (derivedPullback (pullback.fst f g)).obj K) :=
     Γ.mapIso ((schemeDerivedDirectImage (pullback.snd f g)).mapIso (asIso θ)) ≪≫ d.app L
   refine ⟨a, b, ?_⟩
-  change globalHomPullbackComparison f g M K hM hK = _ at hφ
+  change globalHomPullbackComparison f g M K = _ at hφ
   unfold affineGlobalHomBaseChangeMap
   rw [hφ]
   exact hmate L (γ.app (op M, K))

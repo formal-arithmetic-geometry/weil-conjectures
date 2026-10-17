@@ -44,7 +44,7 @@ theorem cartesianRawClass_chart_naturality
     (D : I ⥤ Over (Spec (.of k)))
     [∀ i, QuasiCompact (D.obj i).hom] [∀ i, QuasiSeparated (D.obj i).hom]
     [∀ {i j : I} (a : i ⟶ j), IsAffineHom (D.map a).left]
-    (c : Cone D) (hc : IsLimit ((Over.forget _).mapCone c))
+    (c : Cone D)
     [QuasiCompact c.pt.hom] [QuasiSeparated c.pt.hom]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [QuasiCompact f] [QuasiSeparated f]
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -84,7 +84,6 @@ theorem cartesianRawClass_chart_naturality
             (restrictedOverCohomologyMap (pullback.snd f (D.obj j).hom)
               (((pullback.fst f (D.obj j).hom)^*[AddCommGrpCat.{u + 1}]).obj F)
               (q : ℤ) ((cartesianChartDiagram f D j).map a) W x) := by
-  have _ := hc
   intro m a
   change z ≫ (shiftFunctor _ (q : ℤ)).map
     (rawTransition (i := i) (j := m.left) D c f

@@ -133,6 +133,6 @@ theorem exists_cartesianRawClass_chart_representative
     simp only [Category.assoc, ← Functor.map_comp] at h
     rw [hcone] at h
     exact h.trans (cartesianChartCohomologyLift_exchange f D c F q j W V r hr l x)
-  · exact cartesianRawClass_chart_naturality D c hc f F q i j V z W hW r hr l b x hbase
+  · exact cartesianRawClass_chart_naturality D c f F q i j V z W hW r hr l b x hbase
 
 end AlgebraicGeometry.Etale

@@ -49,7 +49,7 @@ identifications. Empty opens give zero groups and satisfy the same argument.
 No exactness of a filtered colimit is asserted. -/
 theorem perfect_hom_mayerVietoris_stage_rows_core
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
-    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)
+    (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
     (i : I) (X : Scheme.{u}) (s₀ : X ⟶ Spec (R.obj i))
     [LocallyOfFinitePresentation s₀] [QuasiCompact s₀] [QuasiSeparated s₀]
     [∀ Z : Scheme.{u},
@@ -104,7 +104,7 @@ theorem perfect_hom_mayerVietoris_stage_rows_core
         PerfectHomLocalMap R c i X s₀ U V
           (colimit.desc (S.obj' 4) ⟨B.obj' 4, κ.app ⟨4, by decide⟩⟩) := by
   obtain ⟨D, d, hD, hd, e, b, he, hb, hlocal⟩ :=
-    perfect_hom_mayerVietoris_triangle_cocone R c hc i X s₀ U V hU hV Y t ht s hs P Q hP hQ
+    perfect_hom_mayerVietoris_triangle_cocone R c i X s₀ U V hU hV Y t ht s hs P Q hP hQ
   let S : ComposableArrows (Set.Ici i ⥤ AddCommGrpCat.{max u w}) 4 :=
     (D ⋙ perfectHomTriangleRowFunctor Y P).flip
   let B := perfectHomTriangleRow Y P d.pt

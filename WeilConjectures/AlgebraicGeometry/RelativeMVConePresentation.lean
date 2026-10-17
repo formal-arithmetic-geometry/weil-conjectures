@@ -65,10 +65,7 @@ theorem relativeMV_cone_presentation
     (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')
     (φ : (derivedPullback g').obj K ⟶ K')
     [IsAffine S] [IsAffine S'] [QuasiCompact f] [QuasiSeparated f]
-    (hK : schemeDerivedQCohProperty X K) (hK' : schemeDerivedQCohProperty X' K')
-    (U V : X.Opens)
-    (hUqc : IsCompact (U : Set X)) (hVqc : IsCompact (V : Set X))
-    (hUVqc : IsCompact ((U ⊓ V : X.Opens) : Set X)) (hcover : U ⊔ V = ⊤) :
+    (U V : X.Opens) (hcover : U ⊔ V = ⊤) :
     let a := relativeMVLocalArrow f f' g g' hpull K K' φ
     let aX := relativeMVGlobalArrow f f' g g' hpull K K' φ
     ∃ (A B A' B' : CochainComplex
@@ -93,8 +90,8 @@ theorem relativeMV_cone_presentation
         e₃.hom ≫ (a (U ⊓ V)).hom  := by
   dsimp only
   obtain ⟨δ, δ', hT, hT', m, h₁, _, h₃⟩ :=
-    relativeMV_pinned_triangle_comparison f f' g g' hpull K K' φ hK hK'
-      U V hUqc hVqc hUVqc hcover
+    relativeMV_pinned_triangle_comparison f f' g g' hpull K K' φ
+      U V hcover
   have hc := m.comm₃
   rw [h₁, h₃] at hc
   exact derived_endpoint_cone_presentation

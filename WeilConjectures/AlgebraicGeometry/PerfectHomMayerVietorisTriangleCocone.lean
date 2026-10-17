@@ -60,7 +60,7 @@ Proof:
    of the geometric family. No exactness or continuity theorem is used. -/
 theorem perfect_hom_mayerVietoris_triangle_cocone
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
-    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)
+    (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
     (i : I) (X : Scheme.{u}) (s₀ : X ⟶ Spec (R.obj i))
     [LocallyOfFinitePresentation s₀] [QuasiCompact s₀] [QuasiSeparated s₀]
     [∀ Z : Scheme.{u},
@@ -95,7 +95,6 @@ theorem perfect_hom_mayerVietoris_triangle_cocone
               ⟨(perfectHomTriangleRow Y P d.pt).obj r,
                 (perfectHomTriangleRowCoconeMap Y P D d).app r⟩) := by
   classical
-  have _ := hc
   have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace s
   have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated s₀
   have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated s
