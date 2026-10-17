@@ -13,9 +13,150 @@
   "def-coef-complete-algebroid",
   "def-coef-coherent-monad-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Set $\\mathcal V=\\mathbf D(\\mathbf Z)$. Use the enriched tensor calculus and its compatible simplicial presentation, including the specified monad and tensor-comparison data. The coherent monad is represented by the strict simplicial diagram $F:J\\to\\mathscr P$, where $J$ has one object and endomorphism monoid $D=N(\\Delta_+)$. The empty ordinal acts by the identity and an ordinal of size $r$ by $T^r$; contractions and insertions are $\\mu$ and $\\eta$, with their supplied higher simplices. Models are identified with the original coherent action as part of the presentation theorem, rather than silently replacing its data. For $W=N(\\Delta_\\infty)$, the weight-cell lemma supplies cellularity of $W$ and relative cellularity of $j:D\\to W$, where $j$ appends the last singleton.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enriched-simplicial-presentation",
+    "def-coef-coherent-monad-modules",
+    "lem-coef-walking-module-weight-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle derived coefficient adjunction; agent expansion with explicit coherence foundations."
+   }
+  },
+  {
+   "text": "Form $\\mathcal A=\\{W,F\\}_J$. The enriched-lift theorem supplies a complete enriched category and the equivalence between its underlying category and the simplicial weighted limit. Its $r$-simplices are strictly equivariant maps $W\\times\\Delta^r\\to U\\mathcal C$. Naturality for the single object of $J$ is exactly the equivariance equalizer in the coherent-module definition, degree by degree. Thus $U\\mathcal A\\simeq\\operatorname{Alg}_T(\\mathcal C)$ with all transformation simplices. Restriction along $j$ is enriched by that theorem. The regular weight evaluates at its empty unit, which $j$ sends to the singleton, so this restriction is the desired forgetful functor $V:\\mathcal A\\to\\mathcal C$. The original action $t$ on the quasicategory $\\mathcal C$ and $U_{\\mathscr P}F$ are both strict simplicial diagrams $J\\to\\mathsf{qCat}$. Regard $\\mathsf{qCat}$ as a compatible presentation for $\\mathcal V$ the spaces: complete space-enriched categories are infinity-categories with their mapping spaces, by [lem-coef-enrichment-change-adjunction], and $\\mathsf{qCat}(X,Y)=\\operatorname{Fun}(X,Y)$ with strict cotensors $\\operatorname{Fun}(S,X)$. Apply coherent transfer there to the specified equivalence $U_{\\mathscr P}F\\simeq t$ of the presentation theorem and to its inverse; its identity and composition clauses give inverse equivalences $\\{W,U_{\\mathscr P}F\\}\\simeq\\{W,t\\}=\\operatorname{Alg}_T(\\mathcal C)$ of cone categories. Thus this identification retains the original action category of the item.",
+   "uses": [
+    "lem-coef-flexible-weight-enriched-lift",
+    "lem-coef-walking-module-weight-cells",
+    "def-coef-coherent-monad-modules",
+    "lem-coef-enriched-simplicial-presentation",
+    "lem-coef-cellular-weight-coherent-transfer",
+    "lem-coef-enrichment-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle derived coefficient adjunction; agent expansion with explicit coherence foundations."
+   }
+  },
+  {
+   "text": "For fixed $K$, set $h=K\\otimes-$ and write $\\chi_{K,A}:T(K\\otimes A)\\simeq K\\otimes TA$. The iterated comparisons $\\chi^{(r)}$ make $h$ a coherently equivariant enriched functor from $F$ to itself. Its unit, multiplication and every higher intertwining condition are exactly the assumed compatibilities of $\\chi$. Apply cellular coherent transfer to $W$, relative to $j:D\\to W$. On the regular weight specify the strict cone $d\\mapsto t(d,K\\otimes A)$, compared with $d\\mapsto K\\otimes t(d,A)$ by $\\chi^{(r)}$. Relative transfer gives an enriched functor $K\\odot-:\\mathcal A\\to\\mathcal A$ with underlying object $K\\otimes A$, and a coherent equivalence of its $W$-diagram to the componentwise tensor of the original diagram. It retains enriched families of actions and maps. Its action, read through this comparison, is\n$$a_K=(K\\otimes a)\\chi_{K,A}.$$\nThis is a rectified coherent cone supplied by the cited transfer theorem; componentwise tensoring by itself does not satisfy the strict equivariance equations.",
+   "uses": [
+    "lem-coef-cellular-weight-coherent-transfer",
+    "lem-coef-walking-module-weight-cells",
+    "def-coef-coherent-monad-modules",
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle derived coefficient adjunction; agent expansion with explicit coherence foundations."
+   }
+  },
+  {
+   "text": "Compute mapping objects using the enriched-lift theorem's cellular formulas: cotensor coherent ends at free cells, pullbacks at attachments, and inverse limits at continuous stages. The transfer theorem identifies the entire mapping-object diagrams with those for the unrectified component data, compatibly with cell restrictions. At an ordinal of size $p+1$, strict equivariance identifies an action diagram's value with $T^pA$. For mixed endpoints of sizes $p+1,q+1$, use\n$$\\mathcal C(T^p(K\\otimes A),T^qB)\\simeq\\mathcal C(K\\otimes T^pA,T^qB)\\simeq[K,\\mathcal C(T^pA,T^qB)].$$\nThe first equivalence is $\\chi^{(p)}$; the second is the assumed enriched tensor adjunction. Precomposition by the source arrows commutes after these comparisons because its component diagram is coherently $K$ tensored with the old one, as supplied by transfer. Postcomposition commutes by naturality of currying. Insertions, contractions and the action endpoint use the assumed unit, multiplication and action comparisons. Their higher simplices are those same coherent intertwiners, retained by transfer. Hence this is an equivalence of the complete diagrams defining the mapping objects, including every cell boundary map, with $[K,-]$ applied to the construction for $A,B$.",
+   "uses": [
+    "lem-coef-flexible-weight-enriched-lift",
+    "lem-coef-cellular-weight-coherent-transfer",
+    "def-coef-coherent-monad-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle derived coefficient adjunction; agent expansion with explicit coherence foundations."
+   }
+  },
+  {
+   "text": "The internal Hom $[K,-]$ preserves the small limits in the mapping-object construction. Taking limits in Step 4 gives\n$$\\mathcal A(K\\odot A,B)\\simeq[K,\\mathcal A(A,B)]\n=R\\operatorname{Hom}_{\\mathbf Z}(K,\\mathcal A(A,B)).$$\nThus $K\\odot A$ satisfies the enriched tensor universal property. The equivalence restricts under $V$ to the given tensor adjunction in $\\mathcal C$, since all its component maps are that adjunction's currying maps. In particular its evaluation is the given tensor evaluation. For any other lift of this tensor evaluation, curry its compatibility square with the algebra action: the resulting action must be $(K\\otimes a)\\chi$ under the component comparison. Applying the same currying to the parameter simplices fixes its coherent action data. The relative transfer theorem retains precisely these enriched families over the fixed regular cone. Together with uniqueness of a representing tensor, this proves creation of the tensors with their evaluation maps. All limits here are derived; $K$ need not be dualizable.",
+   "uses": [
+    "lem-coef-flexible-weight-enriched-lift",
+    "lem-coef-cellular-weight-coherent-transfer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle derived coefficient adjunction; agent expansion with explicit coherence foundations."
+   }
+  },
+  {
+   "text": "Apply the parameter and transformation clauses of coherent transfer to the tensor unit, tensor associator, and the pentagon and unit coherence diagrams. At the component level the actions become the corresponding iterated tensors of $a$ after the specified $\\chi$ comparisons; the hypotheses give the coherent intertwining squares. Consequently transfer gives the unit and associativity comparisons of $\\odot$ and all their higher compatibilities over the prescribed comparisons in $\\mathcal C$. Naturality of the mapping equivalence in $K,A,B$ is naturality of the component currying followed by the transfer identifications. Composition compatibility can be evaluated in every cotensor and cell: it is compatibility of tensor evaluation with precomposition and postcomposition in $\\mathcal C$. The enriched-lift theorem preserves composition and evaluation in these mapping-object formulas, while transfer retains their parameter simplices. This proves the asserted coherent tensor and composition compatibilities without identifying the rectified diagrams by strict equality.",
+   "uses": [
+    "lem-coef-cellular-weight-coherent-transfer",
+    "lem-coef-flexible-weight-enriched-lift",
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle derived coefficient adjunction; agent expansion with explicit coherence foundations."
+   }
+  },
+  {
+   "text": "Now take the enriched adjunction $L:\\mathcal C\\rightleftarrows\\mathcal D:U$. Its mapping-object adjunction gives enriched unit and counit and triangle witnesses; forgetting enrichment gives the adjunction data of the cited definition. Use the presentation retaining the specified tensor comparisons and compatible transformations. The enriched adjunction-extension theorem, applied there, supplies $H:\\mathsf{Adj}\\to\\mathscr P$. Fix the unit, counit and one triangle witness; the other witness may be replaced, as the theorem allows. Restriction at $\\mathcal C$ gives a strict walking-monad diagram with $T=UL$, unit $\\eta$, and multiplication $U\\epsilon L$. Its tensor comparisons are the composites of those for $U$ and $L$ because the extension was taken in the presentation retaining that data. Restriction to $\\mathsf{Adj}(\\mathcal D,\\mathcal C)=W$ gives a strictly equivariant diagram in the full enriched functor category with singleton $U$ and action $U\\epsilon$. This is where higher adjunction action simplices enter; they do not follow from the two triangle simplices alone.",
+   "uses": [
+    "def-coef-coherent-adjunction-data",
+    "lem-coef-enriched-simplicial-presentation",
+    "lem-coef-enriched-coherent-adjunction-extension",
+    "def-coef-coherent-monad-modules",
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle derived coefficient adjunction; agent expansion with explicit coherence foundations."
+   }
+  },
+  {
+   "text": "Use the cotensor identity\n$$\\operatorname{Fun}_{\\mathcal V}(\\mathcal D,\\mathcal C^S)\\simeq\\operatorname{Fun}_{\\mathcal V}(\\mathcal D,\\mathcal C)^S$$\nfrom the enriched tensor calculus to interpret the equivariant functor-category diagram of Step 7 as a strict enriched $W$-cone with vertex $\\mathcal D$. Apply the enriched functor-category universal property explicitly stated by the enriched-lift theorem. It yields an enriched functor $Q:\\mathcal D\\to\\mathcal A$, whose singleton evaluation is $U$ and whose action evaluation is $U\\epsilon_Y$. In particular $Q(Y)=(UY,U\\epsilon_Y)$. On mapping objects and every transformation simplex this is evaluation of the same enriched cone, so it retains composition and identities. The degree-one unit equation is the triangle for $U$; the action equation is naturality of $\\epsilon$ at $\\epsilon_Y$, but their higher compatibilities are furnished by $H$, rather than asserted from these low-dimensional equations.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-flexible-weight-enriched-lift",
+    "lem-coef-enriched-coherent-adjunction-extension",
+    "def-coef-coherent-monad-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle derived coefficient adjunction; agent expansion with explicit coherence foundations."
+   }
+  },
+  {
+   "text": "Let $u_{K,Y}:U(K\\otimes Y)\\simeq K\\otimes UY$ be the given tensor comparison. The composite comparison for $T=UL$ and compatibility of the counit with the comparisons for $L,U$ give\n$$u_{K,Y}\\,U\\epsilon_{K\\otimes Y}\\simeq\n(K\\otimes U\\epsilon_Y)\\,\\chi_{K,UY}\\,T(u_{K,Y}).$$\nBoth sides have source $T(U(K\\otimes Y))$ and target $K\\otimes UY$. Higher compatible squares come from the tensor-compatible extension of Step 7. They give a coherent map from the $W$-cone of $Q(K\\otimes Y)$ to the unrectified tensor of the $W$-cone of $Q(Y)$. Apply the relative transformation clause of cellular coherent transfer to obtain the actual algebra transformation to $K\\odot Q(Y)$, with underlying component $u_{K,Y}$. It is an equivalence: transfer compares its components to the iterates of $u$, all equivalences, and the componentwise equivalence criterion for cotensors and functor categories in the enriched tensor calculus applies through the cellular limit. Transfer applied to the unit and iterated-tensor parameter diagrams retains their coherence simplices as algebra transformations. Therefore $Q$ preserves the tensors constructed in Steps 3--6. No equivalence of the underlying comparison category is asserted.",
+   "uses": [
+    "lem-coef-cellular-weight-coherent-transfer",
+    "lem-coef-enriched-coherent-adjunction-extension",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-flexible-weight-enriched-lift",
+    "def-coef-coherent-monad-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, middle derived coefficient adjunction; agent expansion with explicit coherence foundations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-enriched-category-tensor-calculus",
+  "lem-coef-enriched-simplicial-presentation",
+  "def-coef-coherent-monad-modules",
+  "lem-coef-walking-module-weight-cells",
+  "lem-coef-flexible-weight-enriched-lift",
+  "lem-coef-cellular-weight-coherent-transfer",
+  "def-coef-coherent-adjunction-data",
+  "lem-coef-enriched-coherent-adjunction-extension",
+  "lem-coef-enrichment-change-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2; repaired coherent enriched-monad infrastructure, cellular tensor transfer, and extension of the enriched adjunction before forming its comparison."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -54,7 +195,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-quillen-section-rectification",
@@ -75,5 +216,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-linear-monad-tensor-enrichment",
+  "worker": "stage1",
+  "summary": "Repair of return 08f2879a1e: added explicit compatible-presentation, enriched-adjunction-extension and relative cellular coherent-transfer foundations; expanded the weighted-limit enriched functor universal property; rewrote tensor construction, mapping-object comparison, tensor coherences and adjunction comparison using these results. Item statement unchanged. Five new statement-only obligations, including the two retained nodes; no Mathlib leaves.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint.proof.md paragraph 2, middle derived coefficient adjunction: Steps 1--2 construct the coherent enriched action category, Steps 3--6 give tensors by relative cellular transfer and mapping-object limits, Steps 7--9 extend the adjunction, form its enriched comparison and transfer the tensor comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-773b96ccf",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-773b96ccf (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps, the 5 new nodes in full, the statement of every cited node, the parent's step 11, the blueprint ancestor's paragraph 2, and the earlier return 08f2879a1e. All three faults of that return are repaired. (1) C1/E5: lem-coef-enriched-coherent-adjunction-extension is Riehl–Verity Thm 4.3.11 and fixes only one triangle witness, as Rem 4.3.12 requires. The lift node now states the enriched functor-category universal property, and Step 8 cites the cotensor identity of the tensor calculus. (2) C2/E5: lem-coef-cellular-weight-coherent-transfer is functoriality of flexible weighted limits for invertible coherent transformations, plus lifting along the isofibration for a relative cell complex. Steps 3, 4, 6 and 9 now use it, and no step claims strict componentwise equivariance any more. (3) B2/B3: lem-coef-enriched-simplicial-presentation now defines the presentation and states that one exists (strictification of the Joyal-enriched (infinity,2)-category). I checked the weight-cell node: j(d)=d⊕* is equivariant and bijective on vertices, and the cells match RV §6 flexibility. I checked the Adj homs: the atomic arrow [1]→[0] corresponds to uεu→u, and [0]→[1] is η·u. The Step 9 square typechecks: both sides go TU(K⊗Y)→K⊗UY. Small cases T=id, K=1 and K=0 behave, and no dualizability is needed. There are no duplicates: about 12 candidate nodes found by rg were opened and none states a new node; no new node restates an item clause. Every cited statement node is in unit sk-prop-sf-biduality-general, so no tool_uses are needed; no SGA is cited. One fault, fixed: Step 2 compared U{W,F} with Alg_T(C) by citing transfer, but the original action t lives on the quasicategory C, outside the presentation, where the transfer node does not literally apply. The corrected item makes qCat the presentation for V=spaces, via lem-coef-enrichment-change-adjunction (same unit, no cycle), and adds that node to the step's uses and to proof_deps. Remark only: the inherited statement has no definition node for 'enriched adjunction'; Step 7 reads it as an adjunction in Cat_V.; 1 file(s) fixed by the reviewer"
  }
 }
