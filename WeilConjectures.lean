@@ -2842,6 +2842,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerRelative
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerRelativeBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Normalization
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Orientation
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.OrientationGeometricPoint
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RankOneLocal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Rational
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Reduction
@@ -3782,6 +3783,7 @@ public import WeilConjectures.RingTheory.Dehomogenization
 public import WeilConjectures.RingTheory.Derivation.Localization
 public import WeilConjectures.RingTheory.DiscreteValuationRing.Dominating
 public import WeilConjectures.RingTheory.DiscreteValuationRing.FiniteKummerLevel
+public import WeilConjectures.RingTheory.DiscreteValuationRing.FiniteKummerLevelFree
 public import WeilConjectures.RingTheory.DiscreteValuationRing.QuotientDuality
 public import WeilConjectures.RingTheory.DualContent
 public import WeilConjectures.RingTheory.Etale.Coordinates
