@@ -15,9 +15,126 @@
   "def-weil-finite-integral-morphism",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $F$ for the reduced closed image of $g$. The map $g$ factors through $F$: on affine charts every function in the radical ideal of the image pulls back to a function vanishing at every point of the reduced scheme $F'$, hence to zero. For every integral closed subscheme $Z\\hookrightarrow F$, apply [lem-trf-closed-image-generic-alteration] to $g:F'\\to S$ and $Z\\hookrightarrow S$. It gives an integral closed subscheme $W_Z\\hookrightarrow F'$ and an alteration $W_Z\\to Z$ whose composite with $Z\\hookrightarrow S$ is the restriction of $g$ to $W_Z$; since $F\\hookrightarrow S$ is a monomorphism, $W_Z\\to Z\\hookrightarrow F$ is also the restriction of the factored map $F'\\to F$.",
+   "uses": [
+    "lem-trf-closed-image-generic-alteration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 3.2.1 proof, p. 8 (author PDF lines 668--674)"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-alteration-blowup-finite] to each alteration $W_Z\\to Z$. Obtain a nowhere dense closed center $R_Z\\subsetneq Z$, the blowup $\\widetilde Z=\\operatorname{Bl}_{R_Z}(Z)\\to Z$, a blowup modification $\\widetilde W_Z\\to W_Z$, and a finite surjective map $\\widetilde W_Z\\to\\widetilde Z$ over $Z$.",
+   "uses": [
+    "lem-trf-alteration-blowup-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 3.2.1 proof, p. 8 (author PDF lines 674--676), using Lemma 2.5 on p. 4"
+   }
+  },
+  {
+   "text": "The locally closed subsets $Z\\setminus R_Z$ cover $F$: a point of $F$ lies in the integral closed subscheme given by the closure of that point, and it is outside the corresponding proper closed subset $R_Z$. Because $F$ is Noetherian, it is quasi-compact and quasi-separated and therefore spectral by [lem-weil-pbc-qcqs-scheme-spectral]. Each $Z\\setminus R_Z$ is constructible by [def-weil-constructible-subset], hence open in the constructible topology by [lem-weil-pbc-spectral-constructible-clopen-constructible-topology]. The constructible topology is quasi-compact by [lem-weil-pbc-spectral-constructible-topology-quasi-compact], so finitely many pairs $(Z_i,R_{Z_i})$, $i=1,\\ldots,r$, cover $F$.",
+   "uses": [
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-spectral-constructible-clopen-constructible-topology",
+    "lem-weil-pbc-spectral-constructible-topology-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 3.2.1 proof, p. 8 (author PDF lines 676--678)"
+   }
+  },
+  {
+   "text": "View each $R_i:=R_{Z_i}$ as a closed subscheme of $S$, with ideal $\\mathcal J_i$, and put $S_i=\\operatorname{Bl}_{R_i}(S)$ and $U=S\\setminus\\bigcup_i|R_i|$. Each $R_i$ avoids every generic point of $S$: if such a point lay in $R_i\\subset Z_i$, the integral closed $Z_i$ would be that irreducible component of $S$, whereas a proper closed subset $R_i$ of $Z_i$ cannot contain its generic point. Thus $U$ is dense and quasi-compact. All $\\mathcal J_i$ are finite-type quasi-coherent ideals since $S$ is Noetherian, and restrict to the unit ideal on $U$. Iterating [lemma-nagata-product-ideal-common-blowup] gives $S'=\\operatorname{Bl}_{\\prod_i\\mathcal J_i}(S)$ and maps $q_i:S'\\to S_i$ over $S$. Its center is nowhere dense, and it is an isomorphism over $U$ by [lemma-nagata-admissible-blowup-over-open]. It is proper by [lemma-nagata-blowup-proper], and its inverse image of $U$ is dense by [lemma-nagata-conrad-dense-in-admissible-blowup]. Hence it is a modification by [def-trf-orgogozo-induction-data]. If $F$ is empty, take the empty product ideal $\\mathcal O_S$, so $S'=S$, and take $G=\\varnothing$; this already proves the conclusion in that case.",
+   "uses": [
+    "lemma-nagata-product-ideal-common-blowup",
+    "lemma-nagata-admissible-blowup-over-open",
+    "lemma-nagata-blowup-proper",
+    "lemma-nagata-conrad-dense-in-admissible-blowup",
+    "def-trf-orgogozo-induction-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 3.2.1 proof, p. 8 (author PDF lines 679--686)"
+   }
+  },
+  {
+   "text": "Let $H=F\\times_S S'$ and give every irreducible component $T_j\\hookrightarrow H$ its reduced induced structure, so $T_j$ is integral. Write $\\eta_j$ for its generic point and $x_j$ for the image in $F$. Choose $i=i_j$ with $x_j\\in Z_i\\setminus R_i$ using Step 3. By [lemma-nagata-strict-transform-ambient-closed], the blowup $\\widetilde Z_i=\\operatorname{Bl}_{R_i}(Z_i)$ is a closed subscheme of $S_i$, with the indicated map to $Z_i\\hookrightarrow S$. The map $S_i\\to S$ is an isomorphism over $V_i=S\\setminus|R_i|$ by [lemma-nagata-admissible-blowup-over-open], applied to $V_i$, since its center avoids $V_i$. Applying the same statement to $\\widetilde Z_i\\to Z_i$ over $Z_i\\setminus|R_i|$ identifies the restriction of this closed subscheme in $S_i$ with $Z_i\\setminus R_i$. Consequently $h_j(\\eta_j)\\in|\\widetilde Z_i|$ for $h_j:T_j\\hookrightarrow H\\to S'\\xrightarrow{q_i}S_i$.",
+   "uses": [
+    "lemma-nagata-strict-transform-ambient-closed",
+    "lemma-nagata-admissible-blowup-over-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 3.2.1 proof, p. 8 (author PDF lines 687--694)"
+   }
+  },
+  {
+   "text": "We now obtain the scheme-theoretic factorization of $h_j$, not merely a containment of points. Let $\\mathcal K_i$ be the ideal of the closed immersion $\\widetilde Z_i\\hookrightarrow S_i$. On any affine open $A\\subset S_i$ and nonempty affine open $B\\subset h_j^{-1}(A)$, a section of $\\mathcal K_i(A)$ maps to zero in $\\kappa(\\eta_j)$, because the field-valued map at $\\eta_j$ factors through that closed subscheme by Step 5. Since $T_j$ is integral, $\\mathcal O_{T_j}(B)$ is a domain with fraction field $\\kappa(\\eta_j)$, so this section already maps to zero in $\\mathcal O_{T_j}(B)$. Thus the pulled-back ideal is zero on an affine cover. The quotient-ring maps define a unique morphism $a_j:T_j\\to\\widetilde Z_i$ with $\\iota_i a_j=h_j$; uniqueness makes these local maps glue. Its composite to $S$ equals the given map from $T_j$, since the closed immersion $\\iota_i$ and $q_i$ are over $S$. The maps $T_j\\to Z_i$ obtained through $a_j$ therefore give its prescribed $F$-structure, since $F\\hookrightarrow S$ is a monomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 3.2.1 proof, p. 8, lines 687--694: full affine ideal argument for the asserted map to the strict transform."
+   }
+  },
+  {
+   "text": "For the morphism $a_j$ constructed in Step 6, form $G_j=T_j\\times_{\\widetilde Z_i}\\widetilde W_{Z_i}$, with projections $b_j:G_j\\to T_j$ and $c_j:G_j\\to\\widetilde W_{Z_i}$. By definition this is the cartesian square whose bottom map is $a_j:T_j\\to\\widetilde Z_i$ and right map is the finite surjective $\\widetilde W_{Z_i}\\to\\widetilde Z_i$ of Step 2. Its left map $b_j$ is finite by [lem-trf-finite-radicial-basechange] and surjective by [lem-weil-pbc-surjective-base-change]. The composite $G_j\\xrightarrow{c_j}\\widetilde W_{Z_i}\\to W_{Z_i}\\hookrightarrow F'$ gives the other required map. This composite is an $F$-morphism for the $F$-structure through $b_j$: by Step 1, $G_j\\to W_{Z_i}\\to F'\\to F$ equals $G_j\\to W_{Z_i}\\to Z_i\\hookrightarrow F$; by Step 2 this is $G_j\\to\\widetilde Z_i\\to Z_i\\hookrightarrow F$; by the cartesian square it is $G_j\\xrightarrow{b_j}T_j\\xrightarrow{a_j}\\widetilde Z_i\\to Z_i\\hookrightarrow F$, which is the $F$-structure of $T_j$ by Step 6.",
+   "uses": [
+    "lem-trf-alteration-blowup-finite",
+    "lem-trf-finite-radicial-basechange",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 3.2.1 proof, p. 8 (author PDF lines 694--697)"
+   }
+  },
+  {
+   "text": "The blowup $S'$ is of finite type over the Noetherian scheme $S$, so $H=F\\times_S S'$ is Noetherian and has only finitely many irreducible components $T_j$. Put $G=\\coprod_jG_j$. Its map to $H$ is finite: on an affine $\\operatorname{Spec}A\\subset H$, write $T_j\\cap\\operatorname{Spec}A=\\operatorname{Spec}(A/I_j)$; the inverse image in $G_j$ is affine with coordinate ring $B_j$ finite over $A/I_j$, hence finite over $A$. The whole inverse image in $G$ is the spectrum of the finite product $\\prod_j B_j$, a finite $A$-module. The images of the surjections $G_j\\to T_j$ cover $H$, so $G\\to H$ is surjective, even if $H$ is nonreduced. The $F$-maps $G_j\\to F'$ assemble into an $F$-map $G\\to F'$, proving the claim.",
+   "uses": [
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Lemma 3.2.1 proof, p. 8 (author PDF lines 686--699)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-orgogozo-induction-data",
+  "def-weil-constructible-subset",
+  "def-weil-finite-integral-morphism",
+  "lem-trf-alteration-blowup-finite",
+  "lem-trf-closed-image-generic-alteration",
+  "lem-trf-finite-radicial-basechange",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-spectral-constructible-clopen-constructible-topology",
+  "lem-weil-pbc-spectral-constructible-topology-quasi-compact",
+  "lem-weil-pbc-surjective-base-change",
+  "lemma-nagata-admissible-blowup-over-open",
+  "lemma-nagata-blowup-proper",
+  "lemma-nagata-conrad-dense-in-admissible-blowup",
+  "lemma-nagata-product-ideal-common-blowup",
+  "lemma-nagata-strict-transform-ambient-closed"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+  "place": "Lemma 3.2.1 (Gabber), pp. 7--8; proof lines 668--699 in the author PDF"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,7 +173,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-orgogozo-good-modification",
@@ -78,5 +195,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-modification-closed-image-lifting",
+  "worker": "stage1",
+  "summary": "Repair of the returned strict-transform factorization gap: uses the existing closed strict-transform/blowup comparison, chooses reduced integral components, checks the generic image over the complement of its selected center, and proves factorization by vanishing of the pulled-back ideal in the function field. The cartesian square and both finite-surjective base-change properties are now explicit. Retains both supporting nodes, existing searches and the original source route; adds no new node in this repair.",
+  "blueprint": "Realizes the supporting Gabber argument attached to lem-trf-local-term-locality: generic closed W_Z selection (proof lines 668--674), blowup finite refinement and finite cover (lines 674--686), and componentwise fibre-product assembly (lines 687--699).",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-product-ideal-common-blowup",
+    "why": "Step 4 uses its statement to dominate the finitely many center blowups by the product blowup; this is a generic blowup construction from the Nagata unit."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-scheme-spectral",
+    "why": "Step 3 uses its generic spectral-space statement to invoke constructible-topology compactness for the Noetherian image F."
+   },
+   {
+    "node": "lem-weil-pbc-spectral-constructible-topology-quasi-compact",
+    "why": "Step 3 uses its generic finite-subcover statement for constructible opens."
+   },
+   {
+    "node": "lem-weil-pbc-spectral-constructible-clopen-constructible-topology",
+    "why": "Step 3 uses its generic topology statement that constructible subsets are clopen in the constructible topology."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Step 7 uses the generic scheme-theoretic surjectivity-under-base-change statement for the specified fibre-product square; this is a Mathlib tool from the proper-base-change chapter."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-product-ideal-common-blowup",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-spectral-constructible-topology-quasi-compact",
+  "lem-weil-pbc-spectral-constructible-clopen-constructible-topology",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-a5ae3e7c0",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-a5ae3e7c0 (reviewer sub-agent of L); spot-checked: Read the whole delivery and the source. Orgogozo's author PDF (fetched and run through pdftotext; the local archival PDF is still WANTED): Lemme 2.5 with its proof (p.4) and Lemme 3.2.1 with its proof (pp.7-8). The item statement matches 3.2.1 and asks slightly more (p is named a modification, and G->F' is an F-morphism); it is unchanged and not weakened. Steps checked: Step 3 uses the constructible-topology compactness of the Noetherian F, and all four cited nodes say what the step takes from them. In Step 4 the centres R_i miss the generic points of S, so U is dense; the iterated product blowup is U-admissible, proper and has a dense preimage of U, so it is a modification; empty F handled. Step 5: the strict-transform closed immersion, with the pulled-back centre equal to R_i, places only the generic point of T_j in Z~_i, which is correct. Step 6, the factorization through the function field, is correct and elementary. In Step 7, b_j is finite and surjective by base change. Step 8, the finite disjoint union, is finite and surjective even for nonreduced H. New nodes: lem-trf-alteration-blowup-finite is true (Lemme 2.5 in the reduced case via generic flatness, RG flattening and the strict transform) and is not a duplicate. lem-trf-finite-after-blowup (unsplit, Q52, not mentioned in the report) is the natural input when this node is split. lem-trf-closed-image-generic-alteration is true (closure of a closed point of the generic fibre). One fault (E3/C4): the generic-alteration statement did not say that W->Z is compatible with h, which Step 7 needs to make G_j->F' an F-morphism. Repaired in fixes/: the node statement now names a:W->Z with Z->X∘a = h∘j and replaces the undefined 'dominant, generically finite' with 'surjective, and finite over a dense open of Z', adding def-weil-finite-integral-morphism to stmt_deps. The item's Step 1 and Step 7 texts now carry this compatibility and the chain of equalities that gives the F-structure. The declared tool_uses are accepted (product-ideal blowup, spectral/constructible lemmas, surjective base change); the other Nagata lemmas are closed in slopmaster2. No SGA cited, no nodes dropped.; 2 file(s) fixed by the reviewer"
  }
 }
