@@ -197,5 +197,43 @@
   "group": "Q144",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-7b01b8b11 (reviewer sub-agent of L); spot-checked: I read the item, its only cited node def-cbc-enhanced-diagrams-cones, the parent's Step 5, the unit and chapter records, and the historical ancestor prop-coef-integral-exceptional-adjoint in full. The delivery has no new nodes, and the statement is unchanged and matches exactly how the parent's Step 5 uses it (H i_0 = h_z, H i_1 = j_z g_z). Using the def's conventions (Fun(K,C)_n = Hom(K×Δ^n, C); hofib paths run from f(a) to b), I checked the typing of g_z, h_z and j_z and every endpoint of H: P(0)=fux, P(1)=v(y), L(0)=y, L(1)=z. I also checked t=0 gives h_z and t=1 gives j_z g_z, with no path reversal. Small cases tested: empty X, Z with no vertices, all objects a point, constant γ, and nondegenerate τ=id_[1] with nonconstant Γ. Steps 1-5 (monotone connections, typing, construction, naturality in α, endpoints) are genuinely elementary from the def node, and none uses another node's proof. There is no cycle and no SGA. Duplicate search: rg over the DAG, and I read lem-coef-kan-pullback-path-comparison, lem-coef-quillen-b-comma-homotopy-fiber, lem-cbc-right-fibration-space-fiber, lem-coef-space-path-fibration-replacement and lem-coef-pointwise-constant-target-square-assembly. None of them states this homotopy. The hypothesis that Q is Kan is redundant but harmless. The Kerodon source is background only: proof_origin is honestly 'agent', and a WANTED line is filed. This is not a target node, so no base-change or coefficient check applies. No tool_uses and no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.QuillenBPathMinmaxHomotopy",
+  "declaration": "SSet.Enhanced.quillenB_path_minmax_homotopy",
+  "declarations": [
+   "SSet.Enhanced.quillenBKanPathPullback",
+   "SSet.Enhanced.quillenBKanPathPullbackProjection",
+   "SSet.Enhanced.quillenBKanPathPullbackSource",
+   "SSet.Enhanced.quillenBKanPathPullbackPath",
+   "SSet.Enhanced.quillenB_constant_path_comm",
+   "SSet.Enhanced.quillenBKanPathPullbackConstant",
+   "SSet.Enhanced.QuillenBPathComparisonMaps",
+   "SSet.Enhanced.IsQuillenBPathComparisonMaps",
+   "SSet.Enhanced.quillenB_path_comparison_maps_existsUnique",
+   "SSet.Enhanced.quillenBPathComparisonMaps",
+   "SSet.Enhanced.quillenBPathComparisonG",
+   "SSet.Enhanced.quillenBPathComparisonJ",
+   "SSet.Enhanced.quillenBPathComparisonH",
+   "SSet.Enhanced.quillenBIntervalMinSimplex",
+   "SSet.Enhanced.quillenBIntervalMaxSimplex",
+   "SSet.Enhanced.IsQuillenBPathMinmaxHomotopy",
+   "SSet.Enhanced.quillenB_path_minmax_homotopy"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/QuillenBPathMinmaxHomotopy.lean",
+  "statement": "theorem quillenB_path_minmax_homotopy {X A Z C : SSet.{u}} [KanComplex X] [KanComplex A] [KanComplex Z] [KanComplex C] (r : X ⟶ Z) (u : X ⟶ A) (f : A ⟶ C) (v : Z ⟶ C) (comm : u ≫ f = r ≫ v) [KanComplex (quillenBKanPathPullback f v)] : ∀ z : Z _⦋0⦌, IsQuillenBPathComparisonMaps r u f v comm z (quillenBPathComparisonMaps r u f v comm z) ∧ ∃ H : SSet.Homotopy (quillenBPathComparisonH r u f v comm z) (quillenBPathComparisonG r u f v comm z ≫ quillenBPathComparisonJ r u f v comm z), IsQuillenBPathMinmaxHomotopy r u f v comm z H",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical Kan path pullback and comparison maps, with the full min/max coordinate equations in every simplex degree included in the existential homotopy conclusion. Generic pullback names avoid the existing categorical Quillen B specialization."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-abde615a9",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Wrote review.md. Checked hypotheses, full simplicial min/max formula, endpoints, dependencies, unique-choice construction, universes, empty fibers, docstrings, and verbatim signature. Snapshot compilation passed both sandbox and library checks. No fixes needed; branch unchanged."
  }
 }

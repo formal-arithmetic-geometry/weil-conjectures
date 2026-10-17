@@ -25,7 +25,10 @@
   "place": "Proposition 4.8.1.10 with K empty and K-prime all small shapes, in the associative-monoidal case, and Variant 4.8.1.11 (printed pp.710-711); the Day-convolution description of Remark 4.8.1.13 applies with associative rather than symmetric structure. Gepner-Haugseng 1312.3178v4, proof of Theorem 5.6.6 explicitly uses this monoidal Yoneda embedding and the induced fully faithful algebra inclusion. Full faithfulness on coherent diagrams is the fully faithful postcomposition property, using the full-subcategory model of functor categories; restriction to inert-preserving objects is full. Read online; archive WANTED. No Stacks tag states this infinity-categorical theorem."
  },
  "stmt_deps": [
-  "def-coef-complete-algebroid"
+  "def-coef-complete-algebroid",
+  "def-coef-infinity-presheaf-yoneda",
+  "lem-coef-presheaf-external-product-kan",
+  "lem-coef-infinity-intermediate-presheaf-kan"
  ],
  "proof": [
   {
@@ -333,5 +336,40 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.MonoidalYonedaEmbedding",
+  "declaration": "SSet.Enhanced.MonoidalYoneda.monoidal_yoneda_embedding",
+  "declarations": [
+   "SSet.Enhanced.MonoidalYoneda.liftBase",
+   "SSet.Enhanced.MonoidalYoneda.liftProjection",
+   "SSet.Enhanced.MonoidalYoneda.doubleLift",
+   "SSet.Enhanced.MonoidalYoneda.liftBinary",
+   "SSet.Enhanced.MonoidalYoneda.binaryCoordinates",
+   "SSet.Enhanced.MonoidalYoneda.oppositeTensor",
+   "SSet.Enhanced.MonoidalYoneda.externalProduct",
+   "SSet.Enhanced.MonoidalYoneda.IsDayTensor",
+   "SSet.Enhanced.MonoidalYoneda.relative",
+   "SSet.Enhanced.MonoidalYoneda.postcompose",
+   "SSet.Enhanced.MonoidalYoneda.precompose",
+   "SSet.Enhanced.MonoidalYoneda.PreservesMarked",
+   "SSet.Enhanced.MonoidalYoneda.Statement",
+   "SSet.Enhanced.MonoidalYoneda.monoidal_yoneda_embedding"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/MonoidalYonedaEmbedding.lean",
+  "statement": "theorem monoidal_yoneda_embedding {E : SSet.{u}} [Quasicategory E] (p : E ⟶ monoidalSimplexBase.{u}) (hp : IsMonoidalInfinityCategory p) : Statement.{u, v} p",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The existing small-space presheaves and Yoneda are retained, in arbitrary ambient max (u+1) v. The new monoidal total space is identified with those presheaves by a fiber equivalence; its binary operation is identified with the coherent Day tensor and its unit is the representable unit. The Kan condition uses the specified universal-arrow composition span, with a unit coherent in both presheaves. Relative diagrams use the existing overFunctors subcomplex, their actual pre/postcomposition, and full marked-edge subcategories. Only the main theorem is postponed. Added statement dependencies are already-landed interfaces used for presheaves, their ambient lift, and the coherent cartesian product in spaces."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0185b877c",
+  "group": "NP",
+  "result": "pass",
+  "note": "Immutable node, dependencies, Lean declarations, source alignment, edge cases, documentation, and compiler evidence checked successfully."
  }
 }

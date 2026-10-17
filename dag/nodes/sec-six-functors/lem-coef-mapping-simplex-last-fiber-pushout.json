@@ -9,7 +9,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "def-coef-mapping-simplex-functor"
  ],
  "proof": [
   {
@@ -203,5 +204,44 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-b7550d235 (reviewer sub-agent of L); spot-checked: Read the item, all three cited definition statements (def-coef-mapping-simplex-functor, def-cbc-enhanced-diagrams-cones, def-weil-pbc-category-colimit), the parent final-edge Step 4 and the unit record. Compared with the base copy: the statement, stmt_deps, source and blueprint are unchanged; only the proof fields, searches and split_report were added. Statement check: k is injective in each degree, and its complement in A_n x Delta^n is exactly V_r = {alpha(r)=n}, so the degreewise pushout is M(A). I tested n=1 (mapping cylinder), A_n empty, a constant chain and a noninjective transition; the statement is true with no injectivity or fibrancy hypothesis. Steps: 1 (U/V split, U stable, U=M_-), 2 (g and h are simplicial, square commutes), 3 (Fj=p, Fh=q using pg=qk and t_{n,n}=1) and 4 (the case alpha(r)=n, alpha theta(s)<n follows from pg=qk) are correct. Step 5 gets uniqueness from j and h being jointly surjective in each degree and matches the colimit node's universal property; Step 6 gets naturality and compatibility with Delta^n from the M(f) formula of def-coef-mapping-simplex-functor plus uniqueness. All steps are honestly elementary from cited statements, and proof_deps is the union of the uses. There are no new nodes. termwise-equivalence, cbc-initial-horn-pushout (marked, Lambda^n_0) and final-face-edge-horn-filtration are not duplicates; final-edge depends on the item, so citing it would make a cycle. All citations are definitions or a Mathlib leaf, so there is no route issue and no tool_uses. No SGA. Ten Mathlib searches of four kinds have a plausible no-match verdict. HTT §3.2.2 / Prop 3.2.2.10 p.183 is not in literature, so I could not check the source page; the WANTED line and proof_origin agent are correct, and I checked the combinatorics directly. Minor: the naturality clause of the statement uses M(f) without stmt_dep def-coef-mapping-simplex-functor, which is cosmetic and not split-owned. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.MappingSimplexLastFiberPushout",
+  "declaration": "SSet.Enhanced.mappingSimplex_last_fiber_pushout",
+  "declarations": [
+   "SSet.Enhanced.mappingSimplexCastSuccFunctor",
+   "SSet.Enhanced.mappingSimplexTruncation",
+   "SSet.Enhanced.mappingSimplexInitialInclusionApp",
+   "SSet.Enhanced.mappingSimplexLastAttachApp",
+   "SSet.Enhanced.mappingSimplexLastCylinderApp",
+   "SSet.Enhanced.mappingSimplexLastAttachment_naturality",
+   "SSet.Enhanced.mappingSimplexInitialInclusion",
+   "SSet.Enhanced.mappingSimplexLastAttach",
+   "SSet.Enhanced.mappingSimplexLastCylinder",
+   "SSet.Enhanced.mappingSimplexLastFace",
+   "SSet.Enhanced.mappingSimplexLastAttachment_comm",
+   "SSet.Enhanced.mappingSimplexLastPushout",
+   "SSet.Enhanced.mappingSimplexLastPushoutComparison",
+   "SSet.Enhanced.mappingSimplexLastPushoutProjection",
+   "SSet.Enhanced.mappingSimplexTruncationMap",
+   "SSet.Enhanced.mappingSimplexLastAttachment_chainMap",
+   "SSet.Enhanced.mappingSimplexLastPushoutMap",
+   "SSet.Enhanced.mappingSimplex_last_fiber_pushout"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/MappingSimplexLastFiberPushout.lean",
+  "statement": "theorem mappingSimplex_last_fiber_pushout (n : ℕ) (A : SimplexChain.{u} (n + 1)) : IsIso (mappingSimplexLastPushoutComparison A) ∧ (mappingSimplexLastPushoutComparison A ≫ mappingSimplexProjection A = mappingSimplexLastPushoutProjection A) ∧ (∀ (B : SimplexChain.{u} (n + 1)) (f : A ⟶ B), mappingSimplexLastPushoutMap f ≫ mappingSimplexLastPushoutComparison B = mappingSimplexLastPushoutComparison A ≫ mappingSimplexChainMap f)",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of immutable head 506281d2f886: reindex the node’s arbitrary positive dimension as n+1, allowing n=0. Canonical g, h and j have explicit degreewise formulas. The theorem states invertibility of their canonical pushout.desc comparison, its equality over the standard simplex, and naturality for the canonical pushout.map of every commuting ladder. Named helper theorems are exactly the simpliciality and square-compatibility obligations already in this node’s statement and proof steps 2 and 6; no new independent notion or mathematical assumption is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-08e6327cd",
+  "group": "Q32",
+  "result": "fix",
+  "note": "Lean and mathematics pass; compilation reproduced cleanly. review.md records all checks. fixes/lem-coef-mapping-simplex-last-fiber-pushout.report.md supplies the complete replacement report with an independent second reading and missing LeanSearch evidence. No Lean or node changes needed."
  }
 }

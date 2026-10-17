@@ -224,5 +224,35 @@
   "group": "N3",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-2fc6f6677 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full. I fetched the source, Gepner–Haugseng arXiv:1312.3178, and read Def 3.1.3, Rem 3.1.4, Def 3.2.1–3.2.3, Ex 3.2.4(i), Thm 3.2.5, Cor 3.2.6 and Def 3.2.7. The item's statement matches Def 3.1.3 together with the fiberwise π-limit form of Rem 3.1.4, including the empty product for n=0. It is unchanged and not weakened. Fault C5 (duplicate): the new node lem-coef-categorical-pattern-model restates the existing base nodes def-coef-categorical-pattern-fibrancy and lem-coef-categorical-pattern-model-calculus (both created 2026-10-17 by NC, same unit). They give the same fully-scaled pattern data and fibrancy conditions (i)–(iv), and a left proper combinatorial simplicial model structure with injective cofibrations, Map^♯ by (Δ^n)^♯ and Kan mapping objects. The report never mentions them, and their closures are acyclic with respect to the item. I dropped the new node and repointed steps 1–4 to these two nodes, with combinatorial read through lem-coef-marked-point-cartesian-model, which is now cited. Step 2 now writes out how the homotopy-pullback form of condition (iv) becomes the product of mapping fibers. proof_deps and the source were updated. Steps 2–4 are otherwise checked: straightening gives the products in Cat_∞, the mapping-criterion inverse argument and the mixed-edge 2-simplex factorization are correct, and the hypotheses of the localization-presentability and simplicial-nerve nodes are met. There are no cycles and no tool_uses. Minor: the report claims to have corrected created.item, but the file was not changed, and the existing value (the parent, Q55) is correct.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.NonsymmetricOperadsPresentability",
+  "declaration": "SSet.Enhanced.NonsymmetricOperad.presentable",
+  "declarations": [
+   "SSet.Enhanced.NonsymmetricOperad.OverBase",
+   "SSet.Enhanced.NonsymmetricOperad.inertMarking",
+   "SSet.Enhanced.NonsymmetricOperad.IsObject",
+   "SSet.Enhanced.NonsymmetricOperad.Object",
+   "SSet.Enhanced.NonsymmetricOperad.coherentOperadNerve",
+   "SSet.Enhanced.NonsymmetricOperad.category",
+   "SSet.Enhanced.NonsymmetricOperad.category_quasicategory",
+   "SSet.Enhanced.NonsymmetricOperad.presentable"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/NonsymmetricOperadsPresentability.lean",
+  "statement": "theorem presentable : SSet.Presentability.IsPresentable.{u, 0} category",
+  "branch": "newtargets-dag",
+  "by": "Q152",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The object notion is the full subcategory of marked over-base objects whose marking is exactly inert cocartesian edges plus degeneracies, with inner fibration, inert lifts, Segal fibers, and the recorded HasMonoidalRelativeLimits triangle-graph comparison. The category is SimplicialNerve of this enriched full subcategory, hence the coherent nerve with Map♯ over the base and higher coherences. The marked-object predicate reuses SSet.Enhanced.IsChainTwoInfinityOperad from the acyclic ComposableBimoduleOperadSegal module; despite its historical name this is the general ordinary nonsymmetric operad predicate. The existential quasicategory proof is redundant for an inner fibration over the simplex nerve, so no hypothesis is added. The canonical enrichment is specified up to enriched isomorphism by its mapping, ordinary-map and composition normalizations.",
+  "fixed_by": "NT-stage2-Codex-093f03ac1"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-093f03ac1",
+  "group": "Q152",
+  "result": "fix",
+  "note": "Reviewed source, dependencies, definitions, universes and edge cases. Complete fixes repair definition reuse, docstrings, declaration records and report detail. The theorem signature is unchanged; original and final replacement compile cleanly through scompile.py. Findings and evidence are in review.md; replacements are under fixes/."
  }
 }
