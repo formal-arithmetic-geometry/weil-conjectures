@@ -25,7 +25,11 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-complete-algebroid"
+  "def-coef-complete-algebroid",
+  "def-cbc-enhanced-cartesian-fibration",
+  "lem-coef-rezk-local-model",
+  "lem-coef-quasicategory-classification-realization",
+  "lem-coef-infinity-pinch-comparison"
  ],
  "proof": [
   {
@@ -230,5 +234,31 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CompleteSegalQuasicategoryComparison",
+  "declaration": "SSet.CompleteSegalComparison.complete_segal_quasicategory_comparison",
+  "declarations": [
+   "SSet.CompleteSegalComparison.ordinaryPathMap",
+   "SSet.CompleteSegalComparison.ordinarySimplex",
+   "SSet.CompleteSegalComparison.ordinaryInclusion",
+   "SSet.CompleteSegalComparison.classificationPresheaves",
+   "SSet.CompleteSegalComparison.complete_segal_quasicategory_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CompleteSegalQuasicategoryComparison.lean",
+  "statement": "theorem complete_segal_quasicategory_comparison : Quasicategory Enhanced.CatInfinity.{u} ∧ (∀ (Q : SSet.{u}) [Quasicategory Q], CategoryTheory.SegalSpace.IsComplete (Functor.uncurry.obj (Classification.diagram Q))) ∧ (∃ q : largeNerve.{u + 1, u, 0} SSet.{u} ⟶ RezkLocalModel.Spaces.{u}, IsLocalization (fun _ _ f ↦ Enhanced.IsWeakHomotopyEquivalence f) q ∧ Quasicategory (RezkLocalModel.completeSegalObjects q).toSSet ∧ ∃ R : Enhanced.CatInfinity.{u} ⟶ (RezkLocalModel.completeSegalObjects q).toSSet, Enhanced.IsFunctorEquivalence R ∧ Enhanced.AreNaturallyEquivalent (ordinaryInclusion ≫ R ≫ (RezkLocalModel.completeSegalObjects q).ι) (classificationPresheaves q) ∧ ∀ (K : SSet.{u}) [Quasicategory K], Enhanced.IsFunctorEquivalence ((ihom (SSet.uliftFunctor.{u + 1}.obj K)).map R)) ∧ (∃ j : ∀ (Q : SSet.{u}) [Quasicategory Q] (x y : Q _⦋0⦌), Enhanced.mappingSpace Q x y ⟶ Enhanced.homotopyFiber (Classification.endpoints Q) (Classification.vertex Q x, Classification.vertex Q y), ∀ (Q : SSet.{u}) [Quasicategory Q] (x y : Q _⦋0⦌), Enhanced.IsWeakHomotopyEquivalence (j Q x y) ∧ (∀ (n : SimplexCategoryᵒᵖ) (s : (Enhanced.mappingSpace Q x y).obj n), MonoidalClosed.uncurry (SSet.yonedaEquiv.symm (((j Q x y).app n s).val.1.val)) = Enhanced.rightPinchPrism n.unop.len ≫ SSet.yonedaEquiv.symm s.val ∧ ((j Q x y).app n s).val.2 = (Enhanced.constantDiagrams Δ[1] _).app n ((SSet.const (X := Enhanced.mappingSpace Q x y) (Classification.vertex Q x, Classification.vertex Q y)).app n s)) ∧ ∀ (T : SSet.{u}) [Quasicategory T] (f : Q ⟶ T) (n : SimplexCategoryᵒᵖ) (s : (Enhanced.mappingSpace Q x y).obj n), ((Classification.map f).app (op ⦋1⦌)).app n ((j Q x y).app n s).val.1 = ((j T (f.app _ x) (f.app _ y)).app n ((Enhanced.mappingSpaceMap f x y).app n s)).val.1 ∧ ((ihom Δ[1]).map (Enhanced.coreMap f ⊗ₘ Enhanced.coreMap f)).app n ((j Q x y).app n s).val.2 = ((j T (f.app _ x) (f.app _ y)).app n ((Enhanced.mappingSpaceMap f x y).app n s)).val.2)",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing CatInfinity and full completeSegalObjects models. Classification.diagram supplies exactly the ordinal-functor cores and their simplicial operators. The coherent comparison is normalized on the entire ordinary nerve. The mapping comparison is fixed on every simplex by the right-pinch prism and the constant endpoint path, with naturality of both coordinates. Added only already-landed statement dependencies; no new notion or dependency replacement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8d4e34335",
+  "group": "Q78",
+  "result": "fix",
+  "note": "Mathematical statement, dependencies, universes, canonical maps, edge cases, and verbatim signature checked; per-file compilation passed. Repaired H11 by supplying a complete replacement report with a substantive independent second reading. Findings and compiler evidence are recorded in review.md."
  }
 }
