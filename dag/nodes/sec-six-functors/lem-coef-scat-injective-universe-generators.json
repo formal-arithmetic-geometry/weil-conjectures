@@ -9,7 +9,9 @@
  },
  "stmt_deps": [
   "lem-coef-simplicial-interval-lifting",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "lem-coef-simplicial-localization-comparison-calculus",
+  "lem-coef-simplicial-diagram-equivalence-classes"
  ],
  "proof": [
   {
@@ -258,5 +260,42 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-fa94cb0a6 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, every cited statement (simplicial-interval-lifting, category-colimit, weak-saturation-tree-presentation, good-cellular-tree, small-cellular-tree-descent), the parent's step 2, the unit, and the main-20261015 proof of prop-coef-integral-exceptional-adjoint, paragraph 2. HTT is not in literature/, so I could not check the printed page numbers. The proof is correctly marked by:agent and the report raises WANTED for HTT. I checked the mathematics of every step myself. Step 3: the V-to-U retract (g=p∘i, lift s, then the squares (1,s) and (1,p)) is correct; the U-to-V direction relies on sCat_U being closed under U-small colimits inside sCat_V, which I accept as elementary. Step 5: the hypotheses of the tree lemma hold, since the endpoints of I and J are countable and so are κ-presentable by the size criterion. Step 6: for downward-closed A and B, Y(A∪B) is the pushout of Y(A) and Y(B) over Y(A∩B); each successor covers a new index; the limit stages are unions. Steps 7 and 8 use exactly what the re-rooting, small-tree-descent and new compact-descent statements say. All three new nodes are true. uniform-presentability holds because sCat is locally finitely presentable, so for uncountable regular κ the κ-presentable objects are those of size <κ; I tested the empty and terminal simplicial categories, and κ must be uncountable. A diagram is κ-presentable exactly when it is pointwise κ-presentable when |Mor D|<κ. For compatible-slices I rebuilt the ω-round closure, which needs κ-good trees and |Mor D|<κ. For compact-pushout-descent I wrote out the F_β argument: G_0(d)=F_β(d)⊔_{P_d}Q_d, with the equations made to hold at a later stage. None of the new nodes restates the item, and none duplicates an existing node: I checked enriched-diagram-size-generation, good-subset-enlargement, cellular-tree-presentable-approximations, partial-cellular-root-descent-extension, compact-pushout-retract-descent and small-simplicial-diagram-cardinality. All dependencies are in unit sk-prop-sf-biduality-general, there is no cycle, the blueprint.from/via fields are correct, the searches are real logged entries, and nothing cites SGA. The new nodes have no lean_audit key; about a third of the project's nodes created since 2026-10-16 also lack it, so I did not count it as a fault. No fixes and no tool_uses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0a0ed4d3a",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Checked source, all statement dependencies, declarations, universes, fixed generators, closure operations, edge cases, report and pilot gates. scompile.py reproduced a clean per-file compile. No delivery faults found; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.InjectiveUniverseGenerators",
+  "declaration": "CategoryTheory.injective_universe_generators",
+  "declarations": [
+   "CategoryTheory.IsWeaklySaturated",
+   "CategoryTheory.weaklySaturatedClosure",
+   "CategoryTheory.injectiveLiftObject",
+   "CategoryTheory.injective_lift_map_laws",
+   "CategoryTheory.injectiveLiftMap",
+   "CategoryTheory.injective_lift_functor_laws",
+   "CategoryTheory.scCatUniverseLift",
+   "CategoryTheory.diagramUniverseLift",
+   "CategoryTheory.diagramUniverseLiftArrow",
+   "CategoryTheory.largeRightClass",
+   "CategoryTheory.largePointwiseCofibrations",
+   "CategoryTheory.injectiveGeneratorBound",
+   "CategoryTheory.injectiveBoundedArrows",
+   "CategoryTheory.injectiveGeneratingArrows",
+   "CategoryTheory.injective_generating_arrows_small",
+   "CategoryTheory.injective_universe_generators"
+  ],
+  "file": "lean/Sheaf/SixFunctors/InjectiveUniverseGenerators.lean",
+  "statement": "theorem injective_universe_generators {D : Type u} [Category.{u} D] (R : IntervalRepresentatives.{u}) : Small.{u} (injectiveGeneratingArrows D I.{u}) ∧ Small.{u} (injectiveGeneratingArrows D (J R)) ∧ weaklySaturatedClosure.{max u w} (diagramUniverseLiftArrow.{u,w} D '' injectiveGeneratingArrows D I.{u}) = largePointwiseCofibrations.{u,w} (D := D) I.{u} ∧ weaklySaturatedClosure.{max u w} (diagramUniverseLiftArrow.{u,w} D '' injectiveGeneratingArrows D (J R)) = largePointwiseCofibrations.{u,w} (D := D) (J R)",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of return 1e4664b157a8: canonical inclusion into full SCat in max u w, reusing recorded liftBundle and diagramULiftEnrichment. Explicit base-only bounded-arrow skeleton sets have Small.{u} assertions and are independent of w; R is fixed arbitrarily before enlargement. The right class is formed once, followed by llp. Named sorry-only coherence and smallness theorems belong to this node. Both transport-owning nodes are cited in stmt_deps."
  }
 }
