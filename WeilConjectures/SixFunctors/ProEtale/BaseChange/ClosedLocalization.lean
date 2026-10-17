@@ -44,9 +44,9 @@ noncomputable def upperStarSquareIso (sq : CommSq iW wZ w i) :
 /-- Blueprint `lem-exc-closed-localization` (subsection `sk-prop-sf-open-closed-triangle`): for the
 cartesian square of a closed immersion `i : Z ⟶ X` and a weakly étale `w : W ⟶ X`, restriction
 to `W` commutes with the underived closed direct image: the base change map
-`i_* ⋙ w^* ⟶ w_Z^* ⋙ i_W*` (`AlgebraicGeometry.ProEtale.baseChangeMap`) is an isomorphism. Being
-the mate of the square of direct images along `w_Z^* ⊣ w_Z*` and `w^* ⊣ w_*`, it respects
-units and counits. The two composites of inverse images agree by
+`i_* ⋙ w^* ⟶ w_Z^* ⋙ i_W*` (`AlgebraicGeometry.ProEtale.baseChangeMap`) is an isomorphism. This is
+the weakly étale base change theorem `AlgebraicGeometry.ProEtale.isIso_baseChangeMap_of_isPullback`
+applied to the closed immersion `i`. The two composites of inverse images agree by
 `AlgebraicGeometry.ProEtale.upperStarSquareIso`. -/
 theorem isIso_baseChangeMap_of_isClosedImmersion [IsClosedImmersion i] [WeaklyEtale w]
     [WeaklyEtale wZ] (hsq : IsPullback iW wZ w i) :

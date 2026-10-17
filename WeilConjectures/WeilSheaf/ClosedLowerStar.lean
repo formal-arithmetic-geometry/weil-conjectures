@@ -147,29 +147,15 @@ theorem WeilComplex.exists_isIso_app_of_isZero_upperStar {X Z U : Scheme.{u}}
     ∃ η : 𝟭 (WeilComplex k₀ l X) ⟶
         WeilComplex.upperStar i ⋙ WeilComplex.derivedLowerStar (k₀ := k₀) (l := l) i,
       ∀ K : WeilComplex k₀ l X, IsZero ((WeilComplex.upperStar j).obj K) → IsIso (η.app K) := by
-  have : IsLocallyNoetherian X :=
-    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (CommRingCat.of k₀))
-  have hij' : IsCompl (Set.range i.base) (Set.range j.base) := by
-    have h : Set.range j.base = (Set.range i.base)ᶜ := hij
-    rw [h]
-    exact isCompl_compl
-  let adj := ProEtaleWeilSheaf.derivedUpperStarLowerStarAdjunction k₀ l i
-  refine ⟨{ app K := ObjectProperty.homMk (adj.unit.app K.obj)
-            naturality _ _ f := ObjectProperty.hom_ext _ (adj.unit.naturality f.hom) },
-    fun K hK ↦ ?_⟩
-  have := ProEtaleWeilSheaf.preservesFiniteColimits_lowerStar_of_isCompl (k₀ := k₀) (l := l)
-    i j hij'
-  have hiso : IsIso (adj.unit.app K.obj) :=
-    DerivedCategory.isIso_mapDerivedCategoryRightDerivedAdjunction_unit_app_of_isZero
-      (ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l i)
-      (ProEtaleWeilSheaf.isZero_upperStar_obj_lowerStar_obj i j hij')
-      (ProEtaleWeilSheaf.isZero_of_isZero_upperStar_of_isCompl i j hij')
-      ((ObjectProperty.ι _).map_isZero hK)
-  have : IsIso ((ObjectProperty.ι (WeilComplex.objectProperty k₀ l X)).map
-      (ObjectProperty.homMk (adj.unit.app K.obj) :
-        (show WeilComplex k₀ l X from K) ⟶ (WeilComplex.derivedLowerStar i).obj
-          ((WeilComplex.upperStar i).obj K))) := hiso
-  exact isIso_of_fully_faithful (ObjectProperty.ι _) _
+  obtain ⟨η, hη⟩ :=
+    WeilComplex.exists_isIso_app_of_isZero_upperStar_of_isClosedImmersion (k₀ := k₀) (l := l) i j
+      hij
+  refine ⟨η ≫ Functor.whiskerLeft _
+    (WeilComplex.derivedLowerStarIsoDerivedLowerStarOfIsClosedImmersion (k₀ := k₀) (l := l)
+      i).inv, fun K hK ↦ ?_⟩
+  have := hη K hK
+  dsimp
+  infer_instance
 
 
 end AlgebraicGeometry

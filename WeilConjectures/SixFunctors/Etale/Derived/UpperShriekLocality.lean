@@ -8,6 +8,8 @@ module
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.OpenClosed.Conservative
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 
 /-!
 # Open restriction and compactifications for `Rf^!`
@@ -85,21 +87,12 @@ section OpenImmersion
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [HasCompactification j]
   [QuasiCompact j]
 
-/-- For a quasi-compact open immersion `j : U ⟶ X`, the derived lower shriek `Rj_!` is the
-extension by zero `Dj_!`: it is computed by the compactification `U ⟶[j] X ⟶[𝟙] X`
-(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`), and `R(𝟙 X)_* ≅ 𝟭`. -/
-noncomputable def rightDerivedLowerShriekOpenImmersionIso :
-    R(j)_![ModuleCat.{u + 1} Λ] ≅ D((j)_!open[ModuleCat.{u + 1} Λ]) :=
-  (rightDerivedLowerShriekIso Λ (Compactification.ofIsOpenImmersion j)).symm ≪≫
-    Functor.isoWhiskerLeft D((j)_!open[ModuleCat.{u + 1} Λ]) (rightDerivedLowerStarIdIso Λ X) ≪≫
-    Functor.rightUnitor _
-
 /-- The adjunction `Rj_! ⊣ Dj^*` for a quasi-compact open immersion `j`: the adjunction
 `Dj_! ⊣ Dj^*` transported along `Rj_! ≅ Dj_!`. -/
 noncomputable def rightDerivedLowerShriekOpenImmersionAdjunction :
     R(j)_![ModuleCat.{u + 1} Λ] ⊣ D((j)^*[ModuleCat.{u + 1} Λ]) :=
   (derivedOpenImmersionLowerShriekUpperStarAdjunction _ j).ofNatIsoLeft
-    (rightDerivedLowerShriekOpenImmersionIso Λ j).symm
+    (rightDerivedLowerShriekIsoOfIsOpenImmersion Λ j).symm
 
 /-- The isomorphism `Rj^! ≅ Dj^*` for a quasi-compact open immersion `j`, compatible with the
 adjunctions `Rj_! ⊣ Rj^!` and `Rj_! ⊣ Dj^*`. -/
@@ -114,8 +107,8 @@ noncomputable def rightDerivedUpperShriekOpenImmersionIso :
 For a quasi-compact open immersion `j : U ⟶ X` and finite `Λ`, the extension by zero
 `Dj_!` is left adjoint to `Dj^*`
 (`AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekUpperStarAdjunction`),
-`Rj_! ≅ Dj_!` (`AlgebraicGeometry.Etale.rightDerivedLowerShriekOpenImmersionIso`), and there is
-a unique isomorphism `Rj^! ≅ Dj^*` compatible with the adjunctions `Rj_! ⊣ Rj^!` and
+`Rj_! ≅ Dj_!` (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoOfIsOpenImmersion`), and
+there is a unique isomorphism `Rj^! ≅ Dj^*` compatible with the adjunctions `Rj_! ⊣ Rj^!` and
 `Rj_! ⊣ Dj^*`, namely `AlgebraicGeometry.Etale.rightDerivedUpperShriekOpenImmersionIso`. -/
 theorem existsUnique_rightDerivedUpperShriekOpenImmersionIso :
     ∃! e : R(j)^![ModuleCat.{u + 1} Λ] ≅ D((j)^*[ModuleCat.{u + 1} Λ]),
@@ -179,20 +172,12 @@ section Proper
 
 variable {X Y : Scheme.{u}} (p : X ⟶ Y) [IsProper p]
 
-/-- For a proper `p`, the derived lower shriek `Rp_!` is the derived pushforward `Rp_*`: it is
-computed by the compactification `X ⟶[𝟙] X ⟶[p] Y`
-(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`), and `D(𝟙_!) ≅ 𝟭`. -/
-noncomputable def rightDerivedLowerShriekProperIso :
-    R(p)_![ModuleCat.{u + 1} Λ] ≅ R((p)_*[ModuleCat.{u + 1} Λ]) :=
-  (rightDerivedLowerShriekIso Λ (Compactification.ofIsProper p)).symm ≪≫
-    Functor.isoWhiskerRight (mapDerivedCategoryOpenImmersionLowerShriekId _ X) _ ≪≫
-    Functor.leftUnitor _
-
 /-- The adjunction `Rp_* ⊣ Rp^!` for a proper `p`: the adjunction `Rp_! ⊣ Rp^!` transported
-along `Rp_! ≅ Rp_*`. -/
+along `Rp_! ≅ Rp_*` (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`). -/
 noncomputable def rightDerivedLowerStarUpperShriekAdjunctionOfIsProper :
     R((p)_*[ModuleCat.{u + 1} Λ]) ⊣ R(p)^![ModuleCat.{u + 1} Λ] :=
-  (rightDerivedUpperShriekAdjunction _ p).ofNatIsoLeft (rightDerivedLowerShriekProperIso Λ p)
+  (rightDerivedUpperShriekAdjunction _ p).ofNatIsoLeft
+    (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) p)
 
 end Proper
 

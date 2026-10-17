@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.ConstructibleTorsion
+public import WeilConjectures.CategoryTheory.DerivedCategory.Rationalization
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsLowerStar
@@ -133,20 +134,6 @@ lemma _root_.CategoryTheory.smul_id_eq_zero_of_iso {C : Type*} [Category C] [Pre
   have : r • 𝟙 B = e.inv ≫ (r • 𝟙 A) ≫ e.hom := by simp
   rw [this, h, zero_comp, comp_zero]
 
-/-- **Killing an extension.** In a distinguished triangle `A ⟶ B ⟶ C ⟶ A⟦1⟧` of an `R`-linear
-pretriangulated category, if `r` kills `A` and `s` kills `C`, then `r * s` kills `B`: `s • 𝟙 B`
-vanishes on `C`, so it factors through `A ⟶ B`, where `r` acts by zero. -/
-lemma _root_.CategoryTheory.Pretriangulated.smul_id_obj₂_eq_zero {C : Type*} [Category C]
-    [Preadditive C] [HasZeroObject C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive]
-    [Pretriangulated C] {R : Type*} [Ring R] [Linear R C] {T : Triangle C}
-    (hT : T ∈ distTriang C) {r s : R} (hr : r • 𝟙 T.obj₁ = 0) (hs : s • 𝟙 T.obj₃ = 0) :
-    (r * s) • 𝟙 T.obj₂ = 0 := by
-  obtain ⟨h, hh⟩ := Triangle.coyoneda_exact₂ T hT (s • 𝟙 T.obj₂) (by
-    have : (s • 𝟙 T.obj₂) ≫ T.mor₂ = T.mor₂ ≫ (s • 𝟙 T.obj₃) := by simp
-    rw [this, hs, comp_zero])
-  have : r • T.mor₁ = (r • 𝟙 T.obj₁) ≫ T.mor₁ := by simp
-  rw [mul_smul, hh, ← Linear.comp_smul, this, hr, zero_comp, comp_zero]
-
 /-- The elements of an ideal `J` kill the homology sheaves of every complex killed by `J`, the
 homology functors being linear. -/
 lemma smul_id_homologyFunctor_obj_eq_zero
@@ -217,7 +204,7 @@ lemma boundedConstructible_rightDerivedLowerStar_of_isGE_of_isLE [IsNoetherianRi
         intro r hr
         rw [pow_succ] at hr
         refine Submodule.mul_induction_on hr (fun x hx y hy ↦ ?_) (fun x y hx hy ↦ ?_)
-        · exact smul_id_obj₂_eq_zero hT (h₁.2 x hx) (h₃J y hy)
+        · exact Rationalization.smul_id_obj₂_eq_zero hT (h₁.2 x hx) (h₃J y hy)
         · rw [add_smul, hx, hy, add_zero]
       have : Finite (Λ ⧸ J ^ (m + 1)) := Ideal.finite_quotient_pow (IsNoetherian.noetherian J) _
       refine ⟨DerivedCategory.boundedConstructible_obj₂_of_smul_eq_zero (J := J ^ (m + 1))
