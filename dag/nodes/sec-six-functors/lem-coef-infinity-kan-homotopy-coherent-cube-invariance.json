@@ -10,9 +10,120 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $I=\\Delta^1$ and $T=\\operatorname{Fun}(I,W')$. By [lem-cbc-kan-functor-space-kan], $T$ is Kan. Each evaluation $e_i:T\\to W'$ is a trivial fibration: a lifting problem against $\\partial\\Delta^n\\hookrightarrow\\Delta^n$ transposes to extension into $W'$ from $(I\\times\\partial\\Delta^n)\\cup(\\{i\\}\\times\\Delta^n)$ to $I\\times\\Delta^n$. This inclusion is the pushout-product of a boundary monomorphism with the endpoint horn $\\{i\\}\\hookrightarrow I$, hence anodyne by [lem-coef-sset-anodyne-pushout-product]. The Kan condition fills it, and the boundary-lifting characterization in [lem-coef-kan-quillen-model-right-proper-core] applies, including $n=0$. All path pullbacks below are Kan by [lem-coef-kan-pullback-path-comparison]. Name the span-face homotopies $\\alpha:du\\simeq u'b$ and $\\beta:dv\\simeq v'c$, viewed as maps $U\\to T$ and $V\\to T$. Name the other faces $F:bf\\simeq f'a$ and $G:cg\\simeq g'a$. Oppositely oriented specified faces can be represented in these orientations by filling the outer two-horns in the appropriate Kan mapping space; no reversal map of $I$ is used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-kan-functor-space-kan",
+    "lem-coef-sset-anodyne-pushout-product",
+    "lem-coef-kan-quillen-model-right-proper-core",
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00TM",
+    "place": "Corollary 3.1.3.3 and the endpoint restriction case; explicit pushout-product lifting. The orientation adjustment is the outer-horn inverse construction in a Kan complex."
+   }
+  },
+  {
+   "text": "Form $R=P(\\alpha,\\beta)=U\\times_{T,e_0}\\operatorname{Fun}(I,T)\\times_{e_1,T}V$. Here the evaluations in this formula are in the new path parameter $s$; write $t$ for the path parameter inside $T$. Evaluation at $t=i$ gives $r_i:R\\to P_i$, where $P_0=P(du,dv)$ and $P_1=P(u'b,v'c)$. These are strict span maps with vertex maps $\\mathrm{id}_U,\\mathrm{id}_V,e_i$. Step 1 and [lem-coef-kan-homotopy-pullback-invariance] make both $r_i$ weak equivalences. The same node gives weak equivalences $j:P(u,v)\\to P_0$ induced by $(\\mathrm{id}_U,\\mathrm{id}_V,d)$, and $k:P_1\\to P(u',v')$ induced by $(b,c,\\mathrm{id}_{W'})$. Its strict-commutation hypotheses hold by the definitions of $du,dv,u'b,v'c$; it is not applied directly to a homotopy-commuting face.",
+   "uses": [
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/032B",
+    "place": "Proposition 3.4.0.9, applied to the four explicitly strictly commuting span maps."
+   }
+  },
+  {
+   "text": "The map $r_0$ has the right lifting property against every boundary inclusion. Indeed a boundary lifting problem prescribes a map to $W'$ on $(I_s\\times\\partial\\Delta^n\\times I_t)\\cup(\\partial I_s\\times\\Delta^n\\times I_t)\\cup(I_s\\times\\Delta^n\\times\\{0\\})$: these three parts are respectively the given boundary in $R$, the prescribed paths $\\alpha,\\beta$, and the given simplex of $P_0$. They agree on intersections. Put $B=I_s\\times\\Delta^n$ and $B_0=(I_s\\times\\partial\\Delta^n)\\cup(\\partial I_s\\times\\Delta^n)$. The inclusion of the prescribed union into $B\\times I_t$ is $ (B_0\\hookrightarrow B)\\mathbin{\\square}(\\{0\\}\\hookrightarrow I_t)$, anodyne by [lem-coef-sset-anodyne-pushout-product]. Fill into the Kan complex $W'$. Thus $r_0$ is a trivial fibration by [lem-coef-kan-quillen-model-right-proper-core]. As every monomorphism is built from boundary inclusions, $r_0$ lifts against every monomorphism. Lifting $\\varnothing\\hookrightarrow P_0$ gives a section $\\sigma$. Any two sections are homotopic over $P_0$ by lifting $P_0\\times\\partial I\\hookrightarrow P_0\\times I$, with base the projection to $P_0$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-sset-anodyne-pushout-product",
+    "lem-coef-kan-quillen-model-right-proper-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00TM",
+    "place": "Explicit relative-square extension, a single pushout-product lifting argument; boundary-lifting and monomorphism generation from the existing Kan-Quillen core node."
+   }
+  },
+  {
+   "text": "Define $\\Psi=k r_1\\sigma j:P(u,v)\\to P(u',v')$. Since $r_0\\sigma=1$, two-out-of-three in [lem-coef-kan-quillen-model-right-proper-core] and Step 2 make $\\sigma$, hence $\\Psi$, weak equivalences. They therefore become isomorphisms in the homotopy category. Its endpoint coordinates are $b,c$. Its path coordinate $\\eta$ is the $t=1$ edge of the square supplied by $\\sigma$, whose $t=0$ edge is $d\\gamma$ and whose $s=0,1$ edges are $\\alpha,\\beta$. Triangulating this square and applying [lem-coef-edge-homotopy-quotient-calculus] gives $[\\alpha][\\eta]=[d\\gamma][\\beta]$, with products here and below written in traversal order. Outer two-horn fillers give inverses to every edge class in a Kan complex, so $[\\eta]=[\\alpha]^{-1}[d\\gamma][\\beta]$. This is exactly the prescribed span comparison. The section homotopy of Step 3 shows independence of its filler choices. Equivalently its class is the roof $[k][r_1][r_0]^{-1}[j]$, without choosing a strict concatenation operation.",
+   "uses": [
+    "lem-coef-kan-quillen-model-right-proper-core",
+    "lem-coef-edge-homotopy-quotient-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean",
+    "place": "Edge.CompStruct.nonempty_iff, lines 295-297, for the two triangles; model two-out-of-three and the explicit roof of Step 2."
+   }
+  },
+  {
+   "text": "Let $q:A\\to P(u,v)$ and $q':A'\\to P(u',v')$ be the given comparison maps, and let $\\lambda:A\\times I\\to W'$ be the path coordinate of $\\Psi q$. Work in the Kan complex $M=\\operatorname{Fun}(A,W')$, which is Kan by [lem-cbc-kan-functor-space-kan]. Step 4 gives $[\\alpha f][\\lambda]=[dH][\\beta g]$. The cube hypothesis gives $[dH][\\beta g][v'G]=[\\alpha f][u'F][H'a]$. To interpret its relative-endpoint homotopies in the edge quotient, triangulate a relative homotopy square: its two constant endpoint edges are identities, so the triangle composition rule of [lem-coef-edge-homotopy-quotient-calculus] equates the two path classes. Thus cancellation of the invertible class $[\\alpha f]$ gives $[\\lambda][v'G]=[u'F][H'a]$ in $H_L(M)$. The equality uses the specified cube coherence, rather than only the classes of its vertices or its four vertical equivalences.",
+   "uses": [
+    "lem-cbc-kan-functor-space-kan",
+    "lem-coef-edge-homotopy-quotient-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean",
+    "place": "HomotopicL, quotient category, and triangle composition criterion, lines 78-79 and 203-311; direct application to the supplied relative-endpoint cube coherence."
+   }
+  },
+  {
+   "text": "Choose a triangle in $M$ composing $\\lambda$ and $v'G$, and denote its diagonal by $z$. Such a triangle exists by the Kan condition. By Step 5, the composite of $u'F$ and $H'a$ has the same class $[z]$. The if-and-only-if in [lem-coef-edge-homotopy-quotient-calculus] supplies a triangle with exactly those two edges and the same diagonal $z$. Glue the two triangles along $z$ to obtain a simplicial square in $M$ with bottom $\\lambda$, top $H'a$, and side edges $u'F,v'G$. By the internal-functor definition this is a map $A\\times I\\times I\\to W'$. Together with $F:A\\times I\\to U'$ and $G:A\\times I\\to V'$ it defines a homotopy $A\\times I\\to P(u',v')$ from $\\Psi q$ to $q'a$: the two path endpoints agree with $u'F,v'G$ at every simplex. Hence the cube coherence gives precisely the asserted homotopy of comparison maps.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-edge-homotopy-quotient-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean",
+    "place": "Edge.CompStruct.nonempty_iff, lines 295-297, supplies the second triangle with its prescribed diagonal; the square gluing and internal-functor adjunction are elementary."
+   }
+  },
+  {
+   "text": "Homotopic maps have the same weak-equivalence status: for each Kan target $Z$, postcomposing a homotopy with a map into $Z$ makes the two precomposition operations equal on edge components of internal functor spaces. Thus the testing criterion of [lem-cbc-realization-weak-equivalence] gives the claim. Apply it to the homotopy in Step 6. Since $\\Psi$ and $a$ are weak equivalences, two-out-of-three in [lem-coef-kan-quillen-model-right-proper-core] gives: $q$ is a weak equivalence if and only if $\\Psi q$ is, if and only if $q'a$ is, if and only if $q'$ is. This is the desired equivalence of homotopy-pullback properties under the definition in the statement.",
+   "uses": [
+    "lem-cbc-realization-weak-equivalence",
+    "lem-coef-kan-quillen-model-right-proper-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03X7",
+    "place": "Corollary 3.6.4.3, Kan-target testing criterion; elementary precomposition with the constructed homotopy and model two-out-of-three."
+   }
+  },
+  {
+   "text": "For a finite zigzag, apply Steps 4 and 6 to each comparison. Its maps are isomorphisms in the homotopy category, invertible in either direction, and the homotopies identify the successive comparison maps there. Composing these isomorphisms gives the comparison along the zigzag. Repeated application of Step 7 preserves and reflects the homotopy-pullback property along every edge, hence between the two ends. The length-zero zigzag is the identity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/02X4",
+    "place": "Proposition 7.1.6.9 is the invariance context; this last step is composition of the already proved isomorphisms."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-kan-functor-space-kan",
+  "lem-cbc-realization-weak-equivalence",
+  "lem-coef-edge-homotopy-quotient-calculus",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-kan-quillen-model-right-proper-core",
+  "lem-coef-sset-anodyne-pushout-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/02X4",
+  "place": "Proposition 7.1.6.9 is the retained evaluation-equivalence context, not a source for a strictification theorem. Explicit path-space roof, relative-square lifting, and triangle-quotient argument, using Kerodon 032B and the existing Mathlib edge-homotopy quotient calculus. Online sources read; archival copies WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,10 +166,66 @@
    "results": "{\"t\": \"2026-10-17T09:32:17Z\", \"tool\": \"leansearch\", \"query\": \"Homotopy coherent cubes of Kan complexes preserve homotopy pullback squares with specified commutation homotopies\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp\", \"CategoryTheory.Square.IsPullback.map\", \"CategoryTheory.Square.IsPullback.iff_of_equiv\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transform_map_associator\", \"CategoryTheory.IsPushout.of_iso'\", \"CategoryTheory.Square.IsPullback.of_equiv\", \"CategoryTheory.Pseudofunctor.isoMapOfCommSq\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.precomposeObjComp\"], \"digest\": \"0aff2d80f2125d5c\"}",
    "date": "2026-10-17",
    "verdict": "no match: read the hits; they state path-object constructions, categorical pullbacks, or the opposite categorical involution, not the specified Kan path-pullback or natural subdivision zigzag theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a Kan complex a map from the boundary of the simplicial square extends to the square if and only if its two composite boundary paths are homotopic relative endpoints",
+   "results": "{\"t\": \"2026-10-17T13:01:06Z\", \"tool\": \"leanfinder\", \"query\": \"In a Kan complex a map from the boundary of the simplicial square extends to the square if and only if its two composite boundary paths are homotopic relative endpoints\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn₃₂.exists_desc\", \"SSet.horn₃₁.exists_desc\", \"SSet.horn₂₂.sq\", \"SSet.KanComplex.hornFilling\", \"SSet.horn₂₀.sq\", \"SSet.horn₂₁.sq\", \"SSet.Truncated.homotopicL_iff_homotopicR\", \"SSet.Truncated.HomotopicL\"], \"digest\": \"10c14efd06a31fcd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: triangle and ordinary categorical lemmas do not state coherent-cube path-pullback invariance; the exact triangle criterion is reused through existing lem-coef-edge-homotopy-quotient-calculus"
+  },
+  {
+   "tool": "grep",
+   "query": "homotop.*[Ss]quare|[Ss]quare.*homotop|comp.*homotopic|homotopic.*comp",
+   "results": "{\"t\": \"2026-10-17T13:02:11Z\", \"tool\": \"grep\", \"query\": \"homotop.*[Ss]quare|[Ss]quare.*homotop|comp.*homotopic|homotopic.*comp\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/FundamentalGroupoid/Product.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/Product.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/Basic.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/InducedMaps.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"80d8bfa99d66371a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: triangle and ordinary categorical lemmas do not state coherent-cube path-pullback invariance; the exact triangle criterion is reused through existing lem-coef-edge-homotopy-quotient-calculus"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A commutative quadrilateral in the homotopy category of a Kan complex lifts to a square with the prescribed four boundary edges",
+   "results": "{\"t\": \"2026-10-17T13:02:11Z\", \"tool\": \"leansearch\", \"query\": \"A commutative quadrilateral in the homotopy category of a Kan complex lifts to a square with the prescribed four boundary edges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CommSq.fac_left\", \"CategoryTheory.IsHomLift.of_commsq\", \"CategoryTheory.CommSq.fac_right\", \"CategoryTheory.CommSq.HasLift.congr_simp\", \"CategoryTheory.CommSq.HasLift.mk\", \"CategoryTheory.CommSq.HasLift\", \"CategoryTheory.CommSq.HasLift.mk'\", \"CategoryTheory.CommSq.LiftStruct\"], \"digest\": \"35650d55d172b4ff\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: triangle and ordinary categorical lemmas do not state coherent-cube path-pullback invariance; the exact triangle criterion is reused through existing lem-coef-edge-homotopy-quotient-calculus"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Truncated.HomotopyCategory, SSet.Truncated.CompStruct",
+   "results": "{\"t\": \"2026-10-17T13:02:12Z\", \"tool\": \"loogle\", \"query\": \"SSet.Truncated.HomotopyCategory, SSet.Truncated.CompStruct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'SSet.Truncated.CompStruct'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: triangle and ordinary categorical lemmas do not state coherent-cube path-pullback invariance; the exact triangle criterion is reused through existing lem-coef-edge-homotopy-quotient-calculus"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quadrilateral of edges in a Kan simplicial set admits a simplicial square filler exactly when the two composites agree in its homotopy category",
+   "results": "{\"t\": \"2026-10-17T13:02:20Z\", \"tool\": \"leanfinder\", \"query\": \"A quadrilateral of edges in a Kan simplicial set admits a simplicial square filler exactly when the two composites agree in its homotopy category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.Edge.CompStruct.nonempty_iff\", \"SSet.Truncated.Edge.CompStruct.ofHomotopyCategory₂Fac\", \"SSet.Truncated.homotopicL_iff_homotopicR\", \"SSet.Truncated.Edge.CompStruct.homotopyCategory₂_fac\", \"SSet.Truncated.HomotopicL.homotopicR\", \"SSet.Truncated.HomotopicR\", \"SSet.Truncated.HomotopicL\", \"SSet.Truncated.HomotopyCategory.BinaryProduct.square\"], \"digest\": \"64937b5d4bc4b09c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: triangle and ordinary categorical lemmas do not state coherent-cube path-pullback invariance; the exact triangle criterion is reused through existing lem-coef-edge-homotopy-quotient-calculus"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.Truncated.Edge.CompStruct.nonempty_iff",
+   "results": "{\"t\": \"2026-10-17T13:04:13Z\", \"tool\": \"loogle\", \"query\": \"SSet.Truncated.Edge.CompStruct.nonempty_iff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.Truncated.Edge.CompStruct.nonempty_iff\"], \"digest\": \"58e1f2d9c99034c7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: triangle and ordinary categorical lemmas do not state coherent-cube path-pullback invariance; the exact triangle criterion is reused through existing lem-coef-edge-homotopy-quotient-calculus"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a two truncated quasicategory there exists a triangle with three prescribed edges if and only if their homotopy classes satisfy the composition equation",
+   "results": "{\"t\": \"2026-10-17T13:04:15Z\", \"tool\": \"leanfinder\", \"query\": \"In a two truncated quasicategory there exists a triangle with three prescribed edges if and only if their homotopy classes satisfy the composition equation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.Quasicategory₂.fill21\", \"SSet.Truncated.Quasicategory₂.fill31\", \"SSet.Truncated.Quasicategory₂.fill32\", \"SSet.Truncated.Edge.CompStruct.nonempty_iff\", \"SSet.Truncated.Edge.CompStruct.simplex\", \"SSet.Truncated.Edge.CompStruct.exists_of_simplex\", \"SSet.OneTruncation₂.HoRel₂.mk\", \"SSet.Truncated.Edge.CompStruct\"], \"digest\": \"25be326932e1bfac\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: triangle and ordinary categorical lemmas do not state coherent-cube path-pullback invariance; the exact triangle criterion is reused through existing lem-coef-edge-homotopy-quotient-calculus"
+  },
+  {
+   "tool": "grep",
+   "query": "nonempty_iff|ofHomotopyCategory₂Fac",
+   "results": "{\"t\": \"2026-10-17T13:04:16Z\", \"tool\": \"grep\", \"query\": \"nonempty_iff|ofHomotopyCategory₂Fac\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\"], \"digest\": \"3e5245ea04c14b40\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the item: triangle and ordinary categorical lemmas do not state coherent-cube path-pullback invariance; the exact triangle criterion is reused through existing lem-coef-edge-homotopy-quotient-calculus"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-relative-cone-equivalence",
@@ -70,7 +237,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: derived coefficient adjunction, via the stable enhancement and finite pushout grid of lem-coef-suspension-square-comparison; local cone filling in the mapping-space universal property of pointwise Kan diagrams. Proposition 7.1.6.9 (02X4); Proposition 7.2.2.9 (02XT), Corollary 7.2.2.2 and Corollary 7.2.1.13 specialized to indexing equivalences; Corollary 7.2.2.5 (02XV) and the mapping-space criterion, Proposition 5.1.2.1 (01TL), and the equivalence criterion, Proposition 5.1.1.9 (01TB); opposite duality of Definition 7.1.6.1 and Remark 7.1.6.2, using the natural pinch comparisons of 4.6.5.10. Supporting path-space comparison from old item step 1: strict cubes and specified coherent face homotopies.",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent cube/path-pullback comparison used in the stable enhancement and finite pushout grid; supporting path-space comparison from the retained item proof, old step 1.",
    "via": [
     "lem-coef-infinity-relative-cone-equivalence",
     "lem-coef-infinity-relative-kan-existence",
@@ -85,5 +252,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-kan-homotopy-coherent-cube-invariance",
+  "worker": "stage1",
+  "summary": "Retained the statement and earlier searches; replaced unsupported coherent-diagram strictification by the explicit R=P(alpha,beta) roof, boundary-lifting section, and prescribed-diagonal triangle assembly. Existing DAG nodes supply every non-elementary input; no new nodes.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2: stable enhancement and finite pushout grid supporting the derived coefficient adjunction, through the retained ancestry. Steps 1-4 give the path-pullback comparison; Steps 5-7 retain the coherent cube datum and prove preservation/reflection; Step 8 gives zigzags.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-realization-weak-equivalence",
+    "why": "Kan-target testing converts a specified simplicial homotopy into equality of weak-equivalence status; this general simplicial-set criterion is not stated by any node of the item unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-realization-weak-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q25-d4e996e12",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-d4e996e12 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements and sources. All eight steps check, including relative-square lifting and prescribed-boundary triangle gluing. Checked edge cases, duplicate candidates, acyclicity, unit route and archived master target signatures. Accepted the declared Kan-target testing tool use. No repairs needed; details in review.md."
  }
 }

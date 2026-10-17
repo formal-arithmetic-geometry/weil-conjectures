@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-base-linear",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "P7: the transform is linear over the base",
@@ -19,54 +19,149 @@
  ],
  "proof": [
   {
-   "text": "Write $\\pi:V\\times_SV^\\vee\\to S$ for the structure morphism of the Fourier\nsquare, so that $p\\circ p_1=\\pi=p'\\circ p_2$. Pullback is monoidal and\ncompatible with composition, hence\n\n$$\np_1^*\\bigl(K\\otimes^L_Ep^*N\\bigr)\\cong p_1^*K\\otimes^L_Ep_1^*p^*N\n\\cong p_1^*K\\otimes^L_E\\pi^*N\\cong p_1^*K\\otimes^L_Ep_2^*{p'}^*N .\n$$",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Tensoring with the kernel $\\mathcal K_\\psi$ of [def-fd-kernel] and using\nthe associativity and commutativity constraints of $\\otimes^L_E$ gives\n\n$$\np_1^*\\bigl(K\\otimes^L_Ep^*N\\bigr)\\otimes^L_E\\mathcal K_\\psi\\cong\n\\bigl(p_1^*K\\otimes^L_E\\mathcal K_\\psi\\bigr)\\otimes^L_Ep_2^*\\bigl({p'}^*N\\bigr).\n$$",
+   "text": "Use the adic coefficient setting of [def-fourier-set], in particular the standing convention that the values of $\\psi$ lie in $E$. All tensor products below are the completed integral tensor followed by rationalization, as specified by [def-weil-derived-pullback-tensor-hom]. The schemes $S,V,V^\\vee,W:=V\\times_SV^\\vee$ are separated finite-type $k$-schemes, hence quasi-compact and quasi-separated. On integral representatives the natural comparison of [lem-fix-constructible-tensor-completion] identifies this tensor with the ordinary derived tensor over the completed coefficient sheaf. Thus the associators, symmetry and unit constraints of [lem-sf-ringed-derived-closed-symmetric-monoidal], applied on small representatives of the pro-etale sites, give those same constraints for the tensor used here: conjugate each constraint by the natural tensor-completion comparison. On morphisms rationalize these constraints using the formulas of [def-weil-derived-pullback-tensor-hom]. They are natural isomorphisms; their equations remain equations after rationalization.",
    "uses": [
-    "def-fd-kernel"
+    "def-fourier-set",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-fix-constructible-tensor-completion",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-base-linear/prop-base-linear.proof.md",
+    "place": "Proof paragraphs 1-2: coefficient interpretation and tensor constraints; Stacks Tag 0FPT, lemma-symmetric-monoidal-derived; Bhatt-Scholze Lemma 6.5.5"
+   }
   },
   {
-   "text": "The first factor $A:=p_1^*K\\otimes^L_E\\mathcal K_\\psi$ lies in\n$D^b_c(V\\times_SV^\\vee,E)$ ($\\mathcal K_\\psi$ being lisse of rank one),\nand $L:={p'}^*N\\in D^b_c(V^\\vee,E)$ has finite Tor amplitude because\n$E$ is a field. The morphism $p_2$ is separated of finite type, so the\ncompact-support projection formula, clause (5) of\n[prop-functor-package], gives\n\n$$\np_{2,!}\\bigl(A\\otimes^L_Ep_2^*L\\bigr)\\cong p_{2,!}(A)\\otimes^L_EL .\n$$",
+   "text": "Let $p_1:W\\to V$ and $p_2:W\\to V^\\vee$ be the projections of [def-fd-kernel], and put $\\pi=pp_1=p'p_2$. The vector-bundle map $p$ is affine of finite type: over a trivializing affine open $\\operatorname{Spec}A\\subset S$ its coordinate algebra is $A[t_1,\\ldots,t_r]$. It is separated, since its affine-chart diagonal is the closed immersion defined by the surjection $A[t_1,\\ldots,t_r]\\otimes_A A[t_1,\\ldots,t_r]\\to A[t_1,\\ldots,t_r]$. Apply [lem-pod-separated-finite-type-base-change] to $p$ and $p'$ to see that its base change $p_2$ is separated of finite type. The argument also applies when $r=0$.",
    "uses": [
-    "prop-functor-package"
+    "def-fd-kernel",
+    "lem-pod-separated-finite-type-base-change"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-base-linear/prop-base-linear.proof.md",
+    "place": "Proof paragraph 3: the geometric hypothesis on the second projection"
+   }
   },
   {
-   "text": "Finally the shift commutes with tensoring by $L$,\n$(X\\otimes^L_EL)[r]\\cong X[r]\\otimes^L_EL$, and by the definition\n[def-fd-transform] the two sides are\n$\\operatorname{FT}_\\psi(K\\otimes^L_Ep^*N)$ and\n$\\operatorname{FT}_\\psi(K)\\otimes^L_E{p'}^*N$. Each isomorphism used is a\nnatural transformation, whence naturality in $K$ and $N$.",
+   "text": "The monoidal pullback isomorphism of [lem-pur-derived-pullback-tensor-iso] and the pullback-composition isomorphisms of [sk-thm-sf-compatibility] (1), used with $pp_1=p'p_2$, give the following composite, natural in both inputs:\n$$p_1^*(K\\otimes_E^Lp^*N)\\simeq p_1^*K\\otimes_E^Lp_1^*p^*N\\simeq p_1^*K\\otimes_E^L\\pi^*N\\simeq p_1^*K\\otimes_E^Lp_2^*{p'}^*N.$$\nThese are the completed/rational pullbacks in the cited statements; no discrete non-torsion etale comparison is used.",
    "uses": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "sk-thm-sf-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-base-linear/prop-base-linear.proof.md",
+    "place": "Proof paragraph 1: the three pullback identifications; Stacks Tag 07A4, lemma-pullback-tensor-product, at finite level and its stated coefficient transports"
+   }
+  },
+  {
+   "text": "Set $A=p_1^*K\\otimes_E^L\\mathcal K_\\psi$ and $L={p'}^*N$. The integrand assertion in [def-fd-kernel] places $A$ in $D^b_c(W,E)$. Apply [lem-pur-integral-operations-preserve-constructible] to integral representatives and rationalize by [def-weil-derived-pullback-tensor-hom]; this places $L$ in $D^b_c(V^\\vee,E)$, and [lem-weil-field-tor-amplitude], with coefficient field $E$, gives its finite Tor amplitude. Tensor the isomorphism of step 3 with $\\mathcal K_\\psi$, and apply the associativity and symmetry constraints from step 1, moving $p_2^*L$ past the kernel. This gives\n$$p_1^*(K\\otimes_E^Lp^*N)\\otimes_E^L\\mathcal K_\\psi\\simeq A\\otimes_E^Lp_2^*L.$$\nThe same preservation statement and its rationalization show that both sides lie in the specified bounded constructible category.",
+   "uses": [
+    "def-fd-kernel",
+    "lem-pur-integral-operations-preserve-constructible",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-field-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-base-linear/prop-base-linear.proof.md",
+    "place": "Proof paragraphs 2-3: rearrange the integrand and check the coefficient domains"
+   }
+  },
+  {
+   "text": "Apply clause (5) of [prop-functor-package] to $f=p_2$, first input $A$, and second input $L$. Step 2 verifies separated finite type, and step 4 verifies exactly the constructibility and finite-Tor hypotheses. The inverse of its projection isomorphism, composed with $p_{2,!}$ of the preceding integrand isomorphism, is\n$$p_{2,!}\\bigl(p_1^*(K\\otimes_E^Lp^*N)\\otimes_E^L\\mathcal K_\\psi\\bigr)\\simeq p_{2,!}(A)\\otimes_E^LL.$$\nIt is natural in $K,N$: the projection map is natural in its two arguments by [prop-sf-pf-coherence], and all previous maps are natural.",
+   "uses": [
+    "prop-functor-package",
+    "prop-sf-pf-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-base-linear/prop-base-linear.proof.md",
+    "place": "Proof paragraph 3: compact-support projection formula, with the isomorphism read in the inverse direction"
+   }
+  },
+  {
+   "text": "Shift the last isomorphism by $[r]$. The integral right-shift comparison of [lem-sf-completed-tensor-shift-right], followed by rationalization as in [def-weil-derived-pullback-tensor-hom], gives $L\\otimes_E^L X[r]\\simeq(L\\otimes_E^LX)[r]$. With the symmetry of step 1 this gives\n$$X[r]\\otimes_E^LL\\simeq L\\otimes_E^LX[r]\\simeq(L\\otimes_E^LX)[r]\\simeq(X\\otimes_E^LL)[r].$$\nUse its inverse for $X=p_{2,!}(A)$ and the definition [def-fd-transform]. The result is\n$$\\operatorname{FT}_\\psi(K\\otimes_E^Lp^*N)\\simeq\\operatorname{FT}_\\psi(K)\\otimes_E^L{p'}^*N.$$\nThe shift comparison and symmetry are natural, so this establishes the asserted bifunctorial isomorphism.",
+   "uses": [
+    "lem-sf-completed-tensor-shift-right",
+    "def-weil-derived-pullback-tensor-hom",
     "def-fd-transform"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-base-linear/prop-base-linear.proof.md",
+    "place": "Proof paragraph 4: commute the normalization shift with tensor"
+   }
   },
   {
-   "text": "(1) is the case $K=\\underline E=E_V$, since $E_V\\otimes^L_Ep^*N\\cong p^*N$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "(2) Let $E_S(m)$, $E_V(m)$, $E_{V^\\vee}(m)$ be the twisting objects of\n[def-wf-tate-twist] on $S$, $V$, $V^\\vee$. For any morphism $f:X\\to Y$\nthe canonical isomorphisms $f^*\\mu_{\\ell^n,Y}\\cong\\mu_{\\ell^n,X}$\n(both being the sheaf represented by the group scheme $\\mu_{\\ell^n}$)\nare compatible with the $\\ell$-th power transition maps; since\n$\\mathbf Z_\\ell(1)_Y$ is pro-etale locally isomorphic to the constant\nsheaf $\\mathbf Z_\\ell$, whose pullback is again $\\mathbf Z_\\ell$, the\npullback commutes with this limit, and they give\n$f^*E_Y(1)\\cong E_X(1)$; since $f^*$ is monoidal, this gives\n$f^*E_Y(m)\\cong E_X(m)$ for $m\\ge0$, and, $E_Y(m)$ being invertible\n(lisse of rank one) with inverse $E_Y(-m)=R\\mathcal Hom_E(E_Y(m),E_Y)$,\npullback commutes with this dual, which gives the case $m<0$. Hence\n$K(m)=K\\otimes^L_EE_V(m)\\cong K\\otimes^L_Ep^*E_S(m)$ and\n$\\operatorname{FT}_\\psi(K)(m)\\cong\\operatorname{FT}_\\psi(K)\\otimes^L_E{p'}^*E_S(m)$,\nand the main isomorphism with $N=E_S(m)$ gives (2). The Frobenius\npullbacks commute with all the canonical isomorphisms used (monoidality\nof pullback, the projection-formula map, the pullback of roots of\nunity), so a Weil structure on $K$ is carried to the Weil structure on\nboth sides.",
+   "text": "The coefficient unit $E_V$ is bounded constructible by [lem-weil-constant-coefficient-objects-constructible]. Specialize step 6 to $K=E_V$, and apply the left unit constraint from step 1, $E_V\\otimes_E^Lp^*N\\simeq p^*N$. This proves clause (1), naturally in $N$.",
    "uses": [
+    "lem-weil-constant-coefficient-objects-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-base-linear/prop-base-linear.proof.md",
+    "place": "Proof paragraph 5: specialization to the coefficient unit"
+   }
+  },
+  {
+   "text": "For $m\\in\\mathbf Z$ take $N=E_S(m)$. This is a bounded constructible invertible coefficient line by [prop-weil-twist-preserves]; its negative powers are included in that statement. The canonical Tate pullback comparisons of [det-prop-sfb-cartesian-coefficients-twists] give $p^*E_S(m)\\simeq E_V(m)$ and ${p'}^*E_S(m)\\simeq E_{V^\\vee}(m)$. Apply step 6 to this $N$ and use the definition $K(m)=K\\otimes_E^LE_V(m)$ from [def-wf-tate-twist]. This proves clause (2) on the underlying complexes for all integers $m$, including $m=0$ and $m<0$.",
+   "uses": [
+    "prop-weil-twist-preserves",
+    "det-prop-sfb-cartesian-coefficients-twists",
     "def-wf-tate-twist"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-base-linear/prop-base-linear.proof.md",
+    "place": "Proof paragraph 6: Tate twists pulled back from the base, using the existing all-integer pullback theorem"
+   }
+  },
+  {
+   "text": "Suppose $K$ has a Weil structure. The maps $p,p',p_1,p_2$ and the kernel in [def-fd-kernel] are defined over $k_0$. By [lem-fix-weil-operations], their pullback, tensor and compact-support images carry the canonical Weil structures, and the composition, exchange and projection maps used above are equivariant. The Tate lines have their prescribed roots-of-unity Frobenius structure [def-weil-frobenius-coefficient-twists]. The Tate pullback comparisons commute with this structure: for each finite roots-of-unity sheaf, pulling a section along the structural map and along Frobenius in either order gives the same section, since the corresponding scheme square commutes. This equality respects the power transition maps, tensor powers and the evaluation maps defining negative powers; it therefore holds for the canonical all-integer comparisons of [det-prop-sfb-cartesian-coefficients-twists]. Tensor constraints are constraints of the induced Weil tensor operation. Shifting a commuting square shifts both of its sides, so the shift comparisons also preserve it. Consequently the composite $e_K$ of step 8 satisfies $e_K\\varphi_{\\operatorname{FT}(K(m))}=\\varphi_{\\operatorname{FT}(K)(m)}\\Phi_{V^\\vee}^*(e_K)$, exactly the morphism condition in [def-wf-weil-category]. Its inverse satisfies the same equation by composing with inverses. Thus the isomorphism is one of Weil complexes.",
+   "uses": [
+    "def-fd-kernel",
+    "lem-fix-weil-operations",
+    "def-weil-frobenius-coefficient-twists",
+    "det-prop-sfb-cartesian-coefficients-twists",
+    "def-wf-weil-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-base-linear/prop-base-linear.proof.md",
+    "place": "Proof paragraph 6, final sentence: the Frobenius square for the actual composite"
+   }
   }
  ],
  "proof_deps": [
+  "def-fourier-set",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-fix-constructible-tensor-completion",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
   "def-fd-kernel",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-pur-derived-pullback-tensor-iso",
+  "sk-thm-sf-compatibility",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-weil-field-tor-amplitude",
   "prop-functor-package",
+  "prop-sf-pf-coherence",
+  "lem-sf-completed-tensor-shift-right",
   "def-fd-transform",
-  "def-wf-tate-twist"
+  "lem-weil-constant-coefficient-objects-constructible",
+  "prop-weil-twist-preserves",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "def-wf-tate-twist",
+  "lem-fix-weil-operations",
+  "def-weil-frobenius-coefficient-twists",
+  "def-wf-weil-category"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-prop-base-linear/prop-base-linear.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-base-linear/prop-base-linear.proof.md",
+  "place": "Proof paragraphs 1-6, with explicit existing-node citations and completed coefficient interpretation"
  },
  "mathlib_searches": [
   {
@@ -74,10 +169,151 @@
    "query": "AlgebraicGeometry.Etale.fourierTransformTensorIso",
    "results": [],
    "date": "2026-10-08"
+  },
+  {
+   "tool": "grep",
+   "query": "fourierTransform|fourier.*[Dd]eligne|[Tt]ate[Tt]wist",
+   "results": {
+    "top": [
+     "Mathlib/NumberTheory/LSeries/DirichletContinuation.lean",
+     "Mathlib/Analysis/Fourier/LpSpace.lean",
+     "Mathlib/Analysis/Fourier/LpSpace.lean",
+     "Mathlib/Analysis/Fourier/LpSpace.lean",
+     "Mathlib/Analysis/Fourier/LpSpace.lean",
+     "Mathlib/Analysis/Fourier/LpSpace.lean",
+     "Mathlib/Analysis/Fourier/PoissonSummation.lean",
+     "Mathlib/Analysis/Fourier/PoissonSummation.lean"
+    ],
+    "note": "",
+    "n_hits": 25,
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: returned names concern analytic Fourier transforms or ordinary sheaf pullback, not the Fourier-Deligne transform on adic constructible complexes; an unknown-identifier response alone is not evidence of absence"
+  },
+  {
+   "tool": "loogle",
+   "query": "fourierTransform, tensor",
+   "results": {
+    "top": [],
+    "note": "loogle: unknown identifier 'fourierTransform'",
+    "n_hits": 0,
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: returned names concern analytic Fourier transforms or ordinary sheaf pullback, not the Fourier-Deligne transform on adic constructible complexes; an unknown-identifier response alone is not evidence of absence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fourier Deligne transform is linear over the base by the compact support projection formula",
+   "results": {
+    "top": [
+     "FourierTransform.fourierₗ",
+     "FourierTransform.fourierInvₗ",
+     "VectorFourier.fourierIntegral_const_smul",
+     "FourierTransform.fourierₗ_apply",
+     "MeasureTheory.Lp.instFourierAdd",
+     "FourierAdd",
+     "TemperedDistribution.fourierTransformCLM_apply",
+     "SchwartzMap.instFourierAdd"
+    ],
+    "note": "",
+    "n_hits": 8,
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: returned names concern analytic Fourier transforms or ordinary sheaf pullback, not the Fourier-Deligne transform on adic constructible complexes; an unknown-identifier response alone is not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Fourier Deligne transform commutes naturally with tensoring by a bounded constructible complex pulled back from the base and with Tate twists",
+   "results": {
+    "top": [
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+     "LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+     "SheafOfModules.freeFunctorCompPullbackIso",
+     "LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+     "LightCondensed.ihomPoints_symm_comp",
+     "SheafOfModules.pullbackComp"
+    ],
+    "note": "",
+    "n_hits": 8,
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: returned names concern analytic Fourier transforms or ordinary sheaf pullback, not the Fourier-Deligne transform on adic constructible complexes; an unknown-identifier response alone is not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "kernelTransform|fourier.*[Dd]eligne|[Tt]ate[Tt]wist|compactSupport.*[Tt]ensor",
+   "results": {
+    "top": [],
+    "note": "",
+    "n_hits": 0,
+    "subdirectory": "AlgebraicGeometry"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: returned names concern analytic Fourier transforms or ordinary sheaf pullback, not the Fourier-Deligne transform on adic constructible complexes; an unknown-identifier response alone is not evidence of absence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, MonoidalCategory.tensorObj",
+   "results": {
+    "top": [],
+    "note": "loogle: unknown identifier 'MonoidalCategory.tensorObj'",
+    "n_hits": 0,
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: returned names concern analytic Fourier transforms or ordinary sheaf pullback, not the Fourier-Deligne transform on adic constructible complexes; an unknown-identifier response alone is not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a kernel integral transform on derived sheaves the projection formula gives an isomorphism when an input is tensored with a pullback from the base",
+   "results": {
+    "top": [
+     "SheafOfModules.freeFunctorCompPullbackIso",
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.pullbackIso",
+     "SheafOfModules.pullbackObjFreeIso",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+     "SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc"
+    ],
+    "note": "",
+    "n_hits": 8,
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: returned names concern analytic Fourier transforms or ordinary sheaf pullback, not the Fourier-Deligne transform on adic constructible complexes; an unknown-identifier response alone is not evidence of absence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fourier\"",
+   "results": {
+    "top": [
+     "Lean.Elab.Tactic.Omega.Problem.FourierMotzkinData",
+     "Lean.Elab.Tactic.Omega.Problem.instInhabitedFourierMotzkinData",
+     "Lean.Elab.Tactic.Omega.Problem.instToStringFourierMotzkinData",
+     "Lean.Elab.Tactic.Omega.Problem.FourierMotzkinData.exact",
+     "Lean.Elab.Tactic.Omega.Problem.FourierMotzkinData.isEmpty",
+     "Lean.Elab.Tactic.Omega.Problem.FourierMotzkinData.lowerExact",
+     "Lean.Elab.Tactic.Omega.Problem.FourierMotzkinData.size",
+     "Lean.Elab.Tactic.Omega.Problem.FourierMotzkinData.upperExact"
+    ],
+    "note": "",
+    "n_hits": 12,
+    "subdirectory": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: returned names concern analytic Fourier transforms or ordinary sheaf pullback, not the Fourier-Deligne transform on adic constructible complexes; an unknown-identifier response alone is not evidence of absence"
   }
  ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -201,5 +437,94 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here); Lean refresh 7d675a26 (L): moved from WeilConjectures.FourierTransform.Properties:431"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-base-linear",
+  "worker": "stage1",
+  "summary": "Retained the statement and adic coefficient setting; replaced uncited monoidality, tensor shifts and inverse-limit claims with existing typed DAG statements. Checked the projection formula domains, bifunctoriality, all integer Tate twists and the Weil morphism equation. No new nodes. The audit-open affine adic finiteness declaration already belongs to lem-sf-adic-affine-direct-image-finiteness.",
+  "blueprint": "Steps 1-6 realize the sole unit proof step: Fourier-square pullback, tensor kernel, projection formula, shift. Step 7 realizes its specialization to the unit. Steps 8-9 realize the node’s additional all-integer Tate-twist and Weil clauses (proof paragraph 6).",
+  "tool_uses": [
+   {
+    "node": "lem-fix-constructible-tensor-completion",
+    "why": "Identifies the completed constructible integral tensor with the ordinary derived tensor, allowing the existing symmetry/unit constraints; no Fourier-specific argument is replaced."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Supplies the ordinary derived associator, symmetry and units over the completed ring sheaf, transported through the cited comparison."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Checks the separated finite-type condition for the Fourier projection as a vector-bundle base change."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Supplies strong monoidality on the actual completed/rational coefficient domains, required by the unit proof."
+   },
+   {
+    "node": "sk-thm-sf-compatibility",
+    "why": "Only clause (1), composition of completed/rational pullbacks, is used for pp1=p′p2; this is a general tool for the prescribed Fourier-square argument."
+   },
+   {
+    "node": "prop-functor-package",
+    "why": "Supplies the unit proof’s compact-support projection formula and the displayed constructible domains."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Supplies the actual completed pullback and tensor constructibility domains; its rationalization is the operation at E."
+   },
+   {
+    "node": "lem-weil-field-tor-amplitude",
+    "why": "Verifies the projection formula’s finite-Tor hypothesis for the pulled-back base complex at field coefficients."
+   },
+   {
+    "node": "prop-sf-pf-coherence",
+    "why": "Only naturality of the projection transformation in its two input objects is used."
+   },
+   {
+    "node": "lem-sf-completed-tensor-shift-right",
+    "why": "Supplies the exact completed tensor shift comparison needed to move the Fourier normalization shift."
+   },
+   {
+    "node": "lem-weil-constant-coefficient-objects-constructible",
+    "why": "Allows the special input K=E_V in the already established bifunctorial isomorphism."
+   },
+   {
+    "node": "prop-weil-twist-preserves",
+    "why": "Supplies bounded constructibility and invertibility of all integer Tate lines, including negative twists."
+   },
+   {
+    "node": "det-prop-sfb-cartesian-coefficients-twists",
+    "why": "Supplies the existing all-integer Tate-line pullback comparisons; no new Tate pullback lemma is created."
+   },
+   {
+    "node": "lem-fix-weil-operations",
+    "why": "Supplies the equivariance of the operation comparisons and projection transformation for the Weil clause."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fix-constructible-tensor-completion",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-pur-derived-pullback-tensor-iso",
+  "sk-thm-sf-compatibility",
+  "prop-functor-package",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-weil-field-tor-amplitude",
+  "prop-sf-pf-coherence",
+  "lem-sf-completed-tensor-shift-right",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "prop-weil-twist-preserves",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "lem-fix-weil-operations"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q117-8d78d1282",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q117-8d78d1282 (reviewer sub-agent of L); spot-checked: Mathematics and dependencies check out. The item follows the main-20261015 blueprint update but lacked the required blueprint_update metadata; corrected DAG JSON is in fixes/dag/nodes/sec-fourier-transform/prop-base-linear.json. Full review is in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

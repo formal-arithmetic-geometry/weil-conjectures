@@ -11,9 +11,65 @@
   "def-coef-complete-algebroid",
   "lem-coef-algebroid-equivalence-nerve"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $X_n=U(C_n)$ and $Y_n=I_1(C_n)$, so the endpoint map is $Y_n\\to X_n^2$. The definition of the algebroid nerve gives $I_0(C)\\simeq U(C)$, and the equivalence-nerve lemma says that a fully faithful map induces equivalences on the fibers of $I_1$ over every pair of source objects. For a structure map $C_m\\to C_n$, compare $Y_m$ with $X_m^2\\times_{X_n^2}Y_n$. The comparison is an equivalence on each homotopy fiber over a point of $X_m^2$; applying the fiberwise comparison clause of geometric descent with the identity cover $X_m^2\\to X_m^2$ shows that this comparison is an equivalence. Hence every naturality square of $Y_\\bullet\\to X_\\bullet^2$ is a homotopy pullback.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-algebroid-equivalence-nerve",
+    "lem-coef-space-geometric-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 5.6.2, final completeness argument; Lemma 5.3.5, together with HTT Theorem 6.1.3.9"
+   }
+  },
+  {
+   "text": "Apply cartesian geometric descent to the transformation $Y_\\bullet\\to X_\\bullet^2$ from Step 1. The descent lemma states that realization commutes with finite products and that a transformation whose operator squares are pullbacks has, in every degree $n$, a pullback square from $Y_n$ to $|Y_\\bullet|$ over $X_n^2\\to|X_\\bullet|^2$. Therefore the displayed realization square in the item is a homotopy pullback for every $n$, with $|X_\\bullet|^2\\simeq|U(C_\\bullet)|^2$.",
+   "uses": [
+    "lem-coef-space-geometric-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 6.1.3.9(4), applied to the endpoint transformation"
+   }
+  },
+  {
+   "text": "The unique map $[0]\\to[n]$ in $\\Delta^{\\mathrm{op}}$ gives a structure map $C_0\\to C_n$, which is fully faithful and essentially surjective by hypothesis. The equivalence-nerve criterion therefore lets every endpoint in degree $n$ be replaced, up to an object equivalence, by one from degree zero; composition with such endpoint equivalences induces equivalences of enriched mapping objects. Thus the degree-zero fiber comparison below controls all endpoint fibers and is independent of representatives.",
+   "uses": [
+    "lem-coef-algebroid-equivalence-nerve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Lemma 5.3.4 and Lemma 5.3.5, objectwise essential-surjectivity and invariance under object equivalence"
+   }
+  },
+  {
+   "text": "Let $q:|Y_\\bullet|\\to |X_\\bullet|^2\\times_{U(B)^2}I_1(B)$ be the pullback comparison induced by the cocone. By assumption $|X_\\bullet|\\to U(B)$ is an equivalence, hence so is $|X_\\bullet|^2\\to U(B)^2$. The square of Step 2 for $n=0$ identifies the homotopy fiber of $|Y_\\bullet|$ over the image of any pair in $X_0^2$ with the corresponding fiber of $Y_0$. Since $j_0$ is fully faithful, the equivalence-nerve lemma identifies that fiber with the fiber of $I_1(B)$ over its image pair. The map $X_0^2\\to|X_\\bullet|^2$ is surjective on components by geometric descent and its finite-product clause. Hence $q$ is an equivalence by the fiberwise comparison criterion of geometric descent. Unwinding $q$ gives the canonical comparison $|I_1(C_\\bullet)|\\to I_1(B)$; its construction is the cocone map, so it is compatible with $U(B)^2\\simeq|U(C_\\bullet)|^2$.",
+   "uses": [
+    "lem-coef-algebroid-equivalence-nerve",
+    "lem-coef-space-geometric-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "Theorem 5.6.2, final fiberwise comparison and two-out-of-three argument; Proposition 5.3.6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-complete-algebroid",
+  "lem-coef-algebroid-equivalence-nerve",
+  "lem-coef-space-geometric-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178v4",
+  "place": "Theorem 5.6.2, final completeness argument, generalized to a fully faithful essentially-surjective simplicial diagram and cocone"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -52,7 +108,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-algebroid-completion",
@@ -76,5 +132,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-algebroid-equivalence-arrow-descent",
+  "worker": "stage1",
+  "summary": "Completed the item proof without adding nodes. The endpoint naturality squares follow fiberwise from full faithfulness and the equivalence-nerve statement; geometric descent realizes those pullbacks. Essential-surjectivity of the degree-zero structure maps permits endpoint replacement, and the degree-zero cover plus full faithfulness of the cocone identifies every realized endpoint fiber with the corresponding fiber in B, giving the final comparison equivalence.",
+  "blueprint": "The inherited ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, finite coefficient mapping-complex adjunction before R lim, specifically the Theorem 5.6.2 completeness-square and cartesian-descent argument."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q06-7d81bb402",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q06-7d81bb402 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources and route. Corrected step 3's reversed indexing arrow to [0]→[n] in Δᵒᵖ. Fiberwise descent proves the unchanged statement without completeness assumptions. No new nodes or dependency cycle. Complete corrected JSON and detailed review.md supplied.; 1 file(s) fixed by the reviewer"
  }
 }

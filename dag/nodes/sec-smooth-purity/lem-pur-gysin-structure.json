@@ -29,16 +29,13 @@
  ],
  "proof": [
   {
-   "text": "Use [def-pur-conventions] at its finite coefficient stage only: the coefficient unit is the constant sheaf $A_T$ in degree zero, $D^b_c(T,A)$ is the full bounded constructible subcategory of the ordinary small pro-etale derived category, and $D^b_{ctf}$ imposes its separate finite-Tor condition. The convention names the constructible exceptional inverse image on the domains specified in [def-weil-exceptional-inverse-image]; it introduces no ambient-adjoint admissibility datum. In particular it does not identify that exceptional inverse image with the ambient support right adjoint. Set $p:X\\to Y$, $\\pi=pj$, and $F=A(1)_X$, a sheaf in degree zero. The affine-line datum [def-pur-affine-line-datum] supplies the closed-open pair and the class $\\kappa(t)$; its divisibility hypothesis gives the integer $N\\geq1$ and invertible exponent $\\ell^N$. The explicit module isomorphism $A\\cong(\\mathbf Z/\\ell^N\\mathbf Z)^{ef}$ of [lem-pur-finite-kummer-level] shows that the coefficient ring is finite, as required below. By the finite-type hypothesis and [def-weil-finite-type-morphism], choose a finite affine cover $Y=\\bigcup_i\\operatorname{Spec}R_i$ with each $R_i$ a finitely generated $k$-algebra. Its inverse images give finite affine covers of $X$ and $U$ with coordinate rings $R_i[t]$ and $R_i[t,t^{-1}]$. These algebras are finitely generated over $k$ by the generators of $R_i$ together with $t$ (and $t^{-1}$ for $U$). Thus $Y,X,U$ are of finite type over $k$ by the same definition. They are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Here $\\operatorname{Spec}k$ is Noetherian: it has one point and one affine chart, and the only ideals of $k$ are $(0)$ and $(1)$, both finitely generated, so [pqf-def-locnoeth] applies. For every affine open $W\\subset X$, both $W$ and $W\\cap U$ are Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian], hence $W\\cap U$ is quasi-compact. Thus $j$ is quasi-compact by [def-weil-finite-type-morphism]. These checks allow the closed-support and closed-exactness results below to be used on the pro-etale sites.",
+   "text": "Use the finite stage of [def-pur-conventions] and the exceptional functor with the domains of [def-weil-exceptional-inverse-image]. Set $p:X\\to Y$, $\\pi=pj$ and $F=A_X(1)[0]$, with the pair $(s,j)$ and $\\kappa(t)$ of [def-pur-affine-line-datum]. Its $e\\mid n$ gives $N=n/e\\geq1$, and [lem-pur-finite-kummer-level] identifies $A$ as a module with $(\\mathbf Z/\\ell^N\\mathbf Z)^{ef}$, so $A$ is finite. Apply [lem-pur-affine-line-support-geometry] to the underlying finite-type $k$-scheme $Y$. It says that $Y,X,U$ are Noetherian, that $X,U$ are finite type over $k$, and that $j$ is quasi-compact. These are the support and closed-exactness hypotheses needed below.",
    "uses": [
     "def-pur-conventions",
     "def-weil-exceptional-inverse-image",
     "def-pur-affine-line-datum",
     "lem-pur-finite-kummer-level",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "pqf-def-locnoeth",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "def-weil-finite-type-morphism"
+    "lem-pur-affine-line-support-geometry"
    ],
    "elementary": false,
    "source": {
@@ -116,16 +113,10 @@
    }
   },
   {
-   "text": "We now compare the support value with the actual exceptional inverse image. The closed immersion $s$ is proper, hence separated and finite type, by [lem-weil-pbc-closed-immersion-proper]. Choose the compactification $c=(\\mathrm{id}_Y,s)$ of [def-weil-compactifications-refinements]. Since $Y$ is finite type over $k$, [lem-kun-dimension-finite-type] supplies an integer $d\\geq0$ with $\\dim Y\\leq d$ if $Y$ is nonempty; for empty $Y$ take $d=0$ and all the following categories and objects are zero. Its pro-etale compact-support functor is $P_c=Rs_*\\mathrm{id}_!=s_*$ by [def-compact-support-direct-image-detailed] and the exactness already established in step 2. Let $B=Rs^!F=\\nu_Y^*s_c^{\\times}R\\nu_{X,*}F$ be the finite-level exceptional value of [def-weil-exceptional-inverse-image], formed at this compactification. The bounded-below typing paragraph of that definition puts $G=s_c^{\\times}R\\nu_{X,*}F$ in $D^+(Y_{\\mathrm{et}},A)$; consequently $(G,\\mathrm{id})$ is an etale-origin witness for $B$. By steps 5-6, $B_0=C_0[-2]\\cong A_Y[-2]$ is bounded constructible, and [lem-sf-proetale-constructible-origin](ii) supplies an etale-origin witness for it. For every bounded-below etale-origin object $T$ on $Y$, the support adjunction of [lem-pur-support-localization-triangle] and the relative adjunction of [thm-sf-ambient-adjoint-class](2) give natural bijections\n$$a_T:\\operatorname{Hom}(T,B_0)\\xrightarrow{\\sim}\\operatorname{Hom}(s_*T,F),\\qquad e_T:\\operatorname{Hom}(T,B)\\xrightarrow{\\sim}\\operatorname{Hom}(s_*T,F).$$\nThese statements apply to the same finite constant coefficient categories and the same functor $s_*$; no adjunction on arbitrary pro-etale objects is assumed for $B$. Put $\\eta_T=e_T^{-1}a_T$. Both representing objects belong to this full comparison class, so define $\\phi=\\eta_{B_0}(1_{B_0}):B_0\\to B$ and $\\psi=\\eta_B^{-1}(1_B):B\\to B_0$. Naturality gives $\\eta_T(f)=\\phi f$ and $\\eta_T^{-1}(g)=\\psi g$. Taking $f=1_{B_0}$ and $g=1_B$ in the two inverse bijections gives $\\psi\\phi=1_{B_0}$ and $\\phi\\psi=1_B$. Thus $\\phi$ is an isomorphism. If $\\epsilon_0=a_{B_0}(1_{B_0})$ is the support counit and $\\epsilon=e_B(1_B)$ the relative counit, then naturality gives $\\epsilon\\,s_*\\phi=e_{B_0}(\\phi)=\\epsilon_0$. This specifies the comparison and its counit compatibility, rather than identifying the two functors by name. Put $C=B[2]$. The isomorphism $\\phi[2]:C_0\\xrightarrow{\\sim}C$ carries the concentration, constant rank-one cohomology, and finite Tor conclusions of steps 5-6 to $C$, proving the first assertion. The constructible exceptional notation in the current conventions is thus used only after this comparison: neither constructible preservation from a name nor an adjunction on all ambient pro-etale objects is needed to establish the calculation.",
+   "text": "Compare $B_0$ with $B=Rs^!F$. The zero section is a closed immersion in the affine-line datum, $X,Y$ are finite type over $k$ and $j$ is quasi-compact by step 1, and $F=A_X(1)[0]$ is bounded below. Steps 5-6 give $B_0=C_0[-2]\\cong A_Y[-2]$, which is bounded constructible by [def-weil-finite-torsion-constructibility]. Thus [lem-pur-closed-support-exceptional-comparison], applied to $i=s$ and $K=F$, gives a canonical isomorphism $\\phi:B_0\\xrightarrow{\\sim}B$ with $\\epsilon\\circ s_*\\phi=\\epsilon_0$, where $\\epsilon_0$ is the support counit and $\\epsilon$ the relative exceptional counit. Put $C=B[2]$. The isomorphism $\\phi[2]:C_0\\xrightarrow{\\sim}C$ carries the concentration, constant rank-one cohomology and finite-Tor conclusions of steps 5-6 to $C$, proving (1). The comparison lemma uses only the full bounded-below etale-origin class; no ambient adjunction on arbitrary pro-etale objects is invoked.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-proper",
-    "def-weil-compactifications-refinements",
-    "lem-kun-dimension-finite-type",
-    "def-compact-support-direct-image-detailed",
-    "def-weil-exceptional-inverse-image",
-    "lem-sf-proetale-constructible-origin",
-    "lem-pur-support-localization-triangle",
-    "thm-sf-ambient-adjoint-class"
+    "def-weil-finite-torsion-constructibility",
+    "lem-pur-closed-support-exceptional-comparison"
    ],
    "elementary": false,
    "source": {
@@ -163,12 +154,10 @@
  ],
  "proof_deps": [
   "def-pur-conventions",
+  "def-weil-exceptional-inverse-image",
   "def-pur-affine-line-datum",
   "lem-pur-finite-kummer-level",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "pqf-def-locnoeth",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "def-weil-finite-type-morphism",
+  "lem-pur-affine-line-support-geometry",
   "lem-pur-support-localization-triangle",
   "lem-exc-proetale-closed-exact",
   "lem-sf-exact-functor-derived-triangulated",
@@ -187,13 +176,7 @@
   "def-weil-finite-torsion-constructibility",
   "def-weil-derived-tensor",
   "def-weil-finite-tor-amplitude",
-  "lem-weil-pbc-closed-immersion-proper",
-  "def-weil-compactifications-refinements",
-  "lem-kun-dimension-finite-type",
-  "def-compact-support-direct-image-detailed",
-  "def-weil-exceptional-inverse-image",
-  "lem-sf-proetale-constructible-origin",
-  "thm-sf-ambient-adjoint-class",
+  "lem-pur-closed-support-exceptional-comparison",
   "lem-pur-supported-hom",
   "def-weil-abstract-derived-category",
   "lem-weil-pbc-derived-single-fully-faithful",
@@ -323,10 +306,45 @@
    "results": "{\"t\": \"2026-10-16T16:17:21Z\", \"tool\": \"leanfinder\", \"query\": \"Absolute purity for a regular closed immersion of codimension one: local etale cohomology of a finite constant sheaf is its Tate twist shifted by two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"Algebra.IsEtaleAt\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"Algebra.etaleLocus_eq_compl_support\"], \"digest\": \"66368f418f05d869\"}",
    "date": "2026-10-16",
    "verdict": "no match: the eight returned declarations concern etale morphisms, formal unramifiedness, affine limits and etale loci; none calculates supported cohomology or an exceptional inverse image"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image of the finite constant sheaf along the zero section of an affine line is rank one in degree two, identified with supported cohomology",
+   "results": "{\"t\": \"2026-10-17T08:04:54Z\", \"tool\": \"leanfinder\", \"query\": \"Exceptional inverse image of the finite constant sheaf along the zero section of an affine line is rank one in degree two, identified with supported cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"ModuleCat.Tilde.exists_const\", \"CategoryTheory.Sheaf.H\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\"], \"digest\": \"ba33059ed7d8e5f5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern affine structure-sheaf localization or the definition of sheaf cohomology, not exceptional inverse images or their purity calculation"
+  },
+  {
+   "tool": "grep",
+   "query": "Gysin|exceptionalInverseImage|localCohomology|rightDerivedUpperShriek",
+   "results": "{\"t\": \"2026-10-17T08:05:18Z\", \"tool\": \"grep\", \"query\": \"Gysin|exceptionalInverseImage|localCohomology|rightDerivedUpperShriek\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization triangle of the zero section of an affine line gives a rank one constant exceptional inverse image shifted by two",
+   "results": "{\"t\": \"2026-10-17T08:05:18Z\", \"tool\": \"leansearch\", \"query\": \"Localization triangle of the zero section of an affine line gives a rank one constant exceptional inverse image shifted by two\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"upperShriek\"",
+   "results": "{\"t\": \"2026-10-17T08:05:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"upperShriek\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local cohomology with support at zero in the affine line is the finite coefficient unit shifted by minus two via the Kummer boundary",
+   "results": "{\"t\": \"2026-10-17T08:06:12Z\", \"tool\": \"leanfinder\", \"query\": \"Local cohomology with support at zero in the affine line is the finite coefficient unit shifted by minus two via the Kummer boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away\", \"BDeRham\", \"AlgebraicGeometry.StructureSheaf.const_mul_rev\"], \"digest\": \"fa89599ff8d09ccb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern affine structure-sheaf localization or the definition of sheaf cohomology, not exceptional inverse images or their purity calculation"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -393,20 +411,12 @@
   "date": "2026-10-17",
   "item": "lem-pur-gysin-structure",
   "worker": "stage1",
-  "summary": "Repair of the landing refusal for the changed def-pur-conventions statement: rebase retained worker content on current DAG metadata, state the finite constant-coefficient and constructible domains explicitly in step 1, and retain the explicit counit-compatible relative-adjunction comparison of step 7. Revalidated every retained proof citation against current node statements; no new nodes.",
+  "summary": "Q116 repaired both returned hidden arguments by extracting lem-pur-affine-line-support-geometry and lem-pur-closed-support-exceptional-comparison as statement-only unsplit nodes. Steps 1 and 7 now cite these obligations and verify their hypotheses. The statement, Lean record and other seven proof steps are unchanged. Preserved prior report findings, citations and search evidence; new nodes were searched by two semantic phrasings, Loogle, LeanSearch and source grep. The localization/A1/Gm route remains unchanged. Repair of returned immutable head d7f39f2e7309: explicitly submit these stage-1 fields and the two unsplit prerequisites through deliver.py for stage-1 review; report answers H1, H2, H12 and H10/H11 individually. Statement, seven statement dependencies and absent Lean record remain unchanged; later stage-2 work is deferred under the human stage-1-only instruction.",
   "blueprint": "First paragraph: steps 1-6 compute the localization support value via the relative A1/Gm proposition; step 7 proves the missing comparison with def-weil-exceptional-inverse-image using thm-sf-ambient-adjoint-class. Second paragraph: steps 8-9 identify supported cohomology with exceptional Hom and degree-zero global sections, and send the Kummer boundary through that comparison.",
   "tool_uses": [
    {
     "node": "lem-pur-finite-kummer-level",
     "why": "Generic prerequisite for the localization calculation or derived-category comparison; no unit node supplies this interface."
-   },
-   {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Generic a scheme of finite type over a noetherian scheme is noetherian (stacks 01t6) used in the localization argument; it supplies no substitute geometric purity or A1/Gm computation."
-   },
-   {
-    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "why": "Generic an open subscheme of a noetherian scheme is noetherian used in the localization argument; it supplies no substitute geometric purity or A1/Gm computation."
    },
    {
     "node": "lem-exc-proetale-closed-exact",
@@ -449,22 +459,6 @@
     "why": "Generic a complex with cohomology in a single degree is that cohomology object shifted used in the localization argument; it supplies no substitute geometric purity or A1/Gm computation."
    },
    {
-    "node": "lem-weil-pbc-closed-immersion-proper",
-    "why": "Verifies that the zero section admits the trivial compactification (id,s); supplies no purity assertion."
-   },
-   {
-    "node": "lem-kun-dimension-finite-type",
-    "why": "Provides the finite dimension bound required to apply the existing relative-adjunction theorem to (id,s)."
-   },
-   {
-    "node": "lem-sf-proetale-constructible-origin",
-    "why": "Places the already calculated support value in the comparison class before comparing representable Hom functors."
-   },
-   {
-    "node": "thm-sf-ambient-adjoint-class",
-    "why": "Its bounded-below relative Hom bijections compare the independently defined exceptional value with the already computed support value; the A1/Gm calculation remains the geometric argument."
-   },
-   {
     "node": "lem-weil-pbc-derived-single-fully-faithful",
     "why": "Generic the single-complex embedding of an abelian category is fully faithful used in the localization argument; it supplies no substitute geometric purity or A1/Gm computation."
    }
@@ -491,11 +485,11 @@
   "lem-weil-pbc-derived-single-fully-faithful"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NG-5c0c282ad",
-  "group": "NG",
+  "reviewer": "NT-Codex-Q116-c6038ba1e",
+  "group": "Q116",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-5c0c282ad (reviewer sub-agent of L); spot-checked: I read the whole item, the current main-20261015 blueprint statement and proof, the sk-prop-a1-kummer unit and the full statement of every cited node; there are no new nodes. The statement repair is faithful: separated finite-type Y and e|n are the current def-pur-affine-line-datum's standing hypotheses ('assumed from now on'), the same as the sibling prop-pur-gm-relative-kummer, and both citers already use the datum. Small cases agree: for Y=Spec k, H^2_0 is A generated by the boundary of kappa(t); empty, disconnected and nonreduced Y need nothing extra. Steps 1-6 compute B_0, the support localization value, from the D+ support triangle, exact s_*, ps=id and pj=pi, and clauses 1-3 of the relative Kummer proposition; I rechecked every degree of the long exact sequence. Step 7's comparison with the actual exceptional value B=nu^* s^x Rnu_* F is correct: B has a bounded-below etale-origin witness by the exceptional definition, and B_0 is A_Y[-2], which has one by constructible-origin (ii); thm-sf-ambient-adjoint-class(2) applies with f=s and the compactification (id,s), and Yoneda on the full comparison class gives an isomorphism phi with eps∘s_*phi = eps_0. Step 8 uses lem-pur-supported-hom, the support adjunction and phi[2]. Step 9 uses full faithfulness of degree-zero complexes and evaluation at 1, with the boundary from the pro-etale clause of thm-pur-with-support-exactness. Stacks 08J5, 06XS, 05RS and 09BM were read. The declared tool_uses are acceptable. Fix: step 1 cites [def-weil-exceptional-inverse-image] in its text but did not list it in its uses; the whole corrected node is in fixes/dag/nodes/sec-smooth-purity/lem-pur-gysin-structure.json, with no other change.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q116-c6038ba1e (reviewer sub-agent of L); spot-checked: Read the full item, both new nodes, cited statements, current blueprint and cited source passages. Verified all nine steps, shifts, finite-Tor argument, étale-origin comparison and counit equation; checked small cases and duplicate candidates. No repairs needed. Accepted the twelve declared tool uses. Detailed findings are in review.md."
  }
 }

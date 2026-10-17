@@ -2,7 +2,7 @@
  "id": "lem-pur-degree-zero-derived-map-gluing",
  "kind": "statement",
  "title": "Unique gluing of derived maps locally in degree zero",
- "statement": "Let $T$ be a scheme [def-pc-scheme], let $\\tau$ be its small etale or small pro-etale site [def-weil-pbc-etale-site, def-weil-pbc-proetale-site], and let $A$ be a finite commutative ring, regarded as a constant sheaf. Work in $D(T_\\tau,A)$, the ordinary derived category of sheaves of $A$-modules [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules], with cohomology sheaves [def-weil-derived-cohomology-sheaves]. Let $(U_i)_{i\\in I}$ be a set-indexed Zariski open cover of $T$, with exact derived restrictions denoted by $|_{U_i}$ [def-weil-derived-pullback-tensor-hom]. Let $M,N\\in D(T_\\tau,A)$, and assume\n$$\\mathcal H^a(M|_{U_i})=\\mathcal H^a(N|_{U_i})=0\\quad\\text{for every }i\\in I\\text{ and }a\\ne0.$$\nThen $\\mathcal H^a(M)=\\mathcal H^a(N)=0$ for $a\\ne0$, and the good-truncation maps [def-kun-truncations] induce canonical isomorphisms $M\\cong\\mathcal H^0(M)[0]$ and $N\\cong\\mathcal H^0(N)[0]$, natural in these objects and commuting with restriction. Restriction induces a bijection\n$$\\operatorname{Hom}_{D(T_\\tau,A)}(M,N)\\xrightarrow{\\sim}\\left\\{(a_i)\\in\\prod_i\\operatorname{Hom}_{D((U_i)_\\tau,A)}(M|_{U_i},N|_{U_i}):a_i|_{U_i\\cap U_j}=a_j|_{U_i\\cap U_j}\\text{ for all }i,j\\right\\}.$$\nUnder the canonical degree-zero identifications this is exactly unique gluing of the $A$-module sheaf maps $\\mathcal H^0(M)|_{U_i}\\to\\mathcal H^0(N)|_{U_i}$. In particular equality of two such global derived maps can be checked on this cover. The assertion includes the empty scheme and its empty open cover; it asserts no gluing property for arbitrary derived complexes.",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], let $\\tau$ be its small etale or small pro-etale site [def-weil-pbc-etale-site, def-weil-pbc-proetale-site], and let $A$ be a finite commutative ring, regarded as a constant sheaf. Work in $D(T_\\tau,A)$, the ordinary derived category of sheaves of $A$-modules [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules], with cohomology sheaves [def-weil-derived-cohomology-sheaves]. Let $(U_i)_{i\\in I}$ be a set-indexed Zariski open cover of $T$, with exact derived restrictions denoted by $|_{U_i}$ [def-pur-localized-ringed-site, lem-pur-site-restriction-module-adjunction-exact, lem-sf-exact-functor-derived-triangulated]. Let $M,N\\in D(T_\\tau,A)$, and assume\n$$\\mathcal H^a(M|_{U_i})=\\mathcal H^a(N|_{U_i})=0\\quad\\text{for every }i\\in I\\text{ and }a\\ne0.$$\nThen $\\mathcal H^a(M)=\\mathcal H^a(N)=0$ for $a\\ne0$, and the good-truncation maps [def-kun-truncations] induce canonical isomorphisms $M\\cong\\mathcal H^0(M)[0]$ and $N\\cong\\mathcal H^0(N)[0]$, natural in these objects and commuting with restriction. Restriction induces a bijection\n$$\\operatorname{Hom}_{D(T_\\tau,A)}(M,N)\\xrightarrow{\\sim}\\left\\{(a_i)\\in\\prod_i\\operatorname{Hom}_{D((U_i)_\\tau,A)}(M|_{U_i},N|_{U_i}):a_i|_{U_i\\cap U_j}=a_j|_{U_i\\cap U_j}\\text{ for all }i,j\\right\\}.$$\nUnder the canonical degree-zero identifications this is exactly unique gluing of the $A$-module sheaf maps $\\mathcal H^0(M)|_{U_i}\\to\\mathcal H^0(N)|_{U_i}$. In particular equality of two such global derived maps can be checked on this cover. The assertion includes the empty scheme and its empty open cover; it asserts no gluing property for arbitrary derived complexes.",
  "source": {
   "document": "literature/stacks-project/derived.tex",
   "place": "Tag 06XS, lemma-negative-exts, part (1) with a=b=0; combined with sites-modules.tex Tag 03EM, lemma-internal-hom, and its reference to Sites Tag 04TQ, lemma-glue-maps. Agent-formulated local concentration and derived-map gluing consequence; no general derived-morphism descent is claimed."
@@ -14,12 +14,131 @@
   "def-weil-pbc-derived-categories",
   "def-weil-pbc-proetale-modules",
   "def-weil-derived-cohomology-sheaves",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-kun-truncations"
+  "def-kun-truncations",
+  "def-pur-localized-ringed-site",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-exact-functor-derived-triangulated"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the site equivalence of [lem-weil-pbc-etale-site-localization-open] for the etale site and [lem-weil-proetale-weakly-etale-localization], parts (1)--(3), for the pro-etale site, with $X=T$ and $W=U_i$ (and likewise for intersections). The open immersion is a site object in either case. The constant coefficient sheaf restricts to the same constant coefficient sheaf: this is part (2) of the pro-etale localization lemma; in the etale case apply [lem-weil-pbc-site-constant-restriction] to the regular $A$-module $A$. Its unit compatibility also identifies ring multiplication, since the two multiplication maps agree on constant generators and sheafification is locally generated by those generators. Consequently all the restrictions in the statement are restrictions on the localized ringed sites of [def-pur-localized-ringed-site]. The family $(U_i\\to T)$ is a cover on either site: on the etale site it is jointly surjective; on the pro-etale site refine the intersections of any affine open with this open cover by affine opens using [lem-weil-pbc-affine-opens-basis], then select a finite subcover by [lem-weil-pbc-affine-scheme-qcqs]. These affine opens lie in the corresponding $U_i$, as required by the covering definition. For a site object $V\\to T$, the family $(V\\times_T U_i\\to V)$ is thus a cover as well.",
+   "uses": [
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-site-constant-restriction",
+    "def-pur-localized-ringed-site",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00XZ, section-localize; Tag 00XR, lemma-when-shriek (1). Pro-etale specialization and constant-ring comparison are the cited existing localization lemma. The finite affine refinement uses Schemes Tag 01IT, lemma-basis-affine-opens, and Algebra Tag 00E8, lemma-quasi-compact."
+   }
+  },
+  {
+   "text": "By [lem-pur-site-restriction-module-adjunction-exact], localization restriction of module sheaves is exact. By [lem-sf-exact-functor-derived-triangulated] it therefore induces the indicated termwise functor on the ordinary derived categories. For a representing complex $K^\\bullet$, exactness preserves the kernel of $d^a$, the image of $d^{a-1}$ and their quotient. Using the formula in [def-weil-derived-cohomology-sheaves] gives the canonical isomorphism $\\mathcal H^a(K)|_U\\cong\\mathcal H^a(K|_U)$. The maps used are induced by the kernel inclusions and quotient maps, so this comparison is natural in chain maps and compatible with iterated restriction. It also commutes with derived morphisms: such a morphism is assembled from chain maps and inverses of quasi-isomorphisms in the localization [def-weil-abstract-derived-category], and both sides invert the latter.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-weil-derived-cohomology-sheaves",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03DH, section-localize; Tag 04IX, definition-localize-ringed-site, sectionwise restriction; restriction exactness used explicitly in the proof of lemma-j-shriek-reflects-exactness after Tag 03DJ. Exact restriction is the stated clause of the cited existing project lemma. Derived localization: Tag 05RU, definition-unbounded-derived-category."
+   }
+  },
+  {
+   "text": "Fix $a\\ne0$ and set $F=\\mathcal H^a(M)$ or $\\mathcal H^a(N)$. Step 2 and the hypotheses give $F|_{U_i}=0$ for every $i$. For any object $V$ of $T_\\tau$, the sections of $F$ over $V\\times_T U_i$ are therefore zero, by the sectionwise formula in [def-pur-localized-ringed-site]. The equalizer in the sheaf axiom [def-weil-pbc-sites-and-cohomology] for the cover of $V$ in Step 1 injects $F(V)$ into $\\prod_i F(V\\times_T U_i)$. This product is the zero module, so $F(V)=0$ for every $V$, proving $F=0$. This uses the sheaf axiom, not stalks or a finite subcover of $T$. If the cover is empty, then $T=\\varnothing$, every site object $V$ is empty, and the same empty-cover equalizer says $F(V)=0$.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VR, definition-sheaf: the equalizer condition, including the empty covering."
+   }
+  },
+  {
+   "text": "For $K=M,N$, choose a representing complex $C^\\bullet$. Write $B^0=\\operatorname{im}d^{-1}$ and $Z^0=\\ker d^0$. The good truncation [def-kun-truncations] gives the inclusion $c:\\tau_{\\le0}C\\to C$ and a chain map $p:\\tau_{\\le0}C\\to\\mathcal H^0(C)[0]$: in degree zero $p$ is $Z^0\\twoheadrightarrow Z^0/B^0$, and in all other degrees it is zero. The chain-map condition is $p\\,d^{-1}=0$. Both $c$ and $p$ induce the identity on degree-zero cohomology, and they induce isomorphisms in all other degrees because Step 3 makes these cohomology objects zero. Thus both are quasi-isomorphisms. In the localization [def-weil-abstract-derived-category] put $\\epsilon_K=Q(p)\\circ Q(c)^{-1}:K\\xrightarrow{\\sim}\\mathcal H^0(K)[0]$. This is the specified good-truncation isomorphism; no splitting of $C^0$ is chosen.",
+   "uses": [
+    "def-kun-truncations",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, section-truncations, canonical cochain truncations; localization at quasi-isomorphisms is Derived Categories Tag 05RU."
+   }
+  },
+  {
+   "text": "For a chain map $f:C\\to D$, its induced maps on kernels and quotients satisfy $f c_C=c_D(\\tau_{\\le0}f)$ and $(\\mathcal H^0(f)[0])p_C=p_D(\\tau_{\\le0}f)$. Hence $\\epsilon_D Q(f)=(\\mathcal H^0(Q(f))[0])\\epsilon_C$. The naturality of $p$ on the entire derived category is also explicitly supplied by [lem-weil-pbc-truncation-descends] with $q=0$. The inclusion $c$ and its naturality descend by [lem-weil-pbc-localization-universal-property], since good truncation preserves quasi-isomorphisms. On the full subcategory concentrated in degree zero both maps are invertible by Step 4; their composite is therefore natural there, including for inverses of quasi-isomorphisms. This proves independence of the representing complex. Exact restriction preserves $Z^0$, $B^0$ and $Z^0/B^0$ and sends $c,p$ to these same inclusion and quotient maps. Applying Step 2 gives $\\epsilon_{K|_U}=\\epsilon_K|_U$ under the canonical cohomology and single-complex comparisons. These comparisons also agree on iterated restrictions.",
+   "uses": [
+    "lem-weil-pbc-truncation-descends",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU, definition-unbounded-derived-category; descent of truncation natural transformations as stated in the cited lemma. Natural-transformation descent uses the fully faithful localization universal property of the cited Mathlib leaf."
+   }
+  },
+  {
+   "text": "Set $F=\\mathcal H^0(M)$ and $G=\\mathcal H^0(N)$. The module-sheaf categories are abelian [def-weil-sheaf-of-modules-category]. Apply [lem-weil-pbc-derived-single-fully-faithful] to each such category, globally and over every open and intersection. Conjugation by $\\epsilon_M,\\epsilon_N$ followed by its Hom bijection identifies a derived map $a:M\\to N$ with the unique sheaf map $b:F\\to G$ such that $b[0]=\\epsilon_N a\\epsilon_M^{-1}$. This construction commutes with open restriction: Step 5 identifies the restricted $\\epsilon$'s, and restriction of the chain map $b[0]$ is exactly $(b|_U)[0]$. Thus agreement of derived maps on intersections is equivalent, by faithfulness of the single-complex embedding there, to agreement of the corresponding sheaf maps on intersections.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XS, lemma-negative-exts, part (2), Ext^0 equals Hom; Mathlib DerivedCategory/FullyFaithful.lean, Full and Faithful instances."
+   }
+  },
+  {
+   "text": "Given a compatible family $a_i$, Step 6 gives compatible $A|_{U_i}$-module sheaf maps $b_i:F|_{U_i}\\to G|_{U_i}$. Apply [lem-pur-sheaf-hom-cover-gluing] on $T_\\tau$ to the cover $(U_i\\to T)$ of its final object; all the required fiber products exist, by Step 1. It supplies a unique global sheaf map $b:F\\to G$. Define $a=\\epsilon_N^{-1}b[0]\\epsilon_M$. Restriction and Step 6 show $a|_{U_i}=a_i$. Conversely, if two global derived maps have the same restrictions, Step 6 turns them into sheaf maps with the same restrictions; uniqueness in the cited gluing statement makes these sheaf maps equal and its Hom bijection makes the derived maps equal. This proves both surjectivity and injectivity of the displayed restriction map, and identifies it with sheaf-map gluing. The gluing lemma allows an empty covering. Alternatively, Step 3 on the empty scheme shows every module sheaf and every cohomology sheaf is zero; the map $0\\to C$ for any representing complex is then a quasi-isomorphism, so every derived object is zero and both sides of the claimed bijection are singleton sets.",
+   "uses": [
+    "lem-pur-sheaf-hom-cover-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EM, lemma-internal-hom, applied through Sites Tag 04TQ, lemma-glue-maps; the cited module-map gluing lemma states existence and uniqueness for this covering."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-site-constant-restriction",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-abstract-derived-category",
+  "def-kun-truncations",
+  "lem-weil-pbc-truncation-descends",
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-pur-sheaf-hom-cover-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Assembly of Tag 06XS (degree-zero fully faithful embedding), Homology Tag 0118 (explicit good truncations), and Modules on Sites Tags 03DJ and 03EM with Sites Tag 04TQ. Local vanishing and naturality are written out; this assembly is not asserted to be a verbatim Stacks lemma."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +174,38 @@
    "results": "Read returned signatures: DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CochainComplex.cm5b, DerivedCategory.exists_iso_Q_obj_of_isLE. Sheaf section gluing and fully faithful singleFunctor are ingredients. Neither alone nor a one-line specialization identifies local heart objects and glues their derived morphisms on both small sites; fractions lemmas likewise do not state descent.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctor|glue|gluing",
+   "results": "25 displayed hits in Algebra/Homology/DerivedCategory, principally TStructure.lean and ExactFunctor.lean. Read FullyFaithful.lean lines 29-66: the Full and Faithful instances at 45 and 37 give only the single-complex Hom bijection. TStructure.lean gives concentration interfaces, not the combined open-cover descent assertion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived sheaf complexes locally concentrated in degree zero have uniquely gluable morphisms on a Zariski open cover",
+   "results": "8 hits, including TopCat.Sheaf.existsUnique_gluing', TopCat.Sheaf.existsUnique_gluing, TopCat.Presheaf.IsSheaf.isSheafUniqueGluing and Scheme.OpenCover.ext_elem. Read UniqueGluing.lean lines 180-196: these glue sections of a TopCat sheaf; they do not state the item for objects of an ordinary module-sheaf derived category on either small scheme site.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms of complexes in the heart of a derived category glue uniquely over an open covering",
+   "results": "8 hits: TopCat.Sheaf.existsUnique_gluing, several Scheme.OpenCover glueMorphisms declarations, Scheme.Cover.glueMorphisms and TopCat.Sheaf.interUnionPullbackConeLift. These glue sheaf sections or scheme morphisms, not local degree-zero derived objects and their derived maps.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local degree zero cohomology implies global concentration and morphism descent for sheaf complexes",
+   "results": "8 hits: TopCat.Sheaf.existsUnique_gluing', TopCat.Sheaf.existsUnique_gluing, CategoryTheory.Sheaf.H, CochainComplex.IsKInjective, MayerVietorisSquare shortComplex objects and CategoryTheory.Sheaf.cohomologyPresheaf. None is the joint local concentration and heart-morphism gluing statement. The general fully faithful singleFunctor theorem is reused as the existing Mathlib leaf lem-weil-pbc-derived-single-fully-faithful, not made into a new node.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-vector-integration-site-comparison",
@@ -77,5 +224,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-degree-zero-derived-map-gluing",
+  "worker": "stage1",
+  "summary": "Reused the existing site-localization, exact restriction, localization-descent, fully faithful single-complex and module-map gluing nodes, with no new nodes. Wrote the local-to-global vanishing argument and the explicit natural good-truncation isomorphisms. Replaced the mismatched special-coefficient pro-etale restriction reference by the general localized-site exact restriction interfaces; hypotheses and conclusions are unchanged. Checked the empty scheme/empty cover and both ordinary coefficient categories.",
+  "blueprint": "Realizes the normalized-map uniqueness/gluing argument beneath cor-pur-dualizing-object-purity, Statement: Every map involved was normalized by the Kummer generator; via lem-pur-vector-integration-site-comparison Step 9. The ancestor three-isomorphism route is retained, with no change to the unit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Generic equivalence with the localized etale site, needed to apply ringed-site restriction and gluing. The purity unit has no replacement site-equivalence statement."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic pro-etale localization and constant-ring identification for an open object, not a replacement purity argument."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic exact restriction of module sheaves; only this clause is used, with no exceptional inverse image or trace."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-descends",
+    "why": "Generic descent and naturality of the truncation projection; no purity unit node supplies it."
+   },
+   {
+    "node": "lem-pur-sheaf-hom-cover-gluing",
+    "why": "Generic gluing of module-sheaf maps on a ringed site, needed after the degree-zero reduction; the purity unit has no such abstract tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-truncation-descends",
+  "lem-pur-sheaf-hom-cover-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NR-b888aed37",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-b888aed37 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements and source passages. All seven steps check out, including truncation naturality, coefficient restriction, unique sheaf-map gluing and empty-cover cases. No new nodes, duplicates or dependency cycles; five generic tool uses accepted. Target categories remain distinct and unchanged. Detailed checks recorded in review.md; no repairs needed."
  }
 }

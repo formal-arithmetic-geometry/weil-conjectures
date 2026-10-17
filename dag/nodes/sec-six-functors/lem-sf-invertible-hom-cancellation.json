@@ -11,9 +11,27 @@
   "def-sfb-monoidal-category",
   "lem-pod-closed-uncurry-laws"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sf-invertible-factor-hom-cancellation] with $X=V$, $Y=\\mathbf1$, and $J=L$. The given isomorphism $L\\otimes L^{-1}\\cong\\mathbf1$ is one of its inverse-factor isomorphisms; composing the symmetry $L^{-1}\\otimes L\\xrightarrow{\\sim}L\\otimes L^{-1}$ with it supplies the other. Under the canonical unit identifications, the theorem's map $s_{V,\\mathbf1,L}:[V,\\mathbf1]\\to[V\\otimes L,\\mathbf1\\otimes L]$ is exactly the displayed transpose $i_{V,L}$: its uncurrying equation is the displayed pairing with the symmetry moving $L$ past $H(V,\\mathbf1)$. Hence $i_{V,L}$ is an isomorphism. The cited theorem gives its contravariant naturality in $V$ and compatibility with isomorphisms of $L$, so these clauses hold for the specified evaluation-transpose map.",
+   "uses": [
+    "lem-sf-invertible-factor-hom-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/thm-sf-dual-perfect.proof.md",
+    "place": "Step 5, inverse twist in the double application of Step 3; abstract evaluation-transpose cancellation extracted from the returned item proof step 7 (agent expansion)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-invertible-factor-hom-cancellation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/thm-sf-dual-perfect.proof.md",
+  "place": "Step 5, inverse twist in the double application of Step 3; specialization of the existing invertible-factor internal-Hom cancellation"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,7 +84,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-sf-dual-perfect",
@@ -83,5 +101,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-invertible-hom-cancellation",
+  "worker": "stage1",
+  "summary": "No new node was needed: the existing lem-sf-invertible-factor-hom-cancellation is strictly more general. Specializing it to X=V, Y=1 and J=L, and obtaining the second inverse-factor isomorphism from the symmetry and L tensor L^{-1} ≅ 1, gives exactly the specified evaluation-transpose map, its isomorphism property, contravariant naturality in V, and compatibility with isomorphisms of L.",
+  "blueprint": "Realizes Step 5 of thm-sf-dual-perfect, the inverse-twist evaluation-transpose cancellation used in the double application of Step 3.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-invertible-factor-hom-cancellation",
+    "why": "Generic closed braided-monoidal internal-Hom cancellation supplies the isomorphism and evaluation normalization; this unit has no separate replacement for that categorical tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-invertible-factor-hom-cancellation"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q86-7ed0cfd5c",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q86-7ed0cfd5c (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, blueprint route and source passages. Verified inverse-factor hypotheses, left/right adjunction conventions, exact evaluation normalization, naturality, graded signs and edge cases. No new nodes or dependency cycle. Accepted lem-sf-invertible-factor-hom-cancellation as a generic tool. No target weakened; no repairs needed. Detailed checks recorded in review.md."
  }
 }

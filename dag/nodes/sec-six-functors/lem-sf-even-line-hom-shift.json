@@ -17,9 +17,73 @@
   "def-pc-kflat-complex",
   "lem-weil-pbc-ringed-internal-hom-exact-restriction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose K-flat representatives for the tensor input and a K-injective representative for the Hom target, using the derived constructions in the statement. The ordinary tensor is the total tensor complex, with the Koszul sign $(-1)^p$ on the second differential, and the internal Hom is the product Hom complex with differential $d(f)=d_Bf-(-1)^n f d_A$. The transpose defining $a_{K,T[r]}$ is therefore represented by the usual chain-level tensor--Hom evaluation transpose; the same description applies after replacing $K$ by $K[s]$. The K-flat and K-injective replacement choices compute the stated derived functors and do not alter the resulting morphisms in $D(R)$.\n\nThe cited definitions give exactly the complexes and replacement procedure used here.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-pc-kflat-resolution",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-hom-complex",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Sections 08J7 and 0A8X of sites-cohomology.tex: construction of RHom from Hom complex and K-injective resolution"
+   }
+  },
+  {
+   "text": "For a homogeneous degree-$n$ family $f=(f^i)_i$ representing a morphism from $K[s]$ to the target, the first-variable shift comparison is the reindexing $j=i+s$ with component multiplier $(-1)^{sn}$. Substituting this formula into the differential displayed in the Hom-complex definition gives a chain map to $H(K,B)[-s]$; the two signs from the shifted source differential cancel the sign change in the Hom differential. Thus this is precisely the map $b_{K,B,s}$, and it is natural in the target $B$, including the map induced by any morphism $B\to B'$.",
+   "uses": [
+    "def-pur-hom-complex",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 0A8X: Hom-complex differential; signed first-variable shift formula supplied by literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/thm-sf-dual-perfect.proof.md Step 4 (agent expansion)"
+   }
+  },
+  {
+   "text": "Evaluate both composites in the asserted square on a homogeneous tensor $f\\otimes t$, where $f$ has Hom degree $n$ and $t$ lies in the shifted line $T[r]$. The right-hand route first contributes $(-1)^{sn}$ from $b_{K,R,s}$ and then applies the evaluation transpose. The left-hand route applies the transpose into $T[r]$ first, so the same reindexing is taken in target degree $n+r$ and contributes $(-1)^{s(n+r)}$. The tensor totalization contributes the same Koszul sign to both routes. Their ratio is $(-1)^{s(n+r)-sn}=(-1)^{sr}=1$ because $r$ is even. Hence the two composites agree on every homogeneous tensor and therefore as maps of total complexes. This calculation also shows that multiplying every $b_{K,B,s}$ by a normalization sign depending only on $s$ leaves the square unchanged, since that factor occurs once on each path.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-hom-complex",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/thm-sf-dual-perfect.proof.md",
+    "place": "Step 4, compatibility with shifts (agent-expanded Hom-complex sign calculation)"
+   }
+  },
+  {
+   "text": "The chain-level equality is natural in representatives and in the morphism of the second Hom variable. The derived internal Hom is well defined after changing representatives, while the ringed-site internal-Hom theorem supplies the natural shift identifications and their compatibility with morphisms. Therefore the equality descends through localization to the displayed morphism equality in $D(R)$ for arbitrary $K$ and all integers $s$, with only the stated parity condition on $r$.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Sections 08J7 and 0A8X of sites-cohomology.tex: RHom well-defined on localization; naturality, with Tag 08JC for triangulated functoriality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-dual-perfect/thm-sf-dual-perfect.proof.md",
+  "place": "Step 4, compatibility with shifts (expanded proof of the even-shift line/Hom square)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,7 +136,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-sf-dual-perfect",
@@ -89,5 +153,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-even-line-hom-shift",
+  "worker": "stage1",
+  "summary": "Expanded the statement-only node into four proof steps. The first step fixes K-flat/K-injective representatives and the total tensor and Hom complexes; the second derives the signed first-variable shift map; the third computes both evaluation-transpose paths and their sign ratio (-1)^(sr), which is one for even r; the fourth descends the chain equality to the derived category. No new nodes were needed.",
+  "blueprint": "Realizes thm-sf-dual-perfect proof Step 4, the compatibility with shifts clause, specifically the agent-expanded signed first-variable Hom/tensor calculation."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q69-770ebe2d9",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q69-770ebe2d9 (reviewer sub-agent of L); spot-checked: Mathematics and split pass. Source metadata incorrectly identifies Tag 08JC as the Hom-complex/RHom construction; those are Sections 0A8X and 08J7. Corrected DAG JSON is in fixes/dag/nodes/sec-six-functors/lem-sf-even-line-hom-shift.json.; 1 file(s) fixed by the reviewer"
  }
 }

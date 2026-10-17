@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-a1-reduction-composition",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Cohomology transport under the finite-map reduction",
@@ -18,28 +18,80 @@
  ],
  "proof": [
   {
-   "text": "By the finite-map transport applied to the sheaf $j_!\\mathcal F$\non $C'_0$: the finite morphism $g$ is proper and $g_*$ is exact\n(the finite-direct-image exactness\n[lemma-weil-pbc-finite-direct-image-exact]), so\n\n$$\nR\\Gamma_c(C,\\mathcal F)=R\\Gamma_c\\bigl(C'_0,j_!\\mathcal F\\bigr)\n\\simeq R\\Gamma_c\\bigl(\\mathbf A^1_{k_0},g_*j_!\\mathcal F\\bigr)\n=R\\Gamma_c(\\mathbf A^1,\\mathcal K),\n$$\n\nwith the same compact-support composition of [prop-functor-package]\nas in [lem-a1-finite-map-cohomology].",
+   "text": "By the definitions of compactly supported cohomology and extension by zero,\n\\(R\\Gamma_c(C,\\mathcal F)=R\\Gamma_c(C'_0,j_!\\mathcal F)\\).  The finite\nmorphism \\(g\\) is proper, so the functor package gives\n\\(Rg_!\\simeq Rg_*\\); its compact-support composition gives\n\\[\nR\\Gamma_c(C'_0,j_!\\mathcal F)\n \\simeq R\\Gamma_c(\\mathbf A^1_{k_0},Rg_!j_!\\mathcal F)\n \\simeq R\\Gamma_c(\\mathbf A^1_{k_0},Rg_*j_!\\mathcal F).\n\\]\nThe finite-direct-image exactness says \\(Rg_*=g_*\\) on the relevant\nbounded-below complexes, hence this is\n\\(R\\Gamma_c(\\mathbf A^1_{k_0},g_*j_!\\mathcal F)\n=R\\Gamma_c(\\mathbf A^1,\\mathcal K)\\).  Taking cohomology gives the\ndisplayed isomorphisms for every \\(i\\).",
    "uses": [
     "lemma-weil-pbc-finite-direct-image-exact",
-    "prop-functor-package",
-    "lem-a1-finite-map-cohomology"
+    "prop-functor-package"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-reduction-composition.proof.md",
+    "place": "Proof paragraph: finite-map transport and compact-support composition"
+   }
   }
  ],
  "proof_deps": [
   "lemma-weil-pbc-finite-direct-image-exact",
-  "prop-functor-package",
-  "lem-a1-finite-map-cohomology"
+  "prop-functor-package"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-reduction-composition.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-reduction-composition.proof.md",
+  "place": "Finite-map transport paragraph, expanded using the exactness and compact-support composition statements"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "compactlySupported|compact.*support|finite.*map.*cohomology",
+   "results": "none (0 hits in Mathlib)",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, IsIso, finite direct image, compact support",
+   "results": "none; service reported unknown identifier 'IsIso'",
+   "date": "2026-10-17",
+   "verdict": "unavailable/invalid pattern"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived compactly supported cohomology finite map composition direct image",
+   "results": "generic unrelated hits (CompactlySupportedContinuousMap.compLinearMap, groupCohomology.map_comp, etc.); no cohomology transport",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "DerivedCategory|Functor.*comp|IsIso.*comp",
+   "results": "none (0 hits in Mathlib/CategoryTheory)",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsIso _",
+   "results": "generic Functor.IsIso declarations in Mathlib.CategoryTheory.IsoCat; none about finite pushforward/cohomology",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compactly supported derived global sections finite proper pushforward sheaf",
+   "results": "generic sheaf/pushforward and condensed hits; no derived compact-support transport",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived compactly supported cohomology is invariant under finite proper pushforward",
+   "results": "generic finite-is-proper and sheaf pushforward hits; no derived compact-support transport",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -69,5 +121,20 @@
   }
  },
  "chapter": "sec-deligne-laumon-a1",
- "unit": "sk-thm-dl-a1-upper"
+ "unit": "sk-thm-dl-a1-upper",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-a1-reduction-composition",
+  "worker": "stage1",
+  "summary": "Updated the imported item to the main-20261015 blueprint and split its finite-map transport proof into one complete step. The step derives the compact-support quasi-isomorphism for j_!F directly from properness and compact-support composition in prop-functor-package and exact finite direct image in lemma-weil-pbc-finite-direct-image-exact; the earlier citation to lem-a1-finite-map-cohomology was removed because that node only states the lisse-sheaf degreewise special case and does not state the derived comparison for j_!F. No new node is needed.",
+  "blueprint": "Proof paragraph of lem-a1-reduction-composition: finite-map transport, exactness of g_*, and compact-support composition."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q45-17c10b4b8",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q45-17c10b4b8 (reviewer sub-agent of L); spot-checked: Read the item, report, chapter/unit route, current blueprint proof, and every cited node/source. The finite-map transport proof is correct with the stated coefficient category, properness, compact-support composition, and exact finite direct image. Edge cases and duplicate/generalization checks pass; no SGA citations or target weakening. Wrote review.md."
+ }
 }
