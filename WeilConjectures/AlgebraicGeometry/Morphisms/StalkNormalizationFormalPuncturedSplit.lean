@@ -106,7 +106,7 @@ theorem GaloisCover.exists_stalk_normalization_formal_punctured_split {S C : Sch
   obtain ⟨hp, hep, hr, her, hV⟩ := h
   have hslice := GaloisCover.stalk_normalization_formal_zero_slice_split
     hS c σ hσ G q j hCη sη hsq hsj Z hZ U hηU jU PA ψ hjU hψ
-    s hs hmin d t hb hz
+    s d t hb hz
   dsimp only at hslice
   obtain ⟨e₀, he₀⟩ := hslice
   let := hp

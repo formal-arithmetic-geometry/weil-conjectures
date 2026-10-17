@@ -58,7 +58,7 @@ theorem semilocal_dim_one_conductor_power
           algebraMap B K b = (x : K) ^ n * (y : K) := by
   intro x y hx hJ
   obtain ⟨A, hfin, hfrac, hxm, hym, m, hm, a, haK, haJ⟩ :=
-    exists_finite_adjoin_with_jacobson_power B hdim K x y hJ
+    exists_finite_adjoin_with_jacobson_power B K x y hJ
   set_option linter.style.haveILetI false in
     letI : Module.Finite B A := hfin
   set_option linter.style.haveILetI false in

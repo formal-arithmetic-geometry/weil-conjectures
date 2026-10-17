@@ -120,8 +120,6 @@ private theorem local_dimension_le_of_goingDown
     (IsLocalRing.maximalIdeal T) (IsLocalRing.le_maximalIdeal_of_isPrime p.asIdeal)
   exact ⟨⟨q, hq⟩, PrimeSpectrum.ext_iff.mpr hlo.over.symm⟩
 
--- The boundary and depth assumptions have already been used to obtain `hboundary`.
-set_option linter.unusedVariables false in
 /-- Finite normalizations transfer the boundary dimension estimate to source stalks.
 Source: Stacks Project, Tags 0337, 00LK, 033C and 00H8.
 (blueprint: new-stalk-normalization-boundary-dimension-two-transfer)
@@ -132,10 +130,7 @@ theorem stalk_normalization_boundary_dimension_two_transfer {S C : Scheme.{u}}
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
     (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c]
     (U : S.Opens) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)
-    (s : S) (hs : s ∉ U)
-    (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s)
-    (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth
-      (R := S.presheaf.stalk s) (S.presheaf.stalk s))
+    (s : S)
     (hboundary : let a := S.fromSpecStalk s
       ∀ y : (pullback c a : Scheme.{u}),
         y ∉ (pullback.fst c a) ⁻¹ᵁ (c ⁻¹ᵁ U) →

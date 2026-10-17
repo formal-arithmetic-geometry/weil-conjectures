@@ -9,7 +9,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.Divisor
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.AlgebraicGeometry.Curve
-public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Topology.LocallyConstant.Basic
 
@@ -26,7 +25,6 @@ Source: blueprint, sec-abelian-varieties, sk-def-av-pic, node def-sc-divisor
 - `Divisor.modulePresheaf`: these sections with pointwise restrictions.
 - `Divisor.associatedModule`: the resulting sheaf of modules.
 - `Divisor.moduleOfSmoothConnectedCurve`: the construction under the node's hypotheses.
-- `divisorConstantSheaf`: the ambient constant sheaf of the function field.
 
 The divisor group, principal-divisor map, class group and degree are the existing
 `Scheme.Divisor`, `Scheme.div`, `Scheme.DivisorClassGroup` and `Scheme.Divisor.degree`.
@@ -274,12 +272,6 @@ invertible module). Source: blueprint node def-sc-divisor, displayed formula O_C
 (blueprint: def-sc-divisor). -/
 noncomputable def Divisor.associatedModule (D : X.Divisor) : X.Modules :=
   ⟨D.modulePresheaf X, D.modulePresheaf_isSheaf X⟩
-
-/-- The ambient constant sheaf of rings, using the recorded constant-sheaf declaration.
-The locally constant functions used above are its usual topological section model.
-Source: blueprint node def-sc-divisor; Stacks, Tag 0H7J (blueprint: def-sc-divisor). -/
-noncomputable def divisorConstantSheaf : TopCat.Sheaf CommRingCat.{u} X :=
-  (constantSheaf (Opens.grothendieckTopology X) CommRingCat.{u}).obj X.functionField
 
 end AlgebraicGeometry.Scheme
 

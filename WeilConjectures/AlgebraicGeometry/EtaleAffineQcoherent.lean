@@ -67,20 +67,18 @@ criterion and faithfully flat Amitsur exactness establish vanishing in every pos
 degree, and the injective K-injective resolution identifies derived evaluation with
 `Sheaf.H`. (blueprint: lem-sc-etale-affine-qcoherent-succ)
 
-Proof: apply the affine Čech vanishing criterion to the affine basis of the small
-étale site. Finite affine refinements are stable under iterated fibre products, and
-the standard disjoint-union cover identifies the Čech complex with the Amitsur
-complex of a faithfully flat algebra. The Amitsur complex is exact in positive
-degrees, so the criterion gives vanishing of derived evaluation at the terminal
-affine object. An injective K-injective resolution identifies that derived
-evaluation with `Sheaf.H`, yielding the stated subsingleton.
+Proof: write `q = n + 1`. The Čech argument above is carried out for the universe
+lift of the sheaf in `etale_affine_qcoherent_ulift`. An injective resolution of the
+sheaf lifts to one of its universe lift, so the lifted cohomology is the lift of the
+cohomology computed by derived evaluation at the terminal affine object. Its vanishing
+therefore gives the vanishing of `Sheaf.H` in degree `n + 1`.
 -/
-theorem etale_affine_qcoherent_succ
+theorem etale_affine_qcoherent
     (X : Scheme.{u}) [IsAffine X]
-    (F : X.Modules) [F.IsQuasicoherent] (n : ℕ) :
-    Subsingleton (Sheaf.H
-      (AlgebraicGeometry.Scheme.Modules.etaleTensorSectionsSheaf F) (n + 1)) := by
+    (F : X.Modules) [F.IsQuasicoherent] (q : ℕ) (hq : 0 < q) :
+    Subsingleton (Sheaf.H (AlgebraicGeometry.Scheme.Modules.etaleTensorSectionsSheaf F) q) := by
   classical
+  obtain ⟨n, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt hq)
   let G := Scheme.Modules.etaleTensorSectionsSheaf F
   let L := AddCommGrpCat.uliftFunctor.{u + 1, u}
   let G' := (sheafCompose X.smallEtaleTopology L).obj G
@@ -129,15 +127,5 @@ theorem etale_affine_qcoherent_succ
   exact @Function.Injective.subsingleton _ _ _
     ((R.isoRightDerivedObj E (n + 1)).addCommGroupIsoToAddEquiv.injective.comp e.injective)
     hsmall
-
-theorem etale_affine_qcoherent
-    (X : Scheme.{u}) [IsAffine X]
-    (F : X.Modules) [F.IsQuasicoherent] :
-    ∀ (q : ℕ), 0 < q →
-      Subsingleton (Sheaf.H (AlgebraicGeometry.Scheme.Modules.etaleTensorSectionsSheaf F) q) := by
-  intro q hq
-  obtain ⟨n, rfl⟩ := Nat.exists_eq_add_of_le hq
-  simpa [Nat.add_comm] using
-    etale_affine_qcoherent_succ X F n
 
 end AlgebraicGeometry.Etale
