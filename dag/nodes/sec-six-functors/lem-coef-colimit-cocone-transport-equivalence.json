@@ -10,7 +10,9 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-reflection-assembly",
+  "lem-cbc-enhanced-functor-cone-calculus"
  ],
  "proof": [
   {
@@ -166,5 +168,24 @@
   "group": "Q09",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-467d6ba12 (reviewer sub-agent of L); spot-checked: I read the item, its 4 steps and the full statements of the three nodes it cites (def-cbc-enhanced-diagrams-cones, lem-cbc-enhanced-functor-cone-calculus, lem-coef-infinity-mapping-composition), plus its two users, lem-coef-canonical-hocolim-degree-reduction steps 4-5 and lem-coef-cocartesian-horn-completion-comparison step 6. HTT 4.2.4.3 is not archived; the report has a WANTED line and proof_origin is agent, so I checked the mathematics directly. The statement is true and unchanged. I tested it with K empty, where D is a point and a colimiting cocone is an initial object, and with C the nerve of an ordinary category, where it is the classical natural-isomorphism case. Its direction matches both users. The dependency closure is acyclic (140 nodes). There are no new nodes and no SGA. This is not a target node, so no base-change morphism or coefficient category is involved. Fault C8: lem-cbc-enhanced-functor-cone-calculus belongs to unit sk-prop-sf-cbc, which is outside the route of sk-prop-sf-biduality-general, and no tool_uses was declared. I accepted it as a generic tool and added it to split_report.tool_uses; sibling nodes of this unit already use it the same way. Small repairs: step 2 now cites the cone calculus for the quasicategory and Kan inputs and writes out the associativity, witness and unitality homotopies with the objects named. Step 3 now writes out [lambda tau]=[lambda][tau], uses the fact that precomposition depends only on the component class, and replaces the claim of a homotopy 'coherent in y' with a pointwise one. blueprint.from.place is corrected from 'step 4' to step 5 of the parent. For the maintainer: lem-coef-brown-cocone-equivalence-transport (unsplit, NL) is a strict generalization that the report does not mention. It is not a duplicate, and its split could cite this item. Details are in review.md; the corrected item is in fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ColimitCoconeTransportEquivalence",
+  "declaration": "SSet.Enhanced.colimit_cocone_transport_equivalence",
+  "file": "lean/Sheaf/CategoryTheory/ColimitCoconeTransportEquivalence.lean",
+  "statement": "theorem colimit_cocone_transport_equivalence (K C : SSet.{u}) [Quasicategory C] (F G : K ⟶ C) (τ : ((ihom K).obj C) _⦋1⦌) (hτ₁ : ((ihom K).obj C).δ 1 τ = diagramVertex F) (hτ₀ : ((ihom K).obj C).δ 0 τ = diagramVertex G) (hτ : IsEquivalenceEdge ((ihom K).obj C) τ) : (∀ x : C _⦋0⦌, IsWeakHomotopyEquivalence (@canonicalPrecompositionMap ((ihom K).obj C) (enhanced_functor_cone_calculus K C).1 (diagramVertex F) (diagramVertex G) ((constantDiagrams K C).app _ x) τ hτ₁ hτ₀)) ∧ (∀ (μ : (coconeCategory G) _⦋0⦌) (ν : (coconeCategory F) _⦋0⦌), μ.1.1 = ν.1.1 → ∀ t : ((ihom K).obj C) _⦋2⦌, ((ihom K).obj C).δ 2 t = τ → ((ihom K).obj C).δ 0 t = SSet.yonedaEquiv (Functor.natTransEquiv ((unitHomEquiv _).symm μ.1.2)) → ((ihom K).obj C).δ 1 t = SSet.yonedaEquiv (Functor.natTransEquiv ((unitHomEquiv _).symm ν.1.2)) → (IsColimiting F ν ↔ IsColimiting G μ))",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing canonicalPrecompositionMap and actual coherent cocone vertices with their composition triangle. The two added statement dependencies already have landed Lean records and supply the canonical map and the functor-quasicategory witness; no mathematical statement is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9bc561fbc",
+  "group": "NL",
+  "result": "pass",
+  "note": "Statement, dependencies, source/docstrings, edge cases, and exact Lean declaration checked; scompile.py passed with only permitted sorry."
  }
 }
