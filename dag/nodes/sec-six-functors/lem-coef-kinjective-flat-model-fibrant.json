@@ -1,0 +1,88 @@
+{
+ "id": "lem-coef-kinjective-flat-model-fibrant",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: 'derived coefficient adjunction' computing R Hom_{X,A_n}(K_n, Rf_n^! L_n) before R lim; the flat-model derived right adjoints and internal Homs used there must agree with the K-injective Ru_* and R Hom.",
+   "via": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Termwise injective K-injective complexes are fibrant in the flat model",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology] and $R$ a sheaf of commutative rings on it, with abelian category $\\operatorname{Mod}(R)$ of module sheaves [def-weil-sheaf-of-modules-category] and cochain complexes as in [def-pc-cochain-complex-modules]. Let $I$ be a K-injective complex of $R$-modules [def-pur-kinjective-complex] each of whose terms $I^r$ is an injective object of $\\operatorname{Mod}(R)$ [def-sp-injective-resolutions]. Let $i:A\\to B$ be a morphism of complexes of $R$-modules which is a monomorphism in every degree and whose cokernel complex is acyclic [def-pc-acyclic-complex-modules]. Then every morphism of complexes $f:A\\to I$ extends to a morphism of complexes $g:B\\to I$ with $g\\circ i=f$. Consequently $I$ is a fibrant object of the flat model structure on complexes of $R$-modules of [lem-coef-sheaf-flat-model], i.e. $I\\to0$ has the right lifting property against its trivial cofibrations.",
+ "source": {
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Agent-formulated; the exact-sequence argument for Hom into a termwise injective complex is the one in the proof of Lemma 079L (injectives-lemma-characterize-K-injective), combined with Definition 070H (derived-definition-K-injective) and the remark after it in literature/stacks-project/derived.tex (Hom_K(M[i], I)=0 for all shifts). Lean analogue: Mathlib Algebra/Homology/ModelCategory/Injective.lean, private lemma lifting (bounded-below case)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-pur-kinjective-complex",
+  "def-sp-injective-resolutions",
+  "def-pc-acyclic-complex-modules",
+  "lem-coef-sheaf-flat-model"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rg -n 'IsKInjective|isFibrant|Lifting.hasLift|eq_δ_of_cocycle' over Mathlib/Algebra/Homology (/home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib)",
+   "results": "Mathlib/Algebra/Homology/ModelCategory/Lifting.lean:144 CochainComplex.Lifting.hasLift (a square with degreewise lifts lifts when the obstruction cocycle Q->K of degree 1 is a coboundary); Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean:171 CochainComplex.IsKInjective.eq_δ_of_cocycle (a cocycle from an acyclic complex into a K-injective complex is a coboundary); Mathlib/Algebra/Homology/ModelCategory/Injective.lean:77 isFibrant_iff and private lemma lifting, for the Quillen model on bounded-below complexes only",
+   "date": "2026-10-17",
+   "verdict": "candidate, not a leaf: the extension clause is Lifting.hasLift (with Y=0, K=I) plus IsKInjective.eq_δ_of_cocycle plus degreewise injectivity, a combination of three declarations rather than one statement; no Mathlib flat model structure exists for the fibrancy clause"
+  },
+  {
+   "tool": "leansearch",
+   "query": "K-injective complex with injective terms extends maps along monomorphisms with acyclic cokernel",
+   "results": "not run: the review service blocks network access for reviewers",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective, HasLiftingProperty",
+   "results": "not run: the review service blocks network access for reviewers",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_candidate": {
+  "declarations": [
+   "CochainComplex.Lifting.hasLift",
+   "CochainComplex.IsKInjective.eq_δ_of_cocycle"
+  ],
+  "files": [
+   "Mathlib/Algebra/Homology/ModelCategory/Lifting.lean:144",
+   "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean:171"
+  ]
+ },
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-coef-semilinear-derived-sections",
+  "by": "reviewer",
+  "date": "2026-10-17",
+  "group": "Q62"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-rational-descent",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Rational descent of the zeta series",
@@ -17,30 +17,103 @@
   "def-weil-geometric-hypotheses",
   "def-weil-normalized-integral-fraction",
   "def-weil-point-counts-zeta",
-  "def-weil-smooth-proper-cohomological-family"
+  "def-weil-smooth-proper-cohomological-family",
+  "def-weil-hankel-matrix",
+  "def-weil-rational-power-series"
  ],
  "proof": [
   {
-   "text": "The finite-rank hypothesis on $\\mathcal H(Z)=(z_{r+s})_{r,s\\geq0}$ in\nthe sense of [def-weil-hankel-matrix] is exactly the finite-rank\nhypothesis of [prop-weil-rationality-criterion] with\n$K=\\mathbf Q$, so the equivalence of its first two items gives\n$Z(X_0,T)\\in\\mathbf Q(T)$, which is the assertion.",
+   "text": "By [def-weil-point-counts-zeta], the series $C(T)=Z(X_0,T)$ belongs to $1+T\\mathbf Q[[T]]$, so its coefficients $z_n$ lie in $\\mathbf Q$. Its Hankel matrix over $\\mathbf Q$ is $(z_{r+s})_{r,s\\geq0}$ by [def-weil-hankel-matrix]. The hypothesis says exactly that the ranks over $\\mathbf Q$ of all its finite square submatrices have a common finite bound. Thus $C\\in\\mathbf Q[[T]]$ satisfies condition (2) of the rationality criterion over $K=\\mathbf Q$.",
    "uses": [
-    "def-weil-hankel-matrix",
+    "def-weil-point-counts-zeta",
+    "def-weil-hankel-matrix"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-rationality/prop-rational-descent.md",
+    "place": "Proof, specialization K = Q and identification of the finite-rank hypothesis; point-count series definition"
+   }
+  },
+  {
+   "text": "Apply the implication (2) $\\Rightarrow$ (1) of [prop-weil-rationality-criterion] to $K=\\mathbf Q$ and $C=Z(X_0,T)$ using step 1. It gives polynomials $P,Q\\in\\mathbf Q[T]$ with $Q(0)=1$ and $Q(T)Z(X_0,T)=P(T)$ in $\\mathbf Q[[T]]$.",
+   "uses": [
     "prop-weil-rationality-criterion"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-rationality/prop-rational-descent.md",
+    "place": "Proof, equivalence of the first two conditions of prop-weil-rationality-criterion"
+   }
+  },
+  {
+   "text": "Since $Q(0)=1\\neq0$ in $\\mathbf Q$, the equality $QZ=P$ from step 2 meets the defining condition for a rational power series in [def-weil-rational-power-series]. Consequently $Z(X_0,T)$ is the Taylor series of $P/Q\\in\\mathbf Q(T)$, which is precisely the claimed membership $Z(X_0,T)\\in\\mathbf Q(T)$.",
+   "uses": [
+    "def-weil-rational-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-rationality/prop-rational-descent.md",
+    "place": "Proof, final conclusion Z(X_0,T) belongs to Q(T)"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-point-counts-zeta",
   "def-weil-hankel-matrix",
-  "prop-weil-rationality-criterion"
+  "prop-weil-rationality-criterion",
+  "def-weil-rational-power-series"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-rationality/prop-rational-descent.md",
-  "place": "## Proof"
+  "place": "Proof; unchanged proof route, expanded into identification of the hypotheses, application of the criterion, and the rational-power-series convention. Current main-20261015 statement agrees with master; master supplies the proof."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "PowerSeries, \"rational\"",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "hankel|rational.*[Pp]ower[Ss]eries|[Pp]ower[Ss]eries.*rational",
+   "results": "No hits in the pinned Mathlib source.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A formal power series over the rationals whose Hankel matrix has finite rank is a rational function",
+   "results": "Hits on Hilbert polynomials for denominators (1-X)^d, Laurent-series approximation, and RatFunc.coe_coe; none gives finite Hankel rank implies rationality.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LinearRecurrence|linear_recurrence|normalized_fraction",
+   "results": "Mathlib/Algebra/LinearRecurrence.lean:53 LinearRecurrence, :70 IsSolution (read source lines 1-100); golden-ratio applications and Chebyshev/Dickson comments. No normalized-fraction or generating-series rationality theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A formal power series with finite Hankel rank is a rational function",
+   "results": "PowerSeries.spanFinrank_le_spanFinrank_map_constantCoeff_add_one_of_X_mem, RatFunc.coe_coe, analytic power series, Laurent-series integers, RatFunc ranks, and PowerSeries.isNoetherianRing; none is a Hankel rationality criterion.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sequence over a field satisfying an eventual linear recurrence has a rational generating power series",
+   "results": "LinearRecurrence.IsSolution, LinearRecurrence, mkSol, is_sol_mkSol, charPoly, Polynomial.existsUnique_hilbertPoly and Schroder-series hits. LinearRecurrence defines and constructs recurrence solutions, but does not identify their generating series as rational.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -78,5 +151,29 @@
   }
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-thm-rationality"
+ "unit": "sk-thm-rationality",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-rational-descent",
+  "worker": "stage1",
+  "summary": "Checked both blueprint snapshots, the unit/chapter route, the cited definition and criterion statements, project Lean declarations, and six logged Mathlib searches. Statement unchanged. Added the missing Hankel-matrix and rational-power-series statement dependencies; expanded the source proof into three explicit steps. No new nodes: the existing general rationality criterion has exactly the needed implication. Finite Hankel rank is an explicit assumption over Q, not a conclusion inferred silently from the l-adic factorization.",
+  "blueprint": "Master prop-rational-descent Proof, its sole paragraph: step 1 identifies the finite-rank hypothesis at K=Q, step 2 applies conditions (2) => (1), and step 3 reads the result as membership in Q(T). Current main-20261015 has the identical statement.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-rationality-criterion",
+    "why": "Existing general power-series rationality criterion supplies (2) => (1) with K=Q. The rationality unit explicitly cites sk-prop-criterion; this is its prescribed criterion application, not a replacement route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-rationality-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-44172005d",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-44172005d (reviewer sub-agent of L); spot-checked: I read the item and all four cited statements in full: def-weil-point-counts-zeta, def-weil-hankel-matrix, prop-weil-rationality-criterion and def-weil-rational-power-series. I also read the five original stmt_deps, unit sk-thm-rationality and chapter sec-zeta-weil. The master proof (order 2891) and the main-20261015 statement (order 3233) are identical to the node's statement, so nothing was changed or weakened. Finite Hankel rank over Q is a hypothesis of the statement. The item does not claim the Q_l-to-Q descent, which the unit step does elsewhere. Step 1 is correctly elementary: X_0 is proper, hence of finite type, so Z lies in 1+TQ[[T]], and the Hankel definition with K=Q, C=Z is exactly the hypothesis. Step 2 uses only the criterion's statement, its (2)=>(1) clause with K=Q, and every hypothesis is met. Step 3 is correctly elementary: Q(0)=1 is nonzero, so Z is a rational power series, which is what 'in Q(T)' means in the DAG. proof_deps equals the union of the uses. The criterion's unit sk-prop-criterion is cited by the item's unit, so the declared tool_use is on-route; I accept it. The dependency closure does not contain the item, so there is no cycle. No duplicate exists: a grep for Hankel over dag/nodes finds only stronger results (sk-thm-rationality, nt-target-zeta-rational) and the generic criterion, so same_as [] is right. There are no new nodes. All three search kinds are recorded. Edge cases check out: Spec F_q gives Z=1/(1-T) with Hankel rank 1, and P^1 gives Z=1/((1-T)(1-qT)) with rank 2. A rational matrix has the same rank over Q and over Q_l. This is not a target node, so no base-change morphism or coefficient category is involved. I made no fixes; details are in review.md."
+ }
 }
