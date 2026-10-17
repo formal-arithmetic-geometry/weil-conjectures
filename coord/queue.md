@@ -12,13 +12,13 @@
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
-| `Sheaf.Paper.IntegralResidueTensorRouteModel` | 11 | 1 | repair |
 | `WeilConjectures.PoincareDuality.Poincare` | 0 | 1 | repair |
 | `WeilConjectures.SmoothPurity.Defs` | 0 | 1 | disputed |
 | `WeilConjectures.PoincareDuality.ProjectionFormula` | 2 | 5 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 3 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal` | 3 | 7 | proof |
 | `Sheaf.CategoryTheory.SetGeneratedDerivedSolutionSet` | 4 | 1 | proof |
+| `Sheaf.Paper.IntegralResidueTensorRouteModel` | 11 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorPullCounitCore` | 14 | 1 | proof |
 
 ## Stage 3: waiting for statements of proof dependencies (3)
