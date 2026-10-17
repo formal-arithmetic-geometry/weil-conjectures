@@ -1,0 +1,88 @@
+{
+ "id": "lem-trf-valuation-torsionfree-flat",
+ "kind": "statement",
+ "title": "Torsion-free modules over valuation rings are flat",
+ "statement": "Let $A$ be a valuation ring, meaning an integral domain such that for every nonzero element $a$ of its fraction field either $a$ or $a^{-1}$ belongs to $A$. Let $M$ be an $A$-module. If $M$ is torsion-free, meaning that $am=0$ for nonzero $a\\in A$ implies $m=0$, then $M$ is flat over $A$ [def-weil-pbc-flat-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0539, lemma-valuation-ring-torsion-free-flat"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every torsion-free module over a valuation ring is flat",
+   "results": "[leansearch] OK 8 hit(s): IsDedekindDomain.flat_iff_torsion_eq_bot; Module.Flat.instOfIsDedekindDomainOfIsTorsionFree; Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal; Module.Flat.flat_iff_torsion_eq_bot_of_isBezout; Module.free_of_finite_type_torsion_free'; Module.free_iff_isTorsionFree; Module.Flat.of_free; Module.Free.instIsTorsionFree. No exact declaration for arbitrary valuation rings.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every torsion-free module over a valuation ring is flat",
+   "results": "[leanfinder] OK 8 hit(s): Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal; Module.Flat.instOfIsDedekindDomainOfIsTorsionFree; Module.Flat.flat_iff_torsion_eq_bot_of_isBezout; IsDedekindDomain.flat_iff_torsion_eq_bot; Valuation.HasExtension.instIsTorsionFreeInteger; Module.Flat.self; Module.Flat.torsion_eq_bot; Module.flat_of_isLocalized_maximal. No exact declaration for arbitrary valuation rings.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ValuationRing, Module.Flat, Module.IsTorsionFree",
+   "results": "[loogle] OK 0 hit(s).",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torsion.free.*flat|flat.*torsion.free",
+   "results": "[grep] OK 1 hit(s): Mathlib/RingTheory/Flat/TorsionFree.lean. The file contains criteria for Dedekind/Bezout domains, not the arbitrary valuation-ring statement.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "flat_iff_torsion_eq_bot_of_isBezout|instance.*IsBezout in Mathlib/RingTheory (sed -n 90-135 TorsionFree.lean; sed -n 375-392 Valuation/ValuationRing.lean)",
+   "results": "Module.Flat.flat_iff_torsion_eq_bot_of_isBezout (Mathlib/RingTheory/Flat/TorsionFree.lean:93, @[stacks 0539]); instance [ValuationRing R] : IsBezout R (Mathlib/RingTheory/Valuation/ValuationRing.lean:379)",
+   "date": "2026-10-18",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Flat.flat_iff_torsion_eq_bot_of_isBezout",
+  "file": "Mathlib/RingTheory/Flat/TorsionFree.lean",
+  "line": 93,
+  "how": "specializes in one line: `Module.Flat.flat_iff_torsion_eq_bot_of_isBezout [IsBezout R] [IsDomain R] : Module.Flat R M ↔ Submodule.torsion R M = ⊥` (TorsionFree.lean:92-94, tagged `@[stacks 0539]`); a valuation ring is Bezout by the instance `ValuationRing.instIsBezout` (Mathlib/RingTheory/Valuation/ValuationRing.lean:379); the node's fraction-field definition of a valuation ring is Mathlib's `ValuationRing` by `ValuationRing.iff_isInteger_or_isInteger` (ValuationRing.lean:346); `Submodule.torsion R M = ⊥` is the torsion-free hypothesis since in a domain the non-zero-divisors are the nonzero elements (mem_nonZeroDivisors_iff_ne_zero). Same match as the existing leaf lem-sc-valuation-fp-torsionfree-free uses for its flatness half. Source read by the maintainer reader 2026-10-18."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-valuation-horizontal-curve-models",
+  "date": "2026-10-18",
+  "group": "Q33"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Temkin Lemma 3.5.1 input in the horizontal-model proof: torsion-freeness over the valuation ring gives flatness (Stacks Tag 0539).",
+   "via": [
+    "lem-trf-valuation-horizontal-curve-models",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

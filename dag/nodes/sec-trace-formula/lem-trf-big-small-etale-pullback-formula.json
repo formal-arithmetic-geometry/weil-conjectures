@@ -14,9 +14,126 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-etale-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the compatible small presentations of [def-weil-size-convention]. For $f:X\\to Y$, identify $B_X$ with $B_Y/(X/Y)$: an object is a scheme over $X$, and the coverings on either side are the same jointly surjective etale families. This is the localized topology of [def-pur-localized-ringed-site]. Put $u_f(V/X)=(V/Y)$ and $v_f(W/Y)=(W\\times_YX/X)$, using [def-pc-fibre-product]. Write $P_fG=G\\circ u_f$ and $Q_fH=H\\circ v_f$ for abelian sheaves. The former is a sheaf by restriction to the localized site. The latter is a sheaf too: a covering $\\{W_i\\to W\\}$ in $B_Y$ pulls back along $W\\times_YX\\to W$ to the covering $\\{W_i\\times_YX\\to W\\times_YX\\}$ by the site axiom in [def-weil-pbc-sites-and-cohomology](1); its overlaps are the corresponding fibre products by their universal property. Thus its sheaf equalizer is precisely that of $H$ on this covering. These formulas also specify the functors on arrows.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-pur-localized-ringed-site",
+    "def-pc-fibre-product",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CE, lemma-localize-given-products; the localization definition and restriction formula of Tag 00Y0, definition-localize"
+   }
+  },
+  {
+   "text": "The adjunction $P_f\\dashv Q_f$ can be constructed explicitly. Let $p_W:u_fv_fW\\to W$ be the first projection and $e_V:V\\to v_fu_fV$ the graph $(\\mathrm{id}_V,V\\to X)$. For $\\alpha:P_fG\\to H$, set $\\lambda(\\alpha)_W=\\alpha_{v_fW}\\circ G(p_W)$; for $\\gamma:G\\to Q_fH$, set $\\mu(\\gamma)_V=H(e_V)\\circ\\gamma_{u_fV}$. These are natural transformations and homomorphisms since the projections and graphs are natural and all their components are homomorphisms. Naturality of $\\alpha$ gives $\\mu\\lambda(\\alpha)_V=\\alpha_V\\circ G(p_{u_fV}\\circ u_f(e_V))=\\alpha_V$. Naturality of $\\gamma$ gives $\\lambda\\mu(\\gamma)_W=H(v_f(p_W)\\circ e_{v_fW})\\circ\\gamma_W=\\gamma_W$. Both projection identities follow by comparing the two projections in [def-pc-fibre-product]. The formulas commute with precomposition in $G$ and postcomposition in $H$, so [lem-weil-pbc-adjunction-of-natural-bijection] supplies the adjunction. Its unit $b_{f,G}:G\\to Q_fP_fG$ has component $G(p_W)$, by taking $\\alpha=\\mathrm{id}$. In particular $P_f=f_b^{-1}$ is the restriction in the statement, and $Q_f$ is its right adjoint. Composition of these restrictions is literally composition of the structure maps.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 021H, lemma-morphism-big-etale, and Sites Tag 03CE, lemma-localize-given-products; explicit Hom bijections and unit"
+   }
+  },
+  {
+   "text": "Write $L_Z=\\pi_Z^{-1}$ and $R_Z=\\pi_{Z,*}$, with unit $e_Z:\\mathrm{id}\\to R_ZL_Z$. By [lem-trf-big-small-etale-exact-retraction], $R_Z$ is restriction and $e_Z$ is an isomorphism. For an abelian sheaf $H$ on $B_X$ and an etale object $W/Y$, the formulas of step 2 and [def-weil-pbc-direct-image] give\n$$ (R_YQ_fH)(W/Y)=H(W\\times_YX/X)=(f_{s,*}R_XH)(W/Y). $$\nOn a $Y$-morphism $W'\\to W$, both restrictions are $H$ applied to $W'\\times_YX\\to W\\times_YX$, and on a sheaf map both sides use its component there. Hence this is a natural identification $\\delta_f:f_{s,*}R_X\\xrightarrow{\\sim}R_YQ_f$, the identity with common choices of fibre products. This proves the direct-image square of Topologies 021I(3).",
+   "uses": [
+    "lem-trf-big-small-etale-exact-retraction",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 021I, lemma-morphism-big-small-etale (3), proof: the two composites are the same base-change functor followed by inclusion"
+   }
+  },
+  {
+   "text": "The composite adjunctions of [def-weil-pbc-composite-adjunction] are $P_fL_Y\\dashv R_YQ_f$ and $L_Xf_s^{-1}\\dashv f_{s,*}R_X$; the small adjunction is the one of [def-weil-pbc-sites-and-cohomology](3). Apply [lem-weil-pbc-conjugate-iso-unit-equation] to $\\delta_f$ from step 3. It gives a canonical natural isomorphism\n$$ \\beta_f:P_fL_Y\\xrightarrow{\\sim}L_Xf_s^{-1}. $$\nThis proves the final clause of the item. More precisely, write $s_{f,F}:F\\to f_{s,*}f_s^{-1}F$ for the small unit and $b_f$ for the big unit of step 2. The characterizing equation, with $\\delta_f$ understood, is\n$$ R_YQ_f(\\beta_{f,F})\\circ R_Y(b_{f,L_YF})\\circ e_{Y,F}\n = f_{s,*}(e_{X,f_s^{-1}F})\\circ s_{f,F}. \\tag{*} $$\nAll units here are the abelian adjunction units, so the equation is one of morphisms of abelian sheaves, not merely a bijection of underlying sets.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints, and its Hom-set characterization; Tag 0DV0, lemma-compose-counits, composite adjunction"
+   }
+  },
+  {
+   "text": "Record the composition compatibility needed for sections. For $a:T\\to S$ and $h:T'\\to T$, let $c_{a,h}:h_s^{-1}a_s^{-1}\\xrightarrow{\\sim}(ah)_s^{-1}$ be the unit-compatible comparison of [lem-weil-pbc-inverse-image-composition](2). Then\n$$ \\beta_{ah,F}=L_{T'}(c_{a,h,F})\\circ\\beta_{h,a_s^{-1}F}\\circ P_h(\\beta_{a,F}), \\tag{**} $$\nwhere $P_hP_a=P_{ah}$. To check this, use the composite-unit formula of [def-weil-pbc-composite-adjunction] to expand the unit on the right, substitute $(*)$ first for $h$ and then for $a$, and use the displayed unit equation for $c_{a,h}$ in clause (2) of the cited node. The resulting right-adjoint comparison at $W/S$ is induced by $(W\\times_ST)\\times_TT'\\cong W\\times_ST'$, exactly the comparison for $ah$: both maps have the same projections to $W$ and $T'$ by [def-pc-fibre-product]. Thus both sides satisfy the same characterizing unit equation for these right adjoints. Uniqueness in [lem-weil-pbc-conjugate-iso-unit-equation] gives $(**)$.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "def-weil-pbc-composite-adjunction",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 021J, lemma-composition-etale; Categories Tag 0B65 and Sites Tag 03CB for the unit-compatible inverse-image comparison"
+   }
+  },
+  {
+   "text": "For $a:T\\to S$ set $K=a_s^{-1}F$. Apply $R_T$ to $\\beta_{a,F}:P_aL_SF\\cong L_TK$ and compose with $e_{T,K}^{-1}$, which exists by [lem-trf-big-small-etale-exact-retraction]. Evaluating at the final object $T/T$ gives\n$$ \\theta_{a,F}=(e_{T,K}(T))^{-1}\\circ\\beta_{a,F}(T):\n(L_SF)(T/S)\\xrightarrow{\\sim}K(T/T)=\\Gamma(T_{\\mathrm{Et}},a_s^{-1}F). $$\nHere $R_TP_aL_SF(T/T)=(L_SF)(T/S)$ by restriction, and $\\Gamma$ is evaluation as in [def-weil-pbc-sites-and-cohomology](2). Every map is an abelian-sheaf morphism, so this is an isomorphism of abelian groups. Naturality in $F$ follows from naturality of $\\beta_a$ and of $e_T$. This is exactly the evaluation argument in the first paragraph of 09XN: restriction along $T_{\\mathrm{Et}}\\to B_S$ is $R_TP_a$.",
+   "uses": [
+    "lem-trf-big-small-etale-exact-retraction",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XN, lemma-describe-pullback, first proof paragraph"
+   }
+  },
+  {
+   "text": "For any abelian sheaf $K$ on $T_{\\mathrm{Et}}$, evaluate $(*)$ for $h:T'\\to T$ at the final object $T/T$. By step 2, $b_{h,L_TK}(T)$ is restriction along $h$, after the canonical identification $T\\times_TT'\\cong T'$; this identification and its projections are supplied by [def-pc-fibre-product]. The identification $\\delta_h$ is the identity of sections from step 3. Thus for $t\\in K(T)$ one obtains the actual equality\n$$ \\beta_{h,K}(T')\\big((L_TK)(h)(e_{T,K}(T)t)\\big)\n = e_{T',h_s^{-1}K}(T')\\big(s_{h,K}(T)t\\big). \\tag{***} $$\nThe map $s_{h,K}(T):K(T)\\to(h_s^{-1}K)(T')$ is precisely pullback of global sections: by [def-weil-pbc-sites-and-cohomology](3), it is the inverse-image adjunction unit evaluated at the final object, with direct-image evaluation given by [def-weil-pbc-direct-image]. Equation $(***)$ therefore identifies the big restriction with this specific pullback map, including its unit normalization.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XN, lemma-describe-pullback, first proof paragraph, with the adjunction-unit compatibility made explicit; Topologies 021I(3)"
+   }
+  },
+  {
+   "text": "Finally let $G=L_SF$, $K=a_s^{-1}F$, $s\\in G(T/S)$ and $t=\\theta_{a,F}(s)$. By definition $\\beta_{a,F}(T)s=e_{T,K}(T)t$. Naturality of the sheaf map $\\beta_{a,F}$ along $h:T'\\to T$, regarded as an arrow of $B_T$, gives\n$$ \\beta_{a,F}(T')G(h)s=(L_TK)(h)e_{T,K}(T)t. $$\nApply $\\beta_{h,K}(T')$ and use $(***)$, then $(**)$ and the naturality of $e_{T'}$ with respect to $c_{a,h,F}$. Cancelling the isomorphism $e_{T',(ah)_s^{-1}F}(T')$ gives\n$$ \\theta_{ah,F}(G(h)s)=c_{a,h,F}(T')\\big(s_{h,K}(T)t\\big). $$\nThe right side is pullback of $t$ along $h_s$ followed by the canonical identification $h_s^{-1}a_s^{-1}F\\cong(ah)_s^{-1}F$ of [lem-weil-pbc-inverse-image-composition]. This proves exactly the claimed restriction formula and hence naturality in every $T/S$, without any etaleness assumption on $a$ or $h$.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XN, lemma-describe-pullback, evaluation formula; Topologies Tags 021I and 021J, composition of the small/big morphisms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "lem-trf-big-small-etale-exact-retraction",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09XN (lemma-describe-pullback), first proof paragraph, through Topologies 021H/021I/021J. The localization Hom bijections and adjunction-unit calculation are written out using Sites 03CE and Categories 0B65."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -52,10 +169,94 @@
    "results": "{\"t\": \"2026-10-17T19:08:33Z\", \"tool\": \"leanfinder\", \"query\": \"Big etale extension of a small etale sheaf is the presheaf assigning pullback sections to each scheme over the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.etaleTopology\"], \"digest\": \"208128c3b6de8ec5\"}",
    "date": "2026-10-17",
    "verdict": "no match: site equivalences, generic sheaf pullback and over-site restriction do not identify extension from the small etale site to all schemes over the base."
+  },
+  {
+   "tool": "grep",
+   "query": "overPullback|overPushforward|overMapPullback|over.*Adjunction",
+   "results": "{\"t\": \"2026-10-17T19:27:59Z\", \"tool\": \"grep\", \"query\": \"overPullback|overPushforward|overMapPullback|over.*Adjunction\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean\", \"Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean\", \"Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean\", \"Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean\", \"Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentDataAsCoalgebra.lean\", \"Mathlib/CategoryTheory/Sites/SheafHom.lean\", \"Mathlib/CategoryTheory/Sites/SheafHom.lean\"], \"digest\": \"493f34bd2f5c0546\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for this item: generic over-site restriction, sheaf adjunctions, and small-etale topology definitions do not state the small-to-big etale evaluation or its compatibility; the generic adjunction tools are reused from existing DAG leaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"overPullback\"",
+   "results": "{\"t\": \"2026-10-17T19:28:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"overPullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.IsPullback.isoOverPullback\", \"CategoryTheory.IsPullback.isoOverPullback_hom_left_comp_snd\", \"CategoryTheory.IsPullback.isoOverPullback_hom_left_comp_snd_assoc\", \"CategoryTheory.MorphismProperty.overPullbackMap\", \"CategoryTheory.GrothendieckTopology.coverPreserving_overPullback\", \"CategoryTheory.GrothendieckTopology.instIsContinuousOverPullbackOver\", \"CategoryTheory.GrothendieckTopology.overPullback\", \"CategoryTheory.Sheaf.toPushforwardOverPullback\"], \"digest\": \"7cb1ef8234153987\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for this item: generic over-site restriction, sheaf adjunctions, and small-etale topology definitions do not state the small-to-big etale evaluation or its compatibility; the generic adjunction tools are reused from existing DAG leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf on a site with binary products restriction to the slice site at U is left adjoint to the functor taking H to X maps to H of X times U over U",
+   "results": "{\"t\": \"2026-10-17T19:28:01Z\", \"tool\": \"leanfinder\", \"query\": \"For a sheaf on a site with binary products restriction to the slice site at U is left adjoint to the functor taking H to X maps to H of X times U over U\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.sheafToPresheaf_isRightAdjoint\", \"CategoryTheory.Sheaf.adjunction\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"CategoryTheory.Functor.sheafAdjunctionContinuous\", \"TopCat.Sheaf.instIsLeftAdjointPullback\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\", \"CategoryTheory.instIsRightAdjointSheafΓ\"], \"digest\": \"85372b65b879c001\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for this item: generic over-site restriction, sheaf adjunctions, and small-etale topology definitions do not state the small-to-big etale evaluation or its compatibility; the generic adjunction tools are reused from existing DAG leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "adjunction|Adjunction|[Aa]dj",
+   "results": "{\"t\": \"2026-10-17T19:28:13Z\", \"tool\": \"grep\", \"query\": \"adjunction|Adjunction|[Aa]dj\", \"sub\": \"CategoryTheory/Sites/Continuous.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"12\", \"13\", \"15\", \"200\", \"201\"], \"digest\": \"79537b43c075caf3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for this item: generic over-site restriction, sheaf adjunctions, and small-etale topology definitions do not state the small-to-big etale evaluation or its compatibility; the generic adjunction tools are reused from existing DAG leaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The localization morphism of a site at an object has restriction as inverse image and direct image given by evaluation on products with that object",
+   "results": "{\"t\": \"2026-10-17T19:28:14Z\", \"tool\": \"leansearch\", \"query\": \"The localization morphism of a site at an object has restriction as inverse image and direct image given by evaluation on products with that object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.ΓRes\", \"ModuleCat.Tilde.openToLocalization\", \"CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp\", \"AlgebraicGeometry.StructureSheaf.openToLocalization\", \"AlgebraicGeometry.StructureSheaf.localizationToStalk\", \"AlgebraicGeometry.StructureSheaf.instIsIsoCommRingCatLocalizationToStalk\", \"CategoryTheory.Localization.Construction.objEquiv\"], \"digest\": \"a90efaf6829caafc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for this item: generic over-site restriction, sheaf adjunctions, and small-etale topology definitions do not state the small-to-big etale evaluation or its compatibility; the generic adjunction tools are reused from existing DAG leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction of continuous functors between sites induces an adjunction of sheaf precomposition functors in the opposite direction",
+   "results": "{\"t\": \"2026-10-17T19:28:15Z\", \"tool\": \"leanfinder\", \"query\": \"An adjunction of continuous functors between sites induces an adjunction of sheaf precomposition functors in the opposite direction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafAdjunctionContinuous\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"CategoryTheory.Sheaf.adjunction\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify\", \"SheafOfModules.PullbackConstruction.adjunction\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\", \"SheafOfModules.pullbackPushforwardAdjunction\"], \"digest\": \"b99f62e85f591121\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for this item: generic over-site restriction, sheaf adjunctions, and small-etale topology definitions do not state the small-to-big etale evaluation or its compatibility; the generic adjunction tools are reused from existing DAG leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "bigEtale|big_etale|small.*big.*[Ee]tale|describePullback",
+   "results": "{\"t\": \"2026-10-17T19:28:32Z\", \"tool\": \"grep\", \"query\": \"bigEtale|big_etale|small.*big.*[Ee]tale|describePullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for this item: generic over-site restriction, sheaf adjunctions, and small-etale topology definitions do not state the small-to-big etale evaluation or its compatibility; the generic adjunction tools are reused from existing DAG leaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image from the small etale site to the big etale site evaluated at T equals sections of the pullback to T",
+   "results": "{\"t\": \"2026-10-17T19:28:32Z\", \"tool\": \"leansearch\", \"query\": \"Inverse image from the small etale site to the big etale site evaluated at T equals sections of the pullback to T\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"TopCat.Presheaf.pullback\", \"TopCat.Presheaf.pullbackObjObjOfImageOpen\", \"CategoryTheory.GrothendieckTopology.overMapPullbackId_inv_app_val_app\", \"CategoryTheory.GrothendieckTopology.overMapPullback\", \"CategoryTheory.sheafSectionsNatIsoEvaluation_inv_app\", \"CategoryTheory.sheafHomSectionsEquiv_symm_apply_coe_apply\", \"CategoryTheory.GrothendieckTopology.overPullback\"], \"digest\": \"659582985b7d3824\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for this item: generic over-site restriction, sheaf adjunctions, and small-etale topology definitions do not state the small-to-big etale evaluation or its compatibility; the generic adjunction tools are reused from existing DAG leaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"etale\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-17T19:28:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"etale\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.instHasPullbacksAffineEtale\"], \"digest\": \"da908431cf096b54\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for this item: generic over-site restriction, sheaf adjunctions, and small-etale topology definitions do not state the small-to-big etale evaluation or its compatibility; the generic adjunction tools are reused from existing DAG leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of a small etale sheaf on the big etale site evaluated on a scheme T is the global sections of its small etale pullback to T and commutes with change of base scheme",
+   "results": "{\"t\": \"2026-10-17T19:28:34Z\", \"tool\": \"leanfinder\", \"query\": \"The inverse image of a small etale sheaf on the big etale site evaluated on a scheme T is the global sections of its small etale pullback to T and commutes with change of base scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app\", \"AlgebraicGeometry.Scheme.restrictFunctorΓ\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\"], \"digest\": \"7334c4570df29f63\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for this item: generic over-site restriction, sheaf adjunctions, and small-etale topology definitions do not state the small-to-big etale evaluation or its compatibility; the generic adjunction tools are reused from existing DAG leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "over_star|Over.star|forgetAdjStar|overPullback|sheafAdjunctionCocontinuous",
+   "results": "{\"t\": \"2026-10-17T19:29:25Z\", \"tool\": \"grep\", \"query\": \"over_star|Over.star|forgetAdjStar|overPullback|sheafAdjunctionCocontinuous\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"Mathlib/CategoryTheory/Sites/SheafHom.lean\", \"Mathlib/CategoryTheory/Sites/SheafHom.lean\", \"Mathlib/CategoryTheory/Sites/Over.lean\"], \"digest\": \"ce6b833e4450bc92\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for this item: generic over-site restriction, sheaf adjunctions, and small-etale topology definitions do not state the small-to-big etale evaluation or its compatibility; the generic adjunction tools are reused from existing DAG leaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"star\", \"sheaf\"",
+   "results": "{\"t\": \"2026-10-17T19:29:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"star\\\", \\\"sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for this item: generic over-site restriction, sheaf adjunctions, and small-etale topology definitions do not state the small-to-big etale evaluation or its compatibility; the generic adjunction tools are reused from existing DAG leaves."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-ph-etale-comparison-hypotheses",
@@ -82,5 +283,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-big-small-etale-pullback-formula",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed the big restriction/product adjunction by explicit inverse natural Hom bijections; proved the direct-image square sectionwise and took its unit-normalized adjoint conjugate. Evaluated its restriction using the exact-retraction unit, and verified the restriction maps by the displayed unit and composition equations. No new node is required: all non-elementary tools already have DAG nodes; the product/graph calculation is written out.",
+  "blueprint": "Realizes the small/big evaluation input 09XN and 021I in the normal-cone specialization of lem-trf-local-term-locality, through the ph/etale comparison ancestry already recorded in blueprint.from; the current blueprint main-20261015 proof is the normal-cone argument in (1) and (2).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-inverse-image-composition",
+    "why": "Use the generic small-etale inverse-image composition comparison and its unit equation in the coherence and restriction calculations; this does not replace the normal-cone route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NK-bcac3faca",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-bcac3faca (reviewer sub-agent of L); spot-checked: I read the whole item: all 8 steps, the statements of all cited nodes, and Stacks 09XN, 021I(1)-(4), 03CE, 0B65, 0DV0 and 0037 at the cited labels. The statement is unchanged and matches the source: it is the 09XN evaluation formula and its naturality for abelian sheaves, plus the inverse-image form of 021I(3). The citer lem-trf-ph-etale-comparison-hypotheses gets exactly the clauses it uses. I recomputed every step myself. Step 2: both Hom-bijection composites are the identity, because p o u_f(e)=id and v_f(p) o e=id; the unit is G(p_W). Step 3: R_Y Q_f and f_{s,*} R_X agree section by section. Step 4: the conjugate is taken with the correct orientation, and (*) is that lemma's unit equation. Step 5: (**) follows from naturality of b_h, delta and e, then (*) for a and h, then the unit equation of inverse-image-composition(2) and naturality of d; the leftover comparison is H applied to (W x_S T) x_T T' = W x_S T'. Step 7 (***) checks at T/T. Step 8 gives theta_{ah}(G(h)s)=c(s_h(theta_a s)). Edge cases checked: T empty, f=id, F=0, h non-etale. The delivery creates no new nodes, so there are no restated clauses and nothing to drop. An rg over the DAG for 09XN, 021I and big-etale finds no duplicate. Off-unit tool use accepted: lem-weil-pbc-inverse-image-composition. There is no SGA source, and proof_deps equals the union of the step uses. I wrote no fixes. Details are in review.md."
  }
 }

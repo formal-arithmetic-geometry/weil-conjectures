@@ -27,48 +27,144 @@
   "def-weil-pbc-multivariate-power-series",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "On an affine chart $U=\\operatorname{Spec}A$ of $X$ over an affine chart of $T=\\operatorname{Spec}V$, flatness over the domain $V$ makes $A\\to A\\otimes_VK$ injective. The generic fibre is smooth over the field $K$, hence reduced, so every such $A$ is reduced. Flatness also makes the generic point of every irreducible component specialize from the generic fibre; therefore the generic fibre meets every component. A finite affine cover of the finitely presented scheme $X$ and the finite-type $K$-scheme $X_\\eta$ then show that $X$ has finitely many irreducible components. This proves the first assertion, including the empty case.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Remark 4.1, pp. 24--25; flatness and generic-fibre reduction argument in the opening of §4.2, p. 26"
+   }
+  },
+  {
+   "text": "Let $q:Y\\to X$ be a reduced modification, inducing an isomorphism $U\\xrightarrow{\\sim}U'$ between schematically dense opens $U\\subseteq Y$, $U'\\subseteq X$. $Y$ is of finite type over $T$ ($q$ proper, $X\\to T$ finitely presented), so the underlying space of an affine open of $Y$ is the union of its finitely many fibres over the finite space $T$, each Noetherian; hence $Y$ is a quasi-compact Noetherian space with finitely many irreducible components. If the generic point $\\xi$ of a component $C$ were not in $U$, the nonempty open $V'$ of points of $Y$ on no other component lies in $C$, and $V'\\cap U$ is an open of the irreducible $C$ missing its generic point, hence empty; then $\\mathcal O_Y(V')\\neq0$ maps to $(j_*\\mathcal O_U)(V')=0$, contradicting schematic density. So every generic point of $Y$ lies in $U$ and maps to a generic point of $X$, which lies in $X_\\eta$ by Step 1; distinct generic points of $Y$ have distinct images. Generic fibre: by [lem-weil-pbc-smooth-over-normal-ring-normal] applied to the smooth ring maps $K\\to\\mathcal O(W)$ ($K$ a field is a normal ring), every local ring of $X_\\eta$ is a normal domain; in particular a point lies on only one irreducible component, so $X_\\eta$ is covered by integral affine opens $W$. Fix such $W$. Its preimage $E=q^{-1}(W)\\subseteq Y_\\eta$ is reduced, its generic points are generic points of $Y$ mapping injectively to the single generic point of $W$, and $E\\neq\\varnothing$ since $W\\cap U'\\neq\\varnothing$; hence $E$ is integral, and $U\\cap E\\cong U'\\cap W$ makes $E\\to W$ dominant with $k(W)\\xrightarrow{\\sim}k(E)$. $E\\to W$ is proper, so $E$ is separated and of finite type over $K$; by [lem-sc-closed-irreducible-dimension-trdeg], $\\dim E=\\operatorname{trdeg}_Kk(E)=\\operatorname{trdeg}_Kk(W)=\\dim W=1$, the last since $X_\\eta$ has pure dimension one. Now [lem-trf-proper-birational-normal-curve-iso] shows $E\\to W$ is an isomorphism; these glue, so $q_\\eta$ is an isomorphism. Flatness: every local ring of the reduced scheme $Y$ injects into the product of its localizations at minimal primes, which are local rings of $Y$ at generic points, hence $K$-algebras; so multiplication by every nonzero element of $V$ is injective on the coordinate rings of affine opens of $Y$, and [lem-trf-valuation-torsionfree-flat] gives flatness of $Y\\to T$. The morphism $q$ is proper, hence of finite type and separated, and $X\\to T$ is of finite presentation, so $Y\\to T$ is of finite type and quasi-separated. Finite presentation: on an affine open $\\operatorname{Spec}B\\subseteq Y$ choose a surjection $P=V[x_1,\\dots,x_n]\\to B$ and regard $\\mathcal F=\\widetilde B$ as a finite-type quasi-coherent module on $\\mathbf A^n_T$, flat over $T$. Its restriction to $\\mathbf A^n_K$ is $B\\otimes_VK$, a finite module over the Noetherian ring $K[x_1,\\dots,x_n]$, hence finitely presented. The open $\\{\\eta\\}=D(a)$ for any nonzero $a$ in the height-one prime of the finite chain is quasi-compact in the affine $T$, hence retrocompact, and scheme-theoretically dense because $V$ injects into its localizations. [lem-trf-flat-finite-type-dense-presentation] for $\\mathbf A^n_T\\to T$ shows that $B$ is a finitely presented $P$-module, so the kernel of $P\\to B$ is a finitely generated ideal (from $0\\to I\\to P\\to B\\to0$ with $P$ finite free and $B$ finitely presented); thus $Y\\to T$ is of finite presentation. Finally $Y_\\eta\\cong X_\\eta$ is dense in $Y$ (it contains all generic points) with components of dimension one, and [lem-trf-flat-dense-generic-fibre-pure-dimension] gives pure dimension one for every nonempty fibre and geometric fibre. Thus $Y$ is a $T$-curve.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-sc-closed-irreducible-dimension-trdeg",
+    "lem-trf-proper-birational-normal-curve-iso",
+    "lem-trf-valuation-torsionfree-flat",
+    "lem-trf-flat-finite-type-dense-presentation",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Remark 4.1, pp. 24--25; Lemma 3.5.1, p. 20 (torsion-freeness, flatness and finite presentation)"
+   }
+  },
+  {
+   "text": "For the marking, work on an affine chart $W=\\operatorname{Spec}B$ of $Y$ and write $I_\\eta$ for the ideal in $B\\otimes_VK$ of the generic marking, transported to $Y_\\eta$ by the isomorphism $q_\\eta$ of Step 2. Define the schematic closure by $I=\\ker(B\\to(B\\otimes_VK)/I_\\eta)$. Then $B/I$ injects into the $K$-vector space $(B\\otimes_VK)/I_\\eta$; hence $B/I$ is torsion-free, and [lem-trf-valuation-torsionfree-flat] makes it flat over $V$. Finite presentation: apply [lem-trf-flat-finite-type-dense-presentation] to the locally finitely presented $Y\\to T$ (Step 2), the finite-type quasi-coherent $\\mathcal O_Y$-module $\\mathcal O_E$ (flat over $T$), and the retrocompact scheme-theoretically dense open $\\{\\eta\\}\\subseteq T$ of Step 2; over $\\eta$ it is $\\mathcal O_{E_\\eta}$, finitely presented on the locally Noetherian $Y_\\eta$. Hence $\\mathcal O_E$ is a finitely presented $\\mathcal O_Y$-module, so the ideal $I$ is finitely generated and $E\\to Y\\to T$ is of finite presentation. (No finiteness of $E$ over $T$ is claimed: the closure algebra need not be a finite $V$-module.) Its generic fibre $E_\\eta\\cong D_\\eta$ is etale over $K$ of dimension zero, and it is dense in $E$ because $\\mathcal O_E\\to\\mathcal O_E\\otimes_VK$ is injective; [lem-trf-flat-dense-generic-fibre-pure-dimension] gives pure relative dimension zero. The closed immersion $E\\hookrightarrow Y$ followed by the proper map $q$ factors through $D\\hookrightarrow X$: the pullback of the ideal of $D$ vanishes on the generic fibre of $E$, and the flat $V$-module $\\mathcal O_E$ is torsion-free, so that ideal pullback is zero. Thus $E\\to D$ is proper ($E\\to X$ is proper and $D\\to X$ is separated). Over the open $D_\\eta$ of $D$ (open because $\\{\\eta\\}$ is open in $T$, schematically dense because $D$ is flat over the domain $V$), and on generic fibres, $E\\to D$ is the prescribed isomorphism $E_\\eta\\cong D_\\eta$; likewise $q$ is an isomorphism over the schematically dense open $X_\\eta$ by Step 2. So the pair map is an $\\eta$-modification. The empty marking gives $E=\\varnothing$.",
+   "uses": [
+    "lem-trf-valuation-torsionfree-flat",
+    "lem-trf-flat-finite-type-dense-presentation",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-closed-immersion",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 3.5.1, p. 20; opening paragraph of §4.2, p. 26"
+   }
+  },
+  {
+   "text": "The closure is the unique flat closed subscheme with this generic fibre. Indeed, if $F$ is another flat closed subscheme with ideal $J$, then flatness over the domain $V$ gives $B/J\\hookrightarrow(B/J)\\otimes_VK$. Equality of the generic fibres says that $I$ and $J$ have the same images in $B\\otimes_VK$, so the two kernels $\\ker(B\\to(B\\otimes_VK)/I_\\eta)$ and $\\ker(B\\to(B\\otimes_VK)/J_\\eta)$ coincide. This proves $I=J$ on every affine chart, hence $E=F$.",
+   "uses": [
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 3.5.1, p. 20 (uniqueness of the flat closure)"
+   }
+  },
+  {
+   "text": "If $W\\subseteq Y$ is quasi-compact open, the same kernel formula computes the closure on each affine chart of $W$. Restriction only localizes $B$ and $B\\otimes_VK$, and localization commutes with the displayed kernel because the localization map is exact. Therefore the closure in $W$ is the restriction of $E$, and the same holds for all quasi-compact restrictions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Remark 4.1, pp. 24--25 (compatibility with restriction)"
+   }
+  },
+  {
+   "text": "Finally let $Y$ be an integral $T$-curve and let $q:Y\\to X$ be a birational quasi-modification identifying $Y_\\eta$ with an open of $X_\\eta$. Replace $D_\\eta$ by its intersection with that open, an open subscheme of the etale zero-dimensional $D_\\eta$, and repeat the affine kernel construction of Step 3. The closure algebra $B/I$ injects into the $K$-vector space $(B\\otimes_VK)/I_\\eta$, so it is torsion-free over $V$, and [lem-trf-valuation-torsionfree-flat] gives flatness. Since $Y\\to T$ is locally of finite presentation and $\\{\\eta\\}\\subseteq T$ is retrocompact and scheme-theoretically dense by finite height, [lem-trf-flat-finite-type-dense-presentation] applied to the finite-type flat $\\mathcal O_Y$-module of the closure, whose generic restriction is finitely presented on the locally Noetherian $Y_\\eta$, shows that the ideal is finitely generated, so the closure is finitely presented over $T$. Its generic fibre is the zero-dimensional scheme $D_\\eta\\cap Y_\\eta$, dense in the closure by flatness, so [lem-trf-flat-dense-generic-fibre-pure-dimension] gives pure relative dimension zero. The localization argument of Step 5 proves compatibility with quasi-compact restrictions. Taking $D=\\varnothing$ makes every generic marking and every closure empty, proving the unmarked case.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-weil-finite-type-morphism",
+    "lem-trf-valuation-torsionfree-flat",
+    "lem-trf-flat-finite-type-dense-presentation",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Opening paragraph of §4.2, p. 26; Lemma 3.5.1, p. 20"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-pc-integral-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-trf-flat-dense-generic-fibre-pure-dimension",
+  "lem-trf-flat-finite-type-dense-presentation",
+  "lem-trf-proper-birational-normal-curve-iso",
+  "lem-trf-valuation-torsionfree-flat",
+  "lem-weil-pbc-smooth-over-normal-ring-normal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Remark 4.1, pp. 24--25; opening paragraph of §4.2, p. 26; Lemma 3.5.1, p. 20. The archival PDF is absent locally (WANTED in report.md)."
+ },
  "mathlib_searches": [
   {
-   "tool": "leanfinder",
-   "query": "Modifications of flat relative curves over valuation rings remain flat finitely presented curves and horizontal markings are strict transforms",
-   "results": "[leanfinder] OK 8 hit(s) AlgebraicGeometry.ValuativeCriterion.Existence.stableUnderBaseChange; AlgebraicGeometry.Flat.isStableUnderBaseChange; AlgebraicGeometry.Flat; AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme; AlgebraicGeometry.Flat.generalizingMap; AlgebraicGeometry.isSmooth_isStableUnderBaseChange; AlgebraicGeometry.Flat.instIsMultiplicativeScheme; AlgebraicGeometry.Flat.instHasRingHomPropertyFlat Read the returned signatures: flatness and etale-locus assertions do not construct horizontal curve models or strict markings.",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Schematic closure of a generic finite etale marking in a curve model over a valuation ring is flat and finitely presented",
-   "results": "[leanfinder] OK 8 hit(s) AlgebraicGeometry.Scheme.Etale; Algebra.Etale.finitePresentation; Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; StandardEtalePair.instEtaleRing; AlgebraicGeometry.IsEtale.instIsSmooth; Algebra.exists_etale_of_isEtaleAt; Algebra.isOpen_etaleLocus; Algebra.etaleLocus Read the returned signatures: flatness and etale-locus assertions do not construct horizontal curve models or strict markings.",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  },
-  {
    "tool": "leansearch",
-   "query": "Modifications of flat relative curves over valuation rings remain flat finitely presented curves and horizontal markings are strict transforms",
-   "results": "[leansearch] OK 8 hit(s) RingHom.Flat.isStableUnderBaseChange; AlgebraicGeometry.Flat.instMorphismRestrict; AlgebraicGeometry.Flat.isStableUnderBaseChange; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth; AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange; AlgebraicGeometry.Flat.casesOn; AlgebraicGeometry.Flat.stalkMap; AlgebraicGeometry.Flat.flat_of_affine_subset Read the returned signatures: flatness and etale-locus assertions do not construct horizontal curve models or strict markings.",
-   "date": "2026-10-18",
+   "query": "Reduced modifications of flat finitely presented curves over finite-height valuation rings, schematic closures of etale markings, and birational quasi-modifications",
+   "results": "[leansearch] OK 8 hit(s): AlgebraicGeometry.flat_iff; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.Flat.mk; AlgebraicGeometry.UniversallyOpen.of_flat; AlgebraicGeometry.IsEtale; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth; AlgebraicGeometry.Flat.casesOn; AlgebraicGeometry.Flat.iff_flat_stalkMap. Read signatures: no horizontal-model or closure theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduced modifications of flat finitely presented curves over finite-height valuation rings, schematic closures of etale markings, and birational quasi-modifications",
+   "results": "[leanfinder] OK 8 hit(s): WeierstrassCurve.IsGoodReduction; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.ValuativeCriterion.existence; AlgebraicGeometry.Flat; AlgebraicGeometry.IsEtale; AlgebraicGeometry.IsSmoothOfRelativeDimension; AlgebraicGeometry.IsSmooth; AlgebraicGeometry.IsSmooth.exists_isStandardSmooth. Read signatures: no horizontal-model or closure theorem.",
+   "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "\"ValuationRing\"",
-   "results": "[loogle] OK 12 hit(s) PreValuationRing; ValuationRing; ValuationRing.of_field; PreValuationRing.iff_dvd_total; ValuationRing.ValueGroup; ValuationRing.instIsBezout; ValuationRing.isLocalRing; ValuationRing.dvd_total; ValuationRing.mk; ValuationRing.toPreValuationRing; ValuationRing.commGroupWithZero; ValuationRing.instInhabitedValueGroup Read the returned signatures: flatness and etale-locus assertions do not construct horizontal curve models or strict markings.",
-   "date": "2026-10-18",
-   "verdict": "no match"
+   "query": "ValuationRing, Module.Flat, Scheme",
+   "results": "[loogle] OK 0 hit(s); note: unknown identifier 'Scheme'.",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
   },
   {
    "tool": "grep",
-   "query": "[Vv]aluation.*[Ff]inite[Pp]resentation|[Tt]orsion[Ff]ree.*[Ff]lat|[Ff]lat.*[Tt]orsion[Ff]ree",
-   "results": "[grep] OK 8 hit(s) Mathlib/LinearAlgebra/RootSystem/IsValuedIn.lean:15; Mathlib/RingTheory/Flat/TorsionFree.lean:15; Mathlib/RingTheory/Flat/TorsionFree.lean:66; Mathlib/RingTheory/Flat/TorsionFree.lean:133; Mathlib/RingTheory/Flat/TorsionFree.lean:143; Mathlib/RingTheory/Flat/TorsionFree.lean:144; Mathlib/RingTheory/RamificationInertia/Basic.lean:9; Mathlib/RingTheory/KrullDimension/Regular.lean:8 Read the returned signatures: flatness and etale-locus assertions do not construct horizontal curve models or strict markings.",
-   "date": "2026-10-18",
+   "query": "schematic closure|valuation.*modification|torsion.free.*flat",
+   "results": "[grep] OK 0 hit(s) in Mathlib/RingTheory (subdirectory RingTheory).",
+   "date": "2026-10-17",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-stable-reduction",
@@ -95,5 +191,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-valuation-horizontal-curve-models",
+  "worker": "stage1",
+  "summary": "Restored the source hypothesis that a reduced modification has an isomorphic generic fibre, proving this from generic-point density, proper quasi-finiteness, birationality, and normality of the smooth generic curve. Added the statement-only valuation-ring torsion-free-flat node, cited it in steps 2, 3, and 6, and cited the dense-open finite-presentation node wherever finite presentation is obtained. Step 3 now proves properness, generic identification, and schematic density for the closure pair map. The cusp objection was removed because that finite map is not a modification under the node definition. Maintainer reader fix 2026-10-18: Step 2 now cites lem-weil-pbc-smooth-over-normal-ring-normal, lem-sc-closed-irreducible-dimension-trdeg and lem-trf-proper-birational-normal-curve-iso for the generic-fibre isomorphism and writes the affine-space embedding for the finite-presentation criterion; Steps 3 and 6 no longer cite lem-sc-valuation-fp-torsionfree-free (the closure algebra need not be a finite V-module); lem-trf-valuation-torsionfree-flat is a Mathlib leaf.",
+  "blueprint": "Proof component named by ancestor lem-trf-local-term-locality: Temkin Remark 4.1, opening §4.2, and Lemma 3.5.1 route for horizontal models and closures; the restored generic-isomorphism argument and valuation flatness input realize the same route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "why": "Step 2 needs that the smooth generic curve has normal local rings; the unit sk-i-curve-zero has no node for smooth over a normal ring implies normal (generic commutative-algebra tool)."
+   },
+   {
+    "node": "lem-sc-closed-irreducible-dimension-trdeg",
+    "why": "Step 2 needs dim = transcendence degree for an integral finite-type K-scheme to check the dimension hypothesis of lem-trf-proper-birational-normal-curve-iso; generic dimension-theory tool, no node of the unit gives it (same tool use as lem-trf-dejong-relative-marked-semistable)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-over-normal-ring-normal",
+  "lem-sc-closed-irreducible-dimension-trdeg"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-53cf0cdd9",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-53cf0cdd9 (reviewer sub-agent of L); spot-checked: I read the item, the new node, the parent lem-trf-valuation-stable-reduction, the unit sk-i-curve-zero, every cited statement, and Temkin arXiv:0707.3953v3: Lemma 3.5.1 (p.20), the §4 conventions, Remark 4.1 (pp.24-25) and the opening of §4.2 (p.26). Temkin was read from an extracted copy in /tmp because the PDF is still WANTED in literature/. I also read Stacks 0539 and the Mathlib sources. The statement is unchanged, correct and matches the source. I tested it on A^1_V with the zero section, on D empty, and on A^1_V minus the closed point of the origin, where the closure is Spec K: flat and finitely presented but not finite over V. I repaired three faults in the files under fixes/. (1) B8, search verdict: lem-trf-valuation-torsionfree-flat is a Mathlib leaf, Module.Flat.flat_iff_torsion_eq_bot_of_isBezout (Flat/TorsionFree.lean:93, @[stacks 0539]) through the instance [ValuationRing R] : IsBezout R (ValuationRing.lean:379). It is now status mathlib with that match. (2) C1/E5: Step 2 used, without any node, that a proper birational map to a smooth, hence normal, curve is an isomorphism, and it did not show that the generic points of Y lie in the dense open. It also applied 081N to no ambient finitely presented morphism. The step now proves the Noetherian-space and generic-point argument, cites lem-weil-pbc-smooth-over-normal-ring-normal, lem-sc-closed-irreducible-dimension-trdeg and lem-trf-proper-birational-normal-curve-iso (same unit, every hypothesis checked), and applies lem-trf-flat-finite-type-dense-presentation through an embedding in A^n_T. (3) C4/E3: Steps 3 and 6 applied lem-sc-valuation-fp-torsionfree-free to a closure algebra that is only finitely presented as an algebra. Step 6's 'finite freeness on affine charts' is false (the closure K above is not finite free over V). Both citations are removed. Steps 1, 4 and 5 are correct. I accept two tool_uses, lem-weil-pbc-smooth-over-normal-ring-normal and lem-sc-closed-irreducible-dimension-trdeg; the second has a precedent in lem-trf-dejong-relative-marked-semistable. There is no cycle, no SGA source, and no target is weakened.; 2 file(s) fixed by the reviewer"
  }
 }
