@@ -151,7 +151,7 @@ theorem GaloisCover.stalk_normalization_section_neighbourhood {S C : Scheme.{u}}
   · exact GaloisCover.stalk_normalization_depth_two_section_source
       hS c σ hσ G hG q j hCη sη hsq hsj Z hZ U hηU jU PA ψ hjU hψ s hs hmin hdim hfin
   · exact GaloisCover.stalk_normalization_trait_section_source
-      hS c σ hσ G hG q j hCη sη hsq hsj Z hZ U hηU jU PA ψ hjU hψ s hs hmin
+      hS c σ hσ G hG q j hCη sη hsj Z hZ U hηU jU PA ψ hjU hψ s hs hmin
       (lt_of_not_ge hdim) hfin
 
 end AlgebraicGeometry.Scheme
