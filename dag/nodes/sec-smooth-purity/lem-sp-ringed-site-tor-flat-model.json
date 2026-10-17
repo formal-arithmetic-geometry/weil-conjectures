@@ -14,7 +14,8 @@
   "def-weil-derived-cohomology-sheaves",
   "lem-weil-pbc-site-derived-tensor-descent",
   "def-pc-cochain-complex-modules",
-  "def-pc-flat-sheaf-modules"
+  "def-pc-flat-sheaf-modules",
+  "def-wf-tensor-product"
  ],
  "proof": [
   {
@@ -267,5 +268,23 @@
   "group": "Q86",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-158314cb6 (reviewer sub-agent of L); spot-checked: I read all of the item and its six steps against Stacks sites-cohomology.tex 08G1 (lemma-tor-amplitude, lines 12432-12481) and 08G0 (lemma-last-one-flat), and checked the step tags 06YP, 06YQ, 06YU and 06YL against tags/tags. The statement matches the source hypothesis by hypothesis: arbitrary sheaf of commutative rings, unbounded D(R), every module sheaf as test object, a<=b; nothing is weakened. I read the statements of all 14 proof_deps and 7 stmt_deps. Step 1: the cone criterion (05RT node, an iff), the tensor-cone iso with T as the left factor, and K-flatness after the signed symmetry swap show that T⊗c is a quasi-isomorphism; the descent iso then gives QT⊗^L M ≅ Q Tot(T⊗M[0]). Step 2: P is K-flat by 06YQ and Tot(P⊗M[0])^i = P^i⊗M. Step 3: testing on M=R gives H^i(K)=0 outside [a,b]; the representative with L^i=0 for i>b comes from the statement of def-sbc-standard-tstructure-derived-category itself, not a proof. Step 4: lem-pc-kflat-bounded-flat-replacement with N=b keeps the bound exactly. Step 5: every hypothesis of lem-weil-pbc-site-flat-opcycles-tor-criterion holds (small site, flat terms, exactness in degree a-1 for every N, no sign from the degree-zero factor), so Coker d^{a-1} is flat. Step 6: the good truncation's cohomology was checked in degrees a, a+1 and below a. Edge cases: a=b, K=0, R=0 or an empty site, a one-point site (agrees with 0654), and Z/2[0] over Z. Grep found no duplicate: the existing nodes are the ring-only 0654 version, the étale class version, the locally perfect version and comparison statements. No cycle: the dependency closure of 205 nodes does not contain the item. The blueprint_update of def-weil-abstract-derived-category does not change what is used. The six tool_uses are accepted; their units are already in the route of sk-prop-sp-integral-adjunction. No SGA is cited. No new nodes and no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedSiteTorFlatModel",
+  "declaration": "SheafOfModules.torAmplitude_iff_exists_bounded_flat_model",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSiteTorFlatModel.lean",
+  "statement": "theorem torAmplitude_iff_exists_bounded_flat_model {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) [HasSheafify J AddCommGrpCat.{max u v}] [J.WEqualsLocallyBijective AddCommGrpCat.{max u v}] (R : Sheaf J CommRingCat.{max u v}) [HasDerivedCategory.{w} (SheafOfModules.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R))] (K : DerivedCategory (SheafOfModules.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R))) (a b : ℤ) (_hab : a ≤ b) : (∀ (M : SheafOfModules.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) (i : ℤ), i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor _ i).obj ((wfSiteDerivedTensor J R).obj (K, (DerivedCategory.singleFunctor _ 0).obj M)))) ↔ ∃ P : CochainComplex (SheafOfModules.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ, (∀ i : ℤ, IsFlatOnSite (C := C) (J := J) (R := R) (P.X i)) ∧ (∀ i : ℤ, i < a ∨ b < i → IsZero (P.X i)) ∧ Nonempty (K ≅ DerivedCategory.Q.obj P)",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2401d239f",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Statement, dependencies, source proof, universes, edge cases, docstrings, report sections, and compiler evidence checked; delivery is correct."
  }
 }
