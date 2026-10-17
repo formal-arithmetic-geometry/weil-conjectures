@@ -42,7 +42,7 @@ variable [∀ Y : Scheme.{u},
 /-- The comparison with the cohomology of the canonical derived pullback.
 Its construction uses the invertible pullback counit on the representative, the
 specified tensor-stalk isomorphism, and the localization comparison; no target
-complex or morphism to a target is involved. 
+complex or morphism to a target is involved.
 (blueprint: lem-pc-stalk-comparison-pullback-naturality)
 -/
 def comparisonIntoPullback (z : X')

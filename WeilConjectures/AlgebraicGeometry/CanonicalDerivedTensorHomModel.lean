@@ -31,7 +31,7 @@ namespace AlgebraicGeometry
 /-- The functorial resolution already used by derived internal Hom, with the scheme's
 Grothendieck instance supplied explicitly.
 Source: Stacks, cohomology.tex, 08DJ
-(blueprint: def-pc-canonical-derived-tensor-hom-bijection). 
+(blueprint: def-pc-canonical-derived-tensor-hom-bijection).
 (blueprint: def-pc-canonical-derived-tensor-hom-model)
 -/
 def schemeHomKInjectiveResolution (X : Scheme.{uCD}) :
@@ -42,7 +42,7 @@ def schemeHomKInjectiveResolution (X : Scheme.{uCD}) :
 
 /-- Inverse of the localized quasi-isomorphism into the fixed resolution.
 Source: Stacks, cohomology.tex, 08DJ
-(blueprint: def-pc-canonical-derived-tensor-hom-bijection). 
+(blueprint: def-pc-canonical-derived-tensor-hom-bijection).
 (blueprint: def-pc-canonical-derived-tensor-hom-model)
 -/
 def schemeHomResolutionInverse (X : Scheme.{uCD})
@@ -61,7 +61,7 @@ def schemeHomResolutionInverse (X : Scheme.{uCD})
 
 /-- The localization factorization for the fixed functorial K-injective model.
 Source: Stacks, cohomology.tex, 08DJ
-(blueprint: def-pc-canonical-derived-tensor-hom-bijection). 
+(blueprint: def-pc-canonical-derived-tensor-hom-bijection).
 (blueprint: def-pc-canonical-derived-tensor-hom-model)
 -/
 def schemeDerivedInternalHomResolutionIso (X : Scheme.{uCD})
@@ -88,7 +88,7 @@ def schemeDerivedInternalHomResolutionIso (X : Scheme.{uCD})
 
 /-- The uncurried component of a map into the fixed Hom complex.
 Source: Stacks Project, cohomology.tex, Tag 08DJ, componentwise evaluation.
-(blueprint: def-pc-canonical-derived-tensor-hom-bijection). 
+(blueprint: def-pc-canonical-derived-tensor-hom-bijection).
 (blueprint: def-pc-canonical-derived-tensor-hom-model)
 -/
 def schemeTensorHomUncurryComponent (X : Scheme.{uCD})
@@ -112,7 +112,7 @@ The chain map ψ is fixed on every total-tensor summand by currying the degree-p
 component of φ, projected to Hom(L^q,I(M)^(q+p)). The symmetry restores the order
 P^p tensor L^q. The localization factorization and resolution map fix both targets.
 Source: Stacks, cohomology.tex, Tag 08DJ
-(blueprint: def-pc-canonical-derived-tensor-hom-bijection). 
+(blueprint: def-pc-canonical-derived-tensor-hom-bijection).
 (blueprint: def-pc-canonical-derived-tensor-hom-model)
 -/
 def IsCanonicalDerivedTensorHom (X : Scheme.{uCD})

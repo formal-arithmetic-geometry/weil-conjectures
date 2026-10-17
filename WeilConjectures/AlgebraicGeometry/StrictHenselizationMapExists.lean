@@ -305,7 +305,7 @@ theorem strictHenselizationMapExists
               have hv := congrArg (fun q ↦ q ≫ pullback.snd f f) hl
               have hu' : l = u := by simpa [d] using hu
               have hv' : l = v := by simpa [d] using hv
-              exact hu'.symm.trans hv' 
+              exact hu'.symm.trans hv'
             change (l i.unop.unop ≫
               (Spec (Opposite.unop (N.obj i.unop.unop).1.left)).isoSpec.hom) ≫
               Spec.map (Spec.map (N.map f.unop.unop).1.left.unop).appTop ≫
