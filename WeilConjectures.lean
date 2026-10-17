@@ -334,9 +334,11 @@ public import WeilConjectures.Algebra.Homology.FreeResolutionSesSplit
 public import WeilConjectures.Algebra.Homology.FreeRestrictionTorBound
 public import WeilConjectures.Algebra.Homology.GradedScalarExtensionCoherence
 public import WeilConjectures.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplexComponents
 public import WeilConjectures.Algebra.Homology.HomComplexDualTotalComparison
 public import WeilConjectures.Algebra.Homology.HomComplexGlobalCochains
 public import WeilConjectures.Algebra.Homology.HomComplexGlobalHomotopy
+public import WeilConjectures.Algebra.Homology.HomComplexInternalHomComparison
 public import WeilConjectures.Algebra.Homology.HomComplexMappingCone
 public import WeilConjectures.Algebra.Homology.HomComplexMappingConeDifferential
 public import WeilConjectures.Algebra.Homology.HomComplexProjections
