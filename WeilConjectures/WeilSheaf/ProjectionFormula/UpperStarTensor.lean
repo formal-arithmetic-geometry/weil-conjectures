@@ -37,7 +37,7 @@ noncomputable def upperStarExchange (j : T₁ ⟶ T₂) (a : T₁ ≅ T₁) (b :
     (j)^*[WeilCoefficients.{u} l] ⋙ (a.inv)_*[WeilCoefficients.{u} l] ≅
       (b.inv)_*[WeilCoefficients.{u} l] ⋙ (j)^*[WeilCoefficients.{u} l] :=
   Functor.isoWhiskerLeft _ (upperStarIsoLowerStarInv _ a).symm ≪≫
-    (upperStarComp _ _ _).symm ≪≫ upperStarCongr _ c ≪≫ upperStarComp _ _ _ ≪≫
+    (upperStarComp _ a.hom j).symm ≪≫ upperStarCongr _ c ≪≫ upperStarComp _ j b.hom ≪≫
     Functor.isoWhiskerRight (upperStarIsoLowerStarInv _ b) _
 
 /-- The exchange isomorphism is monoidal, as a composite of monoidal isomorphisms. -/
@@ -47,17 +47,50 @@ instance isMonoidal_upperStarExchange_hom (j : T₁ ⟶ T₂) (a : T₁ ≅ T₁
     Functor.isoWhiskerRight_hom]
   infer_instance
 
-set_option maxHeartbeats 2000000 in
-lemma adicUpperStarExchange_hom_app_hom (j : T₁ ⟶ T₂) (a : T₁ ≅ T₁) (b : T₂ ≅ T₂)
+
+lemma upperStarExchange_hom_app (j : T₁ ⟶ T₂) (a : T₁ ≅ T₁) (b : T₂ ≅ T₂)
+    (c : a.hom ≫ j = j ≫ b.hom) (M : Sheaf (Scheme.ProEt.topology T₂) (WeilCoefficients.{u} l)) :
+    (upperStarExchange l j a b c).hom.app M =
+      (upperStarIsoLowerStarInv (WeilCoefficients.{u} l) a).inv.app
+          ((j)^*[WeilCoefficients.{u} l].obj M) ≫
+        (upperStarComp _ a.hom j).inv.app M ≫ (upperStarCongr _ c).hom.app M ≫
+        (upperStarComp _ j b.hom).hom.app M ≫
+        (j)^*[WeilCoefficients.{u} l].map
+          ((upperStarIsoLowerStarInv (WeilCoefficients.{u} l) b).hom.app M) := by
+  have e : (upperStarExchange l j a b c).hom =
+      Functor.whiskerLeft (j)^*[WeilCoefficients.{u} l]
+        (upperStarIsoLowerStarInv (WeilCoefficients.{u} l) a).inv ≫
+      (upperStarComp (WeilCoefficients.{u} l) a.hom j).inv ≫
+      (upperStarCongr (WeilCoefficients.{u} l) c).hom ≫
+      (upperStarComp (WeilCoefficients.{u} l) j b.hom).hom ≫
+      Functor.whiskerRight (upperStarIsoLowerStarInv (WeilCoefficients.{u} l) b).hom
+        (j)^*[WeilCoefficients.{u} l] := rfl
+  rw [e, NatTrans.comp_app, NatTrans.comp_app, NatTrans.comp_app, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app]
+
+/-- The exchange isomorphism of `ℓ`-adic sheaves, on the underlying sheaves. -/
+lemma adicUpperStarExchange_hom_app_hom' (j : T₁ ⟶ T₂) (a : T₁ ≅ T₁) (b : T₂ ≅ T₂)
     (c : a.hom ≫ j = j ≫ b.hom) (M : AdicSheaf l T₂) :
     ((adicUpperStarExchange l j a b c).hom.app M).hom =
-      (upperStarExchange l j a b c).hom.app M.X := by
-  simp only [adicUpperStarExchange, upperStarExchange, Iso.trans_hom, Iso.symm_hom,
+      (upperStarIsoLowerStarInv (WeilCoefficients.{u} l) a).inv.app
+          ((j)^*ᵃ[l].obj M).X ≫
+        (upperStarComp _ a.hom j).inv.app M.X ≫ (upperStarCongr _ c).hom.app M.X ≫
+        (upperStarComp _ j b.hom).hom.app M.X ≫
+        (j)^*[WeilCoefficients.{u} l].map
+          ((upperStarIsoLowerStarInv (WeilCoefficients.{u} l) b).hom.app M.X) := by
+  simp only [adicUpperStarExchange, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Mod.comp_hom', adicUpperStar_map_hom,
     adicUpperStarIsoLowerStarInv_inv_app_hom, adicUpperStarIsoLowerStarInv_hom_app_hom,
     adicUpperStarComp_inv_app_hom, adicUpperStarComp_hom_app_hom, adicUpperStarCongr_hom_app_hom]
-  rfl
+
+/-- The exchange isomorphism of `ℓ`-adic sheaves is that of the underlying sheaves. -/
+lemma adicUpperStarExchange_hom_app_hom (j : T₁ ⟶ T₂) (a : T₁ ≅ T₁) (b : T₂ ≅ T₂)
+    (c : a.hom ≫ j = j ≫ b.hom) (M : AdicSheaf l T₂) :
+    ((adicUpperStarExchange l j a b c).hom.app M).hom =
+      (upperStarExchange l j a b c).hom.app M.X := by
+  rw [adicUpperStarExchange_hom_app_hom', upperStarExchange_hom_app]
+  congr 1
 
 /-- The quotient map `P ⊗ M ⟶ P ⊗_{ℚ̄_ℓ} M` is compatible with the comparison
 `g^*(P ⊗_{ℚ̄_ℓ} M) ≅ g^*P ⊗_{ℚ̄_ℓ} g^*M`. -/
