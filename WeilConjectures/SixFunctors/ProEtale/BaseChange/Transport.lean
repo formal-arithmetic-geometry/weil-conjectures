@@ -83,7 +83,6 @@ lemma leftDerivedUpperStarComparisonIso_square (sq : CommSq g' f' f g)
   erw [← (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) g').inv.naturality_assoc,
     ← (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) f').inv.naturality_assoc]
   erw [reassoc_of% hcube]
-  simp only [Category.assoc]
   erw [hsq]
 
 /-- Blueprint `lem-weil-pbc-transport-identifies-exchange` (subsection
@@ -169,7 +168,7 @@ theorem comparison_derivedBaseChangeMap [QuasiCompact f] [QuasiSeparated f] [Qua
       Iso.hom_inv_id_app_assoc, ← cancel_mono (L(ProEtale.upperStar (ModuleCat.{u + 1} Λ) g').map
         ((leftDerivedUpperStarComparisonIso f Λ).hom.app
           (R+(Etale.lowerStar (ModuleCat.{u + 1} Λ) f).obj L)))]
-    simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app, Functor.map_id,
+    simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
       Category.comp_id]
     exact hC
   -- transpose both sides under `Lf'^* ⊣ Rf'_*`

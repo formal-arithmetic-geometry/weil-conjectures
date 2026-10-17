@@ -134,6 +134,18 @@ theorem CategoryTheory.Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_ob
   exact F.map_isZero ((InjectiveObject.ι C).map_isZero
     (CochainComplex.isZero_of_isStrictlyGE L.obj n q hq))
 
+/-- The higher right derived functors of an additive functor `F` vanish in negative degrees:
+for an object `X` placed in degree `0`, `Rᵠ F(X) = Hᵠ(R⁺F(X[0])) = 0` for `q < 0`. This is the
+special case of `CategoryTheory.Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE`
+in blueprint `lem-weil-pbc-derived-functor-negative-vanishing`. -/
+theorem CategoryTheory.Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_singleFunctor_obj
+    {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D] [EnoughInjectives C]
+    (F : C ⥤ D) [F.Additive] (X : C) {q : ℤ} (hq : q < 0) :
+    IsZero ((DerivedCategory.Plus.homologyFunctor D q).obj
+      (F.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor C 0).obj X))) :=
+  F.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE _ 0 hq
+
 namespace DerivedCategory.Plus
 
 variable {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C] [EnoughInjectives C]

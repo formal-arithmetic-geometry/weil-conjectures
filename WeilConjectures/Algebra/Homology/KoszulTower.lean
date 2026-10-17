@@ -35,7 +35,7 @@ of `I = (f₁, …, f_r)`, and the Artin–Rees lemma compares `Iᵏ K ∩ Z` wi
 
 universe u
 
-open CategoryTheory Opposite
+open CategoryTheory Limits Opposite
 
 namespace ExteriorAlgebra
 
@@ -366,7 +366,6 @@ lemma map_zeroEquiv_range_koszulBoundary_zero (g : Fin r → R) :
     LinearMap.ext (zeroEquiv_koszulBoundary_zero g)
   rw [this, LinearMap.range_comp_of_range_eq_top _ (LinearEquiv.range _),
     Finsupp.range_linearCombination]
-  rfl
 
 lemma koszulAug_comp_koszulBoundary (g : Fin r → R) {J : Ideal R}
     (hJ : Ideal.span (Set.range g) ≤ J) : koszulAug J ∘ₗ koszulBoundary R r g 0 = 0 := by

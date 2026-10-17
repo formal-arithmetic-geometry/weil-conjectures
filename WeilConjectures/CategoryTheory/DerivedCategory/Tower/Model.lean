@@ -35,7 +35,8 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
 /-- **Blueprint `prop-weil-pbc-derived-inverse-limit-computation`**, also
 **Blueprint `lem-weil-derived-limit-existence`** (assertion 3). If `I` is a K-injective complex
 of towers (for instance a K-injective resolution of `M`), then the termwise limit `lim I`, with
-its projections to the levels `Iₙ`, is a derived limit of the inverse system `(Iₙ)ₙ` of `D(A)`:
+its projections to the levels `Iₙ`, is a derived limit of the inverse system `(Iₙ)ₙ` of `D(A)`
+(also Blueprint `rem-ptr-weil-pbc-derived-inverse-limit-9`):
 `Q (lim I)` represents `R lim (Q I)` (see also `DerivedCategory.rlimObjQIso`). -/
 theorem isHomotopyLimit_mapCone_limConeAsFunctor (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ)
     [I.IsKInjective] : IsHomotopyLimit (Q.mapCone (limConeAsFunctor I)) :=
@@ -44,7 +45,9 @@ theorem isHomotopyLimit_mapCone_limConeAsFunctor (I : CochainComplex (ℕᵒᵖ 
       rw [Functor.mapCone_π_app]
       exact rlimCone_π_app_Q_obj I (op n)
 
-/-- **Blueprint `prop-weil-pbc-derived-product-representation`**. For a K-injective complex of
+/-- **Blueprint `prop-weil-pbc-derived-product-representation`**, also Blueprint
+`rem-ptr-weil-pbc-derived-inverse-limit-10` (pointer: the derived product `R∏ₙ Mₙ` is the
+product in `D(A)` of the evaluations, represented by `∏ₙ evₙ I`). For a K-injective complex of
 towers `I`, the termwise product `∏ₙ Iₙ` of its levels represents the derived product
 `R∏ₙ evₙ (Q I)`, the product in `D(A)` of the evaluations of `Q I`. -/
 noncomputable def isLimitFanTowerDiagram (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) [I.IsKInjective] :
@@ -77,7 +80,9 @@ instance : IsIso (rlimModelHom ι) := by
     infer_instance
   exact NatIso.isIso_of_isIso_app _
 
-/-- **Blueprint `prop-weil-pbc-rlim-functoriality`** (independence of the model). For any
+/-- **Blueprint `prop-weil-pbc-rlim-functoriality`** (independence of the model), also
+Blueprint `rem-ptr-weil-pbc-derived-inverse-limit-9` (pointer: no construction of `R lim`
+beyond the derived limit; it is computed by a functorial K-injective resolution). For any
 functorial K-injective resolution `η : 𝟭 ⟶ ι` of complexes of towers, the functor
 `K ↦ Q (lim (ι K))` is naturally isomorphic to `K ↦ R lim (Q K)`. Hence it descends to the
 triangulated functor `R lim : D(ℕᵒᵖ ⥤ A) ⥤ D(A)` (`DerivedCategory.rlim`, triangulated by

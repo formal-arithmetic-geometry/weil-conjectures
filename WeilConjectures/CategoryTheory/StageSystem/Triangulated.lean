@@ -242,9 +242,9 @@ lemma complete_morphism_ι {k : I} {T₁ T₂ : Triangle (C k)}
       ((S.ι k).mapTriangle.obj T₁).mor₃ ≫ a⟦(1 : ℤ)⟧' =
         c ≫ ((S.ι k).mapTriangle.obj T₂).mor₃ := by
   obtain ⟨m, hkm, h₁, h₁', h₂, h₂', a', b', rfl, rfl⟩ := exists_common_stage a b k
-  rw [ι_map_eq (h₂ : k ≤ m) T₁.mor₁, ι_map_eq (h₁' : k ≤ m) T₂.mor₁, mkHom_comp_mkHom,
-    mkHom_comp_mkHom,
-    mkHom_eq_mkHom_iff] at hcomm
+  rw [ι_map_eq (i := k) (n := m) h₂ T₁.mor₁, ι_map_eq (i := k) (n := m) h₁' T₂.mor₁] at hcomm
+  erw [mkHom_comp_mkHom, mkHom_comp_mkHom] at hcomm
+  rw [mkHom_eq_mkHom_iff] at hcomm
   obtain ⟨p, hp, e⟩ := hcomm
   rw [← tr_injective, tr_comp, tr_comp, tr_map, tr_map] at e
   rw [← mkHom_tr hp a', ← mkHom_tr hp b']
