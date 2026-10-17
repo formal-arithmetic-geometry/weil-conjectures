@@ -243,5 +243,23 @@
   "group": "Q15",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-d3d83f977 (reviewer sub-agent of L); spot-checked: Read in full against a local text copy of the official HA PDF on this machine (/tmp/ha_txt; HA is not in literature/, WANTED recorded): Lemma 2.4.4.6, printed pp. 307-309, and Lemma 3.1.2.4, pp. 330-332. Item statement: same as HA 2.4.4.6; a map from a quasicategory to Delta^N is automatically inner, and the hypothesis is the same. Steps 1-7 checked one by one. Both filtrations are closed under cofaces and give intersections Lambda^{n_j}_1 and Lambda^{n_j}_{p_j} with 1<p_j<n_j; K_1 is the horn; K_m=c^{-1}Lambda^2_1 and c^{-1}Lambda^3_2. Edges stay cocartesian after the collapse by the ordered-vertex argument. The N=2 case: the arrow-projection section h, then the n=1 mapping simplex after opposites, matched to M(A)=(Delta^1 x A_1) glued at {0} x A_1 to A_0, with marked edges, fiber identities and left properness checked. (3,2) case: Joyal-fibration criterion (1), lift against a, right-pinched mapping spaces lie inside the horn preimage, full-essential-image and criterion (2). HA's 'nondecreasing' at p. 308 is a typo, correctly repaired. New node lem-coef-infinity-relative-joyal-factorization is exactly HA 3.1.2.4, statement only, tested on empty E and on the identity of Lambda^3_2. It is neither a restated clause nor a duplicate (DAG grep for 3.1.2.4, Lambda^3_2, joyal/horn/cocartesian/prism candidates). Accepted tool_uses: lem-cbc-mapping-simplex-universal-equivalence and lem-cbc-equivalence-outer-horn-filling, both generic quasicategory tools. Minor: the new node has no lean_audit key (default none/none); not fixed. No changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be6dd8ba1",
+  "group": "Q97",
+  "result": "pass",
+  "note": "Statement matches node and HA Lemma 2.4.4.6 clause by clause: Quasicategory C, InnerFibration q : C ⟶ Δ[N], 0<i<N via Fin bounds, hlift only over fiber i-1 with an edge over mkOfSucc (i-1) (compile-checked: vertex 0 is i-1, vertex 1 is i) that is IsCocartesianEdge (recorded def-coef-infinity-fibrations declaration). Conclusion: categorical equivalence is the exact Joyal weak-equivalence test of exists_joyal_model_structure (max u v, uliftFunctor) and Mono, both on the canonical pullback.fst q (horn N i).ι. No extra assumptions, universes free, edge cases N<=1, (2,1), (3,2), empty C or fiber fine. Docstrings have source, blueprint and all 7 proof steps; sorry-only; public imports are the statement deps, non-public imports exactly the recorded proof-dep modules; node changed only in lean, statement verbatim; lines <=100. nt_compile --json: rc 0, no errors or warnings. Only nit: report text says 'Lemma the project server' for 2.4.4.6 (cosmetic). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CocartesianInnerHornComparison",
+  "declaration": "SSet.Enhanced.cocartesian_inner_horn_comparison",
+  "file": "lean/Sheaf/CategoryTheory/CocartesianInnerHornComparison.lean",
+  "statement": "theorem cocartesian_inner_horn_comparison (N : ℕ) (i : Fin (N + 1)) (hi : 0 < i) (hiN : i < Fin.last N) (C : SSet.{u}) [Quasicategory C] (q : C ⟶ (Δ[N] : SSet.{u})) [InnerFibration q] (hlift : ∀ x : C _⦋0⦌, stdSimplex.obj₀Equiv (q.app (op ⦋0⦌) x) = ⟨i.val - 1, by omega⟩ → ∃ (y : C _⦋0⦌) (e : C _⦋1⦌), C.δ 1 e = x ∧ C.δ 0 e = y ∧ stdSimplex.obj₀Equiv (q.app (op ⦋0⦌) y) = i ∧ SSet.yonedaEquiv.symm e ≫ q = SSet.stdSimplex.map (SimplexCategory.mkOfSucc ⟨i.val - 1, by omega⟩) ∧ IsCocartesianEdge q (SSet.yonedaEquiv.symm e)) : (∀ (D : SSet.{max u v}), D.Quasicategory → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map (pullback.fst q (horn N i).ι))).app D)).toFunctor).IsEquivalence) ∧ Mono (pullback.fst q (horn N i).ι)",
+  "branch": "newtargets-dag",
+  "by": "Q97",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
