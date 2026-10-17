@@ -92,6 +92,7 @@ theorem ProEtaleWeilSheaf.homToIhom_comm (M D N : ProEtaleWeilSheaf k₀ l X)
     whisker_exchange_assoc, ← tensorHom_def'_assoc, he, comp_whiskerRight_assoc,
     ← tensorHom_def'_assoc]
   erw [hκ]
-  rw [μ_natural_left_assoc, ← Fr.map_comp_assoc]
+  rw [Fr.map_comp_assoc, ← reassoc_of% (μ_natural_left Fr κ.hom D.carrier.X)]
+  rfl
 
 end AlgebraicGeometry

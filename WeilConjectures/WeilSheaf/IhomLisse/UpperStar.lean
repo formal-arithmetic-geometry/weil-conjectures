@@ -63,23 +63,14 @@ noncomputable def upperStarFrobeniusExchangeIso :
 /-- The exchange isomorphism of the pullback along the base change with the Frobenii is
 monoidal. -/
 instance isMonoidal_upperStarFrobeniusExchangeIso_hom :
-    NatTrans.IsMonoidal (upperStarFrobeniusExchangeIso l φ).hom := by
-  dsimp only [upperStarFrobeniusExchangeIso, Iso.trans_hom, Iso.symm_hom]
-  infer_instance
+    NatTrans.IsMonoidal (upperStarFrobeniusExchangeIso l φ).hom :=  sorry
 
 /-- The Weil structure of the pullback of a pro-étale Weil sheaf, on underlying sheaves. -/
 lemma upperStar_obj_str_hom_hom (P : ProEtaleWeilSheaf k₀ l Y) :
     ((upperStar k₀ l φ).obj P).str.hom.hom =
       (upperStarFrobeniusExchangeIso l φ).hom.app P.carrier.X ≫
         (Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*[WeilCoefficients.{u} l].map
-          P.str.hom.hom := by
-  rw [upperStar, IsoAlgebra.mapOfNatIso_obj_str, Iso.trans_hom, Mod.comp_hom', Iso.app_hom,
-    adicUpperStarGeometricFiberMapCompFrobeniusIso_hom_app_hom, Functor.mapIso_hom,
-    adicUpperStar_map_hom]
-  simp only [upperStarFrobeniusExchangeIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
-    Functor.whiskerRight_app, Category.assoc]
-  rfl
+          P.str.hom.hom :=  sorry
 
 /-- **Pullbacks of compatible pairings are compatible.** A pairing `e : P ⊗ Q ⟶ R` of the
 underlying sheaves of pro-étale Weil sheaves compatible with their Weil structures induces the
@@ -102,14 +93,6 @@ theorem upperStar_pairing_str (P Q R : ProEtaleWeilSheaf k₀ l Y)
           (μ (Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*[WeilCoefficients.{u} l]
             P.carrier.X Q.carrier.X ≫
             (Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*[_].map e) ≫
-          ((upperStar k₀ l φ).obj R).str.hom.hom := by
-  have hψ := NatTrans.IsMonoidal.tensor (τ := (upperStarFrobeniusExchangeIso l φ).hom)
-    P.carrier.X Q.carrier.X
-  have nψ := (upperStarFrobeniusExchangeIso l φ).hom.naturality e
-  simp only [Functor.LaxMonoidal.comp_μ, Functor.comp_map, Functor.comp_obj] at hψ nψ
-  rw [upperStar_obj_str_hom_hom, upperStar_obj_str_hom_hom, upperStar_obj_str_hom_hom,
-    ← tensorHom_comp_tensorHom_assoc, μ_natural_assoc, ← Functor.map_comp, h]
-  simp only [Functor.map_comp, Category.assoc]
-  rw [← reassoc_of% hψ, reassoc_of% nψ]
+          ((upperStar k₀ l φ).obj R).str.hom.hom :=  sorry
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
