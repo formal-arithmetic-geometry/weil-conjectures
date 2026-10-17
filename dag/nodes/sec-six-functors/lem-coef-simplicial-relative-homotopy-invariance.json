@@ -30,9 +30,110 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-joyal-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $K=A,B$ and $Z=X,Y$ put $D_{K,Z}=\\operatorname{Fun}(K,Z)$ and $M_{K,Z}=D_{K,Z}^{\\simeq}$. These functor objects are quasicategories by [lem-cbc-internal-hom-quasicategory]; in case (i) they are Kan by [lem-cbc-kan-functor-space-kan], so $M_{K,Z}=D_{K,Z}$ by [lem-coef-infinity-core-kan-fibration]. In both cases restriction $D_{B,Z}\\to D_{A,Z}$ is an isofibration by [lem-coef-infinity-isofibration-exponentiation], hence $r_Z:M_{B,Z}\\to M_{A,Z}$ is a Kan fibration by [lem-coef-infinity-core-kan-fibration]. The $M_{K,Z}$ are themselves Kan: $D_{K,Z}\\to\\Delta^0$ is an isofibration (inner horns fill and the identity equivalence lifts degenerately), so the same core-fibration statement applied to this map gives the Kan lifting property. All these objects fit in the fixed universe.",
+   "uses": [
+    "lem-cbc-internal-hom-quasicategory",
+    "lem-cbc-kan-functor-space-kan",
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-core-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01F3",
+    "place": "Corollary 4.4.5.3 (01F3), Proposition 4.4.3.7 (01EZ), and Corollary 3.1.3.4 (00TN); HTT Proposition 1.2.7.3(1)."
+   }
+  },
+  {
+   "text": "In case (i), [lem-cbc-kan-whitehead-inverse] gives a simplicial inverse $v:Y\\to X$ up to prisms $H:X\\times\\Delta^1\\to X$ and $J:Y\\times\\Delta^1\\to Y$, with endpoints $vu,\\mathrm{id}_X$ and $uv,\\mathrm{id}_Y$. For any $K$, exponentiate these prisms explicitly: an $n$-simplex $F:K\\times\\Delta^n\\to X$ and $t:\\Delta^n\\to\\Delta^1$ are sent to the map $(k,s)\\mapsto H(F(k,s),t(s))$; for $F:K\\times\\Delta^n\\to Y$, the second prism sends $(F,t)$ to $(k,s)\\mapsto J(F(k,s),t(s))$. These formulas commute with simplicial operators and have endpoints $v_*u_*,\\mathrm{id}$ and $u_*v_*,\\mathrm{id}$. Thus [lem-cbc-simplicial-homotopy-equivalence-weak] makes $u_*:D_{K,X}\\to D_{K,Y}$ a weak homotopy equivalence. By step 1 this is the required comparison $M_{K,X}\\to M_{K,Y}$, for $K=A,B$.",
+   "uses": [
+    "lem-cbc-kan-whitehead-inverse",
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00UB",
+    "place": "Proposition 3.1.7.13 (00UB), using Corollary 3.6.4.3 (03X7) for the realization convention; explicit exponentiation of cylinder homotopies."
+   }
+  },
+  {
+   "text": "In case (ii), apply clause (2) of [lem-coef-joyal-quasicategory-characterizations] to $u$. It supplies a simplicial map $v:Y\\to X$ and coherent natural equivalences between $vu$ and $\\mathrm{id}_X$, and between $uv$ and $\\mathrm{id}_Y$. In the quasicategories $\\operatorname{Fun}(X,X)$ and $\\operatorname{Fun}(Y,Y)$ (quasicategories by [lem-cbc-internal-hom-quasicategory]), each such edge gives an isomorphism in the edge-and-triangle category $h$: its two inverse triangles become the two inverse equations. Apply [lem-coef-quasicategory-invertible-interval] to these pairs of vertices. With $I=N(\\mathcal J)$ for the two-object groupoid specified there, this gives maps $I\\to\\operatorname{Fun}(X,X)$ and $I\\to\\operatorname{Fun}(Y,Y)$ with the specified endpoints. Evaluation gives $T:X\\times I\\to X$ and $S:Y\\times I\\to Y$ with endpoints $vu,\\mathrm{id}_X$ and $uv,\\mathrm{id}_Y$. We only need these endpoints, not equality with the originally chosen equivalence edges.",
+   "uses": [
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-cbc-internal-hom-quasicategory",
+    "lem-coef-quasicategory-invertible-interval"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Remark 3.6.5 and Corollary 3.6.6, printed p.114, and Theorem 3.6.8, printed pp.115-116; the equivalence/J-homotopy argument."
+   }
+  },
+  {
+   "text": "For $K=A,B$, exponentiate $T$ to $T_K:D_{K,X}\\times I\\to D_{K,X}$ by the degreewise formula $T_K(F,j)(k,s)=T(F(k,s),j(s))$, and exponentiate $S$ to $S_K:D_{K,Y}\\times I\\to D_{K,Y}$ by $S_K(G,j)(k,s)=S(G(k,s),j(s))$. Each postcomposition functor preserves equivalence edges: applying a simplicial map to an inverse edge and its two inverse triangles preserves those witnesses. For $(Z,R)=(X,T_K)$ or $(Y,S_K)$, this also shows that $R$ restricts to $M_{K,Z}\\times I\\to M_{K,Z}$: an edge in the first factor has an inverse with inverse triangles since that factor is Kan by step 1, and an edge in $I$ has its groupoid inverse and the nerve triangles; pairing the witnesses gives inverse triangles in the product. Its image under $R$ is therefore an equivalence, so every simplex has all its image edges in the core. Restricting along the map $\\Delta^1\\to I$ defined by $0\\to1$ gives $T_K|_{M_{K,X}\\times\\Delta^1}$ with endpoints $v_*u_*,\\mathrm{id}_{M_{K,X}}$, and $S_K|_{M_{K,Y}\\times\\Delta^1}$ with endpoints $u_*v_*,\\mathrm{id}_{M_{K,Y}}$. By [lem-cbc-simplicial-homotopy-equivalence-weak], the specified map $u_*:M_{K,X}\\to M_{K,Y}$ is a weak homotopy equivalence. The facts about inverses in a Kan complex used here are in [lem-coef-infinity-core-kan-fibration].",
+   "uses": [
+    "lem-coef-infinity-core-kan-fibration",
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent expansion of the core-invariance observation following Proposition 1.2.5.3 and the postcomposition argument of Proposition 1.2.7.3(2); all factorization through cores is checked using inverse triangles."
+   }
+  },
+  {
+   "text": "In both cases the square with horizontal maps $u_*:M_{B,X}\\to M_{B,Y}$ and $u_*:M_{A,X}\\to M_{A,Y}$ and vertical maps $r_X,r_Y$ commutes strictly: both composites restrict a diagram to $A$ and then apply $u$. Use the cospans $M_{B,X}\\xrightarrow{r_X}M_{A,X}\\xleftarrow{}\\{a\\}$ and $M_{B,Y}\\xrightarrow{r_Y}M_{A,Y}\\xleftarrow{}\\{ua\\}$. Their comparison maps are weak homotopy equivalences by steps 2 or 4 and the isomorphism of singleton simplicial sets, and their left legs are Kan fibrations by step 1. Hence [lem-coef-kan-pullback-fibration-invariance] gives a weak homotopy equivalence $u_*:P_X\\to P_Y$ of the strict fibers over $a$ and $ua$. These fibers are Kan directly by lifting a horn in $M_{B,Z}$ over the constant simplex of $M_{A,Z}$ using $r_Z$; this also permits empty fibers.",
+   "uses": [
+    "lem-coef-kan-pullback-fibration-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0109",
+    "place": "Proposition 3.4.0.2 (0109); applied to the two restriction cospans with a singleton boundary point."
+   }
+  },
+  {
+   "text": "For $(Z,c)=(X,a)$ and $(Y,ua)$, all vertices of $D_{B,Z}$ belong to its core, so the vertices of $P_Z$ are exactly extensions $f:B\\to Z$ of $c$. In case (i) the functor objects equal their cores, so edges of these fibers are exactly the prisms fixed on $A\\times\\Delta^1$ in the statement. In case (ii), any such prism $H$ has at each vertex $b$ of $B$ the degenerate edge at $c(b)$, because $b\\in A$; this is an equivalence (the degenerate triangles witness its inverse). Apply [lem-coef-infinity-pointwise-equivalences] with $K=B$: $H$ is an equivalence edge of $D_{B,Z}$ and therefore belongs to its core. Its restriction is the degenerate edge at $c$, so it is an edge of $P_Z$. Conversely every edge of $P_Z$ is a prism with exactly this boundary restriction by the definition of the strict fiber. Thus the two relative equivalence relations are precisely those generated by fiber edges. Postcomposition sends a relative prism $H$ to $u\\circ H$, whose boundary is $(ua)\\circ\\operatorname{pr}_1$, so it induces the specified map on both generated equivalence relations.",
+   "uses": [
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01DK",
+    "place": "Theorem 4.4.4.4 (01DK); the all-vertices hypothesis is used only to identify the relative prism relation with core-fiber edges."
+   }
+  },
+  {
+   "text": "For any simplicial set $P$, vertices modulo the equivalence relation generated by its edges identify with path components of $|P|$: every point of a realized simplex joins a vertex by a straight segment, and all vertices of that simplex join along its edges. Conversely, send a point in a simplex to the edge-component of any of its vertices. This is independent of the chosen vertex and of face/degeneracy representatives, and is continuous to the discrete set of edge-components by the quotient definition of realization in [def-cbc-enhanced-diagrams-cones], since it is constant on each summand simplex. A path cannot join different values. This proves the identification naturally in $P$. A weak homotopy equivalence induces a bijection on path components by that same definition. Apply this to step 5 and then use step 6: the resulting bijection is exactly postcomposition $[B,X]_a\\to[B,Y]_{ua}$. If a fiber is empty the component argument is still valid; if $A=B$ each fiber is the singleton prescribed diagram; if $B$ is empty both relative class sets are singletons.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Agent proof: elementary edge-component/realization quotient argument completing the fixed-boundary comparison underlying proof paragraph 2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-internal-hom-quasicategory",
+  "lem-cbc-kan-functor-space-kan",
+  "lem-cbc-kan-whitehead-inverse",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-infinity-core-kan-fibration",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-kan-pullback-fibration-invariance",
+  "lem-coef-quasicategory-invertible-interval"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2 (finite-coefficient mapping-complex adjunction): agent-expanded foundational relative-fiber comparison, checked against online HTT, Cisinski and Kerodon. Their archival copies are WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -89,10 +190,66 @@
    "results": "{\"t\": \"2026-10-16T21:55:05Z\", \"tool\": \"leanfinder\", \"query\": \"Equivalences between fibrant simplicial objects preserve connected components of fibers of restriction to a subcomplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.N.mk'.hcongr_4\", \"SSet.Subcomplex.PairingCore.pairing_p_equivII\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"SSet.Subcomplex.Pairing.p\", \"SSet.Subcomplex.fromPreimage\", \"SSet.S.toN_eq_iff\", \"SSet.RelativeMorphism.HomotopyClass\", \"SSet.Subcomplex.fromPreimage_app_coe\"], \"digest\": \"afd0b76ded50600a\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second-reader search. The hits define relative homotopy classes, subcomplex preimages and an abstract equivalence relation on model-category morphisms; none states target-invariance of the specified strict-boundary prism quotient. Checked RelativeMorphism.lean:83-127 and ModelCategory/Homotopy.lean:153-166; the latter needs substantive undercategory and prism-cylinder comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Postcomposition by a weak equivalence between Kan complexes preserves weak equivalences of simplicial mapping objects for arbitrary simplicial source",
+   "results": "{\"t\": \"2026-10-16T23:21:31Z\", \"tool\": \"leanfinder\", \"query\": \"Postcomposition by a weak equivalence between Kan complexes preserves weak equivalences of simplicial mapping objects for arbitrary simplicial source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.weakEquivalence_postcomp_iff\", \"HomotopicalAlgebra.weakEquivalence_of_postcomp\", \"HomotopicalAlgebra.weakEquivalence_of_postcomp_of_fac\", \"HomotopicalAlgebra.weakEquivalence_precomp_iff\", \"HomotopicalAlgebra.weakEquivalence_of_precomp\", \"HomotopicalAlgebra.LeftHomotopyClass.postcomp_bijective_of_weakEquivalence\", \"HomotopicalAlgebra.weakEquivalence_of_precomp_of_fac\", \"HomotopicalAlgebra.CofibrantObject.instIsStableUnderPostcompHomRel\"], \"digest\": \"7e3f93a8da9d1252\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected RelativeMorphism.lean:83-127 and ModelCategory/Homotopy.lean:153-166. The former defines the relative quotient; the latter is abstract model-category postcomposition and does not identify the specified fixed-boundary prism quotient (especially for the Joyal case). The other hits concern truncated homotopy categories or weak-equivalence cancellation, not this relative assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.RelativeMorphism.HomotopyClass, HomotopicalAlgebra.LeftHomotopyClass.postcomp_bijective_of_weakEquivalence",
+   "results": "{\"t\": \"2026-10-16T23:23:10Z\", \"tool\": \"loogle\", \"query\": \"SSet.RelativeMorphism.HomotopyClass, HomotopicalAlgebra.LeftHomotopyClass.postcomp_bijective_of_weakEquivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected RelativeMorphism.lean:83-127 and ModelCategory/Homotopy.lean:153-166. The former defines the relative quotient; the latter is abstract model-category postcomposition and does not identify the specified fixed-boundary prism quotient (especially for the Joyal case). The other hits concern truncated homotopy categories or weak-equivalence cancellation, not this relative assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "postcomp_bijective_of_weakEquivalence|RelativeMorphism.HomotopyClass|core.*[Ee]quiv",
+   "results": "{\"t\": \"2026-10-16T23:23:09Z\", \"tool\": \"grep\", \"query\": \"postcomp_bijective_of_weakEquivalence|RelativeMorphism.HomotopyClass|core.*[Ee]quiv\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\"], \"digest\": \"79f0d7d8856b59d4\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected RelativeMorphism.lean:83-127 and ModelCategory/Homotopy.lean:153-166. The former defines the relative quotient; the latter is abstract model-category postcomposition and does not identify the specified fixed-boundary prism quotient (especially for the Joyal case). The other hits concern truncated homotopy categories or weak-equivalence cancellation, not this relative assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A weak equivalence between fibrant simplicial sets induces bijections on homotopy classes relative to a simplicial subset",
+   "results": "{\"t\": \"2026-10-16T23:23:09Z\", \"tool\": \"leansearch\", \"query\": \"A weak equivalence between fibrant simplicial sets induces bijections on homotopy classes relative to a simplicial subset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\", \"SSet.RelativeMorphism.HomotopyClass\", \"HomotopicalAlgebra.LeftHomotopyClass.postcomp_bijective_of_weakEquivalence\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"SSet.RelativeMorphism.homotopyClass\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.weakEquivalence_iff\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\"], \"digest\": \"b016b106860cd381\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected RelativeMorphism.lean:83-127 and ModelCategory/Homotopy.lean:153-166. The former defines the relative quotient; the latter is abstract model-category postcomposition and does not identify the specified fixed-boundary prism quotient (especially for the Joyal case). The other hits concern truncated homotopy categories or weak-equivalence cancellation, not this relative assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative simplicial homotopy classes fixed on a simplicial subset are invariant under weak equivalence of Kan targets or categorical equivalence of quasicategory targets",
+   "results": "{\"t\": \"2026-10-16T23:24:06Z\", \"tool\": \"leanfinder\", \"query\": \"Relative simplicial homotopy classes fixed on a simplicial subset are invariant under weak equivalence of Kan targets or categorical equivalence of quasicategory targets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.RelativeMorphism.Homotopy.eq\", \"SSet.RelativeMorphism.HomotopyClass\", \"SSet.RelativeMorphism.Homotopy.ofEq\", \"SSet.RelativeMorphism.Homotopy.ofEq_h\", \"SSet.RelativeMorphism.homotopyClass\", \"SSet.RelativeMorphism.Homotopy.ext_iff\", \"SSet.RelativeMorphism.Homotopy.mk.inj\", \"SSet.RelativeMorphism.Homotopy.ext\"], \"digest\": \"24e7aad8be3a28ad\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected RelativeMorphism.lean:83-127 and ModelCategory/Homotopy.lean:153-166. The former defines the relative quotient; the latter is abstract model-category postcomposition and does not identify the specified fixed-boundary prism quotient (especially for the Joyal case). The other hits concern truncated homotopy categories or weak-equivalence cancellation, not this relative assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bijection on relative simplicial homotopy classes after composing with a weak equivalence between fibrant objects of the Quillen or Joyal model structure",
+   "results": "{\"t\": \"2026-10-16T23:40:38Z\", \"tool\": \"leanfinder\", \"query\": \"Bijection on relative simplicial homotopy classes after composing with a weak equivalence between fibrant objects of the Quillen or Joyal model structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass_mk\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.LeftHomotopyClass.postcomp_bijective_of_weakEquivalence\", \"HomotopicalAlgebra.RightHomotopyClass.whitehead\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_cofibration_of_weakEquivalence\", \"HomotopicalAlgebra.RightHomotopyClass.mk_eq_mk_iff\"], \"digest\": \"a30575b8e6906a9f\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match. Read RelativeMorphism.lean:83-127 and ModelCategory/Homotopy.lean:153-166. The abstract LeftHomotopyClass postcomposition bijection requires an undercategory model structure and comparison with the fixed-boundary prism relation; this is additional mathematics, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.RelativeMorphism.HomotopyClass",
+   "results": "{\"t\": \"2026-10-16T23:41:30Z\", \"tool\": \"loogle\", \"query\": \"SSet.RelativeMorphism.HomotopyClass\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.RelativeMorphism.HomotopyClass\", \"SSet.RelativeMorphism.homotopyClass\", \"SSet.RelativeMorphism.HomotopyClass.eq_homotopyClass\", \"SSet.RelativeMorphism.Homotopy.eq\", \"SSet.RelativeMorphism.HomotopyClass.postcomp\", \"SSet.RelativeMorphism.HomotopyClass.precomp\", \"SSet.RelativeMorphism.postcomp_homotopyClass\", \"SSet.RelativeMorphism.precomp_homotopyClass\"], \"digest\": \"a0f6aeabe8585a43\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match. The hits define relative homotopy classes and their pre/postcomposition operations. Inspected RelativeMorphism.lean:83-155 and found no bijection under target weak or categorical equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "postcomp.*bijective|relative.*[Hh]omotopy|HomotopyClass",
+   "results": "{\"t\": \"2026-10-16T23:41:29Z\", \"tool\": \"grep\", \"query\": \"postcomp.*bijective|relative.*[Hh]omotopy|HomotopyClass\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homotopy.lean\"], \"digest\": \"b77a8e4da300e506\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match. The nine source hits locate the quotient definition at RelativeMorphism.lean:114-115, its quotient-map facts, and nonrelative homotopy definitions. None states target invariance."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-boundary-extension-small-classes",
@@ -112,5 +269,39 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-relative-homotopy-invariance",
+  "worker": "stage1",
+  "summary": "Replaced the earlier auxiliary target-functor node with explicit Kan-inverse and coherent-inverse exponentiation arguments using existing DAG nodes. Uses restriction on cores in both cases, compares strict fibers along Kan fibrations, identifies their edges with the exact relative prism relation using the all-vertices hypothesis, and proves the component identification from the realization quotient. Statement unchanged; no new nodes. Corrected the pullback reference to Kerodon 0109. Second reading restored the protected source record, expanded both target formulas, made the two fiber arguments uniform, and checked quotient functoriality explicitly.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, in both master and main-20261015: the finite-level mapping-complex adjunction before taking the derived inverse limit. This is the foundational fixed-boundary comparison reached through the existing infinity-reflector-accessibility and boundary-extension-small-classes chain, not an additional clause asserted by the blueprint.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-kan-functor-space-kan",
+    "why": "Generic Kan closure of internal functor objects; the unit has no replacement for this simplicial tool."
+   },
+   {
+    "node": "lem-cbc-kan-whitehead-inverse",
+    "why": "Generic simplicial inverse to a weak equivalence between Kan complexes, needed before exponentiating homotopies; no node of this unit states it."
+   },
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Generic implication from explicit inverse prisms to a realization weak equivalence, after exponentiating; no node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-kan-functor-space-kan",
+  "lem-cbc-kan-whitehead-inverse",
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-7593bbf3a",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-7593bbf3a (reviewer sub-agent of L); spot-checked: I read the item, all 12 cited node statements, the citer lem-coef-infinity-boundary-extension-small-classes (steps 2 and 5), the unit record, the main-20261015 proof of prop-coef-integral-exceptional-adjoint, and Mathlib RelativeMorphism.lean:75-160 and ModelCategory/Homotopy.lean postcomp lemmas. The statement is correct and self-contained, keeps both cases and the all-vertices hypothesis (which is necessary), and matches how the citer uses it. I tested it on B empty, A=B, empty fibers, and Delta^0 -> N(walking iso) with B=Delta^1, A=its two endpoints. Step checks: (1) restriction is an isofibration because a simplicial subset is degreewise injective, so restriction on cores is a Kan fibration; the cores are Kan because D -> Delta^0 is an isofibration. (2) The Kan Whitehead inverse prisms, exponentiated by an operator-compatible formula, feed the homotopy-equivalence-to-weak tool, which needs no Kan hypothesis. This is postcomposition, not the precomposition node. (3) Joyal clause (2) with its hFun convention, then inverse triangles give an isomorphism in h, then the invertible-interval map. (4) Paired inverse triangles in M x I show the exponentiated maps land in the cores. (5) Kerodon 0109 pullback node: the comparison maps are weak equivalences, the left legs are Kan fibrations, and both squares commute strictly. (6) Pointwise-equivalence detection identifies fiber edges with relative prisms exactly. (7) pi_0 of the realization is the edge relation; this is elementary from the realization quotient. proof_deps equals the union of the step uses; there is no cycle (136 reachable nodes checked). There are no new nodes and no duplicate (closest candidates read: relative-categorical-cylinder-criterion, cbc-kan-mapping-homotopy-invariance, kan-path-boundary-bijections). No Mathlib leaf exists. Accepted tool_uses: lem-cbc-kan-functor-space-kan (a leaf), lem-cbc-kan-whitehead-inverse and lem-cbc-simplicial-homotopy-equivalence-weak, all generic simplicial tools; sk-prop-sf-cbc is not on the unit route. Not a target node, so the base-change and coefficient checks do not apply, and no SGA source is used. Minor remark: the protected source.place still names Kerodon 00XC while step 5 correctly uses 0109; this is maintainer-owned and not a fault. No fixes."
  }
 }

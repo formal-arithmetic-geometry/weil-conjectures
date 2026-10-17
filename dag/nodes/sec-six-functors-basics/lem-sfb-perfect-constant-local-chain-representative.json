@@ -32,9 +32,119 @@
   "def-weil-abstract-derived-category",
   "def-pur-localized-ringed-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $E^\\bullet=\\underline F^\\bullet$ and choose integers $a\\leq b$ outside which its terms vanish. For each q choose generators of $F^q$, giving a surjection $p_q:R^{n_q}\\to F^q$. Projectivity lifts $\\mathrm{id}_{F^q}$ through $p_q$, so there is $j_q:F^q\\to R^{n_q}$ with $p_qj_q=\\mathrm{id}$. Apply the constant module functor. Sheafification preserves finite products, so the coordinate maps identify $\\underline{R^{n_q}}$ with $\\underline R^{n_q}$; these are $\\underline R$-linear because both scalar actions extend the same constant presheaf action. Thus there are $\\underline R$-linear maps $J_q:E^q\\to\\underline R^{n_q}$ and $P_q:\\underline R^{n_q}\\to E^q$ with $P_qJ_q=\\mathrm{id}$. Also $\\underline0=0$. This proves that E is bounded with finite-free retract terms, i.e. strictly perfect as in Stacks 08FL.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-projective-module",
+    "def-sf-site-constant-module-functor",
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 09BD (lemma-map-out-of-locally-constant); Tag 08FL (definition-strictly-perfect); the finite-projective retract calculation"
+   }
+  },
+  {
+   "text": "Apply the right-fraction representation in the homotopy category of the abelian category of $\\underline R$-modules; its quasi-isomorphisms admit the required right calculus. Choose a complex $B^\\bullet$, a quasi-isomorphism $s:B^\\bullet\\to E^\\bullet$ and a chain map $f:B^\\bullet\\to\\mathcal G^\\bullet$ representing the homotopy-class arrows, with $\\psi=Q(f)\\circ Q(s)^{-1}$. The cone $C^\\bullet=C(s)^\\bullet$ is acyclic. Use the cone convention $C^n=E^n\\oplus B^{n+1}$ and $d_C^n(x,y)=(d_E^n x+s^{n+1}y,-d_B^{n+1}y)$, and let $i:E^\\bullet\\to C^\\bullet$ be $i^n(x)=(x,0)$.",
+   "uses": [
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-pc-right-fraction-representation",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "def-weil-abstract-derived-category",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FR (lemma-local-actual), fraction presentation; Tag 08FQ (lemma-lift-through-quasi-isomorphism), cone obstruction; Derived Categories 05RT (lemma-acyclic)"
+   }
+  },
+  {
+   "text": "All subsequent constructions may be restricted to a slice $\\mathcal C/V$. This site is small: its objects and arrows are subsets of sets of arrows and composable pairs in $\\mathcal C$. The site-module sheafification theorem, applied with coefficient ring $\\mathbf Z$, supplies abelian sheafification on this slice, as required by the forgetful-functor lemma. Its module restriction functor is additive sectionwise and exact: kernels are sectionwise; epimorphisms are preserved since the faithful exact forgetful functor to abelian sheaves and the general-site epimorphism criterion express them by local lifts, and a covering of an object over V is precisely a covering of its underlying object. Faithfulness reflects vanishing cokernels, so these assertions also give exactness in the module category. Therefore restriction preserves the acyclicity of C and the quasi-isomorphism s, and the exact-functor localization comparison defines $\\psi|_V=Q(f|_V)\\circ Q(s|_V)^{-1}$. Finite-free retract maps remain retract maps upon restriction; finite products are sectionwise. Restriction along $X$ itself identifies $\\mathcal C/X$ with $\\mathcal C$, since X is final.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08FP (lemma-local-homotopy) and 08FQ (lemma-lift-through-quasi-isomorphism), restriction to localized ringed sites; Modules on Sites 03DA (lemma-abelian)"
+   }
+  },
+  {
+   "text": "Here is the local lifting calculation used at each degree, written for any object V. If $p:M\\to N$ is an epimorphism of modules on $\\mathcal C/V$ and $r:E^q|_V\\to N$ is a module morphism, consider $rP_q:\\mathcal O_V^{n_q}\\to N$, where $\\mathcal O=\\underline R$. Evaluate on the finitely many standard basis sections at $V/V$. The underlying abelian map of p is epic, so the general-site local-surjectivity criterion gives local preimages of each of these sections. Take a common refinement of those finitely many coverings. On each member W the chosen preimages define an $\\mathcal O_W$-linear map $L:\\mathcal O_W^{n_q}\\to M|_W$ by sending the standard basis to these preimages: on an object $T\\to W$ it sends $(c_j)_j\\in\\mathcal O(T)^{n_q}$ to $\\sum_j c_j(m_j|_T)$. For $T'\\to T$, semilinearity of restriction gives $\\left(\\sum_j c_j(m_j|_T)\\right)|_{T'}=\\sum_j(c_j|_{T'})(m_j|_{T'})$, so these maps form a sheaf morphism. Its composite with p equals $rP_q|_W$, hence $LJ_q|_W$ lifts $r|_W$. If $n_q=0$, take the zero lift and the identity covering. This is the basis-and-retract proof of Stacks 08FN, rather than an additional lemma assumed without citation.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-site-coverings-common-refinement",
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FN (lemma-local-lift-map), proof by lifting finitely many basis sections; Sites 00W6 (lemma-common-refinement)"
+   }
+  },
+  {
+   "text": "Construct a null homotopy of i by finite descending induction, successively refining the covering. Start with $h^q=0$ for $q>b$. Suppose $h^{n+1},h^{n+2},\\ldots$ have been constructed on the current member and $i^q=d_C^{q-1}h^q+h^{q+1}d_E^q$ holds for $q>n$. Put $r^n=i^n-h^{n+1}d_E^n$. Since i is a chain map, $d_C^nr^n=i^{n+1}d_E^n-(i^{n+1}-h^{n+2}d_E^{n+1})d_E^n=0$. Thus $r^n$ factors through $Z^n(C)=\\ker d_C^n$. Acyclicity says that $d_C^{n-1}:C^{n-1}\\to Z^n(C)$ is epic. Apply the basis-and-retract calculation of Step 4 to lift $r^n$ locally to $h^n:E^n\\to C^{n-1}$. This gives the equation at degree n, while previous equations survive restriction. Continue for $n=b,b-1,\\ldots,a$. Transitivity of coverings makes the finite successive refinements a covering $\\{U_i\\to X\\}$. Set $h^q=0$ for $q<a$; the remaining equations are identities between maps from zero terms. This supplies a homotopy $i|_{U_i}=d_Ch+hd_E$ on each member. No infinite intersection of coverings and no boundedness of B or $\\mathcal G$ is needed.",
+   "uses": [
+    "def-pc-acyclic-complex-modules",
+    "def-pc-cochain-complex-modules",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-coverings-common-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FP (lemma-local-homotopy), finite induction with the degreewise homotopy equations expanded; Tag 08FN (lemma-local-lift-map)"
+   }
+  },
+  {
+   "text": "On each $U_i$ write the two components of $h^n:E^n\\to C^{n-1}=E^{n-1}\\oplus B^n$ as $(u^n,t^n)$. The first component of $i=d_Ch+hd_E$ is $\\mathrm{id}_{E^n}=d_E^{n-1}u^n+s^nt^n+u^{n+1}d_E^n$; its second component is $0=-d_B^nt^n+t^{n+1}d_E^n$. Consequently t is a chain map $E|_{U_i}\\to B|_{U_i}$ and $s|_{U_i}\\circ t$ is homotopic to $\\mathrm{id}_{E|_{U_i}}$. Localization factors through the homotopy category, so $Q(s|_{U_i})Q(t)=\\mathrm{id}$; as $Q(s|_{U_i})$ is invertible, $Q(t)=Q(s|_{U_i})^{-1}$. Define $a_i=f|_{U_i}\\circ t$. Then $Q(a_i)=Q(f|_{U_i})Q(s|_{U_i})^{-1}=\\psi|_{U_i}$ by Step 3, which proves every clause of the item. If E is zero, all these maps and equations are zero and the identity covering suffices.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FQ (lemma-lift-through-quasi-isomorphism), cone lifting with both component equations; Tags 08FR(1) and 09BD, conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-acyclic-complex-modules",
+  "def-pc-cochain-complex-modules",
+  "def-pur-localized-ringed-site",
+  "def-sf-site-constant-module-functor",
+  "def-weil-abstract-derived-category",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-right-fraction-representation",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-site-coverings-common-refinement",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 09BD (lemma-map-out-of-locally-constant), via 08FR (lemma-local-actual), 08FQ (lemma-lift-through-quasi-isomorphism), 08FP (lemma-local-homotopy), 08FN (lemma-local-lift-map). Expanded the cone obstruction and finite descending homotopy induction; used right fractions in place of the equivalent left-fraction presentation."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -77,10 +187,66 @@
    "results": "0 hits: none",
    "date": "2026-10-17",
    "verdict": "no match: abstract K-projective representability requires projective objects in the sheaf category; it does not give local chain representatives for finite-projective constant modules on an arbitrary site."
+  },
+  {
+   "tool": "grep",
+   "query": "strictlyPerfect|StrictlyPerfect|local_actual|locally.*homotopy",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern presentations, abstract derived categories or K-projectivity; none states local chain representability on arbitrary sites, and finite-projective constant terms need not be projective sheaf objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local chain maps from bounded finite projective sheaf complexes on arbitrary ringed sites",
+   "results": "8 hits: CategoryTheory.Sheaf.H; SheafOfModules.localGeneratorsDataOfIsFiniteType; SheafOfModules.isFinitePresentation; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.Presentation.IsFinite; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; SheafOfModules.IsFiniteType.exists_localGeneratorsData; SheafOfModules.IsFinitePresentation",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern presentations, abstract derived categories or K-projectivity; none states local chain representability on arbitrary sites, and finite-projective constant terms need not be projective sheaf objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms from bounded complexes of constant finite projective sheaves in a derived category are locally chain maps",
+   "results": "8 hits: HasDerivedCategory.standard; CategoryTheory.ProjectiveResolution.Hom.hom; HomologicalComplex.Hom.mk; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; CategoryTheory.DifferentialObject.HomSubtype; CochainComplex.fromSingle₀Equiv; HomologicalComplexUpToQuasiIso.Q; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern presentations, abstract derived categories or K-projectivity; none states local chain representability on arbitrary sites, and finite-projective constant terms need not be projective sheaf objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, CategoryTheory.Sheaf",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern presentations, abstract derived categories or K-projectivity; none states local chain representability on arbitrary sites, and finite-projective constant terms need not be projective sheaf objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived morphism from a bounded constant finite projective complex of modules on a site is locally represented by a chain map",
+   "results": "8 hits: SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation; Ext; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'; CategoryTheory.Functor.mapProjectiveResolution_complex; CategoryTheory.Functor.mapProjectiveResolution; CochainComplex.IsKProjective.Qh_map_bijective",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern presentations, abstract derived categories or K-projectivity; none states local chain representability on arbitrary sites, and finite-projective constant terms need not be projective sheaf objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An epimorphism of sheaves of modules admits local lifting of maps from a finite direct summand of a free module, giving local null homotopies for bounded complexes",
+   "results": "8 hits: SheafOfModules.relationsOfIsCokernelFree; SheafOfModules.generatorsOfIsCokernelFree; SheafOfModules.GeneratingSections.ofEpi; SheafOfModules.presentationOfIsCokernelFree; SheafOfModules.relationsOfIsCokernelFree_s; SheafOfModules.relationsOfIsCokernelFree_I; SheafOfModules.generatorsOfIsCokernelFree_I; SheafOfModules.generatorsOfIsCokernelFree_s",
+   "date": "2026-10-16",
+   "verdict": "no match: K-projective null homotopy and representability declarations require global K-projectivity in the sheaf category; generating sections under epimorphisms and free presentations do not assert the local chain-representative conclusion on a covering."
+  },
+  {
+   "tool": "grep",
+   "query": "nonempty_homotopy_zero|Qh_map_bijective|local.*lift",
+   "results": "25 hits: Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: K-projective null homotopy and representability declarations require global K-projectivity in the sheaf category; generating sections under epimorphisms and free presentations do not assert the local chain-representative conclusion on a covering."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKProjective, Homotopy",
+   "results": "4 hits: CochainComplex.IsKProjective.homotopyZero; CochainComplex.IsKProjective.mk; CochainComplex.IsKProjective.nonempty_homotopy_zero; CochainComplex.IsKProjective.homotopyZero_def",
+   "date": "2026-10-16",
+   "verdict": "no match: K-projective null homotopy and representability declarations require global K-projectivity in the sheaf category; generating sections under epimorphisms and free presentations do not assert the local chain-representative conclusion on a covering."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-perfect-constant-derived-map-local",
@@ -100,5 +266,39 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-perfect-constant-local-chain-representative",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Replaced the earlier attempt to package the conclusion into a new general local-actual node with a complete six-step proof using existing DAG nodes only. Finite projective constant terms are finite-free retracts; a right fraction supplies a quasi-isomorphism denominator; a finite descending induction null-homotopes the cone inclusion after a covering, and its component equations give the required chain representatives. No new nodes or Mathlib leaves. Corrected the strict-perfect definition reference from 08FQ to 08FL.",
+  "blueprint": "Realizes the first sentence of det-lem-integral-models-stacks invoking sk-prop-integral-criterion: the descendant 09BE local-algebraicity argument uses 09BD, expanded here through 08FR/08FQ/08FP/08FN. The unit route and ancestor chain are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "General abelian-category test for acyclicity of the cone of the denominator; the integral-models unit has no such generic homological lemma."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Faithful exact forgetful functor permits applying the abelian-sheaf local epimorphism criterion to module sheaves; no node of this unit gives this ringed-site infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-site-coverings-common-refinement",
+    "why": "Finitely many basis sections must lift on one covering; this generic site fact is not a replacement of the integral-models route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-coverings-common-refinement"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-7c6a8a831",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-7c6a8a831 (reviewer sub-agent of L); spot-checked: I read the item in full: six steps, no new nodes. I read every cited statement and Stacks sites-cohomology at 08FL, 08FN, 08FP, 08FQ, 08FR and 09BD; the tags match tags/tags. The statement matches 09BD hypothesis by hypothesis. The representative supplies perfectness, the site is small by the DAG convention, the target G is unbounded as in 08FR(1), and nothing is weakened. It is unchanged and serves its parent lem-sfb-perfect-constant-derived-map-local exactly. Step 1: the finite-free retract comes from a generator surjection plus projective lifting; the constant module functor and finite-limit exactness of sheafification give it, and no freeness is assumed. Step 2: the right fraction s:B->E, f:B->G is correctly oriented. The cone convention agrees with def-weil-abstract-derived-category, and lem-pur-quasi-iso-cone-acyclic gives acyclicity. Step 3: I checked that restriction to the slice is exact (sectionwise kernels; forget is exact and faithful; epis are local surjections; slice coverings are coverings of C). The sheafification hypothesis is discharged, and the derived factorization gives psi|_V = Q(f|)Q(s|)^{-1}. Step 4: this is the proof of 08FN, with a basis lift on a common refinement; the map is natural by semilinearity and pLJ = r. Step 5: I recomputed d_C r^n = 0. Exactness gives C^{n-1} -> Z^n as an epi, and the finite descending induction from b to a is fully set up; the coverings compose by axiom (ii). Step 6: expanding the components gives d t = t d and id = du + ud + st, so Q(t) = Q(s)^{-1} and Q(f t) = psi|. Edge cases checked: zero complex, rank 0, the zero ring, nonfree R(1,0) over ZxZ, the one-point site, an empty covering of the final object, and unbounded B and G. proof_deps equals the union of uses. A duplicate search found only narrower nodes: the étale finite-free local-actual node and the scheme-stalk families. I accept the three declared tool uses (cone-acyclic, forgetful functor, common refinement) as generic black boxes. One remark only: the blueprint_update of the derived-category def drops the K(A) clause; Step 2 already cites the multiplicative-system node. No fixes."
  }
 }

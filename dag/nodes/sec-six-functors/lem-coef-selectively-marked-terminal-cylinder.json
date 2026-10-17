@@ -32,8 +32,98 @@
   "lem-coef-marked-anodyne-lifting-calculus",
   "def-weil-size-convention"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "We will use marked pushouts and increasing unions in their explicit form. Form the underlying simplicial pushout degree by degree and mark exactly the images of the marked edges of its inputs. A map out is simplicial and preserves marked edges exactly when its two restrictions do; this proves the universal property of [def-weil-pbc-category-colimit]. For increasing unions use the degreewise union and the union of the markings, with the same restriction test. Simplicial operators on these constructions are induced by those on the inputs, as in [def-cbc-enhanced-diagrams-cones]. These rules apply to marked simplicial sets as defined in [lem-coef-marked-anodyne-lifting-calculus]; in particular a pushout does not automatically mark every edge whose image later becomes degenerate under some other map.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 3.1.0.1, marked simplicial sets; elementary marked-colimit details for the simplex-by-simplex argument of Lemma 3.2.1.9"
+   }
+  },
+  {
+   "text": "First fix $n\\geq0$ and prove the simplex cylinder calculation needed below. On $\\Delta^n\\times\\Delta^1$ mark only the degenerate edges and $e_n=\\{n\\}\\times\\Delta^1$; denote this marking by $E_n$. Put $D_n=(\\partial\\Delta^n\\times\\Delta^1)\\cup(\\Delta^n\\times\\{1\\})$. Apply [lem-coef-infinity-right-prism-boundary] with $m=n$ and exchange the two product coordinates. It gives $D_n=X_0\\subseteq\\cdots\\subseteq X_{n+1}=\\Delta^n\\times\\Delta^1$, attaching $\\Lambda_{q+1}^{n+1}\\hookrightarrow\\Delta^{n+1}$ at step $q$. The attaching simplex $\\tau_q$ has vertices $(j,0)$ for $j\\leq q$ and $(j-1,1)$ for $j>q$. Give every $X_q$ the marking induced by $E_n$. These are the actual pushout maps supplied by the cited statement, not just a decomposition of the vertex sets.",
+   "uses": [
+    "lem-coef-infinity-right-prism-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00TH",
+    "place": "Kerodon Lemma 3.1.2.12, assertions (a), (b) and the displayed sigma maps; coordinate exchange supplies the prism used in HTT Lemma 3.2.1.8"
+   }
+  },
+  {
+   "text": "For $q<n$ the horn index satisfies $0<q+1<n+1$, so the minimally marked horn inclusion is generator (i) of [lem-coef-marked-anodyne-lifting-calculus]. The only repeated first coordinate among distinct vertices of $\\tau_q$ occurs at positions $q,q+1$, with first coordinate $q$, so its only vertical edge is over $q$, not over $n$. Consequently $\\tau_q$ carries no nondegenerate edge into $e_n$. Since here $n\\geq1$, the edge $e_n$ already belongs to $\\partial\\Delta^n\\times\\Delta^1\\subseteq X_0$ with its marking. Thus the underlying pushout from Step 2, when made a pushout of the minimally marked inner horn, has exactly the induced $E_n$ marking on $X_{q+1}$: it keeps the old marked edge and adds no new nondegenerate marked edge. By Step 1 this is a marked pushout and hence is marked anodyne.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.2.1.8, simplex input; explicit inner-horn part of its marked prism calculation using Definition 3.1.1.1(i)"
+   }
+  },
+  {
+   "text": "For $q=n$ the horn is $\\Lambda_{n+1}^{n+1}$. The only vertical edge of $\\tau_n$ joins its final two vertices $(n,0),(n,1)$ and is exactly $e_n$. Use generator (ii) of [lem-coef-marked-anodyne-lifting-calculus], with its final edge marked. Its horn restriction preserves markings into $X_n$, and the pushout marking on $X_{n+1}$ is precisely $E_n$, by Step 1. When $n\\geq1$ the final edge is in the horn (it lies in the face omitting vertex $0$), and is already marked in $X_0$; when $n=0$ the horn is $\\Lambda_1^1=\\{1\\}$ and this pushout adds the single marked interval. Thus this last attachment is marked anodyne as well. Closure under finite compositions proves $(D_n,E_n\\cap(D_n)_1)\\hookrightarrow(\\Delta^n\\times\\Delta^1,E_n)$ is marked anodyne for every $n\\geq0$.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.2.1.8, simplex input; explicit final-horn calculation using Definition 3.1.1.1(ii), including dimension zero"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-monomorphism-boundary-cells] to $K'\\hookrightarrow K$. It supplies $Z_0=K'\\subseteq Z_1\\subseteq\\cdots$ with union $K$, and the map $Z_n\\hookrightarrow Z_{n+1}$ is the pushout of the boundary inclusions for the missing nondegenerate $n$-simplices $\\sigma:\\Delta^n\\to K$. Each such $\\sigma$ has final vertex $\\sigma(n)\\in A$ by the hypothesis of the item. Inside $K\\times\\Delta^1$ put $T_n=(Z_n\\times\\Delta^1)\\cup(K\\times\\{1\\})$, with marking induced by $E$. Then $T_0=B$ and $\\bigcup_nT_n=K\\times\\Delta^1$. For each attaching $\\sigma$ use the map $\\sigma\\times\\mathrm{id}$ from the minimally terminal-marked prism of Steps 2-4. It preserves markings because its designated edge maps to $\\{\\sigma(n)\\}\\times\\Delta^1$, which is marked by the just-verified final-vertex hypothesis. Its boundary prism lies in $T_n$, and its terminal face lies in $K\\times\\{1\\}$, so its restriction gives an attaching map from $D_n$.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0077",
+    "place": "Proposition 1.5.5.14, relative skeletal filtration; realizes the simplex-by-simplex reduction of HTT Lemma 3.2.1.9"
+   }
+  },
+  {
+   "text": "The resulting square, from the coproduct of the maps $(D_n,E_n\\cap(D_n)_1)\\hookrightarrow(\\Delta^n\\times\\Delta^1,E_n)$ into $T_n\\hookrightarrow T_{n+1}$, is a marked pushout. For the underlying square, take the boundary-cell pushout of Step 5 degreewise. Multiplying its sets by $(\\Delta^1)_r$ preserves its quotient presentation: every relation is imposed separately at each fixed interval coordinate. Glue also the already present terminal face. Hence maps on $T_n$ and the new prisms which agree on $D_n$ give one and only one map in each degree; these maps commute with all simplicial operators because their restrictions do. This verifies the colimit universal property [def-weil-pbc-category-colimit], also when $\\sigma$ identifies faces or vertices. For the marking, every nondegenerate marked target edge is vertical over a vertex in $A$. If that vertex lies in $Z_n$, its edge is already marked in $T_n$. For $n\\geq1$ no new vertex is added by the boundary-cell pushout, since every vertex of $\\Delta^n$ lies in its boundary. For $n=0$ every new vertex is a missing $0$-simplex and lies in $A$; its marked vertical edge is supplied by that cell's $e_0$. All degenerate target edges are marked, and images of cell and old markings are among $E$. Thus exactly the required target markings, and no others, are generated. Step 1 identifies the square as a marked pushout.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.2.1.9, expansion of the marked gluing in the simplex-by-simplex reduction; degreewise argument supplied by Q74"
+   }
+  },
+  {
+   "text": "For each $n$, well-order the small set of its cells and attach the prisms of Step 6 one at a time, taking the degreewise marked union at limit ordinals. A map out of the resulting union is exactly a map on $T_n$ and one on each attached prism, agreeing on each $D_n$: successor stages impose that agreement, and limit stages impose compatibility of the restrictions. These are precisely the pushout data of Step 6, so uniqueness of the induced maps identifies the resulting map with $T_n\\hookrightarrow T_{n+1}$. Each successor map is a pushout of the marked-anodyne map proved in Steps 2-4, so closure under pushouts and transfinite compositions in [lem-coef-marked-anodyne-lifting-calculus] makes it marked anodyne. Concatenate these ordinal chains for $n=0,1,\\ldots$; all indexing sets and their countable ordinal sum remain small in the fixed universes [def-weil-size-convention]. At the final union we obtain exactly $(B,E\\cap B_1)\\hookrightarrow(K\\times\\Delta^1,E)$ by Step 5 and the union rule of Step 1. If there are no cells this is the empty composite, an identity. Thus the required inclusion is marked anodyne.",
+   "uses": [
+    "lem-coef-marked-anodyne-lifting-calculus",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 3.2.1.9, transfinite assembly of the simplex cylinders; marked-anodyne saturation from Definition 3.1.1.1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-category-colimit",
+  "def-weil-size-convention",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-infinity-right-prism-boundary",
+  "lem-coef-marked-anodyne-lifting-calculus"
+ ],
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -90,10 +180,59 @@
    "results": "{\"t\": \"2026-10-16T22:40:46Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial set product interval inclusion union terminal endpoint relative boundary distinguished edges trivial cofibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.horn.edge\", \"SSet.horn\", \"SSet.spine_δ₀\", \"SSet.boundary\"], \"digest\": \"937e6bf00d9090c2\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second-reader search. Read the ordinary SSet I/J definitions and horn_ι_mem_J in Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:36-54 and anodyneExtensions in AnodyneExtensions/Basic.lean:64-86. These concern unmarked Kan horns, not a selectively marked terminal cylinder. Loogle returned only measure-theory measurableCylinders declarations, whose displayed types do not concern simplicial sets; source grep returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "marked.*anodyne|markedSimplicial|MarkedSSet|terminal.*cylinder",
+   "results": "{\"t\": \"2026-10-16T23:21:40Z\", \"tool\": \"grep\", \"query\": \"marked.*anodyne|markedSimplicial|MarkedSSet|terminal.*cylinder\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types concern ordinary unmarked Kan horns, horn face maps, or generic model-category cylinders; none states a marked-anodyne cylinder with selected vertical edges. Read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:36-54 and AnodyneExtensions/Basic.lean:64-90. Source grep found no marked-simplicial declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A simplicial cylinder with final endpoint and selected vertical edges marked is marked anodyne",
+   "results": "{\"t\": \"2026-10-16T23:21:40Z\", \"tool\": \"leansearch\", \"query\": \"A simplicial cylinder with final endpoint and selected vertical edges marked is marked anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.Cylinder.noConfusionType\", \"HomotopicalAlgebra.Cylinder.instIsCofibrantI\", \"HomotopicalAlgebra.Cylinder.IsGood\", \"HomotopicalAlgebra.Precylinder.ctorIdx\", \"HomotopicalAlgebra.Cylinder.casesOn\", \"HomotopicalAlgebra.Cylinder.ofFactorizationData\", \"HomotopicalAlgebra.Cylinder.mk.injEq\", \"HomotopicalAlgebra.Precylinder\"], \"digest\": \"bf514af580f8a866\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types concern ordinary unmarked Kan horns, horn face maps, or generic model-category cylinders; none states a marked-anodyne cylinder with selected vertical edges. Read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:36-54 and AnodyneExtensions/Basic.lean:64-90. Source grep found no marked-simplicial declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial set prism boundary filtration by inner horns followed by last horn with marked final edge",
+   "results": "{\"t\": \"2026-10-16T23:21:40Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial set prism boundary filtration by inner horns followed by last horn with marked final edge\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn.multicoequalizerDiagram\", \"SSet.horn.face\", \"SSet.horn_eq_iSup\", \"SSet.horn.ι_ι\", \"SSet.horn.faceι_ι\", \"SSet.horn.faceι\", \"SSet.horn.ι\", \"SSet.horn.primitiveEdge\"], \"digest\": \"1bfffa4c19602176\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types concern ordinary unmarked Kan horns, horn face maps, or generic model-category cylinders; none states a marked-anodyne cylinder with selected vertical edges. Read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:36-54 and AnodyneExtensions/Basic.lean:64-90. Source grep found no marked-simplicial declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"anodyne\"",
+   "results": "{\"t\": \"2026-10-16T23:21:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"anodyne\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.instIsMultiplicativeAnodyneExtensions\", \"SSet.instIsStableUnderCobaseChangeAnodyneExtensions\", \"SSet.instIsStableUnderCoproductsAnodyneExtensions\", \"SSet.instIsStableUnderRetractsAnodyneExtensions\", \"SSet.instIsStableUnderTransfiniteCompositionAnodyneExtensions\", \"SSet.instRespectsIsoAnodyneExtensions\", \"SSet.instRespectsIsoStrongAnodyneExtensions\", \"SSet.anodyneExtensions\"], \"digest\": \"e628c2cf94db43d8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types concern ordinary unmarked Kan horns, horn face maps, or generic model-category cylinders; none states a marked-anodyne cylinder with selected vertical edges. Read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:36-54 and AnodyneExtensions/Basic.lean:64-90. Source grep found no marked-simplicial declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Marked anodyne inclusion relative terminal cylinder of a simplicial subset with selected marked vertical edges",
+   "results": "{\"t\": \"2026-10-16T23:21:41Z\", \"tool\": \"leanfinder\", \"query\": \"Marked anodyne inclusion relative terminal cylinder of a simplicial subset with selected marked vertical edges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"HomotopicalAlgebra.Cylinder.trans_I\", \"HomotopicalAlgebra.Precylinder.i₁\", \"HomotopicalAlgebra.Cylinder.trans_i₀\", \"HomotopicalAlgebra.Precylinder.i₀\"], \"digest\": \"0d5e8181cbd486dd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types concern ordinary unmarked Kan horns, horn face maps, or generic model-category cylinders; none states a marked-anodyne cylinder with selected vertical edges. Read Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:36-54 and AnodyneExtensions/Basic.lean:64-90. Source grep found no marked-simplicial declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Marked simplicial set relative cylinder inclusion generated by inner horns and final horns with distinguished last edge",
+   "results": "{\"t\": \"2026-10-16T23:47:04Z\", \"tool\": \"leanfinder\", \"query\": \"Marked simplicial set relative cylinder inclusion generated by inner horns and final horns with distinguished last edge\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"HomotopicalAlgebra.Precylinder.i₁\", \"HomotopicalAlgebra.Cylinder.trans_i₀\", \"HomotopicalAlgebra.Precylinder.i₀\", \"HomotopicalAlgebra.Cylinder.trans_i₁\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\"], \"digest\": \"d56147a9b97c11a9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader independently searched. Semantic results are ordinary unmarked SSet horn generators and generic precylinders; the read declarations at Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:36-54 and AnodyneExtensions/Basic.lean:64-90 do not specify marked simplicial sets, selected vertical edges, or the final-vertex hypothesis. Source grep returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "MarkedSimplicial|MarkedSSet|markedAnodyne|marked_anodyne",
+   "results": "{\"t\": \"2026-10-16T23:47:58Z\", \"tool\": \"grep\", \"query\": \"MarkedSimplicial|MarkedSSet|markedAnodyne|marked_anodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second reader independently searched. Semantic results are ordinary unmarked SSet horn generators and generic precylinders; the read declarations at Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations.lean:36-54 and AnodyneExtensions/Basic.lean:64-90 do not specify marked simplicial sets, selected vertical edges, or the final-vertex hypothesis. Source grep returned zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-marked-cone-generator-calculations",
@@ -102,5 +241,25 @@
  },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
- "proof_origin": null
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Lemmas 3.2.1.8-3.2.1.9, printed p. 173, read online. Agent expansion of the simplex-by-simplex proof via the existing explicit prism and relative boundary-cell statements; archival copy WANTED in report.md."
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-selectively-marked-terminal-cylinder",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged after comparison with HTT Lemma 3.2.1.9. Proved the simplex input by existing explicit right-prism horns, checked the exact induced markings for inner and final horns including n=0, and expanded the relative boundary-cell gluing and small transfinite assembly. Reused the existing boundary-cell Mathlib leaf and prism statement; created no nodes. Refreshed Mathlib searches and found no marked-cylinder leaf or project Lean attachment.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation: coherent marked-cone foundation used by lem-coef-marked-cone-generator-calculations steps 4 and 5. Steps 2-4 supply its simplex cylinder and Steps 5-7 its selective relative version; this remains below the same unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-b51e09649",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-b51e09649 (reviewer sub-agent of L); spot-checked: I read all of the mathematics. The delivery is one commit containing the item and the report, with no new nodes. The item statement matches HTT Lemma 3.2.1.9 (simplex input 3.2.1.8) hypothesis by hypothesis: arbitrary small K, a simplicial subset K', a set A of vertices, marking by degenerate edges plus the vertical edges over A, and the final-vertex alternative for every nondegenerate simplex. HTT is not archived under literature/; the WANTED lines are present and proof_origin.by=agent. The statement is exactly what parent lem-coef-marked-cone-generator-calculations uses in steps 4 and 5 (K a cube, K'=boundary of K). Step 2 uses only the statement of lem-coef-infinity-right-prism-boundary, with the coordinates exchanged. I rechecked the faces of tau_0 and tau_n. Step 3 is inner horn generator (i): the only vertical edge of tau_q is over q, which is not n, and e_n already lies in X_0 for n>=1. Step 4 is final horn generator (ii): the final edge maps to e_n, and n=0 gives {1}->(Delta^1)^sharp. Step 5 uses the boundary-cell Mathlib leaf; the final-vertex hypothesis makes sigma x id a marked map. In Step 6 I checked the bijection of new simplices and the exact markings, where a new vertex can only appear at n=0 and gets its marked edge from e_0. Step 7 uses closure under pushouts and transfinite composition with small well-orders. Small cases I checked: K'=K, A empty, a missing point, and K=Delta^1 with K'={0} and A={1}. No duplicate: endpoint-prism-generation covers only the all-vertical case A=K_0. All cited statements are in the unit or are definitions, so tool_uses is empty and needs nothing. No SGA is cited and no target is touched. No fixes written."
+ }
 }
