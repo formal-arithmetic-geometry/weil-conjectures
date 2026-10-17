@@ -466,6 +466,7 @@ theorem exists_schemeHomDirectImageComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (schemeDerivedTensorHomEquiv X) (schemeDerivedTensorHomEquiv Y)
     (schemeHomTensorHom_naturality X) (schemeHomTensorHom_naturality Y)
 
+omit [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] in
 /-- The fixed direct-image internal-Hom comparison also satisfies the mate equation
 when the pullback adjunction and tensor iso are transported together. In particular
 this applies to the unique change from the composition counit to the original one.
