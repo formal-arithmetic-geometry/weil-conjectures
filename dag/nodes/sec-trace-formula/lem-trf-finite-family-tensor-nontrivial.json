@@ -11,16 +11,45 @@
   "def-weil-size-convention",
   "def-pc-field-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Proceed by induction on the cardinality of the finite set $S$. If $S=\\varnothing$, the coproduct is the base field $k$ by the empty-tensor convention in the statement, and it is nontrivial because a field has distinct zero and one.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Discussion preceding Tag 0CNI (lemma-infinite-product), limits.tex lines 145-157, for finite tensor stages; the empty coproduct over k is k by the convention in the statement, and its nontriviality is elementary."
+   }
+  },
+  {
+   "text": "For the induction step choose $s\\in S$ and put $T=S\\setminus\\{s\\}$. By induction the finite tensor coproduct $A_T=\\bigotimes_{t\\in T,k}L_t$ is nontrivial. Both $A_T$ and $L_s$ are nonzero vector spaces over the field $k$: $A_T$ has its scalar action through its coproduct structure map, and $L_s$ is a field extension. Therefore [lem-pur-field-vector-space-tensor-nontrivial] gives that $A_T\\otimes_kL_s$ is nontrivial. The canonical associativity/rebracketing identification of a finite coproduct, obtained by applying the binary tensor pushout universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property] to the two subfamilies $T$ and $\\{s\\}$, identifies $A_T\\otimes_kL_s$ with $\\bigotimes_{u\\in S,k}L_u$. Transporting nontriviality across this ring isomorphism proves the induction step, including the singleton case $T=\\varnothing$.",
+   "uses": [
+    "lem-pur-field-vector-space-tensor-nontrivial",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Discussion preceding Tag 0CNI (lemma-infinite-product), limits.tex lines 145-157, for finite tensor stages. The induction over k is agent-supplied using the two cited Mathlib leaves; it is not a proof quoted from Tag 0CNJ."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-field-vector-space-tensor-nontrivial",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Discussion preceding Tag 0CNI (lemma-infinite-product), limits.tex lines 145-157, displays finite tensor stages over Z. The auxiliary nontriviality induction over k and its binary coproduct identification are supplied by the agent using the cited Mathlib leaves."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "finite tensor product of field extensions over a field is nontrivial",
    "results": "Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_isDomain; no arbitrary finite-family declaration",
    "date": "2026-10-18",
-   "verdict": "no match: the two-factor theorem is the induction base, but no finite-family theorem is stated"
+   "verdict": "no match: the two-factor theorem is the induction base, but no arbitrary finite-family theorem is stated"
   },
   {
    "tool": "loogle",
@@ -45,7 +74,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-family-tensor-nontrivial",
@@ -64,5 +93,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finite-family-tensor-nontrivial",
+  "worker": "stage1",
+  "summary": "Split the finite-family tensor nontriviality statement by induction on the finite index set. The empty coproduct is the base field; in the induction step the smaller tensor coproduct and the remaining field are nonzero k-vector spaces, so their tensor product is nonzero by the existing Mathlib leaf, and the binary tensor pushout universal property gives the canonical finite-coproduct rebracketing. No new nodes were created.",
+  "blueprint": "Realizes the finite-subfamily tensor-product argument in the auxiliary coproduct construction beneath lem-trf-local-term-locality.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q105-cfd0cdabc",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q105-cfd0cdabc (reviewer sub-agent of L); spot-checked: Read the mathematics in full; induction, hypotheses, edge cases, both Mathlib citations, and dependency closure check out. Corrected one repeated source-location error: the tensor construction precedes Tag 0CNI, not Tag 0CNJ. Whole corrected JSON is under fixes/dag/nodes/sec-trace-formula/; detailed checks are in review.md. No new nodes, long steps, circularity, or prohibited machinery.; 1 file(s) fixed by the reviewer"
  }
 }

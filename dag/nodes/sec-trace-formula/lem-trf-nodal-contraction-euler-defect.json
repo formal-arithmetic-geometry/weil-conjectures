@@ -22,21 +22,134 @@
   "def-sc-genus",
   "def-pc-euler-characteristic"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-finite-type-over-noetherian], $C,D$ are Noetherian: proper over $k$ implies finite type. Let $A=\\overline{D\\setminus B}_{\\mathrm{red}}$ and $T=A\\cap B$ be the scheme-theoretic intersection. Since $D$ is reduced and pure one-dimensional and $B$ is reduced, closed and pure one-dimensional, $B$ is a union of whole irreducible components and $A$ is the union of the other components. Indeed a proper closed subset of an irreducible Noetherian curve has dimension zero. Their radical ideals have intersection zero, so $D=A\\cup B$ scheme-theoretically. Apply [lem-trf-nodal-subcurve-boundary], with $X=D$ and $Y=B$, using exactly the nodal neighbourhood assumed in the item. It gives nodality of $B$ and $T=\\coprod_{j=1}^{r}\\operatorname{Spec}k$, including the possibility $r=0$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-trf-nodal-subcurve-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38 (lemma-closed-subscheme-nodal-curve), applied on the nodal neighbourhood; finite-type Noetherianity is morphisms.tex Tag 01T6."
+   }
+  },
+  {
+   "text": "Let $h=f|_A:A\\to C$. It is proper by [lem-weil-pbc-proper-fp-permanence](a),(c), since $A\\hookrightarrow D$ is closed. Away from $y$ it is the given isomorphism. Its fibre over $y$ has underlying set $A\\cap B=|T|$, which is finite by Step 1; no assertion that the full fibre of $f$ is reduced is used. Thus every fibre of $h$ is finite. The target $C$ is locally Noetherian by Step 1, so [thm-pqf-finite-iff-proper-finite-fibres] makes $h$ finite. The same permanence node makes the closed subcurves $A,B,T$ proper over $k$.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "thm-pqf-finite-iff-proper-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02OG (lemma-characterize-finite); morphisms.tex Tags 01W3 and 01W5 for properness."
+   }
+  },
+  {
+   "text": "Choose a smooth open neighbourhood $U$ of $y$ in $C$. By [lem-sc-smooth-normal], it is normal. Its finitely many irreducible components are disjoint: if two met, their distinct minimal primes would survive in a local ring, contradicting that a normal local ring is a domain. Retain the component containing $y$, so $U$ is integral. The reduced scheme $h^{-1}(U)$ is also integral: every component of $A$ contains its generic point in $D\\setminus B$, since all components contained in the fibre were removed in forming $A$. Thus each component meeting $h^{-1}(U)$ meets $h^{-1}(U\\setminus\\{y\\})$. The latter is isomorphic to the integral dense open $U\\setminus\\{y\\}$, and consequently has exactly one generic point; hence $h^{-1}(U)$ has one irreducible component. Its reducedness now gives integrality. The finite map $h^{-1}(U)\\to U$ induces an isomorphism of function fields through that dense-open isomorphism. Apply [lem-trf-finite-birational-normal-iso]. It is an isomorphism over $U$; together with the given isomorphism over $C\\setminus\\{y\\}$ this proves that $h:A\\xrightarrow{\\sim}C$ is an isomorphism.",
+   "uses": [
+    "lem-sc-smooth-normal",
+    "lem-trf-finite-birational-normal-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AB1 (lemma-finite-birational-over-normal); smooth-normal input as in curves.tex (smooth curves over a field)."
+   }
+  },
+  {
+   "text": "Write $i_A,i_B,i_T$ for the three closed inclusions into $D$. Their restriction maps give the short exact sequence $$0\\to\\mathcal O_D\\to i_{A,*}\\mathcal O_A\\oplus i_{B,*}\\mathcal O_B\\to i_{T,*}\\mathcal O_T\\to0,$$ where the last map is restriction from $A$ minus restriction from $B$. To check it on an affine chart with component-union ideals $I,J$, use $I\\cap J=0$ from Step 1 and the exact ring-module sequence $$0\\to R\\to R/I\\oplus R/J\\to R/(I+J)\\to0.$$ The kernel of the difference map consists precisely of pairs with equal image modulo $I+J$, which lift to one element of $R$; its surjectivity follows by lifting an element to the first summand. This proves exactness without an auxiliary contraction-cohomology assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4J (lemma-scheme-theoretic-union), explicit affine proof."
+   }
+  },
+  {
+   "text": "All four structure sheaves and their indicated direct images are coherent on these Noetherian schemes. By [lem-pc-closed-immersion-coherent-cohomology], closed direct image preserves coherence and all cohomology groups. Apply [lem-pc-euler-additive] to the exact sequence of Step 4, and to the split direct-sum sequence for its middle term. It gives $$\\chi(D)=\\chi(A)+\\chi(B)-\\chi(T).$$ Since $T$ is the finite disjoint union of $r$ copies of $\\operatorname{Spec}k$, its global sections have dimension $r$ and no higher cohomology: global sections of modules on this finite discrete scheme is a finite product of module evaluation functors, which is exact. Hence $\\chi(T)=r$. The isomorphism of Step 3 gives $\\chi(A)=\\chi(C)$, and therefore $$\\chi(D)-\\chi(C)=\\chi(B)-r.$$ This remains valid if $D$ or $C$ is disconnected and if $r=0$.",
+   "uses": [
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "lem-pc-euler-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08AA (lemma-euler-characteristic-additive); coherent.tex closed-immersion cohomology, or affine cohomology Tag 089W."
+   }
+  },
+  {
+   "text": "The curve $B$ is proper by Step 2, reduced, connected and pure one-dimensional by the item, and nodal by Step 1. Its component normalizations are smooth proper connected curves by the item. Thus [lem-trf-nodal-curve-normalization-euler] applies with exactly the internal nodes and genera named in the statement and yields $$\\chi(B)=v-e-\\sum_{i=1}^{v}g_i.$$ Internal self-nodes contribute once; the $r$ boundary nodes are smooth as points of $B$ and have already been counted in Step 5.",
+   "uses": [
+    "lem-trf-nodal-curve-normalization-euler"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C1R (lemma-prepare-delta-invariant); curves.tex Tag 0CBW (lemma-split-node), with the explicit normalization quotient of length one."
+   }
+  },
+  {
+   "text": "Substitute Step 6 into Step 5: $$\\chi(D)-\\chi(C)=(v-e-\\sum_i g_i)-r=v-e-r-\\sum_i g_i.$$ No equality of the two Euler characteristics, genus-zero condition or tree property enters this argument.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Arithmetic substitution in the normalization Euler identity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-pc-euler-additive",
+  "lem-sc-smooth-normal",
+  "lem-trf-finite-birational-normal-iso",
+  "lem-trf-nodal-curve-normalization-euler",
+  "lem-trf-nodal-subcurve-boundary",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proper-fp-permanence",
+  "thm-pqf-finite-iff-proper-finite-fibres"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0E38 together with morphisms.tex Tags 0C4J and 0AB1, coherent.tex Tag 02OG, and varieties.tex Tag 08AA. The remaining-subcurve comparison and substitution are written out here; not attributed to Temkin."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Euler characteristic difference under contraction of a nodal subcurve to a smooth point equals number of components minus internal nodes minus boundary nodes minus component genera",
-   "results": "[leanfinder] OK 8 hit(s).  Returned names/files: WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal', WeierstrassCurve.Affine.CoordinateRing.C_addPolynomial_slope, WeierstrassCurve.Affine.derivative_addPolynomial_slope, WeierstrassCurve.Affine.CoordinateRing.XYIdeal_mul_XYIdeal, WeierstrassCurve.Affine.CoordinateRing.XYIdeal_neg_mul, WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis, WeierstrassCurve.Affine.addPolynomial_slope, WeierstrassCurve.Affine.C_addPolynomial_slope. The semantic hits concern normalization of scheme morphisms and formulas on a single Weierstrass cubic; none computes the coherent Euler characteristic of a nodal contraction. The source grep and name search found no arithmetic-genus or nodal-normalization formula.",
+   "query": "Euler characteristic difference under contraction of a nodal subcurve to a smooth point",
+   "results": "Returned unrelated Weierstrass and incidence-algebra declarations; no coherent Euler characteristic of a nodal contraction.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
    "query": "Genus formula for a reduced proper nodal curve from its normalization and the number of nodes",
-   "results": "[leansearch] OK 8 hit(s).  Returned names/files: AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso, WeierstrassCurve.j_of_isShortNF, WeierstrassCurve.Δ_of_isShortNF, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, WeierstrassCurve.c₄_of_isCharNeTwoNF, WeierstrassCurve.natDegree_preΨ', WeierstrassCurve.coeff_preΨ'. The semantic hits concern normalization of scheme morphisms and formulas on a single Weierstrass cubic; none computes the coherent Euler characteristic of a nodal contraction. The source grep and name search found no arithmetic-genus or nodal-normalization formula.",
+   "results": "Returned normalization API and unrelated Weierstrass declarations; no arithmetic-genus or nodal-normalization formula.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "arithmeticGenus",
+   "results": "0 hits; loogle reported unknown identifier arithmeticGenus.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "arithmeticGenus|nodal.*genus|genus.*nodal|normalization.*[Ee]uler AlgebraicGeometry",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Euler characteristic difference under contraction of a nodal subcurve to a smooth point equals number of components minus internal nodes minus boundary nodes minus component genera",
+   "results": "[leanfinder] OK 8 hit(s).  Returned names/files: WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal', WeierstrassCurve.Affine.CoordinateRing.C_addPolynomial_slope, WeierstrassCurve.Affine.derivative_addPolynomial_slope, WeierstrassCurve.Affine.CoordinateRing.XYIdeal_mul_XYIdeal, WeierstrassCurve.Affine.CoordinateRing.XYIdeal_neg_mul, WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis, WeierstrassCurve.Affine.addPolynomial_slope, WeierstrassCurve.Affine.C_addPolynomial_slope. The semantic hits concern normalization of scheme morphisms and formulas on a single Weierstrass cubic; none computes the coherent Euler characteristic of a nodal contraction. The source grep and name search found no arithmetic-genus or nodal-normalization formula.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
@@ -56,7 +169,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-smooth-target-modification-exceptional-tree",
@@ -68,7 +181,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: Temkin stable-modification input, specifically Lemma 4.3.2, p. 29, retaining semistability of the modified pair.; local geometric input to the repaired marking-globalization argument: the unmarked smooth-target exceptional-tree case of Temkin Lemma 4.4.2. Numerical proof of the unmarked smooth-target exceptional-fibre assertion, following Temkin Lemma 4.4.2. Auxiliary input: Appendix B normalization genus formula, retaining the numerical defect instead of assuming equal genera or restating the tree conclusion.",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: Temkin stable-modification input, specifically Lemma 4.3.2, p. 29, retaining semistability of the modified pair.; local geometric input to the repaired marking-globalization argument: the unmarked smooth-target exceptional-tree case of Temkin Lemma 4.4.2. Numerical proof of the unmarked smooth-target exceptional-fibre assertion, following Temkin Lemma 4.4.2. Auxiliary input: Appendix B normalization genus formula, retaining the numerical defect instead of assuming equal genera or restating the tree conclusion. Repaired numerical argument: nodal-subcurve boundary, finite birational identification of the remaining curve, and closed-union Euler additivity.",
    "via": [
     "lem-trf-smooth-target-modification-exceptional-tree",
     "lem-trf-valuation-marking-semistable-separation",
@@ -85,5 +198,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-nodal-contraction-euler-defect",
+  "worker": "stage1",
+  "summary": "Replaced the unsupported general contraction-cohomology auxiliary by the nodal-subcurve boundary lemma, proved the complementary subcurve is isomorphic to C by proper finite-fibre and finite-birational-normal tools, and explicitly formed the closed-union sequence. Euler additivity and nodal normalization give the original formula. Removed false r=0 cohomology claims and the invalid r=2 smooth-target test; no item statement change. Sources are available Stacks text.",
+  "blueprint": "The local-term-locality semistable-modification branch, through smooth-target-modification-exceptional-tree: realizes its numerical normalization and boundary count, without assuming equal genera.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "General algebraic-geometry/coherent-cohomology tool for the nodal exceptional-fibre calculation; it does not replace a unit-level argument."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "General algebraic-geometry/coherent-cohomology tool for the nodal exceptional-fibre calculation; it does not replace a unit-level argument."
+   },
+   {
+    "node": "thm-pqf-finite-iff-proper-finite-fibres",
+    "why": "General algebraic-geometry/coherent-cohomology tool for the nodal exceptional-fibre calculation; it does not replace a unit-level argument."
+   },
+   {
+    "node": "lem-sc-smooth-normal",
+    "why": "General algebraic-geometry/coherent-cohomology tool for the nodal exceptional-fibre calculation; it does not replace a unit-level argument."
+   },
+   {
+    "node": "lem-pc-closed-immersion-coherent-cohomology",
+    "why": "General algebraic-geometry/coherent-cohomology tool for the nodal exceptional-fibre calculation; it does not replace a unit-level argument."
+   },
+   {
+    "node": "lem-pc-euler-additive",
+    "why": "General algebraic-geometry/coherent-cohomology tool for the nodal exceptional-fibre calculation; it does not replace a unit-level argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proper-fp-permanence",
+  "thm-pqf-finite-iff-proper-finite-fibres",
+  "lem-sc-smooth-normal",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-pc-euler-additive"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q111-f20d70bd9",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q111-f20d70bd9 (reviewer sub-agent of L); spot-checked: Read all mandated files, the item, every new node, cited node statements, unit/chapter route, and local Stacks sources. Verified each proof step, hypotheses, edge cases, searches, duplication, and route restrictions. The repaired seven-step Euler argument is sound; withdrawn false comparison is absent. Review written to review.md."
  }
 }

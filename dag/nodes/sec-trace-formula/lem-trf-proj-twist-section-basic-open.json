@@ -13,11 +13,68 @@
   "def-weil-pbc-proj-twisting-sheaf",
   "lem-weil-pbc-proj-standard-open-inclusion",
   "def-sc-invertible-module",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-ample-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the union characterization of $W_d$ in the hypothesis. Its covering charts are $V=D_+(ab)$ with $\\alpha=\\deg(a)$, $\\beta=\\deg(b)$, $\\alpha=\\beta+d$; put $h=ab$ and $k=\\alpha+\\beta>0$. By [def-weil-pbc-proj-twisting-sheaf], sections of $\\mathcal O_P(nd)$ on $V$ are the degree-$nd$ fractions in $A_h$. Both $a$ and $b$ are units in $A_h$, since their product is inverted. Thus $e=(a/b)^n=a^{2n}/h^n$ has degree $nd$, its inverse has degree $-nd$, and multiplication by $e$ identifies $(A_h)_0$ with $(A_h)_{nd}$: the inverse sends $t$ to $e^{-1}t$. These formulas commute with localization restrictions, so they give an isomorphism of sheaves $\\mathcal O_V\\simeq\\mathcal O_P(nd)|_V$. The canonical section restricts to $f/1=c e$, with $c=b^nf/a^n\\in(A_h)_0$. This is a direct fraction calculation from the cited definition, including when $V$ is empty.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01MU (lemma-where-invertible), first paragraph of proof, and 01MV (lemma-principal-open), chart calculation."
+   }
+  },
+  {
+   "text": "Fix a chart from Step 1 and a point $x\\in U\\cap V$. Nonvanishing means $s_{f,x}\\notin\\mathfrak m_x\\mathcal O_U(nd)_x$, by [def-weil-pbc-ample-invertible-module]. In the basis $e$ this is $c_x\\notin\\mathfrak m_x$, equivalently $c_x$ is a unit. The degree-zero fraction $u=b^{2n\\alpha}/a^{2n\\beta}$ is a unit of $(A_h)_0$, with inverse $a^{2n\\beta}/b^{2n\\alpha}$. Direct multiplication, using $d=\\alpha-\\beta$, gives $c^k=u f^k/h^{nd}$. In any commutative local ring a positive power is a unit exactly when its base is a unit; multiplication by a unit does not change this. Therefore $c_x$ is a unit exactly when $(f^k/h^{nd})_x$ is. Apply [lem-weil-pbc-proj-basic-open-intersection] with its chart element $h\\in A_k$ and second element $f\\in A_{nd}$: this unit locus is precisely $V\\cap D_+(f)$. Both degrees are positive. Consequently $U_{s_f}\\cap V=U\\cap V\\cap D_+(f)$. The charts cover $U$, so equality of these sets on every chart gives $U_{s_f}=U\\cap D_+(f)$.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "lem-weil-pbc-proj-basic-open-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MV (lemma-principal-open), principal open of the coefficient; Tag 01M4 (lemma-standard-open) (1)(f) / 01MA (lemma-standard-open-proj)."
+   }
+  },
+  {
+   "text": "Let $x\\in U$ and let $N\\subseteq U$ be an open neighbourhood. Since $U$ is open in $P$, $N$ is also open in $P$. The positive-degree basis clause of [lem-weil-pbc-proj-standard-open-inclusion] gives a homogeneous $g\\in A_q$, $q>0$, with $x\\in D_+(g)\\subseteq N$. Put $f=g^d\\in A_{qd}$, so its degree is divisible by $d$. For every homogeneous prime $\\mathfrak p$, primality gives $g^d\\notin\\mathfrak p$ if and only if $g\\notin\\mathfrak p$ because $d\\geq1$. Thus $D_+(f)=D_+(g)\\subseteq U$, and Step 2 gives $U_{s_f}=D_+(g)$. Every prescribed neighbourhood therefore contains one of the stated loci through its point; all these loci are open since $D_+(f)$ is open. This proves the basis assertion without quasi-compactness of $U$.",
+   "uses": [
+    "lem-weil-pbc-proj-standard-open-inclusion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MW (lemma-ample-on-proj), (5)--(6), with the standard-open basis of 01M4; no finite subcover is needed."
+   }
+  },
+  {
+   "text": "The loci chosen in Step 3 equal whole standard opens $D_+(g)\\subseteq U$. By the affine-chart clause of [def-pc-proj], each is the affine scheme $\\operatorname{Spec}(A_{(g)})$. Hence for every point and neighbourhood in $U$ there is an affine member of the stated family inside that neighbourhood. This proves that its affine members form an affine-open basis. We do not assert that an arbitrary intersection $U\\cap D_+(f)$ is affine. When $U$ is empty all the equalities and basis conditions are vacuous; when $f=0$ or is nilpotent, the chart calculation yields the empty nonvanishing locus as required.",
+   "uses": [
+    "def-pc-proj"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MW (lemma-ample-on-proj), (7), using affine standard opens (01MB)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-proj",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-weil-pbc-proj-basic-open-intersection",
+  "lem-weil-pbc-proj-standard-open-inclusion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01MU (lemma-where-invertible), 01MV (lemma-principal-open), and 01MW (lemma-ample-on-proj) (5)--(7), with the coefficient-locus calculation expanded via 01MA."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,10 +103,59 @@
    "results": "AlgebraicGeometry.RingedSpace.isUnit_res_basicOpen; AlgebraicGeometry.StructureSheaf.toBasicOpen_injective; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen; AlgebraicGeometry.RingedSpace.zeroLocus; AlgebraicGeometry.Proj.basicOpenIsoAway; AlgebraicGeometry.StructureSheaf.toBasicOpen; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact; AlgebraicGeometry.RingedSpace.zeroLocus_singleton; no twisting-sheaf theorem",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homogeneous twist section on Proj invertibility locus nonvanishing standard open affine basis",
+   "results": "{\"t\": \"2026-10-17T21:24:48Z\", \"tool\": \"leanfinder\", \"query\": \"homogeneous twist section on Proj invertibility locus nonvanishing standard open affine basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.sectionInBasicOpen\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply\", \"AlgebraicGeometry.Proj.awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction\", \"AlgebraicGeometry.mem_basicOpen_den\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isLocallyFraction\", \"AlgebraicGeometry.Proj.basicOpen\"], \"digest\": \"974204f5b6924e51\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: only structure-sheaf/topology declarations, no twist/nonvanishing theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.basicOpen, IsInvertible, section",
+   "results": "{\"t\": \"2026-10-17T21:24:48Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Proj.basicOpen, IsInvertible, section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: <input>:1:48: expected term\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: loogle: <input>:1:48: expected term"
+  },
+  {
+   "tool": "grep",
+   "query": "lemma-principal-open|nonvanishing|twisting sheaf",
+   "results": "{\"t\": \"2026-10-17T21:24:48Z\", \"tool\": \"grep\", \"query\": \"lemma-principal-open|nonvanishing|twisting sheaf\", \"sub\": \"Mathlib/AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "section of O(nd) on the Proj invertibility locus has nonvanishing locus D_+(f) and affine basis",
+   "results": "{\"t\": \"2026-10-17T21:24:49Z\", \"tool\": \"leansearch\", \"query\": \"section of O(nd) on the Proj invertibility locus has nonvanishing locus D_+(f) and affine basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineBasicOpen\", \"AlgebraicGeometry.Proj.basicOpen\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_preimage_basicOpen\", \"AlgebraicGeometry.Proj.basicOpenToSpec\", \"AlgebraicGeometry.sectionInBasicOpen\", \"ProjectiveSpectrum.basicOpen_eq_union_of_projection\", \"AlgebraicGeometry.Proj.awayι_preimage_basicOpen\"], \"digest\": \"6b2775100a809778\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: only structure-sheaf/topology declarations, no twist/nonvanishing theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary graded ring on the locus where O(d) and its multiplication are invertible homogeneous sections of O(nd) cut out standard opens",
+   "results": "{\"t\": \"2026-10-17T21:30:18Z\", \"tool\": \"leanfinder\", \"query\": \"For an arbitrary graded ring on the locus where O(d) and its multiplication are invertible homogeneous sections of O(nd) cut out standard opens\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isLocallyFraction\", \"AlgebraicGeometry.sectionInBasicOpen\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction\", \"HomogeneousLocalization.Away.mk\", \"AlgebraicGeometry.openToLocalization\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isFractionPrelocal\"], \"digest\": \"cbeffc898f9b9169\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: only structure-sheaf/topology declarations, no twist/nonvanishing theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"twist\"",
+   "results": "{\"t\": \"2026-10-17T21:30:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"Proj\\\", \\\"twist\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "grep",
+   "query": "twist|nonvanishingLocus",
+   "results": "{\"t\": \"2026-10-17T21:30:19Z\", \"tool\": \"grep\", \"query\": \"twist|nonvanishingLocus\", \"sub\": \"AlgebraicGeometry/ProjectiveSpectrum\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: zero hits"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-proj-qc-open-twist-ample",
@@ -80,5 +186,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-proj-twist-section-basic-open",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Expanded Stacks 01MV into a direct degree-part chart trivialization and an explicit unit-power calculation invoking the existing chart-intersection Mathlib leaf, then derived the basis and affine-basis clauses by positive powers and ambient standard opens contained in U. No new nodes: the proposed chart-generator node was eliminated as elementary. Corrected the source tag 01MS to 01MU for lemma-where-invertible and added the nonvanishing definition statement dependency.",
+  "blueprint": "Realizes the inherited Section-algebra/Proj ampleness input of lem-trf-local-term-locality: homogeneous twist nonvanishing loci and affine standard-open basis, following Stacks 01MU/01MV/01MW.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-proj-twisting-sheaf",
+    "why": "Its degree-part sections and localization restrictions give the direct chart generator; this is a generic definition of the twists used by the item."
+   },
+   {
+    "node": "def-weil-pbc-ample-invertible-module",
+    "why": "Uses only the stalk definition of a section nonvanishing locus, not an ampleness theorem."
+   },
+   {
+    "node": "lem-weil-pbc-proj-standard-open-inclusion",
+    "why": "Generic positive-degree standard-open basis needed to refine an ambient open neighbourhood; no in-unit node supplies this topology result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-weil-pbc-proj-standard-open-inclusion"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q98-ff23f174b",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q98-ff23f174b (reviewer sub-agent of L); spot-checked: Read the full item, report, unit, DAG context, cited node statements, and Stacks sources 01MU/01MV/01MW with 01M4/01MA. Verified all four proof steps, fraction and unit calculations, hypotheses, edge cases, Mathlib searches, route compliance, and corrected tag mapping. No mathematical, citation, duplication, circularity, or long-step fault found."
  }
 }

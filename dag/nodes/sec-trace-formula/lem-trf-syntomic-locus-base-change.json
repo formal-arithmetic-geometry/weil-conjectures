@@ -16,9 +16,98 @@
   "def-weil-flat-morphism",
   "def-sbc-locally-finite-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $x\\in X$ over $s\\in S$. By [def-weil-finite-type-morphism], choose affine opens $\\operatorname{Spec}A\\subseteq S$ about $s$ and $\\operatorname{Spec}B\\subseteq X$ about $x$, mapping into $\\operatorname{Spec}A$, with $B$ finitely generated over $A$. By [lem-weil-pbc-open-preimage-fibre-product] and [lem-weil-pbc-fibre-product-affine-spectra], this chart cuts out an affine open $W=\\operatorname{Spec}C$ of $X_s$, with $C=B\\otimes_A k$ and $k=\\kappa(s)$. If $b_1,\\ldots,b_r$ generate $B$ over $A$, then $b_1\\otimes1,\\ldots,b_r\\otimes1$ generate $C$ over $k$: expand each element as a finite sum of tensors and then expand its $B$-factor as a polynomial in the $b_i$. Thus $C$ is a finite type $k$-algebra. This construction for all points gives a locally finite type fibre, without assuming $f$ flat or locally finitely presented.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V3 (lemma-set-points-where-fibres-lci), first part, affine form of the locally finite type hypothesis."
+   }
+  },
+  {
+   "text": "Fix any $x'\\in X'$, put $s'=f'(x')$, $x=g'(x')$, $s=f(x)$, $k=\\kappa(s)$ and $K=\\kappa(s')$. By [lem-weil-pbc-fibre-of-base-change], $X'_{s'}=X_s\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$, compatibly with the projections to $X$. Take the finite type affine chart $W=\\operatorname{Spec}C\\subset X_s$ of step 1 around $x$. Its inverse image is an open neighbourhood of $x'$, by [lem-weil-pbc-open-preimage-fibre-product], and equals $\\operatorname{Spec}(K\\otimes_k C)$ by [lem-weil-pbc-fibre-product-affine-spectra] and the tensor interchange $c\\otimes\\lambda\\mapsto\\lambda\\otimes c$. The prime $\\mathfrak q_K$ of this chart representing $x'$ contracts to the prime $\\mathfrak q$ representing $x$. By [lem-weil-pbc-affine-open-stalk-localization], the two fibre local rings are $C_{\\mathfrak q}$ and $(K\\otimes_k C)_{\\mathfrak q_K}$. Apply [lem-trf-lci-field-change-local]: the first is a complete intersection over $k$ exactly when the second is one over $K$. Hence $x'\\in V_{f'}$ if and only if $g'(x')\\in V_f$. Since $x'$ was arbitrary this proves the asserted equality of subsets.",
+   "uses": [
+    "lem-weil-pbc-fibre-of-base-change",
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-trf-lci-field-change-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V3 (lemma-set-points-where-fibres-lci), first paragraph of proof, applying Algebra Tag 00SI (lemma-lci-field-change-local)."
+   }
+  },
+  {
+   "text": "Now assume $f$ flat and locally of finite presentation, and take $x\\in V_f$, with $s=f(x)$. By [def-weil-flat-morphism] the local map at $x$ is flat, and by [def-sbc-locally-finite-presentation] $f$ is of finite presentation at $x$. Membership in $V_f$ is exactly the remaining complete-intersection local-fibre hypothesis of [lem-trf-syntomic-pointwise-local-model]. For an affine open $V=\\operatorname{Spec}R$ about $s$, apply that lemma to get an affine open $U=\\operatorname{Spec}B$ about $x$, mapping into $V$, and a relative-global-complete-intersection presentation $B=R[t_1,\\ldots,t_n]/(h_1,\\ldots,h_c)$.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-trf-syntomic-pointwise-local-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V3 (lemma-set-points-where-fibres-lci), second paragraph of proof; Tag 01UE (lemma-syntomic-locally-standard-syntomic), implication (3) to (2)."
+   }
+  },
+  {
+   "text": "For each $t\\in V$, the fibre of $U\\to V$ is $\\operatorname{Spec}D_t$, where $D_t=B\\otimes_R\\kappa(t)$ by [lem-weil-pbc-fibre-product-affine-spectra]. By [lem-weil-pbc-presentation-base-change], it has the presentation $D_t=\\kappa(t)[t_1,\\ldots,t_n]/(\\overline h_1,\\ldots,\\overline h_c)$. By [def-weil-pbc-relative-global-complete-intersection], either $D_t=0$ or $\\dim D_t=n-c$. In either case $D_t$ is a global complete intersection over $\\kappa(t)$ by [def-weil-pbc-complete-intersection-over-field], hence a local complete intersection (the single principal open $D(1)$ covers its spectrum). By [lem-trf-lci-pointwise-criterion], every local ring of $\\operatorname{Spec}D_t$ is a complete-intersection local ring. By [lem-weil-pbc-open-preimage-fibre-product], this fibre is the open subspace $U\\cap X_t$ of $X_t$; its local ring at any of its points is unchanged, since a germ can be represented on a neighbourhood inside that open. Thus every $y\\in U$ belongs to $V_f$. Each $x\\in V_f$ has such an open neighbourhood $U\\subseteq V_f$, so $V_f$ is their union and is open.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-presentation-base-change",
+    "def-weil-pbc-relative-global-complete-intersection",
+    "def-weil-pbc-complete-intersection-over-field",
+    "lem-trf-lci-pointwise-criterion",
+    "lem-weil-pbc-open-preimage-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V3 (lemma-set-points-where-fibres-lci), last assertion; Tag 01UE (lemma-syntomic-locally-standard-syntomic), affine local model."
+   }
+  },
+  {
+   "text": "For any source open $H\\subseteq X$, [lem-weil-pbc-open-preimage-fibre-product] identifies its fibre at $s$ with $H\\cap X_s$. Its local rings are the same as those of $X_s$ at its points, by the germ argument in step 4. Therefore every fibre local ring of $H\\to S$ is a complete intersection exactly when $H\\subseteq V_f$. Flatness restricts to $H$ because the source local rings and their maps are unchanged, using [def-weil-flat-morphism]. Local finite presentation restricts as well: inside a witnessing affine chart $\\operatorname{Spec}B$ in [def-sbc-locally-finite-presentation], choose a principal neighbourhood $D(b)$ of the point contained in $H$; if $B=R[\\mathbf t]/(\\mathbf h)$, its algebra is $B_b=R[\\mathbf t,u]/(\\mathbf h,bu-1)$, still finitely presented. Apply this to $H=V_f$ to obtain all three stated properties of its restriction. Conversely any source open having those properties is contained in $V_f$ by its fibre condition. This proves maximality, the stated description of the syntomic locus, and includes the empty source and empty fibres (there are then no points or local rings to check).",
+   "uses": [
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V3 (lemma-set-points-where-fibres-lci), last assertion, with the source-open description expanded from the definitions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-fibre-of-base-change",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-trf-lci-field-change-local",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-trf-syntomic-pointwise-local-model",
+  "lem-weil-pbc-presentation-base-change",
+  "def-weil-pbc-relative-global-complete-intersection",
+  "def-weil-pbc-complete-intersection-over-field",
+  "lem-trf-lci-pointwise-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02V3 (lemma-set-points-where-fibres-lci), its proof via Algebra Tag 00SI and Morphisms Tag 01UE; the source-open maximality argument is written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +143,45 @@
    "results": "{\"t\": \"2026-10-17T21:16:13Z\", \"tool\": \"grep\", \"query\": \"syntomic|CompleteIntersection|complete.intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/Presentation/Basic.lean\"], \"digest\": \"08e65e9beea7152f\"}",
    "date": "2026-10-18",
    "verdict": "no match: generic smooth/flat permanence and algebraic unramified-locus or local-ring facts do not give this scheme-level locus with its arbitrary-base-change equality; the complete-intersection source hit is a comment on presentation dimension."
+  },
+  {
+   "tool": "grep",
+   "query": "syntomic|CompleteIntersection|complete.intersection",
+   "results": "{\"t\": \"2026-10-17T21:28:23Z\", \"tool\": \"grep\", \"query\": \"syntomic|CompleteIntersection|complete.intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/Presentation/Basic.lean\"], \"digest\": \"08e65e9beea7152f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern smoothness, flatness, finite presentation, or openness of a morphism; none gives the complete-intersection fibre locus or its pointwise base-change equality. The only complete-intersection grep hit is the comment in RingTheory/Extension/Presentation/Basic.lean:103."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The syntomic locus of a flat locally finitely presented morphism is open and compatible with base change",
+   "results": "{\"t\": \"2026-10-17T21:28:24Z\", \"tool\": \"leansearch\", \"query\": \"The syntomic locus of a flat locally finitely presented morphism is open and compatible with base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"Algebra.isOpen_smoothLocus\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\"], \"digest\": \"371e9db6fd0f33a4\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern smoothness, flatness, finite presentation, or openness of a morphism; none gives the complete-intersection fibre locus or its pointwise base-change equality. The only complete-intersection grep hit is the comment in RingTheory/Extension/Presentation/Basic.lean:103."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"syntomic\"",
+   "results": "{\"t\": \"2026-10-17T21:28:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"syntomic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern smoothness, flatness, finite presentation, or openness of a morphism; none gives the complete-intersection fibre locus or its pointwise base-change equality. The only complete-intersection grep hit is the comment in RingTheory/Extension/Presentation/Basic.lean:103."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The locus of complete intersection local rings in the fibres of a morphism is compatible with arbitrary base change and is open for a flat locally finitely presented morphism",
+   "results": "{\"t\": \"2026-10-17T21:28:27Z\", \"tool\": \"leanfinder\", \"query\": \"The locus of complete intersection local rings in the fibres of a morphism is compatible with arbitrary base change and is open for a flat locally finitely presented morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"RingHom.Smooth.isStableUnderBaseChange\"], \"digest\": \"b2b0b67ec819ed3a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern smoothness, flatness, finite presentation, or openness of a morphism; none gives the complete-intersection fibre locus or its pointwise base-change equality. The only complete-intersection grep hit is the comment in RingTheory/Extension/Presentation/Basic.lean:103."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of schemes locally of finite type, the set of points with complete intersection fibre local ring pulls back to the identical locus after any change of base",
+   "results": "{\"t\": \"2026-10-17T21:29:06Z\", \"tool\": \"leanfinder\", \"query\": \"For a morphism of schemes locally of finite type, the set of points with complete intersection fibre local ring pulls back to the identical locus after any change of base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"RingHom.IsStableUnderBaseChange.pullback_fst_appTop\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme\"], \"digest\": \"c4b4302788fcd8ef\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern smoothness, flatness, finite presentation, or openness of a morphism; none gives the complete-intersection fibre locus or its pointwise base-change equality. The only complete-intersection grep hit is the comment in RingTheory/Extension/Presentation/Basic.lean:103."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
  "created": {
@@ -78,5 +202,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-syntomic-locus-base-change",
+  "worker": "stage1",
+  "summary": "Checked Stacks 02V3 and its two cited inputs 00SI and 01UE. Proved equality at every base-changed point using a finite type affine fibre chart and primewise field extension. Proved openness using relative-global-complete-intersection affine models and verified the largest-source-open property directly. Retained the statement and added two statement-only inputs after DAG, blueprint and Lean searches. No SGA or Lean writing/builds.",
+  "blueprint": "Historical stability-locus input below lem-trf-local-term-locality (1)--(2), through stable-modification-stability-locus, stable-modification-constructibility and nodal-open-locus, exactly as recorded in blueprint.from; this split realizes the Stacks 02V3 local-complete-intersection subargument, not the local-term theorem itself."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q16-c144e3051",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q16-c144e3051 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited DAG statements, unit/chapter route, and Stacks Tags 02V3, 01UE, and 00SI. Verified hypotheses, residue-field base change, coefficient category, proof steps, edge cases, searches, duplicates, and route constraints. No repairs needed."
  }
 }
