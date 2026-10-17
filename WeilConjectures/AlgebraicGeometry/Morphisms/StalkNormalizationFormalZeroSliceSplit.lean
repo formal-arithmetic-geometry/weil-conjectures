@@ -106,7 +106,6 @@ private theorem composed_pullback {X Y Z B : Scheme.{u}} (f : X ⟶ Z)
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option linter.unusedVariables false in
 -- Splitting over U first makes the minimality hypotheses unnecessary for this proof.
 set_option maxHeartbeats 1800000 in
 -- The nested normalization and iterated pullbacks require extra elaboration heartbeats.
@@ -152,9 +151,7 @@ theorem GaloisCover.stalk_normalization_formal_zero_slice_split {S C : Scheme.{u
     (jU : Cη ⟶ (c ⁻¹ᵁ U).toScheme) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)
     (ψ : Z.P ⟶ PA.obj.left) (hjU : jU ≫ (c ⁻¹ᵁ U).ι = j)
     (hψ : IsPullback ψ Z.π PA.obj.hom jU)
-    (s : S) (hs : s ∉ U)
-    (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s)
-    :
+    (s : S) :
     letI : IsFinite PA.obj.hom := PA.property
     letI : QuasiCompact (c ⁻¹ᵁ U).ι :=
       MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)

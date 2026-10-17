@@ -256,9 +256,6 @@ theorem tilde_functorial
     {S : Type u} [CommRing S] (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]
     (M : Fin 3 → Type u) [∀ i, AddCommGroup (M i)] [∀ i, Module S (M i)]
     (𝓜 : ∀ i, ℤ → AddSubgroup (M i))
-    (h𝓜 : ∀ i, DirectSum.IsInternal (𝓜 i))
-    (hsmul : ∀ (i : Fin 3) (n : ℕ) (z : ℤ) (a : S) (y : M i),
-      a ∈ 𝒜 n → y ∈ 𝓜 i z → a • y ∈ 𝓜 i (n + z))
     (F : Fin 3 → (Proj 𝒜).Modules)
     (alpha : ∀ (i : Fin 3) (f : S), ∀ (d : ℕ), 0 < d → f ∈ 𝒜 d →
       (F i).val.obj (op (basicOpen 𝒜 f)) →+ LocalizedModule.Away f (M i))
@@ -282,10 +279,6 @@ theorem tilde_functorial
     (mu : ∀ (i : Fin 3) (x : Proj 𝒜),
       (RingedSpace.moduleStalkFunctor (Proj 𝒜).toRingedSpace x).obj (F i) →+
         LocalizedModule x.asHomogeneousIdeal.toIdeal.primeCompl (M i))
-    (hmu : ∀ (i : Fin 3) (x : Proj 𝒜), Function.Injective (mu i x) ∧
-      Set.range (mu i x) = degreeZeroFractions
-        (fun n : ℕ ↦ (𝒜 n : Set S)) (fun n : ℕ ↦ (𝓜 i n : Set (M i)))
-        x.asHomogeneousIdeal.toIdeal.primeCompl)
     (hgerm : ∀ (i : Fin 3) (x : Proj 𝒜) (f : S) (d : ℕ) (hd : 0 < d)
       (hf : f ∈ 𝒜 d) (hx : x ∈ basicOpen 𝒜 f) (m : ℕ) (y : M i)
       (s : (F i).val.obj (op (basicOpen 𝒜 f)))
@@ -319,9 +312,6 @@ theorem tilde_functorial
         mu j x ((RingedSpace.moduleStalkFunctor (Proj 𝒜).toRingedSpace x).map
           (lift i j phi hphi) s) = mk (phi y) h) := by
   classical
-  have _ := hmu
-  have _ := h𝓜
-  have _ := hsmul
   let P := fun (i j : Fin 3) (phi : M i →ₗ[S] M j) (chi : F i ⟶ F j) ↦
     ∀ (f : S) (d : ℕ) (hd : 0 < d) (hf : f ∈ 𝒜 d) (m : ℕ) (y : M i)
       (s : (F i).val.obj (op (basicOpen 𝒜 f))),

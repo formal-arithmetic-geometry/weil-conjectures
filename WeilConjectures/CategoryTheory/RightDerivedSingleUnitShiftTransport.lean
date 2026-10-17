@@ -28,7 +28,6 @@ variable {B : Type uB} [Category.{vB} B] [Abelian B] [EnoughInjectives B]
   [HasDerivedCategory B] [HasDerivedCategory C]
   (G : B ⥤ C) [G.Additive]
 
--- The original statement retains an unused GS let-binding.
 set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

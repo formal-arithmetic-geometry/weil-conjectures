@@ -64,7 +64,7 @@ theorem GaloisCover.stalk_normalization_formal_boundary_depths {S C : Scheme.{u}
     (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c]
     (G : Type (u + 1)) [Finite G]
     (U : S.Opens) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)
-    (s : S) (hs : s ∉ U)
+    (s : S)
     (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s)
     (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth
       (R := S.presheaf.stalk s) (S.presheaf.stalk s)) :
@@ -114,7 +114,7 @@ theorem GaloisCover.stalk_normalization_formal_boundary_depths {S C : Scheme.{u}
   have : IsLocallyNoetherian N := LocallyOfFiniteType.isLocallyNoetherian n
   have : IsLocallyNoetherian (pullback n t) :=
     LocallyOfFiniteType.isLocallyNoetherian (pullback.snd n t)
-  have hdim := stalk_normalization_boundary_dimension_two hS c U PA s hs hmin hdepth hn
+  have hdim := stalk_normalization_boundary_dimension_two hS c U PA s hmin hdepth hn
   have hnormal := stalk_normalization_normal_part hS c U PA s
   have hN : ∀ z : N, n z ∉ l ⁻¹ᵁ (c ⁻¹ᵁ U) →
       (2 : ℕ∞) ≤ IsLocalRing.depth (R := N.presheaf.stalk z) (N.presheaf.stalk z) := by

@@ -68,7 +68,7 @@ private theorem localized_comparison_unit (X : Scheme.{u}) (U : X.Opens)
           (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj (DerivedCategory.Q.obj I)),
       DerivedCategory.Q.map (schemeOpenModuleImageComplexUnit X U I) ≫ c.hom =
         adj.unit.app (DerivedCategory.Q.obj I) := by
-  obtain ⟨hD, _⟩ := open_derived_localization_adjunction.{u, w} X U
+  obtain ⟨hD⟩ := nonempty_hasDerivedCategory_openSubscheme.{u, w} X U
   let := hD
   let F : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ⥤
       SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) :=

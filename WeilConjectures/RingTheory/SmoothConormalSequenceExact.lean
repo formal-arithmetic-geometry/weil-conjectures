@@ -29,7 +29,7 @@ The extensions `ofSurjective` have conormal modules `I/I²` and `J/J²` with the
 The second map is `cotangentComplex`, sending a class of `b ∈ J` to `1 ⊗ db` in
 `C ⊗[B] Ω[B⁄A]`; tensor symmetry identifies this with `db ⊗ 1` in the node.
 
-Proof for stage 3:
+Proof:
 1. The structure map takes `I` into `J` and `I²` into `J²`, inducing the `C`-linear `u`.
    Leibniz makes `b ↦ db ⊗ 1` vanish on `J²` and descend to the `C`-linear `v`.
    The universal derivation vanishes on `A`, so `v ∘ u = 0`

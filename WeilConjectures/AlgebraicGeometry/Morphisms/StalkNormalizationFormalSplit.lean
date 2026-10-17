@@ -112,7 +112,7 @@ theorem GaloisCover.exists_stalk_normalization_formal_split {S C : Scheme.{u}}
   let : IsFinite (pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization
       (pullback.fst c (S.fromSpecStalk s))) := hn
   obtain ⟨hr, hp⟩ := GaloisCover.stalk_normalization_formal_boundary_depths
-    hS c G U PA s hs hmin hdepth hn d t ht hb
+    hS c G U PA s hmin hdepth hn d t ht hb
   obtain ⟨e, he⟩ := GaloisCover.exists_stalk_normalization_formal_punctured_split
     hS c σ hσ G q j hCη sη hsq hsj Z hZ U hηU jU PA ψ hjU hψ
     s hs hmin hdepth hn d t ht hb hz

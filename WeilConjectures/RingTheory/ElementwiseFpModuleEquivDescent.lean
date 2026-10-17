@@ -330,7 +330,6 @@ theorem exists_stage_equiv_of_elementwise_colimit
       letI : Algebra (A i) (A j) := (f i j hij).toAlgebra
       Nonempty (A j ⊗[A i] P ≃ₗ[A j] A j ⊗[A i] N) := by
   classical
-  -- Work over the inhabited upper tail, retaining the independent module universes.
   let R := A i
   let : AddCommGroup P := Module.addCommMonoidToAddCommGroup R
   let : AddCommGroup N := Module.addCommMonoidToAddCommGroup R

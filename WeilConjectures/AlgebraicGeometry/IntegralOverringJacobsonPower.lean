@@ -33,7 +33,7 @@ If `Spec(B') → Spec(A)` is surjective, then `A` is semilocal and
 positive power in `m_B A`.  This is the Jacobson-radical argument in
 Stacks, Varieties Lemma 09N2, proof of `lemma-semi-local-dimension-one-conductor`.
 
-Proof (following the DAG node):
+Proof (following the blueprint node):
 1. Injectivity and the scalar tower identify `B ⊆ A ⊆ B'`. Integrality of `B'`
    over `B` implies integrality of `A` over `B` and of `B'` over `A`
    (def-weil-pbc-integral-closure).

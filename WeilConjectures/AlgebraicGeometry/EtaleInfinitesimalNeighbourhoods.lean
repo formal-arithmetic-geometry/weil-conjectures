@@ -35,7 +35,7 @@ Given a finite type morphism between locally Noetherian schemes and a closed sub
 of the target, if every infinitesimal base change is étale, then the morphism is étale
 on an open neighbourhood of the inverse image of the closed subscheme.
 
-Proof (the six steps of the DAG node):
+Proof (the six steps of the blueprint node):
 1. Finite type gives local finite type (def-weil-finite-type-morphism), so the locally
    Noetherian target (pqf-def-locnoeth) allows the Artinian lifting criterion at every
    source point. Fix x over Z, and form the base changes with their two projections

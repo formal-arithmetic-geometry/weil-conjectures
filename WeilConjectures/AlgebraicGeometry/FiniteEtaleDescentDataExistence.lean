@@ -27,7 +27,7 @@ namespace AlgebraicGeometry
 /-- The pullback, transport, and morphism equations characterizing the canonical
 base-change functor. Source: Stacks Project, Descent, Tag 023V
 (blueprint: lem-galois-descent-data-existence). -/
-def finiteEtaleDescentCompatible {Y Y' : Scheme.{v}} {g : Y' ⟶ Y}
+def FiniteEtaleDescentCompatible {Y Y' : Scheme.{v}} {g : Y' ⟶ Y}
     (F : Y.FiniteEtale ⥤ AlgebraicGeometry.FiniteEtaleDescentData g)
     (q : ∀ P : Y.FiniteEtale, (F.obj P).obj.V.left ⟶ P.obj.left) : Prop :=
   (∀ P : Y.FiniteEtale,
@@ -95,7 +95,7 @@ first projections satisfy all the required equations. -/
 theorem finiteEtaleDescent_data {Y Y' : Scheme.{v}} (g : Y' ⟶ Y) :
     ∃ (F : Y.FiniteEtale ⥤ AlgebraicGeometry.FiniteEtaleDescentData g)
       (q : ∀ P : Y.FiniteEtale, (F.obj P).obj.V.left ⟶ P.obj.left),
-      finiteEtaleDescentCompatible F q := by
+      FiniteEtaleDescentCompatible F q := by
   let F : Y.FiniteEtale ⥤ AlgebraicGeometry.FiniteEtaleDescentData g :=
     { obj := pullbackDataObj g
       map := pullbackDataMap g

@@ -9,8 +9,10 @@ public import Mathlib.CategoryTheory.Adjunction.Restrict
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Compactification.Over
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Subcategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
 
 /-!
@@ -58,6 +60,9 @@ subcategory `Dᵇc(X)⟦Λ⟧` (`ObjectProperty.fullMonoidalSubcategory`,
 `ObjectProperty.fullMonoidalClosedSubcategory`), given by the instances
 `isMonoidal_boundedConstructible` and `isMonoidalClosed_boundedConstructible`; they are again
 compatible with the inclusions, the inclusion being strict monoidal (`ObjectProperty.monoidalι`).
+The restricted pullback `Lf^*` is strong monoidal, with the comparison isomorphisms of the
+strong monoidal derived pullback `ProEtale.CondensedRing.monoidal_leftDerivedUpperStar`
+(`monoidal_boundedConstructibleUpperStar`, by `ObjectProperty.monoidalLift`).
 
 The derived lower shriek is not a restriction: it is assembled on bounded constructible
 complexes out of the functors above. For a compactification `c = (X ⟶[i] Z ⟶[p] Y)` of `f`,
@@ -70,7 +75,10 @@ complexes out of the functors above. For a compactification `c = (X ⟶[i] Z ⟶
 
 The adjunctions `Lf^* ⊣ Rf_*` and `j_! ⊣ j^*` restrict along the fully faithful inclusions
 (`Adjunction.restrictFullyFaithful`), and so does the composition isomorphism
-`L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` (`boundedConstructibleUpperStarComp`). The adjunction
+`L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` (`boundedConstructibleUpperStarComp`). Its conjugates under these
+adjunctions are the composition isomorphisms `Rf_* ⋙ Rg_* ≅ R(f ≫ g)_*`
+(`boundedConstructibleLowerStarComp`) and `(j ≫ j')_! ≅ j_! ⋙ j'_!` for open immersions
+(`boundedConstructibleOpenImmersionLowerShriekComp`). The adjunction
 `- ⊗ᴸ - ⊣₂ RHom(-, -)` is the tensor-hom adjunction of the monoidal closed category
 `Dᵇc(X)⟦Λ⟧` (`boundedConstructibleTensorHomAdjunction₂`).
 
@@ -195,6 +203,30 @@ noncomputable def boundedConstructibleUpperStarLowerStarAdjunction :
     (boundedConstructibleUpperStarCompatibility Λ ℓ f).symm
     (boundedConstructibleLowerStarCompatibility Λ ℓ f).symm
 
+/-- The derived pullback `Lf^*` on bounded constructible complexes is a left adjoint, its right
+adjoint being `boundedConstructibleLowerStar`. -/
+instance isLeftAdjoint_boundedConstructibleUpperStar :
+    (boundedConstructibleUpperStar Λ ℓ f).IsLeftAdjoint :=
+  (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f).isLeftAdjoint
+
+/-- The derived pushforward `Rf_*` on bounded constructible complexes is a right adjoint, its
+left adjoint being `boundedConstructibleUpperStar`. -/
+instance isRightAdjoint_boundedConstructibleLowerStar :
+    (boundedConstructibleLowerStar Λ ℓ f).IsRightAdjoint :=
+  (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f).isRightAdjoint
+
+/-- The composition isomorphism `Rf_* ⋙ Rg_* ≅ R(f ≫ g)_*` on bounded constructible complexes:
+the conjugate of `boundedConstructibleUpperStarComp` under the adjunctions
+`L(f ≫ g)^* ⊣ R(f ≫ g)_*` and `Lg^* ⋙ Lf^* ⊣ Rf_* ⋙ Rg_*`. -/
+noncomputable def boundedConstructibleLowerStarComp {Z : Over (Spec (.of k))}
+    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] (g : Y ⟶ Z) :
+    boundedConstructibleLowerStar Λ ℓ f ⋙ boundedConstructibleLowerStar Λ ℓ g ≅
+      boundedConstructibleLowerStar Λ ℓ (f ≫ g) :=
+  (conjugateIsoEquiv (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (f ≫ g))
+    ((boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ g).comp
+      (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ f))
+    (boundedConstructibleUpperStarComp Λ ℓ f g).symm).symm
+
 end UpperLowerStar
 
 /-! ### The extension by zero along an open immersion -/
@@ -241,6 +273,33 @@ noncomputable def boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunctio
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
     (boundedConstructibleOpenImmersionLowerShriekCompatibility Λ ℓ j).symm
     (boundedConstructibleUpperStarCompatibility Λ ℓ j).symm
+
+/-- The extension by zero `j_!` on bounded constructible complexes is a left adjoint, its right
+adjoint being `boundedConstructibleUpperStar`. -/
+instance isLeftAdjoint_boundedConstructibleOpenImmersionLowerShriek :
+    (boundedConstructibleOpenImmersionLowerShriek Λ ℓ j).IsLeftAdjoint :=
+  (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j).isLeftAdjoint
+
+/-- The derived pullback `j^*` along an open immersion on bounded constructible complexes is a
+right adjoint, its left adjoint being `boundedConstructibleOpenImmersionLowerShriek`. -/
+instance isRightAdjoint_boundedConstructibleUpperStar_of_isOpenImmersion :
+    (boundedConstructibleUpperStar Λ ℓ j).IsRightAdjoint :=
+  (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j).isRightAdjoint
+
+/-- The composition isomorphism `(j ≫ j')_! ≅ j_! ⋙ j'_!` of the extensions by zero along open
+immersions on bounded constructible complexes: the conjugate of
+`boundedConstructibleUpperStarComp` under the adjunctions `(j ≫ j')_! ⊣ L(j ≫ j')^*` and
+`j_! ⋙ j'_! ⊣ Lj'^* ⋙ Lj^*`. -/
+noncomputable def boundedConstructibleOpenImmersionLowerShriekComp {V : Over (Spec (.of k))}
+    [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom] (j' : X ⟶ V)
+    [IsOpenImmersion j'.left] [IsOpenImmersion (j ≫ j').left] :
+    boundedConstructibleOpenImmersionLowerShriek Λ ℓ (j ≫ j') ≅
+      boundedConstructibleOpenImmersionLowerShriek Λ ℓ j ⋙
+        boundedConstructibleOpenImmersionLowerShriek Λ ℓ j' :=
+  ((conjugateIsoEquiv (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ (j ≫ j'))
+    ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j).comp
+      (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j'))).symm
+    (boundedConstructibleUpperStarComp Λ ℓ j j')).symm
 
 end OpenImmersion
 
@@ -387,5 +446,21 @@ noncomputable def boundedConstructibleTensorHomAdjunction (K : Dᵇc(X.left)⟦�
   (boundedConstructibleTensorHomAdjunction₂ Λ).adj K
 
 end TensorHom
+
+section MonoidalUpperStar
+
+variable {X Y : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  (f : X ⟶ Y)
+
+/-- The derived pullback `Lf^* : Dᵇc(Y)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` on bounded constructible complexes is
+strong monoidal, with the comparison isomorphisms of `L((f)^*⟦Λ⟧)`. -/
+noncomputable instance monoidal_boundedConstructibleUpperStar :
+    (boundedConstructibleUpperStar Λ ℓ f).Monoidal := by
+  unfold boundedConstructibleUpperStar
+  exact ObjectProperty.monoidalLift _ _
+
+end MonoidalUpperStar
 
 end AlgebraicGeometry.ProEtale.CondensedRing

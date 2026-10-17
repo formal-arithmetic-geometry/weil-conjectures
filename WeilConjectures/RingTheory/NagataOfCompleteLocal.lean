@@ -101,7 +101,7 @@ private theorem isN2_complete_local_domain (D : Type u) [CommRing D]
 Source: Stacks Project, Algebra, Tag 032W
 (blueprint: lem-weil-pbc-complete-local-nagata).
 
-Proof (the six steps of the DAG node):
+Proof (the six steps of the blueprint node):
 1. For each prime ideal `p`, the quotient `R / p` is a complete Noetherian local domain
    by `lem-weil-pbc-complete-local-quotient`. It suffices to prove such domains are N-2.
 2. By `lem-weil-pbc-complete-local-domain-finite-over-regular`, such a domain is finite

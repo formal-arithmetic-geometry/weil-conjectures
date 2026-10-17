@@ -29,7 +29,7 @@ namespace IsLocalRing
 maximal ideal is again Cohen–Macaulay, of dimension one less (Stacks, Tag 02JN)
 (blueprint: lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm).
 
-Proof, following the DAG's five steps:
+Proof, following the blueprint's five steps:
 1. Since `x` lies in the maximal ideal, its principal ideal is proper. The quotient is
 nonzero, Noetherian and local, with maximal ideal the image of the original maximal ideal.
 The dimension-quotient-nonzerodivisor lemma gives dimension plus one equal to `d`, hence

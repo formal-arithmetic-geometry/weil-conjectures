@@ -23,7 +23,9 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-private theorem koszul_term_free (A : Type u) [CommRing A] (r q : ℕ)
+/-- On any open of `Spec A`, the sheaf associated to an exterior power of `A^r` is free of
+finite rank: the wedge basis of the exterior power gives the free generators. -/
+theorem exists_tilde_exteriorPower_iso_free (A : Type u) [CommRing A] (r q : ℕ)
     (U : (Spec (.of A)).Opens) :
     ∃ m : ℕ, Nonempty
       ((SheafOfModules.overFunctor.{u} (moduleRings (Spec (.of A)).toRingedSpace) U).obj
@@ -43,7 +45,8 @@ private theorem koszul_term_free (A : Type u) [CommRing A] (r q : ℕ)
       tildeFinsupp (ULift.{u} (Fin (Fintype.card I)))) ≪≫
     (SheafOfModules.mapFreeIso F (ULift.{u} (Fin (Fintype.card I))) (Iso.refl _)).symm
 
-private theorem koszul_term_zero (A : Type u) [CommRing A] (r q : ℕ) (hq : r < q) :
+/-- The exterior power of degree `q` of `A^r` vanishes when `r < q`. -/
+theorem isZero_exteriorPower_finsupp_of_lt (A : Type u) [CommRing A] (r q : ℕ) (hq : r < q) :
     IsZero (ModuleCat.of A (⋀[A]^q (Fin r →₀ A))) := by
   classical
   let b := (Finsupp.basisSingleOne : Module.Basis (Fin r) A (Fin r →₀ A)).exteriorPower q
@@ -90,7 +93,7 @@ private theorem koszul_strictly_perfect (A : Type u) [CommRing A] (r : ℕ)
     · exact hpos n hp
     · obtain ⟨q, hq⟩ := hneg n (by omega)
       have hrq : r < q := by omega
-      exact (F.map_isZero (T.map_isZero (koszul_term_zero A r q hrq))).of_iso
+      exact (F.map_isZero (T.map_isZero (isZero_exteriorPower_finsupp_of_lt A r q hrq))).of_iso
         (F.mapIso (T.mapIso (L.extendXIso ComplexShape.embeddingDownNat hq)))
   · intro n
     change ∃ m : ℕ, ∃ (ι : F.obj (T.obj
@@ -100,7 +103,7 @@ private theorem koszul_strictly_perfect (A : Type u) [CommRing A] (r : ℕ)
     by_cases hp : 0 < n
     · exact ⟨0, 0, 0, (hpos n hp).eq_of_src _ _⟩
     · obtain ⟨q, hq⟩ := hneg n (by omega)
-      obtain ⟨m, ⟨e⟩⟩ := koszul_term_free A r q U
+      obtain ⟨m, ⟨e⟩⟩ := exists_tilde_exteriorPower_iso_free A r q U
       let e' := F.mapIso (T.mapIso (L.extendXIso ComplexShape.embeddingDownNat hq)) ≪≫ e
       exact ⟨m, e'.hom, e'.inv, e'.hom_inv_id⟩
 

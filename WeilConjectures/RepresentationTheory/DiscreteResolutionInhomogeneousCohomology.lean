@@ -13,10 +13,10 @@ public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.Topology.LocallyConstant.Algebra
 public import Mathlib.Data.Fin.Tuple.Basic
 public import Mathlib.Topology.Connected.TotallyDisconnected
-import WeilConjectures.RepresentationTheory.DiscreteIntegerInvariantsInfrastructure
-import WeilConjectures.RepresentationTheory.LocallyConstantCochainsEffaceable
-import WeilConjectures.CategoryTheory.EffaceableDeltaFunctorUniversal
-import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
+public import WeilConjectures.RepresentationTheory.DiscreteIntegerInvariantsInfrastructure
+public import WeilConjectures.RepresentationTheory.LocallyConstantCochainsEffaceable
+public import WeilConjectures.CategoryTheory.EffaceableDeltaFunctorUniversal
+public import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
 
 /-!
 # Injective resolutions and locally constant inhomogeneous cochains
@@ -34,13 +34,16 @@ open CategoryTheory
 
 namespace Rep
 
-private theorem universalDeltaFunctor_iso_all
+/-- The isomorphism in degree `q` between two universal cohomological delta-functors induced by
+an isomorphism of their degree-zero parts. -/
+noncomputable def _root_.CategoryTheory.CohomologicalDeltaFunctor.isoOfIsUniversal
     {C D : Type*} [Category C] [Abelian C] [Category D] [Abelian D]
     (T R : CohomologicalDeltaFunctor C D) (hT : T.IsUniversal) (hR : R.IsUniversal)
-    (e : T.F 0 ≅ R.F 0) : ∀ q : ℕ, Nonempty (T.F q ≅ R.F q) := by
-  intro q
-  obtain ⟨α, hα, _⟩ := hT R e.hom
-  obtain ⟨β, hβ, _⟩ := hR T e.inv
+    (e : T.F 0 ≅ R.F 0) (q : ℕ) : T.F q ≅ R.F q := by
+  let α := (hT R e.hom).exists.choose
+  let β := (hR T e.inv).exists.choose
+  have hα : α.app 0 = e.hom := (hT R e.hom).exists.choose_spec
+  have hβ : β.app 0 = e.inv := (hR T e.inv).exists.choose_spec
   let idT : CohomologicalDeltaFunctor.Hom T T :=
     ⟨fun n ↦ 𝟙 (T.F n), by intros; simp⟩
   let idR : CohomologicalDeltaFunctor.Hom R R :=
@@ -65,12 +68,20 @@ private theorem universalDeltaFunctor_iso_all
   have hβα : βα = idR := (hR R (𝟙 (R.F 0))).unique
     (by change β.app 0 ≫ α.app 0 = _; rw [hβ, hα]; exact e.inv_hom_id)
     rfl
-  refine ⟨⟨α.app q, β.app q, ?_, ?_⟩⟩
+  refine ⟨α.app q, β.app q, ?_, ?_⟩
   · exact congrArg (fun f : CohomologicalDeltaFunctor.Hom T T ↦ f.app q) hαβ
   · exact congrArg (fun f : CohomologicalDeltaFunctor.Hom R R ↦ f.app q) hβα
 
-/-- Any complex with the locally constant inhomogeneous terms and differential computes
-invariants of an injective resolution transported through an abelian equivalence.
+@[simp]
+theorem _root_.CategoryTheory.CohomologicalDeltaFunctor.isoOfIsUniversal_hom_zero
+    {C D : Type*} [Category C] [Abelian C] [Category D] [Abelian D]
+    (T R : CohomologicalDeltaFunctor C D) (hT : T.IsUniversal) (hR : R.IsUniversal)
+    (e : T.F 0 ≅ R.F 0) : (T.isoOfIsUniversal R hT hR e 0).hom = e.hom :=
+  (hT R e.hom).exists.choose_spec
+
+/-- Additive equivalence between the homology of the invariants of an injective resolution
+transported through an abelian equivalence and the homology of any complex with the locally
+constant inhomogeneous terms and differential.
 
 Source: Stacks Project, Etale Cohomology, Tag 0DVG,
 section-continuous-group-cohomology, final profinite comparison.
@@ -107,7 +118,7 @@ category, using the comparison theorem and its homotopy uniqueness. Finally t id
 K termwise with the constructed complex. The differential equation gives a complex
 isomorphism; transport homology along it. This proof uses arbitrary integer modules,
 not a finite scalar ring. In degree zero there are no incoming boundaries. -/
-theorem nonempty_equiv_invariantResolution_inhomogeneous
+noncomputable def invariantResolutionHomologyAddEquivInhomogeneous
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
     (A : Type v) [Category.{w} A] [Abelian A]
@@ -123,25 +134,40 @@ theorem nonempty_equiv_invariantResolution_inhomogeneous
           ∑ k : Fin (n + 1),
             (-1 : ℤ) ^ (k.val + 1) • t n x (Fin.contractNth k (· * ·) g))
     (q : ℕ) :
-    Nonempty (((((E.functor ⋙ ObjectProperty.ι _ ⋙ Rep.invariantsFunctor ℤ G ⋙
+    ((((E.functor ⋙ ObjectProperty.ι _ ⋙ Rep.invariantsFunctor ℤ G ⋙
       forget₂ (ModuleCat.{max u s} ℤ) AddCommGrpCat).mapHomologicalComplex
-        (ComplexShape.up ℕ)).obj I.cocomplex).homology q) ≃ K.homology q) := by
+        (ComplexShape.up ℕ)).obj I.cocomplex).homology q) ≃+ K.homology q := by
   classical
   let V := E.functor ⋙ ObjectProperty.ι _ ⋙ Rep.invariantsFunctor ℤ G ⋙
     forget₂ (ModuleCat.{max u s} ℤ) AddCommGrpCat
-  obtain ⟨hI, hV⟩ := discreteInteger_invariants_infrastructure G A E
-  let : EnoughInjectives A := hI
-  let : CategoryTheory.Limits.PreservesFiniteLimits V := hV
-  obtain ⟨C, e, _hmap, hd, T, hTF, ⟨hTzero⟩, heff⟩ :=
-    exists_locallyConstantCochains_effaceable G A E
+  have hinfra := discreteInteger_invariants_infrastructure G A E
+  letI : EnoughInjectives A := hinfra.1
+  letI : CategoryTheory.Limits.PreservesFiniteLimits V := hinfra.2
+  have hC := exists_locallyConstantCochains_effaceable G A E
+  have hC₁ := hC.choose_spec
+  set C := hC.choose
+  clear_value C
+  have hC₂ := hC₁.choose_spec
+  set e := hC₁.choose
+  clear_value e
+  obtain ⟨-, hd, hT'⟩ := hC₂
+  have hT₁ := hT'.choose_spec
+  set T := hT'.choose
+  clear_value T
+  obtain ⟨hTF, hTzero, heff⟩ := hT₁
+  let hTzero := Classical.choice hTzero
   have hT : T.IsUniversal := effaceable_deltaFunctor_isUniversal T heff
-  obtain ⟨R, hRF, hR, ⟨hRzero⟩⟩ := V.exists_universal_rightDerived_deltaFunctor
-  have hRzero' : R.F 0 ≅ V := by
-    rw [hRF]
-    exact hRzero
-  obtain ⟨comparison⟩ := universalDeltaFunctor_iso_all R T hR hT
-    (hRzero' ≪≫ hTzero.symm) q
-  rw [hRF, hTF] at comparison
+  have hR' := V.exists_universal_rightDerived_deltaFunctor
+  have hR₁ := hR'.choose_spec
+  set R := hR'.choose
+  clear_value R
+  obtain ⟨hRF, hR, hRzero⟩ := hR₁
+  let hRzero' : R.F 0 ≅ V := eqToIso (congrFun hRF 0) ≪≫ Classical.choice hRzero
+  let comparison : V.rightDerived q ≅ C ⋙ HomologicalComplex.homologyFunctor
+      AddCommGrpCat.{max u s} (ComplexShape.up ℕ) q :=
+    eqToIso (congrFun hRF q).symm ≪≫
+      CohomologicalDeltaFunctor.isoOfIsUniversal R T hR hT (hRzero' ≪≫ hTzero.symm) q ≪≫
+        eqToIso (congrFun hTF q)
   let coord : ∀ n : ℕ, (C.obj F).X n ≅ K.X n :=
     fun n ↦ ((e F n).trans (t n).symm).toAddCommGrpIso
   have hcoord : ∀ (n : ℕ) (x : (C.obj F).X n),
@@ -165,6 +191,6 @@ theorem nonempty_equiv_invariantResolution_inhomogeneous
       ≅ K.homology q :=
     (I.isoRightDerivedObj V q).symm ≪≫ comparison.app F ≪≫
       (HomologicalComplex.homologyFunctor AddCommGrpCat (ComplexShape.up ℕ) q).mapIso iso
-  exact ⟨h.addCommGroupIsoToAddEquiv.toEquiv⟩
+  exact h.addCommGroupIsoToAddEquiv
 
 end Rep

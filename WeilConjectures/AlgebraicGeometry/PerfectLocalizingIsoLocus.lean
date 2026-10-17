@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.PerfectLocalizingClosure
 
 /-! Application of shift-saturated invertibility to the existing definition of
 perfectLocalizingClosure. The proofs of perfect_iso and perfect_shift are
-extracted from the private helpers of PerfectTwoOutOfThree (SHEAF group G1).
+extracted from the private helpers of PerfectTwoOutOfThree.
 All other clauses are naturality, coproduct preservation, and the five-term
 cone argument from Sheaf.CategoryTheory.ShiftSaturatedIsoLocus.
 Source: the defining infimum of perfectLocalizingClosure (Stacks Tag 09IS)

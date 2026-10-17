@@ -20,6 +20,9 @@ universe u w
 open CategoryTheory
 namespace Rep
 
+attribute [local instance] AlgebraicGeometry.etaleFieldDiscreteForget₂
+  AlgebraicGeometry.etaleFieldActionForget₂
+
 open scoped CategoryTheory.MonObj
 open CartesianMonoidalCategory
 

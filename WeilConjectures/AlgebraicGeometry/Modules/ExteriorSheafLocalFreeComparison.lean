@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
@@ -129,13 +129,13 @@ private theorem frameExteriorBasis_natural (X : Scheme.{u}) (M : X.Modules)
     (n : ℕ) (U : X.Opens) (r : ℕ)
     (e : M.over U ≅ SheafOfModules.free (ULift.{u} (Fin r)))
     {W Z : (Over U)ᵒᵖ} (f : W ⟶ Z) (s : Set.powersetCard (Fin r) n) :
-    exteriorSheafRestriction M n ((Over.forget U).op.map f)
+    ((_root_.PresheafOfModules.exteriorPower (R := _) M.val n).map ((Over.forget U).op.map f))
         ((frameBasis X M U r e W).exteriorPower n s) =
       (frameBasis X M U r e Z).exteriorPower n s := by
   rw [exteriorPower.basis_apply, exteriorPower.basis_apply]
   unfold exteriorPower.ιMulti_family
-  refine ((Classical.choose_spec
-    (exteriorSheafRestriction_existsUnique M n ((Over.forget U).op.map f))).1 _).trans ?_
+  refine ((_root_.PresheafOfModules.exteriorPower_map_ιMulti (R := _) M.val n
+    ((Over.forget U).op.map f)) _).trans ?_
   apply congrArg (exteriorPower.ιMulti (X.presheaf.obj (op Z.unop.left)) n
     (M := M.val.obj (op Z.unop.left)))
   funext i
@@ -147,7 +147,7 @@ private theorem exteriorPresheaf_local_coordinates (X : Scheme.{u}) (M : X.Modul
     (e : M.over U ≅ SheafOfModules.free (ULift.{u} (Fin r))) :
     Nonempty
       (((PresheafOfModules.pushforward₀ (Over.forget U) X.ringCatSheaf.obj).obj
-        (exteriorSheafPresheaf M n)) ≅
+        (_root_.PresheafOfModules.exteriorPower (R := _) M.val n)) ≅
         (SheafOfModules.free (R := X.ringCatSheaf.over U)
           (ULift.{u} (Set.powersetCard (Fin r) n))).val) := by
   classical
@@ -163,7 +163,7 @@ private theorem exteriorPresheaf_local_coordinates (X : Scheme.{u}) (M : X.Modul
     ((frameBasis X M U r e Z).exteriorPower n).equiv
         (freeSectionsBasis X U (ULift.{u} (Set.powersetCard (Fin r) n)) Z)
         Equiv.ulift.symm
-        (exteriorSheafRestriction M n ((Over.forget U).op.map f)
+        (((_root_.PresheafOfModules.exteriorPower (R := _) M.val n).map ((Over.forget U).op.map f))
           ((frameBasis X M U r e W).exteriorPower n s)) =
       (SheafOfModules.free (R := X.ringCatSheaf.over U)
         (ULift.{u} (Set.powersetCard (Fin r) n))).val.map f
@@ -225,16 +225,16 @@ is nonzero is used, so empty opens and zero rings are also covered. -/
 theorem exteriorSheaf_local_free_comparison (X : Scheme.{u}) (M : X.Modules)
     (n : ℕ) (U : X.Opens) (r : ℕ)
     (e : M.over U ≅ SheafOfModules.free (ULift.{u} (Fin r))) :
-    Nonempty ((exteriorSheaf M n).over U ≅
+    Nonempty ((exteriorPower M n).over U ≅
       SheafOfModules.free (ULift.{u} (Set.powersetCard (Fin r) n))) ∧
     ∀ (V : X.Opens) (g : V ⟶ U),
       Function.Bijective
         (((PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).unit.app
-          (exteriorSheafPresheaf M n)).app (op V)) := by
+          (_root_.PresheafOfModules.exteriorPower (R := _) M.val n)).app (op V)) := by
   obtain ⟨c⟩ := exteriorPresheaf_local_coordinates X M n U r e
   let T := PresheafOfModules.pushforward₀ (Over.forget U) X.ringCatSheaf.obj
   let η := (PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).unit.app
-    (exteriorSheafPresheaf M n)
+    (_root_.PresheafOfModules.exteriorPower (R := _) M.val n)
   have : IsIso (T.map η) := local_unit_isIso X _ U _ c
   constructor
   · exact ⟨(SheafOfModules.fullyFaithfulForget _).preimageIso

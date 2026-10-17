@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafRestrictIso
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
@@ -53,8 +53,8 @@ For empty X every sheaf involved is zero, and the same identification holds. -/
 theorem exteriorSheaf_fullOpen_pushforward_iso {X : Scheme.{u}} (M : X.Modules)
     (d : ℕ) :
     Nonempty ((pushforward (⊤ : X.Opens).ι).obj
-      (exteriorSheaf ((restrictFunctor (⊤ : X.Opens).ι).obj M) d) ≅
-        exteriorSheaf M d) := by
+      (exteriorPower ((restrictFunctor (⊤ : X.Opens).ι).obj M) d) ≅
+        exteriorPower M d) := by
   have : IsIso (⊤ : X.Opens).ι := inferInstanceAs (IsIso X.topIso.hom)
   obtain ⟨e⟩ := exteriorSheaf_restrict_iso M d (⊤ : X.Opens)
   exact ⟨(pushforward (⊤ : X.Opens).ι).mapIso

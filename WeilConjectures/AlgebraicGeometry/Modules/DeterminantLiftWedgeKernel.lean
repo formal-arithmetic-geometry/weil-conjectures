@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
@@ -52,23 +52,23 @@ and `S.g` an isomorphism, with the same conclusion. -/
 theorem determinant_liftWedge_kernel_exists {X : Scheme.{v}} (S : ShortComplex X.Modules)
     (hS : S.ShortExact) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)
     [S.X₁.IsFiniteLocallyFreeOfRank r₁]
-    (q : exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₂ r₃ ⟶
-      exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃)
+    (q : exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₂ r₃ ⟶
+      exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₃ r₃)
     (hq : ∀ (U : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op U))
       (c : Fin r₃ → S.X₂.val.obj (op U)),
       q.val.app (op U)
-          (tmulSection (exteriorSheafSection S.X₁ r₁ U a)
-            (exteriorSheafSection S.X₂ r₃ U c)) =
-        tmulSection (M := exteriorSheaf S.X₁ r₁) (N := exteriorSheaf S.X₃ r₃)
-          (exteriorSheafSection S.X₁ r₁ U a)
-          (exteriorSheafSection S.X₃ r₃ U (fun i ↦ S.g.val.app (op U) (c i)))) :
-    ∃ w : exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₂ r₃ ⟶ exteriorSheaf S.X₂ r₂,
+          (tmulSection (wedge (M := S.X₁) (r := r₁) (U := U) a)
+            (wedge (M := S.X₂) (r := r₃) (U := U) c)) =
+        tmulSection (M := exteriorPower S.X₁ r₁) (N := exteriorPower S.X₃ r₃)
+          (wedge (M := S.X₁) (r := r₁) (U := U) a)
+          (wedge (M := S.X₃) (r := r₃) (U := U) (fun i ↦ S.g.val.app (op U) (c i)))) :
+    ∃ w : exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₂ r₃ ⟶ exteriorPower S.X₂ r₂,
       kernel.ι q ≫ w = 0 ∧ ∀ (U : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op U))
         (c : Fin r₃ → S.X₂.val.obj (op U)),
         w.val.app (op U)
-            (tmulSection (exteriorSheafSection S.X₁ r₁ U a)
-              (exteriorSheafSection S.X₂ r₃ U c)) =
-          exteriorSheafSection S.X₂ r₂ U
+            (tmulSection (wedge (M := S.X₁) (r := r₁) (U := U) a)
+              (wedge (M := S.X₂) (r := r₃) (U := U) c)) =
+          wedge (M := S.X₂) (r := r₂) (U := U)
             (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i)) := by
   obtain ⟨w, hw⟩ := exteriorSheaf_wedgeMap_exists S.f r₁ r₃ r₂ hr
   obtain ⟨φ, hφ⟩ := determinant_wedge_quotient_factor S hS r₁ r₂ r₃ hr q w hq hw

@@ -7,7 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
-import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageLargeFilteredColimit
+import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageLargeColimit
 import Mathlib.Algebra.Colimit.Finiteness
 import Mathlib.Algebra.Category.ModuleCat.Limits
 import Mathlib.GroupTheory.FiniteAbelian.Basic

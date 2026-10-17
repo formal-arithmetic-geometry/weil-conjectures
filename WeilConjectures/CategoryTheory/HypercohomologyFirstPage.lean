@@ -33,7 +33,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.Functor
 
--- The first spectral sequence uses the term resolutions; retain the CE hypotheses in its API.
 set_option linter.unusedVariables false in
 /-- The second-degree filtration of a Cartan--Eilenberg total complex gives the first
 hypercohomology spectral sequence, with its induced differential and derived abutment.

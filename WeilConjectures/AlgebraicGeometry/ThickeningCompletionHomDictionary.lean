@@ -52,8 +52,7 @@ Proof:
    centrally on maps between its values: conjugate its component on j_{n,*}M by the
    counit to get a natural automorphism of M, and use the unit to identify this with
    its component on j_n^*F. Hence c_n(c'_n)^{-1} commutes with
-   every v_n. Cancel it to identify the two compatibility equations. The canonical
-   comparison prescribed by hc is in particular a natural comparison of this kind.
+   every v_n. Cancel it to identify the two compatibility equations.
 5. These componentwise operations are inverse bijections, since each r_n is invertible
    and Φ is fully faithful. Naturality of ρ and r_n sends the completion of w to the
    componentwise pullback of w, giving the displayed equation. Empty schemes, zero
@@ -76,9 +75,6 @@ theorem thickeningSystems_completion_hom_equiv
       (Ideal.Quotient.mk (I ^ (n + 1 + 1)))))) ⋙ Scheme.Modules.tensorPullback (i n) ≅
       Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom
       (Ideal.Quotient.mk (I ^ (n + 1)))))))
-    (hc : ∀ n : ℕ, c n = (Classical.choice (Scheme.Modules.nonempty_tensorPullbackComp (i n)
-      (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 +
-      1)))))))).symm ≪≫ eqToIso (congrArg Scheme.Modules.tensorPullback (hi n)))
     (F G : X.Modules)
     (hF : RingedSpace.IsCoherent X.toRingedSpace F)
     (hG : RingedSpace.IsCoherent X.toRingedSpace G) :
@@ -100,7 +96,6 @@ theorem thickeningSystems_completion_hom_equiv
             (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))).map w,
             fun n ↦ ((c n).hom.naturality w).symm⟩ := by
   classical
-  have _ := hc
   let K := ((Scheme.IdealSheafData.ofIdealTop
     (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f)
   let ai := fun n ↦ Classical.choice (Scheme.Modules.nonempty_tensorPullbackAdjunction (i n))

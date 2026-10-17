@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
@@ -54,9 +54,9 @@ private noncomputable def topBasis
 private theorem topBasis_apply
     {R M : Type*} [CommRing R] [AddCommGroup M] [Module R M]
     (n : ℕ) (b : Module.Basis (Fin n) R M) (i : Unit) :
-    topBasis n b i = exteriorPower.ιMulti R n b := by
-  rw [topBasis, Module.Basis.reindex_apply, exteriorPower.basis_apply]
-  unfold exteriorPower.ιMulti_family
+    topBasis n b i = _root_.exteriorPower.ιMulti R n b := by
+  rw [topBasis, Module.Basis.reindex_apply, _root_.exteriorPower.basis_apply]
+  unfold _root_.exteriorPower.ιMulti_family
   congr 1
   funext j
   exact congrArg b
@@ -71,8 +71,8 @@ private theorem split_wedge_bijective
     (hf : ∀ x, e (f x) = (x, 0)) (hg : ∀ x, (e x).2 = g x)
     (l : C → B) (hl : ∀ x, g (l x) = x)
     (d : ((⋀[R]^r A) ⊗[R] (⋀[R]^s C)) →ₗ[R] ⋀[R]^(r + s) B)
-    (hd : ∀ x y, d (exteriorPower.ιMulti R r x ⊗ₜ[R] exteriorPower.ιMulti R s y) =
-      exteriorPower.ιMulti R (r + s) (Fin.append (fun i ↦ f (x i)) (fun j ↦ l (y j)))) :
+    (hd : ∀ x y, d (_root_.exteriorPower.ιMulti R r x ⊗ₜ[R] _root_.exteriorPower.ιMulti R s y) =
+      _root_.exteriorPower.ιMulti R (r + s) (Fin.append (fun i ↦ f (x i)) (fun j ↦ l (y j)))) :
     Function.Bijective d := by
   classical
   -- Only basis vectors need lifts; their linear extension gives a new splitting.
@@ -158,13 +158,13 @@ theorem determinant_split_linear_maps_locally_bijective {X : Scheme.{v}}
     (l : ∀ (W : X.Opens), W ≤ U → S.X₃.val.obj (op W) → S.X₂.val.obj (op W))
     (hl : ∀ W hW b, S.g.val.app (op W) (l W hW b) = b)
     (d : ∀ (W : X.Opens), W ≤ U →
-      (exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.obj (op W)
-        →ₗ[X.presheaf.obj (op W)] (exteriorSheaf S.X₂ r₂).val.obj (op W))
+      (exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₃ r₃).val.obj (op W)
+        →ₗ[X.presheaf.obj (op W)] (exteriorPower S.X₂ r₂).val.obj (op W))
     (hd : ∀ W hW (a : Fin r₁ → S.X₁.val.obj (op W))
         (b : Fin r₃ → S.X₃.val.obj (op W)),
-        d W hW (tmulSection (exteriorSheafSection S.X₁ r₁ W a)
-          (exteriorSheafSection S.X₃ r₃ W b)) =
-        exteriorSheafSection S.X₂ r₂ W
+        d W hW (tmulSection (wedge (M := S.X₁) (r := r₁) (U := W) a)
+          (wedge (M := S.X₃) (r := r₃) (U := W) b)) =
+        wedge (M := S.X₂) (r := r₂) (U := W)
           (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op W) (a j))
             (fun j ↦ l W hW (b j)) (Fin.cast hr i))) :
     ∀ x ∈ U, ∃ (V : X.Opens) (hVU : V ≤ U), x ∈ V ∧
@@ -177,36 +177,36 @@ theorem determinant_split_linear_maps_locally_bijective {X : Scheme.{v}}
   obtain ⟨a, c, eW, hfW, hgW, hqB, hqT⟩ := hV W hW
   let qB := (((PresheafOfModules.sheafificationAdjunction
     (𝟙 X.ringCatSheaf.obj)).unit.app
-    (exteriorSheafPresheaf S.X₂ (r₁ + r₃))).app (op W)).hom
+    ((S.X₂.val.exteriorPower (R := X.presheaf) (r₁ + r₃)))).app (op W)).hom
   let qA := (((PresheafOfModules.sheafificationAdjunction
-    (𝟙 X.ringCatSheaf.obj)).unit.app (exteriorSheafPresheaf S.X₁ r₁)).app (op W)).hom
+    (𝟙 X.ringCatSheaf.obj)).unit.app (S.X₁.val.exteriorPower (R := X.presheaf) r₁)).app (op W)).hom
   let qC := (((PresheafOfModules.sheafificationAdjunction
-    (𝟙 X.ringCatSheaf.obj)).unit.app (exteriorSheafPresheaf S.X₃ r₃)).app (op W)).hom
-  let qT := (tensorSectionsMap (exteriorSheaf S.X₁ r₁) (exteriorSheaf S.X₃ r₃) W).comp
+    (𝟙 X.ringCatSheaf.obj)).unit.app (S.X₃.val.exteriorPower (R := X.presheaf) r₃)).app (op W)).hom
+  let qT := (tensorSectionsMap (exteriorPower S.X₁ r₁) (exteriorPower S.X₃ r₃) W).comp
     (TensorProduct.map (R := X.presheaf.obj (op W))
       (R₂ := X.presheaf.obj (op W)) (σ₁₂ := RingHom.id _) qA qC)
   let b := LinearEquiv.ofBijective qB hqB
   let d' := b.symm.toLinearMap.comp ((d W (hW.trans hVU)).comp qT)
   have hd' : ∀ z t,
-      d' (exteriorPower.ιMulti (X.presheaf.obj (op W)) r₁ z ⊗ₜ[
-        X.presheaf.obj (op W)] exteriorPower.ιMulti (X.presheaf.obj (op W)) r₃ t) =
-      exteriorPower.ιMulti (X.presheaf.obj (op W)) (r₁ + r₃)
+      d' (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) r₁ z ⊗ₜ[
+        X.presheaf.obj (op W)] _root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) r₃ t) =
+      _root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) (r₁ + r₃)
         (Fin.append (fun i ↦ S.f.val.app (op W) (z i))
           (fun j ↦ l W (hW.trans hVU) (t j))) := by
     intro z t
     apply b.injective
     change b (b.symm (d W (hW.trans hVU)
-      (qT (exteriorPower.ιMulti (X.presheaf.obj (op W)) r₁ z ⊗ₜ[
-        X.presheaf.obj (op W)] exteriorPower.ιMulti (X.presheaf.obj (op W)) r₃ t)))) = _
+      (qT (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) r₁ z ⊗ₜ[
+        X.presheaf.obj (op W)] _root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) r₃ t)))) = _
     rw [LinearEquiv.apply_symm_apply]
     change d W (hW.trans hVU)
-      (qT (exteriorPower.ιMulti (X.presheaf.obj (op W)) r₁ z ⊗ₜ[
-        X.presheaf.obj (op W)] exteriorPower.ιMulti (X.presheaf.obj (op W)) r₃ t)) = _
+      (qT (_root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) r₁ z ⊗ₜ[
+        X.presheaf.obj (op W)] _root_.exteriorPower.ιMulti (X.presheaf.obj (op W)) r₃ t)) = _
     simp only [qT, LinearMap.comp_apply, TensorProduct.map_tmul, tensorSectionsMap_tmul]
     change d W (hW.trans hVU)
-      (tmulSection (exteriorSheafSection S.X₁ r₁ W z)
-        (exteriorSheafSection S.X₃ r₃ W t)) =
-      exteriorSheafSection S.X₂ (r₁ + r₃) W
+      (tmulSection (wedge (M := S.X₁) (r := r₁) (U := W) z)
+        (wedge (M := S.X₃) (r := r₃) (U := W) t)) =
+      wedge (M := S.X₂) (r := (r₁ + r₃)) (U := W)
         (Fin.append (fun i ↦ S.f.val.app (op W) (z i))
           (fun j ↦ l W (hW.trans hVU) (t j)))
     simpa only [Fin.cast_refl, id_eq] using hd W (hW.trans hVU) z t

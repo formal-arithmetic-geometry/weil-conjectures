@@ -127,7 +127,7 @@ theorem serreSectionModuleChartRestriction
         (y : 𝓜 z) (hay : a • (y : M) ∈ 𝓜 (z + e)),
         φ (z + e) hze ⟨a • (y : M), hay⟩ =
           Scheme.Modules.Hom.app (G ◁ Proj.twistMul z ha) ⊤ (φ z hz y))
-    (f g : MvPolynomial (Fin 2) k) (d b : ℕ) (hd : 0 < d) (hb : 0 < b)
+    (f g : MvPolynomial (Fin 2) k) (d b : ℕ)
     (hf : f ∈ homogeneousSubmodule (Fin 2) k d)
     (hg : g ∈ homogeneousSubmodule (Fin 2) k b)
     (alphaF : G.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f)) →+
@@ -157,16 +157,13 @@ theorem serreSectionModuleChartRestriction
     (inc : basicOpen (homogeneousSubmodule (Fin 2) k) g ≤
       basicOpen (homogeneousSubmodule (Fin 2) k) f)
     (e c : ℕ) (a : MvPolynomial (Fin 2) k)
-    (he : 0 < e) (ha : a ∈ homogeneousSubmodule (Fin 2) k c) (hrel : g ^ e = a * f)
+    (ha : a ∈ homogeneousSubmodule (Fin 2) k c) (hrel : g ^ e = a * f)
     (m : ℕ) (y : 𝓜 (0 + ((m • d : ℕ) : ℤ)))
     (s : G.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f)))
     (hs : alphaF s = mk (y : M) (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f)) :
     alphaG (G.val.map (homOfLE inc).op s) =
       mk (a ^ m • (y : M)) (⟨g ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g) := by
   classical
-  have _ := hd
-  have _ := hb
-  have _ := he
   by_cases hg0 : g = 0
   · subst g
     let : Subsingleton (LocalizedModule.Away (0 : MvPolynomial (Fin 2) k) M) :=

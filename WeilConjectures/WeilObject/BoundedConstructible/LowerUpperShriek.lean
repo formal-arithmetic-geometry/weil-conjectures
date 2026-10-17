@@ -20,6 +20,10 @@ compatible with `f`, that is `e_X ≫ f = f ≫ e_Y` (`hf`), and write `Φ_X = L
 (`WeilConjectures.WeilObject.BoundedConstructible.Defs`). As in
 `WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar`, a functor `G` with a commutation
 isomorphism `b_G` transports Weil objects by `CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIso`.
+The Weil objects here are those for the automorphisms, `WeilBoundedConstructible ℓ e_X.hom`. For a
+Frobenius endomorphism, which is not an isomorphism and whose Frobenius square is not cartesian,
+the lower shriek of Weil objects is `ProEtale.CondensedRing.weilLowerShriekOfFrobenius` of
+`WeilConjectures.TraceFormula.CompactCohomology`.
 This file supplies `b_G` for the lower shriek `Rf_!` and the upper shriek `Rf^!` attached to the
 chosen compactification of `f` (`ProEtale.CondensedRing.boundedConstructibleLowerShriek` and
 `ProEtale.CondensedRing.boundedConstructibleUpperShriek`).
@@ -130,16 +134,16 @@ lemma weilLowerShriekComparison_hom :
 `Rf_! K` with the structure isomorphism `Φ_Y Rf_! K ≅ Rf_! Φ_X K ≅ Rf_! K` given by
 `weilLowerShriekComparison` and `Rf_! φ_K`. -/
 noncomputable def weilLowerShriek :
-    WeilBoundedConstructible ℓ eX ⥤ WeilBoundedConstructible ℓ eY :=
+    WeilBoundedConstructible ℓ eX.hom ⥤ WeilBoundedConstructible ℓ eY.hom :=
   IsoAlgebra.mapOfNatIso (weilLowerShriekComparison ℓ eX eY hf)
 
 @[simp]
-lemma weilLowerShriek_obj_carrier (K : WeilBoundedConstructible ℓ eX) :
+lemma weilLowerShriek_obj_carrier (K : WeilBoundedConstructible ℓ eX.hom) :
     ((weilLowerShriek ℓ eX eY hf).obj K).carrier =
       (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K.carrier :=
   rfl
 
-lemma weilLowerShriek_obj_str (K : WeilBoundedConstructible ℓ eX) :
+lemma weilLowerShriek_obj_str (K : WeilBoundedConstructible ℓ eX.hom) :
     ((weilLowerShriek ℓ eX eY hf).obj K).str =
       (weilLowerShriekComparison ℓ eX eY hf).app K.carrier ≪≫
         (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).mapIso K.str :=
@@ -148,8 +152,8 @@ lemma weilLowerShriek_obj_str (K : WeilBoundedConstructible ℓ eX) :
 /-- The lower shriek of Weil objects lifts the lower shriek on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` along the forgetful
 functors. -/
 lemma weilLowerShriek_comp_forget :
-    weilLowerShriek ℓ eX eY hf ⋙ WeilBoundedConstructible.forget ℓ eY =
-      WeilBoundedConstructible.forget ℓ eX ⋙
+    weilLowerShriek ℓ eX eY hf ⋙ WeilBoundedConstructible.forget ℓ eY.hom =
+      WeilBoundedConstructible.forget ℓ eX.hom ⋙
         boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f :=
   rfl
 
@@ -185,16 +189,16 @@ instance isIso_weilUpperShriekComparison :
 `Rf^! K` with the structure isomorphism `Φ_X Rf^! K ≅ Rf^! Φ_Y K ≅ Rf^! K` given by
 `weilUpperShriekComparison` and `Rf^! φ_K`. -/
 noncomputable def weilUpperShriek :
-    WeilBoundedConstructible ℓ eY ⥤ WeilBoundedConstructible ℓ eX :=
+    WeilBoundedConstructible ℓ eY.hom ⥤ WeilBoundedConstructible ℓ eX.hom :=
   IsoAlgebra.mapOfNatIso (asIso (weilUpperShriekComparison ℓ eX eY hf))
 
 @[simp]
-lemma weilUpperShriek_obj_carrier (K : WeilBoundedConstructible ℓ eY) :
+lemma weilUpperShriek_obj_carrier (K : WeilBoundedConstructible ℓ eY.hom) :
     ((weilUpperShriek ℓ eX eY hf).obj K).carrier =
       (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K.carrier :=
   rfl
 
-lemma weilUpperShriek_obj_str (K : WeilBoundedConstructible ℓ eY) :
+lemma weilUpperShriek_obj_str (K : WeilBoundedConstructible ℓ eY.hom) :
     ((weilUpperShriek ℓ eX eY hf).obj K).str =
       (asIso (weilUpperShriekComparison ℓ eX eY hf)).app K.carrier ≪≫
         (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).mapIso K.str :=
@@ -203,8 +207,8 @@ lemma weilUpperShriek_obj_str (K : WeilBoundedConstructible ℓ eY) :
 /-- The upper shriek of Weil objects lifts the upper shriek on `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` along the
 forgetful functors. -/
 lemma weilUpperShriek_comp_forget :
-    weilUpperShriek ℓ eX eY hf ⋙ WeilBoundedConstructible.forget ℓ eX =
-      WeilBoundedConstructible.forget ℓ eY ⋙
+    weilUpperShriek ℓ eX eY hf ⋙ WeilBoundedConstructible.forget ℓ eX.hom =
+      WeilBoundedConstructible.forget ℓ eY.hom ⋙
         boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f :=
   rfl
 

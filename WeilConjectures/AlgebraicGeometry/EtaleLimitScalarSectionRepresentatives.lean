@@ -56,7 +56,6 @@ private theorem abelian_sections_colimit
   exact ⟨IsColimit.mapCoconeEquiv
     (Functor.isoWhiskerRight S.asEquivalence.counitIso Eab) hEV⟩
 
--- The unchanged interface retains the system laws and its unused transition let.
 set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.CategoryTheory.Sites.Point.Linear
-import WeilConjectures.AlgebraicGeometry.AbelianSheavesGModules
 import WeilConjectures.FieldTheory.OpenSubgroupFixedField
 import WeilConjectures.RepresentationTheory.SylowModuleFiltration
 /-!
@@ -25,7 +24,6 @@ set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits ZeroObject
 namespace AlgebraicGeometry.IsConnectedCurve
-set_option linter.unusedVariables false in
 /-- A finite primary geometric stalk yields an ell-power annihilator.
 Source: blueprint `lem-sc-affine-generic-second`, proof paragraphs 1--2.
 Proof: the finite primary stalk has a largest exponent among the exponents
@@ -36,7 +34,7 @@ theorem exists_primary_annihilator
     {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsAffine C] [IsIntegral C]
     (M : Sheaf (Spec C.functionField).smallEtaleTopology AddCommGrpCat.{u + 1})
-    (ℓ : ℕ) (hℓ : ℓ.Prime)
+    (ℓ : ℕ)
     (hfinite : Finite (((Scheme.pointSmallEtale
       (Spec.map (CommRingCat.ofHom
         (algebraMap C.functionField (AlgebraicClosure C.functionField))))).sheafFiber

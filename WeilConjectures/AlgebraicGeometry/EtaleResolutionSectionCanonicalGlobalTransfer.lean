@@ -7,7 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
-import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionCanonicalGlobalTransferPointwise
+import WeilConjectures.AlgebraicGeometry.EtaleResolutionCanonicalGlobalTransferPointwise
 
 /-!
 # Transfer of normalized resolution comparisons

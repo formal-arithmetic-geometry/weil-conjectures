@@ -78,7 +78,7 @@ is N-1: its integral closure in `K` is finite as an `R[x]`-module.
 Source: Stacks Project, Algebra, Proposition 10.162.15 (Tag 0334), (***) and Step 5
 (blueprint: lem-weil-pbc-normal-nagata-monogenic-n1).
 
-The following is the node's full natural-language proof, for stage 3:
+Proof:
 
 1. If $x=0$, then $S=R$ is normal [def-weil-pbc-normal-ring], hence its integral closure in $K$
 is $R$ itself and it is N-1. Assume $x\ne0$ and write $x=b/a$ with $a,b\in R$, $a\ne0$. Since

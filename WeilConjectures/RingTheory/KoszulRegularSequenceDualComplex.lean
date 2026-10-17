@@ -453,7 +453,7 @@ theorem intrinsic_ext_determinant_roof
         HomologicalComplex.cyclesMap_i_assoc]
     have hh' := congrArg (fun k ↦ k y) hh
     simpa only [ModuleCat.comp_apply, hz, koszulComparisonValue] using hh'
-  have htransport := koszul_roof_comparison_independent A I r f₀ f hreg₀ hreg hf₀ hf
+  have htransport := koszul_roof_comparison_independent A I r f₀ f hreg₀ hf₀ hf
     φ₀ φ hφ₀.1 hφ.1 ε₀ ε haug₀ haug z₀ z
     (by simpa only [x, LinearEquiv.apply_symm_apply] using
       congrArg (Abelian.Ext.homLinearEquiv (R := A)) hx.symm)
@@ -571,7 +571,6 @@ This is the comparison of resolutions used in the intrinsic Ext isomorphism. -/
 theorem koszul_conormal_comparison_change_generators
     (A : Type uT) [CommRing A] (I : Ideal A) (r : ℕ) (f g : Fin r → A)
     (hregf : RingTheory.Sequence.IsKoszulRegular f)
-    (hregg : RingTheory.Sequence.IsKoszulRegular g)
     (hf : Ideal.span (Set.range f) = I) (hg : Ideal.span (Set.range g) = I)
     (φ : koszulDualComplex A r f ⟶
       (HomologicalComplex.single (ModuleCat A) (ComplexShape.up ℕ) r).obj
@@ -587,7 +586,6 @@ theorem koszul_conormal_comparison_change_generators
       koszulComparisonValue A I r f φ
           (ModuleCat.ofHom (x.hom.comp (exteriorPower.map r t))) =
         koszulComparisonValue A I r g ψ x := by
-  have _ := hregg
   obtain ⟨b, _hb⟩ := exists_koszul_conormal_basis A I r f hregf hf
   intro x
   apply pairingDual_injective_of_basis b r

@@ -164,7 +164,6 @@ attribute [local irreducible] affineTildePushforwardComparison
   Scheme.Modules.tensorPullback
   affineTildeTensorOrdinarySourceIso
 
--- Retain the shared comparison definitions in the let-bound public statement.
 set_option cleanup.letToHave false in
 /-- The affine exchange calculation before expanding the target coefficient map.
 Source: Stacks Project, Tags 06Y6 and 08HY.

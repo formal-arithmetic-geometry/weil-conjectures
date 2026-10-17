@@ -71,7 +71,8 @@ theorem exists_polynomial_flat_local_regular_completion_comparison
   let : IsScalarTower A B C := IsScalarTower.of_algebraMap_eq' rfl
   have hB : IsNoetherianRing B := inferInstance
   let : IsNoetherianRing C := AdicCompletion.isNoetherianRing _
-  have hc : (algebraMap B C).IsRegular := Polynomial.completeLocalFormalFibres S Q' hQc
+  have hc : (algebraMap B C).IsRegular :=
+    Polynomial.isRegular_algebraMap_adicCompletion_localization S Q' hQc
   have hcomp : (algebraMap A C).IsRegular :=
     RingHom.IsRegular.comp_of_fiber_noetherian hφ hc
       (fun p _ ↦ Ideal.isNoetherianRing_fiber p)

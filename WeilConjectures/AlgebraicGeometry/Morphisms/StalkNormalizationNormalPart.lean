@@ -63,8 +63,6 @@ private theorem normal_stalks_of_flat_preimmersion {X Y : Scheme.{u}}
       g.stalkMap_surjective x⟩
   exact ⟨e.symm.injective.isDomain e.symm, IsIntegrallyClosed.of_equiv e⟩
 
--- The existing statement binds an unused projection `n`; retain its signature verbatim.
-set_option linter.unusedVariables false in
 /-- Normality of the localized relative normalization.
 
 Source: Stacks Project, Tags 033C (smooth ascent of normality), 035L
@@ -99,7 +97,6 @@ theorem stalk_normalization_normal_part {S C : Scheme.{u}}
         (inferInstance : QuasiCompact U.ι)
     let f := PA.obj.hom ≫ (c ⁻¹ᵁ U).ι
     let l := pullback.fst c (S.fromSpecStalk s)
-    let n := pullback.snd f.fromNormalization l
     ∀ z : (pullback f.fromNormalization l : Scheme.{u}),
       IsDomain ((pullback f.fromNormalization l : Scheme.{u}).presheaf.stalk z) ∧
       IsIntegrallyClosed ((pullback f.fromNormalization l : Scheme.{u}).presheaf.stalk z) := by
@@ -107,7 +104,7 @@ theorem stalk_normalization_normal_part {S C : Scheme.{u}}
   let : QuasiCompact (c ⁻¹ᵁ U).ι :=
     MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)
       (inferInstance : QuasiCompact U.ι)
-  intro f l n z
+  intro f l z
   let : IsLocallyNoetherian ((𝟭 Scheme).obj PA.obj.left) :=
     LocallyOfFiniteType.isLocallyNoetherian (f ≫ c)
   have hP := normal_stalks_of_smooth_integral_base hS (f ≫ c)

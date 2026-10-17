@@ -18,7 +18,7 @@ import WeilConjectures.RingTheory.GradedNakayamaGeneration
 # Existence of minimal finite graded free presentations
 
 Source: blueprint `lem-sc-p1-graded-resolution`, graded Nakayama construction of a minimal
-presentation, expanded from the DAG (blueprint: lem-sc-p1-minimal-graded-presentation-exists).
+presentation, expanded from the blueprint (blueprint: lem-sc-p1-minimal-graded-presentation-exists).
 -/
 
 @[expose] public section
@@ -28,7 +28,7 @@ universe u
 namespace MvPolynomial
 
 -- The shifted-grading construction follows the proved private helpers in
--- WeilConjectures.RingTheory.GradedFreeCover (SHEAF group A3). It is repeated locally because
+-- WeilConjectures.RingTheory.GradedFreeCover. It is repeated locally because
 -- those helpers are private; no additional generation theorem is needed here.
 private noncomputable def flatten {k : Type u} [Field k] {r : ℕ} :
     (Fin r →₀ MvPolynomial (Fin 2) k) ≃ₗ[k] (Fin r × (Fin 2 →₀ ℕ) →₀ k) :=
@@ -129,7 +129,7 @@ private theorem exists_homogeneous_quotient_basis {k : Type u} [Field k]
     exact htli.comp e e.injective
 
 /-- Every finite homogeneous spanning set admits a minimal finite graded free presentation.
-Source: step 1 of DAG node `lem-sc-p1-graded-nakayama-free`, refining the graded Hilbert
+Source: step 1 of blueprint node `lem-sc-p1-graded-nakayama-free`, refining the graded Hilbert
 syzygy argument cited in blueprint `lem-sc-p1-graded-resolution`. The construction below is the
 standard explicit expansion of that step, rather than a quoted blueprint proof.
 (blueprint: lem-sc-p1-minimal-graded-presentation-exists)

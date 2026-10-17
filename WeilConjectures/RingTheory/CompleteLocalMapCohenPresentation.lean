@@ -63,7 +63,7 @@ map carrying parameters into parameters and regular closed fibre. Source: Stacks
 the first parameter in positive residue characteristic is chosen as in Proposition 07NQ
 (blueprint: lem-weil-pbc-complete-local-map-cohen-presentation).
 
-Proof for stage 3:
+Proof:
 1. Use `lem-weil-pbc-cohen-power-series-presentation` to present A and B by power-series
 rings R and S₀ over fields or Cohen rings. By
 `lem-weil-pbc-power-series-field-cohen-regular-complete` they are regular, complete and local;

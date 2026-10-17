@@ -30,7 +30,7 @@ The last smoothness clause uses the algebra structure induced by `cmod` on `D / 
 Source: Stacks Project, Smoothing Ring Maps, Lemma 07CP
 (blueprint: lem-weil-pbc-popescu-lifting).
 
-Proof (the eighteen steps of the DAG node):
+Proof (the eighteen steps of the blueprint node):
 1. (Presentation; Noetherianity.) Since $\bar C$ is of finite presentation over $R/\pi^2R$ [def-
 weil-pbc-finitely-presented-algebra], choose a presentation $\bar
 C\cong(R/\pi^2R)[x_1,\dots,x_n]/(\bar f_1,\dots,\bar f_m)$ and lifts $f_j\in

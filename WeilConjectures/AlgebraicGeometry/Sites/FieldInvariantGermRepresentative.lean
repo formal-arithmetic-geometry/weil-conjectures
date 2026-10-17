@@ -31,8 +31,6 @@ namespace AlgebraicGeometry.Scheme
 
 attribute [local instance] Algebra.Etale.of_finite_of_isSeparable
 
--- Preserve the existing names of nondependent premises in the public signature.
-set_option linter.unusedVariables false in
 /-- Source: Stacks Project, [Tag 04JM](https://stacks.math.columbia.edu/tag/04JM),
 the direct proof of Lemma 59.56.5, applied after restricting the sheaf to `Spec L`.
 (blueprint: lem-exc-field-invariant-germ-representative).
@@ -69,12 +67,12 @@ theorem exists_fieldSection_of_invariant_germ
     (hs : s = Spec.map (CommRingCat.ofHom (algebraMap K Ω)))
     (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v)))
     (action : MulAction Gal(Ks/K) ((pointSmallEtale s).sheafFiber.obj F))
-    (haction : ∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)
-      (hτ : (algebraMap Ks Ω).comp g.toRingHom =
-        τ.toRingHom.comp (algebraMap Ks Ω))
-      (X : (Spec (.of K)).Etale) (x x' : (pointSmallEtale s).fiber.obj X)
-      (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left)
-      (z : F.obj.obj (op X)),
+    (haction : ∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω),
+      (algebraMap Ks Ω).comp g.toRingHom =
+        τ.toRingHom.comp (algebraMap Ks Ω) →
+      ∀ (X : (Spec (.of K)).Etale) (x x' : (pointSmallEtale s).fiber.obj X),
+      x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left →
+      ∀ (z : F.obj.obj (op X)),
       action.smul g ((pointSmallEtale s).toPresheafFiber X x F.obj z) =
         (pointSmallEtale s).toPresheafFiber X x' F.obj z)
     (L : IntermediateField K Ks) [FiniteDimensional K L] [Algebra.IsSeparable K L]
@@ -109,7 +107,7 @@ theorem exists_fieldSection_of_invariant_germ
         (pointSmallEtale s).toPresheafFiber (etaleSpec K E) y F.obj z := by
     simpa only [hz] using hm
   obtain ⟨w, hw⟩ := exists_fieldSection_of_finiteGalois_invariant_representative
-    K Ks Ω s hs F action haction L x hx E hLE y hy z hinj hfixed
+    K Ks Ω s F action haction L x hx E hLE y hy z hinj hfixed
   exact ⟨w, hw.trans hz⟩
 
 end AlgebraicGeometry.Scheme
