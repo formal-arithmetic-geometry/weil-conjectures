@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.EtaleCohomology.PoincareDuality.IntegralDegreewise
 public import WeilConjectures.SixFunctors.Etale.Derived.ScalarExtension
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Unit
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.CompositionPairing
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Invertible
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduction
 
@@ -283,6 +285,36 @@ theorem isPerfectPairing_poincarePairing_integral
 
 end IntegralPairing
 
+section Unit
+
+variable {Λ : Type (u + 1)} [CommRing Λ] [IsDomain Λ] [IsPrincipalIdealRing Λ] {ϖ : Λ}
+  {I : Ideal Λ} [IsAdicComplete I Λ] {k : Type u} [Field k] [IsSepClosed k]
+
+/-- Over a separably closed field `k`, the unit `Λ_s` of `D(Spec(k)_ét, Λ)` is derived complete
+for an ideal `I = (ϖ)` of a principal ideal domain `Λ` which is `I`-adically complete. Evaluation
+at the point is a `Λ`-linear equivalence `D(Spec(k)_ét, Λ) ≌ D(Λ)` carrying `Λ_s` to `Λ[0]`, and
+`Λ[0]` receives no nonzero morphism from an object on which `ϖ` acts invertibly
+(`DerivedCategory.eq_zero_of_isIso_smul_of_singleFunctor`). -/
+theorem derivedComplete_unit_of_isSepClosed (hϖ : ϖ ∈ nonZeroDivisors Λ)
+    (hI : I = Ideal.span {ϖ}) :
+    _root_.DerivedCategory.derivedComplete (Spec (.of k)).smallEtaleTopology I
+      (𝟙_ (DerivedCategoryModule Λ (Spec (.of k)))) := by
+  subst hI
+  rw [_root_.DerivedCategory.derivedComplete_iff_rightOrthogonal hϖ rfl]
+  intro Z f (hZ : IsIso (ϖ • 𝟙 Z))
+  let Γ := rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))
+  have : Γ.Linear Λ := inferInstanceAs
+    ((Sheaf.Γ (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).rightDerivedFunctor.Linear Λ)
+  have hZ' : IsIso (ϖ • 𝟙 (Γ.obj Z)) := by
+    rw [← CategoryTheory.Functor.map_id, ← Functor.map_smul]
+    infer_instance
+  have h := _root_.DerivedCategory.eq_zero_of_isIso_smul_of_singleFunctor hZ'
+    (Γ.map f ≫ (rightDerivedGlobalSectionsUnitIso Λ k).hom)
+  rw [Preadditive.IsIso.comp_right_eq_zero] at h
+  exact Γ.map_injective (by rw [h, Functor.map_zero])
+
+end Unit
+
 section Integral
 
 variable (l : ℕ) [Fact l.Prime] (E L : Type w) [Field E] [Field L]
@@ -302,8 +334,9 @@ variable (l : ℕ) [Fact l.Prime] (E L : Type w) [Field E] [Field L]
 scalar extension (the integral stage and the scalar extension).
 
 Let `E` be a finite extension of `ℚ_ℓ` inside `ℚ̄_ℓ`, `𝒪_E` its ring of integers, `L ⊇ E` a
-further finite extension, and `K ∈ D(X_ét, 𝒪_E)` perfect over `𝒪_{E,X}`. Assume that the
-constant complex `𝒪_E` of the point is derived complete. Then the adjoint
+further finite extension, and `K ∈ D(X_ét, 𝒪_E)` perfect over `𝒪_{E,X}`. The constant complex `𝒪_E`
+of the point is derived complete (`AlgebraicGeometry.Etale.derivedComplete_unit_of_isSepClosed`),
+hence so is `RΓ_c(X, K)^∨`, and the adjoint
 `β_K^♯ : RΓ(X, K^∨(d))[2d] ⟶ RΓ_c(X, K)^∨` of the `𝒪_E`-valued derived Poincaré pairing is an
 isomorphism between derived complete objects: it is an isomorphism `e` of the adic category
 `D_comp(Spec k, 𝒪_E)`, so `β_K^♯` is the realization of its tower of reductions, the
@@ -314,9 +347,7 @@ coefficient-field extension `E ⊆ L`, both integrally
 (`AlgebraicGeometry.Etale.derivedCompleteIntegralScalarExtension`) and rationally
 (`AlgebraicGeometry.Etale.derivedCompleteRationalScalarExtension`), carry `e` to
 isomorphisms: the duality isomorphism over `E` and over `L`. -/
-theorem adicReconstruction_scalarExtension (hKd : IsDualizable K)
-    (hΛ : DerivedCategory.derivedCompleteIntegral (Spec (.of k)).smallEtaleTopology l E
-      (𝟙_ (DerivedCategoryModule (Shrink.{u + 1} (PadicAlgCl.integers l E)) (Spec (.of k))))) :
+theorem adicReconstruction_scalarExtension (hKd : IsDualizable K) :
     ∃ (P Q : DerivedCategoryDerivedCompleteIntegral (Spec (.of k)).smallEtaleTopology l E)
       (e : P ≅ Q),
       Arrow.mk ((DerivedCategoryDerivedCompleteIntegral.ι _ l E).map e.hom) =
@@ -327,10 +358,13 @@ theorem adicReconstruction_scalarExtension (hKd : IsDualizable K)
         ((DerivedCategoryDerivedCompleteRational.fromIntegral _ l E).map e.hom)) := by
   obtain ⟨ϖ, hϖ, hI⟩ :=
     PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span.{w, u} l E
+  have : IsPrincipalIdealRing (Shrink.{u + 1} (PadicAlgCl.integers l E)) :=
+    IsPrincipalIdealRing.of_surjective (PadicAlgCl.shrinkRingEquiv l E).toRingHom
+      (PadicAlgCl.shrinkRingEquiv l E).surjective
   have := isIso_poincareAdjoint a γ hKd
   let f := poincareAdjoint a γ K
   have ht : DerivedCategory.derivedCompleteIntegral _ l E (Arrow.mk f).right :=
-    derivedComplete_derivedHom _ hϖ hI hΛ
+    derivedComplete_derivedHom _ hϖ hI (derivedComplete_unit_of_isSepClosed hϖ hI)
   have hs : DerivedCategory.derivedCompleteIntegral _ l E (Arrow.mk f).left := by
     change _root_.DerivedCategory.derivedComplete _ (PadicAlgCl.maximalIdealShrink l E) _ at ht ⊢
     rw [_root_.DerivedCategory.derivedComplete_eq_rightOrthogonal hϖ hI] at ht ⊢
