@@ -27,7 +27,6 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 -- Work through the constructed pullback functor interface during coherence calculations.
-attribute [local irreducible] derivedPullback
 
 /-- The triangle equation for composition units follows from associativity and the
 left and right unit laws. Transport the two composites of the spectrum isomorphism
