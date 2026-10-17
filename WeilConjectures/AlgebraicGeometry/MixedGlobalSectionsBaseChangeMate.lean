@@ -7,7 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.GlobalHomPullbackComparison
-public import WeilConjectures.AlgebraicGeometry.MixedGlobalSectionsDirectImageIso
+public import WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
 import WeilConjectures.AlgebraicGeometry.MixedSectionsBaseChangeUnitSquare
 
 /-! # Leray comparison and the base-change mate

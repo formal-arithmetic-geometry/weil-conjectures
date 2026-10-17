@@ -6,7 +6,7 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.MixedHomTensorPullbackIso
+public import WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
 import WeilConjectures.AlgebraicGeometry.PullbackTensorTotalCompositionLocalized
 import WeilConjectures.Algebra.Homology.KFlatPullback
 

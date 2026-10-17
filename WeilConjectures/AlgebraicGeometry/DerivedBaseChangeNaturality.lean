@@ -56,8 +56,17 @@ theorem schemeDerivedBaseChangeMap_naturality
       (Classical.choose_spec exists_derivedPullbackComposition.{u, w})))) a b
   let e := c f' g ≪≫
     eqToIso (congrArg (fun k ↦ derivedPullback k) h.symm) ≪≫ (c g' f).symm
-  have hn := mate_naturality (canonicalPullbackAdjunction f)
-    (canonicalPullbackAdjunction f') (derivedPullback g) (derivedPullback g') e k
+  have hn : (derivedPullback g).map ((schemeDerivedDirectImage f).map k) ≫
+        (canonicalPullbackAdjunction f').homEquiv _ _
+          (e.hom.app ((schemeDerivedDirectImage f).obj L) ≫
+            (derivedPullback g').map ((canonicalPullbackAdjunction f).counit.app L)) =
+      (canonicalPullbackAdjunction f').homEquiv _ _
+          (e.hom.app ((schemeDerivedDirectImage f).obj K) ≫
+            (derivedPullback g').map ((canonicalPullbackAdjunction f).counit.app K)) ≫
+        (schemeDerivedDirectImage f').map ((derivedPullback g').map k) := by
+    simpa [Adjunction.homEquiv_unit, mateEquiv] using
+      (mateEquiv (canonicalPullbackAdjunction f) (canonicalPullbackAdjunction f')
+        e.hom).naturality k
   change (derivedPullback g).map ((schemeDerivedDirectImage f).map k) ≫
       (canonicalPullbackAdjunction f').homEquiv _ _
         ((c f' g).hom.app ((schemeDerivedDirectImage f).obj L) ≫

@@ -7,7 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.MixedAffineSectionsComplexUnit
-public import WeilConjectures.AlgebraicGeometry.MixedGlobalSectionsDirectImageIso
+public import WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
 import WeilConjectures.AlgebraicGeometry.Modules.IsKFlatTilde
 import WeilConjectures.AlgebraicGeometry.Modules.IsKFlatRestriction
 import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde

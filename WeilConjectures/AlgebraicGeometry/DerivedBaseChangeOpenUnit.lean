@@ -27,25 +27,6 @@ set_option backward.isDefEq.respectTransparency.types true
 noncomputable section
 namespace AlgebraicGeometry
 
-theorem mate_naturality
-    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
-    {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}
-    (a : L ⊣ R) (a' : L' ⊣ R') (P : C ⥤ C') (Q : D ⥤ D')
-    (e : P ⋙ L' ≅ L ⋙ Q) {Y Z : D} (k : Y ⟶ Z) :
-    P.map (R.map k) ≫
-        a'.homEquiv _ _ (e.hom.app (R.obj Z) ≫ Q.map (a.counit.app Z)) =
-      a'.homEquiv _ _ (e.hom.app (R.obj Y) ≫ Q.map (a.counit.app Y)) ≫
-        R'.map (Q.map k) := by
-  rw [← a'.homEquiv_naturality_left, ← a'.homEquiv_naturality_right]
-  congr 1
-  have hn := e.hom.naturality (R.map k)
-  dsimp only [Functor.comp_map] at hn
-  rw [← Category.assoc, hn]
-  simp only [Category.assoc, ← Q.map_comp]
-  have hc := a.counit.naturality k
-  dsimp only [Functor.comp_map, Functor.id_map] at hc
-  rw [hc]
-
 private theorem mate_unit
     {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
     {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}
@@ -92,7 +73,12 @@ private theorem mate_unit_transport
       ← Q.map_comp_assoc, Iso.hom_inv_id_app, Q.map_id, Category.id_comp]
   rw [← Adjunction.unit_leftAdjointUniq_hom_app a ar K]
   simp only [P.map_comp, Category.assoc, Functor.comp_obj, Functor.id_obj]
-  have hm := mate_naturality a a' P Q e ((a.leftAdjointUniq ar).hom.app K)
+  have hm : P.map (R.map ((a.leftAdjointUniq ar).hom.app K)) ≫
+        a'.homEquiv _ _ (e.hom.app (R.obj (A.obj K)) ≫ Q.map (a.counit.app (A.obj K))) =
+      a'.homEquiv _ _ (e.hom.app (R.obj (L.obj K)) ≫ Q.map (a.counit.app (L.obj K))) ≫
+        R'.map (Q.map ((a.leftAdjointUniq ar).hom.app K)) := by
+    simpa [Adjunction.homEquiv_unit, mateEquiv] using
+      (mateEquiv a a' e.hom).naturality ((a.leftAdjointUniq ar).hom.app K)
   dsimp only [Functor.comp_obj, Functor.id_obj] at hm
   rw [← Category.assoc (P.map (R.map ((a.leftAdjointUniq ar).hom.app K))), hm]
   simp only [Category.assoc, ← R'.map_comp]

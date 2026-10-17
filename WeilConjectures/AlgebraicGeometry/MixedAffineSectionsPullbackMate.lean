@@ -8,7 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.GlobalHomPullbackComparison
 public import WeilConjectures.AlgebraicGeometry.MixedGlobalExtension
-public import WeilConjectures.AlgebraicGeometry.MixedGlobalSectionsDirectImageIso
+public import WeilConjectures.AlgebraicGeometry.GlobalHomAdjunctionIso
 import WeilConjectures.AlgebraicGeometry.MixedAffineSectionsKFlatComparisonIso
 import WeilConjectures.AlgebraicGeometry.AffineDerivedPullbackModuleModel
 
