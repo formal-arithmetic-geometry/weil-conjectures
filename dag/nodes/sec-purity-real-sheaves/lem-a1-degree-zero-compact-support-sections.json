@@ -16,9 +16,166 @@
   "def-pod-lisse-l-adic-sheaves",
   "def-weil-pbc-closed-subset-proper-over-base"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First, $X$ is separated and finite type over $k$: base-changing finite affine presentations preserves their finite generators, and base-changing the closed diagonal preserves its defining surjection of rings. A field is Noetherian, so [lem-weil-pbc-finite-type-over-noetherian] and [lem-kun-dimension-finite-type] make $X$ Noetherian of finite dimension. Forget the Weil structure and represent $\\mathcal F$ at a finite field $E$. By [lem-tw-lisse-rational-realization] its lisse underlying heart object realizes as a locally finite free $E_X$-module $L_E$, preserving the unit and finite coefficient extensions. Apply [lem-a1-smooth-lisse-integral-lattice] to $X=X_0\\times_{k_0}k$ to obtain a lisse integral lattice $M\\subset L_E$. The comparison [lem-per-lisse-completed-system-comparison] gives normalized finite locally free etale sheaves $M_n=M/\\varpi^nM$, with $M=\\lim_n\\nu_X^*M_n$. Define $\\mathcal L$ to be their rationalized system, extended from $E$ to $\\overline{\\mathbf Q}_\\ell$. The full faithfulness in both comparison statements identifies its realization with $\\operatorname{For}(\\mathcal F)$, without identifying the categories by definition.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "lem-tw-lisse-rational-realization",
+    "lem-a1-smooth-lisse-integral-lattice",
+    "lem-per-lisse-completed-system-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Propositions 6.8.4(1),(4), 6.8.14(2); Lemmas 7.4.7 and 7.4.10"
+   }
+  },
+  {
+   "text": "The object $M[0]$ lies in the completed integral constructible category by [lem-weil-pbc-integral-stratified-perfect-characterization]: take the single stratum $X$ and local model a finite free $A$-module in degree zero. Its derived reduction is $\\nu_X^*M_n[0]$, because on a free basis chart tensoring the coefficient unit with $A/\\varpi^n$ is the ordinary quotient in degree zero. By full faithfulness of [lem-tw-lisse-rational-realization], its rationalization represents the original underlying lisse object. Fix a compactification $X\\xrightarrow j\\bar X\\xrightarrow p\\operatorname{Spec}k$, provided by [thm-nagata-compactification].",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-tw-lisse-rational-realization",
+    "thm-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Definition 18.1, pp. 118-119; Bhatt-Scholze Proposition 6.6.11"
+   }
+  },
+  {
+   "text": "At finite level put $V_n=H_c^0(X,\\nu_X^*M_n)$ and $W_n=\\Gamma(X_{\\mathrm{et}},M_n)$. The explicit etale-origin witness is $M_n$ itself. The extension-by-zero isomorphism [lem-cbc-proetale-extension-zero-comparison] transports $j_!M_n$ to the pro-etale compactification. The compactification comparison [lem-trf-compactification-cohomology], together with [sk-thm-pe-direct-image-comparison], identifies $V_n$ with $H^0(\\bar X_{\\mathrm{et}},j_!M_n)=\\Gamma(\\bar X_{\\mathrm{et}},j_!M_n)$. The degree-zero equality follows by a nonnegative injective resolution: left exactness of sections identifies the degree-zero kernel with sections of the original sheaf; there is no incoming differential. The same argument gives $H^0(X,\\nu_X^*M_n)=W_n$, also directly by full faithfulness of [sk-thm-pe-classical-sheaves] on maps from the unit. Both finite-level derived section complexes have zero negative cohomology.",
+   "uses": [
+    "lem-trf-compactification-cohomology",
+    "sk-thm-pe-direct-image-comparison",
+    "sk-thm-pe-classical-sheaves",
+    "lem-cbc-proetale-extension-zero-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Definition 18.1; Bhatt-Scholze Corollary 5.1.5 and Lemma 5.2.6"
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-proper-support-sheaf-composition] first to $j$ and then to the proper morphism $p$. Its open clause identifies $j_!$ with sections of proper support over $\\bar X$, its proper clause gives $p_!=p_*$, and its composition clause identifies $p_*j_!M_n$ with the proper-support subsheaf of $a_*M_n$, where $a=pj$. Evaluation at $\\operatorname{Spec}k$ therefore gives an injection $r_n:V_n\\hookrightarrow W_n$. Its image consists of sections whose nonzero-geometric-germ locus is closed and whose reduced induced closed subscheme is proper over $k$. These maps commute with $M_{n+1}\\to M_n$: every comparison in that node is induced by equality of underlying sections, so reducing a section and then restricting gives its restricted reduction. The coefficient restriction isomorphisms of [lem-sf-compact-support-restriction-of-scalars] identify the compact-support transition with that same reduction map.",
+   "uses": [
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-sf-compact-support-restriction-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F4Y, 0F50 and 0F51 (lemma-separated-etale-shriek, lemma-f-shriek-composition, lemma-proper-f-shriek)"
+   }
+  },
+  {
+   "text": "Use [def-weil-integral-rational-qbar-compact-support] and [def-weil-derived-direct-image] for the two integral direct images, and [def-weil-finite-coefficient-point] for their coefficient complexes. Since $k$ is algebraically closed, [lem-weil-point-proetale-sections-exact] identifies termwise point sections with their derived functor. The ringed-tower direct-image/limit comparison [lem-weil-ringed-tower-pushforward-limit-comparison] applies to sections at the point (restriction to the constant $A$-action), so their coefficient complexes are the derived inverse limits of the finite-level coefficient complexes of Step 3, compatibly with all projections. The Milnor sequence [lem-pc-derived-limit-milnor-sequence] in degree zero has left term $R^1\\lim H^{-1}=0$, since those negative cohomology groups are zero. Consequently\n$$H_c^0(X,M)=\\lim_n V_n,\\qquad H^0(X,M)=\\lim_n W_n.$$\nThere is no Mittag--Leffler or finite-group assumption here: the preceding cohomology groups vanish. The compatible $r_n$ induce $r:\\lim V_n\\to\\lim W_n$, which is injective: if every restricted coordinate is zero, injectivity of each $r_n$ makes every original coordinate zero.",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-derived-direct-image",
+    "def-weil-finite-coefficient-point",
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-pc-derived-limit-milnor-sequence",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.9; integral reduction-tower definitions; Stacks Tag 07KY, Milnor sequence"
+   }
+  },
+  {
+   "text": "By the definition of morphisms between inverse systems [def-pod-lisse-l-adic-sheaves], a map from the unit system to $(M_n)_n$ is exactly a compatible family of sections $1\\mapsto s_n\\in W_n$. Thus $\\lim W_n=\\operatorname{Hom}(\\underline A,(M_n)_n)$. Rationalizing the Hom groups and passing to a common finite stage gives\n$$H^0(X,\\mathcal F)\\cong\\operatorname{Hom}_{\\mathrm{Lisse}(X,\\overline{\\mathbf Q}_\\ell)}(\\underline{\\overline{\\mathbf Q}_\\ell},\\mathcal L).$$\nIndeed [def-weil-finite-coefficient-point] defines rational point evaluation by tensoring with $E$, [def-weil-coefficient-cohomology-modules] defines the final scalar extension, and [lem-pc-flat-tensor-complex-cohom] commutes cohomology with these flat scalar extensions. Flatness of $A\\to E$ is [lem-weil-pbc-localization-flat]; extension from $E$ to a field is free, hence flat. Apply [lem-weil-pbc-flat-tensor-exact] to $r$ to obtain the required injective linear map $\\alpha_{X,\\mathcal F}$.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "def-weil-finite-coefficient-point",
+    "def-weil-coefficient-cohomology-modules",
+    "lem-pc-flat-tensor-complex-cohom",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(4); rationalization and common-stage definitions"
+   }
+  },
+  {
+   "text": "These maps are independent of the chosen lattice. For two lisse integral lattices realizing the same $L_E$, full faithfulness of rational realization in [lem-per-lisse-completed-system-comparison] represents their identity comparison by an integral map divided by a power of $\\varpi$. Multiplying by that power gives a map of the normalized systems. Steps 3-6 commute with such maps, since reduction, section restriction, inverse limit and scalar extension all act on those same section maps. After dividing again the resulting square commutes with the identity on the realized rational object. The identical argument applied to an arbitrary rational lisse morphism proves naturality. The lattice has uniform finite Tor amplitude $[0,0]$. By [lem-coef-integral-compact-support], its compact-support image is bounded constructible (use the finite dimension from Step 1), so the point comparison below applies. To enlarge the coefficient field, the compact-support scalar-extension comparison [lem-pur-compact-support-integral-coefficient-comparison] and the point comparison [lem-weil-point-sections-scalar-extension], together with the finite-extension compatibility of [lem-per-lisse-completed-system-comparison], identify both constructions with scalar extension of the same restriction map. Their identity and composition laws make the map and the ordinary-section identification well defined in the common-stage category. For ordinary sections, the same coefficient comparison follows from the finite freeness of $\\mathcal O_L$ over $\\mathcal O_E$: in a basis it is a finite direct sum, which commutes with sections and inverse limits. Thus no unrestricted direct-image scalar comparison is assumed.",
+   "uses": [
+    "lem-per-lisse-completed-system-comparison",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-weil-point-sections-scalar-extension",
+    "lem-coef-integral-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4 and Remark 6.8.15; comparisons induced by quotient maps and coefficient extension"
+   }
+  },
+  {
+   "text": "For an integral class $b\\in\\lim V_n$, write $(s_n)=r(b)$. The Noetherian space $X$ has finitely many clopen connected components by [lem-sfb-noetherian-connected-components-open]. On any nonempty component choose a geometric point. By the fully faithful finite-coefficient equivalence [cor-galois-lisse-representations](1), a map from the unit to $M_n$ is zero if its fibre map at that point is zero. This holds at every chosen geometric point, so the nonzero-fibre locus $S_n$ of $s_n$ is a union of entire components. It is closed and proper by Step 4. The reduction equation gives $S_n\\subseteq S_{n+1}$. Since only finitely many components occur, these unions eventually stabilize: choose, for each component appearing in the union, its first occurring level and take the largest of the finitely many levels. Hence $S=\\bigcup_n S_n=S_N$ for some $N$. At each geometric point the fibre of the integral section is $(s_{n,\\bar x})_n$ by [def-pod-lisse-l-adic-sheaves]; it is nonzero exactly when one coordinate is nonzero. The fibre is finite free, so rationalization and field extension preserve its nonzeroness. Thus $S$ is precisely the required rationalized nonzero-fibre locus, and $S=S_N$ proves closedness and properness with the stated reduced scheme structure.",
+   "uses": [
+    "lem-sfb-noetherian-connected-components-open",
+    "cor-galois-lisse-representations",
+    "def-pod-lisse-l-adic-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Remark 29.7; finite-component argument for normalized lisse systems"
+   }
+  },
+  {
+   "text": "For an arbitrary $c\\in H_c^0(X,\\mathcal F)$, choose a common finite coefficient extension containing the finitely many scalars in a tensor expression for $c$. After this extension, multiplication by one power of the uniformizer writes $c=\\varpi^{-m}b$ for an integral compact-support class $b$: a tensor expression has finitely many denominators, so a common denominator suffices. Repeat the construction with the scalar-extended lattice, as justified in Step 7. The nonzero-fibre locus of $\\alpha(c)=\\varpi^{-m}\\alpha(b)$ equals that of $\\alpha(b)$ because multiplication by a nonzero field scalar is invertible. Step 8 therefore supplies the closedness and properness for $c$. For the zero class this locus is empty, which is already the support of the zero finite-level section in Step 4. All fibres used here are the inverse-limit, rationalized, scalar-extended fibres of the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Remark 29.7; clearing a finite list of coefficient denominators"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "lem-tw-lisse-rational-realization",
+  "lem-a1-smooth-lisse-integral-lattice",
+  "lem-per-lisse-completed-system-comparison",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "thm-nagata-compactification",
+  "lem-trf-compactification-cohomology",
+  "sk-thm-pe-direct-image-comparison",
+  "sk-thm-pe-classical-sheaves",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-derived-direct-image",
+  "def-weil-finite-coefficient-point",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-pc-derived-limit-milnor-sequence",
+  "lem-weil-point-proetale-sections-exact",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-coefficient-cohomology-modules",
+  "lem-pc-flat-tensor-complex-cohom",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-coef-integral-compact-support",
+  "lem-sfb-noetherian-connected-components-open",
+  "cor-galois-lisse-representations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Definition 18.1 and Remark 29.7, expanded through Bhatt-Scholze 6.8.4, 6.8.14 and 7.4.10, finite-support composition and the degree-zero Milnor sequence"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -61,10 +218,45 @@
    "results": "CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf, LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf, CondensedMod.LocallyConstant.instFaithfulModuleCatFunctor, LightCondMod.LocallyConstant.instFaithfulModuleCatFunctor, CondensedMod.LocallyConstant.instFaithfulSheafCompHausCoherentTopologyTypeConstantSheaf, LightCondSet.LocallyConstant.instFaithfulFunctor, CategoryTheory.Sheaf.isLocallyInjective_iff_injective, LightCondMod.LocallyConstant.instFaithfulSheafLightProfiniteCoherentTopologyTypeConstantSheaf",
    "date": "2026-10-17",
    "verdict": "no match: the hits concern structure-sheaf sections, ordinary topological functions, or generic sheaf functors, not degree-zero compact-support comparison for adic Weil sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Degree zero compactly supported l-adic cohomology injects into ordinary global sections with proper support",
+   "results": "ContDiffMapSupportedIn.structureMapLM_zero_injective, Profinite.NobelingProof.succ_mono, AlgebraicGeometry.Scheme.Hom.toImage_app_injective, AlgebraicGeometry.Scheme.Hom.stalkFunctor_toImage_injective, AlgebraicGeometry.map_injective_of_isIntegral, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, CochainComplex.cm5b.instInjectiveXIntI",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern ordinary functions, scheme structure sheaves, generic module lattices or discrete condensed sheaves; none states this adic sheaf assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"compactlySupported\"",
+   "results": "CompactlySupported.«termC_c(_,_)», CompactlySupported.«term_→C_c_», CompactlySupportedContinuousMap, CompactlySupportedContinuousMap.instInhabited, CompactlySupportedContinuousMap.instZero, CompactlySupportedContinuousMapClass, CompactlySupportedContinuousMap.instFunLike, CompactlySupportedContinuousMap.partialOrder",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern ordinary functions, scheme structure sheaves, generic module lattices or discrete condensed sheaves; none states this adic sheaf assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "compactlySupported|sectionsWithSupport",
+   "results": "Mathlib/MeasureTheory/Measure/Haar/Extension.lean, Mathlib/MeasureTheory/Measure/Haar/Extension.lean, Mathlib/MeasureTheory/Measure/Haar/Extension.lean, Mathlib/MeasureTheory/Measure/Haar/Extension.lean, Mathlib/MeasureTheory/Measure/Haar/Extension.lean, Mathlib/MeasureTheory/Measure/Prokhorov.lean, Mathlib/MeasureTheory/Integral/CompactlySupported.lean, Mathlib/MeasureTheory/Integral/CompactlySupported.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern ordinary functions, scheme structure sheaves, generic module lattices or discrete condensed sheaves; none states this adic sheaf assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zeroth compactly supported cohomology of a lisse adic sheaf consists of global sections with proper support",
+   "results": "groupCohomology.H0, HasCompactSupport.zero, hasCompactSupport_def, HasCompactSupport, ContDiffMapSupportedIn.zero_on_compl, CompactlySupportedContinuousMap.zero_apply, CompactlySupportedContinuousMap.instZero, HasCompactSupport.is_zero_at_infty",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern ordinary functions, scheme structure sheaves, generic module lattices or discrete condensed sheaves; none states this adic sheaf assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sections of extension by zero to an open subscheme is injective and has proper support on a proper compactification",
+   "results": "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.Scheme.Hom.toImage_app_injective, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern ordinary functions, scheme structure sheaves, generic module lattices or discrete condensed sheaves; none states this adic sheaf assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-affine-hc0",
@@ -81,5 +273,139 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-degree-zero-compact-support-sections",
+  "worker": "stage1",
+  "summary": "Made the completed/inverse-system comparison through a genuine lisse lattice on a smooth geometric fibre. Computed both degree-zero groups from normalized finite reductions; restriction is injective levelwise and remains injective after inverse limits and flat scalar extension. Proved support proper by stabilization of increasing unions of finitely many clopen components, rather than assuming an infinite union of proper closed supports is proper. Added one statement-only lattice lemma; reused the existing coefficient and finite-support infrastructure. No statement change.",
+  "blueprint": "Realizes the first sentence of lem-a1-affine-hc0.proof.md: a compact-support degree-zero class is an ordinary adic global section with proper support. This is the H_c^0 input to step 1 of sk-p-real-rankin.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Used for the explicit coefficient, support, finiteness or limit comparison named in the proof; this foundational input is not supplied by the Rankin upper-bound unit."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Used for the explicit coefficient, support, finiteness or limit comparison named in the proof; this foundational input is not supplied by the Rankin upper-bound unit."
+   },
+   {
+    "node": "lem-tw-lisse-rational-realization",
+    "why": "Used for the explicit coefficient, support, finiteness or limit comparison named in the proof; this foundational input is not supplied by the Rankin upper-bound unit."
+   },
+   {
+    "node": "lem-per-lisse-completed-system-comparison",
+    "why": "Used for the explicit coefficient, support, finiteness or limit comparison named in the proof; this foundational input is not supplied by the Rankin upper-bound unit."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Used for the explicit coefficient, support, finiteness or limit comparison named in the proof; this foundational input is not supplied by the Rankin upper-bound unit."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Used for the explicit coefficient, support, finiteness or limit comparison named in the proof; this foundational input is not supplied by the Rankin upper-bound unit."
+   },
+   {
+    "node": "lem-trf-compactification-cohomology",
+    "why": "Used for the explicit coefficient, support, finiteness or limit comparison named in the proof; this foundational input is not supplied by the Rankin upper-bound unit."
+   },
+   {
+    "node": "sk-thm-pe-direct-image-comparison",
+    "why": "Used for the explicit coefficient, support, finiteness or limit comparison named in the proof; this foundational input is not supplied by the Rankin upper-bound unit."
+   },
+   {
+    "node": "sk-thm-pe-classical-sheaves",
+    "why": "Used for the explicit coefficient, support, finiteness or limit comparison named in the proof; this foundational input is not supplied by the Rankin upper-bound unit."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Used for the explicit coefficient, support, finiteness or limit comparison named in the proof; this foundational input is not supplied by the Rankin upper-bound unit."
+   },
+   {
+    "node": "lem-cbc-proper-support-sheaf-composition",
+    "why": "Used for the explicit coefficient, support, finiteness or limit comparison named in the proof; this foundational input is not supplied by the Rankin upper-bound unit."
+   },
+   {
+    "node": "lem-sf-compact-support-restriction-of-scalars",
+    "why": "Used for the explicit coefficient, support, finiteness or limit comparison named in the proof; this foundational input is not supplied by the Rankin upper-bound unit."
+   },
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "Used for the explicit coefficient, support, finiteness or limit comparison named in the proof; this foundational input is not supplied by the Rankin upper-bound unit."
+   },
+   {
+    "node": "lem-pc-derived-limit-milnor-sequence",
+    "why": "Used for the explicit coefficient, support, finiteness or limit comparison named in the proof; this foundational input is not supplied by the Rankin upper-bound unit."
+   },
+   {
+    "node": "lem-pc-flat-tensor-complex-cohom",
+    "why": "Used for the explicit coefficient, support, finiteness or limit comparison named in the proof; this foundational input is not supplied by the Rankin upper-bound unit."
+   },
+   {
+    "node": "lem-weil-pbc-localization-flat",
+    "why": "Used for the explicit coefficient, support, finiteness or limit comparison named in the proof; this foundational input is not supplied by the Rankin upper-bound unit."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Used for the explicit coefficient, support, finiteness or limit comparison named in the proof; this foundational input is not supplied by the Rankin upper-bound unit."
+   },
+   {
+    "node": "lem-pur-compact-support-integral-coefficient-comparison",
+    "why": "Used for the explicit coefficient, support, finiteness or limit comparison named in the proof; this foundational input is not supplied by the Rankin upper-bound unit."
+   },
+   {
+    "node": "lem-weil-point-sections-scalar-extension",
+    "why": "Used for the explicit coefficient, support, finiteness or limit comparison named in the proof; this foundational input is not supplied by the Rankin upper-bound unit."
+   },
+   {
+    "node": "lem-coef-integral-compact-support",
+    "why": "Used for the explicit coefficient, support, finiteness or limit comparison named in the proof; this foundational input is not supplied by the Rankin upper-bound unit."
+   },
+   {
+    "node": "lem-sfb-noetherian-connected-components-open",
+    "why": "Used for the explicit coefficient, support, finiteness or limit comparison named in the proof; this foundational input is not supplied by the Rankin upper-bound unit."
+   },
+   {
+    "node": "cor-galois-lisse-representations",
+    "why": "Used for the explicit coefficient, support, finiteness or limit comparison named in the proof; this foundational input is not supplied by the Rankin upper-bound unit."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Exact sections on the algebraically closed point identify termwise coefficient complexes with derived sections; this is a foundational pro-etale comparison, not a Rankin unit argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "lem-tw-lisse-rational-realization",
+  "lem-per-lisse-completed-system-comparison",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "thm-nagata-compactification",
+  "lem-trf-compactification-cohomology",
+  "sk-thm-pe-direct-image-comparison",
+  "sk-thm-pe-classical-sheaves",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-pc-derived-limit-milnor-sequence",
+  "lem-pc-flat-tensor-complex-cohom",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-coef-integral-compact-support",
+  "lem-sfb-noetherian-connected-components-open",
+  "cor-galois-lisse-representations",
+  "lem-weil-point-proetale-sections-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NS-cb7803bb4",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-cb7803bb4 (reviewer sub-agent of L); spot-checked: I read the item, all nine steps, the new lattice node, and the statement of every cited node in full; I made no changes. Sources checked: Milne LEC Remark 29.7 (p.166) and the compact-support definition, and Bhatt-Scholze Prop 6.8.4(1)-(6), Lemma 7.4.7 and Lemma 7.4.10. No SGA is cited. Steps 1-2: the lattice M comes from the new lemma; lem-per gives M_n with M=lim nu^*M_n; M[0] is constructible by stratified-perfect (ii)=>(i); lem-tw full faithfulness identifies M[1/varpi] with For(F). Steps 3-4: nu^*j_!=j_!nu^*, compactification cohomology, and the pro-etale direct-image comparison give V_n=Gamma(Xbar,j_!M_n). Applying proper-support composition to j and p gives an injection into W_n whose image is the sections with proper support. Step 5: Gamma at an algebraically closed point is exact, sections commute with Rlim, and the degree-0 Milnor sequence has R^1lim H^{-1}=0, so no Mittag-Leffler condition is used. Steps 6-7: flat scalar extension keeps H^0 and injectivity; stage changes go through lem-coef-integral-compact-support (Tor amplitude [0,0]) and the compact-support and point coefficient comparisons. Step 8: on finitely many clopen components, cor-galois (1) makes the support of s_n a union of components; the supports increase and stabilize, so S=S_N is proper. Step 9 is elementary. Small cases tested: X empty, X proper, A^1 with a constant section, pt disjoint union A^1, and varpi-divisible classes. New node lem-a1-smooth-lisse-integral-lattice: true, since T smooth implies normal implies geometrically unibranch, so pi1^proet=pi1^et is profinite (BS 7.4.10), a compact monodromy group fixes a lattice, and BS 7.4.7 turns that lattice into M. It is not a duplicate: lem-weil-pbc-lisse-lattice-etale-local and lem-sfb-etale-local-monodromy-realization give lattices only etale-locally, and lem-weil-pbc-lisse-e-constructible-integral-lattice gives a constructible, not lisse, model. It does not restate a clause of the item. Batch-5 check: I computed the closure of nt-target-weil-conjectures and nt-target-zeta-rational on the base and on the delivery, and the delivery adds exactly one node, the new lemma. lem-tw-lisse-rational-realization is a coefficient realization and reaches trace-formula material only through a pullback-realization comparison: outside. lem-weil-pbc-integral-stratified-perfect-characterization reaches Poincare duality only through a general definition: outside. lem-trf-compactification-cohomology is the general identity RGamma_c=RGamma(Xbar,j_!), which the trace-formula assumption cannot supply and which is already in the batch-5 closure: outside. lem-pur-compact-support-integral-coefficient-comparison reaches the trace-formula chapter only through a general adjoint-mate lemma: outside. cor-galois-lisse-representations is the Galois correspondence, not Poincare duality, and the parent already cites it: outside. I accept all 23 tool_uses as foundational black-box tools. proof_deps equals the union of the uses, and there is no cycle."
  }
 }
