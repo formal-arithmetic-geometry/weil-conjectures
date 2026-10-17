@@ -25,41 +25,124 @@
   "lem-weil-pbc-extension-by-zero-adjunction",
   "lem-weil-pbc-inverse-image-composition-module-linear"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every object $T\\xrightarrow{\\varphi}V$ of the small etale site, the defining formula gives $(\\rho_k\\rho_jG)(T\\xrightarrow{\\varphi}V)=G(T\\xrightarrow{\\varphi}V\\xrightarrow{k}U\\xrightarrow{j}X)=G(T\\xrightarrow{l\\varphi}X)=(\\rho_lG)(T\\xrightarrow{\\varphi}V)$. The restriction maps for both sides are the restriction maps of $G$ along the same composites, so these equalities identify $\\rho_k\\rho_jG$ and $\\rho_lG$ strictly as sheaves of $\\Lambda$-modules.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03EH (lemma-relocalize), together with the explicit restriction description after Definition 03S3 in etale-cohomology.tex"
+   }
+  },
+  {
+   "text": "For an open immersion $a:W\\hookrightarrow Y$ put $S_W=S\\times_YW$ for $S\\in Y_{\\Et}$. The direct-image definition gives $(a_*F)(S)=F(S_W)$. The adjunction $\\rho_a\\dashv a_*$ can be checked directly: a map $\\alpha:\\rho_aG\\to F$ gives $\\beta_S:G(S)\\to F(S_W)$ by $s\\mapsto\\alpha_{S_W}(s|_{S_W})$. Conversely, for $T\\in W_{\\Et}$, set $\\alpha_T=\\beta_T$ after the canonical identification $T\\times_YW\\cong T$, since $a$ is an open immersion. These assignments are inverse: on $T$ the projection $T\\times_YW\\to T$ is an isomorphism, and on $S$ their composite is $\\beta_S$ by naturality for $S_W\\to S$. They commute with module scalars and sheaf maps. Taking $F=\\rho_aG$ and $\\alpha=\\mathrm{id}$ shows that the unit in this restriction model sends $s\\in G(S)$ to $s|_{S_W}$.",
+   "uses": [
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "After Definition 03S3 (definition-extension-zero), restriction description; explicit adjunction calculation using the direct-image definition"
+   }
+  },
+  {
+   "text": "The cited extension-by-zero adjunction statement identifies $a^{-1}G(T\\to W)$ with $G(T\\to Y)$, giving exactly $\\theta_{a,G}$. Its compatibility with the unit of $a^{-1}\\dashv a_*$ is also explicit from the definition of inverse image: the presheaf inverse-image generator represented by $s\\in G(S)$ and $T\\to S$ over $Y$ maps to $s|_T\\in G(T)$. This respects the restriction relations and hence the sheafification defining $a^{-1}G$. Applied to the unit on $S$, with $T=S_W$ and its projection to $S$, it gives $\\theta_{a,G}(\\eta_{a,G,S}(s))=s|_{S_W}$, with $a_*$ understood on $\\theta$. Thus $\\theta$ identifies the inverse-image unit with the restriction-model unit computed in Step 2. This applies to $j,k,l$, naturally in $G$.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "After Definition 03S3 (definition-extension-zero); inverse-image identification evaluated on presheaf generators"
+   }
+  },
+  {
+   "text": "Set $r_G=\\rho_k(\\theta_{j,G})\\circ\\theta_{k,j^{-1}G}$ and $h_G=\\theta_{l,G}^{-1}\\circ r_G$. We check the unit equation characterizing $c_{j,k}$ in the two cited composition statements. For $S\\in X_{\\Et}$ write $S_U=S\\times_XU$, $S_V=S\\times_XV$. Under Step 3 the composite unit $j_*\\eta_kj^{-1}\\circ\\eta_j$, followed by $j_*k_*(r_G)$, sends $s\\in G(S)$ first to $s|_{S_U}$ and then to $(s|_{S_U})|_{S_U\\times_UV}$. The right-hand side $d_{j,k,\\rho_lG}\\circ\\eta_l$ in the restriction model sends it first to $s|_{S_V}$ and then restricts along the canonical isomorphism $S_U\\times_UV\\to S_V$, by clause (1) of the abelian composition statement. These are the same map: both restrict $s$ along the composite projection $S_U\\times_UV\\to S$. Naturality of $d$ with respect to $\\theta_{l,G}$ and cancellation of its isomorphism therefore give $j_*k_*(h_G)\\circ j_*\\eta_kj^{-1}\\circ\\eta_j=d_{j,k,l^{-1}G}\\circ\\eta_l$. The maps $h_G$ are natural module isomorphisms, since they are composites of such maps. The uniqueness clause of the module-linear composition statement implies $h=c_{j,k}$. Multiplying by $\\theta_l$ proves the required equality, with the endpoint equality of Step 1. No finiteness or torsion hypothesis on $\\Lambda$ was used.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-inverse-image-composition-module-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03EH (lemma-relocalize); unit comparison written explicitly, using sites-modules.tex Tag 03D8 (lemma-push-pull-composition-modules)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-inverse-image-composition-module-linear"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03EH (lemma-relocalize), restriction description after Definition 03S3 in etale-cohomology.tex, and module composition of Tag 03D8; explicit unit calculation by the worker"
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "rg -n 'overMapPullbackComp|overPullbackComp|def overMapPullback' Mathlib/CategoryTheory/Sites",
-   "results": "CategoryTheory.GrothendieckTopology.overMapPullbackComp (Mathlib/CategoryTheory/Sites/Over.lean:456), overMapPullbackId (:449), overMapPullbackCongr (:437)",
+   "tool": "leanfinder",
+   "query": "inverse image along composable open immersions agrees with iterated restriction on etale sheaves",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp (Mathlib/AlgebraicGeometry/Modules/Sheaf); related open-immersion restriction declarations, but no small-etale sheaf inverse-image theorem",
    "date": "2026-10-17",
-   "verdict": "no match: composition isomorphism for pullback of sheaves along maps of slice sites C/X, not the small etale site of schemes nor its compatibility with the unit-defined inverse-image composition isomorphism"
+   "verdict": "no match for the small-etale sheaf statement"
   },
   {
-   "tool": "grep",
-   "query": "rg -ln 'Etale.*restrict.*comp|restrictComp' Mathlib/AlgebraicGeometry",
-   "results": "none",
+   "tool": "leanfinder",
+   "query": "composition isomorphism of inverse images is compatible with restriction for open immersions",
+   "results": "AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq; Scheme.Modules.restrictFunctorComp_inv_app_app; no small-etale inverse-image/restriction compatibility theorem",
    "date": "2026-10-17",
-   "verdict": "no match"
+   "verdict": "no match for the small-etale sheaf statement"
   },
   {
-   "tool": "leansearch",
-   "query": "inverse image along composite open immersions agrees with iterated restriction on etale sheaves",
-   "results": "not run: LeanSearch is not available on the review machine",
+   "tool": "loogle",
+   "query": "Functor.sheafPullback, CategoryTheory.Adjunction",
+   "results": "unknown identifier 'Functor.sheafPullback'",
    "date": "2026-10-17",
    "verdict": "unavailable"
   },
   {
    "tool": "loogle",
-   "query": "overMapPullbackComp",
-   "results": "not run: Loogle is not available on the review machine",
+   "query": "AlgebraicGeometry.IsOpenImmersion, Scheme.Modules.restrictFunctorComp",
+   "results": "unknown identifier 'Scheme.Modules.restrictFunctorComp'",
    "date": "2026-10-17",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "restriction.*composition|sheafPullback|openImmersion",
+   "results": "Mathlib/CategoryTheory/Sites/Pullback.lean:18,24,55,60; no etale open-immersion inverse-image/restriction theorem",
+   "date": "2026-10-17",
+   "verdict": "no match for the small-etale sheaf statement"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictFunctorComp|IsOpenImmersion",
+   "results": "Mathlib/AlgebraicGeometry/Restrict.lean and related AlgebraicGeometry files; Scheme.Modules.restrictFunctorComp is for structure-sheaf modules, not small-etale sheaves",
+   "date": "2026-10-17",
+   "verdict": "no match for the small-etale sheaf statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image along composable open immersions agrees with iterated restriction on etale sheaves",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp and open-immersion structure-sheaf declarations; no small-etale sheaf theorem",
+   "date": "2026-10-17",
+   "verdict": "no match for the small-etale sheaf statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "compatibility of inverse image composition isomorphism with restriction of etale sheaves",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback and related open-immersion declarations; no small-etale sheaf theorem",
+   "date": "2026-10-17",
+   "verdict": "no match for the small-etale sheaf statement"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -76,5 +159,39 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-open-inverse-image-restriction-composition",
+  "worker": "stage1",
+  "summary": "Retained the statement, blueprint ancestry and logged Mathlib searches. Proved strict composition of restriction pointwise, wrote the restriction/direct-image adjunction and its unit on sections, evaluated the canonical inverse-image identification on generators, then checked the full unit equation for the candidate composition map using the existing composition statements. This removes the implicit transport argument from the retained attempt. No new nodes.",
+  "blueprint": "Realizes the final clause of cor-cbc-derived-extension-zero-base-change proof, “pasting properties of the construction in [lem-cbc-extension-zero-base-change]”, specifically the identification of inverse-image composition with the restriction-model composition used for open-immersion extension-by-zero pasting.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "The open-immersion route needs the existing etale extension-by-zero adjunction and its explicit sectionwise restriction description."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition-module-linear",
+    "why": "The canonical composition map is supplied by the existing module-linear inverse-image-composition result and its unit-compatible uniqueness clause."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition",
+    "why": "Clause (1) gives the actual fibre-product map d and clause (2) its precise unit equation; these canonical sheaf comparisons are generic tools for the open-immersion route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NE-3ebd05449",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-3ebd05449 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full: def-weil-open-immersion, def-weil-pbc-direct-image (including its module clause), def-weil-pbc-inverse-image, lem-weil-pbc-extension-by-zero-adjunction, lem-weil-pbc-inverse-image-composition (1)-(3), the module-linear node and prop-weil-pbc-inverse-image-modules-exact. I also read the citing parent's Step 3, which uses exactly theta_l∘c = rho_k(theta_j)∘theta_k. Sources checked: Stacks 03EH lemma-relocalize (sites.tex l.5455), 03S3 and the following text on restriction (etale-cohomology.tex l.11361-11420), and 03D8 (sites-modules.tex l.1236). The proof origin is correctly marked agent. The statement is well-typed. theta is canonical because (T, T≅T×_Y W) is initial in the presheaf-pullback index category. The coefficients are a general commutative Lambda with the constant sheaf, and the parent's finite Lambda is a special case. I tested id j and id k, V empty, G=0 and Lambda=0. I recomputed Steps 1-4 by hand. Step 1 is the strict equality from the definition. Step 2 gives the adjunction and the unit s↦s|_{S_W}. Step 3 shows theta carries the inverse-image unit to that unit through the generators (s, S_W→S). Step 4: both sides send s to s|_{S_U×_U V}; naturality of d at theta_l and cancellation give the clause (2) unit equation for h, so h=c by uniqueness. The module linearity of theta holds at presheaf level, and the abelian uniqueness gives h=c anyway. Each step uses only the cited statements, never their proofs. There are no new nodes. An rg search of the DAG found no duplicate, and the item is not a restated clause of its parent. The Mathlib searches are retained, and restrictFunctorComp concerns O_X-modules, not etale Lambda-sheaves. I accept the three tool_uses (extension-by-zero adjunction, which is Lean closed; inverse-image-composition; module-linear) as generic canonical-comparison tools. No SGA source is cited, A-F are clean, and no fixes were made."
  }
 }
