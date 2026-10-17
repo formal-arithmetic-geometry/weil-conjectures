@@ -41,24 +41,54 @@
  ],
  "proof": [
   {
-   "text": "Work with a fixed commutative coefficient ring, and write $L_u=u^{-1}$, $R_u=Ru_*$. The derived adjunctions and their units and counits are those explicitly specified in [def-kun-unbounded-exchange]. By [lem-kun-0ezp], every etale $S$-scheme is a disjoint union of copies of $S$. The sheaf axiom gives $H(\\coprod_I S)=\\prod_I H(S)$, with restriction maps given by the maps of index sets. Thus evaluation $H\\mapsto H(S)$ and the constant-sheaf functor [def-kun-constant-sheaf] are inverse equivalences, also for module sheaves: the module action is evaluated componentwise. The equivalences are exact, so applying them to complexes and inverting quasi-isomorphisms gives the asserted derived identification. In particular $R_fE=A$, $R_gK=B$, $L_gA=\\underline A$; the last identification also follows from [lem-kun-pullback-constant]. The ordinary adjunction for $g$ becomes the constant-sheaf/global-sections adjunction of [def-kun-constant-projection-morphism] under this equivalence: a map $\\underline M\\to H$ is determined by the images in $H(Y)$ of its constant labels, and conversely these sections restrict to define the map on each etale object and then its sheafification. This is the same Hom bijection as $g^{-1}\\dashv g_*$, since evaluating $g_*H$ at $S$ gives $H(Y)$. The tensor comparisons in both descriptions send a pair of constant labels to their tensor, so they agree before deriving. Computing both Hom bijections on the same K-injective representatives identifies their derived counits and tensor comparisons as well. Let $\\ell:R_cT\\to R_gR_qT$ be the composition comparison of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. It is compatible with the composite adjunction of [def-weil-pbc-composite-adjunction], not just an unspecified isomorphism of objects. Indeed [prop-weil-pbc-inverse-image-modules-exact] and [lem-weil-pbc-right-adjoint-preserves-kinjective] show that for a K-injective representative $I$ of $T$, $q_*I$ is K-injective. Choose $J=q_*I$ and $j=1$ in the normalization of that composition lemma: $\\ell$ is then the ordinary composition identification on complexes. The units and counits are induced by the same ordinary adjunctions, whose composite counit is $\\varepsilon_q\\circ L_q\\varepsilon_g$ by the cited composite-adjunction definition. Hence transposing through $\\ell$ is exactly transposing first under $L_g\\dashv R_g$ and then under $L_q\\dashv R_q$, with $L_qL_g\\cong L_c$. The composition identifications on inverse images used here are the canonical module lifts of [lem-weil-pbc-inverse-image-composition-module-linear], clause (2). That statement explicitly says that they carry the composite-adjunction unit to the single-map unit under the direct-image composition identification. Hence the ordinary-composition normalization just checked also identifies the single-map derived adjunction with the composite one, with no choice of an unrelated isomorphism of left adjoints. These are exactly the composition identifications specified in the current [def-kun-kunneth-map].",
+   "text": "By [lem-kun-0ezp], every object of the small étale site of $S=\\operatorname{Spec}k$ is a disjoint union of copies of $S$. Since $k$ is separably closed [def-kun-separably-closed], it has no nontrivial finite separable extension, so every separable algebraic extension of $k$ (a union of finite separable ones) is $k$ itself: $k^{\\rm sep}=k$ and $G=\\operatorname{Gal}(k/k)$ is trivial. Fix an algebraically closed field $\\Omega\\supseteq k$ and the geometric point $\\bar s:\\operatorname{Spec}\\Omega\\to S$. For $\\Lambda=\\mathbf Z$, [lem-exc-abelian-sheaves-gmodules] with $K=k$ says that the geometric stalk at $\\bar s$ is an additive equivalence from abelian sheaves on $S_{\\Et}$ to discrete $G$-modules, i.e. (as $G=1$) to all abelian groups; an additive equivalence of abelian categories is exact. For $\\Lambda=\\mathbf Z/n\\mathbf Z$, [lem-exc-field-discrete-modules] with the finite ring $A=\\Lambda$ gives the exact equivalence of $\\Lambda$-module sheaves on $S_{\\Et}$ with $\\Lambda[G]$-modules, i.e. $\\Lambda$-modules, sections corresponding to invariants, i.e. to the whole stalk. In both cases the global-section-to-germ map $F(S)\\to F_{\\bar s}$ is an isomorphism, naturally in $F$: an étale neighbourhood $(U,\\bar u)$ of $\\bar s$ has $U=\\coprod S$, $\\bar u$ lies on one component, and the inclusion of that component is a morphism of neighbourhoods $(S,\\bar s)\\to(U,\\bar u)$, so $(S,\\bar s)$ is cofinal in the colimit defining the stalk. Hence evaluation $\\mathrm{ev}(F)=F(S)$ is an exact $\\Lambda$-linear equivalence $\\Mod(S_{\\Et},\\Lambda)\\to\\Mod(\\Lambda)$. Next, sheafification [def-weil-pbc-sheafification] does not change the value at $S$: for a presheaf $P$ of $\\Lambda$-modules and a sheaf $F$, a morphism $P\\to F$ is the same as a $\\Lambda$-linear map $P(S)\\to F(S)$, because $F(U)=\\prod F(S)$ over the components of $U=\\coprod S$ (sheaf axiom for the covering by the pairwise disjoint components) and every $S$-morphism between disjoint unions of copies of $S$ maps each component identically onto a component ($\\operatorname{Aut}_S(S)=\\{1\\}$). By the universal property and full faithfulness of $\\mathrm{ev}$ on sheaves, the canonical map $P(S)\\to P^{\\#}(S)$ is an isomorphism. Applied to the constant presheaf with value $M$, this gives $\\mathrm{ev}(\\underline M)=M$ [def-kun-constant-sheaf], so the constant-sheaf functor is the quasi-inverse of $\\mathrm{ev}$ with identity unit; applied to the presheaf tensor product of [def-pur-sheaf-tensor-product] (here $\\Lambda_S(S)=\\Lambda$), it gives $\\mathrm{ev}(F\\otimes_{\\Lambda_S}G)=F(S)\\otimes_\\Lambda G(S)$ with $x\\otimes y\\mapsto x\\otimes y$. Applying $\\mathrm{ev}$ termwise, it commutes with total tensor complexes and with acyclicity in both directions, hence carries K-flat complexes to K-flat complexes; so it induces an equivalence $D(S_{\\Et},\\Lambda)\\simeq D(\\Lambda)$, preserving cohomological lower bounds, which is monoidal for the ordinary derived tensor of [def-kun-derived-tensor] with tensor comparison $x\\otimes y\\mapsto x\\otimes y$ on representatives. All module structures and restrictions are componentwise.",
    "uses": [
-    "def-kun-unbounded-exchange",
     "lem-kun-0ezp",
+    "def-kun-separably-closed",
+    "lem-exc-abelian-sheaves-gmodules",
+    "lem-exc-field-discrete-modules",
+    "def-weil-pbc-sheafification",
     "def-kun-constant-sheaf",
-    "lem-kun-pullback-constant",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "def-weil-pbc-composite-adjunction",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "def-kun-constant-projection-morphism",
-    "lem-weil-pbc-inverse-image-composition-module-linear",
-    "def-kun-kunneth-map"
+    "def-pur-sheaf-tensor-product",
+    "def-kun-derived-tensor"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E (lemma-derived-pushforward-composition), normalization on K-injectives; categories.tex Tag 0DV0 (lemma-compose-counits); morphisms.tex Tag 02GL (lemma-etale-over-field), specialized via lem-kun-0ezp; sites-modules.tex Tag 03D8 (lemma-push-pull-composition-modules), canonical module composition and its adjunction normalization"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-kunneth-map-agrees.proof.md",
+    "place": "Proof paragraph, opening reduction to comparing adjoints under $c^{-1}\\dashv Rc_*$; coefficient equivalences are supplied by the existing point-equivalence lemmas."
+   }
+  },
+  {
+   "text": "Using the monoidal equivalence $\\mathrm{ev}$ of step 1 and the definition [def-kun-rgamma-unbounded], together with $(g_*G)(S)=G(Y\\times_SS)=G(Y)$ for the direct image [def-weil-pbc-direct-image] (and likewise for $f$), evaluation at the terminal object identifies $R_fE$ with $A$ and $R_gK$ with $B$, while [lem-kun-pullback-constant] identifies $L_gA$ with the constant complex $\\underline A$. The ordinary $g^{-1}\\dashv g_*$ Hom bijection is the constant-sheaf/global-sections bijection under these componentwise equivalences; its counit sends a constant label to the corresponding section. The tensor comparison sends constant labels to their tensor, so by [def-kun-constant-projection-morphism] it is exactly the projection morphism $r$ after passage to derived categories using [def-kun-derived-tensor].",
+   "uses": [
+    "lem-exc-field-discrete-modules",
+    "def-kun-rgamma-unbounded",
+    "lem-kun-pullback-constant",
+    "def-kun-constant-projection-morphism",
+    "def-kun-derived-tensor",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-kunneth-map-agrees.proof.md",
+    "place": "Proof paragraph, the sentence identifying the constant-object map [lem-kun-pullback-constant] and the fourth mate (constant projection) of $\\theta$."
+   }
+  },
+  {
+   "text": "The module categories $\\Mod(T_{\\Et},\\Lambda)$ for $T=S,Y,W$ are Grothendieck abelian [lem-weil-pbc-module-sheaves-grothendieck-abelian], and $g^{-1},q^{-1},c^{-1}$ are exact additive left adjoints of $g_*,q_*,c_*$ [prop-weil-pbc-inverse-image-modules-exact]; so [lem-sfb-derived-composition-adjunction-normalization] applies with $L_a=g^{-1}$, $L_b=q^{-1}$, $L_c=c^{-1}$ and $\\lambda$ the module composition isomorphism $q^{-1}g^{-1}\\xrightarrow{\\sim}c^{-1}$ of [lem-weil-pbc-inverse-image-composition-module-linear], clause (2), whose conjugate is the direct-image composition isomorphism $c_*\\cong g_*q_*$ by that lemma's final clause. Apply the canonical derived pushforward comparison [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to $\\ell:R_cT\\to R_gR_qT$. Its K-injective normalization, together with [lem-sfb-derived-composition-adjunction-normalization], identifies this comparison with the conjugate of the composite derived adjunction for $L_qL_g\\dashv R_gR_q$, so its units and counits are the composite ones specified by [def-weil-pbc-composite-adjunction]. The final clause of [lem-weil-pbc-inverse-image-composition-module-linear] says that the canonical module inverse-image composition map carries the composite unit to the single-map unit. Therefore transposing through $\\ell$ is exactly the single-map $c^{-1}\\dashv R_c$ transpose used in [def-kun-kunneth-map].",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-inverse-image-composition-module-linear",
+    "def-kun-kunneth-map",
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-kunneth-map-agrees.proof.md",
+    "place": "Proof paragraph, the sentence beginning 'Each arrow in the definition of $\\theta$ is the mate of an identification built from the adjunction data'."
    }
   },
   {
@@ -74,12 +104,12 @@
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-kunneth-map-agrees.proof.md",
     "place": "Tag 07A4 (lemma-pullback-tensor-product); Tags 06YU (definition-derived-tor), 0G7D (lemma-factor-through-K-flat); explicit comparison argument; Tag 0G7E (lemma-pullback-K-flat), preservation of the representative models; sites-modules.tex Tag 03D8 (lemma-push-pull-composition-modules), underlying canonical composition maps"
    }
   },
   {
-   "text": "Define $s:A\\otimes B\\to R_g(L_gA\\otimes K)$ by\n$$s=R_g(\\sigma_{K,L_gA})\\circ r\\circ\\sigma_{A,B}.$$\nBy [def-kun-constant-projection-morphism], the $g$-adjoint of $r$ is $\\varepsilon_{g,K}\\otimes1_{L_gA}$. By the adjunction identification in step 1 this is the $g$-adjunction used here. Naturality and involutivity of the signed symmetry checked in step 2 give the explicit equality\n$$\\sigma_{K,L_gA}(\\varepsilon_{g,K}\\otimes1_{L_gA})\\sigma_{L_gA,L_gB}=1_{L_gA}\\otimes\\varepsilon_{g,K}.$$\nThus [lem-kun-tensor-sym] and the adjunct-counit identity give\n$$\\varepsilon_{g,L_gA\\otimes K}\\,L_g(s)=1_{L_gA}\\otimes\\varepsilon_{g,K}.$$\nFor $F=L_pE$, the definitions [def-kun-unbounded-exchange] and [def-kun-projection-formula-map] give, respectively,\n$$\\varepsilon_{q,F}L_q(e)=L_p(\\varepsilon_{f,E}):L_qL_gA\\cong L_pL_fA\\to F,$$\n$$\\varepsilon_{q,T}L_q(t)=\\varepsilon_{q,F}\\otimes1_{L_qK}.$$\nEach equality is just the adjunct-counit identity [lem-weil-pbc-adjunct-counit-identity], applied to the specific adjoint written in the cited definition; all source tensor identifications are those checked in step 2. No map is assumed invertible in these equalities.",
+   "text": "Define $s:A\\otimes B\\to R_g(L_gA\\otimes K)$ by\n$$s=R_g(\\sigma_{K,L_gA})\\circ r\\circ\\sigma_{A,B}.$$\nBy [def-kun-constant-projection-morphism], the $g$-adjoint of $r$ is $\\varepsilon_{g,K}\\otimes1_{L_gA}$. By the adjunction identification in step 2 this is the $g$-adjunction used here. Naturality and involutivity of the signed symmetry checked in step 4 give the explicit equality\n$$\\sigma_{K,L_gA}(\\varepsilon_{g,K}\\otimes1_{L_gA})\\sigma_{L_gA,L_gB}=1_{L_gA}\\otimes\\varepsilon_{g,K}.$$\nThus [lem-kun-tensor-sym] and the adjunct-counit identity give\n$$\\varepsilon_{g,L_gA\\otimes K}\\,L_g(s)=1_{L_gA}\\otimes\\varepsilon_{g,K}.$$\nFor $F=L_pE$, the definitions [def-kun-unbounded-exchange] and [def-kun-projection-formula-map] give, respectively,\n$$\\varepsilon_{q,F}L_q(e)=L_p(\\varepsilon_{f,E}):L_qL_gA\\cong L_pL_fA\\to F,$$\n$$\\varepsilon_{q,T}L_q(t)=\\varepsilon_{q,F}\\otimes1_{L_qK}.$$\nEach equality is just the adjunct-counit identity [lem-weil-pbc-adjunct-counit-identity], applied to the specific adjoint written in the cited definition; all source tensor identifications are those checked in step 4. No map is assumed invertible in these equalities.",
    "uses": [
     "def-kun-constant-projection-morphism",
     "lem-kun-tensor-sym",
@@ -89,24 +119,24 @@
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-kunneth-map-agrees.proof.md",
     "place": "Tag 0B56 (equation-projection-formula-map), its adjunction construction; categories.tex Definition 0037 (definition-adjoint), adjunct/counit formula"
    }
   },
   {
-   "text": "Put $U=L_gA\\otimes K$, $m=t\\circ(e\\otimes1_K):U\\to R_qT$, and\n$$v=R_g(m)\\circ s:A\\otimes B\\longrightarrow R_gR_qT,\\qquad \\lambda=\\ell^{-1}\\circ v.$$\nNaturality of the counit for the morphism $m$ says\n$$\\varepsilon_{g,R_qT}\\,L_gR_g(m)=m\\,\\varepsilon_{g,U}.$$\nConsequently the $g$-adjoint of $v$ is $m(1_{L_gA}\\otimes\\varepsilon_{g,K})$, by step 3. The composite-adjunction formula [def-weil-pbc-composite-adjunction], and the normalization checked in step 1, make the $c$-adjoint of $\\lambda$ the following typed morphism:\n$$L_qL_g(A\\otimes B)\\xrightarrow{L_q(1\\otimes\\varepsilon_{g,K})}L_qU\\xrightarrow{L_q(e\\otimes1)}L_q(R_qF\\otimes K)\\xrightarrow{L_qt}L_qR_qT\\xrightarrow{\\varepsilon_{q,T}}T.$$\nThis is obtained by applying the Hom bijections, whose inverse is the counit formula of [lem-weil-pbc-adjunct-counit-identity]; no unit is moved past a tensor without the naturality already checked.",
+   "text": "Put $U=L_gA\\otimes K$, $m=t\\circ(e\\otimes1_K):U\\to R_qT$, and\n$$v=R_g(m)\\circ s:A\\otimes B\\longrightarrow R_gR_qT,\\qquad \\lambda=\\ell^{-1}\\circ v.$$\nNaturality of the counit for the morphism $m$ says\n$$\\varepsilon_{g,R_qT}\\,L_gR_g(m)=m\\,\\varepsilon_{g,U}.$$\nConsequently the $g$-adjoint of $v$ is $m(1_{L_gA}\\otimes\\varepsilon_{g,K})$, by step 5. The composite-adjunction formula [def-weil-pbc-composite-adjunction], and the normalization checked in step 3, make the $c$-adjoint of $\\lambda$ the following typed morphism:\n$$L_qL_g(A\\otimes B)\\xrightarrow{L_q(1\\otimes\\varepsilon_{g,K})}L_qU\\xrightarrow{L_q(e\\otimes1)}L_q(R_qF\\otimes K)\\xrightarrow{L_qt}L_qR_qT\\xrightarrow{\\varepsilon_{q,T}}T.$$\nThis is obtained by applying the Hom bijections, whose inverse is the counit formula of [lem-weil-pbc-adjunct-counit-identity]; no unit is moved past a tensor without the naturality already checked.",
    "uses": [
     "def-weil-pbc-composite-adjunction",
     "lem-weil-pbc-adjunct-counit-identity"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/categories.tex",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-kunneth-map-agrees.proof.md",
     "place": "categories.tex Tag 0DV0 (lemma-compose-counits); explicit first transpose and counit naturality"
    }
   },
   {
-   "text": "Substitute the projection identity from step 3 into this $c$-adjoint. Bifunctoriality of the tensor comparison [lem-kun-inverse-image-monoidal] turns its final two arrows into $\\varepsilon_{q,F}\\otimes1_{L_qK}$. Composing with $L_q(e\\otimes1)$ and the first arrow then gives\n$$\\begin{aligned}\n\\lambda^\\flat\n&=(\\varepsilon_{q,F}L_qe)\\otimes L_q(\\varepsilon_{g,K})\\\\\n&=L_p(\\varepsilon_{f,E})\\otimes L_q(\\varepsilon_{g,K}):\nL_c(A\\otimes B)\\cong L_pL_fA\\otimes L_qL_gB\\longrightarrow L_pE\\otimes L_qK=T.\n\\end{aligned}$$\nThe second equality is the exchange identity from step 3. To compare with the current [def-kun-kunneth-map] without suppressing its source comparisons, write $\\mu^c_{A,B}:L_cA\\otimes L_cB\\xrightarrow{\\sim}L_c(A\\otimes B)$ and use that definition's $\\gamma_{f,p}:L_c\\xrightarrow{\\sim}L_pL_f$ and $\\gamma_{g,q}:L_c\\xrightarrow{\\sim}L_qL_g$. The preceding computation says explicitly that $\\lambda^\\flat=(L_p\\varepsilon_{f,E}\\otimes L_q\\varepsilon_{g,K})\\circ(\\gamma_{f,p,A}\\otimes\\gamma_{g,q,B})\\circ(\\mu^c_{A,B})^{-1}$. The module composition maps in steps 1-2 are precisely these $\\gamma$ maps, and the tensor comparison is the inverse of the same canonical $\\mu^c$. This is exactly the $\\alpha_{E,K}$ whose adjunct defines $\\kappa_{E,K}$ in [def-kun-kunneth-map], using the same K-injective Hom bijection and ordinary counits as in step 1. Injectivity of the adjunction Hom bijection therefore proves $\\lambda=\\kappa_{E,K}$. In particular this argument works for all commutative coefficient rings and unbounded complexes; properness and finiteness are needed only to make its factors invertible.",
+   "text": "Substitute the projection identity from step 5 into this $c$-adjoint. Bifunctoriality of the tensor comparison [lem-kun-inverse-image-monoidal] turns its final two arrows into $\\varepsilon_{q,F}\\otimes1_{L_qK}$. Composing with $L_q(e\\otimes1)$ and the first arrow then gives\n$$\\begin{aligned}\n\\lambda^\\flat\n&=(\\varepsilon_{q,F}L_qe)\\otimes L_q(\\varepsilon_{g,K})\\\\\n&=L_p(\\varepsilon_{f,E})\\otimes L_q(\\varepsilon_{g,K}):\nL_c(A\\otimes B)\\cong L_pL_fA\\otimes L_qL_gB\\longrightarrow L_pE\\otimes L_qK=T.\n\\end{aligned}$$\nThe second equality is the exchange identity from step 5. To compare with the current [def-kun-kunneth-map] without suppressing its source comparisons, write $\\mu^c_{A,B}:L_cA\\otimes L_cB\\xrightarrow{\\sim}L_c(A\\otimes B)$ and use that definition's $\\gamma_{f,p}:L_c\\xrightarrow{\\sim}L_pL_f$ and $\\gamma_{g,q}:L_c\\xrightarrow{\\sim}L_qL_g$. The preceding computation says explicitly that $\\lambda^\\flat=(L_p\\varepsilon_{f,E}\\otimes L_q\\varepsilon_{g,K})\\circ(\\gamma_{f,p,A}\\otimes\\gamma_{g,q,B})\\circ(\\mu^c_{A,B})^{-1}$. The module composition maps in step 3 are precisely these $\\gamma$ maps, and the tensor comparison is the inverse of the same canonical $\\mu^c$. This is exactly the $\\alpha_{E,K}$ whose adjunct defines $\\kappa_{E,K}$ in [def-kun-kunneth-map], using the same K-injective Hom bijection and ordinary counits as in step 2. Injectivity of the adjunction Hom bijection therefore proves $\\lambda=\\kappa_{E,K}$. In particular this argument works for all commutative coefficient rings and unbounded complexes; properness and finiteness are needed only to make its factors invertible.",
    "uses": [
     "lem-kun-inverse-image-monoidal",
     "def-kun-kunneth-map",
@@ -114,33 +144,51 @@
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-kunneth-map-agrees.proof.md",
     "place": "Tags 0B56 (projection morphism), 07A4 (tensor comparison); explicit second transpose, expanding the blueprint common-adjoint argument; Tag 0F1E (remark-define-kunneth-map), explicit adjoint composite with composition and tensor constraints"
    }
   },
   {
-   "text": "For (a), $q$ is proper by [lem-kun-proper-stability]. The exact additive inverse image of [prop-weil-pbc-inverse-image-modules-exact] carries bounded-below $E$ to bounded-below $F$. It also carries torsion sheaves to torsion sheaves: with the kernel/filtered-colimit definition [def-weil-pbc-torsion-etale-sheaf], exactness identifies $L_p(H[n])$ with $(L_pH)[n]$, and left adjointness identifies $L_p(\\varinjlim_n H[n])$ with $\\varinjlim_n L_p(H[n])$. The latter assertion follows directly by applying the adjunction to the colimit universal property: maps out of either object are compatible families of maps from $H[n]$ to the right adjoint. Thus $F$ has torsion cohomology. The hypotheses of [lem-kun-0f0f] hold for $(q,F,K)$ and make $t$ invertible. The hypotheses of [thm-weil-pbc-bounded-below] hold for $(f,g,E)$ and make $e$ invertible, using the same canonical mate as in [def-kun-unbounded-exchange]. For this last identification, [prop-weil-pbc-derived-inverse-image-adjunction] normalizes the bounded derived counit on a bounded-below injective representative by the termwise ordinary counit. The unbounded adjunction in [def-kun-unbounded-exchange] has the same normalization. The Hom bijection of [lem-weil-pbc-kinjective-hom-derived] computes both on the same representatives, so the bounded exchange of [def-weil-pbc-derived-exchange] and the restriction of the unbounded exchange have equal transposes $L_p\\varepsilon_f$; hence they agree. To apply the constant projection lemma, $A$ is bounded below: [lem-weil-pbc-module-sheaves-enough-injectives] and [lem-weil-pbc-dplus-injective-representative] give a bounded-below K-injective representative $I$ of $E$, and [def-kun-rgamma-unbounded] computes $A$ by $\\Gamma(X,I)$, whose terms have the same lower bound. Now [lem-kun-0f0e] applied on the assumed qcqs $Y$, to $K$ and the constant coefficient complex $A$, makes $r$ invertible. The definition of that canonical map is [def-kun-constant-projection-morphism]. The comparison $\\ell$ is invertible on the entire ambient derived category by [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], so no additional tensor boundedness theorem is needed to use Leray here.",
+   "text": "For (a), $q$ is proper by [lem-kun-proper-stability]. The exact additive inverse image in [prop-weil-pbc-inverse-image-modules-exact] preserves bounded-below complexes. It preserves torsion cohomology by the existing statement [lem-weil-pbc-inverse-image-torsion], applied degreewise to the cohomology sheaves of $E$. Therefore $F=p^{-1}E$ has the boundedness and torsion hypotheses required by [lem-kun-0f0f], so $t$ is invertible.",
    "uses": [
     "lem-kun-proper-stability",
     "prop-weil-pbc-inverse-image-modules-exact",
-    "def-weil-pbc-torsion-etale-sheaf",
-    "lem-kun-0f0f",
+    "lem-weil-pbc-inverse-image-torsion",
+    "lem-kun-0f0f"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-kunneth-map-agrees.proof.md",
+    "place": "Integer-coefficient hypothesis check"
+   }
+  },
+  {
+   "text": "The hypotheses of [thm-weil-pbc-bounded-below] hold for $(f,g,E)$, so its exchange isomorphism gives $e$. By [lem-kun-unbounded-exchange-agrees], the bounded exchange is the restriction of the unbounded exchange of [def-kun-unbounded-exchange]: both have the same transpose $L_p\\varepsilon_f$ under the normalized derived adjunction. Thus the $e$ used in the common-adjoint calculation is exactly the canonical unbounded map, not merely an isomorphic endpoint.",
+   "uses": [
     "thm-weil-pbc-bounded-below",
-    "def-kun-unbounded-exchange",
-    "prop-weil-pbc-derived-inverse-image-adjunction",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-weil-pbc-derived-exchange",
+    "lem-kun-unbounded-exchange-agrees",
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-kunneth-map-agrees.proof.md",
+    "place": "Integer-coefficient hypothesis check"
+   }
+  },
+  {
+   "text": "To apply the constant projection theorem, $A$ is bounded below. The enough-injectives and bounded-below representative nodes [lem-weil-pbc-module-sheaves-enough-injectives] and [lem-weil-pbc-dplus-injective-representative] provide a bounded-below K-injective representative $I$ of $E$; termwise sections in [def-kun-rgamma-unbounded] have the same lower bound, and [lem-kun-rgamma-unbounded-bounded] identifies this construction with the bounded derived global sections. Since $Y$ is qcqs, [lem-kun-0f0e] makes $r$ invertible for $(K,A)$. Finally $\\ell$ is invertible by [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], so no tensor boundedness theorem is needed.",
+   "uses": [
     "lem-weil-pbc-module-sheaves-enough-injectives",
     "lem-weil-pbc-dplus-injective-representative",
     "def-kun-rgamma-unbounded",
+    "lem-kun-rgamma-unbounded-bounded",
     "lem-kun-0f0e",
-    "def-kun-constant-projection-morphism",
     "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "etale-cohomology.tex Tags 0F14 (lemma-kunneth-one-proper), part (1), 0F0F (lemma-projection-formula-proper), 0F0E (lemma-pull-out-constant); proper base change as cited in the item"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-kunneth-map-agrees.proof.md",
+    "place": "Integer-coefficient hypothesis check"
    }
   },
   {
@@ -157,51 +205,57 @@
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-kunneth-map-agrees.proof.md",
     "place": "etale-cohomology.tex Tag 0F14 (lemma-kunneth-one-proper), part (2); Tags 0F0G, 0F0C, 0F10, 0F12"
    }
   },
   {
-   "text": "In both cases the morphisms $s,e,t,\\ell$ are isomorphisms by steps 6 and 7 and the symmetry [lem-kun-tensor-sym]. The symmetry squares to the identity: on bidegree $(i,j)$ the two signs multiply to $(-1)^{ij+ji}=1$, first on the tensor models and then by the descent argument of step 2. Therefore\n$$s^{-1}=\\sigma_{B,A}\\circ r^{-1}\\circ R_g(\\sigma_{L_gA,K}).$$\nReverse the displayed factorization $\\lambda=\\ell^{-1}R_g(t)R_g(e\\otimes1)s$. Its inverse is\n$$\\lambda^{-1}=s^{-1}R_g(e^{-1}\\otimes1)R_g(t^{-1})\\ell,$$\nwhich, after substituting the preceding formula for $s^{-1}$, is exactly the stated $\\theta$. Functoriality and tensor bifunctoriality take inverse pairs to inverse pairs, so cancellation gives $\\theta\\lambda=1$ and $\\lambda\\theta=1$. Step 5 identifies $\\lambda$ with $\\kappa_{E,K}$, proving both the required identity and the isomorphism assertion. Notice that the adjoint being compared was that of $\\lambda:A\\otimes B\\to R_cT$, not that of $\\theta\\kappa:A\\otimes B\\to A\\otimes B$.",
+   "text": "In both cases the morphisms $s,e,t,\\ell$ are isomorphisms by steps 8--11 and the symmetry [lem-kun-tensor-sym]. The symmetry squares to the identity: on bidegree $(i,j)$ the two signs multiply to $(-1)^{ij+ji}=1$, first on the tensor models and then by the descent argument of step 4. Therefore\n$$s^{-1}=\\sigma_{B,A}\\circ r^{-1}\\circ R_g(\\sigma_{L_gA,K}).$$\nReverse the displayed factorization $\\lambda=\\ell^{-1}R_g(t)R_g(e\\otimes1)s$. Its inverse is\n$$\\lambda^{-1}=s^{-1}R_g(e^{-1}\\otimes1)R_g(t^{-1})\\ell,$$\nwhich, after substituting the preceding formula for $s^{-1}$, is exactly the stated $\\theta$. Functoriality and tensor bifunctoriality take inverse pairs to inverse pairs, so cancellation gives $\\theta\\lambda=1$ and $\\lambda\\theta=1$. Step 7 identifies $\\lambda$ with $\\kappa_{E,K}$, proving both the required identity and the isomorphism assertion. Notice that the adjoint being compared was that of $\\lambda:A\\otimes B\\to R_cT$, not that of $\\theta\\kappa:A\\otimes B\\to A\\otimes B$.",
    "uses": [
     "lem-kun-tensor-sym"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-kunneth-map-agrees.md",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-kunneth-map-agrees.proof.md",
     "place": "Blueprint final common-adjoint conclusion, repaired by reversing the isomorphism chain; agent-written explicit cancellation"
    }
   }
  ],
  "proof_deps": [
-  "def-kun-unbounded-exchange",
   "lem-kun-0ezp",
+  "def-kun-separably-closed",
+  "lem-exc-abelian-sheaves-gmodules",
+  "lem-exc-field-discrete-modules",
+  "def-weil-pbc-sheafification",
   "def-kun-constant-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "def-kun-derived-tensor",
+  "def-kun-rgamma-unbounded",
   "lem-kun-pullback-constant",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "def-weil-pbc-composite-adjunction",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
   "def-kun-constant-projection-morphism",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "def-weil-pbc-composite-adjunction",
   "lem-weil-pbc-inverse-image-composition-module-linear",
   "def-kun-kunneth-map",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "prop-weil-pbc-inverse-image-modules-exact",
   "lem-kun-inverse-image-monoidal",
-  "def-kun-derived-tensor",
   "lem-weil-pbc-site-derived-tensor-descent",
   "lem-kun-tensor-sym",
   "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "def-kun-unbounded-exchange",
   "def-kun-projection-formula-map",
   "lem-weil-pbc-adjunct-counit-identity",
   "lem-kun-proper-stability",
-  "def-weil-pbc-torsion-etale-sheaf",
+  "lem-weil-pbc-inverse-image-torsion",
   "lem-kun-0f0f",
   "thm-weil-pbc-bounded-below",
-  "prop-weil-pbc-derived-inverse-image-adjunction",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "def-weil-pbc-derived-exchange",
+  "lem-kun-unbounded-exchange-agrees",
   "lem-weil-pbc-module-sheaves-enough-injectives",
   "lem-weil-pbc-dplus-injective-representative",
-  "def-kun-rgamma-unbounded",
+  "lem-kun-rgamma-unbounded-bounded",
   "lem-kun-0f0e",
   "lem-kun-0f0g",
   "lem-kun-0f0c",
@@ -288,7 +342,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -330,65 +384,11 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-kunneth-ordinary",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-18",
   "item": "lem-kun-kunneth-map-agrees",
   "worker": "stage1",
-  "summary": "STATEMENT-DISPUTED: imported (a) omitted qcqs Y, contrary to Stacks 0F14; infinite-disjoint-union counterexample in report.md. Restored this hypothesis and made the inverse constant projection arrow and its tensor symmetry explicit. Expanded the common-adjoint argument into eight steps, checking the composite-adjunction normalization and signed tensor coherence. All prerequisites already exist; no new nodes. Second reading supplies the missing K-flat pullback preservation citation, identifies the constant-sheaf adjunction and displays the symmetry cancellation. Generic tool proposals remain in split_report.tool_uses and are detailed in the report; only the maintainer records accepted top-level tool_uses. Returned merge-lock delivery repaired against the current DAG: reread the expanded def-kun-kunneth-map, added the existing module-composition normalization citation, and wrote its exact gamma/mu adjunct composite in step 5. Refreshed all citation quotations; no new nodes or route changes.",
-  "blueprint": "The imported sole proof paragraph is realized by steps 1-2 (derived/monoidal identifications), 3-5 (three explicit adjunct identities and the common c-adjoint), 6-7 (separate hypothesis audits of parts (a)/(b)), and 8 (inverse cancellation). The geometric route remains Leray, projection formula, proper base change, constant projection, symmetry.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "why": "Its normalized composition comparison on all ordinary unbounded module derived categories identifies the successive transposes and supplies Leray without an extra boundedness premise on the tensor; it does not replace the proper-base-change/projection-formula route."
-   },
-   {
-    "node": "prop-weil-pbc-inverse-image-modules-exact",
-    "why": "Exactness and the sheaf-level module adjunction ensure that the actual constant-coefficient pullbacks preserve boundedness and torsion; the unit monoidality lemma alone does not state this."
-   },
-   {
-    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "why": "K-injective preservation lets the normalized unbounded composition comparison be computed with the identity replacement, checking its compatibility with the composite adjunction."
-   },
-   {
-    "node": "lem-weil-pbc-site-derived-tensor-descent",
-    "why": "Its uniqueness of extension from flat-term K-flat models promotes the explicit tensor/composition and tensor/symmetry calculations to arbitrary derived objects."
-   },
-   {
-    "node": "lem-weil-pbc-adjunct-counit-identity",
-    "why": "The general adjunct/counit formula evaluates the three specific canonical maps; this is categorical bookkeeping, not another Kunneth theorem."
-   },
-   {
-    "node": "prop-weil-pbc-derived-inverse-image-adjunction",
-    "why": "Its explicit normalization of bounded units and counits checks that the bounded proper-base-change theorem concerns the same exchange mate used in the unbounded calculation."
-   },
-   {
-    "node": "lem-weil-pbc-kinjective-hom-derived",
-    "why": "Its Hom bijection identifies the bounded and unbounded counits computed on the same bounded-below injective representatives, so equal transposes identify the exchange maps."
-   },
-   {
-    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
-    "why": "Supplies the category hypothesis for a bounded-below injective representative used to check A belongs to D+ in the constant projection theorem."
-   },
-   {
-    "node": "lem-weil-pbc-dplus-injective-representative",
-    "why": "Provides the bounded-below K-injective model whose termwise sections show A is bounded below."
-   },
-   {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Supplies local Noetherianity and quasi-compactness of the finite-type Y, since Spec k is a Noetherian affine singleton."
-   },
-   {
-    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "why": "Supplies the remaining quasi-separatedness of Y for the unbounded constant projection formula."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "why": "Preserves the K-flat flat-term models under successive inverse images in step 2, after the exact constant-coefficient module pullback identification. This is a generic ringed-site tool, not a replacement geometric route."
-   },
-   {
-    "node": "lem-weil-pbc-inverse-image-composition-module-linear",
-    "why": "Its canonical constant-coefficient module composition maps explicitly preserve the composite-adjunction units. This aligns the Leray adjunction calculation and tensor coherence with the now-expanded Kunneth-map definition; it is a generic normalization tool, not a replacement for a geometric step."
-   }
-  ]
+  "summary": "Repaired the returned split by deleting three redundant statement-only nodes. The point-site and derived constant-sheaf facts are cited from the existing geometric-point and finite-field module-equivalence nodes, while Leray/composite-adjunction normalization is cited from the existing generic derived-composition and module-linearity nodes. Corrected all internal step references after the twelve-step expansion, including the projection/exchange references and the final invertibility and Kunneth-identification references. No new nodes are created.",
+  "blueprint": "The blueprint proof paragraph is realized by steps 1-3 (point-site coefficient identifications and Leray/composite-adjunction normalization), step 4 (tensor coherence), steps 5-7 (explicit adjunct identities and common Kunneth adjoint), steps 8-10 (integer coefficient hypotheses), step 11 (finite coefficient hypotheses), and step 12 (inverse cancellation)."
  },
  "tool_uses": [
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
@@ -406,12 +406,12 @@
   "lem-weil-pbc-inverse-image-composition-module-linear"
  ],
  "reviewed": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q05-9d33f3d88",
-  "group": "Q05",
+  "reviewer": "NT-cc-Q80-6feb55938",
+  "group": "Q80",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q05-9d33f3d88 (reviewer sub-agent of L); spot-checked: Full maintainer reread completed. The corrected qcqs hypothesis in (a), coefficient categories, base-change morphism, tensor symmetries, all eight proof steps, cited DAG statements, Stacks sources 0F14/0F0F/0F0E/0F0C/0F0G/0F10/0F12/0B56/07A4/0DV0/02GL, edge cases, duplicate searches, and Mathlib searches check out. No new nodes or repairs are needed; review.md records the detailed audit."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-6feb55938 (reviewer sub-agent of L); spot-checked: I read the whole item, all 41 cited statements, the main-20261015 blueprint (same as master and 20261017), and Stacks 0F14 (etale-cohomology.tex:20267) with 0F0E, 0F12, 0F0C and 0F0G. The statement is correct and matches 0F14: Y qcqs in (a) is kept from the source although the blueprint omits it, and n invertible in (b) is an extra hypothesis kept from the blueprint, not a weakening. The coefficient categories are constant-ring module sheaves with ordinary derived tensor. The exchange e is the mate of p^{-1}ε_f∘θ_□, with θ_□=γ_{f,p}γ_{g,q}^{-1}. I recomputed the common-adjoint calculation (steps 5-7 and 12) and it gives exactly α_{E,K}. The invertibility hypotheses in steps 8-11 match the Stacks lemmas. Two faults, both repaired in fixes/dag/nodes/sec-smooth-purity/lem-kun-kunneth-map-agrees.json. (1) E1/C4: steps 1-2 applied lem-kun-geometric-point-derived-constants, which assumes Ω algebraically closed, to Spec k with k only separably closed. Step 1 now gets the point equivalence from lem-exc-abelian-sheaves-gmodules for Λ=ℤ and lem-exc-field-discrete-modules for Λ=ℤ/n, both with trivial Galois group, plus three short arguments: stalk equals sections by cofinality (lem-kun-0ezp), sheafification keeps the value at S (universal property of def-weil-pbc-sheafification), and evaluation is monoidal and keeps K-flatness. Step 2 drops the geometric-point citation and adds def-weil-pbc-direct-image. (2) C1: step 3 used lem-sfb-derived-composition-adjunction-normalization without citing its Grothendieck-abelian and exact-left-adjoint hypotheses; I added lem-weil-pbc-module-sheaves-grothendieck-abelian and prop-weil-pbc-inverse-image-modules-exact and made L_a, L_b, L_c and λ explicit. proof_deps is recomputed, there is no cycle, and no node is created or dropped. Accepted tool uses: lem-exc-abelian-sheaves-gmodules, lem-exc-field-discrete-modules, lem-sfb-derived-composition-adjunction-normalization, lem-weil-pbc-module-sheaves-grothendieck-abelian, lem-weil-pbc-inverse-image-torsion, thm-weil-pbc-bounded-below. Details are in review.md.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-16",
