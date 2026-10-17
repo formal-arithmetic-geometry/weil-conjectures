@@ -10,9 +10,118 @@
  "stmt_deps": [
   "def-trf-fs-log-blowup"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $G=Q^{\\rm gp}$, $H=g^{\\rm gp}(P^{\\rm gp})$, and let $\\pi:G\\to L=G/H$ be the quotient. Identify $P,Q$ with their images in their group completions, as permitted by integrality in [def-trf-fs-log-blowup]. Set $S=\\pi(Q)\\subseteq L$. Choose finitely many monoid generators of $Q$; their images generate $S$ as a monoid and $L$ as a group, because every element of $G$ is a difference of elements of $Q$. Thus $L$ is a finitely generated abelian group. It is torsion free by hypothesis, so [lem-trf-fg-torsionfree-group-free] supplies a finite $\\mathbf Z$-basis $e_1,\\ldots,e_r$. Use its coordinates to identify $L$ with $\\mathbf Z^r$.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "lem-trf-fg-torsionfree-group-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 3.7(a), printed p. 75, finite basis for a finitely generated torsion-free group; agent-supplied application to the cokernel of the chart of VI 1.9."
+   }
+  },
+  {
+   "text": "The image monoid $S$ is saturated in $L$. Indeed, suppose $n\\ell\\in S$ with $n\\geq1$. Choose $x\\in G$ lifting $\\ell$ and $q\\in Q$ with $\\pi(q)=n\\ell$. Since $nx-q\\in H$, there exist $a,b\\in P$ with $nx=q+g(a)-g(b)$. Consequently\n$$n(x+g(b))=q+g(a)+(n-1)g(b)\\in Q.$$\nSaturation of $Q$ in $G$ [def-trf-fs-log-blowup] gives $x+g(b)\\in Q$. Its image is $\\ell$, proving $\\ell\\in S$. This calculation uses no assumption that $g(P)$ is a face and no torsion-freeness of $G$.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.17, printed p. 101, saturation convention; explicit quotient-image calculation supplied by the agent."
+   }
+  },
+  {
+   "text": "If $r=0$, $L=0$ and its empty basis already lies in $S$; proceed to Step 8. Suppose $r>0$. Let $s_1,\\ldots,s_m$ be the chosen generators of $S$ and let $B$ be the $r\\times m$ integer matrix of their coordinates. Since they generate $L$ as a group, express each $e_j$ as an integer combination of the $s_i$. These expressions give an $m\\times r$ integer matrix $C$ with $BC=I_r$. Apply [lem-weil-pbc-cauchy-binet]:\n$$1=\\det(BC)=\\sum_{|T|=r}\\det(B^T)\\det(C_T).$$\nHere $\\det I_r=1$ follows directly from [def-weil-pbc-matrix-determinant]. Some summand is nonzero, so some ordered $r$-tuple of elements of $S$ has nonzero integer determinant. This also shows $m\\geq r$, since otherwise the sum would be empty.",
+   "uses": [
+    "lem-weil-pbc-cauchy-binet",
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0F0K, item-cauchy-binet, applied to the integer factorization BC=I; identity determinant from the Leibniz formula."
+   }
+  },
+  {
+   "text": "Among all integer matrices whose $r$ columns belong to $S$ and whose determinant is nonzero, choose $A$ for which $D=|\\det A|$ is least. Step 3 makes this set nonempty; its absolute determinants are positive integers, so the well-ordering of $\\mathbf N$ supplies the least one. Determinants are integers by the finite sum of signed products in [def-weil-pbc-matrix-determinant]. Write $v_1,\\ldots,v_r\\in S$ for the columns of $A$.",
+   "uses": [
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0F0K, item-cauchy-binet, determinant convention; agent-supplied least-positive-determinant argument."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-matrix-adjugate-identity] over $\\mathbf Q$, the matrix $A$ has inverse $\\operatorname{adj}(A)/\\det A$. In particular its columns are independent and every rational vector has unique rational coordinates in these columns. If their integer span were a proper subgroup of $\\mathbf Z^r$, choose $y\\in\\mathbf Z^r$ outside it. Put $b=A^{-1}y\\in\\mathbf Q^r$, let $z_i=\\lfloor b_i\\rfloor\\in\\mathbf Z$ (the unique integer with $z_i\\leq b_i<z_i+1$), and set\n$$a_i=b_i-z_i,\\qquad x=y-Az=Aa\\in\\mathbf Z^r.$$\nThus $0\\leq a_i<1$. Not all $a_i$ vanish, since otherwise $y=Az$ would be in the integer span. Choose $j$ with $0<a_j<1$. These formulas explicitly produce the lattice point; no fundamental-domain theorem is being assumed.",
+   "uses": [
+    "lem-weil-pbc-matrix-adjugate-identity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07DQ, lemma-matrix-left-inverse, proof (adjugate identity); the rational-coordinate floor calculation is supplied explicitly by the agent."
+   }
+  },
+  {
+   "text": "Choose a positive common denominator $N$ of the finitely many rational numbers $a_i$. Then $Na_i\\in\\mathbf N$ and\n$$Nx=\\sum_i(Na_i)v_i\\in S.$$\nThe saturation proved in Step 2 gives $x\\in S$. Let $E$ be the rational identity matrix with column $j$ replaced by the vector $a$. Then $AE$ is $A$ with column $j$ replaced by $x$. The square case of [lem-weil-pbc-cauchy-binet] gives $\\det(AE)=\\det A\\det E$. In the Leibniz sum [def-weil-pbc-matrix-determinant] for $E$, all columns except $j$ force the permutation to fix their indices, hence also $j$; the only surviving term is $a_j$. Therefore\n$$0<|\\det(AE)|=a_jD<D.$$\nThe matrix $AE$ has integer entries (its columns are $v_i$ and $x$), and all its columns belong to $S$. This contradicts the minimality of $D$. Thus the proper-span alternative of Step 5 is impossible.",
+   "uses": [
+    "lem-weil-pbc-cauchy-binet",
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0F0K, item-cauchy-binet, square case; the column replacement determinant is computed from the Leibniz formula."
+   }
+  },
+  {
+   "text": "Consequently the $v_i$ generate $\\mathbf Z^r$ over $\\mathbf Z$. They are independent by Step 5, so every element has a unique integer expression in the $v_i$. They are therefore a $\\mathbf Z$-basis of $L$ lying in $S$. For each $i$ choose $q_i\\in Q$ with $\\pi(q_i)=v_i$, which is possible by the definition $S=\\pi(Q)$. In rank zero make no choices. This proves the asserted basis-lifting clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-supplied basis-lifting refinement of the injective chart with free cokernel in VI Proposition 1.9, printed p. 71."
+   }
+  },
+  {
+   "text": "Define the group homomorphism\n$$\\Phi:P^{\\rm gp}\\oplus\\mathbf Z^r\\to Q^{\\rm gp},\\qquad(u,(m_i))\\mapsto g^{\\rm gp}(u)+\\sum_i m_iq_i.$$\nIf $\\Phi(u,m)=0$, applying $\\pi$ and using uniqueness of the basis coordinates gives $m=0$; injectivity of $g^{\\rm gp}$ then gives $u=0$. Conversely, for $t\\in Q^{\\rm gp}$, write $\\pi(t)=\\sum_i m_i v_i$. Then $t-\\sum_i m_iq_i\\in H$, so it equals $g^{\\rm gp}(u)$ for some $u$. This proves surjectivity and hence that $\\Phi$ is an isomorphism. If $r=0$, the same argument says precisely that $g^{\\rm gp}$ is an isomorphism, since its cokernel is zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI Proposition 1.9, printed p. 71, free-cokernel chart; explicit group calculation supplied by the agent."
+   }
+  },
+  {
+   "text": "Restrict $\\Phi$ to $P\\oplus\\mathbf N^r$. Its values lie in $Q$, because $g(p)$ and all $q_i$ lie there and the coefficients are nonnegative. The result is exactly $h$ in the statement, and its restriction along $p\\mapsto(p,0)$ is $g$. The inclusions $P\\hookrightarrow P^{\\rm gp}$ and $Q\\hookrightarrow Q^{\\rm gp}$ are injective by integrality [def-trf-fs-log-blowup], as is $\\mathbf N^r\\hookrightarrow\\mathbf Z^r$. Hence equality of two $h$-values gives equality of their $\\Phi$-values and then equality of the inputs, proving that $h$ is injective. Group completion of the product $P\\oplus\\mathbf N^r$ is $P^{\\rm gp}\\oplus\\mathbf Z^r$: a homomorphism from the product into an abelian group is uniquely the sum of its restrictions to $P$ and the $r$ coordinate generators, with the former extending to $P^{\\rm gp}$ and each latter generator allowing integer multiples. Under this identification, the induced $h^{\\rm gp}$ is $\\Phi$, already proved an isomorphism.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.9 and VIII 3.1.1, group completions; the product universal property is checked directly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fs-log-blowup",
+  "lem-trf-fg-torsionfree-group-free",
+  "lem-weil-pbc-cauchy-binet",
+  "def-weil-pbc-matrix-determinant",
+  "lem-weil-pbc-matrix-adjugate-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Algebraic refinement of VI Proposition 1.9, printed p. 71; finite free group input VI 3.7(a), saturation VIII 3.1.17, and Stacks Tag 0F0K with the adjugate identity in Tag 07DQ. The minimal-determinant and quotient-image calculations are supplied here, not attributed verbatim to ILO."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +171,45 @@
    "results": "{\"t\": \"2026-10-17T18:14:24Z\", \"tool\": \"grep\", \"query\": \"PowSaturated|rootClosed|saturated\", \"sub\": \"Algebra/AffineMonoid\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The Grothendieck-group and module-basis results do not choose basis vectors inside Q. AffineAddMonoid.embedding embeds into a free group but does not factor a prescribed chart. SaturatedAddSubmonoid means a face, not root saturation. No exact or one-line match.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective map of fine saturated monoids with torsion free cokernel on group completions factors through adjoining N to the r with a group completion isomorphism",
+   "results": "{\"t\": \"2026-10-17T19:03:30Z\", \"tool\": \"leanfinder\", \"query\": \"An injective map of fine saturated monoids with torsion free cokernel on group completions factors through adjoining N to the r with a group completion isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Baer.extension_property_addMonoidHom\", \"Algebra.GrothendieckGroup.of_injective\", \"Submonoid.isLocalizationMap_of_group\", \"Algebra.GrothendieckGroup.lift\", \"Algebra.GrothendieckAddGroup.of_injective\", \"AddSubmonoid.isLocalizationMap_of_addGroup\", \"Algebra.GrothendieckGroup.lift_apply\", \"Algebra.GrothendieckAddGroup.lift\"], \"digest\": \"ca5e194e104141ae\"}; Read the hits: group completions, abstract finite bases, and monoid quotient constructions do not assert basis lifts inside Q. The Loogle response reports an unknown identifier and yields no hits; it is not evidence of mathematical absence. The second semantic phrasing returns the existing finite torsion-free group basis result, reused in Step 1, but no basis constrained to the image monoid.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "GrothendieckAddGroup, AddSubmonoid",
+   "results": "{\"t\": \"2026-10-17T19:03:27Z\", \"tool\": \"loogle\", \"query\": \"GrothendieckAddGroup, AddSubmonoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'GrothendieckAddGroup'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: group completions, abstract finite bases, and monoid quotient constructions do not assert basis lifts inside Q. The Loogle response reports an unknown identifier and yields no hits; it is not evidence of mathematical absence. The second semantic phrasing returns the existing finite torsion-free group basis result, reused in Step 1, but no basis constrained to the image monoid.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "saturat.*basis|basis.*saturat|monoid.*lattice",
+   "results": "{\"t\": \"2026-10-17T19:03:27Z\", \"tool\": \"grep\", \"query\": \"saturat.*basis|basis.*saturat|monoid.*lattice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/Order/Sublattice.lean\", \"Mathlib/Algebra/Group/Subsemigroup/Basic.lean\", \"Mathlib/Algebra/Group/Subsemigroup/Basic.lean\", \"Mathlib/Algebra/Group/Submonoid/Basic.lean\", \"Mathlib/Algebra/Group/Submonoid/Basic.lean\", \"Mathlib/Algebra/Group/Submonoid/Basic.lean\", \"Mathlib/Algebra/Group/Submonoid/Membership.lean\", \"Mathlib/Algebra/Group/Submonoid/Saturation.lean\"], \"digest\": \"fe8b212fd95c62cc\"}; Read the hits: group completions, abstract finite bases, and monoid quotient constructions do not assert basis lifts inside Q. The Loogle response reports an unknown identifier and yields no hits; it is not evidence of mathematical absence. The second semantic phrasing returns the existing finite torsion-free group basis result, reused in Step 1, but no basis constrained to the image monoid.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A saturated additive submonoid of a finite rank free abelian group which generates the group contains an integral basis, by minimal determinant and a lattice point in a fundamental parallelepiped",
+   "results": "{\"t\": \"2026-10-17T19:04:20Z\", \"tool\": \"leanfinder\", \"query\": \"A saturated additive submonoid of a finite rank free abelian group which generates the group contains an integral basis, by minimal determinant and a lattice point in a fundamental parallelepiped\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Basis.ofZLatticeBasis\", \"IsZLattice.basis\", \"NumberField.Units.basisOfIsMaxRank_fundSystem\", \"NumberField.Units.basisUnitLattice\", \"Module.basisOfFiniteTypeTorsionFree'\", \"Module.basisOfFiniteTypeTorsionFree\", \"Module.Basis.addSubgroupOfClosure\", \"NumberField.mixedEmbedding.mem_span_latticeBasis\"], \"digest\": \"b8776af3da086a68\"}; Read the hits: group completions, abstract finite bases, and monoid quotient constructions do not assert basis lifts inside Q. The Loogle response reports an unknown identifier and yields no hits; it is not evidence of mathematical absence. The second semantic phrasing returns the existing finite torsion-free group basis result, reused in Step 1, but no basis constrained to the image monoid.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an injective homomorphism P to Q of finitely generated saturated integral monoids with torsion free quotient of group completions, some elements of Q lift a basis of the quotient",
+   "results": "{\"t\": \"2026-10-17T19:04:11Z\", \"tool\": \"leansearch\", \"query\": \"For an injective homomorphism P to Q of finitely generated saturated integral monoids with torsion free quotient of group completions, some elements of Q lift a basis of the quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Con.lift\", \"Con.kerLift_injective\", \"Submonoid.FG.map_injective\", \"MonoidHom.ofInjective\", \"AddCon.kerLift_injective\", \"Con.kerLift\", \"Function.Injective.isAddTorsionFree\", \"AddSubmonoid.LocalizationMap.lift_injective_iff\"], \"digest\": \"e545d7e94bb8adb6\"}; Read the hits: group completions, abstract finite bases, and monoid quotient constructions do not assert basis lifts inside Q. The Loogle response reports an unknown identifier and yields no hits; it is not evidence of mathematical absence. The second semantic phrasing returns the existing finite torsion-free group basis result, reused in Step 1, but no basis constrained to the image monoid.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-log-smooth-log-regular",
@@ -90,5 +234,30 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-fs-chart-free-factorization",
+  "worker": "stage1",
+  "group": "Q10",
+  "summary": "Kept the statement, supplied a nine-step algebraic proof: quotient image saturation, a least determinant tuple, explicit rational-coordinate rounding and determinant descent, then the injectivity and group-isomorphism checks. Reused the existing finite torsion-free group, Cauchy–Binet, adjugate and determinant nodes; no new nodes or definitions are needed. Checked the source, all cited statements, edge cases, project attachment searches and fresh logged Mathlib searches.",
+  "blueprint": "The historical chart-factorization input in blueprint.from.place beneath lem-trf-local-term-locality (1)–(2), through lem-trf-log-smooth-log-regular and the nodal alteration ancestry. This auxiliary node realizes no new step of the current contracting-correspondence unit and does not change that unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cauchy-binet",
+    "why": "Generic integer/rational matrix determinant formula used for a nonsingular tuple and a column replacement; the log-chart unit has no such matrix statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cauchy-binet"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-d3defdcaa",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-d3defdcaa (reviewer sub-agent of L); spot-checked: I read the item and all 9 steps in full, the statements of every cited node (def-trf-fs-log-blowup, lem-trf-fg-torsionfree-group-free, lem-weil-pbc-cauchy-binet, def-weil-pbc-matrix-determinant, lem-weil-pbc-matrix-adjugate-identity) and the parent's citing step (lem-trf-log-smooth-log-regular step 0). Sources: ILO VI Prop 1.9 (pp.70-71) gives only the specific nodal chart with Coker g^gp ≅ Z, and the general basis-lifting claim is correctly marked as an agent refinement. Saturation in VIII 3.1.17 matches the def node's fs clause. Stacks tags 0F0K and 07DQ match their labels. Proof: Step 2's saturation of S = π(Q) via n(x+g(b)) = q+g(a)+(n-1)g(b) is correct. Steps 3-4 use Cauchy-Binet with B (r×m) times C (m×r) = I_r to give a nonsingular tuple in S, then take the least |det|. Steps 5-6 use the adjugate inverse and floor rounding to get x = Aa with a in [0,1)^r. Saturation gives x in S, and det E = a_j by the Leibniz formula, which contradicts minimality. Steps 7-9 (basis lift, Φ an isomorphism, h injective and h^gp = Φ) are all checked. Small cases tested: g = id; P = 0 into N^2; N into N^2 with 1 ↦ (1,1); torsion units N×Z/2. Saturation is necessary (⟨2,3⟩ ⊂ Z) and so is torsion-freeness (N →×2 N). No new nodes. The DAG statement search found no duplicate or generalization (fs-face-sharpening differs). Accepted tool use: lem-weil-pbc-cauchy-binet, a generic matrix identity. No SGA source is cited. No fixes were made."
  }
 }

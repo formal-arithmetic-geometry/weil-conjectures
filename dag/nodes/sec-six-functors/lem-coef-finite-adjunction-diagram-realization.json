@@ -37,7 +37,7 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathbf C_{W,n}$ equal to the full enhanced subcategory on $D^b_{ctf}(W,A_n)$. For $A=A_m$ and $B=A_n$, the constant $B_W$ is bounded constructible as an $A_W$-module, and [lem-sf-tensor-ctf] gives bounded constructibility and the retained Tor interval for $K\\otimes_A^LB$. Tensor associativity gives $(K\\otimes_A^LB)\\otimes_B^LV\\cong K\\otimes_A^L\\operatorname{Res}_{m,n}V$. The semilinear section theorem identifies normalized systems with cartesian sections and supplies simultaneous models for extension by zero, proper derived direct image, their units, counits, tensor maps, and mates. Thus $\\mathcal F_f=Rp_*j_!$ is a functor on normalized systems before any inverse limit, with the stated finite evaluations.",
+   "text": "Put $\\mathbf C_{W,n}$ equal to the full enhanced subcategory on $D^b_{ctf}(W,A_n)$. For $A=A_m$ and $B=A_n$, the constant $B_W$ is bounded constructible as an $A_W$-module, so clause (i) of [lem-sf-tensor-ctf] gives bounded constructibility of $K\\otimes_A^LB$. This is also constructibility over $B$: the same locally constant cohomology sheaves have finite stalks with the factored $B$-action. If $K$ has Tor interval $[a,b]$, tensor associativity gives $(K\\otimes_A^LB)\\otimes_B^LV\\cong K\\otimes_A^L\\operatorname{Res}_{m,n}V$ for every degree-zero $B$-module $V$, proving the same Tor interval over $B$. Thus coefficient extension preserves these subcategories; no finite Tor dimension of $A\\to B$ is asserted. The semilinear section theorem identifies normalized systems with cartesian sections and supplies simultaneous models for extension by zero, proper derived direct image, their units, counits, tensor maps, and mates. Define $\\mathcal F_f=Rp_*j_!$ on section models with the finite evaluations; step 2 checks its restriction to normalized systems.",
    "uses": [
     "lem-coef-semilinear-derived-sections",
     "lem-coef-derived-system-evaluation-calculus",
@@ -82,12 +82,13 @@
    }
   },
   {
-   "text": "For each $W$, choose $d_W\\ge0$ with $\\dim W\\le d_W$ by [lem-kun-dimension-finite-type] ($W$ is finite type over the field $k$), taking $d_W=0$ when $W$ is empty; this is the dimension hypothesis of [prop-coef-integral-dualizing]. Apply the preceding construction to the structure morphism $a_W$ and the normalized coefficient-unit system. Its normalization is $A_m\\otimes^L_{A_m}A_n\\cong A_n$, so it gives $\\Omega_W=\\mathcal E_{a_W}((A_n)_s)_n$ with transitions equal to the counit-defined maps $u_{W,A_m,A_n}$ from [lem-coef-finite-dualizing]. The mate construction gives their quotient cocycle, rather than independently chosen evaluations. The value-at-the-unit clause of [prop-coef-integral-dualizing] identifies the total limit of this same tower with the prescribed integral dualizing object.",
+   "text": "For each $W$, choose $d_W\\ge0$ with $\\dim W\\le d_W$ by [lem-kun-dimension-finite-type] ($W$ is finite type over the field $k$), taking $d_W=0$ when $W$ is empty; this is the dimension hypothesis of [prop-coef-integral-dualizing]. Since $a_W$ is separated of finite type and $\\operatorname{Spec}k$ is quasi-compact and quasi-separated, fix a compactification of $a_W$ by [thm-nagata-compactification] (for $W=X$ any one; step 6 compares it with $a_Yf$ by the compactification-independent composition comparison). Apply the preceding construction to $a_W$ with this compactification and the normalized coefficient-unit system. Its normalization is $A_m\\otimes^L_{A_m}A_n\\cong A_n$, so it gives $\\Omega_W=\\mathcal E_{a_W}((A_n)_s)_n$ with transitions equal to the counit-defined maps $u_{W,A_m,A_n}$ from [lem-coef-finite-dualizing]. The mate construction gives their quotient cocycle, rather than independently chosen evaluations. The value-at-the-unit clause of [prop-coef-integral-dualizing] identifies the total limit of this same tower with the prescribed integral dualizing object.",
    "uses": [
     "lem-coef-finite-dualizing",
     "prop-coef-integral-dualizing",
     "lem-coef-cartesian-section-adjoint-mates",
-    "lem-kun-dimension-finite-type"
+    "lem-kun-dimension-finite-type",
+    "thm-nagata-compactification"
    ],
    "elementary": false,
    "source": {
@@ -96,14 +97,15 @@
    }
   },
   {
-   "text": "Define $\\mathcal D_W(M)=\\mathcal I_W(M,\\Omega_W)$ using the simultaneous tensor-Hom calculus. Its level is $D_{W,n}M_n$. The finite Verdier preservation and coefficient comparison of [lem-weil-verdier-preservation-strata] and [cor-coef-finite-verdier], transported by [lem-weil-finite-duality-site-comparison], show finite-Tor constructibility and invertibility of the normalization map $Q(D_{W,m}M_m)\\to D_{W,n}(QM_m)\\to D_{W,n}M_n$. The internal-Hom system of [lem-coef-derived-system-evaluation-calculus] preserves evaluation pairings and quotient cocycles. Derived pullback acts on the section models by the exact inverse-image clause of [lem-coef-semilinear-derived-sections], using $f^{-1}(A_n)_Y\\cong(A_n)_X$. It preserves normalization because exact inverse image commutes with derived coefficient extension: on a K-flat representative $f^{-1}(N_m\\otimes_{A_m}A_n)=f^{-1}N_m\\otimes_{A_m}A_n$, so the normalization map of $f^*N$ is $f^*$ of that of $N$. Pullback preserves the finite-Tor domain by [lem-sf-pullback-tor-amplitude], so $\\mathcal D_W$ and derived pullback act on $\\mathscr N_W$.",
+   "text": "Define $\\mathcal D_W(M)=\\mathcal I_W(M,\\Omega_W)$ using the simultaneous tensor-Hom calculus. Its level is $D_{W,n}M_n$. The finite Verdier preservation and coefficient comparison of [lem-weil-verdier-preservation-strata] and [cor-coef-finite-verdier], transported by [lem-weil-finite-duality-site-comparison], show finite-Tor constructibility and invertibility of the normalization map $Q(D_{W,m}M_m)\\to D_{W,n}(QM_m)\\to D_{W,n}M_n$. The internal-Hom system of [lem-coef-derived-system-evaluation-calculus] preserves evaluation pairings and quotient cocycles. Derived pullback acts on the section models by the exact inverse-image clause of [lem-coef-semilinear-derived-sections], using $f^{-1}(A_n)_Y\\cong(A_n)_X$. It preserves normalization because exact inverse image commutes with derived coefficient extension: on a flat-term K-flat representative (whose pullback stays K-flat by [lem-weil-pbc-ringed-pullback-preserves-kflat]) $f^{-1}(N_m\\otimes_{A_m}A_n)=f^{-1}N_m\\otimes_{A_m}A_n$, so the normalization map of $f^*N$ is $f^*$ of that of $N$. Pullback preserves the finite-Tor domain by [lem-sf-pullback-tor-amplitude], so $\\mathcal D_W$ and derived pullback act on $\\mathscr N_W$.",
    "uses": [
     "lem-coef-derived-system-evaluation-calculus",
     "lem-weil-verdier-preservation-strata",
     "lem-weil-finite-duality-site-comparison",
     "cor-coef-finite-verdier",
     "lem-sf-pullback-tor-amplitude",
-    "lem-coef-semilinear-derived-sections"
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat"
    ],
    "elementary": false,
    "source": {
@@ -143,14 +145,15 @@
    }
   },
   {
-   "text": "To prove $\\theta_N$ invertible, fix $n$ and pass to the étale site with [lem-weil-finite-duality-site-comparison] and the comparisons in steps 3 and 5. The internal-adjunction theorem [prop-asd-internal-adjunction], evaluated at $\\omega_Y$ and $\\mathcal E_f\\omega_Y\\cong\\omega_X$, gives $Rf_*D_XK\\cong D_YF_fK$. For finite-Tor constructible $K$, biduality and ordinary pullback/direct-image adjunction yield the natural chain\n$$\\operatorname{Hom}_X(K,D_Xf^*D_YN)\\cong\\operatorname{Hom}_X(f^*D_YN,D_XK)\\cong\\operatorname{Hom}_Y(D_YN,Rf_*D_XK)\\cong\\operatorname{Hom}_Y(D_YN,D_YF_fK)\\cong\\operatorname{Hom}_Y(F_fK,N).$$\nThe domains are finite-Tor by steps 2 and 5. The final group is $\\operatorname{Hom}_X(K,\\mathcal E_fN)$ by step 3.",
+   "text": "To prove $\\theta_N$ invertible, fix $n$ and pass to the étale site with [lem-weil-finite-duality-site-comparison] and the comparisons in steps 3 and 5. The internal-adjunction theorem [prop-asd-internal-adjunction], evaluated at $\\omega_Y$ and $\\mathcal E_f\\omega_Y\\cong\\omega_X$, gives $Rf_*D_XK\\cong D_YF_fK$. For finite-Tor constructible $K$, biduality and the canonical derived pullback/direct-image adjunction of [lem-weil-pbc-ringed-projection-mate-exact], applied to the small etale ringed topoi with constant ring $A_n$, yield the natural chain\n$$\\operatorname{Hom}_X(K,D_Xf^*D_YN)\\cong\\operatorname{Hom}_X(f^*D_YN,D_XK)\\cong\\operatorname{Hom}_Y(D_YN,Rf_*D_XK)\\cong\\operatorname{Hom}_Y(D_YN,D_YF_fK)\\cong\\operatorname{Hom}_Y(F_fK,N).$$\nThe domains are finite-Tor by steps 2 and 5. The final group is $\\operatorname{Hom}_X(K,\\mathcal E_fN)$ by step 3.",
    "uses": [
     "prop-asd-internal-adjunction",
     "thm-fix-general-biduality",
     "lem-weil-finite-duality-site-comparison",
     "thm-weil-pbc-site-comparison",
     "lem-coef-finite-exceptional",
-    "lem-sf-tensor-ctf"
+    "lem-sf-tensor-ctf",
+    "lem-weil-pbc-ringed-projection-mate-exact"
    ],
    "elementary": false,
    "source": {
@@ -159,7 +162,7 @@
    }
   },
   {
-   "text": "Under the displayed bijections, a map $h:K\\to\\mathcal E_fN$ is sent to the tensor-Hom transpose obtained from inverse projection, $1\\otimes F_fh$, the counit, and $D_YN\\otimes N\\to\\omega_Y$. Pullback adjunction transposes the first arrow and the internal adjunction transposes the last two, so this is precisely postcomposition with $\\theta_N$. Yoneda makes $\\theta_N$ an isomorphism at every finite level. The section comparison detects equivalences by evaluations, and the duality/site comparisons identify the resulting map with the canonical finite exceptional isomorphism. The tensor-Hom construction also gives its evaluation and transpose identities before any inverse limit.",
+   "text": "Under the displayed bijections, a map $h:K\\to\\mathcal E_fN$ is sent to the tensor-Hom transpose obtained from inverse projection, $1\\otimes F_fh$, the counit, and $D_YN\\otimes N\\to\\omega_Y$. Pullback adjunction transposes the first arrow and the internal adjunction transposes the last two, so this is precisely postcomposition with $\\theta_N$. This makes $\\theta_N$ an isomorphism at every finite level directly: surjectivity on Hom from its target gives $h$ with $\\theta_Nh=1$; injectivity on Hom from its source, applied to $h\\theta_N$ and $1$, gives $h\\theta_N=1$. The section comparison detects equivalences by evaluations, and the duality/site comparisons identify the resulting map with the canonical finite exceptional isomorphism. The tensor-Hom construction also gives its evaluation and transpose identities before any inverse limit.",
    "uses": [
     "prop-asd-internal-adjunction",
     "thm-fix-general-biduality",
@@ -244,12 +247,15 @@
   "lem-weil-finite-duality-site-comparison",
   "lem-weil-l-adic-extension-integers-dvr",
   "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "lem-weil-valued-dvr-finite-quotients",
   "lem-weil-verdier-preservation-strata",
   "prop-asd-internal-adjunction",
   "prop-coef-integral-dualizing",
   "thm-fix-general-biduality",
+  "thm-nagata-compactification",
   "thm-sf-comp-composition",
   "thm-sf-preservation-class",
   "thm-weil-pbc-site-comparison"
@@ -364,10 +370,45 @@
    "results": "0 hits: ",
    "date": "2026-10-16",
    "verdict": "no match: inspected hits concern ordinary localizations, scalar adjunctions, ordinary mates, underived sheaves or over-category sections; they do not state enhanced varying-ring section realization or its coherent enriched adjoint descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial exceptional inverse image and compact support adjunction on normalized derived inverse coefficient systems of constructible sheaves",
+   "results": "8 hits: CompHausLike.LocallyConstantModule.functor, CategoryTheory.Functor.sheafAdjunctionCocontinuous, CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val, SheafOfModules.pushforwardPushforwardAdj, Condensed.lanSheafProfinite, SheafOfModules.pushforwardComp_inv_app_val_app, CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val, SheafOfModules.pushforwardNatIso_inv",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary sheaf/scalar or derived adjunctions, not exceptional operations on normalized varying-coefficient systems with the specified enriched coherent maps."
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear|laxLimit|cartesianSection|homotopyCoherent",
+   "results": "0 hits: ; Mathlib subdirectory CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary sheaf/scalar or derived adjunctions, not exceptional operations on normalized varying-coefficient systems with the specified enriched coherent maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global Hom adjunction between compact support and extraordinary inverse image on inverse systems of finite coefficient sheaves",
+   "results": "8 hits: CategoryTheory.constantSheafΓAdj, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived', SheafOfModules.pushforwardPushforwardAdj, TopCat.Sheaf.pullbackPushforwardAdjunction, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, CategoryTheory.Functor.sheafAdjunctionCocontinuous",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary sheaf/scalar or derived adjunctions, not exceptional operations on normalized varying-coefficient systems with the specified enriched coherent maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Adjunction\"",
+   "results": "12 hits: PresheafOfModules.freeAdjunctionUnit, PresheafOfModules.freeAdjunction, PresheafOfModules.freeAdjunctionUnit_app, PresheafOfModules.freeAdjunction_homEquiv, PresheafOfModules.freeAdjunction_unit_app, PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModulesOfCommRing.pullbackPushforwardAdjunction, PresheafOfModules.colimitAdjunction",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary sheaf/scalar or derived adjunctions, not exceptional operations on normalized varying-coefficient systems with the specified enriched coherent maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier dual pullback Verdier dual and derived enriched shriek adjunction for coherent adic coefficient towers",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, PresheafOfModules.pullbackComp, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are ordinary sheaf/scalar or derived adjunctions, not exceptional operations on normalized varying-coefficient systems with the specified enriched coherent maps."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "prop-coef-integral-exceptional-adjoint",
   "by": "worker",
@@ -376,10 +417,10 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "item": "lem-coef-finite-adjunction-diagram-realization",
   "worker": "stage1",
-  "summary": "Completed the existing one-level split without changing the imported statement. Audited the coherent semilinear section construction, finite compact-support and exceptional coefficient transitions, dualizing tower, duality map, enriched mapping-system adjunction, finite étale comparison, and total-limit realization. Broke the former long dual-formula argument into explicit construction, finite-level Hom verification, and system-identification steps; no new nodes were needed because every non-elementary ingredient is stated by an existing node. Checked edge cases including empty compactification, identity morphism, zero inputs, n=1, and f the structure morphism.",
+  "summary": "Re-audited and completed the inherited twelve-step coherent finite-adjunction split, retaining the statement, route, and prior searches. Made coefficient-extension constructibility and its retained Tor interval explicit without claiming quotient rings are flat; cited the existing K-flat pullback preservation and general ringed-topos derived adjunction statements at their uses; wrote the inverse argument detecting the finite dual-formula isomorphism. No new nodes are needed.",
   "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 1 (normalized finite exceptional tower and dual formula), paragraph 2 (middle finite enriched comparison before R lim), and final value-at-unit identification; detailed finite proof follows lem-coef-finite-exceptional paragraphs 1-3.",
   "tool_uses": [
    {
@@ -445,6 +486,18 @@
    {
     "node": "thm-weil-pbc-site-comparison",
     "why": "Uses the stated finite-level geometric operation, coefficient comparison, or ringed-topos calculus as a black box in constructing coherent systems; no replacement of this unit's duality/coefficient route is made."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic ringed-topos K-flat preservation justifies computing coefficient-extension compatibility after pullback in step 5; the unit has no replacement for this resolution fact."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Uses only the canonical derived adjunction for arbitrary small ringed topoi in step 8, specialized to etale constant coefficients; this is the ordinary adjunction in the source route."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Step 4 needs a compactification of each structure morphism a_W to form F_{a_W}=Rp_*j_! and its right adjoint; generic existence theorem used as a black box (maintainer-reader repair)."
    }
   ]
  },
@@ -464,15 +517,18 @@
   "prop-asd-internal-adjunction",
   "thm-sf-comp-composition",
   "thm-sf-preservation-class",
-  "thm-weil-pbc-site-comparison"
+  "thm-weil-pbc-site-comparison",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "thm-nagata-compactification"
  ],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q87-6f28b9eeb",
-  "group": "Q87",
+  "reviewer": "NT-cc-Q125-894b180bb",
+  "group": "Q125",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-6f28b9eeb (reviewer sub-agent of L); spot-checked: I read all 12 steps in full, with the statement of every cited node, the master and main-20261015 sources (lem-coef-finite-exceptional proof paragraphs 1-3; prop-coef-integral-exceptional-adjoint proof paragraphs 1-2 and the dualizing sentence), and the unit route. This is a re-split of an unsplit item with no new nodes. The statement, stmt_deps and blueprint fields are unchanged. Hypotheses checked: lem-trf-open-ctf, cor-sf-direct-image-ctf-proetale (p, dim bound d) and lem-fix-compact-support-coefficient-change (ctf input) in step 2; thm-sf-preservation-class and the b_{m,n} of lem-coef-finite-exceptional, which is the mate of lem-coef-cartesian-section-adjoint-mates (counit identity), in step 3; b at the unit equals u of lem-coef-finite-dualizing in step 4; lem-weil-verdier-preservation-strata, cor-coef-finite-verdier and lem-sf-pullback-tor-amplitude in step 5; thm-sf-comp-composition and fix-prop-projection-formula (K=E_fN in D^b_c, L=D_YN in ctf) in step 6; prop-asd-internal-adjunction (finite ring, Noetherian, compactifiable) and the Yoneda chain inside D^b_ctf via thm-fix-general-biduality in steps 8-9; lem-sf-compact-support-restriction-of-scalars against the transition of def-weil-integral-rational-qbar-compact-support in step 12. Small cases checked: f=id, empty X, n=1, f=a_Y, zero input. All 16 off-route uses are declared and accepted, the same set as the node's existing tool_uses. Three fixes to the proof text, in fixes/: (1) step 4 now chooses d_W>=0 with dim W<=d_W, d_W=0 if W is empty; prop-coef-integral-dualizing assumes this, and the cited lem-kun-dimension-finite-type was otherwise unused. (2) step 5 restores the argument that derived pullback preserves normalization: exact inverse image commutes with coefficient extension on section models. (3) step 11 writes out the move from etale to pro-etale mapping complexes: beta from lem-weil-finite-duality-site-comparison, the unit isomorphism of thm-weil-pbc-site-comparison, and Gamma composition; lem-weil-finite-duality-site-comparison is added to the step's uses. Remaining remark, not a return: the etale A-module adjunction Lf^* -|  Rf_* in step 8 has no dedicated node. The source does the same and the earlier review accepted it; def-weil-pbc-proetale-operations states the pro-etale form. The report wrongly lists citations.json and report.md as files written.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-894b180bb (reviewer sub-agent of L); spot-checked: Read in full: the item's statement and all 12 steps, the statement of every node it cites (32 proof deps, 17 stmt deps; all exist and none is merged), the master and main-20261015 sources (identical texts: lem-coef-finite-exceptional proof paragraphs 1-3; prop-coef-integral-exceptional-adjoint paragraphs 1-2 and the G_aR sentence), the unit record sk-prop-sf-biduality-general, and every citer. No new nodes. The statement is unchanged and consistent with all citers. The coefficient category is pro-etale constant (A_n)_W modules, as in def-weil-exceptional-inverse-image and lem-coef-finite-exceptional; etale objects enter only through the stated site comparisons. Hypotheses checked: step 1 uses lem-sf-tensor-ctf(i), not (ii), and the Tor interval follows from Res reassociation. Step 2: lem-trf-open-ctf, cor-sf-direct-image-ctf-proetale (Xbar finite type over k, d>=dim Xbar) and lem-fix-compact-support-coefficient-change (ctf input). Step 3: the counit equation of lem-coef-finite-exceptional is exactly the mate defined in lem-coef-cartesian-section-adjoint-mates, and every hypothesis of that lemma holds. Step 4: at the unit the mate equals u of lem-coef-finite-dualizing; the d>=0 dimension bound of prop-coef-integral-dualizing holds. Step 5: cor-coef-finite-verdier gives an invertible normalization map, the internal Hom is used only with a cartesian first input, and K-flat pullback preservation holds. Step 6: projection formula with K=E_fN in D^b_c and L=D_YN in ctf. Step 7: I type-checked theta. Steps 8-9: prop-asd-internal-adjunction (A_n finite, Noetherian schemes, compactifiable f) and biduality on ctf; the Yoneda inverse argument is correct. Step 11: beta site comparison (ctf first argument, D^b_c second, RHom bounded below). Step 12: the adjoint of the restriction-of-scalars transition is the step-2 normalization map. Edge cases: f=id gives theta=biduality, empty X or Y, n=1, m=n, f=a_W at the unit, zero inputs. One fault repaired in fixes/: step 4 formed F_{a_W} and its adjoint without citing that a_W has a compactification. I added [thm-nagata-compactification] (a_W separated finite type, Spec k qcqs) to its uses, proof_deps and split_report.tool_uses; it is already a tool for 49 nodes in this and other units. Accepted the new tool uses lem-weil-pbc-ringed-pullback-preserves-kflat and lem-weil-pbc-ringed-projection-mate-exact (generic ringed-topos facts). Remark, not a fault: step 9 identifying the composite bijection with postcomposition by theta relies on the canonical form of the internal-adjunction isomorphism, as the source does. Full notes in review.md.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {
