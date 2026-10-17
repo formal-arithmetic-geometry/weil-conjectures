@@ -227,5 +227,24 @@
   "group": "Q28",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-2d06bae4d (reviewer sub-agent of L); spot-checked: Read the item, all 5 steps and the full statements of the 4 cited nodes (def-cbc-enhanced-diagrams-cones, def-coef-universally-localizing-simplicial-map, lem-cbc-enhanced-functor-cone-calculus, lem-cbc-simplicial-groupoid-localization). Statement matches Kerodon 02M8 (Cor. 6.3.5.12) and the definition matches 02M0 (Def. 6.3.5.1, some W per base change), both read online since they are not archived; no hypothesis is added or dropped. The proof is direct rather than Kerodon's 6.3.5.11/.8/.7 route and is valid. Step 1: groupoid localization on C->Delta^0 with target Fun(X,E), which is a quasicategory, and W is fixed before E. Step 2: currying via the exponential law plus the componentwise-equivalence criterion identifies Fun_eq(C,Fun(X,E)) with the V-local subcategory, and the constant functor becomes p^*. Step 3: RP=1 strictly and PR~1 through Q=RPQ~R. Step 4: P and R preserve the U_g/W-local full subcategories and the witnesses restrict by fullness. Step 5: the pullback is X x C with projection hp, so (hp)^*=P h^*, a composite of equivalences, and U_g does not depend on E. Edge cases checked: C=Delta^0, C=Delta^1, non-Kan C, empty C excluded, f=id, empty X or T. The citer (finite-embedded-simplex-resolution step 6) uses exactly this statement. No new nodes. No duplicate found by rg over the DAG; the pushout sibling and the groupoid lemma are different statements. No cycle (the closure of the cited nodes excludes the item). Accepted tool_uses: lem-cbc-simplicial-groupoid-localization and lem-cbc-enhanced-functor-cone-calculus as generic infinity-categorical tools off the biduality unit. No SGA. Not a target node, so the base-change morphism check does not apply. No fixes."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ContractibleFactorUniversalLocalization",
+  "file": "lean/Sheaf/CategoryTheory/ContractibleFactorUniversalLocalization.lean",
+  "declaration": "SSet.Enhanced.contractibleFactor_isUniversallyLocalizing",
+  "statement": "theorem contractibleFactor_isUniversallyLocalizing {A B C : SSet.{u}} (f : A ⟶ B) (hf : IsUniversallyLocalizing.{u, v} f) (hC : IsContractible C) : IsUniversallyLocalizing.{u, v} (CartesianMonoidalCategory.fst A C ≫ f)",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-17",
+  "fixed_by": "NT-stage2-cc-ad276cf9e"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ad276cf9e",
+  "group": "Q26",
+  "result": "fix",
+  "note": "Statement matches the node and Kerodon 6.3.5.12 (02M8). Hypotheses are the recorded IsUniversallyLocalizing and IsContractible; the conclusion is fst A C ≫ f; there is no extra Kan, quasicategory or finiteness assumption. Edge cases checked: C=Δ⁰, C=Δ¹, empty base change, f=𝟙; empty C is excluded. No other declaration states this; docstrings and blueprint tag present; proof only sorry. Fault: the file declared only `universe u`, so the test universe v of IsUniversallyLocalizing was generalised separately on hf (u_2) and the conclusion (u_3), as #check with pp.universes shows. That is an unbound universe and a universe-transfer claim stronger than the node. fixes/ContractibleFactorUniversalLocalization.lean declares `universe u v` and writes IsUniversallyLocalizing.{u, v} on both sides, plus one docstring sentence. Delivered and fixed files both compile clean through nt_compile.py; the fixed #check shows a single shared v; lean.statement is re-read by the refit."
  }
 }
