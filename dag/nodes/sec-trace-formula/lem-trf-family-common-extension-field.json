@@ -11,9 +11,62 @@
   "def-weil-size-convention",
   "def-pc-field-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Form the coproduct A of the small diagram of commutative k-algebras L_j in CommAlg_k, with canonical k-algebra maps iota_j:L_j→A and structural map k→A. Such a coproduct exists because the category of commutative algebras over a commutative ring has colimits [lem-weil-pbc-commutative-algebras-colimits-exist].",
+   "uses": [
+    "lem-weil-pbc-commutative-algebras-colimits-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CNJ, lemma-infinite-product-surjective, auxiliary huge-field construction"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-family-tensor-nontrivial] to the family (L_j)_{j∈J}. It gives that A is nontrivial, including the empty-family case A≅k.",
+   "uses": [
+    "lem-trf-family-tensor-nontrivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0CNJ, proof: choose a huge field extension containing all residue-field extensions"
+   }
+  },
+  {
+   "text": "Choose a maximal ideal I of A by [lem-weil-common-extension-fields-maximal-ideal], and put K=A/I. By [lem-weil-common-extension-fields-quotient-field], K is a field; because the maximal ideal I is proper, the quotient K is nontrivial. Let b:k→K be the composite of the structural map k→A with the quotient map, and let e_j:L_j→K be the composite of iota_j with that quotient map.",
+   "uses": [
+    "lem-weil-common-extension-fields-maximal-ideal",
+    "lem-weil-common-extension-fields-quotient-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Fields, Lemma 9.2, tag 0H7K: choose a maximal ideal and take the residue-field quotient"
+   }
+  },
+  {
+   "text": "The coproduct maps and the quotient map are k-algebra homomorphisms, so e_j∘a_j=b for every j. Each e_j is injective: a unital homomorphism from a field into a nontrivial ring has zero kernel, because a nonzero kernel element is invertible and would force 1=0. Thus K/k with b and the e_j satisfy the required conclusion. The construction also covers J=∅, when there are no e_j to specify.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Fields, Lemma 9.2, tag 0H7K: induced embeddings; kernel argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-commutative-algebras-colimits-exist",
+  "lem-trf-family-tensor-nontrivial",
+  "lem-weil-common-extension-fields-maximal-ideal",
+  "lem-weil-common-extension-fields-quotient-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0CNJ, lemma-infinite-product-surjective, proof paragraph choosing a huge common field"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -59,7 +112,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-infinite-product-surjective",
@@ -71,7 +124,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "The auxiliary product-surjectivity argument of Tag 0CNJ used in the final paragraph of Tag 0CNZ: 'Choose a huge field extension K/kappa(s)' containing every residue field.",
+   "place": "The auxiliary product-surjectivity argument of Tag 0CNJ used in the final paragraph of Tag 0CNZ: choose a huge field extension K/kappa(s) containing every residue field",
    "via": [
     "lem-trf-infinite-product-surjective",
     "lem-trf-fppf-integral-surjective-refinement",
@@ -90,5 +143,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-family-common-extension-field",
+  "worker": "stage1",
+  "summary": "Split the arbitrary-family common-field lemma through the small commutative-algebra coproduct: existing colimit machinery constructs the tensor coproduct, a new statement-only node supplies its nontriviality for a small family, and a maximal-ideal residue field supplies the common field and compatible embeddings. The kernel argument for field maps gives injectivity, and the empty-family edge case is explicit.",
+  "blueprint": "Realizes the auxiliary huge-common-field construction in the final paragraph of Tag 0CNZ/Tag 0CNJ used by the trace-formula route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q43-8e7e878d9",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q43-8e7e878d9 (reviewer sub-agent of L); spot-checked: Two repairable faults: remove the proof-only colimit node from stmt_deps, and replace the invalid claim that nontrivial A implies A/I is nontrivial with the proper-maximal-ideal argument. Corrected JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-family-common-extension-field.json; review.md records full source, node, route, edge-case, and search checks.; 1 file(s) fixed by the reviewer"
  }
 }

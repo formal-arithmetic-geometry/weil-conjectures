@@ -1,0 +1,90 @@
+{
+ "id": "lem-trf-fppf-sheaf-coproduct-partition",
+ "kind": "statement",
+ "title": "Scheme tests of coproducts of fppf sheaves give clopen partitions",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], fix a big fppf site $(\\mathit{Sch}/S)_{fppf}$ [def-pc-fppf-site] with the size convention [def-weil-size-convention], and let $I$ be a small set in that convention. Let $(G_i)_{i\\in I}$ be sheaves of sets on this site [def-weil-pbc-sites-and-cohomology]. Their coproduct $C=\\coprod_{i\\in I}G_i$ in sheaves (the colimit of the discrete $I$-indexed diagram [def-weil-pbc-category-colimit]) exists; its coprojections $c_i:G_i\\to C$ are monomorphisms (injective on sections). For every site object $T$ and every section $a\\in C(T)$, there is a unique partition $T=\\coprod_{i\\in I}T_i$ into pairwise disjoint open and closed subschemes [def-weil-open-immersion] and unique sections $a_i\\in G_i(T_i)$ such that $c_i(a_i)=a|_{T_i}$. Empty pieces are allowed. If $h_T(Z)=\\operatorname{Mor}_S(Z,T)$, the square determined by $T_i\\to T$, $a_i:h_{T_i}\\to G_i$, $a:h_T\\to C$, and $c_i$ is cartesian: $h_{T_i}\\simeq h_T\\times_CG_i$. For every morphism $b:Z\\to T$ of site objects, the partition and sections for $a|_Z$ are $b^{-1}(T_i)$ and the restrictions of $a_i$; conversely any such clopen partition with sections in the $G_i$ glues to a unique section of $C(T)$. For $I=\\varnothing$, $C(T)$ is a singleton when $T$ is empty and is empty otherwise.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 0F15 (lemma-coproduct-sheaves-open-and-closed) and Tag 02WO (lemma-representable-sheaf-coproduct-sheaves), applied to each summand versus the coproduct of the others; the set-indexed form uses the construction of a coproduct as sheafification in sites.tex Tag 00WI (lemma-colimit-sheaves)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-open-immersion",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coproduct.*(sheaf|fppf)|sheaf.*coproduct|coproduct.*representable",
+   "results": "2 hits; read: Mathlib/AlgebraicGeometry/Sites/BigZariski.lean, Mathlib/AlgebraicGeometry/Sites/BigZariski.lean Subdirectory: AlgebraicGeometry.",
+   "date": "2026-10-18",
+   "verdict": "no match: scheme coproduct/open-cover results, module-presheaf coproducts and Zariski sheaf-condition comparisons do not give representability of summand pullbacks of arbitrary fppf sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pulling back a summand of a coproduct of fppf sheaves to a scheme is represented by an open and closed subscheme",
+   "results": "8 hits; read: AlgebraicGeometry.Scheme.IdealSheafData.subscheme, AlgebraicGeometry.IsOpenImmersion.hasPullback_of_right, AlgebraicGeometry.IsOpenImmersion.hasPullback_of_left, AlgebraicGeometry.pullbackRestrictIsoRestrict, AlgebraicGeometry.instIsAffineHomDescScheme, AlgebraicGeometry.sigmaOpenCover, AlgebraicGeometry.isCompl_opensRange_inl_inr, AlgebraicGeometry.Scheme.Modules.instAdditivePullback",
+   "date": "2026-10-18",
+   "verdict": "no match: scheme coproduct/open-cover results, module-presheaf coproducts and Zariski sheaf-condition comparisons do not give representability of summand pullbacks of arbitrary fppf sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"coproduct\"",
+   "results": "12 hits; read: PresheafOfModules.freeYonedaCoproduct, PresheafOfModules.instEpiFromFreeYonedaCoproduct, PresheafOfModules.fromFreeYonedaCoproduct, PresheafOfModules.ιFreeYonedaCoproduct, PresheafOfModules.ι_fromFreeYonedaCoproduct, PresheafOfModules.ι_fromFreeYonedaCoproduct_assoc, PresheafOfModules.freeYonedaCoproductMk, PresheafOfModules.ι_fromFreeYonedaCoproduct_apply",
+   "date": "2026-10-18",
+   "verdict": "no match: scheme coproduct/open-cover results, module-presheaf coproducts and Zariski sheaf-condition comparisons do not give representability of summand pullbacks of arbitrary fppf sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map from a scheme to a coproduct of fppf sheaves determines a partition of the scheme by open and closed subschemes representing the pullbacks of the summands",
+   "results": "8 hits; read: AlgebraicGeometry.sigmaOpenCover, AlgebraicGeometry.Scheme.Cover.toSigma, AlgebraicGeometry.sigmaOpenCover_I₀, AlgebraicGeometry.coprodOpenCover, AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall, AlgebraicGeometry.disjoint_opensRange_sigmaι, AlgebraicGeometry.sigmaOpenCover_f, AlgebraicGeometry.sigmaOpenCover_X",
+   "date": "2026-10-18",
+   "verdict": "no match: scheme coproduct/open-cover results, module-presheaf coproducts and Zariski sheaf-condition comparisons do not give representability of summand pullbacks of arbitrary fppf sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of the coproduct of fppf sheaves are sections on an indexed open closed partition of a test scheme",
+   "results": "8 hits; read: AlgebraicGeometry.Scheme.coprodPresheafObjIso, TopCat.Sheaf.existsUnique_gluing', AlgebraicGeometry.coprodOpenCover, AlgebraicGeometry.sigmaOpenCover, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, AlgebraicGeometry.Scheme.OpenCover.ext_elem, TopCat.Presheaf.IsGluing, TopCat.Presheaf.section_ext",
+   "date": "2026-10-18",
+   "verdict": "no match: scheme coproduct/open-cover results, module-presheaf coproducts and Zariski sheaf-condition comparisons do not give representability of summand pullbacks of arbitrary fppf sheaves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-algebraic-space-coproduct",
+  "date": "2026-10-18",
+  "group": "Q42"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Support for the Tag 02WQ coproduct in the etale-relation quotient used in polarized scheme descent: the scheme-test decomposition needed to fill the omitted diagonal verification and to test the coproduct atlas. Historical ancestry through lem-trf-local-term-locality is retained.",
+   "via": [
+    "lem-trf-algebraic-space-coproduct",
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

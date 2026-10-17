@@ -18,9 +18,111 @@
   "def-weil-residue-field",
   "pqf-def-locnoeth"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $N\\geq2$. Restrict $\\varphi$ to the canonical image of $\\mathcal O_{Y,y}$ in its completion, obtaining the local $\\mathcal O_{S,s}$-map $\\theta:\\mathcal O_{Y,y}\\to\\widehat{\\mathcal O}_{X,x}$. Apply [lem-trf-local-map-completion-approximation] to this map with the given $N$. This gives $p:(U,u)\\to(X,x)$ etale with unchanged residue field, and an $S$-map $f:(U,u)\\to(Y,y)$ with the required congruence on $\\mathcal O_{Y,y}$. The hypotheses are exactly the given locally Noetherian base, the two locally finite type structural maps, and the G-ring $\\mathcal O_{S,s}$.",
+   "uses": [
+    "lem-trf-local-map-completion-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CAV, first sentence, applying Tag 0CAU to the restriction of the given isomorphism"
+   }
+  },
+  {
+   "text": "Write $A=\\mathcal O_{Y,y}$, $B=\\mathcal O_{X,x}$, and $C=\\mathcal O_{U,u}$. These rings are Noetherian: take affine finite-type charts over a Noetherian affine neighbourhood of $s$, use [lem-weil-pbc-finite-type-over-noetherian], and localize using [lem-weil-pbc-flat-local-ring-maps] (its Noetherian-localization assertion, applied also to identity maps). For $U$ use affine charts of the etale map $p$; finite presentation implies finite type. The map $p_u^{\\sharp}:B\\to C$ is flat by [def-weil-etale-morphism, def-weil-flat-morphism]. By [lem-weil-pbc-etale-prime-generates-maximal] on these etale affine charts it satisfies $\\mathfrak m_B C=\\mathfrak m_C$, and Step 1 supplies the residue-field isomorphism. Consequently [lem-weil-pbc-flat-local-completion-iso] gives an isomorphism $\\widehat p^{\\sharp}:\\widehat B\\xrightarrow{\\sim}\\widehat C$. Put $\\alpha=\\widehat p^{\\sharp}\\circ\\varphi:\\widehat A\\xrightarrow{\\sim}\\widehat C$ and let $g=\\widehat f^{\\sharp}:\\widehat A\\to\\widehat C$ be the actual map induced by $f$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-flat-local-ring-maps",
+    "def-weil-etale-morphism",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-etale-prime-generates-maximal",
+    "lem-weil-pbc-flat-local-completion-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CAV, proof, invocation of More on Algebra Tag 0AGX (lemma-flat-unramified)"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak n_A=\\mathfrak m_A\\widehat A$ and $\\mathfrak n_C=\\mathfrak m_C\\widehat C$. These are the maximal ideals by [lem-weil-pbc-local-completion-local-ring]. For each $r\\geq1$, [lem-weil-pbc-local-completion-quotient] applied to $A\\twoheadrightarrow A/\\mathfrak m_A^r$ gives $\\widehat A/\\mathfrak n_A^r\\cong A/\\mathfrak m_A^r$: the quotient has nilpotent maximal ideal, so its defining completion sequence is constant from level $r$ onwards. In particular every $a\\in\\widehat A$ has a representative $a_0\\in A$ with $a-a_0\\in\\mathfrak n_A^N$. Both $g$ and $\\alpha$ are local maps and send this difference into $\\mathfrak n_C^N$. Step 1 gives $g(a_0)-\\alpha(a_0)\\in\\mathfrak n_C^N$, hence $g(a)-\\alpha(a)\\in\\mathfrak n_C^N$ for every $a\\in\\widehat A$. This proves the claimed congruence on the whole completed source, rather than only on its dense local subring.",
+   "uses": [
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-local-completion-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CAV, congruence diagram on completions; extension of the Tag 0CAU congruence using completion of quotients, Algebra Tag 00MA"
+   }
+  },
+  {
+   "text": "Identify $\\widehat A$ with $D=\\widehat C$ using $\\alpha$ and set $h=g\\circ\\alpha^{-1}:D\\to D$. Thus $h(a)-a\\in\\mathfrak n^2$ for every $a\\in D$, where $\\mathfrak n=\\mathfrak n_C$, because $N\\geq2$. It follows that $h$ is the identity on $D/\\mathfrak n$ and on $\\mathfrak n/\\mathfrak n^2$. More explicitly, for $a_1,\\ldots,a_r\\in\\mathfrak n$, the telescoping expansion of $\\prod_i h(a_i)-\\prod_i a_i$ has in each term one factor in $\\mathfrak n^2$ and $r-1$ factors in $\\mathfrak n$, so it belongs to $\\mathfrak n^{r+1}$. Every element of $\\mathfrak n^r$ is a finite sum of such products: scalar coefficients can be absorbed into one factor. Hence $h$ acts as the identity on every $\\mathfrak n^r/\\mathfrak n^{r+1}$. This is the generation-in-degree-one argument for the associated graded ring, with the degree-zero case stated separately.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CAV, associated-graded diagram and generation in degree 1"
+   }
+  },
+  {
+   "text": "For $r\\geq1$ let $h_r:D/\\mathfrak n^r\\to D/\\mathfrak n^r$ be induced by $h$. Inductively these maps are bijective. The base $r=1$ is Step 4. For injectivity at $r+1$, an element killed by $h_{r+1}$ reduces to zero modulo $\\mathfrak n^r$ by injectivity of $h_r$, and is then zero in $\\mathfrak n^r/\\mathfrak n^{r+1}$ because $h$ is the identity there. For surjectivity, given $d\\bmod\\mathfrak n^{r+1}$ first choose $a$ with $h(a)\\equiv d\\bmod\\mathfrak n^r$. The error $d-h(a)$ has a class in $\\mathfrak n^r/\\mathfrak n^{r+1}$; choose a representative $e\\in\\mathfrak n^r$ of that class. Step 4 gives $h(e)\\equiv e\\bmod\\mathfrak n^{r+1}$, so $a+e$ is a preimage. This is an explicit chase of the two short exact sequences used by the source.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CAV, final paragraph: induction with the short exact sequences of successive quotients"
+   }
+  },
+  {
+   "text": "The ideal $\\mathfrak m_C$ is finitely generated since $C$ is Noetherian. Thus [lem-weil-pbc-adic-completion-mod-ideal] makes $D=\\widehat C$ complete for $\\mathfrak n=\\mathfrak m_CD$. By [def-weil-pbc-adic-completion], $D=\\varprojlim_rD/\\mathfrak n^r$. The inverse maps $h_r^{-1}$ of Step 5 commute with the transition quotients: both possible composites are inverses of the same commutative square of the $h_r$. Applying them coordinate by coordinate therefore defines an inverse ring map to $h$ on the compatible sequences. Hence $h$ is an isomorphism and so is $g=h\\circ\\alpha$. No unproved exactness of inverse limits is required.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CAV, last sentence: isomorphisms of all infinitesimal quotients give the isomorphism on completions"
+   }
+  },
+  {
+   "text": "The map $f:U\\to Y$ is locally of finite type: the composite $U\\to X\\to S$ is locally of finite type, and cancellation gives the assertion, both by [lem-weil-pbc-proper-fp-permanence](e),(f). The target $Y$ is locally Noetherian by the affine-chart argument of Step 2. Its actual completed stalk map is the isomorphism $g$ of Step 6, so [lem-trf-completed-stalk-isomorphism-etale] gives an open neighbourhood $W\\ni u$ on which $f$ is etale, and an isomorphism $\\kappa(y)\\to\\kappa(u)$. Replace $U$ by $W$. The map to $X$ remains etale by [lem-weil-pbc-etale-composition-cancellation], since the open immersion $W\\hookrightarrow U$ is etale. Its residue field map is still that of Step 1. The local ring at $u$, its maximal ideal, and both completed maps are unchanged by restriction, so the congruence modulo $\\mathfrak m_u^N\\widehat{\\mathcal O}_{U,u}$ from Step 3 holds with exactly the original $\\varphi$. This supplies both elementary etale neighbourhoods and the requested approximation.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-trf-completed-stalk-isomorphism-etale",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CAV, first paragraph: completed-stalk criterion and restriction to the etale neighbourhood"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-local-map-completion-approximation",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "def-weil-etale-morphism",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-etale-prime-generates-maximal",
+  "lem-weil-pbc-flat-local-completion-iso",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-trf-completed-stalk-isomorphism-etale",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0CAV, lemma-isomorphism-approximation, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +158,129 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-18",
    "verdict": "No match: no statement giving this geometric approximation or completed-local identification."
+  },
+  {
+   "tool": "grep",
+   "query": "isomorphism-approximation|completed local rings|lemma-map-approximation",
+   "results": "{\"t\": \"2026-10-17T20:53:49Z\", \"tool\": \"grep\", \"query\": \"isomorphism-approximation|completed local rings|lemma-map-approximation\", \"sub\": \"Mathlib\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} This request used a subdirectory including Mathlib, which the search wrapper nests under Mathlib. It is not evidence of absence; corrected searches without this prefix are separately recorded.",
+   "date": "2026-10-18",
+   "verdict": "invalid subdirectory; no absence conclusion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given an isomorphism of completed local rings of finite type schemes over a G-ring, construct common etale neighborhood",
+   "results": "{\"t\": \"2026-10-17T20:53:50Z\", \"tool\": \"leansearch\", \"query\": \"Given an isomorphism of completed local rings of finite type schemes over a G-ring, construct common etale neighborhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale\", \"Algebra.FormallyEtale.iff_of_equiv\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"RingHom.Etale.respectsIso\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.Etale.formallyEtale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"1b1ebe4e3b5aa05f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsEtaleAt, Algebra.exists_etale_of_isEtaleAt, IsLocalizationMap",
+   "results": "{\"t\": \"2026-10-17T20:53:50Z\", \"tool\": \"loogle\", \"query\": \"Algebra.IsEtaleAt, Algebra.exists_etale_of_isEtaleAt, IsLocalizationMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsLocalizationMap'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "invalid query; no absence conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "approximation of isomorphism of completed local rings by etale neighborhoods",
+   "results": "{\"t\": \"2026-10-17T20:53:51Z\", \"tool\": \"leanfinder\", \"query\": \"approximation of isomorphism of completed local rings by etale neighborhoods\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.IsEtaleAt\", \"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.etaleLocus\", \"Algebra.mem_etaleLocus_iff\", \"StandardEtalePair.instEtaleRing\"], \"digest\": \"3e3ae2057dc8d3f0\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin approximation over a G-ring algebraizes a local map into a completion on an elementary etale neighborhood",
+   "results": "{\"t\": \"2026-10-17T20:55:07Z\", \"tool\": \"leanfinder\", \"query\": \"Artin approximation over a G-ring algebraizes a local map into a completion on an elementary etale neighborhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"StandardEtalePair.lift\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePresentation\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"StandardEtalePair.hasMap_X\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.exists_etale_of_isEtaleAt\"], \"digest\": \"5e4dce74d8123559\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Artin.*approx|approx.*[Ee]tale|GRing",
+   "results": "{\"t\": \"2026-10-17T20:55:21Z\", \"tool\": \"grep\", \"query\": \"Artin.*approx|approx.*[Ee]tale|GRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Algebra/Defs.lean\", \"Mathlib/Algebra/Algebra/Defs.lean\", \"Mathlib/Algebra/Star/Conjneg.lean\", \"Mathlib/Algebra/DirectSum/Internal.lean\", \"Mathlib/Algebra/DirectSum/Internal.lean\", \"Mathlib/Algebra/DirectSum/Internal.lean\", \"Mathlib/Algebra/DirectSum/Ring.lean\", \"Mathlib/Algebra/DirectSum/Ring.lean\"], \"digest\": \"cba08ac83aee85eb\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, RingEquiv",
+   "results": "{\"t\": \"2026-10-17T20:55:21Z\", \"tool\": \"loogle\", \"query\": \"AdicCompletion, RingEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "map-approximation|Artin.*approximation|approximation.*G.ring",
+   "results": "{\"t\": \"2026-10-17T20:57:00Z\", \"tool\": \"grep\", \"query\": \"map-approximation|Artin.*approximation|approximation.*G.ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*[Ee]tale|[Ee]tale.*completion|completed.*stalk",
+   "results": "{\"t\": \"2026-10-17T20:57:00Z\", \"tool\": \"grep\", \"query\": \"completion.*[Ee]tale|[Ee]tale.*completion|completed.*stalk\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Approximate a local algebra homomorphism into the completion modulo any power of the maximal ideal using an etale neighborhood",
+   "results": "{\"t\": \"2026-10-17T20:57:01Z\", \"tool\": \"leansearch\", \"query\": \"Approximate a local algebra homomorphism into the completion modulo any power of the maximal ideal using an etale neighborhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.mkₐ\", \"IsAdicComplete.mkₐ_comp_liftAlgHom\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"AdicCompletion.liftAlgHom\", \"IsAdicComplete.liftAlgHom\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.FormallySmooth.lift\", \"IsAdicComplete.liftRingHom\"], \"digest\": \"0ce063c737a1d1b3\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a morphism of schemes induces an isomorphism of completed local rings then it is etale at this point",
+   "results": "{\"t\": \"2026-10-17T20:57:01Z\", \"tool\": \"leansearch\", \"query\": \"If a morphism of schemes induces an isomorphism of completed local rings then it is etale at this point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.IsEtaleAt\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"RingHom.FormallyEtale\", \"Algebra.etaleLocus\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\"], \"digest\": \"537a6f5365227924\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, AdicCompletion",
+   "results": "{\"t\": \"2026-10-17T20:57:01Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Etale, AdicCompletion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq",
+   "results": "{\"t\": \"2026-10-17T20:57:01Z\", \"tool\": \"loogle\", \"query\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\"], \"digest\": \"718e816e4240a5ea\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local homomorphism from a local ring of a finite type scheme into a completion is approximated on an elementary etale neighborhood",
+   "results": "{\"t\": \"2026-10-17T20:57:01Z\", \"tool\": \"leanfinder\", \"query\": \"Local homomorphism from a local ring of a finite type scheme into a completion is approximated on an elementary etale neighborhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.exists_etale_of_isEtaleAt\", \"StandardEtalePair.hasMap_X\", \"StandardEtalePresentation.hasMap\", \"Algebra.IsEtaleAt\", \"Algebra.Etale.of_isLocalizationAway\"], \"digest\": \"ec8619d312a27fab\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin approximation of arbitrary polynomial equations using an etale algebra with unchanged residue field",
+   "results": "{\"t\": \"2026-10-17T20:57:02Z\", \"tool\": \"leanfinder\", \"query\": \"Artin approximation of arbitrary polynomial equations using an etale algebra with unchanged residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePresentation.exists_mul_aeval_x_g_pow_eq_aeval_x\", \"StandardEtalePresentation\", \"StandardEtalePair\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"StandardEtalePresentation.P\"], \"digest\": \"4b32f75f5dc3332c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type morphism of locally Noetherian schemes inducing an isomorphism on completed stalks is etale at the point",
+   "results": "{\"t\": \"2026-10-17T20:57:03Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finite type morphism of locally Noetherian schemes inducing an isomorphism on completed stalks is etale at the point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.mem_etaleLocus_iff\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.of_comp\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.etaleLocus\", \"AlgebraicGeometry.IsEtale.instIsSmooth\"], \"digest\": \"f454a72ef59ca774\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale criterion for a finite type morphism from an isomorphism of maximal adic completions",
+   "results": "{\"t\": \"2026-10-17T20:57:04Z\", \"tool\": \"leanfinder\", \"query\": \"Etale criterion for a finite type morphism from an isomorphism of maximal adic completions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.propertyIsLocal\", \"Algebra.Etale.finitePresentation\", \"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.of_bijective\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.instEtaleOfIsStandardEtale\", \"Algebra.IsEtaleAt\", \"Algebra.Etale.of_isLocalization_Away\"], \"digest\": \"902355ce6fae9488\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-relative-completion-etale-approximation",
@@ -84,5 +305,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-isomorphism-completion-approximation",
+  "worker": "stage1",
+  "summary": "Split Stacks 0CAV without changing its statement. Two statement-only inputs isolate local-map approximation (0CAU) and the generic completed-stalk etaleness criterion. The item proves the completed map is an isomorphism by extending the N-th-order congruence, computing all graded pieces, chasing successive quotients, and taking compatible inverses; all generic completion and permanence facts reuse existing nodes. No Lean declaration attaches and no Mathlib search matches.",
+  "blueprint": "Preserves the historical lem-trf-local-term-locality ancestry and realizes the Tag 0CAV input to Tag 0GDX, used for the relative completed-local isomorphism in the nodal etale local-model branch. No chapter or unit route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic local algebra, completion, or finite-type/etale permanence used as a black box in the Stacks 0CAV argument; no node of sk-i-curve-zero supplies this fact."
+   },
+   {
+    "node": "lem-weil-pbc-flat-local-ring-maps",
+    "why": "Generic local algebra, completion, or finite-type/etale permanence used as a black box in the Stacks 0CAV argument; no node of sk-i-curve-zero supplies this fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-prime-generates-maximal",
+    "why": "Generic local algebra, completion, or finite-type/etale permanence used as a black box in the Stacks 0CAV argument; no node of sk-i-curve-zero supplies this fact."
+   },
+   {
+    "node": "lem-weil-pbc-flat-local-completion-iso",
+    "why": "Generic local algebra, completion, or finite-type/etale permanence used as a black box in the Stacks 0CAV argument; no node of sk-i-curve-zero supplies this fact."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-local-ring",
+    "why": "Generic local algebra, completion, or finite-type/etale permanence used as a black box in the Stacks 0CAV argument; no node of sk-i-curve-zero supplies this fact."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-quotient",
+    "why": "Generic local algebra, completion, or finite-type/etale permanence used as a black box in the Stacks 0CAV argument; no node of sk-i-curve-zero supplies this fact."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-mod-ideal",
+    "why": "Generic local algebra, completion, or finite-type/etale permanence used as a black box in the Stacks 0CAV argument; no node of sk-i-curve-zero supplies this fact."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic local algebra, completion, or finite-type/etale permanence used as a black box in the Stacks 0CAV argument; no node of sk-i-curve-zero supplies this fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic local algebra, completion, or finite-type/etale permanence used as a black box in the Stacks 0CAV argument; no node of sk-i-curve-zero supplies this fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-etale-prime-generates-maximal",
+  "lem-weil-pbc-flat-local-completion-iso",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N9-522fa7021",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N9-522fa7021 (reviewer sub-agent of L); spot-checked: Read the full item, both new nodes, cited DAG statements, unit route, worker report, and Stacks sources 0CAU, 0CAV, 02HX, 0CAR, and 0AGX. Verified hypotheses, completion/base-change maps, coefficient category, graded and quotient arguments, etale conclusions, edge cases, duplicate checks, Mathlib searches, and route compliance. No repair is needed; review written to review.md."
  }
 }

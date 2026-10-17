@@ -13,9 +13,128 @@
   "def-sc-invertible-module",
   "def-weil-pbc-ample-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $Z_i=h^{-1}(U_i)$, $h_i:Z_i\\to U_i$, and $N_i=N|_{Z_i}$. For an arbitrary affine open $W\\subseteq U_i$, the inclusion $W\\to U_i$ is affine by [lem-weil-pbc-morphism-affine-schemes-affine]. Its base change $a:h_i^{-1}(W)\\to Z_i$ is affine by [lem-weil-pbc-affine-morphism-permanence](1). Here $Z_i\\times_{U_i}W=h_i^{-1}(W)$: a map into either side is a map into $Z_i$ whose composite to $U_i$ factors through the open $W$. The pullback $a^*N_i$ is its restriction, since the formula in [def-pc-module-pullback] reduces on an open immersion to $\\mathcal O\\otimes_{\\mathcal O}N_i|=N_i|$. By [lem-weil-pbc-pullback-ample-invertible], this restriction is ample. Moreover $h_i$ is quasi-compact: each affine open $W\\subseteq U_i$ is an affine open of $S$, and $h_i^{-1}(W)=h^{-1}(W)$ is quasi-compact by the given quasi-compactness of $h$. These two facts together give $h_i$-ampleness of $N_i$ in the current, quasi-compactness-inclusive sense of [lem-trf-scheme-ample-canonical-proj-criterion].",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-pullback-ample-invertible",
+    "lem-trf-scheme-ample-canonical-proj-criterion",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VJ (lemma-characterize-relatively-ample), (3) implies (5), with the affine-base reduction justified by the affine specialization of Tag 0892 (lemma-pullback-ample-tensor-relatively-ample)(2)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-scheme-ample-canonical-proj-criterion] to the quasi-compact $(h_i,N_i)$ of Step 1. Its forward implication gives quasi-separatedness of $h_i$, the canonical section algebra $\\mathcal A_i=\\bigoplus_{d\\geq0}(h_i)_*N_i^{\\otimes d}$ with evaluation $\\psi_i$, the equality $U(\\psi_i)=Z_i$, and an open immersion $r_i:Z_i\\to\\operatorname{Proj}_{U_i}(\\mathcal A_i)$. Its final assertion also makes $h_i$ separated. Thus the criterion is applied with its quasi-compactness hypothesis already established; its algebra is formed only after obtaining quasi-separatedness.",
+   "uses": [
+    "lem-trf-scheme-ample-canonical-proj-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VJ (lemma-characterize-relatively-ample), local canonical section-algebra maps in the proof of (3) implies (5); Tag 01VI (lemma-relatively-ample-separated)."
+   }
+  },
+  {
+   "text": "View our schemes as representable algebraic spaces over $S$ [def-trf-algebraic-space]. Check the local $h_i$ against the definitions in [lem-trf-space-qc-separated-etale-local]. For each affine scheme $T\\to U_i$, [lem-weil-pbc-qcqs-morphism-permanence](3) makes $q:Z_i\\times_{U_i}T\\to T$ quasi-compact. Its identity presentation is the required surjective etale presentation by a quasi-compact scheme. Hence $h_i$ is quasi-compact as a space morphism. Its scheme diagonal is a closed immersion by Step 2 and [def-weil-proper-morphism]. Every scheme test of the representable diagonal is a base change of this same scheme diagonal (both fibre products classify pairs with equal image). It is a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. Thus $h_i$ is separated as a space morphism as well.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-qc-separated-etale-local",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03KG (lemma-quasi-compact-local), 03KM (lemma-separated-local), scheme tests; schemes.tex Tag 01K5 (lemma-quasi-compact-preserved-base-change); morphisms.tex Tag 01QR (lemma-base-change-closed-immersion)."
+   }
+  },
+  {
+   "text": "The inclusions $U_i\\hookrightarrow S$ are etale by [lem-weil-pbc-etale-composition-cancellation](1) and jointly surjective by hypothesis. Apply [lem-trf-space-qc-separated-etale-local] to $h$ and this family, whose base changes are the $h_i$ checked in Step 3. It gives quasi-compactness and separatedness in the space sense. To recover scheme separatedness, take the scheme test $Z\\times_SZ\\to Z\\times_SZ$ equal to the identity in its representable diagonal: the resulting closed immersion is exactly $\\Delta_h:Z\\to Z\\times_SZ$. Thus $h$ is scheme-separated by [def-weil-proper-morphism]; its scheme quasi-compactness is the original hypothesis. Moreover [def-weil-closed-immersion] says $\\Delta_h$ is affine, so [lem-weil-pbc-affine-morphism-permanence](3) makes it quasi-compact. Consequently $h$ is quasi-separated by [def-weil-quasi-separated-morphism], as required for the current canonical-Proj criterion.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-trf-space-qc-separated-etale-local",
+    "def-weil-proper-morphism",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VJ (lemma-characterize-relatively-ample), first paragraph of (3) implies (5); spaces-morphisms.tex Tags 03KG, 03KM; schemes.tex Tag 01KK (definition-separated), and Tag 01K6 (lemma-closed-immersion-quasi-compact)."
+   }
+  },
+  {
+   "text": "By [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence], $N$ corresponds to a line module on the small etale site of $Z$, and its direct images and pullbacks agree with the Zariski ones under that equivalence. Use [lem-trf-space-section-algebra-etale-base-change] for the quasi-compact separated $h$ from Step 4. It supplies the quasi-coherent graded algebra $\\mathcal A=\\bigoplus_{d\\geq0}h_*N^{\\otimes d}$ on $S$ and its evaluation map $\\psi:h^*\\mathcal A\\to\\bigoplus_{d\\geq0}N^{\\otimes d}$. For each $U_i\\to S$, it identifies $\\mathcal A|_{U_i}$ with $\\mathcal A_i$ and the restricted evaluation with $\\psi_i$. Its last clause identifies all these maps with the ordinary scheme maps, so the canonical criterion of Step 2 concerns exactly these algebras and evaluations.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-trf-space-section-algebra-etale-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VJ (lemma-characterize-relatively-ample), section-algebra and adjunction paragraphs; descent.tex Tags 03DX,03LC and spaces-properties.tex Tag 03LX for the existing comparison interfaces."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-space-line-module-proj-map] to $(h,N,\\mathcal A,\\psi)$. It gives an open $U(\\psi)\\subseteq Z$ and a canonical map $r:U(\\psi)\\to P=\\operatorname{Proj}_S(\\mathcal A)$. Its restriction compatibility and Step 5 identify $U(\\psi)\\cap Z_i$ with $U(\\psi_i)=Z_i$, and identify the restricted map with $r_i$ under $P\\times_SU_i\\simeq\\operatorname{Proj}_{U_i}(\\mathcal A_i)$. Since the $Z_i$ cover $Z$, the first equality gives $U(\\psi)=Z$: every point belongs to a $Z_i$ and hence to $U(\\psi)$. By [lem-weil-pbc-etale-covering-base-change] applied to the covering family of Step 4 and $P\\to S$, the schemes $P\\times_SU_i$ form a jointly surjective etale family over $P$. The base changes of $r:Z\\to P$ to this family are exactly the open immersions $r_i$ of Step 2. Thus [lem-trf-space-open-immersion-etale-local] implies that $r$ is an open immersion.",
+   "uses": [
+    "lem-trf-space-line-module-proj-map",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-trf-space-open-immersion-etale-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VJ (lemma-characterize-relatively-ample), conclusion of (3) implies (5); constructions.tex Tag 01O9, spaces-divisors.tex Tag 0D2Z for restriction compatibility."
+   }
+  },
+  {
+   "text": "The original hypothesis makes $h$ quasi-compact, and Step 4 proves it quasi-separated. Steps 5 and 6 give its canonical graded algebra and evaluation with full generation locus $Z$ and canonical Proj map an open immersion. Thus condition (2) of [lem-trf-scheme-ample-canonical-proj-criterion] holds, with all its prerequisites. Its reverse implication gives $h$-ampleness of $N$, which the statement defines to include precisely ampleness of $N|_{h^{-1}(V)}$ for every affine open $V\\subseteq S$. This is the required conclusion.",
+   "uses": [
+    "lem-trf-scheme-ample-canonical-proj-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VJ (lemma-characterize-relatively-ample), (5) implies (4) implies (1); Definition 01VH (definition-relatively-ample)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-trf-algebraic-space",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-quasi-separated-morphism",
+  "lem-trf-scheme-ample-canonical-proj-criterion",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-line-module-proj-map",
+  "lem-trf-space-open-immersion-etale-local",
+  "lem-trf-space-qc-separated-etale-local",
+  "lem-trf-space-section-algebra-etale-base-change",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01VJ (lemma-characterize-relatively-ample), implication (3) implies (1), with the local-to-global section-algebra and Proj-map comparison written via the existing DAG nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -51,10 +170,124 @@
    "results": "[leanfinder] OK 8 hit(s)\nReturned declarations (in order): AlgebraicGeometry.targetAffineLocally, AlgebraicGeometry.sourceAffineLocally, AlgebraicGeometry.affineLocally_iff_affineOpens_le, AlgebraicGeometry.affineAnd, AlgebraicGeometry.targetAffineLocally_affineAnd_iff, AlgebraicGeometry.HasAffineProperty.iff_of_openCover, AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE, AlgebraicGeometry.affineLocally_iff_forall_isAffineOpen.",
    "date": "2026-10-18",
    "verdict": "no match: generic HasAffineProperty locality assumes a local affine-target property; it does not establish locality of relative ampleness for a specified invertible sheaf. Read Morphisms/Basic.lean:475-487,540-574."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of schemes an invertible module is ample over each member of an affine open cover of the base is relatively ample",
+   "results": {
+    "t": "2026-10-17T20:46:08Z",
+    "tool": "leanfinder",
+    "query": "For a morphism of schemes an invertible module is ample over each member of an affine open cover of the base is relatively ample",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.HasAffineProperty.iff_of_iSup_eq_top",
+     "AlgebraicGeometry.HasAffineProperty.of_iSup_eq_top",
+     "AlgebraicGeometry.HasRingHomProperty.of_source_openCover",
+     "AlgebraicGeometry.HasRingHomProperty.iff_of_iSup_eq_top",
+     "AlgebraicGeometry.HasRingHomProperty.of_iSup_eq_top",
+     "AlgebraicGeometry.HasRingHomProperty.iff_of_source_openCover",
+     "AlgebraicGeometry.of_affine_open_cover",
+     "AlgebraicGeometry.HasAffineProperty.of_openCover"
+    ],
+    "digest": "9a3e444e8c45b077"
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: the hits are generic affine-locality APIs whose hypotheses require locality already; they do not establish ampleness locality for a specified line bundle. Basic.lean:475-487,540-574 inspected. The Loogle query reports unknown identifier IsAmple."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAmple",
+   "results": {
+    "t": "2026-10-17T20:46:09Z",
+    "tool": "loogle",
+    "query": "IsAmple",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'IsAmple'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: the hits are generic affine-locality APIs whose hypotheses require locality already; they do not establish ampleness locality for a specified line bundle. Basic.lean:475-487,540-574 inspected. The Loogle query reports unknown identifier IsAmple."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?ample|IsAmple|ample.*local|local.*ample",
+   "results": {
+    "t": "2026-10-17T20:46:09Z",
+    "tool": "grep",
+    "query": "relative.?ample|IsAmple|ample.*local|local.*ample",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean"
+    ],
+    "digest": "29b21decf7186b62"
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: the hits are generic affine-locality APIs whose hypotheses require locality already; they do not establish ampleness locality for a specified line bundle. Basic.lean:475-487,540-574 inspected. The Loogle query reports unknown identifier IsAmple."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative ampleness of a line bundle can be checked on an affine open cover of the base scheme",
+   "results": {
+    "t": "2026-10-17T20:47:03Z",
+    "tool": "leansearch",
+    "query": "Relative ampleness of a line bundle can be checked on an affine open cover of the base scheme",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.HasAffineProperty.iff_of_iSup_eq_top",
+     "AlgebraicGeometry.HasAffineProperty.iff_of_openCover",
+     "AlgebraicGeometry.HasAffineProperty.of_openCover",
+     "AlgebraicGeometry.Scheme.affineOpenCover",
+     "AlgebraicGeometry.Scheme.AffineOpenCover.openCover",
+     "AlgebraicGeometry.Scheme.directedAffineCover",
+     "AlgebraicGeometry.Scheme.affineCover",
+     "AlgebraicGeometry.Scheme.affineBasisCoverOfAffine"
+    ],
+    "digest": "679c9a59edccd2bf"
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: the hits are generic affine-locality APIs whose hypotheses require locality already; they do not establish ampleness locality for a specified line bundle. Basic.lean:475-487,540-574 inspected. The Loogle query reports unknown identifier IsAmple."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle ample on inverse images of the members of an affine covering is ample over every affine open of the target",
+   "results": {
+    "t": "2026-10-17T20:47:07Z",
+    "tool": "leanfinder",
+    "query": "A line bundle ample on inverse images of the members of an affine covering is ample over every affine open of the target",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.of_affine_open_cover",
+     "AlgebraicGeometry.HasAffineProperty.of_iSup_eq_top",
+     "AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.of_basicOpenCover",
+     "AlgebraicGeometry.HasAffineProperty.iff_of_iSup_eq_top",
+     "AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE",
+     "AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine",
+     "AlgebraicGeometry.HasRingHomProperty.of_iSup_eq_top",
+     "AlgebraicGeometry.HasRingHomProperty.iff_of_iSup_eq_top"
+    ],
+    "digest": "0c097a76b276cd0e"
+   },
+   "date": "2026-10-18",
+   "verdict": "no match: the hits are generic affine-locality APIs whose hypotheses require locality already; they do not establish ampleness locality for a specified line bundle. Basic.lean:475-487,540-574 inspected. The Loogle query reports unknown identifier IsAmple."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-scheme-relative-ample-base-change",
@@ -93,5 +326,29 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-scheme-relative-ample-affine-cover",
+  "worker": "stage1",
+  "summary": "Revalidated the returned split against the current DAG. Retained the statement, ancestry and all Mathlib searches. Reworked the canonical-Proj invocations to check their explicit quasi-compactness and quasi-separatedness prerequisites. Replaced the removed scheme/space agreement clause with scheme-test arguments using existing base-change lemmas and an identity diagonal test. Seven steps, no new nodes. Reviewer FIX: Step 3 now relies only on qc preservation under base change; the finite-type definition was removed because finite type was not assumed.",
+  "blueprint": "Realizes the affine-open-cover criterion used at the beginning and end of the Stacks 0893 scheme-base-change argument in the historical polarized descent chain below lem-trf-local-term-locality.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-pullback-ample-invertible",
+    "why": "Generic affine-pullback ampleness theorem 0892(2), used to check ampleness over smaller affine opens inside each cover member; this unit has no separate replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-pullback-ample-invertible"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q100-afda42d18",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q100-afda42d18 (reviewer sub-agent of L); spot-checked: The statement and seven-step proof match Stacks Morphisms Tag 01VJ, with all cited nodes and route constraints checked. Step 3 incorrectly invoked def-weil-finite-type-morphism although finite type is not assumed; qc base change was already supplied by lem-weil-pbc-qcqs-morphism-permanence(3). Corrected whole DAG JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-scheme-relative-ample-affine-cover.json. No new nodes or target weakening.; 1 file(s) fixed by the reviewer"
  }
 }

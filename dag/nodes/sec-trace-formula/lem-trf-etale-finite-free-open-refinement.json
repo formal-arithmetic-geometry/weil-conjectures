@@ -15,9 +15,107 @@
   "def-weil-surjective-morphism",
   "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $S=\\varnothing$, take $J=\\varnothing$. All required families and equations are then empty. Conversely, a jointly surjective empty family forces $S=\\varnothing$. Hence assume $S$ nonempty. It suffices to produce, for each point $s\\in S$, a suitable open neighbourhood $U_s$, since these neighbourhoods then cover $S$.",
+   "uses": [
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02LI, remark-topologies; empty case and pointwise reduction"
+   }
+  },
+  {
+   "text": "Fix $s\\in S$. Joint surjectivity supplies $a\\in A$ and $x\\in E_a$ mapping to $s$. Choose an affine open $V=\\operatorname{Spec}R\\subset S$ containing $s$, and an affine open $E=\\operatorname{Spec}B_0\\subset e_a^{-1}(V)$ containing $x$, by the affine-open basis lemma. Restricting an etale morphism to open charts preserves its defining affine-local etale condition. Thus $E\\to V$ is etale. Apply the existing locally-standard etale algebra lemma at the prime of $x$: there is $b\\in B_0$ not in that prime and an $R$-algebra isomorphism $(B_0)_b\\cong (R[t]/(f))_{\\bar g}$, with $f$ monic and $f'$ invertible. The basic-open affine section lemma identifies $E^0=D_E(b)$ with this standard etale spectrum, over $V$, and $x\\in E^0$. Denote the prime of $x$ in this algebra by $\\mathfrak q$; it lies over the prime $\\mathfrak p$ of $s$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-etale-locally-standard",
+    "lem-weil-pbc-affine-open-section-vanishing-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02LG, lemma-dominate-etale-neighbourhood-finite-flat, first proof paragraph; Algebra 00UE and Schemes 01IT, 01I3"
+   }
+  },
+  {
+   "text": "Apply the standard-etale prime-lift lemma to the algebra of $E^0$. It gives a finite free $R$-algebra $C$ and a surjection $\\pi:T=\\operatorname{Spec}C\\to V$. Since $s\\in\\operatorname{Spec}R$, the ring $R$ is nonzero, so the free rank is positive; the finite-free spectrum lemma makes $\\pi$ finite locally free. For every $t\\in\\pi^{-1}(s)$ its prime $\\mathfrak q'$ contracts to $\\mathfrak p$. The prime-lift lemma, with the fixed prime $\\mathfrak q$ of $x$, supplies $c_t\\notin\\mathfrak q'$ and a map $B\\to C_{c_t}$ taking that prime back to $\\mathfrak q$. By the basic-open affine section lemma and contravariant functoriality of spectrum, this is a morphism $h_t:D_T(c_t)\\to E^0\\hookrightarrow E_a$ over $S$, with $h_t(t)=x$. In particular the opens $D_T(c_t)$ cover the entire fibre over $s$.",
+   "uses": [
+    "lem-trf-standard-etale-finite-free-prime-lifts",
+    "lem-weil-pbc-finite-free-algebra-spectrum",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02LG, lemma-dominate-etale-neighbourhood-finite-flat, final proof sentence invoking Algebra 00UF"
+   }
+  },
+  {
+   "text": "Put $O=\\bigcup_{t\\in\\pi^{-1}(s)}D_T(c_t)$ and $Z=T\\setminus O$. Since $\\pi$ is finite, the existing finite-closed-map lemma makes $\\pi(Z)$ closed in $V$. No point of $Z$ lies over $s$, so $s\\notin\\pi(Z)$. By the principal-open basis lemma choose $\\ell\\in R\\setminus\\mathfrak p$ with $U_s=D_V(\\ell)\\subset V\\setminus\\pi(Z)$. Therefore $\\pi^{-1}(U_s)\\subset O$. Set $W_s=\\pi^{-1}(U_s)$ and $W_{s,t}=W_s\\cap D_T(c_t)$. These are actual open subschemes and they cover $W_s$; the maps $h_t$ restrict along their open inclusions to maps $W_{s,t}\\to E_a$.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02LI, remark-topologies, passage from 02LG fibre neighbourhoods to a covering after Zariski shrinking"
+   }
+  },
+  {
+   "text": "The restricted map $q_s:W_s\\to U_s$ is still finite locally free, as follows explicitly in coordinates. The basic-open affine section lemma identifies $U_s$ with $\\operatorname{Spec}R_\\ell$ and $W_s=D_T(\\ell)$ with $\\operatorname{Spec}C_\\ell$, using the image of $\\ell$ in $C$. The localization-tensor isomorphism identifies the underlying $R_\\ell$-module $C_\\ell$ with $C\\otimes_R R_\\ell$. The free-module base-change lemma gives the finite basis $e_i\\otimes1$, for the same $r$ indices as the $R$-basis of $C$. Hence the finite-free spectrum lemma applies to $R_\\ell\\to C_\\ell$. Surjectivity needs no new theorem: any point of $U_s$ has a preimage under $\\pi$, and that preimage is in $W_s$ by its definition. For each $t$, the equality over $S$ from Step 3 restricts to $e_a\\circ h_{s,t}=u_s\\circ q_s\\circ\\iota_{s,t}$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-weil-pbc-localization-away-tensor-iso",
+    "lem-weil-pbc-free-module-base-change-free",
+    "lem-weil-pbc-finite-free-algebra-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02LI, remark-topologies; localization of the finite free algebra of 00UF (Algebra 00DK, Morphisms 02KB)"
+   }
+  },
+  {
+   "text": "Perform these choices for each $s\\in S$, take $J$ to be the underlying point set of $S$, and put $K_s=\\pi_s^{-1}(s)$. Each $s$ belongs to $U_s$, so the $U_s$ cover $S$. The finite-fibre lemma makes $K_s$ finite; Steps 4 and 5 give the required open covering of $W_s$, all maps, and the exact factorization equations. Put $a(s,t)=a_s$. The given schemes have small point sets and their rings and localizations stay within the universes of the size convention; these choices indexed by a small point set give a small Zariski covering, and each finite $K_s$ is small. No quasi-compactness, quasi-separatedness, Noetherian assumption, or finite-subcover choice on $S$ is used.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02LI, remark-topologies, assembly of the local refinements"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-surjective-morphism",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-locally-standard",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-trf-standard-etale-finite-free-prime-lifts",
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-localization-away-tensor-iso",
+  "lem-weil-pbc-free-module-base-change-free",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 02LI, remark-topologies, supplied shrinking argument from the fibrewise construction of 02LG; the source remark does not spell out this argument."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -60,10 +158,45 @@
    "results": "{\"t\": \"2026-10-17T20:41:34Z\", \"tool\": \"leanfinder\", \"query\": \"Every etale covering is dominated locally in the Zariski topology by open coverings of finite faithfully flat schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.zariskiPrecoverage\", \"AlgebraicGeometry.Scheme.precoverage\", \"AlgebraicGeometry.Scheme.Cover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S\"], \"digest\": \"e740be4b691c0483\"}",
    "date": "2026-10-18",
    "verdict": "no match: the semantic hits define coverings or give flat descent, openness, or finite presentation, not the stated refinement. Loogle exists_etale_isCompl_of_quasiFiniteAt (ZariskisMainTheorem.lean:49-54) gives an etale-local finite piece of a separated locally quasi-finite map; it neither reduces an arbitrary fppf covering to such maps nor constructs finite flat covers of etale coverings. It is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*(finite.*flat|locally.*free)|finite.*flat.*[Zz]ariski",
+   "results": "{\"t\": \"2026-10-17T20:55:33Z\", \"tool\": \"grep\", \"query\": \"etale.*(finite.*flat|locally.*free)|finite.*flat.*[Zz]ariski\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits define etale covering topologies or give openness; exists_etale_isCompl_of_quasiFiniteAt only gives an etale-local finite piece of a separated locally finite type morphism, not a finite locally free refinement of a covering family."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every etale covering of a scheme is locally dominated by a Zariski covering of a surjective finite locally free cover",
+   "results": "{\"t\": \"2026-10-17T20:55:34Z\", \"tool\": \"leansearch\", \"query\": \"Every etale covering of a scheme is locally dominated by a Zariski covering of a surjective finite locally free cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.zariskiPretopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.zariskiPrecoverage\"], \"digest\": \"607f8c68c7fa776b\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits define etale covering topologies or give openness; exists_etale_isCompl_of_quasiFiniteAt only gives an etale-local finite piece of a separated locally finite type morphism, not a finite locally free refinement of a covering family."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, AlgebraicGeometry.IsFinite",
+   "results": "{\"t\": \"2026-10-17T20:55:34Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Etale, AlgebraicGeometry.IsFinite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt\"], \"digest\": \"4844ac06f7bda4d8\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits define etale covering topologies or give openness; exists_etale_isCompl_of_quasiFiniteAt only gives an etale-local finite piece of a separated locally finite type morphism, not a finite locally free refinement of a covering family."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale coverings refine to Zariski open coverings of surjective finite locally free covers locally on any scheme",
+   "results": "{\"t\": \"2026-10-17T20:55:35Z\", \"tool\": \"leanfinder\", \"query\": \"Etale coverings refine to Zariski open coverings of surjective finite locally free covers locally on any scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.zariskiPrecoverage\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.precoverage\", \"AlgebraicGeometry.Scheme.JointlySurjective\", \"AlgebraicGeometry.Scheme.jointlySurjectivePrecoverage\"], \"digest\": \"4d51445c072153a8\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits define etale covering topologies or give openness; exists_etale_isCompl_of_quasiFiniteAt only gives an etale-local finite piece of a separated locally finite type morphism, not a finite locally free refinement of a covering family."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski locally on the base finite faithfully flat covers dominate arbitrary etale covering families",
+   "results": "{\"t\": \"2026-10-17T20:55:37Z\", \"tool\": \"leanfinder\", \"query\": \"Zariski locally on the base finite faithfully flat covers dominate arbitrary etale covering families\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"RingHom.Etale.propertyIsLocal\"], \"digest\": \"9bd105701064ca1e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits define etale covering topologies or give openness; exists_etale_isCompl_of_quasiFiniteAt only gives an etale-local finite piece of a separated locally finite type morphism, not a finite locally free refinement of a covering family."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-fppf-local-finite-free-refinement",
@@ -94,5 +227,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-etale-finite-free-open-refinement",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 02LI into affine standard etale reduction, a prescribed-prime algebra lift, finite closed-complement shrinking, localization of a finite free basis, and small pointwise assembly. Statement and original provenance preserved. One new statement-only algebra node from 00UF; all other tools already exist.",
+  "blueprint": "Realizes the 02LI input to 05WN in the etale/ph descent chain below lem-trf-local-term-locality, sk-i-curve-zero proof step 2. The chart-level algebra is 00UF as invoked by 02LG; the missing neighbourhood-shrinking argument is written explicitly.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-free-algebra-spectrum",
+    "why": "Generic affine finite-free algebra criterion (02KB), used to verify finite local freeness before and after principal localization; the unit has no such algebraic criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-free-algebra-spectrum"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q35-af4560dd9",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q35-af4560dd9 (reviewer sub-agent of L); spot-checked: The refinement proof and all cited steps check out, but the new node incorrectly requires r≥1 while allowing R=0. Over the zero ring every unital algebra is zero and has only the empty basis. Repairs written under fixes/dag/nodes: change to r≥0, add r≥1 for nonzero R, and update Step 3 accordingly. Sources 00UF, 02LG, 02LI and all cited DAG statements were checked; review.md records edge cases, route, searches, and accepted tool use.; 2 file(s) fixed by the reviewer"
  }
 }

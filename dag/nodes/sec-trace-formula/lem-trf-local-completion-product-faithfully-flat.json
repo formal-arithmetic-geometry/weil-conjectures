@@ -2,7 +2,7 @@
  "id": "lem-trf-local-completion-product-faithfully-flat",
  "kind": "statement",
  "title": "Faithfully flat localization-completion cover",
- "statement": "Let $A$ be a reduced Noetherian commutative ring and let $0\\ne f\\in A$. Let $A^\\wedge=\\varprojlim_n A/(f^n)$ be the $f$-adic completion. Then the canonical map $A\\to A_f\\times A^\\wedge$ is faithfully flat [def-weil-pbc-noetherian-ring] [def-weil-pbc-adic-completion] [def-weil-pbc-faithfully-flat-ring-map].",
+ "statement": "Let $A$ be a reduced Noetherian commutative ring and let $0\\ne f\\in A$. Here $A_f$ is the localization away from $f$ [def-weil-ring-localization-away]. Let $A^\\wedge=\\varprojlim_n A/(f^n)$ be the $f$-adic completion. Then the canonical map $A\\to A_f\\times A^\\wedge$ is faithfully flat [def-weil-pbc-noetherian-ring] [def-weil-pbc-adic-completion] [def-weil-pbc-faithfully-flat-ring-map].",
  "source": {
   "document": "literature/stacks-project/flat.tex",
   "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective, proof: the map R to R_f times R-hat is faithfully flat (using Algebra Tag 00MB, lemma-completion-flat)"
@@ -10,11 +10,80 @@
  "stmt_deps": [
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-adic-completion",
-  "def-weil-pbc-faithfully-flat-ring-map"
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-ring-localization-away"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $C=A^\\wedge$ and $B=A_f\\times C$, with $A\\to B$ given by the pair of the localization and completion maps. By [lem-weil-pbc-localization-flat], applied to the multiplicative subset $\\{1,f,f^2,\\ldots\\}$, the first factor $A_f$ is flat over $A$. By [lem-weil-pbc-noetherian-completion-flat], applied to the Noetherian ring $A$ and ideal $(f)$, the second factor $C$ is flat over $A$. No local-ring hypothesis is used.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-noetherian-completion-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HT (lemma-flat-localization), part (1), and 00MB (lemma-completion-flat), part (1); inputs of the cover in flat.tex Tag 05FS"
+   }
+  },
+  {
+   "text": "The $A$-module underlying $B$ has componentwise scalar multiplication through the two canonical maps. Apply [lem-weil-pbc-finite-product-flat-modules] with two factors and their flatness from Step 1. It gives that $B$ is flat as an $A$-module, hence that the displayed ring map $A\\to B$ is flat.",
+   "uses": [
+    "lem-weil-pbc-finite-product-flat-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05FS (lemma-fibres-irreducible-flat-projective), proof, displayed localization-completion cover; product flatness input"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak m$ be any maximal ideal of $A$, and first suppose $f\\notin\\mathfrak m$. In the nonzero field $k=A/\\mathfrak m$ write $\\bar a$ for the class of $a$. The formula $a/f^n\\mapsto\\bar a\\bar f^{-n}$ defines a unital ring map $A_f\\to k$: the fraction equality in [def-weil-ring-localization-away] implies $\\bar f^r(\\bar a\\bar f^m-\\bar b\\bar f^n)=0$, and division by powers of the nonzero $\\bar f$ gives equality of the proposed values; the addition and multiplication formulas give preservation of both operations. Compose with $B\\to A_f$. This map sends the image of every $a\\in\\mathfrak m$ to zero, so it kills the generated ideal $\\mathfrak mB$. Since it sends $1$ to $1\\ne0$, that ideal is proper.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO (definition-localization), fraction formulas; verification of the Tag 00HP maximal-ideal test for the cover in flat.tex Tag 05FS"
+   }
+  },
+  {
+   "text": "Now suppose $f\\in\\mathfrak m$. The ideal $(f)$ is finitely generated, by $f$. Thus [lem-weil-pbc-adic-completion-mod-ideal] supplies the projection $\\pi:C\\to A/(f)$ whose composite with $A\\to C$ is the quotient map. Because $(f)\\subseteq\\mathfrak m$, reduction defines a unital map $A/(f)\\to A/\\mathfrak m$. Compose $B\\to C\\xrightarrow{\\pi}A/(f)\\to A/\\mathfrak m$. Its composite with $A\\to B$ is reduction modulo $\\mathfrak m$, so it kills every generator of $\\mathfrak mB$ and hence the whole ideal. Again it sends $1$ to the nonzero element $1$ of $A/\\mathfrak m$, so $\\mathfrak mB\\ne B$.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05GG (lemma-hathat-finitely-generated), n=1; the same projection argument occurs in Tag 00MC (lemma-completion-faithfully-flat), proof"
+   }
+  },
+  {
+   "text": "Step 2 proves that $A\\to B$ is flat. Steps 3 and 4 cover every maximal ideal $\\mathfrak m$ of $A$ and prove $\\mathfrak mB\\ne B$. Apply [lem-weil-pbc-flat-faithfully-flat-maximal-ideals] to this map. It is faithfully flat, as asserted. The proof does not require $f$ to be a nonzerodivisor: the fraction argument only divides by its nonzero image in the residue field in the case where $f\\notin\\mathfrak m$.",
+   "uses": [
+    "lem-weil-pbc-flat-faithfully-flat-maximal-ideals"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HP (lemma-ff), implication (4) to (1), for M=B; concludes the cover assertion of flat.tex Tag 05FS"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-weil-pbc-finite-product-flat-modules",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-flat-faithfully-flat-maximal-ideals"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05FS (lemma-fibres-irreducible-flat-projective), displayed localization-completion cover; its one-sentence justification expanded via 00HT, 00MB, 05GG and the maximal-ideal criterion 00HP, following the projection argument of 00MC"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +133,38 @@
    "results": "AdicCompletion.flat_of_isNoetherian; AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian; AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype; Module.FaithfullyFlat.of_flat_of_isLocalHom; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.ofTensorProduct; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "map from a Noetherian ring to the product of localization away from f and f-adic completion is faithfully flat",
+   "results": "{\"t\": \"2026-10-17T21:00:46Z\", \"tool\": \"leanfinder\", \"query\": \"map from a Noetherian ring to the product of localization away from f and f-adic completion is faithfully flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.flat_of_isNoetherian\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"RingHom.FaithfullyFlat.codescendsAlong_injective\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"Module.FaithfullyFlat.of_specComap_surjective\", \"RingHom.Flat.ofLocalizationPrime\"], \"digest\": \"fd2a219ae880d53c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: only component flatness and general faithful-flatness criteria; the item requires the two-case maximal-ideal argument"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FaithfullyFlat, AdicCompletion, Localization.Away",
+   "results": "{\"t\": \"2026-10-17T21:01:03Z\", \"tool\": \"loogle\", \"query\": \"Module.FaithfullyFlat, AdicCompletion, Localization.Away\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: only component flatness and general faithful-flatness criteria; the item requires the two-case maximal-ideal argument"
+  },
+  {
+   "tool": "grep",
+   "query": "FaithfullyFlat.*AdicCompletion|AdicCompletion.*FaithfullyFlat|localization.*completion",
+   "results": "{\"t\": \"2026-10-17T21:01:12Z\", \"tool\": \"grep\", \"query\": \"FaithfullyFlat.*AdicCompletion|AdicCompletion.*FaithfullyFlat|localization.*completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Regular/RegularSequence.lean\"], \"digest\": \"2d1e59ca6655ee89\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: only component flatness and general faithful-flatness criteria; the item requires the two-case maximal-ideal argument"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The product of localization away from f and completion at the principal ideal f is faithfully flat over a Noetherian ring",
+   "results": "{\"t\": \"2026-10-17T21:01:12Z\", \"tool\": \"leansearch\", \"query\": \"The product of localization away from f and completion at the principal ideal f is faithfully flat over a Noetherian ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FaithfullyFlat\", \"Module.Flat.of_isLocalizedModule\", \"RingHom.Flat.holdsForLocalizationAway\", \"AdicCompletion.flat_of_isNoetherian\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"IsLocalization.flat\", \"Module.flat_iff_of_isLocalization\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\"], \"digest\": \"d7fff2a14ef07096\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: only component flatness and general faithful-flatness criteria; the item requires the two-case maximal-ideal argument"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-local-noetherian-fibres-projective",
@@ -97,5 +194,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-local-completion-product-faithfully-flat",
+  "worker": "stage1",
+  "summary": "Preserved all mathematical hypotheses and the conclusion; added the existing localization definition as a statement dependency. Expanded the cover assertion into flatness of each factor, finite-product flatness, the two explicit residue-field maps for maximal ideals outside/inside V(f), and the existing faithful-flatness criterion. Reused existing Mathlib leaves only; no new nodes. Retained inherited searches and metadata, and added four genuinely run searches. No exact project declaration was found.",
+  "blueprint": "Realizes the localization-completion cover input in lem-trf-local-noetherian-fibres-projective Step 5 (Stacks 05FS), on the inherited semistable-alteration/projectivity branch below lem-trf-local-term-locality clauses (1)--(2). Whole-blueprint searches for 05FS, completion product faithfully flat, faithfully flat, and completion found no equivalent blueprint node."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q77-8d41a5aa6",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q77-8d41a5aa6 (reviewer sub-agent of L); spot-checked: Read the item, parent, unit, report, DAG guidance, and cited Stacks passages in full. The five steps correctly prove factor flatness, finite-product flatness, the two exhaustive maximal-ideal cases, and faithful flatness via Tag 00HP. Hypotheses and edge cases check out; no duplicate/new nodes, hidden long arguments, SGA use, route-pivot machinery, or source errors found. Review written to review.md."
  }
 }

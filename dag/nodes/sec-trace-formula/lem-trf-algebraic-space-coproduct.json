@@ -2,18 +2,99 @@
  "id": "lem-trf-algebraic-space-coproduct",
  "kind": "statement",
  "title": "Coproducts of algebraic spaces",
- "statement": "Let $S$ be a scheme [def-pc-scheme]. Let $I$ be a set and let $(F_i)_{i\\in I}$ be algebraic spaces over $S$ [def-trf-algebraic-space]. Assume there are surjective etale maps from schemes $U_i\\to F_i$ whose coproduct $\\coprod_{i\\in I}U_i$ is a scheme over $S$. Then the sheaf coproduct $F=\\coprod_{i\\in I}F_i$ on $(\\mathit{Sch}/S)_{fppf}$ is an algebraic space over $S$.",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Let $I$ be a set and let $(F_i)_{i\\in I}$ be algebraic spaces over $S$ [def-trf-algebraic-space]. Assume there are surjective etale maps from schemes $U_i\\to F_i$ whose scheme coproduct $\\coprod_{i\\in I}U_i$ [lem-weil-pbc-scheme-coproduct-family] is an object of $(\\mathit{Sch}/S)_{fppf}$ [def-pc-fppf-site]. Then the sheaf coproduct (the colimit of the discrete $I$-indexed diagram [def-weil-pbc-category-colimit]) $F=\\coprod_{i\\in I}F_i$ on $(\\mathit{Sch}/S)_{fppf}$ [def-weil-pbc-sites-and-cohomology] is an algebraic space over $S$.",
  "source": {
   "document": "literature/stacks-project/spaces.tex",
   "place": "Tag 02WQ (coproduct-algebraic-spaces), including its size hypothesis."
  },
  "stmt_deps": [
   "def-pc-scheme",
-  "def-trf-algebraic-space"
+  "def-trf-algebraic-space",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-fppf-sheaf-coproduct-partition] to the underlying fppf sheaves of the $F_i$, supplied by [def-trf-algebraic-space]. This gives the sheaf coproduct $F$ and injective coprojections $c_i:F_i\\to F$. For every section $a\\in F(T)$, write $T=\\coprod_iT_i(a)$ for its clopen partition and $a_i\\in F_i(T_i(a))$ for its component sections. The cartesian-square clause identifies $h_{T_i(a)}$ with $h_T\\times_FF_i$, and these identifications persist under every scheme test. We will use these actual scheme partitions, rather than the generally false identity $F(T)=\\coprod_iF_i(T)$.",
+   "uses": [
+    "lem-trf-fppf-sheaf-coproduct-partition",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WQ, first sentence of proof; Tag 0F15, scheme tests of summand inclusions"
+   }
+  },
+  {
+   "text": "Test $\\Delta_F$ on a scheme $T$ with sections $a,b\\in F(T)$. Set $T_{ij}=T_i(a)\\cap T_j(b)$ with its open subscheme structure. For $i=j$, the component sections $a_i,b_i$ on $T_{ii}$ give a scheme $E_i=h_{T_{ii}}\\times_{F_i\\times F_i}F_i$, by the representable diagonal in [def-trf-algebraic-space]. Form the scheme $E=\\coprod_iE_i$ with its evident map to $T$ [lem-weil-pbc-scheme-coproduct-family]. On a test $Z\\to T$, equality $a|_Z=b|_Z$ forces their partitions to agree, by uniqueness in [lem-trf-fppf-sheaf-coproduct-partition]. Thus the opens $Z\\times_TT_{ij}$ with $i\\ne j$ are empty, and $Z_i=Z\\times_TT_{ii}$ cover $Z$. On $Z_i$, injectivity of $c_i$ makes equality equivalent to equality of the two $F_i$ sections, hence to a unique map $Z_i\\to E_i$. These maps glue uniquely to $Z\\to E$ by [lem-weil-pbc-scheme-morphism-gluing]. Conversely a map $Z\\to E$ gives this equality on its inverse images of the summands, hence globally by the sheaf condition [def-weil-pbc-sites-and-cohomology]. The two assignments are inverse and commute with restriction. Therefore $E$ represents $h_T\\times_{F\\times F}F$, and $\\Delta_F$ is representable.",
+   "uses": [
+    "lem-trf-fppf-sheaf-coproduct-partition",
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WQ, omitted verification of the representable diagonal, expanded on arbitrary scheme tests"
+   }
+  },
+  {
+   "text": "Let $U=\\coprod_iU_i$ be the scheme of the hypothesis. The coproduct lemma [lem-weil-pbc-scheme-coproduct-family] says its summands form a disjoint clopen open covering. The atlas maps $p_i:h_{U_i}\\to F_i$ and the inclusions $c_i$ give sections $c_i(p_i)\\in F(U_i)$. They agree on overlaps, which are empty; a sheaf has a unique section over the empty scheme by its empty-cover condition [def-weil-pbc-sites-and-cohomology]. Glue them to $p\\in F(U)$, equivalently a natural map $p:h_U\\to F$ (on $Z\\to U$, take the restriction of $p$). Its restriction to $U_i$ is $c_ip_i$. The hypothesis that $U$ belongs to the chosen big site ensures that this is an allowed scheme atlas candidate.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WQ, resulting map from the scheme coproduct of the atlases"
+   }
+  },
+  {
+   "text": "For a scheme $T$ and $a:h_T\\to F$, use its partition $T_i=T_i(a)$ from Step 1. Because $p_i$ is representable surjective etale [def-trf-algebraic-space], $V_i=h_{T_i}\\times_{F_i}h_{U_i}$ is a scheme and $V_i\\to T_i$ is surjective etale. Put $V=\\coprod_iV_i$, a scheme by [lem-weil-pbc-scheme-coproduct-family]. For any $Z\\to T$, a section of $h_T\\times_Fh_U$ is a map $u:Z\\to U$ with $pu=a|_Z$. The inverse images $u^{-1}(U_i)$ are the partition attached to $pu$, since $p|_{U_i}=c_ip_i$. Uniqueness in [lem-trf-fppf-sheaf-coproduct-partition] identifies them with $Z\\times_TT_i$. On each piece the datum is exactly a map to $V_i$, since $c_i$ is injective on sections. Conversely maps from these pieces to $V_i$ give a map to $U$ satisfying $pu=a|_Z$. The piecewise maps to $V_i$ glue uniquely to $Z\\to V$ by [lem-weil-pbc-scheme-morphism-gluing], and maps to $V$ recover precisely these pieces because $V_i$ maps into $T_i$. These inverse natural constructions show $h_V\\simeq h_T\\times_Fh_U$. Thus $p$ is representable.",
+   "uses": [
+    "lem-trf-fppf-sheaf-coproduct-partition",
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WQ, scheme-test verification of representability of the coproduct atlas"
+   }
+  },
+  {
+   "text": "The projection $V\\to T$ in Step 4 is surjective: any point $t\\in T$ belongs to a unique $T_i$, and surjectivity of $V_i\\to T_i$ gives a point above it. It is etale by the affine-chart characterization recorded in [def-weil-etale-morphism]: at any $v\\in V_i$, choose affine etale charts for $V_i\\to T_i$. Since $V_i\\subset V$ and $T_i\\subset T$ are open, these are the same affine charts, with the same ring homomorphism, for $V\\to T$. Hence the etale-at-every-point definition holds for $V\\to T$. This works for every $T\\to F$, so $p:h_U\\to F$ is representable surjective etale in the precise sense of [def-trf-algebraic-space]. Steps 1, 2 and 4 verify the sheaf, diagonal and atlas requirements, proving that $F$ is an algebraic space. If $I$ is empty, the partition lemma forces every test $T\\to F$ to be empty, and the same construction has $U=V=\\varnothing$; surjectivity and etaleness are vacuous. Empty individual summands cause no change.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WQ, final surjective-etale verification using the affine-chart definition, morphisms.tex Tag 02GI"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-trf-fppf-sheaf-coproduct-partition",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02WQ (lemma-coproduct-algebraic-spaces). The source explicitly omits the diagonal verification and calls the atlas check straightforward; Steps 2 and 4 supply these omitted arguments using the scheme partitions of Tags 0F15 and 02WO."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -133,10 +214,45 @@
    "results": "AlgebraicGeometry.instIsAffineCoprodScheme, AlgebraicGeometry.LocallyRingedSpace.coproduct, AlgebraicGeometry.instIsAffineSigmaObjScheme, AlgebraicGeometry.instMonoCoprodScheme, AlgebraicGeometry.instHasFiniteCoproductsScheme, AlgebraicGeometry.IsIntegralHom.instDescScheme, AlgebraicGeometry.LocallyRingedSpace.instHasColimitsOfShapeDiscrete, FirstOrder.Language.isAlgebraic_sum",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space",
+   "results": "No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match: these are scheme coproduct/diagonal statements; none defines or proves the asserted closure of algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coproduct of algebraic spaces is an algebraic space",
+   "results": "8 hits; read: AlgebraicGeometry.instIsAffineCoprodScheme, AlgebraicGeometry.LocallyRingedSpace.coproduct, AlgebraicGeometry.instIsAffineSigmaObjScheme, AlgebraicGeometry.instMonoCoprodScheme, AlgebraicGeometry.instHasFiniteCoproductsScheme, AlgebraicGeometry.IsIntegralHom.instDescScheme, AlgebraicGeometry.LocallyRingedSpace.instHasColimitsOfShapeDiscrete, FirstOrder.Language.isAlgebraic_sum",
+   "date": "2026-10-18",
+   "verdict": "no match: these are scheme coproduct/diagonal statements; none defines or proves the asserted closure of algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": "No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match: these are scheme coproduct/diagonal statements; none defines or proves the asserted closure of algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A set indexed coproduct of algebraic spaces with a scheme coproduct of etale atlases is an algebraic space",
+   "results": "8 hits; read: AlgebraicGeometry.LocallyRingedSpace.coproduct, AlgebraicGeometry.instHasFiniteCoproductsScheme, AlgebraicGeometry.LocallyRingedSpace.instHasColimitsOfShapeDiscrete, AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall, AlgebraicGeometry.Scheme.GlueData.glued, AlgebraicGeometry.sigmaMk, AlgebraicGeometry.coprodMk, AlgebraicGeometry.instHasColimitsOfShapeDiscreteSchemeOfSmall",
+   "date": "2026-10-18",
+   "verdict": "no match: these are scheme coproduct/diagonal statements; none defines or proves the asserted closure of algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Disjoint unions of algebraic spaces admit representable diagonal and a surjective etale scheme presentation",
+   "results": "8 hits; read: AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall, AlgebraicGeometry.instHasFiniteCoproductsScheme, AlgebraicGeometry.instMonoCoprodScheme, AlgebraicGeometry.IsImmersion.instDiagonalScheme, AlgebraicGeometry.IsFinite.instDescScheme, AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme, AlgebraicGeometry.universallyInjective_eq_diagonal, AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal",
+   "date": "2026-10-18",
+   "verdict": "no match: these are scheme coproduct/diagonal statements; none defines or proves the asserted closure of algebraic spaces"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-etale-relation-quotient",
@@ -165,5 +281,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-algebraic-space-coproduct",
+  "worker": "stage1",
+  "summary": "Read Stacks 02WQ and its omitted diagonal and atlas checks, plus 0F15/02WO. Wrote explicit scheme-test constructions of the diagonal and atlas pullbacks in five steps, reusing the existing scheme-coproduct and scheme-morphism-gluing nodes. Created one genuinely supporting statement about coproducts of arbitrary fppf sheaves and their clopen scheme-test partitions. Made the original size hypothesis explicit as membership in the fixed big site. No algebraic-space closure claim was moved to a helper.",
+  "blueprint": "Realizes the coproduct input to lem-trf-etale-relation-quotient in the polarized scheme descent chain historically descended from lem-trf-local-term-locality; fills the omitted details in Stacks 02WQ without changing the unit or chapter route. Whole-blueprint searches for coproduct, fppf, open and closed, 0F15, 02WO, and 02WQ found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic existence and disjoint open-cover description of scheme coproducts; no node of this unit provides this scheme construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q42-b32cd8213",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q42-b32cd8213 (reviewer sub-agent of L); spot-checked: Read all required instructions, nodes, cited source locations, unit/chapter route, and worker report. The coproduct statement matches Stacks Tag 02WQ; all five proof steps have correct hypotheses and cited dependencies, including diagonal and atlas base changes. The helper is a genuine supporting set-indexed fppf sheaf partition lemma, statement-only, searched and nonduplicate. Edge cases (empty, singleton, infinite, disconnected, nonreduced) were checked; no route-pivot or SGA violation found. Detailed review written to review.md."
  }
 }

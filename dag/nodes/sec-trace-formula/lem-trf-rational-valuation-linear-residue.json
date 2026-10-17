@@ -16,9 +16,89 @@
   "def-weil-polynomial-ring",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\bar{\\ }$ for reduction modulo the maximal ideal. By [lem-trf-separably-closed-value-group-divisible], the value group of the separably closed valued field $(K,R)$ is divisible. The normalization conclusion of [lem-trf-residual-curve-value-group] therefore applies to every nonzero factor of a numerator or denominator: after multiplying by a constant in $K^\\times$, it becomes a unit of $O$. Factoring numerator and denominator in the PID $K[t]$, every residue in $\\kappa(O)$ is generated over $\\kappa(R)$ by residues of normalized elements $f(t)/\\pi$ with $f$ monic irreducible and $\\pi\\in K^\\times$ chosen so that $f(t)/\\pi\\in O^\\times$; this factor-and-residue-generation assertion is [lem-trf-normalized-polynomial-residue-generation]. Since $\\operatorname{trdeg}_{\\kappa(R)}\\kappa(O)=1$, one of these normalized residues is transcendental over $\\kappa(R)$.",
+   "uses": [
+    "lem-trf-separably-closed-value-group-divisible",
+    "lem-trf-residual-curve-value-group",
+    "lem-trf-normalized-polynomial-residue-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, proof, p. 28, paragraph beginning “Note that $\\widetilde L$ is generated over $\\widetilde K$” (normalization of polynomial factors)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-separable-perturbation-factor-selection] to the normalized irreducible polynomial from Step 1. Its conclusion gives a monic separable irreducible $g\\in K[T]$ and $\\pi\\in K^\\times$ such that $g(t)/\\pi\\in O^\\times$ has transcendental residue. The same cited statement says that $g$ has degree one because $K$ is separably closed. Write $g(T)=T-a$, with $a\\in K$. Then $z=(t-a)/\\pi$ gives the unrestricted conclusion. The perturbation argument is confined to the cited support lemma; this step uses only its stated conclusion.",
+   "uses": [
+    "lem-trf-separable-perturbation-factor-selection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, proof, p. 28, paragraph beginning “Moreover, we can take only separable irreducible polynomials” through “we can find $a\\in K$”."
+   }
+  },
+  {
+   "text": "For the closed-centre clause assume $t\\in O$ and put $k=\\kappa(R)$ and $\\mathfrak p=\\mathfrak m_O\\cap R[t]$. First record the restriction identifications: for $c\\in K^\\times$, $c\\in R^\\times$ if and only if $c,c^{-1}\\in O$, if and only if $c\\in O^\\times$. Thus $\\mathfrak m_R=K\\cap\\mathfrak m_O$, and the quotient map embeds $k$ in $\\kappa(O)$. We will use [lem-trf-valuation-inverse-maximal-ideal] for the nonunit inverse test; in particular $b\\notin O$ implies $b^{-1}\\in\\mathfrak m_O$. These identifications need no assertion about algebraic closedness of $k$.",
+   "uses": [
+    "lem-trf-valuation-inverse-maximal-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, proof, p. 28, closed-centre paragraph after the normalized linear coordinate; elementary residue computations expanded here."
+   }
+  },
+  {
+   "text": "The reduction map $R[t]\\to\\kappa(O)$ has kernel exactly $\\mathfrak p$. Since $\\mathfrak p$ is maximal, $E=R[t]/\\mathfrak p$ is a field embedded in $\\kappa(O)$. Since $\\mathfrak p\\cap R=\\mathfrak m_R$, the map from $R$ factors through an embedding $k\\to E$, and $E$ is generated as a $k$-algebra by the image $\\tau$ of $t$. Apply [lem-weil-pbc-zariski-lemma] to this one-generator algebra: $E/k$ is finite dimensional. In particular the powers $1,\\tau,\\ldots,\\tau^{[E:k]}$ are linearly dependent, so the image of $t$ in $\\kappa(O)$ satisfies a nonzero polynomial over $k$.",
+   "uses": [
+    "lem-weil-pbc-zariski-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, proof, p. 28, closed-centre paragraph after the normalized linear coordinate; elementary residue computations expanded here."
+   }
+  },
+  {
+   "text": "Keep $a,\\pi,z$ from Step 2. Suppose $a\\notin R$. Then $a\\notin O$, so [lem-trf-valuation-inverse-maximal-ideal] gives $a^{-1}\\in\\mathfrak m_O$. As $t\\in O$, $t/a\\in\\mathfrak m_O$; hence $h=1-t/a=(t-a)/(-a)$ has residue $1$ and is a unit. Indeed, if $h$ were a nonunit, both $h$ and $t/a$ would lie in the ideal $\\mathfrak m_O$, forcing $1$ into that ideal. Now $z/h=-a/\\pi$ is in $K\\cap O^\\times=R^\\times$ by Step 3. Reducing $z=(-a/\\pi)h$ gives $\\bar z=\\overline{-a/\\pi}\\in k$, contradicting its transcendence. Thus $a\\in R$.",
+   "uses": [
+    "lem-trf-valuation-inverse-maximal-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, proof, p. 28, closed-centre paragraph after the normalized linear coordinate; elementary residue computations expanded here."
+   }
+  },
+  {
+   "text": "Put $y=t-a\\in O\\setminus\\{0\\}$. If $y$ is a unit, then $\\pi=y/z\\in K\\cap O^\\times=R^\\times$ by Step 3. Therefore $\\bar z=(\\tau-\\bar a)/\\bar\\pi$ belongs to the embedded field $E$ of Step 4. Its powers are linearly dependent over $k$, since $E/k$ is finite dimensional; this contradicts transcendence. Thus $y\\in\\mathfrak m_O$. Apply the final clause of [lem-trf-residual-curve-value-group] to $y$: choose $0\\ne c\\in\\mathfrak m_R$ with $z_c=y/c\\in O^\\times$. Then $z_c/z=\\pi/c\\in K\\cap O^\\times=R^\\times$, so $\\bar z_c=\\overline{\\pi/c}\\bar z$ remains transcendental (substitution $T\\mapsto\\overline{\\pi/c}T$ is invertible in $k[T]$). The pair $(a,c)$ is the required integral choice.",
+   "uses": [
+    "lem-trf-residual-curve-value-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1, proof, p. 28, closed-centre paragraph after the normalized linear coordinate; elementary residue computations expanded here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-normalized-polynomial-residue-generation",
+  "lem-trf-residual-curve-value-group",
+  "lem-trf-separable-perturbation-factor-selection",
+  "lem-trf-separably-closed-value-group-divisible",
+  "lem-trf-valuation-inverse-maximal-ideal",
+  "lem-weil-pbc-zariski-lemma"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Temkin Proposition 4.3.1, proof, p. 28, retained route; explicit restriction, Zariski-lemma and residue arguments for the closed-centre clause. Local archival source WANTED, so this expanded proof is recorded as agent-written."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,7 +137,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-single-valuation-semistable-extraction",
@@ -69,7 +149,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Historical semistable-modification input of lem-trf-local-term-locality proof (1)--(2), through the recorded nearby-cycle branch; Temkin Proposition 4.3.1: Proposition 4.3.1, proof, second stage on p. 28: factorization, separable perturbation, and existence of a normalized linear function with transcendental residue, including integrality at a closed centre.",
+   "place": "Historical semistable-modification branch of lem-trf-local-term-locality; Temkin Proposition 4.3.1, proof, p. 28: normalized irreducible factors, separable perturbation, linearity, and the closed-centre positive-scalar calculation.",
    "via": [
     "lem-trf-single-valuation-semistable-extraction",
     "lem-trf-valuation-strict-semistable-cofinality",
@@ -86,5 +166,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-rational-valuation-linear-residue",
+  "worker": "stage1",
+  "summary": "Repair of A4 and C1–C2: retained the reviewer-supplied NZ/item creator correction; replaced the unsupported elementary Step 3 by four non-elementary steps citing the exact Mathlib inverse criterion, Zariski lemma, and the positive-scalar clause of the existing normalization node. Restored the original shared-base statement: only algebraicity of the closed-centre residue is needed, so the prior added algebraic-closedness hypothesis and alleged counterexample were unjustified.",
+  "blueprint": "Temkin Proposition 4.3.1, proof, p. 28, historical valuation branch: Steps 1–2 realize residue generation and separable linearization; Steps 3–6 give the closed-centre argument with cited valuation/Zariski inputs.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-zariski-lemma",
+    "why": "Generic finite-type field algebra theorem (Mathlib leaf) applied to R[t]/p over kappa(R); the unit has no separate residue-field algebraicity theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-zariski-lemma"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NZ-27d9454c2",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-27d9454c2 (reviewer sub-agent of L); spot-checked: Read the required guidance, packet/report, unit/chapter route, item, all new nodes, cited DAG statements, and Temkin Proposition 4.3.1 at the cited passage. Checked hypotheses, closed-centre algebra, normalization, separable perturbation, Mathlib leaf, duplicates, edge cases, route restrictions, and long-step rule. Review written to review.md; no repairs needed."
  }
 }
