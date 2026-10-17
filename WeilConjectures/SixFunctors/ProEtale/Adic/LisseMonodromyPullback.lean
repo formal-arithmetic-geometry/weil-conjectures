@@ -11,7 +11,10 @@ public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.UnitIso
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.Adic.DenseOpenUnit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCoverEquivalence
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCoverPullback
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseUniversalCover
 
 /-!
 # Monodromy of lisse sheaves and pullback
@@ -24,7 +27,7 @@ a path `τ : F_y ≅ F_z` of `Y'` is the transport along `τ` on `Y'`: the monod
 of `π₁(Y', y)` on `(f^* G)_y` is that of `π₁(Y, y ≫ f)` on `G_{y ≫ f}`, restricted along the map
 of fundamental groups. This is the compatibility of `cor-galois-lisse-representations` with base
 change of finite étale covers (`thm-galois-fundamental`); its existence, for connected regular
-locally Noetherian schemes, is `AlgebraicGeometry.ProEtale.exists_lisseMonodromy_isCompatible`.
+Noetherian schemes, is `AlgebraicGeometry.ProEtale.exists_lisseMonodromy_isCompatible`.
 
 If moreover `π₁(Y') → π₁(Y)` is surjective, a lisse subsheaf `G'` of `f^* N` for a lisse `N`
 on `Y` is the pullback of a lisse sheaf on `Y`
@@ -147,7 +150,7 @@ end LisseMonodromy
 
 /-- **Compatible monodromies exist** (blueprint: `cor-galois-lisse-representations`, with the
 compatibility of `thm-galois-fundamental` with base change). For a morphism `f : Y' ⟶ Y` of
-connected regular locally Noetherian schemes there are monodromies of lisse `ℓ`-adic sheaves on
+connected regular Noetherian schemes there are monodromies of lisse `ℓ`-adic sheaves on
 `Y` and on `Y'` which are equivalences at every base point
 (`AlgebraicGeometry.ProEtale.exists_lisseMonodromy`) and are compatible with `f`: the equivalence
 of `cor-galois-lisse-representations` is built from the fibre functors on finite étale covers,
@@ -155,12 +158,20 @@ and pulling back finite étale covers along `f` is compatible with the fibre fun
 (`AlgebraicGeometry.Scheme.FiniteEtale.pullbackFiberIso`), so the monodromy action of
 `π₁(Y', y)` on `(f^* G)_y` is that of `π₁(Y, y ≫ f)` on `G_{y ≫ f}` restricted along
 `π₁(Y', y) → π₁(Y, y ≫ f)`. -/
-theorem exists_lisseMonodromy_isCompatible [IsLocallyNoetherian Y] [IsRegular Y]
-    [ConnectedSpace Y] [IsLocallyNoetherian Y'] [IsRegular Y'] [ConnectedSpace Y']
-    (f : Y' ⟶ Y) :
+theorem exists_lisseMonodromy_isCompatible [IsLocallyNoetherian Y] [CompactSpace Y] [IsRegular Y]
+    [ConnectedSpace Y] [IsLocallyNoetherian Y'] [CompactSpace Y'] [IsRegular Y']
+    [ConnectedSpace Y'] (f : Y' ⟶ Y) :
     ∃ (M : LisseMonodromy l Y Ω) (M' : LisseMonodromy l Y' Ω), (∀ t, M.IsEquivalenceAt t) ∧
       (∀ t, M'.IsEquivalenceAt t) ∧ LisseMonodromy.IsCompatible f M M' := by
-  sorry
+  have hU (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (G : LisseSheaf l Y) :=
+    IsAdicLisseSheaf.exists_iso_upperStar_universalCover (Scheme.universalCovers Y Ω) y
+      G.property
+  have hU' (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y') (G : LisseSheaf l Y') :=
+    IsAdicLisseSheaf.exists_iso_upperStar_universalCover (Scheme.universalCovers Y' Ω) y
+      G.property
+  exact ⟨_, _, Scheme.UniversalCovers.lisseMonodromy_isEquivalenceAt hU,
+    Scheme.UniversalCovers.lisseMonodromy_isEquivalenceAt hU',
+    fun _ _ τ G ↦ (Scheme.universalCoversHom f).lisseMonodromy_mono_upperStar hU hU' τ G⟩
 
 section DenseOpen
 
@@ -212,19 +223,26 @@ lemma exists_algebraicClosure_point (Y' : Scheme.{u}) [Nonempty Y'] :
     (algebraMap (Y'.residueField y) (AlgebraicClosure (Y'.residueField y)))) ≫
       Y'.fromSpecResidueField y⟩⟩
 
+/-- An open subscheme of a Noetherian scheme is quasi-compact. -/
+lemma compactSpace_of_isOpenImmersion [IsLocallyNoetherian Y] [CompactSpace Y] (j : Y' ⟶ Y)
+    [IsOpenImmersion j] : CompactSpace Y' :=
+  have : IsNoetherian Y := {}
+  ⟨j.isOpenEmbedding.isInducing.isCompact_iff.2 (TopologicalSpace.NoetherianSpace.isCompact _)⟩
+
 /-- **Lisse subsheaves extend over a dense open** (blueprint `lem-wf-dense-open-pi1-surjective`,
-part (4), geometric form). Let `Y` be a connected regular locally Noetherian scheme,
+part (4), geometric form). Let `Y` be a connected regular Noetherian scheme,
 `j : Y' ⟶ Y` an open immersion with `Y'` nonempty, and `N` lisse on `Y`. Every lisse subsheaf
 `G'` of `j^* N` is the restriction of a lisse sheaf on `Y`: this is
 `AlgebraicGeometry.ProEtale.LisseMonodromy.exists_upperStar_iso_of_injective`, the map
 `π₁(Y', t) → π₁(Y, t)` being surjective. -/
-theorem IsAdicLisseSheaf.exists_upperStar_iso_of_mono [IsLocallyNoetherian Y] [IsRegular Y]
-    [ConnectedSpace Y] (j : Y' ⟶ Y) [IsOpenImmersion j] [Nonempty Y'] {N : AdicSheaf l Y}
-    (hN : IsAdicLisseSheaf N) {G' : AdicSheaf l Y'} (hG' : IsAdicLisseSheaf G')
-    (i : G' ⟶ (j)^*ᵃ[l].obj N) [Mono i] :
+theorem IsAdicLisseSheaf.exists_upperStar_iso_of_mono [IsLocallyNoetherian Y] [CompactSpace Y]
+    [IsRegular Y] [ConnectedSpace Y] (j : Y' ⟶ Y) [IsOpenImmersion j] [Nonempty Y']
+    {N : AdicSheaf l Y} (hN : IsAdicLisseSheaf N) {G' : AdicSheaf l Y'}
+    (hG' : IsAdicLisseSheaf G') (i : G' ⟶ (j)^*ᵃ[l].obj N) [Mono i] :
     ∃ G : AdicSheaf l Y, IsAdicLisseSheaf G ∧ Nonempty ((j)^*ᵃ[l].obj G ≅ G') := by
   obtain ⟨Ω, _, ⟨t⟩⟩ := exists_algebraicClosure_point Y'
   obtain ⟨_, _, _⟩ := isLocallyNoetherian_isRegular_connectedSpace_of_isOpenImmersion j
+  have := compactSpace_of_isOpenImmersion j
   obtain ⟨M, M', hM, hM', hc⟩ := exists_lisseMonodromy_isCompatible (l := l) (Ω := Ω) j
   have : (stalkFunctor l t).PreservesMonomorphisms := by
     unfold stalkFunctor
@@ -237,15 +255,15 @@ theorem IsAdicLisseSheaf.exists_upperStar_iso_of_mono [IsLocallyNoetherian Y] [I
   exact ⟨G.obj, G.property, ⟨(ObjectProperty.ι _).mapIso e⟩⟩
 
 /-- The direct image `j_* G'` of a lisse subsheaf `G'` of the restriction `j^* N` of a lisse
-sheaf `N` to a dense open `j : Y' ⟶ Y` of a connected regular locally Noetherian scheme is
+sheaf `N` to a dense open `j : Y' ⟶ Y` of a connected regular Noetherian scheme is
 lisse: `G'` is the restriction of a lisse `G`
 (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.exists_upperStar_iso_of_mono`), and
 `G ≅ j_* j^* G`
 (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.isIso_adicUpperStarLowerStarAdjunction_unit_app`). -/
-theorem IsAdicLisseSheaf.adicLowerStar_of_mono [IsLocallyNoetherian Y] [IsRegular Y]
-    [ConnectedSpace Y] (j : Y' ⟶ Y) [IsOpenImmersion j] [Nonempty Y'] (hj : Dense (Set.range j))
-    {N : AdicSheaf l Y} (hN : IsAdicLisseSheaf N) {G' : AdicSheaf l Y'}
-    (hG' : IsAdicLisseSheaf G') (i : G' ⟶ (j)^*ᵃ[l].obj N) [Mono i] :
+theorem IsAdicLisseSheaf.adicLowerStar_of_mono [IsLocallyNoetherian Y] [CompactSpace Y]
+    [IsRegular Y] [ConnectedSpace Y] (j : Y' ⟶ Y) [IsOpenImmersion j] [Nonempty Y']
+    (hj : Dense (Set.range j)) {N : AdicSheaf l Y} (hN : IsAdicLisseSheaf N)
+    {G' : AdicSheaf l Y'} (hG' : IsAdicLisseSheaf G') (i : G' ⟶ (j)^*ᵃ[l].obj N) [Mono i] :
     IsAdicLisseSheaf ((j)_*ᵃ[l].obj G') := by
   obtain ⟨G, hG, ⟨e⟩⟩ := hN.exists_upperStar_iso_of_mono j hG' i
   have := hG.isIso_adicUpperStarLowerStarAdjunction_unit_app (fun _ ↦ inferInstance) j hj
@@ -267,13 +285,13 @@ theorem IsAdicLisseSheaf.adicUpperStar_map_bijective
 
 /-- **Restriction to a dense open preserves irreducible local systems** (blueprint
 `lem-wf-dense-open-pi1-surjective`, part (4), geometric form). Let `Y` be a connected regular
-locally Noetherian scheme and `j : Y' ⟶ Y` a dense open immersion. If `N` is an irreducible
+Noetherian scheme and `j : Y' ⟶ Y` a dense open immersion. If `N` is an irreducible
 `ℓ`-adic local system on `Y`, so is `j^* N`: it is nonzero since `N ≅ j_* j^* N`, a lisse
 subsheaf of `j^* N` is the restriction of a lisse `G`
 (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.exists_upperStar_iso_of_mono`), and the inclusion
 is the restriction of a monomorphism `G ⟶ N` by full faithfulness. -/
-theorem IsIrreducibleAdicLocalSystem.adicUpperStar [IsLocallyNoetherian Y] [IsRegular Y]
-    [ConnectedSpace Y] (j : Y' ⟶ Y) [IsOpenImmersion j] (hj : Dense (Set.range j))
+theorem IsIrreducibleAdicLocalSystem.adicUpperStar [IsLocallyNoetherian Y] [CompactSpace Y]
+    [IsRegular Y] [ConnectedSpace Y] (j : Y' ⟶ Y) [IsOpenImmersion j] (hj : Dense (Set.range j))
     {N : AdicSheaf l Y} (hN : IsIrreducibleAdicLocalSystem N) :
     IsIrreducibleAdicLocalSystem ((j)^*ᵃ[l].obj N) := by
   obtain ⟨hNl, hN0, hNirr⟩ := hN
