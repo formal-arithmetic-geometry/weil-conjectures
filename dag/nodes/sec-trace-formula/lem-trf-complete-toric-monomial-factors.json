@@ -12,9 +12,47 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-cohen-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $S=\\{z^a:a\\in P\\}$ and let $\\ell:R\\to S^{-1}R$ be localization at these monomials (fractions and their equivalence are as defined in the cited interface). From $bc=z^q$ we compute in $S^{-1}R$ that $\\ell(b)\\,\\bigl(\\ell(c)/\\ell(z^q)\\bigr)=\\ell(bc)/\\ell(z^q)=1$. The ring is commutative, so this is a two-sided inverse of $\\ell(b)$. Hence $b$ belongs to the inverse image of the unit group. This calculation requires neither normality nor a divisor-class computation.",
+   "uses": [
+    "lem-trf-complete-toric-kato-recognition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.4 and 1.6, printed pp. 69--70, motivate the recognition interface; the explicit inverse calculation is by Q39."
+   }
+  },
+  {
+   "text": "Apply the complete-local recognition equality [lem-trf-complete-toric-kato-recognition] to $P,n,R$. Its hypotheses are exactly the given finite generation, integrality, saturation and sharpness of $P$, and either the field coefficient model or the stated Cohen quotient with $\\theta-p$ in the indicated monomial-and-parameter ideal. By step 1, $b\\in\\ell^{-1}((S^{-1}R)^\\times)$. The right side of the equality therefore supplies $r\\in P$ and $u\\in R^\\times$ with $b=u z^r$, as required. The cited node is intentionally the unsplit Kato/Nizioł literature interface, not a purported smaller class-group lemma.",
+   "uses": [
+    "lem-trf-complete-toric-kato-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI 1.4, printed p. 69 (recognition equality, citing Nizioł 2006, Proposition 2.6), and VI 1.6(i)--(ii), printed p. 70 (complete models). Complete-local recognition interface to Kato 1994, Theorem 11.6 / Nizioł 2006, Proposition 2.6: both primary references WANTED, not read locally."
+   }
+  },
+  {
+   "text": "If $q=0$, the original equation is $bc=1$, so take $r=0$ and $u=b$. If $P=\\{0\\}$ this is the only case. When $n=0$, there are no polynomial parameters and the same localization computation and recognition interface apply verbatim. No condition on perfection of the Cohen residue field has been introduced.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Direct edge cases for the models of VI 1.6, printed p. 70."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-complete-toric-kato-recognition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Q39 explicit localization argument using the unsplit complete-local Kato 11.6 / Nizioł 2.6 recognition interface (primary references WANTED). ILO VI 1.4 and 1.6, printed pp. 69--70, state the recognition equality and the models, not the proof of the interface."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,7 +91,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-log-regular-divisorial-structure",
@@ -79,5 +117,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-complete-toric-monomial-factors",
+  "worker": "stage1",
+  "summary": "Repair of the returned class-group split. Withdraw the two never-merged child nodes, including the false full-orthant assertion, and use the reviewer-authorized honest Kato/Nizioł complete-local recognition interface with WANTED primary references. Give the explicit localization inverse and apply the interface, preserving the entire item statement. Restore current-main metadata and keep the search log and returned version archived in the sandbox.",
+  "blueprint": "Retains the existing lem-trf-local-term-locality Proof (1)--(2) nearby-duality alteration ancestry through lem-trf-log-regular-divisorial-structure. The steps realize only its supporting complete-local monomial recognition input (ILO VI 1.4 and 1.6); they do not claim that the blueprint contains the nonexistent algebraic sublemma."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-ddd56bbf7",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-ddd56bbf7 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, the new node lem-trf-complete-toric-kato-recognition, the three statement deps, the neighbours (divisorial-structure, which cites the item in step 5; saturation-normality; regular-local-ufd; support-projection; monoidal-ideal-contraction; free-characteristic-regular-boundary; sharp-chart), unit sk-i-curve-zero, the previous return (returns/Q39.md, 19:27) and ILO VI 1.1-1.8 (PDF pp. 75-76). VI 1.4 states M_X = O_X ∩ j_*O_U^* citing Nizioł 2.6. VI 1.6 gives the models k[[P]][[t]] and C(k)[[P]][[t]]/(f) with f ≡ p mod (P−0, t) via Kato 3.2; these match rings (i) and (ii) exactly. The new statement (a function invertible on S^-1 R is u·z^a) is true. By Kato 3.2's converse, R is log regular with stalk P ⊕ R^× at the closed point, U = Spec S^-1 R, and Kato 11.6 applies at the closed point. I tested it on P={0}, k[[x,y]], the A1 cone (exponents only in P, so the false full-orthant claim is gone), C[[x]]/(p−x), C[[x]]/(p−x^2), C[[x,y]]/(p−xy) and n=0. No duplicate exists in the DAG or the blueprint: the divisorial-structure node is global and citing it would be circular, and the regular-local UFD node does not cover singular cones. The new node is equivalent to the item, but the 19:27 return explicitly allowed one honest Kato/Nizioł literature-interface node with WANTED, and this node states that theorem in its natural form, so I accept it under D1/D2. Steps: step 1 is a one-line localization inverse; step 2 applies the interface with exactly the item's hypotheses, using its statement, not its proof; step 3 covers edge cases. proof_deps equals the uses, there is no cycle, the route stays in the unit, no SGA is cited and no tool_uses are needed. One fault, repaired: the new node had no lean_audit, although the report claims it does and return point (2) asked for it. Grepping slopmaster2 and the upstream-master archive found no Lean for it, so I wrote the corrected whole file in fixes/ with lean_audit master/slopmaster2 = none and nothing else changed. For the maintainer: the item's maintainer-owned source.place and blueprint.from.place still mention the nonexistent 'Algebraic sublemma for VI 1.4' and should be corrected to ILO VI 1.4/1.6 with Kato 11.6 / Nizioł 2.6 WANTED.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -12,48 +12,108 @@
   "def-weil-finitely-generated-module",
   "def-weil-pbc-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-essentially-finite-type-algebra] there are a finite type $A$-algebra $C$, a multiplicative subset $W\\subseteq C$ and an isomorphism of $A$-algebras $B\\cong W^{-1}C$, and by [def-weil-pbc-finite-type-algebra] a surjection of $A$-algebras $P=A[x_1,\\ldots,x_n]\\twoheadrightarrow C$. Let $\\rho:P\\to C\\to W^{-1}C\\cong B$ be the composite and $\\mathfrak q=\\rho^{-1}(\\mathfrak m_B)$, a prime of $P$. Every $p\\in P\\setminus\\mathfrak q$ maps outside $\\mathfrak m_B$, hence to a unit of the local ring $B$, so $\\rho$ factors through an $A$-algebra map $\\pi:P_{\\mathfrak q}\\to B$. It is surjective: an element of $B$ is $c/w$ with $c=\\bar p$, $w=\\bar s$ for some $p,s\\in P$; since $w/1$ is a unit of $W^{-1}C$, $\\rho(s)\\notin\\mathfrak m_B$, i.e. $s\\notin\\mathfrak q$, and $c/w=\\pi(p/s)$. Since $\\pi$ is a surjection of local rings, $\\pi^{-1}(\\mathfrak m_B)$ is a proper ideal with residue field $B/\\mathfrak m_B$, hence the maximal ideal of $P_{\\mathfrak q}$; as $A\\to B$ is local, the composite $A\\to P_{\\mathfrak q}\\to B$ shows that $A\\to P_{\\mathfrak q}$ is local. The map $A\\to P_{\\mathfrak q}$ is essentially of finite presentation (a localization of a finitely presented $A$-algebra) because $P$ is a finitely presented $A$-algebra [def-weil-pbc-finitely-presented-algebra] (presentation with $m=0$) and $P_{\\mathfrak q}$ is its localization at $P\\setminus\\mathfrak q$. Regard $N$, $M$, and $u$ as finite $P_{\\mathfrak q}$-modules and a $P_{\\mathfrak q}$-linear map through $\\pi$; the hypotheses (finiteness, flatness of $M$ over $A$, injectivity of the closed-fibre map, which only involves $\\mathfrak m_A$) and the conclusions are unchanged because the underlying $A$-modules and the map are unchanged, so it suffices to prove the result with $B$ replaced by $P_{\\mathfrak q}$.",
+   "uses": [
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-finitely-presented-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSG, proof, first reduction paragraph"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-valuation-finite-module-fp-reduction] with the base ring still $A$ and the new local algebra $P_{\\mathfrak q}$. We obtain a filtered system of finitely presented $P_{\\mathfrak q}$-modules $N_\\lambda$ with surjective transition maps, colimit $N$, and, for sufficiently large $\\lambda$, an isomorphism $N_\\lambda/\\mathfrak m_A N_\\lambda\\cong N/\\mathfrak m_A N$. For such a $\\lambda$, let $\\pi_\\lambda:N_\\lambda\\twoheadrightarrow N$ be the colimit map and set $u_\\lambda=u\\circ\\pi_\\lambda:N_\\lambda\\to M$. The fibre map of $u_\\lambda$ is injective because the displayed isomorphism identifies it with the assumed injective fibre map of $u$.",
+   "uses": [
+    "lem-trf-valuation-finite-module-fp-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSG, proof, second paragraph"
+   }
+  },
+  {
+   "text": "By [lem-trf-valuation-flat-finite-module-presentation], applied to $A\\to P_{\\mathfrak q}$ and the finite flat target $M$, the $P_{\\mathfrak q}$-module $M$ is finitely presented.",
+   "uses": [
+    "lem-trf-valuation-flat-finite-module-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSG, proof, third paragraph, using More on Algebra Tag 0GSE(2)"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-valuation-general-mod-injective] with $R=A$, $S=P_{\\mathfrak q}$, source module $M=N_\\lambda$, target module $N=M$, and map $u_\\lambda$. Step 1 gives that $A\\to P_{\\mathfrak q}$ is local and essentially of finite presentation; Step 2 gives the finitely presented source and injective closed-fibre map; Step 3 gives the finitely presented target; and the target is flat over $A$ by the hypothesis. The helper therefore gives that $u_\\lambda$ is injective and that $M/u_\\lambda(N_\\lambda)$ is flat over $A$.",
+   "uses": [
+    "lem-trf-valuation-general-mod-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSG, proof, first and third paragraphs, applying Algebra Tag 046Y"
+   }
+  },
+  {
+   "text": "The map $\\pi_\\lambda$ is surjective and $u_\\lambda=u\\circ\\pi_\\lambda$. Since $u_\\lambda$ is injective, $\\ker(\\pi_\\lambda)\\subseteq\\ker(u_\\lambda)=0$, so $\\pi_\\lambda$ is an isomorphism. Under this identification $u=u_\\lambda$, and the flatness of $M/u_\\lambda(N_\\lambda)$ from Step 4 is the flatness of $M/u(N)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSG, proof, conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-trf-valuation-finite-module-fp-reduction",
+  "lem-trf-valuation-flat-finite-module-presentation",
+  "lem-trf-valuation-general-mod-injective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GSG proof, with More on Algebra Tag 0GSE(2) and Algebra Tag 046Y"
+ },
  "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Injectivity modulo the maximal ideal implies injectivity and flat cokernel for finite modules over a local essentially finite type algebra over a valuation ring with flat target",
+   "results": "8 hits: injective_of_isLocalized_maximal; Module.flat_of_isLocalized_maximal; injective_of_isLocalization_isMaximal; Module.FaithfullyFlat.mk; injective_of_localized_maximal; Module.flat_of_localized_maximal; Module.Flat.iff_lift_lsmul_comp_subtype_injective; Module.Flat.iff_lTensor_injective_prime; none states the required theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
   {
    "tool": "leanfinder",
    "query": "Over a valuation ring a map of finite modules over an essentially finite type local algebra with flat target is injective and has flat cokernel if its closed fibre is injective",
-   "results": "8 hits: Module.FaithfullyFlat.of_flat_of_isLocalHom, Module.IsLocalRing.linearCombination_bijective_of_flat, Module.flat_of_isLocalized_maximal, IsLocalRing.split_injective_iff_lTensor_residueField_injective, Module.free_of_lTensor_residueField_injective, TensorProduct.toIntegralClosure_injective_of_flat, Module.Flat.toAlgebra_injective, Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal; digest=a23c4cbfb73a237c.  The hits are flatness criteria, faithful flatness, injectivity checked at all maximal localizations, or a split-injection test over a single local ring with a free target. Here the target is only flat over the valuation base, and the finite modules are over an essentially finite type local algebra. None states the required closed-fibre injectivity theorem.",
+   "results": "8 hits: Module.FaithfullyFlat.of_flat_of_isLocalHom; Module.IsLocalRing.linearCombination_bijective_of_flat; Module.flat_of_isLocalized_maximal; IsLocalRing.split_injective_iff_lTensor_residueField_injective; Module.free_of_lTensor_residueField_injective; TensorProduct.toIntegralClosure_injective_of_flat; Module.Flat.toAlgebra_injective; Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal; none states the required theorem.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "ValuationRing, Module.Flat, Function.Injective",
-   "results": "0 hits: ; digest=4f53cda18c2baa0c.  The hits are flatness criteria, faithful flatness, injectivity checked at all maximal localizations, or a split-injection test over a single local ring with a free target. Here the target is only flat over the valuation base, and the finite modules are over an essentially finite type local algebra. None states the required closed-fibre injectivity theorem.",
+   "results": "0 hits.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "valuation.*inject|inject.*valuation|mod_injective",
-   "results": "14 hits: Mathlib/RingTheory/Binomial.lean, Mathlib/RingTheory/Valuation/AlgebraInstances.lean, Mathlib/RingTheory/Valuation/AlgebraInstances.lean, Mathlib/RingTheory/Valuation/AlgebraInstances.lean, Mathlib/RingTheory/Valuation/ValuationSubring.lean, Mathlib/RingTheory/Valuation/ValuationSubring.lean, Mathlib/RingTheory/Valuation/ValuationSubring.lean, Mathlib/RingTheory/Valuation/ValuationSubring.lean; digest=56bdeeb809002de0.  The hits are flatness criteria, faithful flatness, injectivity checked at all maximal localizations, or a split-injection test over a single local ring with a free target. Here the target is only flat over the valuation base, and the finite modules are over an essentially finite type local algebra. None states the required closed-fibre injectivity theorem.",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Injectivity modulo the maximal ideal implies injectivity and flat cokernel for finite modules over a local essentially finite type algebra over a valuation ring with flat target",
-   "results": "8 hits: injective_of_isLocalized_maximal, Module.flat_of_isLocalized_maximal, injective_of_isLocalization_isMaximal, Module.FaithfullyFlat.mk, injective_of_localized_maximal, Module.flat_of_localized_maximal, Module.Flat.iff_lift_lsmul_comp_subtype_injective, Module.Flat.iff_lTensor_injective'; digest=71c6136b19762383.  The hits are flatness criteria, faithful flatness, injectivity checked at all maximal localizations, or a split-injection test over a single local ring with a free target. Here the target is only flat over the valuation base, and the finite modules are over an essentially finite type local algebra. None states the required closed-fibre injectivity theorem.",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A morphism of finite modules with a flat target over a valuation domain has flat cokernel and is a monomorphism if the special fibre map is a monomorphism",
-   "results": "8 hits: Module.Flat.out, Module.Flat.tfae_equational_criterion, Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal, Module.flat_iff, Module.FaithfullyFlat, Module.FaithfullyFlat.of_flat_of_isLocalHom, LinearMap.lTensor_injective_of_exact_of_flat, Module.Flat.iff_lTensor_injective; digest=6a0197438d94b608.  The hits are flatness criteria, faithful flatness, injectivity checked at all maximal localizations, or a split-injection test over a single local ring with a free target. Here the target is only flat over the valuation base, and the finite modules are over an essentially finite type local algebra. None states the required closed-fibre injectivity theorem.",
+   "query": "valuation.*inject|inject.*valuation|mod_injective (Mathlib/)",
+   "results": "0 hits from msearch grep.",
    "date": "2026-10-18",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-flat-relative-associated-specialization",
@@ -82,5 +142,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-valuation-finite-module-injectivity",
+  "worker": "stage1",
+  "summary": "Repair of the Tag 0GSG split: the 046Y helper now states the local essentially-finite-presentation criterion with finitely presented source and target, flat target, and injective closed fibre. The proof first replaces B by the local polynomial localization P_q and checks A→P_q is local, then approximates N over P_q, applies 0GSE(2) to M over P_q, applies 046Y with the source/target roles exchanged, and identifies N_lambda with N.",
+  "blueprint": "The item is an imported Stacks input used in the current blueprint ancestor lem-trf-local-term-locality; Steps 1–5 realize the 0GSG polynomial-localization reduction, finite-module approximation, 0GSE(2) finite-presentation reduction, 046Y application, and final identification."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q147-fc4ddd9e6",
+  "group": "Q147",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-fc4ddd9e6 (reviewer sub-agent of L); spot-checked: Read the item, the 3 new nodes, all cited definition nodes and the sources: Stacks more-morphisms.tex 0GSG (l.5043-5090), algebra.tex 046Y (l.32770), more-algebra.tex 0GSE(2) (l.6005-6044). The item matches 0GSG hypothesis for hypothesis and is not weakened. The steps follow the 0GSG proof: reduce to P_q, approximate N by finitely presented modules (fp-reduction node), get finite presentation of M from 0GSE(2), then apply 046Y with source and target exchanged; step 5 (the kernel argument) is elementary and correct. The helper node is a faithful 046Y, with local R->S, essentially finite presentation written out, both modules finitely presented, flat target and injective fibre. The 0GSE(2) node is faithful. The fp-reduction node is true, because B/m_A B is Noetherian. No new node restates a clause of the item. Duplicate check: rg over the DAG for 046Y/0GSE/0GSG and the key terms found no duplicates; 00R7 and 01PJ/01PK are different statements. My own Mathlib grep found no leaf. No SGA is used, and there is no off-unit tool use. Small cases tested: field base; N=0; free N and M; A=k[[t]], B=A[x]_(t,x) with u=mult by x (hypothesis holds, conclusion holds) and u=mult by t (hypothesis fails, B/tB not flat). FIXES: (1) item step 1 only asserted that B is a quotient of P_q, but the cited definition gives B = W^{-1}C. I wrote out q=rho^{-1}(m_B), the factorization through P_q, surjectivity, the locality of A->P_q, and why the hypotheses are unchanged. (2) fp-reduction used 'valuation ring', m_A and m_B undefined (B2/B3); I added an inline definition, introduced the ideals and made the induced map explicit. Not repaired, flagged for the maintainer: the fp-reduction and flat-presentation nodes record no LeanSearch query (their Loogle query was malformed and marked unavailable). Absence from Mathlib is supported by the item/046Y LeanSearch records and by my grep. The report also lists citations.json files that are not in the commit.; 2 file(s) fixed by the reviewer"
  }
 }
