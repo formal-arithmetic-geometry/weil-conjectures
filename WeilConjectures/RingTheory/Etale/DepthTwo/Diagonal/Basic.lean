@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Local
+public import WeilConjectures.RingTheory.Etale.DepthTwo.Lift
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.RingTheory.Nakayama
@@ -284,6 +285,16 @@ lemma etale_away_of_semilinear (θ : A ≃+* A) (σ : D ≃+* D)
     (etale_comp ?_ (RingHom.Etale.of_bijective e₂.bijective))
   rw [RingHom.etale_algebraMap]
   infer_instance
+
+/-- If `T` is étale over `D(b)` and `b` is invertible in the `O`-algebra `L`, then `L ⊗ T` is
+étale over `L`. -/
+lemma etale_tensor_of_isUnit {O T : Type*} [CommRing O] [CommRing T] [Algebra O T] (b : O)
+    [Algebra.Etale (Localization.Away b) (Localization.Away b ⊗[O] T)] (L : Type*) [CommRing L]
+    [Algebra O L] (hb : IsUnit (algebraMap O L b)) : Algebra.Etale L (L ⊗[O] T) := by
+  let _ : Algebra (Localization.Away b) L := (awayLift b hb).toRingHom.toAlgebra
+  have : IsScalarTower O (Localization.Away b) L :=
+    .of_algebraMap_eq fun x ↦ ((awayLift b hb).commutes x).symm
+  exact .of_equiv (Algebra.TensorProduct.cancelBaseChange O (Localization.Away b) L L T)
 
 end Transport
 

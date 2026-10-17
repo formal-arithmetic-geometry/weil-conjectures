@@ -7,6 +7,11 @@ module
 
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Splitting
 public import WeilConjectures.RingTheory.Smooth.SectionTruncation
+public import WeilConjectures.RingTheory.Etale.DepthTwo.Diagonal.Basic
+public import WeilConjectures.RingTheory.Etale.DepthTwo.Diagonal.LiftQuotient
+public import WeilConjectures.RingTheory.AdicCompletionNoetherian
+public import WeilConjectures.RingTheory.FiniteModuleComplete
+public import Mathlib.RingTheory.TensorProduct.Quotient
 
 /-!
 # Étaleness through the diagonal
@@ -42,24 +47,138 @@ open TensorProduct IsLocalRing
 
 namespace RingTheory.DepthTwo
 
+section Swap
+
+variable {O R : Type*} [CommRing O] [CommRing R] [Algebra R O]
+
+lemma le_comap_ker_algebraMap {τ : R ≃+* R} (hτμ : ∀ r, algebraMap R O (τ r) = algebraMap R O r) :
+    RingHom.ker (algebraMap R O) ≤ (RingHom.ker (algebraMap R O)).comap τ.toRingHom := by
+  intro r hr
+  rw [Ideal.mem_comap, RingHom.mem_ker, RingEquiv.toRingHom_eq_coe, RingEquiv.coe_toRingHom,
+    hτμ]
+  exact hr
+
+lemma sub_mem_ker_algebraMap {τ : R ≃+* R} (hτμ : ∀ r, algebraMap R O (τ r) = algebraMap R O r)
+    (r : R) : τ r - r ∈ RingHom.ker (algebraMap R O) := by
+  rw [RingHom.mem_ker, map_sub, hτμ, sub_self]
+
+/-- The involution of the completion of `R` along the kernel of `R → O` induced by an involution
+`τ` of `R` compatible with `R → O`. -/
+noncomputable def completionSwap (τ : R ≃+* R) (hτ : ∀ r, τ (τ r) = r)
+    (hτμ : ∀ r, algebraMap R O (τ r) = algebraMap R O r) :
+    AdicCompletion (RingHom.ker (algebraMap R O)) R ≃+*
+      AdicCompletion (RingHom.ker (algebraMap R O)) R :=
+  RingEquiv.ofRingHom (adicCompletionMap _ τ.toRingHom (le_comap_ker_algebraMap hτμ))
+    (adicCompletionMap _ τ.toRingHom (le_comap_ker_algebraMap hτμ))
+    (RingHom.ext fun x ↦ adicCompletionMap_adicCompletionMap _ hτ x)
+    (RingHom.ext fun x ↦ adicCompletionMap_adicCompletionMap _ hτ x)
+
+lemma completionSwap_algebraMap (τ : R ≃+* R) (hτ : ∀ r, τ (τ r) = r)
+    (hτμ : ∀ r, algebraMap R O (τ r) = algebraMap R O r) (r : R) :
+    completionSwap τ hτ hτμ (algebraMap R _ r) = algebraMap R _ (τ r) :=
+  adicCompletionMap_algebraMap τ.toRingHom (le_comap_ker_algebraMap hτμ) r
+
+lemma completionSwap_sub_mem (τ : R ≃+* R) (hτ : ∀ r, τ (τ r) = r)
+    (hτμ : ∀ r, algebraMap R O (τ r) = algebraMap R O r) [IsNoetherianRing R]
+    (x : AdicCompletion (RingHom.ker (algebraMap R O)) R) :
+    completionSwap τ hτ hτμ x - x ∈ (RingHom.ker (algebraMap R O)).map
+      (algebraMap R (AdicCompletion (RingHom.ker (algebraMap R O)) R)) := by
+  rw [← AdicCompletion.ker_evalOneₐ_eq_map _ (IsNoetherian.noetherian _), RingHom.mem_ker,
+    map_sub, sub_eq_zero]
+  exact evalOneₐ_adicCompletionMap (le_comap_ker_algebraMap hτμ) (sub_mem_ker_algebraMap hτμ) x
+
+
+lemma completionSwap_completionSwap (τ : R ≃+* R) (hτ : ∀ r, τ (τ r) = r)
+    (hτμ : ∀ r, algebraMap R O (τ r) = algebraMap R O r)
+    (x : AdicCompletion (RingHom.ker (algebraMap R O)) R) :
+    completionSwap τ hτ hτμ (completionSwap τ hτ hτμ x) = x :=
+  adicCompletionMap_adicCompletionMap _ hτ x
+end Swap
+
 variable {O R : Type*} [CommRing O] [CommRing R] [Algebra O R] [Algebra R O]
   [IsScalarTower O R O] [IsLocalRing O] [IsNoetherianRing O] [IsLocalRing R] [IsNoetherianRing R]
   [Algebra.FormallySmooth O R] [Module.Flat O R]
 
-/-- **Étaleness through the diagonal.** See the module docstring. Here `p₂ = algebraMap O R`, the
-section is `algebraMap R O` and `p₁ = τ ∘ p₂`. -/
-theorem etale_of_diagonal (τ : R ≃+* R) (hτ : ∀ r, τ (τ r) = r)
+omit [IsNoetherianRing O] [IsLocalRing R] [Module.Flat O R] in
+variable (O R) in
+/-- The infinitesimal neighbourhoods of the section in the completion are flat. -/
+lemma flat_quotient_pow_map_adicCompletion (n : ℕ) :
+    Module.Flat O (AdicCompletion (RingHom.ker (algebraMap R O)) R ⧸
+      ((RingHom.ker (algebraMap R O)).map
+        (algebraMap R (AdicCompletion (RingHom.ker (algebraMap R O)) R))) ^ n) := by
+  set I := RingHom.ker (algebraMap R O)
+  set Rh := AdicCompletion I R
+  have := Algebra.FormallySmooth.flat_quotient_pow_ker O R n
+  let e₁ : (Rh ⧸ (I.map (algebraMap R Rh)) ^ n) ≃ₐ[Rh] Rh ⧸ (I ^ n).map (algebraMap R Rh) :=
+    Ideal.quotientEquivAlgOfEq Rh (Ideal.map_pow _ _ _).symm
+  let e₂ := Algebra.TensorProduct.quotIdealMapEquivTensorQuot Rh (I ^ n)
+  let e₃ := TensorProduct.comm R Rh (R ⧸ I ^ n)
+  let e : (Rh ⧸ (I.map (algebraMap R Rh)) ^ n) ≃ₗ[O] (R ⧸ I ^ n) ⊗[R] Rh :=
+    ((e₁.trans e₂).restrictScalars O).toLinearEquiv.trans (e₃.restrictScalars O)
+  have : Module.Flat O ((R ⧸ I ^ n) ⊗[R] Rh) := Module.Flat.trans O (R ⧸ I ^ n) _
+  exact Module.Flat.of_linearEquiv e
+
+omit [IsNoetherianRing O] [IsLocalRing R] [Module.Flat O R] in
+/-- The regularity of `(p₁ a, p₁ b)` on the quotients of `R^ ⊗_{p₂} T` by the powers of the ideal
+of the diagonal. -/
+lemma isRegularPair_quotient_pow {τ : R ≃+* R}
     (hτμ : ∀ r, algebraMap R O (τ r) = algebraMap R O r)
-    {T : Type*} [CommRing T] [Algebra O T] [Module.Finite O T] {a b : O}
-    (ha : τ (algebraMap O R a) = algebraMap O R a) (hT : IsRegularPair a b T)
-    [Algebra.Etale (Localization.Away a) (Localization.Away a ⊗[O] T)]
-    [Algebra.Etale (Localization.Away b) (Localization.Away b ⊗[O] T)]
-    (Q : Ideal (AdicCompletion (RingHom.ker (algebraMap R O)) R)) [Q.IsPrime]
-    (hQ : Q.comap (algebraMap O (AdicCompletion (RingHom.ker (algebraMap R O)) R)) =
-      maximalIdeal O)
-    (hQb : algebraMap R (AdicCompletion (RingHom.ker (algebraMap R O)) R)
-      (τ (algebraMap O R b)) ∉ Q) :
-    Algebra.Etale O T := by
-  sorry
+    {T : Type*} [CommRing T] [Algebra O T] {a b : O}
+    (ha : τ (algebraMap O R a) = algebraMap O R a) (hT : IsRegularPair a b T) (n : ℕ) :
+    IsRegularPair
+      (algebraMap (AdicCompletion (RingHom.ker (algebraMap R O)) R)
+        (AdicCompletion (RingHom.ker (algebraMap R O)) R ⊗[O] T)
+        (algebraMap R _ (τ (algebraMap O R a))))
+      (algebraMap (AdicCompletion (RingHom.ker (algebraMap R O)) R)
+        (AdicCompletion (RingHom.ker (algebraMap R O)) R ⊗[O] T)
+        (algebraMap R _ (τ (algebraMap O R b))))
+      ((AdicCompletion (RingHom.ker (algebraMap R O)) R ⊗[O] T) ⧸
+        (((RingHom.ker (algebraMap R O)).map
+          (algebraMap R (AdicCompletion (RingHom.ker (algebraMap R O)) R))).map
+          (algebraMap (AdicCompletion (RingHom.ker (algebraMap R O)) R)
+            (AdicCompletion (RingHom.ker (algebraMap R O)) R ⊗[O] T))) ^ n) := by
+  set I := RingHom.ker (algebraMap R O)
+  set Rh := AdicCompletion I R
+  set D := Rh ⊗[O] T
+  set J := (I.map (algebraMap R Rh)).map (algebraMap Rh D)
+  have h1 : IsRegularPair a b (D ⧸ J ^ n) := by
+    have := flat_quotient_pow_map_adicCompletion O R n
+    refine (hT.lTensor (Rh ⧸ (I.map (algebraMap R Rh)) ^ n)).of_linearEquiv ?_
+    exact ((Algebra.TensorProduct.quotientTensorEquiv (R := O) O T Rh _).trans
+      (Ideal.quotientEquivAlgOfEq O (Ideal.map_pow _ _ _))).toLinearEquiv
+  have h2 := isRegularPair_algebraMap (A := D) h1
+  have hpa : algebraMap Rh D (algebraMap R Rh (τ (algebraMap O R a))) = algebraMap O D a := by
+    rw [ha, ← IsScalarTower.algebraMap_apply, ← IsScalarTower.algebraMap_apply]
+  obtain ⟨j, hj, hpb⟩ : ∃ j ∈ J, algebraMap Rh D (algebraMap R Rh (τ (algebraMap O R b))) =
+      algebraMap O D b + j := by
+    refine ⟨_, Ideal.mem_map_of_mem _ (Ideal.mem_map_of_mem _
+      (sub_mem_ker_algebraMap hτμ (algebraMap O R b))), ?_⟩
+    rw [map_sub, map_sub, ← IsScalarTower.algebraMap_apply O R Rh,
+      ← IsScalarTower.algebraMap_apply O Rh D]
+    ring
+  rw [hpa, hpb]
+  refine h2.add_right (k := n) fun m ↦ ?_
+  obtain ⟨y, rfl⟩ := Ideal.Quotient.mk_surjective m
+  rw [Algebra.smul_def, Ideal.Quotient.algebraMap_eq, ← map_mul, Ideal.Quotient.eq_zero_iff_mem]
+  exact Ideal.mul_mem_right _ _ (Ideal.pow_mem_pow hj n)
+
+omit [IsScalarTower O R O] [IsLocalRing O] [IsNoetherianRing O] [IsLocalRing R]
+  [Algebra.FormallySmooth O R]
+  [Module.Flat O R] in
+/-- `R^ ⊗ T` is complete along the ideal of the diagonal, for a finite `O`-algebra `T`. -/
+lemma isAdicComplete_tensor (T : Type*) [CommRing T] [Algebra O T] [Module.Finite O T] :
+    IsAdicComplete
+      (((RingHom.ker (algebraMap R O)).map
+          (algebraMap R (AdicCompletion (RingHom.ker (algebraMap R O)) R))).map
+          (algebraMap (AdicCompletion (RingHom.ker (algebraMap R O)) R)
+            (AdicCompletion (RingHom.ker (algebraMap R O)) R ⊗[O] T)))
+      (AdicCompletion (RingHom.ker (algebraMap R O)) R ⊗[O] T) := by
+  set I := RingHom.ker (algebraMap R O)
+  set Rh := AdicCompletion I R
+  have := AdicCompletion.isAdicComplete_self I (IsNoetherian.noetherian I)
+  have := AdicCompletion.isNoetherianRing I
+  have : IsAdicComplete (I.map (algebraMap R Rh)) (Rh ⊗[O] T) :=
+    finite_module_complete_over_complete_noetherian Rh _ _
+  exact (IsAdicComplete.map_algebraMap_iff _ _).2 this
 
 end RingTheory.DepthTwo
