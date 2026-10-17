@@ -37,7 +37,9 @@
   "lem-weil-restriction-of-scalars-exact",
   "lem-sf-compact-support-restriction-of-scalars",
   "def-weil-derived-limit",
-  "def-weil-finite-torsion-constructibility"
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-derived-complete",
+  "def-weil-cohomological-support"
  ],
  "proof": [
   {
@@ -74,7 +76,7 @@
    }
   },
   {
-   "text": "Set $L=JK$. We next identify its reductions, including their maps. Identify $X_{\\mathrm{proet}}$ with $\\overline X_{\\mathrm{proet}}/X$ using [lem-weil-proetale-weakly-etale-localization]. On this localized ringed site, [lem-weil-pbc-ringed-slice-extension-tensor] gives $J(G\\otimes j^{-1}F)\\cong JG\\otimes F$, natural in $G,F$. Since $J\\dashv j^{-1}$, it preserves small direct sums by [lem-weil-pbc-left-adjoint-preserves-colimits]; thus the tensor formula applies to total tensor complexes as well, including the sums along each total degree. Choose a K-flat resolution $Q\\to K$ by [lem-pc-kflat-resolution]. For an acyclic $R_{\\overline X}$-complex $C$, exactness of restriction makes $j^{-1}C$ acyclic [lem-weil-pbc-proetale-immersion-limit-preservation]; K-flatness gives $Q\\otimes j^{-1}C$ acyclic [def-pc-kflat-complex]; and exactness of $J$ gives $JQ\\otimes C\\cong J(Q\\otimes j^{-1}C)$ acyclic [lem-weil-pbc-proetale-ringed-open-closed]. Hence $JQ$ is K-flat and resolves $L$. Computing reductions as in [def-weil-integral-derived-reduction] gives isomorphisms of $P_n$-complexes $\\alpha_n:L\\otimes^L_A P_n\\xrightarrow{\\sim}j_!(K\\otimes^L_A P_n)=j_!K_n$. Here extending $Q\\otimes_{R_X}(P_n)_X$ by zero and extending $Q$ before tensoring give the same scalar action, by the natural tensor formula and the coefficient identifications of step 1. The presheaf defining extension by zero is the given sheaf on objects factoring through $X$ and zero otherwise, and module sheafification has underlying abelian sheaf equal to abelian sheafification [lem-pc-sites-module-sheafification-interface]. The uniqueness of the sheafified scalar action in that statement shows that forgetting coefficients leaves the same extension-by-zero sheaf. In particular $J\\operatorname{Res}_n=\\operatorname{Res}_n j_!$. For the quotient $\\rho_n:P_{n+1}\\to P_n$, naturality gives $\\alpha_n\\circ(\\mathrm{id}_{JQ}\\otimes\\rho_n)=j_!(\\mathrm{id}_Q\\otimes\\rho_n)\\circ\\alpha_{n+1}$ after restriction of scalars. For the maps from $L$, the same formula with $q\\mapsto q\\otimes1$ identifies them with $J$ of the reduction maps from $K$. Thus these are identifications of reduction towers with their maps from the original objects, not just of isolated reductions. The resolution-independence assertion [lem-weil-integral-reduction-tower-well-defined] ensures that these quotient maps and units are exactly the intrinsic reduction-tower maps, for any representatives chosen in the item.",
+   "text": "Set $L=JK$. We next identify its reductions, including their maps. Identify $X_{\\mathrm{proet}}$ with $\\overline X_{\\mathrm{proet}}/X$ using [lem-weil-proetale-weakly-etale-localization]. On this localized ringed site, [lem-weil-pbc-ringed-slice-extension-tensor] gives $J(G\\otimes j^{-1}F)\\cong JG\\otimes F$, natural in $G,F$. Since $J\\dashv j^{-1}$, it preserves small direct sums by [lem-weil-pbc-left-adjoint-preserves-colimits]; thus the tensor formula applies to total tensor complexes as well, including the sums along each total degree. Choose a K-flat resolution $Q\\to K$ by [lem-pc-kflat-resolution]. For an acyclic $R_{\\overline X}$-complex $C$, exactness of restriction makes $j^{-1}C$ acyclic [lem-weil-pbc-proetale-immersion-limit-preservation]; K-flatness gives $Q\\otimes j^{-1}C$ acyclic [def-pc-kflat-complex]; and exactness of $J$ gives $JQ\\otimes C\\cong J(Q\\otimes j^{-1}C)$ acyclic [lem-weil-pbc-proetale-ringed-open-closed]. Hence $JQ$ is K-flat and resolves $L$.",
    "uses": [
     "lem-weil-proetale-weakly-etale-localization",
     "lem-weil-pbc-ringed-slice-extension-tensor",
@@ -82,7 +84,18 @@
     "lem-pc-kflat-resolution",
     "lem-weil-pbc-proetale-immersion-limit-preservation",
     "def-pc-kflat-complex",
-    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8I (lemma-j-shriek-and-tensor); K-flat specialization to finite coefficient reduction"
+   }
+  },
+  {
+   "text": "Use the K-flat resolution $JQ\\to L$ of step 3. Computing reductions as in [def-weil-integral-derived-reduction] gives isomorphisms of $P_n$-complexes $\\alpha_n:L\\otimes^L_A P_n\\xrightarrow{\\sim}j_!(K\\otimes^L_A P_n)=j_!K_n$. Here extending $Q\\otimes_{R_X}(P_n)_X$ by zero and extending $Q$ before tensoring give the same scalar action, by the natural tensor formula and the coefficient identifications of step 1. The presheaf defining extension by zero is the given sheaf on objects factoring through $X$ and zero otherwise, and module sheafification has underlying abelian sheaf equal to abelian sheafification [lem-pc-sites-module-sheafification-interface]. The uniqueness of the sheafified scalar action in that statement shows that forgetting coefficients leaves the same extension-by-zero sheaf. In particular $J\\operatorname{Res}_n=\\operatorname{Res}_n j_!$. For the quotient $\\rho_n:P_{n+1}\\to P_n$, naturality gives $\\alpha_n\\circ(\\mathrm{id}_{JQ}\\otimes\\rho_n)=j_!(\\mathrm{id}_Q\\otimes\\rho_n)\\circ\\alpha_{n+1}$ after restriction of scalars. For the maps from $L$, the same formula with $q\\mapsto q\\otimes1$ identifies them with $J$ of the reduction maps from $K$. Thus these are identifications of reduction towers with their maps from the original objects, not just of isolated reductions. The resolution-independence assertion [lem-weil-integral-reduction-tower-well-defined] ensures that these quotient maps and units are exactly the intrinsic reduction-tower maps, for any representatives chosen in the item.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-extension-tensor",
     "def-weil-integral-derived-reduction",
     "lem-pc-sites-module-sheafification-interface",
     "lem-weil-integral-reduction-tower-well-defined"
@@ -94,7 +107,7 @@
    }
   },
   {
-   "text": "Since $K$ is derived complete, its reduction maps $c_n:K\\to\\operatorname{Res}_nK_n$ form the first map of a distinguished Roos triangle [def-weil-derived-complete]. Apply the triangulated functor $J$ [lem-sf-exact-functor-derived-triangulated]. By step 2 its two product terms and middle arrow become $\\prod_nJ\\operatorname{Res}_nK_n$ and the transition endomorphism $1-s$. By step 3 these terms and all their projections are precisely the restricted reductions of $L$, and the first map has components the reduction units $L\\to\\operatorname{Res}_n(L\\otimes_A^LP_n)$. The resulting distinguished triangle is therefore the one required by [def-weil-derived-complete] for $L$. This proves derived completeness of $L$ using the project's Roos-triangle definition, without choosing a functorial homotopy limit.",
+   "text": "Since $K$ is derived complete, its reduction maps $c_n:K\\to\\operatorname{Res}_nK_n$ form the first map of a distinguished Roos triangle [def-weil-derived-complete]. Apply the triangulated functor $J$ [lem-sf-exact-functor-derived-triangulated]. By step 2 its two product terms and middle arrow become $\\prod_nJ\\operatorname{Res}_nK_n$ and the transition endomorphism $1-s$. By step 4 these terms and all their projections are precisely the restricted reductions of $L$, and the first map has components the reduction units $L\\to\\operatorname{Res}_n(L\\otimes_A^LP_n)$. The resulting distinguished triangle is therefore the one required by [def-weil-derived-complete] for $L$. This proves derived completeness of $L$ using the project's Roos-triangle definition, without choosing a functorial homotopy limit.",
    "uses": [
     "def-weil-derived-complete",
     "lem-sf-exact-functor-derived-triangulated"
@@ -106,7 +119,7 @@
    }
   },
   {
-   "text": "The hypothesis $K\\in D^b_c(X,A)$ supplies an interval $[a,b]$ containing the cohomological supports of all $K_n$, and constructibility of each $K_n$ [def-weil-derived-complete-integral-detailed]. For fixed $n,r$, exactness of finite-level $j_!$ gives $\\mathcal H^r(j_!K_n)=j_!\\mathcal H^r(K_n)$ [lem-weil-pbc-proetale-ringed-open-closed]; this identity follows by applying the exact functor to the kernels and images of the differentials. Take a finite stratification of $X$ on which $\\mathcal H^r(K_n)$ is locally constant with finite module stalks [def-weil-finite-torsion-constructibility]. Regard its strata as locally closed subschemes of $\\overline X$ and add the closed complement $Z$: locally closed in an open subset is locally closed in the whole space. For any open subsets $O,W$ of $\\overline X$, $O\\cap W$ is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Thus every open is retrocompact. Each locally closed subset is $O\\cap(\\overline X\\setminus V)$ for opens $O,V$, hence is constructible by [def-weil-constructible-subset]. On the old strata the restriction of $j_!\\mathcal H^r(K_n)$ is the original restriction because $j^{-1}j_!=\\mathrm{id}$; on $Z$ it is zero because $i^{-1}j_!=0$ [lem-weil-pbc-proetale-ringed-open-closed]. Zero is the constant finite zero module. This is exactly the finite-torsion constructibility definition. Thus every $j_!K_n$ is bounded constructible with cohomology in the same interval $[a,b]$. By step 3 these are the reductions of $L$; together with step 4 this proves $L\\in D^b_c(\\overline X,A)$ [def-weil-derived-complete-integral-detailed].",
+   "text": "The hypothesis $K\\in D^b_c(X,A)$ supplies an interval $[a,b]$ containing the cohomological supports of all $K_n$, and constructibility of each $K_n$ [def-weil-derived-complete-integral-detailed]. For fixed $n,r$, exactness of finite-level $j_!$ gives $\\mathcal H^r(j_!K_n)=j_!\\mathcal H^r(K_n)$ [lem-weil-pbc-proetale-ringed-open-closed]; this identity follows by applying the exact functor to the kernels and images of the differentials. Take a finite stratification of $X$ on which $\\mathcal H^r(K_n)$ is locally constant with finite module stalks [def-weil-finite-torsion-constructibility]. Regard its strata as locally closed subschemes of $\\overline X$ and add the closed complement $Z$: locally closed in an open subset is locally closed in the whole space. For any open subsets $O,W$ of $\\overline X$, $O\\cap W$ is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Thus every open is retrocompact. Each locally closed subset is $O\\cap(\\overline X\\setminus V)$ for opens $O,V$, hence is constructible by [def-weil-constructible-subset]. On the old strata the restriction of $j_!\\mathcal H^r(K_n)$ is the original restriction because $j^{-1}j_!=\\mathrm{id}$; on $Z$ it is zero because $i^{-1}j_!=0$ [lem-weil-pbc-proetale-ringed-open-closed]. Zero is the constant finite zero module. This is exactly the finite-torsion constructibility definition. Thus every $j_!K_n$ is bounded constructible with cohomology in the same interval $[a,b]$. By step 4 these are the reductions of $L$; together with step 5 this proves $L\\in D^b_c(\\overline X,A)$ [def-weil-derived-complete-integral-detailed].",
    "uses": [
     "def-weil-derived-complete-integral-detailed",
     "lem-weil-pbc-proetale-ringed-open-closed",
@@ -121,7 +134,7 @@
    }
   },
   {
-   "text": "Apply [lem-sf-integral-direct-image-constructible] to the finite-type $K_0$-morphism $\\bar f:\\overline X\\to Y$ and the integral constructible object $L$. Its hypotheses hold by steps 1 and 5, and $\\ell$ is still invertible in $K_0$. It gives a tower-defined object $T=R\\bar f_*L$ which is derived complete, whose reductions are $R\\bar f_{*,n}L_n$ with $L_n=L\\otimes_A^LP_n$, and an integer $N$ independent of $n$ such that these reductions are bounded constructible with supports in $[a,b+N]$. This is an assertion about reductions of the completed coefficient sheaf; it assumes no finite cohomological dimension on arbitrary pro-etale sheaves. The definition [def-weil-derived-direct-image] makes $T$ a derived limit of $N_n=\\operatorname{Res}_n R\\bar f_{*,n}L_n$ with the quotient-induced transition maps.",
+   "text": "Apply [lem-sf-integral-direct-image-constructible] to the finite-type $K_0$-morphism $\\bar f:\\overline X\\to Y$ and the integral constructible object $L$. Its hypotheses hold by steps 1 and 6, and $\\ell$ is still invertible in $K_0$. It gives a tower-defined object $T=R\\bar f_*L$ which is derived complete, whose reductions are $R\\bar f_{*,n}L_n$ with $L_n=L\\otimes_A^LP_n$, and an integer $N$ independent of $n$ such that these reductions are bounded constructible with supports in $[a,b+N]$. This is an assertion about reductions of the completed coefficient sheaf; it assumes no finite cohomological dimension on arbitrary pro-etale sheaves. The definition [def-weil-derived-direct-image] makes $T$ a derived limit of $N_n=\\operatorname{Res}_n R\\bar f_{*,n}L_n$ with the quotient-induced transition maps.",
    "uses": [
     "lem-sf-integral-direct-image-constructible",
     "def-weil-derived-direct-image"
@@ -133,13 +146,11 @@
    }
   },
   {
-   "text": "For each $n$, applying $R\\bar f_{*,n}$ to $\\alpha_n$ of step 3 gives $\\beta_n:N_n\\xrightarrow{\\sim}\\operatorname{Res}_nR\\bar f_{*,n}j_!K_n=M_n$, using the compact-support candidate $Rf_{!,n}=R\\bar f_{*,n}j_!$ [def-weil-compact-support-candidate]. This is an isomorphism of inverse systems, not merely termwise: on the chosen resolution the input transition is $\\mathrm{id}_Q\\otimes\\rho_n$, and step 3 identifies its extension by zero with the transition for $L_n$. The restriction-of-scalars comparison in [lem-sf-compact-support-restriction-of-scalars] is explicitly the composite of the extension-by-zero coefficient identification and the direct-image coefficient comparison. To check that square explicitly, write $R_n=R\\bar f_{*,n}$, $S_n=\\operatorname{Res}^{P_{n+1}}_{P_n}$, and let $d_n:L_{n+1}\\to S_nL_n$ and $e_n:K_{n+1}\\to S_nK_n$ be the reduction transitions. Step 3 gives $S_n(\\alpha_n)\\circ d_n=j_!(e_n)\\circ\\alpha_{n+1}$, using $j_!S_n=S_nj_!$. Let $C_n(U):R_{n+1}S_nU\\xrightarrow{\\sim}S_nR_nU$ be the natural direct-image comparison [lem-weil-proetale-direct-image-restriction-of-scalars]. Apply $R_{n+1}$ to the preceding equality and then use the naturality identity $S_nR_n(\\alpha_n)\\circ C_n(L_n)=C_n(j_!K_n)\\circ R_{n+1}S_n(\\alpha_n)$. The result is $S_nR_n(\\alpha_n)\\circ C_n(L_n)\\circ R_{n+1}(d_n)=C_n(j_!K_n)\\circ R_{n+1}(j_!e_n)\\circ R_{n+1}(\\alpha_{n+1})$. After $\\operatorname{Res}_{n+1}$ this reads $\\beta_n\\circ t^N_n=t^M_n\\circ\\beta_{n+1}$: the left transition is the one in [def-weil-derived-direct-image], and the right transition is exactly the composite specified in the item because its compact-support comparison is $C_n$ after the extension-by-zero identification. Let $M$ be any derived limit of this system, as in the question. Apply [lem-weil-derived-limit-morphism] to $(\\beta_n)_n$ and the Roos triangles of $T$ and $M$ to obtain a triangle morphism; [lem-weil-derived-limit-levelwise-iso] makes its first component $T\\to M$ an isomorphism. Hence the conclusion applies to every possible derived limit, without claiming a canonical isomorphism between arbitrary choices.",
+   "text": "For each $n$, applying $R\\bar f_{*,n}$ to $\\alpha_n$ of step 4 gives $\\beta_n:N_n\\xrightarrow{\\sim}\\operatorname{Res}_nR\\bar f_{*,n}j_!K_n=M_n$, using the compact-support candidate $Rf_{!,n}=R\\bar f_{*,n}j_!$ [def-weil-compact-support-candidate]. This is an isomorphism of inverse systems, not merely termwise: on the chosen resolution the input transition is $\\mathrm{id}_Q\\otimes\\rho_n$, and step 4 identifies its extension by zero with the transition for $L_n$. The restriction-of-scalars comparison in [lem-sf-compact-support-restriction-of-scalars] is explicitly the composite of the extension-by-zero coefficient identification and the direct-image coefficient comparison. To check that square explicitly, write $R_n=R\\bar f_{*,n}$, $S_n=\\operatorname{Res}^{P_{n+1}}_{P_n}$, and let $d_n:L_{n+1}\\to S_nL_n$ and $e_n:K_{n+1}\\to S_nK_n$ be the reduction transitions. Step 4 gives $S_n(\\alpha_n)\\circ d_n=j_!(e_n)\\circ\\alpha_{n+1}$, using $j_!S_n=S_nj_!$. Let $C_n(U):R_{n+1}S_nU\\xrightarrow{\\sim}S_nR_nU$ be the natural direct-image comparison [lem-weil-proetale-direct-image-restriction-of-scalars]. Apply $R_{n+1}$ to the preceding equality and then use the naturality identity $S_nR_n(\\alpha_n)\\circ C_n(L_n)=C_n(j_!K_n)\\circ R_{n+1}S_n(\\alpha_n)$. The result is $S_nR_n(\\alpha_n)\\circ C_n(L_n)\\circ R_{n+1}(d_n)=C_n(j_!K_n)\\circ R_{n+1}(j_!e_n)\\circ R_{n+1}(\\alpha_{n+1})$. After $\\operatorname{Res}_{n+1}$ this reads $\\beta_n\\circ t^N_n=t^M_n\\circ\\beta_{n+1}$: the left transition is the one in [def-weil-derived-direct-image], and the right transition is exactly the composite specified in the item because its compact-support comparison is $C_n$ after the extension-by-zero identification.",
    "uses": [
     "def-weil-compact-support-candidate",
     "lem-sf-compact-support-restriction-of-scalars",
     "def-weil-derived-direct-image",
-    "lem-weil-derived-limit-morphism",
-    "lem-weil-derived-limit-levelwise-iso",
     "lem-weil-proetale-direct-image-restriction-of-scalars"
    ],
    "elementary": false,
@@ -149,7 +160,19 @@
    }
   },
   {
-   "text": "Let $h:T\\xrightarrow{\\sim}M$ be the isomorphism from step 7 and $h_n:T\\otimes_A^LP_n\\xrightarrow{\\sim}M\\otimes_A^LP_n$ its derived reductions [def-weil-integral-derived-reduction]. The reduction units are the units of the natural adjunction [lem-weil-derived-scalar-extension-restriction-adjunction], so $\\operatorname{Res}_n(h_n)c^T_n=c^M_nh$ for every $n$. Their quotient-induced transitions commute with $h_n$: on a K-flat representative of a morphism this is $(u\\otimes\\mathrm{id}_{P_n})(\\mathrm{id}\\otimes\\rho_n)=(\\mathrm{id}\\otimes\\rho_n)(u\\otimes\\mathrm{id}_{P_{n+1}})$, and this equality passes to the localization, since naturality for a chain map also gives naturality for the inverse of a quasi-isomorphism and hence for a roof. The resolution comparisons preserve both units and transitions [lem-weil-integral-reduction-tower-well-defined]. Taking products thus identifies the first arrow and $1-s$ of the completeness triangle for $T$ with the required arrows for $M$. The triangle obtained through $(h,\\prod_n\\operatorname{Res}_n h_n,\\prod_n\\operatorname{Res}_n h_n)$ is distinguished and proves derived completeness of $M$ [def-weil-derived-complete]. Each reduction of $M$ is isomorphic to the corresponding reduction of $T$. Step 6 therefore gives finite-torsion constructibility of every reduction and the common cohomological interval $[a,b+N]$. These three properties are precisely membership in $D^b_c(Y,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed], and prove all clauses of the item.",
+   "text": "The isomorphism of inverse systems in step 8 compares the tower defining $T$ with the tower in the statement. Let $M$ be any derived limit of this system, as in the question. Apply [lem-weil-derived-limit-morphism] to $(\\beta_n)_n$ and the Roos triangles of $T$ and $M$ to obtain a triangle morphism; [lem-weil-derived-limit-levelwise-iso] makes its first component $T\\to M$ an isomorphism. Hence the conclusion applies to every possible derived limit, without claiming a canonical isomorphism between arbitrary choices.",
+   "uses": [
+    "lem-weil-derived-limit-morphism",
+    "lem-weil-derived-limit-levelwise-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0H9J (remark-functoriality-derived-limit), with the prescribed coefficient comparisons"
+   }
+  },
+  {
+   "text": "Let $h:T\\xrightarrow{\\sim}M$ be the isomorphism from step 9 and $h_n:T\\otimes_A^LP_n\\xrightarrow{\\sim}M\\otimes_A^LP_n$ its derived reductions [def-weil-integral-derived-reduction]. The reduction units are the units of the natural adjunction [lem-weil-derived-scalar-extension-restriction-adjunction], so $\\operatorname{Res}_n(h_n)c^T_n=c^M_nh$ for every $n$. Their quotient-induced transitions commute with $h_n$: on a K-flat representative of a morphism this is $(u\\otimes\\mathrm{id}_{P_n})(\\mathrm{id}\\otimes\\rho_n)=(\\mathrm{id}\\otimes\\rho_n)(u\\otimes\\mathrm{id}_{P_{n+1}})$, and this equality passes to the localization, since naturality for a chain map also gives naturality for the inverse of a quasi-isomorphism and hence for a roof. The resolution comparisons preserve both units and transitions [lem-weil-integral-reduction-tower-well-defined]. Taking products thus identifies the first arrow and $1-s$ of the completeness triangle for $T$ with the required arrows for $M$. The triangle obtained through $(h,\\prod_n\\operatorname{Res}_n h_n,\\prod_n\\operatorname{Res}_n h_n)$ is distinguished and proves derived completeness of $M$ [def-weil-derived-complete]. Each reduction of $M$ is isomorphic to the corresponding reduction of $T$. Step 7 therefore gives finite-torsion constructibility of every reduction and the common cohomological interval $[a,b+N]$. These three properties are precisely membership in $D^b_c(Y,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed], and prove all clauses of the item.",
    "uses": [
     "def-weil-integral-derived-reduction",
     "def-weil-derived-complete",
@@ -193,15 +216,15 @@
   "def-weil-derived-direct-image",
   "def-weil-compact-support-candidate",
   "lem-sf-compact-support-restriction-of-scalars",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
   "lem-weil-derived-limit-morphism",
   "lem-weil-derived-limit-levelwise-iso",
-  "lem-weil-proetale-direct-image-restriction-of-scalars",
   "lem-weil-derived-scalar-extension-restriction-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Definition 6.7.6 and Lemma 6.7.7, expanded using Lemma 6.1.13 and the existing integral direct-image theorem; local PDF unavailable, online source checked"
+  "place": "Definition 6.7.6 and Lemma 6.7.7, expanded from Lemma 6.1.13 using the stated ringed-site tensor formula (Stacks Tag 0E8I) and the existing integral direct-image theorem; the local PDF was read, and the explicit coefficient-tower and Roos-triangle arguments are supplied here."
  },
  "mathlib_searches": [
   {
@@ -301,10 +324,52 @@
    "results": "8 hits: Scheme.Modules.restrictFunctorComp, restrictFunctorAdjCounitIso, restrictFunctor, restrictFunctorComp_inv_app_app, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, restrictFunctorComp_hom_app_app, restrictAdjunction, restrictFunctorIsoPullback. Read Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:348,416,425,453,478 and Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:118,125 (the latter generates the reassoc declaration). These are underived Zariski structure-sheaf restriction comparisons and a free-module pullback identity, not the completed pro-etale compact-support assertion.",
    "date": "2026-10-16",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived compactly supported pushforward of a bounded constructible adic complex is derived complete with uniformly bounded constructible finite reductions",
+   "results": "Actual search returned 8 hits: IsAdicComplete, AdicCompletion, AdicCompletion.map_exact, CondensedMod.IsSolid, IsAdicComplete.toIsPrecomplete, localCohomology, localCohomology.diagram, AdicCompletion.of_apply. These are module completion, topological constructibility, ordinary Zariski pushforward or unrelated condensed/compact-support facts; none states constructible compact-support pushforward for adic pro-etale complexes.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|DerivedComplete|compactSupport.*[Cc]onstruct|[Cc]onstruct.*[Ll]owerShriek|homotopyLimit",
+   "results": "0 hits in the requested search.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactly supported derived direct image preserves bounded constructible integral adic complexes on the pro-etale site",
+   "results": "Actual search returned 8 hits: CondensedSet.LocallyConstant.functorFullyFaithful, HomologicalComplex.instIsSupportedOfIsStrictlySupported, AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj, LightProfinite.hasSheafify, HasCompactSupport.comp_isClosedEmbedding, HasCompactSupport.deriv, instPreservesFiniteLimitsLightProfiniteLightCondSetLightProfiniteToLightCondSet, Condensed.lanCondensedSet. These are module completion, topological constructibility, ordinary Zariski pushforward or unrelated condensed/compact-support facts; none states constructible compact-support pushforward for adic pro-etale complexes.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"constructible\"",
+   "results": "0 hits in the requested search.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a separated finite type morphism of schemes pushforward with proper support preserves constructible l-adic complexes",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, PrimeSpectrum.isConstructible_comap_image, Topology.IsConstructible.image_of_isClosedEmbedding, Topology.IsConstructible.image_of_isOpenEmbedding, PrimeSpectrum.isConstructible_range_comap. These are module completion, topological constructibility, ordinary Zariski pushforward or unrelated condensed/compact-support facts; none states constructible compact-support pushforward for adic pro-etale complexes.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isConstructible_image|def IsAdicComplete|theorem map_exact",
+   "results": "2 hits, read in source: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:165 Scheme.Hom.isConstructible_image concerns constructible subsets; Mathlib/RingTheory/AdicCompletion/Exactness.lean:184 AdicCompletion.map_exact concerns module completion. Neither states the item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -326,10 +391,10 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-sf-integral-compact-support-constructible",
   "worker": "stage1",
-  "summary": "Split without new nodes. Constructed integral extension by zero using the existing ringed recollement, proved its countable-product preservation from the open--closed sequence, checked K-flat reduction comparisons and their quotient maps, and applied the existing integral direct-image theorem to the proper factor. Compared the complete inverse systems and arbitrary Roos-triangle limits. Retained the statement and all maintainer fields. Mathlib searches ran through msearch.py; LeanSearch was unavailable. Local literature files are missing, so proof_origin remains agent despite checking the cited sources online. Second reading expands the proper-pushforward transition square and the reduction-unit compatibility under the final isomorphism; two existing comparison tools are cited explicitly.",
+  "summary": "Q34 retained and audited the existing statement and compactification proof. Separated the elementary K-flatness calculation from coefficient-tower compatibility and the explicit transition square from the arbitrary-limit comparison, giving ten complete steps and no new nodes. Read all cited node statements and the local Bhatt–Scholze PDF and Stacks sources; corrected the inherited false claim that literature files were unavailable. Retained every historical Mathlib search, and appended the actual current search results. All coefficient modules are over the completed sheaf; uniform support and arbitrary Roos limits are checked explicitly.",
   "blueprint": "Realizes the integral membership assertion in the statement of def-weil-integral-rational-qbar-compact-support, before its E and Qbar_l constructions; the unit has no numbered proof steps. The related later blueprint lemma lem-coef-integral-compact-support has a stronger Tor-amplitude and prescribed-reduction package under different coefficient conventions, so is neither a same_as match nor a citation; its statement depends on the ancestor and citing it would also make a cycle.",
   "tool_uses": [
    {
@@ -397,12 +462,12 @@
   "lem-weil-derived-scalar-extension-restriction-adjunction"
  ],
  "reviewed": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q38-b6578f712",
-  "group": "Q38",
+  "reviewer": "NT-cc-Q34-466109707",
+  "group": "Q34",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q38-b6578f712 (reviewer sub-agent of L); spot-checked: Read all required guidance, the complete item, report, unit/chapter route, all 35 cited node statements, and cited source locations. Verified hypotheses, coefficient categories, base-change morphisms, every proof step, edge cases, duplicate/cycle risks, and recorded searches. No new nodes or repairs are needed; review.md was written."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-466109707 (reviewer sub-agent of L); spot-checked: I read all ten steps of the split in full: no new nodes, statement unchanged and matching the main-20261015 ancestor (any field K0, ell invertible, completed coefficient sheaf, the tower transition through lem-sf-compact-support-restriction-of-scalars, every derived limit). Sources checked: Bhatt–Scholze 6.1.12/6.1.13, 6.7.2, 6.7.6/6.7.7 in the local PDF; Stacks 0E8I (sites-modules l.4051), 09AG/09AH/09BN/0GL0 labels in tags/tags; no SGA. I read the statements of all 45 cited nodes. Steps 1-6 prove that j_! takes D^b_c(X,O_E) into D^b_c(Xbar,O_E): j is quasi-compact because X is Noetherian; j_! preserves products by the open-closed sequence; JQ is K-flat by the 0E8I tensor formula; the reductions are j_!K_n, compatible with transitions and units; completeness follows from the Roos triangle under J; the strata become constructible in Xbar plus the zero stratum Z, with the same interval. Step 7 checks every hypothesis of lem-sf-integral-direct-image-constructible. Step 8 writes out the naturality square of C_n, matching both towers' transitions. Steps 9-10 use derived-limit-morphism and levelwise-iso and move completeness along the isomorphism. Small cases checked: X empty, j=id, n=1, A^1 over Fpbar. No duplicate: lem-coef-integral-compact-support and sk-lem-sf-open-ctf need finite-field/Tor hypotheses. No cycle; uses equal proof_deps. All 12 off-unit tool_uses accepted. Minor: step 3 identifies the direct-sum and ordinary extension-by-zero presheaves without saying so (a one-line special case of the cited definitions). The inherited definitions say 'ell != p' while the item and its ancestor say 'ell invertible in K0'; this predates the delivery and was not changed. No fixes; review.md written."
  },
  "lean": {
   "module": "Sheaf.Paper.SfIntegralCompactSupportConstructible",

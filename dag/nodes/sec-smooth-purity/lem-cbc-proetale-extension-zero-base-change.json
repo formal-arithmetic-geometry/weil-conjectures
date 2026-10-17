@@ -20,36 +20,66 @@
  ],
  "proof": [
   {
-   "text": "First work in the abelian categories of sheaves of modules over the finite constant ring $\\Lambda$, rather than taking ordinary direct images of derived objects. The pro-etale inverse-image construction [def-weil-proetale-inverse-image] provides the morphisms of topoi for $g$ and $g_U$. By [prop-weil-pbc-proetale-constant-ring-map], their coefficient structure maps are isomorphisms preserving constant sections; thus the module pullbacks are the $g^{-1}$ and $g_U^{-1}$ of the statement. Apply [lem-weil-pbc-ringed-topoi-module-adjunction] to these two morphisms with their constant coefficient sheaves to obtain $g^{-1}\\dashv g_*$ and $g_U^{-1}\\dashv g_{U*}$. For $j$ and $j'$, [lem-weil-proetale-weakly-etale-localization] identifies the small sites with $X_{\\mathrm{proet}}/U$ and $X'_{\\mathrm{proet}}/U'$ and identifies the restricted coefficient rings with $\\Lambda_U$ and $\\Lambda_{U'}$. Under these identifications $j^{-1}$ and $j'^{-1}$ are restriction. To verify that the scheme-induced inverse image is this restriction, let $W\\to U$ be a site object. It is also an $X$-site object by the localization theorem. In the inverse-image indexing category of [def-weil-proetale-inverse-image] at $W$, the object $(W,W\\to U\\times_XW)$ is initial: an object $(V,\\phi:W\\to U\\times_XV)$ determines the unique arrow $W\\to V$ over $X$ by projection, and the induced arrow to that object respects $\\phi$ since its two projections do. The opposite indexing category has this object terminal, so its presheaf colimit is $F(W\\to X)$. These values already form the restriction sheaf, so sheafification does not change them; the coefficient action is the restricted action under the constant-ring identification. For $j'$, an object $W'\\to U'$ gives $(W',W'\\to U'\\times_{X'}W')$ in its inverse-image indexing category. Each $(V',\\phi':W'\\to U'\\times_{X'}V')$ receives the unique arrow from it given by $\\operatorname{pr}_{V'}\\phi'$; equality of the two projections checks the required compatibility. The opposite-category colimit is therefore $F'(W'\\to X')$, a sheaf under restriction, with the restricted coefficient action. These identifications commute with restriction along $W'_1\\to W'_2$ because both send a section to its restriction along the composite map to the chosen $V'$; thus they identify functors, not just object values. Therefore [lem-cbc-proetale-extension-zero] gives $j_!\\dashv j^{-1}$ and $j'_!\\dashv j'^{-1}$. Every adjunction in the rest of the sheaf calculation is therefore a module adjunction with the same coefficient ring.",
+   "text": "Work first with sheaves of modules over the constant coefficient rings. The construction [def-weil-proetale-inverse-image] gives morphisms of topoi for $g$ and $g_U$. Their coefficient structure maps $c^g_\\Lambda,c^{g_U}_\\Lambda$ are isomorphisms preserving constant sections by [prop-weil-pbc-proetale-constant-ring-map]. Hence the tensor-formula module pullbacks identify with the inverse images denoted $g^{-1},g_U^{-1}$: after transporting scalars through $c$, the maps $r\\otimes m\\mapsto rm$ and $m\\mapsto1\\otimes m$ are inverse. Applying [lem-weil-pbc-ringed-topoi-module-adjunction] gives the module adjunctions $g^{-1}\\dashv g_*$ and $g_U^{-1}\\dashv g_{U*}$.",
    "uses": [
     "def-weil-proetale-inverse-image",
     "prop-weil-pbc-proetale-constant-ring-map",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-cbc-proetale-extension-zero"
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D7, lemma-adjoint-pullback-pushforward-modules; proetale.tex Tag 09A5, section-morphism, and Tag 09AE, definition-extension-zero; blueprint proof, first paragraph, at the sheaf level"
+    "place": "Tag 03D7, lemma-adjoint-pullback-pushforward-modules; proetale.tex Tag 09A5, section-morphism"
    }
   },
   {
-   "text": "The right-adjoint comparison can be computed on sections without any stalk-conservativity assertion. Write $\\iota_j(V\\to U)=(V\\to U\\to X)$ and $\\iota_{j'}(V'\\to U')=(V'\\to U'\\to X')$, using [lem-weil-proetale-weakly-etale-localization]. The chosen cartesian identification $U'\\cong U\\times_X X'$ in [def-cbc-open-immersion-square] gives, for each $V\\to U$, an isomorphism of weakly etale $X'$-objects\n$$a_V:V\\times_U U'\\xrightarrow{\\sim}V\\times_X X'.$$\nIt sends a pair $(v,u')$ to $(v,j'(u'))$. Conversely, a compatible pair $(v,x')$ determines the unique $u'$ with $g_U(u')$ equal to the image of $v$ in $U$ and $j'(u')=x'$, by the fibre-product universal property; this gives the inverse. The two composites fix both projections, hence are identities. These isomorphisms commute with the maps induced by arrows $V_1\\to V_2$ over $U$, since both resulting maps have the same projections. The functor on localized sites obtained by localizing $u_g$ at $U$ is consequently the base-change functor for $g_U$, under the displayed site identifications. The restricted ring structure map of this localized morphism agrees with that for $g_U$: under the restricted constant-ring identifications from step 1, its adjunct sends each constant section $\\lambda\\in\\Lambda$ to the constant section $\\lambda$ after base change, exactly as $\\rho^{g_U}_\\Lambda$ in [def-weil-proetale-inverse-image]. Maps out of the constant presheaf extend uniquely to its sheafification, so these ring maps agree. Hence this identification also identifies the module pushforwards and their scalar actions. Apply [lem-weil-pbc-localize-ringed-site-morphism] to $u_g$ with $V=U$ and $u_g(U)=X'\\times_XU\\cong U'$. It gives the canonical isomorphism\n$$t:j^{-1}g_*\\xrightarrow{\\sim}g_{U*}j'^{-1}.$$\nExplicitly, for a module sheaf $M$ on $X'_{\\mathrm{proet}}$, [def-weil-proetale-inverse-image] and restriction give\n$$(j^{-1}g_*M)(V)=M(V\\times_XX'),\\qquad(g_{U*}j'^{-1}M)(V)=M(V\\times_UU'),$$\nand $t_{M,V}=M(a_V)$, with inverse $M(a_V^{-1})$. This also proves naturality in $M$ and in $V$. Its linearity, including the restricted $\\Lambda_U(V)$-action, is part of the ringed localization theorem. In particular we use a canonical natural isomorphism, not strict equality of differently chosen fibre products or small skeleta.",
+   "text": "For either $e:W\\hookrightarrow Z$ equal to $j$ or $j'$, [lem-weil-proetale-weakly-etale-localization] identifies $W_{\\mathrm{proet}}$ with $Z_{\\mathrm{proet}}/W$ and identifies the restricted constant coefficient ring with $\\Lambda_W$. We check from [def-weil-proetale-inverse-image] that $e^{-1}$ is restriction. At a site object $T\\to W$, the inverse-image indexing category has the initial object $(T,T\\to W\\times_ZT)$. Indeed an object $(V,\\phi:T\\to W\\times_ZV)$ gives the unique $Z$-arrow $T\\to V$ by projection; its compatibility with $\\phi$ follows by comparing the two projections. The opposite indexing category therefore has this object terminal, so the presheaf colimit is $F(T\\to Z)$. These values are already a sheaf, by the site equivalence. For $T_1\\to T_2$ the colimit maps become the restrictions $F(T_2)\\to F(T_1)$, so this identifies functors. The coefficient identification preserves constant sections and therefore identifies the scalar actions too. This proves the assertion simultaneously for both open immersions.",
    "uses": [
     "lem-weil-proetale-weakly-etale-localization",
-    "def-cbc-open-immersion-square",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AE, definition-extension-zero, restriction on the localized site; the initial-object calculation in the blueprint proof, second paragraph"
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-proetale-extension-zero] to $j$ and $j'$, with the given finite commutative ring $\\Lambda$. In the restriction coordinates of step 2 this supplies $j_!\\dashv j^{-1}$ and $j'_!\\dashv j'^{-1}$ on module sheaves, and both extension-by-zero functors are exact and act degreewise on complexes. All four adjunctions now have the constant-coefficient module categories as their domains and codomains.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AE, definition-extension-zero (3); blueprint proof, first paragraph"
+   }
+  },
+  {
+   "text": "The cartesian datum of [def-cbc-open-immersion-square] gives, for every $V\\to U$, an isomorphism\n$$a_V:V\\times_UU'\\xrightarrow{\\sim}V\\times_XX'.$$\nIts projections send $(v,u')$ to $(v,j'(u'))$. Conversely a compatible pair $(v,x')$ determines the unique $u'$ whose images are the image of $v$ in $U$ and $x'$ in $X'$, by the given fibre-product universal property. The two composites fix both projections and so are identities. The same uniqueness shows these maps commute with each arrow $V_1\\to V_2$ over $U$. Thus the localization of the base-change functor for $g$ at $U$ identifies with the base-change functor for $g_U$, under the site identifications of step 2.",
+   "uses": [
+    "def-cbc-open-immersion-square"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-proetale-extension-zero-base-change.proof.md",
+    "place": "Second paragraph, identification of the two base-changed weakly etale objects"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-localize-ringed-site-morphism] to the continuous base-change functor $u_g$, with $V=U$ and $u_g(U)\\cong U'$. Its smallness, continuity and finite-limit hypotheses hold by [def-weil-proetale-inverse-image]; its ring map is the constant-coefficient map of step 1. The localized ring map agrees with that for $g_U$: their adjuncts both send $\\lambda\\in\\Lambda$ to the constant section $\\lambda$ after base change, and maps from the constant presheaf extend uniquely to its sheafification. In the module and site coordinates of steps 1, 2 and 4, the cited theorem therefore gives\n$$t:j^{-1}g_*\\xrightarrow{\\sim}g_{U*}j'^{-1}.$$\nMore explicitly, for a module sheaf $M$ on $X'_{\\mathrm{proet}}$,\n$$(j^{-1}g_*M)(V)=M(V\\times_XX'),\\qquad(g_{U*}j'^{-1}M)(V)=M(V\\times_UU'),$$\nand $t_{M,V}=M(a_V)$ with inverse $M(a_V^{-1})$. Naturality in $V$ follows from step 4, and naturality in $M$ from functoriality. Linearity for the restricted $\\Lambda_U(V)$-action is included in the ringed localization theorem. Thus this is the canonical natural isomorphism of right adjoints, without imposing strict equality on chosen fibre products or skeleta.",
+   "uses": [
     "lem-weil-pbc-localize-ringed-site-morphism",
     "def-weil-proetale-inverse-image"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 04J0, lemma-localize-morphism-ringed-sites, using sites.tex Tag 03CF, lemma-localize-morphism; blueprint proof, second paragraph, section calculation"
+    "place": "Tag 04J0, lemma-localize-morphism-ringed-sites; sites.tex Tag 03CF, lemma-localize-morphism"
    }
   },
   {
-   "text": "Set $L_1=g^{-1}j_!$, $R_1=j^{-1}g_*$, $L_2=j'_!g_U^{-1}$ and $R_2=g_{U*}j'^{-1}$. By [def-weil-pbc-composite-adjunction] and step 1 there are composite adjunctions $L_1\\dashv R_1$ and $L_2\\dashv R_2$. Their Hom bijections are, respectively,\n$$\\operatorname{Hom}(g^{-1}j_!F,M)\\cong\\operatorname{Hom}(j_!F,g_*M)\\cong\\operatorname{Hom}(F,j^{-1}g_*M),$$\n$$\\operatorname{Hom}(j'_!g_U^{-1}F,M)\\cong\\operatorname{Hom}(g_U^{-1}F,j'^{-1}M)\\cong\\operatorname{Hom}(F,g_{U*}j'^{-1}M).$$\nLet $\\delta=t^{-1}:R_2\\xrightarrow{\\sim}R_1$. Applying [lem-weil-pbc-conjugate-iso-unit-equation] gives a natural isomorphism $\\beta:L_1\\xrightarrow{\\sim}L_2$, characterized by\n$$R_1(\\beta_F)\\circ\\eta_{1,F}=\\delta_{L_2F}\\circ\\eta_{2,F}.$$\nHere the units are those of the displayed composite adjunctions. To specify the comparison, not merely the existence of some isomorphism, its component is explicitly\n$$\\beta_F=\\varepsilon_{1,L_2F}\\circ L_1(\\delta_{L_2F})\\circ L_1(\\eta_{2,F}).$$\nThe adjoint of this map is $\\delta_{L_2F}\\circ\\eta_{2,F}$, by the adjunction triangle identity. This is exactly the unit/counit construction of the open extension-by-zero base-change map in the direction of the statement, conjugating the sectionwise cartesian comparison $t^{-1}$. The reverse comparison is\n$$\\gamma_F=\\varepsilon_{2,L_1F}\\circ L_2(t_{L_1F})\\circ L_2(\\eta_{1,F}).$$\nThe cited conjugation theorem applied in the reverse direction, and its uniqueness under the unit equation, show $\\gamma=\\beta^{-1}$. Thus the canonical comparison, with this orientation, is invertible and natural in $F$.",
+   "text": "Set $L_1=g^{-1}j_!$, $R_1=j^{-1}g_*$, $L_2=j'_!g_U^{-1}$ and $R_2=g_{U*}j'^{-1}$. By [def-weil-pbc-composite-adjunction] and steps 1 and 3 there are composite adjunctions $L_1\\dashv R_1$ and $L_2\\dashv R_2$. Their Hom bijections are, respectively,\n$$\\operatorname{Hom}(g^{-1}j_!F,M)\\cong\\operatorname{Hom}(j_!F,g_*M)\\cong\\operatorname{Hom}(F,j^{-1}g_*M),$$\n$$\\operatorname{Hom}(j'_!g_U^{-1}F,M)\\cong\\operatorname{Hom}(g_U^{-1}F,j'^{-1}M)\\cong\\operatorname{Hom}(F,g_{U*}j'^{-1}M).$$\nLet $\\delta=t^{-1}:R_2\\xrightarrow{\\sim}R_1$. Applying [lem-weil-pbc-conjugate-iso-unit-equation] gives a natural isomorphism $\\beta:L_1\\xrightarrow{\\sim}L_2$, characterized by\n$$R_1(\\beta_F)\\circ\\eta_{1,F}=\\delta_{L_2F}\\circ\\eta_{2,F}.$$\nHere the units are those of the displayed composite adjunctions. To specify the comparison, not merely the existence of some isomorphism, its component is explicitly\n$$\\beta_F=\\varepsilon_{1,L_2F}\\circ L_1(\\delta_{L_2F})\\circ L_1(\\eta_{2,F}).$$\nThe adjoint of this map is $\\delta_{L_2F}\\circ\\eta_{2,F}$, by the adjunction triangle identity. This is exactly the unit/counit construction of the open extension-by-zero base-change map in the direction of the statement, conjugating the sectionwise cartesian comparison $t^{-1}$. The reverse comparison is\n$$\\gamma_F=\\varepsilon_{2,L_1F}\\circ L_2(t_{L_1F})\\circ L_2(\\eta_{1,F}).$$\nThe cited conjugation theorem applied in the reverse direction, and its uniqueness under the unit equation, show $\\gamma=\\beta^{-1}$. Thus the canonical comparison, with this orientation, is invertible and natural in $F$.",
    "uses": [
     "def-weil-pbc-composite-adjunction",
     "lem-weil-pbc-conjugate-iso-unit-equation"
@@ -57,20 +87,20 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/categories.tex",
-    "place": "Tags 0DV0, lemma-compose-counits, and 0B65, lemma-transformation-between-functors-and-adjoints; blueprint proof, first-paragraph adjunctions and final Yoneda sentence"
+    "place": "Tags 0DV0, lemma-compose-counits, and 0B65, lemma-transformation-between-functors-and-adjoints; blueprint proof, first-paragraph adjunctions and final Yoneda sentence; current blueprint proof first paragraph and concluding sentence"
    }
   },
   {
-   "text": "For a cochain complex $K$, take in degree $n$ the sheaf isomorphism $\\beta_{K^n}$ constructed in step 3. Naturality with respect to $d^n:K^n\\to K^{n+1}$ says\n$$L_2(d^n)\\circ\\beta_{K^n}=\\beta_{K^{n+1}}\\circ L_1(d^n).$$\nConsequently these components form a chain map $L_1K\\to L_2K$. Naturality of $\\gamma$ gives $L_1(d^n)\\circ\\gamma_{K^n}=\\gamma_{K^{n+1}}\\circ L_2(d^n)$, so its components form the reverse chain map. The two composites in degree $n$ are $\\gamma_{K^n}\\circ\\beta_{K^n}=\\mathrm{id}_{L_1K^n}$ and $\\beta_{K^n}\\circ\\gamma_{K^n}=\\mathrm{id}_{L_2K^n}$. Naturality for a map of complexes holds in each degree by step 3. This proves the asserted natural isomorphism on complexes, without any boundedness or constructibility assumption.",
+   "text": "For a cochain complex $K$, take in degree $n$ the sheaf isomorphism $\\beta_{K^n}$ constructed in step 6. Naturality with respect to $d^n:K^n\\to K^{n+1}$ says\n$$L_2(d^n)\\circ\\beta_{K^n}=\\beta_{K^{n+1}}\\circ L_1(d^n).$$\nConsequently these components form a chain map $L_1K\\to L_2K$. Naturality of $\\gamma$ gives $L_1(d^n)\\circ\\gamma_{K^n}=\\gamma_{K^{n+1}}\\circ L_2(d^n)$, so its components form the reverse chain map. The two composites in degree $n$ are $\\gamma_{K^n}\\circ\\beta_{K^n}=\\mathrm{id}_{L_1K^n}$ and $\\beta_{K^n}\\circ\\gamma_{K^n}=\\mathrm{id}_{L_2K^n}$. Naturality for a map of complexes holds in each degree by step 6. This proves the asserted natural isomorphism on complexes, without any boundedness or constructibility assumption.",
    "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-proetale-extension-zero-base-change.md",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-proetale-extension-zero-base-change.proof.md",
     "place": "Proof, concluding assertion for complexes; the degreewise chain-map verification is written out here"
    }
   },
   {
-   "text": "If $K$ is read as an object of the ordinary unbounded derived category, the same comparison applies. The functors $g^{-1}$ and $g_U^{-1}$ on the finite constant-coefficient module sheaves are exact by [prop-weil-pbc-proetale-constant-exact]; the functors $j_!$ and $j'_!$ are exact and act degreewise by [lem-cbc-proetale-extension-zero]. By [lem-weil-pbc-exact-functor-derived-factorization] each of these termwise functors preserves quasi-isomorphisms and induces its exact derived functor, represented by its termwise value on every complex. Apply [lem-weil-pbc-localization-universal-property], clause (2), to the natural chain isomorphisms $\\beta$ and $\\gamma$ of step 4, composed with the target localization. They descend to inverse natural transformations because their compositions and the identity transformations descend compatibly. This is the same canonical comparison on the derived category, and it is an isomorphism there as well. No ordinary $g_*$ is being substituted for $Rg_*$ in a derived Hom calculation: the right-adjoint argument was completed on sheaves before taking complexes and localizing.",
+   "text": "If $K$ is read as an object of the ordinary unbounded derived category, the same comparison applies. The functors $g^{-1}$ and $g_U^{-1}$ on the finite constant-coefficient module sheaves are exact by [prop-weil-pbc-proetale-constant-exact]; the functors $j_!$ and $j'_!$ are exact and act degreewise by [lem-cbc-proetale-extension-zero]. By [lem-weil-pbc-exact-functor-derived-factorization] each of these termwise functors preserves quasi-isomorphisms and induces its exact derived functor, represented by its termwise value on every complex. Apply [lem-weil-pbc-localization-universal-property], clause (2), to the natural chain isomorphisms $\\beta$ and $\\gamma$ of step 7, composed with the target localization. They descend to inverse natural transformations because their compositions and the identity transformations descend compatibly. This is the same canonical comparison on the derived category, and it is an isomorphism there as well. No ordinary $g_*$ is being substituted for $Rg_*$ in a derived Hom calculation: the right-adjoint argument was completed on sheaves before taking complexes and localizing.",
    "uses": [
     "prop-weil-pbc-proetale-constant-exact",
     "lem-cbc-proetale-extension-zero",
@@ -100,8 +130,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-proetale-extension-zero-base-change.md",
-  "place": "Proof, both paragraphs: retain the right-adjoint route, supply module typing, ringed localization, conjugate unit formula and degreewise/derived passage; Stacks inputs are identified in the steps."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-proetale-extension-zero-base-change.proof.md",
+  "place": "Both paragraphs: the same right-adjoint comparison route, with explicit constant-ring typing, localized-site comparison, conjugate unit equation, chain-map verification and unbounded derived descent. Stacks inputs are cited in each step."
  },
  "mathlib_searches": [
   {
@@ -180,10 +210,45 @@
    "results": "8 hits: SheafOfModules.pullbackIso, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackComp, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullback, PresheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
    "date": "2026-10-16",
    "verdict": "no match: inspected Sheaf/PullbackContinuous.lean, especially pullbackPushforwardAdjunction and pullbackComp; these give module pullback and composition, not the open slice extension-by-zero comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|lowerShriek|shriek",
+   "results": "0 hits: ; Mathlib subdirectory CategoryTheory/Sites",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern structure-sheaf modules, ordinary open restrictions, covering stability, or composition and adjunction of generic module pullbacks; none states open extension-by-zero base change on pro-etale module sheaves or complexes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of sheaves commutes with extension by zero in a cartesian open immersion square",
+   "results": "8 hits: AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackToBaseIsOpenImmersion, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.isPullback_of_isClosedImmersion, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullbackConeOfLeft, CategoryTheory.IsPullback.zero_left, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.sheafedSpace_hasPullback_of_right, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.hasPullback_of_right, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackFstOfRight",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern structure-sheaf modules, ordinary open restrictions, covering stability, or composition and adjunction of generic module pullbacks; none states open extension-by-zero base change on pro-etale module sheaves or complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheaf\", \"baseChange\"",
+   "results": "2 hits: CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange_of_small, CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern structure-sheaf modules, ordinary open restrictions, covering stability, or composition and adjunction of generic module pullbacks; none states open extension-by-zero base change on pro-etale module sheaves or complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image commutes with extension by zero on sheaves of modules for a cartesian square of open immersions of schemes on the pro-etale site",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_apply, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern structure-sheaf modules, ordinary open restrictions, covering stability, or composition and adjunction of generic module pullbacks; none states open extension-by-zero base change on pro-etale module sheaves or complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of sites and its localization at an object, pullback commutes with the left adjoint to restriction on module sheaves",
+   "results": "8 hits: SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackIso, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern structure-sheaf modules, ordinary open restrictions, covering stability, or composition and adjunction of generic module pullbacks; none states open extension-by-zero base change on pro-etale module sheaves or complexes"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -209,11 +274,11 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-cbc-proetale-extension-zero-base-change",
   "worker": "stage1",
-  "summary": "Checked the exact blueprint against Stacks Tags 09A5, 09AE, 03D7, 04J0, 0B65, 0DV0 and 015F and the statements of all cited DAG nodes. Replaced the etale inverse-image citation by the pro-etale construction, worked first on module sheaves, computed the right-adjoint comparison canonically rather than as strict equality, specified the conjugate unit/counit map and its inverse, and wrote out the chain and derived descent. Added only missing notion citations to the unchanged mathematical statement. No new nodes were necessary.",
-  "blueprint": "Steps 1 and 3 realize the first proof paragraph (the two composite adjunctions). Step 2 realizes the second paragraph through the section calculation, retaining the Cartesian right-adjoint route. Step 3 realizes its Yoneda/canonical-map conclusion with the conjugate unit equation. Steps 4 and 5 justify the original assertion for complexes and its ordinary derived interpretation. The unit sk-prop-sf-cbc has no listed proof steps, and this item is not its key statement.",
+  "summary": "Q50 rechecked the inherited split against the current main-20261015 blueprint and Stacks sources. Retained its statement, citations, searches and canonical-map proof; separated coefficient adjunctions, the elementary open-restriction calculation, extension adjunctions, the elementary cartesian identification and the ringed localization comparison. All eight steps have explicit hypotheses and all non-elementary inputs are existing nodes. No new nodes or Lean attachments.",
+  "blueprint": "Steps 1-3 and 6 realize the first paragraph (the two composite adjunctions). Steps 2, 4 and 5 realize the second paragraph through its section calculation. Step 6 realizes its Yoneda and canonical-map conclusion, with the explicit unit/counit formulas retained. Steps 7-8 justify the complex statement and its ordinary derived interpretation. The current blueprint has identical item text and route; its unit has no enumerated proof steps and this item is not the unit key statement.",
   "tool_uses": [
    {
     "node": "lem-weil-proetale-weakly-etale-localization",
@@ -245,12 +310,12 @@
   "prop-weil-pbc-proetale-constant-exact"
  ],
  "reviewed": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-N6-a93ce76e4",
-  "group": "N6",
+  "reviewer": "NT-cc-Q50-6c0f34837",
+  "group": "Q50",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N6-a93ce76e4 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, blueprint route, and source passages. All five steps preserve hypotheses, coefficient typing, canonical-map orientation, and unbounded derived descent. No new nodes, duplicates, cycles, or repairs found. Accepted all five proposed tool_uses; concrete checks are recorded in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-6c0f34837 (reviewer sub-agent of L); spot-checked: I read the whole item, all 8 steps, every cited statement, the master and main-20261015 blueprint statement and proof (they are identical), unit sk-prop-sf-cbc, the chapter record, and Stacks 04J0 (sites-modules l.2369) and 09AE (proetale.tex). Against the base node, only split-owned fields changed: proof, proof_origin, mathlib_searches, split_report and status (unsplit to split). The statement and stmt_deps are byte-identical. There are no new nodes and no unit write. The base was unsplit in both the side tree and the live tree, so re-splitting it is legitimate. Statement and coefficient category: the target is Sh(Y_proet,Lambda) modules for finite commutative Lambda, with the pro-etale def-weil-proetale-inverse-image (the blueprint's uses list points at the etale def-weil-pbc-inverse-image; the DAG's choice is the correct pro-etale one). The map runs g^{-1}j_! -> j'_!g_U^{-1} and nothing is weakened. Step 2: I checked the initial object (T,(s,id)) of I_T by hand; it gives restriction for j and j'. Step 4: a_V comes from the chosen cartesian iso by elementary fibre-product reasoning. Step 5: 04J0 gives j_V^*f_* = f'_*j_U^* with identity sections, so t_{M,V}=M(a_V) in the correct direction. Step 6: I type-checked beta=eps_1 L_1(delta) L_1(eta_2). Its adjunct is the composite unit followed by t^{-1}, i.e. the textbook canonical base-change map, and I verified gamma=beta^{-1} through the uniqueness clause. Steps 7-8: degreewise chain isomorphisms descend through 015F and the localization universal property; prop-weil-pbc-proetale-constant-exact covers an arbitrary g. Accepted all 5 declared tool_uses: lem-weil-proetale-weakly-etale-localization, prop-weil-pbc-proetale-constant-ring-map, lem-weil-pbc-ringed-topoi-module-adjunction, lem-weil-pbc-localize-ringed-site-morphism and prop-weil-pbc-proetale-constant-exact. Each is a generic black box, and the unit cites only sk-def-av-jacobian. No SGA is cited. Duplicate check: the etale nodes lem-cbc-extension-zero-base-change, sbc-prop-extension-by-zero-and-arbitrary-base-change and cor-cbc-derived-extension-zero-base-change; the condensed D_cons node thm-sfb-dc-open-base-change-iso (reverse orientation); and the non-blueprint lem-sfb-abelian-open-extension-base-change (2026-10-17, abelian-valued, reverse orientation). None states the same thing in the same coefficient category, so same_as=[] stands. Edge cases checked: U empty, j=id, g=id, X' empty, Lambda=0, unbounded complexes. No fixes written."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.FiniteOpenBaseChangeNormalized",

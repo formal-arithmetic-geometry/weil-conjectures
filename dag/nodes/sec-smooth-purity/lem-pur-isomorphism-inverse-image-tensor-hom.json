@@ -87,16 +87,15 @@
    }
   },
   {
-   "text": "The associativity comparison commutes: starting with $T((s\\otimes t)\\otimes h)$, each path ends at $Ts\\otimes(Tt\\otimes Th)$. The symmetry comparison commutes because both paths send $T(s\\otimes t)$ to $Tt\\otimes Ts$. The left unit comparison commutes because both paths send $T(a\\otimes s)$ to $Ta\\,Ts=T(as)$. The right unit comparison commutes because both paths send $T(s\\otimes a)$ to $Ta\\,Ts=T(as)$. Equality on these tensors implies equality of the sheaf maps by the iterated uniqueness criterion in step 3. Here the standard associator, symmetry and unit maps are defined by the formulas $(s\\otimes t)\\otimes h\\mapsto s\\otimes(t\\otimes h)$, $s\\otimes t\\mapsto t\\otimes s$, $a\\otimes s\\mapsto as$, and $s\\otimes a\\mapsto as$. For the associator, locally represent an inner section $w$ as $\\sum_i s_i\\otimes t_i$ using step 3 and send $w\\otimes h$ to $\\sum_i s_i\\otimes(t_i\\otimes h)$. The algebraic tensor relations show that this is independent of a presheaf tensor representation; if two representations have equal images in the inner sheaf tensor, step 3 makes them equal as presheaf tensors on a further covering, so their proposed images agree there. Separation makes the images agree on overlaps and the sheaf axiom glues them. The resulting map is bilinear, hence extends from the outer presheaf tensor by the sheafification universal property. To construct the inverse, locally represent a section $v$ of $\\mathcal G\\otimes\\mathcal H$ by $\\sum_j t_j\\otimes h_j$ and send $s\\otimes v$ to $\\sum_j(s\\otimes t_j)\\otimes h_j$. Tensor relations make this independent of the presheaf representation; local injectivity from step 3 makes two lifts agree after refinement, so separation and gluing give a well-defined bilinear map on sheaves. The sheafification universal property extends it over the outer tensor. The two composites fix $(s\\otimes t)\\otimes h$ and $s\\otimes(t\\otimes h)$, respectively, so step 3 proves that they are identities. The flip is its own inverse; the left and right unit inverses are respectively $s\\mapsto1\\otimes s$ and $s\\mapsto s\\otimes1$. Their formulas respect the tensor relations and restrictions, and so extend by sheafification. This constructs the maps used in the verification above from step 3 and the definitions. For powers use the recursion of [def-pur-sheaf-tensor-product]: the $m=1$ comparison is the identity; the $(m+1)$ comparison is $\\sigma_{\\mathcal F^{\\otimes m},\\mathcal F}$ followed by the tensor product of the $m$ comparison and the identity. Induction gives an isomorphism for every $m\\geq1$, and the associativity verification ensures compatibility with rebracketing.",
+   "text": "Use [lem-pc-sheaf-modules-tensor-closed] for the associativity, symmetry and unit isomorphisms of the sheaf tensor product over both $\\mathcal O$ and $R$. Its statement specifies that these are induced by the section-module maps, hence their formulas are $(s\\otimes t)\\otimes h\\mapsto s\\otimes(t\\otimes h)$, $s\\otimes t\\mapsto t\\otimes s$, $a\\otimes s\\mapsto as$, and $s\\otimes a\\mapsto as$. Check the comparison diagrams using the pure-tensor formula of step 3. In the associativity diagram both paths send $T((s\\otimes t)\\otimes h)$ to $Ts\\otimes(Tt\\otimes Th)$. In the symmetry diagram both paths send $T(s\\otimes t)$ to $Tt\\otimes Ts$. The left and right unit diagrams both give $Ta\\,Ts=T(as)$ from $T(a\\otimes s)$ and $T(s\\otimes a)$ respectively. By the iterated local generation criterion proved in step 3 these equalities imply equality of the sheaf morphisms. For tensor powers use the recursion of [def-pur-sheaf-tensor-product]: at $m=1$ take the identity; at $m+1$ follow $\\sigma_{\\mathcal F^{\\otimes m},\\mathcal F}$ by the tensor product of the $m$ comparison and the identity. Induction gives an isomorphism for every $m\\geq1$, with compatibility under rebracketing supplied by the associativity diagram just checked.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-site-sheafification-iso-locally-bijective"
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pur-sheaf-tensor-product"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK (section-tensor-product), algebraic tensor formulas followed by sheafification"
+    "place": "Tag 03EK (section-tensor-product), associativity of the sheaf tensor; Tag 03EO (lemma-internal-hom-adjoint-tensor), via the existing symmetric-monoidal-closed statement; explicit pure-tensor verification of the comparison diagrams"
    }
   },
   {
@@ -130,12 +129,13 @@
   "lem-weil-pbc-site-sheafification-iso-locally-bijective",
   "def-pur-localized-ringed-site",
   "def-pur-sheaf-hom",
+  "lem-pc-sheaf-modules-tensor-closed",
   "def-pur-sheaf-inverse-limit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03EK, 03CY, 04TT, 04IX and 03DB; explicit reindexing proof for the site equivalence of lem-weil-proetale-isomorphism-inverse-image. Tag 03EL supplies the general tensor comparison; Tag 0GMX supplies the Hom comparison formula. Tag 0GN2 is not applied. For local generation in nested tensors use the existing Mathlib leaf lem-weil-pbc-site-sheafification-iso-locally-bijective."
+  "place": "Tags 03EK, 03CY, 04TT, 04IX and 03DB; explicit reindexing argument for the site equivalence of lem-weil-proetale-isomorphism-inverse-image. Tag 03EL supplies the general tensor comparison and Tag 0GMX the Hom comparison formula; 0GN2 is not applied. Local generation uses lem-weil-pbc-site-sheafification-iso-locally-bijective. The existing lem-pc-sheaf-modules-tensor-closed supplies the associativity, symmetry and unit isomorphisms; their compatibility with reindexing is checked explicitly."
  },
  "mathlib_searches": [
   {
@@ -249,10 +249,52 @@
    "results": "8 returned hits; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackComp; SheafOfModules.pullbackObjFreeIso; SheafOfModules.pushforwardCongr; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pullbackIso; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.freeFunctorCompPullbackIso",
    "date": "2026-10-16",
    "verdict": "no match for the complete item: the semantic hits give pullback composition, free modules or a sheafification presentation; source grep finds only IsClosedUnderIsomorphisms declarations, not a varying-ring tensor/internal-Hom comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Tt]ensor|[Tt]ensor.*pullback|pullback.*homObj|homObj.*pullback|sheafCongr",
+   "results": "0 hits;  [Mathlib/Algebra/Category/ModuleCat/Sheaf]",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire varying-ring tensor/Hom/coherence/inverse-limit statement; returned sheaf equivalence, monoidal sheafification, pullback construction or fixed-ring infrastructure does not state all clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reindexing module sheaves along an equivalence of sites preserves tensor products and internal Hom",
+   "results": "8 hits; CategoryTheory.Equivalence.sheafCongr; PiTensorProduct.reindex_tprod; PiTensorProduct.reindex; CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf; CategoryTheory.Limits.Pi.reindex; CategoryTheory.Equivalence.sheafCongr.functor_obj_val_obj; SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.Equivalence.sheafCongr_functor",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire varying-ring tensor/Hom/coherence/inverse-limit statement; returned sheaf equivalence, monoidal sheafification, pullback construction or fixed-ring infrastructure does not state all clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\"",
+   "results": "12 hits; PresheafOfModules.pullbackId; PresheafOfModules.pullbackObjIsDefined; PresheafOfModules.pullback; PresheafOfModules.pullbackObjIsDefined_eq_top; PresheafOfModules.pullbackObjIsDefined_free_yoneda; PresheafOfModules.pullbackPushforwardAdjunction; PresheafOfModules.pullbackComp; PresheafOfModules.pullback_comp_id",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire varying-ring tensor/Hom/coherence/inverse-limit statement; returned sheaf equivalence, monoidal sheafification, pullback construction or fixed-ring infrastructure does not state all clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image along a scheme isomorphism commutes with tensor product and internal Hom of sheaves of modules over an arbitrary ring sheaf and preserves inverse limits",
+   "results": "8 hits; SheafOfModules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.inv_app; SheafOfModules.pullbackIso; SheafOfModules.pullbackObjFreeIso_hom_naturality; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire varying-ring tensor/Hom/coherence/inverse-limit statement; returned sheaf equivalence, monoidal sheafification, pullback construction or fixed-ring infrastructure does not state all clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafCongr|preserves.*[Ll]imit|pullbackIso",
+   "results": "25 hits; Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean; Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean; Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean; Mathlib/CategoryTheory/Sites/CoproductSheafCondition.lean; Mathlib/CategoryTheory/Sites/CoproductSheafCondition.lean; Mathlib/CategoryTheory/Sites/CoproductSheafCondition.lean; Mathlib/CategoryTheory/Sites/CoproductSheafCondition.lean; Mathlib/CategoryTheory/Sites/CoproductSheafCondition.lean [Mathlib/CategoryTheory/Sites]",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire varying-ring tensor/Hom/coherence/inverse-limit statement; returned sheaf equivalence, monoidal sheafification, pullback construction or fixed-ring infrastructure does not state all clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of ringed sites induces a symmetric monoidal equivalence on sheaves of modules preserving internal Hom and all limits",
+   "results": "8 hits; SheafOfModules.pushforwardCongr; CategoryTheory.Equivalence.sheafCongr; CategoryTheory.Equivalence.sheafCongr.functor; CategoryTheory.Equivalence.sheafCongr.inverse; CategoryTheory.Sheaf.monoidalCategory; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; CategoryTheory.Equivalence.transportIsoSheafToPresheaf; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire varying-ring tensor/Hom/coherence/inverse-limit statement; returned sheaf equivalence, monoidal sheafification, pullback construction or fixed-ring infrastructure does not state all clauses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -274,28 +316,33 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-purity-conv",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-pur-isomorphism-inverse-image-tensor-hom",
   "worker": "stage1",
-  "summary": "Kept the statement unchanged. Reused the existing pro-etale site-equivalence lemma and gave explicit reindexing, sheafification, slice-Hom, pure-tensor coherence, scalar-extension and sectionwise-limit arguments. No finite-presentation or constant-ring restriction is introduced; 0GN2 is not used. Searches found partial categorical infrastructure but no Mathlib or project declaration covering all clauses. No new nodes are needed.",
+  "summary": "Retained the existing eight-step reindexing proof and the entire statement, including arbitrary commutative ring sheaves, unrestricted internal Hom, scalar extension and canonical inverse-limit comparison. Replaced the 2631-character inline construction of tensor associators and unitors by a citation of the existing general symmetric-monoidal-closed lemma and explicit diagram calculations. Checked all nine dependency statements, sources, edge cases, existing Lean and new Mathlib searches. No new nodes are needed.",
   "blueprint": "Realizes the tensor, sheaf-Hom and inverse-limit identifications needed to give the Tate-twist construction its Frobenius Weil isomorphism in def-weil-frobenius-coefficient-twists; in the expanded ancestor, clauses 2 (Tate line and scalar extension) and 3 (positive and negative twists).",
   "tool_uses": [
    {
     "node": "lem-weil-proetale-isomorphism-inverse-image",
     "why": "Uses part 1, the pro-etale site equivalence and section formula for an isomorphism of schemes; this generic site tool is not supplied by another statement of sk-def-purity-conv, and does not replace the unit route."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Uses only the generic symmetric monoidal structure on module sheaves over an arbitrary commutative ring sheaf, including its sectionwise associator and unit formulas. The purity-conventions unit does not supply this generic tensor tool, and the Tate-twist route is retained."
    }
   ]
  },
  "tool_uses": [
-  "lem-weil-proetale-isomorphism-inverse-image"
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-pc-sheaf-modules-tensor-closed"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NX-889cd89be",
-  "group": "NX",
+  "reviewer": "NT-cc-Q37-27fc67f76",
+  "group": "Q37",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-889cd89be (reviewer sub-agent of L); spot-checked: Read the full mathematics and sources; all eight steps pass, with no new nodes or target weakening. Accepted the declared site-equivalence tool use. Verified canonical Hom, tensor and limit maps; 0GN2 is not applied. Recorded inherited source-metadata issues in review.md; no split-owned fixes required."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-27fc67f76 (reviewer sub-agent of L); spot-checked: The statement is unchanged (compared with the side base copy, which was reopened as unsplit) and there are no new nodes. The only content change is step 6. Its 2631-char inline construction of the associator and unitors is replaced by a citation of lem-pc-sheaf-modules-tensor-closed, whose statement covers any site and any commutative ring sheaf and gives the structure maps as induced by the O(U)-module maps. The item still proves sigma's compatibility on pure tensors: assoc gives Ts⊗(Tt⊗Th), symmetry gives Tt⊗Ts, the units give Ta·Ts=T(as). Step 3's iterated local-generation criterion turns these into equalities of morphisms; that criterion is valid via lem-weil-pbc-site-sheafification-iso-locally-bijective applied to P→P^#. The tensor-power induction has base m=1 and a recursive step. The tool closure has 10 nodes and does not reach the item, so there is no cycle. I accept both declared tool uses (lem-weil-proetale-isomorphism-inverse-image and lem-pc-sheaf-modules-tensor-closed) as generic black boxes; the unit route is sk-def-purity-conv→sk-def-sf-operations only, and neither tool replaces a route step. I read all eight steps against the cited statements. Step 1 uses only part 1 of the site lemma. Step 2 uses sheafification uniqueness. Step 4 uses the slice equivalence and the 04IX/04TT definitions (I read Stacks 0GMX at sites-modules.tex:3787); 0GN2 is not used and no finiteness is needed. Step 7 uses commutativity only for the extra O'-linearity and assumes no flatness. Step 8 matches the sectionwise limit definition with the projections. Tag labels for 03EK/03EL/03CY/04IX/04TT/0GMX/0GN2/03DB/03CO/09A5/00WK match the tag table; the 00WM label slip is on another node, as the report says. Small cases pass: g=id, empty scheme, zero ring, infinitely generated modules, non-surjective inverse systems, m=1. The duplicate candidates (lem-weil-pbc-module-pullback-tensor, lem-weil-pbc-ringed-topoi-module-pullback-tensor, lem-kun-inverse-image-monoidal) do not state the combined claim. All steps are now under 2000 chars; the longest is 1840. No fixes were written."
  },
  "reviewed_lean": {
   "date": "2026-10-16",

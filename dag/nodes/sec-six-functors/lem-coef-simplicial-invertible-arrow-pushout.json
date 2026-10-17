@@ -11,9 +11,135 @@
   "lem-coef-simplicial-interval-lifting",
   "lem-coef-simplicial-interval-cell-stability"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work first with the fixed object set $O=\\{0,1\\}$. The walking arrow $A$ is cofibrant there: adjoin its single degree-zero arrow to the identity-only category, a free boundary cell. Factor $A\\to\\mathbb J$ as $j_0:A\\to E_0$ a fixed-object cofibration and $q_0:E_0\\to\\mathbb J$ a fixed-object trivial fibration, using [lem-coef-sorted-simplicial-algebra-model]. Thus $E_0$ is cofibrant and all four mapping sets are weakly contractible. These are also a Bergner cofibration and trivial fibration. Indeed the square against a free boundary generator $U(\\partial\\Delta^n)\\to U(\\Delta^n)$ is exactly a boundary lifting square on the selected mapping set; the empty-to-singleton generator tests object-surjectivity. Hence $q_0$ is $I$-injective. Conversely a Bergner trivial fibration has mappingwise trivial fibrations by these squares. A fixed-object cofibration lifts against it after replacing its source and target by the two labelled mapping categories selected by the square. This proves the claimed Bergner cofibration assertion for $j_0$, including squares whose two labelled objects have the same image.",
+   "uses": [
+    "lem-coef-sorted-simplicial-algebra-model",
+    "lem-coef-simplicial-interval-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Sections 7.2 and 7.6; fixed-object factorization and the elementary generating-square correspondence"
+   }
+  },
+  {
+   "text": "The square with top $j_0:A\\to E_0$, bottom $q:E\\to\\mathbb J$, left $j$ and right $q_0$ has a lift $t:E\\to E_0$ with $tj=j_0$ and $q_0t=q$. Two-out-of-three makes $t$ a Dwyer--Kan equivalence. Both $E$ and $E_0$ are cofibrant objects of the undercategory $A/\\mathrm{sCat}$, whose model classes are those on the underlying arrows. Cobase change $F=C\\amalg_A(-):A/\\mathrm{sCat}\\to C/\\mathrm{sCat}$ preserves cofibrations and trivial cofibrations by lifting-class pushout closure [lem-coef-lifting-class-closure]. Apply [lem-coef-brown-split-factorizations] to $t$: write $t=pi$ with $p$ a trivial fibration and a cofibration section $s$ satisfying $ps=1$. Since $p$ and $t$ are weak equivalences, both $i$ and $s$ are trivial cofibrations. Thus $F(i)$ and $F(s)$ are weak equivalences; $F(p)F(s)=1$ makes $F(p)$ a weak equivalence by two-out-of-three. Consequently $F(t):C\\amalg_A E\\to C\\amalg_A E_0$ is a weak equivalence, commuting with the two maps from $C$. It suffices to prove the result for $E_0$.",
+   "uses": [
+    "lem-coef-simplicial-interval-cell-stability",
+    "lem-coef-brown-split-factorizations",
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Remark A.3.2.14: independence of cofibrant inverse-adjunction choice; explicit undercategory split-factorization argument"
+   }
+  },
+  {
+   "text": "Form the two-labelled category $D$ with $D(i,k)=C(f(i),f(k))$, even when $f(0)=f(1)$, and use the vertex $f(a)$ in $D(0,1)$. Its class is invertible by assumption. [lem-coef-countable-equivalence-witness] gives $A\\to H\\to D$ preserving the specified vertex, with all four mapping sets of $H$ weakly contractible. In the fixed-object model factor $A\\to H$ as a cofibration $A\\to K$ followed by a trivial fibration $K\\to H$ [lem-coef-sorted-simplicial-algebra-model]. Then $K$ is cofibrant, all four of its mapping sets are weakly contractible, and the composite $K\\to H\\to D\\to C$ extends the original $f$ exactly. Neither the witness nor this factorization requires Kan mapping sets.",
+   "uses": [
+    "lem-coef-countable-equivalence-witness",
+    "lem-coef-sorted-simplicial-algebra-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/math/0406507",
+    "place": "Bergner Lemma 2.4 and Section 4; relative fixed-object factorization"
+   }
+  },
+  {
+   "text": "Put $P=K\\amalg_A E_0$ in the fixed-object category. Its map from $K$ is a cofibration, so $P$ is cofibrant. Both $\\pi_0K$ and $\\pi_0E_0$ are the two-object groupoid $\\mathbb J$, since their four mapping sets are nonempty and weakly contractible. The functor $\\pi_0$ is left adjoint to discrete enrichment: a simplicial functor into a discrete category is precisely a functor out of the path-component category. It therefore preserves this pushout. Thus $\\pi_0P=\\mathbb J\\amalg_{[1]}\\mathbb J\\cong\\mathbb J$: the common distinguished arrow has a unique inverse, forcing the two inverse arrows to agree. In particular both $K$ and $P$ satisfy the groupoid hypothesis of the nerve-detection lemma.",
+   "uses": [
+    "lem-coef-sorted-simplicial-algebra-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Sections 7.2 and 10.1; explicit path-component pushout calculation"
+   }
+  },
+  {
+   "text": "Use the diagonal classifying nerve $N$ defined in [lem-coef-cofibrant-localization-diagonal-nerve]. Since degreewise groupoid completion of the walking arrow is $\\mathbb J$, the ordinary pushout $L=K\\amalg_A\\mathbb J$ is precisely $K[A^{-1}]$. The map $A\\to K$ is a cofibration between cofibrant objects in the fixed-object model. Apply [lem-coef-cofibrant-localization-diagonal-nerve] with $V=A$ and $B=K$ to obtain a weak homotopy equivalence $NK\\to NL$. This assertion concerns diagonal nerves, not enriched mapping sets, and requires no invertibility hypothesis.",
+   "uses": [
+    "lem-coef-cofibrant-localization-diagonal-nerve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 10.2, printed p.281; specialization to the walking-arrow subcategory"
+   }
+  },
+  {
+   "text": "The comparison $r:P\\to L$ is the pushout of $q_0:E_0\\to\\mathbb J$ along $E_0\\to P$. The latter is a cofibration, being the pushout of $A\\to K$. Since $q_0$ is a mappingwise weak equivalence, fixed-object left properness [lem-coef-fixed-object-scat-left-proper] makes $r$ a mappingwise weak equivalence. To pass to nerves, in nerve degree $p$ the map is the coproduct, indexed by the same strings of objects, of the products of the corresponding $p$ mapping-set maps. Realization preserves coproducts and finite products by [lem-coef-realization-finite-limits]. Homotopy groups of a finite product are the products of the homotopy groups (a based map or homotopy into a product is a tuple), and a path or a connected sphere stays in one coproduct summand. These row maps are therefore weak homotopy equivalences, including the empty product when $p=0$. [lem-coef-bisimplicial-diagonal-equivalence] gives that $Nr:NP\\to NL$ is a weak homotopy equivalence.",
+   "uses": [
+    "lem-coef-fixed-object-scat-left-proper",
+    "lem-coef-realization-finite-limits",
+    "lem-coef-bisimplicial-diagonal-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 7.3(ii), Section 1.4(vi)–(vii); explicit finite-product and disjoint-union row calculation"
+   }
+  },
+  {
+   "text": "The composite $NK\\to NP\\to NL$ is the weak equivalence of step 5, and its second map is a weak equivalence by step 6. Hence $NK\\to NP$ is a weak equivalence. The categories $K$ and $P$ are cofibrant on the same set $O$ and both have groupoidal path-component categories by step 4. Apply [lem-coef-groupoidal-cofibrant-nerve-detection] to conclude that $K\\to P$ is a mappingwise weak equivalence. It is already a fixed-object cofibration, so is a fixed-object trivial cofibration.",
+   "uses": [
+    "lem-coef-groupoidal-cofibrant-nerve-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Corollary 9.6, printed p.280"
+   }
+  },
+  {
+   "text": "A fixed-object trivial cofibration $K\\to P$ has the left lifting property against every $J$-injective functor $X\\to Y$ of [lem-coef-simplicial-interval-lifting]. For a lifting square, fix the object labels given by its top map. On those labels $X(i,k)\\to Y(i,k)$ is a Kan fibration, by the characterization of $J$-injective maps in [lem-coef-simplicial-interval-lifting]. The fixed-object trivial cofibration lifts against this labelled fixed-object fibration by [lem-coef-sorted-simplicial-algebra-model]. Composing the resulting labelled lift with $X$ solves the original square. By pushout closure of the left lifting class [lem-coef-lifting-class-closure], its pushout along $K\\to C$ also lifts against every $J$-injective map, so lies in $J\\text{-cof}$. Every $J\\text{-cof}$ map is a retract of a relative $J\\text{-cell}$ map [lem-coef-simplicial-interval-lifting]; relative $J\\text{-cell}$ maps are Dwyer--Kan equivalences and these are closed under retracts [lem-coef-simplicial-interval-cell-stability]. Hence this pushout is a Dwyer--Kan equivalence. The pushout is $C\\to C\\amalg_KP\\cong C\\amalg_A E_0$: a functor out of either displayed target is precisely a pair of functors from $C$ and $E_0$ agreeing on $A$. A fixed-object pushout of identity-on-object functors is also a pushout with arbitrary target object functions by the same labelled-target argument. No injectivity of the object function $K\\to C$ is needed.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-sorted-simplicial-algebra-model",
+    "lem-coef-lifting-class-closure",
+    "lem-coef-simplicial-interval-cell-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Fixed-object lifting, Section 7.2; HTT Remark A.3.2.14, ordinary cobase change"
+   }
+  },
+  {
+   "text": "By step 2 the map $C\\amalg_A E\\to C\\amalg_A E_0$ is a Dwyer--Kan equivalence and its composite with $C\\to C\\amalg_A E$ is the equivalence proved in step 8. Two-out-of-three [lem-coef-simplicial-interval-cell-stability] proves that $C\\to C\\amalg_A E$ is a Dwyer--Kan equivalence. It is a cofibration because it is the pushout of the given cofibration $j$, by [lem-coef-lifting-class-closure]. This establishes both conclusions for the original, arbitrary factorization $E$.",
+   "uses": [
+    "lem-coef-simplicial-interval-cell-stability",
+    "lem-coef-lifting-class-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Remark A.3.2.14 and Example A.3.2.18; final two-out-of-three and cobase-change calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-brown-split-factorizations",
+  "lem-coef-cofibrant-localization-diagonal-nerve",
+  "lem-coef-countable-equivalence-witness",
+  "lem-coef-fixed-object-scat-left-proper",
+  "lem-coef-groupoidal-cofibrant-nerve-detection",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-realization-finite-limits",
+  "lem-coef-simplicial-interval-cell-stability",
+  "lem-coef-simplicial-interval-lifting",
+  "lem-coef-sorted-simplicial-algebra-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+  "place": "Argument assembled from Dwyer–Kan Sections 7, 9 and 10 and Bergner Lemma 2.4, to supply the cofibrant-replacement reformulation in HTT Remark A.3.2.14. Sources read online, not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,10 +182,45 @@
    "results": "{\"t\": \"2026-10-17T06:30:08Z\", \"tool\": \"leanfinder\", \"query\": \"Pushout along the inclusion of the walking arrow into a cofibrant walking equivalence does not change a simplicial category when the chosen arrow is already an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceInrOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.instWeakEquivalenceInlOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration\", \"HomotopicalAlgebra.AttachCells.ofArrowIso\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.Cylinder.trans_I\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.instCofibrationInlOfIsCofibrant\"], \"digest\": \"02aeeacf5b3f1d6c\"}",
    "date": "2026-10-17",
    "verdict": "no match: semantic hits concern ordinary localizations, simplicial objects or generic pushouts of maps already known to be trivial cofibrations. Here the adjoined-inverse map is not initially a weak equivalence. Source hits in CoherentIso.lean describe the ordinary walking isomorphism and its nerve, not Bergner inverse-adjunction invariance."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjoining a homotopy coherent inverse to an arrow already invertible in the homotopy category of a simplicial category is a Dwyer Kan equivalence",
+   "results": "{\"t\": \"2026-10-17T06:55:17Z\", \"tool\": \"leanfinder\", \"query\": \"Adjoining a homotopy coherent inverse to an arrow already invertible in the homotopy category of a simplicial category is a Dwyer Kan equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.functorEquiv\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"SSet.Truncated.HomotopyCategory.mkNatIso\", \"SSet.Truncated.HomotopyCategory.mkNatIso_inv_app_mk\", \"SSet.Truncated.HomotopyCategory.mkNatIso_hom_app_mk\", \"HomotopyCategory.quotient_inverts_homotopyEquivalences\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\"], \"digest\": \"3245a4e7f8926e9e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary nerves, ordinary pushout isomorphisms, or generic model-category lifting; none states the Bergner inverse-adjunction theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialObject, CategoryTheory.IsIso",
+   "results": "{\"t\": \"2026-10-17T06:55:14Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SimplicialObject, CategoryTheory.IsIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Truncated.cosk_reflective\", \"CategoryTheory.SimplicialObject.Truncated.sk_coreflective\", \"AlgebraicTopology.DoldKan.instIsIsoFunctorSimplicialObjectKaroubiNatTrans\", \"AlgebraicTopology.DoldKan.instIsIsoFunctorKaroubiSimplicialObjectNatTrans\", \"CategoryTheory.SimplicialObject.instIsIsoAppUnitTruncatedCoskAdj\", \"CategoryTheory.SimplicialObject.isCoskeletal_iff_isIso\"], \"digest\": \"5e461feda2109055\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary nerves, ordinary pushout isomorphisms, or generic model-category lifting; none states the Bergner inverse-adjunction theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Bergner|Dwyer.Kan|invertibility.hypothesis",
+   "results": "{\"t\": \"2026-10-17T06:55:14Z\", \"tool\": \"grep\", \"query\": \"Bergner|Dwyer.Kan|invertibility.hypothesis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary nerves, ordinary pushout isomorphisms, or generic model-category lifting; none states the Bergner inverse-adjunction theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushout of a simplicial category along a cofibrant walking isomorphism preserves homotopy type if the arrow is invertible",
+   "results": "{\"t\": \"2026-10-17T06:55:14Z\", \"tool\": \"leansearch\", \"query\": \"Pushout of a simplicial category along a cofibrant walking isomorphism preserves homotopy type if the arrow is invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.pushoutCoconeOfLeftIso\", \"CategoryTheory.Limits.pushoutCoconeOfRightIso\", \"CategoryTheory.Limits.pushoutCoconeOfLeftIso_inl\", \"CategoryTheory.IsPushout.of_iso'\", \"CategoryTheory.IsPushout.of_iso\", \"CategoryTheory.Limits.pushout_inl_iso_of_right_iso\", \"CategoryTheory.Limits.pushout.congrHom\", \"CategoryTheory.Square.IsPushout.iff_of_iso\"], \"digest\": \"4f2d6eafb6aac5dc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary nerves, ordinary pushout isomorphisms, or generic model-category lifting; none states the Bergner inverse-adjunction theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bergner simplicial category invertibility hypothesis homotopy pushout walking arrow walking isomorphism",
+   "results": "{\"t\": \"2026-10-17T06:55:43Z\", \"tool\": \"leanfinder\", \"query\": \"Bergner simplicial category invertibility hypothesis homotopy pushout walking arrow walking isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.BinaryProduct.inverse_map_mkHom_homMk_id\", \"CategoryTheory.hoFunctor.isIso_prodComparison_of_stdSimplex\", \"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"SSet.Truncated.HomotopyCategory.BinaryProduct.square\", \"CategoryTheory.hoFunctor.instIsIsoCatProdComparisonSSetHoFunctorNerve\"], \"digest\": \"dbeb74347dc0e594\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary nerves, ordinary pushout isomorphisms, or generic model-category lifting; none states the Bergner inverse-adjunction theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-walking-groupoid-components",
@@ -92,5 +253,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-invertible-arrow-pushout",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reduce arbitrary cofibrant inverse data to a two-object factorization by split factorization in an undercategory, use a countable equivalence witness, and compare the resulting cofibrant interval pushout by diagonal nerves. Two new statement-only Dwyer–Kan inputs (9.6 and 10.2); no new Mathlib leaves. Avoid all coherent-nerve and general-derived-adjunction nodes that depend transitively on this item.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, the coherent derived coefficient-adjunction calculation, through the existing inverse-adjunction ancestry. Steps 1–3 choose and compare coherent interval data; steps 4–7 prove invariance on a cofibrant interval; steps 8–9 transfer the result to arbitrary C and the given factorization.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-brown-split-factorizations",
+    "why": "Only the split factorization of a weak equivalence between cofibrant undercategory objects is used. This generic model-category tool has no dependency on coherent localization or the item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-brown-split-factorizations"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N9-81e0599db",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-81e0599db (reviewer sub-agent of L); spot-checked: I read all nine steps, both new nodes and every cited statement. No cycles: none of the item's 11 dependencies reaches the item. The statement is unchanged and agrees with HTT A.3.2.14.\n\nOne fault (C1/C2), in step 8, repaired in fixes/dag/nodes/sec-six-functors/lem-coef-simplicial-invertible-arrow-pushout.json. The step concluded 'Bergner trivial cofibration', which step 9 uses as a DK equivalence, without citing why. It was also marked elementary. The repaired step shows that K→P lifts against every J-injective map, using interval-lifting's characterization. By pushout closure, C→C⊔_A E0 is then in J-cof. A J-cof map is a retract of a J-cell map (interval-lifting), and J-cell maps are DK equivalences, closed under retracts (cell-stability). The step now uses cell-stability and is no longer elementary; proof_deps is unchanged.\n\nOther steps:\n- Step 1: j0 and q0 are Bergner maps by the labelled argument, which also covers u(0)=u(1).\n- Step 2: the lift t exists; Brown's lemma in A/sCat is correct, with C⊔_A(−) acting as cobase change.\n- Step 3: two labels satisfy the witness node even when f(0)=f(1); the factorization A→K→H avoids assuming A→H is a cofibration.\n- Step 4: π0P = J⊔_[1]J = J, because [1]→J is an epimorphism.\n- Step 5: G(A)=J, so L=K[A^{-1}].\n- Step 6: left properness is applied on the correct leg (E0→P is a cofibration), then a row argument and the diagonal lemma.\n- Step 7: cofibrancy and groupoidal π0 are checked for K and P; L is correctly not used.\n- Step 9: two-out-of-three plus cobase change of j.\n\nNew nodes (DK 9.6 and DK 10.2):\n- Both are self-contained, statement-only and true. I checked them independently; for 9.6 the key input is Ω_x N ≃ U(x,x) for grouplike π0. Tested on O empty, the walking arrow (Δ¹ against NJ) and the free monoid (BN ≃ BZ ≃ S¹).\n- Neither duplicates DK 9.2/9.5, cofibrant-simplicial-inversion (which is cyclic) or free-category-groupoid-nerve, and neither restates a clause of the item.\n- Their numbering agrees with the existing DK nodes. Searches and the blueprint ancestor are correct.\n\nCaveats:\n- DK, HTT and Bergner are not archived locally, so I could not open the cited pages; the WANTED lines stand.\n- The Bergner model-structure axioms Brown needs in step 2 come from the statement's existing context, the same convention as its parents; no independent node states them.\n- Accepted tool_use: Brown, which is moot because it is in the same unit.; 1 file(s) fixed by the reviewer"
  }
 }

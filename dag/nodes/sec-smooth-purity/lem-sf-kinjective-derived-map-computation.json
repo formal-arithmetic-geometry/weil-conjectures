@@ -1,0 +1,84 @@
+{
+ "id": "lem-sf-kinjective-derived-map-computation",
+ "kind": "statement",
+ "title": "Computation of unbounded derived morphisms on arbitrary K-injective resolutions",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian] and $F:\\mathcal A\\to\\mathcal B$ an additive functor [def-sp-left-exact-additive]. Write $K(\\mathcal A)$ for complexes modulo chain homotopy and $Q_{\\mathcal A}:K(\\mathcal A)\\to D(\\mathcal A)$ for localization at quasi-isomorphisms [def-weil-abstract-derived-category], and similarly for $\\mathcal B$. Assume every complex of $\\mathcal A$ has a K-injective resolution, meaning a quasi-isomorphism to a complex $I$ with $\\operatorname{Hom}_{K(\\mathcal A)}(E,I)=0$ for every acyclic $E$. Let $(RF,\\eta)$ be the unbounded total right derived functor [def-sfb-right-derived-functor], with unit $\\eta_N:Q_{\\mathcal B}(FN)\\to RF(Q_{\\mathcal A}N)$. For a K-injective resolution $a:N\\to I$, set\n$$c_a=\\eta_I^{-1}\\circ RF(Q_{\\mathcal A}a):RF(Q_{\\mathcal A}N)\\xrightarrow{\\sim}Q_{\\mathcal B}(FI).$$\nFor complexes $N,N'$, any morphism $h:Q_{\\mathcal A}N\\to Q_{\\mathcal A}N'$ in the derived category, and K-injective resolutions $a:N\\to I$, $b:N'\\to J$, there is a unique homotopy class $g:I\\to J$ with\n$$Q_{\\mathcal A}g=(Q_{\\mathcal A}b)\\circ h\\circ(Q_{\\mathcal A}a)^{-1},$$\nand\n$$c_b\\circ RF(h)\\circ c_a^{-1}=Q_{\\mathcal B}(Fg).$$\nHere $Fg$ means degreewise application of $F$ to any representative of that homotopy class. These formulas are compatible with identities and composition of derived morphisms. For another resolution $a':N\\to I'$, the canonical transition $c_{a'}c_a^{-1}$ is $Q_{\\mathcal B}(Fk)$ for the unique homotopy class $k:I\\to I'$ satisfying $Q_{\\mathcal A}k=Q_{\\mathcal A}a'(Q_{\\mathcal A}a)^{-1}$; these transitions are isomorphisms, satisfy the cocycle identity for three resolutions, and intertwine the displayed formula for every $h$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 070Y (lemma-K-injective-defined): K-injective computation of total right derived functors; the stated arbitrary-resolution/naturality consequence is an agent formulation of this computation, not a verbatim Stacks lemma."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-left-exact-additive",
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A total right derived functor is computed on a morphism using arbitrary K-injective resolutions, independently of the chosen resolutions",
+   "results": "CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.InjectiveResolution.rightDerived_app_eq; CategoryTheory.NatTrans.rightDerived; CategoryTheory.Functor.rightDerived; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq; CategoryTheory.NatTrans.rightDerivedToHomotopyCategory; CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit",
+   "date": "2026-10-17",
+   "verdict": "no match: rightDerived_map_eq and InjectiveResolution.isoRightDerivedObj concern derived functors on objects via nonnegative injective resolutions. Generic derived comparison/unit lemmas do not state the arbitrary unbounded K-injective morphism formula with its canonical resolution transitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"iso\"",
+   "results": "CategoryTheory.Functor.hasRightDerivedFunctor_iff_of_iso; CategoryTheory.Functor.isRightDerivedFunctor_iff_isIso_rightDerivedDesc; CategoryTheory.Functor.rightDerivedNatIso; CategoryTheory.Functor.rightDerivedNatIso_hom; CategoryTheory.Functor.rightDerivedNatIso_inv; CategoryTheory.Functor.isRightDerivedFunctor_iff_of_iso; CategoryTheory.Functor.isIso_of_isRightDerivedFunctor_of_inverts; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison",
+   "date": "2026-10-17",
+   "verdict": "no match: rightDerived_map_eq and InjectiveResolution.isoRightDerivedObj concern derived functors on objects via nonnegative injective resolutions. Generic derived comparison/unit lemmas do not state the arbitrary unbounded K-injective morphism formula with its canonical resolution transitions."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*(map|[Ii]so)|([Ii]so|map).*rightDerived",
+   "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean; directory Mathlib/CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match: rightDerived_map_eq and InjectiveResolution.isoRightDerivedObj concern derived functors on objects via nonnegative injective resolutions. Generic derived comparison/unit lemmas do not state the arbitrary unbounded K-injective morphism formula with its canonical resolution transitions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compute a right derived functor on maps using K-injective resolutions",
+   "results": "CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.Functor.rightDerived; CategoryTheory.Functor.rightDerivedToHomotopyCategory; CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id; CategoryTheory.Functor.HasRightDerivedFunctor.mk; CategoryTheory.InjectiveResolution.rightDerived_app_eq; CategoryTheory.InjectiveResolution.isoRightDerivedObj; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: rightDerived_map_eq and InjectiveResolution.isoRightDerivedObj concern derived functors on objects via nonnegative injective resolutions. Generic derived comparison/unit lemmas do not state the arbitrary unbounded K-injective morphism formula with its canonical resolution transitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived functor of an additive functor computed using an arbitrary K-injective replacement; naturality for a chain map commuting with the two replacement maps",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.NatTrans.rightDerived; CategoryTheory.Functor.rightDerived; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.InjectiveResolution.rightDerived_app_eq",
+   "date": "2026-10-17",
+   "verdict": "no match: rightDerived_map_eq and InjectiveResolution.isoRightDerivedObj concern derived functors on objects via nonnegative injective resolutions. Generic derived comparison/unit lemmas do not state the arbitrary unbounded K-injective morphism formula with its canonical resolution transitions."
+  },
+  {
+   "tool": "grep",
+   "query": "isoRightDerivedObj|rightDerived.*map|rightDerivedObj",
+   "results": "none; directory Mathlib/Algebra/Homology",
+   "date": "2026-10-17",
+   "verdict": "no match: rightDerived_map_eq and InjectiveResolution.isoRightDerivedObj concern derived functors on objects via nonnegative injective resolutions. Generic derived comparison/unit lemmas do not state the arbitrary unbounded K-injective morphism formula with its canonical resolution transitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-compact-support-restriction-of-scalars",
+  "date": "2026-10-17",
+  "group": "N7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-integral-rational-qbar-compact-support",
+   "place": "The ancestor's derived inverse-limit formula: the former step 5 of its finite-level coefficient comparison uses arbitrary K-injective resolutions to compute derived morphisms and identifies different choices.",
+   "via": [
+    "lem-sf-compact-support-restriction-of-scalars"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

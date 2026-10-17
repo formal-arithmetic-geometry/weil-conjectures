@@ -42,10 +42,11 @@
    }
   },
   {
-   "text": "Write $F_T=\\nu_T^*$ and $R_T=\\nu_{T,*}$. The unit $\\eta_G:G\\to R_TF_TG$ is invertible for every etale $B$-module sheaf by [prop-weil-pbc-site-comparison-finite-level]. The adjunction [def-weil-pbc-site-comparison-morphism] identifies $\\operatorname{Hom}(F_TG,F_TH)$ with $\\operatorname{Hom}(G,R_TF_TH)$, and postcomposition with $\\eta_H^{-1}$ identifies the latter with $\\operatorname{Hom}(G,H)$. Thus $F_T$ is fully faithful on all module sheaves. Call a pro-etale sheaf classical if it is isomorphic to $F_TG$ for some etale sheaf. It is classical exactly when its counit $\\epsilon_P:F_TR_TP\\to P$ is invertible: one implication takes $G=R_TP$, and the other uses naturality and the triangle identity $\\epsilon_{F_TG}\\circ F_T\\eta_G=1$. In particular fully faithful $F_T$ lifts an isomorphism between two of its images uniquely, together with the inverse.",
+   "text": "Write $F_T=\\nu_T^*$ and $R_T=\\nu_{T,*}$. The unit $\\eta_G:G\\to R_TF_TG$ is invertible for every etale $B$-module sheaf by [prop-weil-pbc-site-comparison-finite-level]. The adjunction [def-weil-pbc-site-comparison-morphism] identifies $\\operatorname{Hom}(F_TG,F_TH)$ with $\\operatorname{Hom}(G,R_TF_TH)$, and postcomposition with $\\eta_H^{-1}$ identifies the latter with $\\operatorname{Hom}(G,H)$. Thus $F_T$ is fully faithful on all module sheaves. Call a pro-etale sheaf classical if it is isomorphic to $F_TG$ for some etale sheaf. It is classical exactly when its counit $\\epsilon_P:F_TR_TP\\to P$ is invertible: one implication takes $G=R_TP$, and the other uses naturality and the triangle identity $\\epsilon_{F_TG}\\circ F_T\\eta_G=1$. In particular fully faithful $F_T$ lifts an isomorphism between two of its images uniquely, together with the inverse. Coefficients: the sheaves of $B_T$-modules on $T_{\\mathrm{proet}}$ of [def-weil-pbc-proetale-site] are the module sheaves over $\\Lambda_{T,\\Proet}$ of [def-weil-pbc-proetale-modules] with $\\Lambda=B$, used by the theorems cited in steps 3, 4 and 7. Indeed the ring map from the constant presheaf $U\\mapsto B$ to $U\\mapsto\\operatorname{Cont}(\\pi_0(|U|),B)$ sending $b$ to the constant function is injective for $U\\neq\\emptyset$; it is locally surjective, because a continuous function to the finite discrete $B$ is constant on the finitely many clopen open subschemes where it takes each value, which cover $U$. Hence both sheafifications agree, compatibly with the constant sections.",
    "uses": [
     "prop-weil-pbc-site-comparison-finite-level",
-    "def-weil-pbc-site-comparison-morphism"
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-pbc-proetale-modules"
    ],
    "elementary": true,
    "source": {
@@ -68,7 +69,7 @@
    }
   },
   {
-   "text": "Classical $B$-module sheaves are closed under extensions. For $0\\to F_TG'\\to P\\to F_TG''\\to0$, [lem-sf-derived-ses-triangle] gives its distinguished triangle with boundary $\\delta:F_TG''\\to(F_TG')[1]$. Exactness of $F_T$ follows from [prop-weil-pbc-site-comparison-finite-level]; [lem-sf-exact-functor-derived-triangulated] makes its termwise derived functor triangulated. Full faithfulness on $D^+$ in [thm-weil-pbc-site-comparison] uniquely lifts $\\delta$ to $\\varphi:G''\\to G'[1]$, since both arguments are bounded below. By TR1 and inverse rotation TR2 in [def-weil-triangulated-category], choose a triangle in $D^+$ (which is closed under shifts and cones) $G'\\to H\\to G''\\xrightarrow{\\varphi}G'[1]$. Rotate its image and the triangle of the extension to start with $\\delta$, and apply TR3 with identities on the first two objects. [lem-sf-triangle-morphism-iso] gives $F_TH\\cong P$. The long exact cohomology sequence [lem-sf-derived-homology-long-exact] shows $H$ has zero cohomology outside degree zero; by [lem-sf-derived-concentrated-single], $H\\cong G[0]$ for $G=H^0(H)$. Applying $H^0$ gives an isomorphism of sheaves $F_TG\\cong P$, since exactness computes $H^0(F_TG[0])=F_TG$. No constructibility of $G$ is claimed at this step.",
+   "text": "Classical $B$-module sheaves are closed under extensions. For $0\\to F_TG'\\to P\\to F_TG''\\to0$, [lem-sf-derived-ses-triangle] gives a distinguished triangle with boundary $\\delta:F_TG''[0]\\to F_TG'[0][1]$. Exactness of $F_T$ follows from [prop-weil-pbc-site-comparison-finite-level]; [lem-sf-exact-functor-derived-triangulated] makes its termwise derived functor triangulated. Full faithfulness on $D^+$ in [thm-weil-pbc-site-comparison] lifts $\\delta$ to $\\varphi:G''[0]\\to G'[0][1]$. By TR1 and inverse rotation TR2 in [def-weil-triangulated-category], complete it in the unbounded derived category to a triangle $G'[0]\\to H\\to G''[0]\\xrightarrow{\\varphi}G'[0][1]$. The long exact sequence [lem-sf-derived-homology-long-exact] gives $H^q(H)=0$ for $q\\ne0$. Thus [lem-sf-derived-concentrated-single] identifies $H\\cong G[0]$, where $G=H^0(H)$; in particular $H$ is bounded below. The image triangle and the extension triangle have the same boundary $\\delta$. Rotate both twice to start with $\\delta$; TR3 supplies a triangle morphism with identity first two components. By [lem-sf-triangle-morphism-iso] the third component is invertible, yielding $F_TH\\cong P[0]$. Take $H^0$ to obtain $F_TG\\cong P$. Exactness identifies $H^0(F_TG[0])=F_TG$ by preservation of the kernel and image defining cohomology. No constructibility of $G$ has been asserted.",
    "uses": [
     "lem-sf-derived-ses-triangle",
     "prop-weil-pbc-site-comparison-finite-level",
@@ -86,19 +87,11 @@
    }
   },
   {
-   "text": "Prove by induction on $N\\geq0$, for every scheme $Y$, that every pro-etale $B$-module sheaf $P$ lisse on a finite constructible locally closed partition with at most $N$ nonempty strata is classical. If $N=0$, $Y$ is empty and the sheaf is the zero sheaf, namely $\\nu_Y^*0$. If $N=1$, the immersion of the unique nonempty stratum has image all of $Y$; it need not be an isomorphism. Avoid assuming otherwise: use the local argument below with its closed-stratum restriction, which applies for every $N\\geq1$. Given $y\\in Y_k$, [lem-sf-constructible-partition-local-closed-stratum] supplies affine open $V\\ni y$ where $S_k\\cap V$ is closed and $U=V\\setminus(S_k\\cap V)$ is quasi-compact. Give each restricted stratum the fibre-product structure $S_i\\times_Y V$, not an arbitrary factorization through $V$. Restrictions of lisse sheaves to these open subschemes are lisse: restrict their trivializing covers and constant values; geometric stalks on an open are the same stalks. The immersion $i:Z=S_k\\times_YV\\to V$ is closed: by [def-weil-closed-immersion] an immersion is locally a closed immersion in an open neighbourhood of its image. Since its image here is closed in $V$, cover $V$ by that neighbourhood and its image complement; the structure-sheaf map is surjective on the former and has zero target on the latter, so it is surjective everywhere. Together with the closed topological embedding this is the definition of closed immersion, and $j:U\\to V$ is quasi-compact because $V$ is affine and $U$ is quasi-compact. On $U$ the remaining strata have at most $N-1$ nonempty members, so induction gives $j^*P_V\\cong\\nu_U^*G_U$. On $Z$, $i^*P_V$ is lisse, so clause (b) of [lem-sf-proetale-locally-constant-origin] gives $i^*P_V\\cong\\nu_Z^*G_Z$. By [lem-sf-proetale-open-closed-sequence], $0\\to j_!j^*P_V\\to P_V\\to i_*i^*P_V\\to0$ is exact. By [lem-cbc-proetale-extension-zero-comparison] its first term is $\\nu_V^*(j_!G_U)$. By [lem-weil-pbc-closed-immersion-integral-separated-uc] a closed immersion is affine, and [lem-weil-pbc-affine-morphism-permanence] makes it quasi-compact and quasi-separated; [prop-weil-pbc-comparison-direct-image] applied to $G_Z[0]\\in D^+$ and followed by $H^0$ identifies its last term with $\\nu_V^*(i_*G_Z)$. The degree-zero identification follows from [lem-weil-pbc-left-exact-injective-resolution-degree-zero]: direct image is left exact, being a right adjoint, and these small-site module sheaf categories are Grothendieck by [lem-weil-pbc-ring-sheaves-grothendieck], hence have enough injectives by [lem-sp-grothendieck-enough-injectives]. Thus both end terms are classical. Step 4 makes $P_V$ classical and step 3 makes $P$ classical. When $U$ is empty the first term is zero; the argument still applies.",
+   "text": "For every $N\\geq0$, induct on the assertion that, for every scheme $Y$, a pro-etale $B$-module sheaf $P$ lisse on a finite constructible locally closed partition with at most $N$ nonempty strata is classical. For $N=0$, $Y$ is empty; the empty covering forces its module sheaf to be zero, the pullback of the zero etale sheaf. Assume the assertion for $N-1$. For $y\\in Y_k$, [lem-sf-constructible-partition-local-closed-stratum] gives an affine open $V\\ni y$ such that $Y_k\\cap V$ is closed and $U=V\\setminus(Y_k\\cap V)$ is quasi-compact. Use the fibre-product subschemes $S_i\\times_YV$ and $S_i\\times_YU$; they are immersions by clause (1) of [lem-weil-pbc-immersion-base-change-lft]. Their images remain locally closed and constructible: the former is preserved by intersection with an open, and for the latter use [def-weil-constructible-subset]. Indeed a retrocompact open restricts to a retrocompact open on any open subspace, because each quasi-compact open of that subspace is also a quasi-compact open of $Y$; restrict the finite unions and differences in the definition. The lisse restrictions remain lisse on these open subschemes of the original strata: restrict their trivializing covers, with the same constant values and the same geometric stalks. Thus $P|_U$ has at most $N-1$ nonempty strata, while $P$ restricted to $Z=S_k\\times_YV$ is lisse. The next two steps show $P|_V$ classical; step 3 will then glue these neighbourhoods.",
    "uses": [
     "lem-sf-constructible-partition-local-closed-stratum",
-    "lem-sf-proetale-locally-constant-origin",
-    "lem-sf-proetale-open-closed-sequence",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "prop-weil-pbc-comparison-direct-image",
-    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-    "def-weil-closed-immersion",
-    "lem-weil-pbc-closed-immersion-integral-separated-uc",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "lem-weil-pbc-ring-sheaves-grothendieck",
-    "lem-sp-grothendieck-enough-injectives"
+    "lem-weil-pbc-immersion-base-change-lft",
+    "def-weil-constructible-subset"
    ],
    "elementary": false,
    "source": {
@@ -107,7 +100,38 @@
    }
   },
   {
-   "text": "Let $P$ be intrinsically constructible, and choose $G$ with $\\nu_T^*G\\cong P$ by step 5. Retain the original global finite partition $i_k:S_k\\to T$ of $P$. By [lem-weil-pbc-comparison-pullback], $\\nu_{S_k}^*(i_k^{-1}G)\\cong i_k^*P$. Clause (b) of [lem-sf-proetale-locally-constant-origin] gives a lisse etale sheaf $H_k$ with $\\nu_{S_k}^*H_k\\cong i_k^*P$. Full faithfulness from step 2, applied on $S_k$, lifts the resulting isomorphism to $i_k^{-1}G\\cong H_k$. By [lem-weil-pbc-finite-locally-constant-module-values], each $H_k$ admits etale local trivializations with finite constant $B$-module values. Thus precisely the original partition witnesses constructibility of $G$ in [def-weil-pbc-etale-constructible-sheaf]. Combined with preservation in step 1 and full faithfulness in step 2, this proves the asserted equivalence. The argument works for arbitrary $T$, the zero finite ring, zero sheaves, and empty strata; it neither replaces $B$ by a valuation-ring quotient nor equates global finite partitions with affine-local constructibility.",
+   "text": "The immersion $i:Z\\to V$ just obtained is a closed immersion, even when its stratum scheme structure is nonreduced. By [def-weil-closed-immersion] it factors as a closed immersion into an open $W\\subset V$. Its image $C=Y_k\\cap V$ is closed in $V$, so $W$ and $V\\setminus C$ cover $V$. The structure-sheaf map $\\mathcal O_V\\to i_*\\mathcal O_Z$ is surjective on $W$ by that factorization and on $V\\setminus C$ because its target there is zero; hence it is surjective. The underlying map is a homeomorphism onto $C$, giving the claimed closed immersion by the same definition. The complementary inclusion $j:U\\to V$ is quasi-compact: on the affine $V$, the quasi-compact open $U$ has a finite cover by principal opens $D(f_a)$, whose intersections with any principal open $D(g)$ are the finitely many affine $D(f_ag)$.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AK, lemma-compare-constructible, induction on strata; Tags 09AH, 09AF, 09A6"
+   }
+  },
+  {
+   "text": "Induction now gives $j^*P_V\\cong\\nu_U^*G_U$, and clause (b) of [lem-sf-proetale-locally-constant-origin] gives $i^*P_V\\cong\\nu_Z^*G_Z$. Apply [lem-sf-proetale-open-closed-sequence], whose quasi-compactness hypothesis was checked in step 6, to obtain $0\\to j_!j^*P_V\\to P_V\\to i_*i^*P_V\\to0$. By [lem-cbc-proetale-extension-zero-comparison] its first term is $\\nu_V^*(j_!G_U)$. Clause (b) of [lem-weil-pbc-closed-immersion-integral-separated-uc] makes $i$ affine; clause (3) of [lem-weil-pbc-affine-morphism-permanence] makes it quasi-compact and quasi-separated. Apply [prop-weil-pbc-comparison-direct-image] to $G_Z[0]\\in D^+(Z_{\\mathrm{Et}},B)$ and take $H^0$ to identify its last term with $\\nu_V^*(i_*G_Z)$. For this passage, [lem-weil-pbc-left-exact-injective-resolution-degree-zero] identifies degree-zero derived direct image with ordinary direct image: the latter preserves kernels as a right adjoint; the source module sheaf categories on our small sites are Grothendieck by [lem-weil-pbc-ring-sheaves-grothendieck] and have enough injectives by [lem-sp-grothendieck-enough-injectives]. Exactness of $\\nu_V^*$, already cited in step 4, commutes with degree-zero cohomology. Both end terms are therefore classical. Step 4 makes $P_V$ classical; step 3 makes $P$ classical. This completes the induction also when $N=1$ and $U$ is empty, without identifying a surjective stratum immersion with an isomorphism.",
+   "uses": [
+    "lem-sf-proetale-locally-constant-origin",
+    "lem-sf-proetale-open-closed-sequence",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "prop-weil-pbc-comparison-direct-image",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "prop-weil-pbc-site-comparison-finite-level"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AK, lemma-compare-constructible, induction on strata; Tags 09AH, 09AF, 09A6"
+   }
+  },
+  {
+   "text": "Let $P$ be intrinsically constructible, and choose $G$ with $\\nu_T^*G\\cong P$ by step 7. Retain the original global finite partition $i_k:S_k\\to T$ of $P$. By [lem-weil-pbc-comparison-pullback], $\\nu_{S_k}^*(i_k^{-1}G)\\cong i_k^*P$. Clause (b) of [lem-sf-proetale-locally-constant-origin] gives a lisse etale sheaf $H_k$ with $\\nu_{S_k}^*H_k\\cong i_k^*P$. Full faithfulness from step 2, applied on $S_k$, lifts the resulting isomorphism to $i_k^{-1}G\\cong H_k$. By [lem-weil-pbc-finite-locally-constant-module-values], each $H_k$ admits etale local trivializations with finite constant $B$-module values. Thus precisely the original partition witnesses constructibility of $G$ in [def-weil-pbc-etale-constructible-sheaf]. Combined with preservation in step 1 and full faithfulness in step 2, this proves the asserted equivalence. The argument works for arbitrary $T$, the zero finite ring, zero sheaves, and empty strata; it neither replaces $B$ by a valuation-ring quotient nor equates global finite partitions with affine-local constructibility.",
    "uses": [
     "lem-weil-pbc-comparison-pullback",
     "lem-sf-proetale-locally-constant-origin",
@@ -139,15 +163,18 @@
   "lem-sf-derived-homology-long-exact",
   "lem-sf-derived-concentrated-single",
   "lem-sf-constructible-partition-local-closed-stratum",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "def-weil-constructible-subset",
+  "def-weil-closed-immersion",
   "lem-sf-proetale-open-closed-sequence",
   "lem-cbc-proetale-extension-zero-comparison",
-  "prop-weil-pbc-comparison-direct-image",
-  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-  "def-weil-closed-immersion",
   "lem-weil-pbc-closed-immersion-integral-separated-uc",
   "lem-weil-pbc-affine-morphism-permanence",
+  "prop-weil-pbc-comparison-direct-image",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
   "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-sp-grothendieck-enough-injectives"
+  "lem-sp-grothendieck-enough-injectives",
+  "def-weil-pbc-proetale-modules"
  ],
  "proof_origin": {
   "by": "agent",
@@ -273,10 +300,38 @@
    "results": "0 hits: ; service unavailable: Internal Server Error",
    "date": "2026-10-14",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*pro.?[ée]tale|pro.?[ée]tale.*constructible",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern condensed sheaves, finite presentation or local generators; none states finite-ring constructible etale/proetale comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible sheaves of finite ring modules descend from the proetale site to the etale site",
+   "results": "8 hits: SheafOfModules.IsFiniteType.mk, SheafOfModules.IsFiniteType, SheafOfModules, SheafOfModules.isFinitePresentation, SheafOfModules.mk, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.IsFinitePresentation",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern condensed sheaves, finite presentation or local generators; none states finite-ring constructible etale/proetale comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaves of modules over a finite ring on a scheme are equivalent on the etale and proetale sites",
+   "results": "8 hits: LightCondMod.ofSheafLightProfinite, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CondensedMod.ofSheafProfinite, CondensedMod.ofSheafCompHaus, SheafOfModules.isFinitePresentation, CondensedMod.ofSheafStonean, CompHausLike.LocallyConstantModule.functor, LightCondAb.ofSheafLightProfinite",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern condensed sheaves, finite presentation or local generators; none states finite-ring constructible etale/proetale comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally constant stratified module sheaves descend along the comparison morphism from proetale to etale on arbitrary schemes",
+   "results": "8 hits: Condensed.isColimitLocallyConstantPresheaf_desc_apply, LightCondensed.isColimitLocallyConstantPresheaf_desc_apply, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondMod.ofSheafLightProfinite, LightCondensed.isColimitLocallyConstantPresheafDiagram_desc_apply, CondensedMod.ofSheafProfinite, Condensed.isColimitLocallyConstantPresheafDiagram_desc_apply, LightCondensed.isColimitLocallyConstantPresheaf",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern condensed sheaves, finite presentation or local generators; none states finite-ring constructible etale/proetale comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-finite-ring-constructible-derived-origin",
   "by": "worker",
@@ -311,23 +366,23 @@
   }
  },
  "split_report": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "item": "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
   "worker": "stage1",
-  "summary": "Preserves the arbitrary finite-ring and arbitrary-scheme statement. Reuses finite-ring lisse comparison, local closed-stratum induction, open/closed comparison and derived extension lifting. Essential surjectivity first gives any etale preimage, then full faithfulness and lisse comparison on the original global partition prove that preimage constructible; no affine-local/global identification or new nodes.",
-  "blueprint": "Amplification proof (c): etale origin of the finite coefficient levels; expands the arbitrary finite-ring sheaf comparison needed by the derived-origin bridge.",
+  "summary": "Audited and retained the inherited arbitrary finite-ring, arbitrary-scheme proof following Stacks 09AK. Exposed induction setup, its elementary closed-immersion check and recollement as separate steps; cited the existing immersion base-change node and constructible-subset definition for restriction of strata. Derived extension lifting now proves the cone concentrated in degree zero before using bounded-below comparison. No new nodes; no statement change.",
+  "blueprint": "Current main-20261015 thm-weil-pbc-amplification-proper.proof.md, step (c): etale origin of finite coefficient levels and finite lisse module reductions; this sheaf equivalence supplies the sheaf input to the arbitrary finite-ring derived-origin bridge. Steps 1-2 give preservation and full faithfulness; 3-7 give local induction and extension lifting; 8 recovers constructibility on the original global partition.",
   "tool_uses": [
    {
     "node": "def-weil-pbc-etale-constructible-sheaf",
-    "why": "Steps 1 and 6 use its finite global partition and finite module values to identify precisely the source subcategory; the unit has no alternative definition of this sheaf notion."
+    "why": "Steps 1 and 8 use its finite global partition and finite module values to identify precisely the source subcategory; the unit has no alternative definition of this sheaf notion."
    },
    {
     "node": "lem-weil-pbc-finite-locally-constant-module-values",
-    "why": "Steps 1 and 6 convert finite etale constant module values to finite stalks and back; this finite-ring local-trivialization tool is not stated elsewhere in the unit."
+    "why": "Steps 1 and 8 convert finite etale constant module values to finite stalks and back; this finite-ring local-trivialization tool is not stated elsewhere in the unit."
    },
    {
     "node": "lem-sf-proetale-locally-constant-origin",
-    "why": "Steps 1, 5, and 6 use clauses (a) and (b) for arbitrary finite commutative rings on strata; the unit comparison nodes do not give locally constant descent."
+    "why": "Steps 1, 7, and 8 use clauses (a) and (b) for arbitrary finite commutative rings on strata; the unit comparison nodes do not give locally constant descent."
    },
    {
     "node": "def-weil-proetale-constructible-sheaf",
@@ -371,31 +426,39 @@
    },
    {
     "node": "lem-sf-proetale-open-closed-sequence",
-    "why": "Step 5 uses the open-closed short exact sequence with quasi-compact complementary open and arbitrary finite-ring coefficients; no node of the unit gives this recollement sequence."
+    "why": "Step 7 uses the open-closed short exact sequence with quasi-compact complementary open and arbitrary finite-ring coefficients; no node of the unit gives this recollement sequence."
    },
    {
     "node": "lem-cbc-proetale-extension-zero-comparison",
-    "why": "Step 5 identifies the open end term as a comparison pullback; this generic open-immersion identity supplies no alternative proper-base-change route."
+    "why": "Step 7 identifies the open end term as a comparison pullback; this generic open-immersion identity supplies no alternative proper-base-change route."
    },
    {
     "node": "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-    "why": "Step 5 takes degree-zero cohomology of derived direct-image comparison using left exactness and enough injectives; this is the generic right-derived-functor identification."
+    "why": "Step 7 takes degree-zero cohomology of derived direct-image comparison using left exactness and enough injectives; this is the generic right-derived-functor identification."
    },
    {
     "node": "def-weil-closed-immersion",
-    "why": "Step 5 checks an immersion with closed image is a closed immersion from the topological embedding and structure-sheaf surjectivity definition."
+    "why": "Step 6 checks an immersion with closed image is a closed immersion from the topological embedding and structure-sheaf surjectivity definition."
    },
    {
     "node": "lem-weil-pbc-closed-immersion-integral-separated-uc",
-    "why": "Step 5 uses only clause (b), that a closed immersion is affine, to establish hypotheses of the unit direct-image comparison."
+    "why": "Step 7 uses only clause (b), that a closed immersion is affine, to establish hypotheses of the unit direct-image comparison."
    },
    {
     "node": "lem-weil-pbc-affine-morphism-permanence",
-    "why": "Step 5 uses clause (3), affine morphisms are qcqs, to apply the unit direct-image comparison to the selected closed stratum."
+    "why": "Step 7 uses clause (3), affine morphisms are qcqs, to apply the unit direct-image comparison to the selected closed stratum."
    },
    {
     "node": "lem-sp-grothendieck-enough-injectives",
-    "why": "Step 5 supplies enough injectives from the unit Grothendieck module-sheaf theorem, so the cited degree-zero resolution lemma applies."
+    "why": "Step 7 supplies enough injectives from the unit Grothendieck module-sheaf theorem, so the cited degree-zero resolution lemma applies."
+   },
+   {
+    "node": "lem-weil-pbc-immersion-base-change-lft",
+    "why": "Step 5 uses clause (1), stability of immersions under base change, to restrict the original stratum subschemes to V and U; this is a generic scheme tool, not a replacement proper-base-change route."
+   },
+   {
+    "node": "def-weil-constructible-subset",
+    "why": "Step 5 expands the finite union of differences of retrocompact opens to prove that constructible stratum images restrict to any open subspace."
    }
   ]
  },
@@ -419,15 +482,17 @@
   "def-weil-closed-immersion",
   "lem-weil-pbc-closed-immersion-integral-separated-uc",
   "lem-weil-pbc-affine-morphism-permanence",
-  "lem-sp-grothendieck-enough-injectives"
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "def-weil-constructible-subset"
  ],
  "reviewed": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NF-917cd1132",
-  "group": "NF",
+  "reviewer": "NT-cc-Q12-68dbb5c6a",
+  "group": "Q12",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-917cd1132 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source passages, and chapter/unit route. All six steps check out, including extension lifting, qcqs hypotheses, and descent on the original global partition. Tested empty schemes, zero coefficients, nonfree modules, and full-image non-isomorphic immersions. No new nodes or repairs. Condensed target coefficients remain distinct. Detailed checks and inherited graph defects are recorded in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-68dbb5c6a (reviewer sub-agent of L); spot-checked: I read the item, all eight steps, every cited statement, Stacks proetale.tex 09AK (lemma-compare-constructible, lines 5239-5350), blueprint main-20261015 thm-weil-pbc-amplification-proper proof step (c) and the unit/chapter route. The mathematics is correct. Step 1: the comparison pullback holds for any morphism, and lisse-origin (a) holds for any finite commutative ring. Step 2: invertible unit gives full faithfulness and the counit criterion. Step 3: I checked at presheaf level that the counit commutes with open restriction, because V->T is a monomorphism and the index categories are cofinal; only covering locality, clause (1), is used. Step 4: the lifted boundary is completed by TR1/TR2, the cone is concentrated in degree 0 by the long exact sequence, and TR3 plus the two-out-of-three lemma give the isomorphism. Step 5: the induction is over all schemes; fibre-product strata come from 01JY; retrocompactness restricts to opens. Step 6: the closed-immersion check is valid for nonreduced full-image strata, and j is quasi-compact. Step 7: the hypotheses of the open/closed sequence, the j_! comparison and the qcqs direct-image comparison all hold, and H^0 is justified. Step 8: constructibility is recovered on the original global partition. Edge cases checked: empty schemes and strata, B=0, N=1, non-qcqs T, Spec k into Spec k[e]/e^2, and Z/2 over Z/4. Off-unit tool uses are all already accepted; the two new declarations are an on-route node and a definition, and I accept both. No new nodes. The A_{E,n} node lem-sf-proetale-constructible-origin and the fixed-module node lem-weil-pbc-fixed-module-constructible-origin have different coefficients, so neither is a duplicate. lem-weil-pbc-comparison-stratified-essential-image generalizes steps 3-7; I note it but did not substitute it. FIX: steps 3, 4 and 7 cite theorems stated over Lambda_{T,Proet}=Cont(pi_0,Lambda)^# (def-weil-pbc-proetale-modules), while the item uses the constant sheaf B_T. I added an elementary two-sentence identification to step 2 (injective on nonempty U, locally surjective through the finite clopen partition) and added def-weil-pbc-proetale-modules to its uses and to proof_deps; there is no cycle. Inherited defect, not this delivery: lem-exc-etale-lift-separably-closed-factorization cites the missing node def-weil-pbc-etale-morphism. Details are in review.md.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-15",

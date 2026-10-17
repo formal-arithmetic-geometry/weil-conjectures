@@ -89,22 +89,57 @@
    }
   },
   {
-   "text": "Verify composition for $\\beta$, rather than assuming that restriction preserves K-injectives. On the small site $\\overline X_{\\mathrm{proet}}$, represent an arbitrary $L\\in D(\\overline X_{\\mathrm{proet}},C)$ by a K-injective $C$-complex $H$, and choose K-injective resolutions $u:r_\\psi H\\to I$ over $B$ and $v:r_\\varphi I\\to T$ over $A$. These exist by the resolution theorem and the small-skeleton convention for the site. By step 1, $r_\\varphi u$ is a quasi-isomorphism. Consequently $w=v\\circ r_\\varphi u:r_{\\psi\\varphi}H\\to T$ is a K-injective $A$-resolution. Put $F_R=p_*^R$ on complexes, let $Q_R$ denote localization to the $R$-coefficient derived category, and let brackets mean passage to that category. We compute $Rp_*^R$ on K-injective resolutions as in [def-weil-pbc-proetale-operations]. Such computations may use the resolutions just chosen: for a map $h:N\\to N'$ and resolutions $a:N\\to J$, $b:N'\\to J'$, the derived map $Q_R(b)Q_R(h)Q_R(a)^{-1}$ has a unique representative $J\\to J'$ up to homotopy by [lem-weil-pbc-kinjective-hom-derived]. Applying $F_R$ to that representative computes $Rp_*^R[h]$; uniqueness also identifies computations from different resolutions, because comparisons between K-injectives are homotopy equivalences and the additive functor $F_R$ preserves their homotopies. The normalization of the direct-image theorem gives $\\beta_{\\psi,L}=[F_Bu]^{-1}$ and gives $\\beta_{\\varphi,QI}=[F_Av]^{-1}$. It gives $\\beta_{\\psi\\varphi,L}=[F_Aw]^{-1}$. In particular all these displayed direct-image maps are invertible, although the restricted complexes need not be K-injective. The derived map $r_\\varphi[u]$ identifies $r_{\\psi\\varphi}L$ with $r_\\varphi QI$; using $w$ and $v$ as the two $A$-resolutions, $Rp_*^A(r_\\varphi[u])$ is represented by the identity of $F_AT$, because $w=v\\circ r_\\varphi u$. Compute $Rp_*^B(r_\\psi L)$ using $u$, so its representative is $F_BI$; then $Rp_*^B[u]$ is the identity of $F_BI$ under the resolution identification. Naturality of $\\beta_\\varphi$ at $[u]:r_\\psi L\\to QI$, with both this target identification and the preceding source identification, therefore gives\n$$\\beta_{\\varphi,r_\\psi L}=[F_Av]^{-1}:QF_AT\\longrightarrow Qr_\\varphi F_BI.$$\nHere $F_A r_\\varphi u=r_\\varphi F_Bu$ as chain maps: on every $V\\to Y$ both evaluate $u$ on $\\overline X\\times_YV$ and restrict its action along $\\varphi$. Thus\n$$ (r_\\varphi\\beta_{\\psi,L})\\circ\\beta_{\\varphi,r_\\psi L}=[F_A(r_\\varphi u)]^{-1}\\circ[F_Av]^{-1}=[F_Aw]^{-1}=\\beta_{\\psi\\varphi,L}.$$\nThe direct-image theorem supplies naturality and independence of the resolution identifications, so this equality for an arbitrary derived object is the equality of the canonical natural transformations. For an identity coefficient map choose $u$ to be the identity of a K-injective representative; the same normalization gives the identity comparison.",
+   "text": "For composable coefficient maps $A\\xrightarrow{\\varphi}B\\xrightarrow{\\psi}C$ and $L\\in D(\\overline X_{\\mathrm{proet}},C)$, choose a K-injective $C$-complex $H$ representing $L$, a K-injective resolution $u:r_\\psi H\\to I$ over $B$, and one $v:r_\\varphi I\\to T$ over $A$. The resolution-existence theorem applies on the small site specified by the pro-etale size convention. Exactness from step 1 makes $r_\\varphi u$ a quasi-isomorphism, so $w=v\\circ r_\\varphi u:r_{\\psi\\varphi}H\\to T$ is a K-injective resolution. Write $F_R=p_*^R$ on complexes, $Q_R$ for localization, and brackets for the localized maps.",
    "uses": [
-    "lem-weil-proetale-direct-image-restriction-of-scalars",
     "prop-pur-kinjective-resolutions-exist",
-    "def-weil-pbc-proetale-site",
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-kinjective-hom-derived"
+    "def-weil-pbc-proetale-site"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E (lemma-derived-pushforward-composition); explicit resolution normalization in lem-weil-proetale-direct-image-restriction-of-scalars, with successive K-injective resolutions; derived.tex Tag 070I (lemma-K-injective), morphisms into K-injectives, for the common-resolution calculation"
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y (lemma-K-injective-defined); the existing resolution-existence theorem on small ringed sites"
    }
   },
   {
-   "text": "Combine the two verified composition identities. Expand $\\alpha_{\\psi\\varphi,K}$ by step 4, then use steps 3 and 5 to obtain\n$$r_\\varphi\\beta_{\\psi,J_CK}\\circ\\beta_{\\varphi,r_\\psi J_CK}\\circ Rp_*^A(r_\\varphi e_{\\psi,K})\\circ Rp_*^A(e_{\\varphi,r_\\psi K}).$$\nNaturality of $\\beta_\\varphi$ for $e_{\\psi,K}:J_Br_\\psi K\\to r_\\psi J_CK$ identifies the middle two factors with\n$$r_\\varphi Rp_*^B(e_{\\psi,K})\\circ\\beta_{\\varphi,J_Br_\\psi K}.$$\nSubstitution and associativity now make the whole composite exactly $r_\\varphi(\\alpha_{\\psi,K})\\circ\\alpha_{\\varphi,r_\\psi K}$. This is the required coefficient-composition law under $r_\\varphi r_\\psi=r_{\\psi\\varphi}$. The identity cases checked above give the identity comparison as well.",
+   "text": "Use the arbitrary-resolution morphism computation with the additive functors $F_A,F_B$ defining the direct images. For the map $r_\\varphi[u]$, use source resolution $w$ and target resolution $v$; their common target is $T$ and $v\\circ r_\\varphi u=w$, so the unique comparison class is $1_T$. Consequently $Rp_*^A(r_\\varphi[u])$ is the identity on $Q_AF_AT$ under these identifications. With source resolution $u$ and target resolution $1_I$, the same lemma gives that $Rp_*^B[u]$ is the identity on $Q_BF_BI$. The lemma's canonical transitions justify these computations for the chosen derived direct images, irrespective of their initially chosen functorial resolutions.",
+   "uses": [
+    "lem-sf-kinjective-derived-map-computation",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y (lemma-K-injective-defined), expanded into the arbitrary-resolution computation lemma"
+   }
+  },
+  {
+   "text": "Apply the normalized-comparison common-resolution lemma with $\\mathcal A'=\\Sh(\\overline X_{\\mathrm{proet}},B)$, $\\mathcal A=\\Sh(\\overline X_{\\mathrm{proet}},A)$, $\\mathcal B'=\\Sh(Y_{\\mathrm{proet}},B)$, $\\mathcal B=\\Sh(Y_{\\mathrm{proet}},A)$, $r=r_\\varphi$, $s=r_{\\varphi,Y}$, $F=F_A$, $G=F_B$, $N=r_\\psi H$, and the resolutions $u,v$ of step 5. These are abelian categories of module sheaves on the specified small sites; their K-injective resolutions exist. The functors $r,s$ are exact by step 1. The equality $F_A r_\\varphi=r_\\varphi F_B$ holds on complexes: on $V\\to Y$, both sides evaluate on $\\overline X\\times_YV$ and restrict the action along $\\varphi$. The direct-image theorem supplies the natural isomorphism $\\beta_\\varphi$ with precisely the required normalization. The lemma therefore identifies $\\beta_{\\varphi,r_\\psi L}$ with $[F_Av]^{-1}:Q_AF_AT\\to Q_Ar_\\varphi F_BI$. It also supplies independence of the resolution identifications. This is the naturality calculation whose two vertical derived maps were computed in step 6.",
+   "uses": [
+    "lem-sf-normalized-derived-comparison-common-resolution",
+    "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-sheaf-of-modules-category",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y (lemma-K-injective-defined); common-resolution naturality lemma, with the normalization from the existing direct-image theorem"
+   }
+  },
+  {
+   "text": "For the K-injective $C$-complex $H$, the direct-image theorem identifies $\\beta_{\\psi,L}$ with $[F_Bu]^{-1}$ and $\\beta_{\\psi\\varphi,L}$ with $[F_Aw]^{-1}$. All these maps are invertible by that theorem; no restriction functor is assumed to preserve K-injectives. Using step 7 and the equality $r_\\varphi F_Bu=F_A(r_\\varphi u)$ on sections gives\n$$(r_\\varphi\\beta_{\\psi,L})\\circ\\beta_{\\varphi,r_\\psi L}=[F_A(r_\\varphi u)]^{-1}\\circ[F_Av]^{-1}=[F_Aw]^{-1}=\\beta_{\\psi\\varphi,L}.$$\nThis calculation is functorial in $L$ because the comparisons and canonical resolution identifications are natural. For an identity coefficient map choose the identity resolution of a K-injective representative; normalization gives the identity comparison.",
+   "uses": [
+    "lem-weil-proetale-direct-image-restriction-of-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Normalization of lem-weil-proetale-direct-image-restriction-of-scalars; inverse-of-composite identity"
+   }
+  },
+  {
+   "text": "Combine the two verified composition identities. Expand $\\alpha_{\\psi\\varphi,K}$ by step 4, then use steps 3 and 8 to obtain\n$$r_\\varphi\\beta_{\\psi,J_CK}\\circ\\beta_{\\varphi,r_\\psi J_CK}\\circ Rp_*^A(r_\\varphi e_{\\psi,K})\\circ Rp_*^A(e_{\\varphi,r_\\psi K}).$$\nNaturality of $\\beta_\\varphi$ for $e_{\\psi,K}:J_Br_\\psi K\\to r_\\psi J_CK$ identifies the middle two factors with\n$$r_\\varphi Rp_*^B(e_{\\psi,K})\\circ\\beta_{\\varphi,J_Br_\\psi K}.$$\nSubstitution and associativity now make the whole composite exactly $r_\\varphi(\\alpha_{\\psi,K})\\circ\\alpha_{\\varphi,r_\\psi K}$. This is the required coefficient-composition law under $r_\\varphi r_\\psi=r_{\\psi\\varphi}$. The identity cases checked above give the identity comparison as well.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -124,8 +159,9 @@
   "lem-weil-proetale-direct-image-restriction-of-scalars",
   "prop-pur-kinjective-resolutions-exist",
   "def-weil-pbc-proetale-site",
+  "lem-sf-kinjective-derived-map-computation",
   "def-weil-pbc-proetale-operations",
-  "lem-weil-pbc-kinjective-hom-derived"
+  "lem-sf-normalized-derived-comparison-common-resolution"
  ],
  "proof_origin": {
   "by": "agent",
@@ -191,7 +227,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -235,20 +271,20 @@
   "note": "Full immutable-delivery review recorded in review.md; canonical constructions and all clauses match, both required report sections are substantive, and sandbox/library compiles pass cleanly. Branch unchanged."
  },
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-sf-compact-support-restriction-of-scalars",
   "worker": "stage1",
-  "summary": "Proved the extension-by-zero coefficient comparison from its defining presheaf and uniqueness of sheafified actions; descended it to unbounded derived categories; composed with the existing normalized derived pushforward comparison; verified both coefficient-composition laws explicitly using successive K-injective resolutions and naturality. No new nodes. Clarified the free prime and removed reliance on the narrower compact-support-candidate definition. Second reading binds the illustrative coefficient parameters and cites and spells out the common-resolution derived-map calculation. Repair of the re-issued lock-timeout return: restored all sixteen statement citation quotes, reran all eight logged Mathlib searches (LeanSearch now available), and explicitly specified finite rings in the composition clause; no mathematical return point was supplied.",
-  "blueprint": "The ancestor def-weil-integral-rational-qbar-compact-support, order 1490, formula $Rf_!K=R\\varprojlim_n\\operatorname{Res}_n Rf_{!,n}K_n$: steps 1–4 construct its finite-level coefficient comparisons, and steps 5–6 establish their transition-map coherence.",
+  "summary": "Repair of the dedicated N7 re-split handoff: preserved the statement and Lean record verbatim and kept the original proof route. Replaced former step 5 by four short steps, extracting arbitrary-resolution derived-map computation and evaluation of a normalized comparison on successive resolutions into two statement-only generic lemmas. The compact-support comparison and its composition are still constructed explicitly; no clause of the item is transferred to a new node.",
+  "blueprint": "The ancestor def-weil-integral-rational-qbar-compact-support, order 1490, formula $Rf_!K=R\\varprojlim_n\\operatorname{Res}_n Rf_{!,n}K_n$: steps 1–4 construct its finite-level coefficient comparisons, and steps 5–6 establish their transition-map coherence. The ancestor is now located at literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-brown/def-weil-integral-rational-qbar-compact-support.md; steps 5–8 spell out the same coefficient-tower coherence.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q37-b92dbf473",
-  "group": "Q37",
+  "reviewer": "NT-cc-N7-ab027c554",
+  "group": "N7",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q37-b92dbf473 (reviewer sub-agent of L); spot-checked: Read the item, all six steps, every cited statement, sources and route. Verified exact restriction, extension-by-zero descent, normalized K-injective composition and edge cases. No new nodes, circular dependencies or repairs. Finite constant coefficients remain distinct from condensed target coefficients. Detailed checks are in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-ab027c554 (reviewer sub-agent of L); spot-checked: I read the item in full: all nine steps, the old-versus-new diff, every cited statement, Stacks 070Y/070I/03DI/03DJ/0D6E, and the main-20261015 ancestor def-weil-integral-rational-qbar-compact-support (order 1849, formula R lim Res_n Rf_{!,n}K_n). The item's statement, coefficients (finite constant rings on the small pro-étale site; the direct image built from K-injective resolutions) and Lean record are unchanged. Steps 1-4 and 9 are as before, and I re-checked them, including the step-9 naturality expansion. The new steps 5-8 are correct. In step 6, w = v∘r_φ u forces the comparison class to be 1_T, and the resolutions u, 1_I force 1_I. In step 7, every hypothesis of the common-resolution lemma holds: the categories are abelian with K-injective resolutions, r and s are exact, F_A r_φ = r_φ F_B on the nose, and the normalization is exactly the clause of lem-weil-proetale-direct-image-restriction-of-scalars. In step 8 the identifications at both ends agree, and [F_A r_φ u]^{-1}[F_A v]^{-1} = [F_A w]^{-1}. New node lem-sf-kinjective-derived-map-computation is true: the Hom bijection into a K-injective complex gives a unique g, and naturality of η gives c_b RF(h) c_a^{-1} = Q(Fg). New node lem-sf-normalized-derived-comparison-common-resolution is true: naturality of β at Qu, then lemma 1, then the normalization. Its types check, it states invertibility of Q(Fv) as an explicit hypothesis, and it never assumes rJ is K-injective. I tested both on zero complexes, F=0 and identity resolutions. Both are general, smaller than the item and not clauses of it. Both are self-contained, with three-kind searches, a correct from/via and same_as []. A DAG and blueprint search found no duplicate (checked lem-kun-rgamma-unbounded-bounded, lem-weil-pbc-derived-direct-image-triangulated, def-sfb-right-derived-functor, lem-sp-kinjective-computes and lem-pur-coefficient-system-derived-comparison). Route: the new statements are in sk-def-sf-operations; the direct-image restriction theorem stays an already accepted tool use; no SGA source; no cycle. No fixes."
  },
  "tool_uses": [
   "lem-weil-proetale-direct-image-restriction-of-scalars"
