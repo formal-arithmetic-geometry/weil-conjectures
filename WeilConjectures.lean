@@ -3675,6 +3675,7 @@ public import WeilConjectures.RingTheory.DualContent
 public import WeilConjectures.RingTheory.Etale.Abhyankar
 public import WeilConjectures.RingTheory.Etale.Abhyankar.Basic
 public import WeilConjectures.RingTheory.Etale.Abhyankar.Galois
+public import WeilConjectures.RingTheory.Etale.Abhyankar.Product
 public import WeilConjectures.RingTheory.Etale.Abhyankar.Tame
 public import WeilConjectures.RingTheory.Etale.Coordinates
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Diagonal
