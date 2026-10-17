@@ -12,9 +12,71 @@
   "def-sp-filtration",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose the bounds c,d for Y from the finite-filtration hypotheses. Apply [lem-trf-injective-graded-filtration-splits] to obtain injective objects J_q and an isomorphism θ:Y ≅ ⊕_{c≤q≤d}J_q identifying F^tY with the tail ⊕_{q≥t}J_q. For each p, the inclusion F^pX→X followed by X→X/F^{p+1}X identifies gr^pX with a subobject of X/F^{p+1}X (the kernel is exactly F^{p+1}X by the induced and quotient filtration definitions). Given a finite family of graded maps α_p:gr^pX→gr^{p+r}Y, compose α_p with the isomorphism gr^{p+r}Y ≅ θ(F^{p+r}Y)/θ(F^{p+r+1}Y) = ⊕_{q≥p+r}J_q/⊕_{q≥p+r+1}J_q ≅ J_{p+r} induced by θ (the J_{p+r}-coordinate of the tail; when p+r lies outside [c,d] both sides are 0, take J_{p+r}=0 and α_p=0); injectivity of J_{p+r} extends it along this monomorphism to δ_p:X/F^{p+1}X→J_{p+r}.",
+   "uses": [
+    "lem-trf-injective-graded-filtration-splits",
+    "def-sp-abelian",
+    "def-sp-filtration",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TP, lemma-filtered-injective; split filtration and componentwise extension property"
+   }
+  },
+  {
+   "text": "Compose each δ_p with X→X/F^{p+1}X, include its value in the J_{p+r} summand, transport back by θ^{-1}, and sum over the finitely many p with gr^pX≠0. Call the resulting map f:X→Y. If x lies in F^kX, the summands with p<k vanish because F^kX⊆F^{p+1}X, while the summands with p≥k land in J_{p+r}⊆F^{k+r}Y; hence f∈G^r(X,Y). On the pth graded quotient (composite F^pX→F^{p+r}Y→gr^{p+r}Y), the summands with p'>p land in F^{p+r+1}Y and vanish, and the pth summand is α_p because the θ-induced isomorphism gr^{p+r}Y≅J_{p+r} of step 1 is the J_{p+r}-projection of the tail, so σ_r(f)=(α_p)_p. This proves surjectivity of σ_r; finiteness of the sum follows from the finite interval for X.",
+   "uses": [
+    "lem-trf-injective-graded-filtration-splits",
+    "def-sp-abelian",
+    "def-sp-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TP, finite direct-sum construction and filtration-tail calculation"
+   }
+  },
+  {
+   "text": "If f∈G^r has σ_r(f)=0, then for every p the composite F^pX→F^{p+r}Y→gr^{p+r}Y is zero. Since F^{p+r+1}Y is the kernel of the quotient map defining gr^{p+r}Y, the image f(F^pX) is contained in F^{p+r+1}Y. Thus f∈G^{r+1}. Conversely G^{r+1}⊆G^r and every such map has zero symbol by definition, so ker(σ_r)=G^{r+1}. The first map is the inclusion and is injective, proving exactness at the first two terms.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TP, quotient-kernel characterization of the graded component"
+   }
+  },
+  {
+   "text": "For a filtration-preserving map X'→X, restriction and passage to the quotient commute with precomposition, so each symbol component of f∘u is the corresponding component of σ_r(f)∘gr(u). For a filtration-preserving map v:Y→Y', the inclusions v(F^qY)⊆F^qY' induce maps gr^qY→gr^qY', and the same restriction/quotient calculation gives σ_r(v∘f)=gr(v)∘σ_r(f). These identities respect the inclusions G^{r+1}⊆G^r and the finite direct sums. If Y' has injective graded pieces, the preceding exactness applies to Y' as well, so the induced quotient isomorphisms are natural under both kinds of maps.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TP, naturality of the filtered-injective splitting and induced maps on graded quotients"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-injective-resolutions",
+  "lem-trf-injective-graded-filtration-splits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05TP (lemma-filtered-injective), with the exact symbol sequence extracted from the split-filtration and injective-extension arguments"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,7 +122,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-filtered-hom-complex-invariance",
@@ -72,7 +134,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof paragraphs (1) and (2), open--closed trace additivity via the filtered RHom construction of Varshavsky §5.1.5: the graded comparison for the concrete shift-filtered Hom complex, used in Step 6 of lem-trf-filtered-derived-hom-calculus.",
+   "place": "Proof paragraphs (1) and (2), open--closed trace additivity via the filtered RHom construction of Varshavsky §5.1.5: the graded comparison for the concrete shift-filtered Hom complex, used in Step 6 of lem-trf-filtered-hom-complex-invariance.",
    "via": [
     "lem-trf-filtered-hom-complex-invariance",
     "lem-trf-filtered-derived-hom-calculus",
@@ -81,5 +143,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-injective-target-hom-symbol",
+  "worker": "stage1",
+  "summary": "Read the item against Stacks Tag 05TP and expanded the symbol-sequence consequence into four complete steps. The target filtration is split using the existing lemma lem-trf-injective-graded-filtration-splits; each prescribed graded component extends across gr^p X ↪ X/F^{p+1}X by injectivity, finite summation gives a filtered map with the requested symbols, and the kernel and naturality are checked by quotient and filtration identities. No new nodes were necessary and no Lean attachment was found.",
+  "blueprint": "Realizes the graded comparison for the concrete shift-filtered Hom complex described in the ancestor blueprint proof, the componentwise symbol-sequence step used by lem-trf-filtered-hom-complex-invariance.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-injective-graded-filtration-splits",
+    "why": "Steps 1-2 take from its statement only the splitting of a finite filtered object with injective graded pieces into a biproduct whose tails are the filtration (Stacks 05TP); it is a generic abelian-category tool filed in sk-i-global-additivity, no node of sk-i-curve-zero states it, and the same use is already accepted on lem-trf-filtered-derived-hom-calculus (unit sk-i-curve-zero)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-injective-graded-filtration-splits"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q143-e65bf93df",
+  "group": "Q143",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-e65bf93df (reviewer sub-agent of L); spot-checked: I read the whole item, the statements of every cited node (lem-trf-injective-graded-filtration-splits, def-sp-abelian, def-sp-filtration, def-sp-injective-resolutions), the parent's step 5 (lem-trf-filtered-hom-complex-invariance, the only citer), the units sk-i-curve-zero and sk-i-global-additivity, and the source Stacks derived.tex:7852 lemma-filtered-injective (Tag 05TP) together with the next lemma, lemma-split-strict-monomorphism. The statement is correct and is what the parent uses; it is not weakened. Small cases agree: X=0; one-step X and Y, where G^r=Hom exactly when a+r<=c and the quotient is nonzero only for a+r=c; Y=J_0+J_1. The injectivity hypothesis is needed: with X=Z/2 and Y=Z/4 filtered by 2Z/4, sigma_0=0 but Hom(Z/2,Z/2)=Z/2. Steps 1-4 are correct. Step 1: gr^pX is a subobject of X/F^{p+1}X, and the injective extension property applies. Step 2: the filtration estimate on tails and the degree-p symbol both check. Step 3: the kernel is G^{r+1}. Step 4: naturality, with Y' assumed to have injective graded pieces. I found no duplicate after an rg search for 05TP, 'symbol' and shift-filtration over dag/nodes and reading five related trf nodes. There are no new nodes and no SGA citation. I made two fixes in fixes/dag/nodes/sec-trace-formula/lem-trf-injective-target-hom-symbol.json. (1) E5: steps 1 and 2 said 'transport' without naming which isomorphism gr^{p+r}Y = J_{p+r} is used. The steps now name the theta-induced isomorphism on tail quotients, which is the one needed for sigma_r(f)=alpha. (2) C8: the item cites the split lemma, which belongs to unit sk-i-global-additivity and is off this unit's route, but split_report.tool_uses was empty. I added that tool use with its reason. I accept it: it is a generic 05TP tool, and the same use is already accepted on lem-trf-filtered-derived-hom-calculus in the same unit.; 1 file(s) fixed by the reviewer"
  }
 }
