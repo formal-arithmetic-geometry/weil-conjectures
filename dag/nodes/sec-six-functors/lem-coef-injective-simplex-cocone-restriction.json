@@ -10,9 +10,85 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=\\mathsf S_{\\mathrm{inj}}(X)^{\\mathrm{op}}$, $D=\\mathsf S(X)^{\\mathrm{op}}$ and let $u:A\\to D$ be inclusion, so $j_X=N(u)$. These are small ordinary categories: their objects form $\\coprod_{n\\geq0}X_n$, and their arrows are subsets of the products of these sets with sets of finite monotone maps. Their nerves are quasicategories: an inner horn in an ordinary nerve fills by composition of its arrows, and the category laws give the required higher faces. If $X=\\varnothing$, both categories are empty and $j_X$ is the identity of the empty simplicial set. Restriction is then the identity on the two identical mapping spaces, which are Kan by [lem-cbc-enhanced-functor-cone-calculus]. Henceforth it suffices to verify the comma hypothesis for each object $\\sigma:\\Delta^n\\to X$ of $D$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Variant 4.2.3.15, step (3); definitions and the empty case. Online primary source inspected 2026-10-17; archival copy WANTED in report.md. No Stacks tag states this assertion."
+   }
+  },
+  {
+   "text": "Fix $\\sigma:\\Delta^n\\to X$. Define an ordinary category $C_n$ whose objects are ALL monotone maps $\\theta:[m]\\to[n]$ with $m\\geq0$. A morphism $\\theta\\to\\theta'$ is an injective monotone $a:[m]\\hookrightarrow[m']$ satisfying $\\theta' a=\\theta$. The ordinary comma category $(\\sigma\\downarrow u)$ is exactly $C_n^{\\mathrm{op}}$. Indeed an object of the comma is an arrow $\\sigma\\to\\tau$ in $D$, hence an operator $\\theta:[m]\\to[n]$ with $\\tau=\\sigma\\Delta(\\theta)$. Conversely this formula defines its object for EVERY $\\theta$, even if different operators have the same simplex in $X$, since the operator is part of the comma object. A comma morphism from $\\theta$ to $\\theta'$ is an arrow $\\tau\\to\\tau'$ in $A$, hence an injective $a:[m']\\hookrightarrow[m]$ with $\\theta a=\\theta'$. This is precisely the reverse of the corresponding arrow in $C_n$; identities and composition are the same operator compositions. This identification uses neither injectivity of $\\sigma$ nor nondegeneracy of any simplex.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 6.5.3.7, proof: the category of operators into [n]; applied directly over a fixed simplex of X. Online primary source inspected 2026-10-17; archival copy WANTED in report.md. No Stacks tag states this assertion."
+   }
+  },
+  {
+   "text": "Here is the contraction, including all operators. Let $b:[0]\\to[n]$ take $0$ to $0$, and let $B:C_n\\to C_n$ be constant at $b$. Define $H:C_n\\to C_n$ by prepending $0$: for $\\theta:[m]\\to[n]$, set $H(\\theta):[m+1]\\to[n]$ by $H(\\theta)(0)=0$ and $H(\\theta)(i+1)=\\theta(i)$. For $a:\\theta\\to\\theta'$, set $H(a)(0)=0$ and $H(a)(i+1)=a(i)+1$. This is injective and monotone, and $H(\\theta')H(a)=H(\\theta)$ at $0$ and at every $i+1$; its formulas preserve identities and composites. There are natural transformations $B\\Rightarrow H\\Leftarrow\\mathrm{id}_{C_n}$: the component of the first is $0\\mapsto0$, and that of the second is $i\\mapsto i+1$. Naturality follows respectively from $H(a)(0)=0$ and $H(a)(i+1)=a(i)+1$. All component operators are injective. In particular this still works at $n=0$ and for constant or otherwise degenerate $\\theta$; $H(\\theta)$ need not be nondegenerate, which is why all simplices were retained.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 6.5.3.7, proof, printed p. 676: the prepended-vertex functor and its two natural transformations, with formulas expanded. Online primary source inspected 2026-10-17; archival copy WANTED in report.md. No Stacks tag states this assertion."
+   }
+  },
+  {
+   "text": "Taking opposites gives the zigzag $B^{\\mathrm{op}}\\Leftarrow H^{\\mathrm{op}}\\Rightarrow\\mathrm{id}_{C_n^{\\mathrm{op}}}$. Apply [lem-coef-nerve-natural-homotopy-equivalence] directly to this opposite category, without assuming a comparison of realizations with opposite nerves: the two transformations give homotopies joining its identity to the constant map at $b$. Equivalently the unique functor $P:C_n^{\\mathrm{op}}\\to\\mathbf1$ and the functor $Q:\\mathbf1\\to C_n^{\\mathrm{op}}$ selecting $b$ have $PQ=\\mathrm{id}_{\\mathbf1}$ and the displayed zigzag from $QP=B^{\\mathrm{op}}$ to the identity. The cited theorem says $NP$ is a weak homotopy equivalence. Thus $N(\\sigma\\downarrow u)=N(C_n^{\\mathrm{op}})$ is weakly contractible. The chosen $b$ ensures nonemptiness.",
+   "uses": [
+    "lem-coef-nerve-natural-homotopy-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Lemma 6.5.3.7, last paragraph of proof, with the contraction applied directly to the opposite comma category. Online primary source inspected 2026-10-17; archival copy WANTED in report.md. No Stacks tag states this assertion."
+   }
+  },
+  {
+   "text": "We verify that this ordinary comma computes the infinity-categorical comma required below. For an ordinary category $D$, the coherent undercategory $N(D)_{\\sigma/}$ is $N(D_{\\sigma/})$: a simplex consists of a chain beginning with an arrow from $\\sigma$, and the undercategory identities are exactly its commuting triangles. The projection $N(D_{\\sigma/})\\to N(D)$ is an isofibration. For an inner-horn lifting problem, the given chain in $D_{\\sigma/}$ has its unique nerve filler, obtained by composing adjacent arrows. Its projection agrees with the prescribed base simplex because both fill the same inner horn in $N(D)$ and such a filler is unique in an ordinary nerve; an equivalence in $N(D)$ is an ordinary isomorphism, and an isomorphism $e:d\\to d'$ lifts at $h:\\sigma\\to d$ by the arrow from $h$ to $eh$ over $e$, with its inverse over $e^{-1}$. Both nerves are small quasicategories. Apply [lem-coef-infinity-isofibration-pullback-limit] to this projection and $N(u):N(A)\\to N(D)$. Its conclusion identifies the strict pullback $N(A)\\times_{N(D)}N(D_{\\sigma/})$ with the infinity-categorical pullback. Degree by degree the strict pullback is $N(\\sigma\\downarrow u)$: its simplices are chains of objects of $A$ with arrows from $\\sigma$ commuting with those chains. Step 4 therefore gives weak contractibility of the infinity-categorical comma $N(A)\\times^h_{N(D)}N(D)_{\\sigma/}$ for every $\\sigma$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-isofibration-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Theorem 4.1.3.1: comma convention; strict-versus-infinity pullback justified by the existing isofibration-pullback theorem, Kerodon 033R. Online primary source inspected 2026-10-17; archival copy WANTED in report.md. No Stacks tag states this assertion."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-cofinal-comma-criterion] with $I=N(A)$, $J=N(D)$, functor $N(u)=j_X$, diagram $H=p$ and vertex $T$. Smallness and the quasicategory conditions were checked in step 1, and step 5 verifies its infinity-categorical comma hypothesis at every object of $J$. The conclusion of that cited statement is the restriction map itself, not merely some equivalence between the two spaces. Substituting the definitions of $A,D,u$ gives exactly the map displayed in the item, with constant diagrams restricting to constant diagrams by precomposition. Both functor simplicial sets are quasicategories and their right-pinched mapping spaces are Kan by [lem-cbc-enhanced-functor-cone-calculus]. The criterion requires neither colimit existence in $\\mathcal E$ nor a quasicategory structure on $X$, so the asserted scope is unchanged.",
+   "uses": [
+    "lem-coef-infinity-cofinal-comma-criterion",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Theorem 4.1.3.1 and Proposition 4.1.1.7: universal restriction on cocones; direct comma proof of Variant 4.2.3.15, step (3). Online primary source inspected 2026-10-17; archival copy WANTED in report.md. No Stacks tag states this assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-cofinal-comma-criterion",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "lem-coef-nerve-natural-homotopy-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Lemma 6.5.3.7, proof, and Theorem 4.1.3.1, applied directly to the simplex category over X. The online source is not archived in literature/; formulas and the strict-pullback check are expanded here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -41,10 +117,80 @@
    "results": "No hits in Mathlib.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of coherent cocone mapping spaces along the opposite inclusion of injective simplex operators is an equivalence",
+   "results": "{\"t\": \"2026-10-17T03:36:51Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of coherent cocone mapping spaces along the opposite inclusion of injective simplex operators is an equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallObject.SuccStruct.restrictionLTOfCoconeIso\", \"TopCat.Presheaf.SheafCondition.pairwiseCoconeIso\", \"CategoryTheory.SmallObject.SuccStruct.restrictionLTOfCoconeIso_hom_app\", \"TopCat.Presheaf.whiskerIsoMapGenerateCocone\", \"TopCat.Presheaf.whiskerIsoMapGenerateCocone_hom_hom\", \"SSet.toTopSimplex\", \"SSet.stdSimplex.faceRepresentableBy\", \"TopCat.Presheaf.generateEquivalenceOpensLe_functor\"], \"digest\": \"575f94b78ee1ad4c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits concern ordinary cocones, finite presentability, truncation or face representability; Loogle and the grep searches returned no matching cofinality declaration. Final.coconesEquiv (Mathlib/CategoryTheory/Limits/Final.lean:283-287, read) is ordinary category theory, not coherent cocone mapping spaces in an arbitrary quasicategory."
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplexCategory, CategoryTheory.Functor.Final",
+   "results": "{\"t\": \"2026-10-17T03:36:51Z\", \"tool\": \"loogle\", \"query\": \"SimplexCategory, CategoryTheory.Functor.Final\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits concern ordinary cocones, finite presentability, truncation or face representability; Loogle and the grep searches returned no matching cofinality declaration. Final.coconesEquiv (Mathlib/CategoryTheory/Limits/Final.lean:283-287, read) is ordinary category theory, not coherent cocone mapping spaces in an arbitrary quasicategory."
+  },
+  {
+   "tool": "grep",
+   "query": "(injective|[Ff]ace|[Ss]emi[Ss]implicial).*[Cc]ofinal|[Cc]ofinal.*(injective|[Ff]ace)|[Ss]implex.*[Ff]inal",
+   "results": "{\"t\": \"2026-10-17T03:36:51Z\", \"tool\": \"grep\", \"query\": \"(injective|[Ff]ace|[Ss]emi[Ss]implicial).*[Cc]ofinal|[Cc]ofinal.*(injective|[Ff]ace)|[Ss]implex.*[Ff]inal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits concern ordinary cocones, finite presentability, truncation or face representability; Loogle and the grep searches returned no matching cofinality declaration. Final.coconesEquiv (Mathlib/CategoryTheory/Limits/Final.lean:283-287, read) is ordinary category theory, not coherent cocone mapping spaces in an arbitrary quasicategory."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ofinal|coconesEquiv|[Ss]emi[Ss]implicial",
+   "results": "{\"t\": \"2026-10-17T03:37:00Z\", \"tool\": \"grep\", \"query\": \"[Cc]ofinal|coconesEquiv|[Ss]emi[Ss]implicial\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits concern ordinary cocones, finite presentability, truncation or face representability; Loogle and the grep searches returned no matching cofinality declaration. Final.coconesEquiv (Mathlib/CategoryTheory/Limits/Final.lean:283-287, read) is ordinary category theory, not coherent cocone mapping spaces in an arbitrary quasicategory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Semisimplicial indexing inclusion is cofinal and preserves coherent cocone spaces in quasicategories",
+   "results": "{\"t\": \"2026-10-17T03:37:00Z\", \"tool\": \"leansearch\", \"query\": \"Semisimplicial indexing inclusion is cofinal and preserves coherent cocone spaces in quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategory.Truncated.initial_inclusion\", \"AugmentedSimplexCategory.instFaithfulSimplexCategoryInclusion\", \"SSet.Quasicategory\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"AugmentedSimplexCategory.instFullSimplexCategoryInclusion\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"SimplexCategory.Truncated.inclusion.fullyFaithful\"], \"digest\": \"277a06e293094786\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits concern ordinary cocones, finite presentability, truncation or face representability; Loogle and the grep searches returned no matching cofinality declaration. Final.coconesEquiv (Mathlib/CategoryTheory/Limits/Final.lean:283-287, read) is ordinary category theory, not coherent cocone mapping spaces in an arbitrary quasicategory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The opposite category of simplices with only injective face maps is homotopy final in the opposite full simplex category",
+   "results": "{\"t\": \"2026-10-17T03:37:01Z\", \"tool\": \"leanfinder\", \"query\": \"The opposite category of simplices with only injective face maps is homotopy final in the opposite full simplex category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Finite.instIsFinitelyPresentableObjSimplexCategoryStdSimplex\", \"SSet.Finite.instIsFinitelyPresentable\", \"SSet.cosk\", \"CategoryTheory.SimplicialObject.cosk\", \"SSet.Finite.exists_epi_from_isCardinalPresentable\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.instFiniteInitial\"], \"digest\": \"ebe3d63e1eefc179\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: semantic hits concern ordinary cocones, finite presentability, truncation or face representability; Loogle and the grep searches returned no matching cofinality declaration. Final.coconesEquiv (Mathlib/CategoryTheory/Limits/Final.lean:283-287, read) is ordinary category theory, not coherent cocone mapping spaces in an arbitrary quasicategory."
+  },
+  {
+   "tool": "grep",
+   "query": "([Ss]implex|[Ss]implicial|[Ee]lements).*(homotopy[Ff]inal|[Cc]ofinal)|[Cc]ofinal.*([Ss]implex|[Ss]implicial)",
+   "results": "{\"t\": \"2026-10-17T03:49:15Z\", \"tool\": \"grep\", \"query\": \"([Ss]implex|[Ss]implicial|[Ee]lements).*(homotopy[Ff]inal|[Cc]ofinal)|[Cc]ofinal.*([Ss]implex|[Ss]implicial)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Order/Max.lean\", \"Mathlib/SetTheory/Cardinal/Cofinality/Enum.lean\"], \"digest\": \"7d097ec1421b9870\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. LeanFinder returned cofibration/monomorphism and Dold-Kan constructions; LeanSearch returned face, truncation and opposite-diagram formulas; Loogle returned no hits; grep returned only order/cardinal cofinality vocabulary. None states coherent cocone restriction for this inclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy cofinality of the opposite inclusion of the category of elements restricted to monomorphisms in the simplex category",
+   "results": "{\"t\": \"2026-10-17T03:49:15Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy cofinality of the opposite inclusion of the category of elements restricted to monomorphisms in the simplex category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.cofibration_of_mono\", \"SSet.modelCategoryQuillen.cofibration_iff\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"SSet.modelCategoryQuillen.mono_of_cofibration\", \"SSet.modelCategoryQuillen.I_le_monomorphisms\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.Termwise.mapMono\"], \"digest\": \"6f45c6315f55ba1e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. LeanFinder returned cofibration/monomorphism and Dold-Kan constructions; LeanSearch returned face, truncation and opposite-diagram formulas; Loogle returned no hits; grep returned only order/cardinal cofinality vocabulary. None states coherent cocone restriction for this inclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplexCategory\", \"Final\"",
+   "results": "{\"t\": \"2026-10-17T03:49:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplexCategory\\\", \\\"Final\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. LeanFinder returned cofibration/monomorphism and Dold-Kan constructions; LeanSearch returned face, truncation and opposite-diagram formulas; Loogle returned no hits; grep returned only order/cardinal cofinality vocabulary. None states coherent cocone restriction for this inclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inclusion of face operators into all simplex operators is homotopy final after taking opposite categories",
+   "results": "{\"t\": \"2026-10-17T03:49:45Z\", \"tool\": \"leansearch\", \"query\": \"The inclusion of face operators into all simplex operators is homotopy final after taking opposite categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.δ\", \"SimplexCategory.Truncated.inclusion.fullyFaithful\", \"CategoryTheory.simplicialCosimplicialEquiv_inverse_obj\", \"SimplexCategoryGenRel.faces\", \"SSet.op_δ\", \"CategoryTheory.cosimplicialSimplicialEquiv\", \"SimplexCategory.II_σ\", \"SimplexCategory.II_δ\"], \"digest\": \"8e92b6bf0f4c1527\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader search. LeanFinder returned cofibration/monomorphism and Dold-Kan constructions; LeanSearch returned face, truncation and opposite-diagram formulas; Loogle returned no hits; grep returned only order/cardinal cofinality vocabulary. None states coherent cocone restriction for this inclusion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-poset-nerve-cofinal-replacement",
@@ -75,5 +221,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-injective-simplex-cocone-restriction",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Identified every ordinary comma as the opposite of the injective-operator category over [n], wrote the prepended-zero contraction and its naturality formulas, and checked the isofibration computing the infinity-categorical comma before applying the existing universal cofinality criterion. Reused all foundational lemmas; no new nodes or Mathlib leaves. The delayed shared-DAG refresh resolved the initially missing input.",
+  "blueprint": "Auxiliary HTT Proposition 5.3.5.15, proof (a), reduction to the lifting tests N(B) ⊆ N(B ∪ {∞}) using Remark 5.3.1.12: the converse direction of Remark 5.3.1.12, cofinal poset-nerve replacement of a κ-small diagram shape (Variants 4.2.3.15, 4.2.3.16). Supporting input: HTT Variant 4.2.3.15, step (3), printed pp. 255-256, using Lemma 6.5.3.7 and Proposition 4.1.2.15; Proposition 4.1.1.7, printed p. 226, and natural join/cocone comparison for the mapping-space formulation. Realized by steps 1-6 via the explicit comma proof of HTT Lemma 6.5.3.7, rather than leaving its base-change argument implicit.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic internal-hom and mapping-space calculus: steps 1 and 6 use only that functor simplicial sets into a quasicategory are quasicategories and their mapping spaces are Kan. No statement of this unit supplies this general typing fact; it does not replace the HTT comma-contraction proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-4bdd4b585",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-4bdd4b585 (reviewer sub-agent of L); spot-checked: Read the item and all six proof steps in full, plus the full statements of every cited node: def-cbc-enhanced-diagrams-cones, lem-cbc-enhanced-functor-cone-calculus, lem-coef-infinity-cofinal-comma-criterion, lem-coef-infinity-isofibration-pullback-limit, lem-coef-nerve-natural-homotopy-equivalence, and lem-coef-infinity-isofibration-exponentiation (for the definition of isofibration). Also read the citing parent's step 4 and the unit record. The delivery creates no new nodes. The statement is unchanged and correctly oriented. It needs the undercategory (final) condition of the criterion, and its case X=Δ^0 is the classical cofinality of Δ_inj^op in Δ^op. Rechecked by hand: the comma (σ↓u) is C_n^op (a comma arrow θ→θ' is an injective a with θa=θ'). In the prepended-zero contraction, monotonicity, H(θ')H(a)=H(θ), the two components 0↦0 and i↦i+1, and both naturality equations hold, including at n=0 and for constant θ. The hypotheses of the nerve homotopy lemma (zigzag in either orientation, non-invertible components) are met exactly. The undercategory projection is an isofibration: inner fillers in a nerve are unique and isomorphisms lift as h→eh. Nerves preserve pullbacks, so the strict pullback is N(σ↓u). The criterion's conclusion is the restriction map itself, with no colimit hypothesis. proof_deps equals the union of the steps' uses. A traversal of 484 reachable nodes finds no cycle. An rg sweep of the DAG and a read of six candidate nodes found no duplicate. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus, only for the generic facts that Fun(K,E) is a quasicategory and its mapping spaces are Kan. HTT is not archived; it is recorded as WANTED and proof_origin is agent, as the brief requires. No SGA is used. No fixes were made."
  }
 }
