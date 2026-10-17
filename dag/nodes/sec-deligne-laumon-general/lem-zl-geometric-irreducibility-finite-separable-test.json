@@ -15,9 +15,95 @@
   "def-weil-irreducible-components",
   "def-weil-vector-space-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Condition (1) implies (2): each finite separable extension is in particular a field extension, so specialize the quantifier in (1).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037K, lemma-geometrically-irreducible, first proof paragraph."
+   }
+  },
+  {
+   "text": "We record the scalar identifications used below. For fields $k\\subseteq E\\subseteq F$, put $A_E=R\\otimes_kE$ and $A_F=R\\otimes_kF$. There is an isomorphism $A_E\\otimes_EF\\simeq A_F$ sending $(r\\otimes e)\\otimes f$ to $r\\otimes ef$, with inverse $r\\otimes f\\mapsto(r\\otimes1)\\otimes f$. The bilinearity relations of [def-weil-pbc-module-tensor-product] make both formulas well-defined; on pure tensors their composites are identities by $E$-balancing. The multiplication and unit in [lem-weil-pbc-algebra-tensor-pushout-universal-property] show they are ring maps. The map $A_E\\to A_F$ thereby becomes $a\\mapsto a\\otimes1$. Apply [lem-weil-pbc-field-extension-base-change-faithfully-flat] with base field $E$, extension $F/E$, and algebra $D=A_E$, followed by the $I=0$ clause of [lem-weil-pbc-faithfully-flat-ideal-contraction]: this map is injective. For $E=k$, use also $R\\otimes_kk\\simeq R$, $r\\otimes c\\mapsto cr$, inverse $r\\mapsto r\\otimes1$, verified by the same relations.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037K proof, scalar-extension maps; tensor bilinearity and faithful-flat injectivity replace the minimal-prime going-down argument."
+   }
+  },
+  {
+   "text": "Assume (2). Take a separable closure $k_s/k$ as in [def-pd-separable-closure], which is separably closed and is the filtered union of its finite separable subextensions. Condition (2) for $E=k$ and the unit isomorphism in Step 2 give irreducibility of $\\operatorname{Spec}R$, hence $1_R\\ne0$ by [lem-zl-spectrum-irreducible-nilradical-prime]. Step 2 makes $R\\to A=R\\otimes_kk_s$ injective, so $1_A\\ne0$. Thus the nilradical $N_A$ is proper: $1_A^n=1_A\\ne0$ for every positive integer $n$.",
+   "uses": [
+    "def-pd-separable-closure",
+    "lem-zl-spectrum-irreducible-nilradical-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037K, (2) implies (3), including nonemptiness of the spectrum."
+   }
+  },
+  {
+   "text": "To show $N_A$ is prime, take $x,y\\in A$ with $(xy)^n=0$ for some $n\\ge1$. By the pure-tensor generation in [def-weil-pbc-module-tensor-product], $x$ and $y$ are finite sums of pure tensors. Their finitely many coefficients in $k_s$ lie together in one finite separable subextension $E/k$, by the filtered-union assertion of [def-pd-separable-closure]. Hence $x,y$ are images of elements $x_E,y_E\\in A_E$. Step 2 gives injectivity of $A_E\\to A$, so $(x_Ey_E)^n=0$. Condition (2) and [lem-zl-spectrum-irreducible-nilradical-prime] make $N_{A_E}$ prime, whence $x_E$ or $y_E$ is nilpotent. Its image $x$ or $y$ is nilpotent. Thus $N_A$ is prime and proper, and the same criterion proves $\\operatorname{Spec}A$ irreducible. This proves the separable-closure intermediate assertion without assuming finite generation of $R$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-pd-separable-closure",
+    "lem-zl-spectrum-irreducible-nilradical-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037K, (2) implies (3): the finite-subextension argument, expressed using the nilradical criterion Tag 00ES instead of minimal primes."
+   }
+  },
+  {
+   "text": "Let $L/k$ now be any field extension. Apply [lem-weil-common-extension-fields] to $L/k$ and $k_s/k$ to obtain a field $M$ and compatible $k$-embeddings $L\\to M$ and $k_s\\to M$. Regard $M$ as a $k_s$-algebra via the latter embedding. The nilradical of a field is the zero ideal: a nonzero element is invertible, so cannot have a zero positive power; and a product of two nonzero elements is invertible. It is proper because $1_M\\ne0$. Therefore [lem-zl-spectrum-irreducible-nilradical-prime] makes $\\operatorname{Spec}M$ irreducible. Since $k_s$ is separably closed and Step 4 gives irreducibility of $\\operatorname{Spec}A$, apply [lem-zl-sepclosed-algebras-tensor-irreducible] over $k_s$ to $A$ and $M$. It gives irreducibility of $\\operatorname{Spec}(A\\otimes_{k_s}M)$. Step 2 identifies this ring with $C=R\\otimes_kM$.",
+   "uses": [
+    "lem-weil-common-extension-fields",
+    "lem-zl-spectrum-irreducible-nilradical-prime",
+    "lem-zl-sepclosed-algebras-tensor-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037K, final proof paragraph; Tag 00I7, lemma-separably-closed-irreducible, applied directly over the separable closure."
+   }
+  },
+  {
+   "text": "Put $B=R\\otimes_kL$. Step 2 applied to $L\\subseteq M$ gives an injective unital ring map $v:B\\to C$. For each $b\\in B$, $v(b)$ is nilpotent if and only if $b$ is nilpotent: $v(b)^n=v(b^n)$, and injectivity detects zero. Thus $N_B=v^{-1}(N_C)$. By Step 5 and [lem-zl-spectrum-irreducible-nilradical-prime], $N_C$ is prime and proper. Its preimage is proper since $v(1)=1\\notin N_C$. If $bb\\prime\\in N_B$, then $v(b)v(b\\prime)\\in N_C$, so $v(b)$ or $v(b\\prime)$ lies in $N_C$, and consequently $b$ or $b\\prime$ lies in $N_B$. Thus $N_B$ is prime, and the same criterion gives irreducibility of $\\operatorname{Spec}B$. This holds for every $L/k$, proving (1).",
+   "uses": [
+    "lem-zl-spectrum-irreducible-nilradical-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037K, final descent from a common overfield, via contraction of the nilradical along the injective scalar-extension map."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "def-pd-separable-closure",
+  "lem-zl-spectrum-irreducible-nilradical-prime",
+  "lem-weil-common-extension-fields",
+  "lem-zl-sepclosed-algebras-tensor-irreducible"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 037K, lemma-geometrically-irreducible, (1) implies (2), (2) implies (3), and the final common-overfield argument using Tag 00I7 directly over the separable closure. Finite support and nilradicals spell out the same scalar-extension argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +139,50 @@
    "results": "11 hits in Mathlib/AlgebraicGeometry/Geometrically: definitions, stability, integral/reduced relationships. Read Irreducible.lean in full: no finite-separable-extension test.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative algebra over a field, geometric irreducibility is equivalent to irreducibility after every finite separable extension",
+   "results": "8 hits: Algebra.IsGeometricallyReduced, Algebra.isGeometricallyReduced_iff, Algebra.isReduced_of_isGeometricallyReduced, Algebra.IsGeometricallyReduced.of_forall_fg, Algebra.IsGeometricallyReduced.of_injective, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, Irreducible.hasSeparableContraction, Polynomial.Separable.map_irreducible_of_isPurelyInseparable.  Read the relevant Mathlib source; no theorem with the stated hypotheses and irreducibility conclusion.",
+   "date": "2026-10-18",
+   "verdict": "no match",
+   "digest": "1c7343cba7a9c73f"
+  },
+  {
+   "tool": "grep",
+   "query": "geometrically.?irreducible|finite.*separable|separable.*finite",
+   "results": "11 hits: Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean.  Read the relevant Mathlib source; no theorem with the stated hypotheses and irreducibility conclusion.",
+   "date": "2026-10-18",
+   "verdict": "no match",
+   "digest": "5fb9ff4568179b47"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric irreducibility of an algebra can be tested after finite separable extensions of its base field",
+   "results": "8 hits: Algebra.isGeometricallyReduced_iff, Polynomial.Separable.map_irreducible_of_isPurelyInseparable, Algebra.IsGeometricallyReduced.casesOn, Algebra.IsGeometricallyReduced, IsSepClosure.separable, Algebra.IsSeparable.finInsepDegree_eq, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.IsGeometricallyReduced.of_forall_fg.  Read the relevant Mathlib source; no theorem with the stated hypotheses and irreducibility conclusion.",
+   "date": "2026-10-18",
+   "verdict": "no match",
+   "digest": "40d0dbf28a813473"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyIrreducible\"",
+   "results": "12 hits: AlgebraicGeometry.instIsStableUnderBaseChangeSchemeGeometricallyIrreducible, AlgebraicGeometry.GeometricallyIrreducible, AlgebraicGeometry.instSurjectiveOfGeometricallyIrreducible, AlgebraicGeometry.GeometricallyIrreducible.eq_geometrically, AlgebraicGeometry.GeometricallyIrreducible.geometrically_irreducibleSpace, AlgebraicGeometry.GeometricallyIrreducible.mk, AlgebraicGeometry.geometricallyIrreducible_iff, AlgebraicGeometry.instGeometricallyIrreducibleFiberToSpecResidueField.  Read the relevant Mathlib source; no theorem with the stated hypotheses and irreducibility conclusion.",
+   "date": "2026-10-18",
+   "verdict": "no match",
+   "digest": "7f88068ce516506f"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebra has irreducible spectrum after every field extension if its spectrum remains irreducible after each finite separable extension",
+   "results": "8 hits: Algebra.IsGeometricallyReduced, AlgebraicGeometry.instIrreducibleSpaceCarrierCarrierCommRingCatSpecOfIsDomainCarrier, Algebra.IsGeometricallyReduced.of_forall_fg, Algebra.isGeometricallyReduced_iff, Algebra.isReduced_of_isGeometricallyReduced, PrimeSpectrum.irreducibleSpace, Algebra.IsSeparable, Polynomial.Separable.map_irreducible_of_isPurelyInseparable.  Read the relevant Mathlib source; no theorem with the stated hypotheses and irreducibility conclusion.",
+   "date": "2026-10-18",
+   "verdict": "no match",
+   "digest": "90f8b775a607dc7d"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-field-extension-algebraically-closed-geometric",
@@ -76,5 +202,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-geometric-irreducibility-finite-separable-test",
+  "worker": "stage1",
+  "summary": "Checked Tag 037K for arbitrary, possibly nonreduced and infinitely generated algebras. Expanded the finite-subextension passage by the prime-nilradical criterion, made scalar-extension injectivity explicit, and used Tag 00I7 over the separable closure followed by the common-overfield descent. One statement-only helper is needed because the existing 00I7 node only treats two fields. No statement change.",
+  "blueprint": "Current blueprint main-20261015, lem-zl-bertini-finite-cover-curve proof paragraph 3, geometric irreducibility input for Tag 0G4F; through the Tag 0G33 and Tag 037P field-extension reduction, Tag 037K finite-separable test, (2) implies (3) and (3) implies (1).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-common-extension-fields",
+    "why": "The common-overfield construction is a generic field-theory tool in the final paragraph of Tag 037K; no node of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-common-extension-fields"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-be7a25832",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-be7a25832 (reviewer sub-agent of L); spot-checked: I read Stacks algebra.tex, Tag 037K (lemma-geometrically-irreducible) and Tag 00I7 (lemma-separably-closed-irreducible), in full. The item is exactly 037K's equivalence of (1) and (2), unchanged. Small cases all behave correctly: R=0, Q(i)/Q, a purely inseparable extension, k[e]/e^2 and Qbar/Q. Step 2 gets the reassociation from the tensor product and the algebra-tensor universal property, and injectivity from the faithful-flatness node (it holds for any algebra D) plus the I=0 clause of the ideal-contraction node. Step 3 handles nonemptiness through the nilradical criterion. Step 4 runs the finite-subextension argument with an explicit check that (x_E y_E)^n=0 descends by injectivity. Step 5 applies 00I7 directly over k_s to A and the field M from lem-weil-common-extension-fields; this is valid because 00I7 holds over any separably closed field, so the (3)=>(4) passage is not needed. Step 6 pulls the prime nilradical back along an injective map. proof_deps equals the union of the uses, every cited id exists and is unmerged, and there is no cycle. The new node lem-zl-sepclosed-algebras-tensor-irreducible matches 00I7 hypothesis by hypothesis (arbitrary algebras, separably closed base). It holds on an imperfect separably closed k, where the tensor product is irreducible but not reduced, and C⊗_R C shows the separably-closed hypothesis is needed. It is statement-only, its blueprint ancestry is correct, and its searches are recorded; pinned Mathlib has no match. It is not a duplicate of lem-weil-pbc-field-tensor-irreducible (fields only), lem-weil-pbc-sepclosed-tensor-reduction, lem-weil-pbc-algclosed-finite-type-tensor-domain, lem-sc-irreducible-product-over-field (needs geometric irreducibility) or lem-zl-geometric-irreducibility-subalgebra-colimit. I accept the tool use of lem-weil-common-extension-fields, a generic common-overfield lemma that matches 037K's last paragraph. No SGA source is cited, no fixes were written, and no target is weakened."
  }
 }
