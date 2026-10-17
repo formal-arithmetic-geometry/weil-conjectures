@@ -1,67 +1,135 @@
 {
-  "id": "def-trf-coefficient-pushforward",
-  "blueprint": {
-    "is": "def-trf-coefficient-pushforward",
-    "from": null,
-    "same_as": null
+ "id": "def-trf-coefficient-pushforward",
+ "blueprint": {
+  "is": "def-trf-coefficient-pushforward",
+  "from": null,
+  "same_as": [
+   "sk-d-proper-pushforward"
+  ]
+ },
+ "kind": "definition",
+ "title": "Coefficient pushforward of a correspondence",
+ "statement": "Fix the global finite-field datum and the coefficient conventions,\n$A=A_{E,n}$, $s=\\Spec k$; all functors are derived, and we write\n$c_2^*$, $c_1^!$ for $Lc_2^*$, $Rc_1^!$. Let\n$c=(c_1,c_2):C\\to X\\times_sX$ be an admissible cohomological\ncorrespondence of [def-trf-correspondence], let $K\\in D^b_{ctf}(X,A)$\nand let $u:c_2^*K\\to c_1^!K$ be a correspondence. Let\n$b=(b_1,b_2):D\\to Y\\times_sY$ be a second admissible correspondence. A\n*proper pushforward diagram* $(f,g):(C,c)\\to(D,b)$ consists of proper\nmorphisms\n\n$$\nf:X\\longrightarrow Y,\\qquad g:C\\longrightarrow D,\n\\qquad b_ig=fc_i\\quad(i=1,2).\n$$\n\nNo Cartesian condition is imposed on either leg square\n$(c_i,g,b_i,f)$, and $X,Y,C,D$ need not be proper over $s$. Put\n$K'=Rf_*K$. Write $\\eta_g:\\operatorname{id}\\to Rg_*g^*$ and\n$\\varepsilon_f:f^*Rf_*\\to\\operatorname{id}$ for the unit and counit of\nthe ordinary adjunctions, and $\\varepsilon_{c_1}:Rc_{1!}c_1^!\\to\\operatorname{id}$\nfor the counit of $Rc_{1!}\\dashv c_1^!$, all as in [fix-prop-adjunctions].\n\n1. *The ordinary half.* Let\n$$\n\\begin{aligned}\n\\gamma:b_2^*K'\n&\\xrightarrow{\\ \\eta_g\\ }Rg_*g^*b_2^*Rf_*K\n= Rg_*c_2^*f^*Rf_*K\\\\\n&\\xrightarrow{\\ Rg_*c_2^*\\varepsilon_f\\ }Rg_*c_2^*K,\n\\end{aligned}\n$$\nthe equality being the pullback composition $g^*b_2^*=(b_2g)^*=(fc_2)^*=c_2^*f^*$.\n1. *The exceptional half.* Since $f$ and $g$ are proper,\n$Rf_*=Rf_!$ and $Rg_*=Rg_!$ ([prop-functor-package], clause (3)), and the\ncomposition law of [thm-sf-comp-composition] applied to $b_1g=fc_1$ gives\n$\\Xi_1:Rb_{1!}Rg_*\\cong R(b_1g)_!=R(fc_1)_!\\cong Rf_!Rc_{1!}$. Let\n$$\n\\delta:Rg_*c_1^!K\\longrightarrow b_1^!K'\n$$\nbe the exceptional adjoint (for $Rb_{1!}\\dashv b_1^!$) of\n$$\nRb_{1!}Rg_*c_1^!K\\xrightarrow{\\ \\Xi_1\\ }Rf_!Rc_{1!}c_1^!K\n\\xrightarrow{\\ Rf_!\\varepsilon_{c_1}\\ }Rf_!K=K'.\n$$\n1. The *coefficient pushforward* of $u$ is\n$$\n[f,g]_!u:=\\delta\\circ Rg_*u\\circ\\gamma:\\\nb_2^*K'\\longrightarrow b_1^!K',\n$$\na correspondence on $(Y,K')$ supported on $b$.\n1. *The induced map of fixed schemes.* Let $F_c=\\operatorname{Fix}(c)$\nand $F_b=\\operatorname{Fix}(b)$ be the fixed schemes of\n[def-trf-fixed-scheme], with projections $i_c:F_c\\to C$, $d_c:F_c\\to X$\nand $i_b:F_b\\to D$, $d_b:F_b\\to Y$. Since\n$b\\,g\\,i_c=(f\\times f)\\,c\\,i_c=(f\\times f)\\Delta_Xd_c=\\Delta_Y\\,f\\,d_c$,\nthe universal property of $F_b=D\\times_{Y\\times_sY,\\Delta_Y}Y$ gives a\nunique morphism\n$$\nh:F_c\\longrightarrow F_b,\\qquad i_bh=g\\,i_c,\\qquad d_bh=f\\,d_c .\n$$\n\n*The Cartesian case.* Neither construction uses a Cartesian\nsquare, but they reduce to the familiar maps when the squares are\nCartesian. The recipe for $\\gamma$ is the recipe of the exchange\n$\\operatorname{Ex}_*$ of [def-exchange-projection] (the adjoint of the\ncounit composed with the identification of pullbacks); so if\n$(c_2,g,b_2,f)$ is Cartesian, $\\gamma=\\operatorname{Ex}_*$ is the proper\nbase-change isomorphism $b_2^*Rf_*\\cong Rg_*c_2^*$ of\n[prop-functor-package], clause (4). The map $\\delta$ is the exchange map\nof [def-trf-admissibility] formed from the composition law and the\nexceptional counits; if $(c_1,g,b_1,f)$ is Cartesian, it is inverse to the\ndual base-change isomorphism $b_1^!Rf_*\\cong Rg_*c_1^!$ of\n[thm-sf-dual-base-change] (applied with $b_1$ as the exceptional map and\n$f$ as the proper map). Indeed, the latter is the mate of\n$\\operatorname{Ex}_!$, and $\\operatorname{Ex}_!$ is compatible with the\ncomposition law ([fix-lem-exchanges], item 4) and with the adjunctions\n([fix-prop-adjunctions], item 4), so the two mates are mutually inverse.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-proper-pushforward/def-trf-coefficient-pushforward.md",
+  "place": "node def-trf-coefficient-pushforward, order 2326"
+ },
+ "stmt_deps": [
+  "def-trf-correspondence",
+  "fix-prop-adjunctions",
+  "prop-functor-package",
+  "thm-sf-comp-composition",
+  "def-trf-fixed-scheme",
+  "def-exchange-projection",
+  "def-trf-admissibility",
+  "thm-sf-dual-base-change",
+  "fix-lem-exchanges"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pushforwardCoeff|ProperPushforwardDiagram|cohomological.{0,30}correspondence",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match"
   },
-  "kind": "definition",
-  "title": "Coefficient pushforward of a correspondence",
-  "statement": "Fix the global finite-field datum and the coefficient conventions,\n$A=A_{E,n}$, $s=\\Spec k$; all functors are derived, and we write\n$c_2^*$, $c_1^!$ for $Lc_2^*$, $Rc_1^!$. Let\n$c=(c_1,c_2):C\\to X\\times_sX$ be an admissible cohomological\ncorrespondence of [def-trf-correspondence], let $K\\in D^b_{ctf}(X,A)$\nand let $u:c_2^*K\\to c_1^!K$ be a correspondence. Let\n$b=(b_1,b_2):D\\to Y\\times_sY$ be a second admissible correspondence. A\n*proper pushforward diagram* $(f,g):(C,c)\\to(D,b)$ consists of proper\nmorphisms\n\n$$\nf:X\\longrightarrow Y,\\qquad g:C\\longrightarrow D,\n\\qquad b_ig=fc_i\\quad(i=1,2).\n$$\n\nNo Cartesian condition is imposed on either leg square\n$(c_i,g,b_i,f)$, and $X,Y,C,D$ need not be proper over $s$. Put\n$K'=Rf_*K$. Write $\\eta_g:\\operatorname{id}\\to Rg_*g^*$ and\n$\\varepsilon_f:f^*Rf_*\\to\\operatorname{id}$ for the unit and counit of\nthe ordinary adjunctions, and $\\varepsilon_{c_1}:Rc_{1!}c_1^!\\to\\operatorname{id}$\nfor the counit of $Rc_{1!}\\dashv c_1^!$, all as in [fix-prop-adjunctions].\n\n1. *The ordinary half.* Let\n$$\n\\begin{aligned}\n\\gamma:b_2^*K'\n&\\xrightarrow{\\ \\eta_g\\ }Rg_*g^*b_2^*Rf_*K\n= Rg_*c_2^*f^*Rf_*K\\\\\n&\\xrightarrow{\\ Rg_*c_2^*\\varepsilon_f\\ }Rg_*c_2^*K,\n\\end{aligned}\n$$\nthe equality being the pullback composition $g^*b_2^*=(b_2g)^*=(fc_2)^*=c_2^*f^*$.\n1. *The exceptional half.* Since $f$ and $g$ are proper,\n$Rf_*=Rf_!$ and $Rg_*=Rg_!$ ([prop-functor-package], clause (3)), and the\ncomposition law of [thm-sf-comp-composition] applied to $b_1g=fc_1$ gives\n$\\Xi_1:Rb_{1!}Rg_*\\cong R(b_1g)_!=R(fc_1)_!\\cong Rf_!Rc_{1!}$. Let\n$$\n\\delta:Rg_*c_1^!K\\longrightarrow b_1^!K'\n$$\nbe the exceptional adjoint (for $Rb_{1!}\\dashv b_1^!$) of\n$$\nRb_{1!}Rg_*c_1^!K\\xrightarrow{\\ \\Xi_1\\ }Rf_!Rc_{1!}c_1^!K\n\\xrightarrow{\\ Rf_!\\varepsilon_{c_1}\\ }Rf_!K=K'.\n$$\n1. The *coefficient pushforward* of $u$ is\n$$\n[f,g]_!u:=\\delta\\circ Rg_*u\\circ\\gamma:\\\nb_2^*K'\\longrightarrow b_1^!K',\n$$\na correspondence on $(Y,K')$ supported on $b$ (Varshavsky, loc. cit.,\n1.2.4).\n1. *The induced map of fixed schemes.* Let $F_c=\\operatorname{Fix}(c)$\nand $F_b=\\operatorname{Fix}(b)$ be the fixed schemes of\n[def-trf-fixed-scheme], with projections $i_c:F_c\\to C$, $d_c:F_c\\to X$\nand $i_b:F_b\\to D$, $d_b:F_b\\to Y$. Since\n$b\\,g\\,i_c=(f\\times f)\\,c\\,i_c=(f\\times f)\\Delta_Xd_c=\\Delta_Y\\,f\\,d_c$,\nthe universal property of $F_b=D\\times_{Y\\times_sY,\\Delta_Y}Y$ gives a\nunique morphism\n$$\nh:F_c\\longrightarrow F_b,\\qquad i_bh=g\\,i_c,\\qquad d_bh=f\\,d_c .\n$$\nIts properness, and hence the Borel–Moore pushforward of the trace\nclass along $h$, are established in the next lemma of this block.\n\n*The Cartesian case.* Neither construction uses a Cartesian\nsquare, but they reduce to the familiar maps when the squares are\nCartesian. The recipe for $\\gamma$ is the recipe of the exchange\n$\\operatorname{Ex}_*$ of [def-exchange-projection] (the adjoint of the\ncounit composed with the identification of pullbacks); so if\n$(c_2,g,b_2,f)$ is Cartesian, $\\gamma=\\operatorname{Ex}_*$ is the proper\nbase-change isomorphism $b_2^*Rf_*\\cong Rg_*c_2^*$ of\n[prop-functor-package], clause (4). The map $\\delta$ is the exchange map\nof [def-trf-admissibility] formed from the composition law and the\nexceptional counits; if $(c_1,g,b_1,f)$ is Cartesian, it is inverse to the\ndual base-change isomorphism $b_1^!Rf_*\\cong Rg_*c_1^!$ of\n[thm-sf-dual-base-change] (applied with $b_1$ as the exceptional map and\n$f$ as the proper map). Indeed, the latter is the mate of\n$\\operatorname{Ex}_!$, and $\\operatorname{Ex}_!$ is compatible with the\ncomposition law ([fix-lem-exchanges], item 4) and with the adjunctions\n([fix-prop-adjunctions], item 4), so the two mates are mutually inverse.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-proper-pushforward/def-trf-coefficient-pushforward.md",
-    "place": "node def-trf-coefficient-pushforward, order 2326"
+  {
+   "tool": "leansearch",
+   "query": "Pushforward a cohomological correspondence using proper direct images and exceptional inverse images",
+   "results": "8 hits: TopCat.Sheaf.pushforward, TopCat.Presheaf.pushforward, TopCat.Presheaf.pushforward_obj_obj, TopCat.Presheaf.pushforward_obj_map, AlgebraicGeometry.Scheme.Modules.pushforward, TopCat.Presheaf.pushforward_map_app, TopCat.Presheaf.toPushforwardOfIso, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern ordinary sheaves, their adjunctions or composition, not derived constructible cohomological correspondences with exceptional inverse images"
   },
-  "stmt_deps": [
-    "def-trf-correspondence",
-    "fix-prop-adjunctions",
-    "prop-functor-package",
-    "thm-sf-comp-composition",
-    "def-trf-fixed-scheme",
-    "def-exchange-projection",
-    "def-trf-admissibility",
-    "thm-sf-dual-base-change",
-    "fix-lem-exchanges"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 2326,
-  "blueprint_uses": [
-    "def-exchange-projection",
-    "def-trf-admissibility",
-    "def-trf-correspondence",
-    "def-trf-fixed-scheme",
-    "fix-lem-exchanges",
-    "fix-prop-adjunctions",
-    "prop-functor-package",
-    "thm-sf-comp-composition",
-    "thm-sf-dual-base-change"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor",
+   "results": "12 hits: CategoryTheory.Adjunction, CategoryTheory.Adjunction.isLeftAdjoint, CategoryTheory.Adjunction.isRightAdjoint, CategoryTheory.Adjunction.mk', CategoryTheory.Adjunction.mkOfHomEquiv, CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.ofIsLeftAdjoint, CategoryTheory.Adjunction.ofIsRightAdjoint",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern ordinary sheaves, their adjunctions or composition, not derived constructible cohomological correspondences with exceptional inverse images"
   },
-  "chapter": "sec-trace-formula",
-  "unit": "sk-d-proper-pushforward",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Fix the global finite-field datum and the coefficient conventions,\n$A=A_{E,n}$, $s=\\Spec k$; all functors are derived, and we write\n$c_2^*$, $c_1^!$ for $Lc_2^*$, $Rc_1^!$. Let\n$c=(c_1,c_2):C\\to X\\times_sX$ be an admissible cohomological\ncorrespondence of [def-trf-correspondence], let $K\\in D^b_{ctf}(X,A)$\nand let $u:c_2^*K\\to c_1^!K$ be a correspondence. Let\n$b=(b_1,b_2):D\\to Y\\times_sY$ be a second admissible correspondence. A\n*proper pushforward diagram* $(f,g):(C,c)\\to(D,b)$ consists of proper\nmorphisms\n\n$$\nf:X\\longrightarrow Y,\\qquad g:C\\longrightarrow D,\n\\qquad b_ig=fc_i\\quad(i=1,2).\n$$\n\nNo Cartesian condition is imposed on either leg square\n$(c_i,g,b_i,f)$, and $X,Y,C,D$ need not be proper over $s$. Put\n$K'=Rf_*K$. Write $\\eta_g:\\operatorname{id}\\to Rg_*g^*$ and\n$\\varepsilon_f:f^*Rf_*\\to\\operatorname{id}$ for the unit and counit of\nthe ordinary adjunctions, and $\\varepsilon_{c_1}:Rc_{1!}c_1^!\\to\\operatorname{id}$\nfor the counit of $Rc_{1!}\\dashv c_1^!$, all as in [fix-prop-adjunctions].\n\n1. *The ordinary half.* Let\n$$\n\\begin{aligned}\n\\gamma:b_2^*K'\n&\\xrightarrow{\\ \\eta_g\\ }Rg_*g^*b_2^*Rf_*K\n= Rg_*c_2^*f^*Rf_*K\\\\\n&\\xrightarrow{\\ Rg_*c_2^*\\varepsilon_f\\ }Rg_*c_2^*K,\n\\end{aligned}\n$$\nthe equality being the pullback composition $g^*b_2^*=(b_2g)^*=(fc_2)^*=c_2^*f^*$.\n1. *The exceptional half.* Since $f$ and $g$ are proper,\n$Rf_*=Rf_!$ and $Rg_*=Rg_!$ ([prop-functor-package], clause (3)), and the\ncomposition law of [thm-sf-comp-composition] applied to $b_1g=fc_1$ gives\n$\\Xi_1:Rb_{1!}Rg_*\\cong R(b_1g)_!=R(fc_1)_!\\cong Rf_!Rc_{1!}$. Let\n$$\n\\delta:Rg_*c_1^!K\\longrightarrow b_1^!K'\n$$\nbe the exceptional adjoint (for $Rb_{1!}\\dashv b_1^!$) of\n$$\nRb_{1!}Rg_*c_1^!K\\xrightarrow{\\ \\Xi_1\\ }Rf_!Rc_{1!}c_1^!K\n\\xrightarrow{\\ Rf_!\\varepsilon_{c_1}\\ }Rf_!K=K'.\n$$\n1. The *coefficient pushforward* of $u$ is\n$$\n[f,g]_!u:=\\delta\\circ Rg_*u\\circ\\gamma:\\\nb_2^*K'\\longrightarrow b_1^!K',\n$$\na correspondence on $(Y,K')$ supported on $b$.\n1. *The induced map of fixed schemes.* Let $F_c=\\operatorname{Fix}(c)$\nand $F_b=\\operatorname{Fix}(b)$ be the fixed schemes of\n[def-trf-fixed-scheme], with projections $i_c:F_c\\to C$, $d_c:F_c\\to X$\nand $i_b:F_b\\to D$, $d_b:F_b\\to Y$. Since\n$b\\,g\\,i_c=(f\\times f)\\,c\\,i_c=(f\\times f)\\Delta_Xd_c=\\Delta_Y\\,f\\,d_c$,\nthe universal property of $F_b=D\\times_{Y\\times_sY,\\Delta_Y}Y$ gives a\nunique morphism\n$$\nh:F_c\\longrightarrow F_b,\\qquad i_bh=g\\,i_c,\\qquad d_bh=f\\,d_c .\n$$\n\n*The Cartesian case.* Neither construction uses a Cartesian\nsquare, but they reduce to the familiar maps when the squares are\nCartesian. The recipe for $\\gamma$ is the recipe of the exchange\n$\\operatorname{Ex}_*$ of [def-exchange-projection] (the adjoint of the\ncounit composed with the identification of pullbacks); so if\n$(c_2,g,b_2,f)$ is Cartesian, $\\gamma=\\operatorname{Ex}_*$ is the proper\nbase-change isomorphism $b_2^*Rf_*\\cong Rg_*c_2^*$ of\n[prop-functor-package], clause (4). The map $\\delta$ is the exchange map\nof [def-trf-admissibility] formed from the composition law and the\nexceptional counits; if $(c_1,g,b_1,f)$ is Cartesian, it is inverse to the\ndual base-change isomorphism $b_1^!Rf_*\\cong Rg_*c_1^!$ of\n[thm-sf-dual-base-change] (applied with $b_1$ as the exceptional map and\n$f$ as the proper map). Indeed, the latter is the mate of\n$\\operatorname{Ex}_!$, and $\\operatorname{Ex}_!$ is compatible with the\ncomposition law ([fix-lem-exchanges], item 4) and with the adjunctions\n([fix-prop-adjunctions], item 4), so the two mates are mutually inverse.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "leanfinder",
+   "query": "coefficient pushforward of a cohomological correspondence along proper maps via ordinary and exceptional adjunctions",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj, TopCat.Sheaf.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforward_map_val, AlgebraicGeometry.Scheme.Modules.pushforward_map_app, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardComp_inv_app_val_app",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern ordinary sheaves, their adjunctions or composition, not derived constructible cohomological correspondences with exceptional inverse images"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional|cohomological|correspondence",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: both hits are comments about unrelated point or topology correspondences"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper pushforward of endocorrespondences on derived constructible etale sheaves exceptional pullback",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, CategoryTheory.Functor.sheafPushforwardContinuousComp', AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern ordinary sheaves, their adjunctions or composition, not derived constructible cohomological correspondences with exceptional inverse images"
+  },
+  {
+   "tool": "grep",
+   "query": "def pushforwardComp|def pullbackPushforwardAdjunction|structure Adjunction",
+   "results": "15 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/Topology/Sheaves/Functors.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern ordinary sheaves, their adjunctions or composition, not derived constructible cohomological correspondences with exceptional inverse images"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 2326,
+ "blueprint_uses": [
+  "def-exchange-projection",
+  "def-trf-admissibility",
+  "def-trf-correspondence",
+  "def-trf-fixed-scheme",
+  "fix-lem-exchanges",
+  "fix-prop-adjunctions",
+  "prop-functor-package",
+  "thm-sf-comp-composition",
+  "thm-sf-dual-base-change"
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-proper-pushforward",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Fix the global finite-field datum and the coefficient conventions,\n$A=A_{E,n}$, $s=\\Spec k$; all functors are derived, and we write\n$c_2^*$, $c_1^!$ for $Lc_2^*$, $Rc_1^!$. Let\n$c=(c_1,c_2):C\\to X\\times_sX$ be an admissible cohomological\ncorrespondence of [def-trf-correspondence], let $K\\in D^b_{ctf}(X,A)$\nand let $u:c_2^*K\\to c_1^!K$ be a correspondence. Let\n$b=(b_1,b_2):D\\to Y\\times_sY$ be a second admissible correspondence. A\n*proper pushforward diagram* $(f,g):(C,c)\\to(D,b)$ consists of proper\nmorphisms\n\n$$\nf:X\\longrightarrow Y,\\qquad g:C\\longrightarrow D,\n\\qquad b_ig=fc_i\\quad(i=1,2).\n$$\n\nNo Cartesian condition is imposed on either leg square\n$(c_i,g,b_i,f)$, and $X,Y,C,D$ need not be proper over $s$. Put\n$K'=Rf_*K$. Write $\\eta_g:\\operatorname{id}\\to Rg_*g^*$ and\n$\\varepsilon_f:f^*Rf_*\\to\\operatorname{id}$ for the unit and counit of\nthe ordinary adjunctions, and $\\varepsilon_{c_1}:Rc_{1!}c_1^!\\to\\operatorname{id}$\nfor the counit of $Rc_{1!}\\dashv c_1^!$, all as in [fix-prop-adjunctions].\n\n1. *The ordinary half.* Let\n$$\n\\begin{aligned}\n\\gamma:b_2^*K'\n&\\xrightarrow{\\ \\eta_g\\ }Rg_*g^*b_2^*Rf_*K\n= Rg_*c_2^*f^*Rf_*K\\\\\n&\\xrightarrow{\\ Rg_*c_2^*\\varepsilon_f\\ }Rg_*c_2^*K,\n\\end{aligned}\n$$\nthe equality being the pullback composition $g^*b_2^*=(b_2g)^*=(fc_2)^*=c_2^*f^*$.\n1. *The exceptional half.* Since $f$ and $g$ are proper,\n$Rf_*=Rf_!$ and $Rg_*=Rg_!$ ([prop-functor-package], clause (3)), and the\ncomposition law of [thm-sf-comp-composition] applied to $b_1g=fc_1$ gives\n$\\Xi_1:Rb_{1!}Rg_*\\cong R(b_1g)_!=R(fc_1)_!\\cong Rf_!Rc_{1!}$. Let\n$$\n\\delta:Rg_*c_1^!K\\longrightarrow b_1^!K'\n$$\nbe the exceptional adjoint (for $Rb_{1!}\\dashv b_1^!$) of\n$$\nRb_{1!}Rg_*c_1^!K\\xrightarrow{\\ \\Xi_1\\ }Rf_!Rc_{1!}c_1^!K\n\\xrightarrow{\\ Rf_!\\varepsilon_{c_1}\\ }Rf_!K=K'.\n$$\n1. The *coefficient pushforward* of $u$ is\n$$\n[f,g]_!u:=\\delta\\circ Rg_*u\\circ\\gamma:\\\nb_2^*K'\\longrightarrow b_1^!K',\n$$\na correspondence on $(Y,K')$ supported on $b$.\n1. *The induced map of fixed schemes.* Let $F_c=\\operatorname{Fix}(c)$\nand $F_b=\\operatorname{Fix}(b)$ be the fixed schemes of\n[def-trf-fixed-scheme], with projections $i_c:F_c\\to C$, $d_c:F_c\\to X$\nand $i_b:F_b\\to D$, $d_b:F_b\\to Y$. Since\n$b\\,g\\,i_c=(f\\times f)\\,c\\,i_c=(f\\times f)\\Delta_Xd_c=\\Delta_Y\\,f\\,d_c$,\nthe universal property of $F_b=D\\times_{Y\\times_sY,\\Delta_Y}Y$ gives a\nunique morphism\n$$\nh:F_c\\longrightarrow F_b,\\qquad i_bh=g\\,i_c,\\qquad d_bh=f\\,d_c .\n$$\n\n*The Cartesian case.* Neither construction uses a Cartesian\nsquare, but they reduce to the familiar maps when the squares are\nCartesian. The recipe for $\\gamma$ is the recipe of the exchange\n$\\operatorname{Ex}_*$ of [def-exchange-projection] (the adjoint of the\ncounit composed with the identification of pullbacks); so if\n$(c_2,g,b_2,f)$ is Cartesian, $\\gamma=\\operatorname{Ex}_*$ is the proper\nbase-change isomorphism $b_2^*Rf_*\\cong Rg_*c_2^*$ of\n[prop-functor-package], clause (4). The map $\\delta$ is the exchange map\nof [def-trf-admissibility] formed from the composition law and the\nexceptional counits; if $(c_1,g,b_1,f)$ is Cartesian, it is inverse to the\ndual base-change isomorphism $b_1^!Rf_*\\cong Rg_*c_1^!$ of\n[thm-sf-dual-base-change] (applied with $b_1$ as the exceptional map and\n$f$ as the proper map). Indeed, the latter is the mate of\n$\\operatorname{Ex}_!$, and $\\operatorname{Ex}_!$ is compatible with the\ncomposition law ([fix-lem-exchanges], item 4) and with the adjunctions\n([fix-prop-adjunctions], item 4), so the two mates are mutually inverse.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-trf-coefficient-pushforward",
+  "worker": "stage1",
+  "summary": "Split the definition by recording its nine existing statement dependencies; no new nodes. Checked the main-20261015 definition and every cited statement, including the constructible finite-coefficient domains. The ordinary half is a unit-pullback-comparison-counit composite; the exceptional half is the adjunction transpose of the displayed compact-support composite. The fixed-scheme map is the explicit pullback lift. In the Cartesian specialization the existing proper and dual base-change statements apply with the specified labels. Recorded seven real Mathlib searches, including a second semantic phrasing; no match. The source Lean definitions require additional supplied GeometricOperations data and do not establish the final Cartesian characterization, so they do not attach the entire item.",
+  "blueprint": "Realizes the main-20261015 definition, clauses 1 (ordinary half), 2 (exceptional half), 3 (coefficient composite), 4 (fixed-scheme lift), and its Cartesian-case paragraph. The same construction occurs in the blueprint unit sketch sk-d-proper-pushforward, now recorded in same_as; the detailed node additionally spells out the fixed-scheme equations and Cartesian comparison. Removed the obsolete Varshavsky parenthetical and the old forward pointer on properness to use blueprint_update.statement verbatim. All blueprint_update and import metadata remain unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-2c9e29e53",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-2c9e29e53 (reviewer sub-agent of L); spot-checked: Read in full: the item, all nine cited statements (def-trf-correspondence, fix-prop-adjunctions 1-4, prop-functor-package 3-4, thm-sf-comp-composition, def-trf-fixed-scheme, def-exchange-projection, def-trf-admissibility, thm-sf-dual-base-change, fix-lem-exchanges 4), the master and main-20261015 blueprint files, the unit sketch, Varshavsky math/0505564 §1.1.6, the slopmaster2 file ProperPushforward.lean lines 100-239, and every citer. The statement matches blueprint_update and the main-20261015 text exactly. It only drops the Varshavsky parenthetical and the forward pointer, so nothing is weakened. Checked each clause: gamma is unit of g, then the leg identification, then the counit of f. delta is the b1-transpose of Xi1 followed by Rf_! eps_{c1}. Both typecheck on D^b_ctf, using the constructible exceptional adjunction of def-trf-admissibility and not an ambient adjoint. The composite is elementary. h is the lift into the fibre product F_b, from b g i_c = Delta_Y f d_c. Cartesian paragraph: with the substitutions (C,X,D,Y,c2,f,g,b2) and (C,D,X,Y,c1,b1,g,f), gamma equals Ex_*, which prop-functor-package (4) makes an isomorphism. delta has the type of the conjugate of Ex_! and is inverse to the dual base change via the composition compatibility. These claims are true and no citer uses them; I accept them as a verbatim remark. Recipes match Varshavsky 1.1.6(ii) (legs swapped under the shriek adjunction) and slopmaster2 pushforwardCoeffUnit/Counit/fixMap on the ctf domain. That Lean makes f an s-morphism (f_comp); the DAG node leaves this implicit in the k-scheme convention. Edge cases checked: identity diagram gives u back, K=0, empty supports, the point target reproduces the global operator, and non-Cartesian legs. No new nodes; sk-d-proper-pushforward is correctly in same_as; no SGA; no fixes needed."
+ }
 }

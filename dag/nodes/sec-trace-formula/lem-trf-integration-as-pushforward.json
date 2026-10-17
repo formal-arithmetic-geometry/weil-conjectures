@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-trf-integration-as-pushforward",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Integration is pushforward to the point",
@@ -18,36 +18,152 @@
  ],
  "proof": [
   {
-   "text": "Take $h=a_T$, $T'=s$ in [def-trf-borel-moore-pushforward]. Then\n$\\omega_{T'}=Ra_s^!A_s=A_s$ by [def-trf-dualizing-complex], and the\nisomorphism $Ra_T^!\\omega_s\\xrightarrow{\\sim}\\omega_T$ of\n[thm-trf-dualizing-complex-composition] (with $d=a_T$, $X=s$) is the\nidentity of $Ra_T^!A_s=\\omega_T$, since the composition isomorphism\n$Ra_T^!R\\operatorname{id}_s^!\\cong Ra_T^!$ for the identity is the\nidentity by the unit coherence of the exchange data. Hence\n$(a_T)_*\\alpha$ is the composite\n\n$$\nA_s\\xrightarrow{\\eta_{a_T}}Ra_{T*}A_T\n\\xrightarrow{Ra_{T*}\\alpha}Ra_{T*}\\omega_T\n\\cong Ra_{T!}Ra_T^!A_s\\xrightarrow{\\varepsilon_{a_T}}A_s .\n$$",
+   "text": "Write $a=a_T$ and use the point normalization $R\\mathrm{id}_s^!A_s=A_s$ specified in the statement. The isomorphism $c:Ra^!\\omega_s\\to\\omega_T$ used in [def-trf-borel-moore-pushforward] is that of [thm-trf-dualizing-complex-composition], namely exceptional composition evaluated on $A_s$; [def-trf-dualizing-complex] identifies the target with $Ra^!A_s$, using the specified constructible exceptional inverse image on the small pro-etale site. To check its normalization rather than assume it, [thm-sf-comp-composition] says that the compact-support composition comparison with an identity morphism is the identity, under the canonical identity identifications. By the current statement of [def-trf-admissibility] the exceptional composition comparison is the adjunction conjugate of compact-support composition, using the composite adjunction; this is the mate used here. Use the identity adjunction with identity unit and counit of [def-weil-pbc-composite-adjunction] for the canonical point normalization. Its composite with $Ra_!\\dashv Ra^!$ has the original Hom bijection, since composing that bijection with the identity changes no arrow. The conjugate is defined by the unit-counit formula of [def-weil-pbc-adjunction-conjugate]. All adjunctions here are restricted to $D^b_{ctf}$. The object $A_s$ is the free rank-one constant sheaf in degree zero, and $Ra^!A_s=\\omega_T$ belongs to this category by exceptional admissibility. The schemes $T$ and $s$ are quasi-compact and quasi-separated, and the finite ring $A$ is discrete Noetherian. Thus [sk-thm-pe-constructible-comparison] supplies an etale-origin witness for every bounded constructible object used here, so the identity law of [thm-sf-comp-composition] applies on this restricted domain. For any test object $M\\in D^b_{ctf}(T,A)$ and any $u:M\\to Ra^!A_s$, write $\\Phi_M$ for this common adjunction bijection to $\\Hom(Ra_!M,A_s)$. The defining conjugacy equation is $\\Phi_M(c\\circ u)=\\Phi_M(u)\\circ\\operatorname{id}_{Ra_!M}=\\Phi_M(u)$, because the intervening compact-support composition comparison is the identity. The bijection is injective, and taking $M=Ra^!A_s$, $u=1$ gives $c=1$ under these identifications. No strict equality of unnormalized functors is asserted.",
    "uses": [
     "def-trf-borel-moore-pushforward",
+    "thm-trf-dualizing-complex-composition",
     "def-trf-dualizing-complex",
-    "thm-trf-dualizing-complex-composition"
+    "thm-sf-comp-composition",
+    "def-trf-admissibility",
+    "sk-thm-pe-constructible-comparison",
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-integral/lem-trf-integration-as-pushforward.proof.md",
+    "place": "First paragraph: identity coherence of exceptional composition"
+   }
   },
   {
-   "text": "Applying the $A$-linear equivalence\n$R\\Gamma(s,-):D(s,A)\\to D(A)$ ($k$ algebraically closed) term by\nterm, the first arrow becomes the map $\\eta^*$ of\n[def-trf-integration] (composed with $Ra_{T*}\\cong Ra_{T!}$, which\ncommutes with $Ra_{T*}\\alpha\\leftrightarrow Ra_{T!}\\alpha$ by\nnaturality of that identification), the second becomes\n$R\\Gamma(\\tau)$ with $\\tau=\\alpha$, and the last becomes\n$\\varepsilon_{a_\\beta}$ with $\\beta=T$. So the two composites\n$A\\to A$ agree, i.e. $\\int_T\\alpha=(a_T)_*\\alpha$ under\n$\\End_{D(A)}(A)=A$.",
+   "text": "Apply [def-trf-borel-moore-pushforward] with $h=a:T\\to s$, $T'=s$. Properness and exceptional admissibility of $a$ are hypotheses of the item; the point is the identity case just normalized. Use the proper comparison specified in the current pushforward definition, now explicitly sourced there to clause (3) of the functor package. Denote this comparison by $\\sigma:Ra_*\\xrightarrow{\\sim}Ra_!$, the ordinary unit at $A_s$ by $\\eta:A_s\\to Ra_*A_T$, and the exceptional counit at $A_s$ by $\\varepsilon:Ra_!Ra^!A_s\\to A_s$. Substituting $c=1$ from step 1 into the defining composite gives precisely\n$$ (a_T)_*\\alpha=\\varepsilon\\circ\\sigma_{\\omega_T}\\circ Ra_*\\alpha\\circ\\eta:A_s\\to A_s. $$\nThe $\\sigma$ here is the same proper comparison specified in [def-trf-integration]; there is no choice of a second comparison.",
    "uses": [
+    "def-trf-borel-moore-pushforward",
     "def-trf-integration"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-integral/lem-trf-integration-as-pushforward.proof.md",
+    "place": "First paragraph: displayed pushforward composite"
+   }
+  },
+  {
+   "text": "Naturality of the comparison isomorphism $\\sigma$ appearing in [def-trf-borel-moore-pushforward], applied to $\\alpha:A_T\\to\\omega_T$, is the equation\n$$\\sigma_{\\omega_T}\\circ Ra_*\\alpha=Ra_!\\alpha\\circ\\sigma_{A_T}.$$\nInsert this equation into step 2, obtaining $\\varepsilon\\circ Ra_!\\alpha\\circ\\sigma_{A_T}\\circ\\eta$. Applying the functor $R\\Gamma(s,-)$ preserves this composite. By the explicit three arrows in [def-trf-integration], its first part $R\\Gamma(s,\\sigma_{A_T}\\circ\\eta)$ is $\\eta^*$, its middle part is $R\\Gamma(T,\\alpha)$ under the displayed proper compact-support identifications there, and its final part is $R\\Gamma(s,\\varepsilon)$. Thus its image is exactly the composite defining $\\int_T\\alpha$. Finally read both endomorphisms using the identification $\\End_{D(s,A)}(A_s)=\\End_{D(A)}(A)=A$ specified in the item, which gives the asserted equality of scalars. Only functoriality on this composite is used; no equivalence of the full pro-etale derived category with $D(A)$ is needed.",
+   "uses": [
+    "def-trf-borel-moore-pushforward",
+    "def-trf-integration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-integral/lem-trf-integration-as-pushforward.proof.md",
+    "place": "Second paragraph: naturality and comparison of the three integration arrows"
+   }
   }
  ],
  "proof_deps": [
   "def-trf-borel-moore-pushforward",
-  "def-trf-dualizing-complex",
   "thm-trf-dualizing-complex-composition",
-  "def-trf-integration"
+  "def-trf-dualizing-complex",
+  "thm-sf-comp-composition",
+  "def-trf-admissibility",
+  "def-trf-integration",
+  "sk-thm-pe-constructible-comparison",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-integral/lem-trf-integration-as-pushforward.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-integral/lem-trf-integration-as-pushforward.proof.md",
+  "place": "Both proof paragraphs, with the mate identity and naturality equations expanded"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Integration of a Borel Moore section on a proper scheme equals pushforward to the geometric point via the exceptional adjunction counit",
+   "results": "8 hits: Scheme.Hom.normalizationDiagram; Scheme.ofRestrict_toLRSHom_c_app; toOpen_toSpecΓ_app; Scheme.ofRestrict_app; Scheme.Opens.toSpecΓ_SpecMap_presheaf_map_top; toOpen_toSpecΓ_app_assoc; LocallyRingedSpace.toΓSpecSheafedSpace_app_spec_assoc; Scheme.Modules.restrictFunctorAdjCounitIso. These concern structure sheaves or restrictions, not Borel-Moore integration.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatIso",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "borelMoore|Borel.Moore|dualizing|integration",
+   "results": "AlgebraicGeometry: 0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The trace integral of a dualizing complex section is proper pushforward to a point",
+   "results": "8 hits concerning Algebra.intTrace, Algebra.intTrace_eq_trace, Algebra.intTrace_eq_of_isLocalization, Algebra.algebraMap_intTrace, Algebra.intTraceAux, LinearMap.trace_eq_contract_apply, traceForm_dualSubmodule_adjoin. Ring traces and linear trace contraction do not state this sheaf-theoretic comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper pushforward of a morphism from the constant sheaf to the dualizing complex followed by the trace counit equals integration",
+   "results": "8 hits, all in SheafOfModules: pushforwardSections_unitHomEquiv; unitToPushforwardObjUnit_val_app_apply; pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; pushforwardPushforwardAdj_counit_app_val_app; unitToPushforwardObjUnit; pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; pushforwardPushforwardAdj_unit_app_val_app; pullbackObjUnitToUnit. Read PullbackFree.lean: these are underived pullback/pushforward unit and section formulas; no exceptional trace or dualizing complex.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|upperShriek|dualizing|borelMoore",
+   "results": "CategoryTheory: 5 textual hits in Adjunction/PartialAdjoint.lean:32, Functor/Derived/PointwiseRightDerived.lean:22, PointwiseLeftDerived.lean:21, LeftDerived.lean:27, Category/Cat/Op.lean:12; all are comments about dualizing category-theoretic constructions.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction",
+   "results": "12 hits in Mathlib.CategoryTheory.Adjunction.Basic: Adjunction.id, instInhabitedId, Adjunction, Equivalence.toAdjunction, toAdjunction', isLeftAdjoint, isRightAdjoint, mk', mkOfHomEquiv, mkOfUnitCounit, ofIsLeftAdjoint, ofIsRightAdjoint. These are adjunction constructions, not a theorem comparing the two project integration definitions.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Trace of the exceptional adjunction for a proper morphism equals the composite of the ordinary adjunction unit and cohomology of a dualizing section",
+   "results": "8 hits: ExponentiableMorphism.coev_ev, coev_ev_assoc, coev_def, coev_naturality; Scheme.Modules.pullbackPushforwardAdjunction, pseudofunctor_map_adj; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app and pushforwardPushforwardAdj_unit_app_val_app. These concern exponentiable morphisms and underived sheaves of modules, not the exceptional dualizing-section integral.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "borelMoore|dualizing|exceptionalCounit|properComparison",
+   "results": "10 hits, all textual uses of dualizing: ModelCategory/FibrantObjectHomotopy.lean:20, InnerProductSpace/Dual.lean:190, Data/Set/Defs.lean:60, Adjunction/PartialAdjoint.lean:32, Derived/PointwiseRightDerived.lean:22, PointwiseLeftDerived.lean:21, LeftDerived.lean:27, Category/Cat/Op.lean:12, Tactic/Translate/ToDual.lean:27, Homology/HomotopyFiber.lean:82. No exceptional trace, Borel-Moore pushforward or proper comparison declaration.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugate.*(id|identity)|mate.*(id|identity)",
+   "results": "25 textual hits, mostly unrelated uses of conjugate or approximate; AlgebraicGeometry/Modules/Sheaf.lean:224 has conjugateEquiv_pullbackId_hom. No declaration compares the project integration and Borel–Moore pushforward definitions.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "12 hits include conjugateEquiv_id and conjugateEquiv_leftUnitor_hom/rightUnitor_hom. Read Mathlib/CategoryTheory/Adjunction/Mates.lean:319–322 and 534–545: these prove the formal identity mate calculation, not this item’s derived sheaf-theoretic comparison. Reuse the existing adjunction-definition nodes; create no lemma.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the proper direct image comparison moves a constant sheaf section across pushforward in derived sheaf cohomology",
+   "results": "8 hits in Sites/Continuous and Sheaf/PushforwardContinuous: sheafPushforwardContinuousNatTrans_app_val, sheafPushforwardContinuous_map_val_app, pushforwardNatIso_hom, sheafPushforwardContinuous_obj_val_map, pushforwardNatTrans_app_val_app_apply, pushforwardNatTrans_app_val_app, pushforwardNatIso, sheafPushforwardContinuousNatTrans. These are underived site/sheaf naturality formulas, not the exceptional trace/integration comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -72,5 +188,34 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-d-integral"
+ "unit": "sk-d-integral",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-integration-as-pushforward",
+  "worker": "stage1",
+  "summary": "Kept the statement; expanded the identity normalization by the adjunction-bijection argument and the proper-comparison naturality equation. Reused all existing nodes and created no new nodes. Replaced the unnecessary assertion of an equivalence on the entire pro-etale derived category by functoriality on the displayed composite and the endomorphism identification explicitly fixed in the item. Second reading made the constructible test-object domain explicit and cited the existing constructible comparison for its etale-origin witnesses. Returned-delivery repair re-read all current dependency statements: refreshed the dualizing-complex citation after its expanded definition landed and the admissibility citation after its explicit conjugate-comparison statement landed. The mate calculation uses that specified constructible functor and composite adjunction; the item statement and route are unchanged. Rebased the retained split on the current shared item record, preserving all current import and audit metadata; revalidated the dualizing definition and refreshed all three pushforward quotes after its proper-comparison reference changed. Step 2 now identifies the proper comparison by the current defining clause. Independent second reading cites the existing composite-adjunction and conjugate definitions and writes the identity-normalized Hom-bijection equation explicitly; no statement or route is changed.",
+  "blueprint": "Steps 1 and 2 realize the first paragraph of the current blueprint proof; step 3 realizes its second paragraph. The unit sk-d-integral defines integration as structure pushforward, and this comparison verifies its expanded formula.",
+  "tool_uses": [
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Its identity normalization of compact-support composition is a formal tool for checking the exceptional mate; the integral unit does not state this identity law."
+   },
+   {
+    "node": "sk-thm-pe-constructible-comparison",
+    "why": "Its equivalence supplies the etale-origin witnesses needed to restrict the compact-support identity law to the bounded constructible finite-Tor objects in the mate calculation; it is a coefficient-site comparison tool, not a replacement for the integration argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sf-comp-composition",
+  "sk-thm-pe-constructible-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NK-302dfd29d",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-302dfd29d (reviewer sub-agent of L); spot-checked: PASS, no changes, no fixes/ files. Statement: matches main-20261015 lem-trf-integration-as-pushforward.md word for word. Every hypothesis agrees: A=A_{E,n}; T separated, finite type and proper over s; a_T exceptionally admissible; point normalization; End(A_s)=A; equality in A. Both definitions use the same pro-etale D(T,A) with constructible exceptional functors on D^b_ctf, so no coefficient category is silently identified. Step 1 (c=1): c is the canonical Ra^!omega_s->omega_T of thm-trf-dualizing-complex-composition at d=a, X=s. def-trf-admissibility's current statement makes the trace-formula composition comparison the conjugate of compact-support composition; thm-sf-comp-composition makes that comparison the identity when g=id. Composing with the identity adjunction (def-weil-pbc-composite-adjunction) leaves Ra_! -| Ra^! unchanged, and the conjugate of id is id (def-weil-pbc-adjunction-conjugate), so c=1. Direction checked: tau: L2->L1 gives tau^c: R1->R2. Domain: sk-thm-pe-constructible-comparison gives etale-origin witnesses for the D^b_ctf objects (T, s qcqs; A finite). Step 2: pushforward definition at h=a, T'=s; all hypotheses hold. sigma from prop-functor-package clause 3 for the functor of def-compact-support-direct-image-detailed is the same proper identification that def-trf-integration names. Step 3: naturality of sigma on the full subcategory D+_et, then RGamma(s,-) used only through functoriality, matches the three integration arrows. The blueprint's overbroad 'equivalence RGamma(s,-)' is correctly avoided. Route: thm-trf-dualizing-complex-composition is in sk-d-six, which the unit uses. Tool uses accepted: thm-sf-comp-composition and sk-thm-pe-constructible-comparison, both generic black boxes. proof_deps equals the union of the uses lists; no cycle; no SGA source. No new nodes; rg over dag/nodes found no duplicate of this comparison. Edge cases checked: alpha=0, T empty, T=s, n=1. Upstream reservation, not this delivery's fault: thm-trf-dualizing-complex-composition's statement only says 'a canonical isomorphism'. The link to the composition conjugate comes from def-trf-admissibility's statement and should be made explicit when that theorem is split."
+ }
 }

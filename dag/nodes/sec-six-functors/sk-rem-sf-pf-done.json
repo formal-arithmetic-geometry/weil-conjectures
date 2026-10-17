@@ -3,44 +3,179 @@
  "blueprint": {
   "is": "sk-rem-sf-pf-done",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "fix-prop-projection-formula"
+  ]
  },
  "kind": "statement",
  "title": "The interface is discharged",
- "statement": "By [sk-thm-sf-pf-finite], [sk-prop-sf-pf-reduction],\n[sk-thm-sf-pf-adic], [sk-thm-sf-pf-field], [sk-thm-sf-pf-proetale] and\n[sk-prop-sf-pf-coherence] every obligation listed in the interface\nfix-prop-projection-formula of the framework chapter is discharged, so\nthat interface is an unconditional statement of this manuscript and the\nprojection formula is a *theorem* at every coefficient stage. No duality\nstatement is used anywhere in this subsection: the projection formula concerns the\ncompatibility of $Rf_!$ with the tensor product and is logically prior to\nVerdier duality.",
+ "statement": "Fix the global finite-field and coefficient data of [def-fix-six-functor-datum]: $k$ is an algebraic closure of the finite field $k_0=\\mathbf F_q$ of characteristic $p$, $\\ell\\ne p$, $E/\\mathbf Q_\\ell$ is finite with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\ge1$. Let $f:X\\to Y$ be a separated finite-type morphism of finite-type $k$-schemes. Use the concrete operations and projection transformation of that operation datum, with derived-complete integral coefficients, rationalization at $E$, and common finite coefficient stages at $\\overline{\\mathbf Q}_\\ell$.\n\nFor every $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$, $K\\in D^b_c(X,\\Lambda)$ and $L\\in D^b_{ctf}(Y,\\Lambda)$ (bounded constructible, with finite Tor amplitude required of $L$), the canonical map\n$$\n\\operatorname{PF}_{f,K,L}:Rf_!K\\otimes^L_\\Lambda L\\longrightarrow Rf_!(K\\otimes^L_\\Lambda Lf^*L)\n$$\nis an isomorphism, natural in $K,L$, compatible with composition (the associativity pentagon), compactification comparisons, finite reduction on the stated finite-Tor domains, scalar extension, and $Rf_!\\cong Rf_*$ when $f$ is proper. The formula is on the small pro-etale sites of the operation datum; at integral coefficients tensor and pullback are completed, and the field stages use their rational and common-stage extensions. At the rational and algebraically closed stages, when $X=X_0\\otimes_{k_0}k$ and $Y=Y_0\\otimes_{k_0}k$ for separated finite-type $k_0$-schemes $X_0,Y_0$ and $f$ is the geometric base change of a separated finite-type $k_0$-morphism $f_0:X_0\\to Y_0$, the formula restricts to the Weil categories [def-wf-weil-category] of $X_0$ and $Y_0$, with tensor Frobenius as in [def-wf-tensor-product].\n\nThus every obligation of the concrete interface [fix-prop-projection-formula] is discharged, unconditionally on its stated domains. The discharge uses no duality theorem: it concerns $Rf_!$, pullback and tensor, logically before Verdier duality. The ordinary-direct-image formula is asserted here only for proper $f$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/_section.md",
   "place": "node sk-rem-sf-pf-done, order 2498"
  },
  "stmt_deps": [
-  "sk-thm-sf-pf-finite",
-  "sk-thm-sf-pf-adic",
-  "sk-thm-sf-pf-proetale"
+  "def-fix-six-functor-datum",
+  "fix-prop-projection-formula",
+  "def-wf-weil-category",
+  "def-wf-tensor-product"
  ],
  "proof": [
   {
-   "text": "The obligations of the interface are discharged one coefficient stage at a\ntime. At the finite stages $A_{E,n}$ the projection formula is\n[sk-thm-sf-pf-finite], and it is compatible with finite reduction by\n[sk-prop-sf-pf-reduction]. At the derived-complete stage $\\mathcal O_E$ it is\n[sk-thm-sf-pf-adic], obtained from the finite stages by that compatibility.\nAt $E$ and $\\Qlb$ it is [sk-thm-sf-pf-field]. On the pro-étale realization it\nis [sk-thm-sf-pf-proetale]. The naturality, unit, associativity and\ncompactification-independence clauses are [sk-prop-sf-pf-coherence]. None of\nthese proofs uses a duality statement.",
+   "text": "Use the operation datum [def-fix-six-functor-datum], not a six-functor datum with unverified axioms. Its coefficient stages are exactly $A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell$, and its item (3) fixes the actual projection transformation. Its item (2) fixes compact support, the composition comparisons and proper coincidence. The final paragraph explicitly says this datum names operations and construction data and does not assert smooth purity or Verdier biduality. These are precisely the concrete data and coefficient conventions in the statement, so the concrete theorem used next applies without assuming projection invertibility as an axiom.",
    "uses": [
-    "sk-thm-sf-pf-finite",
-    "sk-thm-sf-pf-adic",
-    "sk-thm-sf-pf-proetale"
+    "def-fix-six-functor-datum"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-fix-six-functor-datum.md",
+    "place": "node def-fix-six-functor-datum, order 1491"
+   }
+  },
+  {
+   "text": "Apply the existing concrete theorem [fix-prop-projection-formula] to $f,K,L$. Its quantified domain is separated finite-type $f$, $K\\in D^b_c(X,\\Lambda)$ and $L\\in D^b_{ctf}(Y,\\Lambda)$, exactly ours, and its displayed morphism is the specified projection transformation, with the same direction and endpoints. It asserts that this map is an isomorphism at every coefficient stage. Thus the finite coefficient, completed integral, rational and algebraically closed cases are all obtained on their actual coefficient categories. In particular no finite Tor condition is added to finite-level $K$. This is a use of an already existing theorem, not a new node restating one of these cases.",
+   "uses": [
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.md",
+    "place": "fix-prop-projection-formula.md, statement through the displayed isomorphism"
+   }
+  },
+  {
+   "text": "The compatibility sentence of [fix-prop-projection-formula] asserts naturality in both inputs, compatibility with the composition law and its associativity pentagon, the compactification comparisons, finite reduction on the stated finite-Tor domains, scalar extension, and proper coincidence. These are the interface obligations with the same maps, not newly chosen isomorphisms. Retain exactly its finite-reduction qualification: this does not impose finite Tor amplitude on an arbitrary finite-level $K$ just to obtain the isomorphism, or assert reduction of a field-coefficient object without an integral representative. For proper $f$, the theorem identifies this same map with the ordinary-direct-image projection formula via $Rf_!\\cong Rf_*$; it asserts no such formula for nonproper $f$.",
+   "uses": [
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.md",
+    "place": "fix-prop-projection-formula.md, compatibility sentence and final proper-case sentence"
+   }
+  },
+  {
+   "text": "For the Weil clause assume exactly the additional finite-field model in the statement. The Weil sentence of [fix-prop-projection-formula] requires $X=X_0\\otimes_{k_0}k$, $Y=Y_0\\otimes_{k_0}k$ for separated finite-type $k_0$-schemes and $f$ the base change of $f_0$. Those are now the hypotheses in force. That sentence gives an isomorphism in the specified Weil categories at the rational and algebraically closed stages, with their specified tensor. No descent model is assumed for the earlier non-Weil assertion, and no integral lift of a Weil automorphism is required.",
+   "uses": [
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.md",
+    "place": "fix-prop-projection-formula.md, Weil-category clause (with the finite-field model made explicit in the reviewed DAG statement)"
+   }
+  },
+  {
+   "text": "The preceding steps supply the isomorphism, all its coefficient stages and the compatibility and Weil clauses, so every obligation of the interface holds. The only theorem invoked in these steps is the concrete projection-formula theorem; no duality assertion is invoked. The no-duality sentence is a provenance assertion about this discharge, not an inference from an axiom of an abstract six-functor datum: the source proof explicitly finishes by saying that its constructions and comparisons of the same projection map use neither smooth purity nor Verdier duality. The existing concrete split likewise proves the formula by finite projection, reduction of the actual integral map, and coefficient and site transport, before any duality theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/sk-rem-sf-pf-done.proof.md",
+    "place": "sk-rem-sf-pf-done.proof.md, last sentence; fix-prop-projection-formula.proof.md, last sentence"
+   }
   }
  ],
  "proof_deps": [
-  "sk-thm-sf-pf-finite",
-  "sk-thm-sf-pf-adic",
-  "sk-thm-sf-pf-proetale"
+  "def-fix-six-functor-datum",
+  "fix-prop-projection-formula"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/sk-rem-sf-pf-done.proof.md",
+  "place": "Coefficient-stage assembly and no-duality conclusion, using the reviewed concrete interface theorem to repair the circular axiomatized-datum inference"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projection.?formula|compact.*support.*tensor|lowerShriek.*[Pp]rojection",
+   "results": "0 hits; none",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the concrete compact-support derived projection theorem at these coefficient stages",
+   "directory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula for compactly supported derived direct image of constructible sheaves at finite and adic coefficients",
+   "results": "8 hits; TopCat.Presheaf.SheafConditionEqualizerProducts.res_π, AdicCompletion.kerProj.congr_simp, AdicCompletion.kerProj, AdicCompletion.kerProj_of, Algebra.PreSubmersivePresentation.ofHasCoeffs_map, CategoryTheory.ProjectiveResolution.pOpcycles_comp_fromLeftDerivedZero', Condensed.isSheafProfinite, CondensedMod.ofSheafProfinite",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the concrete compact-support derived projection theorem at these coefficient stages"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"Sheaf\"",
+   "results": "0 hits; none",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the concrete compact-support derived projection theorem at these coefficient stages"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The compactly supported derived direct image projection formula is an isomorphism for bounded constructible complexes with finite Tor amplitude at finite, integral adic and rational coefficient stages.",
+   "results": "8 hits; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isLE, CondensedMod.IsSolid.isIso_solidification_map, HomologicalComplex.isSupported_iff_of_quasiIso, CochainComplex.cm5b.instQuasiIsoIntP, DerivedCategory.left_fac_of_isStrictlyGE",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the concrete compact-support derived projection theorem at these coefficient stages"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.?formula|HasProjectionFormula|compactly.?supported",
+   "results": "25 hits; Mathlib/Algebra/Algebra/NonUnitalHom.lean, Mathlib/Algebra/Algebra/NonUnitalHom.lean, Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/Algebra/Support.lean, Mathlib/Topology/PartitionOfUnity.lean, Mathlib/Topology/UrysohnsLemma.lean, Mathlib/Topology/UrysohnsLemma.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the concrete compact-support derived projection theorem at these coefficient stages"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectionFormula\"",
+   "results": "0 hits; none",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the concrete compact-support derived projection theorem at these coefficient stages"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a separated finite type morphism of schemes the compact support pushforward commutes with derived tensoring by a finite Tor amplitude constructible sheaf, coherently under composition and coefficient extension.",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, SheafOfModules.pushforwardComp_hom_app_val_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, SheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardComp_inv_app_val_app",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the concrete compact-support derived projection theorem at these coefficient stages"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a scheme morphism the canonical map Rf shriek K tensor L to Rf shriek of K tensor pullback L is invertible and compatible with coefficient reduction and compactification.",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.arrowStalkMapSpecIso, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.inv_app, AlgebraicGeometry.pullbackSpecIso, AlgebraicGeometry.Scheme.app_eq",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the concrete compact-support derived projection theorem at these coefficient stages"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.?formula|HasProjectionFormula|lowerShriek|[Cc]ompact[Ss]upport",
+   "results": "0 hits; none",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the concrete compact-support derived projection theorem at these coefficient stages",
+   "directory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardComp|pullbackPushforwardAdjunction|restrictFunctorAdjCounitIso",
+   "results": "5 hits; 189, 190, 198, 199, 225; the wrapper displays the numeric source line as the file when rg is given a single file; read source lines 177-199 and 227-268 separately",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the concrete compact-support derived projection theorem at these coefficient stages",
+   "directory": "AlgebraicGeometry/Modules/Sheaf.lean"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived projection formula for a ringed topos identifies pushforward tensor a perfect complex with pushforward of the tensor with inverse image.",
+   "results": "8 hits; SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardNatIso_inv, PresheafOfModules.pushforward₀CompToPresheaf, SheafOfModules.pushforwardComp, SheafOfModules.pushforwardPushforwardAdj",
+   "date": "2026-10-17",
+   "verdict": "no match: generic underived module-sheaf pushforward comparisons do not state the derived compact-support interface or its four coefficient stages"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|HasProjectionFormula",
+   "results": "0 hits; none",
+   "date": "2026-10-17",
+   "verdict": "no match: generic underived module-sheaf pushforward comparisons do not state the derived compact-support interface or its four coefficient stages",
+   "directory": "Algebra/Category"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -67,5 +202,21 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-rem-sf-pf-done",
+  "worker": "stage1",
+  "summary": "No new nodes. Reused the already reviewed concrete interface theorem in this same unit, which proves every obligation on the original K in Dbc, L in Dctf domain. Replaced the invalid imported justification through axiomatized-datum statements and obsolete sk-prefixed references by a self-contained conclusion and an explicit clause-by-clause application. No duality theorem or forbidden source is used. Preserved all import and audit fields.",
+  "blueprint": "Realizes the current remark and its proof: every finite/reduction/adic/field/pro-etale and coherence obligation is read from the existing concrete interface theorem; that theorem's reviewed fifteen-step split already realizes the same stage-by-stage route. The Weil clause present in the interface is included. The last step records the source's no-duality provenance assertion.",
+  "route_error": "STATEMENT-DISPUTED (imported justification, not the projection theorem): the named sk-prop-sf-pf-reduction, sk-thm-sf-pf-field and sk-prop-sf-pf-coherence are not DAG nodes; sk-thm-sf-pf-adic now states a different proper/localizing-closure result. More substantially the older conditional thm-sf-* and prop-sf-* statements use def-sf-datum, whose A3 already assumes PF invertibility and A5 coefficient compatibility. Such conditional statements do not verify the concrete operation datum, and their finite-Tor domain does not cover K=A/(varpi) over A=O_E/(varpi^2). The existing reviewed fix-prop-projection-formula repaired precisely this issue by concrete finite/reduction/adic/field/pro-etale/coherence arguments; applying its statement preserves that established route without re-proving or duplicating it."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-bd50adcc6",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-bd50adcc6 (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps, the unit record, and the cited statements of def-fix-six-functor-datum (including its main-20261015 blueprint_update) and fix-prop-projection-formula (statement and all 15 reviewed steps). I also read the main-20261015 remark _section.md and its proof, rem-sf-pf-done.md, and the fix-prop and lem-fix-weil-operations sources with their proofs. The item states the same thing as fix-prop clause for clause: separated finite-type f, all four Λ, K in Dbc with no finite-Tor condition, L in Dctf, the same PF direction, the full compatibility list, the proper-only ordinary formula, and the Weil clause under the separated finite-type k_0-model. The statement correction is justified. The sk-prop-sf-pf-reduction, sk-thm-sf-pf-field and sk-prop-sf-pf-coherence nodes do not exist. sk-thm-sf-pf-adic now states something else. sk-thm-sf-pf-finite is étale-only and sk-thm-sf-pf-proetale assumes finite Tor on K. The def-sf-datum route assumes A3. I checked the counterexample: A=O_E/ϖ², K=A/ϖ gives Tor_i(K,K)=K for all i, so K is in Dbc but not Dctf. Steps 2-4 use only fix-prop's stated clauses. Steps 1 and 5 are elementary. The 54 direct proof_deps of fix-prop include no duality or purity theorem. There are no new nodes and no cycle: the closure of fix-prop and the datum (12,729 nodes) does not reach the item. No tool_uses are needed and no SGA is cited. Two B2/B3 repairs: (1) the Weil clause used k_0 without introducing it; the statement now says k is an algebraic closure of k_0=F_q. (2) 'the associated Weil categories' cited no definition node; it now cites [def-wf-weil-category] with tensor Frobenius [def-wf-tensor-product], and both ids are added to stmt_deps. No proof step changed. One fault predates this delivery and is not caused by it: sk-thm-sf-tensor-hom step 1 needs PF for arbitrary bounded-below L, beyond this interface.; 1 file(s) fixed by the reviewer"
  }
 }
