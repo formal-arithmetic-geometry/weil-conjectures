@@ -75,13 +75,12 @@
    }
   },
   {
-   "text": "Suppose $X\\in D$, with a small $\\kappa$-filtered presentation by representables. Reindex it by a small $\\kappa$-filtered poset using the cofinal-poset statement, applied in the cocomplete category $P$. For a $\\kappa$-small diagram $K\\to E_X$, its projection $q:K\\to\\mathcal C$ and tautological arrows give a coherent cocone $jq\\to X$. The vertices of $jq$ are $\\kappa$-compact in $P$ by Step 1. Apply relative cocone factorization in $P$ to this presentation, with $K'=\\varnothing$: it supplies a stage $j(c)$, a cocone $jq\\to j(c)$ and its full compatibility with the original cocone to $X$. For the lift through Yoneda, let $h$ be the coherent inverse on its full essential image and let $\\epsilon:hj\\simeq1_{\\mathcal C}$ be its natural equivalence. If $\\lambda:jq\\to\\Delta_K j(c)$ is the factorized cocone, the composite $q\\xrightarrow{\\epsilon_q^{-1}}hjq\\xrightarrow{h\\lambda}\\Delta_K hj(c)\\xrightarrow{\\Delta_K\\epsilon_c}\\Delta_Kc$ is a coherent cocone in $\\mathcal C$. The natural equivalences for $jh$ identify its Yoneda image with $\\lambda$, including the triangle to $X$ supplied by factorization. Under the classifier identification of Step 3, these data give a cocone on the original $K\\to E_X$; the join/cone comparison is taken with this boundary fixed. For $K=\\varnothing$, the presentation index is nonempty, so choose a stage $j(c)\\to X$; it is a vertex of $E_X$. Thus $E_X$ is $\\kappa$-filtered. Conversely, if $E_X$ is $\\kappa$-filtered, Step 3 is the required small filtered presentation by representables, so $X\\in D$. In applying the factorization theorem its join cocone model and the coherent-transformation model are identified by the join/cone comparison; replacing an indexing category by an equivalent classifier does not change the existence of a cone. Apply the left-cone comparison in the opposite quasicategory; the opposite/cone equivalences in [lem-coef-infinity-relative-cone-equivalence] identify it with the required right cocone and preserve the fixed-boundary data.",
+   "text": "Suppose $X\\in D$ has a small $\\kappa$-filtered presentation by representables. Reindex it by a small $\\kappa$-filtered poset $I$ using the cofinal-poset statement, computed in the cocomplete presheaf category $P$; the join/cone comparison and its opposite turn its colimiting cocone into a colimiting $\\bar p:N(I)^{\\triangleright}\\to P$ with apex $X$. For a $\\kappa$-small diagram $K\\to E_X$, its projection $q:K\\to\\mathcal C$ and tautological arrows give a coherent cocone $j q\\to X$. The vertices of $j q$ are $\\kappa$-compact in $P$ by Step 1. Applying compact-relative-cocone factorization with $K'=\\varnothing$ supplies $i\\in I$ and a cocone $\\lambda:j q\\to\\Delta_K j(c_i)$ whose composite to $X$ is the original cocone.",
    "uses": [
     "lem-coef-infinity-cofinal-kappa-poset",
     "lem-coef-compact-relative-cocone-factorization",
-    "lem-coef-infinity-full-essential-image",
+    "lem-coef-infinity-yoneda-presheaf-limits",
     "lem-coef-infinity-join-cone-calculus",
-    "lem-coef-space-transport-classification",
     "lem-coef-infinity-relative-cone-equivalence"
    ],
    "elementary": false,
@@ -91,7 +90,58 @@
    }
   },
   {
-   "text": "Let $F:I\\to D$ be a small $\\kappa$-filtered diagram and form its colimit $X$ in $P$. Reindex by a small $\\kappa$-filtered poset, which does not change that colimit in $P$. Given $K\\to E_X$ with $K$ $\\kappa$-small, use relative cocone factorization with $K'=\\varnothing$ and the $\\kappa$-compact vertices $jq(k)$ to factor its tautological cocone through one $F(i)$. This yields a diagram $K\\to E_{F(i)}$ whose cocone to $X$ is the original one, including all coherence. Step 4 says $E_{F(i)}$ is $\\kappa$-filtered, so this diagram has a cocone with representable apex; postcomposing with $F(i)\\to X$ gives a cocone in $E_X$. For empty $K$, choose $i$ in the nonempty presentation index, then a vertex of the nonempty $E_{F(i)}$ supplied by Step 4. Its arrow $j(c)\\to F(i)\\to X$ is a vertex of $E_X$. Step 4 therefore implies $X\\in D$. Finally, fullness gives $\\operatorname{Map}_D(X,Z)=\\operatorname{Map}_P(X,Z)$ for $Z\\in D$, and $\\operatorname{Map}_D(F(i),Z)=\\operatorname{Map}_P(F(i),Z)$ for each $i$; the colimit universal property in $P$ restricts to $D$. This proves existence of small $\\kappa$-filtered colimits in $D$ and preservation by its inclusion.",
+   "text": "Regard $\\lambda$, via the join/cone comparison and its opposite, as a point of $\\operatorname{Map}_{\\operatorname{Fun}(K,P)}(jq,\\Delta_Kjc_i)$. Let $P_0\\subseteq P$ be the full subcategory of objects equivalent to some $j(c)$. Apply the universal-arrow statement to $T=j:\\mathcal C\\to P$ and $P_0$: for $d\\in P_0$ choose $r_d\\in\\mathcal C$ and an equivalence $\\epsilon_d:j(r_d)\\to d$; then $u\\mapsto\\epsilon_d\\circ j(u)$ is the equivalence $\\operatorname{Map}_{\\mathcal C}(c',r_d)\\simeq\\operatorname{Map}_P(jc',jr_d)$ of full faithfulness of Yoneda followed by postcomposition with an equivalence, so these are universal arrows. The statement supplies $R:P_0\\to\\mathcal C$, $\\epsilon:jR\\to\\iota$, and, for $A=q$ and the constant diagram $B=\\Delta_Kjc_i$ (so $RB=\\Delta_KR(jc_i)$), the equivalence $\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal C)}(q,\\Delta_KR(jc_i))\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K,P)}(jq,\\Delta_Kjc_i)$, $u\\mapsto\\Delta_K\\epsilon_{jc_i}\\circ j(u)$. By full faithfulness $\\epsilon_{jc_i}\\simeq j(e)$ for some $e:R(jc_i)\\to c_i$. Let $u$ correspond to $\\lambda$ and put $\\mu=\\Delta_Ke\\circ u:q\\to\\Delta_Kc_i$, a coherent cocone in $\\mathcal C$. Then $j(\\mu)\\simeq\\Delta_Kj(e)\\circ j(u)\\simeq\\lambda$ by a path in $\\operatorname{Map}_{\\operatorname{Fun}(K,P)}(jq,\\Delta_Kjc_i)$, so boundary $jq$ and apex $jc_i$ stay fixed. Postcomposing this path with the stage arrow $j(c_i)\\to X$ and concatenating with the triangle of Step 4 gives a path from the composite of $j(\\mu)$ with $j(c_i)\\to X$ to the tautological cocone $jq\\to\\Delta_KX$.",
+   "uses": [
+    "lem-coef-parametric-universal-arrows",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-coef-infinity-relative-cone-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.1.3.1 (Yoneda fully faithful), used in the proof of Proposition 5.3.5.3 / Corollary 5.3.5.4; lift of the factorized cocone along Yoneda, written out by the maintainer reviewer."
+   }
+  },
+  {
+   "text": "Let $t:K\\to E_X$ be the original diagram, $\\mu:q\\to\\Delta_Kc_i$ the transported cocone, and $x\\in X(c_i)$ the point represented by $j(c_i)\\to X$. Transport classification and Yoneda evaluation send the compatible triangle $jq\\to j(c_i)\\to X$ to a path in the section space $\\Gamma_q$ from the section of $t$ to the section obtained by pulling $x$ back along $\\mu$. The section-cylinder-cocone statement, applied to the small right fibration $E_X\\to\\mathcal C$, converts this path into a coherent cocone $t\\to\\Delta_Kx$ over $\\mu$, retaining the prescribed cylinder. Its naturality under restriction retains the original boundary. The join/cone comparison and its opposite identify this cocone with the required right join cocone, with the same boundary.",
+   "uses": [
+    "lem-coef-infinity-section-cylinder-cocone",
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-yoneda-evaluation",
+    "lem-coef-infinity-join-cone-calculus",
+    "lem-coef-infinity-relative-cone-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.3.5.4, equivalence of (1) and (2), with filteredness proved using Corollary 5.3.4.14 and the relative lifting construction in the proof of Lemma 5.5.4.13 (printed pp. 479-480)."
+   }
+  },
+  {
+   "text": "If $K=\\varnothing$, the presentation index $I$ is nonempty by its filtered-poset statement. Choosing any $i\\in I$ gives an arrow $j(c_i)\\to X$, hence a vertex of $E_X$ and the required empty cocone.",
+   "uses": [
+    "lem-coef-infinity-cofinal-kappa-poset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.3.5.4, equivalence of (1) and (2), with filteredness proved using Corollary 5.3.4.14 and the relative lifting construction in the proof of Lemma 5.5.4.13 (printed pp. 479-480)."
+   }
+  },
+  {
+   "text": "Thus every $\\kappa$-small diagram in $E_X$ admits a cocone, so $E_X$ is $\\kappa$-filtered. Conversely, if $E_X$ is $\\kappa$-filtered, the canonical density statement of Step 3 gives the required small filtered presentation of $X$ by representables, so $X\\in D$.",
+   "uses": [
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.3.5.4, equivalence of (1) and (2), with filteredness proved using Corollary 5.3.4.14 and the relative lifting construction in the proof of Lemma 5.5.4.13 (printed pp. 479-480)."
+   }
+  },
+  {
+   "text": "Let $F:I\\to D$ be a small $\\kappa$-filtered diagram and form its colimit $X$ in $P$. Reindex by a small $\\kappa$-filtered poset, which does not change that colimit in $P$. Given $K\\to E_X$ with $K$ $\\kappa$-small, use relative cocone factorization with $K'=\\varnothing$ and the $\\kappa$-compact vertices $jq(k)$ to factor its tautological cocone through one $F(i)$. This yields a diagram $K\\to E_{F(i)}$ whose cocone to $X$ is the original one, including all coherence. Steps 4–8 show that $E_{F(i)}$ is $\\kappa$-filtered, so this diagram has a cocone with representable apex; postcomposing with $F(i)\\to X$ gives a cocone in $E_X$. For empty $K$, choose $i$ in the nonempty presentation index, then a vertex of the nonempty $E_{F(i)}$ supplied by Steps 4–8. Its arrow $j(c)\\to F(i)\\to X$ is a vertex of $E_X$. Steps 4–8 therefore imply $X\\in D$. Finally, fullness gives $\\operatorname{Map}_D(X,Z)=\\operatorname{Map}_P(X,Z)$ for $Z\\in D$, and $\\operatorname{Map}_D(F(i),Z)=\\operatorname{Map}_P(F(i),Z)$ for each $i$; the colimit universal property in $P$ restricts to $D$. This proves existence of small $\\kappa$-filtered colimits in $D$ and preservation by its inclusion.",
    "uses": [
     "lem-coef-infinity-presheaf-free-cocompletion",
     "lem-coef-infinity-cofinal-kappa-poset",
@@ -107,7 +157,7 @@
    }
   },
   {
-   "text": "For a small $\\kappa$-filtered diagram $F:I\\to D$, Step 5 identifies its colimit with its presheaf colimit. Yoneda evaluation now gives $\\operatorname{Map}_D(jc,\\operatorname{colim}_I F)\\simeq(\\operatorname{colim}_I F)(c)\\simeq\\operatorname{colim}_I F(i)(c)\\simeq\\operatorname{colim}_I\\operatorname{Map}_D(jc,F(i))$, with the canonical cocone maps. Change of universe preserves the colimit of these small spaces. Thus $jc$ is $\\kappa$-compact in $D$. Its full essential image is essentially small since $\\mathcal C$ is small and Yoneda is fully faithful. By the definition of $D$, every object has a small $\\kappa$-filtered representable presentation in $P$, and by Step 5 that cocone is also colimiting in $D$. These statements are precisely $\\kappa$-accessibility.",
+   "text": "For a small $\\kappa$-filtered diagram $F:I\\to D$, Step 9 identifies its colimit with its presheaf colimit. Yoneda evaluation now gives $\\operatorname{Map}_D(jc,\\operatorname{colim}_I F)\\simeq(\\operatorname{colim}_I F)(c)\\simeq\\operatorname{colim}_I F(i)(c)\\simeq\\operatorname{colim}_I\\operatorname{Map}_D(jc,F(i))$, with the canonical cocone maps. Change of universe preserves the colimit of these small spaces. Thus $jc$ is $\\kappa$-compact in $D$. Its full essential image is essentially small since $\\mathcal C$ is small and Yoneda is fully faithful. By the definition of $D$, every object has a small $\\kappa$-filtered representable presentation in $P$, and by Step 9 that cocone is also colimiting in $D$. These statements are precisely $\\kappa$-accessibility.",
    "uses": [
     "lem-coef-infinity-yoneda-evaluation",
     "lem-coef-infinity-yoneda-presheaf-limits",
@@ -135,7 +185,7 @@
    }
   },
   {
-   "text": "Assume now that $\\mathcal C$ admits all $\\kappa$-small colimits. A pushout diagram $F:N(A)\\to D$ has $A=\\{0,1,2\\}$ with $0<1$ and $0<2$, a finite poset. The finite-poset realization statement gives a small $\\kappa$-filtered index $I$ and diagrams $G_i:N(A)\\to\\mathcal C$ whose Yoneda images have pointwise presheaf colimit $F$. By Step 5 they also have pointwise colimit $F$ in $D$. Choose $c_i=\\operatorname{colim}_{N(A)}G_i$ in $\\mathcal C$. The opposite universal-arrow theorem for the constant-diagram functor assembles these colimits and their cocones coherently into $c:I\\to\\mathcal C$. By Step 7, $jc_i$ is the pushout of $jG_i$ in $D$. Form $L=\\operatorname{colim}_I jc_i$ in $D$, using Step 5. For every $Z\\in D$, the universal properties give $\\operatorname{Map}_D(L,Z)\\simeq\\lim_{i\\in I^{\\mathrm{op}}}\\lim_{a\\in N(A)^{\\mathrm{op}}}\\operatorname{Map}_D(jG_i(a),Z)\\simeq\\lim_{a\\in N(A)^{\\mathrm{op}}}\\operatorname{Map}_D(F(a),Z)$. The exchange is of two limits: a coherent cone on either iterated diagram is exactly a coherent cone on their product, so the two universal properties coincide. The equivalences respect the cocone legs. The mapping-space colimit criterion makes $L$ a pushout of $F$.",
+   "text": "Assume now that $\\mathcal C$ admits all $\\kappa$-small colimits. A pushout diagram $F:N(A)\\to D$ has $A=\\{0,1,2\\}$ with $0<1$ and $0<2$, a finite poset. The finite-poset realization statement gives a small $\\kappa$-filtered index $I$ and diagrams $G_i:N(A)\\to\\mathcal C$ whose Yoneda images have pointwise presheaf colimit $F$. By Step 9 they also have pointwise colimit $F$ in $D$. Choose $c_i=\\operatorname{colim}_{N(A)}G_i$ in $\\mathcal C$. The opposite universal-arrow theorem for the constant-diagram functor assembles these colimits and their cocones coherently into $c:I\\to\\mathcal C$. By Step 11, $jc_i$ is the pushout of $jG_i$ in $D$. Form $L=\\operatorname{colim}_I jc_i$ in $D$, using Step 9. For every $Z\\in D$, the universal properties give $\\operatorname{Map}_D(L,Z)\\simeq\\lim_{i\\in I^{\\mathrm{op}}}\\lim_{a\\in N(A)^{\\mathrm{op}}}\\operatorname{Map}_D(jG_i(a),Z)\\simeq\\lim_{a\\in N(A)^{\\mathrm{op}}}\\operatorname{Map}_D(F(a),Z)$. The exchange is of two limits: a coherent cone on either iterated diagram is exactly a coherent cone on their product, so the two universal properties coincide. The equivalences respect the cocone legs. The mapping-space colimit criterion makes $L$ a pushout of $F$.",
    "uses": [
     "lem-coef-ind-finite-poset-realization",
     "lem-coef-parametric-universal-arrows",
@@ -148,7 +198,7 @@
    }
   },
   {
-   "text": "Let $(X_s)_{s\\in S}$ be a family in $D$ with $|S|<\\kappa$. Reindex each chosen presentation as $X_s=\\operatorname{colim}_{a\\in A_s}j p_s(a)$, with $A_s$ a small nonempty $\\kappa$-filtered poset. The product poset $A=\\prod_{s\\in S}A_s$ is small and $\\kappa$-filtered: choose an upper bound separately in each coordinate for any set of fewer than $\\kappa$ tuples; the empty set is included. Each projection $A\\to A_s$ is cofinal. Indeed its comma poset over $b\\in A_s$ is the product of $(A_s)_{b/}$ and the remaining $A_t$; choose its $s$-coordinate above $b$ and choose any point in each other nonempty factor to get an object. For any fewer than $\\kappa$ such objects, choose an upper bound in each coordinate, including $b$ in the set to be bounded in the $s$-coordinate. This gives an upper bound inside the comma poset, so it is $\\kappa$-filtered and the weak-contractibility clause of the coslice-colimit statement applies. Apply the cofinal-comma statement in $P$. Consequently the discrete diagrams $s\\mapsto j p_s(a_s)$ have pointwise filtered colimit $s\\mapsto X_s$. The $<\\kappa$-fold coproducts $c_a=\\coprod_{s\\in S}p_s(a_s)$ exist in $\\mathcal C$ and assemble coherently by universal arrows. Step 7 makes $jc_a$ their coproducts in $D$. Form $L_S=\\operatorname{colim}_{a\\in A}jc_a$ in $D$. For every $Z$, $\\operatorname{Map}_D(L_S,Z)\\simeq\\lim_{a\\in A^{\\mathrm{op}}}\\prod_{s\\in S}\\operatorname{Map}_D(jp_s(a_s),Z)\\simeq\\prod_{s\\in S}\\operatorname{Map}_D(X_s,Z)$. Both orders of limits represent the space of coherent cones on the diagram $(a,s)\\mapsto\\operatorname{Map}_D(jp_s(a_s),Z)$ indexed by $N(A)^{\\mathrm{op}}\\times S$, where $S$ is discrete. The resulting equivalence preserves the projections to each pair $(a,s)$, so it identifies the specified coproduct legs. Thus $L_S$ is a coproduct. If $S=\\varnothing$, use $A=*$ and the initial object of $\\mathcal C$; this also proves existence of the empty coproduct in $D$.",
+   "text": "Let $(X_s)_{s\\in S}$ be a family in $D$ with $|S|<\\kappa$. Reindex each chosen presentation as $X_s=\\operatorname{colim}_{a\\in A_s}j p_s(a)$, with $A_s$ a small nonempty $\\kappa$-filtered poset. The product poset $A=\\prod_{s\\in S}A_s$ is small and $\\kappa$-filtered: choose an upper bound separately in each coordinate for any set of fewer than $\\kappa$ tuples; the empty set is included. Each projection $A\\to A_s$ is cofinal. Indeed its comma poset over $b\\in A_s$ is the product of $(A_s)_{b/}$ and the remaining $A_t$; choose its $s$-coordinate above $b$ and choose any point in each other nonempty factor to get an object. For any fewer than $\\kappa$ such objects, choose an upper bound in each coordinate, including $b$ in the set to be bounded in the $s$-coordinate. This gives an upper bound inside the comma poset, so it is $\\kappa$-filtered and the weak-contractibility clause of the coslice-colimit statement applies. Apply the cofinal-comma statement in $P$. Consequently the discrete diagrams $s\\mapsto j p_s(a_s)$ have pointwise filtered colimit $s\\mapsto X_s$. The $<\\kappa$-fold coproducts $c_a=\\coprod_{s\\in S}p_s(a_s)$ exist in $\\mathcal C$ and assemble coherently by universal arrows. Step 11 makes $jc_a$ their coproducts in $D$. Form $L_S=\\operatorname{colim}_{a\\in A}jc_a$ in $D$. For every $Z$, $\\operatorname{Map}_D(L_S,Z)\\simeq\\lim_{a\\in A^{\\mathrm{op}}}\\prod_{s\\in S}\\operatorname{Map}_D(jp_s(a_s),Z)\\simeq\\prod_{s\\in S}\\operatorname{Map}_D(X_s,Z)$. Both orders of limits represent the space of coherent cones on the diagram $(a,s)\\mapsto\\operatorname{Map}_D(jp_s(a_s),Z)$ indexed by $N(A)^{\\mathrm{op}}\\times S$, where $S$ is discrete. The resulting equivalence preserves the projections to each pair $(a,s)$, so it identifies the specified coproduct legs. Thus $L_S$ is a coproduct. If $S=\\varnothing$, use $A=*$ and the initial object of $\\mathcal C$; this also proves existence of the empty coproduct in $D$.",
    "uses": [
     "lem-coef-infinity-cofinal-kappa-poset",
     "lem-coef-infinity-cofinal-comma-criterion",
@@ -163,7 +213,7 @@
    }
   },
   {
-   "text": "For an arbitrary small set $S$, let $B$ be the poset of subsets $T\\subseteq S$ of cardinality less than $\\kappa$. It is small and $\\kappa$-filtered: regularity of $\\kappa$ ensures that the union of fewer than $\\kappa$ such subsets still has size less than $\\kappa$ and is an upper bound, and $\\varnothing\\in B$. View the discrete simplicial set $S$ as the directed union of the discrete subsets $T$. Step 9 supplies colimiting cocones on every restriction of the family to $T$. The directed-union local-colimits statement assembles these apices $L_T$ coherently and identifies the space of cocones on $T\\mapsto L_T$ with the space of cocones on the entire family, without assuming cocompleteness of $D$. Since $N(B)$ is small and $\\kappa$-filtered, Step 5 supplies its colimit. The same assembly statement says its cocone is colimiting on the whole family. This constructs all small coproducts in $D$, including the empty one. Notice that at $\\kappa=\\aleph_0$ only discrete finite subsets are used, so no countability assumption on general finite-generated simplicial subsets enters.",
+   "text": "For an arbitrary small set $S$, let $B$ be the poset of subsets $T\\subseteq S$ of cardinality less than $\\kappa$. It is small and $\\kappa$-filtered: regularity of $\\kappa$ ensures that the union of fewer than $\\kappa$ such subsets still has size less than $\\kappa$ and is an upper bound, and $\\varnothing\\in B$. View the discrete simplicial set $S$ as the directed union of the discrete subsets $T$. Step 13 supplies colimiting cocones on every restriction of the family to $T$. The directed-union local-colimits statement assembles these apices $L_T$ coherently and identifies the space of cocones on $T\\mapsto L_T$ with the space of cocones on the entire family, without assuming cocompleteness of $D$. Since $N(B)$ is small and $\\kappa$-filtered, Step 9 supplies its colimit. The same assembly statement says its cocone is colimiting on the whole family. This constructs all small coproducts in $D$, including the empty one. Notice that at $\\kappa=\\aleph_0$ only discrete finite subsets are used, so no countability assumption on general finite-generated simplicial subsets enters.",
    "uses": [
     "lem-coef-infinity-directed-union-local-colimits",
     "def-coef-presentable-infinity-category"
@@ -175,7 +225,7 @@
    }
   },
   {
-   "text": "Steps 8 and 10 give pushouts and all small coproducts in $D$. The small-colimit generation theorem therefore gives colimits of every small simplicial diagram. Step 6 has already proved $\\kappa$-accessibility, so the definition of presentability makes $D$ presentable. This final argument uses no adjoint-functor theorem or presheaf-localization theorem, whose current DAG dependencies lead back to the present item.",
+   "text": "Steps 12 and 14 give pushouts and all small coproducts in $D$. The small-colimit generation theorem therefore gives colimits of every small simplicial diagram. Step 10 has already proved $\\kappa$-accessibility, so the definition of presentability makes $D$ presentable. This final argument uses no adjoint-functor theorem or presheaf-localization theorem, whose current DAG dependencies lead back to the present item.",
    "uses": [
     "lem-coef-infinity-small-colimit-generation",
     "def-coef-presentable-infinity-category"
@@ -201,6 +251,7 @@
   "lem-coef-infinity-join-cone-calculus",
   "lem-coef-infinity-presheaf-free-cocompletion",
   "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-infinity-section-cylinder-cocone",
   "lem-coef-infinity-small-colimit-generation",
   "lem-coef-infinity-yoneda-evaluation",
   "lem-coef-infinity-yoneda-presheaf-limits",
@@ -364,7 +415,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-accessible-ind-colimit-extension",
@@ -389,8 +440,8 @@
   "date": "2026-10-17",
   "item": "lem-coef-ind-kappa-presentability",
   "worker": "stage1",
-  "summary": "Kept the statement. Proved the canonical-elements density formula from transport classification and evaluation, filteredness and closure via compact relative cocone factorization, compactness/accessibility and existing-colimit preservation directly. Constructed all colimits by pushouts and coproducts, adding only the finite-poset simultaneous-realization lemma and avoiding the existing localization theorem because its DAG would create a cycle. Searched project Lean, the whole DAG/blueprint and Mathlib; no exact attachment or infinity-category Mathlib leaf exists.",
-  "blueprint": "Supports the inherited auxiliary Ind infrastructure in the derived coefficient-adjunction paragraph of current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, via the preserved ancestor chain. This foundational HTT argument is below the unit route, not a replacement of any geometric unit step. Steps 1-7 realize compact filtered completion; steps 8-11 construct its colimits and presentability.",
+  "summary": "Kept the statement and retained the original Ind proof route. Repaired the former 2004-character filteredness step by splitting its compact-stage factorization, Yoneda cocone lift, canonical-elements/classifier transfer, empty-diagram case, and converse into short cited steps. The canonical-elements lift reuses lem-coef-infinity-section-cylinder-cocone; step 6 spells out the section-space path furnished by the factorization triangle. Maintainer review (2026-10-17): the delivered supporting node lem-coef-ind-yoneda-cocone-transport was dropped as a few-line consequence of lem-coef-parametric-universal-arrows and Yoneda full faithfulness; step 5 now carries that argument directly, and step 4 cites the join/cone conversion of the presentation cocone.",
+  "blueprint": "Supports the inherited auxiliary Ind infrastructure in the derived coefficient-adjunction paragraph of current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, via the preserved ancestor chain. Steps 1–3 establish compact representables and canonical density; steps 4–8 realize the filteredness criterion with explicit transport/factorization lemmas; steps 9–15 construct colimits, accessibility and presentability.",
   "tool_uses": [
    {
     "node": "lem-cbc-enhanced-functor-cone-calculus",
@@ -402,12 +453,12 @@
   "lem-cbc-enhanced-functor-cone-calculus"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q20-8d38b343c",
-  "group": "Q20",
+  "reviewer": "NT-cc-Q84-d71adfb57",
+  "group": "Q84",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-8d38b343c (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-ind-finite-poset-realization, all 20 cited lemma statements and 3 definitions, the unit record and the blueprint ancestor paragraph. I checked the sources against the public HTT PDF (Lurie 2017), reading Def 5.3.5.1, Props 5.3.5.3, 5.3.5.5, 5.3.5.14, 5.3.5.15 with its proof, Warning 5.3.5.16 and Thm 5.5.1.1. The item's statement is unchanged and every clause matches HTT: preservation covers only the colimits that exist in C, and presentability is claimed only when C admits all κ-small colimits (5.5.1.1(4)). Steps 3-5 prove that the filtered-representable definition agrees with HTT's right-fibration definition (Cor 5.3.5.4), so the two are not silently identified. The new node is exactly the essential-surjectivity part of 5.3.5.15: it assumes no colimits in C and keeps the finite-poset restriction that Warning 5.3.5.16 requires. It is statement-only and self-contained, has three kinds of Mathlib search (no match: the candidates are ordinary Type-valued categories), correct blueprint fields, and does not restate any clause of the item. I checked each step against the cited statements. The compact-relative-cocone-factorization hypotheses hold: K'=∅, the representable vertices are κ-compact, and the index is a cofinal κ-poset in the cocomplete P. Step 7 checks preservation inside D, not P, and handles empty K. Step 8 assembles the stage pushouts via the left-adjoint form of parametric-universal-arrows and exchanges two limits. Step 9's product poset is κ-filtered by regularity, and its comma posets are weakly contractible. Step 10 meets the finite-upper-bound hypothesis of directed-union-local-colimits. Step 11 uses small-colimit-generation. Step 2 is elementary and Step 6 is acceptable as elementary. Small cases checked: C empty or terminal, κ=ω with finite-dimensional vector spaces, and for the new node A empty, a point, an arrow, a span. There are no duplicates in the DAG (rg for 5.3.5.15, Ind, finite poset; lem-sfb-ind-arrow-presentation, lem-coef-infinity-finite-poset-kan-extension and lem-coef-accessible-diagram-presentations read). The dependency closure has 370 nodes and no cycle. I accept the declared tool_use lem-cbc-enhanced-functor-cone-calculus as a generic tool; it is already an accepted tool_use on 102 nodes of this unit. No SGA is used. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-d71adfb57 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item statement and all 15 steps, the new node, and the statements of all 21 cited nodes, plus the unit route. The only off-unit citation is the declared tool use lem-cbc-enhanced-functor-cone-calculus, which I accept. A graph traversal shows no cycle, including through lem-coef-infinity-section-cylinder-cocone. The unchanged statement matches HTT clause by clause: 5.1.3.1, 5.3.5.1/5.3.5.4 (the two definitions of Ind are proved to agree in steps 3-8, not assumed), 5.3.5.3, 5.3.5.5, 5.3.5.14 (only colimits that already exist in C) and 5.5.1.1(4) (presentable only when C has kappa-small colimits). HTT is read online and listed as WANTED; no SGA source is cited. Steps 4-8 check out. The compact-relative factorization hypotheses hold: K'=empty, the vertices of jq are kappa-compact, the index poset is nonempty with <kappa upper bounds, and the tautological cocone is literally K*Delta^0->P because the comparison E_X ~ C x_P P_/X is over C. The section-cylinder hypotheses hold: E_X->C is a small right fibration, b=c_i, x is the point given by j(c_i)->X, and the triangle gives the path in the section space. The empty diagram is handled by the nonempty poset, and the converse by step-3 density. Two fixes, in fixes/dag/nodes/sec-six-functors/lem-coef-ind-kappa-presentability.json. (1) C1/D: the new node lem-coef-ind-yoneda-cocone-transport is true but is a two- or three-line consequence of lem-coef-parametric-universal-arrows (functor-category clause with T=j and the essential image) plus Yoneda full faithfulness, both already cited by the item. Its last clause about triangles and boundary data was also vague. I folded the argument into step 5, which now gives jmu ~ lambda by a path with boundary and apex fixed, and removed every citation of the node. (2) C1: step 4 used the join-model colimiting cocone without citing the conversion; I added join-cone-calculus and relative-cone-equivalence. proof_deps is recomputed and split_report.summary updated. Statement, stmt_deps, lean, lean_audit, blueprint and tool_uses are unchanged. Details are in review.md.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
