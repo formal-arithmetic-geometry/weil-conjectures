@@ -12,9 +12,72 @@
   "lem-coef-pinched-cube-latching",
   "lem-coef-simplicial-interval-lifting"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Identify $K$ with its image in $L$. By [lem-coef-infinity-monomorphism-boundary-cells], write $K=Z_0\\subseteq Z_1\\subseteq\\cdots\\subseteq L$ with union $L$, where stage $n$ attaches precisely the missing nondegenerate $n$-simplices along their boundaries. Since $K_0=L_0$, the set of missing $0$-simplices is empty and $Z_1=Z_0$. All remaining cells have $n\\geq1$ and all stages have the same vertex set $O$. This is the dimension filtration, so boundaries, including degenerate faces, already lie in the preceding stage.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Opening paragraph of the proof of Theorem 2.2.5.1; relative skeletal presentation also Kerodon Tag 0077, proof of Proposition 1.5.5.14(b)."
+   }
+  },
+  {
+   "text": "The colimit definition in [lem-coef-pinched-cube-latching] gives a direct universal-property check that $\\mathfrak C$ preserves these pushouts and their sequential colimit. For any small simplicial category $D$, put $N(D)_m=\\operatorname{Fun}_{\\mathrm{sCat}}(\\mathfrak C[\\Delta^m],D)$, with operators by precomposition. A functor $\\mathfrak C[S]\\to D$ is exactly a family of simplex functors indexed by $\\Delta^m\\to S$, compatible with all monotone operators, hence exactly a simplicial map $S\\to N(D)$. A compatible family of maps from a simplicial colimit into $N(D)$ is exactly a map from that colimit. Applying these two bijections proves the required enriched colimit assertions. The object set of $\\mathfrak C[S]$ is $S_0$: in its simplex presentation the object identifications are exactly the vertex identifications, and composition adds only arrows. Consequently each realized stage has object set $O$. The colimit universal property restricts to functors fixing $O$, since their object functions all equal the identity. No assertion that individual mapping sets preserve these colimits is used.",
+   "uses": [
+    "lem-coef-pinched-cube-latching"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1, first paragraph; universal-property expansion of the coherent-realization definition of Section 1.1.5."
+   }
+  },
+  {
+   "text": "Consider an arbitrary square against a simplicial functor $p:E\\to F$ in $\\mathrm{sCat}_O$ whose mapping maps are trivial Kan fibrations. For one attached $n$-simplex $\\sigma$, let its vertices have labels $a_0,\\ldots,a_n\\in O$, allowing repetitions. Restrict the already constructed top functor along $\\mathfrak C[\\partial\\sigma]$ to $g:\\mathfrak C[\\partial\\Delta^n]\\to E$, and the bottom functor along $\\mathfrak C[\\sigma]$ to $f:\\mathfrak C[\\Delta^n]\\to F$; then $p\\circ g$ is the restriction of $f$. By [lem-coef-rigidification-boundary-cube], with $B_{n-1}=(\\Delta^1)^{n-1}$ and $\\partial B_{n-1}$ its union of coordinate faces, $\\mathfrak C[\\Delta^n]$ is the pushout of $\\mathfrak C[\\partial\\Delta^n]$ and $U(B_{n-1})$ over $U(\\partial B_{n-1})$, the two objects of $U$ going to $0$ and $n$. Hence a functor $\\mathfrak C[\\Delta^n]\\to E$ extending $g$ is exactly a simplicial map $B_{n-1}\\to E(a_0,a_n)$ whose restriction to $\\partial B_{n-1}$ is the forward mapping map $\\partial B_{n-1}\\to E(a_0,a_n)$ of $g$ composed with the top horizontal functor; and by the uniqueness in the pushout such an extension lies over $f$ exactly when its cube map composed with $p$ is the forward cube map $B_{n-1}\\to F(a_0,a_n)$ of $f$. The remaining requirement is therefore a square of simplicial sets $\\partial B_{n-1}\\to E(a_0,a_n)$ over $B_{n-1}\\to F(a_0,a_n)$, with left map the inclusion. Coinciding labels change nothing: the pushout is formed in $\\mathrm{sCat}$ with arbitrary object functions, and a functor $U(K)\\to E$ sending both objects to one $a$ is just a map $K\\to E(a,a)$, since $U(K)$ has identity mapping sets $\\Delta^0$ and empty mapping set from $1$ to $0$.",
+   "uses": [
+    "lem-coef-rigidification-boundary-cube"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1, first paragraph, the explicit mapping-set calculation and its free extension interpretation (pushout along U of the cube boundary)."
+   }
+  },
+  {
+   "text": "The inclusion $\\partial B_{n-1}\\hookrightarrow B_{n-1}$ is degreewise injective, including $\\varnothing\\hookrightarrow\\Delta^0$ when $n=1$. By [lem-coef-kan-quillen-model-right-proper-core], it is a Kan-Quillen cofibration, while $E(a_0,a_n)\\to F(a_0,a_n)$ is a trivial fibration for exactly the weak homotopy equivalences and horn fibrations in the item. The model lifting axiom therefore supplies a diagonal cube map $B_{n-1}\\to E(a_0,a_n)$ extending the prescribed map on $\\partial B_{n-1}$ and lying over the cube map of $f$. By the pushout of step 3 it and $g$ define an enriched functor on $\\mathfrak C[\\Delta^n]$, agreeing with $g$ on $\\mathfrak C[\\partial\\Delta^n]$ and lying over $f$. No fibrancy of $E(a,b)$ or $F(a,b)$ as objects is required.",
+   "uses": [
+    "lem-coef-kan-quillen-model-right-proper-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1, first paragraph; the Kan-Quillen cofibration/trivial-fibration lifting axiom, Hovey Theorem 3.6.5."
+   }
+  },
+  {
+   "text": "Start the induction with the specified functor $h_0:\\mathfrak C[K]\\to E$. Suppose $h_n$ has been constructed over $F$. For each cell in the small set indexing stage $n$, choose the extension from steps 3 and 4, with its boundary prescribed by $h_n$. These extensions and $h_n$ agree on the attaching coproduct. The pushout universal property proved in step 2 supplies $h_{n+1}:\\mathfrak C[Z_{n+1}]\\to E$ restricting to $h_n$ and commuting with $p$. The empty stage $n=0$ uses $h_1=h_0$. At the sequential colimit, the compatible $h_n$ give $h:\\mathfrak C[L]\\to E$. Both triangle equations hold on every stage, hence on the colimit by its universal property. All maps fix $O$, so $h$ is a diagonal in $\\mathrm{sCat}_O$. This proves the asserted left lifting property.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.5.1, first paragraph; explicit induction and colimit verification of the lifting property."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-kan-quillen-model-right-proper-core",
+  "lem-coef-pinched-cube-latching",
+  "lem-coef-rigidification-boundary-cube"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Second paragraph, derived coefficient adjunction: technical coherent-realization foundation, following the opening cofibration calculation of online HTT Theorem 2.2.5.1. The archival HTT copy is WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -85,10 +148,38 @@
    "results": "{\"t\": \"2026-10-17T02:16:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialThickening\\\", \\\"Cofibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: second-reader query. Loogle returned zero hits. LeanFinder returned the ordinary nerve/homotopy-category adjunction (NerveAdjunction.lean:393-434) and SSet cofibrations, not a coherent-realization cofibration theorem. Grep returned the thickening definition (SimplicialNerve.lean:54-94), plus unrelated quasicoherent-sheaf lemmas. Read SimplicialNerve.lean:12-125,153-224 and NerveAdjunction.lean:320-434; neither states the required fixed-object lifting assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.?realization|rigidification|SimplicialThickening|boundary.*cube",
+   "results": "5 hits: Mathlib/AlgebraicTopology/SimplicialNerve.lean, Mathlib/AlgebraicTopology/SimplicialNerve.lean, Mathlib/AlgebraicTopology/SimplicialNerve.lean, Mathlib/AlgebraicTopology/SimplicialNerve.lean, Mathlib/AlgebraicTopology/SimplicialNerve.lean. Source subdirectory: AlgebraicTopology",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialNerve.lean:12-125,153-224, SimplicialSet/Boundary.lean:30-55 and SimplicialSet/CategoryWithFibrations.lean:35-100. The simplex thickening, its nerve, ordinary simplex boundary and cofibrations in SSet are present; no coherent boundary colimit calculation or fixed-object enriched cofibration theorem is stated."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rigidification preserves inclusions of simplicial sets without adding objects as fixed object enriched cofibrations",
+   "results": "8 hits: SSet.modelCategoryQuillen.cofibrations_eq, HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjι, SSet.modelCategoryQuillen.instCategoryWithFibrations, SSet.modelCategoryQuillen.instCategoryWithCofibrations, SSet.modelCategoryQuillen.cofibration_iff, SSet.modelCategoryQuillen.cofibration_of_mono, SSet.modelCategoryQuillen.mono_of_cofibration, CategoryTheory.SimplicialObject.instEnrichedCategorySSet",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialNerve.lean:12-125,153-224, SimplicialSet/Boundary.lean:30-55 and SimplicialSet/CategoryWithFibrations.lean:35-100. The simplex thickening, its nerve, ordinary simplex boundary and cofibrations in SSet are present; no coherent boundary colimit calculation or fixed-object enriched cofibration theorem is stated."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialThickening\", \"Cofibration\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialNerve.lean:12-125,153-224, SimplicialSet/Boundary.lean:30-55 and SimplicialSet/CategoryWithFibrations.lean:35-100. The simplex thickening, its nerve, ordinary simplex boundary and cofibrations in SSet are present; no coherent boundary colimit calculation or fixed-object enriched cofibration theorem is stated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent realization of a monomorphism bijective on vertices is a cofibration of simplicial categories with fixed objects",
+   "results": "8 hits: SSet.modelCategoryQuillen.cofibrations_eq, SSet.modelCategoryQuillen.cofibration_of_mono, SSet.modelCategoryQuillen.cofibration_iff, SSet.modelCategoryQuillen.mono_of_cofibration, SSet.modelCategoryQuillen.instCategoryWithCofibrations, SSet.modelCategoryQuillen.J_le_monomorphisms, SSet.modelCategoryQuillen.I_le_monomorphisms, HomotopicalAlgebra.BifibrantObject.instIsCofibrantObjι",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialNerve.lean:12-125,153-224, SimplicialSet/Boundary.lean:30-55 and SimplicialSet/CategoryWithFibrations.lean:35-100. The simplex thickening, its nerve, ordinary simplex boundary and cofibrations in SSet are present; no coherent boundary colimit calculation or fixed-object enriched cofibration theorem is stated."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cone-equivalence-saturation",
@@ -118,5 +209,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-coherent-fixed-vertex-cofibrations",
+  "worker": "stage1",
+  "summary": "Reused the existing relative simplex-cell decomposition, the independent Kan-Quillen core and the existing coherent boundary-cube pushout lem-coef-rigidification-boundary-cube (the delivery's duplicate new boundary-cube node was dropped by the maintainer reader; steps 3-4 now cite the existing node). Wrote the colimit universal property and the compatible lifting induction, retaining arbitrary repeated vertex labels and checking n=1. No statement change, no attachment, no Lean edits or compiles.",
+  "blueprint": "Main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, second paragraph and displayed derived coefficient adjunction, through the recorded cone-equivalence-saturation ancestry. The five steps provide its fixed-vertex coherent-realization lifting foundation without invoking the downstream coherent-nerve Quillen equivalence."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-63ecdbed6",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-63ecdbed6 (reviewer sub-agent of L); spot-checked: FIX for C5: the new node lem-coef-coherent-simplex-boundary-cube duplicates the existing base node lem-coef-rigidification-boundary-cube. That node is in the same unit and has the same HTT 2.2.5.1 source place. It states the same thing: C[∂Δ^n]→C[Δ^n] is injective, all mapping sets agree except (0,n), where the map is ∂B_{n-1}⊂B_{n-1} under characteristic functions, with B_0=∅ for n=1. It also states the pushout square along U(∂B)→U(B). The new node is dropped and the item's steps 3 and 4 are rewritten to cite the existing node; the corrected item is in fixes/dag/nodes/sec-six-functors. Step 3 now uses the pushout: an extension of the boundary functor g is exactly a cube map extending the prescribed map on ∂B, and pushout uniqueness gives the condition for lying over f. Repeated labels are handled through U(K)→E(a,a). Step 4 is in the B/∂B notation and glues explicitly. proof_deps is the union of the step uses, with no cycle (the rigidification node does not reach the item). The item statement is unchanged and not weakened; the cofibration is the LLP against mapping-wise trivial Kan fibrations, with no local Kan hypothesis. Checks: step 1 uses the mathlib skeletal-cell node and Kerodon Tag 0077; since u_0 is bijective no 0-cells are attached, Z_1=Z_0 and every stage has vertex set O. Step 2 is elementary: C is left adjoint to the nerve, and the object set is S_0 because Ob is left adjoint to the indiscrete category. Step 4 uses the KQ core: degreewise injections are cofibrations and the mapping maps are trivial fibrations. Step 5 is a stated sequential induction. Small cases: n=1 is ∅→Δ^0, a vertex lift by surjectivity of a trivial fibration. n=2 gives (0,2) = {02, 12∘01} = ∂Δ^1. K=L, O=∅ and repeated labels also work. The dropped node's mathematics was correct. HTT is not in the local literature: read online, WANTED. No SGA is used and no tool_uses are needed (all nodes are in the same unit).; 1 file(s) fixed by the reviewer"
  }
 }

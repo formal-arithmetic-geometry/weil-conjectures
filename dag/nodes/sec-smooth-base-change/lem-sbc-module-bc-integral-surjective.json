@@ -15,11 +15,83 @@
   "def-weil-pbc-cartesian-square",
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-inverse-image",
-  "def-weil-pbc-direct-image"
+  "def-weil-pbc-direct-image",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $G=\\pi_*F'=\\pi_*\\pi^{-1}F$ and let $\\eta:F\\to G$ be the adjunction unit [def-weil-pbc-inverse-image]. The module adjunction has the underlying abelian unit by [prop-weil-pbc-inverse-image-modules-exact](2),(3). For every $t'\\in T'$ choose an algebraic closure of its residue field [def-weil-algebraic-closure] and the corresponding geometric point $\\bar t'$ [def-weil-geometric-point], and set $\\bar t=\\pi\\bar t'$. These image geometric points cover $T$, by surjectivity [def-weil-surjective-morphism]. A germ of $G$ at $\\bar t$ represented by $b\\in G(U)=F'(U\\times_TT')$ maps to the germ of $b$ at the pointed etale neighbourhood $(U\\times_TT',(\\bar u,\\bar t'))$ of $\\bar t'$. The section formula of [def-weil-pbc-direct-image] makes this assignment compatible with every restriction, hence gives a homomorphism $r_{\\bar t'}:G_{\\bar t}\\to F'_{\\bar t'}$. The unit-germ identity of [lem-weil-pbc-inverse-image-stalk-germ] says $c_{\\pi,\\bar t',F}\\,r_{\\bar t'}\\,\\eta_{\\bar t}=1_{F_{\\bar t}}$, so each such $\\eta_{\\bar t}$ is injective. Apply [lem-weil-pbc-geometric-stalks-detect-mono] to the underlying abelian unit. It is mono, and so is the module unit: if two module maps have equal composites with it, their underlying abelian maps are equal, hence the module maps are equal. This uses no finite-stalk product formula.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-algebraic-closure",
+    "def-weil-geometric-point",
+    "def-weil-surjective-morphism",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-geometric-stalks-detect-mono"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F04, lemma-base-change-q-integral-top, proof; arbitrary-Lambda form as in IntegralBaseChange.lean:125-160"
+   }
+  },
+  {
+   "text": "Write $b_M:p^{-1}R^qg_*M\\to R^qh_*e^{-1}M$. Apply [lem-sbc-integral-test-pushforward-arrow] to the given integral $\\pi$, with $M=F'$ and $r=q$. Its isomorphisms $A_{F'}$ and $B_{F'}$ satisfy $B_{F'}b_G=b'_{F'}A_{F'}$. The hypothesis says $b'_{F'}$ is an isomorphism; therefore $b_G=B_{F'}^{-1}b'_{F'}A_{F'}$ is an isomorphism. The cited statement identifies the arrows themselves, so no inference is being made from endpoint isomorphisms alone. Neither a torsion assumption nor an extension of the lower-degree hypothesis to other coefficient categories is used.",
+   "uses": [
+    "lem-sbc-integral-test-pushforward-arrow"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F04, lemma-base-change-q-integral-top, proof; arbitrary-Lambda form as in IntegralBaseChange.lean:125-160"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-fixed-base-critical-map](1),(2) to the fixed morphism $p$, the given qcqs $g$, the integer $q\\ge1$, and the module monomorphism $\\eta:F\\hookrightarrow G$ from Step 1. Its hypothesis is precisely $\\mathrm{BC}(p,\\Lambda,q-1)$ at the fixed base, which is assumed here. We obtain that $b_F$ is mono and that $\\operatorname{Coker}(b_F)\\to\\operatorname{Coker}(b_G)$ is mono. The existing universally quantified injectivity node cannot be applied with only this fixed-base hypothesis.",
+   "uses": [
+    "lem-sbc-fixed-base-critical-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F04, lemma-base-change-q-integral-top, proof; arbitrary-Lambda form as in IntegralBaseChange.lean:125-160"
+   }
+  },
+  {
+   "text": "Since $b_G$ is an isomorphism by Step 2, its cokernel is zero. The monomorphism from Step 3 embeds $\\operatorname{Coker}(b_F)$ in zero, so this cokernel is zero as well. Thus $b_F$ is epi and mono, hence an isomorphism in the abelian category [def-sp-abelian] of module sheaves [def-weil-pbc-etale-sheaves]. This is the required canonical comparison map.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F04, lemma-base-change-q-integral-top, proof; arbitrary-Lambda form as in IntegralBaseChange.lean:125-160"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-weil-algebraic-closure",
+  "def-weil-geometric-point",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-surjective-morphism",
+  "lem-sbc-fixed-base-critical-map",
+  "lem-sbc-integral-test-pushforward-arrow",
+  "lem-weil-pbc-geometric-stalks-detect-mono",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F04, lemma-base-change-q-integral-top: same unit/cokernel argument, with fixed-base arbitrary-ring inputs verified in the read-only Lean source"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -97,10 +169,45 @@
    "results": "{\"t\": \"2026-10-17T00:36:35Z\", \"tool\": \"grep\", \"query\": \"baseChangeHomologyMap|integral.*base.change|base.change.*integral\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: geometric stability, cotangent modules, ordinary sheaf monomorphisms, and the abstract four lemma do not state this etale higher-direct-image comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChangeHomologyMap|integral.*base.change|base.change.*integral",
+   "results": "{\"t\": \"2026-10-17T02:37:39Z\", \"tool\": \"grep\", \"query\": \"baseChangeHomologyMap|integral.*base.change|base.change.*integral\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned statements concern geometric permanence and algebraic base change, not etale higher direct images"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If etale cohomology base change is an isomorphism after integral surjective replacement of the test scheme then it is an isomorphism before replacement",
+   "results": "{\"t\": \"2026-10-17T02:37:40Z\", \"tool\": \"leansearch\", \"query\": \"If etale cohomology base change is an isomorphism after integral surjective replacement of the test scheme then it is an isomorphism before replacement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage\", \"Algebra.Etale.baseChange\"], \"digest\": \"c6c543ac2c6987c3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned statements concern geometric permanence and algebraic base change, not etale higher direct images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral surjective change of test scheme reflects an isomorphism of etale cohomology base change maps with arbitrary constant ring module coefficients assuming the preceding degree base change",
+   "results": "{\"t\": \"2026-10-17T02:37:40Z\", \"tool\": \"leanfinder\", \"query\": \"Integral surjective change of test scheme reflects an isomorphism of etale cohomology base change maps with arbitrary constant ring module coefficients assuming the preceding degree base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.IsStandardEtale.of_surjective\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"AlgebraicGeometry.IsEtale.of_comp\", \"RingHom.Etale.isStableUnderBaseChange\", \"RingHom.Etale.respectsIso\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.FormallyEtale.of_restrictScalars\"], \"digest\": \"1c962b4fc7941206\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned statements concern geometric permanence and algebraic base change, not etale higher direct images"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegralHom, \"baseChange\"",
+   "results": "{\"t\": \"2026-10-17T02:37:40Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsIntegralHom, \\\"baseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\"], \"digest\": \"8f111bf47cd87001\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned statements concern geometric permanence and algebraic base change, not etale higher direct images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjectivity of etale higher direct image comparison descends through integral surjective extension of the upper test base",
+   "results": "{\"t\": \"2026-10-17T02:38:49Z\", \"tool\": \"leanfinder\", \"query\": \"Surjectivity of etale higher direct image comparison descends through integral surjective extension of the upper test base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardEtale.of_surjective\", \"AlgebraicGeometry.SurjectiveOnStalks.of_comp\", \"AlgebraicGeometry.Surjective.of_comp\", \"AlgebraicGeometry.Scheme.Pullback.forget_comparison_surjective\", \"AlgebraicGeometry.Scheme.pullbackComparison_forget_surjective\", \"AlgebraicGeometry.specTargetImageRingHom_surjective\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"AlgebraicGeometry.IsEtale.of_comp\"], \"digest\": \"0a8a2821227d4b81\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned statements concern geometric permanence and algebraic base change, not etale higher direct images"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-lem-universal-datum",
@@ -128,5 +235,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sbc-module-bc-integral-surjective",
+  "worker": "stage1",
+  "summary": "Expanded the 0F04 unit/cokernel proof without changing its arbitrary-ring fixed-base statement. Proved the unit monic by its germ formula, added a finished fixed-base critical-map interface because the existing node assumes universality, and isolated the integral test-pushforward arrow comparison as a statement-only child. Added missing qcqs notion dependencies.",
+  "blueprint": "Realizes Step 2 of the accepted current sk-lem-universal-datum split (algebraic closure of the failure field), and the integral-surjective operation of the unit proof; no unit/chapter route is changed. The new children have the same nearest blueprint ancestor through this item.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic constant-ring pullback/adjunction compatibility lets the explicit abelian unit-germ argument prove the module unit monic."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic geometric stalk comparison identifies the germ of the adjunction unit, not just its endpoints."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-stalks-detect-mono",
+    "why": "Generic small-etale conservative-family test applies to image geometric points covering the target."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-geometric-stalks-detect-mono"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-e2e865135",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-e2e865135 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, unit sk-lem-universal-datum, and Stacks etale-cohomology.tex Remark 0F02 and Lemmas 0F03/0F04 (lines 16838-16990). I also read the Lean statements and proofs of mono_baseChangeHomologyMap and mono_cokernelMap in CriticalMap.lean. The item statement is unchanged: the fixed-base, arbitrary-commutative-ring form of 0F04. Step 1 is correct: the unit's stalk map has a left inverse, from the stalk-germ lemma with f=pi and the restriction map r. By surjectivity the image geometric points cover T, so detect-mono applies. Module monicity follows by faithful forgetting. Step 2 conjugates the actual canonical arrows by the isomorphisms A and B. Step 3 has every hypothesis present: fixed-base BC(p,Lambda,q-1), q>=1, g qcqs. Step 4 is elementary: a mono into zero, then epi plus mono gives iso. lem-sbc-fixed-base-critical-map is true. The 0F03 proof uses BC only in degree q-1, for the same g and the sheaves I and Q, and R^q g_* of an injective Lambda-module sheaf vanishes. Its clause (2) follows from F in G in I. It properly generalizes lem-sbc-module-bc-injectivity and sbc-lem-bc-injectivity, which assume universal BC, and fixed-base BC does not give universal BC (sbc-lem-fixed-base-not-universal), so it is not a duplicate. lem-sbc-integral-test-pushforward-arrow is true: integral pushforward is exact, the integral underived exchange applies, and vertical pasting gives the square. It is the arrow-level form of the three identifications in the 0F04 proof. It differs from lem-sbc-integral-pushforward-base-change-arrow (that node changes the base, not the test scheme) and is strictly smaller than the item. Edge cases checked: q=1, Lambda=0, F=0, pi=id, empty T, r<0, and non-surjective pi (in which case the item fails, as expected). The three off-unit citations are closed nodes or a Mathlib leaf; I accept the declared tool_uses. No SGA source is used. No fixes."
  }
 }
