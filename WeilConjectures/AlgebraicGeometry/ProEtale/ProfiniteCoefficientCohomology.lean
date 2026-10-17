@@ -94,7 +94,7 @@ lemma shortExact_of_sections (T : ShortComplex (Sheaf J AddCommGrpCat.{u + 1}))
     exact (sheafToPresheaf J _).mono_of_mono_map this
   exact ShortComplex.ShortExact.mk' hT inferInstance inferInstance
 
-variable [DiscreteTopology A] [DiscreteTopology B]
+variable [DiscreteTopology B]
 
 /-- The inclusion of the kernel of a continuous homomorphism, as a continuous homomorphism. -/
 def kerSubtype (φ : ContinuousAddMonoidHom A B) :
@@ -108,11 +108,15 @@ lemma shortExact_continuousSheafMap (φ : ContinuousAddMonoidHom A B)
     (ShortComplex.mk (continuousSheafMap S (kerSubtype φ)) (continuousSheafMap S φ) (by
       apply Sheaf.hom_ext
       ext U f
-      exact ULift.ext _ _ (ContinuousMap.ext fun t ↦ (f.down t).2))).ShortExact := by
+      let f' : C(U.unop.left, φ.toAddMonoidHom.ker) := f.down
+      exact ULift.ext _ _ (ContinuousMap.ext fun t ↦ (f' t).2))).ShortExact := by
   have := epi_continuousSheafMap S φ hφ
   refine shortExact_of_sections _ (fun U x y h ↦ ?_) (fun U y hy ↦ ?_)
   · exact ULift.ext _ _ (ContinuousMap.ext fun t ↦ Subtype.ext
       (congrArg (fun f : ULift.{u + 1} C(U.unop.left, A) ↦ f.down t) h))
+  · let y' : C(U.unop.left, A) := y.down
+    have hy' (t : U.unop.left) : φ (y' t) = 0 :=
+      congrArg (fun f : ULift.{u + 1} C(U.unop.left, B) ↦ f.down t) hy
     exact ⟨ULift.up ⟨fun t ↦ ⟨y' t, hy' t⟩, by fun_prop⟩, rfl⟩
 
 /-- **Right exactness of the top cohomology.** For a surjection `φ : A ⟶ B` of discrete
@@ -126,5 +130,167 @@ lemma surjective_H_map_continuousSheafMap (φ : ContinuousAddMonoidHom A B)
     (Subsingleton.elim _ _)
 
 end Exact
+section Profinite
+
+variable {L : Type} [TopologicalSpace L] [AddCommGroup L] [IsTopologicalAddGroup L]
+  (U : ℕ → AddSubgroup L)
+
+/-- The projection `L ⟶ L/Uₘ`, as a continuous homomorphism. -/
+def quotientMk (m : ℕ) : ContinuousAddMonoidHom L (L ⧸ U m) :=
+  ⟨QuotientAddGroup.mk' (U m), continuous_quot_mk⟩
+
+variable {U} in
+/-- The transition map `L/Uₘ₊₁ ⟶ L/Uₘ`, as a continuous homomorphism. -/
+def quotientTransition (hU : Antitone U) (m : ℕ) :
+    ContinuousAddMonoidHom (L ⧸ U (m + 1)) (L ⧸ U m) :=
+  ⟨QuotientAddGroup.map _ _ (AddMonoidHom.id L) (hU m.le_succ),
+    (QuotientAddGroup.isQuotientMap_mk (U (m + 1))).continuous_iff.2 continuous_quot_mk⟩
+
+omit [IsTopologicalAddGroup L] in
+lemma quotientTransition_mk (hU : Antitone U) (m : ℕ) (x : L) :
+    quotientTransition hU m (x : L ⧸ U (m + 1)) = (x : L ⧸ U m) :=
+  rfl
+
+omit [IsTopologicalAddGroup L] in
+lemma surjective_quotientTransition (hU : Antitone U) (m : ℕ) :
+    Function.Surjective (quotientTransition hU m) := by
+  rintro ⟨x⟩
+  exact ⟨(x : L ⧸ U (m + 1)), rfl⟩
+
+variable [CompactSpace L] {U} (hU : Antitone U) (hopen : ∀ m, IsOpen (U m : Set L))
+  (hbot : ∀ x : L, (∀ m, x ∈ U m) → x = 0)
+
+include hU hopen hbot in
+/-- In a compact group, a decreasing sequence of open subgroups with trivial intersection is
+a basis of neighbourhoods of `0`. -/
+lemma exists_subset_of_mem_nhds_zero {V : Set L} (hV : V ∈ nhds (0 : L)) :
+    ∃ m, (U m : Set L) ⊆ V := by
+  by_contra! h
+  let t (m : ℕ) : Set L := (U m : Set L) ∩ (interior V)ᶜ
+  have hcl (m : ℕ) : IsClosed (t m) :=
+    (AddSubgroup.isClosed_of_isOpen _ (hopen m)).inter isOpen_interior.isClosed_compl
+  obtain ⟨x, hx⟩ := IsCompact.nonempty_iInter_of_sequence_nonempty_isCompact_isClosed t
+    (fun m ↦ Set.inter_subset_inter_left _ (hU m.le_succ))
+    (fun m ↦ by
+      obtain ⟨y, hyU, hyV⟩ := Set.not_subset.1 (h m)
+      exact ⟨y, hyU, fun hy ↦ hyV (interior_subset hy)⟩)
+    (hcl 0).isCompact hcl
+  have hx' := Set.mem_iInter.1 hx
+  obtain rfl := hbot x fun m ↦ (hx' m).1
+  exact (hx' 0).2 (mem_interior_iff_mem_nhds.2 hV)
+
+include hU hopen hbot in
+/-- A compatible family of elements of the quotients `L/Uₘ` comes from a unique element of
+`L`. -/
+lemma existsUnique_of_compatible (f : ∀ m, L ⧸ U m)
+    (hf : ∀ m, quotientTransition hU m (f (m + 1)) = f m) :
+    ∃! x : L, ∀ m, (x : L ⧸ U m) = f m := by
+  have hdisc (m : ℕ) : DiscreteTopology (L ⧸ U m) := QuotientAddGroup.discreteTopology (hopen m)
+  refine existsUnique_of_exists_of_unique ?_ fun x y hx hy ↦ ?_
+  · let t (m : ℕ) : Set L := (QuotientAddGroup.mk : L → L ⧸ U m) ⁻¹' {f m}
+    have hcl (m : ℕ) : IsClosed (t m) := by
+      have := hdisc m
+      exact (isClosed_discrete ({f m} : Set (L ⧸ U m))).preimage
+        (QuotientAddGroup.continuous_mk (N := U m))
+    obtain ⟨x, hx⟩ := IsCompact.nonempty_iInter_of_sequence_nonempty_isCompact_isClosed t
+      (fun m y hy ↦ by
+        change (y : L ⧸ U m) = f m
+        rw [← quotientTransition_mk U hU m y, ← hf m]
+        exact congrArg _ hy)
+      (fun m ↦ (QuotientAddGroup.mk_surjective (f m)).imp fun _ h ↦ h)
+      (hcl 0).isCompact hcl
+    exact ⟨x, fun m ↦ Set.mem_iInter.1 hx m⟩
+  · have h := hbot (-x + y) fun m ↦ QuotientAddGroup.eq.1 ((hx m).trans (hy m).symm)
+    rw [neg_add_eq_zero] at h
+    exact h
+
+include hU hopen hbot in
+/-- **Continuous maps to `L = lim L/Uₘ`.** A compatible family of continuous maps `X ⟶ L/Uₘ`
+comes from a unique continuous map `X ⟶ L`. -/
+lemma existsUnique_continuousMap_of_compatible {X : Type*} [TopologicalSpace X]
+    (f : ∀ m, C(X, L ⧸ U m)) (hf : ∀ m t, quotientTransition hU m (f (m + 1) t) = f m t) :
+    ∃! g : C(X, L), ∀ m t, (g t : L ⧸ U m) = f m t := by
+  have hdisc (m : ℕ) : DiscreteTopology (L ⧸ U m) := QuotientAddGroup.discreteTopology (hopen m)
+  choose g hg hgu using fun t ↦
+    existsUnique_of_compatible hU hopen hbot (fun m ↦ f m t) (fun m ↦ hf m t)
+  refine ⟨⟨g, continuous_iff_continuousAt.2 fun t W hW ↦ ?_⟩, fun m t ↦ hg t m,
+    fun g' hg' ↦ ContinuousMap.ext fun t ↦ hgu t (g' t) fun m ↦ hg' m t⟩
+  have hV : (fun z ↦ g t + z) ⁻¹' W ∈ nhds (0 : L) :=
+    (continuous_const.add continuous_id).continuousAt.preimage_mem_nhds (by simpa using hW)
+  obtain ⟨m, hm⟩ := exists_subset_of_mem_nhds_zero hU hopen hbot hV
+  have hO : (f m) ⁻¹' {f m t} ∈ nhds t :=
+    ((isOpen_discrete _).preimage (f m).continuous).mem_nhds rfl
+  refine Filter.mem_map.2 (Filter.mem_of_superset hO fun z hz ↦ ?_)
+  have hz' : (g t : L ⧸ U m) = g z := (hg t m).trans ((Set.mem_singleton_iff.1 hz).symm.trans
+    (hg z m).symm)
+  have := hm (QuotientAddGroup.eq.1 hz')
+  simpa using this
+
+variable (U) in
+/-- The tower of sheaves `U ↦ C(U, L/Uₘ)` on `S_proét`. -/
+noncomputable def continuousSheafTower : ℕᵒᵖ ⥤ Sheaf (ProEt.topology S) AddCommGrpCat.{u + 1} :=
+  Functor.ofOpSequence (X := fun m ↦ continuousSheaf S (L ⧸ U m))
+    fun m ↦ continuousSheafMap S (quotientTransition hU m)
+
+variable (U) in
+/-- The cone `C(-, L) ⟶ C(-, L/Uₘ)` over the tower of the sheaves `U ↦ C(U, L/Uₘ)`. -/
+noncomputable def continuousSheafTowerCone : Cone (continuousSheafTower S U hU) where
+  pt := continuousSheaf S L
+  π := NatTrans.ofOpSequence (fun m ↦ continuousSheafMap S (quotientMk U m)) fun m ↦ by
+    simp only [Functor.const_obj_obj, Functor.const_obj_map, Category.id_comp,
+      continuousSheafTower, Functor.ofOpSequence_map_homOfLE_succ]
+    rw [← continuousSheafMap_comp]
+    rfl
+
+include hopen hbot in
+/-- The sheaf `U ↦ C(U, L)` is the limit of the tower of the sheaves `U ↦ C(U, L/Uₘ)`. -/
+noncomputable def isLimitContinuousSheafTowerCone :
+    IsLimit (continuousSheafTowerCone S U hU) := by
+  refine isLimitOfReflects (sheafToPresheaf _ _)
+    (evaluationJointlyReflectsLimits _ fun V ↦ ?_)
+  refine isLimitOfReflects (forget AddCommGrpCat.{u + 1})
+    (Classical.choice ((Types.isLimit_iff _).2 fun s hs ↦ ?_))
+  let fm (m : ℕ) : C(V.unop.left, L ⧸ U m) := (s (op m)).down
+  have hfm (m : ℕ) (t : V.unop.left) : quotientTransition hU m (fm (m + 1) t) = fm m t := by
+    have h := hs (homOfLE m.le_succ).op
+    simp only [continuousSheafTower, Functor.comp_map, Functor.ofOpSequence_map_homOfLE_succ]
+      at h
+    exact congrArg (fun x : ULift.{u + 1} C(V.unop.left, L ⧸ U m) ↦ x.down t) h
+  obtain ⟨g, hg, hgu⟩ := existsUnique_continuousMap_of_compatible hU hopen hbot fm hfm
+  refine ⟨ULift.up g, fun j ↦ ?_, fun x hx ↦ ?_⟩
+  · exact ULift.ext _ _ (ContinuousMap.ext fun t ↦ hg j.unop t)
+  · exact ULift.ext _ _ (hgu x.down fun m t ↦
+      congrArg (fun y : ULift.{u + 1} C(V.unop.left, L ⧸ U m) ↦ y.down t) (hx (op m)))
+
+include hU hopen hbot in
+/-- **Pro-étale cohomology with profinite coefficients in high degrees.** Let `S` be a scheme of
+finite type and of dimension at most `d` over a separably closed field, and `L` a compact
+abelian group with a decreasing sequence of open subgroups `Uₘ` with trivial intersection.
+Then `Hᵠ(S_proét, L) = 0` for `q > 2d`, for the sheaf `U ↦ C(U, L)`. -/
+theorem subsingleton_H_continuousSheaf_of_two_mul_lt_of_compact {K : Type u} [Field K]
+    [IsSepClosed K] (a : S ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a] (d : ℕ)
+    (hS : topologicalKrullDim S ≤ (d : WithBot ℕ∞)) (q : ℕ) (hq : 2 * d < q) :
+    Subsingleton (Sheaf.H (continuousSheaf S L) q) := by
+  have hdisc (m : ℕ) : DiscreteTopology (L ⧸ U m) := QuotientAddGroup.discreteTopology (hopen m)
+  have hfin (m : ℕ) : Finite (L ⧸ U m) := by
+    have := hdisc m
+    exact finite_of_compact_of_discrete
+  refine ProEt.subsingleton_H_of_isLimit_tower (F := continuousSheafTower S U hU)
+    (fun m ↦ ?_) (isLimitContinuousSheafTowerCone S hU hopen hbot) (2 * d)
+    (fun m q hq ↦ ?_) (fun m ↦ ?_) q hq
+  · simp only [continuousSheafTower, Functor.ofOpSequence_map_homOfLE_succ]
+    have := hdisc m
+    exact epi_continuousSheafMap S _ (surjective_quotientTransition U hU m)
+  · have := hdisc m
+    have := hfin m
+    exact subsingleton_H_continuousSheaf_of_two_mul_lt a d hS (L ⧸ U m) q hq
+  · simp only [continuousSheafTower, Functor.ofOpSequence_map_homOfLE_succ]
+    have := hdisc m
+    have := hdisc (m + 1)
+    have := hfin (m + 1)
+    exact surjective_H_map_continuousSheafMap S _ (surjective_quotientTransition U hU m) _
+      (subsingleton_H_continuousSheaf_of_two_mul_lt a d hS _ (2 * d + 1) (by lia))
+
+end Profinite
 
 end AlgebraicGeometry.ProEtale

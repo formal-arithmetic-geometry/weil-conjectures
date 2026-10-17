@@ -357,7 +357,7 @@ theorem subsingleton_cohomology_adicConstant_of_isProper (e : ℕ)
     (he : topologicalKrullDim (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ≤ (e : WithBot ℕ∞))
     (r : ℤ) (hr : r < 0 ∨ 2 * (e : ℤ) < r) :
     Subsingleton ((adicConstant k₀ l X).cohomology r).carrier :=
-  sorry
+  subsingleton_cohomology_adicConstant_of_topologicalKrullDim k₀ l X e he hr
 
 end WeilSheaf
 
