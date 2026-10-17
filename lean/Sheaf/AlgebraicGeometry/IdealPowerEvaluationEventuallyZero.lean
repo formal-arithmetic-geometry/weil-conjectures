@@ -7,10 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
-import Sheaf.AlgebraicGeometry.IdealPowerEvaluationAffineEventuallyZero
-import Sheaf.AlgebraicGeometry.FormalPolynomialPowerLifts
-import Sheaf.Topology.GlueSheavesOfModules
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+import Sheaf.AlgebraicGeometry.IdealPowerLocalMapsEventuallyAgree
 
 /-! # IdealPowerEvaluationEventuallyZero
 
@@ -25,9 +22,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
-/ -- A homomorphism from an ideal power that evaluates to zero on the complement
+/-- A homomorphism from an ideal power that evaluates to zero on the complement
 vanishes after restriction to a sufficiently high power.
 
 Proof: Choose a finite affine cover of the quasi-compact scheme. On one affine member
@@ -44,7 +39,7 @@ The resulting restricted homomorphism vanishes on the cover, hence vanishes glob
 by sheaf uniqueness. The case n = 0 uses the same calculation with f_i^0 = 1.
 
 Source: Stacks Project, Properties, Lemma 01PQ and its reduction to Lemma 01PM.
-(blueprint: lem-weil-pbc-ideal-power-evaluation-eventually-zero). - /
+(blueprint: lem-weil-pbc-ideal-power-evaluation-eventually-zero). -/
 theorem ideal_power_evaluation_eventually_zero
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]
@@ -61,38 +56,26 @@ theorem ideal_power_evaluation_eventually_zero
     ∀ (n : ℕ) (φ : (idealSheafPower ι n).1 ⟶ F),
       φ.app U (one n) = 0 →
       ∃ (m : ℕ) (h : n ≤ m), r n m h ≫ φ = 0 := by
-  classical
   intro n φ hφ
-  obtain ⟨S, hfin, hcover⟩ :=
-    isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens.mp
-      ⟨isCompact_univ (X := X), isOpen_univ⟩
-  have hcover' : (⨆ V : S, V.1.1) = ⊤ := by
-    ext x
-    simpa using (Set.ext_iff.mp hcover x).symm
-  have hlocal (V : S) :=
-    ideal_power_evaluation_affine_eventually_zero ι F U one r hU hone hr V.1 n φ hφ
-  choose k hk hzero using hlocal
-  have := hfin.to_subtype
-  let := Fintype.ofFinite S
-  let m := max n (Finset.univ.sup k)
-  have hnm : n ≤ m := le_max_left _ _
-  refine ⟨m, hnm, ?_⟩
-  apply (glue_sheaves_of_modules X.toRingedSpace S (fun V ↦ V.1.1) hcover').2.1
-  intro V
-  have hkm : k V ≤ m := (Finset.le_sup (Finset.mem_univ V)).trans (le_max_right _ _)
-  have : Mono (idealSheafPower ι n).2 := formalPolynomial_power_mono ι n
-  have hcomp : r (k V) m hkm ≫ r n (k V) (hk V) = r n m hnm := by
-    apply (cancel_mono (idealSheafPower ι n).2).mp
-    rw [Category.assoc, hr, hr, hr]
-  have hz : (r n m hnm ≫ φ).over V.1.1 = 0 := by
-    rw [← hcomp, Category.assoc]
-    change (SheafOfModules.overFunctor X.ringCatSheaf V.1.1).map
-      (r (k V) m hkm ≫ (r n (k V) (hk V) ≫ φ)) = 0
-    rw [Functor.map_comp]
-    change (r (k V) m hkm).over V.1.1 ≫
-      (r n (k V) (hk V) ≫ φ).over V.1.1 = 0
-    rw [hzero V, comp_zero]
-  simpa using hz
--/
+  have heval (W : X.Opens) (hWU : W ≤ U) (hW hW' : W ≤ ⊤) :
+      (φ.over ⊤).val.app (op (Over.mk (homOfLE hW)))
+          (((idealSheafPower ι n).1).presheaf.map (homOfLE hWU).op (one n)) =
+        (0 : ((idealSheafPower ι n).1).over ⊤ ⟶ F.over ⊤).val.app
+          (op (Over.mk (homOfLE hW')))
+          (((idealSheafPower ι n).1).presheaf.map (homOfLE hWU).op (one n)) := by
+    change φ.app W (((idealSheafPower ι n).1).presheaf.map
+      (homOfLE hWU).op (one n)) = 0
+    exact (PresheafOfModules.naturality_apply φ.val (homOfLE hWU).op (one n)).trans
+      ((congrArg (F.presheaf.map (homOfLE hWU).op) hφ).trans (map_zero _))
+  obtain ⟨m, h, hm⟩ := ideal_power_local_maps_eventually_agree
+    ι F U one r hU hone hr ⊤ ⊤ (by simpa using isCompact_univ (X := X))
+    n (φ.over ⊤) 0 heval
+  refine ⟨m, h, ?_⟩
+  apply SheafOfModules.hom_ext
+  ext W s
+  have hw := hm W.unop le_top le_top
+  have hs := ConcreteCategory.congr_hom hw s
+  change φ.val.app W ((r n m h).val.app W s) = 0 at hs ⊢
+  exact hs
 
 end AlgebraicGeometry.Scheme

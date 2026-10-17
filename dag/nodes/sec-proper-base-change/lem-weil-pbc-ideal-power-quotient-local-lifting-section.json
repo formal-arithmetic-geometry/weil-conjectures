@@ -72,9 +72,12 @@
   "lem-weil-pbc-glue-sheaves-of-modules"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
+  "group": "H1",
+  "date": "2026-10-17",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Lean implementation of finite affine gluing in 01PQ, using two separated local statements; U1, 2026-10-13."
+  "place": "Lemma 01PQ finite affine lifting and gluing; Lemma 01PM injectivity on overlaps.",
+  "note": "Restore the original signature and finite affine gluing proof. Second reading removes the duplicated overlap calculation and reuses the now proved ideal_power_local_maps_eventually_agree."
  },
  "mathlib_searches": [
   {
@@ -129,7 +132,16 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lean": {},
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IdealPowerQuotientLiftingSection",
+  "file": "lean/Sheaf/AlgebraicGeometry/IdealPowerQuotientLiftingSection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ideal_power_quotient_local_lifting_section",
+  "statement": "theorem ideal_power_quotient_local_lifting_section\n    {X : Scheme.{u}} {I : X.Modules}\n    (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]\n    [I.IsQuasicoherent] [I.IsFiniteType] [CompactSpace X] [QuasiSeparatedSpace X]\n    (F : X.Modules) [F.IsQuasicoherent]\n    (U : X.Opens) (one : ∀ n : ℕ, Γ((idealSheafPower ι n).1, U))\n    (r : ∀ (n m : ℕ), n ≤ m →\n      ((idealSheafPower ι m).1 ⟶ (idealSheafPower ι n).1))\n    (hU : ∀ x : X, x ∈ U ↔ Function.Surjective\n      ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map ι).hom)\n    (hone : ∀ n : ℕ, (idealSheafPower ι n).2.app U (one n) = (1 : Γ(X, U)))\n    (hr : ∀ (n m : ℕ) (h : n ≤ m),\n      r n m h ≫ (idealSheafPower ι n).2 = (idealSheafPower ι m).2)\n    (A : ℕ → X.Modules) (a : ∀ n : ℕ, A n ⟶ F)\n    (hmono : ∀ n : ℕ, Mono (a n))\n    (hqc : ∀ n : ℕ, (A n).IsQuasicoherent)\n    (hann : ∀ (n : ℕ) (W : X.Opens) (s : Γ(F, W)),\n      s ∈ Set.range ((a n).app W) ↔\n        ∀ (W' : X.Opens) (h : W' ≤ W)\n          (b : Γ((idealSheafPower ι n).1, W')),\n          (F.smul (U := W') ((idealSheafPower ι n).2.val.app (op W') b)).hom\n            (F.presheaf.map (homOfLE h).op s) = 0)\n    (hquot : ∀ (n : ℕ) (W : X.Opens), W ≤ U →\n      Function.Bijective ((cokernel.π (a n)).app W))\n    (q : ∀ (n m : ℕ), n ≤ m → (cokernel (a n) ⟶ cokernel (a m)))\n    (hq : ∀ (n m : ℕ) (h : n ≤ m),\n      cokernel.π (a n) ≫ q n m h = cokernel.π (a m)) :\n    ∀ s : Γ(F, U), ∃ (n : ℕ) (φ : (idealSheafPower ι n).1 ⟶ cokernel (a n)),\n      (cokernel.π (a n)).app U s = φ.app U (one n)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
  "reviewed": {
   "date": "2026-10-13",
   "by": "L",
@@ -141,12 +153,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-17",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261013T100142-L-2491649",
+  "landing": "20261017T013735-L-114074",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
