@@ -1,0 +1,79 @@
+{
+ "id": "lem-sfb-dc-hom-scalar-adjunction",
+ "kind": "statement",
+ "title": "Derived internal Hom under restriction of coefficient scalars",
+ "statement": "Let $\\mathcal C$ be a site small in the module universe [def-weil-size-convention], and let $R\\to S$ be a morphism of sheaves of commutative rings. Write $D(R)$ and $D(S)$ for the ordinary unbounded derived categories of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Use the relative derived tensor product computed from K-flat complexes [def-pc-tensor-complex-sheaves, def-pc-kflat-complex], derived scalar extension [lem-pur-derived-change-of-rings], and derived internal Hom $H_R,H_S$ [def-pur-derived-internal-hom]. Let $U:D(S)\\to D(R)$ be termwise restriction of scalars [def-pc-sheaf-restrict-scalars]. For every $K\\in D(R)$ and $N\\in D(S)$ there is an isomorphism, natural in both inputs,\n$$U H_S(S\\otimes_R^{\\mathbf L}K,N)\\xrightarrow{\\sim} H_R(K,UN).$$\nIt is the unique isomorphism whose tensor-Hom transpose is the composite of restricted $S$-linear evaluation with the scalar-extension unit $K\\to U(S\\otimes_R^{\\mathbf L}K)$. Equivalently its representing Hom-bijections are the derived extension-restriction adjunction and the tensor-Hom adjunctions, with the strong tensor comparison for scalar extension. These isomorphisms commute with morphisms of coefficient rings by their evaluation normalization. The functor $U$ is conservative: a morphism in $D(S)$ is an isomorphism if its image in $D(R)$ is. No flatness, perfectness or boundedness assumption is imposed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15 (ambient derived operations); auxiliary change-of-ring comparison, an agent formulation extracted from returned proof step 4, not a verbatim theorem of the source."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-derived-internal-hom",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of ring sheaves R to S derived internal Hom over S from S derived tensor K restricts to derived internal Hom over R from K",
+   "results": "Search returned SheafOfModules.pullbackObjUnitToUnit, LightCondensed.ihom_map_val_app, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.pushforwardSections_unitHomEquiv, PresheafOfModules.Monoidal.tensorObjMap, SheafOfModules.restrictScalars_map_val, LightCondensed.ihomPoints_symm_comp",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ambient adjunction, ordinary module, or colimit infrastructure does not state this derived ring-sheaf comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal left adjoint induces an internal Hom isomorphism under its right adjoint",
+   "results": "Search returned CategoryTheory.Monoidal.Reflective.closed, CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, CategoryTheory.exp.adjunction, CategoryTheory.Exponentiable.mk, CategoryTheory.ihom.adjunction, CategoryTheory.MonoidalClosed.internalHomAdjunction₂, CategoryTheory.Functor.monoidalClosed_closed_adj",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ambient adjunction, ordinary module, or colimit infrastructure does not state this derived ring-sheaf comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalClosed\", \"Adjunction\"",
+   "results": "Search returned CategoryTheory.MonoidalClosed.internalHomAdjunction₂, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ambient adjunction, ordinary module, or colimit infrastructure does not state this derived ring-sheaf comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "(restrictScalars|restrictionOfScalars).*(ihom|internalHom|derivedHom)|(ihom|internalHom|derivedHom).*(restrictScalars|restrictionOfScalars)",
+   "results": "No matching declarations returned.",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ambient adjunction, ordinary module, or colimit infrastructure does not state this derived ring-sheaf comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived restriction of scalars internal Hom extension restriction adjunction for sheaves of modules",
+   "results": "Search returned ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, ModuleCat.extendRestrictScalarsAdj, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, ModuleCat.restrictScalars",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ambient adjunction, ordinary module, or colimit infrastructure does not state this derived ring-sheaf comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dc-hom-preserves",
+  "date": "2026-10-17",
+  "group": "Q110"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "Final paragraph of lem-sfb-dc-hom-preserves.proof.md: 'inverting ell' and 'descending to a finite extension E'; formal scalar-adjunction identification formerly inside returned step 4.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

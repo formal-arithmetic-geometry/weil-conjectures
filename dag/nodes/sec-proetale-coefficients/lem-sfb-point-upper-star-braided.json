@@ -20,17 +20,18 @@
  ],
  "proof": [
   {
-   "text": "Put $L=p^*$ and $R=p_*$, with $L\\dashv R$ as in [def-sfb-point-adjunction], between the two categories of abelian sheaves with tensor product [sk-def-sfb-sheaf-tensor]. By [lem-sfb-point-upper-star-unit], $R$ has its canonical restriction lax monoidal structure and $L$ its adjunction-induced oplax structure, with invertible unit comparison $L\\mathbf Z\\to\\mathbf Z$. By [lem-sfb-point-upper-star-tensor], every tensor comparison $\\delta_{F,G}:L(F\\otimes G)\\to LF\\otimes LG$ is invertible. Use their inverses as the strong monoidal structure maps. Its associativity and unit identities follow by composing the oplax coherence identities with these inverse comparison maps and cancelling each comparison with its inverse. More explicitly, put $m_{F,G}=\\delta_{F,G}^{-1}$ and $j=\\iota^{-1}$, where $\\iota:L\\mathbf1\\to\\mathbf1$ is the oplax unit map. Write $\\alpha,\\lambda,\\rho$ for associator and unitors. The oplax associativity identity is\n$$\n(\\operatorname{id}\\otimes\\delta_{G,H})\\circ\\delta_{F,G\\otimes H}\\circ L(\\alpha_{F,G,H})\n=\\alpha_{LF,LG,LH}\\circ(\\delta_{F,G}\\otimes\\operatorname{id})\\circ\\delta_{F\\otimes G,H}.\n$$\nPrecompose with $m_{F\\otimes G,H}\\circ(m_{F,G}\\otimes\\operatorname{id})$ and postcompose with $m_{F,G\\otimes H}\\circ(\\operatorname{id}\\otimes m_{G,H})$. Cancelling the inverse pairs gives\n$$\nL(\\alpha_{F,G,H})\\circ m_{F\\otimes G,H}\\circ(m_{F,G}\\otimes\\operatorname{id})\n=m_{F,G\\otimes H}\\circ(\\operatorname{id}\\otimes m_{G,H})\\circ\\alpha_{LF,LG,LH}.\n$$\nThe two oplax unit identities are $L(\\lambda_F)=\\lambda_{LF}\\circ(\\iota\\otimes\\operatorname{id})\\circ\\delta_{\\mathbf1,F}$ and $L(\\rho_F)=\\rho_{LF}\\circ(\\operatorname{id}\\otimes\\iota)\\circ\\delta_{F,\\mathbf1}$. Precomposing them with $m_{\\mathbf1,F}\\circ(j\\otimes\\operatorname{id})$ and $m_{F,\\mathbf1}\\circ(\\operatorname{id}\\otimes j)$, respectively, gives $L(\\lambda_F)\\circ m_{\\mathbf1,F}\\circ(j\\otimes\\operatorname{id})=\\lambda_{LF}$ and $L(\\rho_F)\\circ m_{F,\\mathbf1}\\circ(\\operatorname{id}\\otimes j)=\\rho_{LF}$. These are the strong monoidal coherence identities.",
+   "text": "Put $L=p^*$ and $R=p_*$, with $L\\dashv R$ as in [def-sfb-point-adjunction], for the monoidal categories of abelian sheaves in [sk-def-sfb-sheaf-tensor]. By [lem-sfb-point-upper-star-unit], $L$ has its adjunction-induced oplax structure and its unit comparison $\\iota:L\\mathbf1\\to\\mathbf1$ is invertible. By [lem-sfb-point-upper-star-tensor], all its tensor comparisons $\\delta_{F,G}:L(F\\otimes G)\\to LF\\otimes LG$ are invertible. Apply [lem-sfb-strong-monoidal-of-invertible-oplax] to this oplax structure. It supplies strong monoidal coherence with lax unit $j=\\iota^{-1}$ and tensor maps $m_{F,G}=\\delta_{F,G}^{-1}$, and retains the given oplax comparisons. Thus the associativity and both unit arguments formerly inline are precisely the cited promotion theorem.",
    "uses": [
     "def-sfb-point-adjunction",
     "sk-def-sfb-sheaf-tensor",
     "lem-sfb-point-upper-star-unit",
-    "lem-sfb-point-upper-star-tensor"
+    "lem-sfb-point-upper-star-tensor",
+    "lem-sfb-strong-monoidal-of-invertible-oplax"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/_section.md",
-    "place": "step 3; lem-sfb-point-upper-star-unit and lem-sfb-point-upper-star-tensor, statements"
+    "place": "step 3, strong monoidal clause; coherence promotion is Mathlib/CategoryTheory/Monoidal/Functor.lean:743-751 and 764-766 via lem-sfb-strong-monoidal-of-invertible-oplax"
    }
   },
   {
@@ -89,6 +90,7 @@
   "sk-def-sfb-sheaf-tensor",
   "lem-sfb-point-upper-star-unit",
   "lem-sfb-point-upper-star-tensor",
+  "lem-sfb-strong-monoidal-of-invertible-oplax",
   "def-sfb-point-lower-star",
   "def-weil-pbc-sheafification",
   "det-def-sfb-sheaf-tensor-structure"
@@ -178,7 +180,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -199,20 +201,20 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-sfb-point-upper-star-braided",
   "worker": "stage1",
-  "summary": "Kept the statement and supplied five steps: the invertible oplax comparisons give strong monoidality, restriction is lax braided by a sheafification-unit calculation, the induced tensor comparison is written as an explicit adjunction mate, the braiding identity is checked under that bijection, and the comparisons are inverted. Reused existing nodes, including the precise sheafification universal property. No new nodes or Mathlib leaves. No project proof exists in slopmaster2. Second reading supplies the coherence equations, cites the explicit construction of the sheaf symmetry, and identifies the separate current blueprint proof file.",
-  "blueprint": "Realizes sk-def-sfb-pullback-from-point, step 3, strong monoidal and braided clauses. Step 1 writes the inverse-comparison coherence identities. Steps 2--4 expand the restriction and mate sentences of lem-sfb-point-upper-star-braided.proof.md; step 5 expands its final inverse-comparison sentence.",
+  "summary": "Repair of the human re-split return: replaced the long first step by an application of the existing Mathlib leaf lem-sfb-strong-monoidal-of-invertible-oplax. That leaf supplies inverse-comparison associativity and both unit identities, so no duplicate children are needed. The unit and tensor isomorphism hypotheses remain the original two cited nodes. Kept the statement, Lean record, route, and steps 2--5 unchanged. Re-read every cited statement and current blueprint source and wrote the verbatim citation audit. No new nodes.",
+  "blueprint": "Realizes sk-def-sfb-pullback-from-point step 3. Step 1 now cites the existing invertible-oplax promotion leaf for strong monoidality, including associativity and both unit coherences. Unchanged steps 2--4 expand the restriction and mate sentences of lem-sfb-point-upper-star-braided.proof.md; unchanged step 5 expands its final inverse-comparison sentence.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q53-78957c9ae",
-  "group": "Q53",
+  "reviewer": "NT-cc-NJ-d4162a87a",
+  "group": "NJ",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q53-78957c9ae (reviewer sub-agent of L); spot-checked: Read the complete item, report, dependency statements, and current blueprint sources. All five steps check: inverse coherence, sheafification symmetry, adjunction mates, and braided comparison. No new nodes, circularity, coefficient substitution, or repairs. Source locations, edge cases, DAG overlap checks, and target scope are recorded in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-d4162a87a (reviewer sub-agent of L); spot-checked: I read the delivery in full: one item, no new nodes. The statement is the main-20261015 blueprint text verbatim. The proof follows step 3 of unit sk-def-sfb-pullback-from-point and the blueprint's three-sentence proof. Step 1 applies the Mathlib leaf lem-sfb-strong-monoidal-of-invertible-oplax (Functor.lean:743-751 and 764-766), and its hypotheses come from lem-sfb-point-upper-star-unit (oplax structure, invertible unit) and lem-sfb-point-upper-star-tensor (every delta invertible). Step 2: the restriction mu is the lax map built in the unit lemma, the symmetry comes from det-def-sfb-sheaf-tensor-structure, and uniqueness comes from the sheafification universal property (Stacks 00WH, sites.tex:2053) into the sheaf R(B⊗A). Step 3's mate formula matches leftAdjointOplaxMonoidal at Functor.lean:1064-1066. I checked all four equalities of step 4 and the inversion in step 5, which yields the LaxBraided square with mu equal to the inverse of delta. Edge cases checked: zero objects, the unit object, the empty profinite set, and the tensor being ⊗_Z rather than cartesian. No duplicate (lem-sfb-finite-upper-star-braided is a parallel statement, not a generalization), no cycle (closure of 219 nodes), no SGA, and route citations off the unit are only a Mathlib leaf and definitions. The item is not a target, so no base-change morphism was checked. No changes."
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-pullback-from-point",
