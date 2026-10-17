@@ -1,0 +1,87 @@
+{
+ "id": "lem-trf-log-regular-completed-chart",
+ "kind": "statement",
+ "title": "Completed local charts of an fs log regular scheme",
+ "statement": "Let $(X,M,\\alpha)$ be a locally Noetherian log regular fs log scheme [def-trf-fs-log-blowup, pqf-def-locnoeth], let $\\bar x$ be a geometric point over $x$ [def-weil-geometric-point], and put $A=\\mathcal O^{\\mathrm{sh}}_{X,\\bar x}$ [def-weil-pbc-strict-henselization-limit], with residue field $k$ and characteristic monoid $P=\\overline M_{\\bar x}$. Choose a sharp chart $a:P\\to A$ identifying $P$ with this characteristic [lem-trf-log-regular-sharp-chart]. After replacing this sharp chart if necessary by another chart $P\\to M|_{W'}$ on an affine pointed etale neighbourhood $W'$ of $\\bar x$, again inducing the chosen identification of $P$ with $\\overline M_{\\bar x}$, there exist an integer $n\\geq0$ and an isomorphism of complete local rings, compatible with $a(q)\\mapsto z^q$, of the following form. If $A$ contains a field (equal characteristic) it is $\\widehat A\\cong B_k(P,n)$. If $A$ contains no field, then $k$ has prime characteristic $p$ (this is the mixed characteristic $(0,p)$ case) and it is $\\widehat A\\cong B_C(P,n)/(\\theta)$, where $C$ is a Cohen ring with residue field $k$ [def-weil-pbc-cohen-ring] and $\\theta-p\\in(z^q\\ (q\\neq0),t_1,\\ldots,t_n)B_C(P,n)$. Here $\\widehat A$ is the maximal-ideal completion [def-weil-pbc-adic-completion], and $B_L(P,n)$ denotes the completion of the monoid polynomial ring $L[P][t_1,\\ldots,t_n]$ at $(\\mathfrak m_L,z^q\\ (q\\neq0),t_1,\\ldots,t_n)$, with $\\mathfrak m_k=0$ and $\\mathfrak m_C=pC$. The monoid ring is the ring of finite sums $c z^q$ with $z^qz^{q'}=z^{q+q'}$. The case $P=\\{0\\}$ and $n=0$ is allowed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.6(i)--(ii), printed p. 70, citing Kato (1994), Theorem 3.2 (WANTED locally). The isomorphisms respect the chart monomials; these are statements about completed strict local rings, not ordinary smooth chart maps."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-trf-log-regular-sharp-chart",
+  "def-weil-pbc-cohen-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-geometric-point"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Completed strict local rings of fine saturated log regular schemes are completed monoid algebras over a field or Cohen ring modulo one parameter.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"BDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $.\"}\n  {\"name\": \"BDeRham\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The ring $\\\\mathbb{B}_{\\\\mathrm{dR}}^+$ is constructed as the localization of the adic completion of the kernel of the Fontaine theta homomorphism $\\\\Theta: \\\\mathbb{W}(R^\\\\flat) \\\\to R$ (which inverts the \"}\n  {\"name\": \"Tilt\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(K : Type u₁) →\\n  [inst : Field K] →\\n    (v : Valuation K NNReal) →\\n      (O : Type u₂) →\\n        [inst_1 : CommRing O] →\\n          [inst_2 : Algebra O K] → v.Integers O → (p : ℕ) → [Fact (Nat.Prime p)] → [hvp : Fact (v ↑p ≠ 1)] → Type u₂\", \"doc\": \"Given a commutative ring $ O $, a prime number $ p $, and a valuation $ v $ on $ O $ satisfying $ v(p) \\neq 1 $, the tilt is defined as the fraction ring of the pretilt of $ O $ modulo $ p $. The preti\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    [IsDedekindDomain R] →\\n      (K : Type u_2) →\\n        [inst_2 : Field K] →\\n          [inst_3 : Algebra R K] → [IsFractionRing R K] → IsDedekindDomain.HeightOneSpectrum R → Type u_2\", \"doc\": \"Given a Dedekind domain $ R $, its fraction field $ K $, and a height one prime ideal $ v $, this constructs the completion of $ K $ with respect to the non-Archimedean valuation induced by $ v $. The\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDedekindDomain R] →\\n      (K : Type u_2) →\\n        {S : Type u_3} →\\n          [inst_2 : Field K] →\\n            [inst_3 : CommSemiring S] →\\n              [inst_4 : Algebra R K] →\\n                [inst_5 : IsFractionRing R K] →\\n                 \", \"doc\": \"For a Dedekind domain $ R $, its fraction field $ K $, and a height one prime ideal $ v $, the adic completion of $ K $ with respect to the valuation induced by $ v $ carries an algebra structure over\"}\n  {\"name\": \"instCommRingBDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) →\\n      [inst_1 : Fact (Nat.Prime p)] →\\n        [inst_2 : Fact ¬IsUnit ↑p] → [inst_3 : IsAdicComplete (Ideal.span {↑p}) R] → CommRing (BDeRhamPlus R p)\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $ is equipped with a canonical commutative ring s\"}\n  {\"name\": \"LaurentSeries.instAlgebraSubtypeAdicCompletionPolynomialRatFuncIdealXMemValuationSubringAdicCompletionIntegers\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"(K : Type u_2) →\\n  [inst : Field K] →\\n    Algebra K ↥(IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers (RatFunc K) (Polynomial.idealX K))\", \"doc\": \"The valuation subring of the adic completion of the rational function field $ K(X) $ with respect to the ideal generated by $ X $, consisting of elements with valuation $ \\\\leq 1 $, carries a canonical\"}\n  {\"name\": \"LaurentSeries.instAlgebraRatFuncAdicCompl\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"(K : Type u_2) → [inst : Field K] → Algebra K (LaurentSeries.RatFuncAdicCompl K)\", \"doc\": \"For any field $ K $, the $ X $-adic completion of the rational function field $ K(X) $, which is the field of formal Laurent series $ K((X)) $, inherits a canonical algebra structure over $ K $. This \"}\nRead the returned types: ordinary completions, univariate power series, polynomial monomial divisibility, and normalization do not give complete saturated monoid models or their mixed-characteristic quotients. No match for this statement.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kato Cohen structure theorem for a log regular local ring with sharp saturated characteristic monoid",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"split_by_characteristic_localRing\", \"module\": \"Mathlib/Algebra/CharP/MixedCharZero\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {P : Prop} [IsLocalRing R],\\n  (∀ (p : ℕ), IsPrimePow p → CharP R p → P) →\\n    (∀ (a : Algebra ℚ R), P) → (∀ (p : ℕ), Nat.Prime p → MixedCharZero R p → P) → P\", \"doc\": \"For a local ring $ R $, if $ P $ holds in three cases: (1) for every prime power $ p $ such that $ R $ has characteristic $ p $, (2) when $ R $ is a $\\\\mathbb{Q}$-algebra (characteristic zero), and (3)\"}\n  {\"name\": \"PreTilt\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(O : Type u₂) → [CommRing O] → ℕ → Type u₂\", \"doc\": \"The pretilt of a commutative ring $ O $ modulo $ p $ is defined as the perfection of the quotient ring $ O/(p) $ with respect to the prime $ p $. This perfection consists of all sequences $ (f_n)_{n \\\\\"}\n  {\"name\": \"Tilt\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(K : Type u₁) →\\n  [inst : Field K] →\\n    (v : Valuation K NNReal) →\\n      (O : Type u₂) →\\n        [inst_1 : CommRing O] →\\n          [inst_2 : Algebra O K] → v.Integers O → (p : ℕ) → [Fact (Nat.Prime p)] → [hvp : Fact (v ↑p ≠ 1)] → Type u₂\", \"doc\": \"Given a commutative ring $ O $, a prime number $ p $, and a valuation $ v $ on $ O $ satisfying $ v(p) \\neq 1 $, the tilt is defined as the fraction ring of the pretilt of $ O $ modulo $ p $. The preti\"}\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"BDeRham\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The ring $\\\\mathbb{B}_{\\\\mathrm{dR}}^+$ is constructed as the localization of the adic completion of the kernel of the Fontaine theta homomorphism $\\\\Theta: \\\\mathbb{W}(R^\\\\flat) \\\\to R$ (which inverts the \"}\n  {\"name\": \"IsDiscreteValuationRing\", \"module\": \"Mathlib/RingTheory/DiscreteValuationRing/Basic\", \"type\": \"(R : Type u) → [inst : CommRing R] → [IsDomain R] → Prop\", \"doc\": \"The proposition that a commutative ring $ R $, which is a domain, satisfies the discrete valuation ring axioms.\"}\n  {\"name\": \"IsDiscreteValuationRing.TFAE\", \"module\": \"Mathlib/RingTheory/DiscreteValuationRing/TFAE\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] [inst_3 : IsDomain R],\\n  ¬IsField R →\\n    [IsDiscreteValuationRing R, ValuationRing R, IsDedekindDomain R, IsIntegrallyClosed R ∧ ∃! P, P ≠ ⊥ ∧ P.IsPrime,\\n        Submodule.IsPrincipal (IsLocalRing.maximalIdeal R),\\n  \", \"doc\": \"For a commutative ring $ R $ that is Noetherian, local, an integral domain, and not a field, the following are equivalent: (1) $ R $ is a discrete valuation ring; (2) $ R $ is a valuation ring; (3) $ \"}\n  {\"name\": \"PreTilt.isDomain\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"∀ (K : Type u₁) [inst : Field K] (v : Valuation K NNReal) (O : Type u₂) [inst_1 : CommRing O] [inst_2 : Algebra O K],\\n  v.Integers O → ∀ (p : ℕ) [inst : Fact (Nat.Prime p)] [inst_3 : Fact ¬IsUnit ↑p], IsDomain (PreTilt O p)\", \"doc\": \"For a commutative ring $ O $ and prime $ p $, the pretilt $ \\\\mathrm{PreTilt}(O, p) $ (defined as the perfection of $ O/(p) $ consisting of sequences $ (f_n) $ with $ f_n = f_{n+1}^p $) has no zero div\"}\nRead the returned types: ordinary completions, univariate power series, polynomial monomial divisibility, and normalization do not give complete saturated monoid models or their mixed-characteristic quotients. No match for this statement.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A log regular local ring has a completed toric monoid power series chart in equal and mixed characteristic",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"split_by_characteristic_localRing\", \"module\": \"Mathlib.Algebra.CharP.MixedCharZero\", \"type\": \"[IsLocalRing R] (h_pos : ∀ p : ℕ, IsPrimePow p → CharP R p → P) (h_equal : Algebra ℚ R → P)\\n  (h_mixed : ∀ p : ℕ, Nat.Prime p → MixedCharZero R p → P) : P\", \"doc\": \"For a local ring $ R $, if $ P $ holds in three cases: (1) for every prime power $ p $ such that $ R $ has characteristic $ p $, (2) when $ R $ is a $\\\\mathbb{Q}$-algebra (characteristic zero), and (3)\"}\n  {\"name\": \"PowerSeries.instIsLocalRing\", \"module\": \"Mathlib.RingTheory.PowerSeries.Inverse\", \"type\": \": IsLocalRing R⟦X⟧\", \"doc\": \"If $ R $ is a local ring, then the ring of univariate power series over $ R $, denoted $ R⟦X⟧ $, is also a local ring.\"}\n  {\"name\": \"PowerSeries.maximalIdeal_eq_span_X\", \"module\": \"Mathlib.RingTheory.PowerSeries.Inverse\", \"type\": \": IsLocalRing.maximalIdeal (k⟦X⟧) = Ideal.span { X }\", \"doc\": \"If $ k $ is a local ring, then the maximal ideal of the ring of univariate power series $ k⟦X⟧ $ is equal to the ideal generated by the formal variable $ X $.\"}\n  {\"name\": \"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\", \"module\": \"Mathlib.RingTheory.Regular.RegularSequence\", \"type\": \"[IsLocalRing R] [Nontrivial M] [Module.Finite R M] {rs : List R} (h : ∀ r ∈ rs, r ∈ IsLocalRing.maximalIdeal R) :\\n  IsRegular M rs ↔ IsWeaklyRegular M rs\", \"doc\": \"In a local ring $ R $, for a non-trivial finite $ R $-module $ M $, a list of elements $ rs $ contained in the maximal ideal of $ R $ forms a regular sequence on $ M $ if and only if it forms a weakly\"}\n  {\"name\": \"PowerSeries.instIsNoetherianRing\", \"module\": \"Mathlib.RingTheory.PowerSeries.Ideal\", \"type\": \"[IsNoetherianRing R] : IsNoetherianRing R⟦X⟧\", \"doc\": \"If $ R $ is a Noetherian ring, then the ring of univariate power series over $ R $, denoted $ R⟦X⟧ $, is also a Noetherian ring. This means every ideal in $ R⟦X⟧ $ is finitely generated, inheriting th\"}\n  {\"name\": \"PowerSeries.isNoetherianRing\", \"module\": \"Mathlib.RingTheory.PowerSeries.Inverse\", \"type\": \": IsNoetherianRing k⟦X⟧\", \"doc\": \"For any field $ k $, the ring of formal power series $ k⟦X⟧ $ is a Noetherian ring, meaning every ideal in this ring is finitely generated.\"}\n  {\"name\": \"Algebra.IsStandardSmooth.localization_away\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmooth\", \"type\": \"(r : R) [IsLocalization.Away r S] : IsStandardSmooth R S\", \"doc\": \"If $ S $ is the localization of a commutative ring $ R $ at the submonoid generated by the powers of an element $ r $, then $ S $ is a standard smooth $ R $-algebra.\"}\n  {\"name\": \"PowerSeries.weierstrassMod.congr_simp\", \"module\": \"Mathlib.RingTheory.PowerSeries.WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] (f f_1 : PowerSeries A),\\n  f = f_1 →\\n    ∀ (g g_1 : PowerSeries A), g = g_1 → ∀ [inst_2 : IsPrecomplete (IsLocalRing.maximalIdeal A) A], f %ʷ g = f_1 %ʷ g_1\", \"doc\": \"In a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, if two power series $ f = f_1 $ and $ g = g_1 $ over $ A $ are equal, then their Weierstrass moduli satisfy $ f \\\\%^⊙ g = f_1 \\\\%^⊙\"}\nRead the returned types: ordinary completions, univariate power series, polynomial monomial divisibility, and normalization do not give complete saturated monoid models or their mixed-characteristic quotients. No match for this statement.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogRegular\"",
+   "results": "[loogle] OK 0 hit(s)\nRead the returned types: ordinary completions, univariate power series, polynomial monomial divisibility, and normalization do not give complete saturated monoid models or their mixed-characteristic quotients. No match for this statement.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogRegular|log_regular|Cohen.*Monoid|Monoid.*Cohen",
+   "results": "[grep] OK 0 hit(s)\nRead the returned types: ordinary completions, univariate power series, polynomial monomial divisibility, and normalization do not give complete saturated monoid models or their mixed-characteristic quotients. No match for this statement.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-log-regular-divisorial-structure",
+  "date": "2026-10-18",
+  "group": "Q62"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), nearby-duality alteration ancestry: the log-regular local algebra needed for the normalization of log blowups, via Expose VI 1.4 and its completed-local charts in VI 1.6. Expose VI 1.6(i)--(ii), printed p. 70, citing Kato (1994), Theorem 3.2 (WANTED locally). The isomorphisms respect the chart monomials; these are statements about completed strict local rings, not ordinary smooth chart maps.",
+   "via": [
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

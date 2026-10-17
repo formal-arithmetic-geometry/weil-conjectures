@@ -12,9 +12,114 @@
   "pqf-def-locnoeth",
   "def-weil-pbc-normal-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a geometric point $\\bar y$ over $y$, set $A_0=\\mathcal O_{Y,y}$ and $A=\\mathcal O^{\\mathrm{sh}}_{Y,\\bar y}$, and choose a sharp chart $P=\\overline N_{\\bar y}\\to N$ on an affine pointed etale neighbourhood $W$ by the sharp-chart lemma. In particular $P$ is finitely generated, integral, saturated and sharp. The chart definition gives $N_{\\bar y}=P\\oplus A^\\times$. Replacing that sharp chart and its affine neighbourhood $W$ if necessary, as permitted by the completed-chart lemma (from now on $W$ and $a:P\\to A$ denote the replacement), it identifies $\\widehat A$, respecting these monomials, with the complete monoid model $B_k(P,n)$ if $A$ contains a field, and with $B_C(P,n)/(\\theta)$ otherwise. By normality of these saturated models, $\\widehat A$ is a normal domain. This is only the fs case: no saturation of a non-saturated log scheme is introduced.",
+   "uses": [
+    "lem-trf-log-regular-sharp-chart",
+    "def-trf-fs-log-blowup",
+    "lem-trf-log-regular-completed-chart",
+    "lem-trf-log-regular-saturation-normality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6, printed p. 70; saturated complete-model normality input from Kato (1994), 4.1, WANTED."
+   }
+  },
+  {
+   "text": "By the affine strict-local comparison lemma, applied to an affine open $\\operatorname{Spec}D\\ni y$ (so $D_{\\mathfrak p}=A_0$) and the separable closure $K$ of $\\kappa(y)$ in $\\Omega$, $A$ is isomorphic as an $A_0$-algebra to an algebraic strict henselization $A_0^{\\mathrm{sh}}$ relative to $K$, by a local isomorphism. Its index pairs $(S,\\chi:S\\to K)$ are the pointed etale triples $(S,\\ker\\chi,\\text{induced }\\kappa(\\ker\\chi)\\to K)$ over the closed point, with the same morphisms, so $A_0^{\\mathrm{sh}}$ is the triples colimit of the two lemmas below. Hence $A_0\\to A$ and $A\\to\\widehat A$ ($\\widehat A$ the completion at the maximal ideal $\\mathfrak m_{A_0}A$) are faithfully flat, by the strict-henselization and completed-strict-henselization lemmas (their Noetherian hypothesis holds because $Y$ is locally Noetherian). Descend normal-domainness along each map, as follows. For a faithfully flat $E\\to F$ with $F$ a normal domain, ideal contraction for the zero ideal makes $E\\to F$ injective, so $E$ is a domain. If $a/b\\in\\operatorname{Frac}E$ is integral over $E$, its image is integral over $F$ by the same monic equation, hence lies in $F$. Thus $a\\in bF\\cap E=bE$ by ideal contraction, so $a/b\\in E$. Apply this argument first to $A\\to\\widehat A$ and then to $A_0\\to A$. All local rings of $Y$ are therefore normal domains.",
+   "uses": [
+    "lem-exc-affine-strict-local-ring-comparison",
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-sc-strict-henselization-completion-noetherian",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6, followed by explicit faithfully flat descent; ideal contraction is Stacks Tag 00HE."
+   }
+  },
+  {
+   "text": "On the chart $W$, choose generators $p_1,\\ldots,p_r$ of $P$ and put $s=\\prod_i a(p_i)$, with empty product $1$. The associated-log chart formula says that the characteristic is zero exactly where all these generators are units. Hence $V\\times_Y W=D(s)$, an open subset of $W$. Etale maps are open, so their images show that $V$ is open in $Y$. Apply monoidal-ideal contraction at $\\bar y$ to the empty monoid ideal: no $a(p)$ is zero in $A$, and therefore $s\\neq0$ in the domain $A$ of step 2. Thus $D(s)\\subset\\operatorname{Spec}A$ is nonempty. Every open neighbourhood of the closed point of $\\operatorname{Spec}A$ is the whole spectrum; the preimage of every neighbourhood of $y$ contains that closed point, and hence meets $D(s)$. Its image lies in $V$. Since $y$ was arbitrary, $V$ is dense. Every section of $N$ restricts to a unit on $V$, by the chart formula or the definition of the triviality locus.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-trf-log-regular-monoidal-ideal-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Direct argument for VI 1.4, printed p. 69: finite generators, principal open, and nonvanishing monomials."
+   }
+  },
+  {
+   "text": "The structural map is injective on the geometric stalk at $\\bar y$. Indeed, if $u a(p)=v a(q)$ with $u,v\\in A^\\times$, then $(a(p))=(a(q))$. Contraction of the monoid ideals $p+P$ and $q+P$ gives $p+P=q+P$. Thus $p=q+r$ and $q=p+t$ for $r,t\\in P$; integrality gives $r+t=0$, and sharpness gives $r=t=0$, so $p=q$. Since $a(p)\\neq0$ in the domain $A$, cancellation gives $u=v$. Together with $N_{\\bar y}=P\\oplus A^\\times$, this proves injectivity.",
+   "uses": [
+    "lem-trf-log-regular-monoidal-ideal-contraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Direct stalk calculation for VI 1.4; monoidal-ideal contraction is VIII 3.4.3, used only through its separate cited statement."
+   }
+  },
+  {
+   "text": "Let a germ of $\\mathcal O_Y\\cap j_*\\mathcal O_V^\\times$ at $\\bar y$ be represented by a regular function $f$ on a pointed etale neighbourhood, invertible on its intersection with $V$. Refine with the chart neighbourhood of step 1. Pullback of the inverse to $\\operatorname{Spec}A[1/s]$ shows that $f$ is a unit in $A[1/s]$. Write an inverse as $g/s^m$. The localization equality gives $s^l(fg-s^m)=0$ for some $l\\geq0$; since $A$ is a domain and $s\\neq0$, $fg=s^m=a(m\\sum_i p_i)$. Pass to the completed monoid model of step 1. The complete-toric monomial-factor lemma, applied to this equation, gives $f=\\widehat u\\,a(p)$ in $\\widehat A$ for some $p\\in P$ and $\\widehat u\\in\\widehat A^\\times$. The same argument covers $s=1$.",
+   "uses": [
+    "lem-trf-complete-toric-monomial-factors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Direct divisorial recognition for VI 1.4 via VI 1.6: invertibility on the principal open becomes a factorization of a monomial in the complete local model."
+   }
+  },
+  {
+   "text": "We have $(f)\\widehat A=(a(p))\\widehat A$. By faithfully flat ideal contraction along $A\\to\\widehat A$, both inclusions descend: $f=a(p)u$ and $a(p)=fv$ for some $u,v\\in A$. Substitution gives $a(p)=a(p)uv$. Since $a(p)\\neq0$ and $A$ is a domain, $uv=1$; hence $u\\in A^\\times$. Consequently the germ $f$ is the image of $(p,u)\\in P\\oplus A^\\times=N_{\\bar y}$. This proves surjectivity onto the intersection at each geometric point; step 4 gives injectivity. The structural map factors through the intersection by step 3. Geometric-stalk detection of isomorphisms of etale sheaves of sets now identifies $N$ with $\\mathcal O_Y\\cap j_*\\mathcal O_V^\\times$, compatibly with multiplication and the structural maps.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Direct descent and sheaf argument for VI 1.4, printed p. 69; not an application of the log-smooth preservation lemma."
+   }
+  },
+  {
+   "text": "Let $\\operatorname{Spec}C\\subseteq Y$ be an integral affine open. For each maximal ideal $\\mathfrak m$ of $C$, the local ring $C_{\\mathfrak m}=\\mathcal O_{Y,y_{\\mathfrak m}}$ is a normal domain by step 2. The local-normality criterion therefore makes $C$ a normal domain, equivalently integrally closed in its fraction field.",
+   "uses": [
+    "lem-weil-pbc-normal-domain-of-local-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Affine-local consequence of step 2; Stacks Tag 030B, using its existing Mathlib leaf."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-log-regular-sharp-chart",
+  "def-trf-fs-log-blowup",
+  "lem-trf-log-regular-completed-chart",
+  "lem-trf-log-regular-saturation-normality",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-sc-strict-henselization-completion-noetherian",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-trf-log-regular-monoidal-ideal-contraction",
+  "lem-trf-complete-toric-monomial-factors",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+  "lem-weil-pbc-normal-domain-of-local-normal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Direct completed-local-ring proof of VI 1.4 using the models of VI 1.6 and explicit factorization and faithfully flat contraction. Kato (1994) 3.2/4.1/11.6 and Niziol (2006) 2.6 are WANTED locally; the new algebraic inputs are unsplit."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,7 +151,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-log-blowup-normalization",
@@ -58,7 +163,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), nearby-duality alteration reduction: the regular modification of each log regular nodal pair, used in Expose X, proof of Lemma 2.2, through the existing nearby-duality/alteration ancestry. Expose VIII, 3.4.1--3.4.6(i), printed pp. 110--111 (monoidal ideals and normalized-blowup comparison); 3.3.8--3.3.11, printed pp. 107--108, and Expose VI, 1.8, printed p. 70 (log regularity preserved). The triviality-locus assertion is the universal property over U and the local homomorphism on local rings outside U. Input: Expose VI, 1.4, printed p. 69 (dense triviality locus and divisorial equality); Expose VIII, 3.4.1, printed p. 110, and 3.5, printed pp. 114--115 (fs log regular schemes are normal).",
+   "place": "Proof (1)--(2) of lem-trf-local-term-locality, nearby-duality alteration ancestry: the log-blowup normalization step needs the dense triviality locus and divisorial equality of Expose VI 1.4 and fs normality via the complete local models of VI 1.6. VIII 3.4.1 supplies the divisorial identification only.",
    "via": [
     "lem-trf-log-blowup-normalization",
     "lem-trf-log-regular-desingularization",
@@ -71,5 +176,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-log-regular-divisorial-structure",
+  "worker": "stage1",
+  "summary": "Repair of all return points: replaced the circular identity-log-smooth argument with sharp charts, complete local models, a monomial-factor equation, faithful-flat ideal contraction and geometric-stalk detection. Replaced the unproved non-saturated Gabber equivalence by normality only for complete saturated monoid models; explicitly descended it to strict and ordinary local rings. Preserved the affine normality criterion and corrected the source attribution. Three strictly local algebra statements remain unsplit; missing Kato and Niziol documents are WANTED in the report.",
+  "blueprint": "Realizes the ancestor nearby-duality alteration proof through its VI 1.4 divisorial/dense-open input and VI 1.6 saturated complete-local normality input, without the VIII 3.5 non-saturated generalization.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Step 2 uses faithful flatness of an ordinary local ring into its strict henselization; this general local-algebra tool has no log-specific replacement."
+   },
+   {
+    "node": "lem-sc-strict-henselization-completion-noetherian",
+    "why": "Step 2 uses faithful flatness of completion of the strict henselization of a Noetherian local ring; the log unit gives the completed model, not flatness of completion."
+   },
+   {
+    "node": "lem-weil-pbc-normal-domain-of-local-normal",
+    "why": "Step 7 uses the general maximal-localization criterion for integral closedness of an affine domain; no log-specific criterion replaces it."
+   },
+   {
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "Step 2 identifies the pointed-neighbourhood colimit O^sh_{Y,ybar} with the algebraic strict henselization of O_{Y,y}, to which the faithful-flatness lemmas apply; no node of the unit gives this comparison (same use as in lem-trf-snc-divisorial-log-chart)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-sc-strict-henselization-completion-noetherian",
+  "lem-weil-pbc-normal-domain-of-local-normal",
+  "lem-exc-affine-strict-local-ring-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-d5699b0da",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-d5699b0da (reviewer sub-agent of L); spot-checked: Read in full: the item, the 3 new nodes, every cited statement, ILO VI 1.1-1.8 (pp. 69-70; 1.4 divisorial/dense citing Niziol 2.6, 1.6 completed models citing Kato 3.2), and the unit/chapter route. The statement is unchanged and true. Steps 3-7 are correct: D(s) triviality locus; s nonzero by empty-ideal contraction; density via the local Spec A; injectivity via contraction, sharpness and cancellation; factor lemma then double ideal contraction for surjectivity; geometric-stalk detection; affine normality leaf. All 3 new nodes are true and tested on small cases: P=0 Cohen/ramified cases, P=N, C[[x,y]]/(p-xy), k[[u^2,uv,v^2]], C[[X,Z]]/(XZ-p^2), and the non-saturated counterexample k[[t^2,t^3]]. They are statement-only, self-contained, searched, not duplicates (rg over the DAG) and not restatements of the item. Two repairable faults, fixed in fixes/: (1) E1/E3: the completed-chart node and step 1 split only into 'equal char' and 'mixed (0,p)', which misses a local ring of characteristic p^n before domain-ness is known. Restated as Kato's 'contains a field / contains no field (then char k = p)' split, with the chart replacement made explicit as a chart on an affine pointed étale neighbourhood. (2) C1/C4: step 2 applied the triples-colimit faithful-flatness lemmas to the pointed-neighbourhood colimit O^sh_{Y,ybar} without a comparison. Added lem-exc-affine-strict-local-ring-comparison (same use as sibling lem-trf-snc-divisorial-log-chart), wrote out the pairs/triples match, recomputed proof_deps and declared it in split_report.tool_uses. No cycle. The other tool uses are accepted: the two sk-thm-br strict-henselization lemmas and the normal-domain Mathlib leaf. No SGA cited, no target touched.; 2 file(s) fixed by the reviewer"
  }
 }
