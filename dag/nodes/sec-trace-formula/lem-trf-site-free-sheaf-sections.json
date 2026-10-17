@@ -1,0 +1,80 @@
+{
+ "id": "lem-trf-site-free-sheaf-sections",
+ "kind": "statement",
+ "title": "Free representable sheaf maps are sections",
+ "statement": "For a site $\\mathcal D$ with Grothendieck topology $J$ [def-weil-pbc-sites-and-cohomology] [def-weil-pbc-sheafification], an object $U\\in\\mathcal D$, and an abelian sheaf $I\\in\\operatorname{Sh}(J,\\operatorname{Ab})$, let $\\mathbf Z[U]$ be the sheafification of the free abelian presheaf on the representable $U$. There is a natural bijection $\\operatorname{Hom}_{\\operatorname{Sh}(J,\\operatorname{Ab})}(\\mathbf Z[U],I)\\cong I(U)$, sending a morphism to the image of the basis element corresponding to $\\operatorname{id}_U$.",
+ "source": {
+  "document": "Mathlib/CategoryTheory/Generator/Sheaf.lean",
+  "place": "CategoryTheory.Sheaf.freeYonedaHomEquiv, line 42 (with A = AddCommGrpCat and M = the free abelian generator)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-site-free-sheaf-sections arbitrary site hypercover exact free abelian sheaf complex",
+   "results": "CategoryTheory.Sheaf.freeYonedaHomEquiv and freeYoneda; exact Hom-to-sections bijection found.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.freeYonedaHomEquiv",
+   "results": "CategoryTheory.Sheaf.freeYonedaHomEquiv in Mathlib.CategoryTheory.Generator.Sheaf.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "freeYonedaHomEquiv|hypercover.*(acyclic|exact)",
+   "results": "freeYonedaHomEquiv is in Mathlib/CategoryTheory/Generator/Sheaf.lean; no hypercover exactness theorem.",
+   "date": "2026-10-18",
+   "verdict": "match: freeYonedaHomEquiv"
+  },
+  {
+   "tool": "leansearch",
+   "query": "free sheaf on representable Hom to sections",
+   "results": "CategoryTheory.Sheaf.freeYonedaHomEquiv and related free-sheaf declarations.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Sheaf.freeYonedaHomEquiv",
+  "file": "Mathlib/CategoryTheory/Generator/Sheaf.lean",
+  "how": "specializes in one line: take A = AddCommGrpCat and M = AddCommGrpCat.of (ULift ℤ); Presheaf.freeYoneda X M (Mathlib/CategoryTheory/Generator/Presheaf.lean:36-38) is V ↦ ∐_{Hom(V,X)} M, the free abelian presheaf on h_X, and Sheaf.freeYoneda (Sheaf.lean:36) is its sheafification. Compose Sheaf.freeYonedaHomEquiv (Sheaf.lean:42-44) with uliftZMultiplesHom (Mathlib/Algebra/Category/Grp/ForgetCorepresentable.lean:36), G ≃ (ULift ℤ →+ G), applied to G = I(U). By the toFun of Presheaf.freeYonedaHomEquiv (Presheaf.lean:44: Sigma.ι at 𝟙 X, then the component at X) and the sheafification adjunction, the composite sends φ to φ_U of the generator of the summand indexed by id_U; naturality in U follows from that formula and the naturality of φ (cf. Presheaf.freeYonedaHomEquiv_comp, Presheaf.lean:57).",
+  "line": 42
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-site-hypercover-injective-sections",
+  "date": "2026-10-18",
+  "group": "Q37"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Normal-cone specialization descent input: identifying Hom from the free representable sheaf with sections in the injective-coefficient exactness argument.",
+   "via": [
+    "lem-trf-site-hypercover-injective-sections",
+    "lem-trf-site-hypercover-derived-descent",
+    "lem-trf-proper-hypercover-etale-descent",
+    "lem-trf-nearby-proper-hyperdescent",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

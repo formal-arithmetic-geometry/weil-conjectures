@@ -22,9 +22,149 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-multivariate-power-series"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [prop-nagata-noetherian-inverse-system] to the qcqs scheme $S$, obtaining its small cofiltered Noetherian approximation. Apply clause (2) of [lem-weil-pbc-filtered-category-directed-cofinal] to the opposite of its index category: reindex by a nonempty directed set $I$, without changing the limit $S$. All transition maps remain affine and all stages $S_i$ remain of finite type over $\\mathbf Z$. By [lem-weil-pbc-finite-type-over-noetherian] these stages are Noetherian, hence qcqs. This supplies exactly the directed-set and qcqs hypotheses for the subsequent limit lemmas.",
+   "uses": [
+    "prop-nagata-noetherian-inverse-system",
+    "lem-weil-pbc-filtered-category-directed-cofinal",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZA, proposition-approximate; reindexing by categories.tex Tag 0032, lemma-directed-category-system"
+   }
+  },
+  {
+   "text": "Apply clause (1) of [thm-pd-spreading-out] to each of $X\\to S$ and $D\\to S$. Choose a common later stage, using finite-presentation base-change permanence in [lem-weil-pbc-qcqs-morphism-permanence](3), to obtain finitely presented $X_i,D_i$ over $S_i$ with their specified identifications over $S$. Clause (2) of [thm-pd-spreading-out] descends the marking morphism $D\\to X$, so after increasing $i$ it is the pullback of an $S_i$-morphism $h_i:D_i\\to X_i$. The two structural maps commute because this is a morphism over $S_i$, not an independently chosen arrow of schemes. By [lem-weil-pbc-qcqs-morphism-permanence](2), $X_i,D_i$ are qcqs.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM, lemma-descend-finite-presentation, clauses (1),(2)"
+   }
+  },
+  {
+   "text": "The composite $D_i\\xrightarrow{h_i}X_i\\to S_i$ is locally of finite type, since it is finitely presented. By [lem-weil-pbc-proper-fp-permanence](f), $h_i$ is locally of finite type. Its pullback to $S$ is the given closed immersion. Thus [lem-weil-pbc-descend-closed-immersion] applies with qcqs $S_i,D_i,X_i$ and gives a later stage where the marking is a closed immersion. It remains one under further base change by [lem-weil-pbc-proper-fp-permanence](b).",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-descend-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZP, lemma-descend-closed-immersion-finite-presentation"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-descend-flat-finite-presentation] first to $X_i\\to S_i$ and then, after increasing the index, to $D_i\\to S_i$. The stage maps are locally finitely presented and the limit maps are flat by hypothesis; all source, target and base schemes in these applications are qcqs. The flatness obtained in the first application persists in the second by [lem-weil-pbc-flat-morphism-base-change]. We now have both structural maps flat, finitely presented, and the marking a closed immersion at a common stage.",
+   "uses": [
+    "lem-weil-pbc-descend-flat-finite-presentation",
+    "lem-weil-pbc-flat-morphism-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 04AI, lemma-descend-flat-finite-presentation"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-pure-relative-dimension-finite-stage] to the structural map of $X$ with $d=1$ and to that of $D$ with $d=0$. Its hypotheses hold because our stage models are finitely presented over qcqs stages, and the original pair has these pure fibre dimensions. Take a common upper bound of the two resulting indices. The lemma gives the dimensions at every later stage, and flatness, finite presentation and the closed immersion persist by the preceding steps. Thus $(X_i,D_i)$ is a multipointed $S_i$-curve. This includes empty markings; pure dimension is a condition on nonempty fibres, not a surjectivity requirement.",
+   "uses": [
+    "lem-trf-pure-relative-dimension-finite-stage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EY2, lemma-descend-dimension-d; persistence Tag 02NK"
+   }
+  },
+  {
+   "text": "Let $t$ be the image of the generic point $\\eta$ of $S$ in this $S_i$. Give the irreducible closed subset $\\overline{\\{t\\}}$ its reduced induced closed subscheme structure $T$ using [lem-weil-pbc-reduced-induced-closed-subscheme]. It is nonempty, reduced and irreducible, hence integral by [def-pc-integral-scheme]. For every $s\\in S$, continuity and $\\eta\\leadsto s$ give $t\\leadsto\\pi_i(s)$, so the set-theoretic image of $S\\to S_i$ lies in $|T|$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes Tag 01J3, lemma-reduced-closed-subscheme"
+   }
+  },
+  {
+   "text": "The map factors scheme-theoretically through $T$: on an affine $V=\\operatorname{Spec}A\\subseteq S_i$, the ideal of $T\\cap V$ consists of functions vanishing at all its points, by [lem-weil-pbc-reduced-induced-closed-subscheme](1). Each pulls back to a section vanishing in every residue field on $\\pi_i^{-1}V$, and is zero because $S$ is reduced: on each affine chart it belongs to every prime ideal, hence is nilpotent, hence zero. The quotient maps glue uniquely to $S\\to T$. It sends $\\eta$ to $t$, the generic point of $T$, and is dominant. A finite affine cover $\\operatorname{Spec}A_a$ of the finite-type $\\mathbf Z$-scheme $S_i$ restricts to a finite affine cover $\\operatorname{Spec}(A_a/I_a)$ of $T$. Each quotient is still finitely generated over $\\mathbf Z$, proving $T$ is of finite type directly.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3, affine radical-ideal description; quotient-ring calculation"
+   }
+  },
+  {
+   "text": "Put $(X_0,D_0)=(X_i,D_i)\\times_{S_i}T$. Apply the first clause of [lem-trf-semistable-marked-base-change], which explicitly applies to multipointed curves without assuming semistability. It states that this pullback is a multipointed $T$-curve, so flatness, finite presentation, the two pure dimensions and the closed immersion all hold over $T$. In particular this step does not assume that $X_i$ was separated or proper, or that its generic fibre over $S_i$ was smooth.",
+   "uses": [
+    "lem-trf-semistable-marked-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Base-change component of the multipointed approximation argument; Stacks morphisms.tex Tag 02NK for dimensions"
+   }
+  },
+  {
+   "text": "The factorization $S\\to T$ induces a field inclusion $k(T)\\hookrightarrow k(S)$. Its spectrum is affine, quasi-compact, and surjective (both spectra have a single point); it is flat by [lem-weil-pbc-field-extension-base-change-faithfully-flat] with the algebra $D=k(T)$. Thus this singleton is an fpqc covering in [def-weil-pbc-fpqc-covering]. The generic fibres of $X_0,D_0$, after that field extension, identify with $X_\\eta,D_\\eta$ by the defining fibre products. They are respectively smooth and etale by hypothesis. Apply [lem-trf-smooth-fpqc-base-descent] to the generic curve and [lem-galois-fpqc-descend-etale] to the generic marking. This proves the required generic smoothness and etaleness over $k(T)$, without incorrectly asserting these properties over all of $T$.",
+   "uses": [
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "def-weil-pbc-fpqc-covering",
+    "lem-trf-smooth-fpqc-base-descent",
+    "lem-galois-fpqc-descend-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent Tag 02VL, lemma-descending-property-smooth; etale fpqc descent"
+   }
+  },
+  {
+   "text": "Finally, associativity of fibre products and $S\\to T\\to S_i=\\pi_i$ give $X_0\\times_T S\\cong X_i\\times_{S_i}S\\cong X$ and $D_0\\times_T S\\cong D_i\\times_{S_i}S\\cong D$. These isomorphisms commute with the marking maps, since $h_i$ was descended as an arrow in step 2. They form the desired isomorphism of pairs. All conclusions now hold for this integral finite-type $T$ and its dominant map from $S$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Associativity and universal property of fibre products"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "def-weil-pbc-fpqc-covering",
+  "lem-galois-fpqc-descend-etale",
+  "lem-trf-pure-relative-dimension-finite-stage",
+  "lem-trf-semistable-marked-base-change",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-weil-pbc-descend-closed-immersion",
+  "lem-weil-pbc-descend-flat-finite-presentation",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-filtered-category-directed-cofinal",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "prop-nagata-noetherian-inverse-system",
+  "thm-pd-spreading-out"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Approximation proof assembled from Tags 01ZA, 01ZM, 01ZP, 04AI, 0EY2; integral reduced closure and fpqc generic descent supplied explicitly. The cited Temkin PDF is absent locally (WANTED in report)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +193,38 @@
    "results": "hits=11; top=['Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean', 'Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean', 'Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean', 'Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean', 'Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean', 'Mathlib/AlgebraicGeometry/Morphisms/Descent.lean', 'Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean', 'Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean']; note=; digest=bee5574314c373bd. Read the returned statements: none gives this lemma; general flatness, etaleness, valuation, constructibility and Proj hits supply only parts of the notions.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "approximation|descend.*[Ff]lat|relativeDimension.*[Ll]imit",
+   "results": "hits=11; top=['Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean', 'Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean', 'Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean', 'Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean', 'Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean', 'Mathlib/AlgebraicGeometry/Morphisms/Descent.lean', 'Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean', 'Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean']; note=; digest=a4ba539a384827bc. Read the hits: approximation, factorization, finite type and smooth relative dimension definitions do not give eventual pure fibre dimension for arbitrary finitely presented morphisms.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Noetherian approximation of a finitely presented scheme with marking and pure relative dimension",
+   "results": "hits=8; top=['AlgebraicGeometry.Scheme.mk.noConfusion', 'AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian', 'AlgebraicGeometry.IsLocallyNoetherian', 'AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian', 'AlgebraicGeometry.IsNoetherian', 'AlgebraicGeometry.IsNoetherian.toCompactSpace', 'AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian', 'AlgebraicGeometry.IsNoetherian.recOn']; note=; digest=09c7cd8688dac7ae. Read the hits: approximation, factorization, finite type and smooth relative dimension definitions do not give eventual pure fibre dimension for arbitrary finitely presented morphisms.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSmooth\"",
+   "results": "hits=12; top=['Algebra.IsSmoothAt', 'Algebra.IsSmoothAt.exists_notMem_smooth', 'Algebra.IsSmoothAt.of_formallySmooth_fiber', 'Algebra.IsSmoothAt.exists_notMem_isStandardSmooth', 'Algebra.IsSmoothAt.exists_isStandardEtale_mvPolynomial', 'Manifold.IsSmoothEmbedding', 'Manifold.IsSmoothEmbedding.id', 'ModelWithCorners.isSmoothEmbedding']; note=; digest=1d286b72b8a0edbc. Read the hits: approximation, factorization, finite type and smooth relative dimension definitions do not give eventual pure fibre dimension for arbitrary finitely presented morphisms.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat finitely presented marked curve over an integral qcqs scheme descends to an integral finite type scheme over the integers",
+   "results": "hits=8; top=['AlgebraicGeometry.IsIntegral', 'AlgebraicGeometry.IsIntegralHom', 'WeierstrassCurve.integralModel', 'AlgebraicGeometry.finite_appTop_of_universallyClosed', 'AlgebraicGeometry.IsIntegralHom.instDescScheme', 'AlgebraicGeometry.IsFinite.instIsIntegralHom', 'AlgebraicGeometry.isIntegral_appTop_of_universallyClosed', 'AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc']; note=; digest=df30f1fefa01bbc1. Read the hits: approximation, factorization, finite type and smooth relative dimension definitions do not give eventual pure fibre dimension for arbitrary finitely presented morphisms.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-temkin-stable-modification",
@@ -82,5 +250,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-marked-curve-finite-type-model",
+  "worker": "stage1",
+  "summary": "Ten-step approximation proof, preserving the imported statement. Reused existing approximation and limit-property nodes, proved the integral factorization by the radical-ideal calculation, and descended the generic properties fpqc. Added only general eventual pure-dimension descent and one exact Mathlib smooth fpqc descent leaf. No Lean edited or compiled.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Finite-type integral models of multipointed curves. These steps expand its Temkin noetherian-approximation input; no unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-filtered-category-directed-cofinal",
+    "why": "Reindex the small cofiltered approximation by a directed set to meet the exact hypotheses of the existing descent tools."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Finite-type integer stages are Noetherian, hence qcqs, as required by the limit theorems."
+   },
+   {
+    "node": "thm-pd-spreading-out",
+    "why": "Generic finite-presentation descent of the two schemes and their marking arrow; the trace unit has no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Finite presentation is stable under base change and supplies qcqs stage models."
+   },
+   {
+    "node": "lem-weil-pbc-descend-closed-immersion",
+    "why": "Descend the closed marking after its arrow has been modeled."
+   },
+   {
+    "node": "lem-weil-pbc-descend-flat-finite-presentation",
+    "why": "Descend flatness of both structural maps."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Preserve flatness while passing to a common later stage."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Construct the integral reduced closure of the image generic point."
+   },
+   {
+    "node": "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "why": "The generic field extension is faithfully flat, so generic properties descend."
+   },
+   {
+    "node": "lem-galois-fpqc-descend-etale",
+    "why": "Descend etaleness of the generic marking along the field extension."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-filtered-category-directed-cofinal",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-descend-closed-immersion",
+  "lem-weil-pbc-descend-flat-finite-presentation",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-galois-fpqc-descend-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-dae64420f",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-dae64420f (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the sources in full. The item statement is unchanged; its 'finitely presented' must mean 01TP finite presentation, which step 2 uses correctly. The Temkin PDF is not in the literature directory, so the proof is correctly marked agent-written from Stacks and the report carries a WANTED line. Step 1: the slopmaster2-closed Noetherian approximation has a small cofiltered index (structure checked), and directed-cofinal clause (2) reindexes it by a directed set without changing the limit; the stages are Noetherian, hence qcqs. Steps 2-4 match spreading-out 01ZM (1)/(2), closed-immersion descent 01ZP (local finite type from permanence (f)) and flatness descent 04AI with Y_0=S_i, and each hypothesis holds. Step 5 uses the new node with d=1 and d=0. Steps 6-7 build T as the reduced closure of the image of the generic point; S maps into T because S is reduced (radical-ideal argument), T is integral and of finite type over Z, and the map is dominant. Step 8 uses only the non-semistable base-change clause of lem-trf-semistable-marked-base-change, which is in the same unit. Step 9: Spec k(S)->Spec k(T) is flat, qc and surjective, so it is a singleton fpqc covering, also for transcendental extensions; the generic fibres identify with X_eta and D_eta, and the smooth leaf and lem-galois-fpqc-descend-etale (arbitrary fpqc coverings) give smoothness and etaleness. Step 10: the pair isomorphism follows from the descended marking arrow. New node lem-trf-pure-relative-dimension-finite-stage: Stacks limits 0EY2 (l.4587) plus persistence 02NK/02NJ (morphisms l.5564-5594); it is true, a strictly smaller generic tool, and has no duplicate in the DAG. New node lem-trf-smooth-fpqc-base-descent: Mathlib Descent.lean:55-57 (of_pullback_snd_of_descendsAlong) together with LocalFlatDescent.lean:41-42 (DescendsAlong Smooth along Surjective⊓Flat⊓QuasiCompact) is a correct one-line specialization, matching Stacks 02VL. Its Smooth notion is def-sbc-smooth-morphisms, which carries the Smooth match, as precedent leaves do. No cycle; all cited ids exist; no SGA source. I accept the declared tool_uses: directed-cofinal, the descend-closed-immersion and descend-flat lemmas, reduced-induced, spreading-out, galois etale descent, and the redundantly declared leaves. No fixes were made; review.md has the full checks."
  }
 }

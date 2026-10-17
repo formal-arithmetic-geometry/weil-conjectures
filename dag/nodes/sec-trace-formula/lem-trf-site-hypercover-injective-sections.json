@@ -13,9 +13,53 @@
   "def-weil-pbc-simplicial-object",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathbf Z[V_p]$ be the sheafified free abelian sheaf on the representable $V_p$. The free-resolution node gives an exact augmented alternating-face complex $\\cdots\\to\\mathbf Z[V_2]\\to\\mathbf Z[V_1]\\to\\mathbf Z[V_0]\\to\\mathbf Z[W]\\to0$. By the free representable Hom-to-sections bijection, applying $\\operatorname{Hom}(-,I)$ identifies its dual cochain terms with $I(V_p)$ and the dual face maps with the alternating restriction differential $\\delta^p$.",
+   "uses": [
+    "lem-trf-site-hypercover-free-resolution",
+    "lem-trf-site-free-sheaf-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tag 01GW proof, equation identifying the Cech complex with Hom from the sheafified free simplicial complex."
+   }
+  },
+  {
+   "text": "Injectivity of $I$ makes $\\operatorname{Hom}(-,I)$ exact on the displayed augmented complex. At positive degree, a cocycle $f:F_p\\to I$ vanishes on $\\operatorname{im}(d_{p+1})=\\ker(d_p)$, so it factors through the monomorphism $\\operatorname{im}(d_p)\\hookrightarrow F_{p-1}$; extend that map to $F_{p-1}$ using the defining extension property of an injective object, and the resulting cochain has coboundary $f$. In degree zero, a cocycle $f:F_0\\to I$ vanishes on $\\operatorname{im}(d_1)=\\ker(\\varepsilon)$ for the augmentation $\\varepsilon:F_0\\to\\mathbf Z[W]$, which is an epimorphism by exactness at $\\mathbf Z[W]$; so $f$ factors uniquely through $\\varepsilon$, which identifies the kernel of $\\delta^0$ with the image of restriction from $I(W)$. Since $\\varepsilon$ is an epimorphism, $\\operatorname{Hom}(\\varepsilon,I)$ is injective, which is exactness at $I(W)$.",
+   "uses": [
+    "lem-trf-site-hypercover-free-resolution",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tag 01GW, proof after the Hom identification: injectivity and exactness of the free sheaf complex."
+   }
+  },
+  {
+   "text": "Under the Hom-to-sections identifications, the map induced by $\\mathbf Z[V_{p+1}]\\to\\mathbf Z[V_p]$ is $d_i^*:I(V_p)\\to I(V_{p+1})$; summing with signs gives exactly $\\delta^p$. The augmentation is restriction $I(W)\\to I(V_0)$, so the preceding exactness is the stated sequence, including its degree-zero identification. No step uses subcanonicity or a splitting of the hypercover.",
+   "uses": [
+    "lem-trf-site-free-sheaf-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tag 01GW conclusion and the definition of the Cech differential in Section hyper-cech."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-site-hypercover-free-resolution",
+  "lem-trf-site-free-sheaf-sections",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tag 01GW (lemma-injective-trivial-cech), using 01GE for the free hypercover resolution."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -54,7 +98,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-site-hypercover-derived-descent",
@@ -79,5 +123,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-site-hypercover-injective-sections",
+  "worker": "stage1",
+  "summary": "Split the arbitrary-site injective hypercover exactness into the free abelian sheaf resolution from Tags 01GE/01GC--01GD and the Mathlib free-representable Hom-to-sections equivalence. Checked the Hom exactness argument from the defining extension property of injectives and identified the alternating restriction differential and augmentation.",
+  "blueprint": "The three steps realize the blueprint's injective-coefficient exactness input: free hypercover resolution, Hom identification, and exactness after applying Hom into an injective."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-dee216063",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-dee216063 (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks hypercovering.tex: 01G5 (l.346), 01GC, 01GD and 01GE (l.591-784), 01GV and 01GW with equation-identify-cech (l.845-924). The item statement matches the live base exactly, so it was not weakened. It is the representable case of 01GW. With matching objects taken in D/W, p=1 gives V0 x_W V0 and p>=2 gives a connected limit equal to the coskeleton in 01GE. Yoneda preserves these limits, so a covering sieve is the same as being surjective after sheafification. The item assumes no subcanonicity and no splitness, and its proof uses neither. Step 1 is 01GW's Hom identification, using the new free-resolution node and the Mathlib leaf. Step 2 is the correct extension argument for an injective; in degree zero it only said 'same argument'. Step 3 is elementary: the free map on d_i sends the generator id to d_i, and naturality turns that into d_i^*. The new node lem-trf-site-hypercover-free-resolution is 01GE in the representable case. It is strictly smaller than the item and is not one of its clauses restated. I tested it on the identity hypercover (differentials alternate 0 and id, so it is exact) and on a Cech nerve (01GC). For the leaf I read Sheaf.freeYonedaHomEquiv (Generator/Sheaf.lean:42-44), whose map is the toFun of Presheaf.freeYonedaHomEquiv (Generator/Presheaf.lean:44); it matches once composed with uliftZMultiplesHom. Duplicate search: lem-weil-pbc-hypercover-free-resolution covers only split etale hypercovers. lem-weil-pbc-ringed-hypercover-injective-augmentation and lem-sc-ringed-hypercover-injective-augmentation-ring need subcanonical sites. lem-weil-pbc-sheaf-free-separator states a different claim. None is a duplicate, and there is no cycle. Every citation stays in unit sk-i-curve-zero or is a definition or Mathlib leaf; no tool_uses are needed, no SGA source is used, and no target node is involved. Three repairs, in fixes/dag/nodes/sec-trace-formula/: (1) free-resolution statement: fixed the broken TeX 'for $p>0, let $N_p$' and spelled out what a covering sieve means, in the item's own wording, with no hypothesis changed; (2) the leaf's mathlib_match.how claimed 'exact' with ℤ ⟶ I(U); it now names the ULift ℤ / uliftZMultiplesHom step and the lines that give naturality; (3) item step 2: wrote out degree zero (a 0-cocycle factors through the epimorphism ε, and Hom(ε,I) is injective).; 3 file(s) fixed by the reviewer"
  }
 }
