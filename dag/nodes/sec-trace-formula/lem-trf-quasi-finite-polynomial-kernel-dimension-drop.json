@@ -232,5 +232,24 @@
   "group": "Q75",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-168d82919 (reviewer sub-agent of L); spot-checked: I read the item in full, every cited node's statement, the unit sk-i-curve-zero, the chapter sec-trace-formula, and the parent's step 7. I checked the Stacks sources at 00QK l.31380 (last sentence), 00QF l.31267, 00QG l.31291 and 00PN l.30293, and their tags against tags/tags. There are no new nodes and the statement is unchanged. The statement matches the 00QK inference. I tested it on k[x,y]/(xy), on k->0 with n=0, and on k[t]/(f), and the identity map is correctly excluded. The nearest existing node, 00QG, gives only the weak bound <=n, so the item is not a duplicate. Step 1: the T=0 and n=0 cases are correct. Step 2: the polynomial-dimension leaf with dim k=0, plus the lex leading-term domain argument, is correct. Step 3: 00PN applies to the square (P,T,P/I,T) with id; it commutes, t=t*1 gives surjectivity, and the prime pulls back to itself. Step 4: chains of P/I pull back to primes containing h!=0, and prepending (0) gives a uniform bound of n-1. Step 5: the localization chain lemma plus 00QF, whose hypotheses are only finite type and quasi-finite at q, gives dim T_q <= n-1. Step 6: chains ending at q, then ring dimension equals Spec dimension. proof_deps equals the union of uses. I accept the tool uses lem-weil-pbc-quasi-finite-four-rings (00PN) and lem-weil-pbc-dimension-inequality-quasi-finite (00QF): both are generic algebra lemmas from unit sk-thm-p1. Four kinds of Mathlib search are recorded with no match. No SGA source is cited. No fixes were needed."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.QuasiFinitePolynomialKernelDimensionDrop",
+  "declaration": "AlgebraicGeometry.topologicalKrullDim_spec_lt_of_quasiFinite_over_mvPolynomial_of_nonzero_kernel",
+  "file": "lean/Sheaf/TraceFormula/QuasiFinitePolynomialKernelDimensionDrop.lean",
+  "statement": "theorem topologicalKrullDim_spec_lt_of_quasiFinite_over_mvPolynomial_of_nonzero_kernel (k : Type u) [Field k] (n : ℕ) (T : Type v) [CommRing T] [Algebra k T] [Algebra.FiniteType k T] (φ : MvPolynomial (Fin n) k →ₐ[k] T) (hφ : @Algebra.FiniteType (MvPolynomial (Fin n) k) T _ _ φ.toRingHom.toAlgebra) (hq : ∀ q : PrimeSpectrum T, @Algebra.IsQuasiFiniteAtPrime (MvPolynomial (Fin n) k) T _ _ φ.toRingHom.toAlgebra hφ q) (hker : ∃ p : MvPolynomial (Fin n) k, p ≠ 0 ∧ φ p = 0) : topologicalKrullDim (Spec (CommRingCat.of T)) < (n : WithBot ℕ∞)",
+  "by": "Q95",
+  "date": "2026-10-18",
+  "existing": false,
+  "branch": "newtargets-dag",
+  "fixed_by": "NT-stage2-Codex-662b2ebe5"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-662b2ebe5",
+  "group": "Q95",
+  "result": "fix",
+  "note": "Mathematics and signature are correct. Complete fixes replace the placeholder second reading, expand the proof docstring, and clean imports. Original and corrected modules compile through scompile.py. Full findings are in review.md; replacements are under fixes/."
  }
 }

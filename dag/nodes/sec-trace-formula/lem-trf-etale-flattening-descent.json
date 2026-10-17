@@ -388,5 +388,23 @@
   "group": "Q42",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-62e24f838 (reviewer sub-agent of L); spot-checked: I read all of it: the item, the three new nodes, every cited node's statement (including the main-20261015 blueprint_update texts), and the Stacks sources at the cited places. These were flat.tex 080Y/0813/0814, divisors.tex 0805/080A/080B/080D/080F/080I/080M/080N and morphisms.tex 02JZ. The item matches 0814 hypothesis by hypothesis and nothing is weakened. Steps 1-10 follow the 0814 proof with 080Y written out. Step 1's affine refinement is needed, because the calculus node requires a qcqs base and the S_i are not assumed quasi-separated. In Steps 3 and 7 I checked that Z∪b(Z_1)=V(J)∪V(IO), using that the blowup is an isomorphism off its centre, and that the 080D quotient depends only on the support. In Steps 6 and 7 I checked that V(J'_r)⊂V(a), so the second blowup is admissible as calculus (1) requires. Step 8 replaces Stacks' 05B9 citation by stalkwise Module.Flat.trans plus the new 02JZ node, applied to the flat, jointly surjective base change of the j_r. Step 9 works with both forms of lemma-nagata-extend-admissible-blowup. New nodes: lem-trf-etale-ideal-local-factor is a faithful transcription of 0813, tested on B=A, B=A_a and B=0. lem-trf-relative-flatness-source-cover is verbatim 02JZ plus the family form. lem-trf-module-strict-transform-flat-pullback is true by an argument on affine charts: the kernel is ker(N→N_a), which flat extension preserves. Flatness of j is necessary (k[t]⊕k[t]/(t) at the origin). None of the three is a duplicate (searched dag/nodes by tag and keywords, and the blueprint via blueprint_refs search) or a restated clause of the item. B1-B9 hold. The declared tool_uses (the nagata blowup theorems and the generic pbc/pc facts) are accepted. One fix: the flat-pullback node said 'identify T^b≅T×_S S^b by flat base change' without a citation. It now cites [def-nagata-blowup-flat-base-change-map] (bc_e) and [thm-nagata-blowup-flat-base-change], with both added to stmt_deps; the mathematics is unchanged (fixes/dag/nodes/sec-trace-formula/lem-trf-module-strict-transform-flat-pullback.json). For maintenance: the calculus node's source.place labels 080B as 080K. No SGA source is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.EtaleFlatteningDescent",
+  "declaration": "AlgebraicGeometry.exists_admissibleBlowup_moduleStrictTransform_isFlatOver_of_finite_etale_cover",
+  "statement": "theorem exists_admissibleBlowup_moduleStrictTransform_isFlatOver_of_finite_etale_cover {S X : Scheme.{u}} [CompactSpace S] [QuasiSeparatedSpace S] (f : X ⟶ S) (F : X.Modules) [F.IsQuasicoherent] (U : S.Opens) (hU : IsCompact (U : Set S)) {ι : Type v} [Finite ι] (Si : ι → Scheme.{u}) (Xi : ι → Scheme.{u}) (g : ∀ i, Xi i ⟶ Si i) (j : ∀ i, Xi i ⟶ X) (e : ∀ i, Si i ⟶ S) (hcomm : ∀ i, g i ≫ e i = j i ≫ f) (he_qc : ∀ i, QuasiCompact (e i)) (he_etale : ∀ i, Etale (e i)) (hj_etale : ∀ i, Etale (j i)) (he_cover : ∀ s : S, ∃ i : ι, ∃ x : Si i, e i x = s) (hj_cover : ∀ x : X, ∃ i : ι, ∃ y : Xi i, j i y = x) (B : ∀ i, IsAdmissible (Si i) ((e i) ⁻¹ᵁ U)) (hB_flat : ∀ i, letI : (B i).I.toModules.IsFiniteType := (B i).I.isFiniteType_toModules_sheaf (B i).finiteType Scheme.Modules.IsFlatOver (@Scheme.Modules.moduleStrictTransform (Xi i) (Si i) (g i) (B i).I inferInstance ((Scheme.Modules.pullback (j i)).obj F) inferInstance) (pullback.snd (g i) (B i).I.blowupMap)) : ∃ B' : IsAdmissible S U, letI : B'.I.toModules.IsFiniteType := B'.I.isFiniteType_toModules_sheaf B'.finiteType Scheme.Modules.IsFlatOver (@Scheme.Modules.moduleStrictTransform X S f B'.I inferInstance F inferInstance) (pullback.snd f B'.I.blowupMap)",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/TraceFormula/EtaleFlatteningDescent.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-39d941b2a",
+  "group": "NX",
+  "result": "pass",
+  "note": "Statement matches Tag 0814 and the recorded Lean signature exactly; dependencies, projections, docstrings, edge cases, route-pivot constraints, and scompile evidence checked."
  }
 }
