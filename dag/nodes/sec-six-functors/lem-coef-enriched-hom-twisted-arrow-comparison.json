@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-coherent-nerve-comparison",
-  "lem-coef-twisted-arrow-left-fibration"
+  "lem-coef-twisted-arrow-left-fibration",
+  "def-coef-infinity-category-of-spaces"
  ],
  "proof": [
   {
@@ -308,5 +309,38 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3d3451177",
+  "group": "NR",
+  "result": "pass",
+  "note": "Read the node, the 4 stmt_deps nodes and their Lean (CoherentNerveInfrastructure, CoherentNerveComparison, TwistedArrowLeftFibration, EnhancedDiagramsCones, InfinityCategoryOfSpaces, Mathlib SSet.op) and Kerodon 03N6/03N7/03NA/03NC/03ND/03MT/03NK. Clause by clause: A : SCat.{u} with IsLocallyKan only; Kan/S/C are the recorded objects; H pinned on objects A(s1(i.rev), s2(i)) and on all mapping simplices by vzu with reflected subsets (correct variance); W = pullback(ev0, const point) and r = ev1; Tw and lambda reused; the comparison is uniquely pinned by cone_face/cone_mapping (subset Ibar union I)/prism ((j,0)->0, (j,1)->j+1)/over_base; the inverse has over-base IsEquivalenceEdge homotopies; vertex_comparison and identity_edge agree with the dependency's mapping-comparison formulas; naturality is full enriched naturality with F.map components. Edge cases checked: empty A, empty Hom, a=b, n=0, i>j, noninjective operators. Only lean and stmt_deps changed (added landed def-coef-infinity-category-of-spaces, allowed); lean.statement matches the file verbatim; no hollow defs; one sorry; docstrings and the 8 proof steps present; no line over 100 chars; proof-dep imports only. nt_compile.py --json against the side overlay: rc 0, no errors or warnings, 5.0 s. No findings requiring fix or return."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EnrichedHomTwistedArrowComparison",
+  "declaration": "CategoryTheory.EnrichedHomTwisted.enriched_hom_twisted_arrow_comparison",
+  "declarations": [
+   "CategoryTheory.EnrichedHomTwisted.base",
+   "CategoryTheory.EnrichedHomTwisted.arrows",
+   "CategoryTheory.EnrichedHomTwisted.projection",
+   "CategoryTheory.EnrichedHomTwisted.arrowsMap",
+   "CategoryTheory.EnrichedHomTwisted.mappingVertexArrow",
+   "CategoryTheory.EnrichedHomTwisted.pointedArrows",
+   "CategoryTheory.EnrichedHomTwisted.target",
+   "CategoryTheory.EnrichedHomTwisted.barred",
+   "CategoryTheory.EnrichedHomTwisted.unbarred",
+   "CategoryTheory.EnrichedHomTwisted.action",
+   "CategoryTheory.EnrichedHomTwisted.Comparison",
+   "CategoryTheory.EnrichedHomTwisted.enriched_hom_twisted_arrow_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EnrichedHomTwistedArrowComparison.lean",
+  "statement": "theorem enriched_hom_twisted_arrow_comparison : Nonempty Comparison.{u}",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The theorem supplies the canonical comparison via its full symmetric-subset and prism formulas, not an arbitrary fiberwise equivalence. The inverse homotopies are over the base. Reuses the landed internal-Hom Kan category, adding its existing definition node to stmt_deps. The ambient universe lift is degreewise and preserves all small simplicial categories."
  }
 }
