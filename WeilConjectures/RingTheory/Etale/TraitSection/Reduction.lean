@@ -1,0 +1,56 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.Ideal.Height
+public import Mathlib.RingTheory.Etale.Descent
+public import Mathlib.RingTheory.Finiteness.Descent
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+
+/-!
+# Tools for the reduction of the trait case to a base containing roots of unity
+
+* `IsLocalization.AtPrime.isDiscreteValuationRing_of_height_eq_one`: the localization of a
+  Noetherian integrally closed domain at a height one prime is a discrete valuation ring.
+* `Algebra.etale_and_finite_of_isLocalHom`: finite étaleness descends along a flat local
+  homomorphism of local rings.
+
+These are used in the reduction of the trait case of blueprint
+`sbc-thm-spreading-finite-etale-galois` ([Stacks 0EYJ]) to a base containing the roots of unity.
+-/
+
+@[expose] public section
+
+open TensorProduct
+
+/-- The localization of a Noetherian integrally closed domain at a height one prime is a discrete
+valuation ring. -/
+theorem IsLocalization.AtPrime.isDiscreteValuationRing_of_height_eq_one {R : Type*} [CommRing R]
+    [IsDomain R] [IsIntegrallyClosed R] [IsNoetherianRing R] (q : Ideal R) [q.IsPrime]
+    (hq : q.height = 1) (A : Type*) [CommRing A] [Algebra R A] [IsLocalization.AtPrime A q] :
+    ∃ _ : IsDomain A, IsDiscreteValuationRing A := by
+  have hq0 : q.primeCompl ≤ nonZeroDivisors R := q.primeCompl_le_nonZeroDivisors
+  have : IsDomain A := IsLocalization.isDomain_of_le_nonZeroDivisors (M := q.primeCompl) A hq0
+  have : IsLocalRing A := IsLocalization.AtPrime.isLocalRing A q
+  have : IsNoetherianRing A := IsLocalization.isNoetherianRing q.primeCompl A inferInstance
+  have : IsIntegrallyClosed A := isIntegrallyClosed_of_isLocalization (R := R) (S := A)
+    q.primeCompl hq0
+  have hd : ringKrullDim A = 1 := by
+    rw [IsLocalization.AtPrime.ringKrullDim_eq_height q A, hq]
+    rfl
+  have := IsRegularLocalRing.of_isIntegrallyClosed A hd.le
+  exact ⟨inferInstance, IsRegularLocalRing.isDiscreteValuationRing A hd⟩
+
+/-- Finite étaleness descends along a flat local homomorphism of local rings. -/
+theorem Algebra.etale_and_finite_of_isLocalHom {R R₁ S : Type*} [CommRing R] [CommRing R₁]
+    [CommRing S] [Algebra R R₁] [Algebra R S] [IsLocalRing R] [IsLocalRing R₁]
+    [Module.Flat R R₁] [IsLocalHom (algebraMap R R₁)]
+    (hE : Algebra.Etale R₁ (R₁ ⊗[R] S)) (hF : Module.Finite R₁ (R₁ ⊗[R] S)) :
+    Algebra.Etale R S ∧ Module.Finite R S := by
+  have : Module.FaithfullyFlat R R₁ := Module.FaithfullyFlat.of_flat_of_isLocalHom
+  exact ⟨Algebra.Etale.of_etale_tensorProduct_of_faithfullyFlat R₁,
+    Module.Finite.of_finite_tensorProduct_of_faithfullyFlat R₁⟩
