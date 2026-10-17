@@ -16,7 +16,7 @@ Let `Λ` be a commutative ring of characteristic `n ≠ 0`, for instance `A = �
 `μₙ` of `n`-th roots of unity is killed by `n`, so it is a sheaf of `ℤ/n`-modules
 (`AlgebraicGeometry.Scheme.rootsOfUnityModuleSheaf`), and the Tate sheaf
 `Λ(1) = μₙ ⊗_ℤ Λ` (`AlgebraicGeometry.Etale.tateSheaf`) is canonically the tensor product
-`μₙ ⊗_{ℤ/n} Λ` over `ℤ/n` (`AlgebraicGeometry.Etale.tateSheafIsoExtendScalarsAlong`): both are
+`μₙ ⊗_{ℤ/n} Λ` over `ℤ/n` (`AlgebraicGeometry.Etale.extendScalarsIsoExtendScalarsAlong`): both are
 left adjoint objects corepresenting the additive maps `μₙ ⟶ G` into sheaves of `Λ`-modules, an
 additive map of `ℤ/n`-modules being `ℤ/n`-linear.
 
@@ -25,7 +25,13 @@ additive map of `ℤ/n`-modules being `ℤ/n`-linear.
 - `AlgebraicGeometry.Scheme.rootsOfUnityModuleSheaf`: `μₙ` as a sheaf of `ℤ/n`-modules.
 - `AlgebraicGeometry.Etale.extendScalarsAlong`: extension of scalars `F ↦ Λ ⊗_R F` of étale
   sheaves along a ring map `R ⟶ Λ`.
-- `AlgebraicGeometry.Etale.tateSheafIsoExtendScalarsAlong`: `μₙ ⊗_ℤ Λ ≅ μₙ ⊗_{ℤ/n} Λ`.
+- `AlgebraicGeometry.Etale.extendScalarsIsoExtendScalarsAlong`: `μₙ ⊗_ℤ Λ ≅ μₙ ⊗_{ℤ/n} Λ`.
+- `AlgebraicGeometry.Etale.tateTwistSheafOneIsoExtendScalarsAlong`: `Λ(1) ≅ μₙ ⊗_{ℤ/n} Λ`.
+
+## Main statements
+
+- `AlgebraicGeometry.Etale.ringChar_eq_and_nonempty_tateTwistSheaf_iso`: blueprint
+  `lem-pur-finite-kummer-level`.
 -/
 
 @[expose] public section
@@ -180,6 +186,22 @@ noncomputable def extendScalarsIsoExtendScalarsAlong :
       rw [Adjunction.homEquiv_naturality_right, rootsOfUnityModuleSheafHomEquiv_naturality,
         Adjunction.homEquiv_naturality_right_symm])
 
+/-- The identification `Λ ⊗_ℤ μₙ ≅ Λ ⊗_{ℤ/n} μₙ` is canonical: it is compatible with the canonical
+additive maps `μₙ ⟶ Λ ⊗_ℤ μₙ` and `μₙ ⟶ Λ ⊗_{ℤ/n} μₙ`, the units of the extension of scalars
+adjunctions. -/
+lemma unit_comp_extendScalarsIsoExtendScalarsAlong_hom :
+    (extendScalarsAdjunction Λ X).unit.app (X.rootsOfUnitySheaf n) ≫
+        (sheafCompose X.smallEtaleTopology
+          (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map
+          (extendScalarsIsoExtendScalarsAlong Λ X n).hom =
+      rootsOfUnityModuleSheafHomEquiv Λ X _
+        ((extendScalarsAlongAdjunction Λ (ZMod.castHom (dvd_refl n) Λ) X).unit.app
+          (X.rootsOfUnityModuleSheaf n)) := by
+  refine ((extendScalarsAdjunction Λ X).homEquiv_unit _ _ _).symm.trans ?_
+  change (extendScalarsAdjunction Λ X).homEquiv _ _
+    (((extendScalarsAdjunction Λ X).homEquiv _ _).symm _) = _
+  rw [Equiv.apply_symm_apply, Adjunction.homEquiv_id]
+
 end Comparison
 
 section FiniteLevel
@@ -247,11 +269,10 @@ theorem ringChar_eq_and_nonempty_tateTwistSheaf_iso :
         Nonempty (tateTwistSheaf (R ⧸ Ideal.span {ϖ ^ (e * N)}) T 1 ≅
           (extendScalarsAlong (R ⧸ Ideal.span {ϖ ^ (e * N)})
             (ZMod.castHom (dvd_refl (ℓ ^ N)) (R ⧸ Ideal.span {ϖ ^ (e * N)})) T).obj
-              (T.rootsOfUnityModuleSheaf (ℓ ^ N))) :=
-by
+              (T.rootsOfUnityModuleSheaf (ℓ ^ N))) := by
   refine ⟨IsDiscreteValuationRing.ringChar_quotient_span_pow hϖ hℓ he hℓe N, fun T _ ↦ ?_⟩
-  haveI := IsDiscreteValuationRing.charP_quotient_span_pow hϖ hℓ he hℓe N
-  haveI : NeZero (ringChar (R ⧸ Ideal.span {ϖ ^ (e * N)})) := ⟨by
+  have := IsDiscreteValuationRing.charP_quotient_span_pow hϖ hℓ he hℓe N
+  have : NeZero (ringChar (R ⧸ Ideal.span {ϖ ^ (e * N)})) := ⟨by
     rw [ringChar.eq _ (ℓ ^ N)]; exact pow_ne_zero _ hℓ.ne_zero⟩
   exact ⟨tateTwistSheafOneIsoExtendScalarsAlong _ _⟩
 

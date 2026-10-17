@@ -66,7 +66,7 @@ theorem isIso_constantSheafToLowerStar_of_isOpenImmersion {Y V : Scheme.{u}}
     v.isOpenEmbedding.isOpen_range.dense (Set.range_nonempty _)
   have := isIso_unit_upperStarLowerStarAdjunction_of_isDomain_stalk v hX hd
     ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)
-  exact .comp_isIso _ _ _ _ _ _ _ this inferInstance
+  exact @IsIso.comp_isIso _ _ _ _ _ _ _ this inferInstance
 
 variable [Finite Λ]
 

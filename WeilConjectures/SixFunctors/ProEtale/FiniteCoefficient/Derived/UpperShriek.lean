@@ -95,7 +95,8 @@ section Definition
 
 variable [(Etale.rightDerivedLowerShriek A f).IsLeftAdjoint]
 
-/-- Blueprint `sk-def-sf-operations` (vi): the exceptional inverse image
+/-- Blueprint `def-weil-exceptional-inverse-image` (at a finite stage `A = A_{E,n}`; the
+exceptional inverse image notation) and `sk-def-sf-operations` (vi): the exceptional inverse image
 `Rf^! := ν_X^* ∘ f^× ∘ Rν_{Y,*} : D(Y_proét) ⥤ D(X_proét)` along a morphism `f : X ⟶ Y`
 admitting a compactification, where `f^×` is the étale exceptional inverse image
 `AlgebraicGeometry.Etale.rightDerivedUpperShriek`, the right adjoint of the étale `Rf_!`. It is

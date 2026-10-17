@@ -18,15 +18,16 @@ Let `Λ` be a commutative ring and `k` a separably closed field. Étale sheaves 
 with inverse the constant sheaf functor (`constantSheafEquivalenceOfIsSepClosed`). A sheaf `F`
 on `Spec k` is constructible if and only if `Γ(F)` is a finitely generated `Λ`-module: it is the
 constant sheaf on `Γ(F)`, whose stalks are `Γ(F)`. Since `D(Γ)` commutes with homology and
-preserves and reflects boundedness, the equivalence `D(Γ) : D((Spec k)_ét, Λ) ≌ D(Λ)` restricts
-to an equivalence between `Dᵇc(Spec k, Λ)` and the full subcategory `Dᵇ_fin(Λ)` of `D(Λ)` of
-bounded complexes with finitely generated (for `Λ` finite: finite) cohomology modules.
+preserves and reflects boundedness, the equivalence `D(Γ) : D((Spec k)_ét, Λ) ≌ D(Λ)`
+restricts to an equivalence between `Dᵇc(Spec k, Λ)` and the full subcategory `Dᵇ_fin(Λ)` of
+`D(Λ)` of bounded complexes with finitely generated (for `Λ` finite: finite) cohomology modules.
 
 ## Main definitions
 
 - `DerivedCategory.boundedFiniteCohomology`: the object property `Dᵇ_fin(Λ)` of `D(Λ)`.
-- `AlgebraicGeometry.Etale.pointFiber`: the evaluation `Fib_s : Dᵇc(Spec k, Λ) ⥤ Dᵇ_fin(Λ)` at
-  the geometric point `s = Spec k`, the restriction of `D(Γ)`.
+- `AlgebraicGeometry.Etale.pointFiber`: the evaluation
+  `Fib_s : Dᵇc(Spec k, Λ) ⥤ Dᵇ_fin(Λ)` at the geometric point `s = Spec k`, the restriction
+  of `D(Γ)`.
 - `AlgebraicGeometry.Etale.pointFiberEquivalence` (`def-weil-finite-coefficient-point`, finite
   coefficient stage): `Fib_s` is an equivalence.
 
@@ -62,7 +63,8 @@ variable {Λ} in
 lemma boundedFiniteCohomology_iff_finite [Finite Λ] (K : DerivedCategory (ModuleCat.{u + 1} Λ)) :
     boundedFiniteCohomology Λ K ↔ DerivedCategory.TStructure.t.bounded K ∧
       ∀ n : ℤ, Finite ((homologyFunctor (ModuleCat.{u + 1} Λ) n).obj K) := by
-  refine and_congr Iff.rfl (forall_congr' fun n ↦ ⟨fun _ ↦ Module.finite_of_finite Λ, fun _ ↦ ?_⟩)
+  refine and_congr Iff.rfl
+    (forall_congr' fun n ↦ ⟨fun _ ↦ Module.finite_of_finite Λ, fun _ ↦ ?_⟩)
   exact Module.Finite.of_finite
 
 instance : (boundedFiniteCohomology Λ).IsClosedUnderIsomorphisms where
@@ -110,7 +112,7 @@ lemma isConstructibleSheaf_iff_moduleFinite_pointSections
   · intro hF
     have := hF.isFiniteSheaf
     have := IsFiniteSheaf.of_iso e.symm
-    exact moduleFinite_of_isFiniteSheaf_constantSheaf _
+    exact moduleFinite_of_isFiniteSheaf_constantSheaf (Y := Spec (.of k)) _
   · intro hM
     have : IsFiniteLocallyConstantSheaf
         ((constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
@@ -126,22 +128,28 @@ only if `D(Γ)(K) = RΓ(Spec k, K)` is bounded with finitely generated cohomolog
 lemma boundedConstructible_iff_boundedFiniteCohomology
     (K : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) (Spec (.of k)) K ↔
-      DerivedCategory.boundedFiniteCohomology Λ ((pointSections Λ k).mapDerivedCategory.obj K) := by
+      DerivedCategory.boundedFiniteCohomology Λ
+        ((pointSections Λ k).mapDerivedCategory.obj K) := by
   refine and_congr ⟨(pointSections Λ k).bounded_mapDerivedCategory_obj,
     (pointSections Λ k).bounded_of_bounded_mapDerivedCategory_obj⟩
     (forall_congr' fun n ↦ ?_)
   rw [isConstructibleSheaf_iff_moduleFinite_pointSections]
+  let e := ((pointSections Λ k).mapDerivedCategoryHomologyFunctorIso n).app K
   exact ⟨fun _ ↦ Module.Finite.equiv
-      (((pointSections Λ k).mapDerivedCategoryHomologyFunctorIso n).app K).toLinearEquiv,
+      (M := (pointSections Λ k).obj
+        ((DerivedCategory.homologyFunctor (Sheaf _ (ModuleCat.{u + 1} Λ)) n).obj K))
+      e.toLinearEquiv,
     fun _ ↦ Module.Finite.equiv
-      (((pointSections Λ k).mapDerivedCategoryHomologyFunctorIso n).app K).toLinearEquiv.symm⟩
+      (M := (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) n).obj
+        ((pointSections Λ k).mapDerivedCategory.obj K))
+      e.toLinearEquiv.symm⟩
 
 variable (Λ k)
 
 /-- The evaluation at the geometric point `s = Spec k ⟶ Spec k` (`k` separably closed),
-`Fib_s : Dᵇc(Spec k, Λ) ⥤ Dᵇ_fin(Λ)`: the restriction of the functor `D(Γ)` induced on derived
-categories by the exact global sections functor `Γ(Spec k, -)`; equivalently, of the derived
-global sections `RΓ(Spec k, -)` (`AlgebraicGeometry.Etale.pointFiberCompιIso`). -/
+`Fib_s : Dᵇc(Spec k, Λ) ⥤ Dᵇ_fin(Λ)`: the restriction of the functor `D(Γ)` induced on
+derived categories by the exact global sections functor `Γ(Spec k, -)`; equivalently, of the
+derived global sections `RΓ(Spec k, -)` (`AlgebraicGeometry.Etale.pointFiberCompιIso`). -/
 noncomputable def pointFiber :
     DerivedCategoryBoundedConstructible (ModuleCat.{u + 1} Λ) (Spec (.of k)) ⥤
       DerivedCategory.BoundedFiniteCohomology Λ :=
@@ -166,9 +174,9 @@ separably closed field `k`, the evaluation at the geometric point of `s = Spec k
 `AlgebraicGeometry.Etale.pointFiberEquivalence_functor`), is an equivalence onto the bounded
 complexes of `Λ`-modules with finitely generated (for `Λ` finite, equivalently finite,
 `DerivedCategory.boundedFiniteCohomology_iff_finite`) cohomology modules. It is the restriction
-of the equivalence `D(Γ) : D(s_ét, Λ) ≌ D(Λ)` induced by the exact equivalence `Γ(s, -)` between
-étale sheaves of `Λ`-modules on `s` and `Λ`-modules, a sheaf on `s` being constructible if and
-only if its global sections are finitely generated. -/
+of the equivalence `D(Γ) : D(s_ét, Λ) ≌ D(Λ)` induced by the exact equivalence `Γ(s, -)`
+between étale sheaves of `Λ`-modules on `s` and `Λ`-modules, a sheaf on `s` being constructible
+if and only if its global sections are finitely generated. -/
 noncomputable def pointFiberEquivalence :
     DerivedCategoryBoundedConstructible (ModuleCat.{u + 1} Λ) (Spec (.of k)) ≌
       DerivedCategory.BoundedFiniteCohomology Λ :=

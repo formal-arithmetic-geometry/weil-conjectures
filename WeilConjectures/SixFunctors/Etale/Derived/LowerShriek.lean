@@ -262,8 +262,9 @@ This carries the coefficient conventions of the trace formula: the coefficients 
 exponent is invertible on the base, the schemes are the geometric fibers `X = X₀ ×_{k₀} k`
 (`AlgebraicGeometry.Scheme.Hom.geometricFiber`) with structure morphism `a_X : X ⟶ s = Spec k`,
 the categories are `Dᵇc(X, A)` and `Dctf(X, A)` of `AlgebraicGeometry.Etale.DerivedCategory`,
-`RΓ(s, -)` is the evaluation `Fib_s` at the geometric point, and `H_c^i(X, K) = Hⁱ(RΓc(X, K))`
-is `AlgebraicGeometry.Etale.compactlySupportedCohomology`. -/
+`RΓ(s, -)` is the evaluation `Fib_s` at the geometric point
+(`AlgebraicGeometry.Etale.pointFiber`), and `H_c^i(X, K) = Hⁱ(RΓc(X, K))` is
+`AlgebraicGeometry.Etale.compactlySupportedCohomology`. -/
 noncomputable def compactlySupportedGlobalSections :
     DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤ DerivedCategory A :=
   R(f)_![A] ⋙ rightDerivedGlobalSections A Y

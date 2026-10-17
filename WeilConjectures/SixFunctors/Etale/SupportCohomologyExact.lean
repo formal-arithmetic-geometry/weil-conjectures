@@ -241,7 +241,6 @@ theorem isSplitEpi_ΓRes_openComplement_of_injective (I : Sheaf X.smallEtaleTopo
     infer_instance
   exact isSplitEpi_ΓRes_of_isSplitEpi_unit A _ I
 
-variable [HasSmallSiteSheafify A]
 
 /-- The sequence `Γ_Z(X, I) ⟶ Γ(X, I) ⟶ Γ(U, I)` of complexes of a complex `I` of étale sheaves:
 the inclusion of the sections with support in `Z`, and the restriction to the open complement
@@ -297,7 +296,7 @@ theorem exists_distTriang_rightDerivedSectionsWithSupport_Q_obj
     (Triangle.isoMk _ _ e₁ e₂ e₃ ?_ ?_ ?_)
   · exact Functor.rightDerivedFunctorNatTrans_app_Q_obj _ I
   · exact Functor.rightDerivedFunctorNatTrans_app_Q_obj _ I
-  · simp only [Triangle.mk_mor₃, Triangle.mk_obj₁, Iso.symm_hom, Functor.mapIso_hom]
+  · simp only [Triangle.mk_mor₃]
     simp only [assoc, ← Functor.map_comp, Iso.inv_hom_id, CategoryTheory.Functor.map_id,
       comp_id]
 
@@ -336,9 +335,9 @@ theorem exists_distTriang_rightDerivedSectionsWithSupport
       (F₃.mapIso eK.symm) ?_ ?_ ?_)⟩
   · exact ((Functor.rightDerivedFunctorNatTrans _).naturality eK.inv).symm
   · exact ((Functor.rightDerivedFunctorNatTrans _).naturality eK.inv).symm
-  · simp only [Triangle.mk_mor₃, Triangle.mk_obj₁, Iso.symm_hom, Functor.mapIso_hom]
-    simp only [assoc, ← Functor.map_comp, Iso.inv_hom_id, CategoryTheory.Functor.map_id,
-      comp_id, F₁]
+  · simp only [Triangle.mk_mor₃, Iso.symm_hom, Functor.mapIso_hom, assoc]
+    rw [← Functor.map_comp (shiftFunctor _ _), ← Functor.map_comp F₁, Iso.hom_inv_id,
+      CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, comp_id]
 
 include hJX hJZ in
 /-- Blueprint `thm-pur-with-support-exactness`: Long exact sequence for cohomology with support
