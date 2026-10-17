@@ -132,7 +132,7 @@ lemma exists_good (m : ℕ) (W : SimplicialObject X.Etale) (ℓ : W ⟶ Y)
   have hG : G ∈ X.smallEtaleTopology _ := by
     refine GrothendieckTopology.superset_covering _ ?_
       (GrothendieckTopology.bind_covering _ (hY m _ p)
-        (R := fun _ _ H ↦ (S m).pullback H.choose)
+        (R := fun _ g (H : liftSieve p g) ↦ (S m).pullback H.choose)
         (fun _ _ H ↦ GrothendieckTopology.pullback_stable _ _ (hS m)))
     rintro _ _ ⟨_, g', f', H, hg', rfl⟩
     exact ⟨g' ≫ H.choose, by rw [← BoundaryCone.ofSimplex_precomp, H.choose_spec,
@@ -198,8 +198,8 @@ lemma sigmaDesc_φ_eq (n : ℕ) :
     Sigma.desc (data hY S hS n).φ = cellι (step hY S hS) n ≫ matchingMap hY S hS n := by
   refine (isMatchingCone_cone hY S hS n).hom_ext ?_
   rw [← BoundaryCone.precomp_precomp, precomp_matchingMap, BoundaryCone.ofSimplex_precomp,
-    Category.comp_id, ofSimplex_cellι, cells_eq]
-  exact BoundaryCone.precomp_postcomp _ _ _
+    Category.comp_id, ofSimplex_cellι]
+  exact (BoundaryCone.precomp_postcomp _ _ _).symm
 
 lemma surjective_matchingMap (n : ℕ) : Surjective (matchingMap hY S hS n).left := by
   refine ⟨fun x ↦ ?_⟩
@@ -261,7 +261,7 @@ theorem exists_hypercover :
   have h : Sigma.ι (data hY S hS m).V i ≫ (hypercover hY S hS).splitting.ι m ≫
       (hypercoverToY hY S hS).app _ = (data hY S hS m).lift i := by
     change Sigma.ι _ i ≫ cellι (step hY S hS) m ≫ (toY (step hY S hS)).app _ = _
-    rw [cellι_toY_app, cells_eq]
+    rw [cellι_toY_app]
     exact Sigma.ι_desc _ _
   rw [h]
   exact (data_good hY S hS m).1 i

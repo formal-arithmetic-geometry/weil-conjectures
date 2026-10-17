@@ -201,6 +201,14 @@ end Step
 section Zero
 
 omit [Preorder I] in
+/-- Restrictions of a section over a terminal object along two composites agree. -/
+lemma presheaf_map_map_of_isTerminal {C : Type*} [Category C] (P : Cᵒᵖ ⥤ AddCommGrpCat.{u + 1})
+    {X Y₁ Y₂ Z : C} (hZ : IsTerminal Z) (a₁ : Y₁ ⟶ Z) (b₁ : X ⟶ Y₁) (a₂ : Y₂ ⟶ Z)
+    (b₂ : X ⟶ Y₂) (w : P.obj (op Z)) : P.map b₁.op (P.map a₁.op w) = P.map b₂.op (P.map a₂.op w) := by
+  rw [← ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply, ← P.map_comp, ← P.map_comp,
+    ← op_comp, ← op_comp, hZ.hom_ext (b₁ ≫ a₁) (b₂ ≫ a₂)]
+
+omit [Preorder I] in
 /-- The degree zero pullback of a global section, on sections over the terminal objects. -/
 lemma equiv₀_cohomologyMap_zero {X Y : Scheme.{u}} (u : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (s : G.obj.obj (op (⊤_ X.Etale))) :
@@ -323,10 +331,7 @@ theorem isContinuousAt_zero (S : SystemData D c) (hS : S.Laws) : S.IsContinuousA
     erw [hη, ← NatTrans.naturality_apply (S.L.ι.app j).hom,
       ← NatTrans.naturality_apply (S.eG j).inv.hom]
     congr 2
-    erw [← ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply, ← Functor.map_comp,
-      ← Functor.map_comp]
-    congr 2
-    exact Quiver.Hom.unop_inj (hΦ.hom_ext _ _)
+    exact presheaf_map_map_of_isTerminal _ hΦ _ _ _ _ _
   · sorry
 
 end Zero
