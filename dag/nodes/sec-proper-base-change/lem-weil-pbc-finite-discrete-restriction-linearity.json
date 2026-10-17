@@ -15,14 +15,29 @@
  ],
  "proof": [
   {
-   "text": "The sectionwise G and hG identify the original scalar action before and after restriction.",
+   "text": "Reuse the existing encodingPushforwardIso and push_action through a proof-only import all Sheaf.Paper.FiniteDiscreteRestrictionEncoding. These proved constructions give the sectionwise inverse-encoding pushforward comparison, including its scalar action compatibility.",
+   "uses": [
+    "lem-weil-pbc-finite-discrete-restriction-encoding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The existing encodingPushforwardIso is assembled by applying the single functor G to sectionwise identity isomorphisms of internal modules. The equality hG supplies a natural forgetful comparison; its naturality on those identity isomorphisms shows that the underlying pushforward comparison commutes with the forgetful comparison.",
+   "uses": [
+    "def-weil-pbc-common-finite-discrete-encoding",
+    "lem-weil-pbc-finite-discrete-restriction-encoding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Using the counit of restriction of scalars along the scheme-ring isomorphism, whose underlying map is the identity, and naturality of sheafEncodingForgetIso, identify the normalized coefficient forget isomorphism with the inverse forgetful comparison followed by the inverse equivalence unit.",
    "uses": [
     "def-weil-pbc-common-finite-discrete-encoding"
    ],
    "elementary": false
   },
   {
-   "text": "The scheme-ring identifications come from one eR. Naturality of constant-sheaf pullback and its composition comparison identifies the restricted scalar map with condensedPushforwardHom. Substitute in the action equation.",
+   "text": "For N, compose the sectionwise pushforward isomorphism with the restrictions of the inverse unit at N and the unit at h_*N. Fullness of E_T.inverse lifts this composite to a module morphism q. Naturality of the forgetful comparison, the preceding two compatibility equalities, and cancellation of the two unit components show that q.hom is exactly the prescribed normalized additive restriction comparison. Apply Mod.act_hom to q.",
    "uses": [
     "def-weil-pbc-common-finite-discrete-encoding",
     "def-weil-pbc-coefficient-derived-functor-api"
@@ -32,13 +47,14 @@
  ],
  "proof_deps": [
   "def-weil-pbc-common-finite-discrete-encoding",
-  "def-weil-pbc-coefficient-derived-functor-api"
+  "def-weil-pbc-coefficient-derived-functor-api",
+  "lem-weil-pbc-finite-discrete-restriction-encoding"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Proposition 5.3.2 and Lemma 5.4.1; sectionwise coefficient encoding",
-  "note": "A4: explicit coefficient transport; remaining proof obligations are separate named statements."
+  "note": "B2 second reading: reuse the existing private encodingPushforwardIso and push_action via proof-only import all; no duplicate helper, public API adapter or encoding-module adaptation remains. Lift the composite through the fully faithful inverse equivalence and identify its underlying map with the prescribed comparison."
  },
  "mathlib_searches": [
   {
@@ -108,14 +124,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "X-62b33",
-  "group": "A4",
+  "reviewer": "COMPILER",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261016T155153-L-839662",
+  "landing": "20261017T031541-L-1622221",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean constructions, remaining obligations, signatures and proof dependencies match their DAG nodes; compilation, importer and axiom checks pass."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
   "master": {
