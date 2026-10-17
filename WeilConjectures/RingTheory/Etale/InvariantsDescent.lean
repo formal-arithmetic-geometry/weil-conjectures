@@ -24,18 +24,18 @@ section Free
 variable {R : Type*} [CommRing R]
 
 /-- Let `M` be a finite module over a Noetherian local ring `(R, 𝔪)`. If for every `n` there is a
-surjection `M → (R/𝔪ⁿ)ᵏ`, and the one for `n = 1` has kernel contained in `𝔪 M`, then `M` is
+surjection `M → (R/𝔪ⁿ⁺¹)ᵏ`, and the one for `n = 0` has kernel contained in `𝔪 M`, then `M` is
 free of rank `k`. -/
 lemma nonempty_linearEquiv_pi_of_surjective [IsNoetherianRing R] [IsLocalRing R]
     {M : Type*} [AddCommGroup M] [Module R M] [Module.Finite R M] {k : ℕ}
-    (χ : ∀ n : ℕ, M →ₗ[R] (Fin k → R ⧸ maximalIdeal R ^ n))
+    (χ : ∀ n : ℕ, M →ₗ[R] (Fin k → R ⧸ maximalIdeal R ^ (n + 1)))
     (hχ : ∀ n, Function.Surjective (χ n))
-    (h1 : ∀ x, χ 1 x = 0 → x ∈ maximalIdeal R • (⊤ : Submodule R M)) :
+    (h1 : ∀ x, χ 0 x = 0 → x ∈ maximalIdeal R • (⊤ : Submodule R M)) :
     Nonempty ((Fin k → R) ≃ₗ[R] M) := by
-  choose t ht using fun i : Fin k ↦ hχ 1 (Pi.single i 1)
+  choose t ht using fun i : Fin k ↦ hχ 0 (Pi.single i 1)
   let f : (Fin k → R) →ₗ[R] M := Fintype.linearCombination R t
   have hχf (n : ℕ) (c : Fin k → R) :
-      χ n (f c) = Fintype.linearCombination (R ⧸ maximalIdeal R ^ n) (fun i ↦ χ n (t i))
+      χ n (f c) = Fintype.linearCombination (R ⧸ maximalIdeal R ^ (n + 1)) (fun i ↦ χ n (t i))
         (fun i ↦ Ideal.Quotient.mk _ (c i)) := by
     ext j
     simp [f, Fintype.linearCombination_apply, Finset.sum_apply, Algebra.smul_def,
@@ -44,8 +44,8 @@ lemma nonempty_linearEquiv_pi_of_surjective [IsNoetherianRing R] [IsLocalRing R]
     rw [← LinearMap.range_eq_top, eq_top_iff]
     refine Submodule.le_of_le_smul_of_le_jacobson_bot (Module.Finite.fg_top)
       (maximalIdeal_le_jacobson _) fun x _ ↦ ?_
-    choose c hc using fun i ↦ Ideal.Quotient.mk_surjective (χ 1 x i)
-    have hx : χ 1 (x - f c) = 0 := by
+    choose c hc using fun i ↦ Ideal.Quotient.mk_surjective (χ 0 x i)
+    have hx : χ 0 (x - f c) = 0 := by
       rw [map_sub, hχf]
       ext i
       simp [Fintype.linearCombination_apply, Finset.sum_apply, ht, Pi.single_apply, hc]
@@ -57,8 +57,8 @@ lemma nonempty_linearEquiv_pi_of_surjective [IsNoetherianRing R] [IsLocalRing R]
     intro x hx
     rw [LinearMap.mem_ker] at hx
     rw [Submodule.mem_bot]
-    have hmem (n : ℕ) (i : Fin k) : x i ∈ maximalIdeal R ^ n := by
-      let h := Fintype.linearCombination (R ⧸ maximalIdeal R ^ n) (fun i ↦ χ n (t i))
+    have hmem (n : ℕ) (i : Fin k) : x i ∈ maximalIdeal R ^ (n + 1) := by
+      let h := Fintype.linearCombination (R ⧸ maximalIdeal R ^ (n + 1)) (fun i ↦ χ n (t i))
       have hh : Function.Surjective h := by
         intro y
         obtain ⟨m, rfl⟩ := hχ n y
@@ -71,7 +71,7 @@ lemma nonempty_linearEquiv_pi_of_surjective [IsNoetherianRing R] [IsLocalRing R]
     ext i
     have := Ideal.iInf_pow_eq_bot_of_isLocalRing (maximalIdeal R) (maximalIdeal.isMaximal R).ne_top
     rw [Pi.zero_apply, ← Ideal.mem_bot, ← this, Ideal.mem_iInf]
-    exact fun n ↦ hmem n i
+    exact fun n ↦ Ideal.pow_le_pow_right n.le_succ (hmem n i)
   exact ⟨LinearEquiv.ofBijective f ⟨hinj, hsurj⟩⟩
 
 end Free
@@ -233,5 +233,169 @@ lemma maximalIdeal_le_radical_map :
   exact (eq_maximalIdeal (Ideal.isMaximal_of_isIntegral_of_isMaximal_comap P this)).ge
 
 end LocalFinite
+
+section Split
+
+/-- If `k` points `ψ j : T → B` with values in a ring `B` are pairwise "disjoint" (for `j ≠ l`
+some `ψ j t - ψ l t` is a unit), then `B ⊗ T → Bᵏ` is surjective. -/
+lemma surjective_liftPiTop_of_isUnit {R T B : Type*} [CommRing R] [CommRing T] [Algebra R T]
+    [CommRing B] [Algebra R B] {k : ℕ} (ψ : Fin k → (T →ₐ[R] B))
+    (hψ : ∀ j l, j ≠ l → ∃ t, IsUnit (ψ j t - ψ l t)) :
+    Function.Surjective (DepthTwo.liftPiTop ψ) := by
+  set Ψ := DepthTwo.liftPiTop ψ
+  have hΨ (j : Fin k) (x : B) (t : T) : Ψ (x ⊗ₜ t) j = x * ψ j t := by
+    simp [Ψ, DepthTwo.liftPiTop, Algebra.TensorProduct.lift_tmul]
+  have hΨa (j : Fin k) (x : B) : Ψ (algebraMap B (B ⊗[R] T) x) j = x := by
+    rw [AlgHom.commutes]
+    rfl
+  let K (j : Fin k) : Ideal (B ⊗[R] T) := RingHom.ker ((Pi.evalAlgHom B (fun _ ↦ B) j).comp Ψ)
+  have hK (j : Fin k) (q : B ⊗[R] T) : q ∈ K j ↔ Ψ q j = 0 := Iff.rfl
+  have hcop : Pairwise (Function.onFun IsCoprime K) := by
+    intro j l hjl
+    obtain ⟨t, ht⟩ := hψ j l hjl
+    set q : B ⊗[R] T := (1 : B) ⊗ₜ t - algebraMap B _ (ψ l t)
+    set y : B ⊗[R] T := algebraMap B _ ↑ht.unit⁻¹ * q
+    have hyl : Ψ y l = 0 := by
+      simp [y, q, hΨ]
+    have hyj : Ψ y j = 1 := by
+      simp only [y, q, map_mul, map_sub, Pi.mul_apply, Pi.sub_apply, hΨ, hΨa, one_mul]
+      exact ht.val_inv_mul
+    rw [Function.onFun, Ideal.isCoprime_iff_exists]
+    refine ⟨1 - y, ?_, y, (hK l y).2 hyl, sub_add_cancel 1 y⟩
+    rw [hK, map_sub, map_one, Pi.sub_apply, hyj, Pi.one_apply, sub_self]
+  intro z
+  obtain ⟨r, hr⟩ := Ideal.exists_forall_sub_mem_ideal hcop fun j ↦ algebraMap B _ (z j)
+  refine ⟨r, funext fun j ↦ ?_⟩
+  have := hr j
+  rw [hK, map_sub, Pi.sub_apply, hΨa, sub_eq_zero] at this
+  exact this
+
+end Split
+
+section Descent
+
+variable {R : Type*} [CommRing R] {R' : Type*} [CommRing R'] [Algebra R R']
+  {Γ : Type*} [Group Γ] [Fintype Γ] [MulSemiringAction Γ R'] [SMulCommClass Γ R R']
+  [Algebra.IsInvariant R R' Γ]
+  {T : Type*} [CommRing T] [Algebra R T] {T' : Type*} [CommRing T'] [Algebra R' T']
+  [Algebra R T'] [IsScalarTower R R' T'] [Algebra T T'] [IsScalarTower R T T']
+  [MulSemiringAction Γ T'] [SMulCommClass Γ T T'] [Algebra.IsInvariant T T' Γ]
+
+variable (R') in
+/-- The map `R ⧸ I → R' ⧸ I R'`. -/
+noncomputable abbrev quotientMapIdeal (I : Ideal R) : R ⧸ I →ₐ[R] R' ⧸ I.map (algebraMap R R') :=
+  Ideal.quotientMapₐ _ (Algebra.ofId R R') Ideal.le_comap_map
+
+lemma quotientMapIdeal_mk (I : Ideal R) (a : R) :
+    quotientMapIdeal R' I (Ideal.Quotient.mk I a) = Ideal.Quotient.mk _ (algebraMap R R' a) :=
+  rfl
+
+variable (Γ) in
+lemma injective_quotientMapIdeal (hR : Function.Injective (algebraMap R R'))
+    (hΓ : IsUnit (Fintype.card Γ : R)) (I : Ideal R) :
+    Function.Injective (quotientMapIdeal R' I) := by
+  rw [injective_iff_map_eq_zero]
+  intro y hy
+  obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective y
+  rw [quotientMapIdeal_mk, Ideal.Quotient.eq_zero_iff_mem] at hy
+  exact Ideal.Quotient.eq_zero_iff_mem.2
+    (Algebra.IsInvariant.mem_of_algebraMap_mem_map (G := Γ) hΓ hR I hy)
+
+omit [SMulCommClass Γ R R'] [Algebra R T] [Algebra R T'] [IsScalarTower R R' T']
+  [IsScalarTower R T T'] [Algebra.IsInvariant T T' Γ] in
+lemma quotientMapIdeal_mem_range (hΓ : IsUnit (Fintype.card Γ : R)) (I : Ideal R)
+    (L : T' →ₐ[R'] R' ⧸ I.map (algebraMap R R'))
+    (hL : ∀ (g : Γ) (t : T') (x : R'), L t = Ideal.Quotient.mk _ x →
+      L (g • t) = Ideal.Quotient.mk _ (g • x)) (t : T) :
+    L (algebraMap T T' t) ∈ (quotientMapIdeal R' I).range := by
+  obtain ⟨x, hx⟩ := Ideal.Quotient.mk_surjective (L (algebraMap T T' t))
+  have hinv (g : Γ) : g • x - x ∈ I.map (algebraMap R R') := by
+    rw [← Ideal.Quotient.eq, ← hL g _ x hx.symm, smul_algebraMap, hx]
+  obtain ⟨a, ha⟩ := Algebra.IsInvariant.exists_sub_algebraMap_mem_map hΓ I hinv
+  refine ⟨Ideal.Quotient.mk I a, ?_⟩
+
+  exact (Ideal.Quotient.eq.2 ha).symm.trans hx
+
+/-- A `Γ`-equivariant point `T' → R' ⧸ I R'` restricts to a point `T → R ⧸ I` of the invariants
+`T = T'^Γ`. -/
+noncomputable def descendPoint (hR : Function.Injective (algebraMap R R'))
+    (hΓ : IsUnit (Fintype.card Γ : R)) (I : Ideal R)
+    (L : T' →ₐ[R'] R' ⧸ I.map (algebraMap R R'))
+    (hL : ∀ (g : Γ) (t : T') (x : R'), L t = Ideal.Quotient.mk _ x →
+      L (g • t) = Ideal.Quotient.mk _ (g • x)) : T →ₐ[R] R ⧸ I :=
+  (AlgEquiv.ofInjective _ (injective_quotientMapIdeal Γ hR hΓ I)).symm.toAlgHom.comp
+    (((L.restrictScalars R).comp (IsScalarTower.toAlgHom R T T')).codRestrict _
+      (quotientMapIdeal_mem_range hΓ I L hL))
+
+lemma quotientMapIdeal_descendPoint (hR : Function.Injective (algebraMap R R'))
+    (hΓ : IsUnit (Fintype.card Γ : R)) (I : Ideal R)
+    (L : T' →ₐ[R'] R' ⧸ I.map (algebraMap R R'))
+    (hL : ∀ (g : Γ) (t : T') (x : R'), L t = Ideal.Quotient.mk _ x →
+      L (g • t) = Ideal.Quotient.mk _ (g • x)) (t : T) :
+    quotientMapIdeal R' I (descendPoint hR hΓ I L hL t) = L (algebraMap T T' t) :=
+  congrArg Subtype.val
+    ((AlgEquiv.ofInjective _ (injective_quotientMapIdeal Γ hR hΓ I)).apply_symm_apply
+    ⟨L (algebraMap T T' t), quotientMapIdeal_mem_range hΓ I L hL t⟩)
+
+/-- The descended points are compatible with reduction. -/
+lemma factorₐ_comp_descendPoint (hR : Function.Injective (algebraMap R R'))
+    (hΓ : IsUnit (Fintype.card Γ : R)) {I₁ I₂ : Ideal R} (h : I₂ ≤ I₁)
+    (L₁ : T' →ₐ[R'] R' ⧸ I₁.map (algebraMap R R')) (L₂ : T' →ₐ[R'] R' ⧸ I₂.map (algebraMap R R'))
+    (hL₁ : ∀ (g : Γ) (t : T') (x : R'), L₁ t = Ideal.Quotient.mk _ x →
+      L₁ (g • t) = Ideal.Quotient.mk _ (g • x))
+    (hL₂ : ∀ (g : Γ) (t : T') (x : R'), L₂ t = Ideal.Quotient.mk _ x →
+      L₂ (g • t) = Ideal.Quotient.mk _ (g • x))
+    (hcomp : (Ideal.Quotient.factorₐ R' (Ideal.map_mono h)).comp L₂ = L₁) :
+    (Ideal.Quotient.factorₐ R h).comp (descendPoint (T := T) hR hΓ I₂ L₂ hL₂) =
+      descendPoint (T := T) hR hΓ I₁ L₁ hL₁ := by
+  have key (y : R ⧸ I₂) : quotientMapIdeal R' I₁ (Ideal.Quotient.factorₐ R h y) =
+      Ideal.Quotient.factorₐ R' (Ideal.map_mono h) (quotientMapIdeal R' I₂ y) := by
+    obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective y
+    rfl
+  ext t
+  apply injective_quotientMapIdeal Γ hR hΓ I₁
+  rw [AlgHom.comp_apply, key, quotientMapIdeal_descendPoint, quotientMapIdeal_descendPoint,
+    ← hcomp, AlgHom.comp_apply]
+
+/-- Surjectivity of `T' → (R' ⧸ I R')ᵏ` descends to `T → (R ⧸ I)ᵏ` by averaging. -/
+lemma exists_descendPoint_eq (hR : Function.Injective (algebraMap R R'))
+    (hΓ : IsUnit (Fintype.card Γ : R)) (I : Ideal R) {k : ℕ}
+    (L : Fin k → (T' →ₐ[R'] R' ⧸ I.map (algebraMap R R')))
+    (hL : ∀ j (g : Γ) (t : T') (x : R'), L j t = Ideal.Quotient.mk _ x →
+      L j (g • t) = Ideal.Quotient.mk _ (g • x))
+    (hsurj : Function.Surjective (AlgHom.pi L)) (a : Fin k → R ⧸ I) :
+    ∃ t : T, ∀ j, descendPoint hR hΓ I (L j) (hL j) t = a j := by
+  choose α hα using fun j ↦ Ideal.Quotient.mk_surjective (a j)
+  obtain ⟨t', ht'⟩ := hsurj fun j ↦ Ideal.Quotient.mk _ (algebraMap R R' (α j))
+  obtain ⟨t₀, ht₀⟩ : ∃ t₀ : T, algebraMap T T' t₀ = ∑ g : Γ, g • t' :=
+    Algebra.IsInvariant.exists_algebraMap_eq_sum_smul Γ t'
+  refine ⟨(↑hΓ.unit⁻¹ : R) • t₀, fun j ↦ injective_quotientMapIdeal Γ hR hΓ I ?_⟩
+  have hj : L j t' = Ideal.Quotient.mk _ (algebraMap R R' (α j)) := congrFun ht' j
+  rw [quotientMapIdeal_descendPoint, Algebra.smul_def, map_mul, ← IsScalarTower.algebraMap_apply,
+    ← Algebra.smul_def, ht₀, AlgHom.map_smul_of_tower, map_sum]
+  simp_rw [hL j _ _ _ hj, smul_algebraMap]
+  rw [Finset.sum_const, Finset.card_univ, ← Nat.cast_smul_eq_nsmul R, smul_smul,
+    IsUnit.val_inv_mul, one_smul, ← hα, quotientMapIdeal_mk]
+
+/-- If `T' → (R' ⧸ I R')ᵏ` has kernel `I T'`, then `T → (R ⧸ I)ᵏ` has kernel `I T`. -/
+lemma mem_smul_top_of_descendPoint_eq_zero (hR : Function.Injective (algebraMap R R'))
+    (hT : Function.Injective (algebraMap T T')) (hΓ : IsUnit (Fintype.card Γ : R))
+    (I : Ideal R) {k : ℕ} (L : Fin k → (T' →ₐ[R'] R' ⧸ I.map (algebraMap R R')))
+    (hL : ∀ j (g : Γ) (t : T') (x : R'), L j t = Ideal.Quotient.mk _ x →
+      L j (g • t) = Ideal.Quotient.mk _ (g • x))
+    (hker : ∀ t' : T', (∀ j, L j t' = 0) →
+      t' ∈ (I.map (algebraMap R R')).map (algebraMap R' T'))
+    {t : T} (ht : ∀ j, descendPoint hR hΓ I (L j) (hL j) t = 0) :
+    t ∈ I • (⊤ : Submodule R T) := by
+  have h1 (j : Fin k) : L j (algebraMap T T' t) = 0 := by
+    rw [← quotientMapIdeal_descendPoint hR hΓ I _ (hL j), ht j, map_zero]
+  have h2 := hker _ h1
+  rw [Ideal.map_map, ← IsScalarTower.algebraMap_eq, IsScalarTower.algebraMap_eq R T T',
+    ← Ideal.map_map] at h2
+  have hΓT : IsUnit (Fintype.card Γ : T) := by simpa using hΓ.map (algebraMap R T)
+  rw [Ideal.smul_top_eq_map]
+  exact Algebra.IsInvariant.mem_of_algebraMap_mem_map hΓT hT _ h2
+
+end Descent
 
 end RingTheory.InvariantsDescent
