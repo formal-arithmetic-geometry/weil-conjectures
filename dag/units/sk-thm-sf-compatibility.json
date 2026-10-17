@@ -1,0 +1,65 @@
+{
+ "id": "sk-thm-sf-compatibility",
+ "kind": "unit",
+ "chapter": "sec-six-functors",
+ "title": "Compatibility of the six operations",
+ "lean": [],
+ "uses": [
+  "sec-proetale-coefficients",
+  "sec-proper-base-change",
+  "sec-six-functors-basics",
+  "sec-smooth-base-change",
+  "sec-smooth-purity",
+  "sk-def-sf-exchanges",
+  "sk-def-sf-operations",
+  "sk-def-sf-orientation",
+  "sk-lem-sf-mate",
+  "sk-prop-cohsm",
+  "sk-prop-sf-biduality-general",
+  "sk-prop-sf-cbc",
+  "sk-prop-sf-comp-coherence",
+  "sk-prop-sf-comp-proper",
+  "sk-prop-sf-pf-coherence",
+  "sk-prop-sfb-module-derived-factorization",
+  "sk-rem-sf-pf-done",
+  "sk-thm-sf-comp-composition",
+  "sk-thm-sf-kunneth-relative",
+  "sk-thm-sf-package",
+  "sk-thm-sf-tensor-hom",
+  "sk-thm-sf-verdier-exchange",
+  "sk-def-sf-admissible",
+  "sk-lem-finite",
+  "sk-lem-sp-reduction",
+  "sk-prop-sf-kunneth-ordinary",
+  "sk-prop-trace-adic",
+  "sk-thm-purity-transport",
+  "sk-thm-smooth-base-change"
+ ],
+ "statement": "Fix the coefficient stages of [sk-def-sf-setting] and the six operations\n$Lf^*,Rf_*,Rf_!,Rf^!,\\otimes^L,\\RHom$ of [sk-thm-sf-package], each typed\nas there ([sk-rem-sf-typing]). The structure isomorphisms that relate them\n— the composition isomorphisms, the units and counits of the two\nadjunctions, the exchange transformations, the projection transformation,\nthe proper identification $Rf_!\\cong Rf_*$, the tensor–Hom and Verdier\nexchanges and the orientation — are compatible with each other, on the\ncategories on which [sk-thm-sf-package] types each of them:\n\n1. **(1)** *Composition.* The composition isomorphisms\n$L(gf)^*\\cong Lf^*Lg^*$ ([sk-prop-sfb-module-derived-factorization]),\n$R(gf)_*\\cong Rg_*Rf_*$ (its mate under $Lf^*\\dashv Rf_*$),\n$R(gf)_!\\cong Rg_!Rf_!$ ([sk-thm-sf-comp-composition]) and\n$R(gf)^!\\cong Rf^!Rg^!$ ([sk-lem-sf-mate] (1)) are associative and\nunital, and each isomorphism for a right adjoint is the mate of the one for\nits left adjoint, so that the units and counits of $Lf^*\\dashv Rf_*$ and\n$Rf_!\\dashv Rf^!$ are compatible with composition. The functor $Rf_!$ is\nindependent of the compactification, with comparison isomorphisms satisfying\nthe cocycle condition and compatible with the composition law\n([sk-prop-sf-comp-coherence]).\n1. **(2)** *Base change.* The exchange transformations\n$\\operatorname{Ex}_*$ and $\\operatorname{Ex}_!$ of [sk-def-sf-exchanges]\nare natural in the square, the identity for the identity square and\ncompatible with horizontal and vertical pasting; $\\operatorname{Ex}_!$ is\ncompatible with the refinement comparisons and the composition law of (1)\n([sk-prop-sf-cbc]), and for proper $f$ it is $\\operatorname{Ex}_*$ under\n$Rf_!\\cong Rf_*$ ([sk-prop-sf-comp-proper]). Its mate is the dual base\nchange isomorphism $Rf^!Rg_*\\cong Rg'_*Rf'^!$, natural in the square and\ncompatible with pasting ([thm-sf-dual-base-change]), and for smooth $f$ the\nexceptional base change $Lg'^*Rf^!\\cong Rf'^!Lg^*$ of [sk-prop-cohsm]\n(G12) is the mate of $\\operatorname{Ex}_!$.\n1. **(3)** *Tensor product.* The projection transformation\n$\\operatorname{PF}$ is natural, the identity for $f=\\mathrm{id}$,\nassociative for composable $f,g$ with respect to the composition law of\n(1), independent of the compactification, equal for proper $f$ to the\ndirect-image projection formula through $Rf_!\\cong Rf_*$, and compatible\nwith base change through $\\operatorname{Ex}_!$ and the monoidality of\n$Lg^*$ ([sk-prop-sf-pf-coherence]).\n1. **(4)** *Internal Hom and duality.* The tensor–Hom exchange\n$Rf_*\\RHom_X(M,Rf^!N)\\cong\\RHom_Y(Rf_!M,N)$ of\n[sk-thm-sf-tensor-hom] is built from the adjunctions and the inverse of\n$\\operatorname{PF}$, and is natural in $M$ and $N$. With\n$\\mathbb D=\\RHom(-,\\omega)$ and biduality\n([sk-prop-sf-biduality-general]), the Verdier exchange\n$\\mathbb D_YRf_!\\cong Rf_*\\mathbb D_X$ ([sk-thm-sf-verdier-exchange])\nis compatible with composition ([sk-thm-sf-package] (6)), and its mate is\nthe isomorphism $\\mathbb D_XLf^*\\cong Rf^!\\mathbb D_Y$, natural in $f$\n([cor-sf-duality-pullback]).\n1. **(5)** *Orientation.* For smooth $f$ the purity isomorphism\n$\\gamma_f:Lf^*(-)(d)[2d]\\cong Rf^!$ of [sk-def-sf-orientation] is\ncompatible with composition through the isomorphism\n$R(gf)^!\\cong Rf^!Rg^!$ of (1), and with base change through the\nexceptional base change of (2) — along arbitrary $g$ at $\\Lambda=A_{E,n}$,\nalong étale $g$ at the other stages ([sk-thm-sf-package] (5)).\n1. **(6)** *Products.* The relative Künneth isomorphism of\n[sk-thm-sf-kunneth-relative] is compatible with symmetry, triple products,\nbase change and the projection formula.\n1. **(7)** *Coefficients.* All of the maps above commute with finite\nreduction and scalar extension, and at field coefficients they are\nWeil-equivariant ([fix-prop-coherence]).\n\nNo compatibility of the Verdier exchange with base change along an arbitrary\n$g$ is asserted, since $\\mathbb D$ does not commute with $Lg^*$ in general.",
+ "steps": [
+  {
+   "text": "Each clause collects compatibilities proved with the individual\nisomorphisms. Clause (1) is [sk-prop-sfb-module-derived-factorization] (4)\nfor $Lf^*$, [sk-thm-sf-comp-composition] (1) and\n[sk-prop-sf-comp-coherence] for $Rf_!$, and [sk-lem-sf-mate] (1) for\n$Rf^!$; the isomorphisms for $Rf_*$ and $Rf^!$ are mates of those for\n$Lf^*$ and $Rf_!$, and mates of associative and unital isomorphisms are\nassociative and unital, with units and counits compatible\n([sk-lem-sf-mate]). Clause (2) is the identity and pasting equations of the\nexchange transformations ([fix-lem-exchanges], under [sk-prop-sf-cbc]),\n[sk-prop-sf-comp-proper] for proper $f$, [thm-sf-dual-base-change] for the\nmate of $\\operatorname{Ex}_!$, which is natural and compatible with pasting\nby the mate calculus, and [sk-prop-cohsm] (G12). Clause (3) is\n[sk-prop-sf-pf-coherence]. Clause (4) is [sk-thm-sf-tensor-hom],\n[sk-thm-sf-verdier-exchange] and the composition clause of\n[sk-thm-sf-package] (6); passing to right adjoints in\n$\\mathbb D_YRf_!\\cong Rf_*\\mathbb D_X$, with $\\mathbb D$ its own adjoint by\nbiduality, gives [cor-sf-duality-pullback]. Clause (5) is the composition and\nbase-change compatibility of the orientation in [sk-thm-sf-package] (5).\nClause (6) is [sk-thm-sf-kunneth-relative]. Clause (7) is\n[fix-prop-coherence]: the coefficient comparisons preserve tensor\nreassociation, evaluation and the units and counits of the adjunctions, so\nevery map built from them, and every mate of such a map, commutes with\nfinite reduction and scalar extension, and is Weil-equivariant at field\ncoefficients."
+  }
+ ],
+ "source": "literature/blueprint/main-20261017/blueprint/sec-six-functors/sk-thm-sf-compatibility/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   []
+  ]
+ },
+ "realized_by": null,
+ "uses_added_by_reroute": {
+  "units": [
+   "sk-def-sf-admissible",
+   "sk-lem-finite",
+   "sk-lem-sp-reduction",
+   "sk-prop-sf-kunneth-ordinary",
+   "sk-prop-trace-adic",
+   "sk-thm-purity-transport",
+   "sk-thm-smooth-base-change"
+  ],
+  "date": "2026-10-17",
+  "why": "the detail nodes re-routed under this sketch keep the units their proofs already used"
+ }
+}

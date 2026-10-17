@@ -9,7 +9,7 @@
  "title": "Dual base change",
  "statement": "Fix a six-functor datum [def-sf-datum], with its finite-type $k$-scheme and coefficient conventions, and write $\\mathcal C_T=D^b_{ctf}(T,\\Lambda)$ for its supplied finite-Tor categories. Let\n$$\n\\begin{array}{ccc}\nX' & \\xrightarrow{g'} & X\\\\\nf'\\downarrow && \\downarrow f\\\\\nY' & \\xrightarrow{g} & Y\n\\end{array}\n$$\nbe a Cartesian square of separated finite-type $k$-schemes whose arrows are separated and of finite type. Use the canonical exchange and composition comparisons, with the identity, square-comparison and pasting normalizations of [fix-lem-exchanges], restricted to the domains supplied by the datum. There is a canonical natural isomorphism of functors $\\mathcal C_{Y'}\\to\\mathcal C_X$,\n$$\n\\beta_\\square:Rf^!Rg_*\\xrightarrow{\\sim}Rg'_*Rf'^!,\n$$\nnatural in the square through the adjoint comparison maps and compatible with horizontal and vertical pasting. More precisely, under the composite adjunctions [def-weil-pbc-composite-adjunction]\n$$Lg^*Rf_!\\dashv Rf^!Rg_*,\\qquad Rf'_!Lg'^*\\dashv Rg'_*Rf'^!,$$\n$\\beta_\\square$ is the inverse of the conjugate [def-weil-pbc-adjunction-conjugate] of the canonical base-change isomorphism $\\operatorname{Ex}_!:Lg^*Rf_!\\xrightarrow{\\sim}Rf'_!Lg'^*$; equivalently it is the conjugate of $\\operatorname{Ex}_!^{-1}$. If $g$ is proper, then $g'$ is proper, and under the proper-coincidence identifications $Ru_!\\cong Ru_*$ of axiom (A4) of [def-sf-datum], the same isomorphism reads\n$$Rf^!Rg_!\\xrightarrow{\\sim}Rg'_!Rf'^!.$$\nAll integral operations here are completed, and the rational and algebraically closed coefficient operations have the datum's scalar-localization and common-stage meanings; there is no assertion on unrestricted ambient categories.",
  "source": {
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-package/thm-sf-dual-base-change.md",
+  "document": "literature/blueprint/main-20261017/blueprint/sec-six-functors/sk-thm-sf-compatibility/thm-sf-dual-base-change.md",
   "place": "node thm-sf-dual-base-change, order 2234"
  },
  "stmt_deps": [
@@ -207,7 +207,7 @@
   }
  },
  "chapter": "sec-six-functors",
- "unit": "sk-thm-sf-package",
+ "unit": "sk-thm-sf-compatibility",
  "split_report": {
   "date": "2026-10-17",
   "item": "thm-sf-dual-base-change",
@@ -222,5 +222,13 @@
   "group": "Q114",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-336517641 (reviewer sub-agent of L); spot-checked: Read the full item (statement, 5 steps, deps, searches), master and main-20261015 source texts (identical), unit sk-thm-sf-package, chapter, and every cited statement (def-sf-datum A1/A2/A4, fix-lem-exchanges (1)-(2), composite adjunction, conjugate, mate-pasting (1)-(3b), lem-sf-mate, proper-base-change leaf), plus Mathlib Mates.lean:275/319/350/425/486/505. Statement: S->k is the datum's own setting, separatedness is kept, and the forward arrow is correctly (tau^-1)^c, since conjugateEquiv sends (L2->L1) to (R1->R2), so Ex_!^c : Rg'_*Rf'^! -> Rf^!Rg_*. This agrees with fix-prop-adjunctions(4) and def-trf-admissibility. Both conclusions are kept and nothing is weakened; the coefficient category is the datum's D^b_ctf and Ex_! is the def-exchange-projection exchange. Steps: (1) both composite Hom chains are typed. (2) The unit/counit formulas of alpha and beta and the inverse identities check with the order of (s∘s')^c = s'^c∘s^c. (3) (3a)/(3b) give (alpha2 H)b^flat = a^flat(G alpha1); cancelling gives b^flat(G beta1) = (beta2 H)a^flat : GR1->T2H. (4) I recomputed the horizontal beta_gh = (Rg'_*beta_h)(beta_g Rh_*) and the vertical beta_fe = (beta_e Rf'^!)(Re^! beta_f) from the whiskered conjugates; both match. (5) g' is proper as the base change of g along f, and c_g'^-1 is used correctly. Route: all citations are in-unit or in cited units (sk-prop-sf-cbc, sk-lem-sf-mate) or are definitions/Mathlib leaves, so no tool_uses are needed. Dropping the concrete base-change theorems is legitimate under the A2 axiom. proof_deps equals the union of the step uses, there is no cycle (12,628 ids traversed), and no deps are missing or merged. There are no new nodes. Duplicate search (prop-exc-ambient-dual-base-change, def-trf-admissibility, fix-prop-adjunctions(4)) found none. Edge cases: identity square, empty scheme, scaled tau, g=id. No fixes."
+ },
+ "blueprint_snapshot": "main-20261017",
+ "blueprint_parent": {
+  "node": "sk-thm-sf-compatibility",
+  "clause": 2,
+  "from_unit": "sk-thm-sf-package",
+  "date": "2026-10-17",
+  "why": "compatibility node re-routed under the central compatibility sketch (blueprint cbac0b347)"
  }
 }
