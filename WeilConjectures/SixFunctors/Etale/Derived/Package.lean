@@ -13,6 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceU
 public import WeilConjectures.SixFunctors.Etale.Derived.Orientation
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.FiniteStage
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
 public import WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
@@ -258,6 +259,84 @@ theorem sixOperationsPackage [IsAlgClosed k] [HasTateTwist.IsNormalized Λ]
     have : HasInvertibleExponent Λ Y := HasInvertibleExponent.of_hom aY
     constructibleFiniteTor_rightDerivedUpperShriek Λ aY f hK
   ctfVerdierDual _ hK := constructibleFiniteTor_verdierDual Λ (f ≫ aY) hK
+
+omit [HasTateTwist Λ] in
+/-- Blueprint `prop-functor-package`, clause (3): **compactly supported direct image of the
+localization triangle.** For a quasi-compact open immersion `j : U ⟶ X` with closed complement
+`i : Z ⟶ X`, a morphism `f : X ⟶ Y` and finite coefficients, applying `Rf_!` to the open–closed
+triangle `j_! j^* K ⟶ K ⟶ i_* i^* K ⟶` (`AlgebraicGeometry.Etale.exists_distTriang_openClosed`)
+and the composition law (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`)
+gives a distinguished triangle `R(j ≫ f)_! j^* K ⟶ Rf_! K ⟶ R(i ≫ f)_! i^* K ⟶`. -/
+theorem exists_distTriang_rightDerivedLowerShriek_openClosed {U Z X Y : Scheme.{u}}
+    (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] (i : Z ⟶ X) [IsClosedImmersion i]
+    (hij : Set.range i.base = (Set.range j.base)ᶜ) (f : X ⟶ Y) [HasCompactification f]
+    [HasCompactification j] [HasCompactification i] [HasCompactification (j ≫ f)]
+    [HasCompactification (i ≫ f)] (K : DerivedCategoryModule Λ X) :
+    ∃ T ∈ distTriang (DerivedCategoryModule Λ Y),
+      Nonempty (T.obj₁ ≅ (R(j ≫ f)_![ModuleCat.{u + 1} Λ]).obj
+        ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K)) ∧
+      Nonempty (T.obj₂ ≅ (R(f)_![ModuleCat.{u + 1} Λ]).obj K) ∧
+      Nonempty (T.obj₃ ≅ (R(i ≫ f)_![ModuleCat.{u + 1} Λ]).obj
+        ((L((i)^*[ModuleCat.{u + 1} Λ])).obj K)) := by
+  obtain ⟨w, hw⟩ := exists_distTriang_openClosed (ModuleCat.{u + 1} Λ) j i hij K
+  obtain ⟨cj⟩ := nonempty_iso_rightDerivedLowerShriek_comp Λ j f
+  obtain ⟨ci⟩ := nonempty_iso_rightDerivedLowerShriek_comp Λ i f
+  let F := R(f)_![ModuleCat.{u + 1} Λ]
+  let ej : D((j)_!open[ModuleCat.{u + 1} Λ]) ≅ R(j)_![ModuleCat.{u + 1} Λ] :=
+    (Functor.rightUnitor _).symm ≪≫
+      Functor.isoWhiskerLeft _ (rightDerivedLowerStarIdIso Λ X).symm ≪≫
+      rightDerivedLowerShriekIso Λ (Compactification.ofIsOpenImmersion j)
+  refine ⟨F.mapTriangle.obj _, F.map_distinguished _ hw, ⟨?_⟩, ⟨Iso.refl _⟩, ⟨?_⟩⟩
+  · exact F.mapIso (ej.app _ ≪≫ (R(j)_![ModuleCat.{u + 1} Λ]).mapIso
+      ((leftDerivedUpperStarIsoMapDerivedCategory _ j).app K).symm) ≪≫ (cj.app _).symm
+  · exact F.mapIso ((rightDerivedLowerShriekIsoRightDerivedLowerStar _ i).symm.app _ ≪≫
+      (R(i)_![ModuleCat.{u + 1} Λ]).mapIso
+        ((leftDerivedUpperStarIsoMapDerivedCategory _ i).app K).symm) ≪≫ (ci.app _).symm
+
+/-- Blueprint `prop-functor-package`: **the coefficient and functor package on the proved
+domains**, at the finite stages `Λ = A_{E,n}`.
+
+For `k` algebraically closed, a finite ring `Λ` with a normalized Tate twist datum whose exponent is
+invertible on `k`, and a separated finite-type morphism `f : X ⟶ Y` of separated finite-type
+`k`-schemes:
+
+* the clauses of the six-operations package hold (`AlgebraicGeometry.Etale.SixOperationsPackage`):
+  compactification independence and the composition law of `Rf_!` and `Rf_! ≅ Rf_*` for proper
+  `f` (clauses (2) and (3)), base change (clause (4)), the projection formula (clause (5)), smooth
+  purity (clause (6)), biduality and the Verdier exchange `𝔻_Y Rf_! ≅ Rf_* 𝔻_X` on `Dctf`
+  (clause (7));
+* applying `Rf_!` to the localization triangle of a quasi-compact open immersion and its closed
+  complement gives a distinguished triangle (clause (3),
+  `AlgebraicGeometry.Etale.exists_distTriang_rightDerivedLowerShriek_openClosed`);
+* on `Dctf(Y, Λ)` the exceptional inverse image is `Rf^! = 𝔻_X Lf^* 𝔻_Y` (clause (7),
+  `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_verdierDual`).
+
+The integral reduction compatibilities of clause (2) are
+`AlgebraicGeometry.Etale.functorPackage_integral`. Clause (1) (finite coefficient-field extension
+and descent to `ℚ̄_ℓ`) and the integral and field stages of clause (7) are not part of this
+statement; for strict Weil complexes over a finite field, clauses (2)–(4) are the statements of
+`WeilConjectures.WeilSheaf.LowerShriekFunctoriality`. -/
+theorem functorPackage [IsAlgClosed k] [HasTateTwist.IsNormalized Λ]
+    [HasInvertibleExponent Λ (Spec (.of k))] [IsSeparated f] :
+    SixOperationsPackage Λ k f aY ∧
+    (∀ {U Z : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] (i : Z ⟶ X)
+      [IsClosedImmersion i], Set.range i.base = (Set.range j.base)ᶜ →
+      ∀ [HasCompactification j] [HasCompactification i] [HasCompactification (j ≫ f)]
+        [HasCompactification (i ≫ f)] (K : DerivedCategoryModule Λ X),
+        ∃ T ∈ distTriang (DerivedCategoryModule Λ Y),
+          Nonempty (T.obj₁ ≅ (R(j ≫ f)_![ModuleCat.{u + 1} Λ]).obj
+            ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K)) ∧
+          Nonempty (T.obj₂ ≅ (R(f)_![ModuleCat.{u + 1} Λ]).obj K) ∧
+          Nonempty (T.obj₃ ≅ (R(i ≫ f)_![ModuleCat.{u + 1} Λ]).obj
+            ((L((i)^*[ModuleCat.{u + 1} Λ])).obj K))) ∧
+    ∀ L, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L →
+      Nonempty ((R(f)^![ModuleCat.{u + 1} Λ]).obj L ≅
+        (verdierDual (ModuleCat.{u + 1} Λ) (f ≫ aY)).obj
+          (op ((L((f)^*[ModuleCat.{u + 1} Λ])).obj
+            ((verdierDual (ModuleCat.{u + 1} Λ) aY).obj (op L))))) :=
+  ⟨sixOperationsPackage Λ k f aY,
+    fun j _ _ i _ hij _ _ _ _ K ↦ exists_distTriang_rightDerivedLowerShriek_openClosed Λ j i hij f K,
+    fun _ hL ↦ nonempty_iso_rightDerivedUpperShriek_verdierDual Λ (f ≫ aY) aY f rfl hL⟩
 
 end Etale
 

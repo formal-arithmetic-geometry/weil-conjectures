@@ -2290,6 +2290,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula
 public import WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormulaAdjunction
 public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
 public import WeilConjectures.CategoryTheory.Monoidal.Braided.Adjunction
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExternalIhom
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.InvertibleDualizing
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.PairingComparison
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.Preadditive
@@ -2302,6 +2303,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.ExceptionalProjection
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
+public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategorySymmetric
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
 public import WeilConjectures.CategoryTheory.Monoidal.IntTensorFamily
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
@@ -3995,11 +3997,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.DualReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional.BaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional.ClosedImmersion
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional.Local
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional.Mates
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExternalHom
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExternalHomMap
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethVerdier
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
@@ -4149,6 +4149,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.VerdierPreservation
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplex
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplexInternalHom
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplexTensorHom
+public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplexVerdierDual
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
 public import WeilConjectures.SixFunctors.Etale.Gabber
 public import WeilConjectures.SixFunctors.Etale.GeometricFrobenius

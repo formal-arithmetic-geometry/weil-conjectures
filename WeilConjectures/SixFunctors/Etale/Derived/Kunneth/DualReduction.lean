@@ -43,6 +43,8 @@ of the existence of isomorphisms.
   `(K₁ ⊗ᴸ K₂) ⊠ (M₁ ⊗ᴸ M₂) ≅ (K₁ ⊠ M₁) ⊗ᴸ (K₂ ⊠ M₂)`.
 - `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_leftDerivedUpperStar_obj`:
   `𝔻_X (Lf^* K) ≅ Rf^! (𝔻_Y K)`.
+- `AlgebraicGeometry.Etale.nonempty_iso_derivedHom_rightDerivedUpperShriek_fst`:
+  `RHom(p_Y^* N, Rp_X^! M) ≅ 𝔻(𝔻M ⊠ N)`.
 - `AlgebraicGeometry.Etale.VerdierDualExternalProduct.nonempty_iso_kunnethVerdier`,
   `AlgebraicGeometry.Etale.VerdierDualExternalProduct.nonempty_iso_externalHom`,
   `AlgebraicGeometry.Etale.VerdierDualExternalProduct.nonempty_iso_exceptional`: the maps
@@ -196,6 +198,37 @@ structure VerdierDualExternalProduct (k : Type u) [Field k] : Prop where
       externalProduct (ModuleCat.{u + 1} Λ) a b ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op P))
         ((verdierDual (ModuleCat.{u + 1} Λ) b).obj (op Q)))
 
+/-- Blueprint `sk-rem-sf-kv-formal`, `rem-sf-kv-formal`: the formal rewriting of the target of
+`κ`. For separated finite-type `k`-schemes `X`, `Y`, `M ∈ Dctf(X, Λ)` and any `N` on `Y`,
+
+`RHom(p_Y^* N, Rp_X^! M) ≅ 𝔻_{X ×_k Y}(𝔻_X M ⊠ N)`.
+
+By biduality (`sk-prop-sf-biduality-general`) and duality against pullback
+(`cor-sf-duality-pullback`), `Rp_X^! M ≅ Rp_X^! 𝔻_X 𝔻_X M ≅ 𝔻(p_X^* 𝔻_X M)`, and the internal
+adjunction `RHom(A, 𝔻 C) ≅ 𝔻(C ⊗ᴸ A)`
+(`AlgebraicGeometry.Etale.derivedHomVerdierDualIso`) with `A = p_Y^* N`, `C = p_X^* 𝔻_X M`
+concludes. -/
+theorem nonempty_iso_derivedHom_rightDerivedUpperShriek_fst {k : Type u} [Field k]
+    [IsAlgClosed k] [HasInvertibleExponent Λ (Spec (.of k))] {X Y : Scheme.{u}}
+    (a : X ⟶ Spec (.of k)) (b : Y ⟶ Spec (.of k)) [IsSeparated a] [LocallyOfFiniteType a]
+    [QuasiCompact a] [HasCompactification b] [QuasiCompact b]
+    [HasCompactification (pullback.fst a b)]
+    {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hM : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M)
+    (N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Nonempty ((RHom(pullback a b)[ModuleCat.{u + 1} Λ].obj
+          (op ((L((pullback.snd a b)^*[ModuleCat.{u + 1} Λ])).obj N))).obj
+        ((R(pullback.fst a b)^![ModuleCat.{u + 1} Λ]).obj M) ≅
+      (verdierDual (ModuleCat.{u + 1} Λ) (pullback.fst a b ≫ a)).obj
+        (op (externalProduct (ModuleCat.{u + 1} Λ) a b
+          ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op M)) N))) := by
+  obtain ⟨e₁⟩ := nonempty_iso_verdierDual_verdierDual Λ a hM
+  obtain ⟨e₂⟩ := nonempty_iso_verdierDual_leftDerivedUpperStar_obj Λ (pullback.fst a b) a
+    (pullback.fst a b ≫ a) rfl ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op M))
+  exact ⟨((RHom(pullback a b)[ModuleCat.{u + 1} Λ]).obj _).mapIso
+      ((R(pullback.fst a b)^![ModuleCat.{u + 1} Λ]).mapIso e₁ ≪≫ e₂.symm) ≪≫
+    derivedHomVerdierDualIso _ (pullback.fst a b ≫ a) _ _⟩
+
 namespace VerdierDualExternalProduct
 
 variable {Λ} {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent Λ (Spec (.of k))]
@@ -207,7 +240,9 @@ duality commutes with external products: for `M ∈ Dctf(X, Λ)` and `N ∈ Dctf
 
 `M ⊠ 𝔻_Y N ≅ RHom(p_Y^* N, Rp_X^! M)`.
 
-Indeed `Rp_X^! M ≅ Rp_X^! 𝔻𝔻M ≅ 𝔻(p_X^* 𝔻M)` and `RHom(p_Y^* N, 𝔻(p_X^* 𝔻M)) ≅ 𝔻(𝔻M ⊠ N)`. -/
+Indeed `RHom(p_Y^* N, Rp_X^! M) ≅ 𝔻(𝔻M ⊠ N)`
+(`AlgebraicGeometry.Etale.nonempty_iso_derivedHom_rightDerivedUpperShriek_fst`), and
+`𝔻(𝔻M ⊠ N) ≅ 𝔻𝔻M ⊠ 𝔻N ≅ M ⊠ 𝔻N`. -/
 theorem nonempty_iso_kunnethVerdier {X Y : Scheme.{u}} (a : X ⟶ Spec (.of k))
     (b : Y ⟶ Spec (.of k)) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a]
     [HasCompactification b] [QuasiCompact b] [HasCompactification (pullback.fst a b)]
@@ -221,14 +256,9 @@ theorem nonempty_iso_kunnethVerdier {X Y : Scheme.{u}} (a : X ⟶ Spec (.of k))
           (op ((L((pullback.snd a b)^*[ModuleCat.{u + 1} Λ])).obj N))).obj
         ((R(pullback.fst a b)^![ModuleCat.{u + 1} Λ]).obj M)) := by
   obtain ⟨e₁⟩ := nonempty_iso_verdierDual_verdierDual Λ a hM
-  have hDM := constructibleFiniteTor_verdierDual Λ a hM
-  obtain ⟨e₂⟩ := nonempty_iso_verdierDual_leftDerivedUpperStar_obj Λ (pullback.fst a b) a
-    (pullback.fst a b ≫ a) rfl ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op M))
-  obtain ⟨e₃⟩ := hδ.nonempty_iso a b hDM hN
-  exact ⟨externalProductMapIso _ a b e₁ (Iso.refl _) ≪≫ e₃.symm ≪≫
-    (derivedHomVerdierDualIso _ (pullback.fst a b ≫ a) _ _).symm ≪≫
-    ((RHom(pullback a b)[ModuleCat.{u + 1} Λ]).obj _).mapIso
-      (e₂ ≪≫ (R(pullback.fst a b)^![ModuleCat.{u + 1} Λ]).mapIso e₁.symm)⟩
+  obtain ⟨e₂⟩ := nonempty_iso_derivedHom_rightDerivedUpperShriek_fst Λ a b hM N
+  obtain ⟨e₃⟩ := hδ.nonempty_iso a b (constructibleFiniteTor_verdierDual Λ a hM) hN
+  exact ⟨externalProductMapIso _ a b e₁ (Iso.refl _) ≪≫ e₃.symm ≪≫ e₂.symm⟩
 
 /-- The external Hom comparison `β` (`sk-def-sf-kv-maps` (iii)) is invertible if Verdier
 duality commutes with external products:

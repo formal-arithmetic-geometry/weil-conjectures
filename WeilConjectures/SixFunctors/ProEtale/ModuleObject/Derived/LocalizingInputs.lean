@@ -157,14 +157,18 @@ section Field
 
 variable (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
 
+set_option hygiene false in
+/-- The condensed field `E̲`. -/
+local notation "𝐄" => Profinite.continuousMapRingObj.{u} E
+
 /-- Blueprint `lem-sfb-dc-tensor-preserves`: `⊗ᴸ` preserves bounded constructible complexes
 (`ℓ`-adic `Λ`); the case `Λ = E̲`. If `K, L ∈ D(Mod_{Λ_X})` are bounded constructible, then
 so is `K ⊗ᴸ_{Λ_X} L`. -/
 theorem boundedConstructible_tensor_continuousMapRingObj
-    {K L : 𝔻[Profinite.continuousMapRingObj.{u} E](X.left)}
-    (hK : boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj.{u} E) X.left) K)
-    (hL : boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj.{u} E) X.left) L) :
-    boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj.{u} E) X.left) (K ⊗ L) :=
+    {K L : 𝔻[𝐄](X.left)}
+    (hK : boundedConstructible (condensedRingObj 𝐄 X.left) K)
+    (hL : boundedConstructible (condensedRingObj 𝐄 X.left) L) :
+    boundedConstructible (condensedRingObj 𝐄 X.left) (K ⊗ L) :=
   sorry
 
 /-- Blueprint `det-thm-sfb-proper-base-change-rational`: Proper direct image, base change and
@@ -172,10 +176,10 @@ projection formula for `E` and `ℚ̄_ℓ`; part (3), the projection formula, fo
 `p : X ⟶ Y` proper, `K ∈ Dbc(X, Λ)` and `M ∈ Dbc(Y, Λ)`, the projection formula map
 `Rp_*K ⊗ᴸ M ⟶ Rp_*(K ⊗ᴸ p^*M)` is an isomorphism. -/
 theorem isIso_projectionMap_continuousMapRingObj (p : X ⟶ Y) [IsProper p.left]
-    {K : 𝔻[Profinite.continuousMapRingObj.{u} E](X.left)} {M : 𝔻[Profinite.continuousMapRingObj.{u} E](Y.left)}
-    (hK : boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj.{u} E) X.left) K)
-    (hM : boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj.{u} E) Y.left) M) :
-    IsIso (((projectionMap (Profinite.continuousMapRingObj.{u} E) p.left).app K).app M) :=
+    {K : 𝔻[𝐄](X.left)} {M : 𝔻[𝐄](Y.left)}
+    (hK : boundedConstructible (condensedRingObj 𝐄 X.left) K)
+    (hM : boundedConstructible (condensedRingObj 𝐄 Y.left) M) :
+    IsIso (((projectionMap 𝐄 p.left).app K).app M) :=
   sorry
 
 /-- Blueprint `sk-prop-proper-image-localizing`: Proper direct image and extension by zero;
@@ -184,10 +188,10 @@ the proper direct image, for `Λ = E̲` (for which `Dctf = Dbc`): for `p : X ⟶
 sums. -/
 theorem localizingBoundedConstructible_rightDerivedLowerStar_continuousMapRingObj (p : X ⟶ Y)
     [IsProper p.left] :
-    (∀ M, localizingBoundedConstructible (Profinite.continuousMapRingObj.{u} E) X.left M →
-      localizingBoundedConstructible (Profinite.continuousMapRingObj.{u} E) Y.left ((R((p.left)_*⟦Profinite.continuousMapRingObj.{u} E⟧)).obj M)) ∧
-    (R((p.left)_*⟦Profinite.continuousMapRingObj.{u} E⟧)).PreservesCoproductsOn.{u + 1}
-      (localizingBoundedConstructible (Profinite.continuousMapRingObj.{u} E) X.left) :=
+    (∀ M, localizingBoundedConstructible 𝐄 X.left M →
+      localizingBoundedConstructible 𝐄 Y.left ((R((p.left)_*⟦𝐄⟧)).obj M)) ∧
+    (R((p.left)_*⟦𝐄⟧)).PreservesCoproductsOn.{u + 1}
+      (localizingBoundedConstructible 𝐄 X.left) :=
   sorry
 
 /-- Blueprint `sk-prop-proper-base-change-unbounded`: Proper base change on the localizing
@@ -196,8 +200,8 @@ categories, for `Λ = E̲` (for which `Dctf = Dbc`): for a cartesian square
 isomorphism for every `K ∈ Loc(Dbc(X, Λ))`. -/
 theorem isIso_baseChangeMap_of_localizing_continuousMapRingObj {p : X ⟶ Y} {g : Y' ⟶ Y}
     {p' : X' ⟶ Y'} {g' : X' ⟶ X} [IsProper p.left] (sq : IsPullback g' p' p g)
-    {K : 𝔻[Profinite.continuousMapRingObj.{u} E](X.left)} (hK : localizingBoundedConstructible (Profinite.continuousMapRingObj.{u} E) X.left K) :
-    IsIso ((baseChangeMap (Profinite.continuousMapRingObj.{u} E) ((Over.forget _).map_commSq sq.toCommSq)).app K) :=
+    {K : 𝔻[𝐄](X.left)} (hK : localizingBoundedConstructible 𝐄 X.left K) :
+    IsIso ((baseChangeMap 𝐄 ((Over.forget _).map_commSq sq.toCommSq)).app K) :=
   sorry
 
 end Field
@@ -206,15 +210,18 @@ end Field
 
 section AlgCl
 
+set_option hygiene false in
+/-- The condensed field `ℚ̲̄_ℓ`. -/
+local notation "𝐐" => Profinite.padicAlgClRingObj.{u} ℓ
 
 /-- Blueprint `lem-sfb-dc-tensor-preserves`: `⊗ᴸ` preserves bounded constructible complexes
 (`ℓ`-adic `Λ`); the case `Λ = ℚ̲̄_ℓ`. If `K, L ∈ D(Mod_{Λ_X})` are bounded constructible, then
 so is `K ⊗ᴸ_{Λ_X} L`. -/
 theorem boundedConstructible_tensor_padicAlgClRingObj
-    {K L : 𝔻[Profinite.padicAlgClRingObj.{u} ℓ](X.left)}
-    (hK : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) X.left) K)
-    (hL : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) X.left) L) :
-    boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) X.left) (K ⊗ L) :=
+    {K L : 𝔻[𝐐](X.left)}
+    (hK : boundedConstructible (condensedRingObj 𝐐 X.left) K)
+    (hL : boundedConstructible (condensedRingObj 𝐐 X.left) L) :
+    boundedConstructible (condensedRingObj 𝐐 X.left) (K ⊗ L) :=
   sorry
 
 /-- Blueprint `det-thm-sfb-proper-base-change-rational`: Proper direct image, base change and
@@ -222,10 +229,10 @@ projection formula for `E` and `ℚ̄_ℓ`; part (3), the projection formula, fo
 `p : X ⟶ Y` proper, `K ∈ Dbc(X, Λ)` and `M ∈ Dbc(Y, Λ)`, the projection formula map
 `Rp_*K ⊗ᴸ M ⟶ Rp_*(K ⊗ᴸ p^*M)` is an isomorphism. -/
 theorem isIso_projectionMap_padicAlgClRingObj (p : X ⟶ Y) [IsProper p.left]
-    {K : 𝔻[Profinite.padicAlgClRingObj.{u} ℓ](X.left)} {M : 𝔻[Profinite.padicAlgClRingObj.{u} ℓ](Y.left)}
-    (hK : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) X.left) K)
-    (hM : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) Y.left) M) :
-    IsIso (((projectionMap (Profinite.padicAlgClRingObj.{u} ℓ) p.left).app K).app M) :=
+    {K : 𝔻[𝐐](X.left)} {M : 𝔻[𝐐](Y.left)}
+    (hK : boundedConstructible (condensedRingObj 𝐐 X.left) K)
+    (hM : boundedConstructible (condensedRingObj 𝐐 Y.left) M) :
+    IsIso (((projectionMap 𝐐 p.left).app K).app M) :=
   sorry
 
 /-- Blueprint `sk-prop-proper-image-localizing`: Proper direct image and extension by zero;
@@ -234,10 +241,10 @@ the proper direct image, for `Λ = ℚ̲̄_ℓ` (for which `Dctf = Dbc`): for `p
 sums. -/
 theorem localizingBoundedConstructible_rightDerivedLowerStar_padicAlgClRingObj (p : X ⟶ Y)
     [IsProper p.left] :
-    (∀ M, localizingBoundedConstructible (Profinite.padicAlgClRingObj.{u} ℓ) X.left M →
-      localizingBoundedConstructible (Profinite.padicAlgClRingObj.{u} ℓ) Y.left ((R((p.left)_*⟦Profinite.padicAlgClRingObj.{u} ℓ⟧)).obj M)) ∧
-    (R((p.left)_*⟦Profinite.padicAlgClRingObj.{u} ℓ⟧)).PreservesCoproductsOn.{u + 1}
-      (localizingBoundedConstructible (Profinite.padicAlgClRingObj.{u} ℓ) X.left) :=
+    (∀ M, localizingBoundedConstructible 𝐐 X.left M →
+      localizingBoundedConstructible 𝐐 Y.left ((R((p.left)_*⟦𝐐⟧)).obj M)) ∧
+    (R((p.left)_*⟦𝐐⟧)).PreservesCoproductsOn.{u + 1}
+      (localizingBoundedConstructible 𝐐 X.left) :=
   sorry
 
 /-- Blueprint `sk-prop-proper-base-change-unbounded`: Proper base change on the localizing
@@ -246,8 +253,8 @@ categories, for `Λ = ℚ̲̄_ℓ` (for which `Dctf = Dbc`): for a cartesian squ
 isomorphism for every `K ∈ Loc(Dbc(X, Λ))`. -/
 theorem isIso_baseChangeMap_of_localizing_padicAlgClRingObj {p : X ⟶ Y} {g : Y' ⟶ Y}
     {p' : X' ⟶ Y'} {g' : X' ⟶ X} [IsProper p.left] (sq : IsPullback g' p' p g)
-    {K : 𝔻[Profinite.padicAlgClRingObj.{u} ℓ](X.left)} (hK : localizingBoundedConstructible (Profinite.padicAlgClRingObj.{u} ℓ) X.left K) :
-    IsIso ((baseChangeMap (Profinite.padicAlgClRingObj.{u} ℓ) ((Over.forget _).map_commSq sq.toCommSq)).app K) :=
+    {K : 𝔻[𝐐](X.left)} (hK : localizingBoundedConstructible 𝐐 X.left K) :
+    IsIso ((baseChangeMap 𝐐 ((Over.forget _).map_commSq sq.toCommSq)).app K) :=
   sorry
 
 end AlgCl

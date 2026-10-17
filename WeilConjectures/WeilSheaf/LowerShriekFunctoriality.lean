@@ -175,8 +175,19 @@ theorem exists_distTriang_derivedLowerShriek_openClosed (j : U ⟶ X) [IsOpenImm
     ∃ T ∈ distTriang (WeilComplex k₀ l Y),
       Nonempty (T.obj₁ ≅ (derivedLowerShriek k₀ l (j ≫ f)).obj ((upperStar j).obj K)) ∧
       Nonempty (T.obj₂ ≅ (derivedLowerShriek k₀ l f).obj K) ∧
-      Nonempty (T.obj₃ ≅ (derivedLowerShriek k₀ l (i ≫ f)).obj ((upperStar i).obj K)) :=
-  sorry
+      Nonempty (T.obj₃ ≅ (derivedLowerShriek k₀ l (i ≫ f)).obj ((upperStar i).obj K)) := by
+  have hX : f ≫ Y ↘ Spec (CommRingCat.of k₀) = X ↘ Spec (CommRingCat.of k₀) :=
+    Scheme.Hom.comp_over f _
+  have : LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)) := hX ▸ inferInstance
+  have : QuasiCompact (X ↘ Spec (CommRingCat.of k₀)) := hX ▸ inferInstance
+  have : QuasiSeparated (X ↘ Spec (CommRingCat.of k₀)) := hX ▸ inferInstance
+  obtain ⟨T, hT, ⟨e₁⟩, ⟨e₂⟩, ⟨e₃⟩⟩ := exists_distTriang_openClosed j i hij K
+  obtain ⟨cj⟩ := nonempty_derivedLowerShriek_comp_iso (l := l) j f
+  obtain ⟨ci⟩ := nonempty_derivedLowerShriek_comp_iso (l := l) i f
+  let F := derivedLowerShriek k₀ l f
+  exact ⟨F.mapTriangle.obj T, F.map_distinguished _ hT, ⟨F.mapIso e₁ ≪≫ (cj.app _).symm⟩,
+    ⟨F.mapIso e₂⟩, ⟨F.mapIso (e₃ ≪≫ (derivedLowerShriekObjIsoDerivedLowerStar i _).symm) ≪≫
+      (ci.app _).symm⟩⟩
 
 /-- **Base change for the direct image with compact support** (blueprint: `prop-functor-package`,
 clause 4, `g^*Rf_! ≃ Rf'_!g'^*` for arbitrary base change, and `thm-cbc-qbar`): for a cartesian

@@ -30,13 +30,13 @@ The arguments extending the statements from `Dbc` to `Loc(Dbc)` are those of
 
 ## Main statements
 
-- `AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_of_isOpenImmersion_padicIntegersRingObj`
+- `boundedConstructible_rightDerivedLowerStar_of_isOpenImmersion_padicIntegersRingObj`
   (`det-thm-sf-pf-adic-open`);
-- `AlgebraicGeometry.ProEtale.CondensedRing.isIso_baseChangeMap_of_localizingBoundedConstructible_padicIntegersRingObj`
+- `isIso_baseChangeMap_of_localizingBoundedConstructible_padicIntegersRingObj`
   (`det-thm-sf-pf-adic-base-change`);
-- `AlgebraicGeometry.ProEtale.CondensedRing.isIso_projectionMap_of_localizingBoundedConstructible_padicIntegersRingObj`
+- `isIso_projectionMap_of_localizingBoundedConstructible_padicIntegersRingObj`
   (`det-thm-sf-pf-adic-projection`);
-- `AlgebraicGeometry.ProEtale.CondensedRing.openDirectImage_baseChange_projectionFormula_padicIntegersRingObj`
+- `openDirectImage_baseChange_projectionFormula_padicIntegersRingObj`
   (`sk-thm-sf-pf-adic`).
 -/
 

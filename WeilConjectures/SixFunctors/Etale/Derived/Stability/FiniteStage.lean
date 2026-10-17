@@ -23,7 +23,7 @@ complexes of finite Tor amplitude, with explicit Tor intervals, the exceptional 
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_verdierDual`
+- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar`
   (`thm-sf-ctf-stability` (v)): `Rf^! K ≅ 𝔻_X Lf^* 𝔻_Y K` for `K ∈ Dctf(Y, Λ)`.
 - `AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedUpperShriek_of_verdierDual`
   (`thm-sf-ctf-stability` (v)): the Tor interval `[a - 2 dim X, b + 2 dim Y]` of `Rf^! K`.
@@ -71,7 +71,8 @@ For a morphism `f : X ⟶ Y` of separated finite-type `k`-schemes over `k` and `
 
 By biduality (`sk-prop-sf-biduality-general`) `K ≅ 𝔻_Y 𝔻_Y K`, and duality against pullback
 (`cor-sf-duality-pullback`) gives `𝔻_X Lf^* 𝔻_Y K ≅ Rf^! 𝔻_Y 𝔻_Y K`. -/
-theorem nonempty_iso_rightDerivedUpperShriek_verdierDual (f : X ⟶ Y) (hf : f ≫ aY = aX)
+theorem nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar
+    (f : X ⟶ Y) (hf : f ≫ aY = aX)
     [HasCompactification f]
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K) :
@@ -90,7 +91,8 @@ theorem nonempty_iso_rightDerivedUpperShriek_verdierDual (f : X ⟶ Y) (hf : f �
 amplitude in `[a - 2 d_X, b + 2 d_Y]`.
 
 Indeed `Rf^! K ≅ 𝔻_X Lf^* 𝔻_Y K`
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_verdierDual`); the duality bound
+(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar`);
+the duality bound
 (`lem-weil-verdier-preservation-strata`) on `Y` gives `𝔻_Y K` the interval `[-b - 2 d_Y, -a]`,
 pullback preserves it, and the duality bound on `X` gives `[a - 2 d_X, b + 2 d_Y]`. -/
 theorem torAmplitudeIn_rightDerivedUpperShriek_of_verdierDual (f : X ⟶ Y) (hf : f ≫ aY = aX)
@@ -101,7 +103,8 @@ theorem torAmplitudeIn_rightDerivedUpperShriek_of_verdierDual (f : X ⟶ Y) (hf 
     (hKt : torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K) :
     torAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * (dX : ℤ)) (b + 2 * (dY : ℤ))
       ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
-  obtain ⟨e⟩ := nonempty_iso_rightDerivedUpperShriek_verdierDual Λ aX aY f hf hK
+  obtain ⟨e⟩ :=
+    nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar Λ aX aY f hf hK
   have hD := constructibleFiniteTor_verdierDual Λ aY hK
   have hDt := torAmplitudeIn_verdierDual Λ aY dY hdY a b hK.1 hKt
   have hP := constructibleFiniteTor_leftDerivedUpperStar _ f hD
@@ -250,11 +253,12 @@ theorem constructibleFiniteTor_stability (f : X ⟶ Y) (hf : f ≫ aY = aX) [Has
     fun d hd a b K hK ↦ torAmplitudeIn_rightDerivedLowerStar_of_finite Λ aX aY f hf d hd a b hK,
     fun K hK ↦ constructibleFiniteTor_rightDerivedLowerShriek Λ aY f hK,
     fun K hK ↦ ⟨constructibleFiniteTor_rightDerivedUpperShriek Λ aY f hK,
-      nonempty_iso_rightDerivedUpperShriek_verdierDual Λ aX aY f hf hK⟩,
+      nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar Λ aX aY f hf hK⟩,
     fun dX dY hdX hdY a b K hK hKt ↦
       torAmplitudeIn_rightDerivedUpperShriek_of_verdierDual Λ aX aY f hf dX dY hdX hdY a b hK hKt,
-    fun K hK ↦ ⟨constructibleFiniteTor_verdierDual Λ aX hK, isIso_verdierDualDoubleDual_app Λ aX hK⟩,
-    fun T hT ↦ exists_distTriang_derivedHom_left _ _ T hT⟩
+    fun K hK ↦ ⟨constructibleFiniteTor_verdierDual Λ aX hK,
+      isIso_verdierDualDoubleDual_app Λ aX hK⟩,
+    fun T hT ↦ exists_distTriang_derivedHom_left _ T hT⟩
   obtain ⟨e⟩ := nonempty_iso_coefficientDual_tensor hKp.isDualizable M
   exact ⟨e.symm⟩
 

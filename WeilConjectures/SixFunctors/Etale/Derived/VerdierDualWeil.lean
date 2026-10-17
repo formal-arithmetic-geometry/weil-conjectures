@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.WeilEquivariance
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
 
 /-!
@@ -243,6 +244,23 @@ theorem isWeilEquivariant_verdierDual_curry
     IsWeilEquivariant L((g)^*[A]) ψ (verdierDualWeilDatum A a φ φω) (MonoidalClosed.curry b) :=
   MonoidalClosed.isWeilEquivariant_curry _ φ ψ φω hb
 
+
+attribute [local instance] derivedBraidedCategory in
+/-- Blueprint `cor-coef-verdier-weil-equivariance`: **biduality is Weil equivariant**. For a
+strict Weil datum `φ` on `K` and a Weil datum `φ_ω` on `ω_X` such that the dual Weil datum on
+`𝔻_X K` (`AlgebraicGeometry.Etale.verdierDualWeilDatum`) is invertible (for instance an
+automorphism `g` and an invertible `φ_ω`), the double-dual map `δ_K : K ⟶ 𝔻_X 𝔻_X K` is a
+morphism of Weil objects from `φ` to the dual of the dual datum. This uses that `Lg^*` is
+braided (`AlgebraicGeometry.Etale.leftDerivedUpperStar_μ_map_braiding_hom`). -/
+theorem isWeilEquivariant_verdierDualDoubleDual
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (φ : (L((g)^*[A])).obj K ≅ K)
+    (φω : (L((g)^*[A])).obj (dualizingComplex A a) ⟶ dualizingComplex A a)
+    [IsIso (verdierDualWeilDatum A a φ φω)] :
+    IsWeilEquivariant L((g)^*[A]) φ.hom
+      (verdierDualWeilDatum A a (asIso (verdierDualWeilDatum A a φ φω)) φω)
+      ((verdierDualDoubleDual A a).app K) :=
+  letI : (L((g)^*[A])).Braided := { braided := leftDerivedUpperStar_μ_map_braiding_hom A g }
+  MonoidalClosed.isWeilEquivariant_toIhomIhom _ φ φω _ rfl
 end DualWeilDatum
 
 section Dualizing

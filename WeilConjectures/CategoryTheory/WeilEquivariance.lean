@@ -6,7 +6,9 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Adjunction.Mates
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 
 /-!
 # Weil equivariance of adjunction data and of duals
@@ -38,6 +40,11 @@ for an autoequivalence `G` it is `G [A, ω] ≅ [G A, G ω] ──[G A, φ_ω]�
 `B ⟶ [A, ω]` of an equivariant pairing `A ⊗ B ⟶ ω` is equivariant
 (`CategoryTheory.MonoidalClosed.isWeilEquivariant_curry`). No integral lattice of `φ_A` is
 needed: the construction only uses `φ_A` and its inverse.
+
+**Biduality.** If moreover `C` is braided and `G` is a braided functor, the braiding is
+equivariant (`CategoryTheory.MonoidalClosed.isWeilEquivariant_braiding`), and so is the
+double-dual map `A ⟶ [[A, ω], ω]` for `φ_A` and the dual of the dual Weil datum, provided the
+dual Weil datum is invertible (`CategoryTheory.MonoidalClosed.isWeilEquivariant_toIhomIhom`).
 -/
 
 @[expose] public section
@@ -208,6 +215,64 @@ lemma isWeilEquivariant_curry {A B ω : C} (φA : G.obj A ≅ A) (φB : G.obj B 
     ← Functor.map_comp_assoc, whiskerLeft_curry_ihom_ev_app, hb]
   simp only [Category.assoc, MonoidalCategory.whiskerLeft_comp, whiskerLeft_curry_ihom_ev_app,
     Monoidal.μ_δ_assoc, inv_hom_whiskerRight_assoc]
+
+/-- The dual Weil datum is the composite
+`G [A, ω] ──comparison──▶ [G A, G ω] ──[G A, φ_ω]──▶ [G A, ω] ──[φ_A⁻¹, ω]──▶ [A, ω]`, the first
+map being the internal-hom comparison of `G` (`CategoryTheory.Functor.LaxMonoidal.ihomComparison`).
+-/
+lemma dualWeilDatum_eq {A ω : C} (φA : G.obj A ≅ A) (φω : G.obj ω ⟶ ω) :
+    dualWeilDatum G φA φω = (LaxMonoidal.ihomComparison G A).natTrans.app ω ≫
+      (ihom (G.obj A)).map φω ≫ (pre φA.inv).app ω := by
+  apply uncurry_injective
+  rw [dualWeilDatum, uncurry_curry]
+  conv_rhs => rw [← Category.assoc, uncurry_pre_app, uncurry_natural_right,
+    LaxMonoidal.ihomComparison_app_eq_curry, uncurry_curry]
+  simp only [Category.assoc]
+
+/-- For a monoidal autoequivalence `G` and an invertible Weil datum `φ_ω`, the dual Weil datum is
+invertible: the internal-hom comparison of a monoidal equivalence is an isomorphism
+(`CategoryTheory.isIso_mateEquiv_of_isEquivalence`). -/
+instance isIso_dualWeilDatum [G.IsEquivalence] {A ω : C} (φA : G.obj A ≅ A) (φω : G.obj ω ⟶ ω)
+    [IsIso φω] : IsIso (dualWeilDatum G φA φω) := by
+  have : IsIso (LaxMonoidal.μTwoSquare G A).natTrans := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro X
+    dsimp [LaxMonoidal.μTwoSquare]
+    infer_instance
+  have := isIso_mateEquiv_of_isEquivalence (ihom.adjunction A) (ihom.adjunction (G.obj A))
+    (LaxMonoidal.μTwoSquare G A)
+  rw [dualWeilDatum_eq]
+  change IsIso ((LaxMonoidal.ihomComparison G A).natTrans.app ω ≫ _ ≫ _)
+  infer_instance
+
+end MonoidalClosed
+
+namespace MonoidalClosed
+
+variable {C : Type*} [Category* C] [MonoidalCategory C] [BraidedCategory C] (G : C ⥤ C)
+  [G.Braided]
+
+/-- **The braiding is Weil equivariant** for a braided functor `G`: `A ⊗ B ⟶ B ⊗ A` is
+equivariant for the tensor products `φ_A ⊗ φ_B` and `φ_B ⊗ φ_A`. -/
+lemma isWeilEquivariant_braiding {A B : C} (φA : G.obj A ⟶ A) (φB : G.obj B ⟶ B) :
+    IsWeilEquivariant G (tensorWeilDatum G φA φB) (tensorWeilDatum G φB φA) (β_ A B).hom := by
+  rw [IsWeilEquivariant, tensorWeilDatum, tensorWeilDatum, Functor.map_braiding,
+    Category.assoc, Category.assoc, Monoidal.μ_δ_assoc, ← whisker_exchange]
+  simp only [Category.assoc, BraidedCategory.braiding_naturality_right,
+    BraidedCategory.braiding_naturality_left_assoc]
+
+/-- **Biduality is Weil equivariant** for a braided functor `G`: for an invertible Weil datum
+`φ_A` on `A` and a Weil datum `φ_ω` on `ω` such that the dual Weil datum on `[A, ω]` is
+invertible (given as `ψ`), the double-dual map `A ⟶ [[A, ω], ω]` is equivariant for `φ_A` and
+the dual of the dual Weil datum. -/
+lemma isWeilEquivariant_toIhomIhom [MonoidalClosed C] {A ω : C} (φA : G.obj A ≅ A)
+    (φω : G.obj ω ⟶ ω) (ψ : G.obj ((ihom A).obj ω) ≅ (ihom A).obj ω)
+    (hψ : ψ.hom = dualWeilDatum G φA φω) :
+    IsWeilEquivariant G φA.hom (dualWeilDatum G ψ φω) (toIhomIhom ω A) := by
+  refine isWeilEquivariant_curry G ψ φA.hom φω ?_
+  have hev := isWeilEquivariant_ev G φA φω
+  rw [← hψ] at hev
+  exact (isWeilEquivariant_braiding G ψ.hom φA.hom).comp hev
 
 end MonoidalClosed
 
