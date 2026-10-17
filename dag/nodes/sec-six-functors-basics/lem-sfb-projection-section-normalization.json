@@ -20,49 +20,82 @@
   "sk-def-sfb-module-pushforward-pullback",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Transport to ringed topoi. By [lem-pd-module-ringed-topos-derived-comparison], for each scheme $T$ of the setting the equivalence $E_T$ between $R_T$-module objects on $T_{\\mathrm{pro\\acute et}}$ and sheaves of modules over the section-ring sheaf of $R_T$ (on the small pro-etale site) induces an equivalence of the ordinary unbounded derived categories [sk-def-sfb-module-derived-pushpull]. It identifies the K-flat derived tensors [sk-def-sfb-derived-tensor-hom] and their units, the derived module-object pullback and direct image with ringed-topos $Lh^*$ and $Rh_*$, the derived adjunction [def-sfb-module-derived-pushpull-adjunction] with its unit and counit, the pullback composition comparisons, and the pullback/tensor comparison with the ringed-topos isomorphism of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Hence the item's $\\pi_{h,L,N}$, the adjoint transpose of $(1\\otimes c_{h,N})$ after that comparison, is carried to the ringed-topos projection map of [lem-sfb-ringed-projection-tensor-composition] (up to the tensor symmetry fixed there). The direct-image composition isomorphism is the mate of the pullback composition isomorphism under the adjunctions ([sk-def-sfb-module-pushforward-pullback] deduces one from the other by uniqueness of adjoints), so it is carried to the ringed-topos comparison of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. The sites and commutative pulled-back rings come from [sk-def-sfb-dc-setting].\n\nApply [lem-sfb-ringed-projection-tensor-composition], final clause, to the ringed-topos morphisms induced by\n$i:X\\to V$ and $r:V\\to X$, with the section-specialization parameters\n$p=r$, $W=V$, $V$ (in the cited lemma) equal to $R_X$, and $M$ as in this statement.\nThe equality $ri=1_X$ of $k$-morphisms supplies the specified composite\nisomorphism of the induced ringed-topos morphisms. In the cited section specialization, tensor symmetry identifies its first\nprojection arrow with\n$\\pi_{r,M,Ri_*R_X}:M\\otimes Ri_*R_X\\to Rr_*(r^*M\\otimes Ri_*R_X)$, while its second\narrow is $Rr_*$ applied to the $i$-projection map $\\pi_{i,r^*M,R_X}$. After the canonical identification\n$i^*r^*M\\simeq M$ and the unit isomorphism $M\\otimes R_X\\simeq M$, that $i$-projection map is exactly the displayed $a_M$; the canonical\ncomposition $Rr_*Ri_*\\simeq1$ is the same identification used in the cited lemma.\nTherefore its identity composite, conjugated by the unit isomorphism $M\\otimes R_X\\simeq M$, is precisely\n$Rr_*(a_M)\\circ\\pi_{r,M,Ri_*R_X}=1_M$. The inverted form follows by inverting both sides when the projection maps are isomorphisms.",
+   "uses": [
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "lem-sfb-ringed-projection-tensor-composition",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-def-sfb-module-derived-pushpull",
+    "def-sfb-module-derived-pushpull-adjunction",
+    "sk-def-sfb-derived-tensor-hom",
+    "sk-def-sfb-dc-setting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+    "place": "(1), diagonal projection identification and the cancellations on p_i Delta = id"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "lem-sfb-ringed-projection-tensor-composition",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-module-derived-pushpull-adjunction",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-dc-setting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+  "place": "(1), diagonal projection identification and the cancellations on p_i Delta = id; specialization of the cited projection-coherence lemma"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "For a proper projection and diagonal section, the projection formula map composed with diagonal tensor identification is the identity",
-   "results": "8 hits; Algebra.FormallyUnramified.comp_sec, TypeVec.snd_diag, TypeVec.fst_diag, Profinite.NobelingProof.projRestricts_eq_id, retractionOfSectionOfKerSqZero_comp_kerToTensor, TrivSqZeroExt.fst_comp_inl, CategoryTheory.Limits.pullback.diagonal_snd, ContinuousLinearMap.fst_comp_inl",
+   "query": "For a proper retraction with a closed section, the derived projection formula map composed with the section projection map is the identity",
+   "results": "8 hits: SeparationQuotient.mk_comp_outCLM; Profinite.NobelingProof.projRestricts_eq_id; SeparationQuotient.mkCLM_comp_outCLM; ContinuousLinearMap.fst_comp_inl; ContinuousLinearMap.snd_comp_inr; TrivSqZeroExt.fst_comp_inl; Submodule.linearProjOfIsCompl_comp_subtype; TrivSqZeroExt.snd_comp_inr",
    "date": "2026-10-17",
-   "verdict": "No match: the returned facts concern ordinary module/ring trace, scheme fibre products, or abstract adjunctions; none states this derived projection/trace compatibility."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "For a proper morphism with a closed section, composition of the two canonical tensor projection formula maps agrees with the identity under direct image of the section",
-   "results": "8 hits; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst_assoc, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField",
-   "date": "2026-10-17",
-   "verdict": "No match: the returned facts concern ordinary module/ring trace, scheme fibre products, or abstract adjunctions; none states this derived projection/trace compatibility."
+   "verdict": "no match: none states the derived ringed-topos projection identity"
   },
   {
    "tool": "loogle",
-   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor",
-   "results": "12 hits; CategoryTheory.Adjunction, CategoryTheory.Adjunction.isLeftAdjoint, CategoryTheory.Adjunction.isRightAdjoint, CategoryTheory.Adjunction.mk', CategoryTheory.Adjunction.mkOfHomEquiv, CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.ofIsLeftAdjoint, CategoryTheory.Adjunction.ofIsRightAdjoint",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor, projection formula",
+   "results": "0 hits; loogle reports unknown identifier projection",
    "date": "2026-10-17",
-   "verdict": "No match: the returned facts concern ordinary module/ring trace, scheme fibre products, or abstract adjunctions; none states this derived projection/trace compatibility."
+   "verdict": "no match: no Mathlib projection-formula declaration for this derived statement"
   },
   {
    "tool": "grep",
-   "query": "projectionMap|rightAdjointProjectionMap",
-   "results": "0 hits; ",
+   "query": "projection.*formula|projection.*composition|counit.*tensor [CategoryTheory]",
+   "results": "17 hits in Mathlib CategoryTheory files, including CategoryTheory.Monoidal.Functor.map_μ_comp_counit_app_tensor; none is the unbounded ringed-topos statement",
    "date": "2026-10-17",
-   "verdict": "No match: the returned facts concern ordinary module/ring trace, scheme fibre products, or abstract adjunctions; none states this derived projection/trace compatibility.",
-   "subdirectory": "CategoryTheory"
+   "verdict": "no match: abstract monoidal identities do not state this derived projection/section normalization"
   },
   {
    "tool": "leansearch",
-   "query": "Projection formula normalization for a diagonal closed section and its proper projection",
-   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.IsImmersion.instDiagonalScheme, AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc",
+   "query": "Derived projection formula normalization for a proper map with a closed section",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization; AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom; IsProperMap.isClosedMap; normalization morphism declarations; none is the target",
    "date": "2026-10-17",
-   "verdict": "No match: the returned facts concern ordinary module/ring trace, scheme fibre products, or abstract adjunctions; none states this derived projection/trace compatibility."
+   "verdict": "no match: hits concern scheme normalization/proper maps, not derived projection mates"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of canonical projection formula morphisms for a morphism and a section whose composite is identity",
+   "results": "8 hits: CategoryTheory.SmallObject.ιObj_πObj; CategoryTheory.section_comp_left_assoc; CategoryTheory.section_comp_right_assoc; CategoryTheory.section_comp_left; CategoryTheory.section_comp_right; CategoryTheory.IsSplitCoequalizer.rightSection_π; CategoryTheory.Factorisation.ι_π; CategoryTheory.IsSplitCoequalizer.rightSection_π_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: categorical section identities do not supply the derived projection formula compatibility"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-thm-int-restriction-line",
@@ -79,5 +112,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sfb-projection-section-normalization",
+  "worker": "stage1",
+  "summary": "Kept the imported statement and proved it in one specialization step: the existing ringed-topos projection-coherence lemma gives the identity for a morphism with a section, and its tensor-symmetry convention identifies the two arrows with the item’s projection map and Rr_*(a_M). Checked the condensed pro-etale categories supply the cited ringed-topos hypotheses and that ri=1 gives the required canonical comparisons. No new nodes were needed. Maintainer reader (Q94): added the explicit module-object/ringed-topos comparison lem-pd-module-ringed-topos-derived-comparison and the derived pushforward-composition comparison to the step, which had transported the ringed-topos lemma to module objects by definition nodes alone.",
+  "blueprint": "det-thm-int-restriction-line, proof clause (1): diagonal projection identification and cancellations on p_i Delta = id.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-ringed-projection-tensor-composition",
+    "why": "Generic ringed-topos coherence of projection-formula mates, section specialization; its unit sk-prop-p1-adjunction-rational is cited by sk-thm-int-restriction, so this is in route as well."
+   },
+   {
+    "node": "lem-pd-module-ringed-topos-derived-comparison",
+    "why": "Generic identification of the module-object derived tensor, pullback/direct image, adjunction and tensor comparison with the ringed-topos constructions, needed to apply the ringed-topos lemma; no node of the unit states it (the sibling det-prop-p1-adjunction-rational-triangle uses it the same way)."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic derived direct-image composition comparison Rr_*Ri_* = R(ri)_* for ringed topoi, the comparison used by the cited coherence lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-ringed-projection-tensor-composition",
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-2a664e3fb",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-2a664e3fb (reviewer sub-agent of L); spot-checked: I read the item, its one step, unit sk-thm-int-restriction and the blueprint sk-thm-int-restriction-line.proof.md clause (1). Its citer det-thm-int-restriction-line uses it with r=p_i and i=Delta. I read every cited statement in full, including the final section clause of lem-sfb-ringed-projection-tensor-composition. The math is correct. Up to tensor symmetry, the two pi conventions agree. The second coherence identity with f=i, g=r and pi_id=1 gives Rr_*(a_M) o pi_{r,M,Ri_*R_X}=1_M, modulo the unitor M (x) R_X = M, which is now explicit. The inverted clause follows by inverting both sides. Only ri=1 is used; properness, the closed-immersion property and M in L(X) are not needed. Small cases r=i=1, M=0, and X=Spec k with V=P^1_k, its 0-section and M=R_X all check. One fault (C4/E5): the step moved the ringed-topos lemma over to module objects in D(Mod_{R_Z}) citing only definition nodes, which do not state that comparison. FIX: the step now cites lem-pd-module-ringed-topos-derived-comparison (reviewed; it identifies the derived categories, tensors, Lf*/Rf_*, the adjunction with unit and counit, pullback composition and the tensor comparison, as already done in det-prop-p1-adjunction-rational-triangle). It also cites lem-weil-pbc-ringed-topoi-derived-pushforward-composition, since the direct-image composition is the mate of the pullback one. uses/proof_deps were updated and split_report.tool_uses declares both nodes. I accept all tool uses; the projection-coherence lemma is also within route, through sk-prop-p1-adjunction-rational. There are no new nodes, no duplicates, no cycle (reachability checked) and no SGA. The statement is unchanged. Details are in review.md; the corrected item is under fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
  }
 }

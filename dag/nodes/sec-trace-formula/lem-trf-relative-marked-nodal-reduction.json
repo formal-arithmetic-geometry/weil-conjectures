@@ -22,41 +22,108 @@
   "def-weil-closed-immersion",
   "def-weil-finite-integral-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the marked semistable alteration theorem [lem-trf-dejong-relative-marked-semistable] to $(X\\to Y,Z)$. Its hypotheses are exactly the present proper dominant map, excellent integral Noetherian schemes, projective base over an affine Noetherian scheme, smooth irreducible generic curve, and generically etale nowhere-dense closed boundary. We obtain a commutative square $f\\circ a=b\\circ f'$ with $a$ proper dominant generically finite and $b$ projective dominant generically finite in the EGA/ILO projective-bundle convention, excellent integral sources, and a projective flat finitely presented nodal curve $f'$. The same theorem supplies connected pure one-dimensional geometric fibres, a smooth geometrically integral generic fibre, an effective Cartier divisor $D$ in the relative smooth locus which is proper etale over $Y'$, a nowhere-dense closed subset $T'\\subset Y'$ over which smoothness may fail, and $a^{-1}(|Z|)\\subset |D|\\cup(f')^{-1}(T')$.",
+   "uses": [
+    "lem-trf-dejong-relative-marked-semistable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX, Theorem 1.2 (i), (iii)--(vi), printed p. 131"
+   }
+  },
+  {
+   "text": "Convert the source projective-bundle assertions to the DAG H-projective convention. The H-projective hypothesis on $Y\\to\\operatorname{Spec}R$ supplies an ample invertible sheaf on $Y$ by [lem-weil-pbc-projective-ample-invertible]. Therefore [lem-trf-projective-bundle-to-h-projective] makes $b:Y'\\to Y$ H-projective. Composing with the H-projective structure morphism $Y\\to\\operatorname{Spec}R$ and applying [lem-trf-h-projective-composition] makes $Y'\\to\\operatorname{Spec}R$ H-projective; [lem-weil-pbc-projective-ample-invertible] then supplies an ample invertible sheaf on $Y'$. Apply [lem-trf-projective-bundle-to-h-projective] to the projective-bundle morphism $f':X'\\to Y'$ to obtain H-projectivity of $f'$. The alteration $a$ is used only with its properness, exactly as asserted.",
+   "uses": [
+    "def-kun-projective",
+    "def-trf-projective-bundle-morphism",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-weil-pbc-projective-ample-invertible",
+    "lem-trf-projective-bundle-to-h-projective",
+    "lem-trf-h-projective-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 087S (morphisms-lemma-projective-over-quasi-projective-is-H-projective) and 01WE (morphisms-lemma-H-projective-composition), with Tag 01PS for ample invertible sheaves"
+   }
+  },
+  {
+   "text": "Set $T:=T'$ using the closed nowhere-dense subset supplied by [lem-trf-dejong-relative-marked-semistable]. Its statement gives that $f'$ is smooth over $Y'\\setminus T$ and that $a^{-1}(|Z|)\\subset |D|\\cup(f')^{-1}(T)$, so these are exactly the required clauses for the item.",
+   "uses": [
+    "lem-trf-dejong-relative-marked-semistable"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX, Theorem 1.2 (iv), (vi), printed p. 131"
+   }
+  },
+  {
+   "text": "The divisor map $D\\to Y'$ is etale and proper by Step 1. By [def-weil-etale-morphism] it is unramified, and [lem-weil-pbc-unramified-quasi-finite-at-points] therefore makes it locally quasi-finite. The proper locally quasi-finite finiteness criterion [pqf-lem-proper-lqf-finite] then makes $D\\to Y'$ finite. The Cartier and relative-smooth-locus assertions are unchanged. All remaining clauses, including the ordinary-double-point completed local-ring description and the unrestricted alteration degree, are precisely those supplied in Step 1.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "pqf-lem-proper-lqf-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GI (definition-etale), 02V5 (lemma-unramified-quasi-finite), and 02LS (proper locally quasi-finite implies finite)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-projective",
+  "def-trf-projective-bundle-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-trf-dejong-relative-marked-semistable",
+  "lem-trf-h-projective-composition",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "pqf-lem-proper-lqf-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf; literature/stacks-project/curves.tex; literature/stacks-project/morphisms.tex",
+  "place": "Expose IX Theorem 1.2 and Stacks 0C59, 0C5B, 087S, 01WE"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "A proper relative curve with smooth irreducible generic fibre admits projective alterations of source and base making it a flat nodal curve with geometrically connected fibres and marked etale boundary.",
-   "results": "{\"t\": \"2026-10-17T15:24:46Z\", \"tool\": \"leanfinder\", \"query\": \"A proper relative curve with smooth irreducible generic fibre admits projective alterations of source and base making it a flat nodal curve with geometrically connected fibres and marked etale boundary.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\"], \"digest\": \"2508df6efd10c9aa\"}; Read returned signatures: smooth-chart/base-change, Weierstrass-curve, field-theory or ordinary normalization facts do not assert this geometric existence or nodal-family theorem.",
-   "date": "2026-10-17",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Semistable reduction of a relative curve after altering source and base, with a marked divisor etale over the base.",
-   "results": "{\"t\": \"2026-10-17T15:25:05Z\", \"tool\": \"leansearch\", \"query\": \"Semistable reduction of a relative curve after altering source and base, with a marked divisor etale over the base.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction.mk\", \"AlgebraicGeometry.IsEtale\", \"WeierstrassCurve.reduction\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"WeierstrassCurve.baseChange_integralModel_eq\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\"], \"digest\": \"09ffb0d58b2d9c87\"}; Read returned signatures: smooth-chart/base-change, Weierstrass-curve, field-theory or ordinary normalization facts do not assert this geometric existence or nodal-family theorem.",
+   "query": "A proper dominant morphism of excellent integral Noetherian schemes with smooth irreducible one-dimensional generic fibre admits alterations to a flat nodal curve with a finite etale marked divisor",
+   "results": "hits=8; top=['AlgebraicGeometry.IsSmoothOfRelativeDimension', 'AlgebraicGeometry.Scheme.Etale', 'AlgebraicGeometry.IsSmooth', 'AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension', 'AlgebraicGeometry.IsSmooth.exists_isStandardSmooth', 'AlgebraicGeometry.IsEtale', 'AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization', 'AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat']; note=",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "\"semistable\"",
-   "results": "{\"t\": \"2026-10-17T15:25:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"semistable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures: smooth-chart/base-change, Weierstrass-curve, field-theory or ordinary normalization facts do not assert this geometric existence or nodal-family theorem.",
+   "query": "semistable alteration nodal curve",
+   "results": "hits=0; top=[]; note=loogle: Unknown identifier `semistable`",
    "date": "2026-10-17",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "alteration|plurinodal|semistable",
-   "results": "{\"t\": \"2026-10-17T15:25:04Z\", \"tool\": \"grep\", \"query\": \"alteration|plurinodal|semistable\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures: smooth-chart/base-change, Weierstrass-curve, field-theory or ordinary normalization facts do not assert this geometric existence or nodal-family theorem.",
+   "query": "nodal|semistable|alteration",
+   "results": "hits=0; top=[]; note=",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A semistable marked model exists for a proper relative curve after alterations of source and base",
+   "results": "hits=8; top=['WeierstrassCurve.integralModel.congr_simp', 'WeierstrassCurve.exists_isIntegral', 'AlgebraicGeometry.ValuativeCriterion.Existence.stableUnderBaseChange', 'WeierstrassCurve.IsIntegral.integral', 'WeierstrassCurve.exists_isMinimal', 'AlgebraicGeometry.isSmooth_isStableUnderBaseChange', 'WeierstrassCurve.integralModel', 'AlgebraicGeometry.IsProper.isStableUnderBaseChange']; note=",
    "date": "2026-10-17",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-plurinodal-alteration",
@@ -68,7 +135,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), normal-cone specialization and the nearby-duality alteration reduction; Expose IX, Theorem 1.2 (i), (iii)--(vi), and the paragraph defining a nodal curve, printed p. 131; specialization of de Jong 1997, Theorem 2.4. The etale closed divisor is proper over the base, hence finite; geometric integrality of the generic fibre follows from smoothness and geometric connectedness.",
+   "place": "Proof (1)--(2), normal-cone specialization and the nearby-duality alteration reduction; Expose IX, Theorem 1.2 (i), (iii)--(vi), and the paragraph defining a nodal curve, printed p. 131; projectivity conversion via Stacks 087S and 01WE.",
    "via": [
     "lem-trf-plurinodal-alteration",
     "lem-trf-nearby-cycle-verdier-duality",
@@ -78,5 +145,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-relative-marked-nodal-reduction",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by retaining the closed nowhere-dense subset T′ and the boundary inclusion from ILO IX Theorem 1.2, then setting the item’s T equal to T′. Added the missing EGA projective-bundle definition, explicit Stacks conversion lemmas for 087S and 01WE, the ample-line-bundle input needed to apply 087S, and the unramified-to-locally-quasi-finite citation used before finiteness. The boundary Z is explicitly closed in the source node; the item statement is unchanged.",
+  "blueprint": "The steps realize ILO Exposé IX Theorem 1.2 (i), (iii)--(vi), including its T′ clause and boundary containment; Tags 01W8, 087S and 01WE for projectivity conversion; and Tags 02GI, 02V5 and 02LS for the finite etale divisor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-projective-ample-invertible",
+    "why": "Step 2 uses its closed-immersion-into-projective-space conclusion to obtain ample invertible sheaves on Y and Y'; this generic projectivity input is not a clause of the relative nodal-reduction route."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "why": "Step 4 uses the generic unramified-to-locally-quasi-finite theorem after the etale definition; no nodal-reduction node supplies this scheme-theoretic finiteness input."
+   },
+   {
+    "node": "pqf-lem-proper-lqf-finite",
+    "why": "Step 4 uses the generic proper-plus-locally-quasi-finite criterion to obtain finiteness of D→Y'; it is independent of the nodal-family route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "pqf-lem-proper-lqf-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-b2a47bf2a",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-b2a47bf2a (reviewer sub-agent of L); spot-checked: I read the item, all 4 new nodes, every cited statement and the sources in full: ILO IX Thm 1.2 pp.130-131 with the nodal-curve paragraph, ILO II 2.3 for alterations, Stacks morphisms.tex 01W8, 01WE and 087S with their proofs. The source node lem-trf-dejong-relative-marked-semistable matches ILO 1.2(i),(iii)-(vi) with G={1}. Its extra hypotheses (f dominant, Y projective over an affine base) only weaken it, and its derived clauses are a few lines each: excellence from finite type, D proper as a closed subscheme of a projective X', geometric integrality because rare T' misses the generic point. The earlier E2 error (T' as the singular locus) is gone. Step 2 is now correct: Y ↪ P^N_R gives an ample sheaf (lem-weil-pbc-projective-ample-invertible); 087S makes b H-projective; 01WE makes Y'→Spec R H-projective; the ample sheaf on Y' and 087S again make f' H-projective. Step 3 is a pure renaming. Step 4 is étale ⇒ unramified ⇒ locally quasi-finite (02V5), and proper + locally quasi-finite ⇒ finite (02LS). The item statement is unchanged; no new node duplicates an existing one or restates the item. I accept the three declared tool_uses (all generic scheme theory; pqf-lem-proper-lqf-finite is a Mathlib leaf). No SGA source is used. FIX of two missing-notion citations (B3/B2): def-trf-projective-bundle-morphism now cites pqf-def-coherent, def-nagata-relative-proj, lem-weil-pbc-quasi-coherent-symmetric-algebra and lem-weil-pbc-symmetric-algebra-graded; lem-trf-dejong-relative-marked-semistable now defines generically finite and effective Cartier divisor inline, citing def-weil-finite-integral-morphism and def-weil-closed-immersion. Full checks are in review.md.; 2 file(s) fixed by the reviewer"
  }
 }

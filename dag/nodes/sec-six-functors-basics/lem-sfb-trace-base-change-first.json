@@ -21,9 +21,104 @@
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "def-weil-pbc-adjunction-mate"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on small representatives of the pro-etale sites. The module operations are the ringed-topos operations: [sk-def-sfb-module-derived-pushpull] derives the whole module pullback/direct-image composites, [def-sfb-module-derived-pushpull-adjunction] gives their canonical adjunction, and [sk-prop-sfb-cartesian-coefficients] identifies the coefficient pullbacks and makes inverse image exact. Thus the ordinary unbounded ringed-topos comparisons apply with the actual sheaves $R_Z$. Use [lem-sfb-ringed-derived-monoidal-comparisons] to suppress tensor and composition associators, preserving symmetry and the canonical adjunctions. Put $P=Rf_*$, $F=f^*$, $Q_i=Rp_{i*}$, $U_i=p_i^*$, $T=T_X$, $A=PN$, $C=PT$, $H=U_1N\\otimes U_2T$, and $h=fp_1=fp_2$. In particular $U_1F=U_2F$, $U_1T=U_2T=T_W$, and $PQ_1=Rh_*=PQ_2$, with the adjunction-compatible comparisons specified by that node. Write $c_{u,E}$ for the canonical counit at $E$. All comparisons below take place in these ambient categories; the stated preservation and isomorphism hypotheses supply the maps needed on $\\mathcal L$.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "def-sfb-module-derived-pushpull-adjunction",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, 0D6D, 07A6 and 0D6E: tensor, pullback composition, adjunction and direct-image composition"
+   }
+  },
+  {
+   "text": "For a morphism $u$, write $\\lambda_{u;E,L}:Ru_*E\\otimes L\\to Ru_*(E\\otimes u^*L)$ for the projection map in direct-image-first order, obtained from the map $\\pi_{u,L,E}$ defined in the statement using the two tensor symmetries. Its transpose is $c_{u,E}\\otimes1$. Define two maps $A\\otimes C\\to Rh_*H$:\n$$D_2=P(\\lambda_{p_2;U_1N,T})\\circ P(b_{2,N}\\otimes1_T)\\circ\\pi_{f,A,T},$$\n$$D_1=P(\\pi_{p_1,N,T_W})\\circ P(1_N\\otimes b_{1,T})\\circ\\lambda_{f;N,C}.$$\nBoth are well typed: the intermediate targets in the first line are $P(FA\\otimes T)$ and $P(Q_2U_1N\\otimes T)$; in the second they are $P(N\\otimes FC)$ and $P(N\\otimes Q_1T_W)$. Naturality of symmetry and its compatibility with pullback are supplied by [lem-sfb-ringed-derived-monoidal-comparisons]. By the definition of $B_N$,\n$$P(B_N)\\circ D_2=\\pi_{f,A,T}.$$\nConsequently $D_2$ is an isomorphism by exactly the isomorphisms assumed in the item. No invertibility of the auxiliary map $\\lambda_{f;N,C}$ is asserted or needed.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map: the projection map and its transpose"
+   }
+  },
+  {
+   "text": "Compute the transpose of $D_2$ under $h^*\\dashv Rh_*$ by transposing first under $F\\dashv P$ and then under $U_2\\dashv Q_2$. These are the composite hom bijection by [lem-sfb-ringed-derived-monoidal-comparisons]. The adjunct-counit identity [lem-weil-pbc-adjunct-counit-identity], applied to the defining projection maps, gives\n$$(c_{p_2,U_1N}\\otimes1)\\circ(U_2b_{2,N}\\otimes1)\\circ(1\\otimes U_2c_{f,T}).$$\nHere the source is $U_2FA\\otimes U_2FC=h^*(A\\otimes C)$ and the target is $H$. The mate definition [def-weil-pbc-adjunction-mate] gives\n$$c_{p_2,U_1N}\\circ U_2b_{2,N}=U_1c_{f,N}$$\nunder $U_2F=U_1F$. Substitution and bifunctoriality of tensor show that the displayed transpose is\n$$\\phi=(U_1c_{f,N})\\otimes(U_2c_{f,T}).$$\nThis calculation uses naturality of the counits to transpose postcomposition; it is the explicit formula $c\\circ L(\\psi)$ in the cited adjunct identity.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-adjunct-counit-identity",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0B56 (equation-projection-formula-map); Categories Tag 0037 (definition-adjoint)"
+   }
+  },
+  {
+   "text": "Compute the transpose of $D_1$ using the other factorization $h=fp_1$. The same canonical composite-adjunction comparison and [lem-weil-pbc-adjunct-counit-identity] give\n$$(1\\otimes c_{p_1,T_W})\\circ(1\\otimes U_1b_{1,T})\\circ(U_1c_{f,N}\\otimes1).$$\nThe mate characterization [def-weil-pbc-adjunction-mate] now says\n$$c_{p_1,T_W}\\circ U_1b_{1,T}=U_2c_{f,T}.$$\nThe transpose is therefore again $\\phi$, since $U_1FC=U_2FC$. The hom bijection for $h^*\\dashv Rh_*$ is injective, so $D_1=D_2$ as maps to the same $Rh_*H$. In particular this equality uses the specified direct-image comparison, rather than an arbitrary identification of the two targets.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-adjunct-counit-identity",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 and 0B56; Categories Tag 0037: equality under the composite adjunction hom bijection"
+   }
+  },
+  {
+   "text": "Precompose the left side of the required identity with $D_2$. The equality from step 2 and the definition of $e_A$ give\n$$e_A\\circ P(B_N)\\circ D_2=e_A\\circ\\pi_{f,A,T}=1_A\\otimes t.$$\nOnly cancellation of the specified inverse projection map is involved.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+    "place": "(1), first triangle: comparison with the defining counit"
+   }
+  },
+  {
+   "text": "Precompose the right side with $D_1=D_2$ and cancel its $P(\\pi_{p_1,N,T_W}^{-1})$ against the first factor of $D_1$. This gives\n$$P(1_N\\otimes t_1)P(\\pi_{p_1,N,T_W}^{-1})D_1\n=P(1_N\\otimes(t_1b_{1,T}))\\lambda_{f;N,C}\n=P(1_N\\otimes F(t))\\lambda_{f;N,C}.$$\nThe second equality is exactly the hypothesis $t_1b_{1,T}=F(t)$, with $FR_Y=R_X$. Projection naturality in its scalar input, as stated by [lem-sfb-ringed-projection-tensor-composition], applied to $t:C\\to R_Y$, identifies the last expression with\n$$\\lambda_{f;N,R_Y}\\circ(1_A\\otimes t)=1_A\\otimes t.$$\nThe final equality is the tensor-unit normalization of the canonical projection map in [lem-weil-pbc-ringed-projection-mate-exact]. Both cited statements concern ordinary unbounded ringed-topos derived categories, so apply to the pulled-back condensed coefficient sheaves of step 1.",
+   "uses": [
+    "lem-sfb-ringed-projection-tensor-composition",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map: naturality and tensor-unit specialization"
+   }
+  },
+  {
+   "text": "Steps 5 and 6 show that the two maps in the statement agree after precomposition with the same isomorphism $D_2:A\\otimes C\\to Rh_*H$. Cancel $D_2$. With $A=Rf_*N$ and $PQ_2=Rh_*=PQ_1$ as fixed in step 1, this is precisely the asserted equality, with source and target as displayed in the item.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+    "place": "(1), first triangle: finish the reassociation and trace rearrangement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-module-derived-pushpull-adjunction",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-adjunct-counit-identity",
+  "def-weil-pbc-adjunction-mate",
+  "lem-sfb-ringed-projection-tensor-composition",
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+  "place": "(1), first triangle; explicit counit expansion of the standard compatibilities recalled in det-prop-p1-adjunction-rational-triangle.proof.md, first identity"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +155,46 @@
    "results": "8 hits; LinearMap.trace_baseChange, IsBaseChange.comp_iff, Algebra.intTrace_eq_trace, AlgebraicGeometry.IsProper.isStableUnderBaseChange, IsBaseChange.directSumPow, Algebra.algebraMap_intTrace, SheafOfModules.sheafificationCompPullback, Algebra.intTrace.congr_simp",
    "date": "2026-10-17",
    "verdict": "No match: the returned facts concern ordinary module/ring trace, scheme fibre products, or abstract adjunctions; none states this derived projection/trace compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projectionMap|trace.*baseChange|baseChange.*trace",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: results give probability integrals, rigid dual mates, or generic adjunction definitions and naturality; no declaration states the trace/base-change identity in these module derived categories.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"counit\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: results give probability integrals, rigid dual mates, or generic adjunction definitions and naturality; no declaration states the trace/base-change identity in these module derived categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The two orders of the external product map for derived direct images on a commutative square agree by adjunction counits",
+   "results": "8 hits: CategoryTheory.Adjunction.derivedε.congr_simp, CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryFst_mapPullbackAdj_counit_app, CategoryTheory.Adjunction.counit_naturality, CategoryTheory.Adjunction.CoreUnitCounit.counit, CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.localization_counit_app, CategoryTheory.Adjunction.derived_unit",
+   "date": "2026-10-17",
+   "verdict": "no match: results give probability integrals, rigid dual mates, or generic adjunction definitions and naturality; no declaration states the trace/base-change identity in these module derived categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula and proper base change identify integration against a pulled back trace with iterated integration over a fibre product",
+   "results": "8 hits: MeasureTheory.lmarginal_image, ProbabilityTheory.Kernel.integral_traj_partialTraj', ProbabilityTheory.Kernel.setIntegral_traj_partialTraj', ProbabilityTheory.Kernel.lmarginalPartialTraj_eq_lintegral_map, ProbabilityTheory.Kernel.setIntegral_traj_partialTraj, ProbabilityTheory.Kernel.lintegral_traj₀, ProbabilityTheory.Kernel.lintegral_comap, ProbabilityTheory.Kernel.lintegral_traj",
+   "date": "2026-10-17",
+   "verdict": "no match: results give probability integrals, rigid dual mates, or generic adjunction definitions and naturality; no declaration states the trace/base-change identity in these module derived categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In symmetric monoidal categories the external product of two right adjoints has the same transpose in either order using a Beck Chevalley mate",
+   "results": "8 hits: CategoryTheory.rightAdjointMate, CategoryTheory.rightAdjointMate_comp, CategoryTheory.comp_rightAdjointMate, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.rightAdjointMate_comp_evaluation, CategoryTheory.coevaluation_comp_rightAdjointMate_assoc, CategoryTheory.comp_rightAdjointMate_assoc, CategoryTheory.rightAdjointMate_comp_evaluation_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: results give probability integrals, rigid dual mates, or generic adjunction definitions and naturality; no declaration states the trace/base-change identity in these module derived categories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-thm-int-restriction-line",
@@ -80,5 +211,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sfb-trace-base-change-first",
+  "worker": "stage1",
+  "summary": "Prove the trace rearrangement by comparing the two forward external-product composites under the canonical composite adjunction. Their explicitly computed transposes are the tensor of the pulled-back counits. Projection naturality and trace base change then prove the result after cancellation of the assumed isomorphism. Reuse existing ringed-topos coherence nodes; no new nodes and no statement changes.",
+  "blueprint": "det-thm-int-restriction-line proof (1), first triangle: reassociate fp_2=fp_1 and move N outside Rp_1*. Steps 1-4 identify the actual canonical maps; steps 5-7 move the trace using its stipulated base-change equality.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic ringed-topos tensor and adjunction normalization allows the two factorizations of fp_i to be compared; it proves no trace or integration identity."
+   },
+   {
+    "node": "lem-weil-pbc-adjunct-counit-identity",
+    "why": "Generic hom-bijection evaluation computes the two transposes explicitly; it is independent of the projective-line argument."
+   },
+   {
+    "node": "lem-sfb-ringed-projection-tensor-composition",
+    "why": "Only naturality of the canonical ordinary ringed-topos projection transformation is used to move t:C to R_Y."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Only its tensor-unit normalization is used at the final naturality calculation, with the actual pulled-back condensed coefficient sheaves."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-adjunct-counit-identity",
+  "lem-sfb-ringed-projection-tensor-composition",
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-65edb15bb",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-65edb15bb (reviewer sub-agent of L); spot-checked: I read the whole item. Statement: every map is well-typed against blueprint main-20261015 sk-thm-int-restriction-line.proof (1) and sk-prop-p1-adjunction-rational-triangle.proof 'First identity'. The base-change maps b2:f^*Rf_*->Rp2*p1^* and b1 are the mates for fp1=fp2, matching unit-counit.md. The coefficient category is D(Mod O_{E,Z}) restricted to Loc(Dbc), the same as the parent det-thm-int-restriction-line steps 3-4, which uses the item with f=q, N=M, t=t_q. The statement is unchanged and the hypotheses are not weakened. Steps: I recomputed both transposes. D2 transposes under F then U2 to (c_{p2}⊗1)(U2 b2⊗1)(1⊗U2 c_{f,T}). D1 transposes to (1⊗c_{p1})(1⊗U1 b1)(U1 c_{f,N}⊗1). The 'equivalently' clause of def-weil-pbc-adjunction-mate gives c_{p2}U2 b2=U1 c_f and c_{p1}U1 b1=U2 c_f, so both transposes equal U1c_{f,N}⊗U2c_{f,T}. The composite-adjunction clause of lem-sfb-ringed-derived-monoidal-comparisons then gives D1=D2. P(B_N)D2=π is literal cancellation, so D2 is invertible from the assumed isomorphisms alone. Step 6 uses λ-naturality from lem-sfb-ringed-projection-tensor-composition and α_{R_Y}=1 from lem-weil-pbc-ringed-projection-mate-exact, both at statement level. Edge cases checked: f=id, X empty or N=0, t=0, X=Y⊔Y for index order, Koszul signs. Route: every cited unit is reachable from sk-thm-int-restriction, and the four declared tool_uses are accepted. No new nodes, no SGA. rg duplicate search found only lem-sfb-trace-base-change-second (the symmetric identity) and the finite étale analogue, so there is no duplicate. No fixes."
  }
 }

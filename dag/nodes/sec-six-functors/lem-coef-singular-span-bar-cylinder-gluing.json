@@ -13,9 +13,54 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-bousfield-kan-comparison-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $X=A,C,B$ put $e_X=\\varepsilon_{|X|}:|\\operatorname{Sing}(|X|)|\\to|X|$, $[\\sigma,s]\\mapsto\\sigma(s)$, the evaluation map of [lem-coef-singular-counit-weak-equivalence]. Apply [lem-coef-singular-bar-realization-cylinder] to the strict diagram $U=V$ of the statement, whose realized arrows are $|\\operatorname{Sing}(f)|$ and $|\\operatorname{Sing}(g)|$: it gives a homeomorphism $\\Psi_V:|B_W|\\to D(|\\operatorname{Sing}(f)|,|\\operatorname{Sing}(g)|)$ sending $[(i_0\\to\\cdots\\to i_r,\\sigma),s]$ to $[\\sigma,s]$ in the end $|\\operatorname{Sing}(|A|)|$ or $|\\operatorname{Sing}(|B|)|$ when $i_0=a,b$, and, when $i_0=c$, to the class of $([\\sigma,s],t)$ with $t=w/2$, $1-w/2$ or $1/2$ according as $i_r=a,b$ or $c$. Applying $e_A\\amalg(e_C\\times1)\\amalg e_B$ to these values replaces $[\\sigma,s]$ by $\\sigma(s)$ and keeps $t$; this is exactly the formula of $\\Phi_{A,B,C;f,g}$. So, once Step 2 shows that the $e_X$ form a commuting map of spans, $\\Phi=D(e)\\circ\\Psi_V$ where $D(e)$ is the induced map of double cylinders, and in particular the formula for $\\Phi$ is well defined and continuous (Step 3).",
+   "uses": [
+    "lem-coef-singular-bar-realization-cylinder",
+    "lem-coef-singular-counit-weak-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent middle derived adjunction: explicit strict walking-span bar realization and its double-cylinder map."
+   }
+  },
+  {
+   "text": "By [lem-coef-singular-counit-weak-equivalence], each $e_X$ is continuous and natural and induces a bijection on path components and an isomorphism on every homotopy group at every basepoint. Naturality gives $e_A\\circ|\\operatorname{Sing}(f)|=f\\circ e_C$ and $e_B\\circ|\\operatorname{Sing}(g)|=g\\circ e_C$, so the three maps form a commuting map of spans to $(f,g)$ with all components weak homotopy equivalences. This also covers empty simplicial sets and imposes no separation or connectedness hypothesis.",
+   "uses": [
+    "lem-coef-singular-counit-weak-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent middle derived adjunction: realization-singular counit input."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-double-cylinder-weak-equivalence-gluing] to the commuting span map $e=(e_A,e_C,e_B)$ of Step 2, from $(|\\operatorname{Sing}(f)|,|\\operatorname{Sing}(g)|)$ to $(f,g)$: the induced map $D(e):D(|\\operatorname{Sing}(f)|,|\\operatorname{Sing}(g)|)\\to D(f,g)$ is well defined, continuous and a weak homotopy equivalence. By Step 1, $\\Phi=D(e)\\circ\\Psi_V$ with $\\Psi_V$ the homeomorphism of [lem-coef-singular-bar-realization-cylinder], so $\\Phi$ is well defined and continuous, and it is a weak homotopy equivalence (a homeomorphism followed by a weak homotopy equivalence): it induces the required bijection on path components and isomorphisms on all homotopy groups at every basepoint of $|B_W|$. Naturality: for a strictly commuting map of spans $\\alpha$, $\\operatorname{Sing}(\\alpha)$ is a strict map $V\\to V'$; $\\Psi$ is natural for it by [lem-coef-singular-bar-realization-cylinder], $\\alpha_Xe_X=e_{X'}|\\operatorname{Sing}(\\alpha_X)|$ by the naturality in [lem-coef-singular-counit-weak-equivalence], and the functoriality $D(e'e)=D(e')D(e)$ of [lem-coef-double-cylinder-weak-equivalence-gluing] applied to the two equal composites of span maps gives $D(\\alpha)\\Phi=\\Phi'\\,|\\mathrm{BK}_W(\\operatorname{Sing}(\\alpha))|$ with $D(\\alpha)=\\alpha_A\\amalg(\\alpha_C\\times1)\\amalg\\alpha_B$. All three cited statements allow empty objects, so the conclusion holds when any of $A,B,C$ is empty.",
+   "uses": [
+    "lem-coef-double-cylinder-weak-equivalence-gluing",
+    "lem-coef-singular-bar-realization-cylinder",
+    "lem-coef-singular-counit-weak-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, coherent middle derived adjunction: weak-equivalence conclusion and naturality of the double-cylinder comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-double-cylinder-weak-equivalence-gluing",
+  "lem-coef-singular-bar-realization-cylinder",
+  "lem-coef-singular-counit-weak-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, coherent middle derived adjunction; explicit bar-to-cylinder comparison using realization-singular counits. The blueprint supplies context rather than an archived theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,7 +92,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-double-mapping-cylinder-space-pushout",
@@ -57,7 +102,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Paragraph 2, coherent middle derived adjunction: the strict walking-span bar realization is identified with the double mapping cylinder after applying the singular realization unit.",
+   "place": "Paragraph 2, coherent middle derived adjunction: strict walking-span bar realization is compared explicitly with the double mapping cylinder by the realization-singular counits.",
    "via": [
     "lem-coef-double-mapping-cylinder-space-pushout",
     "lem-coef-triangular-bar-excision",
@@ -80,5 +125,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-singular-span-bar-cylinder-gluing",
+  "worker": "stage1",
+  "summary": "Split the singular walking-span bar comparison into an explicit bar-realization/double-cylinder lemma and a homotopy-invariance lemma for double mapping cylinders. The target proof identifies the bar realization and its coordinate formula, verifies the counit span map and its hypotheses, then applies the gluing lemma to obtain the weak homotopy equivalence, naturality, and empty-object cases. Both auxiliary statements are recorded as unsplit nodes because no Mathlib or archived literature theorem was found.",
+  "blueprint": "Paragraph 2 of prop-coef-integral-exceptional-adjoint.proof.md: strict walking-span bar computation, explicit double-cylinder comparison, and counit-induced weak equivalence."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N0-96ff1f096",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-96ff1f096 (reviewer sub-agent of L); spot-checked: I read the delivery in full and the mathematics is correct. I checked that BK_W of a walking span realizes to the two mapping cylinders glued at the vertex c. The coordinates w/2, 1-w/2 and 1/2 agree with the nerve coordinates, the d_0 gluing agrees with u_a and u_b, and the cases C empty, A empty (which forces C empty) and the constant point are consistent. The gluing lemma holds for arbitrary spaces: cover the double cylinder by two open halves and apply the gluing theorem for excisive triads (May, Concise, ch. 10 §7). The item's statement matches what the parent lem-coef-double-mapping-cylinder-space-pushout uses in its steps 2 and 3. Everything cited is in unit sk-prop-sf-biduality-general apart from the definition node def-cbc. There is no SGA, no duplicate (searched with rg; read lem-coef-sset-gluing-filtered-equivalences, triangular-bar-excision, homotopy-equivalence-weak and topological-serre-model) and no restatement of a parent clause. The literature has no homotopy-theory text, so both WANTED lines are justified. I repaired three faults in fixes/: (1) B2/B1 in lem-coef-singular-bar-realization-cylinder: σ and σ(s) were undefined for a general U, and the statement carried a proof hint. The statement now uses [σ,s] and Ψ_U, gives explicit naturality, and its stmt_deps are reduced to def-cbc and BK-calculus. (2) B2/B3 in lem-coef-double-cylinder-weak-equivalence-gluing: D(f,g), the induced map and the weak equivalence of spaces were not defined. The statement is restated for arbitrary topological spaces with these defined inline and with explicit functoriality of D(e). (3) In the item, step 1 now writes Φ = D(e)∘Ψ_V and also uses the counit node, and step 3 derives continuity, the weak equivalence and naturality explicitly; proof_deps is unchanged. The new nodes' search records are summaries that I could not match to a search log on this machine.; 3 file(s) fixed by the reviewer"
  }
 }

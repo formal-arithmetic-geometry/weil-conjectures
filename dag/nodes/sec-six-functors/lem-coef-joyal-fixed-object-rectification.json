@@ -15,9 +15,219 @@
   "lem-coef-model-infinity-derived-adjunction",
   "lem-coef-cat-infinity-colimits-cartesian-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal V=\\mathsf{sSet}_{\\mathrm{Joyal}}$ and $\\mathcal D=\\mathrm{Cat}_\\infty$. By [lem-coef-joyal-presentable-monoidal-localization], $\\mathcal V$ is left proper tractable combinatorial and cartesian closed, with every object cofibrant and strong cartesian monoidal localization $q$ to $\\mathcal D$. The pushout-product hypothesis is exactly [lem-coef-joyal-cartesian-pushout-product]. Apply [lem-coef-cartesian-matrix-model] with $S=O$. Its graph model $\\mathcal G_O$ is left proper tractable combinatorial and biclosed monoidal under $\\star$, with cofibrant unit and the nonsymmetric monoid axiom. These are all the hypotheses needed for associative-algebra transfer, including when $O$ is empty.",
+   "uses": [
+    "lem-coef-joyal-presentable-monoidal-localization",
+    "lem-coef-joyal-cartesian-pushout-product",
+    "lem-coef-cartesian-matrix-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting Joyal rectification: Haugseng Lemma 3.20, matrix category in its proof; Muro section 10."
+   }
+  },
+  {
+   "text": "An associative unital algebra in $\\mathcal G_O$ is exactly a strict simplicial category fixing $O$: a map $P\\star P\\to P$ is the family $P(y,z)\\times P(x,y)\\to P(x,z)$, and $E\\to P$ specifies its identity vertices. The algebra equations are precisely the stated associative and unit equations. Apply [lem-coef-associative-algebra-model-transfer] to the matrix model from step 1. It gives a combinatorial model on $\\mathrm{sCat}_O$ with homwise Joyal weak equivalences and fibrations, and a free/forgetful Quillen adjunction $F\\dashv U$. Its terminal category has every hom equal to $\\Delta^0$; by [lem-coef-joyal-model-structure], the map to it is a fibration exactly when each hom is a quasicategory.",
+   "uses": [
+    "lem-coef-cartesian-matrix-model",
+    "lem-coef-associative-algebra-model-transfer",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting Joyal rectification: Haugseng Lemma 3.20; associative-algebra transfer."
+   }
+  },
+  {
+   "text": "By [lem-coef-infinity-monomorphism-boundary-cells] and the cofibration description in [lem-coef-joyal-model-structure], boundary inclusions generate Joyal cofibrations: lifting against them gives lifting against their coproducts, pushouts, composites and retracts. The graph generators place these boundaries at one ordered pair by [lem-coef-cartesian-matrix-model]; transfer makes their free images generating cofibrations in $\\mathrm{sCat}_O$. To see the precise retract assertion, factor any cofibration $a$ by [lem-coef-presentable-cellular-factorization] using these free images. The right factor lifts against the generators, hence is a trivial fibration by transfer. Lifting $a$ against this right factor exhibits $a$ as an arrow retract of the cellular left factor. Conversely all such cellular maps and retracts are cofibrations by their left lifting characterization. This allows loops $x=y$ and the empty boundary for $n=0$. A coproduct attachment can be well-ordered and performed one cell at a time, with the same pushout by its universal property.",
+   "uses": [
+    "lem-coef-infinity-monomorphism-boundary-cells",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-cartesian-matrix-model",
+    "lem-coef-associative-algebra-model-transfer",
+    "lem-coef-presentable-cellular-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting Joyal rectification: free-arrow generators in Haugseng Lemma 3.20; cellular factorization."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-associative-word-filtration] in the matrix category. Expanding a tensor word using the definition of $\\star$ gives\n$$UF(P)(x,y)=\\coprod_{n\\geq0}\\ \\coprod_{x=x_0,\\ldots,x_n=y}P(x_{n-1},x_n)\\times\\cdots\\times P(x_0,x_1).$$\nAt length zero the summand is $\\Delta^0$ if $x=y$ and is absent otherwise. The multiplication concatenates paths, with the later path on the left; the adjunction unit inserts a length-one edge. Indeed the graph map to a strict category extends on each path by iterated strict composition, so it is forced on each summand; the word adjunction says this extension is the unique algebra map. The reverse order records the convention for strict composition in the item.",
+   "uses": [
+    "lem-coef-associative-word-filtration",
+    "lem-coef-cartesian-matrix-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting Joyal rectification: free-category monad in Haugseng Proposition 5.2(f)."
+   }
+  },
+  {
+   "text": "Evaluation induces $\\mathcal G_O[W^{-1}]_\\infty\\to\\mathcal D^{O^2}$. This is an equivalence: choose fibrant representatives of target entries and coordinatewise cosimplicial frames of source entries using [lem-coef-cosimplicial-frame-mapping]. Since colimits and model classes are coordinatewise by [lem-coef-cartesian-matrix-model], the family of frames is a frame in $\\mathcal G_O$. Its mapping simplicial set is the degreewise product of the coordinate mapping Kan complexes, which by [lem-coef-kan-nerve-small-products] is a Kan complex and a product in spaces, also for an infinite or empty index set; it therefore computes the product of their mapping spaces, which is the mapping space of $\\mathcal D^{O^2}$. This proves full faithfulness of evaluation. Choosing representatives coordinatewise gives essential surjectivity, also for the empty family. Apply [lem-coef-infinity-full-essential-image] to conclude the equivalence.",
+   "uses": [
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-cartesian-matrix-model",
+    "lem-coef-infinity-full-essential-image",
+    "lem-coef-joyal-presentable-monoidal-localization",
+    "lem-coef-kan-nerve-small-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting Joyal rectification: graph localization in Haugseng Proposition 5.2."
+   }
+  },
+  {
+   "text": "By [lem-coef-model-infinity-derived-adjunction], $F\\dashv U$ induces $F_\\infty\\dashv U_\\infty$ with mapping-space adjunction over $\\mathcal D^{O^2}$. The forgetful $U$ preserves all weak equivalences, so $U_\\infty$ is its direct localization, with coherent unit given by length-one insertion. The category $\\mathcal C_O=\\mathrm{sCat}_O[W_O^{-1}]_\\infty$ is presentable by [lem-coef-combinatorial-localization-presentability], hence has all geometric realizations. All graph objects are cofibrant. For a small discrete set $J$, the coproduct functor $\\mathcal V^J\\to\\mathcal V$ is left Quillen, since the diagonal right adjoint preserves the two right lifting classes coordinatewise. Its derived adjunction identifies its localization with the coproduct in $\\mathcal D$, using the discrete-family evaluation argument of step 5. Thus the free formula of step 4 localizes to the coproduct of the indicated finite cartesian products in $\\mathcal D$; finite products are preserved by the strong monoidal $q$. No underived tensor of a noncofibrant object is used.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-joyal-presentable-monoidal-localization",
+    "lem-coef-cartesian-matrix-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting Joyal rectification: Haugseng Proposition 5.2(a),(c),(f)."
+   }
+  },
+  {
+   "text": "The functor $U_\\infty$ is conservative. Given an arrow $a$ in $\\mathcal C_O$ whose graph is an equivalence, replace its source by a cofibrant category $QA$ and its target by a fibrant category $RB$. By [lem-coef-cosimplicial-frame-mapping], its component is represented by a strict $f:QA\\to RB$. The graph of $f$ localizes to an equivalence at each pair: the replacements have homwise weak-equivalence components, and the represented arrow has the assumed graph image. Saturation of the Joyal localization in [lem-coef-joyal-presentable-monoidal-localization] says each $f(x,y)$ is a Joyal weak equivalence. Hence $f\\in W_O$ by transfer, and $a$ is an equivalence. This argument only needs a fibrant replacement of the target, not fibrancy of every strict category.",
+   "uses": [
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-joyal-presentable-monoidal-localization",
+    "lem-coef-associative-algebra-model-transfer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting Joyal rectification: Haugseng Proposition 5.2(e), conservativity."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-associative-algebra-sifted-localization] to $\\mathcal G_O$. Step 1 supplies its left properness, tractability, biclosed monoidal structure, cofibrant unit and nonsymmetric monoid axiom; step 2 is its transferred algebra model. The theorem therefore says $U_\\infty$ preserves geometric realizations after the graph-localization identification of step 5. On the other side, $\\mathcal D$ is presentably monoidal by [lem-coef-combinatorial-localization-presentability] applied to the Joyal cartesian model (or by its cartesian closure). Apply [lem-coef-categorical-algebra-free-monad] to $\\mathcal D$ and $O$. It supplies $\\mathcal A_O=\\operatorname{Alg}_{\\Delta_O^{\\mathrm{op}}}(\\mathcal D)$, its conservative graph functor $V_O$, geometric realizations preserved by $V_O$, and $G_O\\dashv V_O$ with the coherent forward-order free path formula.",
+   "uses": [
+    "lem-coef-associative-algebra-sifted-localization",
+    "lem-coef-cartesian-matrix-model",
+    "lem-coef-associative-algebra-model-transfer",
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-joyal-presentable-monoidal-localization",
+    "lem-coef-categorical-algebra-free-monad"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting Joyal rectification: Haugseng Proposition 5.2(a),(b),(d),(e)."
+   }
+  },
+  {
+   "text": "Construct the comparison before proving it is an equivalence. A strict $P$ determines an inert-preserving operator functor on lists $(x_0,\\ldots,x_n)$: its values are the ordered hom entries and its active maps are iterated strict composition after reversing the forward product order. Composing with the strong symmetric monoidal localization of [lem-coef-joyal-presentable-monoidal-localization] gives a categorical algebra $H_0(P)$ in the convention of [def-coef-complete-algebroid]. Substitution is compatible: for a consecutive-block partition, reversing the entries within each block and then reversing the blocks is the same permutation as reversing the whole list. Strict associativity then gives the same composite; empty blocks insert the identity vertex and length-zero strings give the unit. The coherences of the strong monoidal functor retain these identities as coherent algebra data in every dimension. This construction is functorial for strict functors fixing $O$.",
+   "uses": [
+    "lem-coef-joyal-presentable-monoidal-localization",
+    "def-coef-complete-algebroid"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting Joyal rectification: Haugseng Definition 5.1, explicit operator comparison."
+   }
+  },
+  {
+   "text": "For $w\\in W_O$, the graph of $H_0(w)$ is a family of equivalences $q(w(x,y))$. Conservativity of $V_O$ in [lem-coef-categorical-algebra-free-monad] makes $H_0(w)$ an algebra equivalence. The functor-category universal property of localization in [lem-coef-model-infinity-derived-adjunction] therefore descends $H_0$ to $H:\\mathcal C_O\\to\\mathcal A_O$ with coherent equivalence $V_OH\\simeq U_\\infty$. All hom objects are cofibrant, so this construction applies to every strict category; it requires no replacement that could interfere with restriction of object sets.",
+   "uses": [
+    "lem-coef-categorical-algebra-free-monad",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-joyal-presentable-monoidal-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting Joyal rectification: Haugseng Definition 5.1, descent."
+   }
+  },
+  {
+   "text": "Let $P\\in\\mathcal D^{O^2}$ and represent it by a graph of simplicial sets. Consider the actual adjunct $\\alpha_P:G_O(P)\\to HF_\\infty(P)$ of the derived length-one unit $P\\to U_\\infty F_\\infty(P)\\simeq V_OHF_\\infty(P)$. By [lem-coef-categorical-algebra-free-monad], its restriction to any path is the tensor of these generating-edge maps followed by iterated composition. Steps 4, 6 and 9 identify this with reversal from the forward cartesian product to the reverse cartesian product on that same path. This permutation is an equivalence, with its inverse the reverse permutation. The length-zero component is the identity-unit comparison; length one is the generating edge. The free formulas express both graphs as coproducts over exactly these paths, so $V_O\\alpha_P$ is an equivalence at every pair. The formulas in the cited algebra theorem describe a coherent adjunct on the entire graph infinity category, so this verifies the canonical free comparison, not an arbitrary objectwise isomorphism of free objects.",
+   "uses": [
+    "lem-coef-categorical-algebra-free-monad",
+    "lem-coef-joyal-presentable-monoidal-localization",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting Joyal rectification: Haugseng Proposition 5.2(f)."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-monadic-comparison] with $\\mathcal B=\\mathcal D^{O^2}$, $\\mathcal C=\\mathcal C_O$, $\\mathcal E=\\mathcal A_O$, $U=U_\\infty$, $V=V_O$, $F=F_\\infty$, $G=G_O$ and the comparison $H$. Steps 6 and 8 give both left adjoints and all geometric realizations, steps 7 and 8 give conservativity and realization preservation, step 10 gives $V_OH\\simeq U_\\infty$, and step 11 gives exactly the required adjunct equivalence. Hence $H$ is an equivalence of infinity categories, including mapping spaces.",
+   "uses": [
+    "lem-coef-infinity-monadic-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting Joyal rectification: Haugseng Proposition 5.2, monadic comparison."
+   }
+  },
+  {
+   "text": "For $f:O\\to O'$ restriction on strict categories is $(f^*P)(x,y)=P(fx,fy)$, with the same substituted units and compositions. On categorical algebras it is precomposition with the list map $(x_0,\\ldots,x_n)\\mapsto(fx_0,\\ldots,fx_n)$ of [def-coef-complete-algebroid]. The construction in step 9 commutes with these list maps: products, reversal, identity insertion and composition are exactly the same maps with the labels substituted. This holds also for repeated labels, so no injectivity of $f$ is needed. Restrictions preserve all homwise weak equivalences. Apply the functorial localization of [lem-coef-simplicial-localization-existence] to the whole restriction diagram in a larger universe and descend its comparison using the functor-category localization property in [lem-coef-model-infinity-derived-adjunction]. The identities $(gf)^*=f^*g^*$ and $1^*=1$ and every longer composition diagram descend together; this gives coherent compatibility with all functions, including the empty function. The graph evaluations also commute before localization, giving the asserted coherent compatibility with forgetful functors.",
+   "uses": [
+    "def-coef-complete-algebroid",
+    "lem-coef-simplicial-localization-existence",
+    "lem-coef-model-infinity-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting Joyal rectification: naturality following Haugseng Definition 5.1 and Proposition 5.2."
+   }
+  },
+  {
+   "text": "For a prescribed algebra $A$ on $O$, essential surjectivity of the equivalence in step 12 gives a strict $P_0$ and an algebra equivalence $H(P_0)\\simeq A$. Factor its map to the terminal strict category as a trivial cofibration $P_0\\to P$ followed by a fibration using the transferred model of step 2. The object set stays $O$, the homs of $P$ are quasicategories, and $P_0\\to P$ is homwise a categorical equivalence. Localizing it gives an algebra equivalence $H(P_0)\\simeq H(P)$, so composition with its inverse yields $H(P)\\simeq A$. The graph of this specified algebra equivalence gives the specified equivalences on all hom quasicategories and retains the units, compositions and their coherences. All indexing sets and path strings are small; an enlarged ambient universe contains the set-indexed diagram used in step 13. The same construction in a larger universe proves the final universe assertion.",
+   "uses": [
+    "lem-coef-associative-algebra-model-transfer",
+    "lem-coef-joyal-model-structure",
+    "lem-coef-categorical-algebra-free-monad"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Supporting Joyal rectification: fibrant realization after Haugseng Proposition 5.2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-joyal-presentable-monoidal-localization",
+  "lem-coef-joyal-cartesian-pushout-product",
+  "lem-coef-cartesian-matrix-model",
+  "lem-coef-associative-algebra-model-transfer",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-presentable-cellular-factorization",
+  "lem-coef-associative-word-filtration",
+  "lem-coef-cosimplicial-frame-mapping",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-combinatorial-localization-presentability",
+  "lem-coef-associative-algebra-sifted-localization",
+  "lem-coef-categorical-algebra-free-monad",
+  "def-coef-complete-algebroid",
+  "lem-coef-infinity-monadic-comparison",
+  "lem-coef-simplicial-localization-existence",
+  "lem-coef-kan-nerve-small-products"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Supporting foundation for proof paragraph 2: explicit Joyal specialization of Haugseng Definition 5.1 and Proposition 5.2, using his Lemma 3.20 via matrix convolution and monadic comparison. Online literature read; shared archival copies WANTED in report."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,10 +263,38 @@
    "results": "{\"t\": \"2026-10-17T13:02:39Z\", \"tool\": \"leanfinder\", \"query\": \"Model category of simplicial categories with categorical equivalences on hom objects and fixed object set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"CategoryTheory.SimplicialCategory\", \"SSet\", \"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\", \"SSet.largeCategory\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\"], \"digest\": \"f380caca9ba70d60\"}",
    "date": "2026-10-17",
    "verdict": "no match: read SimplicialCategory/Basic.lean:45-77 and Quasicategory/StrictBicategory.lean:14-31,49-70. These supply simplicial categories and a homotopy bicategory of quasicategories, with no Joyal fixed-object model or categorical-algebra rectification. The modelCategoryQuillen search hits are the Kan-Quillen model on simplicial sets, not this Joyal-enriched model."
+  },
+  {
+   "tool": "grep",
+   "query": "Joyal|rectif",
+   "results": "{\"t\": \"2026-10-17T16:09:02Z\", \"tool\": \"grep\", \"query\": \"Joyal|rectif\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\"], \"digest\": \"feb76b4d9aa0d6fc\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: SimplicialCategory/Basic.lean:45-77 defines enriched categories; Quasicategory/StrictBicategory.lean:49-70 gives only the homotopy bicategory. Neither states Joyal fixed-object rectification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strictification of infinity categories enriched in quasicategories",
+   "results": "{\"t\": \"2026-10-17T16:09:02Z\", \"tool\": \"leansearch\", \"query\": \"Strictification of infinity categories enriched in quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.strictBicategory\", \"SSet.StrictSegal.quasicategory'\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"SSet.StrictSegal.quasicategory\", \"CategoryTheory.Bicategory.Strict.mk\", \"CategoryTheory.CatEnrichedOrdinary.instStrict\", \"CategoryTheory.EnrichedOrdinaryCategory.toEnrichedCategory\", \"CategoryTheory.EnrichedCat\"], \"digest\": \"8d3115cfe82e1c93\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: SimplicialCategory/Basic.lean:45-77 defines enriched categories; Quasicategory/StrictBicategory.lean:49-70 gives only the homotopy bicategory. Neither states Joyal fixed-object rectification."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialCategory",
+   "results": "{\"t\": \"2026-10-17T16:09:02Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SimplicialCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialCategory\", \"CategoryTheory.SimplicialCategory.sHom\", \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"CategoryTheory.SimplicialCategory.homEquiv'\", \"CategoryTheory.SimplicialCategory.sHomComp\", \"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\", \"CategoryTheory.SimplicialNerve\"], \"digest\": \"b4aa0974aa465809\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: SimplicialCategory/Basic.lean:45-77 defines enriched categories; Quasicategory/StrictBicategory.lean:49-70 gives only the homotopy bicategory. Neither states Joyal fixed-object rectification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fixed object simplicial categories with homwise Joyal equivalences model categorical algebras in Cat infinity",
+   "results": "{\"t\": \"2026-10-17T16:09:05Z\", \"tool\": \"leanfinder\", \"query\": \"Fixed object simplicial categories with homwise Joyal equivalences model categorical algebras in Cat infinity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat\", \"CategoryTheory.SimplicialCategory\", \"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"SSet.Augmented\", \"SSet\", \"SSet.largeCategory\"], \"digest\": \"7fb8837821cec83c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: SimplicialCategory/Basic.lean:45-77 defines enriched categories; Quasicategory/StrictBicategory.lean:49-70 gives only the homotopy bicategory. Neither states Joyal fixed-object rectification."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-enriched-simplicial-presentation",
@@ -79,5 +317,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-joyal-fixed-object-rectification",
+  "worker": "stage1",
+  "summary": "Constructed the transferred fixed-object model via a cartesian matrix model; identified free path units, constructed the operator comparison directly on all hom objects, verified its canonical free adjunct and applied the existing infinity-monadic comparison. Checked restriction coherence and fibrant realization. Two foundational statement-only nodes, no new rectification clause nodes.",
+  "blueprint": "Prop-coef-integral-exceptional-adjoint proof paragraph 2, coherent finite-stage mapping adjunction: supports the strict enriched presentation used below it. No change to the unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NO-df1eb1a68",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-df1eb1a68 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited node statement and the parent's three uses of the item. Source: Haugseng arXiv:1312.3881v4, Lemmas 3.19–3.20, Definition 5.1 and Proposition 5.2 with its proof (a)–(f), read online. The hypotheses (left proper, tractable, biclosed, monoid axiom) are met by the cartesian Joyal model with every object cofibrant. Steps 1–12 follow Haugseng's route: transfer, the reverse-order path formula, the free-word adjunction, derived adjunction, conservativity, sifted preservation, the comparison through reversal, the adjunct check and the monadic comparison. I checked by hand the reversal under block substitution and the free formula at lengths 0 and 1. Steps 13–14 (restriction for every function f, fibrant representative) are sound. The item statement is unchanged and not weakened, and the coefficient category is cartesian Cat_infinity. New node lem-coef-joyal-presentable-monoidal-localization is true (left proper because every object is cofibrant, HTT 2.2.5.1, saturation, HA 4.1.7.4) and is not a duplicate. New node lem-coef-cartesian-matrix-model is true: I checked the adjoint formulas by currying, the pushout-product and monoid axioms coordinatewise, and the cases S empty, of size 1 and of size 2. It is not a duplicate of the Ch(R) graph and matrix nodes. Every route node is in the same unit, so no tool_uses; no SGA; no cycle. Repaired (B3/C1): (1) the matrix node took tractable from a node that does not define it and used left proper undefined; both are now defined inline. (2) The Joyal node misattributed its definition of tractable; reworded. (3) Step 5 used infinite and empty products of Kan complexes without a node; it now cites the existing lem-coef-kan-nerve-small-products in uses and proof_deps. The corrected whole files are under fixes/dag/nodes/sec-six-functors/ and the details are in review.md.; 3 file(s) fixed by the reviewer"
  }
 }
