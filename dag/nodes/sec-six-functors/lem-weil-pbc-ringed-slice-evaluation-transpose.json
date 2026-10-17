@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-ringed-slice-evaluation-transpose",
+ "kind": "statement",
+ "title": "Slice restriction preserves evaluation for an arbitrary dualizing object",
+ "statement": "Let $\\mathcal C$ be a site small in the module universe, let $\\mathcal O$ be a sheaf of commutative rings, and let $U\\in\\mathcal C$. Use module sheaves and the unbounded derived categories $D(\\mathcal O)$ and $D(\\mathcal O_U)$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], the localized ringed site [def-pur-localized-ringed-site], and exact derived slice restriction $r$ [def-weil-pbc-ringed-derived-restriction]. Write $H(L,M)=R\\mathcal Hom_{\\mathcal O}(L,M)$, and $H_U$ for its slice version [def-pur-derived-internal-hom]. Use derived tensor computed from total tensor complexes after K-flat replacement [def-pc-tensor-complex-sheaves, def-pc-kflat-complex]. Let $\\rho_{L,M}:r(L\\otimes^{\\mathbf L}M)\\xrightarrow{\\sim}rL\\otimes^{\\mathbf L}rM$ be the canonical tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] for the localization morphism of topoi $\\operatorname{Sh}(\\mathcal C/U)\\to\\operatorname{Sh}(\\mathcal C)$ with ring map the identity of $\\mathcal O_U=\\mathcal O|_U$, whose module pullback $M\\mapsto M|_U\\otimes_{\\mathcal O_U}\\mathcal O_U$ is identified with $r$ by the unit isomorphism. Let $\\eta_{L,M}:rH(L,M)\\xrightarrow{\\sim}H_U(rL,rM)$ be the slice comparison of [lem-weil-pbc-ringed-internal-hom-exact-restriction], normalized on models as follows: if a complex $\\mathcal L$ represents $L$ and a K-injective complex $I$ represents $M$ [prop-pur-kinjective-resolutions-exist], then $rI$ is K-injective [lem-pur-kinjective-restrict-localized], and $\\eta_{L,M}$ is the relocalization identification $r\\mathcal Hom^\\bullet(\\mathcal L,I)=\\mathcal Hom^\\bullet(r\\mathcal L,rI)$ of local families of module maps with the same differential [def-pur-hom-complex, def-pur-localized-ringed-site], followed by the canonical identification of the two K-injective representatives $rI$ and $I_U(rM)$ of $rM$. Denote by $\\operatorname{ev}_{L,M}:H(L,M)\\otimes^{\\mathbf L}L\\to M$ the tensor-Hom counit, by $\\operatorname{tr}$ the natural bijection $\\operatorname{Hom}(T\\otimes^{\\mathbf L}L,M)\\cong\\operatorname{Hom}(T,H(L,M))$, and by $\\sigma_{L,M}$ the Koszul tensor symmetry (on degrees $a,b$, $x\\otimes y\\mapsto(-1)^{ab}y\\otimes x$).\n\nFor every $T,L,M\\in D(\\mathcal O)$ and $f:T\\otimes^{\\mathbf L}L\\to M$, the canonical comparisons satisfy\n$$r(\\operatorname{ev}_{L,M})\\circ\\rho_{H(L,M),L}^{-1}=\\operatorname{ev}_{rL,rM}\\circ(\\eta_{L,M}\\otimes1),$$\n$$\\operatorname{tr}_U\\bigl(r(f)\\circ\\rho_{T,L}^{-1}\\bigr)=\\eta_{L,M}\\circ r(\\operatorname{tr}(f)),$$\nand\n$$\\rho_{M,L}\\circ r(\\sigma_{L,M})=\\sigma_{rL,rM}\\circ\\rho_{L,M}.$$\nThese statements hold for arbitrary unbounded objects; no perfectness or invertibility of evaluation is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JB (lemma-restriction-RHom-to-U) and 08J9 (lemma-internal-hom), with 07A4 (lemma-pullback-tensor-product); the simultaneous evaluation, transposition and symmetry normalization is the representative-level consequence of these constructions, formulated here by the worker."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-kinjective-restrict-localized",
+  "def-pur-hom-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A strong monoidal exact restriction functor between ringed-site derived categories preserves internal-Hom evaluation and the transpose to a double dual",
+   "results": "8 hits; CategoryTheory.Functor.Monoidal.ofBifunctor, CategoryTheory.MonoidalClosedFunctor.mk, CategoryTheory.MonoidalClosedFunctor, CategoryTheory.exactFunctor, ExactPairing constructions; none state ringed-site derived evaluation preservation.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact monoidal restriction functor on unbounded derived categories preserves tensor-Hom evaluation and transpose",
+   "results": "8 hits; CategoryTheory.Tor, CategoryTheory.Abelian.Ext.mapExactFunctor_hom and related derived-category infrastructure; no slice evaluation theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.expComparison CategoryTheory.MonoidalClosed",
+   "results": "0 hits; unknown constant CategoryTheory.MonoidalClosed.expComparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "expComparison_ev|internalHom.*evaluation|tensorHom.*curry [Mathlib/CategoryTheory/Monoidal]",
+   "results": "4 hits; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:538, Functor.lean:85,104, FunctorCategory/Basic.lean:64; no ringed-site derived evaluation theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a small ringed site exact restriction to a slice commutes with derived tensor and derived internal Hom compatibly with evaluation and tensor Hom transposition",
+   "results": {
+    "t": "2026-10-17T08:31:42Z",
+    "tool": "leanfinder",
+    "query": "On a small ringed site exact restriction to a slice commutes with derived tensor and derived internal Hom compatibly with evaluation and tensor Hom transposition",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "LightCondensed.ihomPoints_symm_comp",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition'",
+     "instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite",
+     "LightCondensed.ihomPoints_symm_apply",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'"
+    ],
+    "digest": "ac58b57ebf3136ac"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: hits supply ordinary sheaf adjunctions or exact-functor localization infrastructure, not evaluation/transpose/symmetry coherence for a ringed-site derived slice"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical comparison from the restriction of RHom(L,M) to RHom of restricted complexes is the adjoint of restricted evaluation on unbounded derived categories",
+   "results": {
+    "t": "2026-10-17T08:31:43Z",
+    "tool": "leanfinder",
+    "query": "The canonical comparison from the restriction of RHom(L,M) to RHom of restricted complexes is the adjoint of restricted evaluation on unbounded derived categories",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+     "CategoryTheory.Functor.mapDerivedCategoryFactors",
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+     "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory",
+     "CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory",
+     "CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+     "Ext",
+     "DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE"
+    ],
+    "digest": "f3c637178456c7ca"
+   },
+   "date": "2026-10-17",
+   "verdict": "no match: hits supply ordinary sheaf adjunctions or exact-functor localization infrastructure, not evaluation/transpose/symmetry coherence for a ringed-site derived slice"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-delta-restriction",
+  "date": "2026-10-17",
+  "group": "Q62"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "lem-weil-delta-restriction",
+   "place": "Proof, last two sentences: specialize the arbitrary ringed-site slice calculation to the pro-etale realization and the specified dualizing object",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

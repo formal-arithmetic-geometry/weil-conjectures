@@ -117,21 +117,54 @@
    }
   },
   {
-   "text": "For the pro-etale calculation use [lem-weil-proetale-weakly-etale-localization]: it identifies the site over an object $W$ with $Y_{\\mathrm{proet}}/W$, including the topology and the constant coefficient rings. An etale $j$ is weakly etale: it is flat by [def-weil-etale-morphism], its diagonal is an open immersion by [def-weil-unramified-morphism], and an open immersion is flat because its local ring maps are isomorphisms [def-weil-open-immersion, def-weil-flat-morphism]. Thus $j$ is such an object [def-weil-pbc-proetale-site]. For the specified $\\Omega_Y$ take $\\Omega_W=r\\Omega_Y$, so the dualizing comparison is the identity. Exact slice restriction and exact extension by zero are again [lem-pur-site-restriction-module-adjunction-exact]; derived internal Hom restriction is again [lem-weil-pbc-ringed-internal-hom-exact-restriction]. Specialize the arbitrary-ringed-slice calculations of steps 4 and 5 to $\\mathcal C=Y_{\\mathrm{proet}}$, $\\mathcal O=A_Y$, $U=W$ and the coefficient complex $\\Omega_Y$. Choose $P$ K-flat with flat terms and $I$ K-injective representing $K$ and $\\Omega_Y$; $rP$ is K-flat and $rI$ K-injective by the cited results in step 4. On an object $V\\to W$, both Hom complexes consist of the identical local families of maps on $Y_{\\mathrm{proet}}/V$, and both evaluation maps send $h\\otimes p$ to $h(p)$. Thus the internal-Hom comparison $\\alpha_K^\\Omega$ satisfies $r(\\mathrm{ev}_K)=\\mathrm{ev}_{rK}(\\alpha_K^\\Omega\\otimes1)$. The two transposes in step 5 are consequently this one map composed with $\\sigma$, proving the displayed identity with $D^\\Omega$ and $\\delta^\\Omega$. For a specified isomorphism $\\theta:r\\Omega_Y\\cong\\Omega_W$, postcompose the first evaluation by $\\theta$ and the Hom comparison by $R\\mathcal Hom(rK,\\theta)$; both transposes become $\\theta\\,r(\\mathrm{ev}_K)\\sigma$. This proves the restriction calculation for any compatible finite pro-etale realization; it does not use the etale compact-support locality theorem on a pro-etale ambient category.",
+   "text": "An etale morphism is weakly etale by [det-pe-morphisms-etale-comparison]. The scheme $W$ is of finite type over $k$, hence a small scheme of the size convention, so $j:W\\to Y$ is an object of $Y_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site]. Hence [lem-weil-proetale-weakly-etale-localization] identifies the small pro-etale site of $W$ with the localization $Y_{\\mathrm{proet}}/W$, including its topology and constant coefficient rings.",
    "uses": [
+    "det-pe-morphisms-etale-comparison",
     "lem-weil-proetale-weakly-etale-localization",
-    "def-weil-etale-morphism",
-    "def-weil-unramified-morphism",
-    "def-weil-open-immersion",
-    "def-weil-flat-morphism",
-    "def-weil-pbc-proetale-site",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+    "def-weil-pbc-proetale-site"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-delta-restriction.md",
-    "place": "Proof, last two sentences: the same slice calculation on the pro-etale realization, not closed restriction"
+    "place": "Proof, last two sentences: the same slice calculation on the pro-etale realization"
+   }
+  },
+  {
+   "text": "On this localized ringed site, restriction and extension by zero are exact adjoint functors by [lem-pur-site-restriction-module-adjunction-exact], and derived internal Hom restricts by [lem-weil-pbc-ringed-internal-hom-exact-restriction]. Thus the derived restriction used here is the exact slice restriction of [def-weil-pbc-ringed-derived-restriction], with the constant-ring identification supplied by the localization statement.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-weil-pbc-ringed-derived-restriction",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-delta-restriction.md",
+    "place": "Proof, restriction to the pro-etale slice and exact extension by zero"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-slice-evaluation-transpose] to $\\mathcal C=Y_{\\mathrm{proet}}$, $\\mathcal O=A_Y$, $U=W$, $K$ as given, and $\\Omega=\\Omega_Y$. With $\\Omega_W=r\\Omega_Y$, it gives $r(\\operatorname{ev}^{\\Omega_Y}_K)=\\operatorname{ev}^{\\Omega_W}_{rK}\\circ(\\eta\\otimes1)$ under the tensor comparison.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-delta-restriction.md",
+    "place": "Proof, last two sentences: specialize the arbitrary ringed-site calculation"
+   }
+  },
+  {
+   "text": "For $\\Omega_W=r\\Omega_Y$ let $\\sigma:rK\\otimes^{\\mathbf L}rD_Y^\\Omega K\\to rD_Y^\\Omega K\\otimes^{\\mathbf L}rK$ be tensor symmetry. By the transpose definition of $\\delta^\\Omega$ [lem-weil-duality-pairing] and the transposition/symmetry identities of [lem-weil-pbc-ringed-slice-evaluation-transpose], the transposes of $\\alpha_{D_Y^\\Omega K}\\,r\\delta_K^\\Omega$ and $D_W^\\Omega(\\alpha_K)\\,\\delta_{rK}^\\Omega$ are respectively $r(\\operatorname{ev}^{\\Omega_Y}_K)\\sigma$ and $\\operatorname{ev}^{\\Omega_W}_{rK}(\\alpha_K\\otimes1)\\sigma$, under the tensor comparison. Step 9 equates them; bijectivity of transposition gives the displayed identity. For a specified $\\theta:r\\Omega_Y\\cong\\Omega_W$, postcomposition sends both transposes to $\\theta\\,r(\\operatorname{ev}^{\\Omega_Y}_K)\\sigma$, giving the compatible finite pro-etale realization clause.",
+   "uses": [
+    "lem-weil-duality-pairing",
+    "lem-weil-pbc-ringed-slice-evaluation-transpose"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-delta-restriction.md",
+    "place": "Proof, last two sentences: transpose and compatible dualizing objects"
    }
   }
  ],
@@ -144,12 +177,11 @@
   "def-pur-localized-ringed-site",
   "def-pur-sheaf-tensor-product",
   "def-weil-etale-morphism",
-  "def-weil-flat-morphism",
-  "def-weil-open-immersion",
   "def-weil-pbc-derived-categories",
   "def-weil-pbc-proetale-site",
   "def-weil-pbc-ringed-derived-restriction",
   "def-weil-unramified-morphism",
+  "det-pe-morphisms-etale-comparison",
   "lem-amb-etale-adjoint-locality",
   "lem-pc-kflat-resolution",
   "lem-pur-kinjective-restrict-localized",
@@ -162,6 +194,7 @@
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "lem-weil-pbc-ringed-internal-hom-exact-restriction",
   "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
   "lem-weil-pbc-separated-cancellation",
   "lem-weil-pbc-unbounded-derived-iso-cohomology",
   "lem-weil-proetale-weakly-etale-localization",
@@ -282,7 +315,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -308,11 +341,11 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-weil-delta-restriction",
   "worker": "stage1",
-  "summary": "Expanded the imported paragraph into seven steps using existing DAG results only. Specified the exact double-dual comparison, proved compatibility on K-flat/K-injective complex models including the Koszul sign, and justified unbounded etale locality. Corrected the unscoped pro-etale sentence by stating the calculation for a specified compatible dualizing object, without asserting an ambient pro-etale adjoint or a comparison with condensed coefficients. No new nodes. Second reading checked the cached blueprint and Stacks TeX, made the Nagata-base and local-finite-type checks explicit, and proved the comparison identity by equality of its two transposes, including arbitrary derived dualizing comparisons.",
-  "blueprint": "Opening sentence realized in step 1; etale slice and derived Hom in steps 2-3; evaluation and its transpose in steps 4-5; covering conservativity in step 6; finite pro-etale slice calculation and exclusion of closed restriction in steps 2 and 7.",
+  "summary": "Re-split the returned 2010-character pro-etale step into four short steps. The first two cite the weakly-etale localization and exact ringed-site restriction interfaces; the third cites a new statement-only generic slice evaluation/transposition lemma; the fourth applies tensor-Hom transposition to the specified dualizing object. The item statement and Lean record are unchanged.",
+  "blueprint": "Opening sentence in step 1; etale slice and derived Hom in steps 2-3; evaluation and its transpose in steps 4-5; covering conservativity in step 6; finite pro-etale slice calculation in steps 7-10.",
   "tool_uses": [
    {
     "node": "lem-amb-etale-adjoint-locality",
@@ -365,6 +398,10 @@
    {
     "node": "thm-nagata-compactification",
     "why": "Generic Nagata compactification, [stacks-project] used on ordinary constant-ring module sheaves or their ringed slices; the unit contains no more specific replacement for this technical fact."
+   },
+   {
+    "node": "det-pe-morphisms-etale-comparison",
+    "why": "Its first clause gives etale implies weakly etale, a generic scheme-morphism tool used only to view j as an object of the pro-etale site."
    }
   ]
  },
@@ -381,15 +418,16 @@
   "lem-weil-proetale-weakly-etale-localization",
   "prop-pur-kinjective-resolutions-exist",
   "thm-amb-etale-exceptional-adjoint",
-  "thm-nagata-compactification"
+  "thm-nagata-compactification",
+  "det-pe-morphisms-etale-comparison"
  ],
  "reviewed": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NG-7aea8575a",
-  "group": "NG",
+  "reviewer": "NT-cc-Q62-1d598d7ef",
+  "group": "Q62",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-7aea8575a (reviewer sub-agent of L); spot-checked: Reviewed item, unit route, complete proof, every cited DAG statement, and cited literature locations. Hypotheses, base-change morphism, coefficient categories, derived Hom restriction, evaluation transpose, pro-etale scope, locality criterion, edge cases, searches, and DAG acyclicity all check out. No new nodes or repairs."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-1d598d7ef (reviewer sub-agent of L); spot-checked: This is a repair after a return. The statement, stmt_deps and steps 1-6 are byte-identical to the version reviewed on 2026-10-15. I re-read those steps against every cited statement and they still pass. The only change is that the overlength old step 7 became steps 7-10, which use one new statement-only node, lem-weil-pbc-ringed-slice-evaluation-transpose. I checked the blueprint statement and proof in master and in main-20261015/20261017: the statement and route match, and the coefficient category is ordinary constant-ring etale or pro-etale; no target is involved. Step 7: det-pe-morphisms-etale-comparison clause 1 says etale implies weakly etale; the declared tool use is accepted. lem-weil-proetale-weakly-etale-localization (1)-(3) then gives the site and constant-ring identification. Step 8 sets context on the localized ringed site. Step 9 is equation 1 of the new node with C=Y_proet, O=A_Y, U=W, L=K, M=Omega_Y, and the evaluation order matches. Step 10 is checked in full: equation 2 with f=ev sigma and equation 3 make the transpose of the left side r(ev)rho^{-1}sigma; naturality and equation 1 make the transpose of the right side the same map. The new node's three equations type-check and are true (equation 2 also follows from equation 1 and naturality of rho). I tested the identity localization, the zero ring, zero objects and Koszul signs in degrees a,b. The duplicate search over the DAG found only scheme-open, coefficient-unit or comparison-morphism variants, so it is neither a duplicate nor a relabelling. Fixes: (1) the new node's eta was only 'the canonical comparison' of a node that asserts existence alone, and equation 1 fails for -eta. Eta is now pinned to the relocalization identification on K-injective models (adding stmt_deps prop-pur-kinjective-resolutions-exist, lem-pur-kinjective-restrict-localized and def-pur-hom-complex), and rho to the localization-topos tensor comparison. (2) Step 7 dropped the requirement that W->Y is an object of Y_proet; I restored it, citing def-weil-pbc-proetale-site. After the fixes the graph is acyclic and every cited id exists. Details are in review.md.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.DeltaRestriction",
