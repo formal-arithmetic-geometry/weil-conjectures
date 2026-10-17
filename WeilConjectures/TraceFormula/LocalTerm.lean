@@ -471,4 +471,32 @@ theorem integral_eq_sum_localTerm [IsProper X.hom] {ι : Type*} [Fintype ι]
 
 end BorelMooreSection
 
+/-! ### Local terms at point components -/
+
+namespace BorelMooreSection
+
+variable {B E : Over (Spec (.of k))} [QuasiCompact B.hom] [LocallyOfFiniteType E.hom]
+  [QuasiCompact E.hom] [IsSeparated E.hom]
+
+/-- **The local term at a point component** (blueprint `lem-trf-local-term-point`,
+`rem-ptr-trf-local-term-9`): along an open and closed immersion `j : s ⟶ E` of the base point,
+the local term of `α` is its restriction `j^* α : ℚ̄_ℓ,s ⟶ ω_s`, read as an element of
+`End (ℚ̄_ℓ,s)` through `ω_s ≅ ℚ̄_ℓ,s`. -/
+theorem localTerm_point (j : point k ⟶ E) [IsOpenImmersion j.left] [IsClosedImmersion j.left]
+    (α : BorelMooreSection ℓ E) :
+    α.localTerm j = α.restrict j ≫ (dualizingComplexPointIso ℓ k).hom :=
+  integral_point _
+
+/-- **The local term at a point component** (blueprint `lem-trf-local-term-point`): for an open
+and closed subscheme `j : B ⟶ E` with an isomorphism `e : B ≅ s` over `s`, the local term of
+`α` is the restriction `j^* α`, transported to the base point along `e` and read as an element
+of `End (ℚ̄_ℓ,s)` through `ω_s ≅ ℚ̄_ℓ,s`. -/
+theorem localTerm_eq_of_iso [IsProper B.hom] (j : B ⟶ E) [IsOpenImmersion j.left]
+    [IsClosedImmersion j.left] (e : B ≅ point k) [IsProper e.hom.left]
+    (α : BorelMooreSection ℓ E) :
+    α.localTerm j = pushforward e.hom (α.restrict j) ≫ (dualizingComplexPointIso ℓ k).hom := by
+  rw [← integral_point, integral_pushforward, localTerm]
+
+end BorelMooreSection
+
 end AlgebraicGeometry.ProEtale.CondensedRing
