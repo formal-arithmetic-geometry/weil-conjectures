@@ -2670,9 +2670,14 @@ public import WeilConjectures.DeligneLaumon.Reduction.TraceReality
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Degreewise
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.CompositionPairing
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Equivariance
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Pairings
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Perfectness
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.PointPairing
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Reciprocity
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.TracePairing
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.UntwistedPerfectness
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Pairing
 public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
 public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceCup

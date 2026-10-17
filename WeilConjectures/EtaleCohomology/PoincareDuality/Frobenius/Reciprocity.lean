@@ -11,7 +11,9 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Untwiste
 /-!
 # Frobenius: reciprocity
 
-Part (b) of `sk-thm-frobenius`. Over a field, if the line-valued Poincaré pairing is perfect,
+Part (b) of `sk-thm-frobenius`. Over a field, if the line-valued Poincaré pairing is perfect
+(which holds at finite field stages over a separably closed field,
+`AlgebraicGeometry.Etale.TateOrientation.isPerfPair_untwistedDegreewisePoincarePairing`),
 `F_{K^∨}` is conjugate to `q^d (F_{c,K}^{-1})^t`, so the eigenvalues of `F` on
 `H^{2d-i}(X, K^∨)` are the `q^d / α` for the eigenvalues `α` of `F` on `H^i_c(X, K)`, with
 multiplicities.
@@ -22,6 +24,10 @@ multiplicities.
   `AlgebraicGeometry.Etale.TateOrientation.roots_map_charpoly_frobeniusOperator`
   (`cor-pod-reciprocal-eigenvalues`, `sk-thm-frobenius` (b)): conjugacy and reciprocal
   eigenvalues.
+- `TateOrientation.conj_frobeniusOperator_eq_smul_inverse_dualMap_of_isSepClosed`,
+  `AlgebraicGeometry.Etale.TateOrientation.roots_map_charpoly_frobeniusOperator_of_isSepClosed`:
+  the same at a finite field stage over a separably closed field, without perfectness
+  hypothesis.
 -/
 
 @[expose] public section
@@ -177,15 +183,17 @@ theorem conj_frobeniusOperator_eq_smul_inverse_dualMap_of_isSepClosed (sq : IsPu
   conj_frobeniusOperator_eq_smul_inverse_dualMap sq γ φ ψ hψ τ hTr q hτ
     (Finite.isField_of_domain Λ) hq i j hij ℓ
 
-omit [HasTateTwist Λ] [QuasiCompact a] in
+omit [HasTateTwist Λ] [QuasiCompact a] [HasInvertibleExponent Λ (Spec (.of k))] in
 /-- At a finite field stage, over a separably closed field, `H^i_c(X, K) = Hom(Λ_s, (Ra_! K)[i])`
 is a finite free `Λ`-module for `K ∈ D^b_{ctf}(X, Λ)`. -/
 lemma free_and_finite_hom_compactlySupported {K : DerivedCategoryModule Λ X}
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) (i : ℤ) :
     Module.Free Λ
-        (𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ⟶ ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)⟦i⟧) ∧
+        (𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ⟶
+          ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)⟦i⟧) ∧
       Module.Finite Λ
-        (𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ⟶ ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)⟦i⟧) := by
+        (𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ⟶
+          ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)⟦i⟧) := by
   let _ := (Finite.isField_of_domain Λ).toField
   have := (nondegenerate_comp_unit_shift_of_isSepClosed _ i
     (finite_compactlySupportedCohomology Λ a K hK i)).1
@@ -216,11 +224,12 @@ lemma free_and_finite_hom_lowerStar_coefficientDual (γ : TateOrientation Λ a d
 This is also part (b) of blueprint `sk-thm-frobenius`.
 
 **Reciprocal eigenvalues.** In the situation of
-`AlgebraicGeometry.Etale.TateOrientation.conj_frobeniusOperator_eq_smul_inverse_dualMap_of_isSepClosed`,
+`TateOrientation.conj_frobeniusOperator_eq_smul_inverse_dualMap_of_isSepClosed`,
 the eigenvalues of `F_{K^∨}` on `H^{2d-i}(X, K^∨)`, computed in an algebraically closed field `M`
 containing `Λ` and counted with algebraic multiplicity, are the `q^d / α` for the eigenvalues
 `α` of `F_{c,K}` on `H^i_c(X, K)`. No perfectness, finiteness or freeness hypothesis is needed:
-the spaces are finite free (`AlgebraicGeometry.Etale.TateOrientation.free_and_finite_hom_compactlySupported`,
+the spaces are finite free
+(`AlgebraicGeometry.Etale.TateOrientation.free_and_finite_hom_compactlySupported`,
 `AlgebraicGeometry.Etale.TateOrientation.free_and_finite_hom_lowerStar_coefficientDual`) and the
 line-valued pairing is perfect
 (`AlgebraicGeometry.Etale.TateOrientation.isPerfPair_untwistedDegreewisePoincarePairing`,
