@@ -15,6 +15,7 @@ import WeilConjectures.CategoryTheory.CartanEilenbergTotalResolution
 import all WeilConjectures.CategoryTheory.SecondFiltrationRowCohomology
 import all WeilConjectures.CategoryTheory.SecondFiltrationSignedFirstPage
 import all WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import WeilConjectures.Algebra.Homology.KInjectiveResolution
 
 /-! # Prescribed normalized CE presentations
 
@@ -317,7 +318,17 @@ theorem exists_etaleCE_normalized_row_presentations
         (hterms X K) (hrows X K)
     let ρ := CochainComplex.grothendieckKInjectiveResolutionChoice K.obj
     let τ : CochainComplex.KInjectiveResolutionChoice K.obj := ⟨_, aug, hq, hki⟩
-    obtain ⟨u, v, hu, _, huv, hvu, _⟩ := (Functor.kInjective_computes F).1 K τ ρ
+    let τR : CochainComplex.KInjectiveResolution K.obj :=
+      { I := τ.complex, ι := τ.map, quasiIso_ι := τ.quasiIso, isKInjective := τ.isKInjective }
+    let ρR : CochainComplex.KInjectiveResolution K.obj :=
+      { I := ρ.complex, ι := ρ.map, quasiIso_ι := ρ.quasiIso, isKInjective := ρ.isKInjective }
+    let u : τ.complex ⟶ ρ.complex := (τR.homotopyEquiv ρR).hom
+    let v : ρ.complex ⟶ τ.complex := (τR.homotopyEquiv ρR).inv
+    have hu : Nonempty (Homotopy (τ.map ≫ u) ρ.map) := ⟨τR.homotopyEquivHomotopy ρR⟩
+    have huv : Nonempty (Homotopy (u ≫ v) (𝟙 _)) :=
+      ⟨(τR.homotopyEquiv ρR).homotopyHomInvId⟩
+    have hvu : Nonempty (Homotopy (v ≫ u) (𝟙 _)) :=
+      ⟨(τR.homotopyEquiv ρR).homotopyInvHomId⟩
     let equiv : HomotopyEquiv τ.complex ρ.complex := ⟨u, v, huv.some, hvu.some⟩
     obtain ⟨e, he⟩ := Functor.cartanEilenberg_mapped_total_iso F J (hbelow X K)
     let w := e.hom ≫ (F.mapHomologicalComplex (ComplexShape.up ℤ)).map u

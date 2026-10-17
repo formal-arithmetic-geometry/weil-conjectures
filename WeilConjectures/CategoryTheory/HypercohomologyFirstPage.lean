@@ -8,10 +8,13 @@ module
 
 public import WeilConjectures.CategoryTheory.CartanEilenbergPresentation
 public import WeilConjectures.CategoryTheory.FilteredComplexSpectralSequence
-public import WeilConjectures.CategoryTheory.KInjectiveComputes
+public import WeilConjectures.CategoryTheory.KInjectiveBridge
+public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import WeilConjectures.CategoryTheory.CartanEilenbergSecondFiltration
 import WeilConjectures.CategoryTheory.CartanEilenbergTotalResolution
 import WeilConjectures.CategoryTheory.CartanEilenbergMappedTotal
+import WeilConjectures.Algebra.Homology.KInjectiveResolution
 
 /-! # The first hypercohomology spectral sequence
 
@@ -151,7 +154,17 @@ theorem exists_hypercohomology_firstPage
   intro ρ
   let τ : CochainComplex.KInjectiveResolutionChoice K.obj :=
     ⟨_, aug, hq, hki⟩
-  obtain ⟨u, v, hu, _, huv, hvu, _⟩ := (kInjective_computes F).1 K τ ρ
+  let τR : CochainComplex.KInjectiveResolution K.obj :=
+    { I := τ.complex, ι := τ.map, quasiIso_ι := τ.quasiIso, isKInjective := τ.isKInjective }
+  let ρR : CochainComplex.KInjectiveResolution K.obj :=
+    { I := ρ.complex, ι := ρ.map, quasiIso_ι := ρ.quasiIso, isKInjective := ρ.isKInjective }
+  let u : τ.complex ⟶ ρ.complex := (τR.homotopyEquiv ρR).hom
+  let v : ρ.complex ⟶ τ.complex := (τR.homotopyEquiv ρR).inv
+  have hu : Nonempty (Homotopy (τ.map ≫ u) ρ.map) := ⟨τR.homotopyEquivHomotopy ρR⟩
+  have huv : Nonempty (Homotopy (u ≫ v) (𝟙 _)) :=
+    ⟨(τR.homotopyEquiv ρR).homotopyHomInvId⟩
+  have hvu : Nonempty (Homotopy (v ≫ u) (𝟙 _)) :=
+    ⟨(τR.homotopyEquiv ρR).homotopyInvHomId⟩
   let equiv : HomotopyEquiv τ.complex ρ.complex :=
     ⟨u, v, huv.some, hvu.some⟩
   let w := e.hom ≫ (F.mapHomologicalComplex (ComplexShape.up ℤ)).map u
