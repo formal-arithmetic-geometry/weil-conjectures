@@ -418,4 +418,152 @@ lemma whiskerRight_eq_reductionProj_reductionIncl {m N : ℕ} (hm : a ≤ m + N)
 
 end Monoidal
 
+section Main
+
+variable {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [MonoidalClosed A] [BraidedCategory A]
+  [Abelian.HasFunctorialFlatResolution A]
+  {Λ : Type w} [CommRing Λ] [Linear Λ A] [MonoidalLinear Λ A]
+  (F : ModuleCat.{w} Λ ⥤ A) [F.Additive] [F.Linear Λ]
+  (η : 𝟙_ A ⟶ F.obj (ModuleCat.of Λ Λ)) [IsIso η] {r : ℕ} (f : Fin r → Λ) (a : ℕ)
+  (hflat : ∀ (X : ModuleCat.{w} Λ) [Module.Free Λ X] [Module.Finite Λ X],
+    ObjectProperty.flat (F.obj X))
+
+local instance : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
+
+/-- The tower `n ↦ (K ⊗ᴸ Q_{n+a}) ⊗ᴸ Pₐ`. -/
+noncomputable abbrev reductionRetractTower (K : DerivedCategory A) : ℕᵒᵖ ⥤ DerivedCategory A :=
+  addOpFunctor a ⋙ (reductionSystem (koszulCoefficientTower F f)).obj K ⋙
+    (curriedTensor _).flip.obj (Q.obj (quotComplex F f a))
+
+lemma reductionRetractTower_map (K : DerivedCategory A) {n n' : ℕ} (h : n' ≤ n) :
+    (reductionRetractTower F f a K).map (homOfLE h).op =
+      (K ◁ Q.map ((koszulCoefficientTower F f).map
+        (homOfLE (Nat.add_le_add_right h a)).op)) ▷ Q.obj (quotComplex F f a) := rfl
+
+/-- The retraction `(K ⊗ᴸ Q_{n+a}) ⊗ᴸ Pₐ ⟶ K ⊗ᴸ Pₐ` onto the degree-zero part. -/
+noncomputable def reductionRetractβ (K : DerivedCategory A) :
+    reductionRetractTower F f a K ⟶
+      (Functor.const ℕᵒᵖ).obj (K ⊗ Q.obj (quotComplex F f a)) where
+  app n := (α_ _ _ _).hom ≫ K ◁ reductionProj F η f a (n.unop + a) (Nat.le_add_left a _)
+  naturality n n' h := by
+    obtain ⟨n⟩ := n
+    obtain ⟨n'⟩ := n'
+    obtain ⟨h⟩ := h
+    have hle : n' ≤ n := leOfHom h
+    obtain rfl : h = homOfLE hle := rfl
+    rw [reductionRetractTower_map, whisker_assoc, Category.assoc, Category.assoc,
+      Iso.inv_hom_id_assoc, ← MonoidalCategory.whiskerLeft_comp, whiskerRight_reductionProj]
+    simp
+
+include hflat in
+/-- The inclusion `K ⊗ᴸ Pₐ ⟶ (K ⊗ᴸ Q_{n+a}) ⊗ᴸ Pₐ` of the degree-zero part. -/
+noncomputable def reductionRetractσ (K : DerivedCategory A) :
+    (Functor.const ℕᵒᵖ).obj (K ⊗ Q.obj (quotComplex F f a)) ⟶
+      reductionRetractTower F f a K where
+  app n := K ◁ reductionIncl F η f a hflat (n.unop + a) ≫ (α_ _ _ _).inv
+  naturality n n' h := by
+    obtain ⟨n⟩ := n
+    obtain ⟨n'⟩ := n'
+    obtain ⟨h⟩ := h
+    have hle : n' ≤ n := leOfHom h
+    obtain rfl : h = homOfLE hle := rfl
+    rw [reductionRetractTower_map, whisker_assoc, Category.assoc, Iso.inv_hom_id_assoc]
+    simp only [Functor.const_obj_obj, Functor.const_obj_map, Category.id_comp,
+      ← MonoidalCategory.whiskerLeft_comp_assoc, reductionIncl_whiskerRight]
+
+include hflat in
+lemma reductionRetractσ_β (K : DerivedCategory A) :
+    reductionRetractσ F η f a hflat K ≫ reductionRetractβ F η f a K = 𝟙 _ := by
+  ext n
+  simp [reductionRetractσ, reductionRetractβ, ← MonoidalCategory.whiskerLeft_comp,
+    reductionIncl_proj]
+
+include hflat in
+lemma reductionRetractTower_map_eq (K : DerivedCategory A) (n : ℕ) :
+    (reductionRetractTower F f a K).map (homOfLE (Nat.le_add_right n a)).op =
+      (reductionRetractβ F η f a K).app (op (n + a)) ≫
+        (reductionRetractσ F η f a hflat K).app (op n) := by
+  rw [reductionRetractTower_map, whisker_assoc]
+  have := whiskerRight_eq_reductionProj_reductionIncl F η f a hflat (m := n + a) (N := a)
+    (Nat.le_add_left a _) le_rfl
+  simp only [reductionRetractβ, reductionRetractσ, Category.assoc, unop_op]
+  rw [← MonoidalCategory.whiskerLeft_comp_assoc, ← this]
+
+variable [PreservesFiniteLimits F] [PreservesFiniteColimits F] [IsNoetherianRing Λ]
+  [HasLeftDual (Q.obj (quotComplex F f a))]
+
+include hflat in
+/-- **Projection to level `n ≥ a` of the Koszul completion, tensored with `Pₐ`.** For
+`n ≥ a`, the map `K^{∧,Kos} ⊗ᴸ Pₐ ⟶ (K ⊗ᴸ Qₙ) ⊗ᴸ Pₐ ⟶ K ⊗ᴸ Pₐ`, the projection to level `n`
+followed by the projection of `Qₙ ⊗ Pₐ` onto its degree-zero part, is an isomorphism. -/
+theorem isIso_koszulCompletion_whiskerRight_proj (K : DerivedCategory A) (n : ℕ) (hn : a ≤ n) :
+    IsIso ((((rlimπ A (op n)).app ((reductionTower (koszulCoefficientTower F f)).obj K) ≫
+      ((reductionTowerIso (koszulCoefficientTower F f)).hom.app K).app (op n)) ▷
+        Q.obj (quotComplex F f a)) ≫ (α_ _ _ _).hom ≫ K ◁ reductionProj F η f a n hn) := by
+  obtain ⟨k, rfl⟩ : ∃ k, n = k + a := ⟨n - a, by lia⟩
+  let P' := Q.obj (quotComplex F f a)
+  have : (tensorRight P').IsRightAdjoint := (tensorRightAdjunction (ᘁP') P').isRightAdjoint
+  have : PreservesLimitsOfSize.{0, 0} ((curriedTensor (DerivedCategory A)).flip.obj P') :=
+    inferInstanceAs (PreservesLimitsOfSize.{0, 0} (tensorRight P'))
+  let e := (reductionTowerIso (koszulCoefficientTower F f)).app K
+  let c₀ := rlimCone A ((reductionTower (koszulCoefficientTower F f)).obj K)
+  have h₀ : IsHomotopyLimit c₀ := isHomotopyLimit_rlimCone _
+  have h₁ : IsHomotopyLimit ((Cones.postcompose e.hom).obj c₀) :=
+    h₀.of_iso e _ (Iso.refl _) fun n ↦ by simp
+  have h₂ := (h₁.whiskerAdd a).map ((curriedTensor (DerivedCategory A)).flip.obj P')
+  have := h₂.isIso_π_comp_of_retraction (reductionRetractβ F η f a K)
+    (reductionRetractσ F η f a hflat K) (reductionRetractσ_β F η f a hflat K) a
+    (reductionRetractTower_map_eq F η f a hflat K) k
+  exact this
+
+/-- The degree-zero projection `(K ⊗ᴸ Qₐ) ⊗ᴸ Pₐ ⟶ K ⊗ᴸ Pₐ`, natural in `K`. -/
+noncomputable def reductionProjNatTrans :
+    (reductionSystem (koszulCoefficientTower F f) ⋙ (evaluation _ _).obj (op a)) ⋙
+      (curriedTensor _).flip.obj (Q.obj (quotComplex F f a)) ⟶
+      (curriedTensor _).flip.obj (Q.obj (quotComplex F f a)) where
+  app K := (α_ _ _ _).hom ≫ K ◁ reductionProj F η f a a le_rfl
+  naturality K K' g := by
+    change (g ▷ _) ▷ _ ≫ _ = _ ≫ g ▷ _
+    rw [associator_naturality_left_assoc, Category.assoc, whisker_exchange]
+
+/-- **Blueprint `lemma-weil-pbc-adic-completion-reduction`** (the map). The map
+`(R lim_n Kₙ) ⊗ᴸ Pₐ ⟶ Kₐ = K ⊗ᴸ Pₐ` induced by the projection to level `a`: through the
+comparison `c_K : K^{∧,Kos} ≅ R lim_n Kₙ` (`DerivedCategory.koszulToAdicCompletionIso`) it is
+the projection `K^{∧,Kos} ⟶ K ⊗ᴸ Qₐ` to level `a`, tensored with `Pₐ`, followed by the projection
+of `Qₐ ⊗ Pₐ` (whose differential vanishes) onto its degree-zero part `Pₐ`. -/
+noncomputable def adicCompletionReduction :
+    adicCompletion F (Ideal.span (Set.range f)) ⋙
+        (curriedTensor _).flip.obj (Q.obj (quotComplex F f a)) ⟶
+      (curriedTensor _).flip.obj (Q.obj (quotComplex F f a)) :=
+  Functor.whiskerRight (inv (koszulToAdicCompletion F f)) _ ≫
+    Functor.whiskerRight (Functor.whiskerLeft (reductionTower (koszulCoefficientTower F f))
+      (rlimπ A (op a)) ≫ Functor.whiskerRight (reductionTowerIso (koszulCoefficientTower F f)).hom
+        ((evaluation _ _).obj (op a))) _ ≫
+    reductionProjNatTrans F η f a
+
+include hflat in
+/-- **Blueprint `lemma-weil-pbc-adic-completion-reduction`.** Let `Λ` be Noetherian and assume
+`Pₐ = F(Λ ⧸ Iᵃ)` perfect, in the sense that it is dualizable in `D(A)` (this is all that is used:
+tensoring with `Pₐ` then commutes with the countable products of the product-cone model). Then
+projection to level `a` induces a functorial isomorphism `(R lim_n Kₙ) ⊗ᴸ Pₐ ≅ Kₐ = K ⊗ᴸ Pₐ`. -/
+theorem isIso_adicCompletionReduction : IsIso (adicCompletionReduction F η f a) := by
+  have (K : DerivedCategory A) : IsIso ((adicCompletionReduction F η f a).app K) := by
+    have := isIso_koszulCompletion_whiskerRight_proj F η f a hflat K a le_rfl
+    dsimp [adicCompletionReduction, reductionProjNatTrans]
+    simp only [Category.assoc]
+    infer_instance
+  exact NatIso.isIso_of_isIso_app _
+
+include hflat in
+/-- **Blueprint `lemma-weil-pbc-adic-completion-reduction`** (the isomorphism). -/
+noncomputable def adicCompletionReductionIso :
+    adicCompletion F (Ideal.span (Set.range f)) ⋙
+        (curriedTensor _).flip.obj (Q.obj (quotComplex F f a)) ≅
+      (curriedTensor _).flip.obj (Q.obj (quotComplex F f a)) :=
+  have := isIso_adicCompletionReduction F η f a hflat
+  asIso (adicCompletionReduction F η f a)
+
+end Main
+
 end DerivedCategory
