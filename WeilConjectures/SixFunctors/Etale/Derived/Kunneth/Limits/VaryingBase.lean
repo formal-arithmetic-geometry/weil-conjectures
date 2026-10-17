@@ -62,6 +62,19 @@ def varyingBaseStage (j : I) (U : Over j) : LimitStage cS.pt W :=
 def varyingBaseStarStage (j : I) : LimitStage cS.pt W :=
   ⟨cT.pt, S.obj j, g₀ ≫ cS.π.app j, cS.π.app j, 𝟙 _ ≫ w₀⟩
 
+/-- The morphism of stages from `(T, Sⱼ, …)` to `(Tₖ, Sⱼ, …)` for `U = (k ⟶ j)`. -/
+abbrev varyingBaseStarHom (j : I) (U : Over j) :
+    LimitStage.Hom (varyingBaseStarStage (cS := cS) w₀ j) (varyingBaseStage g w j U) :=
+  ⟨cT.π.app U.left, 𝟙 _, by rw [Category.comp_id, ← Category.assoc, cT.w U.hom, hg₀],
+    by simp, by rw [hw₀, Category.id_comp]⟩
+
+/-- The morphism of stages from `(Tₖ, Sⱼ, …)` to `(Tₗ, Sⱼ, …)` for a morphism `U ⟶ V` over
+`j`. -/
+abbrev varyingBaseStageHom {j : I} {U V : Over j} (φ : U ⟶ V) :
+    LimitStage.Hom (varyingBaseStage (cS := cS) g w j U) (varyingBaseStage g w j V) :=
+  ⟨T.map φ.left, 𝟙 _, by rw [Category.comp_id, ← Category.assoc, ← T.map_comp, Over.w φ],
+    by simp, by simpa using w.naturality φ.left⟩
+
 include hg₀ hw₀ in
 /-- **The fixed-base input.** Over `Sⱼ`, `R^q (T ⟶ Sⱼ)_* (G|_T)` is the filtered colimit of the
 `R^q (Tₖ ⟶ Sⱼ)_* (G|_{Tₖ})`, `k ⟶ j`, pulled back to `S` (Stacks 09Z1). -/
@@ -77,14 +90,93 @@ lemma isElementwiseColimit_varyingBaseStage [IsCofiltered I] (hT : IsLimit cT)
       ((stalkHomology Λ q x).obj ((LimitStage.functor Λ (varyingBaseStarStage w₀ j)).obj
         ((DerivedCategory.Plus.singleFunctor _ 0).obj G)))
       (fun U ↦ (stalkHomology Λ q x).map ((LimitStage.transition Λ
-        (⟨cT.π.app U.left, 𝟙 _, by rw [Category.comp_id, ← Category.assoc, cT.w U.hom, hg₀],
-          by simp, by rw [hw₀, Category.id_comp]⟩ : LimitStage.Hom (varyingBaseStarStage w₀ j)
-            (varyingBaseStage g w j U))).app ((DerivedCategory.Plus.singleFunctor _ 0).obj G)))
-      (fun {U V} φ ↦ (stalkHomology Λ q x).map ((LimitStage.transition Λ
-        (⟨T.map φ.left, 𝟙 _, by rw [Category.comp_id, ← Category.assoc, ← T.map_comp, Over.w φ],
-          by simp, by simpa using w.naturality φ.left⟩ :
-          LimitStage.Hom (varyingBaseStage g w j U) (varyingBaseStage g w j V))).app
-            ((DerivedCategory.Plus.singleFunctor _ 0).obj G))) :=
+        (varyingBaseStarHom g hg₀ w w₀ hw₀ j U)).app
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj G)))
+      (fun {_ _} φ ↦ (stalkHomology Λ q x).map ((LimitStage.transition Λ
+        (varyingBaseStageHom g w φ)).app ((DerivedCategory.Plus.singleFunctor _ 0).obj G))) :=
   sorry
+
+/-- The `[*]`-system `(T, Sⱼ, g₀ ≫ πⱼ, πⱼ, 𝟙 ≫ w₀)`. -/
+noncomputable abbrev varyingBaseStarSystem : LimitStageSystem cS.pt W I :=
+  (pushforwardStageSystem cS g₀).mapW w₀
+
+lemma isStalkColimit_varyingBaseStarSystem [IsCofiltered I] (hS : IsLimit cS)
+    [∀ {i j : I} (f : i ⟶ j), IsAffineHom (S.map f)]
+    [∀ i, CompactSpace (S.obj i)] [∀ i, QuasiSeparatedSpace (S.obj i)]
+    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) :
+    (varyingBaseStarSystem (g₀ := g₀) w₀).IsStalkColimit Λ
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj G) q :=
+  LimitStageSystem.isStalkColimit_mapW w₀ _ (LimitStageSystem.isStalkColimit_of_iso _
+    ((((w₀)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).app G)
+    (isStalkColimit_pushforwardStageSystem Λ cS g₀ hS _ q))
+
+include hg₀ hw₀ in
+/-- **Higher direct images along a limit with varying base** (Stacks 0EYM), on geometric
+stalks: `R^q g₀_* (G|_T)` is the filtered colimit of the `πᵢ^* R^q gᵢ_* (G|_{Tᵢ})`. -/
+theorem isStalkColimit_varyingBaseSystem [IsCofiltered I] (hS : IsLimit cS) (hT : IsLimit cT)
+    [∀ i, QuasiCompact (g.app i)] [∀ i, QuasiSeparated (g.app i)]
+    [∀ i, CompactSpace (S.obj i)] [∀ i, QuasiSeparatedSpace (S.obj i)]
+    [∀ {i j : I} (f : i ⟶ j), IsAffineHom (S.map f)]
+    [∀ {i j : I} (f : i ⟶ j), IsAffineHom (T.map f)] [QuasiCompact g₀] [QuasiSeparated g₀]
+    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) :
+    (varyingBaseSystem g hg₀ w w₀ hw₀).IsStalkColimit Λ
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj G) q := by
+  intro x
+  have hE := isStalkColimit_varyingBaseStarSystem Λ (g₀ := g₀) w₀ hS G q x
+  have hD := fun j ↦ isElementwiseColimit_varyingBaseStage Λ g hg₀ w w₀ hw₀ hT j G q x
+  let K := (DerivedCategory.Plus.singleFunctor (Sheaf W.smallEtaleTopology
+    (ModuleCat.{u + 1} Λ)) 0).obj G
+  let 𝒜 := varyingBaseSystem g hg₀ w w₀ hw₀
+  let ℰ := varyingBaseStarSystem (g₀ := g₀) w₀
+  have tc := LimitStage.transition_apply_comp Λ q x K
+  let ζ : LimitStage.Hom ℰ.pt 𝒜.pt := ⟨𝟙 _, 𝟙 _, by simp [ℰ, 𝒜], by simp [ℰ, 𝒜], by simp [ℰ, 𝒜]⟩
+  let ζ' : LimitStage.Hom 𝒜.pt ℰ.pt := ⟨𝟙 _, 𝟙 _, by simp [ℰ, 𝒜], by simp [ℰ, 𝒜], by simp [ℰ, 𝒜]⟩
+  let ρ (k : I) : LimitStage.Hom (varyingBaseStage g w k (Over.mk (𝟙 k))) (𝒜.obj k) :=
+    ⟨𝟙 _, 𝟙 _, by simp [𝒜], by simp [𝒜], by simp [𝒜]⟩
+  let ψ {j : I} (U : Over j) : LimitStage.Hom (𝒜.obj U.left) (varyingBaseStage g w j U) :=
+    ⟨𝟙 _, S.map U.hom, by simp [𝒜], by simp [𝒜], by simp [𝒜]⟩
+  let θ {α β : LimitStage cS.pt W} (φ : LimitStage.Hom α β) :=
+    ((stalkHomology Λ q x).map ((LimitStage.transition Λ φ).app K)).hom
+  have tc' {α β γ : LimitStage cS.pt W} (φ : LimitStage.Hom α β) (ψ : LimitStage.Hom β γ) (y) :
+      θ φ (θ ψ y) = θ (φ.comp ψ) y := tc φ ψ _ rfl y
+  let σD (j : I) (U : Over j) := varyingBaseStarHom g hg₀ w w₀ hw₀ j U
+  refine ⟨fun b ↦ ?_, fun k a ha ↦ ?_⟩
+  · obtain ⟨j, e, he⟩ := hE.1 (θ ζ b)
+    obtain ⟨U, d, rfl⟩ := (hD j).1 e
+    refine ⟨U.left, θ (ψ U) d, ?_⟩
+    have hχ : (𝒜.π U.left).comp (ψ U) = ζ'.comp ((ℰ.π j).comp (σD j U)) :=
+      LimitStage.Hom.ext (by simp [ζ', ψ, σD, 𝒜, ℰ]) (by simp [ζ', ψ, σD, 𝒜, ℰ])
+    have hinv := LimitStage.transition_apply_inv Λ q x K ζ' ζ
+      (LimitStage.Hom.ext (by simp [ζ, ζ']) (by simp [ζ, ζ'])) b
+    change θ (𝒜.π U.left) (θ (ψ U) d) = b
+    rw [tc', hχ, ← tc', ← tc']
+    exact (congrArg (θ ζ') he).trans hinv
+  · let e := θ (σD k (Over.mk (𝟙 k))) (θ (ρ k) a)
+    have he0 : θ (ℰ.π k) e = 0 := by
+      have hχ : (ℰ.π k).comp ((σD k (Over.mk (𝟙 k))).comp (ρ k)) = ζ.comp (𝒜.π k) :=
+        LimitStage.Hom.ext (by simp [ζ, ρ, σD, 𝒜, ℰ]) (by simp [ζ, ρ, σD, 𝒜, ℰ])
+      have : θ (𝒜.π k) a = 0 := ha
+      simp only [e]
+      rw [tc', tc', hχ, ← tc', this, map_zero]
+    obtain ⟨j, f, hf⟩ := hE.2 k e he0
+    let aj := θ (𝒜.map f) a
+    have hd0 : θ (σD j (Over.mk (𝟙 j))) (θ (ρ j) aj) = 0 := by
+      have hχ : ((σD j (Over.mk (𝟙 j))).comp (ρ j)).comp (𝒜.map f) =
+          (ℰ.map f).comp ((σD k (Over.mk (𝟙 k))).comp (ρ k)) :=
+        LimitStage.Hom.ext (by simp [ρ, σD, 𝒜, ℰ]) (by simp [ρ, σD, 𝒜, ℰ])
+      have : θ (ℰ.map f) e = 0 := hf
+      simp only [aj]
+      rw [tc', tc', hχ, ← tc', ← tc']
+      exact this
+    obtain ⟨V, φ, hφ⟩ := (hD j).2 (Over.mk (𝟙 j)) (θ (ρ j) aj) hd0
+    refine ⟨V.left, V.hom ≫ f, ?_⟩
+    have hχ : 𝒜.map (V.hom ≫ f) = (((ψ V).comp (varyingBaseStageHom g w φ)).comp (ρ j)).comp
+        (𝒜.map f) :=
+      LimitStage.Hom.ext (by simp [ψ, ρ, 𝒜, ← Over.w φ]) (by simp [ψ, ρ, 𝒜])
+    have hφ' : θ (varyingBaseStageHom g w φ) (θ (ρ j) aj) = 0 := hφ
+    change θ (𝒜.map (V.hom ≫ f)) a = 0
+    rw [hχ, ← tc', ← tc', ← tc']
+    simp only [aj] at hφ'
+    rw [hφ', map_zero]
 
 end AlgebraicGeometry.Etale

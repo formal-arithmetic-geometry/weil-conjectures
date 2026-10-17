@@ -193,6 +193,7 @@ lemma transition_id (α : LimitStage B W) : transition Λ (Hom.id α) = 𝟙 _ :
   rw [transition_app, h3]
   simp only [Category.assoc, ← Functor.map_comp, h2, CategoryTheory.Functor.map_id,
     Category.comp_id, NatTrans.id_app]
+  erw [Category.comp_id]
   exact h1
 
 end LimitStage

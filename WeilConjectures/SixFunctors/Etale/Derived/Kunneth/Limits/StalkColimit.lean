@@ -195,7 +195,6 @@ noncomputable def isColimitOfIsElementwiseColimit
       refine ⟨((X.uliftPointSmallEtale x).sheafFiber.map (colimit.ι F (op i))).hom a, ?_⟩
       erw [← ModuleCat.comp_apply, ← Functor.map_comp, colimit.isColimit_desc,
         colimit.ι_desc]
-      rfl
   IsColimit.ofPointIso (colimit.isColimit F)
 
 end AlgebraicGeometry.Etale

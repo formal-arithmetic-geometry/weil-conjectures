@@ -15,8 +15,33 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients
 # Base change along a limit of schemes of finite type over a field
 
 Let `K` be a field, `n` an integer invertible in `K` and killing the coefficient ring `Λ`, and
-`X` a scheme of finite type over `K`.
+`X` a scheme of finite type over `K`. For an affine `K`-scheme `S'`, `X' = X ×_K S'`, a morphism
+`t : T ⟶ S'` from an affine scheme and `Y = X' ×_{S'} T`, the exchange morphism
+`p'⁻¹ R^q t_* F ⟶ R^q h_* e⁻¹ F` is an isomorphism for every sheaf `F` pulled back from
+`Spec K` (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine`, the general
+form of blueprint `lem-kun-0f1i-normal`): writing `Γ(S')` and `Γ(T)` as directed unions of
+finite type `K`-subalgebras, `t` is a cofiltered limit of morphisms of schemes of finite type
+over `K`, and the limit theorem (blueprint `lem-kun-0ezt`) reduces the claim to
+`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_field`.
 
+Taking `T = Spec L` for a separably closed field `L`, the direct images along `t` vanish in
+positive degrees (blueprint `lem-kun-0ezp`), whence blueprint `lem-kun-0f1i-normal`:
+`AlgebraicGeometry.Etale.isZero_higherDirectImage_constantModSheaf_of_isAlgClosed`.
+
+## Main statements
+
+- `CategoryTheory.IsPullback.isLimitOfIsPullbackMap`: a cone whose square of cone points is
+  cartesian over a system of cartesian squares is a limit cone.
+- `CategoryTheory.Limits.isLimitPullbackConstCone`: base change commutes with connected limits.
+- `Subalgebra.isColimitCoconeOfMonotone`: a directed covering family of subalgebras is a filtered
+  colimit.
+- `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit_of_field`
+- `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine`
+- `AlgebraicGeometry.Etale.isZero_higherDirectImage_constantModSheaf_of_isAlgClosed`
+
+## References
+
+- Stacks Project, Lemma 0F1I, <https://stacks.math.columbia.edu/tag/0F1I>
 -/
 
 @[expose] public section
@@ -333,7 +358,8 @@ theorem Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine {K : Type u} [Fie
     dsimp [cS, w]
     rw [Category.assoc, ← Spec.map_comp]
     rfl
-  have ht (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) : t ≫ cS.π.app i = cT.π.app i ≫ g.app i := by
+  have ht (i : (Finset (Γ(S', ⊤) ⊕ Γ(T, ⊤)))ᵒᵖ) :
+      t ≫ cS.π.app i = cT.π.app i ≫ g.app i := by
     dsimp [cS, cT, g]
     rw [Scheme.toSpecΓ_naturality_assoc, Category.assoc, ← Spec.map_comp, ← Spec.map_comp]
     rfl
@@ -393,7 +419,8 @@ theorem Etale.isZero_higherDirectImage_constantModSheaf_of_isAlgClosed {K : Type
     hsrc.of_iso (asIso (Etale.baseChangeHomologyMap Λ sq q F)).symm
   let E : Etale.constantModSheaf Λ Y d ≅ ((e)^*[ModuleCat.{u + 1} Λ]).obj F :=
     ((Etale.constantSheafCompUpperStarIso Λ e).app M).symm ≪≫
-      ((e)^*[ModuleCat.{u + 1} Λ]).mapIso ((Etale.constantSheafCompUpperStarIso Λ (t ≫ s)).app M).symm
+      ((e)^*[ModuleCat.{u + 1} Λ]).mapIso
+        ((Etale.constantSheafCompUpperStarIso Λ (t ≫ s)).app M).symm
   exact htgt.of_iso ((DerivedCategory.Plus.singleFunctor _ 0 ⋙ R+((h)_*[ModuleCat.{u + 1} Λ]) ⋙
     DerivedCategory.Plus.homologyFunctor _ q).mapIso E ≪≫
       ((Etale.baseChangeTargetFunctorIso Λ e h q).app F).symm)

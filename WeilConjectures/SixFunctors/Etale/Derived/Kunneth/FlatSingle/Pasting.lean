@@ -90,9 +90,8 @@ lemma tensorBaseChangeMap_tensorUnit {X' S' T Y : Scheme.{u}} (h : Y ⟶ X') (e 
       (λ_ _).hom ≫ (derivedBaseChangeMap A (CommSq.mk w.symm)).app F := by
   apply ((derivedUpperStarLowerStarAdjunction A h).homEquiv _ _).symm.injective
   rw [Adjunction.homEquiv_naturality_right_symm, Adjunction.homEquiv_naturality_left_symm,
-    Adjunction.homEquiv_counit, tensorBaseChangeMap, Equiv.symm_apply_apply,
-    ← tensorBaseChangeCounitApp_eq]
-  dsimp only [derivedTensor_obj_map]
+    tensorBaseChangeMap_eq, Equiv.symm_apply_apply, Adjunction.homEquiv_counit,
+    ← tensorBaseChangeCounitApp_eq, derivedTensor_obj_map]
   rw [Category.assoc, ← whisker_exchange_assoc, leftUnitor_naturality,
     ← leftDerivedUpperStarTensorComparison_leftUnitor_hom_assoc]
   rfl

@@ -47,7 +47,8 @@ noncomputable def tensorRestrictScalarsInv (M : ModuleCat.{u} R) (P : ModuleCat.
   letI := f.toAlgebra
   letI : Module R P := Module.compHom P f
   haveI : IsScalarTower R S P := IsScalarTower.of_algebraMap_smul fun _ _ ↦ rfl
-  ofHom
+  ofHom (X := ((restrictScalars f).obj ((extendScalars f).obj M ⊗ P) : Type u))
+    (Y := (M ⊗ (restrictScalars f).obj P : ModuleCat.{u} R))
     { toFun := fun x ↦ TensorProduct.comm R P M
         (AlgebraTensorModule.cancelBaseChange R S S P M (TensorProduct.comm S _ P x))
       map_add' := by intros; simp only [map_add]
@@ -69,7 +70,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 lemma tensorRestrictScalarsInv_tmul_tmul (M : ModuleCat.{u} R) (P : ModuleCat.{u} S) (s : S)
     (m : M) (p : P) :
     tensorRestrictScalarsInv f M P ((s ⊗ₜ[R, f] m) ⊗ₜ p) =
-      (m ⊗ₜ (s • p : P) : M ⊗ (restrictScalars f).obj P) :=
+      (m ⊗ₜ[R] ((s • p : P) : (restrictScalars f).obj P) : M ⊗ (restrictScalars f).obj P) :=
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
@@ -79,12 +80,12 @@ noncomputable def tensorRestrictScalarsIso (M : ModuleCat.{u} R) (P : ModuleCat.
   hom := tensorRestrictScalarsHom f M P
   inv := tensorRestrictScalarsInv f M P
   hom_inv_id := by
-    ext m p
-    dsimp
+    refine MonoidalCategory.tensor_ext fun m p ↦ ?_
+    simp only [hom_comp, LinearMap.comp_apply, hom_id, LinearMap.id_apply]
     rw [tensorRestrictScalarsHom_tmul, tensorRestrictScalarsInv_tmul_tmul, one_smul]
   inv_hom_id := by
     ext x
-    dsimp
+    simp only [hom_comp, LinearMap.comp_apply, hom_id, LinearMap.id_apply]
     induction x using TensorProduct.induction_on with
     | zero => simp
     | tmul y p =>
