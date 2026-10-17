@@ -1,0 +1,76 @@
+{
+ "id": "lem-zl-monic-divisor-algebraic-coefficients",
+ "kind": "statement",
+ "title": "A monic divisor of a base-field polynomial has algebraic coefficients",
+ "statement": "Let $K/k$ be a field extension [def-pc-field-extension], let $P\\in k[T]$ and $Q\\in K[T]$ [def-weil-polynomial-ring] be monic, meaning their leading coefficients are $1$. Write $P_K$ for the coefficientwise image of $P$ under $k\\to K$ [def-weil-coefficientwise-ring-hom-map]. If $Q$ divides $P_K$ in $K[T]$, then every coefficient of $Q$ is algebraic over $k$ [def-weil-algebraic-element].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00H6 (lemma-polynomials-divide), clause (1), specialized to the subfield k of K"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-polynomial-ring",
+  "def-weil-coefficientwise-ring-hom-map",
+  "def-weil-algebraic-element"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coefficients of a monic polynomial divisor of a monic polynomial over a base ring are integral over the base ring",
+   "results": "Polynomial.isIntegral_coeff_of_dvd (Mathlib/RingTheory/Polynomial/IsIntegral), plus integralClosure.mem_lifts_of_monic_of_dvd_map; read the former at lines 60-73.",
+   "date": "2026-10-18",
+   "verdict": "match: specialize to the field extension and apply IsIntegral.isAlgebraic"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monic divisor over a field extension of a monic polynomial over the base field has algebraic coefficients",
+   "results": "Polynomial.isIntegral_coeff_of_dvd and integralClosure.mem_lifts_of_monic_of_dvd_map; fraction-field Gauss lemmas have additional hypotheses and are unnecessary.",
+   "date": "2026-10-18",
+   "verdict": "match: Polynomial.isIntegral_coeff_of_dvd"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.isIntegral_coeff_of_dvd",
+   "results": "One hit: for commutative rings R,S and Algebra R S, monic p and q with q dividing p.map imply IsIntegral R (q.coeff i). Tagged 00H6 (1).",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "^lemma isIntegral_coeff_of_dvd|^theorem IsIntegral.isAlgebraic|^lemma IsIntegral.isAlgebraic",
+   "results": "Mathlib/RingTheory/Polynomial/IsIntegral.lean:62 Polynomial.isIntegral_coeff_of_dvd; Mathlib/RingTheory/Algebraic/Integral.lean:54 IsIntegral.isAlgebraic. Read both statements and proofs.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Polynomial.isIntegral_coeff_of_dvd",
+  "file": "Mathlib/RingTheory/Polynomial/IsIntegral.lean",
+  "line": 62,
+  "how": "specializes in one line: (Polynomial.isIntegral_coeff_of_dvd P Q hP hQ hdiv i).isAlgebraic, with R = k and S = K. The theorem at lines 60-73 gives integral coefficients; IsIntegral.isAlgebraic (Mathlib/RingTheory/Algebraic/Integral.lean:54-55) gives algebraicity over the nontrivial field k. Both passages read on 2026-10-18."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-field-extension-algebraically-closed-geometric",
+  "date": "2026-10-18",
+  "group": "Q69"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Algebra, Tag 00H6 (lemma-polynomials-divide), clause (1), specialized to the subfield k of K; supporting the coefficient descent in the Tag 037P proof below lem-zl-geometric-irreducibility-separable (Tag 0G33 converse), used by lem-zl-bertini-finite-cover-curve",
+   "via": [
+    "lem-zl-field-extension-algebraically-closed-geometric",
+    "lem-zl-geometric-irreducibility-separable"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

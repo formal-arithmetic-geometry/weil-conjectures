@@ -12,9 +12,85 @@
   "def-weil-algebraic-element",
   "def-pc-geometrically-irreducible"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-zl-geometric-irreducibility-finite-separable-test], applied to the commutative $k$-algebra $K$, it suffices to prove that $\\operatorname{Spec}(K\\otimes_kE)$ is irreducible for every finite separable algebraic extension $E/k$. The affine fibre-product identification [lem-weil-pbc-fibre-product-affine-spectra] identifies this spectrum with the base change of $\\operatorname{Spec}K$ along $\\operatorname{Spec}E\\to\\operatorname{Spec}k$; this is the interpretation of geometric irreducibility in [def-pc-geometrically-irreducible]. Fix such $E$.",
+   "uses": [
+    "lem-zl-geometric-irreducibility-finite-separable-test",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037P proof, opening reduction using Tag 037K"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-separable-extension-primitive-element], choose $\\alpha\\in E$ with $E=k(\\alpha)$. Let $P\\in k[T]$ be its minimal polynomial. It is monic and irreducible by [def-weil-pbc-separable-algebraic-extension]. By [lem-weil-pbc-minimal-polynomial-quotient-field-iso], $d=\\deg P\\ge1$ and evaluation at $\\alpha$ gives $k[T]/(P)\\cong E$. Its hypotheses hold because $E/k$ is separable algebraic, hence $\\alpha$ is algebraic.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-primitive-element",
+    "def-weil-pbc-separable-algebraic-extension",
+    "lem-weil-pbc-minimal-polynomial-quotient-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037P proof, choice of primitive element using Fields Tag 030N and its minimal polynomial"
+   }
+  },
+  {
+   "text": "Put $P_K\\in K[T]$ for the polynomial with the same coefficients viewed in $K$. Under the presentation in Step 2, there is an isomorphism $K\\otimes_kE\\cong K[T]/(P_K)$: send $a\\otimes g(\\alpha)$ to the class of $a g(T)$. This is well-defined since the kernel of evaluation $k[T]\\to E$ is $(P)$. Conversely send a coefficient $a\\in K$ to $a\\otimes1$ and $T$ to $1\\otimes\\alpha$; the relation $P_K=0$ holds. The tensor universal property [def-weil-pbc-module-tensor-product] extends the first map from these balanced bilinear formulas. The two maps preserve multiplication and are inverse on coefficients, on $T$, and on the pure tensors that generate the tensor product. Thus they are inverse ring homomorphisms.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037P proof, the displayed identification K tensor E = K[T]/(P), with its maps written out"
+   }
+  },
+  {
+   "text": "Suppose $P_K=UV$ with both factors nonconstant. Replace $U$ by its leading-coefficient inverse times $U$ and $V$ by that leading coefficient times $V$. Both become monic since $P_K$ is monic. Each divides $P_K$, so [lem-zl-monic-divisor-algebraic-coefficients] makes every coefficient of both factors algebraic over $k$. The hypothesis on $K/k$ puts all these coefficients in $k$. Therefore $U$ and $V$ are coefficientwise images of monic nonconstant polynomials $U_0,V_0\\in k[T]$. Injectivity of $k\\to K$ gives $P=U_0V_0$, contradicting the irreducibility from Step 2. Hence $P_K$ is irreducible. This uses neither separability nor finite generation of $K/k$.",
+   "uses": [
+    "lem-zl-monic-divisor-algebraic-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037P proof, factorization contradiction, using Tag 00H6 (1) after monic normalization"
+   }
+  },
+  {
+   "text": "The ring $K[T]$ is a principal ideal domain by [lem-pur-polynomial-field-pid]. For $f\\notin(P_K)$, write $(P_K,f)=(h)$. Since $h$ divides the irreducible $P_K$, either $h$ is a unit or $h$ is associated to $P_K$. The latter would put $f$ in $(P_K)$, so $h$ is a unit. Thus $1=AP_K+Bf$ for some $A,B\\in K[T]$, and the class of $B$ is inverse to the class of $f$ in $K[T]/(P_K)$. This quotient is nonzero: $P_K$ has the positive degree $d$, so cannot divide $1$. It is therefore a field. By [def-weil-affine-spectrum] its spectrum has exactly one point, so is nonempty and irreducible. Step 3 now gives the required irreducibility for the arbitrary finite separable extension $E/k$; the criterion of Step 1 proves geometric irreducibility.",
+   "uses": [
+    "lem-pur-polynomial-field-pid",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037P proof, irreducibility of the polynomial quotient, with the PID argument made explicit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-geometric-irreducibility-finite-separable-test",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pc-geometrically-irreducible",
+  "lem-weil-pbc-finite-separable-extension-primitive-element",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
+  "def-weil-pbc-module-tensor-product",
+  "lem-zl-monic-divisor-algebraic-coefficients",
+  "lem-pur-polynomial-field-pid",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 037P (lemma-field-extension-geometrically-irreducible), with the monic factor normalization and quotient maps made explicit"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +119,45 @@
    "results": "Hits concern Algebra.IsGeometricallyReduced and algebraic closures; no geometric-irreducibility field-extension theorem.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field extension in which the base is relatively algebraically closed is geometrically irreducible",
+   "results": "Algebra.IsGeometricallyReduced, algebraic-closure and separably-closed definitions; none proves this irreducibility assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Irreducible polynomial remains irreducible under a field extension with no new algebraic elements",
+   "results": "Separable.map_irreducible_of_isPurelyInseparable, Gauss fraction-field lemmas, irreducible_comp and Kummer lemmas; hypotheses differ from relative algebraic closedness.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A relatively algebraically closed field extension is geometrically irreducible",
+   "results": "Algebra.IsGeometricallyReduced.mk, closure definitions, and reducedness test; no geometric irreducibility theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAlgClosed, Polynomial.Irreducible",
+   "results": "0 hits; remote index reports unknown identifier Polynomial.Irreducible.",
+   "date": "2026-10-18",
+   "verdict": "no match in this index"
+  },
+  {
+   "tool": "grep",
+   "query": "geometrically.?irreducible|IsRelativelyAlgebraicallyClosed|IsAlgebraicallyClosedIn",
+   "results": "15 hits: geometric irreducibility of affine space and geometric-property definitions; none states relative algebraic closedness implies geometric irreducibility.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-geometric-irreducibility-separable",
@@ -65,5 +176,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-field-extension-algebraically-closed-geometric",
+  "worker": "stage1",
+  "summary": "Realized the Tag 037P proof in five steps: reduce to finite separable extensions, choose a primitive element and minimal polynomial, write the tensor-quotient maps, descend monic factor coefficients using Mathlib, and prove the irreducible quotient is a field via the existing PID leaf. Reused primitive-element, minimal-polynomial, tensor and affine-spectrum interfaces; created one statement-only criterion and one Mathlib leaf. No project declaration proves the complete item.",
+  "blueprint": "Field-theoretic support below lem-zl-bertini-finite-cover-curve through lem-zl-geometric-irreducibility-separable: its Tag 0G33 converse invokes Tag 037P for K over its relative algebraic closure. The present split supplies that Tag 037P argument without changing the Bertini/unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-zl-geometric-irreducibility-finite-separable-test",
+    "why": "The general algebra criterion is the precise Tag 037K reduction explicitly used by Tag 037P; it supports the field argument rather than replacing any step of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-zl-geometric-irreducibility-finite-separable-test"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-8cd6aaf04",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-8cd6aaf04 (reviewer sub-agent of L); spot-checked: I read the whole delivery and the sources it cites; I changed no files. The item is Stacks 037P (algebra.tex l.11297) and its statement is unchanged. Step 1 reduces to finite separable extensions with the new 037K test, and the affine fibre-product leaf matches Spec(K⊗L) to the base change in def-pc-geometrically-irreducible. Step 2 uses the primitive-element leaf (Fields 030N), the minimal polynomial (monic and irreducible by its definition node) and the quotient leaf, whose algebraicity hypothesis holds. Step 3 is elementary: I checked that the map K⊗E→K[T]/(P_K) is well defined because P divides g−g' in k[T], and that the reverse map T↦1⊗α kills P_K. Step 4 does the monic normalization correctly and uses the 00H6 leaf; injectivity of k[T]→K[T] then contradicts irreducibility of P. Step 5 shows the quotient is a field by the PID/Bezout argument and is nonzero since deg≥1; the spectrum of a field is one point. New node 037K (1)⇔(2) for any commutative k-algebra (unsplit) matches Stacks l.11146. Small cases: R=0 false on both sides, R=k true, k×k false, k[ε]/(ε²) true. It is not a clause of the item and not a duplicate: rg over all DAG nodes found only the 054P/04KZ/037N nodes and a reducedness analogue, and the blueprint snapshots have no hit. New leaf: Polynomial.isIntegral_coeff_of_dvd (IsIntegral.lean:62, tagged 00H6(1); CommRing R, S with Algebra R S, as at l.30) followed by IsIntegral.isAlgebraic (Integral.lean:54) is a one-line specialization. Q=1 is trivial, and monicity is needed (X²=(tX)(t⁻¹X) over k(t)). Both new nodes record all three kinds of search. Every cited node is a mathlib leaf. The declared tool_use names a node in the same unit, so it is not needed and I do not accept it as a tool use; it is harmless. The parent 0G33 node uses the item exactly as stated, for K over its relative algebraic closure. No SGA, target or coefficient category is involved."
  }
 }
