@@ -10,11 +10,94 @@
  "stmt_deps": [
   "def-weil-pbc-derived-categories",
   "def-kun-derived-tensor",
-  "def-pur-derived-internal-hom"
+  "def-pur-derived-internal-hom",
+  "lem-sf-invertible-factor-hom-cancellation",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check that the shifted line really is invertible for derived tensor. Choose the sheaf inverse $Q^{-1}$ of $Q$. On an etale cover trivializing $Q$, the isomorphism $Q\\otimes Q^{-1}\\cong A_T$ trivializes $Q^{-1}$ too. Thus tensor with either sheaf is exact, checked on this cover where it is the identity; both are flat. Their one-term shifted complexes are K-flat by [lem-pc-kflat-closure]. The total-complex definition [def-kun-derived-tensor] now computes $Q[m]\\otimes_A^LQ^{-1}[-m]$ and its reverse as their degree-zero sheaf products, with zero differential. The given sheaf inverse isomorphisms give both products $A_T$. Hence $I=Q^{-1}[-m]$ is a two-sided inverse of $J$. In the remaining steps suppress monoidal associators, put $F=g^*$, $W=\\Omega'$, $P=FK$ and $H=[P,W]=D'P$, and write $[X,Y]=R\\mathcal Hom_A(X,Y)$, $e_{X,Y}:[X,Y]\\otimes X\\to Y$.",
+   "uses": [
+    "lem-pc-kflat-closure",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
+    "place": "Shifted line invertibility; bounded-flat K-flatness is sites-cohomology-lemma-bounded-flat-K-flat (Tag 06YQ); total tensor as in def-kun-derived-tensor."
+   }
+  },
+  {
+   "text": "By [lem-sf-ringed-derived-closed-symmetric-monoidal] on $(T_{\\mathrm{et}},A_T)$ and $(V_{\\mathrm{et}},A_V)$, derived tensor, its Koszul symmetry and $R\\mathcal Hom_A$ make these derived categories closed symmetric monoidal with evaluation $e$ as counit, which are the hypotheses of [lem-sf-invertible-factor-hom-cancellation]; with $I$ from step 1 it applies to $J$. Use its $t$. The composite $b=[P,\\theta]\\circ\\beta_{K,\\Omega}:FDK\\xrightarrow{\\sim}[P,W\\otimes J]$ is an isomorphism by the hypotheses. Define $\\alpha=t_{P,W,J}^{-1}\\circ b:FDK\\xrightarrow{\\sim}H\\otimes J$. This is precisely the canonical twisted dual comparison in the statement. No dualizability of $P$ is needed: the helper allows arbitrary $X=P$ and $Y=W$.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sf-invertible-factor-hom-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
+    "place": "Proof paragraph 4, returned step 7: construction of the specified twisted dual comparison."
+   }
+  },
+  {
+   "text": "For the second comparison set $u=[\\alpha^{-1},\\theta]\\circ\\beta_{DK,\\Omega}:FDDK\\xrightarrow{\\sim}[H\\otimes J,W\\otimes J]$. Here the first Hom variable is contravariant, so the substitution uses $\\alpha^{-1}$. By [lem-sf-invertible-factor-hom-cancellation], $s_{H,W,J}$ is an isomorphism. Define $\\gamma=s_{H,W,J}^{-1}\\circ u:FDDK\\xrightarrow{\\sim}[H,W]$. This is exactly the prescribed composite of the second beta comparison, substitution, and cancellation.",
+   "uses": [
+    "lem-sf-invertible-factor-hom-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
+    "place": "Proof paragraph 4, returned step 7: second comparison and cancellation in both Hom variables."
+   }
+  },
+  {
+   "text": "Record the evaluation equations that will determine the arrow, rather than merely the objects. The evaluation-preserving beta hypotheses and the two displayed equations of [lem-sf-invertible-factor-hom-cancellation] give\n$$\\theta\\circ F(e_{K,\\Omega})=(e_{P,W}\\otimes1_J)\\circ(1_H\\otimes\\sigma_{J,P})\\circ(\\alpha\\otimes1_P),$$\n$$\\theta\\circ F(e_{DK,\\Omega})=(e_{H,W}\\otimes1_J)\\circ(\\gamma\\otimes\\alpha).$$\nThe domains are respectively $FDK\\otimes P$ and $FDDK\\otimes FDK$. The first equation substitutes $t\\alpha=b$ into the first normalization; the second substitutes $s\\gamma=u$ into the second normalization. Naturality of the adjunction of [lem-sf-ringed-derived-closed-symmetric-monoidal] in all three variables (so $e_{X,Y}\\circ(1\\otimes\\varphi)=e_{X',Y}\\circ([\\varphi,Y]\\otimes1)$ for $\\varphi:X'\\to X$, and $\\theta\\circ e=e\\circ([X,\\theta]\\otimes1)$) handles the changes of variables. These are equations between the actual evaluation maps, using only the assumed strong monoidal comparisons of $F$.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sf-invertible-factor-hom-cancellation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
+    "place": "Proof paragraph 4, returned step 7: evaluation equations for alpha and gamma."
+   }
+  },
+  {
+   "text": "Put $f=\\gamma\\circ F\\delta_K:P\\to[H,W]$. By the defining transpose equation for $\\delta_K$,\n$$e_{DK,\\Omega}\\circ(\\delta_K\\otimes1_{DK})=e_{K,\\Omega}\\circ\\sigma_{K,DK}.$$\nApply the strong symmetric monoidal functor $F$, postcompose with $\\theta$, and precompose with $1_P\\otimes\\alpha^{-1}$. Substitute the two equations of step 4. On $P\\otimes H\\otimes J$ this gives\n$$\\bigl(e_{H,W}\\circ(f\\otimes1_H)\\bigr)\\otimes1_J=(e_{P,W}\\otimes1_J)\\circ(1_H\\otimes\\sigma_{J,P})\\circ\\sigma_{P,H\\otimes J}.$$\nIndeed naturality moves $\\alpha$ across the pulled-back symmetry. The hexagon writes $\\sigma_{P,H\\otimes J}=(1_H\\otimes\\sigma_{P,J})\\circ(\\sigma_{P,H}\\otimes1_J)$. Since $\\sigma_{J,P}\\sigma_{P,J}=1$, the right side is $(e_{P,W}\\circ\\sigma_{P,H})\\otimes1_J$. This calculation uses the naturality, involutivity and hexagon of the symmetry from [lem-sf-ringed-derived-closed-symmetric-monoidal], including the Koszul signs when $J$ is an odd shift.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
+    "place": "Proof paragraph 4, returned step 7: direct tensor-adjunction computation of the double-dual arrow."
+   }
+  },
+  {
+   "text": "Tensor the last equality with $I$ from step 1 and compose with $J\\otimes I\\cong\\mathbf1$ and the unitors. Naturality and the tensor bifunctor laws remove the common factor $J$, giving\n$$e_{H,W}\\circ(f\\otimes1_H)=e_{P,W}\\circ\\sigma_{P,H}.$$\nBy definition the right side is the uncurrying of $\\delta'_P:P\\to[H,W]$. The left side is the uncurrying of $f$. The inverse-adjunction and evaluation formulas in [lem-pod-closed-uncurry-laws], using symmetry to interchange its left-evaluation convention with our right-evaluation convention, identify these with the corresponding adjunction images. Since that adjunction map, the bijection of [lem-sf-ringed-derived-closed-symmetric-monoidal] whose inverse is $u\\mapsto e_{H,W}\\circ(u\\otimes1_H)$, is injective, $f=\\delta'_P$, which is the required $\\gamma\\circ g^*\\delta_K=\\delta'_P$.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-pod-closed-uncurry-laws"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
+    "place": "Proof paragraph 4, returned step 7: cancel the invertible factor and use injectivity of the transpose bijection."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-closure",
+  "def-kun-derived-tensor",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sf-invertible-factor-hom-cancellation",
+  "lem-pod-closed-uncurry-laws"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-weil-etale-geometric-biduality.md",
+  "place": "Proof paragraph 4, returned step 7, expanded using the closed monoidal transpose laws and the invertible-factor cancellation specialization."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -54,7 +137,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-weil-etale-geometric-biduality",
@@ -71,5 +154,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-etale-twisted-bidual-transport",
+  "worker": "stage1",
+  "summary": "Retained the statement and earlier construction, corrected the final uncurrying argument to explicit typed evaluation equations and a hexagon cancellation, and checked invertibility of the shifted line. One generic cancellation sublemma remains statement-only. Reconciled every new-node search with actual msearch log entries. Maintainer reader (Q127 review): added statement-only node lem-sf-ringed-derived-closed-symmetric-monoidal (Stacks 0FPT, 08J9) for the closed symmetric monoidal structure of the ordinary etale derived categories, which steps 2-6 use when applying the helper and the hexagon; cited in the statement dependencies and steps 2, 4, 5, 6.",
+  "blueprint": "Realizes proof paragraph 4, returned step 7: cancellation of the invertible generic-fibre twist in the evaluation-defined double-dual arrow.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-closure",
+    "why": "Only its general bounded-flat K-flatness clause is used to compute the inverse of the shifted rank-one sheaf; it is a generic ringed-site tool, not an alternative biduality route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-closure"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q127-614eb0326",
+  "group": "Q127",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-614eb0326 (reviewer sub-agent of L); spot-checked: I read the delivery in full: the item, the new helper, every cited statement, the ancestor (all 22 steps; step 10 is the only citer), the unit, master blueprint paragraph 4, the main-20261015 lem-weil-geometric-generic-duality text, and Stacks sites-cohomology 0FPT and 08J9. The coefficient category is ordinary constant-A etale throughout. Beta, theta and their evaluation normalization match lem-sf-etale-generic-exchange-algclosed. The statement is unchanged and no comparison theorem is presupposed. I recomputed all six steps. Step 1: the shifted line is invertible via the K-flat one-term complexes. Step 4: both evaluation equations hold, using extranaturality of e. Steps 5-6: the hexagon and involution cancellation and the transpose injectivity give gamma∘g*delta_K = delta'_P. I tested J=1, invertible modules and an odd shift with the Koszul sign. The helper lem-sf-invertible-factor-hom-cancellation is true, well typed, self-contained and statement-only, and is not a clause of the parent. It does not duplicate lem-sf-twist-interchange, lem-pod-relative-biduality-invertible or lem-sfb-dual-tensor-adjunctions, and same_as=[] is correct. I accept the declared lem-pc-kflat-closure tool use. One C1/E1 fault, now repaired: steps 2-6 apply the abstract helper, the symmetry/hexagon and the transpose bijection inside D(T_et,A) and D(V_et,A), but no cited node states that these categories are closed symmetric monoidal. No such ringed-site node exists; the existing ones are scheme-only or underived. I added the statement-only node lem-sf-ringed-derived-closed-symmetric-monoidal (Stacks 0FPT + 08J9, same unit, created.item set to this item). I cited it in the item's stmt_deps and in steps 2, 4, 5 and 6, and updated proof_deps. Its Mathlib grep found nothing; LeanSearch and Loogle could not be reached from this machine and are recorded as unavailable.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }

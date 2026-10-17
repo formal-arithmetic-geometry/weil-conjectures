@@ -24,9 +24,119 @@
   "fix-lem-exchanges",
   "prop-functor-package"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Properness of $\\alpha'$ follows from [lem-weil-pbc-proper-base-change]. The finite-stage preservation statements (i), (iii), (iv) of [thm-sf-ctf-stability] put all the pullbacks, direct images and compact-support images used below in $D^b_{ctf}$. By [lem-sf-proetale-constructible-origin](ii), each such bounded constructible finite-coefficient object admits an etale-origin witness. Choose and retain these witnesses when using compact-support composition: [thm-sf-comp-composition] is stated on that witnessed domain. Thus its domain hypothesis is satisfied, without assuming that arbitrary pro-etale complexes have etale origin.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "thm-sf-ctf-stability",
+    "lem-sf-proetale-constructible-origin",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-map-exchange.proof.md",
+    "place": "Last assertion: domains and proper comparisons"
+   }
+  },
+  {
+   "text": "Choose a compactification $\\beta=pj$, with $j:V\\hookrightarrow\\bar V$ open and $p:\\bar V\\to W$ proper, using [thm-nagata-compactification]. Pull it back along $\\alpha$, writing $\\bar V'=U\\times_W\\bar V$, $a:\\bar V'\\to\\bar V$, $p':\\bar V'\\to U$ and $j':V'\\hookrightarrow\\bar V'$. The proper/open base-change facts [lem-weil-pbc-proper-base-change, lem-weil-pbc-open-immersion-base-change] give proper $a,p'$ and open $j'$. All schemes remain separated of finite type over $k$. Suppress canonical composition parentheses. Set $b:a^*j_!\\xrightarrow{\\sim}j'_!\\alpha'^*$ and $T_p:\\alpha^*Rp_*\\to Rp'_*a^*$. By the defining compactification formula [def-exchange-projection], read on the compactification $(j,p)$ (equivalently, by the vertical pasting of [fix-lem-exchanges](2) for $\\beta=pj$, where the formula for $(\\mathrm{id},p)$ gives $T_p$ and that for $(j,\\mathrm{id})$ gives $b$), and the choice independence of [fix-lem-exchanges](4),\n$$T=Rp'_*(b)\\circ T_pj_!.$$\nLet $\\chi:j_!R\\alpha'_*\\to Ra_*j'_!$ and $\\Theta_p:Rp_*Ra_*\\to R\\alpha_*Rp'_*$ be the composition comparisons for the two smaller squares. Associativity of [thm-sf-comp-composition], with the proper/open normalizations of [lem-trf-compact-composition-proper-square-normalization], identifies the specified comparison in the item with\n$$\\Theta=(\\Theta_pj'_!)\\circ Rp_*(\\chi).$$\nIt remains to compute the ordinary mates for these two factors.",
+   "uses": [
+    "thm-nagata-compactification",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-exchange-projection",
+    "fix-lem-exchanges",
+    "thm-sf-comp-composition",
+    "lem-trf-compact-composition-proper-square-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-map-exchange.proof.md",
+    "place": "Last assertion: expand the specified compactification exchange and composition; Stacks Tags 0F7B, 0F7J"
+   }
+  },
+  {
+   "text": "For the proper square, $T_p$ is the direct-image exchange of [def-exchange-projection]: the mate of the pullback-square comparison under $p^*\\dashv Rp_*$ and $p'^*\\dashv Rp'_*$. Take its mate instead under $\\alpha^*\\dashv R\\alpha_*$ and $a^*\\dashv Ra_*$. The resulting component is explicitly\n$$C_{p,N}=R\\alpha_*(Rp'_*(\\varepsilon_{a,N})\\circ T_{p,Ra_*N})\\circ\\eta_{\\alpha,Rp_*Ra_*N}.$$\nBy the iterated-mate identity [lem-trf-iterated-square-mates] (with $L_2=p'^*$, $F_1=\\alpha^*$, $F_2=a^*$, $L_1=p^*$), taking these two successive mates is the conjugate of the pullback comparison $p'^*\\alpha^*\\cong a^*p^*$ for $pa=\\alpha p'$ under the composite adjunctions $a^*p^*\\dashv Rp_*Ra_*$ and $p'^*\\alpha^*\\dashv R\\alpha_*Rp'_*$. The ordinary direct-image compositions are precisely its conjugates by [fix-prop-adjunctions](3). Clause (1) of [lem-trf-compact-composition-proper-square-normalization] identifies that comparison with $\\Theta_p$, so $C_{p,N}=\\Theta_{p,N}$. Undoing the $\\alpha$ adjunction, using its triangle identity, gives\n$$Rp'_*(\\varepsilon_{a,N})\\circ T_{p,Ra_*N}\n=\\varepsilon_{\\alpha,Rp'_*N}\\circ\\alpha^*\\Theta_{p,N}.$$\nThis uses properness of $p,p',a,\\alpha$, all already verified.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-trf-iterated-square-mates",
+    "fix-prop-adjunctions",
+    "lem-trf-compact-composition-proper-square-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-map-exchange.proof.md",
+    "place": "Last assertion: ordinary mate calculation for the proper factor"
+   }
+  },
+  {
+   "text": "For the open square write $F=a^*$, $F'=\\alpha'^*$, $A=Ra_*$, $A'=R\\alpha'_*$, $J=j_!$, $J'=j'_!$, $Q=j^*$, $Q'=j'^*$, and let $u:1\\to QJ$, $u':1\\to Q'J'$ be the open units. They are isomorphisms by [prop-weil-open-closed-recollement-adjunctions]. Write $s:Q'F\\cong F'Q$ for the pullback comparison. The inverse of $b:FJ\\to J'F'$ is, by [lem-sf-open-tensor-normalization], the $J'\\dashv Q'$-adjunct of $s^{-1}\\circ F'u$. Let $M:QA\\to A'Q'$ be the ordinary square mate of $s^{-1}:F'Q\\to Q'F$. The square mate of $b^{-1}:J'F'\\to FJ$ under $J\\dashv Q$ and $J'\\dashv Q'$ is $Q'(F\\varepsilon_J)\\circ Q'(b^{-1}Q)\\circ u'F'Q$; since $Q'b^{-1}\\circ u'F'=s^{-1}J\\circ F'u$ (the adjunct description above), naturality of $s$ and the triangle identity $Q\\varepsilon_J\\circ uQ=1$ reduce it to $s^{-1}$. Hence the iterated-mate identity [lem-trf-iterated-square-mates] (with $L_2=J'$, $F_1=F'$, $F_2=F$, $L_1=J$) shows that $M$ is the conjugate of $b^{-1}$ under $J'F'\\dashv A'Q'$ and $FJ\\dashv QA$. Since conjugation preserves inverse isomorphisms [def-weil-pbc-adjunction-conjugate],\n$$(b^{-1})^c=M,\\qquad b^c=M^{-1}.$$\nIn particular, with the notation of clause (2) of [lem-trf-compact-composition-proper-square-normalization],\n$$\\lambda_Z=A'(u_Z'^{-1})\\circ M_{J'Z},\\qquad\n\\lambda_Z^{-1}=b^c_{J'Z}\\circ A'(u'_Z).$$\nThese are formulas for the named maps, not a choice of an isomorphism between their endpoints.",
+   "uses": [
+    "prop-weil-open-closed-recollement-adjunctions",
+    "lem-sf-open-tensor-normalization",
+    "lem-trf-iterated-square-mates",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-trf-compact-composition-proper-square-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-map-exchange.proof.md",
+    "place": "Last assertion: open-factor mate and unit normalization"
+   }
+  },
+  {
+   "text": "Let $C:JA'\\to AJ'$ be the ordinary square mate of $b:FJ\\to J'F'$. The explicit mate formula of [def-weil-pbc-adjunction-mate] is\n$$C_Z=A(J'\\varepsilon_{\\alpha',Z})\\circ A(b_{A'Z})\\circ\\eta_{a,JA'Z}.$$\nIts open adjunct is $Q(C_Z)\\circ u_{A'Z}$. Substituting this formula and the conjugate formula of [def-weil-pbc-adjunction-conjugate], naturality of $u'$ and the triangle identity for $J'\\dashv Q'$ give\n$$Q(C_Z)\\circ u_{A'Z}=b^c_{J'Z}\\circ A'(u'_Z)=\\lambda_Z^{-1}.$$\nExplicitly, after moving $A'(u'_Z)$ through the units and $b$ by naturality, counit naturality gives $\\varepsilon_{\\alpha',Q'J'Z}\\circ F'A'(u'_Z)=u'_Z\\circ\\varepsilon_{\\alpha',Z}$. The open triangle then cancels $\\varepsilon_{J',J'Z}\\circ J'(u'_Z)=1_{J'Z}$; the remaining factors are $Q(\\eta_a)$, $Q(A b)$ and $Q(AJ'\\varepsilon_{\\alpha'})$ preceded by $u_{A'Z}$, exactly the left side. Clause (2) of [lem-trf-compact-composition-proper-square-normalization] states that $\\chi_Z$ has this same open adjunct $\\lambda_Z^{-1}$. The open adjunction Hom bijection is injective, so $C_Z=\\chi_Z$. Undoing the ordinary $a$ adjunction therefore yields\n$$j'_!(\\varepsilon_{\\alpha',Z})\\circ b_{R\\alpha'_*Z}\n=\\varepsilon_{a,j'_!Z}\\circ a^*(\\chi_Z).$$",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-adjunction-conjugate",
+    "prop-weil-open-closed-recollement-adjunctions",
+    "fix-prop-adjunctions",
+    "lem-trf-compact-composition-proper-square-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-map-exchange.proof.md",
+    "place": "Last assertion: identify the open-factor mate with the specified proper/open composition"
+   }
+  },
+  {
+   "text": "Now compute the right side of the required equality using the factorizations in step 2. The open-factor identity of step 5, naturality of $T_p$ for $\\chi_Z$, and the proper-factor identity of step 3, in that order, give\n$$\\begin{aligned}\nR\\beta'_!(\\varepsilon_{\\alpha',Z})\\circ T_{R\\alpha'_*Z}\n&=Rp'_*(j'_!\\varepsilon_{\\alpha',Z}\\circ b_{R\\alpha'_*Z})\\circ T_{p,j_!R\\alpha'_*Z}\\\\\n&=Rp'_*(\\varepsilon_{a,j'_!Z})\\circ Rp'_*a^*(\\chi_Z)\\circ T_{p,j_!R\\alpha'_*Z}\\\\\n&=Rp'_*(\\varepsilon_{a,j'_!Z})\\circ T_{p,Ra_*j'_!Z}\\circ\\alpha^*Rp_*(\\chi_Z)\\\\\n&=\\varepsilon_{\\alpha,Rp'_*j'_!Z}\\circ\\alpha^*(\\Theta_{p,j'_!Z})\\circ\\alpha^*Rp_*(\\chi_Z)\\\\\n&=\\varepsilon_{\\alpha,R\\beta'_!Z}\\circ\\alpha^*(\\Theta_Z).\n\\end{aligned}$$\nHere the compactification identifications are the ones of [def-exchange-projection], and [fix-lem-exchanges](4) and [thm-sf-comp-composition] make them independent of the chosen compactification and associative. The counit is the specified ordinary counit of [fix-prop-adjunctions](1). Thus the calculation proves the equality with the exact comparisons in the statement. No properness of $\\beta$ or $\\beta'$ entered.",
+   "uses": [
+    "def-exchange-projection",
+    "fix-lem-exchanges",
+    "thm-sf-comp-composition",
+    "fix-prop-adjunctions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-map-exchange.proof.md",
+    "place": "Last assertion: paste the two counit calculations and use naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-adjunction-mate",
+  "fix-lem-exchanges",
+  "fix-prop-adjunctions",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-proetale-constructible-origin",
+  "lem-trf-compact-composition-proper-square-normalization",
+  "lem-trf-iterated-square-mates",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "thm-nagata-compactification",
+  "thm-sf-comp-composition",
+  "thm-sf-ctf-stability"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-map-exchange.proof.md",
+  "place": "Last assertion, repaired ordinary-mate calculation through proper/open compactification; Stacks more-etale.tex Tags 0F7B and 0F7J for its geometric composition normalization."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,7 +175,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-trace-map-exchange",
@@ -81,5 +191,59 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-compact-support-exchange-counit",
+  "worker": "stage1",
+  "summary": "Retained the statement and previous search records; repaired an unsupported exceptional-to-ordinary mate inference. The six-step proof checks finite-coefficient etale-origin domains, factors beta into open and proper maps, uses the existing proper/open composition normalization node, computes both ordinary mates, and pastes the resulting counit identities explicitly. No new nodes.",
+  "blueprint": "Realizes the compact-support exchange/composition compatibility asserted in the last paragraph for the last assertion of lem-trf-trace-map-exchange.proof.md, with its omitted normalization calculation expanded. The sentence Ex_!=Ex_* based only on alpha proper has the wrong direction: beta need not be proper. We retain compact supports and use the prescribed geometric compactification instead; the unit route and item statement are unchanged.",
+  "tool_uses": [
+   {
+    "node": "fix-lem-exchanges",
+    "why": "Choice independence and pasting of the named compact-support exchange, retaining the unit route."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Associative composition of the named geometric compact-support functors on etale-origin objects."
+   },
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Finite-stage pullback and both direct-image preservation checks for intermediate objects."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Supplies etale-origin witnesses for bounded constructible finite-coefficient objects before using composition."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Specifies the open base-change inverse as an open-adjunction transpose; needed to compute its conjugate."
+   },
+   {
+    "node": "prop-weil-open-closed-recollement-adjunctions",
+    "why": "Open adjunction and its invertible units used to compare the proper/open maps."
+   },
+   {
+    "node": "lem-trf-compact-composition-proper-square-normalization",
+    "why": "Its cross-unit statement is used as a generic normalization tool for the proper/proper and proper/open compactification composition maps; the sk-p-proper route does not prove this compactification normalization itself."
+   }
+  ]
+ },
+ "tool_uses": [
+  "fix-lem-exchanges",
+  "thm-sf-comp-composition",
+  "thm-sf-ctf-stability",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-open-tensor-normalization",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "lem-trf-compact-composition-proper-square-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NX-5c35eb590",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-5c35eb590 (reviewer sub-agent of L); spot-checked: I read the whole item and all six steps against main-20261015 lem-trf-trace-map-exchange.proof.md (last assertion), the parent's step-2 equation (*), Stacks more-etale 0F7B (line 2460) and 0F7J (line 3159), and the statement of every cited node. The statement is unchanged and types correctly; I tested it with alpha=id, beta=id, beta proper, beta open and empty U. The coefficient category is D^b_ctf(A_{E,n}) with etale-origin witnesses; the proper comparison pi uses the identity-open compactification, matching prop-functor-package(3) and cor-cbc-proper-coincidence. The source-error claim holds: Ex_! takes direct images along beta, so 'alpha proper => Ex_!=Ex_*' fails (counterexample: alpha=id, beta=G_m in A^1). I recomputed every mate by hand: C_p equals Theta_p; conj(b^{-1}) equals M; Q(C_Z)u equals b^c(J'Z)A'(u') equals lambda^{-1}; C equals chi; the five-line final calculation is correct. Both normalization-node clauses apply: the open square (t_W=alpha', h=j', h'=j, t=a) is Cartesian, and the proper square has t_W=a, t=alpha, h=p', h'=p. Fault fixed (C4): steps 3 and 4 cited lem-weil-pbc-mate-pasting(2) for the iterated-mate=conjugate identity, which that clause does not state. I replaced it with the existing Mathlib leaf lem-trf-iterated-square-mates (iterated_mateEquiv_conjugateEquiv), wrote out the first-mate computation in step 4 and updated proof_deps. I also clarified the step-2 derivation of T from the (j,p) formula, i.e. vertical pasting in fix-lem-exchanges(2) with choice independence from (4). There are no new nodes, duplicates or cycles. Accepted tool_uses: lem-sf-open-tensor-normalization and lem-trf-compact-composition-proper-square-normalization, both generic normalization statements off the sk-p-proper route. No SGA is used.; 1 file(s) fixed by the reviewer"
  }
 }

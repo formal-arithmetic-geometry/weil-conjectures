@@ -1,0 +1,81 @@
+{
+ "id": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-etale-geometric-biduality",
+   "place": "Proof paragraph 4, returned step 7: the closed symmetric monoidal structure of the ordinary etale derived categories in which the invertible twist is cancelled and the double-dual arrows are compared (the symmetry, hexagon and tensor-Hom transposition used to define alpha, gamma and delta).",
+   "via": [
+    "lem-sf-etale-twisted-bidual-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The derived category of a ringed site is closed symmetric monoidal",
+ "statement": "Let $\\mathcal C$ be a site whose underlying category is small and $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$. Use the category of sheaves of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category] and its unbounded derived category $D(\\mathcal O)$ [def-weil-abstract-derived-category]. For $K,L\\in D(\\mathcal O)$ let $K\\otimes^{\\mathbf L}_{\\mathcal O}L$ be represented by the total tensor complex [def-pc-tensor-complex-sheaves] of a K-flat complex [def-pc-kflat-complex] representing $K$ and any complex representing $L$, and let $R\\mathcal Hom_{\\mathcal O}(L,M)$ be the derived internal Hom [def-pur-derived-internal-hom].\n\nThen $D(\\mathcal O)$ with tensor bifunctor $\\otimes^{\\mathbf L}_{\\mathcal O}$, unit $\\mathcal O$ placed in degree zero, the associativity and unit isomorphisms induced on total tensor complexes of K-flat representatives by those of tensor products of module sheaves, and the symmetry $\\sigma_{K,L}:K\\otimes^{\\mathbf L}_{\\mathcal O}L\\xrightarrow{\\sim}L\\otimes^{\\mathbf L}_{\\mathcal O}K$ induced by $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ on the summand of bidegree $(p,q)$, is a monoidal category [def-sfb-monoidal-category] whose symmetry is natural in both variables and satisfies $\\sigma_{L,K}\\circ\\sigma_{K,L}=1$ and the hexagon identity\n$$\\alpha_{L,M,K}\\circ\\sigma_{K,L\\otimes M}\\circ\\alpha_{K,L,M}=(1_L\\otimes\\sigma_{K,M})\\circ\\alpha_{L,K,M}\\circ(\\sigma_{K,L}\\otimes1_M),$$\nwhere $\\alpha_{X,Y,Z}:(X\\otimes Y)\\otimes Z\\xrightarrow{\\sim}X\\otimes(Y\\otimes Z)$ is the associator. It is closed: for all $K,L,M\\in D(\\mathcal O)$ there is a bijection\n$$\\operatorname{Hom}_{D(\\mathcal O)}(K\\otimes^{\\mathbf L}_{\\mathcal O}L,M)\\cong\\operatorname{Hom}_{D(\\mathcal O)}(K,R\\mathcal Hom_{\\mathcal O}(L,M)),$$\nnatural in $K$, $L$ and $M$ (contravariantly in $K$ and $L$). Its counit at $K=R\\mathcal Hom_{\\mathcal O}(L,M)$ is the evaluation $e_{L,M}:R\\mathcal Hom_{\\mathcal O}(L,M)\\otimes^{\\mathbf L}_{\\mathcal O}L\\to M$, and a morphism $u:K\\to R\\mathcal Hom_{\\mathcal O}(L,M)$ corresponds to $e_{L,M}\\circ(u\\otimes1_L)$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPT (sites-cohomology-lemma-symmetric-monoidal-derived: D(O) is symmetric monoidal with the usual associativity and commutativity constraints, signs as in More on Algebra section-sign-rules; proof omitted in the source) and Tag 08J9 (sites-cohomology-lemma-internal-hom: RHom(K,RHom(L,M)) = RHom(K tensor^L L, M), recovering equation-internal-hom Hom(K,RHom(L,M)) = Hom(K tensor^L L, M) on H^0)."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "def-pur-derived-internal-hom",
+  "def-sfb-monoidal-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'MonoidalCategory\\|SymmetricCategory\\|MonoidalClosed' /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib/Algebra/Homology/",
+   "results": "Mathlib/Algebra/Homology/Monoidal.lean only (monoidal structure on homological complexes HomologicalComplex C c with TensorSigns; no braiding, no derived category, no internal Hom)",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ls /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/ and grep DerivedCategory files for Monoidal",
+   "results": "Basic, DerivabilityStructureInjectives, ExactFunctor, Ext, Fractions, FullyFaithful, HomologySequence, KInjective, KProjective, Linear, Plus, RightDerivedFunctorPlus, ShortExact, SingleTriangle, SmallShiftedHom, TStructure; no DerivedCategory file mentions Monoidal",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived category of sheaves of modules on a ringed site is closed symmetric monoidal with derived tensor and RHom",
+   "results": "not run: the reviewer's machine has no LeanSearch access in this review sandbox",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, SymmetricCategory",
+   "results": "not run: no Loogle access in this review sandbox",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-etale-twisted-bidual-transport",
+  "date": "2026-10-17",
+  "group": "Q127"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

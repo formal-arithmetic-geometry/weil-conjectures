@@ -11,9 +11,125 @@
   "lem-coef-simplicial-interval-lifting",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an uncountable regular $\\kappa\\in\\mathcal U$ greater than $|\\operatorname{Mor}D|$ and the size of every endpoint of $I\\cup J$. The latter endpoints are finite or countable by the displayed generating-family construction. Apply [lem-coef-scat-uniform-presentability] once, fixing its $\\mathcal U$-small representatives $\\mathcal R_D$ for presentable diagrams. In every containing universe the ground and diagram categories are locally $\\kappa$-presentable, with the stated pointwise criterion. This choice precedes any universe enlargement. For the rest of the proof fix $K=I$ or $J$ and put $C=K\\text{-cof}$.",
+   "uses": [
+    "lem-coef-scat-uniform-presentability",
+    "lem-coef-simplicial-interval-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3 proof, conditions (i)-(v), p.878; A.3.6.18 p.905"
+   }
+  },
+  {
+   "text": "By [lem-coef-simplicial-interval-lifting], $C$ is the weakly saturated closure of $K$ in every indicated universe: its maps are retracts of relative $K$-cell maps, and the usual lifting construction extends fillers through cells and retracts. For clarity, a pushout filler is induced by the pushout universal property; at a successor stage choose a filler against the attached $K$-map, and at a limit take the induced map from the colimit. The arrow-retract maps transport the resulting filler. Thus every weakly saturated operation on $C$ stays in $C$. Colimits of diagrams are pointwise by [lem-coef-scat-uniform-presentability]. Consequently the objectwise class $L_{K,\\mathcal V}$ is weakly saturated, including closure under transfinite composition by applying this lifting recursion at each object.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-scat-uniform-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.2.8.3 and A.3.3 proof, p.878; elementary lifting recursion"
+   }
+  },
+  {
+   "text": "Membership of a $\\mathcal U$-small arrow in $C$ is independent of the containing universe. One direction follows by carrying its $\\mathcal U$-small cell-and-retract presentation into the larger category; those colimits have the same universal property, since they are formed from the same generators and relations on objects and simplices. Conversely factor a $\\mathcal U$-small $g:A\\to B$ inside $\\mathcal U$ as $A\\xrightarrow{i}E\\xrightarrow{p}B$, with $i\\in K\\text{-cell}$ and $p\\in K\\text{-inj}$. Every square from a fixed member of $K$ to $p$ has exactly the same maps and fillers in either universe: all endpoints are $\\mathcal U$-small. If $g\\in C$ in the larger universe, lift the square with top $i$, bottom $1_B$ and right $p$ to obtain $s:B\\to E$. The equations $sg=i$, $ps=1_B$ hold in $\\mathcal U$, since $s$ is a function between $\\mathcal U$-small data. The squares $(1_A,s)$ and $(1_A,p)$ exhibit $g$ as a retract of $i$ already in $\\mathcal U$. The pointwise-colimit and representative assertions needed for these comparisons are supplied by [lem-coef-scat-uniform-presentability].",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-scat-uniform-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent common-universe refinement of A.3.3 and A.3.6.18"
+   }
+  },
+  {
+   "text": "Define $S_K$ in $\\mathcal U$ to consist of all arrows between members of $\\mathcal R_D$ whose components lie in $C$ as computed in $\\mathcal U$. This is a $\\mathcal U$-small set: the family of endpoints is $\\mathcal U$-small and the sets of natural transformations are subsets of $\\mathcal U$-small products of component Hom sets. Step 3 identifies its images in any $\\mathcal V$ with representatives of all pointwise $C$-arrows between $\\kappa$-presentable diagrams. In particular $S_K\\subseteq L_{K,\\mathcal V}$; Step 2 gives $\\operatorname{wsat}_{\\mathcal V}(S_K)\\subseteq L_{K,\\mathcal V}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Agent bounded representative selection, following A.3.3 p.878"
+   }
+  },
+  {
+   "text": "Fix $f:F\\to G$ in $L_{K,\\mathcal V}$. Let $C_\\kappa$ be the class of $C$-maps between $\\kappa$-presentable ground objects. Since $K\\subseteq C_\\kappa$ and generates $C$, apply [lem-coef-weak-saturation-tree-presentation] to each $f(d)$. It gives a $\\kappa$-good $C_\\kappa$-tree on a $\\mathcal V$-small well-founded poset $T_d$, with root $F(d)$ and colimit $G(d)$. This application uses ground local $\\kappa$-presentability from [lem-coef-scat-uniform-presentability]; it does not require $F(d)$ to be presentable. Denote its downward-subset colimits by $Y_d(B)$.",
+   "uses": [
+    "lem-coef-weak-saturation-tree-presentation",
+    "lem-coef-scat-uniform-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3 proof p.879, using A.1.5.13"
+   }
+  },
+  {
+   "text": "Construct a continuous chain of slices, starting with the empty subsets and the diagram $F$. At a limit take the unions of the downward-closed subsets and colimits of the earlier diagrams. The universal property defines each structure map uniquely from the earlier structure maps; identities, composition, and both maps to $G$ and from $F$ hold because they hold on every earlier colimit cocone. At a successor, with current slice $M$ on $A_d$, choose one pair $(d,t)$ not yet covered. Apply [lem-coef-diagram-cellular-compatible-slices] with $E_d=\\{t\\}$ and other $E_e$ empty. It supplies a small slice $N$ on $B_d$ and a compatible intersection slice $N'$ on $A_d\\cap B_d$. Amalgamate $M,N$ along $N'$ by pointwise pushouts. This is the slice on $A_d\\cup B_d$: a cocone on a union of downward-closed subsets is exactly two cocones agreeing on the intersection, since comparable elements in different subsets already belong together to one of them. Thus each successor covers at least one new tree index. Well-order the disjoint union of all $T_d$ and always choose its first uncovered element. The construction exhausts that $\\mathcal V$-small union in a $\\mathcal V$-small ordinal. Its final colimit is $G$.",
+   "uses": [
+    "lem-coef-diagram-cellular-compatible-slices",
+    "lem-coef-scat-uniform-presentability",
+    "def-coef-good-cellular-tree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.16 and following transfinite slice construction, pp.882-883"
+   }
+  },
+  {
+   "text": "For a successor inclusion from subsets $A_d$ to $A_d\\cup B_d$, each component is the colimit arrow of the restricted $C_\\kappa$-tree on $(A_d\\cup B_d)\\setminus A_d=B_d\\setminus A_d$ with root $Y_d(A_d)$. This is exactly the re-rooting assertion of [lem-coef-weak-saturation-tree-presentation]. Its index set has size less than $\\kappa$. Apply [lem-coef-small-cellular-tree-descent] to obtain a pushout presentation of this component by a map $u_d:P_d\\to Q_d$ with presentable endpoints, belonging to the weakly saturated closure of $C_\\kappa$, hence to $C$. The roots may be arbitrarily large; the descent statement explicitly permits this.",
+   "uses": [
+    "lem-coef-weak-saturation-tree-presentation",
+    "lem-coef-small-cellular-tree-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3 proof p.883, using A.1.5.5, A.1.5.11 and A.1.5.6"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-diagram-compact-pushout-descent] to the successor natural transformation and these separate component pushout presentations. Its hypotheses on diagram presentations and finite colimits of presentables hold by [lem-coef-scat-uniform-presentability]. It produces one pushout square of natural transformations with top $h:F_0\\to G_0$ between pointwise presentable diagrams. Each $h(d)$ is a pushout of the specified $u_d\\in C$, so is in $C$ by Step 2. Replace both endpoint diagrams by their fixed representatives in $\\mathcal R_D$ and conjugate $h$ by those isomorphisms. Step 3 shows that its components belong to $C$ already in $\\mathcal U$, so the conjugated arrow lies in $S_K$. Thus this successor is a pushout of a map isomorphic to a member of $S_K$, and lies in $\\operatorname{wsat}_{\\mathcal V}(S_K)$.",
+   "uses": [
+    "lem-coef-diagram-compact-pushout-descent",
+    "lem-coef-scat-uniform-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "A.3.3.17, pp.883-884; agent common-representative comparison"
+   }
+  },
+  {
+   "text": "The chain of Step 6 is continuous, starts at $F$, ends at $G$, and all its successor arrows belong to $\\operatorname{wsat}_{\\mathcal V}(S_K)$ by Step 8. Closure under the permitted $\\mathcal V$-small transfinite compositions gives $f\\in\\operatorname{wsat}_{\\mathcal V}(S_K)$. Combining with Step 4 proves equality of classes. Carry out the same construction for $I$ and $J$ using the single initial $\\kappa$ and $\\mathcal R_D$; this gives the asserted two $\\mathcal U$-small sets. Their objects, arrows and structure maps were selected in $\\mathcal U$ before $\\mathcal V$ was chosen. Only the lengths and coproduct sizes in the slice filtrations vary. If $D$ is empty, its diagram category is terminal and the empty generating sets suffice; if $D$ is terminal the construction reduces to the ground cellular-tree argument.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Conclusion of A.3.3 proof; agent common-universe refinement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-scat-uniform-presentability",
+  "lem-coef-simplicial-interval-lifting",
+  "lem-coef-weak-saturation-tree-presentation",
+  "lem-coef-diagram-cellular-compatible-slices",
+  "def-coef-good-cellular-tree",
+  "lem-coef-small-cellular-tree-descent",
+  "lem-coef-diagram-compact-pushout-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT A.3.3 proof pp.878-884 and A.3.6.18 p.905 read online; common-universe refinement supplied here; archival HTT WANTED"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -63,10 +179,38 @@
    "results": "{\"t\": \"2026-10-17T05:58:07Z\", \"tool\": \"leanfinder\", \"query\": \"Objectwise weakly saturated classes in a functor category are generated by uniformly small diagrams between presentable objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalFilteredGenerator.of_isDense\", \"CategoryTheory.MorphismProperty.isLocallyPresentable_isLocal\", \"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.presentable\", \"CategoryTheory.MorphismProperty.isClosedUnderColimitsOfShape_isLocal\", \"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"CategoryTheory.Limits.ColimitPresentation.isCardinalPresentable\", \"CategoryTheory.IsLocallyPresentable\", \"CategoryTheory.isCardinalPresentable_of_isColimit\"], \"digest\": \"8d671dc25e1ebe4c\"}",
    "date": "2026-10-17",
    "verdict": "no match: the presentability and orthogonal-reflection hits concern Hom bijectivity against already specified small arrows, or ordinary presentable generators; they do not generate the objectwise weakly saturated class on simplicial-category diagrams, let alone uniformly across universes. Read OrthogonalReflection.lean:75-105."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A small set generates objectwise cofibrations in functor categories of simplicial categories uniformly in larger universes",
+   "results": "{\"t\": \"2026-10-17T07:51:50Z\", \"tool\": \"leanfinder\", \"query\": \"A small set generates objectwise cofibrations in functor categories of simplicial categories uniformly in larger universes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"HomotopicalAlgebra.instCofibrationMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.isStableUnderCoproductsOfShape_cofibrations\", \"HomotopicalAlgebra.cofibrantObjects\", \"HomotopicalAlgebra.mem_cofibrations\", \"HomotopicalAlgebra.CofibrantObject\", \"HomotopicalAlgebra.IsCofibrant\"], \"digest\": \"65a7b071c3ddc105\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary simplicial-set cofibrations and model-category lifting classes do not state common injective generators for varying-object simplicial-category diagrams; no project declaration matches."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MorphismProperty\", \"Functor\", \"Small\"",
+   "results": "{\"t\": \"2026-10-17T08:39:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"MorphismProperty\\\", \\\"Functor\\\", \\\"Small\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary simplicial-set cofibrations and model-category lifting classes do not state common injective generators for varying-object simplicial-category diagrams; no project declaration matches."
+  },
+  {
+   "tool": "grep",
+   "query": "Bergner|injectiveModel|InjectiveModel|compatibleSlice",
+   "results": "{\"t\": \"2026-10-17T08:40:21Z\", \"tool\": \"grep\", \"query\": \"Bergner|injectiveModel|InjectiveModel|compatibleSlice\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary simplicial-set cofibrations and model-category lifting classes do not state common injective generators for varying-object simplicial-category diagrams; no project declaration matches."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Objectwise cofibrations of diagrams of simplicial categories have a common small set of generators under enlargement of universes",
+   "results": "{\"t\": \"2026-10-17T08:40:21Z\", \"tool\": \"leansearch\", \"query\": \"Objectwise cofibrations of diagrams of simplicial categories have a common small set of generators under enlargement of universes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.cofibrations_eq\", \"HomotopicalAlgebra.CategoryWithWeakEquivalences.noConfusionType\", \"HomotopicalAlgebra.CategoryWithCofibrations\", \"HomotopicalAlgebra.CategoryWithCofibrations.mk.noConfusion\", \"HomotopicalAlgebra.CategoryWithWeakEquivalences.casesOn\", \"HomotopicalAlgebra.CategoryWithCofibrations.recOn\", \"HomotopicalAlgebra.CategoryWithWeakEquivalences.mk.noConfusion\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\"], \"digest\": \"cb3706fef9f21172\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary simplicial-set cofibrations and model-category lifting classes do not state common injective generators for varying-object simplicial-category diagrams; no project declaration matches."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-scat-diagram-factorization-uniform-bound",
@@ -99,5 +243,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-scat-injective-universe-generators",
+  "worker": "stage1",
+  "summary": "Kept the statement and inherited fields. Split common generation via a fixed uniform presentability rank, small representatives, a ground-universe retract argument, existing good cellular trees and small-tree descent, compatible slice filtration and simultaneous compact pushout descent. Three genuine statement-only auxiliary inputs; no duplicate enriched-generation node and no unjustified sSet-tensor structure on sCat. Explicitly checks every universe and empty D.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint, the derived coefficient adjunction/inverse-limit comparison, through the inherited common-chunk and diagram-factorization ancestry. Steps 1-4 establish common bounded generators; Steps 5-9 realize the compatible-slice proof of HTT A.3.3.3 needed by that comparison. No chapter or unit route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-fa94cb0a6",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-fa94cb0a6 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, every cited statement (simplicial-interval-lifting, category-colimit, weak-saturation-tree-presentation, good-cellular-tree, small-cellular-tree-descent), the parent's step 2, the unit, and the main-20261015 proof of prop-coef-integral-exceptional-adjoint, paragraph 2. HTT is not in literature/, so I could not check the printed page numbers. The proof is correctly marked by:agent and the report raises WANTED for HTT. I checked the mathematics of every step myself. Step 3: the V-to-U retract (g=p∘i, lift s, then the squares (1,s) and (1,p)) is correct; the U-to-V direction relies on sCat_U being closed under U-small colimits inside sCat_V, which I accept as elementary. Step 5: the hypotheses of the tree lemma hold, since the endpoints of I and J are countable and so are κ-presentable by the size criterion. Step 6: for downward-closed A and B, Y(A∪B) is the pushout of Y(A) and Y(B) over Y(A∩B); each successor covers a new index; the limit stages are unions. Steps 7 and 8 use exactly what the re-rooting, small-tree-descent and new compact-descent statements say. All three new nodes are true. uniform-presentability holds because sCat is locally finitely presentable, so for uncountable regular κ the κ-presentable objects are those of size <κ; I tested the empty and terminal simplicial categories, and κ must be uncountable. A diagram is κ-presentable exactly when it is pointwise κ-presentable when |Mor D|<κ. For compatible-slices I rebuilt the ω-round closure, which needs κ-good trees and |Mor D|<κ. For compact-pushout-descent I wrote out the F_β argument: G_0(d)=F_β(d)⊔_{P_d}Q_d, with the equations made to hold at a later stage. None of the new nodes restates the item, and none duplicates an existing node: I checked enriched-diagram-size-generation, good-subset-enlargement, cellular-tree-presentable-approximations, partial-cellular-root-descent-extension, compact-pushout-retract-descent and small-simplicial-diagram-cardinality. All dependencies are in unit sk-prop-sf-biduality-general, there is no cycle, the blueprint.from/via fields are correct, the searches are real logged entries, and nothing cites SGA. The new nodes have no lean_audit key; about a third of the project's nodes created since 2026-10-16 also lack it, so I did not count it as a fault. No fixes and no tool_uses."
  }
 }

@@ -1,0 +1,90 @@
+{
+ "id": "lem-sf-invertible-factor-hom-cancellation",
+ "kind": "statement",
+ "title": "Internal-Hom cancellation by an invertible tensor factor",
+ "statement": "Let $\\mathcal C$ be a monoidal category [def-sfb-monoidal-category] with a symmetric braiding $\\sigma_{U,V}:U\\otimes V\\xrightarrow{\\sim}V\\otimes U$, natural in both variables and satisfying the hexagon and symmetry identities. Suppose it is closed: for every $X$ there is a functor $[X,-]$ and adjunction bijections $\\operatorname{Hom}(Z\\otimes X,Y)\\cong\\operatorname{Hom}(Z,[X,Y])$, natural in $X,Y,Z$. Write $e_{X,Y}:[X,Y]\\otimes X\\to Y$ for evaluation. Let $J,I\\in\\mathcal C$ have specified isomorphisms $J\\otimes I\\cong\\mathbf1$ and $I\\otimes J\\cong\\mathbf1$; this is the meaning of an invertible tensor factor here. For all $X,Y$ define two morphisms by transposition:\n$$t_{X,Y,J}:[X,Y]\\otimes J\\longrightarrow[X,Y\\otimes J],\\qquad s_{X,Y,J}:[X,Y]\\longrightarrow[X\\otimes J,Y\\otimes J],$$\nwhere their uncurrying equations, with associators suppressed, are\n$$e_{X,Y\\otimes J}\\circ(t_{X,Y,J}\\otimes1_X)=(e_{X,Y}\\otimes1_J)\\circ(1_{[X,Y]}\\otimes\\sigma_{J,X}),$$\n$$e_{X\\otimes J,Y\\otimes J}\\circ(s_{X,Y,J}\\otimes1_{X\\otimes J})=e_{X,Y}\\otimes1_J.$$\nBoth $t_{X,Y,J}$ and $s_{X,Y,J}$ are isomorphisms, natural contravariantly in $X$ and covariantly in $Y$. They are also compatible with isomorphisms of the invertible factor $J$. In particular $c_{X,Y,J}=s_{X,Y,J}^{-1}$ is the canonical cancellation isomorphism $[X\\otimes J,Y\\otimes J]\\xrightarrow{\\sim}[X,Y]$, and the displayed equations specify the evaluation normalization of these isomorphisms and their inverses.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Agent consequence of Tag 0FFM (categories-lemma-invertible: tensor equivalences) and Tag 0GWJ (categories-remark-internal-hom-monoidal: internal Hom and evaluation transposes). Supporting Mathlib ingredients, not an exact leaf: Monoidal/Rigid/Basic.lean tensorLeftHomEquiv_tensor and tensorRightHomEquiv_tensor, lines 492--505; Monoidal/Closed/Basic.lean evaluation naturality, lines 109--117."
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a closed symmetric monoidal category an invertible tensor factor gives natural internal Hom cancellation and evaluation compatibility",
+   "results": "{\"t\": \"2026-10-17T11:34:26Z\", \"tool\": \"leanfinder\", \"query\": \"In a closed symmetric monoidal category an invertible tensor factor gives natural internal Hom cancellation and evaluation compatibility\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ihom.ev_coev\", \"CategoryTheory.MonoidalClosed.id_tensor_pre_app_comp_ev\", \"CategoryTheory.MonoidalClosed.id_tensor_pre_app_comp_ev_assoc\", \"CategoryTheory.MonoidalClosed.coev_app_comp_pre_app\", \"CategoryTheory.MonoidalClosed.compTranspose\", \"CategoryTheory.MonoidalClosed.coev_app_comp_pre_app_assoc\", \"CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft\", \"CategoryTheory.tensorRightHomEquiv_whiskerRight_comp_evaluation\"], \"digest\": \"e4f0313a2665d1b9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned rigid Hom-set bijections and evaluation identities are ingredients, not either displayed internal-Hom isomorphism for arbitrary X; no exact or one-line specialization was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorLeftHomEquiv_tensor, CategoryTheory.ihom.ev_naturality",
+   "results": "{\"t\": \"2026-10-17T11:34:23Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorLeftHomEquiv_tensor, CategoryTheory.ihom.ev_naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned rigid Hom-set bijections and evaluation identities are ingredients, not either displayed internal-Hom isomorphism for arbitrary X; no exact or one-line specialization was found."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorRightHomEquiv_tensor|tensorLeftHomEquiv_tensor|ev_naturality",
+   "results": "{\"t\": \"2026-10-17T11:34:22Z\", \"tool\": \"grep\", \"query\": \"tensorRightHomEquiv_tensor|tensorLeftHomEquiv_tensor|ev_naturality\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\"], \"digest\": \"82f8c6c3387cfbcd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned rigid Hom-set bijections and evaluation identities are ingredients, not either displayed internal-Hom isomorphism for arbitrary X; no exact or one-line specialization was found.",
+   "sub": "CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom commutes with tensoring the target by an invertible line and its evaluation is compatible",
+   "results": "{\"t\": \"2026-10-17T11:34:23Z\", \"tool\": \"leansearch\", \"query\": \"Internal Hom commutes with tensoring the target by an invertible line and its evaluation is compatible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Invertible.rTensorEquiv\", \"CategoryTheory.exp.ev\", \"CategoryTheory.ihom.ev_naturality_assoc\", \"CategoryTheory.ihom.ev_naturality\", \"CategoryTheory.ihom.ev\", \"CategoryTheory.ihom.adjunction\", \"CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation\", \"CategoryTheory.ihom.coev\"], \"digest\": \"936c7e1f7e144346\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned rigid Hom-set bijections and evaluation identities are ingredients, not either displayed internal-Hom isomorphism for arbitrary X; no exact or one-line specialization was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom cancellation when both arguments are tensored with an invertible object",
+   "results": "{\"t\": \"2026-10-17T11:36:32Z\", \"tool\": \"leanfinder\", \"query\": \"Internal Hom cancellation when both arguments are tensored with an invertible object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.tensorRightHomEquiv_tensor\", \"CategoryTheory.tensorLeftHomEquiv_tensor\", \"CategoryTheory.tensorLeftHomEquiv\", \"CategoryTheory.tensorRightHomEquiv\", \"CategoryTheory.MonoidalClosed.id_comp\", \"CategoryTheory.MonoidalClosed.comp_id_assoc\", \"CategoryTheory.tensorRightHomEquiv_whiskerRight_comp_evaluation\", \"CategoryTheory.MonoidalClosed.id_comp_assoc\"], \"digest\": \"22bde81793096877\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned rigid Hom-set bijections and evaluation identities are ingredients, not either displayed internal-Hom isomorphism for arbitrary X; no exact or one-line specialization was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.tensorRightHomEquiv",
+   "results": "{\"t\": \"2026-10-17T11:36:29Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.tensorRightHomEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.tensorRightHomEquiv\", \"CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerRight\", \"CategoryTheory.tensorRightHomEquiv_whiskerRight_comp_evaluation\", \"CategoryTheory.tensorRightHomEquiv_naturality\", \"CategoryTheory.tensorRightHomEquiv_symm_naturality\", \"CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation\", \"CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft\", \"CategoryTheory.tensorRightHomEquiv_tensor\"], \"digest\": \"0d37af1b6ad902ba\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned rigid Hom-set bijections and evaluation identities are ingredients, not either displayed internal-Hom isomorphism for arbitrary X; no exact or one-line specialization was found."
+  },
+  {
+   "tool": "grep",
+   "query": "ihom.*[Tt]ensor|[Tt]ensor.*[Ii]hom|Ihom.*[Tt]ensor|[Ii]nvertible",
+   "results": "{\"t\": \"2026-10-17T11:36:29Z\", \"tool\": \"grep\", \"query\": \"ihom.*[Tt]ensor|[Tt]ensor.*[Ii]hom|Ihom.*[Tt]ensor|[Ii]nvertible\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Grp.lean\", \"Mathlib/CategoryTheory/Monoidal/Grp.lean\", \"Mathlib/CategoryTheory/Monoidal/Grp.lean\", \"Mathlib/CategoryTheory/Monoidal/Grp.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\"], \"digest\": \"f361f70ce0b55859\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned rigid Hom-set bijections and evaluation identities are ingredients, not either displayed internal-Hom isomorphism for arbitrary X; no exact or one-line specialization was found.",
+   "sub": "CategoryTheory/Monoidal"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-etale-twisted-bidual-transport",
+  "date": "2026-10-17",
+  "group": "Q127"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "thm-weil-etale-geometric-biduality",
+   "place": "Proof paragraph 4, returned step 7: the invertible-factor internal-Hom cancellation used to define alpha and gamma and to preserve evaluation under the twist.",
+   "via": [
+    "lem-sf-etale-twisted-bidual-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
