@@ -7,10 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Mathlib.CategoryTheory.Filtered.Final
-import Mathlib.CategoryTheory.Limits.ConcreteCategory.WithAlgebraicStructures
-import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+import Sheaf.AlgebraicGeometry.EtaleSectionsEqualOpenEtaleCriterion
 
 /-! # The zero locus of an étale section is Zariski open
 
@@ -21,7 +18,7 @@ Source: Stacks Project, Tag 04FR (blueprint: lem-sc-etale-section-zero-open).
 
 universe u
 
-open CategoryTheory AlgebraicGeometry
+open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor AlgebraicGeometry
 
 namespace AlgebraicGeometry.Scheme
 
@@ -63,6 +60,92 @@ theorem etale_section_zero_open
           (v : Spec (.of Ω) ⟶ V.left),
           (pointSmallEtale (v ≫ V.hom)).toPresheafFiber V (Over.homMk v) F.1 s = 0 ↔
             ∃ (y : Spec (.of Ω) ⟶ W.left), y ≫ i.left = v) := by
-  sorry
+  classical
+  let G :=
+    (sheafCompose T.smallEtaleTopology
+      (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj F
+  let z : G.obj.obj (Opposite.op V) :=
+    (0 : (F.obj.obj (Opposite.op V) : AddCommGrpCat.{u + 1}).carrier)
+  obtain ⟨W, hW⟩ := exists_etaleSections_equal_open_etale_criterion T G V s z
+  let i : Scheme.Etale.mk (W.ι ≫ V.hom) ⟶ V := MorphismProperty.Over.homMk W.ι rfl
+  refine ⟨Scheme.Etale.mk (W.ι ≫ V.hom), i, ?_, ?_, ?_⟩
+  · change IsOpenImmersion W.ι
+    infer_instance
+  · intro V' h
+    have hh := hW V' h
+    change (F.obj.map h.op) s = 0 ↔ _
+    have hh' := hh.symm
+    change (CategoryTheory.forget AddCommGrpCat).map (F.obj.map h.op) s =
+      (CategoryTheory.forget AddCommGrpCat).map (F.obj.map h.op) z ↔ _ at hh'
+    rw [show (F.obj.map h.op) s = 0 ↔
+        (CategoryTheory.forget AddCommGrpCat).map (F.obj.map h.op) s =
+          (CategoryTheory.forget AddCommGrpCat).map (F.obj.map h.op) z from by
+      simp [z]]
+    have hirange : Set.range i.left = (W : Set V.left) := by
+      change Set.range W.ι = (W : Set V.left)
+      exact Scheme.Opens.range_ι W
+    rw [hirange]
+    simpa [z] using hh'
+  · intro Ω _ _ v
+    let Φ := pointSmallEtale (v ≫ V.hom)
+    let z₀ : Φ.fiber.obj V := Over.homMk v rfl
+    have : PreservesFilteredColimitsOfSize.{u, u}
+        (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
+      preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+    constructor
+    · intro hs
+      have heq : Φ.toPresheafFiber V z₀ F.obj s =
+          Φ.toPresheafFiber V z₀ F.obj 0 := by
+        simpa only [map_zero] using hs
+      obtain ⟨V', k, w, hw, hk⟩ :=
+        (Φ.toPresheafFiber_eq_iff' (P := F.obj) V z₀ s 0).mp heq
+      have hk0 : (F.obj.map k.op) s = 0 := by
+        simpa only [map_zero] using hk
+      have hkw : Set.range k.left ⊆ (W : Set V.left) := by
+        have hh := (hW V' k).2
+        have hkeq : (ConcreteCategory.hom (G.obj.map k.op)) s =
+            (ConcreteCategory.hom (G.obj.map k.op)) z := by
+          change (F.obj.map k.op) s = (F.obj.map k.op) (0 : _)
+          simp [hk0]
+        exact hh hkeq
+      have hvw : Set.range v ⊆ (W : Set V.left) := by
+        rintro x ⟨q, rfl⟩
+        have hw' := congrArg (fun a => a.left) hw
+        change w.left ≫ k.left = v at hw'
+        have hq : k.left (w.left q) ∈ (W : Set V.left) :=
+          hkw ⟨w.left q, rfl⟩
+        have hx' := congrArg (fun a => a q) hw'
+        have hx'' : v q = k.left (w.left q) := by
+          exact hx'.symm
+        exact hx'' ▸ hq
+      have hvw' : Set.range v ⊆ Set.range W.ι := by
+        rw [Scheme.Opens.range_ι]
+        exact hvw
+      refine ⟨IsOpenImmersion.lift W.ι v hvw',
+        IsOpenImmersion.lift_fac _ _ _⟩
+    · rintro ⟨y, hy⟩
+      let zW : Φ.fiber.obj (Scheme.Etale.mk (W.ι ≫ V.hom)) :=
+        Over.homMk y (by
+          change y ≫ W.ι ≫ V.hom = v ≫ V.hom
+          simpa [i] using congrArg (fun a => a ≫ V.hom) hy)
+      have hmap : (F.obj.map i.op) s = 0 := by
+        have hh := (hW (Scheme.Etale.mk (W.ι ≫ V.hom)) i).1
+        have hsub : Set.range i.left ⊆ (W : Set V.left) := by
+          change Set.range W.ι ⊆ (W : Set V.left)
+          rw [Scheme.Opens.range_ι]
+        have hh' := hh hsub
+        change (CategoryTheory.forget AddCommGrpCat).map (F.obj.map i.op) s =
+          (CategoryTheory.forget AddCommGrpCat).map (F.obj.map i.op) z at hh'
+        simpa [z] using hh'
+      have hfiber : Φ.fiber.map i zW = z₀ := by
+        apply Over.OverMorphism.ext
+        change y ≫ i.left = v
+        exact hy
+      have hn := Φ.toPresheafFiber_w i zW F.obj
+      have hn' := ConcreteCategory.congr_hom hn s
+      change (Φ.toPresheafFiber _ zW F.obj) ((F.obj.map i.op) s) =
+        (Φ.toPresheafFiber V (Φ.fiber.map i zW) F.obj) s at hn'
+      rw [hmap, map_zero, hfiber] at hn'
+      simpa using hn'.symm
 
 end AlgebraicGeometry.Scheme
