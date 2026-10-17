@@ -268,6 +268,8 @@ lemma algebraMap_inertiaInvariants_mem_nonunits_iff [Q.IsMaximal] (a : Γ(C, W))
   rw [Ideal.over_def Q m] at ham
   exact hu' ham
 
+set_option maxHeartbeats 1000000 in
+-- the `Spec`/`CommRingCat.ofHom` rewriting in this proof is slow
 include hxW in
 /-- **The geometric point.** There are ring maps `ε : k̄ ⟶ B_Q^{I_Q}` and `r : B_Q^{I_Q} ⟶ k̄`
 with `r ∘ ε = id` and kernel of `r` the maximal ideal, such that `Spec B_Q^{I_Q} ⟶ C` and
