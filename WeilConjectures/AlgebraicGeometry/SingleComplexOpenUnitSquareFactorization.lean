@@ -42,7 +42,7 @@ private theorem square_factorization
 
 -- Keep derived universal-property constructions abstract during the square calculation.
 -- Only the final conversion needs to compare the underlying category instances.
-attribute [local irreducible] singleComplexOpenPullbackIso derivedPullback
+attribute [local irreducible] singleComplexOpenPullbackIso
   CategoryTheory.Functor.mapDerivedCategory
 
 set_option backward.isDefEq.respectTransparency true in

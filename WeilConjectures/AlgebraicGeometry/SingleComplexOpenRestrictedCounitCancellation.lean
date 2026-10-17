@@ -26,7 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 -- Keep constructed functors abstract; expose only category aliases to implicit unification.
-attribute [local irreducible] derivedPullback singleComplexOpenPullbackIso
+attribute [local irreducible] singleComplexOpenPullbackIso
   Functor.mapHomotopyCategory Functor.mapDerivedCategory
   openPinnedHomotopyTensorRestrictionIso
 attribute [local implicit_reducible] Scheme.Modules Scheme.Modules.Hom TopCat.Sheaf

@@ -93,7 +93,7 @@ def openPinnedHomotopyTargetCompositionIso
     (.up ℤ)).symm
 
 -- Compare the chosen functors through their interfaces, without expanding sheaf data.
-attribute [local irreducible] derivedPullback
+
 attribute [local irreducible] Scheme.Modules.tensorPullbackCompositionIso
   Scheme.Modules.tensorPullback Scheme.Modules.tensorPullbackObj
 attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
