@@ -78,21 +78,14 @@
    }
   },
   {
-   "text": "For every chosen compactification, $Rh_!^c=Rp_*j_!$ is additive and triangulated: extension by zero is exact and hence induces a triangulated derived functor; module direct image is additive left exact, module sheaves have enough injectives, and the generic right-derived-direct-image theorem makes $Rp_*$ triangulated. Thus the composite carries sheaf short-exact triangles to distinguished triangles. Each $hg|_{T_a}:T_a\\to Y$ is affine: $g$ is finite (hence affine by definition), $W$ is affine, and the $T_a$ are affine. A morphism between affine schemes is separated: for a ring map $B\\to C$, the diagonal is the closed immersion induced by the surjective multiplication map $C\\otimes_B C\\to C$. It is smooth of relative dimension one by permanence for the etale map $g|_{T_a}$ followed by the smooth $h$. It is of finite type since $h$ is finitely presented and $g$ is finite. Nagata supplies compactifications of these component morphisms. Apply the constant-coefficient affine-smooth-curve input to every constant finite module occurring in the filtration on $T_a$. For a filtration step $0\\to A\\to B\\to C\\to0$, its image triangle gives a long exact cohomology sequence. If the cohomology of the images of $A$ and $C$ is constructible, write the cohomology of the image of $B$ as an extension of a cokernel between the preceding constructible terms and a kernel between the following ones. The Serre theorem proves it constructible. Induction from the zero filtration term therefore proves constructibility for each $(hg|_{T_a})_!(g^{-1}F|_{T_a})$. On a finite disjoint clopen union extension by zero and restriction identify a sheaf with the direct sum of these component sheaves; applying the additive shriek functor (using shriek composition with each clopen inclusion, whose compactification is the open inclusion followed by the identity of T) gives the corresponding finite direct sum of images. These cohomology sheaves are constructible by Serre extension closure. Step 3 makes the original output a retract; the image of the splitting idempotent is constructible by kernels/cokernels closure. Thus $Rh_!F$, and then the finite sum $Rh_!(L|_W)$, have constructible cohomology for every chosen compactification.",
+   "text": "For a chosen compactification $c=(j,p)$, exactness of module extension by zero and the exact-functor derived theorem make $j_!$ triangulated. Module direct image is additive left exact and its source has enough injectives, so the right-derived theorem makes $Rp_*$ triangulated. Thus $Rp_*j_!$ is additive and triangulated: apply the two functors successively to a distinguished triangle and compose their shift isomorphisms. This applies to every compactification used below.",
    "uses": [
-    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
-    "lem-sbc-smooth-relative-dimension-permanence",
-    "thm-constructible-serre",
     "lem-weil-pbc-extension-by-zero-exact",
     "lem-sf-exact-functor-derived-triangulated",
     "lem-weil-pbc-module-direct-image-left-exact",
     "lem-weil-pbc-module-sheaves-enough-injectives",
     "lem-weil-pbc-derived-direct-image-triangulated",
-    "lem-sf-derived-ses-triangle",
-    "lem-sf-derived-homology-long-exact",
-    "lem-weil-pbc-etale-shriek-qcqs-composition",
-    "def-weil-pbc-projection-compactification",
-    "thm-nagata-compactification"
+    "def-weil-triangulated-category"
    ],
    "elementary": false,
    "source": {
@@ -101,7 +94,63 @@
    }
   },
   {
-   "text": "Induct on the number of principal opens covering $U$. The one-open case is step 4. For $U=W_1\\cup V$ with $V$ the union of the remaining opens, the intersection $W_1\\cap V$ is covered by the at most $r-1$ principal opens $W_1\\cap W_i$; all their finite intersections remain principal. The induction hypothesis applies both to $V$ and to $W_1\\cap V$, with the restricted sheaf. The restricted maps are separated of finite type: the opens are quasi-compact in the Noetherian $U$, and their affine principal covers have finitely presented coordinate algebras over $R$. Choose their compactifications by Nagata. Relative Mayer--Vietoris for these quasi-compact opens gives a triangle $R(W_1\\cap V\\to Y)_!L\\to R(W_1\\to Y)_!L\\oplus R(V\\to Y)_!L\\to Rf_!^cL\\to$. In its cohomology sequence the third term is an extension of a cokernel and a kernel involving cohomology of the first two terms. Serre closure proves it constructible in every degree. The relative Mayer--Vietoris statement is for arbitrary chosen compactifications, so this proves the required assertion for the given $c$ without changing the candidate shriek.",
+   "text": "Put $k_a=hg|_{T_a}:T_a\\to Y$. The cover input makes $T_a$ affine and $g|_{T_a}$ etale. Since $W$ and $Y$ are affine, $h$ is affine; an affine morphism has affine inverse images of all affine opens, and a morphism between affine schemes is affine (localize the corresponding ring map). Affine morphisms are separated and quasi-compact by affine permanence. Smooth-relative-dimension permanence gives $k_a$ smooth of relative dimension $0+1=1$. It is finite type: $h$ is finitely presented, and $g|_{T_a}$ is finite, as a clopen summand of the finite cover (on rings, it is an idempotent summand of a finite module). Nagata supplies a compactification of $k_a$. Apply the constant-coefficient relative-dimension-one theorem to every constant quotient $Q_{a,i}$ in the cover input; every $H^q(R(k_a)_!Q_{a,i})$ is constructible.",
+   "uses": [
+    "lem-weil-pbc-etale-lisse-finite-etale-filtration",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "thm-nagata-compactification",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKY final sentence invoking Tag 0GKX; Tag 03RZ filtration and retract closure"
+   }
+  },
+  {
+   "text": "Apply finite-filtration devissage to $\\Phi=R(k_a)_!$, the filtration $F_{a,i}$ supplied in step 3, and the class of constructible $\\Lambda$-module sheaves on $Y_{\\Et}$. This class contains zero by its definition and is closed under kernels, cokernels and extensions by the constructible Serre theorem. The preceding step verifies the hypothesis for every quotient and every degree, and the first replacement step verifies that $\\Phi$ is triangulated. We obtain constructibility of every $H^q(R(k_a)_!(g^{-1}F|_{T_a}))$.",
+   "uses": [
+    "lem-weil-pbc-etale-lisse-filtration-devissage",
+    "lem-weil-pbc-etale-lisse-finite-etale-filtration",
+    "thm-constructible-serre",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKY final sentence invoking Tag 0GKX; Tag 03RZ filtration and retract closure"
+   }
+  },
+  {
+   "text": "Write $i_a:T_a\\hookrightarrow T$. Apply the disjoint-open-extension biproduct theorem to the finite disjoint open cover of $T$ and $G=g^{-1}F$: $G\\cong\\bigoplus_a i_{a!}(G|_{T_a})$. Each $i_a$ has compactification $(i_a,\\mathrm{id}_T)$, so its candidate shriek is the exact $i_{a!}$. Additivity of $R(hg)_!$ preserves this finite biproduct, and shriek composition identifies its $a$-th image with $R(k_a)_!(G|_{T_a})$. Thus $R(hg)_!G\\cong\\bigoplus_a R(k_a)_!(G|_{T_a})$. Applying cohomology preserves the biproduct relations, so every cohomology sheaf is the finite sum of the constructible component cohomology sheaves. A finite sum of constructible sheaves is constructible by repeated extension closure applied to $0\\to A\\to A\\oplus B\\to B\\to0$.",
+   "uses": [
+    "lem-pbc-t2-disjoint-open-extension-biproduct",
+    "def-weil-pbc-projection-compactification",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-etale-shriek-qcqs-composition",
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKY final sentence invoking Tag 0GKX; Tag 03RZ filtration and retract closure"
+   }
+  },
+  {
+   "text": "Step 3 gives a retract on every cohomology sheaf: write $s:A\\to B$ and $r:B\\to A$ with $rs=1_A$, where $B$ is the constructible sheaf just obtained. Put $e=sr$. The map $s$ identifies $A$ with $\\ker(1_B-e)$: $(1-e)s=0$, and if $(1-e)b=0$ then $b=s(rb)$, with inverse the restriction of $r$. Kernel closure for the endomorphism $1-e$ of the constructible $B$ therefore proves $A$ constructible. Finally, the primary decomposition of step 2 is a finite split sum; additivity and repeated Serre extension closure give constructibility of $Rh_!(L|_W)$ in all degrees, for every chosen compactification.",
+   "uses": [
+    "thm-constructible-serre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKY final sentence invoking Tag 0GKX; Tag 03RZ filtration and retract closure"
+   }
+  },
+  {
+   "text": "Induct on the number of principal opens covering $U$. The one-open case is steps 4--8. For $U=W_1\\cup V$ with $V$ the union of the remaining opens, the intersection $W_1\\cap V$ is covered by the at most $r-1$ principal opens $W_1\\cap W_i$; all their finite intersections remain principal. The induction hypothesis applies both to $V$ and to $W_1\\cap V$, with the restricted sheaf. The restricted maps are separated of finite type: the opens are quasi-compact in the Noetherian $U$, and their affine principal covers have finitely presented coordinate algebras over $R$. Choose their compactifications by Nagata. Relative Mayer--Vietoris for these quasi-compact opens gives a triangle $R(W_1\\cap V\\to Y)_!L\\to R(W_1\\to Y)_!L\\oplus R(V\\to Y)_!L\\to Rf_!^cL\\to$. In its cohomology sequence the third term is an extension of a cokernel and a kernel involving cohomology of the first two terms. Serre closure proves it constructible in every degree. The relative Mayer--Vietoris statement is for arbitrary chosen compactifications, so this proves the required assertion for the given $c$ without changing the candidate shriek.",
    "uses": [
     "lem-weil-pbc-etale-shriek-relative-mayer-vietoris",
     "thm-constructible-serre",
@@ -131,15 +180,20 @@
   "lem-weil-pbc-module-direct-image-left-exact",
   "def-weil-pbc-direct-image",
   "thm-nagata-compactification",
-  "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
-  "thm-constructible-serre",
   "lem-weil-pbc-extension-by-zero-exact",
   "lem-sf-exact-functor-derived-triangulated",
   "lem-weil-pbc-module-sheaves-enough-injectives",
   "lem-weil-pbc-derived-direct-image-triangulated",
-  "lem-sf-derived-ses-triangle",
-  "lem-sf-derived-homology-long-exact",
-  "lem-weil-pbc-etale-shriek-relative-mayer-vietoris"
+  "def-weil-triangulated-category",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+  "lem-weil-pbc-etale-lisse-filtration-devissage",
+  "thm-constructible-serre",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-pbc-t2-disjoint-open-extension-biproduct",
+  "lem-weil-pbc-etale-shriek-relative-mayer-vietoris",
+  "lem-sf-derived-homology-long-exact"
  ],
  "proof_origin": {
   "by": "agent",
@@ -184,7 +238,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
   "by": "worker",
@@ -193,11 +247,11 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "item": "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
   "worker": "stage1",
-  "summary": "Retained statement; expanded the 0GKY primary-coefficient trace and constant-filtration argument. Added finite principal-cover Mayer--Vietoris to avoid assuming the open is affine, and a finite-ring filtration input using 0DV5 to avoid the missing geometric-unibranch hypothesis of 0GJ0. Two new strictly smaller statement-only nodes.",
-  "blueprint": "thm-weil-pbc-direct-image-finiteness-proper classical constructibility input expanded through 0GKZ final sentence, 0GKY primary/trace/filtration reduction and 0GKX constant case.",
+  "summary": "Repair of the human re-split return: replaced former step 4 (2226 characters) by five separately cited steps, isolating finite-filtration devissage as one new statement-only generic lemma and reusing existing geometric, triangulated, clopen-biproduct and Serre nodes. Preserved the statement, Lean record, proof route and other arguments. Refreshed Nagata quotes to the current statement.",
+  "blueprint": "Realizes the classical constructibility input of thm-weil-pbc-direct-image-finiteness-proper via 0GKZ final sentence and 0GKY primary decomposition, trace retraction, constant-filtration reduction, with the same finite-principal-cover Mayer--Vietoris finish. Former step 4 is now steps 4--8.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-finite-type-over-noetherian",
@@ -258,6 +312,14 @@
    {
     "node": "thm-nagata-compactification",
     "why": "Existence of auxiliary compactifications for finite covers, clopen components, and the two-open Mayer--Vietoris induction; the candidate shriek statements require chosen compactifications. General tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Affineness gives separatedness and quasi-compactness for auxiliary component morphisms; generic geometry tool, with no replacement of the unit route."
+   },
+   {
+    "node": "lem-pbc-t2-disjoint-open-extension-biproduct",
+    "why": "Sheaf-level finite disjoint-open biproduct is used before applying compactified shriek and its composition comparison; its hypotheses allow all present finite-ring module sheaves."
    }
   ]
  },
@@ -276,15 +338,17 @@
   "lem-weil-pbc-module-sheaves-enough-injectives",
   "lem-sf-derived-ses-triangle",
   "lem-sf-derived-homology-long-exact",
-  "thm-nagata-compactification"
+  "thm-nagata-compactification",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-pbc-t2-disjoint-open-extension-biproduct"
  ],
  "reviewed": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NY-8e19296f4",
-  "group": "NY",
+  "reviewer": "NT-cc-Q60-5f44231ac",
+  "group": "Q60",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-8e19296f4 (reviewer sub-agent of L); spot-checked: Read the mathematics in full and wrote review.md. Checked all five steps and both new nodes against 0GKY, 0GKX, 0GJ0, 0DV5 and the cited trace, shriek and derived-category sources. Verified hypotheses, edge cases, coefficient categories, duplicate candidates and tool uses. No circular dependency through the delivery or repair needed; inherited source metadata and distant DAG defects are documented."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-5f44231ac (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks more-etale 0GKY (lemma-loc-constant-shriek-rel-dim-1) and 0GKX, and derived 06UQ and 0152 (tag/label pairs checked in tags/tags). The item statement is unchanged and is a faithful specialization of 0GKY: finite Λ, Spec of a finitely generated Z-algebra as base, every compactification, every degree. This is not a target node, so no base-change morphism is involved; the coefficient category is Λ-module sheaves on small étale sites, consistent with all cited shriek nodes. Steps 1-9 each match the statements of all 29 cited nodes, and the hypotheses hold at each use. Step 3: the fibre cardinality d prime to ℓ from the filtration-cover node is the trace-degree node's hypothesis; at with ad≡1 mod ℓ^n retracts η; finite g gives Rg_!=Rg_*. Step 4: Rp_*j_! is triangulated. Step 5: k_a is affine, separated, of finite type and smooth of relative dimension 0+1, meeting every hypothesis of the constant-coefficient relative-dimension-one node. Step 6: the devissage node applies with S = constructible sheaves (thm-constructible-serre). Step 7: the clopen biproduct plus composition through the compactification (i_a, id_T). Step 8: the retract is ker(1−e). Step 9: the Mayer–Vietoris induction is set up correctly and covers an arbitrary c. New node lem-weil-pbc-etale-lisse-filtration-devissage: true (induction on SES triangles, long exact sequence, weak-Serre closure), tested at r=0, zero quotients and r=1, self-contained, not a restatement of an item clause, five searches recorded. My scripted duplicate search found nothing equivalent; the closest node, lem-sbc-cohomology-in-weak-serre-subcategory (06UQ), only implies it with extra steps. No SGA citations; proof_deps equals the union of the step uses. I accept the declared tool_uses: generic tools that replace no unit step. Cosmetic only: the new node's blueprint.from.place still says 'returned step 4' (the use is now step 6), and it has no lean_audit field, which is common among recent nodes. No fixes written."
  },
  "lean_audit": {
   "master": {

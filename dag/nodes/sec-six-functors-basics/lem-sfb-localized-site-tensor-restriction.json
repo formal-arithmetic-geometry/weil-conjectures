@@ -21,9 +21,67 @@
   "def-weil-sheaf-of-modules-category",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P=\\mathcal F\\otimes_{p,\\mathcal O}\\mathcal G$ and $Q=\\mathcal F|_U\\otimes_{p,\\mathcal O_U}\\mathcal G|_U$. At $(V\\to U)$ both $P|_U$ and $Q$ have value $\\mathcal F(V)\\otimes_{\\mathcal O(V)}\\mathcal G(V)$. Their restriction maps are the same maps induced by the restrictions of the two factors and of the coefficients. Thus $P|_U=Q$ as presheaves of $\\mathcal O_U$-modules, naturally in both factors. The sheaf tensors in the assertion are $P^\\#$ and $Q^\\#$.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; Tag 03CY, lemma-sheafification-presheaf-modules; Tag 03DH, section-localize. Slice sheafification comparison is supplied by lem-cbc-sieve-slice-sheafification."
+   }
+  },
+  {
+   "text": "Apply the abelian-group case of the slice sheafification comparison to the underlying abelian presheaf of $P$. Module sheafification has this abelian sheafification as its underlying abelian sheaf. We obtain an abelian-sheaf isomorphism $c:Q^\\#\\xrightarrow{\\sim}(P^\\#)|_U$, natural in maps of $P$, with $c\\eta_Q=(\\eta_P)|_U$ on $Q=P|_U$. Here $\\eta_P$ and $\\eta_Q$ are the module sheafification units. Take a universe containing the site and all values, as in the cited slice result; no fibre products or subcanonicity of the site are required.",
+   "uses": [
+    "lem-cbc-sieve-slice-sheafification",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; Tag 03CY, lemma-sheafification-presheaf-modules; Tag 03DH, section-localize. Slice sheafification comparison is supplied by lem-cbc-sieve-slice-sheafification."
+   }
+  },
+  {
+   "text": "The comparison $c$ is $\\mathcal O_U$-linear: transport the module action on $(P^\\#)|_U$ to $Q^\\#$ through the abelian isomorphism $c$. The equation $c\\eta_Q=(\\eta_P)|_U$ shows that this transported action extends the action on $Q$, because the restricted unit is linear. The uniqueness of the extending module action in module sheafification identifies it with the given action on $Q^\\#$. Hence $c$, and therefore $e=c^{-1}$, are isomorphisms of $\\mathcal O_U$-modules.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; Tag 03CY, lemma-sheafification-presheaf-modules; Tag 03DH, section-localize. Slice sheafification comparison is supplied by lem-cbc-sieve-slice-sheafification."
+   }
+  },
+  {
+   "text": "Take $e:(P^\\#)|_U\\xrightarrow{\\sim}Q^\\#$ for the requested isomorphism. For $x\\in\\mathcal F(V)$ and $y\\in\\mathcal G(V)$, the unit equation gives $e((\\eta_P)_V(x\\otimes y))=(\\eta_Q)_{V/U}(x\\otimes y)$, exactly the asserted formula. For maps $f:\\mathcal F\\to\\mathcal F\\prime$ and $g:\\mathcal G\\to\\mathcal G\\prime$, the induced presheaf map sends $x\\otimes y$ to $f(x)\\otimes g(y)$, and the sectionwise identification in step 1 respects this map. Naturality of $c$ in that presheaf map, followed by inversion, is precisely naturality of $e$ in the two factors. No step uses flatness or finiteness.",
+   "uses": [
+    "lem-cbc-sieve-slice-sheafification",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; Tag 03CY, lemma-sheafification-presheaf-modules; Tag 03DH, section-localize. Slice sheafification comparison is supplied by lem-cbc-sieve-slice-sheafification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-tensor-product",
+  "lem-cbc-sieve-slice-sheafification",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK, 03CY and 03DH; explicit specialization by the existing abelian slice-sheafification Mathlib leaf, proving the unit formula of Tag 03EL for localization."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -31,10 +89,52 @@
    "results": "no monoidal structure on SheafOfModules; only presheaf-level Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean and PushforwardZeroMonoidal.lean; the slice restriction SheafOfModules.over exists in Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:57-64 with no tensor compatibility",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor|Monoidal|sheafification",
+   "results": "15 hits; top results: Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean. Sheaf results contain sheafification and pullback adjunction APIs, but no tensor comparison on localized module sheaves. The single-file search output has malformed file fields because rg omitted its sole filename; it reports scalar restriction and sheafification adjunction lines only.",
+   "date": "2026-10-17",
+   "verdict": "no exact match for item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf tensor product commutes with restriction to the slice site",
+   "results": "8 hits; top results: CategoryTheory.Sheaf.tensorProd_isSheaf, ModuleCat.Tilde.toOpen_res, CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, CategoryTheory.Sheaf.ΓRes, TopCat.Presheaf.SheafConditionEqualizerProducts.res_π, CategoryTheory.Sheaf.cartesianMonoidalCategory, CategoryTheory.Sheaf.monoidalCategory, SheafOfModules.restrictScalars. Eight hits, including Cartesian tensor of sheaves, generic monoidal sheafification, scalar restriction and open sections. These do not state the tensor comparison for modules over a variable sheaf of rings.",
+   "date": "2026-10-17",
+   "verdict": "no exact match for item"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.over, PresheafOfModules.sheafification",
+   "results": "0 hits; top results: . No hits for the two-name pattern.",
+   "date": "2026-10-17",
+   "verdict": "no exact match for item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sheaves of modules to a localized site commutes with the sheaf tensor product",
+   "results": "8 hits; top results: IsLocalizedModule.map_lTensor, PresheafOfModules.Monoidal.tensorObjMap, CategoryTheory.Sheaf.monoidalCategory, PresheafOfModules.Sheafify.mul_smul, SheafOfModules.restrictScalars, IsLocalizedModule.rTensor, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat. No exact item match. First phrasing returns presheaf tensorObjMap, generic sheaf monoidalCategory, scalar restriction and module localizations; second returns module sheafification/underlying abelian comparison, not slice module tensor compatibility.",
+   "date": "2026-10-17",
+   "verdict": "no exact match for item"
+  },
+  {
+   "tool": "grep",
+   "query": "over|restrict|tensor|monoidal",
+   "results": "5 hits; top results: 89, 112, 124, 126, 168. Sheaf results contain sheafification and pullback adjunction APIs, but no tensor comparison on localized module sheaves. The single-file search output has malformed file fields because rg omitted its sole filename; it reports scalar restriction and sheafification adjunction lines only.",
+   "date": "2026-10-17",
+   "verdict": "no exact match for item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of a module presheaf commutes with restriction to the category of objects over U",
+   "results": "8 hits; top results: PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, PresheafOfModules.sheafificationCompForgetCompToPresheaf, PresheafOfModules.toSheafify_app_apply, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def, PresheafOfModules.toSheafify_app_apply', PresheafOfModules.sheafifyMap_val, PresheafOfModules.sheafificationCompToSheaf, PresheafOfModules.toPresheaf_map_toSheafify. No exact item match. First phrasing returns presheaf tensorObjMap, generic sheaf monoidalCategory, scalar restriction and module localizations; second returns module sheafification/underlying abelian comparison, not slice module tensor compatibility.",
+   "date": "2026-10-17",
+   "verdict": "no exact match for item"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "reviewer",
@@ -51,5 +151,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-localized-site-tensor-restriction",
+  "worker": "stage1",
+  "summary": "Preserved the full arbitrary-site statement and its sectionwise pure-tensor normalization. Identified the restricted tensor presheaf sectionwise, used the existing abelian slice-sheafification comparison with its unit equation, and checked module linearity by uniqueness of the sheafified action. No new nodes or statement changes.",
+  "blueprint": "Realizes det-formal-closed-support-ii-limits, proof paragraph 'Tensoring with L', the local verification on a trivializing covering: tensoring may be computed after localization. The argument does not assume the tensor factors themselves finite locally free.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-828f0a00f",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-828f0a00f (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 4 steps, every cited statement, Stacks 03EL (sites-modules l.3649) and the localization section and definition (l.1992/2019; j_U^♯ is the identity and O_U(V/U)=O(V), so the coefficient ring O_U is O|_U itself and is not changed), Mathlib CoverLifting.lean:382-411, and blueprint main-20261015 limits.proof.md 'Tensoring with L'. The statement is the 03EL special case with no added or dropped hypotheses and the pure-tensor normalization in the correct direction. Small cases hold: one-object trivial site, open site of a space (01CD), zero ring, F=0, non-flat Z/2, empty covering sieves. Step 1 (presheaf identification P|_U=Q) is elementary from the definitions. Step 2 applies lem-cbc-sieve-slice-sheafification only with abelian values, its hypotheses hold, and module sheafification is abelian sheafification by def-weil-presheaf-modules-sheafification. Step 3: I checked by hand that the action transported along c extends the action on Q, so the uniqueness clause makes c O_U-linear. Step 4: the normalization and naturality follow from the unit equation and naturality of c. All dependencies are definitions or Mathlib leaves, so the route is respected and no tool_uses are needed; no SGA, no cycle. No new nodes. Duplicate check: lem-pc-open-localized-tensor-natural (topological spaces only), lem-weil-pbc-module-restriction-tensor-comparison (scheme open immersions only), lem-pur-isomorphism-inverse-image-tensor-hom (scheme isomorphisms only) and lem-weil-pbc-ringed-topoi-module-pullback-tensor (not a one-line specialization, and it lacks the normalization) are not duplicates. Blueprint search finds none, so same_as=[] and from.node is correct. No fixes."
  }
 }

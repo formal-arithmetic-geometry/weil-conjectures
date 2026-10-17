@@ -85,17 +85,10 @@
    }
   },
   {
-   "text": "Induct on a positive divisor $m$ of $n$ annihilating $\\mathcal F$. For $m=1$ the sheaf is zero. If $m$ is not prime, choose a prime $\\ell\\mid m$ and use $0\\to\\mathcal F[\\ell]\\to\\mathcal F\\to\\mathcal F/\\mathcal F[\\ell]\\to0$. The first term is killed by $\\ell$, and the last by $m/\\ell$: for a local section $x$, $\\ell((m/\\ell)x)=mx=0$, so $(m/\\ell)x\\in\\mathcal F[\\ell]$. Both annihilators are smaller than $m$. The associated triangle and Step 1 reduce to prime torsion. When $\\ell\\mathcal F=0$, put $k_\\ell=\\mathbf F_\\ell$ and $\\overline{\\mathcal E}=\\mathcal E/\\ell\\mathcal E$. For any sheaf $N$ killed by $\\ell$, the mutually inverse maps $x\\otimes y\\mapsto\\bar x\\otimes y$ and $\\bar x\\otimes y\\mapsto x\\otimes y$ give $\\mathcal E\\otimes_R N\\cong\\overline{\\mathcal E}\\otimes_{k_\\ell}N$: independence of the lift follows from $\\ell y=0$, and the balanced relations give both composites equal to the identity. This is an isomorphism of sheaves by sheafifying these maps [def-pur-sheaf-tensor-product]. In particular $\\overline{\\mathcal E}$ is flat, since its tensor functor on $k_\\ell$-sheaves is the restriction of the exact tensor functor of $\\mathcal E$. Derived direct images with either coefficient ring agree on underlying abelian complexes by [lem-weil-pbc-exchange-forget-coefficients](2). More explicitly, for either $u=g$ or $u=h$ and any $k_\\ell$-module sheaf $H$, choose a bounded-below injective $k_\\ell$-resolution $H\\to J^\\bullet$. Each term is acyclic for the $R$-module direct image: the coefficient-forgetting comparison first with $k_\\ell$ and then with $R$ identifies its higher direct images with the same abelian higher direct images, which vanish. Hence $u_*J^\\bullet$ computes the derived direct image with both coefficients by [src-right-derived-functor-plus-acyclic-unit]. Its hypotheses hold by [lem-weil-pbc-module-sheaves-enough-injectives] and [lem-weil-pbc-module-direct-image-left-exact]. This gives the natural $R$-linear identification of $Ru_*$ with restriction of the $k_\\ell$-coefficient $Ru_*$, not merely an abstract isomorphism of underlying abelian objects. For the left side use $u=g$, $H=\\mathcal F$ and apply the balanced tensor identity termwise to $(f')^{-1}g_*J^\\bullet$. For the right side first use that identity on sheaves to identify $h^{-1}p^{-1}\\mathcal E\\otimes_R e^{-1}\\mathcal F$ with $H=h^{-1}p^{-1}\\overline{\\mathcal E}\\otimes_{k_\\ell}e^{-1}\\mathcal F$, and only then take a $k_\\ell$-injective resolution of this $H$ for $u=h$. Thus no assertion that tensoring an $h_*$-acyclic resolution preserves $h_*$-acyclicity is needed. The flat factors compute the derived tensors, and exact tensor commutes with cohomology [lem-weil-pbc-exact-functor-complex-cohomology]. Inverse image is exact [prop-weil-pbc-inverse-image-modules-exact], so the same balanced maps identify the pulled-back factors. The comparison itself is unchanged: its adjoint sends the pulled-back tensor $\\bar x\\otimes s$ to $\\bar x\\otimes\\varepsilon_g(s)$ with either coefficient ring, by the stated counit formula. We have reduced to sheaves of $k_\\ell$-vector spaces. Here $\\ell$ is invertible in $K$, because it divides $n$.",
+   "text": "Induct on a positive divisor $m$ of $n$ annihilating $\\mathcal F$. For $m=1$ the sheaf is zero. If $m$ is not prime, choose a prime $\\ell\\mid m$ and use $0\\to\\mathcal F[\\ell]\\to\\mathcal F\\to\\mathcal F/\\mathcal F[\\ell]\\to0$. The first term is killed by $\\ell$, and the last by $m/\\ell$: for a local section $x$, $\\ell((m/\\ell)x)=mx=0$, so $(m/\\ell)x\\in\\mathcal F[\\ell]$. Both annihilators are smaller than $m$. The associated triangle and Step 1 reduce to prime torsion. When $\\ell\\mathcal F=0$, [lem-kun-0f1j-prime-torsion-coefficient-reduction] identifies this comparison with the restriction of the $k_\\ell=\\mathbf F_\\ell$ comparison for $(\\mathcal E/\\ell\\mathcal E,\\mathcal F)$, with the first factor flat. Restriction of coefficients is conservative because it leaves underlying cohomology sheaves unchanged. We can therefore prove the remaining sheaf case over $k_\\ell$. The prime $\\ell$ is invertible in $K$, since it divides $n$.",
    "uses": [
-    "src-right-derived-functor-plus-acyclic-unit",
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "lem-weil-pbc-module-direct-image-left-exact",
     "lem-weil-pbc-complex-ses-triangle",
-    "def-pur-sheaf-tensor-product",
-    "def-pc-flat-sheaf-modules",
-    "lem-weil-pbc-exchange-forget-coefficients",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "lem-kun-0f1j-prime-torsion-coefficient-reduction"
    ],
    "elementary": false,
    "source": {
@@ -104,21 +97,14 @@
    }
   },
   {
-   "text": "We first supply the arbitrary-$K$-scheme version of the untensored base change needed below; the existing [lem-kun-0f1i] states only its finite-type case. Let $Z$ be any $K$-scheme, retain $g:T\\to S'$ qcqs, and let $\\mathcal G$ be a $k_\\ell$-module sheaf on $T$, with $\\ell$ invertible in $K$. We first work with its underlying abelian sheaf. The assertion for $Z$ is local on $Z$: for an open $U\\subseteq Z$ its pullback $U\\times_K S'$ is open, and [lem-weil-pbc-derived-open-restriction], applied with the finite ring $k_\\ell$, identifies restriction of the module right direct image with that of the restricted square. Forgetting coefficients via [lem-weil-pbc-exchange-forget-coefficients](1)–(3) gives the same restriction identification and canonical comparison for the underlying abelian sheaf. The left side simply restricts by inverse image. The comparison restricts to the same counit-defined comparison. We may take $Z=\\operatorname{Spec}A$. The finitely generated $K$-subalgebras $A_i\\subseteq A$ form a small directed poset (the algebra generated by the union bounds any two); $A=\\varinjlim_i A_i$, since every element and every finite ring equation occurs in such an algebra. Thus $Z=\\varprojlim_i\\operatorname{Spec}A_i$ by [lem-weil-pbc-spec-small-colimit-limit]. The squares with upper left $\\operatorname{Spec}A_i\\times_KS'$, upper right $\\operatorname{Spec}A_i\\times_KT$, and lower row $T\\xrightarrow g S'$ have this square as limit by [lem-kun-fibre-product-limits]. All transitions are affine (between affine $K$-schemes and then by base change [lem-weil-pbc-affine-morphism-permanence]); the lower transitions are identities. The sheaf system on $T$ is constant with value $\\mathcal G$ and hence has colimit $\\mathcal G$. For every $q\\ge0$, [lem-kun-0f1i] gives the stage degree-$q$ comparison isomorphisms, and [lem-kun-0ezt] gives their limit comparison isomorphism. In the application here $\\mathcal G$ is the underlying sheaf of $\\mathcal F$, so its required torsion condition is [lem-kun-zn-sheaf-invertible-orders] with $n=\\ell$. The module comparison follows from [lem-weil-pbc-exchange-forget-coefficients]. Therefore the untensored comparison for $\\mathcal F$ is an isomorphism for every $Z$ over $K$, without any finite-type assumption on $Z,S'$ or $T$.",
+   "text": "The arbitrary-scheme untensored base-change lemma [lem-kun-0f1j-arbitrary-scheme-untensored-base-change] applies to the present $\\mathbf F_\\ell$-sheaf $\\mathcal F$ on $T_{\\mathrm{et}}$ and to every $K$-scheme $Z$: the prime $\\ell$ is invertible in $K$ (Step 4) and $g$ is quasi-compact and quasi-separated. It supplies the untensored comparison $(f')^{-1}Rg_*\\mathcal F\\to Rh_*e^{-1}\\mathcal F$ for the square $Z\\times_KS'\\leftarrow (Z\\times_KS')\\times_{S'}T$ over $S'\\leftarrow T$, used in the finite-pushforward reduction of Step 8, with no finite-type assumption on $Z$.",
    "uses": [
-    "lem-kun-0f1i",
-    "lem-weil-pbc-derived-open-restriction",
-    "lem-weil-pbc-spec-small-colimit-limit",
-    "lem-kun-fibre-product-limits",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "lem-kun-0ezt",
-    "lem-kun-zn-sheaf-invertible-orders",
-    "lem-weil-pbc-exchange-forget-coefficients"
+    "lem-kun-0f1j-arbitrary-scheme-untensored-base-change"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F1I, lemma-punctual-base-change, first paragraph; Tag 0EZT, lemma-base-change-Rf-star-colim (2); used in the last paragraph of Tag 0F1J"
+    "place": "Tags 0F1I and 0EZT, arbitrary-scheme extension in the proof of Tag 0F1J"
    }
   },
   {
@@ -138,7 +124,7 @@
    }
   },
   {
-   "text": "As in Step 5, restriction along the open sets of $X$ commutes with this comparison by [lem-weil-pbc-derived-open-restriction], so assume $X$ affine. It is qcqs by [lem-weil-pbc-affine-scheme-qcqs]. Use [lem-weil-pbc-module-sheaf-colimit-constructible], with the finite ring $k_\\ell$, to write any $M$ as a small filtered colimit of constructible $k_\\ell$-sheaves $M_i$. Inverse images preserve this colimit because they are left adjoints [prop-weil-pbc-inverse-image-modules-exact; lem-weil-pbc-left-adjoint-preserves-colimits]. Tensor preserves it by [lem-weil-pbc-independent-sheaf-tensor-colimits]. Finally $h$ is qcqs as a base change of $g$ [lem-weil-pbc-qcqs-morphism-permanence](3), so its higher direct images preserve these torsion filtered colimits by [lemma-weil-pbc-direct-image-filtered-colimit]. Forgetting module coefficients commutes with colimits [lem-weil-pbc-module-sheaves-colimits-forgetful] and with higher direct images [lem-weil-pbc-exchange-forget-coefficients]. Consequently $a^q_M=\\varinjlim_i a^q_{M_i}$. These filtered colimits are exact by [lem-pc-module-filtered-colimits-tensor]. It is enough to prove injectivity, or surjectivity, of $a^q$ on constructible $M$ to obtain it on all $M$. This uses the qcqs constructible-generation node, not the narrower finite-type node lem-kun-03sa.",
+   "text": "For an open $U\\subseteq X$, the open $U\\times_KS'\\subseteq X'$ and its preimage in $Y$ form the same diagram for $U$; restriction to them commutes with $Rh_*$ by [lem-weil-pbc-derived-open-restriction] (with the finite ring $k_\\ell$) and with inverse images and tensor products, so the comparison restricts to the comparison for $U$. Isomorphy of a map of sheaves is local, so assume $X$ affine. It is qcqs by [lem-weil-pbc-affine-scheme-qcqs]. Use [lem-weil-pbc-module-sheaf-colimit-constructible], with the finite ring $k_\\ell$, to write any $M$ as a small filtered colimit of constructible $k_\\ell$-sheaves $M_i$. Inverse images preserve this colimit because they are left adjoints [prop-weil-pbc-inverse-image-modules-exact; lem-weil-pbc-left-adjoint-preserves-colimits]. Tensor preserves it by [lem-weil-pbc-independent-sheaf-tensor-colimits]. Finally $h$ is qcqs as a base change of $g$ [lem-weil-pbc-qcqs-morphism-permanence](3), so its higher direct images preserve these torsion filtered colimits by [lemma-weil-pbc-direct-image-filtered-colimit]. Forgetting module coefficients commutes with colimits [lem-weil-pbc-module-sheaves-colimits-forgetful] and with higher direct images [lem-weil-pbc-exchange-forget-coefficients]. Consequently $a^q_M=\\varinjlim_i a^q_{M_i}$. These filtered colimits are exact by [lem-pc-module-filtered-colimits-tensor]. It is enough to prove injectivity, or surjectivity, of $a^q$ on constructible $M$ to obtain it on all $M$. This uses the qcqs constructible-generation node, not the narrower finite-type node lem-kun-03sa.",
    "uses": [
     "lem-weil-pbc-derived-open-restriction",
     "lem-weil-pbc-affine-scheme-qcqs",
@@ -159,23 +145,15 @@
    }
   },
   {
-   "text": "For a constructible $M$ on affine $X$, [lem-weil-pbc-constructible-module-finite-pushforward-embedding] gives a monomorphism $M\\hookrightarrow P=\\bigoplus_i\\pi_{i,*}\\underline{V_i}$ with $\\pi_i:X_i\\to X$ finite and locally of finite presentation and $V_i$ finite $k_\\ell$-modules. Choosing a finite basis of each $V_i$ identifies $\\underline{V_i}$ with a finite direct sum of $\\underline{k_\\ell}$, so it suffices to handle $M=\\pi_*\\underline{k_\\ell}$. Form $X'_i=X_i\\times_X X'$ and $Y_i=X'_i\\times_{X'}Y$, with projections $\\pi':X'_i\\to X'$, $\\rho:Y_i\\to Y$, $h_i:Y_i\\to X'_i$ and $e_i=e\\rho:Y_i\\to T$. These are the diagram in the last paragraph of 0F1J. Base changes $\\pi'$ and $\\rho$ of $\\pi$ are finite by [lem-weil-pbc-finite-morphism-permanence](a). They are therefore proper by [lem-weil-pbc-finite-proper], and their direct images are exact by [lemma-weil-pbc-finite-direct-image-exact] (also for $k_\\ell$-modules by [lem-weil-pbc-exchange-forget-coefficients]). Finite exchange [lemma-weil-pbc-finite-exchange], the projection formula [lem-kun-0f0g] for these finite proper morphisms and the torsion ring $k_\\ell$, and the derived composition isomorphism $R(u\\circ v)_*\\cong Ru_*\\circ Rv_*$ [def-weil-pbc-derived-direct-image-composition] give canonical identifications\n$$A(\\pi_*\\underline{k_\\ell},\\mathcal F)\\cong\\pi'_*((\\pi')^{-1}(f')^{-1}Rg_*\\mathcal F),$$\n$$B(\\pi_*\\underline{k_\\ell},\\mathcal F)\\cong\\pi'_*Rh_{i,*}e_i^{-1}\\mathcal F.$$\nIndeed, finite exchange first replaces $p^{-1}\\pi_*\\underline{k_\\ell}$ by $\\pi'_*\\underline{k_\\ell}$ and $h^{-1}p^{-1}\\pi_*\\underline{k_\\ell}$ by $\\rho_*\\underline{k_\\ell}$. The two projection formulas replace tensor with these sheaves by $\\pi'_*((\\pi')^{-1}-)$ and $\\rho_*\\rho^{-1}(-)$; then $h\\rho=\\pi'h_i$ gives the second identity by composition. Abelian derived composition and finite-exactness transfer to module coefficients through [lem-weil-pbc-exchange-forget-coefficients]. Under these identities the comparison is $\\pi'_*$ of the untensored exchange for $X_i$ and $g$, which is invertible by Step 5. To check the map rather than just its endpoints, use the commuting projection/exchange square [lem-kun-proj-formula-natural] for the finite maps and paste adjunction mates [lem-weil-pbc-mate-pasting](2): the composite counit is $\\varepsilon_{h_i}\\circ h_i^{-1}\\varepsilon_{\\pi'}$, and the resulting adjunct is exactly $e_i^{-1}g^{-1}Rg_*\\mathcal F\\xrightarrow{e_i^{-1}\\varepsilon_g}e_i^{-1}\\mathcal F$, with the tensor unit on $X_i$. This is the defining adjunct of the untensored exchange. Thus $a^q_P$ is an isomorphism for all $q$, by finite additivity. No claim that $X_i$ is finite type over $K$ is needed, and no claim that $P$ or its quotient is constructible is used.",
+   "text": "For a constructible $M$ on affine $X$, [lem-weil-pbc-constructible-module-finite-pushforward-embedding] gives a monomorphism $M\\hookrightarrow P=\\bigoplus_i\\pi_{i,*}\\underline{V_i}$ for finitely many finite maps $\\pi_i$ and finite $k_\\ell$-modules $V_i$. Choose a finite basis of each $V_i$; its constant sheaf is a finite direct sum of $\\underline{k_\\ell}$. For each resulting summand, [lem-kun-0f1j-finite-pushforward-comparison] identifies the canonical comparison with $\\pi'_{i,*}$ of the untensored comparison for $X_i$. That upper square is the product square $X_i\\times_K S'$ and $X_i\\times_K T$, so Step 5 applies and makes its comparison invertible. Finite additivity gives an isomorphism for $P$ in every degree. No finite-type assumption on $X_i$ or constructibility assertion about the cokernel is used.",
    "uses": [
     "lem-weil-pbc-constructible-module-finite-pushforward-embedding",
-    "lem-weil-pbc-finite-morphism-permanence",
-    "lem-weil-pbc-finite-proper",
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "lem-weil-pbc-exchange-forget-coefficients",
-    "lemma-weil-pbc-finite-exchange",
-    "lem-kun-0f0g",
-    "def-weil-pbc-derived-direct-image-composition",
-    "lem-kun-proj-formula-natural",
-    "lem-weil-pbc-mate-pasting"
+    "lem-kun-0f1j-finite-pushforward-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade, finite-pushforward calculation; Tag 09Z7 (3), lemma-constructible-maps-into-constant-general; Tag 0F0G, lemma-projection-formula-proper-mod-n"
+    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade, constructible embedding and final finite-pushforward calculation"
    }
   },
   {
@@ -219,21 +197,13 @@
   "lem-weil-pbc-ringed-topos-kflat-pullback",
   "def-pc-flat-sheaf-modules",
   "lem-weil-pbc-exact-functor-complex-cohomology",
-  "src-right-derived-functor-plus-acyclic-unit",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-weil-pbc-module-direct-image-left-exact",
-  "def-pur-sheaf-tensor-product",
-  "lem-kun-0f1i",
-  "lem-weil-pbc-derived-open-restriction",
-  "lem-weil-pbc-spec-small-colimit-limit",
-  "lem-kun-fibre-product-limits",
-  "lem-weil-pbc-affine-morphism-permanence",
-  "lem-kun-0ezt",
-  "lem-kun-zn-sheaf-invertible-orders",
+  "lem-kun-0f1j-prime-torsion-coefficient-reduction",
+  "lem-kun-0f1j-arbitrary-scheme-untensored-base-change",
   "lem-pod-etale-stalk-tensor-scalar",
   "prop-weil-pbc-geometric-stalks-exact",
   "lemma-weil-pbc-geometric-stalk-conservative",
   "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-derived-open-restriction",
   "lem-weil-pbc-affine-scheme-qcqs",
   "lem-weil-pbc-module-sheaf-colimit-constructible",
   "lem-weil-pbc-left-adjoint-preserves-colimits",
@@ -242,14 +212,7 @@
   "lemma-weil-pbc-direct-image-filtered-colimit",
   "lem-pc-module-filtered-colimits-tensor",
   "lem-weil-pbc-constructible-module-finite-pushforward-embedding",
-  "lem-weil-pbc-finite-morphism-permanence",
-  "lem-weil-pbc-finite-proper",
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "lemma-weil-pbc-finite-exchange",
-  "lem-kun-0f0g",
-  "def-weil-pbc-derived-direct-image-composition",
-  "lem-kun-proj-formula-natural",
-  "lem-weil-pbc-mate-pasting",
+  "lem-kun-0f1j-finite-pushforward-comparison",
   "lem-weil-pbc-derived-stalk-conservative",
   "lem-kun-unbounded-abelian-exchange-comparison"
  ],
@@ -310,7 +273,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -419,8 +382,8 @@
   "date": "2026-10-17",
   "item": "lem-kun-0f1j",
   "worker": "stage1",
-  "summary": "Checked Stacks 0F1J against the current blueprint and every cited DAG statement. Kept the statement unchanged. Supplied K-flat tail and degree bounds, the full F truncation, sheaf coefficient change, arbitrary-X punctual base change through 0EZT, and the complete dimension-shifting chase. Replaced the finite-type 03SA and abelian embedding citations by existing qcqs module nodes; no new nodes are necessary. Removed the false unrestricted derived-tensor lower-bound citation and all unnecessary constructibility-of-cokernel claims. No attachment: the related project external-product theorem has sorry and narrower hypotheses. Second reading repairs the coefficient change by resolving the already formed tensor sheaf for h, and makes the finite-coefficient-to-abelian open-restriction passage explicit.",
-  "blueprint": "Current main-20261015 lem-kun-0f1j.proof.md: first paragraph -> Steps 1–2; second and prime-torsion paragraphs -> Steps 3–4; vector-space and constructible paragraphs -> Steps 6–7 and 9; finite-pushforward diagram and calculation -> Steps 5 and 8; conclusion -> Step 10. Step 5 restores the full 0F1I used in that calculation, since the existing DAG node states only the finite-type case.",
+  "summary": "Repaired the returned split by extracting the three hidden arguments flagged as non-elementary long steps: prime-torsion coefficient reduction, arbitrary-scheme untensored base change, and finite-pushforward comparison. The item statement and Lean record are unchanged; Steps 4, 5, and 8 now cite these statement-only nodes and are each under 2000 characters. Existing steps and route were retained, with proof dependencies recomputed. No finished declaration or exact Mathlib match was found for the item or the three auxiliary statements.",
+  "blueprint": "Current main-20261015 lem-kun-0f1j.proof.md: first paragraph -> Steps 1-2; second and prime-torsion paragraphs -> Steps 3-4 and new coefficient node; arbitrary-scheme 0F1I/0EZT extension -> Step 5 and new untensored node; vector-space and constructible paragraphs -> Steps 6-7 and 9; finite-pushforward diagram and calculation -> Step 8 and new finite-pushforward node; conclusion -> Step 10.",
   "tool_uses": [
    {
     "node": "prop-weil-pbc-inverse-image-modules-exact",
@@ -459,28 +422,8 @@
     "why": "Used as the generic An exact functor commutes with cohomology of cochain complexes. Its statement supplies the indicated categorical, coefficient, constructible-sheaf or geometric ingredient; it does not replace a step of the unit Kunneth route, and no node of this unit gives that ingredient in the needed generality."
    },
    {
-    "node": "src-right-derived-functor-plus-acyclic-unit",
-    "why": "Used as the generic The bounded-below derived unit is invertible on right-acyclic complexes. Its statement supplies the indicated categorical, coefficient, constructible-sheaf or geometric ingredient; it does not replace a step of the unit Kunneth route, and no node of this unit gives that ingredient in the needed generality."
-   },
-   {
-    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
-    "why": "Used as the generic Sheaves of modules on the small etale site have enough injectives. Its statement supplies the indicated categorical, coefficient, constructible-sheaf or geometric ingredient; it does not replace a step of the unit Kunneth route, and no node of this unit gives that ingredient in the needed generality."
-   },
-   {
-    "node": "lem-weil-pbc-module-direct-image-left-exact",
-    "why": "Used as the generic Direct image of etale sheaves of modules over a constant ring: module structure, additive and left exact. Its statement supplies the indicated categorical, coefficient, constructible-sheaf or geometric ingredient; it does not replace a step of the unit Kunneth route, and no node of this unit gives that ingredient in the needed generality."
-   },
-   {
     "node": "lem-weil-pbc-derived-open-restriction",
     "why": "Used as the generic Derived direct image restricted to an open. Its statement supplies the indicated categorical, coefficient, constructible-sheaf or geometric ingredient; it does not replace a step of the unit Kunneth route, and no node of this unit gives that ingredient in the needed generality."
-   },
-   {
-    "node": "lem-weil-pbc-spec-small-colimit-limit",
-    "why": "Used as the generic Spec of a small colimit of rings is the limit of the spectra. Its statement supplies the indicated categorical, coefficient, constructible-sheaf or geometric ingredient; it does not replace a step of the unit Kunneth route, and no node of this unit gives that ingredient in the needed generality."
-   },
-   {
-    "node": "lem-weil-pbc-affine-morphism-permanence",
-    "why": "Used as the generic Base change, affineness of the source, and quasi-compactness and separatedness of affine morphisms. Its statement supplies the indicated categorical, coefficient, constructible-sheaf or geometric ingredient; it does not replace a step of the unit Kunneth route, and no node of this unit gives that ingredient in the needed generality."
    },
    {
     "node": "lem-pod-etale-stalk-tensor-scalar",
@@ -531,26 +474,6 @@
     "why": "Used as the generic A constructible sheaf of $\\Lambda$-modules embeds into a finite sum of finite pushforwards of constant sheaves. Its statement supplies the indicated categorical, coefficient, constructible-sheaf or geometric ingredient; it does not replace a step of the unit Kunneth route, and no node of this unit gives that ingredient in the needed generality."
    },
    {
-    "node": "lem-weil-pbc-finite-morphism-permanence",
-    "why": "Used as the generic Base change, affineness and properness for finite morphisms. Its statement supplies the indicated categorical, coefficient, constructible-sheaf or geometric ingredient; it does not replace a step of the unit Kunneth route, and no node of this unit gives that ingredient in the needed generality."
-   },
-   {
-    "node": "lem-weil-pbc-finite-proper",
-    "why": "Used as the generic Finite morphisms are proper. Its statement supplies the indicated categorical, coefficient, constructible-sheaf or geometric ingredient; it does not replace a step of the unit Kunneth route, and no node of this unit gives that ingredient in the needed generality."
-   },
-   {
-    "node": "lemma-weil-pbc-finite-direct-image-exact",
-    "why": "Used as the generic Exactness of finite direct image. Its statement supplies the indicated categorical, coefficient, constructible-sheaf or geometric ingredient; it does not replace a step of the unit Kunneth route, and no node of this unit gives that ingredient in the needed generality."
-   },
-   {
-    "node": "lemma-weil-pbc-finite-exchange",
-    "why": "Used as the generic Finite exchange isomorphism. Its statement supplies the indicated categorical, coefficient, constructible-sheaf or geometric ingredient; it does not replace a step of the unit Kunneth route, and no node of this unit gives that ingredient in the needed generality."
-   },
-   {
-    "node": "lem-weil-pbc-mate-pasting",
-    "why": "Used as the generic Mates of pasted squares and of conjugate-whiskered squares. Its statement supplies the indicated categorical, coefficient, constructible-sheaf or geometric ingredient; it does not replace a step of the unit Kunneth route, and no node of this unit gives that ingredient in the needed generality."
-   },
-   {
     "node": "lem-weil-pbc-derived-stalk-conservative",
     "why": "Used as the generic Conservativity of geometric stalks on the derived category. Its statement supplies the indicated categorical, coefficient, constructible-sheaf or geometric ingredient; it does not replace a step of the unit Kunneth route, and no node of this unit gives that ingredient in the needed generality."
    }
@@ -592,12 +515,12 @@
   "lem-weil-pbc-derived-stalk-conservative"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-N9-e5d5a77fd",
-  "group": "N9",
+  "reviewer": "NT-cc-Q85-707028a69",
+  "group": "Q85",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-e5d5a77fd (reviewer sub-agent of L); spot-checked: I read all of lem-kun-0f1j: the item, all 10 steps and the statements of all 51 cited nodes. I checked it against Stacks etale-cohomology.tex 0F1I/0F1J (l.20596-20877), the main-20261015 proof, and the unit record. The unit has no steps and is not keyed to this item. The statement is unchanged and matches 0F1J hypothesis by hypothesis: Z/n-module sheaves, tor amplitude in [a,inf], E and F in D+, g qcqs, canonical map adjoint to the counit of g. There are no new nodes and no cycle. Step 2 is correct: the tail is K-flat by the split-sequence argument, and for q<N+b both H^q and H^(q+1) of the tail images vanish. This replaces the blueprint's false derived-tensor-t-est citation; the Z/l^2 counterexample is right. In Step 3, C_M=I/J_M is zero below M. Step 4's annihilator induction and its F_l-injective acyclicity argument are correct, and the repair that resolves the formed tensor sheaf for h is correct. Step 5 really is needed, because lem-kun-0f1i is stated only for finite type; every hypothesis of lem-kun-0ezt is met by the subalgebra system with constant bottom row and the torsion condition from zn-invertible-orders. Step 7 uses the qcqs finite-coefficient colimit node instead of 03SA. In Step 8, X'_i=X_i x_K S', so Step 5 applies, and the Stacks display that drops rho_* is correctly retyped. I redid the Step 9 chase: injectivity holds for all sheaves first, then surjectivity by induction on q; it uses only naturality and needs no constructible cokernel. Step 10 uses stalk conservativity and conservative forgetting of coefficients. Fix (C4): Step 8 cited lem-weil-pbc-derived-leray-composition for R(h rho)_* = pi'_* Rh_{i,*}, but that node states RGamma/Leray compatibility. I replaced it with def-weil-pbc-derived-direct-image-composition, which states R(u o v)_* = Ru_* Ru_* composition on D+, in the text, uses and proof_deps, and removed its tool_use entry. I accept the other 33 declared tool uses as generic tools; no SGA is cited. The corrected file is fixes/dag/nodes/sec-smooth-purity/lem-kun-0f1j.json and the review is in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-707028a69 (reviewer sub-agent of L); spot-checked: I read Stacks 0F1J (l.20705-20877), 0F1I and 0EZT in full, the main-20261015 blueprint proof and lem-kun-0f1i.md, the unit record (no steps), the item, all three new nodes and the statements of all 36 cited nodes. The item statement and Lean record are unchanged and match 0F1J hypothesis by hypothesis. Steps 1-3, 6-7 and 9-10 are unchanged and I re-checked them against their cited statements. Step 4: the annihilator induction is set up (base m=1, prime case, F[l] killed by l<m, F/F[l] killed by m/l<m) and its prime case meets every hypothesis of the coefficient node. Step 5 is needed: the DAG and blueprint 0f1i cover only finite type, but X_i is merely finite over an arbitrary affine X. Step 8: the embedding node needs X qcqs and a finite ring, both hold; X'_i=X_i x_K S' and Y_i=X'_i x_S' T, so the new finite-pushforward node plus Step 5 with Z=X_i give the result. All three new nodes are true, statement-only, strictly smaller than the item and not restatements. Coefficient node: E flat gives the termwise balanced identity, and k-injectives are acyclic for direct image as abelian sheaves. It differs from lem-kun-change-of-rings-tensor, which covers ordinary modules only, with no sheaves, direct images or comparison map. Arbitrary-scheme node: 0F1I for F_l-sheaves with l invertible and g qcqs; no duplicate in any chapter; the proof guide meets every hypothesis of 0ezt. Finite-pushforward node: finite base change, finite projection formula and R(pi'h_i)_*=pi'_*Rh_i* give both endpoints. Edge cases checked: n=1, empty Z, T or X_i, zero sheaf. No cycle; no SGA cited. I made three repairs in fixes/: (1) B4: Step 5 had TeX outside $..$; I rewrote it with its hypotheses checked. (2) Step 7 began 'As in Step 5', pointing at text the repair had moved out of Step 5; I wrote the open-restriction argument there explicitly. (3) B2/B3: the coefficient node now says F is regarded as an F_l-sheaf, and the unused def-weil-finite-type-morphism is removed from the stmt_deps of the coefficient and finite-pushforward nodes. I accept the 23 declared split_report tool_uses. The maintainer-owned tool_uses field still lists 10 nodes the proof no longer cites; the merge should drop them.; 3 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",

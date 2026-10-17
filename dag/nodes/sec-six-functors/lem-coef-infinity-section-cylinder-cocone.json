@@ -1,0 +1,119 @@
+{
+ "id": "lem-coef-infinity-section-cylinder-cocone",
+ "kind": "statement",
+ "title": "Lifting a cocone through a right fibration is a path in its section space",
+ "statement": "Use small simplicial sets, quasicategories, spaces, coherent transformations and cocones of [def-cbc-enhanced-diagrams-cones], right fibrations of [def-coef-infinity-fibrations], and transport and classifiers of [lem-coef-space-transport-classification]. Fix a universe of small simplicial sets. Let $q:I\\to A$ be a right fibration of small quasicategories, classified by $X:A^{\\mathrm{op}}\\to\\mathcal S$. Let $K$ be any small simplicial set, $p:K\\to A$ a diagram, and $t:K\\to I$ a lift with $qt=p$. Write $\\Gamma_p=\\operatorname{Fun}_{/K}(K,K\\times_A I)$ for the Kan space of sections: its $n$-simplices are maps $K\\times\\Delta^n\\to I$ over $p\\operatorname{pr}_K$. The classification mapping-space formula identifies $\\Gamma_p$ with $\\operatorname{Map}_{\\operatorname{Fun}(K^{\\mathrm{op}},\\mathcal S)}(\\Delta *,Xp^{\\mathrm{op}})$, and $t$ determines a point $s_t$ of this space.\n\nLet $b\\in A$, let $\\lambda:p\\to\\Delta_Kb$ be a coherent cocone, represented by $K\\times\\Delta^1\\to A$, and let $x\\in I_b$, regarded as a point of $X(b)$ via the classifier. The composite $\\Delta *\\xrightarrow{x}\\Delta X(b)\\xrightarrow{X\\lambda}Xp^{\\mathrm{op}}$ determines a point $s_{\\lambda,x}\\in\\Gamma_p$, up to the coherent identifications just specified. Define the space of lifted cocones over $\\lambda$ to be the homotopy fiber over $\\lambda$ of\n$$\\operatorname{Map}_{\\operatorname{Fun}(K,I)}(t,\\Delta_Kx)\\longrightarrow\\operatorname{Map}_{\\operatorname{Fun}(K,A)}(p,\\Delta_Kb).$$\nThis space is naturally equivalent to the path space from $s_t$ to $s_{\\lambda,x}$ in $\\Gamma_p$. Moreover, a point of this homotopy fiber can be represented by an actual coherent transformation $t\\to\\Delta_Kx$ whose image under $q$ is the prescribed cylinder $\\lambda$. Thus a path between the two section points supplies a coherent cocone in $I$ over $\\lambda$, with apex $x$. The equivalence and this realization retain simplicial parameters and are natural under restriction of $K$. The shape $K$ need not be a quasicategory, and $K=\\varnothing$ is allowed.",
+ "source": {
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Corollary 5.3.5.4, printed p.404: agent-expanded coherent lifting calculation in the right-fibration/category-of-elements proof; uses the transport mapping-space formula of Section 2.2. This auxiliary statement is not quoted verbatim from HTT. Online source not archived in literature/."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-space-transport-classification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "a cocone in a right fibration is equivalent to a section over the cocone cylinder",
+   "results": "Hits were ordinary Grothendieck cocone constructions and no right-fibration cylinder theorem.",
+   "date": "2026-10-17",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Cocone",
+   "results": "Ordinary CategoryTheory.Limits.Cocone declarations in Mathlib.CategoryTheory.Limits.Cones; no coherent right-fibration statement.",
+   "date": "2026-10-17",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "Cocone.*Functor|IsColimit",
+   "results": "Ordinary Cocone and IsColimit declarations only; no quasicategorical section/cylinder result.",
+   "date": "2026-10-17",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a space valued presheaf on any simplicial set, sections of its right fibration are the limit, and lifting a coherent cocone to an element is a path in that section space",
+   "results": "{\"t\": \"2026-10-17T09:44:59Z\", \"tool\": \"leansearch\", \"query\": \"For a space valued presheaf on any simplicial set, sections of its right fibration are the limit, and lifting a coherent cocone to an element is a path in that section space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.isLimitConeΓ\", \"AlgebraicGeometry.PresheafedSpace.colimitCocone\", \"CategoryTheory.Limits.Types.limitEquivSections\", \"CategoryTheory.GrothendieckTopology.liftToDiagramLimitObjAux\", \"AlgebraicGeometry.PresheafedSpace.colimitCoconeIsColimit\", \"CategoryTheory.Limits.Types.isLimitEquivSections\", \"CategoryTheory.Presheaf.isColimitTautologicalCocone\", \"CategoryTheory.Presheaf.isLimitOfIsSheaf\"], \"digest\": \"b84d704713aa8d26\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the hits concern ordinary sheaf/type-valued limits and ordinary cocones."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right fibration sections over an arbitrary simplicial set form the limit of its classifier and paths from a restricted fiber point give coherent cocones",
+   "results": "{\"t\": \"2026-10-17T09:45:41Z\", \"tool\": \"leanfinder\", \"query\": \"Right fibration sections over an arbitrary simplicial set form the limit of its classifier and paths from a restricted fiber point give coherent cocones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"SSet.StrictSegal.isPointwiseRightKanExtension\", \"SSet.Truncated.rightExtensionInclusion\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"81f2a4756dbaf283\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: StrictSegal pointwise Kan extension results have different hypotheses and give no right-fibration lifted-cocone/path equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Types.limitEquivSections",
+   "results": "{\"t\": \"2026-10-17T09:45:42Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.Types.limitEquivSections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Types.limitEquivSections\", \"CategoryTheory.Limits.Types.limitEquivSections_apply\", \"CategoryTheory.Limits.Types.limitEquivSections_symm_apply\", \"CategoryTheory.Limits.SingleObj.Types.limitEquivFixedPoints_symm_apply\"], \"digest\": \"709937e7a2e7ee56\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: an ordinary Type-valued limit/sections equivalence, not the homotopy-coherent lifted-cocone assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "right.?[Ff]ibration|section.*[Ll]imit|[Ll]imit.*section",
+   "results": "{\"t\": \"2026-10-17T09:45:42Z\", \"tool\": \"grep\", \"query\": \"right.?[Ff]ibration|section.*[Ll]imit|[Ll]imit.*section\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: zero hits in AlgebraicTopology/Quasicategory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coherent cocone lifted through a right fibration is a path between the original section and transport of its apex point",
+   "results": "{\"t\": \"2026-10-17T10:12:10Z\", \"tool\": \"leansearch\", \"query\": \"A coherent cocone lifted through a right fibration is a path between the original section and transport of its apex point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.LiftableCocone.mk.noConfusion\", \"CategoryTheory.LiftableCocone.noConfusionType\", \"CategoryTheory.LiftableCocone.noConfusion\", \"CategoryTheory.Over.liftCone\", \"CategoryTheory.Under.liftCocone_ι_app\", \"CategoryTheory.Over.liftCone_pt\", \"CategoryTheory.Over.liftCocone_pt\", \"CategoryTheory.Over.liftCocone\"], \"digest\": \"1a6574621d98808d\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: LiftableCocone and Over.liftCocone concern ordinary categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent cocones lifting a transformation in a right fibration are paths in the space of sections",
+   "results": "{\"t\": \"2026-10-17T10:12:44Z\", \"tool\": \"leanfinder\", \"query\": \"coherent cocones lifting a transformation in a right fibration are paths in the space of sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Under.liftCocone_ι_app\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.LiftableCocone\", \"CategoryTheory.Functor.IsStronglyCocartesian.toIsHomLift\", \"CategoryTheory.LiftableCocone.liftedCocone\", \"CategoryTheory.LiftableCocone.validLift\", \"CategoryTheory.Functor.IsCocartesian.fac\"], \"digest\": \"dd4331d73d6d7bf4\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: ordinary Under.liftCocone, LiftableCocone and IsCocartesian hits do not state the quasicategorical section-path equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet, \"Cocone\"",
+   "results": "{\"t\": \"2026-10-17T10:13:52Z\", \"tool\": \"loogle\", \"query\": \"SSet, \\\"Cocone\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"SSet.coconeN\", \"SSet.isColimitCoconeN\", \"SSet.coconeN'\", \"SSet.isColimitCoconeN'\", \"SSet.coconeN'_pt\", \"SSet.coconeN'_ι_app\"], \"digest\": \"51cefb7a58e7bd35\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: the six coconeN/coconeN-prime hits express strict colimits of simplicial sets in SSet, not cocones in arbitrary quasicategories."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-infinity-presheaf-ind-criterion",
+  "date": "2026-10-17",
+  "group": "Q100"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, finite-coefficient mapping-complex adjunction: the cocomplete coefficient tensor foundation; bounded-colimit presentation used in step 6 of lem-coef-cocomplete-monoidal-tensor. This lemma supplies the presheaf recognition needed to identify its small-data relative completion with the compact-generator hull. Extracts the cylinder endpoint/path argument in original proof step 4, used to construct the filtered cocones.",
+   "via": [
+    "lem-coef-infinity-presheaf-ind-criterion",
+    "lem-coef-infinity-bounded-colimit-presentation",
+    "lem-coef-cocomplete-monoidal-tensor",
+    "lem-coef-algebroid-bilinear-colimits",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
