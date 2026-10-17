@@ -21,11 +21,162 @@
  },
  "stmt_deps": [
   "def-weil-size-convention",
-  "def-weil-pbc-ringed-topos-morphism"
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-topos",
+  "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the universes of [def-weil-size-convention] and the site and sheaf conventions of [def-weil-pbc-sites-and-cohomology] and [def-weil-pbc-topos]. Form the category of triples in the statement. Its final object is $(e_X\\to e_S\\leftarrow e_Y)$ and pullbacks are computed componentwise, since the two site functors preserve finite limits. Base change of a family of type (a), respectively (b), is again such a family, by the corresponding site axiom; base change of a type-(c) arrow along $(U_0\\to V_0\\leftarrow W_0)\\to(U\\to V\\leftarrow W)$ replaces $V'$ by $V'\\times_VV_0$ and has third component $W_0\\times_{g^{-1}V_0}g^{-1}(V'\\times_VV_0)$. Thus all three types are stable under base change. Close these families under composition and isomorphisms to obtain a pretopology, and take its associated Grothendieck topology by [lem-weil-pbc-pretopology-sheaf-condition].",
+   "uses": [
+    "def-weil-size-convention",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-topos",
+    "lem-weil-pbc-pretopology-sheaf-condition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI 1.1; Stacks sites.tex, Tag 00ZC (lemma-site-gives-topology)"
+   }
+  },
+  {
+   "text": "Here is the sheaf criterion of XI Lemma 1.2, without introducing a separate node. Descent for (a) and (b) is the usual product-equalizer condition. For a type-(c) arrow $q:Z'\\to Z$, its diagonal $Z'\\to Z'\\times_ZZ'$ is again type (c): its middle component is $V'\\to V'\\times_VV'$ and its third component is the corresponding diagonal of $W'$. For a sheaf, restriction along this diagonal is injective and equalizes the two maps $F(Z')\\rightrightarrows F(Z'\\times_ZZ')$, so those two maps are equal. Descent for $q$ therefore says exactly that $F(Z)\\to F(Z')$ is bijective. Conversely, bijectivity for (c) gives descent for that singleton family, and descent for generators gives descent for their composites: glue on each inner family, use uniqueness on its pullbacks to check compatibility of these glued sections on the outer overlaps, and glue on the outer family. Apply [lem-weil-pbc-pretopology-sheaf-condition]. In particular $q^a:Z'^a\\to Z^a$ is an isomorphism: by Yoneda and the sheafification adjunction, maps from these two sheaves to any sheaf $F$ are $F(Z)$ and $F(Z')$, and the induced map is bijective. Here and below $Z^a$ denotes the sheafification of the representable presheaf of the triple $Z$, not a claim that the site is subcanonical.",
+   "uses": [
+    "lem-weil-pbc-pretopology-sheaf-condition",
+    "lem-galois-yoneda-hom-bijection",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI Lemma 1.2; Stacks sites.tex, Tag 00ZC (lemma-site-gives-topology)"
+   }
+  },
+  {
+   "text": "Define $k_1(U)=(U\\to e_S\\leftarrow e_Y)$ and $k_2(W)=(e_X\\to e_S\\leftarrow W)$. These preserve final objects and pullbacks componentwise. They send covering families to generators of type (a), respectively (b). Apply [lem-weil-pbc-left-exact-site-inverse-image-tensor] to obtain geometric morphisms $p_1:P\\to\\operatorname{Sh}(\\mathcal C_1)$ and $p_2:P\\to\\operatorname{Sh}(\\mathcal C_2)$. Their direct images are restriction along $k_1,k_2$. For any sheaf $F$ on $P$, adjunction and Yoneda identify maps from $p_1^{-1}(U^a)$ to $F$ with $F(k_1(U))$, and maps from $k_1(U)^a$ to $F$ with the same set. Thus $p_1^{-1}(U^a)\\cong k_1(U)^a$ naturally, and the identical calculation with $k_2$ proves the displayed formula for $p_2$. This also specifies the convention that an object of an input site in an inverse-image formula means its sheafified representable.",
+   "uses": [
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "lem-galois-yoneda-hom-bijection",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00X6, proposition-get-morphism: a continuous finite-limit-preserving functor defines a morphism of sites; apply to k_1 and k_2 of ILO Exposé XI 1.3, then use Yoneda and the sheafification adjunction for their inverse-image formulas."
+   }
+  },
+  {
+   "text": "For $V\\in\\mathcal D$ put $T_V=(f^{-1}V\\to V\\leftarrow g^{-1}V)$, $F_V=k_1(f^{-1}V)$ and $G_V=k_2(g^{-1}V)$. The arrow $r_V:T_V\\to F_V$ is type (c), so step 2 makes $r_V^a$ invertible. The other structural arrow is $s_V:T_V\\to G_V$. For every sheaf $M$ on $P$ the composite $M(G_V)\\to M(T_V)\\xrightarrow{(M(r_V))^{-1}}M(F_V)$ is natural in $V$ and $M$, and is precisely a transformation $(gp_2)_*\\to(fp_1)_*$. This defines $\\tau:gp_2\\Rightarrow fp_1$ in the convention of the statement. Its inverse-image mate on $V^a$ is $F_V^a\\xrightarrow{(r_V^a)^{-1}}T_V^a\\xrightarrow{s_V^a}G_V^a$; the direction follows by applying $\\operatorname{Hom}(-,M)$ to this composite and the adjunctions.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism",
+    "lem-galois-yoneda-hom-bijection",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI 1.3 (explicit direct-image formula)"
+   }
+  },
+  {
+   "text": "Prove the cartesian formula of XI Lemma 1.5 directly. For $Z=(U\\to V\\leftarrow W)$ put $A=k_1(U)$, $B=k_2(W)$, $C_Z=(U\\to V\\leftarrow g^{-1}V)$ and $D_Z=(f^{-1}V\\to V\\leftarrow W)$. Componentwise pullbacks give $D_Z=T_V\\times_{G_V}B$ and $Z=C_Z\\times_{T_V}D_Z$. The arrow $C_Z\\to A$ is type (c). Representable presheaves preserve these pullbacks by the universal property of a limit, and sheafification preserves them by [lem-weil-pbc-sheafification-sets-exact]. Cancelling the type-(c) isomorphisms $C_Z^a\\cong A^a$ and $T_V^a\\cong F_V^a$ therefore yields $Z^a\\cong A^a\\times_{G_V^a}B^a$. The map $A^a\\to G_V^a$ here is $A^a\\to F_V^a\\xrightarrow{(r_V^a)^{-1}}T_V^a\\to G_V^a$, since $C_Z\\to T_V\\to F_V$ equals $C_Z\\to A\\to F_V$. By step 4 this is the map induced by $U\\to f^{-1}V$ followed by the inverse-image mate of $\\tau$. Thus the bottom object is $(gp_2)^{-1}(V^a)$; no direct-image functor is applied to $V$. All these identifications are natural in morphisms of triples because their projections are the structural arrows just specified.",
+   "uses": [
+    "lem-weil-pbc-sheafification-sets-exact",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI Lemma 1.5 and its cartesian-diagram proof"
+   }
+  },
+  {
+   "text": "Given $(\\mathcal E,a,b,t)$ as in the statement, define a functor on the triple category by $H(U\\to V\\leftarrow W)=a^{-1}(U^a)\\times_{(gb)^{-1}(V^a)}b^{-1}(W^a)$, with left structural map $a^{-1}(U^a)\\to(fa)^{-1}(V^a)\\xrightarrow{t^\\flat}(gb)^{-1}(V^a)$. On triple morphisms use the three component maps and the universal property of pullback; naturality of $t^\\flat$ gives the required commuting squares, and uniqueness in that universal property gives identities and composition. The associated-representable functors preserve finite limits by Yoneda and [lem-weil-pbc-sheafification-sets-exact], as do the inverse images by the geometric-morphism definition. Finite limits of these pullback diagrams commute with pullbacks: on any presentation of $\\mathcal E$ this is the bijection of tuples satisfying the same equations in either order, by [lem-weil-pbc-site-sheaf-sets-limits-sectionwise]. Thus $H$ preserves finite limits.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism",
+    "lem-weil-pbc-sheafification-sets-exact",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI 1.6, formula (1.a)"
+   }
+  },
+  {
+   "text": "Check covers before extending $H$. A type-(a) family maps to the pullback of the jointly epimorphic family $a^{-1}(U_i^a)\\to a^{-1}(U^a)$; type (b) gives the pullback of $b^{-1}(W_i^a)\\to b^{-1}(W^a)$. The original sheafified covering families are jointly epimorphic: maps from their target into any sheaf are determined by restriction, by the sheaf axiom and Yoneda. Inverse images preserve them because they preserve coproducts and coequalizers as left adjoints and epimorphisms are coequalizers of their kernel pairs [lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer]. Joint epimorphy is stable under pullback by the local-surjectivity criterion [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective]: locally lift the section of the target and retain its given component in the other factor. For type (c), $b^{-1}(W'^a)=b^{-1}(W^a)\\times_{(gb)^{-1}(V^a)}(gb)^{-1}(V'^a)$. Naturality of $t^\\flat$ and the specified factorization of $U\\to f^{-1}V$ give a lift $a^{-1}(U^a)\\to(gb)^{-1}(V'^a)$ of its map to $(gb)^{-1}(V^a)$. Pullback cancellation now gives $H(Z')\\cong H(Z)$, with no assumption that the naturality square of $t^\\flat$ itself is cartesian. These properties persist under composites of covering families.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI 1.6, continuity check for types (a), (b), (c); epimorphism facts supplied by Stacks sites.tex Tags 086K and 00WN through the cited existing nodes."
+   }
+  },
+  {
+   "text": "Extend the functor H of step 6, whose cover images were checked in step 7: Present $\\mathcal E$ on any small site and take the full subcategory of its sheaves containing all its sheafified representables, all $H(Z)$ and the final object, and close it under finite limits. This still has a set of objects (at each stage there are only a set of finite diagrams). By [lem-weil-pbc-site-of-sheaf-generators] it is a site presenting $\\mathcal E$, with covers exactly the jointly epimorphic families. Regard $H$ as a finite-limit and cover-preserving functor to this site, include the specified image covers among its representative coverings, and apply [lem-weil-pbc-left-exact-site-inverse-image-tensor]. Composing with the presentation equivalence constructs $h:\\mathcal E\\to P$ with $h^{-1}(Z^a)\\cong H(Z)$, as follows from the adjunction/Yoneda calculation of step 3.",
+   "uses": [
+    "lem-weil-pbc-site-of-sheaf-generators",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 03CI (lemma-topos-good-site) and 03A1 (lemma-special-equivalence) for a small presenting site containing the set of H(Z); Tag 00X6 (proposition-get-morphism) for extension of the finite-limit and cover-preserving H. This supplies the site-theoretic existence input in ILO Exposé XI 1.6."
+   }
+  },
+  {
+   "text": "Since the three inverse images send final objects to final objects, $H(k_1(U))=a^{-1}(U^a)$ and $H(k_2(W))=b^{-1}(W^a)$. These give isomorphisms $\\alpha:p_1h\\cong a$ and $\\beta:p_2h\\cong b$: for example for $M\\in\\mathcal E$ the value of the direct image of $p_1h$ on $U$ is $\\operatorname{Hom}_{\\mathcal E}(a^{-1}(U^a),M)=(a_*M)(U)$, naturally in $U,M$, and the calculation for $b$ is identical with $W,b$ in place of $U,a$. For $V\\in\\mathcal D$, $H(T_V)=(fa)^{-1}(V^a)\\times_{(gb)^{-1}(V^a)}(gb)^{-1}(V^a)$; its projection to $(fa)^{-1}(V^a)$ is $H(r_V)$ and its projection to $(gb)^{-1}(V^a)$ is $H(s_V)$. The inverse of the first projection sends $x$ to $(x,t^\\flat(x))$, so the second projection after this inverse is exactly $t^\\flat$. This verifies the required compatibility on the site objects. On arbitrary sheaves it follows by naturality and the sheafification adjunction: each sheaf is the sheafification of the colimit of its representables indexed by pairs $(V,s)$ (a section is the image of $\\mathrm{id}_V$); all inverse-image functors preserve these colimits. Taking mates gives exactly $g\\beta^{-1};\\tau h;f\\alpha=t$.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism",
+    "lem-galois-yoneda-hom-bijection",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI 1.6, final computation of the induced transformation"
+   }
+  },
+  {
+   "text": "For another compatible triple $(h',\\alpha',\\beta')$, apply its finite-limit-preserving inverse image to the pullback of step 5. Compatibility identifies its bottom map with $t^\\flat$, forcing a natural isomorphism $h'^{-1}(Z^a)\\cong H(Z)$ preserving both projections. For $M\\in\\mathcal E$, adjunction and Yoneda give $(h'_*M)(Z)=\\operatorname{Hom}_{\\mathcal E}(H(Z),M)=(h_*M)(Z)$, naturally in $Z,M$. Thus these isomorphisms define an isomorphism of the right adjoints as sheaves on the triple site, hence of their adjoint geometric morphisms. Any isomorphism respecting $\\alpha,\\beta$ must give the same map on each pullback in step 5, so the right-adjoint calculation forces it to be this unique isomorphism. This proves uniqueness of the compatible triple, including its isomorphism. For a second choice of defining sites, apply the universal property to its projections and orientation to obtain a morphism to $P$ and apply it in the reverse direction as well. Each composite and the corresponding identity induce the same compatible triple, hence have a unique compatible isomorphism by what was just proved. These exhibit the required equivalence of quadruples, unique with its projection and orientation compatibilities. This is the meaning of independence up to unique isomorphism in the 2-category of topoi, and proves Definition 1.7's consequence.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism",
+    "lem-galois-yoneda-hom-bijection",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI Theorem 1.4, 1.6 (uniqueness), and Definition 1.7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-topos",
+  "def-weil-size-convention",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-pretopology-sheaf-condition",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "lem-weil-pbc-site-of-sheaf-generators",
+  "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé XI §§1.1–1.7, printed pp. 171–174: explicit triples, coverings, projections, cartesian formula and universal-property calculation; the generic site-extension inputs in steps 3 and 8 are Stacks sites.tex Tags 00X6, 03A1 and 03CI."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -33,10 +184,199 @@
    "results": "no geometric-morphism, topos or oriented-product declaration; file hits are unrelated words (DedekindDomain/Ideal/Basic, SimplicialNerve, linter and positivity tactic files)",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "oriented product of topoi site of triples universal property",
+   "results": "TopCat.Presheaf.SheafConditionEqualizerProducts.diagram, CategoryTheory.Presheaf.secondObj, TopCat.Presheaf.SheafConditionEqualizerProducts.piInters, TopCat.Presheaf.IsSheafEqualizerProducts, TopCat.Presheaf.SheafConditionEqualizerProducts.piOpens, CategoryTheory.Sheaf.instHasFiniteProducts, CategoryTheory.Sheaf.cartesianMonoidalCategory, TopCat.Sheaf.isProductOfDisjoint",
+   "date": "2026-10-17",
+   "verdict": "no exact match; generic Mathlib sheaf/category hits only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric morphisms 2-morphism universal oriented product",
+   "results": "CategoryTheory.Bicategory.uniformProd, CategoryTheory.Bicategory.term_▷_, CategoryTheory.Bicategory.term_⁺_, CategoryTheory.Bicategory.term_₊_, CategoryTheory.Bicategory.term_≪⊗≫_, CategoryTheory.Bicategory.term⊗𝟙, CategoryTheory.Bicategory.termΔ, CategoryTheory.Bicategory.termΔ[_]",
+   "date": "2026-10-17",
+   "verdict": "no exact match; generic Mathlib sheaf/category hits only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Topos, GeometricMorphism, universal property",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "query did not establish absence: unknown or unqualified identifier; independent valid second-reader searches recorded below"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf, Presheaf, comma category, pullback",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "query did not establish absence: unknown or unqualified identifier; independent valid second-reader searches recorded below"
+  },
+  {
+   "tool": "grep",
+   "query": "oriented.?product|GeometricMorphism|Topos",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Sheaf.*product|Presheaf.*site",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "construct the oriented product of two topoi from sites of triples and prove its universal property",
+   "results": "CategoryTheory.Localization.Construction.prodIsLocalization, CategoryTheory.Cat.isLimitProdCone, TopCat.prodBinaryFanIsLimit, TopCat.prodIsoProd, CategoryTheory.Functor.IsLocalization.prod, CommRingCat.prodFanIsLimit, CategoryTheory.uniformProd, TopCat.prodBinaryFan",
+   "date": "2026-10-17",
+   "verdict": "no exact match; generic category/product hits only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "universal property of a sheaf topos on triples with projections and a 2-morphism",
+   "results": "TopCat.Presheaf.SheafConditionEqualizerProducts.piOpens.hom_ext, CategoryTheory.Sheaf.Hom.epi_of_presheaf_epi, CategoryTheory.Sheaf.instCategorySheaf, CategoryTheory.Sheaf.instInhabitedHom, TopCat.instCategorySheaf, TopCat.Presheaf.SheafConditionEqualizerProducts.res_π, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivInverseObj_π_app, CategoryTheory.Sheaf.homEquiv",
+   "date": "2026-10-17",
+   "verdict": "no exact match; generic category/product hits only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "characterize sheaves on the oriented product site by descent for coverings in the two factors and invariance under base change",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition, TopCat.Presheaf.IsSheafEqualizerProducts, CategoryTheory.Presheaf.isSheafForIsSheafFor', CategoryTheory.Presheaf.isSheaf_iff_isSheaf', CategoryTheory.Presheaf.IsSheaf', CategoryTheory.Presieve.isSheafFor_iff_preservesProduct, CategoryTheory.Sheaf.isSheafFor_bind, CategoryTheory.Sheaf.isSheafFor_trans",
+   "date": "2026-10-17",
+   "verdict": "no exact match; generic Mathlib sheaf/category hits only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cartesian square of associated sheaves for an object U to V from W in oriented product site",
+   "results": "CategoryTheory.Presheaf.secondObj, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toPullbackObj, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.glue, CategoryTheory.Presheaf.secondMap, TopCat.Presheaf.SheafConditionEqualizerProducts.diagram, CategoryTheory.Presheaf.firstMap, TopCat.Presheaf.SheafConditionEqualizerProducts.w_apply, CategoryTheory.Sheaf.cartesianMonoidalCategoryLift_val",
+   "date": "2026-10-17",
+   "verdict": "no exact match; generic Mathlib sheaf/category hits only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.IsSheaf, GrothendieckTopology, pullback",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "query did not establish absence: unknown or unqualified identifier; independent valid second-reader searches recorded below"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsPullback, Sheaf",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "query did not establish absence: unknown or unqualified identifier; independent valid second-reader searches recorded below"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSheaf|isSheaf|IsPullback|pullback",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "GrothendieckTopology|Sheaf",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf condition on oriented product site generated by coverings of first and second factors and base change coverings",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_of_sheaf, CategoryTheory.Presheaf.isSheafForIsSheafFor', TopCat.Presheaf.IsSheafEqualizerProducts, TopCat.Presheaf.SheafConditionEqualizerProducts.piOpens, TopCat.Presheaf.SheafConditionEqualizerProducts.piInters, TopCat.Presheaf.SheafConditionEqualizerProducts.diagram, TopCat.Presheaf.SheafCondition.pairwiseToOpensLeCover_obj",
+   "date": "2026-10-17",
+   "verdict": "no exact match; generic Mathlib sheaf/category hits only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "presheaf descent exactness and invariance under type c pullback covering",
+   "results": "CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition, CategoryTheory.Meq.pullback, CategoryTheory.Presieve.isSheafFor_arrows_iff_pullbacks, CategoryTheory.Presieve.isSheafFor_pullback_iff, CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_comp, CategoryTheory.Sheaf.isSheafFor_trans, CategoryTheory.Presieve.Arrows.pullbackCompatible_iff",
+   "date": "2026-10-17",
+   "verdict": "no exact match; generic Mathlib sheaf/category hits only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presheaf.IsSheaf, Presieve.IsSheafFor",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "query did not establish absence: unknown or unqualified identifier; independent valid second-reader searches recorded below"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSheaf|IsSheafFor|GrothendieckTopology",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cartesian square associated sheaves for triple U to V from W on oriented product site",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.glue, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toPullbackObj, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition, Opens.mayerVietorisSquare_X₃, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₂₄_op_glue, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₃₄_op_glue, TopCat.Sheaf.interUnionPullbackCone, TopCat.Presheaf.SheafConditionEqualizerProducts.w",
+   "date": "2026-10-17",
+   "verdict": "no exact match; generic Mathlib sheaf/category hits only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fiber product of sheaves represented by a triple in a site",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toPullbackObj, CategoryTheory.Meq.pullback, CategoryTheory.Presheaf.secondObj, CategoryTheory.GrothendieckTopology.overPullback, CategoryTheory.Meq.pullback_apply, CategoryTheory.Sheaf.cartesianMonoidalCategoryFst_val, CategoryTheory.GrothendieckTopology.overMapPullback, CategoryTheory.GrothendieckTopology.diagramPullback",
+   "date": "2026-10-17",
+   "verdict": "no exact match; generic Mathlib sheaf/category hits only"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPullback|pullback|cartesian",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left exact functor from a small site to a sheaf topos taking covers to epimorphic families extends to a geometric inverse image",
+   "results": "{\"t\": \"2026-10-17T06:20:06Z\", \"tool\": \"leanfinder\", \"query\": \"A left exact functor from a small site to a sheaf topos taking covers to epimorphic families extends to a geometric inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"CategoryTheory.GrothendieckTopology.W_inverseImage_whiskeringLeft\", \"CategoryTheory.Functor.sheafPushforwardCocontinuous\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac'\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac\", \"CategoryTheory.Equivalence.sheafCongr.functor\"], \"digest\": \"b87f4bac48ee98e2\"}",
+   "date": "2026-10-17",
+   "verdict": "Existing generic Mathlib sheaf APIs, reused through current DAG nodes; no new oriented-product node or new Mathlib leaf needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every functor on a site preserving finite limits and taking covering families to jointly epimorphic families determines a cocontinuous left exact functor on sheaves",
+   "results": "{\"t\": \"2026-10-17T06:20:26Z\", \"tool\": \"leanfinder\", \"query\": \"Every functor on a site preserving finite limits and taking covering families to jointly epimorphic families determines a cocontinuous left exact functor on sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocontinuous\", \"CategoryTheory.Functor.sheafPushforwardCocontinuous\", \"CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfForallEffectiveEpiHasPullbackOfPreservesFiniteLimits\", \"CategoryTheory.HasSheafify.isLeftExact\", \"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\", \"CategoryTheory.GrothendieckTopology.preservesFiniteLimits_sheafification\", \"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"CategoryTheory.Functor.isContinuous_of_coverPreserving\"], \"digest\": \"a1cbac2fa1e82822\"}",
+   "date": "2026-10-17",
+   "verdict": "Existing generic Mathlib sheaf APIs, reused through current DAG nodes; no new oriented-product node or new Mathlib leaf needed."
+  },
+  {
+   "tool": "grep",
+   "query": "geometric|oriented|yoneda.*[Pp]reserves|[Pp]reserves.*yoneda",
+   "results": "{\"t\": \"2026-10-17T06:20:34Z\", \"tool\": \"grep\", \"query\": \"geometric|oriented|yoneda.*[Pp]reserves|[Pp]reserves.*yoneda\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Basic.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/ExtensiveSheaves.lean\", \"Mathlib/CategoryTheory/Sites/Sheaf.lean\", \"Mathlib/CategoryTheory/Sites/Subcanonical.lean\", \"Mathlib/CategoryTheory/Sites/Subcanonical.lean\", \"Mathlib/CategoryTheory/Sites/Subcanonical.lean\", \"Mathlib/CategoryTheory/Sites/Subcanonical.lean\", \"Mathlib/CategoryTheory/Sites/Subcanonical.lean\"], \"digest\": \"c9d7340523f0acbf\"}",
+   "date": "2026-10-17",
+   "verdict": "Existing generic Mathlib sheaf APIs, reused through current DAG nodes; no new oriented-product node or new Mathlib leaf needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf condition for a topology generated by a pullback stable precoverage and singleton covers whose diagonals are covers",
+   "results": "{\"t\": \"2026-10-17T06:20:35Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaf condition for a topology generated by a pullback stable precoverage and singleton covers whose diagonals are covers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.finestTopologySingle\", \"CategoryTheory.Presieve.isSheaf_pretopology\", \"CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff\", \"CategoryTheory.Sheaf.canonicalTopology\", \"CategoryTheory.Sheaf.sheaf_for_finestTopology\", \"CategoryTheory.coherentTopology\", \"CategoryTheory.Presheaf.isSheaf_iff_isLimit_pretopology\", \"CategoryTheory.GrothendieckTopology.Subcanonical\"], \"digest\": \"b506b375d5e8e4b9\"}",
+   "date": "2026-10-17",
+   "verdict": "Existing generic Mathlib sheaf APIs, reused through current DAG nodes; no new oriented-product node or new Mathlib leaf needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"preservesFiniteLimits\", \"sheafification\"",
+   "results": "{\"t\": \"2026-10-17T06:20:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"preservesFiniteLimits\\\", \\\"sheafification\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.preservesFiniteLimits_sheafification\", \"PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification\", \"PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf\"], \"digest\": \"cd54cedf870628db\"}",
+   "date": "2026-10-17",
+   "verdict": "Existing generic Mathlib sheaf APIs, reused through current DAG nodes; no new oriented-product node or new Mathlib leaf needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of representables preserves pullbacks so a square computed as a pullback of objects of a site remains cartesian in sheaves",
+   "results": "{\"t\": \"2026-10-17T06:21:01Z\", \"tool\": \"leanfinder\", \"query\": \"Sheafification of representables preserves pullbacks so a square computed as a pullback of objects of a site remains cartesian in sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.isPullback_square_op_map_yoneda_presheafToSheaf_yoneda_iff\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk_of_isPullback_toSquare\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toPullbackObj\", \"CategoryTheory.SheafOfTypes.adhesive\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk_of_isPullback\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk'\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk'_toSquare\", \"CategoryTheory.instAdhesiveSheafOfHasPullbacksOfHasPushoutsOfHasSheafify\"], \"digest\": \"e30ca84d914308e8\"}",
+   "date": "2026-10-17",
+   "verdict": "Existing generic Mathlib sheaf APIs, reused through current DAG nodes; no new oriented-product node or new Mathlib leaf needed."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "maintainer-reader",
@@ -53,5 +393,49 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-oriented-product-universal",
+  "worker": "stage1",
+  "summary": "Repair of the returned delivery 4e96f52d26: retained the independently reviewed explicit triple-site proof, re-read all thirteen current cited statements, and made the allowed source route explicit. Projection existence is sourced to Stacks 00X6 and the universal morphism to Stacks 03A1/03CI/00X6, with ILO XI supplying the oriented-product calculations. Separated the cover check from the presenting-site extension into steps 7 and 8; the final split has ten steps and zero new nodes. The item statement is unchanged.",
+  "blueprint": "Steps 1–2 realize ILO XI 1.1–1.2; steps 3–4 realize 1.3; step 5 proves Lemma 1.5; steps 6–9 realize the construction and compatibility in 1.6, with the generic extension supplied by Stacks 00X6/03A1/03CI; step 10 realizes uniqueness in Theorem 1.4 and site independence in Definition 1.7, at the ancestor normal-cone specialization place already recorded.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "General sheaf/site tool applied to the explicit triple construction or a presenting site of the test topos; it supplies no oriented-product theorem and does not replace the unit normal-cone route."
+   },
+   {
+    "node": "lem-weil-pbc-site-of-sheaf-generators",
+    "why": "General sheaf/site tool applied to the explicit triple construction or a presenting site of the test topos; it supplies no oriented-product theorem and does not replace the unit normal-cone route."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-sets-exact",
+    "why": "General sheaf/site tool applied to the explicit triple construction or a presenting site of the test topos; it supplies no oriented-product theorem and does not replace the unit normal-cone route."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer",
+    "why": "General sheaf/site tool applied to the explicit triple construction or a presenting site of the test topos; it supplies no oriented-product theorem and does not replace the unit normal-cone route."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "why": "General sheaf/site tool applied to the explicit triple construction or a presenting site of the test topos; it supplies no oriented-product theorem and does not replace the unit normal-cone route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-site-of-sheaf-generators",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-20d9f6124",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-20d9f6124 (reviewer sub-agent of L); spot-checked: I read the item, all ten steps and the statements of all 13 cited nodes. I also read ILO Travaux de Gabber, Exposé XI §§1.1–1.10 (printed pp. 171–175, PDF pp. 177–181) in full. Statement: it matches ILO XI hypothesis by hypothesis — 1.1 (sites, triples, coverings (a)-(c); the item makes explicit the factorization in (c) that ILO leaves implicit), 1.3 (p1, p2 and τ as a map of direct images), Theorem 1.4, formula (1.a) of 1.6, and Definition 1.7. It is unchanged and not weakened, and no coefficient category or base-change morphism enters. I recomputed every step. Step 1: the final object, componentwise pullbacks, and base change of (c) (W'×_W W0 = W0×_{gV0}g(V'×_V V0)) are correct. Step 2: the diagonal of a type-(c) arrow is again type (c), so descent along it means bijectivity (ILO Lemma 1.2). Step 3: the hypotheses of the site inverse-image lemma (Stacks 00X6) hold for k1 and k2. Step 4: (gp2)_*M(V)=M(G_V), and r_V is type (c). Step 5: D_Z=T_V×_{G_V}B and Z=C_Z×_{T_V}D_Z, with C_Z→A type (c), which proves ILO Lemma 1.5. Step 6: H preserves finite limits. Step 7: type (a)/(b) families pull back to jointly epimorphic families, and the type-(c) cancellation is correct without assuming the naturality square of t is cartesian. Step 8: the generator-site lemma and the extension lemma apply. One reading is needed: 'present E on any small site' must mean a site in the sense of def-weil-pbc-sites-and-cohomology (Stacks 00VH), which is how the morphism definition types E; with that, the hypotheses hold. Step 9: H(T_V) projections recover t, which gives α and β. Step 10: uniqueness and site independence. Edge cases: punctual sites, f=g=id, V'=V and empty covers all work. Checks: no new nodes; no duplicate in the DAG (rg for oriented product, vanishing topos, topos of triples) and none in Mathlib; no cycle; no SGA citation; proof_deps equals the union of the step uses. Accepted tool_uses: lem-weil-pbc-left-exact-site-inverse-image-tensor and lem-weil-pbc-site-of-sheaf-generators, both generic site tools from unit sk-thm-properbasechange. The three Mathlib-leaf entries in tool_uses are unnecessary but harmless. No fixes were made."
  }
 }
