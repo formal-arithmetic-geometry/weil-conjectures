@@ -2,7 +2,7 @@
  "id": "lem-pur-integral-realization-shift-coherence",
  "kind": "statement",
  "title": "Shift compatibility of strict-system realization maps",
- "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R=\\mathcal O_E$ and uniformizer $t$, and $A_n=R/t^n$. Let $W$ be a finite-type $k$-scheme with its small pro-etale site, put $\\widehat R_W=\\lim_n(A_n)_W$, and let $\\mathscr S_W$ be the abelian category of strict semilinear systems of $(A_n)_W$-module sheaves with derived reduction $\\mathcal R_W$ and total-limit functor $\\mathcal L_W=R\\lim\\operatorname{Res}$. Restrict to normalized systems with compatible etale-origin witnesses, bounded constructible cohomology and finite Tor amplitude in common finite intervals. For a finite well-typed expression $V$ in the system pullback, system direct image, open extension and derived tensor, with derived-complete constructible integral inputs $K_1,\\ldots,K_s$ and all intermediate objects in those bounds, let $c_V:\\mathcal L_WV(\\mathcal R K_1,\\ldots,\\mathcal R K_s)\\xrightarrow{\\sim}V_{\\mathrm{int}}(K_1,\\ldots,K_s)$ be the canonical realization isomorphism of [lem-sf-integral-compactification-system-realization]. Equip both sides with their canonical integer-shift comparisons induced by termwise cochain shift and completed integral shift. For every $r\\in\\mathbf Z$, the realization square commutes: the integral shift comparison after $c_V$ equals $c_V$ after the system shift comparison. The same assertion holds after whiskering by any such expression and for every canonical system map (units, counits, pullback/tensor maps, direct-image compositors, proper/open interchange and projection maps) together with its corresponding integral map. In particular, for a compactification $f=pj$, the realization for $V=S_pJ_j$ identifies $\\mathcal L_W(S_pJ_j)(\\mathcal R K)$ with the integral compact-support object $Rf_!K=R\\varprojlim_n\\operatorname{Res}_n Rf_{!,n}K_n$ of [def-weil-integral-rational-qbar-compact-support], and this identification commutes with every integer shift.",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R=\\mathcal O_E$ and uniformizer $t$, and $A_n=R/t^n$. Let $W$ be a finite-type $k$-scheme with its small pro-etale site, put $\\widehat R_W=\\lim_n(A_n)_W$, and let $\\mathscr S_W$ be the abelian category of strict semilinear systems of $(A_n)_W$-module sheaves with derived reduction $\\mathcal R_W$ and total-limit functor $\\mathcal L_W=R\\lim\\operatorname{Res}$. Restrict to normalized systems with compatible etale-origin witnesses, bounded constructible cohomology and finite Tor amplitude in common finite intervals. For a finite well-typed expression $V$ in the system pullback, system direct image, open extension and derived tensor, with derived-complete constructible integral inputs $K_1,\\ldots,K_s$ and all intermediate objects in those bounds, let $c_V:\\mathcal L_WV(\\mathcal R K_1,\\ldots,\\mathcal R K_s)\\xrightarrow{\\sim}V_{\\mathrm{int}}(K_1,\\ldots,K_s)$ be the canonical realization isomorphism of [lem-sf-integral-compactification-system-realization]. Treat input slots as individual leaf occurrences in the expression tree; a repeated object has independent occurrence slots. For a designated input slot $i$ and $r\\in\\mathbf Z$, write $V^{(i,r)}$ for the same expression with only $K_i$ replaced by $K_i[r]$; for a tensor node, the comparison in the shifted slot is the signed tensor comparison (in particular this specifies the second-slot Koszul sign). For each compactification $f=pj$, choose the strict tower model $U_W S_pJ_j\\mathcal R K$ (termwise restriction of scalars of a simultaneous system resolution) realizing the inverse system in [def-weil-integral-rational-qbar-compact-support], and use its Roos total-cone representative, and define the completed integral shift on $Rf_!$ by the termwise cochain shift and the induced shifted-cone comparison of that representative. Equip the system expression and its integral counterpart with these slotwise canonical shift comparisons. Then for every $i,r$, the square expressing that $c_{V^{(i,r)}}$ after the system shift equals the integral shift after $c_V$ commutes, naturally in all inputs. The same holds after whiskering by any such expression and for every canonical system map (units, counits, pullback/tensor maps, direct-image compositors, proper/open interchange and projection maps) together with its corresponding integral map.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
   "place": "Unit Step 2 (the adic stage): the normalized strict-system construction and its transport to the integral derived category"
@@ -14,13 +14,187 @@
   "def-weil-finite-tor-amplitude",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\chi_H:H(M[r])\\to H(M)[r]$ for a comparison in one designated input occurrence, with all others fixed. The basic-operation statement supplies the natural, coherent comparisons on $P_v,S_p,J_j,\\otimes^L$, their integral counterparts, and $d_A$; it specifies the signed second tensor slot. The reduction/total-limit statement supplies those on $\\mathcal R,\\mathcal L$ and the actual $u,e$. Use the K-injective strict-tower Roos model of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] for $\\mathcal L$. Its derived products and $1-s$ are functorial on strict tower maps; the shifted-cone comparison fixes the sign. This specifies every shift comparison used below; no tensor/pullback lemma without a shift clause is being cited for one.",
+   "uses": [
+    "lem-pur-integral-basic-operation-shift",
+    "lem-pur-reduction-limit-shift-adjunction",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Maps-used and coefficient-comparison sentences: fix the operation and total-limit shift structures; agent-written shift calculation"
+   }
+  },
+  {
+   "text": "Use the recursive-characterization statement [lem-pur-integral-realization-recursion], not formulas extracted without citation from a proof of the realization theorem. It states for the actual canonical comparisons that $c_{K_i}=u_{K_i}^{-1}$,\n$$a_A(M)=d_A(\\mathcal LM)(\\mathcal LA(e_M))^{-1},\\qquad a_\\otimes(M,N)=d_\\otimes(\\mathcal LM,\\mathcal LN)(\\mathcal L(e_M\\otimes^Le_N))^{-1},$$\nand\n$$c_{AV}=A_{\\rm int}(c_V)a_A(M),\\qquad c_{V\\otimes T}=(c_V\\widehat\\otimes^Lc_T)a_\\otimes(M,N).$$\nHere $M=V(\\mathcal RK_i)$, $N=T(\\mathcal RK_i)$; $u,e$ are invertible on the complete/normalized domains. The $d_A$ are exactly those specified by [lem-sf-generator-reduction-coherence]. Thus we prove a property of the given $c_V$, rather than choosing a different family. The induction claim for a tree $V$ is $\\chi_{V_{\\rm int}}c_{V^{(i,r)}}=c_V[r]\\chi_{\\mathcal LV\\mathcal R}$ for each of its independent leaf slots.",
+   "uses": [
+    "lem-pur-integral-realization-recursion",
+    "lem-sf-generator-reduction-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Coefficient-comparison construction: expose the canonical recursion and state the induction claim; agent-written shift calculation"
+   }
+  },
+  {
+   "text": "The unit square from [lem-pur-reduction-limit-shift-adjunction] gives the induction base for $c_{K_i}=u_{K_i}^{-1}$ by multiplying that square by the inverse units. For $a_A$, the square for $e_M$ remains a square after applying $\\mathcal LA$, by composition/whiskering [lem-weil-pbc-commshift-nattrans-comp-whisker]. The square for $d_A$ and naturality in $\\mathcal LM$ give a square for $d_A(\\mathcal LM)$. An invertible square remains commutative on inverting its horizontal maps: from $s_2h'=h[r]s_1$ one obtains $s_1(h')^{-1}=h[r]^{-1}s_2$. Composing these two squares gives the square for $a_A$. For $a_\\otimes$, apply this argument to $e_M\\otimes1$ and $1\\otimes e_N$ separately and use bifunctoriality; the signed comparisons and naturality are part of the basic-operation statement.",
+   "uses": [
+    "lem-pur-integral-realization-recursion",
+    "lem-pur-reduction-limit-shift-adjunction",
+    "lem-pur-integral-basic-operation-shift",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Coefficient-comparison sentence: shift squares of the adjunction insertions; agent-written shift calculation"
+   }
+  },
+  {
+   "text": "Suppose the induction claim holds for $V$ and put $M=V(\\mathcal RK_i)$. Applying $A_{\\rm int}$ to that square gives the square for $A_{\\rm int}(c_V)$ with the composite comparisons: this is precisely whiskering clause (ii) of [lem-weil-pbc-commshift-nattrans-comp-whisker], using the natural shift comparison of the integral operation supplied by [lem-pur-integral-basic-operation-shift]. In formulas, with the inner comparison denoted $s$, the equation is\n$$\\chi_{A_{\\rm int}V_{\\rm int}}\\,A_{\\rm int}(c_{V^{(i,r)}})=A_{\\rm int}(c_V)[r]\\,\\chi_{A_{\\rm int}\\mathcal LV\\mathcal R}.$$\nPaste this with the square for $a_A(M)$ in step 3 and substitute $c_{AV}=A_{\\rm int}(c_V)a_A(M)$ from [lem-pur-integral-realization-recursion]. The middle comparisons cancel, yielding the induction claim for $AV$. Every invocation decreases the number of tree nodes.",
+   "uses": [
+    "lem-pur-integral-realization-recursion",
+    "lem-pur-integral-basic-operation-shift",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Coefficient-comparison sentence: unary expression-tree induction; agent-written shift calculation"
+   }
+  },
+  {
+   "text": "At a tensor node the designated occurrence lies in exactly one of the two independent leaf sets. If it lies in $V$, tensor its induction square with $c_T$ and use naturality of the completed tensor comparison in the other factor; if it lies in $T$, do the same with $c_V$ fixed. Paste with the corresponding slot square for $a_\\otimes$ from step 3. The tensor recursion of [lem-pur-integral-realization-recursion] then gives the claim for $V\\otimes T$. In the second case the comparison is the signed one of [lem-pur-integral-basic-operation-shift]; it is not the unsigned identification of graded objects. These unary and binary cases exhaust the finite tree. All intermediate systems remain in the explicitly assumed normalized and bounded domains; an integer shift translates a finite interval to a finite interval.",
+   "uses": [
+    "lem-pur-integral-realization-recursion",
+    "lem-pur-integral-basic-operation-shift",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Coefficient-comparison sentence: binary expression-tree induction; agent-written shift calculation"
+   }
+  },
+  {
+   "text": "For system structural maps start with the primitive squares of [lem-pur-system-primitive-comparison-shift], covering pullback compositors, pullback/tensor comparisons, tensor reassociation/unit/symmetry, open composition and the specified restriction/clopen maps. For $P_v\\dashv S_v$ use [lem-weil-pbc-derived-adjunction-shift] on the small ringed diagram topoi whose module categories realize $\\mathscr S$; these are the canonical derived inverse/direct-image adjunctions of [lem-sf-integral-compactification-system-realization]. For $J_j\\dashv P_j$ use [lem-pur-open-adjunction-shift], and for $\\mathcal R\\dashv\\mathcal L$ use [lem-pur-reduction-limit-shift-adjunction]. Thus their units and counits have shift squares before evaluation. More generally an adjunct of $h:FX\\to Y$ is $G(h)\\eta_X$, and a mate of $\\alpha:F_2H\\to TF_1$ is $G_2(T\\varepsilon_1)G_2(\\alpha G_1)\\eta_2HG_1$. Every factor has a shift square when $\\alpha$ does; composition/whiskering pastes them. In particular the direct-image compositors, conjugate to pullback compositors by the realization statement, have shift squares. This is an explicit finite-composite argument, not an assumption that mates automatically preserve the chosen shifts.",
+   "uses": [
+    "lem-pur-system-primitive-comparison-shift",
+    "lem-weil-pbc-derived-adjunction-shift",
+    "lem-pur-open-adjunction-shift",
+    "lem-pur-reduction-limit-shift-adjunction",
+    "lem-sf-integral-compactification-system-realization",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Maps-used sentence: system primitives and the three actual adjunctions; agent-written shift calculation"
+   }
+  },
+  {
+   "text": "Let $\\beta:P_gJ_j\\cong J_{j'}P_{g_U}$ and $\\gamma:J_jM\\otimes^LN\\cong J_j(M\\otimes^LP_jN)$ be the open maps of [lem-sf-open-tensor-normalization], whose statement also applies to the ringed diagram topoi of systems. Its normalization specifies $\\beta^{-1}$ as the open adjunct of $P_{g_U}u_M$ followed by the inverse pullback compositor, and $\\gamma^{-1}$ as the open adjunct of $u_M\\otimes1$ under restriction/tensor comparison. Here $u_M:M\\to P_jJ_jM$ is the open unit, not the reduction unit. The unit squares are [lem-pur-open-adjunction-shift]; the compositor and tensor squares are [lem-pur-system-primitive-comparison-shift]. Applying the adjunct formula in step 6 proves the shift square for each inverse map, in either tensor input. Inverting those squares proves it for $\\beta,\\gamma$. Hence the actual normalized open maps are covered, rather than maps chosen by checking their finite evaluations.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-pur-open-adjunction-shift",
+    "lem-pur-system-primitive-comparison-shift",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Maps-used sentence: open base-change and open tensor normalization; agent-written shift calculation"
+   }
+  },
+  {
+   "text": "For the proper/open square $Q$ of [lem-sf-semilinear-proper-open-mate-pasting], its hypotheses are exactly the proper vertical arrows and quasi-compact open horizontal arrows in the realization statement. In its notation\n$$\\lambda_Q:P_iS_pJ_k\\cong S_qP_bJ_k\\cong S_qJ_s\\cong S_qS_s\\cong S_r.$$\nThe first arrow is conjugate to the normalized cartesian open comparison, so its square follows from steps 6-7. The next two arrows use $P_bJ_k\\cong J_s$ and $J_s\\cong S_s$ for the clopen $s$, covered by [lem-pur-system-primitive-comparison-shift]. The last is the direct-image compositor from step 6. Pasting gives the square for this specified $\\lambda_Q$. The same proper/open statement identifies $\\Gamma_Q$ as the open adjunct of $\\lambda_Q^{-1}$; explicitly\n$$\\Gamma_Q=S_pJ_k\\varepsilon_r\\circ S_p\\alpha_QS_r\\circ\\eta_pJ_iS_r,\\quad \\alpha_Q=(J_bJ_sP_sP_q\\cong J_kP_r)\\circ J_b\\pi_sP_q\\circ\\beta_{i,p}.$$\nThe normalized $\\beta$, clopen projection $\\pi_s$, compositors and proper units/counits all have the squares already established. This displayed factorization proves the square for $\\Gamma_Q$ by pasting in the semilinear derived category. It also handles noncartesian refinement squares allowed by the cited statement.",
+   "uses": [
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "lem-pur-system-primitive-comparison-shift",
+    "lem-sf-open-tensor-normalization",
+    "lem-pur-open-adjunction-shift",
+    "lem-weil-pbc-derived-adjunction-shift",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Maps-used sentence: intrinsic open restriction and proper/open mate; agent-written shift calculation"
+   }
+  },
+  {
+   "text": "The realization statement specifies system exchange and projection maps by the composites of [def-exchange-projection]. In system notation their factors are\n$$\\operatorname{Ex}_*=S_{f'}P_{g'}\\varepsilon_f\\circ S_{f'}\\theta S_f\\circ\\eta_{f'}P_gS_f,\\qquad \\pi_{p;M,N}=S_p((\\varepsilon_{p,M}\\otimes1)\\mu_p)\\circ\\eta_{p,S_pM\\otimes N}.$$\nThe compact-support exchange is $S_{p'}\\beta\\circ\\operatorname{Ex}_{*,p}J_j$; the compact-support projection is $S_p\\gamma\\circ\\pi_{p;J_jM,N}$, with the pullback compositor inserted in $\\gamma$ as in the definition. Each displayed factor is a primitive square, an adjunction square or a normalized open square from steps 6-7. Composition/whiskering therefore proves these four shift equations, separately in each projection input. The proper/open squares from step 8 and direct-image/open compositors give all compactification composition and refinement maps by the same finite pasting. This uses the stated system composite formulas, not a finite-coefficient theorem applied to an integral coefficient ring.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
+    "def-exchange-projection",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Maps-used sentence: write the projection and exchange composites; agent-written shift calculation"
+   }
+  },
+  {
+   "text": "Any allowed system map $\\tau:V\\to T$, including an allowed expression context around a generator, is a composite and whiskering of the preceding maps. Clause (ii)/(iii) and composition in [lem-weil-pbc-commshift-nattrans-comp-whisker] give its shift square. For a tensor context fix the other input and apply that clause; for several changing occurrences factor into single-slot maps by bifunctoriality. The realization statement gives the actual intertwining equation\n$$\\tau_{\\rm int}=c_T\\,\\mathcal L(\\tau)\\,c_V^{-1}.$$\nBoth $c$ squares were proved by tree induction and $\\mathcal L$ has its fixed comparison. Paste their squares with the square for $\\mathcal L(\\tau)$, using the inverse-square identity in step 3. The result is exactly the shift square for the corresponding integral map, together with the compatible realization square. No equality is detected after evaluating systems: all equations used here hold before evaluation.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
+    "lem-pur-reduction-limit-shift-adjunction",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Coefficient-comparison sentence: conjugation by the given realization maps and arbitrary contexts; agent-written shift calculation"
+   }
+  },
+  {
+   "text": "For $f=pj$ take a K-flat strict reduction model for $\\mathcal RK$ and simultaneous direct-image/open models. Their termwise scalar restriction $U_WS_pJ_j\\mathcal RK$ is the strict tower chosen in the statement. The restriction-of-scalars comparison of [lem-sf-compact-support-restriction-of-scalars] identifies its transition from $m$ to $n$ with $Rp_{*,m}j_!$ of the reduction map followed by the coefficient-restriction isomorphism. These are exactly the transitions written in [def-weil-integral-rational-qbar-compact-support]. The realization statement identifies $c_{S_pJ_j}$ with this integral compact-support functor, including its maps. Use the natural total-limit Roos model [lem-weil-pbc-ringed-strict-tower-homotopy-limit] of this strict tower, not a cone assigned to an incoherent diagram of objects in a derived category. Its termwise shift and shifted-cone comparison define the completed integral shift fixed in the statement. Consequently the already proved case $V=S_pJ_j$ is the required compact-support square for that model. The identity shift, positive iterations and inverse comparisons for negative integers give the same equations for every $r\\in\\mathbf Z$.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
+    "lem-sf-compact-support-restriction-of-scalars",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-pur-integral-basic-operation-shift",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Unit Step 2 (adic transport): strict compact-support tower and its fixed Roos shift; agent-written shift calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-pur-integral-basic-operation-shift",
+  "lem-pur-integral-realization-recursion",
+  "lem-pur-open-adjunction-shift",
+  "lem-pur-reduction-limit-shift-adjunction",
+  "lem-pur-system-primitive-comparison-shift",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-sf-generator-reduction-coherence",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Maps-used and coefficient-comparison sentences, expanded into the recursion and system-map shift calculations; blueprint does not assert these shift lemmas. Stacks Tags 0941 (lemma-derived-limit-is-ok) and 08TC (definition-derived-limit) supply the derived-limit background only."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "canonical realization isomorphism from a strict coefficient system to completed integral six-functor expression commutes with integer shifts",
+   "query": "canonical realization isomorphism from a strict coefficient system to a completed integral six-functor expression commutes with integer shifts",
    "results": "CategoryTheory.Functor.mapHomologicalComplex_commShiftIso_hom_app_f (Mathlib/Algebra/Homology/HomotopyCategory/Shift); CategoryTheory.Functor.mapCochainComplexShiftIso (same); no coefficient-system realization declaration",
    "date": "2026-10-18",
    "verdict": "generalization: Mathlib gives generic additive-functor shift comparisons, not the specified integral realization"
@@ -34,7 +208,7 @@
   },
   {
    "tool": "grep",
-   "query": "CommShift|commShift|shiftIso [Mathlib/CategoryTheory/Shift]",
+   "query": "CommShift|commShift|shiftIso",
    "results": "0 hits in the requested Mathlib/CategoryTheory/Shift directory",
    "date": "2026-10-18",
    "verdict": "no match: no realization-specific declaration"
@@ -48,7 +222,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-adic-projection-shift-coherence",
@@ -60,12 +234,56 @@
  "blueprint": {
   "from": {
    "node": "thm-pur-rational-and-qbar-purity",
-   "place": "Step 1 (the E-stage): the adic purity isomorphism on a lattice, with its canonical strict-system realization and shift transport",
+   "place": "Unit Step 2 (the adic stage): normalized strict-system construction and its transport to the integral derived category",
    "via": [
     "lem-pur-adic-projection-shift-coherence"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-pur-integral-realization-shift-coherence",
+  "worker": "stage1",
+  "summary": "Repair of all five numbered return points: expose the canonical recursion as a non-shift interface statement, add a primitive system-map shift obligation, give the unary/binary induction and explicit open/proper/projection/exchange pastings, delete the obsolete restatement node, remove unused statement dependencies, and cite the defining d_A node. The compact-support model is an actual strict tower.",
+  "blueprint": "Adic Unit Step 2 of thm-pur-rational-and-qbar-purity and the maps-used/coefficient-comparison sentences of fix-prop-coherence.proof.md. Five statement-only auxiliaries: reduction-limit adjunction, basic d_A shifts, open adjunction, recursive normalization (no shifts), primitive system comparisons (no integral realization).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-commshift-nattrans-comp-whisker",
+    "why": "Generic composition and whiskering of already proved shift squares; does not supply any primitive square."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic natural strict-tower homotopy-limit/Roos model, applied to the simultaneous pro-etale system tower."
+   },
+   {
+    "node": "lem-weil-pbc-derived-adjunction-shift",
+    "why": "Canonical inverse/direct-image adjunction shift on the small ringed diagram topoi presenting system module categories."
+   },
+   {
+    "node": "def-exchange-projection",
+    "why": "Typed formulas defining exchange and projection, used at the system stage via the realization statement."
+   },
+   {
+    "node": "lem-sf-compact-support-restriction-of-scalars",
+    "why": "Actual scalar-restriction transition maps identifying the strict compact-support tower with the displayed integral definition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "def-exchange-projection",
+  "lem-sf-compact-support-restriction-of-scalars"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-9d06da8a7",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-9d06da8a7 (reviewer sub-agent of L); spot-checked: Read the whole delivery: the item, all 5 new nodes, every cited statement, the full proof of lem-sf-integral-compactification-system-realization, the sk-thm-sf-compatibility route, master sk-thm-purity-transport Step 2 and main-20261015 fix-prop-coherence.proof. Item statement against base: it now uses slotwise shifts on leaf occurrences with the signed tensor comparison, and fixes a strict tower plus Roos model for the integral shift on Rf_!. The base left that shift undefined, because the def-weil Rf_! is an R lim of objects (a non-unique cone, Stacks 08TC). Every hypothesis is kept, nothing is weakened, and the parent's step-4 use is covered. Steps: the recursion formulas are well typed and are verbatim the definitions in step 4 of the realization proof. The inverse-square identity, whiskering (Mathlib leaf), unary and binary tree induction, and the second-slot sign (-1)^{rp} on both sides are correct. The adjunct and mate formulas are correct. beta^{-1} and gamma^{-1} match lem-sf-open-tensor-normalization; lambda_Q, Gamma_Q and alpha_Q are verbatim from lem-sf-semilinear-proper-open-mate-pasting with matching hypotheses. Ex_*, pi, Ex_!^c and PF^c match def-exchange-projection. The compact-support transitions match lem-sf-compact-support-restriction-of-scalars and def-weil-integral. proof_deps equals the union of uses; no cycle. All dependencies lie in the unit route, and the declared tool_uses are generic tools. proof_origin is agent, which is honest (the blueprint asserts no shift coherence); no SGA cited. New nodes: true, smaller than the item, not restatements. I hand-checked the Koszul signs of the primitive node for the associator and symmetry. The recursion node is an accepted construction interface for the item's c_V. The primitive node's mu clause overlaps lem-weil-pbc-ringed-projection-mate-exact; this is noted for the later split, not a duplicate. Fixes (3 faults, corrected files under fixes/): B9: blueprint.from.via of basic-operation-shift, open-adjunction-shift and reduction-limit-shift-adjunction corrected to [item, lem-pur-adic-projection-shift-coherence]. B2: those three nodes are now self-contained (setting written out, stmt_deps completed); content unchanged. Brief §3: lean_audit none and merged_into null added to all five new nodes.; 5 file(s) fixed by the reviewer"
  }
 }
