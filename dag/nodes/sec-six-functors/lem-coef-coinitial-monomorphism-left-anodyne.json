@@ -11,7 +11,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-infinity-slice-right-fibration"
+  "lem-coef-infinity-slice-right-fibration",
+  "def-coef-infinity-left-anodyne"
  ],
  "proof": [
   {
@@ -195,5 +196,23 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-73fb1e694 (reviewer sub-agent of L); spot-checked: I read all of the item, the new node and every cited statement, including the comma criterion's full proof. HTT is not in literature/ (WANTED) and I had no web access, so I checked against my knowledge of HTT, not the PDF; page numbers were not re-checked. The item is the dual of HTT Thm 4.1.3.1 combined with Prop 4.1.1.3(4): incoming commas K x_L L_{/l} and left horns 0<=i<m, oriented correctly. Cases checked: {0} and {1} in Delta^1, the non-full Lambda^2_0 in Delta^2, K=L, and the empty case. Steps 1 and 5 (op realization; (Lambda^m_r)^op = Lambda^m_{m-r} and transport of saturation) are genuinely elementary. Step 3: groupoid localization correctly turns weak contractibility into the comma criterion's 'invert all arrows' convention, and the criterion gives the actual cocone restriction equivalence with no colimits assumed; its proof works in any containing universe. Step 4 meets every hypothesis of the new node. The new node lem-coef-universal-cocone-restriction-right-anodyne is HTT 4.1.1.8 with 4.1.1.3(4) for monomorphisms of quasicategories; join and arrow cocone models are equivalent (HTT 4.2.1.5). It is true and tested on {1} and {0} in Delta^1 and on the empty map into a nonempty B. B1-B7 hold, six real Mathlib searches are recorded with no match, and it is not a duplicate: anodyne-cocones has only the forward direction, while cofinal-mono-right-anodyne and cofinal-relative-join-slice-restriction both need a full image. It does not restate the item. I accept both tool_uses (left fibration is an isofibration; localization at all edges). One fault, which I fixed (C1/C4): Step 2 replaced the comma criterion's arrow model {j} x_{J,ev0} Fun(Delta^1,J) with the join slice B_{l/} without a cited equivalence. The corrected item now cites the same-unit lem-coef-infinity-slice-arrow-equivalence (S_l = L_{/l}), dualizes it by opposites and updates proof_deps. I checked that this adds no cycle. No statement was changed and no node was dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CoinitialMonomorphismLeftAnodyne",
+  "declaration": "SSet.Enhanced.coinitial_monomorphism_left_anodyne",
+  "file": "lean/Sheaf/CategoryTheory/CoinitialMonomorphismLeftAnodyne.lean",
+  "statement": "theorem coinitial_monomorphism_left_anodyne {K L : SSet.{u}} [Quasicategory K] [Quasicategory L] (j : K ⟶ L) (hj : ∀ n : SimplexCategoryᵒᵖ, Function.Injective (j.app n)) (hcomma : ∀ l : L _⦋0⦌, IsContractible (pullback j (joinSliceProjection (SSet.yonedaEquiv.symm l)))) : SSet.leftAnodyneExtensions j",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-554987bbe",
+  "group": "N9",
+  "result": "pass",
+  "note": "Checked node clauses against Lean, all exact: SSet.{u} K L, Quasicategory on both (as the node says), degreewise injective j with no fullness, every vertex l : L _[0], joinSlice(yonedaEquiv.symm l) = maps Δn⋆Δ0→L with final vertex l and projection to the initial-block base, strict pullback comma, IsContractible = weak homotopy equivalence to Δ[0] (empty comma excluded). Conclusion SSet.leftAnodyneExtensions is the sInf over classes containing isos and horns with 1≤n, i<last n, closed under pushouts, transfiniteCompositions.{u} and retracts; it mirrors the landed rightAnodyneExtensions. Orientation matches the dual of HTT 4.1.3.1 and 4.1.1.3(4), checked from memory of HTT; page numbers not re-checked. New node def-coef-infinity-left-anodyne: not hollow and not a duplicate (no leftAnodyne in Sheaf, Mathlib or the DAG; marked-coanodyne and SSet.anodyneExtensions are different notions); fields complete. Item node diff: only the added stmt_dep and the lean record; statement unchanged; lean.statement verbatim. Edge cases {0}/{1}→Δ1, empty K or L, n=0, last horn excluded, non-full Λ2_0 all correct. Docstrings carry source, blueprint id and all 5 proof steps; proof is only sorry. nt_compile.py --json on both files: rc=0, no errors (1.5 s and 1.7 s). No findings."
  }
 }
