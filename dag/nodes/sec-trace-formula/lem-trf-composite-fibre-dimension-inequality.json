@@ -8,60 +8,116 @@
   "place": "Tag 02JS, label lemma-dimension-fibre-at-a-point-additive, first assertion, lines 5396–5404."
  },
  "stmt_deps": [
+  "def-kun-topological-dimension-at-point",
   "def-pc-scheme",
-  "def-weil-finite-type-morphism",
   "def-pc-scheme-fibre",
-  "def-kun-topological-dimension-at-point"
+  "def-weil-finite-type-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Set $s=t$ in the notation of the source and restrict to affine neighbourhoods of $x$, $y$ and $t$. Because $f$ and $g$ are locally of finite type, the three fibre schemes $X_t$, $X_y$ and $Y_t$ are locally of finite type over the residue fields $\\kappa(t)$ and $\\kappa(y)$; their affine neighbourhoods have finite-type coordinate algebras. The fibre-product affine-spectrum identification [lem-weil-pbc-fibre-product-affine-spectra] identifies these coordinate rings with the corresponding tensor products and identifies the residue-field maps. The local rings occurring below are Noetherian by [pqf-lem-locnoeth-lft], applied to the finite-type morphisms to the spectra of fields.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02JS, proof: reduction to affine neighbourhoods and the three fibre schemes"
+   }
+  },
+  {
+   "text": "For a point in a finite-type affine neighbourhood of a fibre, apply the finite-type dimension formula [lem-kun-dimension-formula]: the topological local dimension is the Krull dimension of the corresponding local ring plus the transcendence degree of its residue field over the base residue field. Apply this to $X_t$ at $x$, $X_y$ at $x$, and $Y_t$ at $y$. The open-subspace invariance [lem-weil-pbc-dimension-at-point-open-subspace] lets us replace each whole fibre by the chosen affine neighbourhood without changing the indicated local dimension.",
+   "uses": [
+    "lem-kun-dimension-formula",
+    "lem-weil-pbc-dimension-at-point-open-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02JS proof, using Tag 02FX (lemma-dimension-fibre-at-a-point) on the three fibres"
+   }
+  },
+  {
+   "text": "Choose affine neighbourhoods of the three points in the fibre schemes, and write $A=\\mathcal O_{Y_t,y}$ and $B=\\mathcal O_{X_t,x}$. The composite-fibre-local-model statement [lem-sbc-composite-fibre-local-models] verifies that these are Noetherian local rings, that the induced map $A\\to B$ is local, and that its closed fibre is canonically $B/\\mathfrak m_A B\\cong\\mathcal O_{X_y,x}$. Applying [lem-trf-local-fibre-ring-dimension-inequality] to the corresponding primes gives $\\dim B\\leq\\dim A+\\dim(B/\\mathfrak m_A B)$, exactly the local-ring inequality required in the 02JS proof.",
+   "uses": [
+    "lem-sbc-composite-fibre-local-models",
+    "lem-trf-local-fibre-ring-dimension-inequality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02JS proof, reduced to Algebra Tag 00OM (lemma-dimension-base-fibre-total)"
+   }
+  },
+  {
+   "text": "The residue fields form the tower $\\kappa(t)\\subseteq\\kappa(y)\\subseteq\\kappa(x)$. Hence [lem-sbc-transcendence-degree-tower] gives $\\operatorname{trdeg}_{\\kappa(t)}\\kappa(x)=\\operatorname{trdeg}_{\\kappa(y)}\\kappa(x)+\\operatorname{trdeg}_{\\kappa(t)}\\kappa(y)$ (ordinary addition here, since the finite-type fibre dimensions are finite). Substitute this identity into the local-ring inequality from Step 3 and use the three equalities from Step 2; the intermediate terms regroup as $\\dim_x(X_y)+\\dim_y(Y_t)$, yielding $\\dim_x(X_t)\\leq\\dim_x(X_y)+\\dim_y(Y_t)$. Empty fibres cause no issue, and no flatness was used.",
+   "uses": [
+    "lem-sbc-transcendence-degree-tower",
+    "lem-kun-dimension-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02JS proof, transcendence-degree tower and final substitution"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "lem-kun-dimension-formula",
+  "lem-sbc-composite-fibre-local-models",
+  "lem-sbc-transcendence-degree-tower",
+  "lem-trf-local-fibre-ring-dimension-inequality",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02JS, lemma-dimension-fibre-at-a-point-additive, proof via Tag 02FX and Algebra Tag 02IJ"
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "dim.*le.*add|dimension.*(compos|fiber|fibre)",
-   "results": "{\"t\": \"2026-10-17T19:09:37Z\", \"tool\": \"grep\", \"query\": \"dim.*le.*add|dimension.*(compos|fiber|fibre)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\"], \"digest\": \"51bbef6c26afdd1a\"}",
+   "tool": "leanfinder",
+   "query": "local fibre dimension inequality for a composite of locally finite type scheme morphisms",
+   "results": "{\"t\": \"2026-10-17T19:28:25Z\", \"tool\": \"leanfinder\", \"query\": \"local fibre dimension inequality for a composite of locally finite type scheme morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFiniteType_comp\", \"AlgebraicGeometry.locallyOfFiniteType_of_comp\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType\", \"AlgebraicGeometry.instLocallyQuasiFiniteCompScheme\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.of_comp\", \"AlgebraicGeometry.locallyOfFinitePresentation_comp\"], \"digest\": \"854105eefdc70de9\"}",
    "date": "2026-10-18",
-   "verdict": "no match: inspected the hits; composition of finite-type or quasi-finite morphisms, smooth presentation dimension and order dimension bounds do not give the local scheme-fibre dimension inequality or the power-perturbation assertion"
-  },
-  {
-   "tool": "grep",
-   "query": "dimension.*fibre.*add|fiber.*[dD]imension.*add|krullDim.*(fiber|fibre)",
-   "results": "{\"t\": \"2026-10-17T19:09:37Z\", \"tool\": \"grep\", \"query\": \"dimension.*fibre.*add|fiber.*[dD]imension.*add|krullDim.*(fiber|fibre)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-18",
-   "verdict": "no match: inspected the hits; composition of finite-type or quasi-finite morphisms, smooth presentation dimension and order dimension bounds do not give the local scheme-fibre dimension inequality or the power-perturbation assertion"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Local fibre dimension inequality for composition of morphisms of schemes locally of finite type",
-   "results": "{\"t\": \"2026-10-17T19:09:38Z\", \"tool\": \"leansearch\", \"query\": \"Local fibre dimension inequality for composition of morphisms of schemes locally of finite type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite.of_comp\", \"AlgebraicGeometry.locallyOfFiniteType_comp\", \"AlgebraicGeometry.instLocallyQuasiFiniteCompScheme\", \"AlgebraicGeometry.locallyOfFiniteType_of_comp\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.IsFinite.comp_iff\"], \"digest\": \"4a8edb5c15196362\"}",
-   "date": "2026-10-18",
-   "verdict": "no match: inspected the hits; composition of finite-type or quasi-finite morphisms, smooth presentation dimension and order dimension bounds do not give the local scheme-fibre dimension inequality or the power-perturbation assertion"
+   "verdict": "no match: returned only generic composition/smoothness or order-dimension declarations, not the scheme-fibre inequality"
   },
   {
    "tool": "loogle",
-   "query": "AlgebraicGeometry.LocallyOfFiniteType, \"dimension\"",
-   "results": "{\"t\": \"2026-10-17T19:09:38Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyOfFiniteType, \\\"dimension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, dimension, fibre",
+   "results": "{\"t\": \"2026-10-17T19:28:26Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyOfFiniteType, dimension, fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'dimension'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-18",
-   "verdict": "no match: inspected the hits; composition of finite-type or quasi-finite morphisms, smooth presentation dimension and order dimension bounds do not give the local scheme-fibre dimension inequality or the power-perturbation assertion"
+   "verdict": "no match (service returned no hits; dimension is not a valid Loogle identifier)"
   },
   {
-   "tool": "leanfinder",
-   "query": "The dimension at a point of a fibre of g composed with f is bounded above by the dimension of the fibre of f plus the dimension at the image point of the fibre of g",
-   "results": "{\"t\": \"2026-10-17T19:09:49Z\", \"tool\": \"leanfinder\", \"query\": \"The dimension at a point of a fibre of g composed with f is bounded above by the dimension of the fibre of f plus the dimension at the image point of the fibre of g\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.dimension_comp_eq_dimension_add_dimension\", \"Function.Fiber.map_preimage_eq_image_map\", \"Function.Fiber.image_eq_image_mk\", \"Order.krullDim_le_of_krullDim_preimage_le\", \"ContMDiffFiberwiseLinear.locality_aux₂\", \"ContMDiffFiberwiseLinear.locality_aux₁\", \"LinearMap.lift_rank_comp_le\", \"LinearMap.lift_rank_comp_le_right\"], \"digest\": \"aa8f93d0aca9d352\"}",
+   "tool": "grep",
+   "query": "dimension.*fibre.*add|fiber.*dimension.*add|krullDim.*fiber",
+   "results": "{\"t\": \"2026-10-17T19:28:26Z\", \"tool\": \"grep\", \"query\": \"dimension.*fibre.*add|fiber.*dimension.*add|krullDim.*fiber\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-18",
-   "verdict": "no match: inspected the hits; composition of finite-type or quasi-finite morphisms, smooth presentation dimension and order dimension bounds do not give the local scheme-fibre dimension inequality or the power-perturbation assertion"
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "dimension at a point of a composite fibre is bounded by the sum of successive fibre dimensions",
+   "results": "{\"t\": \"2026-10-17T19:28:26Z\", \"tool\": \"leansearch\", \"query\": \"dimension at a point of a composite fibre is bounded by the sum of successive fibre dimensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"Algebra.PreSubmersivePresentation.dimension_comp_eq_dimension_add_dimension\", \"SSet.instHasDimensionLETensorObjHAddNat\", \"SSet.instHasDimensionLTTensorObjHAddNat\", \"TopologicalSpace.Fiber.sigmaInclIncl\", \"SSet.hasDimensionLE_prod\", \"Order.krullDim_le_of_krullDim_preimage_le'\", \"Order.krullDim_le_of_krullDim_preimage_le\"], \"digest\": \"1d85f88228b1bc30\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned only generic composition/smoothness or order-dimension declarations, not the scheme-fibre inequality"
   },
   {
    "tool": "leanfinder",
    "query": "For locally finite type morphisms X to Y to S the local dimension of the composite fibre at x is at most the sum of the dimensions of the two successive fibres",
-   "results": "{\"t\": \"2026-10-17T19:09:49Z\", \"tool\": \"leanfinder\", \"query\": \"For locally finite type morphisms X to Y to S the local dimension of the composite fibre at x is at most the sum of the dimensions of the two successive fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFiniteType_of_comp\", \"AlgebraicGeometry.locallyOfFiniteType_comp\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.comp_iff\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.instCompScheme\", \"AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme\"], \"digest\": \"d51fc39bdad1066f\"}",
+   "results": "{\"t\": \"2026-10-17T19:28:28Z\", \"tool\": \"leanfinder\", \"query\": \"For locally finite type morphisms X to Y to S the local dimension of the composite fibre at x is at most the sum of the dimensions of the two successive fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFiniteType_comp\", \"AlgebraicGeometry.locallyOfFiniteType_of_comp\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType\", \"AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme\", \"AlgebraicGeometry.instLocallyQuasiFiniteCompScheme\", \"AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme\"], \"digest\": \"2555179f200cacb2\"}",
    "date": "2026-10-18",
-   "verdict": "no match: inspected the hits; composition of finite-type or quasi-finite morphisms, smooth presentation dimension and order dimension bounds do not give the local scheme-fibre dimension inequality or the power-perturbation assertion"
+   "verdict": "no match: returned only generic composition/smoothness or order-dimension declarations, not the scheme-fibre inequality"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-power-perturbation-fibre-dimension",
@@ -73,7 +129,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "No direct sentence of lem-trf-local-term-locality states this. In the recorded normalization branch, this supplies Stacks 0GTF proof, integral affine case: the bound dim(X_p) <= d+1 and the dimension estimate for the non-dominant map through V(g).",
+   "place": "This is the local-fibre-dimension inequality used in the recorded 02JS route of the ancestor trace-formula proof.",
    "via": [
     "lem-trf-power-perturbation-fibre-dimension",
     "lem-trf-weak-relative-noether-normalization",
@@ -89,5 +145,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-composite-fibre-dimension-inequality",
+  "worker": "stage1",
+  "summary": "Checked the exact Stacks 02JS statement and proof. Added one statement-only algebra node for Tag 00OM, the non-flat local-ring dimension inequality used by the source. The item proof uses existing fibre local models, the new 00OM node, the finite-type dimension formula, open-subspace invariance, and the residue-field tower; no unrelated affine-height argument is used.",
+  "blueprint": "Realizes the ancestor route in lem-trf-local-term-locality where the trace-formula argument uses the Stacks local fibre-dimension inequality; the four steps correspond to the Tag 02JS affine reduction, dimension formulas, Algebra 02IJ componentwise inequality, and residue-field tower substitution.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NL-6ba910d24",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-6ba910d24 (reviewer sub-agent of L); spot-checked: I read Stacks 02JS (morphisms.tex l.5396-5420), 02FX and Algebra 00OM/00ON (algebra.tex l.27391ff), and checked every cited node statement. The item is exactly the first assertion of 02JS, with no flatness; its statement is unchanged. The four steps follow the 02JS proof: the affine reduction, 02FX applied to the three finite-type neighbourhoods given by lem-sbc-composite-fibre-local-models, then 00OM applied to the local map A=O_{Y_t,y} -> B=O_{X_t,x} with q=m_B over p=m_A, then the trdeg tower and regrouping. The regrouping needs no finiteness because addition in {0,..,inf} is monotone. The new node is verbatim 00OM. I tested it on k[t]->k, k->k[x], and the non-flat k[t]->k[t,x]/(tx) (1<=2). No DAG or blueprint node states 00OM: only the 00ON flat-equality leaf exists, which does not apply here, so the node is not a duplicate and does not restate the item. One fault, B8/C5: Mathlib has the node exactly as Ideal.height_le_height_add_of_liesOver (RingTheory/Ideal/KrullsHeightTheorem.lean:424-427, @[stacks 00OM]). The worker's searches were the item's queries copied over, and their verdict that Mathlib has 'no base-fibre-total inequality' is false. Fixed in fixes/dag/nodes/sec-trace-formula/lem-trf-local-fibre-ring-dimension-inequality.json: status mathlib, mathlib_match with a how (height form directly, dimension form via IsLocalization.AtPrime.ringKrullDim_eq_height), statement given in height form plus the equivalent 00OM dimension form like the 00ON leaf lem-weil-pbc-flat-height-formula, search verdicts corrected and my real grep added. The item is unchanged. Other-unit tools (lem-kun-dimension-formula, lem-sbc-composite-fibre-local-models) are left for the maintainer to record; I accepted no tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }
