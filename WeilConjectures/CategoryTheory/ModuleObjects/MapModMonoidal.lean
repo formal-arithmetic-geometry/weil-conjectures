@@ -47,20 +47,12 @@ built are strong monoidal for `⊗_R`:
 - `Mod.monoidal_extendScalars`: the strong monoidal structure of `Mod.extendScalars φ` along an
   isomorphism `φ`.
 
-## Sorried input
+## Implementation notes
 
-The data (the comparison isomorphisms) is constructed; the following properties are `sorry`ed:
-
-- the balancing conditions `Functor.mapMod_μ_balanced`, `Functor.mapMod_δ_balanced`,
-  `Mod.comap_tensorπ_balanced` and `Mod.tensorπ_comap_balanced` making the comparison maps
-  well defined on the coequalizers;
-- the linearity of the comparison maps (`Functor.mapModTensorIso_linear`,
-  `Mod.comapTensorIso_linear`);
-- the coherence axioms of `Functor.CoreMonoidal` (naturality, associativity and unitality of the
-  comparison isomorphisms) for `Functor.mapModCoreMonoidal` and `Mod.comapCoreMonoidal`.
-
-All of them are checked after precomposition with the projections onto the coequalizers
-(`Mod.tensorObjπ`), where they reduce to the coherences of `μ F` and of the algebra structures.
+All properties of the comparison maps (balancing conditions, linearity, and the coherence axioms
+of `Functor.CoreMonoidal`) are checked after precomposition with the projections onto the
+coequalizers (`Mod.tensorObjπ`), where they reduce to the coherences of `μ F` and of the algebra
+structures.
 
 -/
 
@@ -326,8 +318,7 @@ lemma tensorπ_comap_balanced (M N : Mod C R) :
     ((β_ ((comap ψ).obj M).X S).hom ≫ γ[S,((comap ψ).obj M).X]) ▷ ((comap ψ).obj N).X ≫
         tensorObjπ M N =
       ((α_ ((comap ψ).obj M).X S ((comap ψ).obj N).X).hom ≫
-        ((comap ψ).obj M).X ◁ γ[S,((comap ψ).obj N).X]) ≫ tensorObjπ M N :=
-  by
+        ((comap ψ).obj M).X ◁ γ[S,((comap ψ).obj N).X]) ≫ tensorObjπ M N := by
   change ((β_ M.X S).hom ≫ ψ ▷ M.X ≫ γ[R,M.X]) ▷ N.X ≫ tensorObjπ M N =
     ((α_ M.X S N.X).hom ≫ M.X ◁ (ψ ▷ N.X ≫ γ[R,N.X])) ≫ tensorObjπ M N
   rw [← braiding_naturality_right_assoc, comp_whiskerRight_assoc, tensorObjπ_condition,
@@ -339,8 +330,7 @@ lemma tensorπ_comap_balanced (M N : Mod C R) :
 actions of `R`, `ψ` being an isomorphism. -/
 lemma comap_tensorπ_balanced (M N : Mod C R) :
     ((β_ M.X R).hom ≫ γ[R,M.X]) ▷ N.X ≫ tensorObjπ ((comap ψ).obj M) ((comap ψ).obj N) =
-      ((α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X]) ≫ tensorObjπ ((comap ψ).obj M) ((comap ψ).obj N) :=
-  by
+      ((α_ M.X R N.X).hom ≫ M.X ◁ γ[R,N.X]) ≫ tensorObjπ ((comap ψ).obj M) ((comap ψ).obj N) := by
   rw [← cancel_epi ((M.X ◁ ψ) ▷ N.X)]
   have h := tensorObjπ_condition ((comap ψ).obj M) ((comap ψ).obj N)
   change ((β_ M.X S).hom ≫ ψ ▷ M.X ≫ γ[R,M.X]) ▷ N.X ≫ _ =
@@ -377,7 +367,14 @@ lemma tensorπ_comapTensorIsoX_hom (M N : Mod C R) :
 lemma comapTensorIso_linear (M N : Mod C R) :
     γ[S, ((comap ψ).obj M ⊗ (comap ψ).obj N).X] ≫ (comapTensorIsoX ψ M N).hom =
       S ◁ (comapTensorIsoX ψ M N).hom ≫ γ[S, ((comap ψ).obj (M ⊗ N)).X] :=
-  sorry
+  by
+  rw [← cancel_epi (S ◁ tensorObjπ ((comap ψ).obj M) ((comap ψ).obj N)),
+    whiskerLeft_tensorπ_smul_assoc, ← MonoidalCategory.whiskerLeft_comp_assoc,
+    tensorπ_comapTensorIsoX_hom_assoc, tensorπ_comapTensorIsoX_hom]
+  change (α_ S M.X N.X).inv ≫ (ψ ▷ M.X ≫ γ[R,M.X]) ▷ N.X ≫ tensorObjπ M N =
+    S ◁ tensorObjπ M N ≫ ψ ▷ (M ⊗ N).X ≫ γ[R,(M ⊗ N).X]
+  rw [← whisker_exchange_assoc, whiskerLeft_tensorπ_smul, associator_inv_naturality_left_assoc,
+    comp_whiskerRight_assoc]
 
 /-- The comparison isomorphism `ψ^* M ⊗_S ψ^* N ≅ ψ^* (M ⊗_R N)` of `S`-module objects for an
 isomorphism `ψ : S ⟶ R` of commutative algebra objects. -/

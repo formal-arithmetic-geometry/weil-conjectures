@@ -52,7 +52,7 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-set_option maxHeartbeats 0 in
+set_option maxHeartbeats 400000 in
 -- the kernel check of the exact pairing is slow
 /-- A lisse flat sheaf `F` placed in degree `0` has a left dual in `D(X_ét, Λ)` lying in
 `Dctf(X, Λ)`: the termwise dual of the single complex, which is the lisse flat sheaf `[F, Λ_X]`
@@ -139,7 +139,7 @@ instance : (derivedHomConstructibleFiniteTor Λ X).IsStableUnderRetracts where
             CategoryTheory.Functor.map_id, NatTrans.id_app] }
       (hK L hL)
 
-set_option maxHeartbeats 0 in
+set_option maxHeartbeats 400000 in
 -- the kernel check of the instance is slow
 instance : (derivedHomConstructibleFiniteTor Λ X).IsTriangulated where
   exists_zero := by

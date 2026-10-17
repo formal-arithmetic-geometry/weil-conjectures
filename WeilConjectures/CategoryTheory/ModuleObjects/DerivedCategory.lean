@@ -32,11 +32,11 @@ which makes `DerivedCategory (Mod C R)` a monoidal category with tensor product 
 (`Mod.derivedMonoidalCategory`), such that the localization functor from complexes of
 `R`-modules is lax monoidal.
 
-## Sorried input
+## Inputs
 
 The K-flat machinery requires three properties of `Mod C R`, inherited from `C`:
-`Mod.monoidalClosed`, `Mod.isGrothendieckAbelian` and `Mod.hasFunctorialFlatResolution`. They
-are currently `sorry`ed in `WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian`.
+`Mod.monoidalClosed`, `Mod.isGrothendieckAbelian` and `Mod.hasFunctorialFlatResolution`
+(`WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian`).
 
 The construction moreover uses the instance `DerivedCategory.hasDerivedMonoidalCategory`, which
 is currently `sorry`ed in
