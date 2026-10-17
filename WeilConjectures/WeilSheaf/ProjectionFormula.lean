@@ -5,9 +5,11 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.WeilSheaf.OpenImmersionRestriction
 public import WeilConjectures.WeilSheaf.UpperStarComp
 public import WeilConjectures.WeilSheaf.UpperStarDual
 public import WeilConjectures.WeilSheaf.UpperStarTensor
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedSupport
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseTensor
 public import WeilConjectures.WeilSheaf.FourierInversion.TensorLisse
 
@@ -101,16 +103,186 @@ variable {X Z Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   (i : X ⟶ Z) [IsOpenImmersion i] [i.IsOver (Spec (CommRingCat.of k₀))]
   (g : Z ⟶ Y) [g.IsOver (Spec (CommRingCat.of k₀))]
 
-theorem nonempty_extensionByZeroCompIhomFunctorIso (B : ProEtaleWeilSheaf k₀ l Z)
+section ExtensionByZero
+
+variable (B : ProEtaleWeilSheaf k₀ l Z)
+
+set_option hygiene false in
+local notation "ib" => Scheme.Hom.geometricFiberMap i (comp_over i (Spec (CommRingCat.of k₀)))
+
+/-- The comparison `[B, i_! F] ⟶ [B, i_* F]` induced by `i_! ⟶ i_*`. -/
+noncomputable abbrev ihomExtensionByZeroToLowerStar (F : ProEtaleWeilSheaf k₀ l X) :
+    (ProEtaleWeilSheaf.ihomFunctor k₀ l Z B).obj ((ProEtaleWeilSheaf.extensionByZero k₀ l i).obj F) ⟶
+      (ProEtaleWeilSheaf.ihomFunctor k₀ l Z B).obj ((ProEtaleWeilSheaf.lowerStar k₀ l i).obj F) :=
+  (ProEtaleWeilSheaf.ihomFunctor k₀ l Z B).map
+    ((ProEtaleWeilSheaf.extensionByZeroToLowerStar k₀ l i).app F)
+
+/-- The comparison `i_! [i^* B, F] ⟶ i_* [i^* B, F] ≅ [B, i_* F]`. -/
+noncomputable abbrev extensionByZeroIhomToIhomLowerStar (F : ProEtaleWeilSheaf k₀ l X) :
+    (ProEtaleWeilSheaf.extensionByZero k₀ l i).obj
+        ((ProEtaleWeilSheaf.ihomFunctor k₀ l X ((ProEtaleWeilSheaf.upperStar k₀ l i).obj B)).obj F) ⟶
+      (ProEtaleWeilSheaf.ihomFunctor k₀ l Z B).obj ((ProEtaleWeilSheaf.lowerStar k₀ l i).obj F) :=
+  (ProEtaleWeilSheaf.extensionByZeroToLowerStar k₀ l i).app _ ≫
+    (lowerStarCompIhomFunctorIso k₀ l i B).inv.app F
+
+lemma mono_extensionByZeroToLowerStar_app (F : ProEtaleWeilSheaf k₀ l X) :
+    Mono ((ProEtaleWeilSheaf.extensionByZeroToLowerStar k₀ l i).app F) :=
+  (IsoAlgebra.forget _).mono_of_mono_map (inferInstanceAs
+    (Mono ((adicOpenImmersionLowerShriekToLowerStar l ib).app F.carrier)))
+
+instance mono_ihomExtensionByZeroToLowerStar (F : ProEtaleWeilSheaf k₀ l X) :
+    Mono (ihomExtensionByZeroToLowerStar i B F) :=
+  have := mono_extensionByZeroToLowerStar_app i F
+  (ProEtaleWeilSheaf.ihomFunctor k₀ l Z B).map_mono _
+
+instance mono_extensionByZeroIhomToIhomLowerStar (F : ProEtaleWeilSheaf k₀ l X) :
+    Mono (extensionByZeroIhomToIhomLowerStar i B F) :=
+  have := mono_extensionByZeroToLowerStar_app i
+    ((ProEtaleWeilSheaf.ihomFunctor k₀ l X ((ProEtaleWeilSheaf.upperStar k₀ l i).obj B)).obj F)
+  mono_comp _ _
+
+instance isIso_upperStar_map_ihomExtensionByZeroToLowerStar (F : ProEtaleWeilSheaf k₀ l X) :
+    IsIso ((ProEtaleWeilSheaf.upperStar k₀ l i).map (ihomExtensionByZeroToLowerStar i B F)) := by
+  have h1 : IsIso ((ib)^*ᵃ[l].map ((adicOpenImmersionLowerShriekToLowerStar l ib).app
+      F.carrier)) :=
+    inferInstanceAs (IsIso ((IsoAlgebra.forget _).map
+      ((ProEtaleWeilSheaf.upperStar k₀ l i).map
+        ((ProEtaleWeilSheaf.extensionByZeroToLowerStar k₀ l i).app F))))
+  have h2 : IsIso ((ib)^*ᵃ[l].map ((AdicSheaf.ihom B.carrier).map
+      ((adicOpenImmersionLowerShriekToLowerStar l ib).app F.carrier))) := by
+    have := NatIso.naturality_2 (adicUpperStarIhomIso l ib B.carrier)
+      ((adicOpenImmersionLowerShriekToLowerStar l ib).app F.carrier)
+    simp only [Functor.comp_map] at this
+    rw [← this]
+    infer_instance
+  have : IsIso ((IsoAlgebra.forget _).map ((ProEtaleWeilSheaf.upperStar k₀ l i).map
+      (ihomExtensionByZeroToLowerStar i B F))) := h2
+  exact isIso_of_reflects_iso _ (IsoAlgebra.forget _)
+
+instance isIso_upperStar_map_extensionByZeroIhomToIhomLowerStar (F : ProEtaleWeilSheaf k₀ l X) :
+    IsIso ((ProEtaleWeilSheaf.upperStar k₀ l i).map (extensionByZeroIhomToIhomLowerStar i B F)) := by
+  simp only [extensionByZeroIhomToIhomLowerStar, Functor.map_comp]
+  infer_instance
+
+lemma extensionByZeroIhomToIhomLowerStar_comp_cokernel_π (F : ProEtaleWeilSheaf k₀ l X) :
+    extensionByZeroIhomToIhomLowerStar i B F ≫
+      cokernel.π (ihomExtensionByZeroToLowerStar i B F) = 0 := by
+  set Fg := IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Z)
+  have hZ : IsZero ((ib)^*ᵃ[l].obj (Fg.obj (cokernel (ihomExtensionByZeroToLowerStar i B F)))) := by
+    have : IsIso ((ib)^*ᵃ[l].map (Fg.map (ihomExtensionByZeroToLowerStar i B F))) :=
+      inferInstanceAs (IsIso ((IsoAlgebra.forget _).map
+        ((ProEtaleWeilSheaf.upperStar k₀ l i).map (ihomExtensionByZeroToLowerStar i B F))))
+    have : Epi ((ib)^*ᵃ[l].map (Fg.map (ihomExtensionByZeroToLowerStar i B F))) :=
+      IsIso.epi_of_iso _
+    exact (isZero_cokernel_of_epi _).of_iso ((ib)^*ᵃ[l].mapIso
+      (PreservesCokernel.iso Fg (ihomExtensionByZeroToLowerStar i B F)) ≪≫
+        PreservesCokernel.iso (ib)^*ᵃ[l] _)
+  apply Fg.map_injective
+  rw [Functor.map_comp, Functor.map_zero]
+  apply ((adicOpenImmersionLowerShriekAdjunction l ib).homEquiv _ _).injective
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+  exact hZ.eq_of_tgt _ _
+
+/-- The comparison `i_! [i^* B, F] ⟶ [B, i_! F]`, lifting `i_! [i^* B, F] ⟶ [B, i_* F]` along
+the monomorphism `[B, i_! F] ⟶ [B, i_* F]`. -/
+noncomputable def extensionByZeroIhomToIhom (F : ProEtaleWeilSheaf k₀ l X) :
+    (ProEtaleWeilSheaf.extensionByZero k₀ l i).obj
+        ((ProEtaleWeilSheaf.ihomFunctor k₀ l X ((ProEtaleWeilSheaf.upperStar k₀ l i).obj B)).obj F) ⟶
+      (ProEtaleWeilSheaf.ihomFunctor k₀ l Z B).obj ((ProEtaleWeilSheaf.extensionByZero k₀ l i).obj F) :=
+  Abelian.monoLift _ _ (extensionByZeroIhomToIhomLowerStar_comp_cokernel_π i B F)
+
+@[reassoc (attr := simp)]
+lemma extensionByZeroIhomToIhom_comp (F : ProEtaleWeilSheaf k₀ l X) :
+    extensionByZeroIhomToIhom i B F ≫ ihomExtensionByZeroToLowerStar i B F =
+      extensionByZeroIhomToIhomLowerStar i B F :=
+  Abelian.monoLift_comp _ _ _
+
+lemma mono_extensionByZeroIhomToIhom (F : ProEtaleWeilSheaf k₀ l X) :
+    Mono (extensionByZeroIhomToIhom i B F) :=
+  mono_of_mono_fac (extensionByZeroIhomToIhom_comp i B F)
+
+lemma isIso_upperStar_map_extensionByZeroIhomToIhom (F : ProEtaleWeilSheaf k₀ l X) :
+    IsIso ((ProEtaleWeilSheaf.upperStar k₀ l i).map (extensionByZeroIhomToIhom i B F)) := by
+  have hc : (ProEtaleWeilSheaf.upperStar k₀ l i).map (extensionByZeroIhomToIhom i B F) ≫
+      (ProEtaleWeilSheaf.upperStar k₀ l i).map (ihomExtensionByZeroToLowerStar i B F) =
+      (ProEtaleWeilSheaf.upperStar k₀ l i).map (extensionByZeroIhomToIhomLowerStar i B F) := by
+    rw [← Functor.map_comp, extensionByZeroIhomToIhom_comp]
+  have : IsIso ((ProEtaleWeilSheaf.upperStar k₀ l i).map (extensionByZeroIhomToIhom i B F) ≫
+      (ProEtaleWeilSheaf.upperStar k₀ l i).map (ihomExtensionByZeroToLowerStar i B F)) := by
+    rw [hc]
+    infer_instance
+  exact IsIso.of_isIso_comp_right _
+    ((ProEtaleWeilSheaf.upperStar k₀ l i).map (ihomExtensionByZeroToLowerStar i B F))
+
+lemma isIso_extensionByZeroIhomToIhom [QuasiCompact i] (hB : IsAdicLisseSheaf B.carrier)
+    (F : ProEtaleWeilSheaf k₀ l X) : IsIso (extensionByZeroIhomToIhom i B F) := by
+  set Fg := IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l Z)
+  set k := (Scheme.Hom.opensRange ib).closedComplement
+  have hij : IsCompl (Set.range k.base) (Set.range (ib).base) := by
+    rw [Scheme.Opens.range_closedComplement, Scheme.Hom.coe_opensRange]
+    exact isCompl_compl.symm
+  have hdisj : Set.range (ib).base ∩ Set.range k.base = ∅ :=
+    Set.disjoint_iff_inter_eq_empty.1 hij.symm.disjoint
+  have := mono_extensionByZeroIhomToIhom i B F
+  have : Epi (extensionByZeroIhomToIhom i B F) := by
+    refine Preadditive.epi_of_isZero_cokernel _ ((ProEtaleWeilSheaf.isZero_iff _).2 ?_)
+    have hCi : IsZero ((ib)^*ᵃ[l].obj (Fg.obj (cokernel (extensionByZeroIhomToIhom i B F)))) := by
+      have := isIso_upperStar_map_extensionByZeroIhomToIhom i B F
+      have : IsIso ((ib)^*ᵃ[l].map (Fg.map (extensionByZeroIhomToIhom i B F))) :=
+        inferInstanceAs (IsIso ((IsoAlgebra.forget _).map
+          ((ProEtaleWeilSheaf.upperStar k₀ l i).map (extensionByZeroIhomToIhom i B F))))
+      have : Epi ((ib)^*ᵃ[l].map (Fg.map (extensionByZeroIhomToIhom i B F))) :=
+        IsIso.epi_of_iso _
+      exact (isZero_cokernel_of_epi _).of_iso ((ib)^*ᵃ[l].mapIso
+        (PreservesCokernel.iso Fg (extensionByZeroIhomToIhom i B F)) ≪≫
+          PreservesCokernel.iso (ib)^*ᵃ[l] _)
+    have hCk : IsZero ((k)^*ᵃ[l].obj (Fg.obj (cokernel (extensionByZeroIhomToIhom i B F)))) := by
+      have h0 : IsZero ((k)^*ᵃ[l].obj ((AdicSheaf.ihom B.carrier).obj
+          ((ib)_!ᵃ[l].obj F.carrier))) :=
+        IsAdicLisseSheaf.isZero_upperStar_ihom k hB
+          (isZero_adicUpperStar_adicOpenImmersionLowerShriek ib k hdisj F.carrier)
+      have : Epi (Fg.map (cokernel.π (extensionByZeroIhomToIhom i B F))) := inferInstance
+      have : Epi ((k)^*ᵃ[l].map (Fg.map (cokernel.π (extensionByZeroIhomToIhom i B F)))) :=
+        inferInstance
+      exact h0.of_epi ((k)^*ᵃ[l].map (Fg.map (cokernel.π (extensionByZeroIhomToIhom i B F))))
+    exact AdicSheaf.isZero_of_isZero_adicUpperStar_of_isCompl k ib hij _ hCk hCi
+  exact isIso_of_mono_of_epi _
+
+theorem nonempty_extensionByZeroCompIhomFunctorIso [QuasiCompact i]
     (hB : IsAdicLisseSheaf B.carrier) :
     Nonempty (ProEtaleWeilSheaf.extensionByZero k₀ l i ⋙ ProEtaleWeilSheaf.ihomFunctor k₀ l Z B ≅
       ProEtaleWeilSheaf.ihomFunctor k₀ l X ((ProEtaleWeilSheaf.upperStar k₀ l i).obj B) ⋙
-        ProEtaleWeilSheaf.extensionByZero k₀ l i) :=
-  sorry
+        ProEtaleWeilSheaf.extensionByZero k₀ l i) := by
+  have := isIso_extensionByZeroIhomToIhom i B hB
+  set ρ := ProEtaleWeilSheaf.extensionByZeroToLowerStar k₀ l i
+  refine ⟨(NatIso.ofComponents (fun F ↦ asIso (extensionByZeroIhomToIhom i B F))
+    fun {F F'} f ↦ ?_).symm⟩
+  have h1 : (ProEtaleWeilSheaf.ihomFunctor k₀ l Z B).map
+      ((ProEtaleWeilSheaf.extensionByZero k₀ l i).map f) ≫ ihomExtensionByZeroToLowerStar i B F' =
+      ihomExtensionByZeroToLowerStar i B F ≫
+        (ProEtaleWeilSheaf.ihomFunctor k₀ l Z B).map ((ProEtaleWeilSheaf.lowerStar k₀ l i).map f) := by
+    simp only [ihomExtensionByZeroToLowerStar, ← Functor.map_comp]
+    congr 1
+    exact ρ.naturality f
+  have h2 : (ProEtaleWeilSheaf.extensionByZero k₀ l i).map
+      ((ProEtaleWeilSheaf.ihomFunctor k₀ l X ((ProEtaleWeilSheaf.upperStar k₀ l i).obj B)).map f) ≫
+      extensionByZeroIhomToIhomLowerStar i B F' =
+      extensionByZeroIhomToIhomLowerStar i B F ≫
+        (ProEtaleWeilSheaf.ihomFunctor k₀ l Z B).map ((ProEtaleWeilSheaf.lowerStar k₀ l i).map f) := by
+    simp only [extensionByZeroIhomToIhomLowerStar, Category.assoc]
+    rw [ρ.naturality_assoc]
+    congr 1
+    exact (lowerStarCompIhomFunctorIso k₀ l i B).inv.naturality f
+  rw [← cancel_mono (ihomExtensionByZeroToLowerStar i B F')]
+  simp only [Functor.comp_map, asIso_hom, Category.assoc, extensionByZeroIhomToIhom_comp]
+  rw [h1, extensionByZeroIhomToIhom_comp_assoc, h2]
+  simp only [extensionByZeroIhomToIhomLowerStar, Category.assoc]
+
+end ExtensionByZero
 
 /-- The projection formula for `Rg_* ∘ i_!`, on the derived categories of pro-étale Weil
 sheaves. -/
-theorem nonempty_rightDerived_projection (A : ProEtaleWeilSheaf k₀ l Y)
+theorem nonempty_rightDerived_projection [QuasiCompact i] (A : ProEtaleWeilSheaf k₀ l Y)
     (hA : IsAdicLisseSheaf A.carrier) (B : ProEtaleWeilSheaf k₀ l X)
     (hB : IsAdicLisseSheaf B.carrier)
     (e : (ProEtaleWeilSheaf.upperStar k₀ l i).obj ((ProEtaleWeilSheaf.upperStar k₀ l g).obj A) ≅
@@ -201,6 +373,14 @@ theorem WeilComplex.nonempty_iso_derivedLowerShriek_tensorLisse {X Y : Scheme.{u
   let c := HasCompactification.compactification f (hf := hasCompactification_of_over (k₀ := k₀) f)
   have : LocallyOfFiniteType (c.Z ↘ Spec (CommRingCat.of k₀)) :=
     inferInstanceAs (LocallyOfFiniteType (c.g ≫ Y ↘ Spec (CommRingCat.of k₀)))
+  have : IsLocallyNoetherian Y :=
+    LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (CommRingCat.of k₀))
+  have : CompactSpace Y :=
+    QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (CommRingCat.of k₀))
+  have : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
+  have : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g
+  have : IsNoetherian c.Z := ⟨⟩
+  have : QuasiCompact c.i := inferInstance
   set G' := (WeilSheaf.upperStar f).obj G
   have hG' : G'.IsLisse := ProEtale.IsAdicLisseSheaf.upperStar _ hG
   obtain ⟨e₁⟩ := WeilSheaf.nonempty_upperStar_dual_iso f G hG
