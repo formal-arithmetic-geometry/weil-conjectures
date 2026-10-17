@@ -359,5 +359,23 @@
   "group": "Q30",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-48aecb396 (reviewer sub-agent of L); spot-checked: I read the item, all 11 steps and the full statements of all 6 cited nodes. No new nodes and no fixes. The statement is unchanged and not weakened: arbitrary diagrams over an ordinary small filtered J, objectwise Joyal equivalences, the degreewise colimit map, plus the union and universe clauses. It agrees with Cisinski HCHA Cor. 3.9.8 (not archived; WANTED and proof_origin.by=agent are correct). Checked steps: 1 compact-object argument via the unique-decomposition leaf, valid for non-posetal J. 2-3 inner-horn replacement R; it is a trivial cofibration by the model node's (trivial cofibration, fibration) WFS and commutes with filtered colimits. 4 reduction to quasicategories by 2-of-3. 5 finite test set: inner horns plus s_{eps,n} from interval-boundary-tests, whose J is finite (2 vertices, 3 edges, 2 triangles); products and subcomplexes finite. 6 labelled small-object factorization q_f l_f = f; q_f lifts every test map, l_f is a trivial cofibration. 7 factorization commutes with filtered colimits on the actual arrows (finite A_u, B_u; equalization). 8 E(f_j) is a quasicategory, so the interval test makes q_{f_j} a fibration; 2-of-3 makes it a trivial fibration. 9 colimit map lifts boundary inclusions by compactness, then all monos by the skeletal-cell leaf, so it is a trivial fibration. 10-11 2-of-3 finishes. Edge cases: empty sets, n=0, non-injective transitions, parallel arrows, constant diagrams. proof_deps equals the union of step uses. Dependency closure is 44 nodes and does not reach the item. Uses are in the same unit or are definitions/Mathlib leaves, so tool_uses=[] is right. No SGA. Duplicate candidates read and rejected: filtered-colimit-weak-equivalences (Kan-Quillen, not Joyal), categorical-equivalences-small-generation, cat-infinity-filtered-finite-calculus, model-weak-equivalences-accessible. Not a target node, so the base-change and coefficient checks do not apply."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.JoyalFilteredEquivalences",
+  "declaration": "SSet.categorical_equivalences_colimMap_of_isFiltered",
+  "file": "lean/Sheaf/AlgebraicTopology/JoyalFilteredEquivalences.lean",
+  "statement": "theorem categorical_equivalences_colimMap_of_isFiltered (M : HomotopicalAlgebra.ModelCategory SSet.{u}) (hJoyal : ∀ {X Y : SSet.{u}} (g : X ⟶ Y), M.categoryWithWeakEquivalences.weakEquivalences g ↔ ∀ (C : SSet.{max u v}), C.Quasicategory → ((hoFunctor.map ((MonoidalClosed.pre (uliftFunctor.{v, u}.map g)).app C)).toFunctor).IsEquivalence) (J : Type u) [SmallCategory J] [IsFiltered J] (X Y : J ⥤ SSet.{u}) (a : X ⟶ Y) (ha : ∀ j : J, M.categoryWithWeakEquivalences.weakEquivalences (a.app j)) : M.categoryWithWeakEquivalences.weakEquivalences (colimMap a)",
+  "branch": "newtargets-dag",
+  "by": "Q115",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1779508bb",
+  "group": "Q115",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: M plus hJoyal copied exactly from the weak-equivalence clause of the dependency SSet.exists_joyal_model_structure (same pattern as the landed Joyal siblings); J : Type u with SmallCategory and IsFiltered; arbitrary X Y : J ⥤ SSet.{u} and a; ha on every component; conclusion on colimMap a. Union clause is a special case; universe clause holds because the theorem is polymorphic in u and v. No extra assumptions and no universe equation. Edge cases (empty J excluded by IsFiltered, empty sSets, degree 0, non-injective transitions, non-posetal J) checked. No duplicate in Mathlib or the side tree. No definitions, proof only sorry, docstrings carry the source place, blueprint tag and all 11 steps. lean.statement is verbatim in the file; node differs only in lean; stmt_deps correct. Report has Worker report and Second reading by Q115. nt_compile.py --json exit 0, no errors or warnings. No findings."
  }
 }

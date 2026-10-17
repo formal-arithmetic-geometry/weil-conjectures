@@ -293,5 +293,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenDirectImageClassicalAmplitude",
+  "declaration": "AlgebraicGeometry.ProEtale.openDirectImage_classical_amplitude",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenDirectImageClassicalAmplitude.lean",
+  "statement": "theorem openDirectImage_classical_amplitude (k : Type u) [Field k] (Λ : Type (u + 1)) [Ring Λ] [Finite Λ] (ℓ : ℕ) (hΛ : ∃ r : ℕ, 1 ≤ r ∧ ∀ x : Λ, (ℓ ^ r) • x = 0) (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (j : X ⟶ Y) [j.IsOver (Spec (.of k))] [IsOpenImmersion j] : ∃ d : ℕ, (@Scheme.Hom.torsionEtaleCohomologicalDimension _ _ j (@quasiCompact_of_compactSpace X Y j ((quasiCompact_iff_compactSpace (X ↘ Spec (.of k))).mp inferInstance) (@IsLocallyNoetherian.quasiSeparatedSpace Y (LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (.of k))))) (@QuasiSeparated.of_quasiSeparatedSpace X Y j (@IsLocallyNoetherian.quasiSeparatedSpace X (LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k)))))) = (d : ℕ∞) ∧ (∀ (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ), (d : ℤ) < q → IsZero ((DerivedCategory.Plus.homologyFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) q).obj ((Etale.rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) j).obj ((DerivedCategory.Plus.singleFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj F)))) ∧ (∀ (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ), (d : ℤ) < q → IsZero ((DerivedCategory.Plus.homologyFunctor (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)) q).obj ((lowerStar (ModuleCat.{u + 1} Λ) j).rightDerivedFunctorPlus.obj ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategoryPlus.obj ((DerivedCategory.Plus.singleFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj F))))) ∧ (∀ (a b : ℤ) (M : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))), (∀ q : ℤ, (q < a ∨ b < q) → IsZero ((DerivedCategory.Plus.homologyFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) q).obj M)) → ∀ q : ℤ, (q < a ∨ b + (d : ℤ) < q) → IsZero ((DerivedCategory.Plus.homologyFunctor (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)) q).obj ((lowerStar (ModuleCat.{u + 1} Λ) j).rightDerivedFunctorPlus.obj ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategoryPlus.obj M))))",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded canonical fixed-ring module-sheaf encoding and comparison adjunction; finiteCoefficientEtaleRealization and finiteCoefficientRealization identify it with the coefficient ring-sheaf categories, including noncommutative rings. Finiteness and the choice d=cd(j) are expressed by an existential natural number whose ENat cast equals the recorded dimension. No extra qcqs hypotheses: the signature supplies their canonical consequences of finite type over the field."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-defddc145",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Read the node, the blueprint source and unit, all 7 stmt_dep records and the actual declarations (torsionEtaleCohomologicalDimension, ProEtaleFiniteModules, comparisonUpperStar, which is additive and preserves homology, so mapDerivedCategoryPlus is the derived ν^*), plus the module and report. Every hypothesis and clause (1)-(3) is exact. d is pinned to cd(j) by ENat equality. The qcqs arguments are derived terms, not binders. Λ:Type(u+1) matches the recorded coefficient interface (finite rings resize). ℓ:ℕ adds no primality. Edge cases covered: empty X, j=id, Λ=0, char k=ℓ, noncommutative Λ, a>b, strict q>d. Using the original comparisonUpperStar instead of Q17's small-model record is accepted: it is the canonical ν that the recorded finiteCoefficientComparison is built from, and the small-model module transports it. Node differs from base only in lean; statement verbatim; sorry only; docstrings with source and blueprint tag; lines ≤98 characters; worker and second-reading sections present. nt_compile.py --json on the snapshot module: rc 0, no errors or warnings, module 2.4 s. No findings."
  }
 }
