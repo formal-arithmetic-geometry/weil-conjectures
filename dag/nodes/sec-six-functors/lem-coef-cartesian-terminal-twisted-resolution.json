@@ -9,7 +9,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-colimit-gluing"
  ],
  "proof": [
   {
@@ -297,5 +298,39 @@
   "group": "Q02",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-96a5df490 (reviewer sub-agent of L); spot-checked: I read the item, the new node and the full statements of all 21 cited nodes, and checked each of the seven steps against them; details are in review.md. (1) Construction of k: the dual of arrow-projection is onto because p is cartesian, the terminal fillers are made only in the fibre R_{a_n}, and no transported object is assumed terminal. (2) For r in R_c, C_r = K_A x_R R_{r/} is a quasicategory because R_{r/} -> R is a left fibration. cartesian-mapping-fiber with s=c and a discrete base factors beta as cart.h. I rederived w'=wg, wu=w'u'f, the twisted pair (f,1_c), and naturality of H. (3) The pairs (1_a,w) and (wu,1_c) satisfy the twisted-square equation. Their triangles lie in R_c and are filled by terminal-boundary-extension at t_c, so the zigzag id <- H -> const contracts C_r. (4) The small-object hypotheses hold for the right horns with kappa=aleph_0 in an enlarged universe. j is right anodyne, q is a right fibration, and E is a quasicategory. (5) The pullback of j along the left fibration D_r -> E is literally C_r -> D_r. It is right anodyne by the new node and a weak equivalence by Kan-Quillen. (6) The prism map is monotone, the right fibration D_r -> S_r has all edges cartesian, and the lift relative to E_r gives Ti=id and iT~id. right-fibration-fibers and contractible-fibers then make q a trivial fibration. (7) The section plus the N(J) lift makes q an equivalence, anodyne-cocones handles j, and the colimit criterion gives both directions. Small cases: A empty; A a point; A=[1], where the colimit is the pushout V(t_1)<-V(u^*t_0)->V(t_0), so no terminal-preservation hypothesis is needed. New node lem-coef-left-fibration-right-anodyne-base-change is true: left fibrations are smooth (HTT 4.1.2.15), and a right anodyne monomorphism is the same as a cofinal one (HTT 4.1.1.3, Kerodon 02N3). The variance test {0}->Delta^1 shows the left-fibration hypothesis is essential. Cisinski 4.4.11 is not archived locally (WANTED recorded); online citation is the existing practice for this chain. The node meets B1-B9 and duplicates none of eight candidates I read. The claimed cycle is real: cofinal-comma-criterion and cofinality-space-test both reach the item, so inlining the Theorem A argument is justified. A graph traversal finds no cycle through the item, and proof_deps equals the union of the step uses. Statement unchanged and matching its use in coherent-diagram-coyoneda. I accept the four tool_uses (three lem-cbc foundations and one Mathlib leaf). No SGA source. Not a target node, so the base-change-morphism check does not apply. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartesianTerminalTwistedResolution",
+  "declaration": "SSet.Enhanced.terminal_twisted_resolution_final",
+  "declarations": [
+   "SSet.Enhanced.TerminalTwistedArrow",
+   "SSet.Enhanced.TerminalTwistedSquare",
+   "SSet.Enhanced.terminalTwistedArrowCategory",
+   "SSet.Enhanced.terminalTwistedTarget",
+   "SSet.Enhanced.terminalTwistedBase",
+   "SSet.Enhanced.terminalTwistedIndex",
+   "SSet.Enhanced.terminalTwistedProjection",
+   "SSet.Enhanced.terminalTwistedBaseVertex",
+   "SSet.Enhanced.terminalTwistedDiagonal",
+   "SSet.Enhanced.IsTerminalTwistedResolution",
+   "SSet.Enhanced.TerminalTwistedComparison",
+   "SSet.Enhanced.exists_terminal_twisted_resolution",
+   "SSet.Enhanced.terminal_twisted_resolution_final"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CartesianTerminalTwistedResolution.lean",
+  "statement": "theorem terminal_twisted_resolution_final {A : Type u} [SmallCategory A] {R : SSet.{max u v}} [Quasicategory R] (p : R ⟶ terminalTwistedBase.{u, v} A) (hp : ∃ hB : Quasicategory (terminalTwistedBase.{u, v} A), @cartesianFibration R (terminalTwistedBase.{u, v} A) p inferInstance hB) (t : ∀ a : A, (fiber p (terminalTwistedBaseVertex a)) _⦋0⦌) (ht : ∀ a : A, IsTerminal (fiber p (terminalTwistedBaseVertex a)) (t a)) (k : terminalTwistedIndex.{u, v} A ⟶ R) (hk : IsTerminalTwistedResolution p t k) (D : SSet.{max u v w}) [Quasicategory D] (V : SSet.uliftFunctor.{w, max u v}.obj R ⟶ D) : (∀ d : D _⦋0⦌, IsWeakHomotopyEquivalence (mappingSpaceMap ((MonoidalClosed.pre (SSet.uliftFunctor.{w, max u v}.map k)).app D) (diagramVertex V) (diagramVertex (SSet.const (X := _) d)))) ∧ (∀ c : (coconeCategory V) _⦋0⦌, IsColimiting V c ↔ IsColimiting (SSet.uliftFunctor.{w, max u v}.map k ≫ V) ((gluingCoconeRestrict (SSet.uliftFunctor.{w, max u v}.map k) V).app _ c)) ∧ ∀ d : D _⦋0⦌, (∃ c : (coconeCategory V) _⦋0⦌, c.1.1 = d ∧ IsColimiting V c) ↔ (∃ c : (coconeCategory (SSet.uliftFunctor.{w, max u v}.map k ≫ V)) _⦋0⦌, c.1.1 = d ∧ IsColimiting (SSet.uliftFunctor.{w, max u v}.map k ≫ V) c)",
+  "branch": "newtargets-dag",
+  "by": "Q96",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Two statements together render the node: exists_terminal_twisted_resolution gives coherent existence and uniqueness over the base, and terminal_twisted_resolution_final gives actual cocone-space restriction and both colimit consequences. The source-fixed-cartesian characterization of the explicit ordinary twisted index encodes the transport formula without choosing separate transport functors. Independent universe lifts retain large total categories and arbitrary further target universes. Helpers are definitions of this node’s own displayed K_A and resolution data. Added the already landed colimit-gluing node solely to use its canonical gluingCoconeRestrict helper; no gluing theorem is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-403cb7e78",
+  "group": "Q96",
+  "result": "pass",
+  "note": "Read node, 3 stmt deps, dependency decls (EnhancedDiagramsCones, InfinityFibrations, InfinityColimitGluing), module, report (Worker report + Second reading by Q96 present). Clause match: A small cat; R : SSet.{max u v} quasicategory, no smallness; base ulift nerve A^op; hp ∃ Quasicategory instance (Prop) = cartesianFibration; terminal t_a via IsTerminal; Tw(A)^op objects/squares/variance/projection correct (rfl-checked); IsTerminalTwistedResolution (over base, k(id_a)=t_a, source-fixed squares cartesian) verified equivalent to node's edge formula via factorization (f,g)=(f,1)(1,g) and square v->u'->id_a' = v->f->id_a'; uniqueness for any t' as equivalence edge in fibre of Fun(K,p) over projection; finality = weak equivalence of actual pre(k) mappingSpaceMap at V, const d for D in independent universe w; colimiting iff via gluingCoconeRestrict; fixed-apex existence equivalence. Edge cases: empty A, point, [1], degenerate edges, empty D, universes ok. No Mathlib/side ordinary twisted-arrow duplicate (SSet twistedArrow is edgewise subdivision, not cited). Node diff vs base: lean added + stmt_deps gains landed lem-coef-infinity-colimit-gluing (allowed); deps unchanged; statement verbatim; 13 declarations present; no hollow defs, only sorry, docstrings with source and blueprint. nt_compile: module compiles rc 0, no errors/warnings; #print axioms only sorryAx + standard. No findings."
  }
 }
