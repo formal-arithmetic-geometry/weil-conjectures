@@ -275,5 +275,32 @@
   "group": "Q44",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-4f5db18e4 (reviewer sub-agent of L); spot-checked: I read the item in full: an unchanged statement and seven agent-written steps, with no new nodes. I also read the statements of all 13 proof deps and 3 stmt deps, the parent lem-trf-artin-tensor-etale-acyclic (both of its steps that use the item) and unit sk-i-curve-zero. Sources read: Stacks proetale.tex 097U/097V (lines 1424-1505), topology.tex 005F and algebra.tex 00EG. Hübner–Schmidt is not in the local literature; the WANTED request stays, and the proof is honestly marked as agent-written. Step checks: step 1 verifies the three hypotheses of the 005F node (it does not need sobriety). Step 2 checks the colimit formula C_Z = colim C_e, including that e = prod(1 - d_i) kills each d_i. Step 3 uses the strictly henselian section node with R = C_Z, then the 00QO factorization with R = C over that directed system, and the open immersion Spec C_e = D(e). Step 4 makes the cover disjoint and glues; it also covers C = 0. Step 5 derives that C_Z is local from the split cover D(f), D(1-f) and clause (ii) of the unit criterion; this correctly repairs the earlier false 'local by construction'. Step 6 uses faithfully flat surjectivity to get a singleton cover, then 097V applied to C itself. Step 7 checks the explicit isomorphism C_Z = C_m. Small cases tested: C = 0, a strictly henselian local ring, a product of two such rings, Z (both conditions fail), and k^N (components that are not open). The statement holds in each, and there is no duplicate anywhere in the DAG (I checked the 097U/097V carriers and the w-local and w-contractible nodes). One C1 fix, with the corrected item under fixes/dag/nodes/sec-trace-formula/. Step 3 now cites lem-weil-pbc-etale-composition-cancellation (clauses 1 and 2) for affine charts being etale over X, and def-weil-affine-spectrum for passing from a section to an algebra map; proof_deps was recomputed. Off-unit tool uses accepted: lem-sbc-strict-henselian-etale-neighbourhood-section, lem-weil-pbc-quasicompact-components-clopen-intersection and lem-weil-pbc-split-etale-covers-maximal-local-criterion. The other declared entries are Mathlib leaves. No SGA is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e885fcf76",
+  "group": "Q22",
+  "result": "fix",
+  "note": "Statement matches node clause by clause (component ideal/ring as quotient by idempotents vanishing on connectedComponent x; range of comap = component; all component rings strictly henselian ⇔ every u-indexed jointly surjective etale family splits); edge cases C=0, empty family, non-open components ok; no hollow defs, sorry only. H4: delivered EtaleCoverSplits duplicated landed AlgebraicGeometry.Scheme.IsEtaleAcyclic (def-trf-etale-acyclic-scheme, in base aa536a130d, used by parent artin_tensor_etale_acyclic); fixed to Scheme.IsEtaleAcyclic (Spec (.of C)). Also fixed: H8 step-by-step proof docstring with node ids, lean.declarations listing helpers, module-system header with public imports plus stated proof-dep imports, named CommRing instance on componentRing replacing explicit @. Delivered and fixed files both compile clean via nt_compile.py (3.4 s / 3.5 s); stage2_delivery.check_lean_text passes on the fix. fixes/: AffineEtaleCoverComponentCriterion.lean, <item>.lean-record.json, <item>.report.md."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.AffineEtaleCoverComponentCriterion",
+  "declaration": "AlgebraicGeometry.affineEtaleCover_componentCriterion",
+  "file": "lean/Sheaf/TraceFormula/AffineEtaleCoverComponentCriterion.lean",
+  "statement": "theorem affineEtaleCover_componentCriterion (C : Type u) [CommRing C] : (∀ x : PrimeSpectrum C, Set.range (componentSpectrumMap C x) = connectedComponent x) ∧ ((∀ x : PrimeSpectrum C, IsStrictlyHenselianLocalRing (componentRing C x)) ↔ Scheme.IsEtaleAcyclic (Spec (.of C)))",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.affineEtaleCover_componentCriterion",
+   "AlgebraicGeometry.componentIdeal",
+   "AlgebraicGeometry.componentRing",
+   "AlgebraicGeometry.componentRing.instCommRing",
+   "AlgebraicGeometry.componentSpectrumMap"
+  ],
+  "note": "Reviewer fix (NT-cc second reading, 2026-10-18): condition (i) is stated with the landed AlgebraicGeometry.Scheme.IsEtaleAcyclic (def-trf-etale-acyclic-scheme, Sheaf.AlgebraicGeometry.EtaleAcyclic, in the delivery's base) instead of the delivered private copy EtaleCoverSplits (H4); it is the same condition: every Type u-indexed jointly surjective family of objects of the small etale site (Spec C).Etale has a section of the coproduct cover. Helpers componentIdeal (I_Z), componentRing (C_Z = C/I_Z) with its quotient CommRing instance, and componentSpectrumMap (Spec C_Z -> Spec C) are recorded here; the module is now a module-system file with the proof-dependency imports and the node's seven proof steps in the docstring. The DAG edge to def-trf-etale-acyclic-scheme is not in stmt_deps (the node spells condition (i) out citing def-weil-pbc-etale-site).",
+  "fixed_by": "NT-stage2-cc-e885fcf76"
  }
 }

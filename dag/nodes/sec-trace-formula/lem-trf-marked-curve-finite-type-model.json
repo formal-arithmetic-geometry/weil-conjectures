@@ -20,7 +20,8 @@
   "def-weil-flat-morphism",
   "def-weil-geometric-fibre",
   "def-weil-pbc-adic-completion",
-  "def-weil-pbc-multivariate-power-series"
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-multipointed-curve"
  ],
  "proof": [
   {
@@ -319,5 +320,23 @@
   "group": "Q82",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-dae64420f (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the sources in full. The item statement is unchanged; its 'finitely presented' must mean 01TP finite presentation, which step 2 uses correctly. The Temkin PDF is not in the literature directory, so the proof is correctly marked agent-written from Stacks and the report carries a WANTED line. Step 1: the slopmaster2-closed Noetherian approximation has a small cofiltered index (structure checked), and directed-cofinal clause (2) reindexes it by a directed set without changing the limit; the stages are Noetherian, hence qcqs. Steps 2-4 match spreading-out 01ZM (1)/(2), closed-immersion descent 01ZP (local finite type from permanence (f)) and flatness descent 04AI with Y_0=S_i, and each hypothesis holds. Step 5 uses the new node with d=1 and d=0. Steps 6-7 build T as the reduced closure of the image of the generic point; S maps into T because S is reduced (radical-ideal argument), T is integral and of finite type over Z, and the map is dominant. Step 8 uses only the non-semistable base-change clause of lem-trf-semistable-marked-base-change, which is in the same unit. Step 9: Spec k(S)->Spec k(T) is flat, qc and surjective, so it is a singleton fpqc covering, also for transcendental extensions; the generic fibres identify with X_eta and D_eta, and the smooth leaf and lem-galois-fpqc-descend-etale (arbitrary fpqc coverings) give smoothness and etaleness. Step 10: the pair isomorphism follows from the descended marking arrow. New node lem-trf-pure-relative-dimension-finite-stage: Stacks limits 0EY2 (l.4587) plus persistence 02NK/02NJ (morphisms l.5564-5594); it is true, a strictly smaller generic tool, and has no duplicate in the DAG. New node lem-trf-smooth-fpqc-base-descent: Mathlib Descent.lean:55-57 (of_pullback_snd_of_descendsAlong) together with LocalFlatDescent.lean:41-42 (DescendsAlong Smooth along Surjective⊓Flat⊓QuasiCompact) is a correct one-line specialization, matching Stacks 02VL. Its Smooth notion is def-sbc-smooth-morphisms, which carries the Smooth match, as precedent leaves do. No cycle; all cited ids exist; no SGA source. I accept the declared tool_uses: directed-cofinal, the descend-closed-immersion and descend-flat lemmas, reduced-induced, spreading-out, galois etale descent, and the redundantly declared leaves. No fixes were made; review.md has the full checks."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1df79bf30",
+  "group": "N5",
+  "result": "pass",
+  "note": "Item statement and proof unchanged; stmt_deps gains only def-trf-multipointed-curve. Lean matches the node clause by clause: [IsIntegral S][CompactSpace][QuasiSeparatedSpace]; generic point eta as a witness; Smooth/Etale of fiberToSpecResidueField at eta; conclusion has integral T, LFT and QC map to Spec (ULift Z) (terminal, so no universe restriction), IsDominant s with s eta = etaT, a MultipointedCurve over T smooth/etale at etaT, and eX/eD isomorphisms to the pullbacks whose three equations are exactly commutation with the base-changed marking. New def MultipointedCurve is not hollow: comm, Flat, full FP (LFP+QC+QS) for both maps, fibrewise IsPureDimension 1/0 via the existing def-weil-pure-dimension, IsClosedImmersion; empty marking allowed, no separatedness. No duplicate (only Q61's placeholder copy, already returned). Deps exist; lean.statement verbatim; docstrings carry source, blueprint and the ten proof steps. Edge cases (empty D, empty fibres, char p, transcendental generic extension, non-separated X, S already of finite type) covered. nt_compile --json of both siblings: rc 0, no errors or warnings printed; a probe file confirmed the tool reports errors and sorryAx comes only from the theorem body."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.MarkedCurveFiniteTypeModel",
+  "declaration": "AlgebraicGeometry.exists_finite_type_model_of_multipointed_curve",
+  "file": "lean/Sheaf/TraceFormula/MarkedCurveFiniteTypeModel.lean",
+  "statement": "theorem exists_finite_type_model_of_multipointed_curve {S : Scheme.{u}} [IsIntegral S] [CompactSpace S] [QuasiSeparatedSpace S] (P : MultipointedCurve S) (η : S) (hη : IsGenericPoint η (Set.univ : Set S)) (hXη : Smooth (P.x.fiberToSpecResidueField η)) (hDη : Etale (P.d.fiberToSpecResidueField η)) : ∃ (T : Scheme.{u}) (hT : IsIntegral T) (ηT : T), IsGenericPoint ηT (Set.univ : Set T) ∧ ∃ (s : S ⟶ T), IsDominant s ∧ s η = ηT ∧ ∃ (tZ : T ⟶ Spec (.of (ULift.{u} ℤ))), LocallyOfFiniteType tZ ∧ QuasiCompact tZ ∧ ∃ (P₀ : MultipointedCurve T), Smooth (P₀.x.fiberToSpecResidueField ηT) ∧ Etale (P₀.d.fiberToSpecResidueField ηT) ∧ ∃ (eX : P.X ≅ pullback P₀.x s) (eD : P.D ≅ pullback P₀.d s), eX.hom ≫ pullback.snd P₀.x s = P.x ∧ eD.hom ≫ pullback.snd P₀.d s = P.d ∧ eD.hom ≫ pullback.fst P₀.d s ≫ P₀.i = P.i ≫ eX.hom ≫ pullback.fst P₀.x s",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

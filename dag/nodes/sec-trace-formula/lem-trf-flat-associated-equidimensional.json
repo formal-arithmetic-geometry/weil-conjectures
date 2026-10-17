@@ -232,5 +232,35 @@
   "group": "Q65",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-b78d21093 (reviewer sub-agent of L); spot-checked: I read the whole delivery and checked it against the sources. The item's statement is unchanged and matches Stacks 0GSJ (more-morphisms, lemma-flat-associated-equidimensional) hypothesis by hypothesis. Clause (ii) writes out the meaning of Morphisms 02NJ(3), relative dimension d: all nonempty fibres equidimensional of dimension d. Nothing is weakened, and no base-change morphism or coefficient category is involved. Step 1 is correct. It gets locally finite type fibres from three Mathlib-leaf nodes: lem-weil-pbc-immersion-base-change-lft part (2), lem-weil-pbc-proper-fp-permanence part (e) and lem-weil-pbc-lft-base-change. The fibre of Y over T is the same as its fibre over S because T->S is a closed immersion with the same residue fields. Y_t is irreducible with y as its generic point. Step 2 is correct. It takes a finite type affine open U and gets dim U finite from lem-kun-dimension-finite-type (Lean-closed). Then dim Y_t = dim U by lem-sc-dimension-locally-algebraic, which matches Varieties 0A21(3). Y_t is nonempty, so d >= 0, and Y_t is never assumed quasi-compact. Step 3 is correct. lem-sc-scheme-sober gives the generic point x of each component C, and the new pointwise node applies at x. d is fixed before s and C are chosen, and empty fibres impose nothing. The new node lem-trf-flat-relative-associated-specialization is exactly Stacks 0GSI (lemma-associated-point-specializes), which I read in full. Its extra equality dim C = dim Y_t is written in the second paragraph of the 0GSI proof. It is also true on its own terms: the generic point of C lies on no other component of the locally Noetherian fibre Y_s, so dim_x(Y_s) = dim C. The node is statement-only and self-contained, cites a defining node for every notion and records three kinds of search. It is not a relabelling or restatement of the item (D1, D2): it needs flatness only at the one chosen point, it is a separate Stacks lemma that Stacks also uses elsewhere, and the item still has to produce the finite d >= 0 and make it uniform. Duplicate search: rg over dag/nodes for 0GSI, associated-point-specializes and the relative assassin finds only nodes that use 0GSJ and lem-trf-fibre-component-relative-associated, which states something different. No blueprint node mentions 0GSI. There is no cycle. The transitive route of unit sk-i-curve-zero contains the Kunneth and Jacobian units. I accept the declared tool uses: lem-weil-pbc-immersion-base-change-lft, lem-weil-pbc-proper-fp-permanence, lem-weil-pbc-lft-base-change, lem-sc-dimension-locally-algebraic and lem-sc-scheme-sober. No SGA is cited. Small cases checked: A^1 over k[t]; xy=t; O/(t), which is not flat at its associated point; the generic point of a DVR, whose closed fibre is empty; and F=0. I made no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-edefc3812",
+  "group": "Q25",
+  "result": "fix",
+  "note": "Item statement matches Stacks 0GSJ/0GSI and the node clause by clause (LocallyOfFiniteType; relative assassin via fibre pullback (tensorPullback), annihilatorAssociatedPrimes and the moduleStalkFunctor stalk; pointwise stalk flatness over O_{S,f(x)}; canonical Mathlib reduced closure subschemes and subschemeMap; hflat over all s in T, all components and generic points; (i) membership in the relative assassin; (ii) ∃ d:ℕ with dim C = d for every component, empty fibres vacuous). No hollow defs, sorry only, docstrings fine, no stray universes, no duplicate helpers found. Fault H13/H4: the delivery re-pointed the record of pqf-def-coherent (~739 citers) from RingedSpace.IsCoherent (Stacks 01BV coherent; the note claiming finite presentation is false) to a new conjunction IsQuasiCoherentFiniteType duplicating Mathlib IsQuasicoherent ∧ IsFiniteType. Fix: fixes/FlatAssociatedEquidimensional.lean uses [F.IsQuasicoherent] [F.IsFiniteType] and drops the CoherentFiniteType import; land with --apply-fixes fixes/ --revert-nodes pqf-def-coherent (drops the CoherentFiniteType module); fixes also has a lean-record note and an updated report. nt_compile: delivered files clean (2.5 s, 3.2 s); fixed module clean (5.0 s); #check shows the expected binders. Removing the HilbertPolynomial/DirectImage.Basic imports breaks the compile, so they stay. merge_delivery.py was not run (landing tools are off-limits), so acceptance of the fix is unconfirmed."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FlatAssociatedEquidimensional",
+  "declaration": "AlgebraicGeometry.flat_associated_equidimensional",
+  "declarations": [
+   "AlgebraicGeometry.closureSubscheme",
+   "AlgebraicGeometry.closureInclusion",
+   "AlgebraicGeometry.closureMap",
+   "AlgebraicGeometry.fibreModule",
+   "AlgebraicGeometry.fibreAssociated",
+   "AlgebraicGeometry.relativeAssassin",
+   "AlgebraicGeometry.moduleFlatAt",
+   "AlgebraicGeometry.flat_associated_equidimensional"
+  ],
+  "statement": "theorem flat_associated_equidimensional {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (F : X.Modules) [F.IsQuasicoherent] [F.IsFiniteType] (y : X) (hy : y ∈ relativeAssassin f F) (hflat : ∀ (s : closureSubscheme (f y)), ∀ C ∈ irreducibleComponents ((closureMap f y).fiber s), ∀ x : (closureMap f y).fiber s, IsGenericPoint x C → moduleFlatAt f F (closureInclusion y ((closureMap f y).fiberι s x))) : (∀ (s : closureSubscheme (f y)), ∀ C ∈ irreducibleComponents ((closureMap f y).fiber s), ∀ x : (closureMap f y).fiber s, IsGenericPoint x C → closureInclusion y ((closureMap f y).fiberι s x) ∈ relativeAssassin f F) ∧ (∃ d : ℕ, ∀ (s : closureSubscheme (f y)), ∀ C ∈ irreducibleComponents ((closureMap f y).fiber s), topologicalKrullDim C = (d : WithBot ℕ∞))",
+  "by": "Q25",
+  "date": "2026-10-18",
+  "file": "lean/Sheaf/TraceFormula/FlatAssociatedEquidimensional.lean",
+  "branch": "newtargets-dag",
+  "existing": false,
+  "note": "Quasi-coherent of finite type [pqf-def-coherent] is rendered by Mathlib's SheafOfModules.IsQuasicoherent and SheafOfModules.IsFiniteType, the node's quasi-coherent and finite-type clauses, as named in the docstring of the recorded module WeilConjectures.AlgebraicGeometry.Coherent. The delivered re-pointing of pqf-def-coherent to a new conjunction definition was reverted by the reviewer. The pointwise predicates relativeAssassin, fibreAssociated and moduleFlatAt are the item-local notions that the node's own statement defines (Divisors 05AT/02OJ, stalk flatness at x).",
+  "fixed_by": "NT-stage2-cc-edefc3812"
  }
 }

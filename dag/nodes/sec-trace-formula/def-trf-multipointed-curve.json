@@ -1,0 +1,108 @@
+{
+ "id": "def-trf-multipointed-curve",
+ "kind": "definition",
+ "title": "Multipointed relative curves",
+ "statement": "Let $T$ be a scheme [def-pc-scheme]. A *multipointed $T$-curve* is a pair of schemes $X,D$ with morphisms $x:X\\to T$, $d:D\\to T$ and a marking $i:D\\to X$ such that $d=x\\circ i$, both $x$ and $d$ are flat [def-weil-flat-morphism] and finitely presented [def-sbc-locally-finite-presentation], every scheme-theoretic fibre [def-pc-scheme-fibre] of $x$ has pure dimension $1$ and every scheme-theoretic fibre of $d$ has pure dimension $0$ [def-weil-pure-dimension], and $i$ is a closed immersion [def-weil-closed-immersion]. The marking $D$ may be empty, and $X\\to T$ is not required to be separated or proper.",
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "§1.2 (definition of a multipointed relative curve) and §3.1, pp. 2--3 and 14--15",
+  "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-scheme-fibre",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pure-dimension",
+  "def-weil-flat-morphism",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A multipointed curve is a flat finitely presented curve with a flat finitely presented zero-dimensional closed marking",
+   "results": "{\"t\": \"2026-10-17T19:11:16Z\", \"tool\": \"leansearch\", \"query\": \"A multipointed curve is a flat finitely presented curve with a flat finitely presented zero-dimensional closed marking\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.mk\", \"WeierstrassCurve\", \"AlgebraicGeometry.Flat\", \"WeierstrassCurve.Affine\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.Flat.instDescScheme\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"eb125d51d390254f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no multipointed-curve definition; reuse the constituent Mathlib declarations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat finitely presented morphisms of pure relative dimensions one and zero with a closed immersion marking",
+   "results": "{\"t\": \"2026-10-17T19:11:18Z\", \"tool\": \"leanfinder\", \"query\": \"flat finitely presented morphisms of pure relative dimensions one and zero with a closed immersion marking\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.IsPreimmersion\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"8c8b025ad519d391\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no multipointed-curve definition; reuse the constituent Mathlib declarations"
+  },
+  {
+   "tool": "grep",
+   "query": "MultipointedCurve|multipointed|pure relative dimension",
+   "results": "{\"t\": \"2026-10-17T19:11:18Z\", \"tool\": \"grep\", \"query\": \"MultipointedCurve|multipointed|pure relative dimension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no multipointed-curve definition; reuse the constituent Mathlib declarations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-marked-curve-finite-type-model",
+  "date": "2026-10-17",
+  "group": "N5"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), the multipointed relative-curve input to the finite-type integral-model step in the nearby-cycle branch.",
+   "via": [
+    "lem-trf-marked-curve-finite-type-model",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.MultipointedCurve",
+  "declaration": "AlgebraicGeometry.MultipointedCurve",
+  "file": "lean/Sheaf/TraceFormula/MultipointedCurve.lean",
+  "statement": "structure MultipointedCurve (T : Scheme.{u})",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "proof_origin": null,
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1df79bf30",
+  "group": "N5",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1df79bf30",
+  "group": "N5",
+  "result": "pass",
+  "note": "Item statement and proof unchanged; stmt_deps gains only def-trf-multipointed-curve. Lean matches the node clause by clause: [IsIntegral S][CompactSpace][QuasiSeparatedSpace]; generic point eta as a witness; Smooth/Etale of fiberToSpecResidueField at eta; conclusion has integral T, LFT and QC map to Spec (ULift Z) (terminal, so no universe restriction), IsDominant s with s eta = etaT, a MultipointedCurve over T smooth/etale at etaT, and eX/eD isomorphisms to the pullbacks whose three equations are exactly commutation with the base-changed marking. New def MultipointedCurve is not hollow: comm, Flat, full FP (LFP+QC+QS) for both maps, fibrewise IsPureDimension 1/0 via the existing def-weil-pure-dimension, IsClosedImmersion; empty marking allowed, no separatedness. No duplicate (only Q61's placeholder copy, already returned). Deps exist; lean.statement verbatim; docstrings carry source, blueprint and the ten proof steps. Edge cases (empty D, empty fibres, char p, transcendental generic extension, non-separated X, S already of finite type) covered. nt_compile --json of both siblings: rc 0, no errors or warnings printed; a probe file confirmed the tool reports errors and sorryAx comes only from the theorem body."
+ }
+}

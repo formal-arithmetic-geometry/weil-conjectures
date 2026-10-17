@@ -183,5 +183,29 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-f3c86f7dc (reviewer sub-agent of L); spot-checked: Read the item and the new node in full, Stacks divisors.tex Tag 080H (lemma-strict-transform-different-centers, statement and proof) and Tag 080G, and the statement/blueprint_update of every cited node. The item matches 080H(2); its extra 'I_Z finite type' comes from def-trf-module-strict-transform and the parent supplies it. The new affine torsion comparison is true: the a-localizations agree, and Gamma_x(M_a)=0 gives xa-torsion => a-torsion. Small cases checked: A=Z,a=2,x=3,M=Z/2 (sides equal); M=Z/3 shows the hypothesis is needed; a=0. Neither node restates its parent, and the DAG search found no duplicate. Three faults fixed in fixes/: (1) B4: new node JSON had 'A\\to B' encoded as a TAB, repaired. (2) C1: step 1 applied lemma-nagata-blowup-invertible-factor, which needs an invertible ideal, to the effective Cartier I_D without lemma-nagata-effective-cartier-is-invertible; now cited and declared as a tool use. (3) C4: steps 2-3 got the module-kernel chart description from def-nagata-strict-transform-chart-ring, a ring quotient for the scheme strict transform, and used the S'_D chart A[xI/xa] without anything identifying it under phi. Rewritten to use only S' charts: phi over S carries b_D^{-1}(Z u D) to b^{-1}(Z u D), both kernels are quasi-coherent by lem-trf-strict-transform-sheaf-kernel (no cycle), and the elementary computations IA[I/a]=aA[I/a] and N~(D(r))=N_r (01I8) give Gamma_(a)(N) and Gamma_(xa)(N); def-pc-module-pullback added. Statements unchanged. Accepted tool uses: lemma-nagata-blowup-invertible-factor, prop-nagata-affine-blowup-chart-cover, lemma-nagata-effective-cartier-is-invertible. No SGA cited.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-61045188c",
+  "group": "Q143",
+  "result": "pass",
+  "note": "Matches Stacks 080H(2) and the node clause by clause: [I.toModules.IsFiniteType]; D.IsInvertible is the nonzerodivisor effective Cartier definition; I*D; recorded blowups; any phi over S with hphi (covers the fixed phi, and the kernel depends only on b∘phi=b_D); F quasi-coherent; hF = Mono of the restriction unit to f⁻¹(S∖V(D)), i.e. no sections supported on f⁻¹D; conclusion is kernelSubobject equality in the common p*F after transporting the I*D complement open through the canonical pullback.map id×phi. Helpers are canonical (pullback.map, preimage, adjunction unit), not hollow, with source and blueprint docstrings and listed in lean.declarations; only the theorem is sorry; the docstring has the 4-step proof; lean.statement is verbatim. Commit touches only the module, the report and the node's lean key. Edge cases (empty, I=0, I=top, D=top, F=0, the k[x]/(x) counterexample without hF) are fine. nt_compile.py --json: rc 0, item 4.5 s, no warnings or errors. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictTransformDifferentCenters",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleStrictTransform_kernel_eq_of_cartier_factor",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.moduleStrictTransformCenterIso",
+   "AlgebraicGeometry.Scheme.Modules.moduleStrictTransformTransportedOpen",
+   "AlgebraicGeometry.Scheme.Modules.moduleStrictTransformTransportedRestriction",
+   "AlgebraicGeometry.Scheme.Modules.moduleStrictTransform_kernel_eq_of_cartier_factor"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictTransformDifferentCenters.lean",
+  "statement": "theorem moduleStrictTransform_kernel_eq_of_cartier_factor {X S : Scheme.{u}} (f : X ⟶ S) (I D : S.IdealSheafData) [I.toModules.IsFiniteType] (hD : D.IsInvertible) (φ : (I * D).blowup ≅ I.blowup) (hφ : φ.hom ≫ I.blowupMap = (I * D).blowupMap) (F : X.Modules) [F.IsQuasicoherent] (hF : Mono ((restrictAdjunction (f ⁻¹ᵁ D.support.compl).ι).unit.app F)) : kernelSubobject (moduleStrictTransformRestriction f I F) = kernelSubobject (moduleStrictTransformTransportedRestriction f I D φ hφ F)",
+  "branch": "newtargets-dag",
+  "by": "Q143",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

@@ -18,7 +18,8 @@
   "def-pc-integral-scheme",
   "def-pc-scheme-fibre",
   "def-sc-generic-point",
-  "def-weil-residue-field"
+  "def-weil-residue-field",
+  "lem-pqf-finite-type-ideal-module"
  ],
  "proof": [
   {
@@ -376,5 +377,23 @@
   "group": "Q68",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-a6d37aaf8 (reviewer sub-agent of L); spot-checked: I read all of it. The item's statement matches Stacks 0811 (flat.tex lemma-flatten-module-pre) hypothesis by hypothesis and is not weakened. New lem-trf-flat-fibre-free-neighbourhood is exactly 080Q (more-morphisms.tex lemma-flat-and-free-at-point-fibre). New lem-trf-affine-generic-rank-blowup is exactly 0810 (lemma-helper-blowup-affine-space). Its rewordings are equivalent to the source: q_p as the preimage of the zero prime of B⊗κ(p) equals pB, and 'g nonzero in the fibre ring' equals g∉p'S', both because B/pB is flat over R/p. I tested 0810 on R=k with N=B/(x); on R=k[t] with N=B/(tx) and I=(t); and on nilpotent h. I tested 080Q on r=0 and on a dual-numbers counterexample without relative flatness. rg over dag/nodes finds no existing node for 080Q, 0810 or the same statements. Both children are strictly smaller than the item and do not restate any of its clauses. Steps 1-9 match the cited statements: rank strata via 080Q and flat-lfp-open; the boundary made Cartier before the existing separation-of-closures theorem, with density preserved so the closures are clopen; the affine hypotheses (finite presentation, flatness via def-pc-scheme-module-flat-over, finiteness via the qc-affine lemma); 0810 on the charts, where the strict transform is the a-power torsion quotient; the extension lemma (also valid under its blueprint_update); the product-ideal common refinement (elementary, acceptable); flat base change of the blowups and calculus (1)/(2) for gluing. One implicit point in step 6: D(g) meets the fibre because the fibre ring is a domain. It is elementary, so I made no change. The dependency graph is acyclic. Everything is on the route except det-nagata-boundary-divisor-cartier, a declared tool use that I accept. No SGA, no fixes, no dropped nodes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ce105b183",
+  "group": "N0",
+  "result": "pass",
+  "note": "Clause-by-clause match with Stacks 0811 lemma-flatten-module-pre (flat.tex 8781-8800). qcqs S; affine+flat+lfp f (= finite presentation, since affine gives qc/qs); qcoh finite-type F; GeometricallyIntegral fibres for all s (Mathlib, fields in universe u); compact open U; finite presentation of F on f^-1 U; stalkwise flatness only at generic points of fibres over U, over O_{S,f(xi)} via stalkMap and the canonical FlatPullbackStalk instance (no global IsFlatOver, so not stronger). Conclusion: exists IsAdmissible B, open V of pullback f B.I.blowupMap, V->S' surjective, moduleStrictTransform of the same centre restricted to V is IsFiniteLocallyFree (variable rank). Declarations read: IsAdmissible, moduleStrictTransform (real cokernel of restriction kernel), IsFiniteLocallyFree, isFiniteType_toModules_sheaf bridge. Single universe; edge cases empty S/U, U=S, F=0 ok. Node diff only lean record + used stmt_dep lem-pqf-finite-type-ideal-module; lean.statement verbatim; all recorded stmt/proof-dep modules imported; no definitions, proof sorry, source/blueprint/proof docstrings present. nt_compile.py --json: rc 0, 21.3 s, no errors or warnings; probe #check/#synth confirmed signature and instance. Second-reading section is by the author (noted, not a fault)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericFreeBlowup",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_admissibleBlowup_fiberwise_finiteLocallyFree",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericFreeBlowup.lean",
+  "statement": "theorem exists_admissibleBlowup_fiberwise_finiteLocallyFree {X S : Scheme.{u}} [CompactSpace S] [QuasiSeparatedSpace S] (f : X ⟶ S) [IsAffineHom f] [Flat f] [LocallyOfFinitePresentation f] (F : X.Modules) [F.IsQuasicoherent] [F.IsFiniteType] (U : S.Opens) (hU : IsCompact (U : Set S)) (hfp : (F.restrict (f ⁻¹ᵁ U).ι).IsFinitePresentation) (hgeom : ∀ s : S, GeometricallyIntegral (f.fiberToSpecResidueField s)) (hflat : ∀ (s : S), s ∈ U → ∀ (ξ : f.fiber s), IsGenericPoint ξ Set.univ → @Module.Flat (S.presheaf.stalk (f (f.fiberι s ξ))) (F.presheaf.stalk (f.fiberι s ξ)) _ _ (Module.compHom _ (f.stalkMap (f.fiberι s ξ)).hom)) : ∃ B : IsAdmissible S U, ∃ V : (Limits.pullback f B.I.blowupMap).Opens, Surjective (V.ι ≫ pullback.snd f B.I.blowupMap) ∧ SheafOfModules.IsFiniteLocallyFree ((@moduleStrictTransform X S f B.I (B.I.isFiniteType_toModules_sheaf B.finiteType) F inferInstance).restrict V.ι)",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

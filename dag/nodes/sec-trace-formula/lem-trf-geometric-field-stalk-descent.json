@@ -263,5 +263,24 @@
   "group": "Q28",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-1b65dbfcf (reviewer sub-agent of L); spot-checked: Read the item (8 steps), the new node, all 19 cited statements, and the sources: Varieties 035U/035W/0384 with proofs, Curves 0C4D arbitrary-field paragraph (curves.tex line 4220), and Algebra 030W. Route is 0C4D -> 0384 -> field stalk -> 030W. Step 1: Zariski lemma applies to F=T/p. Steps 2-4: a prime q over p exists by faithful flatness; S/q is a finite-dimensional domain over Omega, so it equals Omega; kappa(q)=S/q with its structural Omega-algebra structure. Step 5: the localization flatness lemmas give a flat local map A->B, hence faithfully flat, hence injective. Step 6: pA=0, so the residue map A->F is an isomorphism. Step 7: B tensor_Omega H = H gives clause (2) of the new node; clause (1) with E=Omega makes F tensor_k Omega reduced. Step 8: the pc criterion gives separability; with an empty transcendence basis this is separable algebraic. New node lem-trf-geometric-reducedness-local-base-change is exactly 0384 in affine local-ring form via 035W, true with no extra hypotheses. Tested on L=k, R=0, F_p(u)[v]/(v^p-u) with L=k^{1/p}, and R[x]/(x^2+1) over C. It is not a duplicate: rg for 0384, 035W and geometric-reducedness phrasings found only global or other statements. It does not restate a clause of the item. Its form, searches and blueprint ancestry/via are correct. The parent's uses in steps 1, 4 and 9 match the item statement. No SGA is cited, and no target, base-change morphism or coefficient category is involved. Accepted tool_use: lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable, a generic field-theory criterion that no node of sk-i-curve-zero gives. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6cd6876b6",
+  "group": "N3",
+  "result": "pass",
+  "note": "Read the node, all 5 statement deps and their Mathlib declarations (IsAlgClosure, Algebra.FiniteType, Algebra.IsSeparable, Localization.AtPrime/Ideal.ResidueField, TensorProduct with includeRight and the left algebraMap), equivQuotMaximalIdeal (AtPrime/Basic.lean:560, [p.IsMaximal], so its inverse after residue is the canonical residue map), and curves.tex:4220 (0C4D). Every hypothesis and clause matches: finiteness of T/p; a prime over p exists; every such prime is maximal with bijective structural map Omega->kappa(q); for one prime with bijective Omega->S_q, the residue map T_p->T/p is bijective and Algebra.IsSeparable k (T/p). No stronger assumptions; universes u,v,w independent and bound. Edge cases (T=0, T=k, purely inseparable F, k[x], k[e]/e^2) behave correctly, and the statement is true. No definitions; sorry only; source and blueprint docstrings with the 8-step proof; lean.statement verbatim; node unchanged apart from lean; dep copies identical; imports follow the proof plan; no H4 duplicate. nt_compile.py --json clean in 2.5 s with no warnings (an injected-error control confirms the wrapper reports errors). The Second reading section is the standard post-2026-10-17 text. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GeometricFieldStalkDescent",
+  "declaration": "Algebra.geometric_field_stalk_descent",
+  "file": "lean/Sheaf/RingTheory/GeometricFieldStalkDescent.lean",
+  "statement": "theorem geometric_field_stalk_descent (k : Type u) (Ω : Type v) (T : Type w) [Field k] [Field Ω] [CommRing T] [Algebra k Ω] [IsAlgClosure k Ω] [Algebra k T] [Algebra.FiniteType k T] (p : Ideal T) [p.IsMaximal] : Module.Finite k (T ⧸ p) ∧ (∃ q : PrimeSpectrum (T ⊗[k] Ω), q.asIdeal.comap (algebraMap T (T ⊗[k] Ω)) = p) ∧ (∀ q : PrimeSpectrum (T ⊗[k] Ω), q.asIdeal.comap (algebraMap T (T ⊗[k] Ω)) = p → q.asIdeal.IsMaximal ∧ Function.Bijective ((algebraMap (T ⊗[k] Ω) q.asIdeal.ResidueField).comp (Algebra.TensorProduct.includeRight : Ω →ₐ[k] T ⊗[k] Ω).toRingHom)) ∧ ((∃ q : PrimeSpectrum (T ⊗[k] Ω), q.asIdeal.comap (algebraMap T (T ⊗[k] Ω)) = p ∧ Function.Bijective ((algebraMap (T ⊗[k] Ω) (Localization.AtPrime q.asIdeal)).comp (Algebra.TensorProduct.includeRight : Ω →ₐ[k] T ⊗[k] Ω).toRingHom)) → Function.Bijective ((IsLocalization.AtPrime.equivQuotMaximalIdeal p (Localization.AtPrime p)).symm.toRingHom.comp (IsLocalRing.residue (Localization.AtPrime p))) ∧ Algebra.IsSeparable k (T ⧸ p))",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The structural Ω-algebra identifications are bijectivity of the canonical maps from Ω through the right tensor factor. The conditional conclusion is bijectivity of the canonical residue map to T/p, not an arbitrary ring isomorphism."
  }
 }

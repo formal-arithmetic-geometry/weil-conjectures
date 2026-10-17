@@ -143,27 +143,23 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pdc2105 (reviewer sub-agent of L); spot-checked: Clauses checked against literature/stacks-project modules.tex 01BV (coherent: finite type + finite-type kernels of O_U^n->F|_U), 01B5 (finite type), 01BE plus Schemes 01IA (affine tilde form of quasi-coherence): match. No duplicate definition node (grep of definition nodes for coherent/quasi-coherent/finite type). Mathlib: SheafOfModules.IsQuasicoherent/IsFiniteType/IsFinitePresentation exist but no Stacks-coherent class, so no mathlib_match; project isCoherent (qcoh+fp) correctly not attached. FIX more, RETURN less: source.external still read Tag 01DW (wrong tag, the report and second reading claimed it corrected) -> replaced by 01BV, 01B5, 01BE, 01IA; inline citation now names the tags. Note: the Stacks checkout is present, so the report's WANTED is moot.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "WeilConjectures.AlgebraicGeometry.Coherent",
-  "declaration": "AlgebraicGeometry.RingedSpace.IsCoherent",
-  "declarations": [
-   "AlgebraicGeometry.RingedSpace.IsCoherent"
-  ],
-  "file": "lean/WeilConjectures/AlgebraicGeometry/Coherent.lean",
-  "statement": "def IsCoherent (X : RingedSpace.{u}) (F : SheafOfModules.{u} (moduleRings X)) : Prop",
-  "branch": "sheaf-dag",
-  "by": "C1",
-  "date": "2026-10-11",
+  "module": "Sheaf.AlgebraicGeometry.CoherentFiniteType",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.IsQuasiCoherentFiniteType",
+  "statement": "def Scheme.Modules.IsQuasiCoherentFiniteType {X : Scheme.{u}} (F : X.Modules) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-18",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFiniteType.lean",
   "existing": false,
-  "fixed_by": "R-pdc1131",
-  "note_upsync_e47": "re-attached at the upstream sync e47efb5a5: Sheaf.AlgebraicGeometry.Coherent retired, the source module WeilConjectures.AlgebraicGeometry.Coherent declares the same names"
+  "note": "The recorded IsCoherent declaration means quasi-coherent plus finite presentation, whereas this node states quasi-coherent plus finite type. This dependency module supplies exactly the node's finite-type notion."
  },
  "reviewed_lean": {
-  "date": "2026-10-11",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "R-pdc1131",
-  "group": "C1",
+  "reviewer": "NT-stage2-cc-edefc3812",
+  "group": "Q25",
   "result": "fix",
-  "note": "Stacks 01BV/01B5/01BE matched clause by clause; finite type and quasi-coherent are Mathlib SheafOfModules.IsFiniteType/IsQuasicoherent (private copies removed: they shadowed [M.IsQuasicoherent] on X.Modules, compiled); IsCoherent on SheafOfModules (moduleRings X) like H1 siblings, usable with F : X.Modules via X.toRingedSpace; no free universes"
+  "note": "Item statement matches Stacks 0GSJ/0GSI and the node clause by clause (LocallyOfFiniteType; relative assassin via fibre pullback (tensorPullback), annihilatorAssociatedPrimes and the moduleStalkFunctor stalk; pointwise stalk flatness over O_{S,f(x)}; canonical Mathlib reduced closure subschemes and subschemeMap; hflat over all s in T, all components and generic points; (i) membership in the relative assassin; (ii) ∃ d:ℕ with dim C = d for every component, empty fibres vacuous). No hollow defs, sorry only, docstrings fine, no stray universes, no duplicate helpers found. Fault H13/H4: the delivery re-pointed the record of pqf-def-coherent (~739 citers) from RingedSpace.IsCoherent (Stacks 01BV coherent; the note claiming finite presentation is false) to a new conjunction IsQuasiCoherentFiniteType duplicating Mathlib IsQuasicoherent ∧ IsFiniteType. Fix: fixes/FlatAssociatedEquidimensional.lean uses [F.IsQuasicoherent] [F.IsFiniteType] and drops the CoherentFiniteType import; land with --apply-fixes fixes/ --revert-nodes pqf-def-coherent (drops the CoherentFiniteType module); fixes also has a lean-record note and an updated report. nt_compile: delivered files clean (2.5 s, 3.2 s); fixed module clean (5.0 s); #check shows the expected binders. Removing the HilbertPolynomial/DirectImage.Basic imports breaks the compile, so they stay. merge_delivery.py was not run (landing tools are off-limits), so acceptance of the fix is unconfirmed."
  },
  "lead_note": "L 2026-10-11 15:21 UTC (B-1521): source.external tag corrected 01DW -> 01BV (coherent modules, Sheaves of Modules; the statement already cites 01BV; E1 ceac4548f, R-pco).",
  "blueprint_update": {

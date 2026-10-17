@@ -140,5 +140,24 @@
   "group": "Q64",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-f67067743 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, the cited definition nodes, the citer lem-trf-flattening-module-by-admissible-blowup (steps 8 and 10), and Stacks 05I3 (full proof), 05CL, 05CM, 00HM and 05FT. The mathematics is correct and the item statement is unchanged; it matches 05I3 applied over each R_p plus 05CL (4)=>(1). Small cases checked: R=0, r=0, H_q=0, and R=k[t], A=R[x], N=A/(t), where the flatness hypothesis at xi fails as it should. Step 1: the hypotheses of the local node hold over R_p at q=pA_p=xi_p. Step 2: 05CL is applied in the right direction. Step 3: the local node gives the forward implication and a flat-extension argument gives the converse. The local node is exactly 05I3 (1)=>(2) and is strictly smaller than the item, so it is not a D1 restatement. The stalk node is 05CL (1)<=>(4). The rg search found no duplicates and there are no off-unit citations. Repairs: (1) the 05FT projectivity node is cited by no node, since the item proof does not use it and statement-only nodes cannot, so it is dropped; (2) step 2's 'preserved by further localization' (05CM) and step 3's 'standard diagram chase' (00HM) are now written out as elementary arguments (E5/C2); (3) the local node now cites def-weil-affine-spectrum and def-weil-pbc-module-localization for Spec and N_q (B3). No SGA source used, no tool_uses.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b9205e1a",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Read node, 7 stmt deps with lean records, Stacks 05I3 (flat.tex), the module, report and node JSON (only the lean field differs from the side clone). Clause by clause the Lean matches the node. Mathlib GeometricallyIntegral includes nonempty fibres, matching 'nonzero domain'. hξ fixes ξ_p as ker(A→κ(p)⊗A), so the family is unique. Flatness is stated over R for the localized modules; the R-action is the standard one (probe-checked smul'_mk) and flat_iff_of_isLocalization makes this equivalent to flatness over R_p. α.baseChange κ(ξ p) bijective; H = N ⧸ range α. Universal injectivity over L : Type (max u w), documented and ULift-equivalent: not a fault. Edge cases R=0, A=0 over a nonempty base, r=0, α=id checked. No duplicate in Mathlib or the side tree. lean.statement verbatim. Docstrings carry the source place, blueprint tag and three proof steps; sorry only; report sections present. nt_compile --json: rc 0, clean, 8.4 s."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FreeSubtractionFlatness",
+  "declaration": "Module.free_subtraction_flatness",
+  "file": "lean/Sheaf/RingTheory/FreeSubtractionFlatness.lean",
+  "statement": "theorem free_subtraction_flatness (R A : Type u) [CommRing R] [CommRing A] [Algebra R A] [Module.Flat R A] [Algebra.FinitePresentation R A] [GeometricallyIntegral (Spec.map (CommRingCat.ofHom (algebraMap R A)))] (N : Type v) [AddCommGroup N] [Module A N] [Module R N] [IsScalarTower R A N] [Module.Finite A N] (r : ℕ) (α : (Fin r → A) →ₗ[A] N) (ξ : PrimeSpectrum R → PrimeSpectrum A) (hξ : ∀ p : PrimeSpectrum R, (ξ p).asIdeal = RingHom.ker (Algebra.TensorProduct.includeRight : A →ₐ[R] p.asIdeal.ResidueField ⊗[R] A)) (hgenericFlat : ∀ p : PrimeSpectrum R, Module.Flat R (LocalizedModule (ξ p).asIdeal.primeCompl N)) (hgenericBasis : ∀ p : PrimeSpectrum R, Function.Bijective (α.baseChange (ξ p).asIdeal.ResidueField)) : (∀ (L : Type (max u w)) [AddCommGroup L] [Module R L], Function.Injective ((α.restrictScalars R).lTensor L)) ∧ ∀ q : PrimeSpectrum A, Module.Flat R (LocalizedModule q.asIdeal.primeCompl N) ↔ Module.Flat R (LocalizedModule q.asIdeal.primeCompl (N ⧸ LinearMap.range α))",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The generic primes ξ are specified uniquely by the kernels of the canonical maps into the fibre rings. Flatness of each localized module is expressed over R, equivalently over R_p for its canonical localized-base action, by Module.flat_iff_of_isLocalization; no hypothesis or conclusion is changed."
  }
 }

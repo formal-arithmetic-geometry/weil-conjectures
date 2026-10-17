@@ -242,5 +242,24 @@
   "group": "Q46",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-8a6b7978d (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks algebra.tex l.10220-10255 (Tag 0C2X, lemma-separable-algebraic-diagonal). The statement matches the source with no finiteness assumed; the three-condition form is equivalent and is proved in step 7. All 7 steps are correct. Step 2: the generators leaf and the primitive-element leaf are applied to E=k(b_i) with their hypotheses met. Step 3: polynomial representatives come from the last clause of the minimal-polynomial leaf, and F(t)=x is verified with k-coefficients moved across the tensor sign. Step 4: the geometric-sum identity gives Q(alpha)=P'(alpha) without dividing by j. Step 5: evaluating the Bezout identity shows P'(alpha) is nonzero in every characteristic. Step 6: P(t)=0 because p_j is in k, and Q(t)(t-alpha⊗1)=P(t), so sx=0. Step 7: the fraction map is well defined, a ring homomorphism, and bijective. Small cases checked: k1=k, C/R (s=1⊗i+i⊗1 kills 1⊗i-i⊗1), F4/F2 (Q(alpha)=1), and Qbar/Q. The inseparable F_p(u)/F_p(u^p) case shows the separability hypothesis is needed. Every cited node is an unmerged Mathlib leaf or definition, so there is no route issue and no tool_uses. There are no new nodes, and a DAG-wide search for 0C2X and separable-algebraic-diagonal found no duplicate. Fix (C1/C4): steps 1, 3 and 6 rely on the ring structure of k1⊗_k k1, on c↦c⊗1 being a ring homomorphism, and on μ being a ring homomorphism, but only the module tensor-product node was cited. I added the existing Mathlib leaf lem-weil-pbc-algebra-tensor-pushout-universal-property: clause (1) gives the ring structure, and clause (2) with f=g=id makes μ an algebra homomorphism. It is now in stmt_deps and in the text and uses of steps 1, 3 and 6, and proof_deps is recomputed. The statement text is unchanged. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b422a5d68",
+  "group": "Q10",
+  "result": "fix",
+  "note": "Statement matches node and Stacks 0C2X (algebra.tex l.10220-10255): fields k (Type u), k1 (Type v), [Algebra k k1], [Algebra.IsSeparable k k1] (implies algebraic), no finiteness, characteristic or universe restriction; conclusion is exists S : Submonoid (k1 tensor_k k1) with the node's three localization clauses for Algebra.TensorProduct.lmul' k (unit images, c = mu x * (mu s)^-1, kernel killed by S), which are the IsLocalization fields, neither weaker nor stronger. lean.statement verbatim in file; node differs from base only in lean; dependency records and mathlib_match used. Searches of Mathlib (lmul' with IsLocalization, RingTheory/Unramified, RingTheory/Etale), side lean/Sheaf, lean/WeilConjectures and slopmaster2 found no duplicate (Paper/FiniteFieldDerivedTensorSummand cites 0C2X for a different statement). Edge cases k1=k, infinite algebraic extensions and all characteristics are covered. No hollow definitions, proof is only sorry, Mathlib imports, lines <= 100. nt_compile --json: delivered file clean in 3.8 s, fixed file clean in 5.9 s (a broken probe file confirmed errors are reported). Finding H8: the theorem docstring lacked the node's proof step by step; fixes/SeparableAlgebraicDiagonalLocalization.lean adds the 7 steps with a byte-identical signature, so the record is unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.SeparableAlgebraicDiagonalLocalization",
+  "declaration": "Algebra.separableAlgebraicDiagonalLocalization",
+  "statement": "theorem separableAlgebraicDiagonalLocalization (k : Type u) (k₁ : Type v) [Field k] [Field k₁] [Algebra k k₁] [Algebra.IsSeparable k k₁] : ∃ S : Submonoid (k₁ ⊗[k] k₁), (∀ s : k₁ ⊗[k] k₁, s ∈ S → IsUnit (Algebra.TensorProduct.lmul' k s)) ∧ (∀ c : k₁, ∃ x : k₁ ⊗[k] k₁, ∃ s : k₁ ⊗[k] k₁, s ∈ S ∧ c = Algebra.TensorProduct.lmul' k x * (Algebra.TensorProduct.lmul' k s)⁻¹) ∧ (∀ x : k₁ ⊗[k] k₁, Algebra.TensorProduct.lmul' k x = 0 → ∃ s : k₁ ⊗[k] k₁, s ∈ S ∧ s * x = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/FieldTheory/SeparableAlgebraicDiagonalLocalization.lean",
+  "fixed_by": "NT-stage2-cc-b422a5d68"
  }
 }

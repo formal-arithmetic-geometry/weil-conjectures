@@ -1,0 +1,104 @@
+{
+ "id": "def-trf-purely-transcendental-extension",
+ "kind": "definition",
+ "title": "Purely transcendental field extension",
+ "status": "split",
+ "statement": "Let $K/k$ be a field extension [def-pc-field-extension]. It is *purely transcendental* if there is a subset $T\\subseteq K$ algebraically independent over $k$ [def-kun-transcendence-degree] such that $k(T)=K$, where $k(T)$ is the smallest intermediate field containing $T$. Equivalently, $K/k$ is isomorphic over $k$ to the field of fractions of a polynomial ring over $k$, with any set of variables, including the empty set.",
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-kun-transcendence-degree"
+ ],
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 030E, definition-transcendence (1)--(3); field generators give the equivalent formulation of (3)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "PurelyTranscendental|purelyTranscendental|purely transcendental",
+   "results": "[grep] OK 2 hit(s); Mathlib/FieldTheory/AlgebraicClosure.lean; Mathlib/RingTheory/Smooth/Field.lean. Nearby results do not define the predicate; AlgebraicIndependent.aevalEquivField gives its rational-function-field interpretation, not the predicate itself.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A purely transcendental field extension is generated as a field by an algebraically independent subset",
+   "results": "[leansearch] OK 8 hit(s); isTranscendenceBasis_iff_algebraicIndependent_isAlgebraic; IsTranscendenceBasis.isAlgebraic_field; AlgebraicIndependent.option_iff; isTranscendenceBasis_iff_maximal; IsPurelyInseparable.isAlgebraic; exists_isTranscendenceBasis_superset; isAlgebraic_iff_exists_isTranscendenceBasis_subset; isStronglyTranscendental_iff_of_field. Nearby results do not define the predicate; AlgebraicIndependent.aevalEquivField gives its rational-function-field interpretation, not the predicate itself.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicIndependent, IntermediateField.adjoin",
+   "results": "[loogle] OK 10 hit(s); AlgebraicIndependent.aevalEquivField; AlgebraicIndependent.reprField; AlgebraicIndependent.aevalEquivField_apply_coe; AlgebraicIndependent.aevalEquivField_algebraMap_apply_coe; AlgebraicIndependent.lift_reprField; AlgebraicIndependent.liftAlgHom_comp_reprField; IntermediateField.algebraicIndependent_adjoin_iff; Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable. Nearby results do not define the predicate; AlgebraicIndependent.aevalEquivField gives its rational-function-field interpretation, not the predicate itself.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-elementary-module-devissage",
+  "date": "2026-10-17",
+  "group": "NZ"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 proof paragraph 2: apply elementary devissage and replace the module by its finite pushforward on a smooth family. Purely transcendental residue extension in the elementary module devissage, Stacks 057S conclusion (5).",
+   "via": [
+    "lem-trf-elementary-module-devissage",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.FieldTheory.PurelyTranscendentalExtension",
+  "declaration": "Algebra.IsPurelyTranscendentalExtension",
+  "file": "lean/Sheaf/FieldTheory/PurelyTranscendentalExtension.lean",
+  "statement": "def IsPurelyTranscendentalExtension (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K] : Prop",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ad8ad234d",
+  "group": "NZ",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ad8ad234d",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Checked every clause of Stacks 057S and the node against the Lean: canonical fibre pullback (tensorPullback along fiberι); support = non-Subsingleton stalks; n = topologicalKrullDimAt on the support subspace; Etale g and e with residue isos; g≫f=f'≫e and i≫f'=π≫h; four IsAffine; closed immersion lfp+qc+qs (= finite presentation, not stronger); IsFinite π; finite-type quasi-coherent G with Nonempty (pushforward i G ≅ tensorPullback g F); SmoothOfRelativeDimension n h; GeometricallyIntegral h (nonempty fibres, which 057L arranges); i z'=x', h(π z')=s', π⁻¹{π z'}={z'}; purely transcendental via the canonical residueFieldMap. No extra hypotheses or universe restriction. New def-trf-purely-transcendental-extension is exactly Stacks 030E(3), not hollow, covers the empty basis (n=0); no existing notion; §5 fields complete. Item node changes only lean plus stmt_deps gaining the new node; lean.statement verbatim in both files. Docstrings carry source, blueprint id and the seven proof steps; tensorPullback convention followed; private proof-dependency imports present; lines ≤100. nt_compile.py --json on both files: rc 0, no errors or warnings (warn.sorry off). Minor, no action: item TeX does not bracket-cite the new node, which §5 forbids changing."
+ }
+}

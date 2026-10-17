@@ -235,5 +235,43 @@
   "group": "Q115",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-2c1c9146b (reviewer sub-agent of L); spot-checked: Read the item and all three new nodes in full, every cited statement, and Stacks etale-cohomology section-ph-etale with proofs (0DDW, 0DE4, 0DE5), 0DDI with proof, and sites-cohomology 0DD7 with proof. The item statement is unchanged and matches 0DE5 exactly: any scheme, D^+, local torsion with no common annihilator, Ab coefficients, a_T = pi_T after epsilon_T. The Zariski+proper-surjective generated topology equals Stacks ph by 0DBQ. Steps: (1) the composite geometric morphism and Grothendieck abelianness hold via def-trf-geometric-morphism and prop-pur with O=Z; (2) the epsilon unit is iso by 0DE4(1)+0DDW, and the acyclic comparison plus the derived Hom bijection identify the derived unit; pi_* is exact restriction with identity unit (0DDI); (3) the composition normalization's hypotheses all hold, and both factors are invertible; (4) the 0DD7 torsion representative gives a chain isomorphism by unit naturality; (5) Leray acyclicity plus the transpose computation, where R^+ vs unbounded R agree on bounded-below objects via K-injective resolutions (standard, not a gap). The worker's source-typo notes (0DE5 composite order, 0DE4(3), 0DD7 injective terms) are correct and harmless. All three new nodes are true, strictly smaller, non-restating, and correctly formed: the epsilon node keeps the small-etale origin G = pi^{-1}F, and the representative follows from the 0DD7 equivalence plus truncation inside the Serre subcategory. They were tested on the empty scheme, 0, Q/Z, shifts, and char-p torsion. rg over the DAG and the main-20261015 blueprint found no duplicates. I accept the tool uses prop-pur-kinjective-resolutions-exist, src-right-derived-functor-plus-acyclic-unit, lem-pc-derived-adjoint-functors, lem-sfb-derived-composition-adjunction-normalization and lem-weil-pbc-site-sheaves-enough-injectives (a Mathlib leaf) as generic homological tools. No SGA is used. No changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2408e226e",
+  "group": "Q135",
+  "result": "fix",
+  "note": "Statement matches the node and Stacks 0DE5 clause by clause: any scheme T, Mathlib small etale site, recorded ph presentation, K in D+, local torsion (Sheaf.IsTorsion) in every degree with no common annihilator, the canonical unit Adjunction.derivedPlus.unit, IsIso. Real helpers built from Mathlib sheaf pullback/pushforward/adjunction; the sorry'd continuity and left-exactness theorems are clauses of the node and are true; the HasDerivedCategory.{max (w+1) (u+2)} instance hypotheses are satisfiable, so no silent universe restriction. Record verbatim, node unchanged outside lean, tags correct, no duplicates, no pro-etale substitute. Delivered file compiles clean with nt_compile (rc=0). FIX: added the missing proof-dependency import Sheaf.CategoryTheory.TorsionSheafComplexRepresentative (that node's module landed 2 min before the delivery commit); the fixed file compiles clean (rc=0), statement unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PhEtaleTorsionComparison",
+  "declaration": "AlgebraicGeometry.Scheme.isIso_phEtale_derivedUnit",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.phEtaleInclusion",
+   "AlgebraicGeometry.Scheme.phEtaleInclusion_isContinuous",
+   "AlgebraicGeometry.Scheme.phEtaleInclusion_preservesFiniteLimits",
+   "AlgebraicGeometry.Scheme.phEtaleInclusion_representablyFlat",
+   "AlgebraicGeometry.Scheme.phEtaleAbelianInverse",
+   "AlgebraicGeometry.Scheme.phEtaleAbelianDirect",
+   "AlgebraicGeometry.Scheme.phEtaleAbelianAdjunction",
+   "AlgebraicGeometry.Scheme.phEtaleAbelian_hasSheafify",
+   "AlgebraicGeometry.Scheme.phEtaleInverse_leftExact",
+   "AlgebraicGeometry.Scheme.phEtaleAbelianInverse_preservesFiniteLimits",
+   "AlgebraicGeometry.Scheme.phEtaleGeometricMorphism",
+   "AlgebraicGeometry.Scheme.phEtaleAbelianInverse_preservesFiniteColimits",
+   "AlgebraicGeometry.Scheme.phEtaleAbelianInverse_additive",
+   "AlgebraicGeometry.Scheme.phEtaleAbelianDirect_preservesFiniteLimits",
+   "AlgebraicGeometry.Scheme.phEtaleAbelianDirect_additive",
+   "AlgebraicGeometry.Scheme.isIso_phEtale_derivedUnit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PhEtaleTorsionComparison.lean",
+  "statement": "theorem isIso_phEtale_derivedUnit (T : Scheme.{u}) [HasDerivedCategory.{max (w + 1) (u + 2)} (Sheaf T.smallEtaleTopology AddCommGrpCat.{max w (u + 1)})] [HasDerivedCategory.{max (w + 1) (u + 2)} (Sheaf (phModelTopology.{u, w} T) AddCommGrpCat.{max w (u + 1)})] (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology AddCommGrpCat.{max w (u + 1)})) (hK : ∀ q : ℤ, ((DerivedCategory.Plus.homologyFunctor (Sheaf T.smallEtaleTopology AddCommGrpCat.{max w (u + 1)}) q).obj K).IsTorsion) : IsIso ((phEtaleAbelianAdjunction.{u, w} T).derivedPlus.unit.app K)",
+  "branch": "newtargets-dag",
+  "by": "Q135",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helpers construct the site inclusion, its geometric morphism and canonical abelian adjunction. The continuity and left-exactness clauses of the same DAG statement are separately named theorems with proof docstrings; no functor or map is arbitrary. The main theorem uses Adjunction.derivedPlus.unit, with local torsion in every cohomology degree.",
+  "fixed_by": "NT-stage2-cc-2408e226e"
  }
 }

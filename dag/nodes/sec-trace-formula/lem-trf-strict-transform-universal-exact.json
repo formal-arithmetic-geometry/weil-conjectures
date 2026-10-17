@@ -243,5 +243,27 @@
   "group": "Q70",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-745ce57e9 (reviewer sub-agent of L); spot-checked: I read Stacks 080W (divisors.tex, lemma-strict-transform-universally-injective: statement and full proof) and Definition 080D with its text on E and pr^{-1}E. The item matches 080W hypothesis by hypothesis, except that the centre is limited to a finite-type ideal; that limit comes from the existing def-trf-module-strict-transform, and the only citer (lem-trf-flattening-module-by-admissible-blowup, Stacks 0815 paragraph 3) uses exactly this conclusion. I opened every one of the 18 proof_deps and checked it against its use. Step 1: the principalization node gives the local generator a, so the exceptional set on Z is V(a); the adjunction node's counit, clause (3), gives the identification. Step 2: the kernel node's sectionwise kernel and clause (3) of the cokernel-image node (literally stated there) give the short exact sequence of modules. Step 3: T_n=Spec(A/a^n) is an S-scheme; pasting, open base change, the affine fibre product C/a^nC, composition of pullbacks and tilde pullback give N_i/a^nN_i, so N1/a^n injects into N2/a^n; n=0 is vacuous. Step 4: the kernel of N_s->N_{sa} is the a-power torsion of N_s and equals the localized T_i (fractions checked both ways), and clause (4) gives the quotient. Steps 5-6: the element chase a^n(x-i(z))=0 is correct; it fixes Stacks' x-y typo, which the report flags as a source error. Step 7: kernels and cokernels are preserved and the local-to-global argument is written out. Small cases: Z, 2 with 0->Z->Z->Z/2->0 (not universally exact) fails in the middle, as expected; a unit, a=0 or nilpotent, and split sequences all behave correctly. Every used unit is in the route of sk-i-curve-zero; the two recorded tool_uses (lem-pc-ringed-space-tensor-pullback-qcoh, lem-sc-tilde-preserves-finite-limits) are accepted and harmless. No cycle, no new nodes, no duplicate found by rg, no SGA. No fixes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ca532c461",
+  "group": "Q144",
+  "result": "pass",
+  "note": "Read the node, Stacks divisors.tex 080W (lines 9037-9073), def-trf-module-strict-transform and its live module, and the tensorPullback, blowup and fibre-product dependencies. Every clause matches: IdealSheafData with toModules.IsFiniteType, three IsQuasicoherent instances, C.ShortExact, the universal hypothesis via tensorPullback (pullback.fst f t) for all T : Scheme.{u}, and a ShortExact conclusion on pullback f I.blowupMap. The helper moduleStrictTransformMap is the canonical cokernel.map/kernel.map along unit naturality, with domain and codomain literally moduleStrictTransform, so it is not hollow or arbitrary. Restricting T to the same universe only weakens the hypothesis; the source proof needs only S^b and Spec(A/a^n). Edge cases checked: unit, zero and nilpotent ideals, empty schemes, n=0, and Z-2->Z->Z/2. The commit has 3 files, and the node changes only by the lean key. The statement field is verbatim. Docstrings give the source, the blueprint and all 7 steps. The only proof is sorry. nt_compile: rc 0, 8.6 s, no warnings. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleStrictTransformUniversalExact",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleStrictTransform_shortExact_of_universallyShortExact",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.moduleStrictTransformMap",
+   "AlgebraicGeometry.Scheme.Modules.moduleStrictTransform_shortExact_of_universallyShortExact"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleStrictTransformUniversalExact.lean",
+  "statement": "theorem moduleStrictTransform_shortExact_of_universallyShortExact {X S : Scheme.{u}} (f : X ⟶ S) (I : S.IdealSheafData) [I.toModules.IsFiniteType] (C : ShortComplex X.Modules) [C.X₁.IsQuasicoherent] [C.X₂.IsQuasicoherent] [C.X₃.IsQuasicoherent] (hC : C.ShortExact) (hbase : ∀ (T : Scheme.{u}) (t : T ⟶ S), ∃ w : (tensorPullback (pullback.fst f t)).map C.f ≫ (tensorPullback (pullback.fst f t)).map C.g = 0, (ShortComplex.mk ((tensorPullback (pullback.fst f t)).map C.f) ((tensorPullback (pullback.fst f t)).map C.g) w).ShortExact) : ∃ w : moduleStrictTransformMap f I C.f ≫ moduleStrictTransformMap f I C.g = 0, (ShortComplex.mk (moduleStrictTransformMap f I C.f) (moduleStrictTransformMap f I C.g) w).ShortExact",
+  "branch": "newtargets-dag",
+  "by": "Q144",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

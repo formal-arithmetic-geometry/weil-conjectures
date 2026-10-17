@@ -14,7 +14,9 @@
   "def-nagata-admissible-blowup",
   "def-trf-module-strict-transform",
   "pqf-def-coherent",
-  "def-weil-pbc-module-finite-type-presentation"
+  "def-weil-pbc-module-finite-type-presentation",
+  "lem-pqf-finite-type-ideal-module",
+  "def-pc-module-stalk-functor"
  ],
  "proof": [
   {
@@ -472,5 +474,23 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-fdae5604f (reviewer sub-agent of L); spot-checked: I read the item, all seven new nodes and every cited statement in full, and checked them against literature/stacks-project: flat.tex 0815 (statement and full proof), 0814, 0811, 080Y, 057S, 05I3 and 081N; divisors.tex 080K, 080I, 080F, 080W and 080G; algebra 05CL. The item statement is unchanged and faithful to 0815: 'f quasi-compact' over a qcqs S is equivalent to 'X quasi-compact'. All 13 steps check out. The base case uses 056J(2). The empty-source diagrams make the bases cover S, as 0814 needs. The finite-presentation check across i and pi uses 00F4(4), 0564 and transitivity, and the kernel argument over B/J is right. Flatness over R' uses the etale-flat and unramified flat-of-base-flat statements. The hypotheses of 0811 are met. alpha and W are built with the image of W open by 00I1, and W->S is surjective, so the fibres are nonempty as the free-subtraction node needs. The dimension drop to n-1 is proved explicitly. The 080W exact sequence and the flatness equivalence move flatness from H back to F on affine charts of the blowup. Gluing uses calculus (1) and 0814. The final finite-presentation step uses 081N. New nodes: all are statement-only, self-contained, with created and blueprint fields set and five searches each; none restates a clause of the item. I tested them on small cases: free-subtraction is checked by localising at p, with R=k, A=k[t], N=A+A/(t), plus the k[eps] example showing the flatness hypothesis is needed; generic-free-blowup with U empty; dense-presentation over a DVR; devissage over a field. Duplicate search over dag/nodes by tag and phrase: thm-nagata-composition-of-blowups states only the scheme part of calculus (1), and lem-trf-strict-transform-composition is the scheme version of 080I(2); neither duplicates the module calculus node. I accept the 22 declared tool uses as generic black boxes. Fix (C1/C4): step 13 applied det-nagata-boundary-divisor-cartier without citing where the ideal with V(I)=S\\U comes from. I added lemma-nagata-qc-open-complement-ideal-exists to the step-13 text, its uses, proof_deps and split_report.tool_uses, and checked that this creates no cycle. The corrected item is at fixes/dag/nodes/sec-trace-formula/lem-trf-flattening-module-by-admissible-blowup.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60b704d51",
+  "group": "Q120",
+  "result": "pass",
+  "note": "Read node, Stacks flat.tex Tag 0815 (theorem-flatten-module), all 9 stmt_deps and the exact declarations (IsAdmissible with fields I/finiteType/disjoint_support; moduleStrictTransform = cokernel of kernel of p*F -> j_*j^*p*F with retained centre; isFiniteType_toModules_sheaf; RingedSpace.moduleStalkFunctor). Every clause matches: qcqs S via CompactSpace/QuasiSeparatedSpace; QuasiCompact + LocallyOfFinitePresentation f; F quasi-coherent of finite type; U a compact open; hfp = IsFinitePresentation of the restriction to f^-1 U; hflat = stalk flatness over O_{S,f x} for f x in U; exists B : IsAdmissible S U with S' = B.I.blowup; strict-transform stalks flat over the blowup stalks via pullback.snd, plus global IsFinitePresentation on the fibre product. No extra assumptions; one universe as the pullback requires; edge cases U empty, U = S, empty schemes and zero module are fine. Added stmt_deps (lem-pqf-finite-type-ideal-module, def-pc-module-stalk-functor) are landed and used in the type; lean.statement matches the file verbatim; only sorry; source/blueprint/proof-step docstrings present; lines <= 100; no definitions, so nothing hollow; no pro-etale content, no live write. nt_compile.py --json on the snapshot text: rc 0, 8.9 s, no messages (warn.sorry=false in the lakefile; a broken variant with a false example failed as expected, so the file is really elaborated). Report has a real Worker report; the Second reading section is the standard post-2026-10-17 direct-delivery text, which is accepted. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatteningModuleByAdmissibleBlowup",
+  "declaration": "AlgebraicGeometry.exists_flat_finitePresentation_moduleStrictTransform_admissibleBlowup",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatteningModuleByAdmissibleBlowup.lean",
+  "statement": "theorem exists_flat_finitePresentation_moduleStrictTransform_admissibleBlowup {S X : Scheme.{u}} [CompactSpace S] [QuasiSeparatedSpace S] (f : X ⟶ S) [QuasiCompact f] [LocallyOfFinitePresentation f] (F : X.Modules) [F.IsQuasicoherent] [F.IsFiniteType] (U : S.Opens) (hU : IsCompact (U : Set S)) (hfp : ((Scheme.Modules.restrictFunctor (f ⁻¹ᵁ U).ι).obj F).IsFinitePresentation) (hflat : ∀ x : X, f x ∈ U → Module.Flat (S.presheaf.stalk (f x)) ((ModuleCat.restrictScalars (f.stalkMap x).hom).obj ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F))) : ∃ B : IsAdmissible S U, (∀ x : (Limits.pullback f B.I.blowupMap : Scheme.{u}), Module.Flat (B.I.blowup.presheaf.stalk ((pullback.snd f B.I.blowupMap) x)) ((ModuleCat.restrictScalars ((pullback.snd f B.I.blowupMap).stalkMap x).hom).obj ((RingedSpace.moduleStalkFunctor (Limits.pullback f B.I.blowupMap).toRingedSpace x).obj (@Scheme.Modules.moduleStrictTransform X S f B.I (B.I.isFiniteType_toModules_sheaf B.finiteType) F inferInstance)))) ∧ (@Scheme.Modules.moduleStrictTransform X S f B.I (B.I.isFiniteType_toModules_sheaf B.finiteType) F inferInstance).IsFinitePresentation",
+  "branch": "newtargets-dag",
+  "by": "Q120",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

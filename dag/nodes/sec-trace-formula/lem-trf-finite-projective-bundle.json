@@ -244,5 +244,23 @@
   "group": "N8",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-3ba4f25e5 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited node's statement, including def-nagata-relative-proj, def-nagata-affine-proj and def-weil-pbc-quasi-coherent-algebra. The item statement matches Stacks morphisms.tex Tag 0B3I (morphisms-lemma-finite-projective) read with Definition 01W8(1), with no hypothesis added and the statement unchanged. The steps check: E=h_*O_T is quasi-coherent of finite type (def-weil-finite-integral-morphism). B has B_0=O_S and B_n=E, and its sections over an affine are C=R plus positive copies of A, by the tilde/Gamma clauses (2)-(4). Sym(E)->B is graded and surjective because a[n]=q(j(a)j(1)^{n-1}), so functoriality clause (3) gives the closed immersion. In Step 4, a[n]^2=t(a^2)[2n-1] puts every prime containing t over C_+, so Proj C=D_+(t); the cover clause alone would not do this, since t does not generate C_+. In Step 5, C_(t),0 is A: equality of fractions a[m]/t^m comes down to equality of coefficients. Step 6 glues on affine refinements and never assumes an overlap is affine. I tested S empty, A=0, A=R, A=R/I, k[eps] over k, RxR, and R->A not injective; all work. Duplicate search (rg for 0B3I, lemma-finite-projective and finite/projective wording) found no node stating this; the hits are citers or unrelated statements. There are no new nodes. I accept the seven declared tool_uses as generic black boxes: none replaces a step of the sk-i-curve-zero route. The source typo the report notes (R[x]->Sym(A) where A is meant) is real and does not affect the delivery. One fix, B3/C4: Step 3 formed Proj_S(B) without citing the relative-Proj definition or the quasi-coherent-algebra hypothesis. I added [def-weil-pbc-quasi-coherent-algebra] and [def-nagata-relative-proj] to Step 3's text and uses and recomputed proof_deps, in fixes/dag/nodes/sec-trace-formula/lem-trf-finite-projective-bundle.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-01680b5c2",
+  "group": "Q115",
+  "result": "pass",
+  "note": "Delivery adds only the lean field, the module FiniteProjectiveBundle.lean (proof is sorry) and the report. Statement `isProjectiveBundle_of_isFinite {T S : Scheme.{u}} (h : T ⟶ S) [IsFinite h] : IsProjectiveBundle h` matches the node and Stacks 0B3I with 01W8(1) (morphisms.tex l.11237, l.10488): IsFinite is the recorded Mathlib declaration of def-weil-finite-integral-morphism; IsProjectiveBundle (read in ProjectiveBundleMorphism.lean) is an E quasi-coherent of finite type plus a closed immersion into relProj(Sym E) with i ≫ relProjHom = h. No extra hypotheses, single universe forced by the hom, lean.statement verbatim. Edge cases (empty schemes, identity, non-reduced, non-Noetherian) covered. No hollow definitions; source and blueprint docstrings present, six-step proof in the docstring; no pro-etale, global build or live write. Report has Worker report and Second reading sections. No duplicate (IsHProjective is a different convention). nt_compile.py --json on the snapshot: 3.7 s, rc=0, no errors or warnings. Minor: unused non-public proof-dependency imports, no action."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FiniteProjectiveBundle",
+  "declaration": "AlgebraicGeometry.isProjectiveBundle_of_isFinite",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FiniteProjectiveBundle.lean",
+  "statement": "theorem isProjectiveBundle_of_isFinite {T S : Scheme.{u}} (h : T ⟶ S) [IsFinite h] : IsProjectiveBundle h",
+  "branch": "newtargets-dag",
+  "by": "Q115",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

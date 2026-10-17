@@ -203,5 +203,29 @@
   "group": "Q37",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-762c97fe0 (reviewer sub-agent of L); spot-checked: I read all of it: the item, all four steps, every cited node's statement, Stacks divisors.tex Section strict-transform (paragraph before 080D, 080D (1)(2), 080E proof), properties.tex 07ZP, and unit sk-i-curve-zero. The statement agrees with 080D. Its extra clauses are true. Edge cases checked: Z empty, Z=S (Bl empty), F=0, affine chart. No duplicate statement exists, and no new nodes were added. I repaired three faults in fixes/dag/nodes/sec-trace-formula/lem-trf-strict-transform-sheaf-kernel.json. (1) C1/C8, step 3: it quoted Tag 07ZP with no node (no DAG node states it) and used lemma-nagata-power-torsion-quotient-torsionfree, which is off-route, not Lean-closed and not declared in tool_uses. I rewrote step 3 as a direct sheaf argument from cokernel-image (1),(3) and the affine basis, and dropped that dependency. (2) C4/E4, step 4: it claimed the kernel equals the ideal of X' 'exactly by 080D(2)', but def-nagata-strict-transform is the scheme-theoretic closure. The new step 4 identifies (X x_S U) x_U (S' x_S U) with the qcqs open Y minus D, then uses def-nagata-scheme-theoretic-closure/-image to get ker(O_Y -> j_*O) = K_0, and lem-weil-pbc-quasi-coherent-ideal-closed-subscheme with def-sbc-closed-immersion-ideal-sheaf and def-weil-closed-immersion to get O^st ≅ i_*O_{X'}. The step is now marked non-elementary. (3) C1 minor, step 2: quasi-coherence of the restriction to Y minus D had no citation; it now cites module-pullback quasi-coherence applied to j. Step 1 is correct (the 07ZT retrocompactness argument); I only made its prose precise. I accept the five declared tool_uses as generic tools. The graph is still acyclic, and uses equal the bracketed citations. Statement, stmt_deps, blueprint and tool_uses are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-94f46290e",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Read node (only the lean record added vs side HEAD), the delivered ModuleStrictTransformKernel.lean, the report (Worker report and Second reading by Q14 present), the dependency ModuleStrictTransform.lean, Compactification/StrictTransform.lean (IdealSheafData.strictTransform with U = I.support.compl, same open as moduleStrictTransformOpen), idealOfOpens, Mathlib unitToPushforwardObjUnit, and Stacks divisors.tex 080D with the paragraph before it. Every clause matches: Epi of the canonical cokernel pi; kernel = supported sections via the restriction unit on every open; kernel and F^st quasi-coherent; IsIso after restriction to the complement; no supported sections; for O_X, kernel = idealOfOpens of the strict-transform ideal and an iso to i_*O_X' compatible with both quotient maps. The helper defs are canonical and not hollow; proofs are sorry only, with docstrings carrying the proof steps; no extra hypotheses; single universe u; lean.statement verbatim. Edge cases checked: I = top, I = bottom, F = 0, X empty. nt_compile --json per-file compile against the local side overlay: rc=0, no errors (45.2 s)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleStrictTransformKernel",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleStrictTransform_properties",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.moduleStrictTransformπ",
+   "AlgebraicGeometry.Scheme.Modules.moduleStrictTransformStructureMap",
+   "AlgebraicGeometry.Scheme.Modules.moduleStrictTransform_properties",
+   "AlgebraicGeometry.Scheme.Modules.moduleStrictTransform_structureSheaf"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleStrictTransformKernel.lean",
+  "statement": "theorem moduleStrictTransform_properties {X S : Scheme.{u}} (f : X ⟶ S) (I : S.IdealSheafData) [I.toModules.IsFiniteType] (F : X.Modules) [F.IsQuasicoherent] : Epi (moduleStrictTransformπ f I F) ∧ (∀ (V : (Limits.pullback f I.blowupMap).Opens) (s : Γ((tensorPullback (pullback.fst f I.blowupMap)).obj F, V)), (moduleStrictTransformπ f I F).app V s = 0 ↔ (moduleStrictTransformRestriction f I F).app V s = 0) ∧ (moduleStrictTransformKernel f I F).IsQuasicoherent ∧ (moduleStrictTransform f I F).IsQuasicoherent ∧ IsIso ((restrictFunctor (moduleStrictTransformOpen f I).ι).map (moduleStrictTransformπ f I F)) ∧ (∀ (V : (Limits.pullback f I.blowupMap).Opens) (s : Γ(moduleStrictTransform f I F, V)), ((restrictAdjunction (moduleStrictTransformOpen f I).ι).unit.app (moduleStrictTransform f I F)).app V s = 0 → s = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

@@ -208,5 +208,32 @@
   "group": "Q83",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q83-d3f930519 (reviewer sub-agent of L); spot-checked: Read the item, all cited nodes and sources, unit route, DAG policies, and delivery errors. Verified all four proof steps, canonical comparison directions, coefficient categories, hypotheses, edge cases, duplicate search, and accepted generic composition tool. Wrote review.md; no repairs needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f84169051",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Node change is lean-only; statement field verbatim in file; one sorry; source and blueprint docstrings; report has Worker report and Second reading by NQ. Clauses match: Ω alg. closed, arbitrary Z and h; dependency coefficient encoding ModuleCat(ULift Z) with curriedTensor; S_D and C_s are the mapDerivedCategory functors; beta = geometricPointDerivedSectionsIso; gamma = recorded geometricPointSectionsConstantsIso moved through the left-derived/termwise isos; upper map = rightDerivedLowerStarProjectionMap; lower map is word for word the body of constantDerivedProjectionMap; alpha = delta_S, then inverse unit, then beta_E; right map = beta_N then R(1 tensor gamma_M); equation for all E, M with no invertibility assumed. Classical.choice monoidal stalk is uniquely fixed by stalk_factors_monoidal; rfl probe confirms the unit adjunction is the same choice. nt_compile --json on side overlay: module clean (10.7 s, 14.0 s), probe clean (7.6 s); rfl probe of the lower-map identity hit the 60 s limit, identity confirmed by reading the source. No duplicates, no extra hypotheses, universes bound. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricPointProjectionComparison",
+  "declaration": "AlgebraicGeometry.Etale.geometricPoint_projection_comparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricPointProjectionComparison.lean",
+  "statement": "theorem geometricPoint_projection_comparison (Ω : Type u) [Field Ω] [IsAlgClosed Ω] {Z : Scheme.{u}} (h : Z ⟶ Spec (.of Ω)) : GeometricPointProjectionSquare (upperStar GeometricPointIntegerModule h).leftDerivedFunctor (lowerStar GeometricPointIntegerModule h).rightDerivedFunctor (geometricPointStalk Ω).mapDerivedCategory (geometricPointConstants Ω).mapDerivedCategory (constantSheaf Z.smallEtaleTopology GeometricPointIntegerModule).leftDerivedFunctor (rightDerivedGlobalSections GeometricPointIntegerModule Z) (geometricPointDerivedSectionsIso Ω h) (geometricPointProjectionCoefficientIso Ω h) (geometricPointSectionsStalkAdjunction Ω).mapDerivedCategoryAdjunction.unit (rightDerivedLowerStarProjectionMap GeometricPointIntegerModule h) ((derivedConstantGlobalSectionsAdjunction GeometricPointIntegerModule Z).rightAdjointProjectionMap (constantSheaf Z.smallEtaleTopology GeometricPointIntegerModule).leftDerivedTensorComparison)",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Etale.GeometricPointIntegerModule",
+   "AlgebraicGeometry.Etale.geometricPointDerivedStalkMonoidal",
+   "AlgebraicGeometry.Etale.geometricPointDerivedSectionsStalkUnitIsIso",
+   "AlgebraicGeometry.Etale.geometricPointProjectionCoefficientIso",
+   "AlgebraicGeometry.Etale.GeometricPointProjectionSquare",
+   "AlgebraicGeometry.Etale.geometricPoint_projection_comparison"
+  ],
+  "note": "GeometricPointProjectionSquare is a transparent formula for the original square, universally quantified over E and M. The theorem specializes its functors, monoidal stalk, invertible germ unit, canonical beta and gamma, and the two recorded counit-defined projection transformations; it assumes none of their compatibility. The lower transformation is exactly the one evaluated by constantDerivedProjectionMap. Factoring the equation at the abstract categorical level avoids kernel expansion of specialized derived tensor objects; the file remains one module and uses the default 60-second compilation limit."
  }
 }

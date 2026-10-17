@@ -322,5 +322,23 @@
   "group": "Q11",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-c05d29cd7 (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes and every cited node statement in full. Sources checked: Curves 0C49, 0C4C, 0C4D and 0C4E plus definition-multicross; Varieties 0C52, 0C54, 0C4Y, 0C50 and 0384; DPA 09Q1, 09Q3 and 09Q6. The item statement agrees with 0C4D (1)<=>(5) combined with 0C4E and is unchanged. All 9 steps check against their cited statements, all hypotheses are present, there is no cycle and no SGA is used. The four new nodes are true, are not duplicates (I grepped all the tags) and none restates a clause of the item. Small cases tested: uv, the smooth line, the double line, char-2 u^2+uv+v^2, a purely inseparable residue field, and the field, regular-curve and nodal-hypersurface cases of the CI lemma. Repairs: (E1) Step 2 applied formal-Jacobian (b)=>(a), which needs an isomorphism of complete local F-algebras, but the node hypothesis (def-trf-nodal-geometric-fibres and Stacks) gives only a ring isomorphism. I added the equivalent condition (c), a ring-isomorphism form, to lem-trf-formal-jacobian-quadratic-criterion; it follows from 0C49 (1) being invariant under ring isomorphism, then 0C49 (1)=>(3). Step 2 now cites (c)=>(a). (E5/B2) lem-trf-separable-closed-point-formal-presentation did not require the surjection to be F-linear through the section, and did not say its base-change clause holds for every presentation, which step 9 relies on. I clarified both and reworded step 9 to match. All the generic commutative-algebra tool_uses declared in the split_report are accepted. The corrected files are under fixes/dag/nodes/sec-trace-formula/.; 3 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bc9ab53af",
+  "group": "Q134",
+  "result": "pass",
+  "note": "Read item node, all 14 dependency records and the Lean source of firstFittingIdealSheaf, IsLocalCompleteIntersection, HasNodalGeometricFibres, IsPureDimension, residueFieldAlgebraMap; checked against Stacks curves.tex 0C4D (1)<=>(5) and 0C4E. Every hypothesis and conclusion clause matches the node: geometric point over x via pullback.fst, ring iso of the adic completion with Omega[[u,v]]/(uv) (same encoding as the recorded nodal-fibres def), finite + separable via the canonical residue embedding, affine LCI neighbourhood with the f-induced algebra, Fitting ideal mapped along the germ equals m_x (=O_{Z,x}=kappa(x)). No stronger assumptions; universes bound; edge cases (empty scheme, smooth point, uv in char 2, cusp, double line, inseparable residue field) consistent. No definitions, only sorry; docstrings with source and blueprint plus 9-step plan; node unchanged except lean, statement verbatim. nt_compile --json: rc=0, no errors, 4.0 s."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalPointLocalCriterion",
+  "declaration": "AlgebraicGeometry.nodalPoint_iff_separable_lci_firstFitting",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalPointLocalCriterion.lean",
+  "statement": "theorem nodalPoint_iff_separable_lci_firstFitting {k : Type u} [Field k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [LocallyOfFiniteType f] (hpure : C.IsPureDimension 1) (x : C) (hx : x ∈ closedPoints C) (Ω : Type u) [Field Ω] [Algebra k Ω] [IsAlgClosure k Ω] : (∃ y : pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap k Ω))), pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k Ω))) y = x ∧ Nonempty (AdicCompletion (IsLocalRing.maximalIdeal ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))).presheaf.stalk y)) ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))).presheaf.stalk y) ≃+* (MvPowerSeries (Fin 2) Ω ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) Ω) * (MvPowerSeries.X 1 : MvPowerSeries (Fin 2) Ω)}))) ↔ (f.residueFieldAlgebraMap x).Finite ∧ @Algebra.IsSeparable k (C.residueField x) _ _ (f.residueFieldAlgebraMap x).toAlgebra ∧ ∃ (U : C.affineOpens) (hxU : x ∈ U.1) (hfg : @Algebra.FiniteType k Γ(C, U.1) _ _ ((f.appLE ⊤ U.1 le_top).hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom).toAlgebra), @Algebra.IsLocalCompleteIntersection k Γ(C, U.1) _ _ ((f.appLE ⊤ U.1 le_top).hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom).toAlgebra hfg ∧ ((Scheme.firstFittingIdealSheaf f).ideal U).map (C.presheaf.germ U.1 x hxU).hom = IsLocalRing.maximalIdeal (C.presheaf.stalk x)",
+  "branch": "newtargets-dag",
+  "by": "Q134",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

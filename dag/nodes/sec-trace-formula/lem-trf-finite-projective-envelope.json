@@ -315,10 +315,10 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-8a7cbdb51",
-  "group": "Q06",
-  "result": "fix",
-  "note": "Statement matches node clause by clause: IsAffine B, d:ℕ, finite h into 𝔸(ULift (Fin d); B), ∃ P j p with IsOpenImmersion j, IsProjective p (side IsHProjective+QuasiCompact = def-pc-projective-morphism convention), IsProper p, j ≫ p = h ≫ structural map, ∀ b, topologicalKrullDim (p.fiber b) ≤ d in WithBot ℕ∞. No extra hypotheses or universe restriction; edge cases d=0, empty T/fibres (⊥), non-Noetherian base, non-dominant h covered. No definitions, only sorry, docstrings carry source/blueprint and six proof steps; lean.statement verbatim; report has Worker report and Second reading by Q06; no existing duplicate found. nt_compile --json: clean rc=0 (negative control errors as expected). Only finding (H8): theorem docstring step 3 had 'r ≫ j' for the factorization, corrected to 'j ≫ r' in fixes/lean/Sheaf/TraceFormula/FiniteProjectiveEnvelope.lean (whole file, signature unchanged, compiles clean)."
+  "reviewer": "NT-stage2-cc-ac0f27c77",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Re-delivery of Q06's unlanded item; the Lean file is Q06's reviewer-fixed file (j ≫ r) plus one docstring sentence matching node step 6. Clause by clause exact: [IsAffine B], d:ℕ, h : T ⟶ 𝔸(ULift (Fin d); B) [IsFinite h], ∃ P j p, IsOpenImmersion j ∧ IsProjective p (side IsHProjective+QuasiCompact = def-pc-projective-morphism) ∧ IsProper p ∧ j ≫ p = h ≫ structural map ∧ ∀ b, topologicalKrullDim (p.fiber b) ≤ d. No extra hypotheses or universe restriction; edge cases d=0, empty T/fibres, non-dominant maps, non-Noetherian base covered. All 9 stmt_deps declarations match. No defs, only sorry, source/blueprint docstrings with six proof steps; lean.statement verbatim (whitespace-normalized); node otherwise identical to main; no duplicate found by rg; Worker report plus Q06 second reading, Q72 section is the accepted placeholder. nt_compile --json rc=0 in 2.4 s with no messages; negative control rc=1. Only note: a stale Q06 reviewed_lean in the delivered node, which merge_delivery overwrites from the current main node, so no fix is needed."
  },
  "lean": {
   "module": "Sheaf.TraceFormula.FiniteProjectiveEnvelope",
@@ -326,9 +326,8 @@
   "file": "lean/Sheaf/TraceFormula/FiniteProjectiveEnvelope.lean",
   "statement": "theorem exists_finite_projective_envelope {B T : Scheme.{u}} [IsAffine B] (d : ℕ) (h : T ⟶ 𝔸(ULift.{u} (Fin d); B)) [IsFinite h] : ∃ (P : Scheme.{u}) (j : T ⟶ P) (p : P ⟶ B), IsOpenImmersion j ∧ IsProjective p ∧ IsProper p ∧ j ≫ p = h ≫ (𝔸(ULift.{u} (Fin d); B) ↘ B) ∧ ∀ b : B, topologicalKrullDim (p.fiber b) ≤ (d : WithBot ℕ∞)",
   "branch": "newtargets-dag",
-  "by": "Q06",
-  "date": "2026-10-17",
-  "existing": false,
-  "fixed_by": "NT-stage2-cc-8a7cbdb51"
+  "by": "Q72",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

@@ -21,7 +21,8 @@
   "def-sbc-locally-finite-presentation",
   "def-weil-residue-field",
   "def-weil-affine-spectrum",
-  "def-pc-integral-scheme"
+  "def-pc-integral-scheme",
+  "def-trf-purely-transcendental-extension"
  ],
  "proof": [
   {
@@ -265,5 +266,23 @@
   "group": "Q36",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-777435e82 (reviewer sub-agent of L); spot-checked: I read the whole item, both new nodes, and the statement of every cited node against the Stacks sources: flat.tex 057Q (lines 446-491), 057S (statement and full proof), 057R, and more-morphisms.tex 057K (1)-(6) and 057L (7). The item matches 057S clause by clause and is not weakened. Its extra hypothesis x in Supp(F_s) was inherited from the item's creator. It makes dim_x meaningful and is harmless. The node lem-trf-finite-type-sheaf-fp-support is exactly 057Q; I tested it on F=0, a hyperplane support, and a non-noetherian base. The node lem-trf-etale-finite-smooth-local-structure is exactly 057K+057L; I tested the n=0 case. It generalizes the existing 02LK node and does not duplicate it. Neither new node restates a clause of the item. Steps 1-7 check out: every hypothesis is present (affine T and W, closed immersion D->T, v etale by cancellation, affine j for 02KG with the right orientation), and the residue-field argument via gi=jb is correct. I accept the declared tool use lem-weil-pbc-closed-immersion-residue-field-iso; the other off-unit citations are Mathlib leaves or Lean-closed nodes, and there is no SGA citation. I made two repairs, written as whole files under fixes/dag/nodes/sec-trace-formula. (a) The item and the 057K node cited def-sbc-smooth-morphisms (smooth of relative dimension 0) for 'etale', but every etale lemma the steps use, and the parent, uses def-weil-etale-morphism, and no step cited a bridge between them. I now cite def-weil-etale-morphism for etale and keep def-sbc for 'smooth of relative dimension n'. The two notions are equivalent, so the meaning is unchanged. (b) Step 6 never checked that pi lies over S'; it now shows f'i=h pi and a(s_1)=s. No node is dropped. Details are in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ad8ad234d",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Checked every clause of Stacks 057S and the node against the Lean: canonical fibre pullback (tensorPullback along fiberι); support = non-Subsingleton stalks; n = topologicalKrullDimAt on the support subspace; Etale g and e with residue isos; g≫f=f'≫e and i≫f'=π≫h; four IsAffine; closed immersion lfp+qc+qs (= finite presentation, not stronger); IsFinite π; finite-type quasi-coherent G with Nonempty (pushforward i G ≅ tensorPullback g F); SmoothOfRelativeDimension n h; GeometricallyIntegral h (nonempty fibres, which 057L arranges); i z'=x', h(π z')=s', π⁻¹{π z'}={z'}; purely transcendental via the canonical residueFieldMap. No extra hypotheses or universe restriction. New def-trf-purely-transcendental-extension is exactly Stacks 030E(3), not hollow, covers the empty basis (n=0); no existing notion; §5 fields complete. Item node changes only lean plus stmt_deps gaining the new node; lean.statement verbatim in both files. Docstrings carry source, blueprint id and the seven proof steps; tensorPullback convention followed; private proof-dependency imports present; lines ≤100. nt_compile.py --json on both files: rc 0, no errors or warnings (warn.sorry off). Minor, no action: item TeX does not bracket-cite the new node, which §5 forbids changing."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ElementaryModuleDevissage",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_elementary_module_devissage",
+  "file": "lean/Sheaf/TraceFormula/ElementaryModuleDevissage.lean",
+  "statement": "theorem exists_elementary_module_devissage {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (F : X.Modules) [F.IsFiniteType] [F.IsQuasicoherent] (x : X) (hx : ¬ Subsingleton (((tensorPullback (f.fiberι (f x))).obj F).presheaf.stalk (f.asFiber x))) : ∃ (n : ℕ), topologicalKrullDimAt (⟨f.asFiber x, hx⟩ : {q : f.fiber (f x) | ¬ Subsingleton (((tensorPullback (f.fiberι (f x))).obj F).presheaf.stalk q)}) = (n : WithBot ℕ∞) ∧ ∃ (X' Z' Y' S' : Scheme.{u}) (g : X' ⟶ X) (e : S' ⟶ S) (f' : X' ⟶ S') (i : Z' ⟶ X') (π : Z' ⟶ Y') (h : Y' ⟶ S') (x' : X') (s' : S') (z' : Z') (G : Z'.Modules), Etale g ∧ Etale e ∧ g x' = x ∧ e s' = f x ∧ IsIso (g.residueFieldMap x') ∧ IsIso (e.residueFieldMap s') ∧ g ≫ f = f' ≫ e ∧ i ≫ f' = π ≫ h ∧ IsAffine X' ∧ IsAffine Z' ∧ IsAffine Y' ∧ IsAffine S' ∧ IsClosedImmersion i ∧ LocallyOfFinitePresentation i ∧ QuasiCompact i ∧ QuasiSeparated i ∧ IsFinite π ∧ G.IsFiniteType ∧ G.IsQuasicoherent ∧ Nonempty ((pushforward i).obj G ≅ (tensorPullback g).obj F) ∧ SmoothOfRelativeDimension n h ∧ GeometricallyIntegral h ∧ i z' = x' ∧ h (π z') = s' ∧ (π ⁻¹' ({π z'} : Set Y')) = {z'} ∧ (letI : Algebra (S'.residueField (h (π z'))) (Y'.residueField (π z')) := (h.residueFieldMap (π z')).hom.toAlgebra Algebra.IsPurelyTranscendentalExtension (S'.residueField (h (π z'))) (Y'.residueField (π z')))",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

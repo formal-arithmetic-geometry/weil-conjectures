@@ -18,7 +18,8 @@
   "def-weil-closed-points",
   "def-weil-residue-field",
   "def-weil-pbc-separable-algebraic-extension",
-  "def-pc-field-extension"
+  "def-pc-field-extension",
+  "def-trf-orgogozo-induction-data"
  ],
  "proof": [
   {
@@ -266,5 +267,24 @@
   "group": "Q74",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-a255be686 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-trf-rational-node-quadratic-completion and every cited statement in full, against Stacks curves.tex 0C49 (and the nondegeneracy definition before it), 0C4D (statement and whole proof), 0CBT, 0CBU, definition-split-node, 0CBW, definition-nodal and the first proof of 0CBY. Steps 1-2: flatness and local finite presentation hold, the Fitting node's hypotheses are exactly the item's own geometric-fibre hypotheses, and the unramified-over-field criterion gives that x is closed with kappa(x)/k finite separable. Step 3: the F-rational lift z lies in Sing after base change to F, so it is nonsmooth, and the hypothesis applies at the induced point over an algebraic closure of F. Step 4: the dimension and closedness arguments are correct; the three dimension nodes are accepted as generic tool uses. Step 5: every hypothesis of the new node is met. Steps 6-7 are elementary and I checked them by hand: the identity (2aT+b)^2-4ap=Delta, the discriminant t^2*Delta for s+tr, Vieta r*r2=c/a, Delta=a^2(r-r2)^2, and both inverse substitutions; characteristic 2 is covered. Step 8 applies the every-presentation clause of lem-trf-separable-closed-point-formal-presentation with n=2, section = structure map, kernel (q) in (u,v); the point given by that clause is the K-rational point x' over x, and permanence gives K/k finite separable. The new node is the rational case of 0C4D (3)=>(2) plus 0C49 (3). Stacks' definition-nodal asks only for a ring isomorphism, matching the node. Tested on uv, u^2+v^2 over R and u^2+uv+v^2 over F2; the cusp and double line are excluded by the hypothesis. It is not a duplicate of the local-criterion, lci, Jacobian-quadratic, field-stalk or formal-presentation nodes, and not a restatement of an item clause. Form checks B1-B9 pass. The route is preserved and no SGA is used. No changes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1e8e2eb44",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: finite type as LocallyOfFiniteType+QuasiCompact; algebraically closed Omega/k as ring maps k->Omega in Type u (weaker hypothesis, so the theorem is stronger and still true); C_Omega as pullback; IsPureDimension 1 is vacuous on the empty scheme; nonsmooth means no smooth open neighbourhood; the geometric completion is a ring iso to nodeRing Omega, as in the node; conclusion: closedPoints, residueFieldAlgebraMap Finite and IsSeparable, K with i: kappa(x)->K with K/k finite separable and finrank <= 2, x' over x via pullback.fst, residue map of pullback.snd bijective (K-rational), IsOrdinaryDoublePoint (K-algebra iso via localScalar), matching Stacks 0CBW(3), 0CBT, 0CBU and the split-node definition. Only lean and stmt_deps changed; stmt_deps gains the landed def-trf-orgogozo-induction-data, no cycle over 19179 nodes. lean.statement verbatim. No definitions, sole sorry, source and blueprint docstrings, 8 proof steps. nt_compile --json: rc=0, no diagnostics, 4.3 s; the tool's error reporting confirmed on a /tmp copy with a deliberate error. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalPointFiniteSeparableSplitting",
+  "declaration": "AlgebraicGeometry.nodal_point_finite_separable_splitting",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalPointFiniteSeparableSplitting.lean",
+  "statement": "theorem nodal_point_finite_separable_splitting {k : Type u} [Field k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f] (hgeom : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (ι : k →+* Ω), (pullback f (Spec.map (CommRingCat.ofHom ι))).IsPureDimension 1 ∧ ∀ y : pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom ι)), (¬ ∃ U : (pullback f (Spec.map (CommRingCat.ofHom ι))).Opens, y ∈ U ∧ Smooth (U.ι ≫ pullback.snd f (Spec.map (CommRingCat.ofHom ι)))) → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal ((pullback f (Spec.map (CommRingCat.ofHom ι))).presheaf.stalk y)) ((pullback f (Spec.map (CommRingCat.ofHom ι))).presheaf.stalk y) ≃+* Orgogozo.nodeRing Ω)) (x : C) (hx : ¬ ∃ U : C.Opens, x ∈ U ∧ Smooth (U.ι ≫ f)) : x ∈ closedPoints C ∧ (f.residueFieldAlgebraMap x).Finite ∧ @Algebra.IsSeparable k (C.residueField x) _ _ (f.residueFieldAlgebraMap x).toAlgebra ∧ ∃ (K : Type u) (_ : Field K) (i : C.residueField x →+* K), (i.comp (f.residueFieldAlgebraMap x)).Finite ∧ @Algebra.IsSeparable k K _ _ (i.comp (f.residueFieldAlgebraMap x)).toAlgebra ∧ @Module.finrank (C.residueField x) K _ _ i.toAlgebra.toModule ≤ 2 ∧ ∃ x' : pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (i.comp (f.residueFieldAlgebraMap x)))), pullback.fst f (Spec.map (CommRingCat.ofHom (i.comp (f.residueFieldAlgebraMap x)))) x' = x ∧ Function.Bijective (Scheme.Hom.residueFieldAlgebraMap (pullback.snd f (Spec.map (CommRingCat.ofHom (i.comp (f.residueFieldAlgebraMap x))))) x') ∧ Orgogozo.IsOrdinaryDoublePoint (pullback.snd f (Spec.map (CommRingCat.ofHom (i.comp (f.residueFieldAlgebraMap x))))) x'",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The geometric completed equations are ring isomorphisms; the final split equation uses the existing scalar-compatible Orgogozo.IsOrdinaryDoublePoint. Added the landed def-trf-orgogozo-induction-data statement dependency for nodeRing and IsOrdinaryDoublePoint; no definitions are duplicated."
  }
 }

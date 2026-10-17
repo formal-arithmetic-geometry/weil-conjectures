@@ -177,5 +177,30 @@
   "group": "Q75",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-9a82f1eec (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks divisors.tex 080D–080I (lines 8748–9035, with the proofs of 080H and 080I), Properties 07ZP and Morphisms 01R8, and every cited node, including the current def-trf-module-strict-transform. The item statement is 080I(2) and is unchanged from the base; I compared it with the earlier delivery snapshots. Its finite-type hypotheses are the DAG's setting, and the citer lem-trf-finite-after-blowup supplies them. Nothing was weakened. Steps 1–5 check out. Step 2 needs only the inclusion of b_1^{-1}V(J) ∪ preimage of V(I) into the preimage of V(K). In step 3, principalizes-center makes E Cartier, F' has no sections supported on E (the hypothesis of 080H(2)), invertible-factor applies with L = I·O_{S_1}, and b_0 is U-admissible for U = S∖V(I), which is quasi-compact because I has finite type; so the preimage of V(K) is the preimage of V(J·L). Step 4: the remaining kernel vanishes, and the O_X clause plus affine-pushforward for i_1 identify the scheme transforms; the base-change sentence there is redundant, not a gap. I tested the item with J unit, I unit, J = I·O_{S_1} (K = I²) and V(J) disjoint from E. Both new nodes are true, statement-only, strictly smaller than the item and not duplicates (rg for 080D/G/H/I, strict transform and supported sections over the whole DAG). The four sec-nagata nodes are Lean-closed; the two declared tool_uses are accepted. Three repairable faults are fixed in fixes/dag/nodes/sec-trace-formula/. (1) B9: in both new nodes blueprint.from.via started with the sheaf-kernel node itself and omitted the item; it is now the item followed by the item's via, and from.place names exact 080I sentences. (2) different-centers: duplicate searches removed; the source place now says clause (2) only; the statement now fixes φ: Bl_{Z_D} ≅ Bl_Z from lemma-nagata-blowup-invertible-factor and says the kernels correspond under id×φ (stmt_deps gains that node and def-pc-fibre-product). (3) sheaf-kernel: the proof inside the O_X clause (B1) became a plain assertion, with 01R8 added to the source, and I added that the kernel and F^st are quasi-coherent (07ZP), which steps 1 and 3 need to reapply the node and 080H to F'. Item steps 1 and 3 now say F' is quasi-coherent, and step 3 notes that J·I·O_{S_1} has finite type; uses and proof_deps are unchanged. Fixes (1)–(2) and the B1 part of (3) reapply the earlier FIX (ab2414239874), which this delivery did not carry; I checked them again.; 3 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45fe9010a",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Node differs from base only in the lean field; lean.statement is verbatim in the file. Clause-by-clause match with the node and Stacks 080I(2): hI/hJ/hK finite type (the DAG's setting), e+he give the iso over S, hV is exactly V(K)=V(I)∪b0(V(J)), and the two equations give compatibility with the projections to X and S2, which also forces compatibility with the closed inclusions into X×_S S2 and makes φ unique. No extra instances or universe restriction; universe u explicit; edge cases (empty X, I or J the unit ideal, I=0) not excluded. The four helpers are real aliases of the recorded strictTransform/blowup declarations, with docstrings and listed in lean.declarations; rg found no existing 080I statement. No hollow def; only the theorem proof is sorry; docstrings and conventions OK; both imports needed (tested). Report has Worker report and Second reading by Q28. nt_compile.py --json on the snapshot file: clean in 3.5 s, no warnings."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictTransformComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictTransformComposition.lean",
+  "declaration": "AlgebraicGeometry.strictTransform_comp_blowup",
+  "declarations": [
+   "AlgebraicGeometry.firstStrictTransform",
+   "AlgebraicGeometry.firstStrictTransformToSource",
+   "AlgebraicGeometry.secondStrictTransform",
+   "AlgebraicGeometry.secondStrictTransformι",
+   "AlgebraicGeometry.strictTransform_comp_blowup"
+  ],
+  "statement": "theorem strictTransform_comp_blowup (S X : Scheme.{u}) (f : X ⟶ S) (I : S.IdealSheafData) (hI : I.ofFiniteType) (J : I.blowup.IdealSheafData) (hJ : J.ofFiniteType) (K : S.IdealSheafData) (hK : K.ofFiniteType) (e : J.blowup ≅ K.blowup) (he : J.blowupMap ≫ I.blowupMap = e.hom ≫ K.blowupMap) (hV : (K.support : Set S) = (I.support : Set S) ∪ I.blowupMap '' (J.support : Set I.blowup)) : ∃ φ : secondStrictTransform I J f ≅ K.strictTransform f, φ.hom ≫ K.strictTransformι f ≫ pullback.fst f K.blowupMap = secondStrictTransformι I J f ≫ pullback.fst (firstStrictTransformToSource I f) J.blowupMap ≫ AlgebraicGeometry.strictTransformι f I.blowupMap I.support.compl ≫ pullback.fst f I.blowupMap ∧ φ.hom ≫ K.strictTransformι f ≫ pullback.snd f K.blowupMap ≫ e.inv = secondStrictTransformι I J f ≫ pullback.snd (firstStrictTransformToSource I f) J.blowupMap",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-18"
  }
 }

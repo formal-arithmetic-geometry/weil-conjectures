@@ -249,5 +249,23 @@
   "group": "Q74",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-a2f142b43 (reviewer sub-agent of L); spot-checked: Read the item and the statements of all 13 cited nodes, plus Stacks algebra.tex Tag 00I7 (lines 11105-11144). The statement matches 00I7 hypothesis by hypothesis: a unique minimal prime is the same as a nonempty irreducible spectrum via the cited nilradical-prime criterion. Small cases checked: k, k[x] with k[y], k[e]/e^2 with itself, k^{1/p} with itself over an imperfect separably closed k, and C tensor C over R as a counterexample without the hypothesis. The steps check out: purely inseparable Omega/k, then the homeomorphism and affine fibre product, an explicit T=V isomorphism, reduced quotients that are domains, ker q=J by an explicit inverse, J nil by pigeonhole with exponent 1+sum(e_i-1), and 00I3(2) over Omega with the algclosed finite-type tensor-domain node (all hypotheses checked; this replaces 00I4 soundly). The prime nilradical then gives irreducibility. proof_deps equals the union of the step uses and there is no cycle. The off-unit nodes homeo-pure-insep, tensor-finite-type-limit and algclosed-finite-type-tensor-domain are all Lean-closed tools; I accept the two declared tool_uses. Not a duplicate: the field-tensor nodes cover fields only, and the parent applies this item to an arbitrary algebra. No new nodes, no SGA, no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1746275e9",
+  "group": "NY",
+  "result": "pass",
+  "note": "Matched each clause against the node and Stacks 00I7 (unique minimal prime = nonempty irreducible Spec): IsSepClosed k, CommRing+Algebra k for A and B in independent universes v and w, IrreducibleSpace hypotheses on Spec(CommRingCat.of A/B), canonical A ⊗[k] B ring structure, IrreducibleSpace conclusion. No extra hypotheses; the zero ring is excluded by the hypotheses as in the source; non-reduced, non-finitely-generated factors and all characteristics covered. Proof is only sorry, no new definitions; docstrings cite 00I7 and the blueprint id and give all 8 proof steps; lean.statement verbatim in the file; no duplicate in Mathlib or the project (field_tensor_unique_minimalPrime is fields only). nt_compile --json on Sheaf/FieldTheory/SepClosedAlgebrasTensorIrreducible.lean: clean, exit 0, 7.1 s and 9.8 s. Worker report and Second reading by NY sections present."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.SepClosedAlgebrasTensorIrreducible",
+  "declaration": "IsSepClosed.irreducibleSpace_tensorProduct",
+  "file": "lean/Sheaf/FieldTheory/SepClosedAlgebrasTensorIrreducible.lean",
+  "statement": "theorem irreducibleSpace_tensorProduct (k : Type u) [Field k] [IsSepClosed k] (A : Type v) [CommRing A] [Algebra k A] (B : Type w) [CommRing B] [Algebra k B] [IrreducibleSpace (Spec (CommRingCat.of A))] [IrreducibleSpace (Spec (CommRingCat.of B))] : IrreducibleSpace (Spec (CommRingCat.of (A ⊗[k] B)))",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
