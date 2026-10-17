@@ -12,9 +12,113 @@
   "def-trf-admissibility",
   "lem-trf-exceptional-internal-hom-exchange"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathcal D_T=D^b_{ctf}(T,A)$ and $H_T=R\\mathcal Hom_A$. Put $F=Rc_!$, $G=Rc^!$, $L=Lc^*$ and $f=Rj_!$, $g=Rj^!$, $l=Lj^*$. The admissibility datum supplies $F\\dashv G$, $f\\dashv g$ and their constructible domains. The pullback-preservation lemma gives $LM\\in\\mathcal D_C$ and $lLM\\in\\mathcal D_W$. Set $Q=H_Z(M,N)$, $H=H_C(LM,GN)$ and $P=H_W(lLM,gGN)$; all three belong to their $\\mathcal D_T$ by internal-Hom preservation and admissibility. Tensor preservation ensures that every tensor used below also lies in the relevant constructible domain. Use compact-support composition $Ff\\cong R(cj)_!$ and pullback composition $L(cj)^*\\cong lL$. By the specified exceptional comparison in admissibility, its conjugate identifies $R(cj)^!$ with $gG$, with the composite adjunction. Thus the composite has the required constructible adjunction and preservation as well. These are identifications of the specified maps, not choices of new adjunctions. No separatedness of the schemes over $k$ is needed.",
+   "uses": [
+    "def-trf-admissibility",
+    "lem-sf-pullback-tor-amplitude",
+    "lem-sf-tensor-ctf",
+    "lem-trf-proetale-internal-hom-ctf",
+    "thm-sf-comp-composition",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-exceptional-internal-hom-exchange.proof.md",
+    "place": "Hom-bijection construction; domain checks and composition conventions"
+   }
+  },
+  {
+   "text": "On a small pro-etale site $T$, the two cited ringed-site statements give, for ambient derived objects $U,V,B$, natural bijections\n$$\\operatorname{Hom}_T(U,H_T(V,B))\\cong H^0(T,H_T(U,H_T(V,B)))\\cong H^0(T,H_T(U\\otimes_A^L V,B))\\cong\\operatorname{Hom}_T(U\\otimes_A^L V,B).$$\nThey restrict to the full constructible categories by step 1. This derives the tensor–internal-Hom adjunction from the cited statements, rather than from preservation alone. Write $\\operatorname{cur}$ and $\\operatorname{unc}$ for the bijection and its inverse, so $\\operatorname{unc}(v)=\\mathrm{ev}\\circ(v\\otimes1)$. Naturality gives $\\operatorname{unc}(b\\circ v)=\\operatorname{unc}(b)\\circ(v\\otimes1)$ whenever defined.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 (lemma-internal-hom), 08JA (lemma-section-RHom-over-U), equation-internal-hom"
+   }
+  },
+  {
+   "text": "Record explicitly the meaning of the canonical exchange, including its direction. For $h:T\\to S$, write $F_h\\dashv G_h$, $L_h=Lh^*$, $B=H_T(L_hM,G_hN)$, and $\\mathrm{ev}_h:B\\otimes L_hM\\to G_hN$. Write $\\epsilon_h$ for the exceptional counit and $\\operatorname{PF}_h$ for the projection map in the direction $F_hB\\otimes M\\to F_h(B\\otimes L_hM)$. The canonical exchange $E_h:B\\to G_hH_S(M,N)$ is the double transpose of\n$$d_h=\\epsilon_{h,N}\\circ F_h(\\mathrm{ev}_h)\\circ\\operatorname{PF}_{h,B,M}:F_hB\\otimes M\\to N.$$\nIndeed, tensor–Hom transposition, exceptional transposition, precomposition by $\\operatorname{PF}_h$, and the two reverse transpositions give exactly this map on $1_B$. This is the inverse of Varshavsky's (0.3): his (0.2) is the exceptional transpose of $\\epsilon_h\\otimes1$ after the inverse projection isomorphism; inserting it in his evaluation formula (0.3) reverses the displayed Hom bijections. In particular\n$$\\operatorname{unc}\\bigl(\\epsilon_{h,H_S(M,N)}\\circ F_h(E_h)\\bigr)=d_h.$$\nThis unpacks the specified canonical comparison, and does not infer coherence from the mere existence of an isomorphism. The projection theorem supplies invertibility and naturality on precisely these finite-Tor domains.",
+   "uses": [
+    "lem-trf-exceptional-internal-hom-exchange",
+    "def-trf-admissibility",
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§0.3(a)-(b), equations (0.2)-(0.3); explicit inverse via the Hom bijections in the blueprint exchange proof"
+   }
+  },
+  {
+   "text": "Let $\\epsilon_c:FG\\to1$, $\\epsilon_j:fg\\to1$, and write $e_C:H\\otimes LM\\to GN$ and $e_W:P\\otimes lLM\\to gGN$ for evaluation. Define\n$$a=\\epsilon_{j,H}\\circ f(E_j):fP\\to H.$$\nThe characterization in step 3, applied to $j$ with inputs $(LM,GN)$, says exactly\n$$e_C\\circ(a\\otimes1)=\\epsilon_{j,GN}\\circ f(e_W)\\circ\\operatorname{PF}_{j,P,LM}.$$\nAll objects here were checked in step 1. This is an instance of the already established characterization, not a further compatibility assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§0.3(b), inverse of (0.3) applied to j"
+   }
+  },
+  {
+   "text": "Transpose $r=g(E_c)\\circ E_j:P\\to gGQ$ under $Ff\\dashv gG$. By the composite-adjunction counit its transpose is\n$$\\epsilon_{c,Q}\\circ F(\\epsilon_{j,GQ})\\circ Ff(g(E_c))\\circ Ff(E_j).$$\nNaturality of $\\epsilon_j$ at $E_c:H\\to GQ$ rewrites this as $\\epsilon_{c,Q}\\circ F(E_c)\\circ F(a)$. Uncurrying and step 3 for $c$, followed by naturality of $\\operatorname{PF}_c$ at $a$, give\n$$\\begin{aligned}\n\\operatorname{unc}(\\operatorname{adj}^{-1}(r))\n&=\\epsilon_{c,N}\\circ F(e_C)\\circ\\operatorname{PF}_{c,H,M}\\circ(F(a)\\otimes1)\\\\\n&=\\epsilon_{c,N}\\circ F(e_C\\circ(a\\otimes1))\\circ\\operatorname{PF}_{c,fP,M}\\\\\n&=\\epsilon_{c,N}\\circ F(\\epsilon_{j,GN})\\circ Ff(e_W)\\circ F(\\operatorname{PF}_{j,P,LM})\\circ\\operatorname{PF}_{c,fP,M}.\n\\end{aligned}$$\nThe last equality substitutes step 4. Thus the right-hand side of the requested equality has been reduced to a specific arrow $FfP\\otimes M\\to N$.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-trf-admissibility",
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0DV0, lemma-compose-counits; naturality of the projection transformation in the blueprint projection-formula theorem"
+   }
+  },
+  {
+   "text": "Now transpose $s=\\kappa_Q\\circ E_{cj}$ under the same adjunction and uncurry. Because $\\kappa$ is the conjugate of compact-support composition, the two transpositions for $cj$ are the composite transpositions after inserting $Ff\\cong R(cj)_!$; this is precisely the Hom-bijection meaning of conjugation. Its counit is therefore $\\epsilon_{c,N}\\circ F(\\epsilon_{j,GN})$, by the composite-adjunction formula. The composition compatibility in the projection-formula theorem states, under the pullback and compact-support composition comparisons,\n$$\\operatorname{PF}_{cj,P,M}=F(\\operatorname{PF}_{j,P,LM})\\circ\\operatorname{PF}_{c,fP,M}.$$\nTo be explicit, the right-hand side has successive targets $F(fP\\otimes LM)$ and $Ff(P\\otimes lLM)$, the latter identified with $R(cj)_!(P\\otimes L(cj)^*M)$. Evaluation $e_W$ is evaluation for this identified internal Hom; transport in its second variable uses $\\kappa_N$, by naturality of tensor–Hom transposition. Consequently step 3 for $cj$ gives\n$$\\operatorname{unc}(\\operatorname{adj}^{-1}(s))=\\epsilon_{c,N}\\circ F(\\epsilon_{j,GN})\\circ Ff(e_W)\\circ F(\\operatorname{PF}_{j,P,LM})\\circ\\operatorname{PF}_{c,fP,M}.$$\nThis is the same arrow as in step 5, with both the counit order and the projection-composition identifications specified.",
+   "uses": [
+    "def-trf-admissibility",
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-composite-adjunction",
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Composition identity of the specified projection maps; Stacks Tag 0DV0 for the composite counit and Tag 0B65 for the conjugate comparison"
+   }
+  },
+  {
+   "text": "Exceptional adjunction and tensor–Hom transposition are bijections on these Hom sets. Steps 5 and 6 have identical images under their composite, so $s=r$. Restoring the notation gives $\\kappa_Q\\circ E_{cj}=Rj^!(E_c)\\circ E_j$, with the source comparison using $\\kappa_N$ and $L(cj)^*\\cong Lj^*Lc^*$. We never interchange tensor factors: evaluation throughout is $H(-,-)\\otimes(\\text{first input})\\to(\\text{second input})$. Thus the result is the stated equality of canonical maps, without an extra permutation or sign.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§0.3(b), equations (0.2)-(0.3), formal composition consequence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-admissibility",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-trf-proetale-internal-hom-ctf",
+  "thm-sf-comp-composition",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections",
+  "lem-trf-exceptional-internal-hom-exchange",
+  "fix-prop-projection-formula",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "§0.3(b), equations (0.2)-(0.3), formal composition calculation using projection-composition and the composite counit; the inverse Hom-bijection convention is the blueprint exchange proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +147,45 @@
    "results": "8 hits headed by CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom, CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat.pullHom_pullHom, and generic pullback composition declarations. None states constructible exceptional internal-Hom exchange.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek.*[Hh]om|[Hh]om.*upperShriek|exceptional.*[Hh]om",
+   "results": "0 hits: . Read the returned signatures; generic adjunction laws, Cartesian exponential comparisons and ordinary sheaf pullback comparisons do not state this finite-Tor exceptional exchange equality.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherence of the canonical exceptional inverse image internal Hom comparison under composition of scheme morphisms",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, CategoryTheory.GrothendieckTopology.pseudofunctorOver_mapComp_inv_toNatTrans_app_val_app, AlgebraicGeometry.Scheme.Hom.preimageIso_inv_ι_assoc, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, CategoryTheory.Limits.CoconeMorphism.inv_hom_id_assoc, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.inv_app. Read the returned signatures; generic adjunction laws, Cartesian exponential comparisons and ordinary sheaf pullback comparisons do not state this finite-Tor exceptional exchange equality.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "12 hits: CategoryTheory.Adjunction.comp, CategoryTheory.Equivalence.trans_toAdjunction, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.comp_unit_app, CategoryTheory.Adjunction.comp_counit_app_assoc, CategoryTheory.Adjunction.comp_unit_app_assoc, CategoryTheory.Adjunction.comp_counit. Read the returned signatures; generic adjunction laws, Cartesian exponential comparisons and ordinary sheaf pullback comparisons do not state this finite-Tor exceptional exchange equality.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image internal Hom exchange commutes with composition by the projection formula and composite adjunction",
+   "results": "8 hits: CategoryTheory.expComparison, CategoryTheory.expComparison_ev, LightCondensed.ihomPoints_symm_comp, CategoryTheory.coev_expComparison, CategoryTheory.expComparison_whiskerLeft, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.ExponentiableMorphism.ev_coev_assoc, CategoryTheory.ExponentiableMorphism.coev_ev_assoc. Read the returned signatures; generic adjunction laws, Cartesian exponential comparisons and ordinary sheaf pullback comparisons do not state this finite-Tor exceptional exchange equality.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pair of adjunctions with projection formulas between closed monoidal categories gives internal Hom right adjoint comparisons compatible with composite functors",
+   "results": "8 hits: CategoryTheory.expComparison, CategoryTheory.coev_expComparison, CategoryTheory.MonoidalClosed.coev_app_comp_pre_app, CategoryTheory.coev_app_comp_pre_app, CategoryTheory.MonoidalClosed.compTranspose, CategoryTheory.MonoidalClosedFunctor.comparison_iso, CategoryTheory.expComparison_ev, CategoryTheory.MonoidalClosed.comp. Read the returned signatures; generic adjunction laws, Cartesian exponential comparisons and ordinary sheaf pullback comparisons do not state this finite-Tor exceptional exchange equality.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-external-duality-composition",
@@ -66,5 +205,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-exceptional-internal-hom-composition",
+  "worker": "stage1",
+  "summary": "Checked Varshavsky equations (0.2)-(0.3), the current exchange proof, the exact cited DAG statements, and project Lean. Proved the equality by an explicit comparison of the two double inverse transposes, with the same ordered counits and projection composite. No new node or statement change is needed; source paragraph corrected from (a) to (b).",
+  "blueprint": "Ancestor lem-trf-local-term-locality: the restriction-of-correspondence construction used in proof paragraphs (1)-(2), through trace-class-open-restriction and external-duality-composition. This item supplies only composition of the exceptional internal-Hom exchange, not a false ordinary stalk/internal-Hom comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Constructible finite-Tor domains of the ordinary pullbacks; a preservation tool, not a replacement for the local-term route."
+   },
+   {
+    "node": "lem-sf-tensor-ctf",
+    "why": "Finite-Tor tensor closure needed to form all adjunction instances."
+   },
+   {
+    "node": "lem-trf-proetale-internal-hom-ctf",
+    "why": "Internal-Hom closure on possibly nonseparated finite-type schemes."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "The canonical ordinary pullback comparison in the stated source identification."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Derived currying on a small ringed site, used only to derive the tensor–Hom adjunction."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Passage from derived internal Hom to Hom sets on a small ringed site."
+   },
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "Specified projection transformation, its naturality and its composition law; the trace-formula unit has no separate projection-coherence statement."
+   },
+   {
+    "node": "def-weil-pbc-composite-adjunction",
+    "why": "The exact counit and Hom-bijection formulas for composite adjunctions."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-conjugate",
+    "why": "Hom-bijection characterization of the specified exceptional composition comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-trf-proetale-internal-hom-ctf",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections",
+  "fix-prop-projection-formula",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-0539ac9bb",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-0539ac9bb (reviewer sub-agent of L); spot-checked: I read the whole split: the statement, all 7 steps, the statement of every cited node, Varshavsky §0.3(a)-(b) on pp. 5-6, the main-20261015 exchange and projection-formula proofs, the projection-coherence node, the unit sk-i-curve-zero and the citer lem-trf-external-duality-composition. Our E_h is the inverse of Varshavsky's (0.3). It matches the DAG exchange node, which defines h as the double transpose of eps∘F(ev)∘PF, and step 3 re-derives that description from cited statements. I recomputed steps 5 and 6 and they agree. Step 5 uses the composite counit eps_c∘F(eps_j), naturality of eps_j at E_c, naturality of uncurrying, and naturality of PF_c at a. Step 6 uses the conjugate property for kappa (the conjugate of alpha, type R(cj)^!→Rj^!Rc^!) and the projection-formula composition pentagon, with the orientation checked. Both sides give the same arrow FfP⊗M→N. All four PF instances lie in the projection formula's domain (D^b_c × D^b_ctf), at finite stage A_{E,n} on pro-etale sites, the same coefficient category as def-fix-six-functor-datum. Edge cases checked: identity j or c, and M=0 or N=0. There are no new nodes and I found no duplicate in the DAG. All proof dependencies are on the unit's transitive route, so the declared tool_uses are harmless but unnecessary. No SGA source is used. FIX: the report says source.place was corrected to §0.3(b), but the file still said §0.3(a) and credited the source with a composition coherence it does not state. I wrote a corrected whole item JSON under fixes/; no other field changed.; 1 file(s) fixed by the reviewer"
  }
 }
