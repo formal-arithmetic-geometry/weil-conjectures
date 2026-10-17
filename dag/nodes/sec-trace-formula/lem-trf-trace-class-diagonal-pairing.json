@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "lem-trf-trace-class-diagonal-pairing",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "sk-d-trace-class"
+  ]
  },
  "kind": "statement",
  "title": "The trace class is the diagonal supported pairing",
@@ -22,83 +24,218 @@
  ],
  "proof": [
   {
-   "text": "*Notation.* Put $Z=X\\times_sX$ with projections $p_1,p_2$, diagonal\n$\\Delta=\\Delta_X$ (a closed immersion, $X$ being separated), factor\nexchange $\\tau$ (so $\\tau\\Delta=\\Delta$, $p_i\\tau=p_{3-i}$), and\n$e:=c\\,i_F=\\Delta d:F\\to Z$. All pullbacks and tensor products are\nderived ([def-weil-derived-pullback-tensor-hom]). Put $D:=D_XK$,\n$\\omega=\\omega_{X,A}$, and\n\n$$\nP:=K\\boxtimes_A^{\\mathrm L}D=Lp_1^*K\\otimes_A^{\\mathrm L}Lp_2^*D,\n\\qquad\ne':L\\Delta^*P=K\\otimes_A^{\\mathrm L}D\\xrightarrow{\\ \\mathrm{sym}\\ }\nD\\otimes_A^{\\mathrm L}K\\xrightarrow{\\operatorname{ev}_K}\\omega ,\n$$\n\nwith $\\operatorname{ev}_K$ the evaluation of [def-trf-dualizing-complex]\nand $\\mathrm{sym}$ the symmetry with its Koszul signs; the map\n$e_K:P\\to R\\Delta_*\\omega$ of\n[lem-trf-trace-map-from-external-duality] is the\n$L\\Delta^*\\dashv R\\Delta_*$ adjoint of $e'$. For an exceptionally\nadmissible $f$ write\n$\\operatorname{adj}_f:\\Hom(Rf_!M,N)\\cong\\Hom(M,Rf^!N)$. The\nidentifications $\\omega\\cong R\\Delta^!\\omega_Z$,\n$\\omega_{F,A}\\cong Rd^!\\omega$ and $\\omega_{F,A}\\cong Re^!\\omega_Z$ are\nthose of [thm-trf-dualizing-complex-composition]; by its compatibility\nwith further compositions, the last is the composite of the first two\nwith $Re^!\\cong Rd^!R\\Delta^!$. In the diagonal case of\n[def-trf-supported-pairing] one has $(Y,L)=(X,K)$, $\\bar d=\\Delta$,\n$E=F$, $e_C=i_F$, $e_D=d$, and the Künneth–Verdier isomorphism used there\nis $\\kappa:=\\kappa_{K,K}:P\\xrightarrow{\\sim}\\RHom_A(Lp_2^*K,Rp_1^!K)$ of\n[thm-trf-kunneth-verdier]. Let\n\n$$\n\\widetilde u:=\\kappa^{-1}\\circ[u]:Rc_!A_C\\longrightarrow P\n$$\n\nbe the supported class of $u$ (Step 1 there, with $[u]$ from\n[lem-trf-correspondence-class]), and let $\\widetilde u_{\\mathrm{tr}}:A_C\\to\n\\mathcal H_c(K)$ be the mate of $u$ from\n[def-trf-trace-class-source].",
+   "text": "*Notation.* Put $Z=X\\times_sX$ with projections $p_1,p_2$, diagonal\n$\\Delta=\\Delta_X$, factor\nexchange $\\tau$ (so $\\tau\\Delta=\\Delta$, $p_i\\tau=p_{3-i}$), and\n$e:=c\\,i_F=\\Delta d:F\\to Z$. All pullbacks and tensor products are\nderived ([def-weil-derived-pullback-tensor-hom]). Put $D:=D_XK$,\n$\\omega=\\omega_{X,A}$, and\n\n$$\nP:=K\\boxtimes_A^{\\mathrm L}D=Lp_1^*K\\otimes_A^{\\mathrm L}Lp_2^*D,\n\\qquad\ne':L\\Delta^*P=K\\otimes_A^{\\mathrm L}D\\xrightarrow{\\ \\mathrm{sym}\\ }\nD\\otimes_A^{\\mathrm L}K\\xrightarrow{\\operatorname{ev}_K}\\omega ,\n$$\n\nwith $\\operatorname{ev}_K$ the evaluation of [def-trf-dualizing-complex]\nand $\\mathrm{sym}$ the symmetry with its Koszul signs; define $e_K:P\\to R\\Delta_*\\omega$ to be the\n$L\\Delta^*\\dashv R\\Delta_*$ adjoint of $e'$ ([fix-prop-adjunctions] (1)). For an exceptionally\nadmissible $f$ write\n$\\operatorname{adj}_f:\\Hom(Rf_!M,N)\\cong\\Hom(M,Rf^!N)$. The\nidentifications $\\omega\\cong R\\Delta^!\\omega_Z$,\n$\\omega_{F,A}\\cong Rd^!\\omega$ and $\\omega_{F,A}\\cong Re^!\\omega_Z$ are\nthose of [thm-trf-dualizing-complex-composition]; by functoriality in the morphism $d$ and the composite-adjunction convention of [def-trf-admissibility], the last is the composite of the first two\nwith $Re^!\\cong Rd^!R\\Delta^!$. In the diagonal case of\n[def-trf-supported-pairing] one has $(Y,L)=(X,K)$, $\\bar d=\\Delta$,\n$E=F$, $e_C=i_F$, $e_D=d$, and the Künneth–Verdier isomorphism used there\nis $\\kappa:=\\kappa_{K,K}:P\\xrightarrow{\\sim}\\RHom_A(Lp_2^*K,Rp_1^!K)$ of\n[thm-trf-kunneth-verdier]. Let\n\n$$\n\\widetilde u:=\\kappa^{-1}\\circ[u]:Rc_!A_C\\longrightarrow P\n$$\n\nbe the supported class of $u$ (Step 1 there, with $[u]$ from\n[lem-trf-correspondence-class]), and let $\\widetilde u_{\\mathrm{tr}}:A_C\\to\n\\mathcal H_c(K)$ be the mate of $u$ from\n[def-trf-trace-class-source].\nThe pullback identifications and their compatibility with tensor, units and signed symmetry are those of [lem-pur-derived-pullback-tensor-iso]. All exceptional operations are on the constructible finite-Tor categories of [def-trf-admissibility]; no unrestricted ambient exceptional adjoint is used.",
    "uses": [
     "def-weil-derived-pullback-tensor-hom",
     "def-trf-dualizing-complex",
-    "lem-trf-trace-map-from-external-duality",
     "thm-trf-dualizing-complex-composition",
     "def-trf-supported-pairing",
     "thm-trf-kunneth-verdier",
     "lem-trf-correspondence-class",
-    "def-trf-trace-class-source"
+    "def-trf-trace-class-source",
+    "fix-prop-adjunctions",
+    "def-trf-admissibility",
+    "lem-pur-derived-pullback-tensor-iso"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-trace-class-diagonal-pairing.proof.md",
+    "place": "Notation paragraph"
+   }
   },
   {
-   "text": "*Step 1 (both constructions start from $\\widetilde u$).* Let\n$\\xi:\\mathcal H_c(K)\\xrightarrow{\\sim}Rc^!P$ be the comparison of\n[thm-trf-verdier-duality]: the exchange\n$\\mathcal H_c(K)=\\RHom_A(Lc^*Lp_2^*K,Rc^!Rp_1^!K)\\cong\nRc^!\\RHom_A(Lp_2^*K,Rp_1^!K)$ of\n[lem-trf-exceptional-internal-hom-exchange], followed by\n$Rc^!\\kappa^{-1}$. We claim\n\n$$\n\\xi\\circ\\widetilde u_{\\mathrm{tr}}=\\operatorname{adj}_c(\\widetilde u).\n\\tag{1}\n$$\n\nThe exchange is defined by the Yoneda chain of\n[lem-trf-exceptional-internal-hom-exchange]; evaluated on the test\nobject $A_C$ that chain reads\n$\\Hom_C(A_C,\\mathcal H_c(K))\\cong\\Hom_C(Lc^*M,Rc^!N)\\cong\n\\Hom_Z(Rc_!A_C\\otimes M,N)\\cong\\Hom_Z(Rc_!A_C,\\RHom_A(M,N))\\cong\n\\Hom_C(A_C,Rc^!\\RHom_A(M,N))$ with $M=Lp_2^*K$, $N=Rp_1^!K$, using\n$A_C\\otimes Lc^*M=Lc^*M$. Its first arrow is the mate bijection of\n[def-trf-trace-class-source], and its middle arrows are, in reverse,\nexactly the tensor–Hom, projection-formula and exceptional-adjunction\nsteps whose composite defines $[u]$ in [lem-trf-correspondence-class]\n(with the same identifications $Lc_2^*=Lc^*Lp_2^*$,\n$Rc_1^!=Rc^!Rp_1^!$). Hence the exchange sends $\\widetilde u_{\\mathrm{tr}}$\nto $\\operatorname{adj}_c([u])$, and by naturality of $\\operatorname{adj}_c$\nin its target, $Rc^!\\kappa^{-1}\\circ\\operatorname{adj}_c([u])\n=\\operatorname{adj}_c(\\kappa^{-1}[u])$, which is (1).",
+   "text": "*Step 1 (both constructions start from $\\widetilde u$).* Let\n$\\xi:\\mathcal H_c(K)\\xrightarrow{\\sim}Rc^!P$ be the comparison of\n[thm-trf-verdier-duality]: the exchange\n$\\mathcal H_c(K)=\\RHom_A(Lc^*Lp_2^*K,Rc^!Rp_1^!K)\\cong\nRc^!\\RHom_A(Lp_2^*K,Rp_1^!K)$ of\n[lem-trf-exceptional-internal-hom-exchange], followed by\n$Rc^!\\kappa^{-1}$. We claim\n\n$$\n\\xi\\circ\\widetilde u_{\\mathrm{tr}}=\\operatorname{adj}_c(\\widetilde u).\n\\tag{1}\n$$\n\nCompute the canonical exchange by tensor–Hom and exceptional adjunction: evaluated on the test object $A_C$, the Hom chain reads\n$\\Hom_C(A_C,\\mathcal H_c(K))\\cong\\Hom_C(Lc^*M,Rc^!N)\\cong\n\\Hom_Z(Rc_!A_C\\otimes M,N)\\cong\\Hom_Z(Rc_!A_C,\\RHom_A(M,N))\\cong\n\\Hom_C(A_C,Rc^!\\RHom_A(M,N))$ with $M=Lp_2^*K$, $N=Rp_1^!K$, using\n$A_C\\otimes Lc^*M=Lc^*M$. Its first arrow is the mate bijection of\n[def-trf-trace-class-source], and its middle arrows are, in reverse,\nexactly the tensor–Hom, projection-formula and exceptional-adjunction\nsteps whose composite defines $[u]$ in [lem-trf-correspondence-class]\n(with the same identifications $Lc_2^*=Lc^*Lp_2^*$,\n$Rc_1^!=Rc^!Rp_1^!$). Hence the exchange sends $\\widetilde u_{\\mathrm{tr}}$\nto $\\operatorname{adj}_c([u])$, and by naturality of $\\operatorname{adj}_c$\nin its target, $Rc^!\\kappa^{-1}\\circ\\operatorname{adj}_c([u])\n=\\operatorname{adj}_c(\\kappa^{-1}[u])$, which is (1).",
    "uses": [
     "thm-trf-verdier-duality",
     "lem-trf-exceptional-internal-hom-exchange",
     "def-trf-trace-class-source",
-    "lem-trf-correspondence-class"
+    "lem-trf-correspondence-class",
+    "def-trf-admissibility",
+    "prop-functor-package"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-trace-class-diagonal-pairing.proof.md",
+    "place": "Step 1: both constructions start from the supported class"
+   }
   },
   {
-   "text": "*Step 2 (the trace class).* Let\n$bc:L\\Delta^*Rc_!\\xrightarrow{\\sim}Rd_!Li_F^*$ be the base change of\n[thm-trf-fixed-point-base-change] (2), and put\n\n$$\nh:\\;Rd_!A_F=Rd_!Li_F^*A_C\\xrightarrow{\\ bc^{-1}\\ }\nL\\Delta^*Rc_!A_C\\xrightarrow{\\ L\\Delta^*\\widetilde u\\ }L\\Delta^*P\n\\xrightarrow{\\ e'\\ }\\omega .\n$$\n\nWe claim $\\Tr_c(u)=\\operatorname{adj}_d(h)$, read through\n$Rd^!\\omega\\cong\\omega_{F,A}$. By [def-trf-trace-class] and naturality of\nthe global-sections adjunction (with\n$R\\Gamma(C,Ri_{F*}-)=R\\Gamma(F,-)$), $\\Tr_c(u)$ is the\n$Li_F^*\\dashv Ri_{F*}$ adjoint of $\\varphi\\circ\\widetilde u_{\\mathrm{tr}}:\nA_C\\to Ri_{F*}\\omega_{F,A}$, where $\\varphi$ is the objectwise map of\n[lem-trf-trace-map-from-external-duality]:\n$\\varphi=(\\text{composition})\\circ BC\\circ Rc^!e_K\\circ\\xi$, with\n$BC:Rc^!R\\Delta_*\\cong Ri_{F*}Rd^!$ the right-adjoint form of $bc$. By\n(1), $Rc^!e_K\\circ\\xi\\circ\\widetilde u_{\\mathrm{tr}}\n=\\operatorname{adj}_c(g)$ with $g:=e_K\\circ\\widetilde u:Rc_!A_C\\to\nR\\Delta_*\\omega$. That $BC$ is the right-adjoint form of $bc$ (its\ncompatibility with the adjunction data, [thm-trf-fixed-point-base-change])\nmeans precisely: for every $g:Rc_!M\\to R\\Delta_*N$, the $i_F$-adjoint of\n$BC\\circ\\operatorname{adj}_c(g)$ is\n$\\operatorname{adj}_d(g^\\flat\\circ bc^{-1}):Li_F^*M\\to Rd^!N$, where\n$g^\\flat:L\\Delta^*Rc_!M\\to N$ is the $L\\Delta^*\\dashv R\\Delta_*$ adjoint\nof $g$. Here $g^\\flat=e'\\circ L\\Delta^*\\widetilde u$, since $e_K$ is the\nadjoint of $e'$; so $g^\\flat\\circ bc^{-1}=h$, which is the claim.",
+   "text": "*Step 2 (the trace class).* Let\n$bc:L\\Delta^*Rc_!\\xrightarrow{\\sim}Rd_!Li_F^*$ be the base change of\n[thm-trf-fixed-point-base-change] (2), and put\n\n$$\nh:\\;Rd_!A_F=Rd_!Li_F^*A_C\\xrightarrow{\\ bc^{-1}\\ }\nL\\Delta^*Rc_!A_C\\xrightarrow{\\ L\\Delta^*\\widetilde u\\ }L\\Delta^*P\n\\xrightarrow{\\ e'\\ }\\omega .\n$$\n\nWe claim $\\Tr_c(u)=\\operatorname{adj}_d(h)$, read through\n$Rd^!\\omega\\cong\\omega_{F,A}$. By [def-trf-trace-class] and naturality of\nthe global-sections adjunction (with\n$R\\Gamma(C,Ri_{F*}-)=R\\Gamma(F,-)$), $\\Tr_c(u)$ is the\n$Li_F^*\\dashv Ri_{F*}$ adjoint of $\\varphi\\circ\\widetilde u_{\\mathrm{tr}}:\nA_C\\to Ri_{F*}\\omega_{F,A}$, where the final paragraph of [def-trf-kernel-pushforward-maps] identifies the trace morphism with the global sections of the objectwise composite\n$\\varphi=(\\text{composition})\\circ BC\\circ Rc^!e_K\\circ\\xi$, with\n$BC:Rc^!R\\Delta_*\\cong Ri_{F*}Rd^!$ the right-adjoint form of $bc$. By\n(1), $Rc^!e_K\\circ\\xi\\circ\\widetilde u_{\\mathrm{tr}}\n=\\operatorname{adj}_c(g)$ with $g:=e_K\\circ\\widetilde u:Rc_!A_C\\to\nR\\Delta_*\\omega$. That $BC$ is the right-adjoint form of $bc$ (its\ncompatibility with the adjunction data, [thm-trf-fixed-point-base-change])\nmeans the following Hom-square identity (the pasting formula of [lem-weil-pbc-mate-pasting] (2), applied to $L\\Delta^*Rc_!\\dashv Rc^!R\\Delta_*$ and $Rd_!Li_F^*\\dashv Ri_{F*}Rd^!$): for every $g:Rc_!M\\to R\\Delta_*N$, the $i_F$-adjoint of\n$BC\\circ\\operatorname{adj}_c(g)$ is\n$\\operatorname{adj}_d(g^\\flat\\circ bc^{-1}):Li_F^*M\\to Rd^!N$, where $M\\in D^b_{ctf}(C,A)$, $N\\in D^b_{ctf}(X,A)$ and\n$g^\\flat:L\\Delta^*Rc_!M\\to N$ is the $L\\Delta^*\\dashv R\\Delta_*$ adjoint\nof $g$. Here $g^\\flat=e'\\circ L\\Delta^*\\widetilde u$, since $e_K$ is the\nadjoint of $e'$; so $g^\\flat\\circ bc^{-1}=h$, which is the claim.\nIndeed both routes send $g$ to its transpose in $\\Hom_X(Rd_!Li_F^*M,N)$: first transpose along $\\Delta$, then precompose by $bc_M^{-1}$; the conjugate route transposes along $c$ and then along $i_F$. Transposing once more along $d$ gives exactly the displayed identity. Thus this compatibility is derived here from the stated right-adjoint form, rather than assumed as an extra clause of the new node.\nTo apply that paragraph without extra geometric hypotheses, take its proper pushforward diagram to be $Y=X$, $D=C$, $b=c$, $f=\\operatorname{id}_X$ and $g=\\operatorname{id}_C$ ([def-trf-coefficient-pushforward]). The leg equations are identities. Each identity morphism is separated (its diagonal is an identity), finite type (its affine ring maps are identities), and universally closed (every base change is an identity), hence proper. Its induced fixed map is $\\operatorname{id}_F$, by the two projection identities and the fibre-product universal property. The exceptional data for these maps and for $i_F$ exist by [def-trf-admissibility]; they add no hypothesis. In the cited definition $\\delta_K=e_K$, and $\\zeta_c^{-1}=(Ri_{F*}\\rho_d)\\circ BC$ by its support-isomorphism clause, so its last displayed composite is precisely $\\varphi$ above. Thus the objectwise identification is an identity-diagram specialization of an existing statement, not a new lemma.",
    "uses": [
     "thm-trf-fixed-point-base-change",
     "def-trf-trace-class",
-    "lem-trf-trace-map-from-external-duality"
+    "def-trf-kernel-pushforward-maps",
+    "lem-weil-pbc-mate-pasting",
+    "thm-trf-dualizing-complex-composition",
+    "def-trf-coefficient-pushforward",
+    "def-trf-admissibility"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-trace-class-diagonal-pairing.proof.md",
+    "place": "Step 2: the trace class"
+   }
   },
   {
-   "text": "*Step 3 (pairing with the diagonal class).* Let\n$\\widetilde v:R\\Delta_!A_X\\to Q=D\\boxtimes_A^{\\mathrm L}K$ be the\nsupported class of $(X,\\Delta,1_K)$ in [def-trf-supported-pairing]: it is\n$\\widetilde v=s\\circ\\tau_*\\widetilde v'$ with\n$\\widetilde v':=\\kappa^{-1}\\circ[1_K]:R\\Delta_!A_X\\to P$ and\n$s:\\tau_*P\\cong Q$ the symmetry. Let\n$\\gamma=\\alpha\\circ(\\operatorname{ev}_K\\boxtimes\\operatorname{ev}_K)\\circ\n\\mathrm{rearr}:P\\otimes Q\\to\\omega_Z$ be the contraction of Step 3 there.\nWe claim\n\n$$\n\\gamma\\circ(1_P\\otimes\\widetilde v)\n=\\varepsilon_\\Delta\\circ R\\Delta_!(e')\\circ\\pi_P,\n\\tag{2}\n$$\n\nwhere $\\pi_P:P\\otimes R\\Delta_!A_X\\cong R\\Delta_!L\\Delta^*P$ is the\nprojection formula ([prop-functor-package] (5), after the symmetry, which\nis sign-free because $R\\Delta_!A_X$ is a sheaf in degree $0$) and\n$\\varepsilon_\\Delta:R\\Delta_!\\omega\\cong R\\Delta_!R\\Delta^!\\omega_Z\\to\n\\omega_Z$ is the counit. Equivalently (by projection formula and\n$\\operatorname{adj}_\\Delta$), the $\\Delta$-adjoint\n$L\\Delta^*P\\to R\\Delta^!\\omega_Z\\cong\\omega$ of the left side is $e'$.\n\n(3a) By [lem-trf-correspondence-class] for $c=\\Delta$ (both legs\n$\\operatorname{id}_X$), the tensor–Hom transpose\n$[1_K]^T:R\\Delta_!A_X\\otimes Lp_2^*K\\to Rp_1^!K$ is, after\n$R\\Delta_!A_X\\otimes Lp_2^*K\\cong R\\Delta_!K$, the $\\Delta$-adjoint of the\ncomposition isomorphism $K\\cong R\\Delta^!Rp_1^!K$; equivalently, under\nthe adjunction for $p_1\\Delta=\\operatorname{id}_X$, it corresponds to\n$1_K$, i.e. $\\varepsilon_{p_1}\\circ Rp_{1!}[1_K]^T=1_K$ on\n$Rp_{1!}R\\Delta_!K=K$.\n\n(3b) By [def-sf-kv-maps] (iii), (iv), the transpose\n$\\kappa^T:P\\otimes Lp_2^*K\\to Rp_1^!K$ of $\\kappa$ is\n$Lp_1^*K\\otimes Lp_2^*(D\\otimes K)\\xrightarrow{1\\otimes Lp_2^*\\operatorname{ev}_K}\nK\\boxtimes\\omega\\xrightarrow{\\alpha_{\\operatorname{id},a_X}}Rp_1^!K$ (the\nother evaluation is the unit identification $\\RHom_A(A_X,K)=K$, and moving\nthe unit $A_X$ costs no sign), with $\\alpha_{\\operatorname{id},a_X}$ the\nexceptional Künneth map of [prop-trf-exceptional-kunneth] for\n$p_1=\\operatorname{id}_X\\times a_X$. So $\\kappa\\circ\\widetilde v'=[1_K]$\ntransposes to\n\n$$\n\\alpha_{\\operatorname{id},a_X}\\circ(1\\otimes Lp_2^*\\operatorname{ev}_K)\n\\circ(\\widetilde v'\\otimes 1_{Lp_2^*K})=[1_K]^T .\n\\tag{3}\n$$\n\n(3c) Let $\\varpi:Lp_1^*D\\otimes Rp_1^!K\\to Rp_1^!\\omega\\cong\\omega_Z$ be\nthe $p_1$-adjoint of\n$Rp_{1!}(Lp_1^*D\\otimes Rp_1^!K)\\cong D\\otimes Rp_{1!}Rp_1^!K\n\\xrightarrow{1\\otimes\\varepsilon_{p_1}}D\\otimes K\n\\xrightarrow{\\operatorname{ev}_K}\\omega$. Apply the autoequivalence\n$\\tau^*$ ($\\tau^*R\\Delta_!A_X=R\\Delta_!A_X$,\n$\\tau^*\\omega_Z\\cong\\omega_Z$): the left side of (2) becomes\n$\\gamma^\\tau\\circ(1\\otimes\\widetilde v')$ with\n$\\gamma^\\tau:=\\tau^*\\gamma\\circ(1\\otimes\\tau^*s):\\tau^*P\\otimes P\\to\n\\omega_Z$, where $\\tau^*P=Lp_2^*K\\otimes Lp_1^*D$. Then\n\n$$\n\\gamma^\\tau=\\varpi\\circ(1_{Lp_1^*D}\\otimes\\kappa^T)\\circ r,\n\\qquad\nr:\\tau^*P\\otimes P\\cong Lp_1^*D\\otimes(P\\otimes Lp_2^*K)\n$$\n\nthe symmetry-constraint permutation. Both sides contract the factor-one\n$D$ with the factor-one $K$ and the factor-two $D$ with the factor-two\n$K$ by $\\operatorname{ev}_K$, and then identify the result with\n$\\omega_Z$; they agree because $\\alpha_{a_X,a_X}$ factors as\n$\\alpha_{\\operatorname{id},a_X}$ (for $L_1=\\omega$) followed by\n$Rp_1^!\\omega=Rp_1^!Ra_X^!A_s\\cong Ra_Z^!A_s$ (both are exceptional\nadjoints of $\\mathrm{Ku}_!$ followed by counits, [def-sf-kv-maps] (i),\n(ii), and $\\mathrm{Ku}_!$ is compatible with composition and with the\nexchange of factors), because $\\alpha_{\\operatorname{id},a_X}$ is natural\nin $L_1$ and compatible with $Lp_1^*D\\otimes(-)$ through the projection\nformula (which is how $\\varpi$ is built), and because all permutations\nused are symmetry constraints with Koszul signs, so two composites\ninducing the same permutation of the same factors coincide (coherence of\nthe symmetric monoidal structure, [prop-functor-package], final clause).\n\n(3d) By (3c), naturality of $r$, and (3),\n\n$$\n\\gamma^\\tau\\circ(1\\otimes\\widetilde v')\n=\\varpi\\circ(1_{Lp_1^*D}\\otimes[1_K]^T)\\circ r',\n\\qquad\nr':\\tau^*P\\otimes R\\Delta_!A_X\\cong\nLp_1^*D\\otimes(R\\Delta_!A_X\\otimes Lp_2^*K).\n$$\n\nTake $\\Delta$-adjoints. Since $\\tau\\Delta=\\Delta$ and $p_i\\Delta=\\operatorname{id}$,\n$L\\Delta^*\\tau^*P=K\\otimes D$ and $L\\Delta^*r'$ is $\\mathrm{sym}:K\\otimes\nD\\cong D\\otimes K$. The map\n$\\varpi\\circ(1\\otimes[1_K]^T):R\\Delta_!(D\\otimes K)\\cong\nLp_1^*D\\otimes R\\Delta_!K\\to\\omega_Z\\cong Rp_1^!\\omega$ corresponds, under\nthe adjunction for $p_1\\Delta=\\operatorname{id}_X$, to\n$D\\otimes K\\xrightarrow{1\\otimes\\varepsilon_{p_1}Rp_{1!}[1_K]^T}D\\otimes K\n\\xrightarrow{\\operatorname{ev}_K}\\omega$ (definition of $\\varpi$ and\nnaturality of the projection formula), which is $\\operatorname{ev}_K$ by\n(3a). Hence the $\\Delta$-adjoint of $\\tau^*$ of the left side of (2) is\n$\\operatorname{ev}_K\\circ\\mathrm{sym}=e'$; as $\\tau^*$ commutes with the\n$\\Delta$-adjunction ($\\tau$ an automorphism with $\\tau\\Delta=\\Delta$), so\nis that of the left side itself. This proves (2).",
+   "text": "*Step 3 (pairing with the diagonal class).* Let\n$\\widetilde v:R\\Delta_!A_X\\to Q=D\\boxtimes_A^{\\mathrm L}K$ be the\nsupported class of $(X,\\Delta,1_K)$ in [def-trf-supported-pairing]: it is\n$\\widetilde v=s\\circ\\tau_*\\widetilde v'$ with\n$\\widetilde v':=\\kappa^{-1}\\circ[1_K]:R\\Delta_!A_X\\to P$ and\n$s:\\tau_*P\\cong Q$ the symmetry. Let\n$\\gamma=\\alpha\\circ(\\operatorname{ev}_K\\boxtimes\\operatorname{ev}_K)\\circ\n\\mathrm{rearr}:P\\otimes Q\\to\\omega_Z$ be the contraction of Step 3 there.\nWe claim\n\n$$\n\\gamma\\circ(1_P\\otimes\\widetilde v)\n=\\varepsilon_\\Delta\\circ R\\Delta_!(e')\\circ\\pi_P,\n\\tag{2}\n$$\n\nwhere $\\pi_P:P\\otimes R\\Delta_!A_X\\cong R\\Delta_!L\\Delta^*P$ is the\nprojection formula ([prop-functor-package] (5), after the canonical derived symmetry) and\n$\\varepsilon_\\Delta:R\\Delta_!\\omega\\cong R\\Delta_!R\\Delta^!\\omega_Z\\to\n\\omega_Z$ is the counit. Equivalently (by projection formula and\n$\\operatorname{adj}_\\Delta$), the $\\Delta$-adjoint\n$L\\Delta^*P\\to R\\Delta^!\\omega_Z\\cong\\omega$ of the left side is $e'$.\n\n(3a) By [lem-trf-correspondence-class] for $c=\\Delta$ (both legs\n$\\operatorname{id}_X$), the tensor–Hom transpose\n$[1_K]^T:R\\Delta_!A_X\\otimes Lp_2^*K\\to Rp_1^!K$ is, after\n$R\\Delta_!A_X\\otimes Lp_2^*K\\cong R\\Delta_!K$, the $\\Delta$-adjoint of the\ncomposition isomorphism $K\\cong R\\Delta^!Rp_1^!K$; equivalently, under\nthe adjunction for $p_1\\Delta=\\operatorname{id}_X$, it corresponds to\n$1_K$, i.e. $\\varepsilon_{p_1}\\circ Rp_{1!}[1_K]^T=1_K$ on\n$Rp_{1!}R\\Delta_!K=K$.\n\n(3b) By [def-sf-kv-maps] (iii), (iv), the transpose\n$\\kappa^T:P\\otimes Lp_2^*K\\to Rp_1^!K$ of $\\kappa$ is\n$Lp_1^*K\\otimes Lp_2^*(D\\otimes K)\\xrightarrow{1\\otimes Lp_2^*\\operatorname{ev}_K}\nK\\boxtimes\\omega\\xrightarrow{\\alpha_{\\operatorname{id},a_X}}Rp_1^!K$ (the\nother evaluation is the unit identification $\\RHom_A(A_X,K)=K$, and moving\nthe unit $A_X$ costs no sign), with $\\alpha_{\\operatorname{id},a_X}$ the\nexceptional Künneth map of [prop-trf-exceptional-kunneth] for\n$p_1=\\operatorname{id}_X\\times a_X$. So $\\kappa\\circ\\widetilde v'=[1_K]$\ntransposes to\n\n$$\n\\alpha_{\\operatorname{id},a_X}\\circ(1\\otimes Lp_2^*\\operatorname{ev}_K)\n\\circ(\\widetilde v'\\otimes 1_{Lp_2^*K})=[1_K]^T .\n\\tag{3}\n$$\n\n(3c) Let $\\varpi:Lp_1^*D\\otimes Rp_1^!K\\to Rp_1^!\\omega\\cong\\omega_Z$ be\nthe $p_1$-adjoint of\n$Rp_{1!}(Lp_1^*D\\otimes Rp_1^!K)\\cong D\\otimes Rp_{1!}Rp_1^!K\n\\xrightarrow{1\\otimes\\varepsilon_{p_1}}D\\otimes K\n\\xrightarrow{\\operatorname{ev}_K}\\omega$. Apply the autoequivalence\n$\\tau^*$ ($\\tau^*R\\Delta_!A_X=R\\Delta_!A_X$,\n$\\tau^*\\omega_Z\\cong\\omega_Z$): the left side of (2) becomes\n$\\gamma^\\tau\\circ(1\\otimes\\widetilde v')$ with\n$\\gamma^\\tau:=\\tau^*\\gamma\\circ(1\\otimes\\tau^*s):\\tau^*P\\otimes P\\to\n\\omega_Z$, where $\\tau^*P=Lp_2^*K\\otimes Lp_1^*D$. Then\n\n$$\n\\gamma^\\tau=\\varpi\\circ(1_{Lp_1^*D}\\otimes\\kappa^T)\\circ r,\n\\qquad\nr:\\tau^*P\\otimes P\\cong Lp_1^*D\\otimes(P\\otimes Lp_2^*K)\n$$\n\nthe symmetry-constraint permutation. Both sides contract the factor-one\n$D$ with the factor-one $K$ and the factor-two $D$ with the factor-two\n$K$ by $\\operatorname{ev}_K$, and then identify the result with\n$\\omega_Z$; they agree because $\\alpha_{a_X,a_X}$ factors as\n$\\alpha_{\\operatorname{id},a_X}$ (for $L_1=\\omega$) followed by\n$Rp_1^!\\omega=Rp_1^!Ra_X^!A_s\\cong Ra_Z^!A_s$ (both are exceptional\nadjoints of $\\mathrm{Ku}_!$ followed by counits, [def-sf-kv-maps] (i),\n(ii), and the product comparisons agree with their projection-formula specializations and signed factor exchange by [lem-sf-kunneth-coherence] (i), (ii), (iv)), because $\\alpha_{\\operatorname{id},a_X}$ is natural\nin $L_1$ and compatible with $Lp_1^*D\\otimes(-)$ through the projection\nformula (which is how $\\varpi$ is built), and because all permutations\nused are symmetry constraints with Koszul signs, so two composites\ninducing the same permutation of the same factors coincide (the signed monoidal pullback identifications of [lem-pur-derived-pullback-tensor-iso] and the signed product coherence of [lem-sf-kunneth-coherence]).\n\n(3d) By (3c), naturality of $r$, and (3),\n\n$$\n\\gamma^\\tau\\circ(1\\otimes\\widetilde v')\n=\\varpi\\circ(1_{Lp_1^*D}\\otimes[1_K]^T)\\circ r',\n\\qquad\nr':\\tau^*P\\otimes R\\Delta_!A_X\\cong\nLp_1^*D\\otimes(R\\Delta_!A_X\\otimes Lp_2^*K).\n$$\n\nTake $\\Delta$-adjoints. Since $\\tau\\Delta=\\Delta$ and $p_i\\Delta=\\operatorname{id}$,\n$L\\Delta^*\\tau^*P=K\\otimes D$ and $L\\Delta^*r'$ is $\\mathrm{sym}:K\\otimes\nD\\cong D\\otimes K$. The map\n$\\varpi\\circ(1\\otimes[1_K]^T):R\\Delta_!(D\\otimes K)\\cong\nLp_1^*D\\otimes R\\Delta_!K\\to\\omega_Z\\cong Rp_1^!\\omega$ corresponds, under\nthe adjunction for $p_1\\Delta=\\operatorname{id}_X$, to\n$D\\otimes K\\xrightarrow{1\\otimes\\varepsilon_{p_1}Rp_{1!}[1_K]^T}D\\otimes K\n\\xrightarrow{\\operatorname{ev}_K}\\omega$ (definition of $\\varpi$ and\nnaturality of the projection formula), which is $\\operatorname{ev}_K$ by\n(3a). Hence the $\\Delta$-adjoint of $\\tau^*$ of the left side of (2) is\n$\\operatorname{ev}_K\\circ\\mathrm{sym}=e'$; as $\\tau^*$ commutes with the\n$\\Delta$-adjunction ($\\tau$ an automorphism with $\\tau\\Delta=\\Delta$), so\nis that of the left side itself. This proves (2).\nIn (3c) the adjoints can be checked explicitly: after $Ra_{Z!}$, each side is the product comparison followed by $\\varepsilon_{a_X}\\boxtimes\\varepsilon_{a_X}$ on the two dualizing factors, and by the two displayed evaluations on $D$ and $K$. Pasting the counits uses [lem-weil-pbc-mate-pasting] (2); taking the relative product with an identity factor is the projection formula by [lem-sf-kunneth-coherence] (iv). Its naturality and (i) move the same factor permutations through these maps. This gives the claimed factorization through $\\varpi$ with exactly the symmetry $r$, rather than positing an additional exceptional Künneth coherence axiom.",
    "uses": [
     "def-trf-supported-pairing",
     "prop-functor-package",
     "lem-trf-correspondence-class",
     "def-sf-kv-maps",
-    "prop-trf-exceptional-kunneth"
+    "prop-trf-exceptional-kunneth",
+    "lem-sf-kunneth-coherence",
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-weil-pbc-mate-pasting"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-trace-class-diagonal-pairing.proof.md",
+    "place": "Step 3 (3a)-(3d): pairing with the diagonal class"
+   }
   },
   {
-   "text": "*Step 4 (the supported pairing).* By [def-trf-supported-pairing], with\n$\\mu:Re_!A_F\\cong Rc_!A_C\\otimes R\\Delta_!A_X$,\n\n$$\n\\sigma_{u,1_K}=\\gamma\\circ(\\widetilde u\\otimes\\widetilde v)\\circ\\mu\n=\\gamma\\circ(1_P\\otimes\\widetilde v)\\circ(\\widetilde u\\otimes1)\\circ\\mu\n=\\varepsilon_\\Delta\\circ R\\Delta_!\\bigl(e'\\circ L\\Delta^*\\widetilde u\\bigr)\n\\circ\\pi_{Rc_!A_C}\\circ\\mu\n$$\n\nby (2) and naturality of the projection formula. The isomorphism $\\mu$\nis built from the projection formula for $c$ and the base change along\n$c$ in the fixed square; the isomorphism\n$R\\Delta_!(bc^{-1})\\circ(Re_!\\cong R\\Delta_!Rd_!):Re_!A_F\\cong\nR\\Delta_!L\\Delta^*Rc_!A_C$ is built from the base change along $\\Delta$\nin the same Cartesian square. By the coherence of the composition,\nbase-change and projection-formula isomorphisms ([prop-functor-package]\n(3)–(5) and its final clause) the isomorphism\n$Re_!A_F\\cong Rc_!A_C\\otimes R\\Delta_!A_X$ does not depend on which leg\nof the square is used, i.e.\n$\\pi_{Rc_!A_C}\\circ\\mu=R\\Delta_!(bc^{-1})\\circ(Re_!\\cong R\\Delta_!Rd_!)$.\nTherefore\n\n$$\n\\sigma_{u,1_K}=\\varepsilon_\\Delta\\circ R\\Delta_!(h)\\circ\n(Re_!A_F\\cong R\\Delta_!Rd_!A_F).\n$$\n\nThe adjunction $Re_!\\dashv Re^!$ is the composite of those for $\\Delta$\nand $d$ (this is how $Re^!\\cong Rd^!R\\Delta^!$ is defined), and\n$\\operatorname{adj}_\\Delta(\\varepsilon_\\Delta\\circ R\\Delta_!h)=h$\n(followed by $\\omega\\cong R\\Delta^!\\omega_Z$). Hence\n$\\operatorname{adj}_e(\\sigma_{u,1_K})=\\operatorname{adj}_d(h)$ under\n$Re^!\\omega_Z\\cong Rd^!R\\Delta^!\\omega_Z\\cong Rd^!\\omega$, and by the\ncompatibility recalled in the notation paragraph,\n$\\langle u,1_K\\rangle_{\\mathrm{LV}}=\\operatorname{adj}_d(h)$ read through\n$Rd^!\\omega\\cong\\omega_{F,A}$. By Step 2 this is $\\Tr_c(u)$.",
+   "text": "*Step 4 (the supported pairing).* By [def-trf-supported-pairing], with\n$\\mu:Re_!A_F\\cong Rc_!A_C\\otimes R\\Delta_!A_X$,\n\n$$\n\\sigma_{u,1_K}=\\gamma\\circ(\\widetilde u\\otimes\\widetilde v)\\circ\\mu\n=\\gamma\\circ(1_P\\otimes\\widetilde v)\\circ(\\widetilde u\\otimes1)\\circ\\mu\n=\\varepsilon_\\Delta\\circ R\\Delta_!\\bigl(e'\\circ L\\Delta^*\\widetilde u\\bigr)\n\\circ\\pi_{Rc_!A_C}\\circ\\mu\n$$\n\nby (2) and naturality of the projection formula. The isomorphism $\\mu$\nis built from the projection formula for $c$ and the base change along\n$c$ in the fixed square; the isomorphism\n$R\\Delta_!(bc^{-1})\\circ(Re_!\\cong R\\Delta_!Rd_!):Re_!A_F\\cong\nR\\Delta_!L\\Delta^*Rc_!A_C$ is built from the base change along $\\Delta$\nin the same Cartesian square. More explicitly, the definition of $\\mu$ uses the construction with $c$ as the outer direct image. Under the canonical swap of the fibre product, this is the relative-product map of [thm-sf-kunneth-relative] for $(f,g)=(\\Delta,c)$, followed by the tensor symmetry. Clause (i) of [lem-sf-kunneth-coherence] therefore identifies $\\mu$ with the relative-product map for $(f,g)=(c,\\Delta)$ over the base $Z$, on $(A_C,A_X)$; its direction is $Re_!A_F\\to Rc_!A_C\\otimes R\\Delta_!A_X$. Expand the latter construction with $\\Delta$ as the outer direct image. The projection-formula arrow for $d$ has second input $A_X$ and becomes the unit identification, the inverse base-change arrow is $bc^{-1}$, and the last arrow is $\\pi_{Rc_!A_C}^{-1}$. Thus composition with $\\pi_{Rc_!A_C}$ cancels that last arrow; what remains is exactly $R\\Delta_!(bc^{-1})$ after the composition identification for $e=\\Delta d$. Consequently\n$$\n\\pi_{Rc_!A_C}\\circ\\mu=R\\Delta_!(bc^{-1})\\circ(Re_!\\cong R\\Delta_!Rd_!).\n$$\nTherefore\n\n$$\n\\sigma_{u,1_K}=\\varepsilon_\\Delta\\circ R\\Delta_!(h)\\circ\n(Re_!A_F\\cong R\\Delta_!Rd_!A_F).\n$$\n\nThe adjunction $Re_!\\dashv Re^!$ is the composite of those for $\\Delta$\nand $d$ (this is how $Re^!\\cong Rd^!R\\Delta^!$ is defined), and\n$\\operatorname{adj}_\\Delta(\\varepsilon_\\Delta\\circ R\\Delta_!h)=h$\n(followed by $\\omega\\cong R\\Delta^!\\omega_Z$). Hence\n$\\operatorname{adj}_e(\\sigma_{u,1_K})=\\operatorname{adj}_d(h)$ under\n$Re^!\\omega_Z\\cong Rd^!R\\Delta^!\\omega_Z\\cong Rd^!\\omega$, and by the\ncompatibility recalled in the notation paragraph,\n$\\langle u,1_K\\rangle_{\\mathrm{LV}}=\\operatorname{adj}_d(h)$ read through\n$Rd^!\\omega\\cong\\omega_{F,A}$. By Step 2 this is $\\Tr_c(u)$.\nThe last adjunction computation uses only the triangle identity and the pasted composite adjunctions in [def-trf-admissibility], equivalently the general pasting statement [lem-weil-pbc-mate-pasting] (2). Functoriality of [thm-trf-dualizing-complex-composition] identifies their final target with the same $\\omega_{F,A}$. Every permutation has been carried along as the canonical derived symmetry, so the resulting map is $e'$, with no extra sign or twist.",
    "uses": [
     "def-trf-supported-pairing",
-    "prop-functor-package"
+    "prop-functor-package",
+    "thm-sf-kunneth-relative",
+    "lem-sf-kunneth-coherence",
+    "def-trf-admissibility",
+    "lem-weil-pbc-mate-pasting",
+    "thm-trf-dualizing-complex-composition"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-trace-class-diagonal-pairing.proof.md",
+    "place": "Step 4: supported pairing and composite adjunction"
+   }
   }
  ],
  "proof_deps": [
   "def-weil-derived-pullback-tensor-hom",
   "def-trf-dualizing-complex",
-  "lem-trf-trace-map-from-external-duality",
   "thm-trf-dualizing-complex-composition",
   "def-trf-supported-pairing",
   "thm-trf-kunneth-verdier",
   "lem-trf-correspondence-class",
   "def-trf-trace-class-source",
+  "fix-prop-adjunctions",
+  "def-trf-admissibility",
+  "lem-pur-derived-pullback-tensor-iso",
   "thm-trf-verdier-duality",
   "lem-trf-exceptional-internal-hom-exchange",
+  "prop-functor-package",
   "thm-trf-fixed-point-base-change",
   "def-trf-trace-class",
-  "prop-functor-package",
+  "def-trf-kernel-pushforward-maps",
+  "lem-weil-pbc-mate-pasting",
+  "def-trf-coefficient-pushforward",
   "def-sf-kv-maps",
-  "prop-trf-exceptional-kunneth"
+  "prop-trf-exceptional-kunneth",
+  "lem-sf-kunneth-coherence",
+  "thm-sf-kunneth-relative"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-trace-class-diagonal-pairing.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-trace-class/lem-trf-trace-class-diagonal-pairing.proof.md",
+  "place": "Notation and Steps 1-4; expanded mate and relative-product coherence computations"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Verdier trace class of a cohomological correspondence equals the Lefschetz Verdier pairing with the diagonal identity",
+   "results": "8 hits: CategoryTheory.Functor.IsHomological.mk'; CategoryTheory.Functor.mem_homologicalKernel_trW_iff; CategoryTheory.Functor.mem_homologicalKernel_W_iff; CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; CategoryTheory.Functor.comp_homologySequenceδ; CategoryTheory.Pretriangulated.preadditiveCoyoneda_homologySequenceδ_apply; CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply; read the hits: generic adjunction, sheaf or linear-algebra/triangulated results do not state the geometric trace-map construction or diagonal pairing comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, \"trace\"",
+   "results": "0 hits: none; read the hits: generic adjunction, sheaf or linear-algebra/triangulated results do not state the geometric trace-map construction or diagonal pairing comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|Lefschetz|traceClass|supportedPairing",
+   "results": "19 hits: Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean; Mathlib/CategoryTheory/Localization/Triangulated.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Basic.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Triangulated.lean; Mathlib/CategoryTheory/Triangulated/SpectralObject.lean; searched Mathlib/CategoryTheory; read the hits: generic adjunction, sheaf or linear-algebra/triangulated results do not state the geometric trace-map construction or diagonal pairing comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verdier trace class pairing with the diagonal identity correspondence",
+   "results": "8 hits: toPullbackDiag_coe; Algebra.trace_self; CategoryTheory.Limits.pullback.diagonal; Module.dualPairing_apply; LinearMap.trace_eq_contract; LinearMap.IsPerfPair.id; RootPairing.Equiv.comp_id; Matrix.trace_diagonal; read the hits: generic adjunction, sheaf or linear-algebra/triangulated results do not state the geometric trace-map construction or diagonal pairing comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A trace of a sheaf correspondence is the contraction of its supported kernel class with the identity kernel",
+   "results": "8 hits: AlgebraicGeometry.Scheme.kerFunctor; AlgebraicGeometry.Scheme.kerFunctor_map; AlgebraicGeometry.Scheme.kerFunctor_obj; SheafOfModules.unit; AlgebraicGeometry.Scheme.kerAdjunction_unit_app; SheafOfModules.pushforwardSections_unitHomEquiv; AlgebraicGeometry.Scheme.kerAdjunction; SheafOfModules.unitToPushforwardObjUnit_val_app_apply; read the hits: generic adjunction, sheaf or linear-algebra/triangulated results do not state the geometric trace-map construction or diagonal pairing comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\", \"contract\"",
+   "results": "5 hits: LinearMap.trace_eq_contract_of_basis; LinearMap.trace_eq_contract; LinearMap.trace_eq_contract_of_basis'; LinearMap.trace_eq_contract'; LinearMap.trace_eq_contract_apply; read the hits: generic adjunction, sheaf or linear-algebra/triangulated results do not state the geometric trace-map construction or diagonal pairing comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "traceClass|trace_class|Lefschetz|kunneth|künneth",
+   "results": "25 hits: Mathlib/Tactic/DepRewrite.lean; Mathlib/Tactic/DepRewrite.lean; Mathlib/Tactic/DepRewrite.lean; Mathlib/Tactic/DepRewrite.lean; Mathlib/Tactic/FastInstance.lean; Mathlib/Tactic/DeriveFintype.lean; Mathlib/Tactic/ApplyFun.lean; Mathlib/Tactic/GCongr/Core.lean; read the hits: generic adjunction, sheaf or linear-algebra/triangulated results do not state the geometric trace-map construction or diagonal pairing comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "trace of a sheaf cohomological correspondence exceptional adjunction diagonal contraction",
+   "results": "8 hits: CategoryTheory.constantSheafΓAdj; LinearMap.trace_eq_contract'; LinearMap.trace_eq_contract; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; stalkSkyscraperSheafAdjunction; SheafOfModules.conjugateEquiv_pullbackId_hom; LinearMap.trace_eq_contract_of_basis'; CompHausLike.LocallyConstant.adjunction; read the hits: generic adjunction, sheaf or linear-algebra/triangulated results do not state the geometric trace-map construction or diagonal pairing comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived global sections of the evaluation kernel restricted to the fixed point locus is the sheaf correspondence trace",
+   "results": "8 hits; top recorded hits: ModuleCat.Tilde.res_const; SheafOfModules.unitHomEquiv_symm_comp; ModuleCat.Tilde.res_apply; ModuleCat.Tilde.toOpen_res; CategoryTheory.Sheaf.natTransΓRes_app; SheafOfModules.unitHomEquiv_comp_apply; SheafOfModules.unitHomEquiv; CategoryTheory.Sheaf.natTransΓRes. The returned module/sheaf section and generic adjunction results do not state the derived geometric trace-map or diagonal-pairing comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|cohomologicalCorrespondence|supportedPairing|traceMorphism",
+   "results": "25 hits; top recorded hits: Mathlib/CategoryTheory/Shift/CommShift.lean; Mathlib/CategoryTheory/Shift/CommShift.lean; Mathlib/CategoryTheory/Presentable/Directed.lean; Mathlib/CategoryTheory/Localization/Triangulated.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean. The returned module/sheaf section and generic adjunction results do not state the derived geometric trace-map or diagonal-pairing comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv, CategoryTheory.Adjunction.homEquiv",
+   "results": "0 hits; top recorded hits: none. The returned module/sheaf section and generic adjunction results do not state the derived geometric trace-map or diagonal-pairing comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\", \"Adjunction\"",
+   "results": "0 hits; the query returned no declarations.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomological.correspondence|lefschetz|supported.pairing",
+   "results": "6 hits, all about the model-theoretic Lefschetz principle: Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean lines 19, 27, 40, 221, 233 and Mathlib/FieldTheory/AxGrothendieck.lean line 31. None concerns sheaf correspondences or the supported pairing.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -137,5 +274,49 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-d-trace-class"
+ "unit": "sk-d-trace-class",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-trace-class-diagonal-pairing",
+  "worker": "stage1",
+  "summary": "Second reader removed the duplicate objectwise-factorization child: the final paragraph and support/evaluation clauses of def-trf-kernel-pushforward-maps give its entire assertion on the identity proper pushforward diagram. Wrote out that specialization in proof entry 3, preserving the five-entry diagonal contraction proof and the item statement.",
+  "blueprint": "Proof array 1 realizes Notation, 2 source Step 1, 3 source Step 2 (using the existing kernel-pushforward construction on the identity diagram), 4 source Step 3 (3a)-(3d), and 5 source Step 4. No new nodes.",
+  "tool_uses": [
+   {
+    "node": "fix-prop-adjunctions",
+    "why": "Clause (1) supplies the ordinary pullback/direct-image adjunction used to construct the diagonal evaluation adjoint; no ambient exceptional-adjoint assertion is used."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Supplies the canonical monoidal pullback and signed symmetry identifications in the displayed contraction; this unit has no monoidal-pullback coherence lemma."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Supplies formal pasting of already specified ordinary and exceptional adjunctions for the fixed-square Hom computation and composite counits; no alternative trace construction is introduced."
+   },
+   {
+    "node": "lem-sf-kunneth-coherence",
+    "why": "Supplies the signed swap and identity/projection-formula normalization of the existing relative product used in the blueprint contraction and support-square comparison."
+   },
+   {
+    "node": "thm-sf-kunneth-relative",
+    "why": "Gives the actual projection-formula/base-change composite which is the support-product isomorphism mu, so the two leg computations can be compared."
+   }
+  ]
+ },
+ "tool_uses": [
+  "fix-prop-adjunctions",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-weil-pbc-mate-pasting",
+  "lem-sf-kunneth-coherence",
+  "thm-sf-kunneth-relative"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NM-cff150c4f",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-cff150c4f (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. The delivery adds no new node (the duplicate objectwise-factorization child was dropped). The statement is identical to main-20261015 (order 2662) and to the master snapshot: finite coefficients A_{E,n} on D^b_ctf, ordinary c_2 and exceptional c_1, no properness, not weakened. Step 1: e' and e_K agree with the current statement of lem-trf-trace-map-from-external-duality. Step 2: the exchange has the correct variance (ordinary pullback first, exceptional second); evaluated on A_C it is the Yoneda chain, whose middle arrows are the bijection defining [u]; xi is the exchange followed by Rc^!kappa^{-1}, the only reading of verdier-duality's 'yields', so (1) holds. Step 3: the final paragraph of def-trf-kernel-pushforward-maps on the identity proper diagram gives t=RGamma(phi), consistent with the trace-map statement. BC is the conjugate of bc^{-1}, so the i_F-adjoint of BC∘adj_c(g) is adj_d(h), which I checked by hand. Step 4: kappa^T is taken from the statement of def-sf-kv-maps (iii)-(iv). The alpha factorization and the signed symmetries are covered by the kunneth-coherence (i)/(ii)/(iv) and monoidal-pullback statements. The contraction gives e'=ev∘sym, so no sign is lost. Step 5: I recomputed mu as sigma∘kappa_{Delta,c}, which coherence (i) makes kappa_{c,Delta}; the projection-formula arrow cancels, so pi∘mu=RDelta_!(bc^{-1})∘comp, and the composite adjunction gives adj_d(h). Small cases: a point with K=A and with K=A[1] (supertrace sign the same on both sides), K=0, F empty, n=1 with non-field coefficients. There is no cycle and no duplicate in the DAG; sk-d-trace-class is the unit summary, correctly recorded in same_as. No SGA citation. Off-route tool use prop-functor-package (sk-thm-sf-package) was not declared, but the blueprint proof cites it; accepted together with the five declared tool uses. Minor: the source field still names master order 2318 (statement identical). No fixes written."
+ }
 }
