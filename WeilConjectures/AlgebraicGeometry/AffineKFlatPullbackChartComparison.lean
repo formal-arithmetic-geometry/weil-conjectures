@@ -103,8 +103,9 @@ theorem affine_kFlat_pullback_chart_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
                 (@id (ModuleCat.{u} Γ(X, ⊤) ⥤
                   SheafOfModules.{u} (moduleRings (Spec Γ(X, ⊤)).toRingedSpace))
                   (tilde.functor Γ(X, ⊤))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj
-                  (((ModuleCat.extendScalars f.appTop.hom).mapHomologicalComplex
-                    (.up ℤ)).obj P)))) := by
+                  ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _
+                    (ModuleCat.extendScalars f.appTop.hom)
+                    (Functor.preservesZeroMorphisms_of_isLeftAdjoint _) (.up ℤ)).obj P)))) := by
   classical
   let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
   let B := SheafOfModules.{u} (moduleRings X.toRingedSpace)
