@@ -132,11 +132,17 @@ theorem isIso_map_externalIhomMap_iff_of_baseChange {Z₁ Z₂ P Z₁' P' : Sche
     (Ex : R(g₁)_![A] ⋙ L((p₁)^*[A]) ⟶ L((p₁')^*[A]) ⋙ R(g)_![A]) [IsIso Ex]
     (hEx : ∀ (M : _root_.DerivedCategory (Sheaf Z₁'.smallEtaleTopology A))
       (N : _root_.DerivedCategory (Sheaf Z₁.smallEtaleTopology A)),
-      (L((p₁)^*[A])).map (((projectionMap A g₁).app M).app N) ≫ Ex.app (M ⊗ (L((g₁)^*[A])).obj N) ≫
+      (L((p₁)^*[A])).map (X := (R(g₁)_![A]).obj M ⊗ N)
+          (Y := (R(g₁)_![A]).obj (M ⊗ (L((g₁)^*[A])).obj N)) (((projectionMap A g₁).app M).app N) ≫
+        Ex.app (M ⊗ (L((g₁)^*[A])).obj N) ≫
         (R(g)_![A]).map (δ L((p₁')^*[A]) M ((L((g₁)^*[A])).obj N)) ≫
         (R(g)_![A]).map ((L((p₁')^*[A])).obj M ◁ derivedSquareUpperStarIsoInvApp A sq N) =
-      δ L((p₁)^*[A]) ((R(g₁)_![A]).obj M) N ≫ Ex.app M ▷ (L((p₁)^*[A])).obj N ≫
-        ((projectionMap A g).app ((L((p₁')^*[A])).obj M)).app ((L((p₁)^*[A])).obj N))
+      δ L((p₁)^*[A]) ((R(g₁)_![A]).obj M) N ≫
+        CategoryStruct.comp (Y := (R(g)_![A]).obj ((L((p₁')^*[A])).obj M) ⊗ (L((p₁)^*[A])).obj N)
+          (Z := (R(g)_![A]).obj ((L((p₁')^*[A])).obj M ⊗
+            (L((g)^*[A])).obj ((L((p₁)^*[A])).obj N)))
+          (Ex.app M ▷ (L((p₁)^*[A])).obj N)
+          (((projectionMap A g).app ((L((p₁')^*[A])).obj M)).app ((L((p₁)^*[A])).obj N)))
     (hBC : ∀ N, IsIso ((mateEquiv (rightDerivedUpperShriekAdjunction A g₁)
       (rightDerivedUpperShriekAdjunction A g) (inv Ex)).natTrans.app N))
     (hτ : ∀ M N, IsIso ((rightDerivedUpperShriekAdjunction A g).projectionTensorMap
