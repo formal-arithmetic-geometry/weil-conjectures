@@ -38,9 +38,9 @@
    "elementary": true
   },
   {
-   "text": "Reuse the closed locally constant ring Hom equivalence, importing all of ModuleObject.Basic to access it without changing visibility. Compose its inverse with Spec.homEquiv and the equivalence between profinite morphisms and continuous maps. The universal property of ConnectedComponents identifies continuous maps on the spectrum with maps on its component quotient. Transport along the affine scheme isomorphism U ≅ Spec Γ(U,top). This gives (U → Spec LC(S,Z)) ≃ C(U,S).",
+   "text": "For a ring R, send a ring map LC(S,Z) to R to the first coordinate of its spectrum map. Its inverse is the proved LocallyConstant.liftPrimeSpectrum of the integer cast map. For a locally constant function g and a prime p of R, the characteristic idempotent of the fibre through the selected point is outside p, hence becomes one in R_p. Multiplying by it proves that the localized image of g is its evaluation. Equality at every prime localization proves the first inverse law; LocallyConstant.comap_liftPrimeSpectrum proves the second. Compose this explicit equivalence with Spec.homEquiv and transport along the affine isomorphism. The construction is inside the existing specMapEquiv definition and does not depend on the removed private Basic helpers.",
    "uses": [
-    "def-weil-pbc-profinite-locally-constant-hom-equiv"
+    "lem-weil-pbc-locally-constant-prime-spectrum"
    ],
    "elementary": true
   },
@@ -65,13 +65,12 @@
  "proof_deps": [
   "lem-weil-pbc-qcqs-scheme-spectral",
   "lem-weil-pbc-quasicompact-components-clopen-intersection",
-  "def-weil-pbc-profinite-locally-constant-hom-equiv",
   "lem-weil-pbc-locally-constant-prime-spectrum"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Basic.lean",
-  "place": "Reuse the closed profiniteLocallyConstantHomEquiv and profiniteSpectrumProjection; affine transport, pullback universal property, and explicit pointwise naturality proved in Sheaf.Paper.ProEtalePointComponentsMaps. The direct affine route replaces the finite-quotient argument below unit level."
+  "document": "lean/WeilConjectures/RingTheory/Spectrum/Prime/LocallyConstant.lean",
+  "place": "The proved liftPrimeSpectrum, algebraMap_localization_liftPrimeSpectrum, comap_liftPrimeSpectrum and equality in every prime localization. The elementary characteristic-idempotent inverse argument also appears in Sheaf.AlgebraicGeometry.CondensedFieldContinuousRealization; that module imports this item and cannot be imported back. Affine transport, the terminal-Spec-Z pullback equivalence and pointwise naturality complete the proof below unit level."
  },
  "mathlib_searches": [
   {
@@ -125,9 +124,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-galois-coproduct-copies-morphisms-clopen"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -167,12 +164,12 @@
   "existing": false
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261015T181521-L-748175",
+  "landing": "20261017T003414-L-3312671",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
