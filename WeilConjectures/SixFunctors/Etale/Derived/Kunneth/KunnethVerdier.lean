@@ -62,6 +62,7 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
+omit [Finite Λ] in
 /-- The unit `Λ_X` lies in `Dctf(X, Λ)`: it is the constant sheaf `Λ` placed in degree `0`,
 which is constructible and flat. -/
 theorem constructibleFiniteTor_unit (X : Scheme.{u}) :
@@ -85,8 +86,8 @@ theorem verdierDualEvaluation_eq_homEquiv_symm_id {X S : Scheme.{u}} (a : X ⟶ 
     [HasCompactification a]
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     verdierDualEvaluation _ a M =
-      ((ihom.adjunction M).homEquiv _ _).symm (𝟙 ((verdierDual _ a).obj (op M))) := by
-  simp [verdierDualEvaluation, Adjunction.homEquiv_counit, ihom.ev]
+      ((ihom.adjunction M).homEquiv _ _).symm (𝟙 ((verdierDual _ a).obj (op M))) :=
+  (MonoidalClosed.uncurry_id_eq_ev _ _).symm
 
 /-- The internal hom out of the unit is the identity, `RHom(Λ_X, -) ≅ 𝟭`: both are right
 adjoint to `Λ_X ⊗ᴸ - ≅ 𝟭`. -/
@@ -182,7 +183,7 @@ theorem nonempty_iso_kunnethVerdier [HasInvertibleExponent Λ (Spec (.of k))] {X
   obtain ⟨α⟩ := nonempty_iso_rightDerivedUpperShriek_pullbackFst Λ a b M
   exact ⟨externalProductMapIso _ a b ((derivedHomUnitIso Λ X).app M).symm (Iso.refl _) ≪≫ β ≪≫
     ((RHom(pullback a b)[ModuleCat.{u + 1} Λ]).mapIso
-      (externalProductUnitLeftIso Λ a b N).op).app _ ≪≫
+      (externalProductUnitLeftIso Λ a b N).symm.op).app _ ≪≫
     ((RHom(pullback a b)[ModuleCat.{u + 1} Λ]).obj _).mapIso α.symm⟩
 
 /-- The Künneth–Verdier isomorphism over `k` for all separated finite-type `k`-schemes
@@ -220,10 +221,15 @@ theorem hasKunnethComparisons [HasInvertibleExponent Λ (Spec (.of k))] :
     intro _ _ _ _ b₁ b₂ _ _ _ _ f₁ f₂ _ _ _ _ _ _ _ hM₁ hM₂
     exact nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct (Λ := Λ) b₁ b₂ f₁ f₂
       hM₁ hM₂
-  exceptional b₁ b₂ f₁ f₂ hN₁ hN₂ :=
-    nonempty_iso_externalProduct_rightDerivedUpperShriek Λ b₁ b₂ f₁ f₂ hN₁ hN₂
-  externalHom c₁ c₂ hE₁ hE₂ hN₁ hN₂ := nonempty_iso_externalHom Λ c₁ c₂ hE₁ hE₂ hN₁ hN₂
-  kunnethVerdier a b hM hN := nonempty_iso_kunnethVerdier Λ a b hM hN
+  exceptional := by
+    intro _ _ _ _ b₁ b₂ _ _ _ _ f₁ f₂ _ _ _ _ _ _ _ _ _ _ hN₁ hN₂
+    exact nonempty_iso_externalProduct_rightDerivedUpperShriek Λ b₁ b₂ f₁ f₂ hN₁ hN₂
+  externalHom := by
+    intro _ _ c₁ c₂ _ _ _ _ _ _ _ _ _ _ hE₁ hE₂ hN₁ hN₂
+    exact nonempty_iso_externalHom Λ c₁ c₂ hE₁ hE₂ hN₁ hN₂
+  kunnethVerdier := by
+    intro _ _ a b _ _ _ _ _ _ _ _ _ _ hM hN
+    exact nonempty_iso_kunnethVerdier Λ a b hM hN
 
 end Etale
 
