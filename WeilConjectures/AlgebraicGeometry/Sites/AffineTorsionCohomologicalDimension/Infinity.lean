@@ -19,7 +19,8 @@ whose image has residue field of transcendence degree `t` over `K`, and `n > d -
 of `Rⁿj_* M` at the point `s ≫ ∞` at infinity vanishes for every torsion sheaf `M`
 (`AlgebraicGeometry.ProjectiveLine.isZero_upperStar_infinity_rightDerived_lowerStar_affineChart`).
 
-By the stalk formula (`AlgebraicGeometry.Etale.isZero_upperStar_rightDerived_lowerStar_of_subsingleton_H`)
+By the stalk formula
+(`AlgebraicGeometry.Etale.isZero_upperStar_rightDerived_lowerStar_of_subsingleton_H`)
 applied with the chart at infinity `𝔸¹_B ≅ Spec K[y, z] ⟶ ℙ¹_B`, it suffices that
 `Hⁿ(𝔸¹_B ×_{ℙ¹_B} Spec R) = 0` for the strict henselization `R` of `K[y, z]` at `s ≫ 0`; this fibre
 product is `Spec R[1/z]`, whose torsion cohomological dimension is at most `d - t` by the local
@@ -47,7 +48,8 @@ theorem Ideal.exists_algebraicIndependent_residueField {K A : Type u} [Field K] 
   have : Algebra.IsAlgebraic (A ⧸ p) p.ResidueField :=
     IsLocalization.isAlgebraic _ (nonZeroDivisors (A ⧸ p))
   have htr : Algebra.trdeg K (A ⧸ p) = Algebra.trdeg K p.ResidueField := by
-    rw [← trdeg_add_eq K (A ⧸ p) p.ResidueField, Algebra.trdeg_eq_zero, add_zero]
+    rw [← trdeg_add_eq K (A ⧸ p) (A := p.ResidueField),
+      trdeg_eq_zero (R := A ⧸ p) (A := p.ResidueField), add_zero]
   obtain ⟨ι, x, hx⟩ := exists_isTranscendenceBasis'.{u} K (A ⧸ p)
   have hι : (a : Cardinal) ≤ Cardinal.mk ι := by rw [hx.cardinalMk_eq_trdeg, htr]; exact h
   obtain ⟨e⟩ : Nonempty (Fin a ↪ ι) := by
@@ -86,7 +88,7 @@ lemma residueFieldTrdeg_Spec {K A : Type u} [Field K] [CommRing A] [Algebra K A]
     residueFieldTrdeg (Spec.map (CommRingCat.ofHom (algebraMap K A))) y =
       Algebra.trdeg K y.asIdeal.ResidueField := by
   unfold residueFieldTrdeg
-  letI := (residueFieldHomOfOver (Spec.map (CommRingCat.ofHom (algebraMap K A))) y).toAlgebra
+  let := (residueFieldHomOfOver (Spec.map (CommRingCat.ofHom (algebraMap K A))) y).toAlgebra
   refine AlgEquiv.trdeg_eq
     { (Spec.residueFieldIso (.of A) y).commRingCatIsoToRingEquiv with commutes' := fun k ↦ ?_ }
   have h : (Scheme.ΓSpecIso (.of K)).inv ≫
@@ -98,8 +100,8 @@ lemma residueFieldTrdeg_Spec {K A : Type u} [Field K] [CommRing A] [Algebra K A]
       Category.assoc, ← Spec.algebraMap_residueFieldIso_inv_assoc, Iso.inv_hom_id,
       Category.comp_id]
   have := congrArg (fun f ↦ f.hom k) h
-  simpa [residueFieldHomOfOver, RingHom.algebraMap_toAlgebra,
-    IsScalarTower.algebraMap_apply K A y.asIdeal.ResidueField] using this
+  simp only [CommRingCat.hom_comp, RingHom.comp_apply, CommRingCat.hom_ofHom] at this
+  exact this
 
 end Scheme
 
@@ -135,7 +137,54 @@ theorem isZero_upperStar_infinity_rightDerived_lowerStar_affineChart_of_le {K : 
   have hs' : s ≫ infinity B = s' ≫ ι := by simp [s', ι, infinity]
   rw [hs']
   refine isZero_upperStar_rightDerived_lowerStar_of_subsingleton_H (affineChart B) ι M s' n hn ?_
-  sorry
+  let R := strictHenselization s'
+  let t := strictLocalizationToBase s'
+  let x : MvPolynomial PUnit.{u + 1} A := MvPolynomial.X PUnit.unit
+  have hφt : Spec.map (toStrictHenselization s') = t := Spec.map_preimage _
+  -- the cohomological dimension bound for `R[1/x]`
+  have hd : ringKrullDim P = (c + 1 : ℕ) := by
+    change ringKrullDim (MvPolynomial PUnit.{u + 1} A) = _
+    rw [MvPolynomial.ringKrullDim_of_isNoetherianRing, MvPolynomial.ringKrullDim_of_isNoetherianRing,
+      ringKrullDim_eq_zero_of_field]
+    simp
+  have hpre (r : A) : (Spec.preimage s').hom (MvPolynomial.C r) = (Spec.preimage s).hom r := by
+    have h : Spec.map (CommRingCat.ofHom (MvPolynomial.C (σ := PUnit.{u + 1}) (R := A)) ≫
+        Spec.preimage s') = s := by
+      have key : e.hom ≫ Spec.map (CommRingCat.ofHom (MvPolynomial.C (σ := PUnit.{u + 1}) (R := A)))
+          = 𝔸(PUnit.{u + 1}; B) ↘ B := by
+        rw [← AffineSpace.SpecIso_inv_over (n := PUnit.{u + 1}) (.of A), Iso.hom_inv_id_assoc]
+      rw [Spec.map_comp, Spec.map_preimage]
+      simp only [s', Category.assoc, key]
+      erw [AffineSpace.zeroSection_over, Category.comp_id]
+    rw [← Spec.map_injective (h.trans (Spec.map_preimage s).symm)]
+    rfl
+  have hx : (Spec.preimage s').hom x = 0 := by
+    sorry
+  obtain ⟨g, hg⟩ := exists_spec_preimage_eq_comp s
+  rw [residueFieldTrdeg_Spec] at ha
+  obtain ⟨σ, hσ⟩ := Ideal.exists_algebraicIndependent_residueField _ a ha
+  have hτ (f : MvPolynomial (Fin a) K) (hf : f ≠ 0) :
+      (Spec.preimage s').hom (MvPolynomial.aeval (fun i ↦ MvPolynomial.C (σ i)) f) ≠ 0 := by
+    have h1 : MvPolynomial.aeval (fun i ↦ (MvPolynomial.C (σ i) : MvPolynomial PUnit.{u + 1} A)) f =
+        MvPolynomial.C (MvPolynomial.aeval σ f) :=
+      MvPolynomial.aeval_algebraMap_apply (A := A) (B := MvPolynomial PUnit.{u + 1} A) σ f
+    rw [h1, hpre, hg]
+    change g.hom (algebraMap A _ (MvPolynomial.aeval σ f)) ≠ 0
+    rw [← MvPolynomial.aeval_algebraMap_apply]
+    exact (map_ne_zero_iff _ g.hom.injective).2 ((map_ne_zero_iff _ hσ).2 hf)
+  have hcd := hasTorsionCohomologicalDimensionLE_strictHenselization_away (K := K) (P := P) hd
+    IH s' (MvPolynomial.X_ne_zero _) hx (fun i ↦ MvPolynomial.C (σ i)) hτ
+  -- the fibre product is `Spec R[1/x]`
+  have hopens : (t ≫ ι) ⁻¹ᵁ (affineChart B).opensRange =
+      PrimeSpectrum.basicOpen ((toStrictHenselization s').hom x) := by
+    sorry
+  let iso : Spec (.of (Localization.Away ((toStrictHenselization s').hom x))) ≅
+      pullback (affineChart B) (t ≫ ι) :=
+    (basicOpenIsoSpecAway _).symm ≪≫ IsOpenImmersion.isoOfRangeEq (Scheme.Opens.ι _)
+      (pullback.snd (affineChart B) (t ≫ ι))
+      (by rw [Scheme.Opens.range_ι, IsOpenImmersion.range_pullbackSnd, hopens])
+  exact (hcd.of_isUniversalHomeomorphism iso.hom) _ (Etale.isTorsion_upperStar _ hM) n
+    (by omega)
 
 /-- **Stalks at infinity.** Let `K` be a field, `B = Spec K[y₁, …, y_c]` and `j : 𝔸¹_B ⟶ ℙ¹_B`
 the affine chart, and assume the affine Artin bound in dimensions `< c + 1`. Let `s` be a
@@ -159,8 +208,8 @@ theorem isZero_upperStar_infinity_rightDerived_lowerStar_affineChart {K : Type u
       (Spec.map (CommRingCat.ofHom (algebraMap K (MvPolynomial (Fin c) K))))
       (s (IsLocalRing.closedPoint Ω))
     · exact ⟨c + 1, h, by omega⟩
-    · push_neg at h
-      obtain ⟨m, hm⟩ := Cardinal.lt_aleph0.1 (h.trans (Cardinal.nat_lt_aleph0 _))
+    · push Not at h
+      obtain ⟨m, hm⟩ := Cardinal.lt_aleph0.1 (h.trans (Cardinal.natCast_lt_aleph0))
       rw [hm] at hs
       refine ⟨m, hm.ge, ?_⟩
       have : c + 1 < n + m := by exact_mod_cast hs
