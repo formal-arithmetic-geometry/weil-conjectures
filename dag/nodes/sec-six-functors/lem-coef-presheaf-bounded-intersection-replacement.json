@@ -372,5 +372,29 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-63afc4ff9 (reviewer sub-agent of L); spot-checked: I read the item (its statement is unchanged from the side DAG), all 14 steps, the full statements of the 7 cited nodes and the parent's uses of clauses (1)-(5). I checked every step myself: the objectwise normal form of the one-step pushout Q(F)(a)=F(a) ⊔ the labelled complements; that Q preserves monos and intersections (old and new symbols never collide, and u factors through S∩T); the transfinite induction at limit stages; that eta_F is in wsat(Lambda) as a continuous composite of single-generator pushouts; Lambda-injectivity from the regularity of lambda; the size bound with alpha=(2^theta)^+, using mu^theta=mu, at most mu new symbols, at most lambda unions at limits and |B x R(F)|<=mu; supports of size below lambda by simultaneous induction; and clauses (4) and (5) from those supports. Edge cases checked: A empty, Lambda empty, an empty-domain generator with S∩T empty, a non-injective attaching map u, B empty or large. The delivery has no new nodes. Every dependency is a definition or a Mathlib leaf, so there are no off-unit tools (tool_uses=[]), no cycle, and proof_deps equals the union of the uses. No SGA source is used. The small-object factorization nodes and good-subset-enlargement do not state this item, so it is not a duplicate. Caveat: Cisinski 2.4.36-2.4.37 is not in literature/ and network access is blocked here, so I could not read the source; the proof is marked agent-written and its WANTED entry stands. Unverified: source.place still says PDF pp. 79-80, though the report claims a correction to 80-81; no change made. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PresheafBoundedIntersectionReplacement",
+  "declaration": "CategoryTheory.Presheaf.exists_bounded_intersection_replacement",
+  "declarations": [
+   "CategoryTheory.Presheaf.totalCardinal",
+   "CategoryTheory.Presheaf.weaklySaturated",
+   "CategoryTheory.Presheaf.IsLambdaInjective"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PresheafBoundedIntersectionReplacement.lean",
+  "statement": "theorem exists_bounded_intersection_replacement {A : Type u} [Category.{u} A] (B : Aᵒᵖ ⥤ Type u) (Λ : Set (Arrow (Aᵒᵖ ⥤ Type u))) [Small.{u} Λ] (hΛ : ∀ a : Arrow (Aᵒᵖ ⥤ Type u), a ∈ Λ → Mono a.hom) : ∃ (R : (Aᵒᵖ ⥤ Type u) ⥤ (Aᵒᵖ ⥤ Type u)) (η : 𝟭 (Aᵒᵖ ⥤ Type u) ⟶ R) (κ α : Cardinal.{u}), Cardinal.aleph0 ≤ κ ∧ κ.IsRegular ∧ Cardinal.aleph0 ≤ α ∧ α.IsRegular ∧ κ < α ∧ Cardinal.mk (Σ a b : A, (a ⟶ b)) < α ∧ totalCardinal B < α ∧ (∀ F : Aᵒᵖ ⥤ Type u, weaklySaturated Λ (η.app F) ∧ IsLambdaInjective Λ (R.obj F)) ∧ (∀ {X Y : Aᵒᵖ ⥤ Type u} (f : X ⟶ Y), Mono f → Mono (R.map f)) ∧ (∀ (Y : Aᵒᵖ ⥤ Type u) (S T : Subfunctor Y), Subfunctor.range (R.map (S.ι)) ⊓ Subfunctor.range (R.map (T.ι)) = Subfunctor.range (R.map ((S ⊓ T).ι))) ∧ (∀ F : Aᵒᵖ ⥤ Type u, totalCardinal F < α → totalCardinal (R.obj F) < α ∧ Cardinal.mk (Σ a : A, B.obj (Opposite.op a) × (R.obj F).obj (Opposite.op a)) < α) ∧ (∀ (Y : Aᵒᵖ ⥤ Type u), (⨆ (S : Subfunctor Y) (_ : totalCardinal S.toFunctor < α), Subfunctor.range (R.map S.ι)) = ⊤) ∧ (∀ (Y : Aᵒᵖ ⥤ Type u) (T : κ.ord.ToType → Subfunctor Y), (∀ ξ ζ, ξ ≤ ζ → T ξ ≤ T ζ) → (⨆ ξ : κ.ord.ToType, Subfunctor.range (R.map (T ξ).ι)) = Subfunctor.range (R.map ((⨆ ξ, T ξ).ι)))",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The three helpers spell out the total-element size, weak saturation, and Lambda-injectivity explicitly introduced in this node; all have real data. Smallness of the set of arrows is Small.{u} Λ. Subfunctor.range of each R.map inclusion specifies the canonical images inside R(Y). The source lambda is named κ in Lean because λ is reserved syntax."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9edb6b998",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Item node unchanged from the side clone except the new lean field; no statement_change, new nodes or dependency modules. Lean signature checked clause by clause against the node: U-small A as Type u/Category.{u}; B arbitrary; Λ Small.{u} set of monos; wsat as sInf of classes closed under pushouts, transfiniteCompositions.{u} (well-order-continuous) and retracts (the extra isomorphisms clause is redundant, since isos are one-point transfinite compositions); Λ-injectivity as existence of an extension; one outer existential R, η, κ<α, both infinite regular; α above #Mor(A) and |B|; clauses (1)-(5) faithful, with canonical Subfunctor.range images and the chain indexed by κ.ord.ToType. Edge cases (A empty, Λ empty, empty-domain generator, empty S∩T, empty F or B, large Y) are not excluded. Helpers have real data; every docstring cites the source and blueprint id; the theorem docstring has all 14 steps; the only proof is one sorry; lean.statement is verbatim; the report has real Worker report and Second reading by Q21 sections. nt_compile.py --json compiled clean in 1.5 s; #print axioms shows sorryAx only from the postponed proof. No findings, no fixes."
  }
 }
