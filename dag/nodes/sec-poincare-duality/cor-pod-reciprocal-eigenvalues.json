@@ -1,89 +1,219 @@
 {
-  "id": "cor-pod-reciprocal-eigenvalues",
-  "blueprint": {
-    "is": "cor-pod-reciprocal-eigenvalues",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Reciprocal eigenvalues",
-  "statement": "In the Poincare duality conventions of this chapter (the fixed setting), strict Weil complex with $K$ perfect, at a *field* coefficient stage $\\Lambda \\in \\{ E,\\overline{\\mathbf Q}_{\\ell }\\}$ (the hypothesis of [thm-pod-degreewise-perfectness-over-a-field]; the statement fails over $\\mathcal O_E$, where the degreewise pairing need not be perfect). Relative to the perfect pairing of Theorem 9.23, the operator $F_{K^\\vee }$ on $H^{2d-i}(X,K^\\vee )$ is conjugate to\n\n$$\nq^d\\, \\bigl(F_{c,K}^{-1}\\bigr)^{\\mathsf t}.\n$$\n\nThus an eigenvalue $\\alpha$ of $F_{c,K}$ on $H_c^i(X,K)$ with algebraic multiplicity $m$ corresponds, with the same multiplicity, to the eigenvalue $q^d/\\alpha$ of $F_{K^\\vee }$ on $H^{2d-i}(X,K^\\vee )$. If $X_0$ is proper, the first space is $H^i(X,K)$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-thm-frobenius/cor-pod-reciprocal-eigenvalues.md",
-    "place": "node cor-pod-reciprocal-eigenvalues, order 2447"
-  },
-  "stmt_deps": [
+ "id": "cor-pod-reciprocal-eigenvalues",
+ "blueprint": {
+  "is": "cor-pod-reciprocal-eigenvalues",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Reciprocal eigenvalues",
+ "statement": "In the Poincare duality conventions [def-pod-conventions] of this chapter (the fixed setting), let $(K,\\varphi_K)$ be a strict Weil complex with $K$ perfect, at a *field* coefficient stage $\\Lambda \\in \\{ E,\\overline{\\mathbf Q}_{\\ell }\\}$ (the hypothesis of [thm-pod-degreewise-perfectness-over-a-field]; the statement fails over $\\mathcal O_E$, where the degreewise pairing need not be perfect). Relative to the perfect pairing of [thm-pod-degreewise-perfectness-over-a-field], the operator $F_{K^\\vee }$ on $H^{2d-i}(X,K^\\vee )$ is conjugate to\n\n$$\nq^d\\, \\bigl(F_{c,K}^{-1}\\bigr)^{\\mathsf t}.\n$$\n\nThus an eigenvalue $\\alpha$ of $F_{c,K}$ on $H_c^i(X,K)$ with algebraic multiplicity $m$ corresponds, with the same multiplicity, to the eigenvalue $q^d/\\alpha$ of $F_{K^\\vee }$ on $H^{2d-i}(X,K^\\vee )$. If $X_0$ is proper, the first space is $H^i(X,K)$. Here eigenvalues at the $E$ stage are computed in the fixed algebraic closure $\\overline{\\mathbf Q}_\\ell$, and algebraic multiplicity means multiplicity as a root of the characteristic polynomial [def-weil-characteristic-polynomial, def-weil-root-multiplicity]. The scalar-valued adjoint is obtained by choosing a trivialization of the value line $\\Lambda(-d)$; equivalently, the conjugacy is intrinsically with the dual tensored with that line.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-thm-frobenius/cor-pod-reciprocal-eigenvalues.md",
+  "place": "node cor-pod-reciprocal-eigenvalues, order 2447"
+ },
+ "stmt_deps": [
+  "def-pod-conventions",
+  "def-pur-tate-datum",
+  "def-pod-perfect-complex-on-x",
+  "def-pod-coefficient-dual-on-x",
+  "thm-pod-degreewise-perfectness-over-a-field",
+  "def-weil-characteristic-polynomial",
+  "def-weil-root-multiplicity"
+ ],
+ "proof": [
+  {
+   "text": "Put $V=H_c^i(X,K)$, $W=H^{2d-i}(X,K^\\vee)$ and $L=\\Lambda(-d)$. By [thm-pod-degreewise-perfectness-over-a-field], $V,W$ are finite-dimensional and the line-valued pairing $b_L:V\\times W\\to L$ is perfect. Choose a nonzero vector in the one-dimensional coefficient line $L$, hence a linear isomorphism $t:L\\xrightarrow{\\sim}\\Lambda$. Then $b=t\\circ b_L$ is perfect: composing either adjoint with the isomorphism induced by $t$ preserves bijectivity. Thus $\\Phi:W\\xrightarrow{\\sim}V^\\vee$, $\\Phi(y)(x)=b(x,y)$, is an isomorphism. This uses the ordinary finite-dimensional dual explicitly supplied by the cited field-stage theorem, not a claim about integral degreewise duals.",
+   "uses": [
     "thm-pod-degreewise-perfectness-over-a-field"
-  ],
-  "proof": [
-    {
-      "text": "Step 1: the adjoint identification. By [thm-pod-degreewise-perfectness-over-a-field] the degreewise pairing is perfect, so the bilinear form $b:H_c^i(X,K)\\times H^{2d-i}(X,K^\\vee )\\to \\Lambda$ is nondegenerate and the map\n\n$$\n\\Phi :H^{2d-i}(X,K^\\vee )\\longrightarrow H_c^i(X,K)^\\vee , \\qquad \\Phi (y)(x)=\\langle x,y\\rangle ^{\\mathrm{untw}}_i,\n$$\n\nis an isomorphism of $\\Lambda$-vector spaces, the field-stage dual being the ordinary dual, by [def-weil-finite-coefficient-point]. Step 2: the similitude translates. The untwisted similitude of [cor-pod-untwisted-similitude], $b(F_{c,K}x,F_{K^\\vee }y)=q^db(x,y)$, says precisely that\n\n$$\n\\Phi \\circ F_{K^\\vee }=q^d\\, \\bigl(F_{c,K}^{-1}\\bigr)^{\\mathsf t}\\circ \\Phi ,\n$$\n\nwhere $\\bigl(F_{c,K}^{-1}\\bigr)^{\\mathsf t}$ is the transpose of the inverse operator on the dual $H_c^i(X,K)^\\vee$. Therefore $F_{K^\\vee }=q^d\\Phi ^{-1}\\bigl(F_{c,K}^{-1}\\bigr)^{\\mathsf t}\\Phi$, i.e. $F_{K^\\vee }$ is conjugate to $q^d\\bigl(F_{c,K}^{-1}\\bigr)^{\\mathsf t}$. Step 3: eigenvalues. A linear operator on a finite-dimensional vector space and its transpose have the same characteristic polynomial, and conjugation does not change it, so the eigenvalues of $F_{K^\\vee }$ are the eigenvalues of $q^dF_{c,K}^{-1}$; on the finite-dimensional space $H_c^i(X,K)$ (Step 1 and the finite-dimensionality of [thm-pod-degreewise-perfectness-over-a-field]) the eigenvalues of an automorphism are the inverses of the eigenvalues of the operator, each with the same algebraic multiplicity, so the eigenvalues of $F_{K^\\vee }$ are the $q^d/\\alpha$ with the multiplicities of the eigenvalues $\\alpha$ of $F_{c,K}$. Step 4: the last assertion is the proper comparison $H_c^i=H^i$ of [thm-pod-proper-poincare-duality], which requires $X_0$ proper.",
-      "uses": [
-        "thm-pod-degreewise-perfectness-over-a-field",
-        "def-weil-finite-coefficient-point",
-        "cor-pod-untwisted-similitude",
-        "thm-pod-proper-poincare-duality"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "thm-pod-degreewise-perfectness-over-a-field",
-    "def-weil-finite-coefficient-point",
-    "cor-pod-untwisted-similitude",
-    "thm-pod-proper-poincare-duality"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-thm-frobenius/cor-pod-reciprocal-eigenvalues.md",
-    "place": "## Proof"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-thm-frobenius/cor-pod-reciprocal-eigenvalues.proof.md",
+    "place": "Proof, Step 1; explicit linear algebra and proper-operator compatibility as detailed here"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 2447,
-  "blueprint_uses": [
+  {
+   "text": "Write $F=F_{c,K}$, $G=F_{K^\\vee}$ and $c=q^d\\in\\Lambda$. The Tate datum [def-pur-tate-datum] states that $q$ is a unit at all coefficient stages, so $c\\ne0$ in our field. By [cor-pod-untwisted-similitude], $b_L(Fx,Gy)=q^db_L(x,y)$. Applying the linear map $t$ gives $b(Fx,Gy)=c\\,b(x,y)$ for all $x,y$. In particular the two finite-dimensional spaces, the scalar-valued perfect pairing, and the nonzero multiplier satisfy every hypothesis of [lem-weil-similitude-pairing-reciprocity].",
+   "uses": [
+    "def-pur-tate-datum",
     "cor-pod-untwisted-similitude",
-    "def-weil-finite-coefficient-point",
-    "thm-pod-degreewise-perfectness-over-a-field",
-    "thm-pod-proper-poincare-duality"
-  ],
-  "blueprint_tags": [
-    "latex:corollary"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+    "lem-weil-similitude-pairing-reciprocity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-thm-frobenius/cor-pod-reciprocal-eigenvalues.proof.md",
+    "place": "Proof, Step 2; explicit linear algebra and proper-operator compatibility as detailed here"
+   }
   },
-  "chapter": "sec-poincare-duality",
-  "unit": "sk-thm-frobenius",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "In the Poincare duality conventions of this chapter (the fixed setting), let $(K,\\varphi_K)$ be a strict Weil complex with $K$ perfect, at a *field* coefficient stage $\\Lambda \\in \\{ E,\\overline{\\mathbf Q}_{\\ell }\\}$ (the hypothesis of [thm-pod-degreewise-perfectness-over-a-field]; the statement fails over $\\mathcal O_E$, where the degreewise pairing need not be perfect). Relative to the perfect pairing of [thm-pod-degreewise-perfectness-over-a-field], the operator $F_{K^\\vee }$ on $H^{2d-i}(X,K^\\vee )$ is conjugate to\n\n$$\nq^d\\, \\bigl(F_{c,K}^{-1}\\bigr)^{\\mathsf t}.\n$$\n\nThus an eigenvalue $\\alpha$ of $F_{c,K}$ on $H_c^i(X,K)$ with algebraic multiplicity $m$ corresponds, with the same multiplicity, to the eigenvalue $q^d/\\alpha$ of $F_{K^\\vee }$ on $H^{2d-i}(X,K^\\vee )$. If $X_0$ is proper, the first space is $H^i(X,K)$.",
-    "proof": [
-      {
-        "text": "Step 1: the adjoint identification. By [thm-pod-degreewise-perfectness-over-a-field] the degreewise pairing is perfect, so the bilinear form $b:H_c^i(X,K)\\times H^{2d-i}(X,K^\\vee )\\to \\Lambda$ is nondegenerate and the map\n\n$$\n\\Phi :H^{2d-i}(X,K^\\vee )\\longrightarrow H_c^i(X,K)^\\vee , \\qquad \\Phi (y)(x)=\\langle x,y\\rangle ^{\\mathrm{untw}}_i,\n$$\n\nis an isomorphism of $\\Lambda$-vector spaces, the field-stage dual being the ordinary dual, by [def-weil-finite-coefficient-point]. Step 2: the similitude translates. The untwisted similitude of [cor-pod-untwisted-similitude], $b(F_{c,K}x,F_{K^\\vee }y)=q^db(x,y)$, says precisely that\n\n$$\n\\Phi \\circ F_{K^\\vee }=q^d\\, \\bigl(F_{c,K}^{-1}\\bigr)^{\\mathsf t}\\circ \\Phi ,\n$$\n\nwhere $\\bigl(F_{c,K}^{-1}\\bigr)^{\\mathsf t}$ is the transpose of the inverse operator on the dual $H_c^i(X,K)^\\vee$. Therefore $F_{K^\\vee }=q^d\\Phi ^{-1}\\bigl(F_{c,K}^{-1}\\bigr)^{\\mathsf t}\\Phi$, i.e. $F_{K^\\vee }$ is conjugate to $q^d\\bigl(F_{c,K}^{-1}\\bigr)^{\\mathsf t}$. Step 3: eigenvalues. A linear operator on a finite-dimensional vector space and its transpose have the same characteristic polynomial, and conjugation does not change it, so the eigenvalues of $F_{K^\\vee }$ are the eigenvalues of $q^dF_{c,K}^{-1}$; on the finite-dimensional space $H_c^i(X,K)$ (Step 1 and the finite-dimensionality of [thm-pod-degreewise-perfectness-over-a-field]) the eigenvalues of an automorphism are the inverses of the eigenvalues of the operator, each with the same algebraic multiplicity, so the eigenvalues of $F_{K^\\vee }$ are the $q^d/\\alpha$ with the multiplicities of the eigenvalues $\\alpha$ of $F_{c,K}$. Step 4: the last assertion is the proper comparison $H_c^i=H^i$ of [thm-pod-proper-poincare-duality], which requires $X_0$ proper.",
-        "uses": [
-          "thm-pod-degreewise-perfectness-over-a-field",
-          "def-weil-finite-coefficient-point",
-          "cor-pod-untwisted-similitude",
-          "thm-pod-proper-poincare-duality"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Clause 2 of [lem-weil-similitude-pairing-reciprocity] implies that $F$ and $G$ are invertible. For $x\\in V,y\\in W$, substitute $F^{-1}x$ into the identity of step 2 to obtain $\\Phi(Gy)(x)=b(x,Gy)=c\\,b(F^{-1}x,y)=\\bigl(c(F^{-1})^{\\mathsf t}\\Phi(y)\\bigr)(x)$. Equality of these functionals for every $x$ proves $\\Phi G=c(F^{-1})^{\\mathsf t}\\Phi$, hence $\\Phi G\\Phi^{-1}=c(F^{-1})^{\\mathsf t}$. This is the required conjugacy, with its specified adjoint. A different trivialization multiplies $\\Phi$ by a nonzero scalar, which cancels in this displayed conjugation.",
+   "uses": [
+    "lem-weil-similitude-pairing-reciprocity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-thm-frobenius/cor-pod-reciprocal-eigenvalues.proof.md",
+    "place": "Proof, Step 3; explicit linear algebra and proper-operator compatibility as detailed here"
+   }
+  },
+  {
+   "text": "Apply clause 4 of [lem-weil-similitude-pairing-reciprocity] to the data checked in steps 1 and 2, using the inclusion $\\Lambda\\hookrightarrow\\overline{\\mathbf Q}_\\ell$ (the identity at the algebraically closed stage). It says that the eigenvalue multiset of $G$ is the image of that of $F$ under $\\alpha\\mapsto q^d/\\alpha$, counted with algebraic multiplicity. Invertibility excludes $\\alpha=0$. Since $c\\ne0$, equality $c/\\alpha=c/\\alpha^\\prime$ for nonzero $\\alpha,\\alpha^\\prime$ implies $\\alpha=\\alpha^\\prime$ by multiplying by $\\alpha\\alpha^\\prime$ and cancelling $c$. Therefore an eigenvalue of multiplicity $m$ contributes exactly multiplicity $m$, without merging distinct eigenvalues.",
+   "uses": [
+    "lem-weil-similitude-pairing-reciprocity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-thm-frobenius/cor-pod-reciprocal-eigenvalues.proof.md",
+    "place": "Proof, Step 4; explicit linear algebra and proper-operator compatibility as detailed here"
+   }
+  },
+  {
+   "text": "If $X_0$ is proper, [thm-pod-proper-poincare-duality] supplies the canonical comparison $R\\Gamma_c(X,K)\\cong R\\Gamma(X,K)$, hence $V\\cong H^i(X,K)$. It also identifies the Poincare pairing under this comparison. For completeness the comparison respects the operators: write $\\kappa_M$ for its derived version and use the identity compactification as in [lem-pod-proper-coincidence-frobenius]. That node gives $\\tau_K\\kappa_K=\\kappa_{Lg^*K}\\tau_{c,K}$ and says that $\\kappa$ is natural in $M$. Naturality for $\\varphi_K:Lg^*K\\to K$ gives $R\\Gamma(\\varphi_K)\\kappa_{Lg^*K}=\\kappa_KR\\Gamma_c(\\varphi_K)$. Substitution into the definitions of $F_K,F_{c,K}$ in [def-pod-conventions] yields $F_K\\kappa_K=\\kappa_KF_{c,K}$. Taking degree $i$ proves that the first space and its Frobenius may be replaced by ordinary cohomology.",
+   "uses": [
+    "thm-pod-proper-poincare-duality",
+    "lem-pod-proper-coincidence-frobenius",
+    "def-pod-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-thm-frobenius/cor-pod-reciprocal-eigenvalues.proof.md",
+    "place": "Proof, Step 4; explicit linear algebra and proper-operator compatibility as detailed here"
+   }
   }
+ ],
+ "proof_deps": [
+  "thm-pod-degreewise-perfectness-over-a-field",
+  "def-pur-tate-datum",
+  "cor-pod-untwisted-similitude",
+  "lem-weil-similitude-pairing-reciprocity",
+  "thm-pod-proper-poincare-duality",
+  "lem-pod-proper-coincidence-frobenius",
+  "def-pod-conventions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-thm-frobenius/cor-pod-reciprocal-eigenvalues.proof.md",
+  "place": "Steps 1-4; adjoint calculation and multiplicity argument, using the existing abstract similitude lemma"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Poincare duality Frobenius eigenvalues reciprocal with algebraic multiplicity over a field",
+   "results": "LinearMap.finrank_genEigenspace_le, LinearMap.finrank_maxGenEigenspace_eq, LinearMap.finrank_eigenspace_le, Module.End.maxUnifEigenspaceIndex_le_finrank, FiniteField.orderOf_frobeniusAlgHom, Module.End.finite_hasEigenvalue, FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic, LinearMap.finrank_maxGenEigenspace",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the field-stage cohomological reciprocity corollary"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.IsPerfPair, LinearMap.charpoly",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the field-stage cohomological reciprocity corollary"
+  },
+  {
+   "tool": "grep",
+   "query": "similitude|roots_map_charpoly_of_similitude|conj_toPerfPair",
+   "results": "No hits in Mathlib/LinearAlgebra",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the field-stage cohomological reciprocity corollary"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A perfect bilinear pairing preserved up to a scalar relates Frobenius eigenvalues by reciprocal eigenvalues with multiplicity",
+   "results": "LinearMap.IsPerfPair.congr, LinearMap.apply_symm_toPerfPair_self, LinearMap.IsPerfPair.compl₁₂, LinearMap.IsPerfPair.mk, LinearMap.IsPerfPair.flip, LinearMap.IsPerfPair.recOn, LinearMap.BilinForm.dualSubmoduleParing, LinearMap.IsPerfPair",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the field-stage cohomological reciprocity corollary"
+  },
+  {
+   "tool": "grep",
+   "query": "charpoly_dual|charpoly_conj|charpoly.*inv|roots.*inv|IsPerfPair",
+   "results": "Mathlib/LinearAlgebra/SpecialLinearGroup.lean, Mathlib/LinearAlgebra/SpecialLinearGroup.lean, Mathlib/LinearAlgebra/SpecialLinearGroup.lean, Mathlib/LinearAlgebra/SpecialLinearGroup.lean, Mathlib/LinearAlgebra/SpecialLinearGroup.lean, Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean, Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean, Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the field-stage cohomological reciprocity corollary"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The eigenvalues of two endomorphisms related by a perfect bilinear similitude are c divided by alpha with multiplicities",
+   "results": "Module.End.HasUnifEigenvalue.of_mem_spectrum, Module.End.hasUnifEigenvalue_iff_hasUnifEigenvalue_one, LinearMap.IsSymmetric.diagonalization_apply_self_apply, Module.End.hasUnifEigenvalue_iff_mem_spectrum, Module.End.hasEigenvalue_iff_mem_spectrum, Module.End.hasGenEigenvalue_iff_hasEigenvalue, Module.End.HasEigenvalue.of_mem_spectrum, Module.End.eigenspace_div",
+   "date": "2026-10-17",
+   "verdict": "no match: none states the field-stage cohomological reciprocity corollary"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2447,
+ "blueprint_uses": [
+  "cor-pod-untwisted-similitude",
+  "def-weil-finite-coefficient-point",
+  "thm-pod-degreewise-perfectness-over-a-field",
+  "thm-pod-proper-poincare-duality"
+ ],
+ "blueprint_tags": [
+  "latex:corollary"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-frobenius",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "In the Poincare duality conventions of this chapter (the fixed setting), let $(K,\\varphi_K)$ be a strict Weil complex with $K$ perfect, at a *field* coefficient stage $\\Lambda \\in \\{ E,\\overline{\\mathbf Q}_{\\ell }\\}$ (the hypothesis of [thm-pod-degreewise-perfectness-over-a-field]; the statement fails over $\\mathcal O_E$, where the degreewise pairing need not be perfect). Relative to the perfect pairing of [thm-pod-degreewise-perfectness-over-a-field], the operator $F_{K^\\vee }$ on $H^{2d-i}(X,K^\\vee )$ is conjugate to\n\n$$\nq^d\\, \\bigl(F_{c,K}^{-1}\\bigr)^{\\mathsf t}.\n$$\n\nThus an eigenvalue $\\alpha$ of $F_{c,K}$ on $H_c^i(X,K)$ with algebraic multiplicity $m$ corresponds, with the same multiplicity, to the eigenvalue $q^d/\\alpha$ of $F_{K^\\vee }$ on $H^{2d-i}(X,K^\\vee )$. If $X_0$ is proper, the first space is $H^i(X,K)$.",
+  "proof": [
+   {
+    "text": "Step 1: the adjoint identification. By [thm-pod-degreewise-perfectness-over-a-field] the degreewise pairing is perfect, so the bilinear form $b:H_c^i(X,K)\\times H^{2d-i}(X,K^\\vee )\\to \\Lambda$ is nondegenerate and the map\n\n$$\n\\Phi :H^{2d-i}(X,K^\\vee )\\longrightarrow H_c^i(X,K)^\\vee , \\qquad \\Phi (y)(x)=\\langle x,y\\rangle ^{\\mathrm{untw}}_i,\n$$\n\nis an isomorphism of $\\Lambda$-vector spaces, the field-stage dual being the ordinary dual, by [def-weil-finite-coefficient-point]. Step 2: the similitude translates. The untwisted similitude of [cor-pod-untwisted-similitude], $b(F_{c,K}x,F_{K^\\vee }y)=q^db(x,y)$, says precisely that\n\n$$\n\\Phi \\circ F_{K^\\vee }=q^d\\, \\bigl(F_{c,K}^{-1}\\bigr)^{\\mathsf t}\\circ \\Phi ,\n$$\n\nwhere $\\bigl(F_{c,K}^{-1}\\bigr)^{\\mathsf t}$ is the transpose of the inverse operator on the dual $H_c^i(X,K)^\\vee$. Therefore $F_{K^\\vee }=q^d\\Phi ^{-1}\\bigl(F_{c,K}^{-1}\\bigr)^{\\mathsf t}\\Phi$, i.e. $F_{K^\\vee }$ is conjugate to $q^d\\bigl(F_{c,K}^{-1}\\bigr)^{\\mathsf t}$. Step 3: eigenvalues. A linear operator on a finite-dimensional vector space and its transpose have the same characteristic polynomial, and conjugation does not change it, so the eigenvalues of $F_{K^\\vee }$ are the eigenvalues of $q^dF_{c,K}^{-1}$; on the finite-dimensional space $H_c^i(X,K)$ (Step 1 and the finite-dimensionality of [thm-pod-degreewise-perfectness-over-a-field]) the eigenvalues of an automorphism are the inverses of the eigenvalues of the operator, each with the same algebraic multiplicity, so the eigenvalues of $F_{K^\\vee }$ are the $q^d/\\alpha$ with the multiplicities of the eigenvalues $\\alpha$ of $F_{c,K}$. Step 4: the last assertion is the proper comparison $H_c^i=H^i$ of [thm-pod-proper-poincare-duality], which requires $X_0$ proper.",
+    "uses": [
+     "thm-pod-degreewise-perfectness-over-a-field",
+     "def-weil-finite-coefficient-point",
+     "cor-pod-untwisted-similitude",
+     "thm-pod-proper-poincare-duality"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "cor-pod-reciprocal-eigenvalues",
+  "worker": "stage1",
+  "summary": "Followed main-20261015 statement and proof; separated perfectness, similitude, explicit conjugacy, algebraic multiplicity and proper comparison. Made Tate-line trivialization and algebraic-closure convention explicit. Reused existing generic similitude reciprocity and proper Frobenius comparison nodes; no new nodes. Tagged Lean declarations are finite-coefficient-only and cannot attach the field-stage statement.",
+  "blueprint": "Realizes sk-thm-frobenius clause (b), its Step 4, and all four steps of the current corollary proof; keeps the perfectness and untwisted-similitude route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-similitude-pairing-reciprocity",
+    "why": "Generic finite-dimensional linear algebra supplies invertibility and reciprocal eigenvalue multisets with multiplicity; it contains no geometric theorem, and no node of this unit supplies this abstract spectral calculation."
+   },
+   {
+    "node": "lem-pod-proper-coincidence-frobenius",
+    "why": "Generic compatibility of the proper comparison with Frobenius transports; used only in the optional proper clause, where the unit names the comparison but does not state its operator compatibility."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-similitude-pairing-reciprocity",
+  "lem-pod-proper-coincidence-frobenius"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q89-d8df0b9f2",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q89-d8df0b9f2 (reviewer sub-agent of L); spot-checked: Full mathematics, cited nodes/sources, blueprint route, coefficient categories, base-change/Frobenius compatibility, duplicates, and edge cases were checked. The split is correct; review written to review.md. No repairs or attachments are needed."
+ }
 }

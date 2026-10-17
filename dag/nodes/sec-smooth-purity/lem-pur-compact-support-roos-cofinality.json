@@ -4,13 +4,108 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-sheaf-of-modules-category",
   "def-weil-inverse-system",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $T(i,j)=t_i\\cdots t_{j-1}:K_j\\to K_i$ for $j\\ge i$, with $T(i,i)=1$, and $P=\\prod_{i\\ge1}K_i$, $P_e=\\prod_{n\\ge1}K_{en}$, $D=1-s$ and $D_e=1-s_e$. In the reordered, signed coordinates $(x,y)=(x_{\\rm cone},-y_{\\rm cone})$, the stipulated shifted cone has terms $P^q\\oplus P^{q-1}$ and differential $d_R(x,y)=(dx,Dx-dy)$ [def-weil-abstract-derived-category]. The identity $T(i,j)T(j,k)=T(i,k)$ is the tower composition law [def-weil-inverse-system]. Hence finite cancellation gives\n$$ (b_eDx)_n=\\sum_{i=en}^{e(n+1)-1}\\bigl(T(en,i)x_i-T(en,i+1)x_{i+1}\\bigr)=x_{en}-T(en,e(n+1))x_{e(n+1)}=(D_ea_ex)_n. $$\nBoth $a_e$ and $b_e$ commute with internal differentials, since every $T(i,j)$ does. Thus $r_e(x,y)=(a_ex,b_ey)$ is precisely the induced chain map of the two cones.",
+   "uses": [
+    "def-weil-inverse-system",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, Roos-cone context; explicit block calculations by the worker (not a claim that this tag states cofinality)"
+   }
+  },
+  {
+   "text": "Construct a section of this particular map. For each $i\\ge1$, let $m(i)$ be the least positive multiple of $e$ with $m(i)\\ge i$. Define $\\alpha:P_e\\to P$ by $(\\alpha u)_i=T(i,m(i))u_{m(i)/e}$, and $\\beta:P_e\\to P$ by $(\\beta v)_{en}=v_n$, with all other coordinates zero. These are maps of internal complexes. Directly $a_e\\alpha=1$ and $b_e\\beta=1$. If $i$ is not a multiple of $e$, $m(i)=m(i+1)$, so $(D\\alpha u)_i=0$. At $i=en$ it equals $u_n-T(en,e(n+1))u_{n+1}$. Therefore $D\\alpha=\\beta D_e$, and $j(u,v)=(\\alpha u,\\beta v)$ is a chain map with $r_ej=1$. This also treats the initial indices $1\\le i<e$: they are extended backward from $e$, rather than discarded.",
+   "uses": [
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, Roos-cone context; explicit block calculations by the worker (not a claim that this tag states cofinality)"
+   }
+  },
+  {
+   "text": "Let $U=\\ker a_e\\subset P$ and $V=\\ker b_e\\subset P$, computed sectionwise [def-weil-sheaf-of-modules-category]. The square from Step 1 restricts $D$ to $D_U:U\\to V$. For $y\\in V$, define $c(y)_{en}=0$. At a nonretained index $i$, let $m=m(i)>i$ and put\n$$ c(y)_i=\\sum_{k=i}^{m-1}T(i,k)y_k. $$\nThese are finite sums of sheaf morphisms and define a map $c:V\\to U$ of internal complexes. At a nonretained index, cancellation gives $(Dc(y))_i=y_i$. At $en$, the equation $(b_ey)_n=0$ gives $y_{en}=-\\sum_{k=en+1}^{e(n+1)-1}T(en,k)y_k=-t_{en}c(y)_{en+1}$, so the same equality holds there. Conversely, telescoping $\\sum_{k=i}^{m-1}T(i,k)(Dx)_k=x_i-T(i,m)x_m=x_i$ for $x\\in U$ gives $cD_U=1$; retained coordinates are zero on both sides. Thus $D_Uc=1$ and $cD_U=1$. No surjectivity of any transition is used.",
+   "uses": [
+    "def-weil-inverse-system",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, Roos-cone context; explicit block calculations by the worker (not a claim that this tag states cofinality)"
+   }
+  },
+  {
+   "text": "In the coordinates of Step 1 the kernel $E=\\ker r_e$ is $E^q=U^q\\oplus V^{q-1}$ with differential $(u,v)\\mapsto(du,D_Uu-dv)$. The degree $-1$ map $h(u,v)=(cv,0)$ satisfies\n$$ d_Eh(u,v)+hd_E(u,v)=(dcv,v)+(u-cdv,0)=(u,v). $$\nThe equality uses $dc=cd$ from Step 3. Since $r_ej=1$, the chain map $L=1-jr_e$ takes values in $E$. With $\\iota:E\\to R$ its inclusion, the degree $-1$ map $H=\\iota hL$ therefore satisfies $d_RH+Hd_R=1-jr_e$. On a cycle $z$, this says $z-jr_ez=d_RHz$, a boundary. Thus $jr_e$ induces the identity on $\\ker d/\\operatorname{im}d$, and $r_ej=1$ does as well on the other complex. Consequently every $H^q(r_e)$ has inverse $H^q(j)$, proving the required quasi-isomorphism by the definition in [def-weil-abstract-derived-category]. All formulas are identities of sheaf morphisms; no passage from presheaf cohomology to sheaf cohomology is used.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, Roos-cone context; explicit block calculations by the worker (not a claim that this tag states cofinality)"
+   }
+  },
+  {
+   "text": "For a tower map $f_i:K_i\\to K'_i$, induction on $j-i$ in the transition equation gives $f_iT(i,j)=T'(i,j)f_j$. Substitution into the formulas for $a_e,b_e$ proves naturality of $r_e$. For successive restrictions by $e$ and $f$, the first-coordinate map is $a_fa_e=a_{ef}$. On the second coordinate, the block sum for the restricted tower is\n$$ \\sum_{n=fk}^{f(k+1)-1}T(efk,en)\\sum_{i=en}^{e(n+1)-1}T(en,i)y_i=\\sum_{i=efk}^{ef(k+1)-1}T(efk,i)y_i. $$\nThus $b_f^{(e)}b_e=b_{ef}$ and the actual cone maps compose strictly, with $r_1=1$. For a strictly compatible augmentation $\\gamma:P_0\\to K_\\bullet$, $D(\\gamma_i)_i=0$, so its cone map is $p\\mapsto((\\gamma_i p)_i,0)$. Applying $r_e$ gives $p\\mapsto((\\gamma_{en}p)_n,0)$, exactly the restricted augmentation.",
+   "uses": [
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, Roos-cone context; explicit block calculations by the worker (not a claim that this tag states cofinality)"
+   }
+  },
+  {
+   "text": "Here and below $-\\otimes_AB$ means $-\\otimes_{\\underline A}\\underline B$ for the constant sheaves [def-weil-pbc-constant-sheaf, def-pur-sheaf-tensor-product]. Choose a finite $A$-basis $b_1,\\ldots,b_r$ of $B$, with dual maps $\\lambda_a:B\\to A$. For any module sheaf $M$, the mutually inverse maps\n$$ M\\otimes_AB\\longrightarrow M^r,\\quad m\\otimes b\\longmapsto(\\lambda_a(b)m)_a,\\qquad (m_a)_a\\longmapsto\\sum_a m_a\\otimes b_a $$\nare defined using the sectionwise tensor universal property [def-weil-pbc-module-tensor-product] and then sheafification [def-pur-sheaf-tensor-product]. The identities follow from $b=\\sum_a\\lambda_a(b)b_a$; on arbitrary sections of $\\underline B$ this identity follows by sheafifying the corresponding identity on the constant presheaf. For any family $M_i$, the canonical map\n$$ \\gamma:(\\prod_iM_i)\\otimes_AB\\to\\prod_i(M_i\\otimes_AB) $$\nthen becomes the rearrangement $(\\prod_iM_i)^r\\to\\prod_i M_i^r$, $(m_{i,a})\\mapsto(m_{i,a})$. Its inverse sends a family with basis coordinates $m_{i,a}$ to $\\sum_{a=1}^r(m_{i,a})_i\\otimes b_a$. This is a finite sum, so it defines a sheaf morphism for any countable family and on any site. The canonical map $\\gamma$ is consequently an isomorphism; the basis proves invertibility without entering its definition.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; finite-basis calculation using algebra.tex Tag 00CX, lemma-tensor-product"
+   }
+  },
+  {
+   "text": "The map $\\gamma$ is natural and $B$-linear: on local tensor generators it is $(m_i)_i\\otimes b\\mapsto(m_i\\otimes b)_i$, so $\\gamma(zb')=\\gamma(z)b'$ and it commutes with every componentwise module map. The same finite-basis rearrangement identifies $(M\\oplus N)\\otimes_AB$ with $(M\\otimes_AB)\\oplus(N\\otimes_AB)$ and commutes with negatives. Applied in every degree, these maps therefore give a chain isomorphism\n$$ \\theta:\\mathsf R(K_\\bullet)\\otimes_AB\\xrightarrow{\\sim}\\mathsf R(K_\\bullet\\otimes_AB). $$\nIndeed $\\gamma(sx\\otimes b)=(t_ix_{i+1}\\otimes b)_i=s_B\\gamma(x\\otimes b)$, and the internal differential and the signed cone differential are preserved term by term. Finally $a_e(x)_n=x_{en}$ is preserved by tensoring, and\n$$ \\Bigl(\\sum_{i=en}^{e(n+1)-1}T(en,i)y_i\\Bigr)\\otimes b=\\sum_{i=en}^{e(n+1)-1}(T(en,i)\\otimes1)(y_i\\otimes b). $$\nThus $\\theta$ commutes with $r_e$ on both cone coordinates. On an augmentation $(\\gamma_i p,0)$ it gives $(\\gamma_i p\\otimes b,0)$, its scalar extension. These equalities on local tensor generators give sheaf morphism equalities by the defining sheafification; they also prove naturality of $\\theta$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; finite-basis calculation using algebra.tex Tag 00CX, lemma-tensor-product"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-inverse-system",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok, provides the Roos context only; explicit chain section, finite-block contraction and tensor comparisons proved here; tensor definitions from sites-modules.tex Tag 03EK and algebra.tex Tag 00CX"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-compact-support-integral-coefficient-comparison",
@@ -111,6 +206,62 @@
    "results": "Mathlib/Order/DirectedInverseSystem.lean; Mathlib/Order/DirectedInverseSystem.lean; Mathlib/Order/DirectedInverseSystem.lean; Mathlib/Order/DirectedInverseSystem.lean; Mathlib/Order/DirectedInverseSystem.lean",
    "date": "2026-10-17",
    "verdict": "no match: ordinary inverse-system equivalences, generic quasi-isomorphisms or exact functors do not state the explicit cofinal Roos map and its scalar/augmentation normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|cofinal.*subsequence|mapping.*fiber.*tower",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary inverse limits, generic cones/quasi-isomorphisms or unrelated Dold-Kan constructions; none states the specified cofinal block-sum chain map with scalar and augmentation compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Roos complex of a tower is quasi-isomorphic to the complex for a cofinal subsequence and commutes with finite free scalar extension",
+   "results": "Algebra.QuasiFinite.of_restrictScalars, CochainComplex.instQuasiIsoIntπTruncGEOfIsGE, KaehlerDifferential.cotangentComplexBaseChange.congr_simp, CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ', Algebra.Extension.instIsScalarTowerRing, CochainComplex.instIsCompatibleWithShiftHomologicalComplexIntUpQuasiIso, CochainComplex.instQuasiIsoIntιTruncLEOfIsLE, Module.FinitePresentation.isLocalizedModule_mapExtendScalars",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary inverse limits, generic cones/quasi-isomorphisms or unrelated Dold-Kan constructions; none states the specified cofinal block-sum chain map with scalar and augmentation compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homotopyLimit\"",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary inverse limits, generic cones/quasi-isomorphisms or unrelated Dold-Kan constructions; none states the specified cofinal block-sum chain map with scalar and augmentation compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Explicit block-sum cofinal restriction is a chain homotopy equivalence between Roos mapping-fiber complexes of inverse towers",
+   "results": "AlgebraicTopology.DoldKan.homotopyPInftyToId, AlgebraicTopology.DoldKan.homotopyPInftyToId_hom, HomologicalComplex.homotopyCofiber.descEquiv, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_inv, HomologicalComplex.cylinder.map_ι₀_eq_map_ι₁, CochainComplex.cm5b.homotopyEquiv, HomologicalComplex.homotopyCofiber.XIso, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary inverse limits, generic cones/quasi-isomorphisms or unrelated Dold-Kan constructions; none states the specified cofinal block-sum chain map with scalar and augmentation compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "invLimEquiv|pEquivOnLim",
+   "results": "Mathlib/Order/DirectedInverseSystem.lean, Mathlib/Order/DirectedInverseSystem.lean, Mathlib/Order/DirectedInverseSystem.lean, Mathlib/Order/DirectedInverseSystem.lean, Mathlib/Order/DirectedInverseSystem.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary inverse limits, generic cones/quasi-isomorphisms or unrelated Dold-Kan constructions; none states the specified cofinal block-sum chain map with scalar and augmentation compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cofinal restriction of a sequential tower preserves the homotopy limit computed as the mapping cone of one minus shift",
+   "results": "CochainComplex.mappingCone, CategoryTheory.Limits.SequentialProduct.isLimit, CochainComplex.mappingCone.inl, CategoryTheory.Limits.IsLimit.ofPreservesConeTerminal, CategoryTheory.SmallObject.SuccStruct.restrictionLTOfCoconeIso, CategoryTheory.Limits.isLimitOfCoconeRightOpOfCone, LightProfinite.isoMapCone, CochainComplex.MappingConeCompHomotopyEquiv.hom",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary inverse limits, generic cones/quasi-isomorphisms or unrelated Dold-Kan constructions; none states the specified cofinal block-sum chain map with scalar and augmentation compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Roos\"",
+   "results": "Std.DTreeMap.Internal.Unit.RooSlice, Std.DTreeMap.Internal.Unit.RooSliceData, Std.DTreeMap.Internal.Const.RooSlice, Std.DTreeMap.Internal.Const.RooSliceData, Std.DTreeMap.Internal.RooSlice, Std.DTreeMap.Internal.RooSliceData, Std.DTreeMap.Internal.Unit.RooSliceData.range, Std.DTreeMap.Internal.Const.RooSliceData.range",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary inverse limits, generic cones/quasi-isomorphisms or unrelated Dold-Kan constructions; none states the specified cofinal block-sum chain map with scalar and augmentation compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse limits of a sequential inverse system are invariant under restriction to every e-th index via finite sums of transition maps",
+   "results": "InverseSystem.pEquivOnLim, InverseSystem.globalEquiv, InverseSystem.globalEquiv_compatibility, InverseSystem.invLimEquiv_apply_coe, InverseSystem.globalEquiv_naturality, InverseSystem.piLTLim, InverseSystem.IsNatEquiv, InverseSystem.piLTLim_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary inverse limits, generic cones/quasi-isomorphisms or unrelated Dold-Kan constructions; none states the specified cofinal block-sum chain map with scalar and augmentation compatibility"
   }
  ],
  "blueprint": {
@@ -124,5 +275,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-compact-support-roos-cofinality",
+  "worker": "stage1",
+  "summary": "Gave the explicit telescoping square, a chain-map section, finite backward-sum inverse on its kernel, and a contracting homotopy proving the actual specified cofinal map is a quasi-isomorphism. Checked strict composition, naturality and augmentation. Proved finite-free tensor/product invertibility by dual-basis maps and checked all cone and block-map compatibilities. Statement unchanged; added the existing sheaf tensor definition to statement dependencies. No new nodes: all steps are displayed finite-sum or matrix identities, with the cohomology consequence written out.",
+  "blueprint": "Serves thm-pur-rational-and-qbar-purity Proof Step 2 finite-stage independence, through the integral coefficient comparison Step 5; current sk-thm-sf-compatibility clause (7) coefficient compatibility. No unit route is replaced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q113-ebb334584",
+  "group": "Q113",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q113-ebb334584 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, source passages, and unit/chapter route. All seven explicit chain and tensor calculations check out, including cone signs, initial indices, strict composition, and augmentations. Independently checked 4,767 arithmetic identities. No new nodes, missing citations, cycles, or repairs found. Full findings are in review.md."
  }
 }

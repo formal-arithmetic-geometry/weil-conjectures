@@ -13,9 +13,78 @@
   "def-sp-filtration",
   "def-sp-convergence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Propagate vanishing by induction on $r\\geq2$. At page two all entries with $p<0$, $q<0$, or $0\\leq q<m$ vanish by hypothesis. If an entry is zero on page $r$, its cycles are a subobject of zero, hence zero (a monomorphism to zero forces the identity of its source to vanish). Its homology, a quotient of these cycles, is therefore zero. The page comparison in [def-sp-spectral-sequence] gives the same vanishing on page $r+1$. This proves the stated vanishing on every page.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011N, definition-spectral-sequence: successor page is homology; elementary induction from the hypotheses."
+   }
+  },
+  {
+   "text": "For every $r\\geq2$, the incoming differential at $(0,m)$ has source $(-r,m+r-1)$, which is zero by Step 1. Its outgoing target is $(r,m-r+1)$: if $m-r+1<0$ it is zero by the first-quadrant vanishing, and otherwise $0\\leq m-r+1<m$, so it is zero by the lower-row vanishing. Both differentials are consequently zero. In the recursive subobjects of [def-sp-convergence], start with $Z_2^{0,m}=E_2^{0,m}$ and $B_2^{0,m}=0$. The kernel of each outgoing zero map is the whole current page and the incoming image is zero; their inverse images therefore leave $Z_r^{0,m}=E_2^{0,m}$ and $B_r^{0,m}=0$ unchanged. Thus $Z_\\infty^{0,m}=E_2^{0,m}$, $B_\\infty^{0,m}=0$. The quotient by zero gives the canonical isomorphism $s:E_\\infty^{0,m}\\xrightarrow{\\sim}E_2^{0,m}$.",
+   "uses": [
+    "def-sp-convergence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011O, definition-limit-spectral-sequence and preceding recursive cycle/boundary construction; elementary bidegree calculation."
+   }
+  },
+  {
+   "text": "For each $1\\leq p\\leq m$, the entry $(p,m-p)$ has $0\\leq m-p<m$, so it is zero on every page by Step 1. Its cycle and boundary subobjects inside the zero initial entry are zero; hence $E_\\infty^{p,m-p}=0$ by [def-sp-convergence]. The convergence identifications assumed in the item now give $F^pH^m/F^{p+1}H^m=0$ for $1\\leq p\\leq m$, using the meaning of graded pieces in [def-sp-filtration].",
+   "uses": [
+    "def-sp-convergence",
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011O, definition-limit-spectral-sequence; Tag 0121, definition-filtered. The graded-piece identifications are hypotheses, not an invocation of the double-complex theorem 0132."
+   }
+  },
+  {
+   "text": "Descend from the given $F^{m+1}H^m=0$. For $p=m,m-1,\\ldots,1$, put $U=F^{p+1}H^m$ and $V=F^pH^m$. Step 3 says that the inclusion $i:U\\hookrightarrow V$ has zero cokernel. Here is the elementary kernel/cokernel argument for equality of these subobjects: by [def-sp-abelian], $i$ is a kernel of some $g:V\\to W$; since $gi=0$, $g$ factors through the zero cokernel of $i$, so $g=0$. The kernel universal property applied to $1_V$ gives $h:V\\to U$ with $ih=1_V$, and monicity gives $hi=1_U$. Thus $U=V$ as subobjects of $H^m$. The finite descent yields $F^1H^m=0$. When $m=0$ there is no descent: $F^1H^0=0$ is already the given terminal filtration condition.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0121, definition-filtered; elementary finite-filtration argument from the normal-monomorphism axiom, written out here."
+   }
+  },
+  {
+   "text": "Let $c:F^0H^m/F^1H^m\\xrightarrow{\\sim}E_\\infty^{0,m}$ be the supplied convergence identification. Since $F^0H^m=H^m$, the left edge is the composite $H^m\\xrightarrow{q}H^m/F^1H^m\\xrightarrow{c}E_\\infty^{0,m}\\xrightarrow{s}E_2^{0,m}$, with $s$ from Step 2. By Step 4, $q$ is quotient by zero and is an isomorphism: the identity of $H^m$ factors uniquely through this quotient, giving its inverse. The other two arrows are isomorphisms, so their composite is an isomorphism. All arrows use the given quotient maps, convergence comparison and recursive cycle/boundary comparison, so this is precisely the canonical left edge relative to the given convergence data.",
+   "uses": [
+    "def-sp-filtration",
+    "def-sp-convergence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011O, definition-limit-spectral-sequence; Tag 0121, definition-filtered; explicit edge-map composite from the assumed convergence data."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-sp-spectral-sequence",
+  "def-sp-convergence",
+  "def-sp-filtration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Elementary lowest-row consequence of Tags 011N (definition-spectral-sequence), 011O (definition-limit-spectral-sequence and preceding recursive subobjects), and 0121 (definition-filtered), with the finite abutment filtration and its comparisons assumed as in the statement; 0132 is background only."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -51,10 +120,52 @@
    "results": "{\"t\": \"2026-10-17T08:39:43Z\", \"tool\": \"leanfinder\", \"query\": \"a first quadrant spectral sequence whose E2 terms vanish for q less than n has canonical edge H n isomorphic to E2 (0,n)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.ConnectData.homologyIsoPos\", \"CochainComplex.ConnectData.homologyIsoNeg\", \"CochainComplex.isZero_of_isLE\", \"CochainComplex.isZero_of_isGE\", \"groupHomology.isIso_δ_of_isZero\", \"HomologicalComplex.isZero_single_obj_homology\", \"CategoryTheory.ShortComplex.ShortExact.isIso_δ\", \"HomologicalComplex.alternatingConstHomologyIsoEven\"], \"digest\": \"27d38be5514f44a1\"}",
    "date": "2026-10-17",
    "verdict": "no match: the hits concern complex homology or spectral-object page transitions; none gives this lowest-row abutment-edge criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "convergent first quadrant spectral sequence vanishing below row m gives H m isomorphic to E2 zero m by left edge",
+   "results": "{\"t\": \"2026-10-17T14:10:40Z\", \"tool\": \"leanfinder\", \"query\": \"convergent first quadrant spectral sequence vanishing below row m gives H m isomorphic to E2 zero m by left edge\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.ConnectData.homologyIsoPos\", \"CochainComplex.ConnectData.homologyIsoNeg\", \"CochainComplex.isZero_of_isLE\", \"CochainComplex.isZero_of_isGE\", \"CategoryTheory.ShortComplex.ShortExact.isIso_δ\", \"HomologicalComplex.isIso_pOpcycles\", \"groupHomology.isIso_δ_of_isZero\", \"HomologicalComplex.singleObjHomologySelfIso_hom_singleObjOpcyclesSelfIso_hom\"], \"digest\": \"d1284a18203de989\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern homology of connected or single-term complexes and total-complex component vanishing, not the claimed spectral-sequence edge."
+  },
+  {
+   "tool": "grep",
+   "query": "edge.*[Ii]so|[Ii]so.*edge|Abutment|AbutsTo|pageInfinity",
+   "results": "{\"t\": \"2026-10-17T14:10:53Z\", \"tool\": \"grep\", \"query\": \"edge.*[Ii]so|[Ii]so.*edge|Abutment|AbutsTo|pageInfinity\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no hits for this query; the separate SpectralSequence grep located the Basic source, which was read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A first quadrant spectral sequence with vanishing rows below m has edge isomorphism H m to E2 zero m",
+   "results": "{\"t\": \"2026-10-17T14:10:53Z\", \"tool\": \"leansearch\", \"query\": \"A first quadrant spectral sequence with vanishing rows below m has edge isomorphism H m to E2 zero m\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.asIsoHomologyι.congr_simp\", \"CategoryTheory.ShortComplex.quasiIso_iff_isIso_descOpcycles\", \"CategoryTheory.ShortComplex.isIso_leftRightHomologyComparison\", \"CategoryTheory.ShortComplex.cyclesIsoLeftHomology\", \"CategoryTheory.ShortComplex.asIsoHomologyπ\", \"CategoryTheory.ShortComplex.isIso_rightHomologyι\", \"HomologicalComplex.truncGE'.quasiIsoAt_restrictionToTruncGE'\", \"CategoryTheory.ShortComplex.isIso_homologyFunctor_map_of_epi_of_isIso_of_mono\"], \"digest\": \"9d1959807e0e7567\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: short-complex homology comparison isomorphisms and truncation lemmas do not state the filtered-abutment edge criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpectralSequence\", \"IsIso\"",
+   "results": "{\"t\": \"2026-10-17T14:10:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"SpectralSequence\\\", \\\"IsIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.SpectralObject.SpectralSequence.HomologyData.isIso_mapFourδ₁Toδ₀'\", \"CategoryTheory.Abelian.SpectralObject.SpectralSequence.HomologyData.isIso_mapFourδ₄Toδ₃'\"], \"digest\": \"6d4f34db30690208\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SpectralObject/SpectralSequence.lean lines 276-285 and 371-380; these compare intermediate spectral-object maps when a complex-shape relation is absent, not a filtered abutment edge."
+  },
+  {
+   "tool": "grep",
+   "query": "SpectralSequence",
+   "results": "{\"t\": \"2026-10-17T14:11:03Z\", \"tool\": \"grep\", \"query\": \"SpectralSequence\", \"sub\": \"Algebra/Homology/SpectralSequence\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean\", \"Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean\", \"Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean\", \"Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean\", \"Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean\", \"Mathlib/Algebra/Homology/SpectralSequence/Basic.lean\", \"Mathlib/Algebra/Homology/SpectralSequence/Basic.lean\", \"Mathlib/Algebra/Homology/SpectralSequence/Basic.lean\"], \"digest\": \"373a5f20a3a1c613\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Basic.lean defines pages and successor homology comparisons, not abutments or a lowest-row edge criterion; read lines 15-44 and 124-143."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite filtered abutment with all graded pieces in total degree m except p zero equal zero spectral sequence E infinity zero m identifies canonically with E2 zero m",
+   "results": "{\"t\": \"2026-10-17T14:11:25Z\", \"tool\": \"leanfinder\", \"query\": \"finite filtered abutment with all graded pieces in total degree m except p zero equal zero spectral sequence E infinity zero m identifies canonically with E2 zero m\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex₂.ιTotalOrZero_eq_zero\", \"HomologicalComplex.isZero_single_comp_eval\", \"HomologicalComplex.mapBifunctor₂₃.ιOrZero_eq_zero\", \"HomologicalComplex.isZero_single_obj_homology\", \"HomologicalComplex.ιMapBifunctorOrZero_eq_zero\", \"HomologicalComplex.mapBifunctor₁₂.ιOrZero_eq_zero\", \"HomologicalComplex.isZero_double_X\", \"HomologicalComplex.isZero_single_obj_X\"], \"digest\": \"d5f7451c87a044c7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern homology of connected or single-term complexes and total-complex component vanishing, not the claimed spectral-sequence edge."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-relative-support-bottom-descent",
@@ -73,5 +184,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-first-quadrant-lowest-row-edge",
+  "worker": "stage1",
+  "summary": "Kept the statement and four statement dependencies. Wrote the five elementary steps: propagation of zeros, fixed cycles/boundaries at (0,m), vanishing of the other total-degree-m graded pieces, finite downward descent of the filtration (including the normal-monomorphism argument), and the explicit canonical left-edge composite. No new nodes or Mathlib leaves; searches found no exact project attachment or Mathlib edge criterion. Checked m=0 and zero/single-entry examples.",
+  "blueprint": "Serves the first two sentences of main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md, via lem-pur-relative-support-bottom-descent: the missing lowest supported-degree local-to-global edge argument. The general spectral-sequence proof introduces no change to the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q03-150d8bdb1",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q03-150d8bdb1 (reviewer sub-agent of L); spot-checked: Read the item, all cited definitions, Stacks 011N/011O/0121/0132, and blueprint route. All five steps correctly prove canonical survival, filtration vanishing, and the specified edge isomorphism. Checked m=0,1,2 and noncollapsed examples; no duplicate generalization, missing citation, cycle, or repair found. No new nodes or tool_uses. Full review written to review.md."
  }
 }

@@ -1,0 +1,154 @@
+{
+ "id": "lem-coef-qbar-adjunction-hom-descent",
+ "kind": "statement",
+ "title": "Compatible additive equivalences on directed Hom systems",
+ "statement": "Let $I$ be a nonempty directed partially ordered set, and let $(A_i,u_{ij})$ and $(B_i,v_{ij})$ be two directed systems of abelian groups indexed by $I$, with direct limits and canonical maps $\\iota_i^A,\\iota_i^B$ as in [def-weil-directed-colimit-abelian-groups]. Suppose $e_i:A_i\\xrightarrow{\\sim}B_i$ are additive equivalences such that $e_j\\circ u_{ij}=v_{ij}\\circ e_i$ for every $i\\leq j$. Then there is an additive equivalence\n$$e:\\varinjlim_{i\\in I}A_i\\xrightarrow{\\sim}\\varinjlim_{i\\in I}B_i$$\nwith $e(\\iota_i^A(x))=\\iota_i^B(e_i(x))$ and $e^{-1}(\\iota_i^B(y))=\\iota_i^A(e_i^{-1}(y))$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-qbar-verdier.md",
+  "place": "## Proof, third paragraph: passage of the finite-stage adjunction to the filtered colimit of Hom groups; general additive-colimit ingredient, Mathlib/Algebra/Colimit/Module.lean:417–441"
+ },
+ "stmt_deps": [
+  "def-weil-directed-colimit-abelian-groups"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite-stage adjunction hom-set bijections compatible with scalar extension descend to natural hom-set bijections on a directed common-stage pair category",
+   "results": "8 hits: CategoryTheory.LiftLeftAdjoint.constructLeftAdjointEquiv, CategoryTheory.Adjunction.homEquiv, partial adjoint HomEquiv lemmas, and ModuleCat scalar-extension adjunction; none states the common-stage coefficient descent lemma.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.mkOfHomEquiv CategoryTheory.Adjunction.CoreHomEquiv",
+   "results": "0 hits; loogle reports unknown identifier Adjunction.mkOfHomEquiv for this query syntax.",
+   "date": "2026-10-17",
+   "verdict": "invalid query: unknown identifier; no absence inference"
+  },
+  {
+   "tool": "grep",
+   "query": "mkOfHomEquiv|CoreHomEquiv",
+   "results": "Mathlib/CategoryTheory/Adjunction/Basic.lean:335 CoreHomEquivUnitCounit; :348 documentation; :436 mkOfHomEquiv; :453 mkOfHomEquiv_homEquiv.",
+   "date": "2026-10-17",
+   "verdict": "generic adjunction constructors only; no common-stage descent match"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudocolimit|PseudoColimit|common.stage|colimit.*[Ee]quiv|[Ee]quiv.*colimit",
+   "results": "25 hits in Mathlib CategoryTheory; only generic colimit equivalences, no common-stage coefficient descent theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunctions between directed diagrams of categories with invertible coherent comparison maps and compatible unit counit induce Hom equivalences on their filtered pseudocolimit categories",
+   "results": "8 hits: generic partial-adjoint and colimit declarations; none states this common-stage coefficient descent lemma.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv\"",
+   "results": "12 unrelated algebraic equivalences; no adjunction common-stage descent theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A family of finite-stage adjunction Hom bijections compatible with scalar extension induces an adjunction on the common-stage category",
+   "results": "service unavailable: rate limit exceeded",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural adjunction Hom equivalences between coherent directed diagrams of additive categories descend to their common-stage pair categories",
+   "results": "8 hits including CategoryTheory.Adjunction.compPreadditiveYonedaIso and CategoryTheory.Adjunction.homAddEquiv_apply, and evaluation/partial-adjoint constructions. No pair-category descent statement.",
+   "date": "2026-10-17",
+   "verdict": "no match to the earlier category-descent question"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Limits.colimit",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudocolimit|PseudoColimit|[Aa]djunction.*[Cc]olimit|[Cc]olimit.*[Aa]djunction",
+   "results": "25 hits in CategoryTheory, including Adjunction/Limits.lean and Category/Cat/Colimit.lean. These concern preservation of colimits or ordinary categorical colimits, not the pair-category argument.",
+   "date": "2026-10-17",
+   "verdict": "no match to the earlier category-descent question"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunctions on directed systems of categories with compatible scalar comparison isomorphisms descend to the category of finite-stage objects and common-stage morphisms",
+   "results": "8 hits including AddCommGroup.DirectLimit.congr (Mathlib.Algebra.Colimit.Module), DirectLimit.setoid and generic adjunction/limit declarations. DirectLimit.congr supplies the algebraic ingredient after identifying the two Hom systems.",
+   "date": "2026-10-17",
+   "verdict": "match after isolating the additive-colimit ingredient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible additive equivalences between two directed systems of abelian groups induce an additive equivalence of their direct limits",
+   "results": "8 hits; AddCommGroup.DirectLimit.congr, congr_apply_of and congr_symm_apply_of in Mathlib/Algebra/Colimit/Module, plus module/ring analogues and direct-limit constructions. Read Module.lean:417–441.",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddCommGroup.DirectLimit.congr",
+   "results": "3 hits: AddCommGroup.DirectLimit.congr, AddCommGroup.DirectLimit.congr_apply_of, AddCommGroup.DirectLimit.congr_symm_apply_of; Mathlib.Algebra.Colimit.Module.",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "def congr|theorem congr|congr_of",
+   "results": "2 hits when restricted to Algebra/Colimit/Module.lean: line 212 Module.DirectLimit.congr, line 417 AddCommGroup.DirectLimit.congr. The wrapper parses a single-file grep without a filename, so the directory grep below confirms file paths.",
+   "date": "2026-10-17",
+   "verdict": "match; confirmed by directory grep and source reading"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible additive equivalences of directed systems of abelian groups induce an additive equivalence of the direct limits",
+   "results": "8 hits, including AddCommGroup.DirectLimit.congr and congr_apply_of, map and map_apply_of, all in Mathlib.Algebra.Colimit.Module.",
+   "date": "2026-10-17",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "def congr|lemma congr_apply_of|lemma congr_symm_apply_of",
+   "results": "8 hits in Algebra/Colimit: Mathlib/Algebra/Colimit/Module.lean:212,220,226 (module analogues), :417 AddCommGroup.DirectLimit.congr and :429 congr_apply_of; Ring.lean:265,277,284 (ring analogues). Read Module.lean:417–441, including congr_symm_apply_of at line 437.",
+   "date": "2026-10-17",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AddCommGroup.DirectLimit.congr",
+  "file": "Mathlib/Algebra/Colimit/Module.lean",
+  "how": "specializes in one line: apply AddCommGroup.DirectLimit.congr (line 417) to the abelian groups A_i, B_i and the additive equivalences e_i with their stated compatibility. It is stated for additive commutative monoids over any preorder, hence includes this case. The representative formulas are AddCommGroup.DirectLimit.congr_apply_of (line 429) and AddCommGroup.DirectLimit.congr_symm_apply_of (line 437) in the same file. Classical decidable equality on I discharges its DecidableEq parameter. The direct-sum congruence quotient is the direct-limit presentation specified in the definition node.",
+  "line": 417
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "thm-coef-qbar-verdier",
+  "date": "2026-10-17",
+  "group": "Q63"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "thm-coef-qbar-verdier",
+   "place": "Proof, third paragraph: use coefficient compatibility to pass finite-stage adjunction bijections to the filtered colimit of Hom groups; the additive-colimit equivalence ingredient.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

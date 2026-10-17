@@ -13,9 +13,94 @@
   "lem-coef-relative-operadic-terminal-active-mapping",
   "def-coef-colored-operator-systems"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S=N(\\mathrm{Fin}_*)$, let $p:B\\to S$ be the arity map, and put $r=pq$. These three maps are inner fibrations: for $p,r$ this is part of the symmetric-operad definition in [lem-coef-relative-operadic-terminal-active-mapping]. Suppose $u:U\\to V$ has $q(u)$ inert in $B$. For each $Z\\in E^\\otimes$, stack the precomposition squares for $q$ and $p$, with rows $\\operatorname{Map}_{E^\\otimes}(V,Z)\\to\\operatorname{Map}_{E^\\otimes}(U,Z)$, $\\operatorname{Map}_B(qV,qZ)\\to\\operatorname{Map}_B(qU,qZ)$, and the analogous row in $S$. The bottom square is a homotopy pullback by [lem-coef-infinity-cocartesian-mapping-criterion], since $q(u)$ is $p$-cocartesian. By [lem-coef-infinity-homotopy-pullback-pasting], applied to the transposed diagram, the top square is a homotopy pullback exactly when the outer square is. Applying the mapping criterion again shows that $u$ is $q$-cocartesian exactly when it is $r$-cocartesian. In particular an inert $u$ is $q$-cocartesian, because $q$ preserves inert edges. Conversely any $q$-cocartesian lift of an inert base edge is inert. Thus the frame's actual cocartesian output projections $v_j:Y\\to y_j$ are legitimate inert projections for the operadic Segal mapping axiom.",
+   "uses": [
+    "lem-coef-relative-operadic-terminal-active-mapping",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-homotopy-pullback-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 2.1.2.22, final assertion, printed pp. 183-184; mapping-square proof of the needed special case."
+   }
+  },
+  {
+   "text": "For a pointed map $\\alpha$, write $A_E^\\alpha(U,V)$ for the inverse image of $\\alpha$ in $\\operatorname{Map}_{E^\\otimes}(U,V)$ under the arity map, and similarly write $A_B^\\alpha$. These are Kan spaces: apply [lem-coef-infinity-inner-mapping-fiber] to the arity maps, whose mapping-space targets are discrete. Directly from the right-pinched model, a mapping space in the nerve of an ordinary category is the discrete set of its arrows: a functor $[m+1]\\to O^\\otimes$ constant on the initial face is specified by its last arrow. Postcomposition with $v_j$ and its base projection gives the commutative square with rows\n$$A_E^{\\bar f}(X,Y)\\longrightarrow\\prod_j A_E^{\\rho_j\\bar f}(X,y_j),\\qquad A_B^{\\bar f}(\\mathbf c,\\mathbf d)\\longrightarrow\\prod_j A_B^{\\rho_j\\bar f}(\\mathbf c,d_j).$$\nThe upper row is the mapping-space Segal equivalence in [lem-coef-relative-operadic-terminal-active-mapping]; the lower row is an isomorphism of discrete sets, since an operator with underlying map $\\bar f$ is precisely its list of output operations. Its image of $f$ is $(h_j)_j$, where $h_j=\\rho_jf$. Take homotopy fibers at these points. [lem-coef-kan-homotopy-pullback-invariance] makes the resulting map an equivalence. In the path-space model, a path into a product is exactly a tuple of paths, so the homotopy fiber of this product map is the product of its homotopy fibers. This gives\n$$M_f(X,Y)\\simeq\\prod_j M_{h_j}(X,y_j).$$\nRestriction to $A_E^{\\bar f}$ does not change the fiber at $f$, since every path in the discrete base is constant.",
+   "uses": [
+    "lem-coef-infinity-inner-mapping-fiber",
+    "lem-coef-relative-operadic-terminal-active-mapping",
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 2.1.1.7 and Definition 2.1.1.10(2), printed pp. 173-174: take the fiber of the two output Segal maps."
+   }
+  },
+  {
+   "text": "For each $j$, let $I_j=\\{i:\\bar f(i)=j\\}$ in its induced order and let $\\mathbf c_j=(c_i)_{i\\in I_j}$. In the ordinary operator category, $h_j$ factors as the inert projection $a_j:\\mathbf c\\to\\mathbf c_j$ followed by the active single-output operator $\\theta_j:\\mathbf c_j\\to d_j$: this follows by writing its one output operation, including when $I_j$ is empty. Let $u_j:X\\to X_j$ be the frame's $q$-cocartesian lift of $a_j$. For $i\\in I_j$, the composite of $u_j$ with a cocartesian singleton projection of $X_j$ is a cocartesian lift of the singleton projection of $\\mathbf c$ by [lem-coef-infinity-cocartesian-composition-initiality]. Compare it with the fixed projection $X\\to x_i$ using the same node's equivalence of targets of initial lifts. Hence the Segal coordinates of $X_j$ are coherently the tuple $(x_i)_{i\\in I_j}$. Under the frame of [def-coef-colored-operator-systems], transporting $X_j$ along $\\theta_j$ therefore has target $Z_j=T_{\\theta_j}((x_i)_{i\\in I_j})$, with the frame's comparison equivalence understood. The transport lift $b_j:X_j\\to Z_j$ and $u_j$ compose coherently to a $q$-cocartesian edge $e_j:X\\to Z_j$ over $h_j$, again by the composition assertion. These are the specified inert-then-active lifts, not lifts chosen from a mere existence assertion.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "def-coef-colored-operator-systems"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 2.1.1.7 and Remark 2.1.2.16, printed pp. 173 and 182: input blocks and their transport functors."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-pointwise-cocartesian-transport] with parameter $K=\\Delta^0$, base edge $h_j$, initial object $X$, transport lift $e_j$, and target $y_j$ in the degreewise fiber $E_{d_j}$. Its hypotheses hold since $q$ is an inner fibration with cocartesian lifts; the equivalence between its mapping-square edge condition and our horn condition is [lem-coef-infinity-cocartesian-mapping-criterion]. The cited transport theorem identifies precomposition with $e_j$ as a natural equivalence\n$$\\operatorname{Map}_{E_{d_j}}(Z_j,y_j)\\xrightarrow{\\sim}M_{h_j}(X,y_j).$$\nCompose the output comparison of step 2 with the inverses of these equivalences. Substituting the expression for $Z_j$ from step 3 gives exactly the asserted product formula. In particular its $j$th component first postcomposes with $v_j$, then factors through $u_j$ followed by $b_j$; it is the comparison specified in the statement, rather than an unspecified equivalence of the two spaces.",
+   "uses": [
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 2.1.2.16, printed p. 182: relative mapping spaces represented by cocartesian transport; the explicit mapping-fiber form is the cited transport theorem."
+   }
+  },
+  {
+   "text": "The equivalence is natural in the two fiber objects. The output comparison in step 2 is postcomposition by the coherent inert projections of the fixed frame [def-coef-colored-operator-systems]; varying $X$ precomposes its input and varying $Y$ uses the frame's output transformations. The Segal comparison is therefore a map of these space-valued functors. For step 3, [lem-coef-infinity-pointwise-cocartesian-transport] supplies coherent compatibility of successive transports with transport along the composite and with the precomposition maps. Its assertion for every simplicial parameter applies to the frame's diagrams and transformations, so these compatibilities include higher simplices, not only arrows in the homotopy category. Consequently the maps in step 4 are natural equivalences of the same space-valued functors. Inverting such an equivalence and composing with the output map gives a natural equivalence. No objectwise arbitrary inverse is being used: the inverses are inverses of the specified natural equivalences.",
+   "uses": [
+    "def-coef-colored-operator-systems",
+    "lem-coef-infinity-pointwise-cocartesian-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 2.1.3.4, printed pp. 184-185: pointwise operations in coherent families; use the parametric transport statement for the transport comparisons."
+   }
+  },
+  {
+   "text": "When $k=0$, there are no output projections or operations. Both rows in step 2 are equivalences to the one-point empty product; the lower space is literally the singleton consisting of the unique operator to the empty tuple. Its fiber is thus contractible, proving the asserted zero-output case. If $I_j$ is empty but $j$ is an output, $a_j$ projects to the empty tuple, whose degreewise fiber is terminal by the assumed empty Segal equivalence. Transport along $\\theta_j:\\varnothing\\to d_j$ still produces $Z_j=T_{\\theta_j}(())$ in the output color fiber. Step 4 retains $\\operatorname{Map}_{E_{d_j}}(Z_j,y_j)$; it does not assert this space is contractible or remove it. These arguments also apply when the whole input tuple is empty. All products used here are finite products of spaces or the assumed Segal products; no limit or colimit in a color fiber was required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.1.1.10(2)-(3) and Remark 2.1.2.20, printed pp. 174 and 183: zero arity and the nullary unit operation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-relative-operadic-terminal-active-mapping",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-homotopy-pullback-pasting",
+  "lem-coef-infinity-inner-mapping-fiber",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "def-coef-colored-operator-systems",
+  "lem-coef-infinity-pointwise-cocartesian-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Agent-written relative-fiber and transport calculation following Construction 2.1.1.7, Definition 2.1.1.10(2), Proposition 2.1.2.22 (final assertion), and Remarks 2.1.2.16 and 2.1.3.4 of Higher Algebra (2017), read online; archive WANTED. The non-elementary mapping-space and transport facts are existing DAG citations."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -44,10 +129,45 @@
    "results": "{\"t\": \"2026-10-17T08:06:33Z\", \"tool\": \"leanfinder\", \"query\": \"Relative mapping spaces of a cocartesian fibration of symmetric infinity operads decompose into output fiber mapping spaces after active transport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.map_comp_map\", \"SimplicialObject.Splitting.IndexSet.pull\", \"classifyingSpaceUniversalCover_map\", \"CategoryTheory.Functor.IsStronglyCocartesian.fac\", \"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"HasFibers.inducedMap\"], \"digest\": \"a761014f500497dc\"}",
    "date": "2026-10-17",
    "verdict": "no match: read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:54-79 and Fiber.lean:35-50. IsCocartesian and IsStronglyCocartesian concern ordinary categories and unique morphisms, not homotopy fibers of mapping spaces. The semantic hits give ordinary fiber functors, products of fibrations or strict simplicial splitting. The grep hit is a bibliography reference; none states a relative infinity-operadic output formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative mapping spaces of a cocartesian fibration of symmetric infinity operads decompose into output fiber mapping spaces after active transport",
+   "results": "{\"t\": \"2026-10-17T13:42:38Z\", \"tool\": \"leanfinder\", \"query\": \"Relative mapping spaces of a cocartesian fibration of symmetric infinity operads decompose into output fiber mapping spaces after active transport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsStronglyCocartesian.map_comp_map\", \"CategoryTheory.Functor.IsStronglyCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"SimplicialObject.Splitting.IndexSet.pull\", \"classifyingSpaceUniversalCover_map\", \"CategoryTheory.Functor.IsStronglyCocartesian.fac\"], \"digest\": \"7456c88de8271c67\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category cocartesian lifting and Hom sets, not quasicategorical operation mapping spaces; read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-74 and Fiber.lean:35-50. Other hits are ordinary multiequalizer structures, simplicial products or unrelated fibrations. The operad grep hit is only a bibliography reference at Distributive/Monoidal.lean:55."
+  },
+  {
+   "tool": "grep",
+   "query": "operad|operadic|Segal.*mapping",
+   "results": "{\"t\": \"2026-10-17T13:42:43Z\", \"tool\": \"grep\", \"query\": \"operad|operadic|Segal.*mapping\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Distributive/Monoidal.lean\"], \"digest\": \"87457169ff2dfc4c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category cocartesian lifting and Hom sets, not quasicategorical operation mapping spaces; read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-74 and Fiber.lean:35-50. Other hits are ordinary multiequalizer structures, simplicial products or unrelated fibrations. The operad grep hit is only a bibliography reference at Distributive/Monoidal.lean:55."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mapping spaces over an operator in a colored infinity operad are products of mapping spaces in its output color fibers",
+   "results": "{\"t\": \"2026-10-17T13:42:43Z\", \"tool\": \"leansearch\", \"query\": \"Mapping spaces over an operator in a colored infinity operad are products of mapping spaces in its output color fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Fiber\", \"CategoryTheory.Limits.FormalCoproduct.evalOp_map_app\", \"HomotopicalAlgebra.instFibrationMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations_1\", \"HasFibers.inducedFunctor_map_coe\", \"HomotopicalAlgebra.instIsMultiplicativeFibrations\", \"AlgebraicTopology.DoldKan.QInfty\", \"PiTensorProduct.mapL_opNorm\", \"HomotopicalAlgebra.instFibrationMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\"], \"digest\": \"526a25aa80bfe5df\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category cocartesian lifting and Hom sets, not quasicategorical operation mapping spaces; read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-74 and Fiber.lean:35-50. Other hits are ordinary multiequalizer structures, simplicial products or unrelated fibrations. The operad grep hit is only a bibliography reference at Distributive/Monoidal.lean:55."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cocartesian\"",
+   "results": "{\"t\": \"2026-10-17T13:42:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cocartesian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.isIso_of_base_isIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_isIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_iso\"], \"digest\": \"e657772dd468ef8f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category cocartesian lifting and Hom sets, not quasicategorical operation mapping spaces; read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-74 and Fiber.lean:35-50. Other hits are ordinary multiequalizer structures, simplicial products or unrelated fibrations. The operad grep hit is only a bibliography reference at Distributive/Monoidal.lean:55."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multimorphism spaces in a symmetric infinity operad factor as products indexed by outputs and cocartesian lifts represent relative morphisms",
+   "results": "{\"t\": \"2026-10-17T13:42:44Z\", \"tool\": \"leanfinder\", \"query\": \"Multimorphism spaces in a symmetric infinity operad factor as products indexed by outputs and cocartesian lifts represent relative morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.MultispanIndex.SymmStruct\", \"CategoryTheory.Limits.MulticospanShape.prod_R\", \"SSet.prodStdSimplex.objEquiv\", \"CategoryTheory.Limits.Concrete.multiequalizerEquiv_apply\", \"CategoryTheory.Limits.MulticospanIndex.fstPiMap_π\", \"CategoryTheory.Limits.MulticospanIndex.sndPiMap_π\", \"CategoryTheory.cechNerveTerminalFrom\", \"CategoryTheory.Limits.Multiequalizer.ιPi_π\"], \"digest\": \"1dccf730c4854788\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category cocartesian lifting and Hom sets, not quasicategorical operation mapping spaces; read Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:46-74 and Fiber.lean:35-50. Other hits are ordinary multiequalizer structures, simplicial products or unrelated fibrations. The operad grep hit is only a bibliography reference at Distributive/Monoidal.lean:55."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-colored-operation-section-reconstruction",
@@ -73,5 +193,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-relative-operadic-output-mapping",
+  "worker": "stage1",
+  "summary": "Preserved every hypothesis and clause of the statement. Proved inert-edge recognition using existing mapping-square and homotopy-pullback-pasting lemmas, took the relative fiber of the operadic Segal mapping axiom, and represented each output factor by the specified inert-then-active cocartesian transport. Wrote out naturality, empty-output and empty-input-block cases. No new nodes or Mathlib leaves; no Lean declaration states this result. Logged all four search tools and a second semantic phrasing.",
+  "blueprint": "Realizes the existing ancestry to prop-coef-integral-exceptional-adjoint, proof paragraph 2, the coherent middle derived mapping-complex comparison before inverse limit, through colored-operation section reconstruction. More precisely it proves the relative output mapping and transport calculation extracted from step 1 of lem-coef-colored-operation-section-reconstruction. The current main-20261015 proof at sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md has the same middle comparison; historical ancestry and unit are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N4-560e44916",
+  "group": "N4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N4-560e44916 (reviewer sub-agent of L); spot-checked: Read the item, report, required stage/coordination documents, unit route, all eight cited node statements, the Higher Algebra source locations, and the archived target declarations. The six proof steps correctly establish inert cocartesian recognition, the relative Segal fiber decomposition, blockwise transport, naturality, and nullary/empty-output cases. No new nodes, duplicates, cycles, unsupported hypotheses, coefficient-category substitutions, or SGA citations were found. Review written to review.md."
  }
 }

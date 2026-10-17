@@ -12,11 +12,101 @@
   "def-sf-kv-maps",
   "fix-prop-projection-formula"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work at the fixed finite ring $A$ throughout. The maps $r=f\\times1_X$ and $1_Y\\times f$ are base changes of $f$; their composite is $q$, so they and $q$ are proper by [lem-weil-pbc-proper-fp-permanence](a),(b). Use [prop-functor-package](3) to identify their compact-support and ordinary images, and to compose compact-support functors. By [thm-sf-ctf-stability](i)--(iv), all pullbacks, external products, $W$, $K'$, $Rf_*V$, $Rf_*W$, and their compact-support images lie in $D^b_{ctf}$. In particular the tensor unit $A_Y$, which is locally free of rank one in degree zero, is an allowed finite-Tor input. Put $P=\\operatorname{PF}_{q,K\\boxtimes V,p_2'^*L}$, including the monoidal identification of its target with $Rq_!(K\\boxtimes W)$, and put $u=\\operatorname{PF}_{f,V,L}:Rf_*V\\otimes L\\to Rf_*W$. These are the specified transformations of [fix-prop-projection-formula].",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "prop-functor-package",
+    "thm-sf-ctf-stability",
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+    "place": "Step 3, proof of (a): “since ... mu_f and Pi_f are adjoint to epsilon_f tensor epsilon_f”; product/projection comparison expanded in returned item step 9"
+   }
+  },
+  {
+   "text": "For the first factor, the proper projection map $\\operatorname{PF}_{f,K,A_Y}$ is the identity of $Rf_*K$ under the tensor-unit identifications. Indeed, [def-exchange-projection] defines its ordinary $f^*\\dashv Rf_*$ transpose to be $\\varepsilon_{f,K}\\otimes1_{f^*A_Y}$ after the monoidal pullback comparison. Since $f^*A_Y=A_X$, its transpose is exactly $\\varepsilon_{f,K}$; this is also the transpose of $1_{Rf_*K}$. The ordinary adjunction of [fix-prop-adjunctions](1) is a bijection on morphisms, so the maps coincide. The proper compact-support normalization agrees with this ordinary projection by [fix-prop-projection-formula].",
+   "uses": [
+    "def-exchange-projection",
+    "fix-prop-adjunctions",
+    "fix-prop-projection-formula"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+    "place": "Step 3, proof of (a): “since ... mu_f and Pi_f are adjoint to epsilon_f tensor epsilon_f”; product/projection comparison expanded in returned item step 9"
+   }
+  },
+  {
+   "text": "Write $H=\\operatorname{Ku}_!(f,f;K,W)$ and $H_0=\\operatorname{Ku}_!(f,f;K,V)$. Apply [lem-sf-exterior-projection-kunneth] with $(f_1,f_2)=(f,f)$, $(M_1,M_2)=(K,V)$, and $(B_1,B_2)=(A_Y,L)$. Here $A_Y\\boxtimes L=p_2'^*L$ and $(K\\otimes f^*A_Y)\\boxtimes(V\\otimes f^*L)=K\\boxtimes W$. The unit calculation in Step 2 removes the first-factor projection. Consequently, if $A_0:(Rq_!(K\\boxtimes V))\\otimes p_2'^*L\\to K'\\boxtimes(Rf_*V\\otimes L)$ denotes $H_0\\otimes1$ followed by the reassociation used in $G$, the cited equality is precisely\n$$H\\circ P=(1_{K'}\\boxtimes u)\\circ A_0.$$\nAll identifications here are the signed monoidal pullback comparisons of [lem-pur-derived-pullback-tensor-iso]; the cited exterior-projection lemma uses the exact $\\operatorname{Ku}_!$ construction specified by [def-sf-kv-maps](i).",
+   "uses": [
+    "lem-sf-exterior-projection-kunneth",
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-sf-kv-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+    "place": "Step 3, proof of (a): “since ... mu_f and Pi_f are adjoint to epsilon_f tensor epsilon_f”; product/projection comparison expanded in returned item step 9"
+   }
+  },
+  {
+   "text": "The maps $\\operatorname{Ku}_!$ of [def-sf-kv-maps](i) are natural in their coefficient objects: that definition constructs them from the relative product, which is natural in both objects by [thm-sf-kunneth-relative], and the natural compact-support exchanges. In particular apply this naturality to $J_Y$ and the morphism $u:Rf_*V\\otimes L\\to Rf_*W$ to get\n$$(1_{K'}\\otimes a_Y^*Ra_{Y!}u)\\circ J_Y(Rf_*V\\otimes L)\n=J_Y(Rf_*W)\\circ Rp'_{1!}(1_{K'}\\boxtimes u).$$\nSince $G=Rp'_{1!}A_0$, composing with $G$ and applying $Rp'_{1!}$ to Step 3 shows that the left side of the asserted equality is\n$$J_Y(Rf_*W)\\circ Rp'_{1!}H\\circ Rp'_{1!}P.$$\nIts target is $K'\\otimes a_Y^*Ra_{Y!}Rf_!W$, with the proper identification for $f$ from Step 1.",
+   "uses": [
+    "def-sf-kv-maps",
+    "thm-sf-kunneth-relative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+    "place": "Step 3, proof of (a): “since ... mu_f and Pi_f are adjoint to epsilon_f tensor epsilon_f”; product/projection comparison expanded in returned item step 9"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-kv-shriek-composition] to the two factorwise chains $(X\\xrightarrow fY\\xrightarrow{1}Y,\\ X\\xrightarrow fY\\xrightarrow{a_Y}s)$ and to the objects $(K,W)$. Since $a_Yf=a_X$, its displayed equation gives\n$$J_Y(Rf_*W)\\circ Rp'_{1!}H=\\operatorname{Ku}_!(f,a_X;K,W).$$\nApply the same node instead to $(X\\xrightarrow fY\\xrightarrow{1}Y,\\ X\\xrightarrow{1}X\\xrightarrow{a_X}s)$. Its equation gives\n$$\\operatorname{Ku}_!(f,a_X;K,W)=J_{Y,X}(W)\\circ R\\pi_!E_r(W).$$\nThese are equalities from $R(p'_1q)_!(K\\boxtimes W)=R(\\pi r)_!(K\\boxtimes W)$ to $K'\\otimes a_Y^*Ra_{X!}W$. The composition and identity identifications are the specified ones in that node, with the associative compact-support composition of [prop-functor-package](3). Thus both factorizations use the same comparison, including the target identification $Ra_{Y!}Rf_!W=Ra_{X!}W$.",
+   "uses": [
+    "lem-sf-kv-shriek-composition",
+    "prop-functor-package"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+    "place": "Step 3, proof of (a): “since ... mu_f and Pi_f are adjoint to epsilon_f tensor epsilon_f”; product/projection comparison expanded in returned item step 9"
+   }
+  },
+  {
+   "text": "Substitute the two equalities of Step 5 into the final composite of Step 4. This gives\n$$J_{Y,X}(W)\\circ R\\pi_!E_r(W)\\circ Rp'_{1!}P.$$\nUnder $p'_1q=\\pi r$, the last factor, with the target composition comparison inserted, is exactly $F$ by its definition in the statement. The resulting expression is the asserted right side. Every tensor symmetry was the specified signed symmetry in Step 3; subsequent steps used only functoriality, naturality and the specified composition equations, so no additional sign is introduced.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+    "place": "Step 3, proof of (a): “since ... mu_f and Pi_f are adjoint to epsilon_f tensor epsilon_f”; product/projection comparison expanded in returned item step 9"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-sf-kv-maps",
+  "fix-prop-adjunctions",
+  "fix-prop-projection-formula",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-sf-exterior-projection-kunneth",
+  "lem-sf-kv-shriek-composition",
+  "lem-weil-pbc-proper-fp-permanence",
+  "prop-functor-package",
+  "thm-sf-ctf-stability",
+  "thm-sf-kunneth-relative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+  "place": "Step 3, proof of (a): explicit external-projection square and the two factorizations of Ku_!(f,a_X)"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-trace-source-exchange",
@@ -67,6 +157,41 @@
    "results": "IsProperMap.prodMap; IsProperMap.pi_map; MulHom.prod_comp_prodMap; AddHom.prodMap_def; LinearMap.ker_prodMap; MulHom.prodMap_def; ContinuousAffineMap.coe_prodMap; MeasureTheory.FiniteMeasure.map_prod_map",
    "date": "2026-10-17",
    "verdict": "no match: hits do not state this specified geometric six-functor comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]unneth|externalProduct.*projection|externalProduct.*shriek",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures describe ordinary or underived pushforward composition, diagram external products, or topological products; none states this specified compact-support comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward external Kunneth comparison followed by projection formula commutes with compact support integration",
+   "results": "TopCat.Sheaf.pushforward_forget; SheafOfModules.pushforwardComp; AlgebraicGeometry.Scheme.Modules.pushforward_map_app; TopCat.Sheaf.pushforwardForgetIso; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc; AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app; ProbabilityTheory.Kernel.map_prodMkLeft; CategoryTheory.Functor.sheafPushforwardContinuousComp'",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures describe ordinary or underived pushforward composition, diagram external products, or topological products; none states this specified compact-support comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, \"externalProduct\"",
+   "results": "CategoryTheory.MonoidalCategory.externalProduct; CategoryTheory.MonoidalCategory.externalProductBifunctor; CategoryTheory.MonoidalCategory.externalProductBifunctorCurried; CategoryTheory.MonoidalCategory.prodCompExternalProduct; CategoryTheory.MonoidalCategory.externalProductBifunctor_obj_obj; CategoryTheory.MonoidalCategory.externalProductBifunctorCurried_obj_obj_obj_obj; CategoryTheory.MonoidalCategory.externalProductCompDiagIso; CategoryTheory.MonoidalCategory.externalProductBifunctorCurried_obj_obj_obj_map",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures describe ordinary or underived pushforward composition, diagram external products, or topological products; none states this specified compact-support comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of compact support Kunneth maps with the projection formula and composition of product morphisms",
+   "results": "TopCat.piIsoPi_inv_π_assoc; TopCat.prodIsoProd_hom_fst_assoc; TopCat.prodIsoProd_hom_snd_assoc; TopCat.prodIsoProd_inv_fst_assoc; TopCat.prodIsoProd_inv_snd_assoc; ContinuousMap.piComparison_fac; TopCat.piIsoPi_inv_π; Profinite.NobelingProof.GoodProducts.square_commutes",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures describe ordinary or underived pushforward composition, diagram external products, or topological products; none states this specified compact-support comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For proper f the exterior product pushforward comparison and the projection morphism commute after pushing along the first projection",
+   "results": "CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; CategoryTheory.ExponentiableMorphism.comp_pushforward; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom; AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app; CategoryTheory.ExponentiableMorphism.pushforwardComp; PresheafOfModules.pushforward_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures describe ordinary or underived pushforward composition, diagram external products, or topological products; none states this specified compact-support comparison"
   }
  ],
  "blueprint": {
@@ -85,5 +210,69 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-product-projection-comparison",
+  "worker": "stage1",
+  "summary": "Preserved the statement and its three statement dependencies. Split the product/projection comparison into the exterior projection identity, naturality of the integration product map, and two applications of existing shriek-product composition coherence. No new nodes or attachment. Checked all coefficient domains, proper identifications, signs and citations.",
+  "blueprint": "Realizes the product/projection part of Step 3, proof of (a), of lem-trf-trace-source-exchange, namely the stated comparison of the specified proper product map with the projection map before structural integration.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic stability of proper morphisms under base change and composition verifies that the displayed product maps are proper; the proper-pushforward unit supplies no replacement geometry lemma."
+   },
+   {
+    "node": "prop-functor-package",
+    "why": "The existing geometric package supplies proper identifications and associative compact-support composition used by this unit."
+   },
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "The finite-level preservation theorem checks domains of all concrete coefficient operations; no new preservation result is being substituted."
+   },
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "Uses the specified natural projection transformations and their agreement with ordinary projections for proper maps."
+   },
+   {
+    "node": "fix-prop-adjunctions",
+    "why": "Uses only the ordinary adjunction Hom bijection for the elementary tensor-unit normalization."
+   },
+   {
+    "node": "lem-sf-exterior-projection-kunneth",
+    "why": "Generic external-product/projection coherence for the very Ku_! maps of the unit; used at (f,f;A_Y,L), not to replace the trace-source calculation."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Generic monoidal pullback constraints ensure that the product tensor identifications and their Koszul signs are the specified ones."
+   },
+   {
+    "node": "thm-sf-kunneth-relative",
+    "why": "Uses naturality in coefficient objects of the relative product from which Ku_! is defined."
+   },
+   {
+    "node": "lem-sf-kv-shriek-composition",
+    "why": "Generic composition coherence for the specified external shriek product, applied to two factorizations of (f,a_X); the proper-pushforward unit has no separate composition theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proper-fp-permanence",
+  "prop-functor-package",
+  "thm-sf-ctf-stability",
+  "fix-prop-projection-formula",
+  "fix-prop-adjunctions",
+  "lem-sf-exterior-projection-kunneth",
+  "lem-pur-derived-pullback-tensor-iso",
+  "thm-sf-kunneth-relative",
+  "lem-sf-kv-shriek-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q63-309153551",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q63-309153551 (reviewer sub-agent of L); spot-checked: Read the complete item, unit/chapter route, main-20261015 source proof (Step 3(a), lines 87–109), every cited node statement, and recorded Mathlib searches. Checked hypotheses, coefficient category, base-change maps, tensor signs, both Ku_! composition factorizations, edge cases, duplicates, cycles, and route compliance. No new nodes or repairs are needed; review written to review.md."
  }
 }

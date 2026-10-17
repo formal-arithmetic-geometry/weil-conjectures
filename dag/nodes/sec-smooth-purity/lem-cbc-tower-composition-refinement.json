@@ -1,0 +1,80 @@
+{
+ "id": "lem-cbc-tower-composition-refinement",
+ "kind": "statement",
+ "title": "Compatible-tower composition commutes with proper refinements",
+ "statement": "Let $\\Lambda$ be a finite commutative ring and use $D^+(T_{\\mathrm{et}},\\Lambda)$ for schemes $T$ [def-weil-pbc-derived-categories], with direct images [def-weil-pbc-direct-image] and open extension by zero [def-weil-pbc-extension-by-zero]. Let $X\\xrightarrow{f}Y\\xrightarrow{h}Z$ be separated finite-type morphisms. For $\\nu=1,2$, suppose given a compatible tower [lem-cbc-compactifiable-compatible-tower]\n$$Y\\xrightarrow{i_\\nu}\\bar Y_\\nu\\xrightarrow{q_\\nu}Z,\\qquad X\\xrightarrow{a_\\nu}\\bar X_\\nu\\xrightarrow{p_\\nu}\\bar Y_\\nu,$$\nwhere $i_\\nu,a_\\nu$ are quasi-compact open immersions, $q_\\nu,p_\\nu$ are proper, $q_\\nu i_\\nu=h$ and $p_\\nu a_\\nu=i_\\nu f$. Put $U_\\nu=\\bar X_\\nu\\times_{\\bar Y_\\nu}Y$ with projections $b_\\nu:U_\\nu\\to\\bar X_\\nu$ and $p_{Y,\\nu}:U_\\nu\\to Y$. Let $c_\\nu:X\\to U_\\nu$ be the induced quasi-compact open immersion, so that $b_\\nu c_\\nu=a_\\nu$ and $p_{Y,\\nu}c_\\nu=f$. Suppose proper maps $u:\\bar Y_1\\to\\bar Y_2$, $v:\\bar X_1\\to\\bar X_2$, $w:U_1\\to U_2$ satisfy\n$$ui_1=i_2,\\quad va_1=a_2,\\quad wc_1=c_2,\\quad vb_1=b_2w,\\quad p_2v=up_1,\\quad p_{Y,2}w=p_{Y,1},\\quad q_2u=q_1.$$\nFor every proper/open square use the normalized comparison $\\gamma$ of [lem-cbc-proper-open-interchange-coherence], and for proper refinements write $\\alpha_u,\\alpha_v,\\alpha_w$ for [def-weil-pbc-proper-open-comparison]. Set\n$$F_\\nu=Rp_{Y,\\nu,*}c_{\\nu!},\\quad H_\\nu=Rq_{\\nu,*}i_{\\nu!},\\quad E_\\nu=R(q_\\nu p_\\nu)_*a_{\\nu!}.$$\nLet $\\gamma_\\nu:i_{\\nu!}Rp_{Y,\\nu,*}\\to Rp_{\\nu,*}b_{\\nu!}$ be the comparison for the tower square. Define\n$$\\mu_\\nu:H_\\nu F_\\nu\\xrightarrow{Rq_{\\nu,*}\\gamma_\\nu c_{\\nu!}}Rq_{\\nu,*}Rp_{\\nu,*}b_{\\nu!}c_{\\nu!}\\xrightarrow{\\sim}E_\\nu,$$\nusing the canonical ordinary etale bounded-below direct-image composition isomorphisms with their identity and triple-composition coherence [lem-cbc-etale-derived-direct-image-coherence] and the degreewise exact open-extension composition isomorphism [lem-cbc-extension-zero-composition, lem-weil-pbc-extension-by-zero-exact]. Put\n$$C_f=Rp_{Y,2,*}\\alpha_w:F_2\\to F_1,\\quad C_h=Rq_{2,*}\\alpha_u:H_2\\to H_1,\\quad C_{hf}=R(q_2p_2)_*\\alpha_v:E_2\\to E_1,$$\nwith the same direct-image composition identifications. Then, as natural transformations $H_2F_2\\to E_1$,\n$$C_{hf}\\circ\\mu_2=\\mu_1\\circ(C_hF_1)\\circ(H_2C_f).$$\nThe square $vb_1=b_2w$ need not be cartesian. No Noetherian, quasi-compact or quasi-separated hypothesis is imposed on $X,Y,Z$ beyond the supplied tower data.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal), specialized to open immersions and assembled for two refining compatible compactification towers; the displayed tower equation is the agent-formulated consequence used in the blueprint final pasting assertion."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-extension-by-zero",
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-cbc-proper-open-interchange-coherence",
+  "def-weil-pbc-proper-open-comparison",
+  "lem-cbc-etale-derived-direct-image-coherence",
+  "lem-cbc-extension-zero-composition",
+  "lem-weil-pbc-extension-by-zero-exact"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of compact support composition isomorphisms with proper refinements of compatible compactification towers using proper open interchange",
+   "results": "CompactlySupportedContinuousMap.comp_assoc; CompactlySupportedContinuousMap.comp; CompactlySupportedContinuousMap.compLeft; CompactlySupportedContinuousMap.coe_comp_to_continuous_fun; hasCompactSupport_comp_left; HasCompactSupport.comp_left; CompactlySupportedContinuousMap.ContinuousMap.liftCompactlySupported; IsCompactOpenCovered.of_comp",
+   "date": "2026-10-17",
+   "verdict": "no match for the stated proper/open tower compatibility; hits concern other functors or structural scheme maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, CategoryTheory.Iso",
+   "results": "",
+   "date": "2026-10-17",
+   "verdict": "no match for the stated proper/open tower compatibility; hits concern other functors or structural scheme maps"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*open.*(comp|refin)|[Ll]owerShriek.*[Cc]omp|compactification.*[Cc]omp",
+   "results": "Mathlib/Topology/MetricSpace/Polish.lean; Mathlib/Topology/Category/CompHaus/Basic.lean; Mathlib/Topology/Compactification/OnePoint/Basic.lean; Mathlib/Topology/Compactification/OnePoint/Basic.lean; Mathlib/Topology/Compactification/OnePoint/Basic.lean; Mathlib/Topology/Compactification/OnePoint/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the stated proper/open tower compatibility; hits concern other functors or structural scheme maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper open interchange commutes with refinement of compactification towers in derived etale sheaves",
+   "results": "ModuleCat.Tilde.toOpen_res; AlgebraicGeometry.IsProper.instMorphismRestrict; AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom; AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc; AlgebraicGeometry.Scheme.restrictRestrictComm; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_invApp; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackConeOfLeftLift_fst; AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map",
+   "date": "2026-10-17",
+   "verdict": "no match for the stated proper/open tower compatibility; hits concern other functors or structural scheme maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite ring coefficients refinement maps between two compatible compactification towers intertwine the two proper open composition chains",
+   "results": "Profinite.NobelingProof.projRestricts_eq_comp; LightProfinite.proj_comp_transitionMap'; Profinite.NobelingProof.GoodProducts.smaller_factorization; LightProfinite.proj_comp_transitionMap; LightProfinite.transitionMapLE; LightProfinite.proj_comp_transitionMapLE'; Profinite.IndexFunctor.map_comp_π_app; LightProfinite.proj_comp_transitionMapLE",
+   "date": "2026-10-17",
+   "verdict": "no match for the stated proper/open tower compatibility; hits concern other functors or structural scheme maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "thm-cbc-finite-torsion",
+  "date": "2026-10-17",
+  "group": "Q66"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "thm-cbc-finite-torsion",
+   "place": "Proof, final sentence on vertical pasting after canonical associativity: compatibility of the tower composition chain with common refining towers (returned step 7).",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

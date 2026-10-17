@@ -112,18 +112,43 @@
    }
   },
   {
-   "text": "First fix a flat-term K-flat sheaf model $P$, and put $C=\\Gamma(s,P)$. For two ordinary-module K-flat flat-term resolutions $q_i:Q_i\\to C$, apply the diagram replacement theorem on the one-point site to the cospan $Q_1\\to C\\leftarrow Q_2$. It gives a cospan $W_1\\xrightarrow{a_1}W_0\\xleftarrow{a_2}W_2$ and objectwise quasi-isomorphisms $e_i:W_i\\to Q_i$, $e_0:W_0\\to C$, with $q_i e_i=e_0a_i$. Each $W_i$ is K-flat with flat terms; each $a_i$ is a quasi-isomorphism since both $e_0$ and $q_i e_i$ induce cohomology isomorphisms. The canonical ordinary derived-tensor comparisons identify $L(C)=C\\otimes_R^L A$ with $W_0/tW_0$, and identify $L(q_i)$ with $\\bar a_i\\bar e_i^{-1}:Q_i/tQ_i\\to W_0/tW_0$. The reduced equality $\\bar q_i\\bar e_i=\\bar e_0\\bar a_i$ then gives $\\bar q_iL(q_i)^{-1}=\\bar e_0$ after this identification. Thus the comparison $L(C)\\to C/tC$ is independent of $q_i$.\n\nFor a chain map $P\\to P'$ between flat-term K-flat sheaf models, replace the arrow $C\\to C'$ simultaneously on the one-point site. The resulting square commutes before and after quotienting by $t$. Together with the degreewise quotient-to-sections map of step 3, this proves naturality of step 7 for these resolution choices; the preceding independence argument proves it for every choice.\n\nFor two sheaf resolutions $P\\to M\\leftarrow P'$, replace this cospan on the pro-etale site. Write the replacement as $U\\to V\\leftarrow U'$ with vertical quasi-isomorphisms to $P,M,P'$. All three replacements are K-flat with flat terms, and the two arrows into $V$ are quasi-isomorphisms by the commutative squares and their cohomology isomorphisms. The vertical maps $U\\to P$ and $U'\\to P'$ are also quasi-isomorphisms between such models. Exact sections preserve these arrows, and derived change of rings preserves their reductions. Naturality on these four arrows therefore identifies the comparisons formed from $P$ and $P'$ under the canonical derived-reduction and ordinary derived-tensor identifications. This proves resolution independence for the sheaf model as well.\n\nFinally a chain map $M\\to M'$ can itself be replaced as an arrow diagram on the pro-etale site, proving the naturality square for its image in the derived category. That square also holds for the inverse of a quasi-isomorphism: its functor images are invertible, so multiply the square by their inverses. Every localization morphism is a finite composite of these maps and inverses; composing their squares proves naturality for every derived morphism and compatibility with composition. All diagrams used above are finite and hence small. No functorial choice of unrelated resolutions is assumed.",
+   "text": "Fix a flat-term K-flat sheaf model $P$ and put $C=\\Gamma(s,P)$. Specialize [lem-pc-mixed-tensor-pointwise-left-derived] to $R\\to A=R/(t)$ and second factor $A[0]$, using its universal derived-tensor counit $\\varepsilon_C:L(Q_R C)\\to Q_A(C\\otimes_R A)=Q_A(C/tC)$. For a K-flat resolution $q:Q\\to C$, the canonical identification is $\\lambda_q=\\varepsilon_Q\\circ L(Q_Rq)^{-1}$. Naturality of $\\varepsilon$ gives $Q_A(\\bar q)\\circ\\lambda_q=\\varepsilon_C$. Thus the first map of step 7 is independent of $q$, and its chain naturality is the naturality of $\\varepsilon$. Step 7 proves this component is invertible for the particular $C$ in use. The quotient identification is the balanced map $x\\otimes\\bar a\\mapsto ax\\bmod tC$, with inverse $\\bar x\\mapsto x\\otimes1$.",
+   "uses": [
+    "lem-pc-mixed-tensor-pointwise-left-derived",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y6, lemma-derived-base-change and its preceding construction; counit naturality and cancellation of L(Q_R q), with the elementary tensor-quotient identification."
+   }
+  },
+  {
+   "text": "Apply [lem-pod-derived-reduction-sheaf-resolution-independence] on $s_{\\mathrm{proet}}$, with $\\mathcal O=B$, $\\mathcal O'=A_s$, the map $R\\to\\Gamma(s,B)$ of the statement, and $t=\\varpi_E^n$. Step 1 supplies its coefficient exact sequence, step 2 supplies a K-flat model with flat terms, and [lem-weil-point-proetale-sections-exact] supplies exactness on abelian sheaves. Its $\\theta_P\\circ c_C$ is exactly the comparison of step 7, by step 3. The lemma proves naturality for maps between such sheaf models and equality of the transported comparisons for any two resolutions of a complex $M$. Thus the comparison is independent of the sheaf model as well as of the ordinary resolution.",
+   "uses": [
+    "lem-pod-derived-reduction-sheaf-resolution-independence",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change; strict sheaf arrow/cospan coherence extracted in the cited node."
+   }
+  },
+  {
+   "text": "For a chain map $M\\to M'$, [lem-weil-pbc-diagram-kflat-replacements] supplies a strict replacement of this arrow with flat-term K-flat sources and objectwise quasi-isomorphisms. Naturality on its replaced arrow from step 9 and resolution independence give the comparison square for $M\\to M'$. The functors $L\\Gamma(s,-)$ and $\\Gamma(s,-)T$ invert quasi-isomorphisms by the ordinary derived-tensor theorem, derived change of rings and exact point sections. Apply clause (2) of [lem-weil-pbc-localization-universal-property] to $Q:\\mathrm{CoCh}(\\operatorname{Mod}(B))\\to D(B)$: the chain-natural comparison descends uniquely to a natural transformation on the derived category. This includes compatibility with composition. Its components are isomorphisms by step 7, hence it is the required natural isomorphism. All replacement diagrams used here are finite, hence small.",
    "uses": [
     "lem-weil-pbc-diagram-kflat-replacements",
-    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-localization-universal-property",
     "lem-pc-derived-tensor-second-factor-functor",
+    "lem-pur-derived-change-of-rings",
     "lem-weil-point-proetale-sections-exact",
     "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 077J and 0G7E as packaged by lem-weil-pbc-diagram-kflat-replacements, for the finite arrow, cospan, and zigzag diagrams; Tag 06YY, lemma-derived-base-change, for choice independence; more-algebra.tex Tag 06Y6."
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition 05RU; natural-transformation descent is the existing Mathlib leaf lem-weil-pbc-localization-universal-property, clause (2), not an additional new lemma."
    }
   },
   {
@@ -154,23 +179,26 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-standard-quotients-perfect",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-pc-kflat-resolution",
-  "def-weil-integral-derived-reduction",
   "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves",
   "def-pur-sheaf-tensor-product",
-  "def-weil-finite-field-fiber",
-  "lem-weil-point-proetale-sections-exact",
-  "lem-pur-quasi-iso-cone-acyclic",
   "def-weil-abstract-derived-category",
+  "def-weil-finite-field-fiber",
+  "def-weil-integral-derived-reduction",
   "lem-pc-derived-tensor-second-factor-functor",
-  "lem-weil-pbc-diagram-kflat-replacements",
-  "lem-pur-derived-change-of-rings",
-  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-kflat-resolution",
   "lem-pc-mixed-tensor-kflat-quasi-iso",
-  "def-pc-tensor-complex-sheaves"
+  "lem-pc-mixed-tensor-pointwise-left-derived",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pod-derived-reduction-sheaf-resolution-independence",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "lem-weil-point-proetale-sections-exact"
  ],
  "proof_origin": {
   "by": "agent",
@@ -317,10 +345,46 @@
    "results": "Mathlib/RingTheory/Etale/StandardEtale.lean:85 lift_X (x : S) (h : P.HasMap x) : P.lift x h P.X = x; line 110 hasMap_X : P.HasMap P.X; lines 126 and 137 proof uses, and line 133 lift_X_left. These statements concern standard-etale algebra lifts only. Search subdirectory: RingTheory/Etale.",
    "date": "2026-10-16",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections commute with derived tensor product by a quotient of a discrete valuation ring",
+   "results": "Executed search: 8 hits; Algebra.tensorH1CotangentOfIsLocalization, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst. The top result is localization of cotangent cohomology (Kaehler.lean:281); the other hits are scheme pullback carrier identities. None is the derived quotient/sections comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory, Module.Flat, CochainComplex.mappingCone",
+   "results": "Executed search: 0 hits; . No declaration satisfies this pattern.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedTensor|sections.*tensor|tensor.*sections",
+   "results": "Executed search: 0 hits; . No hits in Mathlib/Algebra/Homology.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "sub": "Algebra/Homology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections commute with derived tensor reduction modulo a nonzero divisor",
+   "results": "Executed search: 8 hits; AlgebraicGeometry.Scheme.Γ, AlgebraicGeometry.Scheme.Γ_def, AlgebraicGeometry.LocallyRingedSpace.Γ, AlgebraicGeometry.LocallyRingedSpace.Γ_obj, AlgebraicGeometry.StructureSheaf.to_global_factors_apply, AlgebraicGeometry.AffineScheme.Γ, AlgebraicGeometry.AffineScheme.Γ_preservesLimits, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec. Ordinary structure-sheaf sections, not derived completed-coefficient module sections.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact linear functor commutes with derived reduction by a regular element using a two term free resolution",
+   "results": "Executed search: 8 hits; CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instLinearCochainComplexIntQ, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Abelian.Ext.mapExactFunctor_zero. Read DerivedCategory/ExactFunctor.lean and DerivedCategory/Ext/Map.lean: exact-functor descent, linearity and Ext maps, without a completed-coefficient reduction comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -342,11 +406,11 @@
  "chapter": "sec-poincare-duality",
  "unit": "sk-thm-sf-compatibility",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-pod-point-sections-derived-reduction",
   "worker": "stage1",
-  "summary": "Repaired the literature re-review B3 finding: removed lem-weil-point-sections-finiteness from stmt_deps, since no finiteness assertion or object defined by that node occurs in the statement. Re-read the current and archived blueprint, all cited node statements and the Stacks sources; retained the accepted ten-step quotient/cone comparison and its tool declarations. Repeated project attachment and Mathlib searches, checked the quotient-module action, unbounded resolution argument, naturality and edge cases, and supplied verbatim citation quotes. No statement change or new nodes.",
-  "blueprint": "prop-cohomological-finiteness, Proof Steps 2 and 4; specifically its current split step 6, the passage from integral point sections to finite reductions. This supplies the integral-stage passage in sk-lem-finite, Step 3.",
+  "summary": "Repair of returned long step 8: retain the statement, Lean record, route and all other proof steps; extract ordinary augmentation naturality/choice independence and sheaf-model coherence as two precise statement-only nodes, and cite the existing Mathlib localization-universal-property leaf for descent. Regenerate verbatim citations; rerun and inspect searches with their actual logs. Maintainer repair: drop the new ordinary-resolution lemma, whose augmentation is the existing universal mixed-tensor counit specialized to A[0]; write the counit-naturality equation directly in step 8. The sheaf-coherence statement now uses this counit directly.",
+  "blueprint": "Current unit sk-thm-sf-compatibility clause (7), coefficient compatibility: the integral point-sections/reduction comparison. Historical ancestor prop-cohomological-finiteness, Proof Steps 2 and 4 (main-20261015), and its DAG step 6 remain the source. The extracted nodes make explicit the resolution-independence and localization-naturality arguments formerly hidden in the naturality paragraph.",
   "tool_uses": [
    {
     "node": "lem-weil-l-adic-extension-integers-dvr",
@@ -387,6 +451,10 @@
    {
     "node": "lem-pc-mixed-tensor-kflat-quasi-iso",
     "why": "Tensoring q:Q->C with the fixed K-flat quotient resolution preserves quasi-isomorphisms, even when C is unbounded. No statement of sk-lem-finite replaces this generic tool."
+   },
+   {
+    "node": "lem-pc-mixed-tensor-pointwise-left-derived",
+    "why": "The universal ordinary mixed-tensor counit, specialized to the quotient in degree zero, supplies the augmentation and its naturality in step 8. It is generic derived-functor infrastructure, not a substitute coefficient-compatibility route."
    }
   ]
  },
@@ -400,15 +468,16 @@
   "lem-weil-pbc-diagram-kflat-replacements",
   "lem-pur-derived-change-of-rings",
   "lem-pc-module-bounded-flat-kflat",
-  "lem-pc-mixed-tensor-kflat-quasi-iso"
+  "lem-pc-mixed-tensor-kflat-quasi-iso",
+  "lem-pc-mixed-tensor-pointwise-left-derived"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q44-0d4a051e9",
-  "group": "Q44",
+  "reviewer": "NT-Codex-Q114-108f29b29",
+  "group": "Q114",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q44-0d4a051e9 (reviewer sub-agent of L); spot-checked: Read all ten steps, all 19 cited node statements, local source passages, and unit/chapter route. Verified the D(A)-linear comparison, resolution independence, naturality, cone signs, hypotheses and small cases. No new nodes, duplicate replacement, cycle or missing substantive citation found. Accepted all ten declared tool uses. Detailed independent checks are in review.md; no repairs needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q114-108f29b29 (reviewer sub-agent of L); spot-checked: Read the mathematics and cited sources in full. Replaced the redundant ordinary-resolution lemma with the existing derived-tensor counit argument; corrected both citers under fixes/. Verified D(A)-linearity, naturality, cone signs, edge cases and acyclic dependencies. Detailed checks are in review.md.; 2 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-16",

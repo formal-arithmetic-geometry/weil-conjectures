@@ -3,71 +3,169 @@
  "blueprint": {
   "is": "lem-zl-relative-curve-mixedness",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Mixedness of the direct images over a relative affine curve",
- "statement": "Fix the coefficient and weight conventions of\n[def-weil-punctual-weights]. Let $h:U_0\\to Y_0$ be a\nsmooth separated morphism\nbetween separated finite-type\n$k_0$-schemes, with every nonempty geometric fiber a smooth affine curve,\nand let $\\mathcal F$ be a\nlisse\n$\\Qlb$-Weil sheaf that is\npunctually $\\iota$-pure of weight\n$w$. Then for every $i$ there is a real number $u_i$ such that\n$R^ih_!\\mathcal F$ is\n$\\iota$-mixed of weights at most\n$u_i$.\nThe proof follows the reduction in Kiehl–Weissauer I.7, pp. 53–54:\nthe curve bound separates the two cohomological root radii, and\n[thm-zl-real-mixed-by-curves] supplies mixedness on the base by\ngeometric reduction to the already proved real-sheaf theorem on curves.\nNo instance of the general direct-image weight theorem is imported.",
+ "statement": "Fix the coefficient and weight conventions of\n[def-weil-punctual-weights]. Let $h:U_0\\to Y_0$ be a\nsmooth separated morphism\nbetween separated finite-type\n$k_0$-schemes, with every nonempty geometric fiber a smooth affine curve,\nand let $\\mathcal F$ be a\nlisse\n$\\Qlb$-Weil sheaf that is\npunctually $\\iota$-pure of weight\n$w$. Then for every $i$ there is a real number $u_i$ such that\n$R^ih_!\\mathcal F$ is\n$\\iota$-mixed of weights at most\n$u_i$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-curve-mixedness.md",
   "place": "node lem-zl-relative-curve-mixedness, order 2843"
  },
  "stmt_deps": [
   "def-weil-punctual-weights",
-  "thm-zl-real-mixed-by-curves",
-  "def-weil-pbc-constructible-complexes",
-  "def-weil-pbc-qbar-category",
-  "def-weil-pbc-scheme-conventions",
+  "def-weil-weil-sheaf-complex",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-integral-rational-qbar-compact-support",
   "def-weil-scheme-morphism-properties"
  ],
  "proof": [
   {
-   "text": "Normalize $\\mathcal F$ as in\n[def-wf-normalized-real-envelope]: put\n$b=\\iota^{-1}(q^{-w/2})$,\n$\\mathcal F^0=\\mathcal F\\otimes\\mathcal B_b$, and\n$\\mathcal E=\\mathcal F^0\\oplus(\\mathcal F^0)^\\vee$.\nIt is lisse, pure of weight zero and real by\n[lem-wf-envelope-real]. The relative factor calculation\n[lem-zl-relative-envelope-factor-reality], which uses only the\nproved curve estimate, shows that $R^ih_!\\mathcal E$ is real for\nevery $i$. These are constructible sheaves: the finite-level\nfiniteness theorem [sbc-thm-finiteness-finite-type] supplies the\nconstructible landing hypotheses in the coefficient passage of\n[thm-cbc-qbar].",
+   "text": "Choose $b=\\iota^{-1}(q^{-w/2})\\in\\Qlb^\\times$ and put $\\mathcal F^0=\\mathcal F\\otimes\\mathcal B_b$ and $\\mathcal E=\\mathcal F^0\\oplus(\\mathcal F^0)^\\vee$, as in [def-wf-normalized-real-envelope]. This choice is allowed because the fixed $\\iota$ is an isomorphism and $q^{-w/2}>0$. Since $q>1$, $2\\log_q|\\iota(b)|=-w$. By [lem-wf-constant-twist-weight], $\\mathcal F^0$ is punctually pure of weight zero. It is lisse: its underlying geometric sheaf is the tensor of the lisse sheaf $\\mathcal F$ with a constant one-dimensional sheaf. By [lem-tw-dual-negation], $(\\mathcal F^0)^\\vee$ is also pure of weight zero. The Frobenius matrix of the direct sum is block diagonal, so its characteristic polynomial is the product of the two characteristic polynomials; all eigenvalues of $\\mathcal E$ therefore have modulus one. Thus $\\mathcal E$ is pure of weight zero. Finally [lem-wf-envelope-real] gives both lissity and $\\iota$-reality of $\\mathcal E$.",
    "uses": [
     "def-wf-normalized-real-envelope",
-    "lem-wf-envelope-real",
+    "lem-wf-constant-twist-weight",
+    "def-wf-constant-weil-twist",
+    "lem-tw-dual-negation",
+    "lem-wf-envelope-real"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-curve-mixedness.proof.md",
+    "place": "paragraph 1, normalization and the real envelope; purity made explicit"
+   }
+  },
+  {
+   "text": "We check the constructible domain before applying the real-sheaf theorem. All schemes are separated and of finite type over $k_0$, and $h$ is separated and of finite type; $\\ell\\ne\\operatorname{char}(k_0)$. Regard $\\mathcal E$ in degree zero. In the common-stage construction [def-weil-integral-rational-qbar-compact-support], its underlying complex is represented at a finite field $E/\\Ql$ by an integral constructible complex $K$. The theorem [lem-sf-integral-compact-support-constructible] applies to $K$ and $h$ and puts its integral compact-support image in $D^b_c(Y,\\mathcal O_E)$. Rationalization and the common-stage formula in the cited definition therefore put $Rh_!\\mathcal E$ in $D^b_c(Y,\\Qlb)$. This uses completed integral coefficients, followed by rationalization, not discrete non-torsion coefficients on the etale site. The lift [prop-weil-operations] equips this output with its Weil structure and makes its morphisms Frobenius compatible. By [prop-constructible-truncations], its cohomology $\\mathcal G_i=\\mathcal H^i(Rh_!\\mathcal E)$ is in the constructible heart and inherits that structure. Hence each $\\mathcal G_i$ is a constructible $\\Qlb$-Weil sheaf. The same reasoning applies to $Rh_!\\mathcal F$ and $Rh_!\\mathcal F^0$.",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-sf-integral-compact-support-constructible",
+    "prop-weil-operations",
+    "prop-constructible-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-curve-mixedness.proof.md",
+    "place": "paragraph 1, constructible landing (replace the insufficient finiteness/base-change citation by the existing preservation theorem)"
+   }
+  },
+  {
+   "text": "The morphism $h$ satisfies precisely the hypotheses of [lem-zl-relative-envelope-factor-reality]: it is smooth and separated between separated finite-type schemes with every nonempty geometric fiber an affine curve. Step 1 supplies its other three hypotheses: $\\mathcal E$ is lisse, real and pure of weight zero. That lemma gives $\\iota$-reality of $\\mathcal G_i$ for every $i$. The scheme $Y_0$ is separated and of finite type over the finite field, and Step 2 supplies constructibility. Apply [thm-zl-real-mixed-by-curves] to obtain a finite mixed filtration of $\\mathcal G_i$. Choose a real upper bound $v_i$ for its finitely many pure-quotient weights; when the filtration is empty take $v_i=0$.",
+   "uses": [
     "lem-zl-relative-envelope-factor-reality",
-    "sbc-thm-finiteness-finite-type",
-    "thm-cbc-qbar"
+    "thm-zl-real-mixed-by-curves"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-curve-mixedness.proof.md",
+    "place": "paragraphs 1-2, reality of the relative factors and mixedness on the base"
+   }
   },
   {
-   "text": "Apply [thm-zl-real-mixed-by-curves] on $Y_0$, obtaining a\nfinite mixed filtration of $R^ih_!\\mathcal E$.\nAdditivity makes $R^ih_!\\mathcal F^0$ a direct summand, so it is\nmixed by [lem-a1-mixed-direct-summand]. The constant-twist\nprojection formula [lem-wf-constant-twist-cohomology] identifies\n\n$$\nR^ih_!\\mathcal F\n\\cong R^ih_!\\mathcal F^0\\otimes\\mathcal B_{b^{-1}}.\n$$",
+   "text": "Write $a:\\mathcal F^0\\to\\mathcal E$ and $p:\\mathcal E\\to\\mathcal F^0$ for the inclusion and projection of the first summand, so $p\\circ a=1$. Applying the functor $\\mathcal H^i Rh_!$ gives maps whose composite is still the identity; these are maps of Weil sheaves by [prop-weil-operations] and the Frobenius-compatible cohomology functors [prop-constructible-truncations]. Consequently $R^ih_!\\mathcal F^0$ is a retract, hence a Weil direct summand, of $\\mathcal G_i$. Clause 3 of [lem-a1-mixed-direct-summand] gives a finite mixed filtration of $R^ih_!\\mathcal F^0$ of weights at most $v_i$. This uses functoriality of the retraction and requires no exactness of $R^ih_!$.",
    "uses": [
-    "thm-zl-real-mixed-by-curves",
-    "lem-a1-mixed-direct-summand",
-    "lem-wf-constant-twist-cohomology"
+    "prop-weil-operations",
+    "prop-constructible-truncations",
+    "lem-a1-mixed-direct-summand"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-curve-mixedness.proof.md",
+    "place": "paragraph 2, the direct summand argument"
+   }
   },
   {
-   "text": "Tensoring the finite filtration with this rank-one sheaf is exact.\nAt a closed point of degree $m$, the twist multiplies each\neigenvalue by $b^{-m}$, of $\\iota$-modulus $q^{mw/2}$, by\n[def-wf-constant-weil-twist]. Thus every pure quotient of weight\n$v$ becomes pure of weight $v+w$, including where its stalk is\nzero. This gives the required finite mixed filtration without a\nlissity assumption on the direct image. Its finitely many\nweights have a maximum $u_i$; for the zero sheaf take any $u_i$.",
+   "text": "The pullback to $U_0$ of the constant Weil line $\\mathcal B_b$ on $Y_0$ is the constant Weil line with the same scalar, since both actions are $g\\mapsto b^{\\deg(g)}$. Apply [lem-wf-constant-twist-cohomology] to $h$, $\\mathcal F$ and this line. Its hypotheses hold: $h$ is separated of finite type, both schemes are separated of finite type, and $\\mathcal F$ in degree zero is constructible. It gives a Frobenius-compatible isomorphism $Rh_!\\mathcal F^0\\cong Rh_!\\mathcal F\\otimes\\mathcal B_b$. The underlying geometric line is constant of rank one, so tensoring with it preserves kernels and images, and hence commutes with cohomology. In degree $i$ and then tensoring with its inverse line, this identifies\n$$R^ih_!\\mathcal F\\cong (R^ih_!\\mathcal F^0)\\otimes\\mathcal B_{b^{-1}}.$$\nThe cancellation of the two lines is Weil compatible: their Frobenius scalars multiply to $bb^{-1}=1$.",
    "uses": [
+    "lem-wf-constant-twist-cohomology",
     "def-wf-constant-weil-twist"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-curve-mixedness.proof.md",
+    "place": "paragraph 2, the constant-twist projection isomorphism"
+   }
+  },
+  {
+   "text": "Tensor the finite filtration from Step 4 by $\\mathcal B_{b^{-1}}$. This is exact, since the underlying geometric line is the constant one-dimensional coefficient sheaf; on underlying sheaves tensoring with it is isomorphic to the identity. Subsheaves and quotients therefore remain constructible, with their induced Weil structures. If a quotient was pure of weight $t$, then at a degree-$m$ closed point its Frobenius eigenvalues become $b^{-m}\\alpha$ by [def-wf-constant-weil-twist]. Since $q_y=q^m$ and $|\\iota(b^{-m})|=q^{mw/2}$, their moduli are $q_y^{t/2}q_y^{w/2}=q_y^{(t+w)/2}$. Thus this quotient is pure of weight $t+w$ by [def-weil-punctual-weights]. All these weights are at most $v_i+w$. Step 5 transports this filtration to $R^ih_!\\mathcal F$, so $u_i=v_i+w$ works. Zero stalks impose no eigenvalue condition, and the zero sheaf has the empty filtration. No lissity of a direct image is used.",
+   "uses": [
+    "def-wf-constant-weil-twist",
+    "def-weil-punctual-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-curve-mixedness.proof.md",
+    "place": "paragraph 3, exact untwisting and the weight calculation"
+   }
   }
  ],
  "proof_deps": [
   "def-wf-normalized-real-envelope",
+  "lem-wf-constant-twist-weight",
+  "def-wf-constant-weil-twist",
+  "lem-tw-dual-negation",
   "lem-wf-envelope-real",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-sf-integral-compact-support-constructible",
+  "prop-weil-operations",
+  "prop-constructible-truncations",
   "lem-zl-relative-envelope-factor-reality",
-  "sbc-thm-finiteness-finite-type",
-  "thm-cbc-qbar",
   "thm-zl-real-mixed-by-curves",
   "lem-a1-mixed-direct-summand",
   "lem-wf-constant-twist-cohomology",
-  "def-wf-constant-weil-twist"
+  "def-weil-punctual-weights"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-curve-mixedness.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-p-dl-general-relative-line/lem-zl-relative-curve-mixedness.proof.md",
+  "place": "paragraphs 1-3, expanding missing domain, purity and functoriality checks"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|IsMixedOfWeights|PunctuallyPure|higherLowerShriek",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: no theorem on mixed Weil sheaves or their compact-support higher direct images"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct image with compact support of pure lisse Weil sheaves on affine curves is mixed",
+   "results": "8 hits; CondensedSet.LocallyConstant.functorFullyFaithful, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.instFullPushforward, AlgebraicGeometry.Scheme.compactSpace_of_isLimit, AlgebraicGeometry.Scheme.Hom.support_ker, AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj, SheafOfModules.sheafificationCompPullback, CompHausLike.LocallyConstant.functorIso",
+   "date": "2026-10-17",
+   "verdict": "no match: no theorem on mixed Weil sheaves or their compact-support higher direct images"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilSheaf\"",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: no theorem on mixed Weil sheaves or their compact-support higher direct images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported higher direct images of a pure lisse Weil sheaf along smooth affine curves over a finite field are mixed sheaves",
+   "results": "8 hits; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, CompHausLike.LocallyConstantModule.functor, LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, instAbelianLightCondMod, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "date": "2026-10-17",
+   "verdict": "no match: no theorem on mixed Weil sheaves or their compact-support higher direct images"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius.*weight|mixed.*sheaf|pure.*sheaf",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: no theorem on mixed Weil sheaves or their compact-support higher direct images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Deligne weights theorem real constructible l-adic sheaf is mixed compact support direct image affine curve",
+   "results": "8 hits; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_map_preimage_le_map_preimage, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_map_preimage_eq_map_preimage, AlgebraicGeometry.exists_preimage_eq, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated",
+   "date": "2026-10-17",
+   "verdict": "no match: no theorem on mixed Weil sheaves or their compact-support higher direct images"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -735,5 +833,44 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-zl-relative-curve-mixedness",
+  "worker": "stage1",
+  "summary": "Followed main-20261015 blueprint_update, preserving the mathematical statement and removing the old proof commentary from its statement field. Expanded envelope purity, corrected the constructible landing citations, checked all hypotheses and wrote the retraction and inverse-twist filtration arguments. Reused all needed nodes; no new nodes. The matching Lean theorem is not closed: the relative-reality and mixed-constant-twist inputs remain sorry.",
+  "blueprint": "Steps 1-3 realize paragraph 1 and the opening of paragraph 2; Step 4 realizes the direct summand sentence; Step 5 realizes the displayed projection formula; Step 6 realizes paragraph 3. This is unit sk-p-dl-general-relative-line step 2, with normalization to weight zero.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-integral-compact-support-constructible",
+    "why": "Constructibility of integral compact-support output before rationalization; the unit does not prove this coefficient preservation theorem."
+   },
+   {
+    "node": "prop-weil-operations",
+    "why": "Weil-equivariant functorial lift of compact-support direct image; used only to give the existing operations their Frobenius structure."
+   },
+   {
+    "node": "prop-constructible-truncations",
+    "why": "Constructible cohomology and its compatibility with Frobenius pullback; the unit is about weights, not constructing the heart."
+   },
+   {
+    "node": "lem-tw-dual-negation",
+    "why": "Linear dual changes punctual weight t to -t, used only to check the envelope is weight zero."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-integral-compact-support-constructible",
+  "prop-weil-operations",
+  "prop-constructible-truncations",
+  "lem-tw-dual-negation"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q123-21d3e0a48",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q123-21d3e0a48 (reviewer sub-agent of L); spot-checked: Read the required instructions, packet/report, item, unit/chapter route, every cited node statement, and cited blueprint/literature sources. Verified all six proof steps, hypotheses, coefficient-category transitions, base-change/twist morphisms, edge cases, route compliance, and no duplicate or new nodes. Wrote review.md; no repairs needed."
  }
 }

@@ -11,9 +11,70 @@
   "def-weil-abstract-derived-category",
   "def-sc-module-total-hom-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a homogeneous cochain $\\varphi\\in H_R^j$, precomposition gives $(f^*\\varphi)=\\varphi f$. Since $f$ commutes with differentials, $d_Rf=fd_P$, and the total Hom differential is $D\\varphi=d_T\\varphi-(-1)^j\\varphi d_R$, we have $D(\\varphi f)=(D\\varphi)f$. Thus $f^*$ is a degree-zero chain map.",
+   "uses": [
+    "def-sc-module-total-hom-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/sk-p-trace.proof.md",
+    "place": "Final two sentences: the Hom-precomposition homotopy argument needed to dualize a homotopy equivalence."
+   }
+  },
+  {
+   "text": "Precomposition by the identity is the identity on every homogeneous cochain. For composable degree-zero chain maps $P\\xrightarrow{f}R\\xrightarrow{g}L$ and any cochain $\\varphi:L\\to T$, $(f^*(g^*\\varphi))=(\\varphi g)f=\\varphi(gf)=(gf)^*\\varphi$. Hence $(1_P)^*=1_{H_P}$ and $(gf)^*=f^*g^*$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/sk-p-trace.proof.md",
+    "place": "Final two sentences: the Hom-precomposition homotopy argument needed to dualize a homotopy equivalence."
+   }
+  },
+  {
+   "text": "Let $h$ have degree $-1$ and define $S_h(\\varphi)=(-1)^j\\varphi h$ for $\\varphi$ homogeneous of degree $j$. The two terms in $DS_h(\\varphi)+S_hD(\\varphi)$ are $(-1)^j d_T\\varphi h+\\varphi h d_P$ and $(-1)^{j+1}d_T\\varphi h+\\varphi d_Rh$, respectively. The $d_T$ terms cancel, leaving $\\varphi(hd_P+d_Rh)=\\varphi(f-f')=(f^*-(f')^*)\\varphi$. Therefore $f^*-(f')^*=DS_h+S_hD$.",
+   "uses": [
+    "def-sc-module-total-hom-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/sk-p-trace.proof.md",
+    "place": "Final two sentences: the Hom-precomposition homotopy argument needed to dualize a homotopy equivalence."
+   }
+  },
+  {
+   "text": "Taking $T=A[0]$ gives the stated dual complexes $P^\\vee$ and $R^\\vee$, and the preceding identity says that a chain homotopy $f\\simeq f'$ induces a chain homotopy $f^\\vee\\simeq(f')^\\vee$ via $S_h$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/sk-p-trace.proof.md",
+    "place": "Final two sentences: transport of duality along an isomorphism; the Hom-precomposition homotopy argument needed to dualize a homotopy equivalence."
+   }
+  },
+  {
+   "text": "If $f:P\\to R$ and $g:R\\to P$ are homotopy inverses, then $gf\\simeq1_P$ and $fg\\simeq1_R$. By the previous specialization, $(gf)^*\\simeq(1_P)^*$ and $(fg)^*\\simeq(1_R)^*$. Using the composition identity, these are $f^\\vee g^\\vee\\simeq1_{P^\\vee}$ and $g^\\vee f^\\vee\\simeq1_{R^\\vee}$, so $f^\\vee$ and $g^\\vee$ are homotopy inverses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/sk-p-trace.proof.md",
+    "place": "Final two sentences: transport of duality along an isomorphism; the Hom-precomposition homotopy argument needed to dualize a homotopy equivalence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-total-hom-complex",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/sk-p-trace.proof.md",
+  "place": "Final two sentences: transport of duality along an isomorphism; the Hom-precomposition homotopy argument needed to dualize a homotopy equivalence."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,7 +120,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-chain-supertrace",
@@ -76,5 +137,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-hom-dual-preserves-homotopies",
+  "worker": "stage1",
+  "summary": "Expanded the blueprint's Hom-precomposition argument into five explicit elementary steps: the chain-map calculation, identity and composition, the signed homotopy computation, specialization to dualization, and transport of homotopy inverses. No auxiliary node was needed; all non-elementary notions are the two existing definition dependencies.",
+  "blueprint": "The five steps realize the final two sentences of sk-p-trace.proof.md: precomposition on total Hom, its signed homotopy formula, and the dualization of homotopy equivalences.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q28-37aaa2d1d",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q28-37aaa2d1d (reviewer sub-agent of L); spot-checked: Read the full item, all five steps, both cited definitions, current blueprint route and Stacks 0A8H. Signed homotopy and contravariant composition are correct; 405 small arithmetic cases passed. No duplicate, cycle, missing non-elementary citation or coefficient-category change found. No fixes or tool_uses needed. Detailed checks are in review.md."
  }
 }

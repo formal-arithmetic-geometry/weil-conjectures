@@ -93,8 +93,54 @@
    }
   },
   {
-   "text": "Define $(F\\otimes K)(d)=F(d)\\times K$ and $(G^K)(d)=G(d)^K$, using at each object the Cartesian cotensor of Step 2, and put $\\operatorname{Map}(F,G)_n=\\operatorname{Nat}(F\\times\\Delta^n,G)$; a simplicial operator acts by precomposition on $\\Delta^n$, and composition is pointwise using the diagonal of $\\Delta^n$. The objectwise exponential adjunction of Step 2 is natural in $d$, so it restricts to natural families and gives bijections $\\operatorname{Hom}(F\\otimes K,G)\\cong\\operatorname{Hom}(K,\\operatorname{Map}(F,G))\\cong\\operatorname{Hom}(F,G^K)$, natural in all three variables: a natural family $F(d)\\times K\\to G(d)$ sends a simplex $k:\\Delta^n\\to K$ to the composite $F\\times\\Delta^n\\to F\\times K\\to G$, and conversely a map $K\\to\\operatorname{Map}(F,G)$ is evaluated on the identity simplices. Equivalently $\\operatorname{Map}(F,G)$ is the equalizer of the two maps from $\\prod_d\\operatorname{Map}(F(d),G(d))$ to $\\prod_{\\alpha:e\\to d}\\operatorname{Map}(F(d),G(e))$; it is an end, not an objectwise mapping object. Pushout-product axiom: let $i:A\\to B$ be a projective cofibration, $j:K\\to L$ a monomorphism of simplicial sets and $p:X\\to Y$ an objectwise Kan fibration. Write $i\\mathbin\\square j:(A\\otimes L)\\amalg_{A\\otimes K}(B\\otimes K)\\to B\\otimes L$ and $p^{\\square j}:X^L\\to X^K\\times_{Y^K}Y^L$. Applying the natural bijections above to the corners of the squares, and the universal properties of the pushout and the pullback, commutative squares from $i\\mathbin\\square j$ to $p$ correspond bijectively to commutative squares from $i$ to $p^{\\square j}$, and diagonal fillers correspond to diagonal fillers. Cotensors and pullbacks are objectwise, so the component of $p^{\\square j}$ at $d$ is the map $\\operatorname{Map}(L,X(d))\\to\\operatorname{Map}(K,X(d))\\times_{\\operatorname{Map}(K,Y(d))}\\operatorname{Map}(L,Y(d))$ of Step 2 for the monomorphism $j$ and the Kan fibration $p(d)$. By Step 2 it is a Kan fibration, and a trivial fibration if $j$ or $p(d)$ is trivial. (a) If $p$ is an objectwise trivial fibration, $p^{\\square j}$ is an objectwise trivial fibration, so $i$ lifts against it by definition of projective cofibrations; hence $i\\mathbin\\square j$ lifts against every objectwise trivial fibration and is a projective cofibration. (b) If $j$ is a weak equivalence, $p^{\\square j}$ is an objectwise trivial fibration for every objectwise Kan fibration $p$, so $i\\mathbin\\square j$ lifts against every projective fibration, i.e. lies in ${}^{\\square}(J_D^{\\square})$, which is the class of trivial projective cofibrations by Step 5. (c) If $i$ is a trivial projective cofibration, then $i\\in{}^{\\square}(J_D^{\\square})$ by Step 5 and $p^{\\square j}$ is an objectwise Kan fibration, i.e. lies in $J_D^{\\square}$; so $i$ lifts against it and again $i\\mathbin\\square j$ is a trivial projective cofibration. Finally, for a projective cofibration $i:A\\to B$ and a projective fibration $p:X\\to Y$, the tensor adjunction identifies a lifting problem of $\\partial\\Delta^n\\to\\Delta^n$ (resp. $\\Lambda^n_k\\to\\Delta^n$) against $\\operatorname{Map}(B,X)\\to\\operatorname{Map}(A,X)\\times_{\\operatorname{Map}(A,Y)}\\operatorname{Map}(B,Y)$ with a lifting problem of $i\\mathbin\\square(\\partial\\Delta^n\\to\\Delta^n)$ (resp. $i\\mathbin\\square(\\Lambda^n_k\\to\\Delta^n)$) against $p$. By (b) the horn case is solvable, so this map is a Kan fibration; if $p$ is trivial, (a) solves the boundary case, and if $i$ is trivial, (c) does; by [lem-coef-kan-quillen-right-proper] the map is then a trivial fibration. This proves the asserted simplicial projective structure with its precise tensor, cotensor and mapping object.",
+   "text": "Regard $J=D^{\\mathrm{op}}$ as the small simplicial category $I$ with discrete mapping sets $I(d,e)=\\operatorname{Hom}_J(d,e)$ and composition induced from $J$. Enriched functors $I\\to\\mathrm{sSet}$ are exactly ordinary $J$-diagrams: a map out of a discrete mapping set chooses one ordinary arrow for each $\\alpha$, and the unit and composition equations are the functor laws. Enriched naturality is ordinary naturality at each $\\alpha$. Apply [lem-coef-enriched-diagram-size-generation] with $\\mathcal A=\\mathrm{sSet}$, locally presentable by Step 1 and enriched, tensored and cotensored by Step 2. It supplies the diagram enrichment, its mapping end, and objectwise tensor and cotensor. Thus $(F\\otimes K)(d)=F(d)\\times K$, $(G^K)(d)=G(d)^K$, and $\\operatorname{Map}(F,G)_n=\\operatorname{Nat}(F\\times\\Delta^n,G)$. The operators act by precomposition and composition uses the diagonal, as in the Cartesian enrichment. The tensor/cotensor conventions [def-coef-simplicial-tensor-cotensor] make these representing data with enriched natural isomorphisms $\\operatorname{Map}(F\\otimes K,G)\\cong[K,\\operatorname{Map}(F,G)]\\cong\\operatorname{Map}(F,G^K)$. On vertices they give both parametrized adjunctions used below. No model-compatibility conclusion is taken from the diagram lemma.",
    "uses": [
+    "lem-coef-enriched-diagram-size-generation",
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark A.3.3.4 and Remark A.3.1.6, enriched model compatibility; verified here by the tensor/cotensor adjunction against the objectwise cotensor maps (repair by the maintainer reader). Read online; not archived in literature/. The detailed assembly is by the worker."
+   }
+  },
+  {
+   "text": "Let $i:A\\to B$ be a projective cofibration, $j:K\\to L$ a simplicial monomorphism and $p:X\\to Y$ an objectwise Kan fibration. Put $q_j(p):X^L\\to X^K\\times_{Y^K}Y^L$. At $d$ this is $\\operatorname{Map}(L,X(d))\\to\\operatorname{Map}(K,X(d))\\times_{\\operatorname{Map}(K,Y(d))}\\operatorname{Map}(L,Y(d))$, since cotensors and pullbacks are objectwise. Step 2 therefore makes $q_j(p)$ an objectwise Kan fibration, and an objectwise trivial fibration if $j$ is a weak equivalence or $p$ is objectwise trivial. This uses the Kan simplicial axiom only at a single object, with the cofibration $j$ and the fibration $p(d)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark A.3.3.4 and Remark A.3.1.6, enriched model compatibility; verified here by the tensor/cotensor adjunction against the objectwise cotensor maps (repair by the maintainer reader). Read online; not archived in literature/. The detailed assembly is by the worker."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-parametrized-adjunction-corner-lifting] to the adjunction $\\operatorname{Hom}(F\\otimes K,G)\\cong\\operatorname{Hom}(F,G^K)$ supplied by [lem-coef-enriched-diagram-size-generation]. It identifies $\\operatorname{LLP}(i\\mathbin\\square j,p)$ with $\\operatorname{LLP}(i,q_j(p))$, where $i\\mathbin\\square j:(A\\otimes L)\\amalg_{A\\otimes K}(B\\otimes K)\\to B\\otimes L$. When $p$ is objectwise trivial, the preceding step makes $q_j(p)$ objectwise trivial. The defining lifting property of $i$ gives the required lift. Thus $i\\mathbin\\square j$ lifts against all objectwise trivial fibrations, so is a projective cofibration by Step 5.",
+   "uses": [
+    "lem-coef-parametrized-adjunction-corner-lifting",
+    "lem-coef-enriched-diagram-size-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark A.3.3.4 and Remark A.3.1.6, enriched model compatibility; verified here by the tensor/cotensor adjunction against the objectwise cotensor maps (repair by the maintainer reader). Read online; not archived in literature/. The detailed assembly is by the worker."
+   }
+  },
+  {
+   "text": "If $j$ is also a weak equivalence, the same corner-lifting equivalence [lem-coef-parametrized-adjunction-corner-lifting] makes $i\\mathbin\\square j$ lift against every projective fibration: the preceding objectwise computation makes $q_j(p)$ trivial for every such $p$, and $i$ lifts against it. If $i$ is instead a trivial projective cofibration, $q_j(p)$ is a projective fibration for every projective fibration $p$, and $i$ lifts against it by Step 5. In either case $i\\mathbin\\square j$ belongs to the left class of the second weak factorization system of Step 5, hence is a trivial projective cofibration.",
+   "uses": [
+    "lem-coef-parametrized-adjunction-corner-lifting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark A.3.3.4 and Remark A.3.1.6, enriched model compatibility; verified here by the tensor/cotensor adjunction against the objectwise cotensor maps (repair by the maintainer reader). Read online; not archived in literature/. The detailed assembly is by the worker."
+   }
+  },
+  {
+   "text": "Use [lem-coef-parametrized-adjunction-corner-lifting] a second time, now for $\\operatorname{Hom}(F\\otimes K,G)\\cong\\operatorname{Hom}(K,\\operatorname{Map}(F,G))$ from [lem-coef-enriched-diagram-size-generation]. For a projective cofibration $i:A\\to B$ and projective fibration $p:X\\to Y$, lifting a simplicial map $j$ against $r:\\operatorname{Map}(B,X)\\to\\operatorname{Map}(A,X)\\times_{\\operatorname{Map}(A,Y)}\\operatorname{Map}(B,Y)$ is equivalent to lifting $i\\mathbin\\square j$ against $p$. For a horn inclusion $j$, this pushout product is trivial by the preceding step, so all horn lifts exist. If $p$ is trivial, every boundary inclusion gives a cofibration pushout product by the earlier corner calculation, so it lifts against $p$. If $i$ is trivial, each boundary pushout product is trivial and lifts against $p$. The horn and boundary characterizations in [lem-coef-kan-quillen-right-proper], including the zero-dimensional boundary, show that $r$ is a Kan fibration, trivial in both asserted cases. This proves the required simplicial model axiom with the stated enrichment.",
+   "uses": [
+    "lem-coef-parametrized-adjunction-corner-lifting",
+    "lem-coef-enriched-diagram-size-generation",
     "lem-coef-kan-quillen-right-proper"
    ],
    "elementary": false,
@@ -122,7 +168,10 @@
   "lem-coef-sset-anodyne-pushout-product",
   "lem-coef-object-presentability-rank",
   "lem-coef-small-family-regular-bound",
-  "lem-coef-small-object-cell-factorization"
+  "lem-coef-small-object-cell-factorization",
+  "lem-coef-enriched-diagram-size-generation",
+  "def-coef-simplicial-tensor-cotensor",
+  "lem-coef-parametrized-adjunction-corner-lifting"
  ],
  "proof_origin": {
   "by": "agent",
@@ -172,7 +221,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-presheaf-localization-comparison",
@@ -184,8 +233,8 @@
   "date": "2026-10-17",
   "item": "lem-coef-simplicial-presheaf-projective-model",
   "worker": "stage1",
-  "summary": "Replaced the earlier clause-restatement split with the free-diagram adjunction, cellular factorizations and model-recognition retract argument. Reused existing Kan, presentability-rank, regular-bound, small-object and anodyne pushout-product nodes. Added the exact Mathlib local-presentability leaf and the general all-cofibrant left-properness theorem. Corrected the earlier child mapping-object error by giving the natural-transformation end formula in the item proof; the imported item statement itself is unchanged.",
-  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent derived coefficient adjunction before the displayed derived inverse limit, through the existing projective-presheaf localization ancestry. No unit step or route is replaced.",
+  "summary": "Repaired the human-returned 3627-character step 6 by retaining its enrichment/cotensor-corner route in five short steps. Reused the existing enriched-diagram-size-generation theorem (with the local-presentability hypothesis proved in Step 1) for ordinary-diagram enrichment and both tensor adjunctions, and the existing exact Mathlib parametrized-adjunction-corner-lifting leaf for both lifting transpositions. Relative cotensors are computed objectwise; the three lifting-class deductions and horn/boundary test remain explicit. The statement, Lean record, original steps 1–5 and final step are unchanged. No new nodes.",
+  "blueprint": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: coherent derived coefficient adjunction before the displayed derived inverse limit, through the existing projective-presheaf localization ancestry. No unit step or route is replaced. This repair extracts only the enriched adjunction and corner-lifting infrastructure formerly carried inline in step 6.",
   "tool_uses": [],
   "foundation_repair": {
    "item": "lem-coef-unmarked-straightening-quillen",
@@ -195,12 +244,12 @@
   }
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q31-c37c0c4be",
-  "group": "Q31",
+  "reviewer": "NT-Codex-NV-04d5e9096",
+  "group": "NV",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-c37c0c4be (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, both new nodes, every cited node's statement, the Mathlib sources (Presheaf.lean:77-96, Type.lean:158-167, LocallyPresentable.lean:30-90) and the blueprint ancestor's proof paragraph 2. HTT is not archived locally (the worker filed a WANTED request) and I could not open the PDF, so I checked the cited places (A.2.4.2, A.2.8.2/4/5, A.3.3.2/4) from my knowledge of the book. The item statement is unchanged and correct. Edge cases checked: empty D, terminal D, discrete two-object D, the arrow category, D=BG, and the n=0 boundary inclusion. Steps 1-5 and 7 are sound: local presentability, Kan left properness/combinatoriality/simplicial axiom, the free-diagram adjunction L_d -| ev_d, the small-object argument with a regular bound, and the model axioms via the retract argument. One repair (error E5/C2): step 6 extended the simplicial pushout-product axiom from generators to all projective cofibrations by asserting, without argument, that pushout product carries cell presentations to cell presentations. I rewrote step 6 to argue directly: by the tensor/cotensor adjunction, lifting i□j against p is equivalent to lifting i against p^{□j}, which at each object is the Kan map of Step 2. This gives cases (a) p trivial, (b) j trivial, (c) i trivial, then the mapping-space form. The step now uses lem-coef-kan-quillen-right-proper only; proof_deps is unchanged. New node lem-coef-all-cofibrant-left-proper is true, general, not a clause of the item and not in Mathlib or the DAG. New node lem-coef-presheaf-local-presentability is a valid two-clause Mathlib leaf; applying it to SSet.{u} with u>0 will need a universe lift in Lean (stage-2 note only). All cited nodes are in the unit, so no tool uses. Separately, the existing unsplit node lem-coef-simplicial-model-coherent-diagrams generalizes the item; that is for maintainer awareness only and does not affect this split. The corrected item is in fixes/dag/nodes/sec-six-functors/ and the full review is in review.md.; 1 file(s) fixed by the reviewer Maintenance Q72 (2026-10-17) retained the seven-step construction, replaced the theorem-valued model terminology by independent model/tensor definitions, and checked the left-properness specialization of the existing simplicial-set gluing statement. Original review and record archived in coord/reports/maintenance/Q72-unmarked-straightening-before.json."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-04d5e9096 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, sources and route. All eleven steps check out, including both corner-lifting applications, smallness, retract arguments and dimension-zero boundaries. No new nodes, missing dependencies or return path were found. No corrections or tool_uses needed; detailed checks are in review.md."
  },
  "lean_audit": {
   "master": {

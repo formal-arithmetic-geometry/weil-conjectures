@@ -7,9 +7,7 @@
    "place": "proof of (2): 'By naturality of the projection formula under pullback (compatibility of the projection formula with base change), this equals the projection formula for f' followed by id⊗ε_{f'} at v^*K'; this node states that compatibility for finite-ring and tower coefficients.",
    "via": []
   },
-  "same_as": [
-   "prop-sf-pf-coherence"
-  ]
+  "same_as": []
  },
  "kind": "statement",
  "title": "Compact-support projection map commutes with base change (finite rings and coefficient towers)",
@@ -32,9 +30,79 @@
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "def-exchange-projection"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work uniformly in ringed topoi. In (i) use the constant ring sheaf $A_T$. In (ii), [det-sp-coefficient-towers-abelian] identifies the category with modules over the ring object $(\\mathcal O_E/\\ell^n)_n$ in the inverse-system topos. A small site for this topos is the diagram site of [lem-weil-pbc-diagram-site-realization], with $J=\\mathbf N_{\\geq1}^{\\mathrm{op}}$; its sheaf equivalence carries this varying ring object as well. The scheme inverse images act levelwise, preserve this ring object, and their right adjoints are levelwise direct images: the usual adjunction bijection restricts to compatible families because its bijections are natural. Their derived adjunctions are exactly the ones stipulated in the item. Thus [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] supplies the canonical uncompleted derived tensors and tensor comparisons in either case. It also gives K-flat representatives preserved by pullback. All subsequent equalities are in these ringed-topos derived categories. Write $G=v^*$, $H=\\bar u^*$, $U=u^*$, $R=Rp_*$, $R'=Rp'_*$, and write $e:GR\\to R'H$ for proper exchange. Let $b_M:Hj_!M\\to j'_!UM$ and $\\gamma_j(M,P):j_!M\\otimes P\\to j_!(M\\otimes j^*P)$ be the canonical open comparisons. The open normalization theorem [lem-sf-open-tensor-normalization] applies both to ring sheaves and to strict ring systems; it supplies these actual maps, their invertibility, and their identity restrictions. In all formulas below insert the canonical pullback/tensor and composition identifications of the statement.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian",
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "(2), finite and tower calculation in the ambient ringed-topos categories"
+   }
+  },
+  {
+   "text": "For the square with vertical arrows $p,p'$ and horizontal arrows $v,\\bar u$, apply [lem-weil-pbc-ringed-exchange-tensor-coherence] with $E=N=j_!M$ and $Q=K$. Its ringed commutation isomorphism is the canonical one $p'^*v^*\\cong\\bar u^*p^*$: the constant coefficient identifications, or the ring-system identifications at every index, respect the structural ring maps. Its exchange is $e$ because both are the mate of that isomorphism under the specified derived adjunctions. Its projection map $\\pi_p(N,K)$ is the counit transpose used in the item, not an arbitrarily chosen projection isomorphism. Consequently, after the indicated target identification, its equality reads\n$$e_{N\\otimes p^*K}\\,G\\pi_p(N,K)=\\pi_{p'}(HN,GK)(e_N\\otimes1).$$\nThe theorem allows arbitrary objects of the unbounded derived categories and arbitrary commutative ring sheaves, so it applies directly to the ring-system topos too. It requires neither proper base-change invertibility nor a perfectness condition on $K$.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, remark-compatible-with-diagram; use the existing node for its omitted verification"
+   }
+  },
+  {
+   "text": "For an arbitrary object $P$ on $\\overline X$, the open-factor equality is\n$$b_{M\\otimes j^*P}\\,H\\gamma_j(M,P)=\\gamma_{j'}(UM,HP)(b_M\\otimes1),$$\nwhere the left target is identified using $Uj^*\\cong j'^*H$ and the source using the tensor comparison for $H$. To prove it, [lem-sf-open-tensor-normalization] identifies the common source $H(j_!M\\otimes P)$, by $\\mu_H$, $b_M\\otimes1$, and $\\gamma_{j'}$, with $j'_!(UM\\otimes j'^*HP)$. Thus source and target are in the essential image of the fully faithful $j'_!$, and it suffices to restrict the two maps to $X'$. That theorem says that the restrictions of $b$ and $\\gamma$ are the identities under their open unit identifications. The remaining comparisons on both routes identify $U(M\\otimes j^*P)$ with $UM\\otimes j'^*HP$. They agree directly on the K-flat representatives of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]: in every bidegree both send an inverse-image tensor $m\\otimes t$ to the same two inverse-image factors, with $Uj^*t=j'^*Ht$; they preserve bidegrees and the total differential. These equations on tensor generators are local equations of sheaves and descend to the derived category. This also works on the diagram site itself. Full faithfulness now proves the displayed open equality as an equality of system-derived morphisms, without trying to infer it from equality of level evaluations.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; sites-modules.tex Tag 0E8I, lemma-j-shriek-and-tensor; normalized open restriction argument"
+   }
+  },
+  {
+   "text": "Put $N=j_!M$, $W=M\\otimes f^*K$, $C=N\\otimes p^*K$, and let $\\gamma:C\\to j_!W$ include $j^*p^*\\cong f^*$. Write $\\pi=\\pi_p(N,K)$, and let $\\gamma'$ be the corresponding open tensor map for $j'$ with second input $p'^*GK$. The preceding open equality, applied with $P=p^*K$, includes $Hp^*K\\cong p'^*GK$ and therefore says $b_W H\\gamma=\\gamma'(b_M\\otimes1)$. Expand the two definitions in the item and use naturality of $e$:\n$$\\begin{aligned}\n\\beta_W\\,G\\operatorname{PF}_f\n &=R'(b_W)e_{j_!W}\\,G(R\\gamma)\\,G\\pi\\\\\n &=R'(b_W H\\gamma)e_C\\,G\\pi\\\\\n &=R'\\gamma'\\,R'(b_M\\otimes1)\\,\\pi_{p'}(HN,GK)(e_N\\otimes1)\\\\\n &=R'\\gamma'\\,\\pi_{p'}(j'_!UM,GK)(R'b_M\\,e_N\\otimes1)\\\\\n &=\\operatorname{PF}_{f'}(UM,GK)(\\beta_M\\otimes1).\n\\end{aligned}$$\nThe third line uses step 3 and step 2. The fourth uses naturality of the proper projection map in its first input, supplied by [lem-weil-pbc-ringed-projection-mate-exact], applied to $b_M:HN\\to j'_!UM$; its counit-transpose definition is precisely the present $\\pi_{p'}$. The first naturality is that of the mate transformation $e$ of [lem-weil-pbc-ringed-exchange-tensor-coherence]. Every displayed target is identified using the same pullback comparisons as in the statement; the open comparison uses $Uj^*p^*\\cong j'^*Hp^*\\cong j'^*p'^*G$. The last line is the required forward identity. All component maps are natural in $M,K$, so this equality is natural in them.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "(2), compatibility of the projection formula with base change: paste the proper and open factors"
+   }
+  },
+  {
+   "text": "For the final assertion write $B=\\beta_M\\otimes1$, $C=\\beta_{M\\otimes f^*K}$, $P=G\\operatorname{PF}_f(M,K)$, and $Q=\\operatorname{PF}_{f'}(UM,GK)$, with exactly the preceding identifications. Step 4 gives $CP=QB$. Under the isomorphism hypotheses, compose on the left with $Q^{-1}$ and on the right with $P^{-1}C^{-1}$ to obtain $BP^{-1}C^{-1}=Q^{-1}$. Functoriality gives $P^{-1}=v^*(\\operatorname{PF}_f(M,K)^{-1})$. This is the displayed inverse identity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "(2), inverse projection-formula expression obtained from the forward compatibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-sp-coefficient-towers-abelian",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "(2), compatibility of the projection formula with base change; Stacks Tags 0E48 and 0GL1; explicit open restriction and pasting calculation in ordinary finite-ring and tower categories"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -63,10 +131,59 @@
    "results": "none",
    "date": "2026-10-17",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection formula map for compactly supported derived direct image of sheaves commutes with base change",
+   "results": "Hits: TopCat.Sheaf.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforward_assoc, CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app, SheafOfModules.pushforwardNatTrans_comp, SheafOfModules.pushforwardNatTrans_app_val_app_apply; these are adjunction, pullback-composition or unrelated projection facts, not the asserted derived compact-support identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\"",
+   "results": "Hits: Lean.AuxParentProjectionInfo, Lean.ProjectionFunctionInfo, Lean.instInhabitedAuxParentProjectionInfo, Lean.instInhabitedProjectionFunctionInfo, Lean.instReprAuxParentProjectionInfo, Lean.instReprProjectionFunctionInfo, Lean.projectionFnInfoExt, Lean.AuxParentProjectionInfo.fromClass; these are adjunction, pullback-composition or unrelated projection facts, not the asserted derived compact-support identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection.*baseChange|baseChange.*projection",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projection formula for derived pushforward with compact support commutes with pullback",
+   "results": "Hits: CompHausLike.pullback.condition, CategoryTheory.ChosenPullbacksAlong.pullbackMap_snd, SheafOfModules.pullbackComp, CategoryTheory.ChosenPullbacksAlong.pullbackMap_fst, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackConeOfLeftLift_snd, AlgebraicGeometry.Scheme.Pullback.lift_comp_ι, AlgebraicGeometry.Scheme.Modules.pullbackComp, CategoryTheory.ExponentiableMorphism.pushforwardUncurry; these are adjunction, pullback-composition or unrelated projection facts, not the asserted derived compact-support identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor projection morphisms defined by an adjunction counit commute with the mate of a square of monoidal pullback functors",
+   "results": "Hits: CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.ExponentiableMorphism.ev_coev_assoc, CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.mateEquiv_counit; these are adjunction, pullback-composition or unrelated projection facts, not the asserted derived compact-support identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjointProjectionMap\"",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointProjectionMap|projectionMap_mate|extensionByZero",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "reviewer",
@@ -87,5 +204,49 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sp-compact-projection-base-change",
+  "worker": "stage1",
+  "summary": "Proved the finite-ring and tower ambient compatibility by applying the existing general ringed-topos exchange/tensor theorem to the proper factor, deriving the open factor from unit normalization and full faithfulness, and writing the explicit naturality/pasting computation. The inverse clause follows by composing with inverses. No statement correction and no new nodes. The etale Lean declarations and bounded/completed six-functor coherence statements do not attach this ambient pro-etale/tower item.",
+  "blueprint": "Realizes det-sp-purity-bc-factors proof (2), the sentence 'By naturality of the projection formula under pullback (compatibility of the projection formula with base change)'. It supplies the compact-support identity used by unit sk-prop-sp-purity-bc step 3 without changing that unit's route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-diagram-site-realization",
+    "why": "Generic small diagram-site presentation for the inverse-system topos; not a replacement for a purity argument."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic unbounded ringed-topos tensor and K-flat construction, applicable also to the ring-system topos."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic open adjunction normalization and full faithfulness, explicitly including strict coefficient systems; needed to prove the open-factor identity."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic counit/mate coherence for ordinary unbounded ringed topoi, used for the proper factor of the prescribed compactification composite."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic naturality in the first projection input, needed in the explicit pasting computation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q114-310b6ca73",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q114-310b6ca73 (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements and source passages. All five steps check, including canonical mate directions, unbounded tower coefficients, open normalization and inverse order. No duplicate, cycle, target weakening or repair found. Five generic tool uses accepted; detailed checks are in review.md."
  }
 }

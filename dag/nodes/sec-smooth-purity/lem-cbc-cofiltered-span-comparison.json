@@ -1,0 +1,77 @@
+{
+ "id": "lem-cbc-cofiltered-span-comparison",
+ "kind": "statement",
+ "title": "Common-predecessor comparison is independent of the span",
+ "statement": "Let $I$ be a nonempty ordinary category [def-nagata-category] that is cofiltered: any two objects receive morphisms from a common object, and every pair of parallel morphisms $u,v:i\\to j$ is equalized by a morphism $t:k\\to i$ with $ut=vt$. Let $\\mathcal D$ be an ordinary category [def-nagata-category] and $F:I\\to\\mathcal D$ a functor (a map on objects and morphisms preserving sources, targets, identities and composition) sending every morphism to an isomorphism (a morphism with a two-sided inverse). For objects $c,d$ of $I$ and any two spans $c\\xleftarrow{r}e\\xrightarrow{s}d$ and $c\\xleftarrow{r'}e'\\xrightarrow{s'}d$, the following morphisms from $F(c)$ to $F(d)$ agree:\n$$F(s)\\circ F(r)^{-1}=F(s')\\circ F(r')^{-1}.$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-torsion.md",
+  "place": "Proof, common-refinement independence paragraph, made precise by Mathlib CategoryTheory/Limits/Constructions/EventuallyConstant.lean, lemma coneπApp_eq, lines 89–97."
+ },
+ "stmt_deps": [
+  "def-nagata-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A functor on a cofiltered category sending every arrow to an isomorphism has canonical isomorphisms between all its values independent of common predecessor and satisfying cocycle",
+   "results": "CategoryTheory.Functor.IsEventuallyConstantTo.coneπApp_eq; CategoryTheory.IsCofiltered.IsEventuallyConstant; CategoryTheory.Functor.IsEventuallyConstantTo.isoMap; CategoryTheory.Functor.IsEventuallyConstantFrom.isoMap; CategoryTheory.Functor.IsEventuallyConstantTo.coneπApp; CategoryTheory.Functor.IsEventuallyConstantTo.isIso_map; CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_map; CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit'",
+   "date": "2026-10-17",
+   "verdict": "match: common-span independence is coneπApp_eq"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsCofiltered, CategoryTheory.IsIso",
+   "results": "CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit; CategoryTheory.Functor.IsEventuallyConstantTo.isLimitOfIsIso; CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit'; HomologicalComplex.isIso_π_f_of_isLimit_of_isEventuallyConstantTo",
+   "date": "2026-10-17",
+   "verdict": "related results only; the exact common-span formula is supplied by coneπApp_eq, read at lines 89–97"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical isomorphism between values of a functor inverting all arrows of a cofiltered category",
+   "results": "CategoryTheory.Limits.colimitOpIsoOpLimit; CategoryTheory.Limits.colimitRightOpIsoUnopLimit; CategoryTheory.Limits.limitOpIsoOpColimit; CategoryTheory.Limits.Cofork.unopOpIso; CategoryTheory.Limits.colimitFlipIsoCompColim; CategoryTheory.Limits.coyonedaOpColimitIsoLimitCoyoneda'; CategoryTheory.Limits.limitUnopIsoUnopColimit; CategoryTheory.Limits.PreservesFiniteLimitsOfIsFilteredCostructuredArrowYonedaAux.flipFunctorToInterchange_inv_app_app",
+   "date": "2026-10-17",
+   "verdict": "related results only; the exact common-span formula is supplied by coneπApp_eq, read at lines 89–97"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A diagram sending all arrows to isomorphisms on a nonempty cofiltered category is isomorphic to a constant diagram by common refinement ratios",
+   "results": "CategoryTheory.IsCofiltered.IsEventuallyConstant; CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit'; CategoryTheory.Functor.IsEventuallyConstantTo.isoMap; CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit; CategoryTheory.Functor.IsEventuallyConstantTo.coneπApp_eq; CategoryTheory.IsCofiltered.IsEventuallyConstant.exists_isEventuallyConstantTo; CategoryTheory.Functor.IsEventuallyConstantFrom.isoMap; CategoryTheory.Functor.IsEventuallyConstantTo.isIso_map",
+   "date": "2026-10-17",
+   "verdict": "match: common-span independence is coneπApp_eq"
+  },
+  {
+   "tool": "grep",
+   "query": "coneπApp_eq|coneπApp_eq_id|def coneπApp",
+   "results": "Mathlib/CategoryTheory/Limits/Constructions/EventuallyConstant.lean; Mathlib/CategoryTheory/Limits/Constructions/EventuallyConstant.lean; Mathlib/CategoryTheory/Limits/Constructions/EventuallyConstant.lean; Mathlib/CategoryTheory/Limits/Constructions/EventuallyConstant.lean; Mathlib/CategoryTheory/Limits/Constructions/EventuallyConstant.lean",
+   "date": "2026-10-17",
+   "verdict": "related results only; the exact common-span formula is supplied by coneπApp_eq, read at lines 89–97"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.IsEventuallyConstantTo.coneπApp_eq",
+  "file": "Mathlib/CategoryTheory/Limits/Constructions/EventuallyConstant.lean",
+  "how": "specializes in one line: lines 89–97, with h : F.IsEventuallyConstantTo c given by the assumed invertibility of every F.map; apply coneπApp_eq d e r s and coneπApp_eq d e′ r′ s′ to identify both displayed ratios with h.coneπApp d. The categorical composition convention is reversed in the written formula.",
+  "line": 89
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "thm-cbc-finite-torsion",
+  "date": "2026-10-17",
+  "group": "Q66"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "thm-cbc-finite-torsion",
+   "place": "Proof, refinement paragraph: the comparison through a common refinement is independent of that common refinement (returned step 5).",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

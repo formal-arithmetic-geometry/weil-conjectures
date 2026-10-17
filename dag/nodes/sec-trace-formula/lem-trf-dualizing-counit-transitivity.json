@@ -12,9 +12,67 @@
   "def-trf-dualizing-complex",
   "thm-trf-dualizing-complex-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work throughout in $\\mathcal D_T=D^b_{ctf}(T,A)$ with the one fixed finite coefficient ring $A$. Write $L=Rf_!$, $R=Rf^!$, $M=Ra_{Y!}$, $S=Ra_Y^!$, $H=Ra_{X!}$ and $T=Ra_X^!$. The specified adjunctions are $L\\dashv R$, $M\\dashv S$ and $H\\dashv T$, by [def-trf-admissibility]. Denote the specified compact-support composition isomorphism by $\\alpha:ML\\xrightarrow{\\sim}H$. This is the inverse direction to the precomposition isomorphism in the conclusion. By [def-trf-dualizing-complex], $TA_s=\\omega_X$ and $SA_s=\\omega_Y$. The canonical isomorphism of [thm-trf-dualizing-complex-composition] identifies $RSA_s$ with $TA_s$; its inverse is the given $i_f$. All these functors and adjunctions have the stated constructible finite-Tor domains; no adjunction on the whole unbounded category is used.",
+   "uses": [
+    "def-trf-admissibility",
+    "def-trf-dualizing-complex",
+    "thm-trf-dualizing-complex-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+    "place": "Step 3, structural-counit identity; notation for its specified adjunctions"
+   }
+  },
+  {
+   "text": "Form the composite adjunction $ML\\dashv RS$ of [def-weil-pbc-composite-adjunction]. Its counit at $N\\in\\mathcal D_s$ is the explicitly pasted map $$e_N=\\varepsilon_{a_Y,N}\\circ M(\\varepsilon_{f,SN}):MLRSN\\longrightarrow N.$$ This applies to the actual two specified adjunctions, without replacing the independently specified adjunction $H\\dashv T$ by the composite adjunction.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0DV0 (lemma-compose-counits) and 0B65 (lemma-transformation-between-functors-and-adjoints); applied to the specified constructible adjunctions"
+   }
+  },
+  {
+   "text": "Conjugate $\\alpha:ML\\to H$ between $H\\dashv T$ and $ML\\dashv RS$, obtaining $j:T\\to RS$. By [def-weil-pbc-adjunction-conjugate], conjugation preserves isomorphisms and takes inverses to inverses. The normalization of exceptional composition in [def-trf-admissibility] therefore identifies $j_{A_s}$ with the specified $i_f$: the comparison in the opposite direction is the conjugate of $\\alpha^{-1}$. Apply the transpose characterization of [def-weil-pbc-adjunction-mate] with $L_1=H$, $R_1=T$, $L_2=ML$, $R_2=RS$, and both vertical functors identity. It says exactly that the transpose of $j_N$ under $ML\\dashv RS$ is $\\varepsilon_{a_X,N}\\circ\\alpha_{TN}$. Written using the counit $e$ from Step 2, this is $$e_N\\circ ML(j_N)=\\varepsilon_{a_X,N}\\circ\\alpha_{TN}:MLTN\\longrightarrow N.$$ Thus the compatibility is an application of the cited mate statement, rather than a claim that arbitrary chosen right-adjoint isomorphisms preserve counits.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate",
+    "def-trf-admissibility",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints, commutative counit square; Mathlib/CategoryTheory/Adjunction/Mates.lean:285, conjugateEquiv_counit"
+   }
+  },
+  {
+   "text": "Evaluate the identity of Step 3 at $N=A_s$. Substituting $j_{A_s}=i_f$ and the formula for $e_{A_s}$ from Step 2, then using functoriality of $M$, gives $$\\begin{aligned}t_Y\\circ M(\\tau_f)\\circ\\alpha_{\\omega_X}^{-1}&=\\varepsilon_{a_Y,A_s}\\circ M(\\varepsilon_{f,SA_s})\\circ ML(i_f)\\circ\\alpha_{TA_s}^{-1}\\\\&=e_{A_s}\\circ ML(j_{A_s})\\circ\\alpha_{TA_s}^{-1}\\\\&=\\varepsilon_{a_X,A_s}\\circ\\alpha_{TA_s}\\circ\\alpha_{TA_s}^{-1}\\\\&=t_X.\\end{aligned}$$ Here the first equality is precisely the definition $\\tau_f=\\varepsilon_{f,\\omega_Y}\\circ L(i_f)$ in the item; the last equality cancels an isomorphism and its inverse. The domain is $H\\omega_X=Ra_{X!}\\omega_X$, and $\\alpha_{\\omega_X}^{-1}$ is exactly the precomposition required by the statement. Properness is used in the statement to label $L\\omega_X$ also as $Rf_*\\omega_X$; the calculation itself retains compact supports throughout, so it does not impose properness of $a_X$ or $a_Y$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+    "place": "Step 3, structural-counit identity, with the composition isomorphism written explicitly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-admissibility",
+  "def-trf-dualizing-complex",
+  "thm-trf-dualizing-complex-composition",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-proper/lem-trf-trace-source-exchange.proof.md",
+  "place": "Step 3, expanded structural-counit identity using Stacks Tags 0DV0 and 0B65"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,10 +108,45 @@
    "results": "SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction; CompHausLike.LocallyConstant.adjunction_counit; CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit; Condensed.profiniteSolidCounit; CompHausLike.LocallyConstant.counit_app_val; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc",
    "date": "2026-10-17",
    "verdict": "no match: hits do not state this specified geometric six-functor comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "comp_counit_app|conjugateEquiv_counit|rightAdjointUniq_hom_counit",
+   "results": "7 hits: Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean (subdirectory CategoryTheory/Adjunction)",
+   "date": "2026-10-17",
+   "verdict": "formal ingredients found, already represented by the existing composite-adjunction and mate/conjugate nodes; the geometric statement requires their specified specialization and final cancellation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The exceptional trace on dualizing complexes is compatible with the structural adjunction counit and compact support composition",
+   "results": "8 hits: CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.CoreUnitCounit.counit, CategoryTheory.Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit, CategoryTheory.Adjunction.derivedε.congr_simp, CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.map_ε_comp_counit_app_unit, CategoryTheory.Adjunction.Triple.adj₁_counit_app_rightToLeft_app",
+   "date": "2026-10-17",
+   "verdict": "formal ingredients found, already represented by the existing composite-adjunction and mate/conjugate nodes; the geometric statement requires their specified specialization and final cancellation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp_counit_app",
+   "results": "1 hits: CategoryTheory.Adjunction.comp_counit_app",
+   "date": "2026-10-17",
+   "verdict": "formal ingredients found, already represented by the existing composite-adjunction and mate/conjugate nodes; the geometric statement requires their specified specialization and final cancellation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The structural counit on the dualizing complex equals integration after the proper exceptional counit under the conjugate compact support composition isomorphism",
+   "results": "8 hits: HomologicalComplex.dgoEquivHomologicalComplex_counitIso, CompHausLike.LocallyConstant.counit_app_val, Condensed.profiniteSolidCounit, CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction, HomologicalComplex.dgoEquivHomologicalComplexCounitIso_hom_app_f, CompHausLike.LocallyConstant.adjunction_counit, HomologicalComplex.dgoEquivHomologicalComplexCounitIso, HomologicalComplex.unopEquivalence_counitIso",
+   "date": "2026-10-17",
+   "verdict": "no match: these hits concern other categorical counits and do not state the geometric dualizing-complex identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counits of composite adjunctions commute with the canonical conjugate isomorphism from compact support composition for dualizing objects",
+   "results": "8 hits: CategoryTheory.conjugateEquiv_counit, CategoryTheory.conjugateEquiv_counit_symm, CategoryTheory.conjugateEquiv_comm, CategoryTheory.Adjunction.comp_counit_app_assoc, CategoryTheory.mateEquiv_counit, CategoryTheory.Adjunction.comp_counit, CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.leftAdjointCompIso_hom_app",
+   "date": "2026-10-17",
+   "verdict": "formal ingredients found, already represented by the existing composite-adjunction and mate/conjugate nodes; the geometric statement requires their specified specialization and final cancellation"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-trace-source-exchange",
@@ -78,5 +171,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-dualizing-counit-transitivity",
+  "worker": "stage1",
+  "summary": "Q62 expands the specified structural-counit identity into the composite counit formula, conjugation/transpose compatibility, and a displayed evaluation-and-cancellation calculation. The statement is unchanged; all categorical ingredients already have Mathlib nodes, and no new node is needed. The comparison direction and all constructible finite-Tor domains were checked explicitly.",
+  "blueprint": "Realizes the sentence in Step 3 of lem-trf-trace-source-exchange.proof.md asserting epsilon_aY Ra_Y! tau_f = epsilon_aX because the composite counit is pasted. Steps 1–3 identify the specified maps and Step 4 proves exactly this sentence including its implicit compact-support comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q62-52e23ca21",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q62-52e23ca21 (reviewer sub-agent of L); spot-checked: Read the full item, all six cited statements, report, unit/chapter route, and cited blueprint, Stacks and Mathlib sources. All four steps correctly identify the conjugate comparison and prove counit compatibility. Edge cases and finite-ring normalization checks pass; no cycles, duplicate nodes, missing citations or repairs found. Written review.md; no additional tool_uses."
  }
 }
