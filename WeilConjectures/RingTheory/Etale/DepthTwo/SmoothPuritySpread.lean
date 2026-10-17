@@ -315,13 +315,66 @@ theorem exists_etale_finite_away_of_localization
     obtain ⟨k', hk'⟩ := exists_pow_smul_eq_zero hunit h hgood (s := h ^ k * s)
       (fun Q _ hQ ↦ hloc _ (by
         rw [map_mul]
-        exact mul_ne_zero ((IsLocalization.map_units Bh (⟨h ^ k, k, rfl⟩ : Submonoid.powers h)).ne_zero) hs) Q hQ) hk
+        exact mul_ne_zero ((IsLocalization.map_units Bh
+          (⟨h ^ k, k, rfl⟩ : Submonoid.powers h)).ne_zero) hs) Q hQ) hk
     have h0 : TensorProduct.mk B Bh T 1 t = 0 := (IsLocalizedModule.eq_zero_iff
       (Submonoid.powers h) (TensorProduct.mk B Bh T 1)).2
       ⟨(⟨h ^ k', k', rfl⟩ : Submonoid.powers h), hk'⟩
     rw [← hut, Submonoid.smul_def, ← algebraMap_smul Bh] at h0
     exact ((IsLocalization.map_units Bh u).smul_eq_zero).1 h0
-  sorry
+  -- the étale algebra `L = K ⊗ X` over the fraction field `K` of `B_h`
+  let K := FractionRing Bh
+  have hOK (s : P.primeCompl) : IsUnit (algebraMap B K s) := by
+    rw [IsScalarTower.algebraMap_apply B Bh K]
+    refine isUnit_iff_ne_zero.2 ((map_ne_zero_iff _ (IsFractionRing.injective Bh K)).2 ?_)
+    intro h0
+    obtain ⟨⟨_, j, rfl⟩, hj⟩ :=
+      (IsLocalization.map_eq_zero_iff (Submonoid.powers h) _ (s : B)).1 h0
+    have : h ^ j * s ∈ P := hj ▸ P.zero_mem
+    rcases Ideal.IsPrime.mem_or_mem inferInstance this with h2 | h2
+    · exact hhP (Ideal.IsPrime.mem_of_pow_mem inferInstance j h2)
+    · exact s.2 h2
+  let : Algebra O K := (IsLocalization.lift (M := P.primeCompl) hOK).toAlgebra
+  have : IsScalarTower B O K := .of_algebraMap_eq fun b ↦ (IsLocalization.lift_eq hOK b).symm
+  let L := K ⊗[Bh] X
+  let eL : L ≃ₐ[K] K ⊗[O] (O ⊗[B] T) :=
+    (Algebra.TensorProduct.cancelBaseChange B Bh K K T).trans
+      (Algebra.TensorProduct.cancelBaseChange B O K K T).symm
+  have : Algebra.Etale K L := .of_equiv eL.symm
+  -- `X` embeds into `L`
+  let ι : X →ₐ[Bh] L := Algebra.TensorProduct.includeRight
+  have hι : Function.Injective ι := by
+    rw [injective_iff_map_eq_zero]
+    intro x hx
+    obtain ⟨⟨z, hz⟩, hzx⟩ := (IsLocalizedModule.eq_zero_iff (nonZeroDivisors Bh)
+      (TensorProduct.mk Bh K X 1)).1 hx
+    exact htf z (nonZeroDivisors.ne_zero hz) x hzx
+  -- `X` is finite over `B_h`
+  have : Module.Finite Bh (integralClosure Bh L) := finite_integralClosure_of_etale K
+  have hint (x : X) : ι x ∈ integralClosure Bh L := (Algebra.IsIntegral.isIntegral x).map ι
+  have hXfin : Module.Finite Bh X :=
+    Module.Finite.of_injective ((ι.toLinearMap).codRestrict (integralClosure Bh L).toSubmodule
+      hint) fun x y hxy ↦ hι (congrArg Subtype.val hxy)
+  -- étaleness spreads out from `B_P`
+  have : Algebra.FinitePresentation Bh X :=
+    Algebra.FinitePresentation.of_finiteType.mp inferInstance
+  let : Algebra Bh O := (IsLocalization.Away.lift h
+    (IsLocalization.map_units O (⟨h, hhP⟩ : P.primeCompl))).toAlgebra
+  have : IsScalarTower B Bh O := .of_algebraMap_eq fun b ↦ (IsLocalization.Away.lift_eq h _ b).symm
+  have hle : Submonoid.powers h ≤ P.primeCompl := (Submonoid.powers_le).2 hhP
+  have : IsLocalization (Algebra.algebraMapSubmonoid Bh P.primeCompl) O :=
+    IsLocalization.isLocalization_of_submonoid_le Bh O (Submonoid.powers h) P.primeCompl hle
+  have : Algebra.Etale O (O ⊗[Bh] X) :=
+    .of_equiv (Algebra.TensorProduct.cancelBaseChange B Bh O O T).symm
+  obtain ⟨_, ⟨g, hg, rfl⟩, hEt⟩ := Algebra.exists_etale_away_tensor_of_isLocalization
+    (A := Bh) (A' := O) (X := X) (Algebra.algebraMapSubmonoid Bh P.primeCompl)
+  -- the neighbourhood `D(h g)`
+  let B'' := Localization.Away (algebraMap B Bh g)
+  let e'' := Algebra.TensorProduct.cancelBaseChange B Bh B'' B'' T
+  have : Algebra.Etale B'' (B'' ⊗[B] T) := .of_equiv e''
+  have : Module.Finite B'' (B'' ⊗[B] T) := .equiv e''.toLinearEquiv
+  refine ⟨h * g, fun hm ↦ (Ideal.IsPrime.mem_or_mem inferInstance hm).elim hhP hg, ?_⟩
+  exact etale_finite_away_of_isLocalizationAway (h * g) B''
 
 end Spread
 
