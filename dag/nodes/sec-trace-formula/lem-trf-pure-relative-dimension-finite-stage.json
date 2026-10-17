@@ -211,5 +211,23 @@
   "group": "Q66",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q66-24e3d08d5 (reviewer sub-agent of L); spot-checked: Read all delivery mathematics and cited sources. Corrected TeX, handled d=0 explicitly, supplied existing dimension-comparison citations, and used the new base-change lemma for later-stage persistence. Four corrected JSON files are under fixes/; detailed checks are in review.md. No target weakened; corrected dependencies are acyclic and within route.; 4 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6632a2fda",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Statement, dependencies, source proof plan, docstrings, edge cases, universes, report sections, route-pivot constraints, and scompile.py evidence all check out; no substantive or mechanical errors found."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.PureRelativeDimensionFiniteStage",
+  "declaration": "AlgebraicGeometry.pure_relative_dimension_finite_stage",
+  "file": "lean/Sheaf/TraceFormula/PureRelativeDimensionFiniteStage.lean",
+  "statement": "theorem pure_relative_dimension_finite_stage {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)] [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] (c : Cone D) (hc : IsLimit c) (i₀ : I) (X₀ Y₀ : Over (D.obj (op i₀))) (f₀ : X₀ ⟶ Y₀) [CompactSpace X₀.left] [QuasiSeparatedSpace X₀.left] [CompactSpace Y₀.left] [QuasiSeparatedSpace Y₀.left] [LocallyOfFinitePresentation f₀.left] (d : ℕ) (hpure : ∀ z : ((Over.pullback (c.π.app (op i₀))).obj Y₀).left, IsEmpty (((Over.pullback (c.π.app (op i₀))).map f₀).left.fiber z) ∨ (((Over.pullback (c.π.app (op i₀))).map f₀).left.fiber z).IsPureDimension d) : ∃ i : I, ∃ hi : i₀ ≤ i, ∀ (j : I) (hj : i ≤ j), ∀ z : ((Over.pullback (D.map (homOfLE (hi.trans hj)).op)).obj Y₀).left, IsEmpty (((Over.pullback (D.map (homOfLE (hi.trans hj)).op)).map f₀).left.fiber z) ∨ Scheme.IsPureDimension (((Over.pullback (D.map (homOfLE (hi.trans hj)).op)).map f₀).left.fiber z) d",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
