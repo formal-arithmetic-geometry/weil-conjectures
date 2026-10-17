@@ -10,9 +10,67 @@
  "stmt_deps": [
   "def-kun-projective"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the definition of H-projectivity [def-kun-projective], choose integers $n,m\\geq0$ and closed immersions $i:X\\hookrightarrow\\mathbf P^n_Y$ over $Y$ and $j:Y\\hookrightarrow\\mathbf P^m_S$ over $S$. Thus $g=\\pi_Y\\circ i$ and $h=\\pi_S\\circ j$, with $\\pi_Y:\\mathbf P^n_Y\\to Y$ and $\\pi_S:\\mathbf P^m_S\\to S$ the structural projections.",
+   "uses": [
+    "def-kun-projective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WE, lemma-H-projective-composition, proof"
+   }
+  },
+  {
+   "text": "Put $Q=\\mathbf P^n_{\\mathbf P^m_S}$. Apply [lemma-nagata-projective-space-base-change-pullback] with coordinate set $\\{0,\\ldots,n\\}$ to $j:Y\\to\\mathbf P^m_S$. It identifies $\\mathbf P^n_Y$ with $Y\\times_{\\mathbf P^m_S}Q$ and its map $q:\\mathbf P^n_Y\\to Q$ with the base change of $j$ along the structural projection $Q\\to\\mathbf P^m_S$. Since $j$ is a closed immersion, [lem-weil-pbc-closed-immersion-base-change] makes $q$ a closed immersion. The cartesian square gives $\\pi_Q\\circ q=j\\circ\\pi_Y$, where $\\pi_Q:Q\\to\\mathbf P^m_S$.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-pullback",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WE, lemma-H-projective-composition, proof"
+   }
+  },
+  {
+   "text": "Apply [lemma-nagata-projective-space-base-change-pullback] again, this time to $\\pi_S:\\mathbf P^m_S\\to S$ with the same coordinate set. This identifies $Q$ over $\\mathbf P^m_S$ with $\\mathbf P^m_S\\times_S\\mathbf P^n_S$. Swapping the two projections gives $Q\\cong\\mathbf P^n_S\\times_S\\mathbf P^m_S$: the swap and its inverse are the maps specified by the reversed pairs of projections, and both composites are identities by the fibre-product universal property. Under this cartesian identification $q\\circ i$ is a closed immersion $k:X\\hookrightarrow\\mathbf P^n_S\\times_S\\mathbf P^m_S$, by [lem-weil-pbc-closed-immersion-comp] applied to $i$ and $q$. Its composite with the second projection is $j\\circ g$, by the square in step 2, and hence its structure morphism to $S$ is $h\\circ g$.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-pullback",
+    "lem-weil-pbc-closed-immersion-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WE, lemma-H-projective-composition, proof"
+   }
+  },
+  {
+   "text": "By [lem-chow-segre], compose $k$ with the Segre closed immersion $s:\\mathbf P^n_S\\times_S\\mathbf P^m_S\\hookrightarrow\\mathbf P^{nm+n+m}_S$. The same cited statement says that this composite of a closed immersion into the product with $s$ is a closed immersion. Both maps are over $S$, so for $e=s\\circ k$ and the structural projection $\\pi:\\mathbf P^{nm+n+m}_S\\to S$ one has $\\pi\\circ e=h\\circ g$. The integer $nm+n+m$ is nonnegative. This is precisely a finite projective-space closed-immersion factorization as required by [def-kun-projective], proving H-projectivity of $h\\circ g$.",
+   "uses": [
+    "lem-chow-segre",
+    "def-kun-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WE, lemma-H-projective-composition, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-projective",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-chow-segre"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01WE, lemma-H-projective-composition, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -41,10 +99,45 @@
    "results": "hits=0; top=[]; note=",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsHProjective|H.projective|projective.*comp|comp.*[Pp]rojective",
+   "results": "hits=3; top=['Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean', 'Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean', 'Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean']; note=",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of projective morphisms of schemes is projective",
+   "results": "hits=8; top=['AlgebraicGeometry.instIsAffineHomCompScheme', 'AlgebraicGeometry.quasiSeparated_comp', 'AlgebraicGeometry.instIsMultiplicativeSchemeIsAffineHom', 'AlgebraicGeometry.IsProper.instCompScheme', 'AlgebraicGeometry.IsProper.comp_iff', 'AlgebraicGeometry.IsClosedImmersion.comp', 'AlgebraicGeometry.IsIntegralHom.instCompScheme', 'AlgebraicGeometry.instSurjectiveCompScheme']; note=",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsHProjective",
+   "results": "hits=0; top=[]; note=loogle: unknown identifier 'AlgebraicGeometry.IsHProjective'",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The composite of two scheme morphisms that factor as closed immersions into finite projective spaces is H-projective",
+   "results": "hits=8; top=['AlgebraicGeometry.IsClosedImmersion.comp', 'AlgebraicGeometry.IsPreimmersion.comp', 'AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme', 'AlgebraicGeometry.IsPreimmersion.instIsMultiplicativeScheme', 'AlgebraicGeometry.IsProper.instCompScheme', 'AlgebraicGeometry.IsClosedImmersion.of_comp_isClosedImmersion', 'AlgebraicGeometry.IsProper.stableUnderComposition', 'AlgebraicGeometry.IsImmersion.instIsMultiplicativeScheme']; note=",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective scheme morphisms are stable under composition using the Segre embedding of a product of projective spaces",
+   "results": "hits=8; top=['AlgebraicGeometry.Proj.pullbackAwayιIso', 'AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc', 'AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc', 'AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc', 'AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι', 'AlgebraicGeometry.Proj.SpecMap_awayMap_awayι_assoc', 'AlgebraicGeometry.Proj.SpecMap_awayMap_awayι', 'AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left_assoc']; note=",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-relative-marked-nodal-reduction",
@@ -67,5 +160,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-h-projective-composition",
+  "worker": "stage1",
+  "summary": "Expanded Stacks Tag 01WE into its finite projective-space embedding argument: choose the two closed immersions, base-change the second using the projective-space cartesian square, identify the iterated projective space with the fibre product over S, and apply the existing Segre closed-immersion node. All non-elementary assertions are existing DAG statements. No statement change, new nodes, or new Mathlib leaves. Checked arbitrary bases and n=0 or m=0 and empty source/base cases.",
+  "blueprint": "This is the H-projective-composition tool (Stacks 01WE) invoked in the source of lem-trf-relative-marked-nodal-reduction to make the altered base projective over the original affine base, on the existing ancestry to lem-trf-local-term-locality. The four steps realize exactly the diagram and Segre conclusion of 01WE; no unit step is replaced.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-projective-space-base-change-pullback",
+    "why": "Generic cartesian-square property of projective space needed twice in the diagram of 01WE; the trace-formula unit has no projective-space construction lemma."
+   },
+   {
+    "node": "lem-chow-segre",
+    "why": "Generic Segre closed-immersion theorem needed for the final arrow of the 01WE diagram; no trace-formula unit node supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-projective-space-base-change-pullback",
+  "lem-chow-segre"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NG-ed2ca7f57",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-ed2ca7f57 (reviewer sub-agent of L); spot-checked: I read all four steps of the item, the five cited node statements (including the main-20261015 blueprint_update of lem-chow-segre and def-chow-segre), Stacks morphisms.tex 01WE (lines 10630-10655, full proof) and constructions.tex 01WD (Segre, line 2927). H-projective in def-kun-projective matches Stacks 01W8: a closed immersion into P({0..N};Y) over Y. Step 1 unfolds the definition (elementary). Step 2: the cartesian square with base P^m_S and map j makes q: P^n_Y -> Q the base change of j, so q is a closed immersion by 01QR, and pi_Q q = j pi_Y. Step 3: the cartesian square applied to pi_S gives Q = P^m_S x_S P^n_S, with the swap written out. k = q i is a closed immersion by 01QS, and I checked pr2 k = j g and that its structure morphism is h g. Step 4: lem-chow-segre's composite clause gives a closed immersion into P^{nm+n+m}_S over S, and def-kun-projective applies. proof_deps is the union of the uses. Edge cases: n=0 or m=0, empty schemes and arbitrary non-Noetherian bases need no extra hypothesis. There are no new nodes. A grep for duplicates (01WE, H-projective, composition of projective) finds no existing node with this statement; det-chow-projective-closed-immersions states something different. The parent relative-marked-nodal-reduction uses the item exactly as stated. I accept the declared tool_uses lemma-nagata-projective-space-base-change-pullback and lem-chow-segre as generic black-box tools. This is not a target node, so there is no base-change morphism or coefficient category to check, and no SGA is cited. I wrote no fixes; review.md has the details."
  }
 }

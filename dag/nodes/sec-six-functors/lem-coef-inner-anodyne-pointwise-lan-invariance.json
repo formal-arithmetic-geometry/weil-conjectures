@@ -11,9 +11,54 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-inner-anodyne-pushout-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $c\\in C$, the slice pullback lemma gives a categorical equivalence $i_c:L_{/c}\\to K_{/c}$ for the induced map on the two comma simplicial sets. Its proof uses that an inner anodyne inclusion is a categorical equivalence, that $C_{/c}\\to C$ is a right fibration, and that right fibrations are cartesian fibrations in the lifting convention; the cartesian-base argument is packaged in the new slice lemma, so no quasicategory hypothesis on $L$ or $K$ is introduced.",
+   "uses": [
+    "lem-coef-inner-anodyne-slice-categorical-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02YL",
+    "place": "Proposition 7.3.1.14 (02YL), proof, first paragraph: the slice pullback of a categorical equivalence"
+   }
+  },
+  {
+   "text": "For any quasicategory $E$, precomposition with $i_c$ is a coherent functor equivalence $\\operatorname{Fun}(K_{/c},E)\\to\\operatorname{Fun}(L_{/c},E)$ by the Joyal functor-equivalence test, applied to the categorical equivalence $i_c$ of Step 1. By the cone-calculus theorem, every functor equivalence induces equivalences on all right-pinched mapping spaces. Take $E=D$, write $f_K=F_0\\circ\\mathrm{pr}_K$ on $K_{/c}$ and $f_L=f_K\\circ i_c=F_0\\circ\\mathrm{pr}_L$ on $L_{/c}$. Since restriction sends the constant diagram $\\Delta_{K_{/c}}z$ to $\\Delta_{L_{/c}}z$, for every vertex $z$ of $D$ restriction is an equivalence of Kan complexes\n$$i_c^*:\\operatorname{Map}_{\\operatorname{Fun}(K_{/c},D)}(f_K,\\Delta_{K_{/c}}z)\\longrightarrow\\operatorname{Map}_{\\operatorname{Fun}(L_{/c},D)}(f_L,\\Delta_{L_{/c}}z).$$\nBy the statement, it sends the canonical cocone $\\lambda_K$ with apex $F(c)$ to the cocone $\\lambda_L=i_c^*\\lambda_K$, with the same apex.",
+   "uses": [
+    "lem-coef-joyal-functor-equivalence-test",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02YL",
+    "place": "Proposition 7.3.1.14 (02YL), proof, second paragraph: restriction of the slice diagrams and transformations"
+   }
+  },
+  {
+   "text": "By the dual (cocone) clause of the cone-calculus theorem, a coherent cocone $\\lambda:f\\to\\Delta_Jx$ on a small simplicial set $J$ is colimiting exactly when, for every vertex $z$ of $D$, the map $\\operatorname{Map}_D(x,z)\\to\\operatorname{Map}_{\\operatorname{Fun}(J,D)}(f,\\Delta_Jz)$, $u\\mapsto\\Delta_J(u)\\lambda$, is an equivalence. Apply it to $\\lambda_K$ on $J=K_{/c}$ and to $\\lambda_L$ on $J=L_{/c}$, both with $x=F(c)$. The two comparison maps form a triangle with $i_c^*$ of Step 2: the restriction $\\operatorname{Fun}(K_{/c},D)\\to\\operatorname{Fun}(L_{/c},D)$ is a simplicial map sending $\\Delta_{K_{/c}}(u)$ to $\\Delta_{L_{/c}}(u)$, $\\lambda_K$ to $\\lambda_L$, and each composition triangle $\\Delta^2\\times\\Delta^n\\to\\operatorname{Fun}(K_{/c},D)$ to a composition triangle, so by the characterization of composition through triangle spaces in the composition lemma, $i_c^*(\\Delta_{K_{/c}}(u)\\lambda_K)$ is homotopic, naturally in $u$, to $\\Delta_{L_{/c}}(u)\\lambda_L$. Since $i_c^*$ is an equivalence (Step 2), two-out-of-three for homotopy equivalences of Kan complexes shows that the comparison for $K_{/c}$ is an equivalence if and only if the comparison for $L_{/c}$ is, for each $z$. Hence $\\lambda_K$ is colimiting exactly when $\\lambda_L$ is. Since $c$ was arbitrary, the cocones on $K_{/c}$ are colimiting for every $c$ exactly when their restrictions on $L_{/c}$ are.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02YL",
+    "place": "Proposition 7.3.1.14 (02YL), proof: epsilon_{/C} categorical equivalence hence cofinal (Corollary 7.2.1.13, 02NC), and the colimit condition (*_C) is unchanged (Corollary 7.2.2.3, 02XR); written here through the mapping-space criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-inner-anodyne-slice-categorical-equivalence",
+  "lem-coef-joyal-functor-equivalence-test"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/02YL",
+  "place": "Proposition 7.3.1.14 (Change of Diagram), proof; specialized to inner anodyne indexing maps and the pointwise left Kan cocones in this statement."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,7 +97,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-pointwise-lan-mapping-property",
@@ -79,5 +124,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-inner-anodyne-pointwise-lan-invariance",
+  "worker": "stage1",
+  "summary": "Split the imported pointwise left Kan invariance statement (Kerodon 02YL, left Kan clause, specialized to inner anodyne maps) into three proof steps. First, the new statement-only node lem-coef-inner-anodyne-slice-categorical-equivalence gives that the slice pullback $i_c:L_{/c}\\to K_{/c}$ is a categorical equivalence (Kerodon 018F and 029H); the existing cartesian-base node is not cited because its dependency closure reaches this item. Second, the Joyal functor-equivalence test and the enhanced functor cone calculus make restriction an equivalence on the cocone mapping spaces to every constant diagram. Third, the dual cocone criterion of the cone calculus and the triangle-space composition lemma transfer the colimit property at each $c$, with the same apex and canonical legs. Repaired on maintainer review 2026-10-18: step 3 no longer cites the relative $K^{\\triangleright}$ test, which concerns strict cone diagrams rather than the coherent cocones of the statement.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2: the displayed coherent mapping-complex adjunction and its replacement of an arbitrary simplicial indexing shape by an inner-horn completion; this item supplies the inner-anodyne pointwise-colimit invariance used in that reduction.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Steps 2-3 take the generic facts that functor equivalences induce mapping-space equivalences and the dual mapping-space criterion for colimiting coherent cocones; this generic cone calculus is filed in unit sk-prop-sf-cbc and no node of sk-prop-sf-biduality-general states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-c99fb31bf",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-c99fb31bf (reviewer sub-agent of L); spot-checked: I read the item, the new node, the parent lem-coef-pointwise-lan-mapping-property and the statement of every cited node, and checked them against Kerodon 02YL (Prop 7.3.1.14, Change of Diagram; read online, as no archival copy exists). Kerodon's proof goes through the slice fibration (018F), invariance of categorical equivalences under that pullback (029H), cofinality (02NC) and the colimit transfer (02XR).\n\nItem: the statement is 02YL(2) specialized to inner anodyne i. It is not weakened, and it fits the parent's use with the inner anodyne inclusion K into its horn completion. I checked the edge cases L=K=empty, C=point, and the inner horn of Delta^2.\n\nNew node lem-coef-inner-anodyne-slice-categorical-equivalence: true by 018F plus 029H (dual), since right fibrations are cartesian. It is statement-only, self-contained and strictly smaller than the item. It is a special case of lem-coef-cartesian-base-equivalence-invariance (1), but I verified that citing that node would close a cycle (cartesian-base -> kan-quillen-right-proper -> ... -> pointwise-lan-mapping-property -> item), so the separate node is justified. No other DAG node states it.\n\nFixes written under fixes/:\n(1) C4: step 3 applied lem-coef-infinity-relative-cone-constant-test, which concerns strict diagrams out of K-right-cone, to the item's coherent cocone. Step 3 is rewritten to use the dual cocone criterion of lem-cbc-enhanced-functor-cone-calculus, plus lem-coef-infinity-mapping-composition (same unit, no cycle) for the restriction triangle. Step 2 now covers every vertex z, and proof_deps is updated.\n(2) B9: the new node's blueprint.from.via is now the full chain (the item, then the item's own via).\n(3) The split_report summary said no new nodes were created and described the old route; it is rewritten. The off-unit tool use of lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc), which is generic and already accepted on many nodes of this unit, is accepted and added to split_report.tool_uses.\n\nThe new node's Loogle record is a malformed query rather than a real search, but LeanSearch, LeanFinder and grep still cover the three required kinds. No SGA source is used, and the graph stays acyclic after the fix.; 2 file(s) fixed by the reviewer"
  }
 }
