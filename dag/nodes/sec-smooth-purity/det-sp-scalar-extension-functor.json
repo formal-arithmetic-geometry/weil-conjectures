@@ -341,5 +341,55 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f9df4c49d",
+  "group": "NH",
+  "result": "pass",
+  "note": "Repair of a4717a1495b7 addresses all five earlier findings. scalarExtensionFunctor is the published universal left-derived change of rings along proEtaleConstantRingMap; the recorded constantCoefficientScalarExtension cannot take T.ProEt because of its universes. Clause 1: exactness, explicit K-flat counit iso naming the functor, map formula v⊗id. Clause 2: finite A,B killed by ℓ^n; constructible bounded K with HasProEtaleTorAmplitude [a,b] gives the same over B with identical [a,b] and no flatness; the predicates are the original interfaces re-exported by the recorded §1(B) modules. Clause 3: rank-one line counit and ordinary tensor; Tate lines built from tateFiniteLine with tensor powers, unit and homObj duals, ℓ invertible only for Tate; the ∃!-normalized semilinear maps, scalar iso, derived iso for all r∈ℤ and signed Kummer exponent naturality are correct; the degree-1 HEq clause is non-vacuous (rfl checked). Clause 4: α from ∃! via the counits and reductionBalance; naturality, g=id unitor and associativity coherence stated for that α (rfl checks on RingHom.comp). No hollow defs, all theorems sorry with source and proof docstrings, 29 declarations match the record, node differs from the shared node only in lean, report sections present. nt_compile clean in 5.3 s; scratch rfl test compiled. Minor: lean.statement omits noncomputable (normalized by merge)."
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.ScalarExtensionFunctor",
+  "declaration": "AlgebraicGeometry.ProEtale.scalarExtensionFunctor",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.scalarExtensionFunctor",
+   "AlgebraicGeometry.ProEtale.scalarExtensionFunctor_exact",
+   "AlgebraicGeometry.ProEtale.scalarExtensionFunctorCounit",
+   "AlgebraicGeometry.ProEtale.scalarExtensionFunctor_kflat_representation",
+   "AlgebraicGeometry.ProEtale.scalarExtensionFunctorKFlatIso",
+   "AlgebraicGeometry.ProEtale.scalarExtensionFunctor_map",
+   "AlgebraicGeometry.ProEtale.scalarExtensionFunctor_preserves_constructible_tor",
+   "AlgebraicGeometry.ProEtale.scalarExtensionFunctor_line",
+   "AlgebraicGeometry.ProEtale.scalarExtensionFunctorLineIso",
+   "AlgebraicGeometry.ProEtale.scalarExtensionTateLine",
+   "AlgebraicGeometry.ProEtale.ScalarExtensionTateMaps",
+   "AlgebraicGeometry.ProEtale.IsCanonicalScalarExtensionTateMaps",
+   "AlgebraicGeometry.ProEtale.scalarExtensionTateMaps_existsUnique",
+   "AlgebraicGeometry.ProEtale.scalarExtensionTateMaps",
+   "AlgebraicGeometry.ProEtale.scalarExtensionTateIso_existsUnique",
+   "AlgebraicGeometry.ProEtale.scalarExtensionTateIso",
+   "AlgebraicGeometry.ProEtale.scalarExtensionFunctor_tate",
+   "AlgebraicGeometry.ProEtale.scalarExtensionFunctorTateIso",
+   "AlgebraicGeometry.ProEtale.IsCanonicalScalarExtensionTateLevelMaps",
+   "AlgebraicGeometry.ProEtale.scalarExtensionTateLevelIso_existsUnique",
+   "AlgebraicGeometry.ProEtale.scalarExtensionTateLevelIso",
+   "AlgebraicGeometry.ProEtale.scalarExtensionTateIso_exponent_naturality",
+   "AlgebraicGeometry.ProEtale.scalarExtensionFunctor_ringMap_comp",
+   "AlgebraicGeometry.ProEtale.scalarExtensionFunctor_composition_existsUnique",
+   "AlgebraicGeometry.ProEtale.scalarExtensionFunctor_composition",
+   "AlgebraicGeometry.ProEtale.scalarExtensionFunctor_composition_naturality",
+   "AlgebraicGeometry.ProEtale.scalarExtensionFunctor_identity_existsUnique",
+   "AlgebraicGeometry.ProEtale.scalarExtensionFunctor_identity",
+   "AlgebraicGeometry.ProEtale.scalarExtensionFunctor_coherence"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/ScalarExtensionFunctor.lean",
+  "statement": "def scalarExtensionFunctor {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) (T : Scheme.{u}) : Scheme.proEtaleDerivedCategory T A ⥤ Scheme.proEtaleDerivedCategory T B",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of returned a4717a1495b7: retain the published scalarExtension; state actual K-flat counit computations and morphism maps, constructibility and unchanged Tor bounds without flatness, ordinary rank-one extension, canonically normalized signed Tate base change with Kummer exponent independence, and uniquely normalized composition, its naturality, identity unitor and associativity coherence. All helpers belong to the four clauses of this definition node."
  }
 }
