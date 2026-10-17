@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-pur-adic-reconstruction-trace-coherence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Adic transport of trace and coherence",
@@ -21,30 +21,245 @@
  ],
  "proof": [
   {
-   "text": "The trace of [def-pur-smooth-trace] is the counit of the realized\nadjunction and its transport is\nincluded in the same reconstruction\n([lem-weil-pbc-reconstruction-uniform-tower]), as in the trace-formula\nblueprint; the coherence statements are the compatible systems of the\nfinite-level coherence statements of\n[thm-pur-composition-coherence] and\n[thm-pur-smooth-base-change-coherence].",
+   "text": "Use the completed coefficient sheaves $R_W=\\widehat{\\mathcal O}_{E,W}$ and $B_{n,W}=(A_{E,n})_W$ in the situation of [thm-pur-adic-reconstruction]. Work with normalized strict semilinear derived systems, not just inverse sequences in the ordinary derived category. By [lem-pur-finite-coefficient-adjoint-comparisons], finite compact supports $F_{f,n}$ and exceptional images $G_{f,n}$ preserve the finite-Tor constructible categories; the coefficient comparison $q$ for $F$ and its mate $b$ for $G$ are coherent equivalences, including the counit equation. Apply [lem-coef-cartesian-section-adjoint-mates] to these enhanced finite operations and coefficient extensions. This gives actual functors $\\mathcal F_f\\dashv\\mathcal G_f$ on cartesian sections, with section units and counits, natural for coherent composition comparisons. [lem-coef-semilinear-derived-sections] realizes them in the derived category of strict coefficient systems, including levelwise pullback, tensor, and the specified exchange maps. All its rings are the actual quotient sheaves $B_{n,W}$, and no flatness of $B_{n+1,W}\\to B_{n,W}$ is needed. Use the compact-support composition comparison of [thm-sf-comp-composition] in these simultaneous geometric models. Fix the realizations $\\mathcal F_f,\\mathcal G_f=\\mathcal E_f$ and their evaluation/counit transformations to be the ones specified in [lem-coef-finite-adjunction-diagram-realization]; this uses its actual system transformations, not an identification of lifts from equality of evaluations. Thus the subsequent inverse limit uses precisely the exceptional-system realization specified by [prop-coef-integral-exceptional-adjoint].",
    "uses": [
-    "def-pur-smooth-trace",
-    "lem-weil-pbc-reconstruction-uniform-tower",
-    "thm-pur-composition-coherence",
-    "thm-pur-smooth-base-change-coherence"
+    "thm-pur-adic-reconstruction",
+    "lem-pur-finite-coefficient-adjoint-comparisons",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-semilinear-derived-sections",
+    "thm-sf-comp-composition",
+    "lem-coef-finite-adjunction-diagram-realization",
+    "prop-coef-integral-exceptional-adjoint"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-adic-reconstruction-trace-coherence.proof.md",
+    "place": "counit of the realized adjunction; coherent realization of the finite operations"
+   }
+  },
+  {
+   "text": "Put $T_{f,n}=B_{n,X}(d)[2d]$ and $\\Omega_{f,\\bullet}=\\mathcal G_f\\mathbf1_{Y,\\bullet}$. The twists and their quotient transitions are those of [def-coefficient-twists-detailed]. At every level, [thm-pur-finite-coefficient-smooth-purity] identifies $\\Omega_{f,n}$ with $T_{f,n}$ by the unit component of the smooth purity map. [thm-pur-finite-reduction-of-purity] makes these components commute with quotient transitions. Both systems have cohomology in the single degree $r=-2d$: exact evaluation and componentwise cohomology in [lem-pur-system-level-left-extension] detect this in the strict system category. Replace either system functorially by its degree-$r$ cohomology system placed in degree $r$: for a complex $C$, the zigzag is $C\\leftarrow\\tau_{\\le r}C\\to H^r(C)[-r]$, with the upper truncation using $\\ker d^r$ and the second map the quotient by $\\operatorname{im}d^{r-1}$. Both maps are quasi-isomorphisms because the other cohomology vanishes. The compatible level orientation maps now give an actual isomorphism of cohomology systems. Hence they give $j_f:T_{f,\\bullet}\\simeq\\Omega_{f,\\bullet}$ in the derived system category. Moreover, maps between these single-degree systems are determined by their components: after the common shift, use [lem-weil-pbc-derived-single-fully-faithful] in the abelian category of strict systems, where a sheaf-system map is componentwise. This argument applies only to these single-degree objects; it does not assert faithfulness of arbitrary derived evaluation. Here the unit component is the inverse diagonal orientation, under the canonical unit/tensor identifications of [def-pur-smooth-purity-map]: at $K=\\mathbf1$, the projection comparison with the tensor unit is the unit identification, so the transpose defining $\\theta_{f,\\mathbf1}$ is $\\epsilon_{f,\\mathbf1}$; the adjunction triangle makes its transpose the identity of $\\Omega_f$. Consequently the $j_f$ used in Step 3 has the required inverse-diagonal evaluations.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "thm-pur-finite-coefficient-smooth-purity",
+    "thm-pur-finite-reduction-of-purity",
+    "lem-pur-system-level-left-extension",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "def-pur-smooth-purity-map",
+    "def-pur-co-smoothness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-adic-reconstruction-trace-coherence.proof.md",
+    "place": "compatible systems of finite-level maps; choose a coherent orientation before reconstruction"
+   }
+  },
+  {
+   "text": "For a normalized coefficient system $K_\\bullet$, construct $\\theta_{f,K_\\bullet}:f_\\bullet^*K_\\bullet\\otimes\\Omega_{f,\\bullet}\\to\\mathcal G_fK_\\bullet$ as the section-adjunction transpose of the defining composite of [def-pur-co-smoothness]: tensor symmetry, inverse compact-support projection map, then $\\epsilon_{f,\\mathbf1}\\otimes1_K$ and the unit identification. These are simultaneous section constructions by [lem-coef-semilinear-derived-sections] and Step 1. The finite projection map is invertible on this domain by [lem-weil-finite-compact-projection-formula]; the finite tensor map is invertible by [thm-pur-cohomological-smoothness]. Thus their section maps are invertible, since evaluations detect equivalences. Define $\\Gamma_{f,K_\\bullet}=\\theta_{f,K_\\bullet}(1\\otimes j_f)\\tau$, where $\\tau$ is the twist/shift reassociation of [def-pur-smooth-purity-map]. This is a natural isomorphism of section functors with precisely the finite smooth purity maps as evaluations. Units, counits, tensor evaluation and transposition are actual section maps, rather than independent lifts of their evaluated maps.",
+   "uses": [
+    "def-pur-co-smoothness",
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-finite-compact-projection-formula",
+    "thm-pur-cohomological-smoothness",
+    "def-pur-smooth-purity-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-adic-reconstruction-trace-coherence.proof.md",
+    "place": "transport included in the same reconstruction; construct its coherent maps"
+   }
+  },
+  {
+   "text": "Write $\\mathcal R_W$ and $\\mathcal L_W$ for the reduction and total-limit functors of [lem-coef-derived-system-evaluation-calculus], so $\\mathcal L_W=R\\lim\\circ U_W$, with termwise restriction $U_W$ to $R_W$-module towers. The latter is exact since kernels and cokernels are unchanged by restriction; thus the strict-tower functor of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] applies. The counit $e_N:\\mathcal R_W\\mathcal L_WN\\to N$ evaluates to the actual limit-projection scalar-extension adjoint. For normalized $N$, [lem-coef-normalized-dvr-effectivity] makes these evaluations isomorphisms, so $e_N$ is a natural system isomorphism by evaluation detection. For derived-complete $K$, the unit $K\\to\\mathcal L_W\\mathcal R_WK$ is the quotient-tower completion unit from [lem-coef-derived-system-evaluation-calculus]. The system $\\mathcal R_WK$ is normalized, so [lem-coef-normalized-dvr-effectivity] makes $\\mathcal L_W\\mathcal R_WK$ derived complete. The triangle identity $e_{\\mathcal R_WK}\\circ\\mathcal R_W(u_K)=1_{\\mathcal R_WK}$, together with the invertibility of $e_{\\mathcal R_WK}$ proved above, makes every evaluation of $\\mathcal R_W(u_K)$ invertible. In particular the first reduction of $u_K$ is an isomorphism. Since $K$ is also derived complete, [sk-lem-pe-derived-nakayama] applied to this morphism proves that $u_K$ is an isomorphism. The reconstruction statement [thm-pur-adic-reconstruction] supplies the derived-complete hypothesis on $K$. Apply $\\mathcal L_X$ to $\\Gamma_{f,\\mathcal R_YK}$. Its source is $Lf^*K(d)[2d]$ by [def-pur-integral-derived-operations] and [def-coefficient-twists-detailed]; its target is $Rf^!K=\\mathcal L_X\\mathcal E_f\\mathcal R_YK$ with the precise chosen realization of [prop-coef-integral-exceptional-adjoint] and Step 1. The $Rf^!$ on the left is the exceptional inverse-image right adjoint of [def-weil-exceptional-inverse-image]; the functor $G_f=\\mathcal L_X\\mathcal E_f$ of [prop-coef-integral-exceptional-adjoint] is its counit-compatible integral realization, so these are identified as counit-compatible right adjoints on the stated constructible categories. The map is an isomorphism since $\\Gamma$ is one. Naturality of $e$ identifies its reductions with the finite purity maps, selecting a coherent reconstruction as permitted by [thm-pur-adic-reconstruction]. For trace, form the system composite $\\epsilon_{f,N}\\circ\\mathcal F_f(\\Gamma_{f,N})$ at $N=\\mathcal R_YK$, as in [def-pur-smooth-trace]. By [lem-coef-finite-adjunction-diagram-realization], integral compact supports are $\\mathcal L_Y\\mathcal F_f\\mathcal R_X$. The natural isomorphism $e$ identifies their action on $\\mathcal L_X\\Gamma$ with $\\mathcal L_Y\\mathcal F_f(\\Gamma)$: insert $e_{\\mathrm{source}(\\Gamma)}$ and $e_{\\mathrm{target}(\\Gamma)}$, and use $e_{\\mathrm{target}(\\Gamma)}\\mathcal R_X\\mathcal L_X(\\Gamma)=\\Gamma e_{\\mathrm{source}(\\Gamma)}$. The integral-adjoint proposition identifies the resulting counit with $\\epsilon_{f,K}$. Hence this total-limit trace is exactly $\\epsilon_{f,K}\\circ Rf_!(\\gamma_{f,K})$, and its reductions are the finite traces. The case $K=\\mathbf1_Y$ is the smooth trace. The same natural $e$ comparisons identify composites of reconstructed operations with reconstructed composites; thus the equations established in Steps 5 and 6 have the stated integral functors as their source and target. This uses normalized-system effectivity, without inferring equipped common local models from bounded constructibility.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-coef-normalized-dvr-effectivity",
+    "sk-lem-pe-derived-nakayama",
+    "def-pur-integral-derived-operations",
+    "def-coefficient-twists-detailed",
+    "prop-coef-integral-exceptional-adjoint",
+    "def-weil-exceptional-inverse-image",
+    "thm-pur-adic-reconstruction",
+    "def-pur-smooth-trace",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-adic-reconstruction-trace-coherence.proof.md",
+    "place": "counit transport under reconstruction; unit sk-thm-purity-transport Step 2"
+   }
+  },
+  {
+   "text": "Let $f:X\\to Y$ and $g:Y\\to Z$ be smooth separated of dimensions $d,e$, in the separated finite-type setting of Step 1. Use the section composition comparisons induced by [thm-sf-comp-composition] and [lem-coef-cartesian-section-adjoint-mates]. Put $W=f_\\bullet^*\\Omega_{g,\\bullet}\\otimes\\Omega_{f,\\bullet}$, $\\rho=\\theta_{f,\\Omega_{g,\\bullet}}:W\\xrightarrow{\\sim}\\mathcal G_f\\Omega_{g,\\bullet}$, and $\\mu=\\rho^{-1}c_{g,f,\\mathbf1}:\\Omega_{gf,\\bullet}\\xrightarrow{\\sim}W$. The two orientation maps to compare are explicitly $\\mu j_{gf}:T_{gf,\\bullet}\\to W$ and $(f_\\bullet^*j_g\\otimes j_f)\\lambda:T_{gf,\\bullet}\\to W$, where $\\lambda:T_{gf,\\bullet}\\simeq f_\\bullet^*T_{g,\\bullet}\\otimes T_{f,\\bullet}$ is the twist/shift identification. Their evaluations agree by [thm-pur-composition-coherence] at the unit and the definition [def-pur-smooth-purity-map]. Their source and target are both concentrated in degree $-2(d+e)$: $j_f,j_g$ identify each factor with a shifted rank-one locally free twist. Step 2 and [lem-weil-pbc-derived-single-fully-faithful] therefore prove equality of these system maps. For arbitrary $K_\\bullet$, expand $\\theta$ by [def-pur-co-smoothness]. Write $\\sigma_{f,L}=\\epsilon_{f,L}\\mathcal F_f(\\theta_{f,L})$, namely inverse projection, then $\\epsilon_{f,\\mathbf1}\\otimes1_L$, then the unit identification. Set $t=\\epsilon_{g,\\mathbf1}\\mathcal F_g(\\sigma_{f,\\Omega_g}):\\mathcal F_g\\mathcal F_fW\\to\\mathbf1_Z$. The strict-system projection maps used in these transposes satisfy the required composition identity by [lem-pur-system-level-projection-formula-coherence], whose construction is the system-level form of the specified projection transformation [fix-prop-projection-formula]. Explicitly the two maps from $(gf)_\\bullet^*K\\otimes W$ to $\\mathcal G_f\\mathcal G_gK$ are $A_K=c_{g,f,K}\\,\\theta_{gf,K}(1\\otimes\\mu^{-1})$ and $B_K=\\theta_{f,\\mathcal G_gK}(f_\\bullet^*\\theta_{g,K}\\otimes1_{\\Omega_f})$, with pullback and tensor reassociation inserted in $B_K$. They have, under the composite adjunction, the transpose $$\\mathcal F_g\\mathcal F_f((gf)_\\bullet^*K\\otimes W)\\xrightarrow{\\mathrm{sym},\\,\\mathrm{PF}_{\\mathrm{comp}}^{-1}}\\mathcal F_g\\mathcal F_fW\\otimes K\\xrightarrow{t\\otimes1_K}\\mathbf1_Z\\otimes K\\xrightarrow{\\sim}K.$$ Here $\\mathrm{PF}_{\\mathrm{comp}}$ is $\\mathcal F_g(\\mathrm{PF}_{f,W,g^*K})\\circ\\mathrm{PF}_{g,\\mathcal F_fW,K}$ with associators inserted. To check the equality of transposes, substitute the unit/counit words for projection from [def-exchange-projection]; naturality moves the intermediate unit past the tensor comparison, and the adjacent counit and unit cancel by the triangle identity, leaving precisely this displayed composite. The composite exceptional counit is $\\epsilon_g\\circ\\mathcal F_g(\\epsilon_f)$ by clause (2) of [lem-weil-pbc-mate-pasting], while clause (3) identifies the composite adjunction through $\\alpha_{g,f}$. The projection associativity identity supplied by [lem-pur-system-level-projection-formula-coherence] is the non-triangle input that changes the composite-formula side to this same transpose. The simultaneous section models of [lem-coef-semilinear-derived-sections] and the composition naturality in [lem-coef-cartesian-section-adjoint-mates] make these substitutions identities of section constructions. This is the tensor-formula composition assertion of [thm-pur-cohomological-smoothness] with its transposes written before inverse limit. Injectivity of transposition proves it there. Insert the orientation equality into $\\Gamma=\\theta(1\\otimes j)\\tau$, and then apply total limit with Step 4's natural counit comparisons. The result is exactly $\\gamma_{gf,K}=c_{g,f}^{-1}\\gamma_{f,Rg^!K}Lf^*(\\gamma_{g,K})(d)[2d]$ under the canonical twist/shift identification. Faithfulness of evaluation is used only for the single-degree orientation maps.",
+   "uses": [
+    "thm-pur-composition-coherence",
+    "thm-pur-cohomological-smoothness",
+    "def-pur-co-smoothness",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "thm-sf-comp-composition",
+    "def-pur-smooth-purity-map",
+    "def-exchange-projection",
+    "lem-pur-system-level-projection-formula-coherence",
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-adic-reconstruction-trace-coherence.proof.md",
+    "place": "compatible finite-level composition statements; write the orientation and mate argument"
+   }
+  },
+  {
+   "text": "For the Cartesian square of [thm-pur-smooth-base-change-coherence], use exactly the smooth pullback exchange of [def-pur-smooth-pullback-exchange]. Write $b$ for its canonical pullback/twist reassociation. Its section realization is $\\Gamma_{f',v^*K}\\,b\\,(u^*\\Gamma_{f,K})^{-1}$; it is a section map because Step 3 constructs $\\Gamma$ and [lem-coef-semilinear-derived-sections] realizes the pullback and tensor comparisons. Its evaluations are the prescribed finite exchanges, not an unspecified extraordinary mate. Multiplying on the right by $u^*\\Gamma_{f,K}$ cancels the inverse and gives $\\operatorname{Ex}^{!,\\mathrm{sm}}u^*\\Gamma_{f,K}=\\Gamma_{f',v^*K}b$ as an equation of section maps. Applying the strict derived-limit functor, with the integral pullbacks defined in [def-pur-integral-derived-operations], gives the required adic commuting square. The base morphism $v$ is arbitrary; no flatness or smoothness of $v$ is used. Together with Steps 4 and 5 this proves all three transport assertions, with a coherent choice of purity maps realizing the finite ones.",
+   "uses": [
+    "thm-pur-smooth-base-change-coherence",
+    "def-pur-smooth-pullback-exchange",
+    "lem-coef-semilinear-derived-sections",
+    "def-pur-integral-derived-operations",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-adic-reconstruction-trace-coherence.proof.md",
+    "place": "compatible finite-level base-change statements; the defined purity exchange"
+   }
   }
  ],
  "proof_deps": [
+  "def-coefficient-twists-detailed",
+  "def-exchange-projection",
+  "def-pur-co-smoothness",
+  "def-pur-integral-derived-operations",
+  "def-pur-smooth-pullback-exchange",
+  "def-pur-smooth-purity-map",
   "def-pur-smooth-trace",
-  "lem-weil-pbc-reconstruction-uniform-tower",
+  "def-weil-exceptional-inverse-image",
+  "fix-prop-projection-formula",
+  "lem-coef-cartesian-section-adjoint-mates",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-finite-adjunction-diagram-realization",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-finite-coefficient-adjoint-comparisons",
+  "lem-pur-system-level-left-extension",
+  "lem-pur-system-level-projection-formula-coherence",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "prop-coef-integral-exceptional-adjoint",
+  "sk-lem-pe-derived-nakayama",
+  "thm-pur-adic-reconstruction",
+  "thm-pur-cohomological-smoothness",
   "thm-pur-composition-coherence",
-  "thm-pur-smooth-base-change-coherence"
+  "thm-pur-finite-coefficient-smooth-purity",
+  "thm-pur-finite-reduction-of-purity",
+  "thm-pur-smooth-base-change-coherence",
+  "thm-sf-comp-composition"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-adic-reconstruction-trace-coherence.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-adic-reconstruction-trace-coherence.proof.md",
+  "place": "proof paragraph, with explicit coherent-system argument for the counit, orientations and composition"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "adic transport of trace and coherence from compatible finite coefficient levels",
+   "results": "8 hits: IsAdicComplete; AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top; AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq; AdicCompletion.exists_smodEq_pow_add_one_smul; AdicCompletion; Hausdorffification; AdicCompletion.transitionMap_comp_reduceModIdeal; AdicCompletion.module",
+   "date": "2026-10-16",
+   "verdict": "no match for smooth purity, exceptional counits and coherent derived coefficient-system reconstruction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.hom_inv_id_assoc",
+   "results": "1 hits: CategoryTheory.Iso.hom_inv_id_assoc",
+   "date": "2026-10-16",
+   "verdict": "no match for smooth purity, exceptional counits and coherent derived coefficient-system reconstruction"
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*reconstruction|coherence.*tower [CategoryTheory]",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match for smooth purity, exceptional counits and coherent derived coefficient-system reconstruction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "compatible finite-level trace and coherence maps reconstruct to an adic tower morphism",
+   "results": "8 hits: AdicCompletion.lift; IsAdicComplete.StrictMono.lift.congr_simp; AdicCompletion.lift.congr_simp; AdicCompletion.eval_lift_apply; AdicCompletion.liftAlgHom; IsAdicComplete.StrictMono.lift; AdicCompletion.instIsScalarTower; IsAdicComplete.lift",
+   "date": "2026-10-16",
+   "verdict": "no match for smooth purity, exceptional counits and coherent derived coefficient-system reconstruction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compatible finite-level trace maps form a morphism under adic tower reconstruction",
+   "results": "8 hits: IsAdicComplete.mkₐ_comp_liftAlgHom; AdicCompletion.lift; IsAdicComplete.StrictMono.lift; AdicCompletion.transitionMap; IsAdicComplete.mkQ_comp_lift; IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq'; AdicCompletion.transitionMapₐ; IsAdicComplete.of_comp_lift",
+   "date": "2026-10-16",
+   "verdict": "no match for smooth purity, exceptional counits and coherent derived coefficient-system reconstruction"
+  },
+  {
+   "tool": "grep",
+   "query": "hom_inv_id_assoc|inverse limit.*morphism [CategoryTheory]",
+   "results": "25 hits: Mathlib/CategoryTheory/Equivalence.lean; Mathlib/CategoryTheory/Equivalence.lean; Mathlib/CategoryTheory/Galois/Decomposition.lean; Mathlib/CategoryTheory/ExtremalEpi.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/FunctorCategory.lean; Mathlib/CategoryTheory/Subobject/Basic.lean; Mathlib/CategoryTheory/Subobject/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for smooth purity, exceptional counits and coherent derived coefficient-system reconstruction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "adic transport of smooth trace and composition base-change coherence from compatible finite coefficient levels",
+   "results": "8 hits: LinearMap.trace_baseChange; Algebra.trace_comp_trace; Algebra.trace_comp_trace_of_basis; Algebra.trace_trace; Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange; Algebra.Smooth.comp; Algebra.Generators.H1Cotangent.δAux_ofComp; Algebra.trace_trace_of_basis",
+   "date": "2026-10-17",
+   "verdict": "no match for smooth purity, exceptional counits and coherent derived coefficient-system reconstruction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, CategoryTheory.NatTrans, CategoryTheory.Iso, trace, coherence",
+   "results": "0 hits: none; loogle: unknown identifier 'trace'",
+   "date": "2026-10-17",
+   "verdict": "query rejected: loogle: unknown identifier 'trace'"
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*coherence|adic.*reconstruction [CategoryTheory]",
+   "results": "0 hits: none",
+   "date": "2026-10-17",
+   "verdict": "no match for smooth purity, exceptional counits and coherent derived coefficient-system reconstruction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "compatible finite-level smooth trace and coherence maps transport through adic reconstruction",
+   "results": "8 hits: AdicCompletion.eval_lift_apply; IsAdicComplete.StrictMono.lift.congr_simp; IsAdicComplete.lift; IsAdicComplete.StrictMono.lift; AdicCompletion.lift.congr_simp; IsAdicComplete.StrictMono.of_lift; AdicCompletion.transitionMap_comp_eval; IsAdicComplete.lift.congr_simp",
+   "date": "2026-10-17",
+   "verdict": "no match for smooth purity, exceptional counits and coherent derived coefficient-system reconstruction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "smooth exceptional inverse image adic coefficients counit and tensor orientation composition coherence",
+   "results": "8 hits: AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProduct_naturality; Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq; AdicCompletion.ofTensorProductEquivOfPiFintype; Algebra.Generators.CotangentSpace.fst_compEquiv; AdicCompletion.ofTensorProduct_tmul; AdicCompletion.ofTensorProduct",
+   "date": "2026-10-17",
+   "verdict": "no match for smooth purity, exceptional counits and coherent derived coefficient-system reconstruction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "6 hits: CategoryTheory.Functor.map_comp; PresheafOfModules.map_comp; PresheafOfModules.map_comp_assoc; PresheafOfModules.mk; PresheafOfModulesOfCommRing.mk; AlgebraicGeometry.PresheafedSpace.map_comp_c_app",
+   "date": "2026-10-17",
+   "verdict": "no match for smooth purity, exceptional counits and coherent derived coefficient-system reconstruction"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothTrace|purity.*coherence|adic.*trace",
+   "results": "2 hits: Mathlib/Algebra/Lie/Semisimple/Lemmas.lean; Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for smooth purity, exceptional counits and coherent derived coefficient-system reconstruction"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -77,5 +292,94 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-thm-purity-transport"
+ "unit": "sk-thm-purity-transport",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-pur-adic-reconstruction-trace-coherence",
+  "worker": "stage1",
+  "summary": "Repaired the returned projection-coherence gap by adding a statement-only strict-system projection-formula composition lemma and citing it in Step 5, with the specified operation-level projection map as a declared tool. Step 4 now uses the reduction/limit completion unit plus derived Nakayama and explicitly identifies the integral exceptional functor with the right adjoint realization. The source/report consistently use main-20261015. Second reading made the new lemma self-contained and corrected its source attribution, supplied the completion-unit triangle argument and explicitly typed the two general-input composition maps.",
+  "blueprint": "The sole proof paragraph, along unit transport Step 2: counit transport and compatible composition/base-change systems. Normalized DVR effectivity realizes the inverse-limit reconstruction without imposing stronger common local-model hypotheses. All coherence maps are constructed before inverse limit.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-finite-coefficient-adjoint-comparisons",
+    "why": "Finite coefficient extension and its exceptional mate are coherent equivalences with counit compatibility; this is the generic coefficient-system input absent from the purity unit."
+   },
+   {
+    "node": "lem-coef-cartesian-section-adjoint-mates",
+    "why": "Realizes compatible enhanced adjunctions as an actual section adjunction, including composition; ordinary levelwise lifting is insufficient."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Provides strict-system realization and simultaneous tensor, pullback, exchange and mate models; it replaces no geometric purity argument."
+   },
+   {
+    "node": "lem-pur-system-level-left-extension",
+    "why": "Uses only its abelian strict-system category, exact evaluations and componentwise cohomology to isolate the orientation degree."
+   },
+   {
+    "node": "lem-weil-finite-compact-projection-formula",
+    "why": "Ensures the canonical compact-support projection section map is invertible on finite-Tor constructible inputs."
+   },
+   {
+    "node": "lem-coef-normalized-dvr-effectivity",
+    "why": "Provides canonical effectivity for normalized DVR systems without an unjustified common local-model assumption."
+   },
+   {
+    "node": "prop-coef-integral-exceptional-adjoint",
+    "why": "Identifies the inverse-limit exceptional image, its adjunction and reductions with the geometric finite counits."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Supplies the actual exact total derived-limit functor on strict towers; no arbitrary cone comparison is used."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Identifies composites of specified adjunction transposes, to prove composition before inverse limit."
+   },
+   {
+    "node": "lem-coef-finite-adjunction-diagram-realization",
+    "why": "Fixes the actual finite system functors and counit transformations used by the integral exceptional functor and the integral compact-support realization; evaluation formulas alone do not identify arbitrary lifts."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Supplies the natural reduction/limit counit and its projection formula; effectivity makes it a system isomorphism and identifies reconstructed composites."
+   },
+   {
+    "node": "lem-pur-system-level-projection-formula-coherence",
+    "why": "States the strict-system projection-formula associativity identity used to identify the composite tensor-formula transpose before total inverse limit."
+   },
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "Specifies the counit-defined projection transformation whose strict-system realization is used in the new coherence lemma; the generic operation-level statement does not itself state the strict-system equality."
+   },
+   {
+    "node": "sk-lem-pe-derived-nakayama",
+    "why": "Step 4 takes only its statement that a morphism between derived-complete complexes is an isomorphism when its first derived reduction is, to invert the completion unit u_K; no node of the purity-transport route states derived Nakayama."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-finite-coefficient-adjoint-comparisons",
+  "lem-coef-cartesian-section-adjoint-mates",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-system-level-left-extension",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-coef-normalized-dvr-effectivity",
+  "prop-coef-integral-exceptional-adjoint",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-mate-pasting",
+  "lem-coef-finite-adjunction-diagram-realization",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-system-level-projection-formula-coherence",
+  "fix-prop-projection-formula",
+  "sk-lem-pe-derived-nakayama"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-6836155bf",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-6836155bf (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node and every cited statement; the main-20261015 and master blueprint proposition and proof; thm-pur-adic-reconstruction (statement and proof); the unit sk-thm-purity-transport and its steps. Statement unchanged and the same in both snapshots. Hypotheses: separated finite-type schemes over k = \\bar F_q, smooth separated f of pure dimension d, completed \\hat O_E coefficients that are derived complete with uniform finite Tor. No condensed or ambient category is substituted. The proof constructs a canonical system-level purity map Gamma, which thm-pur-adic-reconstruction permits since it asserts existence and not uniqueness; this is not a weakening. Steps checked: S1 the section adjunction from the adjoint-comparison and cartesian-section nodes, no flatness needed. S2 the zigzag C <- tau_{<=r}C -> H^r(C)[-r] is valid, faithfulness is used only for single-degree objects through derived-single-fully-faithful in the abelian category of systems, and the unit calculation gives j_f = Pi_f^{-1}. S3 PF and theta are invertible by the finite projection formula and the tensor formula, and evaluations detect equivalences. S4 the completion unit is inverted by the triangle identity, effectivity and derived Nakayama; G_f = L E_f R is identified with the Rlim(DU T_f) of def-weil-exceptional-inverse-image as right adjoints of the same integral Rf_!; the trace reduces to the finite traces. S5 I re-derived the orientation equality from thm-pur-composition-coherence at K = 1 (both sides in degree -2(d+e)) and the A_K = B_K transpose using mate-pasting (2),(3) and the new PF lemma; the final formula with c^{-1} matches. S6 Ex^{!,sm} = gamma' b (u^*gamma)^{-1} by definition, with v arbitrary. Edge cases checked: d = 0, n = 1, empty schemes, K = 0, f = id. New node lem-pur-system-level-projection-formula-coherence: the maps are well typed; it holds at identities and at zero; it is not a duplicate of prop-sf-pf-coherence or fix-prop-projection-formula, whose statements are only levelwise; it is strictly smaller than the item; B1-B9 hold. No cycle. Fixes: (1) C8: sk-lem-pe-derived-nakayama is off-route and was undeclared; added it to split_report.tool_uses. (2) B3/C3: removed the uncited stmt_deps thm-pur-adic-reconstruction, fix-prop-projection-formula and lem-weil-pbc-ringed-strict-tower-homotopy-limit from the new node. Accepted tool uses: the lem-coef-* section, effectivity and realization nodes, prop-coef-integral-exceptional-adjoint, lem-weil-finite-compact-projection-formula, fix-prop-projection-formula and sk-lem-pe-derived-nakayama. Remark: the item's source.document still names master (the text is identical, and the field is not split-owned).; 2 file(s) fixed by the reviewer"
+ }
 }

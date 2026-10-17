@@ -3,48 +3,178 @@
  "blueprint": {
   "is": "det-sp-trace-basic",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Basic properties of the smooth trace",
- "statement": "Let $f:X\\to Y$ be smooth of pure relative dimension $d$ and $\\Lambda$\nadmissible.\n\n1. $\\operatorname{Tr}_f(K)$ is natural in $K\\in\\Dctf(Y,\\Lambda)$, and it is the\n   counit of the adjunction $Rf_!\\dashv f^*(-)(d)[2d]$ obtained by transporting\n   $Rf_!\\dashv f^!$ along $\\gamma_f$.\n2. For the projection $p_d:\\mathbf A^d_Y\\to Y$ and $K=\\Lambda_Y$,\n   $\\operatorname{Tr}_{p_d}(\\Lambda_Y)$ is the coefficient version of affine-space\n   integration, which on each geometric fibre sends the class of the origin to\n   $1$.\n3. For finite étale $f$ (so $d=0$, and $f^!=f^*$ with $\\gamma_f$ the identity\n   of the étale adjunction), $\\operatorname{Tr}_f(K)$ is summation over the fibres\n   $f_*f^*K\\to K$.",
+ "statement": "Use the standing purity conventions [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}(k)$, $E/\\mathbf Q_\\ell$ finite with valuation ring $\\mathcal O_E$, uniformizer $\\varpi_E$, and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\geq1$. Let $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$ (including $\\mathbf Z_\\ell,\\mathbf Q_\\ell$ by taking $E=\\mathbf Q_\\ell$). Work on small pro-etale sites in $\\Dctf(T,\\Lambda)=D^b_{ctf}(T,\\Lambda)$, with the derived-complete integral, rationalized and common-stage field conventions specified there. Let $X,Y$ be separated finite-type $k$-schemes and $f:X\\to Y$ a smooth separated $k$-morphism of pure relative dimension $d\\geq0$ [def-weil-scheme-morphism-properties, def-sbc-smooth-morphisms]; this is the domain on which the right adjoint $f^!$ of [sk-prop-sf-existence], used by [sk-thm-purity-transport], is given. Use $Rf_!\\dashv f^!$, the normalized purity isomorphism $\\gamma_f:f^*(-)(d)[2d]\\xrightarrow{\\sim}f^!$ of [sk-thm-purity-transport], and $\\operatorname{Tr}_f(K)=\\varepsilon_f(K)\\circ Rf_!(\\gamma_f(K))$ of [sk-def-sp-trace].\n\n1. $\\operatorname{Tr}_f(K)$ is natural in $K\\in\\Dctf(Y,\\Lambda)$ and is the counit of $Rf_!\\dashv f^*(-)(d)[2d]$ obtained by transporting $Rf_!\\dashv f^!$ along $\\gamma_f$.\n2. For $p_d:\\mathbf A^d_Y\\to Y$ [def-sbc-affine-space] and $K=\\Lambda_Y$, $\\operatorname{Tr}_{p_d}(\\Lambda_Y)$ is the coefficient version of affine-space integration. On each geometric fibre it sends the class of the origin to $1$. At finite level that class is the compactly supported image of the ordered supported Kummer product $\\partial\\kappa(t_1)\\cup\\cdots\\cup\\partial\\kappa(t_d)$ of the coordinate zero divisors, as in [cor-pur-affine-space-zero-section-purity]; for $d=0$ use the unit. At the other coefficient stages use its coefficient transport.\n3. For finite etale $f$, use relative dimension $d=0$. Under the canonical counit-preserving identification $f^!\\simeq f^*$ with the etale sum adjunction, $\\gamma_f$ becomes the identity and $\\operatorname{Tr}_f(K)$ is summation over the finite fibres, $Rf_*f^*K\\to K$. Here $Rf_*$ is the finite pushforward on coefficient complexes, conventionally written $f_*$ in this formula.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-trace/sk-def-sp-trace-properties.md",
   "place": "node det-sp-trace-basic, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "sk-prop-sf-existence",
+  "sk-thm-purity-transport",
+  "sk-def-sp-trace",
+  "def-sbc-affine-space",
+  "cor-pur-affine-space-zero-section-purity"
+ ],
  "proof": [
   {
-   "text": "(1) $\\gamma_f$ and $\\varepsilon_f$ are natural transformations, so their composite\nis natural. Transporting an adjunction $F\\dashv G$ along a natural isomorphism\n$\\gamma:G'\\xrightarrow{\\sim}G$ gives an adjunction $F\\dashv G'$ with counit\n$\\varepsilon\\circ F\\gamma$, which is exactly $\\operatorname{Tr}_f$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "(2) The purity map of $p_d$ is the inverse orientation followed by the tensor\nmap; by [det-sp-orientation-charts] (the case $U=\\mathbf A^d_Y$, $e=\\mathrm{id}$) the\norientation of $p_d$ is the affine-space orientation given by its coordinate\nadjunction, whose counit is iterated affine-line integration. Hence\n$\\operatorname{Tr}_{p_d}(\\Lambda_Y)=\\varepsilon_{p_d}\\circ Rp_{d!}\\gamma_{p_d}$ is the\ncounit of the coordinate adjunction at $\\Lambda_Y$, i.e. affine-space\nintegration, normalized on geometric fibres by sending the class of the\norigin (the $d$-fold product of the affine-line classes) to $1$. For finite\ncoefficients this is the finite trace of [def-pur-smooth-trace]; for the other\ncoefficients it is its transport.",
+   "text": "Put $F=Rf_!$, $G=f^!$, $H=f^*(-)(d)[2d]$, and let $\\alpha_{M,K}:\\operatorname{Hom}(FM,K)\\simeq\\operatorname{Hom}(M,GK)$ be the given adjunction. By [sk-thm-purity-transport], $\\gamma:H\\xrightarrow{\\sim}G$ is natural. Define the transported bijection by $a\\mapsto\\gamma_K^{-1}\\circ\\alpha_{M,K}(a)$; its inverse sends $b:M\\to HK$ to $\\varepsilon_K\\circ F(\\gamma_K\\circ b)$. These are inverse natural bijections, since $\\alpha^{-1}(c)=\\varepsilon_K\\circ F(c)$. The inverse image of $1_{HK}$ is $\\varepsilon_K\\circ F(\\gamma_K)$, exactly the trace defined in [sk-def-sp-trace], so it is the transported counit. If $u:K\\to L$, naturality of $\\varepsilon$ and $\\gamma$ gives $u\\circ\\operatorname{Tr}_f(K)=\\varepsilon_L\\circ F(G(u))\\circ F(\\gamma_K)=\\operatorname{Tr}_f(L)\\circ F(H(u))$. This proves (1).",
    "uses": [
-    "det-sp-orientation-charts",
-    "def-pur-smooth-trace"
+    "sk-thm-purity-transport",
+    "sk-def-sp-trace"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-trace/sk-def-sp-trace-properties.proof.md",
+    "place": "Paragraph (1): naturality and transport of the adjunction"
+   }
   },
   {
-   "text": "(3) For étale $f$ the adjunction $f_!\\dashv f^*$ has as counit the sum over the\nfibres; with $d=0$ the orientation is the identity ($\\omega_f=f^*\\Lambda_Y=\\Lambda_X$\nby the étale chart description), so $\\gamma_f=\\mathrm{id}$ and $\\operatorname{Tr}_f$ is\nthis counit; for finite $f$, $f_!=f_*$.",
-   "uses": [],
-   "elementary": null
+   "text": "First let $\\Lambda=A_{E,n}$. By [cor-pur-dualizing-object-purity], the normalized $\\gamma_{p_d,K}$ is the smooth purity map specified by [def-pur-smooth-purity-map]. By [lem-pur-projection-purity-agreement], that map equals the ordered composite $\\Gamma_{p_d,K}$ of the integration-transposed affine-line maps, at every $n\\geq1$. Taking the adjoint transpose of this equality, Step 1 identifies $\\operatorname{Tr}_{p_d}(\\Lambda_Y)$ with that same ordered affine-space integration: apply the composition identity of [thm-pur-trace-normalization-transitivity] successively to the coordinate projections. The induction starts with $p_0=1$ and its identity trace; the step factors $p_{r+1}$ into an affine-line projection followed by $p_r$, with the twists and even shifts placed exactly as in that identity. This is an equality of specified maps, not merely an isomorphism between their sources. By [cor-pur-affine-space-zero-section-purity], the integration transposed from $\\Gamma_{p_d,\\Lambda_Y}$ sends the zero-section Kummer product to $1$; the rank-zero product is the unit. The base-change compatibility and finite-level normalization in [thm-pur-trace-normalization-transitivity] identify the fibre map with the corresponding geometric-fibre integration. Consequently the compactly supported class of the origin maps to $1$ on every geometric fibre. All these inputs use the specified pro-etale twists and all finite coefficient levels, with no divisibility condition on the ramification index and $n$.",
+   "uses": [
+    "cor-pur-dualizing-object-purity",
+    "lem-pur-projection-purity-agreement",
+    "cor-pur-affine-space-zero-section-purity",
+    "thm-pur-trace-normalization-transitivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-trace/sk-def-sp-trace-properties.proof.md",
+    "place": "Paragraph (2): the coordinate adjunction and origin normalization, made precise by the existing all-finite-level projection-agreement and zero-section statements"
+   }
+  },
+  {
+   "text": "Still at finite coefficients, take $f$ etale, $U=X$, $e=f:X\\to\\mathbf A^0_Y=Y$ and $p_0=1_Y$. The chart assertion of [det-sp-reduction-exceptional] identifies the right adjoint with $e^*p_0^*(-)(0)[0]=f^*$, preserving the counit: summation over the fibres of $e$ followed by the rank-zero affine-space counit. The latter is the identity by the $d=0$ clause of [lem-pur-projection-purity-agreement]. The normalization and counit-preserving uniqueness in [sk-thm-purity-transport] identify this comparison with $\\gamma_f$. In these coordinates $\\gamma_f$ is therefore $1_{f^*}$ and its transported counit is precisely the fibre sum, for arbitrary $K\\in\\Dctf(Y,A_{E,n})$. This uses the chart assertion for that coefficient ring and arbitrary $K$, rather than assuming that $K$ descends from a cyclic coefficient ring. The replacement of $Rf_!$ by finite pushforward is justified in Step 6.",
+   "uses": [
+    "det-sp-reduction-exceptional",
+    "lem-pur-projection-purity-agreement",
+    "sk-thm-purity-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-trace/sk-def-sp-trace-properties.proof.md",
+    "place": "Paragraph (3): the etale chart, its sum counit, and the dimension-zero normalization"
+   }
+  },
+  {
+   "text": "For $\\Lambda=\\mathcal O_E$, apply [det-sp-tower-gluing] to the normalized reduction tower of $K$. Its chart counit is the actual tower morphism given by the fibre sum followed by iterated integration, and its finite evaluations preserve counits. For $p_d$ take $e=1$; for etale $f$ take $d=0$, $p_0=1$ and $e=f$. Thus these tower maps are respectively integration and fibre sum. By [det-sp-integral-adjunction-bijection], the integral counit and purity comparison are the derived limits of these tower maps and comparisons. The trace compatibility of [prop-pur-adic-reconstruction-trace-coherence] identifies their composite with the integral smooth trace. Applying the functor $R\\varprojlim$ to the composite therefore gives integral integration in the first case and the integral fibre sum in the second. The compatible zero-section maps at finite levels compose with the tower integration to the identity of the coefficient-unit tower; applying the same functor gives identity on the completed coefficient unit, so the transported origin class still maps to $1$. This is an argument with specified coherent tower morphisms, not an inference that equality of separate reductions detects equality of derived morphisms. It proves (2) and the trace description of (3) integrally; $\\mathbf Z_\\ell$ is $E=\\mathbf Q_\\ell$.",
+   "uses": [
+    "det-sp-tower-gluing",
+    "det-sp-integral-adjunction-bijection",
+    "prop-pur-adic-reconstruction-trace-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-trace/sk-def-sp-trace-properties.proof.md",
+    "place": "Paragraphs (2)-(3): coefficient transport through the coherent tower and integral adjunction"
+   }
+  },
+  {
+   "text": "For $\\Lambda=E$, [prop-pur-rational-purity-trace-coherence] transports the integral smooth trace to the rational smooth trace. In [def-weil-rationalization-karoubi] every object has an integral representative; [def-weil-linear-scalar-localization] sends a map $a$ to $a\\otimes1$ and composition to $(a\\circ b)\\otimes1$. In particular the equality $t\\circ\\mathrm{cl}(0)=1$ becomes $(t\\otimes1)\\circ(\\mathrm{cl}(0)\\otimes1)=1\\otimes1$, and a finite fold map $\\sum_i a_i$ becomes $\\sum_i(a_i\\otimes1)$ by the defining linear map on Hom modules. Hence integration remains normalized and the etale trace remains the fibre sum, for every rational object. For $\\Lambda=\\overline{\\mathbf Q}_\\ell$, represent $K$ at a finite coefficient field as in [def-weil-algebraically-closed-coefficients]. The same trace-transport statement identifies its trace with the class of this finite-field trace. Composition and equality are computed at a common finite field, so the normalization identity and the fibre-sum formula pass to that class. Enlarging the field applies the same scalar extension to both sides. This proves (2) and the trace description of (3) at both field stages, including $\\mathbf Q_\\ell$.",
+   "uses": [
+    "prop-pur-rational-purity-trace-coherence",
+    "def-weil-rationalization-karoubi",
+    "def-weil-linear-scalar-localization",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-trace/sk-def-sp-trace-properties.proof.md",
+    "place": "Paragraphs (2)-(3): rationalization and common-stage coefficient transport"
+   }
+  },
+  {
+   "text": "Finally let $f$ be finite etale. It is proper by [lem-weil-pbc-finite-proper]. The canonical proper compact-support identification in [cor-cbc-proper-coincidence] is $Rf_!\\simeq Rf_*$, obtained from the compactification $X\\xrightarrow{1_X}X\\xrightarrow{f}Y$. At finite level this is exactly the formula of [def-compact-support-direct-image-detailed]. The construction in [def-weil-integral-rational-qbar-compact-support] uses that same compactification in all reductions, then takes its derived limit, rationalization and common finite-stage image, respectively. Thus the same identification is the specified proper identification at all coefficient stages. Under it the fibre-sum counits of Steps 3-5 have domain $Rf_*f^*K$. This gives exactly (3), with $f_*$ understood as finite pushforward on coefficient complexes. The identity comparison means identity after the counit-preserving right-adjoint identification, rather than a literal equality between independently constructed functors.",
+   "uses": [
+    "lem-weil-pbc-finite-proper",
+    "cor-cbc-proper-coincidence",
+    "def-compact-support-direct-image-detailed",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-trace/sk-def-sp-trace-properties.proof.md",
+    "place": "Paragraph (3), last sentence: finite pushforward equals compact-support pushforward"
+   }
   }
  ],
  "proof_deps": [
-  "det-sp-orientation-charts",
-  "def-pur-smooth-trace"
+  "sk-thm-purity-transport",
+  "sk-def-sp-trace",
+  "cor-pur-dualizing-object-purity",
+  "lem-pur-projection-purity-agreement",
+  "cor-pur-affine-space-zero-section-purity",
+  "thm-pur-trace-normalization-transitivity",
+  "det-sp-reduction-exceptional",
+  "det-sp-tower-gluing",
+  "det-sp-integral-adjunction-bijection",
+  "prop-pur-adic-reconstruction-trace-coherence",
+  "prop-pur-rational-purity-trace-coherence",
+  "def-weil-rationalization-karoubi",
+  "def-weil-linear-scalar-localization",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-weil-pbc-finite-proper",
+  "cor-cbc-proper-coincidence",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-integral-rational-qbar-compact-support"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-trace/sk-def-sp-trace-properties.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-trace/sk-def-sp-trace-properties.proof.md",
+  "place": "Paragraphs (1)-(3), expanded using the existing all-finite-level normalization and coherent coefficient-transport statements"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth purity trace is the transported adjunction counit, normalized by affine space integration and finite etale fibre summation",
+   "results": "AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.ΓSpec.adjunction_counit_app'; AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap; AlgebraicGeometry.Scheme.kerAdjunction_counit_app; AlgebraicGeometry.AffineSpace.homOfVector; AlgebraicGeometry.IsEtale; AlgebraicGeometry.Scheme.Hom.normalizationDiagram; AlgebraicGeometry.AffineSpace.homOfVector_over",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state smooth-purity integration or etale fibre-sum normalization for these derived coefficient categories"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothTrace|smooth_trace|purity.*trace|trace.*purity",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state smooth-purity integration or etale fibre-sum normalization for these derived coefficient categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The smooth etale cohomology trace is affine space integration and the sum over finite etale fibres",
+   "results": "trace_eq_sum_embeddings; trace_eq_sum_automorphisms; Algebra.intTrace.congr_simp; Algebra.intTrace_eq_trace; Algebra.normalizedTrace; Algebra.intTraceAux; Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero; Algebra.FormallyEtale.of_unramified_and_smooth",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state smooth-purity integration or etale fibre-sum normalization for these derived coefficient categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatIso",
+   "results": "0 hits: loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-17",
+   "verdict": "unavailable: invalid Loogle identifier in this query; corrected by the later valid trace/etale pattern"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\", \"etale\"",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state smooth-purity integration or etale fibre-sum normalization for these derived coefficient categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The counit of smooth relative purity is natural in the sheaf complex and agrees with integration on affine space and finite etale trace",
+   "results": "AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; AlgebraicGeometry.LocallyRingedSpace.toΓSpecCBasicOpens; AlgebraicGeometry.Scheme.Hom.normalizationDiagram; AlgebraicGeometry.Spec_Γ_naturality_assoc; AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app; AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_spec; AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state smooth-purity integration or etale fibre-sum normalization for these derived coefficient categories"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -70,5 +200,49 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-sp-trace-basic",
+  "worker": "stage1",
+  "summary": "Expanded the three source paragraphs into six complete steps, with explicit standing coefficient/scheme conventions, the all-finite-level affine projection/zero-section normalization, the finite etale chart counit, and coherent integral/rational/common-stage transports. Clarified identity under the canonical etale right-adjoint identification and finite derived pushforward notation. Reused existing nodes throughout; no new nodes.",
+  "blueprint": "Step 1 realizes source paragraph (1); Step 2 realizes the coordinate-integration and origin-normalization argument of paragraph (2), using the existing all-finite-level agreement statement in place of its cyclic-coefficient chart shorthand; Step 3 realizes the etale chart argument of paragraph (3); Steps 4-5 expand the higher-coefficient transports in paragraphs (2)-(3); Step 6 realizes the finite/proper final sentence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Generic finite-morphism properness, used only for the final compactification identification; the unit route does not replace this scheme-theoretic tool."
+   },
+   {
+    "node": "cor-cbc-proper-coincidence",
+    "why": "Only its explicit canonical Rf_! = Rf_* identification for a proper morphism is used, not its base-change theorem; this is the final finite-pushforward observation in the source."
+   },
+   {
+    "node": "det-sp-reduction-exceptional",
+    "why": "Coefficient-change comparison with its smooth coordinate-chart counit; the trace unit has no node supplying this arbitrary finite coefficient extension interface."
+   },
+   {
+    "node": "det-sp-tower-gluing",
+    "why": "Coherent finite-level tower adjunction and chart counits needed for integral transport; no node in the trace unit supplies the tower construction."
+   },
+   {
+    "node": "det-sp-integral-adjunction-bijection",
+    "why": "Derived-limit integral adjunction and reductions of unit/counit; this is a generic coefficient-system tool outside the trace unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-proper",
+  "cor-cbc-proper-coincidence",
+  "det-sp-reduction-exceptional",
+  "det-sp-tower-gluing",
+  "det-sp-integral-adjunction-bijection"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-e5703b2ed",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-e5703b2ed (reviewer sub-agent of L); spot-checked: I read the source statement and proof (main-20261015 sk-def-sp-trace-properties.md and .proof.md), the unit and chapter records, and the full statement of every node in stmt_deps and proof_deps, plus the nodes they rest on (sk-prop-sf-existence, def-pur-affine-space-comparison, def-pur-affine-line-purity-comparison, det-sp-orientation-charts, thm-pur-adic-reconstruction, thm-pur-rational-and-qbar-purity, pur713-def-upper-shriek-module). One fault, which I fixed (E1). The second reader removed absolute separatedness of X and Y, but the item's gamma_f comes from sk-thm-purity-transport, whose f^! is the right adjoint of sk-prop-sf-existence, stated only for separated finite-type X,Y. The blueprint's higher-coefficient f^! (pur713) is likewise defined only between separated schemes. Steps 2-5 also cite statements that assume separated schemes: lem-pur-projection-purity-agreement, cor-pur-affine-space-zero-section-purity, thm-pur-trace-normalization-transitivity, det-sp-reduction-exceptional, det-sp-integral-adjunction-bijection, thm-pur-adic-reconstruction and thm-pur-rational-and-qbar-purity. Equality of maps in D(Y) cannot be checked on a separated open cover, so the gap cannot be closed locally. The corrected item in fixes/ restores 'X,Y separated finite-type k-schemes', which is the domain where the source's objects exist, not a weakening. It also adds the missing citations [def-weil-scheme-morphism-properties] and [sk-prop-sf-existence] to the statement and stmt_deps; a transitive walk shows no cycle. Step checks: Step 1, the transported counit epsilon∘F(gamma) and its naturality, recomputed and genuinely elementary. Step 2 holds via lem-pur-projection-purity-agreement (all n>=1, so ramified E with e not dividing n is covered) and the zero-section-to-1 clause of cor-pur-affine-space-zero-section-purity pulled back to geometric fibres. In Step 3, the chart clause of det-sp-reduction-exceptional with U=X, e=f, d=0 plus the counit-uniqueness of sk-thm-purity-transport gives the fibre-sum counit. Step 4 applies R lim to coherent tower identities (det-sp-tower-gluing, det-sp-integral-adjunction-bijection). Step 5 holds because scalar localization is linear and the Qbar case computes at a common finite field. Step 6: finite implies proper, and cor-cbc-proper-coincidence gives Rf_!=Rf_* with the same compactification at all coefficient stages. Accepted tool uses: cor-cbc-proper-coincidence, det-sp-reduction-exceptional, det-sp-tower-gluing, det-sp-integral-adjunction-bijection, lem-weil-pbc-finite-proper. There are no new nodes. The duplicate search with rg found no node stating the three clauses, so same_as=[] stands. No SGA is cited. Edge cases checked: d=0, d=1, K=0, f=id, a split cover (fold map), empty X, and e not dividing n.; 1 file(s) fixed by the reviewer"
  }
 }

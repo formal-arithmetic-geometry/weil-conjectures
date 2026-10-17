@@ -11,9 +11,46 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $B$ be a partially ordered set with $|B|<\\kappa$ and $p:N(B)\\to\\mathcal E$. The nerve $N(B)$ is $\\kappa$-small: its nondegenerate $n$-simplices are the strictly increasing chains $b_0<\\cdots<b_n$ in $B$, so there are finitely many when $B$ is finite, and when $B$ is infinite their set has cardinality $|B|<\\kappa$. Since $\\mathcal E$ is $\\kappa$-filtered, [def-coef-presentable-infinity-category] gives a coherent cocone $p\\to\\Delta_{N(B)}T$, that is, a vertex of the coherent cocone category $P_p$ of [def-cbc-enhanced-diagrams-cones]. By [lem-coef-join-slice-cocone-comparison] the comparison $J_p\\to P_p$ from the join slice is a functor equivalence; a quasi-inverse carries this vertex to a vertex of $J_p$, that is, a map $N(B)\\star\\Delta^0\\to\\mathcal E$ restricting to $p$. Finally $N(B)\\star\\Delta^0=N(B^{\\triangleright})$: an $n$-simplex of $N(B^{\\triangleright})$ is a weakly increasing chain $c_0\\leq\\cdots\\leq c_n$ in $B^{\\triangleright}$, and since $\\infty$ is the maximum, the entries in $B$ form an initial block $c_0,\\ldots,c_a$ ($-1\\leq a\\leq n$) followed by the constant block at $\\infty$; this is exactly the decomposition of an $n$-simplex of the join into an $N(B)$-block and a $\\Delta^0$-block, and restriction of chains is the join's operator. So $p$ extends over $N(B^{\\triangleright})$.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-join-slice-cocone-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 5.3.1.12, 'only if' direction (\"obvious\"), with Definition 5.3.1.7 (join-cone filteredness), compared with coherent cocones through Proposition 4.2.1.5"
+   }
+  },
+  {
+   "text": "Conversely, assume that every map $N(B)\\to\\mathcal E$ with $|B|<\\kappa$ extends over $N(B^{\\triangleright})$. Let $K$ be a $\\kappa$-small simplicial set and $p:K\\to\\mathcal E$ a coherent diagram. By [lem-coef-infinity-poset-nerve-cofinal-replacement] there are a partially ordered set $B$ with $|B|<\\kappa$ and a map $\\varphi:N(B)\\to K$ such that, for every vertex $T$ of $\\mathcal E$, restriction $\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal E)}(p,\\Delta_KT)\\to\\operatorname{Map}_{\\operatorname{Fun}(N(B),\\mathcal E)}(p\\varphi,\\Delta_{N(B)}T)$ is an equivalence of Kan complexes. Put $q=p\\varphi$. By hypothesis $q$ extends to $\\bar q:N(B^{\\triangleright})=N(B)\\star\\Delta^0\\to\\mathcal E$ (identification of step 1), a vertex of the join slice $J_q$ with apex $T=\\bar q(\\infty)$. The comparison $J_q\\to P_q$ of [lem-coef-join-slice-cocone-comparison] lies over $\\mathcal E$, so it carries $\\bar q$ to a vertex of $P_q$ over $T$: an edge $q\\to\\Delta_{N(B)}T$ of $\\operatorname{Fun}(N(B),\\mathcal E)$, i.e. a vertex of $\\operatorname{Map}_{\\operatorname{Fun}(N(B),\\mathcal E)}(q,\\Delta_{N(B)}T)$ (vertices of the right-pinched mapping space of [def-cbc-enhanced-diagrams-cones] are exactly such edges). An equivalence of Kan complexes is a bijection on path components, so $\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal E)}(p,\\Delta_KT)$ has a vertex, which is a coherent cocone $p\\to\\Delta_KT$. Thus every $\\kappa$-small diagram in $\\mathcal E$ has a cocone, and $\\mathcal E$ is $\\kappa$-filtered by [def-coef-presentable-infinity-category]. For $K=\\varnothing$ the poset $B$ is empty (a map $N(B)\\to\\varnothing$ forces $B=\\varnothing$) and the assumed extension of the empty map is a vertex of $\\mathcal E$, which is the required cocone; no colimits in $\\mathcal E$ are used.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-join-slice-cocone-comparison",
+    "lem-coef-infinity-poset-nerve-cofinal-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 5.3.1.12, converse: C_{p/} equivalent to C_{q/} for a cofinal p0:N(A)->K from Variant 4.2.3.15 (kappa uncountable) or Variant 4.2.3.16 (kappa countable)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-presentable-infinity-category",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-join-slice-cocone-comparison",
+  "lem-coef-infinity-poset-nerve-cofinal-replacement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Remark 5.3.1.12 and Variants 4.2.3.15–4.2.3.16; source read online and not archived in literature/"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,43 +102,36 @@
    "verdict": "No match. This second directory search finds the ordinary-category IsCardinalFiltered and directed-poset infrastructure. Read Presentable/IsCardinalFiltered.lean:39-48 and Presentable/Directed.lean:13-28; neither proves the quasicategorical poset-nerve criterion."
   },
   {
-   "tool": "leanfinder",
-   "query": "For a quasicategory, extension of diagrams indexed by small ordered sets characterizes cardinal filteredness",
-   "results": "{\"t\": \"2026-10-16T23:51:24Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasicategory, extension of diagrams indexed by small ordered sets characterizes cardinal filteredness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.isCardinalFiltered_iff_aux₁\", \"CategoryTheory.isCardinalFiltered_iff\", \"CategoryTheory.isCardinalFiltered_iff_aux₂\", \"CategoryTheory.IsCardinalFiltered.wideSpan\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.Diagram\", \"CategoryTheory.IsCardinalFiltered\", \"CategoryTheory.isCardinalFiltered_preorder\", \"CategoryTheory.IsCardinalFiltered.exists_cardinal_directed.isCardinalFiltered_aux\"], \"digest\": \"ec8d0eeaa15c5d75\"}",
-   "date": "2026-10-16",
-   "verdict": "No match. Read Mathlib/CategoryTheory/Presentable/IsCardinalFiltered.lean:39-48: the returned class and its criteria concern ordinary categories, not coherent simplicial diagrams in a quasicategory."
-  },
-  {
    "tool": "grep",
-   "query": "Quasicategory|CardinalFiltered|anodyne",
-   "results": "{\"t\": \"2026-10-16T23:52:17Z\", \"tool\": \"grep\", \"query\": \"Quasicategory|CardinalFiltered|anodyne\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\"], \"digest\": \"a7128b499870473c\"}",
-   "date": "2026-10-16",
-   "verdict": "No match. The quasicategory grep returns inner-horn fillers and nerve/strict-Segal infrastructure. Read Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:36-54; no cardinal-filteredness criterion is stated."
+   "query": "IsCardinalFiltered|Quasicategory|poset|filtered",
+   "results": "{\"t\": \"2026-10-17T01:52:53Z\", \"tool\": \"grep\", \"query\": \"IsCardinalFiltered|Quasicategory|poset|filtered\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\"], \"digest\": \"3f982b9c93f66910\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match; hits are quasicategory/nerve or inner-horn infrastructure, not the cardinal filtered poset-cone criterion."
   },
   {
-   "tool": "leanfinder",
-   "query": "A quasicategory is filtered if every diagram indexed by a finite partially ordered set extends to a right cone",
-   "results": "{\"t\": \"2026-10-17T01:13:23Z\", \"tool\": \"leanfinder\", \"query\": \"A quasicategory is filtered if every diagram indexed by a finite partially ordered set extends to a right cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsFiltered.of_cocone_nonempty\", \"SSet.Finite.instIsFinitelyPresentable\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.Quasicategory\", \"CategoryTheory.IsFiltered.iff_cocone_nonempty\", \"CategoryTheory.IsFiltered.cocone_nonempty\", \"CategoryTheory.IsFiltered.cocone\", \"SSet.hasColimits\"], \"digest\": \"bcee9cc8ab68eb36\"}",
+   "tool": "leansearch",
+   "query": "Detect kappa filtered quasicategories using cones on small partially ordered sets",
+   "results": "{\"t\": \"2026-10-17T01:52:53Z\", \"tool\": \"leansearch\", \"query\": \"Detect kappa filtered quasicategories using cones on small partially ordered sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalFiltered.mk\", \"CategoryTheory.IsCardinalFiltered\", \"CategoryTheory.isCardinalFiltered_iff_aux₁\", \"CategoryTheory.HasCardinalFilteredColimits\", \"CategoryTheory.HasCardinalFilteredColimits.mk\", \"CategoryTheory.IsFiltered.of_cocone_nonempty\", \"CategoryTheory.IsFiltered.iff_cocone_nonempty\", \"CategoryTheory.isCardinalFiltered_iff\"], \"digest\": \"125c0839fd4f85dd\"}",
    "date": "2026-10-17",
-   "verdict": "No match. Read CategoryTheory/Filtered/Basic.lean:342-373 and AlgebraicTopology/Quasicategory/Basic.lean:34-51. IsFiltered.of_cocone_nonempty tests ordinary finite categories; the quasicategory class gives inner-horn fillers only. Neither states the kappa-filtered finite-poset cone criterion for arbitrary quasicategories."
-  },
-  {
-   "tool": "grep",
-   "query": "IsCardinalFiltered|Quasicategory|LeftAnodyne|RightAnodyne",
-   "results": "{\"t\": \"2026-10-17T01:13:38Z\", \"tool\": \"grep\", \"query\": \"IsCardinalFiltered|Quasicategory|LeftAnodyne|RightAnodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\"], \"digest\": \"3f982b9c93f66910\"}",
-   "date": "2026-10-17",
-   "verdict": "No match. Read CategoryTheory/Filtered/Basic.lean:342-373 and AlgebraicTopology/Quasicategory/Basic.lean:34-51. IsFiltered.of_cocone_nonempty tests ordinary finite categories; the quasicategory class gives inner-horn fillers only. Neither states the kappa-filtered finite-poset cone criterion for arbitrary quasicategories."
+   "verdict": "No match; hits concern ordinary CategoryTheory cardinal filteredness, not coherent quasicategories."
   },
   {
    "tool": "loogle",
-   "query": "\"Quasicategory\", \"cone\"",
-   "results": "{\"t\": \"2026-10-17T01:13:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"cone\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "IsCardinalFiltered, Quasicategory, PartOrd",
+   "results": "{\"t\": \"2026-10-17T01:52:53Z\", \"tool\": \"loogle\", \"query\": \"IsCardinalFiltered, Quasicategory, PartOrd\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsCardinalFiltered'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "No match. Loogle returned zero hits."
+   "verdict": "No match; service returned no hits/unknown ordinary identifier."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasicategory is kappa filtered exactly when every map from the nerve of a poset of size less than kappa extends to the nerve of its right cone",
+   "results": "{\"t\": \"2026-10-17T01:52:55Z\", \"tool\": \"leanfinder\", \"query\": \"A quasicategory is kappa filtered exactly when every map from the nerve of a poset of size less than kappa extends to the nerve of its right cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling\", \"SSet.Quasicategory\", \"SSet.modelCategoryQuillen.J\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.quasicategory_of_filler\", \"SSet.Finite.instIsFinitelyPresentable\", \"CategoryTheory.nerve.edgeMk_surjective\", \"SSet.instQuasicategoryOfKanComplex\"], \"digest\": \"691f08d3e80cb2e2\"}",
+   "date": "2026-10-17",
+   "verdict": "No match; hits concern quasicategory horn filling and ordinary nerves, not the criterion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-ind-finite-poset-realization",
@@ -130,5 +160,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-filtered-poset-cone-test",
+  "worker": "stage1",
+  "summary": "Split the poset-nerve criterion into the forward implication and Lurie's converse reduction from arbitrary kappa-small simplicial diagrams to poset nerves. The statement is unchanged. Maintainer-reader repair (Q130 review): the join-cone/coherent-cocone translation is cited from lem-coef-join-slice-cocone-comparison (lem-coef-infinity-join-cocone-associativity does not state it), and the cofinal poset replacement of HTT Variants 4.2.3.15/4.2.3.16 with Proposition 4.1.1.8 is the new statement-only node lem-coef-infinity-poset-nerve-cofinal-replacement; lem-coef-infinity-cofinal-comma-criterion was dropped because it requires the target K to be a quasicategory.",
+  "blueprint": "The steps realize the auxiliary HTT 5.3.5.15(a) reduction cited in the blueprint ancestor prop-coef-integral-exceptional-adjoint: Remark 5.3.1.12 supplies the poset-nerve criterion and Variants 4.2.3.15/16 supply the cardinal cases."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q130-212d82370",
+  "group": "Q130",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-212d82370 (reviewer sub-agent of L); spot-checked: I read the item, all four cited nodes and their neighbours in full, and HTT at the cited places: Def 4.1.1.1, Prop 4.1.1.8 (pp.225-226), Prop 4.2.1.5, Prop 4.2.3.14 and Variants 4.2.3.15-16 (pp.254-256), Remark 5.3.1.12 (p.383). HTT was read from a PDF fetched from the node's URL; it is not archived. The statement matches Remark 5.3.1.12 exactly (|B|<kappa, empty poset included, no colimit hypothesis). I tested it on B empty, a point, two discrete points, 0<1, kappa=aleph_0, and E empty or terminal. Three repairable faults. (1) C4: step 1 cites lem-coef-infinity-join-cocone-associativity to identify a coherent (transformation) cocone with a map N(B)*Delta^0 -> E, but that node never states this comparison; it is in lem-coef-join-slice-cocone-comparison. Step 1 was also marked elementary while doing this. (2) C4: step 2 has the same misattribution, from extension to cocone on q. (3) C1+E1: step 2 quotes HTT Variants 4.2.3.15/16 with no node, then applies lem-coef-infinity-cofinal-comma-criterion with J=K. That node requires quasicategories, but K is an arbitrary kappa-small simplicial set, and HTT's cofinality there is the right-fibration notion of Def 4.1.1.1. Fixes: new statement-only unsplit node lem-coef-infinity-poset-nerve-cofinal-replacement (from HTT 4.2.3.15/16 with 4.1.1.8(1)=>(2) and 4.2.1.5; kappa-smallness for uncountable kappa checked from the construction). It is not a duplicate, after rg over dag/nodes and the main-20261015 blueprint. Its Mathlib record has three greps; LeanSearch and Loogle could not be reached from this machine and are recorded as unavailable, so it needs a re-search on the Codex machine. Both item steps are rewritten to cite lem-coef-join-slice-cocone-comparison, which is in the same unit, split and reviewed. Step 1 now writes out N(B)*Delta^0=N(B^triangleright). Step 2 uses the new node's Map equivalence on pi_0 and checks K empty. The associativity and comma-criterion citations are dropped, and proof_deps equals the union of the uses. There is no cycle, the item's statement, source and blueprint fields are unchanged, and no tool_uses are needed. The report also lists a citations.json that is not in the delivery. WANTED: HTT for the literature archive.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }
