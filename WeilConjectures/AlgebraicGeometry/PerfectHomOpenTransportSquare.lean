@@ -8,7 +8,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectHomTransport
 
-
 public import WeilConjectures.AlgebraicGeometry.PerfectHomTransportExtension
 import all WeilConjectures.AlgebraicGeometry.PerfectHomTransportExtension
 public import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
@@ -32,7 +31,7 @@ section TransportCalculations
 variable [∀ Z : Scheme.{u}, HasDerivedCategory.{w}
   (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-attribute [local irreducible] perfectHomComposition derivedPullback
+attribute [local irreducible] perfectHomComposition
 
 private theorem tr_comp_source {W X Y Z : Scheme.{u}}
     (h : W ⟶ X) (p : X ⟶ Y) (i : Y ⟶ Z)
@@ -80,7 +79,6 @@ private theorem trTo_comp_source {W X Y Z : Scheme.{u}}
   rw [tr_comp_source]
   simp only [Category.assoc, Iso.hom_inv_id_app_assoc,
     Iso.hom_inv_id_app, Category.comp_id]
-
 
 private theorem homMap_natural {X S : Scheme.{u}} (s : X ⟶ S)
     {T T' : Over S} (g : T' ⟶ T) {P P' Q Q' : schemeDerivedCategory X}
