@@ -1,0 +1,110 @@
+{
+ "id": "def-trf-complete-toric-local-model",
+ "kind": "definition",
+ "title": "Complete toric local models",
+ "statement": "Let $P$ be a commutative monoid, written additively, $n\\geq0$, and for a local ring $L$ let $B_L(P,n)$ be the completion [def-weil-pbc-adic-completion] of $L[P][t_1,\\ldots,t_n]$ at $(\\mathfrak m_L,z^q\\ (q\\neq0),t_1,\\ldots,t_n)$. A commutative ring $R$ with a map $z:P\\to R$ is a complete toric local model if either (i) there are a field $k$ and a ring isomorphism $e:B_k(P,n)\\to R$ with $z(q)=e(z^q)$ for all $q\\in P$, or (ii) there are a Cohen ring $C$ of residue characteristic $p$ [def-weil-pbc-cohen-ring], an element $\\theta\\in B_C(P,n)$ with $\\theta-p\\in(z^q\\ (q\\neq0),t_1,\\ldots,t_n)B_C(P,n)$, and a ring isomorphism $e:B_C(P,n)/(\\theta)\\to R$ with $z(q)=e(\\overline{z^q})$ for all $q\\in P$.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-cohen-ring"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé VI 1.6(i)--(ii), printed p. 70: the complete models k[[P]][[t_1..t_n]] and C[[P]][[t_1..t_n]]/(theta) with theta - p in the ideal of the monomials and parameters."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WeilDivisor|MonoidFacet|ToricCompletion",
+   "results": "no exact existing project declaration",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "primitive facet forms and completed toric monoid algebra",
+   "results": "generic monoid algebra and tensor hits only",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AffineWeilClassGroup, MonoidFacetForm, IsCompleteToricLocalModel",
+   "results": "no exact match",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-complete-toric-boundary-class-injectivity",
+  "date": "2026-10-18",
+  "group": "Q135"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2) nearby-duality alteration ancestry of lem-trf-local-term-locality, through log-regular divisorial structure: Class-group input to the complete-local recognition equality: the cokernel of the primitive facet-valuation map injects into the Weil divisor class group of the completed model (the Mori-type injectivity issue in the return).",
+   "via": [
+    "lem-trf-complete-toric-boundary-class-injectivity",
+    "lem-trf-complete-toric-kato-recognition",
+    "lem-trf-complete-toric-monomial-factors",
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompleteToricLocalModel",
+  "declaration": "AddMonoidAlgebra.IsCompleteToricLocalModel",
+  "file": "lean/Sheaf/RingTheory/CompleteToricLocalModel.lean",
+  "statement": "def IsCompleteToricLocalModel {P : Type uP} [AddCommMonoid P] (n : ℕ) (R : Type uR) [CommRing R] (z : P → R) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q135",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "AddMonoidAlgebra.IsCompleteToricLocalModel"
+  ],
+  "note": "Reviewer fix: B_L(P,n), its completion ideal and its boundary ideal are the published AddMonoidAlgebra.CompletedLocalModel, localModelCompletionIdeal and completedLocalModelBoundaryIdeal of lem-trf-log-regular-saturation-normality (Sheaf.RingTheory.LogRegularSaturationNormality, newtargets-dag); the delivered private copies (toricParameterIdeal, toricCompletionIdeal, ToricCompletion, toricMonomial, completedToricParameterIdeal) were removed (H4/H12); only the two-case predicate is new.",
+  "fixed_by": "NT-stage2-cc-a469435ec"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a469435ec",
+  "group": "Q135",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a469435ec",
+  "group": "Q135",
+  "result": "fix",
+  "note": "Statement matches node clause by clause: fs+sharp P, n, two complete-model cases via IsCohenRing (p prime), Noetherian+IsIntegrallyClosed domain, nonzero monomials, MonoidFacetForm = primitive nonnegative facet forms (codim-1 zero span), boundary primes/valuation (length = DVR valuation)/exhaustive hypotheses, injective beta with representative formula; edge cases P={0} (no facets, zero source), n=0, universes u/v/w/t free. Findings fixed: H4/H12 def-trf-complete-toric-local-model duplicated published AddMonoidAlgebra.CompletedLocalModel/localModelCompletionIdeal/localModelBoundaryIdeal/completedLocalModelBoundaryIdeal (Sheaf.RingTheory.LogRegularSaturationNormality, proof dep of the item) and Q148 completeToricChart; module now states only IsCompleteToricLocalModel on the published declarations, item signature verbatim unchanged, stmt_deps unchanged. H8: added headers, module docstrings, source+blueprint docstrings on all declarations (Stacks 0BE0/0BE2/0BE3/0BE4/02RJ/02MD, ILO VI 1.6 p.70), 12-step proof docstring on the item. H12: new nodes get TeX statements and concrete source places; Weil class group node cites def-weil-pbc-localization-at-prime. nt_compile --json: delivered and fixed 4-module sets rc=0 clean; stage2_delivery check_new_node/check_lean_text pass on the fixed records."
+ }
+}

@@ -14,7 +14,10 @@
   "def-weil-pbc-normal-ring",
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-localization-at-prime",
-  "def-sc-discrete-valuation-ring"
+  "def-sc-discrete-valuation-ring",
+  "def-trf-affine-weil-divisor-class-group",
+  "def-trf-sharp-monoid-facet-forms",
+  "def-trf-complete-toric-local-model"
  ],
  "proof": [
   {
@@ -246,5 +249,24 @@
   "group": "Q29",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-f84d25864 (reviewer sub-agent of L); spot-checked: Read the full mathematics and wrote review.md. All twelve steps check out against the cited statements, ILO model presentations, Stacks 031S/031T/00PD, and Mathlib’s power-series unit criterion. No new nodes, cycles, duplicate splits, weakened hypotheses, or long-step violations. Accepted both declared Serre/S2 tool uses; no fixes needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a469435ec",
+  "group": "Q135",
+  "result": "fix",
+  "note": "Statement matches node clause by clause: fs+sharp P, n, two complete-model cases via IsCohenRing (p prime), Noetherian+IsIntegrallyClosed domain, nonzero monomials, MonoidFacetForm = primitive nonnegative facet forms (codim-1 zero span), boundary primes/valuation (length = DVR valuation)/exhaustive hypotheses, injective beta with representative formula; edge cases P={0} (no facets, zero source), n=0, universes u/v/w/t free. Findings fixed: H4/H12 def-trf-complete-toric-local-model duplicated published AddMonoidAlgebra.CompletedLocalModel/localModelCompletionIdeal/localModelBoundaryIdeal/completedLocalModelBoundaryIdeal (Sheaf.RingTheory.LogRegularSaturationNormality, proof dep of the item) and Q148 completeToricChart; module now states only IsCompleteToricLocalModel on the published declarations, item signature verbatim unchanged, stmt_deps unchanged. H8: added headers, module docstrings, source+blueprint docstrings on all declarations (Stacks 0BE0/0BE2/0BE3/0BE4/02RJ/02MD, ILO VI 1.6 p.70), 12-step proof docstring on the item. H12: new nodes get TeX statements and concrete source places; Weil class group node cites def-weil-pbc-localization-at-prime. nt_compile --json: delivered and fixed 4-module sets rc=0 clean; stage2_delivery check_new_node/check_lean_text pass on the fixed records."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompleteToricBoundaryClassInjectivity",
+  "declaration": "AddMonoidAlgebra.completeToric_boundaryClass_injective",
+  "file": "lean/Sheaf/RingTheory/CompleteToricBoundaryClassInjectivity.lean",
+  "statement": "theorem completeToric_boundaryClass_injective (P : Type u) [AddCommMonoid P] (hfs : AlgebraicGeometry.IsFineSaturatedMonoid (Multiplicative P)) (hsharp : ∀ q : Multiplicative P, IsUnit q → q = 1) (n : ℕ) (R : Type w) [CommRing R] [IsDomain R] [IsNoetherianRing R] [IsIntegrallyClosed R] (z : P → R) (hmodel : IsCompleteToricLocalModel.{t, u, w} n R z) (hmonomial : ∀ q : P, z q ≠ 0) (F : Type v) [Fintype F] (facets : F ≃ MonoidFacetForm P) (primes : F → Ring.WeilHeightOnePrime R) (hdistinct : Function.Injective primes) (hboundary : ∀ i : F, (primes i).1.asIdeal = Ideal.span {b | ∃ q : P, (facets i).1 (GrothendieckAddGroup.of q) ≠ 0 ∧ b = z q}) (hvaluation : ∀ (i : F) (q : P), Ring.weilOrder (primes i) (z q) = (facets i).1 (GrothendieckAddGroup.of q)) (hexhaustive : ∀ q : Ring.WeilHeightOnePrime R, (∃ a : P, z a ∈ q.1.asIdeal) ↔ ∃ i : F, primes i = q) : ∃ β : ((F → ℤ) ⧸ (monoidFacetVector facets).range) →+ Ring.AffineWeilClassGroup R, Function.Injective β ∧ ∀ m : F → ℤ, β (QuotientAddGroup.mk m) = QuotientAddGroup.mk (∑ i : F, Finsupp.single (primes i) (m i))",
+  "branch": "newtargets-dag",
+  "by": "Q135",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-a469435ec"
  }
 }
