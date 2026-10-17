@@ -2,7 +2,7 @@
  "id": "lem-asd-supported-kummer-support-hom-naturality",
  "kind": "statement",
  "title": "Naturality of the supported Hom identification under base change",
- "statement": "Let $A$ be a commutative ring, $h:T'\\to T$ a morphism of schemes [def-pc-scheme], $i:D\\hookrightarrow T$ a closed immersion [def-weil-closed-immersion], and $i':D'=T'\\times_TD\\hookrightarrow T'$ its scheme-theoretic pullback [def-pc-fibre-product]. Put $V=T-D$ and $V'=T'-D'$. Work in ordinary small etale module derived categories [def-weil-pbc-derived-categories], using inverse and direct image [def-weil-pbc-inverse-image, def-weil-pbc-direct-image] and constant sheaves [def-weil-pbc-constant-sheaf]. The canonical closed-immersion exchange $e:h^{-1}i_*A_D\\to i'_*A_{D'}$ is an isomorphism. For every bounded-below complex $K$ of $A_T$-module sheaves and integer $q$, in the abstract derived category [def-weil-abstract-derived-category] put\n$$H^q(T,V;K)=H^q(\\operatorname{Cone}(R\\Gamma(T,K)\\to R\\Gamma(V,K|_V))[-1]),$$\nwith etale cohomology [def-weil-pbc-etale-cohomology]. Use the canonical supported-Hom identification [lem-amb-closed-support-hom] $\\Phi_{T,D,K}^q:H^q(T,V;K)\\cong\\operatorname{Hom}_{D(T_{\\mathrm{et}},A)}(i_*A_D,K[q])$. Then pullback $P_h$ on the relative section complexes satisfies\n$$\\Phi_{T',D',h^{-1}K}^q(P_h x)=(h^{-1}\\Phi_{T,D,K}^q(x))\\circ e^{-1}.$$\nHere $P_h$ is induced by the canonical derived section pullback maps on $T$ and $V$, with their restriction-compatible comparison. The same identifications make forgetting support equal to precomposition by the constant unit $A_T\\to i_*A_D$.",
+ "statement": "Let $A$ be a commutative ring, $h:T'\\to T$ a morphism of schemes [def-pc-scheme], and\n$i:D\\hookrightarrow T$ a closed immersion [def-weil-closed-immersion]. Choose schemes $D',V',V$\nand maps $i':D'\\hookrightarrow T'$, $h_D:D'\\to D$, $v:V\\hookrightarrow T$, $v':V'\\hookrightarrow T'$\nand $h_V:V'\\to V$ such that $(h_D,i',i,h)$ and $(h_V,v',v,h)$ are pullback squares\n[def-pc-fibre-product], and $V,V'$ are the open complements of $D,D'$.\nWork in ordinary small etale module derived categories [def-weil-pbc-derived-categories], using\ninverse and direct image [def-weil-pbc-inverse-image, def-weil-pbc-direct-image] and constant\nsheaves [def-weil-pbc-constant-sheaf]. There are canonical restriction chain maps $q,q'$,\na canonical closed-immersion exchange $e:h^{-1}i_*A_D\\to i'_*A_{D'}$, and natural cone\ncomparisons identifying the shifted restriction cones with derived Hom from the closed constant\nsheaves [lem-amb-closed-support-hom]. The exchange is an isomorphism. For every bounded-below\ncomplex $K$ of $A_T$-module sheaves and integer $q$, the induced relative-section pullback\n$P_h$ satisfies\n$$\\Phi_{T',D',h^{-1}K}^q(P_h x)=\n(h^{-1}\\Phi_{T,D,K}^q(x))\\circ e^{-1},$$\nwhere $\\Phi$ is the canonical supported-Hom identification. The same identifications make\nforgetting support equal to precomposition by the constant unit $A_T\\to i_*A_D$.\nHere the constant coefficient, unit and exchange are the unrestricted helper constructions of [def-asd-ordinary-finite-p1-kummer-class] and [def-asd-ordinary-supported-kummer-boundary]. On functorial degreewise-injective K-injective models I and J, the resolution comparison a:h^{-1}I→J extends the pulled-back resolution unit. The two section maps are section pullback followed by a; their diagonal shifted-cone map defines P_h. The supported Hom map sends c to a∘h^{-1}c∘e^{-1}. The cone comparison is normalized by the kernel inclusion c↦(0,c∘η), using evaluation at 1 to identify Hom(A_T,I) with global sections. Forgetting support is projection of this shifted cone to Γ(T,I), with that fixed target.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 0A45, lemma-cohomology-with-support-triangle; agent refinement of the natural support-Hom interface in blueprint lem-amb-closed-support-hom and the penultimate paragraph of lem-amb-cartier-kummer-map (ordinary etale pullback of the relative section complex)"
@@ -17,7 +17,9 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-abstract-derived-category",
   "def-weil-pbc-etale-cohomology",
-  "lem-amb-closed-support-hom"
+  "lem-amb-closed-support-hom",
+  "def-asd-ordinary-supported-kummer-boundary",
+  "def-asd-ordinary-finite-p1-kummer-class"
  ],
  "proof": [
   {
@@ -354,5 +356,69 @@
   "group": "Q149",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-3501975e4 (reviewer sub-agent of L); spot-checked: Read the item, every cited node statement (with blueprint_updates), the full proof of lem-amb-closed-support-hom, unit sk-prop-sf-cbc, the main-20261015 blueprint texts lem-amb-closed-support-hom and lem-amb-cartier-kummer-map (the penultimate-paragraph sentence 'all cone maps … commute with pullback of the pair'), and Stacks 0A45, 04FX, 095L, 03Q1 and 08BJ. The statement is unchanged, the coefficient category is ordinary constant étale A-modules, and base change is ordinary inverse image with the underived closed exchange plus h_D^{-1}A_D=A_{D'}. Step checks: (1) the stalk identity on D' comes from the upperstar and lowerstar nodes; off D' both stalks are 0 by the direct-image formula, because h^{-1}D=D' as sets; conservativity finishes it. (2) The unit compatibility e∘h^{-1}η=η' holds on constant sections. (3) Resolutions are redone on T', so pullback is not assumed to preserve injectives. (4) The Hom sequence 0→C→E→B→0 is exact on the right by injectivity, and the counit formula makes the map restriction. (5) The 08BJ hypotheses are met: v_! is exact and left adjoint to v^{-1}. (6) I recomputed the sign of Cone(r)[-1] from def-weil-abstract-derived-category: d(b,s)=(-d_B b - r s, d_E s). Both lifts for the kernel-inclusion quasi-isomorphism are correct, and the normalization matches the parent's construction (c↦(0,c)) and the blueprint. (7) Both squares of chain maps commute strictly. (8) The cone homotopy (-s_B,s_E) is correct. (9) The derived reading of H^q(f_C) and the inverted ι give the formula. (10) Forgetting support is p∘ι=k=−∘η. Edge cases D=∅, D=T, h=id, h through V', A=0, K=0 and all q check out. A–F: one commit, no new nodes, proof_deps equals the union of the uses, all 12 off-unit statement tools are declared, and I accept them. Minor caveat, not a fault: step 6 fixes Φ to the parent's kernel-inclusion normalization, which the item's own statement calls canonical. Observation for the maintainer: the existing unsplit node lem-pur-supported-hom-pullback (Q128) contains an étale clause that is a special case of this item (A=A_{E,n}); it can cite this item when it is split. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportedKummerSupportHomNaturality",
+  "declaration": "AlgebraicGeometry.Etale.supportedKummerSupportHomNaturality",
+  "declarations": [
+   "AlgebraicGeometry.Etale.supportedResolution",
+   "AlgebraicGeometry.Etale.supportedHomComplex",
+   "AlgebraicGeometry.Etale.supportedHomObject",
+   "AlgebraicGeometry.Etale.supportedHomModelMap",
+   "AlgebraicGeometry.Etale.supportedEvaluateSection",
+   "AlgebraicGeometry.Etale.supportedPullbackComplex",
+   "AlgebraicGeometry.Etale.SupportedHomConeModel",
+   "AlgebraicGeometry.Etale.supportedRelativeObject",
+   "AlgebraicGeometry.Etale.supportedHomIdentification",
+   "AlgebraicGeometry.Etale.SupportedKummerSupportHomData",
+   "AlgebraicGeometry.Etale.supportedRelativePullback",
+   "AlgebraicGeometry.Etale.supportedHomPullback",
+   "AlgebraicGeometry.Etale.supportedKummerSupportHomNaturality"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedKummerSupportHomNaturality.lean",
+  "statement": "theorem supportedKummerSupportHomNaturality (A : Type (u + 1)) [CommRing A] {T' T D' D V' V : Scheme.{u}} (h : T' ⟶ T) (i : D ⟶ T) [IsClosedImmersion i] (i' : D' ⟶ T') (hD : D' ⟶ D) (sqD : IsPullback hD i' i h) [IsClosedImmersion i'] (v : V ⟶ T) (v' : V' ⟶ T') [IsOpenImmersion v] [IsOpenImmersion v'] (hV : V' ⟶ V) (sqV : IsPullback hV v' v h) (hcomp : Set.range v.base = (Set.range i.base)ᶜ) (hcomp' : Set.range v'.base = (Set.range i'.base)ᶜ) : ∃ N : SupportedKummerSupportHomData A h i i' hD v v' sqD hV sqV, (∀ (K : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) (_hK : ∃ b : ℤ, ∀ n : ℤ, n < b → IsZero (K.X n)) (n : ℤ), (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} A) n).map (supportedRelativePullback A N K) ≫ (supportedHomIdentification A N.targetModel (supportedPullbackComplex A h K) n).hom = (supportedHomIdentification A N.sourceModel K n).hom ≫ (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} A) n).map (supportedHomPullback A N K)) ∧ (∀ (K : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) (n : ℤ), (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} A) n).map (DerivedCategory.Q.map (N.sourceModel.projection K)) = (supportedHomIdentification A N.sourceModel K n).hom ≫ (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} A) n).map ((N.sourceModel.modelIso K).hom ≫ DerivedCategory.Q.map (N.sourceModel.toSections K))) ∧ (∀ (K : CochainComplex (Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) (n : ℤ), (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} A) n).map (DerivedCategory.Q.map (N.targetModel.projection K)) = (supportedHomIdentification A N.targetModel K n).hom ≫ (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} A) n).map ((N.targetModel.modelIso K).hom ≫ DerivedCategory.Q.map (N.targetModel.toSections K)))",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical exchange and unit are reused from OrdinarySupportedKummerBoundary. The normalized model fields fix all representative maps by component equations. The actual localized diagonal-cone pullback, inverse-image Hom pullback and fixed-target cone projections occur in the theorem, with no free cohomology maps."
+ },
+ "statement_change": {
+  "date": "2026-10-17",
+  "by": "Q58 stage 2",
+  "old_statement": "Let $A$ be a commutative ring, $h:T'\\to T$ a morphism of schemes [def-pc-scheme], $i:D\\hookrightarrow T$ a closed immersion [def-weil-closed-immersion], and $i':D'=T'\\times_TD\\hookrightarrow T'$ its scheme-theoretic pullback [def-pc-fibre-product]. Put $V=T-D$ and $V'=T'-D'$. Work in ordinary small etale module derived categories [def-weil-pbc-derived-categories], using inverse and direct image [def-weil-pbc-inverse-image, def-weil-pbc-direct-image] and constant sheaves [def-weil-pbc-constant-sheaf]. The canonical closed-immersion exchange $e:h^{-1}i_*A_D\\to i'_*A_{D'}$ is an isomorphism. For every bounded-below complex $K$ of $A_T$-module sheaves and integer $q$, in the abstract derived category [def-weil-abstract-derived-category] put\n$$H^q(T,V;K)=H^q(\\operatorname{Cone}(R\\Gamma(T,K)\\to R\\Gamma(V,K|_V))[-1]),$$\nwith etale cohomology [def-weil-pbc-etale-cohomology]. Use the canonical supported-Hom identification [lem-amb-closed-support-hom] $\\Phi_{T,D,K}^q:H^q(T,V;K)\\cong\\operatorname{Hom}_{D(T_{\\mathrm{et}},A)}(i_*A_D,K[q])$. Then pullback $P_h$ on the relative section complexes satisfies\n$$\\Phi_{T',D',h^{-1}K}^q(P_h x)=(h^{-1}\\Phi_{T,D,K}^q(x))\\circ e^{-1}.$$\nHere $P_h$ is induced by the canonical derived section pullback maps on $T$ and $V$, with their restriction-compatible comparison. The same identifications make forgetting support equal to precomposition by the constant unit $A_T\\to i_*A_D$.",
+  "what": "The old statement left the complements and comparison maps implicit. The explicit formulation introduces their scheme maps and pullback squares and specifies the actual operations on K-injective representatives. The returned existential interface did not fix these operations: zero or rescaled maps could satisfy its equations. The repair fixes the exchange to the published mate, the resolution comparison to an extension of the resolution unit, the relative pullback to the diagonal cone map, the Hom pullback to inverse-image/precomposition, the cone isomorphism to the kernel-inclusion normalization, and forgetting support to projection to global sections. The additional dependencies supply already-published unrestricted constant/unit/exchange helpers; no finite coefficient or Cartier-divisor hypothesis is added.",
+  "source": {
+   "document": "literature/stacks-project/etale-cohomology.tex",
+   "place": "Tag 0A45, lemma-cohomology-with-support-triangle; blueprint sec-smooth-purity/sk-prop-sf-cbc, penultimate supported-Hom paragraph"
+  },
+  "citers": [
+   {
+    "id": "lem-asd-ordinary-supported-kummer",
+    "holds": true,
+    "note": "Uses the canonical closed exchange, support-Hom pullback and forgetting-support normalization; all remain valid with the now-explicit representative formulas."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-scheme",
+   "def-weil-closed-immersion",
+   "def-pc-fibre-product",
+   "def-weil-pbc-derived-categories",
+   "def-weil-pbc-inverse-image",
+   "def-weil-pbc-direct-image",
+   "def-weil-pbc-constant-sheaf",
+   "def-weil-abstract-derived-category",
+   "def-weil-pbc-etale-cohomology",
+   "lem-amb-closed-support-hom"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a7df4fc1b",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Checked the immutable statement, dependencies, source passages, canonical map specifications, universes, edge cases, verbatim signature, and sole citer. Both scompile checks passed; no landing defects found.",
+  "statement_corrected": true
  }
 }
