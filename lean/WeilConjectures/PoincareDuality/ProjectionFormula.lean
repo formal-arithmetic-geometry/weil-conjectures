@@ -79,17 +79,34 @@ direction is chosen so that the Verdier exchange morphism can be defined from it
 
 @[expose] public section
 
+noncomputable section
+
 universe u
 
 open CategoryTheory MonoidalCategory
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
+attribute [local irreducible] Functor.rightDerivedFunctor Functor.mapDerivedCategory
+  DerivedCategory.monoidalClosed Mod.monoidalClosed AlgebraicGeometry.ProEtale.upperStarFromPoint
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+
+local instance projectionMonoidal (Z : Scheme.{u}) :
+    MonoidalCategory (DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :=
+  Mod.derivedMonoidalCategory
+
+local instance projectionTensorData (Z : Scheme.{u}) :
+    MonoidalCategoryStruct (DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :=
+  (projectionMonoidal (Λ := Λ) Z).toMonoidalCategoryStruct
+
+attribute [local instance 3000] projectionMonoidal projectionTensorData
 
 /-! ### The projection morphism of `Lg^* ⊣ Rg_*` -/
 
@@ -254,8 +271,17 @@ lemma boundedConstructibleExceptionalProjectionMorphism_natural_right (K : Dᵇc
         boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K B' =
       boundedConstructibleExceptionalProjectionMorphism Λ ℓ f K B ≫
         (boundedConstructibleLowerShriek Λ ℓ f).map
-          (K ◁ (boundedConstructibleUpperStar Λ ℓ f).map h) :=
-  sorry
+          (K ◁ (boundedConstructibleUpperStar Λ ℓ f).map h) := by
+  apply ObjectProperty.hom_ext (boundedConstructible (condensedRingObj Λ Y.left))
+  dsimp only [boundedConstructibleExceptionalProjectionMorphism,
+    boundedConstructibleLowerShriek, boundedConstructibleLowerShriekOfCompactification,
+    boundedConstructibleOpenImmersionLowerShriek, boundedConstructibleLowerStar,
+    boundedConstructibleUpperStar, ObjectProperty.lift, ObjectProperty.ι,
+    ObjectProperty.homMk, Functor.comp_obj, Functor.comp_map,
+    ObjectProperty.instMonoidalCategoryStructFullSubcategory,
+    ObjectProperty.FullSubcategory.comp_hom]
+  exact exceptionalProjectionMorphismOfCompactification_natural_right Λ
+    (compactificationOverField f) K.obj h.hom
 
 /-- The exceptional projection morphism on bounded constructible complexes is natural in its
 first variable. Like `boundedConstructibleExceptionalProjectionMorphism_natural_right`, it
