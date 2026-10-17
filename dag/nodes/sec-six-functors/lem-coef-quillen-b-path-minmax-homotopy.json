@@ -10,9 +10,71 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $I=\\Delta^1$. By [def-cbc-enhanced-diagrams-cones], $I_m$ consists of monotone maps $[m]\\to[1]$ with restriction operators. For $\\sigma,\\tau\\in I_m$ define $\\mu_m(\\sigma,\\tau)(i)=\\min(\\sigma(i),\\tau(i))$ and $\\nu_m(\\sigma,\\tau)(i)=\\max(\\sigma(i),\\tau(i))$. Both functions are monotone: increasing both inputs cannot decrease either their minimum or maximum. For every monotone $\\alpha:[l]\\to[m]$, pointwise evaluation gives $\\mu_m(\\sigma,\\tau)\\alpha=\\mu_l(\\sigma\\alpha,\\tau\\alpha)$ and the identical equation for $\\nu$. Thus these are simplicial maps $I\\times I\\to I$, exactly the nerve maps of the stated order maps on $[1]\\times[1]$. In each degree their endpoint identities are $\\mu(\\sigma,0)=0$, $\\mu(\\sigma,1)=\\sigma$, $\\nu(\\sigma,0)=\\sigma$, $\\nu(\\sigma,1)=1$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0148",
+    "place": "Construction 3.6.5.1 provides background on simplicial families only; agent-written coordinate verification of the min/max formula extracted from Step 5 of lem-coef-quillen-b-discrete-fibration-base-change. No realization theorem is used."
+   }
+  },
+  {
+   "text": "Unpack the degreewise pullbacks and internal functor simplicial sets in [def-cbc-enhanced-diagrams-cones]. An $n$-simplex of $F_z$ is $(x,\\Gamma)$ with $x\\in X_n$ and a simplicial map $\\Gamma:I\\times\\Delta^n\\to Z$ such that $\\Gamma(0,-)=r x$ and $\\Gamma(1,-)=z_n$, the constant $n$-simplex at $z$. Here $x$ also denotes the map $\\Delta^n\\to X$ sending $\\xi:[m]\\to[n]$ to $X(\\xi)x$; its naturality is the presheaf composition identity. Strict commutation gives $(v\\Gamma)(0,-)=fu x$, $(v\\Gamma)(1,-)=v z_n$, so $(u x,v\\Gamma,z_n)$ lies in $Q_z$. The constant path at $fu x=vr x$ gives $k(x)\\in Q$. Also $qk=r$, so $(k(x),\\Gamma)$ lies in $\\operatorname{hofib}_z(q)$; for $y\\in(Q_z)_n$, $(y,\\operatorname{const}_{z_n})$ lies there too. Postcomposition, restrictions and constant maps commute with all simplex operators. These observations verify that the specified $k,g_z,h_z,j_z$ are simplicial maps with the asserted targets.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0148",
+    "place": "Construction 3.6.5.1 provides background on simplicial families only; agent-written coordinate verification of the min/max formula extracted from Step 5 of lem-coef-quillen-b-discrete-fibration-base-change. No realization theorem is used."
+   }
+  },
+  {
+   "text": "For an $n$-simplex $((x,\\Gamma),\\tau)$ of $F_z\\times I$, with $\\tau:\\Delta^n\\to I$, define simplicial maps on $\\Delta^n$ or $I\\times\\Delta^n$ by\n$$y(a)=\\Gamma(\\tau(a),a),\\quad P(s,a)=v\\Gamma(\\min(s,\\tau(a)),a),\\quad L(s,a)=\\Gamma(\\max(s,\\tau(a)),a).$$\nThese are composites of product maps, the maps $\\mu,\\nu$ of Step 1, and $\\Gamma,v$; the notation retains $a$ throughout. Their endpoint equations are\n$$P(0,a)=v\\Gamma(0,a)=fu x(a),\\quad P(1,a)=v y(a),\\quad L(0,a)=y(a),\\quad L(1,a)=z_n(a).$$\nConsequently $Y=(u x,P,y)$ is an $n$-simplex of $Q$ and $(Y,L)$ is an $n$-simplex of $\\operatorname{hofib}_z(q)$, since $qY=y$. This uses precisely the pullback and path-fiber definitions of [def-cbc-enhanced-diagrams-cones]. Set $H_n((x,\\Gamma),\\tau)=(Y,L)$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0148",
+    "place": "Construction 3.6.5.1 provides background on simplicial families only; agent-written coordinate verification of the min/max formula extracted from Step 5 of lem-coef-quillen-b-discrete-fibration-base-change. No realization theorem is used."
+   }
+  },
+  {
+   "text": "Check the outer simplex parameter, rather than only vertices. For $\\alpha:[m]\\to[n]$, restriction replaces $x,\\Gamma,\\tau$ by $x\\alpha$, $\\Gamma\\circ(\\mathrm{id}_I\\times\\Delta(\\alpha))$, $\\tau\\alpha$. For any simplex parameter $a$ of $\\Delta^m$, the resulting three coordinates are\n$$\\Gamma(\\tau(\\alpha a),\\alpha a),\\quad v\\Gamma(\\min(s,\\tau(\\alpha a)),\\alpha a),\\quad\\Gamma(\\max(s,\\tau(\\alpha a)),\\alpha a).$$\nThese are exactly the restrictions of $y,P,L$ from Step 3 along $\\Delta(\\alpha)$, with the $s$ coordinate unchanged. The $u x$ coordinate restricts to $u(x\\alpha)$ since $u$ is simplicial. Thus $H_m((x\\alpha,\\Gamma\\circ(\\mathrm{id}_I\\times\\Delta(\\alpha))),\\tau\\alpha)=\\operatorname{hofib}_z(q)(\\alpha)H_n((x,\\Gamma),\\tau)$. Hence the $H_n$ assemble to a simplicial map $F_z\\times I\\to\\operatorname{hofib}_z(q)$, using the restriction operators of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0148",
+    "place": "Construction 3.6.5.1 provides background on simplicial families only; agent-written coordinate verification of the min/max formula extracted from Step 5 of lem-coef-quillen-b-discrete-fibration-base-change. No realization theorem is used."
+   }
+  },
+  {
+   "text": "At the constant endpoint $\\tau=0$, Step 1 gives $y=rx$, $P=\\operatorname{const}_{fu x}$ and $L=\\Gamma$. Therefore $H|_0=((u x,\\operatorname{const}_{fu x},rx),\\Gamma)=h_z$. At $\\tau=1$, it gives $y=z_n$, $P=v\\Gamma$ and $L=\\operatorname{const}_{z_n}$, so $H|_1=((u x,v\\Gamma,z_n),\\operatorname{const}_{z_n})=j_zg_z$. These identities hold in every degree, which is exactly the claimed cylinder homotopy and its displayed formula. The Kan hypotheses allow the homotopy-fiber terminology of [def-cbc-enhanced-diagrams-cones]; no horn filling, choice of a point in a fiber, or additional hypothesis has entered the construction. If $F_z$ is empty, each $H_n$ is the unique function from the empty set, so the same endpoint equalities hold.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/0148",
+    "place": "Construction 3.6.5.1 provides background on simplicial families only; agent-written coordinate verification of the min/max formula extracted from Step 5 of lem-coef-quillen-b-discrete-fibration-base-change. No realization theorem is used."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/0148",
+  "place": "Construction 3.6.5.1 provides background on simplicial families only; agent-written coordinate verification of the min/max formula extracted from Step 5 of lem-coef-quillen-b-discrete-fibration-base-change. No realization theorem is used."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -55,10 +117,45 @@
    "results": "{\"t\": \"2026-10-17T08:41:19Z\", \"tool\": \"leanfinder\", \"query\": \"A strictly commuting square of Kan complexes has a constant path map to its path pullback; the induced homotopy fiber map is simplicially homotopic to the strict fiber comparison followed by constant paths\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.PathObject.trans_ι\", \"HomotopicalAlgebra.PathObject.trans_p₀\", \"HomotopicalAlgebra.PathObject.trans_P\", \"HomotopicalAlgebra.PrepathObject.trans_ι\", \"HomotopicalAlgebra.PathObject.trans_p₁\", \"HomotopicalAlgebra.PathObject.trans\", \"HomotopicalAlgebra.PrepathObject.trans_p₀\", \"HomotopicalAlgebra.PrepathObject.trans_P\"], \"digest\": \"d57b1a209d1c2029\"}",
    "date": "2026-10-17",
    "verdict": "no match: homological-complex homotopy fibers, generic relative-homotopy definitions, and abstract path-object composition do not state this explicit min/max homotopy. Read Mathlib/Algebra/Homology/HomotopyFiber.lean:29-58, AlgebraicTopology/SimplicialSet/RelativeMorphism.lean:85-95, and AlgebraicTopology/ModelCategory/PathObject.lean:267-306."
+  },
+  {
+   "tool": "grep",
+   "query": "min.*max|max.*min|homotopyFiber|homotopy_fiber",
+   "results": "{\"t\": \"2026-10-17T12:07:24Z\", \"tool\": \"grep\", \"query\": \"min.*max|max.*min|homotopyFiber|homotopy_fiber\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned topological path homotopies, finite edge-string intervals and generic simplicial homotopy definitions do not state the specified min/max comparison; the AlgebraicTopology grep returned no hits. Read RelativeMorphism.lean:85-95, Homotopy.lean:47-65, Path.lean:107-142,250-280, and Topology/Homotopy/Path.lean:425-433."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Homotopy\"",
+   "results": "{\"t\": \"2026-10-17T12:07:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"Homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory₂\", \"SSet.Truncated.instCategoryHomotopyCategory₂\", \"SSet.Truncated.HomotopyCategory₂.instCategoryStruct\", \"SSet.Truncated.HomotopyCategory₂.Hom\", \"SSet.Truncated.HomotopyCategory₂.homMk_id\", \"SSet.Truncated.HomotopyCategory₂.mk\", \"SSet.Truncated.HomotopyCategory₂.pt\", \"SSet.Truncated.HomotopyCategory₂.mk_surjective\"], \"digest\": \"4642944b66c62684\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned topological path homotopies, finite edge-string intervals and generic simplicial homotopy definitions do not state the specified min/max comparison; the AlgebraicTopology grep returned no hits. Read RelativeMorphism.lean:85-95, Homotopy.lean:47-65, Path.lean:107-142,250-280, and Topology/Homotopy/Path.lean:425-433."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The min and max maps of the simplicial interval construct a homotopy between the mapping path fiber comparison and the inclusion by constant paths",
+   "results": "{\"t\": \"2026-10-17T12:07:28Z\", \"tool\": \"leanfinder\", \"query\": \"The min and max maps of the simplicial interval construct a homotopy between the mapping path fiber comparison and the inclusion by constant paths\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GenLoop.homotopyFrom\", \"GenLoop.homotopyTo\", \"ContinuousMap.Homotopy.diagonalPath\", \"unitInterval.uhpath01\", \"Path.Homotopy.reflTransSymmAux\", \"ContinuousMap.Homotopy.diagonalPath'\", \"ContinuousMap.Homotopy.prodToProdTopI\", \"Path.toHomotopyConst_apply\"], \"digest\": \"b704786b1744c31e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned topological path homotopies, finite edge-string intervals and generic simplicial homotopy definitions do not state the specified min/max comparison; the AlgebraicTopology grep returned no hits. Read RelativeMorphism.lean:85-95, Homotopy.lean:47-65, Path.lean:107-142,250-280, and Topology/Homotopy/Path.lean:425-433."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homotopy using minimum and maximum of the simplicial interval identifies the constant path comparison on homotopy fibers",
+   "results": "{\"t\": \"2026-10-17T12:07:55Z\", \"tool\": \"leansearch\", \"query\": \"A homotopy using minimum and maximum of the simplicial interval identifies the constant path comparison on homotopy fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Path.toHomotopyConst\", \"Path.Homotopic.Quotient.refl\", \"Path.toHomotopyConst_apply\", \"SSet.RelativeMorphism.Homotopy.h\", \"ContinuousMap.Homotopy.mk.congr_simp\", \"Path.Homotopy.reflTransSymm\", \"ContinuousMap.HomotopyWith.Simps.apply\", \"SSet.RelativeMorphism.Homotopy.ofEq_h\"], \"digest\": \"d0242c6b9262fb40\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned topological path homotopies, finite edge-string intervals and generic simplicial homotopy definitions do not state the specified min/max comparison; the AlgebraicTopology grep returned no hits. Read RelativeMorphism.lean:85-95, Homotopy.lean:47-65, Path.lean:107-142,250-280, and Topology/Homotopy/Path.lean:425-433."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a commuting square of simplicial sets, deform a path into its initial segment and final segment using connections on the interval",
+   "results": "{\"t\": \"2026-10-17T12:07:56Z\", \"tool\": \"leanfinder\", \"query\": \"For a commuting square of simplicial sets, deform a path into its initial segment and final segment using connections on the interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Path.interval\", \"SSet.Path.map_interval\", \"SSet.Truncated.Path.interval\", \"SSet.Truncated.Path.map_interval\", \"SSet.Truncated.StrictSegal.spineToSimplex_interval\", \"SSet.StrictSegal.spineToSimplex_interval\", \"SSet.Truncated.Path.mk₂\", \"SSet.Truncated.Path.mk₂_arrow\"], \"digest\": \"c87b0ab1e2ceeab8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned topological path homotopies, finite edge-string intervals and generic simplicial homotopy definitions do not state the specified min/max comparison; the AlgebraicTopology grep returned no hits. Read RelativeMorphism.lean:85-95, Homotopy.lean:47-65, Path.lean:107-142,250-280, and Topology/Homotopy/Path.lean:425-433."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-quillen-b-discrete-fibration-base-change",
@@ -85,5 +182,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-quillen-b-path-minmax-homotopy",
+  "worker": "stage1",
+  "summary": "Preserved the statement and gave five explicit elementary coordinate steps: monotone interval connections, typing the comparison maps, the candidate homotopy and its pullback equations, full simplex-operator compatibility, and the two endpoints including empty fibers. Only the existing enhanced-diagram definition is needed; no new nodes, no attachment, no compiler. Read the online Kerodon background and the actual parent split, and reran logged searches in all four modes plus a second semantic phrasing.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 (derived coefficient adjunction); the intervening coherent-localization infrastructure leads to Step 5 of lem-coef-quillen-b-discrete-fibration-base-change. This item verifies its extracted min/max homotopy, without invoking the parent theorem or changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q144-7b01b8b11",
+  "group": "Q144",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-7b01b8b11 (reviewer sub-agent of L); spot-checked: I read the item, its only cited node def-cbc-enhanced-diagrams-cones, the parent's Step 5, the unit and chapter records, and the historical ancestor prop-coef-integral-exceptional-adjoint in full. The delivery has no new nodes, and the statement is unchanged and matches exactly how the parent's Step 5 uses it (H i_0 = h_z, H i_1 = j_z g_z). Using the def's conventions (Fun(K,C)_n = Hom(K×Δ^n, C); hofib paths run from f(a) to b), I checked the typing of g_z, h_z and j_z and every endpoint of H: P(0)=fux, P(1)=v(y), L(0)=y, L(1)=z. I also checked t=0 gives h_z and t=1 gives j_z g_z, with no path reversal. Small cases tested: empty X, Z with no vertices, all objects a point, constant γ, and nondegenerate τ=id_[1] with nonconstant Γ. Steps 1-5 (monotone connections, typing, construction, naturality in α, endpoints) are genuinely elementary from the def node, and none uses another node's proof. There is no cycle and no SGA. Duplicate search: rg over the DAG, and I read lem-coef-kan-pullback-path-comparison, lem-coef-quillen-b-comma-homotopy-fiber, lem-cbc-right-fibration-space-fiber, lem-coef-space-path-fibration-replacement and lem-coef-pointwise-constant-target-square-assembly. None of them states this homotopy. The hypothesis that Q is Kan is redundant but harmless. The Kerodon source is background only: proof_origin is honestly 'agent', and a WANTED line is filed. This is not a target node, so no base-change or coefficient check applies. No tool_uses and no fixes."
  }
 }

@@ -10,9 +10,69 @@
  "stmt_deps": [
   "def-nagata-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check that the rules produce reduced composable words. An identity input preserves the word and identifies $x=y$. If the input $f$ is nonidentity and the word is empty or begins in the other factor, adjoining $f$ gives the required alternating nonidentity list with source $x$. In the remaining case write $w=h\\,v$, where $h:y\\to a$ has the tag of $f$ and $v$ is empty or begins in the other factor. The composite $h\\circ f:x\\to a$ is defined by [def-nagata-category]. If it is nonidentity, its tag differs from the first tag of $v$, so $(h\\circ f)\\,v$ is reduced. If it is an identity, $a=x$, and $v$ is already a reduced word from $x$ to $z$. These mutually exclusive cases give a single value in $R(x,z)$; no iteration or choice of reductions is used.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Dwyer–Kan, Calculating simplicial localizations, proof of Proposition 3.2, printed p.21; agent expansion of the categorical prepend-action law, case 1."
+   }
+  },
+  {
+   "text": "The identity rule gives $P_{\\mathrm{id}_x}(w)=w$ directly. To prove the composition law, fix $f:x\\to y$ and $g:y\\to u$ in one factor $t$. If $f$ is an identity, $P_f(P_g(w))=P_g(w)=P_{g\\circ f}(w)$ by the right identity law in [def-nagata-category]. If $g$ is an identity, $P_f(P_g(w))=P_f(w)=P_{g\\circ f}(w)$ by the left identity law. Hence assume both $f$ and $g$ nonidentity and put $c=g\\circ f$.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Dwyer–Kan, Calculating simplicial localizations, proof of Proposition 3.2, printed p.21; agent expansion of the categorical prepend-action law, case 2."
+   }
+  },
+  {
+   "text": "Suppose $w$ is empty or its first tag differs from $t$. Then $P_g(w)=g\\,w$. Applying $P_f$ merges $f$ with this first letter: it gives $w$ if $c$ is an identity and $c\\,w$ otherwise. These are exactly the two values of $P_c(w)$ under the rules in the statement (in the identity case $x=u$). Thus the composition law holds in this case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Dwyer–Kan, Calculating simplicial localizations, proof of Proposition 3.2, printed p.21; agent expansion of the categorical prepend-action law, case 3."
+   }
+  },
+  {
+   "text": "Otherwise write $w=h\\,v$ with $h:u\\to a$ a nonidentity arrow in factor $t$; the reduced tail $v$ is empty or begins with the other tag. Put $d=h\\circ g:y\\to a$. First suppose $d$ nonidentity. Then $P_g(w)=d\\,v$, and $P_f(P_g(w))$ is $v$ if $e=d\\circ f$ is an identity and $e\\,v$ otherwise. Associativity in [def-nagata-category] gives $e=(h\\circ g)\\circ f=h\\circ(g\\circ f)=h\\circ c$. If $c$ is nonidentity, the rule for $P_c(h\\,v)$ gives exactly those same two outputs. If $c=\\mathrm{id}_x$, then $x=u$, $e=h\\circ\\mathrm{id}_x=h$ is nonidentity, and both sides equal $h\\,v=w$.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Dwyer–Kan, Calculating simplicial localizations, proof of Proposition 3.2, printed p.21; agent expansion of the categorical prepend-action law, case 4."
+   }
+  },
+  {
+   "text": "Finally suppose $d=h\\circ g=\\mathrm{id}_y$, so $a=y$ and $P_g(w)=v$. Since $f$ is nonidentity and $v$ is empty or begins with the other tag, $P_f(P_g(w))=f\\,v$. If $c=g\\circ f$ is nonidentity, associativity and the identity law in [def-nagata-category] give $h\\circ c=(h\\circ g)\\circ f=f$, which is nonidentity, so $P_c(h\\,v)=f\\,v$. If $c=\\mathrm{id}_x$, then $x=u$ and $f=(h\\circ g)\\circ f=h\\circ(g\\circ f)=h$, again by those axioms. Consequently $P_c(w)=w=h\\,v=f\\,v$. Together with the previous cases this proves the law for every $w$. The argument includes noninvertible retractions as well as inverse pairs; it never infers $g\\circ h=\\mathrm{id}$ from $h\\circ g=\\mathrm{id}$.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Dwyer–Kan, Calculating simplicial localizations, proof of Proposition 3.2, printed p.21; agent expansion of the categorical prepend-action law, case 5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+  "place": "Proof of Proposition 3.2, printed p.21, unique alternating factorization; the source omits the prepend-action calculation. The five explicit cases here are an agent-written expansion, not a quoted lemma of Dwyer–Kan."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -76,10 +136,38 @@
    "results": "{\"t\": \"2026-10-17T08:31:06Z\", \"tool\": \"grep\", \"query\": \"instance summandAction|theorem equivPair_smul_same\", \"sub\": \"GroupTheory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/PushoutI.lean\", \"Mathlib/GroupTheory/CoprodI.lean\", \"Mathlib/GroupTheory/CoprodI.lean\"], \"digest\": \"3ca7ac723409a3d4\"}",
    "date": "2026-10-17",
    "verdict": "no match: read Mathlib/GroupTheory/CoprodI.lean:88-110,338-341,426-430,476-499. Word.summandAction is the analogous result for a family of monoids, whose multiplication is total. The present statement concerns arrows with varying source and target and a partial composition law. Constructing a monoid encoding and proving that its reduction restricts to typed paths is not a one-line specialization. The PushoutI.lean:440 summand action is likewise for groups, with a prescribed amalgamated subgroup, not categories."
+  },
+  {
+   "tool": "grep",
+   "query": "summandAction|equivPair_smul_same",
+   "results": "{\"t\": \"2026-10-17T12:04:46Z\", \"tool\": \"grep\", \"query\": \"summandAction|equivPair_smul_same\", \"sub\": \"GroupTheory/CoprodI.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"476\", \"496\"], \"digest\": \"85a751fbd524e952\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: CoprodI.lean:476-483 and 496-499 provide the monoid analogue, with total multiplication; typed categorical composition needs the present case analysis and is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduced left concatenation gives an action of each factor category on alternating composable words",
+   "results": "{\"t\": \"2026-10-17T12:04:47Z\", \"tool\": \"leansearch\", \"query\": \"Reduced left concatenation gives an action of each factor category on alternating composable words\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FreeGroup.Red.to_append_iff\", \"CategoryTheory.MonoidalCategory.MonoidalLeftAction.term_⊴ₗ_\", \"CategoryTheory.MonoidalCategory.MonoidalLeftAction.actionHom_comp_assoc\", \"CategoryTheory.MonoidalCategory.MonoidalLeftAction.term_⊙ₗₘ_\", \"CategoryTheory.MonoidalCategory.MonoidalLeftAction.actionHomRight_comp\", \"CategoryTheory.MonoidalCategory.MonoidalLeftAction.term_⊵ₗ_\", \"Monoid.CoprodI.Word.of_smul_def\", \"CategoryTheory.MonoidalCategory.MonoidalLeftAction.actionHomRight_comp_assoc\"], \"digest\": \"5d53946ef6b6ef03\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: FreeGroup.Red.to_append_iff is free-group inverse cancellation; the MonoidalLeftAction laws assume an existing monoidal action; Monoid.CoprodI.Word.of_smul_def is only the monoid analogue (CoprodI.lean:493-494). None supplies the typed categorical construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "Monoid.CoprodI.Word.summandAction",
+   "results": "{\"t\": \"2026-10-17T12:04:47Z\", \"tool\": \"loogle\", \"query\": \"Monoid.CoprodI.Word.summandAction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Monoid.CoprodI.Word.summandAction\", \"Monoid.CoprodI.Word.smul_eq_of_smul\", \"Monoid.CoprodI.Word.smul_def\"], \"digest\": \"c8474746b78a7170\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read Mathlib/GroupTheory/CoprodI.lean:426-430,476-499. The action is for monoids, not arbitrary categories on a common object set."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Prepending tagged arrows to reduced alternating composable paths in two categories respects composition within each factor",
+   "results": "{\"t\": \"2026-10-17T12:04:50Z\", \"tool\": \"leanfinder\", \"query\": \"Prepending tagged arrows to reduced alternating composable paths in two categories respects composition within each factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ComposableArrows.Precomp.map_comp\", \"CategoryTheory.ComposableArrows.Mk₁.map_comp\", \"CategoryTheory.ComposableArrows.twoδ₂Toδ₁\", \"CategoryTheory.ComposableArrows.homMkSucc\", \"CategoryTheory.ComposableArrows.Precomp.map\", \"CategoryTheory.ComposableArrows.twoδ₁Toδ₀\", \"CategoryTheory.composePath_cons\", \"CategoryTheory.ComposableArrows.mapFunctorArrows_app\"], \"digest\": \"bffef219ad8b681e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/ComposableArrows/Basic.lean:323-365,410. Precomp constructs unreduced fixed-length composable chains; its map_comp is functoriality of a chain, not reduction of alternating two-factor words. composePath_cons evaluates ordinary paths and does not supply this action."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-free-factor-category-normal-form",
@@ -108,5 +196,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-reduced-word-prepend-action",
+  "worker": "stage1",
+  "summary": "Kept the statement and its category-definition dependency unchanged. Supplied a complete five-step direct case analysis for well-definedness, units, and factor-composition, including both identity-composite branches and noninvertible retractions. Only the category axioms are used; no new lemma or normal-form/confluence result is assumed. Reused the recorded prior Mathlib searches and checked fresh searches and candidate sources; no typed categorical match or blueprint duplicate exists.",
+  "blueprint": "Realizes the existing from.place: the categorical-word foundation below the finite-adjunction/mapping-space calculation in the second paragraph of prop-coef-integral-exceptional-adjoint.proof.md, through Dwyer–Kan Proposition 3.2. Expands the prepend action extracted from step 2 of lem-coef-free-factor-category-normal-form, preserving all from/via metadata.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-f87fc033e",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-f87fc033e (reviewer sub-agent of L); spot-checked: I read the whole item and its parent; there are no new nodes. The statement is unchanged and gives exactly what the parent's normal-form proof (steps 2–3) uses: P_f maps R(y,z) to R(x,z), P_id=id, and P_f∘P_g=P_{g∘f}. I checked all five steps by hand. They cover well-definedness, the identity inputs, the empty or other-tag word, a surviving head composite (including c=id_x, where e=h), and a deleted head composite (f=h∘(g∘f)=h when c=id). Each uses only the associativity and identity laws of def-nagata-category, a Mathlib leaf, and never infers a two-sided inverse. I wrote my own brute-force check over two tagged copies of maps between sets of size 1 and 2, words of length up to 4: 32,040 instances, all pass. There is no cycle and no restated clause. No duplicate exists in the DAG; Mathlib's CoprodI.summandAction is only the monoid analogue, not a one-line specialization. The unit, chapter and blueprint via chain are consistent, and there are no tool_uses. Dwyer–Kan Prop. 3.2 is not in the local literature (filed as WANTED) and I did not read it. That is acceptable because proof_origin is correctly marked agent and the proof stands on its own. This is not a target node. No fixes."
  }
 }

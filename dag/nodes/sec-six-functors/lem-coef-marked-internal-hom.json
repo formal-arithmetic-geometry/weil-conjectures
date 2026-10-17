@@ -11,9 +11,101 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-weil-size-convention"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $\\alpha:[m]\\to[n]$ define $H(\\alpha)(h)=h\\circ(\\mathrm{id}_X\\times\\Delta(\\alpha))$. A simplicial map sends degenerate edges to degenerate edges, so $\\Delta(\\alpha):(\\Delta^m)^\\flat\\to(\\Delta^n)^\\flat$ preserves markings. Thus restriction takes the displayed set $H_n$ into $H_m$. The identity and composition equations follow by composition of these restriction maps. If $h\\in H_0$ is a vertex, the edge $s_0h$ is represented by $X\\times\\Delta^1\\to X\\xrightarrow{h}Y$. This projection preserves markings even on $X\\times(\\Delta^1)^\\sharp$, because a marked edge projects to a marked edge of $X$. Hence $s_0h$ is marked. This proves that the given simplicial set with its given subset of edges is a marked simplicial set. These are restriction and degeneracy calculations using the standard simplices and degreewise products, not a horn-filling assertion.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, opening paragraph before Remark 3.1.3.1, printed p.154 (PDF p.172); explicit degreewise verification supplied by the worker."
+   }
+  },
+  {
+   "text": "For marked maps $a:X'\\to X$ and $b:Y\\to Y'$, send $h\\in H(X,Y)_n$ to $b\\circ h\\circ(a\\times\\mathrm{id}_{\\Delta^n})$. Both precomposition and postcomposition preserve marked maps on the flat product. If $h$ is a marked edge, the same compositions preserve markings on the sharp-interval product, so its image is also a marked edge. These maps commute with restriction in $\\Delta^n$, and their identity and composition equations follow from associativity of composition. Therefore $H$ is contravariantly functorial in $X$ and covariantly functorial in $Y$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, opening paragraph before Remark 3.1.3.1, printed p.154 (PDF p.172); explicit degreewise verification supplied by the worker."
+   }
+  },
+  {
+   "text": "Define evaluation in degree $n$ by $E_n(h,x)=h_n(x,\\mathrm{id}_{[n]})$. For $\\alpha:[m]\\to[n]$, naturality of $h:X\\times\\Delta^n\\to Y$ gives $Y(\\alpha)E_n(h,x)=h_m(X(\\alpha)x,\\alpha)=E_m(H(\\alpha)h,X(\\alpha)x)$. Thus $E:H(X,Y)\\times X\\to Y$ is simplicial. If $h\\in H_1$ and $x\\in X_1$ are both marked, the sharp-extension condition on $h$ applies to the marked pair $(x,\\mathrm{id}_{[1]})$ in $X\\times(\\Delta^1)^\\sharp$. It gives $E_1(h,x)\\in M_Y$. Thus evaluation is a marked map. For any marked $g:Z\\to H(X,Y)$ its untranspose is $F=E\\circ(g\\times\\mathrm{id}_X)$, with $F_n(z,x)=(g_nz)_n(x,\\mathrm{id}_{[n]})$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, opening paragraph before Remark 3.1.3.1, printed p.154 (PDF p.172); explicit degreewise verification supplied by the worker."
+   }
+  },
+  {
+   "text": "Conversely, let $F:Z\\times X\\to Y$ be a marked map. For $z\\in Z_n$ define $h_z:X\\times\\Delta^n\\to Y$ in degree $m$ by $(h_z)_m(x,\\alpha)=F_m(Z(\\alpha)z,x)$, where $\\alpha:[m]\\to[n]$. For $\\beta:[r]\\to[m]$, naturality of $F$ makes both sides of the naturality equation equal to $F_r(Z(\\alpha\\beta)z,X(\\beta)x)$, so $h_z$ is simplicial. A marked edge of $X\\times(\\Delta^n)^\\flat$ is $(e,c_v)$, where $e\\in M_X$ and $c_v:[1]\\to[n]$ is constant at a vertex $v$. Since $Z(c_v)z=s_0(Z(v)z)$ is degenerate and therefore marked, $(h_z)_1(e,c_v)=F_1(Z(c_v)z,e)$ is marked. Hence $h_z\\in H_n$. Put $G_n(z)=h_z$. For $\\gamma:[k]\\to[n]$, the equality $(h_{Z(\\gamma)z})_m(x,\\alpha)=F_m(Z(\\gamma\\alpha)z,x)=(H(\\gamma)h_z)_m(x,\\alpha)$ proves that $G:Z\\to H(X,Y)$ is simplicial.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, opening paragraph before Remark 3.1.3.1, printed p.154 (PDF p.172); explicit degreewise verification supplied by the worker."
+   }
+  },
+  {
+   "text": "For a marked $z\\in Z_1$ and any edge $\\alpha:[1]\\to[1]$, the edge $Z(\\alpha)z$ is marked: $\\alpha$ is either the identity or one of the two constant maps, which give degenerate edges. Therefore $(h_z)_1(e,\\alpha)=F_1(Z(\\alpha)z,e)$ is marked for every marked $e\\in X_1$. These are precisely the marked edges of $X\\times(\\Delta^1)^\\sharp$, so $G(z)=h_z$ is marked. The transpose of a marked $F$ is consequently marked. Conversely, for any simplicial $g:Z\\to H(X,Y)$, naturality gives $(g_1z)_1(e,\\alpha)=(g_1(Z(\\alpha)z))_1(e,\\mathrm{id}_{[1]})$. If $g$ is marked, Step 3 gives marked $F$. If its untranspose $F$ is marked, the preceding three-edge calculation shows that $g_1z$ is marked whenever $z$ is marked. Thus the ordinary transpose preserves markings exactly when the untranspose carries every pair of marked edges of $Z$ and $X$ into $M_Y$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, opening paragraph before Remark 3.1.3.1, printed p.154 (PDF p.172); explicit degreewise verification supplied by the worker."
+   }
+  },
+  {
+   "text": "Untransposing the $G$ constructed in Step 4 recovers $F$, since $(h_z)_n(x,\\mathrm{id})=F_n(z,x)$. Conversely start with $g:Z\\to H(X,Y)$ and put $h=g_nz$. Transposing its evaluation gives in degree $m$ the value $(g_m(Z(\\alpha)z))_m(x,\\mathrm{id}_{[m]})$. Since $g_m(Z(\\alpha)z)=H(\\alpha)h$, this value is $h_m(x,\\alpha)$, so the original $g$ is recovered. These inverse equations prove the claimed bijection, and the formulas are the usual simplicial evaluation and transpose. Naturality also follows directly from them: for marked $c:Z'\\to Z$, $a:X'\\to X$, and $b:Y\\to Y'$, transposing $b\\circ F\\circ(c\\times a)$ gives at $(z',x',\\alpha)$ the value $b_mF_m(Z(\\alpha)c_nz',a_mx')$, which is the transpose of $F$ precomposed with $c$ and acted on by $H(a,b)$. Here naturality of $c$ identifies $Z(\\alpha)c_n$ with $c_mZ'(\\alpha)$. Thus all three naturalities hold. This proves the internal-Hom universal property.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, opening paragraph before Remark 3.1.3.1, printed p.154 (PDF p.172); explicit degreewise verification supplied by the worker."
+   }
+  },
+  {
+   "text": "Choose the common Grothendieck universe specified in [def-weil-size-convention] containing the degree sets of $X,Y,Z$. Each $(\\Delta^n)_m$ is finite. The set $H_n$ is a subset of the countable product of function sets $\\prod_{m\\geq0}\\operatorname{Map}(X_m\\times(\\Delta^n)_m,Y_m)$ cut out by naturality and preservation of marked edges. A Grothendieck universe is closed under these products, function sets and subsets. Its subset $M_H\\subseteq H_1$ belongs to that universe as well. The displayed evaluation, restriction and transpose functions use only these sets. Therefore neither the marked internal Hom nor the adjunction requires a universe enlargement.",
+   "uses": [
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 3.1.3, opening paragraph before Remark 3.1.3.1, printed p.154 (PDF p.172); explicit degreewise verification supplied by the worker."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-simplicial-set",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Section 3.1.3, opening paragraph before Remark 3.1.3.1, printed p.154 (PDF p.172); explicit degreewise verification supplied by the worker. HTT asserts the universal property; the proof here supplies the elementary formulas without invoking Cartesian closure as a black box. The PDF is not archived under literature/; see WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +141,52 @@
    "results": "{\"t\": \"2026-10-17T08:27:51Z\", \"tool\": \"grep\", \"query\": \"marked.?simplicial|MarkedSSet|MapSharp|mapSharp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: semantic hits are unmarked SSet monoidal closure or generic enrichment already assuming structure. Read Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean and SimplicialCategory/Basic.lean:53-72. They do not construct marked Homs or prove the marking-preservation equivalence; grep finds no marked-set implementation."
+  },
+  {
+   "tool": "grep",
+   "query": "MarkedSSet|marked.?simplicial|instMonoidalClosed",
+   "results": "{\"t\": \"2026-10-17T12:10:38Z\", \"tool\": \"grep\", \"query\": \"MarkedSSet|marked.?simplicial|instMonoidalClosed\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern unmarked SSet closure, general enrichment or simplicial operators; no marked internal-Hom construction or marking-preservation criterion. Read Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean and its pointwise closed-structure imports. Loogle could not resolve the generated instance name; this is not evidence against the unmarked instance."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Marked simplicial sets form a cartesian closed category with internal Hom defined by minimally marked simplices",
+   "results": "{\"t\": \"2026-10-17T12:10:38Z\", \"tool\": \"leansearch\", \"query\": \"Marked simplicial sets form a cartesian closed category with internal Hom defined by minimally marked simplices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instMonoidalClosed\", \"CategoryTheory.CartesianClosed\", \"SSet.instCartesianMonoidalCategory\", \"SSet.instFiniteTensorUnit\", \"SSet.whiskerRight_app_apply\", \"SSet.Truncated.instMonoidalClosed\", \"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\", \"SSet.instFiniteObjOppositeSimplexCategoryTensorObj\"], \"digest\": \"971f541cd3f88dd9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern unmarked SSet closure, general enrichment or simplicial operators; no marked internal-Hom construction or marking-preservation criterion. Read Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean and its pointwise closed-structure imports. Loogle could not resolve the generated instance name; this is not evidence against the unmarked instance."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.instMonoidalClosed",
+   "results": "{\"t\": \"2026-10-17T12:10:38Z\", \"tool\": \"loogle\", \"query\": \"SSet.instMonoidalClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'SSet.instMonoidalClosed'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern unmarked SSet closure, general enrichment or simplicial operators; no marked internal-Hom construction or marking-preservation criterion. Read Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean and its pointwise closed-structure imports. Loogle could not resolve the generated instance name; this is not evidence against the unmarked instance."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom of marked simplicial sets with n simplices maps from product with minimally marked simplex and marked exponential adjunction",
+   "results": "{\"t\": \"2026-10-17T12:10:40Z\", \"tool\": \"leanfinder\", \"query\": \"Internal Hom of marked simplicial sets with n simplices maps from product with minimally marked simplex and marked exponential adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instMonoidalClosed\", \"SSet.Truncated.instMonoidalClosed\", \"CategoryTheory.SimplicialCategory.sHom\", \"SSet.PtSimplex.MulStruct.map\", \"SSet.ι₀\", \"SSet.ι₁\", \"SSet.PtSimplex\", \"CategoryTheory.SimplicialThickening.SimplicialCategory.Hom\"], \"digest\": \"15c7bfcd3a398432\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern unmarked SSet closure, general enrichment or simplicial operators; no marked internal-Hom construction or marking-preservation criterion. Read Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean and its pointwise closed-structure imports. Loogle could not resolve the generated instance name; this is not evidence against the unmarked instance."
+  },
+  {
+   "tool": "grep",
+   "query": "marked|Marked|MonoidalClosed",
+   "results": "{\"t\": \"2026-10-17T12:11:58Z\", \"tool\": \"grep\", \"query\": \"marked|Marked|MonoidalClosed\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\"], \"digest\": \"b70df466507f210d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern unmarked SSet closure, general enrichment or simplicial operators; no marked internal-Hom construction or marking-preservation criterion. Read Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean and its pointwise closed-structure imports. Loogle could not resolve the generated instance name; this is not evidence against the unmarked instance."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplex of the exponential of marked simplicial sets is a map preserving markings in the first coordinate at every vertex, and marked edges preserve markings in both coordinates",
+   "results": "{\"t\": \"2026-10-17T12:11:59Z\", \"tool\": \"leanfinder\", \"query\": \"A simplex of the exponential of marked simplicial sets is a map preserving markings in the first coordinate at every vertex, and marked edges preserve markings in both coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.PtSimplex.MulStruct.map\", \"SSet.modelCategoryQuillen.J\", \"SSet.stdSimplex.objMk\", \"SSet.PtSimplex\", \"SSet.modelCategoryQuillen.I\", \"SSet.PtSimplex.RelStruct.map\", \"SSet.S.simplex\", \"SSet.S.map\"], \"digest\": \"c204719ed3adac9d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern unmarked SSet closure, general enrichment or simplicial operators; no marked internal-Hom construction or marking-preservation criterion. Read Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean and its pointwise closed-structure imports. Loogle could not resolve the generated instance name; this is not evidence against the unmarked instance."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-marked-point-cartesian-model",
@@ -79,5 +213,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-marked-internal-hom",
+  "worker": "stage1",
+  "summary": "Constructed the marked internal Hom and adjunction in seven elementary degreewise steps, with explicit evaluation and inverse transpose formulas, all marking checks, functoriality, naturality and universe bound. Statement unchanged; no new nodes. Searched project declarations and Mathlib; unmarked closure hits do not state the item.",
+  "blueprint": "main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, paragraph 2, displayed finite-coefficient derived mapping adjunction: technical marked Cartesian-closed foundations along the inherited marked-point-model ancestry, specifically its former proof step 7. No unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-cb93a5fc1",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-cb93a5fc1 (reviewer sub-agent of L); spot-checked: I read the item in full: its statement, steps 1-7, source, searches, blueprint and split_report. I also read the full statements of def-cbc-enhanced-diagrams-cones, def-weil-pbc-simplicial-set and def-weil-size-convention, the parent lem-coef-marked-point-cartesian-model (its step 7 cites only this item, for Y^X and the exponential adjunction), and the unit and chapter records. The statement matches the opening paragraph of HTT §3.1.3: Map^flat as the underlying simplicial set, with edges marked when they extend over (Delta^1)^sharp. It has no extra hypotheses and is not weakened. HTT is not in literature/, so the WANTED line and proof_origin=agent follow the §4 procedure. I recomputed every formula: restriction and degeneracy marking (step 1); functoriality, including marked edges (step 2); simpliciality and marking of evaluation, with Y(alpha)h_n(x,id)=h_m(X(alpha)x,alpha) (step 3); simpliciality of the transpose using Z(alpha beta)=Z(beta)Z(alpha), and the flat test through Z(c_v)z=s_0(Z(v)z) (step 4); the three-edge sharp check and its converse through (g_1z)_1(e,alpha)=F_1(Z(alpha)z,e) (step 5); both inverse identities and naturality in Z, X and Y (step 6); and the universe bound, where N is in U is left implicit but holds (step 7). All steps are genuinely elementary against the cited definitions, and proof_deps equals the union of the uses lists. Edge cases X empty, Y empty, X=(Delta^0)^sharp, and X=(Delta^1)^sharp with Y=(Delta^1)^flat all check out. There are no new nodes. An rg search for marked/sSet^+/Y^X found no duplicate: lem-coef-marked-sharp-enrichment, lem-coef-cat-infinity-colimits-cartesian-closure, lem-cbc-enhanced-relative-exponential and lem-coef-marked-anodyne-lifting-calculus all state other things. The item uses only definitions, so there are no route or tool_uses issues and nothing from SGA or Stacks. It is not a target node, so the base-change and coefficient checks do not apply. Minor point: source.place also names HTT Cor. 3.1.4.4, which the proof does not use; I made no fixes."
  }
 }

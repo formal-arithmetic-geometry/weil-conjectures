@@ -11,9 +11,54 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a simplex $\\sigma:\\Delta^n\\to X$. By [lem-weil-pbc-simplicial-set-nondegenerate-decomposition] there are a nondegenerate $\\bar\\sigma:\\Delta^r\\to X$ and a surjective monotone $s_\\sigma:[n]\\twoheadrightarrow[r]$ with $\\bar\\sigma\\Delta(s_\\sigma)=\\sigma$. Thus $c=(\\bar\\sigma,s_\\sigma)$ is an object of $D=(\\sigma\\downarrow B_X)$ by its displayed definition. The category $D$ is small: its objects are pairs of a simplex of the small $X$ and a monotone map of finite ordinals, and its arrows are subsets of the finite sets of monotone maps between the corresponding ordinals. Its nerve and the weak-equivalence convention are those of [def-cbc-enhanced-diagrams-cones].",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Variant 4.2.3.15(5) and Variant 4.2.3.16, first paragraph, printed p. 256 (PDF page 274); explicit agent expansion of the universal-arrow and nerve-contraction argument. Read online 2026-10-17; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Let $d=(\\tau,a)$ be any object of $D$. The hypotheses of [lem-coef-nondegenerate-simplex-face-poset] hold: $X$ is small and every nondegenerate simplex is degreewise injective, which is precisely its monomorphism condition. Its factorization clause gives exactly one $t:\\bar\\sigma\\to\\tau$ in $B_X$ with $t\\circ s_\\sigma=a$. By the definition of morphisms of $D$, such $t$ are exactly the morphisms $c\\to d$. Therefore each such hom-set has exactly one element, so $c$ is initial. This uses the factorization clause, not just the poset clause, and concerns all simplex operators $a$, including noninjective ones.",
+   "uses": [
+    "lem-coef-nondegenerate-simplex-face-poset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Variant 4.2.3.15(5) and Variant 4.2.3.16, first paragraph, printed p. 256 (PDF page 274); explicit agent expansion of the universal-arrow and nerve-contraction argument. Read online 2026-10-17; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Let $P:D\\to\\mathbf 1$ be the unique functor to the one-object, one-arrow category and let $Q:\\mathbf 1\\to D$ select $c$. Then $PQ=\\mathrm{id}_{\\mathbf 1}$, while $QP$ is the constant functor at $c$. The unique arrows $\\eta_d:c\\to d$ of step 2 define a natural transformation $QP\\Rightarrow\\mathrm{id}_D$: for $h:d\\to d\\prime$, both $h\\eta_d$ and $\\eta_{d\\prime}$ are arrows from $c$ to $d\\prime$ and hence are equal. Apply [lem-coef-nerve-natural-homotopy-equivalence] to these small categories, with this one-link transformation for $QP$ and the identity transformation for $PQ$. It gives that $NP:N(D)\\to N(\\mathbf 1)$ is a weak homotopy equivalence. By the ordinary nerve formula in [def-cbc-enhanced-diagrams-cones], $N(\\mathbf 1)$ has exactly one simplex in each degree and all operators are the unique functions, so it is $\\Delta^0$ and $NP$ is the unique map to it. By the definition of weak contractibility in that same node, $N(\\sigma\\downarrow B_X)$ is weakly contractible.",
+   "uses": [
+    "lem-coef-nerve-natural-homotopy-equivalence",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "HTT Variant 4.2.3.15(5) and Variant 4.2.3.16, first paragraph, printed p. 256 (PDF page 274); explicit agent expansion of the universal-arrow and nerve-contraction argument. Read online 2026-10-17; archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-nondegenerate-simplex-face-poset",
+  "lem-coef-nerve-natural-homotopy-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "HTT Variant 4.2.3.15(5) and Variant 4.2.3.16, first paragraph, printed p. 256 (PDF page 274); explicit agent expansion of the universal-arrow and nerve-contraction argument. Read online 2026-10-17; archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +94,45 @@
    "results": "{\"t\": \"2026-10-17T08:57:56Z\", \"tool\": \"leanfinder\", \"query\": \"In a nonsingular simplicial set each simplex has a universal arrow to a nondegenerate simplex, initial in its comma category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.KanComplex\", \"SSet.N.mk'_surjective\", \"SSet.S.toN\", \"SSet.N.mk\", \"SSet.N.nonDegenerate\", \"SSet.exists_nonDegenerate\", \"SSet.nonDegenerate\", \"SSet.N.mk'\"], \"digest\": \"ab01ece7edd5d513\"}",
    "date": "2026-10-17",
    "verdict": "no match: the hits SSet.exists_nonDegenerate, SSet.S.toN and SSet.S.existsUnique_toNπ give the nondegenerate decomposition, not initiality in the comma category of all maps into nondegenerate simplices or its nerve contractibility. Read NonDegenerateSimplices.lean:240-295 and Splitting.lean:14-48; the category-theoretic adjunction hits do not concern this inclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The nerve of the comma category of a simplex under the nondegenerate simplex subcategory has an initial object and is weakly contractible",
+   "results": "{\"t\": \"2026-10-17T11:25:04Z\", \"tool\": \"leanfinder\", \"query\": \"The nerve of the comma category of a simplex under the nondegenerate simplex subcategory has an initial object and is weakly contractible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.instIsCoskeletalNerveOfNatNat\", \"CategoryTheory.Nerve.quasicategory\", \"CategoryTheory.Nerve.isStrictSegal\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerve\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.nerveFunctor_obj\"], \"digest\": \"75bd1c5bea605046\"}",
+   "date": "2026-10-17",
+   "verdict": "no full match: nerve, strict-Segal and quasicategory declarations do not give comma initiality or nerve weak contractibility; existsUnique_toNπ in NonDegenerateSimplices.lean:278 gives only the surjective degeneracy operator, not factorization of every arrow into a nondegenerate simplex. isConnected_of_hasInitial in Limits/IsConnected.lean:171 gives only connectedness, not higher homotopy groups. Nonempty.lean:55 concerns an empty simplicial set as an initial object. Sources inspected; no exact or one-line match for the full item."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.nerve, IsInitial, SSet.Nonsingular",
+   "results": "{\"t\": \"2026-10-17T11:25:06Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.nerve, IsInitial, SSet.Nonsingular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsInitial'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Loogle reports unknown identifier IsInitial; this failed name query supplies no absence evidence. Other semantic searches and source inspection were used."
+  },
+  {
+   "tool": "grep",
+   "query": "initial object|weakly contractible|existsUnique_toNπ",
+   "results": "{\"t\": \"2026-10-17T11:25:06Z\", \"tool\": \"grep\", \"query\": \"initial object|weakly contractible|existsUnique_toNπ\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Nonempty.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NonDegenerateSimplices.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NonDegenerateSimplices.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NonDegenerateSimplices.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NonDegenerateSimplices.lean\"], \"digest\": \"02ce6e97b0df531c\"}",
+   "date": "2026-10-17",
+   "verdict": "no full match: nerve, strict-Segal and quasicategory declarations do not give comma initiality or nerve weak contractibility; existsUnique_toNπ in NonDegenerateSimplices.lean:278 gives only the surjective degeneracy operator, not factorization of every arrow into a nondegenerate simplex. isConnected_of_hasInitial in Limits/IsConnected.lean:171 gives only connectedness, not higher homotopy groups. Nonempty.lean:55 concerns an empty simplicial set as an initial object. Sources inspected; no exact or one-line match for the full item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ordinary category with an initial object has a weakly contractible nerve",
+   "results": "{\"t\": \"2026-10-17T11:31:53Z\", \"tool\": \"leansearch\", \"query\": \"An ordinary category with an initial object has a weakly contractible nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.isConnected_of_hasInitial\", \"CategoryTheory.WithInitial\", \"CategoryTheory.WithInitial.of\", \"CategoryTheory.Limits.HasInitial\", \"CategoryTheory.instInhabitedWithInitial\", \"CategoryTheory.WithInitial.instCategory\", \"CategoryTheory.to_initial_isIso\", \"CategoryTheory.WithInitial.instHasInitial\"], \"digest\": \"3e63f04ae380bf11\"}",
+   "date": "2026-10-17",
+   "verdict": "no full match: nerve, strict-Segal and quasicategory declarations do not give comma initiality or nerve weak contractibility; existsUnique_toNπ in NonDegenerateSimplices.lean:278 gives only the surjective degeneracy operator, not factorization of every arrow into a nondegenerate simplex. isConnected_of_hasInitial in Limits/IsConnected.lean:171 gives only connectedness, not higher homotopy groups. Nonempty.lean:55 concerns an empty simplicial set as an initial object. Sources inspected; no exact or one-line match for the full item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A unique factorization through the nondegenerate ancestor gives an initial object in the simplex comma category",
+   "results": "{\"t\": \"2026-10-17T11:31:54Z\", \"tool\": \"leanfinder\", \"query\": \"A unique factorization through the nondegenerate ancestor gives an initial object in the simplex comma category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategory.Truncated.initial_inclusion\", \"SimplexCategory.Truncated.initial_incl\", \"AugmentedSimplexCategory.instHasInitial\", \"SSet.Subcomplex.isInitialBot\", \"SSet.instFiniteInitial\", \"AugmentedSimplexCategory.inclusion_obj\", \"SSet.stdSimplex.isTerminalObj₀\", \"SimplexCategory.uniqueHomToZero\"], \"digest\": \"e2bf6a216a7f20e9\"}",
+   "date": "2026-10-17",
+   "verdict": "no full match: nerve, strict-Segal and quasicategory declarations do not give comma initiality or nerve weak contractibility; existsUnique_toNπ in NonDegenerateSimplices.lean:278 gives only the surjective degeneracy operator, not factorization of every arrow into a nondegenerate simplex. isConnected_of_hasInitial in Limits/IsConnected.lean:171 gives only connectedness, not higher homotopy groups. Nonempty.lean:55 concerns an empty simplicial set as an initial object. Sources inspected; no exact or one-line match for the full item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-poset-nerve-cofinal-replacement",
@@ -83,5 +163,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-nondegenerate-simplex-comma-initial",
+  "worker": "stage1",
+  "summary": "Kept the statement and its two statement dependencies unchanged. Wrote the universal-arrow proof of initiality using the existing face-poset factorization theorem and the explicit natural transformation from the constant initial-object functor to the identity. Applied the existing nerve homotopy-equivalence theorem to the point functor to prove exactly the weak-contractibility clause. No new nodes, attachments or Mathlib leaves. Read HTT online, checked all cited statements, source/Lean/DAG/blueprint searches and small cases; no Lean writing or compilation.",
+  "blueprint": "Historical ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, displayed derived Hom / derived limit adjunction. Through the recorded presentability and poset-replacement ancestry, this item realizes the universal-arrow and comma-contractibility details of HTT Variant 4.2.3.15(5), also explicitly motivated by Variant 4.2.3.16 first paragraph. The blueprint ancestor itself does not state this combinatorial lemma; no chapter or unit route changes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-326e97951",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-326e97951 (reviewer sub-agent of L); spot-checked: I read all three steps of the item and the statements of every cited node: face-poset (unsplit, same unit), nerve-natural-homotopy-equivalence (split and reviewed), the decomposition Mathlib leaf, def-cbc and def-coef-zigzag. The item statement is true. My proof: write α=i∘p (surjection then injection); τΔ(i) is injective and so nondegenerate; uniqueness of the decomposition gives p=s_σ; t is unique because s_σ is epi. I tested it on Δ^0 and on Δ^1 (a degenerate 2-simplex and a nondegenerate edge). The one-vertex circle shows the injectivity hypothesis is needed. Step 1: the decomposition leaf gives the object, and smallness is a direct count. Step 2: the face-poset factorization clause gives exactly the comma morphisms; the composition direction matches; it uses the cited statement, not its proof. Step 3: η:QP⇒id is natural by uniqueness of arrows from c; the nerve lemma's weak-equivalence convention matches def-cbc; N(1)=Δ^0, so weak contractibility follows. There are no new nodes, no cycle (face-poset does not cite the item), no off-unit citation and no tool use. My rg search of the DAG found no duplicate. HTT is not in literature/; the proof is marked agent-written and the archive copy is filed as WANTED. HTT Variant 4.2.3.16 (from memory, not checked against a local copy) states this left-adjoint setting. No SGA. No fixes written."
  }
 }

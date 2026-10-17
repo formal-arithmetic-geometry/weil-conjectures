@@ -11,11 +11,55 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-pinched-cube-latching"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $q_n:N(P_n)\\to Q^n$ for the quotient map in [lem-coef-pinched-cube-latching], and write $[I]$ for the vertex represented by a nonempty subset $I\\subseteq[n]$. Put $k=\\max I$. In the relation subcube with coordinate $k$ equal to $1$, the vertices $I$ and $\\{k\\}$ have identical (empty) coordinates strictly greater than $k$; hence $[I]=[\\{k\\}]$. Thus every vertex has a singleton representative. Moreover $Q^0$ has exactly one simplex in every degree, since $P_0=\\{\\{0\\}\\}$ and taking its quotient makes no change. These are direct uses of the stated degreewise quotient and nerve definitions.",
+   "uses": [
+    "lem-coef-pinched-cube-latching",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.2, cubical quotient and maximum augmentation immediately before Proposition 2.2.2.7, printed p.76; agent-written uniqueness argument for the normalization used in Proposition 3.2.1.14, printed p.177."
+   }
+  },
+  {
+   "text": "Let $b_\\bullet$ be a cosimplicial map as in the statement. For $k\\in[n]$ let $\\iota_k:[0]\\to[n]$ have value $k$. By the direct-image action in [lem-coef-pinched-cube-latching], $Q(\\iota_k)$ sends the sole vertex $v$ of $Q^0$ to $[\\{k\\}]$. The sole vertex of $\\Delta^0$ is $0$, so $b_0(v)=0$. Cosimplicial naturality therefore gives $b_n([\\{k\\}])=\\Delta(\\iota_k)(b_0(v))=k$. Step 1 now gives $b_n([I])=\\max I$ for every nonempty $I$. This calculation includes $n=0$ and both endpoint vertices.",
+   "uses": [
+    "lem-coef-pinched-cube-latching",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.2, cubical quotient and maximum augmentation immediately before Proposition 2.2.2.7, printed p.76; agent-written uniqueness argument for the normalization used in Proposition 3.2.1.14, printed p.177."
+   }
+  },
+  {
+   "text": "Fix $n,r\\geq0$ and an $r$-simplex $z$ of $Q^n$. The degreewise quotient supplies a representative chain $I_0\\subseteq\\cdots\\subseteq I_r$ of nonempty subsets. Its $j$th vertex is $[I_j]$: in the nerve, restriction along $[0]\\to[r]$ with value $j$ selects $I_j$, and the quotient map is simplicial. Since $b_n$ is simplicial, Step 2 says the $j$th vertex of $b_n(z)$ is $\\max I_j$. By the definition in [def-cbc-enhanced-diagrams-cones], an $r$-simplex of $\\Delta^n$ is a weakly increasing function $[r]\\to[n]$ and its $j$th vertex is its value at $j$. Thus $b_n(z)$ is exactly $j\\mapsto\\max I_j$. The descended nerve-of-maximum map $\\mu_n$ in [lem-coef-pinched-cube-latching] has this same value on the representative chain. Hence $b_n(z)=\\mu_n(z)$. Equality for every $r,z$ and then every $n$ proves $b_\\bullet=\\mu_\\bullet$.",
+   "uses": [
+    "lem-coef-pinched-cube-latching",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.2, cubical quotient and maximum augmentation immediately before Proposition 2.2.2.7, printed p.76; agent-written uniqueness argument for the normalization used in Proposition 3.2.1.14, printed p.177."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-pinched-cube-latching"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Section 2.2.2, cubical quotient and maximum augmentation immediately before Proposition 2.2.2.7, printed p.76; agent-written uniqueness argument for the normalization used in Proposition 3.2.1.14, printed p.177."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-relative-nerve-cone-left-comparison",
@@ -73,6 +117,55 @@
    "results": "8 hits; ; SSet.Truncated.HomotopyCategory.mkNatTrans, CategoryTheory.Limits.punitCone, CategoryTheory.CosimplicialObject.id_app, SSet.unitHomEquiv, CategoryTheory.Limits.Cones.eta, SSet.id_app, CategoryTheory.Limits.ConeMorphism.mk.noConfusion, CategoryTheory.WithTerminal.coneEquiv_counitIso_hom_app_hom",
    "date": "2026-10-17",
    "verdict": "no match: ordinary cone and homotopy-category natural transformation constructions do not state the pinched-cube assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every cosimplicial map from the pinched cube quotient Q n to the standard simplex Delta n equals the maximum of subsets augmentation",
+   "results": "{\"t\": \"2026-10-17T11:22:50Z\", \"tool\": \"leanfinder\", \"query\": \"Every cosimplicial map from the pinched cube quotient Q n to the standard simplex Delta n equals the maximum of subsets augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.stdSimplex\", \"SSet.Augmented.stdSimplex_obj_right\", \"SSet.Augmented.stdSimplex\", \"SSet.Augmented.stdSimplex_map_left\", \"SimplexCategory.toTopMap\", \"SSet.Augmented.stdSimplex_obj_hom_app\", \"SSet.Augmented.stdSimplex_map_right\", \"SSet.Augmented.StandardSimplex.extraDegeneracy\"], \"digest\": \"b6967802914dec92\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned standard or augmented simplices and ordinary nerve constructions, not uniqueness for the pinched-cube quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "CosimplicialObject NatTrans",
+   "results": "{\"t\": \"2026-10-17T11:22:51Z\", \"tool\": \"loogle\", \"query\": \"CosimplicialObject NatTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `CosimplicialObject`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: query rejected for unknown unqualified identifier; not evidence of absence. A corrected stdSimplex ext search was run separately."
+  },
+  {
+   "tool": "grep",
+   "query": "pinched|augmentation.*unique",
+   "results": "{\"t\": \"2026-10-17T11:22:51Z\", \"tool\": \"grep\", \"query\": \"pinched|augmentation.*unique\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no pinched quotient theorem; hits, when present, concern simplex Kan extensions, standard simplex extensionality or horn inclusions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The natural augmentation from a cosimplicial pinched cube quotient to standard simplices is unique because its vertices are indexed by simplex vertices",
+   "results": "{\"t\": \"2026-10-17T11:22:51Z\", \"tool\": \"leansearch\", \"query\": \"The natural augmentation from a cosimplicial pinched cube quotient to standard simplices is unique because its vertices are indexed by simplex vertices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CosimplicialObject.augment\", \"CategoryTheory.SimplicialObject.augment\", \"SSet.stdSimplex\", \"CategoryTheory.CosimplicialObject.augment_hom_app\", \"SSet.Augmented.stdSimplex\", \"SSet.instInhabited\", \"SSet.Augmented.stdSimplex_obj_left\", \"SSet.stdSimplex.obj₀Equiv\"], \"digest\": \"92c9c9ca5f1d00a5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned standard or augmented simplices and ordinary nerve constructions, not uniqueness for the pinched-cube quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural map from the cosimplicial quotient of nonempty subset nerves to standard simplices is forced by singleton vertices",
+   "results": "{\"t\": \"2026-10-17T11:26:49Z\", \"tool\": \"leanfinder\", \"query\": \"A natural map from the cosimplicial quotient of nonempty subset nerves to standard simplices is forced by singleton vertices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.stdSimplex.isoNerve_hom_app_apply\", \"SSet.stdSimplex.isoNerve\", \"SSet.stdSimplex.isoNerve_inv_app_apply\", \"CategoryTheory.SimplicialNerve\", \"SSet.OneTruncation₂.nerveEquiv_apply\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.nerve\", \"CategoryTheory.Nerve.nerveFunctor₂\"], \"digest\": \"4570cff209cd5c0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned standard or augmented simplices and ordinary nerve constructions, not uniqueness for the pinched-cube quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stdSimplex\", \"ext\"",
+   "results": "{\"t\": \"2026-10-17T11:26:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"stdSimplex\\\", \\\"ext\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.stdSimplex.ext\", \"SSet.stdSimplex.ext_iff\", \"SSet.Augmented.StandardSimplex.nonempty_extraDegeneracy_stdSimplex\", \"Convexity.StdSimplex.ext\", \"Convexity.StdSimplex.ext_iff\", \"Convexity.StdSimplex.affineMap_ext\", \"Convexity.StdSimplex.affineMap_ext_iff\", \"stdSimplex.ext\"], \"digest\": \"9a98ae504d3a0519\"}",
+   "date": "2026-10-17",
+   "verdict": "no full match: SSet.stdSimplex.ext and ext_iff give elementary function extensionality only (StdSimplex.lean:85-86 read); the quotient-vertex and cosimplicial argument remain necessary."
+  },
+  {
+   "tool": "grep",
+   "query": "pinch|maximum.*subset|subset.*maximum|stdSimplex.*ext",
+   "results": "{\"t\": \"2026-10-17T11:26:50Z\", \"tool\": \"grep\", \"query\": \"pinch|maximum.*subset|subset.*maximum|stdSimplex.*ext\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\"], \"digest\": \"c190f6443ae7ea45\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no pinched quotient theorem; hits, when present, concern simplex Kan extensions, standard simplex extensionality or horn inclusions."
   }
  ],
  "blueprint": {
@@ -92,5 +185,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-pinched-cube-augmentation-uniqueness",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Three elementary steps expand the degreewise quotient, fix singleton vertices by cosimplicial naturality from degree zero, and identify every target simplex by its vertex values. No new nodes; the existing cubical quotient theorem supplies all non-elementary input. Searched project Lean, the DAG, blueprint and Mathlib; no attachment or full Mathlib match found.",
+  "blueprint": "Realizes the point-normalization uniqueness argument extracted from the inherited relative-nerve comparison (now step 8), on the branch expanding the enhanced-diagram transport under thm-cbc-finite-level-proetale. The current blueprint theorem proof has no standalone pinched-cube uniqueness lemma; its ancestor and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-pinched-cube-latching",
+    "why": "Uses only the generic cubical quotient description, direct-image action and descended maximum map for the identical Q; this is a simplicial combinatorics tool, and the compact-support-base-change unit supplies no such quotient theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-pinched-cube-latching"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-6515a58e9",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-6515a58e9 (reviewer sub-agent of L); spot-checked: I read the whole item and the full statements of def-cbc-enhanced-diagrams-cones and lem-coef-pinched-cube-latching, including the latching node's quotient normal form and its direct-image step. The item uses only that node's statement: Q^n is the subcube quotient of N(P_n), monotone maps act by direct image, the max map descends, and Q^0=Delta^0. The statement is true, and I checked it by hand for n=0, for n=1 (where {0,1}~{1} and Q^1 is Delta^1) and for degenerate chains with repeated entries. Step 1 holds: [I]=[{max I}] by one generating relation at k=max I. Step 2 holds: naturality along iota_k:[0]->[n], together with b_0 being forced, gives b_n({k})=k. Step 3 holds: a quotient simplex has a representative chain, and a simplex of Delta^n is a function determined by its vertex values, so b_n=mu_n. All three steps are genuinely elementary and proof_deps equals the union of the uses. The delivery has no new nodes and is not a relabelling. There is no cycle: the latching node and def-cbc do not depend on the item. I searched for duplicates with rg over the snapshot DAG (pinched, and nodes mentioning both max and Q^n). I read the five candidates: marked-cone-generator-calculations, unstraightening-simplex-pointwise, coherent-prism-pinch-identity, rigidification-identity-action and diagonal-coherent-nerve-comparison. None states this uniqueness, so same_as=[] stands. The declared tool use of lem-coef-pinched-cube-latching, which belongs to unit sk-prop-sf-biduality-general, is accepted: only its statement is used, as a combinatorial description of Q, and the item's unit sk-prop-sf-cbc offers no substitute. The Mathlib searches of all three kinds are recorded and none matches. HTT is not in the local literature, so I did not open it; the WANTED entry is in the report. The proof is agent-written, uses no SGA, and nothing in it depends on HTT. The item is not a target node, so there is no base-change morphism or coefficient category to check. I made no fixes, and review.md is written."
  }
 }
