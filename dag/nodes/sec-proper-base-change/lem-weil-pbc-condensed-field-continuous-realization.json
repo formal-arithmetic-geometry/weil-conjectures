@@ -1,147 +1,177 @@
 {
-  "id": "lem-weil-pbc-condensed-field-continuous-realization",
-  "kind": "statement",
-  "title": "Canonical continuous-function realization for totally disconnected normed fields",
-  "statement": "For a normed field E with totally disconnected topology and any scheme X, the condensed coefficient ring of continuous E-valued functions is canonically isomorphic as a ring sheaf to the continuous-function ring sheaf on X_proet. The isomorphism is uniquely characterized by the adjoint equations on every profinite test function. In particular this applies to finite normed p-adic extensions on topologically noetherian X. The chosen isomorphism is determined uniquely, not chosen from undetermined existence.",
-  "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Example 3.1; agent rank/descent argument in original node, Canonical continuous-function realization for totally disconnected normed fields"
-  },
-  "stmt_deps": [
+ "id": "lem-weil-pbc-condensed-field-continuous-realization",
+ "kind": "statement",
+ "title": "Canonical continuous-function realization for totally disconnected normed fields",
+ "statement": "For a normed field E with totally disconnected topology and any scheme X, the condensed coefficient ring of continuous E-valued functions is canonically isomorphic as a ring sheaf to the continuous-function ring sheaf on X_proet. The isomorphism is uniquely characterized by the adjoint equations on every profinite test function. In particular this applies to finite normed p-adic extensions on topologically noetherian X. The chosen isomorphism is determined uniquely, not chosen from undetermined existence.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1; agent rank/descent argument in original node, Canonical continuous-function realization for totally disconnected normed fields"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof": [
+  {
+   "text": "Construct the adjoint by composing continuous test functions with the canonical projections |X[S]| → S. Prove naturality using the prime-spectrum homeomorphism for locally constant integer-valued functions and pullback projection identities. Transpose through the existing monoidal adjunction; the pushforward ring-object identity proves multiplicativity.",
+   "uses": [
     "def-weil-pbc-condensed-e-module-category"
-  ],
-  "proof": [
-    {
-      "text": "Construct the adjoint by composing each continuous test function with the canonical projection |X[S]| → S. Prove projection naturality and ring compatibility, then transpose through the existing monoidal adjunction. On an affine U, use the explicit component-map equivalence of [lem-weil-pbc-proetale-point-components-maps] to construct U → X[π₀(U)] and prove it terminal in the opposite comma category. Its Kan cocone leg is invertible. The comparison on U is composition with U → π₀(U); connected-component factorization and total disconnectedness of the finite normed extension E make this map bijective. On a weakly contractible affine, [lem-weil-pbc-proetale-sheafification-wcontractible-sections] identifies the sheafification unit as invertible. Uniqueness of left adjoints transfers the Kan comparison to the given composite inverse image. The affine covers of [lem-weil-pbc-proetale-affine-wcontractible-covering-family] make the resulting sheaf morphism locally bijective, hence invertible. The adjoint equations on all test functions imply uniqueness by injectivity of the adjunction equivalence.",
-      "uses": [
-        "lem-weil-pbc-proetale-point-components-maps",
-        "lem-weil-pbc-proetale-sheafification-wcontractible-sections",
-        "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
-        "def-weil-pbc-condensed-e-module-category"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-        "place": "Example 3.1; restriction and basis-gluing argument written out"
-      }
-    }
-  ],
-  "proof_deps": [
-    "lem-weil-pbc-proetale-point-components-maps",
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1; direct locally constant ring and connected-component argument formalized by D2"
+   }
+  },
+  {
+   "text": "Reuse the proved normalized pointComponentsEquiv and pointComponentsEquiv_apply from lem-weil-pbc-proetale-point-components-maps via the existing proof-only import all. Its explicit locally constant integer spectrum lift, affine transport, relative pullback-map equivalence and connected-components factorization identify maps U → X[S] with continuous maps π₀(U) → S for every affine U, with the evaluation formula needed below. No witness is chosen from the public existence theorem.",
+   "uses": [
+    "lem-weil-pbc-proetale-point-components-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1; direct locally constant ring and connected-component argument formalized by D2"
+   }
+  },
+  {
+   "text": "Naturality of the profinite projection shows target naturality of this normalized equivalence. Its inverse applied to the identity defines the canonical component arrow q:U → X[π₀(U)]. The equivalence and its target naturality show q is terminal in the opposite comma category. For a pointwise left Kan extension the corresponding cocone leg a is invertible by IsColimit.isIso_ι_app_of_isTerminal. Naturality of the comparison σ and its adjoint equation identify a followed by σ(U) with pullback of continuous functions along q. The normalization identifies this with composition along U → π₀(U). Surjectivity of the component quotient gives injectivity, and Continuous.connectedComponentsLift gives surjectivity for a totally disconnected coefficient field. Thus σ(U) is invertible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1; direct locally constant ring and connected-component argument formalized by D2"
+   }
+  },
+  {
+   "text": "On weakly contractible affine objects use lem-weil-pbc-proetale-sheafification-wcontractible-sections to identify the sheafification unit as invertible. Uniqueness of left adjoints compares this sheafified Kan construction with the given composite inverse image. The affine covers in lem-weil-pbc-proetale-affine-wcontractible-covering-family detect local bijectivity, hence the resulting ring-sheaf comparison is invertible. The adjoint equations on all test functions determine uniqueness. A finite normed p-adic extension is totally disconnected via its finite-dimensional coordinate homeomorphism, so the final specialization follows from the general theorem.",
+   "uses": [
     "lem-weil-pbc-proetale-sheafification-wcontractible-sections",
-    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
-    "def-weil-pbc-condensed-e-module-category"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "lem-weil-pbc-proetale-affine-wcontractible-covering-family"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "F1 checked Lean proof or explicit pending step of the original rank/descent argument; Canonical continuous-function realization for totally disconnected normed fields"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "loogle",
-      "query": "\"Mod.IsFinitelyPresented\"",
-      "digest": "4f53cda18c2baa0c",
-      "date": "2026-10-15",
-      "results": "",
-      "verdict": "No exact statement; generic matrix, topology, and quasicoherence APIs inspected."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Locally finitely presented modules over sheaves of continuous p-adic field valued functions on a noetherian scheme are locally finite free",
-      "digest": "b8d5f201c2eeb371",
-      "date": "2026-10-15",
-      "results": "SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.IsFiniteType",
-      "verdict": "No exact statement; generic matrix, topology, and quasicoherence APIs inspected."
-    },
-    {
-      "tool": "grep",
-      "query": "isClosed_of_specializes_iff|GeneralizingMap|schur_eq_zero_of_rank_le",
-      "digest": "35e16f6ca7048bb7",
-      "date": "2026-10-15",
-      "results": "Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/LocalAtTarget.lean, Mathlib/Topology/LocalAtTarget.lean, Mathlib/Topology/LocalAtTarget.lean",
-      "verdict": "No exact statement; generic matrix, topology, and quasicoherence APIs inspected."
-    },
-    {
-      "tool": "leansearch",
-      "query": "A finitely presented module over a sheaf of continuous functions into a nonarchimedean field has locally free cokernel when the presentation has locally constant rank",
-      "digest": "4f53cda18c2baa0c",
-      "date": "2026-10-15",
-      "results": "service unavailable: Internal Server Error",
-      "verdict": "unavailable"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality",
-    "date": "2026-10-16",
-    "group": "F1"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-weil-pbc-qbar",
-      "place": "Original local-freeness bridge: Canonical continuous-function realization for totally disconnected normed fields",
-      "via": [
-        "lem-weil-pbc-condensed-lfp-local-triviality",
-        "lem-weil-pbc-condensed-sheaf-ext-continuity",
-        "prop-weil-pbc-qbar-condensed-two-colimit",
-        "nt-target-proetale-qbar"
-      ]
-    },
-    "same_as": []
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.CondensedFieldContinuousRealization",
-    "file": "lean/Sheaf/AlgebraicGeometry/CondensedFieldContinuousRealization.lean",
-    "declaration": "AlgebraicGeometry.ProEtale.existsUnique_condensedFieldContinuousMapIso_of_totallyDisconnected",
-    "statement": "theorem existsUnique_condensedFieldContinuousMapIso_of_totallyDisconnected (E : Type u) [NormedField E] [TotallyDisconnectedSpace E] (X : Scheme.{u}) : ∃! e : Mon.mk (condensedRingObj (Profinite.continuousCoefficientRingObj E) X) ≅ Mon.mk ((sheafCompose (Scheme.ProEt.topology X) (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).obj (continuousCoefficientRingSheaf X E)), ∀ (S : Profinite.{u}) (f : C(S, E)), (((pointUpperStarLowerStarAdjunction.comp (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (toSpecZ X))).homEquiv _ _ e.hom.hom).hom.app (Opposite.op S)) (ULift.up f) = ULift.up (f.comp (profiniteTestProjection X S))",
-    "branch": "sheaf-dag",
-    "by": "F1",
-    "date": "2026-10-16",
-    "declarations": [
-      "AlgebraicGeometry.ProEtale.profiniteTestProjection",
-      "AlgebraicGeometry.ProEtale.existsUnique_condensedFieldContinuousMapIso_of_totallyDisconnected",
-      "AlgebraicGeometry.ProEtale.condensedFieldContinuousMapIso",
-      "AlgebraicGeometry.ProEtale.condensedFieldContinuousMapIso_test",
-      "AlgebraicGeometry.ProEtale.existsUnique_condensedFieldContinuousMapIso"
-    ]
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "X-0b366",
-    "group": "F1",
-    "result": "pass",
-    "landing": "20261016T005128-L-4190704",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "X-0b366",
-    "group": "F1",
-    "result": "pass",
-    "landing": "20261016T005128-L-4190704",
-    "kind": "interface",
-    "note": "independent Codex review: Delivered Lean against all ten node signatures, unchanged existing interfaces, proof dependencies, remaining obligations, clean compilation of twelve delivery modules and seven direct importers, and twenty-two declaration axiom probes."
+    "place": "Example 3.1; direct locally constant ring and connected-component argument formalized by D2"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-point-components-maps",
+  "lem-weil-pbc-proetale-sheafification-wcontractible-sections",
+  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+  "def-weil-pbc-condensed-e-module-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1; direct locally constant ring and connected-component argument formalized by D2",
+  "note": "D2 second reading: reuse the now-published proved normalized component-map helpers instead of duplicating their spectrum construction. Restore and prove the terminal comma object, close kanComparison_isIso, and specialize the general theorem to finite p-adic extensions. One active hole closed, no new holes, all original proof dependencies retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Mod.IsFinitelyPresented\"",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-15",
+   "results": "",
+   "verdict": "No exact statement; generic matrix, topology, and quasicoherence APIs inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally finitely presented modules over sheaves of continuous p-adic field valued functions on a noetherian scheme are locally finite free",
+   "digest": "b8d5f201c2eeb371",
+   "date": "2026-10-15",
+   "results": "SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.IsFiniteType",
+   "verdict": "No exact statement; generic matrix, topology, and quasicoherence APIs inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "isClosed_of_specializes_iff|GeneralizingMap|schur_eq_zero_of_rank_le",
+   "digest": "35e16f6ca7048bb7",
+   "date": "2026-10-15",
+   "results": "Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/Inseparable.lean, Mathlib/Topology/LocalAtTarget.lean, Mathlib/Topology/LocalAtTarget.lean, Mathlib/Topology/LocalAtTarget.lean",
+   "verdict": "No exact statement; generic matrix, topology, and quasicoherence APIs inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented module over a sheaf of continuous functions into a nonarchimedean field has locally free cokernel when the presentation has locally constant rank",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-15",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality",
+  "date": "2026-10-16",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-qbar",
+   "place": "Original local-freeness bridge: Canonical continuous-function realization for totally disconnected normed fields",
+   "via": [
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "lem-weil-pbc-condensed-sheaf-ext-continuity",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "nt-target-proetale-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CondensedFieldContinuousRealization",
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedFieldContinuousRealization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.existsUnique_condensedFieldContinuousMapIso_of_totallyDisconnected",
+  "statement": "theorem existsUnique_condensedFieldContinuousMapIso_of_totallyDisconnected (E : Type u) [NormedField E] [TotallyDisconnectedSpace E] (X : Scheme.{u}) : ∃! e : Mon.mk (condensedRingObj (Profinite.continuousCoefficientRingObj E) X) ≅ Mon.mk ((sheafCompose (Scheme.ProEt.topology X) (forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})).obj (continuousCoefficientRingSheaf X E)), ∀ (S : Profinite.{u}) (f : C(S, E)), (((pointUpperStarLowerStarAdjunction.comp (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (toSpecZ X))).homEquiv _ _ e.hom.hom).hom.app (Opposite.op S)) (ULift.up f) = ULift.up (f.comp (profiniteTestProjection X S))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-16",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.profiniteTestProjection",
+   "AlgebraicGeometry.ProEtale.existsUnique_condensedFieldContinuousMapIso_of_totallyDisconnected",
+   "AlgebraicGeometry.ProEtale.condensedFieldContinuousMapIso",
+   "AlgebraicGeometry.ProEtale.condensedFieldContinuousMapIso_test",
+   "AlgebraicGeometry.ProEtale.existsUnique_condensedFieldContinuousMapIso"
+  ]
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-0b366",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261016T005128-L-4190704",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261017T013732-L-112815",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
