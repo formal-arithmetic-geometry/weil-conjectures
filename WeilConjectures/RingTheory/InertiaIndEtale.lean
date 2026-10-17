@@ -312,6 +312,70 @@ theorem isIntegralElem_residueField_inertiaInvariants [Q.IsMaximal] (m : Ideal R
   congr 1
   exact RingHom.ext_int _ _
 
+section Decomposition
+
+omit [Algebra.IsAlgebraic K Ω]
+
+lemma atPrimeMap_congr {σ τ : Gal(Ω/K)} (h : σ = τ) (hσ : σ ∈ MulAction.stabilizer Gal(Ω/K) Q)
+    (hτ : τ ∈ MulAction.stabilizer Gal(Ω/K) Q) (a : Localization.AtPrime Q) :
+    atPrimeMap Q σ hσ a = atPrimeMap Q τ hτ a := by
+  subst h
+  rfl
+
+omit [Q.IsPrime] in
+/-- The inertia group is normalised by the decomposition group. -/
+lemma inv_mul_mul_mem_inertia {σ τ : Gal(Ω/K)} (hσ : σ ∈ MulAction.stabilizer Gal(Ω/K) Q)
+    (hτ : τ ∈ Q.inertia Gal(Ω/K)) : σ⁻¹ * τ * σ ∈ Q.inertia Gal(Ω/K) := by
+  intro b
+  have hσ' : σ⁻¹ • Q = Q := by
+    rw [inv_smul_eq_iff]
+    exact (MulAction.mem_stabilizer_iff.1 hσ).symm
+  have h := Ideal.smul_mem_pointwise_smul σ⁻¹ _ _ (hτ (σ • b))
+  rw [hσ', smul_sub, inv_smul_smul] at h
+  rwa [mul_smul, mul_smul]
+
+/-- The action on `B_Q^{I_Q}` of an element `σ` of the decomposition group of `Q`, which
+normalises the inertia group. -/
+noncomputable def inertiaInvariantsMap {σ : Gal(Ω/K)} (hσ : σ ∈ MulAction.stabilizer Gal(Ω/K) Q) :
+    inertiaInvariants K Q →+* inertiaInvariants K Q :=
+  ((atPrimeMap Q σ hσ).comp (inertiaInvariants K Q).val.toRingHom).codRestrict
+    (inertiaInvariants K Q) fun a ↦ mem_inertiaInvariants.2 fun τ hτ ↦ by
+      have hρ := inv_mul_mul_mem_inertia K Q hσ hτ
+      change atPrimeMap Q τ _ (atPrimeMap Q σ hσ a) = atPrimeMap Q σ hσ a
+      rw [← atPrimeMap_mul Q (inertia_le_stabilizer Q hτ) hσ,
+        atPrimeMap_congr K Q (show τ * σ = σ * (σ⁻¹ * τ * σ) by group) _
+          (mul_mem hσ (inertia_le_stabilizer Q hρ)),
+        atPrimeMap_mul Q hσ (inertia_le_stabilizer Q hρ), mem_inertiaInvariants.1 a.2 _ hρ]
+
+variable {K Q}
+
+lemma coe_inertiaInvariantsMap {σ : Gal(Ω/K)} (hσ : σ ∈ MulAction.stabilizer Gal(Ω/K) Q)
+    (a : inertiaInvariants K Q) :
+    (inertiaInvariantsMap K Q hσ a : Localization.AtPrime Q) = atPrimeMap Q σ hσ a :=
+  rfl
+
+lemma inertiaInvariantsToField_inertiaInvariantsMap {σ : Gal(Ω/K)}
+    (hσ : σ ∈ MulAction.stabilizer Gal(Ω/K) Q) (a : inertiaInvariants K Q) :
+    inertiaInvariantsToField K Q (inertiaInvariantsMap K Q hσ a) =
+      σ (inertiaInvariantsToField K Q a) := by
+  rw [inertiaInvariantsToField_apply, coe_inertiaInvariantsMap, atPrimeToField_atPrimeMap,
+    AlgEquiv.smul_def]
+  rfl
+
+lemma inertiaInvariantsMap_algebraMap {σ : Gal(Ω/K)} (hσ : σ ∈ MulAction.stabilizer Gal(Ω/K) Q)
+    (r : R) : inertiaInvariantsMap K Q hσ (algebraMap R _ r) = algebraMap R _ r :=
+  Subtype.ext (atPrimeMap_algebraMap_base Q σ hσ r)
+
+lemma isUnit_of_isUnit_inertiaInvariantsMap {σ : Gal(Ω/K)}
+    (hσ : σ ∈ MulAction.stabilizer Gal(Ω/K) Q) {a : inertiaInvariants K Q}
+    (ha : IsUnit (inertiaInvariantsMap K Q hσ a)) : IsUnit a := by
+  refine isUnit_of_isUnit_coe K Q ?_
+  have h : IsUnit (atPrimeMap Q σ hσ (a : Localization.AtPrime Q)) :=
+    ha.map (inertiaInvariants K Q).val
+  exact (isUnit_map_iff (atPrimeMap Q σ hσ) _).1 h
+
+end Decomposition
+
 end Invariants
 
 section IndEtale
