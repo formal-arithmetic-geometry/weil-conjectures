@@ -259,6 +259,13 @@ theorem IsMixed.of_iso {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   let ⟨w, hw⟩ := hF
   ⟨w, hw.of_iso e⟩
 
+/-- A quotient of a mixed Weil sheaf is mixed. -/
+theorem IsMixed.of_epi {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] {F G : WeilSheaf k₀ l X}
+    (hF : F.IsMixed ι) (p : F ⟶ G) [Epi p] : G.IsMixed ι :=
+  let ⟨w, hw⟩ := hF
+  ⟨w, hw.of_epi p⟩
+
 /-- If the pullback of `G` along an open immersion `k` is mixed, then so is its restriction to
 the open image of `k`. -/
 theorem IsMixed.upperStar_opensRange_ι {W T : Scheme.{u}} [W.Over (Spec (CommRingCat.of k₀))]
@@ -377,7 +384,6 @@ theorem IsReal.exists_isMixed_upperStar_opensι (T : Scheme.{u})
   have : QuasiSeparated (O.toScheme ↘ Spec (CommRingCat.of k₀)) := by
     rw [← comp_over O.ι]; infer_instance
   have : Nonempty O := ⟨π.base (Classical.arbitrary W)⟩
-  set GW := (WeilSheaf.upperStar j).obj G
   obtain ⟨O', ⟨o, ho⟩, hmix⟩ := exists_isMixed_upperStar_opensι_of_affineSpace
     (fun _ hd O _ _ hG ↦ hG.exists_isMixed_upperStar_opensι_of_two_le hd O) O
     ((hG.upperStar j).lowerStar_of_isFinite π)
@@ -385,19 +391,21 @@ theorem IsReal.exists_isMixed_upperStar_opensι (T : Scheme.{u})
   have : (π ∣_ O').IsOver (Spec (CommRingCat.of k₀)) := ⟨by
     rw [← comp_over O'.ι, morphismRestrict_ι_assoc, comp_over π, comp_over (π ⁻¹ᵁ O').ι]⟩
   obtain ⟨e₁⟩ := nonempty_upperStar_comp_iso (l := l) (π ∣_ O') O'.ι
-    ((WeilSheaf.lowerStar π).obj GW)
+    ((WeilSheaf.lowerStar π).obj ((WeilSheaf.upperStar j).obj G))
   obtain ⟨e₂⟩ := nonempty_upperStar_congr_iso (l := l) (morphismRestrict_ι π O')
-    ((WeilSheaf.lowerStar π).obj GW)
+    ((WeilSheaf.lowerStar π).obj ((WeilSheaf.upperStar j).obj G))
   obtain ⟨e₃⟩ := nonempty_upperStar_comp_iso (l := l) (π ⁻¹ᵁ O').ι π
-    ((WeilSheaf.lowerStar π).obj GW)
-  obtain ⟨w, hw⟩ := (hmix.upperStar (π ∣_ O')).of_iso (e₁.symm ≪≫ e₂ ≪≫ e₃)
+    ((WeilSheaf.lowerStar π).obj ((WeilSheaf.upperStar j).obj G))
+  have hmix' := (hmix.upperStar (π ∣_ O')).of_iso (e₁.symm ≪≫ e₂ ≪≫ e₃)
   -- the counit of `π^* ⊣ π_*` is an epimorphism since `π` is finite étale
-  have := epi_upperStarLowerStarAdjunction_counit_app_of_finite_etale (l := l) π GW
-  have h₂ : ((WeilSheaf.upperStar (π ⁻¹ᵁ O').ι).obj GW).IsMixed ι :=
-    ⟨w, hw.of_epi ((WeilSheaf.upperStar (π ⁻¹ᵁ O').ι).map
-      ((upperStarLowerStarAdjunction (k₀ := k₀) (l := l) π).counit.app GW))⟩
+  have := epi_upperStarLowerStarAdjunction_counit_app_of_finite_etale (l := l) π
+    ((WeilSheaf.upperStar j).obj G)
+  have h₂ : ((WeilSheaf.upperStar (π ⁻¹ᵁ O').ι).obj ((WeilSheaf.upperStar j).obj G)).IsMixed ι :=
+    hmix'.of_epi ((WeilSheaf.upperStar (π ⁻¹ᵁ O').ι).map
+      ((upperStarLowerStarAdjunction (k₀ := k₀) (l := l) π).counit.app
+        ((WeilSheaf.upperStar j).obj G)))
   obtain ⟨e₄⟩ := nonempty_upperStar_comp_iso (l := l) (π ⁻¹ᵁ O').ι j G
-  obtain ⟨p, hp⟩ := hπs.surj ⟨o, ho⟩
+  obtain ⟨p, hp⟩ := hπs.surj o
   refine ⟨((π ⁻¹ᵁ O').ι ≫ j).opensRange, ⟨j.base p, ⟨⟨p, ?_⟩, rfl⟩⟩,
     (h₂.of_iso e₄.symm).upperStar_opensRange_ι⟩
   rw [Scheme.Hom.mem_preimage, hp]
