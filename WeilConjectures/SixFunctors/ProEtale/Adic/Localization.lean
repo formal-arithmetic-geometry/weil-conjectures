@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Triangulated.Recollement
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Subcategory
-public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedSupport
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedLowerStar
 
 /-!
 # The closed-support triangle on `Dᵇc(-, ℚ̄_ℓ)`
@@ -152,11 +152,23 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {Z U X : Scheme.{u}} (s : X ⟶ 
   (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
   (hij : IsCompl (Set.range i.base) (Set.range j.base))
 
+/-- The direct image `i_* : Dᵇc(Z, ℚ̄_ℓ) ⥤ Dᵇc(X, ℚ̄_ℓ)` along a closed immersion, built from the
+finiteness theorem, is the functor
+`AlgebraicGeometry.ProEtale.boundedConstructibleAdicClosedLowerStar` built without it: both are
+the restriction of `Ri_*`. -/
+noncomputable def ProEtale.boundedConstructibleAdicRightDerivedLowerStarIsoClosedLowerStar :
+    haveI := LocallyOfFiniteType.isLocallyNoetherian s
+    ProEtale.boundedConstructibleAdicRightDerivedLowerStar (l := l) s hk i ≅
+      ProEtale.boundedConstructibleAdicClosedLowerStar l i :=
+  Iso.refl _
+
 /-- The direct image `i_* : Dᵇc(Z, ℚ̄_ℓ) ⥤ Dᵇc(X, ℚ̄_ℓ)` along a closed immersion is fully
-faithful (blueprint `prop-sf-closed-unit-all-stages`). -/
+faithful (blueprint `prop-sf-closed-unit-all-stages`;
+`AlgebraicGeometry.ProEtale.fullyFaithfulBoundedConstructibleAdicClosedLowerStar`). -/
 noncomputable def ProEtale.fullyFaithfulBoundedConstructibleAdicRightDerivedLowerStar :
     (ProEtale.boundedConstructibleAdicRightDerivedLowerStar (l := l) s hk i).FullyFaithful :=
-  .ofFullyFaithful _
+  have := LocallyOfFiniteType.isLocallyNoetherian s
+  ProEtale.fullyFaithfulBoundedConstructibleAdicClosedLowerStar i
 
 include hij in
 /-- `j^* i_* = 0` on `Dᵇc(-, ℚ̄_ℓ)`

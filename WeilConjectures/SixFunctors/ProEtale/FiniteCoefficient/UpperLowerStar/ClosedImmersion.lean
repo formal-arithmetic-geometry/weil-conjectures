@@ -63,12 +63,21 @@ variable (R : Type (u + 1)) [Ring R] {Z U X : Scheme.{u}}
 /-- Blueprint `lem-exc-proetale-closed-fully-faithful` (subsection
 `sk-prop-sf-open-closed-triangle`): for a closed immersion `i : Z ⟶ X` the counit
 `i^* i_* G ⟶ G` of the pro-étale adjunction `i^* ⊣ i_*` is an isomorphism on all pro-étale
-sheaves of modules; so `i_*` is fully faithful, without a constructibility hypothesis. -/
+sheaves of modules; so `i_*` is fully faithful, without a constructibility hypothesis.
+
+The pullback `i^*` is the sheafification of the left Kan extension along base change
+`u : W ↦ W ×_X Z`, and the counit is the sheafification of the counit of the Kan extension. The
+latter is locally bijective (`CategoryTheory.Functor.isIso_sheafAdjunctionContinuous_counit_app`)
+because every object of `Z_proét` is covered by base changes `u W'`, compatibly with any given
+map to some `u W`: locally these are the henselian lifts `Spec H_A(C̄)` of
+`Algebra.ClosedLift`, whose reduction is `Spec C̄` (`Algebra.ClosedLift.bijective_reduction`,
+`AlgebraicGeometry.Scheme.ProEt.generate_liftPresieve_mem_topology`). -/
 theorem isIso_upperStarLowerStarAdjunction_counit (i : Z ⟶ X) [IsClosedImmersion i] :
     IsIso (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) i).counit := by
   rw [NatTrans.isIso_iff_isIso_app]
   intro G
-  exact Functor.isIso_sheafAdjunctionContinuous_counit_app _ (Scheme.ProEt.topology X)
+  exact Functor.isIso_sheafAdjunctionContinuous_counit_app
+    (MorphismProperty.Over.pullback @WeaklyEtale ⊤ i) (Scheme.ProEt.topology X)
     (Scheme.ProEt.topology Z) (fun V ↦ Scheme.ProEt.generate_exists_iso_mem_topology i V)
     (fun ψ ↦ Scheme.ProEt.generate_liftPresieve_mem_topology i ψ) G
 

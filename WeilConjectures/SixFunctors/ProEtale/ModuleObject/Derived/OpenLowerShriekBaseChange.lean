@@ -35,7 +35,7 @@ with `j` and `j'` open immersions.
   (`ProEtale.CondensedRing.boundedConstructibleLowerStarOpenImmersionLowerShriekExchange`, where
   the square is written `IsPullback p i' j p'`). For a cartesian square with `g` proper it is an
   isomorphism, for the coefficient rings `E̲` of a finite extension `E` of `ℚ_ℓ` and `ℚ̲̄_ℓ`: this
-  is part (3) of the blueprint lemma `det-sf-comp-composition-interchange`, proved in
+  is the coefficient analogue of part (3) of the interchange lemma, proved in
   `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekInterchange`.
 
 Both morphisms are the exchange morphisms `CategoryTheory.Adjunction.exchangeLeft` and

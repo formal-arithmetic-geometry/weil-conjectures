@@ -29,8 +29,9 @@ with `j` and `i'` open immersions, the exchange morphism `Rp_* ⋙ j_! ⟶ i'_! 
 isomorphism when `p'` is proper, for the coefficient rings `E̲` of a finite extension `E` of
 `ℚ_ℓ` and `ℚ̲̄_ℓ`
 (`ProEtale.CondensedRing.isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange`
-and `..._padicAlgCl`). This is part (3) of the blueprint lemma
-`det-sf-comp-composition-interchange`.
+and `..._padicAlgCl`). This is the `E`-coefficient analogue of part (3) of the blueprint
+lemma on interchanging proper direct image and extension by zero, which is formalised for finite
+coefficients as `AlgebraicGeometry.Etale.existsUnique_openImmersionLowerShriekLowerStarExchange`.
 
 ## Proof
 
@@ -316,11 +317,12 @@ variable (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimension
 
 omit [MonObj Λ] [IsCommMonObj Λ] in
 /-- **Interchanging proper direct image and extension by zero** for bounded constructible
-`E`-sheaves (blueprint `det-sf-comp-composition-interchange`, part (3)): the exchange morphism
-`Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` of a cartesian square with `p'` proper is an isomorphism. Over the
-open `X ⊆ Z` it is the identification `Lj^* ⋙ Rp'_* ≅ Rp_* ⋙ Li'^*`, and over the closed
-complement `Z ∖ X` the stalks of `Rp'_*(i'_! K)` are, by proper base change, the cohomology of
-the fibres of `p'` over `Z ∖ X`, which do not meet `X' ⊆ Z'`, with coefficients in `i'_! K`,
+`E`-sheaves (the `E`-coefficient analogue of part (3) of the interchange lemma): the exchange
+morphism `Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` of a cartesian square with `p'` proper is an
+isomorphism. Over the open `X ⊆ Z` it is the identification
+`Lj^* ⋙ Rp'_* ≅ Rp_* ⋙ Li'^*`, and over the closed complement `Z ∖ X` the stalks of
+`Rp'_*(i'_! K)` are, by proper base change, the cohomology of the fibres of `p'` over `Z ∖ X`,
+which do not meet `X' ⊆ Z'`, with coefficients in `i'_! K`,
 hence vanish. (In the blueprint the square is cartesian by part (1), from the density of `X'`
 in `Z'`.) -/
 theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
@@ -334,7 +336,7 @@ theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
 
 omit [MonObj Λ] [IsCommMonObj Λ] in
 /-- **Interchanging proper direct image and extension by zero** for bounded constructible
-`ℚ̄_ℓ`-sheaves (blueprint `det-sf-comp-composition-interchange`, part (3)): the exchange morphism
+`ℚ̄_ℓ`-sheaves (the `ℚ̄_ℓ`-analogue of part (3) of the interchange lemma): the exchange morphism
 `Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` of a cartesian square with `p'` proper is an isomorphism. -/
 theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_padicAlgCl
     (sq : IsPullback p i' j p') :

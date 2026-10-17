@@ -34,10 +34,16 @@ The objects of `N_A(C̄)` are taken to be the quotients `A[x₁, …, xₙ] ⧸ 
 finite presentation is isomorphic to such a quotient, so this is a skeleton-like small model of
 the blueprint's indexing category, with the same colimit.
 
-The two facts about this construction that belong to the subsection
-`sk-prop-sf-open-closed-triangle` of the blueprint, that `N_A(C̄)` is filtered
-(`lem-exc-closed-lift-filtered`) and the reduction isomorphism (`lem-exc-closed-lift-reduction`),
-are stated here for use downstream.
+Arbitrary étale algebras with a map to `C̄` are turned into objects of `N_A(C̄)` by
+`Algebra.ClosedLift.Index.ofEtale`.
+
+## Main results
+
+- `Algebra.ClosedLift.isFiltered_index`: `N_A(C̄)` is filtered (`lem-exc-closed-lift-filtered`).
+- `Algebra.ClosedLift.isUnit_of_isUnit_toAlgHom`: an element of `H_A(C̄)` is a unit if its image
+  in `C̄` is (`lem-exc-closed-lift-units`).
+- `Algebra.ClosedLift.bijective_reduction`: the reduction isomorphism
+  (`lem-exc-closed-lift-reduction`).
 
 ## Main definitions
 

@@ -110,7 +110,7 @@ lemma isLocallyInjective_lanAdjunction_counit_app (K : GrothendieckTopology D) [
     have hε : ∀ t, ε.app Y (((LeftExtension.mk _ (F.op.leftKanExtensionUnit (F.op ⋙ G))).coconeAt
         Y).ι.app (CostructuredArrow.mk ψ.op) t) = G.map ψ.op t := by
       intro t
-      simp only [LeftExtension.coconeAt_ι_app, LeftExtension.mk_hom, LeftExtension.mk_right,
+      simp only [LeftExtension.coconeAt_ι_app, LeftExtension.mk_hom,
         CostructuredArrow.mk_left, CostructuredArrow.mk_hom_eq_self, ConcreteCategory.comp_apply]
       exact (lanAdjunction_counit_app_naturality_apply F G ψ.op _).trans
         (congrArg _ (lanAdjunction_counit_app_app_lanUnit_app_app F G X t))
@@ -119,8 +119,7 @@ lemma isLocallyInjective_lanAdjunction_counit_app (K : GrothendieckTopology D) [
     rw [Sieve.generate_le_iff]
     rintro Y' f ⟨X', h, c, hc⟩
     simp only [Presheaf.equalizerSieve_apply, LeftExtension.coconeAt_ι_app,
-      LeftExtension.mk_hom, LeftExtension.mk_right, CostructuredArrow.mk_left,
-      CostructuredArrow.mk_hom_eq_self, ConcreteCategory.comp_apply]
+      LeftExtension.mk_hom, ConcreteCategory.comp_apply]
     have key : ∀ t, (F.op.leftKanExtension (F.op ⋙ G)).map f.op
         ((F.op.leftKanExtension (F.op ⋙ G)).map ψ.op
           ((F.op.leftKanExtensionUnit (F.op ⋙ G)).app (op X) t)) =
@@ -163,12 +162,14 @@ lemma toSheafify_sheafAdjunctionContinuous_counit_app_hom (G : Sheaf K H) :
     (fullyFaithfulSheafToPresheaf J H) (Functor.FullyFaithful.id _)
     (L := sheafPullbackConstruction.sheafPullback F H J K)
     (R := F.sheafPushforwardContinuous H J K) (Iso.refl _) (Iso.refl _) G
-  simp only [Functor.id_map, Iso.refl_inv, NatTrans.id_app, Functor.map_id, Category.id_comp,
+  simp only [Functor.id_map, Iso.refl_inv, NatTrans.id_app,
     Adjunction.comp_counit_app] at h
   change toSheafify K _ ≫ ((sheafPullbackConstruction.sheafAdjunctionContinuous F H J K).counit.app
     G).hom = _
   rw [show (sheafPullbackConstruction.sheafAdjunctionContinuous F H J K).counit.app G = _ from h]
-  simp
+  simp only [ObjectProperty.ι_obj, id_obj, comp_obj, whiskeringLeft_obj_obj, comp_map,
+    ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.id_hom,
+    sheafificationAdjunction_counit_app_val, sheafifyMap_sheafifyLift, Category.comp_id]
   erw [Category.id_comp, toSheafify_sheafifyLift, Functor.map_id, Category.id_comp]
 
 variable [RepresentablyFlat F]
@@ -188,7 +189,8 @@ theorem isIso_sheafAdjunctionContinuous_counit_app [(forget H).ReflectsIsomorphi
   have hε := toSheafify_sheafAdjunctionContinuous_counit_app_hom F J K G
   have := isLocallySurjective_lanAdjunction_counit_app (FH := FH) F G.obj K hF
   have := isLocallyInjective_lanAdjunction_counit_app (FH := FH) F G.obj K hS
-  exact (Sheaf.isLocallyBijective_iff_isIso (FA := FH) _).1 ⟨Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective_fac K _ hε,
+  exact (Sheaf.isLocallyBijective_iff_isIso (FA := FH) _).1
+    ⟨Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective_fac K _ hε,
     Presheaf.isLocallySurjective_of_isLocallySurjective_fac K hε⟩
 
 end Sheaf
