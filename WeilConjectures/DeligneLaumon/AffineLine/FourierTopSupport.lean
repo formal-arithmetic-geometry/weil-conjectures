@@ -102,6 +102,7 @@ lemma isGE_toComplex_obj (G : WeilSheaf k₀ l X) : (WeilSheaf.toComplex.obj G).
   (isGE_iff_isZero_homologySheaf _ 0).2 fun _ ha ↦
     isZero_homologySheaf_singleComplex ha.ne G
 
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- A Weil sheaf placed in degree `n`, as the shift `G[-n]`, is `≥ n`. -/
 lemma isGE_shift_toComplex_obj (G : WeilSheaf k₀ l X) (n : ℤ) :
     ((WeilSheaf.toComplex.obj G)⟦-n⟧).obj.IsGE n :=

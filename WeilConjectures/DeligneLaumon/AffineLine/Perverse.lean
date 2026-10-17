@@ -239,6 +239,7 @@ section Heart
 
 variable [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- For `K` in degrees `≤ n` and `L` in degrees `≥ n`, a morphism `K ⟶ L` is determined by the
 map it induces on `𝓗ⁿ`, and every morphism `𝓗ⁿK ⟶ 𝓗ⁿL` arises in this way. -/
 theorem homologySheaf_map_bijective {K L : WeilComplex k₀ l X} (n : ℤ)
@@ -256,6 +257,7 @@ theorem homologySheaf_map_bijective {K L : WeilComplex k₀ l X} (n : ℤ)
   obtain ⟨f, hf⟩ := h.2 g.hom
   exact ⟨ObjectProperty.homMk f, ObjectProperty.hom_ext _ hf⟩
 
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- A Weil complex all of whose cohomology sheaves vanish is zero. -/
 theorem isZero_of_forall_isZero_homologySheaf {K : WeilComplex k₀ l X}
     (h : ∀ a, IsZero ((homologySheaf a).obj K)) : IsZero K := by
@@ -266,6 +268,7 @@ theorem isZero_of_forall_isZero_homologySheaf {K : WeilComplex k₀ l X}
   exact IsZero.of_full_of_faithful_of_isZero (ObjectProperty.ι _) K
     (_root_.DerivedCategory.TStructure.t.isZero K.obj 0 1)
 
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- Two Weil complexes concentrated in degree `n` with isomorphic cohomology sheaves `𝓗ⁿ` are
 isomorphic. -/
 theorem nonempty_iso_of_homologySheaf_iso {K L : WeilComplex k₀ l X} (n : ℤ)
@@ -289,6 +292,7 @@ theorem nonempty_iso_of_homologySheaf_iso {K L : WeilComplex k₀ l X} (n : ℤ)
   have := isIso_of_fully_faithful (ObjectProperty.ι _) f
   exact ⟨asIso f⟩
 
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- The shifted classes `ᵖD^{≤n}` are compatible with the shift: `K[m] ∈ ᵖD^{≤n'}` for
 `K ∈ ᵖD^{≤n}` and `m + n' = n`. -/
 theorem IsCurvePerverseLE.shift {n : ℤ} {K : WeilComplex k₀ l X} (hK : K.IsCurvePerverseLE n)
@@ -298,11 +302,13 @@ theorem IsCurvePerverseLE.shift {n : ℤ} {K : WeilComplex k₀ l X} (hK : K.IsC
   rw [WeilSheaf.support_congr (homologySheafShiftIso K m n' n h)]
   exact hK.2
 
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- A Weil sheaf `G` placed in degree `-1` has `𝓗ᵃ = 0` for `a ≠ -1`. -/
 theorem isZero_homologySheaf_shift_one_toComplex (G : WeilSheaf k₀ l X) {a : ℤ} (ha : a ≠ -1) :
     IsZero ((homologySheaf a).obj ((WeilSheaf.toComplex.obj G)⟦(1 : ℤ)⟧)) :=
   isZero_homologySheaf_shift_toComplex G (by omega)
 
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- A Weil sheaf `G` of finite support placed in degree `-1` lies in `ᵖD^{≤-1}`. -/
 theorem isCurvePerverseLE_shift_one_toComplex (G : WeilSheaf k₀ l X) (hG : G.support.Finite) :
     ((WeilSheaf.toComplex.obj G)⟦(1 : ℤ)⟧).IsCurvePerverseLE (-1) := by
@@ -310,6 +316,7 @@ theorem isCurvePerverseLE_shift_one_toComplex (G : WeilSheaf k₀ l X) (hG : G.s
   rw [WeilSheaf.support_congr (homologySheafShiftToComplexIso G 1 (-1) (by norm_num))]
   exact hG
 
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- A Weil sheaf `G` without nonzero subsheaf of finite support, placed in degree `-1`, is curve
 perverse. -/
 theorem isCurvePerverse_shift_one_toComplex (G : WeilSheaf k₀ l X)
@@ -355,6 +362,8 @@ theorem mono_homMk_of_distinguished
   Preadditive.mono_of_cancel_zero _ fun {M} u hu ↦ ObjectProperty.hom_ext _
     (eq_zero_of_comp_mor₁_eq_zero _ hT hR M.property.1 u.hom (congrArg (fun φ ↦ φ.hom) hu))
 
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))] in
 /-- A monomorphism `f : Q ⟶ P` of the curve perverse heart is left cancellable against morphisms
 `u : M ⟶ Q` of Weil complexes from a curve perverse `M`. -/
 theorem eq_zero_of_comp_hom_eq_zero
@@ -397,7 +406,8 @@ theorem isCurvePerverse_of_mono
     have hδ0 : δ ≫ (homologySheaf (-1)).map f.hom = 0 :=
       homologySheafδ_comp_map_mor₁ T (-2) (-1) hT (by norm_num)
     let K' := (WeilSheaf.toComplex.obj K)⟦(1 : ℤ)⟧
-    let eK : (homologySheaf (-1)).obj K' ≅ K := homologySheafShiftToComplexIso K 1 (-1) (by norm_num)
+    let eK : (homologySheaf (-1)).obj K' ≅ K :=
+      homologySheafShiftToComplexIso K 1 (-1) (by norm_num)
     have hK' : K'.IsCurvePerverse := isCurvePerverse_shift_one_toComplex K
       fun G i _ hG ↦ hQ.2.2 G (i ≫ δ) inferInstance hG
     obtain ⟨u, hu⟩ := (homologySheaf_map_bijective (-1) (K := K') (L := Q.obj)
