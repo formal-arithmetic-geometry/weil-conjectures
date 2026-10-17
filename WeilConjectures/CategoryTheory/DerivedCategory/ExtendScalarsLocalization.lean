@@ -172,7 +172,8 @@ theorem locHomBijective_derivedExtendScalars_single (n : ℤ) :
     infer_instance
   by_cases hn : n = 0
   · subst hn
-    refine Rationalization.LocHomBijective.of_iso ?_ (Iso.refl S) ((shiftFunctorZero _ ℤ).app S).symm
+    refine Rationalization.LocHomBijective.of_iso ?_ (Iso.refl S)
+      ((shiftFunctorZero _ ℤ).app S).symm
     refine ⟨fun f hf₀ ↦ ?_, fun g ↦ ?_⟩
     · obtain ⟨c, rfl⟩ := exists_eq_smul_id_singleFunctor (1 : R)
         (fun v ↦ ⟨v, by simp⟩) f

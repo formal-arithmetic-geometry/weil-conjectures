@@ -95,6 +95,8 @@ noncomputable abbrev pointFiberRationalAux : 𝐂 ⥤ DerivedCategory (ModuleCat
   integralPointSections I k ⋙
     ModuleCat.derivedExtendScalars (algebraMap Λ K) (flat_algebraMap_of_isLocalization M K)
 
+omit [IsNoetherianRing Λ] [Finite (Λ ⧸ I)] [IsAdicComplete I Λ] [IsDomain Λ]
+  [IsPrincipalIdealRing Λ] [Fact (∃ ϖ ∈ nonZeroDivisors Λ, I = Ideal.span {ϖ})] in
 lemma pointFiberRationalAux_map_smul_id (r : Λ) (X : 𝐂) :
     (pointFiberRationalAux I M K k).map (r • 𝟙 X) =
       algebraMap Λ K r • 𝟙 ((pointFiberRationalAux I M K k).obj X) := by
@@ -144,6 +146,7 @@ lemma prop_of_unitIntegral (P : ObjectProperty (Rationalization M 𝐂)) [P.IsTr
   exact P.prop_of_iso
     ((Rationalization.Q M 𝐂).mapIso ((integralPointSections I k).preimageIso e') ≪≫ e) hL'
 
+omit [IsDomain Λ] [IsPrincipalIdealRing Λ] in
 lemma locHomBijective_unitIntegral (n : ℤ) :
     Rationalization.LocHomBijective M K (pointFiberRationalAux I M K k) (unitIntegral I k)
       ((unitIntegral I k)⟦n⟧) :=
@@ -163,6 +166,7 @@ noncomputable def fullyFaithfulPointFiberRationalToDerived :
         (locHomBijective_unitIntegral I M K k n)).of_iso (Iso.refl _)
         (((Rationalization.Q M 𝐂).commShiftIso n).app _))
 
+omit [IsDomain Λ] [IsPrincipalIdealRing Λ] in
 /-- `Fib_s` takes values in `Dᵇ_fd(K)`. -/
 lemma boundedFiniteCohomology_pointFiberRationalToDerived_obj (X : Rationalization M 𝐂) :
     DerivedCategory.boundedFiniteCohomology K ((pointFiberRationalToDerived I M K k).obj X) := by
@@ -196,11 +200,13 @@ noncomputable def pointFiberRational :
     (boundedFiniteCohomology_pointFiberRationalToDerived_obj I M K k)
 
 instance : (pointFiberRational I M K k).Full :=
-  (Functor.FullyFaithful.ofCompFaithful (F := pointFiberRational I M K k) (G := (DerivedCategory.boundedFiniteCohomology K).ι)
+  (Functor.FullyFaithful.ofCompFaithful (F := pointFiberRational I M K k)
+    (G := (DerivedCategory.boundedFiniteCohomology K).ι)
     (fullyFaithfulPointFiberRationalToDerived I M K k)).full
 
 instance : (pointFiberRational I M K k).Faithful :=
-  (Functor.FullyFaithful.ofCompFaithful (F := pointFiberRational I M K k) (G := (DerivedCategory.boundedFiniteCohomology K).ι)
+  (Functor.FullyFaithful.ofCompFaithful (F := pointFiberRational I M K k)
+    (G := (DerivedCategory.boundedFiniteCohomology K).ι)
     (fullyFaithfulPointFiberRationalToDerived I M K k)).faithful
 
 instance : (pointFiberRational I M K k).EssSurj where

@@ -2120,6 +2120,7 @@ public import WeilConjectures.CategoryTheory.ConcreteCategory.FinitelyGenerated
 public import WeilConjectures.CategoryTheory.DeltaFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionUnit
+public import WeilConjectures.CategoryTheory.DerivedCategory.AlgebraicClosureColimit
 public import WeilConjectures.CategoryTheory.DerivedCategory.BifunctorHom
 public import WeilConjectures.CategoryTheory.DerivedCategory.BrownRepresentability.Grothendieck
 public import WeilConjectures.CategoryTheory.DerivedCategory.BrownRepresentability.ModuleCat
@@ -2140,9 +2141,11 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.ConstructibleTorsio
 public import WeilConjectures.CategoryTheory.DerivedCategory.Coproducts
 public import WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits
 public import WeilConjectures.CategoryTheory.DerivedCategory.ExtendScalarsLocalization
+public import WeilConjectures.CategoryTheory.DerivedCategory.FieldExtensionHom
 public import WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimension
 public import WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimensionAmplitude
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatExtendScalars
+public import WeilConjectures.CategoryTheory.DerivedCategory.FlatExtendScalarsComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModelOfClass
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
@@ -2541,6 +2544,7 @@ public import WeilConjectures.CategoryTheory.Triangulated.RecollementIsoAlgebra
 public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
 public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Karoubian
 public import WeilConjectures.CategoryTheory.Triangulated.TStructure.ShortExact
+public import WeilConjectures.CategoryTheory.Triangulated.TensorHomGenerator
 public import WeilConjectures.CategoryTheory.Triangulated.TriangleMorphismExtension
 public import WeilConjectures.CategoryTheory.TrivialCovering
 public import WeilConjectures.CategoryTheory.TruncationAbutmentCocone
@@ -4182,6 +4186,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Point
 public import WeilConjectures.SixFunctors.Etale.Derived.PointBiduality
 public import WeilConjectures.SixFunctors.Etale.Derived.PointFiber
 public import WeilConjectures.SixFunctors.Etale.Derived.PointFiberIntegral
+public import WeilConjectures.SixFunctors.Etale.Derived.PointFiberRational
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Integral
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Rational

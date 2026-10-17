@@ -118,7 +118,8 @@ lemma derivedExtendScalars_map_smul_id (r : R) (X : DerivedCategory (ModuleCat.{
 
 /-- The derived extension of scalars is semilinear along `f`. -/
 lemma derivedExtendScalars_map_smul (r : R) {X Y : DerivedCategory (ModuleCat.{u + 1} R)}
-    (φ : X ⟶ Y) : (derivedExtendScalars f hf).map (r • φ) = f r • (derivedExtendScalars f hf).map φ := by
+    (φ : X ⟶ Y) :
+      (derivedExtendScalars f hf).map (r • φ) = f r • (derivedExtendScalars f hf).map φ := by
   rw [show r • φ = (r • 𝟙 X) ≫ φ by rw [Linear.smul_comp, Category.id_comp], Functor.map_comp,
     derivedExtendScalars_map_smul_id, Linear.smul_comp, Category.id_comp]
 
