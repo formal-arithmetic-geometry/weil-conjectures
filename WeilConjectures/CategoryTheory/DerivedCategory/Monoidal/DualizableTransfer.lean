@@ -137,11 +137,23 @@ structure DualizabilityDatum (P : CochainComplex C ℤ) where
     (HomotopyCategory.quotient C (.up ℤ)).map
       ((α_ _ _ _).inv ≫ (CochainComplex.tensorHomAdjunction P).counit.app I₁ ▷ P ≫ j)
 
+lemma quotient_associator_inv (K L M : CochainComplex C ℤ) :
+    (α_ ((HomotopyCategory.quotient C (.up ℤ)).obj K) ((HomotopyCategory.quotient C (.up ℤ)).obj L)
+      ((HomotopyCategory.quotient C (.up ℤ)).obj M)).inv =
+      (HomotopyCategory.quotient C (.up ℤ)).map (α_ K L M).inv := by
+  rw [← cancel_mono (α_ _ _ _).hom, Iso.inv_hom_id, quotient_associator_hom,
+    ← Functor.map_comp, Iso.inv_hom_id]
+  exact ((HomotopyCategory.quotient C (.up ℤ)).map_id _).symm
+
+omit [IsGrothendieckAbelian.{v} C] [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C]
+  [BraidedCategory C] [HasDerivedCategory.{v} C] [Abelian.HasFunctorialFlatResolution C] in
 lemma isLocal_quotient_obj_of_isKInjective (I : CochainComplex C ℤ) [I.IsKInjective] :
     (quasiIso C (.up ℤ)).isLocal ((HomotopyCategory.quotient C (.up ℤ)).obj I) := by
   rw [quasiIso_eq_trW_subcategoryAcyclic, ObjectProperty.isLocal_trW]
   exact (isKInjective_iff_rightOrthogonal I).1 inferInstance
 
+omit [IsGrothendieckAbelian.{v} C] [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C]
+  [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C] in
 lemma isIso_Qh_map_quotient_map_iff {K L : CochainComplex C ℤ} (φ : K ⟶ L) :
     IsIso (Qh.map ((HomotopyCategory.quotient C (.up ℤ)).map φ)) ↔ QuasiIso φ := by
   rw [← isIso_Q_map_iff_quasiIso]
@@ -170,22 +182,17 @@ theorem DualizabilityDatum.isDualizable_Q_obj_iff {P : CochainComplex C ℤ}
     ((HomotopyCategory.quotient C (.up ℤ)).map d.j) ?_
     ((HomotopyCategory.quotient C (.up ℤ)).map d.χ) ?_
   · have h := d.hj
-    have hλ : (λ_ ((HomotopyCategory.quotient C (.up ℤ)).obj P)).hom =
+    have hlu : (λ_ ((HomotopyCategory.quotient C (.up ℤ)).obj P)).hom =
         (HomotopyCategory.quotient C (.up ℤ)).map (λ_ P).hom :=
       HomotopyCategory.MonoidalCategory.leftUnitor_hom_app P
-    rw [Functor.map_comp, Functor.map_comp, quotient_map_whiskerRight', ← hλ] at h
+    rw [Functor.map_comp, Functor.map_comp, quotient_map_whiskerRight', ← hlu] at h
     exact h
   · have h := d.hχ
-    have hα : (α_ ((HomotopyCategory.quotient C (.up ℤ)).obj P)
-        ((HomotopyCategory.quotient C (.up ℤ)).obj (internalHomObj P d.I₁))
-        ((HomotopyCategory.quotient C (.up ℤ)).obj P)).inv =
-        (HomotopyCategory.quotient C (.up ℤ)).map (α_ P (internalHomObj P d.I₁) P).inv := by
-      rw [← cancel_mono (α_ _ _ _).hom, Iso.inv_hom_id, quotient_associator_hom,
-        ← Functor.map_comp, Iso.inv_hom_id, Functor.map_id]
-    rw [Functor.map_comp, Functor.map_comp, Functor.map_comp, quotient_map_whiskerLeft',
-      quotient_map_whiskerRight', ← hα,
-      ← tensorHomAdjunction_counit_app ((HomotopyCategory.quotient C (.up ℤ)).obj P),
-      ← tensorHomAdjunction_counit_app ((HomotopyCategory.quotient C (.up ℤ)).obj P)] at h
+    rw [HomotopyCategory.tensorHomAdjunction_counit_app,
+      HomotopyCategory.tensorHomAdjunction_counit_app, ← quotient_map_whiskerLeft',
+      ← quotient_map_whiskerRight']
+    erw [quotient_associator_inv P (internalHomObj P d.I₁) P]
+    rw [← Functor.map_comp, ← Functor.map_comp, ← Functor.map_comp]
     exact h
 
 end Datum
@@ -221,6 +228,17 @@ lemma isIso_ihomComparison_mapHomologicalComplex (P : CochainComplex C ℤ) :
   exact Functor.Monoidal.isIso_ihomComparison_of_isIso_projectionMap
     (adj.mapHomologicalComplex (.up ℤ)) P
 
+omit [PreservesFiniteLimits G] [PreservesFiniteColimits G] [∀ X : C, IsIso (ihomComparison G X).natTrans] in
+/-- If two morphisms of complexes are homotopic, so are their images under `G`, after
+precomposition with any morphism. -/
+lemma quotient_map_comp_map_eq {X : CochainComplex D ℤ} {Y Z : CochainComplex C ℤ}
+    (A : X ⟶ (G.mapHomologicalComplex (.up ℤ)).obj Y) {x y : Y ⟶ Z}
+    (h : (HomotopyCategory.quotient C (.up ℤ)).map x = (HomotopyCategory.quotient C (.up ℤ)).map y) :
+    (HomotopyCategory.quotient D (.up ℤ)).map (A ≫ (G.mapHomologicalComplex (.up ℤ)).map x) =
+      (HomotopyCategory.quotient D (.up ℤ)).map (A ≫ (G.mapHomologicalComplex (.up ℤ)).map y) := by
+  rw [Functor.map_comp, Functor.map_comp, ← Functor.mapHomotopyCategory_map, h,
+    Functor.mapHomotopyCategory_map]
+
 variable {G} in
 /-- The image of a `DualizabilityDatum P` under `G`: the resolutions are mapped by `G` (which
 preserves quasi-isomorphisms and, having an exact left adjoint, K-injective complexes), and the
@@ -248,11 +266,102 @@ noncomputable def DualizabilityDatum.map {P : CochainComplex C ℤ} (d : Dualiza
     quasiIso_i := inferInstance
     j := μ G' _ _ ≫ G'.map d.j
     hj := by
-      sorry
+      have e₁ : (ε G' ≫ G'.map d.u) ▷ G'.obj P ≫ μ G' _ _ ≫ G'.map d.j =
+          (ε G' ▷ G'.obj P ≫ μ G' _ _) ≫ G'.map (d.u ▷ P ≫ d.j) := by
+        rw [comp_whiskerRight, Category.assoc, Category.assoc, μ_natural_left_assoc,
+          Functor.map_comp]
+      have e₂ : (λ_ (G'.obj P)).hom ≫ G'.map d.i =
+          (ε G' ▷ G'.obj P ≫ μ G' _ _) ≫ G'.map ((λ_ P).hom ≫ d.i) := by
+        rw [left_unitality, Functor.map_comp]
+        simp only [Category.assoc]
+      rw [e₁, e₂]
+      exact quotient_map_comp_map_eq G _ d.hj
     χ := inv (c d.I₁) ▷ G'.obj P ≫ μ G' _ _ ≫ G'.map d.χ ≫ c d.I
     hχ := by
-      sorry }
+      have hc (Y : CochainComplex C ℤ) : G'.obj P ◁ c Y ≫
+          (CochainComplex.tensorHomAdjunction (G'.obj P)).counit.app (G'.obj Y) =
+          μ G' P _ ≫ G'.map ((CochainComplex.tensorHomAdjunction P).counit.app Y) :=
+        ihomComparison_ev G' P Y
+      have hc₁ : G'.obj P ◁ inv (c d.I₁) ≫ μ G' P _ ≫
+          G'.map ((CochainComplex.tensorHomAdjunction P).counit.app d.I₁) =
+          (CochainComplex.tensorHomAdjunction (G'.obj P)).counit.app (G'.obj d.I₁) := by
+        erw [← hc]
+        rw [← MonoidalCategory.whiskerLeft_comp_assoc, IsIso.inv_hom_id,
+          MonoidalCategory.whiskerLeft_id, Category.id_comp]
+      let W := G'.obj P ◁ (inv (c d.I₁) ▷ G'.obj P) ≫ G'.obj P ◁ μ G' _ _ ≫ μ G' _ _
+      have eA : G'.obj P ◁ (inv (c d.I₁) ▷ G'.obj P ≫ μ G' _ _ ≫ G'.map d.χ ≫ c d.I) ≫
+          (CochainComplex.tensorHomAdjunction (G'.obj P)).counit.app (G'.obj d.I) =
+          W ≫ G'.map (P ◁ d.χ ≫ (CochainComplex.tensorHomAdjunction P).counit.app d.I) := by
+        simp only [W, MonoidalCategory.whiskerLeft_comp, Category.assoc, hc, Functor.map_comp]
+        erw [μ_natural_right_assoc]
+      have eB : (α_ _ _ _).inv ≫
+          (CochainComplex.tensorHomAdjunction (G'.obj P)).counit.app (G'.obj d.I₁) ▷ G'.obj P ≫
+          μ G' _ _ ≫ G'.map d.j = W ≫ G'.map ((α_ _ _ _).inv ≫
+            (CochainComplex.tensorHomAdjunction P).counit.app d.I₁ ▷ P ≫ d.j) := by
+        simp only [W, Functor.map_comp, Category.assoc, associativity_inv_assoc,
+          ← μ_natural_left_assoc, associator_inv_naturality_middle_assoc,
+          ← comp_whiskerRight_assoc, hc₁]
+        rfl
+      rw [eA, eB]
+      exact quotient_map_comp_map_eq G _ d.hχ }
+
+include adj in
+/-- **Transfer of the dualizability criterion along `G`.** For a `DualizabilityDatum P` and `P`
+such that `G P` is K-flat, `Q (G P)` is dualizable if and only if `G χ` is a
+quasi-isomorphism. -/
+theorem DualizabilityDatum.isDualizable_Q_obj_map_iff {P : CochainComplex C ℤ}
+    (d : DualizabilityDatum P)
+    (hGP : (quasiIso D (.up ℤ)).kFlat
+      ((HomotopyCategory.quotient D (.up ℤ)).obj ((G.mapHomologicalComplex (.up ℤ)).obj P))) :
+    IsDualizable (Q.obj ((G.mapHomologicalComplex (.up ℤ)).obj P)) ↔
+      QuasiIso ((G.mapHomologicalComplex (.up ℤ)).map d.χ) := by
+  have := isIso_ihomComparison_mapHomologicalComplex G adj P
+  rw [(d.map adj).isDualizable_Q_obj_iff hGP]
+  dsimp only [DualizabilityDatum.map]
+  rw [quasiIso_iff_comp_left, quasiIso_iff_comp_left, quasiIso_iff_comp_right]
 
 end Transfer
+
+section Existence
+
+variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
+  [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+  [HasDerivedCategory.{v} C] [Abelian.HasFunctorialFlatResolution C]
+
+local instance : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
+
+/-- A K-flat complex admits a `DualizabilityDatum`: take K-injective resolutions of the unit and
+of `P`; the map `j` exists as `u ▷ P` is a quasi-isomorphism and the target is K-injective, and
+`χ` is a transpose in the homotopy category. -/
+theorem DualizabilityDatum.nonempty (P : CochainComplex C ℤ)
+    (hP : (quasiIso C (.up ℤ)).kFlat ((HomotopyCategory.quotient C (.up ℤ)).obj P)) :
+    Nonempty (DualizabilityDatum P) := by
+  obtain ⟨I₁, _, u, -, hu⟩ :=
+    Abelian.HasKInjectiveResolutions.exists_isKInjective (𝟙_ (CochainComplex C ℤ))
+  obtain ⟨I, _, i, -, hi⟩ := Abelian.HasKInjectiveResolutions.exists_isKInjective P
+  have : QuasiIso u := hu
+  have : QuasiIso i := hi
+  let q := HomotopyCategory.quotient C (.up ℤ)
+  have hs : quasiIso C (.up ℤ) (q.map (u ▷ P)) := by
+    rw [quotient_map_whiskerRight']
+    exact hP.whiskerRight ((quotient_map_mem_quasiIso_iff _).2 hu)
+  obtain ⟨j₀, hj₀⟩ := (isLocal_quotient_obj_of_isKInjective I _ hs).2 (q.map ((λ_ P).hom ≫ i))
+  obtain ⟨j, rfl⟩ := q.map_surjective j₀
+  let adj := HomotopyCategory.tensorHomAdjunction (q.obj P)
+  obtain ⟨χ, hχ⟩ := q.map_surjective (adj.homEquiv _ _
+    ((α_ _ _ _).inv ≫ adj.counit.app (q.obj I₁) ▷ q.obj P ≫ q.map j))
+  refine ⟨⟨I₁, I, inferInstance, inferInstance, u, inferInstance, i, inferInstance, j,
+    (Functor.map_comp _ _ _).trans hj₀, χ, ?_⟩⟩
+  have e : q.map (P ◁ χ ≫ (CochainComplex.tensorHomAdjunction P).counit.app I) =
+      (adj.homEquiv _ _).symm (q.map χ) := by
+    rw [Adjunction.homEquiv_counit, Functor.map_comp, quotient_map_whiskerLeft']
+    erw [HomotopyCategory.tensorHomAdjunction_counit_app]
+    rfl
+  rw [e, hχ, Equiv.symm_apply_apply, HomotopyCategory.tensorHomAdjunction_counit_app,
+    Functor.map_comp, Functor.map_comp, quotient_map_whiskerRight']
+  erw [quotient_associator_inv]
+  rfl
+
+end Existence
 
 end DerivedCategory
