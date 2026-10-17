@@ -214,5 +214,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SmithModelRecognition",
+  "declaration": "CategoryTheory.MorphismProperty.smithModelRecognition",
+  "file": "lean/Sheaf/CategoryTheory/SmithModelRecognition.lean",
+  "statement": "theorem smithModelRecognition {A : Type v} [Category.{u} A] [HasLimits A] [HasColimits A] [IsLocallyPresentable.{u} A] (C W : MorphismProperty A) (hC : isomorphisms A ≤ C ∧ C.IsStableUnderCobaseChange ∧ C.IsStableUnderTransfiniteComposition.{u} ∧ C.IsStableUnderRetracts) (hC₀ : ∃ (C₀ : MorphismProperty A), C₀.IsSmall.{u} ∧ C₀ ≤ C ∧ ∀ (D : MorphismProperty A), (isomorphisms A ≤ D ∧ D.IsStableUnderCobaseChange ∧ D.IsStableUnderTransfiniteComposition.{u} ∧ D.IsStableUnderRetracts) → C₀ ≤ D → C ≤ D) (hCW : isomorphisms A ≤ C ⊓ W ∧ (C ⊓ W).IsStableUnderCobaseChange ∧ (C ⊓ W).IsStableUnderTransfiniteComposition.{u} ∧ (C ⊓ W).IsStableUnderRetracts) [W.HasTwoOutOfThreeProperty] (hW : ∃ (κ : Cardinal.{u}) (_ : Fact κ.IsRegular) (G : ObjectProperty (Arrow A)), ObjectProperty.Small.{u} G ∧ (∀ (f : Arrow A), G f → W f.hom) ∧ (∀ (I : Type u) [SmallCategory I] [IsCardinalFiltered I κ], ObjectProperty.IsClosedUnderColimitsOfShape (fun f : Arrow A ↦ W f.hom) I) ∧ ∀ (f : Arrow A), W f.hom → ∃ (I : Type u) (_ : SmallCategory I) (_ : IsCardinalFiltered I κ), G.colimitsOfShape I f) (hRight : C.rlp ≤ W) : ∃ (m : ModelCategory A), m.categoryWithCofibrations.cofibrations = C ∧ m.categoryWithWeakEquivalences.weakEquivalences = W ∧ m.categoryWithFibrations.fibrations = (C ⊓ W).rlp ∧ MorphismProperty.IsWeakFactorizationSystem C ((C ⊓ W).rlp ⊓ W) ∧ MorphismProperty.IsWeakFactorizationSystem (C ⊓ W) (C ⊓ W).rlp ∧ MorphismProperty.HasFunctorialFactorization C ((C ⊓ W).rlp ⊓ W) ∧ MorphismProperty.HasFunctorialFactorization (C ⊓ W) (C ⊓ W).rlp ∧ ∃ (I : MorphismProperty A), I.IsSmall.{u} ∧ I ≤ C ∧ (∀ (D : MorphismProperty A), (isomorphisms A ≤ D ∧ D.IsStableUnderCobaseChange ∧ D.IsStableUnderTransfiniteComposition.{u} ∧ D.IsStableUnderRetracts) → I ≤ D → C ≤ D) ∧ ∃ (J : MorphismProperty A), J.IsSmall.{u} ∧ J ≤ C ⊓ W ∧ (∀ (D : MorphismProperty A), (isomorphisms A ≤ D ∧ D.IsStableUnderCobaseChange ∧ D.IsStableUnderTransfiniteComposition.{u} ∧ D.IsStableUnderRetracts) → J ≤ D → C ⊓ W ≤ D)",
+  "branch": "newtargets-dag",
+  "by": "Q101",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-32dcdb7a9",
+  "group": "Q101",
+  "result": "pass",
+  "note": "Node unchanged except the new lean field; lean.statement verbatim equals the file signature. Hypotheses (i)-(v) match HTT A.2.6.10 / Def A.2.6.2 clause by clause: weak saturation as four closures, a small generator C0 by minimality, accessible W via regular kappa, small G, closure under kappa-filtered colimits in Arrow A and a presentation of every W-arrow, 2-of-3 instance, C.rlp <= W. The hypothesis block is identical to the landed A.2.6.9 node. Conclusion gives a ModelCategory with cof=C, we=W, fib=(C⊓W).rlp, both WFS, both functorial factorizations and small generators I, J. Single fixed universe u, object universe free, no extra assumptions, empty cases allowed. One sorry, no definitions, source/blueprint docstrings and 9-step proof plan present. nt_compile clean (1.3 s); axioms propext/sorryAx/choice/Quot.sound. No duplicate in Mathlib or the project. Report has Worker report and Second reading by Q101."
  }
 }

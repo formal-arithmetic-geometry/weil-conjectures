@@ -26,7 +26,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-fibrations"
+  "def-coef-infinity-fibrations",
+  "def-cbc-enhanced-cartesian-fibration"
  ],
  "proof": [
   {
@@ -245,5 +246,40 @@
   "group": "NQ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-810400a8f (reviewer sub-agent of L); spot-checked: I read the item, all ten cited node statements, the parent's step that uses the item (lem-coef-operadic-algebra-presentability) and the unit record; there are no new nodes and no fixes. The statement is true as written. I checked the direction of variance on S=T=Delta^1: for a cocartesian fibration, limits of sections are computed pointwise with no preservation by the transport, and preservation is needed exactly on marked edges. I also checked J empty, T empty and the worker's example where the transport is constant at 0, which does not preserve the terminal object. Each step uses what its cited node states. Step 1 converts between the horn and mapping-space notions of cocartesian with the mapping criterion, and the diagonal preserves cocartesian edges because those are componentwise. In step 3, the relative right adjoint (the opposite of HA 7.3.2.6) needs cocartesian fibrations, a functor preserving cocartesian edges and fiber right adjoints, and nothing more. Step 4 shows that pointwise equivalences are equivalences in the section fiber, by cocartesian-over-identity plus the converse outer-horn criterion. It is marked elementary although it combines five cited statements, which is borderline but every input is cited. Steps 6-7 use preservation only for w in W, then the equivalence of the target comparison and the 2-out-of-3 clause of composition-initiality. Searching dag/nodes found no duplicate (the Yoneda presheaf limits, relative colimit completion and section-colimit nodes all state something else). The graph has no cycle and no SGA source is cited. HA and HTT are not in literature/; the report has WANTED lines for them and proof_origin is agent. I accept both split_report.tool_uses (lem-cbc-enhanced-functor-cone-calculus and lem-cbc-equivalence-outer-horn-filling) as generic quasicategory tools; the cone calculus is already recorded as a tool use on lem-coef-cocartesian-relative-right-adjoint. Details are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.MarkedSectionsPointwiseLimits",
+  "declaration": "SSet.Enhanced.marked_sections_pointwise_limits",
+  "declarations": [
+   "SSet.Enhanced.sectionFiberInclusion",
+   "SSet.Enhanced.sectionTransportEdge",
+   "SSet.Enhanced.CoherentSectionTransport",
+   "SSet.Enhanced.ConeImagesAgree",
+   "SSet.Enhanced.HasJIndexedLimits",
+   "SSet.Enhanced.PreservesJIndexedLimits",
+   "SSet.Enhanced.MarkedSection",
+   "SSet.Enhanced.markedSections",
+   "SSet.Enhanced.markedSectionsInclusion",
+   "SSet.Enhanced.sectionEvaluationInTotal",
+   "SSet.Enhanced.SectionFiberwiseLimiting",
+   "SSet.Enhanced.MarkedConeFiberwiseLimiting",
+   "SSet.Enhanced.PointwiseLimitConclusion",
+   "SSet.Enhanced.marked_sections_pointwise_limits"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/MarkedSectionsPointwiseLimits.lean",
+  "statement": "theorem marked_sections_pointwise_limits {E S : SSet.{max u v}} {T J : SSet.{u}} [Quasicategory E] [Quasicategory S] [Quasicategory T] (p : E ⟶ S) (hp : cocartesianFibration p) (g : SSet.uliftFunctor.{v}.obj T ⟶ S) (W : (SSet.uliftFunctor.{v}.obj T) _⦋1⦌ → Prop) (hT : ∀ t : (SSet.uliftFunctor.{v}.obj T) _⦋0⦌, HasJIndexedLimits (fiber p (g.app _ t)) (SSet.uliftFunctor.{v}.obj J)) (hW : ∀ e : (SSet.uliftFunctor.{v}.obj T) _⦋1⦌, W e → ∀ τ : fiber p (S.δ 1 (g.app _ e)) ⟶ fiber p (S.δ 0 (g.app _ e)), CoherentSectionTransport p (g.app _ e) τ → PreservesJIndexedLimits (J := SSet.uliftFunctor.{v}.obj J) τ) : PointwiseLimitConclusion (J := SSet.uliftFunctor.{v}.obj J) p g W",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Actual cone images specify preservation and evaluations; coherent transport includes its entire lift family. The landed section-definition node is added to stmt_deps for its recorded sectionSSet and sectionMap. All helper definitions express parts of this theorem; none selects data from mere existence."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1bf9fd11d",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Clause-by-clause match of the node and the Lean: all objects (quasicategories E,S in max u v; small T with the node's functor-source quasicategory instance; small J lifted; W an edge predicate), hypotheses hT (actual fiber limiting cones) and hW (every coherent cocartesian transport of a marked edge preserves actual limiting cones; choice-independent, not vacuous, no condition on unmarked edges), and six conclusion clauses (ambient existence, pointwise iff, closure of every ambient limit apex, marked existence, marked joint detection, creation) agree with the node. Dependency declarations sectionSSet/sectionMap/fiber/cocartesianFibration/coneCategory/IsLimiting read and used, no private copies. Edge cases J, T, W empty, degenerate edges and universes all covered. Node changed only in lean and stmt_deps (+ landed def-cbc-enhanced-cartesian-fibration, allowed, acyclic). lean.statement verbatim. No name clash in side/live trees. Only sorry is the main theorem (axioms propext/sorryAx/choice/Quot.sound). Docstrings with source, blueprint and 8 proof steps; lines at most 100 chars. nt_compile against the side overlay rc 0, module 2.1 s, no errors or warnings. Non-blocking: near-duplicate lemma-local helper IsCocartesianTransport in CocartesianSectionColimits; garbled source numbers in the second-reading text."
  }
 }
