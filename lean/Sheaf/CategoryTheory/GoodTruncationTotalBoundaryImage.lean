@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 import WeilConjectures.FromJoel.Algebra.Homology.Embedding.CochainComplex
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
-import all Sheaf.Algebra.Homology.UpperTruncationStepSES
+import all WeilConjectures.Algebra.Homology.UpperTruncationStepQuotient
 
 /-! # The degreewise image of the total good-truncation inclusion
 
@@ -110,7 +110,12 @@ private theorem truncation_boundary_kernel {D : Type u} [Category.{v} D] [Abelia
     (K : CochainComplex D ℤ) (q : ℤ) :
     ∃ h : (K.ιTruncLE q).f q ≫ K.d q (q + 1) = 0,
       Nonempty (IsLimit (KernelFork.ofι ((K.ιTruncLE q).f q) h)) := by
-  sorry
+  have hc := (truncLE_inclusion_coordinates K q).1
+  have hz : (K.ιTruncLE q).f q ≫ K.d q (q + 1) = 0 := by
+    rw [← hc, Category.assoc, HomologicalComplex.iCycles_d, comp_zero]
+  refine ⟨hz, ⟨?_⟩⟩
+  refine IsLimit.ofIsoLimit (K.cyclesIsKernel q (q + 1) (by simp)) (Iso.symm ?_)
+  exact Fork.ext (K.truncLEXIsoCycles q) (by simpa using hc)
 
 end CochainComplex
 namespace HomologicalComplex₂
