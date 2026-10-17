@@ -174,7 +174,7 @@ def perfectHomOpenDerivedComparison {S Y T : Scheme.{u}}
     (openImmersion_restriction_derived_properties (perfectHomOpenMap s B r)).2
   have : F.Additive := inferInstance
   have : G.Additive := Functor.additive_of_preserves_binary_products _
-  have : H.Additive := restriction_additive _
+  have : H.Additive := inferInstance
   have : K.Additive := inferInstance
   have : (F ⋙ G).Additive := inferInstance
   have : (H ⋙ K).Additive := inferInstance
@@ -311,7 +311,7 @@ theorem perfectHomOpenComparison_counit_resolution
   have : F.Additive := inferInstance
   have : K.Additive := inferInstance
   have : G.Additive := Functor.additive_of_preserves_binary_products _
-  have : H.Additive := restriction_additive _
+  have : H.Additive := inferInstance
   let ah₀ : H.mapDerivedCategory ⊣ P.rightDerivedFunctor :=
     (Scheme.Modules.restrictAdjunction b).mapDerivedCategoryRightDerivedAdjunction
   let he : b ≫ f = f' ≫ B.ι := (perfectHomOpenSquare s B r).w.symm
