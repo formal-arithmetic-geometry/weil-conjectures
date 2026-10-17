@@ -14,6 +14,7 @@ import Sheaf.CategoryTheory.FiniteCoconeExactCouple
 import WeilConjectures.CategoryTheory.ExactCouple
 import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 import WeilConjectures.CategoryTheory.PBCFiltration
+import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!
 # Finite abutment of a filtered-complex exact couple

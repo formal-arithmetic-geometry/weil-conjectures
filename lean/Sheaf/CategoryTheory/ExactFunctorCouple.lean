@@ -12,6 +12,7 @@ import WeilConjectures.CategoryTheory.ExactCouple
 import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 import WeilConjectures.CategoryTheory.HalfPlaneConvergence
 import WeilConjectures.CategoryTheory.PBCFiltration
+import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!
 # Exact functors transport exact couples

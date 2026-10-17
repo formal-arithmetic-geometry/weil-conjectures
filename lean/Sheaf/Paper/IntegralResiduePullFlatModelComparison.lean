@@ -6,6 +6,7 @@ Authors: SHEAF group D4
 module
 
 public import Sheaf.Paper.IntegralResiduePullSquareData
+import Sheaf.Paper.IntegralResiduePullOrdinaryUnit
 
 /-! # Comparison equality for the integral residue pull model
 
