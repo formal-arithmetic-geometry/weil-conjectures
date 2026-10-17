@@ -51,10 +51,6 @@ lemma opens_ext (G : S.FiniteAffineGluingPresentation) {O₁ O₂ : S.Opens}
   have := SetLike.ext_iff.mp (h a) ⟨x, ha⟩
   exact this
 
-/-- The open cover of `S` by the charts of a finite affine gluing presentation. -/
-noncomputable def openCover (G : S.FiniteAffineGluingPresentation) : S.OpenCover :=
-  S.openCoverOfIsOpenCover (fun a ↦ (G.U a : S.Opens)) G.iSup_U
-
 namespace Stage
 
 variable (l : G.Stage)

@@ -34,7 +34,7 @@ are moved between the stages of a cofiltered system.
 - `AlgebraicGeometry.RelativeGluingDatum.transport`,
   `AlgebraicGeometry.RelativeGluingDatum.IsTransport`: transport along `γ : B' ⟶ B`.
 - `AlgebraicGeometry.RelativeGluingDatum.IsCompatible`: compatibility of a datum with a family of
-  monomorphisms `ℓₐ : Yₐ ×_T B ⟶ X`; compatible data are valid.
+  open immersions `ℓₐ : Yₐ ×_T B ⟶ X`; compatible data are valid.
 -/
 
 @[expose] public section
@@ -54,6 +54,7 @@ structure RelativeGluingDatum {B : Scheme.{u}} (β : B ⟶ T) where
   V (a b : J) : (pullback (p a) β).Opens
   /-- The first component of the overlap map `V a b ⟶ Y_b ×_T B`. -/
   ψ (a b : J) : (V a b).toScheme ⟶ Y b
+  /-- The overlap maps lie over `T`. -/
   ψ_comp (a b : J) : ψ a b ≫ p b = (V a b).ι ≫ pullback.fst (p a) β ≫ p a
 
 namespace RelativeGluingDatum
@@ -164,7 +165,8 @@ noncomputable def toOpensGlueData (h : d.IsValid) : Scheme.OpensGlueData.{u} whe
       rw [← cancel_mono (d.V b c).ι, IsOpenImmersion.lift_fac, cocycleMap_ι, t_ι]
     rw [e, t_ι, t_ι, h.cocycleMap_map]
 
-/-- Blueprint-facing name for the glued scheme of a valid relative gluing datum. -/
+/-- The scheme over `B` obtained by gluing the charts `Yₐ ×_T B` of a valid relative gluing
+datum along the opens `V a b` via the overlap maps. -/
 noncomputable def glued (h : d.IsValid) : Scheme.{u} := (toOpensGlueData h).glued
 
 /-- The open immersion of the chart `Yₐ ×_T B` into the glued scheme. -/
@@ -350,7 +352,7 @@ lemma IsTransport.resLE_cocycle_right {d' : RelativeGluingDatum p β'}
   rw [reassoc_of% aux, h.ψ_eq a c]
 
 
-/-! ### Data compatible with a family of monomorphisms -/
+/-! ### Data compatible with a family of open immersions -/
 
 variable {X : Scheme.{u}} (ℓ : ∀ a, pullback (p a) β ⟶ X) [∀ a, IsOpenImmersion (ℓ a)]
 
@@ -363,7 +365,7 @@ structure IsCompatible (d : RelativeGluingDatum p β) : Prop where
 
 variable {ℓ}
 
-/-- A datum compatible with a family of monomorphisms satisfies the gluing axioms. -/
+/-- A datum compatible with a family of open immersions satisfies the gluing axioms. -/
 lemma IsCompatible.isValid (h : IsCompatible ℓ d) : d.IsValid := by
   have hov : d.IsOpenValid := by
     refine ⟨fun a ↦ ?_, fun a b c ↦ ?_⟩

@@ -83,13 +83,6 @@ namespace FiniteAffineGluingPresentation
 
 variable {S : Scheme.{u}} (G : S.FiniteAffineGluingPresentation)
 
-/-- The open cover of `S` by the charts of a finite affine gluing presentation. -/
-noncomputable def openCover : S.OpenCover :=
-  S.openCoverOfIsOpenCover (fun a ↦ (G.U a : S.Opens)) G.iSup_U
-
-instance (a : G.ι) : IsAffine (G.openCover.X a) :=
-  (G.U a).2
-
 /-- Gluing the charts of a finite affine gluing presentation along their overlaps recovers `S`.
 -/
 noncomputable def gluedIso : G.openCover.gluedCover.glued ≅ S :=

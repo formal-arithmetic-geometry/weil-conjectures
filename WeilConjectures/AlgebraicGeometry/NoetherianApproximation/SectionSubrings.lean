@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import WeilConjectures.Mathlib.CategoryTheory.Filtered.Basic
 
 /-!
 # Finitely generated subrings of section rings
@@ -17,11 +18,6 @@ Auxiliary results for finite affine gluing presentations
   generated `ℤ`-algebra.
 - `RingHom.exists_finset_closure_eq_range`: the image of a ring homomorphism out of a finitely
   generated `ℤ`-algebra is generated, as a subring, by a finite set.
-- `AlgebraicGeometry.IsAffineOpen.finiteType_of_locallyOfFiniteType`: the sections over an affine
-  open of a scheme locally of finite type over `ℤ` form a finitely generated `ℤ`-algebra.
-- `CategoryTheory.IsCofiltered.exists_hom_forall`: finitely many properties of morphisms into a
-  fixed object of a cofiltered category, each stable under precomposition and each eventually
-  true, are simultaneously true for one morphism.
 -/
 
 @[expose] public section
@@ -52,51 +48,6 @@ lemma RingHom.exists_finset_closure_eq_range {R S : Type*} [CommRing R] [Ring S]
     rwa [Algebra.adjoin_int] at this
   refine ⟨t.image φ, ?_⟩
   rw [Finset.coe_image, ← RingHom.map_closure, ht', RingHom.range_eq_map]
-
-namespace AlgebraicGeometry
-
-/-- The sections over an affine open of a scheme locally of finite type over `ℤ` form a finitely
-generated `ℤ`-algebra. -/
-lemma IsAffineOpen.finiteType_of_locallyOfFiniteType {X : Scheme.{u}}
-    [LocallyOfFiniteType (specULiftZIsTerminal.from X)] {V : X.Opens} (hV : IsAffineOpen V) :
-    Algebra.FiniteType ℤ Γ(X, V) := by
-  have h := HasRingHomProperty.appLE @LocallyOfFiniteType (specULiftZIsTerminal.from X) ‹_›
-    ⟨⊤, isAffineOpen_top _⟩ ⟨V, hV⟩ (by simp)
-  have hs : Function.Surjective
-      (algebraMap ℤ Γ(Spec (CommRingCat.of (ULift.{u} ℤ)), ⊤)) := by
-    intro x
-    obtain ⟨⟨n⟩, rfl⟩ :=
-      (Scheme.ΓSpecIso (CommRingCat.of (ULift.{u} ℤ))).commRingCatIsoToRingEquiv.symm.surjective x
-    refine ⟨n, ?_⟩
-    have : (⟨n⟩ : ULift.{u} ℤ) = (n : ULift.{u} ℤ) := by ext; simp
-    rw [this, map_intCast, eq_intCast]
-  rw [← RingHom.finiteType_algebraMap]
-  convert h.comp (RingHom.FiniteType.of_surjective _ hs)
-  exact Subsingleton.elim _ _
-
-end AlgebraicGeometry
-
-namespace CategoryTheory.IsCofiltered
-
-/-- Finitely many properties of morphisms into a fixed object `i` of a cofiltered category, each
-stable under precomposition and each true for some morphism, hold simultaneously for a single
-morphism into `i`. -/
-lemma exists_hom_forall {I : Type*} [Category* I] [IsCofiltered I] {i : I} {σ : Type*}
-    [Finite σ] (P : σ → ∀ k : I, (k ⟶ i) → Prop)
-    (hP : ∀ s {k k' : I} (f : k' ⟶ k) (g : k ⟶ i), P s k g → P s k' (f ≫ g))
-    (h : ∀ s, ∃ k g, P s k g) : ∃ k g, ∀ s, P s k g := by
-  classical
-  cases nonempty_fintype σ
-  choose k g hg using h
-  obtain ⟨m, fm⟩ := IsCofiltered.inf_objs_exists
-    (Finset.univ.image fun s ↦ (Over.mk (g s) : Over i))
-  refine ⟨m.left, m.hom, fun s ↦ ?_⟩
-  have ψ : m ⟶ Over.mk (g s) := (fm (by simp)).some
-  have hw : ψ.left ≫ g s = m.hom := by simpa using Over.w ψ
-  rw [← hw]
-  exact hP s _ _ (hg s)
-
-end CategoryTheory.IsCofiltered
 
 namespace AlgebraicGeometry.Scheme.NoetherianApproximation
 
@@ -183,8 +134,8 @@ lemma exists_hom_forall_map_preimage_eq {k : N.I} {σ : Type*} [Finite σ]
     (hW' : ∀ a, IsCompact (W' a : Set (N.D.obj k)))
     (h : ∀ a, N.proj k ⁻¹ᵁ W a = N.proj k ⁻¹ᵁ W' a) :
     ∃ (k₁ : N.I) (g : k₁ ⟶ k), ∀ a, N.D.map g ⁻¹ᵁ W a = N.D.map g ⁻¹ᵁ W' a := by
-  refine IsCofiltered.exists_hom_forall
-    (fun a l (g : l ⟶ k) ↦ N.D.map g ⁻¹ᵁ W a = N.D.map g ⁻¹ᵁ W' a)
+  refine IsCofiltered.exists_forall_of_finite
+    (fun a {l} (g : l ⟶ k) ↦ N.D.map g ⁻¹ᵁ W a = N.D.map g ⁻¹ᵁ W' a)
     (fun a _ _ f g hP ↦ ?_) fun a ↦ ?_
   · simp only [Functor.map_comp, Scheme.Hom.comp_preimage] at hP ⊢
     rw [hP]

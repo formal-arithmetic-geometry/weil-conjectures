@@ -3373,6 +3373,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
 public import WeilConjectures.Mathlib.CategoryTheory.Yoneda
 public import WeilConjectures.Mathlib.Data.Fin.Rev
 public import WeilConjectures.Mathlib.Data.Fin.Tuple.Basic
+public import WeilConjectures.Mathlib.Data.Finset.Order
 public import WeilConjectures.Mathlib.Data.Multiset.MapFold
 public import WeilConjectures.Mathlib.Data.Multiset.UnionInter
 public import WeilConjectures.Mathlib.Data.Nat.Choose.Dvd

@@ -46,8 +46,6 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-set_option backward.defeqAttrib.useBackward true
-
 variable {I : Type u} [Category.{u} I] {D : I ⥤ Scheme.{u}} {c : Cone D} (hc : IsLimit c)
   [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)]
 

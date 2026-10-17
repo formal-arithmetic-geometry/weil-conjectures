@@ -299,7 +299,10 @@ noncomputable abbrev finitePresentationDescentIso :
 /-- Blueprint `lemma-nagata-finite-presentation-descends` (concrete form): the constructed
 `X^desc_{λ_rel} ⟶ D_{λ_rel}` is of finite presentation (locally of finite presentation,
 quasi-compact and quasi-separated), and `ε_X` is an isomorphism over `lim Dⱼ`: the square formed
-by `X ⟶ X^desc_{λ_rel}`, `g` and the projections is cartesian. -/
+by `X ⟶ X^desc_{λ_rel}`, `g` and the projections is cartesian.
+
+This is an explicit construction for Stacks 01ZM; the existence statement is
+`AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation`. -/
 theorem isPullback_finitePresentationDescent :
     LocallyOfFinitePresentation (finitePresentationDescentHom hc g) ∧
       QuasiCompact (finitePresentationDescentHom hc g) ∧

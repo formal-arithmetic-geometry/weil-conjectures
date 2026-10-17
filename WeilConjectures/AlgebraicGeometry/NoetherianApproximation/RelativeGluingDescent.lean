@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.AlgebraicGeometry.NoetherianApproximation.DescentStages
+public import WeilConjectures.Mathlib.CategoryTheory.Filtered.Basic
 public import WeilConjectures.AlgebraicGeometry.NoetherianApproximation.RelativeGluingDatum
 public import WeilConjectures.AlgebraicGeometry.NoetherianApproximation.RelativeGluingOpens
 public import WeilConjectures.AlgebraicGeometry.NoetherianApproximation.RelativeGluingPresentation
@@ -37,14 +38,6 @@ universe u
 open CategoryTheory Limits
 
 namespace AlgebraicGeometry
-
-/-- A finite family of objects of a cofiltered category has a common lower bound. -/
-lemma IsCofiltered.exists_forall_nonempty_hom {C : Type*} [Category* C] [IsCofiltered C]
-    {K : Type*} [Finite K] (F : K → C) : ∃ l : C, ∀ k, Nonempty (l ⟶ F k) := by
-  classical
-  have := Fintype.ofFinite K
-  obtain ⟨s⟩ := IsCofiltered.cone_nonempty (Discrete.functor F)
-  exact ⟨s.pt, fun k ↦ ⟨s.π.app ⟨k⟩⟩⟩
 
 variable {I : Type u} [Category.{u} I] {D : I ⥤ Scheme.{u}} {c : Cone D} (hc : IsLimit c)
   [IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)]
@@ -105,8 +98,11 @@ structure ChartModels where
   p (a : R.J) : Y a ⟶ D.obj stage
   /-- The projections `Wₐ ⟶ Yₐ`. -/
   h (a : R.J) : (R.chart a).toScheme ⟶ Y a
+  /-- The models are affine. -/
   isAffine (a : R.J) : IsAffine (Y a)
+  /-- The models are locally of finite presentation over `D_i`. -/
   locallyOfFinitePresentation (a : R.J) : LocallyOfFinitePresentation (p a)
+  /-- Each chart `Wₐ` is the base change of its model `Yₐ` along `c.pt ⟶ D_i`. -/
   isPullback (a : R.J) : IsPullback (h a) ((R.chart a).ι ≫ g) (p a) (c.π.app stage)
 
 include hc in
@@ -346,8 +342,8 @@ theorem isCompatible_rawDatum :
       Scheme.homOfLE _ (hV a b).le ≫ M.limitOverlapMap a b := by
     apply pullback.hom_ext
     · rw [RelativeGluingDatum.map_fst, limitTransport_rawDatum_ψ,
-        ← Scheme.homOfLE_comp_resLE _ _ (by rw [hV, ← M.preimage_overlapOpen hc a b])
-          (by rw [← Scheme.Hom.comp_preimage, Cone.w]),
+        ← Scheme.Hom.map_resLE _ (by rw [← Scheme.Hom.comp_preimage, Cone.w])
+          (by rw [hV, ← M.preimage_overlapOpen hc a b]),
         Category.assoc, resLE_overlapMapDescent, limitOverlapMapFst, Category.assoc]
       exact Scheme.homOfLE_homOfLE_assoc _ _ _ _
     · rw [RelativeGluingDatum.map_snd, Category.assoc, limitOverlapMap_snd,

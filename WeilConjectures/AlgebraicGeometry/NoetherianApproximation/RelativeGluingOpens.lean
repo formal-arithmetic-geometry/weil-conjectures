@@ -40,18 +40,6 @@ lemma Scheme.Hom.resLE_eq_of_eq {X Y : Scheme.{u}} {f f' : X ⟶ Y} (h : f = f')
   subst h
   rfl
 
-@[reassoc]
-lemma Scheme.homOfLE_comp_resLE {X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) {V W : X.Opens}
-    (e : W ≤ V) (e' : V ≤ f ⁻¹ᵁ U) :
-    X.homOfLE e ≫ f.resLE U V e' = f.resLE U W (e.trans e') := by
-  rw [← cancel_mono U.ι]
-  simp
-
-lemma Scheme.Hom.resLE_apply_val {X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) (V : X.Opens)
-    (e : V ≤ f ⁻¹ᵁ U) (x : V) : (f.resLE U V e x).1 = f x.1 := by
-  rw [← Scheme.Opens.ι_apply, ← Scheme.Hom.comp_apply, Scheme.Hom.resLE_comp_ι,
-    Scheme.Hom.comp_apply, Scheme.Opens.ι_apply]
-
 lemma Scheme.Opens.mem_ι_image_iff_exists {X : Scheme.{u}} (V : X.Opens) (A : V.toScheme.Opens)
     (x : X) : x ∈ V.ι ''ᵁ A ↔ ∃ h : x ∈ V, (⟨x, h⟩ : V) ∈ A := by
   rw [← SetLike.mem_coe, Scheme.Hom.coe_image]
@@ -72,7 +60,7 @@ lemma Scheme.Hom.resLE_preimage_le_iff {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.O
     obtain ⟨h, hA⟩ := (V.mem_ι_image_iff_exists A₁ _).mp hx
     have hxV : x ∈ f ⁻¹ᵁ V := h
     have key : f.resLE V (f ⁻¹ᵁ V) le_rfl ⟨x, hxV⟩ = ⟨f x, h⟩ :=
-      Subtype.ext (f.resLE_apply_val V _ le_rfl _)
+      Subtype.ext (f.coe_resLE_apply le_rfl _)
     have h₁ : (⟨x, hxV⟩ : (f ⁻¹ᵁ V : X.Opens)) ∈ f.resLE V (f ⁻¹ᵁ V) le_rfl ⁻¹ᵁ A₁ := by
       rw [Scheme.Hom.mem_preimage, key]
       exact hA
@@ -82,7 +70,7 @@ lemma Scheme.Hom.resLE_preimage_le_iff {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.O
   · intro H x hx
     rw [Scheme.Hom.mem_preimage] at hx ⊢
     have e : f.resLE V (f ⁻¹ᵁ V) le_rfl x = ⟨f x.1, x.2⟩ :=
-      Subtype.ext (f.resLE_apply_val V _ le_rfl _)
+      Subtype.ext (f.coe_resLE_apply le_rfl _)
     rw [e] at hx ⊢
     obtain ⟨_, h⟩ := (V.mem_ι_image_iff_exists A₂ _).mp
       (H ((V.mem_ι_image_iff_exists A₁ _).mpr ⟨x.2, hx⟩))

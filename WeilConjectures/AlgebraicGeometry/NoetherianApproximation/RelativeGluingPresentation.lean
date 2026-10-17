@@ -49,14 +49,19 @@ structure RelativeAffinePresentation {X : Scheme.{u}} (g : X ⟶ c.pt) where
   stage : I
   /-- The finite index type of the charts. -/
   J : Type u
+  /-- There are finitely many charts. -/
   finite : Finite J
   /-- The affine base charts of `D_{i₀}`. -/
   base (a : J) : (D.obj stage).Opens
+  /-- The base charts are affine. -/
   isAffineOpen_base (a : J) : IsAffineOpen (base a)
   /-- The affine charts of `X`. -/
   chart (a : J) : X.Opens
+  /-- The charts of `X` are affine. -/
   isAffineOpen_chart (a : J) : IsAffineOpen (chart a)
+  /-- Each chart of `X` maps into the corresponding base chart. -/
   chart_le (a : J) : chart a ≤ (g ≫ c.π.app stage) ⁻¹ᵁ base a
+  /-- The charts cover `X`. -/
   iSup_chart : ⨆ a, chart a = ⊤
 
 namespace RelativeAffinePresentation

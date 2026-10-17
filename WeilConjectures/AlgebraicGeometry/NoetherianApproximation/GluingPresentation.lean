@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.AlgebraicGeometry.NoetherianApproximation.SectionSubrings
 
 /-!
@@ -103,6 +104,13 @@ variable (G : S.FiniteAffineGluingPresentation)
 lemma basicOpen_g_le (a b : G.ι) (r : G.κ a b) :
     S.basicOpen (G.g a b r) ≤ S.basicOpen (G.f a b r) :=
   (G.basicOpen_f a b r).ge
+
+/-- The open cover of `S` by the charts of a finite affine gluing presentation. -/
+noncomputable def openCover : S.OpenCover :=
+  S.openCoverOfIsOpenCover (fun a ↦ (G.U a : S.Opens)) G.iSup_U
+
+instance (a : G.ι) : IsAffine (G.openCover.X a) :=
+  (G.U a).2
 
 /-- Blueprint `def-nagata-noetherian-stage` (the index set): a *valid finite coefficient
 refinement* of the presentation `G`.
@@ -476,8 +484,9 @@ theorem exists_stage_of_model {X : Scheme.{u}} [LocallyOfFiniteType (specULiftZI
     (hW : ∀ a, G.witnesses a ⊆ (p.appLE (V a) (G.U a) (hUV a)).hom.range) :
     ∃ l : G.Stage, ∀ a, l.A a = (p.appLE (V a) (G.U a) (hUV a)).hom.range := by
   refine ⟨Stage.mk' G (fun a ↦ (p.appLE (V a) (G.U a) (hUV a)).hom.range)
-    (fun a ↦ have := (hV a).finiteType_of_locallyOfFiniteType
-      RingHom.exists_finset_closure_eq_range _) hW (fun a b r ↦ ?_), fun a ↦ rfl⟩
+    (fun a ↦
+      have := (hV a).algebra_finiteType_of_locallyOfFiniteType (f := specULiftZIsTerminal.from _);
+        RingHom.exists_finset_closure_eq_range _) hW (fun a b r ↦ ?_), fun a ↦ rfl⟩
   rw [localizationSubring_range_appLE p (hV a) (hUV a) (f' a b r) (hf' a b r),
     localizationSubring_range_appLE p (hV b) (hUV b) (g' a b r) (hg' a b r)]
   exact range_appLE_congr p (hfg' a b r) _ _ _
