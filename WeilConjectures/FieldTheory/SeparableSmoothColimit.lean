@@ -8,6 +8,7 @@ module
 public import Mathlib.RingTheory.Smooth.Field
 public import Mathlib.RingTheory.Smooth.Locus
 public import WeilConjectures.FieldTheory.SeparableExtension
+public import WeilConjectures.RingTheory.FiniteTypeSubalgebraUnion
 
 /-! # Separable field extensions are filtered unions of smooth subalgebras
 
@@ -29,9 +30,14 @@ Generic smoothness for fraction fields, and its consequence: a separable field e
 * `Algebra.directedOn_smooth_finiteType_subalgebra_of_isSeparableExtension`,
   `Algebra.sSup_smooth_finiteType_subalgebra_of_isSeparableExtension`: the finite type smooth
   `K`-subalgebras of `L` form a directed family with union `L`.
+* `Algebra.isFiltered_smooth_finiteType_subalgebra_of_isSeparableExtension`,
+  `Algebra.isColimitSmoothFiniteTypeSubalgebraOfIsSeparableExtension`: `L` is the filtered
+  colimit in `CommRingCat` of these subalgebras along the inclusions.
 -/
 
 @[expose] public section
+
+universe u
 
 namespace Algebra
 
@@ -202,5 +208,35 @@ theorem exists_smooth_subalgebra_of_isSeparable [Algebra.IsSeparable K L] (s : F
   have : Etale K F := ⟨inferInstance, inferInstance⟩
   exact ⟨F.toSubalgebra, inferInstanceAs (Smooth K F), inferInstanceAs (FiniteType K F),
     IntermediateField.subset_adjoin K _⟩
+
+
+section Colimit
+
+open CategoryTheory Limits
+
+variable {K : Type*} {L : Type u} [Field K] [Field L] [Algebra K L]
+
+/-- The finite type smooth `K`-subalgebras of a separable extension `L / K`, ordered by
+inclusion, form a filtered category (companion of `lem-kun-separable-smooth-colimit`). -/
+theorem isFiltered_smooth_finiteType_subalgebra_of_isSeparableExtension
+    (h : IsSeparableExtension K L) :
+    IsFiltered {S : Subalgebra K L | Smooth K S ∧ FiniteType K S} := by
+  refine Subalgebra.isFiltered_of_directedOn
+    (directedOn_smooth_finiteType_subalgebra_of_isSeparableExtension h) ?_
+  obtain ⟨S, hS, hft, -⟩ := exists_smooth_subalgebra_of_isSeparableExtension h ∅
+  exact ⟨S, hS, hft⟩
+
+/-- A separable extension `L / K` is the filtered colimit in `CommRingCat` of its finite type
+smooth `K`-subalgebras along the inclusions (companion of `lem-kun-separable-smooth-colimit`);
+dually, `Spec L` is the cofiltered limit of the affine smooth `K`-schemes `Spec S`. -/
+noncomputable def isColimitSmoothFiniteTypeSubalgebraOfIsSeparableExtension
+    (h : IsSeparableExtension K L) :
+    IsColimit (Subalgebra.cocone {S : Subalgebra K L | Smooth K S ∧ FiniteType K S}) :=
+  Subalgebra.isColimitCocone (directedOn_smooth_finiteType_subalgebra_of_isSeparableExtension h)
+    fun x ↦ by
+      obtain ⟨S, hS, hft, hx⟩ := exists_smooth_subalgebra_of_isSeparableExtension h {x}
+      exact ⟨S, ⟨hS, hft⟩, hx (Finset.mem_coe.2 (Finset.mem_singleton_self x))⟩
+
+end Colimit
 
 end Algebra

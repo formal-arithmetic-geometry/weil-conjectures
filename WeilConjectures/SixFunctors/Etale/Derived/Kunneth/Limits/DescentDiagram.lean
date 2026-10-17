@@ -96,10 +96,26 @@ lemma descentTransition_comp {W : Scheme.{u}} (g₂ : Z ⟶ W) (g₁₂ : Y ⟶ 
   apply ((upperStarLowerStarAdjunction A r₂).homEquiv _ _).injective
   rw [homEquiv_descentTransition, Adjunction.homEquiv_naturality_right,
     homEquiv_descentTransition]
-  have key := lowerStarComp_assoc' A q g g₂ r g₁₂ r₂ hr hg₁₂ hr₂
-  have key' := NatTrans.congr_app key
   simp only [descentTransitionAux, Category.assoc]
-  sorry
+  rw [← (lowerStarComp A r g₂ r₂ hr₂).hom.naturality, Functor.comp_map,
+    ← Functor.map_comp_assoc, ← Adjunction.homEquiv_unit, homEquiv_descentTransition,
+    descentTransitionAux]
+  have kiso : Functor.isoWhiskerRight (lowerStarComp A q g r hr) (g₂)_*[A] ≪≫
+      lowerStarComp A r g₂ r₂ hr₂ = Functor.isoWhiskerLeft (q)_*[A]
+        (lowerStarComp A g g₂ g₁₂ hg₁₂) ≪≫
+      lowerStarComp A q g₁₂ r₂ (by rw [hr₂, hr, hg₁₂, Category.assoc]) :=
+    Iso.ext (lowerStarComp_assoc' A q g g₂ r g₁₂ r₂ hr hg₁₂ hr₂)
+  have k1 := NatTrans.congr_app (congrArg Iso.hom kiso)
+    ((q)^*[A].obj ((q)_*[A].obj F))
+  have k2 := NatTrans.congr_app (congrArg Iso.inv kiso) F
+  have k3 := (lowerStarComp A g g₂ g₁₂ hg₁₂).hom.naturality
+    ((upperStarLowerStarAdjunction A q).unit.app ((q)_*[A].obj F))
+  simp only [Iso.trans_hom, Iso.trans_inv, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+    Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerLeft_inv,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app] at k1 k2
+  simp only [Functor.comp_map] at k3
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% k2, k1, reassoc_of% k3, Iso.inv_hom_id_app_assoc]
 
 end Transition
 

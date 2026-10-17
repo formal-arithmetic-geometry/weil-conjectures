@@ -94,7 +94,9 @@ theorem exists_finitePresentation_tensorProduct_algEquiv (hc : IsColimit c) (B :
     ext p
     refine ⟨fun hp ↦ ⟨⟨p, hp⟩, heP ⟨p, hp⟩⟩, ?_⟩
     rintro ⟨p, rfl⟩
-    simpa only [Function.comp_apply, heP] using p.2
+    rw [Function.comp_apply, Finset.mem_coe]
+    convert p.2 using 1
+    exact heP p
   exact (Algebra.TensorProduct.tensorQuotientEquiv c.pt _ c.pt Ii).trans
     ((Ideal.quotientEquivAlg _ _ eP hmap).trans e)
 

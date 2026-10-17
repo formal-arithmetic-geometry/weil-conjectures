@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompCoherence
 
 /-!
@@ -68,6 +68,30 @@ lemma leftDerivedUpperStarTensorComparison_comp_derivedTensor {T S R : Scheme.{u
   rw [MonoidalCategory.tensorHom_def] at this
   exact this
 
+omit [HasSmallSiteSheafify A] in
+/-- Naturality of the tensor comparison of `Lg^*` in the first variable. -/
+@[reassoc]
+lemma leftDerivedUpperStarTensorComparison_naturality_left {T R : Scheme.{u}} (g : T ⟶ R)
+    {K K' : DerivedCategory (Sheaf R.smallEtaleTopology A)} (φ : K ⟶ K')
+    (M : DerivedCategory (Sheaf R.smallEtaleTopology A)) :
+    L((g)^*[A]).map (((-⊗ᴸ-(R)[A]).map φ).app M) ≫
+        ((leftDerivedUpperStarTensorComparison A g).app K').app M =
+      ((leftDerivedUpperStarTensorComparison A g).app K).app M ≫
+        ((-⊗ᴸ-(T)[A]).map (L((g)^*[A]).map φ)).app _ :=
+  NatTrans.congr_app ((leftDerivedUpperStarTensorComparison A g).naturality φ) M
+
+omit [HasSmallSiteSheafify A] in
+/-- Naturality of the tensor comparison of `Lg^*` in the second variable. -/
+@[reassoc]
+lemma leftDerivedUpperStarTensorComparison_naturality_right {T R : Scheme.{u}} (g : T ⟶ R)
+    (K : DerivedCategory (Sheaf R.smallEtaleTopology A))
+    {M M' : DerivedCategory (Sheaf R.smallEtaleTopology A)} (ψ : M ⟶ M') :
+    L((g)^*[A]).map (((-⊗ᴸ-(R)[A]).obj K).map ψ) ≫
+        ((leftDerivedUpperStarTensorComparison A g).app K).app M' =
+      ((leftDerivedUpperStarTensorComparison A g).app K).app M ≫
+        ((-⊗ᴸ-(T)[A]).obj _).map (L((g)^*[A]).map ψ) :=
+  ((leftDerivedUpperStarTensorComparison A g).app K).naturality ψ
+
 /-- The transpose of the Künneth map `κ_{E,K}` along `Lc^* ⊣ Rc_*`, written with the tensor
 comparison of `Lc^*`: it is
 `Lc^*(Rf_* E ⊗ᴸ Rg_* K) ⟶ Lc^* Rf_* E ⊗ᴸ Lc^* Rg_* K ⟶ Lp^* E ⊗ᴸ Lq^* K`, the second map being
@@ -93,6 +117,58 @@ lemma map_kunnethMap_comp_counit (p : W ⟶ X) (q : W ⟶ Y) (f : X ⟶ S) (g : 
   rw [whisker_exchange_assoc, ← MonoidalCategory.whiskerLeft_comp_assoc, Iso.hom_inv_id_app,
     MonoidalCategory.whiskerLeft_id, Category.id_comp]
   done
+
+/-- The counit `Lr'^* Ra_{Y*} K ≅ Lc'^* Ra_{Y*} K ⟶ ...` of a composite `r' = h ≫ r`: the map
+`Lc'^* Ra_{Y*} K ≅ Lr'^* La_Y^* Ra_{Y*} K ⟶ Lr'^* K` agrees with
+`Lc'^* Ra_{Y*} K ≅ Lh^* Lc^* Ra_{Y*} K ≅ Lh^* Lr^* La_Y^* Ra_{Y*} K ⟶ Lh^* Lr^* K ≅ Lr'^* K`. -/
+lemma leftDerivedUpperStarComp_hom_app_map_counit_comp (h : V ⟶ W) (r : W ⟶ Y) (aY : Y ⟶ S)
+    (c : W ⟶ S) (r' : V ⟶ Y) (c' : V ⟶ S) (hr : r ≫ aY = c) (hr' : h ≫ r = r')
+    (hc' : h ≫ c = c') (hr'c : r' ≫ aY = c')
+    (K : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    (leftDerivedUpperStarComp A r' aY c' hr'c.symm).hom.app _ ≫
+        L((r')^*[A]).map ((derivedUpperStarLowerStarAdjunction A aY).counit.app K) =
+      (leftDerivedUpperStarComp A h c c' hc'.symm).hom.app _ ≫
+        L((h)^*[A]).map ((leftDerivedUpperStarComp A r aY c hr.symm).hom.app _ ≫
+          L((r)^*[A]).map ((derivedUpperStarLowerStarAdjunction A aY).counit.app K)) ≫
+        (leftDerivedUpperStarComp A h r r' hr'.symm).inv.app K := by
+  rw [Functor.map_comp, ← Category.assoc, ← Category.assoc,
+    leftDerivedUpperStarComp_assoc'_app A h r aY r' c c' hr'.symm hr.symm hr'c.symm,
+    Category.assoc, Category.assoc]
+  erw [← (leftDerivedUpperStarComp A h r r' hr'.symm).hom.naturality_assoc]
+  simp
+
+/-- The counit of a composite `a_U = j ≫ a_X` and the exchange map: the map
+`Lc'^* Ra_{X*} Rj_* F ≅ Lc'^* Ra_{U*} F ≅ Lp^* La_U^* Ra_{U*} F ⟶ Lp^* F` agrees with
+`Lc'^* Ra_{X*} Rj_* F ≅ Lh^* Lq^* La_X^* Ra_{X*} Rj_* F ⟶ Lh^* Lq^* Rj_* F ≅ Lp^* Lj^* Rj_* F
+⟶ Lp^* F`. -/
+lemma leftDerivedUpperStarComp_hom_app_map_counit_comp_derivedSquareUpperStarIso
+    (j : U ⟶ X) (aX : X ⟶ S) (aU : U ⟶ S) (hj : j ≫ aX = aU) (q : W ⟶ X) (c : W ⟶ S)
+    (hq : q ≫ aX = c) (p : V ⟶ U) (h : V ⟶ W) (sq : CommSq p h j q) (c' : V ⟶ S)
+    (hc' : h ≫ c = c') (hp : p ≫ aU = c')
+    (F : DerivedCategory (Sheaf U.smallEtaleTopology A)) :
+    L((c')^*[A]).map ((rightDerivedLowerStarCompIsoOfComp A j aX aU hj).hom.app F) ≫
+        (leftDerivedUpperStarComp A p aU c' hp.symm).hom.app _ ≫
+        L((p)^*[A]).map ((derivedUpperStarLowerStarAdjunction A aU).counit.app F) =
+      (leftDerivedUpperStarComp A h c c' hc'.symm).hom.app _ ≫
+        L((h)^*[A]).map ((leftDerivedUpperStarComp A q aX c hq.symm).hom.app _ ≫
+          L((q)^*[A]).map ((derivedUpperStarLowerStarAdjunction A aX).counit.app
+            (R((j)_*[A]).obj F))) ≫
+        (derivedSquareUpperStarIso A sq).hom.app (R((j)_*[A]).obj F) ≫
+        L((p)^*[A]).map ((derivedUpperStarLowerStarAdjunction A j).counit.app F) := by
+  have hc'pj : c' = (p ≫ j) ≫ aX := by rw [Category.assoc, hj, hp]
+  erw [(leftDerivedUpperStarComp A p aU c' hp.symm).hom.naturality_assoc]
+  rw [Functor.comp_map, ← Functor.map_comp,
+    map_rightDerivedLowerStarCompIsoOfComp_hom_app_comp_counit A j aX aU hj F,
+    Functor.map_comp, Functor.map_comp, ← Category.assoc]
+  erw [leftDerivedUpperStarComp_assoc'_app A p j aX (p ≫ j) aU c' rfl hj.symm hc'pj]
+  rw [derivedSquareUpperStarIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.map_comp]
+  simp only [Category.assoc]
+  erw [leftDerivedUpperStarComp_assoc'_app_assoc A h q aX (p ≫ j) c c' sq.w hq.symm hc'pj]
+  congr 1
+  erw [← (leftDerivedUpperStarComp A h q (p ≫ j) sq.w).hom.naturality_assoc,
+    ← (leftDerivedUpperStarComp A p j (p ≫ j) rfl).hom.naturality_assoc]
+  simp
 
 /-- Blueprint `lem-kun-bc-kunneth-compat`: compatibility of the Künneth maps with the exchange
 map of the square
@@ -126,7 +202,22 @@ lemma kunnethMap_derivedBaseChangeMap (aX : X ⟶ S) (aY : Y ⟶ S) (aU : U ⟶ 
         (rightDerivedLowerStarCompIsoOfComp A h c c' hc').hom.app _ ≫
         R((c')_*[A]).map (((-⊗ᴸ-(V)[A]).obj _).map
           ((leftDerivedUpperStarComp A h r r' hr'.symm).inv.app K)) := by
-  sorry
+  apply ((derivedUpperStarLowerStarAdjunction A c').homEquiv _ _).symm.injective
+  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc,
+    map_kunnethMap_comp_counit, Adjunction.counit_naturality,
+    map_rightDerivedLowerStarCompIsoOfComp_hom_app_comp_counit_assoc]
+  conv_rhs => rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc]
+  erw [(leftDerivedUpperStarComp A h c c' hc'.symm).hom.naturality_assoc]
+  rw [Functor.comp_map, ← Functor.map_comp_assoc]
+  rw [Functor.map_comp L((c)^*[A]), Category.assoc, Adjunction.counit_naturality,
+    Functor.map_comp L((c)^*[A]), Category.assoc, Adjunction.counit_naturality_assoc,
+    map_kunnethMap_comp_counit_assoc]
+  simp only [Functor.map_comp, Category.assoc, map_rightDerivedLowerStarProjectionMap_comp_counit,
+    leftDerivedUpperStarTensorComparison_naturality_left_assoc,
+    leftDerivedUpperStarTensorComparison_naturality_right_assoc]
+  rw [← leftDerivedUpperStarTensorComparison_comp_derivedTensor_assoc A h c c' hc'.symm]
+  congr 1
+  done
 
 end General
 

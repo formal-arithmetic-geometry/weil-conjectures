@@ -58,7 +58,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 
 Let `i ↦ (Yᵢ, Xᵢ, Tᵢ, Sᵢ)` be a cofiltered system of Cartesian squares
 `IsPullback (e.app i) (h.app i) (g.app i) (p.app i)` with affine transition morphisms and every
-`g.app i` quasi-compact quasi-separated, and let `sq₀ : IsPullback e₀ h₀ g₀ p₀` be a Cartesian
+`g.app i` quasi-compact quasi-separated, all `Sᵢ` and `Xᵢ` quasi-compact quasi-separated,
+and let `sq₀ : IsPullback e₀ h₀ g₀ p₀` be a Cartesian
 square of limits (the four limit cones being compatible with the four morphisms), with `g₀`
 quasi-compact quasi-separated. Let `G` be a sheaf on a scheme `W` to which the system `T` maps.
 If for a fixed degree `q` every base-change map `pᵢ⁻¹ R^q gᵢ_* (G|_{Tᵢ}) ⟶ R^q hᵢ_* eᵢ⁻¹ (G|_{Tᵢ})`
@@ -68,6 +69,8 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit {I : Type u} [Category.{u} 
     [IsCofiltered I] {S X T Y : I ⥤ Scheme.{u}} (p : X ⟶ S) (g : T ⟶ S) (e : Y ⟶ T)
     (h : Y ⟶ X) (hsq : ∀ i, IsPullback (e.app i) (h.app i) (g.app i) (p.app i))
     [∀ i, QuasiCompact (g.app i)] [∀ i, QuasiSeparated (g.app i)]
+    [∀ i, CompactSpace (S.obj i)] [∀ i, QuasiSeparatedSpace (S.obj i)]
+    [∀ i, CompactSpace (X.obj i)] [∀ i, QuasiSeparatedSpace (X.obj i)]
     [∀ {i j : I} (f : i ⟶ j), IsAffineHom (S.map f)]
     [∀ {i j : I} (f : i ⟶ j), IsAffineHom (X.map f)]
     [∀ {i j : I} (f : i ⟶ j), IsAffineHom (T.map f)]
@@ -91,17 +94,18 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit {I : Type u} [Category.{u} 
 /-- Blueprint `lem-kun-0ezt`: Higher direct images along limits of cartesian squares, for all
 coefficient sheaves.
 
-In the situation of `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit`, assume
-moreover that the schemes `Tᵢ` are affine. If for a fixed degree `q` every stage base-change
-map is an isomorphism for every sheaf of `Λ`-modules on `Tᵢ`, then the base-change map of the
-limit square is an isomorphism for every sheaf `F` of `Λ`-modules on `T`: such an `F` is the
-filtered colimit of the pullbacks of its direct images to the stages (blueprint
+In the situation of `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit`, if for a
+fixed degree `q` every stage base-change map is an isomorphism for every sheaf of `Λ`-modules
+on `Tᵢ`, then the base-change map of the limit square is an isomorphism for every sheaf `F` of
+`Λ`-modules on `T`: such an `F` is the filtered colimit of the pullbacks of its direct images to the stages (blueprint
 `lem-kun-descent-limit`). -/
 @[stacks 0EZT]
 theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_of_forall {I : Type u} [Category.{u} I]
     [IsCofiltered I] {S X T Y : I ⥤ Scheme.{u}} (p : X ⟶ S) (g : T ⟶ S) (e : Y ⟶ T)
     (h : Y ⟶ X) (hsq : ∀ i, IsPullback (e.app i) (h.app i) (g.app i) (p.app i))
-    [∀ i, QuasiCompact (g.app i)] [∀ i, QuasiSeparated (g.app i)] [∀ i, IsAffine (T.obj i)]
+    [∀ i, QuasiCompact (g.app i)] [∀ i, QuasiSeparated (g.app i)]
+    [∀ i, CompactSpace (S.obj i)] [∀ i, QuasiSeparatedSpace (S.obj i)]
+    [∀ i, CompactSpace (X.obj i)] [∀ i, QuasiSeparatedSpace (X.obj i)]
     [∀ {i j : I} (f : i ⟶ j), IsAffineHom (S.map f)]
     [∀ {i j : I} (f : i ⟶ j), IsAffineHom (X.map f)]
     [∀ {i j : I} (f : i ⟶ j), IsAffineHom (T.map f)]

@@ -41,7 +41,8 @@ monomorphisms. -/
 lemma mono_mapMap (j : J) [(MorphismProperty.monomorphisms C).IsStableUnderColimitsOfShape
       (Discrete (p ⁻¹' {j}))] (hφ : ∀ i, Mono (φ i)) :
     Mono (mapMap φ p j) :=
-  MorphismProperty.IsStableUnderColimitsOfShape.condition _ _ _
+  MorphismProperty.IsStableUnderColimitsOfShape.condition
+    (Discrete.functor (X.mapObjFun p j)) (Discrete.functor (Y.mapObjFun p j)) _ _
     (colimit.isColimit _) (colimit.isColimit _)
     (Discrete.natTrans fun i ↦ φ i.as.1) (fun i ↦ hφ i.as.1) (mapMap φ p j)
     (fun i ↦ ι_mapMap φ p i.as.1 j i.as.2)
@@ -61,11 +62,21 @@ lemma mono_whiskerRight_of_shortExact {S : ShortComplex C} (hS : S.ShortExact)
     (h₃ : flat S.X₃) {Q Z : C} (π : Q ⟶ Z) [Epi π] (hQ : flat Q) : Mono (S.f ▷ Z) := by
   have (F : C) : PreservesColimitsOfSize.{0, 0} (tensorRight F) :=
     preservesColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight F)
+  have := hS.mono_f
   have := hS.epi_g
   have := h₃.tensorLeft.preservesFiniteLimits
   have := hQ.tensorRight.preservesFiniteLimits
   have hK : (ShortComplex.mk (kernel.ι π) π (kernel.condition π)).Exact :=
     ShortComplex.exact_of_f_is_kernel _ (kernelIsKernel π)
+  have hK₂ : (ShortComplex.mk (S.X₂ ◁ kernel.ι π) (S.X₂ ◁ π) (by
+      rw [← MonoidalCategory.whiskerLeft_comp, kernel.condition,
+        MonoidalPreadditive.whiskerLeft_zero])).Exact :=
+    hK.map_of_epi_of_preservesCokernel (tensorLeft S.X₂) (by dsimp; infer_instance)
+      inferInstance
+  have hS₂ : (ShortComplex.mk (S.f ▷ kernel π) (S.g ▷ kernel π) (by
+      rw [← comp_whiskerRight, S.zero, MonoidalPreadditive.zero_whiskerRight])).Exact :=
+    hS.exact.map_of_epi_of_preservesCokernel (tensorRight _) hS.epi_g
+      inferInstance
   have hmono₃ : Mono (S.X₃ ◁ kernel.ι π) := (tensorLeft S.X₃).map_mono (kernel.ι π)
   have hmonoQ : Mono (S.f ▷ Q) := (tensorRight Q).map_mono S.f
   have hπe : Epi (S.X₁ ◁ π) := (tensorLeft S.X₁).map_epi π
@@ -73,8 +84,7 @@ lemma mono_whiskerRight_of_shortExact {S : ShortComplex C} (hS : S.ShortExact)
   -- lift `x` to `X₁ ⊗ Q`
   obtain ⟨T₁, π₁, _, y, hy⟩ := surjective_up_to_refinements_of_epi (S.X₁ ◁ π) x
   -- its image in `X₂ ⊗ Q` comes from `X₂ ⊗ ker π`
-  obtain ⟨T₂, π₂, _, w, hw⟩ := (hK.map_of_epi_of_preservesCokernel (tensorLeft S.X₂)
-      (by dsimp; infer_instance) inferInstance).exact_up_to_refinements (y ≫ S.f ▷ Q) (by
+  obtain ⟨T₂, π₂, _, w, hw⟩ := hK₂.exact_up_to_refinements (y ≫ S.f ▷ Q) (by
     dsimp
     rw [Category.assoc, ← whisker_exchange, ← Category.assoc, ← hy, Category.assoc, hx,
       comp_zero])
@@ -85,13 +95,12 @@ lemma mono_whiskerRight_of_shortExact {S : ShortComplex C} (hS : S.ShortExact)
       ← Category.assoc, ← hw, Category.assoc, Category.assoc, ← comp_whiskerRight, S.zero,
       MonoidalPreadditive.zero_whiskerRight, comp_zero, comp_zero]
   -- so it comes from `X₁ ⊗ ker π`
-  obtain ⟨T₃, π₃, _, v, hv⟩ := (hS.exact.map_of_epi_of_preservesCokernel (tensorRight _)
-      (by dsimp; infer_instance) inferInstance).exact_up_to_refinements w hw₀
+  obtain ⟨T₃, π₃, _, v, hv⟩ := hS₂.exact_up_to_refinements w hw₀
   dsimp at hv
   have hyv : π₃ ≫ π₂ ≫ y = v ≫ S.X₁ ◁ kernel.ι π := by
     rw [← sub_eq_zero, ← cancel_mono (S.f ▷ Q), zero_comp, Preadditive.sub_comp,
-      Category.assoc, Category.assoc, hw, ← Category.assoc, hv, Category.assoc,
-      whisker_exchange, sub_self]
+      Category.assoc, Category.assoc, hw, ← Category.assoc, hv]
+    simp [whisker_exchange]
   rw [← cancel_epi (π₃ ≫ π₂ ≫ π₁), comp_zero, Category.assoc, Category.assoc, hy,
     ← Category.assoc, ← Category.assoc, Category.assoc π₃, hyv, Category.assoc,
     ← MonoidalCategory.whiskerLeft_comp, kernel.condition, MonoidalPreadditive.whiskerLeft_zero,
@@ -111,15 +120,10 @@ lemma mono_whiskerRight_of_shortExact' {S : ShortComplex C} (hS : S.ShortExact)
 lemma mono_whiskerLeft_of_shortExact {S : ShortComplex C} (hS : S.ShortExact)
     (h₃ : flat S.X₃) (Z : C) : Mono (Z ◁ S.f) := by
   have := mono_whiskerRight_of_shortExact' hS h₃ Z
-  have e := BraidedCategory.braiding_naturality_left S.f Z
-  have : Mono (Z ◁ S.f ≫ (β_ S.X₂ Z).inv) := by
-    rw [← cancel_epi (β_ S.X₁ Z).hom] at e
-    have h : Z ◁ S.f ≫ (β_ S.X₂ Z).inv = (β_ S.X₁ Z).inv ≫ S.f ▷ Z := by
-      rw [Iso.eq_inv_comp, ← Category.assoc, ← BraidedCategory.braiding_naturality_left,
-        Category.assoc, Iso.hom_inv_id, Category.comp_id]
-    rw [h]
-    infer_instance
-  exact mono_of_mono _ (β_ S.X₂ Z).inv
+  have h : Z ◁ S.f = (β_ S.X₁ Z).inv ≫ S.f ▷ Z ≫ (β_ S.X₂ Z).hom := by
+    rw [BraidedCategory.braiding_naturality_left, Iso.inv_hom_id_assoc]
+  rw [h]
+  infer_instance
 
 /-- **The kernel of an epimorphism between flat objects is flat.** -/
 lemma flat_of_shortExact {S : ShortComplex C} (hS : S.ShortExact) (h₂ : flat S.X₂)
@@ -135,7 +139,7 @@ lemma flat_of_shortExact {S : ShortComplex C} (hS : S.ShortExact) (h₂ : flat S
   have : Mono (S.X₁ ◁ T.f ≫ S.f ▷ T.X₂) := by
     rw [whisker_exchange]
     infer_instance
-  exact mono_of_mono _ (S.f ▷ T.X₂)
+  exact mono_of_mono (S.X₁ ◁ T.f) (S.f ▷ T.X₂)
 
 end CategoryTheory.ObjectProperty
 
@@ -151,9 +155,7 @@ lemma mono_whiskerRight_of_mono_f {K L : CochainComplex C ℤ} (f : K ⟶ L)
   have : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
   refine HomologicalComplex.mono_of_mono_f _ fun n ↦ ?_
   refine GradedObject.mono_mapMap _ _ n fun ⟨p, q⟩ ↦ ?_
-  dsimp
-  rw [MonoidalCategory.whiskerLeft_id, Category.comp_id]
-  exact hf p q
+  simpa using hf p q
 
 /-- If `f : K ⟶ L` is a morphism of complexes such that every `Z^q ⊗ f^p` is a monomorphism,
 then so is `Z ⊗ f`. -/

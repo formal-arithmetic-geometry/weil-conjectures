@@ -45,6 +45,43 @@ theorem Hom.isClosed_singleton_iff_finite_residueField (f : X.Hom (Spec (.of k))
   have := locallyOfFiniteType_of_comp (X.fromSpecResidueField x) f
   exact isClosed_singleton_iff_locallyOfFiniteType.2 this
 
+/-- The residue field `κ(x)` of a point of a scheme locally of finite type over `k` is
+essentially of finite type over `k`, i.e. a finitely generated field extension of `k`. -/
+theorem Hom.essFiniteType_residueFieldAlgebraMap (f : X.Hom (Spec (.of k)))
+    [LocallyOfFiniteType f] (x : X) : (f.residueFieldAlgebraMap x).EssFiniteType := by
+  rw [Hom.residueFieldAlgebraMap, CommRingCat.hom_comp, CommRingCat.hom_comp]
+  refine RingHom.EssFiniteType.comp ?_ (RingHom.EssFiniteType.comp ?_ ?_)
+  · exact RingHom.essFiniteType_algebraMap.2 inferInstance
+  · exact (RingHom.FiniteType.of_surjective _
+      (ConcreteCategory.bijective_of_isIso (Spec.residueFieldIso _ _).inv).2).essFiniteType
+  · exact RingHom.EssFiniteType.residueFieldMap (LocallyOfFiniteType.stalkMap f x)
+
+/-- A finitely generated algebraic field extension is finite. -/
+theorem _root_.Module.Finite.of_essFiniteType_of_isAlgebraic (K L : Type*) [Field K] [Field L]
+    [Algebra K L] [Algebra.EssFiniteType K L] [Algebra.IsAlgebraic K L] : Module.Finite K L := by
+  obtain ⟨s, hs⟩ := IntermediateField.fg_top_iff.2 (inferInstance : Algebra.EssFiniteType K L)
+  have : FiniteDimensional K (IntermediateField.adjoin K (s : Set L)) :=
+    IntermediateField.finiteDimensional_adjoin fun x _ ↦ Algebra.IsIntegral.isIntegral x
+  rw [hs] at this
+  exact Module.Finite.equiv IntermediateField.topEquiv.toLinearEquiv
+
+/-- Blueprint `lem-kun-closed-point-field` (a), transcendence degree form: a point `x` of a
+scheme locally of finite type over a field `k` is closed if and only if `κ(x)` is algebraic over
+`k` (i.e. `trdeg_k κ(x) = 0`).
+
+Proof: `κ(x)` is a finitely generated field extension of `k`, so it is algebraic if and only if
+it is finite; conclude by `Hom.isClosed_singleton_iff_finite_residueField`. -/
+theorem Hom.isClosed_singleton_iff_isAlgebraic_residueField (f : X.Hom (Spec (.of k)))
+    [LocallyOfFiniteType f] (x : X) :
+    letI := (f.residueFieldAlgebraMap x).toAlgebra
+    IsClosed {x} ↔ Algebra.IsAlgebraic k (X.residueField x) := by
+  let := (f.residueFieldAlgebraMap x).toAlgebra
+  rw [f.isClosed_singleton_iff_finite_residueField x]
+  refine ⟨fun _ ↦ inferInstance, fun _ ↦ ?_⟩
+  have : Algebra.EssFiniteType k (X.residueField x) :=
+    RingHom.essFiniteType_algebraMap.1 (f.essFiniteType_residueFieldAlgebraMap x)
+  exact Module.Finite.of_essFiniteType_of_isAlgebraic k _
+
 /-- Blueprint `lem-kun-closed-point-field` (b): if `k` is separably closed and `x` is a closed
 point of a scheme locally of finite type over `k`, then `κ(x)` is finite and purely
 inseparable over `k`, and `κ(x)` is separably closed.
