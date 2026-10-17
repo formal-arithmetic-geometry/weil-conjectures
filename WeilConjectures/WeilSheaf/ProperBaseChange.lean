@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.WeilSheaf.LowerStar
+public import WeilConjectures.WeilSheaf.TraceFunctionOps
 
 /-!
 # Proper base change for Weil complexes
@@ -46,6 +47,17 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
+/-- Pullback commutes with placing a Weil sheaf in degree zero: `φ^* (F[0]) ≅ (φ^* F)[0]`, the
+pullback of Weil complexes being induced by the exact pullback of pro-étale Weil sheaves. -/
+noncomputable def WeilSheaf.upperStarToComplexIso {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ}
+    [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+    [Y.Over (Spec (CommRingCat.of k₀))] (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
+    (F : WeilSheaf k₀ l Y) :
+    (WeilComplex.upperStar φ).obj (WeilSheaf.toComplex.obj F) ≅
+      WeilSheaf.toComplex.obj ((WeilSheaf.upperStar φ).obj F) :=
+  ObjectProperty.isoMk _
+    (((ProEtaleWeilSheaf.upperStar k₀ l φ).mapDerivedCategorySingleFunctor 0).app F.obj)
+
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   {X Y X' Y' : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [Y.Over (Spec (CommRingCat.of k₀))] [X'.Over (Spec (CommRingCat.of k₀))]
@@ -77,7 +89,11 @@ of Weil sheaves. -/
 theorem WeilSheaf.nonempty_upperStar_higherLowerStar_iso_of_isProper
     (h : IsPullback g' f' f g) (F : WeilSheaf k₀ l X) (i : ℕ) :
     Nonempty ((WeilSheaf.upperStar g).obj ((WeilSheaf.higherLowerStar f i).obj F) ≅
-      (WeilSheaf.higherLowerStar f' i).obj ((WeilSheaf.upperStar g').obj F)) :=
-  sorry
+      (WeilSheaf.higherLowerStar f' i).obj ((WeilSheaf.upperStar g').obj F)) := by
+  obtain ⟨e⟩ := WeilComplex.nonempty_upperStar_derivedLowerStar_iso_of_isProper h
+    (WeilSheaf.toComplex.obj F)
+  exact ⟨(WeilComplex.homologySheafUpperStarIso g i _).symm ≪≫
+    (WeilComplex.homologySheaf i).mapIso
+      (e ≪≫ (WeilComplex.derivedLowerStar f').mapIso (WeilSheaf.upperStarToComplexIso g' F))⟩
 
 end AlgebraicGeometry

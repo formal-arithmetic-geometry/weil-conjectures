@@ -4242,6 +4242,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedFieldExact
 public import WeilConjectures.SixFunctors.ProEtale.Adic.BaseChange
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedOpenImmersion
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedOpenImmersionUnit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedSupport
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantGlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
@@ -4293,6 +4294,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalkPointwise
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseUniversalCover
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Localization
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarClopenSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarComp
 public import WeilConjectures.SixFunctors.ProEtale.Adic.MayerVietoris
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Module
@@ -4606,6 +4608,7 @@ public import WeilConjectures.WeilSheaf.StalkConstantSheaf
 public import WeilConjectures.WeilSheaf.StalkConstantTwist
 public import WeilConjectures.WeilSheaf.StalkExtensionByZero
 public import WeilConjectures.WeilSheaf.StalkFrobenius
+public import WeilConjectures.WeilSheaf.StalkFrobeniusPow
 public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.WeilSheaf.StalkInternalHom
 public import WeilConjectures.WeilSheaf.StalkIso
