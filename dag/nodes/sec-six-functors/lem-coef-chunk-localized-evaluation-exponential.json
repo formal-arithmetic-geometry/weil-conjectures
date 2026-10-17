@@ -9,7 +9,11 @@
  },
  "stmt_deps": [
   "lem-coef-simplicial-projective-model-calculus",
-  "lem-coef-simplicial-localization-comparison-calculus"
+  "lem-coef-simplicial-localization-comparison-calculus",
+  "lem-coef-simplicial-small-chunks",
+  "lem-coef-common-chunk-filtered-approximation",
+  "lem-coef-simplicial-fully-faithful-homotopy-image",
+  "lem-coef-simplicial-diagram-equivalence-classes"
  ],
  "proof": [
   {
@@ -229,5 +233,44 @@
   "group": "Q59",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-25641f062 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-chunk-bifibrant-localization and the full statements of all 8 cited nodes, and checked every step. Nothing needed fixing. (1) No cycle at this branch: I recomputed reachability over stmt_deps and proof_deps, and none of the 8 proof deps reaches the item. diagram-equivalence-classes and fully-faithful-homotopy-image are unsplit here, so the SCC described in the report is historical. (2) The unit route holds: every cited node is in sk-prop-sf-biduality-general. No tool_uses are declared, accepted or needed. (3) The steps are sound. Step 1's enriched evaluation sends V to objectwise weak equivalences, so localization functoriality applies. Step 2: inversion-product-parameter with C=A, D=J has W_D=V exactly. Its product argument is valid for non-Kan factors: Rf×1 is a base change along a Kan fibration, then right properness, Ex-infinity product compatibility and two-out-of-three. Step 4 applies the new node to U in M and to U^I in M^I; U^I is small and its weak equivalences between fibrant objects are W_I. Its composites k→θ×1 and k→ηe check out. Step 5's currying (M^I)^T≅M^{I×T} is valid with the same projective classes. Its claim that the bijection is evaluation holds because every class has a strict bifibrant representative. Steps 6-7 use the injectivity and essential-image criterion correctly, and the restricted bijection under exactly I cofibrant and U an I-chunk. The empty-family chunk replacement stays in U^I. Step 8 is elementary. (4) Edge cases T, I, J or U empty all hold. (5) The new node is a correct simplicial-set case of HTT A.3.6.17 and needs U to contain cofibrant replacements and path objects. It generalizes the whole-model clause of localization-comparison-calculus, and no existing node states it. It does not restate a clause of the item. It is statement-only and self-contained, with all four search kinds and blueprint provenance. (6) The source is HTT A.3.4/A.3.6, which is not archived (WANTED), so I checked the mathematics directly. proof_origin=agent is correct. No SGA is used and no statement is weakened. Minor notes, not faults: Step 5 could cite lem-coef-simplicial-derived-exponential instead of re-deriving it; the new node lacks a lean_audit field."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dd6414536",
+  "group": "Q61",
+  "result": "fix",
+  "note": "Statement matches node clause by clause; edge cases (empty U/I/J, n=0, non-cofibrant T, independent universes) and all gates pass. Delivered and fixed modules compile clean with nt_compile.py (6.6 s / 6.4 s). H4 fixed: parameterPair duplicated SimplicialInversion.productPair (proof dep, landed after the base); fixes/ has the complete module using productPair (public import added, parameterFirst gets a real marking-preservation proof, no sorry) and a lean-record.json dropping parameterPair, statement unchanged. Maintainer notes: the MarkedConeExternalProduct import is owned by a node downstream of this item (same as already-landed SimplicialInversionProductParameter), so productIndex needs splitting before stage 3; optionally add inversion-product-parameter to stmt_deps."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ChunkLocalizedEvaluationExponential",
+  "declaration": "CategoryTheory.ChunkLocalizedEvaluation.chunk_localized_evaluation_exponential",
+  "declarations": [
+   "CategoryTheory.ChunkLocalizedEvaluation.first",
+   "CategoryTheory.ChunkLocalizedEvaluation.second",
+   "CategoryTheory.ChunkLocalizedEvaluation.parameterFirst",
+   "CategoryTheory.ChunkLocalizedEvaluation.chunkPair",
+   "CategoryTheory.ChunkLocalizedEvaluation.productCone",
+   "CategoryTheory.ChunkLocalizedEvaluation.homotopyProductCone",
+   "CategoryTheory.ChunkLocalizedEvaluation.largeIndex",
+   "CategoryTheory.ChunkLocalizedEvaluation.Span",
+   "CategoryTheory.ChunkLocalizedEvaluation.uncurry",
+   "CategoryTheory.ChunkLocalizedEvaluation.WeakExponential",
+   "CategoryTheory.ChunkLocalizedEvaluation.chunkMap",
+   "CategoryTheory.ChunkLocalizedEvaluation.ProductMap",
+   "CategoryTheory.ChunkLocalizedEvaluation.Restriction",
+   "CategoryTheory.ChunkLocalizedEvaluation.NaturalSpanSquare",
+   "CategoryTheory.ChunkLocalizedEvaluation.ParameterMap",
+   "CategoryTheory.ChunkLocalizedEvaluation.EvaluationSystem",
+   "CategoryTheory.ChunkLocalizedEvaluation.chunk_localized_evaluation_exponential"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ChunkLocalizedEvaluationExponential.lean",
+  "statement": "theorem chunk_localized_evaluation_exponential (M : Type w) [Category.{u} M] [ModelCategory M] [SimplicialCategory M] (T : SimplicialTensorCotensor M) (hC : CombinatorialModelCategory.{w, u, u} M) (hSM7 : SimplicialModelLocalization.SatisfiesSM7 M) (B : BergnerModelData.{max u w}) : ∃ L : LocalizationSystem B, Nonempty (EvaluationSystem M T L)",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing chunk, projective diagram, marked full-subcategory, coordinatewise enriched product, marked product (SimplicialInversion.productPair of lem-coef-simplicial-inversion-product-parameter, a proof dependency landed after the delivery base; it replaces the delivered duplicate parameterPair, fix by the maintainer's reviewer) and Bergner localization definitions. The theorem supplies functorial enriched localization with its unit and derived-pushout presentations, then specifies evaluation on every mapping simplex, both localized projections, actual enriched restriction/parameter maps and the natural span-induced Hom bijection. No object is chosen from a sorry existence theorem. The marked-cone module is used only for its productIndex definition, not its external-product theorem; adding that theorem node as a mathematical dependency would close a downstream cycle.",
+  "fixed_by": "NT-stage2-cc-dd6414536"
  }
 }
