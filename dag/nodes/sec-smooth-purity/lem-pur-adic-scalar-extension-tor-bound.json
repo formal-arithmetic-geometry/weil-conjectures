@@ -17,9 +17,68 @@
   "lem-pur-derived-change-of-rings",
   "lem-weil-finite-free-completed-scalar-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $R=\\widehat{\\mathcal O}_{E,W}$, $S=\\widehat{\\mathcal O}_{F,W}$, $A=A_{E,n}$ and $C=A_{F,m}$, where $m\\geq1$ is arbitrary and $n$ is chosen with $en\\geq m$. Since $\\varpi_E^n\\mathcal O_F=\\varpi_F^{en}\\mathcal O_F\\subseteq\\varpi_F^m\\mathcal O_F$, the reduction $\\mathcal O_F\\to C$ kills $\\varpi_E^n$, so $\\mathcal O_E\\to C$ factors through $A$; on limit projections the two ring maps $R\\to S\\to C_W$ and $R\\to A_W\\to C_W$ agree. Choose a K-flat resolution $P\\to K$ over $R$ with flat terms. Then $P\\otimes_RS$ is K-flat over $S$ with flat terms and $Q=P\\otimes_RA_W$ is K-flat over $A_W$ with flat terms, and $Q$ represents $K_n=K\\otimes^L_{\\mathcal O_E}A_{E,n}$; $P\\otimes_RS$ represents $C_{F/E,W}(K)$. Hence the $F$-level reduction $C_{F/E,W}(K)\\otimes^L_{\\mathcal O_F}A_{F,m}$ is represented by $(P\\otimes_RS)\\otimes_SC_W$, which by associativity of termwise change of rings along $R\\to S\\to C_W$ and $R\\to A_W\\to C_W$ equals $P\\otimes_RC_W=Q\\otimes_AC_W$, a representative of $K_n\\otimes^L_AC$. The derived change-of-rings statement makes these identifications independent of $P$. No flatness of $C$ over $A$ is used.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings",
+    "lem-pur-derived-change-of-rings",
+    "def-weil-integral-derived-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+    "place": "first paragraph: exactness and cofinal reductions"
+   }
+  },
+  {
+   "text": "Let $N$ be any sheaf of $C_W$-modules placed in degree zero. Since $Q\\otimes_AC_W$ is K-flat over $C_W$, the derived tensor of [def-weil-derived-tensor] computes $(K_n\\otimes^L_AC)\\otimes^L_CN$ as the total tensor complex $(Q\\otimes_AC_W)\\otimes_CN$, which is termwise and as a complex equal to $Q\\otimes_A\\operatorname{Res}N$, where $\\operatorname{Res}N$ is $N$ regarded as a sheaf of $A_W$-modules by restriction of scalars. As $Q$ is a K-flat resolution of $K_n$, this complex computes $K_n\\otimes^L_A\\operatorname{Res}N$. By hypothesis $K_n$ has Tor amplitude in $[a,b]$, so by [def-weil-proetale-tor-amplitude] applied to the degree-zero $A_W$-module $\\operatorname{Res}N$ its cohomology sheaves vanish outside $[a,b]$. Thus every $F$-level reduction of $C_{F/E,W}(K)$ has Tor amplitude in $[a,b]$, the same interval for all $m$. The test only uses restriction of scalars along $A\\to C$, never flatness of $C$ over $A$.",
+   "uses": [
+    "def-weil-proetale-tor-amplitude",
+    "def-weil-derived-tensor",
+    "lem-pur-kflat-change-of-rings",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+    "place": "first paragraph after displayed reductions: constructibility and uniform Tor bounds"
+   }
+  },
+  {
+   "text": "The quotient identifications are compatible with transition maps in m, so the complexes just described form the normalized F-tower of the completed scalar extension. The normalized-DVR effectivity statement identifies its derived-limit object with these reductions and gives derived completeness. The completed scalar comparison identifies $C_{F/E,W}(K)$ (K is derived complete) with the strict-tower integral scalar extension, and the integral scalar-extension constructibility theorem places the resulting object in the bounded constructible category; together with the uniform [a,b] calculation above, it lies in D^b_ctf(W,\\mathcal O_F) and has the asserted interval at every F-level.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-coef-normalized-dvr-effectivity",
+    "lem-weil-integral-scalar-extension-constructible",
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+    "place": "first paragraph after displayed reductions: normalized tower reconstruction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-tensor",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-integral-derived-reduction",
+  "def-weil-proetale-tor-amplitude",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-integral-scalar-extension-constructible"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "first two paragraphs: cofinal reductions and uniform Tor bounds"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,7 +124,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-adic-purity-scalar-naturality",
@@ -80,7 +139,25 @@
    "via": [],
    "place": "Unit Step 2: ordinary derived coefficient extension preserves the finite-Tor domain"
   },
-  "same_as": [],
+  "same_as": [
+   "lem-coef-integral-finite-extension"
+  ],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-pur-adic-scalar-extension-tor-bound",
+  "worker": "stage1",
+  "summary": "Audited the imported statement against the current coefficient-tower route. No new node is needed: the finite-free completed scalar comparison, derived change of rings, finite-level Tor-amplitude definition, K-flat change of rings, normalized-DVR effectivity and integral constructibility nodes already supply the needed notions. Replaced the empty proof with three steps: identify cofinal reductions, test every arbitrary F-level against degree-zero modules by associativity and restriction of scalars, and reconstruct the normalized tower. The statement and hypotheses are unchanged; the proof explicitly avoids any flatness assumption for intermediate quotients.",
+  "blueprint": "Realizes thm-pur-rational-and-qbar-purity, Unit Step 2 (ordinary derived coefficient extension preserves the finite-Tor domain), through the current main-20261015 scalar-extension tower proof.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NI-90337ad7d",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-90337ad7d (reviewer sub-agent of L); spot-checked: Read the item and every cited node in full, the main-20261015 lem-coef-integral-finite-extension.proof.md (first paragraph) and master sk-thm-purity-transport Step 2. The statement is true; I tested it on E=F and on Q_l(sqrt l) with e=2, m=3, n=2, where A_{F,3} is not flat over Z/l^2, using K=Z_l and K=Z/l. The delivery has no new nodes. Batch-5 check: step 2 cited lem-coef-finite-free-extension, whose closure reaches lem-trf-adjoint-mate, only for a finite freeness the argument never uses; the blueprint paragraph it follows does not cite it either. I removed the citation (no file still cites it). Step 1 now works at every level m with en>=m and cites the K-flat change of rings it used without citation: lem-pc-kflat-resolution and lem-pur-kflat-change-of-rings, plus associativity along R->S->A_{F,m} = R->A_{E,n}->A_{F,m}. Step 2 tests the Tor amplitude through def-weil-derived-tensor and restriction of scalars, so no flatness is needed. Step 3 now also cites lem-weil-finite-free-completed-scalar-comparison to identify C(K) with the strict-tower extension. proof_deps were recomputed; the statement is unchanged. Tool use to record: lem-pc-kflat-resolution (generic). Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-pur-adic-scalar-extension-tor-bound.json.; 1 file(s) fixed by the reviewer"
  }
 }
