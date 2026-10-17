@@ -21,7 +21,12 @@
   "def-weil-derived-complete-integral-detailed",
   "def-weil-rationalization-karoubi",
   "def-weil-algebraically-closed-coefficients",
-  "def-exchange-projection"
+  "def-exchange-projection",
+  "lem-sp-finite-ring-compact-support-projection",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "def-pur-integral-derived-operations",
+  "def-weil-pbc-constructible-complexes",
+  "lem-sf-integral-compact-support-constructible"
  ],
  "proof": [
   {
@@ -343,5 +348,35 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-8f3c57997 (reviewer sub-agent of L); spot-checked: I read all of it: the item, the 8 delivered steps, the statements of all 23 cited nodes, the unit sk-thm-sf-pf-proetale, the main-20261015 blueprint for sk-thm-sf-pf-proetale and thm-sf-pf-proetale, the units sk-thm-sf-pf-field and sk-thm-sf-pf-adic, the full proof of thm-sf-pf-adic, and def-sf-datum. The statement is unchanged and nothing is weakened: each stage is typed separately (finite pro-etale with witnesses, derived-complete completed integral, raw rationalization, common stage), and PF is the def-exchange-projection composite at a chosen compactification. Steps 1-2 are correct. Step 1 uses Stacks 01T6 for Noetherianity, Noetherian Nagata, and the qc-open-immersion triangle. Step 2: constructible-origin(ii) supplies the etale representatives; comparison-Tor(ii) applies because L_0 is bounded below; lem-weil-finite-compact-projection-formula needs Tor amplitude on L only, and its final paragraph names the pro-etale composite. Steps 7-8 (field stages via thm-sf-pf-field, the raw localization and the common-stage Hom-colimit) are correct. Fault (C7/C8, C5): steps 3-6 re-proved the integral stage with off-unit tools (completion-unit equivalence, Roos-triangle levelwise iso) and declared a route_error. But the on-route, reviewed thm-sf-pf-adic states exactly this. It covers derived-complete K,L with uniform Tor reductions, completed operations and the def-exchange-projection composite, and gives an isomorphism that reduces to PF_n. Its unit sk-thm-sf-pf-adic is on the route through sk-thm-sf-pf-field, and the blueprint thm-sf-pf-proetale proof says '[thm-sf-pf-adic] gives the integral stage'. The route_error also had stale step numbers. Fix: steps 3-6 are replaced by one step citing thm-sf-pf-adic, with each hypothesis checked and the compactification of step 1 taken as the arbitrary choice c. The rational and common-stage steps are renumbered 4-5, and step 4 now localizes the isomorphism from step 3. proof_deps is the union of uses. split_report summary, blueprint, route_error ('none established') and tool_uses are updated. I checked that there is no cycle. Accepted tool_uses: lem-weil-pbc-finite-type-over-noetherian, sk-thm-nagata-sketch-noetherian, lemma-nagata-open-immersion-qc-over-separated-target, lem-sf-proetale-constructible-origin, lem-sf-comparison-tor-amplitude, lem-weil-finite-compact-projection-formula, lem-coef-integral-residue-tor. No new nodes and no SGA source.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfProEtaleProjectionFormula",
+  "declaration": "WeilConjectures.sf_proetale_projection_formula",
+  "declarations": [
+   "WeilConjectures.SfProEtaleProjection.Origin",
+   "WeilConjectures.SfProEtaleProjection.TensorModel",
+   "WeilConjectures.SfProEtaleProjection.ordinarySource",
+   "WeilConjectures.SfProEtaleProjection.ordinaryInner",
+   "WeilConjectures.SfProEtaleProjection.completedSource",
+   "WeilConjectures.SfProEtaleProjection.completedTarget",
+   "WeilConjectures.SfProEtaleProjection.integralDomains",
+   "WeilConjectures.SfProEtaleProjection.integralMap",
+   "WeilConjectures.sf_proetale_projection_formula"
+  ],
+  "file": "lean/Sheaf/Paper/SfProEtaleProjectionFormula.lean",
+  "statement": "theorem sf_proetale_projection_formula (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) : (∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (K : proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E (n + 1))) (L : proEtaleDerivedCategory Y (Padic.coefficientExtensionRing l E (n + 1))) (_hK : finiteTorConstructible l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) X K) (_hL : finiteTorConstructible l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) Y L) (_wK : SfProEtaleProjection.Origin X (Padic.coefficientExtensionRing l E (n + 1)) K) (_wL : SfProEtaleProjection.Origin Y (Padic.coefficientExtensionRing l E (n + 1)) L), let P := Arrow.mk (((finiteRingCompactSupportProjection (Padic.coefficientExtensionRing l E (n + 1)) c).app K).app L) ∃ (hS : (DerivedCategory.TStructure.t (C := proEtaleRingModules Y (proEtaleConstantRing Y (Padic.coefficientExtensionRing l E (n + 1))))).plus P.left) (hT : (DerivedCategory.TStructure.t (C := proEtaleRingModules Y (proEtaleConstantRing Y (Padic.coefficientExtensionRing l E (n + 1))))).plus P.right), IsIso (ObjectProperty.homMk P.hom : (⟨P.left, hS⟩ : DerivedCategory.Plus (proEtaleRingModules Y (proEtaleConstantRing Y (Padic.coefficientExtensionRing l E (n + 1))))) ⟶ (⟨P.right, hT⟩ : DerivedCategory.Plus (proEtaleRingModules Y (proEtaleConstantRing Y (Padic.coefficientExtensionRing l E (n + 1))))))) ∧ (∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (aX : SfProEtaleProjection.TensorModel l E X) (aZ : SfProEtaleProjection.TensorModel l E c.Z) (aY : SfProEtaleProjection.TensorModel l E Y) (K : sfIntegralConstructibleCategory l E X) (L : sfIntegralConstructibleCategory l E Y) (_hK : finiteTorConstructibleIntegral l E X K.obj) (_hL : finiteTorConstructibleIntegral l E Y L.obj) (_wK : ∀ n : ℕ, SfProEtaleProjection.Origin X (Padic.coefficientExtensionRing l E (n + 1)) ((scalarReductionDerivedExtension l E X n).obj K.obj)) (_wL : ∀ n : ℕ, SfProEtaleProjection.Origin Y (Padic.coefficientExtensionRing l E (n + 1)) ((scalarReductionDerivedExtension l E Y n).obj L.obj)), IsIso (SfProEtaleProjection.integralMap l E D hl f c aX aZ aY K L)) ∧ (∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (aX : SfProEtaleProjection.TensorModel l E X) (aZ : SfProEtaleProjection.TensorModel l E c.Z) (aY : SfProEtaleProjection.TensorModel l E Y) (K : sfIntegralConstructibleCategory l E X) (L : sfIntegralConstructibleCategory l E Y), IsIso ((sfRationalConstructibleLocalization l E Y).map (SfProEtaleProjection.integralMap l E D hl f c aX aZ aY K L))) ∧ (∀ (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (F : Padic.FiniteCoefficientFields l Ω) (aX : SfProEtaleProjection.TensorModel l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) X) (aZ : SfProEtaleProjection.TensorModel l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) c.Z) (aY : SfProEtaleProjection.TensorModel l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) Y) (K : sfIntegralConstructibleCategory l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) X) (L : sfIntegralConstructibleCategory l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) Y), IsIso ((GeneralAlgebraicallyClosedCoefficients.inclusion (Y := Y) F).map ((sfRationalConstructibleLocalization l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) Y).map (SfProEtaleProjection.integralMap l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) D hl f c aX aZ aY K L))))",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of f133502b9519: removes arbitrary categories, operations, and projection fields. Finite projection is the existing canonical intrinsic transport. Integral projection is explicitly the completion-unit extension of PurCompactSupport.projectionMap over the completed coefficient sheaf, in sfIntegralConstructibleCategory. The field clauses apply the actual raw localization and common-stage inclusion; no integral finite-Tor or lattice condition is added to field inputs. All tensor presentations have signed K-flat representative identifications. Helper integralDomains supplies only typing and completion-unit facts implicit in this projection, on finite-type schemes without structural separatedness. Origin transports the recorded witness through the existing intrinsic equivalence. Statement, proof and proof dependencies remain those of current main."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-30b1c23f9",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Reviewed node, source, dependencies, Lean module, report, route-pivot compliance, edge cases, and canonical constructions. scompile.py sandbox and library checks both passed with exit 0; review.md records all checks."
  }
 }

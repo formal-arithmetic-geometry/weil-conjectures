@@ -176,5 +176,24 @@
   "group": "NQ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-0b5e60a39 (reviewer sub-agent of L); spot-checked: Reviewed item and both new nodes against Stacks 0D66, 0D5Q, and 0D68; checked every proof step, hypothesis, edge case, cited statement, route, searches, duplicates, and coefficient category. No faults or repairs needed. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedBasisLocalHomGlue",
+  "declaration": "AlgebraicGeometry.derived_basis_local_hom_glue",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedBasisLocalHomGlue.lean",
+  "statement": "theorem derived_basis_local_hom_glue (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (C : Set X.Opens) (hcover : sSup C = ⊤) (hrefine : ∀ U ∈ C, ∀ V ∈ C, sSup {W : X.Opens | W ∈ C ∧ W ≤ U ⊓ V} = U ⊓ V) (M N : schemeDerivedCategory X) (hnegative : ∀ U ∈ C, ∀ i : ℤ, i < 0 → Subsingleton ((SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj M ⟶ ((SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj N)⟦i⟧)) : ∀ O : X.Opens, sSup {U : X.Opens | U ∈ C ∧ U ≤ O} = O → (∀ i : ℤ, i < 0 → Subsingleton ((SheafOfModules.overFunctor (moduleRings X.toRingedSpace) O).mapDerivedCategory.obj M ⟶ ((SheafOfModules.overFunctor (moduleRings X.toRingedSpace) O).mapDerivedCategory.obj N)⟦i⟧)) ∧ (∀ (a : ∀ U : {U : X.Opens // U ∈ C ∧ U ≤ O}, (SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U.val).mapDerivedCategory.obj M ⟶ (SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U.val).mapDerivedCategory.obj N), (∀ (U V : {U : X.Opens // U ∈ C ∧ U ≤ O}) (h : V.val ≤ U.val), derivedOpenHomRestriction X.toRingedSpace (homOfLE h) (a U) = a V) → ∃! f : (SheafOfModules.overFunctor (moduleRings X.toRingedSpace) O).mapDerivedCategory.obj M ⟶ (SheafOfModules.overFunctor (moduleRings X.toRingedSpace) O).mapDerivedCategory.obj N, ∀ U : {U : X.Opens // U ∈ C ∧ U ≤ O}, derivedOpenHomRestriction X.toRingedSpace (homOfLE U.property.2) f = a U)",
+  "branch": "newtargets-dag",
+  "by": "Q81",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Unique-preimage formulation of the restriction bijection; local derived categories use the shared localized open-site encoding, canonically equivalent to modules on the open subscheme. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-576108da9",
+  "group": "Q81",
+  "result": "fix",
+  "note": "Lean statement matches the node and sources; exact dependencies, universes, empty cases, signature, and route checked. Compilation completed with exit 0 and no Lean diagnostics. review.md records all findings; fixes/lem-trf-derived-basis-local-hom-glue.report.md supplies the complete replacement report correcting the H11 placeholder and recording compiler evidence."
  }
 }

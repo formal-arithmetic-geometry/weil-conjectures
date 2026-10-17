@@ -191,24 +191,20 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-b1517d28d",
-  "group": "NF",
+  "reviewer": "NT-stage2-Codex-f95b498c8",
+  "group": "NK",
   "result": "pass",
-  "note": "Canonical cup-trace pairing matches the source; dependencies and universes check; no dropped-route or pro-etale issue; scompile sandbox and library compiles succeeded."
+  "note": "Reviewed node, source, dependencies, Lean declaration, docstrings, edge cases, route-pivot constraints, and report. scompile.py passed sandbox and library compilation with no errors or warnings; review.md records all checks."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.Curve.FiniteLevelPoincareDuality",
-  "declaration": "AlgebraicGeometry.curve_finite_level_poincare_duality",
-  "declarations": [
-   "AlgebraicGeometry.curveFiniteLevelCupTrace",
-   "AlgebraicGeometry.curve_finite_level_poincare_duality"
-  ],
+  "declaration": "AlgebraicGeometry.exists_curveFiniteLevel_perfectPairing",
   "file": "lean/Sheaf/AlgebraicGeometry/Curve/FiniteLevelPoincareDuality.lean",
-  "statement": "theorem curve_finite_level_poincare_duality (k₀ K : Type u) [Field k₀] [Field K] [Algebra k₀ K] [IsAlgClosure k₀ K] (C₀ : Scheme.{u}) [C₀.Over (Spec (.of k₀))] [SmoothOfRelativeDimension 1 (C₀ ↘ Spec (.of k₀))] [IsProjective (C₀ ↘ Spec (.of k₀))] [GeometricallyConnected (C₀ ↘ Spec (.of k₀))] (ell c : ℕ) [Fact ell.Prime] [CharP k₀ c] (hell : ell ≠ c) (n : ℕ) (hn : 1 ≤ n) : ∃ b : Sheaf.H ((C₀.baseChangeField k₀ K).constantZMod (ell ^ n)) 1 →+ Sheaf.H ((C₀.baseChangeField k₀ K).rootsOfUnitySheaf (ell ^ n)) 1 →+ ZMod (ell ^ n), (∀ x y, b x y = curveFiniteLevelCupTrace k₀ K C₀ ell c hell n hn x y) ∧ Function.Bijective b ∧ Function.Bijective b.flip",
+  "statement": "theorem exists_curveFiniteLevel_perfectPairing (k₀ K : Type u) [Field k₀] [Field K] [Algebra k₀ K] [IsAlgClosure k₀ K] [IsAlgClosed K] (C₀ : Scheme.{u}) [C₀.Over (Spec (.of k₀))] [SmoothOfRelativeDimension 1 (C₀ ↘ Spec (.of k₀))] [IsProjective (C₀ ↘ Spec (.of k₀))] [GeometricallyConnected (C₀ ↘ Spec (.of k₀))] (C : Scheme.{u}) [C.Over (Spec (.of K))] [IsConnectedCurve (C ↘ Spec (.of K))] [Smooth (C ↘ Spec (.of K))] [IsProper (C ↘ Spec (.of K))] (p : C ⟶ C₀) (hC : IsPullback p (C ↘ Spec (.of K)) (C₀ ↘ Spec (.of k₀)) (Spec.map (CommRingCat.ofHom (algebraMap k₀ K)))) (ell c : ℕ) [Fact ell.Prime] [CharP k₀ c] [CharP K c] (hell : ell ≠ c) (n : ℕ) (hn : 1 ≤ n) : ∃ (m : Module (ZMod (ell ^ n)) (Sheaf.H (C.constantZMod (ell ^ n)) 1)) (m' : Module (ZMod (ell ^ n)) (Sheaf.H (C.rootsOfUnitySheaf (ell ^ n)) 1)), ((fun [m₁ : Module (ZMod (ell ^ n)) (Sheaf.H (C.constantZMod (ell ^ n)) 1)] [m₂ : Module (ZMod (ell ^ n)) (Sheaf.H (C.rootsOfUnitySheaf (ell ^ n)) 1)] => ∃ B : Sheaf.H (C.constantZMod (ell ^ n)) 1 →ₗ[ZMod (ell ^ n)] Sheaf.H (C.rootsOfUnitySheaf (ell ^ n)) 1 →ₗ[ZMod (ell ^ n)] ZMod (ell ^ n), (∀ (x : Sheaf.H (C.constantZMod (ell ^ n)) 1) (y : Sheaf.H (C.rootsOfUnitySheaf (ell ^ n)) 1), B x y = Scheme.degreeNormalizedCurveTrace K C (C ↘ Spec (.of K)) ell c hell n hn (C.finiteCoefficientCup (ell ^ n) 1 1 2 rfl x y)) ∧ B.IsPerfPair) (m₁ := m) (m₂ := m'))",
   "branch": "newtargets-dag",
-  "by": "NF",
+  "by": "NK",
   "date": "2026-10-17",
   "existing": false,
-  "note": "The canonical cup-trace is the published finiteCoefficientCup followed by degreeNormalizedCurveTrace, specialized to the actual algebraic-closure base change. Sheaf.H is the recorded Ext model of ordinary etale cohomology. Its finite Tate coefficient is read as the existing etale roots-of-unity sheaf. Biadditivity and bijectivity of both additive adjoints are exactly Z/(ell^n)-bilinearity and perfectness: additive maps between modules over Z/N are automatically Z/N-linear. No arbitrary pairing, trace, root trivialization, or geometric-curve hypothesis is supplied."
+  "note": "Uses the published finite coefficient cup and unique degree-normalized trace. Existential module structures supply the unique ZMod actions on ordinary Sheaf.H without extra scalar-action hypotheses; IsPerfPair states bijectivity of both linear adjoints."
  }
 }
