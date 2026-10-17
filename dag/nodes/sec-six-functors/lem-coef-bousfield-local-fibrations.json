@@ -314,5 +314,29 @@
   "group": "Q81",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-e34d10c75 (reviewer sub-agent of L); spot-checked: I read the item and all six cited statements in full, plus the citer's use. All 8 steps check out against what those statements say. (1) An original weak equivalence is a local one, so localized fibrations are original fibrations (F_S ⊆ F) by right-lifting characterization. (2) Cofibrant arrow replacement t_s, with B_s cofibrant by composition closure; SM7 makes m_{s,V} a Kan fibration, so locality is equivalent to m_{s,V} being a trivial fibration. (3) Cofibration □ monomorphism is a cofibration, by transposing to the SM7 corner map; initial tensors are initial, so P_{s,n} is cofibrant. (4) The corner map lifts every boundary because ∂_n□∂_m is a monomorphism, so h_{s,n} ∈ C∩W_S. (5) For fibrant V, locality is equivalent to RLP against all h_{s,n}, including n=0. (6) The localized factorization's middle object E is fibrant and local, without Hirschhorn 3.4.1 or left properness. (7) The Yoneda cancellation in M[W^{-1}] goes through the hammock π_0 nodes and then detects-weak-equivalences, so i ∈ W. (8) An old-model lift gives r with ri=1 and pr=q, so p is a retract of q, hence p ∈ F_S. The source is Hirschhorn 3.3.16(1), not archived; the report has a WANTED line and the proof is marked agent-written. The item assumes S-local endpoints rather than Hirschhorn's localized-fibrant ones, which is the form the citer lem-coef-bousfield-quillen-descent needs, and the proof proves it directly. Statement, stmt_deps and source are identical to the unsplit node in the side DAG, so nothing is weakened. There are no new nodes. All deps are in unit sk-prop-sf-biduality-general, so no tool_uses are needed. There is no cycle and no SGA citation. All three search kinds are recorded. No duplicate in the DAG: the other Bousfield nodes are existence or Quillen-equivalence theorems with left-proper combinatorial hypotheses. Edge cases checked: S empty, S of identities, ∅→pt in sSet, n=0. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-766dc6521",
+  "group": "Q100",
+  "result": "fix",
+  "note": "Hollow-statement fault (the Lean does not say what the node says): the explicit (L : ModelCategory M) binder came after the original [ModelCategory M] and became the local instance used everywhere after it. cofibrations M in _hC, IsLocal/localEquivalences in _hW/_hX/_hY and Fibration p in the conclusion all elaborated with L (pp.explicit probe), _hC was rfl, and the delivered theorem was proved by Iff.intro (fun h => ⟨h⟩) (fun h => h.mem) with no error. Fix: fixes/BousfieldLocalFibrations.lean binds L before the original instance (plus docstring notes); otherwise identical. Probe on the fix: all instance-resolved classes are the original structure, the trivial proofs fail, _hC is not rfl. Both modules compile cleanly with nt_compile.py (1.2 s/1.3 s). Report addendum in fixes/lem-coef-bousfield-local-fibrations.report.md. Other checks pass: statement field verbatim (only lean differs from live), clauses match the node and the dependency's SM7/model conventions, real helper predicates, single sorry, source/blueprint docstrings with all 8 proof steps, edge cases (empty I, identity family, noncofibrant objects), independent universes, no duplicate or downstream users."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BousfieldLocalFibrations",
+  "file": "lean/Sheaf/CategoryTheory/BousfieldLocalFibrations.lean",
+  "declaration": "CategoryTheory.BousfieldLocalization.fibration_iff_of_isLocal",
+  "declarations": [
+   "CategoryTheory.BousfieldLocalization.IsLocal",
+   "CategoryTheory.BousfieldLocalization.localEquivalences",
+   "CategoryTheory.BousfieldLocalization.fibration_iff_of_isLocal"
+  ],
+  "statement": "theorem fibration_iff_of_isLocal {M : Type u} [Category.{v} M] (L : ModelCategory M) [ModelCategory M] [HasLimits M] [HasColimits M] [(cofibrations M).HasFunctorialFactorization (trivialFibrations M)] [(trivialCofibrations M).HasFunctorialFactorization (fibrations M)] [SimplicialCategory M] (_T : SimplicialTensorCotensor M) (_hSM7 : SimplicialModelLocalization.SatisfiesSM7 M) (Q : M ⥤ M) (ε : Q ⟶ 𝟭 M) (_hQ : ∀ Z : M, IsCofibrant (Q.obj Z) ∧ Fibration (ε.app Z) ∧ WeakEquivalence (ε.app Z)) {I : Type w} {A B : I → M} (s : ∀ i : I, A i ⟶ B i) (_hL₁ : MorphismProperty.HasFunctorialFactorization (L.categoryWithCofibrations.cofibrations ⊓ L.categoryWithWeakEquivalences.weakEquivalences) L.categoryWithFibrations.fibrations) (_hL₂ : MorphismProperty.HasFunctorialFactorization L.categoryWithCofibrations.cofibrations (L.categoryWithFibrations.fibrations ⊓ L.categoryWithWeakEquivalences.weakEquivalences)) (_hC : L.categoryWithCofibrations.cofibrations = cofibrations M) (_hW : L.categoryWithWeakEquivalences.weakEquivalences = localEquivalences Q s) {X Y : M} (p : X ⟶ Y) (_hX : IsLocal Q s X) (_hY : IsLocal Q s Y) : L.categoryWithFibrations.fibrations p ↔ Fibration p",
+  "branch": "newtargets-dag",
+  "by": "Q100",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-766dc6521"
  }
 }

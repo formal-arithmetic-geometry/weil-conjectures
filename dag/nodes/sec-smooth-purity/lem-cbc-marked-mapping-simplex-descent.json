@@ -413,5 +413,31 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-0862880bd (reviewer sub-agent of L); spot-checked: Read the item and all 10 steps in full, the full statements of all 12 cited nodes, and HTT Prop. 3.1.3.3 with its proof, Remark 3.1.3.4 and Prop. 3.2.2.8 with its full proof (a local copy of the HTT PDF, pp. 155-156 and 181). The statement and stmt_deps are byte-identical to the base on the side DAG; nothing is weakened. No new nodes. Checks by step: (1) the flat product marking is (marked edge, degenerate edge), so F_S equals the flat mapping object, and taking opposites gives the cocartesian form. (2) sigma_! is left Quillen and every object is cofibrant. (3) Pulling back the skeletal pushout works degreewise; I checked the markings myself, and the boundary-cell node with X empty gives the skeleta. (4) Induction over all T of dimension at most n; parts (a) and (b) of the colimit comparison need cofibrant spans with a monomorphism leg, which holds, and no left properness is needed. (5) Part (c) with theta = omega has no limit stages to check. (6)-(7) The coanodyne replacement and the order of the pushout product match the calculus; lifting against all monomorphisms makes i^* a Joyal trivial fibration. (8) The formula Phi_X(a,tau) = a(H_X(x,tau(v)),v) is over S, simplicial, has the right endpoints, and its components are sharp edges; the pointwise criterion applies with K = C = A, and the Y side is symmetric. (9) i_X^*(Rf)^* = f^* i_Y^*, so two-out-of-three gives f^*. (10) The universe enlargement is fine. Small cases: S = Delta^0 with (Delta^1)^flat (the hypothesis fails, correctly) and with (Delta^1)^sharp (true), S empty, f = identity. My own traversal of 338 reachable nodes finds no cycle. Duplicate candidates (cartesian-base-equivalence-invariance, mapping-simplex-universal-equivalence, cocartesian-categorical-base-change, cocartesian-mapping-criterion) state other results. All 10 declared tool_uses are accepted as generic foundations from sk-prop-sf-biduality-general. No SGA is cited and no coefficient category or base-change morphism is involved. Cosmetic only: the mathlib_searches list repeats queries with verdict strings that do not line up. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-941da2a51",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Checked every node clause against the Lean using the dependency definitions (Over, IsNaturallyFibrant true, cartesianFunctors = vertex-full subcomplex of flat funOver with PreservesMarkings, pull = degreewise marked pullback over Δ[n], weak true, IsFunctorEquivalence). functorRestriction is precomposition by f×id; the universe clause is stated through enlargeObject/enlargeHom built on the existing Marked.enlargeMap. No extra hypotheses; quantifier order matches; edge cases n=0, empty base, empty source, S=Δ[0] and any larger universe are covered. Helpers are real constructions with source and blueprint docstrings; only the theorem is sorry, and its docstring has all 10 proof steps. Node diff vs side clone is the lean field only; lean.statement matches the file byte for byte; no duplicate precomposition map. Report has Worker report and Second reading by Q110 sections. nt_compile.py --json per-file compile: rc 0, no diagnostics; a deliberately broken copy gave rc 1, so the clean result is meaningful. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.MarkedMappingSimplexDescent",
+  "declaration": "SSet.Marked.Over.marked_mapping_simplex_descent",
+  "declarations": [
+   "SSet.Marked.Over.unmarkMap",
+   "SSet.Marked.Over.funOverPre",
+   "SSet.Marked.Over.functorRestriction",
+   "SSet.Marked.Over.enlargeObject",
+   "SSet.Marked.Over.enlargeHom",
+   "SSet.Marked.Over.marked_mapping_simplex_descent"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/MarkedMappingSimplexDescent.lean",
+  "statement": "theorem marked_mapping_simplex_descent (S : SSet.{u}) [Quasicategory S] : (∀ (U Z : Over S), IsNaturallyFibrant true Z → Quasicategory (cartesianFunctors U Z)) ∧ (∀ (X Y : Over S) (f : X ⟶ Y), (∀ (n : ℕ) (σ : (Δ[n] : SSet.{u}) ⟶ S), weak true ((pull σ).map f)) → weak true f ∧ (∀ (Z : Over S), IsNaturallyFibrant true Z → Enhanced.IsFunctorEquivalence (functorRestriction (Z := Z) f)) ∧ weak true (enlargeHom.{u, v} f) ∧ (∀ (Z : Over (SSet.uliftFunctor.{v, u}.obj S)), IsNaturallyFibrant true Z → Quasicategory (cartesianFunctors (enlargeObject.{u, v} X) Z) ∧ Quasicategory (cartesianFunctors (enlargeObject.{u, v} Y) Z) ∧ Enhanced.IsFunctorEquivalence (functorRestriction (Z := Z) (enlargeHom.{u, v} f))))",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

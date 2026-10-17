@@ -267,5 +267,29 @@
   "group": "Q58",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-33ceff479 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, the unit and the parent's step 9. CatLR is not in literature/ and network access is blocked, so I could not open Cisinski 2.4.36-2.4.38. I checked the mathematics independently instead. All nine steps hold: e0□(δ×K) gives direct homotopy as an equivalence relation; An is contained in W_I; R(F) is naive fibrant by lifting-class closure plus transfinite lifting; k is a retract of j through the factorization and Whitehead nodes, whose hypotheses I checked; the strong-deformation-retract filler is valid; the size bounds come from regularity with λ<α; clause (2) identifies R(V∩X); the last step is 2-of-3. The new replacement node is true. I checked it by my own one-step attachment construction (Λ consists of monos, so attaching cells along maps into an intersection gives preservation of monos and intersections; λ-presentable domains; α=(2^ν)^+). Edge cases A=∅, Λ=∅, empty generator domains, B=∅ and F=∅ pass. It is not a restatement of the item. No duplicate exists among the 8 small-object, presentability and accessibility nodes I read or in an rg over dag/nodes. There is no cycle, the route stays inside the unit apart from Mathlib leaves, there is no SGA, and no tool_uses are accepted. The one fault (B form, brief §3): the new node had no lean_audit. The repaired whole file is in fixes/. The report's source-error claim about the printed 2.4.38 proof is unverified here; the maintainer should check the PDF before recording it. The delivered proof does not depend on it.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d311e9abc",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Matched every node clause to CategoryTheory.presheaf_weakMono_bounded_enlargement: interval and monic delta, Mathlib pushout product in the right order, presheafAnodyne as the closure of a small family of monos under isos, cobase change, transfinite composition .{max u v} and retracts, h0/h1/hdelta-i, naive fibrancy as An.rlp (terminal.from Z), EqvGen homotopy classes, W_I as surjectivity+injectivity on representatives (well defined, empty Hom sets correct), uniform infinite alpha > |Mor A| chosen before X,Y,U, fixed mono U->Y with total-element size bound, V with factorization, size bound, pullback.snd in W_I. Universes u,v independent; edge cases ok. Helpers non-hollow; docstrings carry source, blueprint id and all 9 proof steps; only the theorem proof is sorry; node differs from base only in lean, statement verbatim; Worker report and Second reading by Q53 present. nt_compile local overlay: clean, 1.1 s. Non-blocking: generic helpers duplicate the Category.{u}-specialized cylinder-module definitions, justified by universe generality and an import cycle (checked); unify later. Whitehead proof dep will need an AsSmall-style transport at proof stage."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PresheafWeakMonoBoundedEnlargement",
+  "declaration": "CategoryTheory.presheaf_weakMono_bounded_enlargement",
+  "declarations": [
+   "CategoryTheory.presheafAnodyne",
+   "CategoryTheory.presheafDirectHomotopy",
+   "CategoryTheory.presheafIntervalWeakEquivalences",
+   "CategoryTheory.presheaf_weakMono_bounded_enlargement"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PresheafWeakMonoBoundedEnlargement.lean",
+  "statement": "theorem presheaf_weakMono_bounded_enlargement {A : Type u} [Category.{v} A] (ι : Type (max u v)) (D E : ι → (Aᵒᵖ ⥤ Type (max u v))) (j : ∀ i, D i ⟶ E i) (hj : ∀ i, Mono (j i)) (I : Aᵒᵖ ⥤ Type (max u v)) (e₀ e₁ : (⊤_ (Aᵒᵖ ⥤ Type (max u v))) ⟶ I) (hδ : Mono (coprod.desc e₀ e₁)) (h₀ : ∀ {K L : Aᵒᵖ ⥤ Type (max u v)} (m : K ⟶ L), Mono m → presheafAnodyne ι j (Functor.PushoutObjObj.ofHasPushout prod.functor e₀ m).ι) (h₁ : ∀ {K L : Aᵒᵖ ⥤ Type (max u v)} (m : K ⟶ L), Mono m → presheafAnodyne ι j (Functor.PushoutObjObj.ofHasPushout prod.functor e₁ m).ι) (hδi : ∀ {K L : Aᵒᵖ ⥤ Type (max u v)} (m : K ⟶ L), presheafAnodyne ι j m → presheafAnodyne ι j (Functor.PushoutObjObj.ofHasPushout prod.functor (coprod.desc e₀ e₁) m).ι) : ∃ α : Cardinal.{max u v}, Cardinal.aleph0.{max u v} ≤ α ∧ Cardinal.lift (Cardinal.mk (Σ a b : A, a ⟶ b)) < α ∧ ∀ (X Y : Aᵒᵖ ⥤ Type (max u v)) (iXY : X ⟶ Y), Mono iXY → presheafIntervalWeakEquivalences e₀ e₁ (presheafAnodyne ι j) iXY → ∀ (U : Aᵒᵖ ⥤ Type (max u v)) (uU : U ⟶ Y), Mono uU → Cardinal.mk (Σ a : A, U.obj (Opposite.op a)) < α → ∃ (V : Aᵒᵖ ⥤ Type (max u v)) (vV : V ⟶ Y), Mono vV ∧ (∃ uUV : U ⟶ V, uUV ≫ vV = uU) ∧ Cardinal.mk (Σ a : A, V.obj (Opposite.op a)) < α ∧ presheafIntervalWeakEquivalences e₀ e₁ (presheafAnodyne ι j) (pullback.snd iXY vV : pullback iXY vV ⟶ V)",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
