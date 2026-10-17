@@ -273,5 +273,51 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-178014480 (reviewer sub-agent of L); spot-checked: I read the whole item: its statement, all nine steps, the split_report and the tool_use. It creates no new nodes. I read every cited statement (def-weil-ring-localization-away, def-weil-linear-scalar-localization, def-weil-pbc-module-localization-away, lem-weil-pbc-localization-module-tensor, def-weil-linear-category, lem-weil-linear-scalar-localization-triangulated, def-weil-triangulated-category, pur9-def-exact-transformation), the unit sk-thm-purity-transport Step 3, the main-20261015 proof sentence of prop-pur-rational-purity-transitivity-summands, and that node's Step 3, which applies this item with R=O_E and S=O_F. I checked the Stacks places against tags/tags: 07K0 (algebra.tex:1171) and 00DK (algebra.tex:2088), plus the labels of 00CO, 07JZ and 05R6. Step 1: the induced coefficient map is well defined, because applying λφ to the annihilator relation and multiplying by c^{-k-m-n} gives equal images. Step 2: the R-linear map from Hom to N=Hom_{D[1/u]}, with t acting as the unit c, extends by the universal property stated inside the module-localization node; the tensor/fraction identification comes from the cited lemma's statement. Steps 3-5 are correct fraction calculations: semilinearity, uniqueness, the functor laws, and naturality and inverses of the localized transformations. Step 6 identifies the composite of extensions with the extension of the composite, using both uniqueness clauses; it never needs φ(t) to be a power of u. Step 7 gives the whiskering components Q_T(Hη_K) and Q_S(η_{PK}). Step 8: the last arrow is Q_S(σ_X F(w)), and closure under triangle isomorphism finishes exactness; the naturality of σ̄ it uses is Step 5 after Step 6, left implicit, which I accept as a typing remark. Step 9 localizes the shift square. Edge cases tested: t=1, φ=id with t=u (gives the same-ring prop-weil-pbc-rational-transport, a special case, not a duplicate), t nilpotent (zero target), torsion Hom groups, the Z, t=2, u=3 counterexample when the hypothesis is dropped, and ramified O_E⊂O_F. An rg search over the DAG found no duplicate. I accept the tool_use lem-weil-linear-scalar-localization-triangulated, a generic triangulated-localization result that the purity unit does not replace. No SGA is cited, this is not a target node, and the statement is unchanged and not weakened. No fixes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-b12a4a333",
+  "group": "N0",
+  "result": "fix",
+  "note": "Mathematical and Lean checks pass; per-file compilation reproduced cleanly. review.md records all checks. fixes/lem-pur-semilinear-scalar-localization.report.md replaces the H11 placeholder with a complete independent second reading, preserving the Worker report. No Lean or node changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SemilinearScalarLocalization",
+  "declaration": "CategoryTheory.ScalarLocalization.existsUnique_semilinear_extension",
+  "declarations": [
+   "CategoryTheory.ScalarLocalization.IsSemilinear",
+   "CategoryTheory.ScalarLocalization.coefficientMap",
+   "CategoryTheory.ScalarLocalization.coefficientMap_unique",
+   "CategoryTheory.ScalarLocalization.existsUnique_semilinearHom",
+   "CategoryTheory.ScalarLocalization.extensionHom",
+   "CategoryTheory.ScalarLocalization.extensionHom_laws",
+   "CategoryTheory.ScalarLocalization.extension",
+   "CategoryTheory.ScalarLocalization.extensionAdditive",
+   "CategoryTheory.ScalarLocalization.extension_spec",
+   "CategoryTheory.ScalarLocalization.extension_unique",
+   "CategoryTheory.ScalarLocalization.existsUnique_semilinear_extension",
+   "CategoryTheory.ScalarLocalization.extensionNatTrans_naturality",
+   "CategoryTheory.ScalarLocalization.extensionNatTrans",
+   "CategoryTheory.ScalarLocalization.extensionNatTrans_unique",
+   "CategoryTheory.ScalarLocalization.extensionNatIso",
+   "CategoryTheory.ScalarLocalization.extensionNatIso_spec",
+   "CategoryTheory.ScalarLocalization.extensionNatTrans_laws",
+   "CategoryTheory.ScalarLocalization.extension_comparisonSquare",
+   "CategoryTheory.ScalarLocalization.semilinear_composition",
+   "CategoryTheory.ScalarLocalization.extension_comp",
+   "CategoryTheory.ScalarLocalization.extensionNatTrans_whiskerRight",
+   "CategoryTheory.ScalarLocalization.extensionNatTrans_whiskerLeft",
+   "CategoryTheory.ScalarLocalization.isSemilinear_of_linear",
+   "CategoryTheory.ScalarLocalization.extension_id_and_linear",
+   "CategoryTheory.ScalarLocalization.extension_exact",
+   "CategoryTheory.ScalarLocalization.extension_exactComparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SemilinearScalarLocalization.lean",
+  "statement": "theorem existsUnique_semilinear_extension (F : C ⥤ D) [F.Additive] (hF : IsSemilinear φ F) : ∃! J : ScalarLocalization R C t ⥤ ScalarLocalization S D b, J.Additive ∧ IsSemilinear (coefficientMap t b φ h) J ∧ (∀ K : C, J.obj ⟨K⟩ = ⟨F.obj K⟩) ∧ localization R C t ⋙ J = F ⋙ localization S D b",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

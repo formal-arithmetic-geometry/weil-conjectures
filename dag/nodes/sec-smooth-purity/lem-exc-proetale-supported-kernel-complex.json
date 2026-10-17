@@ -220,5 +220,41 @@
   "group": "Q39",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-6671f391d (reviewer sub-agent of L); spot-checked: Read the item, all five steps, the new helper, every cited statement (closed-essential-image, open-unit-evaluation, proetale-constant-exact and constant-ring-map, proetale-inverse-image, proetale-operations, restrict-scalars, sheaf-of-modules-category, cochain-complexes-degreewise-exact), the parent support-triangle split, unit sk-prop-sf-localization, the main-20261015 blueprint proof and Stacks 03D3 (sites-modules.tex 1043-1098). Coefficient category: def-weil-pbc-proetale-operations explicitly identifies the tensor pullback with the transported action r.m=c^{-1}(r)m and with the 03D3-lifted adjunction, so the commutative closed unit in closed-essential-image for B=Z/n is the helper's eta^B. Step 2's transfer is therefore exact, and in any case invertibility of a unit does not depend on the choice of isomorphic left adjoint. Step 1: Z/n to A is well defined and central, and scalar restriction reflects isomorphisms and detects zero. Step 2: the unit equation gives P(eta^A_i) = iso composed with eta^B_i, and beta and alpha give j^*i_*M=0. The quasi-compact j hypothesis matches. Step 3: j^*eta_j is the identity by the restriction description of open-unit-evaluation (finite commutative B), kernel preservation gives j^*G=0, and Step 2 applies to G. Steps 4-5: the kernel differential, d^2=0, the chain map u and its inverse, the degreewise short exact sequence with epic eta, and naturality are all correct. The helper is true: both ring-map composites agree on constant sections, the underlying maps are identities, and the module units have the abelian unit as underlying map. Tested on identities, the zero ring, the empty scheme and a matrix ring. It is not a restatement of the item, and it does not duplicate ring-sheaf-change-adjunction, cbc-finite-open-exchange-scalars, finite-constant-coefficient-transport or the sfb module-object nodes, all of which assume commutative coefficients. Searches cover three kinds, the blueprint from/via fields are correct, and no SGA is cited. Accepted tool_uses: open-unit-evaluation and proetale-constant-exact. The closed-essential-image entry is on the unit's route (sk-prop-sf-closed-unit) and is harmless. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-fc19d59f8",
+  "group": "NP",
+  "result": "fix",
+  "note": "Wrote review.md and four complete fixes. Repaired H6 local proofs and H11 placeholder second reading; mathematical statements unchanged. Both immutable and corrected modules compiled cleanly through scompile.py. No repository or branch changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleSupportedKernelComplex",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteSupportedKernelComplex_shortExact",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteSupportedKernelMap",
+   "AlgebraicGeometry.ProEtale.finiteSupportedKernelMap_id",
+   "AlgebraicGeometry.ProEtale.finiteSupportedKernelMap_comp",
+   "AlgebraicGeometry.ProEtale.finiteSupportedKernel",
+   "AlgebraicGeometry.ProEtale.finiteSupportedKernel_additive",
+   "AlgebraicGeometry.ProEtale.finiteSupportedKernelInclusion_naturality",
+   "AlgebraicGeometry.ProEtale.finiteSupportedKernelInclusion",
+   "AlgebraicGeometry.ProEtale.finiteSupportedH",
+   "AlgebraicGeometry.ProEtale.finiteSupportedH_additive",
+   "AlgebraicGeometry.ProEtale.finiteSupportedKernelComplex",
+   "AlgebraicGeometry.ProEtale.finiteSupportedKernelComplexInclusion",
+   "AlgebraicGeometry.ProEtale.finiteOpenComplexUnit",
+   "AlgebraicGeometry.ProEtale.finiteOpenEpicComplex",
+   "AlgebraicGeometry.ProEtale.finiteOpenEpicComplexInclusion",
+   "AlgebraicGeometry.ProEtale.finiteSupportedKernelComplex_shortExact"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleSupportedKernelComplex.lean",
+  "statement": "theorem finiteSupportedKernelComplex_shortExact [IsLocallyNoetherian T] [CompactSpace T] [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j] (hU : Set.range j = (Set.range i)ᶜ) (hB : ∀ N : Scheme.proEtaleRingModules T (Scheme.proEtaleConstantRing T (ULift.{u} (ZMod (addOrderOf (1 : A))))), ((Scheme.proEtaleConstantRingPushforward (ULift.{u} (ZMod (addOrderOf (1 : A)))) i).essImage N ↔ IsZero ((Scheme.proEtaleConstantRingPullback (ULift.{u} (ZMod (addOrderOf (1 : A)))) j).obj N)) ∧ (IsZero ((Scheme.proEtaleConstantRingPullback (ULift.{u} (ZMod (addOrderOf (1 : A)))) j).obj N) → IsIso ((Scheme.proEtaleConstantRingAdjunction (ULift.{u} (ZMod (addOrderOf (1 : A)))) i).unit.app N))) : (∀ N : FiniteCoefficientModules T A, IsZero ((finiteCoefficientModulePullback j A).obj N) → IsIso ((finiteModuleAdjunction i A).unit.app N)) ∧ (∀ M : FiniteCoefficientModules Z A, IsZero ((finiteCoefficientModulePullback j A).obj ((finiteModulePushforward i A).obj M))) ∧ ∃ e : finiteOpenEpicComplexInclusion j A ⋙ finiteSupportedKernelComplex j A ≅ finiteOpenEpicComplexInclusion j A ⋙ (finiteSupportedH i j A ⋙ finiteModulePushforward i A).mapHomologicalComplex (ComplexShape.up ℤ), (∀ (I : (finiteOpenEpicComplex j A).FullSubcategory) (q : ℤ), (e.hom.app I).f q = (finiteModuleAdjunction i A).unit.app ((finiteSupportedKernel j A).obj (I.obj.X q))) ∧ ∃ w : (e.inv ≫ Functor.whiskerLeft (finiteOpenEpicComplexInclusion j A) (finiteSupportedKernelComplexInclusion j A)) ≫ Functor.whiskerLeft (finiteOpenEpicComplexInclusion j A) (finiteOpenComplexUnit j A) = 0, ∀ I : (finiteOpenEpicComplex j A).FullSubcategory, ((ShortComplex.mk (e.inv ≫ Functor.whiskerLeft (finiteOpenEpicComplexInclusion j A) (finiteSupportedKernelComplexInclusion j A)) (Functor.whiskerLeft (finiteOpenEpicComplexInclusion j A) (finiteOpenComplexUnit j A)) w).map ((evaluation _ _).obj I)).ShortExact ∧ ∀ q : ℤ, (((ShortComplex.mk (e.inv ≫ Functor.whiskerLeft (finiteOpenEpicComplexInclusion j A) (finiteSupportedKernelComplexInclusion j A)) (Functor.whiskerLeft (finiteOpenEpicComplexInclusion j A) (finiteOpenComplexUnit j A)) w).map ((evaluation _ _).obj I)).map (HomologicalComplex.eval _ (ComplexShape.up ℤ) q)).ShortExact",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-Codex-fc19d59f8"
  }
 }

@@ -275,32 +275,29 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-f6c53df8f (reviewer sub-agent of L); spot-checked: Read in full: the item, all 14 cited node statements, and the sources (Stacks proetale 09A5 l.4675; sites 00X6, 00VC/00WX, 00YV l.10473 incl. non-commutative rings, 0H7J; sites-modules 03D2 l.1020; tags 094T/094U/022D). The module pullback f^{-1}F tensor_{f^{-1}A_Y} A_X matches blueprint main-20261015 def-weil-derived-pullback-tensor-hom. The delivery only re-splits an already split and reviewed node: the 2156-char ring step becomes steps 4-6 (every step now under 2000 chars). Statement and deps are unchanged, proof_deps equals the union of uses, and there are no new nodes. Step checks: weakly etale and fpqc base change give coverings; final object and fibre products are preserved, so the left-exact site lemma applies in the right direction; continuity follows from the u_f(V_i x_V V_j) identification; I_U and the colimit over I_U^op are verbatim the continuous-functor lemma (variance checked); the step-4 adjoint computation (rho_{LF} R(lambda) eta = eta^n) is correct and extends the commutative lifting lemma to all rings as in 00YV; the step-5 universal property and the two-left-adjoints comparison are correct; rho naturality and c = epsilon o f^{-1} rho are correct; the step-7 module action is exactly 03D2's proof. Edge cases tested: f = id, X empty, A = 0, nullary operations, non-commutative rings. The duplicate search found only nodes that cite this item or state generic/narrower facts. Accepted tool uses: lem-weil-pbc-left-exact-site-inverse-image-tensor (00X6) and lem-weil-pbc-adjunction-lifts-group-ring-objects (00YV). The inherited unit binding to sk-def-sf-admissible is wrong but maintainer-owned; the report correctly flags it for maintenance. No SGA used. No fixes."
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-579de47d0",
-  "group": "NY",
-  "result": "pass",
-  "note": "Statement, dependencies, declarations, universes, edge cases, canonical maps, report sections, and compiler evidence checked; no findings."
+  "reviewer": "NT-stage2-Codex-fc19d59f8",
+  "group": "NP",
+  "result": "fix",
+  "note": "Wrote review.md and four complete fixes. Repaired H6 local proofs and H11 placeholder second reading; mathematical statements unchanged. Both immutable and corrected modules compiled cleanly through scompile.py. No repository or branch changes."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport",
-  "declaration": "AlgebraicGeometry.Scheme.sfIntrinsicConstantModuleAdjunction",
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleFiniteModuleAdjunction",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteModuleAdjunction",
   "declarations": [
-   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedEquivalence",
-   "AlgebraicGeometry.Scheme.sfIntrinsicRealizationUnit",
-   "AlgebraicGeometry.Scheme.sfIntrinsicDirectImageComparison_existsUnique",
-   "AlgebraicGeometry.Scheme.sfIntrinsicDirectImageComparison",
-   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedDirectImageComparison_existsUnique",
-   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedDirectImageComparison",
-   "AlgebraicGeometry.Scheme.sfIntrinsicConstantModuleAdjunction",
-   "AlgebraicGeometry.ProEtale.sfFixedDerivedPullback"
+   "AlgebraicGeometry.ProEtale.finiteModulePushforward",
+   "AlgebraicGeometry.ProEtale.finiteModuleAdjunction_existsUnique",
+   "AlgebraicGeometry.ProEtale.finiteModuleAdjunction",
+   "AlgebraicGeometry.ProEtale.finiteModulePushforward_additive"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/SfIntrinsicRealizationTransport.lean",
-  "statement": "def sfIntrinsicConstantModuleAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) (A : Type u) [CommRing A] [Finite A] : sfIntrinsicPullback A f ⊣ proEtaleConstantModuleDirectImage f A",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleFiniteModuleAdjunction.lean",
+  "statement": "def finiteModuleAdjunction : finiteCoefficientModulePullback f A ⊣ finiteModulePushforward f A",
   "branch": "newtargets-dag",
-  "by": "NY",
-  "date": "2026-10-16",
+  "by": "NP",
+  "date": "2026-10-17",
   "existing": false,
-  "note": "§1(B): proEtaleConstantModulePullback supplies only an object map. Reuse the already published sfIntrinsicPullback and sfIntrinsicDerivedPullback from ProEtaleIntrinsicFiniteOperations; this module adds their actual adjunction to the recorded intrinsic direct image, the specified derived realization equivalence, and direct-image comparisons uniquely normalized on constant-unit sections and K-injective representatives. No inverse-image notion is redefined, and no arbitrary equivalence or natural isomorphism is chosen. The original arbitrary-ring site inverse-image and module constructions remain reexported; the added normalized realization helpers serve only the finite-coefficient consumer. Returned compilation repair: the exact fixed-scalar derived-pullback abbreviation is owned by the inverse-image module and imported directly by the extension-by-zero module."
+  "note": "Section 1(B): the recorded sfIntrinsicConstantModuleAdjunction requires commutative coefficients in Type u and cannot supply the actual adjunction for the Ring-valued finite coefficient sheaves in Type (u+1). This extension reexports the entire previous inverse-image module and supplies the noncommutative finite-coefficient pullback/direct-image adjunction. Its Hom equivalence is uniquely normalized by the actual small-model pullback adjunction after undoing scalar transport. The direct image uses the canonical finiteCoefficientDirectImageMap, and the left adjoint is precisely the recorded finiteCoefficientModulePullback; neither is replaced. The existence theorem determines every Hom transpose uniquely, so the adjunction definition chooses no unspecified data.",
+  "fixed_by": "NT-stage2-Codex-fc19d59f8"
  }
 }
