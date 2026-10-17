@@ -97,7 +97,7 @@ structure TraceDiagonalDatum (L : DerivedCategoryModule Λ X) where
   /-- The trace `tr_f : Rf_! L ⟶ Λ_Y`. -/
   trace : (R(f)_![ModuleCat.{u + 1} Λ]).obj L ⟶ derivedTensorUnit _ Y
   /-- The diagonal class `cl_Δ : RΔ_! Λ_X ⟶ Lp₂^* L`. -/
-  diagonalClass : (R(pullback.diagonal f)_![ModuleCat.{u + 1} Λ]).obj (derivedTensorUnit _ X) ⟶
+  diagonalClass : (R(TraceDiagonalDatum.diagonal f)_![ModuleCat.{u + 1} Λ]).obj (derivedTensorUnit _ X) ⟶
     (L((pullback.snd f f)^*[ModuleCat.{u + 1} Λ])).obj L
 
 namespace TraceDiagonalDatum
@@ -148,16 +148,16 @@ The first *triangular composite* `Rf_! A ⟶ Rf_! G_L Rf_! A ⟶ Rf_! A`, that i
 `ε_{Rf_! A} ∘ Rf_! η_A`, natural in `A`. -/
 noncomputable def leftTriangle :
     R(f)_![ModuleCat.{u + 1} Λ] ⟶ R(f)_![ModuleCat.{u + 1} Λ] :=
-  (Functor.leftUnitor _).inv ≫ Functor.whiskerRight d.unit _ ≫ (Functor.associator _ _ _).hom ≫
-    Functor.whiskerLeft _ d.counit ≫ (Functor.rightUnitor _).hom
+  Functor.whiskerRight d.unit (R(f)_![ModuleCat.{u + 1} Λ]) ≫
+    (Functor.associator (R(f)_![ModuleCat.{u + 1} Λ]) d.functor (R(f)_![ModuleCat.{u + 1} Λ])).hom ≫
+    Functor.whiskerLeft (R(f)_![ModuleCat.{u + 1} Λ]) d.counit
 
 /-- Blueprint `def-pur-td-datum`: Trace–diagonal datum
 
 The second *triangular composite* `G_L K ⟶ G_L Rf_! G_L K ⟶ G_L K`, that is
 `G_L ε_K ∘ η_{G_L K}`, natural in `K`. -/
 noncomputable def rightTriangle : d.functor ⟶ d.functor :=
-  (Functor.rightUnitor _).inv ≫ Functor.whiskerLeft _ d.unit ≫ (Functor.associator _ _ _).inv ≫
-    Functor.whiskerRight d.counit _ ≫ (Functor.leftUnitor _).hom
+  Functor.whiskerLeft _ d.unit ≫ (Functor.associator _ _ _).inv ≫ Functor.whiskerRight d.counit _
 
 /-- The components of the first triangular composite: `ε_{Rf_! A} ∘ Rf_! η_A`. -/
 lemma leftTriangle_app (A : DerivedCategoryModule Λ X) :
@@ -182,12 +182,8 @@ noncomputable def adjunction : R(f)_![ModuleCat.{u + 1} Λ] ⊣ d.functor :=
   Adjunction.mkOfUnitCounit
     { unit := d.unit
       counit := d.counit
-      left_triangle := by
-        ext A
-        simpa [leftTriangle_app] using NatTrans.congr_app hl A
-      right_triangle := by
-        ext K
-        simpa [rightTriangle_app] using NatTrans.congr_app hr K }
+      left_triangle := hl
+      right_triangle := hr }
 
 @[simp]
 lemma adjunction_unit : (d.adjunction hl hr).unit = d.unit :=

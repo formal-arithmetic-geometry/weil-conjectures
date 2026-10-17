@@ -157,61 +157,80 @@ noncomputable def projectionUnitIso {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompact
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f]
   [IsSeparated f]
 
+namespace TraceDiagonalDatum
+
+omit [HasCompactification f] [QuasiCompact f] [IsSeparated f] in
+/-- The diagonal `Δ : X ⟶ X ×_Y X`, with codomain written `pullback f f`.
+
+This is `CategoryTheory.Limits.pullback.diagonal f`, whose codomain is the reducible synonym
+`pullback.diagonalObj f`; the kernel compares functors between derived categories over
+`pullback.diagonalObj f` and over `pullback f f` only very slowly, so all constructions below use
+this version of the diagonal. -/
+noncomputable def diagonal : X ⟶ pullback f f :=
+  pullback.diagonal f
+
+omit [HasCompactification f] [QuasiCompact f] [IsSeparated f] in
+@[reassoc (attr := simp)]
+lemma diagonal_fst : diagonal f ≫ pullback.fst f f = 𝟙 X :=
+  pullback.diagonal_fst f
+
+omit [HasCompactification f] [QuasiCompact f] [IsSeparated f] in
+@[reassoc (attr := simp)]
+lemma diagonal_snd : diagonal f ≫ pullback.snd f f = 𝟙 X :=
+  pullback.diagonal_snd f
+
+/-- The diagonal of a separated morphism admits a compactification. -/
+instance hasCompactification_diagonal : HasCompactification (diagonal f) := by
+  unfold diagonal
+  infer_instance
+
 /-- `Δ ≫ p₂ = 𝟙` admits a compactification. -/
 instance hasCompactification_diagonal_snd :
-    HasCompactification (pullback.diagonal f ≫ pullback.snd f f) := by
-  rw [pullback.diagonal_snd]
+    HasCompactification (diagonal f ≫ pullback.snd f f) := by
+  rw [diagonal_snd]
   infer_instance
 
 /-- `Δ ≫ p₂ = 𝟙` is quasi-compact. -/
-instance quasiCompact_diagonal_snd : QuasiCompact (pullback.diagonal f ≫ pullback.snd f f) := by
-  rw [pullback.diagonal_snd]
+instance quasiCompact_diagonal_snd : QuasiCompact (diagonal f ≫ pullback.snd f f) := by
+  rw [diagonal_snd]
   infer_instance
-namespace TraceDiagonalDatum
 
 variable {Λ}
 
 /-- The isomorphism `𝟭 ≅ Lp₁^* ⋙ LΔ^*`, from `Δ ≫ p₁ = 𝟙`. -/
 noncomputable def diagonalSectionIso :
     𝟭 (DerivedCategoryModule Λ X) ≅
-      (L((pullback.fst f f)^*[ModuleCat.{u + 1} Λ])) ⋙
-        (L((pullback.diagonal f)^*[ModuleCat.{u + 1} Λ])) :=
-  (leftDerivedUpperStarCompSectionIso _ (pullback.diagonal f) (pullback.fst f f)
-    (pullback.diagonal_fst f)).symm
+      (L((pullback.fst f f)^*[ModuleCat.{u + 1} Λ])) ⋙ (L((diagonal f)^*[ModuleCat.{u + 1} Λ])) :=
+  (leftDerivedUpperStarCompSectionIso _ (diagonal f) (pullback.fst f f) (diagonal_fst f)).symm
 
 /-- The isomorphism `RΔ_! ≅ Lp₁^* ⋙ LΔ^* ⋙ RΔ_!`, from `Δ ≫ p₁ = 𝟙`. -/
 noncomputable def diagonalLowerShriekSectionIso :
-    R(pullback.diagonal f)_![ModuleCat.{u + 1} Λ] ≅
+    R(diagonal f)_![ModuleCat.{u + 1} Λ] ≅
       (L((pullback.fst f f)^*[ModuleCat.{u + 1} Λ])) ⋙
-        (L((pullback.diagonal f)^*[ModuleCat.{u + 1} Λ])) ⋙
-          (R(pullback.diagonal f)_![ModuleCat.{u + 1} Λ]) :=
-  (Functor.leftUnitor (R(pullback.diagonal f)_![ModuleCat.{u + 1} Λ])).symm ≪≫
-    Functor.isoWhiskerRight (diagonalSectionIso f)
-      (R(pullback.diagonal f)_![ModuleCat.{u + 1} Λ]) ≪≫
+        (L((diagonal f)^*[ModuleCat.{u + 1} Λ])) ⋙ (R(diagonal f)_![ModuleCat.{u + 1} Λ]) :=
+  (Functor.leftUnitor (R(diagonal f)_![ModuleCat.{u + 1} Λ])).symm ≪≫
+    Functor.isoWhiskerRight (diagonalSectionIso f) (R(diagonal f)_![ModuleCat.{u + 1} Λ]) ≪≫
     Functor.associator (L((pullback.fst f f)^*[ModuleCat.{u + 1} Λ]))
-      (L((pullback.diagonal f)^*[ModuleCat.{u + 1} Λ]))
-      (R(pullback.diagonal f)_![ModuleCat.{u + 1} Λ])
+      (L((diagonal f)^*[ModuleCat.{u + 1} Λ])) (R(diagonal f)_![ModuleCat.{u + 1} Λ])
 
 /-- The isomorphism `RΔ_! A ≅ RΔ_! Λ_X ⊗ᴸ Lp₁^* A`: `L(Δ ≫ p₁)^* = L(𝟙)^* ≅ 𝟭` and the
 projection formula for `Δ` (`AlgebraicGeometry.Etale.projectionUnitIso`). -/
 noncomputable def diagonalIso :
-    R(pullback.diagonal f)_![ModuleCat.{u + 1} Λ] ≅
+    R(diagonal f)_![ModuleCat.{u + 1} Λ] ≅
       (L((pullback.fst f f)^*[ModuleCat.{u + 1} Λ])) ⋙
         (derivedTensor (ModuleCat.{u + 1} Λ) (pullback f f)).obj
-          ((R(pullback.diagonal f)_![ModuleCat.{u + 1} Λ]).obj (derivedTensorUnit _ X)) :=
+          ((R(diagonal f)_![ModuleCat.{u + 1} Λ]).obj (derivedTensorUnit _ X)) :=
   diagonalLowerShriekSectionIso f ≪≫
     Functor.isoWhiskerLeft (L((pullback.fst f f)^*[ModuleCat.{u + 1} Λ]))
-      (projectionUnitIso Λ (pullback.diagonal f))
+      (projectionUnitIso Λ (diagonal f))
 
-#exit
 /-- The isomorphism `𝟭 ≅ R(𝟙)_! = R(Δ ≫ p₂)_! ≅ RΔ_! ⋙ Rp₂_!`. -/
 noncomputable def idIsoDiagonalSnd :
     𝟭 (DerivedCategoryModule Λ X) ≅
-      (R(pullback.diagonal f)_![ModuleCat.{u + 1} Λ]) ⋙
-        (R(pullback.snd f f)_![ModuleCat.{u + 1} Λ]) :=
+      (R(diagonal f)_![ModuleCat.{u + 1} Λ]) ⋙ (R(pullback.snd f f)_![ModuleCat.{u + 1} Λ]) :=
   (rightDerivedLowerShriekIdIsoOfLowerStar (ModuleCat.{u + 1} Λ) X).symm ≪≫
-    rightDerivedLowerShriekCongrIso Λ (pullback.diagonal_snd f).symm ≪≫
-    rightDerivedLowerShriekCompIso Λ (pullback.diagonal f) (pullback.snd f f)
+    rightDerivedLowerShriekCongrIso Λ (diagonal_snd f).symm ≪≫
+    rightDerivedLowerShriekCompIso Λ (diagonal f) (pullback.snd f f)
 
 /-- Proper base change `Rf_! ⋙ Lf^* ≅ Lp₁^* ⋙ Rp₂_!` for the cartesian square of
 `W = X ×_Y X`. -/
@@ -237,6 +256,7 @@ noncomputable def sndProjectionIso (L : DerivedCategoryModule Λ X) :
     Functor.isoWhiskerRight (baseChangeIso f).symm
       (derivedTensorRight (ModuleCat.{u + 1} Λ) X L) ≪≫
     Functor.associator _ _ _
+
 end TraceDiagonalDatum
 
 end Etale

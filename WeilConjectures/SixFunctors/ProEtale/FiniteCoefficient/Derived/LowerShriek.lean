@@ -229,7 +229,10 @@ namespace ProEtale
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
-/-- The compactly supported derived global sections along a morphism `f : X ⟶ Y`
+/-- Blueprint `pur9-def-compact-cohomology`: Compact-support cohomology (for `f = a_X` the
+structure morphism of `X` over `Spec k`, and `A` the category of `A_{E,n}`-modules).
+
+The compactly supported derived global sections along a morphism `f : X ⟶ Y`
 admitting a compactification, *defined* as the composite
 
 `RΓc(X/Y, -) := RΓ(Y, Rf_! -) : D(X_proét) ⥤ D(A)`.
