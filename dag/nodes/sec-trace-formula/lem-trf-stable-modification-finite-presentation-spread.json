@@ -19,9 +19,82 @@
   "def-weil-proper-morphism",
   "lem-trf-riemann-zariski-finite-refinement"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put S=Spec V. It is affine, quasi-compact and quasi-separated. Apply [lem-weil-pbc-proper-limit-noetherian] to the identity of S (which is proper) and use its affine clause. Thus S is the limit of a directed affine system S_i of finite-type Z-schemes with affine transitions. The curve objects Y_V and E_V, their structural maps to S, the base changes X\\times_T S and D\\times_T S, and the maps f_X and f_D are all finite-presentation data. After increasing i, [thm-pd-spreading-out] descends the map S to T (clause 2 applied to the finitely presented S_i-schemes S_i and T\\times_{\\mathbf Z}S_i, which is of finite presentation over S_i because T is of finite type over the Noetherian ring \\mathbf Z, and to the section S\\to T\\times_{\\mathbf Z}S given by S\\to T), both curve objects and their structural maps, the two target base changes, the maps f_X and f_D, the marking inclusion E_V\\hookrightarrow Y_V, and the two compatibility equations. Its morphism and equality clauses let all these finitely many pieces be descended at one common stage.",
+   "uses": [
+    "lem-weil-pbc-proper-limit-noetherian",
+    "thm-pd-spreading-out"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§3.1 and Remark 3.1.1(ii), and the finite-presentation approximation argument in the second paragraph of the proof of Theorem 1.5, pp. 34--36."
+   }
+  },
+  {
+   "text": "The descended marking map E_i\\to Y_i is made a closed immersion after a further stage by [lem-weil-pbc-descend-closed-immersion]; the hypotheses hold because the displayed schemes and maps are quasi-compact and quasi-separated and the descended map is locally of finite type. Apply [lem-weil-pbc-descend-flat-finite-presentation] to Y_i\\to S_i and E_i\\to S_i, and then [lem-trf-pure-relative-dimension-finite-stage] with dimensions 1 and 0. The flat base-change statement [lem-weil-pbc-flat-morphism-base-change] and the base-change clause of [lem-weil-pbc-proper-fp-permanence] preserve flatness, finite presentation, and the closed immersion after each later enlargement. Thus, at a common later stage, (Y_i,E_i) is a multipointed S_i-curve with the required pure fibre dimensions. We deliberately postpone choosing U_0: all later enlargements in Step 3 are made first, and the final base change retains flatness, finite presentation and the closed immersion by the same two permanence statements. The pure fibre dimensions are retained as well, since the final base change is along a closed immersion U_0\\hookrightarrow S_i, so each fibre over a point of U_0 is the fibre over the same point of S_i.",
+   "uses": [
+    "lem-weil-pbc-descend-closed-immersion",
+    "lem-weil-pbc-descend-flat-finite-presentation",
+    "lem-trf-pure-relative-dimension-finite-stage",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§3.1, Remark 3.1.1(ii), and the finite-presentation approximation paragraph of the proof of Theorem 1.5, pp. 34--36."
+   }
+  },
+  {
+   "text": "At the stage supplied by Step 2, let g_X and g_D denote the descended compatible maps. Their base changes to S are f_X and f_D, hence are proper. Apply [lem-weil-pbc-eventually-proper] separately to these maps in the affine inverse system, using the locally finite-type property supplied by finite presentation; after one common enlargement both are proper, and [lem-weil-pbc-proper-fp-permanence] preserves properness and finite presentation under subsequent base changes. For the generic-fibre assertion, write S_i=Spec A_i and let ξ_i be the image of the generic point of Spec L, i.e. the prime p_i=ker(A_i\\to V\\subset L); its reduced closure is Spec B_i with B_i=A_i/p_i the image of A_i in V, and K_i=κ(ξ_i)=Frac(B_i)\\subset L. Since V=colim_i A_i, every element of V lies in some B_i, so V is the directed union of the B_i, and L=Frac(V) is the directed union of the K_i; hence Spec L=lim_i Spec K_i, an inverse system of affine schemes with affine transition maps. The generic fibres of the descended finite-presentation schemes and maps are finite-presentation data over this field limit. Apply the morphism and equality clauses of [thm-pd-spreading-out] to this field system to descend the inverse maps of f_X and f_D and their two inverse identities after a common enlargement. We can now take the reduced closure U_0 of ξ_i in the final affine S_i; Spec V factors through U_0 because Spec V is integral and the generic point lands in U_0. The final base changes give Y_0,E_0 and g_X,g_D. The map U_0\\to T is of finite type: it is locally of finite type by clause (f) of [lem-weil-pbc-proper-fp-permanence], since U_0 is of finite type over \\mathbf Z, and quasi-compact by clause (1) of [lem-weil-pbc-qcqs-morphism-permanence], since U_0 is affine and T is Noetherian, hence quasi-separated. It is separated because U_0 is affine and [lem-weil-pbc-affine-source-morphism-separated] (the affine-source/01KN and composition/01KV argument, with T Noetherian) applies. Hence U_0 is an L-quasi-model by [lem-trf-riemann-zariski-finite-refinement]. The descended maps commute with the marking because the compatibility equality was included in the finite diagram of Step 1.",
+   "uses": [
+    "lem-weil-pbc-eventually-proper",
+    "lem-weil-pbc-proper-fp-permanence",
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-trf-riemann-zariski-finite-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§3.1 and Remark 3.1.1(ii), finite-presentation approximation and generic-isomorphism paragraph in the proof of Theorem 1.5, pp. 34--36."
+   }
+  },
+  {
+   "text": "The morphism Spec V to U_0 is the chosen factorization of the original map to T, and the identifications from the limit construction give Y_0\\times_{U_0}Spec V\\cong Y_V and E_0\\times_{U_0}Spec V\\cong E_V. Associativity of fibre products identifies the pullbacks of g_X and g_D with f_X and f_D, and the descended equalities preserve the closed immersion and compatibility. The construction did not impose semistability or stability on (Y_0,E_0), exactly as required.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Remark 3.1.1(ii) and the second paragraph of the proof of Theorem 1.5, pp. 34--36."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-trf-pure-relative-dimension-finite-stage",
+  "lem-trf-riemann-zariski-finite-refinement",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-descend-closed-immersion",
+  "lem-weil-pbc-descend-flat-finite-presentation",
+  "lem-weil-pbc-eventually-proper",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-proper-limit-noetherian",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "thm-pd-spreading-out"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "§3.1 and Remark 3.1.1(ii), together with the finite-presentation approximation argument in the second paragraph of the proof of Theorem 1.5, pp. 34--36; the PDF is not present in literature/ (WANTED)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,7 +126,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-stable-modification-spreading",
@@ -72,5 +145,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-stable-modification-finite-presentation-spread",
+  "worker": "stage1",
+  "summary": "Split the finite-presentation spreading argument into four steps. The affine clause of the proper-limit lemma, applied to the identity of Spec V, writes Spec V as the limit of affine finite-type Z-schemes. The spreading-out theorem then descends the map to T, the two curves, the targets, f_X, f_D, the marking and the compatibility equalities. Closed-immersion, flatness and pure-dimension descent give a multipointed curve at a finite stage. Eventual properness gives the two proper maps, and spreading-out over the system of generic residue fields gives the generic-fibre inverses. The quasi-model U_0 is the reduced closure of the generic point at the final stage. No new nodes were needed. The Temkin PDF is absent from literature/, so the proof is recorded as agent-written. The maintainer reader made the justifications of steps 1-3 explicit (FIX).",
+  "blueprint": "Realizes the finite-presentation approximation paragraph in the proof of Temkin Theorem 1.5, as cited by the item blueprint ancestor lem-trf-local-term-locality.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proper-limit-noetherian",
+    "why": "Provides the affine finite-type inverse system whose limit is Spec V."
+   },
+   {
+    "node": "thm-pd-spreading-out",
+    "why": "Spreads the finite-presentation schemes, maps, inverse maps, and finite compatibility equations."
+   },
+   {
+    "node": "lem-weil-pbc-descend-closed-immersion",
+    "why": "Makes the marking closed immersion hold at a finite stage."
+   },
+   {
+    "node": "lem-weil-pbc-descend-flat-finite-presentation",
+    "why": "Descends flatness of both curve structural maps."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Supplies qcqs and locally-finite-type hypotheses for the descent interfaces."
+   },
+   {
+    "node": "lem-weil-pbc-eventually-proper",
+    "why": "Descends properness of each compatible pair map to a common finite stage."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Preserves properness, finite presentation, and closed immersions under later base changes."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Preserves flatness under the later base changes."
+   },
+   {
+    "node": "lem-weil-pbc-affine-source-morphism-separated",
+    "why": "Shows the final affine U_0 -> T is separated via the 01KN/01KV argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proper-limit-noetherian",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-descend-closed-immersion",
+  "lem-weil-pbc-descend-flat-finite-presentation",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-eventually-proper",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-affine-source-morphism-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-bab489b5a",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-bab489b5a (reviewer sub-agent of L); spot-checked: I read all of the mathematics: the item, unit sk-i-curve-zero, the parent lem-trf-stable-modification-spreading (its Step 1 uses this item exactly), and the statements of all 12 cited nodes. I checked Stacks limits.tex directly: 01ZM (all three clauses, line 2370), plus 0A0P, 01ZP, 04AI, 081F and 0EY2, all confirmed in tags/tags. The Temkin PDF is missing, so proof_origin=agent and the WANTED line are correct. The statement is unchanged and true. Edge cases tested: V=L, empty marking, f already an isomorphism, non-separated X. Hypotheses are checked at every step: qcqs and lft for 01ZP and 081F, lfp for 04AI, and the pure-dimension node with d=1 and d=0. U_0=Spec(image of A_i in V) is integral, separated and of finite type over T, with generic point the image of Spec L, so it is an L-quasi-model. No duplicates: lem-trf-marked-curve-finite-type-model and lem-trf-stable-curve-diagram-noetherian-model state different things. There are no new nodes and no SGA citations. Accepted tool uses: 0A0P, 01ZM, 01ZP, 04AI, 081F (generic limit lemmas; no node of the unit gives them). FIX, one file: (1) Step 1 now says how S->T is descended (01ZM clause 2 with T x_Z S_i). (2) Step 2 now gives the closed-fibre reason why pure dimension survives the base change to U_0; the cited permanence lemmas do not cover it. (3) Step 3 replaces the imprecise 'cofinal subsystem' with B_i=A_i/p_i and a proof that colim K_i = L, and justifies that U_0->T is of finite type by proper-fp (f) and qcqs (1). (4) The stale split_report.summary still described the returned 'proper envelope' route and has been replaced.; 1 file(s) fixed by the reviewer"
  }
 }
