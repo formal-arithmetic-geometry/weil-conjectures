@@ -18,6 +18,7 @@ import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleQcqsAffineLocal
 import Sheaf.AlgebraicGeometry.ConstructibleSurjectivePullback
+import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 
 /-!
 # Finite etale pushforward preserves constructibility of module sheaves

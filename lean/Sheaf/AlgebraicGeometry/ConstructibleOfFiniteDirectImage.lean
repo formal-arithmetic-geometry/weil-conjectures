@@ -21,6 +21,7 @@ import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
+import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 
 /-!
 # Finite direct image reflects constructibility

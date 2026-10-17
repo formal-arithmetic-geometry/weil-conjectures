@@ -24,6 +24,7 @@ import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
+import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 
 /-!
 # Descent of open direct image and exchange along finite radicial covers

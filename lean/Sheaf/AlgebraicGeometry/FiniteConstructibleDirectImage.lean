@@ -19,6 +19,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import WeilConjectures.SixFunctors.Finite.Exact
 import Sheaf.AlgebraicGeometry.ConstructibleAbelianSheaf
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 
 /-!
 # Finite direct images of constructible module sheaves

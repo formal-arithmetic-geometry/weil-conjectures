@@ -31,6 +31,7 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleModuleTraceDegree
 import WeilConjectures.AlgebraicGeometry.Curve.DisjointOpenExtensionBiproduct
+import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 
 /-!
 # Constructibility for lisse coefficients on an open relative affine line

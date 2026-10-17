@@ -27,6 +27,7 @@ import Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetCompariso
 import Sheaf.AlgebraicGeometry.EtaleCompactificationConstructibility
 import Sheaf.AlgebraicGeometry.Sites.FiniteTypeTorsionCohomologicalDimension
 import WeilConjectures.AlgebraicGeometry.DerivedCategories
+import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 
 /-!
 # Finiteness of proper direct images on the small etale site

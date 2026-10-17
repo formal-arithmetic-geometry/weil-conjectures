@@ -23,6 +23,7 @@ public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
 import WeilConjectures.ConstructibleSheaf.Defs
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
+import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 
 /-!
 # Affine locality of constructible etale module sheaves on qcqs schemes
