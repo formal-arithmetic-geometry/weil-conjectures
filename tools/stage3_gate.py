@@ -89,8 +89,12 @@ def gate(D: dict, group: str, item: str, graph=None, cycle_check: bool = True) -
         if d["statement_changed"]: bad.append("changes the statement of " + short(d["statement_changed"]))
         if d["removed"]: bad.append("removes " + short(d["removed"]))
         if d["public_added"]: bad.append("adds public declaration(s) " + short(d["public_added"]))
-        data = [k for k in d["body_changed"] if d["old"][k]["kw"] not in ("theorem", "lemma")]
-        if data: bad.append("changes the body of non-theorem declaration(s) " + short(data))
+        # launcher, 2026-10-17: filling a body that is `sorry` upstream is allowed for any declaration (instance, def,
+        # ...) whose signature (name, binders, type, attributes) is unchanged; those are checked just above and below.
+        # Changing a non-sorry body of a non-theorem declaration stays refused.
+        data = [k for k in d["body_changed"] if d["old"][k]["kw"] not in ("theorem", "lemma")
+                and not s3.only_sorry(d["old"][k]["body"])]
+        if data: bad.append("changes the non-sorry body of non-theorem declaration(s) " + short(data))
         attrs = [k for k in d["new"] if k in d["old"] and d["old"][k].get("head") != d["new"][k].get("head")]
         if attrs: bad.append("changes attributes of " + short(attrs))
         # a private `import Sheaf.*` is allowed: proofs of upstream sorries use our lemmas, and the integration agent sends
