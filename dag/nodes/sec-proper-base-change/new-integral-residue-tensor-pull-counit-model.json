@@ -1,0 +1,180 @@
+{
+ "id": "new-integral-residue-tensor-pull-counit-model",
+ "kind": "statement",
+ "title": "Counit normalization of the residue tensor-pull presentation",
+ "statement": "Use the constructed ordinary coefficient isomorphism of [new-integral-residue-scalar-counit-model]. Use [def-weil-pbc-integral-residue-tensor-pull-presentation] and [new-integral-residue-tensor-model]. Fix a prime ℓ, a normed field E over ℚ_ℓ, a scheme morphism f:X→Y, and any integral homotopy complex P on Y. Write F for integral pullback, B and B' for the restricted regular residue modules on Y and X, H for reduction then restriction on X, and εX for tensorPresentationDerivedCounit on X. Let e:F(B)≅B' be ordinary restriction/pullback on the regular residue module followed by restriction of the inverse monoidal unit of residue pullback, and let eH:Fh(B[0])≅B'[0] be its canonical homotopy image. Put a=F.leftDerivedFunctorCounit(P). Then residueExchangeTensorPullIso at LF(Qh P), followed by residueExchangeTensorModelTarget at P, is H(a) followed by εX(Fh P), then Qh of homotopyTensorSingleIso(B') inverse followed by eH inverse tensor identity on Fh P. This statement contains only the X tensor presentation and its coefficient normalization, no scalar-extension pull mate, and no flatness hypothesis.",
+ "stmt_deps": [
+  "def-weil-pbc-integral-residue-tensor-pull-presentation",
+  "new-integral-residue-tensor-model",
+  "new-integral-residue-scalar-counit-model"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15 and proof of Lemma 6.5.9(5), p. 51; explicit formal normalization by derived counits (agent calculation, not a separate statement in the paper)"
+ },
+ "proof": [
+  {
+   "text": "Normalize the coefficient pull isomorphism c by the exact-F derived counit: c inverse followed by LF(jB) and gamma_F(B[0]) is jB' followed by Qh(eH inverse). Use the singleFunctorCompLeftDerivedFunctorIso definition, exact-F counit factorization and quotientCompQhIso naturality. The scalar-counit module is used here only for its explicitly constructed ordinary coefficient isomorphism, not its scalar-counit theorem.",
+   "uses": [
+    "def-weil-pbc-integral-residue-tensor-pull-presentation",
+    "new-integral-residue-tensor-model",
+    "new-integral-residue-scalar-counit-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Normalize derivedTensorPresentationIso by leftDerivedNatTrans_app, first for derivedTensorSingleIso and then for leftDerivedUnique. Its presentation followed by inverse braiding, jB' tensor identity and the lax Qh comparison equals the defining tensor-presentation counit followed by the inverse ordinary single/tensor comparison.",
+   "uses": [
+    "new-integral-residue-tensor-presentation",
+    "lem-weil-pbc-integral-reduction-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand tensorPullIso and tensorModelTarget, use braiding naturality and the preceding coefficient identity, move a by tensor exchange and presentation naturality, then apply presentation normalization at Fh(P). Qh.map_comp gives the claimed composite. No map is inverted using flatness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-integral-residue-tensor-pull-presentation",
+  "new-integral-residue-tensor-model",
+  "new-integral-residue-scalar-counit-model",
+  "new-integral-residue-tensor-presentation",
+  "lem-weil-pbc-integral-reduction-tensor"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "A2",
+  "date": "2026-10-17",
+  "document": "Bhatt--Scholze and the existing derived-functor constructions",
+  "place": "Remark 6.8.15 and proof of Lemma 6.5.9(5), p. 51; explicit formal normalization by derived counits (agent calculation, not a separate statement in the paper)",
+  "note": "Repair after upstream synchronization: the ordinary restricted-regular pullback isomorphism is constructed generically and referred to by name; the local pullback counit uses the existing typed residueExchangeUpperStarCounit. These are the same constructed maps as in the retained delivery. The theorem remains a named open obligation with its complete proof in words."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact functor degree zero coefficient comparison normalized by left derived counit and derived tensor presentation",
+   "results": "8 hits: CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero_eq, CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Functor.fromLeftDerivedZero, CategoryTheory.Tor'_obj_map",
+   "date": "2026-10-16",
+   "verdict": "Generic counit, derived-functor or module-category ingredients only; no theorem identifying these fixed paper comparisons. Direct searches of lean/ found the defining constructions, not this normalized identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedNatTrans_app",
+   "results": "1 hits: CategoryTheory.Functor.leftDerivedNatTrans_app",
+   "date": "2026-10-16",
+   "verdict": "Generic counit, derived-functor or module-category ingredients only; no theorem identifying these fixed paper comparisons. Direct searches of lean/ found the defining constructions, not this normalized identity."
+  },
+  {
+   "tool": "grep",
+   "query": "residueExchangeTensorPullIso|tensorPresentationDerivedCounit",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "Generic counit, derived-functor or module-category ingredients only; no theorem identifying these fixed paper comparisons. Direct searches of lean/ found the defining constructions, not this normalized identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalizing a derived tensor presentation by its counit and the exact functor comparison on degree zero coefficients",
+   "results": "8 hits: CoalgCat.MonoidalCategoryAux.counit_tensorObj, CategoryTheory.Adjunction.derivedε, CategoryTheory.Functor.totalLeftDerivedCounit, CategoryTheory.FreeMonoidalCategory.normalizeObj', CategoryTheory.instIsIsoFunctorFromLeftDerivedZero, CategoryTheory.FreeMonoidalCategory.normalize, CategoryTheory.FreeMonoidalCategory.normalizeIsoApp, CategoryTheory.Functor.rightDerivedZeroIsoSelf.congr_simp",
+   "date": "2026-10-16",
+   "verdict": "Generic counit, derived-functor or module-category ingredients only; no theorem identifying these fixed paper comparisons. Direct searches of lean/ found the defining constructions, not this normalized identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit normalization of a derived tensor presentation and the ordinary tensor comparison",
+   "results": "8 hits: Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul, CategoryTheory.FreeMonoidalCategory.normalizeIso, TensorProduct.counit_tmul, CategoryTheory.FreeMonoidalCategory.normalizeIsoAux, Algebra.Presentation.tensorModelOfHasCoeffsHom_tmul, TensorProduct.counit_def",
+   "date": "2026-10-17",
+   "verdict": "Repair session search: generic derived-counit and tensor-localization identities are available, but no theorem directly states this fixed residue comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedNatIso_hom",
+   "results": "1 hits: CategoryTheory.Functor.leftDerivedNatIso_hom",
+   "date": "2026-10-17",
+   "verdict": "Repair session search: generic derived-counit and tensor-localization identities are available, but no theorem directly states this fixed residue comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPresentationDerivedCounit|homotopyTensorSingleIso",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "Repair session search: generic derived-counit and tensor-localization identities are available, but no theorem directly states this fixed residue comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedNatTrans_app",
+   "results": "1 hits: CategoryTheory.Functor.leftDerivedNatTrans_app",
+   "date": "2026-10-17",
+   "verdict": "Repair session search: generic derived-counit and tensor-localization identities are available, but no theorem directly states this fixed residue comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization of a left derived tensor presentation by its counit and the lax tensor map of the localization functor",
+   "results": "8 hits: CategoryTheory.Localization.Monoidal.μ, CategoryTheory.Localization.Monoidal.triangle_aux₂, CategoryTheory.Localization.Monoidal.triangle_aux₃, CategoryTheory.Localization.Monoidal.leftUnitor, CategoryTheory.Localization.Monoidal.μ_natural_left, CategoryTheory.Localization.Monoidal.id_tensorHom, CategoryTheory.Localization.Monoidal.tensorHom_id, CategoryTheory.Localization.Monoidal.μ_inv_natural_left",
+   "date": "2026-10-17",
+   "verdict": "Repair session search: generic derived-counit and tensor-localization identities are available, but no theorem directly states this fixed residue comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "A2",
+  "item": "Sheaf.Paper.IntegralResidueScalarGeometryBridge",
+  "date": "2026-10-17"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Counit normalization of the fixed residue tensor square",
+   "via": [
+    "new-integral-residue-scalar-geometry-component",
+    "new-integral-residue-scalar-route-model",
+    "new-integral-residue-tensor-geometry",
+    "new-integral-residue-projection-normalization",
+    "lem-weil-pbc-integral-residue-comparisons",
+    "lem-weil-pbc-integral-residue-exchange",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResidueTensorPullCounitModel",
+  "file": "lean/Sheaf/Paper/IntegralResidueTensorPullCounitModel.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_tensorPullCounit_model",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_tensorPullCounit_model"
+  ],
+  "statement": "theorem integralResidue_tensorPullCounit_model {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (P : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})\n      (condensedRingObj (integralCoeff ℓ E) Y)) (.up ℤ)) :\n    let F := (f)^*⟦integralCoeff ℓ E⟧\n    let B := residueExchangeOrdinaryCoefficient ℓ E Y\n    let B' := residueExchangeOrdinaryCoefficient ℓ E X\n    let A := Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)\n    let SX := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (coefficientMap (integralReductionMap ℓ E) X)\n    letI := residueOrdinaryUpperStarMonoidal A f\n    let e : F.obj B ≅ B' :=\n      residueOrdinaryRestrictedRegularPullIso (integralCoeff ℓ E) A\n        (integralReductionMap ℓ E) f\n    let eH : (F.mapHomotopyCategory (.up ℤ)).obj (Functor.tensorModelCoefficient B) ≅\n      Functor.tensorModelCoefficient B' := (F.mapHomotopyCategoryFactors (.up ℤ)).app\n        ((CochainComplex.singleFunctor _ 0).obj B) ≪≫\n      (HomotopyCategory.quotient _ (.up ℤ)).mapIso\n        ((F.mapCochainComplexSingleFunctor 0).app B ≪≫\n          (HomologicalComplex.single _ (.up ℤ) 0).mapIso e)\n    let φX := coefficientMap (integralReductionMap ℓ E) X\n    let H := residueExchangeReduction ℓ E X ⋙ residueExchangeRestriction ℓ E X\n    let εX : DerivedCategory.Qh ⋙ H ⟶\n        (tensorLeft B').mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh := by\n      unfold H B' residueExchangeOrdinaryCoefficient\n        residueExchangeReduction integralReduction residueExchangeRestriction\n      exact Mod.tensorPresentationDerivedCounit φX\n    let M := DerivedCategory.Qh.obj P\n    let a : (residueExchangeUpperStar (integralCoeff ℓ E) f).obj M ⟶\n        DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj P) :=\n      (residueExchangeUpperStarCounit (integralCoeff ℓ E) f).app P\n    (residueExchangeTensorPullIso ℓ E f).hom.app\n        ((residueExchangeUpperStar (integralCoeff ℓ E) f).obj M) ≫\n      residueExchangeTensorModelTarget ℓ E f P =\n      H.map a ≫\n      εX.app\n        ((F.mapHomotopyCategory (.up ℤ)).obj P) ≫\n      DerivedCategory.Qh.map\n        ((homotopyTensorSingleIso B').inv.app ((F.mapHomotopyCategory (.up ℤ)).obj P) ≫\n          eH.inv ▷ (F.mapHomotopyCategory (.up ℤ)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-17"
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261017T024325-L-1172589",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261017T024325-L-1172589",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
