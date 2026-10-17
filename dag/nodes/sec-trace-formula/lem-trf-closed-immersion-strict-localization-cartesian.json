@@ -31,34 +31,147 @@
   "def-pc-fibre-product",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an affine open $U=\\operatorname{Spec}A$ of $W$ containing $i(\\bar a)$. By the affine characterization of a closed immersion, $i^{-1}(U)=\\operatorname{Spec}(A/I)$ for an ideal $I$, and the image of $\\bar a$ corresponds to a prime $\\mathfrak p/I$ over $\\mathfrak p$. The affine-neighbourhood/triples comparison [lem-weil-pbc-etale-local-ring-triples](2)-(3) lets us compute the chosen geometric colimits on these charts. Apply the affine strict-local-ring comparison [lem-exc-affine-strict-local-ring-comparison] to the open charts $U\\hookrightarrow W$ and $\\operatorname{Spec}(A/I)\\hookrightarrow Z$. It identifies the two geometric strict-local rings with algebraic strict henselizations of $A_{\\mathfrak p}$ and $(A/I)_{\\mathfrak p/I}$, respectively, using the same separable closure $K\\subset\\Omega$ and the identity residue-field maps. The fibre-product maps are induced by the quotient $A\\to A/I$, so the claimed scheme map can be checked on these affine rings.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-pc-fibre-product",
+    "def-weil-affine-spectrum",
+    "lem-exc-affine-strict-local-ring-comparison",
+    "lem-weil-pbc-etale-local-ring-triples",
+    "def-weil-pbc-strict-henselization-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05WS, together with Tag 04HX (affine strict-local comparison) and the affine description of a closed immersion (Tag 01QO)"
+   }
+  },
+  {
+   "text": "Put $C_W=\\mathcal O^{\\mathrm{sh}}_{W,i\\bar a}$, $C_Z=\\mathcal O^{\\mathrm{sh}}_{Z,\\bar a}$ and $R=(A/I)_{\\mathfrak p/I}=A_{\\mathfrak p}/IA_{\\mathfrak p}$. By Step 1 the $A$-algebra map $A\\to C_W$ is $A\\to A_{\\mathfrak p}\\to C_W$, where $C_W$ is, as an $A_{\\mathfrak p}$-algebra, an algebraic strict henselization of $A_{\\mathfrak p}$ relative to $K$ [def-sc-ring-strict-henselization]; likewise $C_Z$ is an $R$-algebra strict henselization of $R$ relative to $K$. Both structure maps are local and both composites $A_{\\mathfrak p}\\to C_W\\to K$, $R\\to C_Z\\to K$ are the canonical $\\kappa(\\mathfrak p)\\subset K$, since the residue maps of [lem-exc-affine-strict-local-ring-comparison] are the geometric evaluations. The canonical local map $h^\\#:C_W\\to C_Z$ of [lem-weil-pbc-strict-henselization-functoriality](3) satisfies $j_W\\circ\\operatorname{Spec}h^\\#=i\\circ j_Z$; both sides factor through $U$, so by [def-weil-affine-spectrum] $A\\to C_W\\to C_Z$ equals $A\\to A/I\\to C_Z$. Two ring maps out of $A_{\\mathfrak p}$ that agree on $A$ agree, so $h^\\#$ is an $A_{\\mathfrak p}$-algebra map and kills $IC_W$. Put $Q=C_W/IC_W$ with quotient map $q$; $Q$ is an $R$-algebra through $A_{\\mathfrak p}\\to C_W\\to Q$, and $h^\\#=\\bar hq$ for a unique $R$-algebra map $\\bar h:Q\\to C_Z$. Since $q$ is surjective and $h^\\#$ local, $\\bar h^{-1}(\\mathfrak m_{C_Z})=q(\\mathfrak m_{C_W})=\\mathfrak m_Q$. By (1)-(3) of the functoriality node and the identifications of Step 1, $h^\\#$ induces $\\mathrm{id}_K$ ($\\kappa(i(a))=\\kappa(a)=\\kappa(\\mathfrak p)$).",
+   "uses": [
+    "def-sc-ring-strict-henselization",
+    "lem-exc-affine-strict-local-ring-comparison",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GU (lemma-strictly-henselian-functorial) and etale-cohomology.tex Tag 04HX (lemma-describe-etale-local-ring); the quotient Q of Tag 05WS"
+   }
+  },
+  {
+   "text": "Since $A_{\\mathfrak p}\\to C_W$ is local, $IC_W\\subseteq\\mathfrak m_{C_W}$, and $C_W$ is strictly henselian (Step 1); so [lem-weil-pbc-strictly-henselian-quotient] makes $Q$ henselian local with maximal ideal $\\mathfrak m_Q=q(\\mathfrak m_{C_W})$ and residue field $K$ through $q$. By [def-sc-ring-strict-henselization] and [lem-sc-pointed-etale-filtered], $C_W$ is a filtered colimit of etale $A_{\\mathfrak p}$-algebras and $C_Z$ a filtered colimit of etale $R$-algebras (as algebras with the structures of Step 2). All structure maps to $K$ are $\\kappa(\\mathfrak p)\\subset K$, so $\\mathrm{id}_K$ is a $\\kappa(\\mathfrak p)$-algebra map in each application below, and each maximal ideal lies over the maximal ideal of the base. (a) Apply [lem-weil-pbc-map-into-henselian-colimit] over $R$ with source $C_Z$, target $Q$, prime $\\mathfrak m_{C_Z}$, $\\tau=\\mathrm{id}_K$: there is an $R$-algebra map $v:C_Z\\to Q$ with $v^{-1}(\\mathfrak m_Q)=\\mathfrak m_{C_Z}$ inducing $\\mathrm{id}_K$. (b) Over $R$ with source and target $C_Z$: $\\bar hv$ and $\\mathrm{id}$ are $R$-algebra maps with preimage $\\mathfrak m_{C_Z}$ inducing $\\mathrm{id}_K$, so $\\bar hv=\\mathrm{id}$. (c) Over $A_{\\mathfrak p}$ with source $C_W$, target $Q$, prime $\\mathfrak m_{C_W}$, $\\tau=\\mathrm{id}_K$: both $q$ and $vh^\\#$ are such $A_{\\mathfrak p}$-algebra maps ($vh^\\#$ by Step 2 and (a)), so $vh^\\#=q$, i.e. $v\\bar hq=q$; as $q$ is surjective, $v\\bar h=\\mathrm{id}_Q$. Thus $\\bar h$ is an isomorphism and $h^\\#=\\bar hq$ is surjective with kernel $IC_W$. This is the argument of Stacks 08HT from 08HR, with the bases written out.",
+   "uses": [
+    "lem-weil-pbc-strictly-henselian-quotient",
+    "def-sc-ring-strict-henselization",
+    "lem-sc-pointed-etale-filtered",
+    "lem-weil-pbc-map-into-henselian-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 08HR (lemma-map-into-henselian-colimit), applied over (A/I)_p twice and over A_p once, as in Tag 08HT (lemma-uniqueness-henselian); Tag 04GW for filteredness; Tag 05WS for the quotient statement"
+   }
+  },
+  {
+   "text": "By Step 1, $j_W$ factors through the open $U$ [lem-exc-affine-strict-local-ring-comparison], and $i^{-1}(U)=\\operatorname{Spec}(A/I)$ is an open subscheme of $Z$ [def-weil-open-immersion]. For any $a:T\\to Z$, $b:T\\to W_{(i\\bar a)}$ with $ia=j_Wb$, the map $a$ lands in $i^{-1}(U)$ and so factors uniquely through it; hence by the universal property [def-pc-fibre-product] $Z\\times_WW_{(i\\bar a)}=\\operatorname{Spec}(A/I)\\times_{\\operatorname{Spec}A}\\operatorname{Spec}C_W$, with the same projections. By [lem-weil-pbc-fibre-product-affine-spectra] this is $\\operatorname{Spec}(A/I\\otimes_AC_W)=\\operatorname{Spec}Q$, with projections $\\operatorname{Spec}$ of $A/I\\to Q$ and of $q$. Under the isomorphism $\\operatorname{Spec}\\bar h:\\operatorname{Spec}C_Z\\to\\operatorname{Spec}Q$ of Step 3 [def-weil-affine-spectrum], these become $\\operatorname{Spec}$ of $A/I\\to C_Z$ (as $\\bar h$ is an $A/I$-algebra map), which is $j_Z$ on the chart, and $\\operatorname{Spec}(\\bar hq)=\\operatorname{Spec}h^\\#=h$. Thus $(j_Z,h)$ is an isomorphism, with no Noetherian or reducedness hypothesis and with nilpotents retained.",
+   "uses": [
+    "lem-exc-affine-strict-local-ring-comparison",
+    "def-weil-open-immersion",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JQ (lemma-fibre-product-affines) and the open-subscheme factorization; scheme form of Tag 05WS"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sc-ring-strict-henselization",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-sc-pointed-etale-filtered",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-map-into-henselian-colimit",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-strictly-henselian-quotient"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Statement: Tag 05WS (lemma-quotient-strict-henselization). Proof: Tag 08HR (lemma-map-into-henselian-colimit) applied over (A/I)_p and A_p to the explicit quotient, as in the proof of Tag 08HT (lemma-uniqueness-henselian); affine comparison via etale-cohomology.tex Tag 04HX and the closed-immersion chart Tag 01QO"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
-   "query": "rg -l -i 'strict.?hensel|StrictlyHenselian|strictHenselization' over /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib; then rg -l -i 'henselian'",
-   "results": "first query: no file; second: only Mathlib/RingTheory/Henselian.lean (HenselianLocalRing); no strict henselization or strict localization in Mathlib",
-   "date": "2026-10-18",
-   "verdict": "no match: Mathlib has no strict henselization, hence no quotient/closed-immersion comparison"
+   "query": "strictHenselization|strict_henselization|StrictHensel [Mathlib/]",
+   "results": "top=",
+   "date": "2026-10-17",
+   "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "strict henselization of a quotient local ring is the quotient of the strict henselization",
-   "results": "not run: LeanSearch is not reachable from the review service on the project server",
-   "date": "2026-10-18",
-   "verdict": "unavailable"
+   "query": "strict henselization of quotient ring by ideal and canonical map from ambient strict localization",
+   "results": "top=quotMapEquivQuotMapMaximalIdealOfIsLocalization, IsLocalRing.residue, instHenselianRingMaximalIdeal, Ideal.Quotient.mkₐ_toRingHom, Ideal.Quotient.factorₐ, Ideal.Quotient.mkₐ, Ideal.Quotient.mk, Submodule.toLocalizedQuotient",
+   "date": "2026-10-17",
+   "verdict": "no match: returned quotient/localization and henselian component lemmas, but no strict henselization comparison"
   },
   {
    "tool": "loogle",
-   "query": "strict henselization / closed immersion strict localization",
-   "results": "not run: Loogle is not reachable from the review service on the project server",
-   "date": "2026-10-18",
-   "verdict": "unavailable"
+   "query": "StrictHenselization, HenselianLocalRing, IsClosedImmersion",
+   "results": "top=; note=loogle: unknown identifier 'StrictHenselization'",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strict henselization of quotient ring by ideal and canonical map from ambient strict localization",
+   "results": "top=IsAdicComplete.StrictMono.mk_liftRingHom, PreTilt.mk_comp_untilt_eq_coeff_zero, IsAdicComplete.StrictMono.mk_comp_liftRingHom, HenselianRing, Ideal.powQuotSuccInclusion_apply_coe, IsAdicComplete.henselianRing, PreTilt.untilt, Ideal.quotientToQuotientRangePowQuotSuccAux_mk",
+   "date": "2026-10-17",
+   "verdict": "no match: returned adic-completion and henselian declarations, but no strict henselization comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedImmersion|strictHenselization|Ideal.Quotient [Mathlib/AlgebraicGeometry]",
+   "results": "top=",
+   "date": "2026-10-17",
+   "verdict": "no match: no matching closed-immersion, strict-henselization, or quotient declaration in the searched Mathlib directories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "base change of strict henselization along a closed immersion is the strict henselization of the closed subscheme",
+   "results": "top=AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, RingHom.IsStandardOpenImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsImmersion.isStableUnderBaseChange, RingHom.IsStableUnderBaseChange, Algebra.Unramified.baseChange, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange, AlgebraicGeometry.IsSeparated.isStableUnderBaseChange",
+   "date": "2026-10-17",
+   "verdict": "generalization: returned closed-immersion base-change declarations, but none states the strict-henselization fibre-product conclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsClosedImmersion, IsLocalRing, Ideal.Quotient",
+   "results": "top=; note=loogle: unknown identifier 'IsClosedImmersion'",
+   "date": "2026-10-17",
+   "verdict": "no match: unknown identifier and no strict-henselization declaration"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "closed immersion strict local scheme is fibre product with strict localization at image geometric point",
+   "results": "top=AlgebraicGeometry.IsClosedImmersion.isZariskiLocalAtTarget, AlgebraicGeometry.instIsClosedImmersionFstScheme, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.instIsClosedImmersionSndScheme, AlgebraicGeometry.instIsPreimmersionFiberι, AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion, AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId, AlgebraicGeometry.isPullback_of_isClosedImmersion",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary closed-immersion/base-change properties, but no strict-localization comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -75,5 +188,54 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-closed-immersion-strict-localization-cartesian",
+  "worker": "stage1",
+  "summary": "Repair of returned head e5b4bf56c0: removed the false and redundant residue-uniqueness node. Step 3 now cites the strictly henselian quotient and pointed-etale filteredness statements, verifies the common R-algebra residue map, and applies the existing 08HR mapping theorem in both directions and to endomorphisms to prove that the canonical factored map is an isomorphism. Removed the unused pointed-etale-finality tool declaration and declared all actually cited off-unit tools, including the affine comparison. Item statement and blueprint route unchanged; no new nodes. Maintainer-reader FIX (2026-10-18): Steps 2-4 rewritten. The existential quotient node lem-sbc-strict-henselization-surjective-quotient (whose B-algebra structure on C/IC is arbitrary) is no longer cited; Q is used with its induced structure and 08HR is applied over R twice and over A_p once. Step 4 now cites the affine fibre-product leaf and the open-subscheme factorization.",
+  "blueprint": "Realizes the ancestor lem-trf-local-term-locality proof place describing the Orgogozo closed-image reduction and the identification F \\times_S S(a) = F(a) of strict-local tubes; the repaired steps make the canonical quotient/functorial identification explicit.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "Steps 1-3 use its affine-chart comparison with the algebraic colimit model and its strictly henselian and fixed geometric residue-field clauses; these generic strict-local tools are not stated in the trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Step 2 uses the canonical local map and its prescribed residue field map; this generic construction does not replace any step of the trace-formula route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-local-ring-triples",
+    "why": "Step 1 uses clauses (2)-(3) to compute the geometric colimits on the two affine charts; no node of this unit gives that generic comparison."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-quotient",
+    "why": "Step 3 needs its henselian local quotient and unchanged residue-field clauses to satisfy the target hypotheses of the 08HR mapping theorem; no trace-formula node gives this ring-theoretic fact."
+   },
+   {
+    "node": "lem-sc-pointed-etale-filtered",
+    "why": "Step 3 needs filteredness of the defining pointed-etale diagrams to satisfy the source hypothesis of 08HR; the trace-formula unit has no such ring-theoretic filteredness theorem."
+   },
+   {
+    "node": "lem-weil-pbc-map-into-henselian-colimit",
+    "why": "Step 3 uses existence and uniqueness among all compatible local R-algebra maps to construct the inverse and identify both composites; it is a generic henselian mapping tool absent from this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strictly-henselian-quotient",
+  "lem-sc-pointed-etale-filtered",
+  "lem-weil-pbc-map-into-henselian-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-647d3ef59",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-647d3ef59 (reviewer sub-agent of L); spot-checked: Read the item, the parent lem-trf-nearby-closed-image, unit sk-i-curve-zero and every cited node statement, including the Lean record of lem-sbc-strict-henselization-surjective-quotient. Checked Stacks algebra.tex 05WS (l.43703), 08HR (l.42881) and 08HT (l.42902), and tag 01JQ. The statement is true (05WS in scheme form). Tested on I=0, k[x] with I=(x), a nilpotent thickening, and the unit ideal (excluded). There are no new nodes. Gap (E1/C4) in Steps 2-3: lem-sbc-strict-henselization-surjective-quotient only says that some B-algebra structure exists on C/IC (the Lean statement is existential and calls it an arbitrary action). Step 3 still applied 08HR uniqueness to Q as an R-algebra and used that hbar is an R-algebra map, which holds only for the induced structure. Fix: Steps 2-3 are rewritten with Q under its induced structure, used only as a henselian local target (lem-weil-pbc-strictly-henselian-quotient). C_W is a filtered colimit of etale A_p-algebras and C_Z one of etale R-algebras (def-sc + lem-sc-pointed-etale-filtered, through lem-exc). 08HR is applied three times: over R for C_Z->Q (gives v), over R for C_Z->C_Z (hbar v=id), and over A_p for C_W->Q (v h#=q, so v hbar=id). All hypotheses were checked: local structure maps, base primes, tau=id_K as a kappa(p)-algebra map. The surjective-quotient node and its tool_uses request are removed. C1 in Step 4: the affine fibre product needed the existing Mathlib leaf lem-weil-pbc-fibre-product-affine-spectra (01JQ, pullbackSpecIso). The reduction to the chart U needed j_W to factor through U (lem-exc) and the open-subscheme factorization (def-weil-open-immersion). Both are now cited, the step is no longer marked elementary, and its source is corrected. The item statement, stmt_deps and blueprint are unchanged. proof_deps is recomputed. Accepted tool_uses: lem-exc-affine-strict-local-ring-comparison, lem-weil-pbc-strict-henselization-functoriality, lem-weil-pbc-etale-local-ring-triples, lem-weil-pbc-strictly-henselian-quotient, lem-sc-pointed-etale-filtered, lem-weil-pbc-map-into-henselian-colimit. No SGA source is used.; 1 file(s) fixed by the reviewer"
  }
 }

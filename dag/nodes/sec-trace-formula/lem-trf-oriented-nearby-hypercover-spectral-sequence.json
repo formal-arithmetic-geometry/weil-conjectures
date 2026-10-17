@@ -9,17 +9,119 @@
  },
  "stmt_deps": [
   "def-trf-oriented-nearby-cycles",
-  "def-trf-oriented-constructible-sheaf",
   "pqf-def-locnoeth",
   "def-weil-pbc-quasi-compact-scheme",
   "def-weil-pbc-scheme-conventions",
   "def-weil-pbc-constructible-complexes",
   "def-weil-proper-morphism",
-  "def-weil-surjective-morphism"
+  "def-weil-surjective-morphism",
+  "def-trf-proper-hypercover",
+  "def-sp-spectral-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the total etale topos of $Y_\\bullet$ and the total topos of the simplicial vanishing topoi $V_{f_i}$. These are the family categories with componentwise coverings in [lem-trf-total-site-augmentation-spectral-sequence]. The exact pullback $\\epsilon^*K$ has component $K_i$. The maps $\\psi_{f_i}:Y_{i,\\mathrm{Et}}\\to V_{f_i}$ assemble to a total morphism $\\psi_\\bullet$, and the $\\bar\\epsilon_i$ assemble to an augmentation $\\bar\\epsilon$. Indeed, the projection descriptions and the canonical identifications $\\bar\\epsilon_i\\psi_{f_i}\\simeq\\psi_f\\epsilon_i$ in [def-trf-oriented-nearby-cycles] commute with every face and degeneracy: both composites have the same two projections and the same oriented $2$-morphism, so the universal property gives their unique compatible identifications. Thus $\\bar\\epsilon\\psi_\\bullet\\simeq\\psi_f\\epsilon$.",
+   "uses": [
+    "def-trf-oriented-nearby-cycles",
+    "lem-trf-total-site-augmentation-spectral-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "General simplicial-site total construction and component functoriality; Orgogozo Section 9.2, p. 22, the simplicial vanishing topos."
+   }
+  },
+  {
+   "text": "The matching-map assumptions are exactly those of [def-trf-proper-hypercover]. Apply [lem-trf-proper-hypercover-etale-descent] to $K$ on $X$. It is bounded below, and the coefficient ring is annihilated by the stated integer. The ordinary adjunction unit therefore gives $K\\xrightarrow{\\sim}R\\epsilon_*\\epsilon^*K$. The descent assertion requires neither properness of $f$ nor any goodness condition on nearby cycles.",
+   "uses": [
+    "def-trf-proper-hypercover",
+    "lem-trf-proper-hypercover-etale-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0DHL, lemma-cohomological-descent-for-ph-hypercovering."
+   }
+  },
+  {
+   "text": "Put $L=R\\psi_{\\bullet,*}\\epsilon^*K$. The component assertion of [lem-trf-total-site-augmentation-spectral-sequence] and the definition $R\\Psi_{f_i}=R\\psi_{f_i,*}$ give $r_iL\\simeq R\\Psi_{f_i}K_i$. All these module-sheaf categories are Grothendieck by [lem-weil-pbc-ring-sheaves-grothendieck]. Exact constant-coefficient inverse image preserves the bound $c$ on $K_i$. Left t-exactness [lem-weil-pbc-derived-functor-negative-vanishing] applied to each direct image gives $H^j(r_iL)=0$ for $j<c$. Exactness and joint conservativity of component restriction then give $H^j(L)=0$ for $j<c$.",
+   "uses": [
+    "lem-trf-total-site-augmentation-spectral-sequence",
+    "def-trf-oriented-nearby-cycles",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-weil-pbc-derived-functor-negative-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0DH1; derived.tex Tag 05TC, lemma-negative-vanishing."
+   }
+  },
+  {
+   "text": "Using the commuting total square of Step 1, apply derived direct-image composition [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] on its two sides. Together with the isomorphism of Step 2 this gives\n$$R\\bar\\epsilon_*L\\simeq R\\bar\\epsilon_*R\\psi_{\\bullet,*}\\epsilon^*K\\simeq R\\psi_{f,*}R\\epsilon_*\\epsilon^*K\\simeq R\\Psi_fK.$$\nThe augmentation in the opposite direction $R\\Psi_fK\\to R\\bar\\epsilon_*L$ is $R\\psi_{f,*}$ applied to the ordinary descent unit, followed by the displayed composition identifications. These identifications use the composite-adjunction normalization of [lem-sfb-derived-composition-adjunction-normalization]; hence this specifies the canonical augmentation, rather than merely an isomorphism of its source and target.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-sfb-derived-composition-adjunction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; derived.tex Tag 09T5 for adjunction normalization."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-total-site-augmentation-spectral-sequence] to $\\bar\\epsilon$ and $L$, using the bound proved in Step 3. Substitution of $r_iL=R\\Psi_{f_i}K_i$ identifies its first page with $H^j(R\\bar\\epsilon_{i,*}R\\Psi_{f_i}K_i)$ and Step 4 identifies its abutment with $H^{i+j}(R\\Psi_fK)$. This gives the requested spectral sequence, with horizontal degree $i\\geq0$, vertical degree $j\\geq c$, and alternating-face first differential.",
+   "uses": [
+    "lem-trf-total-site-augmentation-spectral-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7F, lemma-augmentation-spectral-sequence-modules."
+   }
+  },
+  {
+   "text": "The same general-site theorem supplies the filtration: for $n\\geq c$ it is $F^0H^n=H^n$, $F^{n-c+1}H^n=0$, with $F^iH^n/F^{i+1}H^n\\simeq E_\\infty^{i,n-i}$. The possible indices are exactly $0\\leq i\\leq n-c$. For $n<c$, the abutment is zero and the filtration is the zero filtration. Thus each degree uses finitely many columns even when the vertical complexes have no uniform upper bound.",
+   "uses": [
+    "lem-trf-total-site-augmentation-spectral-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7F, bounded-below alternating-face double complex and first-quadrant convergence."
+   }
+  },
+  {
+   "text": "Let $g:S'\\to S$ be any base change, and prime all the families and topoi. The proper hypercover remains a proper hypercover by [lem-trf-proper-hypercover-etale-descent]. Write $v:V_{f'}\\to V_f$ and $w:V_{f'_\\bullet}\\to V_{f_\\bullet}$. The ordinary comparison for the total nearby-cycle square gives $w^*L\\to L'$. Functoriality of [lem-trf-total-site-augmentation-spectral-sequence], first for the augmented square and then for this coefficient map, gives a morphism from $v^*$ of the old spectral sequence to the primed one. Its first-page map is the composite\n$$v^*R\\bar\\epsilon_{i,*}R\\Psi_{f_i}K_i\\longrightarrow R\\bar\\epsilon'_{i,*}v_i^*R\\Psi_{f_i}K_i\\longrightarrow R\\bar\\epsilon'_{i,*}R\\Psi_{f'_i}K'_i,$$\non cohomology. The second arrow is the comparison $\\beta$ defined in [def-trf-oriented-nearby-cycles] for $Y_i$: the component identifications of [lem-trf-total-site-augmentation-spectral-sequence] are the canonical base-change maps, so restricting the total mate $w^*L\\to L'$ to component $i$ and pasting it with those base-change squares by [lem-weil-pbc-mate-pasting] (clauses 1 and 2) gives the mate of the component square $v_i\\psi_{f'_i}\\simeq\\psi_{f_i}h_i$ for $h_i:Y'_i\\to Y_i$, which is $\\beta$. With the composition normalization of Step 4, mate pasting [lem-weil-pbc-mate-pasting] identifies the abutment map with $v^*R\\Psi_fK\\to R\\Psi_{f'}K'$ and makes the augmentation square commute: pasting across $\\bar\\epsilon\\psi_\\bullet\\simeq\\psi_f\\epsilon$ yields the same inverse-image square, hence the same mate. This proves base-change naturality, including composition of base changes. These are comparison maps; no assertion that they are isomorphisms is used. Arbitrary $S'$ is allowed by the cited small-site and descent results.",
+   "uses": [
+    "lem-trf-proper-hypercover-etale-descent",
+    "lem-trf-total-site-augmentation-spectral-sequence",
+    "def-trf-oriented-nearby-cycles",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Remarks 0E46 and 0E47, composition of ordinary base-change maps; spaces-simplicial.tex Tag 0D99."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-oriented-nearby-cycles",
+  "def-trf-proper-hypercover",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-trf-proper-hypercover-etale-descent",
+  "lem-trf-total-site-augmentation-spectral-sequence",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Combine Tag 0DHL with general simplicial-site Tags 0DH1 and 0D7F and derived composition Tag 0D6E; this supplies the general-K version of the nearby-cycle descent identity of Orgogozo Section 9.2, p. 22."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -104,10 +206,59 @@
    "results": "{\"t\": \"2026-10-17T18:20:07Z\", \"tool\": \"grep\", \"query\": \"nearby.?cycle|vanishing.?topos|oriented.?product\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: read the returned signatures; ordinary scheme morphisms, ordinary module sheaves, condensed modules and chain complexes do not state this assertion about vanishing topoi."
+  },
+  {
+   "tool": "grep",
+   "query": "augmentation.*spectral|simplicial.*site|nearby.?cycle",
+   "results": "{\"t\": \"2026-10-17T18:41:55Z\", \"tool\": \"grep\", \"query\": \"augmentation.*spectral|simplicial.*site|nearby.?cycle\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned signatures describe exact derived functors, one-hypercover sheaf conditions, augmented simplicial objects or cochain augmentation, not the derived augmentation spectral sequence on arbitrary simplicial sites or nearby cycles."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomological descent spectral sequence for a bounded below complex of sheaves on an augmented simplicial topos",
+   "results": "{\"t\": \"2026-10-17T18:41:55Z\", \"tool\": \"leansearch\", \"query\": \"Cohomological descent spectral sequence for a bounded below complex of sheaves on an augmented simplicial topos\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented\", \"CochainComplex.augmentTruncate\", \"CochainComplex.augment_X_succ\", \"CategoryTheory.Arrow.augmentedCechConerve\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"CochainComplex.augment_d_succ_succ\", \"HomotopyCategory.spectralObjectMappingCone\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\"], \"digest\": \"17e90cb92768236b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned signatures describe exact derived functors, one-hypercover sheaf conditions, augmented simplicial objects or cochain augmentation, not the derived augmentation spectral sequence on arbitrary simplicial sites or nearby cycles."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"SpectralSequence\"",
+   "results": "{\"t\": \"2026-10-17T18:41:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"SpectralSequence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned signatures describe exact derived functors, one-hypercover sheaf conditions, augmented simplicial objects or cochain augmentation, not the derived augmentation spectral sequence on arbitrary simplicial sites or nearby cycles."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an augmented simplicial site the derived direct image has a functorial spectral sequence from the derived images of its components, compatible with base change comparison maps",
+   "results": "{\"t\": \"2026-10-17T18:41:56Z\", \"tool\": \"leanfinder\", \"query\": \"For an augmented simplicial site the derived direct image has a functorial spectral sequence from the derived images of its components, compatible with base change comparison maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\", \"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc\"], \"digest\": \"5f79c4195f27a68c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned signatures describe exact derived functors, one-hypercover sheaf conditions, augmented simplicial objects or cochain augmentation, not the derived augmentation spectral sequence on arbitrary simplicial sites or nearby cycles."
+  },
+  {
+   "tool": "grep",
+   "query": "nearby.?cycle|vanishing.?topos|oriented.?product",
+   "results": "{\"t\": \"2026-10-17T18:42:07Z\", \"tool\": \"grep\", \"query\": \"nearby.?cycle|vanishing.?topos|oriented.?product\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned signatures describe exact derived functors, one-hypercover sheaf conditions, augmented simplicial objects or cochain augmentation, not the derived augmentation spectral sequence on arbitrary simplicial sites or nearby cycles."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper hypercover descent spectral sequence for nearby cycles on the oriented vanishing topos",
+   "results": "{\"t\": \"2026-10-17T18:42:08Z\", \"tool\": \"leanfinder\", \"query\": \"Proper hypercover descent spectral sequence for nearby cycles on the oriented vanishing topos\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'\", \"CategoryTheory.GrothendieckTopology.HOneHypercover\", \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac\", \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'_assoc\", \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.lift\", \"CategoryTheory.GrothendieckTopology.OneHypercover.multiforkLift\", \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.isLimit\", \"CategoryTheory.GrothendieckTopology.OneHypercover.IsPreservedBy.mem₁\"], \"digest\": \"ced71d0c0e4c2b22\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned signatures describe exact derived functors, one-hypercover sheaf conditions, augmented simplicial objects or cochain augmentation, not the derived augmentation spectral sequence on arbitrary simplicial sites or nearby cycles."
+  },
+  {
+   "tool": "grep",
+   "query": "spectralSequence|spectral_sequence|SpectralSequence",
+   "results": "{\"t\": \"2026-10-17T18:42:24Z\", \"tool\": \"grep\", \"query\": \"spectralSequence|spectral_sequence|SpectralSequence\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned signatures describe exact derived functors, one-hypercover sheaf conditions, augmented simplicial objects or cochain augmentation, not the derived augmentation spectral sequence on arbitrary simplicial sites or nearby cycles."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-psi-proper-surjective-constructibility",
@@ -130,5 +281,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-oriented-nearby-hypercover-spectral-sequence",
+  "worker": "stage1",
+  "summary": "Derive nearby-cycle hypercover descent from ordinary torsion hyperdescent by derived composition, form its simplicial vanishing-topos spectral sequence, check the lower bound and finite filtration, and give ordinary-comparison base-change naturality. One general small-site spectral-sequence node is needed because the existing node is restricted to schemes. No statement correction.",
+  "blueprint": "The ancestor local-term-locality nearby-cycle constructibility input through psi-proper-surjective-constructibility, Orgogozo Section 9.2, p. 22: simplicial vanishing-topos descent identity and the spectral-sequence filtration.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "General module-sheaf/derived-functor or adjunction tool applied to the total and vanishing topoi; the current unit has no replacement for this categorical fact."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-negative-vanishing",
+    "why": "General module-sheaf/derived-functor or adjunction tool applied to the total and vanishing topoi; the current unit has no replacement for this categorical fact."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "General module-sheaf/derived-functor or adjunction tool applied to the total and vanishing topoi; the current unit has no replacement for this categorical fact."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "General module-sheaf/derived-functor or adjunction tool applied to the total and vanishing topoi; the current unit has no replacement for this categorical fact."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "General module-sheaf/derived-functor or adjunction tool applied to the total and vanishing topoi; the current unit has no replacement for this categorical fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-3687bfc61",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-3687bfc61 (reviewer sub-agent of L); spot-checked: Read the item's statement, all 7 steps and every field, the new node lem-trf-total-site-augmentation-spectral-sequence in full, the statements of all cited nodes, and the parent's uses of the item. Read at the cited places in local Stacks spaces-simplicial.tex: 0D99, 0DH1 with lemma-morphism-simplicial-sites-modules, 0D7F with its double-complex proof and lemma-augmentation-cech-complex-modules, 0DHL; also homology lemma-first-quadrant-ss and 0E46/0E47. The Orgogozo PDF is WANTED and proof_origin is honestly by: agent. The item statement is unchanged and keeps every hypothesis. Its coefficients are constant-Λ modules on the small étale and vanishing topoi, matching the descent lemma.\n\nThe route is correct. Ordinary proper hyperdescent gives K≅Rε_*ε^*K. Applying Rψ_{f,*} and derived composition along ε̄ψ_•≅ψ_fε gives RΨ_fK≅Rε̄_*L with L=Rψ_{•,*}ε^*K. The components of L are r_iL≅RΨ_{f_i}K_i, and the lower bound c holds by left t-exactness and conservativity of the restrictions. The general-site spectral sequence then gives E1^{i,j}=H^j(Rε̄_{i,*}RΨ_{f_i}K_i), with i≥0, j≥c, and graded pieces for 0≤i≤n−c. Tested on the identity hypercover (E2 concentrated in column 0), on K=0, on negative c, and on n<c.\n\nThe new node is true for geometric transition morphisms with constant Λ: g_{p!} is exact, components of direct images are componentwise, the 0D7F argument shifts by c, and functoriality comes from a map of double complexes built from base-change maps. It is a needed generalization of lem-trf-simplicial-derived-image-spectral-sequence, which covers only étale sites of simplicial schemes, and vanishing topoi are not such sites. Its module component clauses overlap the abelian-sheaf nodes lem-trf-total-site-component-restriction and lem-trf-total-site-derived-components; I accepted the overlap and noted it for the future split.\n\nTwo fixes. (1) In the new node, the component identification is now stated as the canonical base-change map r_pRh_*J→Rh_{p,*}r'_pJ, the mate of h_p^*r_p≃r'_ph^*, which is an isomorphism, exactly as in 0DH1. The node also states r'_ph^*≃h_p^*r_p and cites def-weil-pbc-simplicial-object. (2) In item step 7, I added the justification that the component of the total comparison w^*L→L' is β for Y_i, by mate pasting (clauses 1–2) with those base-change squares.\n\nAccepted tool uses: lem-sfb-derived-composition-adjunction-normalization, lem-weil-pbc-derived-functor-negative-vanishing, lem-weil-pbc-ring-sheaves-grothendieck, lem-weil-pbc-ringed-topoi-derived-pushforward-composition. lem-weil-pbc-mate-pasting is a Mathlib leaf. No SGA source is used.; 2 file(s) fixed by the reviewer"
  }
 }
