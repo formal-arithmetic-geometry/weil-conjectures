@@ -19,21 +19,56 @@
  ],
  "proof": [
   {
-   "text": "Let $k$ be the base field and $\\Lambda$ the given finite commutative ring. The scheme $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since a field is Noetherian. The assertion is immediate for the empty ambient scheme: its unique module sheaf is zero and has a finite lisse stratification by [def-weil-pbc-constructible-complexes]. First reduce the assertion to reduced schemes. The reduction $r:X_{\\mathrm{red}}\\to X$ is a surjective closed immersion and universal homeomorphism by [lem-weil-pbc-reduction-universal-homeomorphism]. Write $s:U_{\\mathrm{red}}\\to U$ for reduction and $j_{\\mathrm{red}}:U_{\\mathrm{red}}\\hookrightarrow X_{\\mathrm{red}}$ for the open immersion. Topological invariance [thm-weil-pbc-universal-homeomorphism-invariance] makes $r^{-1},r_*$ and $s^{-1},s_*$ mutually inverse equivalences. The constant-ring comparison and module adjunction in [prop-weil-pbc-inverse-image-modules-exact] give these equivalences on $\\Lambda$-module sheaves. Put $F_{\\mathrm{red}}=s^{-1}F$, so $F\\cong s_*F_{\\mathrm{red}}$. For every etale $T\\to X$, [def-weil-pbc-direct-image] evaluates both $j_*s_*F_{\\mathrm{red}}$ and $r_*j_{\\mathrm{red},*}F_{\\mathrm{red}}$ as $F_{\\mathrm{red}}(T\\times_XU_{\\mathrm{red}})$; on a morphism $T'\\to T$ both restriction maps are induced by $T'\\times_XU_{\\mathrm{red}}\\to T\\times_XU_{\\mathrm{red}}$. Thus $j_*F\\cong r_*j_{\\mathrm{red},*}F_{\\mathrm{red}}$. Constructibility is preserved and reflected by $r^{-1}$ and $s^{-1}$ using [lem-weil-pbc-etale-constructible-surjective-pullback]; all these schemes are Noetherian, hence quasi-compact and quasi-separated. In particular $F_{\\mathrm{red}}$ is constructible, and if $G=j_{\\mathrm{red},*}F_{\\mathrm{red}}$ is constructible, then $r^{-1}r_*G\\cong G$ makes $r_*G$, and hence $j_*F$, constructible by that criterion. Thus it suffices to prove the assertion for every reduced closed subscheme of $X_{\\mathrm{red}}$. Use Noetherian induction on their closed underlying subsets, the inductive assertion including every open subscheme and every constructible $\\Lambda$-sheaf there. At the inductive stage write the ambient reduced scheme again as $X$. If $U$ is not dense, let $Z$ be its closure with reduced induced structure. Then $Z$ is a proper closed subscheme and $U$ is an open subscheme of $Z$ (on $U$ the reduced induced structure is that of $U$). Induction makes the image on $Z$ constructible; [lem-fin-closed-immersion] pushes it to $X$. The two direct images compose because their evaluations on an etale $T\\to X$ both equal $F(T\\times_X U)$, with the same restriction maps, by [def-weil-pbc-direct-image].",
+   "text": "Let $k$ be the base field and $\\Lambda$ the finite coefficient ring. Since a field is Noetherian, [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian. If $X$ is empty, its unique module sheaf is zero and the empty stratification proves constructibility by [def-weil-pbc-constructible-complexes].",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-fin-open-degree-zero.proof.md",
+    "place": "Proof, first paragraph; returned step 1 re-split without changing the route"
+   }
+  },
+  {
+   "text": "Write $r:X_{\\mathrm{red}}\\to X$, $s:U_{\\mathrm{red}}\\to U$ and $F_{\\mathrm{red}}=s^{-1}F$. The reductions are surjective closed immersions and universal homeomorphisms by [lem-weil-pbc-reduction-universal-homeomorphism]. Topological invariance [thm-weil-pbc-universal-homeomorphism-invariance] and the constant-ring module adjunction [prop-weil-pbc-inverse-image-modules-exact] make their inverse and direct images mutually inverse on $\\Lambda$-module sheaves. By [lem-fin-reduction-open-direct-image], $j_*F\\cong r_*j_{\\mathrm{red},*}F_{\\mathrm{red}}$. The surjective-pullback criterion [lem-weil-pbc-etale-constructible-surjective-pullback] applies: these schemes are Noetherian, hence qcqs. It makes $F_{\\mathrm{red}}$ constructible; if $G=j_{\\mathrm{red},*}F_{\\mathrm{red}}$ is constructible, then $r^{-1}r_*G\\cong G$ makes $r_*G$ constructible. Thus the assertion for reduced schemes implies the original one.",
+   "uses": [
     "lem-weil-pbc-reduction-universal-homeomorphism",
     "thm-weil-pbc-universal-homeomorphism-invariance",
-    "lem-fin-closed-immersion",
-    "def-weil-pbc-constructible-complexes",
     "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-etale-constructible-surjective-pullback",
+    "lem-fin-reduction-open-direct-image",
+    "lem-weil-pbc-etale-constructible-surjective-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-fin-open-degree-zero.proof.md",
+    "place": "Proof, first paragraph; returned step 1 re-split without changing the route"
+   }
+  },
+  {
+   "text": "It remains to prove the assertion for every reduced closed subscheme of $X_{\\mathrm{red}}$. Use Noetherian induction on their closed underlying subsets; [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] supplies this induction principle. For each such ambient scheme the inductive assertion quantifies over every open subscheme and every constructible $\\Lambda$-module sheaf on it. At the inductive stage write the ambient reduced scheme again as $X$ and assume the assertion for every proper reduced closed subscheme. Reduced closed subschemes are of finite type over $k$ (affine locally their coordinate algebras are quotients of finitely generated $k$-algebras). If the ambient scheme is empty, its unique module sheaf is zero and the empty stratification makes it constructible by [def-weil-pbc-constructible-complexes], as in step 1; so at the inductive stage $X$ may be assumed nonempty, as step 5 does.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-fin-open-degree-zero.proof.md",
+    "place": "Proof, first paragraph; returned step 1 re-split without changing the route"
+   }
+  },
+  {
+   "text": "If $U$ is not dense, give $Z=\\overline U\\subsetneq X$ the reduced induced closed structure from [lem-weil-pbc-reduced-induced-closed-subscheme]. Since $U$ is reduced, [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] factors $U\\to X$ through $Z$. Over the open $U\\subset X$, the vanishing ideal defining $Z$ is the nilradical of $\\mathcal O_U$, hence zero; thus $Z\\times_XU=U$ and this factorization $a:U\\hookrightarrow Z$ is open. Induction makes $a_*F$ constructible, and [lem-fin-closed-immersion] makes $i_*a_*F$ constructible for $i:Z\\hookrightarrow X$. On each etale $T\\to X$, both $i_*a_*F$ and $j_*F$ have sections $F(T\\times_XU)$; the fibre-product identifications commute with restrictions along every $T^{\\prime}\\to T$. Hence [def-weil-pbc-direct-image] identifies them. This proves the nondense case, so the remaining inductive stage has $U$ dense.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "lem-fin-closed-immersion",
     "def-weil-pbc-direct-image"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/thm-fin-open-degree-zero.md",
-    "place": "Proof, paragraph 1; the reduction, generic-open, supported-kernel, and extension argument respectively; supplementary Stacks Tags 01T6, 054M, 04DZ, 095Q"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-fin-open-degree-zero.proof.md",
+    "place": "Proof, first paragraph; returned step 1 re-split without changing the route"
    }
   },
   {
@@ -90,12 +125,16 @@
  ],
  "proof_deps": [
   "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-pbc-constructible-complexes",
   "lem-weil-pbc-reduction-universal-homeomorphism",
   "thm-weil-pbc-universal-homeomorphism-invariance",
-  "lem-fin-closed-immersion",
-  "def-weil-pbc-constructible-complexes",
   "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-fin-reduction-open-direct-image",
   "lem-weil-pbc-etale-constructible-surjective-pullback",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-fin-closed-immersion",
   "def-weil-pbc-direct-image",
   "lem-weil-pbc-noetherian-finite-components",
   "lem-fin-dense-normal-open",
@@ -237,7 +276,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -275,15 +314,15 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-a1-kummer",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "thm-fin-open-degree-zero",
   "worker": "stage1",
-  "summary": "Audited the four blueprint paragraphs and kept their Noetherian-induction route. Made the inductive assertion, reduction/constructibility reflection, finite-product argument, closed restriction constructibility, open counit, inverse-image exactness, unit stalk calculation, and direct-image composition explicit using existing DAG nodes. No new node or Lean artifact is delivered.",
-  "blueprint": "Steps 1–4 realize, respectively, the four paragraphs under '## Proof' in the blueprint node thm-fin-open-degree-zero.",
+  "summary": "Repair of returned long step 1: extracted the natural reduction/open-direct-image comparison as one statement-only node; reused the existing reduced-induced-closed-subscheme and reduced-source factorization statements for the nondense case. Replaced only step 1 with four short steps. Original steps 2–4, statement, statement dependencies, and Lean record are unchanged.",
+  "blueprint": "Steps 1–4 realize paragraph 1 (Noetherianity, reduction, induction, nondense closure); steps 5–7 retain the original paragraphs 2–4 verbatim. The new comparison lemma realizes the reduction/adjunction sentence of paragraph 1 in main-20261015.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-constructible-subobjects-noetherian",
-    "why": "Steps 3 and 4 need closure of constructible sheaves under subsheaves; this imported theorem is from the generic constructible-sheaf unit and no node in sk-prop-a1-kummer supplies that closure."
+    "why": "Steps 6 and 7 need closure of constructible sheaves under subsheaves; this imported theorem is from the generic constructible-sheaf unit and no node in sk-prop-a1-kummer supplies that closure."
    },
    {
     "node": "lem-weil-pbc-reduction-universal-homeomorphism",
@@ -308,6 +347,18 @@
    {
     "node": "lem-weil-pbc-inverse-image-stalk-germ",
     "why": "The closed adjunction unit is checked on stalks using the generic inverse-image stalk isomorphism with its stated germ compatibility; no node of this unit supplies that compatibility."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "The nondense induction case needs the generic construction and affine ideal description of the reduced closure, not another proof route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "The nondense induction case needs the generic reduced-source factorization theorem to obtain the morphism to the reduced closure."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "The proof uses the generic Noetherian-induction principle; the affine-line unit supplies no separate version."
    }
   ]
  },
@@ -318,15 +369,18 @@
   "lem-weil-pbc-etale-constructible-surjective-pullback",
   "prop-weil-pbc-inverse-image-modules-exact",
   "lem-kun-open-immersion-restriction",
-  "lem-weil-pbc-inverse-image-stalk-germ"
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NE-b7ce2ac3f",
-  "group": "NE",
+  "reviewer": "NT-cc-Q05-8f709a091",
+  "group": "Q05",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-b7ce2ac3f (reviewer sub-agent of L); spot-checked: Read the item, blueprint, unit/chapter route, report, all 20 cited node statements, and cited Stacks sources. Verified all four proof steps, hypotheses, coefficient category, base-change/direct-image calculations, edge cases, dependency equality, and no duplicates or new nodes. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-8f709a091 (reviewer sub-agent of L); spot-checked: I read all of it: the item, all 7 steps, the new node lem-fin-reduction-open-direct-image, the statements of all 24 cited nodes (with their blueprint_update texts), the unit and chapter records, the item's blueprint text in main-20261015 and master (same statement, same 4-paragraph route) and Stacks 04DZ (topological invariance holds for any universal homeomorphism). Statement unchanged; coefficient category (finite-Λ module sheaves, def-weil-pbc-constructible-complexes) used consistently. Steps check: X Noetherian (step 1); the reduction step uses the surjective qcqs descent criterion with all hypotheses met (step 2); induction via the minimal-closed-subset lemma (step 3); in the nondense case the reduced closure gives an open immersion U→Z because the ideal on U is the nilradical, which is 0 (step 4); steps 5–7 are the earlier steps 2–4, unchanged and correct (generic normal lisse opens, the kernel unit checked on stalks, the extension). The new lemma is true for arbitrary schemes and rings, since r∘j_red=j∘s and the unit F→s_*s^{-1}F is an isomorphism by 04DZ; tested on U=X, U empty, X reduced, X=Spec k[ε], Λ=0. It is self-contained and statement-only, and its blueprint place is quoted verbatim. It does not restate a clause of the item and is not a duplicate (DAG search; also compared with i-topology, thm-weil-pbc-universalHomeomorphism_pullback and lem-fin-radicial-exchange-descent). Its searches cover three kinds. Accepted tool_uses: lem-weil-pbc-etale-constructible-surjective-pullback, lem-weil-pbc-reduced-source-factors-through-closed-subscheme, lem-weil-pbc-constructible-subobjects-noetherian, lem-kun-open-immersion-restriction. FIX in fixes/dag/nodes/sec-smooth-purity/thm-fin-open-degree-zero.json: (1) step 5 assumed X nonempty, but the induction never handled an empty ambient (e.g. the closure of an empty U); step 3 now covers it via def-weil-pbc-constructible-complexes, as step 1 does, and that node is added to step 3's uses. (2) In split_report.tool_uses, the reason given for lem-weil-pbc-constructible-subobjects-noetherian said 'Steps 3 and 4' (old numbering); it now says 'Steps 6 and 7'. Details in review.md.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-16",
