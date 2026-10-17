@@ -8,14 +8,53 @@
   "place": "Tag 00IH, lemma-ideals-valuation-ring (the value-group ideal correspondence and preservation of prime ideals)."
  },
  "stmt_deps": [
-  "def-weil-field"
+  "def-weil-field",
+  "def-trf-valuation-ring",
+  "def-trf-totally-ordered-abelian-group"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "For an ideal J of A define V(J) = {[a] in Gamma : a is nonzero and a is in J}. This is well defined on classes because multiplying a by a unit of A preserves membership in J. Every class in Gamma_{>=0} has a representative in A, since [1] <= [x] means x is in A. If [a] is in V(J) and [a] <= [b], then b/a is in A, hence b = a(b/a) is in J; therefore V(J) is an upward-closed subset of Gamma_{>=0}.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IE value-group definition and Tag 00IH, proof of lemma-ideals-valuation-ring (the value-set construction)."
+   }
+  },
+  {
+   "text": "Conversely, for an ideal I of Gamma define R(I) = {0} union {a in A nonzero : [a] is in I}. It is an ideal of A. It is closed under multiplication by A by upward closure. For addition, if a,b are nonzero elements of R(I), the valuation class of a+b (when a+b is nonzero) is at least the smaller of [a] and [b]: after interchanging, b/a is in A, so a+b = a(1+b/a) and 1+b/a is in A. Since I is upward closed, [a+b] belongs to I; the case a+b=0 is immediate. Thus R(I) is an ideal.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IE value-group order and Tag 00IH, proof of lemma-ideals-valuation-ring (construction from an upward-closed value set)."
+   }
+  },
+  {
+   "text": "The two constructions are inverse. For an ideal J, an element a is nonzero and belongs to R(V(J)) exactly when its class belongs to V(J), which by definition is exactly a in J; adjoining zero gives R(V(J)) = J. For an ideal I, every gamma in I has a representative a in A because gamma is nonnegative, and then [a] belongs to I, so gamma belongs to V(R(I)); the reverse inclusion is the defining condition. Hence V and R give a canonical bijection, and both constructions plainly preserve inclusion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IH, lemma-ideals-valuation-ring (inverse constructions and inclusion preservation)."
+   }
+  },
+  {
+   "text": "The bijection preserves primality. If J is a proper prime ideal of A, then 0 is not in V(J), since a nonnegative class 0 has a unit representative and J contains no unit. If gamma+delta is in V(J), choose representatives a,b in A with classes gamma,delta; then ab is in J, so a or b is in J, and gamma or delta is in V(J). Conversely, if I is prime and ab is in R(I) for a,b in A, then either ab=0 (forcing a=0 or b=0 because A is a domain) or [a]+[b]=[ab] lies in I; primality gives [a] or [b] in I, hence a or b in R(I). Also 0 is not in I precisely when R(I) is proper: if 0 were in I, upward closure would put every nonnegative class in I, including the class of 1, and R(I)=A; if R(I)=A then 1 is in R(I), so 0 is in I. Therefore prime ideals correspond in both directions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IH, lemma-ideals-valuation-ring (preservation of prime ideals)."
+   }
+  }
+ ],
  "proof_deps": [],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 00IH, lemma-ideals-valuation-ring."
+  "place": "Tag 00IH, lemma-ideals-valuation-ring; the published proof is omitted, so the value-set argument is written out from the Tag 00IE definitions."
  },
  "mathlib_searches": [
   {
@@ -48,7 +87,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-prime-convex-correspondence",
@@ -77,5 +116,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-valuation-ring-ideal-correspondence",
+  "worker": "stage1",
+  "summary": "Split the Stacks Tag 00IH correspondence by writing the canonical maps J ↦ {[a] : 0 ≠ a ∈ J} and I ↦ {0} ∪ {a : [a] ∈ I}, proving well-definedness, ideal closure, inverse and inclusion preservation, and preservation of primality. No additional node was created because each argument is a direct verification from the valuation-ring and ordered-value-group definitions; the Mathlib searches found no exact theorem.",
+  "blueprint": "Realizes the ancestor blueprint's Temkin §2.1 valuation-ring/value-group ideal correspondence used before the convex-subgroup identification.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q110-6310c7416",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q110-6310c7416 (reviewer sub-agent of L); spot-checked: The correspondence and all four proof steps are mathematically correct and source-checked against Stacks Tags 00IE/00IH. The item omitted existing statement dependencies def-trf-valuation-ring and def-trf-totally-ordered-abelian-group; corrected JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-valuation-ring-ideal-correspondence.json. Full review: review.md.; 1 file(s) fixed by the reviewer"
  }
 }

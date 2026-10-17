@@ -10,55 +10,101 @@
  "stmt_deps": [
   "def-pc-scheme"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "Define an equivalence relation on points of $X$ by $x\\sim y$ if and only if, for every $U\\in\\mathcal C$, one has $x\\in U$ exactly when $y\\in U$. Let $Y$ be the set of equivalence classes and let $f:X\\to Y$ send a point to its class. For every $U\\in\\mathcal C$, the definition gives $U\\subseteq f^{-1}(f(U))$; conversely, if $x\\in f^{-1}(f(U))$, then $x\\sim y$ for some $y\\in U$, so the defining equivalence condition gives $x\\in U$. Thus $f^{-1}(f(U))=U$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0D5Q, proof, construction of the equivalence relation and quotient map"
+   }
+  },
+  {
+   "text": "For $U,V\\in\\mathcal C$, one has $f(U)\\cap f(V)=f(U\\cap V)$. Indeed, if a class has representatives $x\\in U$ and $y\\in V$, then $x\\sim y$ implies that $x$ belongs to $V$ and hence to $U\\cap V$, so the class lies in $f(U\\cap V)$; the reverse inclusion is immediate. The intersection hypothesis on $\\mathcal C$ therefore gives $f(U)\\cap f(V)=\\bigcup_{W\\in\\mathcal C,\\,W\\subset U\\cap V}f(W)$. Since $X=\\bigcup_{U\\in\\mathcal C}U$, the sets $f(U)$ cover $Y$. Declare the opens of $Y$ to be exactly the unions of these sets $f(U)$. Arbitrary unions are automatic, and the displayed intersection formula shows that finite intersections are again unions of such sets, so this is a topology and the family $\\{f(U):U\\in\\mathcal C\\}$ is a basis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0D5Q, proof, identification of intersections and application of Lemma make-base (Tag 0D5P)"
+   }
+  },
+  {
+   "text": "The map $f$ is continuous: every open subset of $Y$ is a union of basis opens $f(U)$, and its inverse image is the corresponding union of the open subsets $f^{-1}(f(U))=U$ of $X$. This also proves the asserted openness of every $f(U)$ and completes the construction, including empty $X$ or an empty indexing family (where the quotient and the generated topology are empty).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0D5Q, proof, continuity and conclusion"
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tag 0D5Q (topology-lemma-create-map-from-subcollection), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "A covering family of opens with intersection refinement defines a quotient topology map whose images form a basis and inverse images recover opens",
-   "results": "8 hits; top=['TopologicalSpace.IsTopologicalBasis.isQuotientMap', 'IsOpenQuotientMap', 'Topology.IsQuotientMap', 'TopologicalSpace.IsTopologicalBasis.quotient', 'SeparationQuotient.isQuotientMap_mk', 'Topology.IsQuotientMap.isGeneratedBy', 'isQuotientMap_quot_mk', 'IsOpenQuotientMap.isQuotientMap']; none gives the stated construction",
+   "query": "A covering family of open subsets with intersections refined by the family yields a quotient map whose images form a basis and whose inverse images recover the opens",
+   "results": "8 hits including TopologicalSpace.IsTopologicalBasis.isQuotientMap, TopologicalSpace.IsTopologicalBasis.quotient, IsOpenQuotientMap, and generic quotient-map declarations; none gives the stated construction",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct a topological quotient from an intersection stable open cover with f inverse image of f U equal to U",
+   "results": "8 hits including IsOpenQuotientMap, IsCoveringMap.isQuotientMap, Topology.IsQuotientMap, and generic quotient declarations; none gives the stated construction",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "continuous quotient map from open covering family with intersection refinement",
-   "results": "8 hits; top=['IsOpenQuotientMap.continuous', 'continuous_quot_mk', 'SeparationQuotient.continuous_mk', 'continuous_quotient_mk'', 'Topology.IsQuotientMap.continuousOn_isOpen_iff', 'IsQuotientCoveringMap.isOpenQuotientMap', 'IsOpenMap.isQuotientMap', 'IsCoveringMap.continuous']; none gives the stated construction",
+   "query": "continuous map from an open cover closed under intersection refinements with basis images and exact preimages",
+   "results": "8 hits including continuous_of_continuousOn_iUnion_of_isOpen and generic covering/quotient continuity lemmas; none gives the stated construction",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "quotient topology construction from a family of opens whose pairwise intersections are unions of family members",
+   "results": "8 hits including IsOpenQuotientMap.isQuotientMap, instTopologicalSpaceQuotient, TopologicalSpace.IsTopologicalBasis.quotient, and generic quotient topology declarations; none gives the stated construction",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "TopCat, Quotient, IsOpen, preimage",
-   "results": "0 hits; loogle: unknown identifier 'preimage'",
+   "query": "TopologicalSpace.IsTopologicalBasis, Quotient, preimage",
+   "results": "0 hits; loogle reported unknown identifier preimage",
    "date": "2026-10-18",
-   "verdict": "invalid query: unknown identifier; no absence conclusion drawn from this query"
+   "verdict": "invalid query: unknown identifier; no absence conclusion drawn"
+  },
+  {
+   "tool": "loogle",
+   "query": "Topology.IsQuotientMap, IsOpenMap, IsTopologicalBasis",
+   "results": "0 hits; loogle reported unknown identifier IsTopologicalBasis",
+   "date": "2026-10-18",
+   "verdict": "invalid query: unknown identifier; no absence conclusion drawn"
   },
   {
    "tool": "grep",
-   "query": "create-map-from-subcollection|intersection.*basis|quotient",
-   "results": "25 hits, mostly generic quotient topology declarations; none states the Stacks construction; directory=Mathlib/Topology",
+   "query": "IsTopologicalBasis|isQuotientMap|quotient topology",
+   "results": "25 hits in generic Mathlib topology files, including quotient and basis declarations; none states the Stacks construction",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
-   "tool": "loogle",
-   "query": "TopologicalSpace.IsTopologicalBasis",
-   "results": "12 hits; top=['TopologicalSpace.IsTopologicalBasis', 'TopologicalSpace.isBasis_countableBasis', 'TopologicalSpace.isTopologicalBasis_opens', 'TopologicalSpace.isTopologicalBasis_empty', 'TopologicalSpace.IsTopologicalBasis.eq_generateFrom', 'TopologicalSpace.IsTopologicalBasis.secondCountableTopology', 'TopologicalSpace.IsTopologicalBasis.sUnion_eq', 'TopologicalSpace.isTopologicalBasis_of_subbasis_of_finiteInter']; note=",
-   "date": "2026-10-18",
-   "verdict": "no match: generic definitions and quotient/topological basis lemmas do not construct the requested space and map"
-  },
-  {
    "tool": "grep",
-   "query": "IsTopologicalBasis.isQuotientMap|IsTopologicalBasis.quotient|isTopologicalBasis_of_isOpen_of_nhds",
-   "results": "5 hits; top=['119', '145', '164', '182', '249']; note=",
+   "query": "generateFrom|Quotient|quot_mk",
+   "results": "25 hits in generic Mathlib topology files, including generated and quotient topologies; none states the Stacks construction",
    "date": "2026-10-18",
-   "verdict": "no match: generic definitions and quotient/topological basis lemmas do not construct the requested space and map"
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-derived-basis-local-hom-glue",
@@ -89,5 +135,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-derived-basis-open-subcollection-map",
+  "worker": "stage1",
+  "summary": "Split the Tag 0D5Q quotient-space construction into an explicit equivalence-relation step, an intersection calculation and basis-topology construction, and a continuity step. No additional child node was created because each argument follows directly from the stated cover hypotheses and the definitions of quotient classes, unions, intersections, and continuity. The statement and scheme specialization are unchanged.",
+  "blueprint": "Realizes the supporting BBD-descent component in the inherited lem-trf-local-term-locality ancestry: Tag 0D5Q constructs the quotient space whose images of the covering opens form a basis.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q25-59dd1fcfe",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-59dd1fcfe (reviewer sub-agent of L); spot-checked: Read the full item, Stacks Tags 0D5Q/0D5P, dependencies, downstream citer, unit, chapter, packet, and instructions. All hypotheses and conclusions match; three elementary proof steps correctly establish the quotient relation, basis topology, continuity, and empty cases. Searches found no duplicate or Mathlib match. Review written to review.md."
  }
 }
