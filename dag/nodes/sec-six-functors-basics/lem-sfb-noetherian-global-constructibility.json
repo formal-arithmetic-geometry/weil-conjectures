@@ -20,9 +20,103 @@
   "def-weil-pbc-inverse-image",
   "def-weil-proetale-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose the finite affine open cover $X=\\bigcup_{a<n}W_a$ of the hypothesis. Each $W_a$ has Noetherian underlying space by [lem-sc-affine-noetherian-underlying-space]. By [lem-kun-finite-union-noetherian], their union $|X|$ is Noetherian. Apply [lem-sfb-noetherian-space-compact-subsets]: every subset of $|X|$ is quasi-compact, including $X$ and every open subset. This also includes the empty scheme and the empty finite covering.",
+   "uses": [
+    "lem-sc-affine-noetherian-underlying-space",
+    "lem-kun-finite-union-noetherian",
+    "lem-sfb-noetherian-space-compact-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OZ, lemma-Noetherian-topology, finite-affine-cover proof; topology.tex Tag 0053, lemma-finite-union-Noetherian, and Tag 04ZA, lemma-Noetherian-quasi-compact"
+   }
+  },
+  {
+   "text": "The chosen affine cover makes $X$ locally Noetherian by [pqf-def-locnoeth], so [lem-weil-pbc-locally-noetherian-quasi-separated] makes $X$ quasi-separated. Together with step 1, this verifies the qcqs hypothesis used below. In any open subspace $U\\subseteq X$, every subset is quasi-compact: a cover in $U$ is a cover in the induced topology of that subset, to which step 1 applies. Consequently every open of $U$ is retrocompact. A locally closed subset $C\\subseteq U$ has the form $O\\cap(U\\setminus V)$ with $O,V$ open in $U$; these opens are retrocompact, so $C$ is constructible by [def-weil-constructible-subset]. In particular this applies to every stratum of any finite stratification of an affine open.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005L, lemma-constructible-Noetherian-space; properties.tex Tag 01OY, lemma-locally-Noetherian-quasi-separated"
+   }
+  },
+  {
+   "text": "We record the site operations used to restrict local models. For any scheme morphism $h:T\\to Z$, base change sends an étale covering to an étale covering by [lem-weil-pbc-etale-covering-base-change]. The étale base-change functor preserves finite limits by [lem-weil-pbc-etale-base-change-finite-limits]. Thus [lem-weil-pbc-left-exact-site-inverse-image-tensor] supplies its geometric inverse image and the inverse-image composition comparisons. For the pro-étale site all these assertions, including preservation of coverings and the comparison $(gh)^{-1}\\cong h^{-1}g^{-1}$, are stated in [det-pe-topos-functoriality-inverse-image]. Hence for either fixed choice of site we may pull back a trivializing covering along $h$ and identify successive scheme restrictions with restriction along the composite. No coefficient finiteness is involved here.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "det-pe-topos-functoriality-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 021I, lemma-morphism-big-small-etale, and Tag 021J, lemma-composition-etale; sites.tex Tag 03CB, lemma-composition-morphisms-sites; proetale.tex Tag 09A5, section-functoriality"
+   }
+  },
+  {
+   "text": "For either site let $G$ on $Z$ have a trivializing covering $\\{V_j\\to Z\\}$ with $G|_{V_j}\\cong\\underline{M_j}_{V_j}$ and $M_j$ finitely presented over $R$. Put $V'_j=T\\times_ZV_j$. Step 3 gives a covering of $T$ and its restriction-composition comparisons. The scalar identifications and their compatibility with composition and localized restrictions are [lem-pe-constant-left-module-inverse-image]. Applying [lem-sfb-geometric-inverse-image-constant-module] on $V'_j\\to V_j$ gives module isomorphisms\n$$ (h_R^*G)|_{V'_j}\\cong (V'_j\\to V_j)_R^*(G|_{V_j})\\cong (V'_j\\to V_j)_R^*\\underline{M_j}_{V_j}\\cong\\underline{M_j}_{V'_j}. $$\nThe value is the same $R$-module $M_j$, so finite presentation is unchanged. Thus local constancy with finitely presented values is preserved by every scheme pullback. This is a direct application of the cited constant-module comparison to the pulled-back covering; it does not identify finite generation with finiteness as a set.",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-sfb-geometric-inverse-image-constant-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, fixed-ring modules; Tag 0H7J, example-constant-sheaf, universal property"
+   }
+  },
+  {
+   "text": "Assume (i). For each member $W_a$ of the finite affine cover in step 1 choose its supplied finite constructible locally closed immersed stratification $(Z_{a,b}\\to W_a)_b$. Apply [lem-weil-pbc-etale-stratification-local-gluing-core], whose statement is about schemes and has no restriction on sheaves or coefficients. Its qcqs hypothesis holds by steps 1 and 2. It gives a finite constructible locally closed immersed stratification $(s_c:S_c\\to X)_c$ and, for every $c$, indices $a,b$ and an actual scheme morphism $q_c:S_c\\to Z_{a,b}$ such that $s_c$ equals the composite through $Z_{a,b}\\to W_a\\to X$. By the restriction-composition comparison of steps 3 and 4,\n$$F|_{S_c}\\cong q_c^*(F|_{Z_{a,b}}).$$\nThe right side is locally constant with the same finitely presented values by step 4 and (i). This proves (ii). The actual factorization supplied by the cited node is essential: mere containment of images would not suffice for arbitrary subscheme structures.",
+   "uses": [
+    "lem-weil-pbc-etale-stratification-local-gluing-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095E, lemma-constructible-quasi-compact-quasi-separated, proof (2) implies (3), using an immersed refinement with scheme factorizations"
+   }
+  },
+  {
+   "text": "Assume (ii), and fix any affine open $U\\subseteq X$. Apply [lemma-constructible-pullback-stratification] to $U\\to X$ and the given stratification $(S_b\\to X)_b$. The actual base changes $T_b=U\\times_XS_b\\to U$ form a finite locally closed immersed stratification, with images the intersections of $U$ with the original stratum images. Step 2 makes every one of these locally closed subsets constructible in $U$. The projection $T_b\\to S_b$ and the restriction-composition comparisons identify $F|_{T_b}$ with the pullback of $F|_{S_b}$. Step 4 therefore supplies local constancy with the same finitely presented $R$-module values on $T_b$. This proves (i) for every affine $U$, including the empty open. Both implications apply separately to the chosen site. In particular no part of the proof requires $R$ or its finitely presented modules to be finite as sets.",
+   "uses": [
+    "lemma-constructible-pullback-stratification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095E, lemma-constructible-quasi-compact-quasi-separated, proof (3) implies (1); topology.tex Tag 005L, lemma-constructible-Noetherian-space"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-constructible-subset",
+  "det-pe-topos-functoriality-inverse-image",
+  "lem-kun-finite-union-noetherian",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-stratification-local-gluing-core",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lemma-constructible-pullback-stratification",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 095E, lemma-constructible-quasi-compact-quasi-separated, finite-affine-cover refinement proof, adapted explicitly to either small site using constant-module inverse image; proetale.tex definition-constructible."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,10 +159,45 @@
    "results": "OK 0 hits",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*sheaf|sheaf.*constructible|stratification",
+   "results": "OK, zero hits in the Mathlib source.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf locally constant of finite presentation on affine-local finite stratifications admits a finite global stratification on a Noetherian scheme",
+   "results": "Eight hits about quasicoherent finite presentations and Noetherian affine-cover criteria; none gives stratified sheaf constructibility.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsConstructible\", \"Sheaf\"",
+   "results": "OK, zero hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine-local constructibility of etale or proetale sheaves of modules is equivalent to a finite global stratification on a Noetherian scheme",
+   "results": "Eight hits about SheafOfModules finite generation and Noetherian schemes; none states the item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaves on quasi compact schemes global finite locally closed partition from local partitions",
+   "results": "Eight hits about constructible subsets (PrimeSpectrum.ConstructibleSetData and Topology.IsLocallyConstructible) and Chevalley; none globalizes sheaf local models.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-adic-stratified-perfect",
@@ -88,5 +217,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-noetherian-global-constructibility",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Proved both directions with existing nodes: Noetherian-space and qcqs checks, pullback of trivializing covers and constant module values, global immersed refinement with actual scheme factorizations, and pullback to arbitrary affine opens. No new nodes. Read the authoritative server item because the shared working checkout lacked it; preserved all imported searches and ancestry.",
+  "blueprint": "Realizes the constructibility-conventions comparison in det-lem-integral-models-stacks, proof final sentence of its first paragraph (constructibility conditions agree), as reached through lem-sfb-integral-cohomological-adic-criterion and lem-sfb-adic-stratified-perfect. Steps 1-2 verify the Noetherian geometric input, steps 3-4 retain the module local models on both sites, steps 5-6 reconcile affine-local with global stratifications.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Generic site theorem supplying geometric inverse images and composition for the etale base-change functor; no integral-models node supplies these site facts."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-base-change",
+    "why": "Generic stability of etale covers needed to pull back constant-module trivializations; no integral-models statement supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Generic finite-limit property of the etale base-change functor, needed for its geometric inverse image; no integral-models statement supplies it."
+   },
+   {
+    "node": "det-pe-topos-functoriality-inverse-image",
+    "why": "Generic pro-etale site functoriality, including coverings and restriction composition, used without changing the integral comparison route."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic fixed-ring module inverse image with scalar, composition and localized-site compatibility, required for arbitrary discrete Noetherian R."
+   },
+   {
+    "node": "lemma-constructible-pullback-stratification",
+    "why": "Generic scheme pullback of a finite immersed stratification for the reverse implication; the integral-models unit contains no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "det-pe-topos-functoriality-inverse-image",
+  "lem-pe-constant-left-module-inverse-image",
+  "lemma-constructible-pullback-stratification"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NL-6ea0f9479",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-6ea0f9479 (reviewer sub-agent of L); spot-checked: Read the whole item, all 6 steps, every cited statement, Stacks 095E (etale-cohomology.tex:11717-11757) and 03RW(3), proetale.tex definition-constructible (5225-5233), and blueprint main-20261015 sk-lem-integral-models-stacks.proof ('constructibility conditions agree'). The statement and stmt_deps are identical to the live unsplit base. There are no new nodes. proof_deps equals the union of the step uses. Step 1: leaves for affine Noetherian space, finite union and compact subsets; the empty cover is fine. Step 2: locally Noetherian, then quasi-separated (01OY), and all opens of U are retrocompact, so locally closed subsets are constructible (005L); no affine intersections are assumed. Step 3: etale cover base change plus finite limits meet the hypotheses of left-exact-site-inverse-image; det-pe-topos-functoriality covers pro-etale. Step 4: the constant-module inverse image keeps the same finitely presented M, with no set finiteness (R=Z, M=Z checked). Step 5: gluing-core (slopmaster2-closed) gives actual factorizations q_c, which avoids E3 for non-reduced strata. Step 6: pullback-stratification along U->X, constructibility from step 2, local models from step 4. Edge cases checked: empty X, R=0, non-separated X, non-reduced strata. No duplicate: lem-weil-pbc-constructible-qcqs-affine-local is etale-only with finite Lambda. No cycle. Accepted tool_uses: left-exact-site-inverse-image-tensor, det-pe-topos-functoriality-inverse-image and lem-pe-constant-left-module-inverse-image; the other three declared entries are leaves or closed nodes and are harmless. No fixes."
  }
 }
