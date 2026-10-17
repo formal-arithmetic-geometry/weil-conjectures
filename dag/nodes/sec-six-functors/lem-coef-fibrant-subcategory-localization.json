@@ -33,9 +33,74 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Enlarge universes once so that $\\mathcal A$, its full subcategory, and their localizations are small in the chosen universe. The arrow systems on their nerves contain all equivalences and are closed under composition: the equivalences in an ordinary nerve are precisely the isomorphisms. Apply [lem-coef-system-localization-universal] to obtain $q_f:N\\mathcal A_f\\to X$ and $q:N\\mathcal A\\to Y$ with exactly the universal property in the statement. Since $q i$ inverts the restricted system, that same universal property supplies $u:X\\to Y$ and $u q_f\\simeq q i$. Its full functor-category form supplies the coherent natural equivalence, not just an equality on components.",
+   "uses": [
+    "lem-coef-system-localization-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Definition 7.1.2 and Proposition 7.1.3; square (7.5.1.1)."
+   }
+  },
+  {
+   "text": "Every localization with this universal property is essentially surjective. Indeed, for $s:C\\to D$ let $D_0\\subseteq D$ be the full subcategory of objects equivalent to some $s(c)$, with inclusion $j$. The factor $s_0:C\\to D_0$ still inverts the system, so universality extends it to $t:D\\to D_0$. The equivalence $jts\\simeq s$ lifts to $jt\\simeq\\mathrm{id}_D$: lift its inverse as well by full faithfulness of restriction along $s$; faithfulness identifies both lifted composites with the identity transformations. Thus every $d$ is equivalent to $j t(d)$ and hence to some $s(c)$. Apply this to $q_f$ and $q$. This argument needs no chosen fibrant-replacement functor.",
+   "uses": [
+    "lem-coef-system-localization-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.5.18, essential-surjectivity observation; expanded using Definition 7.1.2."
+   }
+  },
+  {
+   "text": "The hypotheses are the ordinary-nerve form of Definitions 7.4.6 and 7.4.12: $1$ is fibrant since its identity belongs to $P$; pullbacks and trivial-fibration pullbacks between fibrant objects are exactly the assumed ones; the required factorization has fibrant intermediate object by assumption. For an ordinary pullback $x′=y′\\times_yx$ and each $z$, its universal property is $\\operatorname{Hom}(z,x′)=\\operatorname{Hom}(z,y′)\\times_{\\operatorname{Hom}(z,y)}\\operatorname{Hom}(z,x)$. These Hom sets are the discrete mapping spaces of the nerve, so this is also their homotopy pullback; the same test gives its terminal object. Moreover the source definition only asks that the intermediate factor be fibrant implicitly: $a′\\to b\\to1$ is in $P$ by composition. Apply [lem-coef-fibrant-localized-comma-final]. It gives, for every $x\\in\\mathcal A_f$, finality of $(q_f\\downarrow q_f(x))\\to(q\\downarrow q(x))$, with the indicated coherent commuting-triangle data. The codomain is the localization of all of $\\mathcal A$, not the ordinary slice $\\mathcal A/x$.",
+   "uses": [
+    "lem-coef-fibrant-localized-comma-final"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.5.16, printed pp. 378-379; Definitions 7.4.6, 7.4.12."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-final-square-full-faithfulness] with $A=N\\mathcal A_f$, $B=N\\mathcal A$, $q=q_f$, $r=q$, and lower functor $u$. Inclusion of a full ordinary subcategory is fully faithful also on nerves: its mapping spaces are discrete Hom sets and those Hom sets agree. Step 2 gives essential surjectivity of the left functor $q_f$. Step 3 gives the criterion's final comma functors; identify the terminal target $u q_f(x)$ with $q(x)$ by the displayed equivalence of the square. Consequently $u$ is fully faithful on every mapping space. This applies the general square criterion, whose hypotheses include no Brown structure and whose proof is the space-valued Kan-extension argument, rather than assuming the desired equivalence of localizations.",
+   "uses": [
+    "lem-coef-final-square-full-faithfulness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.5.18, full-faithfulness argument, printed p. 380."
+   }
+  },
+  {
+   "text": "Factor each terminal arrow $a\\to1$ as $a\\xrightarrow{w_a}a^f\\to1$. Its intermediate object is fibrant and $w_a\\in W$, so $q(a)\\simeq q(a^f)\\simeq u q_f(a^f)$. Every object of $Y$ is equivalent to some $q(a)$ by step 2; hence every object of $Y$ belongs to the full essential image of $u$. Together with step 4, [lem-coef-infinity-full-essential-image] provides a coherent quasi-inverse to $u$ and coherent equivalences of both composites with the identities. This is the asserted equivalence $L(\\mathcal A_f,W|_{\\mathcal A_f})\\simeq L(\\mathcal A,W)$. The localizations from step 1 already have the required universal property on all coherent transformations and higher simplices.",
+   "uses": [
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.5.18, essential surjectivity and conclusion, printed p. 380."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-fibrant-localized-comma-final",
+  "lem-coef-final-square-full-faithfulness",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-system-localization-universal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+  "place": "Theorem 7.5.18 first assertion, via Proposition 7.5.16; an agent expansion of the online source, whose archive is WANTED. No change to the blueprint route."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -109,10 +174,39 @@
    "results": "{\"t\": \"2026-10-16T23:25:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRightDerivabilityStructure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizerMorphism.instIsRightDerivabilityStructureIdOfContainsIdentities\", \"CategoryTheory.LocalizerMorphism.IsRightDerivabilityStructure\", \"CategoryTheory.LocalizerMorphism.IsRightDerivabilityStructure.hasRightResolutions\", \"CategoryTheory.LocalizerMorphism.instIsLeftDerivabilityStructureOppositeOpOpOfIsRightDerivabilityStructure\", \"CategoryTheory.LocalizerMorphism.instIsRightDerivabilityStructureOppositeOpOpOfIsLeftDerivabilityStructure\", \"CategoryTheory.LocalizerMorphism.isRightDerivabilityStructure_iff_op\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure'\", \"CategoryTheory.LocalizerMorphism.isRightDerivabilityStructure_iff\"], \"digest\": \"1734be54f62e0b98\"}",
    "date": "2026-10-16",
    "verdict": "No match. Independent second reader read Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean:12-24,166-169 and DerivabilityStructure/Basic.lean:15-22,72-80: these concern ordinary categorical localization, not coherent localizations. FibrantObjectHomotopy.lean:34,120-127 additionally assumes ModelCategory. None states the Brown fibrant-subcategory theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inclusion of fibrant objects in a Brown category induces an equivalence of infinity categorical localizations",
+   "results": "{\"t\": \"2026-10-17T00:36:46Z\", \"tool\": \"leanfinder\", \"query\": \"Inclusion of fibrant objects in a Brown category induces an equivalence of infinity categorical localizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.toHoCatLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\"], \"digest\": \"9e31fe662552a5dd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: repeated search in this attempt; read Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean:34-36,120-132 and Bifibrant.lean inclusion declarations. They concern ordinary localization for a full ModelCategory and cannot prove a coherent localization statement under only the given Brown hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.FibrantObject.ι",
+   "results": "{\"t\": \"2026-10-17T00:36:47Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.FibrantObject.ι\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.FibrantObject.ι\", \"HomotopicalAlgebra.FibrantObject.instIsFibrantObjι\", \"HomotopicalAlgebra.FibrantObject.localizerMorphism_functor\", \"HomotopicalAlgebra.FibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.FibrantObject.HoCat.toHoCatCompToLocalizationIso\", \"HomotopicalAlgebra.FibrantObject.HoCat.ιCompResolutionNatTrans\", \"HomotopicalAlgebra.FibrantObject.instWeakEquivalenceHoCatAppιCompResolutionNatTrans\", \"HomotopicalAlgebra.FibrantObject.instIsIsoFunctorWhiskerRightHoCatιCompResolutionNatTransOfIsLocalizationWeakEquivalences\"], \"digest\": \"8b8376808638faef\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: repeated search in this attempt; read Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean:34-36,120-132 and Bifibrant.lean inclusion declarations. They concern ordinary localization for a full ModelCategory and cannot prove a coherent localization statement under only the given Brown hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "FibrantObject|fibrant.*localization",
+   "results": "{\"t\": \"2026-10-17T00:37:26Z\", \"tool\": \"grep\", \"query\": \"FibrantObject|fibrant.*localization\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureFibrant.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureFibrant.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureFibrant.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean\"], \"digest\": \"dbe1a9238eeab664\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: repeated search in this attempt; read Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean:34-36,120-132 and Bifibrant.lean inclusion declarations. They concern ordinary localization for a full ModelCategory and cannot prove a coherent localization statement under only the given Brown hypotheses.",
+   "sub": "AlgebraicTopology/ModelCategory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inclusion of fibrant objects preserves homotopy coherent localization without functorial factorization",
+   "results": "{\"t\": \"2026-10-17T00:37:26Z\", \"tool\": \"leansearch\", \"query\": \"Inclusion of fibrant objects preserves homotopy coherent localization without functorial factorization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.FibrantObject.ι\", \"HomotopicalAlgebra.BifibrantObject.ι\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjι\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.ι\", \"HomotopicalAlgebra.IsFibrant\", \"HomotopicalAlgebra.FibrantObject\"], \"digest\": \"ff7410c750f500b0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: repeated search in this attempt; read Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean:34-36,120-132 and Bifibrant.lean inclusion declarations. They concern ordinary localization for a full ModelCategory and cannot prove a coherent localization statement under only the given Brown hypotheses."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-brown-reedy-fibrant-replacement",
@@ -120,5 +214,34 @@
   "group": "ND"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-fibrant-subcategory-localization",
+  "worker": "stage1",
+  "summary": "Checked the ordinary-nerve Brown axioms against Cisinski Definitions 7.4.6 and 7.4.12 and split Theorem 7.5.18 first assertion through final comma comparison and a general square criterion. Reused universal localization and full essential image; avoided cyclic use of the existing space-valued Kan-extension/Yoneda/Reedy chains. No statement change, Lean or build. Two statement-only children, neither a Mathlib leaf.",
+  "blueprint": "Technical foundation under prop-coef-integral-exceptional-adjoint: the displayed derived coefficient adjunction and inverse-limit construction requires coherent diagram rectification; the present split proves its general fibrant-subcategory localization input. Main-20261015 ancestry was read; the item has no separate imported blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-system-localization-universal",
+    "why": "Generic quasicategorical tool: existence and entire functor-category universal property of localization. It does not replace any geometric or coefficient unit step."
+   },
+   {
+    "node": "lem-coef-infinity-full-essential-image",
+    "why": "Generic quasicategorical tool: coherent quasi-inverse for a fully faithful functor onto its essential image. It does not replace any geometric or coefficient unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-system-localization-universal",
+  "lem-coef-infinity-full-essential-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-f966d75b8",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-f966d75b8 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and the full statements of the 3 cited nodes (system-localization-universal, infinity-full-essential-image, def-cbc-enhanced-diagrams-cones). The item's hypotheses match Cisinski Defs 7.4.6/7.4.12 one by one: terminal object, W and P closed under composition, 2-of-3, pullbacks of P and P∩W between fibrant objects, nonfunctorial factorization with fibrant target. Nothing is added or dropped. The conclusion is the first assertion of Thm 7.5.18, in the full functor-category sense, which is what the citer brown-reedy-fibrant-replacement needs. Steps: (1) W is a system on the nerve and u q_f≃q i follows from the universal property; (2) essential surjectivity of a localization is a short elementary argument; (3) the comma-final child's hypotheses are exactly the item's, and the codomain is (q↓q x) in L(A), not the ordinary slice; (4) the square criterion applies, with T_a matching step 3 up to the equivalence θ_x; (5) factoring a→a^f→1 puts all of Y in u's essential image, and the cited node gives the quasi-inverse. New nodes: both are self-contained, statement only, and true. The square criterion follows from the Beck–Chevalley mate q_! i^*≃u^* r_!, which gives u^*u_!q_!≃q_! and makes the unit invertible on corepresentables. Counter-check: with A=B={0,1}, X=pt, Y=BZ/2, u is not fully faithful and T_a is not final, so the hypothesis does real work. Comma finality is Cisinski's intermediate result 7.5.16 and is strictly weaker than the item, so neither child restates a clause. Small cases tested: all objects fibrant, A=[1] with W=all arrows, W=isomorphisms, empty A. No duplicates among the Brown nodes (all assume every object fibrant), the infinity cofinality/Kan nodes, or def-sfb-left-derivability-structure. The 179-node closure has no cycle. All cited statements are in the item's own unit, so the requested tool_uses are unnecessary and not accepted. No SGA; not a target, so no base-change morphism or coefficient category is involved. No fixes. Residual: archive Cisinski's CatLR.pdf. I could not open it (network blocked), so the attribution to 7.5.16 rests on the earlier readings plus my own check that the statement is true."
+ }
 }

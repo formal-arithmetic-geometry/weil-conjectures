@@ -27,69 +27,182 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-coef-kan-minimal-factorization] to p. We obtain a simplicial subset E' of E, maps s:E'\\to E and r:E\\to E' with rs=1, and q=ps:E'\\to T such that p=qr; r has the right lifting property against every boundary inclusion, and for the given simplex b:\\Delta^n\\to T there are a Kan complex F_b and an isomorphism \\theta:\\Delta^n\\times_T E'\\cong\\Delta^n\\times F_b over \\Delta^n. The factorization theorem imposes no Kan condition on E or T, so it applies under exactly the hypotheses here.",
+   "uses": [
+    "lem-coef-kan-minimal-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 3.5.9 and Corollary 3.5.7 (minimal-fibration retract and simplexwise product)"
+   }
+  },
+  {
+   "text": "Form the degreewise pullback E'_b=\\Delta^n\\times_T E'. The composite r\\circ a: \\partial\\Delta^n\\to E' and the continuous map |r|\\circ h:|\\Delta^n|\\to|E'| both lie over |b|, and the latter restricts to |r\\circ a| on |\\partial\\Delta^n|. By preservation of finite limits and products under realization in [lem-coef-realization-finite-limits], the isomorphism \\theta realizes to a homeomorphism in the category of k-spaces |E'_b|\\cong|\\Delta^n|\\times|F_b| over |\\Delta^n|. The map $(1,|r|h)$ into the realized pullback is continuous by its k-space universal property, since $|\\Delta^n|$ is a k-space. Hence it determines a continuous map H:|\\Delta^n|\\to|F_b| whose boundary is the realization of the simplicial map \\alpha:\\partial\\Delta^n\\to F_b obtained from r\\circ a and \\theta.",
+   "uses": [
+    "lem-coef-kan-minimal-factorization",
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 3.5.9, Corollary 3.5.7 and the realization finite-limit comparison"
+   }
+  },
+  {
+   "text": "Put $K=F_b$. First record explicitly how to extend a prescribed simplicial homotopy. For a degreewise inclusion $C\\hookrightarrow L$, apply [lem-cbc-internal-hom-fibration-corner-map] to $K\\to\\Delta^0$: restriction $\\operatorname{Fun}(L,K)\\to\\operatorname{Fun}(C,K)$ is a Kan fibration. A homotopy $C\\times\\Delta^1\\to K$ is an edge below this fibration. Given an extension to $L$ at either endpoint, lift that edge using the corresponding one-dimensional horn $\\{0\\}\\hookrightarrow\\Delta^1$ or $\\{1\\}\\hookrightarrow\\Delta^1$; evaluation at the other endpoint extends its boundary map. In particular, for $C=\\partial\\Delta^n$ and $L=\\Delta^n$, extendability is invariant under each simplicial boundary homotopy in either orientation, hence under any finite zigzag of such homotopies. This does not reverse the simplicial interval.",
+   "uses": [
+    "lem-cbc-internal-hom-fibration-corner-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 3.3.1; the first paragraph of the proof of Proposition 3.4.7, with the endpoint lift specified"
+   }
+  },
+  {
+   "text": "For $n=0$, the continuous map $H$ supplies a point of $|K|$. By the realization quotient definition in [def-cbc-enhanced-diagrams-cones], such a point has a representative in a simplex of $K$; any vertex of that simplex supplies $d_F:\\Delta^0\\to K$. Thus an empty $K$ is impossible here. For $n=1$, $H$ is a path between the two vertices of $\\alpha$. The component bijection of [lem-coef-kan-realization-serre] puts them in one simplicial component, so there is a finite edge zigzag between them. Reverse a backward edge by filling the outer $2$-horn whose known edges are that edge and the degenerate edge at its source; the third edge has the reverse endpoints. Compose two successive forward edges by filling their inner $2$-horn. Iterating gives one edge $d_F$ with exactly the prescribed endpoints; for a length-zero zigzag take the degenerate edge. These settle both low dimensions.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-realization-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Definition 3.4.1, Lemmas 3.4.2–3.4.3; the dimension-zero case of the relative comparison"
+   }
+  },
+  {
+   "text": "Assume $n\\geq2$, set $A=\\Lambda_n^n\\subseteq\\partial\\Delta^n$, and let $x=\\alpha(n)$. The order-preserving map $[n]\\times[1]\\to[n]$ taking $(v,0)$ to $v$ and $(v,1)$ to $n$ induces a simplicial contraction $C:\\Delta^n\\times\\Delta^1\\to\\Delta^n$. It preserves $A$: a simplex of $A$ omits a vertex $i<n$, and the contraction adds only the vertex $n$. Its restriction fixes $n$. Hence $\\alpha C|_{A\\times\\Delta^1}$ contracts $\\alpha|_A$ to $x$. Apply the restriction fibration in step 3 with $C=A$, $L=\\partial\\Delta^n$, and prescribed endpoint $\\alpha$, to obtain $G:\\partial\\Delta^n\\times\\Delta^1\\to K$ agreeing with this contraction on $A$ and with $\\alpha$ at time zero. Write $g=G_1$. Then $g|_A=x$, and $\\sigma=g d_n:\\Delta^{n-1}\\to K$ is constant at $x$ on its boundary, since every proper face of $d_n\\Delta^{n-1}$ lies in $A$.",
+   "uses": [
+    "lem-cbc-internal-hom-fibration-corner-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Lemma 3.4.6 and the horn-contraction paragraph in the proof of Proposition 3.4.7"
+   }
+  },
+  {
+   "text": "The map $g$ still has a continuous extension $J:|\\Delta^n|\\to|K|$, as the following formula verifies. Use the disk/boundary homeomorphism and product-realization comparison of [lem-coef-realization-finite-limits] to view $H$ as $H_D:D^n\\to|K|$ and $|G|$ as $G_D:S^{n-1}\\times[0,1]\\to|K|$, with $G_D(z,0)=H_D(z)$. On the disk define $J_D(u)=H_D(2u)$ for $\\|u\\|\\leq1/2$, and $J_D(u)=G_D(u/\\|u\\|,2\\|u\\|-1)$ for $\\|u\\|\\geq1/2$. The formulas agree at $\\|u\\|=1/2$, so pasting makes $J_D$ continuous, and its boundary is $g$. Translate back to $J$ on the simplex. The formula $N(z,t)=J((1-t)d_n(z)+t e_n)$, where $z\\in|\\Delta^{n-1}|$ and $e_n$ is the last vertex, is a nullhomotopy of $|\\sigma|$. For $z$ in the boundary, the entire segment to $e_n$ lies in $|A|$ and $J|_{|A|}=x$; thus $N$ fixes the whole boundary and is a based nullhomotopy.",
+   "uses": [
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proof of Proposition 3.4.7 and Proposition 3.6.3; explicit topological collar and based-nullhomotopy calculation supplied by the agent"
+   }
+  },
+  {
+   "text": "By injectivity of the realization isomorphism $\\pi_{n-1}^s(K,x)\\cong\\pi_{n-1}(|K|,x)$ in [lem-coef-kan-realization-serre], step 6 implies $[\\sigma]=0$. By the definition of $\\pi_{n-1}^s$ in that cited statement, this equality is witnessed by a finite zigzag of based simplicial homotopies from $\\sigma$ to the constant $(n-1)$-simplex at $x$. Extend each homotopy to $\\partial\\Delta^n\\times\\Delta^1$ by making it constant at $x$ on $A\\times\\Delta^1$ and using the given based homotopy on $d_n\\Delta^{n-1}\\times\\Delta^1$. These prescriptions agree on the intersection $\\partial(d_n\\Delta^{n-1})\\times\\Delta^1$, so they glue degreewise. They give a boundary-homotopy zigzag from $g$ to the constant boundary map. The latter extends by the constant $n$-simplex. Apply the endpoint-lifting argument of step 3 successively along this zigzag, starting at that constant filler, to extend $g$. Finally apply it to $G$ from step 5, with the known extension at time one, to obtain $d_F:\\Delta^n\\to K$ whose boundary is exactly $\\alpha$. Thus all dimensions are covered.",
+   "uses": [
+    "lem-coef-kan-realization-serre",
+    "lem-cbc-internal-hom-fibration-corner-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Proposition 3.6.3 and the homotopy-extension argument in the proof of Proposition 3.4.7; the zigzag and all boundary prescriptions are explicit"
+   }
+  },
+  {
+   "text": "Define $c'=\\operatorname{pr}_{E'}\\theta^{-1}(1_{\\Delta^n},d_F):\\Delta^n\\to E'$. Since $\\theta$ is over $\\Delta^n$, $qc'=b$. On $\\partial\\Delta^n$, the pair $(1,d_F)$ restricts to $(1,\\alpha)$, which by the definition of $\\alpha$ in step 2 is $\\theta(1,r a)$. Applying $\\theta^{-1}$ and the projection gives $c'|_{\\partial\\Delta^n}=r a$.",
+   "uses": [
+    "lem-coef-kan-minimal-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Corollary 3.5.7; explicit projection and boundary calculation"
+   }
+  },
+  {
+   "text": "Apply the boundary lifting property of $r:E\\to E'$ from [lem-coef-kan-minimal-factorization] to the square with left map $\\partial\\Delta^n\\hookrightarrow\\Delta^n$, right map $r$, top map $a$, and bottom map $c'$. Step 8 gives its commutativity. The lift $c:\\Delta^n\\to E$ satisfies $rc=c'$ and $c|_{\\partial\\Delta^n}=a$, also for $n=0$ because the lifting statement includes the empty boundary. Finally $pc=qrc=qc'=b$.",
+   "uses": [
+    "lem-coef-kan-minimal-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Theorem 3.5.9; final boundary lift through the retraction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-kan-minimal-factorization",
+  "lem-coef-realization-finite-limits",
+  "lem-cbc-internal-hom-fibration-corner-map",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-kan-realization-serre"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+  "place": "Agent-written relative comparison using Hovey Theorem 3.5.9, Corollary 3.5.7, Theorem 3.3.1, Lemma 3.4.6 and the proof of Proposition 3.4.7, and Proposition 3.6.3. Includes explicit continuous collar extension, based nullhomotopy and endpoint lifts. Permanent archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "For a Kan fibration of simplicial sets a boundary lifting problem has a simplicial filler whenever its geometric realization has a continuous filler",
-   "results": "{\"t\": \"2026-10-16T22:53:18Z\", \"tool\": \"leanfinder\", \"query\": \"For a Kan fibration of simplicial sets a boundary lifting problem has a simplicial filler whenever its geometric realization has a continuous filler\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.KanComplex.hornFilling\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.J\", \"SSet.KanComplex\"], \"digest\": \"60bf3b5a945c6964\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: semantic hits give horn lifting, SSet.RelativeMorphism.Homotopy and abstract model-category lifts, not reflection of a continuous filler under realization. Loogle returned zero hits. Grep found only the Jardine reference in Nonsingular.lean:21,27 and Subdivision.lean:26; read Nonsingular.lean:13–28,36–48 and Subdivision.lean:11–27,48–62: these define nonsingularity and subdivision, not this comparison. CategoryWithFibrations.lean:66–89 supplies horn-defined fibrations only; no one-line specialization."
+   "query": "continuous boundary lift for a Kan fibration from a geometric realization filler",
+   "results": "SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration; SSet.modelCategoryQuillen.boundary_ι_mem_I; SSet.KanComplex.hornFilling; SSet.modelCategoryQuillen.fibrations_eq; SSet.modelCategoryQuillen.fibration_iff; no declaration compares a continuous realized filler with a strict simplicial filler.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "SSet.toTop, CategoryTheory.HasLiftingProperty",
-   "results": "{\"t\": \"2026-10-16T22:55:46Z\", \"tool\": \"loogle\", \"query\": \"SSet.toTop, CategoryTheory.HasLiftingProperty\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: semantic hits give horn lifting, SSet.RelativeMorphism.Homotopy and abstract model-category lifts, not reflection of a continuous filler under realization. Loogle returned zero hits. Grep found only the Jardine reference in Nonsingular.lean:21,27 and Subdivision.lean:26; read Nonsingular.lean:13–28,36–48 and Subdivision.lean:11–27,48–62: these define nonsingularity and subdivision, not this comparison. CategoryWithFibrations.lean:66–89 supplies horn-defined fibrations only; no one-line specialization."
+   "query": "SSet.KanComplex, geometric realization, boundary lift",
+   "results": "0 hits; service reported Unknown identifier `geometric`.",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
   },
   {
    "tool": "grep",
-   "query": "realization.*lift|lift.*realization|[Ss]implicial.*[Aa]pproximation|relative.*approximation",
-   "results": "{\"t\": \"2026-10-16T22:53:17Z\", \"tool\": \"grep\", \"query\": \"realization.*lift|lift.*realization|[Ss]implicial.*[Aa]pproximation|relative.*approximation\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Nonsingular.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Nonsingular.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\"], \"digest\": \"ab1f26584ccc4548\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: semantic hits give horn lifting, SSet.RelativeMorphism.Homotopy and abstract model-category lifts, not reflection of a continuous filler under realization. Loogle returned zero hits. Grep found only the Jardine reference in Nonsingular.lean:21,27 and Subdivision.lean:26; read Nonsingular.lean:13–28,36–48 and Subdivision.lean:11–27,48–62: these define nonsingularity and subdivision, not this comparison. CategoryWithFibrations.lean:66–89 supplies horn-defined fibrations only; no one-line specialization."
+   "query": "relative.*realization.*lift|boundary.*simplicial.*filler (Mathlib/AlgebraicTopology)",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "A Kan fibration lifts a boundary inclusion if the corresponding geometric realization square admits a continuous lift",
-   "results": "{\"t\": \"2026-10-16T22:53:51Z\", \"tool\": \"leansearch\", \"query\": \"A Kan fibration lifts a boundary inclusion if the corresponding geometric realization square admits a continuous lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.HasLiftingPropertyFixedBot\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.ModelCategory.cm4a\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"CategoryTheory.HasLiftingPropertyFixedTop\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.ModelCategory.cm4b\", \"CategoryTheory.CommSq.lift\"], \"digest\": \"9ade20f50c3ed49a\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: semantic hits give horn lifting, SSet.RelativeMorphism.Homotopy and abstract model-category lifts, not reflection of a continuous filler under realization. Loogle returned zero hits. Grep found only the Jardine reference in Nonsingular.lean:21,27 and Subdivision.lean:26; read Nonsingular.lean:13–28,36–48 and Subdivision.lean:11–27,48–62: these define nonsingularity and subdivision, not this comparison. CategoryWithFibrations.lean:66–89 supplies horn-defined fibrations only; no one-line specialization."
+   "query": "A continuous relative filler of a realized simplex boundary lifting problem for a Kan fibration gives a simplicial filler",
+   "results": "SSet.KanComplex.hornFilling; SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration; SSet.modelCategoryQuillen.fibration_iff; HomotopicalAlgebra.ModelCategory.cm4a; IsCoveringMap.liftHomotopyRel; none states the requested realization comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   },
   {
    "tool": "leanfinder",
-   "query": "Relative simplicial approximation for a Kan fibration strictifies a continuous section over a simplex agreeing with a prescribed simplicial section on its boundary",
-   "results": "{\"t\": \"2026-10-16T22:53:51Z\", \"tool\": \"leanfinder\", \"query\": \"Relative simplicial approximation for a Kan fibration strictifies a continuous section over a simplex agreeing with a prescribed simplicial section on its boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.RelativeMorphism.ofSimplex₀\", \"SSet.modelCategoryQuillen.I\", \"SSet.RelativeMorphism.Homotopy.refl_h\", \"SSet.RelativeMorphism.Homotopy.rel\", \"SSet.S.toN\", \"SSet.KanComplex.hornFilling\", \"SSet.modelCategoryQuillen.fibrations_eq\"], \"digest\": \"6a8cbd081e88a431\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: semantic hits give horn lifting, SSet.RelativeMorphism.Homotopy and abstract model-category lifts, not reflection of a continuous filler under realization. Loogle returned zero hits. Grep found only the Jardine reference in Nonsingular.lean:21,27 and Subdivision.lean:26; read Nonsingular.lean:13–28,36–48 and Subdivision.lean:11–27,48–62: these define nonsingularity and subdivision, not this comparison. CategoryWithFibrations.lean:66–89 supplies horn-defined fibrations only; no one-line specialization."
-  },
-  {
-   "tool": "grep",
-   "query": "HasLiftingProperty.*boundary|boundary.*HasLiftingProperty|trivialFibration_iff",
-   "results": "{\"t\": \"2026-10-16T23:15:46Z\", \"tool\": \"grep\", \"query\": \"HasLiftingProperty.*boundary|boundary.*HasLiftingProperty|trivialFibration_iff\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: independent second-reader grep in AlgebraicTopology completed with zero hits."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "For a Kan fibration, a simplex with prescribed boundary lifts if its realization admits a section relative to that boundary",
-   "results": "{\"t\": \"2026-10-16T23:15:48Z\", \"tool\": \"leanfinder\", \"query\": \"For a Kan fibration, a simplex with prescribed boundary lifts if its realization admits a section relative to that boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.KanComplex.hornFilling\", \"SSet.KanComplex\", \"SSet.horn₃₁.exists_desc\", \"SSet.modelCategoryQuillen.J\", \"SSet.horn₃₂.exists_desc\", \"SSet.modelCategoryQuillen.I\", \"SSet.Quasicategory.hornFilling\"], \"digest\": \"0a2112c86093c381\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: independent second-reader semantic search. The eight returned declarations state horn lifting, Kan complexes, explicit three-dimensional horns or the generating boundary family; none compares a continuous relative section with a strict simplicial filler."
+   "query": "A nullhomotopic boundary in a fibrant simplicial set extends to a simplex",
+   "results": "{\"t\": \"2026-10-17T01:13:28Z\", \"tool\": \"leanfinder\", \"query\": \"A nullhomotopic boundary in a fibrant simplicial set extends to a simplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.I\", \"SSet.KanComplex.hornFilling\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.RelativeMorphism.Homotopy.rel\"], \"digest\": \"bad15629748b7203\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern horn filling, pointed-simplex algebra, abstract lifting or realization adjunctions; none compares a continuous prescribed-boundary filler with a strict simplicial filler."
   },
   {
    "tool": "loogle",
-   "query": "\"SSet\", \"boundary\", \"lift\"",
-   "results": "{\"t\": \"2026-10-16T23:18:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"boundary\\\", \\\"lift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: independent second-reader Loogle query completed with zero hits."
+   "query": "SSet.KanComplex, SSet.boundary",
+   "results": "{\"t\": \"2026-10-17T01:14:04Z\", \"tool\": \"loogle\", \"query\": \"SSet.KanComplex, SSet.boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"SSet.PtSimplex.MulStruct.exists_left_inverse\", \"SSet.PtSimplex.MulStruct.mulOneEqOfOneMulEq\", \"SSet.PtSimplex.MulStruct.mulOneEqSymm\", \"SSet.PtSimplex.MulStruct.oneMulEqOfMulOneEq\", \"SSet.PtSimplex.MulStruct.oneMulEqSymm\", \"SSet.PtSimplex.MulStruct.mulOneEqTrans\", \"SSet.PtSimplex.MulStruct.oneMulEqTrans\"], \"digest\": \"5d268940f20b6a65\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern horn filling, pointed-simplex algebra, abstract lifting or realization adjunctions; none compares a continuous prescribed-boundary filler with a strict simplicial filler."
+  },
+  {
+   "tool": "grep",
+   "query": "realization|toTop|homotopyGroup",
+   "results": "{\"t\": \"2026-10-17T01:14:04Z\", \"tool\": \"grep\", \"query\": \"realization|toTop|homotopyGroup\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Op.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Op.lean\"], \"digest\": \"ed8fc4e25ae7608d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern horn filling, pointed-simplex algebra, abstract lifting or realization adjunctions; none compares a continuous prescribed-boundary filler with a strict simplicial filler."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Kan fibration has a simplicial lift of a simplex with fixed boundary whenever a continuous lift of its geometric realization exists",
+   "results": "{\"t\": \"2026-10-17T01:14:26Z\", \"tool\": \"leansearch\", \"query\": \"A Kan fibration has a simplicial lift of a simplex with fixed boundary whenever a continuous lift of its geometric realization exists\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.KanComplex\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.ModelCategory.cm4a\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"sSetTopAdj\", \"CategoryTheory.Bicategory.RightLift.IsKan\"], \"digest\": \"797f8e9fe65b9596\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern horn filling, pointed-simplex algebra, abstract lifting or realization adjunctions; none compares a continuous prescribed-boundary filler with a strict simplicial filler."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-kan-whitehead-inverse",
@@ -97,5 +210,39 @@
   "group": "NH"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-kan-relative-realization-lift",
+  "worker": "stage1",
+  "summary": "Split the relative comparison using the existing minimal-fibration retract and finite-limit realization. Second reading replaced the unsupported path-boundary citation by explicit endpoint lifting through the internal-Hom fibration, horn contraction, a continuous collar extension and based nullhomotopy, and a zigzag of based simplicial homotopies with exact boundary restoration. No new nodes; statement unchanged.",
+  "blueprint": "Realizes the technical relative boundary-lifting input in the opening compactification/refinement ancestry of thm-cbc-finite-level-proetale, specifically the Kan realization comparison used by lem-cbc-kan-whitehead-inverse.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-kan-minimal-factorization",
+    "why": "Steps 1, 8, 9 take the generic minimal-fibration retract r (boundary RLP) and the simplexwise product trivialization of q; unit sk-prop-sf-cbc has no node giving this simplicial factorization."
+   },
+   {
+    "node": "lem-coef-realization-finite-limits",
+    "why": "Steps 2 and 6 take preservation of finite limits/products by realization in k-spaces and the disk/boundary homeomorphism; generic topology, no node of sk-prop-sf-cbc gives it."
+   },
+   {
+    "node": "lem-coef-kan-realization-serre",
+    "why": "Steps 4 and 7 take the component bijection and the isomorphism pi_n^s(K,x) = pi_n(|K|,x) for a Kan complex; generic comparison, independent of this item, not replaced by any node of sk-prop-sf-cbc."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-kan-minimal-factorization",
+  "lem-coef-realization-finite-limits",
+  "lem-coef-kan-realization-serre"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-51d76fc08",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-51d76fc08 (reviewer sub-agent of L); spot-checked: Read the item, all nine steps, the full statements of the five cited nodes, unit sk-prop-sf-cbc, chapter sec-smooth-purity and the consumer lem-cbc-kan-whitehead-inverse. The statement (a continuous relative boundary filler for a Kan fibration gives a simplicial filler) is true and unchanged. I tested it on n=0, a discrete Kan set, non-Kan Delta^1->pt (which shows the Kan hypothesis is needed) and a nontrivial group-nerve loop. Step checks: the minimal-factorization hypotheses are only that p is Kan; the k-space pullback map is continuous because |Delta^n| is compact Hausdorff, and its boundary is |alpha| by naturality; the corner-map leaf, taken over Delta^0, gives a restriction Kan fibration that lifts an edge with either endpoint prescribed (I read SSet.fibration_pullbackObjObjπ, PushoutProduct.lean:70-93); the n=1 edge reversal uses Lambda^2_0 and composition uses Lambda^2_1; the contraction [n]x[1]->[n] preserves Lambda^n_n; the collar formulas agree at radius 1/2 and N is a based nullhomotopy because the segments from boundary points to e_n stay in |A|; the zigzag homotopies glue on the boundary of the d_n face; the final retract lift gives pc=b, including n=0. proof_deps equals the union of the steps' uses, the dependency closure is acyclic, and no new nodes were created. Searches for duplicates (lem-coef-kan-locally-trivial-realization, lem-cbc-terminal-boundary-extension, lem-coef-kan-quillen-right-proper, etc.) found none. Hovey is not in literature/: WANTED, proof marked by agent. No SGA source is used. One repairable fault: three off-route statements of unit sk-prop-sf-biduality-general (lem-coef-kan-minimal-factorization, lem-coef-realization-finite-limits, lem-coef-kan-realization-serre) were not declared in split_report.tool_uses. I accept them as generic tool uses and added the declarations in fixes/dag/nodes/sec-smooth-purity/lem-cbc-kan-relative-realization-lift.json; nothing else changed.; 1 file(s) fixed by the reviewer"
+ }
 }

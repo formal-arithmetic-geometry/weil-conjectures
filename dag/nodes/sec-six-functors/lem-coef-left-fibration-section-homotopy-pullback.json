@@ -32,9 +32,87 @@
   "def-coef-infinity-fibrations",
   "lem-coef-space-transport-classification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $q:Y\\to B$ and $r:Y\\to X$ be the actual pullback projections. Thus $fr=sq$ and $pr=q$. Check the lifting property directly using [def-coef-infinity-fibrations]. Given a left-horn lifting problem for $q$, with lower simplex $v:\\Delta^n\\to B$ and upper horn $h:\\Lambda_i^n\\to Y$, use the horn $rh$ and the lower simplex $sv$ to lift against $f$. The resulting $w:\\Delta^n\\to X$ satisfies $fw=sv$, so $(v,w)$ is a simplex of $Y$ extending $h$. Consequently $q$ is a left fibration. The same argument shows that a pullback of any left fibration has the left-horn lifting property; we use this below for vertex fibers. Only the assumed lifting property of $f$, not any fibrancy of $B$, was used.",
+   "uses": [
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.5.4.13, proof, displayed pullback Y on printed pp.479-480; base change of the horn lifting property"
+   }
+  },
+  {
+   "text": "Fix a vertex $t:\\Delta^0\\to B$. The strict fibers $X_t,X'_t$ are left fibrations over $\\Delta^0$ by the pullback argument in step 1 and [def-coef-infinity-fibrations]. We obtain their full Kan properties from [lem-cbc-right-fibration-space-fiber], rather than assuming that left horns include all horns. Explicitly, for a simplicial set $K$ let $(K^{\\mathrm{op}})_n=K_n$, with faces $d_i^{\\mathrm{op}}=d_{n-i}$ and degeneracies $s_i^{\\mathrm{op}}=s_{n-i}$ in degree $n$. Reversal carries $\\Lambda_i^n$ to $\\Lambda_{n-i}^n$, and hence exchanges left and right lifting properties and preserves the all-horn property. Apply the cited right-fibration theorem to $X_t^{\\mathrm{op}}\\to\\Delta^0$ and $(X'_t)^{\\mathrm{op}}\\to\\Delta^0$, whose bases are Kan. Reversing back proves that $X_t,X'_t$ are Kan. Next $f_t:X_t\\to X'_t$ is the pullback of $f$ along $X'_t\\to X'$, hence a left fibration. Apply the same theorem to $f_t^{\\mathrm{op}}$, now over the Kan complex $(X'_t)^{\\mathrm{op}}$, and reverse its all-horn lifts. Thus $f_t$ is a Kan fibration. Empty fibers are allowed throughout.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-cbc-right-fibration-space-fiber"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 2.1.3.3, printed p.66; its right-handed counterpart is Kerodon Corollary 4.4.3.8 (01NV), used through the existing right-fibration-space-fiber node"
+   }
+  },
+  {
+   "text": "The degreewise pullback formula of [def-cbc-enhanced-diagrams-cones] identifies $Y_t$ exactly with $X_t\\times_{X'_t}\\Delta^0$, where the second map is the vertex $s_t$. Put\n$$P_t=X_t\\times_{X'_t,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,X'_t)\\times_{\\operatorname{ev}_1,X'_t}\\Delta^0.$$\nAll three input spaces are Kan and $f_t$ is a Kan fibration by step 2. Therefore [lem-coef-kan-pullback-path-comparison] gives the weak homotopy equivalence $Y_t\\to P_t$ inserting the constant path at $f_t(x)=s_t(*)$. This is the comparison of the actual cones: its maps to $X_t$ and $\\Delta^0$ are the original projections, and its path is their specified constant commutation path. By the homotopy-pullback model clause of [lem-coef-kan-quillen-right-proper], this strict pullback is the model-categorical homotopy pullback of the Kan cospan $X_t\\xrightarrow{f_t}X'_t\\xleftarrow{s_t}\\Delta^0$, since the leg $f_t$ already is a fibration and requires no replacement. To pass to the infinity category $\\mathcal S$ of spaces, apply the cospan clause of [lem-coef-simplicial-model-coherent-diagrams] to the Kan model structure on simplicial sets, in which every object is cofibrant and $X_t,X'_t,\\Delta^0$ are fibrant, with the path object $\\operatorname{Fun}(\\Delta^1,X'_t)$: the strict pullback $P_t$, with its induced cone (the two projections and the evaluated path as commutation homotopy), represents the pullback of this cospan in $\\mathcal S$. The weak homotopy equivalence $Y_t\\to P_t$ commutes strictly with the projections to $X_t$ and $\\Delta^0$, and pulls the path homotopy back to the constant one; hence the strict cone of $Y_t$ is the restriction of the limiting cone of $P_t$ along an equivalence of apices, and is itself limiting in $\\mathcal S$. The displayed $P_t$ retains the entire simplicial path, not only a component or a point.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-model-coherent-diagrams"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0329",
+    "place": "Proposition 3.4.0.7 (Kerodon 0329), path model Construction 3.4.0.3 (010B); Kan-model homotopy-pullback interpretation supplied by the cited node"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-space-transport-classification] to the entire strictly commuting square $(Y,X,B,X')$ over $B$, retaining both projections and its equality $fr=sq$. A constant terminal-space functor is represented by $B\\to B$, so its image is a coherent cone from the classifying functor $H$ of $q$ to the span $G\\xrightarrow{a}G'\\xleftarrow{b}1_B$. The classification is coherent in maps, composition and base pullback. Consequently, evaluation at $t$ identifies this cone, including its commutation homotopy, with the strict fiber cone of step 3, up to an equivalence of cones. In particular, this is not a choice of an unrelated equivalence $H(t)\\simeq P_t$: the comparison comes from $r,q$ and the equality just specified. A cone's universal mapping-space condition is unchanged by such an equivalence, since the corresponding test-map spaces and their cone maps are identified by equivalences. Each evaluated cone is therefore limiting. Now apply the general small-simplicial-set, objectwise-limit clause of [lem-coef-infinity-yoneda-presheaf-limits] with $K=B$, $\\mathcal V=\\mathcal S$ and the finite cospan shape. Its hypothesis on the existence of the corresponding limits in $\\mathcal S$ holds: the same cited node states that spaces admit all small limits. This proves that this very cone with apex $H$ is limiting in $\\operatorname{Fun}(B,\\mathcal S)$. Thus it realizes $G\\times^h_{G'}1_B$, with the actual projection to $G$. Step 3 supplies its asserted pointwise path description.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.1.2.3, printed p.319, with opposites for limits; Theorem 2.2.1.2 and the homotopy-pullback argument of Lemma 5.5.4.13"
+   }
+  },
+  {
+   "text": "For any map $u:C\\to B$ of small simplicial sets, degreewise pullback gives a canonical isomorphism\n$$u^*Y\\cong C\\times_{u^*X'}u^*X,$$\nwith the section $u^*s$, and it commutes with both projections. The isomorphism simply forgets the repeated base coordinate, so its isomorphisms for composable base maps agree. The pulled-back comparison $u^*f$ is still a left fibration by step 1. Classification commutes coherently with these base pullbacks by [lem-coef-space-transport-classification]. Applying step 4 to $C$ therefore shows that the restricted cone is the limit of the restricted span. This also follows directly from the objectwise-limit criterion of [lem-coef-infinity-yoneda-presheaf-limits]. The limiting cones are terminal objects of their coherent cone category, by [def-cbc-enhanced-diagrams-cones]; their full subcategory is a contractible Kan complex by [lem-cbc-enhanced-functor-cone-calculus]. Hence the identification with any notation for the homotopy pullback is the equivalence of limiting cones, with its coherent compatibility, and respects the displayed restriction maps and their composites. The square was transported as a whole, and restriction keeps all its simplices. In particular, when $B$ itself carries a cone or cocone parameter, this identifies the induced coherent cones or cocones and their structure maps, including all higher compatibility simplices. No passage to apex objects alone occurs.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.1.2.3 and classification naturality; universal property and contractible space of limiting cones applied to the projection square"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-fibrations",
+  "lem-cbc-right-fibration-space-fiber",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-simplicial-model-coherent-diagrams",
+  "lem-coef-space-transport-classification",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Detailed argument for the section-pullback assertion used in Lemma 5.5.4.13, printed pp.479-480, using Lemma 2.1.3.3 and the limit dual of Corollary 5.1.2.3. Read online; the book is not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -91,10 +169,94 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-17",
    "verdict": "no match in Mathlib/AlgebraicTopology for left-fibration, covariant-model or homotopy-colimit vocabulary; this does not replace checking the semantic-search hits."
+  },
+  {
+   "tool": "grep",
+   "query": "left.?fibration|right.?fibration|straighten|homotopy.?pullback",
+   "results": "{\"t\": \"2026-10-16T23:56:23Z\", \"tool\": \"grep\", \"query\": \"left.?fibration|right.?fibration|straighten|homotopy.?pullback\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and relevant sources. Ordinary Grothendieck/Over pullbacks, Cech nerves, and all-horn or inner-fibration exponential lemmas do not state classification-compatible section pullbacks of left fibrations, nor specialize to this in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LeftFibration\"",
+   "results": "{\"t\": \"2026-10-16T23:56:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"LeftFibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and relevant sources. Ordinary Grothendieck/Over pullbacks, Cech nerves, and all-horn or inner-fibration exponential lemmas do not state classification-compatible section pullbacks of left fibrations, nor specialize to this in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pulling back a left fibration along a section computes the pointwise homotopy fiber of its space valued transport functor",
+   "results": "{\"t\": \"2026-10-16T23:56:25Z\", \"tool\": \"leanfinder\", \"query\": \"Pulling back a left fibration along a section computes the pointwise homotopy fiber of its space valued transport functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Grothendieck.transport_fiber\", \"HasFibers.mkPullback\", \"CategoryTheory.Functor.IsFibered.pullbackPullbackIso\", \"Bundle.Pullback\", \"CategoryTheory.Functor.IsPreFibered.pullbackObj\", \"HasFibers.Fib.mk\", \"HasFibers.pullbackMap\", \"CategoryTheory.Functor.IsPreFibered.pullbackMap\"], \"digest\": \"143ff8c3fd022192\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and relevant sources. Ordinary Grothendieck/Over pullbacks, Cech nerves, and all-horn or inner-fibration exponential lemmas do not state classification-compatible section pullbacks of left fibrations, nor specialize to this in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*[Pp]ullback|[Pp]ullback.*homotopy|[Ll]eft[Ff]ibration|[Rr]ight[Ff]ibration",
+   "results": "{\"t\": \"2026-10-16T23:57:17Z\", \"tool\": \"grep\", \"query\": \"homotopy.*[Pp]ullback|[Pp]ullback.*homotopy|[Ll]eft[Ff]ibration|[Rr]ight[Ff]ibration\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean\", \"Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean\", \"Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean\", \"Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean\"], \"digest\": \"de8c1560f10cce3b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and relevant sources. Ordinary Grothendieck/Over pullbacks, Cech nerves, and all-horn or inner-fibration exponential lemmas do not state classification-compatible section pullbacks of left fibrations, nor specialize to this in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of left fibrations along a section corresponds to a homotopy pullback of space valued functors",
+   "results": "{\"t\": \"2026-10-16T23:57:17Z\", \"tool\": \"leansearch\", \"query\": \"Pullback of left fibrations along a section corresponds to a homotopy pullback of space valued functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sieve.functorPullback\", \"CategoryTheory.Over.pullback\", \"CategoryTheory.ChosenPullbacksAlong.pullback\", \"CategoryTheory.Over.pullback_obj_left\", \"CategoryTheory.Functor.IsPreFibered.pullbackMap\", \"CategoryTheory.Functor.IsPreFibered.pullbackObj\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"CategoryTheory.MorphismProperty.Over.pullback_map_left\"], \"digest\": \"5670fdb47024e2ba\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and relevant sources. Ordinary Grothendieck/Over pullbacks, Cech nerves, and all-horn or inner-fibration exponential lemmas do not state classification-compatible section pullbacks of left fibrations, nor specialize to this in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-16T23:57:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"SSet.relativeCellComplexOfMono.isPullback\", \"SSet.Subcomplex.Pairing.RankFunction.isPullback\", \"SSet.finite_of_isPullback\", \"SSet.instFinitePullback\", \"SSet.innerFibration_pullbackObjObjπ\", \"SSet.fibration_pullbackObjObjπ\"], \"digest\": \"2ca51a8c4abacd21\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and relevant sources. Ordinary Grothendieck/Over pullbacks, Cech nerves, and all-horn or inner-fibration exponential lemmas do not state classification-compatible section pullbacks of left fibrations, nor specialize to this in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fiber product of Kan complex families along a fibrational map computes the limit of the classified diagrams in spaces",
+   "results": "{\"t\": \"2026-10-16T23:57:18Z\", \"tool\": \"leanfinder\", \"query\": \"A fiber product of Kan complex families along a fibrational map computes the limit of the classified diagrams in spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Arrow.cechNerve\", \"CategoryTheory.Arrow.cechNerve_obj\", \"HomotopicalAlgebra.instFibrationFstOfIsFibrant\", \"CategoryTheory.SimplicialObject.cechNerve_obj\", \"HomotopicalAlgebra.instFibrationSndOfIsFibrant\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"CategoryTheory.Arrow.cechNerve_map\", \"SSet.hasLimits\"], \"digest\": \"e06529f8b88a7815\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and relevant sources. Ordinary Grothendieck/Over pullbacks, Cech nerves, and all-horn or inner-fibration exponential lemmas do not state classification-compatible section pullbacks of left fibrations, nor specialize to this in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "innerFibration_pullbackObjObjπ|fibration_pullbackObjObjπ",
+   "results": "{\"t\": \"2026-10-16T23:58:17Z\", \"tool\": \"grep\", \"query\": \"innerFibration_pullbackObjObjπ|fibration_pullbackObjObjπ\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\"], \"digest\": \"98a72e45826b949b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and relevant sources. Ordinary Grothendieck/Over pullbacks, Cech nerves, and all-horn or inner-fibration exponential lemmas do not state classification-compatible section pullbacks of left fibrations, nor specialize to this in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "left.?[Ff]ibration|unstraighten|straighten|homotopy.?[Pp]ullback",
+   "results": "{\"t\": \"2026-10-17T00:38:23Z\", \"tool\": \"grep\", \"query\": \"left.?[Ff]ibration|unstraighten|straighten|homotopy.?[Pp]ullback\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and Mathlib/AlgebraicTopology/ModelCategory/Instances.lean:110-175, CategoryTheory/FiberedCategory/HasFibers.lean:140-200 and CategoryTheory/GuitartExact/KanExtension.lean:40-95. These give pullback stability for a fibration class, ordinary fibered-category pullbacks, or ordinary categorical Kan extensions, not the classified coherent homotopy pullback of space-valued diagrams. No left-fibration or straightening result was returned."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of a left fibration along a section computes pointwise homotopy fibers of coherent space valued diagrams",
+   "results": "{\"t\": \"2026-10-17T00:38:24Z\", \"tool\": \"leansearch\", \"query\": \"Base change of a left fibration along a section computes pointwise homotopy fibers of coherent space valued diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"CategoryTheory.TwoSquare.lanBaseChange\", \"CategoryTheory.TwoSquare.isIso_lanBaseChange_app\", \"CategoryTheory.Functor.leftKanExtensionIsoFiberwiseColimit\", \"CategoryTheory.Functor.leftKanExtensionIsoFiberwiseColimit_hom_app\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeTrivialFibrations\", \"CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange\", \"HomotopicalAlgebra.instFibrationFstOfIsStableUnderBaseChangeFibrations\"], \"digest\": \"f959aa9a455abc58\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and Mathlib/AlgebraicTopology/ModelCategory/Instances.lean:110-175, CategoryTheory/FiberedCategory/HasFibers.lean:140-200 and CategoryTheory/GuitartExact/KanExtension.lean:40-95. These give pullback stability for a fibration class, ordinary fibered-category pullbacks, or ordinary categorical Kan extensions, not the classified coherent homotopy pullback of space-valued diagrams. No left-fibration or straightening result was returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strict section pullback of left fibrations classifies the homotopy pullback of their space valued functors",
+   "results": "{\"t\": \"2026-10-17T00:38:24Z\", \"tool\": \"leanfinder\", \"query\": \"A strict section pullback of left fibrations classifies the homotopy pullback of their space valued functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instFibrationFstOfIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.instFibrationSndOfIsStableUnderBaseChangeFibrations\", \"HasFibers.pullbackMap\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HasFibers.mkPullback\", \"HomotopicalAlgebra.instWeakEquivalenceSndOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\", \"HomotopicalAlgebra.PathObject.trans_P\", \"HasFibers.pullbackMap.isCartesian\"], \"digest\": \"16609e74f3bdf687\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and Mathlib/AlgebraicTopology/ModelCategory/Instances.lean:110-175, CategoryTheory/FiberedCategory/HasFibers.lean:140-200 and CategoryTheory/GuitartExact/KanExtension.lean:40-95. These give pullback stability for a fibration class, ordinary fibered-category pullbacks, or ordinary categorical Kan extensions, not the classified coherent homotopy pullback of space-valued diagrams. No left-fibration or straightening result was returned."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"LeftFibration\"",
+   "results": "{\"t\": \"2026-10-17T00:38:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"LeftFibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures and Mathlib/AlgebraicTopology/ModelCategory/Instances.lean:110-175, CategoryTheory/FiberedCategory/HasFibers.lean:140-200 and CategoryTheory/GuitartExact/KanExtension.lean:40-95. These give pullback stability for a fibration class, ordinary fibered-category pullbacks, or ordinary categorical Kan extensions, not the classified coherent homotopy pullback of space-valued diagrams. No left-fibration or straightening result was returned."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-compact-relative-cocone-factorization",
@@ -102,5 +264,34 @@
   "group": "Q77"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-left-fibration-section-homotopy-pullback",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Five proof steps establish the pullback lifting property, derive Kan fiber maps by explicit opposite-simplex reversal and the existing right-fibration theorem, compute the actual constant-path comparison, and transport the entire cone using classification and objectwise limits. Restriction coherence and projection compatibility follow from the degreewise pullback and the universal cone. Zero new nodes; no Lean attachment or Mathlib match.",
+  "blueprint": "Realizes the displayed pullback Y and homotopy-pullback sentence in the proof of HTT Lemma 5.5.4.13 beneath proof paragraph 2 of prop-coef-integral-exceptional-adjoint (current main-20261015): coherent mapping-complex/adjunction infrastructure through the inherited common-refinement ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-right-fibration-space-fiber",
+    "why": "Generic one-sided-fibration theorem over a Kan base, used after explicit simplicial reversal to prove the vertex-fiber maps are Kan fibrations; no same-unit theorem supplies this lifting upgrade."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic contractibility of the category of limiting cones, used solely to make the projection-preserving identification coherent under base restriction; no same-unit statement supplies this uniqueness theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-right-fibration-space-fiber",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-971c115e8",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-971c115e8 (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps and the full statements of the 8 cited nodes, plus the parent's Step 3 (its only citer), the unit record and the ancestor proof prop-coef-integral-exceptional-adjoint (main-20261015). HTT is not archived, so I checked Lemma 2.1.3.3, Corollary 5.1.2.3 and Lemma 5.5.4.13 (pp. 479-480) against my knowledge of HTT. The statement is true. Edge cases checked: B empty, B a point, f the identity, X empty. The left-fibration hypothesis on f is needed: without it, a groupoid example gives an empty strict pullback but a contractible homotopy pullback. Steps 1, 2, 4 and 5 are correct, including the horn-index reversal, the identification f_t = f x_{X'} X'_t, the objectwise-limit clause for an arbitrary small simplicial set B, and contractibility of limiting cones. One fault, C4 in Step 3: it concluded that the strict fiber square is a limit in the infinity category S from lem-coef-kan-quillen-right-proper alone, but that node only describes the model-categorical homotopy pullback. Fixed by citing the Kan-cospan clause of lem-coef-simplicial-model-coherent-diagrams (same unit; its closure does not reach the item; lem-coef-spaces-kappa-limit-filtered-colimit Step 6 uses it the same way) and stating that the strict cone of Y_t is the path-object cone restricted along the equivalence Y_t -> P_t. Step 3 uses and proof_deps updated. There are no new nodes; no duplicate found in a DAG-wide search. I accept both tool_uses (lem-cbc-right-fibration-space-fiber, lem-cbc-enhanced-functor-cone-calculus) as generic black-box tools. The report wrongly says created was changed to Q38; the file correctly still names Q77/lem-coef-compact-relative-cocone-factorization, so I left it unchanged.; 1 file(s) fixed by the reviewer"
+ }
 }

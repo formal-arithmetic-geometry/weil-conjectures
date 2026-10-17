@@ -3,42 +3,165 @@
  "blueprint": {
   "is": "cor-trf-constant-stalk-trace",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Constant coefficients have unit stalk trace",
- "statement": "For the constant complex $K=A_X$ in degree zero and the canonical\nmap $u:Lh^*A_X\\simeq A_X$, every fixed geometric stalk has\ncategorical trace equal to $1$.\nThe complex is site-perfect.",
+ "statement": "Use the commutative finite coefficient ring $A=A_{E,n}$ ($n\\geq1$) and\nalgebraically closed base field $k$ of characteristic $p\\neq\\ell$ from\n[def-trf-coefficient-conventions]. Let $X$ be a separated\nfinite-type $k$-scheme [def-weil-proper-morphism, def-weil-finite-type-morphism] and let $h:X\\to X$ be a $k$-endomorphism. Put $K=A_X$ in degree zero, the constant complex on the\nsmall pro-etale site. Let\n$$u:Lh^*K\\xrightarrow{\\sim}K$$\nbe the canonical unit comparison induced by the constant coefficient identification in\n[def-weil-derived-pullback-tensor-hom]. For every geometric point\n$\\bar x:\\operatorname{Spec}\\Omega\\to X$ fixed by $h$, meaning $h\\circ\\bar x=\\bar x$, use the canonical stalk identification\n$(Lh^*K)_{\\bar x}\\simeq K_{\\bar x}$ and write $u_{\\bar x}:K_{\\bar x}\\to K_{\\bar x}$ for the\ninduced endomorphism. Then\n$$\\operatorname{tr}_A(u_{\\bar x}\\mid K_{\\bar x})=1$$\nin the sense of [def-trf-categorical-trace]. Moreover, $K$ is site-perfect in the sense of\n[def-weil-site-perfect-complex].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-pairing/cor-trf-constant-stalk-trace.md",
   "place": "node cor-trf-constant-stalk-trace, order 2322"
  },
  "stmt_deps": [
-  "def-trf-categorical-trace"
+  "def-trf-coefficient-conventions",
+  "def-weil-geometric-point",
+  "def-weil-proetale-geometric-stalk",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-trf-categorical-trace",
+  "def-weil-site-perfect-complex",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism"
  ],
  "proof": [
   {
-   "text": "The complex consists of a single free rank-one sheaf, so it satisfies\n[def-weil-site-perfect-complex]. Pullback preserves the unit by\n[def-weil-derived-pullback-tensor-hom]; its canonical map is the\nidentity on each rank-one stalk. The degree-zero chain trace in\n[lem-trf-chain-supertrace] is therefore $1$.",
+   "text": "Use the identity covering $\\{X\\xrightarrow{\\mathrm{id}}X\\}$. On it $K$ is represented by the complex with only $P^0=A_X$ nonzero. Its degree-zero term is a direct summand of the one-fold sum $A_X$ by the two identity maps; the zero terms are direct summands of zero-fold sums. This is exactly a bounded finite-projective representative in [def-weil-site-perfect-complex], proving site-perfectness.",
    "uses": [
-    "def-weil-site-perfect-complex",
-    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-site-perfect-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-pairing/cor-trf-constant-stalk-trace.proof.md",
+    "place": "first sentence"
+   }
+  },
+  {
+   "text": "Apply [prop-weil-pbc-proetale-constant-ring-map] with $u=h$ and $\\Lambda=A$; this is permitted because $A=A_{E,n}$ is finite discrete. It supplies the canonical isomorphism $c_A^h:h^{-1}A_X\\to A_X$. Its adjoint sends the constant section $a$ to the same constant section $a$ after base change. By the finite-level termwise model in [def-weil-derived-pullback-tensor-hom], $Lh^*(A_X[0])$ is $h^{-1}A_X[0]$ with its coefficient action transported through $c_A^h$. Thus $c_A^h[0]$ is the specified $u$. In the extension-of-scalars presentation the same map is $m\\otimes b\\mapsto c_A^h(m)b$, with inverse $b\\mapsto1\\otimes b$; balancing gives both inverse identities.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-pairing/cor-trf-constant-stalk-trace.proof.md",
+    "place": "second sentence"
+   }
+  },
+  {
+   "text": "Fix $\\bar x$ with $h\\bar x=\\bar x$. By [lem-weil-proetale-constant-sheaf-stalk] with $M=A$, the constant-germ map $\\gamma_{\\bar x}:A\\to(A_X)_{\\bar x}$ is an isomorphism. Write $d_{\\bar x}=(c_A^h)_{\\bar x}$. In the inverse-image colimit of [def-weil-proetale-inverse-image] at $U=X$, take $V=X$ (the final target-site object) and the unique map $\\phi:X\\to h^*X\\simeq X$. Send the global constant section $a$ through this coprojection and sheafification, then take its germ at $(X,\\bar x)$ using [def-weil-proetale-geometric-stalk]; call the resulting map $t_{\\bar x}:A\\to(h^{-1}A_X)_{\\bar x}$. The adjunction defining $c_A^h$ and its constant-section formula in [prop-weil-pbc-proetale-constant-ring-map] give $d_{\\bar x}t_{\\bar x}(a)=\\gamma_{\\bar x}(a)$ for every $a$. Since $c_A^h$ is an isomorphism, so is $d_{\\bar x}$, hence $t_{\\bar x}$ is an isomorphism. The canonical pullback comparison on these constant stalks is $b_{\\bar x}=t_{\\bar x}\\gamma_{\\bar x}^{-1}:(A_X)_{h\\bar x}\\to(h^{-1}A_X)_{\\bar x}$: its value on a constant germ is precisely the coprojection just described, and all source germs are constant by the stalk lemma. Thus $u_{\\bar x}\\gamma_{\\bar x}(a)=d_{\\bar x}b_{\\bar x}\\gamma_{\\bar x}(a)=\\gamma_{\\bar x}(a)$ for every $a$. Surjectivity of $\\gamma_{\\bar x}$ proves that $u_{\\bar x}$ is the identity, and identifies the stalk complex with $A[0]$.",
+   "uses": [
+    "lem-weil-proetale-constant-sheaf-stalk",
+    "def-weil-proetale-inverse-image",
+    "def-weil-proetale-geometric-stalk",
+    "prop-weil-pbc-proetale-constant-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-pairing/cor-trf-constant-stalk-trace.proof.md",
+    "place": "second sentence"
+   }
+  },
+  {
+   "text": "Compute the degree-zero chain trace directly from [def-trf-categorical-trace], which is the degree-zero specialization of the source's supertrace calculation. Use the representative $B^0=A$ with representative isomorphism $\\alpha=\\gamma_{\\bar x}[0]$ from step 3, and use the identity splitting $A\\to A\\to A$, with sole dual-frame pair $e=1$ and $\\epsilon(a)=a$. All differentials are zero. Coevaluation sends $1$ to $1\\otimes\\epsilon$; the stalk identity leaves this unchanged; the Koszul symmetry has sign $(-1)^{0\\cdot0}=1$ and sends it to $\\epsilon\\otimes1$; evaluation returns $\\epsilon(1)=1$. The defined scalar identification evaluates this endomorphism of $A[0]$ at $1$, so the trace is $1\\in A$. No other degree contributes. Here we used one bounded projective representative and one splitting; by the invariance assertion of [lem-trf-chain-supertrace] (the formulas are invariant under chain homotopy, choice of dual frame, and replacement of the representative and endomorphism by an isomorphic pair in $D(A)$, and agree with the trace of [def-trf-categorical-trace]), this value is $\\operatorname{tr}_A(u_{\\bar x}\\mid K_{\\bar x})$ for every admissible choice in that definition. Equivalently, part (c) of that lemma gives $(-1)^0\\operatorname{Tr}_A(1\\mid A)=\\epsilon(1)=1$.",
+   "uses": [
+    "def-trf-categorical-trace",
     "lem-trf-chain-supertrace"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-pairing/cor-trf-constant-stalk-trace.proof.md",
+    "place": "last sentence, expanded in degree zero"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-site-perfect-complex",
+  "def-trf-categorical-trace",
   "def-weil-derived-pullback-tensor-hom",
+  "def-weil-proetale-geometric-stalk",
+  "def-weil-proetale-inverse-image",
+  "def-weil-site-perfect-complex",
+  "lem-weil-proetale-constant-sheaf-stalk",
+  "prop-weil-pbc-proetale-constant-ring-map",
   "lem-trf-chain-supertrace"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-pairing/cor-trf-constant-stalk-trace.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-pairing/cor-trf-constant-stalk-trace.proof.md",
+  "place": "complete proof, with explicit constant-germ and degree-zero evaluation/coevaluation calculations"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constant.*stalk|stalk.*trace|sitePerfect",
+   "results": "{\"t\": \"2026-10-17T00:32:57Z\", \"tool\": \"grep\", \"query\": \"constant.*stalk|stalk.*trace|sitePerfect\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match: hits supply module units, ordinary traces, or topological stalks, not the finite-coefficient pro-etale corollary"
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidalCategory.trace, constant sheaf, stalk",
+   "results": "{\"t\": \"2026-10-17T00:32:58Z\", \"tool\": \"loogle\", \"query\": \"MonoidalCategory.trace, constant sheaf, stalk\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'MonoidalCategory.trace'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: invalid Loogle identifier; the valid second Loogle query was also run"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a constant rank one complex, pullback preserves the unit and the categorical trace on every geometric stalk equals 1",
+   "results": "{\"t\": \"2026-10-17T00:32:58Z\", \"tool\": \"leansearch\", \"query\": \"For a constant rank one complex, pullback preserves the unit and the categorical trace on every geometric stalk equals 1\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.germ_stalkPullbackHom\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk\", \"TopCat.Presheaf.stalkPullbackHom\", \"CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryToUnit_pullback_map\", \"TopCat.Presheaf.pushforwardPullbackAdjunction_unit_app_app_germToPullbackStalk\", \"TopCat.Presheaf.stalkPullbackIso\", \"TopCat.Presheaf.stalkPullbackInv\"], \"digest\": \"40c56104e1d6b2d5\"}",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match: hits supply module units, ordinary traces, or topological stalks, not the finite-coefficient pro-etale corollary"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constant complex A_X in degree zero is site-perfect and its geometric stalk categorical trace is one",
+   "results": "{\"t\": \"2026-10-17T00:33:00Z\", \"tool\": \"leanfinder\", \"query\": \"constant complex A_X in degree zero is site-perfect and its geometric stalk categorical trace is one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.const_one\", \"SheafOfModules.unit\", \"AlgebraicGeometry.StructureSheaf.const_self\", \"AlgebraicGeometry.SheafedSpace.unit\", \"AlgebraicGeometry.Scheme.instSubsingletonCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensBot\", \"TopCat.sheafInhabited\", \"CondensedMod.LocallyConstant.functorIsoDiscreteAux₁\", \"AlgebraicGeometry.LocallyRingedSpace.empty\"], \"digest\": \"0b3853314cf4a153\"}",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match: hits supply module units, ordinary traces, or topological stalks, not the finite-coefficient pro-etale corollary"
+  },
+  {
+   "tool": "grep",
+   "query": "trace_id|trace.*unit|unit.*trace|constantSheaf",
+   "results": "{\"t\": \"2026-10-17T00:34:12Z\", \"tool\": \"grep\", \"query\": \"trace_id|trace.*unit|unit.*trace|constantSheaf\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match: hits supply module units, ordinary traces, or topological stalks, not the finite-coefficient pro-etale corollary"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\", \"id\"",
+   "results": "{\"t\": \"2026-10-17T00:34:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"trace\\\", \\\"id\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.TraceState.tid\", \"Lean.Widget.LazyTraceChildren\", \"Lean.Widget.instTypeNameLazyTraceChildren\", \"Lean.Widget.LazyTraceChildren.indent\", \"Lean.Widget.LazyTraceChildren.children\", \"Lean.Widget.LazyTraceChildren.mk\", \"Lean.Widget.MsgEmbed.trace\", \"Plausible.Configuration.traceShrinkCandidates\"], \"digest\": \"6d77e8554bc89c3c\"}",
+   "date": "2026-10-17",
+   "verdict": "No whole-item match: the broad name query returned Lean tracing infrastructure among its leading hits; it supplies no pro-etale stalk or perfectness assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Trace of the identity of the tensor unit in a derived category is the scalar one and a constant sheaf in degree zero is perfect",
+   "results": "{\"t\": \"2026-10-17T00:34:23Z\", \"tool\": \"leanfinder\", \"query\": \"Trace of the identity of the tensor unit in a derived category is the scalar one and a constant sheaf in degree zero is perfect\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FGModuleCat.tensorUnit_obj\", \"SheafOfModules.unit_val\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"HomologicalComplex.instHasTensorXTensorUnit\", \"ModuleCat.MonoidalCategory.tensorUnit_carrier\", \"ModuleCat.FreeMonoidal.εIso_hom_one\", \"HomologicalComplex.instHasTensorTensorUnit_1\", \"DerivedCategory.instIsLEObjSingleFunctor\"], \"digest\": \"51e5d438516a0e4c\"}",
+   "date": "2026-10-17",
+   "verdict": "no whole-item match: hits supply module units, ordinary traces, or topological stalks, not the finite-coefficient pro-etale corollary"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "categorical dimension of the monoidal unit equals one; pullback of a constant sheaf is constant",
+   "results": "{\"t\": \"2026-10-17T01:11:58Z\", \"tool\": \"leanfinder\", \"query\": \"categorical dimension of the monoidal unit equals one; pullback of a constant sheaf is constant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.tensorUnit_isSheaf\", \"TopCat.Presheaf.isSheaf_on_punit_of_isTerminal\", \"CategoryTheory.Presheaf.isSheaf_of_isTerminal\", \"TopCat.Presheaf.isSheaf_on_punit_iff_isTerminal\", \"TopCat.Presheaf.isSheaf_unit\", \"TopCat.Presheaf.isSheaf_of_isTerminal_of_indiscrete\", \"TopCat.Presheaf.isSheaf_iff_isTerminal_of_indiscrete\", \"TopCat.sheafInhabited\"], \"digest\": \"a77a645d6a3210b6\"}",
+   "date": "2026-10-17",
+   "verdict": "No whole-item match: returned sheaf conditions for terminal-valued presheaves, not constant module stalks, site-perfectness, or the categorical trace scalar."
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*(tensorUnit|coevaluation)|stalk.*constant|constant.*stalk",
+   "results": "{\"t\": \"2026-10-17T01:11:58Z\", \"tool\": \"grep\", \"query\": \"trace.*(tensorUnit|coevaluation)|stalk.*constant|constant.*stalk\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Flat/LocallyFree.lean\", \"Mathlib/RingTheory/Flat/LocallyFree.lean\"], \"digest\": \"722ee229314065c7\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: nine hits concern locally constant algebraic module rank, not categorical traces or geometric constant-sheaf stalks."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\", \"tensorUnit\"",
+   "results": "{\"t\": \"2026-10-17T01:11:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"trace\\\", \\\"tensorUnit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: zero hits for the tensor-unit trace query."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -69,5 +192,34 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-p-pairing"
+ "unit": "sk-p-pairing",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "cor-trf-constant-stalk-trace",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED (unbound ambient objects): made the finite-coefficient convention, X, h, canonical u and fixed geometric point explicit, retaining the source ambient separated finite-type setting. Expanded the proof into site-perfectness from the identity cover, actual constant-coefficient pullback on sections, its identity action on constant germs, and the direct degree-zero categorical trace composite. Reused the existing canonical coefficient-ring isomorphism and constant pro-etale stalk lemma; no new nodes. The direct rank-one trace calculation needs no general supertrace theorem. The second reading specifies the constant-stalk pullback comparison and the representative isomorphism explicitly, and separates the coefficient/base-field convention from the independent scheme binder.",
+  "blueprint": "Realizes all three sentences of main-20261015 cor-trf-constant-stalk-trace.proof.md. Steps 1, 2-3, and 4 expand respectively site-perfectness, the canonical unit map and its stalk action, and the degree-zero chain trace; no unit-level pairing or trace-class assertion is substituted.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic finite constant-coefficient ring pullback isomorphism with its action on constant sections, used for h; the pairing unit has no such sheaf-theoretic lemma."
+   },
+   {
+    "node": "lem-weil-proetale-constant-sheaf-stalk",
+    "why": "Generic pro-etale constant-module germ isomorphism specialized to M=A; the pairing unit has no constant-stalk lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-proetale-constant-sheaf-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-bd6227c1c",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-bd6227c1c (reviewer sub-agent of L); spot-checked: I read the item, the master and main-20261015 blueprint statement and proof, the unit sk-p-pairing, and the full current statements of every cited node, plus lem-trf-chain-supertrace and lem-pur-proetale-inverse-image-stalk. The STATEMENT-DISPUTED binders are faithful: A=A_{E,n} with n>=1, X separated and of finite type over k (def-weil-proper-morphism does define separated), h a k-endomorphism, fixed geometric points meaning h∘x̄=x̄. They add no hypothesis, and ell is invertible on X as the pullback definition requires. u is c^h_A[0] in the pro-étale finite-level coefficient category. Step 1 (identity cover, rank-one summand) is correctly elementary. Step 2: the prop applies because A is finite discrete, and the finite-level termwise pullback with transported action is exactly what the pullback definition states. Step 3: t is the coprojection at (X, φ) and c=ε∘h^{-1}ρ, so d∘t=γ; the canonical comparison is t∘γ^{-1}, giving u_x̄=id, which I checked against the stated definitions. Step 4: the computation 1→1⊗ε→ε⊗1→1 is correct, but def-trf-categorical-trace defines the trace through chosen representatives and frames and defers their independence to lem-trf-chain-supertrace, which the blueprint proof cites. A missing citation (C1/C4) remained. Repaired: step 4 now also uses lem-trf-chain-supertrace for frame and representative invariance and its identification with the definition's trace (part (c) as an alternative), elementary is set to false, and the lemma is added to proof_deps. That lemma is on route (unit sk-p-trace, cited by sk-p-pairing), reviewed, and has no path back to the item. There are no new nodes and no duplicates (searched the DAG; thm-trf-fixed-point-evaluation-finite is distinct). The declared tool_uses prop-weil-pbc-proetale-constant-ring-map and lem-weil-proetale-constant-sheaf-stalk are accepted as generic sheaf facts. No SGA is cited. Edge cases checked: X empty, no fixed points, n=1, rings with nilpotents, and the degree-shift and scalar-u variants that would make the statement false.; 1 file(s) fixed by the reviewer"
+ }
 }

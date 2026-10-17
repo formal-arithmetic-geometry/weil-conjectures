@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "i-topology",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Topological invariance",
@@ -13,28 +13,166 @@
   "place": "node i-topology, order 2358"
  },
  "stmt_deps": [
-  "def-trf-coefficient-conventions"
+  "def-trf-coefficient-conventions",
+  "def-weil-finite-integral-morphism",
+  "def-weil-universal-homeomorphism",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-derived-direct-image",
+  "def-compact-support-direct-image-detailed"
  ],
  "proof": [
   {
-   "text": "Base change $V\\mapsto V\\times_YX$ is an equivalence of the small étale\ncategories, natural in the scheme and compatible with identities and\ncomposites, and it preserves and reflects jointly surjective families,\nbecause the underlying map of $r$ and of every base change of $r$ is a\nhomeomorphism. Its inverse functors are $r^{-1}$ and $r_*$, so the two\ncategories of étale sheaves are equivalent, with $r^{-1}$ exact and\n$r_*$ its quasi-inverse. Exactness carries an injective resolution to an\ninjective resolution, which gives the compatibility with cohomology and\nhence the statement on derived categories. Constructibility and finite\nTor amplitude are preserved on both sides, so the equivalence restricts to\n$D^b_{ctf}$; $Rr_*=Rr_!$ because $r$ is finite, hence proper, by\n[prop-functor-package]. A reduction is a finite universal homeomorphism, so the\nreduction clause is a special case.",
+   "text": "Work throughout in the finite-coefficient and geometric setting of [def-trf-coefficient-conventions]: $A=\\mathcal O_E/\\varpi_E^n$, $n\\geq1$, $\\ell\\ne p$, and $X,Y$ are separated finite-type schemes over $k=\\overline{\\mathbf F}_q$, with $r$ a $k$-morphism. These are the geometric schemes and coefficient categories named in [sk-d-setup]. Apply [lem-trf-proetale-topological-invariance] to the given universal homeomorphism. Its unit and counit on sheaves of sets are isomorphisms. This is the pro-etale site input required here; the opening etale-site argument of the blueprint alone concerns etale sheaves, whereas the coefficient categories in the statement are pro-etale categories.",
    "uses": [
-    "prop-functor-package"
+    "def-trf-coefficient-conventions",
+    "lem-trf-proetale-topological-invariance",
+    "sk-d-setup"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AB (lemma-thickening); blueprint proof, opening site-equivalence sentences"
+   }
+  },
+  {
+   "text": "Lift this equivalence to constant-$A$ module sheaves. Apply $r^{-1}$ to the addition and action maps and transport the coefficient action through $c_A:r^{-1}A_Y\\xrightarrow{\\sim}A_X$, the isomorphism of [prop-weil-pbc-proetale-constant-ring-map]. Naturality of the set-sheaf unit and counit with respect to addition, zero and the action map makes both maps $A$-linear, so they remain inverse isomorphisms in the module categories. This gives $r^*\\dashv r_*$ as an equivalence on module sheaves. The pullback is exactly the exact functor of [prop-weil-pbc-proetale-constant-exact]. Its inverse $r_*$ is exact as well: an equivalence preserves the universal properties of kernels and cokernels.",
+   "uses": [
+    "lem-trf-proetale-topological-invariance",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "prop-weil-pbc-proetale-constant-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-topology/i-topology.proof.md",
+    "place": "Exact inverse/direct images paragraph; constant-ring module action written out"
+   }
+  },
+  {
+   "text": "Apply these two exact functors degree by degree to cochain complexes. Exactness preserves the kernel, image and quotient defining cohomology, and therefore gives $H^i(r^*C)=r^*H^i(C)$ and $H^i(r_*C)=r_*H^i(C)$, so both preserve quasi-isomorphisms. By the localization definition [def-weil-abstract-derived-category], their termwise unit and counit descend to inverse isomorphisms on derived categories; the triangle equations descend too. The finite-level definition [def-weil-derived-pullback-tensor-hom] identifies this termwise pullback with $Lr^*$. For a K-injective resolution $C\\to I$, exactness of $r_*$ makes $r_*C\\to r_*I$ a quasi-isomorphism, identifying termwise $r_*$ with $Rr_*$ as defined in [def-weil-derived-direct-image]. Thus the canonical derived adjunction has invertible unit and counit.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-topology/i-topology.proof.md",
+    "place": "Derived-category passage: replace the injective-resolution sentence by explicit exact-functor localization"
+   }
+  },
+  {
+   "text": "Since $r$ is finite, it is proper by [lem-weil-pbc-finite-proper]; in particular it is separated and of finite type by [def-weil-proper-morphism]. Hence clauses (i) and (iii) of [thm-sf-ctf-stability] apply over the same algebraically closed field and with the same finite ring $A$. They show respectively that $Lr^*$ and $Rr_*$ carry the indicated bounded constructible finite-Tor subcategories into each other. Restrict the two functors and the unit and counit of the preceding step to these full subcategories. Their triangle identities and invertibility remain valid there. This proves the asserted equivalence on $D^b_{ctf}$ without asserting that every bounded constructible finite-coefficient complex has finite Tor amplitude.",
+   "uses": [
+    "lem-weil-pbc-finite-proper",
+    "def-weil-proper-morphism",
+    "thm-sf-ctf-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-topology/i-topology.proof.md",
+    "place": "Constructibility and finite-Tor preservation sentence; use the existing preservation clauses on their exact domains"
+   }
+  },
+  {
+   "text": "The notation for the derived operations and proper comparison is that of [sk-d-six]; here its comparison is instantiated by the finite-coefficient theorem. For the proper morphism $r$, clause (3) of [prop-functor-package] supplies the canonical isomorphism $\\alpha:Rr_!\\xrightarrow{\\sim}Rr_*$. Write $F=r^*$, $G=Rr_*$ and $H=Rr_!$, with the preceding unit $\\eta:1\\to GF$ and counit $\\varepsilon:FG\\to1$. Define $\\eta^H_K=\\alpha^{-1}_{FK}\\circ\\eta_K$ and $\\varepsilon^H_L=\\varepsilon_L\\circ F(\\alpha_L)$. Both maps are isomorphisms. Naturality of $\\alpha$ gives $\\varepsilon^H_{FK}\\circ F(\\eta^H_K)=\\varepsilon_{FK}\\circ F(\\eta_K)=1_{FK}$ and $H(\\varepsilon^H_L)\\circ\\eta^H_{HL}=\\alpha_L^{-1}\\circ G(\\varepsilon_L)\\circ\\eta_{GL}\\circ\\alpha_L=1_{HL}$. Hence $Rr_!$ is also a quasi-inverse with invertible unit and counit.",
+   "uses": [
+    "prop-functor-package",
+    "sk-d-six"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-topology/i-topology.proof.md",
+    "place": "Sentence Rr_* = Rr_! because r is finite, hence proper"
+   }
+  },
+  {
+   "text": "For reduction, [lem-weil-pbc-reduction-universal-homeomorphism] states that $i:Y_{\\mathrm{red}}\\to Y$ is a surjective closed immersion and a universal homeomorphism. By [lem-weil-pbc-closed-immersion-finite] it is finite. The reduced closed subscheme is again separated and finite type over $k$: a finite affine cover $Y=\\bigcup\\operatorname{Spec}B_j$ restricts to $\\operatorname{Spec}(B_j/\\sqrt{0})$, whose $k$-algebras are generated by the images of any generators of $B_j$ [def-weil-finite-type-morphism, def-weil-closed-immersion]. Its diagonal is the base change of the closed diagonal of $Y$ to $Y_{\\mathrm{red}}\\times_kY_{\\mathrm{red}}$ (on affines $(B/I)\\otimes_B(B/I)=B/I$); it is closed by [lem-weil-pbc-closed-immersion-base-change], so separatedness follows from [def-weil-proper-morphism]. Apply the preceding steps with $r=i$. This proves the reduction clause; no assertion that the nilradical is finitely generated or nilpotent is needed.",
+   "uses": [
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "lem-weil-pbc-closed-immersion-finite",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-topology/i-topology.proof.md",
+    "place": "Final reduction sentence"
+   }
   }
  ],
  "proof_deps": [
-  "prop-functor-package"
+  "def-trf-coefficient-conventions",
+  "lem-trf-proetale-topological-invariance",
+  "sk-d-setup",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "prop-weil-pbc-proetale-constant-exact",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-direct-image",
+  "lem-weil-pbc-finite-proper",
+  "def-weil-proper-morphism",
+  "thm-sf-ctf-stability",
+  "prop-functor-package",
+  "sk-d-six",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-closed-immersion-finite",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-base-change"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-i-topology/i-topology.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-topology/i-topology.proof.md",
+  "place": "Entire proof, expanded using Stacks Tag 09AB for the pro-etale input and the existing finite-Tor preservation theorems"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback along a finite universal homeomorphism is an equivalence on bounded constructible finite Tor amplitude proetale complexes",
+   "results": "8 hits, including Scheme.instHasPullbacksEtale and SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal. These concern etale pullbacks or coefficient-unit maps, not topological invariance of derived constructible categories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"universalHomeomorphism\"",
+   "results": "0 hits; Loogle reported unknown identifier 'AlgebraicGeometry'. This query did not establish absence; the later valid ProEtale query was also read.",
+   "date": "2026-10-17",
+   "verdict": "no match (query rejected: unknown identifier; superseded by valid Loogle query)"
+  },
+  {
+   "tool": "grep",
+   "query": "universalHomeomorphism|UniversalHomeomorphism|topological.invariance",
+   "results": "0 hits in AlgebraicGeometry; no universal-homeomorphism or topological-invariance theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived constructible sheaves are invariant under universal homeomorphisms of schemes",
+   "results": "8 hits, including Scheme.Hom.homeomorph and stability of IsEtale and UniversallyClosed. Scheme.Hom.homeomorph assumes a scheme isomorphism, whereas a universal homeomorphism need not be an isomorphism.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProEtale\"",
+   "results": "12 hits, including Scheme.proetalePrecoverage, proetaleTopology, their stability and subcanonicality instances and topology comparisons. Read Mathlib/AlgebraicGeometry/Sites/Proetale.lean:1-130: these define the sites; they do not prove topological invariance.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Topological invariance of finite torsion constructible derived categories under reduction and finite radicial surjective morphisms",
+   "results": "8 hits, including isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, Scheme.Hom.isConstructible_image and locallyOfFiniteType.jacobsonSpace. These are geometric finite-type/constructible-image facts, not equivalence of constructible derived categories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -67,5 +205,39 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-i-topology"
+ "unit": "sk-i-topology",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "i-topology",
+  "worker": "stage1",
+  "summary": "Retained the imported statement verbatim. Separated the missing pro-etale topos input (Stacks 09AB, one new unsplit statement) from elementary lifting to constant modules and exact derived localization. Restricted using the existing finite-Tor preservation theorem, then used the proper compact-support comparison. Made reduction finiteness explicit via the existing closed-immersion leaf. No Lean or Mathlib exact attachment; no statement weakening. Preflight route repair: explicitly cited the geometric terminology of sk-d-setup and the operation/proper-comparison notation of sk-d-six, both units required by sk-i-topology; all mathematical preservation and proper-comparison claims still use their theorem nodes. Second reading: wrote the proper-comparison unit/counit and both triangle equations explicitly, removed the unused step-6 finite-proper citation, and independently re-searched the new topos lemma. Resumed-worker audit confirmed Stacks 09AB/04DF directly and all cited current statements; recorded fresh searches and removed the obsolete step-6 finite-proper entry from citations.json.",
+  "blueprint": "Steps 1-2 realize the opening site/sheaf-equivalence sentences on the required pro-etale site; step 3 realizes passage to derived categories; step 4 realizes constructibility and finite-Tor restriction; step 5 realizes proper coincidence; step 6 realizes reduction.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic constant-ring identification needed to lift topoi to module sheaves; no ring-identification statement in this unit."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Generic exactness and identification of the finite constant-coefficient pullback; no such module lemma in this unit."
+   },
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Use only finite-stage pullback and direct-image preservation clauses (i) and (iii), exactly the coefficient-stage preservation asserted in the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "prop-weil-pbc-proetale-constant-exact",
+  "thm-sf-ctf-stability"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-06fe59539",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-06fe59539 (reviewer sub-agent of L); spot-checked: Read the item, the one new node, every cited statement, unit sk-i-topology, both blueprint snapshots, and Stacks proetale.tex:4962-4989 (09AB lemma-thickening) and morphisms.tex:11360-11383 (04DF). The item statement is the blueprint's, verbatim, and is not weakened. Its coefficient category is finite-level pro-etale D^b_ctf, the same category on which thm-sf-ctf-stability and prop-functor-package make their claims. Steps checked: (1) the new pro-etale topos lemma replaces the blueprint's etale-only opening sentence; (2) constant-ring-map and constant-exact give A-linear unit and counit, and r_* is exact because it is an equivalence; (3) exact functors commute with H^i, so localization descends the equivalence; termwise pullback is finite-level Lr^* by definition, and exact r_* sends a K-injective resolution to a quasi-isomorphism, so termwise r_* is Rr_*; (4) finite implies proper (Mathlib leaf) implies separated finite type, and clauses (i) and (iii) of thm-sf-ctf-stability restrict the equivalence to D^b_ctf; (5) clause (3) of prop-functor-package gives Rr_! ≅ Rr_* on the finite D^b_ctf domain, and I recomputed both triangle identities for the transported unit and counit; (6) Y_red -> Y is a surjective closed immersion and a universal homeomorphism (the cited lemma is Lean-closed), finite by the Mathlib leaf; Y_red is finite type, and separated because its diagonal is a base change of Delta_Y. The new node lem-trf-proetale-topological-invariance is exactly 09AB combined with 04DF, on Stacks' weakly etale site. It is true with no finiteness hypothesis; I tested it on identity and empty schemes, k[eps]/eps^2, Frobenius on A^1 and an inseparable field extension. It is statement-only, self-contained, has all three search kinds recorded, and its blueprint.from points to the opening sentence of i-topology's proof. Searching snapshot dag/nodes for 09AB and for universal homeomorphism with pro-etale found no duplicate: the existing nodes cover only the etale site, condensed surjective closed immersions, or affineness of thickenings. It is not a restatement of the item. No cycle; proof_deps equals the union of the step uses. Accepted tool uses: constant-ring-map, constant-exact, and thm-sf-ctf-stability (i),(iii). No SGA source is cited. No fixes were made."
+ }
 }

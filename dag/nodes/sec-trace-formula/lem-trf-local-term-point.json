@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-trf-local-term-point",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The local term at a point component",
- "statement": "Fix the coefficient\nconventions, let $c$ be an\nadmissible correspondence with\nfixed scheme $F$ over $s=\\Spec k$ (not necessarily proper), and let\n$\\beta\\subseteq F$ be an open-and-closed subscheme with\n$\\beta\\simeq\\Spec k$, finite etale over $s$ in relative dimension\n$0$ (for instance a component $\\beta\\in\\pi_0(F)$ of this form when\n$F$ is proper with finitely many open-and-closed components, or the\nreduced point component $B_{\\bar x}$ of a point $\\bar x$ of $F$). Then\nthe local term\n$\\operatorname{LT}_\\beta(u)=\\int_\\beta(\\operatorname{Tr}_c(u)|_\\beta)$\nof [def-trf-local-term], where\n$\\operatorname{Tr}_c(u)|_\\beta=j_\\beta^*\\operatorname{Tr}_c(u)$, is\nthe element of $A$ corresponding to\nthe trace class\n$\\operatorname{Tr}_c(u)|_\\beta$ under the canonical identification\n\n$$\n\\operatorname{Hom}_{D(\\beta,A)}\\bigl(A_\\beta,\\omega_{\\beta,A}\\bigr)\n\\cong\\operatorname{End}_{D(A)}(A)\\cong A\n$$\n\nof the point case $\\beta\\simeq\\Spec k$. In particular this computes\n$\\operatorname{LT}_{\\bar x}(u)=\\operatorname{LT}_{B_{\\bar x}}(u)$ at\nevery point $\\bar x$ with reduced open-and-closed point component\n$B_{\\bar x}$.",
+ "statement": "Fix the global finite-field and finite coefficient conventions of [def-trf-coefficient-conventions], with $A=A_{E,n}$, put $s=\\Spec k$, and let $X$ be a separated finite-type $s$-scheme. Let $c=(c_1,c_2):C\\to X\\times_sX$ be an admissible cohomological correspondence, let $K\\in D^b_{ctf}(X,A)$, let $u:Lc_2^*K\\to Rc_1^!K$ be its coefficient morphism, and let $F=\\operatorname{Fix}(c)$. Suppose that $\\beta\\subseteq F$ is an open-and-closed subscheme with $\\beta\\simeq\\Spec k$ over $s$, finite étale over $s$ of relative dimension $0$ (for instance a component $\\beta\\in\\pi_0(F)$ of this form when $F$ is proper with finitely many open-and-closed components, or the reduced point component $B_{\\bar x}$ of a point $\\bar x$ of $F$). Then the local term $\\operatorname{LT}_\\beta(u)=\\int_\\beta(\\operatorname{Tr}_c(u)|_\\beta)$ of [def-trf-local-term], where $\\operatorname{Tr}_c(u)|_\\beta=j_\\beta^*\\operatorname{Tr}_c(u)$, is the element of $A$ corresponding to the trace class $\\operatorname{Tr}_c(u)|_\\beta$ under the canonical identification\n\n$$\n\\operatorname{Hom}_{D(\\beta,A)}\\bigl(A_\\beta,\\omega_{\\beta,A}\\bigr)\n\\cong\\operatorname{End}_{D(A)}(A)\\cong A\n$$\n\nof the point case $\\beta\\simeq\\Spec k$. In particular this computes $\\operatorname{LT}_{\\bar x}(u)=\\operatorname{LT}_{B_{\\bar x}}(u)$ at every point $\\bar x$ with reduced open-and-closed point component $B_{\\bar x}$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-local-term/lem-trf-local-term-point.md",
   "place": "node lem-trf-local-term-point, order 2337"
@@ -17,42 +17,239 @@
   "def-trf-coefficient-conventions",
   "def-trf-correspondence",
   "def-trf-trace-class",
-  "def-weil-scheme-morphism-properties"
+  "def-trf-fixed-scheme",
+  "def-trf-admissibility",
+  "def-trf-dualizing-complex",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-abstract-derived-category",
+  "def-weil-finite-tor-amplitude"
  ],
  "proof": [
   {
-   "text": "The trace class\n$\\operatorname{Tr}_c(u)$ and hence its restriction\n$\\operatorname{Tr}_c(u)|_\\beta$ of [def-trf-local-term] are\ndefined for the admissible $c$ by\n[prop-trf-trace-class-unconditional]. Being isomorphic to $\\Spec k$, the open-and-closed subscheme $\\beta$\nof the fixed scheme of [def-trf-fixed-scheme] is a\nseparated finite-type\nproper $s$-scheme, and (as in [def-trf-local-term]) it is taken with structure morphism $a_\\beta$ admissible in\nthe sense of [def-trf-admissibility], and the purity clause of\n[prop-functor-package] in relative dimension $0$ identifies\n$\\omega_{\\beta,A}=Ra_\\beta^!A_s$ of\n[def-trf-dualizing-complex] with $A_\\beta$, so that\n$\\operatorname{Hom}_{D(\\beta,A)}(A_\\beta,\\omega_{\\beta,A})\\cong \\operatorname{End}_{D(A)}(A)\\cong A$.\nFor $\\tau:A_\\beta\\to\\omega_{\\beta,A}$ the integration is the\ncomposite $A\\xrightarrow{\\eta^*}R\\Gamma(\\beta,A_\\beta) \\xrightarrow{R\\Gamma(\\tau)}R\\Gamma(\\beta,\\omega_{\\beta,A}) \\xrightarrow{\\varepsilon_{a_\\beta}}A$ of\n[def-trf-integration]. For $\\tau=\\operatorname{id}_{A_\\beta}$\nunder the identification $\\omega_{\\beta,A}\\cong A_\\beta$, the middle\narrow is the identity of $R\\Gamma(\\beta,A_\\beta)$ and the composite\nof the first and last arrows is the composite of the unit and the\ncounit of the adjunction $Ra_{\\beta!}\\dashv Ra_\\beta^!$ of\n[def-trf-admissibility], which is the identity of $A$ by the\ntriangle identity of the adjunction; since the integration is\n$A$-linear by [lem-trf-integration-linear], it is the identity\nmap on all of $A$. Applying this to\n$\\tau=\\operatorname{Tr}_c(u)|_\\beta$ gives the last assertion, by the\ndefinition of the local term in [def-trf-local-term].",
+   "text": "The data of [def-trf-correspondence] include the separated finite-type support $C$, $K\\in D^b_{ctf}(X,A)$ and $u:Lc_2^*K\\to Rc_1^!K$. By [prop-trf-trace-class-unconditional] the class of [def-trf-trace-class] is a morphism $\\operatorname{Tr}_c(u):A_F\\to\\omega_{F,A}$. Its restriction to the clopen $\\beta$ is the morphism $\\tau=j_\\beta^*\\operatorname{Tr}_c(u):A_\\beta\\to\\omega_{\\beta,A}$ defined in [def-trf-local-term]. The structure morphism $a=a_\\beta:\\beta\\to s$ is an isomorphism, by the given isomorphism over $s$. In particular it is proper: in the definitions collected by [def-weil-scheme-morphism-properties] an isomorphism has closed diagonal, is finite type (the identity algebra is finitely generated), and remains a closed map after every base change. It is also finite etale of relative dimension zero, as in the hypothesis. The admissibility datum for this separated finite-type structure morphism is available by [def-trf-admissibility]; it is the constructible adjunction, not an unrestricted ambient adjoint. Thus the local-term and integration definitions apply, with their specified exceptional adjunction.",
    "uses": [
-    "def-trf-local-term",
+    "def-trf-correspondence",
     "prop-trf-trace-class-unconditional",
-    "def-trf-fixed-scheme",
-    "def-trf-admissibility",
-    "prop-functor-package",
+    "def-trf-trace-class",
+    "def-trf-local-term",
+    "def-weil-scheme-morphism-properties",
+    "def-trf-admissibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-local-term/lem-trf-local-term-point.proof.md",
+    "place": "first sentences: existence of the trace class and the point component"
+   }
+  },
+  {
+   "text": "By [def-trf-dualizing-complex], $\\omega_{\\beta,A}=Ra^!A_s$. The relative-dimension-zero purity clause of [prop-functor-package] gives the normalized identification $\\omega_{\\beta,A}\\cong A_\\beta$, with no twist or shift. Apply [lem-weil-proetale-isomorphism-inverse-image] to the isomorphism $a$: its exact mutually inverse functors on module sheaves, preserving the constant coefficient sheaves, act degreewise on complexes and preserve quasi-isomorphisms. Their inverse identifications therefore descend to derived categories and identify $\\operatorname{End}(A_\\beta)$ with $\\operatorname{End}(A_s)$. The finite-coefficient equivalence [lem-weil-point-fibre-equivalence], whose functor is evaluation at $s$ as specified in [def-weil-finite-coefficient-point], sends $A_s$ to the complex $A[0]$. Consequently $\\operatorname{Hom}_{D(\\beta,A)}(A_\\beta,\\omega_{\\beta,A})\\cong\\operatorname{End}_{D(A)}(A)\\cong A$: First [lem-weil-pbc-derived-single-fully-faithful], applied to the abelian category of $A$-modules, identifies $\\operatorname{End}_{D(A)}(A[0])$ with $\\operatorname{End}_A(A)$. The final map evaluates an $A$-linear endomorphism at $1$, and its inverse sends $b$ to multiplication by $b$: $f(r)=rf(1)$ for every $r\\in A$. The identifications are $A$-linear, since inverse image and evaluation act termwise on module maps and therefore send $bf$ to $b$ times the image of $f$, and the single-complex functor does the same. These objects are constructible, so their Hom groups agree with those in the full ambient derived categories.",
+   "uses": [
     "def-trf-dualizing-complex",
+    "prop-functor-package",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-point-fibre-equivalence",
+    "def-weil-finite-coefficient-point",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-local-term/lem-trf-local-term-point.proof.md",
+    "place": "dimension-zero purity and the displayed Hom identification"
+   }
+  },
+  {
+   "text": "Let $e:A_\\beta\\to\\omega_{\\beta,A}$ correspond to $1$ under Step 2, that is, the purity map $\\gamma_{a,A_s}$. By [def-trf-integration], $\\int_\\beta e$ is the ordinary pullback unit, followed by $R\\Gamma(e)$ and the exceptional counit. The last two arrows are $R\\Gamma(s,-)$ of the smooth trace $\\varepsilon_a\\circ Ra_!(\\gamma_{a,A_s})$ of [def-pur-smooth-trace]. For finite etale $a$, [det-sp-trace-basic], clauses (1) and (3), identifies exactly this purity-transported counit with summation over the fibres. Here $a$ has one sheet, so the ordinary pullback unit sends $r$ to its single copy $r$, and summation sends that copy to $r$. Thus $\\int_\\beta e=1$. This uses the normalized finite-etale trace, rather than identifying the ordinary unit with an exceptional unit. Every morphism corresponding to $b\\in A$ in Step 2 is $be$; [lem-trf-integration-linear] gives $\\int_\\beta(be)=b$. No field assumption on $A$ or division by a degree is used.",
+   "uses": [
     "def-trf-integration",
+    "def-pur-smooth-trace",
+    "det-sp-trace-basic",
     "lem-trf-integration-linear"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-local-term/lem-trf-local-term-point.proof.md",
+    "place": "integration of the unit section and linearity (correcting the adjunction explanation)"
+   }
+  },
+  {
+   "text": "Take the section $\\tau=j_\\beta^*\\operatorname{Tr}_c(u)$ from Step 1 in the scalar calculation of Step 3. The equality $\\operatorname{LT}_\\beta(u)=\\int_\\beta\\tau$ in [def-trf-local-term] gives precisely the claimed scalar under Step 2. For a reduced clopen point component $B_{\\bar x}$, the same definition gives $B_{\\bar x}\\simeq\\Spec k$ and $\\operatorname{LT}_{\\bar x}(u)=\\operatorname{LT}_{B_{\\bar x}}(u)$, so this instance proves the final assertion.",
+   "uses": [
+    "def-trf-local-term"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-local-term/lem-trf-local-term-point.proof.md",
+    "place": "final specialization to the local term"
+   }
   }
  ],
  "proof_deps": [
-  "def-trf-local-term",
+  "def-trf-correspondence",
   "prop-trf-trace-class-unconditional",
-  "def-trf-fixed-scheme",
+  "def-trf-trace-class",
+  "def-trf-local-term",
+  "def-weil-scheme-morphism-properties",
   "def-trf-admissibility",
-  "prop-functor-package",
   "def-trf-dualizing-complex",
+  "prop-functor-package",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-point-fibre-equivalence",
+  "def-weil-finite-coefficient-point",
+  "lem-weil-pbc-derived-single-fully-faithful",
   "def-trf-integration",
+  "def-pur-smooth-trace",
+  "det-sp-trace-basic",
   "lem-trf-integration-linear"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-local-term/lem-trf-local-term-point.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-local-term/lem-trf-local-term-point.proof.md",
+  "place": "complete proof; normalized finite-etale counit calculation expanded using det-sp-trace-basic(1),(3)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "localTerm|borelMoore|Verdier.*trace",
+   "results": "no hits",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not state the project-level local-term normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The local term of a cohomological correspondence on a point is integration of its trace class identified with a scalar",
+   "results": "Algebra.intTrace_eq_of_isLocalization; term_→Co_; Manifold.LocalPresentationAt.ctorIdx; VectorBundleCore.localTrivAt_def; AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo'; smoothSheafCommRing.evalHom; smoothSheafCommRing.eval; CochainComplex.HomComplex.Cochain.units_smul_v",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not state the project-level local-term normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"localTerm\"",
+   "results": "no hits",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not state the project-level local-term normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integration of a dualizing Borel Moore section on an algebraically closed point is its scalar endomorphism of the coefficient ring",
+   "results": "AlgebraicGeometry.Scheme.germToFunctionField; AlgebraicGeometry.instFieldCarrierFunctionField; AlgebraicGeometry.instAlgebraCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensFunctionFieldOfNonemptyToScheme; AlgebraicGeometry.Scheme.Γevaluation; ModuleCat.Tilde.exists_const; AlgebraicGeometry.functionField_isScalarTower; AlgebraicGeometry.stalkFunctionFieldAlgebra; AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not state the project-level local-term normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from the spectrum of an algebraically closed field to a scheme has a reduced open and closed point component isomorphic to the spectrum of the field",
+   "results": "AlgebraicGeometry.Spec_closedPoint; AlgebraicGeometry.Scheme.SpecToEquivOfField; AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst; AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme; AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField; AlgebraicGeometry.Scheme.fromSpecResidueField; AlgebraicGeometry.Scheme.fromSpecResidueField_apply; AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not state the project-level local-term normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.IsOpenImmersion, IsClosedImmersion, Spec",
+   "results": "no hits; loogle: unknown identifier 'Scheme.IsOpenImmersion'",
+   "date": "2026-10-17",
+   "verdict": "invalid query; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "adjunction|triangle|isIso",
+   "results": "Mathlib/CategoryTheory: Mathlib/CategoryTheory/Groupoid.lean; Mathlib/CategoryTheory/Groupoid.lean; Mathlib/CategoryTheory/Groupoid.lean; Mathlib/CategoryTheory/Groupoid.lean; Mathlib/CategoryTheory/Groupoid.lean; Mathlib/CategoryTheory/MarkovCategory/Positive.lean; Mathlib/CategoryTheory/MarkovCategory/Positive.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not state the project-level local-term normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsIso, Scheme",
+   "results": "no hits; loogle: unknown identifier 'Scheme'",
+   "date": "2026-10-17",
+   "verdict": "invalid query; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "localTerm|borelMoore|traceClass",
+   "results": "Mathlib/AlgebraicGeometry: no hits",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not state the project-level local-term normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "|- IsIso _ → _",
+   "results": "no hits; loogle: Unknown identifier `IsIso`",
+   "date": "2026-10-17",
+   "verdict": "invalid query; not evidence of absence"
+  },
+  {
+   "tool": "loogle",
+   "query": "?a → ?a",
+   "results": "no hits; loogle: Cannot search: No constants or name fragments in search pattern.",
+   "date": "2026-10-17",
+   "verdict": "invalid query; not evidence of absence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.EqToHom",
+   "results": "no hits; loogle: unknown identifier 'CategoryTheory.EqToHom'",
+   "date": "2026-10-17",
+   "verdict": "invalid query; not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The local term of a cohomological correspondence on an algebraically closed point equals the scalar representing the restricted Verdier trace class",
+   "results": "AlgebraicGeometry.Scheme.Γevaluation; trace_quotient_eq_trace_localization_quotient; AlgebraicGeometry.stalkClosedPointIso; ModuleCat.Tilde.isUnit_toStalk; AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv; AlgebraicGeometry.Scheme.Γevaluation_naturality_apply; AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst; AlgebraicGeometry.germ_stalkClosedPointIso_hom_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not state the project-level local-term normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integration of a dualizing complex section over a geometric point is its coefficient scalar",
+   "results": "smoothSheaf.evalAt; AlgebraicGeometry.Scheme.evaluation; Module.Basis.linearCombination_dualBasis; ModuleCat.Tilde.sections_smul_localizations_def; Module.DualBases.coeffs_apply; ContMDiffSection.coe_nsmul; Module.Basis.toDual_eq_repr; ModuleCat.Tilde.smul_section_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not state the project-level local-term normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "localTerm|borelMoore|traceClass",
+   "results": "Mathlib/Tactic/TermCongr.lean; Mathlib/Tactic/FieldSimp.lean; Mathlib/Tactic/Widget/LibraryRewrite.lean; Mathlib/Tactic/DepRewrite.lean; Mathlib/Tactic/DepRewrite.lean; Mathlib/Tactic/DepRewrite.lean; Mathlib/Tactic/DepRewrite.lean; Mathlib/Tactic/Variable.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations do not state the project-level local-term normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctor.*(full|faithful)|singleFunctorFullyFaithful|homEquiv.*single",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "existing leaf lem-weil-pbc-derived-single-fully-faithful supplies the degree-zero Hom identification; no match for the entire local-term theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"single\"",
+   "results": "12 hits: DerivedCategory.singleFunctor, DerivedCategory.singleFunctors, DerivedCategory.instAdditiveSingleFunctor, DerivedCategory.singleFunctorIsoCompQ, DerivedCategory.singleFunctorsPostcompQIso, DerivedCategory.singleFunctorIsoCompQh, DerivedCategory.singleFunctorsPostcompQhIso, DerivedCategory.Q_obj_single_obj",
+   "date": "2026-10-17",
+   "verdict": "existing leaf lem-weil-pbc-derived-single-fully-faithful supplies the degree-zero Hom identification; no match for the entire local-term theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms between modules placed in degree zero in the derived category are exactly module homomorphisms",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.linearEquiv₀, CategoryTheory.Abelian.Ext.mk₀_linearEquiv₀_apply, CategoryTheory.Abelian.Ext.homLinearEquiv, CategoryTheory.Abelian.Ext.instModule, CategoryTheory.Abelian.Ext.homLinearEquiv_apply, instHasExtModuleCatOfSmall, CategoryTheory.Abelian.Ext.linearEquiv₀_symm_apply, CategoryTheory.Abelian.Ext.mk₀_hom",
+   "date": "2026-10-17",
+   "verdict": "existing leaf lem-weil-pbc-derived-single-fully-faithful supplies the degree-zero Hom identification; no match for the entire local-term theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*singleFunctor.*(Full|Faithful)",
+   "results": "2 hits: Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean, Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean",
+   "date": "2026-10-17",
+   "verdict": "existing leaf lem-weil-pbc-derived-single-fully-faithful supplies the degree-zero Hom identification; no match for the entire local-term theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singleFunctor\", \"Faithful\"",
+   "results": "2 hits: CochainComplex.instFaithfulIntSingleFunctor, DerivedCategory.instFaithfulSingleFunctor",
+   "date": "2026-10-17",
+   "verdict": "existing leaf lem-weil-pbc-derived-single-fully-faithful supplies the degree-zero Hom identification; no match for the entire local-term theorem"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -91,5 +288,39 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-d-local-term"
+ "unit": "sk-d-local-term",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-local-term-point",
+  "worker": "stage1",
+  "summary": "Recovered the earlier attempt; made the implicit correspondence and coefficient data explicit, expanded the point Hom identification through existing equivalences, and corrected the ordinary-unit/exceptional-counit calculation using normalized finite-etale trace on a one-sheeted map. Refreshed stale citations and recorded actual Mathlib searches. No new nodes. Second reader cited the existing degree-zero full-faithfulness Mathlib leaf, made structure-map admissibility and A-linearity explicit, and refreshed every quotation against the current shared DAG.",
+  "blueprint": "All of the current main-20261015 proof: trace class and clopen point setup; dimension-zero purity and Hom identification; integration of the unit section and A-linearity; final local-term substitution. The original unsupported triangle-identity explanation is replaced by the normalized finite-etale trace calculation on the same point structure map.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Exact equivalence of module sheaves and identification of constant sheaves for the point structure isomorphism; the local-term unit supplies no site-equivalence theorem."
+   },
+   {
+    "node": "lem-weil-point-fibre-equivalence",
+    "why": "Finite-coefficient point equivalence identifies Hom of constant coefficient objects with Hom of A-complexes; the local-term unit does not prove the point comparison."
+   },
+   {
+    "node": "det-sp-trace-basic",
+    "why": "Normalized purity-transported counit for finite etale maps is summation over fibres, used only for the one-sheeted point structure map; this justifies the unit/counit normalization omitted by the local-term unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-point-fibre-equivalence",
+  "det-sp-trace-basic"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-10e9e9be8",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-10e9e9be8 (reviewer sub-agent of L); spot-checked: Read in full: the item, every cited statement (including blueprint_update), the unit sk-d-local-term, the main-20261015 and master blueprint statement and proof, and the main-20261015 sk-def-sp-trace files (def-pur-smooth-trace, det-sp-trace-basic). No new nodes. proof_deps equals the union of step uses. All cited ids exist and none is merged. A transitive walk over all cited deps never reaches the item, so there is no cycle. Statement: only the binders X, C, K, u and A=A_{E,n} were made explicit, and they match def-trf-correspondence. 'beta ≃ Spec k over s' is automatic because k is algebraically closed. No hypothesis was added, none dropped, the conclusion is not weakened, and F need not be proper. Step 1: the trace class is defined (prop-trf-trace-class-unconditional, def-trf-trace-class) and restricted as in def-trf-local-term. The isomorphism a is proper and admissible, as def-trf-local-term requires. Step 2: omega = Ra^!A_s ≅ A_beta by prop-functor-package(6) in dimension 0. The Hom group is identified with A through the isomorphism inverse-image equivalence (2),(3), Fib_s = Gamma(s,-) (lem-weil-point-fibre-equivalence, def-weil-finite-coefficient-point), and the Mathlib leaf for single-functor full faithfulness (FullyFaithful.lean:37/45, checked). A-linearity is argued. Step 3: the integral of e = gamma is eps∘Ra_!(gamma)∘P_a∘eta. Its last two arrows are Tr^sm_a of def-pur-smooth-trace (smooth separated, d=0, same constructible counit). det-sp-trace-basic(3) identifies Tr^sm_a with summation over the fibres. Summation after the unit multiplies by the degree, which is 1. lem-trf-integration-linear then gives the integral of b·e = b. No division is used. Step 4 is an elementary substitution, and the B_x clause comes from def-trf-local-term. Confirmed source error: the blueprint calls the La^*⊣Ra_* unit the unit of Ra_!⊣Ra^! and uses a triangle identity, which is a type mismatch. The delivery repairs this via the normalized finite-etale trace, with the statement unchanged; the unit has no steps, so no route is replaced. Accepted tool_use: det-sp-trace-basic (sk-def-sp-trace, main-20261015, not SGA). Two further tool declarations, for the isomorphism inverse-image equivalence and the point fibre equivalence, are on the sk-def-sf-admissible route, so they are harmless. prop-trf-trace-class-unconditional and prop-functor-package are cited in the blueprint item's own uses. Edge cases checked: K=0, beta=s, (s, A, id), Z/l^2, empty F, k[eps]/eps^2 excluded, nonproper F. No duplicate among lem-trf-local-term-locality, thm-trf-frobenius-local-term, lem-trf-integration-component-sum, prop-trf-pairing-point-normalization. No fixes."
+ }
 }

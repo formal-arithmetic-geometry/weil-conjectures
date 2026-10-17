@@ -31,9 +31,111 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First $E$ is a quasicategory: project any inner horn to $B$, fill it there, and lift the resulting simplex against the same inner horn using the right-fibration hypothesis. Opposite simplicial sets reverse faces and degeneracies and take $\\Lambda_i^n$ to $\\Lambda_{n-i}^n$, so $q^{\\mathrm{op}}:E^{\\mathrm{op}}\\to B^{\\mathrm{op}}$ is a left fibration between small quasicategories. Apply [lem-cbc-left-fibration-equivalence-lift]. Its reflection clause, on taking opposites, says that $q$ reflects equivalence edges. Its prescribed-target lifting clause, applied to the opposite of an equivalence $q(x)\\to b$, gives an equivalence in $E$ with prescribed source $x$ over that edge. Thus $q$ lifts inner horns and equivalences with prescribed source: it is an isofibration. Reversing the two inverse-triangle witnesses in [def-cbc-enhanced-diagrams-cones] justifies every use of opposites here.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-cbc-left-fibration-equivalence-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01EW",
+    "place": "Example 4.4.1.11 and Proposition 4.4.2.11 (019K): right fibrations are conservative isofibrations These are Kerodon identifiers, not Stacks tags; online text read, archival copy WANTED."
+   }
+  },
+  {
+   "text": "For $K=A,B$, put $\\mathcal D_K=\\operatorname{Fun}(K,E)$, $\\mathcal C_K=\\operatorname{Fun}(K,B)$ and let $p_K:\\mathcal D_K\\to\\mathcal C_K$ be postcomposition with $q$. Apply [lem-coef-infinity-isofibration-exponentiation] to $q$ and the empty inclusion $\\varnothing\\hookrightarrow K$. Since a functor simplicial set out of the empty set is a point, its exponential corner is exactly $p_K$; both its source and target are quasicategories and $p_K$ is an isofibration. By [lem-coef-infinity-core-kan-fibration], $r_K=p_K^\\simeq:\\mathcal D_K^\\simeq\\to\\mathcal C_K^\\simeq$ is a Kan fibration. Both cores are Kan: apply the same core-fibration statement to each quasicategory's map to a point, an isofibration since its only required equivalence lift is a degenerate edge. All these functor simplicial sets remain small in the fixed universe.",
+   "uses": [
+    "lem-coef-infinity-isofibration-exponentiation",
+    "lem-coef-infinity-core-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01F1",
+    "place": "Proposition 4.4.5.1 and Proposition 4.4.3.7 (01EZ), specialized to empty-domain exponentiation These are Kerodon identifiers, not Stacks tags; online text read, archival copy WANTED."
+   }
+  },
+  {
+   "text": "For $a:K\\to B$ and $K=A,B$, the strict fiber of $p_K$ over the vertex $a$ has $n$-simplices exactly the maps $h:K\\times\\Delta^n\\to E$ satisfying $qh=a\\operatorname{pr}_K$, by [def-cbc-enhanced-diagrams-cones]. Every edge $\\tau$ of this fiber has, at each vertex $k$ of $K$, a component in $E$ whose image under $q$ is the degenerate edge at $a(k)$. The reflection assertion of Step 1 makes this component an equivalence. By [lem-coef-infinity-pointwise-equivalences], $\\tau$ is an equivalence in $\\mathcal D_K$. Consequently every simplex of the strict fiber lies in $\\mathcal D_K^\\simeq$, and the strict fibers of $p_K$ and $r_K$ over $a$ are equal as simplicial sets, not merely equivalent. They are precisely $\\Gamma_a(q)$. A horn in a fiber of the Kan fibration $r_K$ fills over the constant simplex at $a$, so $\\Gamma_a(q)$ is Kan. This proves the two Kan assertions for $a=\\mathrm{id}_B$ and $a=e$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01GZ",
+    "place": "Corollary 4.4.2.5, with Theorem 4.4.4.4 (01DK): strict sections are the core fibers These are Kerodon identifiers, not Stacks tags; online text read, archival copy WANTED."
+   }
+  },
+  {
+   "text": "Choose a simplicial quasi-inverse $d:B\\to A$ to $e$, and coherent natural equivalences $de\\simeq\\mathrm{id}_A$ and $ed\\simeq\\mathrm{id}_B$, as specified in [def-cbc-enhanced-diagrams-cones]. For $C=E,B$, restriction gives maps $R_C:\\operatorname{Fun}(B,C)^\\simeq\\to\\operatorname{Fun}(A,C)^\\simeq$ and $D_C$ in the reverse direction by $d$. Simplicial maps preserve equivalence edges by applying them to inverse-triangle witnesses, so these restrictions preserve cores. Whiskering the two chosen equivalences with a variable diagram supplies simplicial homotopies between $D_CR_C$ and the identity, and between $R_CD_C$ and the identity. Explicitly, if $\\eta:B\\times\\Delta^1\\to B$ is the chosen equivalence between $ed$ and the identity, the first homotopy before restriction to cores is the map $(F,t)\\mapsto F\\circ\\eta_t$, defined in all degrees by evaluation and the exponential formula; use the analogous map for $A$. These maps do land in the cores: their edges at a fixed $F$ are pointwise images of the equivalence components of $\\eta$, hence equivalences by [lem-coef-infinity-pointwise-equivalences]. Their edges at a fixed endpoint are restrictions of edges already in the source core. For a mixed edge $(\\alpha,0\\to1)$ in the product of a source core with $\\Delta^1$, use the explicit product $2$-simplex with vertices $(F_0,0),(F_1,0),(F_1,1)$: its first coordinate is the degeneracy of $\\alpha$ that repeats $F_1$, and its second coordinate is the monotone string $(0,0,1)$. The homotopy sends its two consecutive edges to a fixed-endpoint restriction edge and a fixed-diagram edge, and its long edge to the mixed edge. To check that its third side is invertible, use [lem-coef-homotopy-category-triangle-calculus]: an edge is an equivalence if and only if its class in the edge-and-triangle category is invertible, because inverse classes can be represented by edges and the two inverse equations can be represented by triangles. The naturality triangle makes the mixed-edge class the product of the other two invertible classes, so it is invertible too. Thus the homotopies restrict in all degrees, since cores consist of simplices whose edges are equivalences. Apply [lem-cbc-simplicial-homotopy-equivalence-weak] to conclude that both $R_E$ and $R_B$ are weak homotopy equivalences. No reversal map $\\Delta^1\\to\\Delta^1$ is asserted or needed: the chosen endpoint orientations are allowed.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pointwise-equivalences",
+    "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "lem-coef-homotopy-category-triangle-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00UB",
+    "place": "Proposition 3.1.7.13, forward implication; inverse-equivalence whiskering and Theorem 4.4.4.4 (01DK) These are Kerodon identifiers, not Stacks tags; online text read, archival copy WANTED."
+   }
+  },
+  {
+   "text": "There is a strictly commutative square of Kan complexes with top map $R_E:\\mathcal D_B^\\simeq\\to\\mathcal D_A^\\simeq$, bottom map $R_B:\\mathcal C_B^\\simeq\\to\\mathcal C_A^\\simeq$, and vertical maps $r_B,r_A$. Its commutativity is the equality $q\\circ(F\\circ e)=(q\\circ F)\\circ e$ in every simplicial degree. Both horizontal maps are weak homotopy equivalences by Step 4, and $R_B$ takes the vertex $\\mathrm{id}_B$ to the vertex $e$. Apply [lem-coef-spaces-homotopy-fiber-detection] to this square, with its constant commutativity homotopy. The forward direction of its equivalence yields a weak homotopy equivalence\n$$\\phi:\\operatorname{hofib}_{\\mathrm{id}_B}(r_B)\\longrightarrow\\operatorname{hofib}_e(r_A).$$\nIn the path-space models its map is exactly $(x,\\gamma)\\mapsto(R_E(x),R_B\\circ\\gamma)$.",
+   "uses": [
+    "lem-coef-spaces-homotopy-fiber-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00ZN",
+    "place": "Proposition 3.3.7.1, in the existing homotopy-fiber formulation These are Kerodon identifiers, not Stacks tags; online text read, archival copy WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-kan-pullback-path-comparison] to each pair $r_B,\\{\\mathrm{id}_B\\}\\to\\mathcal C_B^\\simeq$ and $r_A,\\{e\\}\\to\\mathcal C_A^\\simeq$. Its hypotheses hold because the bases and total spaces are Kan and $r_B,r_A$ are Kan fibrations. Using Step 3, it gives weak homotopy equivalences $j_B:\\Gamma_{\\mathrm{id}_B}(q)\\to\\operatorname{hofib}_{\\mathrm{id}_B}(r_B)$ and $j_A:\\Gamma_e(q)\\to\\operatorname{hofib}_e(r_A)$, both inserting constant paths. They satisfy $j_Ae^*=\\phi j_B$ exactly: precomposition takes the family $h$ to $h(e\\times\\mathrm{id})$ and takes its constant base path to the constant path at $e$. The right-hand composite and $j_A$ induce bijections on components and isomorphisms on all based homotopy groups; cancelling those of $j_A$ shows that the specified $e^*$ does as well. Hence $e^*$ is a weak homotopy equivalence of the two strict section Kan complexes.",
+   "uses": [
+    "lem-coef-kan-pullback-path-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/0329",
+    "place": "Proposition 3.4.0.7: natural constant-path comparison of strict fibers with path-space homotopy fibers These are Kerodon identifiers, not Stacks tags; online text read, archival copy WANTED."
+   }
+  },
+  {
+   "text": "Now [lem-cbc-kan-whitehead-inverse] applies directly to $e^*$: Step 3 proved its source and target Kan, and Step 6 proved precisely the realized component and based-homotopy-group conditions in that node's statement. It gives a simplicial map $c:\\Gamma_e(q)\\to\\Gamma_{\\mathrm{id}_B}(q)$ and homotopies on product with $\\Delta^1$ from $ce^*$ and $e^*c$ to the respective identities. This is the claimed simplicial homotopy equivalence. The theorem explicitly permits empty Kan complexes. Every earlier fiber comparison also permits empty fibers, so the argument has made no nonemptiness assumption.",
+   "uses": [
+    "lem-cbc-kan-whitehead-inverse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00UB",
+    "place": "Proposition 3.1.7.13, converse for Kan complexes; realization convention as in Corollary 3.6.4.3 (03X7) These are Kerodon identifiers, not Stacks tags; online text read, archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-cbc-kan-whitehead-inverse",
+  "lem-cbc-left-fibration-equivalence-lift",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-homotopy-category-triangle-calculus",
+  "lem-coef-infinity-core-kan-fibration",
+  "lem-coef-infinity-isofibration-exponentiation",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-spaces-homotopy-fiber-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/02NC",
+  "place": "Expanded proof of the right-cofinal assertion of Corollary 7.2.1.13 for a functor equivalence: direct comparison of strict section fibers using cores, isofibration exponentiation and Kan homotopy fibers. Source statements read online; not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -90,10 +192,108 @@
    "results": "{\"t\": \"2026-10-16T21:58:48Z\", \"tool\": \"leanfinder\", \"query\": \"Precomposition with an equivalence preserves simplicial mapping objects in the slice over a base right fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.MorphComponents.preComp\", \"CategoryTheory.StructuredArrow.preEquivalence\", \"CategoryTheory.CostructuredArrow.isEquivalence_pre\", \"CategoryTheory.CostructuredArrow.preEquivalence\", \"AlgebraicTopology.DoldKan.MorphComponents.preComp_b\", \"AlgebraicTopology.DoldKan.MorphComponents.preComp_φ\", \"AlgebraicTopology.DoldKan.MorphComponents.preComp_a\", \"CategoryTheory.StructuredArrow.preEquivalenceFunctor_obj_hom\"], \"digest\": \"b6971a626318e06c\"}",
    "date": "2026-10-16",
    "verdict": "no match: returned Dold-Kan morphism components and ordinary structured-arrow equivalences; none is a theorem about strict sections of simplicial right fibrations."
+  },
+  {
+   "tool": "grep",
+   "query": "right.?fibration|right.?cofinal|sections.*[Ee]quiv|[Ee]quiv.*sections",
+   "results": "{\"t\": \"2026-10-16T23:24:43Z\", \"tool\": \"grep\", \"query\": \"right.?fibration|right.?cofinal|sections.*[Ee]quiv|[Ee]quiv.*sections\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Cylinder.lean\"], \"digest\": \"5a08640accd65ca8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures. Nerve/homotopy-category adjunctions, ordinary Kan extensions, Kan-fibration horn instances and model-category cylinders do not assert invariance of strict section complexes of right fibrations under quasicategorical equivalences. The two semantic phrasings give no exact match or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a right fibration of simplicial sets restriction of sections along an equivalence of infinity categories is a homotopy equivalence",
+   "results": "{\"t\": \"2026-10-16T23:24:43Z\", \"tool\": \"leansearch\", \"query\": \"For a right fibration of simplicial sets restriction of sections along an equivalence of infinity categories is a homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"CategoryTheory.Functor.isRightKanExtensionAlongEquivalence\", \"CategoryTheory.Sheaf.ΓRes\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"CategoryTheory.Functor.isRightKanExtensionAlongEquivalence'\"], \"digest\": \"c93d0174a15e9d6e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures. Nerve/homotopy-category adjunctions, ordinary Kan extensions, Kan-fibration horn instances and model-category cylinders do not assert invariance of strict section complexes of right fibrations under quasicategorical equivalences. The two semantic phrasings give no exact match or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"rightFibration\"",
+   "results": "{\"t\": \"2026-10-16T23:24:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"rightFibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures. Nerve/homotopy-category adjunctions, ordinary Kan extensions, Kan-fibration horn instances and model-category cylinders do not assert invariance of strict section complexes of right fibrations under quasicategorical equivalences. The two semantic phrasings give no exact match or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial lifts of an equivalence against a right fibration are equivalent to the space of sections",
+   "results": "{\"t\": \"2026-10-16T23:24:44Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial lifts of an equivalence against a right fibration are equivalent to the space of sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.unitHomEquiv\", \"SSet.hoFunctor.unitHomEquiv\", \"SSet.Truncated.liftOfStrictSegal\", \"HomotopicalAlgebra.FibrantObject.homMk_surjective\", \"SSet.uliftFunctor\"], \"digest\": \"f365d76cedcbae9f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures. Nerve/homotopy-category adjunctions, ordinary Kan extensions, Kan-fibration horn instances and model-category cylinders do not assert invariance of strict section complexes of right fibrations under quasicategorical equivalences. The two semantic phrasings give no exact match or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction along an equivalence of quasicategories induces a simplicial homotopy equivalence between strict section complexes of a right fibration",
+   "results": "{\"t\": \"2026-10-16T23:24:44Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction along an equivalence of quasicategories induces a simplicial homotopy equivalence between strict section complexes of a right fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk_eq_strictMap\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.Truncated.nerve₂Adj\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"SSet.Truncated.HomotopyCategory.mkNatIso\", \"SSet.Truncated.HomotopyCategory.mkNatIso_hom_app_mk\", \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\"], \"digest\": \"9a3dcb017929fbf9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned signatures. Nerve/homotopy-category adjunctions, ordinary Kan extensions, Kan-fibration horn instances and model-category cylinders do not assert invariance of strict section complexes of right fibrations under quasicategorical equivalences. The two semantic phrasings give no exact match or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "right.?fibration|right.?cofinal|section.*equiv",
+   "results": "{\"t\": \"2026-10-17T00:32:41Z\", \"tool\": \"grep\", \"query\": \"right.?fibration|right.?cofinal|section.*equiv\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no AlgebraicTopology source hits. This searches right-fibration/cofinal terminology and section-equivalence wording."
+  },
+  {
+   "tool": "loogle",
+   "query": "rightFibration, IsEquivalence, Functor",
+   "results": "{\"t\": \"2026-10-17T00:32:42Z\", \"tool\": \"loogle\", \"query\": \"rightFibration, IsEquivalence, Functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'rightFibration'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "invalid pattern: Loogle reported unknown identifier rightFibration; this is not evidence of absence. Retried with the valid quoted-name query recorded below."
+  },
+  {
+   "tool": "leansearch",
+   "query": "restriction along a categorical equivalence induces homotopy equivalence of sections of a right fibration",
+   "results": "{\"t\": \"2026-10-17T00:32:42Z\", \"tool\": \"leansearch\", \"query\": \"restriction along a categorical equivalence induces homotopy equivalence of sections of a right fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isRightKanExtensionAlongEquivalence\", \"CategoryTheory.Limits.Types.limitEquivSections\", \"CategoryTheory.Functor.isRightKanExtensionAlongEquivalence'\", \"HasFibers.instIsEquivalenceFibFiberInducedFunctor\", \"CategoryTheory.Over.postEquiv\", \"CategoryTheory.Limits.Types.sectionsEquiv\", \"CategoryTheory.Functor.sectionsEquivHom\", \"CategoryTheory.Equivalence.congrRightFunctor\"], \"digest\": \"120015e33d7dd078\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read all eight signatures. Ordinary categorical Kan extension, set-valued sections, fibers and functor-category equivalences do not state equivalence invariance of strict simplicial right-fibration section complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "equivalence restriction right fibration strict sections Kan complex",
+   "results": "{\"t\": \"2026-10-17T00:32:45Z\", \"tool\": \"leanfinder\", \"query\": \"equivalence restriction right fibration strict sections Kan complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegalCore\", \"SSet.IsStrictSegal\", \"SSet.StrictSegal\", \"SSet.Truncated.StrictSegal\", \"SSet.StrictSegal.isStrictSegal\", \"SSet.StrictSegal.ofIsStrictSegal\", \"SSet.Truncated.IsStrictSegal\", \"CategoryTheory.Nerve.strictSegal\"], \"digest\": \"f3f2ebb644745360\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: all eight signatures define strict Segal structures or give the strict Segal structure of an ordinary categorical nerve; none concerns section spaces of right fibrations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Homotopy\"",
+   "results": "{\"t\": \"2026-10-17T00:36:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"Homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory₂\", \"SSet.Truncated.instCategoryHomotopyCategory₂\", \"SSet.Truncated.HomotopyCategory₂.instCategoryStruct\", \"SSet.Truncated.HomotopyCategory₂.Hom\", \"SSet.Truncated.HomotopyCategory₂.homMk_id\", \"SSet.Truncated.HomotopyCategory₂.mk\", \"SSet.Truncated.HomotopyCategory₂.pt\", \"SSet.Truncated.HomotopyCategory₂.mk_surjective\"], \"digest\": \"4642944b66c62684\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: signatures concern the category of homotopy classes of edges of a two-truncated quasicategory and its objects and morphisms. They do not concern restriction of strict section complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "precomposition categorical equivalence preserves spaces of lifts over a base simplicial set",
+   "results": "{\"t\": \"2026-10-17T00:36:25Z\", \"tool\": \"leanfinder\", \"query\": \"precomposition categorical equivalence preserves spaces of lifts over a base simplicial set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.RelativeMorphism.HomotopyClass.precomp\", \"SSet.Subcomplex.preimage_obj\", \"SSet.uliftFunctor\", \"SSet.RelativeMorphism.precomp_homotopyClass\", \"SSet.Subcomplex.fromPreimage_app_coe\", \"SSet.yonedaEquiv_comp\", \"SSet.Subcomplex.preimage\", \"SSet.degenerate_le_preimage\"], \"digest\": \"31dbf06c674286d4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read all eight signatures. RelativeMorphism.HomotopyClass.precomp and precomp_homotopyClass are composition on relative homotopy classes; the remaining hits concern subcomplex preimages, universe lifting, degeneracies and Yoneda. No right-fibration section-invariance statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Categorical equivalences preserve the space of lifts of a diagram through a right fibration of simplicial sets",
+   "results": "{\"t\": \"2026-10-17T01:17:29Z\", \"tool\": \"leanfinder\", \"query\": \"Categorical equivalences preserve the space of lifts of a diagram through a right fibration of simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.lift_obj_mk\", \"SSet.Truncated.liftOfStrictSegal.naturalityProperty_eq_top\", \"SSet.Truncated.liftOfStrictSegal.naturalityProperty\", \"SSet.uliftFunctor\", \"SSet.Truncated.liftOfStrictSegal\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\"], \"digest\": \"a602485c64615a6e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader query. Read returned signatures: two-truncated homotopy-category lifts, strict-Segal naturality, universe lifts, all-horn Kan fibrations and a simplex-product intersection do not assert invariance of strict section spaces for right fibrations. Grep hits are section headings or extra-degeneracy/covering homotopies; none is this proposition or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "right.?[Ff]ibration|[Ss]ection.*[Hh]omotop",
+   "results": "{\"t\": \"2026-10-17T01:17:38Z\", \"tool\": \"grep\", \"query\": \"right.?[Ff]ibration|[Ss]ection.*[Hh]omotop\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/ShortComplex/Preadditive.lean\", \"Mathlib/Topology/Homotopy/Lifting.lean\"], \"digest\": \"5f3305f03cd3be31\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader query. Read returned signatures: two-truncated homotopy-category lifts, strict-Segal naturality, universe lifts, all-horn Kan fibrations and a simplex-product intersection do not assert invariance of strict section spaces for right fibrations. Grep hits are section headings or extra-degeneracy/covering homotopies; none is this proposition or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"section\"",
+   "results": "{\"t\": \"2026-10-17T01:17:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"section\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SSet.prodStdSimplex₁.intersectionNondeg\"], \"digest\": \"c1cbce38b1212a2e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second-reader query. Read returned signatures: two-truncated homotopy-category lifts, strict-Segal naturality, universe lifts, all-horn Kan fibrations and a simplex-product intersection do not assert invariance of strict section spaces for right fibrations. Grep hits are section headings or extra-degeneracy/covering homotopies; none is this proposition or a one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-equivalence-anodyne-factorization",
@@ -113,5 +313,39 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-equivalence-section-restriction",
+  "worker": "stage1",
+  "summary": "Revalidated the existing seven-step acyclic sandbox proof against the current shared DAG and Kerodon source statements, and made the product 2-simplex controlling mixed homotopy edges explicit. Right-fibration conservativity identifies strict sections with fibers on cores; inverse whiskering compares the ambient cores; natural constant-path comparison identifies the specified restriction map as a weak equivalence; Kan Whitehead supplies a simplicial inverse. Statement and provenance are preserved. Repeated logged Mathlib searches found no attachment or Mathlib match. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes the auxiliary equivalence-invariance of strict section spaces in the local cone-filling infrastructure below paragraph 2 (derived coefficient adjunction) of prop-coef-integral-exceptional-adjoint. The current main-20261015 proof has the same derived coefficient adjunction paragraph. This is below the fixed unit route, and introduces no coefficient-category identification.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-left-fibration-equivalence-lift",
+    "why": "Generic one-sided-fibration tool, used on opposites to show that q reflects equivalences and is an isofibration; the coefficient unit supplies no one-sided horn-lifting replacement."
+   },
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Generic simplicial homotopy theorem converts the explicit inverse-whiskering homotopies on cores into weak homotopy equivalences; no coefficient-unit result supplies this realization implication."
+   },
+   {
+    "node": "lem-cbc-kan-whitehead-inverse",
+    "why": "Generic Kan Whitehead inverse supplies the actual simplicial inverse and product-with-Delta-one homotopies required by the item after the fiber comparison; this is independent of the coefficient unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-left-fibration-equivalence-lift",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-cbc-kan-whitehead-inverse"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N1-c302fb94a",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-c302fb94a (reviewer sub-agent of L); spot-checked: I read the item and all 11 cited statements in full, plus the unit record and the one citer (lem-coef-infinity-equivalence-anodyne-factorization). There are no new nodes. The statement is Kerodon 02NC with Def. 7.2.1.1: Gamma_id and Gamma_e are exactly Fun_{/B}(B,E) and Fun_{/B}(A,E), defined by the Fun formula of def-cbc. Kerodon is not archived in literature/, so I checked the statement from my own knowledge of the source; it is marked agent-written and WANTED. I tested it on these cases: e=id; A=B empty; E empty over a nonempty B; a point mapped into the two-object contractible groupoid. It is true, not weakened, and no coefficient category or base change is involved. Step 1: E is a quasicategory, and under op q becomes a left fibration. The reflection clause and the prescribed-target clause then give conservativity and an isofibration with prescribed source. Step 2: exponentiation along the empty inclusion gives the isofibration p_K; the core of p_K is a Kan fibration and the cores are Kan, using C->Delta^0. Step 3: each strict fiber is Gamma_a, and every edge in it is an equivalence by reflection plus the pointwise criterion, so the fiber lies in the core and is Kan. Step 4: I checked F.eta_t edge by edge, including the mixed edge through the product 2-simplex and the triangle calculus; homotopy implies weak equivalence. Step 5: the fiber-detection forward direction applies, and the path direction matches the hofib model in def-cbc. Step 6: constant-path comparison plus 2-out-of-3 makes e^* a weak equivalence. The claim that phi is exactly R_B.gamma depends on reading 'compose with the constant homotopy' as the identity; if that composite were only defined up to a chosen filler, commutation up to homotopy still suffices, so this is not a gap. Step 7: Kan Whitehead gives the inverse, and empty cases are allowed. proof_deps equals the union of the step uses. There is no cycle: 137 nodes are reachable from the item and none leads back to it. Possible duplicates I read and rejected: cofinal-colimit-restriction, cofinality-space-test, final-index-colimit, anodyne-cocones, left-fibration-section-homotopy-pullback. Accepted tool_uses (sk-prop-sf-cbc is not on the route): lem-cbc-left-fibration-equivalence-lift, lem-cbc-simplicial-homotopy-equivalence-weak, lem-cbc-kan-whitehead-inverse. No SGA is cited and no changes were made."
  }
 }

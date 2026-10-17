@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-pur-immersion-twist",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The co-projection for the twist",
- "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $i:Z\\hookrightarrow X$ be a closed immersion of\nseparated finite-type\n$k$-schemes and let $K\\in D^b_{ctf}(X,\\Lambda)$. Then, for\n$m\\in\\mathbf Z$,\n\n$$\nRi^!\\bigl(K\\otimes^L_{\\Lambda_X}\\Lambda_X(m)[2m]\\bigr)\n\\;\\xrightarrow{\\ \\sim\\ }\\;\nRi^!K\\otimes^L_{\\Lambda_Z}\\Lambda_Z(m)[2m]\n$$\n\nvia [lem-pur-coprojection] with the\nTate twist object\n$L=\\Lambda_X(m)[2m]$ (an invertible object of\n[def-weil-derived-tensor], whose restriction to $Z$ is\n$\\Lambda_Z(m)[2m]$ by the [def-coefficient-twists-detailed]\nrestriction compatibility).",
+ "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $i:Z\\hookrightarrow X$ be a closed immersion of\nseparated finite-type\n$k$-schemes and let $K\\in D^b_{ctf}(X,\\Lambda)$. Then, for\n$m\\in\\mathbf Z$,\n\n$$\nRi^!\\bigl(K\\otimes^L_{\\Lambda_X}\\Lambda_X(m)[2m]\\bigr)\n\\;\\xrightarrow{\\ \\sim\\ }\\;\nRi^!K\\otimes^L_{\\Lambda_Z}\\Lambda_Z(m)[2m]\n$$\n\nvia [lem-pur-coprojection] with the\nTate twist object\n$L=\\Lambda_X(m)[2m]$ (invertibility follows from\n[det-def-sp-tate-twist-locally-free] and the shift calculation, and\nits derived restriction to $Z$ is $\\Lambda_Z(m)[2m]$ by\n[det-prop-sfb-cartesian-coefficients-twists]).",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-lem-coprojection/lem-pur-immersion-twist.md",
   "place": "node lem-pur-immersion-twist, order 2007"
@@ -18,30 +18,143 @@
   "def-weil-derived-tensor",
   "def-coefficient-twists-detailed",
   "def-weil-exceptional-inverse-image",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-scheme-morphism-properties",
+  "pur9-cs-def-invertible",
+  "det-def-sp-tate-twist-locally-free",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "def-weil-derived-pullback-tensor-hom"
  ],
  "proof": [
   {
-   "text": "Apply [lem-pur-coprojection] to the object $K$ on $W=X$ and\nthe invertible object $L=\\Lambda_X(m)[2m]$, and use the\n[def-coefficient-twists-detailed] identification\n$i^*\\Lambda_X(m)=\\Lambda_Z(m)$.",
+   "text": "Work at the finite coefficient stage $\\Lambda=A_{E,n}$ prescribed by [def-pur-conventions]. This is a finite ring by [def-weil-l-adic-coefficient-extension]; moreover $|\\ell|_E=\\ell^{-1}<1$, so $\\ell\\in\\mathfrak m_E=(\\varpi_E)$ and $\\ell^n A_{E,n}=0$. Since $X$ is a $k$-scheme and $\\ell\\ne\\operatorname{char}(k)$, $\\ell$ is invertible on $X$. Put $T=\\Lambda_X(m)$ and $T^{-1}=\\Lambda_X(-m)$. By [det-def-sp-tate-twist-locally-free], twisting by $T$ and by $T^{-1}$ are inverse autoequivalences: use $d=m$ if $m\\geq0$, and exchange the equivalence and its inverse at $d=-m$ if $m<0$. Evaluating their composite on $\\Lambda_X$ gives $T\\otimes^L T^{-1}\\cong\\Lambda_X$. Set $L=T[2m]$ and $L^{-1}=T^{-1}[-2m]$. Choose a K-flat representative $P\\to T$ as in [def-weil-derived-tensor], and represent $T^{-1}$ by a complex $Q$. In [def-pc-tensor-complex-sheaves], the summand $(P[2m])^p\\otimes(Q[-2m])^q$ of total degree $r=p+q$ is $P^{p+2m}\\otimes Q^{q-2m}$. The change $(p,q)\\mapsto(p+2m,q-2m)$ preserves the total degree; the shift signs and the tensor differential signs agree because $2m$ is even. It therefore defines a chain isomorphism $P[2m]\\otimes Q[-2m]\\cong P\\otimes Q$. To check that this computes derived tensor, for any acyclic complex $B$, reindex $(p,q)\\mapsto(p+2m,q)$: the degree-$r$ term of $P[2m]\\otimes B$ identifies with the degree-$(r+2m)$ term of $P\\otimes B$, and the differentials agree by the evenness of $2m$. Thus $P[2m]\\otimes B\\cong(P\\otimes B)[2m]$ is acyclic, so $P[2m]$ is K-flat. Consequently $L\\otimes^L L^{-1}\\cong T\\otimes^L T^{-1}\\cong\\Lambda_X$, supplying exactly the inverse datum of [pur9-cs-def-invertible].",
    "uses": [
-    "lem-pur-coprojection",
-    "def-coefficient-twists-detailed"
+    "def-pur-conventions",
+    "def-weil-l-adic-coefficient-extension",
+    "det-def-sp-tate-twist-locally-free",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-derived-tensor",
+    "pur9-cs-def-invertible"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-coprojection/lem-pur-immersion-twist.proof.md",
+    "place": "Proof, invertibility of L=Lambda_X(m)[2m], expanded using the total tensor differential"
+   }
+  },
+  {
+   "text": "Apply [det-prop-sfb-cartesian-coefficients-twists] with $f=i$ and $d=m$ to get $i^{-1}\\Lambda_X(m)\\cong\\Lambda_Z(m)$ with the coefficient-module structure. The hypotheses hold: $X$ and $Z$ are $k$-schemes and $\\ell\\ne\\operatorname{char}(k)$, hence $\\ell$ is invertible on both. At finite level the derived module pullback is termwise inverse image, as specified in [def-weil-derived-pullback-tensor-hom]; termwise inverse image of the shifted complex has the same terms and differentials as the shift of its inverse image. We therefore obtain $\\rho:Li^*L\\xrightarrow{\\sim}\\Lambda_Z(m)[2m]$.",
+   "uses": [
+    "det-prop-sfb-cartesian-coefficients-twists",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-coprojection/lem-pur-immersion-twist.proof.md",
+    "place": "Proof, identification of the restriction of the Tate twist"
+   }
+  },
+  {
+   "text": "Use [lem-pur-coprojection] with $W=X$, the given $K$, and the invertible object $L$ of Step 1. Its closed-immersion hypothesis is precisely the hypothesis on $i$. It gives the canonical isomorphism $Ri^!(K\\otimes^L L)\\xrightarrow{\\sim}Ri^!K\\otimes^L Li^*L$. Compose it with $1_{Ri^!K}\\otimes^L\\rho$ from Step 2. A functor sends an isomorphism and its inverse to inverse maps, so the latter map is an isomorphism. Substituting $L=\\Lambda_X(m)[2m]$ gives exactly the displayed assertion, with the stipulated co-projection map.",
+   "uses": [
+    "lem-pur-coprojection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-coprojection/lem-pur-immersion-twist.proof.md",
+    "place": "Proof, apply lem-pur-coprojection with W=X"
+   }
   }
  ],
  "proof_deps": [
-  "lem-pur-coprojection",
-  "def-coefficient-twists-detailed"
+  "def-pur-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "det-def-sp-tate-twist-locally-free",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-derived-tensor",
+  "pur9-cs-def-invertible",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-coprojection"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-lem-coprojection/lem-pur-immersion-twist.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-coprojection/lem-pur-immersion-twist.proof.md",
+  "place": "Proof, expanded into inverse, restriction and co-projection steps"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image of a closed immersion commutes with tensoring by a shifted Tate twist",
+   "results": "8 hits on the repeated query: AlgebraicGeometry.Proj.pullbackAwayιIso; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv; AlgebraicGeometry.liftCoborder_app; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm; LightCondensed.ihomPoints_symm_comp; AlgebraicGeometry.Scheme.Hom.appIso_inv_app_assoc. The displayed types concern ordinary pullbacks, immersion structure maps and condensed tensor Hom; none states exceptional inverse image or Tate twist co-projection.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Tate, shriek",
+   "results": "0 hits; Loogle says unknown identifier 'Tate'. No candidate declaration returned.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate|tateTwist|upperShriek|exceptional.*inverse",
+   "results": "25 hits in Mathlib/AlgebraicGeometry, including ProjectiveSpectrum/Scheme.lean:67,359, ProjectiveSpectrum/Proper.lean:197, Birational/Composition.lean:22, EllipticCurve/Weierstrass.lean:58, and Morphisms/Finite.lean:177. These are incidental text matches (statements, rotate_left, or the name Tate); none gives an exceptional pullback or Tate twist theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exceptional pullback commutes with shifted Tate twists for constructible complexes",
+   "results": "8 hits: Functor.commShiftPullback_iso_eq, NatTrans.commShiftPullback, pullbackShiftFunctorZero'_hom_app, NatTrans.PullbackShift.natIsoComp, Functor.commShiftPullback, Adjunction.commShiftPullback, TwistShiftData.commShift, pullbackShiftFunctorZero_inv_app. These concern reindexing an abstract shift action, not sheaf exceptional pullback or Tate twists.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint commutes with tensor by invertible object using projection formula for sheaves",
+   "results": "8 hits: monoidal closed structures on sheaves/condensed objects, SheafOfModules.PullbackConstruction.adjunction, GrothendieckCategory tensorObj left adjoint, and tensorLeft functor-category adjoint. No exceptional-pullback projection formula or Tate theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tateTwist|upperShriek|exceptionalInverse|shiftTateObject",
+   "results": "0 hits in all Mathlib.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"upperShriek\"",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring an extraordinary inverse image with a rank one local system is equivalent to twisting before extraordinary pullback",
+   "results": "8 hits: SheafOfModules pullback composition, free-module pullback and pullback/pushforward adjunction declarations, and a LightCondensed sheafification monoidal instance. Their displayed types concern ordinary module pullback or sheafification; none gives extraordinary pullback or Tate twist co-projection.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedUpperShriek\"",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "co[Pp]rojection|[Ii]sInvertible.*shift|[Tt]ate[Oo]bject|[Uu]pper[Ss]hriek",
+   "results": "15 hits, all coproduct coprojections in Mathlib category theory. No exceptional inverse image, shifted invertible object, or Tate object declaration.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -72,5 +185,44 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-lem-coprojection"
+ "unit": "sk-lem-coprojection",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-immersion-twist",
+  "worker": "stage1",
+  "summary": "Expanded the current blueprint specialization into the shifted inverse calculation, the actual theorem on inverse images of twists, and application of closed-immersion co-projection. Reused existing nodes only. The mathematical assertion is unchanged; the explanatory restriction citation is corrected because the current twist definition does not assert base-change compatibility. The upstream etale HasTateTwist theorem does not attach to the current pro-etale object.",
+  "blueprint": "Realizes the complete main-20261015 proof: applying co-projection with W=X and L=Lambda_X(m)[2m], and identifying the restricted twist. Step 1 makes its invertibility check explicit; Step 2 supplies the theorem behind the restriction assertion.",
+  "tool_uses": [
+   {
+    "node": "det-def-sp-tate-twist-locally-free",
+    "why": "Uses only the generic twist autoequivalence/inverse statement to verify the invertibility hypothesis of our unit co-projection; the unit has no theorem constructing the coefficient line."
+   },
+   {
+    "node": "det-prop-sfb-cartesian-coefficients-twists",
+    "why": "Uses only inverse-image compatibility of coefficient twists to identify Li^*L; our unit proves co-projection and has no coefficient base-change theorem."
+   },
+   {
+    "node": "def-pc-tensor-complex-sheaves",
+    "why": "Uses the total tensor differential on any ringed site to write the elementary cancelling even-shift calculation, without changing the co-projection route."
+   },
+   {
+    "node": "def-weil-derived-pullback-tensor-hom",
+    "why": "Uses the finite-level termwise description of derived inverse image to identify the shifted restriction; no new pullback construction is made."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-def-sp-tate-twist-locally-free",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-9f8a0efb9",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-9f8a0efb9 (reviewer sub-agent of L); spot-checked: Read the item, all 3 steps, the 10 searches and the tool_uses, the main-20261015 sk-lem-coprojection files (_section, the unit proof, lem-pur-coprojection, lem-pur-immersion-twist order 2351 and its proof, pur9-cs-def-invertible), and the current statements of all cited nodes. Statement: the assertion matches main-20261015 and master word for word. Only the explanatory parenthesis changed, and correctly: def-coefficient-twists-detailed asserts no restriction compatibility. The scope Lambda=A_{E,n} comes from def-pur-conventions, and the coefficient category is the conventions' pro-etale finite one. Step 1: ell^n A_{E,n}=0 holds because ell lies in (varpi_E), per def-weil-l-adic-coefficient-extension clause 4. Clause 3 of det-def-sp-tate-twist-locally-free gives the autoequivalence and its inverse, with roles exchanged at d=-m for m<0. I checked the even-shift reindexing and the K-flatness of P[2m] by hand; the result is the triple of pur9-cs-def-invertible. Step 2: det-prop-sfb-cartesian-coefficients-twists holds for every d in Z and any morphism with ell invertible, and def-weil-derived-pullback-tensor-hom computes finite-level pullback termwise, which commutes with shifts. Step 3: lem-pur-coprojection with W=X, composed with 1 tensor rho, gives exactly the stipulated map. Edge cases checked: Z empty, K=0, i=id, m=0, m<0, and F_ell on Spec k. No new nodes, no cycle, no duplicate (sk-lem-coprojection is the imported unit node and lem-pur-coprojection is cited), no SGA. I accept the tool uses of det-def-sp-tate-twist-locally-free and det-prop-sfb-cartesian-coefficients-twists (unit sk-prop-an) as generic coefficient black boxes that replace no step of the route; the other two entries are definitions. One existing point recorded for maintenance: the agreement of alpha_f (lem-sfb-alpha-iso) with c^f_A is written out only in det-prop-sfb's Step 3 proof, not in a node statement. No changes."
+ }
 }

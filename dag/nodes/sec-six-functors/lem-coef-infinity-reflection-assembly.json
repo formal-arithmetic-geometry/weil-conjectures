@@ -29,9 +29,105 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-mapping-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Form the full simplicial subcategory $E\\subseteq\\mathcal C\\times\\Delta^1$ on $(x,0)$ for $x\\in\\mathcal C$ and $(i(d),1)$ for $d\\in\\mathcal D$, and let $p:E\\to\\Delta^1$ be the projection. It is an inner fibration. Indeed an inner horn in $E$ projects to a horn in $\\mathcal C$, which has a filler; pair that filler with the prescribed simplex in $\\Delta^1$. Every vertex already belongs to $E$, so fullness puts the paired filler in $E$. The same horn argument makes $E$ a quasicategory. The fibers are $\\mathcal C$ and $\\mathcal D$. Directly from the right-pinched definition, $\\operatorname{Map}_E((x,0),(i(d),1))=\\operatorname{Map}_{\\mathcal C}(x,i(d))$, the mapping spaces within the two fibers are their own mapping spaces, and all mapping spaces from fiber $1$ to fiber $0$ are empty. In the cocartesian mapping-square criterion of [lem-coef-infinity-cocartesian-mapping-criterion], a lift $\\widetilde u:(x,0)\\to(i(d_x),1)$ of a supplied $u_x$ has, for a test vertex in fiber $1$, two singleton base mapping spaces and precisely the hypothesized equivalence as its top map. For a test vertex in fiber $0$, the bottom left and top left corners are empty and the bottom right is a singleton, so its homotopy pullback is empty. Thus every supplied $u_x$ gives a $p$-cocartesian edge. This calculation also proves that any $p$-cocartesian mixed edge has exactly the universal precomposition property in the item.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02FD",
+    "place": "Lemma 6.2.2.23, full subcategory E and its mixed cocartesian edges; the horn and mapping-space checks are expanded here."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-infinity-cocartesian-arrow-projection] to this inner fibration $p$, using its notation $Y,Z,\\theta$. The fixed base edge $\\alpha:0\\to1$ defines a simplicial map $t:\\mathcal C\\to Z$, $x\\mapsto(\\alpha,(x,0))$: in every degree its first coordinate is the constant simplex at $\\alpha$, and its second coordinate is the fiber inclusion. It lands in the full vertex image $Z$ by Step 1 and the objectwise hypotheses. Apply [lem-weil-pbc-trivial-kan-lifts-monomorphisms] to the trivial Kan fibration $\\theta$ and the degreewise injective inclusion $\\varnothing\\hookrightarrow\\mathcal C$. This gives a simplicial lift $h:\\mathcal C\\to Y$ with $\\theta h=t$. Uncurrying gives $H:\\mathcal C\\times\\Delta^1\\to E$ whose initial restriction is the fiber inclusion, whose final restriction takes values in the full fiber $\\mathcal D$, and whose vertical edges are $p$-cocartesian. The endpoint and first projection therefore give $P:\\mathcal C\\to\\mathcal D$ and $a:\\mathrm{id}_{\\mathcal C}\\to iP$. The last sentence of Step 1 supplies the universal precomposition equivalence for every $a_x$. The whole lift is simplicial, so $P$ and $a$ already contain all their naturality parameters. The supplied witnesses were used only to show that the vertices of $t$ lie in $Z$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-cocartesian-arrow-projection",
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02FD",
+    "place": "Lemma 6.2.2.23, assembly step, expanded via the trivial Kan fibration in the cocartesian dual of Proposition 5.2.1.3 (01VK)."
+   }
+  },
+  {
+   "text": "Restrict $a$ to $\\mathcal D$. For $d\\in\\mathcal D$, fullness identifies the universal map with precomposition $\\operatorname{Map}_{\\mathcal D}(Pi(d),z)\\to\\operatorname{Map}_{\\mathcal D}(d,z)$ for every $z\\in\\mathcal D$. At $z=d$, its surjectivity on components gives $b_d:Pi(d)\\to d$ with $b_d a_{i(d)}\\simeq1_d$. At $z=Pi(d)$, injectivity on components, applied after precomposition with $a_{i(d)}$, gives $a_{i(d)}b_d\\simeq1_{Pi(d)}$. The inverse criterion in [lem-coef-infinity-mapping-composition] makes $a_{i(d)}$ an equivalence. The restriction of $a$ is an edge $a_D:\\mathrm{id}_{\\mathcal D}\\to Pi$ in $\\operatorname{Fun}(\\mathcal D,\\mathcal D)$: its simplices lie there because all their vertices lie in the full subcategory $\\mathcal D$. The componentwise criterion in [lem-cbc-enhanced-functor-cone-calculus] makes this edge an equivalence. Choose its inverse $b:Pi\\to\\mathrm{id}_{\\mathcal D}$ in that functor quasicategory, with both inverse homotopies. In particular $i b\\circ a i\\simeq1_i$ is a homotopy of coherent transformations, giving the first triangle.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02FE",
+    "place": "Proposition 6.2.2.24, reflection arrows on the full subcategory are equivalences; counit obtained as a coherent inverse."
+   }
+  },
+  {
+   "text": "Naturality of $a$ at $a_x$ gives $(iP(a_x))a_x\\simeq a_{iP(x)}a_x$. Both right-hand factors after $a_x$ have target $iPiP(x)$ in $i(\\mathcal D)$. The injectivity on components of the universal precomposition equivalence for $a_x$ therefore gives $iP(a_x)\\simeq a_{iP(x)}$. The latter is an equivalence by Step 3; fullness and the inverse criterion for component classes show that $P(a_x)$ is an equivalence in $\\mathcal D$. Consequently $Pa:P\\to PiP$ is an equivalence in $\\operatorname{Fun}(\\mathcal C,\\mathcal D)$ by the componentwise criterion. Also $bP$ is an equivalence, since its inverse and inverse homotopies are obtained by precomposing the inverse data for $b$ with $P$. Thus the composite $\\beta=bP\\circ Pa$ is invertible in the homotopy category of $\\operatorname{Fun}(\\mathcal C,\\mathcal D)$. This step only uses objectwise cancellation to prove invertibility; the coherent equality $\\beta\\simeq1_P$ is proved in Step 5.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02FE",
+    "place": "Proposition 6.2.2.24, proof of (2) implies (3): naturality at the unit edge makes P(a_x) an equivalence."
+   }
+  },
+  {
+   "text": "Do the following calculation in the homotopy categories of the full functor quasicategories; juxtaposition of transformations means vertical composition, with the rightmost applied first. Whiskering is restriction or postcomposition of the internal functor simplicial sets. The spine calculus [lem-cbc-simplicial-composition-spine] supplies composition and its homotopies. The interchange equalities used below come from the two triangles of an evaluation square: for transformations $r:F\\to G$ and $s:H\\to J$, evaluate $s$ on $r$ as a map with two $\\Delta^1$ factors; the two routes around that square have the same diagonal composite. This is an equality in the homotopy category of the entire functor object, retaining its diagram parameter. Applying it to $Pa$ and $b$, to $b$ and itself, and to $a$ and itself (then applying $P$) gives, respectively,\n$$Pa\\,bP=bPiP\\,PiPa,\\qquad bP\\,bPiP=bP\\,Pi bP,\\qquad PiPa\\,Pa=Pa iP\\,Pa.$$\nTherefore\n$$\\begin{aligned}\n\\beta^2&=bP\\,Pa\\,bP\\,Pa\\\\\n&=bP\\,bPiP\\,PiPa\\,Pa\\\\\n&=bP\\,Pi bP\\,Pa iP\\,Pa\\\\\n&=bP\\,P(i bP\\,a iP)\\,Pa\\\\\n&=bP\\,Pa=\\beta.\n\\end{aligned}$$\nThe penultimate equality uses the first triangle from Step 3 whiskered by $P$ on both sides. Since $\\beta$ is invertible by Step 4, $\\beta^2=\\beta$ implies $\\beta=1_P$. An equality of these morphism classes is a path between the corresponding vertices in the mapping Kan complex of $\\operatorname{Fun}(\\mathcal C,\\mathcal D)$, so this is the required coherent second triangle homotopy. This explicitly proves both triangles without inferring natural homotopy from pointwise homotopy.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-simplicial-composition-spine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02DK",
+    "place": "Proposition 6.1.4.6 (02DK), proof via the invertible idempotent triangle defect, expanded as a whiskering calculation."
+   }
+  },
+  {
+   "text": "For the dual assertion apply Steps 1--5 to $i^{\\mathrm{op}}:\\mathcal D^{\\mathrm{op}}\\hookrightarrow\\mathcal C^{\\mathrm{op}}$. Explicitly reversal keeps the $n$-simplices and replaces every simplicial operator $\\gamma:[m]\\to[n]$ by $\\rho_n\\gamma\\rho_m$, where $\\rho_j(t)=j-t$. This exchanges inner horns with inner horns and reverses every edge. The arrow-space comparison [lem-coef-infinity-pinch-comparison] identifies the given mapping spaces with the arrow mapping spaces $U$. Reversing the interval identifies $U_{\\mathcal C^{\\mathrm{op}}}(x,y)$ with $U_{\\mathcal C}(y,x)^{\\mathrm{op}}$; reversing the barycentric coordinates identifies the realizations of a simplicial set and its opposite. Thus weak equivalences are preserved. Reversal of the composition triangles in [lem-coef-infinity-mapping-composition] exchanges postcomposition by $v_x$ with precomposition by $v_x^{\\mathrm{op}}$. The dual hypotheses are consequently precisely those of the reflective construction in the opposite categories. It gives $P':\\mathcal C^{\\mathrm{op}}\\to\\mathcal D^{\\mathrm{op}}$ with unit $a'$ and counit $b'$. Reversing back yields $B=(P')^{\\mathrm{op}}$, $c=(a')^{\\mathrm{op}}:iB\\to\\mathrm{id}_{\\mathcal C}$ and $e=(b')^{\\mathrm{op}}:\\mathrm{id}_{\\mathcal D}\\to Bi$. The triangle homotopies reverse to $c i\\circ i e\\simeq1_i$ and $Bc\\circ eB\\simeq1_B$ in the full functor quasicategories; the same mapping-space comparison gives the required postcomposition property for every $c_x$. No compatibility among the original witnesses is needed in either construction.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02FD",
+    "place": "Opposite-category dual of Lemma 6.2.2.23 and Proposition 6.2.2.24; mapping-model comparison from Kerodon 01L5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-cocartesian-arrow-projection",
+  "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-composition-spine",
+  "lem-coef-infinity-pinch-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, coherent derived coefficient adjunction; foundation expanded using online Kerodon 02FD, 02FE, 01VK and the explicit invertible-idempotent calculation of 02DK. These references are not archived locally; WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -67,10 +163,38 @@
    "results": "{\"t\": \"2026-10-16T22:31:08Z\", \"tool\": \"leanfinder\", \"query\": \"Pointwise universal morphisms into a full sub-quasicategory can be chosen as a natural unit of a reflector\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.coskAdj.reflective\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.nerve.instReflectiveTruncatedOfNatNatCatNerveFunctor₂\", \"CategoryTheory.SimplicialObject.Truncated.coskAdj.reflective\", \"CategoryTheory.SimplicialObject.Truncated.cosk.fullyFaithful\", \"SSet.Truncated.skAdj.coreflective\", \"SSet.Truncated.sk_coreflective\", \"CategoryTheory.SimplicialObject.Truncated.sk_coreflective\"], \"digest\": \"5c5c886ad234523f\"}",
    "date": "2026-10-16",
    "verdict": "No match: the coskeleton and nerve reflective instances are ordinary categorical adjunctions between categories of simplicial objects, not pointwise universal-arrow assembly inside an arbitrary quasicategory."
+  },
+  {
+   "tool": "grep",
+   "query": "reflective|coreflective|reflection|adjunction",
+   "results": "{\"t\": \"2026-10-17T00:34:43Z\", \"tool\": \"grep\", \"query\": \"reflective|coreflective|reflection|adjunction\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Reflective assumes an ordinary categorical adjunction, while the nerve and coskeleton hits give specific ordinary adjunctions. None assembles objectwise universal arrows into a coherent quasicategorical adjunction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A full infinity subcategory admitting a reflection of each object has a coherent left adjoint to its inclusion",
+   "results": "{\"t\": \"2026-10-17T00:34:43Z\", \"tool\": \"leansearch\", \"query\": \"A full infinity subcategory admitting a reflection of each object has a coherent left adjoint to its inclusion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsLeftAdjointReflector\", \"CategoryTheory.OrthogonalReflection.isRightAdjoint_ι\", \"CategoryTheory.Coreflective.rec\", \"CategoryTheory.Coreflective.R\", \"CategoryTheory.Reflective.toFull\", \"CategoryTheory.reflectorAdjunction\", \"CategoryTheory.reflector\", \"CategoryTheory.Reflective.adj\"], \"digest\": \"83dcd16b6a874a1f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Reflective assumes an ordinary categorical adjunction, while the nerve and coskeleton hits give specific ordinary adjunctions. None assembles objectwise universal arrows into a coherent quasicategorical adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Reflective\"",
+   "results": "{\"t\": \"2026-10-17T00:34:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"Reflective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Coreflective\", \"CategoryTheory.Reflective\", \"CategoryTheory.Coreflective.R\", \"CategoryTheory.Reflective.L\", \"CategoryTheory.instIsLeftAdjointOfCoreflective\", \"CategoryTheory.instIsRightAdjointOfReflective\", \"CategoryTheory.Coreflective.toFaithful\", \"CategoryTheory.Coreflective.toFull\"], \"digest\": \"444cdeb49ba3de19\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Reflective assumes an ordinary categorical adjunction, while the nerve and coskeleton hits give specific ordinary adjunctions. None assembles objectwise universal arrows into a coherent quasicategorical adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pointwise universal arrows to a full subcategory of a quasicategory assemble to a reflection functor and a coherent adjunction",
+   "results": "{\"t\": \"2026-10-17T00:34:48Z\", \"tool\": \"leanfinder\", \"query\": \"Pointwise universal arrows to a full subcategory of a quasicategory assemble to a reflection functor and a coherent adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"CategoryTheory.nerve.instReflectiveTruncatedOfNatNatCatNerveFunctor₂\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"SSet.Truncated.coskAdj.reflective\", \"CategoryTheory.SimplicialObject.Truncated.coskAdj.reflective\", \"SSet.Truncated.skAdj.coreflective\", \"CategoryTheory.OrthogonalReflection.isRightAdjoint_ι\"], \"digest\": \"3bc7c4c9977ae07a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Reflective assumes an ordinary categorical adjunction, while the nerve and coskeleton hits give specific ordinary adjunctions. None assembles objectwise universal arrows into a coherent quasicategorical adjunction."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-bicartesian-interval-adjunction",
@@ -78,5 +202,39 @@
   "group": "NB"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-reflection-assembly",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Replaced the earlier overlapping interval-transport node with the horn-level trivial-Kan cocartesian-arrow projection, which applies even to an inner fibration with only some liftable base/source pairs. Assembled a simplicial unit by lifting the entire source diagram, inverted its restriction coherently, proved Pa invertible, and wrote the triangle-defect idempotence calculation inside homotopy categories of full functor quasicategories. Expanded the opposite-model comparison for the coreflective assertion. One statement-only foundational node, no Mathlib leaves or Lean work.",
+  "blueprint": "Realizes paragraph 2 of prop-coef-integral-exceptional-adjoint.proof.md: the derived adjunction computation and its specified coherent units/counits and triangle identities, through the existing ancestry of local universal arrows. No change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic quasicategory closure and componentwise detection of natural equivalences; used to invert a_D and detect Pa, not to replace any geometric unit step."
+   },
+   {
+    "node": "lem-cbc-simplicial-composition-spine",
+    "why": "Generic coherent composition of transformations; used for the evaluation-square and whiskering identities in the triangle calculation."
+   },
+   {
+    "node": "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "why": "Generic extension property of trivial Kan fibrations along degreewise injections; used with the empty simplicial subset to lift the whole source diagram."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-composition-spine",
+  "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N0-d974f957d",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-d974f957d (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-infinity-cocartesian-arrow-projection, all nine cited statements, the parent's citing step, and paragraph 2 of the ancestor prop-coef-integral-exceptional-adjoint in main-20261015. The item statement is unchanged and matches Kerodon 02FD/02FE and their coreflective dual. The new node is true: it is the dual of Kerodon 01VK. The Z restriction is necessary (the {0}⊂Δ¹ case shows why) and is present. It is statement-only, self-contained, has all three search kinds, and its blueprint ancestry is correct. Step 1: E⊂C×Δ¹ is a quasicategory with an inner fibration to Δ¹. I checked both test fibers in the cocartesian mapping criterion; in fiber 0 both sides are empty, so the map is ∅→∅. Step 2: the lift along ∅⊂C via the trivial-Kan leaf gives a coherent P and a. Step 3: inverting a on D gives the first triangle. Step 4: Pa and bP are invertible by cancellation into D. Step 5: I type-checked the three interchange identities and the idempotence calculation; an invertible idempotent is 1, so the second triangle holds in Fun(C,D). Step 6: the dual goes through opposites via the pinch/U comparison, with correct triangle orientations. A BFS over the 146 dependencies shows no cycle. Citing pointwise-cocartesian-transport would close an 8-node cycle back to the item, so the new lower node is justified. No duplicate exists. I accept the tool uses of lem-cbc-enhanced-functor-cone-calculus and lem-cbc-simplicial-composition-spine as generic black boxes; the trivial-Kan lemma is a Mathlib leaf. No SGA is used; the Kerodon sources are WANTED and proof_origin is agent. The new node has no lean_audit field, which I did not treat as a fault since 123 of 1647 nodes created since 2026-10-16 also lack it. No fixes."
+ }
 }

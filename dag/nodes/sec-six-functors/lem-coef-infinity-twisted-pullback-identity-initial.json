@@ -30,9 +30,91 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-pushout-join-saturation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the unique map $p:P_x\\to\\Delta^0$, the inner-fibration lifting condition is exactly the inner-horn filling condition of the assumed quasicategory $P_x$. Apply [lem-coef-infinity-relative-initial-boundary]. Its $p$-initiality condition is precisely initiality in this item: the mapping simplicial set between the unique vertex of $\\Delta^0$ and itself has exactly one simplex in each degree, so a mapping-space map to it is a weak homotopy equivalence exactly when its source is weakly contractible, as defined in [def-cbc-enhanced-diagrams-cones]. Thus it suffices, for every $n>0$, to extend each $a:\\partial\\Delta^n\\to P_x$ with $a(0)=f$ to $\\Delta^n\\to P_x$.",
+   "uses": [
+    "lem-coef-infinity-relative-initial-boundary",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03JW",
+    "place": "Proposition 8.1.2.1, boundary-filling reduction (there cited as Proposition 4.7.3.11); the existing dependency states this criterion in the relative form of Corollary 7.1.5.17 (Kerodon 02WS), specialized here to the map to a point."
+   }
+  },
+  {
+   "text": "Use $V_n$ and the basic-face union $K_0$ of [lem-coef-infinity-twisted-pullback-boundary-filtration]. Number the vertices of $[n]^{\\mathrm{op}}\\star[n]$ by $0,\\ldots,2n+1$: the first copy of $j\\in[n]$ has position $n-j$ and the second has position $n+1+j$. Its nerve is therefore $\\Delta^{2n+1}$, by the nerve and join formulas in [def-cbc-enhanced-diagrams-cones] and [lem-coef-infinity-pushout-join-saturation]. The face of $\\partial\\Delta^n$ omitting $j$ gives a map on the face omitting the pair $\\{n-j,n+1+j\\}$. These are exactly the maximal faces of basic type (b). The fixed-source requirement gives the constant map at $x$ on the face $\\{0,\\ldots,n\\}$, of basic type (a). All these maps agree on intersections: intersections of boundary faces are their common simplicial restrictions, and intersections with the first block are constant at $x$. Degreewise gluing thus gives $\\theta_0:K_0\\to\\mathcal C$. Its edge $\\{n,n+1\\}$ is $f$, since it corresponds to the vertex $0$ of the boundary. This edge belongs to $K_0$ even when $n=1$, since it omits the pair $\\{0,2n+1\\}$.",
+   "uses": [
+    "lem-coef-infinity-twisted-pullback-boundary-filtration",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pushout-join-saturation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03JW",
+    "place": "Proposition 8.1.2.1, basic subsets and identification of the boundary data with a map on K_0."
+   }
+  },
+  {
+   "text": "Take the list $S_1,\\ldots,S_m$ and unions $K_q$ provided by [lem-coef-infinity-twisted-pullback-boundary-filtration]. The map is already defined on $K_0$. At stage $q$ set $i=\\operatorname{pr}(S_q)$ and write $S_q=\\{j_0<\\cdots<j_d\\}$ with $i=j_k$. The cited intersection equality says that the restriction of the existing map to the new face is prescribed exactly on $\\Lambda_k^d$. Hence a filler for this horn extends the map to $K_q$: in each simplicial degree glue the two functions on $K_{q-1}$ and $\\Delta^{S_q}$ along their equal restrictions. The resulting functions commute with restriction operators because each of the two functions does. This supplies the gluing directly, with no separate pushout theorem.",
+   "uses": [
+    "lem-coef-infinity-twisted-pullback-boundary-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03JW",
+    "place": "Proposition 8.1.2.1, priority ordering, horn intersection and union extension."
+   }
+  },
+  {
+   "text": "The definition in [lem-coef-infinity-twisted-pullback-boundary-filtration] implies that a nonbasic $S_q$ meets each of the $n+1$ disjoint pairs, and prioritized means that it contains both $i$ and $2n+1-i$ in one of these pairs. Thus $|S_q|\\geq n+2$ and $d\\geq2$. Also $2n+1-i>i$ belongs to $S_q$, so $k<d$. If $0<k<d$, fill the horn using the quasicategory condition of [def-cbc-enhanced-diagrams-cones]. If $k=0$ and $i<n$, maximality of $i$ implies $2n-i\\notin S_q$. Since the pair $\\{i+1,2n-i\\}$ must be met, $i+1\\in S_q$; these are the first two vertices. Their edge lies in the first block, so its image under the already constructed map is the degenerate identity at $x$. It is an equivalence, witnessed by the constant two-simplices. If $k=0$ and $i=n$, the first two vertices are $n,n+1$, and the edge is the prescribed equivalence $f$. In each $k=0$ case apply [lem-cbc-equivalence-outer-horn-filling], whose dimension requirement $d\\geq2$ has just been checked. All possibilities have now been covered, and Step 3 glues each filler to an extension on $K_q$.",
+   "uses": [
+    "lem-coef-infinity-twisted-pullback-boundary-filtration",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-equivalence-outer-horn-filling"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03JW",
+    "place": "Proposition 8.1.2.1, inner-horn case, exclusion of the final horn, and the two initial-horn cases."
+   }
+  },
+  {
+   "text": "Induct over $q=1,\\ldots,m$, keeping the restriction to every previous union fixed. By [lem-coef-infinity-twisted-pullback-boundary-filtration], $K_m=\\Delta^{2n+1}$, so this produces $\\theta:\\Delta^{2n+1}\\to\\mathcal C$ extending $\\theta_0$. Its first block is still constant at $x$, being contained in $K_0$. It therefore defines an $n$-simplex of $P_x$, and its face omitting $j$ is the original boundary face by the paired-deletion identification of Step 2. Thus it extends $a$ as a simplicial map. The criterion applied in Step 1 proves that $f$ is initial, equivalently that every $\\operatorname{Map}_{P_x}(f,g)$ is weakly contractible.",
+   "uses": [
+    "lem-coef-infinity-twisted-pullback-boundary-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03JW",
+    "place": "Proposition 8.1.2.1, conclusion of the finite compatible extension argument."
+   }
+  },
+  {
+   "text": "For the last clause take $f$ to be the degenerate identity at $x$. Its inverse is itself, and the two inverse triangles are constant two-simplices. Thus it is an equivalence by [def-cbc-enhanced-diagrams-cones], so the result already proved applies.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03JW",
+    "place": "Proposition 8.1.2.1, specialization to the identity edge."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-equivalence-outer-horn-filling",
+  "lem-coef-infinity-pushout-join-saturation",
+  "lem-coef-infinity-relative-initial-boundary",
+  "lem-coef-infinity-twisted-pullback-boundary-filtration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/03JW",
+  "place": "Proposition 8.1.2.1, full proof read online; archival copy WANTED. The boundary identification, dimension check and degreewise gluing are expanded explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -68,10 +150,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SimplexCategory.Truncated.initial_inclusion\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Truncated\", \"type\": \"∀ {n : ℕ} [NeZero n], (SimplexCategory.Truncated.inclusion n).Initial\", \"doc\": \"For any non-zero natural number $ n $, the inclusion functor from the truncated simplex category $ \\\\Delta_{\\\\leq n} $ (consisting of objects $[k]$ for $ k \\\\leq n $) to the full simplex category $ \\\\Delt\"}\n  {\"name\": \"SSet.instFiniteInitial\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/FiniteColimits\", \"type\": \"(⊥_ SSet).Finite\", \"doc\": \"The initial object in the category of simplicial sets is a finite simplicial set. This follows because the initial object is constructed as the colimit of the empty diagram, and the empty type (which \"}\n  {\"name\": \"AugmentedSimplexCategory.instHasInitial\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Basic\", \"type\": \"CategoryTheory.Limits.HasInitial AugmentedSimplexCategory\", \"doc\": \"The augmented simplex category, obtained by adjoining an initial object $[-1]$ to the simplex category $\\\\Delta$, has $[-1]$ as its initial object. This means there exists a unique morphism from $[-1]$\"}\n  {\"name\": \"SSet.horn_obj_zero\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Horn\", \"type\": \"∀ (n : ℕ) (i : Fin (n + 3)), (SSet.horn (n + 2) i).obj (Opposite.op (SimplexCategory.mk 0)) = ⊤\", \"doc\": \"For any natural number $n$ and any $i \\\\in \\\\mathrm{Fin}(n + 3)$, evaluating the $(n + 2)$-dimensional horn with the $i$-th face removed at the $0$-simplex in the opposite category yields the entire set\"}\n  {\"name\": \"SimplexCategory.Truncated.initial_incl\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Truncated\", \"type\": \"∀ {n m : ℕ} [NeZero n] (hm : n ≤ m), (SimplexCategory.Truncated.incl n m hm).Initial\", \"doc\": \"For natural numbers $n$ and $m$ with $n \\\\leq m$, the canonical inclusion functor from the truncated simplex category $\\\\Delta_{\\\\leq n}$ to $\\\\Delta_{\\\\leq m}$ is initial. This means that for every object\"}\n  {\"name\": \"CategoryTheory.SimplicialThickening.SimplicialCategory.id\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialNerve\", \"type\": \"{J : Type u_1} →\\n  [inst : LinearOrder J] →\\n    (i : CategoryTheory.SimplicialThickening J) →\\n      CategoryTheory.MonoidalCategoryStruct.tensorUnit SSet ⟶\\n        CategoryTheory.SimplicialThickening.SimplicialCategory.Hom i i\", \"doc\": \"For a linearly ordered set $ J $, the identity morphism for an object $ i $ in the simplicial thickening category is the constant natural transformation from the identity functor on simplicial sets to\"}\n  {\"name\": \"SSet.Subcomplex.isInitialBot\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Subcomplex\", \"type\": \"{X : SSet} → CategoryTheory.Limits.IsInitial ⊥.toSSet\", \"doc\": \"The trivial subcomplex (the bottom element $\\\\bot$ in the lattice of subcomplexes of a simplicial set $X$) is the initial object in the category of simplicial sets. This means there exists a unique mor\"}\n  {\"name\": \"SSet.ι₀_fst\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Monoidal\", \"type\": \"∀ (X : SSet),\\n  CategoryTheory.CategoryStruct.comp SSet.ι₀\\n      (CategoryTheory.SemiCartesianMonoidalCategory.fst X (SSet.stdSimplex.obj (SimplexCategory.mk 1))) =\\n    CategoryTheory.CategoryStruct.id X\", \"doc\": \"For any simplicial set $X$, the composition of the natural transformation $\\\\iota_0 : X \\\\to X \\\\times \\\\Delta[1]$ (left inclusion into the product with the standard 1-simplex) with the projection morphis\"}",
    "date": "2026-10-17",
    "verdict": "no match: inspected all returned signatures. The initial-object results are for ordinary structured-arrow categories, ordinary initial functors, or the initial simplicial set. None addresses the fixed-source edgewise-subdivision quasicategory. The focused source grep found no twisted-arrow or one-sided-fibration declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence arrow is initial in the fixed source fiber of the twisted arrow infinity category",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SimplexCategory.Truncated.initial_inclusion\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Truncated\", \"type\": \"∀ {n : ℕ} [NeZero n], (SimplexCategory.Truncated.inclusion n).Initial\", \"doc\": \"For any non-zero natural number $ n $, the inclusion functor from the truncated simplex category $ \\\\Delta_{\\\\leq n} $ (consisting of objects $[k]$ for $ k \\\\leq n $) to the full simplex category $ \\\\Delt\"}\n  {\"name\": \"CategoryTheory.StructuredArrow.mkIdInitial\", \"module\": \"Mathlib/CategoryTheory/Comma/StructuredArrow/Basic\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {Y : C} →\\n          {T : CategoryTheory.Functor C D} →\\n            [T.Full] →\\n              [T.Faithful] →\\n                CategoryTheory.Limits.IsInitial\", \"doc\": \"Given a full and faithful functor $ T : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and an object $ Y \\\\in \\\\mathcal{C} $, the object $ (Y, \\\\text{id}_{T(Y)}) $ in the structured arrow category $ \\\\text{StructuredArrow\"}\n  {\"name\": \"SimplexCategory.Truncated.initial_incl\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Truncated\", \"type\": \"∀ {n m : ℕ} [NeZero n] (hm : n ≤ m), (SimplexCategory.Truncated.incl n m hm).Initial\", \"doc\": \"For natural numbers $n$ and $m$ with $n \\\\leq m$, the canonical inclusion functor from the truncated simplex category $\\\\Delta_{\\\\leq n}$ to $\\\\Delta_{\\\\leq m}$ is initial. This means that for every object\"}\n  {\"name\": \"CategoryTheory.Under.mkIdInitial\", \"module\": \"Mathlib/CategoryTheory/Comma/Over/Basic\", \"type\": \"{T : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} T] →\\n    {X : T} → CategoryTheory.Limits.IsInitial (CategoryTheory.Under.mk (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"For any object $ X $ in a category $ \\\\mathcal{T} $, the object $ (X, \\\\text{id}_X) $ in the under category $ \\\\mathcal{T} \\\\downarrow X $ is initial. This means that for every object $ (Y, f: X \\\\to Y) $ \"}\n  {\"name\": \"CategoryTheory.Functor.initial_of_equivalence_comp\", \"module\": \"Mathlib/CategoryTheory/Limits/Final\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {E : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} E] (F : CategoryTheory.Functor C D)\\n  (G : CategoryTheory.Functor D E) [F.IsEquivalence] [(F.comp G).Initial], G.Initial\", \"doc\": \"If $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is an equivalence of categories and the composition $ F \\\\circ G : \\\\mathcal{C} \\\\to \\\\mathcal{E} $ is an initial functor, then $ G : \\\\mathcal{D} \\\\to \\\\mathcal{E} $ i\"}\n  {\"name\": \"CategoryTheory.TwoSquare.instInitialStructuredArrowObjStructuredArrowDownwardsOfGuitartExact\", \"module\": \"Mathlib/CategoryTheory/GuitartExact/Basic\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} {C₃ : Type u₃} {C₄ : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] [inst_2 : CategoryTheory.Category.{v₃, u₃} C₃]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} C₄] {T : CategoryTheory.Functor C₁ C₂} {L : Category\", \"doc\": \"Given a Guitart exact two-square diagram $ w $ and an object $ X_2 $ in category $ \\\\mathcal{C}_2 $, the downward structured arrow functor $ w.\\\\text{structuredArrowDownwards}(X_2) $ is initial. This me\"}\n  {\"name\": \"CategoryTheory.leftAdjointOfStructuredArrowInitialsAux\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Comma\", \"type\": \"{C : Type u₁} →\\n  {D : Type u₂} →\\n    [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        (G : CategoryTheory.Functor D C) →\\n          [inst_2 : ∀ (A : C), CategoryTheory.Limits.HasInitial (CategoryTheory.StructuredArrow A G)] →\\n            (A \", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a functor $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$, and objects $A \\\\in \\\\mathcal{C}$, $B \\\\in \\\\mathcal{D}$, there is a natural equivalence between the set of mor\"}\n  {\"name\": \"CategoryTheory.CostructuredArrow.initial_pre\", \"module\": \"Mathlib/CategoryTheory/Limits/Final\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {E : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} E] (T : CategoryTheory.Functor C D) [T.Initial]\\n  (S : CategoryTheory.Functor D E) (X : E), (CategoryTheory.CostructuredA\", \"doc\": \"If $ T : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is an initial functor and $ S : \\\\mathcal{D} \\\\to \\\\mathcal{E} $ is any functor, then the precomposition functor $ (T \\\\circ S \\\\downarrow X) \\\\to (S \\\\downarrow X) $ i\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern ordinary structured/under categories, ordinary initial functors, inner-horn filling, or the empty simplicial set. Their signatures do not concern this fixed-source twisted-arrow quasicategory. Source grep returned only fixed-source path induction; no twisted-arrow or edgewise declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TwistedArrow\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern ordinary structured/under categories, ordinary initial functors, inner-horn filling, or the empty simplicial set. Their signatures do not concern this fixed-source twisted-arrow quasicategory. Source grep returned only fixed-source path induction; no twisted-arrow or edgewise declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "twisted.?arrow|edgewise|fixed.?source",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/PathCategory/Basic.lean\", \"line\": \"62\", \"text\": \"lemma induction_fixed_source {a : Paths V} (P : ∀ {b : Paths V}, (a ⟶ b) → Prop)\"}\n  {\"file\": \"Mathlib/CategoryTheory/PathCategory/Basic.lean\", \"line\": \"97\", \"text\": \"  fun {_} ↦ induction_fixed_source _ id comp\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern ordinary structured/under categories, ordinary initial functors, inner-horn filling, or the empty simplicial set. Their signatures do not concern this fixed-source twisted-arrow quasicategory. Source grep returned only fixed-source path induction; no twisted-arrow or edgewise declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every equivalence is an initial object in the fixed source twisted arrow quasicategory",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Equivalence.hasInitial_iff\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Equivalence\", \"type\": \"(e : C ≌ D) : HasInitial C ↔ HasInitial D\", \"doc\": \"Given an equivalence $ e : C \\\\simeq D $ between categories $ C $ and $ D $, the category $ C $ has an initial object if and only if $ D $ has an initial object.\"}\n  {\"name\": \"CategoryTheory.hasInitial_of_equivalence\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Equivalence\", \"type\": \"(e : D ⥤ C) [e.IsEquivalence] [HasInitial C] : HasInitial D\", \"doc\": \"If a category $\\\\mathcal{C}$ has an initial object and there exists an equivalence of categories $e : \\\\mathcal{D} \\\\to \\\\mathcal{C}$, then $\\\\mathcal{D}$ also has an initial object.\"}\n  {\"name\": \"CategoryTheory.Functor.initial_comp_equivalence\", \"module\": \"Mathlib.CategoryTheory.Limits.Final\", \"type\": \"[Initial F] [IsEquivalence G] : Initial (F ⋙ G)\", \"doc\": \"If $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is an initial functor and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{E} $ is an equivalence of categories, then the composition $ G \\\\circ F $ is an initial functor from $ \\\\m\"}\n  {\"name\": \"CategoryTheory.Functor.initial_iff_equivalence_comp\", \"module\": \"Mathlib.CategoryTheory.Limits.Final\", \"type\": \"[IsEquivalence F] : Initial G ↔ Initial (F ⋙ G)\", \"doc\": \"Let $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ be an equivalence of categories. Then a functor $ G : \\\\mathcal{D} \\\\to \\\\mathcal{E} $ is initial if and only if the composite functor $ G \\\\circ F : \\\\mathcal{C} \\\\t\"}\n  {\"name\": \"CategoryTheory.Functor.initial_iff_comp_equivalence\", \"module\": \"Mathlib.CategoryTheory.Limits.Final\", \"type\": \"[IsEquivalence G] : Initial F ↔ Initial (F ⋙ G)\", \"doc\": \"If $ G : \\\\mathcal{D} \\\\to \\\\mathcal{E} $ is an equivalence of categories, then a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is initial if and only if the composition $ G \\\\circ F : \\\\mathcal{C} \\\\to \\\\math\"}\n  {\"name\": \"CategoryTheory.Limits.Cocone.isColimitEquivIsInitial\", \"module\": \"Mathlib.CategoryTheory.Limits.ConeCategory\", \"type\": \"{F : J ⥤ C} (c : Cocone F) : IsColimit c ≃ IsInitial c\", \"doc\": \"For any diagram $ F : \\\\mathcal{J} \\\\to \\\\mathcal{C} $, a cocone $ c $ over $ F $ is a colimit if and only if it is an initial object in the category of cocones for $ F $. This establishes the universal \"}\n  {\"name\": \"CategoryTheory.Functor.initial_of_equivalence_comp\", \"module\": \"Mathlib.CategoryTheory.Limits.Final\", \"type\": \"[IsEquivalence F] [Initial (F ⋙ G)] : Initial G\", \"doc\": \"If $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is an equivalence of categories and the composition $ F \\\\circ G : \\\\mathcal{C} \\\\to \\\\mathcal{E} $ is an initial functor, then $ G : \\\\mathcal{D} \\\\to \\\\mathcal{E} $ i\"}\n  {\"name\": \"CategoryTheory.Limits.isInitialEquivUnique\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.IsTerminal\", \"type\": \"(F : Discrete.{0} PEmpty.{1} ⥤ C) (X : C) :\\n  IsColimit (⟨X, ⟨by cat_disch, by simp⟩⟩ : Cocone F) ≃ ∀ Y : C, Unique (X ⟶ Y)\", \"doc\": \"An object $X$ in a category $\\\\mathcal{C}$ is initial (i.e., the colimit of the diagram from the discrete category over the empty type) if and only if for every object $Y$ in $\\\\mathcal{C}$, there exist\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern ordinary structured/under categories, ordinary initial functors, inner-horn filling, or the empty simplicial set. Their signatures do not concern this fixed-source twisted-arrow quasicategory. Source grep returned only fixed-source path induction; no twisted-arrow or edgewise declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasicategory identity arrow is initial in the simplicial set of joins with constant first block",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.Quasicategory.hornFilling\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic\", \"type\": \"∀ {S : SSet} [S.Quasicategory] ⦃n : ℕ⦄ ⦃i : Fin (n + 1)⦄,\\n  0 < i →\\n    i < Fin.last n →\\n      ∀ (σ₀ : (SSet.horn n i).toSSet ⟶ S), ∃ σ, σ₀ = CategoryTheory.CategoryStruct.comp (SSet.horn n i).ι σ\", \"doc\": \"For any quasicategory $ S $ and for any inner horn $ \\\\Lambda^i[n] $ (where $ 0 < i < n $), every morphism $ \\\\sigma_0 : \\\\Lambda^i[n] \\\\to S $ admits an extension $ \\\\sigma : \\\\Delta[n] \\\\to S $ such that $\"}\n  {\"name\": \"SSet.Subcomplex.isInitialBot\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Subcomplex\", \"type\": \"{X : SSet} → CategoryTheory.Limits.IsInitial ⊥.toSSet\", \"doc\": \"The trivial subcomplex (the bottom element $\\\\bot$ in the lattice of subcomplexes of a simplicial set $X$) is the initial object in the category of simplicial sets. This means there exists a unique mor\"}\n  {\"name\": \"SSet.Quasicategory.hornFilling'\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic\", \"type\": \"∀ {S : SSet} [self : S.Quasicategory] ⦃n : ℕ⦄ ⦃i : Fin (n + 3)⦄ (σ₀ : (SSet.horn (n + 2) i).toSSet ⟶ S),\\n  0 < i → i < Fin.last (n + 2) → ∃ σ, σ₀ = CategoryTheory.CategoryStruct.comp (SSet.horn (n + 2) i).ι σ\", \"doc\": \"In a quasi-category $ S $, for any inner horn $ \\\\Lambda^i[n+2] \\\\to S $ with $ 0 < i < n+2 $, there exists a filler $ \\\\Delta[n+2] \\\\to S $ such that the composition of the canonical inclusion $ \\\\Lambda^\"}\n  {\"name\": \"AugmentedSimplexCategory.instHasInitial\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Basic\", \"type\": \"CategoryTheory.Limits.HasInitial AugmentedSimplexCategory\", \"doc\": \"The augmented simplex category, obtained by adjoining an initial object $[-1]$ to the simplex category $\\\\Delta$, has $[-1]$ as its initial object. This means there exists a unique morphism from $[-1]$\"}\n  {\"name\": \"SSet.ι₀_fst\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Monoidal\", \"type\": \"∀ (X : SSet),\\n  CategoryTheory.CategoryStruct.comp SSet.ι₀\\n      (CategoryTheory.SemiCartesianMonoidalCategory.fst X (SSet.stdSimplex.obj (SimplexCategory.mk 1))) =\\n    CategoryTheory.CategoryStruct.id X\", \"doc\": \"For any simplicial set $X$, the composition of the natural transformation $\\\\iota_0 : X \\\\to X \\\\times \\\\Delta[1]$ (left inclusion into the product with the standard 1-simplex) with the projection morphis\"}\n  {\"name\": \"SimplexCategory.Truncated.initial_incl\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Truncated\", \"type\": \"∀ {n m : ℕ} [NeZero n] (hm : n ≤ m), (SimplexCategory.Truncated.incl n m hm).Initial\", \"doc\": \"For natural numbers $n$ and $m$ with $n \\\\leq m$, the canonical inclusion functor from the truncated simplex category $\\\\Delta_{\\\\leq n}$ to $\\\\Delta_{\\\\leq m}$ is initial. This means that for every object\"}\n  {\"name\": \"SimplexCategory.Truncated.initial_inclusion\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Truncated\", \"type\": \"∀ {n : ℕ} [NeZero n], (SimplexCategory.Truncated.inclusion n).Initial\", \"doc\": \"For any non-zero natural number $ n $, the inclusion functor from the truncated simplex category $ \\\\Delta_{\\\\leq n} $ (consisting of objects $[k]$ for $ k \\\\leq n $) to the full simplex category $ \\\\Delt\"}\n  {\"name\": \"SSet.Edge.id_edge\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CompStruct\", \"type\": \"∀ {X : SSet} (x₀ : X.obj (Opposite.op (SimplexCategory.mk 0))),\\n  (SSet.Edge.id x₀).edge = CategoryTheory.SimplicialObject.σ X 0 x₀\", \"doc\": \"For a simplicial set $X$ and a 0-simplex $x_0$, the edge corresponding to the identity edge at $x_0$ is equal to the 0th degeneracy map applied to $x_0$, i.e., $(\\\\text{id}(x_0)).\\\\text{edge} = X.\\\\sigma\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern ordinary structured/under categories, ordinary initial functors, inner-horn filling, or the empty simplicial set. Their signatures do not concern this fixed-source twisted-arrow quasicategory. Source grep returned only fixed-source path induction; no twisted-arrow or edgewise declaration."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-twisted-arrow-left-fibration",
@@ -79,5 +196,29 @@
   "group": "Q48"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-twisted-pullback-identity-initial",
+  "worker": "stage1",
+  "summary": "Realized the Kerodon 03JW proof using the existing initial-boundary criterion, the explicit paired-face encoding, one smaller combinatorial filtration lemma, and inner/equivalence outer-horn filling. Repaired the inherited draft's undefined priority and conflicting vertex labels, made every attaching horn's dimension explicit, and repeated logged Mathlib searches against the correct source root. The item statement is unchanged.",
+  "blueprint": "Proof paragraph 2, first and last derived Hom / inverse-limit comparisons: coherent mapping functors and universal arrows, below the explicit twisted-arrow and slice comparison step of lem-coef-space-transport-classification. Equivalence arrows are initial in the fixed-source twisted-arrow simplicial set.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-equivalence-outer-horn-filling",
+    "why": "Step 4 takes Joyal's generic outer-horn filling statement for Lambda^d_0 with an equivalence first edge in the quasicategory C (Kerodon 03JW cites Theorem 4.4.2.6 for exactly this); it belongs to unit sk-prop-sf-cbc, which is not on the route of sk-prop-sf-biduality-general, and no node of the biduality unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-equivalence-outer-horn-filling"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-bef7c23a8",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-bef7c23a8 (reviewer sub-agent of L); spot-checked: I read the whole item and the new node lem-coef-infinity-twisted-pullback-boundary-filtration. I checked them against Kerodon 03JW (Prop. 8.1.2.1, read online): the basic sets, pr(S) as a maximum, prioritized, and the ordering by priority then cardinality all match, as do the four horn cases. Those cases are: inner horn; k=d impossible; k=0 with i<n (identity edge); k=0 with i=n (edge f), the last two by Thm 4.4.2.6. Step 1 is correct: applied to P_x->Delta^0, relative-initial-boundary (02WS) gives weak contractibility, because Map_{Delta^0} is the point. Step 2 is correct: d_j omits the pair {n-j,n+1+j}, and the edge {n,n+1} is f, which lies in K_0 even for n=1. Step 4 is correct: d>=n+1>=2 and k<d hold, and for i<n maximality of i forces i+1 into S, so the first edge is the identity at x. My own enumeration for n=1..4, with five random tie orders each, found every attaching intersection equal to Lambda^d_k and S_m=V_n; the counts are 4/13/40/121. I found no duplicate: twisted-arrow-join-horn (H_{n,k}, 03JT) is a different subcomplex. The item statement is unchanged and nothing is weakened. No SGA source is used. Fix: Step 4 cites lem-cbc-equivalence-outer-horn-filling, from unit sk-prop-sf-cbc, which is not on the route of sk-prop-sf-biduality-general, and the delivery had tool_uses []. I added split_report.tool_uses for it in fixes/dag/nodes/sec-six-functors/lem-coef-infinity-twisted-pullback-identity-initial.json. This is Joyal's generic outer-horn filling, the same theorem 03JW invokes, and it is already a tool of other nodes in this unit. I accept that tool use.; 1 file(s) fixed by the reviewer"
+ }
 }

@@ -25,9 +25,133 @@
  "stmt_deps": [
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First establish a rank-enlargement construction with quantified inputs: let $\\mathcal C$ be $\\nu$-accessible, choose its small generating family $G$ of $\\nu$-presentables, and let $\\tau>\\nu$ be infinite regular with $a^d<\\tau$ for $a<\\tau,d<\\nu$. Steps 2-5 prove that $\\mathcal C$ is $\\tau$-accessible and every $\\tau$-presentable object is a retract of a colimit of a $\\nu$-filtered diagram in $G$ with fewer than $\\tau$ arrows. No arbitrary colimits in $\\mathcal C$ are assumed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Auxiliary ordinary uniformization: state the intermediate claim proved in Steps 2-5; agent expansion of the sharp-rank argument of AR 2.11 and Beke--Rosicky section 3."
+   }
+  },
+  {
+   "text": "For any $X\\in\\mathcal C$, its defining accessible presentation is a small $\\nu$-filtered diagram in $G$. Apply [lem-coef-cardinal-filtered-poset-reindex] to replace its index by a small $\\nu$-filtered poset $\\Pi$ without changing its colimit cocone; write $F:\\Pi\\to\\mathcal C$ for the resulting diagram. Apply [lem-coef-sharp-filtered-poset-subsets] with $(\\alpha,\\beta,A)=(\\nu,\\tau,\\Pi)$. Its poset $B$ of $\\nu$-filtered subsets $J\\subseteq\\Pi$ of size less than $\\tau$ is small and $\\tau$-filtered, including nonemptiness, and covers $\\Pi$. Each $J$ is a full subposet, has fewer than $\\tau$ arrows (a subset of $J\\times J$), and is $\\nu$-filtered as a category: an upper bound for the fewer than $\\nu$ vertices of a diagram supplies its cocone. Every arrow of $\\Pi$ lies in some $J$, by taking an upper bound in $B$ of members containing its endpoints.",
+   "uses": [
+    "lem-coef-cardinal-filtered-poset-reindex",
+    "lem-coef-sharp-filtered-poset-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Auxiliary ordinary uniformization: filtered-poset decomposition, along AR 2.11; the existing sharp-subset node supplies the non-elementary closure argument."
+   }
+  },
+  {
+   "text": "For $J\\in B$, let $Q_J=\\operatorname{colim}_{J}F|_J$. It exists because $\\mathcal C$ admits $\\nu$-filtered colimits. Every value of $F$ is $\\tau$-presentable: each $\\tau$-filtered category is $\\nu$-filtered, so its Hom comparison is already bijective by $\\nu$-presentability. Apply [lem-coef-ordinary-small-colimit-presentable] to the diagram on $J$, which has fewer than $\\tau$ arrows, to conclude that $Q_J$ is $\\tau$-presentable.",
+   "uses": [
+    "lem-coef-ordinary-small-colimit-presentable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Auxiliary ordinary uniformization: presentability of each small restricted colimit; ordinary Hom version of the AR 2.11 argument."
+   }
+  },
+  {
+   "text": "Inclusions $J\\subseteq K$ give unique compatible maps $Q_J\\to Q_K$; uniqueness proves identities and composition. The resulting cocone $Q\\to X$ is colimiting by [def-weil-pbc-category-colimit]: a compatible family $Q_J\\to Z$ defines $F(p)\\to Z$ using a member containing $p$; a common upper bound of two members proves independence, and a member containing an arrow proves naturality. Conversely a cocone on $F$ restricts to each $J$ and induces a unique compatible family. These operations are inverse. There is a small family containing representatives of all possible $Q_J$, independent of $X$: relabel each $J$ on a cardinal $\\delta<\\tau$. The poset relations on $\\delta$ form a small set, and so do the functors into the fixed small full category on $G$ (its arrows form a small set since $G$ and every Hom set are small). The union over $\\delta<\\tau$ of these sets is small. Retain the $\\nu$-filtered diagrams and choose one colimit of each. Relabelling preserves cocones and their universal properties, so every $Q_J$ is isomorphic to one of these colimits. Replacing values by these representatives and conjugating transition arrows by their isomorphisms preserves the displayed colimit cocone. Thus every $X$ is a small $\\tau$-filtered colimit of a fixed small family of $\\tau$-presentables. Also $\\mathcal C$ admits all $\\tau$-filtered colimits, because these are $\\nu$-filtered. This proves $\\tau$-accessibility.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Auxiliary ordinary uniformization: explicit cocone gluing and small family of diagrams in a fixed small generator category, completing rank enlargement."
+   }
+  },
+  {
+   "text": "If $X=P$ is $\\tau$-presentable, the comparison $\\operatorname{colim}_{J\\in B}\\operatorname{Hom}(P,Q_J)\\to\\operatorname{Hom}(P,P)$ is bijective. Apply clause (1) of [lem-weil-pbc-filtered-colimit-sets-elementwise] to represent the preimage of $1_P$ by $s:P\\to Q_J$ for some $J$. Its image is $rs$, where $r:Q_J\\to P$ is the cocone component, so $rs=1_P$. This proves the retract assertion in Step 1. The construction in Steps 2-5 was for arbitrary $\\mathcal C,\\nu,\\tau,G$ satisfying Step 1, so it may now be instantiated at different ranks.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Auxiliary ordinary uniformization: compactness/retract argument, made explicit rather than invoking an eventual-rank node."
+   }
+  },
+  {
+   "text": "For each $s$, choose an infinite regular accessibility witness $\\nu_s$ for $\\mathcal A_s$ and its small generating family; for each $t$ choose a regular preservation witness $\\alpha_t$ for $H_t$, as in the statement's definitions. Apply [lem-coef-small-family-regular-bound] to the disjoint union of sets of cardinalities $\\nu_s,\\alpha_t$ and one additional set of cardinality $b$. It supplies an infinite regular $\\eta_0$ strictly above all these cardinals, including when both families are empty. Put $\\beta=(2^{\\eta_0})^+$. By [lem-coef-infinite-cardinal-successor-regular], $\\beta$ is infinite regular. For $a<\\beta,d<\\nu_s$, we have $a\\leq 2^{\\eta_0}$, $d\\leq\\eta_0$, and $a^d\\leq(2^{\\eta_0})^{\\eta_0}=2^{\\eta_0}<\\beta$; the equality uses infinitude of $\\eta_0$, and the inequality includes $d=0$. Apply the construction proved in Steps 1-5 to each $(\\mathcal A_s,\\nu_s,\\beta)$; every $\\mathcal A_s$ is $\\beta$-accessible. Every $\\beta$-filtered category is $\\alpha_t$-filtered, so $H_t$ preserves these colimits.",
+   "uses": [
+    "lem-coef-small-family-regular-bound",
+    "lem-coef-infinite-cardinal-successor-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Auxiliary ordinary uniformization: first common category rank above all original category and functor preservation ranks."
+   }
+  },
+  {
+   "text": "Choose small families $G_s$ of $\\beta$-presentable generators supplied by Step 6. For each $t$ and $g\\in G_{a(t)}$, present $H_t(g)$ as a small $\\beta$-filtered colimit of members of $G_{b(t)}$, indexed by $I_{t,g}$. Such a presentation exists by $\\beta$-accessibility of the target. By [lem-coef-small-family-regular-bound], applied to a set of size $\\beta$ and the set of arrows of $I_{t,g}$, choose an infinite regular $\\mu_{t,g}>\\beta,|\\operatorname{Mor}I_{t,g}|$. The objects of $G_{b(t)}$ are $\\mu_{t,g}$-presentable by the filteredness inclusion used in Step 3. Apply [lem-coef-ordinary-small-colimit-presentable] to this particular presentation; it proves that $H_t(g)$ is $\\mu_{t,g}$-presentable. Thus the presentability ranks of the images have been obtained without assuming cocompleteness or the locally-presentable object-rank lemma.",
+   "uses": [
+    "lem-coef-small-family-regular-bound",
+    "lem-coef-ordinary-small-colimit-presentable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Auxiliary ordinary uniformization: bound the images of a small generator family, as in AR 2.19; presentability of each object is derived from its own accessible presentation."
+   }
+  },
+  {
+   "text": "The set of pairs $(t,g)$ is small. Apply [lem-coef-small-family-regular-bound] to sets of cardinalities $\\mu_{t,g}$ and extra sets of cardinalities $\\beta,b$, obtaining an infinite regular $\\eta$ strictly larger than all of them. Set $\\kappa=(2^\\eta)^+$, infinite regular by [lem-coef-infinite-cardinal-successor-regular]. For $a<\\kappa,d<\\beta$, the calculation $a^d\\leq(2^\\eta)^\\eta=2^\\eta<\\kappa$ holds because $a\\leq 2^\\eta$, $d\\leq\\eta$ and $\\eta$ is infinite. Instantiate Steps 1-5 with $(\\nu,\\tau,G)=(\\beta,\\kappa,G_s)$: every $\\mathcal A_s$ is $\\kappa$-accessible, and every $\\kappa$-presentable $P\\in\\mathcal A_{a(t)}$ is a retract of some $Q=\\operatorname{colim}_JF$ where $J$ is $\\beta$-filtered with fewer than $\\kappa$ arrows and $F$ takes values in $G_{a(t)}$. The functor $H_t$ preserves this colimit by Step 6. Each $H_t(F(j))$ is $\\kappa$-presentable since $\\mu_{t,F(j)}<\\eta<\\kappa$. Apply [lem-coef-ordinary-small-colimit-presentable] in $\\mathcal A_{b(t)}$ to the colimit $H_t(Q)$; it is $\\kappa$-presentable.",
+   "uses": [
+    "lem-coef-small-family-regular-bound",
+    "lem-coef-infinite-cardinal-successor-regular",
+    "lem-coef-ordinary-small-colimit-presentable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Auxiliary ordinary uniformization: second rank choice controlling generator images, and the small-colimit calculation for the image of the retract presentation."
+   }
+  },
+  {
+   "text": "Write $s:P\\to Q,r:Q\\to P$ with $rs=1_P$. Functoriality gives $H_t(r)H_t(s)=1_{H_t(P)}$. Here is the presentability of a retract explicitly. Put $A=H_t(P),D=H_t(Q),u=H_t(s),v=H_t(r)$, so $vu=1_A$. On Hom sets put $i_Z(f)=fv$ and $p_Z(g)=gu$; then $p_Zi_Z=1$ and both maps commute with postcomposition. For any small $\\kappa$-filtered diagram with colimit $Z$, [def-weil-pbc-category-colimit] induces the corresponding splitting on colimits of Hom sets. If $c_A,c_D$ are the Hom comparison maps, naturality says $c_Di=i_Zc_A$ and $c_Ap=p_Zc_D$. The map $c_D$ is bijective by Step 8. Then $p c_D^{-1}i_Z$ is inverse to $c_A$: its right composite with $c_A$ is $p i=1$, and its left composite is $p_Zi_Z=1$. Therefore $H_t(P)$ is $\\kappa$-presentable.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Auxiliary ordinary uniformization: explicit retract comparison on Hom sets, proving strong accessibility without a new functor-eventual-rank node."
+   }
+  },
+  {
+   "text": "Take $\\lambda=\\beta$. Step 6 gives existence and preservation of all small $\\lambda$-filtered colimits. Since $\\kappa>\\eta>\\beta$, every $\\kappa$-filtered category is $\\beta$-filtered, so the same preservation applies at $\\kappa$. Step 8 gives $\\kappa$-accessibility, and Step 9 gives preservation of $\\kappa$-presentables. Also $b<\\eta<\\kappa$ and $\\lambda<\\kappa$, as required. This choice happens to make the categories $\\lambda$-accessible, but the statement requires no such additional conclusion. If $S$ is empty then $T$ is empty because its functors have specified endpoints in $S$; the two cardinal choices and all vacuous conclusions still apply.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Auxiliary ordinary uniformization: final lower and upper ranks; empty families included."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-coef-cardinal-filtered-poset-reindex",
+  "lem-coef-infinite-cardinal-successor-regular",
+  "lem-coef-ordinary-small-colimit-presentable",
+  "lem-coef-sharp-filtered-poset-subsets",
+  "lem-coef-small-family-regular-bound",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Agent-written complete simultaneous uniformization argument: Steps 1-5 prove sharp-rank enlargement and retract presentations; Steps 6-10 make two rank choices and control images of generators. Beke--Rosicky section 3 and Brooke-Taylor--Rosicky section 2 were read online during second reading; AR full text remains WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -77,10 +201,66 @@
    "results": "{\"t\": \"2026-10-16T22:22:21Z\", \"tool\": \"grep\", \"query\": \"uniformization|IsDense|isCardinalAccessible_of_isLimit\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/StrongGenerator.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Dense.lean\"], \"digest\": \"d35a88a294eca6c4\"}",
    "date": "2026-10-17",
    "verdict": "no match in installed Mathlib: hits provide individual colimit-preservation ranks and monotonicity, not simultaneous strong ranks for merely accessible categories; grep confirms no installed uniformization module."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Accessibility rank enlargement by writing filtered presentations as filtered colimits of small directed subdiagrams",
+   "results": "{\"t\": \"2026-10-17T00:01:32Z\", \"tool\": \"leanfinder\", \"query\": \"Accessibility rank enlargement by writing filtered presentations as filtered colimits of small directed subdiagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\", \"SSet.Subcomplex.Pairing.rank'_eq\", \"Acc.rank_lt_of_rel\", \"CategoryTheory.isCardinalFilteredGenerator_isCardinalPresentable\", \"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"SSet.Subcomplex.Pairing.rank'\", \"SSet.Subcomplex.Pairing.rank'_lt\", \"CategoryTheory.Functor.isCardinalAccessible_of_le\"], \"digest\": \"63f91aace80a8964\"}",
+   "date": "2026-10-17",
+   "verdict": "Second reading: no exact match in pinned Mathlib. Online Uniformization.lean hits are absent from this checkout; existing DAG nodes supply the filtered-poset reindexing, sharp-subset cover, small-colimit presentability and cardinal bounds used explicitly in the repaired proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"uniformization\"",
+   "results": "{\"t\": \"2026-10-17T00:01:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"uniformization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalAccessibleCategory.uniformization\", \"CategoryTheory.IsCardinalAccessibleCategory.uniformization_of_small\", \"CategoryTheory.IsCardinalAccessibleCategory.uniformization_aux\", \"CategoryTheory.IsCardinalAccessibleCategory.uniformization_pair\"], \"digest\": \"b2eff3c4f72b8b17\"}",
+   "date": "2026-10-17",
+   "verdict": "Second reading: no exact match in pinned Mathlib. Online Uniformization.lean hits are absent from this checkout; existing DAG nodes supply the filtered-poset reindexing, sharp-subset cover, small-colimit presentability and cardinal bounds used explicitly in the repaired proof."
+  },
+  {
+   "tool": "grep",
+   "query": "uniformization|isCardinalPresentable_of_isColimit|exists_cardinal_directed|exists_isCardinalFiltered_set_of_exists_cofinal",
+   "results": "{\"t\": \"2026-10-17T00:01:32Z\", \"tool\": \"grep\", \"query\": \"uniformization|isCardinalPresentable_of_isColimit|exists_cardinal_directed|exists_isCardinalFiltered_set_of_exists_cofinal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/Directed.lean\", \"Mathlib/CategoryTheory/Presentable/Directed.lean\", \"Mathlib/CategoryTheory/Presentable/Directed.lean\", \"Mathlib/CategoryTheory/Presentable/Directed.lean\", \"Mathlib/CategoryTheory/Presentable/Directed.lean\", \"Mathlib/CategoryTheory/Presentable/CardinalFilteredPresentation.lean\", \"Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean\", \"Mathlib/CategoryTheory/Presentable/SharplyLT/Basic.lean\"], \"digest\": \"bcbc477aa15db67e\"}",
+   "date": "2026-10-17",
+   "verdict": "Second reading: no exact match in pinned Mathlib. Online Uniformization.lean hits are absent from this checkout; existing DAG nodes supply the filtered-poset reindexing, sharp-subset cover, small-colimit presentability and cardinal bounds used explicitly in the repaired proof."
+  },
+  {
+   "tool": "grep",
+   "query": "uniformization|IsAccessibleCategory|instIsPresentableOfIsAccessibleCategory",
+   "results": "{\"t\": \"2026-10-17T00:38:02Z\", \"tool\": \"grep\", \"query\": \"uniformization|IsAccessibleCategory|instIsPresentableOfIsAccessibleCategory\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/Adjunction.lean\", \"Mathlib/CategoryTheory/Presentable/Adjunction.lean\", \"Mathlib/CategoryTheory/Presentable/Adjunction.lean\", \"Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean\", \"Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean\", \"Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean\", \"Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean\", \"Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean\"], \"digest\": \"d920d49b5972659e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match in installed Mathlib: individual accessibility witnesses and monotonicity are insufficient; online Uniformization hits are not present in the pinned installed checkout, confirmed by source reads."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous strong accessibility ranks for a small diagram of accessible categories and accessible functors",
+   "results": "{\"t\": \"2026-10-17T00:38:02Z\", \"tool\": \"leansearch\", \"query\": \"Simultaneous strong accessibility ranks for a small diagram of accessible categories and accessible functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsAccessible\", \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredColimits\", \"CategoryTheory.Functor.instIsCardinalAccessibleComp\", \"CategoryTheory.Functor.IsCardinalAccessible\", \"CategoryTheory.Functor.IsCardinalAccessible.mk\", \"CategoryTheory.Functor.IsAccessible.mk\", \"CategoryTheory.IsAccessibleCategory\", \"CategoryTheory.Functor.isAccessible_of_isCardinalAccessible\"], \"digest\": \"17d98be7be310a3a\"}",
+   "date": "2026-10-17",
+   "verdict": "no match in installed Mathlib: individual accessibility witnesses and monotonicity are insufficient; online Uniformization hits are not present in the pinned installed checkout, confirmed by source reads."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"uniformization\"",
+   "results": "{\"t\": \"2026-10-17T00:38:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"uniformization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.IsCardinalAccessibleCategory.uniformization\", \"CategoryTheory.IsCardinalAccessibleCategory.uniformization_of_small\", \"CategoryTheory.IsCardinalAccessibleCategory.uniformization_aux\", \"CategoryTheory.IsCardinalAccessibleCategory.uniformization_pair\"], \"digest\": \"b2eff3c4f72b8b17\"}",
+   "date": "2026-10-17",
+   "verdict": "no match in installed Mathlib: individual accessibility witnesses and monotonicity are insufficient; online Uniformization hits are not present in the pinned installed checkout, confirmed by source reads."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A small family of accessible categories and accessible functors admits common large regular ranks preserving presentable objects",
+   "results": "{\"t\": \"2026-10-17T00:38:03Z\", \"tool\": \"leanfinder\", \"query\": \"A small family of accessible categories and accessible functors admits common large regular ranks preserving presentable objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsAccessible.exists_cardinal\", \"CategoryTheory.Functor.IsCardinalAccessible\", \"CategoryTheory.Functor.isAccessible_of_isCardinalAccessible\", \"CategoryTheory.IsCardinalAccessibleCategory\", \"CategoryTheory.Functor.isCardinalAccessible_of_le\", \"CategoryTheory.Functor.instIsCardinalAccessibleId\", \"CategoryTheory.IsAccessibleCategory.exists_cardinal\", \"CategoryTheory.IsCardinalPresentable\"], \"digest\": \"030e35287f941b71\"}",
+   "date": "2026-10-17",
+   "verdict": "no match in installed Mathlib: individual accessibility witnesses and monotonicity are insufficient; online Uniformization hits are not present in the pinned installed checkout, confirmed by source reads."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Enlarging accessibility cardinals using filtered diagrams of small directed subsets and bounding images of generators to obtain strong accessibility",
+   "results": "{\"t\": \"2026-10-17T00:43:44Z\", \"tool\": \"leanfinder\", \"query\": \"Enlarging accessibility cardinals using filtered diagrams of small directed subsets and bounding images of generators to obtain strong accessibility\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsAccessibleCategory.exists_cardinal\", \"CategoryTheory.Functor.IsAccessible.exists_cardinal\", \"CategoryTheory.IsCardinalAccessibleCategory.toHasCardinalFilteredGenerator\", \"CategoryTheory.Functor.isCardinalAccessible_of_le\", \"CategoryTheory.Functor.isAccessible_of_isCardinalAccessible\", \"CategoryTheory.AreCardinalFilteredGenerators\", \"CategoryTheory.HasCardinalFilteredGenerators\", \"CategoryTheory.HasCardinalFilteredGenerator\"], \"digest\": \"1f4f8a0751ddc28b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits supply accessibility witnesses or generators; none gives the sharp-rank enlargement and simultaneous preservation of presentables in this statement."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-accessible-pie-closure",
@@ -100,5 +280,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-accessible-system-ranks",
+  "worker": "stage1",
+  "summary": "Reviewed and completed the inherited ten-step simultaneous uniformization split: explicit sharp-rank enlargement, small generator-image bounds, two common-rank choices and the Hom retract calculation. Replaced the stale report, checked all thirteen verbatim citation uses, repeated Mathlib searches against installed sources. No new nodes; statement retained.",
+  "blueprint": "Auxiliary ordinary uniformization input beneath paragraph 2 of prop-coef-integral-exceptional-adjoint, via the inherited accessible PIE/monad route; Steps 1-5 prove the enlargement tool inside this proof, Steps 6-10 implement the simultaneous common lower and upper ranks."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-36574d2fe",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-36574d2fe (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's statement, all ten steps, every cited node statement, the parent lem-coef-accessible-pie-closure, and the blueprint ancestor's proof paragraph 2. The ancestor is only a distant auxiliary input, so the agent origin and the WANTED for Adámek–Rosický are honest. Step 2: the reindex node and the sharp-subset node apply with (α,β,A)=(ν,τ,Π). Each J has fewer than τ arrows and is ν-filtered, and every arrow lies in some J. Step 3: the small-colimit node's hypotheses hold, and it needs no cocompleteness. Step 4: the cocone gluing and the small representative family, which does not depend on X, are correct and elementary. Step 5: clause (1) of the elementwise node gives rs=1. Step 6: η0 lies above all ν_s, α_t and b, and β=(2^{η0})^+ satisfies the power bound since (2^{η0})^{η0}=2^{η0}. Step 7: each generator image gets its rank from its own presentation. Step 8: κ=(2^η)^+ satisfies the bound for (β,κ); H_t preserves the β-filtered retract presentation, and the image is κ-presentable. Step 9: the Hom-set retract inverse p c_D^{-1} i_Z checks on both sides. Step 10: λ=β<η<κ and b<κ. Edge cases checked: S and T empty, finite b, 0^0, empty families, terminal category. The parent uses this item exactly in this form. No ordinary-category duplicate exists: the other rank nodes assume local presentability or cocompleteness, or concern infinity-categories. All citations are within the unit or are Mathlib leaves, so no tool_uses are needed. No SGA is cited, no new nodes are created, the statement is unchanged, and there are no fixes."
  }
 }

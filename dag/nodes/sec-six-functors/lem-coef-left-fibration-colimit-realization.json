@@ -33,9 +33,114 @@
   "def-coef-infinity-fibrations",
   "lem-coef-space-transport-classification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B=L^{\\triangleright}$ and let $v$ be its cone vertex. The inclusion $j:\\{v\\}\\hookrightarrow B$ is right anodyne in the sense of [lem-coef-infinity-anodyne-cocones]. Indeed, start from $\\{v\\}$; in increasing dimension $n\\geq0$, for each nondegenerate $n$-simplex $\\sigma$ of $L$ attach the $(n+1)$-simplex $\\sigma\\star v$ along $\\Lambda_{n+1}^{n+1}$. This horn is exactly the union of the coned proper faces of $\\sigma$, already present from lower dimensions; its missing face is $\\sigma$. Thus the attachment adds precisely $\\sigma$ and its cone. A degenerate face is already in a lower-dimensional stage. These pushouts, with all simplices of a fixed dimension attached together, exhaust $B$. For $n=0$ the horn is the final vertex $\\{v\\}$, so the orientation is right anodyne. For empty $L$, $j$ is the identity.",
+   "uses": [
+    "lem-coef-infinity-anodyne-cocones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.3.4.5 and Corollary 3.3.4.6; explicit cone-vertex horn filtration"
+   }
+  },
+  {
+   "text": "For every $\\mathcal W$-small Kan complex $X$, apply the mapping-space assertion of [lem-coef-infinity-anodyne-cocones] to $j$, $F:B\\to\\mathcal S_{\\mathcal W}$ and the constant target $X$. It gives an equivalence\n$$e_X:\\operatorname{Map}_{\\operatorname{Fun}(B,\\mathcal S_{\\mathcal W})}(F,\\Delta_BX)\\longrightarrow\\operatorname{Map}_{\\mathcal S_{\\mathcal W}}(F(v),X).$$\nThis is actual restriction to $v$. The lemma allows arbitrary simplicial bases, so neither $B$ nor $L$ needs to be a quasicategory. The target infinity category and the diagram categories are formed in a universe containing $\\mathcal W$.",
+   "uses": [
+    "lem-coef-infinity-anodyne-cocones",
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02NR",
+    "place": "Proposition 7.2.2.1, opposite dual, and Proposition 7.2.1.3; right-anodyne restriction of cocones"
+   }
+  },
+  {
+   "text": "Define $H:B\\times\\Delta^1\\to B$ simplexwise by retaining the initial vertices of the $B$-simplex where the interval coordinate is $0$, and replacing its final vertices where that coordinate is $1$ by $v$. If the retained part already contains $v$, the additional $v$-vertices are degeneracies of the same cone simplex. Restriction and repetition of vertices commute with this rule. Hence $H$ is simplicial, $H|_0=1_B$, $H|_1$ is constant at $v$, and $H|_{\\{v\\}\\times\\Delta^1}$ is constant. Composition with $F$ gives a coherent transformation $\\tau:F\\to\\Delta_BF(v)$ whose component at $v$ is the identity. Write $\\lambda=\\tau|_L$, exactly the cocone specified in the statement. Composition with $\\tau$ gives\n$$u_X:\\operatorname{Map}(F(v),X)\\to\\operatorname{Map}_{\\operatorname{Fun}(B,\\mathcal S_{\\mathcal W})}(F,\\Delta_BX).$$\nThe composite $e_Xu_X$ is homotopic to the identity because $\\tau_v=1_{F(v)}$. Step 2 therefore makes $u_X$ an equivalence. If $r_X$ denotes restriction from $B$ to $L$, the composite $r_Xu_X$ is the map $a\\mapsto\\Delta_L(a)\\circ\\lambda$, with its coherent composition homotopy, rather than an arbitrary equivalence between these spaces.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.3.4.5; agent expansion of the normalized right-cone cocone and restriction comparison"
+   }
+  },
+  {
+   "text": "By the cocone dual of the mapping-space criterion of [lem-cbc-enhanced-functor-cone-calculus], $\\lambda$ is colimiting if and only if $r_Xu_X$ is an equivalence for every $X\\in\\mathcal S_{\\mathcal W}$. Since $u_X$ is an equivalence by step 3, this is equivalent to $r_X$ being an equivalence for every such $X$. This uses the mapping-space characterization of an initial object in the coherent cocone category, not merely a universal property on homotopy classes.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.3.4.5, condition (1), expressed via coherent cocone mapping spaces"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-space-transport-classification] first over $B$ and then over $L$. The constant target $X$ is represented by $B\\times X\\to B$ and $L\\times X\\to L$, respectively; pullback of $Z$ to $L$ is precisely $Z_0$ and classifies $F|_L$. A map $Z\\times\\Delta^n\\to B\\times X$ over $B$ has its first coordinate forced to be $p$, so projection to the second coordinate identifies its simplicial set of such maps with $\\operatorname{Fun}(Z,X)$. Similarly the boundary mapping simplicial set is $\\operatorname{Fun}(Z_0,X)$. The classification's compatibility with pullback identifies $r_X$, up to its specified coherent comparison, with precomposition by $i:Z_0\\hookrightarrow Z$:\n$$i_X^*:\\operatorname{Fun}(Z,X)\\longrightarrow\\operatorname{Fun}(Z_0,X).$$\nBoth complexes are Kan by the same mapping-space assertion. In particular the comparison concerns the actual inclusion, not just two abstract spaces of the same homotopy type.",
+   "uses": [
+    "lem-coef-space-transport-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 2.2.1.2, covariant dual, with the coherent diagram comparison; mapping into constant left fibrations"
+   }
+  },
+  {
+   "text": "We verify the Kan-model hypotheses needed to test $i$ by these function complexes. Use [lem-coef-kan-quillen-right-proper] on $\\mathcal W$-small simplicial sets. Every object is cofibrant and the fibrant objects are exactly the Kan complexes. With degreewise products as tensors, internal function simplicial sets as enrichment and cotensors, the tensor-cotensor adjunction is currying of maps of products. The simplicial model axiom follows from [lem-coef-sset-anodyne-pushout-product]: lifting the induced mapping-space map against a horn is adjoint to lifting a fibration against the pushout product of a monomorphism with that horn. This product is anodyne. If the object-side cofibration is trivial, exchange the two product factors and use a boundary inclusion in the other factor; its pushout product is again anodyne. If the object-side fibration is trivial, the pushout product of a monomorphism with any boundary is degreewise a monomorphism, hence lifts against it. The horn and boundary characterizations in the Kan-model node give precisely fibrations, trivial in the two asserted cases. Thus [lem-coef-simplicial-model-nerve-localization] applies. For any simplicial set $A$ and Kan complex $X$ it identifies $\\operatorname{Fun}(A,X)$ naturally with $\\operatorname{Map}_{\\mathcal S_{\\mathcal W}}(qA,X)$, where $q$ is Kan-model localization. It also supplies this identification's compatibility with precomposition. Fibrant replacement stays among $\\mathcal W$-small simplicial sets.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-sset-anodyne-pushout-product",
+    "lem-coef-simplicial-model-nerve-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Theorem 1.3.4.20 and Remark 1.3.4.16; Kan-model specialization with the simplicial axiom checked from the cited pushout-product theorem"
+   }
+  },
+  {
+   "text": "Consequently $i$ is a weak homotopy equivalence if and only if $i_X^*$ is an equivalence for every $\\mathcal W$-small Kan $X$. For the forward direction, localization sends $i$ to an equivalence, which induces equivalences on the mapping spaces supplied in step 6. For the converse, take components of those mapping spaces. Every object of the localized category has a Kan representative by fibrant replacement, so the hypothesis says that precomposition with $qi$ is bijective on morphisms into every object of its homotopy category $\\mathcal H$. Here $h\\mathcal C$ has objects the vertices of $\\mathcal C$ and morphisms the components of its mapping spaces. The passage to ordinary localization can be checked explicitly. For an ordinary category $D$, a simplicial map $\\mathcal C\\to N(D)$ sends homotopic edges to the same arrow and the long edge of a $2$-simplex to the composite of its short edges, so it induces a functor $h\\mathcal C\\to D$. Conversely, a functor $h\\mathcal C\\to D$ sends each simplex to the chain of images of its successive edges; the $2$-face relations give every face compatibility, and degenerate edges give degeneracy compatibility. These constructions are inverse. Applied to $\\mathcal C\\times\\Delta^n$, the same formulas identify transformations and their compatibility with the ordinary functor category $\\operatorname{Fun}(h\\mathcal C,D)$: an edge from $(c,k)$ to $(c',l)$, for $k\\leq l$, is determined in the homotopy category by its $\\mathcal C$ edge class and the unique arrow $k\\to l$. The two triangular faces impose the naturality square, and the triangular faces on three parameter vertices impose composition of these transformations. Repeated parameter vertices impose the identity transformations. Thus the full functor-category localization property of [lem-coef-simplicial-model-nerve-localization], tested on $N(D)$, identifies $\\operatorname{Fun}(\\mathcal H,D)$ with the full subcategory of $\\operatorname{Fun}(\\mathrm{sSet}_{\\mathcal W},D)$ on functors inverting the weak homotopy equivalences. Hence $q:\\mathrm{sSet}_{\\mathcal W}\\to\\mathcal H$ is an ordinary localization at those maps. Explicitly, surjectivity for target $qZ_0$ yields $g:qZ\\to qZ_0$ with $g(qi)=1$; injectivity for target $qZ$ applied to $((qi)g)(qi)=qi$ yields $(qi)g=1$. Thus $qi$ is an isomorphism in $\\mathcal H$. Apply [lem-coef-model-localization-detects-weak-equivalences] to this ordinary localization of the Kan model category to conclude that $i$ is a weak homotopy equivalence. No fibrancy of $Z$ or $Z_0$ was assumed.",
+   "uses": [
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-model-localization-detects-weak-equivalences",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.3.4.5, condition (3); agent mapping-test argument using model-category saturation (Hovey Theorem 1.2.10(iv))"
+   }
+  },
+  {
+   "text": "Steps 4 and 5 identify the colimit condition with the function-complex tests of step 7, proving both implications. All indexing sets and total spaces used in these tests are $\\mathcal W$-small as assumed. If $L=\\varnothing$, then $B=\\Delta^0$, $Z_0=\\varnothing$, and $Z$ represents $F(v)$. The tests say that $F(v)$ is initial in spaces, equivalently that $\\varnothing\\to Z$ is a weak homotopy equivalence; the same proof applies because the filtration in step 1 is empty and the boundary transformation space is terminal. No argument used filteredness or a quasicategory structure on $L$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.3.4.5, equivalence (1) with (3); empty-shape verification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-anodyne-cocones",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-model-localization-detects-weak-equivalences",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-space-transport-classification",
+  "lem-coef-sset-anodyne-pushout-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, mapping-complex infrastructure through the recorded ancestry; agent mapping-space proof of the online HTT Proposition 3.3.4.5 (not archived in literature/)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -92,10 +197,59 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-17",
    "verdict": "no match in Mathlib/AlgebraicTopology for left-fibration, covariant-model or homotopy-colimit vocabulary; this does not replace checking the semantic-search hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent cocone of spaces is colimiting if and only if the inclusion of total left fibration spaces is a weak homotopy equivalence",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Instances\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithWeakEquivalences C]\\n  [inst_2 : HomotopicalAlgebra.CategoryWithCofibrations C] [inst_3 : HomotopicalAlgebra.CategoryWithFibrations C]\\n  {J : Type u_1} {X Y : J → C} (f : (i : J) → X i ⟶ Y i) [inst_4 : C\", \"doc\": \"In a category equipped with a weak factorization system where the left class consists of trivial cofibrations (morphisms that are both cofibrations and weak equivalences) and the right class consists \"}\n  {\"name\": \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits\", \"type\": \"{X : SSet} →\\n  {A : X.Subcomplex} →\\n    {ι : Type u_1} →\\n      {U : ι → X.Subcomplex} →\\n        {V : ι → ι → X.Subcomplex} →\\n          (h : A.MulticoequalizerDiagram U V) →\\n            CategoryTheory.Limits.IsColimit\\n              ((CompleteLattice.MulticoequalizerDiagram.multicofork h).map SSet.Sub\", \"doc\": \"For any simplicial set $X$ and a diagram of subcomplexes $A$ indexed by $\\\\iota$, if $A$ satisfies multicoequalizer conditions at each simplicial degree $n$ (i.e., the object mappings form suprema and \"}\n  {\"name\": \"CategoryTheory.Limits.isColimitCoconeOfFiberwiseCocone\", \"module\": \"Mathlib/CategoryTheory/Limits/Shapes/Grothendieck\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {F : CategoryTheory.Functor C CategoryTheory.Cat} →\\n      {H : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} H] →\\n          {G : CategoryTheory.Functor (CategoryTheory.Grothendieck F) H} →\\n            [inst_2 :\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{H}$, a functor $F : \\\\mathcal{C} \\\\to \\\\mathsf{Cat}$, and a functor $G : \\\\text{Grothendieck}(F) \\\\to \\\\mathcal{H}$ with fiberwise colimits, if $c$ is a colimit \"}\n  {\"name\": \"CategoryTheory.Limits.isColimitCoconeFiberwiseColimitOfCocone\", \"module\": \"Mathlib/CategoryTheory/Limits/Shapes/Grothendieck\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {F : CategoryTheory.Functor C CategoryTheory.Cat} →\\n      {H : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} H] →\\n          {G : CategoryTheory.Functor (CategoryTheory.Grothendieck F) H} →\\n            [inst_2 :\\n     \", \"doc\": \"Given a category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\mathsf{Cat}$, and a functor $G : \\\\text{Grothendieck}(F) \\\\to \\\\mathcal{H}$, if $c$ is a colimit cocone for $G$, then the cocone constructe\"}\n  {\"name\": \"HomotopicalAlgebra.ModelCategory.cm1b\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/Basic\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} [self : HomotopicalAlgebra.ModelCategory C],\\n  CategoryTheory.Limits.HasFiniteColimits C\", \"doc\": \"Any category equipped with a model category structure (consisting of weak equivalences, fibrations, and cofibrations satisfying the model category axioms) necessarily has all finite colimits.\"}\n  {\"name\": \"HomotopicalAlgebra.AttachCells.isColimit₁\", \"module\": \"Mathlib/AlgebraicTopology/RelativeCellComplex/AttachCells\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {α : Type t} →\\n      {A B : α → C} →\\n        {g : (a : α) → A a ⟶ B a} →\\n          {X₁ X₂ : C} →\\n            {f : X₁ ⟶ X₂} → (self : HomotopicalAlgebra.AttachCells g f) → CategoryTheory.Limits.IsColimit self.cofan₁\", \"doc\": \"Given a category $\\\\mathcal{C}$, a type $\\\\alpha$, functors $A,B:\\\\alpha\\\\to\\\\mathcal{C}$, a family of morphisms $A(a)\\\\to B(a)$, and an attached cells construction, this asserts that the cocone (cofan) for\"}\n  {\"name\": \"HomotopicalAlgebra.AttachCells.isColimit₂\", \"module\": \"Mathlib/AlgebraicTopology/RelativeCellComplex/AttachCells\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {α : Type t} →\\n      {A B : α → C} →\\n        {g : (a : α) → A a ⟶ B a} →\\n          {X₁ X₂ : C} →\\n            {f : X₁ ⟶ X₂} → (self : HomotopicalAlgebra.AttachCells g f) → CategoryTheory.Limits.IsColimit self.cofan₂\", \"doc\": \"Given a category $\\\\mathcal{C}$, functors $A,B: \\\\alpha \\\\to \\\\mathcal{C}$, a family of morphisms $A(a) \\\\to B(a)$, and an object $X_2 \\\\in \\\\mathcal{C}$, this asserts that the cocone (cofan) constructed by \"}\n  {\"name\": \"CategoryTheory.Limits.hasColimit_of_hasColimit_fiberwiseColimit_of_hasColimit\", \"module\": \"Mathlib/CategoryTheory/Limits/Shapes/Grothendieck\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {F : CategoryTheory.Functor C CategoryTheory.Cat}\\n  {H : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} H]\\n  (G : CategoryTheory.Functor (CategoryTheory.Grothendieck F) H)\\n  [inst_2 :\\n    ∀ {X Y : C} (f : X ⟶ Y),\\n      CategoryTheory.L\", \"doc\": \"The functor G has a colimit.\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Functor/KanExtension/Adjunction.lean:211-234 and Limits/Shapes/Grothendieck.lean:130-210; these are ordinary categorical colimits. SubcomplexColimits.lean:35-70 concerns ordinary colimits of simplicial subcomplexes, not coherent colimits of spaces or classified left-fibration total spaces. The model-category and nerve hits likewise do not state the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homotopy colimit of a space valued infinity category diagram is computed by its Grothendieck left fibration total space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_inv\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Adjunction\", \"type\": \"(X : Grothendieck (CostructuredArrow.functor L)) :\\n  colimit.ι (CostructuredArrow.grothendieckProj L ⋙ G) X ≫ (colimitIsoColimitGrothendieck L G).inv =\\n    colimit.ι G ((CostructuredArrow.proj L X.base).obj X.fiber)\", \"doc\": \"For functors $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{C} \\\\to \\\\mathcal{H} $, the colimit of $ G $ is isomorphic to the colimit of the composition of the Grothendieck projection functor $ \"}\n  {\"name\": \"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_inv_assoc\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D) {H : Type u_3}\\n  [inst_2 : CategoryTheory.Category.{v_3, u_3} H] (G : CategoryTheory.Functor C H)\\n  [inst_3 : L.HasPointwiseLeftKanExtensio\", \"doc\": \"For functors $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{C} \\\\to \\\\mathcal{H} $, the colimit of $ G $ is isomorphic to the colimit of the composition of the Grothendieck projection functor $ \"}\n  {\"name\": \"CategoryTheory.Functor.leftKanExtensionIsoFiberwiseColimit\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Adjunction\", \"type\": \"[HasLeftKanExtension L F] : leftKanExtension L F ≅ fiberwiseColimit (grothendieckProj L ⋙ F)\", \"doc\": \"For functors $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ F : \\\\mathcal{C} \\\\to \\\\mathcal{H} $, the left Kan extension of $ F $ along $ L $ is naturally isomorphic to the fiberwise colimit of the compositio\"}\n  {\"name\": \"CategoryTheory.Functor.colimitIsoColimitGrothendieck\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Adjunction\", \"type\": \": colimit G ≅ colimit (CostructuredArrow.grothendieckProj L ⋙ G)\", \"doc\": \"For functors $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{C} \\\\to \\\\mathcal{H} $, the colimit of $ G $ is isomorphic to the colimit of the composition of the Grothendieck projection functor $ \"}\n  {\"name\": \"CategoryTheory.Functor.leftKanExtensionIsoFiberwiseColimit_hom_app\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D) {H : Type u_3}\\n  [inst_2 : CategoryTheory.Category.{v_3, u_3} H] (F : CategoryTheory.Functor C H)\\n  [inst_3 : L.HasPointwiseLeftKanExtensio\", \"doc\": \"For functors $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ F : \\\\mathcal{C} \\\\to \\\\mathcal{H} $, the left Kan extension of $ F $ along $ L $ is naturally isomorphic to the fiberwise colimit of the compositio\"}\n  {\"name\": \"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_hom_assoc\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D) {H : Type u_3}\\n  [inst_2 : CategoryTheory.Category.{v_3, u_3} H] (G : CategoryTheory.Functor C H)\\n  [inst_3 : L.HasPointwiseLeftKanExtensio\", \"doc\": \"For functors $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{C} \\\\to \\\\mathcal{H} $, if $ G $ has a pointwise left Kan extension along $ L $ and the categories $ \\\\mathcal{D} $ and $ \\\\mathcal{C} $\"}\n  {\"name\": \"CategoryTheory.Limits.isColimitCoconeOfFiberwiseCocone\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Grothendieck\", \"type\": \"{c : Cocone (fiberwiseColimit G)} (hc : IsColimit c) : IsColimit (coconeOfCoconeFiberwiseColimit c)\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{H}$, a functor $F : \\\\mathcal{C} \\\\to \\\\mathsf{Cat}$, and a functor $G : \\\\text{Grothendieck}(F) \\\\to \\\\mathcal{H}$ with fiberwise colimits, if $c$ is a colimit \"}\n  {\"name\": \"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_hom\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Adjunction\", \"type\": \"(X : C) :\\n  colimit.ι G X ≫ (colimitIsoColimitGrothendieck L G).hom =\\n    colimit.ι (CostructuredArrow.grothendieckProj L ⋙ G) ⟨L.obj X, .mk (𝟙 _)⟩\", \"doc\": \"For any object $X$ in category $\\\\mathcal{C}$, the composition of the colimit inclusion morphism $\\\\iota_G(X)$ with the hom component of the isomorphism between the colimit of $G$ and the colimit of the\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Functor/KanExtension/Adjunction.lean:211-234 and Limits/Shapes/Grothendieck.lean:130-210; these are ordinary categorical colimits. SubcomplexColimits.lean:35-70 concerns ordinary colimits of simplicial subcomplexes, not coherent colimits of spaces or classified left-fibration total spaces. The model-category and nerve hits likewise do not state the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LeftFibration\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits; grep searched AlgebraicTopology."
+  },
+  {
+   "tool": "grep",
+   "query": "left.?fibration|homotopy.?colimit|unstraighten",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits; grep searched AlgebraicTopology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total space of a Grothendieck construction of a homotopy coherent diagram of Kan complexes represents its homotopy colimit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/SubcomplexColimits\", \"type\": \"{X : SSet} →\\n  {A : X.Subcomplex} →\\n    {ι : Type u_1} →\\n      {U : ι → X.Subcomplex} →\\n        {V : ι → ι → X.Subcomplex} →\\n          (h : A.MulticoequalizerDiagram U V) →\\n            CategoryTheory.Limits.IsColimit\\n              ((CompleteLattice.MulticoequalizerDiagram.multicofork h).map SSet.Sub\", \"doc\": \"For any simplicial set $X$ and a diagram of subcomplexes $A$ indexed by $\\\\iota$, if $A$ satisfies multicoequalizer conditions at each simplicial degree $n$ (i.e., the object mappings form suprema and \"}\n  {\"name\": \"SSet.horn.isColimit\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HornColimits\", \"type\": \"{n : ℕ} →\\n  (i : Fin (n + 1)) →\\n    CategoryTheory.Limits.IsColimit\\n      ((CompleteLattice.MulticoequalizerDiagram.multicofork ⋯).toLinearOrder.map SSet.Subcomplex.toSSetFunctor)\", \"doc\": \"The colimit property of the multicoequalizer diagram constructing the n-dimensional horn Λ[n, i] is preserved under transformation to a linear order context via the subcomplex-to-simplicial-set functo\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"{X : SSet.Truncated 2} →\\n  {C : Type u} →\\n    [inst : CategoryTheory.SmallCategory C] →\\n      CategoryTheory.Functor X.HomotopyCategory C → (X ⟶ (SSet.truncation 2).obj (CategoryTheory.nerve C))\", \"doc\": \"For a 2-truncated simplicial set $X$ and a category $\\\\mathcal{C}$, this function constructs a morphism from $X$ to the 2-truncated nerve of $\\\\mathcal{C}$ by lifting a functor $F: X.\\\\text{HomotopyCateg\"}\n  {\"name\": \"SSet.cosk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"ℕ → CategoryTheory.Functor SSet SSet\", \"doc\": \"For a natural number $n$, the coskeleton functor $\\\\text{cosk}_n$ is a functor from the category of simplicial sets to itself. It is defined as the composition of the truncation functor (which discards\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.descOfTruncation\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"{X : SSet.Truncated 2} →\\n  {C : Type u} →\\n    [inst : CategoryTheory.SmallCategory C] →\\n      (X ⟶ (SSet.truncation 2).obj (CategoryTheory.nerve C)) → CategoryTheory.Functor X.HomotopyCategory C\", \"doc\": \"Given a 2-truncated simplicial set $X$ and a category $\\\\mathcal{C}$, along with a natural transformation $\\\\phi: X \\\\to \\\\text{trunc}_2(\\\\text{Nerve}(\\\\mathcal{C}))$, this constructs a functor from the hom\"}\n  {\"name\": \"CategoryTheory.nerveFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Nerve\", \"type\": \"CategoryTheory.Functor CategoryTheory.Cat SSet\", \"doc\": \"The nerve functor is a functor from the category of small categories to the category of simplicial sets. It maps each category $\\\\mathcal{C}$ to its nerve, a simplicial set where each $n$-simplex corre\"}\n  {\"name\": \"CategoryTheory.Limits.coconeFiberwiseColimitOfCocone\", \"module\": \"Mathlib/CategoryTheory/Limits/Shapes/Grothendieck\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {F : CategoryTheory.Functor C CategoryTheory.Cat} →\\n      {H : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} H] →\\n          {G : CategoryTheory.Functor (CategoryTheory.Grothendieck F) H} →\\n            [inst_2 :\\n     \", \"doc\": \"Given a cocone $ c $ for a functor $ G : \\\\text{Grothendieck}(F) \\\\to \\\\mathcal{H} $, this constructs a cocone for the fiberwise colimit functor $ \\\\text{fiberwiseColimit} \\\\, G $. The apex of the new coco\"}\n  {\"name\": \"CategoryTheory.Limits.coconeOfCoconeFiberwiseColimit\", \"module\": \"Mathlib/CategoryTheory/Limits/Shapes/Grothendieck\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {F : CategoryTheory.Functor C CategoryTheory.Cat} →\\n      {H : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} H] →\\n          {G : CategoryTheory.Functor (CategoryTheory.Grothendieck F) H} →\\n            [inst_2 :\\n     \", \"doc\": \"Given a cocone $ c $ for the fiberwise colimit of a functor $ G : \\\\text{Grothendieck}(F) \\\\to \\\\mathcal{H} $, this constructs a cocone for $ G $ itself. The apex of the cocone is the same as $ c $'s ape\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: read CategoryTheory/Functor/KanExtension/Adjunction.lean:211-234 and Limits/Shapes/Grothendieck.lean:130-210; these are ordinary categorical colimits. SubcomplexColimits.lean:35-70 concerns ordinary colimits of simplicial subcomplexes, not coherent colimits of spaces or classified left-fibration total spaces. The model-category and nerve hits likewise do not state the item."
+  },
+  {
+   "tool": "grep",
+   "query": "colimitIsoColimitGrothendieck|IsColimit.*Grothendieck",
+   "results": "{\"t\": \"2026-10-17T01:08:18Z\", \"tool\": \"grep\", \"query\": \"colimitIsoColimitGrothendieck|IsColimit.*Grothendieck\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Final.lean\", \"Mathlib/CategoryTheory/Comma/StructuredArrow/Final.lean\", \"Mathlib/CategoryTheory/Filtered/CostructuredArrow.lean\"], \"digest\": \"e2689e234f6be733\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second reading; read Adjunction.lean:213-234 (ordinary categorical Grothendieck colimits), Homotopy.lean:238-253 (left/right homotopy classes), and CofibrantObjectHomotopy.lean:84-90 (preservation/reflection of the designated weak-equivalence class by a quotient). None states the coherent colimit/total-left-fibration equivalence or the full mapping-complex test."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map of simplicial sets is a weak homotopy equivalence if and only if mapping into every Kan complex induces a homotopy equivalence",
+   "results": "{\"t\": \"2026-10-17T01:08:20Z\", \"tool\": \"leanfinder\", \"query\": \"A map of simplicial sets is a weak homotopy equivalence if and only if mapping into every Kan complex induces a homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass_mk\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.weakEquivalence_iff\", \"HomotopicalAlgebra.PathObject.RightHomotopy.weakEquivalence_iff\", \"HomotopicalAlgebra.leftHomotopyRel_iff_rightHomotopyRel\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\"], \"digest\": \"20e6e8b3dac12944\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second reading; read Adjunction.lean:213-234 (ordinary categorical Grothendieck colimits), Homotopy.lean:238-253 (left/right homotopy classes), and CofibrantObjectHomotopy.lean:84-90 (preservation/reflection of the designated weak-equivalence class by a quotient). None states the coherent colimit/total-left-fibration equivalence or the full mapping-complex test."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-compact-relative-cocone-factorization",
@@ -103,5 +257,29 @@
   "group": "Q77"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-left-fibration-colimit-realization",
+  "worker": "stage1",
+  "summary": "Completed the unfinished prior sandbox with an eight-step mapping-space proof. Preserved the statement, all size and empty-shape clauses, provenance and imported search records; added five searches actually run through msearch.py. Reused existing anodyne-restriction, space-transport and model-localization inputs rather than introducing duplicate lemmas. Checked the actual cocone and total-space restriction map and supplied the Kan-model mapping-test argument. No new nodes, Lean or compilation. Independent second reading expanded the ordinary-localization bridge in step 7 and tightened statement quotations; the cross-unit tool listed below is proposed for maintainer acceptance, not self-approved.",
+  "blueprint": "Realizes paragraph 2 of prop-coef-integral-exceptional-adjoint, the coherent mapping-complex adjunction infrastructure reached through the recorded finite-adjunction, presentability and filtered-refinement ancestry; specifically the HTT 5.5.4.13 total-left-fibration test consumed by lem-coef-compact-relative-cocone-factorization. The current blueprint paragraph itself is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent comma mapping-space and colimit criterion, used for diagrams of spaces. The home-unit definitions and transport theorem do not state the equivalence between initial cocones and the universal mapping-space test; this does not replace a geometric or coefficient step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-f0a7ed7fb",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-f0a7ed7fb (reviewer sub-agent of L); spot-checked: I read the item, all eight steps and the full statement of every cited node; the delivery creates no new nodes. The statement is HTT Prop. 3.3.4.5, the equivalence of (1) and (3), for an arbitrary W-small simplicial set L, with L empty allowed and no filteredness or quasicategory hypothesis. The cocone is given explicitly as precomposition with the map L x Delta^1 -> L^triangleright, and nothing is weakened. HTT is read online and not archived, so it is marked WANTED, and proof_origin is agent. Step-by-step checks: Step 1 attaches each sigma*v along the horn Lambda^{n+1}_{n+1} through the skeletal filtration, so it is right anodyne; the n=0 and empty cases also check out. Step 2 is the restriction-equivalence clause of lem-coef-infinity-anodyne-cocones, which allows any simplicial base. Step 3: the homotopy H is simplicial, its restriction to L x Delta^1 is the cocone of the statement, and e_X u_X is homotopic to the identity. Step 4 is the dual clause of lem-cbc-enhanced-functor-cone-calculus. Step 5 uses the classification node's mapping formula, its constant-functor clause and its pullback compatibility, which together identify r_X with i^*. Step 6 checks the simplicial model axiom for the Kan model structure using lem-coef-sset-anodyne-pushout-product and lem-coef-kan-quillen-right-proper, covering both trivial cases. Step 7 gives the representable/Yoneda argument and the homotopy category as the ordinary localization (tested against nerves N(D)), then applies lem-coef-model-localization-detects-weak-equivalences. Step 8 combines these. Small cases tested: L empty, L a point (a single arrow f), and two discrete points (whose colimit S^0 is not contractible); all are consistent. Duplicate search found nothing: HTT 3.3.4.3 Cat-valued localization, the cofinality space test, the filtered cocone transport and the cartesian descent criterion all state something different. There are no cycles, and the only user, lem-coef-compact-relative-cocone-factorization, uses exactly the colimit-implies-weak-equivalence direction. I accept the tool use of lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc) as a generic mapping-space colimit criterion: no node of the home unit gives it, and it replaces no step of the unit's route. Mathlib searches cover all three kinds with real hits read. No SGA source is used, and I made no fixes."
+ }
 }

@@ -31,9 +31,90 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-category-of-spaces"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Regard the tower as a diagram $D:I\\to\\mathrm{sSet}$ with $I=\\mathbb N^{\\mathrm{op}}$, inverse arrows all arrows, direct arrows identities, and degree $n$. Use the Kan model structure of [lem-coef-kan-quillen-right-proper]. In [lem-coef-reedy-model-structure], the matching category at $n>0$ has initial object the arrow $n\\to n-1$: a compatible cone to all lower stages is uniquely specified by its component at $n-1$, the other components being its composites with the transition maps. Thus $M_nD=X_{n-1}$ and the matching map is $p_{n-1}$. At $n=0$ the matching object is terminal. Therefore $D$ is Reedy fibrant, including when some stages are empty.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Definition 5.1.2 and Theorem 5.1.3, printed pp.120-122: matching objects and inverse diagram model structure."
+   }
+  },
+  {
+   "text": "Every direct latching category of $I$ is empty. Consequently the relative latching map of $A\\to B$ at $n$ is just $A_n\\to B_n$, so [lem-coef-reedy-model-structure] makes Reedy cofibrations and trivial cofibrations precisely the objectwise ones. The ordinary constant-diagram functor $c:\\mathrm{sSet}\\to\\mathrm{sSet}^I$ therefore preserves both classes. Its right adjoint is the strict limit functor: a natural transformation $cK\\to A$ is exactly a compatible family $K\\to A_n$, and hence factors uniquely through the degreewise compatible-family limit. Thus $c\\dashv\\lim_I$ is a Quillen adjunction by [lem-coef-model-infinity-derived-adjunction]. In particular $\\lim_I$ preserves fibrations and terminal objects. Since $D$ is fibrant by Step 1, its strict limit $X$ is fibrant, hence Kan by [lem-coef-kan-quillen-right-proper].",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Corollary 5.1.6, printed p.123: limit is right Quillen for an inverse category; the adjunction and class check are expanded here."
+   }
+  },
+  {
+   "text": "Let $W$ be weak homotopy equivalences and $W_I$ their objectwise class. Apply [lem-coef-model-infinity-derived-adjunction] to $c\\dashv\\lim_I$. All simplicial sets are cofibrant because their initial inclusions are monomorphisms by [lem-coef-kan-quillen-right-proper], and $c$ preserves all weak equivalences, since the diagram weak equivalences are objectwise. Thus the derived left functor is the localized constant functor. Since $D$ is already Reedy fibrant, the derived right functor at $D$ is represented by its strict limit $X$. Its derived counit is represented by the ordinary counit $cX\\to D$, whose components are exactly the projections. For every object $K$ of $\\mathrm{sSet}[W^{-1}]_\\infty$ the derived adjunction therefore gives the natural mapping-space equivalence $\\operatorname{Map}(K,X)\\simeq\\operatorname{Map}(cK,D)$, including the projection-induced map and its coherent naturality.",
+   "uses": [
+    "lem-coef-model-infinity-derived-adjunction",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Corollary 5.1.6 and the coherent derived-adjunction theorem cited in lem-coef-model-infinity-derived-adjunction; this is the mapping-space form of the right derived limit."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-small-diagram-model-rectification] to the Kan model category and the small ordinary category $I$. It identifies $\\mathrm{sSet}^I[W_I^{-1}]_\\infty$ with $\\operatorname{Fun}(N(I),\\mathrm{sSet}[W^{-1}]_\\infty)$, preserving constants, the given diagram and its natural transformations. Hence the equivalence of Step 3 becomes $\\operatorname{Map}(K,X)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(N(I),\\mathrm{sSet}[W^{-1}]_\\infty)}(\\Delta K,D)$ with the projection cone. Apply the mapping-space characterization of limiting cones in [lem-cbc-enhanced-functor-cone-calculus]: the displayed equivalence is induced by composition with the projection cone, so that cone is terminal in the coherent cone category of [def-cbc-enhanced-diagrams-cones]. Identify the Kan-model localization with $\\mathcal S$ by [lem-coef-simplicial-model-nerve-localization]. Its simplicial-model hypothesis holds for the usual internal mapping complexes: tensor is product, all cofibrations are monos, products and pushouts are degreewise, so a pushout product of cofibrations is mono. If the second factor is trivial, write it as a retract of a transfinite composite of pushouts of horn inclusions by [lem-coef-kan-quillen-right-proper]; [lem-coef-sset-anodyne-pushout-product] makes the pushout product anodyne, and pushout products preserve retracts. If the first factor is trivial, use the symmetry isomorphism of the pushout-product construction to interchange the two factors and apply the same argument. Thus the pushout product is a trivial cofibration by the Kan model lifting-class characterization. The mapping-space adjunction turns these pushout-product lifting properties into the simplicial-model axiom. All objects are cofibrant and the fibrant objects are Kan, so the bifibrant simplicial nerve is precisely the definition of $\\mathcal S$ in [def-coef-infinity-category-of-spaces]. Thus $X$ with the specified projections is a limit in that exact infinity category.",
+   "uses": [
+    "lem-coef-small-diagram-model-rectification",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-model-nerve-localization",
+    "lem-coef-sset-anodyne-pushout-product",
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-category-of-spaces",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Corollary 5.1.6 for the model limit; the coherent rectification and bifibrant-nerve localization sources are those of the cited existing nodes. HTT Lemma 5.3.4.11, printed p.398, confirms the point-base result."
+   }
+  },
+  {
+   "text": "The simplicial set $X$ constructed in Step 2 has in degree $m$ exactly the families $(x_n)$ satisfying $p_n(x_{n+1})=x_n$. A face or degeneracy applied coordinatewise preserves these equations because every $p_n$ is simplicial. Its projection counit is therefore the cone in the statement. For a strict transformation $a:D\\to E$, the limit map sends $(x_n)$ to $(a_n(x_n))$, and $\\pi_n\\lim(a)=a_n\\pi_n$ holds in every degree. The coherent naturality in Steps 3-4 consequently gives naturality for strict maps of towers. By the terminal-object uniqueness clause of [lem-cbc-enhanced-functor-cone-calculus], its comparison with any chosen limiting cone is an equivalence of cones and hence of their apices, equivalently a weak homotopy equivalence of the representing Kan complexes. No step required a vertex to lift without a specified horn, so no vertex-surjectivity or nonemptiness hypothesis has entered.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Degreewise limit definition; naturality of the counit and of the comparisons established in Steps 3-4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-model-infinity-derived-adjunction",
+  "lem-coef-small-diagram-model-rectification",
+  "lem-coef-simplicial-model-nerve-localization",
+  "lem-coef-sset-anodyne-pushout-product",
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+  "place": "Corollary 5.1.6 and Definition 5.1.2/Theorem 5.1.3, combined with the existing coherent derived-adjunction, diagram-rectification and simplicial-model-localization nodes; explicit mapping-space argument supplied here. Agrees with HTT Lemma 5.3.4.11 at a point."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -69,10 +150,38 @@
    "results": "{\"t\": \"2026-10-16T21:24:44Z\", \"tool\": \"leanfinder\", \"query\": \"Reedy fibrant inverse sequences of simplicial sets have ordinary limits equal to their derived limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instHasLimitsOfShape\", \"CategoryTheory.SimplicialObject.instHasLimits\", \"CategoryTheory.SimplicialObject.Truncated.instHasLimits\", \"CategoryTheory.SimplicialObject.Truncated.instHasLimitsOfShape\", \"SSet.hasLimits\", \"SSet.Truncated.hasLimits\", \"DeltaGenerated.hasLimits\", \"CategoryTheory.CosimplicialObject.Truncated.instHasLimits\"], \"digest\": \"61e12bf324be3e36\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits concern limits of sets or ordinary categories, simplicial-set completeness, or strict Segal simplex/path bijections; none states a homotopy limit theorem for towers of Kan fibrations or coherent diagram mapping spaces. Read the relevant pinned Mathlib source: SimplicialSet/Basic.lean, Order/DirectedInverseSystem.lean, Quasicategory/StrictSegal.lean and Quasicategory/InnerFibration.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse limit of a tower of Kan complexes along Kan fibration maps represents the homotopy limit",
+   "results": "{\"t\": \"2026-10-17T00:39:40Z\", \"tool\": \"leanfinder\", \"query\": \"inverse limit of a tower of Kan complexes along Kan fibration maps represents the homotopy limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hasLimits\", \"SSet.hoFunctor\", \"SSet.cosk\", \"SSet.hoFunctor.preservesTerminal\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"CategoryTheory.hoFunctor.preservesBinaryProduct\", \"CategoryTheory.hoFunctor.preservesBinaryProducts\"], \"digest\": \"03f060ac14bad911\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary SSet limits, Kan lifting structures, inverse limits of sets and homotopy-category finite-product preservation do not state the coherent limit of a Kan-fibration tower"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.hasLimits, modelCategoryQuillen, KanComplex",
+   "results": "{\"t\": \"2026-10-17T00:39:41Z\", \"tool\": \"loogle\", \"query\": \"SSet.hasLimits, modelCategoryQuillen, KanComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'SSet.hasLimits'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "inconclusive: Loogle reported unknown identifier SSet.hasLimits"
+  },
+  {
+   "tool": "grep",
+   "query": "KanComplex|homotopy limit|Reedy.*limit",
+   "results": "{\"t\": \"2026-10-17T00:39:41Z\", \"tool\": \"grep\", \"query\": \"KanComplex|homotopy limit|Reedy.*limit\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/KanComplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/KanComplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/KanComplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/KanComplex.lean\"], \"digest\": \"1551d748d73d1a27\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary SSet limits, Kan lifting structures, inverse limits of sets and homotopy-category finite-product preservation do not state the coherent limit of a Kan-fibration tower"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse limit of a tower of fibrant simplicial sets with fibration maps computes the homotopy limit",
+   "results": "{\"t\": \"2026-10-17T00:39:41Z\", \"tool\": \"leansearch\", \"query\": \"inverse limit of a tower of fibrant simplicial sets with fibration maps computes the homotopy limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hasLimits\", \"InverseSystem.isNatEquiv_piEquivLim\", \"InverseSystem.invLimEquiv.congr_simp\", \"InverseSystem.limit\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"InverseSystem.invLimEquiv_symm_apply_coe\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"CategoryTheory.SimplicialObject.instHasLimits\"], \"digest\": \"83679976dbb18655\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary SSet limits, Kan lifting structures, inverse limits of sets and homotopy-category finite-product preservation do not state the coherent limit of a Kan-fibration tower"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-functor-spine-tower-mapping-descent",
@@ -92,5 +201,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-kan-fibration-tower-limit",
+  "worker": "stage1",
+  "summary": "Removed the clause-only Reedy tower child. Proved the tower theorem directly through the existing Reedy model structure, constant/limit Quillen adjunction, coherent derived adjunction and diagram rectification, then identified spaces and the specified cone. No new nodes or Mathlib leaves.",
+  "blueprint": "Prop-coef-integral-exceptional-adjoint proof paragraph 2: general Kan-fibration tower theorem used for the coherent inverse-limit comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "The general mapping-space criterion for terminal coherent cones and uniqueness of limiting cones converts the derived adjunction into the precise cone definition; this is a generic foundational tool, not a replacement of any geometric unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-e346a35a4",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-e346a35a4 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, the full statements of all 9 cited nodes, the citer lem-coef-functor-spine-tower-mapping-descent, and the unit record. The source is HTT Lemma 5.3.4.11, read in a local htt.pdf. It covers towers of left fibrations over S, and at S = point (Kan model) it gives the item exactly, with no hypothesis added. Edge cases checked: one stage, a constant identity tower, empty stages, and fibrations that are not surjective on components; all hold. Without fibrations the claim would be false (lim^1), and that hypothesis is present. Step 1: for N^op the matching category at n has initial object n→n-1, so M_n = X_{n-1}, the matching map is p_{n-1}, M_0 = *, and the tower is Reedy fibrant. Step 2: the latching objects are empty, so Reedy cofibrations are objectwise; c ⊣ lim is Quillen and X is Kan. Step 3: the derived adjunction has the ordinary counit (the projections) as its derived counit. Step 4: the rectification node, the cone-calculus mapping criterion, and the simplicial-model nerve localization apply; the SM7 check uses the anodyne pushout-product leaf (trivial cofibration = anodyne by the weak factorization system), and M^cf is the Kan_W of the spaces definition. Step 5 (naturality and uniqueness of terminal objects) is genuinely elementary. proof_deps equals the union of the step uses, there is no cycle, there are no new nodes, I found no duplicate, and no SGA source is cited. The declared tool use of lem-cbc-enhanced-functor-cone-calculus (sk-prop-sf-cbc) is accepted: it is generic cone calculus that this unit's nodes already cite as a black box. No target node is involved, so no base-change or coefficient-category check applies. No fixes were made."
  }
 }

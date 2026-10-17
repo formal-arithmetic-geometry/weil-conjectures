@@ -3,22 +3,182 @@
  "blueprint": {
   "is": "sk-def-smooth",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Smooth and allowed coefficients",
- "statement": "A morphism is *smooth* if it is flat, locally of finite\npresentation and its geometric fibres are smooth varieties. A sheaf\nof $\\Lambda$-modules on $T_{\\Et}$, for a scheme $T$ and a commutative\nring $\\Lambda$, has *allowed torsion* with respect to a base scheme $S$ if\nall its geometric stalks are torsion of orders invertible on $S$.\n\"Invertible on $S$\" is read globally: each element of each geometric\nstalk is killed by some positive integer invertible on all of $S$\n(a unit of $\\Gamma(S,\\mathcal O_S)$), with no common annihilator\nrequired.\n\nFor every $d$ the projection $\\Aaf^d_S\\to S$ is smooth. The global\nreading is stronger than invertibility of the orders near the support:\non $S=\\Spec\\Z$ the sheaf $j_!(\\Z/2)$, $j:D(2)\\hookrightarrow S$, has the\nlatter property but not the former. A sheaf $\\mathcal F$ with allowed\ntorsion is the filtered union $\\mathcal F=\\varinjlim_d\\mathcal F[d]$ of\nits $d$-torsion subsheaves over the integers $d$ invertible on $S$.",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes. Use the notion of smooth morphism of [def-sbc-smooth-morphisms]. Equivalently, by [sbc-lem-smooth-criterion], $f$ is smooth if and only if it is flat [def-weil-flat-morphism], locally of finite presentation [def-sbc-locally-finite-presentation], and every scheme-theoretic fibre $X_y=X\\times_Y\\operatorname{Spec}\\kappa(y)$ [def-pc-scheme-fibre] is smooth over its residue field $\\kappa(y)$ [def-weil-residue-field]. The fibres need not be varieties of finite type.\n\nLet $S,T$ be schemes and $\\Lambda$ a commutative ring. A sheaf $\\mathcal F$ of $\\Lambda$-modules on the small etale site $T_{\\mathrm{et}}$ [def-weil-pbc-etale-sheaves] has allowed torsion with respect to $S$ if, for every geometric point $\\bar t$ of $T$ [def-weil-geometric-point] and every element $x$ of the geometric stalk $\\mathcal F_{\\bar t}$ [def-weil-pbc-geometric-stalks], there is a positive integer $d$ with $dx=0$ and $d\\cdot1$ a unit of $\\Gamma(S,\\mathcal O_S)$. Invertibility is global on $S$; no common annihilator is required.\n\nFor every $n\\in\\mathbb N$, the projection $\\mathbf A^n_S\\to S$ of [def-sbc-affine-space] is smooth. The global allowed-torsion condition is stronger than requiring each stalk element to have an annihilator invertible on a neighbourhood of its underlying point when $T=S$: on $S=\\operatorname{Spec}\\mathbb Z$ [def-weil-affine-spectrum], the sheaf $j_!\\underline{\\mathbb Z/2\\mathbb Z}$, for the open immersion $j:D(2)\\hookrightarrow S$ [def-weil-open-immersion], has the latter property but not the former. Here the underlined sheaf is constant [def-weil-pbc-constant-sheaf] and $j_!$ is extension by zero [def-weil-pbc-extension-by-zero].\n\nPut $I_S=\\{d\\in\\mathbb N: d>0,\\ d\\cdot1\\in\\Gamma(S,\\mathcal O_S)^\\times\\}$, ordered by divisibility. For $d\\in I_S$, define the $\\Lambda$-module subsheaf $\\mathcal F[d]$ by $\\mathcal F[d](U)=\\{s\\in\\mathcal F(U):ds=0\\}$, with the restrictions of $\\mathcal F$; its underlying abelian sheaf is $\\ker(d:\\mathcal F\\to\\mathcal F)$ [def-pur-abelian-sheaf-kernel]. For $d\\mid e$, use the inclusion $\\mathcal F[d]\\hookrightarrow\\mathcal F[e]$. If $\\mathcal F$ has allowed torsion with respect to $S$, these form a small filtered diagram and the canonical morphism\n$$c:\\varinjlim_{d\\in I_S}\\mathcal F[d]\\longrightarrow\\mathcal F$$\nis an isomorphism in the category of $\\Lambda$-module sheaves on $T_{\\mathrm{et}}$; this is the asserted filtered union [def-weil-pbc-category-colimit].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-def-smooth/_section.md",
   "place": "node sk-def-smooth, order 1432"
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "sbc-lem-smooth-criterion",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks",
+  "def-sbc-affine-space",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-extension-by-zero",
+  "def-pur-abelian-sheaf-kernel",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "The smoothness terminology is that of [def-sbc-smooth-morphisms]. Apply [sbc-lem-smooth-criterion] to the arbitrary morphism $f:X\\to Y$: its stated equivalence is exactly flatness, local finite presentation, and smoothness of every residue-field fibre, with no quasi-compactness or finite-type hypothesis. This proves the characterization written above and avoids interpreting “variety” as an extra finiteness or irreducibility condition.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "sbc-lem-smooth-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01V8 (lemma-smooth-flat-smooth-fibres), 01VE, 01VF and 01VB; current blueprint first sentence"
+   }
+  },
+  {
+   "text": "By [sbc-lem-affine-space-smooth], for every scheme $S$ and $n\\geq0$ the affine-space projection is smooth of relative dimension $n$. By the definition in [def-sbc-smooth-morphisms], smooth of relative dimension $n$ includes smoothness. Hence the projection is smooth, including $n=0$.",
+   "uses": [
+    "sbc-lem-affine-space-smooth",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-def-smooth/_section.md",
+    "place": "paragraph 2, affine-space projection sentence; existing affine-space lemma"
+   }
+  },
+  {
+   "text": "The subsheaf $\\mathcal F[d]$ is closed under addition, negatives, and the $\\Lambda$-action because $d(a s)=a(ds)$, and the condition $ds=0$ glues uniquely by the sheaf axiom. Its abelian kernel and sectionwise description are [def-pur-abelian-sheaf-kernel]; the module forgetful functor preserves these kernels by [lem-weil-pbc-module-sheaves-colimits-forgetful]. If $d\\mid e$, write $e=kd$; then $ds=0$ implies $es=k(ds)=0$, giving the stated inclusions and their composition laws. The set $I_S$ is nonempty because $1$ is a global unit, and $d,e\\in I_S$ have common upper bound $de\\in I_S$, since $(de)^{-1}=e^{-1}d^{-1}$ in the global-section ring. A preordered set has at most one arrow between two objects, so no parallel-arrow condition remains: it is a small filtered category. The module colimit $L$ exists by [lem-weil-pbc-module-sheaves-colimits-forgetful]. The compatible inclusions $i_d:\\mathcal F[d]\\to\\mathcal F$ induce $c:L\\to\\mathcal F$ with $c\\iota_d=i_d$ by [def-weil-pbc-category-colimit].",
+   "uses": [
+    "def-pur-abelian-sheaf-kernel",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA (lemma-abelian), 03DB (lemma-limits-colimits); agent argument for the globally invertible divisibility diagram"
+   }
+  },
+  {
+   "text": "Forget the $\\Lambda$-action; by [lem-weil-pbc-module-sheaves-colimits-forgetful], the underlying abelian sheaf of $L$ is the colimit of the underlying abelian diagram. The inclusions $i_d$ constructed in the preceding step are monic, so they give an objectwise monic natural transformation to the constant diagram with value $\\mathcal F$. Exactness of filtered colimits in [lem-weil-pbc-abelian-etale-sheaves-grothendieck] makes its colimit monic. The colimit of the constant diagram is $\\mathcal F$: any cocone has equal components, since any two indices map into their product, and its common component is its unique factorization. Thus that colimit morphism is precisely the underlying map $c$, which is monic.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-abelian-etale-sheaves-grothendieck"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CO (lemma-limits-colimits-abelian-sheaves), 03DB (lemma-limits-colimits); canonical mono argument"
+   }
+  },
+  {
+   "text": "Let $\\bar t$ be any geometric point and $x\\in\\mathcal F_{\\bar t}$. Allowed torsion supplies $d\\in I_S$ with $dx=0$. Exactness of the abelian geometric-stalk functor [prop-weil-pbc-geometric-stalks-exact] identifies $(\\mathcal F[d])_{\\bar t}$ with $\\ker(d:\\mathcal F_{\\bar t}\\to\\mathcal F_{\\bar t})$, so $x$ lifts to some $y$ in this stalk. Then $(\\iota_d)_{\\bar t}(y)\\in L_{\\bar t}$ maps to $x$ under $c_{\\bar t}$ because $c\\iota_d=i_d$. Thus every $c_{\\bar t}$ is surjective. It is also injective, since the exact stalk functor preserves the monomorphism from the preceding step. The underlying abelian map $c$ is therefore an isomorphism by [lemma-weil-pbc-geometric-stalk-conservative]. Its inverse is $\\Lambda$-linear: for a local section $z$, the two sections $c^{-1}(a z)$ and $a c^{-1}(z)$ have equal images under the injective $c$, namely $a z$. Hence $c$ is an isomorphism of module sheaves. This proves the actual restricted union, without assuming that $I_S$ is cofinal in all positive integers.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03PT (lemma-stalk-exact), 03PU (theorem-exactness-stalks); agent restricted-union argument"
+   }
+  },
+  {
+   "text": "For the comparison example put $S=\\operatorname{Spec}\\mathbb Z$, $U=D(2)$, and $G=j_!\\underline{\\mathbb Z/2\\mathbb Z}$. By [lem-weil-pbc-constant-sheaf-geometric-stalk], the constant sheaf has stalk $\\mathbb Z/2\\mathbb Z$ at every geometric point of $U$. By [lem-weil-pbc-extension-by-zero-stalks], $G$ has those stalks on $U$ and zero stalks on the complement. On $U$, the integer $2$ kills every stalk and is a unit on the open neighbourhood $D(2)$; at points outside $U$ the zero stalk is killed by the unit $1$. But a nonzero stalk element on $U$ cannot be killed by a positive integer globally invertible on $S$: the global-section ring is $\\mathbb Z$, whose only positive unit is $1$, and $1$ does not kill the nonzero element of $\\mathbb Z/2\\mathbb Z$. This proves the distinction claimed in the statement.",
+   "uses": [
+    "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03PT (lemma-stalk-exact), 03S5 (proposition-describe-jshriek); current blueprint comparison example"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-smooth-morphisms",
+  "sbc-lem-smooth-criterion",
+  "sbc-lem-affine-space-smooth",
+  "def-pur-abelian-sheaf-kernel",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-def-smooth/_section.md",
+  "place": "Definition and its three asserted properties; explicit globally invertible divisibility-diagram proof using Stacks Tags 03DA, 03DB, 03CO, 03PT, 03PU and 03S5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "smooth morphism flat locally of finite presentation geometric fibers allowed torsion sheaf invertible on base filtered union",
+   "results": "8 returned hits: AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.Flat, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete combined definition and its asserted properties"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.AffineSpace, IsTorsionSheafOfInvertibleOrder, CategoryTheory.Limits.IsColimit",
+   "results": "0 returned hits: . loogle: unknown identifier 'IsTorsionSheafOfInvertibleOrder'",
+   "date": "2026-10-16",
+   "verdict": "invalid query; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "Smooth|IsTorsion.*Invertible|filtered.*colimit",
+   "results": "0 returned hits: ; subdirectory argument: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "invalid directory argument: msearch already prefixes Mathlib; zero hits are not evidence of absence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "smooth morphism with flat locally finite presentation smooth geometric fibres and sheaf torsion orders invertible globally on a base scheme as filtered union of d-torsion subsheaves",
+   "results": "8 returned hits: AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsSmooth, RingHom.smooth_def, AlgebraicGeometry.IsSmooth.mk, Algebra.Smooth.finitePresentation, RingHom.Smooth",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete combined definition and its asserted properties"
+  },
+  {
+   "tool": "grep",
+   "query": "IsTorsionSheaf|invertibleOrder|torsion.*sheaf|sheaf.*torsion",
+   "results": "0 returned hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete combined definition and its asserted properties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale sheaf of modules whose every geometric stalk element is annihilated by a positive integer invertible on a scheme is the colimit of its kernel subsheaves for those integers",
+   "results": "8 returned hits: Algebra.etaleLocus_eq_compl_support, SheafOfModules.Presentation.isColimit, AlgebraicGeometry.Scheme.Modules.instHasColimits, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.mem_etaleLocus_iff, smoothSheafCommRing.nonunits_stalk, Algebra.basicOpen_subset_etaleLocus_iff_etale, SheafOfModules.generatorsOfIsCokernelFree_I",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete combined definition and its asserted properties"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Limits.IsColimit",
+   "results": "12 returned hits: CategoryTheory.Sheaf.isColimitSheafifyCocone, CategoryTheory.Sheaf.createsColimitOfIsSheaf, SheafOfModules.isColimitFreeCofan, SheafOfModules.generatorsOfIsCokernelFree, SheafOfModules.presentationOfIsCokernelFree, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.presentationOfIsCokernelFree_generators, SheafOfModules.generatorsOfIsCokernelFree_π",
+   "date": "2026-10-17",
+   "verdict": "no match for the complete combined definition and its asserted properties"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -74,5 +234,54 @@
    ],
    "open": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-def-smooth",
+  "worker": "stage1",
+  "summary": "Definition and its factual assertions split using existing nodes only. STATEMENT-DISPUTED: the phrase smooth varieties can incorrectly require finite type or irreducibility for arbitrary smooth morphisms; replaced by the precise residue-field fibre criterion already stated in sbc-lem-smooth-criterion. Kept the globally invertible positive-integer condition on arbitrary base S. Supplied the previously missing complete proof of the canonical restricted module-sheaf colimit, using the directed divisibility diagram, exact filtered colimits, exact stalks and conservativity. Verified the extension-by-zero counterexample. Mathlib and project searches do not give an exact whole-item attachment.",
+  "blueprint": "Current main-20261015 source paragraph 1: precise smooth criterion and explicit allowed-torsion definition; paragraph 2: proof step 2 is affine-space smoothness, step 6 is the global/local example, and steps 3–5 prove the asserted restricted filtered union. No clause is moved to a new node. Imported node has blueprint.from=null and no whole-node same_as match.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic module-sheaf kernels/colimits and compatibility with abelian sheaves, needed to prove the module-coefficient union; the unit has no such general tool."
+   },
+   {
+    "node": "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+    "why": "Generic exactness of filtered colimits establishes the canonical map is monic; no node of this unit supplies that fact."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Exactness identifies kernel stalks and preserves monomorphisms in the restricted-union proof."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic detection of abelian etale-sheaf isomorphisms from geometric stalks."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "why": "Computes the nonzero Z/2 stalks needed for the imported comparison example."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Computes the on-open and off-open stalks of the imported j_! counterexample."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-extension-by-zero-stalks"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-f5a12de23",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-f5a12de23 (reviewer sub-agent of L); spot-checked: I read the item, its unit, the main-20261015 blueprint section, all 16 stmt_deps and 12 proof_deps, and Stacks 01V8, 01VB, 03CO, 03PU and 03S5 at the cited places. The STATEMENT-DISPUTED change from 'smooth varieties' to the criterion with smooth residue-field fibres is correct and disclosed; I checked the counterexample ⊔_ℕ Spec k → Spec k. Steps 1-2 follow exactly from sbc-lem-smooth-criterion and from sbc-lem-affine-space-smooth with the definition of relative dimension (n=0 included). Steps 3-5 are a valid proof of the restricted union over I_S: I_S contains 1 and is closed under products; the abelian colimit comes from the forgetful lemma; a filtered colimit of monos is mono (the Grothendieck lemma states this); colim(const F)=F is argued; exact stalks give kernel stalks, and with conservativity c is an isomorphism; the inverse is Λ-linear. Step 6: on Spec Z, j_!(Z/2) has stalk Z/2 on D(2) and 0 off it, and the only positive unit of Z is 1. Edge cases checked: n=0, the zero sheaf, S empty, I_S={1}. The current blueprint has no R^q clause, so no target or clause is weakened. No new nodes. lem-kun-invertible-orders-colimit (field case) and lemma-weil-pbc-torsion-filtered-union (all integers) are not duplicates. I accept the six generic-sheaf tool_uses. FIX (B3): 'geometric point' had no definition node; I added [def-weil-geometric-point] to the statement and to stmt_deps in fixes/dag/nodes/sec-smooth-base-change/sk-def-smooth.json.; 1 file(s) fixed by the reviewer"
  }
 }

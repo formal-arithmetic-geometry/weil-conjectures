@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "sk-thm-sf-hom-ctf",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "thm-sf-hom-ctf"
+  ]
  },
  "kind": "statement",
  "title": "Internal Hom with finite Tor amplitude",
@@ -13,40 +15,99 @@
   "place": "node sk-thm-sf-hom-ctf, order 1713"
  },
  "stmt_deps": [
-  "sk-def-sf-admissible"
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-finite-tor-amplitude",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-strict-perfect-coefficient-package"
  ],
  "proof": [
   {
-   "text": "The sharper interval fails for general $K$: for\nthe origin $i:\\{0\\}\\hookrightarrow\\mathbf A^1$ the complexes $i_*A$ and $A$\nhave Tor amplitude $[0,0]$, but $\\RHom_A(i_*A,A)=i_*A(-1)[-2]$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Constructibility: every cohomology sheaf of $\\RHom_A(K,M)$ is constructible,\nbecause the $\\mathcal Ext$-sheaves of two constructible complexes are\nconstructible on a common stratification. Dualizable case (no duality\ntheory is needed for it): a dualizable $K$ is perfect, and a perfect complex\nwith Tor amplitude in $[a,b]$ is locally a bounded complex $P$ of finite\nprojective $A$-modules in degrees $[a,b]$, so\n$\\RHom_A(K,M)=P^\\vee\\otimes^L_AM$ locally, $P^\\vee$ being finite projective\nin degrees $[-b,-a]$; tensoring with $M$ of Tor amplitude $[c,d]$ gives Tor\namplitude in $[c-b,d-a]$, and since stalks are exact and conservative on the\nétale site the interval holds globally. General case: the stalk of $\\RHom$ is *not*\n$\\RHom$ of the stalks (the example above), and one argues geometrically. No\nadmissibility datum on the structure morphism $a_X$ is assumed: the general\ninterval rests on [sk-prop-sf-biduality-general], whose dualizing complex is\nformed with the unconditional constructible adjoint $Ra_X^!$ of\n[sk-def-sf-operations] (vi) — Brown representability gives the étale\nadjoint of $Ra_{X!}$ for the compactifiable $a_X$ between Noetherian schemes\n([def-weil-exceptional-inverse-image]), [thm-sf-ambient-adjoint-class] transports it to $\\Dctf$, and the preservation clauses are\n[sk-prop-sf-rf-shriek-preservation]. By\n[sk-prop-sf-biduality-general] — applied to $a_X$, with the\nunconditional $Ra_X^!$ — and the tensor–Hom adjunction,\n$\\RHom_A(K,M)\\cong\\mathbb D_X(K\\otimes^L_A\\mathbb D_XM)$, and $\\mathbb D_X$\ncarries Tor amplitude $[c,d]$ into $[-d-2m,-c]$ (the dualizing complex has\ncohomology in $[-2m,0]$). Applying this twice, with the additivity of Tor\namplitude for $\\otimes^L$, gives $[c-b-2m,d-a+2m]$.",
+   "text": "If $m<0$, then $\\dim X\\le m$ forces $\\dim X=-\\infty$, so $X$ is empty by [def-kun-topological-krull-dimension]. The small etale site of the empty scheme has only the empty object, covered by the empty family, so every sheaf on it is zero; hence $K=M=0$ and $\\RHom_A(K,M)=0$. The zero complex is bounded constructible, and every derived tensor product with it vanishes, so it has Tor amplitude in every interval; both conclusions hold. Assume from now on $m\\geq0$. The existing split node [thm-sf-hom-ctf] proves the same finite-stage étale internal-Hom theorem. Instantiate its global finite-field datum with the $A=A_{E,n}$, $X$, dimension bound $m$, amplitudes $[a,b]$ and $[c,d]$, and complexes $K,M$ of this item; all hypotheses match the definitions in the statement. Its general clause gives bounded constructibility and the interval $[c-b-2m,d-a+2m]$, and its site-perfect clause gives the sharper interval $[c-b,d-a]$. That clause applies: the item's hypothesis, that locally on $X_{\\Et}$ the complex $K$ is isomorphic to a bounded complex of finite projective $A$-module sheaves (direct summands of finite free ones) in degrees $[a,b]$, implies the cited theorem's site-perfect hypothesis by forgetting the degree bounds.",
    "uses": [
-    "sk-def-sf-operations",
-    "def-weil-exceptional-inverse-image",
-    "thm-sf-ambient-adjoint-class",
-    "sk-prop-sf-rf-shriek-preservation"
+    "def-kun-topological-krull-dimension",
+    "thm-sf-hom-ctf"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-hom-ctf/_section.md",
+    "place": "node sk-thm-sf-hom-ctf, order 1713; theorem statement and proof route"
+   }
   }
  ],
  "proof_deps": [
-  "sk-def-sf-operations",
-  "def-weil-exceptional-inverse-image",
-  "thm-sf-ambient-adjoint-class",
-  "sk-prop-sf-rf-shriek-preservation",
-  "sk-prop-sf-existence"
+  "def-kun-topological-krull-dimension",
+  "thm-sf-hom-ctf"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-hom-ctf/_section.md",
-  "place": "## Proof"
+  "place": "The theorem statement is realized by the existing split node thm-sf-hom-ctf, which has the complete finite-stage proof."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom of bounded constructible etale complexes preserves finite Tor amplitude with dimension bounds",
+   "results": "8 hits. DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE and DerivedCategory.IsGE/IsLE and associated localization bounds concern ordinary cohomological bounds; none gives constructible etale internal Hom or its Tor window.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom of bounded constructible etale complexes has finite Tor dimension",
+   "results": "8 hits, including HomologicalComplex.locallySmall, CategoryTheory.IsGrothendieckAbelian.hasExt, and CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE. These give size/existence of Ext or complex limits, not the asserted constructibility and Tor bounds.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ihom",
+   "results": "12 hits, including CategoryTheory.ihom, CategoryTheory.ihom.adjunction, and CategoryTheory.MonoidalClosed.unitIsoSelf. Their signatures concern internal Hom in closed monoidal categories; none has constructibility or Tor-amplitude hypotheses or conclusions.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|derivedHom|constructibleFiniteTor",
+   "results": "0 hits in the Mathlib source.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier duality internal Hom of constructible finite Tor complexes on an etale site with perfect first argument",
+   "results": "8 hits. LightCondensed monoidal-closed and internally-projective statements, LightCondensed.ihomPoints, and Ext. The returned signatures do not assert the geometric finite-Tor internal-Hom theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ihom|internalHom",
+   "results": "25 displayed hits in CategoryTheory/Monoidal/Closed, including Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:76 (ihom) and :82 (ihom.adjunction), and internal currying/functor/enrichment constructions. These do not state constructibility or the dimension-dependent Tor interval.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a small etale site the derived sheaf Hom between constructible torsion complexes is constructible and of bounded flat dimension",
+   "results": "8 hits. Read the returned types: CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, SheafOfModules.isFinitePresentation, CategoryTheory.Sheaf.H, SheafOfModules.IsFinitePresentation, instAbelianCondensedMod, AlgebraicGeometry.Scheme.Modules.instAbelian, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, LightCondensed.instIsGrothendieckAbelianLightCondMod. These concern abelian/Grothendieck categories, finite presentation, sheaf cohomology or a cohomological bound; none states constructibility and finite Tor bounds for derived internal Hom.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Constructible.*[Hh]om|[Hh]om.*Constructible|[Tt]or.*[Aa]mplitude",
+   "results": "10 displayed hits, all about constructible subsets of spectra or scheme morphisms (ChevalleyComplexity.lean, ConstructibleSet.lean, Chevalley.lean, Morphisms/FinitePresentation.lean). No constructible-sheaf internal-Hom or Tor-amplitude theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -253,5 +314,21 @@
     }
    ]
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-thm-sf-hom-ctf",
+  "worker": "stage1",
+  "summary": "Rechecked the earlier attempt against the current blueprint, the full statement and reviewed split of thm-sf-hom-ctf, and the current read-only Lean source. The existing theorem has precisely both conclusions under the same finite-coefficient global datum, without a separatedness hypothesis. Reuse it rather than create duplicate nodes. Recorded fresh logged Mathlib searches and repaired the report to identify the current Lean locations and the actual scope of the citation check. No new nodes.",
+  "blueprint": "The item is the main-20261015 restatement of the finite-stage internal-Hom theorem. Its proof is discharged by the existing split node thm-sf-hom-ctf, whose detailed proof realizes the affine-local, Verdier-duality, constructibility, and finite-projective site-perfect routes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-2bf5cb85d",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-2bf5cb85d (reviewer sub-agent of L); spot-checked: Read the whole item, the main-20261015 statement and proof (sec-six-functors-basics/sk-thm-sf-hom-ctf/_section.md and .proof.md), the older master section (thm-sf-hom-ctf.md, rem-sf-proetale-hom-status), the unit, the chapter, and the cited reviewed node thm-sf-hom-ctf in full (all nine steps), plus the statements of cor-weil-finite-constructible-hom, lem-sf-site-perfect-tor-window and lem-sf-ext-sheaf-constructible and the statement-dependency definitions. The item's statement is the source's verbatim and is not weakened. Its k, A_{E,n} and étale A_X-module coefficient category are the global datum used by thm-sf-hom-ctf. Neither is pro-étale or condensed, and no base-change morphism is involved. X may be non-separated in both. a<=b and c<=d are forced by def-weil-finite-tor-amplitude. The item's site-perfect hypothesis (finite projective terms in degrees [a,b]) implies the theorem's by dropping the degree bounds. Conclusions are identical. There is no cycle: the closure of thm-sf-hom-ctf does not contain the item. The duplicate search found only thm-sf-hom-ctf as the exact statement; the others are separated-only, pro-étale or coefficient-change variants. The unit route is kept, because thm-sf-hom-ctf realizes the unit's single step through geometric Verdier biduality plus the local finite-projective model. There are no new nodes, no SGA, and no tool uses needed. Small cases checked: the point, the origin in A^1 (degree 2 lies in [-2,2]), m=0, and empty or zero inputs. One fault repaired (E1): step 1 claimed all hypotheses match, but the item allows an integer m<0 while the cited theorem needs m>=0. The fix adds the m<0 case: X is empty by def-kun-topological-krull-dimension, so every sheaf vanishes and the conclusion is trivial. It also states explicitly why the site-perfect clause applies. uses and proof_deps are now {def-kun-topological-krull-dimension, thm-sf-hom-ctf}. The corrected file is fixes/dag/nodes/sec-six-functors-basics/sk-thm-sf-hom-ctf.json; details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

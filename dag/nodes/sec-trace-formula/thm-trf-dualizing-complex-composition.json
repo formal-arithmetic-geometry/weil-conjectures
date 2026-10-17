@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-trf-dualizing-complex-composition",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Composition for the dualizing complex",
@@ -16,41 +16,154 @@
   "def-trf-dualizing-complex",
   "def-trf-coefficient-conventions",
   "def-weil-finite-field-fiber",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-scheme-morphism-properties",
+  "def-trf-admissibility",
+  "def-weil-exceptional-inverse-image"
  ],
  "proof": [
   {
-   "text": "The composition and base-change exchange data for the exceptional inverse\nimage of [def-trf-admissibility], together with the composition law\n$R(a_X\\circ d)_!\\cong Ra_{X!}Rd_!$ of the six-operations package\n[prop-functor-package] (item (3)), give the adjoint composition\nisomorphism\n\n$$\nRd^!Ra_X^!\\xrightarrow{\\ \\sim\\ }R(a_X\\circ d)^!=Ra_F^!.\n$$",
+   "text": "Write $\\mathcal D_T=D^b_{ctf}(T,A)$, $L_f=Rf_!$ and $R_f=Rf^!$. By [def-trf-admissibility], the three morphisms $d,a_X,a_F$ have specified adjunctions $L_f\\dashv R_f$ on these categories. The hypotheses give admissibility for the two structure morphisms; for $d$ the same definition explicitly states that every separated finite-type morphism of finite-type $k$-schemes is admissible. Thus all three adjunctions have the same finite coefficient ring $A$ and the same constructible finite-Tor domains. Clause (3) of [prop-functor-package] supplies the natural isomorphism $\\alpha:L_{a_X}L_d\\xrightarrow{\\sim}L_{a_F}$, with its identity and associativity equations. Only this compact-support composition clause is used from that package.",
    "uses": [
     "def-trf-admissibility",
     "prop-functor-package"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-six/thm-trf-dualizing-complex-composition.proof.md",
+    "place": "First paragraph; prop-functor-package, clause (3)"
+   }
   },
   {
-   "text": "Applying it to the constant complex $A_s$ and using\n$\\omega_{X,A}=Ra_X^!A_s$, $\\omega_{F,A}=Ra_F^!A_s$ of\n[def-trf-dualizing-complex] gives the displayed canonical\nisomorphism; its compatibility with further compositions is the coherence\nof the exchange data of [def-trf-admissibility]. (The types of\n$Rd^!$ are those of [def-weil-exceptional-inverse-image].)",
+   "text": "Apply [lem-cat-right-adjoint-composition] to $L_d$ and $L_{a_X}$: $R_dR_{a_X}$ is right adjoint to $L_{a_X}L_d$, with pasted counit. The same left functor has right adjoint $R_{a_F}$: explicitly transport $L_{a_F}\\dashv R_{a_F}$ along $\\alpha$ by the natural bijections $\\operatorname{Hom}(L_{a_X}L_dK,N)\\xrightarrow{h\\mapsto h\\alpha_K^{-1}}\\operatorname{Hom}(L_{a_F}K,N)\\cong\\operatorname{Hom}(K,R_{a_F}N)$. The canonical right-adjoint comparison in [lem-cat-right-adjoint-composition] therefore gives a natural isomorphism $\\chi_{d,a_X}:R_dR_{a_X}\\xrightarrow{\\sim}R_{a_F}$. More explicitly, $\\chi_{d,a_X,N}$ is the $L_{a_F}\\dashv R_{a_F}$ transpose of\n$$L_{a_F}R_dR_{a_X}N\\xrightarrow{\\alpha^{-1}}L_{a_X}L_dR_dR_{a_X}N\\xrightarrow{L_{a_X}\\varepsilon_d}L_{a_X}R_{a_X}N\\xrightarrow{\\varepsilon_{a_X}}N.$$\nThis specifies the comparison rather than an arbitrary isomorphism between the objects; the inverse is the reverse right-adjoint comparison. The displayed formula uses precisely the pasted counit asserted by the cited node.",
    "uses": [
-    "def-trf-dualizing-complex",
-    "def-trf-admissibility",
-    "def-weil-exceptional-inverse-image"
+    "lem-cat-right-adjoint-composition"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0DV0, lemma-compose-counits; Tag 0037, definition-adjoint; Tag 0B65, lemma-transformation-between-functors-and-adjoints"
+   }
+  },
+  {
+   "text": "The constant complex $A_s$ is in $\\mathcal D_s$: its sole cohomology sheaf is the constant finite rank-one free $A$-module, hence constructible. For every sheaf $M$ of $A$-modules in degree zero, the free rank-one complex $A_s$ itself is a flat model and $A_s\\otimes_A^L M=M$, so cohomology outside degree zero vanishes. This gives Tor amplitude $[0,0]$ by [def-weil-finite-tor-amplitude], with the finite coefficient ring of [def-trf-coefficient-conventions]. Evaluate $\\chi_{d,a_X}$ at $A_s$. By [def-trf-dualizing-complex], $R_{a_X}A_s=\\omega_{X,A}$ and $R_{a_F}A_s=\\omega_{F,A}$. The resulting component is the required canonical isomorphism $R_d\\omega_{X,A}\\xrightarrow{\\sim}\\omega_{F,A}$.",
+   "uses": [
+    "def-trf-coefficient-conventions",
+    "def-weil-finite-tor-amplitude",
+    "def-trf-dualizing-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-six/thm-trf-dualizing-complex-composition.proof.md",
+    "place": "Second paragraph: evaluate the composition isomorphism at the constant complex"
+   }
+  },
+  {
+   "text": "Here is the compatibility with further composition. Let $e:H\\to F$ be another separated finite-type morphism in the same setting and put $a_H=a_Xde$. Compare the two maps $R_eR_dR_{a_X}N\\to R_{a_H}N$: first $R_e(\\chi_{d,a_X,N})$ followed by $\\chi_{e,a_F,N}$, or first $\\theta_{e,d,R_{a_X}N}$ followed by $\\chi_{de,a_X,N}$. Here, writing $\\alpha_{d,e}:L_dL_e\\xrightarrow{\\sim}L_{de}$ for the compact-support comparison, define $\\theta_{e,d,M}:R_eR_dM\\to R_{de}M$ to be the $L_{de}\\dashv R_{de}$ transpose of $\\varepsilon_{d,M}\\circ L_d(\\varepsilon_{e,R_dM})\\circ\\alpha_{d,e,R_eR_dM}^{-1}$; it is an isomorphism by the same right-adjoint-composition statement used in Step 2. After the associativity identification $L_{a_H}\\cong L_{a_X}L_dL_e$ of [prop-functor-package], their transposes are both\n$$L_{a_X}L_dL_eR_eR_dR_{a_X}N\\xrightarrow{L_{a_X}L_d\\varepsilon_e}L_{a_X}L_dR_dR_{a_X}N\\xrightarrow{L_{a_X}\\varepsilon_d}L_{a_X}R_{a_X}N\\xrightarrow{\\varepsilon_{a_X}}N.$$\nFor the first path, naturality of $\\varepsilon_e$ gives $\\varepsilon_{e,R_{a_F}N}\\circ L_eR_e(\\chi_{d,a_X,N})=\\chi_{d,a_X,N}\\circ\\varepsilon_{e,R_dR_{a_X}N}$; after moving $\\chi_{d,a_X,N}$ past this counit, its defining transpose formula in Step 2 gives the last two displayed arrows. For the second path, the counit-compatibility and pasted-counit clause of [lem-cat-right-adjoint-composition], applied first to $e,d$ at $R_{a_X}N$, replaces their combined counit by $L_d\\varepsilon_e$ followed by $\\varepsilon_d$; applying the $a_X$ counit gives exactly the same three arrows. In detail, the associativity equation is\n$$\\alpha_{a_F,e}\\circ(\\alpha_{a_X,d}L_e)=\\alpha_{a_X,de}\\circ(L_{a_X}\\alpha_{d,e}).$$\nTaking its inverse gives the same initial map from $L_{a_H}$ to $L_{a_X}L_dL_e$ in both transposes. The adjunction Hom bijection is injective, so the two component maps agree. For identities, let $\\lambda_T:L_{\\mathrm{id}_T}\\xrightarrow{\\sim}\\mathrm{id}_{\\mathcal D_T}$ be the compact-support unit isomorphism. The canonical isomorphism $u_T:R_{\\mathrm{id}_T}\\xrightarrow{\\sim}\\mathrm{id}_{\\mathcal D_T}$ has components $u_{T,M}=\\varepsilon_{\\mathrm{id}_T,M}\\circ\\lambda_{T,R_{\\mathrm{id}_T}M}^{-1}$: transport the specified identity-morphism adjunction along $\\lambda_T$ and compare its right adjoint with that of $\\mathrm{id}\\dashv\\mathrm{id}$ by [lem-cat-right-adjoint-composition] (take both functors to be identities). In particular $\\varepsilon_{\\mathrm{id}_T,M}=u_{T,M}\\circ\\lambda_{T,R_{\\mathrm{id}_T}M}$. For the source identity and $g:T\\to U$, the unit equation $\\alpha_{g,\\mathrm{id}_T}=L_g\\lambda_T$ makes the transpose of $\\chi_{\\mathrm{id}_T,g,M}$ equal to\n$$\\varepsilon_{g,M}\\circ L_g(\\varepsilon_{\\mathrm{id}_T,R_gM}\\circ\\lambda_{T,R_{\\mathrm{id}_T}R_gM}^{-1})\n=\\varepsilon_{g,M}\\circ L_g(u_{T,R_gM}).$$\nBy the adjunction bijection this gives $\\chi_{\\mathrm{id}_T,g,M}=u_{T,R_gM}$. For the target identity and $f:V\\to T$, use $\\alpha_{\\mathrm{id}_T,f}=\\lambda_TL_f$. Naturality of $\\lambda_T$ makes the transpose of $\\chi_{f,\\mathrm{id}_T,M}$ equal to\n$$\\varepsilon_{\\mathrm{id}_T,M}\\circ\\lambda_{T,R_{\\mathrm{id}_T}M}^{-1}\\circ\\varepsilon_{f,R_{\\mathrm{id}_T}M}\n=u_{T,M}\\circ\\varepsilon_{f,R_{\\mathrm{id}_T}M}\n=\\varepsilon_{f,M}\\circ L_fR_f(u_{T,M}),$$\nwhere the final equality is counit naturality for $f$. Hence $\\chi_{f,\\mathrm{id}_T,M}=R_f(u_{T,M})$. Thus these comparisons are identities after the canonical identifications $R_{\\mathrm{id}_T}\\cong\\mathrm{id}$, without requiring the specified functor or counit to be literally identities. Evaluating these equations at $N=A_s$ proves functoriality in $d$.",
+   "uses": [
+    "prop-functor-package",
+    "lem-cat-right-adjoint-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0DV0, lemma-compose-counits; Tag 0037, definition-adjoint (injectivity of transposition); blueprint proof, final coherence sentence"
+   }
   }
  ],
  "proof_deps": [
   "def-trf-admissibility",
   "prop-functor-package",
-  "def-trf-dualizing-complex",
-  "def-weil-exceptional-inverse-image"
+  "lem-cat-right-adjoint-composition",
+  "def-trf-coefficient-conventions",
+  "def-weil-finite-tor-amplitude",
+  "def-trf-dualizing-complex"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-six/thm-trf-dualizing-complex-composition.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-six/thm-trf-dualizing-complex-composition.proof.md",
+  "place": "Both paragraphs, identical to the master proof: expanded using the adjunction Hom bijections and pasted counits of Stacks Tags 0037 and 0DV0, and explicit composition and unit equations."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "dualizingComplex|rightDerivedUpperShriek",
+   "results": "0 hits: none",
+   "date": "2026-10-17",
+   "verdict": "no match: no exceptional inverse image or dualizing-complex theorem for these constructible pro-etale categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq, CategoryTheory.Adjunction.comp",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match: no exceptional inverse image or dualizing-complex theorem for these constructible pro-etale categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional pullback of the dualizing complex is the dualizing complex of the source scheme",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Pullback.instHasPullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.IsProper.instFstScheme, AlgebraicGeometry.IsProper.instSndScheme, AlgebraicGeometry.Scheme.Pullback.isAffine_of_isAffine_isAffine_isAffine",
+   "date": "2026-10-17",
+   "verdict": "no match: no exceptional inverse image or dualizing-complex theorem for these constructible pro-etale categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exceptional inverse image of a dualizing complex is canonically the dualizing complex of the source, compatible with composition",
+   "results": "8 hits: CategoryTheory.Functor.map_distinguished_op_exact, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, HomologicalComplex.quasiIsoAt_unopFunctor_map_iff, HomologicalComplex.dgoEquivHomologicalComplex_inverse, HomologicalComplex.quasiIso_unopFunctor_map_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: no exceptional inverse image or dualizing-complex theorem for these constructible pro-etale categories"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointUniq|comp_counit_app|conjugateEquiv",
+   "results": "17 hits: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean; subdirectory CategoryTheory/Adjunction",
+   "date": "2026-10-16",
+   "verdict": "formal ingredients only: Adjunction.comp and rightAdjointUniq; no geometric theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "12 hits: CategoryTheory.Adjunction.rightAdjointUniq, CategoryTheory.Adjunction.rightAdjointUniq_refl, CategoryTheory.Adjunction.rightAdjointUniq_inv_app, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom, CategoryTheory.Adjunction.rightAdjointUniq_trans, CategoryTheory.Adjunction.rightAdjointUniq_trans_app, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app",
+   "date": "2026-10-17",
+   "verdict": "formal ingredient only: right-adjoint uniqueness is already the Mathlib leaf lem-cat-right-adjoint-composition; not an exact match or one-line specialization for this geometric theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoints to compactly supported direct image compose, giving functorial isomorphisms between dualizing objects",
+   "results": "8 hits: PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp, CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction, CondensedSet.compactlyGeneratedAdjunction, LightCondensed.ihomPoints_symm_comp, CondensedSet.compactlyGeneratedAdjunctionCounitIso, CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction, CompHausLike.LocallyConstant.adjunction_counit, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+   "date": "2026-10-17",
+   "verdict": "no match: no exceptional inverse image or dualizing-complex theorem for these constructible pro-etale categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.Adjunction.comp\"",
+   "results": "12 hits: CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.comp_map_bijective_iff, CategoryTheory.Adjunction.compCoyonedaIso, CategoryTheory.Adjunction.compUliftCoyonedaIso, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.compYonedaIso, CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.comp_unit_app",
+   "date": "2026-10-16",
+   "verdict": "formal ingredient already represented by lem-cat-right-adjoint-composition, not the geometric theorem with its coherence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.Adjunction.rightAdjointUniq_trans_app\"",
+   "results": "2 hits: CategoryTheory.Adjunction.rightAdjointUniq_trans_app, CategoryTheory.Adjunction.rightAdjointUniq_trans_app_assoc",
+   "date": "2026-10-17",
+   "verdict": "categorical coherence ingredients only, already covered by the existing categorical leaf; no geometric dualizing-composition theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of right adjoints and their counits gives a canonical isomorphism for pullback of the dualizing object",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.ExponentiableMorphism.ev_coev_assoc, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.ExponentiableMorphism.coev_ev_assoc, CategoryTheory.ExponentiableMorphism.coev_naturality_assoc, CategoryTheory.ExponentiableMorphism.ev_def, CategoryTheory.ExponentiableMorphism.ev, CategoryTheory.ExponentiableMorphism.coev_def",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state constructible exceptional pullback of the dualizing object or its coherent comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|Dualizing|UpperShriek",
+   "results": "10 hits: Mathlib/Tactic/Translate/ToDual.lean, Mathlib/Algebra/Homology/HomotopyFiber.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/Data/Set/Defs.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: results do not state constructible exceptional pullback of the dualizing object or its coherent comparisons"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -83,5 +196,29 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-d-six"
+ "unit": "sk-d-six",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "thm-trf-dualizing-complex-composition",
+  "worker": "stage1",
+  "summary": "Kept the statement, reused the existing categorical right-adjoint-composition Mathlib leaf, and expanded the adjunction transport, counit normalization, evaluation at the finite coefficient unit, and further-composition coherence. Added the two direct statement dependencies for admissibility and exceptional inverse image. No new nodes; no attachment because the located Lean declaration gives only Nonempty of an isomorphism. Second reading: made the e,d comparison and identity-adjunction normalization explicit and corrected the current proof-file attribution. Restart review: cited the finite-Tor definition directly, wrote the flat-model calculation for the coefficient unit, and refreshed narrow verbatim citation excerpts against the current prerequisites. Independent second reader: displayed the left-composition associativity equation and both identity transpose calculations; marked the coherence step non-elementary because it invokes the categorical lemma.",
+  "blueprint": "Steps 1-2 realize the first paragraph of the main-20261015 companion .proof.md (identical to the master proof); Step 3 realizes its evaluation at A_s; Step 4 supplies its further-composition equality and the unit coherence required by the current sk-d-six unit. The statement is unchanged.",
+  "tool_uses": [
+   {
+    "node": "prop-functor-package",
+    "why": "Only clause (3), compact-support composition with its identity and associativity equations, is used as the generic geometric operation law explicitly invoked by the blueprint proof; sk-d-six specifies the package and does not prove this realization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-functor-package"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-367643482",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-367643482 (reviewer sub-agent of L); spot-checked: I read the full delivery and the delivery adds no new nodes. The statement is unchanged and matches both the master and main-20261015 blueprint texts. It uses the finite-stage pro-étale D^b_ctf category throughout, the same one used by def-trf-admissibility and def-trf-dualizing-complex. Step 1: admissibility gives the specified adjunctions for every separated finite-type morphism, d included, and prop-functor-package clause (3) gives compact-support composition with its unit and associativity laws on separated finite-type schemes over k. Step 2: lem-cat-right-adjoint-composition is an exact Mathlib match (Adjunction.comp, Basic.lean:565-585; rightAdjointUniq and rightAdjointUniq_hom_counit, Unique.lean:102/133). The transported Hom bijection and the displayed counit are correctly typed, so chi is the conjugate of alpha. Step 3: A_s is constructible and has Tor amplitude [0,0]; this step really is elementary. Step 4: I recomputed both triple-composition transposes and both reduce to eps_aX ∘ L eps_d ∘ LL eps_e after the associativity identification. The two identity equations with u_T = eps_id ∘ lambda^-1 also check. Edge cases checked: d or a_X an identity (with the F_3 adjunction whose unit and counit are -id), empty F, zero N, and n=1 versus n>1. No dependency path from the item's dependencies leads back to it, and proof_deps equals the union of the steps' uses. No duplicate exists in the DAG. No SGA source is cited. I accept the declared tool use of prop-functor-package clause (3), because the blueprint proof itself invokes it. No fixes were needed."
+ }
 }

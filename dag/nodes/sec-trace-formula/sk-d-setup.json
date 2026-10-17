@@ -3,22 +3,175 @@
  "blueprint": {
   "is": "sk-d-setup",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Coefficients and geometric categories",
- "statement": "Fix $q=p^r$, $k=\\overline{\\mathbf F}_q$, $s=\\operatorname{Spec}k$, a prime\n$\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with uniformizer $\\varpi$,\nand $A=\\mathcal O_E/\\varpi^n$, $n\\ge1$.\nA geometric scheme is separated and of finite type over $k$; its structure\nmap is $a_X:X\\to s$. Maps between geometric schemes are $k$-maps, and\nunsubscripted products are over $s$.\nDimension is the supremum of lengths of chains of irreducible closed\nsubsets. Reduction means quotienting the structure sheaf by its nilradical.\nA universal homeomorphism is a morphism inducing a homeomorphism after\nevery base change. These terms are used only in the final reduction steps.\nWrite $D(X,A)$ for the ordinary derived category of sheaves of $A$-modules\non $X_{\\mathrm{pro\\acute et}}$, and $D^b_{ctf}(X,A)$ for its bounded\nconstructible objects of finite Tor-amplitude. The subcategories\n$D^b_{ctf}(X,A)$ are fixed as part of the coefficient data: for every scheme $X$,\n$D^b_{ctf}(X,A)$ is a triangulated subcategory of $D(X,A)$, closed under\nisomorphisms, and stable under $f^*$ for every morphism $f$ and under $Rf_!$\nfor every compactifiable morphism $f$. For a commutative ring $R$,\n$\\Perf(R)\\subset D(R)$ consists of objects represented by bounded complexes\nof finitely generated projective $R$-modules.",
+ "statement": "Fix the global finite-field datum [def-weil-finite-field-fiber], with $q=p^r$, $k=\\overline{\\mathbf F}_q$, $s=\\operatorname{Spec}k$, a prime\n$\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with uniformizer $\\varpi$,\nand $A=\\mathcal O_E/\\varpi^n$, $n\\ge1$ [def-weil-l-adic-coefficient-extension].\nA geometric scheme is a scheme [def-pc-scheme] separated [def-weil-proper-morphism] and of finite type [def-weil-finite-type-morphism] over $k$; its structure\nmap is $a_X:X\\to s$ [def-weil-scheme-over-base, def-weil-affine-spectrum]. Maps between geometric schemes are $k$-maps [def-weil-scheme-over-base], and\nunsubscripted products are fibre products over $s$ [def-pc-fibre-product].\nDimension is the supremum of lengths of chains of irreducible closed\nsubsets [def-kun-topological-krull-dimension]. Reduction means quotienting the structure sheaf by its nilradical [def-weil-pbc-scheme-reduction].\nA universal homeomorphism is a morphism inducing a homeomorphism after\nevery base change [def-weil-universal-homeomorphism]. These terms are used only in the final reduction steps.\nWrite $D(X,A)$ for the ordinary derived category of sheaves of $A$-modules\non $X_{\\mathrm{pro\\acute et}}$ [def-weil-pbc-proetale-site], and $D^b_{ctf}(X,A)$ for its bounded\nconstructible objects [def-weil-finite-torsion-constructibility] of finite Tor-amplitude [def-weil-proetale-tor-amplitude]. This definition uses the latter general ringed-site Tor-amplitude predicate for every scheme $X$; on schemes where $\\ell$ is invertible it is the finite-coefficient subcategory of [def-weil-finite-tor-amplitude].\nOn geometric schemes $X$, the subcategories $D^b_{ctf}(X,A)$ are fixed as part of the coefficient data, subject to the following requirements. They are full triangulated subcategories [def-weil-triangulated-subcategory] of $D(X,A)$, closed under isomorphisms. For every $k$-morphism $f:X\\to Y$ between geometric schemes,\n$$\nf^*\\bigl(D^b_{ctf}(Y,A)\\bigr)\\subseteq D^b_{ctf}(X,A).\n$$\nFor every compactifiable such $f$ [def-asd-compactifiable], choose a compactification $f=\\bar f\\circ j$, with $\\overline X$ geometric, $j:X\\hookrightarrow\\overline X$ an open $k$-immersion and $\\bar f:\\overline X\\to Y$ a proper $k$-morphism, and use the chosen-compactification functor\n$$\nRf_!:=R\\bar f_*\\,j_!:D(X,A)\\longrightarrow D(Y,A)\n$$\nof [def-compact-support-direct-image-detailed]. Require\n$$\nRf_!\\bigl(D^b_{ctf}(X,A)\\bigr)\\subseteq D^b_{ctf}(Y,A).\n$$\nHere $f^*=Lf^*$ and $R\\bar f_*$ are the ordinary, uncompleted derived inverse and direct images of [def-weil-pbc-proetale-operations], for the constant coefficient sheaves. Extension by zero $j_!$ [def-weil-extension-by-zero] is applied termwise to complexes, using its exactness [lem-weil-extension-by-zero-exact] and the induced derived functor [lem-sf-exact-functor-derived-triangulated]. The chosen composite is defined on $D(X,A)$; compactification independence is used only on the bounded-below étale-origin subcategory specified by [def-compact-support-direct-image-detailed], not on the entire unbounded category. Triangulatedness, closure under isomorphisms, and the two preservation conditions are requirements on this geometric coefficient package. The definitions of $D(X,A)$ and of bounded constructible finite-Tor objects remain available for arbitrary schemes, but these requirements quantify only over geometric schemes and $k$-maps. This corrects the false all-scheme stability requirement of the imported sketch.\nFor a commutative ring $R$,\n$\\Perf(R)\\subset D(R)$ consists of objects represented by bounded complexes\nof finitely generated projective $R$-modules [def-pc-perfect-ring-complex].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-setup/_section.md",
   "place": "node sk-d-setup, order 2610"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-scheme-over-base",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-universal-homeomorphism",
+  "def-weil-pbc-proetale-site",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-triangulated-subcategory",
+  "def-asd-compactifiable",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-extension-by-zero",
+  "lem-weil-extension-by-zero-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-pc-perfect-ring-complex"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient geometric scheme setup: ordinary pro-etale derived category of modules, bounded constructible finite Tor amplitude, and perfect complexes over a ring",
+   "results": "8 hits, headed by AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, and Algebra.FormallyEtale.instForallOfFinite; other hits concern etale algebra. None defines the combined coefficient/geometric-category datum.",
+   "date": "2026-10-16",
+   "verdict": "no match: no declaration states this combined coefficient and geometric-category convention; its constituents are existing statement dependencies"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, Perfect",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match: no declaration states this combined coefficient and geometric-category convention; its constituents are existing statement dependencies"
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricCoefficients|constructibleFiniteTor|PerfectComplex|ProEtale",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:11,39,61,65,66 and Mathlib/AlgebraicGeometry/Sites/Proetale.lean:34,50,52,57,58. Read Proetale.lean:20-100: these provide the pro-etale site, not this combined datum.",
+   "date": "2026-10-16",
+   "verdict": "no match: no declaration states this combined coefficient and geometric-category convention; its constituents are existing statement dependencies"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coefficients and geometric categories: bounded constructible pro-etale complexes of finite Tor amplitude over a finite quotient of the integers in a local field",
+   "results": "8 hits, including DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE (Mathlib.Algebra.Homology.DerivedCategory.TStructure), AlgebraicGeometry.Scheme.etalePretopology, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, LightCondensed and formally-etale algebra declarations. Read the TStructure source: generic boundedness is only one constituent, not the combined datum.",
+   "date": "2026-10-16",
+   "verdict": "no match: no declaration states this combined coefficient and geometric-category convention; its constituents are existing statement dependencies"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A category of separated schemes of finite type over an algebraically closed finite field with finite torsion coefficients and constructible derived categories",
+   "results": "8 hits: AlgebraicGeometry.IsFinite and its affine/fibre/of_comp instances, AlgebraicGeometry.LocallyOfFiniteType, and AlgebraicGeometry.AffineScheme. No coefficient/constructible-category package.",
+   "date": "2026-10-16",
+   "verdict": "no match: no declaration states this combined coefficient and geometric-category convention; its constituents are existing statement dependencies"
+  },
+  {
+   "tool": "grep",
+   "query": "def (proetaleTopology|constructible|perfect)|structure Geometric|class IsGeometric",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match: no declaration states this combined coefficient and geometric-category convention; its constituents are existing statement dependencies",
+   "sub": "AlgebraicGeometry"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSeparated, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "10 hits: AlgebraicGeometry.ext_of_apply_eq, IsProper.mk, isProper_iff, isProper_eq and Zariski Main Theorem facts; none gives the combined datum.",
+   "date": "2026-10-16",
+   "verdict": "no match: no declaration states this combined coefficient and geometric-category convention; its constituents are existing statement dependencies"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fixed finite coefficient data assigning to every scheme the full subcategory of bounded constructible pro-etale complexes of finite Tor amplitude and requiring preservation by pullback and compact-support direct image",
+   "results": "The eight hits concern LocallyOfFiniteType, LocallyOfFinitePresentation, etale morphisms and affine transition limits; none defines the fixed coefficient and stability package.",
+   "date": "2026-10-16",
+   "verdict": "no match: no hit states the whole fixed coefficient and geometric-category datum"
+  },
+  {
+   "tool": "loogle",
+   "query": "ObjectProperty.IsTriangulated, AlgebraicGeometry.Scheme",
+   "results": "0 hits; loogle: unknown identifier 'ObjectProperty.IsTriangulated'. This identifier query is inconclusive, not evidence that the constituent is absent.",
+   "date": "2026-10-16",
+   "verdict": "inconclusive identifier query; no exact package found; generic triangulated-subcategory constituent already cited"
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricCoefficients|ctf_upperStar|ctf_lowerShriek|finiteTorAmplitude",
+   "results": "0 hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-16",
+   "verdict": "no match: no hit states the whole fixed coefficient and geometric-category datum",
+   "sub": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fixed bounded constructible finite Tor subcategories of pro-etale derived categories for every scheme, stable under pullback and compactifiable direct image",
+   "results": "8 hits: CategoryTheory.Tor, CategoryTheory.Tor', AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, DerivedCategory.TStructure.t, DerivedCategory.IsLE, CategoryTheory.Subfunctor.IsFinite.mk, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.IsFinite.instSndScheme. These give ordinary derived/t-structure, Tor, topology and morphism notions, not the fixed coefficient/stability package.",
+   "date": "2026-10-16",
+   "verdict": "no match: no hit states the whole fixed coefficient and geometric-category datum"
+  },
+  {
+   "tool": "grep",
+   "query": "constructibleFiniteTor|GeometricCoefficients|HasFiniteTorDimension",
+   "results": "0 hits in Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite coefficient system on schemes assigning ordinary derived categories of module sheaves and replete constructible subcategories of finite Tor dimension stable under inverse image and compactifiable direct image",
+   "results": "8 hits: SheafOfModules.IsFiniteType, SheafOfModules.isFinitePresentation, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFiniteType.exists_localGeneratorsData, and SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType. These concern local finite generation/presentation of module sheaves, not the scheme-indexed constructible derived-category package.",
+   "date": "2026-10-16",
+   "verdict": "no match for the combined setup"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsTriangulated",
+   "results": "12 hits, including CategoryTheory.ObjectProperty.IsTriangulated and its closure instances. Read Mathlib/CategoryTheory/Triangulated/Subcategory.lean:180-185: this is the generic triangulated object-property class already supplied by def-weil-triangulated-subcategory, not the whole coefficient/geometric-category setup.",
+   "date": "2026-10-16",
+   "verdict": "constituent match already cited; no match for the combined setup"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient setup on separated finite type schemes over an algebraically closed finite field with bounded constructible finite Tor derived subcategories preserved by pullback and compact support direct image",
+   "results": "8 hits: AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit and exists_appTop_map_eq_zero_of_isLimit (Mathlib/AlgebraicGeometry/AffineTransitionLimit); AlgebraicGeometry.IsFinite.of_comp, Scheme.Hom.finite_app, IsFinite.finite_app, IsFinite.comp_iff and the HasAffineProperty instance (Mathlib/AlgebraicGeometry/Morphisms/Finite); AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite (Mathlib/AlgebraicGeometry/Fiber). These concern finite scheme maps and limits, not the coefficient package.",
+   "date": "2026-10-17",
+   "verdict": "no match for the combined geometric coefficient setup"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsTriangulated, DerivedCategory",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match for the combined geometric coefficient setup"
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricCoefficients|constructibleFiniteTor|ctf_lowerShriek|PerfectComplex",
+   "results": "0 hits in Mathlib.",
+   "date": "2026-10-17",
+   "verdict": "no match for the combined geometric coefficient setup"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible finite Tor amplitude pro-etale complexes on separated schemes of finite type over a field, stability under inverse image and compact support pushforward",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instFullPushforward (Mathlib.AlgebraicGeometry.Modules.Sheaf); AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme and IsEtale.instHasOfPostcompPropertyScheme (Mathlib.AlgebraicGeometry.Morphisms.Etale); RingHom.Etale.stableUnderComposition (Mathlib.RingTheory.RingHom.Etale); AlgebraicGeometry.Scheme.etalePretopology, smallEtalePretopology and etaleTopology (Mathlib.AlgebraicGeometry.Sites.Etale); CategoryTheory.MorphismProperty.IsStableUnderComposition.inverseImage (Mathlib.CategoryTheory.MorphismProperty.Composition). These concern module-sheaf pushforward and morphism/topology properties, not the coefficient package.",
+   "date": "2026-10-17",
+   "verdict": "no match for the combined geometric coefficient setup"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -54,5 +207,27 @@
     "AlgebraicGeometry.ProEtale.GeometricCoefficients"
    ]
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sk-d-setup",
+  "worker": "stage1",
+  "summary": "Repaired returned E7/E2: the retrocompact constructibility definition makes the imported all-scheme compact-support stability false. Restrict the fixed-data stability requirements to geometric schemes and k-maps, recording the polynomial-ring counterexample and all ten direct citer checks in report.md. Ordinary D(X,A) and the general Tor predicate remain defined on arbitrary schemes. Choose a compactification for each compactifiable geometric map and use its actual composite R fbar_* j_!; do not require compactification independence on the entire unbounded category. This respects the current def-compact-support-direct-image-detailed restriction to bounded-below etale-origin complexes. Restore omitted lean_audit metadata, correct logged search dates, and flag the stale perfect-complex tag and historical unit for maintenance. No new nodes or proof steps. In this continuation, reread the returned repair against the current shared statements and sources, repeated the four corrected-scope searches, and made the geometric k-scheme compactification domain explicit.",
+  "blueprint": "All paragraphs of main-20261015 sk-d-setup/_section.md, order 2610, are realized: coefficient datum, geometric schemes/maps/products, dimension/reduction/universal homeomorphisms, ordinary pro-etale D(X,A), bounded constructible finite Tor objects, corrected geometric-scope stability requirements, and Perf(R). The source error in the all-scheme requirement is explicitly recorded rather than retained as an impossible fixed-data axiom. The definition unit has no proof steps; only its realization fields are changed.",
+  "repair": {
+   "return": "E7/E2 at returned head c6ead0af8d: impossible all-scheme Rf_! stability, missing Source error, non-qcqs pullback scope, citer recheck; stale perfect-complex tag and unit text.",
+   "source_error": "For R=k[x_1,x_2,...] and m=(x_1,x_2,...), the closed immersion i:Spec(R/m)->Spec(R) is proper and finite type. With A=Z/ell, H^0(Ri_!A)=i_*A is not constructible. A constructible stratum containing m also contains the prime (x_1,...,x_N) for some finite N; flat going-down prevents a weakly etale local trivialization of the nonzero stalk at m with support only at m. Thus the literal all-scheme fixed-data requirement is inconsistent.",
+   "decision": "Require stability only on separated finite-type k-schemes and k-maps, matching GeometricCoefficients and the (i)/(iv) domain of thm-sf-ctf-stability. No non-qcqs preservation statement remains. The general ambient categories are still defined.",
+   "scope": "For each compactifiable geometric map use a chosen compactification composite; independence outside the etale-origin domain is not asserted. All ten direct citers retain the notions they use; generic ambient-operation uses require their own expressly supplied functors and adjunctions.",
+   "maintenance": "def-pc-perfect-ring-complex source should be Stacks Tag 0657, more-algebra-definition-perfect, not 0A1U. The unit record still cites the older master snapshot. These maintainer-owned texts are reported, not edited."
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-b56929dee",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-b56929dee (reviewer sub-agent of L); spot-checked: I read the definition sk-d-setup in full against the source, main-20261015 sec-trace-formula/sk-d-setup/_section.md order 2610, and diffed it with master order 2266. I also read all 23 statement dependencies, the cross-check nodes thm-sf-ctf-stability, def-weil-derived-direct-image, def-weil-compact-support-candidate, def-weil-compactifications-refinements and def-weil-constructible-subset, the citers sk-d-six, sk-d-corr, sk-d-operator and sk-d-weil, and the slopmaster2 GeometricCoefficients structure in Defs.lean. All other clauses match the source: the coefficient datum, geometric schemes and maps, dimension, reduction, universal homeomorphisms, the ordinary pro-etale D(X,A), D^b_ctf as bounded constructible plus Stacks 08FZ Tor amplitude (the same subcategory as def-weil-finite-tor-amplitude where l is invertible), and Perf(R) (Stacks 0657, read). The one change is an established E7 source error, and I confirmed it independently. The closed immersion Spec k -> Spec k[x1,x2,...] at m is finite type and proper (Stacks morphisms lemma-immersion-locally-finite-type and lemma-closed-immersion-proper), so it is compactifiable with j=id. Its Ri_!A = i_*A is not constructible: a constructible set (Stacks 005G) containing m also contains p_N=(x1..xN), and going-down along a flat cover contradicts local constancy. The repair restricts the pullback and Rf_! stability requirements to geometric schemes and k-maps. That is exactly the scope of the GeometricCoefficients fields (IsGeometricHom) and of thm-sf-ctf-stability (i),(iv), so the requirements are true. sk-d-setup is not a target, and no target is weakened. Rf_! is the chosen-compactification composite R fbar_* j_!, consistent with def-compact-support-direct-image-detailed and def-weil-compact-support-candidate. Compactification independence is claimed only on the etale-origin subcategory. j_! is applied termwise through exactness and Stacks 015F (read). Requiring the compactification to be geometric loses no case. Edge cases checked: a point with f=id, the empty scheme, open and proper maps, and A=Z/l^2 with M=Z/l, which has infinite Tor amplitude and is excluded, so the finite-Tor condition is not vacuous. The statement dependencies are acyclic. There are no new nodes, no tool uses and no SGA citations. No citer breaks: each supplies its own operation data outside the geometric case. No fixes. Maintenance notes for the maintainer, not faults of this delivery: def-pc-perfect-ring-complex should cite Tag 0657 instead of 0A1U; the unit record's source still points to master; HUMAN.md should record the disputed all-scheme clause."
  }
 }

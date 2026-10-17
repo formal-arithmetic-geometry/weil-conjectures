@@ -28,9 +28,84 @@
  "stmt_deps": [
   "def-coef-segal-presheaf-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the fixed small universe of the presheaf definitions. For a presheaf $T$ equipped with a map $t:T\\to L$, put $\\Phi(T,t)=X\\times_{p^*L}p^*T$, with its projection to $X$; maps over $L$ give maps over $X$. The cited free-cocompletion result supplies small presheaf colimits, and the cited pointwise theorem computes these colimits and pullbacks objectwise. A colimit of objects over a fixed base is their underlying colimit equipped with its induced map to that base: this follows from the colimit universal property by taking the homotopy fibers imposing compatibility with the base. At $c\\in C_\\otimes$, restriction gives $(p^*T)(c)=T(p(c))$, so restriction preserves those colimits. The space-valued pullback comparison in the cited universality theorem, applied over the small space $L(p(c))$ along $X(c)\\to L(p(c))$, therefore gives\n$$\\operatorname{colim}_j\\Phi(T_j,t_j)(c)\\simeq X(c)\\times_{L(p(c))}\\operatorname{colim}_jT_j(p(c))\\simeq\\Phi(\\operatorname{colim}_jT_j,t)(c).$$\nThe comparisons are natural. The componentwise-equivalence criterion of [lem-coef-infinity-pointwise-equivalences] then makes this a presheaf equivalence over $X$. Consequently $\\Phi:P(\\Delta)_{/L}\\to P(C_\\otimes)_{/X}$ preserves all small colimits, in particular pushouts and ordinal colimits. Here slices mean maps to the displayed base and coherently commuting triangles; no strict fiber product is substituted for a homotopy pullback.",
+   "uses": [
+    "lem-coef-infinity-presheaf-free-cocompletion",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-space-universal-colimits",
+    "lem-coef-infinity-pointwise-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1707.08049",
+    "place": "Lemma 2.7.14 proof, colimit preservation and base-change reduction, expanded using objectwise presheaf calculations; Proposition 2.7.8, universality argument."
+   }
+  },
+  {
+   "text": "Let $\\sigma:\\Delta^a\\to L$. Simplicity says that $X_\\sigma$ is represented by an object $e=[r](\\boldsymbol e)$ of $C_\\otimes$ and that the adjoint $p_!X_\\sigma\\to\\Delta^a$ of its projection is an equivalence. Yoneda evaluation and the defining adjunction give, naturally in $G\\in P(\\Delta)$,\n$$\\operatorname{Map}(p_!y(e),G)\\simeq\\operatorname{Map}(y(e),p^*G)\\simeq G([r])\\simeq\\operatorname{Map}(\\Delta^r,G).$$\nBy Yoneda full faithfulness (applied also to the opposite presheaf category in a containing universe), this identifies $p_!y(e)$ with $\\Delta^r$. Under this identification the adjoint projection is induced by a monotone map $\\alpha:[r]\\to[a]$. Yoneda full faithfulness makes $\\alpha$ an isomorphism because its represented map is an equivalence. An order isomorphism of finite ordinals forces $r=a$ and $\\alpha=\\mathrm{id}$. The labels of $e$ thus form a list in $C^a$. Under the adjunction its identity base map corresponds precisely to the structural unit $y(e)\\to p^*\\Delta^a$. Thus $X_\\sigma\\to p^*\\Delta^a$ is equivalent OVER $p^*\\Delta^a$ to $\\Delta^a(\\boldsymbol e)\\to p^*\\Delta^a$, not merely equivalent as an underlying presheaf.",
+   "uses": [
+    "def-coef-segal-presheaf-localization",
+    "lem-coef-infinity-yoneda-evaluation",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1707.08049",
+    "place": "Definition 2.7.11 and Lemma 2.7.14, identification of the pulled-back representable and its adjoint projection; Haugseng arXiv:2311.13362v1 Definition 6.7."
+   }
+  },
+  {
+   "text": "For an inner horn $h:\\Lambda^a_b\\to\\Delta^a$ and any $\\sigma:\\Delta^a\\to L$, associating the homotopy pullbacks gives\n$$\\Phi(\\Lambda^a_b,\\sigma h)\\simeq X_\\sigma\\times_{p^*\\Delta^a}p^*\\Lambda^a_b,$$\ncompatibly with the arrow to $\\Phi(\\Delta^a,\\sigma)=X_\\sigma$. Step 2 identifies this arrow with the labelled inner horn generator\n$$\\Delta^a(\\boldsymbol e)\\times_{p^*\\Delta^a}p^*\\Lambda^a_b\\longrightarrow\\Delta^a(\\boldsymbol e).$$\nIt therefore belongs to $\\mathcal A_C$. This calculation only uses the defining pullback and the over-base identification; it does not assume that arbitrary pullbacks preserve inner anodyne maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1707.08049",
+    "place": "Lemma 2.7.14, final two pullback squares and generator identification; Haugseng Proposition 6.9 applied to the horn generators."
+   }
+  },
+  {
+   "text": "Define a class $\\mathcal W$ of arrows $v:A\\to B$ in $P(\\Delta)$ by requiring that, for EVERY $t:B\\to L$, the arrow $\\Phi(A,tv)\\to\\Phi(B,t)$ belongs to $\\mathcal A_C$. By step 3 every ordinary inner horn inclusion belongs to $\\mathcal W$. To verify pushout closure, let $v\\in\\mathcal W$, form $B'=B\\amalg_A A'$, and fix any $t':B'\\to L$. Restricting $t'$ equips the entire pushout diagram with maps to $L$. Step 1 sends this pushout to\n$$\\Phi(B',t')\\simeq\\Phi(B,t'|_B)\\amalg_{\\Phi(A,t'|_A)}\\Phi(A',t'|_{A'}).$$\nThe arrow $\\Phi(A',t'|_{A'})\\to\\Phi(B',t')$ is a pushout of the image of $v$, which is in $\\mathcal A_C$ by the definition of $\\mathcal W$. It belongs to $\\mathcal A_C$ by its defining pushout closure. Since $t'$ was arbitrary, $A'\\to B'$ belongs to $\\mathcal W$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1707.08049",
+    "place": "Proposition 2.7.8, closure under cobase change; Lemma 2.7.14 proof. The class with all maps of the codomain to L makes the slice argument explicit."
+   }
+  },
+  {
+   "text": "For transfinite closure, let $(A_\\beta)_{\\beta\\leq\\lambda}$ be a small continuous ordinal diagram whose successor arrows are in $\\mathcal W$, and fix $t:A_\\lambda\\to L$. Put $t_\\beta=t\\circ(A_\\beta\\to A_\\lambda)$. At every successor stage the arrow $\\Phi(A_\\beta,t_\\beta)\\to\\Phi(A_{\\beta+1},t_{\\beta+1})$ lies in $\\mathcal A_C$, since $t_{\\beta+1}$ is one of the maps tested in the definition of $\\mathcal W$. At each limit ordinal $\\gamma\\leq\\lambda$, step 1 identifies\n$$\\Phi(A_\\gamma,t_\\gamma)\\simeq\\operatorname{colim}_{\\beta<\\gamma}\\Phi(A_\\beta,t_\\beta).$$\nThus the image is itself a continuous transfinite composition of arrows of $\\mathcal A_C$. Its composite is in $\\mathcal A_C$ by the defining closure of that class. As this holds for every $t$, the composite $A_0\\to A_\\lambda$ is in $\\mathcal W$. The zero-length case is an identity, as included in transfinite-composition closure; no large ordinal or colimit outside the fixed universe is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1707.08049",
+    "place": "Proposition 2.7.8, closure under transfinite compositions, with the continuous diagram and its limit stages written out."
+   }
+  },
+  {
+   "text": "For retract closure, suppose $v:A\\to B$ is a retract of $w:A'\\to B'$ in the arrow category, with codomain maps $i_B:B\\to B'$ and $r_B:B'\\to B$ satisfying $r_Bi_B=\\mathrm{id}_B$ (with the coherent retract data). If $w\\in\\mathcal W$ and $t:B\\to L$, equip $B'$ with $tr_B$ and each domain with the composite through its arrow. The retract diagram is now over $L$: on $B$, $tr_Bi_B=t$, and on domains the same equality follows from the commuting arrow squares. Applying the functor $\\Phi$ preserves the retract data. The image of $w$ is in $\\mathcal A_C$, so its retract, the image of $v$, is in $\\mathcal A_C$. Hence $\\mathcal W$ is retract closed. Steps 3--5 and this retract calculation show that $\\mathcal W$ is weakly saturated and contains all the inner horns. By the defining minimality of $\\mathcal A_\\Delta$, it contains $\\mathcal A_\\Delta$. Apply this to $u:K\\to L$ and the tested map $\\mathrm{id}_L$: since $\\Phi(L,\\mathrm{id}_L)\\simeq X$, the resulting arrow is exactly $X\\times_{p^*L}p^*K\\to X$, proving the claim.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1707.08049",
+    "place": "Proposition 2.7.8, retract closure, and Lemma 2.7.14; Haugseng Definition 6.1 and Proposition 6.9. Expanded without invoking a small-object factorization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-segal-presheaf-localization",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-infinity-presheaf-free-cocompletion",
+  "lem-coef-infinity-yoneda-evaluation",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-space-universal-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, finite-coefficient mapping-complex adjunction; foundation through the recorded enriched-tensor ancestry. Agent-expanded reconstruction of Haugseng Definition 6.7/Proposition 6.9 and Chu–Haugseng Proposition 2.7.8/Lemma 2.7.14, read online but not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -87,10 +162,136 @@
    "results": "{\"t\": \"2026-10-16T21:39:19Z\", \"tool\": \"grep\", \"query\": \"pullback.*[Cc]olimit|[Cc]olimit.*pullback|[Ss]imple.*[Aa]nodyne\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Condensed/Light/Sequence.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Defs.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Defs.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/DisjointCoproduct.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/DisjointCoproduct.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/DisjointCoproduct.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/DisjointCoproduct.lean\"], \"digest\": \"657934dba3cbcd68\"}",
    "date": "2026-10-16",
    "verdict": "no match: hits are ordinary pullback/coequalizer and coproduct universal properties or the already cited ordinary simplicial pushout-product theorem; they do not state this infinity-categorical theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "simpleMap|simple_map|innerAnodyne.*pullback|pullback.*innerAnodyne",
+   "results": "{\"t\": \"2026-10-16T22:22:41Z\", \"tool\": \"grep\", \"query\": \"simpleMap|simple_map|innerAnodyne.*pullback|pullback.*innerAnodyne\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits concern ordinary simplicial sets (StdSimplex.faceRepresentableBy, generating horns, fillers), ordinary pullback preservation, and sheaf pullback on ordinary categories. The source files Inner/Basic.lean:40-59, CategoryWithFibrations.lean:38-55, Quasicategory/Basic.lean:39-54 and CategoryTheory/Simple.lean:53-65 do not state base change along a simple map of labelled space-valued infinity-presheaves. Second phrasing also returned ordinary horns/fillers, so the item is not a one-line Mathlib specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]imple.*[Mm]ap|[Ii]nner.*[Aa]nodyne",
+   "results": "{\"t\": \"2026-10-16T22:22:41Z\", \"tool\": \"grep\", \"query\": \"[Ss]imple.*[Mm]ap|[Ii]nner.*[Aa]nodyne\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Simple.lean\"], \"digest\": \"e693b13f817714d6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits concern ordinary simplicial sets (StdSimplex.faceRepresentableBy, generating horns, fillers), ordinary pullback preservation, and sheaf pullback on ordinary categories. The source files Inner/Basic.lean:40-59, CategoryWithFibrations.lean:38-55, Quasicategory/Basic.lean:39-54 and CategoryTheory/Simple.lean:53-65 do not state base change along a simple map of labelled space-valued infinity-presheaves. Second phrasing also returned ordinary horns/fillers, so the item is not a one-line Mathlib specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simple maps of infinity categorical presheaves preserve inner anodyne maps by pullback",
+   "results": "{\"t\": \"2026-10-16T22:22:41Z\", \"tool\": \"leansearch\", \"query\": \"Simple maps of infinity categorical presheaves preserve inner anodyne maps by pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsPullback.map\", \"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"TopCat.Presheaf.pullback\", \"CategoryTheory.Functor.map_isPullback\", \"TopCat.Presheaf.presheafEquivOfIso_inverse_obj_map\", \"CategoryTheory.PreservesPullbacksOfInclusions.mk\", \"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\", \"CategoryTheory.Presieve.functorPullback\"], \"digest\": \"88bf7a76253600e8\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits concern ordinary simplicial sets (StdSimplex.faceRepresentableBy, generating horns, fillers), ordinary pullback preservation, and sheaf pullback on ordinary categories. The source files Inner/Basic.lean:40-59, CategoryWithFibrations.lean:38-55, Quasicategory/Basic.lean:39-54 and CategoryTheory/Simple.lean:53-65 do not state base change along a simple map of labelled space-valued infinity-presheaves. Second phrasing also returned ordinary horns/fillers, so the item is not a one-line Mathlib specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A colimit preserving pullback functor sends the weak saturation of inner horn inclusions into the weak saturation of labelled horns",
+   "results": "{\"t\": \"2026-10-16T22:22:41Z\", \"tool\": \"leanfinder\", \"query\": \"A colimit preserving pullback functor sends the weak saturation of inner horn inclusions into the weak saturation of labelled horns\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.J\", \"SSet.KanComplex.hornFilling\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.quasicategory_of_filler\", \"SSet.Quasicategory.hornFilling\", \"SSet.horn.isColimit\", \"SSet.modelCategoryQuillen.I\"], \"digest\": \"cce0f08de09d79b6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits concern ordinary simplicial sets (StdSimplex.faceRepresentableBy, generating horns, fillers), ordinary pullback preservation, and sheaf pullback on ordinary categories. The source files Inner/Basic.lean:40-59, CategoryWithFibrations.lean:38-55, Quasicategory/Basic.lean:39-54 and CategoryTheory/Simple.lean:53-65 do not state base change along a simple map of labelled space-valued infinity-presheaves. Second phrasing also returned ordinary horns/fillers, so the item is not a one-line Mathlib specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"innerAnodyneExtensions\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-16T22:22:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"innerAnodyneExtensions\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits concern ordinary simplicial sets (StdSimplex.faceRepresentableBy, generating horns, fillers), ordinary pullback preservation, and sheaf pullback on ordinary categories. The source files Inner/Basic.lean:40-59, CategoryWithFibrations.lean:38-55, Quasicategory/Basic.lean:39-54 and CategoryTheory/Simple.lean:53-65 do not state base change along a simple map of labelled space-valued infinity-presheaves. Second phrasing also returned ordinary horns/fillers, so the item is not a one-line Mathlib specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simple map of space valued presheaves with representable simplex pullbacks pulls back inner anodyne maps to labelled inner anodyne maps",
+   "results": "{\"t\": \"2026-10-16T22:22:45Z\", \"tool\": \"leanfinder\", \"query\": \"A simple map of space valued presheaves with representable simplex pullbacks pulls back inner anodyne maps to labelled inner anodyne maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.stdSimplex.faceRepresentableBy\", \"SSet.S.mk_map_le\", \"SSet.RelativeMorphism.ofSimplex₀\", \"SSet.stdSimplex.objMk\", \"SSet.degenerate_le_preimage\", \"SSet.modelCategoryQuillen.I\", \"SimplicialObject.Splitting.IndexSet.pull\", \"SSet.Subcomplex.fromPreimage\"], \"digest\": \"2b6c941557f682dd\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: semantic hits concern ordinary simplicial sets (StdSimplex.faceRepresentableBy, generating horns, fillers), ordinary pullback preservation, and sheaf pullback on ordinary categories. The source files Inner/Basic.lean:40-59, CategoryWithFibrations.lean:38-55, Quasicategory/Basic.lean:39-54 and CategoryTheory/Simple.lean:53-65 do not state base change along a simple map of labelled space-valued infinity-presheaves. Second phrasing also returned ordinary horns/fillers, so the item is not a one-line Mathlib specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "faceRepresentableBy",
+   "results": "{\"t\": \"2026-10-16T22:29:10Z\", \"tool\": \"grep\", \"query\": \"faceRepresentableBy\", \"sub\": \"AlgebraicTopology/SimplicialSet/StdSimplex.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"402\", \"522\", \"557\", \"600\", \"618\"], \"digest\": \"f02de246939dc1e8\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: faceRepresentableBy in Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex.lean:402 represents an ordinary face subcomplex by an ordinal; it does not state the labelled infinity-presheaf simple-map base-change theorem. The single-file grep output has its line number in the file slot; the directory grep supplies the full file path."
+  },
+  {
+   "tool": "grep",
+   "query": "faceRepresentableBy",
+   "results": "{\"t\": \"2026-10-16T22:29:26Z\", \"tool\": \"grep\", \"query\": \"faceRepresentableBy\", \"sub\": \"AlgebraicTopology/SimplicialSet\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex.lean\"], \"digest\": \"798c234831ecbd04\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: faceRepresentableBy in Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex.lean:402 represents an ordinary face subcomplex by an ordinal; it does not state the labelled infinity-presheaf simple-map base-change theorem. The single-file grep output has its line number in the file slot; the directory grep supplies the full file path."
+  },
+  {
+   "tool": "grep",
+   "query": "simpleMap|simple_map|innerAnodyne.*pullback|pullback.*innerAnodyne",
+   "results": "{\"t\": \"2026-10-17T00:08:27Z\", \"tool\": \"grep\", \"query\": \"simpleMap|simple_map|innerAnodyne.*pullback|pullback.*innerAnodyne\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits; ordinary SSet horn generators (CategoryWithFibrations.lean:38–59), ordinal face representability (StdSimplex.lean:402), ordinary Guitart-exact Kan-extension base change (CategoryTheory/GuitartExact/KanExtension.lean:185–197), and fibration/precoverage stability concern other categories or assumptions. None gives the labelled space-valued infinity-presheaf assertion; the second semantic phrasing also returned ordinary simplicial-set constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"innerAnodyneExtensions\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-17T00:08:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"innerAnodyneExtensions\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits; ordinary SSet horn generators (CategoryWithFibrations.lean:38–59), ordinal face representability (StdSimplex.lean:402), ordinary Guitart-exact Kan-extension base change (CategoryTheory/GuitartExact/KanExtension.lean:185–197), and fibration/precoverage stability concern other categories or assumptions. None gives the labelled space-valued infinity-presheaf assertion; the second semantic phrasing also returned ordinary simplicial-set constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of inner anodyne presheaf maps along simple maps of labelled infinity categorical presheaves",
+   "results": "{\"t\": \"2026-10-17T00:08:27Z\", \"tool\": \"leansearch\", \"query\": \"Base change of inner anodyne presheaf maps along simple maps of labelled infinity categorical presheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"CategoryTheory.Functor.mapPresheaf_map_f\", \"CategoryTheory.isStableUnderBaseChange_comap_jointlySurjectivePrecoverage\", \"CategoryTheory.TwoSquare.isIso_lanBaseChange_app\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeTrivialFibrations\", \"CategoryTheory.Precoverage.IsStableUnderBaseChange\", \"CategoryTheory.GrothendieckTopology.instIsStableUnderBaseChangeToPrecoverage\", \"CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange\"], \"digest\": \"a97313510892535f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits; ordinary SSet horn generators (CategoryWithFibrations.lean:38–59), ordinal face representability (StdSimplex.lean:402), ordinary Guitart-exact Kan-extension base change (CategoryTheory/GuitartExact/KanExtension.lean:185–197), and fibration/precoverage stability concern other categories or assumptions. None gives the labelled space-valued infinity-presheaf assertion; the second semantic phrasing also returned ordinary simplicial-set constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simple maps with representable simplex fibers pull back weakly saturated inner horn inclusions to labelled inner anodyne presheaf maps",
+   "results": "{\"t\": \"2026-10-17T00:08:28Z\", \"tool\": \"leanfinder\", \"query\": \"Simple maps with representable simplex fibers pull back weakly saturated inner horn inclusions to labelled inner anodyne presheaf maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn.const\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.PtSimplex.RelStruct.map\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.stdSimplex.faceRepresentableBy\", \"SSet.horn.yonedaEquiv_ι\", \"SSet.horn₃₂.ι₁_desc\"], \"digest\": \"c51ef2e61fb62ba1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits; ordinary SSet horn generators (CategoryWithFibrations.lean:38–59), ordinal face representability (StdSimplex.lean:402), ordinary Guitart-exact Kan-extension base change (CategoryTheory/GuitartExact/KanExtension.lean:185–197), and fibration/precoverage stability concern other categories or assumptions. None gives the labelled space-valued infinity-presheaf assertion; the second semantic phrasing also returned ordinary simplicial-set constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor preserving small colimits and retracts sends the weak saturation of generating labelled horns into the weak saturation of their images",
+   "results": "{\"t\": \"2026-10-17T00:08:47Z\", \"tool\": \"leanfinder\", \"query\": \"A functor preserving small colimits and retracts sends the weak saturation of generating labelled horns into the weak saturation of their images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SimplexCategory.Truncated.morphismProperty_eq_top\", \"SSet.cosk\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.sk\", \"SSet.Truncated.HomotopyCategory.multiplicativeClosure_morphismPropertyHomMk\"], \"digest\": \"9577d68edec2382c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected hits; ordinary SSet horn generators (CategoryWithFibrations.lean:38–59), ordinal face representability (StdSimplex.lean:402), ordinary Guitart-exact Kan-extension base change (CategoryTheory/GuitartExact/KanExtension.lean:185–197), and fibration/precoverage stability concern other categories or assumptions. None gives the labelled space-valued infinity-presheaf assertion; the second semantic phrasing also returned ordinary simplicial-set constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "simpleMap|simple_map|innerAnodyne.*pullback|pullback.*innerAnodyne",
+   "results": "{\"t\": \"2026-10-17T00:32:37Z\", \"tool\": \"grep\", \"query\": \"simpleMap|simple_map|innerAnodyne.*pullback|pullback.*innerAnodyne\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned statements and Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex.lean:402-405, CategoryWithFibrations.lean:38-59, and CategoryTheory/GuitartExact/KanExtension.lean:185-197. The hits concern ordinary simplicial sets, fibration/precoverage stability, or an ordinary Guitart-exact square; none states the labelled infinity-presheaf simple-map assertion. The second semantic phrasing again returns ordinary horn generators and their colimit presentations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"innerAnodyneExtensions\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-17T00:32:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"innerAnodyneExtensions\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned statements and Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex.lean:402-405, CategoryWithFibrations.lean:38-59, and CategoryTheory/GuitartExact/KanExtension.lean:185-197. The hits concern ordinary simplicial sets, fibration/precoverage stability, or an ordinary Guitart-exact square; none states the labelled infinity-presheaf simple-map assertion. The second semantic phrasing again returns ordinary horn generators and their colimit presentations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of inner anodyne presheaf maps along simple maps of labelled infinity categorical presheaves",
+   "results": "{\"t\": \"2026-10-17T00:32:38Z\", \"tool\": \"leansearch\", \"query\": \"Base change of inner anodyne presheaf maps along simple maps of labelled infinity categorical presheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"CategoryTheory.Functor.mapPresheaf_map_f\", \"CategoryTheory.isStableUnderBaseChange_comap_jointlySurjectivePrecoverage\", \"CategoryTheory.TwoSquare.isIso_lanBaseChange_app\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeTrivialFibrations\", \"CategoryTheory.Precoverage.IsStableUnderBaseChange\", \"CategoryTheory.GrothendieckTopology.instIsStableUnderBaseChangeToPrecoverage\", \"CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange\"], \"digest\": \"a97313510892535f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned statements and Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex.lean:402-405, CategoryWithFibrations.lean:38-59, and CategoryTheory/GuitartExact/KanExtension.lean:185-197. The hits concern ordinary simplicial sets, fibration/precoverage stability, or an ordinary Guitart-exact square; none states the labelled infinity-presheaf simple-map assertion. The second semantic phrasing again returns ordinary horn generators and their colimit presentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simple map of space valued presheaves with representable simplex pullbacks pulls back inner anodyne maps to labelled inner anodyne maps",
+   "results": "{\"t\": \"2026-10-17T00:32:42Z\", \"tool\": \"leanfinder\", \"query\": \"A simple map of space valued presheaves with representable simplex pullbacks pulls back inner anodyne maps to labelled inner anodyne maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.stdSimplex.faceRepresentableBy\", \"SSet.S.mk_map_le\", \"SSet.RelativeMorphism.ofSimplex₀\", \"SSet.stdSimplex.objMk\", \"SSet.degenerate_le_preimage\", \"SSet.modelCategoryQuillen.I\", \"SimplicialObject.Splitting.IndexSet.pull\", \"SSet.Subcomplex.fromPreimage\"], \"digest\": \"2b6c941557f682dd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned statements and Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex.lean:402-405, CategoryWithFibrations.lean:38-59, and CategoryTheory/GuitartExact/KanExtension.lean:185-197. The hits concern ordinary simplicial sets, fibration/precoverage stability, or an ordinary Guitart-exact square; none states the labelled infinity-presheaf simple-map assertion. The second semantic phrasing again returns ordinary horn generators and their colimit presentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A colimit preserving pullback functor sends the weak saturation of inner horn inclusions into the weak saturation of labelled horns",
+   "results": "{\"t\": \"2026-10-17T00:35:13Z\", \"tool\": \"leanfinder\", \"query\": \"A colimit preserving pullback functor sends the weak saturation of inner horn inclusions into the weak saturation of labelled horns\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.horn.isColimit\", \"SSet.modelCategoryQuillen.boundary_ι_mem_I\", \"SSet.horn₃₂.ι₁_desc\", \"SSet.horn₃₂.ι₃_desc\", \"SSet.horn₃₁.ι₂_desc\"], \"digest\": \"8f1e1d1cdb2243b1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned statements and Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex.lean:402-405, CategoryWithFibrations.lean:38-59, and CategoryTheory/GuitartExact/KanExtension.lean:185-197. The hits concern ordinary simplicial sets, fibration/precoverage stability, or an ordinary Guitart-exact square; none states the labelled infinity-presheaf simple-map assertion. The second semantic phrasing again returns ordinary horn generators and their colimit presentations."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-labelled-spine-prism-horn-calculus",
@@ -110,5 +311,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simple-inner-anodyne-base-change",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged after comparing Haugseng Definition 6.7 and Proposition 6.9. Gave a six-step proof using existing space universality, pointwise presheaf (co)limits, presheaf colimit existence and Yoneda evaluation/full faithfulness; proved the over-base generator identification and each weak-saturation closure explicitly. No new nodes, no Mathlib match, no Lean attachment. Repeated all four Mathlib search modes and a second semantic phrasing. Second reader replaced the broad cross-unit componentwise-equivalence citation by the existing exact criterion lem-coef-infinity-pointwise-equivalences in the same unit; no new node or tool-use record is needed.",
+  "blueprint": "Realizes the finite-coefficient mapping-complex adjunction in paragraph 2 of prop-coef-integral-exceptional-adjoint.proof.md through the existing via chain, specifically the simple-map base-change input to the labelled boundary–horn prisms (Haugseng Corollary 7.4), beneath enriched tensor cocontinuity. No unit statement or proof route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NA-f1d002126",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-f1d002126 (reviewer sub-agent of L); spot-checked: I read the item and all six cited statements in full and wrote review.md; I wrote no fixes. The item's statement, stmt_deps, blueprint, unit and created fields are identical to the side base copy; only the proof, proof_deps, proof_origin, split_report, status and added searches changed. Sources read: Haugseng arXiv:2311.13362v1 Defs 6.1, 6.2 and 6.7 and Prop 6.9 (online), and Chu–Haugseng arXiv:1707.08049 pp.26-29, Def 2.7.1, Prop 2.7.8(i)-(iii), Cor 2.7.9, Def 2.7.11, Notation 2.7.13 and Lemma 2.7.14 (PDF via pdftotext in /tmp). The statement matches the sources: generators for a>=2 and 0<b<a, the three closure operations, simplicity requiring the adjoint projection to be an equivalence, and the same base-change direction. The item uses only the generic P(C_otimes) of def-coef-segal-presheaf-localization, so there is no target coefficient category or scheme base-change morphism to compare. Step checks: step 1 shows slice colimits are underlying colimits, p* is evaluation at p(c), applies universal-colimits over L(pc) along X(c), then pointwise-equivalences on the nerve of C_otimes^op. Step 2 uses the Yoneda chain to get p_!y(e)=Delta^r; the projection is a monotone map alpha, simplicity forces alpha=id, so the map is the structural unit over Delta^a, and the projection clause is genuinely used (counterexample at a=1 without it). Step 3 is pasting of homotopy pullbacks, objectwise, which I accept as elementary. Steps 4-6 prove pushout, transfinite and retract closure of the class W that tests every map to L, matching CH 2.7.8; then minimality, and t=id_L gives the claim. Edge cases tested: a=0,1,2, empty L, identity u, terminal C, and X=Delta^n(c). Cited nodes are all in unit sk-prop-sf-biduality-general and none is merged; proof_deps equals the union of the step uses; a traversal of 440 dependencies found no cycle; the parent lem-coef-labelled-spine-prism-horn-calculus applies the item correctly. There are no new nodes. rg over dag/nodes and blueprint_refs search found no duplicate, so same_as [] is right. There are no tool_uses and no SGA citation."
  }
 }

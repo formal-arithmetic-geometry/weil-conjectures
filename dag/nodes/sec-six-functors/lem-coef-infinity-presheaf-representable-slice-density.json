@@ -30,9 +30,103 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-category-of-spaces"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Keep $\\mathcal U$ fixed and work in a larger universe $\\mathcal W$ containing $\\mathcal P(D)$, its slices and their functor categories. This changes neither $\\mathcal S_{\\mathcal U}$ nor the desired smallness assertion. By [lem-coef-space-transport-classification], each presheaf $F$ has a $\\mathcal U$-small right-fibration representative $q:E_F\\to D$. Its total space is a quasicategory: project an inner horn to $D$, fill there and lift by the right-fibration horn condition. For two such representatives the same statement identifies the presheaf mapping space with the Kan complex $\\operatorname{Fun}_{/D}(E_F,E_G)$. This complex is $\\mathcal U$-small degree by degree, since $D,E_F,E_G$ are small. Thus $\\mathcal P(D)$ is locally $\\mathcal U$-small. By [lem-coef-infinity-yoneda-presheaf-limits] the actual Yoneda functor $y$ is fully faithful. Its factorization $J:D\\to A$ is fully faithful as well, since $A$ is full. Apply [lem-coef-infinity-full-essential-image] to obtain a coherent equivalence $J:D\\simeq A$. Both categories fit in $\\mathcal W$; that statement does not require $A$ to be $\\mathcal U$-small.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.1.5.3, first two sentences; Proposition 5.1.3.1; Sections 2.2.1 and 3.3.2 for the existing transport model."
+   }
+  },
+  {
+   "text": "Put $T=A_{/F}$ and $B=D\\times_{\\mathcal P(D)}\\mathcal P(D)_{/F}=D\\times_A T$. The slice projection is a right fibration by [lem-coef-infinity-slice-right-fibration]; its pullbacks are right fibrations because a lifting problem in a pullback is precisely a lifting problem over the specified simplex of the base. They are quasicategories by the inner-horn argument of step 1. The join-slice and pullback clauses of [lem-coef-space-transport-classification] identify $B\\to D$ as the right fibration classified by $d\\mapsto\\operatorname{Map}_{\\mathcal P(D)}(y(d),F)$. The natural equivalence of [lem-coef-infinity-yoneda-evaluation] identifies this classifier with $F$. The mapping-space and composition clauses of transport therefore give over-maps $s:E_F\\to B$ and $t:B\\to E_F$ representing inverse equivalences, with homotopies $ts\\simeq1$ and $st\\simeq1$ in their Kan over-map spaces. Evaluating such homotopies gives coherent transformations of total categories whose components lie in the Kan vertex fibers; their edges have inverses there. By the componentwise criterion of [lem-cbc-enhanced-functor-cone-calculus] these are natural equivalences. Hence $s$ is an equivalence of quasicategories over $D$. Compose $s$ with $B\\to T$ and append $F$ to obtain a join cocone $\\alpha$ on $yq$. Under the arrow-to-join comparison in the transport statement, the coherent cocone has leg at $e\\in E_F$ corresponding to the element of $F(q(e))$ represented by $e$, by the specified Yoneda evaluation. This construction and identification take place in the spaces of over-maps, including their parameter simplices; they do not choose unrelated individual legs.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-yoneda-evaluation",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.1.5.2 and its right-fibration interpretation; canonical cocone of Lemma 5.1.5.3."
+   }
+  },
+  {
+   "text": "The projection $v:B\\to T$ is an equivalence, as follows directly from the right-fibration morphism formula [lem-cbc-right-fibration-morphism-space]. For $b,b'\\in B$ over $d,d'$, that formula expresses $\\operatorname{Map}_B(b,b')$ as the homotopy fiber at $b$ of the transport map $\\operatorname{Map}_D(d,d')\\to B_d$. The analogous formula in $T$ uses $\\operatorname{Map}_A(Jd,Jd')\\to T_{Jd}$. Here $B_d=T_{Jd}$ degree by degree, and $J$ induces an equivalence of the mapping spaces. Choose the transport in B by pulling back that in T, as allowed by the stated pullback compatibility of the morphism formula; this makes the square of transport maps commute. Then [lem-coef-kan-homotopy-pullback-invariance] identify their homotopy fibers, proving that $v$ is fully faithful. To check essential surjectivity, let $u\\in T$ lie over $a\\in A$ and choose an equivalence $h:Jd\\to a$. The $n=1$ right-horn lifting condition gives an edge $\\widetilde h:u'\\to u$ over $h$, where $u'$ is in the image of $B$. This edge is an equivalence by the following two-horn argument. For any edge $f:x\\to y$ in a right fibration lying over an equivalence $h$, take the base inverse triangle with edges $h^{-1},h,1$. The right horn $\\Lambda^2_2$ with edges $12=f$ and $02=1_y$ lifts this triangle and supplies $g:y\\to x$ with $[f][g]=1_y$. Repeat with $g$ to obtain $k:x\\to y$ and $[g][k]=1_x$. The composition laws of [lem-coef-infinity-mapping-composition] give $[f]=[f][g][k]=[k]$, hence $[g][f]=1_x$. That node's equivalence criterion now makes $f$ an equivalence. Thus the full essential image of $v$ is all of $T$, and [lem-coef-infinity-full-essential-image] supplies a coherent quasi-inverse. Consequently $e=vs:E_F\\simeq T$ proves essential $\\mathcal U$-smallness. The restriction of the actual canonical cocone $\\delta_F$ along $e$ is the join cocone $\\alpha$ of step 2, with its entire simplicial boundary.",
+   "uses": [
+    "lem-cbc-right-fibration-morphism-space",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Replete-image expansion of Lemma 5.1.5.3; direct right-fibration proof of equivalence on slices."
+   }
+  },
+  {
+   "text": "Here is the sections calculation needed to prove that this particular $\\alpha$ is colimiting. Let $K$ be a $\\mathcal U$-small quasicategory and let a small right fibration $Q\\to K$ classify $H:K^{\\mathrm{op}}\\to\\mathcal S_{\\mathcal U}$. Put $\\Gamma=\\operatorname{Fun}_{/K}(K,Q)$. Transport classification [lem-coef-space-transport-classification], applied to the constant one-point functor, says that $\\Gamma$ is a small Kan space. For every small Kan complex $X$, the constant-product clause and the degreewise exponential adjunction give\n$$\\operatorname{Map}_{\\mathcal S}(X,\\Gamma)\\simeq\\operatorname{Fun}(X,\\Gamma)\\cong\\operatorname{Fun}_{/K}(K\\times X,Q)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K^{\\mathrm{op}},\\mathcal S)}(\\Delta X,H).$$\nThe first comparison is the enriched mapping-space comparison of [lem-coef-coherent-nerve-comparison], applied to the simplicial category of small Kan complexes. The middle map sends $f$ to $(k,x)\\mapsto f(x)(k)$ on every parameter simplex; the last is precisely transport for the constant classifier $K\\times X$. Thus this composite is induced by the evaluation cone $\\Delta\\Gamma\\to H$. The cone criterion of [lem-cbc-enhanced-functor-cone-calculus] shows that the evaluation cone is limiting: $\\Gamma\\simeq\\lim_{K^{\\mathrm{op}}}H$. This calculation is natural under pullback and postcomposition, because all three displayed comparisons are.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Contravariant form of Corollary 3.3.3.4, derived explicitly from transport and the exponential adjunction."
+   }
+  },
+  {
+   "text": "For a test presheaf $G$, choose its small classifier $E_G\\to D$. An over-map $E_F\\to E_G$ is exactly a section of $E_F\\times_D E_G\\to E_F$; the correspondence sends $f$ to $e\\mapsto(e,f(e))$ and is an isomorphism in every simplicial degree, also with every parameter $\\Delta^n$. By [lem-coef-space-transport-classification] this pullback classifies $Gq^{\\mathrm{op}}$. Step 4 yields\n$$\\operatorname{Map}_{\\mathcal P(D)}(F,G)\\simeq\\operatorname{Fun}_{/E_F}(E_F,E_F\\times_DE_G)\\simeq\\lim_{e\\in E_F^{\\mathrm{op}}}G(q(e))\\simeq\\lim_{e\\in E_F^{\\mathrm{op}}}\\operatorname{Map}_{\\mathcal P(D)}(y(q(e)),G).$$\nThe last equivalence is the coherent natural Yoneda evaluation of [lem-coef-infinity-yoneda-evaluation]. This is the actual comparison induced by $\\alpha$: an over-map representing $g:F\\to G$ sends $e=(d,x)$ to $g_d(x)$; evaluation at $1_d$ of the composite $y(d)\\xrightarrow{\\alpha_e}F\\xrightarrow{g}G$ is the same $g_d(x)$. The composition and unit comparisons in transport and the naturality of Yoneda evaluation make this calculation commute with the entire parameter simplex and all operators. Therefore it identifies the full comparison maps, not merely their action on vertices. The colimit mapping-space criterion of [lem-coef-infinity-yoneda-presheaf-limits] proves that $\\alpha$ is colimiting.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-yoneda-evaluation",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.1.5.3; mapping-space verification of its canonical cocone using right-fibration sections."
+   }
+  },
+  {
+   "text": "For completeness, transport from the small index to the full replete slice uses only coherent functor equivalences. Choose a coherent quasi-inverse $r:T\\to E_F$ to $e$ from step 3. Precomposition $e^*:\\operatorname{Fun}(T,\\mathcal P(D))\\to\\operatorname{Fun}(E_F,\\mathcal P(D))$ and $r^*$ have inverse natural equivalences obtained by whiskering the unit and counit of $e,r$. The componentwise criterion and mapping-space invariance in [lem-cbc-enhanced-functor-cone-calculus] therefore show that restriction induces an equivalence on the spaces of coherent cocones from the source diagram to each constant $G$. It fixes $G$ and sends $\\delta_F$ to $\\alpha$, since this is precomposition of the actual appended-vertex simplicial map. In the square whose upper map is composition with $\\delta_F$, whose lower map is composition with $\\alpha$, whose left side is the identity on $\\operatorname{Map}_{\\mathcal P(D)}(F,G)$ and whose right side is this restriction equivalence, the lower map is an equivalence by step 5. Hence the upper map is an equivalence. The dual cone criterion in the same node proves that $\\delta_F$ itself is colimiting. Apply that criterion in the enlarged ambient universe containing $T$; only the equivalence $T\\simeq E_F$ uses $\\mathcal U$-smallness. This proves both requested assertions for the specified canonical cocone and all its higher simplices.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Lemma 5.1.5.3 in the replete-image formulation; explicit restriction of coherent cocone spaces."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-right-fibration-morphism-space",
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-infinity-full-essential-image",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-infinity-yoneda-evaluation",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-space-transport-classification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Lemmas 5.1.5.2–5.1.5.3, printed pp. 324–326 (PDF pp. 342–344), read online; mapping-space expansion using existing transport nodes. Not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -82,10 +176,24 @@
    "results": "{\"t\": \"2026-10-16T22:27:47Z\", \"tool\": \"leanfinder\", \"query\": \"Tautological cocone of representable objects category of elements density space valued presheaves quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.tautologicalCocone'\", \"CategoryTheory.Presheaf.tautologicalCocone\", \"CategoryTheory.Presheaf.coconeOfRepresentable\", \"CategoryTheory.Presheaf.tautologicalCocone'_\\u03b9_app\", \"CategoryTheory.Presheaf.coconeOfRepresentable_\\u03b9_app\", \"CategoryTheory.Presheaf.coconeOfRepresentable_pt\", \"CategoryTheory.Presheaf.tautologicalCocone'_pt\", \"CategoryTheory.Presheaf.tautologicalCocone_pt\"], \"digest\": \"ae97daf89669cc03\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second reading. Read Mathlib/CategoryTheory/Limits/Presheaf.lean:650-700: tautologicalCocone and isColimitTautologicalCocone (and primed versions) quantify over an ordinary category and Type-valued functors; they do not state a coherent space-valued quasicategory colimit. LeanFinder returned these ordinary cocones; Loogle returned their IsColimit declarations. No one-line specialization to this node."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isColimitTautologicalCocone\"",
+   "results": "Two hits: CategoryTheory.Presheaf.isColimitTautologicalCocone and its primed variant, ordinary categories and Type-valued presheaves.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Type-valued presheaf density does not specialize to this coherent space-valued statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A space valued presheaf on a small quasicategory is the canonical colimit over its category of elements",
+   "results": "Ordinary presheaf colimit declarations; inspected Mathlib/CategoryTheory/Limits/Presheaf.lean:258-300,650-705. No coherent space-valued quasicategory theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary Type-valued presheaf density does not specialize to this coherent space-valued statement."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-intermediate-presheaf-kan",
@@ -93,5 +201,34 @@
   "group": "Q03"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-presheaf-representable-slice-density",
+  "worker": "stage1",
+  "summary": "Six-step direct proof using existing DAG only: fully faithful Yoneda and small classifiers; the canonical join-slice classifier; equivalence of the pullback slice with the full replete slice and essential smallness; explicit sections/limit calculation; mapping-space verification of the canonical cocone; transport of its universal property along the indexing equivalence. No new nodes and no attachment. Replaced a draft helper by its argument because the existing transport, Yoneda and right-fibration morphism statements already supply it. The statement is unchanged.",
+  "blueprint": "Proof paragraph 2, finite-coefficient mapping-complex adjunction: canonical Yoneda-image slice density, needed to verify the pointwise colimit hypothesis for the intermediate presheaf restriction. Six steps expand this supporting density argument below the unit route; main-20261015 ancestor proof paragraph 2 is the coefficient adjunction calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent functor-category, mapping-space and cone criteria used in steps 2, 4 and 6; no unit-specific replacement."
+   },
+   {
+    "node": "lem-cbc-right-fibration-morphism-space",
+    "why": "Generic mapping spaces in a right fibration, used to compare the canonical pullback and replete-image slices in step 3; no unit-specific replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-right-fibration-morphism-space"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q127-49c2c57fe",
+  "group": "Q127",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-49c2c57fe (reviewer sub-agent of L); spot-checked: I read the item, all six steps and the full statements of its 10 proof_deps and 2 stmt_deps. The statement is unchanged and is HTT 5.1.5.3 for the replete Yoneda image; step 3 proves the replete slice equivalent to HTT's pullback slice, so nothing is weakened. HTT is not archived: there is a WANTED line and proof_origin is agent. No SGA source is used. Step 1: transport gives small classifiers and essentially small mapping spaces, yoneda-presheaf-limits gives full faithfulness, and full-essential-image gives D ≃ A. Step 2: slice-right-fibration with transport's join-slice and pullback clauses and yoneda-evaluation make B classify F; s is an equivalence by the componentwise criterion. Step 3: the morphism-space formula plus homotopy-pullback invariance gives full faithfulness. I re-did the Λ^1_1 lift and the two Λ^2_2 lifts that make the lifted edge invertible ([f]=[k], so [g][f]=1). Step 4: the sections calculation has an exact middle exponential isomorphism, the coherent-nerve and transport comparisons are cited, and the elementary marking is acceptable. Step 5: the variance and the identification of the comparison map induced by α are correct; the colimit criterion of yoneda-presheaf-limits concludes. Step 6: restriction along e is a functor equivalence, so the universal property passes to δ_F in the larger universe. Small cases checked: D empty, D a point (A_{/F} ≃ F, with disconnected or looped F), F empty, F representable. No new nodes. No duplicate: space-yoneda-density, free-cocompletion, pointwise-lan, accessible-compact-slice-density and presentable-canonical-density all state something else. No cycle (closure of 381 nodes). The two sk-prop-sf-cbc nodes, functor-cone-calculus and right-fibration-morphism-space, are off this unit's route and accepted as declared generic tool_uses. Mathlib searches are recorded with no match. No fixes."
+ }
 }

@@ -29,9 +29,44 @@
   "def-coef-presentable-infinity-category",
   "lem-coef-nonsymmetric-operads-presentability"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The ordinary-operad definition of [lem-coef-nonsymmetric-operads-presentability] supplies the same inner fibration and inert cocartesian lifts as [lem-coef-inert-operad-color-reconstruction]. At arity zero its Segal equivalence identifies the fiber with a point. Every arrow in that fiber is consequently an equivalence, so the fiber equals its core and is Kan by [lem-cbc-enhanced-functor-cone-calculus]. Thus $u$ induces an equivalence of Kan zero-fibers. The generalized Segal fiber products over this terminal zero-fiber reduce to the ordinary products. For the generalized incidence relative-limit axiom, write $E_i=\\operatorname{Map}^{\\rho_i\\phi}(X,C_i)$ and $Z_j=\\operatorname{Map}^{\\nu_j\\phi}(X,C_{\\nu_j})$, where $\\nu_j:[n]\\to[0]$ selects vertex $j$. The only nonidentity arrows of $I_n$ are the two endpoint projections from each edge $i$ to vertices $i-1,i$. Consequently its limit in spaces is the homotopy pullback of $\\prod_{i=1}^n E_i\\to\\prod_{i=1}^n(Z_{i-1}\\times Z_i)\\leftarrow\\prod_{j=0}^n Z_j$. Each $Z_j$ is contractible by the empty-product clause of the ordinary relative-limit axiom, so projection identifies this pullback with $\\prod_{i=1}^n E_i$. The canonical comparison from $\\operatorname{Map}^{\\phi}(X,C)$ is exactly the ordinary relative-limit equivalence. When $n=0$, the incidence limit has only $Z_0$, and that same empty-product clause makes both sides contractible. Hence both ordinary operads are generalized operads in precisely the sense of the cited reconstruction node. Their inert-preserving algebra categories agree by the common definition. In the slice of [lem-coef-generalized-active-extension-criterion], a source-change arrow necessarily lies over an active base map, since its image under $u$ does and $u$ is over $\\Delta^{\\mathrm{op}}$. Thus that slice is the stated $K_b$. Its tensor diagram is exactly $D_{A,b}$, including the nullary value $\\mathbf1$.",
+   "uses": [
+    "lem-coef-nonsymmetric-operads-presentability",
+    "lem-coef-inert-operad-color-reconstruction",
+    "lem-coef-generalized-active-extension-criterion",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf",
+    "place": "Definitions 3.1.3, 3.1.13 and 3.1.17, printed pp.601,603-604; ordinary-operad specialization of the generalized inputs in Proposition A.4.4."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-generalized-active-extension-criterion] to the ordinary operads, the monoidal infinity category $\\mathcal V^\\otimes$, and the assumed colimits preserved by every two-sided tensoring functor. It supplies a coherent left adjoint $u_!$ to restriction, the objectwise formula $(u_!A)(b)\\simeq\\operatorname{colim}_{K_b}D_{A,b}$, and the natural mapping-space equivalence $\\operatorname{Map}(u_!A,B)\\simeq\\operatorname{Map}(A,u^*B)$. Its identity-operation cocones give the stated unit, and its substitution construction gives the stated operadic operations and all higher coherences.",
+   "uses": [
+    "lem-coef-generalized-active-extension-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf",
+    "place": "Proposition A.4.4 and Corollary A.4.5, pp.705-706, conditional existence and coherent adjunction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-nonsymmetric-operads-presentability",
+  "lem-coef-inert-operad-color-reconstruction",
+  "lem-coef-generalized-active-extension-criterion",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/gepner-haugseng2.pdf",
+  "place": "Agent specialization of the existing generalized active-extension criterion, checked against Definitions 3.1.3 and 3.1.13 and Propositions A.2.10, A.4.3-A.4.4 and Corollary A.4.5. Online PDF read; shared literature archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -74,10 +109,136 @@
    "results": "{\"t\": \"2026-10-16T20:01:15Z\", \"tool\": \"grep\", \"query\": \"Quasicategory.*[Ll]imit|[Oo]perad|[Cc]ategorical[Pp]attern|[Mm]onadic|[Ff]ibered\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\"], \"digest\": \"aa89b8257bbbce8e\"}",
    "date": "2026-10-17",
    "verdict": "no match: independently read returned ordinary category/strict monad and QCat declarations; none supplies this coherent infinity-categorical statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Operadic left Kan extension from active slice colimits preserved by tensor products",
+   "results": "{\"t\": \"2026-10-16T21:39:32Z\", \"tool\": \"leanfinder\", \"query\": \"Operadic left Kan extension from active slice colimits preserved by tensor products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionAtExtensionUnitLeft\", \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionAtExtensionUnitRight\", \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionExtensionUnitLeft\", \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionExtensionUnitRight\", \"CategoryTheory.MonoidalCategory.DayConvolutionUnit.instIsLeftKanExtensionProdDiscretePUnitExternalProductExtensionUnitLeftφ\", \"CategoryTheory.MonoidalCategory.DayConvolutionUnit.instIsLeftKanExtensionProdDiscretePUnitExternalProductExtensionUnitRightφ\", \"CategoryTheory.MonoidalCategory.DayConvolution.instIsLeftKanExtensionProdExternalProductConvolutionExtensionUnitLeftUnit\", \"CategoryTheory.MonoidalCategory.DayConvolutionUnit.isPointwiseLeftKanExtensionCan\"], \"digest\": \"d1e664f95427c9c8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary category adjunction/Kan-extension declarations or ordinary algebra constructions; grep finds only bibliographic mentions of operads."
+  },
+  {
+   "tool": "grep",
+   "query": "[Oo]peradic|[Oo]perad",
+   "results": "{\"t\": \"2026-10-16T21:39:53Z\", \"tool\": \"grep\", \"query\": \"[Oo]peradic|[Oo]perad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/NonAssoc/PreLie/Basic.lean\", \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\"], \"digest\": \"fd86d48dbea6a9e4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary category adjunction/Kan-extension declarations or ordinary algebra constructions; grep finds only bibliographic mentions of operads."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Left adjoint to restriction of nonsymmetric infinity operad algebras under active colimit existence",
+   "results": "{\"t\": \"2026-10-16T21:39:53Z\", \"tool\": \"leansearch\", \"query\": \"Left adjoint to restriction of nonsymmetric infinity operad algebras under active colimit existence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimConstAdj\", \"CategoryTheory.Functor.leftAdjointObjIsDefined_colimit\", \"CategoryTheory.Limits.instIsLeftAdjointFunctorColim\", \"CategoryTheory.Functor.leftAdjointObjIsDefined_of_isColimit\", \"Rep.instIsLeftAdjointActionModuleCatRes\", \"CategoryTheory.Functor.instPreservesColimitsOfSizeOfIsLeftAdjoint\", \"CategoryTheory.Adjunction.ofIsLeftAdjoint\", \"CategoryTheory.Functor.instPreservesColimitsOfShapeOfIsLeftAdjoint\"], \"digest\": \"6725e256371b1da7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary category adjunction/Kan-extension declarations or ordinary algebra constructions; grep finds only bibliographic mentions of operads."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free algebra over an infinity operad computed by colimits indexed by active operations",
+   "results": "{\"t\": \"2026-10-16T21:39:53Z\", \"tool\": \"leanfinder\", \"query\": \"Free algebra over an infinity operad computed by colimits indexed by active operations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgCat.free\", \"AlgCat.free_obj\", \"CategoryTheory.Free\", \"SimplexCategoryGenRel.toSimplexCategory\", \"FreeAlgebra.Pre\", \"AlgCat.free_map\", \"FreeAlgebra\", \"CategoryTheory.FreeBicategory\"], \"digest\": \"554d4af88d6a0f1f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary category adjunction/Kan-extension declarations or ordinary algebra constructions; grep finds only bibliographic mentions of operads."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"operad\"",
+   "results": "{\"t\": \"2026-10-16T21:39:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"operad\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary category adjunction/Kan-extension declarations or ordinary algebra constructions; grep finds only bibliographic mentions of operads."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generalized nonsymmetric infinity operad active slice colimit extension criterion",
+   "results": "{\"t\": \"2026-10-16T22:42:43Z\", \"tool\": \"leanfinder\", \"query\": \"Generalized nonsymmetric infinity operad active slice colimit extension criterion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isPointwiseRightKanExtension\", \"SSet.StrictSegal.isRightKanExtension\", \"CategoryTheory.extendCofanIsColimit\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"SSet.hasDimensionLT_of_isColimit\", \"HomotopicalAlgebra.RelativeCellComplex.hom_ext\"], \"digest\": \"65d985f291b4e100\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned strict Segal simplicial-set or ordinary category colimit/adjunction statements, not coherent operadic algebra extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftKanExtension, CategoryTheory.MonoidalCategory.ExternalProduct",
+   "results": "{\"t\": \"2026-10-16T22:42:44Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsLeftKanExtension, CategoryTheory.MonoidalCategory.ExternalProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.MonoidalCategory.ExternalProduct'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no usable result: the service rejected the query with unknown identifier CategoryTheory.MonoidalCategory.ExternalProduct."
+  },
+  {
+   "tool": "grep",
+   "query": "[Oo]peradic|active slice|left Kan extension",
+   "results": "{\"t\": \"2026-10-16T22:42:44Z\", \"tool\": \"grep\", \"query\": \"[Oo]peradic|active slice|left Kan extension\", \"sub\": \"Mathlib/CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits for the recorded directory and pattern."
+  },
+  {
+   "tool": "leansearch",
+   "query": "active slice colimit induces a left adjoint to restriction of operad algebras",
+   "results": "{\"t\": \"2026-10-16T22:42:44Z\", \"tool\": \"leansearch\", \"query\": \"active slice colimit induces a left adjoint to restriction of operad algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.instIsLeftAdjointFunctorColim\", \"CategoryTheory.Limits.colimConstAdj\", \"Rep.instIsLeftAdjointActionModuleCatRes\", \"CategoryTheory.Functor.leftAdjointObjIsDefined_colimit\", \"CategoryTheory.Functor.leftAdjointObjIsDefined_of_isColimit\", \"CategoryTheory.Functor.instPreservesColimitsOfSizeOfIsLeftAdjoint\", \"CategoryTheory.Limits.IsColimit.ofLeftAdjoint\", \"CategoryTheory.Adjunction.leftAdjoint_preservesColimits\"], \"digest\": \"464d8e6c440e7b65\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned strict Segal simplicial-set or ordinary category colimit/adjunction statements, not coherent operadic algebra extension."
+  },
+  {
+   "tool": "grep",
+   "query": "operad|Operad|generalized.*Segal",
+   "results": "{\"t\": \"2026-10-16T23:41:31Z\", \"tool\": \"grep\", \"query\": \"operad|Operad|generalized.*Segal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/NonAssoc/PreLie/Basic.lean\", \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\"], \"digest\": \"fd86d48dbea6a9e4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second-reader searches found ordinary algebra/category adjunctions and Kan extensions; the grep hits are two bibliographic mentions, and Loogle returned no hits. None states coherent nonsymmetric infinity-operad algebra extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Operadic\"",
+   "results": "{\"t\": \"2026-10-16T23:41:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"Operadic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second-reader searches found ordinary algebra/category adjunctions and Kan extensions; the grep hits are two bibliographic mentions, and Loogle returned no hits. None states coherent nonsymmetric infinity-operad algebra extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction between algebra infinity categories admits an adjoint computed by monoidal Kan extension",
+   "results": "{\"t\": \"2026-10-16T23:41:34Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction between algebra infinity categories admits an adjoint computed by monoidal Kan extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgCat.adj\", \"CommRingCat.monoidAlgebraAdj\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.Adjunction.restrictFullyFaithful\", \"CommRingCat.forget₂Adj\", \"ModuleCat.instIsRightAdjointRestrictScalars\", \"Condensed.freeForgetAdjunction\", \"CategoryTheory.nerveAdjunction\"], \"digest\": \"9b1352ef34845c97\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second-reader searches found ordinary algebra/category adjunctions and Kan extensions; the grep hits are two bibliographic mentions, and Loogle returned no hits. None states coherent nonsymmetric infinity-operad algebra extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Monoidal infinity categorical left Kan extension along a map of algebraic theories with objectwise tensor colimits",
+   "results": "{\"t\": \"2026-10-16T23:42:36Z\", \"tool\": \"leansearch\", \"query\": \"Monoidal infinity categorical left Kan extension along a map of algebraic theories with objectwise tensor colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.leftKanExtension\", \"CategoryTheory.MonoidalCategory.DayConvolution.leftKanExtension\", \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionExtensionUnitLeft\", \"CategoryTheory.Functor.leftKanExtensionObjIsoColimit\", \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionAtExtensionUnitLeft\", \"CategoryTheory.Functor.pointwiseLeftKanExtension\", \"CategoryTheory.MonoidalCategory.DayFunctor.η_comp_isoPointwiseLeftKanExtension_hom\", \"CategoryTheory.Functor.leftKanExtensionUnit_leftKanExtensionObjIsoColimit_hom_assoc\"], \"digest\": \"b8903f63fba77aa1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: second-reader searches found ordinary algebra/category adjunctions and Kan extensions; the grep hits are two bibliographic mentions, and Loogle returned no hits. None states coherent nonsymmetric infinity-operad algebra extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"operad\"",
+   "results": "{\"t\": \"2026-10-17T00:31:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"operad\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected results concern ordinary algebra/category adjunctions and ordinary pointwise Kan extensions; grep hits are bibliographic mentions and a tactic comment, and Loogle has no hits. None states an infinity-operadic algebra extension criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of algebras over nonsymmetric infinity operads has left adjoint from tensor-preserved active-slice colimits",
+   "results": "{\"t\": \"2026-10-17T00:31:21Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of algebras over nonsymmetric infinity operads has left adjoint from tensor-preserved active-slice colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsLeftAdjointDiscreteTensorLeftCompIncl\", \"CategoryTheory.Under.costarAdjForget\", \"AlgCat.adj\", \"CategoryTheory.Under.instIsLeftAdjointCostar\", \"CategoryTheory.OrthogonalReflection.isRightAdjoint_ι\", \"CategoryTheory.Under.instIsRightAdjointForget\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj\"], \"digest\": \"f333485d7545ecbb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected results concern ordinary algebra/category adjunctions and ordinary pointwise Kan extensions; grep hits are bibliographic mentions and a tactic comment, and Loogle has no hits. None states an infinity-operadic algebra extension criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "[Oo]perad|active.slice|[Oo]peradic",
+   "results": "{\"t\": \"2026-10-17T00:31:47Z\", \"tool\": \"grep\", \"query\": \"[Oo]perad|active.slice|[Oo]peradic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/NonAssoc/PreLie/Basic.lean\", \"Mathlib/Tactic/CategoryTheory/Slice.lean\", \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\"], \"digest\": \"ab92315fd51cb5f6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected results concern ordinary algebra/category adjunctions and ordinary pointwise Kan extensions; grep hits are bibliographic mentions and a tactic comment, and Loogle has no hits. None states an infinity-operadic algebra extension criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free extension of infinity operad algebras computed by colimits over active operations",
+   "results": "{\"t\": \"2026-10-17T00:31:48Z\", \"tool\": \"leansearch\", \"query\": \"Free extension of infinity operad algebras computed by colimits over active operations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimit.desc_extend\", \"CategoryTheory.CosimplicialObject.instHasColimits\", \"CategoryTheory.Limits.IsColimit.ofExtendIso\", \"CategoryTheory.Limits.isColimitOfUnop\", \"CategoryTheory.Limits.isColimitOfOp\", \"HomotopicalAlgebra.AttachCells.isColimit₁\", \"CategoryTheory.Limits.CoproductsFromFiniteFiltered.isColimitFiniteSubproductsCocone\", \"FreeAlgebra.Pre\"], \"digest\": \"851b90166cdd1763\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected results concern ordinary algebra/category adjunctions and ordinary pointwise Kan extensions; grep hits are bibliographic mentions and a tactic comment, and Loogle has no hits. None states an infinity-operadic algebra extension criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Operadic left Kan extension from colimits of tensor products indexed by operations with fixed output color",
+   "results": "{\"t\": \"2026-10-17T00:33:22Z\", \"tool\": \"leanfinder\", \"query\": \"Operadic left Kan extension from colimits of tensor products indexed by operations with fixed output color\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionAtExtensionUnitLeft\", \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionAtExtensionUnitRight\", \"CategoryTheory.MonoidalCategory.DayConvolutionUnit.instIsLeftKanExtensionProdDiscretePUnitExternalProductExtensionUnitLeftφ\", \"CategoryTheory.MonoidalCategory.DayConvolutionUnit.instIsLeftKanExtensionProdDiscretePUnitExternalProductExtensionUnitRightφ\", \"CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionExtensionUnitLeft\", \"CategoryTheory.MonoidalCategory.DayFunctor.isoPointwiseLeftKanExtension\", \"CategoryTheory.MonoidalCategory.DayConvolution.instIsLeftKanExtensionProdExternalProductConvolutionExtensionUnitLeftUnit\", \"CategoryTheory.MonoidalCategory.DayFunctor.instIsLeftKanExtensionProdFunctorTensorObjη\"], \"digest\": \"58e55d0758ec4c85\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected results concern ordinary algebra/category adjunctions and ordinary pointwise Kan extensions; grep hits are bibliographic mentions and a tactic comment, and Loogle has no hits. None states an infinity-operadic algebra extension criterion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-algebra-presentability",
@@ -97,5 +258,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operadic-active-colimit-extension-criterion",
+  "worker": "stage1",
+  "summary": "Repaired the split by specializing the existing generalized active-extension criterion to ordinary nonsymmetric infinity operads. This removes the previous dependency cycle through def-coef-operadic-correspondence and lem-coef-operadic-algebra-presentability while retaining the exact active-slice colimit, unit, substitution, and coherent-adjunction conclusions.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint.proof.md paragraph 2: supporting operadic foundation before the derived inverse limit; the two steps realize the ordinary specialization of the cited Gepner-Haugseng active-extension and coherent-adjunction argument.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "The generic assertion that the core of a quasicategory is Kan verifies the ordinary zero-fiber hypothesis; no same-unit node supplies this quasicategory calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N7-42823121a",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-42823121a (reviewer sub-agent of L); spot-checked: One commit with the item and its report only; no new nodes. Step 1 checked against the full statements of the four cited nodes. (1) The ordinary n=0 Segal condition makes O_[0] equivalent to a point; all its arrows are then equivalences, so it equals its core. That core is Kan by lem-cbc-enhanced-functor-cone-calculus, which is in unit sk-prop-sf-cbc; the declared tool use is accepted. So u_[0] is an equivalence. (2) I_n is the zigzag of n edges and n+1 vertices; singletons count as inert. Its limit is the stated homotopy pullback, and the vertex factors are contractible by the ordinary empty-product relative-limit clause. This reduces it to the ordinary product condition, and both sides are contractible at n=0. (3) The algebra definitions are identical. (4) O x_P (P_act)_{/b} = O_act x_{P_act} (P_act)_{/b} on all simplices, because u lies over the simplex category; D_{A,b} agrees, including the nullary unit. Step 2 uses only the statement of the same-unit node lem-coef-generalized-active-extension-criterion (unsplit). Its local two-sided tensor-preservation hypothesis is word for word the item's, and its conclusions cover the colimit formula, the Map equivalence, the identity-operation unit and substitution coherence. Edge cases checked: n=0,1, u=id, empty K_b, L or R equal to the unit, terminal V. My transitive-closure computation (535 nodes) shows no cycle; the earlier cycle through def-coef-operadic-correspondence is gone. Duplicate search covered the free-extension, cocomplete-extensions, free-cocone-criterion, active-slice-formula and active-lift nodes: the generalized criterion is a strict generalization, and citing it is sanctioned reuse. The item statement is unchanged and matches the shape of Lurie HA 3.1.3 in local form. I could not open the Gepner-Haugseng PDF: it is not archived and network access is blocked here. The proof takes nothing from it beyond the cited DAG node. No fixes."
  }
 }
