@@ -101,41 +101,12 @@ lemma curvePullback_obj_obj_carrier (F : WeilSheaf k₀ l X) :
     ((curvePullback j hj).obj F).obj.carrier = (j)^*ᵃ[l].obj F.obj.carrier :=
   rfl
 
-variable (k₀ l X N) in
-/-- The underlying sheaves of Weil sheaves with their iterated Weil structures `φ_N`, as algebras
-for the `N`-th Frobenius pullback. -/
-noncomputable def powIsoAlgebraFunctor :
-    WeilSheaf k₀ l X ⥤
-      IsoAlgebra ((((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).inv)_*ᵃ[l]) where
-  obj F := F.powIsoAlgebra N
-  map {F G} φ := ObjectProperty.homMk ⟨φ.hom.hom.f, frobeniusPowIso_hom_naturality φ N⟩
-
-/-- The curve pullback, viewed in pro-étale Weil sheaves, is the iterated Weil structure followed
-by the equivariant pullback. -/
-noncomputable def curvePullbackCompιIso :
-    curvePullback (l := l) j hj ⋙ (WeilSheaf.objectProperty L l Y).ι ≅
-      powIsoAlgebraFunctor l k₀ X N ⋙ ProEtaleWeilSheaf.equivariantPullback _ j hj :=
-  NatIso.ofComponents (fun F ↦ Iso.refl ((ProEtaleWeilSheaf.equivariantPullback _ j hj).obj
-    (F.powIsoAlgebra N))) fun _ ↦
-    sorry
-
-/-- The underlying sheaf of the iterated Weil structure is the underlying sheaf. -/
-noncomputable def powIsoAlgebraFunctorCompForgetIso :
-    powIsoAlgebraFunctor l k₀ X N ⋙ IsoAlgebra.forget _ ≅
-      (WeilSheaf.objectProperty k₀ l X).ι ⋙ IsoAlgebra.forget _ :=
-  Iso.refl _
-
-instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
-    PreservesFiniteLimits (powIsoAlgebraFunctor l k₀ X N) := by
-  have : PreservesFiniteLimits (powIsoAlgebraFunctor l k₀ X N ⋙ IsoAlgebra.forget _) :=
-    preservesFiniteLimits_of_natIso (powIsoAlgebraFunctorCompForgetIso (N := N)).symm
-  exact preservesFiniteLimits_of_reflects_of_preserves _ (IsoAlgebra.forget _)
-
-instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
-    PreservesFiniteColimits (powIsoAlgebraFunctor l k₀ X N) := by
-  have : PreservesFiniteColimits (powIsoAlgebraFunctor l k₀ X N ⋙ IsoAlgebra.forget _) :=
-    preservesFiniteColimits_of_natIso (powIsoAlgebraFunctorCompForgetIso (N := N)).symm
-  exact preservesFiniteColimits_of_reflects_of_preserves _ (IsoAlgebra.forget _)
+/-- The underlying sheaf of the curve pullback is the pullback of the underlying sheaf. -/
+noncomputable def curvePullbackCompForgetIso :
+    curvePullback (l := l) j hj ⋙ (WeilSheaf.objectProperty L l Y).ι ⋙ IsoAlgebra.forget _ ≅
+      (WeilSheaf.objectProperty k₀ l X).ι ⋙ IsoAlgebra.forget _ ⋙ (j)^*ᵃ[l] :=
+  NatIso.ofComponents (fun F ↦ eqToIso (curvePullback_obj_obj_carrier j hj F)) fun _ ↦
+    (Category.comp_id _).trans (Category.id_comp _).symm
 
 instance : (curvePullback (l := l) j hj).Additive where
   map_add := ObjectProperty.hom_ext _ (ObjectProperty.hom_ext _
@@ -143,17 +114,25 @@ instance : (curvePullback (l := l) j hj).Additive where
 
 instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
     PreservesFiniteLimits (curvePullback (l := l) j hj) := by
+  have : PreservesFiniteLimits ((curvePullback (l := l) j hj ⋙
+      (WeilSheaf.objectProperty L l Y).ι) ⋙ IsoAlgebra.forget _) :=
+    preservesFiniteLimits_of_natIso
+      (Functor.associator _ _ _ ≪≫ curvePullbackCompForgetIso j hj).symm
   have : PreservesFiniteLimits (curvePullback (l := l) j hj ⋙
       (WeilSheaf.objectProperty L l Y).ι) :=
-    preservesFiniteLimits_of_natIso (curvePullbackCompιIso j hj).symm
+    preservesFiniteLimits_of_reflects_of_preserves _ (IsoAlgebra.forget _)
   have : ReflectsLimitsOfSize.{0, 0} (WeilSheaf.objectProperty L l Y).ι := inferInstance
   exact preservesFiniteLimits_of_reflects_of_preserves _ (WeilSheaf.objectProperty L l Y).ι
 
 instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
     PreservesFiniteColimits (curvePullback (l := l) j hj) := by
+  have : PreservesFiniteColimits ((curvePullback (l := l) j hj ⋙
+      (WeilSheaf.objectProperty L l Y).ι) ⋙ IsoAlgebra.forget _) :=
+    preservesFiniteColimits_of_natIso
+      (Functor.associator _ _ _ ≪≫ curvePullbackCompForgetIso j hj).symm
   have : PreservesFiniteColimits (curvePullback (l := l) j hj ⋙
       (WeilSheaf.objectProperty L l Y).ι) :=
-    preservesFiniteColimits_of_natIso (curvePullbackCompιIso j hj).symm
+    preservesFiniteColimits_of_reflects_of_preserves _ (IsoAlgebra.forget _)
   have : ReflectsColimitsOfSize.{0, 0} (WeilSheaf.objectProperty L l Y).ι := inferInstance
   exact preservesFiniteColimits_of_reflects_of_preserves _ (WeilSheaf.objectProperty L l Y).ι
 
@@ -177,10 +156,28 @@ noncomputable def curvePullbackSubι (F : WeilSheaf k₀ l X) (P : Subobject F.o
   ObjectProperty.homMk ((ProEtaleWeilSheaf.equivariantPullback _ j hj).map
     (F.stableIsoAlgebraι P hP))
 
+@[simp]
+lemma curvePullbackSub_obj_carrier (F : WeilSheaf k₀ l X) (P : Subobject F.obj.carrier)
+    (hP : (⇑F.frobeniusTwist)^[N] P = P) (hPl : IsAdicLisseSheaf (Subobject.underlying.obj P)) :
+    (curvePullbackSub j hj F P hP hPl).obj.carrier = (j)^*ᵃ[l].obj (Subobject.underlying.obj P) :=
+  rfl
+
+lemma curvePullbackSubι_hom_hom_f (F : WeilSheaf k₀ l X) (P : Subobject F.obj.carrier)
+    (hP : (⇑F.frobeniusTwist)^[N] P = P) (hPl : IsAdicLisseSheaf (Subobject.underlying.obj P)) :
+    (curvePullbackSubι j hj F P hP hPl).hom.hom.f = (j)^*ᵃ[l].map P.arrow :=
+  rfl
+
 instance (F : WeilSheaf k₀ l X) (P : Subobject F.obj.carrier)
     (hP : (⇑F.frobeniusTwist)^[N] P = P) (hPl : IsAdicLisseSheaf (Subobject.underlying.obj P)) :
     Mono (curvePullbackSubι j hj F P hP hPl) := by
-  sorry
+  have : Mono (curvePullbackSubι j hj F P hP hPl).hom.hom.f := by
+    rw [curvePullbackSubι_hom_hom_f]
+    infer_instance
+  have : Mono (curvePullbackSubι j hj F P hP hPl).hom.hom :=
+    (Algebra.forget _).mono_of_mono_map this
+  have : Mono (curvePullbackSubι j hj F P hP hPl).hom :=
+    (IsoAlgebra.ι _).mono_of_mono_map this
+  exact (WeilSheaf.objectProperty L l Y).ι.mono_of_mono_map this
 
 /-- The pullback of a subsheaf defined over `L` is lisse. -/
 theorem isLisse_curvePullbackSub (F : WeilSheaf k₀ l X) (P : Subobject F.obj.carrier)
@@ -190,11 +187,28 @@ theorem isLisse_curvePullbackSub (F : WeilSheaf k₀ l X) (P : Subobject F.obj.c
 
 /-- If the pullback `j^* P` is an irreducible local system, then the Weil sheaf
 `curvePullbackSub j hj F P` is irreducible lisse. -/
-theorem isIrreducibleLisse_curvePullbackSub (F : WeilSheaf k₀ l X) (P : Subobject F.obj.carrier)
+theorem isIrreducibleLisse_curvePullbackSub [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of L))]
+    (F : WeilSheaf k₀ l X) (P : Subobject F.obj.carrier)
     (hP : (⇑F.frobeniusTwist)^[N] P = P) (hPl : IsAdicLisseSheaf (Subobject.underlying.obj P))
     (hirr : IsIrreducibleAdicLocalSystem ((j)^*ᵃ[l].obj (Subobject.underlying.obj P))) :
     (curvePullbackSub j hj F P hP hPl).IsIrreducibleLisse := by
-  sorry
+  refine ⟨isLisse_curvePullbackSub j hj F P hP hPl,
+    fun h ↦ hirr.2.1 (isZero_iff_isZero_carrier.mp h), fun H i hi hH ↦ ?_⟩
+  have : Mono (((WeilSheaf.objectProperty L l Y).ι ⋙ IsoAlgebra.forget _).map i) :=
+    Functor.map_mono _ i
+  have : Mono i.hom.hom.f := this
+  have hm : Mono (i.hom.hom.f ≫ eqToHom (curvePullbackSub_obj_carrier j hj F P hP hPl)) :=
+    mono_comp _ _
+  rcases hirr.2.2 _ _ hm hH with h | h
+  · exact Or.inl (isZero_iff_isZero_carrier.mpr h)
+  · have : IsIso i.hom.hom.f := IsIso.of_isIso_comp_right _
+      (eqToHom (curvePullbackSub_obj_carrier j hj F P hP hPl))
+    have : IsIso ((Algebra.forget _).map i.hom.hom) := this
+    have : IsIso i.hom.hom := isIso_of_reflects_iso _ (Algebra.forget _)
+    have : IsIso ((IsoAlgebra.ι _).map i.hom) := this
+    have : IsIso i.hom := isIso_of_reflects_iso _ (IsoAlgebra.ι _)
+    have : IsIso ((WeilSheaf.objectProperty L l Y).ι.map i) := this
+    exact Or.inr (isIso_of_fully_faithful (WeilSheaf.objectProperty L l Y).ι i)
 
 /-- If finitely many subsheaves defined over `L` span `F̄` and the pullback of each is punctually
 `ι`-pure of weight `w`, so is the pullback of `F`: it is a quotient of their direct sum. -/

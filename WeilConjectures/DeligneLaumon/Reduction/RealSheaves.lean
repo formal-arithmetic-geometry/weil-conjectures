@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Bertini
+public import WeilConjectures.DeligneLaumon.Reduction.RealLissePurity
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.Line
 public import WeilConjectures.DeligneLaumon.Reduction.FiniteDirectImage
 public import WeilConjectures.DeligneLaumon.Reduction.FiniteEtaleChart
@@ -30,38 +30,19 @@ to turn the reality of a local `L`-factor into a weight bound.
 
 ## Implementation notes
 
-A Noetherian induction reduces to a lisse real sheaf on a smooth affine irreducible stratum, where
-an irreducibility-preserving Bertini theorem produces a family of smooth geometrically irreducible
-curve sections on which each constituent becomes pure of a weight independent of the curve;
-mixedness then descends along finite constant extensions and is spliced back along the open–closed
-sequence.
-
-The geometric and group-theoretic inputs of the reduction are stated and proved separately:
-`AlgebraicGeometry.Scheme.Hom.exists_isClosedImmersion_connectedSpace_pullback` (Bertini),
-`Representation.exists_forall_isIrreducible_baseChange_of_congr` (finite matrix witnesses) and
-`Representation.exists_filtration_isIrreducible_restrict` (geometric constituents), and curve
-testing for geometric irreducibility below.
+A Noetherian induction reduces to a real sheaf on a nonempty open, which may be taken finite
+étale over a nonempty open of some `𝔸ᵈ`; pushing forward, to a real sheaf on a nonempty open of
+`𝔸ᵈ`, lisse on a smooth affine open. There its irreducible constituents are pure
+(`AlgebraicGeometry.WeilSheaf.IsReal.exists_isPunctuallyPureOfWeight_cokernel_of_smooth`, by
+curve testing and purity on curves), so it is mixed, and mixedness is spliced back along the
+open–closed sequence.
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar`:
-  blueprint `lem-zl-curve-testing-irreducibility`.
 - `AlgebraicGeometry.WeilSheaf.isMixed_of_forall_exists_isMixed_upperStar_opensι`: the Noetherian
   induction of `thm-zl-real-mixed-by-curves`.
 - `AlgebraicGeometry.WeilSheaf.IsReal.isMixed`: blueprint `sk-i-dl-general-real` and
   `thm-zl-real-mixed-by-curves`.
-
-## TODO
-
-`AlgebraicGeometry.WeilSheaf.IsReal.isMixed` is reduced here by Noetherian induction
-(`AlgebraicGeometry.WeilSheaf.isMixed_of_forall_exists_isMixed_upperStar_opensι`) to mixedness on
-a nonempty open, which is left as `sorry`, as is curve testing
-`AlgebraicGeometry.WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar`. Both
-need infrastructure that does not exist yet: the dictionary between lisse pro-étale Weil sheaves
-and representations of the Weil group (`def-wf-fundamental-representation`) on a base of any
-dimension, finite constant-field extensions of Weil sheaves, and the Bertini theorem
-`AlgebraicGeometry.Scheme.Hom.exists_isClosedImmersion_connectedSpace_pullback`. The curve case
-is `AlgebraicGeometry.WeilSheaf.IsReal.isMixed_of_isLisse`.
 
 ## References
 
@@ -87,36 +68,6 @@ namespace AlgebraicGeometry
 open scoped ProEtale
 
 open TopologicalSpace
-
-/-- **Curve testing for geometric irreducibility**
-(blueprint: `lem-zl-curve-testing-irreducibility`). Let `X₀` be a smooth geometrically connected
-affine scheme of dimension `d ≥ 1` over a finite field `k₀`, with geometric fiber `X`, let
-`𝒮₁, …, 𝒮ᵣ` be Weil sheaves on `X₀` whose geometric restrictions are irreducible local systems,
-and let `S` be a nonempty finite set of `k̄`-points of `X`. There is a closed immersion
-`i : C ⟶ X` of a smooth connected affine curve over `k̄` through `S`, defined over a finite
-extension of `k₀` (stable under a power of the geometric Galois Frobenius of `X`), on which
-every `𝒮ⱼ` remains geometrically irreducible. -/
-theorem WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar {k₀ : Type u}
-    [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] {X₀ : Scheme.{u}}
-    [X₀.Over (Spec (CommRingCat.of k₀))] [IsAffine X₀] {d : ℕ} (hd : 1 ≤ d)
-    [SmoothOfRelativeDimension d (X₀ ↘ Spec (CommRingCat.of k₀))]
-    [GeometricallyConnected (X₀ ↘ Spec (CommRingCat.of k₀))] {r : ℕ}
-    (𝒮 : Fin r → WeilSheaf k₀ l X₀)
-    (h𝒮 : ∀ j, ProEtale.IsIrreducibleAdicLocalSystem (𝒮 j).obj.carrier)
-    (S : Finset
-      (Spec (.of (AlgebraicClosure k₀)) ⟶ (X₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber))
-    (hS : S.Nonempty)
-    (hS' : ∀ s ∈ S, s ≫ (X₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure = 𝟙 _) :
-    ∃ (C : Scheme.{u}) (i : C ⟶ (X₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber),
-      IsClosedImmersion i ∧ IsAffine C ∧
-      SmoothOfRelativeDimension 1
-        (i ≫ (X₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure) ∧
-      ConnectedSpace C ∧ (∀ s ∈ S, ∃ c, c ≫ i = s) ∧
-      (∀ j, ProEtale.IsIrreducibleAdicLocalSystem
-        ((i)^*ᵃ[l].obj (𝒮 j).obj.carrier)) ∧
-      ∃ m : ℕ, 0 < m ∧ ∃ φ : C ≅ C,
-        φ.hom ≫ i = i ≫ ((X₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom := by
-  sorry
 
 namespace WeilSheaf
 
@@ -324,26 +275,6 @@ theorem IsMixed.upperStar_opensRange_ι {W T : Scheme.{u}} [W.Over (Spec (CommRi
   obtain ⟨e₂⟩ := nonempty_upperStar_comp_iso (l := l) k.isoOpensRange.inv k G
   exact (h.upperStar k.isoOpensRange.inv).of_iso (e₂.symm ≪≫ e₁)
 
-/-- **Purity of the irreducible constituents of a real lisse sheaf on a smooth affine scheme**:
-the lisse-stratum step of `thm-zl-real-mixed-by-curves`. Let `X₀` be a smooth geometrically
-connected affine scheme of dimension `d ≥ 2` over `k₀` and `𝒢` an `ι`-real lisse Weil sheaf on
-`X₀`. Every irreducible lisse subquotient `𝒢₂ / 𝒢₁` of lisse Weil subsheaves `𝒢₁ ⊆ 𝒢₂ ⊆ 𝒢` is
-punctually `ι`-pure of some weight (curve testing + purity on curves + descent of a constant
-field extension). This is the higher-dimensional analogue of
-`AlgebraicGeometry.WeilSheaf.IsReal.exists_isPunctuallyPureOfWeight_cokernel`. -/
-theorem IsReal.exists_isPunctuallyPureOfWeight_cokernel_of_smooth {X₀ : Scheme.{u}}
-    [X₀.Over (Spec (CommRingCat.of k₀))] [IsAffine X₀] {d : ℕ} (hd : 2 ≤ d)
-    [SmoothOfRelativeDimension d (X₀ ↘ Spec (CommRingCat.of k₀))]
-    [GeometricallyConnected (X₀ ↘ Spec (CommRingCat.of k₀))]
-    [IsSeparated (X₀ ↘ Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (X₀ ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (X₀ ↘ Spec (CommRingCat.of k₀))]
-    {𝒢 : WeilSheaf k₀ l X₀} (h𝒢 : 𝒢.IsLisse) (hreal : 𝒢.IsReal ι) {𝒢₁ 𝒢₂ : WeilSheaf k₀ l X₀}
-    (i : 𝒢₁ ⟶ 𝒢₂) (j : 𝒢₂ ⟶ 𝒢) [Mono i] [Mono j] (h₁ : 𝒢₁.IsLisse) (h₂ : 𝒢₂.IsLisse)
-    (hirr : (cokernel i).IsIrreducibleLisse) :
-    ∃ w : ℝ, (cokernel i).IsPunctuallyPureOfWeight ι w := by
-  sorry
-
 /-- **Real lisse sheaves on smooth affine schemes are mixed.** Let `X₀` be a smooth geometrically
 connected affine scheme of dimension `d ≥ 2` over `k₀` and `𝒢` an `ι`-real lisse Weil sheaf on
 `X₀`. Then `𝒢` is `ι`-mixed: the successive quotients of a filtration with irreducible lisse
@@ -477,20 +408,19 @@ theorem IsReal.exists_isMixed_upperStar_opensι (T : Scheme.{u})
 
 By Noetherian induction
 (`AlgebraicGeometry.WeilSheaf.isMixed_of_forall_exists_isMixed_upperStar_opensι`) it suffices
-to make a real sheaf mixed on a nonempty open. That step is not yet formalised: after shrinking,
-the sheaf is lisse on a smooth affine stratum, where curve testing
+to make a real sheaf mixed on a nonempty open
+(`AlgebraicGeometry.WeilSheaf.IsReal.exists_isMixed_upperStar_opensι`): after shrinking, the
+sheaf is lisse on a smooth affine stratum, where curve testing
 (`AlgebraicGeometry.WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar`) and
 purity of real lisse sheaves on curves
 (`AlgebraicGeometry.WeilSheaf.IsReal.exists_isPunctuallyPureOfWeight_cokernel`) make the
-geometric constituents pure after a finite constant extension, which is then descended. -/
+geometric constituents pure
+(`AlgebraicGeometry.WeilSheaf.IsReal.exists_isPunctuallyPureOfWeight_cokernel_of_smooth`). -/
 theorem IsReal.isMixed {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
     [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] {F : WeilSheaf k₀ l X} (hF : F.IsReal ι) :
     F.IsMixed ι :=
-  -- TODO: the lisse-stratum step needs the dictionary between lisse pro-étale Weil sheaves and
-  -- Weil-group representations, finite constant-field extensions of Weil sheaves with the
-  -- trace splitting, and the descent of the curves of curve testing to a finite field.
   isMixed_of_forall_exists_isMixed_upperStar_opensι
     (fun T _ _ _ _ _ _ _ hG ↦ hG.exists_isMixed_upperStar_opensι T) hF
 

@@ -61,6 +61,14 @@ theorem IsPureOfWeightOn.map {M N : FrobeniusModule.{u} K} {U : Submodule K M.ca
   rw [he, map_smul]
   exact hα
 
+/-- Purity on a subspace descends along an isomorphism of Frobenius modules. -/
+theorem IsPureOfWeightOn.of_map {M N : FrobeniusModule.{u} K} {U : Submodule K M.carrier}
+    (e : M.carrier ≃ₗ[K] N.carrier) (he : ∀ x, e (M.frobenius x) = N.frobenius (e x))
+    (h : N.IsPureOfWeightOn ι q (U.map e.toLinearMap) w) : M.IsPureOfWeightOn ι q U w := by
+  intro α x hx hx0 hα
+  refine h α (e x) ⟨x, hx, rfl⟩ (fun h0 ↦ hx0 (e.injective (h0.trans (map_zero e).symm))) ?_
+  rw [← he, hα, map_smul]
+
 /-- The weight of a module pure on a nonzero Frobenius-stable subspace is unique. -/
 theorem IsPureOfWeightOn.weight_eq [IsAlgClosed K] {M : FrobeniusModule.{u} K}
     {U : Submodule K M.carrier} (h : M.IsPureOfWeightOn ι q U w)

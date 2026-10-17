@@ -13,6 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseIrreducible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyIrreducible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyExists
+public import WeilConjectures.SixFunctors.ProEtale.Adic.SubobjectStalk
 
 /-!
 # The Frobenius twist of subsheaves of a Weil sheaf
@@ -165,7 +166,21 @@ theorem exists_mono_of_frobeniusTwist_eq {P : Subobject F.obj.carrier}
     (hP : F.frobeniusTwist P = P) (hPl : IsAdicLisseSheaf (Subobject.underlying.obj P)) :
     ∃ (G : WeilSheaf k₀ l X) (i : G ⟶ F), Mono i ∧ G.IsLisse ∧
       ∃ _ : Mono i.hom.hom.f, Subobject.mk i.hom.hom.f = P := by
-  sorry
+  have e : Subobject.mk ((frobeniusPullback k₀ l X).map P.arrow ≫ F.obj.str.hom) = P :=
+    (F.frobeniusTwist_mk P.arrow).symm.trans
+      ((congrArg F.frobeniusTwist (Subobject.mk_arrow P)).trans hP)
+  let str : (frobeniusPullback k₀ l X).obj (Subobject.underlying.obj P) ≅
+      Subobject.underlying.obj P :=
+    (Subobject.underlyingIso _).symm ≪≫ Subobject.isoOfEq _ _ e
+  let G : WeilSheaf k₀ l X :=
+    ⟨IsoAlgebra.mk (Subobject.underlying.obj P) str, hPl.isAdicConstructibleSheaf⟩
+  have hc : (frobeniusPullback k₀ l X).map P.arrow ≫ F.obj.str.hom = str.hom ≫ P.arrow := by
+    simp [str]
+  let i : G ⟶ F := ObjectProperty.homMk (ObjectProperty.homMk ⟨P.arrow, hc⟩)
+  have : Mono ((ObjectProperty.ι _ ⋙ IsoAlgebra.forget _).map i) :=
+    inferInstanceAs (Mono P.arrow)
+  exact ⟨G, i, (ObjectProperty.ι _ ⋙ IsoAlgebra.forget _).mono_of_mono_map this, hPl,
+    inferInstanceAs (Mono P.arrow), Subobject.mk_arrow P⟩
 
 end IsoAlgebra
 
@@ -197,7 +212,36 @@ theorem iSup_frobeniusTwist_iterate_eq_top
     (hPl : IsAdicLisseSheaf (Subobject.underlying.obj P)) (hP0 : P ≠ ⊥) {M : ℕ} (hM : 0 < M)
     (hP : (⇑F.frobeniusTwist)^[M] P = P) :
     (Finset.univ : Finset (Fin M)).sup (fun n ↦ (⇑F.frobeniusTwist)^[n] P) = ⊤ := by
-  sorry
+  set T := F.frobeniusTwist
+  set S := (Finset.univ : Finset (Fin M)).sup (fun n ↦ (⇑T)^[n] P)
+  have hle (n : ℕ) : (⇑T)^[n] P ≤ S := by
+    rw [← Nat.mod_add_div n M, Function.iterate_add_apply, Function.iterate_mul,
+      Function.iterate_fixed hP]
+    exact Finset.le_sup (f := fun n : Fin M ↦ (⇑T)^[n] P) (Finset.mem_univ ⟨n % M, n.mod_lt hM⟩)
+  have hTS : T S = S := by
+    refine le_antisymm ?_ ?_
+    · rw [← OrderIso.le_symm_apply]
+      refine Finset.sup_le fun n _ ↦ ?_
+      rw [OrderIso.le_symm_apply, ← Function.iterate_succ_apply' (⇑T)]
+      exact hle _
+    · refine Finset.sup_le fun n _ ↦ ?_
+      have h : (⇑T)^[n] P = T ((⇑T)^[n + M - 1] P) := by
+        rw [← Function.iterate_succ_apply' (⇑T), Nat.succ_eq_add_one,
+          Nat.sub_add_cancel (by omega), Function.iterate_add_apply, hP]
+      rw [h]
+      exact T.monotone (hle _)
+  have hSl : IsAdicLisseSheaf (Subobject.underlying.obj S) :=
+    IsAdicLisseSheaf.underlying_finset_sup hF.1 _ fun n _ ↦
+      F.isAdicLisseSheaf_frobeniusTwist_iterate hPl n
+  obtain ⟨G, i, hi, hG, hif, hS⟩ := F.exists_mono_of_frobeniusTwist_eq hTS hSl
+  rcases hF.2.2 G i hi hG with h | h
+  · refine absurd (eq_bot_iff.2 ((hle 0).trans_eq ?_)) hP0
+    rw [← hS, Subobject.mk_eq_bot_iff_zero]
+    exact (isZero_iff_isZero_carrier.1 h).eq_of_src _ _
+  · have : IsIso i.hom.hom.f :=
+      inferInstanceAs (IsIso ((ObjectProperty.ι _ ⋙ IsoAlgebra.forget _).map i))
+    rw [← hS]
+    exact Subobject.mk_eq_top_of_isIso _
 
 end Constituents
 
@@ -214,11 +258,19 @@ noncomputable def stalkSubspace
   LinearMap.range ((WeilCoefficients.toModuleCat l).map ((Sheaf.Γ _ _).map
     ((t)^*[WeilCoefficients.{u} l].map ((ProEtale.AdicSheaf.forget _).map P.arrow)))).hom
 
+/-- The geometric stalk of a subsheaf of a Weil sheaf is that of the subsheaf of the underlying
+`ℓ`-adic sheaf. -/
+theorem stalkSubspace_eq_adicStalkSubspace
+    (t : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (P : Subobject F.obj.carrier) :
+    F.stalkSubspace t P = adicStalkSubspace t P :=
+  rfl
+
 /-- The stalk of the whole sheaf is the whole stalk. -/
 theorem stalkSubspace_top
     (t : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
-    F.stalkSubspace t ⊤ = ⊤ := by
-  sorry
+    F.stalkSubspace t ⊤ = ⊤ :=
+  adicStalkSubspace_top t _
 
 /-- If finitely many subsheaves span `F̄`, their stalks span the stalk of `F`: the stalk functor
 is exact. -/
@@ -226,7 +278,50 @@ theorem iSup_stalkSubspace_eq_top
     (t : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     {M : ℕ} (Q : Fin M → Subobject F.obj.carrier) (hQ : (Finset.univ : Finset (Fin M)).sup Q = ⊤) :
     ⨆ n, F.stalkSubspace t (Q n) = ⊤ := by
-  sorry
+  rw [← adicStalkSubspace_top t F.obj.carrier, ← hQ, adicStalkSubspace_finset_sup]
+  simp [stalkSubspace_eq_adicStalkSubspace]
+
+/-- The identification `A_{s ≫ e} ≅ (e^* A)_s ≅ ((e⁻¹)_* A)_s` of geometric stalks of an `ℓ`-adic
+sheaf `A`, for an automorphism `e` of the geometric fiber. -/
+noncomputable def stalkLowerStarInvIso
+    (e : (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ≅
+      (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (A : AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
+    (adicStalkFunctor l (s ≫ e.hom)).obj A ≅ (adicStalkFunctor l s).obj ((e.inv)_*ᵃ[l].obj A) :=
+  (Sheaf.Γ _ _).mapIso ((ProEtale.upperStarComp _ s e.hom).app A.X ≪≫
+    (s)^*[_].mapIso ((ProEtale.upperStarIsoLowerStarInv _ e).app A.X))
+
+omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] in
+/-- The identification `A_{s ≫ e} ≅ ((e⁻¹)_* A)_s` is natural in `A`. -/
+lemma stalkLowerStarInvIso_hom_naturality
+    (e : (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ≅
+      (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    {A B : AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber} (u : A ⟶ B) :
+    (adicStalkFunctor l (s ≫ e.hom)).map u ≫ (stalkLowerStarInvIso e s B).hom =
+      (stalkLowerStarInvIso e s A).hom ≫ (adicStalkFunctor l s).map ((e.inv)_*ᵃ[l].map u) := by
+  simp only [stalkLowerStarInvIso, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom,
+    Functor.comp_map, ← Functor.map_comp, Category.assoc]
+  congr 1
+  have n₁ := (ProEtale.upperStarComp (WeilCoefficients.{u} l) s e.hom).hom.naturality
+    ((ProEtale.AdicSheaf.forget _).map u)
+  have n₂ := (ProEtale.upperStarIsoLowerStarInv (WeilCoefficients.{u} l) e).hom.naturality
+    ((ProEtale.AdicSheaf.forget _).map u)
+  erw [reassoc_of% n₁]
+  simp only [← Functor.map_comp]
+  erw [n₂]
+  rfl
+
+/-- The isomorphism `F_{s ≫ Frᵐ} ≅ F_s` of the iterated Weil structure, through the
+identification `F_{s ≫ Frᵐ} ≅ ((Fr⁻ᵐ)_* F)_s`. -/
+lemma stalkObjFrobeniusPowIso_hom_eq_stalkLowerStarInvIso (m : ℕ)
+    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
+    (F.stalkObjFrobeniusPowIso m s).hom =
+      (stalkLowerStarInvIso ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m) s
+        F.obj.carrier).hom ≫ (adicStalkFunctor l s).map (F.frobeniusPowIso m).hom := by
+  simp only [stalkObjFrobeniusPowIso, stalkLowerStarInvIso, Iso.trans_hom, Functor.mapIso_hom,
+    Iso.app_hom, Functor.comp_map, ← Functor.map_comp, Category.assoc]
 
 /-- The stalk at `t` of the `a`-th Frobenius twist of `P` is the image of the stalk of `P` at
 `t ≫ Frᵃ` under the identification `F_{t ≫ Frᵃ} ≅ F_t` induced by `φ_a`
@@ -237,7 +332,25 @@ theorem stalkSubspace_frobeniusTwist_iterate
     F.stalkSubspace t ((⇑F.frobeniusTwist)^[a] P) =
       (F.stalkSubspace (t ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ a).hom)
         P).map (WeilCoefficients.linearEquivOfIso (F.stalkObjFrobeniusPowIso a t)).toLinearMap := by
-  sorry
+  set Fr := (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+  have h : (WeilCoefficients.linearEquivOfIso (F.stalkObjFrobeniusPowIso a t)).toLinearMap ∘ₗ
+      adicStalkMap (t ≫ (Fr ^ a).hom) P.arrow =
+      adicStalkMap t ((((Fr ^ a).inv)_*ᵃ[l]).map P.arrow ≫ (F.frobeniusPowIso a).hom) ∘ₗ
+        ((WeilCoefficients.toModuleCat l).map
+          (stalkLowerStarInvIso (Fr ^ a) t (Subobject.underlying.obj P)).hom).hom := by
+    have n := stalkLowerStarInvIso_hom_naturality (Fr ^ a) t P.arrow =≫
+      (adicStalkFunctor l t).map (F.frobeniusPowIso a).hom
+    simp only [Category.assoc, ← Functor.map_comp] at n
+    rw [← stalkObjFrobeniusPowIso_hom_eq_stalkLowerStarInvIso] at n
+    have n' := congrArg (fun f ↦ ((WeilCoefficients.toModuleCat l).map f).hom) n
+    simp only [Functor.map_comp, ModuleCat.hom_comp] at n'
+    rw [adicStalkMap_comp]
+    exact n'.trans (LinearMap.comp_assoc _ _ _)
+  conv_lhs => rw [← Subobject.mk_arrow P, frobeniusTwist_iterate_mk]
+  rw [stalkSubspace_eq_adicStalkSubspace, stalkSubspace_eq_adicStalkSubspace, adicStalkSubspace_mk,
+    adicStalkSubspace, ← LinearMap.range_comp, h, LinearMap.range_comp_of_range_eq_top]
+  exact LinearMap.range_eq_top.2 ((WeilCoefficients.toModuleCat l).mapIso
+    (stalkLowerStarInvIso (Fr ^ a) t (Subobject.underlying.obj P))).toLinearEquiv.surjective
 
 /-- The reparametrisation `F_{σᵃ ≫ t} ≅ F_t` of a geometric point by a power of the Frobenius
 of `k̄` (`AlgebraicGeometry.WeilSheaf.stalkObjSpecFrobeniusPowIso`) carries the stalk of `P` at
@@ -248,7 +361,62 @@ theorem stalkSubspace_specGeometricFrobenius_pow
     (F.stalkSubspace ((specGeometricFrobenius k₀ ^ a).hom ≫ t) P).map
         (WeilCoefficients.linearEquivOfIso (F.stalkObjSpecFrobeniusPowIso a t)).toLinearMap =
       F.stalkSubspace t P := by
-  sorry
+  have h : (WeilCoefficients.linearEquivOfIso (F.stalkObjSpecFrobeniusPowIso a t)).toLinearMap ∘ₗ
+      adicStalkMap ((specGeometricFrobenius k₀ ^ a).hom ≫ t) P.arrow =
+      adicStalkMap t P.arrow ∘ₗ ((WeilCoefficients.toModuleCat l).map
+        (reparamStalkIso l (specGeometricFrobenius k₀ ^ a) t
+          (Subobject.underlying.obj P).X).hom).hom := by
+    have n := congrArg (fun f ↦ ((WeilCoefficients.toModuleCat l).map f).hom)
+      (reparamStalkIso_hom_naturality (specGeometricFrobenius k₀ ^ a) t
+        ((ProEtale.AdicSheaf.forget _).map P.arrow))
+    simp only [Functor.map_comp, ModuleCat.hom_comp] at n
+    exact n
+  rw [stalkSubspace_eq_adicStalkSubspace, stalkSubspace_eq_adicStalkSubspace, adicStalkSubspace,
+    adicStalkSubspace, ← LinearMap.range_comp, h, LinearMap.range_comp_of_range_eq_top]
+  exact LinearMap.range_eq_top.2 ((WeilCoefficients.toModuleCat l).mapIso
+    (reparamStalkIso l (specGeometricFrobenius k₀ ^ a) t
+      (Subobject.underlying.obj P).X)).toLinearEquiv.surjective
+
+/-- The identification of stalks at equal geometric points carries the stalk of a subsheaf to
+its stalk. -/
+theorem stalkSubspace_map_eqToIso {s s' : Spec (.of (AlgebraicClosure k₀)) ⟶
+    (X ↘ Spec (CommRingCat.of k₀)).geometricFiber} (h : s = s') (P : Subobject F.obj.carrier) :
+    (F.stalkSubspace s P).map
+        (WeilCoefficients.linearEquivOfIso (eqToIso (congrArg F.stalkObj h))).toLinearMap =
+      F.stalkSubspace s' P := by
+  subst h
+  ext v
+  simp [WeilCoefficients.linearEquivOfIso]
+
+/-- The Frobenius of the stalk `F_t` relative to `𝔽_{qᴺ}`, as the composite
+`F_t ≅ F_{σᴺ ≫ t} = F_{t ≫ Frᴺ} ≅ F_t`. -/
+theorem stalkAt_frobenius_eq
+    {t : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
+    {N : ℕ} (ht : t ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).hom =
+      (specGeometricFrobenius k₀ ^ N).hom ≫ t) :
+    (F.stalkAt t N ht).frobenius = WeilCoefficients.linearEquivOfIso
+      ((F.stalkObjSpecFrobeniusPowIso N t).symm ≪≫ eqToIso (congrArg F.stalkObj ht.symm) ≪≫
+        F.stalkObjFrobeniusPowIso N t) :=
+  rfl
+
+/-- The stalk at a geometric point `t` fixed by `Frᴺ` up to reparametrisation of the `N`-th
+Frobenius twist of `P` is the image of the stalk of `P` under the Frobenius relative to
+`𝔽_{qᴺ}`. -/
+theorem stalkSubspace_frobeniusTwist_iterate_eq_map_frobenius
+    {t : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
+    {N : ℕ} (ht : t ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ N).hom =
+      (specGeometricFrobenius k₀ ^ N).hom ≫ t)
+    (P : Subobject F.obj.carrier) :
+    F.stalkSubspace t ((⇑F.frobeniusTwist)^[N] P) =
+      (F.stalkSubspace t P).map (F.stalkAt t N ht).frobenius.toLinearMap := by
+  have hρ : (F.stalkSubspace t P).map
+      (WeilCoefficients.linearEquivOfIso (F.stalkObjSpecFrobeniusPowIso N t)).symm.toLinearMap =
+      F.stalkSubspace ((specGeometricFrobenius k₀ ^ N).hom ≫ t) P :=
+    (Submodule.map_symm_eq_iff _).2 (F.stalkSubspace_specGeometricFrobenius_pow t P N)
+  rw [stalkAt_frobenius_eq, WeilCoefficients.linearEquivOfIso_trans,
+    WeilCoefficients.linearEquivOfIso_trans, WeilCoefficients.linearEquivOfIso_symm,
+    LinearEquiv.coe_trans, LinearEquiv.coe_trans, Submodule.map_comp, Submodule.map_comp, hρ,
+    stalkSubspace_map_eqToIso _ ht.symm, stalkSubspace_frobeniusTwist_iterate]
 
 /-- The stalk at `t` of a subsheaf fixed by `T^N` is stable under the Frobenius relative to
 `𝔽_{q^N}` of the stalk of `F` at a geometric point `t` fixed by `Fr^N` up to reparametrisation. -/
@@ -259,7 +427,8 @@ theorem frobenius_mem_stalkSubspace
     {P : Subobject F.obj.carrier} (hP : (⇑F.frobeniusTwist)^[N] P = P)
     {v : (F.stalkAt t N ht).carrier} (hv : v ∈ F.stalkSubspace t P) :
     (F.stalkAt t N ht).frobenius v ∈ F.stalkSubspace t P := by
-  sorry
+  rw [← hP, F.stalkSubspace_frobeniusTwist_iterate_eq_map_frobenius ht P]
+  exact Submodule.mem_map_of_mem hv
 
 /-- The identification `F_{t ≫ Frᵃ} ≅ F_t` induced by `φ_a` intertwines the Frobenius relative to
 `𝔽_{q^N}` at the two geometric points. -/
@@ -299,11 +468,23 @@ theorem stalkSubspace_ne_bot
     [ConnectedSpace (X ↘ Spec (CommRingCat.of k₀)).geometricFiber]
     [IsRegular (X ↘ Spec (CommRingCat.of k₀)).geometricFiber]
     [IsLocallyNoetherian (X ↘ Spec (CommRingCat.of k₀)).geometricFiber]
+    [CompactSpace (X ↘ Spec (CommRingCat.of k₀)).geometricFiber]
     (t : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     {P : Subobject F.obj.carrier}
     (hP : IsIrreducibleAdicLocalSystem (Subobject.underlying.obj P)) :
     F.stalkSubspace t P ≠ ⊥ := by
-  sorry
+  intro h
+  obtain ⟨M, hM⟩ := exists_lisseMonodromy (l := l)
+    (Y := (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (Ω := k₀)
+  have : Subsingleton (LisseMonodromy.StalkSpace t
+      (⟨Subobject.underlying.obj P, hP.1⟩ : LisseSheaf l _)) := by
+    refine ⟨fun v w ↦ injective_adicStalkMap t P.arrow ?_⟩
+    have hv : adicStalkMap t P.arrow v ∈ F.stalkSubspace t P := LinearMap.mem_range_self _ v
+    have hw : adicStalkMap t P.arrow w ∈ F.stalkSubspace t P := LinearMap.mem_range_self _ w
+    rw [h, Submodule.mem_bot] at hv hw
+    rw [hv, hw]
+  exact hP.2.1 ((hM t).isZero_of_subsingleton ⟨Subobject.underlying.obj P, hP.1⟩)
 
 end Stalk
 
