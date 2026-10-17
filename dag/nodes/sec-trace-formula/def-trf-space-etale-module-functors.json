@@ -1,0 +1,151 @@
+{
+ "id": "def-trf-space-etale-module-functors",
+ "kind": "definition",
+ "title": "Canonical etale module functors of algebraic spaces",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space]. Use the small etale structure sheaves and their module categories [def-weil-sheaf-of-modules-category]. For an etale scheme $V\\to Y$, let $\\mathcal A(f,V)$ have objects etale scheme charts $T\\to X$ together with a scheme map $a:T\\to V$ over $Y$, and morphisms the commuting chart maps over $X$ and $V$. For a module $F$ on $X$, its chart diagram on $\\mathcal A(f,V)^{op}$ has value $F(T)$, regarded as a $\\Gamma(V,\\mathcal O_V)$-module via $a^\\sharp$, and has the restriction maps of $F$. Define the canonical module direct image $f_*$ by the limit universal property $(f_*F)(V)=\\lim_{\\mathcal A(f,V)^{op}}F(T)$, with its specified chart projections. For maps of test schemes and module morphisms the projections commute with the same restrictions and module maps. This property determines the direct-image functor up to unique natural isomorphism preserving every projection. Define the tensor pullback $f^*$, namely $\\mathcal O_X\\otimes_{f^{-1}\\mathcal O_Y}f^{-1}(-)$ [def-pur-sheaf-tensor-product], by its adjunction to this specified $f_*$. Retain its unit $\\eta$. For $m\\in G(V)$, a chart $(T,a)$, and $b\\in\\mathcal O_X(T)$, the local tensor $b\\otimes m$ is $b\\,\\pi_{T,a}(\\eta_G(m))$ in $(f^*G)(T)$. Limits and adjoints are taken by their universal properties, without choosing arbitrary functors or maps.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 03G8 (lemma-morphism-ringed-topoi), 03H7 (remark-explain-equivalence), and 03LV (lemma-etale-exact-pullback); spaces-morphisms.tex Tag 03M8 (lemma-compute-pushforward), proof; sites-modules.tex Tag 03D7 (lemma-adjoint-pullback-pushforward-modules)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|pushforward.*restrict|restrict.*pushforward",
+   "results": "[grep] OK 17 hit(s); ; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean, Mathlib/MeasureTheory/Measure/Restrict.lean, Mathlib/MeasureTheory/Measure/Haar/Quotient.lean, Mathlib/Geometry/RingedSpace/PresheafedSpace.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: generic site functors and scheme/Zariski module functors do not supply algebraic-space module direct image with its compatible-chart-section normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, SheafOfModules.pullback, Functor.rightKanExtension",
+   "results": "[loogle] OK 0 hit(s); loogle: unknown identifier 'Functor.rightKanExtension'; ",
+   "date": "2026-10-17",
+   "verdict": "no match: generic site functors and scheme/Zariski module functors do not supply algebraic-space module direct image with its compatible-chart-section normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale localization of algebraic spaces commutes with module direct image and tensor pullback",
+   "results": "[leanfinder] OK 8 hit(s); ; Algebra.FormallyEtale.localization_map, Algebra.FormallyEtale.localization_base, Algebra.Etale.baseChange, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, Algebra.FormallyEtale.instLocalization, AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux, Algebra.basicOpen_subset_etaleLocus_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: generic site functors and scheme/Zariski module functors do not supply algebraic-space module direct image with its compatible-chart-section normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical direct image of modules on the etale site of an algebraic space is compatible sections on scheme charts, tensor pullback is its left adjoint",
+   "results": "[leansearch] OK 8 hit(s); ; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.pullback",
+   "date": "2026-10-17",
+   "verdict": "no match: generic site functors and scheme/Zariski module functors do not supply algebraic-space module direct image with its compatible-chart-section normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "compatible.*section|directImage.*[Mm]odule|[Mm]odule.*[Dd]irectImage [AlgebraicGeometry]",
+   "results": "[grep] OK 1 hit(s); ; Mathlib/AlgebraicGeometry/Gluing.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: generic site functors and scheme/Zariski module functors do not supply algebraic-space module direct image with its compatible-chart-section normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "rg moduleChart|ModuleDirectImageModel|moduleTensorPullback|moduleTensorSection in Mathlib, upstream WeilConjectures and lean/Sheaf; DAG and blueprint searches for module direct image algebraic space / compatible sections",
+   "results": "No declarations with these names in any of the three Lean sources; no blueprint matches to either phrase. The enlarged-site-model node describes a ringed topos model but has no module operations declaration. Existing algebraic-space definitions give only etale restriction, not arbitrary direct image or tensor pullback.",
+   "date": "2026-10-17",
+   "verdict": "no existing canonical module operations interface"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-etale-module-pushforward-restriction",
+  "date": "2026-10-17",
+  "group": "Q24"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Canonical arbitrary-module direct images and tensor pullbacks used by the section-algebra and adjunction-map etale comparison in the polarized descent input.",
+   "via": [
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceModuleOperations",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.ModuleDirectImageModel",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.moduleChartTarget",
+   "AlgebraicGeometry.AlgebraicSpace.ModuleChart",
+   "AlgebraicGeometry.AlgebraicSpace.moduleChartScalar",
+   "AlgebraicGeometry.AlgebraicSpace.moduleChartMap_smul",
+   "AlgebraicGeometry.AlgebraicSpace.moduleChartMap",
+   "AlgebraicGeometry.AlgebraicSpace.moduleChartMap_id",
+   "AlgebraicGeometry.AlgebraicSpace.moduleChartMap_comp",
+   "AlgebraicGeometry.AlgebraicSpace.moduleChartDiagram",
+   "AlgebraicGeometry.AlgebraicSpace.moduleChartPost",
+   "AlgebraicGeometry.AlgebraicSpace.ModuleDirectImageModel",
+   "AlgebraicGeometry.AlgebraicSpace.moduleDirectImageModel_nonempty",
+   "AlgebraicGeometry.AlgebraicSpace.moduleDirectImageModel_unique",
+   "AlgebraicGeometry.AlgebraicSpace.moduleDirectImageModel",
+   "AlgebraicGeometry.AlgebraicSpace.moduleDirectImage",
+   "AlgebraicGeometry.AlgebraicSpace.moduleDirectImage_isRightAdjoint",
+   "AlgebraicGeometry.AlgebraicSpace.moduleTensorPullback",
+   "AlgebraicGeometry.AlgebraicSpace.moduleTensorAdjunction",
+   "AlgebraicGeometry.AlgebraicSpace.moduleTensorSection"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceModuleOperations.lean",
+  "statement": "structure ModuleDirectImageModel (f : X ⟶ Y)",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The chart category, regular-function scalar maps and chart diagram have real data. The direct-image model includes the complete section-limit universal property and its naturality in both arguments; moduleDirectImageModel_unique records uniqueness by every chart projection. Selection uses this normalized universal property, the exception expressly allowed by AGENTS.md section 5, and tensor pullback is the left adjoint retaining its unit. The named supporting theorems have source and complete proof docstrings; none of the definitions has a sorry body. No independent equality between site and coefficient universes is imposed."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ce2e97dc2",
+  "group": "Q24",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ce2e97dc2",
+  "group": "Q24",
+  "result": "fix",
+  "note": "Mathematics and signatures accepted; both immutable Lean modules compile cleanly through scompile.py. Complete fixes replace the placeholder second reading and correct the adjunction citation from 03CR to 03D7. Full checks and compiler evidence are recorded in review.md."
+ }
+}

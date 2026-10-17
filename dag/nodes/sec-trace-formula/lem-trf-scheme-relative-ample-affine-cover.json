@@ -11,7 +11,9 @@
   "def-pc-scheme",
   "def-weil-finite-type-morphism",
   "def-sc-invertible-module",
-  "def-weil-pbc-ample-invertible-module"
+  "def-weil-pbc-ample-invertible-module",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-invertible-pullback-tensor"
  ],
  "proof": [
   {
@@ -350,5 +352,23 @@
   "group": "Q100",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q100-afda42d18 (reviewer sub-agent of L); spot-checked: The statement and seven-step proof match Stacks Morphisms Tag 01VJ, with all cited nodes and route constraints checked. Step 3 incorrectly invoked def-weil-finite-type-morphism although finite type is not assumed; qc base change was already supplied by lem-weil-pbc-qcqs-morphism-permanence(3). Corrected whole DAG JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-scheme-relative-ample-affine-cover.json. No new nodes or target weakening.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.SchemeRelativeAmpleAffineCover",
+  "declaration": "AlgebraicGeometry.scheme_relative_ample_affine_cover",
+  "file": "lean/Sheaf/TraceFormula/SchemeRelativeAmpleAffineCover.lean",
+  "statement": "theorem scheme_relative_ample_affine_cover {Z S : Scheme.{u}} (h : Z ⟶ S) [QuasiCompact h] (N : Z.Modules) [N.IsInvertible] {I : Type v} (U : I → S.Opens) (hU : ∀ i : I, IsAffineOpen (U i)) (hcover : iSup U = ⊤) (hample : ∀ i : I, @Scheme.Modules.IsAmple (h ⁻¹ᵁ U i).toScheme ((Scheme.Modules.tensorPullback (h ⁻¹ᵁ U i).ι).obj N) ((Scheme.Modules.invertible_pullback_tensor (h ⁻¹ᵁ U i).ι).1 N).2) : ∀ (V : S.Opens), IsAffineOpen V → @Scheme.Modules.IsAmple (h ⁻¹ᵁ V).toScheme ((Scheme.Modules.tensorPullback (h ⁻¹ᵁ V).ι).obj N) ((Scheme.Modules.invertible_pullback_tensor (h ⁻¹ᵁ V).ι).1 N).2",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5e5a3d240",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Recorded review.md. Checked immutable node, all statement dependencies, source, declarations, docstrings, universes, edge cases and route-pivot compliance. Signature matches verbatim; scompile.py reproduced clean compilation. No delivery errors found."
  }
 }

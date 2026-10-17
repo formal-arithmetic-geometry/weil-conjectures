@@ -12,7 +12,8 @@
   "def-trf-algebraic-space",
   "def-weil-sheaf-of-modules-category",
   "def-pur-sheaf-tensor-product",
-  "lem-trf-space-fibre-products-etale-covers"
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-etale-module-functors"
  ],
  "proof": [
   {
@@ -203,5 +204,33 @@
   "group": "Q78",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q78-0977185a5 (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and cited statements against Stacks sources. Removed the unnecessary étale-base-change helper using the existing covering theorem applied to {g,id_Y}; corrected algebraic-space fibre-product citations. Corrected JSON files and detailed review.md written; dependency closure is acyclic.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceEtaleModulePushforwardRestriction",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etale_module_pushforward_restriction",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.etaleRingRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.etaleStructureRestrictionIso",
+   "AlgebraicGeometry.AlgebraicSpace.moduleChartEtaleHom",
+   "AlgebraicGeometry.AlgebraicSpace.moduleTensorPullback_etale_restriction",
+   "AlgebraicGeometry.AlgebraicSpace.moduleChartBaseChange_triangle",
+   "AlgebraicGeometry.AlgebraicSpace.moduleChartBaseChange",
+   "AlgebraicGeometry.AlgebraicSpace.etale_module_pushforward_restriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceEtaleModulePushforwardRestriction.lean",
+  "statement": "theorem etale_module_pushforward_restriction (f : X ⟶ Y) (g : Y' ⟶ Y) (h : X' ⟶ X) (f' : X' ⟶ Y') (hg : IsEtale g.hom.hom) (hp : IsPullback h.hom f'.hom f.hom g.hom) : ∃ hh : IsEtale h.hom.hom, ∃ (beta : moduleDirectImage f ⋙ pullback g hg ≅ pullback h hh ⋙ moduleDirectImage f') (lambda : moduleTensorPullback f ⋙ pullback h hh ≅ pullback g hg ⋙ moduleTensorPullback f'), (∀ (F : X.Modules) (V : Y'.EtaleSite) (q : ModuleChart f' V) (s : ((moduleDirectImage f).obj F).val.obj (op ((etaleMap g hg).obj V))), ((moduleDirectImageModel f').projection ((pullback h hh).obj F) V).app (op q) ((beta.hom.app F).val.app (op V) s) = ((moduleDirectImageModel f).projection F ((etaleMap g hg).obj V)).app (op (moduleChartBaseChange f g h f' hg hh hp.w V q)) s) ∧ (∀ (M : Y.Modules) (V : Y'.EtaleSite) (q : ModuleChart f' V) (a b : X'.structureSheaf.obj.obj (op q.left)) (m : M.val.obj (op ((etaleMap g hg).obj V))), (lambda.hom.app M).val.app (op q.left) (a • moduleTensorSection f M ((etaleMap g hg).obj V) (moduleChartBaseChange f g h f' hg hh hp.w V q) b m) = moduleTensorSection f' ((pullback g hg).obj M) V q (a * b) m)",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The main theorem states both natural comparison isomorphisms and fixes their components on every compatible scheme-chart section and every local tensor. The same module defines the explicit restricted structure-sheaf isomorphism and states the etale tensor-restriction isomorphism normalized by a tensor m maps to a m. A cartesian sheaf square is used instead of choosing one particular fibre product; it is the same universal fibre-product hypothesis and adds no representability or surjectivity assumption."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ce2e97dc2",
+  "group": "Q24",
+  "result": "fix",
+  "note": "Mathematics and signatures accepted; both immutable Lean modules compile cleanly through scompile.py. Complete fixes replace the placeholder second reading and correct the adjunction citation from 03CR to 03D7. Full checks and compiler evidence are recorded in review.md."
  }
 }
