@@ -1,0 +1,283 @@
+{
+ "id": "lem-coef-ex-infinity-finite-products",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation, and the following naturality and triangle-identity sentences; foundational enhancement of finite coefficient adjunction diagrams. Technical input: Iterated Ex gives a Kan replacement preserving finite limits.",
+   "via": [
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Iterated Ex gives a Kan replacement preserving finite limits",
+ "statement": "Use simplicial sets and weak homotopy equivalences [def-weil-pbc-simplicial-set], [lem-coef-kan-quillen-right-proper]. Let $\\operatorname{Sd}(\\Delta^n)$ be the ordinary nerve of the poset of nonempty subsets of $\\{0,\\ldots,n\\}$ ordered by inclusion. Define $(\\operatorname{Ex}K)_n=\\operatorname{Hom}(\\operatorname{Sd}(\\Delta^n),K)$ with operators induced by image of subsets under monotone maps. The map sending a subset to its largest element gives a natural last-vertex map $\\operatorname{Sd}(\\Delta^n)\\to\\Delta^n$, and hence $j_K:K\\to\\operatorname{Ex}K$. Define\n$$\\operatorname{Ex}^{\\infty}K=\\operatorname{colim}\\bigl(K\\xrightarrow{j_K}\\operatorname{Ex}K\\xrightarrow{j_{\\operatorname{Ex}K}}\\operatorname{Ex}^2K\\longrightarrow\\cdots\\bigr).$$\nThen $\\operatorname{Ex}^{\\infty}K$ is Kan for every $K$, the natural map $K\\to\\operatorname{Ex}^{\\infty}K$ is a weak homotopy equivalence, and the functor $\\operatorname{Ex}^{\\infty}$ preserves finite limits. Preservation of finite products means that the canonical maps to the products of the images, including the terminal-object comparison, are isomorphisms; these canonical comparisons and the natural unit commute with product projections.",
+ "source": {
+  "document": "https://kerodon.net/tag/00ZA",
+  "place": "Kerodon Section 3.3.6, Construction 3.3.6.1 and Propositions 3.3.6.4, 3.3.6.7 and 3.3.6.9, section Tag 00ZA (Kerodon tag, not a Stacks tag). No Stacks tag supplies this simplicial Kan replacement."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-kan-quillen-right-proper",
+  "def-weil-pbc-category-colimit",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [
+  {
+   "text": "Postcomposition defines $\\operatorname{Ex}(u)$ for every simplicial map $u$. Since a monotone map commutes with taking the maximum of a nonempty subset, the last-vertex maps commute with all simplex operators; hence $j$ is a natural transformation. Each $j_X$ is degreewise injective: the map $[n]\\to\\mathcal P_+([n])$, $a\\mapsto\\{0,\\ldots,a\\}$, is monotone and its nerve is a section of $\\lambda_n$. Thus precomposition with $\\lambda_n$ is injective on maps into $X$. In particular all stages $X_m=\\operatorname{Ex}^mK$ embed in the degreewise colimit. Degreewise colimits have the simplicial universal property because each operator is induced on representatives and the functorial identities hold on representatives [def-weil-pbc-simplicial-set]. For a map $u:K\\to L$, the maps $\\operatorname{Ex}^m(u)$ commute with the transitions by naturality of $j$ and thus induce $\\operatorname{Ex}^{\\infty}(u)$ on colimits. Identities and composition hold on every stage, and the stage-zero maps therefore form a natural unit.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00ZA",
+    "place": "Construction 3.3.6.1 and Proposition 3.3.6.2; online source read 2026-10-17, archive WANTED; agent supplies the expanded argument."
+   }
+  },
+  {
+   "text": "Use [lem-coef-subdivision-face-poset-calculus] for the subdivision adjunction and the face-poset description. Fix $n\\geq1$ and $0\\leq i\\leq n$, and put $V=[n]$, $P=\\mathcal P_+(V)$, and $Q=P\\setminus\\{V,V\\setminus\\{i\\}\\}$. The faces of $\\Lambda_i^n$ are exactly the nonempty subsets omitting some vertex other than $i$. For a chain in $Q$, its largest member contains all the maxima and omits a vertex other than $i$, so the image-of-maxima set is again in $Q$. The cited identifications give\n$$\\operatorname{Sd}\\Lambda_i^n=N(Q),\\quad \\operatorname{Sd}^2\\Lambda_i^n=N(\\operatorname{Ch}(Q)),\\quad \\operatorname{Sd}^2\\Delta^n=N(\\operatorname{Ch}(P)).$$\nOn these descriptions $\\operatorname{Sd}(\\lambda_{\\Lambda_i^n})$ is the nerve of the map sending a chain $\\{S_0\\subsetneq\\cdots\\subsetneq S_r\\}$ in $Q$ to $\\{\\max S_0,\\ldots,\\max S_r\\}\\in Q$: this is the image-of-faces rule applied to the vertex map $S\\mapsto\\max S$.",
+   "uses": [
+    "lem-coef-subdivision-face-poset-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00ZA",
+    "place": "Proposition 3.3.6.9 (00ZK), reduction to face posets, using Proposition 3.3.3.17 (00YL); online source read 2026-10-17, archive WANTED; agent supplies the expanded argument."
+   }
+  },
+  {
+   "text": "Define a function on vertices of $P$ by $b(S)=i$ for $S=V$ or $S=V\\setminus\\{i\\}$ and $b(S)=\\max S$ otherwise. For a nonempty chain $C\\subseteq P$, put $r(C)=\\{b(S):S\\in C\\}$. This set is nonempty and belongs to $Q$. Indeed, if $C$ has an allowed member, choose its largest allowed member $T$; all allowed members are subsets of $T$, so $r(C)\\subseteq T\\cup\\{i\\}$. Since $T\\in Q$, it omits a vertex different from $i$, and so does $r(C)$. If $C$ has no allowed member, $r(C)=\\{i\\}$, which also omits another vertex because $n\\geq1$. For $C\\subseteq C'$, $r(C)\\subseteq r(C')$, so $r:\\operatorname{Ch}(P)\\to Q$ is monotone. If $C\\subseteq Q$, every $b(S)$ is $\\max S$, so its restriction is exactly the map of step 2. Taking nerves therefore constructs\n$$R:\\operatorname{Sd}^2\\Delta^n\\longrightarrow\\operatorname{Sd}\\Lambda_i^n,\\qquad R|_{\\operatorname{Sd}^2\\Lambda_i^n}=\\operatorname{Sd}(\\lambda_{\\Lambda_i^n}).$$\nThe nerve of a monotone map is obtained by applying it to each entry of a weakly increasing sequence; this commutes with restriction, so no extension theorem is hidden here [lem-coef-subdivision-face-poset-calculus].",
+   "uses": [
+    "lem-coef-subdivision-face-poset-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00ZA",
+    "place": "Proposition 3.3.6.9 (00ZK), explicit finite-poset extension; landing in Q and monotonicity expanded; online source read 2026-10-17, archive WANTED; agent supplies the expanded argument."
+   }
+  },
+  {
+   "text": "Let $f:\\Lambda_i^n\\to\\operatorname{Ex}X$ and let $\\bar f:\\operatorname{Sd}\\Lambda_i^n\\to X$ be its adjoint under [lem-coef-subdivision-face-poset-calculus]. The map $\\bar fR:\\operatorname{Sd}^2\\Delta^n\\to X$ transposes twice to $h:\\Delta^n\\to\\operatorname{Ex}^2X$. Its restriction is the double transpose of $\\bar f\\operatorname{Sd}(\\lambda_{\\Lambda_i^n})$, by step 3. This is precisely $j_{\\operatorname{Ex}X}f$: first $j_{\\operatorname{Ex}X}f$ transposes to $f\\lambda_{\\Lambda_i^n}$ since $j$ transposes to $\\lambda$; transposing that map once more gives $\\bar f\\operatorname{Sd}(\\lambda_{\\Lambda_i^n})$ by naturality of the adjunction. Thus every horn in $\\operatorname{Ex}X$ fills after applying the transition to $\\operatorname{Ex}^2X$. In particular the restriction involves $\\operatorname{Sd}(\\lambda_A)$, not $\\lambda_{\\operatorname{Sd}A}$.",
+   "uses": [
+    "lem-coef-subdivision-face-poset-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00ZA",
+    "place": "Proposition 3.3.6.9 (00ZK), double-adjunction identification of the required restriction; online source read 2026-10-17, archive WANTED; agent supplies the expanded argument."
+   }
+  },
+  {
+   "text": "Now take $f:\\Lambda_i^n\\to\\operatorname{Ex}^{\\infty}K$. This horn is generated by the finitely many faces of $\\Delta^n$ other than face $i$. Choose representatives at a common stage for their images, then increase the stage to some $m\\geq1$. The face compatibility equations hold there because the stage maps into the colimit are injective by step 1; hence these face maps glue to $f_m:\\Lambda_i^n\\to X_m$. Explicitly, on any simplex of the horn choose a containing face and apply its simplicial operator to that face's representative; on intersections the two expressions agree by those equations. Apply step 4 with $X=X_{m-1}$ and then map $X_{m+1}$ to the colimit to obtain a filler of $f$. For $n=1$ the horn has one vertex and the same argument has no intersection equations. The characterization of Kan complexes by fillers for these horns, with $n\\geq1$ and both outer horns included, is [lem-coef-kan-quillen-right-proper]. Therefore $\\operatorname{Ex}^{\\infty}K$ is Kan, including when $K$ is empty.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00ZA",
+    "place": "Proposition 3.3.6.9 (00ZK), passage from a finite horn to one finite stage; online source read 2026-10-17, archive WANTED; agent supplies the expanded argument."
+   }
+  },
+  {
+   "text": "By [lem-coef-ex-comparison-weak-equivalence], every transition $X_m\\to X_{m+1}$ is a weak homotopy equivalence. The finite composite $u_m:K\\to X_m$ is consequently a weak equivalence, using composition in the model structure of [lem-coef-kan-quillen-right-proper]; $u_0$ is the identity. These maps form a natural transformation from the constant $\\mathbf N$-diagram $K$ to $(X_m)$. Apply [lem-coef-filtered-colimit-weak-equivalences] with the small filtered category $\\mathbf N$ to this transformation. The colimit of the constant diagram is $K$ (a cocone is a single map because $0\\to m$ for every $m$), and the induced map is exactly the stage-zero inclusion $K\\to\\operatorname{Ex}^{\\infty}K$. It is therefore a weak homotopy equivalence.",
+   "uses": [
+    "lem-coef-ex-comparison-weak-equivalence",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-filtered-colimit-weak-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00ZA",
+    "place": "Proposition 3.3.6.7, using Theorem 3.3.5.1 (00Z2) and Proposition 3.2.8.3 (00XE); online source read 2026-10-17, archive WANTED; agent supplies the expanded argument."
+   }
+  },
+  {
+   "text": "Let $D:J\\to\\mathrm{sSet}$ be a finite diagram and put $L=\\lim_JD$, formed degreewise as compatible tuples. A map from any simplicial set $T$ into $L$ is exactly a family of maps $T\\to D(a)$ commuting with every arrow of $J$: the inverse sends the family to its tuple in each degree. Hence for $T=\\operatorname{Sd}\\Delta^n$,\n$$(\\operatorname{Ex}L)_n=\\operatorname{Hom}(T,L)\\cong\\lim_{a\\in J}\\operatorname{Hom}(T,D(a))=(\\lim_{a\\in J}\\operatorname{Ex}D(a))_n.$$\nThese bijections commute with all operators, since both sides act by precomposition with the same maps of subdivided simplices. This proves preservation of finite limits by $\\operatorname{Ex}$. Inducting on $m$, composition of these canonical bijections proves it for every $\\operatorname{Ex}^m$; the case $m=0$ is the identity. Empty $J$ gives the singleton set in each degree [def-weil-pbc-simplicial-set].",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00ZA",
+    "place": "Proposition 3.3.6.4, preservation of limits by Ex expanded directly from its Hom formula; online source read 2026-10-17, archive WANTED; agent supplies the expanded argument."
+   }
+  },
+  {
+   "text": "The comparisons of step 7 commute with the transitions in $m$, since after each projection both composites are the same by naturality of $j$. For each degree $n$ apply [lem-weil-pbc-filtered-colimits-commute-finite-limits] to the diagram of sets $(m,a)\\mapsto(\\operatorname{Ex}^mD(a))_n$. Its first index is the small filtered category $\\mathbf N$, and its second index is the given finite category $J$. We obtain the canonical bijection\n$$(\\operatorname{Ex}^{\\infty}L)_n\\cong\\varinjlim_m\\lim_{a\\in J}(\\operatorname{Ex}^mD(a))_n\\cong\\lim_{a\\in J}\\varinjlim_m(\\operatorname{Ex}^mD(a))_n.$$\nAll maps here are induced by projections and coprojections, so applying a simplicial operator before or after gives the same representatives. The bijections thus assemble to an isomorphism $\\operatorname{Ex}^{\\infty}(\\lim_JD)\\to\\lim_J\\operatorname{Ex}^{\\infty}D$. This proves preservation of finite limits, including the empty limit.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/00ZA",
+    "place": "Proposition 3.3.6.4; Stacks Tag 002W (categories.tex, lemma-directed-commutes) for the interchange; online source read 2026-10-17, archive WANTED; agent supplies the expanded argument."
+   }
+  },
+  {
+   "text": "For a finite family $(K_a)$ the comparison just proved is the unique map $c:\\operatorname{Ex}^{\\infty}(\\prod_aK_a)\\to\\prod_a\\operatorname{Ex}^{\\infty}K_a$ whose $a$th component is $\\operatorname{Ex}^{\\infty}(p_a)$. Thus $p_a c=\\operatorname{Ex}^{\\infty}(p_a)$. If $u_K:K\\to\\operatorname{Ex}^{\\infty}K$ denotes the stage-zero map, its naturality gives $\\operatorname{Ex}^{\\infty}(p_a)u_{\\prod K_a}=u_{K_a}p_a$. After composing with every projection this is the equality $c\\,u_{\\prod K_a}=\\prod_a u_{K_a}$. For the empty family, both the comparison and these equalities are the unique maps to the terminal simplicial set. This supplies the stated compatibility of canonical comparisons and unit with product projections.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/00ZA",
+    "place": "Construction 3.3.6.1 and Proposition 3.3.6.4, canonical-product and unit compatibility expanded; online source read 2026-10-17, archive WANTED; agent supplies the expanded argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-subdivision-face-poset-calculus",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-ex-comparison-weak-equivalence",
+  "lem-coef-filtered-colimit-weak-equivalences",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/00ZA",
+  "place": "Agent expansion of the online proofs in Section 3.3.6 (00ZA), read 2026-10-17; the local Kerodon archive is absent and is requested in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kan Ex infinity is a natural fibrant replacement for every simplicial set and preserves finite limits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.cosk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"ℕ → CategoryTheory.Functor SSet SSet\", \"doc\": \"For a natural number $n$, the coskeleton functor $\\\\text{cosk}_n$ is a functor from the category of simplicial sets to itself. It is defined as the composition of the truncation functor (which discards\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithFibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.cosk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (n : ℕ) →\\n      [∀ (F : CategoryTheory.Functor (SimplexCategory.Truncated n)ᵒᵖ C),\\n            (SimplexCategory.Truncated.inclusion n).op.HasRightKanExtension F] →\\n        CategoryTheory.Functor (CategoryTheory.SimplicialObject C) (Cat\", \"doc\": \"The coskeleton functor for simplicial objects in a category $\\\\mathcal{C}$, defined as the composition of the truncation functor (which discards data above dimension $n$) followed by the right Kan exte\"}\n  {\"name\": \"SSet.Truncated.hasLimits\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"∀ {n : ℕ}, CategoryTheory.Limits.HasLimits (SSet.Truncated n)\", \"doc\": \"For any natural number $ n $, the category of $ n $-truncated simplicial sets has all limits. This means that for every diagram $ D : \\\\mathcal{J} \\\\to \\\\text{Truncated}(n) $ where $ \\\\mathcal{J} $ is a c\"}\n  {\"name\": \"SSet.hasLimits\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"CategoryTheory.Limits.HasLimits SSet\", \"doc\": \"The category of simplicial sets has all limits, meaning that for every diagram $D : \\\\mathcal{J} \\\\to \\\\text{SSet}$ where $\\\\mathcal{J}$ is a category of the same size as $\\\\text{SSet}$, the limit of $D$ e\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithCofibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with cofibrations structure, where the cofibrations are defined as the monomorphisms in the category of simplicial sets.\"}\n  {\"name\": \"CategoryTheory.Nerve.quasicategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/Nerve\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).Quasicategory\", \"doc\": \"For any category $\\\\mathcal{C}$, its nerve (the simplicial set whose $n$-simplices are composable sequences of $n$ morphisms in $\\\\mathcal{C}$) satisfies the quasicategory condition: every inner horn $\\\\\"}\n  {\"name\": \"SSet.QCat\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of the category of simplicial sets consisting of all quasi-categories (simplicial sets where every inner horn admits a filler) and all morphisms between them.\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: coskeleta and preservation of products by the ordinary homotopy-category functor are different functors; subdivision/ex are defined but no Ex-infinity Kan replacement theorem is present."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The iterated subdivision right adjoint Ex infinity preserves finite products and the natural unit is a weak homotopy equivalence into a Kan complex",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.NerveAdjunction\", \"type\": \": PreservesFiniteProducts hoFunctor\", \"doc\": \"The functor from the category of simplicial sets to the category of small categories, which maps each simplicial set to its homotopy category by truncating at dimension 2 and quotienting by homotopy r\"}\n  {\"name\": \"CategoryTheory.hoFunctor.isIso_prodComparison\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.NerveAdjunction\", \"type\": \"(X Y : SSet) : IsIso (prodComparison hoFunctor X Y)\", \"doc\": \"For any two simplicial sets $X$ and $Y$, the homotopy category functor applied to their product induces an isomorphism between the homotopy category of $X \\times Y$ and the product of the homotopy cate\"}\n  {\"name\": \"CategoryTheory.hoFunctor.preservesBinaryProduct\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.NerveAdjunction\", \"type\": \"(X Y : SSet) : PreservesLimit (pair X Y) hoFunctor\", \"doc\": \"The homotopy category functor from the category of simplicial sets to the category of small categories preserves binary products. For any two simplicial sets $X$ and $Y$, the image of their product $X\"}\n  {\"name\": \"CategoryTheory.hoFunctor.preservesBinaryProducts\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.NerveAdjunction\", \"type\": \": PreservesLimitsOfShape (Discrete WalkingPair) hoFunctor\", \"doc\": \"The homotopy category functor for simplicial sets preserves binary products. This means that for any pair of simplicial sets, their product in the category of simplicial sets is mapped by the homotopy\"}\n  {\"name\": \"CategoryTheory.Limits.instPreservesFiniteProductsOfPreservesFiniteLimits\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Finite\", \"type\": \"(F : C ⥤ D) [PreservesFiniteLimits F] : PreservesFiniteProducts F\", \"doc\": \"If a functor between categories preserves finite limits, then it necessarily preserves finite products. This instance establishes that the property of preserving all finite limits implies the property\"}\n  {\"name\": \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Instances\", \"type\": \": (fibrations C).IsStableUnderProductsOfShape J\", \"doc\": \"A category equipped with cofibrations, fibrations, and weak equivalences, together with a weak factorization system and stability of fibrations under products, satisfies the axioms of a model category\"}\n  {\"name\": \"Condensed.instPreservesFiniteProductsOppositeCompHausVal\", \"module\": \"Mathlib.Condensed.Explicit\", \"type\": \"(X : Condensed A) : PreservesFiniteProducts X.val\", \"doc\": \"For any condensed object $ X $ in a category $ \\\\mathcal{A} $, the underlying presheaf of $ X $, which is a functor from the opposite category of compact Hausdorff spaces to $ \\\\mathcal{A} $, preserves \"}\n  {\"name\": \"CategoryTheory.Localization.instPreservesFiniteProductsLocalization'Q'\", \"module\": \"Mathlib.CategoryTheory.Localization.FiniteProducts\", \"type\": \"[W.HasLocalization] : PreservesFiniteProducts W.Q'\", \"doc\": \"Given a category $\\\\mathcal{C}$ and a morphism property $W$ with localization data, the localization functor $Q' : \\\\mathcal{C} \\\\to \\\\mathcal{C}[W^{-1}]$ preserves finite products. This means that $Q'$ m\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: coskeleta and preservation of products by the ordinary homotopy-category functor are different functors; subdivision/ex are defined but no Ex-infinity Kan replacement theorem is present."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SSet\", \"Ex\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Lean.Expr.getUsedConstantsAsSet\", \"module\": \"Lean.Util.FoldConsts\", \"type\": \" (e : Lean.Expr) : Lean.NameSet\", \"doc\": \"Like `Expr.getUsedConstants`, but produce a `NameSet`. \"}\n  {\"name\": \"Lean.Expr.relevantConstantsAsSet\", \"module\": \"Lean.LibrarySuggestions.Basic\", \"type\": \" (e : Lean.Expr) : Lean.MetaM Lean.NameSet\", \"doc\": \"Collect the constants occurring in `e` (once each), skipping instance arguments and proofs. \"}\n  {\"name\": \"CompositionAsSet.ext\", \"module\": \"Mathlib.Combinatorics.Enumerative.Composition\", \"type\": \" {n : ℕ} {x y : CompositionAsSet n} (boundaries : x.boundaries = y.boundaries) : x = y\", \"doc\": \"\"}\n  {\"name\": \"CompositionAsSet.ext_iff\", \"module\": \"Mathlib.Combinatorics.Enumerative.Composition\", \"type\": \" {n : ℕ} {x y : CompositionAsSet n} : x = y ↔ x.boundaries = y.boundaries\", \"doc\": \"\"}\n  {\"name\": \"CompositionAsSet.mem_boundaries_iff_exists_blocks_sum_take_eq\", \"module\": \"Mathlib.Combinatorics.Enumerative.Composition\", \"type\": \" {n : ℕ} (c : CompositionAsSet n) {j : Fin (n + 1)} : j ∈ c.boundaries ↔ ∃ i < c.boundaries.card, (List.take i c.blocks).sum = ↑j\", \"doc\": \"\"}\n  {\"name\": \"mem_nhdsSet_iff_exists\", \"module\": \"Mathlib.Topology.NhdsSet\", \"type\": \" {X : Type u_2} [TopologicalSpace X] {s t : Set X} : s ∈ nhdsSet t ↔ ∃ U, IsOpen U ∧ t ⊆ U ∧ U ⊆ s\", \"doc\": \"\"}\n  {\"name\": \"eventually_nhdsSet_iff_exists\", \"module\": \"Mathlib.Topology.NhdsSet\", \"type\": \" {X : Type u_2} [TopologicalSpace X] {s : Set X} {p : X → Prop} : (∀ᶠ (x : X) in nhdsSet s, p x) ↔ ∃ t, IsOpen t ∧ s ⊆ t ∧ ∀ x ∈ t, p x\", \"doc\": \"A proposition is true on a set neighborhood of `s` iff it is true on a larger open set \"}\n  {\"name\": \"exists_mem_nhdsSet_isCompact_mapsTo\", \"module\": \"Mathlib.Topology.Compactness.LocallyCompact\", \"type\": \" {X : Type u_1} {Y : Type u_2} [TopologicalSpace X] [TopologicalSpace Y] [LocallyCompactPair X Y] {f : X → Y} {K : Set X} {U : Set Y} (hf : Continuous f) (hK : IsCompact K) (hU : IsOpen U) (hKU : Set.MapsTo f K U) : ∃ L ∈ nhdsSet K, IsCompact L ∧ Set.MapsTo f L U\", \"doc\": \"If `f : X → Y` is a continuous map in a locally compact pair of topological spaces,\\n`K : set X` is a compact set, and `U` is an open neighbourhood of `f '' K`,\\nthen there exists a compact neighbourhoo\"}\n  {\"name\": \"Set.InjOn.exists_mem_nhdsSet\", \"module\": \"Mathlib.Topology.Separation.Hausdorff\", \"type\": \" {X : Type u_3} {Y : Type u_4} [TopologicalSpace X] [TopologicalSpace Y] [T2Space Y] {f : X → Y} {s : Set X} (inj : Set.InjOn f s) (sc : IsCompact s) (fc : ∀ x ∈ s, ContinuousAt f x) (loc : ∀ x ∈ s, ∃ u ∈ nhds x, Set.InjOn f u) : ∃ t ∈ nhdsSet s, Set.InjOn f t\", \"doc\": \"If a function `f` is\\n\\n- injective on a compact set `s`;\\n- continuous at every point of this set;\\n- injective on a neighborhood of each point of this set,\\n\\nthen it is injective on a neighborhood of thi\"}\n  {\"name\": \"exists_mem_nhdsSet_isClosed_subset\", \"module\": \"Mathlib.Topology.Separation.Regular\", \"type\": \" {X : Type u_1} [TopologicalSpace X] [NormalSpace X] {u s : Set X} (h : s ∈ nhdsSet u) (hu : IsClosed u) : ∃ t ∈ nhdsSet u, IsClosed t ∧ t ⊆ s\", \"doc\": \"\"}\n  {\"name\": \"SSet.hom_ext\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Basic\", \"type\": \" {X Y : SSet} {f g : X ⟶ Y} (w : ∀ (n : SimplexCategoryᵒᵖ), f.app n = g.app n) : f = g\", \"doc\": \"\"}\n  {\"name\": \"SSet.hom_ext_iff\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Basic\", \"type\": \" {X Y : SSet} {f g : X ⟶ Y} : f = g ↔ ∀ (n : SimplexCategoryᵒᵖ), f.app n = g.app n\", \"doc\": \"\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: coskeleta and preservation of products by the ordinary homotopy-category functor are different functors; subdivision/ex are defined but no Ex-infinity Kan replacement theorem is present."
+  },
+  {
+   "tool": "grep",
+   "query": "ExInfty|exInfty|ExInfinity|exInfinity|Ex∞|Ex.*[Kk]an|[Kk]an.*Ex",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.CategoryTheory.Functor.KanExtension.Adjunction\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"line\": \"292\", \"text\": \"    (SimplexCategory.Truncated.inclusion n).op.HasLeftKanExtension F] :\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"line\": \"298\", \"text\": \"    (SimplexCategory.Truncated.inclusion n).op.HasRightKanExtension F] :\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"line\": \"304\", \"text\": \"    (SimplexCategory.Truncated.inclusion n).op.HasLeftKanExtension F] :\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"line\": \"309\", \"text\": \"    (SimplexCategory.Truncated.inclusion n).op.HasRightKanExtension F] :\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.CategoryTheory.Functor.KanExtension.Adjunction\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.CategoryTheory.Functor.KanExtension.Basic\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\", \"line\": \"18\", \"text\": \"The simplicial object `X` is *n-coskeletal* if `rightExtensionInclusion X n` is a right Kan\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\", \"line\": \"21\", \"text\": \"When the ambient category admits right Kan extensions along `(Truncated.inclusion n).op`,\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean\", \"line\": \"57\", \"text\": \"/-- A simplicial object `X` is `n`-coskeletal when it is the right Kan extension of its restriction\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicTopology.SimplicialSet.KanComplex\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"line\": \"15\", \"text\": \"We show that every Kan complex is a quasicategory.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"line\": \"24\", \"text\": \"  `Mathlib/AlgebraicTopology/SimplicialSet/KanComplex.lean`.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"line\": \"52\", \"text\": \"/-- Every Kan complex is a quasicategory. -/\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"line\": \"54\", \"text\": \"instance (S : SSet) [KanComplex S] : Quasicategory S where\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"line\": \"24\", \"text\": \"It is the left Kan extension of `SimplexCategory.toTop` along the Yoneda embedding.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"line\": \"36\", \"text\": \"- Show that the singular simplicial set is a Kan complex.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"line\": \"67\", \"text\": \"the left Kan extension of `SimplexCategory.toTop` along the Yoneda embedding.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"line\": \"71\", \"text\": \"  stdSimplex.{u}.leftKanExtension SimplexCategory.toTop\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SingularSet.lean\", \"line\": \"80\", \"text\": \"    (SSet.stdSimplex.{u}.leftKanExtension SimplexCategory.toTop)\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"line\": \"33\", \"text\": \"  Kan complexes.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic.lean\", \"line\": \"160\", \"text\": \"/-- Since `Truncated.inclusion` is fully faithful, so is right Kan extension along it. -/\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic.lean\", \"line\": \"174\", \"text\": \"/-- Since `Truncated.inclusion` is fully faithful, so is left Kan extension along it. -/\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/KanComplex/MulStruct.lean\", \"line\": \"17\", \"text\": \"which will be used in the definition of homotopy groups of Kan complexes.\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/KanComplex/MulStruct.lean\", \"line\": \"150\", \"text\": \"that `fg` is the product of `f` and `g` in the homotopy group (of a Kan complex).\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: coskeleta and preservation of products by the ordinary homotopy-category functor are different functors; subdivision/ex are defined but no Ex-infinity Kan replacement theorem is present."
+  },
+  {
+   "tool": "grep",
+   "query": "ExInfty|exInfty|ExInfinity|exInfinity|Ex∞|barycentric|subdivision",
+   "results": "{\"t\": \"2026-10-16T15:32:35Z\", \"tool\": \"grep\", \"query\": \"ExInfty|exInfty|ExInfinity|exInfinity|Ex∞|barycentric|subdivision\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Nonsingular.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\"], \"digest\": \"0fbbf9e617592e8d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean in full; SSet.sd, SSet.ex and sdExAdjunction define only a single subdivision adjunction, not the iterated replacement or its homotopical properties."
+  },
+  {
+   "tool": "grep",
+   "query": "ExInfty|exInfinity|ex_infinity|subdivision|def ex|sdExAdjunction",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"line\": \"13\", \"text\": \"# The subdivision functors\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"line\": \"15\", \"text\": \"In this file, we define the subdivision functor `sd : SSet ⥤ SSet`\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"line\": \"45\", \"text\": \"/-- The subdivision functor on simplicial sets. -/\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"line\": \"49\", \"text\": \"/-- The right adjoint to the subdivision functor on simplicial sets. -/\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"line\": \"50\", \"text\": \"noncomputable def ex : SSet.{u} ⥤ SSet.{u} :=\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"line\": \"46\", \"text\": \"* show that anodyne extensions are stable under the subdivision functor (@joelriou)\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Nonsingular.lean\", \"line\": \"16\", \"text\": \"This notion is useful in the context of the study of the subdivision\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: the available SSet.ex and sdExAdjunction construct a single right adjoint; the other hits are coskeleta or the ordinary homotopy-category functor. There is no Ex-infinity construction or its Kan/weak-equivalence theorem in the pinned subdivision file."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterating the simplicial Ex functor gives a Kan fibrant replacement preserving finite limits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.SimplicialObject.cosk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (n : ℕ) →\\n      [∀ (F : CategoryTheory.Functor (SimplexCategory.Truncated n)ᵒᵖ C),\\n            (SimplexCategory.Truncated.inclusion n).op.HasRightKanExtension F] →\\n        CategoryTheory.Functor (CategoryTheory.SimplicialObject C) (Cat\", \"doc\": \"The coskeleton functor for simplicial objects in a category $\\\\mathcal{C}$, defined as the composition of the truncation functor (which discards data above dimension $n$) followed by the right Kan exte\"}\n  {\"name\": \"SSet.cosk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"ℕ → CategoryTheory.Functor SSet SSet\", \"doc\": \"For a natural number $n$, the coskeleton functor $\\\\text{cosk}_n$ is a functor from the category of simplicial sets to itself. It is defined as the composition of the truncation functor (which discards\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.sk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (n : ℕ) →\\n      [∀ (F : CategoryTheory.Functor (SimplexCategory.Truncated n)ᵒᵖ C),\\n            (SimplexCategory.Truncated.inclusion n).op.HasLeftKanExtension F] →\\n        CategoryTheory.Functor (CategoryTheory.SimplicialObject C) (Cate\", \"doc\": \"The functor that maps a simplicial object in a category $\\\\mathcal{C}$ to its skeletal approximation by first truncating it to dimension $n$ (discarding simplicial data above $n$) and then extending th\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.Truncated.cosk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (n : ℕ) →\\n      [∀ (F : CategoryTheory.Functor (SimplexCategory.Truncated n)ᵒᵖ C),\\n            (SimplexCategory.Truncated.inclusion n).op.HasRightKanExtension F] →\\n        CategoryTheory.Functor (CategoryTheory.SimplicialObject.Truncat\", \"doc\": \"The coskeleton functor for $ n $-truncated simplicial objects in a category $ \\\\mathcal{C} $, defined as the right Kan extension along the opposite of the inclusion functor $ \\\\Delta_{\\\\leq n} \\\\hookright\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.instHasLimits\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasLimits C],\\n  CategoryTheory.Limits.HasLimits (CategoryTheory.SimplicialObject C)\", \"doc\": \"If a category $\\\\mathcal{C}$ has all limits, then the category of simplicial objects in $\\\\mathcal{C}$ also has all limits.\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.instHasLimitsOfShape\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] {J : Type v} [inst_1 : CategoryTheory.SmallCategory J]\\n  [CategoryTheory.Limits.HasLimitsOfShape J C],\\n  CategoryTheory.Limits.HasLimitsOfShape J (CategoryTheory.SimplicialObject C)\", \"doc\": \"If a category $\\\\mathcal{C}$ has all limits of shape $J$, then the category of simplicial objects in $\\\\mathcal{C}$ also has all limits of shape $J$.\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.truncation\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (n : ℕ) → CategoryTheory.Functor (CategoryTheory.SimplicialObject C) (CategoryTheory.SimplicialObject.Truncated C n)\", \"doc\": \"For a natural number $ n $, this functor maps a simplicial object in a category $ \\\\mathcal{C} $ to its $ n $-truncated version by restricting the domain of the original functor $ \\\\Delta^\\\\text{op} \\\\to \"}\n  {\"name\": \"CategoryTheory.SimplicialObject.Truncated.sk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (n : ℕ) →\\n      [∀ (F : CategoryTheory.Functor (SimplexCategory.Truncated n)ᵒᵖ C),\\n            (SimplexCategory.Truncated.inclusion n).op.HasLeftKanExtension F] →\\n        CategoryTheory.Functor (CategoryTheory.SimplicialObject.Truncate\", \"doc\": \"The functor that assigns to each n-truncated simplicial object (a functor from $\\\\Delta_{\\\\leq n}^\\\\text{op}$ to $\\\\mathcal{C}$) its left Kan extension along the opposite of the inclusion functor $\\\\Delta_\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: the available SSet.ex and sdExAdjunction construct a single right adjoint; the other hits are coskeleta or the ordinary homotopy-category functor. There is no Ex-infinity construction or its Kan/weak-equivalence theorem in the pinned subdivision file."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Ex infinity functor on simplicial sets preserves finite products and gives a Kan complex weakly equivalent to the input",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.hoFunctor.preservesBinaryProducts\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.NerveAdjunction\", \"type\": \": PreservesLimitsOfShape (Discrete WalkingPair) hoFunctor\", \"doc\": \"The homotopy category functor for simplicial sets preserves binary products. This means that for any pair of simplicial sets, their product in the category of simplicial sets is mapped by the homotopy\"}\n  {\"name\": \"CategoryTheory.Limits.PreservesFiniteProducts.mk\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Finite\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {F : CategoryTheory.Functor C D},\\n  (∀ (n : ℕ), CategoryTheory.Limits.PreservesLimitsOfShape (CategoryTheory.Discrete (Fin n)) F) →\\n    CategoryTheory.Limits.PreservesFiniteProdu\", \"doc\": \"If a functor $ F : C \\\\to D $ preserves limits of shape $ \\\\mathrm{Discrete}(\\\\mathrm{Fin}\\\\, n) $ for all $ n \\\\in \\\\mathbb{N} $, then $ F $ preserves finite products. Here, $ \\\\mathrm{Discrete}(\\\\mathrm{Fin\"}\n  {\"name\": \"CategoryTheory.Limits.PreservesFiniteProducts\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Finite\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} → [inst_1 : CategoryTheory.Category.{v₂, u₂} D] → CategoryTheory.Functor C D → Prop\", \"doc\": \"A property asserting that a functor from category $ C $ to category $ D $ preserves finite products\"}\n  {\"name\": \"CategoryTheory.hoFunctor.preservesBinaryProduct\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.NerveAdjunction\", \"type\": \"(X Y : SSet) : PreservesLimit (pair X Y) hoFunctor\", \"doc\": \"The homotopy category functor from the category of simplicial sets to the category of small categories preserves binary products. For any two simplicial sets $X$ and $Y$, the image of their product $X\"}\n  {\"name\": \"CategoryTheory.Limits.PreservesFiniteProducts.casesOn\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Finite\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {motive : CategoryTheory.Limits.PreservesFiniteProducts F → Sort u} →\\n            (t : CategoryTheory.Limits.\", \"doc\": \"A recursor for the property that a functor preserves finite products, allowing functions on this property to be defined by specifying their behavior on instances constructed via preservation of discre\"}\n  {\"name\": \"CategoryTheory.Limits.CreatesFiniteProducts\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Creates.Finite\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        CategoryTheory.Functor C D → Type (max (max (max (max 1 u₁) u₂) v₁) v₂)\", \"doc\": \"A property of a functor $ F : C \\to D $ stating that it creates finite products, meaning that whenever a diagram in $ C $ has a cone whose image under $ F $ is a limit cone in $ D $, then the original \"}\n  {\"name\": \"CategoryTheory.hoFunctor.isIso_prodComparison\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.NerveAdjunction\", \"type\": \"(X Y : SSet) : IsIso (prodComparison hoFunctor X Y)\", \"doc\": \"For any two simplicial sets $X$ and $Y$, the homotopy category functor applied to their product induces an isomorphism between the homotopy category of $X \\times Y$ and the product of the homotopy cate\"}\n  {\"name\": \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"module\": \"Mathlib.AlgebraicTopology.SingularSet\", \"type\": \": SSet.toTop.{u}.IsLeftKanExtension SSet.toTopSimplex.inv\", \"doc\": \"The geometric realization functor from simplicial sets to topological spaces satisfies the left Kan extension property along the standard simplex cosimplicial object, verified via the inverse of the n\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: the available SSet.ex and sdExAdjunction construct a single right adjoint; the other hits are coskeleta or the ordinary homotopy-category functor. There is no Ex-infinity construction or its Kan/weak-equivalence theorem in the pinned subdivision file."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.ex",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"SSet.ex\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Subdivision\", \"type\": \" : CategoryTheory.Functor SSet SSet\", \"doc\": \"The right adjoint to the subdivision functor on simplicial sets. \"}\n  {\"name\": \"SSet.instIsRightAdjointEx\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Subdivision\", \"type\": \" : SSet.ex.IsRightAdjoint\", \"doc\": \"\"}\n  {\"name\": \"SSet.sdExAdjunction\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Subdivision\", \"type\": \" : SSet.sd ⊣ SSet.ex\", \"doc\": \"The adjunction between the subdivision functor `sd` and `ex`. \"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: the available SSet.ex and sdExAdjunction construct a single right adjoint; the other hits are coskeleta or the ordinary homotopy-category functor. There is no Ex-infinity construction or its Kan/weak-equivalence theorem in the pinned subdivision file."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-coherent-nerve-comparison",
+  "date": "2026-10-16",
+  "group": "Q62"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-ex-infinity-finite-products",
+  "worker": "stage1",
+  "summary": "Kept the statement and expanded the Kan proof into an explicit face-poset extension and double-adjunction calculation, then used one-step Ex weak equivalence and filtered-colimit stability for the unit, and degreewise Hom/finite-limit interchange for finite limits. Three strictly smaller statement-only inputs; no exact project attachment or Mathlib match. All cited statements read and verbatim quotes supplied.",
+  "blueprint": "Paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation, and the following naturality and triangle-identity sentences; foundational enhancement of finite coefficient adjunction diagrams. Technical input: Iterated Ex gives a Kan replacement preserving finite limits. The split realizes this finite-product-preserving Kan replacement input, with all intermediate face and colimit arguments exposed; the ancestral coefficient-adjunction route is unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-batch",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-batch (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps, all three new nodes and every cited statement in full: simplicial-set and colimit defs, def-cbc-enhanced-diagrams-cones, lem-coef-kan-quillen-right-proper, and the 002W filtered/finite interchange leaf. The item statement is unchanged and true, with nothing weakened. Step 1: the section a↦{0..a} of λ_n gives injective j, so stage maps into the colimit are injective. Step 2: Q=P∖{V,V∖{i}} is exactly the horn's face set, and the image-of-faces hypothesis max(C)∈Q holds. Step 3: r(C)⊆T∪{i} still omits T's missing vertex j≠i, and r(C)={i} otherwise; hand-checked on n=1 and n=2. Step 4: both transposes checked; j_Y f transposes to f λ_Λ by naturality of λ, then to f̄ Sd(λ_Λ). Step 5: finite stage plus injectivity glue the horn; the m≥1 shift is right; n=1 and empty K are fine. Step 6: one-step equivalences, composition, filtered colimit over N with the constant diagram's colimit K. Steps 7–9: Hom/limit, the 002W interchange with N small filtered and J finite, and the projection/unit equations. New nodes: face-poset calculus (true; Sd A≅N(F) for downward-closed chain families; image rule tested on [1]→[0]), one-step Ex comparison (Kan's theorem), and filtered-colimit stability (true without monicity). Each is self-contained, statement-only and strictly smaller than the item; none restates one of its clauses. A whole-DAG statement scan found no duplicates. Pinned Mathlib Subdivision.lean has only sd/ex and the adjunction, with the face comparison left as TODO, so there is no leaf. No cycle; route is within sk-prop-sf-biduality-general apart from definition and leaf nodes; no tool_uses needed. Kerodon is not archived locally: the delivery says so, gives WANTED lines and uses proof_origin agent. I could not open the online tags, so I checked the mathematics directly. No SGA. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.ExInfinityFiniteProducts",
+  "declaration": "SSet.ex_infinity_finite_products",
+  "declarations": [
+   "SSet.sdLastVertexOrderHom",
+   "SSet.sdLastVertex",
+   "SSet.sdLastVertexCosimplicial",
+   "SSet.exLastVertexUnit",
+   "SSet.exIter",
+   "SSet.exIterTransition",
+   "SSet.exTowerFunctor",
+   "SSet.exInfinityFunctor",
+   "SSet.exInfinity",
+   "SSet.exInfinityUnit",
+   "SSet.ex_infinity_finite_products"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/ExInfinityFiniteProducts.lean",
+  "statement": "theorem ex_infinity_finite_products : (∀ K : SSet.{u}, KanComplex (exInfinity K) ∧ Enhanced.IsWeakHomotopyEquivalence (exInfinityUnit.app K)) ∧ PreservesFiniteLimits exInfinityFunctor.{u} ∧ (∀ (I : Type v) [Finite I] (K : I → SSet.{u}), IsIso (piComparison exInfinityFunctor.{u} K) ∧ ∀ i : I, piComparison exInfinityFunctor.{u} K ≫ Pi.π (fun a : I ↦ exInfinityFunctor.obj (K a)) i = exInfinityFunctor.map (Pi.π K i) ∧ exInfinityUnit.app (∏ᶜ K) ≫ piComparison exInfinityFunctor.{u} K ≫ Pi.π (fun a : I ↦ exInfinityFunctor.obj (K a)) i = Pi.π K i ≫ exInfinityUnit.app (K i)) ∧ IsIso (terminalComparison exInfinityFunctor.{u})",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The helper definitions construct the exact last-vertex comparison into Mathlib SSet.ex, its iterates and sequential functor-category colimit, and the natural stage-zero unit. All have real data; only the node theorem is postponed. The finite-product clauses quantify over every finite index type in an independent universe and specify both projection equations and the terminal comparison."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a60ae47c",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Read node, 4 stmt deps, report (Worker report + Second reading by Q24 present), module. Lean matches every clause: SimplexCategory.sd = nerve of nonempty subsets (linear order), SSet.ex = Hom(Sd Δ^n,K), last vertex = max' with real naturality proofs, j_K = precomposition, transitions whiskerLeft (exIter n) j (rfl/ofSequence checked), colimit tower, KanComplex (all horns incl. outer, no nonemptiness), Enhanced.IsWeakHomotopyEquivalence (same notion as Kan-Quillen dep; printed: π0 + all π_r, all basepoints), PreservesFiniteLimits, piComparison iso for any Finite I : Type v, terminalComparison iso, both projection equations in the right order. No extra hypotheses or universe restriction; edge cases (empty K, n=0, empty/singleton I, stage 0 = id) covered. 10 helpers with real data; only the theorem uses sorry (#print axioms); docstrings carry source/blueprint and the 9 proof steps; lean.statement verbatim; declarations exist; Mathlib has no Ex^∞. nt_compile.py: module compiles in 3.4 s, no errors or warnings. Cosmetic: report source line has a redaction artefact ('the project server'), no fix needed."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}
