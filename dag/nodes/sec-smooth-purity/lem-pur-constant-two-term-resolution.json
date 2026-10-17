@@ -13,7 +13,8 @@
   "def-pc-tensor-complex-sheaves",
   "def-pc-flat-sheaf-modules",
   "def-pc-kflat-complex",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-constant-coefficient-scalar-extension"
  ],
  "proof": [
   {
@@ -262,5 +263,39 @@
   "group": "Q20",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-57b2b5073 (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps, every cited statement, the parent lem-pur-finite-kummer-level (its step 6 uses this item) and the main-20261015 Kummer proof. In Stacks I checked 03EI (sites-modules l.874: any presheaf of rings, so it covers the constant presheaf Z_l), 03EP(2) (l.4013) and 06YQ lemma-bounded-flat-K-flat (sites-cohomology l.3120). The statement is unchanged, uses the discrete constant (Z_l)_C, and is true. Small cases: L=0, L=R with ell=2 and N=1 on the point site, L=(Q_l)_C, and torsion L for the identification all agree; L=Q shows the injectivity hypothesis is needed. Step 1 sheafifies the exact ordinary resolution and takes Mod(R) kernels and cokernels. Step 2: the unitor makes R flat, 0 is flat, and bounded-above flat implies K-flat. Step 3 (elementary): H^-1=ker t=0 and H^0=coker t=Q. Step 4: tensor preserves the finite cokernel diagram, and the unitor gives L tensor Q = L/tL by x tensor a-bar to a[x]. Step 5 (elementary): Tot is [L -t-> L] with sign +1, and the augmentation induces phi^{-1} on H^0. No new nodes, so no relabelling. The grep found no duplicate in the DAG. No SGA. I accept the four declared tool_uses: lem-weil-pbc-standard-quotients-perfect, lem-pc-sheaf-modules-tensor-closed, lem-pc-bounded-above-flat-kflat-site and lem-weil-pbc-independent-sheaf-tensor-colimits. Not a delivery fault: lem-pc-bounded-above-flat-kflat-site gives source tag 06YS, but the right tag is 06YQ; that is for maintenance. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6effca997",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Every clause matches the node: K is fixed up to isomorphism (degrees -1 and 0, both terms R, differential l^n), flat terms and K-flatness use the recorded declarations, the augmentation to Q[0] is fixed by its degree-0 equation and is a quasi-iso, L⊗Q≅coker(l^n) holds for every L and is pinned down on local pure tensors, and under Mono the augmentation from the total tensor complex is fixed on its (0,0) summand and is a quasi-iso. Added stmt_dep def-weil-pbc-constant-coefficient-scalar-extension is landed and reviewed; no cycle. Gates pass: no hollow defs, one sorry, source/blueprint docstrings with all 5 proof steps, lean.statement verbatim, all 13 declarations present, no pro-etale substitute. Stacks 06YQ and 03EI checked. nt_compile with side overlay: runs 1 and 4 clean (24.7 s, 13.2 s, rc=0); runs 2-3 timed out on overlay dependency AdicCoefficientDatum.lean at load ~210, not a delivery fault. Notes: single-universe SmallCategory site follows the recorded constantCoefficientModule interface and is documented (parent will need a ULiftHom transport in stage 3); the Second reading section is the 2026-10-17 policy placeholder."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstantTwoTermResolution",
+  "declaration": "SheafOfModules.ConstantPrimePower.constant_two_term_resolution",
+  "declarations": [
+   "SheafOfModules.ConstantPrimePower.Coeff",
+   "SheafOfModules.ConstantPrimePower.Modules",
+   "SheafOfModules.ConstantPrimePower.freeModule",
+   "SheafOfModules.ConstantPrimePower.reductionRingHom",
+   "SheafOfModules.ConstantPrimePower.quotientModule",
+   "SheafOfModules.ConstantPrimePower.reductionLinear",
+   "SheafOfModules.ConstantPrimePower.quotientSheaf",
+   "SheafOfModules.ConstantPrimePower.quotientMap",
+   "SheafOfModules.ConstantPrimePower.constantSection",
+   "SheafOfModules.ConstantPrimePower.single",
+   "SheafOfModules.ConstantPrimePower.total",
+   "SheafOfModules.ConstantPrimePower.zeroSummand",
+   "SheafOfModules.ConstantPrimePower.constant_two_term_resolution"
+  ],
+  "file": "lean/Sheaf/Paper/ConstantTwoTermResolution.lean",
+  "statement": "theorem constant_two_term_resolution (n : ℕ) (hn : 1 ≤ n) : ∃ (K : CochainComplex (Modules J l) ℤ) (em : K.X (-1) ≅ freeModule J l) (e0 : K.X 0 ≅ freeModule J l), (∀ i : ℤ, i ≠ -1 → i ≠ 0 → IsZero (K.X i)) ∧ K.d (-1) 0 = em.hom ≫ ((l ^ n) • 𝟙 (freeModule J l)) ≫ e0.inv ∧ (∀ i : ℤ, IsFlatOnSite (J := J) (R := (constantSheaf J CommRingCat.{u}).obj (CommRingCat.of (Coeff.{u} l))) (K.X i)) ∧ CochainComplex.IsKFlatIndependentCoefficients K ∧ (∃ ε : K ⟶ single J l (quotientSheaf J l n), ε.f 0 ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).hom = e0.hom ≫ quotientMap J l n ∧ QuasiIso ε) ∧ (∀ L : Modules J l, ∃ φ : (siteSheafTensorRight (quotientSheaf J l n)).obj L ≅ cokernel ((l ^ n) • 𝟙 L), (∀ (U : Sᵒᵖ) (x : L.val.obj U) (a : Coeff.{u} l), φ.hom.val.app U (siteSheafTensorTmul L (quotientSheaf J l n) U x ((quotientMap J l n).val.app U (constantSection J l U a))) = (cokernel.π ((l ^ n) • 𝟙 L)).val.app U (((constantCoefficientUnit J (Coeff.{u} l)).app U a) • x)) ∧ (Mono ((l ^ n) • 𝟙 L) → ∃ α : total J l L K ⟶ single J l ((siteSheafTensorRight (quotientSheaf J l n)).obj L), zeroSummand J l L K ≫ α.f 0 ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).hom = (siteSheafTensorRight (K.X 0)).map (HomologicalComplex.singleObjXSelf (.up ℤ) 0 L).hom ≫ siteSheafTensorSecondMap L (e0.hom ≫ quotientMap J l n) ∧ QuasiIso α))",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the recorded constantCoefficientModule functor for the actual constant coefficient and quotient sheaves. Helpers expose the lifted quotient map, sheafification-unit sections, signed total tensor, and canonical (0,0)-summand. Both augmentations are normalized by equations; the quotient identification is specified on local pure tensors and does not assume injectivity. The added, already recorded constant-coefficient definition node supplies precisely this constant-module interface."
  }
 }
