@@ -268,5 +268,33 @@
   "group": "Q140",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-8a439f6a5 (reviewer sub-agent of L); spot-checked: Read the item, all 13 citations' statements, and Stacks more-etale 0GL6 (l.3739-3771), sites-cohomology 07A4/0G7E/06YS/07A7 and blueprint main-20261015 prop-finite-compact-support-constructibility Step 5. The statement is unchanged, has correct D+ hypotheses and uses the def-kun coefficient category. Small cases f=id, B=0, J=0 and nonflat Z->Z/2 are fine. Steps 1-4 recomputed: counit-clause orientation, naturality of a, the definition of beta, the e/t normalization on K-flat models, and the transpose equal to alpha_{J,B_W[0]}. All correct. No new nodes. Neighbours lem-sfb-etale-proetale-scalar-mate and lem-coef-finite-direct-image (a special-case clause under finite/constructible hypotheses) are not duplicates. Fix: step 3 silently identified the counits of the sbc-def-base-change-map D+ adjunction (the one the cited counit identity concerns) with those of the def-kun-projection-formula-map adjunction. Added one sentence and cited the definition nodes sbc-def-base-change-map and def-kun-unbounded-exchange; proof_deps updated. Declared tool_uses accepted as generic black-box tools (the unit cites only sk-def-av-jacobian). No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurEtaleScalarMateProjection",
+  "declaration": "AlgebraicGeometry.Etale.scalarMate_restrict_eq_projection",
+  "declarations": [
+   "AlgebraicGeometry.Etale.scalarSheafPullbackIso",
+   "AlgebraicGeometry.Etale.scalarSheafPullbackComplexIso",
+   "AlgebraicGeometry.Etale.scalarGeometricRepresentative",
+   "AlgebraicGeometry.Etale.scalarPullbackIso_existsUnique",
+   "AlgebraicGeometry.Etale.scalarPullbackIso",
+   "AlgebraicGeometry.Etale.scalarMate",
+   "AlgebraicGeometry.Etale.scalarCoefficientPullbackIso",
+   "AlgebraicGeometry.Etale.scalarMate_restrict_eq_projection"
+  ],
+  "file": "lean/Sheaf/Paper/PurEtaleScalarMateProjection.lean",
+  "statement": "theorem scalarMate_restrict_eq_projection {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) {Z W : Scheme.{u}} (f : Z ⟶ W) (J : _root_.DerivedCategory.Plus (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A))) (_hN : ∃ N : _root_.DerivedCategory.Plus (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} B)), N.obj = (scalarExtension φ Z).obj J.obj) (_hM : ∃ M : _root_.DerivedCategory.Plus (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} B)), M.obj = (scalarExtension φ W).obj (R(lowerStar (ModuleCat.{u + 1} A) f).obj J.obj)) : (Sheaf.derivedRestrictScalars W.smallEtaleTopology φ).map ((scalarMate φ f).app J.obj) ≫ (scalarRestrictionDirectImageMap φ f).app ((scalarExtension φ Z).obj J.obj) = (scalarTensorIso φ W).hom.app (R(lowerStar (ModuleCat.{u + 1} A) f).obj J.obj) ≫ ((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) f).app J.obj).app (scalarCoefficient φ W) ≫ R(lowerStar (ModuleCat.{u + 1} A) f).map (((derivedTensor (ModuleCat.{u + 1} A) Z).obj J.obj).map (scalarCoefficientPullbackIso φ f).hom ≫ (scalarTensorIso φ Z).inv.app J.obj)",
+  "branch": "newtargets-dag",
+  "by": "Q158",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d89a1f905",
+  "group": "Q158",
+  "result": "pass",
+  "note": "Statement, dependencies, source, docstrings, edge cases, canonical constructions, and combined side-overlay compilation checked; no findings."
  }
 }

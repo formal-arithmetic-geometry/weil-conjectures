@@ -91,24 +91,19 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-thm-sf-compatibility",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.EtaleRestrictScalarsFunctorComparisons",
-  "file": "lean/Sheaf/AlgebraicGeometry/EtaleRestrictScalarsFunctorComparisons.lean",
-  "declaration": "AlgebraicGeometry.Etale.isIso_derivedLowerStarRestrictScalarsMap",
-  "statement": "theorem isIso_derivedLowerStarRestrictScalarsMap : IsIso (derivedLowerStarRestrictScalarsMap φ f)",
-  "branch": "sheaf-dag",
-  "by": "V1",
-  "date": "2026-10-12",
+  "module": "Sheaf.Paper.EtaleUnboundedRestrictionComparison",
+  "declaration": "AlgebraicGeometry.Etale.scalarRestrictionDirectImageMap",
   "declarations": [
-   "AlgebraicGeometry.Etale.lowerStarRestrictScalarsIso",
-   "AlgebraicGeometry.Etale.upperStarRestrictScalarsIsoSheaf",
-   "AlgebraicGeometry.Etale.derivedUpperStarRestrictScalarsIso",
-   "AlgebraicGeometry.Etale.derivedLowerStarRestrictScalarsMap",
-   "AlgebraicGeometry.Etale.isIso_derivedLowerStarRestrictScalarsMap",
-   "AlgebraicGeometry.Etale.derivedLowerStarRestrictScalarsIso",
-   "AlgebraicGeometry.Etale.derivedBaseChangeSourceRestrictScalarsIso",
-   "AlgebraicGeometry.Etale.derivedBaseChangeTargetRestrictScalarsIso"
-  ]
+   "AlgebraicGeometry.Etale.scalarRestrictionPullbackIso",
+   "AlgebraicGeometry.Etale.scalarRestrictionDirectImageMap"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleUnboundedRestrictionComparison.lean",
+  "statement": "def scalarRestrictionDirectImageMap {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) {Z W : Scheme.{u}} (f : Z ⟶ W) : R(lowerStar (ModuleCat.{u + 1} B) f) ⋙ Sheaf.derivedRestrictScalars W.smallEtaleTopology φ ⟶ Sheaf.derivedRestrictScalars Z.smallEtaleTopology φ ⋙ R(lowerStar (ModuleCat.{u + 1} A) f)",
+  "branch": "newtargets-dag",
+  "by": "Q158",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Section 1(B): the original recorded interface is reexported unchanged, including its bounded-below canonical isomorphisms. The consumer states its equation in the ambient unbounded categories, so this module supplies the exact derived inverse-image square and its geometric counit mate. Its D+ restriction is the original comparison by the counit identities. The equivalent helpers in FiniteCoefficientDirectImage cannot be imported here: the prescribed compiler reports duplicate upperStarIsoLowerStarInv declarations from two of its upstream imports. This smaller interface imports neither competing pro-etale module and adds no isomorphism hypothesis."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -148,5 +143,13 @@
   "from_unit": "sk-thm-smooth-base-change",
   "date": "2026-10-17",
   "why": "compatibility node re-routed under the central compatibility sketch (blueprint cbac0b347)"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d89a1f905",
+  "group": "Q158",
+  "result": "pass",
+  "note": "Statement, dependencies, source, docstrings, edge cases, canonical constructions, and combined side-overlay compilation checked; no findings."
  }
 }
