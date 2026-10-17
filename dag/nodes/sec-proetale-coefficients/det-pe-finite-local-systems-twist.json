@@ -289,5 +289,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a28542f7a",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Read the node, all 9 stmt dependency records, Stacks 099Y, the delivered module and the report (Worker report and Second reading by Q27 both present), plus the exact declarations: ProEtale.comparisonUpperStar/LowerStar/Adjunction (identical to the recorded proEtaleSiteComparisonModules without its Finite requirement), the published IsLocallyConstantProEtaleFixedModuleSheaf, IsClassical on the underlying set sheaf (node clause 3 equivalence) and Cover.etalePrecoverageToEtale. Every clause matches: the etale model F0 with nu^*F0 ≅ F, classical, trivializing etale cover, preservation both ways, bijectivity on morphisms, unit and counit isomorphisms (restricted quasi-inverse equivalence), and the Finite Λ clause for finite models. No extra hypotheses. Λ : Type u with the ULift into the module universe follows def-weil-size-convention and the sibling records. Edge cases covered: empty X, Λ=0, zero module, varying models, cover index universes. The four helper predicates have real content, are listed in lean.declarations, and duplicate nothing in Mathlib or the project. Single sorry, no pro-etale substitute. lean.statement matches the file signature verbatim (script check). nt_compile.py: rc=0, no errors or warnings (warn.sorry=false). Cosmetic only: two helper docstrings use the backtick blueprint form, which is common in the landed tree."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleFiniteLocalSystemsTwist",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteLocalSystemsTwist",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IsFinitePresentationProEtaleLocalSystem",
+   "AlgebraicGeometry.ProEtale.IsFinitePresentationEtaleLocalSystem",
+   "AlgebraicGeometry.ProEtale.IsFiniteModelProEtaleLocalSystem",
+   "AlgebraicGeometry.ProEtale.HasEtaleTrivializingCover",
+   "AlgebraicGeometry.ProEtale.finiteLocalSystemsTwist"
+  ],
+  "statement": "theorem finiteLocalSystemsTwist (X : Scheme.{u}) (Λ : Type u) [CommRing Λ] (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ))) : IsFinitePresentationProEtaleLocalSystem X Λ F → (∃ G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)), IsFinitePresentationEtaleLocalSystem X Λ G ∧ Nonempty ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) X).obj G ≅ F)) ∧ IsClassical ((sheafCompose (Scheme.ProEt.topology X) (forget (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)))).obj F) ∧ HasEtaleTrivializingCover X Λ F ∧ (∀ G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)), IsFinitePresentationEtaleLocalSystem X Λ G → IsFinitePresentationProEtaleLocalSystem X Λ ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) X).obj G)) ∧ (∀ F' : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)), IsFinitePresentationProEtaleLocalSystem X Λ F' → IsFinitePresentationEtaleLocalSystem X Λ ((comparisonLowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) X).obj F')) ∧ (∀ G H : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)), IsFinitePresentationEtaleLocalSystem X Λ G → IsFinitePresentationEtaleLocalSystem X Λ H → Function.Bijective (fun φ : G ⟶ H ↦ (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) X).map φ)) ∧ (∀ G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)), IsFinitePresentationEtaleLocalSystem X Λ G → IsIso ((comparisonAdjunction (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) X).unit.app G)) ∧ (∀ F' : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)), IsFinitePresentationProEtaleLocalSystem X Λ F' → IsIso ((comparisonAdjunction (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) X).counit.app F')) ∧ (Finite Λ → ∀ F' : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)), IsFiniteModelProEtaleLocalSystem X Λ F' → IsFinitePresentationProEtaleLocalSystem X Λ F')",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleFiniteLocalSystemsTwist.lean"
  }
 }
