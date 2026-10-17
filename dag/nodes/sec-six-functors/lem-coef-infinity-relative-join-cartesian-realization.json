@@ -257,5 +257,36 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e24c0eda4",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Read node, all 4 stmt deps (RelativeJoin, InfinityFibrations, InfinityMappingComposition, EnhancedDiagramsCones sources), Kerodon 024K/0242/024F places. E_R=relativeJoin (𝟙 Y) R with correct orientation; p = interval coordinate; relativeJoinMap args (a=R,b=𝟙,h=R) match the node; endpoints, cartesian edges at every x, recorded cartesianFibration; fiber and mapping isos canonically pinned (inv≫pullback.snd / mappingSpaceMap / q on underlying simplex), Map(x,y) empty in every degree; composition homotopy on the whole product gives v↦R(v)∘u, with c from mapping_composition (class-invariant). Universe u only; empty and point edge cases fine. No hollow defs, only sorry proofs, docstrings with the six proof steps verbatim, lean.statement verbatim, node changed only in lean, report has both sections. nt_compile --json at library path: rc=0, clean, 7.9s. Non-blocking: standardInterval_quasicategory duplicates the landed SSet.Enhanced.intervalQuasicategory, but importing it would create a stage-3 import cycle via ModelInfinityDerivedAdjunction (whose node reaches this item); it is a Prop, so the statement is unaffected; recommend moving that instance to a low-level module later."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityRelativeJoinCartesianRealization",
+  "declaration": "SSet.Enhanced.relative_join_cartesian_realization",
+  "declarations": [
+   "SSet.Enhanced.standardInterval_quasicategory",
+   "SSet.Enhanced.relativeJoinCartesianTotal",
+   "SSet.Enhanced.relativeJoinCartesianProjection",
+   "SSet.Enhanced.relativeJoinCartesianTransport",
+   "SSet.Enhanced.relativeJoinCartesianEdge",
+   "SSet.Enhanced.relativeJoinYVertex",
+   "SSet.Enhanced.relativeJoinXVertex",
+   "SSet.Enhanced.RelativeJoinMappingData",
+   "SSet.Enhanced.RelativeJoinCartesianStatement",
+   "SSet.Enhanced.relative_join_cartesian_realization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityRelativeJoinCartesianRealization.lean",
+  "statement": "theorem relative_join_cartesian_realization {X Y : SSet.{u}} [Quasicategory X] [Quasicategory Y] (R : X ⟶ Y) : Nonempty (RelativeJoinCartesianStatement R)",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical fiber identifications are fixed by their inclusions, and mapping identifications by the inclusions or the relative-join projection to Y. Explicit instances avoid statement-local lets. Real cylinder and interval maps, canonical composition up to its specified homotopy class, and the six-step source proof are retained."
  }
 }

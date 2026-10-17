@@ -103,11 +103,25 @@
  "chapter": "sec-zeta-weil",
  "unit": "sk-thm-tracetodeterminant",
  "lean": {
-  "branch": "slopmaster2",
+  "module": "WeilConjectures.ZetaLinearAlgebra.DetTrace",
+  "declaration": "LinearMap.inv_charpolyRev_eq_exp",
   "declarations": [
    "LinearMap.inv_charpolyRev_eq_exp",
    "LinearMap.logOf_charpolyRev"
   ],
-  "note": "attached by the lead's tool attach.py 2026-10-17 00:40 UTC for group N4, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: LinearMap.inv_charpolyRev_eq_exp gives the exponential, inverse, unit, and product clauses, while LinearMap.logOf_charpolyRev gives the equivalent logarithmic claus"
+  "statement": "theorem inv_charpolyRev_eq_exp [CharZero K] (F : Module.End K V) :\n    (F.charpolyRev : K⟦X⟧)⁻¹ =\n      (PowerSeries.exp K).subst\n        (PowerSeries.mk fun n ↦ if n = 0 then 0 else LinearMap.trace K V (F ^ n) / n)",
+  "branch": "slopmaster2",
+  "by": "NG",
+  "date": "2026-10-17",
+  "existing": true,
+  "note": "Existing exponential identity at DetTrace.lean:208, with the logarithmic identity at line 285. The shared context is a field K and a finite-dimensional K-vector space V; each theorem assumes CharZero K. The first states P inverse = exp(trace series). Since P has constant coefficient 1, it is a unit and multiplication gives P * exp(trace series) = 1. The second states logOf P = -traceSeries F, equivalently logOf(P inverse) = traceSeries F. No invertibility or semisimplicity of F is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3ce62afd9",
+  "group": "NG",
+  "result": "pass",
+  "note": "Existing-declaration attachment. Only the item's lean field changed against the base (the partial record is completed); lean.statement is verbatim DetTrace.lean:208 up to ':= by'. Milne LEC Lemma 27.5 (pp. 155-156) read: log(1/det(1-phi t)) = sum Tr(phi^m) t^m/m; the node adds char 0. Clause match: Field K + CharZero, FiniteDimensional V with its own universe, arbitrary F : Module.End K V, F.charpolyRev = charpoly.reverse, bridged to the dependency's Matrix.charpolyRev by charpolyRev_toMatrix, the dependencies' polynomial coercion, LinearMap.trace and (exp K).subst; the n=0 term is suppressed. inv_charpolyRev_eq_exp gives the inverse form; the product and unit forms follow from constant coefficient 1 (compiled); logOf_charpolyRev with traceSeries = S gives the log form. Edge cases checked: V=0, F=0, nilpotent, singular, dimension-one signs. lcompile probe of both theorems is clean; their axioms are only propext/choice/Quot.sound (no sorry). No repair note, no Sheaf duplicate; Worker report and Second reading by NG are both real. No findings."
  }
 }

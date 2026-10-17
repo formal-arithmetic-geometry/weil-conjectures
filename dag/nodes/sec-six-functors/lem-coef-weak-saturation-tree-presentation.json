@@ -29,7 +29,8 @@
   "place": "Definition A.1.5.1 and Notation A.1.5.2 (printed pp. 799-800), Remark A.1.5.5 and Lemma A.1.5.6 (pp. 800-801), Proposition A.1.5.12 and Corollary A.1.5.13 (pp. 808-809). Read online 2026-10-17; not archived in literature/. No Stacks tag states this cellular-tree result."
  },
  "stmt_deps": [
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "def-coef-good-cellular-tree"
  ],
  "proof": [
   {
@@ -273,5 +274,23 @@
   "group": "Q15",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-62a3102f3 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, all nine cited statements, the unit and chapter records, and the three duplicate candidates (small-cellular-tree-descent, good-subset-enlargement, cellular-tree-presentable-approximations). The source, HTT A.1.5, is not in literature/ and I could not open it (no downloads). The report lists it as WANTED and proof_origin is agent. So I checked each step directly as mathematics. I compared the route with HTT A.1.5 only from memory: 6/7 transitions and thinning, 9/10 auxiliaries, 11 compact-root descent, 12/13 the theorem. Steps 1-10 hold. Step 1: under downward closure every cross relation lies in F, so the union square is a pushout; the relative tree's intersection is {s<t}. Step 3: thinning keeps its comparison invariant because S minus t is downward-closed in both orders. Step 4: compact-root descent pushes out along V to V_i and uses a cofinal tail; the root-augmented diagrams have fewer than tau morphisms. It proves small-cellular-tree-descent inline, because citing that node would close a cycle. Step 5: lifting gives sf=j and ps=1. Step 7: the coequalizer splitting gives qj=1 and the image-map calculations hold. Step 8: the three equations of the A.1.5.9 node are exactly what amalgamation needs. Step 9: the retract lemma gives k in wsat({h}), which lies in C, so k is in K. Step 10: pj and qs are inverse isomorphisms under X. New nodes: both are self-contained statement-only nodes, true by my own proof sketches (uncountable tau allows countably many enlargements), and tested on small cases (B empty, B=T, u=id, empty set to a point in Set). Neither is a duplicate or a restated clause of the item. Each has the ancestor prop-coef-integral-exceptional-adjoint with the via list headed by the item, same_as [], and three kinds of Mathlib search. The dependency closure has no cycle and no missing id. Every cited statement is in unit sk-prop-sf-biduality-general or is a Mathlib leaf, so no tool_uses are needed and none are accepted. The statement is unchanged and nothing was weakened. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.WeakSaturationTreePresentation",
+  "declaration": "CategoryTheory.weakSaturation_good_tree_presentation",
+  "file": "lean/Sheaf/CategoryTheory/WeakSaturationTreePresentation.lean",
+  "statement": "theorem weakSaturation_good_tree_presentation {A : Type u} [Category.{v} A] (κ : Cardinal.{v}) [Fact κ.IsRegular] (hκ : Cardinal.aleph0 < κ) [IsCardinalLocallyPresentable A κ] (C : MorphismProperty A) (hC : MorphismProperty.isomorphisms A ≤ C ∧ C.IsStableUnderCobaseChange ∧ C.IsStableUnderTransfiniteComposition.{v} ∧ C.IsStableUnderRetracts) (hgen : ∃ I : MorphismProperty A, MorphismProperty.IsSmall.{v} I ∧ (∀ ⦃P Q : A⦄ (i : P ⟶ Q), I i → C i ∧ IsCardinalPresentable P κ ∧ IsCardinalPresentable Q κ) ∧ ∀ W : MorphismProperty A, I ≤ W → MorphismProperty.isomorphisms A ≤ W → W.IsStableUnderCobaseChange → W.IsStableUnderTransfiniteComposition.{v} → W.IsStableUnderRetracts → C ≤ W) : (∀ ⦃X Y : A⦄ (f : X ⟶ Y), C f → ∃ (T : Type v) (_ : PartialOrder T) (_ : WellFoundedLT T) (tree : CellularTree (fun {P Q : A} (k : P ⟶ Q) ↦ C k ∧ IsCardinalPresentable P κ ∧ IsCardinalPresentable Q κ) X T), tree.IsGood κ ∧ Nonempty (colimit tree.diagram ≅ Under.mk f)) ∧ (∀ (L : MorphismProperty A) (X : A) (T : Type v) [PartialOrder T] [WellFoundedLT T] (tree : CellularTree L X T) (E F : Set T), IsLowerSet E → IsLowerSet F → ∀ hEF : E ⊆ F, (∀ W : MorphismProperty A, L ≤ W → MorphismProperty.isomorphisms A ≤ W → W.IsStableUnderCobaseChange → W.IsStableUnderTransfiniteComposition.{v} → W.IsStableUnderRetracts → W (CellularTree.subsetMap tree.diagram hEF).right) ∧ (tree.IsGood κ → ∃ relative : CellularTree L (CellularTree.subsetObj tree.diagram E).right ↥(F \\ E), relative.IsGood κ ∧ Nonempty (colimit relative.diagram ≅ Under.mk (CellularTree.subsetMap tree.diagram hEF).right)))",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b865245da",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Checked all 12 parts of the node against weakSaturation_good_tree_presentation and CellularTree: universes v/u with no u=v restriction, Cardinal.{v} regular and > aleph0, IsCardinalLocallyPresentable, weak saturation via Mathlib's isomorphisms/CobaseChange/TransfiniteComposition.{v}/Retracts, K written inline, small I with the least-class condition, Under-X colimits with the canonical predecessor leg (colimit.desc of D.map), IsGood bounds cell endpoints and Iio t only, conclusions (a) Under.mk f iso, (b) membership in every weakly saturated W containing L, (c) good relative tree on the inherited F minus E with root Y_E. Edge cases (empty T/E/F, E=F, empty I, branching posets, large roots) are admitted. The new def node is justified (no Mathlib/side-clone duplicate; RelativeCellComplex is linear), not hollow, and has complete docstrings and records. Statement fields match the files exactly; all 10 proof steps are in the docstring; one sorry. nt_compile --json with both files: no errors or warnings. The wrapper hides sorry warnings and exits 0 even on an error, so the clean result rests on absent diagnostics (an injected error was printed). No findings."
  }
 }
