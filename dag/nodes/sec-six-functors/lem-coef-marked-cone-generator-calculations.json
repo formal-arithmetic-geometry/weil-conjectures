@@ -269,5 +269,45 @@
   "group": "Q127",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-d2a94a489 (reviewer sub-agent of L); spot-checked: I read all of the item, the new node and the seven proof dependencies, checked against HTT §3.2.1 (pp. 170-177: Def 3.2.1.2, Prop 3.2.1.4/3.2.1.7, Lemmas 3.2.1.8-3.2.1.10, Prop 3.2.1.11 cases 1-4, Prop 3.2.1.14). The item statement is unchanged and matches HTT. Steps 1-6, 8 and 9 hold: I checked the subset-cube evaluations, the marked-edge criterion (equal maxima), B = ∂K×Δ^1 ∪ K×{1} with the right set A, the final-vertex hypothesis, n=0 and n=1 edge cases, Lemma 3.2.1.10 (2)⇒(1), the ba/cb inverse algebra and the min-square, and Q^0, Q^1. The new node lem-coef-selectively-marked-terminal-cylinder is exactly HTT Lemma 3.2.1.9. It is true (tested on empty K, K'=K, a point, and the Δ^1 square via Λ^2_1 then a marked Λ^2_2) and duplicates no existing node; the endpoint-prism node marks all vertical edges, and nothing else states 3.2.1.8 or 3.2.1.9. Its source and the search records are correct. The route stays within sk-prop-sf-biduality-general; there are no tool_uses and no SGA. Repaired in fixes/: step 7 claimed the target marks every edge of the square, but the diagonal ad = ∅→{1,2} is not of the form g^*ẽ, so it is unmarked; the conclusion was unaffected and the text now gives the correct markings. Step 5's 'newly marked' wording was also corrected. Note: the report says the new node's Lean audits are 'none', but the node has no lean_audit key. That is a maintainer field for the merge to fill.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.MarkedConeGeneratorCalculations",
+  "declaration": "SSet.MarkedCone.marked_cone_generator_calculations",
+  "declarations": [
+   "SSet.MarkedCone.ModelObjects",
+   "SSet.MarkedCone.modelObjectsCategory",
+   "SSet.MarkedCone.modelObjectsEnrichment",
+   "SSet.MarkedCone.action",
+   "SSet.MarkedCone.projectiveWeak",
+   "SSet.MarkedCone.projectiveCof",
+   "SSet.MarkedCone.Realization",
+   "SSet.MarkedCone.canonicalIndex",
+   "SSet.MarkedCone.canonicalComparison",
+   "SSet.MarkedCone.overTarget",
+   "SSet.MarkedCone.boundaryMap",
+   "SSet.MarkedCone.GeneratorCalculations",
+   "SSet.MarkedCone.pointMap",
+   "SSet.MarkedCone.simplexMap",
+   "SSet.MarkedCone.PointCubeComparison",
+   "SSet.MarkedCone.pointCubeMap",
+   "SSet.MarkedCone.PointCalculation",
+   "SSet.MarkedCone.marked_cone_generator_calculations"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/MarkedConeGeneratorCalculations.lean",
+  "statement": "theorem marked_cone_generator_calculations (M : Marked.CartesianModelStatement.{u}) : (∀ (S : SSet.{u}) (I : SCat.{u}) (u : PinchedCube.rigidification.obj S ⟶ UnmarkedStraightening.oppositeCategory I), Nonempty (Realization M I u)) ∧ (∃ L : ∀ S : SSet.{u}, Realization M (canonicalIndex S) (canonicalComparison S), GeneratorCalculations M L) ∧ Nonempty PointCalculation.{u}",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical enriched cone values and exact acting-image markings are real constructions. The normalized realization functors retain values, all simplicial action maps and canonical pushout-induced arrows. The terminal comparison is normalized through the collapse of the initial simplex face and the existing subset-path quotient map, then through every coend summand. Reuses existing cone, marked object, enriched diagram-end and pinched-cube definitions; does not invoke downstream mapping-simplex theorems. Reviewer fix (H4): the marked cone values, inputs and their forgetful maps are the landed SSet.MarkedCone.markedValue, Input, underlyingInput and underlyingInputMap of Sheaf.AlgebraicTopology.MarkedConeExternalProduct (lem-coef-marked-cone-external-product, same L_u text); the delivered duplicates value, unmarked, unmarkedMap, triangle, triangle_endpoints and coningEdge are removed. The main statement is unchanged.",
+  "fixed_by": "NT-stage2-cc-ec180fc47"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ec180fc47",
+  "group": "Q38",
+  "result": "fix",
+  "note": "Statement matches node clause by clause. Checked: realization functor fixed on objects, actions and arrows; boundaries for all n incl. 0; flat-to-sharp interval; all four anodyneGenerators false families as llp/objectwise-weak projective trivial cofibrations; terminal Q^n collapse, quotient, natural, coend and max augmentation, all pinned; three marked IsIso cases. Edge cases (n=0, final horn dim 1, empty X/I/K, arbitrary g) covered; single universe u; no hollow def; nothing proved; docstrings ok; node changed only in lean. Delivered module compiles clean via nt_compile (2.6 s). H4: SSet.MarkedCone.markedValue/Input/underlyingInput/underlyingInputMap/edgeTriangle already landed in Sheaf.AlgebraicTopology.MarkedConeExternalProduct (same L_u text and marking); the delivered unmarked/unmarkedMap/triangle/triangle_endpoints/coningEdge/value duplicated them. fixes/: replacement MarkedConeGeneratorCalculations.lean importing that module, using the landed names in Realization, six duplicates removed, main statement byte-identical (compiles clean, 3.2 s); lean-record.json with filtered declarations and note; report.md with an added maintainer-fix section."
  }
 }

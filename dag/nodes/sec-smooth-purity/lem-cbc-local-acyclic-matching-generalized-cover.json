@@ -11,7 +11,8 @@
   "def-weil-size-convention",
   "def-weil-pbc-sheafification",
   "def-weil-pbc-simplicial-set",
-  "def-cbc-generalized-cover"
+  "def-cbc-generalized-cover",
+  "def-cbc-local-simplicial-presheaf-maps"
  ],
  "proof": [
   {
@@ -230,5 +231,31 @@
   "group": "Q17",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-eff012ec8 (reviewer sub-agent of L); spot-checked: PASS, no fixes written; full review in review.md. Neither source is in literature/, so I fetched both arXiv PDFs into /tmp and read them with pdftotext. Sources: DHI arXiv math/0205027v2 Prop 3.1, Prop 3.2, the generalized-cover definition (p.7) and (3.4) (p.8); DI arXiv math/0205025v1 Def 3.1 (p.4), Def 6.6 and Prop 6.9 (pp.12-13), Def 6.11 and Thm 6.15(a) (pp.13-14), Prop 7.2 locally fibrant paragraph (p.15). Item statement: unchanged; it is the forward direction of DHI 3.2/(3.4) for objectwise Kan F,G, with every hypothesis matching the source. Step 1: the simplex-evaluation (Yoneda) step is elementary and correct. Step 2: the new node supplies exactly the four homotopy identities used; DI Def 3.1 fixes the homotopy direction as H(0)=f c, H(1)=b. Step 3: I checked the prism faces myself. For j other than k,k+1, d_j sigma_k lies in the boundary prism. d_{k+1} sigma_k is the bottom when k=n and equals d_{k+1} sigma_{k+1} otherwise. d_k sigma_k is new because it contains (k,1). So each attachment meets the earlier union in exactly the horn Lambda^{n+1}_k, and the n+1 attachments cover the prism. Step 4: the map on P is well defined; the sieves R_j cover by T_r inside r*R_{j+1}, with upward closure derived from transitivity; restricting to endpoint 1 gives the strict lift. Step 5: transitivity applied to the lifting sieve gives the generalized-cover property. Edge cases checked: n=0, n=1, empty values, and the trivial topology. New node lem-cbc-local-weak-equivalence-homotopy-lifting: correct objectwise-Kan form of DHI 3.1 / DI 6.15(a); statement only and self-contained; strictly weaker than the item (no local-fibration hypothesis, only a homotopy lift); no cycle; all three search kinds recorded. I searched the whole DAG for duplicates: def-cbc-local-simplicial-presheaf-maps, lem-cbc-hypercover-cotensor-local-acyclic-fibration, lem-cbc-weak-equivalence-relative-disk-extension, lem-cbc-cw-source-homotopy-lift and lem-coef-simplicial-relative-homotopy-invariance are all definitions only or a different setting or conclusion. Route: unit sk-prop-sf-cbc only; no tool_uses declared or needed; no SGA. Minor remarks, no change made: (1) the item's source.place still cites the HTML lines although the report says it was changed (only the step sources changed); (2) the report says the item's created metadata was changed to Q17, but the item correctly keeps its original NL created record."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.LocalAcyclicMatchingGeneralizedCover",
+  "file": "lean/Sheaf/CategoryTheory/LocalAcyclicMatchingGeneralizedCover.lean",
+  "declaration": "CategoryTheory.LocalSimplicialPresheaf.local_acyclic_matching_generalized_cover",
+  "declarations": [
+   "CategoryTheory.LocalSimplicialPresheaf.degreePresheaf",
+   "CategoryTheory.LocalSimplicialPresheaf.boundaryPresheaf",
+   "CategoryTheory.LocalSimplicialPresheaf.boundaryRestriction",
+   "CategoryTheory.LocalSimplicialPresheaf.boundaryPresheafMap",
+   "CategoryTheory.LocalSimplicialPresheaf.relativeBoundaryMatchingMap",
+   "CategoryTheory.LocalSimplicialPresheaf.local_acyclic_matching_generalized_cover"
+  ],
+  "statement": "theorem local_acyclic_matching_generalized_cover {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (F G : Cᵒᵖ ⥤ SSet.{max u w}) (hF : ∀ V : C, SSet.KanComplex (F.obj (op V))) (hG : ∀ V : C, SSet.KanComplex (G.obj (op V))) (f : F ⟶ G) (hf : IsLocalKanFibration J f) (hw : IsLocalWeakEquivalence J f) (n : ℕ) : Presheaf.IsLocallySurjective J (relativeBoundaryMatchingMap f n)",
+  "branch": "newtargets-dag",
+  "by": "Q94",
+  "date": "2026-10-17"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-808070812",
+  "group": "Q94",
+  "result": "pass",
+  "note": "Item node diff vs base: only lean (complete record, statement verbatim with file signature) and stmt_deps (+ landed def-cbc-local-simplicial-presheaf-maps, allowed by brief-stage2 'STMT_DEPS MAY GAIN LANDED NODES'). Lean matches node clause by clause: small site J, universes u w with values max u w (landed dependency's convention, no equality imposed), objectwise Kan hF/hG, IsLocalKanFibration (all horns n+1, i:Fin(n+2), independent fillers on covering sieve), IsLocalWeakEquivalence (sheafified pi0 iso plus local bijectivity on positive Pi, equivalent to slice homotopy-sheaf isos), all n:N; conclusion Presheaf.IsLocallySurjective (recorded mathlib_match of def-cbc-generalized-cover) of the canonical pullback.lift relativeBoundaryMatchingMap. Probes: degreePresheaf values F(V)_n, boundaryPresheaf values (boundary n -> F(V)), boundaryPresheafMap is postcomposition, boundaryRestriction is iota composed with yonedaEquiv.symm (all rfl); lift composed with fst/snd equal boundaryRestriction F n / whiskerRight f eval[n] (simp). Edge cases n=0 (boundary bottom, map f_0), n=1, empty site/values, trivial/maximal topology, arbitrary w all covered. #print axioms: helpers have no sorryAx; only the theorem uses sorry. Docstrings carry source, blueprint id and all 5 proof steps; no line over 100 chars; no duplicate names in side lean/Sheaf or Mathlib; report has Worker report and a substantive Second reading by Q94. nt_compile.py --json on snapshot module rc=0, nothing printed; probe compile rc=0. No blocking findings."
  }
 }
