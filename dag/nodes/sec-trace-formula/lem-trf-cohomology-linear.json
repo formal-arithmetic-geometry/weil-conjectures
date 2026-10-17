@@ -15,9 +15,122 @@
   "def-weil-finite-torsion-constructibility",
   "def-weil-finite-coefficient-point"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-weil-ordinary-compact-cohomology] and [def-weil-finite-coefficient-point], $F_Y=\\operatorname{Fib}_s\\circ Ra_{Y!}$ and $\\operatorname{Fib}_s$ is termwise $\\Gamma(s,-)$ on the finite-coefficient category. Use the compactification $c=(j:Y\\hookrightarrow\\overline Y,\\overline a:\\overline Y\\to s)$ chosen in [def-compact-support-direct-image-detailed]. Its candidate [def-weil-compact-support-candidate] is $Ra_{Y!}^c=R\\overline a_*\\circ j_!$, where $j_!$ on derived categories is induced by its exact sheaf functor. We prove linearity on the ambient derived morphisms for this chosen candidate, then restrict to the full bounded constructible subcategory in the statement.",
+   "uses": [
+    "def-weil-ordinary-compact-cohomology",
+    "def-weil-finite-coefficient-point",
+    "def-compact-support-direct-image-detailed",
+    "def-weil-compact-support-candidate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-integral/lem-trf-integration-linear.proof.md",
+    "place": "Middle-arrow compact-support linearity assertion, expanded using the defining compactification composite."
+   }
+  },
+  {
+   "text": "For a sheaf of $A_T$-modules, multiplication by $a\\in A$ means multiplication by its constant section on each site object. By [def-weil-sheaf-of-modules-category], sums of module-sheaf maps and scalar multiples are computed sectionwise; restrictions respect the constant sections. The module identities and bilinearity of composition are therefore the sectionwise identities for modules, giving the $A$-linear category of [def-weil-linear-category]. The category of $A$-modules has the same structure. Apply [lem-weil-linear-abelian-derived-category] to these abelian categories, in the site universes of the definitions: the ambient derived categories and their localization functors $Q$ are $A$-linear. In particular $Q(\\alpha+a\\beta)=Q\\alpha+aQ\\beta$, and composition with any fixed derived isomorphisms is $A$-linear by bilinearity. This is the scalar action of the statement, since $Q(a\\operatorname{id}_C)=a\\operatorname{id}_{QC}$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-linear-category",
+    "lem-weil-linear-abelian-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "/home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/Linear.lean",
+    "place": "Lines 24-36: linear derived categories and linear localization; constant-section specialization written here."
+   }
+  },
+  {
+   "text": "The extension-by-zero presheaf construction in [def-weil-extension-by-zero] sends $u+av$ to $P(u)+aP(v)$: on a site object factoring through $j$ this is the original sectionwise identity, and on every other object both sides are zero. Write $\\iota_M:P_M\\to P_M^\\#$ for sheafification. The two module-sheaf maps $j_!(u+av)$ and $j_!u+a j_!v$ have the same composite with $\\iota_M$, by this presheaf identity and naturality of $\\iota$. The uniqueness clause of [def-weil-presheaf-modules-sheafification] makes them equal. Thus the sheaf functor $j_!$ is $A$-linear.",
+   "uses": [
+    "def-weil-extension-by-zero",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules: uniqueness of factoring maps; the two-case presheaf calculation is written here."
+   }
+  },
+  {
+   "text": "We check the induced functors of $j_!$ and $\\Gamma(s,-)$ on arbitrary derived morphisms. Both are exact: for $j_!$ this is part of [def-weil-compact-support-candidate], and for $\\Gamma(s,-)$ it is stated in [def-weil-finite-coefficient-point]. They are $A$-linear on sheaves, for $j_!$ by Step 3 and for $\\Gamma(s,-)$ because $(u+av)_s=u_s+a v_s$. Choose K-injective resolutions $C\\to I$, $D\\to J$ using [prop-pur-kinjective-resolutions-exist]. For either functor $T$, [lem-weil-pbc-kinjective-hom-derived] represents any two derived maps between $QI$ and $QJ$ by homotopy classes of chain maps $\\alpha,\\beta:I\\to J$. Step 2 shows that their sum with scalar $a$ is represented by $\\alpha+a\\beta$. Since the induced exact functor satisfies $T_D(Q\\alpha)=Q(T\\alpha)$, degreewise linearity gives $T_D(Q(\\alpha+a\\beta))=Q(T\\alpha+aT\\beta)=Q(T\\alpha)+aQ(T\\beta)$. For the original objects, compose this equality with $T_D(Q(C\\to I))$ and $T_D(Q(D\\to J))^{-1}$; bilinearity from Step 2 gives the same equality on $\\operatorname{Hom}(QC,QD)$. Thus both derived $j_!$ and $\\operatorname{Fib}_s$ are $A$-linear. This uses no assertion that a chosen resolution functor is itself linear.",
+   "uses": [
+    "def-weil-compact-support-candidate",
+    "def-weil-finite-coefficient-point",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective, clause (3); existence is injectives.tex Tag 079P, theorem-K-injective-embedding-grothendieck, via the cited site-module resolution node. The linearity calculation is written here."
+   }
+  },
+  {
+   "text": "For the sheaf direct image $G=\\overline a_*$, [def-weil-proetale-module-direct-image] gives $(G M)(V)=M(V\\times_s\\overline Y)$ and $(G u)_V=u_{V\\times_s\\overline Y}$. Its coefficient map takes a constant section $a$ to the constant section $a$. Consequently $(G(u+av))_V=u_{V\\times_s\\overline Y}+a v_{V\\times_s\\overline Y}=(Gu+aGv)_V$ on every site object $V$. Thus $G$ and its degreewise action on chain maps are $A$-linear.",
+   "uses": [
+    "def-weil-proetale-module-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D6, definition-pushforward, clause (1), specialized to the constant coefficient ring and the sectionwise direct image of the cited node."
+   }
+  },
+  {
+   "text": "By [def-weil-derived-direct-image], $R\\overline a_*=RG$ is computed with K-injectives. Take K-injective resolutions $C\\to I$, $D\\to J$ as supplied by [prop-pur-kinjective-resolutions-exist], and let $\\alpha,\\beta:I\\to J$ represent two derived maps using [lem-weil-pbc-kinjective-hom-derived]. By [def-sfb-right-derived-functor], the natural derived-functor comparison gives fixed isomorphisms $\\eta_I:Q(GI)\\xrightarrow{\\sim}RG(QI)$ and $\\eta_J:Q(GJ)\\xrightarrow{\\sim}RG(QJ)$. Naturality gives $RG(Q\\alpha)=\\eta_J\\circ Q(G\\alpha)\\circ\\eta_I^{-1}$, also for $\\beta$ and $\\alpha+a\\beta$. Step 5 and Step 2 therefore give\n$$\nRG(Q\\alpha+aQ\\beta)=\\eta_J\\circ Q(G\\alpha+aG\\beta)\\circ\\eta_I^{-1}=RG(Q\\alpha)+aRG(Q\\beta).\n$$\nFor maps $h,t:QC\\to QD$, replace them by $Q(D\\to J)\\circ h\\circ Q(C\\to I)^{-1}$ and the expression with $t$; composing the displayed equality with $RG(Q(D\\to J))^{-1}$ on the left and $RG(Q(C\\to I))$ on the right proves $RG(h+at)=RG(h)+aRG(t)$. Thus the derived direct image is $A$-linear without any assumption that $j_!$ preserves K-injectives.",
+   "uses": [
+    "def-weil-derived-direct-image",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective, and the K-injective derived-functor comparison specified by def-sfb-right-derived-functor; injectives.tex Tag 079P supplies the resolutions. Naturality and the scalar calculation are written here."
+   }
+  },
+  {
+   "text": "For $f,g:K\\to L$ in the full category $D^b_c(Y,A)$, apply Steps 4 and 6 to the composite of Step 1:\n$$\n\\begin{aligned}\nF_Y(f+ag)&=\\operatorname{Fib}_s\\bigl(R\\overline a_*\\bigl(j_!f+a j_!g\\bigr)\\bigr)\\\\\n&=\\operatorname{Fib}_s\\bigl(R\\overline a_*j_!f+aR\\overline a_*j_!g\\bigr)\\\\\n&=F_Y(f)+aF_Y(g).\n\\end{aligned}\n$$\nThe full-subcategory convention of [def-weil-finite-torsion-constructibility] leaves these Hom groups and scalar actions unchanged; the target is the functor already defined in [def-weil-ordinary-compact-cohomology]. Taking $a=1$ proves additivity; taking $f=g=0$ and $a=1$ proves preservation of zero; then taking $f=0$ proves preservation of scalar multiples. These are exactly the conditions of [def-weil-linear-functor].",
+   "uses": [
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-ordinary-compact-cohomology",
+    "def-weil-linear-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-integral/lem-trf-integration-linear.proof.md",
+    "place": "Middle-arrow displayed linearity identity, with its compactification calculation made explicit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-compact-support-direct-image-detailed",
+  "def-sfb-right-derived-functor",
+  "def-weil-compact-support-candidate",
+  "def-weil-derived-direct-image",
+  "def-weil-extension-by-zero",
+  "def-weil-finite-coefficient-point",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-linear-category",
+  "def-weil-linear-functor",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-proetale-module-direct-image",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-linear-abelian-derived-category",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-integral/lem-trf-integration-linear.proof.md",
+  "place": "Expansion of the asserted compact-support linearity, using the defining compactification, sectionwise operations and the cited K-injective interfaces; the source asserts linearity but omits this argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -81,10 +194,66 @@
    "results": "0 hits: none",
    "date": "2026-10-17",
    "verdict": "no match: sheafification scalar identities and a map_smul theorem assuming functor linearity do not prove finite-coefficient compact-support derived functor linearity; derived-functor grep has no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compact support direct image and point fibre composition is linear over finite coefficient ring",
+   "results": "8 hits: FunOnFinite.linearMap_apply_apply; Finsupp.linearCombination_comapDomain; Finsupp.linearCombination_comp_lmapDomain; Finsupp.linearCombination_comp; Finsupp.lmapDomain_linearCombination; SimplexCategory.coe_toTopMap; CompactlySupportedContinuousMap.compLinearMap; Finsupp.lsum_comp_lsingle. No derived compact-support cohomology declaration.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Linear compactlySupportedGlobalSections",
+   "results": "0 hits; Loogle reports Unknown identifier compactlySupportedGlobalSections.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactlySupportedGlobalSections|rightDerivedGlobalSections|linear_rightDerivedLowerShriek [AlgebraicGeometry/]",
+   "results": "0 hits in Mathlib; these are project declarations rather than Mathlib declarations.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "compactly supported cohomology functor preserves addition and scalar multiplication",
+   "results": "8 hits: ContDiffMapSupportedIn.coe_add; CompactlySupportedContinuousMap.coe_add; HasCompactSupport.add; ContDiffMapSupportedIn.coe_smul; CompactlySupportedContinuousMap.instSMulOfContinuousConstSMul.congr_simp; CompactlySupportedContinuousMap.instSMulOfContinuousConstSMul; CompactlySupportedContinuousMap.instAddOfContinuousAdd.congr_simp; CompactlySupportedContinuousMap.coe_smul. No sheaf-derived compact-support cohomology declaration.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Linear, CategoryTheory.Functor.mapDerivedCategory",
+   "results": "1 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory",
+   "date": "2026-10-17",
+   "verdict": "generic linear derived-category and exact-functor results found; the existing lem-weil-linear-abelian-derived-category already supplies linear localization. No exact compact-support cohomology declaration, so the item remains split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor of linear abelian categories induces a linear functor on their derived categories",
+   "results": "8 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instLinear, DerivedCategory.instLinearCochainComplexIntQ, DerivedCategory.instLinearHomotopyCategoryIntUpQh, DerivedCategory.instLinearSingleFunctor, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+   "date": "2026-10-17",
+   "verdict": "generic linear derived-category and exact-functor results found; the existing lem-weil-linear-abelian-derived-category already supplies linear localization. No exact compact-support cohomology declaration, so the item remains split."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Ll]inear|[Ll]inear.*rightDerived|instance.*F.Linear|Functor.Linear R.*DerivedCategory.Q",
+   "results": "3 hits: Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Linear.lean, Mathlib/Algebra/Homology/DerivedCategory/Linear.lean",
+   "date": "2026-10-17",
+   "verdict": "generic linear derived-category and exact-functor results found; the existing lem-weil-linear-abelian-derived-category already supplies linear localization. No exact compact-support cohomology declaration, so the item remains split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total right derived functor of a linear additive functor is linear via injective resolutions",
+   "results": "8 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instLinearCochainComplexIntQ, DerivedCategory.instLinearHomotopyCategoryIntUpQh, DerivedCategory.instLinear, DerivedCategory.instLinearSingleFunctor, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.Functor.rightDerived",
+   "date": "2026-10-17",
+   "verdict": "generic linear derived-category and exact-functor results found; the existing lem-weil-linear-abelian-derived-category already supplies linear localization. No exact compact-support cohomology declaration, so the item remains split."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-integration-linear",
@@ -101,5 +270,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-cohomology-linear",
+  "worker": "stage1",
+  "summary": "Expanded compact-support linearity into the chosen compactification composite, canonical derived scalar actions, extension-by-zero sheafification, exact induced functors, sectionwise direct image, K-injective derived direct image, and the final formula. Removed the proposed new Rf_! linearity node: its argument is now written using existing nodes, including the existing derived-linearity Mathlib leaf. Statement unchanged; no new nodes.",
+  "blueprint": "Seven steps expand the middle-arrow A-linearity assertion of lem-trf-integration-linear.proof.md, on the current main-20261015 route, using the definitions of compact-support cohomology and its compactification candidate.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-0e526c32d",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-0e526c32d (reviewer sub-agent of L); spot-checked: Read the item, the unit sk-d-integral (uses sk-d-setup and sk-d-six, no steps), the main-20261015 lem-trf-integration-linear proof (the middle-arrow sentence asserting A-linearity of compact-support cohomology), and the statements of all 18 cited nodes. The delivery changes only the item; it adds no new nodes, the first reader's proposed lem-trf-compact-support-functor-linear was removed, and there is nothing to drop. Statement, stmt_deps and the blueprint field are unchanged against the base copy, and proof_deps equals the union of the step uses. Steps: (1) RΓ_c=Fib_s∘R\\bar a_*∘j_! for the chosen compactification, by def-weil-ordinary-compact-cohomology and def-compact-support-direct-image-detailed; the hypotheses hold (k a field, Y separated of finite type, ℓ≠p). (2) The sectionwise A-linear structure plus the Mathlib leaf DerivedCategory.instLinear make D and Q A-linear. (3) j_! is linear on sheaves by the two-case presheaf identity and uniqueness of sheafification; genuinely elementary. (4) The exact functors j_! and Γ(s,−) are linear on derived Homs: resolutions from prop-pur-kinjective-resolutions-exist (the site is V-small, as the size convention gives), and maps into K-injectives are represented by chain maps (Qh_map_bijective leaf), then conjugated by the resolution isomorphisms. (5) The sectionwise direct image is linear because ρ preserves constant sections. (6) RG(Qα)=η_J Q(Gα) η_I^{-1}, using the unit of def-sfb-right-derived-functor, which is an isomorphism on K-injectives; correct, and needs no preservation of K-injectives. (7) The composite and restriction to full subcategories give def-weil-linear-functor. Edge cases Y=∅, Y=s, a=0 and 1, n=1 and n>1 pass. Route: every off-unit citation is a definition, a Mathlib leaf, or Lean-closed (prop-pur-kinjective-resolutions-exist is closed in slopmaster2), so no tool use needs declaring or accepting. No SGA source. No duplicate in the DAG or the blueprint; slopmaster2 has lower-shriek linearity instances only for the étale construction, so nothing to attach. Minor, left as is: step 4 writes T_D(Qα)=Q(Tα) as an equality (harmless, since conjugating by a natural isomorphism preserves linearity), and step 2 gives an absolute Mathlib file path as its source. No changes."
  }
 }

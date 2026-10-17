@@ -13,55 +13,143 @@
   "def-coef-infinity-fibrations",
   "lem-coef-marked-relative-cartesian-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Start with a lifting square over the arbitrary base $S$, where $i:A\\hookrightarrow B$ is a degreewise injective categorical equivalence. Factor the terminal map of $S$ in the Joyal model structure as a categorical equivalence $j:S\\to T$ followed by a Joyal fibration $T\\to\\Delta^0$. Since the terminal simplicial set is a quasicategory, the fibrancy clause of [lem-coef-joyal-model-structure] makes $T$ a quasicategory. The factorization is in the input universe, and no hypothesis on $S$ is used.",
+   "uses": [
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.3.1.7, proof, first sentence (factor $S\\to\\Delta^0$ through an infinity category)"
+   }
+  },
+  {
+   "text": "Work first with a cartesian fibration $p$. The family of relative marked model structures required as hypotheses by [lem-coef-cartesian-base-equivalence-invariance] is supplied by [lem-coef-marked-relative-cartesian-model]: the weak equivalences, fibrant objects, sharp mapping enrichment, base-change Quillen adjunctions and universe-relative factorizations are precisely those stipulated there. Its tensor is $U\\times K^\\sharp$ by the defining sharp mapping adjunction. Apply clause (2) of the base-equivalence statement to $j:S\\to T$ and $p:X\\to S$. Obtain a cartesian fibration $q:Y\\to T$ and a cartesian-edge-preserving map $u:X\\to Z=S\\times_TY$ over $S$, whose pullback along every map to $S$ is a categorical equivalence. By the base-change clause of [lem-coef-relative-marked-anodyne-calculus], $Z\\to S$ is cartesian and its natural marking is the pulled-back natural marking of $Y$.",
+   "uses": [
+    "lem-coef-cartesian-base-equivalence-invariance",
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-relative-marked-anodyne-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.3.1.7, proof, use of Corollary 3.3.1.2"
+   }
+  },
+  {
+   "text": "For each vertex $s:\\Delta^0\\to S$, the universal comparison of [lem-coef-cartesian-base-equivalence-invariance] gives a categorical equivalence $u_s:X_s\\to Z_s$. Thus the fiber criterion of [lem-coef-marked-relative-cartesian-model] makes $u:X^\\natural\\to Z^\\natural$ a weak equivalence between fibrant marked objects over $S$. Its inverse criterion supplies a marked map $v:Z^\\natural\\to X^\\natural$ over $S$ and a path $\\eta$ from $vu$ to $\\operatorname{id}_X$ in $\\operatorname{Map}^\\sharp_S(X^\\natural,X^\\natural)$. This is an actual path over $S$, not a homotopy claimed to be constant on $A$. If given as an edge path, combine consecutive edges by $2$-horn fillers in this Kan complex and reverse edges by $2$-horn fillers with a degenerate edge, obtaining a single edge with the indicated endpoints.",
+   "uses": [
+    "lem-coef-cartesian-base-equivalence-invariance",
+    "lem-coef-marked-relative-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.3.1.7, proof, the maps $u,v$ and their homotopies over $S$"
+   }
+  },
+  {
+   "text": "Let $a=\\operatorname{pr}_Yuf:A\\to Y$. Since $T$ is a quasicategory, [lem-coef-relative-marked-anodyne-calculus] says that $q:Y\\to T$ is a Joyal fibration. The square with top $a$, bottom $jg:B\\to T$ and left side $i$ commutes, since $qa=jpf=jgi$. Apply its right lifting property from [lem-coef-joyal-model-structure] to obtain $k:B\\to Y$ with $ki=a$ and $qk=jg$ strictly. Therefore $w=(g,k):B\\to Z$ is defined and $wi=uf$, because both coordinates agree. Set $r=vw:B\\to X$. Then $pr=g$ and $ri=vuf$. This performs the source's extension and base correction in one strict lift, using only the already established quasicategory-base case.",
+   "uses": [
+    "lem-coef-relative-marked-anodyne-calculus",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.3.1.7, proof, extension into $Y$ and correction over $T$; combined by the quasicategory-base lifting clause"
+   }
+  },
+  {
+   "text": "Regard $A^\\flat$ as an object over $S$ via $gi=pf$ and $B^\\flat$ via $g$. The map $f:A^\\flat\\to X^\\natural$ preserves markings because only degenerate edges of $A$ are marked. Precompose the path $\\eta$ of step 3 with $f\\times\\operatorname{id}_{\\Delta^1}$ to obtain an edge $\\eta_f$ from $vuf=ri$ to $f$ in $\\operatorname{Map}^\\sharp_S(A^\\flat,X^\\natural)$. By [lem-coef-relative-marked-anodyne-calculus], restriction $R:\\operatorname{Map}^\\sharp_S(B^\\flat,X^\\natural)\\to\\operatorname{Map}^\\sharp_S(A^\\flat,X^\\natural)$ is a Kan fibration, since $i$ is a monomorphism and $p$ is cartesian over the arbitrary base $S$. Apply its horn lifting property for $\\{0\\}\\hookrightarrow\\Delta^1$ to the vertex $r$ and the edge $\\eta_f$. The endpoint is a marked map $h:B^\\flat\\to X^\\natural$ over $S$ with $R(h)=f$. On underlying simplicial sets this says $ph=g$ and $hi=f$ strictly. This supplies the diagonal without presupposing that $p$ is a Joyal fibration.",
+   "uses": [
+    "lem-coef-relative-marked-anodyne-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.3.1.7, proof, final relative homotopy correction; its extension justified by Lemma 3.1.3.6"
+   }
+  },
+  {
+   "text": "For a cocartesian $p$, reversal of the order on each simplex turns $p$ into the cartesian fibration $p^{\\mathrm{op}}$, by the opposite horn convention of [lem-coef-marked-relative-cartesian-model]. It preserves monomorphisms degreewise. It also preserves categorical equivalences as defined in [lem-coef-joyal-model-structure]: for every quasicategory $C$, reversal identifies $\\operatorname{Fun}(B^{\\mathrm{op}},C)$ with $\\operatorname{Fun}(B,C^{\\mathrm{op}})^{\\mathrm{op}}$, and identifies their homotopy categories with the corresponding opposite categories; $C^{\\mathrm{op}}$ is a quasicategory because reversal sends inner horns to inner horns. Thus restriction along $i^{\\mathrm{op}}$ is an equivalence by the test for $i$ against $C^{\\mathrm{op}}$ and passage to opposite ordinary categories. Reverse the given square, apply the cartesian case to obtain $h^{\\mathrm{op}}$, and reverse again. The two strict triangle identities become $hi=f$ and $ph=g$.",
+   "uses": [
+    "lem-coef-marked-relative-cartesian-model",
+    "lem-coef-joyal-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 3.3.1.7, opposite dual; self-duality noted immediately after its proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-cartesian-base-equivalence-invariance",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-marked-relative-cartesian-model",
+  "lem-coef-relative-marked-anodyne-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Proposition 3.3.1.7, printed p. 209; expanded using the quasicategory-base lifting clause and Lemma 3.1.3.6 for the final homotopy extension"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "Every cartesian or cocartesian fibration of simplicial sets over an arbitrary base is a categorical fibration in the Joyal model structure",
-   "results": "{\"t\": \"2026-10-17T00:42:03Z\", \"tool\": \"leanfinder\", \"query\": \"Every cartesian or cocartesian fibration of simplicial sets over an arbitrary base is a categorical fibration in the Joyal model structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.FibrantObject.instIsFibrantObjι\", \"HomotopicalAlgebra.FibrantObject.mk_surjective\", \"CategoryTheory.Nerve.quasicategory\"], \"digest\": \"7a5d797d22b2158f\"}",
+   "results": "{\"t\": \"2026-10-17T01:55:11Z\", \"tool\": \"leanfinder\", \"query\": \"Every cartesian or cocartesian fibration of simplicial sets over an arbitrary base is a categorical fibration in the Joyal model structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.FibrantObject.instIsFibrantObjι\", \"HomotopicalAlgebra.FibrantObject.mk_surjective\", \"CategoryTheory.Nerve.quasicategory\"], \"digest\": \"7a5d797d22b2158f\"}",
    "date": "2026-10-17",
    "verdict": "no match: read the returned types and Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:27-95, SimplicialSet/CategoryWithFibrations.lean:35-82 and ModelCategory/JoyalTrick.lean:40-82. The simplicial fibration is the all-horn Quillen fibration, and JoyalTrick is an abstract model-category axiom argument; neither supplies arbitrary-base (co)cartesian-to-Joyal fibrancy. Ordinary CategoryTheory fibered categories have Hom sets."
   },
   {
    "tool": "loogle",
    "query": "\"InnerFibration\", \"fibration\"",
-   "results": "{\"t\": \"2026-10-17T00:42:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"InnerFibration\\\", \\\"fibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.instIsMultiplicativeInnerFibrations\", \"SSet.instIsStableUnderBaseChangeInnerFibrations\", \"SSet.instIsStableUnderRetractsInnerFibrations\", \"SSet.instRespectsIsoInnerFibrations\", \"SSet.innerFibrations\", \"SSet.InnerFibration\", \"SSet.mem_innerFibrations\", \"SSet.quasicategory_of_innerFibration\"], \"digest\": \"41355fb03648d837\"}",
+   "results": "{\"t\": \"2026-10-17T01:55:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"InnerFibration\\\", \\\"fibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SSet.instIsMultiplicativeInnerFibrations\", \"SSet.instIsStableUnderBaseChangeInnerFibrations\", \"SSet.instIsStableUnderRetractsInnerFibrations\", \"SSet.instRespectsIsoInnerFibrations\", \"SSet.innerFibrations\", \"SSet.InnerFibration\", \"SSet.mem_innerFibrations\", \"SSet.quasicategory_of_innerFibration\"], \"digest\": \"41355fb03648d837\"}",
    "date": "2026-10-17",
    "verdict": "no match: read the returned types and Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:27-95, SimplicialSet/CategoryWithFibrations.lean:35-82 and ModelCategory/JoyalTrick.lean:40-82. The simplicial fibration is the all-horn Quillen fibration, and JoyalTrick is an abstract model-category axiom argument; neither supplies arbitrary-base (co)cartesian-to-Joyal fibrancy. Ordinary CategoryTheory fibered categories have Hom sets."
   },
   {
    "tool": "grep",
    "query": "Joyal|categoricalFibration|cartesian.*[Ff]ibration|[Ff]ibration.*cartesian",
-   "results": "{\"t\": \"2026-10-17T00:42:03Z\", \"tool\": \"grep\", \"query\": \"Joyal|categoricalFibration|cartesian.*[Ff]ibration|[Ff]ibration.*cartesian\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\"], \"digest\": \"feb76b4d9aa0d6fc\"}",
+   "results": "{\"t\": \"2026-10-17T01:55:12Z\", \"tool\": \"grep\", \"query\": \"Joyal|categoricalFibration|cartesian.*[Ff]ibration|[Ff]ibration.*cartesian\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean\"], \"digest\": \"feb76b4d9aa0d6fc\"}",
    "date": "2026-10-17",
    "verdict": "no match: read the returned types and Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:27-95, SimplicialSet/CategoryWithFibrations.lean:35-82 and ModelCategory/JoyalTrick.lean:40-82. The simplicial fibration is the all-horn Quillen fibration, and JoyalTrick is an abstract model-category axiom argument; neither supplies arbitrary-base (co)cartesian-to-Joyal fibrancy. Ordinary CategoryTheory fibered categories have Hom sets."
   },
   {
    "tool": "leansearch",
    "query": "Every cocartesian fibration of simplicial sets is a fibration for the Joyal model structure",
-   "results": "{\"t\": \"2026-10-17T00:42:03Z\", \"tool\": \"leansearch\", \"query\": \"Every cocartesian fibration of simplicial sets is a fibration for the Joyal model structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"CategoryTheory.Functor.IsFibered.toIsPreFibered\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\"], \"digest\": \"267ff08bc96ca454\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read the returned types and Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:27-95, SimplicialSet/CategoryWithFibrations.lean:35-82 and ModelCategory/JoyalTrick.lean:40-82. The simplicial fibration is the all-horn Quillen fibration, and JoyalTrick is an abstract model-category axiom argument; neither supplies arbitrary-base (co)cartesian-to-Joyal fibrancy. Ordinary CategoryTheory fibered categories have Hom sets."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Cartesian fibrations have the right lifting property against every monomorphism that is a categorical equivalence, without assuming a quasicategory base",
-   "results": "{\"t\": \"2026-10-17T00:42:41Z\", \"tool\": \"leanfinder\", \"query\": \"Cartesian fibrations have the right lifting property against every monomorphism that is a categorical equivalence, without assuming a quasicategory base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"CategoryTheory.Functor.IsCartesian.toIsHomLift\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibration_iff\", \"CategoryTheory.Functor.IsCartesian.map_isHomLift\", \"CategoryTheory.Functor.IsCartesian.universal_property\", \"CategoryTheory.MorphismProperty.rlp\"], \"digest\": \"eff6b348bc262a98\"}",
+   "results": "{\"t\": \"2026-10-17T01:55:13Z\", \"tool\": \"leansearch\", \"query\": \"Every cocartesian fibration of simplicial sets is a fibration for the Joyal model structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"CategoryTheory.Functor.IsFibered.toIsPreFibered\", \"SSet.modelCategoryQuillen.cofibrations_eq\", \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\"], \"digest\": \"267ff08bc96ca454\"}",
    "date": "2026-10-17",
    "verdict": "no match: read the returned types and Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:27-95, SimplicialSet/CategoryWithFibrations.lean:35-82 and ModelCategory/JoyalTrick.lean:40-82. The simplicial fibration is the all-horn Quillen fibration, and JoyalTrick is an abstract model-category axiom argument; neither supplies arbitrary-base (co)cartesian-to-Joyal fibrancy. Ordinary CategoryTheory fibered categories have Hom sets."
   },
   {
    "tool": "grep",
-   "query": "Cocartesian|CoCartesian|Joyal|categorical",
-   "results": "{\"t\": \"2026-10-17T00:42:35Z\", \"tool\": \"grep\", \"query\": \"Cocartesian|CoCartesian|Joyal|categorical\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "MapSharp|mapSharp|CartesianFibration|CocartesianFibration|cartesianFibration|cocartesianFibration",
+   "results": "{\"t\": \"2026-10-17T02:20:55Z\", \"tool\": \"grep\", \"query\": \"MapSharp|mapSharp|CartesianFibration|CocartesianFibration|cartesianFibration|cocartesianFibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: read the returned types and Mathlib/AlgebraicTopology/Quasicategory/InnerFibration.lean:27-95, SimplicialSet/CategoryWithFibrations.lean:35-82 and ModelCategory/JoyalTrick.lean:40-82. The simplicial fibration is the all-horn Quillen fibration, and JoyalTrick is an abstract model-category axiom argument; neither supplies arbitrary-base (co)cartesian-to-Joyal fibrancy. Ordinary CategoryTheory fibered categories have Hom sets."
+   "verdict": "no match: returned types concern ordinary fibered categories, unmarked Quillen all-horn fibrations, or inner fibrations; none states arbitrary-base Cartesian/Joyal fibrancy or the marked mapping restriction. Read InnerFibration.lean:29-100."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of marked mapping spaces into a Cartesian fibration is a Kan fibration and lifts homotopies along monomorphisms",
+   "results": "{\"t\": \"2026-10-17T02:20:55Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of marked mapping spaces into a Cartesian fibration is a Kan fibration and lifts homotopies along monomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFibers.inducedMap\", \"HasFibers.fiber_factorization\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"HomotopicalAlgebra.FibrantObject.homMk\", \"HomotopicalAlgebra.FibrantObject.homMk_surjective\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"ef7a89ac71e9e9e7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types concern ordinary fibered categories, unmarked Quillen all-horn fibrations, or inner fibrations; none states arbitrary-base Cartesian/Joyal fibrancy or the marked mapping restriction. Read InnerFibration.lean:29-100."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"InnerFibration\", \"quasicategory\"",
+   "results": "{\"t\": \"2026-10-17T02:20:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"InnerFibration\\\", \\\"quasicategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.quasicategory_of_innerFibration\", \"SSet.quasicategory_of_innerFibration_quasicategory\", \"SSet.quasicategory_of_from_innerFibrations\", \"SSet.Quasicategory.from_innerFibrations\", \"SSet.instInnerFibrationFromOfQuasicategory\", \"SSet.quasicategory_iff_from_innerFibration\", \"SSet.quasicategory_iff_innerFibration\", \"SSet.instInnerFibrationAppPreOfMonoOfQuasicategory\"], \"digest\": \"3f7e9f1a608fc48c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types concern ordinary fibered categories, unmarked Quillen all-horn fibrations, or inner fibrations; none states arbitrary-base Cartesian/Joyal fibrancy or the marked mapping restriction. Read InnerFibration.lean:29-100."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-filtered-fiber-small-cone-lifting",
@@ -73,7 +161,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Proof paragraph 2, finite-coefficient mapping-complex adjunction infrastructure reached through lem-coef-presentable-infinity-adjoints; HTT Proposition 5.4.4.3, used in the pushout and two-out-of-three parts of Lemma 5.5.4.14 to express diagrams in an accessible functor category as filtered colimits of small compact diagrams. General tool: Filtered coherent sections and cofinal evaluation. Specific input: HTT 5.4.4.2, successor construction: lift each small diagram into X_{/x} ×_X Y across its right cone by Lemma 5.4.4.1. Auxiliary for the first sentence of HTT Lemma 5.4.4.1: Proposition 3.3.1.7 supplies arbitrary-base categorical fibrancy needed for rectification of the blunt cone.",
+   "place": "Auxiliary input to lem-coef-filtered-fiber-small-cone-lifting for the first sentence of HTT Lemma 5.4.4.1: arbitrary-base categorical fibrancy needed for blunt-cone rectification. This serves the coherent adjunction used in proof paragraph 2 of prop-coef-integral-exceptional-adjoint; six steps give base replacement, marked inverse, strict lift, relative correction and opposite dual.",
    "via": [
     "lem-coef-filtered-fiber-small-cone-lifting",
     "lem-coef-filtered-cocartesian-section-cofinality",
@@ -90,5 +178,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cocartesian-joyal-fibration",
+  "worker": "stage1",
+  "summary": "Six-step arbitrary-base lifting proof following HTT Proposition 3.3.1.7: replace the base, extend the cartesian fibration, obtain a marked inverse from its vertex fibers, solve the square strictly over the quasicategory base, and correct the restriction using the Kan fibration on relative sharp mapping complexes. Dualize with the explicit categorical-equivalence test on opposites. Independent second reading repaired unsupported homotopy assertions; no new nodes.",
+  "blueprint": "Realizes the auxiliary input sentence in prop-coef-integral-exceptional-adjoint used by lem-coef-filtered-fiber-small-cone-lifting: HTT Proposition 3.3.1.7 supplies arbitrary-base categorical fibrancy needed for rectification of the blunt cone."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-75b2babae",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-75b2babae (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item and the full statements of all five cited nodes. HTT is not in literature/ and network access is blocked, so I could not open the PDF. I checked the statement against HTT Prop. 3.3.1.7 from memory; it is that proposition plus its cocartesian dual, not weakened. I checked each proof step against the cited node statements. Step 1: the Joyal factorization makes T a quasicategory. Step 2: every hypothesis of base-equivalence-invariance (2) is supplied by marked-relative-cartesian-model, including the tensor U×K♯ from the enrichment; the base-change clause gives the natural marking on Z. Step 3: the vertex fibers give a weak equivalence between fibrant objects, hence v and a path vu~id. Step 4: q is a Joyal fibration over T, and qa=jgi, w=(g,k), wi=uf, pr=g, ri=vuf all hold strictly. Step 5: restriction of sharp mapping complexes along i is a Kan fibration over an arbitrary S; lifting at r gives hi=f and ph=g. Step 6: the opposite argument is correct and elementary enough. Small cases checked: point base, empty A (forces B empty), empty S or X, identity fibration. No new nodes, no duplicate in the DAG, no cycle, all citations in the same unit, no tool_uses, no SGA. No fixes."
  }
 }

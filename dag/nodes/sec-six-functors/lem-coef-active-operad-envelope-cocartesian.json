@@ -12,9 +12,134 @@
   "def-coef-infinity-fibrations",
   "lem-coef-operadic-approximation-restriction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $s_C:\\mathcal C^\\otimes\\to N(\\mathsf{Fin}_*)$ and $s_O:\\mathcal O^\\otimes\\to N(\\mathsf{Fin}_*)$. The given inner-fibration and equivalence-lifting hypotheses on $p$ are exactly those required by [lem-coef-infinity-lax-comma-target-fibration]. Apply it to form the unrestricted arrow category $T$ and its inner fibration $q:T\\to\\mathcal O^\\otimes$. The specified $H$ is its full subcategory on pairs with active arrow: a simplex lies in this subcategory precisely when all its vertices do. An inner horn already contains every vertex of its simplex, so a filler in $T$ of a lifting problem for $H\\to\\mathcal O^\\otimes$ belongs to $H$. Thus $r$ is an inner fibration, $H$ is a quasicategory, and $s_Or$ is an inner fibration by lifting first in $\\mathcal O^\\otimes$ and then in $H$. The comma mapping formula restricts unchanged to $H$ because its mapping simplices have only the two endpoint vertices. For $x=(c,a:p(c)\\to o)$ and $z=(d,b:p(d)\\to t)$ it is\n$$\\operatorname{Map}_H(x,z)\\simeq\\operatorname{Map}_{\\mathcal C^\\otimes}(c,d)\\times^h_{\\operatorname{Map}_{\\mathcal O^\\otimes}(p(c),t)}\\operatorname{Map}_{\\mathcal O^\\otimes}(o,t).$$",
+   "uses": [
+    "lem-coef-infinity-lax-comma-target-fibration",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 2.2.4.1 and Lemma 2.2.4.15(1)-(2): unrestricted arrow category, then full active subcategory; explicit horn and mapping-space verification."
+   }
+  },
+  {
+   "text": "Every inert edge $f:c\\to c'$ of $\\mathcal C^\\otimes$ is $p$-cocartesian. Indeed it is $s_C$-cocartesian, and $p(f)$ is $s_O$-cocartesian by inert preservation. Apply the mapping criterion to both and cancel the lower homotopy-pullback square using [lem-coef-infinity-homotopy-pullback-pasting]; the remaining square is exactly the $p$-cocartesian square. Moreover every specified inert $j:p(c)\\to v$ has an inert lift with source $c$ and image exactly $j$. Choose an inert $f_0:c\\to d$ over the underlying pointed map. The $s_O$-cocartesian universal properties of $p(f_0)$ and $j$ give a comparison equivalence $e:p(d)\\to v$ and a triangle $e p(f_0)\\simeq j$: comparison maps in both directions are inverse since precomposition with either cocartesian edge is an equivalence on the appropriate mapping-space fibers. Lift $e$ to an equivalence $\\widetilde e:d\\to d'$ using the hypothesis on $p$. Lift that base triangle through the inner horn with edges $f_0,\\widetilde e$ using that $p$ is an inner fibration. Its third edge $f:c\\to d'$ maps exactly to $j$. Inert edges are closed under composition with equivalences, so $f$ is inert. This is where the equivalence-lifting hypothesis is used.",
+   "uses": [
+    "lem-coef-operadic-approximation-restriction",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-homotopy-pullback-pasting",
+    "lem-coef-operadic-inert-active-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.1.2.10 and Proposition 2.1.2.22; elementary construction of the specified inert lift, and the mapping-space cancellation of HTT Proposition 2.4.1.3."
+   }
+  },
+  {
+   "text": "Consider an edge $e:x=(c,a)\\to y=(c',a')$ of $H$ with source component $f:c\\to c'$ inert and target component $g:o\\to o'$, so $g a\\simeq a'p(f)$. Fix $z=(d,b:p(d)\\to t)$ and a map $h:o'\\to t$. In the mapping formula of step 1, lifting an arrow $x\\to z$ over $hg$ through $e$ asks for $u':c'\\to d$ and a homotopy $b p(u')\\simeq h a'$, with the specified original $u:c\\to d$ and $b p(u)\\simeq h g a$. Apply inert-active orthogonality to the square in $\\mathcal O^\\otimes$ with left side $p(f)$, right side $b$, top $p(u)$ and bottom $h a'$. Its entire space of diagonal fillers is contractible. For each such diagonal, the $p$-cocartesian square for $f$ from step 2 gives a contractible space of lifts $u'$ with the required homotopy $u'f\\simeq u$. Equivalently, pasting these two homotopy-pullback squares with the formula of step 1 gives\n$$\\operatorname{Map}_H(y,z)\\simeq\\operatorname{Map}_H(x,z)\\times^h_{\\operatorname{Map}_{\\mathcal O^\\otimes}(o,t)}\\operatorname{Map}_{\\mathcal O^\\otimes}(o',t).$$\nThese are equivalences of spaces with all path coordinates, not just existence or uniqueness on components. The mapping criterion for the inner fibration $r$ now proves that $e$ is $r$-cocartesian.",
+   "uses": [
+    "lem-coef-infinity-lax-comma-target-fibration",
+    "lem-coef-operadic-inert-active-factorization",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-homotopy-pullback-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemmas 2.2.4.14-2.2.4.15: explicit orthogonality/mapping-square proof of the inert-source implication, replacing the reflective-localization shorthand."
+   }
+  },
+  {
+   "text": "Let $x=(c,a:p(c)\\to o)$ and let $g:o\\to o'$ be any edge. Form a composite $ga$ and factor it as $p(c)\\xrightarrow{j}v\\xrightarrow{a'}o'$ with $j$ inert and $a'$ active. Lift $j$ inertly as in step 2. The factorization triangle and the composition triangle give a coherent square, hence an edge $x\\to(c',a')$ of $H$ over $g$, whose source component is inert. Step 3 proves it is $r$-cocartesian. There is therefore a cocartesian lift of every $g$, so $r$ is a cocartesian fibration. To prove the converse edge criterion, compare any $r$-cocartesian $e:x\\to y$ with the constructed lift $e_0:x\\to y_0$ over the same $g$. Their mapping-square universal properties give arrows $v:y_0\\to y$ and $w:y\\to y_0$ over the identity with $ve_0\\simeq e$ and $we\\simeq e_0$. Applying the same mapping equivalences to these identities gives $wv\\simeq1$ and $vw\\simeq1$. Thus $v$ is an equivalence, its image in $\\mathcal C^\\otimes$ is an equivalence, and the source component of $e$ is the composite of an inert edge with that equivalence. It is inert by [lem-coef-operadic-inert-active-factorization].",
+   "uses": [
+    "lem-coef-operadic-inert-active-factorization",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-lax-comma-target-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 2.2.4.15(3)-(4): construct the lift by inert-active factorization, and compare arbitrary universal lifts by their mapping-space properties."
+   }
+  },
+  {
+   "text": "Every inert pointed map $\\delta:s_O(o)\\to\\langle n\\rangle$ lifts inertly from $o$ in $\\mathcal O^\\otimes$. Lift that edge $r$-cocartesianly from any $x$ above $o$. The two mapping squares, for $r$ and $s_O$, paste to the mapping square for $s_Or$. Hence this edge is $(s_Or)$-cocartesian. This supplies inert lifts in $H$. It also shows that $r$ preserves all inert edges: given any inert edge of $H$, compare it with this constructed lift over the same pointed map using the two universal mapping properties, as in step 4. The comparison in $H$ is an equivalence; its image in $\\mathcal O^\\otimes$ is an equivalence, so the image of the original edge is inert. Restrictions over an individual inert pointed edge are cocartesian fibrations: inner-horn fillers and the horn conditions for the constructed cocartesian edges restrict by projecting a lifting problem to that edge; the only base arrows are its edge and identities, whose degenerate lifts are cocartesian by the mapping criterion. Straightening these restrictions supplies the coherent projection functors on fibers used below.",
+   "uses": [
+    "lem-coef-operadic-approximation-restriction",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-homotopy-pullback-pasting",
+    "lem-coef-operadic-inert-active-factorization",
+    "lem-coef-cocartesian-straightening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 2.2.4.4, first paragraph: inert lifts and preservation, with cocartesian composition checked by pasting mapping squares."
+   }
+  },
+  {
+   "text": "Fix $y=(c,a:p(c)\\to o)$ with $s_O(o)=\\langle n\\rangle$, $s_C(c)=\\langle m\\rangle$, and active base map $\\alpha:\\langle m\\rangle\\to\\langle n\\rangle$. Choose inert $o\\to o_i$ over $\\rho_i$. The non-basepoint sets $I_i=\\alpha^{-1}(i)$ partition $\\langle m\\rangle^\\circ$. Choose inert block projections $c\\to c_i$ onto these sets. Since their images in $\\mathcal O^\\otimes$ are cocartesian over the block projections, the composite $p(c)\\xrightarrow a o\\to o_i$ factors through $p(c_i)$, giving an active $a_i:p(c_i)\\to o_i$ and a coherent square. These squares give edges $y\\to y_i=(c_i,a_i)$ in $H$ which are $r$-cocartesian by step 3 and $(s_Or)$-cocartesian by step 5. A block can be empty, in which case $c_i$ has arity zero and $a_i$ is a nullary operation. If $n=0$, activity forces $m=0$.",
+   "uses": [
+    "lem-coef-operadic-approximation-restriction",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-operadic-inert-active-factorization",
+    "lem-coef-infinity-lax-comma-target-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 2.2.4.4, partition of inputs used in the relative-limit verification; Lemma 2.2.4.16, explicit finite-pointed-set blocks."
+   }
+  },
+  {
+   "text": "Verify the entire output mapping-space Segal axiom directly. Write $x=(d,b:p(d)\\to t)$ with arities $\\ell,k$ and active base $\\beta:\\langle\\ell\\rangle\\to\\langle k\\rangle$. For each pointed $u:\\langle k\\rangle\\to\\langle n\\rangle$, the mapping formula of step 1 expresses $\\operatorname{Map}_H^u(x,y)$ as the disjoint union, over pointed maps $v:\\langle\\ell\\rangle\\to\\langle m\\rangle$ satisfying $\\alpha v=u\\beta$, of\n$$\\operatorname{Map}_{\\mathcal C^\\otimes}^{v}(d,c)\\times^h_{\\operatorname{Map}_{\\mathcal O^\\otimes}^{\\alpha v}(p(d),o)}\\operatorname{Map}_{\\mathcal O^\\otimes}^{u}(t,o).$$\nHere the superscript means the homotopy fiber over that map in the discrete mapping space of $N(\\mathsf{Fin}_*)$. The output product axioms in $\\mathcal C^\\otimes$ and $\\mathcal O^\\otimes$ decompose each of the three spaces into its block or color factors, and do so compatibly with $p$, since $p$ preserves the chosen inert projections. For the $\\mathcal C^\\otimes$ factors, group its singleton output factors by $I_i$; this also proves the decomposition for blocks of size zero. The permissible $v$ correspond bijectively to tuples of maps $v_i:\\langle\\ell\\rangle\\to(I_i)_+$ with $\\alpha_i v_i=\\rho_i u\\beta$: for an input $j$ with $u\\beta(j)=i\\ne *$, activity forces exactly its $i$th component to be non-basepoint; if $u\\beta(j)=*$ all components must be basepoint. These rules give the unique inverse to block restriction. Products of the path-space pullbacks are the pullback of the products (a tuple of paths is a path in the product), and disjoint unions distribute by this bijection of indices. Thus the actual projection map induces\n$$\\operatorname{Map}_H^u(x,y)\\xrightarrow{\\sim}\\prod_{i=1}^n\\operatorname{Map}_H^{\\rho_i u}(x,y_i).$$\nAll operations preserve the higher simplices in these path models. For $n=0$, $m=0$, the sole $v$ is the collapse and all displayed mapping spaces to zero-output objects are contractible by the empty-output axiom, so the result is the empty product, a point.",
+   "uses": [
+    "lem-coef-infinity-lax-comma-target-fibration",
+    "lem-coef-operadic-approximation-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proof of Proposition 2.2.4.4, verification of relative limiting inert cones; explicit mapping-space expansion of the three successive relative-limit checks and Lemma 2.2.4.16."
+   }
+  },
+  {
+   "text": "Finally check the fiber Segal equivalence. By step 5 there is a coherent projection functor $H_{\\langle n\\rangle}\\to H_{\\langle1\\rangle}^n$. Step 7 with $u=1_{\\langle n\\rangle}$ makes it fully faithful: maps in a fiber are the mapping-space fibers over the identity, and for the $(s_Or)$-cocartesian projections $x\\to x_i$ and $y\\to y_i$ of step 6, the mapping criterion for $s_Or$, restricted to the homotopy fibers over $\\rho_i$ and $1_{\\langle1\\rangle}$, identifies $\\operatorname{Map}_H^{\\rho_i}(x,y_i)$ with $\\operatorname{Map}_{H_{\\langle1\\rangle}}(x_i,y_i)$. Under these identifications the equivalence of step 7 is the map induced by the projection functor. For essential surjectivity take any finite family $y_i=(c_i,a_i:p(c_i)\\to o_i)$, where $o_i$ has arity one and $c_i$ has arity $m_i$. The fiber product axiom in $\\mathcal C^\\otimes$ assembles their color lists into $c$ of arity $m=\\sum_i m_i$ with inert block maps $c\\to c_i$; the analogous axiom in $\\mathcal O^\\otimes$ assembles the $o_i$ into $o$ of arity $n$. Let $\\alpha:\\langle m\\rangle\\to\\langle n\\rangle$ send the $i$th block to $i$. The output mapping-space axiom in $\\mathcal O^\\otimes$ supplies an arrow $a:p(c)\\to o$ over $\\alpha$ with components $a_i p(c\\to c_i)$ and the specified homotopies. It is active. The resulting coherent squares give inert-source edges $(c,a)\\to y_i$, so their projections identify its fiber projections with the given family. When $n=0$, choose zero-arity objects $c$ and $o$ of the two operads and an equivalence $p(c)\\to o$ in the contractible zero fiber of $\\mathcal O^\\otimes$; this supplies $(c,a)$, while step 7 makes its zero fiber contractible. Apply [lem-coef-infinity-full-essential-image] to the fully faithful projection functor: its essential image is the whole target by this construction, so it is an equivalence. With the inner fibration of step 1, inert lifts of step 5 and output mapping-space axiom of step 7, these are exactly the symmetric infinity-operad axioms. Step 5 gives inert preservation by $r$, step 4 its cocartesian fibration and exact edge criterion; all clauses follow.",
+   "uses": [
+    "lem-coef-operadic-approximation-restriction",
+    "lem-coef-infinity-lax-comma-target-fibration",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 2.2.4.4, last paragraph: assembling the colorwise objects and operations; the empty family is included explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-lax-comma-target-fibration",
+  "def-coef-infinity-fibrations",
+  "lem-coef-operadic-approximation-restriction",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-homotopy-pullback-pasting",
+  "lem-coef-operadic-inert-active-factorization",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-infinity-full-essential-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Construction 2.2.4.1, Proposition 2.2.4.4 and Lemma 2.2.4.15, read online; explicit mapping-space proof using inert-active orthogonality instead of an unexpanded localization argument. HA and HTT are not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -78,10 +203,38 @@
    "results": "{\"t\": \"2026-10-17T01:17:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"Operad\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second-reader search; semantic hits concern augmented ordinal categories and nerves, not infinity-operadic active-arrow envelopes; the FiberedCategory grep and Operad Loogle query returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "monoidalEnvelope|MonoidalEnvelope|operad|operadic",
+   "results": "{\"t\": \"2026-10-17T01:55:44Z\", \"tool\": \"grep\", \"query\": \"monoidalEnvelope|MonoidalEnvelope|operad|operadic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/NonAssoc/PreLie/Basic.lean\", \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\"], \"digest\": \"fd86d48dbea6a9e4\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact or one-line specialization: IsWeakFactorizationSystem at Mathlib/CategoryTheory/MorphismProperty/WeakFactorizationSystem.lean:36-39 concerns ordinary categories, and SimplexCategoryGenRel factorizations concern monotone maps. The whole-Mathlib operad grep has bibliography/linter hits only; the topology grep has an interval inclusion in SimplexCategory/Basic.lean:171. None states inert-active orthogonality in a symmetric infinity-operad."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative symmetric monoidal envelope of an infinity operad",
+   "results": "{\"t\": \"2026-10-17T01:55:44Z\", \"tool\": \"leansearch\", \"query\": \"Relative symmetric monoidal envelope of an infinity operad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.symmetricCategoryOfFullyFaithful\", \"CategoryTheory.symmetricOfHasFiniteProducts\", \"CategoryTheory.symmetricOfHasFiniteCoproducts\", \"CategoryTheory.SymmetricCategory.toBraidedCategory\", \"CategoryTheory.CopyDiscardCategory.toSymmetricCategory\", \"SSet.instMonoidalClosed\", \"CategoryTheory.SymmetricCategory.mk.noConfusion\", \"CategoryTheory.SymmetricCategory.noConfusion\"], \"digest\": \"07fbf06d917e8561\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact or one-line specialization: IsWeakFactorizationSystem at Mathlib/CategoryTheory/MorphismProperty/WeakFactorizationSystem.lean:36-39 concerns ordinary categories, and SimplexCategoryGenRel factorizations concern monotone maps. The whole-Mathlib operad grep has bibliography/linter hits only; the topology grep has an interval inclusion in SimplexCategory/Basic.lean:171. None states inert-active orthogonality in a symmetric infinity-operad."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCocartesian\"",
+   "results": "{\"t\": \"2026-10-17T01:55:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCocartesian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.codomainUniqueUpToIso\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.map_self\", \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsCocartesian.of_comp_iso\"], \"digest\": \"60646e309b2723ac\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact or one-line specialization: IsWeakFactorizationSystem at Mathlib/CategoryTheory/MorphismProperty/WeakFactorizationSystem.lean:36-39 concerns ordinary categories, and SimplexCategoryGenRel factorizations concern monotone maps. The whole-Mathlib operad grep has bibliography/linter hits only; the topology grep has an interval inclusion in SimplexCategory/Basic.lean:171. None states inert-active orthogonality in a symmetric infinity-operad."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The active arrow envelope of a symmetric infinity operad is a cocartesian fibration and cocartesian edges have inert source components",
+   "results": "{\"t\": \"2026-10-17T01:55:50Z\", \"tool\": \"leanfinder\", \"query\": \"The active arrow envelope of a symmetric infinity operad is a cocartesian fibration and cocartesian edges have inert source components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"SSet.StrictSegal.isRightKanExtension\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"CategoryTheory.Functor.IsCocartesian.map_uniq\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\"], \"digest\": \"6ab39572d3bce0df\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact or one-line specialization: IsWeakFactorizationSystem at Mathlib/CategoryTheory/MorphismProperty/WeakFactorizationSystem.lean:36-39 concerns ordinary categories, and SimplexCategoryGenRel factorizations concern monotone maps. The whole-Mathlib operad grep has bibliography/linter hits only; the topology grep has an interval inclusion in SimplexCategory/Basic.lean:171. None states inert-active orthogonality in a symmetric infinity-operad."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-active-operad-cocartesian-concatenation",
@@ -107,5 +260,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-active-operad-envelope-cocartesian",
+  "worker": "stage1",
+  "summary": "Preserved the server item statement and gave eight complete proof steps: strict inner fibration, exact inert lifts, orthogonality mapping calculation, both cocartesian implications, inert preservation, block projections, output mapping-space products, and fiber Segal equivalence including arity zero. Added two generic statement-only lemmas for unrestricted comma mapping spaces and inert-active orthogonality, after DAG/blueprint/Lean/Mathlib searches.",
+  "blueprint": "Realizes the supporting active-envelope construction in the recorded ancestry of prop-coef-integral-exceptional-adjoint, paragraph 2, the coherent finite-level middle mapping-complex adjunction before the derived inverse limit; respects the same unit route.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-enhanced-diagrams-cones",
+    "why": "Foundational simplicial/functor/mapping-space conventions already in the statement; no route change."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NU-39519ba6f",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-39519ba6f (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, both new nodes and every cited statement in full, against HA (Sept 2017) Construction 2.2.4.1, Prop. 2.2.4.4 with its proof on pp. 217-218, Lemmas 2.2.4.11-16 and Prop. 2.1.2.4-5, and HTT Cor. 2.4.7.11-12. The item statement is unchanged from the side DAG and matches HA. 'Fibration of infinity-operads' (Def. 2.1.2.10) is exactly the stated hypotheses: inert-preserving, inner fibration, lifts equivalences. Act is the full subcategory, r is ev_1, and the edge criterion is Lemma 2.2.4.15(4). Steps 1-7 are correct. I checked: inner horns contain every vertex, so the full subcategory inherits fillers; the cancellation direction of the pasting in step 2; the exact inert lift via the equivalence-lifting hypothesis; that step 3's filler space is inert-active orthogonality with p(f) on the left and b on the right; the index bijection alpha v = u beta in step 7, including dropped inputs and empty blocks; and the n=0 case. New node lem-coef-infinity-lax-comma-target-fibration is the true cocartesian dual of HTT 2.4.7.12; I rederived its mapping formula, and the edge cases A empty and B a point hold. New node lem-coef-operadic-inert-active-factorization is true by HA 2.1.2.4-5 with HTT 5.2.8 orientation; tested on Fin_*, the collapse to arity zero and permutations. Duplicate search by rg over the whole DAG (HTT 2.4.7.11/12, Kerodon 01KE, ev/Fun(Delta^1) cocartesian, HA 2.1.2.4, inert/active factorization) opened about 12 candidates; none duplicates either node. No circularity and no restated clauses. Route: every cited statement is in unit sk-prop-sf-biduality-general. The declared tool use of def-cbc-enhanced-diagrams-cones is a definition and is accepted. FIX: step 8 claimed full faithfulness from step 7 without the identification Map^{rho_i}_H(x,y_i) = Map_{H<1>}(x_i,y_i). I added that sentence and cited lem-coef-infinity-cocartesian-mapping-criterion in step 8; it was already in proof_deps. Corrected file is fixes/dag/nodes/sec-six-functors/lem-coef-active-operad-envelope-cocartesian.json.; 1 file(s) fixed by the reviewer"
  }
 }
