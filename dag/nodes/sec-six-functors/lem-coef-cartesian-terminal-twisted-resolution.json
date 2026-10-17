@@ -11,9 +11,130 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First make the construction, retaining its coherences. Opposite the arrow-projection theorem [lem-coef-infinity-cocartesian-arrow-projection]: the category of cartesian edges projects by target and base edge as a trivial Kan fibration onto all such pairs, since $p$ is cartesian. Its boundary-lifting property lets us choose compatible cartesian lifts over every simplex, also relative to choices already made on faces and with simplicial parameters. The opposite of [lem-coef-infinity-cocartesian-composition-initiality] identifies composites of these lifts with lifts of composite base arrows. For every chain $a_0\\xrightarrow{f_1}\\cdots\\xrightarrow{f_n}a_n$ in $A$, choose in the last fibre the comparison to $t_{a_n}$ from the transported earlier terminal objects. For $n=1$ it is $f_1^*t_{a_0}\\to t_{a_1}$. At every higher stage the already chosen faces, after factoring through the chosen cartesian edges, are a boundary with last vertex $t_{a_n}$; [lem-cbc-terminal-boundary-extension] fills it. Applying the transport functors to these terminal comparison simplices gives the required comparison simplices in the other fibres. For a chain of twisted squares $(f_i,g_i)$, combine these simplices with the chosen cartesian lifts over the chain of $g_i^{\\mathrm{op}}$. The cartesian universal property [lem-coef-infinity-cartesian-mapping-fiber] factors each comparison through its lift, including its triangle data, and the preceding relative boundary construction makes the faces and degeneracies agree. This constructs $k$ with $k(u)=u^*t_a$ up to the chosen equivalence. Its edge on $(f,g)$ is exactly\n$$u^*t_a\\simeq g^*u'^*f^*t_a\\longrightarrow g^*u'^*t_{a'}\\longrightarrow u'^*t_{a'}.$$\nApply the same relative construction with a parameter interval to two choices, and with parameter boundaries to their comparisons. Terminal objects form a contractible Kan complex by [lem-cbc-enhanced-functor-cone-calculus], and cartesian-lift choices have the boundary-lifting property just used. Thus the two constructions admit a coherent natural comparison over the base, whose components are equivalences; the componentwise criterion in that node makes it a natural equivalence. No assertion that $f^*t_a$ is terminal is used.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-arrow-projection",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-cbc-terminal-boundary-extension",
+    "lem-coef-infinity-cartesian-mapping-fiber",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent construction from terminal comparisons and cartesian lifts; the twisted-diagonal comparison of Proposition 5.6.9 is motivation, not an assertion of this generalization."
+   }
+  },
+  {
+   "text": "Fix $r\\in R_c$. Use the join comma $C_r=K_A\\times_R R_{r/}$, where an $n$-simplex of $R_{r/}$ is a map $\\Delta^0\\star\\Delta^n\\to R$ restricting to $r$ on the first vertex, and the projection restricts to the last face. Thus an $n$-simplex of $C_r$ is a simplex $v:\\Delta^n\\to K_A$ together with precisely such a cone whose last face is $kv$; its face and degeneracy maps are restrictions. This definition retains all comma triangles and their higher compatibilities. By the opposite of [lem-coef-infinity-slice-right-fibration], the projection $R_{r/}\\to R$ is a left fibration. Its pullback to the quasicategory $K_A$ fills inner horns by first filling in $K_A$ and then lifting, so $C_r$ is a quasicategory. An object is $(u:a\\to b,\\beta:r\\to k(u))$. Its base edge is uniquely $w^{\\mathrm{op}}:c\\to b$ for an arrow $w:b\\to c$ of $A$, because mapping spaces of an ordinary nerve are discrete Hom sets. The cartesian edge $(wu)^*t_a\\to u^*t_a$ over $w^{\\mathrm{op}}$ gives, by [lem-coef-infinity-cartesian-mapping-fiber], a coherent factorization of $\\beta$ as\n$$r\\xrightarrow{h}(wu)^*t_a\\longrightarrow u^*t_a,$$\nwith $h$ in $R_c$. In particular the space of factorizations of the fixed $\\beta$, including its comparison homotopy, is contractible. For an edge, the comparison triangle is a last-horn problem $\\Lambda^2_2\\to R$: its two given edges are $\\beta$ and the cartesian edge $(wu)^*t_a\\to u^*t_a$. Its base triangle is fixed, and the cartesian-edge clause of [def-coef-infinity-fibrations] supplies $h$ and the triangle. Over a simplex of the join comma, factor the corresponding cone along the compatible cartesian lifts from step 1. Induct on its dimension, keeping the already chosen faces: the remaining lifting problems have the same last cartesian edge and are the higher last-horn problems in that definition. These fillers retain the entire cone at $r$, not just the induced homotopy classes. Degenerate simplices are assigned the degeneracies of the chosen fillers; choose fillers only on nondegenerate simplices. This constructs compatible factorizations on whole parameter simplices. Define $H:C_r\\to C_r$ by\n$$H(u,w,\\beta)=(wu:a\\to c,h:r\\to (wu)^*t_a).$$\nOn a comma arrow with twisted pair $(f:a\\to a',g:b'\\to b)$, the base triangle says $w'=wg$. Hence $wu=w'u'f$, and $H$ uses the twisted pair $(f,1_c)$ together with the lifted triangle. Cartesian factorization makes these lifted triangles compatible under composition and all higher simplices. All this is done over a fixed $r$, so no local smallness in the universe of $A$ is required.",
+   "uses": [
+    "lem-coef-infinity-cartesian-mapping-fiber",
+    "lem-coef-infinity-cocartesian-arrow-projection",
+    "lem-coef-infinity-slice-right-fibration",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent comma calculation for the terminal-fibre generalization of Section 5.6; factorization of the base edge and its parameter simplices."
+   }
+  },
+  {
+   "text": "There is a coherent transformation $H\\to\\mathrm{id}_{C_r}$. At $(u,w,\\beta)$ it is the twisted arrow $(1_a,w):wu\\to u$, with its cartesian factorization triangle $\\beta\\simeq (\\mathrm{cart}_w)h$. Choose a terminal cone in $R_c$ by [lem-coef-infinity-normalized-final-cone]. Write $\\rho:r\\to t_c$ for its component at $r$, and put $z=(1_c:c\\to c,\\rho)$ in $C_r$. There is a second coherent transformation $H\\to\\Delta z$: its twisted pair is $(wu,1_c):wu\\to1_c$, and its triangle compares $r\\xrightarrow h(wu)^*t_a\\to t_c$ with $\\rho$. The comparison to $t_c$ here is the one used to construct $k$ in step 1. The terminal-boundary extension theorem gives these triangles and all their parameter coherences relative to that chosen comparison; no equality of two arbitrarily chosen maps to $t_c$ is asserted. On an arrow of $C_r$ the required equality of twisted pairs is $(w'u')f=wu$, already established in step 2. Thus the two transformations give a zigzag\n$$\\mathrm{id}_{C_r}\\ \\longleftarrow\\ H\\ \\longrightarrow\\ \\Delta z.$$\nOn realizations they are homotopies: triangulate each prism $|\\Delta^n|\\times[0,1]$ by its monotone lattice paths and evaluate the transformation on the corresponding simplices of $\\Delta^n\\times\\Delta^1$. The face restrictions agree, so these maps descend through the realization quotient. Concatenating the first one backwards with the second contracts the identity to the constant map at $z$. Consequently $C_r$ is weakly contractible. This is a contraction of the whole coherent comma category, including all higher simplices, rather than only of its homotopy category.",
+   "uses": [
+    "lem-coef-infinity-normalized-final-cone",
+    "lem-cbc-terminal-boundary-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent explicit twisted-comma contraction: replace the arrow u by wu and then map wu to the identity of c."
+   }
+  },
+  {
+   "text": "To obtain restriction on cocone spaces without a circular appeal to an existing cofinality theorem, enlarge to a universe in which $R$ is small and factor $k$ by the small-object theorem [lem-coef-small-object-cell-factorization], using the set of right horns $\\Lambda_i^n\\hookrightarrow\\Delta^n$, $0<i\\leq n$. In simplicial sets colimits are computed degreewise. Each horn is generated by finitely many nondegenerate simplices, so its maps into an increasing countable sequence of horn-cell inclusions factor at a finite stage; equality of two such maps is also detected at a finite stage. Thus the smallness hypothesis holds with $\\kappa=\\aleph_0$. The theorem gives\n$$K_A\\xrightarrow{j}E\\xrightarrow{q}R,\\qquad qj=k,$$\nwhere $j$ is a right-horn cell map and $q$ lifts all right horns. In the terminology of [def-coef-infinity-right-anodyne] and [def-coef-infinity-fibrations], $j$ is right anodyne and $q$ is a right fibration. Since $R$ is a quasicategory, filling an inner horn first in $R$ and then along $q$ proves that $E$ is a quasicategory. All sets of attaching squares are small in the chosen enlarged universe.",
+   "uses": [
+    "lem-coef-small-object-cell-factorization",
+    "def-coef-infinity-right-anodyne",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent use of the one-sided horn small-object factorization; compare the factorization characterization before Proposition 4.4.4."
+   }
+  },
+  {
+   "text": "Let $S_r=R_{r/}$ be the join coslice. By the opposite of [lem-coef-infinity-slice-right-fibration], its target projection $S_r\\to R$ is a left fibration. By the explicit simplex definition in step 2, $K_A\\times_R S_r=C_r$ as simplicial sets; no comparison between distinct comma models is required. Put $D_r=E\\times_R S_r$. The pullback of $j$ along the left fibration $D_r\\to E$ is\n$$K_A\\times_R S_r\\longrightarrow D_r.$$\nIt is right anodyne by [lem-coef-left-fibration-right-anodyne-base-change]. The Kan-Quillen theorem [lem-coef-kan-quillen-right-proper] makes every horn inclusion a trivial cofibration and closes these under cell attachments and retracts. Hence this pullback is a weak homotopy equivalence. Step 3 implies that $D_r$ is weakly contractible.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-coef-left-fibration-right-anodyne-base-change",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 4.4.11 with Proposition 4.4.4(iv), plus the agent right-anodyne comparison of comma models."
+   }
+  },
+  {
+   "text": "The identity arrow is initial in $S_r$ by the opposite of [lem-coef-infinity-slice-equivalence-final]. Its normalized initial cone, supplied by the opposite of [lem-coef-infinity-normalized-final-cone], is a transformation from the constant identity arrow to the identity functor of $S_r$, constant on its initial vertex. The projection $D_r\\to S_r$ is the pullback of the right fibration $q$. Its edges are cartesian: the defining right-horn lifting property includes every cartesian-edge horn problem. To regard the initial join cone as a transformation, precompose on each simplex with the prism map $\\Delta^n\\times\\Delta^1\\to\\Delta^0\\star\\Delta^n$ that sends $(a,0)$ to the initial vertex and $(a,1)$ to the vertex $a$ of the last block. These maps agree with faces and degeneracies, and the transformation is constant on the initial vertex $1_r$. Pull it back along $D_r\\to S_r$, with target the projection $D_r\\to S_r$. Together with the target diagram $\\mathrm{id}_{D_r}$ it defines a map from $D_r$ into the base of the cartesian-arrow projection for $D_r\\to S_r$. Every required target admits a cartesian lift: the right $1$-horn lifts any edge with prescribed target, and every edge of a right fibration is cartesian by the last-horn definition. The opposite of [lem-coef-infinity-cocartesian-arrow-projection] therefore makes this arrow projection a trivial Kan fibration onto the whole required base. On the simplicial subset $E_r\\subseteq D_r$, prescribe the lift to be the degenerate arrow at each simplex of $E_r$; this is possible because the normalized cone there is constant. Apply [lem-weil-pbc-trivial-kan-lifts-monomorphisms] to this inclusion and the arrow projection. The resulting relative lift has source in the fibre over $1_r$, exactly $E_r$. It gives $T:D_r\\to E_r$ and a transformation $iT\\to\\mathrm{id}_{D_r}$ whose restriction to $E_r$ is degenerate, so $Ti=\\mathrm{id}_{E_r}$ strictly. The transformation supplies a simplicial interval homotopy on $D_r$; the equality supplies the constant interval homotopy on $E_r$. By [lem-cbc-simplicial-homotopy-equivalence-weak], $i$ is a weak homotopy equivalence. Thus $E_r$ is weakly contractible by step 5, and it is Kan by [lem-coef-infinity-right-fibration-fibers]. This holds for every $r\\in R$, so [lem-coef-right-fibration-contractible-fibers] makes $q$ a trivial Kan fibration.",
+   "uses": [
+    "lem-coef-infinity-slice-equivalence-final",
+    "lem-coef-infinity-normalized-final-cone",
+    "lem-coef-infinity-cocartesian-arrow-projection",
+    "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "lem-coef-infinity-right-fibration-fibers",
+    "lem-coef-right-fibration-contractible-fibers",
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent deformation of the right-fibration comma onto its fibre, using the initial identity arrow; no classification or space-valued straightening theorem."
+   }
+  },
+  {
+   "text": "A trivial Kan fibration $q:E\\to R$ has a section $s$ by [lem-weil-pbc-trivial-kan-lifts-monomorphisms], applied to the empty inclusion into $R$. Let $J$ be the ordinary groupoid on two objects with one arrow between each ordered pair. Use the same lifting theorem on $E\\times\\{0,1\\}\\hookrightarrow E\\times N(J)$, with endpoints $\\mathrm{id}_E$ and $sq$ and base map $q\\operatorname{pr}_E$. The lift supplies a coherent natural equivalence between these endpoints: the interval arrows in $N(J)$ are invertible, so their images are equivalences. Thus $q$ and $s$ are inverse functor equivalences, and whiskering gives inverse equivalences on the corresponding functor quasicategories. The mapping-space clause of [lem-cbc-enhanced-functor-cone-calculus] therefore makes restriction along $q$ an equivalence on cocone spaces for any $V:R\\to D$ and $d\\in D$. Restriction along $j$ is an equivalence on those spaces by [lem-coef-infinity-anodyne-cocones]. Their composite is restriction itself along $qj=k$, proving the displayed equivalence in the statement, naturally in $V,d$ and coherently with postcomposition in $d$.\n\nFor a specified cocone $\\lambda:V\\to\\Delta d$, the mapping-space criterion for colimits in [lem-cbc-enhanced-functor-cone-calculus] tests whether $\\operatorname{Map}_D(d,x)\\to\\operatorname{Map}_{\\operatorname{Fun}(R,D)}(V,\\Delta x)$ is an equivalence for every $x$. The restriction equivalences just proved identify this test with that for $\\lambda k$. This proves both directions. If a colimit cocone is initially given only on $Vk$, the equivalence of cocone spaces with its fixed apex lifts it to a cocone on $V$ up to coherent equivalence, which is colimiting by the same criterion. The reverse implication is restriction. The factorization was performed in an enlarged universe containing the entire $R$, independently of the smaller universe of $A$. For any specified further target universe, take one containing it and this factorization; every construction is a simplicial map and the comparisons are the actual restriction maps, so the conclusion applies to each $D$ asserted in the statement.",
+   "uses": [
+    "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-anodyne-cocones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Agent conclusion from right-anodyne factorization; compare the cocone restriction formulation of Theorem 6.4.5. The proof does not cite the downstream comma-cofinality criterion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-fibrations",
+  "def-coef-infinity-right-anodyne",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-cbc-terminal-boundary-extension",
+  "lem-coef-infinity-anodyne-cocones",
+  "lem-coef-infinity-cartesian-mapping-fiber",
+  "lem-coef-infinity-cocartesian-arrow-projection",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-infinity-normalized-final-cone",
+  "lem-coef-infinity-right-fibration-fibers",
+  "lem-coef-infinity-slice-equivalence-final",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-left-fibration-right-anodyne-base-change",
+  "lem-coef-right-fibration-contractible-fibers",
+  "lem-coef-small-object-cell-factorization",
+  "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Foundational expansion of paragraph 2, via the existing coherent-diagram rectification ancestry; explicit terminal-fibre comma contraction and one-sided horn factorization. Cisinski Proposition 4.4.11 is the independent base-change input, not Proposition 5.6.9 asserted beyond its scope."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,10 +191,45 @@
    "results": "{\"t\": \"2026-10-17T01:58:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grothendieck\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.hasColimitsOfShape_grothendieck\", \"CategoryTheory.Grothendieck.fiberwiseColimitMapCompEquivalence\", \"CategoryTheory.Functor.instHasColimitGrothendieckFunctorCompGrothendieckProj\", \"CategoryTheory.Functor.colimitIsoColimitGrothendieck\", \"CategoryTheory.Functor.hasColimit_map_comp_ι_comp_grothendieckProj\", \"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_hom\", \"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_inv\", \"CategoryTheory.Functor.ι_colimitIsoColimitGrothendieck_hom_assoc\"], \"digest\": \"a279e0222c24a4b7\"}",
    "date": "2026-10-17",
    "verdict": "No match: the returned Grothendieck and fibrewise-colimit declarations use ordinary Category and Cat, not arbitrary quasicategorical cartesian fibrations or coherent cocone spaces. Read Mathlib/CategoryTheory/Limits/Shapes/Grothendieck.lean:32-60; the grep has zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grothendieck\", \"final\"",
+   "results": "{\"t\": \"2026-10-17T02:33:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grothendieck\\\", \\\"final\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Grothendieck.final_pre\", \"CategoryTheory.Grothendieck.final_map\"], \"digest\": \"9ab4a40f2f7807cd\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The ordinary Grothendieck finality and pseudofunctor cartesian-lift results use ordinary categories and Cat, and StrictSegal results assume a strict nerve. Read CategoryTheory/Limits/Final.lean and CategoryTheory/FiberedCategory/Grothendieck.lean:20-81. No result states finality for arbitrary quasicategorical fibres or the coherent cocone-space comparison in this item."
+  },
+  {
+   "tool": "grep",
+   "query": "TwistedArrow|RightFibration|cartesian.*terminal",
+   "results": "{\"t\": \"2026-10-17T02:33:16Z\", \"tool\": \"grep\", \"query\": \"TwistedArrow|RightFibration|cartesian.*terminal\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Zero.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean\"], \"digest\": \"f694d7a29337263c\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The ordinary Grothendieck finality and pseudofunctor cartesian-lift results use ordinary categories and Cat, and StrictSegal results assume a strict nerve. Read CategoryTheory/Limits/Final.lean and CategoryTheory/FiberedCategory/Grothendieck.lean:20-81. No result states finality for arbitrary quasicategorical fibres or the coherent cocone-space comparison in this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cartesian fibration of quasicategories with terminal fibres is resolved finally by the opposite twisted arrow category of the base",
+   "results": "{\"t\": \"2026-10-17T02:33:17Z\", \"tool\": \"leanfinder\", \"query\": \"A cartesian fibration of quasicategories with terminal fibres is resolved finally by the opposite twisted arrow category of the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegal.isRightKanExtension\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.domainCartesianLift\", \"CategoryTheory.Functor.final_of_final_costructuredArrowToOver\", \"CategoryTheory.StructuredArrow.final_pre\", \"SSet.Truncated.rightExtensionInclusion\", \"CategoryTheory.Limits.WalkingParallelPair.inclusionWalkingReflexivePair_final\", \"CategoryTheory.Comma.map_final\"], \"digest\": \"3baed20aec655ee8\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The ordinary Grothendieck finality and pseudofunctor cartesian-lift results use ordinary categories and Cat, and StrictSegal results assume a strict nerve. Read CategoryTheory/Limits/Final.lean and CategoryTheory/FiberedCategory/Grothendieck.lean:20-81. No result states finality for arbitrary quasicategorical fibres or the coherent cocone-space comparison in this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy coherent cocones on a cartesian fibration can be computed from transported terminal objects over twisted arrows",
+   "results": "{\"t\": \"2026-10-17T02:33:17Z\", \"tool\": \"leansearch\", \"query\": \"Homotopy coherent cocones on a cartesian fibration can be computed from transported terminal objects over twisted arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.LiftableCocone.noConfusion\", \"CategoryTheory.LiftableCocone.mk.noConfusion\", \"CategoryTheory.LiftableCocone.noConfusionType\", \"CategoryTheory.Limits.coconeOfCoconeUncurryIsColimit\", \"CategoryTheory.LiftableCocone\", \"CategoryTheory.Limits.coconeOfDiagramTerminal\", \"CategoryTheory.Limits.Cocone.toCostructuredArrowCocone\", \"CategoryTheory.Limits.coconeOfCoconeFiberwiseColimit\"], \"digest\": \"3225f041f4d1cba8\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The ordinary Grothendieck finality and pseudofunctor cartesian-lift results use ordinary categories and Cat, and StrictSegal results assume a strict nerve. Read CategoryTheory/Limits/Final.lean and CategoryTheory/FiberedCategory/Grothendieck.lean:20-81. No result states finality for arbitrary quasicategorical fibres or the coherent cocone-space comparison in this item."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma final_pre|theorem final_pre|lemma final_map|theorem final_map|domainCartesianLift",
+   "results": "{\"t\": \"2026-10-17T02:33:30Z\", \"tool\": \"grep\", \"query\": \"lemma final_pre|theorem final_pre|lemma final_map|theorem final_map|domainCartesianLift\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean\"], \"digest\": \"f30af13d0de4f7dc\"}",
+   "date": "2026-10-17",
+   "verdict": "No match. The ordinary Grothendieck finality and pseudofunctor cartesian-lift results use ordinary categories and Cat, and StrictSegal results assume a strict nerve. Read CategoryTheory/Limits/Final.lean and CategoryTheory/FiberedCategory/Grothendieck.lean:20-81. No result states finality for arbitrary quasicategorical fibres or the coherent cocone-space comparison in this item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-coherent-diagram-coyoneda",
@@ -102,5 +258,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cartesian-terminal-twisted-resolution",
+  "worker": "stage1",
+  "summary": "Retained every clause, including non-terminal-preserving transport, coherent construction and uniqueness, all cocone spaces, and larger total-category universes. Gave the explicit comma contraction through wu and the identity at c. Avoided a genuine dependency cycle through the existing comma-cofinality and pointwise-transport nodes by deriving cocone restriction via right-horn factorization. Added one strictly foundational statement-only base-change lemma; all other inputs reuse existing nodes. Mathlib searches found no matching leaf.",
+  "blueprint": "Realizes the independent small-index terminal-fibre resolution used below paragraph 2 of prop-coef-integral-exceptional-adjoint (coherent diagram rectification via the inherited ancestry). The current main-20261015 ancestor was read; no unit route or chapter statement changes.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic simplicial or quasicategorical foundation used only for its stated lifting, mapping-space, or homotopy property; it does not replace a geometric step of the unit route."
+   },
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Generic simplicial or quasicategorical foundation used only for its stated lifting, mapping-space, or homotopy property; it does not replace a geometric step of the unit route."
+   },
+   {
+    "node": "lem-cbc-terminal-boundary-extension",
+    "why": "Generic simplicial or quasicategorical foundation used only for its stated lifting, mapping-space, or homotopy property; it does not replace a geometric step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-trivial-kan-lifts-monomorphisms",
+    "why": "Generic simplicial or quasicategorical foundation used only for its stated lifting, mapping-space, or homotopy property; it does not replace a geometric step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-cbc-terminal-boundary-extension",
+  "lem-weil-pbc-trivial-kan-lifts-monomorphisms"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-96a5df490",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-96a5df490 (reviewer sub-agent of L); spot-checked: I read the item, the new node and the full statements of all 21 cited nodes, and checked each of the seven steps against them; details are in review.md. (1) Construction of k: the dual of arrow-projection is onto because p is cartesian, the terminal fillers are made only in the fibre R_{a_n}, and no transported object is assumed terminal. (2) For r in R_c, C_r = K_A x_R R_{r/} is a quasicategory because R_{r/} -> R is a left fibration. cartesian-mapping-fiber with s=c and a discrete base factors beta as cart.h. I rederived w'=wg, wu=w'u'f, the twisted pair (f,1_c), and naturality of H. (3) The pairs (1_a,w) and (wu,1_c) satisfy the twisted-square equation. Their triangles lie in R_c and are filled by terminal-boundary-extension at t_c, so the zigzag id <- H -> const contracts C_r. (4) The small-object hypotheses hold for the right horns with kappa=aleph_0 in an enlarged universe. j is right anodyne, q is a right fibration, and E is a quasicategory. (5) The pullback of j along the left fibration D_r -> E is literally C_r -> D_r. It is right anodyne by the new node and a weak equivalence by Kan-Quillen. (6) The prism map is monotone, the right fibration D_r -> S_r has all edges cartesian, and the lift relative to E_r gives Ti=id and iT~id. right-fibration-fibers and contractible-fibers then make q a trivial fibration. (7) The section plus the N(J) lift makes q an equivalence, anodyne-cocones handles j, and the colimit criterion gives both directions. Small cases: A empty; A a point; A=[1], where the colimit is the pushout V(t_1)<-V(u^*t_0)->V(t_0), so no terminal-preservation hypothesis is needed. New node lem-coef-left-fibration-right-anodyne-base-change is true: left fibrations are smooth (HTT 4.1.2.15), and a right anodyne monomorphism is the same as a cofinal one (HTT 4.1.1.3, Kerodon 02N3). The variance test {0}->Delta^1 shows the left-fibration hypothesis is essential. Cisinski 4.4.11 is not archived locally (WANTED recorded); online citation is the existing practice for this chain. The node meets B1-B9 and duplicates none of eight candidates I read. The claimed cycle is real: cofinal-comma-criterion and cofinality-space-test both reach the item, so inlining the Theorem A argument is justified. A graph traversal finds no cycle through the item, and proof_deps equals the union of the step uses. Statement unchanged and matching its use in coherent-diagram-coyoneda. I accept the four tool_uses (three lem-cbc foundations and one Mathlib leaf). No SGA source. Not a target node, so the base-change-morphism check does not apply. No fixes."
  }
 }
