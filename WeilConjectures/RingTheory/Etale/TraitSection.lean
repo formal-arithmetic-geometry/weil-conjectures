@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.RingTheory.Etale.Abhyankar
 public import WeilConjectures.RingTheory.Etale.DepthTwo.SmoothPurity
+public import WeilConjectures.RingTheory.Etale.DepthTwo.Spreading
 
 /-!
 # Étaleness of the normalization near a section over a trait
@@ -50,6 +51,25 @@ variable {R₀ B Bk L : Type u} [CommRing R₀] [IsDomain R₀] [IsIntegrallyClo
   [Module.Finite Bk L] [Algebra.Etale Bk L]
 
 include Bk in
+/-- **Étaleness of the normalization at a section over a trait**, local form: the base change of
+the integral closure of `B` in `L` to the local ring `B_P`, `P = ε⁻¹(q)`, is finite étale. -/
+theorem etale_localization_integralClosure_of_height_eq_one (ε : B →ₐ[R₀] R₀) (q : Ideal R₀)
+    [q.IsPrime] (hq : q.height = 1) (G : Type*) [Group G] [Finite G]
+    [MulSemiringAction G L] [SMulCommClass G Bk L]
+    (hfix : ∀ x : L, (∀ g : G, g • x = x) → x ∈ Set.range (algebraMap Bk L))
+    (hrank : ∀ p, Module.rankAtStalk (R := Bk) L p = Nat.card G)
+    (hG : IsUnit (Nat.card G : R₀))
+    {K : Type u} [Field K] [Algebra R₀ K] [IsFractionRing R₀ K]
+    (φ : Fin (Nat.card G) → (L →+* K))
+    (hφ : ∀ j, (φ j).comp (algebraMap B L) = (algebraMap R₀ K).comp ε.toRingHom)
+    (hφinj : Function.Injective φ) :
+    Algebra.Etale (Localization.AtPrime (q.comap ε))
+        (Localization.AtPrime (q.comap ε) ⊗[B] integralClosure B L) ∧
+      Module.Finite (Localization.AtPrime (q.comap ε))
+        (Localization.AtPrime (q.comap ε) ⊗[B] integralClosure B L) := by
+  sorry
+
+include Bk in
 /-- **Étaleness of the normalization near a section over a trait** (trait case of the proof of
 [Stacks 0EYJ], a step of blueprint `sbc-thm-spreading-finite-etale-galois`). See the module
 docstring. -/
@@ -67,6 +87,9 @@ theorem exists_etale_integralClosure_of_height_eq_one (ε : B →ₐ[R₀] R₀)
       [IsLocalization.Away g B'] [Algebra L L'] [IsLocalization.Away (algebraMap B L g) L']
       [Algebra B' L'] [Algebra B L'] [IsScalarTower B B' L'] [IsScalarTower B L L'],
       Algebra.Etale B' (integralClosure B' L') := by
-  sorry
+  obtain ⟨hE, hF⟩ := etale_localization_integralClosure_of_height_eq_one (Bk := Bk) ε q hq G
+    hfix hrank hG φ hφ hφinj
+  exact Algebra.exists_etale_integralClosure_of_etale_localization (R := R₀) (Bk := Bk)
+    (q.comap ε) hE hF
 
 end Algebra
