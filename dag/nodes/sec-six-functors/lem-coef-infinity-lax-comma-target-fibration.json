@@ -10,7 +10,9 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
-  "lem-coef-infinity-mapping-composition"
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-arrow-morphism-square",
+  "lem-coef-infinity-pinch-comparison"
  ],
  "proof": [
   {
@@ -243,5 +245,37 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-12e030487 (reviewer sub-agent of L); spot-checked: I read the whole item: statement, 5 steps, proof_deps, blueprint record and split_report, plus the full statements of all 11 cited nodes, the citer lem-coef-active-operad-envelope-cocartesian and the unit sk-prop-sf-biduality-general. HTT and Kerodon are not in literature/; WANTED is declared and proof_origin is agent. I checked the item against HTT Cor. 2.4.7.12 (dual) and the Kerodon §4.6.4 oriented-fiber-product Hom formula: endpoint direction and the legs h↦vf(h), k↦ku agree. The isofibration hypothesis on f is inherited and stronger than the source needs; nothing was weakened. Small cases checked: B=Δ⁰ (T=A); A=Δ⁰ (coslice); A=Δ⁰, B=N[1]; f=id (reduces to arrow-morphism-square, not circular); A empty (vacuous). Step 1: e is an isofibration by the exponentiation 'in particular' clause, pullback-limit applies with g=(f,id), q=ev_1 is a composite of inner fibrations. Step 2: the U_T strict pullback identity is correct; the leg is a Kan fibration by the last clause of exponentiation; pinch naturality gives strictly commuting cospans, so invariance applies as stated; vertical and horizontal pasting orientations checked and P≃H×^h_Z K with the right legs. Step 3: both triangles checked explicitly (σ and s_0(w)); s lies in the strict pullback with q(s)=k; elementary. Step 4: the criterion's square matches p(x)=b, p(y)=b', p(z)=c; the pasting uses the specified-homotopy clause. One minor gloss, accepted: the outer rectangle being a homotopy pullback after replacing ℓ↦ℓw by the homotopic ℓ↦(ℓk)u (and transferring along the Step 2 equivalences) is a one-line path-concatenation fact. Step 5 follows from the definition and is elementary. Route: all statements cited are in the item's own unit; the only other-unit citation, def-cbc-enhanced-diagrams-cones, is a definition. No tool_uses, no SGA. proof_deps equals the union of uses; the blueprint via chain matches; same_as=[]. Duplicate search with rg over dag/nodes (relative-slice-sections, arrow-target-right-fibration, slice-arrow-equivalence, cocartesian-arrow-projection): different constructions, no duplicate. No new nodes, no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86edbd0eb",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Shape: commit 86edbd0 changes only the module, node and report; the report has Worker report and Second reading by Q30. Node: only lean and stmt_deps changed; the two added stmt_deps (arrow-morphism-square Q22, pinch-comparison Q08) are landed nodes with lean records, which brief-stage2 l.140 allows; lean.statement matches the file verbatim. Every clause matches the node: universe u, quasicategories, InnerFibration f, _hlift for equivalence-edge lifting from a fixed source, T = pullback f ev0, q = ev1, ∃hT Quasicategory, recorded cocartesianFibrationOver, WHE j_T≫c into a literal path pullback with legs h↦v f(h) and k↦k u and the whole path kept, an exact k-projection equation, and naturality over every parameter. Traced the arrowSquareRestriction orientation: c exists and is unique; the extra Kan/WHE clauses are true conclusions. Edge cases (empty A or B, empty mapping spaces, degenerate edges, single universe) are covered. Gates: no hollow definition, one sorry, docstrings with source, blueprint id and 5 proof steps, no line over 100 chars, no name clash, proof-dependency imports complete. nt_compile.py twice against the side overlay: clean in 4.1 s, rc 0. Non-blocking remark: _hlift restates the last clause of IsIsofibration, which the node does not cite."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityLaxCommaTargetFibration",
+  "declaration": "SSet.Enhanced.infinity_lax_comma_target_fibration",
+  "declarations": [
+   "SSet.Enhanced.laxComma",
+   "SSet.Enhanced.laxCommaSource",
+   "SSet.Enhanced.laxCommaArrow",
+   "SSet.Enhanced.laxCommaTarget",
+   "SSet.Enhanced.laxCommaHomFamily",
+   "SSet.Enhanced.laxCommaPathFamily",
+   "SSet.Enhanced.LaxCommaSpanPresentation",
+   "SSet.Enhanced.LaxCommaFamilyComparison",
+   "SSet.Enhanced.LaxCommaFamilyNaturality",
+   "SSet.Enhanced.LaxCommaMappingStatement",
+   "SSet.Enhanced.infinity_lax_comma_target_fibration"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityLaxCommaTargetFibration.lean",
+  "statement": "theorem infinity_lax_comma_target_fibration {A B : SSet.{u}} [Quasicategory A] [Quasicategory B] (f : A ⟶ B) [InnerFibration f] (_hlift : ∀ (a : A _⦋0⦌) (v : B _⦋1⦌), B.δ 1 v = f.app _ a → IsEquivalenceEdge B v → ∃ e : A _⦋1⦌, A.δ 1 e = a ∧ IsEquivalenceEdge A e ∧ f.app _ e = v) : ∃ hT : Quasicategory (laxComma f), cocartesianFibrationOver (laxCommaTarget f) ∧ @LaxCommaMappingStatement A B inferInstance f hT",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The fixed-leg triangle spans are the recorded canonical coherent composition maps. The path-family model is identified with their literal path-space pullback, retaining both triangles, the whole path, and the A-arrow. Their free-edge weak equivalences and natural pinch equivalences identify its legs with the stipulated right-pinched mapping spaces. The family comparison is fixed on entire squares by the two triangle restrictions and constant diagonal path, with parameter naturality and the explicit target projection. All helper definitions belong to this node; the only postponed theorem is the node itself."
  }
 }

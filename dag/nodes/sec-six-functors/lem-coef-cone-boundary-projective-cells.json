@@ -8,7 +8,8 @@
   "place": "Section 2.2.1, correspondence construction (the cone collage $M_p$); Section 2.2.2, point calculation (straightening over a vertex is the $Q$-realization). Read online on 2026-10-17; not archived in literature/. No Stacks tag states this simplicial homotopy result."
  },
  "stmt_deps": [
-  "lem-coef-pinched-cube-latching"
+  "lem-coef-pinched-cube-latching",
+  "def-coef-infinity-relative-cone"
  ],
  "proof": [
   {
@@ -258,5 +259,35 @@
   "group": "Q16",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-8dce10c0c (reviewer sub-agent of L); spot-checked: I read HTT §§2.2.1–2.2.2 at the cited place (printed pp. 73–76, fetched copy). The item's M_p and L_a(X) are the source's correspondence M = C[X^▷] ⊔_{C[X]} C^op and St_φX = Map_M(-,v) with A = C^op, so the variance is correct. J^n and Q^n match p. 76 and lem-coef-pinched-cube-latching word for word. The coend is Remark 2.2.2.1, C ⊣ N is Example 2.2.2.5, and naturality is Prop. 2.2.1.1. The statement is byte-identical to the live and side DAG copies, so nothing is weakened. Both cited statements were read in full: pinched-cube gives C[Δ^m], the colimit C[S], J^n, Q^n and Q^0 = Δ^0; interval-lifting gives cocompleteness of sCat. Both are in the same unit, so the route holds and no tool uses are needed. Step checks: (1) C is the left adjoint of N, so it preserves the pinch pushout. (2) Degreewise word construction for the cone: mixed simplices are v-degeneracies, there is no path back from v, and the old part is full. (3) The pushout with A gives full A, M(v,c) = ∅ and M(v,v) = pt, with no injectivity needed. (4) Pushout pasting gives A ⊔_x C[J^n], so M(c,v) = A(c,b) × Q^n. (5) The collage universal property via t(q) gives the coend relations, and the empty K keeps A and v. (6) The relations fix f, which gives the product. (7) Co-Yoneda with Q^0 = Δ^0, naturality under Fa = a'C[h], and the size clause. Steps 3, 5 and 6 are marked elementary because they cite nothing, which is the only form the tools accept; their arguments are fully written. Small cases I checked: K = Δ^1 gives Q^1 ≅ Δ^1; K = ∅; A a one-object monoid; A empty; a non-injective. No new nodes. The existing clauses in marked-cone-generator-calculations, right-straightening-fiber-comparison and unmarked-straightening-quillen are special cases inside larger, different nodes, not duplicates. No SGA is cited. No fixes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f529a000b",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Every clause matches the node and HTT 2.2.1-2.2.2: pushout M_p and vertex v (Mathlib pushout of C[rightJoinConeInclusion] and C[p]>>a), value M_p(c,v) with precomposition action as EnrichedFunctor SSet A^op SSet (HEq not vacuous: elaborated self-enrichment Hom X Y = ihom X Y by rfl at default transparency, checked by test compile), old objects exactly A (Injective obj + IsIso maps, true because the SCat object functor has a right adjoint), IsEmpty M(v,c) in every degree, M(v,v) iso Delta[0], point formula as representable times leftKanExtension of qFunctor along stdSimplex (the coend over all monotone maps), full action and K/S/A naturality (g quantified over the unique pushout map; hc/hv/hs follow from the hypotheses), K=Delta[0] case. lean.statement equals the file signature exactly; node text unchanged from side DAG. Added stmt_dep def-coef-infinity-relative-cone is landed, join declarations reachable through it, no cycle. Docstrings with source and blueprint, only the final theorem is sorry, no hollow definitions, no extra hypotheses, universes bound. Report has Worker report and Second reading by Q04. nt_compile.py: clean compile, rc 0, 1.9 s. Edge cases X=empty, K=empty, K=Delta[0], empty A/S and non-injective a all left to the theorem. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.ConeBoundaryProjectiveCells",
+  "declaration": "SSet.CoherentCone.cone_boundary_projective_cells",
+  "declarations": [
+   "SSet.CoherentCone.moduleCategory",
+   "SSet.CoherentCone.baseInclusion",
+   "SSet.CoherentCone.coneInclusion",
+   "SSet.CoherentCone.coneVertex",
+   "SSet.CoherentCone.value",
+   "SSet.CoherentCone.precomposition",
+   "SSet.CoherentCone.coefficientVertex",
+   "SSet.CoherentCone.PointFormula",
+   "SSet.CoherentCone.cone_boundary_projective_cells"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/ConeBoundaryProjectiveCells.lean",
+  "statement": "theorem cone_boundary_projective_cells : (∀ {S X : SSet.{u}} {A : SCat.{u}} (a : rigidification.obj S ⟶ A) (p : X ⟶ S), Function.Injective (baseInclusion a p).obj ∧ (∀ c d : A, IsIso ((baseInclusion a p).map c d)) ∧ (∀ (c : A) (r : SimplexCategoryᵒᵖ), IsEmpty ((CoherentNerve.hom (moduleCategory a p) (coneVertex a p) ((baseInclusion a p).obj c)).obj r)) ∧ Nonempty (CoherentNerve.hom (moduleCategory a p) (coneVertex a p) (coneVertex a p) ≅ Δ[0]) ∧ ∃ L : EnrichedFunctor SSet Aᵒᵖ SSet.{u}, (∀ c : Aᵒᵖ, L.obj c = value a p c.unop) ∧ ∀ c d : Aᵒᵖ, HEq (L.map c d) (MonoidalClosed.curry ((β_ _ _).hom ≫ precomposition a p c.unop d.unop))) ∧ Nonempty PointFormula.{u} ∧ IsIso (SSet.stdSimplex.isTerminalObj₀.from ((SSet.stdSimplex.{u}.leftKanExtension qFunctor.{u}).obj Δ[0])) ∧ (∀ {S : SSet.{u}} {A : SCat.{u}} (a : rigidification.obj S ⟶ A) (s : S _⦋0⦌) (c : A), Nonempty (value a (SSet.const (X := Δ[0]) s) c ≅ CoherentNerve.hom A c (coefficientVertex a s)))",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the published ordered join and coherent realization. The Q coend is Mathlib leftKanExtension along SSet.stdSimplex, whose pointwise colimit is exactly the displayed coend, without copying the downstream quotient implementation. PointFormula specifies full enriched naturality and simultaneous K/S/A naturality for the uniquely determined pushout map. All construction data are explicit; only the final theorem is postponed. The additional statement dependency is the landed owner of the ordered right cone."
  }
 }

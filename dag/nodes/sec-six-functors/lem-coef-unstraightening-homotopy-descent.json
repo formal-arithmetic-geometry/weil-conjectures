@@ -249,5 +249,36 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-25bd890d8 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the 5 new nodes, every cited statement, and HTT (reading copy) at Prop 2.2.1.1, Thm 2.2.1.2, 2.2.2.7-2.2.2.12, Lemmas 2.2.3.1/2.2.3.4-2.2.3.10, Prop 2.2.3.11 pp.83-85, Rem A.3.2.14, Cor A.3.2.28, Lemma A.3.6.17 and Cor A.3.6.18. The item statement is faithful to 2.2.3.11 and unchanged. The steps follow HTT's localization square and the induction of Lemma 2.2.3.5. The coproduct, pushout-along-mono and increasing-union cases are written out, including the degreewise pullback-of-pushout and the Kan-leg strict pullback via lem-coef-kan-pullback-path-comparison. The induction base and the extraction of homotopy-equivalence edges are also checked. All five children are true and none restates a clause of the item. Pointwise: the right horn cones to the inner horn Lambda^{n+1}_i, which is a Bergner trivial cofibration after pushout; the Sing_Q fiber was computed. The simplex child is HTT 2.2.3.10 on bifibrant diagrams. Gluing: HTT 2.2.3.4 for an arbitrary mono via the pushout-product, plus 2.2.3.6. The localization child is A.3.2.14 (*'), A.3.6.17, A.3.2.28 and the Kan tower. Descent: A.3.6.18; C[-] of a mono is a cofibration and Bergner is left proper. I verified that the existing alternatives (external-products, enriched-diagram-homotopy-descent, simplicial-model-nerve-localization, dk-cofibrant/fibrant-subcategory localization, unmarked-straightening-quillen) all reach the item. The final dependency closure is acyclic and every citation is in the same unit; no tool_uses are needed. Repair to item Step 3 (text only): it claimed only 'coherent' commutation with restriction, but A.3.2.28 and the descent child need strict cones. I added a presentation, built from Step 2's cone description, in which simplicial sets over a base are presheaves on its simplices and the base-change isomorphism is an identity. Note: the existing unsplit lem-coef-simplicial-right-fibration-presentation contains this item's statement; it should cite this item when it is split.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aa492ccf6",
+  "group": "Q64",
+  "result": "pass",
+  "note": "Checked every node clause against the Lean. Bifibrant = projectively cofibrant and objectwise Kan; RightFibrations = all right fibrations in Over S; the mapping complex is the existing transportOverHom; the enrichment map is simplicial and preserves identity and diagonal composition. cone_formula fixes U on every simplex using the cone generators, quotientMap, pi and t, so U is unique. pi is fixed because quotientMap is surjective; the cone coordinates are unique because Delta[k+1] has no nontrivial automorphisms. The right-fibration, weak-equivalence and TransportOverEquivalence clauses match the node, including e, r, both Delta^1 homotopies and their endpoints. Edge cases S empty, empty values, k=0, n=0 and degenerate t are covered; one universe u, no extra hypotheses. No hollow definitions; only the main theorem is sorry. Docstrings carry the source, blueprint id and all 8 proof steps. lean.statement is verbatim; only the lean field changed; no name collisions; lines at most 100 characters. nt_compile --json on the snapshot module against the local side overlay: rc=0, no errors or warnings, 2.2 s. Observation, not a fault: the public import of SpaceTransportClassification, a node above this one in the DAG, reuses the only over-base mapping-complex definition. This is the same pattern as the existing ConePresheafAdjunction import and is covered by the import-cycle rule in stages/2-statements.md section 3 rule 7."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.UnstraighteningHomotopyDescent",
+  "declaration": "SSet.ConePresheaf.unstraightening_homotopy_descent",
+  "declarations": [
+   "SSet.ConePresheaf.Bifibrant",
+   "SSet.ConePresheaf.RightFibrations",
+   "SSet.ConePresheaf.simplexVertex",
+   "SSet.ConePresheaf.simplexConeFunctor",
+   "SSet.ConePresheaf.ConeSimplexCoordinates",
+   "SSet.ConePresheaf.conePathSubsets",
+   "SSet.ConePresheaf.coneGenerator",
+   "SSet.ConePresheaf.coneParameter",
+   "SSet.ConePresheaf.CanonicalEnrichment",
+   "SSet.ConePresheaf.unstraightening_homotopy_descent"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/UnstraighteningHomotopyDescent.lean",
+  "statement": "theorem unstraightening_homotopy_descent (S : SSet.{u}) : ∃ (C : ConeSimplexCoordinates S) (π : PinchedCube.qFunctor.{u} ⟶ stdSimplex.{u}), (∀ k : ℕ, PinchedCube.quotientMap k ≫ π.app ⦋k⦌ = PinchedCube.maximumMap k) ∧ ∃ U : CanonicalEnrichment C π, (∀ F : Bifibrant S, Enhanced.rightFibration (rightProjection F.obj)) ∧ (∀ F G : Bifibrant S, Enhanced.IsWeakHomotopyEquivalence (U.map F G)) ∧ (∀ E : RightFibrations S, ∃ F : Bifibrant S, Enhanced.TransportOverEquivalence E.obj.hom (rightProjection F.obj))",
+  "branch": "newtargets-dag",
+  "by": "Q64",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The Dwyer--Kan equivalence is rendered by its equivalent explicit clauses: a simplicial map on each actual enriched mapping complex, identity and diagonal-composition preservation, local weak homotopy equivalence and essential surjectivity witnessed by actual over-base inverse homotopies. Its canonical enrichment is normalized on every coherent cone generator by the quotient Q^k to Delta[k], whose composite with the subset-nerve quotient is maximum. All construction helpers belong to this node; no unrelated existence choice or slice-model hypothesis is used."
  }
 }
