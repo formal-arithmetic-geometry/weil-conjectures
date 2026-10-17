@@ -17,41 +17,161 @@
   "def-coef-monoidal-infinity-category",
   "def-coef-infinity-relative-cone"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "An equivalence edge $u:x\\to y$ over an identity of the base is $p$-cocartesian. Indeed its inverse and inverse triangles make precomposition $\\operatorname{Map}(y,z)\\to\\operatorname{Map}(x,z)$ a homotopy equivalence for each $z$, by the composition statement [lem-coef-infinity-mapping-composition]. The corresponding lower map of base mapping spaces is the identity. Its path pullback is equivalent to the upper-right space (contract the path coordinate), so the square is a homotopy pullback. The criterion [lem-coef-infinity-cocartesian-mapping-criterion] gives the assertion.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Elementary use of the cocartesian mapping criterion and inverse triangles; GH Definition 3.1.3, exact-boundary preparation."
+   }
+  },
+  {
+   "text": "Choose a Segal transport equivalence $T:\\mathcal V^\\otimes_{[n]}\\to\\mathcal V^n$ from [def-coef-monoidal-infinity-category]. Apply a quasi-inverse of $T$ to the prescribed tuple to obtain $C$, with a tuple equivalence $T(C)\\simeq(v_i)$. Write the chosen transport edges as $e_i:C\\to w_i$ over $\\rho_i$; their existence is part of the cocartesian-fibration definition. Projecting the tuple equivalence and its inverse triangles to each coordinate gives equivalences $u_i:w_i\\to v_i$ in the fiber over $[1]$. These are cocartesian by Step 1. Fill the inner $2$-horn $(e_i,u_i)$ over the composable pair $(\\rho_i,1_{[1]})$; let its long edge be $a_i:C\\to v_i$. The composition assertion [lem-coef-infinity-cocartesian-composition-initiality] makes $a_i$ cocartesian. Its base is exactly $\\rho_i$. The left cone on discrete $I$ is the union of these $n$ copies of $\\Delta^1$ along their initial vertex, so the $a_i$ give a simplicial cone with exactly the prescribed boundary and base $g$. This construction includes $n=0$: the quasi-inverse of the Segal equivalence to the one-point quasicategory supplies an apex over $[0]$.",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Tuple construction supporting GH Proposition 3.4.5, using Definition 3.1.3 (Segal fibers) and Definition 3.1.10 (cocartesian fibration)."
+   }
+  },
+  {
+   "text": "For any specified cone $q$ over $g$, put $x=q(*)$ and $a_i=q(*\\to i)$. Apply the limit dual of [lem-coef-infinity-relative-cone-constant-test]. Since $I$ is discrete, its functor simplicial set and right-pinched mapping spaces are degreewise products, so the upper row of that test is $\\operatorname{Map}(D,x)\\to\\prod_i\\operatorname{Map}(D,v_i)$. If $p(D)=[m]$, its lower row is the map from the discrete set $\\operatorname{Hom}([m],[n])$ to $\\prod_i\\operatorname{Hom}([m],[1])$ given by $\\phi\\mapsto(\\rho_i\\phi)_i$. The path pullback therefore has, over $\\phi$, the fiber $\\prod_i\\operatorname{Map}^{\\rho_i\\phi}(D,v_i)$: paths in the discrete lower-right space force exactly these equalities. Homotopy fibers over a discrete space are the strict components indexed by its vertices. By [lem-coef-spaces-homotopy-fiber-detection], with identity map on this discrete indexing space, the test square is a homotopy pullback exactly when all maps $F_q(D,\\phi):\\operatorname{Map}^{\\phi}(D,x)\\to\\prod_i\\operatorname{Map}^{\\rho_i\\phi}(D,v_i)$ are equivalences. This criterion applies to every $q$, without assumptions on its edges.",
+   "uses": [
+    "lem-coef-infinity-relative-cone-constant-test",
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-spaces-homotopy-fiber-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02X1",
+    "place": "GH Remark 3.1.4 (mapping-space fiber calculation); constant-source relative-limit test, Kerodon 02X1, Proposition 7.1.6.19."
+   }
+  },
+  {
+   "text": "If every $a_i$ is cocartesian, the second clause of [def-coef-monoidal-infinity-category] says exactly that every $F_q(D,\\phi)$ of Step 3 is an equivalence. Thus Step 3 makes every such specified cone a $p$-limit diagram. In particular this proves the relative-limit property for the exact-boundary cone $r$ constructed in Step 2; denote its apex by $y$ and its edges by $b_i:y\\to v_i$.",
+   "uses": [
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "GH Definition 3.1.3 and Remark 3.1.4, inert relative-limit condition."
+   }
+  },
+  {
+   "text": "Conversely suppose $q$ is a $p$-limit diagram, with apex $x$. Step 3 gives equivalences $F_q(D,1_{[n]})$ and $F_r(D,1_{[n]})$ for every $D$ over $[n]$, with the same target $P(D)=\\prod_i\\operatorname{Map}^{\\rho_i}(D,v_i)$. Surjectivity on components of $F_r(x,1)$ supplies an edge $h:x\\to y$ over $1_{[n]}$ such that $[b_i h]=[a_i]$ for every $i$. Similarly $F_q(y,1)$ supplies $k:y\\to x$ over $1_{[n]}$ with $[a_i k]=[b_i]$. Associativity of composition from [lem-coef-infinity-mapping-composition] gives $[a_i k h]=[a_i]$ and $[b_i h k]=[b_i]$. Injectivity on components of $F_q(x,1)$ and $F_r(y,1)$ now gives $[kh]=[1_x]$ and $[hk]=[1_y]$. The inverse-triangle criterion in that same cited statement makes $h$ an equivalence. No restriction of a limiting cone to a smaller boundary has been used.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Converse comparison of two tuple apices using the fiber criterion of GH Remark 3.1.4; explicit inverse calculation in the homotopy category."
+   }
+  },
+  {
+   "text": "By Step 1 the equivalence $h$ over $1_{[n]}$ is cocartesian. Fill the composable inner horn $(h,b_i)$. Its long edge $c_i$ is cocartesian by [lem-coef-infinity-cocartesian-composition-initiality]. Step 5 gives $[c_i]=[a_i]$. The composition statement [lem-coef-infinity-mapping-composition] says that precomposition depends only on this component class, so $c_i$ and $a_i$ induce the same homotopy class of mapping-space square. Hence the cocartesian mapping criterion [lem-coef-infinity-cocartesian-mapping-criterion] makes $a_i$ cocartesian as well. This proves the converse for every $i$.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Converse recognition of inert projections in the calculation supporting GH Proposition 3.4.5; composition and mapping criterion."
+   }
+  },
+  {
+   "text": "For $n=0$, Step 2 already supplies an apex over $[0]$ and no edge data are required. For every specified apex over $[0]$, the second clause of [def-coef-monoidal-infinity-category] applies with no chosen edges and says $\\operatorname{Map}^{\\phi}(D,x)\\simeq *$ for every $D,\\phi$. Thus the empty product case of Step 3 proves that every specified empty cone is a $p$-limit. All positive arities were covered above, and none of the arguments invoked ordinary limits, colimits, or presentability.",
+   "uses": [
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "GH Definition 3.1.3, nullary Segal condition and empty product of mapping-space fibers."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "def-coef-monoidal-infinity-category",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-infinity-relative-cone-constant-test",
+  "lem-coef-spaces-homotopy-fiber-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Ancestral finite-coefficient adjunction infrastructure, via the returned color-reconstruction split. Expanded tuple argument from GH Definitions 3.1.3 and 3.1.10, Remark 3.1.4, and Proposition 3.4.5; constant-test comparison from Kerodon 02X1. Online sources read, local archives WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "In a monoidal infinity category a cone over the discrete color projections is a relative limit if and only if its edges are cocartesian",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.CostructuredArrow.CreatesConnected.isLimitRaiseCone\", \"module\": \"Mathlib/CategoryTheory/Limits/Constructions/Over/Connected\", \"type\": \"{J : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} J] →\\n    {C : Type u} →\\n      [inst_1 : CategoryTheory.Category.{v, u} C] →\\n        {D : Type u_1} →\\n          [inst_2 : CategoryTheory.Category.{v_1, u_1} D] →\\n            {K : CategoryTheory.Functor C D} →\\n              [inst_3 : CategoryT\", \"doc\": \"Given a connected category $\\\\mathcal{J}$, an object $B$ in category $\\\\mathcal{D}$, and a functor $F: \\\\mathcal{J} \\\\to \\\\text{CostructuredArrow}(K, B)$, if a cone $c$ over the composition $F \\\\circ \\\\text{\"}\n  {\"name\": \"CategoryTheory.Functor.isLimitConeOfIsRightKanExtension\", \"module\": \"Mathlib/CategoryTheory/Functor/KanExtension/Basic\", \"type\": \"{C : Type u_1} →\\n  {H : Type u_3} →\\n    {D : Type u_4} →\\n      [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n        [inst_1 : CategoryTheory.Category.{v_3, u_3} H] →\\n          [inst_2 : CategoryTheory.Category.{v_4, u_4} D] →\\n            (F' : CategoryTheory.Functor D H) →\\n              {L : Cate\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{H}$, functors $F' : \\\\mathcal{D} \\\\to \\\\mathcal{H}$, $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and $F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, if $F$ is the right Kan\"}\n  {\"name\": \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"{X : SSet} →\\n  X.StrictSegal →\\n    {n : ℕ} →\\n      (s :\\n          CategoryTheory.Limits.Cone\\n            ((CategoryTheory.StructuredArrow.proj (Opposite.op (SimplexCategory.mk n))\\n                  (SimplexCategory.Truncated.inclusion 2).op).comp\\n              ((SimplexCategory.Truncated.inclusion 2\", \"doc\": \"Given a strict Segal space $ X $, a natural number $ n $, and a cone $ s $ over a diagram involving the truncated simplex category $ \\\\Delta_{\\\\leq 2} $, this function constructs an $ n $-simplex in $ X\"}\n  {\"name\": \"CategoryTheory.Functor.isLimitConeOfIsRightKanExtension_lift\", \"module\": \"Mathlib/CategoryTheory/Functor/KanExtension/Basic\", \"type\": \"∀ {C : Type u_1} {H : Type u_3} {D : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_3, u_3} H] [inst_2 : CategoryTheory.Category.{v_4, u_4} D]\\n  (F' : CategoryTheory.Functor D H) {L : CategoryTheory.Functor C D} {F : CategoryTheory.Functor C H}\\n  (α : \", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{H}$ and functors $F' : \\\\mathcal{D} \\\\to \\\\mathcal{H}$, $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, if $F$ is the right Kan \"}\n  {\"name\": \"CategoryTheory.CechNerveTerminalFrom.wideCospan.limitCone\", \"module\": \"Mathlib/AlgebraicTopology/CechNerve\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Limits.HasTerminal C] →\\n      (ι : Type w) →\\n        [CategoryTheory.Limits.HasFiniteProducts C] →\\n          [Finite ι] → (X : C) → CategoryTheory.Limits.LimitCone (CategoryTheory.CechNerveTerminalFrom.wideCosp\", \"doc\": \"In a category $\\\\mathcal{C}$ with finite products and a terminal object, for any finite set $\\\\iota$ and object $X$, the limit cone for the Čech nerve diagram of $X$ indexed by $\\\\iota$ is constructed as\"}\n  {\"name\": \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"∀ {X : SSet} (sx : X.StrictSegal) {n : ℕ}\\n  (s :\\n    CategoryTheory.Limits.Cone\\n      ((CategoryTheory.StructuredArrow.proj (Opposite.op (SimplexCategory.mk n))\\n            (SimplexCategory.Truncated.inclusion 2).op).comp\\n        ((SimplexCategory.Truncated.inclusion 2).op.comp X)))\\n  (x : s.pt) (φ \", \"doc\": \"For a strict Segal space $X$, a natural number $n$, a cone $s$ over a diagram involving the truncated simplex category $\\\\Delta_{\\\\leq 2}$, an element $x$ in the apex of the cone, and a morphism $\\\\phi: \"}\n  {\"name\": \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₁\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"∀ {X : SSet} (sx : X.StrictSegal) {n : ℕ}\\n  (s :\\n    CategoryTheory.Limits.Cone\\n      ((CategoryTheory.StructuredArrow.proj (Opposite.op (SimplexCategory.mk n))\\n            (SimplexCategory.Truncated.inclusion 2).op).comp\\n        ((SimplexCategory.Truncated.inclusion 2).op.comp X)))\\n  (x : s.pt) (i \", \"doc\": \"For a strict Segal space $X$, natural number $n$, cone $s$ over a diagram involving the truncated simplex category $\\\\Delta_{\\\\leq 2}$, and element $x$ in the apex of $s$, the compatibility condition as\"}\n  {\"name\": \"LightDiagram.isLimit\", \"module\": \"Mathlib/Topology/Category/LightProfinite/Basic\", \"type\": \"(self : LightDiagram) → CategoryTheory.Limits.IsLimit self.cone\", \"doc\": \"For a light diagram, the cone constructed by composing its diagram functor (from the opposite category of natural numbers to finite types) with the canonical embedding into profinite spaces satisfies \"}",
+   "query": "A monoidal infinity category over Delta opposite has an object over [n] with prescribed color projections and a relative limit cone exactly when the inert edges are cocartesian",
+   "results": "8 hits: SSet.StrictSegal.isPointwiseRightKanExtensionAt and related strict Segal/Kan declarations; none states a monoidal quasicategory or cocartesian inert tuple cone.",
    "date": "2026-10-17",
-   "verdict": "no match: ordinary category products/cocartesian arrows or strict Segal simplicial sets; not the asserted relative-limit/coherent-quasicategory result."
+   "verdict": "no match: strict Segal simplicial-set Kan extensions are unrelated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cocartesian inert projections characterize relative limit diagrams in a nonsymmetric infinity operad",
+   "results": "8 hits: CategoryTheory.Nerve.strictSegal, SSet.IsStrictSegal and ordinary IsStronglyCocartesian; none states the asserted relative-limit result.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category/strict Segal results do not cover the quasicategorical claim."
   },
   {
    "tool": "loogle",
-   "query": "SSet.StrictSegal",
-   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"SSet.StrictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" (X : SSet) : Type u\", \"doc\": \"A simplicial set `X` satisfies the strict Segal condition if its simplices\\nare uniquely determined by their spine.\"}\n  {\"name\": \"SSet.StrictSegal.isStrictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (sx : X.StrictSegal) : X.IsStrictSegal\", \"doc\": \"The unique existence of an inverse to `spine X n` forall `n : ℕ` implies\\nthe mere existence of such an inverse.\"}\n  {\"name\": \"SSet.StrictSegal.ofIsStrictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" (X : SSet) [X.IsStrictSegal] : X.StrictSegal\", \"doc\": \"Given `IsStrictSegal X`, a choice of inverse to `spine X n` for all `n : ℕ`\\ndetermines an inhabitant of `StrictSegal X`.\"}\n  {\"name\": \"CategoryTheory.Nerve.strictSegal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] : (CategoryTheory.nerve C).StrictSegal\", \"doc\": \"Simplices in the nerve of categories are uniquely determined by their spine.\\nIndeed, this property describes the essential image of the nerve functor.\"}\n  {\"name\": \"SSet.StrictSegal.ofCore\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (h : (n : ℕ) → X.StrictSegalCore n) : X.StrictSegal\", \"doc\": \"Given a simplicial set `X`, this constructs a `StrictSegal` structure for `X` from\\n`StrictSegalCore` structures for all `n : ℕ`.\"}\n  {\"name\": \"SSet.StrictSegal.spineToSimplex\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (self : X.StrictSegal) {n : ℕ} : X.Path n → X.obj (Opposite.op { len := n })\", \"doc\": \"The inverse to `spine X n`.\"}\n  {\"name\": \"SSet.StrictSegal.spine_spineToSimplex_apply\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (sx : X.StrictSegal) {n : ℕ} (f : X.Path n) : X.spine n (sx.spineToSimplex f) = f\", \"doc\": \"\"}\n  {\"name\": \"SSet.StrictSegal.spineEquiv\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (sx : X.StrictSegal) (n : ℕ) : X.obj (Opposite.op { len := n }) ≃ X.Path n\", \"doc\": \"The fields of `StrictSegal` define an equivalence between `X _⦋n⦌`\\nand `Path X n`.\"}\n  {\"name\": \"SSet.StrictSegal.spineToDiagonal\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (sx : X.StrictSegal) {n : ℕ} (f : X.Path n) : X.obj (Opposite.op { len := 1 })\", \"doc\": \"In the presence of the strict Segal condition, a path of length `n` can be\\n\\\"composed\\\" by taking the diagonal edge of the resulting `n`-simplex.\"}\n  {\"name\": \"SSet.StrictSegal.spineToSimplex_spine_apply\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (sx : X.StrictSegal) {n : ℕ} (Δ : X.obj (Opposite.op { len := n })) : sx.spineToSimplex (X.spine n Δ) = Δ\", \"doc\": \"\"}\n  {\"name\": \"SSet.StrictSegal.spine_spineToSimplex\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (self : X.StrictSegal) (n : ℕ) : X.spine n ∘ self.spineToSimplex = id\", \"doc\": \"`spineToSimplex` is a right inverse to `spine X n`.\"}\n  {\"name\": \"SSet.StrictSegal.spineToSimplex_spine\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.StrictSegal\", \"type\": \" {X : SSet} (self : X.StrictSegal) (n : ℕ) : self.spineToSimplex ∘ X.spine n = id\", \"doc\": \"`spineToSimplex` is a left inverse to `spine X n`.\"}",
+   "query": "SSet.StrictSegal, CategoryTheory.FiberedCategory.IsCocartesian",
+   "results": "0 hits; service reports unknown identifier CategoryTheory.FiberedCategory.IsCocartesian.",
    "date": "2026-10-17",
-   "verdict": "no match: ordinary category products/cocartesian arrows or strict Segal simplicial sets; not the asserted relative-limit/coherent-quasicategory result."
+   "verdict": "no match: query error/unknown identifier, no relevant declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsLimit",
+   "results": "12 hits including CategoryTheory.Limits.IsLimit and ordinary limit-cone API; none is a relative quasicategorical limit cone.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary category limits only."
   },
   {
    "tool": "grep",
-   "query": "relative.*limit|IsLimit",
-   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean\", \"line\": \"342\", \"text\": \"  isLimit' := ⟨evaluationJointlyReflectsLimits _ (fun ⟨⟨n⟩⟩ ↦ by\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean\", \"line\": \"343\", \"text\": \"    refine (isLimitMapConePullbackConeEquiv _ _).2\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean\", \"line\": \"344\", \"text\": \"      (IsPullback.isLimit ?_)\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean\", \"line\": \"482\", \"text\": \"  isLimit' := ⟨evaluationJointlyReflectsLimits _ (fun ⟨⟨d⟩⟩ ↦ by\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean\", \"line\": \"483\", \"text\": \"    refine (isLimitMapConePullbackConeEquiv _ _).symm\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean\", \"line\": \"484\", \"text\": \"      (IsPullback.isLimit ?_)\"}",
+   "query": "cocartesian|coCartesian|relative.?limit",
+   "results": "8 hits in Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean (ordinary IsCocartesian/IsStronglyCocartesian) and unrelated monoidal files.",
    "date": "2026-10-17",
-   "verdict": "no match: ordinary category products/cocartesian arrows or strict Segal simplicial sets; not the asserted relative-limit/coherent-quasicategory result."
+   "verdict": "no match: no quasicategorical relative-limit theorem.",
+   "directory": "Mathlib/CategoryTheory"
+  },
+  {
+   "tool": "grep",
+   "query": "StrictSegal|Monoidal",
+   "results": "25 hits in strict Segal and ordinary simplicial monoidal files; no monoidal infinity category over Delta opposite.",
+   "date": "2026-10-17",
+   "verdict": "no match: unrelated strict Segal/ordinary monoidal declarations.",
+   "directory": "Mathlib/AlgebraicTopology"
   },
   {
    "tool": "leansearch",
-   "query": "Segal fiber tuple cone over a discrete set with prescribed targets is a relative limit in a monoidal quasicategory",
-   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Limits.Types.Small.productLimitCone\", \"module\": \"Mathlib.CategoryTheory.Limits.Types.Products\", \"type\": \": Limits.LimitCone (Discrete.functor F)\", \"doc\": \"Given a small type $ J $ and a diagram $ F : \\\\mathcal{D}(J) \\\\to \\\\mathrm{Type}\\\\,u $ (where $ \\\\mathcal{D}(J) $ is the discrete category over $ J $), this constructs the limit cone for the diagram. The a\"}\n  {\"name\": \"CategoryTheory.Mon.limitConeIsLimit\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Internal.Limits\", \"type\": \"(F : J ⥤ Mon C) : IsLimit (limitCone F)\", \"doc\": \"Given a small category $\\\\mathcal{J}$ and a monoidal category $\\\\mathcal{C}$ with all $\\\\mathcal{J}$-shaped limits, for any functor $F: \\\\mathcal{J} \\\\to \\\\text{Mon}(\\\\mathcal{C})$, the cone constructed by a\"}\n  {\"name\": \"CategoryTheory.Mon.hasLimitsOfShape\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Internal.Limits\", \"type\": \"[HasLimitsOfShape J C] : HasLimitsOfShape J (Mon C)\", \"doc\": \"If a category $\\\\mathcal{C}$ has all limits of shape $J$, then the category of monoidal categories over $\\\\mathcal{C}$ also has all limits of shape $J$.\"}\n  {\"name\": \"CategoryTheory.Limits.productIsProduct\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Products\", \"type\": \"(f : β → C) [HasProduct f] : IsLimit (Fan.mk _ (Pi.π f))\", \"doc\": \"For a family of objects $ f : \\\\beta \\\\to C $ with a product in a category $ C $, the cone formed by the product object $ \\\\prod^\\\\circ f $ and its projection morphisms $ \\\\pi_b : \\\\prod^\\\\circ f \\\\to f(b) $ \"}\n  {\"name\": \"AddCommGrpCat.HasLimit.productLimitCone\", \"module\": \"Mathlib.Algebra.Category.Grp.Biproducts\", \"type\": \": Limits.LimitCone (Discrete.functor f)\", \"doc\": \"For any discrete diagram in the category of additive commutative groups (i.e., a family of objects indexed by a type with only identity morphisms), the product of the diagram's objects forms a limit c\"}\n  {\"name\": \"CategoryTheory.Limits.limitConeOfUnique\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Products\", \"type\": \"[Unique β] (f : β → C) : LimitCone (Discrete.functor f)\", \"doc\": \"Given a type $\\\\beta$ with a unique element and a function $f : \\\\beta \\\\to \\\\mathcal{C}$ to a category $\\\\mathcal{C}$, this constructs the limit cone for the discrete functor induced by $f$. The apex of t\"}\n  {\"name\": \"CategoryTheory.Mon.limitCone\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Internal.Limits\", \"type\": \"(F : J ⥤ Mon C) : Cone F\", \"doc\": \"For a functor $ F : \\\\mathcal{J} \\\\to \\\\text{Mon}\\\\,\\\\mathcal{C} $, the limit cone in the category of monoids in a monoidal category $ \\\\mathcal{C} $ is constructed by taking the limit of $ F $ in $ \\\\mathca\"}\n  {\"name\": \"CommMonCat.limitConeIsLimit\", \"module\": \"Mathlib.Algebra.Category.MonCat.Limits\", \"type\": \": IsLimit (limitCone F)\", \"doc\": \"Given a small category $\\\\mathcal{J}$ and a functor $F : \\\\mathcal{J} \\\\to \\\\text{CommMonCat}$, if the composition $F \\\\circ \\\\text{forget}_2$ admits a limit in the category of monoidal categories, then the\"}",
+   "query": "Monoidal infinity category inert projections form a relative limit cone with any prescribed tuple of colors",
+   "results": "{\"t\": \"2026-10-17T11:57:43Z\", \"tool\": \"leansearch\", \"query\": \"Monoidal infinity category inert projections form a relative limit cone with any prescribed tuple of colors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Mon.limitCone\", \"CategoryTheory.Mon.limitConeIsLimit\", \"CategoryTheory.Limits.LimitPresentation.π\", \"MonCat.HasLimits.limitCone\", \"CommMonCat.limitCone\", \"CategoryTheory.Mon.hasLimitsOfShape\", \"MonCat.limitπMonoidHom\", \"AddMonCat.HasLimits.limitConeIsLimit\"], \"digest\": \"0d1946c27d5823ee\"}",
    "date": "2026-10-17",
-   "verdict": "no match: ordinary category products/cocartesian arrows or strict Segal simplicial sets; not the asserted relative-limit/coherent-quasicategory result."
+   "verdict": "no match: all hits are ordinary category limit cones, monoids, or limit presentations; none concerns relative limits in a monoidal quasicategory."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-inert-operad-color-reconstruction",
@@ -78,5 +198,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-inert-relative-tuple-cone",
+  "worker": "stage1",
+  "summary": "Repaired the inherited attempt: seven steps construct exact prescribed targets by composing with fiber equivalences, identify relative limits using the existing constant-source test, and compare the two relative-limit apices by explicit inverse equations. Removed the false singleton-restriction argument and the incorrect use of a cartesian dual as a cocartesian criterion. No statement change, new nodes, or Mathlib leaves.",
+  "blueprint": "The inherited returned steps 3-4 in lem-coef-inert-operad-color-reconstruction below prop-coef-integral-exceptional-adjoint paragraph 2: exact tuple construction and recognition of its cocartesian color edges. The current ancestor proof itself is the finite coefficient mapping-complex adjunction; this is generic infrastructure below it."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q127-bffe29fd3",
+  "group": "Q127",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-bffe29fd3 (reviewer sub-agent of L); spot-checked: I read the item in full: all 7 steps and the full statements of all 8 dependencies (def-coef-monoidal-infinity-category, def-coef-infinity-relative-cone, def-coef-infinity-fibrations, mapping-composition, cocartesian-mapping-criterion, cocartesian-composition-initiality, relative-cone-constant-test, spaces-homotopy-fiber-detection). I also read the unit, the chapter record, the blueprint proof file (main-20261015) and the citers' steps 4/6/7. No new nodes, statement unchanged. All dependencies are in the item's own unit sk-prop-sf-biduality-general, so there are no tool_uses. Step 1 (an equivalence over an identity is cocartesian) is correct and acceptably elementary. Step 2 builds an exact-boundary cone: Segal quasi-inverse, then fiber equivalences, then an inner-horn fill over (rho_i,1), so the base is exactly rho_i, and the composition lemma makes each edge cocartesian; for discrete I the join is n edges at the apex. Step 3 applies the stated dual constant test; base hom-sets are discrete, so the path pullback is a disjoint union of fiber products and fiber detection gives a fiberwise criterion. Step 4 is the definition's second clause. Steps 5-6 prove the converse correctly: a pi0 inverse argument shows h is an equivalence, then the composite c_i is cocartesian and in the same component as a_i over the same base. Step 7 handles n=0 with the empty product. Small cases checked: n=0 (Hom([m],[0]) has m+1 points), n=1 (an edge over an identity is p-cartesian iff cocartesian iff an equivalence) and n=2. Duplicate candidates checked; none states the item: inert-color-coslice-components, relative-cone-equivalence, cocartesian-cone-limit-section-test, left-cone-restriction-cocartesian, symmetric-relative-product-comparison. Gepner-Haugseng is not available locally, so it is WANTED and proof_origin=agent is correct. Not a target node. Non-blocking note: the report's worker and review sections are stale; they describe a removed 4-step singleton-restriction argument. The node's split_report is accurate. No fixes written."
  }
 }

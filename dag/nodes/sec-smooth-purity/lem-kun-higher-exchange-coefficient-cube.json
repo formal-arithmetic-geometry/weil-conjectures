@@ -18,9 +18,80 @@
   "lem-kun-bc-map-on-cohomology",
   "lem-weil-pbc-derived-inverse-image-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $K_0=F_0[0]$ and $K_1=F_1[0]$. Termwise inverse image identifies $a^{-1}K_0$ with $(a^{-1}F_0)[0]$, so $\\phi$ gives $\\widehat\\phi:a^{-1}K_0\\to K_1$. All these objects are bounded below. Apply [lem-kun-derived-exchange-cube] to the given eight schemes, their named arrows, and $K_0$. Its four comparison equalities are exactly the four equalities in the hypotheses. With $E_b,P,Q$ denoting the derived exchanges, and $\\chi^D:y^{-1}e_0^{-1}\\cong e_1^{-1}a^{-1}$, it gives\n$$E_{1,a^{-1}K_0}\\circ f_1^{-1}P_{K_0}=Rh_{1,*}(\\chi^D_{K_0})\\circ Q_{e_0^{-1}K_0}\\circ x^{-1}E_{0,K_0}.$$\nThe source comparison $x^{-1}f_0^{-1}\\cong f_1^{-1}s^{-1}$ is included on the left. The cited cube theorem requires only commuting faces, so no cartesianness of a comparison face is used.",
+   "uses": [
+    "def-weil-pbc-derived-inverse-image",
+    "lem-kun-derived-exchange-cube"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYM, lemma-relative-colimit-general, first two proof paragraphs; Tag 0EZT, lemma-base-change-Rf-star-colim, final comparison; formal degreewise coefficient compatibility"
+   }
+  },
+  {
+   "text": "By [def-kun-commutative-derived-exchange], $E_1:f_1^{-1}Rg_{1,*}\\to Rh_{1,*}e_1^{-1}$ is a natural transformation. Its naturality equation at $\\widehat\\phi$ is\n$$E_{1,K_1}\\circ f_1^{-1}Rg_{1,*}(\\widehat\\phi)=Rh_{1,*}(e_1^{-1}\\widehat\\phi)\\circ E_{1,a^{-1}K_0}.$$\nPrecompose with $f_1^{-1}P_{K_0}$ and substitute step 1. Associativity gives\n$$E_{1,K_1}\\circ f_1^{-1}Rg_{1,*}(\\widehat\\phi)\\circ f_1^{-1}P_{K_0}=Rh_{1,*}(e_1^{-1}\\widehat\\phi)\\circ Rh_{1,*}(\\chi^D_{K_0})\\circ Q_{e_0^{-1}K_0}\\circ x^{-1}E_{0,K_0}.$$\nOnly naturality and composition have been used; $\\widehat\\phi$ is not inverted.",
+   "uses": [
+    "def-kun-commutative-derived-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYM, lemma-relative-colimit-general, first two proof paragraphs; Tag 0EZT, lemma-base-change-Rf-star-colim, final comparison; formal degreewise coefficient compatibility"
+   }
+  },
+  {
+   "text": "Use the natural exact-functor cohomology isomorphism of [lem-weil-pbc-exact-functor-complex-cohomology] for each inverse image. Together with the termwise factorization in [def-weil-pbc-derived-inverse-image], it gives $\\lambda_{u,L}:\\mathcal H^q(u^{-1}L)\\cong u^{-1}\\mathcal H^q(L)$ on derived categories: apply part (2) of [lem-weil-pbc-localization-universal-property] to the cohomology functors and their isomorphism on complexes. They invert quasi-isomorphisms by the definition of cohomology and exactness. Thus $\\lambda$ is natural for derived morphisms as well. These identifications respect the composition comparisons of [lem-weil-pbc-derived-inverse-image-composition]. Indeed on a representative complex both paths act on cycles by the termwise sheaf composition map and then pass to the quotient by boundaries; the cycle inclusion and cohomology projection compatibility in the exact-functor lemma gives equality. Part (3) of the localization lemma gives the same equality on derived categories. In particular, $\\mathcal H^q(\\chi^D_L)$ is the sheaf comparison $\\chi$ after these identifications.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-derived-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYM, lemma-relative-colimit-general, first two proof paragraphs; Tag 0EZT, lemma-base-change-Rf-star-colim, final comparison; formal degreewise coefficient compatibility"
+   }
+  },
+  {
+   "text": "Apply the functor $\\mathcal H^q$ to step 2 and use step 3. By [def-weil-pbc-direct-image], $\\mathcal H^q(Ru_*G[0])=R^qu_*G$, also on coefficient morphisms by functoriality. The cohomology of $P_{K_0}$ is $P^q_{F_0}$ and that of $Q_{e_0^{-1}K_0}$ is $Q^q_{e_0^{-1}F_0}$, precisely their definitions in the statement. Each square indexed by $b$ is cartesian, and for it $E_b$ is the exchange $\\Ex_{\\square_b}$ of [def-weil-pbc-derived-exchange]. Indeed both are the mate of a square isomorphism under the same adjunctions, by the same unit-isomorphism-counit formula. The sheaf-level $\\theta_{\\square_b}$ of [def-weil-pbc-cartesian-square] is the identification of both sides with the inverse image along the common composite, i.e. $c^{-1}\\circ c$. Hence the component of $\\theta^D_{\\square_b}$ [def-weil-pbc-derived-square-iso] at $QK^\\bullet$ is the class of the termwise $c^{-1}\\circ c$. By clause (2) of [lem-weil-pbc-derived-inverse-image-composition], that is also the component of the commutative-square $\\theta$. Part (3) of [lem-weil-pbc-localization-universal-property] makes the two isomorphisms equal, hence also their mates. Therefore [lem-kun-bc-map-on-cohomology] identifies $\\mathcal H^q(E_{0,K_0})$ with $\\beta_{0,F_0}$ and $\\mathcal H^q(E_{1,K_1})$ with $\\beta_{1,F_1}$. The other three factors become $f_1^{-1}(R^qg_{1,*}\\phi)$, $R^qh_{1,*}(e_1^{-1}\\phi)$ and $R^qh_{1,*}(\\chi_{F_0})$. Hence the equality obtained is exactly $\\beta_{1,F_1}\\circ U_\\phi=V_\\phi\\circ x^{-1}\\beta_{0,F_0}$. Cartesianness was used only for the two usual-map identifications, and no finiteness, torsion or isomorphism hypothesis was used.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "lem-kun-bc-map-on-cohomology",
+    "def-weil-pbc-derived-exchange",
+    "def-weil-pbc-cartesian-square",
+    "def-weil-pbc-derived-square-iso",
+    "lem-weil-pbc-derived-inverse-image-composition",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYM, lemma-relative-colimit-general, first two proof paragraphs; Tag 0EZT, lemma-base-change-Rf-star-colim, final comparison; formal degreewise coefficient compatibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-inverse-image",
+  "lem-kun-derived-exchange-cube",
+  "def-kun-commutative-derived-exchange",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "def-weil-pbc-direct-image",
+  "lem-kun-bc-map-on-cohomology",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-square-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EYM, lemma-relative-colimit-general, first two proof paragraphs; Tag 0EZT, lemma-base-change-Rf-star-colim, final comparison; formal degreewise coefficient compatibility"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +127,45 @@
    "results": "Actual msearch hits: Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean, Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean, Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean, Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean, Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean",
    "date": "2026-10-17",
    "verdict": "no match: module pullback coherence, unrelated cohomology or ordinary square infrastructure; not the degreewise etale exchange identity with a coefficient morphism"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*(cube|naturality)|exchange.*cube",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Actual msearch hits: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary naturality and pullback comparisons are ingredients, not the degreewise etale cube with a coefficient morphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of etale higher direct image base change under commuting cubes and coefficient morphisms",
+   "results": "Actual msearch hits: CategoryTheory.CatCommSq.iso_hom_naturality_assoc, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, CategoryTheory.CatCommSq.iso_hom_naturality, CategoryTheory.Functor.IsCoverDense.Types.naturality_assoc, PresheafOfModules.Hom.naturality, CategoryTheory.TwoSquare.lanBaseChange, Algebra.Etale.baseChange, CategoryTheory.TwoSquare.isIso_lanBaseChange_app",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary naturality and pullback comparisons are ingredients, not the degreewise etale cube with a coefficient morphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct image base change commutes with a cube of commuting scheme squares and an arbitrary coefficient sheaf morphism",
+   "results": "Actual msearch hits: SheafOfModules.pullback_assoc, AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, SheafOfModules.pushforwardNatTrans_comp",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary naturality and pullback comparisons are ingredients, not the degreewise etale cube with a coefficient morphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a derived exchange natural transformation is compatible with a morphism between pullback coefficient sheaves",
+   "results": "Actual msearch hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary naturality and pullback comparisons are ingredients, not the degreewise etale cube with a coefficient morphism"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-kun-0ezt",
@@ -76,5 +182,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-kun-higher-exchange-coefficient-cube",
+  "worker": "stage1",
+  "summary": "Derived the degreewise coefficient cube from the existing general derived cube, naturality at the arbitrary coefficient morphism, and natural exact-inverse-image cohomology. Kept the statement and all hypotheses. No new nodes.",
+  "blueprint": "lem-kun-0ezt: canonical-map comparison in the deduction from Tag 0EYM, including coefficient transitions and degree-q identification; current main-20261015 node has no separate proof text.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic exact-functor cohomology comparison, natural on complexes and compatible with cycle inclusions and quotient projections; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic localization tool to descend the natural cohomology comparison and its composition compatibility; the unit has no localization statement."
+   },
+   {
+    "node": "lem-weil-pbc-derived-inverse-image-composition",
+    "why": "Generic derived inverse-image composition isomorphisms and their termwise description (clause 2), used to identify chi on cohomology and to identify the commutative-square exchange with the cartesian derived exchange; the unit has no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-derived-inverse-image-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-80f7b982c",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-80f7b982c (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 4 steps, every cited statement, the parent lem-kun-0ezt, Stacks 0EYM (how the map is built) and 0EZT (proof of (2)), Remarks 07A7 and 0E47 in sites-cohomology, and the main-20261015 0ezt proof, which says no separate proof is given. The statement typechecks and the exchange orientations are right. It is exactly what 0ezt uses, with the transition cube and the projection cube and a coefficient morphism that need not be invertible. I tested it on q=0, on the all-identity cube, on phi=0, and on F_0=0 or F_1=0, and it holds in each case. It is not a restatement of the derived cube. Steps 1 to 3 are correct: the cube is applied with its exact face equalities, step 2 is plain naturality, and step 3 makes the cohomology identification natural through localization (2) and (3) and composition clause (2). C4/E5 fault in step 4, fixed: the step applied lem-kun-bc-map-on-cohomology, which is about Ex_square from def-weil-pbc-derived-exchange, to the cube's E_b, which are commutative-square mates. It never said why the two are the same. I added that argument. theta_square is c^{-1}∘c along fg'=gf' (blueprint_update of def-weil-pbc-cartesian-square, and lem-weil-pbc-square-iso-pasting). Its derived class therefore equals the commutative theta by composition clause (2) and localization (3), and the mates of equal isomorphisms are equal. This is the same repair made to lem-kun-0eym step 5. I added the matching uses and proof_deps. I also declared the tool use lem-weil-pbc-derived-inverse-image-composition, which was off-route and undeclared. Accepted tool uses: exact-functor cohomology, localization universal property, inverse-image composition. No new nodes, no SGA, no cycle. Duplicate search found none. The corrected item is at fixes/dag/nodes/sec-smooth-purity/lem-kun-higher-exchange-coefficient-cube.json.; 1 file(s) fixed by the reviewer"
  }
 }

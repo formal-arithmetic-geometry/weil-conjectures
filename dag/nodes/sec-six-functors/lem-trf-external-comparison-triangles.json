@@ -19,9 +19,133 @@
   "def-weil-triangulated-category",
   "lem-weil-pbc-inverse-image-composition-module-linear"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Regard each small étale topos as ringed by its constant sheaf $A_T$. By [prop-weil-pbc-inverse-image-modules-exact], for every scheme map $u$ the map $u^{-1}A_T\\to A_{T'}$ is an isomorphism and module pullback is canonically the exact module inverse image. Apply [lem-weil-pbc-exact-functor-derived-factorization] to this exact functor: its derived functor is termwise inverse image, is triangulated, and its canonical shift is the identity on each term. By [lem-weil-pbc-exact-functor-derived-functor] this same functor computes $Lu^*$. Thus constant-coefficient specializations of ringed-topos derived pullbacks use exactly the inverse images and canonical shifts of the statement.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04JC (lemma-flat-pullback-exact); derived.tex Tag 015F (lemma-right-derived-exact-functor)."
+   }
+  },
+  {
+   "text": "Smallness of the site supplies K-injective resolutions for every module complex by [prop-pur-kinjective-resolutions-exist]. Consequently [lem-pc-right-derived-functor-triangulated], applied to the additive module direct image, makes $Rh_*$ an unbounded triangulated functor with its canonical derived shift. Tensor with any fixed derived object is triangulated in either variable by [lem-kun-derived-tensor-triangulated]. Apply [lem-weil-pbc-triangulated-functor-composite] to the pullbacks of Step 1, these tensor functors and $Rh_*$. It follows that $F$, $G$, and the intermediate functors $H(Q)=Rh_*E\\otimes_A^L K_Q$ and $J(Q)=Rh_*(E\\otimes_A^Lh^{-1}K_Q)$ are triangulated, where $E=p_X^*L$ and $K_Q=p_Z'^*Q$. Their shifts are the canonical composite shifts. Here $F,G,H,J$ may first be defined on all of $D(Z_{\\mathrm{et}},A)$; restriction to the strictly full triangulated subcategory $D^+$ of [def-weil-pbc-derived-categories] retains this property.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-kun-derived-tensor-triangulated",
+    "lem-weil-pbc-triangulated-functor-composite",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A5 (section-unbounded); Tag 06YU (definition-derived-tor and preceding construction); derived.tex Tag 05SE (proposition-derived-functor) and Tag 014Y (lemma-composition-exact)."
+   }
+  },
+  {
+   "text": "Put $U=p_Y^*Rf_*L$, $V=Rh_*E$ and $e=\\operatorname{Ex}_{\\square,L}:U\\to V$, the single morphism supplied by [def-kun-unbounded-exchange]. Define $a_Q=e\\otimes1_{K_Q}:F(Q)\\to H(Q)$, $b_Q=\\mathrm{PF}_h(E,K_Q):H(Q)\\to J(Q)$, and $d_Q=Rh_*(1_E\\otimes c_Q):J(Q)\\to G(Q)$. The formula of [def-kun-projection-formula-map] and the module composition isomorphism of [lem-weil-pbc-inverse-image-composition-module-linear] show that the comparison in the statement is precisely $\\alpha_Q=d_Qb_Qa_Q$. This is its specified factorization, with $e$ held fixed as $Q$ varies.",
+   "uses": [
+    "def-kun-unbounded-exchange",
+    "def-kun-projection-formula-map",
+    "lem-weil-pbc-inverse-image-composition-module-linear"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-kunneth-star/lem-trf-ordinary-kunneth.proof.md",
+    "place": "Displayed exchange/projection composite immediately before Step 1; Step 2, “Both sides of the comparison are exact in Q”."
+   }
+  },
+  {
+   "text": "The canonical second-input shift $t_{B,C}:B\\otimes_A^L C[1]\\xrightarrow{\\sim}(B\\otimes_A^LC)[1]$ multiplies the summand with first degree $p$ by $(-1)^p$ for the total tensor differential in [def-kun-derived-tensor]. For a degree-zero chain map $v:B\\to B'$, both $t_{B',C}(v\\otimes1_{C[1]})$ and $(v\\otimes1_C)[1]t_{B,C}$ act on that summand by $(-1)^p(v^p\\otimes1)$. This equality is preserved under composition and inversion of quasi-isomorphisms, so [lem-weil-pbc-site-derived-tensor-descent] gives it for every derived morphism $v$, in particular $v=e$. Termwise inverse image commutes with shift by Step 1. Substituting $C=K_Q$ proves $s_Ha_{Q[1]}=a_Q[1]s_F$. Bifunctoriality in the cited descent statement also proves naturality of $a$ in $Q$.",
+   "uses": [
+    "def-kun-derived-tensor",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor and the construction preceding it), with the signed total tensor; Tag 0G7D (lemma-factor-through-K-flat)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-projection-mate-exact] to $h$, the constant sheaves of rings $A$, and the fixed object $E$. Its pullback is the exact $h^{-1}$ of Step 1. Its transformation is exactly $\\mathrm{PF}_h(E,-)$: both it and [def-kun-projection-formula-map] are adjoint to $(\\varepsilon_{h,E}\\otimes1)\\mu_{Rh_*E,-}$, with the same canonical pullback tensor comparison and derived adjunction. The cited theorem asserts naturality and shift compatibility for this map for arbitrary unbounded module complexes. Precomposing with $p_Z'^*$ and using [lem-weil-pbc-commshift-nattrans-comp-whisker](iii) therefore gives $s_Jb_{Q[1]}=b_Q[1]s_H$, as well as naturality of $b$. No invertibility assertion for $b$ is used.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "def-kun-projection-formula-map",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56 (equation-projection-formula-map), Tag 07A4 (lemma-pullback-tensor-product), Tag 07A6 (lemma-adjoint); the shift-compatible mate is the existing ringed-projection-mate-exact lemma."
+   }
+  },
+  {
+   "text": "The isomorphism $c:h^{-1}p_Z'^{-1}\\xrightarrow{\\sim}p_Z^{-1}$ of [lem-weil-pbc-inverse-image-composition-module-linear] is natural on module sheaves. Applied termwise to a complex $C$, its component in degree $q$ is $c_{C^q}$. Hence at $C[1]$ it is $c_{C^{q+1}}$, exactly the degree-$q$ component of $c_C[1]$; naturality for the differential proves the chain-map equality. These exact inverse images descend with those same identity shifts by [lem-weil-pbc-exact-functor-derived-factorization], so $c_{Q[1]}=c_Q[1]$ under the canonical comparisons. Tensoring on the left by $E$ preserves this equality: on the summand of first degree $p$ either order applies $c$ in the second factor and the scalar $(-1)^p$. The bifunctor descent in [lem-weil-pbc-site-derived-tensor-descent] gives the same identity on derived objects. Postcomposing by $Rh_*$ and [lem-weil-pbc-commshift-nattrans-comp-whisker](ii) yield $s_Gd_{Q[1]}=d_Q[1]s_J$. Naturality of $c$, tensor and $Rh_*$ gives naturality of $d$.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition-module-linear",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8 (lemma-push-pull-composition-modules); termwise comparison on complexes; sites-cohomology.tex Tag 06YU (definition-derived-tor)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-commshift-nattrans-comp-whisker](i), the three natural transformations of Steps 4–6 compose to a natural shift-compatible transformation. Explicitly, $s_G\\alpha_{Q[1]}=s_Gd_{Q[1]}b_{Q[1]}a_{Q[1]}=d_Q[1]s_Jb_{Q[1]}a_{Q[1]}=d_Q[1]b_Q[1]s_Ha_{Q[1]}=d_Q[1]b_Q[1]a_Q[1]s_F=\\alpha_Q[1]s_F$. These are the canonical $s_F,s_G$ of Step 2, so this proves the claimed shift equation for the actual composite.",
+   "uses": [
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014V (definition-exact-functor-triangulated-categories), paragraph defining a 2-morphism of triangulated functors; composition of compatible natural transformations."
+   }
+  },
+  {
+   "text": "For a distinguished triangle $Q_1\\xrightarrow{u}Q_2\\xrightarrow{v}Q_3\\xrightarrow{w}Q_1[1]$, its image triangles under $F,G$ are distinguished by Step 2. Naturality of $\\alpha$ gives the first two squares. The connecting square is the equality $\\alpha_{Q_1}[1]\\,s_F\\,F(w)=s_G\\,\\alpha_{Q_1[1]}F(w)=s_G\\,G(w)\\alpha_{Q_3}$, using Step 7 and naturality at $w$. This is exactly the third square in the definition of a morphism of triangles [def-weil-triangulated-category]. Thus the three specified components give the required morphism of distinguished triangles.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0144 (definition-triangle), morphisms of triangles; Tag 014V (definition-exact-functor-triangulated-categories), image triangle connecting arrow."
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-kun-derived-tensor-triangulated",
+  "lem-weil-pbc-triangulated-functor-composite",
+  "def-weil-pbc-derived-categories",
+  "def-kun-unbounded-exchange",
+  "def-kun-projection-formula-map",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "def-kun-derived-tensor",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-kunneth-star/lem-trf-ordinary-kunneth.proof.md",
+  "place": "Step 2, exactness in Q; explicit sign and connecting-square calculations using Stacks and the existing ringed-topos projection-mate lemma."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +181,45 @@
    "results": "CategoryTheory.MorphismProperty.IsCompatibleWithTriangulation.compatible_with_triangulation; CategoryTheory.Pretriangulated.productTriangle_mor₂; CochainComplex.mappingCone.triangleMap_hom₁; CategoryTheory.Pretriangulated.productTriangle_obj₂; CategoryTheory.ObjectProperty.instIsCompatibleWithTriangulationTrWOfIsTriangulatedOfIsTriangulated; CategoryTheory.Pretriangulated.productTriangle.congr_simp; CategoryTheory.Pretriangulated.productTriangle; CategoryTheory.Pretriangulated.isoTriangleOfIso₁₂",
    "date": "2026-10-17",
    "verdict": "no match: generic triangle constructions only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The external tensor base change and direct image projection comparison is a natural transformation of exact functors commuting with shifts",
+   "results": "CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.mapExactFunctor_smul; CategoryTheory.Tor'_obj_map; CategoryTheory.Tor_map; CategoryTheory.Tor'_map_app; CategoryTheory.Tor'; CategoryTheory.Tor; CategoryTheory.LocalizerMorphism.natTransCommShift_hom",
+   "date": "2026-10-17",
+   "verdict": "no match: generic adjunction, exact-functor, Tor or shift APIs; none states the external geometric composite."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived base change exchange followed by the projection formula map is compatible with shifts in the external tensor factor",
+   "results": "LinearMap.rTensor_baseChange; LinearMap.liftBaseChange_tmul; LinearMap.baseChangeHom; TensorProduct.AlgebraTensorModule.distribBaseChange; LinearMap.baseChange_tmul; LinearEquiv.baseChange; IsBaseChange.of_comp; LinearMap.BilinForm.baseChange",
+   "date": "2026-10-17",
+   "verdict": "no match: results concern ordinary module extension of scalars, not the geometric derived comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift, CategoryTheory.Adjunction",
+   "results": "CategoryTheory.Adjunction.CommShift.commShift_counit; CategoryTheory.Adjunction.CommShift.commShift_unit; CategoryTheory.Adjunction.CommShift.mk'; CategoryTheory.Adjunction.CommShift.mk",
+   "date": "2026-10-17",
+   "verdict": "no match: unit and counit CommShift APIs require the compatibility data and do not state this comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*CommShift|CommShift.*projection|external.*triangle|triangle.*external",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits in Mathlib/CategoryTheory for the geometric projection/external triangle patterns."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tensor product with a fixed morphism and a projection formula mate commute with the shift in the other variable and induce morphisms of distinguished triangles",
+   "results": "CategoryTheory.Adjunction.IsTriangulated.commShift; CategoryTheory.Functor.instCommShiftTriangleMapTriangleInt; CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₁; CategoryTheory.Triangulated.SpectralObject.mapTriangulatedFunctor_δ'; CategoryTheory.Triangulated.SpectralObject.mapTriangulatedFunctor_δ; CategoryTheory.Functor.mapTriangleCommShiftIso; CategoryTheory.Adjunction.IsTriangulated; CategoryTheory.Adjunction.IsTriangulated.mk'",
+   "date": "2026-10-17",
+   "verdict": "no match: generic adjunction, exact-functor, Tor or shift APIs; none states the external geometric composite."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-ordinary-kunneth",
@@ -77,5 +236,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-external-comparison-triangles",
+  "worker": "stage1",
+  "summary": "Expanded the exactness-in-Q assertion into eight steps: exact module pullbacks and unbounded direct image, tensor exactness, the actual three-factor comparison, the signed tensor square for the fixed exchange morphism, the existing ringed-topos projection-mate shift theorem, termwise pullback-composition compatibility, and the explicit connecting square. Statement retained; no new nodes and no Lean edits or compiler calls.",
+  "blueprint": "Realizes lem-trf-ordinary-kunneth.proof.md Step 2, sentence “Both sides of the comparison are exact in Q”, for the displayed exchange/projection composite preceding Step 1. Does not use the coefficient-transport or invertibility assertions of that parent.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Identifies constant-coefficient ringed pullback with exact module inverse image; a generic coefficient tool."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Supplies unbounded module K-injective resolutions on the small sites; no geometric route replacement."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic unbounded right-derived exactness; the bounded-below abelian-sheaf exchange lemma is insufficient here."
+   },
+   {
+    "node": "lem-weil-pbc-triangulated-functor-composite",
+    "why": "Generic composition of exact functors with the specified composite shifts."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic bifunctor localization and descent of the explicit tensor sign calculation."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic ringed-topos projection mate shift theorem, specialized to constant A; supplies the ordinary direct-image map without finite or proper assumptions."
+   },
+   {
+    "node": "lem-weil-pbc-commshift-nattrans-comp-whisker",
+    "why": "Generic composition and whiskering of shift-compatible transformations."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Identifies the termwise derived functor of the exact constant-coefficient inverse image with the derived pullback Lu^*; a generic derived-functor tool, not a geometric route step."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition-module-linear",
+    "why": "Supplies the module-linear inverse-image composition isomorphism c for p_Z=p'_Z h used in the comparison; a generic sheaf-functoriality tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-triangulated-functor-composite",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-inverse-image-composition-module-linear"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-c1934e180",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-c1934e180 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement, plus the full proof of lem-weil-pbc-ringed-projection-mate-exact. Source: lem-trf-ordinary-kunneth.proof.md (main-20261015), the displayed exchange/projection composite and Step 2 'exact in Q'. The parent DAG node's step 6 uses this item with exactly this scope (bounded flat L, bounded Q in D^+). The statement is a formal shift/triangle compatibility with no invertibility claim, and it is true. Base-change square: def-kun-unbounded-exchange with (f,f',g,g')=(f,h,p_Y,p_X) gives p_Y^{-1}Rf_*L -> Rh_*p_X^{-1}L. The coefficient category is constant-A D(T_et,A) throughout, and the direction of c (h^{-1}p'^{-1} -> p_Z^{-1}) agrees with the module-linear composition node. Step 4: I recomputed the (-1)^p second-variable shift as a chain map and it agrees with the convention in step 2 of the projection-mate node. Step 5: mu and the inverse of the lem-kun-inverse-image-monoidal comparison are the same termwise isomorphism in the same direction, both adjunctions are the canonical derived one, and the constant-A hypotheses hold. Steps 6–8: the termwise c shift identity, the four-equality composition and the explicit connecting square are correct; no unspecified TR3 fill-in is used. Small cases checked: Q=0, Q=M[0] vs M[1] signs, f=id, Z=Spec k. There are no new nodes, no duplicates (lem-sf-supported-external-triangle-comparison is a different statement), no cycle and no SGA citation. FIX: two off-route split statements, lem-weil-pbc-exact-functor-derived-functor and lem-weil-pbc-inverse-image-composition-module-linear, were used without a tool_uses declaration. I appended both to split_report.tool_uses in fixes/dag/nodes/sec-six-functors/lem-trf-external-comparison-triangles.json; nothing else changed. I accept all nine tool uses as generic black boxes. The report mentions a citations.json that is not in the delivered commit; this is not a DAG fault.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -12,9 +12,80 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-spaces-small-colimits-universe"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-coef-spaces-small-colimits-universe], the $\\mathcal U$-small shape $I$ and the diagram $H:I\\to\\mathcal S_{\\mathcal U}$ admit a colimit cocone $\\mu:H\\to\\Delta_I Q$ with $Q\\in\\mathcal S_{\\mathcal U}$. The same statement says that $\\iota\\mu$ is colimiting in $\\mathcal S_{\\mathcal U\\prime}$. This uses its assertion about the image of the actual cocone, not merely the existence of an equivalent apex. All the cocone categories below are formed in the further ambient universe specified in the statement.",
+   "uses": [
+    "lem-coef-spaces-small-colimits-universe"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, foundational universe comparison extracted in lem-coef-infinity-presentable-presheaf-presentation. Agent argument from the cited colimit and coherent cocone statements."
+   }
+  },
+  {
+   "text": "By [def-cbc-enhanced-diagrams-cones], $\\mu$ is initial in the cocone category of $H$. Its mapping space to $\\lambda$ is therefore contractible, hence nonempty. Choose a cocone morphism $u:\\mu\\to\\lambda$; its apex is the induced comparison $\\alpha:Q\\to M$, and its compatibility data give $\\alpha\\mu\\simeq\\lambda$. The same argument applies to every choice of induced comparison together with its cocone compatibility.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, foundational universe comparison extracted in lem-coef-infinity-presentable-presheaf-presentation. Agent argument from the cited colimit and coherent cocone statements."
+   }
+  },
+  {
+   "text": "The fully faithful $\\iota$ of [lem-coef-spaces-small-colimits-universe] reflects equivalence of $\\alpha$ directly from [def-cbc-enhanced-diagrams-cones] and [lem-coef-infinity-mapping-composition]. By the latter, components of right-pinched mapping spaces are the morphisms of the homotopy category, a $2$-simplex with edges $u,v,w$ gives $[v][u]=[w]$, and an edge is an equivalence exactly when its class is invertible; since $\\iota$ is a simplicial map it carries $2$-simplices and degenerate edges to such, so its maps on components form a functor of homotopy categories. If $\\iota\\alpha$ has inverse $b$, the bijection on components of $\\operatorname{Map}(M,Q)\\to\\operatorname{Map}(\\iota M,\\iota Q)$ lifts the component of $b$ to some $\\beta:M\\to Q$. The inverse equations for $b$, and injectivity on components of the mapping spaces for $(Q,Q)$ and $(M,M)$, give $[\\beta\\alpha]=[1_Q]$ and $[\\alpha\\beta]=[1_M]$. Thus $\\beta$ and these homotopies witness that $\\alpha$ is an equivalence. Conversely, applying the coherent functor $\\iota$ to an inverse and its two triangle witnesses preserves them, so it preserves equivalences. This proves the stated if and only if without any colimit assumption on $\\iota\\lambda$.",
+   "uses": [
+    "lem-coef-spaces-small-colimits-universe",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Lecture II, basic facts (2)-(3), printed p.14: morphisms in the homotopy category and the inverse criterion for equivalences; the component-lifting argument is supplied here."
+   }
+  },
+  {
+   "text": "Now suppose $\\iota\\lambda$ is colimiting. By step 1, both $\\iota\\mu$ and $\\iota\\lambda$ are initial in the larger cocone category. The dual cocone and initial-object assertions of [lem-cbc-enhanced-functor-cone-calculus] apply to this category and to the arbitrary shape $I$. Choose a cocone morphism $v:\\iota\\lambda\\to\\iota\\mu$. The composites $v(\\iota u)$ and $(\\iota u)v$ are homotopic to the respective identities: each lies with that identity in a contractible endomorphism mapping space of an initial object. The apex projection is a simplicial map, so it carries these equations of component classes to $[\\iota\\alpha]$ and the class of the apex of $v$ being mutually inverse; by [lem-coef-infinity-mapping-composition] this makes $\\iota\\alpha$ an equivalence edge. Hence $\\iota\\alpha$ is an equivalence. Step 3 now implies that $\\alpha$ is an equivalence in $\\mathcal S_{\\mathcal U}$.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, foundational universe comparison extracted in lem-coef-infinity-presentable-presheaf-presentation. Agent argument from the cited colimit and coherent cocone statements."
+   }
+  },
+  {
+   "text": "It remains to verify the given small cocone itself. For any $Y\\in\\mathcal S_{\\mathcal U}$ its universal-arrow map factors, up to the homotopy $\\alpha\\mu\\simeq\\lambda$ of step 2, as\n$$\\operatorname{Map}(M,Y)\\xrightarrow{\\alpha^*}\\operatorname{Map}(Q,Y)\\xrightarrow{\\mu^*}\\operatorname{Map}_{\\operatorname{Fun}(I,\\mathcal S_{\\mathcal U})}(H,\\Delta_IY).$$\nHere precomposition maps are the canonical composition classes of [lem-coef-infinity-mapping-composition] in $\\mathcal S_{\\mathcal U}$ and in $\\operatorname{Fun}(I,\\mathcal S_{\\mathcal U})$; they depend only on component classes and are associative and unital up to homotopy, and $\\Delta_I$, a simplicial map, respects them up to homotopy, because the spaces $V$, the maps $\\theta,\\ell$ there and the comparison $j$ of [lem-coef-infinity-pinch-comparison] are natural under simplicial functors. The first map is an equivalence: precomposition with an inverse $\\beta$ of $\\alpha$ supplies its inverse, and associativity, unitality and the two inverse classes supply the homotopies of composites. The second map is an equivalence by the dual cone criterion of [lem-cbc-enhanced-functor-cone-calculus], since $\\mu$ is colimiting. The same criterion applied to their composite says exactly that $\\lambda$ is colimiting. For $I=\\varnothing$ the colimit $Q$ of step 1 is the empty space; all the arguments concern initial objects and require no vertex of $I$, so this case is included.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, foundational universe comparison extracted in lem-coef-infinity-presentable-presheaf-presentation. Agent argument from the cited colimit and coherent cocone statements."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-spaces-small-colimits-universe"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2: foundational universe comparison. Explicit inverse and mapping-space arguments from the statements of lem-coef-spaces-small-colimits-universe and lem-cbc-enhanced-functor-cone-calculus; inverse criterion checked in Scholze Lecture II, p.14."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +114,38 @@
    "results": "{\"t\": \"2026-10-17T09:16:45Z\", \"tool\": \"leansearch\", \"query\": \"The fully faithful inclusion of small spaces into larger spaces reflects a colimit cocone of a small diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.fullyFaithful_reflectsColimits\", \"CategoryTheory.Limits.createsColimitFullSubcategoryInclusion'\", \"AlgebraicGeometry.PresheafedSpace.colimitCocone\", \"CategoryTheory.Limits.createsColimitFullSubcategoryInclusion\", \"CategoryTheory.Limits.Types.colimitCocone\", \"CategoryTheory.createsColimitOfFullyFaithfulOfLift'\", \"CategoryTheory.Limits.fullyFaithful_reflectsLimits\", \"CategoryTheory.Limits.Types.colimitCoconeIsColimit\"], \"digest\": \"e5efbbff6a6d5eeb\"}",
    "date": "2026-10-17",
    "verdict": "no match: read Mathlib/CategoryTheory/Limits/Preserves/Basic.lean:805-817 (fullyFaithful_reflectsColimits), CategoryTheory/Whiskering.lean:116-126 (FullyFaithful.whiskeringRight), and CategoryTheory/Functor/FullyFaithful.lean:205-210 (preimageIso). These theorems assume ordinary Category instances and use set-valued homs; they do not specialize to coherent diagrams and homotopy colimits in arbitrary quasicategories of spaces. AlgebraicTopology/Quasicategory/Basic.lean:32-45 defines horn filling, not this result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful functor between infinity categories reflects equivalences and reflects colimit cocones",
+   "results": "{\"t\": \"2026-10-17T10:12:37Z\", \"tool\": \"leanfinder\", \"query\": \"A fully faithful functor between infinity categories reflects equivalences and reflects colimit cocones\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.fullyFaithful_reflectsColimits\", \"CategoryTheory.createsColimitOfFullyFaithfulOfLift'\", \"CategoryTheory.createsColimitOfFullyFaithfulOfIso'\", \"CategoryTheory.createsColimitOfFullyFaithfulOfLift\", \"CategoryTheory.createsColimitOfFullyFaithfulOfIso\", \"CategoryTheory.Functor.reflectsColimits_of_isEquivalence\", \"CategoryTheory.Limits.isColimitOfReflects\", \"CategoryTheory.Limits.IsColimit.ofReflectsCoconeInitial\"], \"digest\": \"2305f1ab58856117\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary Category instances, ordinary Cocone and IsColimit, or ordinary fully faithful functors. Read Mathlib/CategoryTheory/Limits/Preserves/Basic.lean:805-817 and CategoryTheory/Functor/ReflectsIso/Basic.lean:49-60. These are not homotopy-coherent colimits of arbitrary small simplicial shapes in quasicategories of spaces. AlgebraicTopology/Quasicategory/Basic.lean:32-45 defines the horn-filling condition but supplies no such reflection theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fullyFaithful_reflectsColimits\"",
+   "results": "{\"t\": \"2026-10-17T10:12:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"fullyFaithful_reflectsColimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.fullyFaithful_reflectsColimits\"], \"digest\": \"7ead92b888830299\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary Category instances, ordinary Cocone and IsColimit, or ordinary fully faithful functors. Read Mathlib/CategoryTheory/Limits/Preserves/Basic.lean:805-817 and CategoryTheory/Functor/ReflectsIso/Basic.lean:49-60. These are not homotopy-coherent colimits of arbitrary small simplicial shapes in quasicategories of spaces. AlgebraicTopology/Quasicategory/Basic.lean:32-45 defines the horn-filling condition but supplies no such reflection theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithful_reflectsColimits|reflectsIsomorphisms_of_fullyFaithful|fullyFaithful.*reflects",
+   "results": "{\"t\": \"2026-10-17T10:12:38Z\", \"tool\": \"grep\", \"query\": \"fullyFaithful_reflectsColimits|reflectsIsomorphisms_of_fullyFaithful|fullyFaithful.*reflects\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/ReflectsIso/Basic.lean\", \"Mathlib/CategoryTheory/Functor/ReflectsIso/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Basic.lean\"], \"digest\": \"4372a683f871c9f7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary Category instances, ordinary Cocone and IsColimit, or ordinary fully faithful functors. Read Mathlib/CategoryTheory/Limits/Preserves/Basic.lean:805-817 and CategoryTheory/Functor/ReflectsIso/Basic.lean:49-60. These are not homotopy-coherent colimits of arbitrary small simplicial shapes in quasicategories of spaces. AlgebraicTopology/Quasicategory/Basic.lean:32-45 defines the horn-filling condition but supplies no such reflection theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fully faithful inclusion of universes of Kan complexes reflects homotopy colimits and equivalences of spaces",
+   "results": "{\"t\": \"2026-10-17T10:12:38Z\", \"tool\": \"leansearch\", \"query\": \"Fully faithful inclusion of universes of Kan complexes reflects homotopy colimits and equivalences of spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.fullyFaithful_reflectsColimits\", \"CategoryTheory.Limits.IsColimit.ofFaithful\", \"CategoryTheory.createsColimitOfFullyFaithfulOfLift'\", \"CategoryTheory.Limits.fullyFaithful_reflectsLimits\", \"CategoryTheory.Limits.createsColimitFullSubcategoryInclusion\", \"CompactlyGenerated.fullyFaithfulCompactlyGeneratedToTop\", \"CategoryTheory.Types.instReflectsColimitsOfSizeForgetType\", \"CategoryTheory.createsColimitOfFullyFaithfulOfLift\"], \"digest\": \"ed9d82c7f5b651ec\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern ordinary Category instances, ordinary Cocone and IsColimit, or ordinary fully faithful functors. Read Mathlib/CategoryTheory/Limits/Preserves/Basic.lean:805-817 and CategoryTheory/Functor/ReflectsIso/Basic.lean:49-60. These are not homotopy-coherent colimits of arbitrary small simplicial shapes in quasicategories of spaces. AlgebraicTopology/Quasicategory/Basic.lean:32-45 defines the horn-filling condition but supplies no such reflection theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-presentable-presheaf-presentation",
@@ -72,5 +171,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-universe-colimit-descent",
+  "worker": "stage1",
+  "summary": "Proved descent using preservation of a chosen small colimit, the inverse equations between two initial cocones in the larger universe, direct reflection of equivalences on mapping-space components, and the dual mapping-space cocone criterion. The statement is unchanged. No new nodes are needed. Searches distinguish ordinary-category Mathlib results from coherent space-valued colimits.",
+  "blueprint": "Proof paragraph step 2: after compactness is applied in S_U′, the comparison from the small-space colimit is shown to be an equivalence by full faithfulness of the universe inclusion and contractibility of mapping spaces of colimiting cocones.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "The generic quasicategory cocone mapping-space criterion and initial-object calculus are used as black-box foundations in steps 4-5. This unit has no statement supplying that general calculus; no geometric unit step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q158-9d2987d17",
+  "group": "Q158",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-9d2987d17 (reviewer sub-agent of L); spot-checked: I read the item and the full statements of every cited node, and checked Scholze Lecture II pp.13-15 (basic facts (2)-(3) are on printed p.14). The statement is unchanged and correct. It holds in three small cases: empty I (an initial ιM forces M empty), I a point (ι reflects equivalences) and I two discrete points (coproducts). It also matches the only citer, lem-coef-infinity-presentable-presheaf-presentation step 4. There are no new nodes. No DAG node states this lemma; I checked spaces-small-colimits-universe, infinity-full-essential-image, colimit-cocone-transport-equivalence and the 1-category isomorphism lift. Steps 1-2 are correct. Step 1 takes existence, full faithfulness and preservation of the actual cocone from lem-coef-spaces-small-colimits-universe; step 2 is the definition of initial objects in the cocone pullback. Steps 3-5 are mathematically correct. One fault (C1): they use without citation facts that a split node of the same unit states, lem-coef-infinity-mapping-composition. Those facts are that π0 of mapping spaces gives the homotopy category, that an invertible class is the same as an equivalence edge, and that composition is associative and unital up to homotopy. Step 5 also uses the naturality of the comparison j from lem-coef-infinity-pinch-comparison. The fix adds these citations to steps 3, 4 and 5 and to proof_deps, with one sentence in each step on what is taken from them. Neither added node reaches the item or its citer, so there is no cycle. Both are in the same unit, so no extra tool use is needed. The declared tool use lem-cbc-enhanced-functor-cone-calculus (the generic cocone criterion and initial-object calculus) is accepted. No SGA source is used, and no target, coefficient category or base-change morphism is involved. The corrected file is fixes/dag/nodes/sec-six-functors/lem-coef-infinity-universe-colimit-descent.json; the full write-up is in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

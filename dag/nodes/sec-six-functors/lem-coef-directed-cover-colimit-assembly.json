@@ -57,10 +57,10 @@
    }
   },
   {
-   "text": "Define a small simplicial subset $H\\subseteq K\\star N(I)$ as follows. It contains the pure copies of $K$ and $N(I)$; a mixed simplex $\\sigma\\star(i_0\\leq\\cdots\\leq i_r)$ belongs to $H$ precisely when $\\sigma\\in K_{i_0}$. Removing an initial-block vertex preserves this condition since $K_{i_0}$ is a simplicial subset; removing the first final-block vertex preserves it since $K_{i_0}\\subseteq K_{i_1}$. Degeneracies preserve it as well. For $Y\\subseteq N(I)$ let $H_Y$ consist of $K$ and the simplices with final block in $Y$. Well-order the cells in each dimension and filter $N(I)$ by its nondegenerate simplices after their boundaries, using [lem-coef-infinity-monomorphism-boundary-cells]. For a new vertex $i$ the new part is $K_i^{\\triangleright}$ attached along $K_i$; extend $p$ by the chosen $q_i$. For a new positive-dimensional simplex $i_0<\\cdots<i_n$, the new part is $K_{i_0}\\star\\Delta^n$ attached along $K_{i_0}\\star\\partial\\Delta^n$. The already specified map is a boundary in the quasicategory $D=J_{p|K_{i_0}}$, whose first vertex is $q_{i_0}$, initial by step 1. The boundary extension from step 2 fills it. Continue over the small skeletal filtration, taking unions at limit stages. This constructs $q:H\\to\\mathcal E$ restricting to $p$ on $K$ and to $q_i$ on every $K_i^{\\triangleright}$. Set $c=q|_{N(I)}$. In particular, the mixed simplices for $i\\leq j$ exhibit $c_i\\to c_j$ as the map induced by the colimiting cocone $q_i$ and the restriction of $q_j$; higher chains give their coherent compatibilities. More explicitly, write $e_i$ for the equivalence in the fixed-apex cocone space between the comparison of $q_i$ and the prescribed cocone. The edge $i\\leq j$ gives a coherent triangle from the comparison of $q_i$, via $c_i\\to c_j$, to the restriction of the comparison of $q_j$. Concatenate its compatibility path with $e_i^{-1}$ at the source and $e_j|_{K_i}$ at the target. This gives compatibility with the prescribed cocones. The higher simplices of $q$ and the same equivalences supply the higher compatibilities; the apex diagram $c$ is unchanged.",
+   "text": "Define $H\\subseteq K\\star N(I)$ and $H_Y$ by the mixed-simplex rule of [lem-coef-directed-cover-mixed-subset-cells]. That statement proves closure under operators, continuity in $Y$, and identifies every attachment over a nondegenerate chain $i_0<\\cdots<i_n$ as $K_{i_0}\\star\\partial\\Delta^n\\hookrightarrow K_{i_0}\\star\\Delta^n$. Apply [lem-coef-infinity-monomorphism-boundary-cells] to $\\varnothing\\hookrightarrow N(I)$ and well-order the cells in each dimension to obtain a small filtration with one such attachment at each successor. In particular, a vertex $i$ attaches $K_i^{\\triangleright}$ along $K_i$.",
    "uses": [
-    "lem-coef-infinity-monomorphism-boundary-cells",
-    "lem-coef-join-slice-cocone-comparison"
+    "lem-coef-directed-cover-mixed-subset-cells",
+    "lem-coef-infinity-monomorphism-boundary-cells"
    ],
    "elementary": false,
    "source": {
@@ -69,7 +69,31 @@
    }
   },
   {
-   "text": "For this $q$, restriction $R:J_q\\to J_p$ is a trivial Kan fibration over $\\mathcal E$. Use the same filtration $H_Y$ as in step 3. At a cell $i_0<\\cdots<i_n$, the already chosen map on $K_{i_0}\\star\\Delta^n$ is a simplex $s:\\Delta^n\\to D=J_{p|K_{i_0}}$ with initial first vertex $q_{i_0}$. Restriction on join slices across that cell is the pullback of $J_s\\to J_{s|\\partial\\Delta^n}$ in $D$. By the defining simplices of the join slice in [lem-coef-join-slice-cocone-comparison], both lifting problems specify the same map on $K_{i_0}\\star(\\Delta^n\\star\\Delta^m)$ and the same prescribed boundary. Step 2 makes it a trivial Kan fibration; $n=0$ treats the vertex cells. A boundary lift across the entire tower is obtained recursively by these cell lifts, keeping the previously specified lift at every successor and taking its union at limits. Thus the definition of trivial Kan fibration applies to $R$ itself. Lift the vertex $\\lambda\\in J_p$ along $R$ to a join cocone $\\widetilde\\lambda$ on $q$; since $R$ is over $\\mathcal E$, its apex is the same $C$. For any apex $T$, the pullback $R_T$ on strict fibers is also a trivial Kan fibration (the same lifting square with constant apex). By [lem-weil-pbc-trivial-kan-homotopy-equivalence] it is a homotopy equivalence. By the fixed-apex and naturality assertions of [lem-coef-join-slice-cocone-comparison], restriction therefore gives an equivalence of coherent cocone spaces $\\operatorname{Map}_{\\operatorname{Fun}(H,\\mathcal E)}(q,\\Delta_HT)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal E)}(p,\\Delta_KT)$, compatible with postcomposition by maps out of $C$. Since composition with $\\lambda$ identifies the latter space with $\\operatorname{Map}_{\\mathcal E}(C,T)$ by [lem-cbc-enhanced-functor-cone-calculus], composition with $\\widetilde\\lambda$ identifies the former with that mapping space. Consequently $\\widetilde\\lambda$ is colimiting for $q$.",
+   "text": "Extend $p$ along this filtration. At a vertex cell use the prescribed join cocone $q_i$. At a positive-dimensional chain cell, the already defined map corresponds, by the defining simplices of [lem-coef-join-slice-cocone-comparison], to a boundary $\\partial\\Delta^n\\to J_{p|K_{i_0}}$ whose first vertex is $q_{i_0}$. This is an initial vertex by step 1. Apply [lem-coef-infinity-relative-initial-boundary] with target the point to fill this boundary, keeping all its faces. The attachment pushout from step 3 then glues the filler to the previous map. At a limit ordinal take the degreewise union of the compatible maps, which is simplicial since every simplex already occurs at an earlier stage. The resulting $q:H\\to\\mathcal E$ restricts exactly to $p$ and every chosen $q_i$.",
+   "uses": [
+    "lem-coef-join-slice-cocone-comparison",
+    "lem-coef-infinity-relative-initial-boundary",
+    "lem-coef-directed-cover-mixed-subset-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation 4.2.3.1 and Proposition 4.2.3.4, construction in its proof, printed pp. 248-250."
+   }
+  },
+  {
+   "text": "Set $c=q|_{N(I)}$, so its vertex at $i$ is exactly $c_i$. Apply [lem-coef-mixed-join-incidence-cocones] to $q$ and the fixed-apex equivalences $e_i$ from step 1. It supplies a coherent incidence transformation from $p$ to $c$ restricting exactly to each prescribed cocone, with the same apex diagram $c$; its edges and higher simplices give the transition compatibilities. Thus the transition $c_i\\to c_j$ is induced by the local colimiting cocone and the restriction of the prescribed cocone at $j$. The triangle assertion of that node says that every join cocone on $q$ is coherently compatible with this transformation and its restricted cocones on $p,c$. Apply that assertion to the join cocone $\\widetilde\\lambda$ constructed below. This replaces the former uncited instruction to concatenate equivalences and obtain all higher compatibilities.",
+   "uses": [
+    "lem-coef-mixed-join-incidence-cocones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Notation 4.2.3.1 and Proposition 4.2.3.4, construction in its proof, printed pp. 248-250."
+   }
+  },
+  {
+   "text": "For this $q$, restriction $R:J_q\\to J_p$ is a trivial Kan fibration over $\\mathcal E$. Use the same filtration $H_Y$ as in steps 3-4. At a cell $i_0<\\cdots<i_n$, the already chosen map on $K_{i_0}\\star\\Delta^n$ is a simplex $s:\\Delta^n\\to D=J_{p|K_{i_0}}$ with initial first vertex $q_{i_0}$. Restriction on join slices across that cell is the pullback of $J_s\\to J_{s|\\partial\\Delta^n}$ in $D$. By the defining simplices of the join slice in [lem-coef-join-slice-cocone-comparison], both lifting problems specify the same map on $K_{i_0}\\star(\\Delta^n\\star\\Delta^m)$ and the same prescribed boundary. Step 2 makes it a trivial Kan fibration; $n=0$ treats the vertex cells. A boundary lift across the entire tower is obtained recursively by these cell lifts, keeping the previously specified lift at every successor and taking its union at limits. Thus the definition of trivial Kan fibration applies to $R$ itself. Lift the vertex $\\lambda\\in J_p$ along $R$ to a join cocone $\\widetilde\\lambda$ on $q$; since $R$ is over $\\mathcal E$, its apex is the same $C$. For any apex $T$, the pullback $R_T$ on strict fibers is also a trivial Kan fibration (the same lifting square with constant apex). By [lem-weil-pbc-trivial-kan-homotopy-equivalence] it is a homotopy equivalence. By the fixed-apex and naturality assertions of [lem-coef-join-slice-cocone-comparison], restriction therefore gives an equivalence of coherent cocone spaces $\\operatorname{Map}_{\\operatorname{Fun}(H,\\mathcal E)}(q,\\Delta_HT)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(K,\\mathcal E)}(p,\\Delta_KT)$, compatible with postcomposition by maps out of $C$. Since composition with $\\lambda$ identifies the latter space with $\\operatorname{Map}_{\\mathcal E}(C,T)$ by [lem-cbc-enhanced-functor-cone-calculus], composition with $\\widetilde\\lambda$ identifies the former with that mapping space. Consequently $\\widetilde\\lambda$ is colimiting for $q$.",
    "uses": [
     "def-weil-pbc-trivial-kan-fibration",
     "lem-weil-pbc-trivial-kan-homotopy-equivalence",
@@ -97,7 +121,7 @@
    }
   },
   {
-   "text": "Apply [lem-coef-infinity-anodyne-cocones] to $N(I)\\hookrightarrow H$, $q$, and any vertex $T$ of $\\mathcal E$. It identifies the space of cocones on $q$ with that on $c=q|_{N(I)}$, naturally in $T$ and compatibly with postcomposition. Restrict $\\widetilde\\lambda$ to get a compatible cocone $\\nu$ on $c$ with apex $C$. Steps 4 and 5 give equivalences induced by composition with this very cocone, $\\operatorname{Map}_{\\mathcal E}(C,T)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(H,\\mathcal E)}(q,\\Delta_HT)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(N(I),\\mathcal E)}(c,\\Delta_{N(I)}T)$. The cocone/initial-object criterion of [lem-cbc-enhanced-functor-cone-calculus] proves that $\\nu$ is colimiting. Hence its apex $C$ realizes $\\operatorname{colim}_{i\\in I}c_i\\simeq\\operatorname{colim}_Kp$. If $K=\\varnothing$, all $K_i$ are empty and the construction gives $H=N(I)$: steps 2-4 apply to the chosen initial objects $c_i$, while step 5 has no cells and the final inclusion is the identity. Thus this case is covered without an unstated nonemptiness hypothesis on $K$ or on the $K_i$.",
+   "text": "Apply [lem-coef-infinity-anodyne-cocones] to $N(I)\\hookrightarrow H$, $q$, and any vertex $T$ of $\\mathcal E$. It identifies the space of cocones on $q$ with that on $c=q|_{N(I)}$, naturally in $T$ and compatibly with postcomposition. Restrict $\\widetilde\\lambda$ to get a compatible cocone $\\nu$ on $c$ with apex $C$. Steps 6 and 7 give equivalences induced by composition with this very cocone, $\\operatorname{Map}_{\\mathcal E}(C,T)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(H,\\mathcal E)}(q,\\Delta_HT)\\simeq\\operatorname{Map}_{\\operatorname{Fun}(N(I),\\mathcal E)}(c,\\Delta_{N(I)}T)$. The cocone/initial-object criterion of [lem-cbc-enhanced-functor-cone-calculus] proves that $\\nu$ is colimiting. Hence its apex $C$ realizes $\\operatorname{colim}_{i\\in I}c_i\\simeq\\operatorname{colim}_Kp$. If $K=\\varnothing$, all $K_i$ are empty and the construction gives $H=N(I)$: steps 2-6 apply to the chosen initial objects $c_i$, while step 7 has no cells and the final inclusion is the identity. Thus this case is covered without an unstated nonemptiness hypothesis on $K$ or on the $K_i$.",
    "uses": [
     "lem-coef-infinity-anodyne-cocones",
     "lem-cbc-enhanced-functor-cone-calculus"
@@ -115,7 +139,10 @@
   "lem-coef-infinity-relative-cone-equivalence",
   "lem-cbc-terminal-boundary-extension",
   "def-weil-pbc-trivial-kan-fibration",
+  "lem-coef-directed-cover-mixed-subset-cells",
   "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-infinity-relative-initial-boundary",
+  "lem-coef-mixed-join-incidence-cocones",
   "lem-weil-pbc-trivial-kan-homotopy-equivalence",
   "lem-cbc-filtered-nerve-weak-contractibility",
   "lem-coef-contractible-join-right-anodyne",
@@ -239,10 +266,45 @@
    "results": "{\"t\": \"2026-10-16T21:24:27Z\", \"tool\": \"grep\", \"query\": \"colimit|directed|cofinal\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-16",
    "verdict": "Renewed review: no match. Read the returned signatures: SSet.Subcomplex.MulticoequalizerDiagram.isColimit and SSet.hasColimits concern ordinary colimits in the ambient category of simplicial sets. Scheme gluing and CardinalDirectedPoset colimits have ordinary Hom sets. They do not assemble coherent diagrams in an arbitrary quasicategory. Scoped Quasicategory grep has zero hits; LeanSearch supplies the alternative phrasing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent colimit over a directed union of simplicial subsets is assembled from local colimits",
+   "results": "{\"t\": \"2026-10-17T07:58:08Z\", \"tool\": \"leanfinder\", \"query\": \"A coherent colimit over a directed union of simplicial subsets is assembled from local colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"SSet.hasColimits\", \"SSet.horn.isColimit\", \"SSet.range_eq_iSup_of_isColimit\", \"SSet.iSup_range_eq_top_of_isColimit\", \"SSet.Subcomplex.MulticoequalizerDiagram\", \"CategoryTheory.SimplicialObject.instHasColimits\"], \"digest\": \"06c75d47c92b42ce\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures concern ordinary categories, schemes, or colimits of simplicial sets; none states assembly of coherent colimits inside a quasicategory."
+  },
+  {
+   "tool": "loogle",
+   "query": "colimit, Directed, SSet",
+   "results": "{\"t\": \"2026-10-17T07:58:09Z\", \"tool\": \"loogle\", \"query\": \"colimit, Directed, SSet\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'colimit'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: Loogle returned unknown identifier 'colimit'; this is not evidence of absence."
+  },
+  {
+   "tool": "grep",
+   "query": "directed.*colimit|colimit.*directed",
+   "results": "{\"t\": \"2026-10-17T07:58:09Z\", \"tool\": \"grep\", \"query\": \"directed.*colimit|colimit.*directed\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no directed colimit assembly declaration in the quasicategory directory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy coherent colimit of local colimits over a filtered cover of an infinity categorical diagram",
+   "results": "{\"t\": \"2026-10-17T08:07:34Z\", \"tool\": \"leanfinder\", \"query\": \"Homotopy coherent colimit of local colimits over a filtered cover of an infinity categorical diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.ColimitPresentation.bind\", \"CategoryTheory.Limits.ColimitPresentation.bind_diag_obj\", \"CategoryTheory.Limits.ColimitPresentation.bind_diag_map\", \"CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom\", \"CategoryTheory.Limits.ColimitPresentation.instNonemptyTotalOfIsFiltered\", \"CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag\", \"CategoryTheory.Limits.IndObjectPresentation.coconeIsColimit\", \"CategoryTheory.Limits.IndObjectPresentation.hI\"], \"digest\": \"082f738636a723eb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures concern ordinary categories, schemes, or colimits of simplicial sets; none states assembly of coherent colimits inside a quasicategory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Colimits in a quasicategory over a directed union of subdiagrams",
+   "results": "{\"t\": \"2026-10-17T08:07:34Z\", \"tool\": \"leansearch\", \"query\": \"Colimits in a quasicategory over a directed union of subdiagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.MonoCoprod.isColimitBinaryCofanSum\", \"CategoryTheory.Limits.Cofan.combPairIsColimit\", \"CategoryTheory.Limits.ColimitPresentation.bind\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.openCover_f\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.instHasColimit\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.ι_jointly_surjective\", \"CategoryTheory.Limits.HasColimitOfHasCoproductsOfHasCoequalizers.buildColimit\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.instIsOpenImmersionι\"], \"digest\": \"781ded85ccd8af20\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned signatures concern ordinary categories, schemes, or colimits of simplicial sets; none states assembly of coherent colimits inside a quasicategory."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-small-saturated-arrow-accessibility",
@@ -255,30 +317,8 @@
   "date": "2026-10-17",
   "item": "lem-coef-directed-cover-colimit-assembly",
   "worker": "stage1",
-  "summary": "Read HTT decomposition of diagrams online, reconstructed the mixed simplicial set, proved coherent assembly and cocone-space comparison by boundary lifts, and proved the directed-support inclusion right anodyne by explicit cells. Added only the generic sharp/fat slice comparison and contractible-join anodyne lemma. Checked empty shapes and all cited hypotheses; no finished project declaration and no Mathlib match.",
-  "blueprint": "Realizes proof paragraph 2 of prop-coef-integral-exceptional-adjoint through the existing ancestry: filtered-subdiagram reconstruction needed in HTT Lemma 5.5.4.14. Neither the finite-coefficient adjunction route nor the general-biduality unit is replaced.",
-  "tool_uses": [
-   {
-    "node": "lem-cbc-enhanced-functor-cone-calculus",
-    "why": "Cocone quasicategories, mapping-space equivalences and the initial-object colimit criterion are generic infinity-category tools; this unit has no substitute."
-   },
-   {
-    "node": "lem-cbc-terminal-boundary-extension",
-    "why": "The boundary characterization of a terminal vertex, applied in the opposite, proves the exact initial-simplex lifting calculation; no node of this unit states that criterion."
-   },
-   {
-    "node": "def-weil-pbc-trivial-kan-fibration",
-    "why": "The generic boundary-lifting definition, including dimension zero, is used in steps 2 and 4."
-   },
-   {
-    "node": "lem-weil-pbc-trivial-kan-homotopy-equivalence",
-    "why": "Turns the proved trivial fibration of fixed-apex fibers into an equivalence of spaces; generic simplicial tool, not a replacement of the unit route."
-   },
-   {
-    "node": "lem-cbc-filtered-nerve-weak-contractibility",
-    "why": "Supplies weak contractibility of each small directed support poset nerve; generic simplicial tool, not a coefficient-specific route."
-   }
-  ]
+  "summary": "Repair of the human return of 2026-10-17: retained the statement, Lean record and HTT route; extracted the mixed-subset cell identification and incidence cocone realization/relative representative transport into two statement-only nodes. Replaced old step 3 by three short steps, citing the existing relative-initial boundary extension for the filler. The other proof steps are retained with internal step references renumbered. All non-elementary steps are at most 2000 characters.",
+  "blueprint": "Realizes the filtered-subdiagram reconstruction in the blueprint ancestry of prop-coef-integral-exceptional-adjoint (proof paragraph 2, HTT Lemma 5.5.4.14 route), while retaining the imported directed-cover statement and its six proof steps."
  },
  "tool_uses": [
   "lem-cbc-enhanced-functor-cone-calculus",
@@ -288,12 +328,12 @@
   "lem-cbc-filtered-nerve-weak-contractibility"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q11-2896d7c9c",
-  "group": "Q11",
+  "reviewer": "NT-cc-Q08-621adb389",
+  "group": "Q08",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-2896d7c9c (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. Proof uses equal proof_deps. The split follows HTT Prop 4.2.3.4, Prop 4.2.3.8 and Cor 4.2.3.10 in the directed-union case of Rem 4.2.3.9. Step 2: checked the boundary identity (∂Δ^n⋆Δ^m)∪(Δ^n⋆∂Δ^m)=∂Δ^{n+m+1}, including n=0 and m=0; the filler comes from the opposite dual via relative-cone-equivalence (4) and terminal-boundary-extension, so marking it elementary is fine. Step 3: H is closed under faces because deleting i_0 lands in K_{i_0}⊆K_{i_1}, and each cell is K_{i_0}⋆Δ^n attached along K_{i_0}⋆∂Δ^n, with an initial first vertex q_{i_0}. Step 4: attaching a cell changes the slice by a pullback of J_s→J_{s|∂}, so R is a trivial fibration and λ̃ is colimiting. Step 5: each I_σ is nonempty, upward closed and directed, so N(I_σ) is weakly contractible; each attachment is Δ^m⋆N(I_σ) along ∂Δ^m⋆N(I_σ), and degenerate initial blocks are handled by Eilenberg–Zilber. Step 6: anodyne-cocones plus the cone criterion. The K=∅ case is covered. New node lem-coef-contractible-join-right-anodyne is HTT Lemma 4.2.3.6 and true; tested on Λ^1_1, Λ^2_2 and two glued edges, and B=∅ is rightly excluded. New node lem-coef-join-slice-cocone-comparison is HTT 4.2.1.5–4.2.1.8; P_a is exactly the fat slice and the cocone category of def-cbc; tested for L=∅ and L=Δ^0. Neither new node duplicates the existing nodes cone-mono-right-anodyne, blunt-sharp-join-equivalence, slice-right-fibration, slice-arrow-equivalence, join-cone-calculus or join-slice-diagram-isomorphisms, and neither restates a clause of the item. Both pass B1–B7 with all three search kinds recorded. The five declared tool_uses are accepted as generic black boxes: cone-calculus, terminal-boundary-extension, trivial-kan-fibration, trivial-kan-homotopy-equivalence, filtered-nerve-weak-contractibility. There is no cycle and no SGA. HTT is not archived in literature/, so proof_origin=agent with a WANTED line is correct. No fixes were made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-621adb389 (reviewer sub-agent of L); spot-checked: I read the whole item, both new nodes and every cited statement; review.md has the step-by-step checks. HTT is not under literature/, so I checked the route against HTT 4.2.3.1–4.2.3.10 from memory; the WANTED line and proof_origin=agent are correct. This repairs the one point of the return (old step 3 too long). Statement, stmt_deps and lean record are unchanged.\n\nNew steps:\n- Step 3: a skeletal filtration of N(I) from monomorphism-boundary-cells (a Mathlib leaf), plus the new attachment pushout. Each boundary lies in Y.\n- Step 4: relative-initial-boundary over the point fills each boundary in J_{p|K_{i_0}}. Its first vertex q_{i_0} is initial by step 1.\n- Step 5: the incidence node with input e_i from step 1 gives a, the fiber equations and the triangle t. Its forward reference to λ̃ is not circular.\n- Steps 1, 2 and 6–8 are unchanged apart from renumbering. I rechecked them, including K=∅.\n\nlem-coef-directed-cover-mixed-subset-cells is true:\n- H and H_Y are closed under simplicial operators.\n- The new simplices are exactly σ⋆τθ with θ surjective, so θ(0)=0 and the condition is σ∈K_{i_0}. τ is strictly increasing, so the square is a pushout.\n- Holds for n=0, I=∅ and empty pieces.\n\nlem-coef-mixed-join-incidence-cocones is true:\n- V is simplicial by monotonicity.\n- a_0 restricted along v_i is the J→P comparison image of q|K_i^▷.\n- The replacement comes from lifting along the isofibration of isofibration-exponentiation over the disjoint local pieces with fixed endpoints.\n- The triangle comes from V×Δ^2→H^▷ composed with λ̃, then lifting along Fun(V×Δ^2,E)→Fun(V×∂Δ^2,E).\n\nForm and checks:\n- B1–B4, B7 and B9 pass: statement-only, three kinds of search recorded honestly (LeanSearch shown as unavailable), blueprint from/via correct, same_as=[].\n- No duplicates. directed-decomposition-right-anodyne shares K_F but states only anodyneness. Neither node restates the item (D1).\n- uses equal proof_deps, there is no cycle, and every new citation is in the item's own unit, so there are no new tool uses.\n- Not a fault of this delivery: the pre-existing unsplit node lem-coef-infinity-directed-union-local-colimits overlaps the item's conclusion and may be worth merging later.\n\nNo fixes were made."
  },
  "lean_audit": {
   "master": {

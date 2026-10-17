@@ -39,8 +39,9 @@
    }
   },
   {
-   "text": "Define $\\mathcal A\\otimes\\mathcal D$ to have object pairs and morphism complexes $\\mathcal A(a,a')\\otimes_{\\mathbf Z}\\mathcal D(d,d')$, with tensor differential and composition using the graded symmetry. Currying identifies a strict $\\mathcal A$-diagram of covariant $\\mathcal D$-modules with a covariant module over $\\mathcal A\\otimes\\mathcal D$, as follows. Put $H(a,d)=F(a)(d)$, and, for homogeneous $\\alpha:a\\to a'$ and $\\delta:d\\to d'$, put $H(\\alpha\\otimes\\delta)=F(\\alpha)_{d'}\\circ F(a)(\\delta)$. Graded naturality gives $F(a')(\\delta)F(\\alpha)_d=(-1)^{|\\alpha||\\delta|}F(\\alpha)_{d'}F(a)(\\delta)$, so compositions obey the tensor-category sign $(-1)^{|\\delta'||\\alpha|}$. Conversely restrict $H$ to $\\alpha\\otimes1$ and $1\\otimes\\delta$ to recover the two actions. A degree-$r$ transformation is a family of maps at $(a,d)$ satisfying the two graded commutation equations; these combine to the module equation with sign $(-1)^{r(|\\alpha|+|\\delta|)}$. The componentwise differential is $d\\eta=d_G\\eta-(-1)^r\\eta d_F$ on both sides. Both categories have the same values at pairs of objects, the same complexes of graded module maps, and the same objectwise quasi-isomorphisms and surjections. Thus their projective model structures agree, by the lifting definition of cofibrations. A projectively cofibrant module $P$ is homotopically projective: for any objectwise acyclic $N$, apply the enriched model axiom of [lem-coef-enriched-projective-diagram-model] to $0\\to P$ and the trivial fibration $N\\to0$. It says that $\\underline{\\operatorname{Hom}}(P,N)\\to0$ is a quasi-isomorphism. Apply [lem-coef-dg-module-projective-resolution] to $(\\mathcal A\\otimes\\mathcal D)^{\\mathrm{op}}$ (a homogeneous left action $bm$ is read as the right action $mb=(-1)^{|b||m|}bm$ over the opposite; this turns the signed left-module map equation into the right-module equation in that node). Between these cofibrant modules, morphisms in the localized diagram category are therefore $H^0$ of the actual module-map complexes. In particular an isomorphism between two cofibrant diagrams has representatives in both directions whose composites differ from identities by boundaries; it is represented by a chain homotopy equivalence of module diagrams, hence by an objectwise quasi-isomorphism.",
+   "text": "By [lem-coef-dg-module-tensor-currying], strict $\\mathcal A$-diagrams of $\\mathcal D$-modules are the covariant modules over $\\mathcal A\\otimes\\mathcal D$, with the same actual Hom complexes and projective model structure. A projectively cofibrant module $P$ is homotopically projective: for acyclic $N$, apply the enriched model axiom of [lem-coef-enriched-projective-diagram-model] to $0\\to P$ and the trivial fibration $N\\to0$ to obtain an acyclic complex $\\underline{\\operatorname{Hom}}(P,N)$. Apply [lem-coef-dg-module-projective-resolution] to $(\\mathcal A\\otimes\\mathcal D)^{\\mathrm{op}}$: the left action $bm$ becomes the right action $mb=(-1)^{|b||m|}bm$, giving exactly that node's graded-map convention. It computes localized morphisms between cofibrant diagrams as $H^0$ of the actual module-map complexes, compatibly with composition. Hence an isomorphism between two such diagrams has representatives in both directions whose composites differ from the identities by boundaries. Its representative is a chain homotopy equivalence and therefore an objectwise quasi-isomorphism.",
    "uses": [
+    "lem-coef-dg-module-tensor-currying",
     "lem-coef-enriched-projective-diagram-model",
     "lem-coef-dg-module-projective-resolution"
    ],
@@ -86,10 +87,9 @@
    }
   },
   {
-   "text": "Form a dg category $\\mathcal E_{\\mathcal S}$ whose objects are trivial cofibrations $c:P\\to Q$ in $\\mathcal M$ with $P,Q$ cofibrant and in $\\mathcal S$. Between $c:P\\to Q$ and $c':P'\\to Q'$ take the strict-square complex\n$$\\underline{\\operatorname{Hom}}(P,P')\\times_{\\underline{\\operatorname{Hom}}(P,Q')}\\underline{\\operatorname{Hom}}(Q,Q'),$$\nwith differential and composition componentwise. It is a dg category because the square equation is preserved by both operations. Let $e_0,e_1$ be its source and target dg functors to $\\operatorname{Int}(\\mathcal S)$, and let $s$ send $P$ to $1_P$. For the trivial cofibration $c$ and the fibrant object $Q'$, the enriched model axiom in [lem-coef-enriched-projective-diagram-model] makes $\\underline{\\operatorname{Hom}}(Q,Q')\\to\\underline{\\operatorname{Hom}}(P,Q')$ a degreewise surjective quasi-isomorphism. Its pullback is exactly the map of Hom complexes induced by $e_0$. This pullback is again a surjective quasi-isomorphism: its kernel is the same acyclic kernel $K$. To check acyclicity of the kernel of a surjective quasi-isomorphism $t$, a kernel cycle $z$ is a boundary $dx$ in the source by injectivity on cohomology. The element $t(x)$ is a cycle; surjectivity on cohomology gives a source cycle $y$ with $t(x)-t(y)=dv$. Lift $v$ to $w$ using degreewise surjectivity; then $x-y-dw$ is a kernel primitive of $z$. For any degree-$n$ cycle in the target, choose a degree-$n$ lift; its differential is a cycle in $K^{n+1}$, hence a boundary, so subtracting an element of $K^n$ gives a cycle lift. If a cycle maps to a boundary, lift a primitive and subtract its differential; the remaining cycle is in $K$ and is a boundary there. This proves surjectivity and injectivity on cohomology in every degree. Thus $e_0$ is quasi-fully faithful; it is essentially surjective since $e_0s=1$. By [lem-coef-dgcat-model-structure] it is a quasi-equivalence and becomes invertible in $\\mathsf{Hqe}$. Since $e_0s=e_1s=1$, the section $s$ is its inverse and $e_0=e_1$ in $\\mathsf{Hqe}$. Every objectwise trivial-cofibration transformation $U\\to V$ from step 5 defines a strict dg functor $\\mathcal A\\to\\mathcal E_{\\mathcal S}$: naturality is exactly the strict-square equation in each degree. Composing with $e_0,e_1$ shows $[U]=[V]$ in $\\mathsf{Hqe}$. Applying this to the spans of step 5 proves $[F]=[G]$, hence injectivity. This constructs the needed comparison for diagrams and never infers it merely from objectwise isomorphisms.",
+   "text": "Use the strict-square dg category $\\mathcal E_{\\mathcal S}$ of [lem-coef-dg-module-arrow-category-comparison]. Its source and target projections $e_0,e_1$ are equal in $\\mathsf{Hqe}$. Each objectwise trivial-cofibration transformation $U\\to V$ from step 5 gives a strict dg functor $T:\\mathcal A\\to\\mathcal E_{\\mathcal S}$: the component arrows are its objects, and naturality in each degree is precisely the strict-square equation defining its Hom complexes. Thus $[U]=[e_0T]=[e_1T]=[V]$. Applying this equality to the spans from step 5 proves $[F]=[G]$, hence injectivity for whole diagrams.",
    "uses": [
-    "lem-coef-enriched-projective-diagram-model",
-    "lem-coef-dgcat-model-structure"
+    "lem-coef-dg-module-arrow-category-comparison"
    ],
    "elementary": false,
    "source": {
@@ -124,10 +124,12 @@
   }
  ],
  "proof_deps": [
-  "lem-coef-dg-module-projective-resolution",
-  "lem-coef-dgcat-model-structure",
   "lem-coef-enriched-projective-diagram-model",
-  "lem-coef-locally-cofibrant-dg-restriction"
+  "lem-coef-dgcat-model-structure",
+  "lem-coef-dg-module-tensor-currying",
+  "lem-coef-dg-module-projective-resolution",
+  "lem-coef-locally-cofibrant-dg-restriction",
+  "lem-coef-dg-module-arrow-category-comparison"
  ],
  "proof_origin": {
   "by": "agent",
@@ -298,7 +300,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-coef-dg-quasifunctor-invariance",
   "by": "worker",
@@ -320,18 +322,18 @@
   }
  },
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "item": "lem-coef-dg-module-diagram-classification",
   "worker": "stage1",
-  "summary": "No exact project declaration or Mathlib match. Statement unchanged. Expanded Toën Lemma 6.2 into the projective-diagram replacement, cylinder-invariance, and explicit arrow-dg-category arguments. Isolated two general model-theoretic inputs; all diagram identifications, the saturated-subcategory checks, and the homotopically projective variant are proved in the item. Second reading makes graded currying, acyclic-kernel cohomology lifting, and Hqe naturality explicit; auxiliary model notions and localization classes are defined inline.",
+  "summary": "Repair of the human re-split return: statement, Lean/audit records, proof route and steps 1,3,4,5,7,8 unchanged. Extracted graded tensor currying from step 2 and the strict-square dg-category comparison from step 6 into two statement-only nodes. The remaining step 2 uses the existing enriched-model and projective-module statements; step 6 applies the arrow comparison to the already constructed spans. Completed missing searches and blueprint ancestry of retained drafts; retained the earlier searches and source route. Every non-elementary step is below 2000 characters.",
   "blueprint": "prop-coef-integral-exceptional-adjoint proof paragraph 2, the middle finite mapping-complex comparison before total inverse limit; realizes the existing derived-Yoneda/quasi-functor foundation branch, not a new route at unit level."
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-Q58-aa5c092f1",
-  "group": "Q58",
+  "reviewer": "NT-cc-Q49-987ce4d84",
+  "group": "Q49",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q58-aa5c092f1 (reviewer sub-agent of L); spot-checked: Read all required governance files, the packet/report, item and both new nodes, cited DAG statements, unit/chapter route, and Toën’s exact Definition 3.1, Proposition 3.2(2), Proposition 3.3, Sub-lemmas 4.4–4.5, and Lemma 6.2. Verified hypotheses, variance, saturated coefficient category, whole-diagram comparison, edge cases, searches, route, and absence of duplicates/cycles. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-987ce4d84 (reviewer sub-agent of L); spot-checked: The mathematics checks out; one form fault is fixed in fixes/ for both new nodes. Toën (arXiv math/0408337) is not in literature/ and network access is blocked, so I could not reopen it. The place citations are unchanged from the Q58-reviewed version and proof_origin stays 'agent', so every step was checked directly. tensor-currying: I verified that H(α⊗δ)=F(α)_{d'}F(a)(δ) respects the Koszul composition sign (−1)^{|ε||α|} and is a chain map, that the inverse via H(α⊗1), H(1⊗δ) recovers graded naturality, that transformations match with sign (−1)^{r(|α|+|δ|)}, and that the objectwise weak-equivalence/fibration classes and hence the model structures agree. Small cases: empty index, unit categories, odd degrees. arrow-category-comparison: the enriched axiom for trivial cofibration c and Q'→0 makes Hom(Q,Q')→Hom(P,Q') a degreewise surjective quasi-isomorphism; its base change keeps the same acyclic kernel, so e_0 is a trivial fibration of dg categories; e_0s=e_1s=1 gives [e_0]=[e_1] in Hqe. Small cases: S empty, identity arrows, zero object. Neither new node restates a clause of the parent. The near-duplicates dg-resolution-square-projection and dg-module-base-change both reach the item (checked by script), so citing them would be circular; an rg search over dag/nodes found no other duplicate. Item: steps 1-8 re-read. Repaired step 2: cofibrant implies homotopically projective via 0→P against N→0, then projective-resolution over (A⊗D)^op with the signed action. Repaired step 6: degree-0 naturality is exactly the strict-square condition, so T:A→E_S exists and [U]=[V]. Local cofibrancy only of A, saturation, the cylinder argument through locally-cofibrant-dg-restriction, and the spans of step 5 all check. proof_deps equals the union of the uses, there is no cycle, and all nodes are in unit sk-prop-sf-biduality-general, so no tool_uses are needed. FIX: both new nodes lacked the required lean_audit and merged_into fields. Whole corrected files are in fixes/dag/nodes/sec-six-functors/, with no other change. Minor: the report mentions a citations.json that is not in the commit.; 2 file(s) fixed by the reviewer"
  }
 }

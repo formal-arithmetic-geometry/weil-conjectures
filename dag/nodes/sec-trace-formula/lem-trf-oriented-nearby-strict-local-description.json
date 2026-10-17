@@ -16,34 +16,197 @@
   "def-pc-fibre-product",
   "def-kun-projection-formula-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $j:X_{(x)}\\to X$ and $k:Y_{(y)}\\to Y$. The closed geometric points of these strict localizations give $g:X_{(x)}\\to Y_{(y)}$ as a local morphism. The local-projection lemma supplies the canonical section $\\widetilde\\sigma_x:(Y_{(y)})_{\\mathrm{Et}}\\to V_g$, built from the constant closed point $x\\epsilon$ and the natural $2$-morphism $1\\Rightarrow y\\epsilon$. Let $v:V_g\\to V_f$ be the morphism induced by $(j,k)$. Define $\\sigma_x=v\\widetilde\\sigma_x$. The universal property shows that its geometric point at $t\\to y$ is $(x,y\\leftarrow t)$ and makes the construction canonical. In particular the specialization datum is the counit from the constant closed-point sheaf, rather than the identity arrow at $y$.",
+   "uses": [
+    "lem-trf-local-oriented-projection-exact",
+    "lem-trf-oriented-product-universal",
+    "def-trf-oriented-nearby-cycles",
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.imo.universite-paris-saclay.fr/~luc.illusie/Illusie-nearby-cycles28.pdf",
+    "place": "Illusie §§1.3, 1.11--1.12; Zheng Appendix A.1--A.2 and (A.3.1). Read online; no downloaded literature added."
+   }
+  },
+  {
+   "text": "First suppose $K\\in D^+(X_{\\mathrm{Et}},\\Lambda)$. Form the canonical comparison $v^*R\\Psi_fK\\to R\\Psi_gj^*K$ from the definition. Pull back by $\\widetilde\\sigma_x$, then use $\\widetilde\\sigma_x^*\\cong p_{2,*}$ from the local-projection lemma. Since $p_{2,*}$ is exact and $p_2\\psi_g=g$, the resulting target is $Rg_*j^*K$: both are right adjoint to $g^*=\\psi_g^*p_2^*$. This constructs a natural map $\\alpha_K:\\sigma_x^*R\\Psi_fK\\to Rg_*j^*K$. At a geometric point $t$ of $Y_{(y)}$, oriented-point cohomology (take the second scheme to be $Y$ and its map the identity) computes the source as $R\\Gamma(X_{(x)}\\times_{Y_{(y)}}Y_{(t)},K)$. The strict-local stalk formula computes the target as the same complex: $g$ is a morphism between affine schemes, hence qcqs, and the coefficients are torsion since $m\\Lambda=0$. Their maps are the restrictions from the same pointed neighbourhoods. Thus $\\alpha_K$ is an isomorphism by geometric-stalk conservativity. Apply the coefficient-forgetting theorem (use the identity base-change square for $g$): it identifies the bounded-below module direct image with the abelian one. Its exact inverse-image comparison identifies the restrictions as well, so the abelian strict-local stalk formula applies to our module complex. No unbounded version of either bounded-below formula is being used. Ind-etale invariance identifies the strict localization of $Y_{(y)}$ at $t$ with $Y_{(t)}$.",
+   "uses": [
+    "lem-trf-local-oriented-projection-exact",
+    "def-trf-oriented-nearby-cycles",
+    "lem-trf-oriented-point-cohomology",
+    "prop-weil-pbc-strict-henselization-stalk-formula",
+    "lemma-openclosed-point-ulift",
+    "def-kun-projection-formula-map",
+    "lem-trf-ind-etale-strict-local-invariance",
+    "lem-weil-pbc-exchange-forget-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.imo.universite-paris-saclay.fr/~luc.illusie/Illusie-nearby-cycles28.pdf",
+    "place": "Illusie §§1.3, 1.11--1.12; Zheng Appendix A.1--A.2 and (A.3.1). Read online; no downloaded literature added."
+   }
+  },
+  {
+   "text": "For arbitrary $K$, take a K-injective resolution $K\\to I^\\bullet$ with injective terms, using the resolution-existence node on a small representative of $X_{\\mathrm{Et}}$. Apply step 2 to a single injective sheaf $J$. Since $R\\Psi_fJ=\\psi_{f,*}J[0]$, it shows that $j^*J$ is $g_*$-acyclic, and in degree zero gives the natural underived isomorphism $\\sigma_x^*\\psi_{f,*}J\\cong g_*j^*J$. The universal-(*) node gives an integer $N$ with $R^qg_*F=0$ for all module sheaves $F$ and $q>N$; only the bound at this $x$ is needed. The finite-cd acyclic-complex theorem now says that the possibly unbounded complex $j^*I^\\bullet$, all of whose terms are $g_*$-acyclic, computes $Rg_*j^*K$. Applying the degree-zero isomorphism termwise gives $\\sigma_x^*\\psi_{f,*}I^\\bullet\\cong g_*j^*I^\\bullet$, which represents $\\alpha_K$. Naturality of the acyclic-complex comparison shows that this is the same derived comparison, and proves the unbounded assertion without assuming that $j^*I^\\bullet$ is K-injective.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-trf-finite-type-torsion-universal-star",
+    "lem-kun-finite-cd-acyclic-complex",
+    "def-trf-oriented-nearby-cycles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.imo.universite-paris-saclay.fr/~luc.illusie/Illusie-nearby-cycles28.pdf",
+    "place": "Illusie §§1.3, 1.11--1.12; Zheng Appendix A.1--A.2 and (A.3.1). Read online; no downloaded literature added."
+   }
+  },
+  {
+   "text": "Inverse image for a geometric morphism with constant coefficients is exact, by the nearby-cycle definition. Apply the derived tensor-pullback theorem to $\\sigma_x$, with the coefficient-ring map the canonical isomorphism $\\sigma_x^{-1}\\Lambda\\cong\\Lambda$. It gives $\\sigma_x^*(A\\otimes^LB)\\cong\\sigma_x^*A\\otimes^L\\sigma_x^*B$ for arbitrary unbounded $A,B$.",
+   "uses": [
+    "def-trf-oriented-nearby-cycles",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.imo.universite-paris-saclay.fr/~luc.illusie/Illusie-nearby-cycles28.pdf",
+    "place": "Illusie §§1.3, 1.11--1.12; Zheng Appendix A.1--A.2 and (A.3.1). Read online; no downloaded literature added."
+   }
+  },
+  {
+   "text": "Every specialization-triple point of $V_f$ has the form $(x,y\\leftarrow t)$ for a geometric point $t$ of $Y_{(y)}$; the specialization is precisely its map into the strict localization. By the product-point conservativity node these point functors detect sheaf isomorphisms. They are exact, so for a derived morphism $a$ they commute with every cohomology sheaf of $\\operatorname{Cone}(a)$. If every $\\sigma_x^*a$ is invertible, all the triple stalks of all these cohomology sheaves vanish, hence the cone is zero. This proves joint conservativity on the unbounded derived category.",
+   "uses": [
+    "lem-trf-oriented-product-points-conservative",
+    "def-trf-oriented-nearby-cycles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.imo.universite-paris-saclay.fr/~luc.illusie/Illusie-nearby-cycles28.pdf",
+    "place": "Illusie §§1.3, 1.11--1.12; Zheng Appendix A.1--A.2 and (A.3.1). Read online; no downloaded literature added."
+   }
+  },
+  {
+   "text": "For a commutative local strict-local square $gh=kg'$, the universal property identifies $v\\sigma_{x'}=\\sigma_xk$ with the specified $2$-morphisms, because the constant closed-point counit is natural under a local map. Unfold the mate defining the ordinary nearby comparison, then the unit defining the local-projection isomorphism. After $\\alpha$ its adjunct under $g'^*\\dashv Rg'_*$ is exactly $g'^*k^*Rg_*K_{(x)}\\cong h^*g^*Rg_*K_{(x)}\\xrightarrow{h^*\\varepsilon_g}h^*K_{(x)}$: the intervening unit followed by counit cancels by the adjunction triangle identity. This specifies the ordinary strict-local comparison, including for an essentially Cartesian square; no invertibility is needed for the identification.",
+   "uses": [
+    "lem-trf-local-oriented-projection-exact",
+    "lem-trf-oriented-product-universal",
+    "def-trf-oriented-nearby-cycles",
+    "def-kun-projection-formula-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.imo.universite-paris-saclay.fr/~luc.illusie/Illusie-nearby-cycles28.pdf",
+    "place": "Illusie §§1.3, 1.11--1.12; Zheng Appendix A.1--A.2 and (A.3.1). Read online; no downloaded literature added."
+   }
+  },
+  {
+   "text": "For $A,B$, the local lax map is specified by the adjunct $g^*(Rg_*A\\otimes^LRg_*B)\\cong g^*Rg_*A\\otimes^Lg^*Rg_*B\\xrightarrow{\\varepsilon_A\\otimes^L\\varepsilon_B}A\\otimes^LB$. The defining adjunct of the oriented lax map becomes this composite by step 4 and the same triangle identities as step 6. For two factors and a point $x$ of their product, the projections give $x_i$ and the functorial maps $X_{(x)}\\to X_{i,(x_i)}$. The oriented external-product map is, by definition, the tensor of the two ordinary comparisons followed by the lax map. Step 6 identifies each ordinary comparison and the present adjunct identifies its last map. Thus the whole composite becomes the direct-image external-product map on these strict localizations, even though their scheme product need not itself be strictly local.",
+   "uses": [
+    "def-trf-oriented-nearby-cycles",
+    "def-kun-projection-formula-map",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.imo.universite-paris-saclay.fr/~luc.illusie/Illusie-nearby-cycles28.pdf",
+    "place": "Illusie §§1.3, 1.11--1.12; Zheng Appendix A.1--A.2 and (A.3.1). Read online; no downloaded literature added."
+   }
+  },
+  {
+   "text": "Let $Y'\\to Y$ be arbitrary and $T=X\\times_YY'$. At a geometric point $x'$ of $T$, put $x$ for its image and localize the target at $y'=f'(x')$. Its functorial map $Y'_{(y')}\\to Y_{(y)}$ is local. Put $Q=X_{(x)}\\times_YY'_{(y')}$ and $W=X_{(x)}\\times_{Y_{(y)}}Y'_{(y')}$. First, $Q\\to T$ is the composite of the base changes of $X_{(x)}\\to X$ and of $Y'_{(y')}\\to Y'$, both ind-etale by their pointed-etale limit construction (on affine neighbourhoods); two applications of the ind-etale invariance node identify $T_{(x')}$ with the strict localization of $Q$ at the induced point $q$, which lies over the closed points of $X_{(x)}$, $Y'_{(y')}$ and $Y_{(y)}$. Second, $W=Q\\times_ZY_{(y)}$ for $Z=Y_{(y)}\\times_YY_{(y)}$ and the diagonal $Y_{(y)}\\to Z$. On an affine neighbourhood $\\operatorname{Spec}A$ of $y$, $Y_{(y)}=\\operatorname{Spec}B$ with $B$ ind-etale over $A$, so the affine strict-local base-change node computes the strict localization of $Z$ at the diagonal closed point $z$ as $Y_{(y)}\\times_{Y_{(y)}}Y_{(y)}$, using the closed-point-localization node for $S'_{(f'\\bar x')}\\cong S'\\cong S_{(\\bar u)}$ with $f=\\mathrm{id}$; both projections being the functorial maps, the diagonal is the strict-localization map $Z_{(z)}\\to Z$. Hence $W=Q\\times_ZZ_{(z)}$, and the closed-point-localization node (base $Z$, point $z$; $q$ lies over the closed point) gives $W_{(q)}\\cong Q_{(q)}\\cong T_{(x')}$. So $T_{(x')}\\to W$ is a strict localization and the square is essentially Cartesian. Consequently step 6 turns the restriction of the global comparison into one of the maps in the asserted local criterion. If all such maps are invertible, step 5 reflects invertibility of the global comparison. This proves the implication from the local criterion to $\\Psi$-goodness.",
+   "uses": [
+    "lem-trf-ind-etale-strict-local-invariance",
+    "def-weil-pbc-strict-henselization-limit",
+    "def-trf-oriented-nearby-cycles",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-ind-etale-affine-strict-local-base-change",
+    "lem-weil-pbc-strict-base-closed-point-localizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.imo.universite-paris-saclay.fr/~luc.illusie/Illusie-nearby-cycles28.pdf",
+    "place": "Illusie §§1.3, 1.11--1.12; Zheng Appendix A.1--A.2 and (A.3.1). Read online; no downloaded literature added."
+   }
+  },
+  {
+   "text": "Conversely take any essentially Cartesian square in the statement. Use the composite $Y'\\to Y_{(y)}\\to Y$ as a global base change and let $T=X\\times_YY'$. The closed point of $X'$ defines a geometric point $x'$ of $T$. The argument of step 8 (with $Y'_{(y')}=Y'$) shows $X'\\cong T_{(x')}$, compatibly with $h$, and $Y'$ is its own strict localization at its closed point. Therefore its displayed local comparison is step 6's restriction of that global comparison. If $(f,K)$ is $\\Psi$-good it is invertible. For stability, a subsequent essentially Cartesian square over $(g',h^*K_{(x)})$ corresponds likewise to strict localizations of successive global base changes of $f$. The defining mates for successive comparisons compose: their adjunct is the composite of the two pulled-back counits, with the middle unit/counit cancelled. Thus $\\Psi$-goodness survives global base change and the preceding local test applies again to $(g',h^*K_{(x)})$. This proves the stability clause as well as the converse.",
+   "uses": [
+    "lem-trf-ind-etale-strict-local-invariance",
+    "def-weil-pbc-strict-henselization-limit",
+    "def-trf-oriented-nearby-cycles",
+    "def-kun-projection-formula-map",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-ind-etale-affine-strict-local-base-change",
+    "lem-weil-pbc-strict-base-closed-point-localizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.imo.universite-paris-saclay.fr/~luc.illusie/Illusie-nearby-cycles28.pdf",
+    "place": "Illusie §§1.3, 1.11--1.12; Zheng Appendix A.1--A.2 and (A.3.1). Read online; no downloaded literature added."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-projection-formula-map",
+  "def-trf-oriented-nearby-cycles",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-kun-finite-cd-acyclic-complex",
+  "lem-trf-finite-type-torsion-universal-star",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-trf-local-oriented-projection-exact",
+  "lem-trf-oriented-point-cohomology",
+  "lem-trf-oriented-product-points-conservative",
+  "lem-trf-oriented-product-universal",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-ind-etale-affine-strict-local-base-change",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-strict-base-closed-point-localizations",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lemma-openclosed-point-ulift",
+  "prop-pur-kinjective-resolutions-exist",
+  "prop-weil-pbc-strict-henselization-stalk-formula"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.imo.universite-paris-saclay.fr/~luc.illusie/Illusie-nearby-cycles28.pdf",
+  "place": "Illusie §§1.3, 1.11--1.12; Zheng Appendix A.1--A.2 and (A.3.1). Read online; no downloaded literature added."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Restriction of nearby cycles to a geometric strict localization computes derived direct image and detects isomorphisms",
-   "results": "8 hits: HomologicalComplex.restrictionCyclesIso, HomologicalComplex.restrictionCyclesIso_inv_iCycles, HomologicalComplex.restrictionCyclesIso_hom_iCycles, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, HomologicalComplex.restrictionCyclesIso_hom_iCycles_assoc, HomologicalComplex.restrictionCyclesIso_inv_iCycles_assoc, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp",
+   "query": "Strict-local description of oriented nearby cycles via geometric points and derived direct images",
+   "results": "8 hits: AlgebraicGeometry.exists_lift_of_germInjective_aux, AlgebraicGeometry.spread_out_of_isGermInjective', AlgebraicGeometry.spread_out_of_isGermInjective, AlgebraicGeometry.spread_out_unique_of_isGermInjective, AlgebraicGeometry.spread_out_unique_of_isGermInjective', AlgebraicGeometry.exists_lift_of_germInjective, AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf, StalkSkyscraperPresheafAdjunctionAuxs.toSkyscraperPresheaf_app; no nearby-cycle theorem.",
    "date": "2026-10-17",
-   "verdict": "no match: inspected signatures concern ordinary scheme properties, sheaf composition/restriction or homological-complex cycles, not the strict-local etale cohomological assertion"
+   "verdict": "no match: unrelated scheme spreading and stalk infrastructure"
   },
   {
-   "tool": "leansearch",
-   "query": "For a scheme morphism, restriction of the nearby cycle functor to the strict localization of a geometric image point is derived direct image; Psi goodness is localized base change invariance",
-   "results": "8 hits: AlgebraicGeometry.morphismRestrict, AlgebraicGeometry.IsIntegralHom.instMorphismRestrict, AlgebraicGeometry.IsProper.instMorphismRestrict, AlgebraicGeometry.isClosedMap_isZariskiLocalAtTarget, AlgebraicGeometry.IsLocalAtSource.resLE, AlgebraicGeometry.IsFinite.instMorphismRestrict, AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict, AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem_restrict",
+   "tool": "loogle",
+   "query": "HasEnoughPoints, pointSmallEtale, isConservative",
+   "results": "0 hits; loogle reported unknown identifier 'HasEnoughPoints'.",
    "date": "2026-10-17",
-   "verdict": "no match: inspected signatures concern ordinary scheme properties, sheaf composition/restriction or homological-complex cycles, not the strict-local etale cohomological assertion"
+   "verdict": "query rejected: unknown identifier HasEnoughPoints; no conclusion from this query; other semantic and source searches have no match"
   },
   {
    "tool": "grep",
-   "query": "nearbyCycles|vanishingTopos|localizedBaseChange|cohomologicalDimension",
-   "results": "0 hits: ",
+   "query": "RΨ|nearby|oriented product|strict localization",
+   "results": "0 hits in Mathlib/CategoryTheory/Sites.",
    "date": "2026-10-17",
-   "verdict": "no match: inspected signatures concern ordinary scheme properties, sheaf composition/restriction or homological-complex cycles, not the strict-local etale cohomological assertion"
+   "verdict": "no match: no nearby-cycle or oriented-product declaration"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nearby cycles on an oriented product restrict at a geometric point to direct image from a strict localization",
+   "results": "8 hits: AlgebraicGeometry.PresheafedSpace.restrictStalkIso, AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso, AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec_fromSpecStalk, AlgebraicGeometry.Γ_restrict_isLocalization, AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap', AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_hom_eq_germ_assoc, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_spec; no nearby-cycle theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary stalk/restriction declarations only"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-good-oriented-nearby-kunneth",
@@ -64,5 +227,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-oriented-nearby-strict-local-description",
+  "worker": "stage1",
+  "summary": "Repaired the saved split: construct the canonical section from the local closed-point counit, prove the bounded-below comparison on Milnor-tube stalks, and extend using injective terms, Gabber finite cd and the existing acyclic-complex theorem. Verify ordinary and external-product mates, point conservativity, and both directions plus stability of the localized criterion.",
+  "blueprint": "Realizes the blueprint proof paragraph for (1) and (2), namely the strict-local description and localized base-change criterion used by the external-product comparison.",
+  "tool_uses": [
+   {
+    "node": "def-kun-projection-formula-map",
+    "why": "Its ordinary unbounded direct-image adjunction and explicit counit specify the strict-local ordinary and tensor mates; the trace-formula unit supplies no separate definition of this adjunction."
+   },
+   {
+    "node": "def-weil-pbc-strict-henselization-limit",
+    "why": "Its pointed-etale inverse-limit construction identifies the schemes used in the strict-local tests; the trace-formula unit uses this general scheme construction."
+   },
+   {
+    "node": "lem-kun-finite-cd-acyclic-complex",
+    "why": "Its unbounded acyclic-term comparison computes Rg_* on the restricted injective resolution using the finite bound; it is a general homological tool, not a replacement for specialization."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Its unbounded monoidal pullback isomorphism applies to each sigma_x with the constant coefficient-ring isomorphism; it supplies the general tensor comparison used by this unit."
+   },
+   {
+    "node": "lemma-openclosed-point-ulift",
+    "why": "Its conservative geometric-stalk family detects the bounded-below comparison on Y_(y) in the coefficient universe; it is a general etale-site tool."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "It supplies a K-injective resolution with injective terms on a small representative site; the trace-formula definition uses this general resolution theorem."
+   },
+   {
+    "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+    "why": "Its D+ torsion stalk formula computes Rg_* at t for the affine, hence qcqs, map g; this general strict-local tool supplies the target calculation."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Its exact inverse-image and D+ direct-image coefficient comparisons justify applying the abelian torsion stalk formula to constant-Lambda modules; no trace-formula node supplies this general comparison."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Its clauses (1), (3) and (4) supply the local functorial maps of strict localizations and their compatibility with pointed neighbourhoods; this is a general scheme tool needed in the strict-local tests."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-affine-strict-local-base-change",
+    "why": "Steps 8-9: computes the strict localization of Y_(y) x_Y Y_(y) at the diagonal closed point (Y_(y) ind-etale over an affine neighbourhood), identifying the diagonal with a strict-localization map; a general scheme tool absent from the trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-strict-base-closed-point-localizations",
+    "why": "Steps 8-9: strict localizations are unchanged by base change along a strict localization of the base at points over its closed point, and a strict localization is its own localization at the closed point; a general scheme tool absent from the trace-formula unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-kun-projection-formula-map",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-kun-finite-cd-acyclic-complex",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lemma-openclosed-point-ulift",
+  "prop-pur-kinjective-resolutions-exist",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-ind-etale-affine-strict-local-base-change",
+  "lem-weil-pbc-strict-base-closed-point-localizations"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-d690aa92a",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-d690aa92a (reviewer sub-agent of L); spot-checked: Verdict FIX: one gap repaired in the item file; no node dropped. Mathematics read in full: the item, its nine steps, the three new nodes and every cited statement. Sources read locally: Gabber XI 1.8, 1.11-1.12, 2.1-2.7 (canonical section and Prop 2.3/Cor 2.3.1) and 4.1-4.5 (vanishing topos and the local reduction for Psi); Stacks 05WR and 0GIP including the filtered-colimit proof of (2). Zheng A.1-A.3 and Illusie 1.11-1.12 are not in literature/ and this service blocks network access, so the item was checked against Gabber's identical construction and the DAG definitions; proof_origin is correctly agent. Statement unchanged; coefficients are constant-Lambda module sheaves; the base-change map is the definition's comparison beta; the D+ to unbounded passage via injective terms, g_*-acyclicity and the universal (*) bound is sound. Steps 1-7 and 9 are correct. Gap (E5/C1) in step 8: ind-etaleness of X_(x)->X and Y'_(y')->Y' only gives Q=X_(x)x_Y Y'_(y')->T, not W=X_(x)x_{Y_(y)}Y'_(y'). Repaired with existing nodes lem-weil-pbc-ind-etale-affine-strict-local-base-change and lem-weil-pbc-strict-base-closed-point-localizations: the diagonal of Y_(y)/Y is the strict-localization map Z_(z)->Z, so W_(q)=Q_(q)=T_(x'). Step 9 now refers to step 8's argument; uses, proof_deps and two tool_uses entries added. New nodes are true, needed and not duplicates: the local-projection node is Gabber XI 2.3+2.3.1; the points node follows from triple points plus local coherence; the ind-etale node is needed because step 2 uses non-closed points t of Y_(y), which the existing closed-point node does not cover. Off-unit tool uses (generic sheaf and scheme facts) accepted. No SGA citation.; 1 file(s) fixed by the reviewer"
  }
 }

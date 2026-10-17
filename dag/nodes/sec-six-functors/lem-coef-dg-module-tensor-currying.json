@@ -1,0 +1,82 @@
+{
+ "id": "lem-coef-dg-module-tensor-currying",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: finite enriched mapping-complex comparison before total inverse limit; the tensor-module identification used in classification proof step 2.",
+   "via": [
+    "lem-coef-dg-module-diagram-classification",
+    "lem-coef-dg-quasifunctor-invariance",
+    "lem-coef-derived-enriched-yoneda",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "kind": "statement",
+ "source": {
+  "document": "https://arxiv.org/pdf/math/0408337",
+  "place": "Section 4, opening tensor dg-category and enriched currying paragraphs; Section 3, module conventions. Read online; not archived locally. No Stacks tag states this enriched currying result."
+ },
+ "stmt_deps": [
+  "lem-coef-dgcat-model-structure",
+  "lem-coef-dg-module-projective-resolution",
+  "lem-coef-enriched-projective-diagram-model"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Currying strict dg functors from a tensor product dg category is equivalent to dg functors into a module category",
+   "results": "{\"t\": \"2026-10-17T08:30:42Z\", \"tool\": \"leansearch\", \"query\": \"Currying strict dg functors from a tensor product dg category is equivalent to dg functors into a module category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.curry\", \"CategoryTheory.Functor.curryingEquiv\", \"CategoryTheory.Functor.curryObj\", \"CategoryTheory.MonoidalClosed.ofEquiv_curry_def\", \"CategoryTheory.Functor.currying\", \"CategoryTheory.Functor.curryingEquiv_apply_map\", \"CategoryTheory.Functor.curryingEquiv_apply_obj\", \"CategoryTheory.MonoidalClosed.curryHomEquiv'\"], \"digest\": \"1a889745e8fe76b0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary currying only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Currying strict dg functors from a tensor product dg category is equivalent to dg functors into a module category",
+   "results": "{\"t\": \"2026-10-17T08:30:52Z\", \"tool\": \"leanfinder\", \"query\": \"Currying strict dg functors from a tensor product dg category is equivalent to dg functors into a module category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.Monoidal.inducingFunctorData\", \"CategoryTheory.Functor.curryingEquiv\", \"CategoryTheory.Functor.currying\", \"HomologicalComplex.dgoEquivHomologicalComplex_functor\", \"CategoryTheory.Functor.fullyFaithfulCurry\", \"HomologicalComplex.monoidalCategory\", \"CategoryTheory.Functor.curryingEquiv_apply_obj\", \"CategoryTheory.Functor.curryingEquiv_symm_apply_obj_map\"], \"digest\": \"5a7a722c66e1b893\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary currying and monoidal complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Enriched.FunctorCategory.homEquiv, CategoryTheory.Functor.curryingEquiv",
+   "results": "{\"t\": \"2026-10-17T08:32:06Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Enriched.FunctorCategory.homEquiv, CategoryTheory.Functor.curryingEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: enriched Hom projection, not the dg-module tensor assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "EnrichedFunctor|tensor.*Category|homEquiv",
+   "results": "{\"t\": \"2026-10-17T08:32:05Z\", \"tool\": \"grep\", \"query\": \"EnrichedFunctor|tensor.*Category|homEquiv\", \"sub\": \"CategoryTheory/Enriched\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Enriched/HomCongr.lean\", \"Mathlib/CategoryTheory/Enriched/HomCongr.lean\", \"Mathlib/CategoryTheory/Enriched/HomCongr.lean\", \"Mathlib/CategoryTheory/Enriched/HomCongr.lean\", \"Mathlib/CategoryTheory/Enriched/HomCongr.lean\", \"Mathlib/CategoryTheory/Enriched/Opposite.lean\", \"Mathlib/CategoryTheory/Enriched/Opposite.lean\", \"Mathlib/CategoryTheory/Enriched/Opposite.lean\"], \"digest\": \"36d6235bbf5ab624\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: source grep found only general enriched Hom and ordinary functor currying"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-dg-module-diagram-classification",
+  "date": "2026-10-17",
+  "group": "Q49"
+ },
+ "title": "Currying dg-module diagrams over a tensor product",
+ "statement": "Use the cochain-complex and dg-category conventions of [lem-coef-dgcat-model-structure], the module Hom-complex conventions of [lem-coef-dg-module-projective-resolution], and the enriched diagram conventions of [lem-coef-enriched-projective-diagram-model], in sufficiently large universes. Let $\\mathcal A,\\mathcal D$ be small dg categories over $\\mathbf Z$. Let $\\operatorname{Mod}(\\mathcal D)$ be covariant dg functors $\\mathcal D\\to\\mathrm{Ch}(\\mathbf Z)$; a degree-$r$ transformation $\\eta:F\\to G$ satisfies $G(\\delta)\\eta_d=(-1)^{r|\\delta|}\\eta_{d'}F(\\delta)$ and has differential $d\\eta=d_G\\eta-(-1)^r\\eta d_F$. Define $\\mathcal A\\otimes\\mathcal D$ to have object pairs, morphism complexes $\\mathcal A(a,a')\\otimes_{\\mathbf Z}\\mathcal D(d,d')$, the tensor differential, and composition $(\\beta\\otimes\\epsilon)\\circ(\\alpha\\otimes\\delta)=(-1)^{|\\epsilon||\\alpha|}(\\beta\\alpha\\otimes\\epsilon\\delta)$ on homogeneous morphisms. There is an isomorphism of dg categories between strict dg functors $\\mathcal A\\to\\operatorname{Mod}(\\mathcal D)$ and covariant dg modules over $\\mathcal A\\otimes\\mathcal D$. It sends $F$ to $H$ with $H(a,d)=F(a)(d)$ and $H(\\alpha\\otimes\\delta)=F(\\alpha)_{d'}F(a)(\\delta)$, and identifies all transformation complexes, differentials, identities and compositions. It identifies objectwise quasi-isomorphisms and objectwise degreewise surjections, and the projective model structures (hence cofibrant objects) on both sides whenever these structures exist.",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

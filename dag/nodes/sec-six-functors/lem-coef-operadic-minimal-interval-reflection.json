@@ -13,9 +13,125 @@
   "def-coef-operadic-weak-approximation",
   "def-coef-coherent-adjunction-data"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $p_M:M\\to N(\\Delta^{\\mathrm{op}})$ and $p_O:O\\to N(\\Delta^{\\mathrm{op}})$ be the operad projections. For $A=(\\beta:D\\to C,\\gamma:X\\to g(D))$, write $p_O(\\gamma)=J^{\\mathrm{op}}$ with $J:[m]\\hookrightarrow[n]$, $J(u)=t+u$, and $p_M(\\beta)=\\psi^{\\mathrm{op}}$. Its triangle gives $\\phi=J\\psi$, hence $t\\leq a\\leq b\\leq t+m$. Define $\\ell:[r]\\hookrightarrow[m]$ by $\\ell(v)=a-t+v$ and $\\psi_0:[k]\\to[r]$ by $\\psi_0(v)=\\phi(v)-a$. Then $\\psi=\\ell\\psi_0$ and $J\\ell(v)=a+v$. These formulas hold for noninjective $\\phi$ and for $r=0$.",
+   "uses": [
+    "def-coef-operadic-weak-approximation",
+    "lem-coef-operadic-algebra-presentability"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Agent expansion of the minimal-interval restriction supporting Definition A.6.1 and Proposition A.6.3 / Erratum Proposition E.0.2; these propositions state the approximation criterion, not the reflector itself."
+   }
+  },
+  {
+   "text": "The generalized-operad inert-lift axiom supplies a $p_M$-cocartesian edge $q:D\\to D_0$ over $\\ell^{\\mathrm{op}}$. Apply the cocartesian mapping-square criterion with target $C$. On the base-arrow component $\\psi_0^{\\mathrm{op}}$ it says that precomposition gives an equivalence $\\operatorname{Map}_M^{\\psi_0^{\\mathrm{op}}}(D_0,C)\\simeq\\operatorname{Map}_M^{\\psi^{\\mathrm{op}}}(D,C)$. Indeed the base is the nerve of an ordinary category, so its mapping spaces are discrete, and the prescribed component maps to the component of $\\psi^{\\mathrm{op}}$. Taking the homotopy fiber at $\\beta$ gives a contractible space of pairs $(\\beta_0,\\beta_0q\\simeq\\beta)$. Choose such a pair; the triangle in the slice is part of this choice, rather than an equality only in the homotopy category.",
+   "uses": [
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Agent expansion of the minimal-interval restriction supporting Definition A.6.1 and Proposition A.6.3 / Erratum Proposition E.0.2; these propositions state the approximation criterion, not the reflector itself."
+   }
+  },
+  {
+   "text": "Because $g$ preserves inert edges, $g(q)$ is $p_O$-cocartesian. The composition/cancellation lemma implies that the composite $\\gamma_0=g(q)\\gamma$ is $p_O$-cocartesian. Its base is $(J\\ell)^{\\mathrm{op}}$, so its interval is exactly $[a,b]$. Applying $g$ to the chosen slice triangle and composing with the triangle of $A$ gives a coherent triangle $g(\\beta_0)\\gamma_0\\simeq\\alpha$. Thus $A_0=(\\beta_0,\\gamma_0)$ is an object of the full subcategory $\\mathcal A_0$. The same pasting, retaining the compatibility simplex, gives an edge $\\eta_A:A\\to iA_0$ in the specified join-slice model, with comparison edge $q$. All compositions here are coherent compositions, not choices of strict equalities.",
+   "uses": [
+    "def-coef-operadic-weak-approximation",
+    "lem-coef-infinity-cocartesian-composition-initiality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Agent expansion of the minimal-interval restriction supporting Definition A.6.1 and Proposition A.6.3 / Erratum Proposition E.0.2; these propositions state the approximation criterion, not the reflector itself."
+   }
+  },
+  {
+   "text": "Here is the mapping-space calculation used below. Put $S=M_{/C}$, $T=O_{/g(C)}$, and $H=S\\times_T T_{\\alpha/}$ as in the definition of $\\mathcal F$. The slice-right-fibration theorem makes $S,T$ quasicategories. The coslice-left-fibration theorem makes $T_{\\alpha/}\\to T$ a left fibration; its pullback $H\\to S$ is again left, by projecting and filling each left-horn lifting problem. Opposite duality and the right-fibration morphism-space formula therefore give, naturally in two objects $A,B$ of $\\mathcal F$,\n$$\\operatorname{Map}_{\\mathcal F}(A,B)\\simeq\\operatorname{hofib}_{\\gamma_B}\\left(\\operatorname{Map}_S(\\beta,\\beta_B)\\longrightarrow\\operatorname{Map}_T(\\alpha,g\\beta_B)\\right).$$\nThe map takes $h$ with its slice triangle to $(g h)\\gamma$ with its pasted triangle. The fiber of $T_{\\alpha/}$ at $g\\beta_B$ is the left-pinched mapping model, naturally equivalent to the right-pinched one by opposite duality. Fullness gives the same mapping spaces in $H$ and $\\mathcal F$. Likewise the cone mapping-fiber formula for a one-object diagram, transported through the join-slice/arrow-slice equivalence, gives\n$$\\operatorname{Map}_S(\\beta,\\beta_B)\\simeq\\operatorname{hofib}_{\\beta}\\bigl(\\operatorname{Map}_M(D,D_B)\\xrightarrow{\\beta_B\\circ-}\\operatorname{Map}_M(D,C)\\bigr).$$\nThese are natural equivalences of spaces with their homotopies, so subsequent fibers retain the compatibility of the triangles.",
+   "uses": [
+    "def-coef-operadic-weak-approximation",
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-cbc-relative-coslice-left-fibration",
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-cbc-right-fibration-morphism-space",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-slice-arrow-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Agent expansion of the minimal-interval restriction supporting Definition A.6.1 and Proposition A.6.3 / Erratum Proposition E.0.2; these propositions state the approximation criterion, not the reflector itself."
+   }
+  },
+  {
+   "text": "Fix $B\\in\\mathcal A_0$, so $D_B$ is over $[r]$. In the first fiber of Step 4, every comparison $h:D\\to D_B$ has an opposite base map $u:[r]\\to[m]$ satisfying $Ju(v)=a+v$, by the compatibility with $\\gamma_B$. Since $J$ is injective, $u=\\ell$ is forced. For a comparison out of $A_0$, the same equation forces the opposite base map to be $\\operatorname{id}_{[r]}$. Higher homotopies in the base cannot change these maps since its mapping spaces are discrete. Apply the cocartesian mapping-square criterion for $q$ with targets $D_B$ and $C$. It gives equivalences on the two prescribed components\n$$\\operatorname{Map}_M^{\\operatorname{id}}(D_0,D_B)\\simeq\\operatorname{Map}_M^{\\ell^{\\mathrm{op}}}(D,D_B),\\qquad \\operatorname{Map}_M^{\\psi_0^{\\mathrm{op}}}(D_0,C)\\simeq\\operatorname{Map}_M^{\\psi^{\\mathrm{op}}}(D,C).$$\nPostcomposition with $\\beta_B$ commutes with these equivalences up to its coherent composition homotopy. Homotopy-pullback invariance, taking fibers at $\\beta_0$ and $\\beta$ and using the chosen triangle, gives an equivalence between the corresponding base-map components of $\\operatorname{Map}_S(\\beta_0,\\beta_B)$ and $\\operatorname{Map}_S(\\beta,\\beta_B)$. This is the actual precomposition map along the slice edge represented by $q$.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Agent expansion of the minimal-interval restriction supporting Definition A.6.1 and Proposition A.6.3 / Erratum Proposition E.0.2; these propositions state the approximation criterion, not the reflector itself."
+   }
+  },
+  {
+   "text": "Use Step 4 once for $(A_0,B)$ and once for $(A,B)$. The equivalence of slice-mapping components in Step 5 lies over the same target space $\\operatorname{Map}_T(\\alpha,g\\beta_B)$: the equality $\\gamma_0=g(q)\\gamma$ and the compatible slice triangle identify the two composition maps, with their homotopy. The fiber at $\\gamma_B$ only meets these components, by the forced-base calculation of Step 5. Homotopy-pullback invariance therefore gives\n$$\\operatorname{Map}_{\\mathcal A_0}(A_0,B)\\simeq\\operatorname{Map}_{\\mathcal F}(A,iB),$$\ninduced by precomposition with $\\eta_A$. All mapping-fiber formulas and composition maps used above are natural in $B$; thus this is a natural equivalence on the full category $\\mathcal A_0$, including higher simplices. In particular, there is no imposed inertness condition on $h$: its base map is forced by the triangles, while its edge in $M$ is unrestricted.",
+   "uses": [
+    "lem-coef-kan-homotopy-pullback-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Agent expansion of the minimal-interval restriction supporting Definition A.6.1 and Proposition A.6.3 / Erratum Proposition E.0.2; these propositions state the approximation criterion, not the reflector itself."
+   }
+  },
+  {
+   "text": "For every $A$, Step 6 represents $B\\mapsto\\operatorname{Map}_{\\mathcal F}(A,iB)$ by $A_0$, with universal edge $\\eta_A$. Apply the dual pointwise adjoint criterion to the full inclusion $i$. It assembles the representatives into a coherent functor $R$, the chosen universal edges into its unit, and supplies a counit and both coherent triangle identities, as required by the coherent-adjunction definition. This avoids choosing unrelated edge-level factorizations and asserting that they form a functor. For $A=iB$ with $B\\in\\mathcal A_0$, one has $t=a,m=r,\\ell=\\operatorname{id}$, so the identity restriction and $\\beta_0=\\beta_B$ can be used in Steps 2-3. The identity universal edge represents the functor $B'\\mapsto\\operatorname{Map}_{\\mathcal A_0}(B,B')$ by fullness. The universal property identifies $RiB$ with $B$, and its counit is this equivalence: applying the two representing equivalences to the identity maps gives inverse comparisons and both inverse homotopies. Hence the counit is a coherent equivalence.",
+   "uses": [
+    "lem-coef-infinity-pointwise-adjoint-criterion",
+    "def-coef-coherent-adjunction-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Agent expansion of the minimal-interval restriction supporting Definition A.6.1 and Proposition A.6.3 / Erratum Proposition E.0.2; these propositions state the approximation criterion, not the reflector itself."
+   }
+  },
+  {
+   "text": "If $r=0$, the map $\\ell:[0]\\hookrightarrow[m]$ selects the vertex $a-t$. It is an inert interval inclusion, so Steps 2-6 apply without modification. It need not be an identity: for $n=1,k=0,\\phi(0)=0$ and an object with $t=0,m=1$, the restriction has base $[1]\\to[0]$. If $n=0$, then $m=r=0$ and $\\ell$ is an identity; if $\\alpha$ is active, then $[a,b]=[0,n]$ forces every object to be minimal already. If $\\mathcal F$ is empty the objectwise criterion is vacuous and gives the unique adjunction between empty categories. No weak contractibility assumption about any factorization or lifting category was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178",
+    "place": "Agent expansion of the minimal-interval restriction supporting Definition A.6.1 and Proposition A.6.3 / Erratum Proposition E.0.2; these propositions state the approximation criterion, not the reflector itself."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-coherent-adjunction-data",
+  "def-coef-operadic-weak-approximation",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-relative-coslice-left-fibration",
+  "lem-cbc-right-fibration-morphism-space",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-pointwise-adjoint-criterion",
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-operadic-algebra-presentability"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1312.3178",
+  "place": "Definition A.6.1 and Proposition A.6.3 / Erratum Proposition E.0.2, read online 2026-10-17; the minimal-interval reflection is written out from the explicit inert-restriction argument."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -79,10 +195,52 @@
    "results": "Hits read: 38, 47, 50. ",
    "date": "2026-10-17",
    "verdict": "No match: Hits concern ordinary-category reflectors, nerve/coskeleton reflections or ordinal epi-mono factorization, not the coherent operadic triangle category. Reflective.lean lines 38,47,50 assume an existing ordinary Reflective structure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent left adjoint reflects an inert factorization category of a generalized nonsymmetric infinity operad to the minimal interval of an arbitrary base arrow",
+   "results": "CategoryTheory.instReflectiveSSetCatNerveFunctor; SimplexCategoryGenRel.instHasFactorizationP_σP_δ; CategoryTheory.nerve.instReflectiveTruncatedOfNatNatCatNerveFunctor₂; CategoryTheory.OrthogonalReflection.isRightAdjoint_ι; SSet.Truncated.coskAdj.reflective; none states the generalized infinity-operadic minimal-interval reflection.",
+   "date": "2026-10-17",
+   "verdict": "No match: the hits are ordinary nerve/coskeleton or orthogonal-reflection results, not this coherent operadic factorization category."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Reflective, SSet.Quasicategory",
+   "results": "0 hits (no declaration returned).",
+   "date": "2026-10-17",
+   "verdict": "No match: no Mathlib declaration combines quasicategories, operadic inert edges and the stated reflector."
+  },
+  {
+   "tool": "grep",
+   "query": "operad|Operad|WeakApproximation|weakApproximation (Mathlib/AlgebraicTopology)",
+   "results": "0 hits in the searched Mathlib/AlgebraicTopology subtree.",
+   "date": "2026-10-17",
+   "verdict": "No match: Mathlib contains no generalized infinity-operad weak-approximation API in this subtree."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inert factorization category of an infinity operad has a reflector onto factorizations through the minimal base interval",
+   "results": "CategoryTheory.reflector; CategoryTheory.instIsLeftAdjointReflector; CategoryTheory.Factorisation.instHasInitial; CategoryTheory.reflectorAdjunction; CategoryTheory.Factorisation.IsInitial_initial; model-category factorization declarations.",
+   "date": "2026-10-17",
+   "verdict": "No match: returned ordinary-category reflectors and model-category factorization results do not state the infinity-operadic assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cocartesian restriction of coherent operadic factorization triangles is universal for maps into the shortest subinterval containing the image of a simplex map",
+   "results": "{\"t\": \"2026-10-17T08:57:19Z\", \"tool\": \"leanfinder\", \"query\": \"Cocartesian restriction of coherent operadic factorization triangles is universal for maps into the shortest subinterval containing the image of a simplex map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn₃₁.desc.multicofork\", \"SSet.horn₃₂.desc.multicofork\", \"SSet.horn₃₁.desc.multicofork_π_zero\", \"SSet.horn₃₂.desc.multicofork_π_one\", \"SSet.horn₃₁.desc.multicofork_π_two\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₂\", \"SSet.horn₃₂.desc.multicofork_π_zero\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.fac_aux₃\"], \"digest\": \"774a4c51a79c553f\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: horn multicofork and strict Segal Kan extension hits do not assert the operadic reflector; Reflective.lean:38-54 assumes an existing ordinary reflector."
+  },
+  {
+   "tool": "grep",
+   "query": "def reflector|reflectorAdjunction|class Reflective",
+   "results": "{\"t\": \"2026-10-17T08:57:19Z\", \"tool\": \"grep\", \"query\": \"def reflector|reflectorAdjunction|class Reflective\", \"sub\": \"CategoryTheory/Adjunction/Reflective.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"38\", \"47\", \"50\", \"52\", \"54\"], \"digest\": \"9c9f89b15b6bd87a\"}",
+   "date": "2026-10-17",
+   "verdict": "No match: horn multicofork and strict Segal Kan extension hits do not assert the operadic reflector; Reflective.lean:38-54 assumes an existing ordinary reflector."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-active-lift-criterion",
@@ -109,5 +267,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operadic-minimal-interval-reflection",
+  "worker": "stage1",
+  "summary": "Reused the interrupted split and logged searches; replaced the unsupported mapping-fiber assertion with the existing slice, coslice and fibration mapping-space theorems. The forced base map and two cocartesian mapping-square equivalences prove the mapping-space universal property. The existing pointwise adjoint criterion supplies all coherent adjunction data. Corrected the proof-only false assertion that r=0 makes q an identity. Statement and provenance are unchanged; no new nodes or Lean attachment.",
+  "blueprint": "The nearest blueprint ancestor is prop-coef-integral-exceptional-adjoint. These steps realize its proof paragraph 2, the finite coefficient mapping-complex adjunction before derived inverse limit, via the corrected active-slice/minimal-interval argument of Definition A.6.1 and Proposition A.6.3 / Erratum Proposition E.0.2.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic quasicategory slice/coslice or mapping-space calculus used to compute the full factorization mapping spaces; no node of this unit supplies this same statement, and the operadic minimal-interval route is retained."
+   },
+   {
+    "node": "lem-cbc-relative-coslice-left-fibration",
+    "why": "Generic quasicategory slice/coslice or mapping-space calculus used to compute the full factorization mapping spaces; no node of this unit supplies this same statement, and the operadic minimal-interval route is retained."
+   },
+   {
+    "node": "lem-cbc-right-fibration-morphism-space",
+    "why": "Generic quasicategory slice/coslice or mapping-space calculus used to compute the full factorization mapping spaces; no node of this unit supplies this same statement, and the operadic minimal-interval route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-relative-coslice-left-fibration",
+  "lem-cbc-right-fibration-morphism-space"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q129-9db864f69",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-9db864f69 (reviewer sub-agent of L); spot-checked: I read the whole item, all 14 cited statements and the user's step 3. The delivery adds no new nodes, the statement and provenance are unchanged, and a walk over 998 dependencies found no cycle. Step 1: phi=J psi gives t<=a<=b<=t+m and psi=ell psi0, ordinal arithmetic correctly marked elementary. Step 2: the generalized-operad inert-lift axiom (singleton intervals included) and the cocartesian mapping square, taken over the discrete N(Delta^op), give Map^{psi0}(D0,C)~Map^{psi}(D,C). Step 3: g preserves inert edges, and the composition lemma applied to (gamma,g(q),gamma0) makes gamma0 cocartesian over (a+.)^op. Step 4: T_{alpha/}->T is a left fibration (coslice lemma with K=Delta^0, K0 empty) and so is its pullback H->S; taking opposites and the right-fibration morphism-space formula give hofib_{gamma_B}(Map_S(beta,beta_B)->Map_T(alpha,g beta_B)); cone calculus plus the slice-arrow equivalence give the slice mapping fiber. I re-derived both formulas independently. Steps 5-6: the base map is forced to u=ell because the base is discrete and J is injective; two mapping-square equivalences and homotopy-pullback invariance give the natural equivalence induced by eta_A. Step 7: the dual pointwise adjoint criterion supplies the coherent adjunction data; the counit is an equivalence because i is fully faithful. Step 8 cases check out, including the counterexample n=1, k=0, r=0 where ell is not an identity. Statement tested on small cases (n=2,k=1; r=0; active; empty F). No duplicate: rg over dag/nodes finds only the item and its user. The source, Gepner-Haugseng 1312.3178 A.6.1, A.6.3 and E.0.2, is not archived, read online and marked WANTED; the reflection is honestly attributed to the agent; no SGA. Blueprint ancestor prop-coef-integral-exceptional-adjoint exists in main-20261015. Tool uses accepted: three sk-prop-sf-cbc nodes (cone-calculus, relative-coslice-left-fibration, right-fibration-morphism-space); no node of this unit states them. The worker wrote the tool_uses entries itself, which C8 reserves for the maintainer; their content is correct and I left them. No fixes written."
  }
 }

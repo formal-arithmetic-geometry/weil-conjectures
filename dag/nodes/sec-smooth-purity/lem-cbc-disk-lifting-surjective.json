@@ -4,11 +4,61 @@
  "stmt_deps": [
   "lem-cbc-dold-kan-normalization-equivalence"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "Assume that g_n:C_n\\to E_n is surjective. For a commutative square (u,v), put y=v(e_n) and choose x\\in C_n with g_n(x)=y. Since v is a chain map, v(e_{n-1})=\\partial y. This choice uses only the displayed disk differential and surjectivity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "The item source place: supporting homological-algebra primitive for the compact-support base-change transport, the disk lifting calculation."
+   }
+  },
+  {
+   "text": "Define d:D^n\\to C by d(e_n)=x, d(e_{n-1})=\\partial x, and d=0 in all other degrees. It is a chain map: in degree n the chain-map equation is d(e_{n-1})=\\partial x, in degree n-1 it is\\partial^2x=0, and all remaining equations are zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "The item source place: supporting homological-algebra primitive for the compact-support base-change transport, the disk lifting calculation."
+   }
+  },
+  {
+   "text": "Let h:K\\oplus D^n\\to C be u on K and d on D^n. The direct-sum definition makes h a chain map, hj=u, and gh=v: on K this is the assumed equality gu=vj, while on e_n it follows from g_n(x)=v(e_n), and on e_{n-1} from the chain-map equations for g, d, and v.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "The item source place: supporting homological-algebra primitive for the compact-support base-change transport, the disk lifting calculation."
+   }
+  },
+  {
+   "text": "Conversely, assume the stated right lifting property. For any y\\in E_n, let u:K\\to C be the zero chain map and define v:K\\oplus D^n\\to E to be zero on K and to send e_n to y and e_{n-1} to \\partial y. The latter assignment is a chain map because \\partial^2y=0, and gu=vj holds.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "The item source place: supporting homological-algebra primitive for the compact-support base-change transport, the disk lifting calculation."
+   }
+  },
+  {
+   "text": "A lift h for this square gives x=h(e_n)\\in C_n with g_n(x)=y. Thus every y has a preimage and g_n is surjective, proving the equivalence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "The item source place: supporting homological-algebra primitive for the compact-support base-change transport, the disk lifting calculation."
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+  "place": "Supporting homological-algebra primitive for the transport in the proof opening 'Choose a compactification': disk lifting argument formerly inside step 3 of lem-cbc-simplicial-module-model. Agent-written linear chain calculation, in the model-theoretic context of Choudhury--Gallauer §3.3, sequence (1), before Proposition 3.15 (archive WANTED); its complete argument is retained in report.md."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-simplicial-module-model",
@@ -111,5 +161,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-disk-lifting-surjective",
+  "worker": "stage1",
+  "summary": "Expanded the imported disk lifting claim into a complete five-step generator calculation. The forward direction chooses a preimage of v(e_n), defines the lift on the two disk generators, and verifies the chain and square equations; the reverse direction uses the square with K-component zero and arbitrary y in E_n. No new node is needed because all auxiliary facts are direct consequences of the disk definition and chain-map axioms.",
+  "blueprint": "The proof realizes the supporting disk-lifting calculation named in the ancestor theorem's compact-support transport route; the five steps give the forward construction and the converse test square explicitly."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-d8b82668e",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-d8b82668e (reviewer sub-agent of L); spot-checked: Read the item, its five steps, the cited stmt-dep lem-cbc-dold-kan-normalization-equivalence (mathlib; it fixes the convention for nonnegative complexes and chain maps), the user lem-cbc-simplicial-module-model step 4 (it needs exactly this equivalence), the sibling lem-cbc-normalized-horn-disk (same D^n: rank one in degrees n and n-1, identity differential), unit sk-prop-sf-cbc, and the ancestor blueprint proof thm-cbc-finite-level-proetale.proof.md (main-20261015). The blueprint does not treat the disk calculation, so proof_origin=agent and the WANTED for Choudhury-Gallauer section 3.3 are correct; the paper is not archived. Statement checked as true with n>=1 and Lambda commutative. Edge cases: n=1, where the degree-0 equation holds since partial_0=0; K=0, where Hom(D^n,X)=X_n; C=0 or E=0; the zero ring; a non-cycle y, which the converse handles through e_{n-1} -> partial y. Steps: 1 gives v(e_{n-1})=partial y; 2 checks the chain equations in degrees n and n-1 (partial^2 x=0); 3 checks gh=v on K (square hypothesis), on e_n (g x=y) and on e_{n-1} (g partial x=partial g x=partial y); 4 builds the test square u=0 with v a chain map since partial^2 y=0; 5 takes the preimage h(e_n). All five are one- or two-line definition-level checks, so elementary is justified. uses and proof_deps are empty and consistent, there is no cycle, and no tool_uses or off-unit citations. No new nodes. rg over dag/nodes for disk, D^n, right lifting and lifting/surjective finds no duplicate: the only disk hits are a topological disk-extension lemma and the complementary horn-disk node. Mathlib searches cover all three kinds; one LeanSearch was correctly recorded as unavailable and another ran. Not a target node, so the base-change and coefficient checks do not apply. No SGA. Only cosmetic issue: step texts are bare TeX without $ delimiters. No fixes written."
  }
 }

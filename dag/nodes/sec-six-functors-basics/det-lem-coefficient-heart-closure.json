@@ -44,31 +44,66 @@
    }
   },
   {
-   "text": "*Finite-field coefficient comparison and cokernels.* First take $\\Lambda=E$. By [def-sfb-subfield-coefficient-ring], $E_S=p_S^*C(-,E)$. The canonical ring-sheaf isomorphism in [lem-weil-pbc-condensed-field-continuous-realization] identifies this ring with $V\\mapsto C(|V|,E)$, exactly the rational coefficient ring in [def-weil-pbc-lisse-lattice-coefficients] and Bhatt–Scholze Definition 6.8.1. It preserves finite free local models, hence lisseness. This is the coefficient realization of Hemo–Richarz–Scholbach Example 3.1; it is not used as a local-freeness theorem. Apply [lem-sfb-etale-local-monodromy-realization] to the finite diagram $F\\xrightarrow{\\phi}G$. On its connected qcqs étale cover $T\\to S$, $\\phi$ is $J_T(h)$ for an equivariant map $h:V\\to W$ of finite-dimensional continuous $E$-representations. Put $I=h(V)$ and $Q=W/I$. Both are finite-dimensional. Their actions are continuous: choose a basis of $I$, extend it to a basis of $W$, and identify $Q$ with the complementary coordinates; the action matrices on $I$ and $Q$ are submatrices of the continuous matrix on $W$. The same basis calculation for $\\ker h\\subset V$ makes the induced action continuous. The exact sequences $0\\to\\ker h\\to V\\to I\\to0$ and $0\\to I\\to W\\to Q\\to0$ therefore have exact images under $J_T$. Consequently the map $J_T(V)\\to J_T(I)$ is epic, $J_T(I)\\to J_T(W)$ is monic, and their composite is $J_T(h)$. The second sequence then says that $J_T(Q)$, with its specified quotient map from $J_T(W)$, is the ambient cokernel of $J_T(h)$. It is lisse by the comparison node. By [sk-prop-sfb-cartesian-coefficients](1) and its final assertion, module pullback is canonically naturally isomorphic to the exact lift of inverse image with action transported along the coefficient-ring comparison. It therefore preserves this ambient cokernel, which identifies it with the restriction of $\\operatorname{coker}\\phi$. This uses untwisted coefficients, so no invertibility of $\\ell$ is required. Combining the étale covering with the pro-étale finite-free covers of $J_T(Q)$ proves that $\\operatorname{coker}\\phi$ is lisse on the original $S$. No new stratification is taken.",
+   "text": "First take $\\Lambda=E$. By [def-sfb-subfield-coefficient-ring], $E_S=p_S^*C(-,E)$. The canonical ring-sheaf isomorphism of [lem-weil-pbc-condensed-field-continuous-realization] identifies it with the continuous-function ring of [def-weil-pbc-lisse-lattice-coefficients]. Transport along this isomorphism preserves finite free local models, since it sends the standard basis to the standard basis. Apply [lem-sfb-etale-local-monodromy-realization] to the finite diagram $F\\xrightarrow{\\phi}G$. On each connected qcqs topologically Noetherian member $T$ of its etale covering, the diagram is $J_T(V)\\xrightarrow{J_T(h)}J_T(W)$ for an equivariant map of continuous finite-dimensional $E$-representations. These are the continuous-function coefficients of Bhatt–Scholze, not discrete coefficient sheaves.",
    "uses": [
     "def-sfb-subfield-coefficient-ring",
     "lem-weil-pbc-condensed-field-continuous-realization",
     "def-weil-pbc-lisse-lattice-coefficients",
+    "lem-sfb-etale-local-monodromy-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1),(4),(6) and Corollary 6.8.5, integral-monodromy reduction; HRS Example 3.1 for coefficient realization"
+   }
+  },
+  {
+   "text": "By [lem-sfb-continuous-representation-subquotients], $K=\\ker h$, $I=h(V)$ and $Q=W/I$ are continuous representations, and $0\\to K\\to V\\to I\\to0$ and $0\\to I\\to W\\to Q\\to0$ are underlying-exact sequences of representations. The ambient exactness assertion of [lem-sfb-etale-local-monodromy-realization] applies to both. Thus $J_T(V)\\to J_T(I)$ is epic, $J_T(I)\\to J_T(W)$ is monic, and $J_T(Q)$ is the ambient cokernel of their composite $J_T(h)$. This composite is the restricted $\\phi$. By the untwisted clause (1) and final assertion of [sk-prop-sfb-cartesian-coefficients], module restriction to $T$ is canonically isomorphic to exact inverse image, so it identifies the ambient cokernel with $(\\operatorname{coker}\\phi)|_T$. As $J_T(Q)$ is lisse, its finite-free covers, composed with the etale cover, prove that $\\operatorname{coker}\\phi$ is lisse on $S$. No invertibility of $\\ell$ or additional stratification is used.",
+   "uses": [
+    "lem-sfb-continuous-representation-subquotients",
     "lem-sfb-etale-local-monodromy-realization",
     "sk-prop-sfb-cartesian-coefficients"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(1),(4),(6) and Corollary 6.8.5, proof; coefficient comparison: Hemo–Richarz–Scholbach Example 3.1"
+    "place": "Corollary 6.8.5, representation cokernel and exact restriction"
    }
   },
   {
-   "text": "*Algebraic-closure cokernels by the prescribed finite-coefficient passage.* Now let $\\Lambda=\\Qlb$. Fix the prime and algebraic closure already used for the coefficients. Use precisely the conventions in [det-lem-coefficient-finite-descent-lisse]: finite coefficient fields are subfields of this fixed closure, $E_S=p_S^*\\underline E$, and $\\QbarS=p_S^*\\underline{\\Qlb}$ uses continuous sections with values in a finite subextension. Lisse means locally finite free on the small pro-étale site, including zero and varying ranks; scalar extension is the ordinary relative tensor product. These are the coefficient and locality conventions of the present item. A topologically Noetherian scheme $S$ is qcqs: every open, in particular $S$ and the intersection of two affine opens, is quasi-compact. Hence clause (1) of the descent node supplies lisse finite-field models of $F$ and $G$. Take the compositum $E_0$ of their fields inside the fixed closure; it is finite, since products of finite spanning sets span the compositum. Extend both models to $E_0$. Extending a local basis gives a local basis, so both models remain lisse. Tensor transitivity is the balanced map $r\\otimes(s\\otimes m)\\mapsto rs\\otimes m$, with inverse $r\\otimes m\\mapsto r\\otimes(1\\otimes m)$; thus their extensions to $\\QbarS$ retain the specified isomorphisms with $F,G$. Transport $\\phi$ through these isomorphisms. By clause (2), this actual morphism is the image of a representative $(E,\\phi_E)$ of the Hom colimit for a finite $E\\supseteq E_0$, where $\\phi_E:F_E\\to G_E$. The transition maps in that colimit are exactly scalar extension, so the same tensor identifications identify $(\\phi_E)_{\\Qlb}$ with $\\phi$. The previous step shows $C_E=\\operatorname{coker}\\phi_E$ is lisse. By [sk-def-sfb-change-of-scalars](2), extension of scalars is a left adjoint and preserves cokernels. Hence $\\operatorname{coker}\\phi\\cong\\QbarS\\otimes_{E_S}C_E$, which is lisse since a finite local basis extends to a finite local basis. The coefficient ring is exactly the one in [sk-prop-sfb-qlbar-colimit-x], $\\QbarS\\cong\\varinjlim_E E_S$. No identification with the ring of all functions continuous for the valuation topology on $\\Qlb$, and no flatness or preservation-of-kernels assertion, enters this passage.",
+   "text": "Now take $\\Lambda=\\Qlb$ in the fixed algebraic closure. Use the coefficient and locality conventions stated in [det-lem-coefficient-finite-descent-lisse]: pulled-back condensed rings, ordinary relative tensor product, and finite-subextension-valued sections for $\\QbarS$. A topologically Noetherian $S$ is qcqs, because every open subset is quasi-compact, including $S$ and intersections of affine opens. Clause (1) of that node therefore supplies lisse models $F_{E_1}$ and $G_{E_2}$ with specified scalar-extension isomorphisms to $F,G$. Take the compositum $E_0$ inside the fixed closure. It is finite over $\\mathbf Q_\\ell$: if $a_i$ and $b_j$ span the two fields, the products $a_i b_j$ span their compositum.",
    "uses": [
-    "det-lem-coefficient-finite-descent-lisse",
+    "det-lem-coefficient-finite-descent-lisse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(3),(4); finite-stage object descent in blueprint paragraph (2)"
+   }
+  },
+  {
+   "text": "Extend these models to $E_0$. A finite local basis remains a finite local basis after tensoring: $B\\otimes_A A^r\\cong B^r$, by $b\\otimes(a_i)\\mapsto(ba_i)$ with inverse $(b_i)\\mapsto\\sum_i b_i\\otimes e_i$. The tensor comparisons of [lem-weil-pbc-condensed-flat-coefficient-calculus] identify their further extensions to $\\QbarS$ with the original $F,G$; its rings are exactly the pulled-back $E_S$ and finite-subextension-valued $\\QbarS$ here, and its hypothesis on $S$ is only topological Noetherianity. Transport $\\phi$ through these specified isomorphisms. Clause (2) of [det-lem-coefficient-finite-descent-lisse] gives a representative $(E,\\phi_E)$ in the Hom colimit for a finite $E\\supseteq E_0$. Its transition maps are scalar extension, so $(\\phi_E)_{\\Qlb}$ is this actual transported morphism, not merely a map between isomorphic objects. The same local-basis calculation makes $F_E,G_E$ lisse. On degree-zero modules the cited termwise computation identifies its derived tensor comparisons with these ordinary tensor comparisons.",
+   "uses": [
+    "lem-weil-pbc-condensed-flat-coefficient-calculus",
+    "det-lem-coefficient-finite-descent-lisse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(3),(4); finite-stage morphism descent with tensor comparisons"
+   }
+  },
+  {
+   "text": "The finite-$E$ case proved above makes $C_E=\\operatorname{coker}\\phi_E$ lisse. By [sk-def-sfb-change-of-scalars](2), extension of scalars is a left adjoint and preserves cokernels. Its braided, colimit-preserving tensor hypotheses hold for abelian sheaves by [sk-def-sfb-sheaf-tensor]; $E_S$ is commutative. Hence $\\operatorname{coker}\\phi\\cong\\QbarS\\otimes_{E_S}C_E$. The local-basis isomorphism of the preceding step makes this lisse, including rank zero. The coefficient system is precisely $\\QbarS\\cong\\varinjlim_E E_S$ of [sk-prop-sfb-qlbar-colimit-x]. This passage uses neither the sheaf of all valuation-continuous $\\Qlb$-valued functions nor preservation of kernels by scalar extension.",
+   "uses": [
     "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-sheaf-tensor",
     "sk-prop-sfb-qlbar-colimit-x"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.2 and Proposition 6.8.4(3),(4),(6), finite-coefficient passage in Corollary 6.8.5; blueprint paragraph (2)"
+    "place": "Lemma 6.8.2 and Proposition 6.8.4(3),(4); blueprint paragraph (2), cokernel after finite descent"
    }
   },
   {
@@ -111,7 +146,9 @@
   "lem-weil-pbc-condensed-field-continuous-realization",
   "def-weil-pbc-lisse-lattice-coefficients",
   "lem-sfb-etale-local-monodromy-realization",
+  "lem-sfb-continuous-representation-subquotients",
   "det-lem-coefficient-finite-descent-lisse",
+  "lem-weil-pbc-condensed-flat-coefficient-calculus",
   "sk-def-sfb-change-of-scalars",
   "sk-prop-sfb-qlbar-colimit-x",
   "def-sfb-modobj-internal-hom",
@@ -160,10 +197,115 @@
    "results": "6 hits: SheafOfModules.IsLocallyFree, SheafOfModules.LocalGeneratorsData.isLocallyFree, SheafOfModules.IsLocallyFree.exists_isLocallyFreeData, SheafOfModules.IsLocallyFree.mk, SheafOfModules.instIsQuasicoherentOfIsLocallyFree, SheafOfModules.instIsLocallyFreeFree",
    "date": "2026-10-16",
    "verdict": "no match: definitions of local freeness, presentation constructors, and abelianity of other sheaf categories do not give this pro-etale coefficient-specific closure theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kernels and cokernels of morphisms of lisse l-adic pro-etale sheaves are locally free of finite rank",
+   "results": "8 hits: SheafOfModules.relationsOfIsCokernelFree_s, AlgebraicGeometry.Scheme.Hom.ker, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.generatorsOfIsCokernelFree_s, CategoryTheory.kernelUnopUnop, SheafOfModules.generatorsOfIsCokernelFree_π, CondensedSet.LocallyConstant.functorFullyFaithful, CategoryTheory.ComposableArrows.Exact.cokerIsoKer'",
+   "date": "2026-10-17",
+   "verdict": "no match: algebraic tensor, free-module or sheaf-local-freeness interfaces do not state this pro-etale l-adic closure result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a topologically Noetherian scheme lisse sheaves over a finite extension of Q_l or bounded-image Qbar_l are closed under kernels cokernels and extensions",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAbelian, LightCondensed.instIsGrothendieckAbelianLightCondMod, instAbelianLightCondMod, instAbelianCondensedMod, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.Sheaf.instIsGrothendieckAbelian, Condensed.instAB4CondensedMod, Condensed.instAB5CondensedMod",
+   "date": "2026-10-17",
+   "verdict": "no match: algebraic tensor, free-module or sheaf-local-freeness interfaces do not state this pro-etale l-adic closure result"
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousSMul, Submodule.Quotient",
+   "results": "0 hits: ; loogle: unknown identifier 'Submodule.Quotient'",
+   "date": "2026-10-17",
+   "verdict": "invalid query; inconclusive"
+  },
+  {
+   "tool": "grep",
+   "query": "ContinuousSMul|continuous.*(quotient|submodule)|quotient.*continuous",
+   "results": "9 hits: Mathlib/RepresentationTheory/Continuous/TopRep.lean, Mathlib/RepresentationTheory/Continuous/TopRep.lean, Mathlib/RepresentationTheory/Continuous/TopRep.lean, Mathlib/RepresentationTheory/Continuous/TopRep.lean, Mathlib/RepresentationTheory/Continuous/TopRep.lean, Mathlib/RepresentationTheory/Continuous/Basic.lean, Mathlib/RepresentationTheory/Continuous/Basic.lean, Mathlib/RepresentationTheory/Continuous/Basic.lean; Mathlib directory RepresentationTheory",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state joint continuity of invariant subspace and quotient actions in the finite-dimensional p-adic representation category"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A jointly continuous linear group action on a finite dimensional p-adic vector space induces continuous actions on invariant linear subspaces and quotient vector spaces",
+   "results": "8 hits: QuotientGroup.instContinuousConstSMul, QuotientGroup.instContinuousSMul, ContinuousCohomology.invariants, QuotientAddGroup.instContinuousConstVAdd, AddSubgroup.continuousVAdd, QuotientAddGroup.instContinuousVAdd, ContinuousVAdd, ContinuousVAdd.mk",
+   "date": "2026-10-17",
+   "verdict": "no match: algebraic tensor, free-module or sheaf-local-freeness interfaces do not state this pro-etale l-adic closure result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous finite dimensional representation of a topological group over a finite extension of Q_p, invariant subspaces and quotients have continuous induced actions and equivariant linear maps have continuous kernel image and cokernel representations",
+   "results": "8 hits: ContinuousCohomology.invariants, Rep.quotient, ContinuousCohomology.instLinearActionTopModuleCatInvariants, Rep.mkQ, Representation.quotient, Rep.mkQ_hom, Representation.quotient_apply, Rep.quotientToInvariants",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state joint continuity of invariant subspace and quotient actions in the finite-dimensional p-adic representation category"
+  },
+  {
+   "tool": "grep",
+   "query": "ContinuousSMul|continuous.*smul",
+   "results": "0 hits: ; Mathlib directory Topology/Algebra/Module/Quotient",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state joint continuity of invariant subspace and quotient actions in the finite-dimensional p-adic representation category"
+  },
+  {
+   "tool": "grep",
+   "query": "subrepresentation|quotient|cokernel|kernel|submodule",
+   "results": "9 hits: Mathlib/RepresentationTheory/Continuous/TopRep.lean, Mathlib/RepresentationTheory/Continuous/TopRep.lean, Mathlib/RepresentationTheory/Continuous/TopRep.lean, Mathlib/RepresentationTheory/Continuous/TopRep.lean, Mathlib/RepresentationTheory/Continuous/Basic.lean, Mathlib/RepresentationTheory/Continuous/Basic.lean, Mathlib/RepresentationTheory/Continuous/Basic.lean, Mathlib/RepresentationTheory/Continuous/Basic.lean; Mathlib directory RepresentationTheory/Continuous",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state joint continuity of invariant subspace and quotient actions in the finite-dimensional p-adic representation category"
+  },
+  {
+   "tool": "loogle",
+   "query": "ContRepresentation",
+   "results": "12 hits: ContRepresentation, ContRepresentation.trivial, ContRepresentation.invariants, ContRepresentation.toRepresentation, ContIntertwiningMap.id, ContRepresentation.Equiv.refl, ContIntertwiningMap.instOne, ContRepresentation.restrict",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state joint continuity of invariant subspace and quotient actions in the finite-dimensional p-adic representation category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invariant subspace and its quotient of a finite dimensional continuous representation over a nonarchimedean local field inherit continuous representations; kernels and cokernels are computed on vector spaces",
+   "results": "8 hits: Rep.quotient, Rep.mkQ, Representation.quotient, Representation.quotient_apply, Representation.quotientToInvariants, Rep.mkQ_hom, Rep.quotientToInvariants, Rep.toCoinvariantsKer",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state joint continuity of invariant subspace and quotient actions in the finite-dimensional p-adic representation category"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*assoc|assoc.*tensor|IsLocallyFree",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean; Mathlib directory Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-17",
+   "verdict": "no match: algebraic tensor, free-module or sheaf-local-freeness interfaces do not state this pro-etale l-adic closure result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite extension of scalars preserves locally free finite rank sheaves and scalar extension is associative",
+   "results": "8 hits: ModuleCat.ExtendScalars.obj', Algebra.TensorProduct.instFree, ModuleCat.extendScalars_assoc', instFinitePresentationTensorProduct, LinearEquiv.extendScalarsOfIsLocalizationEquiv, LinearEquiv.extendScalarsOfIsLocalizationEquiv_apply, ModuleCat.extendRestrictScalarsAdj, ModuleCat.restrictCoextendScalarsAdj",
+   "date": "2026-10-17",
+   "verdict": "no match: algebraic tensor, free-module or sheaf-local-freeness interfaces do not state this pro-etale l-adic closure result"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.assoc",
+   "results": "12 hits: TensorProduct.assoc, TensorProduct.assoc_tmul, TensorProduct.lid_tensor, TensorProduct.assoc_symm_tmul, TensorProduct.leftComm_def, TensorProduct.rightComm_def, LinearMap.lTensor_rTensor_comp_assoc, Equiv.tensorProductAssoc_def",
+   "date": "2026-10-17",
+   "verdict": "no match: algebraic tensor, free-module or sheaf-local-freeness interfaces do not state this pro-etale l-adic closure result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a lisse module over a condensed finite p-adic coefficient field, finite scalar extension is lisse and tensor scalar extension is transitive",
+   "results": "8 hits: LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CondensedMod.IsSolid, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "date": "2026-10-17",
+   "verdict": "no match: algebraic tensor, free-module or sheaf-local-freeness interfaces do not state this pro-etale l-adic closure result"
+  },
+  {
+   "tool": "grep",
+   "query": "def quotient|def mkQ|def quotientToInvariants",
+   "results": "4 hits: Mathlib/RepresentationTheory/Basic.lean, Mathlib/RepresentationTheory/Rep/Basic.lean, Mathlib/RepresentationTheory/Coinvariants.lean, Mathlib/RepresentationTheory/Invariants.lean; Mathlib directory RepresentationTheory",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state joint continuity of invariant subspace and quotient actions in the finite-dimensional p-adic representation category"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -187,8 +329,8 @@
   "date": "2026-10-17",
   "item": "det-lem-coefficient-heart-closure",
   "worker": "stage1",
-  "summary": "Repair of landing refusal L: revalidated every retained citation against the current DAG, reread the expanded finite-lisse-descent and cartesian-coefficient statements, and adjusted steps 1–3 to their precise conventions. Step 3 checks the fixed algebraic closure, finite subfields, bounded-subextension condensed coefficients, zero/varying ranks, ordinary relative tensor and Hom-colimit transitions. Steps 1–2 use the canonical exact inverse-image lift rather than literal equality of functors. All citation quotes were refreshed. The five-step Bhatt–Scholze route, item statement, and statement-only monodromy child are retained. Second reader supplied the missing Grothendieck-abelian hypothesis in step 4 using an existing Lean-closed generic tool, and added the exact site-comparison definition to the monodromy child.",
-  "blueprint": "Step 1 realizes local field models and extension splitting. Step 2 realizes the prescribed Bhatt–Scholze paragraph (2) through its integral-monodromy comparison and explicit quotient representations. Step 3 realizes its finite-E to Qbar passage using the existing coefficient colimit and finite-field lisse descent. Step 4 supplies elementary kernel duality; step 5 realizes globalization. No unit-route or source-error exception is invoked.",
+  "summary": "Q24 dedicated long-step repair: preserved the statement, Lean metadata, and original extension, kernel-duality and globalization steps. Extracted continuous representation subquotients into one statement-only node; reused the existing condensed coefficient calculus for tensor comparisons and the finite-lisse-descent node for object and actual morphism descent. Replaced old steps 2–3 by five shorter steps with precise citations and refreshed verbatim citation quotes.",
+  "blueprint": "Step 1 is the original local-model and extension paragraph. Steps 2–3 realize paragraph (2) via finite-E coefficient comparison, the etale-local monodromy realization, continuous representation subquotients, and ambient exactness. Steps 4–6 realize the same paragraph’s colimit-over-E passage via the existing finite-lisse-descent theorem, tensor comparisons and preservation of cokernels. Steps 7–8 retain kernel duality and globalization. No route change or statement correction.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-condensed-field-continuous-realization",
@@ -208,7 +350,11 @@
    },
    {
     "node": "sk-prop-sfb-cartesian-coefficients",
-    "why": "Steps 1-2 take only clause (1) (untwisted) and its final assertion: module pullback along a weakly etale/etale map is the exact lift of f^{-1}; the unit's own common-stratification node (3) gives exactness only for restriction to strata, not to pro-etale or etale covers."
+    "why": "Steps 1 and 3 use only untwisted clause (1) and the final exact-inverse-image assertion for covering restrictions; common-stratification (3) supplies only restriction to strata."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-flat-coefficient-calculus",
+    "why": "Only the existing tensor-transitivity comparison for these exact pulled-back condensed coefficients, evaluated on modules in degree zero, is used in step 5; no constructible closure or alternate proof route is imported."
    }
   ]
  },
@@ -217,15 +363,16 @@
   "def-weil-pbc-lisse-lattice-coefficients",
   "det-lem-coefficient-finite-descent-lisse",
   "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
-  "sk-prop-sfb-cartesian-coefficients"
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-condensed-flat-coefficient-calculus"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q17-5a86563db",
-  "group": "Q17",
+  "reviewer": "NT-cc-Q24-c9a3d4090",
+  "group": "Q24",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-5a86563db (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-etale-local-monodromy-realization, every cited statement, the unit sk-lem-coefficient-heart, the main-20261015 blueprint statement and proof, and Bhatt–Scholze §6.8 (Def 6.8.1, Lemma 6.8.2, Def 6.8.3, Prop 6.8.4(1)-(6) with proofs, Cor 6.8.5 with proof). The item matches the blueprint word for word and nothing is weakened. Steps 1-5 hold. Step 1: the module-cokernel hypotheses are met by the sheaf-tensor and abelian-sheaf nodes, and a local basis lift splits the sequence, rank 0 included. Step 2 is BS's proof of 6.8.5: kernel, image and quotient representations are continuous, J(Q) is the ambient cokernel, and restriction is exact by the cartesian node, untwisted only. Step 3: topologically Noetherian implies qcqs, so the current finite-descent node applies; scalar extension is a left adjoint and preserves cokernels, and no flatness is used. Step 4: ker φ ≅ (coker φ^∨)^∨, with the Grothendieck hypothesis supplied by a Lean-closed node. Step 5 uses common-stratification (1)-(3), and the full subcategory is abelian with exact inclusion. The new node is true by BS 6.8.4(1),(4),(6), cor-galois-lisse-representations(1), invariant lattices, and exactness of limits in the replete topos; I tested B=0, a geometric point, the empty base, varying ranks, and zero/identity/injective/surjective maps. Its proof will have to show that étale covers of a topologically Noetherian scheme are topologically Noetherian (Zariski's Main Theorem plus Ohm–Pendleton); BS use this implicitly too. The node is statement-only, its form and searches are complete, and it states no closure clause of its parent. No duplicate found: lem-weil-pbc-continuous-etale-local-lattice, lisse-e-constructible-integral-lattice, condensed-constructible-serre (a different, local-finite-presentation notion of constructibility), locally-constant-derived-serre, cor-galois-lisse-representations(2) and sk-lem-stratified-lattice all state something else. Fix: sk-prop-sfb-cartesian-coefficients is used off the unit's route in steps 1-2 without a declaration. I added it to split_report.tool_uses in fixes/dag/nodes/sec-six-functors-basics/det-lem-coefficient-heart-closure.json; nothing else in that file changed. I accept the declared tool uses for condensed-field-continuous-realization, lisse-lattice-coefficients, finite-descent-lisse and epi-locally-surjective. No SGA source is used.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-c9a3d4090 (reviewer sub-agent of L); spot-checked: I read all of it: the item, all 8 steps, the new node, the statement of every cited node, unit sk-lem-coefficient-heart, the main-20261015 blueprint statement and proof, and Bhatt–Scholze §6.8 (Lemma 6.8.2, Prop 6.8.4(1)-(6) with proofs, Cor 6.8.5 with proof, p.60). The statement matches the blueprint word for word and nothing is weakened. Step 1 (local basis lift splits the extension, rank 0 included) and steps 7-8 (kernel ≅ (coker φ^∨)^∨, checked both ways; globalization through common stratification (1)-(3) and modobj-abelian) are unchanged from the previously reviewed split. Steps 2-3 are BS 6.8.5. The coefficient ring is transported to the continuous-function ring through the explicit realization isomorphism. The monodromy node needs only a Noetherian underlying space. In the new node, K, I and Q give underlying-exact sequences, so J(V)→J(I) is epi, and coker J(h)=J(Q) by functoriality; restriction is exact by cartesian (1) untwisted only, with no condition on ℓ. Step 4: topologically Noetherian implies qcqs, and the finite-descent conventions are identical to the item's. Step 5: the condensed-flat calculus rings are the same internal-module rings as the item's, termwise tensor gives the ordinary degree-0 comparisons, and descent (2) gives the actual transported morphism. Step 6: extension of scalars is a left adjoint and preserves cokernels; no kernel exactness is used. New node lem-sfb-continuous-representation-subquotients is true: subspaces of finite-dimensional spaces over the complete field E are closed with the canonical topologies, and Π×V→Π×V/U is an open surjection. I tested V=0, U=0, U=V, trivial Π, h=0, h an isomorphism, and injective, surjective and split h. Its source is BS 6.8.5 p.60 ('obviously admits kernels and cokernels'). It is statement-only, B1-B9 hold, and the searches are genuine. It is not a restatement of a parent clause. It is not a duplicate: cor-galois-lisse-representations(2) states abelianness only for π1 of a Noetherian separated Y with ℓ invertible, and the kernel argument is only in its proof. There is no cycle. Off-route uses are a Mathlib leaf, a Lean-closed node, a definition, and six declared tool uses; I accept all six, including the new condensed-flat-coefficient-calculus. No SGA source is used. No fixes were made. Cosmetic only: the new node's title says 'p-adic' and lean_audit is absent (filled by tools)."
  },
  "lean_audit": {
   "master": {
