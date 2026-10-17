@@ -225,5 +225,32 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-53f2705b0 (reviewer sub-agent of L); spot-checked: Read the full item, report, ten cited statements, and relevant HA/HTT/Kerodon sources. All six proof steps check out; 1,464 finite block-map cases passed. The unary C₂ counterexample justifies removing unqualified contractible uniqueness. No cycles, duplicate nodes, target weakening, or new tool uses found. Detailed review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ActiveConcatenationBlockProjections",
+  "declaration": "SSet.Enhanced.active_concatenation_block_projections",
+  "declarations": [
+   "SSet.Enhanced.activeBlockOffset",
+   "SSet.Enhanced.IsActiveOrderedBlockSum",
+   "SSet.Enhanced.IsActiveOrderedBlockProjection",
+   "SSet.Enhanced.HasActiveOrderedBlockForm",
+   "SSet.Enhanced.HasActiveCoherentBlockProjections",
+   "SSet.Enhanced.active_concatenation_block_projections"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ActiveConcatenationBlockProjections.lean",
+  "statement": "theorem active_concatenation_block_projections {C : SSet.{u}} (p : C ⟶ finStarBase.{u}) (hp : IsSymmetricInfinityOperad p) (s : ℕ) : ∃ (j : fiber (activeConcatenationProjection p) (finStarVertex 1) ⟶ (activeOperadSubcomplex p).toSSet) (t : (∏ᶜ (fun _ : Fin s ↦ fiber (activeConcatenationProjection p) (finStarVertex 1))) ⟶ fiber (activeConcatenationProjection p) (finStarVertex 1)) (F : (∏ᶜ (fun _ : Fin s ↦ (activeOperadSubcomplex p).toSSet)) ⟶ (activeOperadSubcomplex p).toSSet), IsFunctorEquivalence j ∧ j ≫ (activeOperadSubcomplex p).ι = activeConcatenationInclusion p ∧ IsActiveConcatenationTensor p s t ∧ AreNaturallyEquivalent (Pi.lift (fun i : Fin s ↦ Pi.π (fun _ : Fin s ↦ fiber (activeConcatenationProjection p) (finStarVertex 1)) i ≫ j) ≫ F) (t ≫ j) ∧ HasActiveOrderedBlockForm p s F ∧ HasActiveCoherentBlockProjections p s F",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Constructs an ordered representative F of the existing envelope tensor using its normalized color-fiber equivalence, without choosing data from the postponed theorem. The same internal-hom edge supplies each inert projection and, in the unary case, its equivalence; naturality on all higher simplices is intrinsic to that edge."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-51ab7e021",
+  "group": "Q32",
+  "result": "fix",
+  "note": "Wrote review.md and a complete replacement report under fixes/. Mathematical statements, dependencies, universes, edge cases, docstrings and verbatim signatures pass; both Lean files compile cleanly through scompile.py. Fixed H11’s placeholder second reading and five obscured source citations. No repository or branch changes.; reverted the delivery's change of existing node(s) lem-coef-space-valued-straightening (--revert-nodes; kept as on newtargets-dag)"
  }
 }
