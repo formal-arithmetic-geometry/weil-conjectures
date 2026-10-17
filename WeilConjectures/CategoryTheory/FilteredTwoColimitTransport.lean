@@ -15,7 +15,8 @@ Let `c'` be a cocone of categories on a directed system `C' i` with vertex `D`, 
 `F i : C i ⥤ C' i` be equivalences from the stages of another directed system `C i`, compatible
 with the transition functors up to isomorphisms `β h : T h ⋙ F j ≅ F i ⋙ T' h`. Composing
 with the `F i` gives a cocone `CategoryCocone.transport` on the `C i` with the same vertex, and it
-is a filtered 2-colimit as soon as `c'` is (`CategoryTheory.CategoryCocone.IsFilteredTwoColimit.transport`):
+is a filtered 2-colimit as soon as `c'` is
+(`CategoryTheory.CategoryCocone.IsFilteredTwoColimit.transport`):
 a functor between filtered 2-colimits defined stagewise by equivalences is an equivalence. No
 compatibility of the `β h` with the composition of the transition functors is needed.
 -/
@@ -64,9 +65,8 @@ theorem IsFilteredTwoColimit.transport [∀ i, (F i).IsEquivalence] (hc' : c'.Is
       Functor.mapIso_inv, Functor.mapIso_hom, Iso.app_inv, Iso.app_hom, Functor.map_comp,
       Category.assoc]
     rw [hg']
-    simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app, Functor.map_id, Category.id_comp,
-      Category.assoc]
-    simp [← Functor.map_comp]
+    simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+    simp
   homInj k x y g g' h := by
     obtain ⟨k', hk, h'⟩ := hc'.homInj k ((F k).obj x) ((F k).obj y) ((F k).map g) ((F k).map g') h
     refine ⟨k', hk, (F k').map_injective ?_⟩

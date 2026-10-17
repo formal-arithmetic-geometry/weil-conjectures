@@ -46,8 +46,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-- Any ring morphism between fields is flat. -/
 lemma flat_of_field {K L : Type*} [Field K] [CommRing L] (f : K →+* L) : f.Flat := by
-  letI := f.toAlgebra
-  show Module.Flat K L
+  let _ : Algebra K L := f.toAlgebra
+  change Module.Flat K L
   infer_instance
 
 /-- The ring map `E ⟶ F` between the universe `u + 1` copies of finite subextensions

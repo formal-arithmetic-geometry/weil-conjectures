@@ -108,7 +108,8 @@ noncomputable def pointSectionsDerivedBaseChangeIso :
     additive_constantSheaf Λ' _
   let eE := (constantSheafEquivalenceOfIsSepClosed Λ (k := k)).symm.mapDerivedCategory
   let eF := (constantSheafEquivalenceOfIsSepClosed Λ' (k := k)).symm.mapDerivedCategory
-  let adjM := (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ).mapDerivedCategoryAdjunction
+  let adjM :=
+    (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ).mapDerivedCategoryAdjunction
   let κ₀ : derivedRestrictScalars φ (Spec (.of k)) ⋙ eE.functor ≅
       eF.functor ⋙ (ModuleCat.restrictScalars.{u + 1} φ).mapDerivedCategory :=
     (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫ Functor.mapDerivedCategoryCompIso
@@ -190,12 +191,12 @@ lemma integersStageMap_nonZeroDivisors_le :
 
 lemma flat_integersStageMap : (integersStageMap.{u} h).Flat := by
   rw [integersStageMap_eq]
-  letI := stageAlgebra h
-  haveI := stageTower h
+  let _ := stageAlgebra h
+  have := stageTower h
   obtain ⟨n, b, -, -⟩ := PadicAlgCl.exists_basis_frobeniusForm_integersShrinkMap.{0, u} l E.1 F.1
-  letI := (PadicAlgCl.integersShrinkMap.{0, u} l E.1 F.1).toAlgebra
+  let _ := (PadicAlgCl.integersShrinkMap.{0, u} l E.1 F.1).toAlgebra
   have : Module.Free _ _ := Module.Free.of_basis b
-  show Module.Flat _ _
+  change Module.Flat _ _
   exact Module.Flat.of_free
 
 /-- Restriction of scalars `D(X_ét, 𝒪_F) ⥤ D(X_ét, 𝒪_E)`. -/
@@ -211,15 +212,17 @@ lemma exists_isDerivedBaseChange_integersStageMap {X : Scheme.{u}}
       (η : K ⟶ (stageRestrictScalars h X).obj K'), IsDerivedBaseChange η := by
   unfold stageRestrictScalars
   rw [integersStageMap_eq]
-  letI := stageAlgebra h
-  haveI := stageTower h
+  let _ := stageAlgebra h
+  have := stageTower h
   exact exists_isDerivedBaseChange_integersShrinkMap K
 
 /-- The derived base change `K ↦ K ⊗ᴸ_{𝒪_E} 𝒪_F` on `D(s_ét, 𝒪_E)`, left adjoint to restriction
 of scalars. -/
 noncomputable def stageDerivedBaseChange :
-    DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} (StageInt.{u} l E))) ⥤
-    DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} (StageInt.{u} l F))) :=
+    DerivedCategory
+        (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} (StageInt.{u} l E))) ⥤
+      DerivedCategory
+        (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} (StageInt.{u} l F))) :=
   let φ := integersStageMap.{u} h
   derivedBaseChange φ (Spec (.of k)) (exists_isDerivedBaseChange_integersStageMap h)
 
@@ -315,7 +318,7 @@ noncomputable def rationalStageTransitionFac :
         (DerivedCategory.boundedConstructibleIntegral (PadicAlgCl.maximalIdealShrink l F.1)
           (Spec (.of k))).FullSubcategory := by
   unfold rationalStageTransition
-  exact Localization.Lifting.iso _ (Rationalization.W _ _) _ _
+  exact Localization.Lifting.iso _ (Rationalization.W (nonZeroDivisors (StageInt.{u} l E)) _) _ _
 
 /-- The evaluation at the geometric point commutes with the scalar extension `- ⊗_E F`:
 `Fib_s(K ⊗_E F) ≅ Fib_s(K) ⊗_E F` for `K ∈ Dᵇc(s, E)`. -/
@@ -347,7 +350,8 @@ noncomputable def pointFiberStageTransitionIso :
     (integralStageTransition k h ⋙ ΦF) (ΦE ⋙ stageDerived l h)
     (rationalStageTransition k h ⋙ HF) (HE ⋙ stageDerived l h)
     (pointFiberRationalAuxTransitionIso k h)
-  exact NatIso.ofComponents (fun X ↦ (_root_.DerivedCategory.boundedFiniteCohomology _).isoMk (β.app X))
+  exact NatIso.ofComponents
+    (fun X ↦ (_root_.DerivedCategory.boundedFiniteCohomology _).isoMk (β.app X))
     fun f ↦ by
       ext
       exact β.hom.naturality f
