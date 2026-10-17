@@ -1,68 +1,134 @@
 {
-  "id": "def-wf-middle-extension",
-  "blueprint": {
-    "is": "def-wf-middle-extension",
-    "from": null,
-    "same_as": null
+ "id": "def-wf-middle-extension",
+ "blueprint": {
+  "is": "def-wf-middle-extension",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Middle extension on a curve",
+ "statement": "Use the global finite-field and coefficient datum of [def-weil-finite-field-fiber]: $k_0=\\mathbf F_q$ has characteristic $p$, $\\ell\\ne p$ is prime, and $\\Qlb$ is the chosen algebraic closure of $\\mathbf Q_\\ell$. Let $j:U_0\\hookrightarrow C_0$ be a dense open immersion between separated finite-type $k_0$-schemes [def-weil-pbc-scheme-conventions], where dense means that the closure of $j(U_0)$ is all of $C_0$, and $C_0$ is a smooth curve: its structure morphism $C_0\\to\\operatorname{Spec}k_0$ is smooth [def-sbc-smooth-morphisms] and $C_0$ has pure dimension one [def-weil-pure-dimension].\n\nFor a lisse $\\Qlb$-sheaf $\\mathcal F$ on $U_0$ in the finite-extension, adic convention of [def-pod-lisse-l-adic-sheaves] (whose finite-ring lisse convention is [def-weil-pbc-constructible-complexes]), the *sheaf-theoretic middle extension* is $j_*\\mathcal F$, where $j_*$ is the ordinary direct image of coefficient sheaves, interpreted in the coefficient category of [def-weil-pbc-qbar-category]. Ordinary module direct image is the sheaf pushforward of [def-weil-pbc-proetale-operations]: at a fixed sheaf coefficient stage it has sections\n$$\n (j_*G)(V)=G(V\\times_{C_0}U_0),\n$$\nrestriction maps induced by base change of $V$, and $(j_*u)_V=u_{V\\times_{C_0}U_0}$ on a sheaf morphism $u$; at finite etale coefficient level this is [def-weil-pbc-direct-image]. The coefficient action is the one induced by the coefficient structure map in module direct image.\n\nThus $(j_*\\mathcal F)[1]$ means the ordinary sheaf direct image, placed in degree zero, followed by the cohomological shift [def-weil-abstract-derived-category]; at the $\\Qlb$ pair-category level the shift is the one of [def-weil-pbc-common-stage-cones]. The derived direct image is written $Rj_*\\mathcal F$ (the right-derived construction at a fixed coefficient stage is [def-weil-pbc-direct-image, def-weil-pbc-proetale-operations]); its higher cohomology sheaves must be retained in derived adjunction and Verdier-duality formulas.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-i-real-boundary/def-wf-middle-extension.md",
+  "place": "node def-wf-middle-extension, order 2643",
+  "note": [
+   "*Recorded in advance* from chapter *Boundary weights, constant twists, and real envelopes* of the source."
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pure-dimension",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-qbar-category",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-direct-image",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-common-stage-cones"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "middleExtension|middle.extension|intermediate.extension|lisse|adic.*sheaf",
+   "results": "14 hits: Scheme.ellAdicSheaf at Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:63 defines the coefficient sheaf of continuous Z_l-valued maps; remaining hits concern radicals and separatedness. No lisse Qbar_l middle extension.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
   },
-  "kind": "definition",
-  "title": "Middle extension on a curve",
-  "statement": "Let $j:U_0\\hookrightarrow C_0$ be a dense open immersion between\nseparated finite-type\n$k_0$-schemes, with $C_0$ a smooth curve. For a lisse\n$\\Qlb$-sheaf $\\mathcal F$ on $U_0$ (in the lisse convention of\n[def-weil-pbc-constructible-complexes]), the\n*sheaf-theoretic middle extension* is $j_*\\mathcal F$, where\n$j_*$ is the ordinary direct image in the coefficient category of\n[def-weil-pbc-qbar-category]. Thus $(j_*\\mathcal F)[1]$\nmeans the ordinary sheaf direct image followed by a cohomological\nshift. The derived direct image is written $Rj_*\\mathcal F$;\nits higher cohomology sheaves must be retained in derived adjunction\nand Verdier-duality formulas.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-i-real-boundary/def-wf-middle-extension.md",
-    "place": "node def-wf-middle-extension, order 2643",
-    "note": [
-      "*Recorded in advance* from chapter *Boundary weights, constant twists, and real envelopes* of the source."
-    ]
+  {
+   "tool": "leansearch",
+   "query": "Ordinary direct image of a lisse l-adic sheaf along a dense open immersion of a smooth curve as a sheaf theoretic middle extension",
+   "results": "8 hits including Scheme.Modules.restrictAdjunction, Scheme.Modules.restrictStalkNatIso, and Functor.IsDenseSubsite.full_sheafPushforwardContinuous. They concern structure-sheaf modules, restriction, or general site infrastructure, not the finite-stage adic coefficient definition.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
   },
-  "stmt_deps": [
-    "def-weil-pbc-constructible-complexes",
-    "def-weil-pbc-qbar-category",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 2643,
-  "blueprint_uses": [
-    "def-weil-pbc-constructible-complexes",
-    "def-weil-pbc-qbar-category",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "blueprint_notes": [
-    {
-      "label": "recorded_in_advance",
-      "text": "*Recorded in advance* from chapter *Boundary weights, constant twists, and real envelopes* of the source.",
-      "where": "statement"
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "loogle",
+   "query": "\"middleExtension\"",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
   },
-  "chapter": "sec-purity-real-sheaves",
-  "unit": "sk-i-real-boundary",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $j:U_0\\hookrightarrow C_0$ be a dense open immersion between\nseparated finite-type\n$k_0$-schemes, with $C_0$ a smooth curve. For a lisse\n$\\Qlb$-sheaf $\\mathcal F$ on $U_0$ (in the lisse convention of\n[def-weil-pbc-constructible-complexes]), the\n*sheaf-theoretic middle extension* is $j_*\\mathcal F$, where\n$j_*$ is the ordinary direct image in the coefficient category of\n[def-weil-pbc-qbar-category]. Thus $(j_*\\mathcal F)[1]$\nmeans the ordinary sheaf direct image followed by a cohomological\nshift. The derived direct image is written $Rj_*\\mathcal F$;\nits higher cohomology sheaves must be retained in derived adjunction\nand Verdier-duality formulas.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "leanfinder",
+   "query": "The sheaf theoretic middle extension of a lisse l-adic sheaf on a dense open of a smooth curve is its ordinary direct image, distinct from derived direct image",
+   "results": "8 hits including Scheme.Modules.restrictFunctor, Scheme.Modules.restrict, Scheme.Modules.restrictFunctorAdjCounitIso, and TopCat.Sheaf.restrictHomEquivHom. No lisse Qbar_l coefficient middle extension.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerStar|sheafPushforwardContinuous|directImage",
+   "results": "4 hits: AffineEtale.lean:108,117,141 and ElladicCohomology.lean:65 use sheafPushforwardContinuous. None constructs the finite-extension adic middle extension.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Define the underived direct image functor on finite stage constructible Qbar_l sheaves using a lisse l-adic lattice, and then cohomologically shift by one",
+   "results": "8 hits including Scheme.Modules.pushforward, SheafOfModules.pushforward, LightCondMod.LocallyConstant.functor, and Condensed.profiniteSolid. Generic pushforward infrastructure and structure-sheaf modules, not this lisse Qbar_l construction.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 2643,
+ "blueprint_uses": [
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-qbar-category",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "blueprint_notes": [
+  {
+   "label": "recorded_in_advance",
+   "text": "*Recorded in advance* from chapter *Boundary weights, constant twists, and real envelopes* of the source.",
+   "where": "statement"
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-i-real-boundary",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $j:U_0\\hookrightarrow C_0$ be a dense open immersion between\nseparated finite-type\n$k_0$-schemes, with $C_0$ a smooth curve. For a lisse\n$\\Qlb$-sheaf $\\mathcal F$ on $U_0$ (in the lisse convention of\n[def-weil-pbc-constructible-complexes]), the\n*sheaf-theoretic middle extension* is $j_*\\mathcal F$, where\n$j_*$ is the ordinary direct image in the coefficient category of\n[def-weil-pbc-qbar-category]. Thus $(j_*\\mathcal F)[1]$\nmeans the ordinary sheaf direct image followed by a cohomological\nshift. The derived direct image is written $Rj_*\\mathcal F$;\nits higher cohomology sheaves must be retained in derived adjunction\nand Verdier-duality formulas.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "def-wf-middle-extension",
+  "worker": "stage1",
+  "summary": "Definition-only split using existing notions, with no new nodes. Read the current main-20261015 definition and boundary unit, the existing coefficient, lisse, pushforward and shift nodes, Weil II (1.1.1), and Stacks 03D6. Corrected the finite-ring-only lisse reference by citing the existing adic finite-extension definition, made the standing datum and smooth-curve convention explicit, and exposed the ordinary direct-image and cohomological-shift inputs. The project middleExtension abbreviation is for arbitrary coefficient-valued small etale sheaves and does not supply the finite-stage adic Qbar_l construction, so no exact attachment is claimed. Six logged Mathlib searches found infrastructure only.",
+  "blueprint": "Realizes the full definition paragraph of current main-20261015 def-wf-middle-extension: ordinary sheaf j_*F, then the cohomological shift [1], and the distinction from Rj_*F. There are no proof steps in this definition. The boundary unit retains the constructibility and stalk theorems; none of these is asserted or cited backwards here."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-b98de9bc9",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-b98de9bc9 (reviewer sub-agent of L); spot-checked: Read the whole delivery: one commit with the item and its report, no new nodes. The main-20261015 definition (main-20261017 only adds a lean field) is kept in full, in order: ordinary j_*F in the qbar category, then [1], with Rj_*F kept separate. I read all 11 stmt_deps and the pair, rational and complete coefficient categories they rest on. Hypotheses hold: U_0 and C_0 are Noetherian, separated and finite-dimensional with ell invertible, as def-pod-lisse-l-adic-sheaves and def-weil-pbc-qbar-category require. Citing def-pod-lisse-l-adic-sheaves (clauses 1, 2 and 4, Weil II 1.1.1 b-d) makes the blueprint's finite-ring lisse pointer precise without changing its meaning; the finite-ring node stays for the finite levels. The direct-image formula with its module action is exactly what def-weil-pbc-proetale-operations and def-weil-pbc-direct-image state. This matches unit Steps 2-3 (levelwise limit; the tower need not be adic), and the item claims neither constructibility nor exactness. The shifts check against def-weil-abstract-derived-category ((K[1])^r=K^{r+1}) and def-weil-pbc-common-stage-cones ((E,K)[1]=(E,K[1])). Small cases checked: j=id, F=0, empty C_0, disconnected C_0. No cycle (the 2072-node closure excludes the item), no duplicate definition (d-real-boundary agrees with it), no SGA, no tool_uses. Etale.middleExtension is the generic small-etale (j)_*[A], so it is rightly not attached. FIX: the statement now says the structure morphism C_0 -> Spec k_0 is smooth, where it only said 'C_0 is smooth'; nothing else changed.; 1 file(s) fixed by the reviewer"
+ }
 }

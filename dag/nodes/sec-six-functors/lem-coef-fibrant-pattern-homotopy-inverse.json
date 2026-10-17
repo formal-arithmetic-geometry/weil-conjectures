@@ -13,9 +13,81 @@
   "lem-coef-marked-point-cartesian-model",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First work in the marked model category over a point. Let $I=(\\Delta^1)^\\sharp$ and let $e_0:(\\Delta^0)^\\sharp\\to I$ select vertex $0$. The unmarked vertex inclusion $\\Delta^0\\to\\Delta^1$ is a one-dimensional horn inclusion, hence a trivial cofibration in the Kan model structure. Apply the simplicial pushout-product axiom of the marked-point model structure to this inclusion and the cofibration $\\varnothing\\to(\\Delta^0)^\\sharp$. Its pushout product is exactly $e_0$, because the simplicial tensor is $X\\otimes K=X\\times K^\\sharp$. Thus $e_0$ is a trivial cofibration of marked simplicial sets.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma B.2.4 (1) iff (2), printed p.1483, formal argument expanded using Theorem B.0.20 and Remark B.2.5; no finiteness assumption."
+   }
+  },
+  {
+   "text": "For any marked pattern object $A$, put $C_A=A\\times I$, with its base map obtained by projection to $A$. The initial map $\\varnothing\\to A$ is a cofibration, since it is injective on all simplices. The marked pushout-product assertion for the pattern model structure, applied to this initial map and $e_0$ from step 1, makes $i_0:A\\to C_A$ a trivial cofibration. The projection $p:C_A\\to A$ satisfies $pi_0=1_A$, so two-out-of-three makes $p$ a weak equivalence. The two endpoints give a degreewise injective map $A\\amalg A\\to A\\times I$, hence a cofibration, and $pi_1=1_A$ also holds. These are good cylinders in exactly the sense of [lem-coef-model-cylinder-whitehead]. Every object is cofibrant, and $F,G$ are fibrant because they are $P$-fibered.",
+   "uses": [
+    "lem-coef-categorical-pattern-model-calculus",
+    "lem-coef-marked-point-cartesian-model",
+    "lem-coef-model-cylinder-whitehead"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma B.2.4 (1) iff (2), printed p.1483, formal argument expanded using Theorem B.0.20 and Remark B.2.5; no finiteness assumption."
+   }
+  },
+  {
+   "text": "Assume $f:F\\to G$ is a weak equivalence. Apply [lem-coef-model-cylinder-whitehead] inside the pattern model category, with the good cylinders $C_F=F\\times I$ and $C_G=G\\times I$ of step 2. The theorem gives $g:G\\to F$ and maps $H:C_F\\to F$, $J:C_G\\to G$ whose endpoints are respectively $gf,1_F$ and $fg,1_G$. All three are morphisms of the slice category, so preserve markings and commute with the maps to $(B,S)$. These are precisely the inverse data required by the item.",
+   "uses": [
+    "lem-coef-categorical-pattern-model-calculus",
+    "lem-coef-model-cylinder-whitehead"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma B.2.4 (1) iff (2), printed p.1483, formal argument expanded using Theorem B.0.20 and Remark B.2.5; no finiteness assumption."
+   }
+  },
+  {
+   "text": "Conversely, suppose the specified $g,H,J$ exist. Fix a $P$-fibered $Z$ and write $M_A=\\operatorname{Map}^{\\sharp}_B(A,Z)$. Precomposition gives $a=f^*:M_G\\to M_F$ and $b=g^*:M_F\\to M_G$. Here is the homotopy on $M_F$ explicitly. For $u:F\\times(\\Delta^n)^\\sharp\\to Z$ and an $n$-simplex $\\alpha:\\Delta^n\\to\\Delta^1$, define $\\Phi_n(u,\\alpha)$ to be $u$ after the marked map $F\\times(\\Delta^n)^\\sharp\\to F\\times(\\Delta^n)^\\sharp$ which sends $(x,s)$ in simplicial degree $m$ to $(H_m(x,\\alpha\\circ s),s)$. The first coordinate preserves markings because $H$ does and $\\alpha$ is a map between sharply marked simplices; it preserves the base because $H$ is over $B$. The second coordinate is unchanged. For every simplex operator $\\theta:[k]\\to[n]$, restricting this formula replaces $(u,\\alpha)$ by $(u\\circ(1\\times\\theta),\\alpha\\theta)$, so it defines a simplicial map $\\Phi:M_F\\times\\Delta^1\\to M_F$. At its endpoints it is $ab=(gf)^*$ and $1_{M_F}$. Replacing $(F,H)$ by $(G,J)$ gives a simplicial homotopy $M_G\\times\\Delta^1\\to M_G$ from $ba=(fg)^*$ to $1_{M_G}$. This is a direct calculation from the sharp mapping-complex definition and the marked-product rule.",
+   "uses": [
+    "lem-coef-categorical-pattern-model-calculus",
+    "lem-coef-marked-point-cartesian-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma B.2.4 (1) iff (2), printed p.1483, formal argument expanded using Theorem B.0.20 and Remark B.2.5; no finiteness assumption."
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-simplicial-homotopy-equivalence-weak] to $a:M_G\\to M_F$, $b:M_F\\to M_G$ and the two homotopies of step 4. It says exactly that $a$ is a weak homotopy equivalence. Since $Z$ was arbitrary, the weak-equivalence testing clause of [lem-coef-categorical-pattern-model-calculus] makes $f$ a weak equivalence. The same testing clause also identifies the last condition in the statement with being a pattern weak equivalence, completing both equivalences. The model-calculus theorem applies to every small pattern, and none of steps 1–4 restricts its cone shapes; hence no finiteness assumption on $K_a$ has entered.",
+   "uses": [
+    "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "lem-coef-categorical-pattern-model-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma B.2.4 (1) iff (2), printed p.1483, formal argument expanded using Theorem B.0.20 and Remark B.2.5; no finiteness assumption."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-marked-point-cartesian-model",
+  "lem-coef-categorical-pattern-model-calculus",
+  "lem-coef-model-cylinder-whitehead",
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Lemma B.2.4 (1) iff (2), whose formal proof is expanded here with prescribed cylinders and explicit mapping-complex homotopies. Read online 2026-10-17; archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,10 +137,38 @@
    "results": "{\"t\": \"2026-10-17T07:56:23Z\", \"tool\": \"leansearch\", \"query\": \"Whitehead criterion for P fibered marked simplicial sets using sharp interval homotopies over a fixed base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.LeftHomotopyClass.whitehead\", \"HomotopicalAlgebra.RightHomotopyClass.whitehead\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomotopicalAlgebra.isFibrant_of_fibration\", \"HomotopicalAlgebra.CategoryWithFibrations.fibrations\", \"HomotopicalAlgebra.trivialFibrations_sub_fibrations\", \"HomotopicalAlgebra.fibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\"], \"digest\": \"42961a210d699a9c\"}",
    "date": "2026-10-17",
    "verdict": "no match: the returned declarations concern generic model-category homotopy classes or unmarked simplicial sets. Generic Whitehead produces an unspecified model homotopy, not the specified sharp-interval homotopies over a marked pattern; identifying them and proving the converse require more than a one-line specialization. Read Homotopy.lean lines 102-120 and 217-268, CategoryWithFibrations.lean lines 38-97, and Enriched/HomCongr.lean lines 43-62. No marking/pattern source hit."
+  },
+  {
+   "tool": "grep",
+   "query": "categorical.?pattern|MarkedSSet|marked.*homotopy|homotopy.*marked",
+   "results": "{\"t\": \"2026-10-17T08:38:16Z\", \"tool\": \"grep\", \"query\": \"categorical.?pattern|MarkedSSet|marked.*homotopy|homotopy.*marked\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic Whitehead and specified-cylinder transport are already carried by lem-coef-model-cylinder-whitehead; the marked-pattern cylinder construction and converse mapping-space homotopies are additional arguments. Read Homotopy.lean lines 76–90 and 216–227. No Mathlib marked-pattern declaration was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Whitehead theorem in a simplicial model category using a chosen tensor cylinder",
+   "results": "{\"t\": \"2026-10-17T08:38:16Z\", \"tool\": \"leansearch\", \"query\": \"Whitehead theorem in a simplicial model category using a chosen tensor cylinder\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.LeftHomotopyClass.whitehead\", \"HomotopicalAlgebra.RightHomotopyClass.whitehead\", \"HomotopicalAlgebra.RightHomotopyRel.leftHomotopy\", \"HomotopicalAlgebra.Cylinder.LeftHomotopy.weakEquivalence_iff\", \"HomotopicalAlgebra.Cylinder.mk.inj\", \"HomotopicalAlgebra.Cylinder.LeftHomotopy.exists_good_cylinder\", \"HomotopicalAlgebra.Cylinder.noConfusionType\", \"HomotopicalAlgebra.Cylinder.weakEquivalence_π\"], \"digest\": \"0fa102b57c216080\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic Whitehead and specified-cylinder transport are already carried by lem-coef-model-cylinder-whitehead; the marked-pattern cylinder construction and converse mapping-space homotopies are additional arguments. Read Homotopy.lean lines 76–90 and 216–227. No Mathlib marked-pattern declaration was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"whitehead\"",
+   "results": "{\"t\": \"2026-10-17T08:38:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"whitehead\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.LeftHomotopyClass.whitehead\", \"HomotopicalAlgebra.RightHomotopyClass.whitehead\"], \"digest\": \"d15bb1ae18c75848\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic Whitehead and specified-cylinder transport are already carried by lem-coef-model-cylinder-whitehead; the marked-pattern cylinder construction and converse mapping-space homotopies are additional arguments. Read Homotopy.lean lines 76–90 and 216–227. No Mathlib marked-pattern declaration was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weak equivalences between fibrant marked categorical pattern objects have homotopy inverses with the sharp marked interval",
+   "results": "{\"t\": \"2026-10-17T08:38:27Z\", \"tool\": \"leanfinder\", \"query\": \"Weak equivalences between fibrant marked categorical pattern objects have homotopy inverses with the sharp marked interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RightHomotopyClass.whitehead\", \"HomotopicalAlgebra.LeftHomotopyClass.whitehead\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantObject.homRel_equivalence_of_isFibrant_tgt\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass_mk\", \"HomotopicalAlgebra.RightHomotopyRel.leftHomotopyRel\", \"HomotopicalAlgebra.leftHomotopyRel_iff_rightHomotopyRel\"], \"digest\": \"40a1fda2244a5360\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic Whitehead and specified-cylinder transport are already carried by lem-coef-model-cylinder-whitehead; the marked-pattern cylinder construction and converse mapping-space homotopies are additional arguments. Read Homotopy.lean lines 76–90 and 216–227. No Mathlib marked-pattern declaration was found."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-finite-pattern-universe-comparison",
@@ -95,5 +195,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-fibrant-pattern-homotopy-inverse",
+  "worker": "stage1",
+  "summary": "Preserved the statement, reused the existing general prescribed-cylinder Whitehead Mathlib leaf, constructed the sharp cylinders by the cited model axioms, and wrote the converse homotopies simplex by simplex. No new nodes. Searches and source comparison rule out an exact project attachment or an immediate Mathlib specialization of the whole marked-pattern statement.",
+  "blueprint": "The ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 (finite-coefficient enriched adjunction), is realized through the existing universe-comparison dependency chain. Steps 1–3 establish the homotopy-inverse criterion used by lem-coef-finite-pattern-universe-comparison; steps 4–5 justify its mapping-complex formulation. This is a local foundation for that paragraph, not a change to its route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Generic simplicial homotopy-equivalence theorem applied only after writing the two actual mapping-complex homotopies. The item unit has no separate realization theorem, and this tool does not replace any unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-007e598bf",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-007e598bf (reviewer sub-agent of L); spot-checked: I read the item (5 steps, no new nodes) and every cited statement in full: def-coef-categorical-pattern-fibrancy, lem-coef-categorical-pattern-model-calculus, lem-coef-marked-point-cartesian-model, lem-coef-kan-quillen-right-proper, lem-coef-model-cylinder-whitehead and lem-cbc-simplicial-homotopy-equivalence-weak. I also read the Whitehead leaf's Mathlib match in Homotopy.lean (whitehead and leftHomotopy).\n\nStep 1: {0}⊂Δ^1 is the horn Λ^1_0, so it is a Kan trivial cofibration. Its pushout product with ∅→(Δ^0)^♯, using the tensor X×K^♯, is exactly e_0.\n\nStep 2: the pattern pushout-product clause applied to ∅→A and e_0 gives i_0 as a trivial cofibration. Two-out-of-three then makes p a weak equivalence. (i_0,i_1) is injective on simplices, so it is a cofibration. This meets the good-cylinder definition clause by clause. Every object is cofibrant, and fibrant is the same as P-fibered.\n\nStep 3: the endpoint orders match the item (H|0=gf, H|1=id; J|0=fg, J|1=id).\n\nStep 4: I checked Φ by hand. It is simplicial, it preserves markings and is over B, it is natural in θ, and its endpoints are ab=(gf)^* and the identity. The same holds for J.\n\nStep 5: the tool lemma applies with u=f^*, v=g^*, either endpoint order allowed. The model-calculus testing clause then gives both equivalences.\n\nThe statement is unchanged and matches its only citer, lem-coef-finite-pattern-universe-comparison. There is no cycle and no duplicate in the DAG. Edge cases (∅ objects, empty pattern family and empty K_a, no basepoints) are fine. I accept the declared tool_use of lem-cbc-simplicial-homotopy-equivalence-weak: its unit sk-prop-sf-cbc is outside the item's route, it is a generic black box applied after the homotopies are built, and it replaces no unit step. HA B.2.4 is not archived, so the source match is from my own knowledge of that lemma. The proof stands on the cited statements, and proof_origin=agent with WANTED is correct. No SGA is used and no fixes were needed."
  }
 }
