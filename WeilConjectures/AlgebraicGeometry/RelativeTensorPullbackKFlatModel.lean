@@ -101,7 +101,7 @@ theorem relativeTensorPullback_kFlat_model
   have : PreservesFiniteColimits W := hW.2.2.1
   obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
     G, hG, hGmap, hGadd, ε, _, _, hε⟩ :=
-    Classical.choose_spec (exists_derivedPullback f)
+    (derivedPullback_spec f)
   have := hGadd
   let T := G
   let TL := (T.mapHomologicalComplex (.up ℤ)).obj L
