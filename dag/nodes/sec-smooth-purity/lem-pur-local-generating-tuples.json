@@ -10,9 +10,78 @@
  "stmt_deps": [
   "def-weil-finitely-generated-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Prove the assertion simultaneously for all finitely generated $R$-modules by induction on $c$, keeping $R$ fixed. For $c=0$, generation by the empty tuple forces $M=0$, so $f=g$ and no operation is needed. At every positive length the case $M=0$ also needs no operation, since every entry is zero. Hence suppose $c>0$, $M\\ne0$, and assume the assertion for every finitely generated $R$-module with two generating tuples of length $c-1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DV (lemma-NAK, (2), (4), (8)) and 00E9 (lemma-characterize-local-ring, (1) iff (3)); agent-written induction on the length of the generating tuples"
+   }
+  },
+  {
+   "text": "Write $\\mathfrak mM$ for the submodule of finite sums of elements $ax$ with $a\\in\\mathfrak m$ and $x\\in M$. The quotient $M/\\mathfrak mM$ is nonzero: if it were zero, the zero submodule would surject onto this quotient, and [lem-weil-pbc-nakayama-local-generators], applied with $N=0$ to the finite module $M$, would give $M=0$. Since the entries of $g$ generate $M$, at least one $g_j$ has nonzero image in this quotient. Permute $g$ to a tuple $\\widetilde g$ with $\\widetilde g_1=g_j\\notin\\mathfrak mM$; record this permutation so that it can be undone at the end.",
+   "uses": [
+    "lem-weil-pbc-nakayama-local-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DV (lemma-NAK, (2), (4), (8)) and 00E9 (lemma-characterize-local-ring, (1) iff (3)); agent-written induction on the length of the generating tuples"
+   }
+  },
+  {
+   "text": "Express $\\widetilde g_1=\\sum_{i=1}^c a_i f_i$ using generation by $f$. Some $a_j$ lies outside $\\mathfrak m$, since otherwise this sum belongs to $\\mathfrak mM$. By [lem-weil-pbc-local-ring-unit-criterion], this $a_j$ is a unit. Permute the entries of $f$, and relabel the coefficients in the same way, so that $j=1$. Multiply its first entry by $a_1$, then, successively for $i=2,\\ldots,c$, add $a_i$ times entry $i$ to entry $1$. The resulting tuple $h$ has $h_1=\\widetilde g_1$. Every operation is allowed and invertible: the inverse scaling uses $a_1^{-1}$, the inverse swap is the same swap, and the inverse shear subtracts $a_i$ times the unchanged entry $i$. Thus $h$ still generates $M$.",
+   "uses": [
+    "lem-weil-pbc-local-ring-unit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DV (lemma-NAK, (2), (4), (8)) and 00E9 (lemma-characterize-local-ring, (1) iff (3)); agent-written induction on the length of the generating tuples"
+   }
+  },
+  {
+   "text": "Put $Q=M/R\\widetilde g_1$, where $R\\widetilde g_1=\\{a\\widetilde g_1:a\\in R\\}$. The tails $(\\overline h_2,\\ldots,\\overline h_c)$ and $(\\overline{\\widetilde g}_2,\\ldots,\\overline{\\widetilde g}_c)$ generate $Q$: reduce an expression in the full generating tuple modulo $R\\widetilde g_1$ and its first term disappears. In particular $Q$ is finitely generated, directly by these $c-1$ elements [def-weil-finitely-generated-module]. It is an $R$-module over the same nonzero local ring. The induction hypothesis therefore gives a finite allowed sequence taking the first tail to the second in $Q$. For $c=1$ this is the already proved empty-tuple case in $Q=0$.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DV (lemma-NAK, (2), (4), (8)) and 00E9 (lemma-characterize-local-ring, (1) iff (3)); agent-written induction on the length of the generating tuples"
+   }
+  },
+  {
+   "text": "Perform that same finite sequence on entries $2,\\ldots,c$ of $h$ in $M$, using the identical scalars, units and pairs of indices, and leaving entry $1$ fixed. Writing $q:M\\to Q$ for the quotient map, the lifted scaling satisfies $q(ux_i)=u q(x_i)$, a lifted swap interchanges $q(x_i)$ and $q(x_j)$, and a lifted shear satisfies $q(x_i+a x_j)=q(x_i)+a q(x_j)$. Induction on the finite list of operations therefore identifies every reduced intermediate tail with its prescribed tail in $Q$. Consequently the resulting tuple $k$ satisfies $k_1=\\widetilde g_1$ and $\\widetilde g_i-k_i\\in R\\widetilde g_1$ for $i\\ge2$. Choose $b_i\\in R$ with $\\widetilde g_i-k_i=b_i\\widetilde g_1$, and add $b_i$ times entry $1$ to entry $i$. These are shears with distinct indices and give exactly $\\widetilde g$. Undo the recorded permutation of $g$ to obtain $g$. This completes the induction; all sequences concatenated here are finite.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DV (lemma-NAK, (2), (4), (8)) and 00E9 (lemma-characterize-local-ring, (1) iff (3)); agent-written induction on the length of the generating tuples"
+   }
+  },
+  {
+   "text": "For completeness, each performed operation has its usual matrix on the column tuple: a diagonal matrix with one unit entry, a permutation matrix, or $I+aE_{ij}$ with $i\\ne j$. Their inverses are respectively the inverse-unit diagonal matrix, the inverse permutation matrix, and $I-aE_{ij}$; for the last identity $E_{ij}^2=0$. If the successive operation matrices are $A_1,\\ldots,A_s$, their action on the column tuple is $g=A_s\\cdots A_1f$. Thus $P=A_s\\cdots A_1$ is a product of these invertible $c\\times c$ matrices with $g=Pf$, and conversely applying the factors of any such product from right to left gives the stated operations. For $c=0$ take the identity on the zero free module, the empty product. An ideal generated by $c$ elements is a finitely generated module by definition, so the ideal specialization needs no extra hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DV (lemma-NAK, (2), (4), (8)) and 00E9 (lemma-characterize-local-ring, (1) iff (3)); agent-written induction on the length of the generating tuples"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-local-ring-unit-criterion",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent-written tuple-length induction using Nakayama, Tag 00DV (lemma-NAK), and the local unit criterion, Tag 00E9 (lemma-characterize-local-ring); motivated by the local-ring paragraph of lem-pur-frame-independence.proof.md in main-20261015."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -76,10 +145,66 @@
    "results": "Directory: LinearAlgebra/Matrix/Transvection.lean. 5 hits: 15, 17, 18, 23, 27. Read Matrix/Transvection.lean: the diagonal/transvection factorization assumes Field; Smith-normal-form results require PID hypotheses. Basis-change results assume bases. None handles generating tuples over an arbitrary local ring.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalRing\", \"span\"",
+   "results": "9 hits: IsLocalRing.rank_cotangentSpace_eq_spanrank_maximalIdeal, IsLocalRing.rank_cotangentSpace_eq_spanrank_maximalIdeal_of_fg, IsLocalRing.CotangentSpace.span_image_eq_top_iff, IsLocalRing.span_eq_top_of_tmul_eq_basis, IsLocalRing.spanFinrank_maximalIdeal_eq_finrank_cotangentSpace, IsLocalRing.spanFinrank_maximalIdeal_eq_finrank_cotangentSpace_of_fg, IsLocalRing.spanFinrank_maximalIdeal_add_finrank_eq_of_surjective, IsLocalRing.spanFinrank_eq_finrank_quotient. Read the relevant source: Matrix/Transvection.lean:70,676 uses a field; basis change requires bases, Smith normal form requires PID hypotheses; LocalRing/Module.lean:72 gives only Nakayama, not this full tuple theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any two generating tuples of equal length of a finite module over a commutative local ring are related by elementary row operations",
+   "results": "8 hits: Submodule.exists_smith_normal_form_of_rank_eq, Submodule.smithNormalFormOfRankEq, Submodule.smithNormalFormCoeffs, Module.Basis.SmithNormalForm, Module.Basis.SmithNormalForm.a, Submodule.smithNormalFormBotBasis_def, Submodule.smithNormalFormBotBasis, Module.Basis.SmithNormalForm.snf. Read the relevant source: Matrix/Transvection.lean:70,676 uses a field; basis change requires bases, Smith normal form requires PID hypotheses; LocalRing/Module.lean:72 gives only Nakayama, not this full tuple theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "transvection|generat.*tuple|tuple.*generat|elementary.*matri",
+   "results": "Directory: LinearAlgebra. 25 hits: Mathlib/LinearAlgebra/Matrix/Block.lean, Mathlib/LinearAlgebra/Matrix/Block.lean, Mathlib/LinearAlgebra/Matrix/Block.lean, Mathlib/LinearAlgebra/Matrix/Block.lean, Mathlib/LinearAlgebra/Matrix/Block.lean, Mathlib/LinearAlgebra/Matrix/Rank.lean, Mathlib/LinearAlgebra/Matrix/Rank.lean, Mathlib/LinearAlgebra/Matrix/Swap.lean. Read the relevant source: Matrix/Transvection.lean:70,676 uses a field; basis change requires bases, Smith normal form requires PID hypotheses; LocalRing/Module.lean:72 gives only Nakayama, not this full tuple theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "two finite generating tuples of a module over a local ring differ by elementary invertible operations",
+   "results": "8 hits: Module.free_of_flat_of_isLocalRing, IsLocalRing.span_eq_top_of_tmul_eq_basis, Module.Invertible.instFinite, Module.Basis.invertibleToMatrix, FiniteDimensional.nonempty_linearEquiv_of_finrank_eq, Module.exists_basis_of_basis_baseChange, Module.free_of_maximalIdeal_rTensor_injective, Submodule.smithNormalFormTopBasis.congr_simp. Read the relevant source: Matrix/Transvection.lean:70,676 uses a field; basis change requires bases, Smith normal form requires PID hypotheses; LocalRing/Module.lean:72 gives only Nakayama, not this full tuple theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generat.*(tuple|famil)|surject.*(matrix|linearEquiv)|elementary",
+   "results": "Directory: RingTheory/LocalRing. 1 hits: Mathlib/RingTheory/LocalRing/Module.lean. Read the relevant source: Matrix/Transvection.lean:70,676 uses a field; basis change requires bases, Smith normal form requires PID hypotheses; LocalRing/Module.lean:72 gives only Nakayama, not this full tuple theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The general linear group acts transitively on surjective maps from a finite free module onto a finite module over a local ring",
+   "results": "8 hits: Module.Finite.exists_free_surjective, Module.exists_surjective_quotient_of_finite, exists_bijective_map_powers, Module.Finite.exists_fin', LinearMap.split_surjective_of_localization_maximal, orzechProperty_iff, Matrix.isRepresentation.toEnd_surjective, Module.Finite.exists_nat_not_surjective. Read the relevant source: Matrix/Transvection.lean:70,676 uses a field; basis change requires bases, Smith normal form requires PID hypotheses; LocalRing/Module.lean:72 gives only Nakayama, not this full tuple theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative local ring R and a finite R-module M, any two epimorphisms R^n to M differ by an automorphism of R^n",
+   "results": "8 hits: CommRing.orzechProperty, OrzechProperty.instOfFinite, orzechProperty_iff, OrzechProperty.bijective_of_surjective_endomorphism, OrzechProperty.injective_of_surjective_endomorphism, OrzechProperty.injective_of_surjective_of_submodule', strongRankCondition_of_orzechProperty, Module.Finite.reprEquiv. OrzechProperty.bijective_of_surjective_endomorphism (RingTheory/OrzechProperty.lean:108-110) concerns a surjective endomorphism of M; it does not relate two epimorphisms from a different free module. No tuple-transitivity theorem among the hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "transitiv|transvection|elementary|generating (family|families|tuple)|automorphism",
+   "results": "1 hits: Mathlib/RingTheory/LocalRing/Module.lean. Directory RingTheory/LocalRing; read Module.lean:219-237. exists_basis_of_span_of_maximalIdeal_rTensor_injective requires finite presentation and injectivity of the maximal-ideal tensor map, hypotheses absent here; no match.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-frame-independence",
@@ -96,5 +221,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-local-generating-tuples",
+  "worker": "stage1",
+  "summary": "Proved the full arbitrary-finite-module statement by induction on tuple length. Nakayama supplies a target generator outside the maximal-ideal multiple; a unit coefficient allows an explicit first-entry pivot; induction in the quotient and explicit corrective shears finish. Reused the existing Nakayama and local-unit Mathlib leaves and the finite-module definition, creating no nodes. Checked zero/empty and redundant generating tuples, exact citation statements, the current blueprint, and source Lean. The server supplied the item missing from the lagging shared snapshot.",
+  "blueprint": "Realizes the local-ring reduction and paragraph beginning \"Over a local ring\" in lem-pur-frame-independence.proof.md: proves transitivity and factorization for the particular change-of-generators matrix directly, without an unsupported Smith-normal-form assertion. No change of the unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-4d5e8fbbd",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-4d5e8fbbd (reviewer sub-agent of L); spot-checked: I read the whole item: its statement, all six steps, the three cited nodes by statement (Nakayama leaf IsLocalRing.map_mkQ_eq_top, unit-criterion leaf IsLocalRing.notMem_maximalIdeal, def Module.Finite), the parent lem-pur-frame-independence (step 2 is its use), blueprint main-20261015 lem-pur-frame-independence.proof.md lines 10-21, and Stacks algebra.tex lemma-NAK 00DV (2),(4),(8) and lemma-characterize-local-ring 00E9 (1)<=>(3). The statement (any two generating c-tuples of a finite module over a local ring are related by unit scalings, swaps and shears) is true and is what the parent needs. It replaces the blueprint's unsupported Smith-normal-form sentence and does not weaken anything. The induction is set up explicitly: Nakayama with N=0 gives M/mM nonzero; a coefficient outside m is a unit; the pivot is explicit; the quotient tails generate Q; the lifted operations commute with q; corrective shears finish; and the matrix order is P=A_s...A_1. Small cases I checked: Z/4 with (2,1)->(1,0), k[eps]/eps^2 with (eps,0)->(0,eps), c=0, c=1, and the non-Noetherian case. There are no new nodes. proof_deps equals the union of uses. The theorem inputs are Mathlib leaves, so they count as tools and no tool_uses is needed. There is no cycle and no SGA. An rg over the DAG and a Mathlib LocalRing grep found no duplicate or leaf. There are no fixes."
  }
 }
