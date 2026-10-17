@@ -224,5 +224,24 @@
   "group": "Q56",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-24cf3aa91 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited node statement and the Stacks sources: dpa 09Q1 statement and proof, more-algebra 066A(1) and its proof, algebra 05GG(2) and 00MA(2,3), with tags checked in tags/tags. The statement is unchanged and true for Noetherian local R; no regularity hypothesis is needed. I tested I=0, (x^2) in k[x]_(x), (y) and (x) in (k[x,y]/(x^2))_(x,y), and (x^2,xy) in k[x,y]_(x,y). Steps 1-4, 6 and 7 are correct: q is surjective with kernel IS by local-completion-quotient (I in m gives the maximal ideal m/I), and I^ is identified with IS by exact completion of finite modules. Step 2 gives I/mI = J/nJ by 05GG(2) and mJ=nJ. The forward direction completes the prefix exact sequences. The reverse direction gets dim J/nJ = r from the conormal basis, lifts a basis with Nakayama, and reflects each nonzerodivisor condition via K_i^=0, 05GG(2) and Nakayama. The empty case is handled. The route is sk-i-curve-zero, whose transitive uses include sk-thm-p1, sk-thm-reduction, sk-def-purity-conv and sk-prop-a1-kummer; no tool_uses are declared or needed, and no SGA is cited. Fault (C1 / brief section 2): the new node lem-trf-local-regular-generators-same-length is true, but it is a few-line consequence of three existing nodes on the route: lem-pur-local-generating-tuples (z=Py with P in GL_r), lem-pur-regular-sequence-graded-polynomial (theta_y is an isomorphism), and lem-pur-quasi-regular-noetherian-local, with theta_z = theta_y composed with the graded automorphism T -> P-bar T. None of the three reaches the item, so there is no cycle. I folded this 066A(1) argument into step 5 of fixes/dag/nodes/sec-trace-formula/lem-trf-completion-regular-kernel-preservation.json, recomputed proof_deps and updated the split_report summary; no file cites the dropped node. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompletionRegularKernelPreservation",
+  "declaration": "completionRegularKernelPreservation",
+  "file": "lean/Sheaf/RingTheory/CompletionRegularKernelPreservation.lean",
+  "statement": "theorem completionRegularKernelPreservation {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R] (I : Ideal R) (hI : I ≤ IsLocalRing.maximalIdeal R) (hIfg : I.FG) : let B := R ⧸ I let m := IsLocalRing.maximalIdeal R let n := Ideal.map (Ideal.Quotient.mk I) m let c := AdicCompletion.exists_local_completion_quotient R B (Ideal.Quotient.mk I) (Ideal.Quotient.mk_surjective) let q : AdicCompletion m R →+* AdicCompletion n B := c.2.choose Function.Surjective q ∧ ((∃ xs : List R, RingTheory.Sequence.IsRegular R xs ∧ Ideal.ofList xs = I ∧ ∀ x ∈ xs, x ∈ m) ↔ (∃ ys : List (AdicCompletion m R), RingTheory.Sequence.IsRegular (AdicCompletion m R) ys ∧ Ideal.ofList ys = RingHom.ker q ∧ ∀ y ∈ ys, y ∈ IsLocalRing.maximalIdeal (AdicCompletion m R)))",
+  "branch": "newtargets-dag",
+  "by": "N1",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The completion ideal n is the image of the maximal ideal of R under R → R ⧸ I; under hI this is the maximal ideal of B. The chosen q is the canonical coordinatewise completion map supplied by AdicCompletion.exists_local_completion_quotient, whose witness includes surjectivity and kernel identification."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-73e2d604f",
+  "group": "N1",
+  "result": "pass",
+  "note": "Reviewed packet, node, dependencies, report, source declaration, edge cases, route-pivot constraints, and module docstrings. scompile.py succeeded for the delivered Lean file with no errors; no substantive or mechanical defects found."
  }
 }

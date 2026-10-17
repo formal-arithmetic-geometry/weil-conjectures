@@ -189,5 +189,23 @@
   "group": "Q91",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-780ee3e14 (reviewer sub-agent of L); spot-checked: I read all of it. The item is Stacks flat.tex Tag 05FT (lemma-fibres-irreducible-flat-projective-nonnoetherian, lines 2246-2278) with Tag 05DX (algebra.tex 11661) written out; its hypotheses match 05FT one for one, with finite presentation as an algebra and an arbitrary base. Step 2 cites the existing unsplit duplicate lem-trf-local-fibres-integral-projective (Q57, same chapter and unit, empty proof_deps, so no cycle). That reuse is correct under C5, and it is not a D1/D2 restatement because no new node was created. The maintainer should merge the two ids. Fault fixed (C1/C4): Step 1 ended at ring-level geometric integrality (05DX), but the cited node uses the scheme notion def-pc-geometrically-irreducible. I added the Mathlib leaves lem-weil-pbc-fibre-product-affine-spectra ((Spec C)_K = Spec(C tensor_k K)) and lem-weil-pbc-spec-domain-stalks-function-field clause (2) (Spec of a domain is integral), plus def-pc-geometrically-irreducible, to Step 1's uses and to proof_deps. Step 3 matches the split-embedding clause of def-weil-pbc-projective-module, which is what the parent lem-trf-affine-generic-rank-blowup Step 2 uses. Cases checked: k[x] over a field; Z[1/2] over Z, excluded by its zero fibre at 2 and in fact not projective; k[x,y]/(xy), excluded; the zero ring. No new nodes, no tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AffineGeometricallyIntegralProjective",
+  "declaration": "Algebra.projective_of_geometricallyIntegral_fibres",
+  "file": "lean/Sheaf/RingTheory/AffineGeometricallyIntegralProjective.lean",
+  "statement": "theorem projective_of_geometricallyIntegral_fibres (R : Type u) (B : Type v) [CommRing R] [CommRing B] [Algebra R B] [Algebra.FinitePresentation R B] (hflat : RingHom.Flat (algebraMap R B)) (hfibres : ∀ (p : Spec (.of R)) (K : Type (max u v w)) [Field K] [Algebra R K] (ι : (Spec (.of R)).residueField p →+* K), algebraMap R K = ι.comp (((Scheme.ΓSpecIso (.of R)).inv ≫ (Spec (.of R)).Γevaluation p).hom) → IsDomain (B ⊗[R] K)) : Module.Projective R B",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-07a9d7672",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Reviewed the immutable statement, dependencies, source, module, docstrings, report, universes and edge cases. Per-file scompile reproduction succeeded. Review recorded in review.md; no fixes required."
  }
 }
