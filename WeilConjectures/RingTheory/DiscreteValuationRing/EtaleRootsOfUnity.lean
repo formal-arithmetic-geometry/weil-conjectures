@@ -17,12 +17,13 @@ public import WeilConjectures.RingTheory.Etale.IntegrallyClosed
 # Adjoining roots of unity to a discrete valuation ring by a local étale extension
 
 Let `A` be a discrete valuation ring and `n` a natural number invertible in `A`. Then there is a
-discrete valuation ring `A₁` with a local étale, faithfully flat map `A → A₁` such that `A₁`
-contains a primitive `n`-th root of unity
+discrete valuation ring `A₁` with a local étale, faithfully flat map `A → A₁` such that
+`A₁` contains a primitive `n`-th root of unity
 (`IsDiscreteValuationRing.exists_etale_isPrimitiveRoot`).
 
 The ring `A₁` is a localization `D[1/s]` of the étale `A`-algebra
-`D = A[ζ] = A[T]/(Tⁿ - 1)[(1 - ζᵏ)⁻¹, 0 < k < n]` (`AlgebraicGeometry.PrimitiveRootsAlgebra`)
+`D = A[ζ] = A[T]/(Tⁿ - 1)[(1 - ζᵏ)⁻¹, 0 < k < n]`
+(`AlgebraicGeometry.PrimitiveRootsAlgebra`)
 which is local: `D` has finitely many primes (it is quasi-finite over `A`), so a prime `q` of
 `D` over the maximal ideal of `A` has a basic open neighbourhood consisting of generalizations of
 `q` (`Ideal.exists_notMem_forall_le_of_finite`), and on it `D[1/s] = D_q`.
@@ -57,7 +58,8 @@ theorem Ideal.exists_notMem_forall_le_of_finite {C : Type*} [CommRing C]
     rintro ⟨p, hpS, hpq⟩
     exact (ht p (Finset.mem_filter.mp hpS).2).2 hpq
   · by_contra hpq
-    have hpS : (⟨p, hp⟩ : PrimeSpectrum C) ∈ S := Finset.mem_filter.mpr ⟨Finset.mem_univ _, hpq⟩
+    have hpS : (⟨p, hp⟩ : PrimeSpectrum C) ∈ S :=
+      Finset.mem_filter.mpr ⟨Finset.mem_univ _, hpq⟩
     exact hs (Ideal.mem_of_dvd _ (Finset.dvd_prod_of_mem t hpS) (ht ⟨p, hp⟩ hpq).1)
 
 /-- If `s ∉ q` and every prime not containing `s` is contained in the prime `q`, then the
@@ -77,7 +79,8 @@ theorem IsLocalization.Away.isLocalization_atPrime {C : Type*} [CommRing C] (q :
 /-- A discrete valuation ring has finitely many primes: `⊥` and the maximal ideal. -/
 instance IsDiscreteValuationRing.finite_primeSpectrum (A : Type*) [CommRing A] [IsDomain A]
     [IsDiscreteValuationRing A] : Finite (PrimeSpectrum A) := by
-  refine Finite.of_injective (fun p : PrimeSpectrum A ↦ (p.asIdeal = ⊥ : Prop)) fun p₁ p₂ h ↦ ?_
+  refine Finite.of_injective (fun p : PrimeSpectrum A ↦ (p.asIdeal = ⊥ : Prop))
+    fun p₁ p₂ h ↦ ?_
   have key (p : PrimeSpectrum A) (hp : p.asIdeal ≠ ⊥) : p.asIdeal = maximalIdeal A :=
     eq_maximalIdeal (p.2.isMaximal hp)
   ext1
@@ -129,7 +132,8 @@ theorem IsDiscreteValuationRing.exists_etale_isPrimitiveRoot {A : Type u} [CommR
   have : IsNoetherianRing A₁ := Algebra.FiniteType.isNoetherianRing A A₁
   obtain ⟨ϖ, hϖ⟩ := IsDiscreteValuationRing.exists_irreducible A
   have hmax : maximalIdeal A₁ = Ideal.span {algebraMap A A₁ ϖ} := by
-    rw [← Algebra.FormallyUnramified.map_maximalIdeal (R := A), hϖ.maximalIdeal_eq, Ideal.map_span,
+    rw [← Algebra.FormallyUnramified.map_maximalIdeal (R := A), hϖ.maximalIdeal_eq,
+      Ideal.map_span,
       Set.image_singleton]
   have hnf : ¬ IsField A₁ := by
     rw [isField_iff_maximalIdeal_eq, hmax, Ideal.span_singleton_eq_bot,

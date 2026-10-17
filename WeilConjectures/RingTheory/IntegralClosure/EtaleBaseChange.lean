@@ -12,14 +12,14 @@ public import Mathlib.RingTheory.Etale.Basic
 # Integral closure commutes with étale base change
 
 Let `B` be a ring, `L` a `B`-algebra with integral closure `T = integralClosure B L`, and
-`B → B₁` a smooth (e.g. étale) ring map. Then the canonical map `B₁ ⊗[B] T → B₁ ⊗[B] L` is
-injective and its image is the integral closure of `B₁` in `B₁ ⊗[B] L`.
+`B → B₁` a smooth (e.g. étale) ring map. Then the canonical map
+`B₁ ⊗[B] T → B₁ ⊗[B] L` is injective and its image is the integral closure of `B₁` in `B₁ ⊗[B] L`.
 
 This is a reformulation of Mathlib's `TensorProduct.toIntegralClosure_bijective_of_smooth`
 (which is proved by reducing to the standard étale case and the trace/dual basis argument),
 in the form used in the trait case of the spreading theorem (blueprint
-`sbc-thm-spreading-finite-etale-galois`), where `B → B₁` is an étale base change adjoining roots
-of unity.
+`sbc-thm-spreading-finite-etale-galois`), where `B → B₁` is an étale base change adjoining
+roots of unity.
 
 ## Main results
 
@@ -48,8 +48,8 @@ theorem map_integralClosure_val_injective [Module.Flat B B₁] :
     (integralClosure B L).val.toLinearMap Subtype.val_injective
 
 /-- **Integral closure commutes with smooth (e.g. étale) base change.** For a smooth
-`B`-algebra `B₁`, the image of `B₁ ⊗[B] integralClosure B L → B₁ ⊗[B] L` is the integral closure
-of `B₁` in `B₁ ⊗[B] L`. Used in the trait case of the spreading theorem (blueprint
+`B`-algebra `B₁`, the image of `B₁ ⊗[B] integralClosure B L → B₁ ⊗[B] L` is the integral
+closure of `B₁` in `B₁ ⊗[B] L`. Used in the trait case of the spreading theorem (blueprint
 `sbc-thm-spreading-finite-etale-galois`). -/
 theorem range_map_integralClosure_val [Algebra.Smooth B B₁] :
     (Algebra.TensorProduct.map (AlgHom.id B₁ B₁) (integralClosure B L).val).range =
