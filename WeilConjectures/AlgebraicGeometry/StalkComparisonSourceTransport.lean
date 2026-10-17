@@ -134,7 +134,7 @@ private theorem lift_tensor_iso
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- Additivity of the module stalk functor, by additivity of abelian-group stalks. 
+/-- Additivity of the module stalk functor, by additivity of abelian-group stalks.
 (blueprint: lem-pc-stalk-comparison-source-transport)
 -/
 instance comparisonStalkAdditive (Y : Scheme.{u}) (y : Y) :
@@ -149,7 +149,7 @@ instance comparisonStalkAdditive (Y : Scheme.{u}) (y : Y) :
     rw [Functor.map_add, Functor.map_add]
     rfl
 
-/-- Exactness of the module stalk functor, from the shared stalk exactness theorem. 
+/-- Exactness of the module stalk functor, from the shared stalk exactness theorem.
 (blueprint: lem-pc-stalk-comparison-source-transport)
 -/
 instance comparisonStalkHomology (Y : Scheme.{u}) (y : Y) :
@@ -169,21 +169,21 @@ instance comparisonStalkColimits (Y : Scheme.{u}) (y : Y) :
     PreservesFiniteColimits (RingedSpace.moduleStalkFunctor Y.toRingedSpace y) :=
   Functor.preservesFiniteColimits_of_preservesHomology _
 
-/-- The exact stalk functor on derived categories, with the standard module localization. 
+/-- The exact stalk functor on derived categories, with the standard module localization.
 (blueprint: lem-pc-stalk-comparison-source-transport)
 -/
 def comparisonDerivedStalk (Y : Scheme.{u}) (y : Y) :=
   letI := HasDerivedCategory.standard (ModuleCat.{u} (Y.presheaf.stalk y))
   (RingedSpace.moduleStalkFunctor Y.toRingedSpace y).mapDerivedCategory
 
-/-- Derived stalk cohomology, as a functor on the sheaf derived category. 
+/-- Derived stalk cohomology, as a functor on the sheaf derived category.
 (blueprint: lem-pc-stalk-comparison-source-transport)
 -/
 def comparisonStalkCohomology (Y : Scheme.{u}) (y : Y) (i : ℤ) :=
   letI := HasDerivedCategory.standard (ModuleCat.{u} (Y.presheaf.stalk y))
   comparisonDerivedStalk Y y ⋙ DerivedCategory.homologyFunctor _ i
 
-/-- Identification of the derived stalk cohomology with the homology of the stalk complex. 
+/-- Identification of the derived stalk cohomology with the homology of the stalk complex.
 (blueprint: lem-pc-stalk-comparison-source-transport)
 -/
 def comparisonStalkHomologyIso (Y : Scheme.{u}) (y : Y)
@@ -197,7 +197,7 @@ def comparisonStalkHomologyIso (Y : Scheme.{u}) (y : Y)
       ((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).mapDerivedCategoryFactors.app P) ≪≫
     (DerivedCategory.homologyFunctorFactors _ i).app _
 
-/-- Naturality of the identification of derived stalk cohomology. 
+/-- Naturality of the identification of derived stalk cohomology.
 (blueprint: lem-pc-stalk-comparison-source-transport)
 -/
 @[reassoc]
@@ -222,7 +222,7 @@ variable {X X' S S' : Scheme.{u}}
   (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
   (sq : IsPullback g' f' f g)
 
-/-- Exact derived restriction of stalk modules to the base stalk ring. 
+/-- Exact derived restriction of stalk modules to the base stalk ring.
 (blueprint: lem-pc-stalk-comparison-source-transport)
 -/
 def comparisonBaseRestriction (z : X') :=
@@ -231,7 +231,7 @@ def comparisonBaseRestriction (z : X') :=
   letI := leftAlgebra f g' z
   (ModuleCat.restrictScalars.{u} (algebraMap (R f g' z) (A g' z))).mapDerivedCategory
 
-/-- The model's input identifies with the derived restriction of the derived stalk. 
+/-- The model's input identifies with the derived restriction of the derived stalk.
 (blueprint: lem-pc-stalk-comparison-source-transport)
 -/
 def comparisonModelInputIso (z : X')
@@ -256,7 +256,7 @@ def comparisonModelInputIso (z : X')
       ((RingedSpace.moduleStalkFunctor X.toRingedSpace (g' z)).mapDerivedCategoryFactors
         |>.symm.app P)
 
-/-- The counit-compatible isomorphism between the two derived tensor functors. 
+/-- The counit-compatible isomorphism between the two derived tensor functors.
 (blueprint: lem-pc-stalk-comparison-source-transport)
 -/
 def comparisonModelDerivedIso (z : X')
@@ -280,7 +280,7 @@ def comparisonModelDerivedIso (z : X')
   exact Functor.leftDerivedNatIso M.derived N.derived M.counit N.counit
     (HomotopyCategory.quasiIso _ (.up ℤ)) (Iso.refl _)
 
-/-- The canonical B-linear cohomology transport before lifting to the tensor algebra. 
+/-- The canonical B-linear cohomology transport before lifting to the tensor algebra.
 (blueprint: lem-pc-stalk-comparison-source-transport)
 -/
 def comparisonSourceUnderlyingIso (z : X')
