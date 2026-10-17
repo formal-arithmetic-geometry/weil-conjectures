@@ -370,5 +370,38 @@
   "group": "Q92",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-d9ccdf003 (reviewer sub-agent of L); spot-checked: I read the item, the blueprint main-20261015 statement and proof, the unit record and all 32 cited statements in full. The item statement is byte-identical to the blueprint: arbitrary commutative Lambda, nothing weakened. There are 0 new nodes, no cycle, and proof_deps equals the union of the step uses. Step 1: Spec of the algebraically closed field is w-contractible under sk-def-pe-wlocal; (Omega,0) is henselian because B->B/0B is the identity. Step 2: det-pe-wc-sections-exact and det-pe-wc-sections-derived apply with X=U=P. Step 3: clause (1) of lem-weil-pbc-geometric-point-pullback-stalk covers every ring; lem-weil-pbc-comparison-sections applies with the one-object presentation; abelian exactness lifts to modules. Step 4: proper gives qcqs through the closed-immersion diagonal, and the directions of alpha and beta are correct. Beta is the fixed construction of def-weil-pbc-fixed-derived-comparisons, the same map stage3-proetale-comparison-counit treats for arbitrary Lambda (its proof step 4). That node's stmt_dep points loosely at the finite-ring canonical-mate node; this is outside the delivery and harmless. Step 5: classicality comes from sk-prop-sf-comparison plus det-pe-classical-derived-equivalence (1). Torsion holds because nu* is an exact left adjoint and the forgetful functor preserves kernels and colimits; no common exponent is needed. Step 6: the good truncation, K-injective resolution and (a_*J)(P)=J(X_ybar) are correct. Step 7: I redid the transpose calculation under p_a -| s_a with the counit identity and the square identity at M=r_fL, and it is correct. Step 8: on a bounded-below injective, the resolution-level fixed derived base change gives the canonical sf comparison, so the etale fibre map is the stated map and an isomorphism without the finite-ring corollary. Edge cases checked: Lambda=0, Z, Q; K=0; empty fibre; f=id. The rg search found no duplicates. I accept four off-route tool_uses: det-pe-wc-sections-exact, det-pe-wc-sections-derived, sk-prop-sf-comparison and det-pe-classical-derived-equivalence. The unit step genuinely needs each of these facts and no node of the unit's route states them. No SGA is used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleTorsionStalk",
+  "declaration": "AlgebraicGeometry.proEtale_torsion_stalk_point",
+  "statement": "theorem proEtale_torsion_stalk_point (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (Λ : Type (u + 1)) [CommRing Λ] : PreservesFiniteLimits (torsionPointProEtaleSections Ω Λ) ∧ PreservesFiniteColimits (torsionPointProEtaleSections Ω Λ) ∧ (Etale.sectionsFunctor (ModuleCat.{u + 1} Λ) (Spec (.of Ω))).IsEquivalence ∧ (∀ [PreservesFiniteLimits (torsionPointProEtaleSections Ω Λ)] [PreservesFiniteColimits (torsionPointProEtaleSections Ω Λ)] [(Etale.sectionsFunctor (ModuleCat.{u + 1} Λ) (Spec (.of Ω))).IsEquivalence], (∀ M : HomotopyCategory.Plus (Sheaf (Scheme.ProEt.topology (Spec (.of Ω))) (ModuleCat.{u + 1} Λ)), IsIso ((torsionPointProEtaleSections Ω Λ).rightDerivedFunctorUnit.app M.obj)) ∧ IsIso (torsionPointSectionsComparison Ω Λ) ∧ (∀ [IsIso (torsionPointSectionsComparison Ω Λ)] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (barY : Spec (.of Ω) ⟶ Y) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (hK : ∀ n : ℤ, Scheme.IsTorsionAbelianSheaf ((DerivedCategory.Plus.homologyFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) n).obj ((D+(Etale.moduleAbelianForget Λ X)).obj K))), ∃ s : Etale.upperStar (ModuleCat.{u + 1} Λ) barY ⋙ Etale.sectionsFunctor (ModuleCat.{u + 1} Λ) (Spec (.of Ω)) ≅ (Scheme.pointSmallEtale barY).sheafFiber (A := ModuleCat.{u + 1} Λ), (∀ (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (U : Y.Etale) (x : (Scheme.pointSmallEtale barY).fiber.obj U), torsionPointPulledBackSection Ω Λ barY F U x ≫ s.hom.app F = (Scheme.pointSmallEtale barY).toPresheafFiber U x F.obj) ∧ IsIso (torsionPointProEtaleFibreMap Ω Λ f barY K) ∧ IsIso (torsionPointEtaleFibreMap Ω Λ f barY K s) ∧ IsIso (torsionPointFibreCohomologyComparison Ω Λ f barY K) ∧ (torsionPointFibreSourceIso Ω Λ f barY K s).hom ≫ torsionPointProEtaleFibreMap Ω Λ f barY K = torsionPointEtaleFibreMap Ω Λ f barY K s ≫ torsionPointFibreCohomologyComparison Ω Λ f barY K))",
+  "branch": "newtargets-dag",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleTorsionStalk.lean",
+  "by": "Q127",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.torsionPointProEtaleSections",
+   "AlgebraicGeometry.torsionPointSectionsComparison",
+   "AlgebraicGeometry.torsionPointPulledBackSection",
+   "AlgebraicGeometry.torsionPointDerivedSectionsComparison",
+   "AlgebraicGeometry.torsionPointDerivedStalkSections",
+   "AlgebraicGeometry.torsionPointProEtaleLerayIso",
+   "AlgebraicGeometry.torsionPointEtaleLerayIso",
+   "AlgebraicGeometry.torsionPointFibreSourceIso",
+   "AlgebraicGeometry.torsionPointProEtaleFibreMap",
+   "AlgebraicGeometry.torsionPointEtaleFibreMap",
+   "AlgebraicGeometry.torsionPointFibreCohomologyComparison",
+   "AlgebraicGeometry.proEtale_torsion_stalk_point"
+  ],
+  "note": "Second reader: canonical comparison-adjunction unit; germ-normalized stalk identification; canonical derived unit on bounded-below representatives; named real-data compositions replacing statement-local lets. The two Leray constructions supply actual fibre derived-global-section endpoints. The fibre identity uses the specified Etale.baseChange, ProEtale.derivedBaseChangeMap and fixed comparison mates, for arbitrary commutative coefficients. Helpers are the canonical constructions of this item, not new independent notions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e2477ed34",
+  "group": "Q127",
+  "result": "pass",
+  "note": "Read the item node, the unit, all 18 stmt_deps records, the relevant proof-dep records and the exact upstream declarations (ProEtale.sectionsFunctor, the fixed source/target comparison isos and comparison_derivedBaseChangeMap, valid for any commutative Λ; rightDerivedFunctorUnit; IsTorsionAbelianSheaf). Clauses: (1) PreservesFiniteLimits/Colimits of evaluation at ProEt.mk(𝟙 P), plus IsIso of the canonical derived unit on HomotopyCategory.Plus; (2) IsEquivalence of étale point sections plus IsIso of the comparison-adjunction unit at the final étale object, whose termwise derived extension gives the D+ statement; (3) [IsProper f], geometric fibre square from pullback.fst/snd, K in D+ with torsion cohomology in every integer degree via the recorded predicate, germ-normalized unique stalk iso s, and the literal equation SourceIso ≫ ProEtaleFibreMap = EtaleFibreMap ≫ FibreCohomologyComparison with both fibre maps iso. Λ : Type (u+1) is the chapter's recorded encoding (derived-categories and comparison nodes), not a silent restriction; no Finite/Noetherian assumptions; site universes intact. All 11 helpers have real data; one sorry; docstrings with source and blueprint id and the 8-step proof; node changes only lean, statement verbatim, 12 declarations, max line 99. The omitted proof imports BoundedBelowProEtaleComparison/ClassicalDerivedEquivalence still fail in the published dependency (duplicate rightDerivedLowerShriekOfCompactification, reproduced), so the omission is justified and documented. Observation only: the fibre comparison is built via the point unit and β_a, which node Step 8 identifies with the usual one. nt_compile.py --json on the snapshot module: exit 0, no errors or warnings, 6.2 s."
  }
 }

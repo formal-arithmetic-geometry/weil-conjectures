@@ -260,5 +260,31 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-45615fa8b (reviewer sub-agent of L); spot-checked: I read the whole item. Statement: it matches HTT Variant 4.2.3.15(2) (p.255; φ2 is the first-vertex map from N(I2)^op, with comma I2^op×_{I1}(I1)_{C/}), Theorem 4.1.3.1 (p.236; cofinality iff the comma C×_D D_{D/} is weakly contractible) and Proposition 4.1.1.7 (p.226; the comparison holds over every apex). I read these from a local HTT PDF. Generalizing from I1 to an arbitrary small C adds no hypothesis, and the orientation τ→σ ↦ τ(0→α0) is correct. Steps 1-3 (elementary): I checked that v_C is a functor, that nerves are quasicategories and nerve functors are inner fibrations, and the empty-C case (both mapping spaces are Δ^0). I recomputed the prepend contraction H_c on D_c=(c↓v_C) by hand: Hτ∘α⁺=Hσ including the edge 0→1 (τ(0→α0)a=b), the comma equalities, (αβ)⁺=α⁺β⁺, the maps j_m and k_m into the comma, and the naturality identities α⁺j_n=j_mα and α⁺k_n=k_m. No component needs to be invertible. Step 4: lem-coef-nerve-natural-homotopy-equivalence allows either orientation and non-invertible components, and the two definition nodes define weak homotopy equivalence the same way (through realization). lem-cbc-simplicial-groupoid-localization with S=Δ^0 then gives the criterion's 'all arrows inverted' form. Step 5: the strict pullback is N(D_c) and N(c/C)=N(C)_{c/}. q is an inner fibration that lifts isomorphisms at a given source, so lem-coef-infinity-isofibration-pullback-limit makes the strict pullback the Cat_∞ pullback the criterion requires. Step 6: lem-coef-infinity-cofinal-comma-criterion's displayed map is exactly the item's (restriction, same T, no colimits), and lem-cbc-enhanced-functor-cone-calculus gives the Kan clause. Small cases checked: empty C; C=[1] with c=0 and c=1 and a non-invertible a; degenerate α:[1]→[0]; a one-object category with automorphisms. Following dependencies (488 nodes) gives no cycle; the only citer, poset-nerve-cofinal-replacement, uses it with C=I1. No new nodes; the last-vertex node is a different statement. Mathlib: there are 15 searches of all kinds, and Final.lean:96 is only ordinary finality, so this is not a leaf. Route: the two sk-prop-sf-cbc tool uses (groupoid localization, enhanced-functor-cone-calculus) are generic black boxes and I accept them. No SGA is cited, no target is involved, and unit and chapter are untouched. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplexFirstVertexCoconeEquivalence",
+  "declaration": "SSet.Enhanced.simplex_first_vertex_cocone_equivalence",
+  "declarations": [
+   "SSet.Enhanced.simplexFirstVertexArrow",
+   "SSet.Enhanced.simplexFirstVertexArrow_functorial",
+   "SSet.Enhanced.simplexFirstVertex",
+   "SSet.Enhanced.simplexFirstVertexMap",
+   "SSet.Enhanced.simplex_first_vertex_cocone_equivalence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SimplexFirstVertexCoconeEquivalence.lean",
+  "statement": "theorem simplex_first_vertex_cocone_equivalence (C : Type u) [Category.{v} C] (E : SSet.{max u v w}) [Quasicategory E] (p : SSet.uliftFunctor.{w}.obj (CategoryTheory.nerve C) ⟶ E) (T : E _⦋0⦌) : KanComplex (mappingSpace ((ihom (SSet.uliftFunctor.{w}.obj (CategoryTheory.nerve C))).obj E) (diagramVertex p) (diagramVertex (SSet.const T))) ∧ KanComplex (mappingSpace ((ihom (SSet.uliftFunctor.{w}.obj (CategoryTheory.nerve ((CategoryTheory.nerve C).Elements)))).obj E) (((MonoidalClosed.pre (SSet.uliftFunctor.{w}.map (simplexFirstVertexMap C))).app E).app _ (diagramVertex p)) (((MonoidalClosed.pre (SSet.uliftFunctor.{w}.map (simplexFirstVertexMap C))).app E).app _ (diagramVertex (SSet.const T)))) ∧ IsWeakHomotopyEquivalence (mappingSpaceMap ((MonoidalClosed.pre (SSet.uliftFunctor.{w}.map (simplexFirstVertexMap C))).app E) (diagramVertex p) (diagramVertex (SSet.const T)))",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The simplex category is Mathlib Functor.Elements with the required opposite orientation. Explicit chain arrows and the induced nerve map have real data; the named functoriality theorem states the functor clause of this same node. All proof dependencies already stated are imported. Universe enlargement uses SSet.uliftFunctor and the conclusion includes both Kan assertions and weak equivalence of restriction itself."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-58fb553f6",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Read node, dep def-cbc-enhanced-diagrams-cones (mappingSpace/mappingSpaceMap/diagramVertex/IsWeakHomotopyEquivalence), InfinityCofinalCommaCriterion signature, Mathlib Functor.Elements, module and report (Worker report + Second reading by Q58 present). Elements arrow orientation gives alpha:[n]->[m] with tau∘alpha=sigma, so first-vertex arrow tau(0)->tau(alpha 0)=sigma(0) as node; real data for arrow/functor/nerve map; helper functoriality theorem is the node's own clause with sorry+proof docstring. E : SSet.{max u v w} with uliftFunctor.{w}, independent u v w; Map(p,ΔT) right-pinched cocone orientation; both KanComplex clauses + IsWeakHomotopyEquivalence of actual restriction, same form as the criterion; no colimit/Nonempty hypotheses; empty C covered. Node differs from side clone only in lean; lean.statement verbatim in file. No existing duplicate (rg side Sheaf, Mathlib searches). nt_compile.py --json on snapshot module: rc=0, no errors/warnings. No findings."
  }
 }

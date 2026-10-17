@@ -231,5 +231,34 @@
   "group": "Q79",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-3022f7635 (reviewer sub-agent of L); spot-checked: PASS. I read the whole item and the full statements of def-cbc-enhanced-diagrams-cones and the same-unit lem-coef-homotopy-category-triangle-calculus. The statement is unchanged, true and not weakened. I tested it on an empty D, nerves of categories, a one-sided retract (which gives no Q-diagram) and a=b with degenerate e. Step 1: the faces 012=(u,e,1_b), 123=(e,u,1_a) and 013=s1u=(u,1_a,u) agree on edges 12, 13 and 01, so they glue to Lambda^3_1. Step 2: the horn is inner and the filler is degenerate on 02 and 13, so it descends to Q with fc=e. Step 3: the faces 012, 123, 013 and 023 give [v][u]=1_x, [w][v]=1_y, [z]=[u] and [z]=[w], using only the defining relations, which the cited statement provides. Step 4 is algebra in hD. Step 5: the cited 'only if' clause with h a degenerate edge gives the inverse triangles that the definition requires, and the edge list is exhaustive (10 edges of Delta^3 plus the degenerate point edges). proof_deps equals the union of uses. There is no cycle: the item's only citer is pattern-anodyne-lifting-products. I read 11 rg candidates (the Joyal walking-iso test, marked fibrancy, pattern generators with the same Q as (A1), and others) and none duplicates this node. The node has no new nodes and no SGA. I accept tool_uses for def-cbc as a notion use; it is unnecessary but harmless. HA B.1.6 is not archived under literature/, so I checked it through the mathematics and the identical (A1) Q in existing nodes; proof_origin is correctly agent and the WANTED line is recorded. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.FiniteInverseTetrahedron",
+  "declaration": "SSet.Enhanced.finite_inverse_tetrahedron",
+  "declarations": [
+   "SSet.Enhanced.inverseTetrahedronEdge02",
+   "SSet.Enhanced.inverseTetrahedronEdge13",
+   "SSet.Enhanced.inverseTetrahedronFirst",
+   "SSet.Enhanced.inverseTetrahedronFirstMap",
+   "SSet.Enhanced.inverseTetrahedron",
+   "SSet.Enhanced.inverseTetrahedronQuotient",
+   "SSet.Enhanced.inverseTetrahedronCentralEdge",
+   "SSet.Enhanced.finite_inverse_tetrahedron"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/FiniteInverseTetrahedron.lean",
+  "statement": "theorem finite_inverse_tetrahedron (D : SSet.{u}) [Quasicategory D] : (∀ e : (Δ[1] : SSet.{u}) ⟶ D, IsEquivalenceEdge D (yonedaEquiv e) → ∃ f : inverseTetrahedron.{u} ⟶ D, inverseTetrahedronCentralEdge ≫ f = e) ∧ (∀ (f : inverseTetrahedron.{u} ⟶ D) (a : inverseTetrahedron.{u} _⦋1⦌), IsEquivalenceEdge D (f.app _ a))",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper constructions give the actual successive simplicial pushouts defining Q and its central edge. The single theorem states both clauses; its proof alone is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c29bcde43",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Theorem SSet.Enhanced.finite_inverse_tetrahedron matches the node clause by clause: Q is the real iterated pushout collapsing edges 02 and 13 to two separate points, c is the image of edge 12, D is any quasicategory in universe u with no extra instances, the extension clause uses strict equality c≫f=e, and the detection clause covers all 1-simplices of Q. IsEquivalenceEdge requires two-sided inverse triangles, which is the node's notion. Both clauses checked mathematically: inner horn Λ^3_1 filler for extension, and the four faces give vu=1, wv=1, z=u, z=w for detection. Only the lean field differs from the base, and lean.statement matches the file byte for byte. The 7 helper definitions are non-hollow constructions from Mathlib pushout, yonedaEquiv and stdSimplex.edge. The only proof is sorry, with a five-step docstring. Every declaration carries source and blueprint docstrings. Imports are correct, with the proof dependency imported without public. Report has Worker report and Second reading by Q25. No duplicate: equivalenceDetector is a different coequalizer and coherentIso is the full nerve. nt_compile.py exit 0, no errors or warnings."
  }
 }
