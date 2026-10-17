@@ -25,7 +25,9 @@
   "document": "literature/stacks-project/dga.tex",
   "place": "Tag 09QX, lemma-dgc-analogue-tr4 and its displayed quotient construction; correct the typos s_2 p_2=0 and pi_3 beta=0 in the proof to s_2 p_2=1-beta alpha pi_1 pi_3 and pi_3 beta=1."
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "lem-coef-dg-semi-free-homotopically-projective"
+ ],
  "proof": [
   {
    "text": "Use right-to-left composition and work first with homogeneous maps in the unshifted Hom complexes. Chain-map composition, as recalled in the statement, means $\\partial(gh)=(\\partial g)h+(-1)^{|g|}g\\partial h$. For any admissible splitting $(a,b,\\pi,s)$ put $D=\\pi\\partial s$, of degree $1$. Differentiating $bs=1$ and using $1=a\\pi+sb$ gives $\\partial s=aD$. Differentiating $1=a\\pi+sb$ and multiplying on the left by $\\pi$ gives $\\partial\\pi=-Db$. Consequently $\\partial D=(\\partial\\pi)\\partial s=-DbaD=0$. Under (B), $D$ represents the closed degree-zero boundary. Apply this calculation to the two given sequences to obtain $D_1=\\pi_1\\partial s_1$, $D_3=\\pi_3\\partial s_3$, $\\partial s_1=\\alpha D_1$, $\\partial\\pi_1=-D_1p_1$, $\\partial s_3=\\beta D_3$, and $\\partial\\pi_3=-D_3p_3$.",
@@ -257,5 +259,37 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-2cb9746f1 (reviewer sub-agent of L); spot-checked: I read Stacks dga.tex Tags 09P6 (lemma-get-triangle, l.3491), 09QJ (situation-ABC, l.3545) and 09QX (lemma-dgc-analogue-tr4, l.4360) in full, plus the cited node lem-coef-dgcat-model-structure and the parent lem-coef-dg-abc-homotopy-category-triangulated. The statement is unchanged and not weakened. The parent uses it existentially ('some choice'), and I checked by hand that it also holds for any q_2-sequence with pi_2=pi_1pi_3. All ten steps hold, and I re-derived each one: dD=-DbaD=0; R dT=E from the cone of eps[-1] (axiom C with strict shifts); the five splitting identities for (Pi,S,P); dP=0; D_2=D_1R+pi_1D_3k; u=j, v=k, r=R, t=T; boundary RjE=E; three squares strict; and D_3v-alpha D_2=-d(s_1R), which gives the fourth square with the correct shift sign. I confirm the three source errors in 09QX: s_2p_2=0 should be 1-beta alpha pi_1pi_3, pi_3beta=0 should be 1, and delta_3's target is y[1], not x[1]. The source also never constructs q_2; the worker fills that gap with the cone, which is sound. My own pure-Python test on 300 random two-degree Z-complex examples confirmed every identity; the last-square difference was nonzero in 293 of them, so the homotopy is genuinely needed. There are no new nodes. The candidate duplicates cone-homotopy and admissible-replacement state different results, and there is no cycle. The only dependency is in the same unit, so there are no tool_uses. No SGA is cited and Mathlib searches cover all three kinds. The missing lean_audit field predates this delivery and is not a fault of it. No fixes."
  },
- "lead_note": "2026-10-18 L (route pivot, the human): the model structure node lem-coef-dgcat-model-structure was cited only for the definition of a small dg category; that definition is now recalled inline in the statement (Stacks 09QJ route) and the citation removed"
+ "lead_note": "2026-10-18 L (route pivot, the human): the model structure node lem-coef-dgcat-model-structure was cited only for the definition of a small dg category; that definition is now recalled inline in the statement (Stacks 09QJ route) and the citation removed",
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-81e499a7b",
+  "group": "N6",
+  "result": "pass",
+  "note": "Read node, Stacks dga.tex (A)/(B) l.3448-3470, admissible-sequence defs, 09P6 l.3491, 09QJ l.3545, definition-dg-direct-sum, the delivered module and the IntegralDGCategory dependency (SemiFreeDGModule.lean:41). Every clause matches: DgClosedHom/DgHomologyEq (d(-1)0) render Z0/H0; DgZeroBinarySums gives a zero object with trivial graded Homs plus closed biproduct maps and equations; DgShiftData gives dg functors with strict [0], [n+m] and additive homIso with the (-1)^n differential and composition compatibility (Koszul sign forced in the complexes model and used only at p=0); DgBoundary is defined as homIso^-1(pi d s); DgConeAxiom is a real existence statement with boundary f[1]. The conclusion gives existential gamma=beta alpha and S2 with pi2=pi1 pi3, closed u=p2 beta s1 and v=p3 s2, strict five splitting equations with r=p1 pi3 s2 and t=p2 s3, r dt=p1[1]delta3, closed boundaries, and the four H0 identities up to homotopy only. Checked the steps 1-10 transports and that the hypotheses are satisfiable by complexes. Edge cases: all shifts, independent universes u and v, no extra assumptions. No duplicate ABC/shift/cone definitions in side lean; parent has no lean record. stmt_deps adds the owner of IntegralDGCategory with no cycle; the node differs from the shared one only in lean and stmt_deps; lean.statement verbatim; all 11 declarations present with source and blueprint docstrings; theorem docstring has all 10 proof steps; only sorry. nt_compile.py --json: exit 0, no messages, 5.2 s; #print axioms on a /tmp copy shows only sorryAx beyond standard axioms. The report has a real Worker report and Second reading by N6. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgAbcAdmissibleFlagQuotients",
+  "declaration": "CategoryTheory.dg_abc_admissible_flag_quotients",
+  "declarations": [
+   "CategoryTheory.DgClosedHom",
+   "CategoryTheory.DgHomologyEq",
+   "CategoryTheory.DgGradedSplitting",
+   "CategoryTheory.DgAdmissibleSequence",
+   "CategoryTheory.DgAdmissibleMono",
+   "CategoryTheory.DgHomotopyEquivalence",
+   "CategoryTheory.DgZeroBinarySums",
+   "CategoryTheory.DgShiftData",
+   "CategoryTheory.DgBoundary",
+   "CategoryTheory.DgConeAxiom",
+   "CategoryTheory.dg_abc_admissible_flag_quotients"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DgAbcAdmissibleFlagQuotients.lean",
+  "statement": "theorem dg_abc_admissible_flag_quotients (A : IntegralDGCategory.{u, v}) (hA : DgZeroBinarySums A) (B : DgShiftData A) (hC : DgConeAxiom A B) {x y z : A.Obj} (alpha : DgClosedHom A x y) (beta : DgClosedHom A y z) (ha : DgAdmissibleMono A alpha) (hb : DgAdmissibleMono A beta) (S1 : DgAdmissibleSequence A alpha) (S3 : DgAdmissibleSequence A beta) : ∃ (gamma : DgClosedHom A x z) (S2 : DgAdmissibleSequence A gamma) (uMap : DgClosedHom A S1.w S2.w) (vMap : DgClosedHom A S2.w S3.w), gamma.hom = A.comp 0 0 beta.hom alpha.hom ∧ S2.pi = A.comp 0 0 S1.pi S3.pi ∧ uMap.hom = A.comp 0 0 S2.b.hom (A.comp 0 0 beta.hom S1.s) ∧ vMap.hom = A.comp 0 0 S3.b.hom S2.s ∧ DgGradedSplitting A uMap.hom vMap.hom (A.comp 0 0 S1.b.hom (A.comp 0 0 S3.pi S2.s)) (A.comp 0 0 S2.b.hom S3.s) ∧ DgBoundary A B (A.comp 0 0 S1.b.hom (A.comp 0 0 S3.pi S2.s)) (A.comp 0 0 S2.b.hom S3.s) = A.comp 0 0 (B.shiftMap 1 0 S1.b.hom) (DgBoundary A B S3.pi S3.s) ∧ (A.hom S1.w (B.shiftObj 1 x)).d 0 1 (DgBoundary A B S1.pi S1.s) = 0 ∧ (A.hom S2.w (B.shiftObj 1 x)).d 0 1 (DgBoundary A B S2.pi S2.s) = 0 ∧ (A.hom S3.w (B.shiftObj 1 y)).d 0 1 (DgBoundary A B S3.pi S3.s) = 0 ∧ DgHomologyEq A (A.comp 0 0 uMap.hom S1.b.hom) (A.comp 0 0 S2.b.hom beta.hom) ∧ DgHomologyEq A (A.comp 0 0 (DgBoundary A B S2.pi S2.s) uMap.hom) (DgBoundary A B S1.pi S1.s) ∧ DgHomologyEq A (A.comp 0 0 vMap.hom S2.b.hom) S3.b.hom ∧ DgHomologyEq A (A.comp 0 0 (DgBoundary A B S3.pi S3.s) vMap.hom) (A.comp 0 0 (B.shiftMap 1 0 alpha.hom) (DgBoundary A B S2.pi S2.s))",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of c6b4fbf4e0f1: reuse the landed IntegralDGCategory from SemiFreeDGModule; every axiom (A), (B), (C) is expressed by actual equations or quantified existence, and every boundary is defined as the shift identification of pi d(s). The conclusion includes the prescribed composite retraction, both closed quotient maps, all five equations for the prescribed quotient splitting, its strict boundary equation, and all four H^0 identities."
+ }
 }

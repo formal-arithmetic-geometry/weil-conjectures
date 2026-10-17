@@ -114,10 +114,21 @@
   }
  ],
  "lean": {
+  "module": "WeilConjectures.Mathlib.AlgebraicGeometry.ValuativeCriterion",
+  "declaration": "AlgebraicGeometry.Scheme.exists_valuationSubring_of_specializes",
+  "statement": "lemma Scheme.exists_valuationSubring_of_specializes {Y : Scheme.{u}} {y' y : Y} (h : y' ⤳ y) :\n    ∃ (A : ValuationSubring (AlgebraicClosure (Y.residueField y'))) (ρ : Spec (.of A) ⟶ Y),\n      ρ (closedPoint A) = y ∧\n      Spec.map (CommRingCat.ofHom (algebraMap A (AlgebraicClosure (Y.residueField y')))) ≫ ρ =\n        Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y')\n          (AlgebraicClosure (Y.residueField y')))) ≫ Y.fromSpecResidueField y'",
   "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.exists_valuationSubring_of_specializes"
-  ],
-  "note": "attached by the lead's tool attach.py 2026-10-17 19:28 UTC for group N8, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: Its existential supplies the valuation subring with algebraic-closure fraction field, the morphism, the closed-point equality, and the stated generic-"
+  "by": "Q53",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact existing declaration in WeilConjectures.Mathlib.AlgebraicGeometry.ValuativeCriterion, lines 218–235. Its ValuationSubring A is a valuation ring inside AlgebraicClosure (Y.residueField y'), the closed-point equality is ρ (closedPoint A) = y, and the displayed Spec.map composition is exactly the generic-point restriction through the canonical residue-field map. The source theorem is sorry-free."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-31feb84bb",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Existing-declaration delivery: AlgebraicGeometry.Scheme.exists_valuationSubring_of_specializes (WeilConjectures.Mathlib.AlgebraicGeometry.ValuativeCriterion l.218-235, sorry-free, identical in newtargets/slopmaster2/side). lean.statement is verbatim the signature. Each node clause matches: Scheme Y, y'⤳y, ValuationSubring of AlgebraicClosure(residueField y') (fraction field Ω), ρ(closedPoint A)=y, generic restriction = Spec Ω→Spec κ(y')→Y via fromSpecResidueField. Matches Stacks 01J8 (1)+(2) with K = algebraic closure. No extra hypotheses or universe restriction. Edge cases y'=y and empty Y are fine. No duplicate declaration. Deps used and resolved. Node unchanged except the lean record. Worker report and Second reading sections present. nt_compile: 11.4 s, rc 0, no error, warning or sorry. Only a cosmetic 214 vs 218 line-range note."
  }
 }

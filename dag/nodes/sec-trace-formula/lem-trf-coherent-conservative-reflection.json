@@ -226,5 +226,24 @@
   "group": "Q66",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-b8f13a7a1 (reviewer sub-agent of L); spot-checked: PASS. I read the item in full, all 7 cited node statements and the parent's step that uses this item. The delivery has no new nodes, and the statement is unchanged and correct. Step checks: 1 writes the sheaf coproduct as the sheafification of the presheaf coproduct and gets local representatives from lem-cbc (W_iff_isLocallyBijective, small site, Set_U values). 2 combines this with the epi⇔local-surjectivity node into a covering calculus, with base change via sectionwise fibre products. 3 shows u^{-1} preserves coproducts and epis (Stacks 0038(1), and 086K: an epi is the coequalizer of its kernel pair). 4 shows u^{-1} is faithful, because equalizers are reflected by conservativity, and therefore reflects epis and covers. 5 descends quasi-compactness. 6 shows a finite cover by quasi-compact objects has a quasi-compact target (including J empty). 7 shows u^{-1} preserves quasi-compact objects, using a finite cover by coherent generators and the coherence of u; it does not assume quasi-compact equals coherent. 8 checks quasi-separatedness against arbitrary quasi-compact B, C, using left exactness. Stacks tags 00WH, 00WI, 00WK, 00WN, 00W2, 086K and 0038 were checked against tags/tags and sites.tex. Edge cases checked: Set; a diagonal conservative morphism into Set×Set; the non-conservative projection (finite, infinite), which shows Step 4 needs conservativity; empty covers. Duplicate search with rg found only the hypothesis provider lem-trf-proper-base-change-coherent-conservative and the criterion lem-trf-oriented-constructible-coherent, neither a duplicate. Route: all cited nodes are definitions or Mathlib leaves. The declared tool_use of lem-cbc-set-presheaf-sheafification-local-bijection is accepted (it is a Mathlib leaf, so not strictly needed). No SGA source, no fixes. One unread source: the Orgogozo §8.1 draft is not in the local literature, so I did not read it. The proof is correctly marked agent-written with a WANTED request, and I checked it independently."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8b4c6e947",
+  "group": "Q36",
+  "result": "fix",
+  "note": "Statement matches node clause by clause: GeometricMorphism E' E (inverse E⥤E'), hE/hE' IsCoherentTopos, hu coherent, hcon conservative (ReflectsIsomorphisms), ∀A, IsCoherentObject(u⁻¹A)→IsCoherentObject A; no extra hypotheses; universes checked with pp.universes (common coproduct universe w, independent object/morphism universes); dependency def-trf-coherent-topos declarations used; no duplicate found; sorry-only; lean.statement verbatim. Delivered file compiles clean via nt_compile (1.9 s). H8: theorem docstring only summarised the proof; fixes/CoherentConservativeReflection.lean replaces only that docstring with node Steps 1-8 and their Stacks tags, signature unchanged, compiles clean (2.3 s, rc 0). Minor: worker report prose calls def-weil-size-convention a dependency; stmt_deps are correct."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.CoherentConservativeReflection",
+  "declaration": "CategoryTheory.isCoherentObject_of_inverse_coherent",
+  "file": "lean/Sheaf/CategoryTheory/Sites/CoherentConservativeReflection.lean",
+  "statement": "theorem isCoherentObject_of_inverse_coherent {E : Type u} {E' : Type u'} [Category.{v} E] [Category.{v'} E'] [HasCoproducts.{w} E] [HasCoproducts.{w} E'] [HasFiniteLimits E] [HasFiniteLimits E'] (hE : IsCoherentTopos E) (hE' : IsCoherentTopos E') (u : GeometricMorphism E' E) (hu : IsCoherentGeometricMorphism hE' hE u) (hcon : IsConservativeGeometricMorphism hE' hE u) (A : E) : IsCoherentObject (u.inverse.obj A) → IsCoherentObject A",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-8b4c6e947"
  }
 }

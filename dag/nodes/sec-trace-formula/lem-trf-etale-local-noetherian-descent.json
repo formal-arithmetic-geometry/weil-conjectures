@@ -155,5 +155,23 @@
   "group": "Q44",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-dfe9bdff8 (reviewer sub-agent of L); spot-checked: I read the item, every cited statement and the parent in full. Source: Stacks descent.tex Tag 034C (lemma-Noetherian-local-fppf, lines 4761-4781), descent direction via Algebra 033E; affine refinement is Topologies lemma-etale-affine (0218, topologies.tex 766-778). The statement is a correct etale specialization of 034C and is not weakened, and the parent lem-trf-polarized-fine-log-etale-descent uses it exactly as stated. Step 1: the base-change leaf applies, and the refinement leaf applies because W is affine. Step 2: etale implies flat by the definition; the affine flatness criterion gives R->A_j flat and the finite-product leaf gives R->A flat. The primes pulled back along the projections give surjectivity on Spec, so 00HQ gives faithfully flat; the product of Noetherian rings is Noetherian (elementary, via idempotents), and 033E gives R Noetherian. Step 3 is the definition of locally Noetherian and is elementary. Edge cases T empty (m=0, R=0) and the identity cover both work. No new nodes; rg for 034C and fppf/faithfully-flat locally-Noetherian descent finds only the item and its parent, so there is no duplicate. No cycle, no SGA. The tool_uses entry for the Mathlib leaf lem-weil-pbc-faithfully-flat-descent-noetherian is accepted. FIX (C1): step 1 called the refined U_j affine opens of T_{a(j)}, but the refinement leaf gives affine opens of W x_T T_a; identifying that product with the open t_a^{-1}(W) needs the existing leaf lem-weil-pbc-open-preimage-fibre-product. I added it to the step 1 text, uses and proof_deps in fixes/dag/nodes/sec-trace-formula/lem-trf-etale-local-noetherian-descent.json; no other change.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-402c4e6b9",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Lean theorem isLocallyNoetherian_of_etale_cover matches the node and Stacks 034C (descent direction, etale case via 021N): arbitrary index type in its own universe, Etale instances, pointwise joint surjectivity (same as Mathlib's ofArrows_mem_smallEtaleTopology_iff), IsLocallyNoetherian members, sole conclusion IsLocallyNoetherian T; no extra assumptions; lean.statement verbatim. Node differs from main only in lean. Edge cases (empty index type, empty T, identity cover) fine. No duplicate in Mathlib, upstream or the project; no definitions. Docstrings carry source and blueprint and all 3 proof steps; proof sorry only; report has Worker report and Second reading sections. nt_compile.py --json: exit 0, no diagnostics; a test copy confirmed errors are reported; axioms are sorryAx plus the standard ones. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleLocalNoetherianDescent",
+  "declaration": "AlgebraicGeometry.isLocallyNoetherian_of_etale_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLocalNoetherianDescent.lean",
+  "statement": "theorem isLocallyNoetherian_of_etale_cover {T : Scheme.{u}} {A : Type v} (Tₐ : A → Scheme.{u}) (t : ∀ a, Tₐ a ⟶ T) [∀ a, Etale (t a)] [∀ a, IsLocallyNoetherian (Tₐ a)] (hcover : ∀ x : T, ∃ a : A, ∃ y : Tₐ a, t a y = x) : IsLocallyNoetherian T",
+  "branch": "newtargets-dag",
+  "by": "Q95",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

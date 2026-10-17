@@ -14,7 +14,9 @@
   "lem-coef-model-infinity-derived-adjunction",
   "lem-coef-simplicial-model-nerve-localization",
   "lem-coef-simplicial-projective-model-calculus",
-  "lem-coef-enriched-diagram-rectification"
+  "lem-coef-enriched-diagram-rectification",
+  "lem-coef-kan-diagram-localized-evaluation",
+  "lem-coef-kan-diagram-evaluation-restriction"
  ],
  "proof": [
   {
@@ -262,5 +264,60 @@
   "group": "Q08",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q08-3465124e6 (reviewer sub-agent of L); spot-checked: Read the item, unit, chapter, report, all cited node statements, and HTT source locations. Verified hypotheses, covariant base-change direction, replacement formulas, coherence, edge cases, route compliance, duplicate/cycle absence, and 607-node dependency traversal. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-189060fff",
+  "group": "Q155",
+  "result": "pass",
+  "note": "Read node, report, full module, and all dependency declarations. Node diff: statement/proof/proof_deps unchanged; lean added; stmt_deps gain two landed nodes already in proof_deps (allowed by brief-stage2 §140); lean.statement verbatim; 34/34 declarations recorded. Every clause matches the node: B a small quasicategory (empty allowed); replacements Q/T need only cofibrant/fibrant values with weak-equivalence augmentations; unit/counit replacement formulas come from the dependency's ReplacementAdjunction, and both edges are equivalences in the full functor quasicategories; Kan trivial-fibration replacement stays Kan and is invariant under unstraightening and chain evaluation, with no cofibrancy-preservation assumption; derived restriction is pinned to Over.pullback and P's restriction; beta is normalized against P.covariant_base_change.comparison (direction checked); alpha is the 3-factor mate; unit/counit squares, gamma, St=L≫E and identity/composition laws (alpha_{gf}=(r_g alpha_f)(alpha_g p_f)) all checked endpoint-by-endpoint; parametric descent matches the dependency. The conclusion can be met: IsLocalization includes the quasicategory targets the dependency needs. Single universe u, localizations in u+1, no silent restriction; no hollow defs; one sorry; docstrings with HTT place and blueprint; no lines over 100; no name clashes; no pro-etale content. nt_compile.py --json on the snapshot text: 22.9 s, exit 0, no errors or warnings. Minor point needing no action: unused import of PointwiseEquivalences for the later proof, as in at least 10 landed modules."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CovariantDerivedReplacementBaseChange",
+  "declaration": "SSet.CovariantDerivedReplacement.covariant_derived_replacement_base_change",
+  "declarations": [
+   "SSet.CovariantDerivedReplacement.Base",
+   "SSet.CovariantDerivedReplacement.LeftFibrations",
+   "SSet.CovariantDerivedReplacement.leftInclusion",
+   "SSet.CovariantDerivedReplacement.Models",
+   "SSet.CovariantDerivedReplacement.Derived",
+   "SSet.CovariantDerivedReplacement.Comparison",
+   "SSet.CovariantDerivedReplacement.qLeft",
+   "SSet.CovariantDerivedReplacement.qKan",
+   "SSet.CovariantDerivedReplacement.CoherentDescent",
+   "SSet.CovariantDerivedReplacement.left",
+   "SSet.CovariantDerivedReplacement.right",
+   "SSet.CovariantDerivedReplacement.UnitCounitEquivalences",
+   "SSet.CovariantDerivedReplacement.leftWeak",
+   "SSet.CovariantDerivedReplacement.kanUnstraightening",
+   "SSet.CovariantDerivedReplacement.FibrantPullback",
+   "SSet.CovariantDerivedReplacement.KanReplacement",
+   "SSet.CovariantDerivedReplacement.evaluationLarge",
+   "SSet.CovariantDerivedReplacement.rawClass",
+   "SSet.CovariantDerivedReplacement.SameClass",
+   "SSet.CovariantDerivedReplacement.Pasting",
+   "SSet.CovariantDerivedReplacement.Pastes",
+   "SSet.CovariantDerivedReplacement.Commutes",
+   "SSet.CovariantDerivedReplacement.preRaw",
+   "SSet.CovariantDerivedReplacement.postRaw",
+   "SSet.CovariantDerivedReplacement.pre",
+   "SSet.CovariantDerivedReplacement.post",
+   "SSet.CovariantDerivedReplacement.unit",
+   "SSet.CovariantDerivedReplacement.counit",
+   "SSet.CovariantDerivedReplacement.LocalData",
+   "SSet.CovariantDerivedReplacement.RestrictionData",
+   "SSet.CovariantDerivedReplacement.AdjunctionData",
+   "SSet.CovariantDerivedReplacement.Conclusion",
+   "SSet.CovariantDerivedReplacement.Coherence",
+   "SSet.CovariantDerivedReplacement.covariant_derived_replacement_base_change"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CovariantDerivedReplacementBaseChange.lean",
+  "statement": "theorem covariant_derived_replacement_base_change (P : SimplicialRightFibration.Presentation.{u}) (m : ∀ B : Base.{u}, Models P B) : ∃ C : Conclusion P m, Nonempty (Coherence C)",
+  "branch": "newtargets-dag",
+  "by": "Q155",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helper declarations belong to this node: they specify replacement-normalized derived data and actual base-change and evaluation comparisons. The two added statement dependencies already occur in proof_deps and supply the exact chain-evaluation and restriction interfaces used in the conclusion."
  }
 }

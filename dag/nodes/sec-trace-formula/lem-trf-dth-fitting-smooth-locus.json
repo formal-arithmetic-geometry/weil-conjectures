@@ -174,5 +174,29 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-88bca6edb (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited node and the Stacks sources: Divisors 0C3K (l.1615), 0C3F (l.1352), 05P8 (l.1384), More on Algebra 07ZC, Morphisms 01V9 and Algebra 00P4. The item matches 0C3K. Its geometric-fibre hypothesis is enough because Step 2 derives the ordinary fibre dimension d. Small cases agree: A^d, xy=0 with d=1, k[x]/(x^2) with d=0, the inseparable x^p-t, and the non-flat closed point (excluded by flatness). The new nodes are true, are not duplicates (searched by rg over the DAG for Fitting, 0C3F, 05P8, 07ZC and 01V9), and do not restate clauses of the item. I fixed four faults with no new nodes. (1) Step 1 used the stalk form, but the Fitting node stated only neighbourhood generation (C4); the node now also states the 07ZC (1)<=>(3) stalk clause. (2) Step 2 went from equidimensional to pointwise dimension without justification (C1), and the item cited def-kun-dimension for 'equidimensional' (B3); it now cites def-weil-pure-dimension, lem-sbc-equidimensional-open-local-dimension (0A21, declared as a tool use) and qcqs-permanence (3) (a Mathlib leaf). (3) The Fitting node cited def-trf-first-fitting-singular-subscheme, which defines only Fit_1 of Omega, for the general Fit_r(F) (B3); it now defines Fit_r inline and cites lem-trf-fitting-ideal-independence-base-change. (4) The new nodes' blueprint.from.via left out lem-trf-projective-nodal-family-geometry. I also spelled out 'smooth at x' and cleaned the item's stmt_deps. The 00P4 and 0A21 tool uses are accepted. No cycle; no SGA. For the citer lem-trf-nodal-family-fitting-singular: its base-change step uses geometric fibres over a different algebraically closed field.; 3 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aa555ff13",
+  "group": "Q112",
+  "result": "fix",
+  "note": "Checked every clause against the node and Stacks Divisors 0C3K: flat, lfp, d:N, relativeDifferentials, the existing fittingIdealSheaf (Q108), support = |Z_d|, smooth-at-x via an open U with Smooth (U.ι ≫ g), IsOpen V, |Z_d| = univ \\ V, and the d=1 identification with firstFittingIdealSheaf are all correct. H3/H4 fault: hpure used the ordinary fibre g.fiber b instead of the node's geometric fibre, and the recorded def-weil-geometric-fibre declaration was unused. The report falsely claimed g.geometricFiberAt and a delivered GeometricFiber dependency module (neither exists; dependency nodes are unchanged). Fixes: fixes/DthFittingSmoothLocus.lean (hpure = pure dimension d of pullback g (Spec.map (algebraMap κ(b) (AlgebraicClosure κ(b))) ≫ B.fromSpecResidueField b), as in the landed ProperSmoothConnectedFibreDimensionLoci; unused GeometricFrobenius import replaced by Pullbacks/ResidueField/AlgebraicClosure; undocumented instance wrappers replaced by attribute [instance]; node Steps 1-4 in the docstring) and fixes/lem-trf-dth-fitting-smooth-locus.report.md (corrected; false Dependency modules section removed; reviewer-fix section added). nt_compile.py per file: delivered rc0 clean (14.9 s), fixed rc0 clean (11.4 s); a sanity run confirmed errors are reported and the hypothesis is the base change to Spec(κ(b)^alg). Edge cases checked: empty fibre (vacuous), empty schemes, d=0, d≥n, universes. No hollow defs, nothing proved, no extra assumptions."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DthFittingSmoothLocus",
+  "declaration": "AlgebraicGeometry.dthFitting_smoothLocus",
+  "declarations": [
+   "AlgebraicGeometry.relativeDifferentials_isFiniteType",
+   "AlgebraicGeometry.relativeDifferentials_isQuasicoherent",
+   "AlgebraicGeometry.dthFitting_smoothLocus"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DthFittingSmoothLocus.lean",
+  "statement": "theorem dthFitting_smoothLocus {T B : Scheme.{u}} (g : T ⟶ B) (d : ℕ) [Flat g] [LocallyOfFinitePresentation g] (hpure : ∀ b : B, (pullback g (Spec.map (CommRingCat.ofHom (algebraMap (B.residueField b) (AlgebraicClosure (B.residueField b)))) ≫ B.fromSpecResidueField b)).IsPureDimension d) : ∃ V : Set T, IsOpen V ∧ (∀ x : T, x ∈ V ↔ ∃ U : T.Opens, x ∈ U ∧ Smooth (U.ι ≫ g)) ∧ ((Scheme.Modules.fittingIdealSheaf g.relativeDifferentials d).support : Set T) = Set.univ \\ V ∧ (d = 1 → Scheme.Modules.fittingIdealSheaf g.relativeDifferentials 1 = Scheme.firstFittingIdealSheaf g)",
+  "branch": "newtargets-dag",
+  "by": "Q112",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-aa555ff13"
  }
 }

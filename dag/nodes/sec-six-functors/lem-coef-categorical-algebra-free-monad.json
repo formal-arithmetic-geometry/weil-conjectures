@@ -234,5 +234,39 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5ada23aa3",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Snapshot only adds the lean field to the node (statement, deps and proof unchanged, no statement_change) and the module CategoricalAlgebraFreeMonad.lean. lean.statement appears verbatim and all 13 recorded declarations exist; the only sorry is the theorem body; helpers are real data (discrete = ULift of the existing discreteSet, explicit listVertex, Path, word, coconeLeg, FreeData); source and blueprint docstrings throughout, and the theorem docstring carries the six proof steps. Clause match: hp = IsPresentablyMonoidal.{u,v} (Quasicategory E is required by that predicate); algebras = Nonsymmetric.algebras on projection(discrete S), the same predicate as Algebroid.fiberCategory; forget pinned to evaluation at listVertex(pairList s t) by evaluation_eq; presentable; conservative iff; small sifted and Delta^op realizations; CoherentAdjunction; path coproduct colimiting in the functor infinity-category of graphs, forward-order words via rho_i = mkOfSucc i; n=0 unit only if s=t; unit and length-one normalization; adjunct_paths over every parameter K. active and collapse edges are unique in the discrete relative nerve; the n=1 normalizations are satisfiable. No universe equality is imposed; S empty is covered. nt_compile.py --json of the snapshot file: rc 0, 13 s, no errors or warnings. Report has both required sections (second reading is the standard post-2026-10-17 text). GH/Haugseng could not be reopened offline; judged against the stage-1-reviewed node. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CategoricalAlgebraFreeMonad",
+  "declaration": "SSet.Enhanced.CategoricalFree.categorical_algebra_free_monad",
+  "declarations": [
+   "SSet.Enhanced.CategoricalFree.discrete",
+   "SSet.Enhanced.CategoricalFree.discreteDiagram",
+   "SSet.Enhanced.CategoricalFree.listVertex",
+   "SSet.Enhanced.CategoricalFree.pairList",
+   "SSet.Enhanced.CategoricalFree.Path",
+   "SSet.Enhanced.CategoricalFree.concatLists",
+   "SSet.Enhanced.CategoricalFree.blockEndpoints",
+   "SSet.Enhanced.CategoricalFree.twoBlockArrow",
+   "SSet.Enhanced.CategoricalFree.graphs",
+   "SSet.Enhanced.CategoricalFree.word",
+   "SSet.Enhanced.CategoricalFree.coconeLeg",
+   "SSet.Enhanced.CategoricalFree.FreeData",
+   "SSet.Enhanced.CategoricalFree.categorical_algebra_free_monad"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CategoricalAlgebraFreeMonad.lean",
+  "statement": "theorem categorical_algebra_free_monad {E : SSet.{max (u + 1) v}} [Quasicategory E] (p : E ⟶ monoidalSimplexBase.{max (u + 1) v}) (hp : Algebroid.IsPresentablyMonoidal.{u, v} p) (S : Type u) : Nonempty (FreeData.{u, v} p S)",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Coherent fixed-small-object categorical algebras on the recorded relative nerve; actual graph evaluation, presentability, conservative/sifted/realization-preserving forgetful functor, coherent free adjunction, ordered path coproduct in the full graph functor infinity category, list-substitution triangles and parametrized pathwise adjunct formula. Helpers index the same canonical free construction."
  }
 }

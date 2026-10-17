@@ -148,5 +148,23 @@
   "group": "N1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-3eb4cbcb7 (reviewer sub-agent of L); spot-checked: I read the whole delivery against CochainComplexMinus.lean lines 32-108 in slopmaster2 and against Mathlib LeftResolution/Basic.lean lines 1-200, where chainComplexMap_zero is at lines 161-168. The item statement matches the source hypothesis by hypothesis and is unchanged. Step 1 (construction of the bicomplex) and step 2 (vanishing for q>0) are both backed by the objectwise-cochain node's statement, which gives the functor R and its support in degrees <=0. Step 3 (vanishing for p>b) follows the source: F preserves zero morphisms, so chainComplexMap_zero gives R(0)=0; K^p is zero, so id=0 on every term of R(K^p). Step 4 meets every hypothesis of additive-total-transport and gets the two totals for shape up(Z). Every cited statement is in unit sk-def-sfb-derived-tensor-hom, there is no cycle, no SGA, and no tool use is needed. Edge cases checked: K=0, K in a single degree, and Tot^n running over the finite range p in [n,b]. The new Mathlib leaf is an exact match, has no duplicate in the DAG, and is strictly smaller than the item. I repaired three small faults in fixes/: (1) step 3 now spells out that R(X)^{-n} is Mathlib's N-indexed chainComplex term and cites the additive-functor node for the zero objects under iota; (2) the new node's statement was not self-contained (B2) and now defines Lambda, chainComplex and chainComplexMap; (3) the new node's blueprint.from.via was wrong (B9) and is now [item, bounded-minus, functorial-bounded-above-class-resolution, kflat-derivability].; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f8a96422b",
+  "group": "NR",
+  "result": "pass",
+  "note": "Read node, all 6 stmt_deps, source CochainComplexMinus.lean 31-101 (same md5 in side/slopmaster2), module, report (Worker report + Second reading by NR present). Only the node's lean field differs from base; lean.statement is verbatim in the file. Clause match: A abelian, C preadditive+zero object+finite coproducts, ι full/faithful/additive (additivity is in the node; the source does not need it, not blocking), Λ with F preserving zero morphisms, hK equals Mathlib isStrictlyLE_iff; canonical source bicomplexFunctor and ι.mapHomologicalComplex₂; 4 IsZero clauses (q>0, p>b, both bicomplexes) and 2 HasTotal(up ℤ) clauses; 4 independent universes. Edge cases K=0, any b, single degree, finite diagonals covered. nt_compile --json on the delivered file: rc=0, no errors. /tmp probe with the sorry replaced by a real proof (isStrictlyLE_iff, source instances, hasTotal_of_isStrictlyLE _ b 0) compiles, axioms propext/choice/Quot.sound. No hollow definitions, sorry only, docstrings carry source place, blueprint tag and proof steps, no duplicates found. Minor non-blocking: bicomplexFunctor not listed in lean.declarations."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.LeftResolutionBicomplexTotalExists",
+  "declaration": "CategoryTheory.Abelian.LeftResolution.leftResolution_bicomplex_total_exists",
+  "file": "lean/Sheaf/Algebra/Homology/LeftResolutionBicomplexTotalExists.lean",
+  "statement": "theorem leftResolution_bicomplex_total_exists {A : Type uA} [Category.{vA, uA} A] [Abelian A] {C : Type uC} [Category.{vC, uC} C] [Preadditive C] [HasZeroObject C] [HasFiniteCoproducts C] {ι : C ⥤ A} [ι.Full] [ι.Faithful] [ι.Additive] (Λ : LeftResolution ι) [Λ.F.PreservesZeroMorphisms] (K : CochainComplex A ℤ) (b : ℤ) (hK : ∀ p : ℤ, b < p → IsZero (K.X p)) : (∀ (p q : ℤ), 0 < q → IsZero (((Λ.bicomplexFunctor.obj K).X p).X q)) ∧ (∀ (p q : ℤ), b < p → IsZero (((Λ.bicomplexFunctor.obj K).X p).X q)) ∧ (∀ (p q : ℤ), 0 < q → IsZero ((((ι.mapHomologicalComplex₂ (ComplexShape.up ℤ) (ComplexShape.up ℤ)).obj (Λ.bicomplexFunctor.obj K)).X p).X q)) ∧ (∀ (p q : ℤ), b < p → IsZero ((((ι.mapHomologicalComplex₂ (ComplexShape.up ℤ) (ComplexShape.up ℤ)).obj (Λ.bicomplexFunctor.obj K)).X p).X q)) ∧ (Λ.bicomplexFunctor.obj K).HasTotal (ComplexShape.up ℤ) ∧ ((ι.mapHomologicalComplex₂ (ComplexShape.up ℤ) (ComplexShape.up ℤ)).obj (Λ.bicomplexFunctor.obj K)).HasTotal (ComplexShape.up ℤ)",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

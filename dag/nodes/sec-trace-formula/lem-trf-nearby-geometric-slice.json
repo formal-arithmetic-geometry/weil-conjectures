@@ -12,7 +12,9 @@
   "def-trf-oriented-nearby-cycles",
   "def-weil-finite-type-morphism",
   "def-weil-geometric-point",
-  "def-weil-pbc-strict-henselization-limit"
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-trf-general-nearby-slice-test",
+  "lem-trf-oriented-product-points-conservative"
  ],
  "proof": [
   {
@@ -217,5 +219,64 @@
   "group": "Q32",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-867d9a62e (reviewer sub-agent of L); spot-checked: I read the item in full (statement and 6 steps), the new node lem-trf-oriented-point-cohomology, the statements of all 18 cited nodes, unit sk-i-curve-zero and the parent blueprint paragraph '(1) and (2)'. The Illusie PDF is not in literature/ and there is no network, so I could not read (1.3.1)-(1.3.4). I checked the oriented-topos mathematics against the local ILO Travaux de Gabber XI instead: 1.4 (points), proof of 2.3 (fibre as a colimit over neighbourhoods (U->V<-W)) and 4.3 (Psi^{-1}(U->V<-W)=U x_V W); the classical side against Varshavsky 1.3.1. The statement is unchanged and not weakened. The coefficient category matches def-trf-oriented-nearby-cycles. Step 1: the 2-cell (fa)^{-1}->b^{-1} is the specialization F_bbar->F_tbar, in the right direction. Step 2: the restriction map is well defined, because a compatible t-bar point of V comes from a section A->V_A over strictly henselian A. Step 3: strict-base-closed-point-localizations applies (x lies on T_A x_A bbar); 072W, and 0GIT on affine U x_A tbar for D^+, give the target stalk. Step 4: k-bar/k^s is purely inseparable, hence a universal homeomorphism. 59.90.1 applies (M_kbar is affine, n is invertible), then truncation and stalk conservativity finish. Step 5: v e_f' = e_f h_bbar holds, and the mate expansion is valid for arbitrary h. Step 6: the ringed-topos tensor pullback covers e_f and psi_f. New node: I proved it from the sources for arbitrary schemes and arbitrary Lambda on D^+; U x_V W is open in U x_S W, so it is etale over Z. I tested it on f=g=id (K_y), on g=id with trivial c (K_x, matching ILO XI 4.4), and on empty schemes. It satisfies B1-B7 and is not a restatement of the item. rg over the DAG finds no duplicate. Every proof_dep is on the unit route, so no tool_uses are needed. The closure is acyclic, and no SGA is cited. Fixes: (1) in the new node, the specialization c must be a morphism of S-schemes between the strict localizations; this repeats a fix the redelivery dropped. I also added the ILO XI corroboration to its source. (2) The item's proof_origin.by changes from document to agent, because the Illusie PDF is not in literature/ (WANTED); the URL is kept.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-061fd0896",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: DVR via IsDomain+IsDiscreteValuationRing; finite type = LocallyOfFiniteType+QuasiCompact; finite Λ with m•a=0 and IsUnit (m:R); bounded L via IsBounded; b̄ geometric closed point; recorded strictHenselizationScheme; generic t̄ through B_(b̄); nested fibre products with canonical i, j, r. e_f has both legs normalized (second = constant generic point) and a natural oriented-point stalk formula, the same pattern as landed IsSpecializationSlice. Existential natural α with bounded iso η (as landed GeneralNearbySliceTest). The ordinary square uses γ normalized on both projections, the dependency's baseChange, and a geometricSliceOrdinary that matches ordinarySliceComparison; the tensor square uses pullTensor⁻¹, laxTensor, and i*·(mate of j-counit tensor)·r* lax structure; no invertibility asserted for either comparison. IsIso of α_{f'} on h*L is implied by the node and proof step 5. Edge cases (empty schemes, Λ=0, identity or non-finite-type h, transcendental fields, independent universes u/v) fine. 38 decls match the record, all docstrings carry source and blueprint, 6 whole-proof sorries, statement verbatim. Added stmt_deps are landed and acyclic, no name collisions. nt_compile --json on the snapshot file: rc 0 (29.4 s, then 10.1 s), no errors or warnings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NearbyGeometricSlice",
+  "declaration": "AlgebraicGeometry.OrientedNearbyCycles.nearby_geometric_slice",
+  "declarations": [
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceFibre",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceTube",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceGeneric",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceI",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceJ",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceR",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceClassical",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSlicePoint",
+   "AlgebraicGeometry.OrientedNearbyCycles.IsGeometricNearbySlice",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceSections",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceEpsilon",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceBasePoint",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceSecond",
+   "AlgebraicGeometry.OrientedNearbyCycles.GeometricNearbySliceData",
+   "AlgebraicGeometry.OrientedNearbyCycles.GeometricNearbySliceFamily",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceModules",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceFibreMap",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceTubeMap",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceTubeMap_snd",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceGenericMap",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceMap_squares",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceOrdinary",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceJLax",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceTensor",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceDirectSections",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceIdentityComponent",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceIdentity_naturality",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceIdentitySite",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceIdentity",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceFibreMap_fst",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceSourceSquare",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceSquareFirst",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceFibreFirst",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceSquareSecond",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceFibreSecond",
+   "AlgebraicGeometry.OrientedNearbyCycles.geometricSliceSquare",
+   "AlgebraicGeometry.OrientedNearbyCycles.GeometricSliceComparisonFamily",
+   "AlgebraicGeometry.OrientedNearbyCycles.nearby_geometric_slice"
+  ],
+  "file": "lean/Sheaf/Paper/NearbyGeometricSlice.lean",
+  "statement": "theorem nearby_geometric_slice (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] {T : Scheme.{u}} (f : T ⟶ Spec (.of R)) [LocallyOfFiniteType f] [QuasiCompact f] (Λ : Type v) [CommRing Λ] [Finite Λ] (m : ℕ) (hmΛ : ∀ a : Λ, m • a = 0) (hmR : IsUnit (m : R)) {Ω Ξ : Type u} [Field Ω] [IsAlgClosed Ω] [Field Ξ] [IsAlgClosed Ξ] (b : Spec (.of Ω) ⟶ Spec (.of R)) (hb : b (IsLocalRing.closedPoint Ω) = IsLocalRing.closedPoint R) (t : Spec (.of Ξ) ⟶ Scheme.strictHenselizationScheme b) (ht : IsGenericPoint (t (IsLocalRing.closedPoint Ξ)) Set.univ) : ∃ (E : GeometricNearbySliceFamily.{u, v} b t) (α : GeometricSliceComparisonFamily b t E Λ), (∃ η : sliceBoundedInclusion T Λ ⋙ nearbyCycles f Λ ⋙ (geometricSliceModules b t E f).pull (Coeff.{u, v} Λ) ≅ sliceBoundedInclusion T Λ ⋙ geometricSliceClassical f b t Λ, η.hom = Functor.whiskerLeft (sliceBoundedInclusion T Λ) (α f)) ∧ (∀ (T' : Scheme.{u}) (h : T' ⟶ T), ∃ γ : ((E (h ≫ f)).morphism.comp (squareMorphism f (h ≫ f) h (𝟙 _) (geometricSliceSourceSquare f h))).direct ≅ ((etaleMorphism (geometricSliceFibreMap f h b)).comp (E f).morphism).direct, (Functor.isoWhiskerRight γ (p₁ f).direct ≪≫ geometricSliceFibreFirst f h b t E = geometricSliceSquareFirst f h b t E) ∧ (Functor.isoWhiskerRight γ (p₂ f).direct ≪≫ geometricSliceFibreSecond f h b t E = geometricSliceSquareSecond f h b t E) ∧ ∀ (L : EtaleDerived T Λ) (_hL : IsBounded (etaleDatum.{u, v} T) (Coeff.{u, v} Λ) L), IsIso ((α (h ≫ f)).app (((etaleModules h).pull (Coeff.{u, v} Λ)).obj L)) ∧ (geometricSliceSquare f h b t E γ Λ).hom.app ((nearbyCycles f Λ).obj L) ≫ ((etaleModules (geometricSliceFibreMap f h b)).pull (Coeff.{u, v} Λ)).map ((α f).app L) ≫ geometricSliceOrdinary f h b t Λ L = ((geometricSliceModules b t E (h ≫ f)).pull (Coeff.{u, v} Λ)).map (baseChange f (h ≫ f) h (𝟙 _) (geometricSliceSourceSquare f h) Λ L) ≫ (α (h ≫ f)).app (((etaleModules h).pull (Coeff.{u, v} Λ)).obj L)) ∧ (∀ (L M : EtaleDerived T Λ) (_hL : IsBounded (etaleDatum.{u, v} T) (Coeff.{u, v} Λ) L) (_hM : IsBounded (etaleDatum.{u, v} T) (Coeff.{u, v} Λ) M), (pullTensor (geometricSliceModules b t E f) (Coeff.{u, v} Λ)).inv.app ((nearbyCycles f Λ).obj L, (nearbyCycles f Λ).obj M) ≫ ((geometricSliceModules b t E f).pull (Coeff.{u, v} Λ)).map (laxTensor f Λ L M) ≫ (α f).app ((derivedTensor (etaleDatum T) (Coeff.{u, v} Λ)).obj (L, M)) = (derivedTensor (etaleDatum (geometricSliceFibre f b)) (Coeff.{u, v} Λ)).map (Prod.mkHom ((α f).app L) ((α f).app M)) ≫ geometricSliceTensor f b t Λ L M)",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The owning-node helpers give the actual nested geometric fibre products, their canonical maps, the normalized geometric slice data, and independently defined ordinary counit and lax tensor maps. Reuses the landed general-slice module for the transported stalk, bounded inclusion, and inverse-image squares, and the landed point module for the recorded geometric point and its transport from the punctual topos to sets. The conclusion supplies the slice and a natural comparison, its bounded natural isomorphism, and both comparison compatibilities, including arbitrary source morphisms."
  }
 }

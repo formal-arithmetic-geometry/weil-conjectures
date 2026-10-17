@@ -15,7 +15,8 @@
   "def-weil-pbc-scheme-conventions",
   "def-weil-proper-morphism",
   "def-weil-finite-integral-morphism",
-  "def-weil-geometric-point"
+  "def-weil-geometric-point",
+  "lem-trf-oriented-product-points-conservative"
  ],
  "proof": [
   {
@@ -506,5 +507,41 @@
   "group": "Q38",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-fbb112dd8 (reviewer sub-agent of L); spot-checked: I read the item, all 13 steps, both new nodes and the statement of every cited node in full. One fix: def-weil-geometric-point was missing from the item's stmt_deps (the statement uses geometric oriented points and geometric x in X_y), so I added it in fixes/dag/nodes/sec-trace-formula/lem-trf-oriented-proper-image-constructibility.json; nothing else changed. Source limit: the cited Orgogozo draft (8.1, 8.3.3, 9.1.1-9.1.5) is not in literature/ and network access is blocked here, so I did not read it. The worker marks the proof agent-written and lists the PDF as WANTED. I checked every step myself instead, against local ILO Travaux de Gabber XI 1.4/1.6, 2.2-2.7 (Lemma 2.5 generalizes Orgogozo 2006 9.1) and XII 1.2.1/1.3. Item checks: the statement is unchanged, uses constant-Lambda module coefficients as in def-trf-oriented-nearby-cycles, and is not a target. Step 2: the fibre-dimension bound, invariance of dimension under field extension, and the Stacks 095U bound give R^j of h-bar_* A = 0 for j > 2d for every sheaf A. Step 5: I verified that V_T and W_T split into opens of T and that the pulled-back triple is a finite coproduct of triples (coverings of types a, c, b with empty overlaps). Step 6: V_a is a subobject of the terminal object, so the XI 1.6 formula gives H = p1^-1 h_E x p2^-1 h_W, and the free module is p1^*(u_!Lambda) tensor p2^*(j_!Lambda). Step 7: the ordinary compactification theorem is used with identity compactification and needs no finite-dimension hypothesis. Step 8: I checked the projection-map isomorphism stalk by stalk: on the open p2^-1 W_a it is the identity, and off it both stalks vanish. Step 9: finite-surjective descent through lem-trf-psi-constructibility-descent; a search of all dependencies found no cycle. Step 10: descending dimension shifting from i = c+1, using kernels of maps between constructible sheaves and quotients. Steps 11-13: truncation triangles; finite fibres are zero-dimensional and their points are Omega-rational; the counit is surjective on stalks, so F is a quotient of a constructible sheaf. New node lem-trf-oriented-proper-fibre-exchange: I believe it is true: localize, use XI 2.3 and SGA4 VI 8.7.3 with qcqs neighbourhoods, then ordinary proper base change for torsion sheaves; the base-change clause and first-projection clause also check out stalk by stalk. It is not a restatement of a clause of the item and not a duplicate of lem-trf-oriented-point-cohomology or lem-trf-nearby-proper-source-exchange. New node lem-trf-finite-base-splits-etale: I believe it is true, via Stacks 09ZA (lem-weil-pbc-gabber-finite-etale-section) over the integral closure in a separable closure plus a limit argument. Tested on z->z^2 over A^1 and on the connected double cover of a nodal cubic. It is not a duplicate of lemma-weil-pbc-finite-refinement-etale-cover, which gives only local sections. All 21 declared tool_uses are generic infrastructure, and I accept them. No SGA source is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-977f01556",
+  "group": "Q70",
+  "result": "fix",
+  "note": "Statement matches node clause by clause: IsNoetherian S; LocallyOfFinitePresentation+QuasiCompact+QuasiSeparated on h,g; IsProper h; Λ finite CommRing with N:ℕ, (N:Λ)=0, IsUnit (N:Γ(S,⊤)) (N=0 forces S empty); h̄ = squareModules g (h≫g) h (𝟙 S); bounded L with constructible H^q gives constructible H^q of the K-injective derived push; finite h gives exactness (PreservesFiniteLimits/Colimits), constructibility iff, Finite index {x : Spec Ω ⟶ X // x≫h=y} and a natural iso of the pushed stalk with the product of the fibre stalks. Helpers are canonical, not hollow: identity base-change site iso (as def-trf-oriented-constructible-sheaf prescribes for b=𝟙 S), fixed-scalar restriction, constant_ring_module_sheaves inverse pinned by its forward functor, fieldPoint and fibreOrientation from the recorded etaleComposition, stalk via the recorded lift. Records: lean.statement verbatim, 14 declarations present, all 13 proof steps verbatim in the docstring, stmt_deps gained an already landed node with no cycle, lines ≤100, universes u and v independent. Delivered file compiles clean (15.7 s, 13.3 s) with nt_compile --json. Finding (H9 imports rule): proof-dependency modules CoherentTopos, LeftModuleDerivedEvaluationForget and QcqsOrientedTriplePresentation were already stated on base f459229 but not imported. fixes/OrientedProperImageConstructibility.lean adds the three plain imports and nothing else; it compiles clean (9.0 s)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OrientedProperImageConstructibility",
+  "declaration": "AlgebraicGeometry.OrientedProperImage.proper_image_constructibility",
+  "declarations": [
+   "AlgebraicGeometry.OrientedProperImage.etaleIdentity",
+   "AlgebraicGeometry.OrientedProperImage.vanishingToProduct",
+   "AlgebraicGeometry.OrientedProperImage.scalarMap",
+   "AlgebraicGeometry.OrientedProperImage.fixedPresheaf",
+   "AlgebraicGeometry.OrientedProperImage.fixedModules",
+   "AlgebraicGeometry.OrientedProperImage.constructibilityTransport",
+   "AlgebraicGeometry.OrientedProperImage.IsConstructible",
+   "AlgebraicGeometry.OrientedProperImage.fieldPoint",
+   "AlgebraicGeometry.OrientedProperImage.fieldPointComp",
+   "AlgebraicGeometry.OrientedProperImage.fibreOrientation",
+   "AlgebraicGeometry.OrientedProperImage.stalk",
+   "AlgebraicGeometry.OrientedProperImage.sourceMorphism",
+   "AlgebraicGeometry.OrientedProperImage.cohomology",
+   "AlgebraicGeometry.OrientedProperImage.proper_image_constructibility"
+  ],
+  "file": "lean/Sheaf/Paper/OrientedProperImageConstructibility.lean",
+  "statement": "theorem proper_image_constructibility {X Y S : Scheme.{u}} [IsNoetherian S] (h : X ⟶ Y) (g : Y ⟶ S) [LocallyOfFinitePresentation h] [QuasiCompact h] [QuasiSeparated h] [IsProper h] [LocallyOfFinitePresentation g] [QuasiCompact g] [QuasiSeparated g] (Λ : Type v) [CommRing Λ] [Finite Λ] (N : ℕ) (hkill : (N : Λ) = 0) (hunit : IsUnit (N : Γ(S, ⊤))) : (∀ L : VanishingDerived.{u, v} (h ≫ g) Λ, IsBounded (vanishingDatum.{u, v} (h ≫ g)) (Coeff.{u, v} Λ) L → (∀ q : ℤ, IsConstructible.{u, v} (h ≫ g) Λ ((cohomology (vanishingDatum.{u, v} (h ≫ g)) (Coeff.{u, v} Λ) q).obj L)) → ∀ q : ℤ, IsConstructible.{u, v} g Λ ((cohomology (vanishingDatum.{u, v} g) (Coeff.{u, v} Λ) q).obj (((sourceMorphism.{u, v} h g).push (Coeff.{u, v} Λ)).obj L))) ∧ (IsFinite h → PreservesFiniteLimits ((sourceMorphism.{u, v} h g).modulePush (Coeff.{u, v} Λ)) ∧ PreservesFiniteColimits ((sourceMorphism.{u, v} h g).modulePush (Coeff.{u, v} Λ)) ∧ (∀ F : (vanishingDatum.{u, v} (h ≫ g)).modules (Coeff.{u, v} Λ), IsConstructible.{u, v} (h ≫ g) Λ F ↔ IsConstructible.{u, v} g Λ (((sourceMorphism.{u, v} h g).modulePush (Coeff.{u, v} Λ)).obj F)) ∧ ∀ (Ω Ξ : Type u) [Field Ω] [IsAlgClosed Ω] [Field Ξ] [IsAlgClosed Ξ] (y : Spec (.of Ω) ⟶ Y) (t : Spec (.of Ξ) ⟶ S) (c : ((fieldPoint.{u, v} t).comp (identity _)).direct ⟶ ((fieldPoint.{u, v} y).comp (etaleMorphism g)).direct), Finite {x : Spec (.of Ω) ⟶ X // x ≫ h = y} ∧ Nonempty (((sourceMorphism.{u, v} h g).modulePush (Coeff.{u, v} Λ) ⋙ stalk.{u, v} g y t c Λ) ≅ (Functor.pi' (fun x : {x : Spec (.of Ω) ⟶ X // x ≫ h = y} => stalk.{u, v} (h ≫ g) x.val t (fibreOrientation.{u, v} h g y t c x) Λ) ⋙ Pi.functor _)))",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical helpers compare the identity-leg triple presentations and the constant CommRingCat/RingCat module encodings; geometric stalk points use the recorded universal oriented lift. The theorem includes bounded constructible derived direct image, finite exactness, finite constructibility detection, and the natural finite product of actual geometric-fibre stalks.",
+  "fixed_by": "NT-stage2-cc-977f01556"
  }
 }

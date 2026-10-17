@@ -178,5 +178,30 @@
   "group": "Q41",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q41-400c90718 (reviewer sub-agent of L); spot-checked: Read the mathematics and cited source passages in full. Repaired specialization citations and dimension-bound check, added the existing co-Yoneda citation, and corrected agent-written proof provenance. Statement unchanged; no new nodes or cycles. Detailed checks are in review.md; corrected JSON is under fixes/dag/nodes/sec-smooth-purity/.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be6774e33",
+  "group": "Q15",
+  "result": "fix",
+  "note": "H3: the delivery made the node's assertion 'both B0 and B are bounded below of etale origin' into two hypotheses. The node, its proof step 2 ('places') and the only citer lem-pur-gysin-structure (which supplies only B0 in D^b_c and K in D+) make it a conclusion. The B0 in D^b_c hypothesis exists to give it; it holds by lem-weil-pbc-finite-ring-constructible-derived-origin for B0 and by left t-exactness of the right adjoint of exact i_* for B. fixes/ClosedSupportExceptionalComparison.lean concludes plusEtaleOrigin B0 ∧ ∃ hB, ∃ φ, ...; the docstrings record that node proof steps 2-3 leave these facts underived. Theorem signature and lean record unchanged; fixes/<item>.report.md adds a maintainer-fix section. All other clauses check out (support and relative Hom maps, direction of the canonical comparison q, uniqueness, counit equation, canonical constructibility realization, quantified adjunction data). The FixedEtaleOriginWitness §1(B) repair is valid (remark: its record drops the 17 old declarations, still reexported). No hollow definitions, only sorry proofs, docstrings ok, lines ≤100. nt_compile clean for the delivered files and the fixed file, and a #print check confirms the fixed statement's shape."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedSupportExceptionalComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.closedSupportExceptionalComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.closedSupportIdentityExtension",
+   "AlgebraicGeometry.ProEtale.closedSupportCompactIso",
+   "AlgebraicGeometry.ProEtale.closedSupportExceptionalComparisonProperty",
+   "AlgebraicGeometry.ProEtale.closedSupportExceptionalComparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedSupportExceptionalComparison.lean",
+  "statement": "theorem closedSupportExceptionalComparison (P : WeilConjectures.PurityFiniteSetting.{u}) {Z X V : Scheme.{u}} (aZ : Z ⟶ Spec (.of P.field.k)) (aX : X ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aZ] [QuasiCompact aZ] [LocallyOfFiniteType aX] [QuasiCompact aX] (i : Z ⟶ X) [IsClosedImmersion i] (_hi : i ≫ aX = aZ) (j : V ⟶ X) [IsOpenImmersion j] [QuasiCompact j] (hPair : IsCompl (Set.range i) (Set.range j)) : closedSupportExceptionalComparisonProperty P aZ aX i j hPair",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-be6774e33"
  }
 }

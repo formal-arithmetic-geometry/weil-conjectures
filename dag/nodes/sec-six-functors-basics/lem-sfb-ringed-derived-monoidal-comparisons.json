@@ -17,7 +17,10 @@
   "lem-weil-pbc-ringed-projection-mate-exact",
   "def-weil-pbc-composite-adjunction",
   "def-sfb-strong-monoidal-functor",
-  "def-sfb-monoidal-category"
+  "def-sfb-monoidal-category",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-weil-pbc-ringed-tensor-square-presentation",
+  "def-coef-ringed-tensor-hom-model"
  ],
  "proof": [
   {
@@ -543,5 +546,43 @@
   "group": "Q63",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-2c79bcf48 (reviewer sub-agent of L); spot-checked: I read the whole delivery and wrote review.md; no repairs, fixes/ is empty. The statement is byte-identical to the base and is not weakened. The delivery adds no new nodes. The two added stmt_deps (strong-monoidal functor, monoidal category) are both used by the statement. proof_deps equals the union of the step uses, the searches cover all three kinds, and no SGA is cited. I read all 33 cited statements, plus the proofs of the tensor-pullback, derived-pullback, pushforward-composition, mate-exact, cochain-coherence and both derived-adjoint nodes. Stacks sources checked at their labels: 0D6D (proof: (g∘f)^*K = f^*g^*K on flat-term K-flat K), 07A4, 0FPI, 0FPT, 0DV0 (the composite-counit equation); tags 03D7, 03D8, 03EL, 06YY, 07A2, 07A6, 09T5, 0D6E, 0FND, 0G7E all map to the labels named. Blueprint from.place matches the First/Second identity paragraphs of the main-20261015 proof of det-prop-p1-adjunction-rational-triangle. Coefficient category is ordinary D(Mod(A)) on small ringed sites throughout; nothing pro-étale is substituted, and this is not a target node. Recomputations: step 4 unit, t⊗(1⊗z) ↦ t·(gf)^♯(z); steps 8-10 transposes, using ε⁰_{g,J}g^*(g_*j) = jε⁰_{g,f_*I} and ι_J = β_{f,I}(Qj)^{-1}, with the full counit ε_{gf} = ε_f P_f(ε_g) c P_{gf}(κ) re-derived through naturality of c; step 12 balancing needs exactly h^♯ = k^♯∘θ_A. The κ normalization (g_*j is a quasi-isomorphism, f_*I not assumed K-injective) is stated in the cited node. Steps 2 and 5 identify t_h and the module Hom bijection with the pure-tensor constructions. The cited statements say only 'canonical', but the cited nodes' constructions give exactly these, and pure tensors determine the maps; I accept this and suggest recording the representative formula in lem-weil-pbc-ringed-topoi-derived-tensor-pullback. Small cases: Z→Z/2 on a one-object site (pullback preserves flat-term K-flat complexes but is not exact, so rejecting lem-sfb-derived-composition-adjunction-normalization is correct); odd-odd signs and characteristic 2; identities; zero complexes; θ = id. Duplicate search: the scheme, étale-D⁺ and pro-étale composition nodes and lem-sfb-ringed-comparison-tensor-adjunction are special cases or consumers, not duplicates or generalizations. I accept all 14 declared tool_uses as generic black-box tools; none replaces a step of the unit's route."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a17d7b714",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Read the item node, all 13 stmt deps, the report (Worker report and Second reading by Q46 present) and the whole module; checked the dependency declarations in the side clone (RingedTensorEdge, RingedToposMorphism, RingedDerivedTensorCoherence, mateFlat, derivedPullbackComplexComparison, pushforward-composition kappa). Every node clause is rendered: small ringed sites in universe u with independent w; the canonical signed symmetric monoidal D(A) from the recorded witnesses; Lift pins the scalar-extension pullback, left/right derived functors and the canonical derived adjunction through the step-6 representative Hom formula; CoreMonoidal with tensor_canonical, unit_canonical and symmetric; Composition with c pinned on K-flat representatives, kappa_model matching the recorded unique kappa, the tensor and unit equations in the node's order, homEquiv = Adjunction.comp and the full counit formula; Identity; TwoIso with exact ring compatibility and conjugate orientation. Nonempty System is the same pinned existential-witness style as the cited dependency theorems, not a bare Nonempty of an unconstrained isomorphism; no hollow definition, sorry only in the theorem proof, source and blueprint docstrings present. Statement text byte-identical to base; lean.statement verbatim; no flatness, boundedness or universe restriction; edge cases (empty site, zero ring, Z->Z/2, odd-odd sign, char 2, theta=id) admitted. nt_compile timed out twice at the 60 s wall limit under load 160/80 cores (about 27 s CPU each time); the same tool with only the per-file limit raised compiled clean in 91 s wall / 46 s CPU, no errors or warnings, consistent with the delivery's recorded 51.2 s. Minor only: the report wrongly calls the pushforward-composition import non-public."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.RingedDerivedMonoidalComparisons",
+  "declaration": "CategoryTheory.RingedDerivedComparisons.ringedDerivedMonoidalComparisons",
+  "declarations": [
+   "CategoryTheory.RingedDerivedComparisons.Site",
+   "CategoryTheory.RingedDerivedComparisons.Site.ring",
+   "CategoryTheory.RingedDerivedComparisons.Site.modules",
+   "CategoryTheory.RingedDerivedComparisons.Site.D",
+   "CategoryTheory.RingedDerivedComparisons.Site.sets",
+   "CategoryTheory.RingedDerivedComparisons.Site.corner",
+   "CategoryTheory.RingedDerivedComparisons.Morphism",
+   "CategoryTheory.RingedDerivedComparisons.Lift",
+   "CategoryTheory.RingedDerivedComparisons.Lift.insertion",
+   "CategoryTheory.RingedDerivedComparisons.Lift.alpha",
+   "CategoryTheory.RingedDerivedComparisons.Lift.tensor",
+   "CategoryTheory.RingedDerivedComparisons.Lift.unit",
+   "CategoryTheory.RingedDerivedComparisons.Composition",
+   "CategoryTheory.RingedDerivedComparisons.Identity",
+   "CategoryTheory.RingedDerivedComparisons.TwoIso",
+   "CategoryTheory.RingedDerivedComparisons.System",
+   "CategoryTheory.RingedDerivedComparisons.ringedDerivedMonoidalComparisons"
+  ],
+  "file": "lean/Sheaf/SixFunctors/RingedDerivedMonoidalComparisons.lean",
+  "statement": "theorem ringedDerivedMonoidalComparisons : Nonempty (System.{u, w})",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "All clauses are packaged in System. Site retains the existing normalized signed tensor structure, Lift retains ordinary scalar extension and canonical representative Hom maps, and Composition/Identity/TwoIso specify comparisons on representatives. Helpers package the simultaneous witnesses of this node only; no independent construction is chosen from a mere existence assertion."
  }
 }

@@ -221,5 +221,23 @@
   "group": "Q30",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-4670a6885 (reviewer sub-agent of L); spot-checked: Read in full: Stacks 057Q (flat.tex 445-491, tag lemma-sheaf-lives-on-subscheme), the item, and the statement of every cited node. There are no new nodes. The statement matches 057Q hypothesis by hypothesis and is not weakened; the m/n generator-index typo is correctly normalized. The proof is correct but left the affine dictionary uncited (error C1), and the lead's review wrongly calls these facts definitions. Fixed in fixes/dag/nodes/sec-trace-formula/lem-trf-finite-type-sheaf-fp-support.json: (1) Step 1: F = ~Gamma(X,F) now cites lem-weil-pbc-affine-tilde-gamma-adjunction. (2) Step 2: X_s = Spec(B tensor kappa(p)) and F_s = ~(M tensor kappa(p)) now cite lem-weil-pbc-fibre-product-affine-spectra, lem-weil-pbc-tilde-pullback-base-change and def-pc-module-pullback; the step g^{-1}V(I)=V(IR) is written out. (3) Step 4: j_*~N = ~N_B, used for the closed immersion and for j_*H = F, now cites lem-weil-pbc-pushforward-tilde-spec and lem-weil-pbc-spec-module-tilde-sections; finite presentation (n=0, qc/qs for affine schemes) is written out. Step 5 now cites the affine fibre-product formula and is marked non-elementary. (4) The statement's stalk now cites def-weil-pbc-module-stalk. proof_deps is the union of the uses; there is no cycle. Added lem-weil-pbc-tilde-pullback-base-change to split_report.tool_uses. I accept the declared tool uses (quasi-coherent-finite-type-affine, finite-type-module-support-closed, support-pullback-finite-type) as generic affine tools, since the unit sk-i-curve-zero supplies no affine algebra. Small cases checked: M=0, M=B, B=k[t,x] with M=B/(tx,x^2) at p=(t), and a non-Noetherian B with M=B/(y_i), where J=0 is not equal to I. No duplicate found (057Q appears only in this item and its parent); no SGA cited.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c380419bd",
+  "group": "NW",
+  "result": "pass",
+  "note": "Read node, Stacks 057Q (flat.tex 445-491), all 10 statement deps and their lean records (tensorPullback source, stalkObj carrier), module, docstrings, report. Clause-by-clause match: affine X,S; f finite type = LocallyOfFiniteType+QuasiCompact; F IsFiniteType+IsQuasicoherent; arbitrary x; exists Z, j closed immersion of finite presentation (LFP+QC+QS), H finite type quasi-coherent, Nonempty (pushforward j H ≅ F); range of canonical base change pullback.map (j≫f) ... equals {z | stalk of tensorPullback F at z nontrivial}. No stronger assumption, single universe u, nothing unbound. Edge cases (empty X, F=0, F=O_X, x outside support, non-Noetherian) fine. No new definitions or duplicates; docstrings carry source, blueprint and 5 proof steps; proof only sorry; lean.statement verbatim; node changed only in lean. Second reading is an openly declared author self-check (accepted under direct-delivery regime). nt_compile: rc 0, no errors or warnings; probe confirmed signature, stalk carrier rfl, axioms only sorryAx beyond standard ones."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypeSheafFinitePresentationSupport",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_finitePresentation_closedImmersion_fiber_support",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeSheafFinitePresentationSupport.lean",
+  "statement": "theorem exists_finitePresentation_closedImmersion_fiber_support {X S : Scheme.{u}} [IsAffine X] [IsAffine S] (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] (F : X.Modules) [F.IsFiniteType] [F.IsQuasicoherent] (x : X) : ∃ (Z : Scheme.{u}) (j : Z ⟶ X), IsClosedImmersion j ∧ LocallyOfFinitePresentation j ∧ QuasiCompact j ∧ QuasiSeparated j ∧ ∃ H : Z.Modules, H.IsFiniteType ∧ H.IsQuasicoherent ∧ Nonempty ((pushforward j).obj H ≅ F) ∧ Set.range (pullback.map (j ≫ f) (S.fromSpecResidueField (f x)) f (S.fromSpecResidueField (f x)) j (𝟙 (Spec (S.residueField (f x)))) (𝟙 S) (by simp) (by simp)).base = {z : Limits.pullback (C := Scheme.{u}) f (S.fromSpecResidueField (f x)) | ¬ Subsingleton (((tensorPullback (pullback.fst f (S.fromSpecResidueField (f x)))).obj F).presheaf.stalk z)}",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

@@ -124,42 +124,25 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-6b8c323dc (reviewer sub-agent of L); spot-checked: Read the full item, report, dependency statements and cited sources. The retained pair matches master blueprint order 1289; the revised dependencies cover finite left-module coefficients without imposing commutativity. Checked edge cases, duplicate candidates, dependency cycles and the unit route. No condensed/discrete comparison theorem is inferred. Full checks recorded in review.md; no fixes needed."
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-1f3350d30",
-  "group": "Q44",
+  "reviewer": "NT-stage2-cc-be6774e33",
+  "group": "Q15",
   "result": "fix",
-  "note": "Reviewed all twelve modules, immutable records, sources, hypotheses, coherence clauses, universes and edge cases. Fixed H3/H13: the witness interface wrongly required commutative rings; complete replacements are in fixes/. Original and fixed packets passed per-file server compilation through scompile.py. Full findings and evidence are in review.md."
+  "note": "H3: the delivery made the node's assertion 'both B0 and B are bounded below of etale origin' into two hypotheses. The node, its proof step 2 ('places') and the only citer lem-pur-gysin-structure (which supplies only B0 in D^b_c and K in D+) make it a conclusion. The B0 in D^b_c hypothesis exists to give it; it holds by lem-weil-pbc-finite-ring-constructible-derived-origin for B0 and by left t-exactness of the right adjoint of exact i_* for B. fixes/ClosedSupportExceptionalComparison.lean concludes plusEtaleOrigin B0 ∧ ∃ hB, ∃ φ, ...; the docstrings record that node proof steps 2-3 leave these facts underived. Theorem signature and lean record unchanged; fixes/<item>.report.md adds a maintainer-fix section. All other clauses check out (support and relative Hom maps, direction of the canonical comparison q, uniqueness, counit equation, canonical constructibility realization, quantified adjunction data). The FixedEtaleOriginWitness §1(B) repair is valid (remark: its record drops the 17 old declarations, still reexported). No hollow definitions, only sorry proofs, docstrings ok, lines ≤100. nt_compile clean for the delivered files and the fixed file, and a #print check confirms the fixed statement's shape."
  },
  "lean": {
-  "module": "Sheaf.Paper.RingedEtaleOriginWitness",
-  "declaration": "AlgebraicGeometry.Scheme.EtaleOriginWitness",
+  "module": "Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness",
+  "declaration": "AlgebraicGeometry.Scheme.FixedEtaleOriginWitness",
   "declarations": [
-   "AlgebraicGeometry.Scheme.etaleOriginRing",
-   "AlgebraicGeometry.Scheme.etaleOriginScalars",
-   "AlgebraicGeometry.Scheme.etaleOriginScalars_locallyBijective",
-   "AlgebraicGeometry.Scheme.etaleOriginScalars_isLocallyInjective",
-   "AlgebraicGeometry.Scheme.etaleOriginScalars_isLocallySurjective",
-   "AlgebraicGeometry.Scheme.etaleOriginRealization",
-   "AlgebraicGeometry.Scheme.etaleOriginRealization_properties",
-   "AlgebraicGeometry.Scheme.etaleOriginRealization_additive",
-   "AlgebraicGeometry.Scheme.etaleOriginRealization_preservesFiniteLimits",
-   "AlgebraicGeometry.Scheme.etaleOriginRealization_preservesFiniteColimits",
-   "AlgebraicGeometry.Scheme.etaleOriginComparison",
-   "AlgebraicGeometry.Scheme.EtaleOriginWitness",
-   "AlgebraicGeometry.Scheme.finiteOriginFunctionRing",
-   "AlgebraicGeometry.Scheme.finiteOriginConstantComparison_isIso",
-   "AlgebraicGeometry.Scheme.finiteOriginConstantIso",
-   "AlgebraicGeometry.Scheme.finiteOriginToConstant",
-   "AlgebraicGeometry.Scheme.FiniteEtaleOriginWitness"
+   "AlgebraicGeometry.Scheme.FixedEtaleOriginWitness"
   ],
-  "file": "lean/Sheaf/Paper/RingedEtaleOriginWitness.lean",
-  "statement": "abbrev EtaleOriginWitness (T : Scheme.{u}) (Λ : Type (u + 1)) [Ring Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (K : ProEtale.FiniteCoefficientDerivedCategoryPlus T Λ)",
+  "file": "lean/Sheaf/AlgebraicGeometry/FixedEtaleOriginWitness.lean",
+  "statement": "structure FixedEtaleOriginWitness (T : Scheme.{u}) (A : Type (u + 1)) [Ring A] (K : DerivedCategory.Plus (Sheaf (ProEt.topology T) (ModuleCat.{u + 1} A)))",
   "branch": "newtargets-dag",
-  "by": "Q44",
-  "date": "2026-10-16",
+  "by": "Q15",
+  "date": "2026-10-17",
   "existing": false,
-  "note": "Section 1(B): retain the general-ring witness module by import and expose its constant-ring-sheaf realization with a specified bounded-below object and isomorphism. FiniteEtaleOriginWitness is the same general witness after exact scalar restriction along the canonical constants-to-functions isomorphism to the current reduction coefficients. The general witness imposes no finiteness condition.",
-  "fixed_by": "NT-stage2-Codex-1f3350d30"
+  "note": "Section 1(B): the recorded EtaleOriginWitness has a continuous-function ringed-module target, and FiniteEtaleOriginWitness also has ringed-module endpoints after scalar restriction. Neither accepts the ordinary fixed-scalar D+ objects used by supportClosedDerivedPlus and FixedComparisonClassAdjunction. This module reexports that full interface unchanged and states the same retained pair (a bounded-below etale object and its specified comparison isomorphism) directly in fixed-scalar module coordinates. It permits arbitrary rings, with no added constructibility, commutativity, topology, or finiteness hypothesis. It neither chooses an antecedent from Nonempty nor replaces the pair by a property."
  }
 }

@@ -367,10 +367,10 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-e0dd71a2a",
-  "group": "Q124",
-  "result": "fix",
-  "note": "Read the item, all 12 stmt_deps incl. 3 new def nodes and the def-pc-flat-sheaf-modules (B) record, the 5 modules, the upstream RingedToposMorphism/AlgebraicInverseImage/IsFlatOnSite/restrictScalars declarations and Stacks 0FND/0DVC/03D3/03ER. Every clause matches: coherent square orientation, flatness at both sites, one shared geometric morphism, transpose-pinned module adjunctions, IsRightDerivedFunctor+computes+0FND transpose normalization, exactness and K-injective preservation for r_U,r_V, b/d directions, ordinary/inverse/direct normalizations pinning b,d, and the adjunct identity with b.inv. HEq fields compare rfl-equal types (scratch check), so they are not vacuous. No extra hypotheses, universes bound, no hollow defs, only sorry is the theorem. nt_compile on all 5 files is clean (Defs/Adjuncts take 42-50 s under load, near the 60 s limit). Fixes: (1) item module adds missing proof-dep imports EssentiallyConstantInd/Pro, Mathlib.RingTheory.TensorProduct.Basic, Mathlib.Algebra.Homology.DerivedCategory.KInjective (H9); (2) FlatOnSite.lean drops a delivery-specific docstring sentence. Both are recompiled clean."
+  "reviewer": "NT-stage2-cc-25ea53013",
+  "group": "NA",
+  "result": "pass",
+  "note": "Re-delivery of the already-landed CategoryTheory.FlatRingedDiagramInput.flatRingedDiagramRestriction: module identical to base except the Authors comment line; node differs only in lean.by/date (Q124->NA); lean.statement equals the file signature. Read independently against the node: shared geometric morphism, flatness at both sites via IsFlatOnSite (tensor exact, 03ER(3)), coefficient square a_U c_R = c_S u^-1 a_V correctly oriented, module adjunctions tied to the sheaf adjunction; derived functors given by IsRightDerivedFunctor, invertibility on K-injectives and the 0FND transpose formula (satisfiable). Conclusions: r_U/r_V preserve finite limits and colimits and K-injectives; b: LS⋙rU≅rV⋙LR and d: FS⋙rV≅rU⋙FR, determined by the ordinary/inverse/direct normalizations; adjunct equation order checked. Universes u,w bound; edge cases fine. No hollow definitions, only sorry, docstrings carry source and blueprint tag, no duplicate. Compile of the identical landed file through nt_compile is clean on the third try (Defs 55.2s, Comparisons 13.7s, Adjuncts 35.1s, item 27.1s); two earlier tries hit the 60s limit on Defs at load ~157. Second-reading section is the standard post-2026-10-17 placeholder, accepted. No faults; landing is a no-op apart from attribution."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.FlatRingedDiagramRestriction",
@@ -381,8 +381,8 @@
   "file": "lean/Sheaf/CategoryTheory/FlatRingedDiagramRestriction.lean",
   "statement": "theorem flatRingedDiagramRestriction (LR : derivedRV x J ⥤ derivedRU x J) (FR : derivedRU x J ⥤ derivedRV x J) (qLR : DerivedCategory.Q ⋙ LR ≅ inverseRComplex x J ⋙ DerivedCategory.Q) (ηR : directRComplex x J ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ FR) (aR : LR ⊣ FR) (derivedR : FR.IsRightDerivedFunctor ηR (HomologicalComplex.quasiIso (x.diagramsRU J) (.up ℤ))) (computesR : ∀ I : cochainRU x J, I.IsKInjective → IsIso (ηR.app I)) (transposeR : ∀ (P : cochainRV x J) (I : cochainRU x J) (f : (inverseRComplex x J).obj P ⟶ I), aR.homEquiv (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj I) (qLR.hom.app P ≫ DerivedCategory.Q.map f) = DerivedCategory.Q.map (((Adjunction.whiskerRight J x.R.adjunction).mapHomologicalComplex (.up ℤ)).homEquiv P I f) ≫ ηR.app I) (LS : derivedSV x J ⥤ derivedSU x J) (FS : derivedSU x J ⥤ derivedSV x J) (qLS : DerivedCategory.Q ⋙ LS ≅ inverseSComplex x J ⋙ DerivedCategory.Q) (ηS : directSComplex x J ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ FS) (aS : LS ⊣ FS) (derivedS : FS.IsRightDerivedFunctor ηS (HomologicalComplex.quasiIso (x.diagramsSU J) (.up ℤ))) (computesS : ∀ I : cochainSU x J, I.IsKInjective → IsIso (ηS.app I)) (transposeS : ∀ (P : cochainSV x J) (I : cochainSU x J) (f : (inverseSComplex x J).obj P ⟶ I), aS.homEquiv (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj I) (qLS.hom.app P ≫ DerivedCategory.Q.map f) = DerivedCategory.Q.map (((Adjunction.whiskerRight J x.S.adjunction).mapHomologicalComplex (.up ℤ)).homEquiv P I f) ≫ ηS.app I) : PreservesFiniteLimits (x.restrictU J) ∧ PreservesFiniteColimits (x.restrictU J) ∧ PreservesFiniteLimits (x.restrictV J) ∧ PreservesFiniteColimits (x.restrictV J) ∧ (∀ I : cochainSU x J, I.IsKInjective → CochainComplex.IsKInjective ((restrictUComplex x J).obj I)) ∧ (∀ I : cochainSV x J, I.IsKInjective → CochainComplex.IsKInjective ((restrictVComplex x J).obj I)) ∧ Nonempty (DerivedRestrictionComparison (x := x) (J := J) LR FR qLR ηR aR LS FS qLS ηS aS)",
   "branch": "newtargets-dag",
-  "by": "Q124",
-  "date": "2026-10-17",
+  "by": "NA",
+  "date": "2026-10-18",
   "existing": false,
   "fixed_by": "NT-stage2-cc-e0dd71a2a"
  }

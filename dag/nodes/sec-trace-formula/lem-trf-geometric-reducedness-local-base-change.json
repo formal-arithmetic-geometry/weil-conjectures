@@ -268,5 +268,23 @@
   "group": "Q66",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-1c723be06 (reviewer sub-agent of L); spot-checked: Read the whole delivery: the item, the new 030V node, every cited statement and the parent's step that applies the item. Checked against the sources: varieties.tex 035W (l.354) and 0384 (l.491) plus the char-p check-only-finite-inseparable lemma; algebra.tex 030V (l.10425), 0BRA (l.10868) and the geometrically-reduced definition (l.10046). The item statement is exactly 0384, read through 035W, for X=Spec R, with no hypothesis added. Step checks: 1. The localization argument is correct. 2. The 0BRA node's hypotheses (kernel 0, generators 1⊗e, n>0, p^n(1⊗e)=0) are verified, so C is local; the Noetherian helper is correctly avoided. 3. Common extension (0H7K) and a prime Q over q via faithful flatness; Q contracts to p. 4. D=T_Q is a further localization of B⊗_L F, so it is reduced. 5. (R_E)_P≅C via P_C=n. 6. 00HT first clause, then 00HR. 7. Injective map into a reduced ring (05CK/033F); marked elementary, which is justified. 8. The 030V test. The new node matches 030V (1)⇔(5) in all characteristics and for arbitrary algebras. Tested on C=0, C=k[u]/(u^p−t) over F_p(t), and characteristic 0. Its form (B1–B7) is fine and it is not a restatement of the item. DAG and blueprint searches (04KT, 04KS, 034N, the pc finite-field-extension nodes, 07QH) turned up no duplicate. Mathlib has no leaf: GeometricallyReduced.lean uses the algebraic-closure definition and leaves the comparison as a TODO. I accept the two declared tool uses (lem-weil-common-extension-fields, lem-pur-power-generated-spectrum-homeomorphism) as generic tools cited by 0384/035W themselves. No SGA, no cycle. Fix (C1): steps 4 and 5 used the identifications B⊗_LF≅B⊗_S(S⊗_LF) and A⊗_kE≅A⊗_R(R⊗_kE) without citing lem-weil-pbc-tensor-cancel-base-change. I added the citation to the text and to uses in fixes/dag/nodes/sec-trace-formula/lem-trf-geometric-reducedness-local-base-change.json; proof_deps already contained the node and is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3d613cc06",
+  "group": "NB",
+  "result": "fix",
+  "note": "Lean statement correct against node and Stacks 0384/035W: all objects and hypotheses match (p = comap includeLeft, Iff.rfl probe), no extra hypotheses. The @_root_.id rightAlgebra form is rfl-equal to the letI form and gives the canonical L-action 1⊗l (rfl probe). Universes all bound; test fields in max u v w t with t free, iff holds for each t, neither side vacuous. Edge cases (L=k, non-maximal q, R=0, char 0/p, nonalgebraic extensions) covered. Docstrings carry source, blueprint and 8 proof steps; sorry only; lean.statement verbatim; only the node's lean field changed. nt_compile clean (3.0 s, rc 0). Only finding H1/H11: '## Second reading by NB' was a placeholder; fixes/lem-trf-geometric-reducedness-local-base-change.report.md replaces the report, Worker report unchanged, with a real clause-by-clause second reading."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GeometricReducednessLocalBaseChange",
+  "declaration": "Algebra.isReduced_localization_tensorProduct_iff",
+  "file": "lean/Sheaf/RingTheory/GeometricReducednessLocalBaseChange.lean",
+  "statement": "theorem isReduced_localization_tensorProduct_iff (k : Type u) (L : Type v) (R : Type w) [Field k] [Field L] [CommRing R] [Algebra k L] [Algebra k R] (q : Ideal (R ⊗[k] L)) [q.IsPrime] : (∀ (E : Type (max u v w t)) [Field E] [Algebra k E], IsReduced (Localization.AtPrime (q.comap (Algebra.TensorProduct.includeLeft : R →ₐ[k] R ⊗[k] L).toRingHom) ⊗[k] E)) ↔ @_root_.id (∀ [Algebra L (R ⊗[k] L)], Prop) (fun [Algebra L (R ⊗[k] L)] ↦ ∀ (H : Type (max u v w t)) [Field H] [Algebra L H], IsReduced (Localization.AtPrime q ⊗[L] H)) (Algebra.TensorProduct.rightAlgebra (R := k) (A := R) (B := L))",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

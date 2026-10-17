@@ -183,5 +183,23 @@
   "group": "Q04",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-89703ff15 (reviewer sub-agent of L); spot-checked: Read the item and all four steps in full against Stacks divisors.tex Tag 080H (label lemma-strict-transform-different-centers, proof of (2), 'following algebra problem' paragraph; tag-to-label mapping confirmed at tags line 10182). The statement matches the source hypothesis by hypothesis: commutative A, ideal I, a in I, x a nonzerodivisor, Gamma_(x)(M)=0 (equivalent to Stacks' 'x-torsion zero'), and B=A[I/a] as the subalgebra of A_a, as in def-nagata-blowup-chart-ring. The positive-exponent convention agrees with def-nagata-power-torsion (n>=0) because a^0 m=0 forces m=0. Nothing was weakened or added. Step 1 checks conditions (a)-(c) of lem-weil-pbc-localization-tensor-product for the inclusion i:B->A_a: a is a unit, every element is a^-r i(c), and i is injective so s=1 works. Step 2 applies that Mathlib leaf (IsLocalizedModule tensor instance plus moduleTensorEquiv) to (lambda,i), then composes with M_a tensor_L L = M_a, giving j with ju=lambda. It uses the lemma's statement, not its proof. Step 3 derives the kernel and cokernel bounds from the fraction criterion of def-weil-pbc-module-localization-away and from condition (c). Step 4 is the exponent chase: u(x^n a^n m)=a^r (xa)^n z=0, so x^n a^(s+n) m=0, so a^(s+n) m=0, so a^(s+n+r) z=0, plus the trivial converse. I checked every exponent. Small cases: a nilpotent gives zero rings. Z with a=2, x=3: M=Z/2 holds; M=Z/3 violates the hypothesis and the equality fails. The non-flat case k[s,t]/(t-s) works, with v-1 in both torsion submodules and x not injective on N, which the proof never assumes. The parent lem-trf-strict-transform-different-centers step 3 uses the item exactly as stated. No new nodes. Duplicate search (rg for 080H and 'power torsion' over dag/nodes) finds nothing that states this comparison; the two nagata localization lemmas state only the kernel and the localization of torsion. All step uses are definitions or Mathlib leaves, so there is no route issue and no tool_uses. No SGA source. Not a target node, so the base-change and coefficient checks don't apply. No fixes written; review.md written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-315fb6d05",
+  "group": "NG",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 080H proof(2) clause by clause: CommRing A, Ideal I, a∈I, x∈nonZeroDivisors, M Type v A-module, powTorsion A M x = ⊥ (= x-torsion zero), B = AffineBlowup.chartRing I a (ChartAlgebra.lean:52), conclusion powTorsion A (M⊗_A B) a = powTorsion A (M⊗_A B) (x*a); A-action equals action through A→B so carriers agree with node's Γ over B; n≥0 convention harmless. lean.statement verbatim, stmt_deps correct, universes bound, no new defs, sorry only, source/blueprint docstrings present, report has Worker report and Second reading by NG. Edge cases a=0/I=⊥, a nilpotent, a or x unit, M=0, non-flat B covered. No duplicate theorem found. nt_compile.py: exit 0, 2.7 s, no errors; probe #print axioms = propext, sorryAx, Classical.choice, Quot.sound. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.StrictTransformAffineTorsionComparison",
+  "declaration": "AlgebraicGeometry.strictTransform_affine_torsion_comparison",
+  "file": "lean/Sheaf/TraceFormula/StrictTransformAffineTorsionComparison.lean",
+  "statement": "theorem strictTransform_affine_torsion_comparison {A : Type u} [CommRing A] (I : Ideal A) (a x : A) (ha : a ∈ I) (hx : x ∈ nonZeroDivisors A) (M : Type v) [AddCommGroup M] [Module A M] (hM : Submodule.powTorsion A M x = ⊥) : Submodule.powTorsion A (TensorProduct A M (AffineBlowup.chartRing I a)) a = Submodule.powTorsion A (TensorProduct A M (AffineBlowup.chartRing I a)) (x * a)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

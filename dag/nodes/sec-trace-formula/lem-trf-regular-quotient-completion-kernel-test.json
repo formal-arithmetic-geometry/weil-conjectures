@@ -149,5 +149,26 @@
   "group": "Q87",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-566dd406d (reviewer sub-agent of L); spot-checked: I read all of the mathematics: the item, both new nodes, the parent and every cited node statement, plus Stacks dpa.tex 09PZ and 09Q1 with their proofs and algebra.tex 00MA and 00LN/00MB (tags confirmed in tags/tags). The item is unchanged from the base and true: it is 09Q1 (1)<=>(2) combined with 09PZ. I tested it on I=0, (x^2) in k[x]_(x) against Q=k[[t]] and k[[s,t]], (x^2,xy) in k[x,y]_(x,y) (both sides fail), Z_(p) with I=(p) against Q=F_p and Z_p[[x]], and I=m_R. New node completion-regular-kernel-preservation is true by 00MA (kernel = IR^), faithful flatness and the minimal-generators argument of the 09Q1 proof. New node complete-local-ci-presentation-independence is exactly 09PZ for two surjections; Stacks does not require the source ring to be complete. Both new nodes are strictly smaller than the item and are not restated clauses; each records four searches. I found no duplicates (rg for 09PZ/09Q0/09Q1/ci-well-defined over dag/nodes and checks of the nearby lem-weil-pbc and lem-pur nodes), and no blueprint node states either fact, so same_as is right. Every hypothesis holds where it is used: steps 2 and 3 use only the forward direction of 07NY to make R^ regular local, and pi and q_0 are local because they are surjective. The route is fine: sk-thm-p1 is in the closure of sk-i-curve-zero's uses, and no tool_uses are needed. No SGA source is used. One C4 fault, repaired: step 1 credited adic-completion-mod-ideal with 'R^->B^ is the quotient completion map', which that node does not state. I reworded the step so that each cited node supports exactly its clause and left the canonical surjection to step 2; the uses are unchanged. Whole corrected file: fixes/dag/nodes/sec-trace-formula/lem-trf-regular-quotient-completion-kernel-test.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2ac4b8429",
+  "group": "Q31",
+  "result": "pass",
+  "note": "The delivery adds the lean field, the module and the report; lean.statement appears verbatim in the file. Clauses checked against the node and Stacks dpa.tex 09Q1 (1)<=>(2) plus 09PZ: IsRegularLocalRing for R and Q in independent universes u and v; hI : I ≤ m_R; AdicCompletion (map mk I m_R) (R⧸I) is lim B/(m_R B)^n (Mathlib Basic.lean:171); pi is only surjective, which makes it local, as Stacks needs; both sides are ∃ List, IsRegular, Ideal.ofList = I or ker pi, elements in the maximal ideal, joined by ↔. Edge cases I=0, I=m_R, empty lists and unit-ideal exclusion are fine. No definitions, proof only sorry (axioms: standard plus sorryAx), source and blueprint docstrings present, only the Mathlib leaves of the three stmt_deps used, no duplicate found. Report has a Worker report and a Second reading by Q31 section. nt_compile per-file run clean (2.8 s, no errors or warnings). No findings."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularQuotientCompletionKernelTest",
+  "declaration": "regularQuotientCompletionKernelTest",
+  "file": "lean/Sheaf/RingTheory/RegularQuotientCompletionKernelTest.lean",
+  "statement": "theorem regularQuotientCompletionKernelTest {R : Type u} {Q : Type v} [CommRing R] [CommRing Q] [IsRegularLocalRing R] [IsRegularLocalRing Q] (I : Ideal R) (hI : I ≤ IsLocalRing.maximalIdeal R) (π : Q →+* AdicCompletion (Ideal.map (Ideal.Quotient.mk I) (IsLocalRing.maximalIdeal R)) (R ⧸ I)) (hπ : Function.Surjective π) : (∃ xs : List R, RingTheory.Sequence.IsRegular R xs ∧ Ideal.ofList xs = I ∧ ∀ x ∈ xs, x ∈ IsLocalRing.maximalIdeal R) ↔ (∃ ys : List Q, RingTheory.Sequence.IsRegular Q ys ∧ Ideal.ofList ys = RingHom.ker π ∧ ∀ y ∈ ys, y ∈ IsLocalRing.maximalIdeal Q)",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "regularQuotientCompletionKernelTest"
+  ]
  }
 }

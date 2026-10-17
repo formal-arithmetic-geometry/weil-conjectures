@@ -205,5 +205,33 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-fbca1ea0b (reviewer sub-agent of L); spot-checked: Read in full: the item; the unit sk-i-curve-zero; the parent lem-trf-nearby-spread-out at the step that uses it (P=M_q[-q], Q=L_{q-1}, n=1); and every cited statement. Stacks sources checked: 09YU at etale-cohomology line 12552 (qcqs, affine transitions, Noetherian Λ), 0149, 00DB, 05QB, 0D6D, 015F, 06XS (derived line 8713) and 08J5. The statement is true and not weakened. Same coefficient category D(Mod(-,A)) as the sheaf Ext node; no invertibility of |A| needed. Small cases tested: singleton I; the finite-field tower F_{p^{k!}} with Z/ℓ and n=1, where the colimit and H^1 of the algebraic closure are both 0; negative n; zero objects; one-term shifts. The Postnikov source and target inductions, the five-term Hom ladders (0149 plus the rotated triangle), filtered-colimit exactness (00DB) and the five lemma (05QB) are correct. Two repairable citation faults (C1/C4/E5), fixed in fixes/dag/nodes/sec-trace-formula/lem-trf-bounded-constructible-derived-hom-continuity.json: (1) step 1 cited only the abstract def-weil-t-structure and Tag 0145, which is the triangulated-category definition, for negative-Ext vanishing. Added def-sbc-standard-tstructure-derived-category, wrote out D^{≥-n}⊆D^{≥1}, and set the source to 06XS. (2) Steps 2-3 used pulled-back triangles and Postnikov towers without citing that exact pullback is triangulated and commutes with truncations. Added lem-sf-exact-functor-derived-triangulated, prop-weil-pbc-inverse-image-modules-exact and lem-weil-pbc-truncation-triangle, made the stage-i triangles and the q=a..b induction explicit, and updated proof_deps. Accepted tool uses, declared in split_report.tool_uses: lem-weil-pbc-derived-inverse-image-composition (generic inverse-image coherence), plus the Lean-closed prop-weil-pbc-inverse-image-modules-exact, lem-weil-pbc-ext-exact-functor-composition-comparison and lem-weil-pbc-truncation-triangle. No new nodes. Not duplicates: sk-lem-constructible-ext-continuity, det-lem-constructible-ext-continuity-devissage and det-lem-int-ext-continuity are about filtered colimits on a fixed X. No cycle; no SGA citations.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-199d4a17e",
+  "group": "Q20",
+  "result": "pass",
+  "note": "All of the earlier RETURN's F1-F4 are fixed. Shift clause: a real canonical shift transport (commShiftIso m, a⟦m⟧', shiftFunctorComm) with a commuting square between stage and limit; a /tmp probe shows rfl fails, so it is a genuine equation. Composition clause: Leg(ShiftedHom.comp a b h) = comp(Leg a)(Leg b) h at stage j for arbitrary degrees; also not rfl. Hypotheses: t.bounded (= DerivedCategory.Bounded) plus ∀q IsConstructibleEtaleModuleSheaf(H^q), the recorded declarations of the stmt_deps; unused LimitAffineTransition import removed. Both report sections are real. Checked every clause: directed nonempty I : Type u, IsNoetherian (qcqs), IsAffineHom, any limit cone, finite A : Type (u+1) (recorded encoding), upperStar.mapDerivedCategory inverse images, ∀n, descends plus eventually_equal (bijectivity of the colimit map), later. Helper isos are canonical liftNatIso; nothing hollow; the sole sorry is the theorem proof; docstrings have source and blueprint and all 4 proof steps; lean.statement verbatim; node diff is only lean; universes clean. nt_compile --json: rc 0, no diagnostics, module 5.1 s."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.BoundedConstructibleDerivedHomContinuity",
+  "declaration": "AlgebraicGeometry.Etale.bounded_constructible_derived_hom_continuity",
+  "file": "lean/Sheaf/TraceFormula/BoundedConstructibleDerivedHomContinuity.lean",
+  "statement": "theorem bounded_constructible_derived_hom_continuity {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ i : Iᵒᵖ, IsNoetherian (D.obj i)] [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)] (c : Cone D) (_hc : IsLimit c) (i : I) {A : Type (u + 1)} [CommRing A] [Finite A] (P Q : DerivedCategory (Sheaf (D.obj (op i)).smallEtaleTopology (ModuleCat.{u + 1} A))) (hP : DerivedCategory.TStructure.t.bounded P ∧ ∀ q : ℤ, Scheme.IsConstructibleEtaleModuleSheaf ((DerivedCategory.homologyFunctor (Sheaf (D.obj (op i)).smallEtaleTopology (ModuleCat.{u + 1} A)) q).obj P)) (hQ : DerivedCategory.TStructure.t.bounded Q ∧ ∀ q : ℤ, Scheme.IsConstructibleEtaleModuleSheaf ((DerivedCategory.homologyFunctor (Sheaf (D.obj (op i)).smallEtaleTopology (ModuleCat.{u + 1} A)) q).obj Q)) : ∀ n : ℤ, BoundedConstructibleDerivedHomContinuityData D c P Q n",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Etale.boundedConstructibleDerivedHom",
+   "AlgebraicGeometry.Etale.boundedConstructibleDerivedHomCompIso",
+   "AlgebraicGeometry.Etale.boundedConstructibleDerivedHomPullback",
+   "AlgebraicGeometry.Etale.boundedConstructibleDerivedHomShiftTransport",
+   "AlgebraicGeometry.Etale.boundedConstructibleDerivedHomLeg",
+   "AlgebraicGeometry.Etale.boundedConstructibleDerivedHomTransition",
+   "AlgebraicGeometry.Etale.BoundedConstructibleDerivedHomContinuityData",
+   "AlgebraicGeometry.Etale.bounded_constructible_derived_hom_continuity"
+  ]
  }
 }
