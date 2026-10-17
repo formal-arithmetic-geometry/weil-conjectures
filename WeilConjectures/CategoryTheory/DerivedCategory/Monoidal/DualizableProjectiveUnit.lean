@@ -63,11 +63,12 @@ def UnitFactorsThroughFiniteCoproducts : Prop :=
   ∀ ⦃J : Type⦄ (X : J → C) [HasCoproduct X] (x : 𝟙_ C ⟶ ∐ X),
     ∃ (S : Finset J) (y : ∀ j, 𝟙_ C ⟶ X j), x = ∑ j ∈ S, y j ≫ Sigma.ι X j
 
-/-- Morphisms from the unit to a tensor product `F ⊗ G` are finite sums of tensor products of
-morphisms `𝟙 ⟶ F` and `𝟙 ⟶ G`. -/
+/-- Morphisms from the unit to a tensor product `F ⊗ G` are finite sums of composites
+`𝟙 ⟶ 𝟙 ⊗ 𝟙 ⟶ F ⊗ G` of a morphism `uᵢ : 𝟙 ⟶ 𝟙 ⊗ 𝟙` with a tensor product of morphisms
+`sᵢ : 𝟙 ⟶ F` and `tᵢ : 𝟙 ⟶ G`. -/
 def UnitTensorFinite : Prop :=
-  ∀ (F G : C) (x : 𝟙_ C ⟶ F ⊗ G), ∃ (n : ℕ) (s : Fin n → (𝟙_ C ⟶ F)) (t : Fin n → (𝟙_ C ⟶ G)),
-    x = ∑ i, (λ_ (𝟙_ C)).inv ≫ (s i ⊗ₘ t i)
+  ∀ (F G : C) (x : 𝟙_ C ⟶ F ⊗ G), ∃ (n : ℕ) (u : Fin n → (𝟙_ C ⟶ 𝟙_ C ⊗ 𝟙_ C))
+    (s : Fin n → (𝟙_ C ⟶ F)) (t : Fin n → (𝟙_ C ⟶ G)), x = ∑ i, u i ≫ (s i ⊗ₘ t i)
 
 /-- **An elementwise five lemma.** In a preadditive category, consider a commutative ladder
 `A₁ ⟶ A₂ ⟶ A₃ ⟶ A₄ ⟶ A₅` over `B₁ ⟶ B₂ ⟶ B₃ ⟶ B₄ ⟶ B₅` whose rows are exact at the
@@ -146,13 +147,14 @@ tensor products `sᵢ ⊗ tᵢ` of morphisms to terms `M^{pᵢ}` and `F^{qᵢ}`,
 lemma exists_eq_sum_ιTensorObj (hC : UnitFactorsThroughFiniteCoproducts C)
     (hT : UnitTensorFinite C) (M F : CochainComplex C ℤ) (x : 𝟙_ C ⟶ (M ⊗ F).X 0) :
     ∃ (ι : Type) (_ : Fintype ι) (p q : ι → ℤ) (h : ∀ i, p i + q i = 0)
+      (u : ι → (𝟙_ C ⟶ 𝟙_ C ⊗ 𝟙_ C))
       (s : ∀ i, 𝟙_ C ⟶ M.X (p i)) (t : ∀ i, 𝟙_ C ⟶ F.X (q i)),
-      x = ∑ i, (λ_ (𝟙_ C)).inv ≫ (s i ⊗ₘ t i) ≫
+      x = ∑ i, u i ≫ (s i ⊗ₘ t i) ≫
         HomologicalComplex.ιTensorObj M F (p i) (q i) 0 (h i) := by
   obtain ⟨S, y, hy⟩ := hC _ (show 𝟙_ C ⟶ ∐ _ from x)
-  choose n s t hst using fun j ↦ hT _ _ (y j)
+  choose n u s t hst using fun j ↦ hT _ _ (y j)
   refine ⟨Σ j : S, Fin (n j), inferInstance, fun j ↦ j.1.1.1.1, fun j ↦ j.1.1.1.2,
-    fun j ↦ j.1.1.2, fun j ↦ s j.1 j.2, fun j ↦ t j.1 j.2, ?_⟩
+    fun j ↦ j.1.1.2, fun j ↦ u j.1 j.2, fun j ↦ s j.1 j.2, fun j ↦ t j.1 j.2, ?_⟩
   refine hy.trans ?_
   rw [Fintype.sum_sigma, ← Finset.sum_coe_sort S]
   refine Finset.sum_congr rfl fun j _ ↦ ?_
@@ -228,7 +230,7 @@ theorem exists_retract_of_exactPairing_of_projective_unit [Projective (𝟙_ C)]
     (eU.inv ≫ η_ K N ≫ e.hom ▷ N ≫ (T M).hom)
   let x : 𝟙_ C ⟶ (M ⊗ F).X 0 :=
     (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (𝟙_ C)).inv ≫ φ.f 0
-  obtain ⟨ι, _, p, q, hpq, s, t, hx⟩ := exists_eq_sum_ιTensorObj hC hT M F x
+  obtain ⟨ι, _, p, q, hpq, u, s, t, hx⟩ := exists_eq_sum_ιTensorObj hC hT M F x
   have hp (i : ι) : (ComplexShape.up ℤ).Rel (p i) (p i + 1) := rfl
   have hp' (i : ι) : p i ≠ p i + 1 := by omega
   let D (i : ι) : CochainComplex C ℤ := HomologicalComplex.double (𝟙 (𝟙_ C)) (hp i)
@@ -244,7 +246,7 @@ theorem exists_retract_of_exactPairing_of_projective_unit [Projective (𝟙_ C)]
       simp [j, g]
     simp only [s', Category.assoc, ← HomologicalComplex.comp_f, this, dm,
       HomologicalComplex.mkHomFromDouble_f₀, Iso.inv_hom_id_assoc]
-  let x' : 𝟙_ C ⟶ (L ⊗ F).X 0 := ∑ i, (λ_ (𝟙_ C)).inv ≫ (s' i ⊗ₘ t i) ≫
+  let x' : 𝟙_ C ⟶ (L ⊗ F).X 0 := ∑ i, u i ≫ (s' i ⊗ₘ t i) ≫
     HomologicalComplex.ιTensorObj L F (p i) (q i) 0 (hpq i)
   have hx' : x' ≫ (j ▷ F).f 0 = x := by
     rw [hx, Preadditive.sum_comp]
