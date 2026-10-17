@@ -24,7 +24,10 @@
  },
  "stmt_deps": [
   "def-coef-complete-algebroid",
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-presentable-infinity-category",
+  "def-coef-coherent-adjunction-data",
+  "lem-coef-infinity-reflection-assembly"
  ],
  "proof": [
   {
@@ -274,5 +277,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6469e9728",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Statement, dependencies, docstrings, edge cases, and exact Lean signature audited; per-file scompile passed with no errors or warnings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PresentableInfinityAdjoints",
+  "declaration": "SSet.Presentability.presentable_infinity_adjoint_localization",
+  "file": "lean/Sheaf/CategoryTheory/PresentableInfinityAdjoints.lean",
+  "statement": "theorem presentable_infinity_adjoint_localization (C D : SSet.{max (u + 1) v}) [SSet.Quasicategory C] [SSet.Quasicategory D] (hC : IsPresentable.{u, v} C) (hD : IsPresentable.{u, v} D) (F : C ⟶ D) : (∀ (I : SSet.{max (u + 1) v}), IsSmall.{u, max (u + 1) v} I → ∀ (G : I ⟶ C), ∃ t : (SSet.Enhanced.coneCategory G) _⦋0⦌, SSet.Enhanced.IsLimiting G t) ∧ (∀ (I : SSet.{max (u + 1) v}), IsSmall.{u, max (u + 1) v} I → ∀ (G : I ⟶ D), ∃ t : (SSet.Enhanced.coneCategory G) _⦋0⦌, SSet.Enhanced.IsLimiting G t) ∧ ((∃ R : D ⟶ C, Nonempty (HomotopicalAlgebra.ModelInfinity.CoherentAdjunction F R)) ↔ PreservesColimitsIn F (fun I _ _ ↦ IsSmall.{u, max (u + 1) v} I)) ∧ ∀ (S : Set (C _⦋1⦌)), Small.{u} S → ∃ (P : C _⦋0⦌ → Prop) (hP : SSet.Quasicategory (SSet.Enhanced.fullSubcomplex C P).toSSet), (∀ Z : C _⦋0⦌, P Z ↔ ∀ (s : C _⦋1⦌), s ∈ S → SSet.Enhanced.IsWeakHomotopyEquivalence (SSet.Enhanced.canonicalPrecompositionMap (C.δ 1 s) (C.δ 0 s) Z s rfl rfl)) ∧ @IsPresentable.{u, v} (SSet.Enhanced.fullSubcomplex C P).toSSet hP ∧ ∃ (L : C ⟶ (SSet.Enhanced.fullSubcomplex C P).toSSet), Nonempty (HomotopicalAlgebra.ModelInfinity.CoherentAdjunction L (SSet.Enhanced.fullSubcomplex C P).ι) ∧ (∃ (κ : Cardinal.{u}), κ.IsRegular ∧ PreservesColimitsIn L (fun I _ _ ↦ ∃ hI : SSet.Quasicategory I, IsSmall.{u, max (u + 1) v} I ∧ @IsKappaFiltered.{u, max (u + 1) v} κ I hI)) ∧ (∀ (I : SSet.{max (u + 1) v}), IsSmall.{u, max (u + 1) v} I → ∀ (G : I ⟶ (SSet.Enhanced.fullSubcomplex C P).toSSet) (t : (SSet.Enhanced.coneCategory G) _⦋0⦌), SSet.Enhanced.IsLimiting G t ↔ ∃ t' : (SSet.Enhanced.coneCategory (G ≫ (SSet.Enhanced.fullSubcomplex C P).ι)) _⦋0⦌, t'.1 = ((SSet.Enhanced.fullSubcomplex C P).ι.app _ t.1.1, ((ihom Δ[1]).map ((ihom I).map (SSet.Enhanced.fullSubcomplex C P).ι)).app _ t.1.2) ∧ SSet.Enhanced.IsLimiting (G ≫ (SSet.Enhanced.fullSubcomplex C P).ι) t') ∧ (∀ (I : SSet.{max (u + 1) v}), IsSmall.{u, max (u + 1) v} I → ∀ (G : I ⟶ (SSet.Enhanced.fullSubcomplex C P).toSSet) (t : (SSet.Enhanced.coconeCategory (G ≫ (SSet.Enhanced.fullSubcomplex C P).ι)) _⦋0⦌), SSet.Enhanced.IsColimiting (G ≫ (SSet.Enhanced.fullSubcomplex C P).ι) t → SSet.Enhanced.IsColimiting ((G ≫ (SSet.Enhanced.fullSubcomplex C P).ι) ≫ L) (CategoryTheory.Spaces.mappedCocone L (G ≫ (SSet.Enhanced.fullSubcomplex C P).ι) t))",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Small limits in both input categories, the coherent adjoint criterion, and the exact small local full subcategory with an accessible reflector. Ambient limit computation is tested on the actual postcomposed cone. Reflected ambient colimiting cocones are colimiting; the coherent counit identifies their diagram LiG with G. Reuses presentability, coherent adjunction data and canonical precomposition from already landed nodes added as statement dependencies. No new notion or statement correction."
  }
 }
