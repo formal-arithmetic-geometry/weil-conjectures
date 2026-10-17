@@ -140,6 +140,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
 
 attribute [local instance] Abelian.hasFiniteBiproducts
 
+omit [HasDerivedCategory.{w} C] [Abelian.HasFunctorialFlatResolution C] in
 /-- If morphisms from the unit are finite on coproducts and on tensor products, a morphism from
 the unit to the degree `0` term of a tensor product of complexes `M ⊗ F` is a finite sum of
 tensor products `sᵢ ⊗ tᵢ` of morphisms to terms `M^{pᵢ}` and `F^{qᵢ}`, `pᵢ + qᵢ = 0`. -/
@@ -162,7 +163,8 @@ lemma exists_eq_sum_ιTensorObj (hC : UnitFactorsThroughFiniteCoproducts C)
   rfl
 
 omit [IsGrothendieckAbelian.{v} C] [MonoidalClosed C] [BraidedCategory C]
-  [HasDerivedCategory.{w} C] [Abelian.HasFunctorialFlatResolution C] in
+  [HasDerivedCategory.{w} C] [Abelian.HasFunctorialFlatResolution C] [MonoidalCategory C]
+  [MonoidalPreadditive C] in
 /-- A finite direct sum of morphisms which are epimorphisms is an epimorphism. -/
 lemma epi_biproduct_map {ι : Type} [Finite ι] {X Y : ι → C} (f : ∀ i, X i ⟶ Y i)
     [∀ i, Epi (f i)] : Epi (biproduct.map f) := by
@@ -171,6 +173,7 @@ lemma epi_biproduct_map {ι : Type} [Finite ι] {X Y : ι → C} (f : ∀ i, X i
   rw [← cancel_epi (f i)]
   simpa using congrArg (fun k ↦ biproduct.ι X i ≫ k) hgh
 
+omit [HasDerivedCategory.{w} C] [Abelian.HasFunctorialFlatResolution C] in
 /-- If the terms of `F` are flat, tensoring a termwise monomorphism `f : L ⟶ M` of complexes with
 `F` gives a termwise monomorphism `L ⊗ F ⟶ M ⊗ F`: in each degree it is a coproduct of the
 monomorphisms `Lᵖ ⊗ F^q ⟶ Mᵖ ⊗ F^q`. -/
@@ -331,7 +334,8 @@ lemma isDualizable_shift {X : DerivedCategory C} (hX : IsDualizable X) (n : ℤ)
     (shiftTensorShiftIso (X := U) (Y := U) (a := -n) (b := n) ≪≫ (shiftFunctor _ _).mapIso (λ_ U) ≪≫
       eqToIso (by rw [neg_add_cancel]) ≪≫ (shiftFunctorZero _ ℤ).app U)
   have hX0 : IsDualizable (X⟦(0 : ℤ)⟧) := IsDualizable.of_iso ((shiftFunctorZero _ ℤ).app X).symm hX
-  exact IsDualizable.of_iso (shiftTensorShiftIso (X := X) (Y := U) (a := 0) (b := n) ≪≫ (shiftFunctor _ _).mapIso (ρ_ X) ≪≫
+  exact IsDualizable.of_iso (shiftTensorShiftIso (X := X) (Y := U) (a := 0) (b := n) ≪≫
+    (shiftFunctor _ _).mapIso (ρ_ X) ≪≫
     eqToIso (by rw [zero_add])) (hX0.tensorObj hU)
 
 /-- **Dualizable objects are closed under cones.** If two vertices `T.obj₁` and `T.obj₂` of a
@@ -370,8 +374,10 @@ theorem isDualizable_obj₃_of_distTriang (T : Triangle (DerivedCategory C))
     (ihomUnitTensorToIhom_pre _ _).symm (ihomUnitTensorToIhom_pre _ _).symm
     (ihomUnitTensorToIhom_pre _ _).symm (ihomUnitTensorToIhom_pre _ _).symm
     (comp_distTriang_mor_zero₁₂ _ hF₂) (comp_distTriang_mor_zero₁₂ _ hl₀)
-    (fun _ u hu ↦ Triangle.coyoneda_exact₂ _ hF₁ u hu) (fun _ u hu ↦ Triangle.coyoneda_exact₂ _ hF₀ u hu)
-    (fun _ u hu ↦ Triangle.coyoneda_exact₂ _ hl₂ u hu) (fun _ u hu ↦ Triangle.coyoneda_exact₂ _ hl₁ u hu)
+    (fun _ u hu ↦ Triangle.coyoneda_exact₂ _ hF₁ u hu)
+    (fun _ u hu ↦ Triangle.coyoneda_exact₂ _ hF₀ u hu)
+    (fun _ u hu ↦ Triangle.coyoneda_exact₂ _ hl₂ u hu)
+    (fun _ u hu ↦ Triangle.coyoneda_exact₂ _ hl₁ u hu)
 
 end DerivedCategory
 
@@ -413,10 +419,12 @@ variable (C) in
 def finProj : ObjectProperty C :=
   fun P ↦ ∃ r : ℕ, Nonempty (Retract P (⨁ fun _ : Fin r ↦ 𝟙_ C))
 
+omit [HasBinaryBiproducts C] in
 lemma finProj_of_iso {P P' : C} (e : P ≅ P') (hP : finProj C P) : finProj C P' := by
   obtain ⟨r, ⟨h⟩⟩ := hP
   exact ⟨r, ⟨(Retract.ofIso e.symm).trans h⟩⟩
 
+omit [HasBinaryBiproducts C] in
 lemma finProj_of_isZero {P : C} (hP : IsZero P) : finProj C P :=
   ⟨0, ⟨{ i := 0, r := 0, retract := hP.eq_of_src _ _ }⟩⟩
 
@@ -425,29 +433,37 @@ lemma finProj_biprod {P P' : C} (hP : finProj C P) (hP' : finProj C P') :
   obtain ⟨r, ⟨h⟩⟩ := hP
   obtain ⟨s, ⟨h'⟩⟩ := hP'
   refine ⟨r + s, ⟨Retract.trans ?_ (Retract.ofIso (biprodBiproductFinIso _ r s))⟩⟩
-  exact { i := biprod.map h.i h'.i, r := biprod.map h.r h'.r, retract := by apply biprod.hom_ext' <;> simp [h.retract_assoc, h'.retract_assoc] }
+  exact
+    { i := biprod.map h.i h'.i
+      r := biprod.map h.r h'.r
+      retract := by apply biprod.hom_ext' <;> simp [h.retract_assoc, h'.retract_assoc] }
 
-omit [MonoidalCategory C] in
+omit [MonoidalCategory C] [HasBinaryBiproducts C] in
 lemma projective_biproduct_const (X : C) [Projective X] (ι : Type) [Finite ι] :
     Projective (⨁ fun _ : ι ↦ X) where
-  factors f e _ := ⟨biproduct.desc fun b ↦ Projective.factorThru (biproduct.ι (fun _ : ι ↦ X) b ≫ f) e,
+  factors f e _ := ⟨biproduct.desc fun b ↦
+    Projective.factorThru (biproduct.ι (fun _ : ι ↦ X) b ≫ f) e,
     biproduct.hom_ext' _ _ fun b ↦ by simp⟩
 
+omit [HasBinaryBiproducts C] in
 lemma finProj.projective [Projective (𝟙_ C)] {P : C} (hP : finProj C P) : Projective P := by
   obtain ⟨r, ⟨h⟩⟩ := hP
   have := projective_biproduct_const (𝟙_ C) (Fin r)
   exact h.projective
 
-lemma isDualizable_biproduct_unit [MonoidalPreadditive C] (r : ℕ) : IsDualizable (⨁ fun _ : Fin r ↦ 𝟙_ C) := by
+lemma isDualizable_biproduct_unit [MonoidalPreadditive C] (r : ℕ) :
+    IsDualizable (⨁ fun _ : Fin r ↦ 𝟙_ C) := by
   induction r with
   | zero =>
-    refine CategoryTheory.IsZero.isDualizable ((IsZero.iff_id_eq_zero _).2 (biproduct.hom_ext' _ _ ?_))
+    refine CategoryTheory.IsZero.isDualizable
+      ((IsZero.iff_id_eq_zero _).2 (biproduct.hom_ext' _ _ ?_))
     exact fun i ↦ i.elim0
   | succ r ih =>
     exact IsDualizable.of_iso (biprodBiproductFinIso _ r 1)
       (IsDualizable.biprod ih (IsDualizable.of_iso (biproductUniqueIso _).symm isDualizable_unit))
 
-lemma finProj.isDualizable [MonoidalPreadditive C] [IsIdempotentComplete C] {P : C} (hP : finProj C P) :
+lemma finProj.isDualizable [MonoidalPreadditive C] [IsIdempotentComplete C] {P : C}
+    (hP : finProj C P) :
     IsDualizable P := by
   obtain ⟨r, ⟨h⟩⟩ := hP
   exact IsDualizable.of_retract h (isDualizable_biproduct_unit r)
