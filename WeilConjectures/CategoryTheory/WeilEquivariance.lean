@@ -190,7 +190,7 @@ lemma isWeilEquivariant_ev {A ω : C} (φA : G.obj A ≅ A) (φω : G.obj ω ⟶
   simp only [Category.assoc, Monoidal.μ_δ_assoc, MonoidalCategory.whiskerLeft_comp,
     id_tensor_pre_app_comp_ev]
   rw [← whisker_exchange_assoc, ← whisker_exchange_assoc, hom_inv_whiskerRight_assoc,
-    ev_naturality]
+    ihom.ev_naturality]
   exact (LaxMonoidal.ihomComparison_ev_assoc G A ω φω).symm
 
 /-- **The adjoint of a Weil pairing is Weil equivariant**: if `b : A ⊗ B ⟶ ω` is equivariant for
