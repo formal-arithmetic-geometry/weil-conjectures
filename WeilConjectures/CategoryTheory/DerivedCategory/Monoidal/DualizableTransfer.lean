@@ -137,6 +137,7 @@ structure DualizabilityDatum (P : CochainComplex C ℤ) where
     (HomotopyCategory.quotient C (.up ℤ)).map
       ((α_ _ _ _).inv ≫ (CochainComplex.tensorHomAdjunction P).counit.app I₁ ▷ P ≫ j)
 
+omit [HasDerivedCategory.{v} C] [Abelian.HasFunctorialFlatResolution C] in
 lemma quotient_associator_inv (K L M : CochainComplex C ℤ) :
     (α_ ((HomotopyCategory.quotient C (.up ℤ)).obj K) ((HomotopyCategory.quotient C (.up ℤ)).obj L)
       ((HomotopyCategory.quotient C (.up ℤ)).obj M)).inv =
@@ -197,6 +198,24 @@ theorem DualizabilityDatum.isDualizable_Q_obj_iff {P : CochainComplex C ℤ}
 
 end Datum
 
+section Homotopic
+
+variable {C : Type*} {D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive D]
+  (G : C ⥤ D) [G.Additive]
+
+/-- If two morphisms of complexes are homotopic, so are their images under `G`, after
+precomposition with any morphism. -/
+lemma quotient_map_comp_map_eq {X : CochainComplex D ℤ} {Y Z : CochainComplex C ℤ}
+    (A : X ⟶ (G.mapHomologicalComplex (.up ℤ)).obj Y) {x y : Y ⟶ Z}
+    (h : (HomotopyCategory.quotient C (.up ℤ)).map x =
+      (HomotopyCategory.quotient C (.up ℤ)).map y) :
+    (HomotopyCategory.quotient D (.up ℤ)).map (A ≫ (G.mapHomologicalComplex (.up ℤ)).map x) =
+      (HomotopyCategory.quotient D (.up ℤ)).map (A ≫ (G.mapHomologicalComplex (.up ℤ)).map y) := by
+  rw [Functor.map_comp, Functor.map_comp, ← Functor.mapHomotopyCategory_map, h,
+    Functor.mapHomotopyCategory_map]
+
+end Homotopic
+
 section Transfer
 
 variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
@@ -216,6 +235,9 @@ local instance : HasColimitsOfSize.{0, 0} D := hasColimitsOfSizeShrink D
 
 attribute [local instance] CochainComplex.monoidalClosed
 
+omit [HasDerivedCategory.{v} C] [Abelian.HasFunctorialFlatResolution C] [HasDerivedCategory.{v} D]
+  [Abelian.HasFunctorialFlatResolution D] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+  [PreservesFiniteLimits L] [PreservesFiniteColimits L] in
 include adj in
 /-- The functor induced by `G` on cochain complexes commutes with internal hom complexes: its
 left adjoint satisfies the projection formula degreewise. -/
@@ -228,16 +250,6 @@ lemma isIso_ihomComparison_mapHomologicalComplex (P : CochainComplex C ℤ) :
   exact Functor.Monoidal.isIso_ihomComparison_of_isIso_projectionMap
     (adj.mapHomologicalComplex (.up ℤ)) P
 
-omit [PreservesFiniteLimits G] [PreservesFiniteColimits G] [∀ X : C, IsIso (ihomComparison G X).natTrans] in
-/-- If two morphisms of complexes are homotopic, so are their images under `G`, after
-precomposition with any morphism. -/
-lemma quotient_map_comp_map_eq {X : CochainComplex D ℤ} {Y Z : CochainComplex C ℤ}
-    (A : X ⟶ (G.mapHomologicalComplex (.up ℤ)).obj Y) {x y : Y ⟶ Z}
-    (h : (HomotopyCategory.quotient C (.up ℤ)).map x = (HomotopyCategory.quotient C (.up ℤ)).map y) :
-    (HomotopyCategory.quotient D (.up ℤ)).map (A ≫ (G.mapHomologicalComplex (.up ℤ)).map x) =
-      (HomotopyCategory.quotient D (.up ℤ)).map (A ≫ (G.mapHomologicalComplex (.up ℤ)).map y) := by
-  rw [Functor.map_comp, Functor.map_comp, ← Functor.mapHomotopyCategory_map, h,
-    Functor.mapHomotopyCategory_map]
 
 variable {G} in
 /-- The image of a `DualizabilityDatum P` under `G`: the resolutions are mapped by `G` (which
@@ -305,6 +317,7 @@ noncomputable def DualizabilityDatum.map {P : CochainComplex C ℤ} (d : Dualiza
       rw [eA, eB]
       exact quotient_map_comp_map_eq G _ d.hχ }
 
+omit [HasDerivedCategory.{v} C] [Abelian.HasFunctorialFlatResolution C] in
 include adj in
 /-- **Transfer of the dualizability criterion along `G`.** For a `DualizabilityDatum P` and `P`
 such that `G P` is K-flat, `Q (G P)` is dualizable if and only if `G χ` is a
@@ -330,6 +343,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
 
 local instance : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
 
+omit [HasDerivedCategory.{v} C] [Abelian.HasFunctorialFlatResolution C] in
 /-- A K-flat complex admits a `DualizabilityDatum`: take K-injective resolutions of the unit and
 of `P`; the map `j` exists as `u ▷ P` is a quasi-isomorphism and the target is K-injective, and
 `χ` is a transpose in the homotopy category. -/

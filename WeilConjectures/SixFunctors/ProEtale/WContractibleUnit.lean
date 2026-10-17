@@ -32,7 +32,6 @@ namespace AlgebraicGeometry.ProEtale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] (R : CommRingCat.{u}) [IsWContractibleRing R]
 
-set_option maxHeartbeats 2000000 in
 set_option synthInstance.maxHeartbeats 400000 in
 -- the instances `WEqualsLocallyBijective` and `HasSheafCompose` on the small pro-étale sites
 -- take long to synthesize

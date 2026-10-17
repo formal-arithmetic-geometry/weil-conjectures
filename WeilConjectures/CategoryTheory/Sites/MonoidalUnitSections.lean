@@ -24,10 +24,10 @@ sheaves of `R`-modules with the monoidal structure `CategoryTheory.Sheaf.monoida
 
 * Morphisms `𝟙_ ⟶ F` correspond to sections of `F` over `W`, via evaluation at the *unit
   section* `CategoryTheory.Sheaf.unitSection J W`, the image of `1 ∈ R`
-  (`CategoryTheory.Sheaf.unitHom_ext`, `CategoryTheory.Sheaf.exists_unitHom`).
+  (`CategoryTheory.Sheaf.hom_ext_of_unitSection`, `CategoryTheory.Sheaf.exists_unitHom_eq`).
 * Under this correspondence, `(λ_ 𝟙_).inv ≫ (s ⊗ₘ t)` corresponds to the image of
   `s(1) ⊗ t(1)` under the canonical map `F(W) ⊗ G(W) ⟶ (F ⊗ G)(W)`
-  (`CategoryTheory.Sheaf.app_leftUnitor_inv_comp_tensorHom`).
+  (`CategoryTheory.Sheaf.leftUnitor_inv_comp_tensorHom_app`).
 
 If moreover `W` has finite disjoint refinements
 (`CategoryTheory.GrothendieckTopology.HasFiniteDisjointRefinements`), then taking sections over
@@ -263,12 +263,11 @@ lemma exists_unitHom_eq (F : Sheaf J (ModuleCat.{max u v} R)) (s : F.obj.obj (op
     rw [← homEquiv_η_comp, IsIso.hom_inv_id_assoc, Equiv.apply_symm_apply]
   have h := congr_arg (fun φ ↦ φ.app (op W) (1 : R)) hp
   refine h.trans ?_
-  simp only [p, ModuleCat.hom_ofHom, one_smul]
+  simp only [p, ModuleCat.hom_ofHom]
   rw [hW.hom_ext (hW.from W) (𝟙 W), op_id, F.obj.map_id]
   simp only [ModuleCat.hom_id, LinearMap.id_apply]
   exact one_smul R s
 
-include hW in
 /-- The section over the terminal object of `λ⁻¹ ≫ (s ⊗ t) : 𝟙 ⟶ F ⊗ G` is the image of
 `s(1) ⊗ t(1)` under the comparison `F(W) ⊗ G(W) ⟶ (F ⊗ G)(W)`. -/
 lemma leftUnitor_inv_comp_tensorHom_app {F G : Sheaf J (ModuleCat.{max u v} R)}
@@ -288,16 +287,15 @@ lemma leftUnitor_inv_comp_tensorHom_app {F G : Sheaf J (ModuleCat.{max u v} R)}
     hn]
   rfl
 
-variable [HasSheafify J (ModuleCat.{max u v} R)]
-  [J.HasSheafCompose (forget (ModuleCat.{max u v} R))]
+variable [J.HasSheafCompose (forget (ModuleCat.{max u v} R))]
   [J.WEqualsLocallyBijective (ModuleCat.{max u v} R)]
-  [Balanced (Sheaf J (ModuleCat.{max u v} R))]
 
 include hW in
 /-- If the terminal object has finite disjoint refinements, the unit of sheaves of modules is
 projective: morphisms out of it are sections over the terminal object, and epimorphisms are
 surjective on these. -/
-theorem projective_unit (hfd : J.HasFiniteDisjointRefinements W) :
+theorem projective_unit [HasSheafify J (ModuleCat.{max u v} R)]
+    [Balanced (Sheaf J (ModuleCat.{max u v} R))] (hfd : J.HasFiniteDisjointRefinements W) :
     Projective (𝟙_ (Sheaf J (ModuleCat.{max u v} R))) where
   factors {E G} f e _ := by
     have : Presheaf.IsLocallySurjective J e.hom :=
@@ -307,10 +305,11 @@ theorem projective_unit (hfd : J.HasFiniteDisjointRefinements W) :
       (f.hom.app (op W) (unitSection J W))
     obtain ⟨x, hx⟩ := exists_unitHom_eq hW E t
     refine ⟨x, hom_ext_of_unitSection hW ?_⟩
-    rw [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, ConcreteCategory.comp_apply, hx, ht]
+    rw [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, ConcreteCategory.comp_apply,
+      hx, ht]
 
-omit [HasSheafify J (ModuleCat.{max u v} R)] [J.WEqualsLocallyBijective (ModuleCat.{max u v} R)]
-  [Balanced (Sheaf J (ModuleCat.{max u v} R))] in
+omit [J.HasSheafCompose (forget (ModuleCat.{max u v} R))]
+  [J.WEqualsLocallyBijective (ModuleCat.{max u v} R)] in
 /-- Taking the image of the unit section is additive. -/
 lemma sum_hom_app_unitSection {F : Sheaf J (ModuleCat.{max u v} R)} {ι : Type*} (S : Finset ι)
     (x : ι → (𝟙_ (Sheaf J (ModuleCat.{max u v} R)) ⟶ F)) :
@@ -320,15 +319,16 @@ lemma sum_hom_app_unitSection {F : Sheaf J (ModuleCat.{max u v} R)} {ι : Type*}
   have h := congr_arg (fun φ ↦ φ (unitSection J W)) (E.map_sum x S)
   simpa [E] using h
 
-omit [HasSheafify J (ModuleCat.{max u v} R)] [J.WEqualsLocallyBijective (ModuleCat.{max u v} R)]
-  [Balanced (Sheaf J (ModuleCat.{max u v} R))] in
+omit [J.HasSheafCompose (forget (ModuleCat.{max u v} R))]
+  [J.WEqualsLocallyBijective (ModuleCat.{max u v} R)] in
 /-- Taking the image of the unit section is additive. -/
 lemma sub_hom_app_unitSection {F : Sheaf J (ModuleCat.{max u v} R)}
     (x y : 𝟙_ (Sheaf J (ModuleCat.{max u v} R)) ⟶ F) :
     (x - y).hom.app (op W) (unitSection J W) =
       x.hom.app (op W) (unitSection J W) - y.hom.app (op W) (unitSection J W) := by
   let E := sheafToPresheaf J (ModuleCat.{max u v} R) ⋙ (evaluation _ _).obj (op W)
-  have h := congr_arg (fun φ : E.obj _ ⟶ E.obj F ↦ φ (unitSection J W)) (E.map_sub (f := x) (g := y))
+  have h := congr_arg (fun φ : E.obj _ ⟶ E.obj F ↦ φ (unitSection J W))
+    (E.map_sub (f := x) (g := y))
   simpa [E] using h
 
 include hW in
@@ -363,7 +363,7 @@ theorem unitTensorFinite (hfd : J.HasFiniteDisjointRefinements W) :
     obtain ⟨s, hs⟩ := exists_unitHom_eq hW F a
     obtain ⟨t, ht⟩ := exists_unitHom_eq hW G b
     refine ⟨1, fun _ ↦ s, fun _ ↦ t, hom_ext_of_unitSection hW ?_⟩
-    rw [Fin.sum_univ_one, leftUnitor_inv_comp_tensorHom_app hW, hs, ht, ← hp]
+    rw [Fin.sum_univ_one, leftUnitor_inv_comp_tensorHom_app, hs, ht, ← hp]
   | add p₁ p₂ h₁ h₂ =>
     obtain ⟨x₁, hx₁⟩ := exists_unitHom_eq hW (F ⊗ G) ((tensorObjComparison J F G).app (op W) p₁)
     obtain ⟨n₁, s₁, t₁, e₁⟩ := h₁ x₁ hx₁.symm
