@@ -262,8 +262,8 @@ theorem truncationCouple_exact
     (∀ p q : ℤ,
       ∃ w : TruncationCouple.alpha F K p q ≫ TruncationCouple.g F K (p - 1) (q + 1) = 0,
         (ShortComplex.mk _ _ w).Exact) := by
-  letI := HasDerivedCategory.standard A
-  letI := HasDerivedCategory.standard B
+  let := HasDerivedCategory.standard A
+  let := HasDerivedCategory.standard B
   have h := truncation_raw_exact F K
   dsimp only at h
   obtain ⟨h₁, h₂, h₃⟩ := h

@@ -70,10 +70,28 @@ local notation "𝐃(" T ")" =>
   _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A))
 
 
-set_option pp.explicit true in
-#synth HasDerivedCategory (Sheaf (Scheme.ProEt.topology (⊤_ Scheme.{u})) (ModuleCat.{u + 1} A))
-set_option pp.explicit true in
-#synth Linear A (𝐃(⊤_ Scheme.{u}))
+lemma tpT5 {S T : Scheme.{u}} (Φ : 𝐃(S) ⥤ 𝐃(T)) [Φ.CommShift ℤ]
+    [Φ.IsTriangulated] [Φ.Linear A] : True := trivial
+
+lemma tpT1 {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
+    {J : GrothendieckTopology C} {ϖ : A} (hϖ : ϖ ∈ nonZeroDivisors A)
+    (hI : I = Ideal.span {ϖ})
+    (Φ : _root_.DerivedCategory (Sheaf J (ModuleCat.{u + 1} A)) ⥤
+      _root_.DerivedCategory (Sheaf J (ModuleCat.{u + 1} A))) [Φ.CommShift ℤ]
+    [Φ.IsTriangulated] [Φ.Linear A] (K : _root_.DerivedCategory (Sheaf J (ModuleCat.{u + 1} A)))
+    (n : ℕ) : Nonempty (Φ.obj
+    ((_root_.DerivedCategory.derivedCompletionDiagram J I K).obj (op n)) ≅
+      (_root_.DerivedCategory.derivedCompletionDiagram J I (Φ.obj K)).obj (op n)) :=
+  _root_.DerivedCategory.nonempty_iso_map_derivedCompletionDiagram_obj hϖ hI Φ K n
+
+lemma tpT2 {ϖ : A} (hϖ : ϖ ∈ nonZeroDivisors A)
+    (hI : I = Ideal.span {ϖ}) {S : Scheme.{u}} (Φ : 𝐃(S) ⥤ 𝐃(S)) [Φ.CommShift ℤ]
+    [Φ.IsTriangulated] [Φ.Linear A] (K : 𝐃(S)) (n : ℕ) : Nonempty (Φ.obj
+    ((_root_.DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology S) I K).obj (op n)) ≅
+      (_root_.DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology S) I
+        (Φ.obj K)).obj (op n)) :=
+  tpT1 I hϖ hI Φ K n
+
 #exit
 /-- A functor `Φ : D(S_proét, A) ⥤ D(T_proét, A)` *commutes with the reductions*: for every
 `K` and `n`, `Φ (K ⊗ᴸ A/Iⁿ) ≅ Φ(K) ⊗ᴸ A/Iⁿ`. -/

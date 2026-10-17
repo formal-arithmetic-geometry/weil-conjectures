@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.CategoryTheory.Triangulated.Triangulated
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import WeilConjectures.Algebra.Homology.UpperTruncationStepSES
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
@@ -329,6 +330,7 @@ theorem truncation_cohomology (K : CochainComplex A ℤ) (n : ℤ) :
   · exact IsZero.of_iso ((CochainComplex.truncation_cohomology K n).2.1 i hi)
       ((homologyFunctorFactors A i).app _)
 
+omit [HasDerivedCategory A] in
 /-- Part (a) of blueprint `lem-weil-pbc-truncation-descends`: the canonical truncation
 `τ_{≤ q}` and the functor `Hᵠ(-)[-q]` on cochain complexes preserve quasi-isomorphisms. -/
 theorem quasiIso_truncLEMap_and_singleFunctor_map_homologyMap {K L : CochainComplex A ℤ}

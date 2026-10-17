@@ -115,24 +115,22 @@ noncomputable def tensorReduction (sq : CommSq g' f' f g)
   redY' := (-⊗ᴸ-(Y')[A]).flip.obj (L((g)^*[A]).obj P)
   γF := TwoSquare.mk _ _ _ _
     { app M := ((leftDerivedUpperStarTensorComparison A f).app M).app P
-      naturality M N φ := by
-        simpa using congrArg (fun α ↦ α.app P)
-          ((leftDerivedUpperStarTensorComparison A f).naturality φ) }
+      naturality M N φ :=
+        congrArg (fun α ↦ α.app P) ((leftDerivedUpperStarTensorComparison A f).naturality φ) }
   γF' := TwoSquare.mk _ _ _ _
     { app M := ((leftDerivedUpperStarTensorComparison A f').app M).app (L((g)^*[A]).obj P)
-      naturality M N φ := by
-        simpa using congrArg (fun α ↦ α.app (L((g)^*[A]).obj P))
+      naturality M N φ := congrArg (fun α ↦ α.app (L((g)^*[A]).obj P))
           ((leftDerivedUpperStarTensorComparison A f').naturality φ) }
   δG := NatIso.ofComponents
     (fun M ↦ asIso (((leftDerivedUpperStarTensorComparison A g).app M).app P))
-    (fun φ ↦ by
-      simpa using congrArg (fun α ↦ α.app P)
+    (fun φ ↦ congrArg (fun α ↦ α.app P)
         ((leftDerivedUpperStarTensorComparison A g).naturality φ))
   δG' := NatIso.ofComponents
+      (F := (-⊗ᴸ-(X)[A]).flip.obj (L((f)^*[A]).obj P) ⋙ L((g')^*[A]))
+      (G := L((g')^*[A]) ⋙ (-⊗ᴸ-(X')[A]).flip.obj (L((g')^*[A]).obj (L((f)^*[A]).obj P)))
       (fun K ↦ asIso (((leftDerivedUpperStarTensorComparison A g').app K).app
         (L((f)^*[A]).obj P)))
-      (fun φ ↦ by
-        simpa using congrArg (fun α ↦ α.app (L((f)^*[A]).obj P))
+      (fun φ ↦ congrArg (fun α ↦ α.app (L((f)^*[A]).obj P))
           ((leftDerivedUpperStarTensorComparison A g').naturality φ)) ≪≫
     Functor.isoWhiskerLeft L((g')^*[A])
       ((-⊗ᴸ-(X')[A]).flip.mapIso ((leftDerivedUpperStarSquareIso A sq).app P).symm)
@@ -273,8 +271,8 @@ noncomputable def tensorReductionHom {P P' : DerivedCategory (Sheaf (Scheme.ProE
     have h₁ := ((leftDerivedUpperStarTensorComparison A g').app K).naturality
       (L((f)^*[A]).map φ)
     have h₂ := (leftDerivedUpperStarSquareIso A sq).inv.naturality φ
-    dsimp [tensorReduction] at h₁ h₂ ⊢
-    simp only [Category.assoc, reassoc_of% h₁, ← Functor.map_comp, h₂]
+    dsimp [tensorReduction, baseChangeSquare] at h₁ h₂ ⊢
+    rw [reassoc_of% h₁, ← Functor.map_comp, ← Functor.map_comp, h₂]
 
 /-- **Tower compatibility of the finite-level arrows** (Blueprint
 `lemma-weil-pbc-level-map-tower-compatibility`): for a coefficient tower

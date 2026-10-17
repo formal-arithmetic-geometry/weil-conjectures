@@ -125,7 +125,7 @@ lemma restrictScalarsCompIso_assoc :
       (Functor.associator _ _ _).symm ≪≫
         Functor.isoWhiskerRight (restrictScalarsCompIso J f₂ f₃ f₂₃ h₂₃) (restrictScalars J f₁) ≪≫
           restrictScalarsCompIso J f₁ f₂₃ f₁₂₃ h₁₃ := by
-  ext F : 2
+  refine Iso.ext (NatTrans.ext (funext fun F ↦ ?_))
   apply (fullyFaithfulSheafToPresheaf J _).map_injective
   ext U x
   rfl
@@ -142,7 +142,7 @@ lemma derivedRestrictScalarsCompIso_assoc :
         (restrictScalarsCompIso J f₁ f₂ f₁₂ h₁₂) ≪≫ restrictScalarsCompIso J f₁₂ f₃ f₁₂₃ h₀₃ =
       Functor.isoWhiskerRight (restrictScalarsCompIso J f₂ f₃ f₂₃ h₂₃) (restrictScalars J f₁) ≪≫
         restrictScalarsCompIso J f₁ f₂₃ f₁₂₃ h₁₃ := by
-    ext F : 2
+    refine Iso.ext (NatTrans.ext (funext fun F ↦ ?_))
     apply (fullyFaithfulSheafToPresheaf J _).map_injective
     ext U x
     rfl
@@ -167,7 +167,6 @@ lemma derivedRestrictScalarsCompIso_assoc :
       (restrictScalars J f₂ ⋙ restrictScalars J f₁)).hom.app K)]
   simp only [Iso.hom_inv_id_app_assoc]
   rw [← reassoc_of% e₁, Iso.hom_inv_id_app_assoc, reassoc_of% e₃]
-  erw [Category.id_comp]
   rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app, Functor.map_id, Category.id_comp,
     ← reassoc_of% e₂, Iso.hom_inv_id_app_assoc]
   exact e₅
@@ -359,7 +358,8 @@ variable (l : ℕ) [Fact l.Prime] (E L M N : Type w) [Field E] [Field L] [Field 
   [Algebra ℚ_[l] M] [IsScalarTower ℚ_[l] M (PadicAlgCl l)] [FiniteDimensional ℚ_[l] M]
   [Algebra ℚ_[l] N] [IsScalarTower ℚ_[l] N (PadicAlgCl l)] [FiniteDimensional ℚ_[l] N]
   [Small.{u + 1} E] [Small.{u + 1} L] [Small.{u + 1} M] [Small.{u + 1} N] (Y : Scheme.{u})
-
+set_option maxHeartbeats 1600000 in
+-- the comparison unfolds the derived base change functors on the full subcategories
 /-- The composition isomorphisms of the integral scalar extensions satisfy the cocycle
 condition: the two identifications of `((K ⊗ 𝒪_L) ⊗ 𝒪_M) ⊗ 𝒪_N` with `K ⊗ 𝒪_N` agree. -/
 lemma derivedCompleteIntegralScalarExtensionCompIso_cocycle
@@ -384,6 +384,14 @@ lemma derivedCompleteIntegralScalarExtensionCompIso_cocycle
   simp only [Functor.map_comp, derivedCompleteIntegralScalarExtensionCompIso,
     NatIso.ofComponents_hom_app, Functor.FullyFaithful.preimageIso_hom,
     Functor.FullyFaithful.map_preimage]
+  have hT : ∀ {A B : DerivedCategoryDerivedCompleteIntegral Y.smallEtaleTopology l M} (g : A ⟶ B),
+      (DerivedCategoryDerivedCompleteIntegral.ι _ l N).map
+          ((derivedCompleteIntegralScalarExtension l M N).map g) =
+        (derivedBaseChange (PadicAlgCl.integersShrinkMap l M N) Y
+          exists_isDerivedBaseChange_integersShrinkMap).map
+          ((DerivedCategoryDerivedCompleteIntegral.ι _ l M).map g) := fun _ ↦ rfl
+  rw [hT, Functor.FullyFaithful.map_preimage]
+  simp only [Iso.app_hom]
   exact h.symm
 
 
