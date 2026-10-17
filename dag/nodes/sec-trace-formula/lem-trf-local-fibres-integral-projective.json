@@ -15,9 +15,56 @@
   "def-weil-affine-spectrum",
   "def-pc-geometrically-irreducible"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-local-noetherian-approximation], which is the Noetherian approximation paragraph of Tag 05FT. It supplies a cocartesian diagram with R₀ of finite type over ℤ, a finite type flat map R₀→S₀, geometrically integral fibres at every prime of R₀, and S≅S₀⊗_{R₀}R. The approximation lemma applies because the given map is finitely presented and flat and all its fibres are geometrically integral.",
+   "uses": [
+    "lem-trf-local-noetherian-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05FT, lemma-fibres-irreducible-flat-projective-nonnoetherian, proof: cocartesian diagram and Noetherian approximation paragraph"
+   }
+  },
+  {
+   "text": "The ring ℤ is Noetherian (every ideal of ℤ is principal). Since R₀ is of finite type over ℤ, [lem-weil-pbc-finite-type-algebra-noetherian] gives that R₀ is Noetherian. The finite type flat map R₀→S₀ has geometrically integral fibre rings at every prime of R₀ by Step 1, so [lem-trf-local-noetherian-fibres-projective] gives that S₀ is projective as an R₀-module.",
+   "uses": [
+    "lem-trf-local-noetherian-approximation",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-trf-local-noetherian-fibres-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05FT, lemma-fibres-irreducible-flat-projective-nonnoetherian, proof: apply lemma-fibres-irreducible-flat-projective to S₀"
+   }
+  },
+  {
+   "text": "The cocartesian square gives an isomorphism of R-modules S≅S₀⊗_{R₀}R, and the symmetry of the tensor product gives S₀⊗_{R₀}R≅R⊗_{R₀}S₀. By [lem-trf-local-projective-tensor-base-change], applied to R₀→R and the projective R₀-module S₀ of Step 2, R⊗_{R₀}S₀ is a projective R-module. A module isomorphic to a projective module is projective (a direct summand of a free module is carried to one by the isomorphism), so S is projective over R.",
+   "uses": [
+    "lem-trf-local-noetherian-approximation",
+    "lem-trf-local-noetherian-fibres-projective",
+    "lem-trf-local-projective-tensor-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05FT, lemma-fibres-irreducible-flat-projective-nonnoetherian, proof: S=S₀ tensor_{R₀}R and Algebra Lemma 05A3(4)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-local-noetherian-approximation",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-trf-local-noetherian-fibres-projective",
+  "lem-trf-local-projective-tensor-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05FT, lemma-fibres-irreducible-flat-projective-nonnoetherian"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,7 +96,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-local-generic-basis-universal-injective",
@@ -78,5 +125,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-local-fibres-integral-projective",
+  "worker": "stage1",
+  "summary": "Split Tag 05FT into the fibre-preserving Noetherian approximation, the Noetherian finite-type projectivity lemma, and the scalar-extension projectivity input. The three proof steps follow the source's cocartesian approximation, Noetherian application, and tensor base-change paragraphs; the statement and all original hypotheses are unchanged.",
+  "blueprint": "Realizes the ancestor blueprint sentence in the semistable-alteration input that invokes the projectivity of S over R from Tag 05FT together with Tag 05FQ."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-6cea3d6d9",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-6cea3d6d9 (reviewer sub-agent of L); spot-checked: I read all of it: the item, the three new nodes, Stacks flat.tex Tags 05FT and 05FS (lemma-fibres-irreducible-flat-projective) with their proofs, more-morphisms 05FE/05FG/05FH/05FL, and Mathlib Projective.lean l.242. The item matches 05FT hypothesis by hypothesis. The three steps follow the source proof (Noetherian approximation, then the Noetherian lemma, then 05A3(4) scalar extension). No new node is false, circular or a restated clause. The Mathlib leaf Module.Projective.tensorProduct specializes correctly with M=R. I fixed three faults. C1: step 2 used 'finite type over Z implies Noetherian' without a citation; it now cites the Mathlib leaf lem-weil-pbc-finite-type-algebra-noetherian, and step 3's 'transporting' is written out. B3: lem-trf-local-noetherian-fibres-projective now cites def-weil-pbc-finite-type-algebra. B9: blueprint.from.place on the three new nodes gave Stacks/Mathlib places; it now gives the place in the lem-trf-local-term-locality proof. I also added the 05FE/05FG/05FH/05FL tags to the approximation node's source. No tool_uses are involved. For the maintainer: the existing unsplit node lem-trf-affine-geometrically-integral-projective (Q35, same day, same unit) states the same 05FT fact as the item. It should be merged into the item and its citer lem-trf-affine-generic-rank-blowup repointed.; 4 file(s) fixed by the reviewer"
  }
 }
