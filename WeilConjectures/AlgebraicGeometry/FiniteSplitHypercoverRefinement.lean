@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.SemiRepresentableObject
 public import WeilConjectures.AlgebraicGeometry.FiniteSplitEtaleHypercover
 public import WeilConjectures.AlgebraicGeometry.FiniteSplitHypercoverLocalLifts
 public import WeilConjectures.AlgebraicGeometry.SemiRepresentableLocalLifts
+public import WeilConjectures.AlgebraicTopology.SimplicialObject.PathSpaceBoundary
 
 /-!
 # Refinements of finite split étale hypercovers
@@ -83,12 +84,61 @@ theorem exists_common_refinement (U V : FiniteSplitEtaleHypercover X) :
     (fun m ↦ X.smallEtaleTopology.top_mem _)
   exact ⟨W, ⟨ℓ ≫ prodSimplicialFst _ _⟩, ⟨ℓ ≫ prodSimplicialSnd _ _⟩⟩
 
+lemma _root_.CategoryTheory.Sieve.iInf_apply' {C : Type*} [Category* C] {X Y : C} {ι : Type*}
+    (S : ι → Sieve X) (f : Y ⟶ X) : (⨅ i, S i) f ↔ ∀ i, S i f :=
+  ⟨fun h i ↦ (Sieve.sInf_apply f).1 h _ ⟨i, rfl⟩,
+    fun h ↦ (Sieve.sInf_apply f).2 (by rintro _ ⟨i, rfl⟩; exact h i)⟩
+
+open Scheme.Etale SimplicialObject PathSpaceBoundary in
+/-- The simplicial object of homotopies between two maps of simplicial objects with local lifts
+has local lifts. -/
+lemma _root_.AlgebraicGeometry.Scheme.Etale.hasLocalLifts_pathSpace
+    {U V : SimplicialObject X.Etale} (a b : U ⟶ V) (hU : HasLocalLifts U)
+    (hV : HasLocalLifts V) : HasLocalLifts (pathSpace a b) := by
+  intro N T p
+  let S₁ : Sieve T :=
+    { arrows := fun T₁ g ↦ ∃ (u : T₁ ⟶ U _⦋N⦌) (τ : Fin (N + 2) → (T₁ ⟶ V _⦋N⦌)),
+        BoundaryCone.ofSimplex u = (p.precomp g).postcomp (pathProj a b) ∧
+          ∀ s, BoundaryCone.ofSimplex (τ s) = tauCone (p.precomp g) s
+      downward_closed := by
+        rintro T₁ T₂ g ⟨u, τ, hu, hτ⟩ f
+        refine ⟨f ≫ u, fun s ↦ f ≫ τ s, ?_, fun s ↦ ?_⟩
+        · rw [← BoundaryCone.ofSimplex_precomp, hu, ← BoundaryCone.precomp_postcomp,
+            BoundaryCone.precomp_precomp]
+        · rw [← BoundaryCone.ofSimplex_precomp, hτ, tauCone_precomp,
+            BoundaryCone.precomp_precomp] }
+  have hS₁ : S₁ ∈ X.smallEtaleTopology T := by
+    refine X.smallEtaleTopology.superset_covering ?_
+      (X.smallEtaleTopology.intersection_covering (hU N T (p.postcomp (pathProj a b)))
+        (X.smallEtaleTopology.iInf_mem_of_finite _ fun s ↦ hV N T (tauCone p s)))
+    rintro T₁ g ⟨⟨u, hu⟩, hτ⟩
+    rw [Sieve.iInf_apply'] at hτ
+    choose τ hτ using hτ
+    refine ⟨u, τ, ?_, fun s ↦ ?_⟩
+    · rw [hu, BoundaryCone.precomp_postcomp]
+    · rw [hτ s, tauCone_precomp]
+  refine X.smallEtaleTopology.superset_covering ?_ (X.smallEtaleTopology.bind_covering hS₁
+    (R := fun T₁ g (H : S₁ g) ↦ ⨅ k : Fin (N + 1),
+      liftSieve (prismCone H.choose_spec.choose_spec.1 H.choose_spec.choose_spec.2 k))
+    (fun T₁ g H ↦ X.smallEtaleTopology.iInf_mem_of_finite _ fun k ↦ hV _ _ _))
+  rintro T₂ _ ⟨T₁, f, g, H, hf, rfl⟩
+  rw [Sieve.iInf_apply'] at hf
+  choose h hh using hf
+  obtain ⟨z, hz⟩ := exists_ofSimplex_eq_precomp H.choose_spec.choose_spec.1
+    H.choose_spec.choose_spec.2 f h fun k ↦ (hh k).trans (by rfl)
+  exact ⟨z, by rw [hz, BoundaryCone.precomp_precomp]⟩
+
+open Scheme.Etale SimplicialObject in
 /-- Blueprint `lem-weil-pbc-hypercover-refinement`: parallel refinements become homotopic after
 refinement. -/
 theorem exists_homotopic_refinement (U V : FiniteSplitEtaleHypercover X) (a b : U.Refinement V) :
     ∃ (W : FiniteSplitEtaleHypercover X) (c : W.Refinement U),
       isRefinementHomotopic (c ≫ a) (c ≫ b) := by
-  sorry
+  obtain ⟨W, ℓ, -⟩ := FiniteSplitHypercoverEngine.exists_hypercover
+    (hasLocalLifts_pathSpace a b U.hasLocalLifts V.hasLocalLifts) (fun _ ↦ ⊤)
+    (fun m ↦ X.smallEtaleTopology.top_mem _)
+  refine ⟨W, ℓ ≫ pathProj a b, Relation.EqvGen.rel _ _ ⟨?_⟩⟩
+  simpa only [Category.assoc] using (pathHomotopy a b).precomp ℓ
 
 /-- Blueprint `lem-weil-pbc-hypercover-refinement`: finite split étale hypercovers exist, and
 their homotopy category is cofiltered. -/

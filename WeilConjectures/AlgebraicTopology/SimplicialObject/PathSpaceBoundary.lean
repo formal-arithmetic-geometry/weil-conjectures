@@ -46,8 +46,7 @@ lemma bval_comp {Δ Δ' : SimplexCategory} (f : Δ ⟶ ⦋N⦌) (hf : ¬ Epi f) 
   obtain ⟨m, rfl⟩ : ∃ m, Δ' = ⦋m⦌ := ⟨Δ'.len, rfl⟩
   obtain ⟨n, rfl⟩ : ∃ n, Δ = ⦋n⦌ := ⟨Δ.len, rfl⟩
   rw [bval, bval, pathValue_comp, p.descApp_comp f hf θ hf']
-  erw [pathValue_map]
-  simp
+  exact ((pathValue_map (p.descApp f hf) θ (𝟙 _) (θ ≫ g)).trans (by simp)).symm
 
 lemma bval_precomp {T' : C} (t : T' ⟶ T) {Δ : SimplexCategory} (f : Δ ⟶ ⦋N⦌) (hf : ¬ Epi f)
     (g : Δ ⟶ ⦋1⦌) : bval (p.precomp t) f hf g = t ≫ bval p f hf g := by
@@ -60,23 +59,21 @@ lemma bval_eq_pathValue {n : ℕ} (hn : n < N) (β : ⦋n⦌ ⟶ ⦋N⦌) {Δ : 
     bval p (α ≫ β) h g = pathValue a b (p.π ⦋n⦌ (by simpa using hn) β) α g := by
   obtain ⟨m, rfl⟩ : ∃ m, Δ = ⦋m⦌ := ⟨Δ.len, rfl⟩
   have hβ : ¬ Epi β := not_epi_of_len_lt β (by simpa using hn)
-  rw [bval, p.descApp_comp β hβ α h]
-  erw [pathValue_map]
-  rw [p.descApp_eq_π β hβ (by simpa using hn)]
-  simp
+  rw [bval, p.descApp_comp β hβ α h, p.descApp_eq_π β hβ (by simpa using hn)]
+  exact (pathValue_map _ α (𝟙 _) g).trans (by simp)
 
 /-- The boundary of the interior `N`-simplex of the prism switching at `s`. -/
 noncomputable def tauCone (s : Fin (N + 2)) : BoundaryCone V N T where
   π Δ hΔ θ := bval p θ (not_epi_of_len_lt θ hΔ) (θ ≫ sw s)
   w Δ Δ' h h' α θ := by
-    rw [bval_comp]
+    rw [bval_comp (hf' := not_epi_of_len_lt _ h')]
     exact bval_congr _ _ _ rfl (Category.assoc _ _ _).symm
 
 lemma tauCone_descApp (s : Fin (N + 2)) {Δ : SimplexCategory} (μ : Δ ⟶ ⦋N⦌) (hμ : ¬ Epi μ) :
     (tauCone p s).descApp μ hμ = bval p μ hμ (μ ≫ sw s) := by
   rw [BoundaryCone.descApp]
   dsimp only [tauCone]
-  rw [bval_comp]
+  rw [bval_comp (hf' := by rw [image.fac]; exact hμ)]
   exact bval_congr _ _ _ (image.fac μ) (by rw [image.fac_assoc])
 
 lemma tauCone_precomp {T' : C} (t : T' ⟶ T) (s : Fin (N + 2)) :
@@ -93,7 +90,7 @@ lemma descApp_pathU {Δ : SimplexCategory} (f : Δ ⟶ ⦋N⦌) (hf : ¬ Epi f) 
   simp only [BoundaryCone.descApp_ofSimplex, BoundaryCone.descApp_postcomp] at this
   exact this.symm
 
-variable (p u) in
+variable (u) in
 /-- The interior `N`-simplices of the prism, with the two ends given by `u`. -/
 noncomputable def tau' (τ : Fin (N + 2) → (T ⟶ V _⦋N⦌)) (s : Fin (N + 2)) : T ⟶ V _⦋N⦌ :=
   if s = 0 then u ≫ b.app _ else if s = Fin.last (N + 1) then u ≫ a.app _ else τ s
@@ -103,7 +100,7 @@ variable {τ : Fin (N + 2) → (T ⟶ V _⦋N⦌)}
 
 include hu hτ in
 lemma tau'_map (s : Fin (N + 2)) {Δ : SimplexCategory} (μ : Δ ⟶ ⦋N⦌) (hμ : ¬ Epi μ) :
-    tau' p u τ s ≫ V.map μ.op = bval p μ hμ (μ ≫ sw s) := by
+    tau' u τ s ≫ V.map μ.op = bval p μ hμ (μ ≫ sw s) := by
   obtain ⟨m, rfl⟩ : ∃ m, Δ = ⦋m⦌ := ⟨Δ.len, rfl⟩
   unfold tau'
   split_ifs with h₀ h₁
@@ -124,9 +121,9 @@ variable (p u τ) in
 the other ones. -/
 noncomputable def hval (f : ⦋N⦌ ⟶ ⦋N⦌) (g : ⦋N⦌ ⟶ ⦋1⦌) : T ⟶ V _⦋N⦌ := by
   classical
-  exact if hf : Epi f then tau' p u τ (switch g) else bval p f hf g
+  exact if hf : Epi f then tau' u τ (switch g) else bval p f hf g
 
-lemma hval_id (g : ⦋N⦌ ⟶ ⦋1⦌) : hval p u τ (𝟙 _) g = tau' p u τ (switch g) := by
+lemma hval_id (g : ⦋N⦌ ⟶ ⦋1⦌) : hval p u τ (𝟙 _) g = tau' u τ (switch g) := by
   rw [hval, dif_pos inferInstance]
 
 include hu hτ in
@@ -152,8 +149,9 @@ lemma isBoundaryFamily_hFaces (k : Fin (N + 1)) : V.IsBoundaryFamily (hFaces p u
     simp only [hFaces, SimplicialObject.δ]
     rw [hval_map hu hτ _ _ _ (not_epi_of_len_lt _ (by simp)),
       hval_map hu hτ _ _ _ (not_epi_of_len_lt _ (by simp))]
-    exact bval_congr _ _ _ (by rw [← Category.assoc, ← Category.assoc, δ_comp_δ hij])
-      (by rw [← Category.assoc, ← Category.assoc, δ_comp_δ hij])
+    exact bval_congr _ _ _
+      (by rw [← Category.assoc, ← Category.assoc, SimplexCategory.δ_comp_δ hij])
+      (by rw [← Category.assoc, ← Category.assoc, SimplexCategory.δ_comp_δ hij])
 
 /-- The boundary of the `k`-th prism simplex. -/
 noncomputable def prismCone (k : Fin (N + 1)) : BoundaryCone V (N + 1) T :=
@@ -173,7 +171,7 @@ theorem exists_ofSimplex_eq_precomp {T' : C} (t : T' ⟶ T)
       (hφ : ¬ Epi (φ ≫ σ k)), h k ≫ V.map φ.op = t ≫ bval p (φ ≫ σ k) hφ (φ ≫ side k) := by
     intro k Δ φ hφ
     have hφ' : ¬ Function.Surjective φ.toOrderHom := fun hs ↦
-      hφ (@epi_comp _ _ _ _ _ _ (epi_iff_surjective.2 hs) _ inferInstance)
+      hφ (@epi_comp _ _ _ _ _ _ (SimplexCategory.epi_iff_surjective.2 hs) _ inferInstance)
     simp only [Function.Surjective, not_forall, not_exists] at hφ'
     obtain ⟨J, hJ⟩ := hφ'
     obtain ⟨φ', rfl⟩ := eq_comp_δ_of_not_surjective' φ J hJ
@@ -182,22 +180,22 @@ theorem exists_ofSimplex_eq_precomp {T' : C} (t : T' ⟶ T)
     rw [Category.assoc, hFaces, hval_map hu hτ _ _ φ' (by simpa using hφ)]
     exact bval_congr _ _ _ (by simp) (by simp)
   have hpath : V.IsPathFamily h := fun j ↦ by
-    have e₁ : δ j.succ.castSucc ≫ σ j.succ = 𝟙 _ := δ_comp_σ_self
+    have e₁ : δ j.succ.castSucc ≫ σ j.succ = 𝟙 _ := SimplexCategory.δ_comp_σ_self
     have e₂ : δ j.succ.castSucc ≫ σ j.castSucc = 𝟙 _ := by
-      rw [← Fin.succ_castSucc]; exact δ_comp_σ_succ
+      rw [← Fin.succ_castSucc]; exact SimplexCategory.δ_comp_σ_succ
     have e₃ : δ j.succ.castSucc ≫ side j.succ = sw j.succ.castSucc := δ_castSucc_comp_side _
     have e₄ : δ j.succ.castSucc ≫ side j.castSucc = sw j.succ.castSucc := by
       rw [← Fin.succ_castSucc]; exact δ_succ_comp_side _
     rw [hface, hface, hFaces, hFaces, e₁, e₂, e₃, e₄]
   have h₀ : h 0 ≫ V.δ 0 = (t ≫ u) ≫ b.app _ := by
     have e₁ : δ (0 : Fin (N + 2)) ≫ σ (0 : Fin (N + 1)) = 𝟙 _ := by
-      simpa using δ_comp_σ_self (i := (0 : Fin (N + 1)))
+      simpa using SimplexCategory.δ_comp_σ_self (i := (0 : Fin (N + 1)))
     have e₂ : δ (0 : Fin (N + 2)) ≫ side (0 : Fin (N + 1)) = sw 0 := by
       simpa using δ_castSucc_comp_side (0 : Fin (N + 1))
     rw [hface, hFaces, e₁, e₂, hval_id, switch_sw, tau', if_pos rfl, Category.assoc]
   have h₁ : h (Fin.last N) ≫ V.δ (Fin.last (N + 1)) = (t ≫ u) ≫ a.app _ := by
     have e₁ : δ (Fin.last (N + 1)) ≫ σ (Fin.last N) = 𝟙 _ := by
-      rw [← Fin.succ_last]; exact δ_comp_σ_succ
+      rw [← Fin.succ_last]; exact SimplexCategory.δ_comp_σ_succ
     have e₂ : δ (Fin.last (N + 1)) ≫ side (Fin.last N) = sw (Fin.last (N + 1)) := by
       rw [← Fin.succ_last]; exact δ_succ_comp_side _
     rw [hface, hFaces, e₁, e₂, hval_id, switch_sw, tau', if_neg (Fin.last_pos.ne'),

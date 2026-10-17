@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
 public import Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 
 /-!
 # The constant sheaf on the small pro-étale site as a sheaf of continuous maps
@@ -163,6 +164,8 @@ noncomputable def continuousMapPresheafModule : Scheme.{u}ᵒᵖ ⥤ ModuleCat.{
 
 lemma isSheaf_fpqcTopology_continuousMapPresheafModule :
     Presheaf.IsSheaf fpqcTopology (continuousMapPresheafModule Λ M) :=
+  have : ReflectsLimitsOfSize.{u, u + 1} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    reflectsLimitsOfSize_shrink.{u, u + 1, u + 1, u + 1} _
   Presheaf.isSheaf_of_isSheaf_comp _ _ (CategoryTheory.forget (ModuleCat.{u + 1} Λ))
     (isSheaf_fpqcTopology_continuousMapPresheaf M)
 
