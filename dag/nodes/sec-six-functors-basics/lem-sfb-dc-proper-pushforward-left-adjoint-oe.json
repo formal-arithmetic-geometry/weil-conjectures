@@ -36,70 +36,40 @@
  ],
  "proof": [
   {
-   "text": "Put $\\Lambda=\\underline{\\cO}_E$. Both $D_{\\mathrm{cons}}(T,\\Lambda)$ of [sk-def-sfb-bounded-constructible] and $\\Dbc(T,\\cO_E)$ of [sk-def-sfb-constructible] are the full subcategory of the derived category of $\\Lambda_T$-modules consisting of bounded complexes with constructible cohomology, for $T=Z,Y$. Thus these are the same categories with the same morphisms; no change to discrete constant coefficients is made. For integral coefficients [sk-lem-integral-models] gives $\\Dctf(T,\\cO_E)=\\Dbc(T,\\cO_E)$. Write $\\mathcal C_T$ for this common category.",
+   "text": "Select the oe coefficient certificate [def-sfb-adic-coefficient-certificate]. The source and target are the standing schemes and g is proper, so [lem-sfb-adic-proper-localizing-pushforward] supplies the actual coproduct-preserving localizing restriction F_g.",
    "uses": [
-    "sk-def-sfb-bounded-constructible",
-    "sk-def-sfb-constructible",
-    "sk-lem-integral-models"
+    "def-sfb-adic-coefficient-certificate",
+    "lem-sfb-adic-proper-localizing-pushforward"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/_section.md",
-    "place": "Opening equality Dctf=Dbc; definitions of Dcons and Dbc"
-   }
+   "elementary": false
   },
   {
-   "text": "The coefficient $\\cO_E$ is admissible in the explicit list of [sk-def-localizing-closure], since $E/\\mathbf Q_\\ell$ is finite. By the setting [sk-def-sfb-dc-setting], $Z$ and $Y$ are separated finite-type schemes over the standing field $k$, of characteristic different from $\\ell$, and $p$ is a morphism of these schemes. Apply [sk-thm-existence] (2)--(4) with $f=p$ and integral coefficients. On $\\mathcal T_T=\\Loc(\\mathcal C_T)$ it supplies a functor $F=Rp_!$ and an exact right adjoint $G=p^!$, with $F(\\mathcal C_Z)\\subseteq\\mathcal C_Y$ and $G(\\mathcal C_Y)\\subseteq\\mathcal C_Z$. In particular both restrictions are functors; preservation by the right adjoint is part (4), not a consequence of Brown representability alone.",
+   "text": "Apply [lem-sfb-adic-localizing-brown-representability] at each target object. A representing object of every Hom functor assembles by its universal property into a right adjoint: maps are the transposes of postcomposition. In Lean this is Functor.isLeftAdjoint_of_rightAdjointObjIsDefined_eq_top. This constructs an adjunction on the localizing categories, rather than on the entire ambient derived categories.",
    "uses": [
-    "sk-def-localizing-closure",
-    "sk-def-sfb-dc-setting",
-    "sk-thm-existence"
+    "lem-sfb-adic-localizing-brown-representability"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/_section.md",
-    "place": "Parts (2)--(4), integral coefficient case"
-   }
+   "elementary": true
   },
   {
-   "text": "For proper $p$, clause (1) of [det-cor-existence-ii-restriction] gives a natural isomorphism $F\\cong Rp_*|_{\\mathcal T_Z}$. This is the proper compactification comparison: $Z\\xrightarrow{\\mathrm{id}}Z\\xrightarrow{p}Y$ is an admissible compactification and its extension-by-zero factor is the identity. The cited clause supplies the comparison with the chosen compactification, so equality is not inferred merely by substituting a different choice into a definition. On $\\mathcal C_Z$ the resulting restricted ambient pushforward is exactly the functor of [def-sfb-dc-lower-star].",
+   "text": "By [lem-sfb-adic-localizing-exceptional-constructible], the selected right adjoint carries bounded constructible target objects into bounded constructible source objects. Lift its composite with the bounded target inclusion to the bounded source category. The left and right functor squares with the full inclusions commute by construction. Restrict the adjunction along those fully faithful inclusions (Adjunction.restrictFullyFaithful). The resulting left functor is the existing boundedConstructibleLowerStar, with unchanged statement; its Hom equivalences are the Hom equivalences of the localizing adjunction on the same ambient objects.",
    "uses": [
-    "det-cor-existence-ii-restriction",
-    "def-sfb-dc-lower-star"
+    "lem-sfb-adic-localizing-exceptional-constructible",
+    "def-sfb-bounded-constructible-localizing-closure"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.md",
-    "place": "Clause (1): proper lower shriek is restricted ambient direct image"
-   }
-  },
-  {
-   "text": "Define $Rp^!:=G|_{\\mathcal C_Y}$. For $K\\in\\mathcal C_Z$ and $L\\in\\mathcal C_Y$, the full inclusions from [sk-def-localizing-closure] and Step 1, the natural isomorphism in Step 3, and the adjunction in [sk-thm-existence] (3) give\n$$\n\\operatorname{Hom}_{\\mathcal C_Y}(Rp_*K,L)\n=\\operatorname{Hom}_{\\mathcal T_Y}(Rp_*K,L)\n\\cong\\operatorname{Hom}_{\\mathcal T_Y}(FK,L)\n\\cong\\operatorname{Hom}_{\\mathcal T_Z}(K,GL)\n=\\operatorname{Hom}_{\\mathcal C_Z}(K,Rp^!L).\n$$\nEvery bijection is natural in $K,L$: the middle ones come from a natural functor isomorphism and an adjunction, and the equalities are those of full subcategories. These bijections are precisely an adjunction for the stated $Rp_*$ and $Rp^!$ on $D_{\\mathrm{cons}}$.",
-   "uses": [
-    "sk-def-localizing-closure",
-    "sk-thm-existence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.md",
-    "place": "Proof, part (2): natural Hom bijection along full inclusions"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-bounded-constructible",
-  "sk-def-sfb-constructible",
-  "sk-lem-integral-models",
-  "sk-def-localizing-closure",
-  "sk-def-sfb-dc-setting",
-  "sk-thm-existence",
-  "det-cor-existence-ii-restriction",
-  "def-sfb-dc-lower-star"
+  "def-sfb-adic-coefficient-certificate",
+  "lem-sfb-adic-proper-localizing-pushforward",
+  "lem-sfb-adic-localizing-brown-representability",
+  "lem-sfb-adic-localizing-exceptional-constructible",
+  "def-sfb-bounded-constructible-localizing-closure"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii.proof.md",
-  "place": "Opening proper identity-compactification argument, parts (3)--(4) of sk-thm-existence, and detailed restriction in sk-cor-existence-ii-restriction"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
+  "place": "parts (1)-(2), implemented by source/target lifts and fully faithful adjunction restriction"
  },
  "mathlib_searches": [
   {
@@ -226,5 +196,25 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek",
+  "file": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/UpperShriek.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj",
+  "statement": "instance isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj\n    (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]\n    [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] :\n    (boundedConstructibleLowerStar (Profinite.padicIntegersRingObj ℓ E) ℓ g).IsLeftAdjoint",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-17"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261017T021601-L-694163",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

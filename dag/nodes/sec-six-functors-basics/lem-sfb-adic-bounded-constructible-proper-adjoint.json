@@ -1,0 +1,108 @@
+{
+ "id": "lem-sfb-adic-bounded-constructible-proper-adjoint",
+ "kind": "lemma",
+ "title": "Proper bounded constructible pushforward for certified adic coefficients",
+ "statement": "For a certified ell-adic coefficient ring Λ and a proper morphism g, the bounded constructible derived pushforward is a left adjoint.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-upper-shriek/_section.md",
+  "place": "the three proper-pushforward coefficient cases"
+ },
+ "stmt_deps": [
+  "def-sfb-adic-coefficient-certificate",
+  "sk-def-sfb-dc-upper-shriek"
+ ],
+ "proof": [
+  {
+   "text": "Eliminate the coefficient certificate. Each constructor is exactly one of the three upstream proper-pushforward instances for continuous, integral, or algebraic-closure coefficients. Apply the corresponding instance in each branch.",
+   "uses": [
+    "lem-sfb-dc-proper-pushforward-left-adjoint-e",
+    "lem-sfb-dc-proper-pushforward-left-adjoint-oe",
+    "lem-sfb-dc-proper-pushforward-left-adjoint-qlbar"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dc-proper-pushforward-left-adjoint-e",
+  "lem-sfb-dc-proper-pushforward-left-adjoint-oe",
+  "lem-sfb-dc-proper-pushforward-left-adjoint-qlbar"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-upper-shriek/_section.md",
+  "place": "the three proper-pushforward coefficient cases"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsEllAdicCoefficient ellAdic_isLeftAdjoint_boundedConstructibleLowerStar",
+   "results": "No prior coefficient-generic theorem found.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper bounded constructible pushforward left adjoint coefficient certificate",
+   "results": "No exact match.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsLeftAdjoint",
+   "results": "Generic adjunction API only; coefficient cases are upstream declarations.",
+   "date": "2026-10-17",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek",
+  "date": "2026-10-17",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-sfb-dc-upper-shriek",
+   "place": "the three named coefficient cases in the right-adjoint hypothesis",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-upper-shriek",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EllAdicBoundedConstructibleProperAdjoint",
+  "file": "lean/Sheaf/AlgebraicGeometry/EllAdicBoundedConstructibleProperAdjoint.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.ellAdic_isLeftAdjoint_boundedConstructibleLowerStar",
+  "statement": "theorem ellAdic_isLeftAdjoint_boundedConstructibleLowerStar [IsProper g.left]\n    (hΛ : IsEllAdicCoefficient ℓ Λ inferInstance) :\n    (boundedConstructibleLowerStar Λ ℓ g).IsLeftAdjoint",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-17"
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261017T021601-L-694163",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261017T021601-L-694163",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

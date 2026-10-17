@@ -169,7 +169,9 @@ instance isRightAdjoint_boundedConstructibleUpperShriek :
 
 end Chosen
 
-/-! ### The proper pushforward for the `ℓ`-adic coefficient rings -/
+/-! Upstream declarations retained; generic interface is separate. -/
+
+/-! ### The proper pushforward for the `ℓ`-adic coefficient rings. -/
 
 section EllAdic
 

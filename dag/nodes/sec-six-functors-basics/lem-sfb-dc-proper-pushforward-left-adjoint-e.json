@@ -37,46 +37,40 @@
  ],
  "proof": [
   {
-   "text": "The finite extension $E/\\mathbf Q_\\ell$ is an admissible rational coefficient in the list of [sk-def-localizing-closure]. The schemes $Z,Y$ and the proper $k$-morphism $p$ satisfy the standing hypotheses of [sk-def-sfb-dc-setting]: separated and of finite type over $k$, with $\\ell\\ne\\operatorname{char}k$. Apply [det-cor-existence-ii-restriction] (2) to this coefficient and morphism, renaming its $X$ as $Z$. It supplies a functor $p^!\\colon\\Dctf(Y,E)\\to\\Dctf(Z,E)$ and a natural adjunction bijection $\\operatorname{Hom}(Rp_*K,L)\\cong\\operatorname{Hom}(K,p^!L)$ for $K\\in\\Dctf(Z,E)$ and $L\\in\\Dctf(Y,E)$.",
+   "text": "Select the e coefficient certificate [def-sfb-adic-coefficient-certificate]. The source and target are the standing schemes and g is proper, so [lem-sfb-adic-proper-localizing-pushforward] supplies the actual coproduct-preserving localizing restriction F_g.",
    "uses": [
-    "sk-def-localizing-closure",
-    "sk-def-sfb-dc-setting",
-    "det-cor-existence-ii-restriction"
+    "def-sfb-adic-coefficient-certificate",
+    "lem-sfb-adic-proper-localizing-pushforward"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
-    "place": "clause (2)"
-   }
+   "elementary": false
   },
   {
-   "text": "The coefficient $E$ in step 1 denotes the condensed ring $\\underline E$, defined by $S\\mapsto C(S,E)$ with the $\\ell$-adic topology in [sk-def-sfb-condensed-ring]. This is the condensed-module convention of [sk-def-sfb-constructible], whose $\\Dbc(-,E)$ is the full subcategory with bounded constructible cohomology over the pulled-back ring. For this rational coefficient [sk-def-localizing-closure] states $\\Dctf(-,E)=\\Dbc(-,E)$, while [sk-def-sfb-dc-setting] defines $D_{\\mathrm{cons}}(-,\\underline E)$ as that same bounded constructible category of modules over the pulled-back condensed ring. Finally [def-sfb-dc-lower-star] defines the target's $Rp_*$ as the restriction of the ambient derived pushforward. Consequently the categories and left functor in step 1 are precisely those in the statement. Define $Rp^!$ to be its $p^!$. The displayed Hom bijection of step 1, with the same objects and morphisms, is natural in both variables and proves $Rp_*\\dashv Rp^!$. No comparison with a discrete constant $E$-sheaf or with a rationalized étale category is being used.",
+   "text": "Apply [lem-sfb-adic-localizing-brown-representability] at each target object. A representing object of every Hom functor assembles by its universal property into a right adjoint: maps are the transposes of postcomposition. In Lean this is Functor.isLeftAdjoint_of_rightAdjointObjIsDefined_eq_top. This constructs an adjunction on the localizing categories, rather than on the entire ambient derived categories.",
    "uses": [
-    "sk-def-sfb-condensed-ring",
-    "sk-def-sfb-constructible",
-    "sk-def-localizing-closure",
-    "sk-def-sfb-dc-setting",
-    "def-sfb-dc-lower-star"
+    "lem-sfb-adic-localizing-brown-representability"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
-    "place": "clauses (1)–(2), specialization to $E$"
-   }
+   "elementary": true
+  },
+  {
+   "text": "By [lem-sfb-adic-localizing-exceptional-constructible], the selected right adjoint carries bounded constructible target objects into bounded constructible source objects. Lift its composite with the bounded target inclusion to the bounded source category. The left and right functor squares with the full inclusions commute by construction. Restrict the adjunction along those fully faithful inclusions (Adjunction.restrictFullyFaithful). The resulting left functor is the existing boundedConstructibleLowerStar, with unchanged statement; its Hom equivalences are the Hom equivalences of the localizing adjunction on the same ambient objects.",
+   "uses": [
+    "lem-sfb-adic-localizing-exceptional-constructible",
+    "def-sfb-bounded-constructible-localizing-closure"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "sk-def-localizing-closure",
-  "sk-def-sfb-dc-setting",
-  "det-cor-existence-ii-restriction",
-  "sk-def-sfb-condensed-ring",
-  "sk-def-sfb-constructible",
-  "def-sfb-dc-lower-star"
+  "def-sfb-adic-coefficient-certificate",
+  "lem-sfb-adic-proper-localizing-pushforward",
+  "lem-sfb-adic-localizing-brown-representability",
+  "lem-sfb-adic-localizing-exceptional-constructible",
+  "def-sfb-bounded-constructible-localizing-closure"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
-  "place": "clauses (1)–(2), specialized to $E$"
+  "place": "parts (1)-(2), implemented by source/target lifts and fully faithful adjunction restriction"
  },
  "mathlib_searches": [
   {
@@ -215,5 +209,25 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek",
+  "file": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/UpperShriek.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj",
+  "statement": "instance isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj\n    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] :\n    (boundedConstructibleLowerStar (Profinite.continuousMapRingObj E) ℓ g).IsLeftAdjoint",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-17"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261017T021601-L-694163",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

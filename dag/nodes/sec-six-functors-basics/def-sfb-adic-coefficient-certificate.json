@@ -1,0 +1,106 @@
+{
+ "id": "def-sfb-adic-coefficient-certificate",
+ "kind": "definition",
+ "title": "Certificate for the three adic condensed coefficient families",
+ "statement": "Fix a prime $\\ell$. A sheaf $\\Lambda$ of abelian groups on profinite sets, together with its specified commutative monoid-object structure, has the certificate $\\mathrm{IsEllAdicCoefficient}(\\ell,\\Lambda)$ if it is exactly one of the following ring objects [sk-def-sfb-condensed-ring; sk-def-sfb-qlbar-condensed]: (i) the continuous-function condensed ring $C(-,E)$ for a finite normed extension $E/\\mathbf Q_\\ell$; (ii) $C(-,\\mathcal O_E)$ for a finite extension $E\\subseteq\\overline{\\mathbf Q}_\\ell$ with the induced valuation; (iii) $C(-,\\overline{\\mathbf Q}_\\ell)$. The certificate is the inductive proposition with these three constructors and no others. Both the underlying sheaf and the monoid-object structure are indices, so a different multiplication on the same sheaf is not certified.",
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-upper-shriek/_section.md",
+  "place": "the three proper-pushforward coefficient examples"
+ },
+ "proof": [
+  {
+   "text": "Use one constructor for each displayed coefficient family, indexed by its actual continuous-function ring object and its canonical multiplication. There are no further constructors. This records the three cases without choosing any data from an unproved existence assertion.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-upper-shriek/_section.md",
+  "place": "the three proper-pushforward coefficient examples"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructibleLocalizingClosure|localizingLowerStar|boundedConstructible.*[Rr]ightAdjoint",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "No exact match. Generic adjunction, module sheaf adjunction and localization declarations do not give the stated constructible localizing/coefficient result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The localizing closure of bounded constructible complexes is compactly generated and proper pushforward preserves coproducts",
+   "results": "8 hits: CategoryTheory.Localization.preservesFiniteProducts, HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso, CategoryTheory.Localization.instPreservesFiniteProductsLocalization'Q', CategoryTheory.Localization.hasProductsOfShape, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, ModuleCat.instPreservesFiniteColimitsLocalizationLocalizedModule_functor, CategoryTheory.Localization.instPreservesFiniteProductsLocalizationQ, Topology.IsLocallyConstructible.isConstructible",
+   "date": "2026-10-16",
+   "verdict": "No exact match. Generic adjunction, module sheaf adjunction and localization declarations do not give the stated constructible localizing/coefficient result."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftAdjoint",
+   "results": "12 hits: CategoryTheory.Functor.IsLeftAdjoint, CategoryTheory.Equivalence.isLeftAdjoint_functor, CategoryTheory.Equivalence.isLeftAdjoint_inverse, CategoryTheory.Functor.rightAdjoint, CategoryTheory.Functor.isLeftAdjoint_of_isEquivalence, CategoryTheory.Adjunction.instIsLeftAdjointLeftAdjoint, CategoryTheory.Adjunction.instIsRightAdjointRightAdjoint, CategoryTheory.Adjunction.isLeftAdjoint",
+   "date": "2026-10-16",
+   "verdict": "No exact match. Generic adjunction, module sheaf adjunction and localization declarations do not give the stated constructible localizing/coefficient result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The localizing closure of bounded constructible complexes of condensed modules, proper pushforward preserves this closure and has a right adjoint preserving bounded constructible complexes",
+   "results": "8 hits: CondensedMod.LocallyConstant.adjunction, LightCondMod.LocallyConstant.adjunction, LightCondensed.instMonoidalClosedLightCondMod, Condensed.profiniteSolid, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondSet.LocallyConstant.adjunction",
+   "date": "2026-10-16",
+   "verdict": "No exact match. Generic adjunction, module sheaf adjunction and localization declarations do not give the stated constructible localizing/coefficient result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek",
+  "date": "2026-10-17",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-sfb-dc-upper-shriek",
+   "place": "The three named coefficient cases in the right-adjoint hypothesis.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-upper-shriek",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EllAdicCondensedCoefficient",
+  "file": "lean/Sheaf/AlgebraicGeometry/EllAdicCondensedCoefficient.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.IsEllAdicCoefficient",
+  "statement": "inductive IsEllAdicCoefficient (ℓ : ℕ) [Fact ℓ.Prime] :\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) → MonObj Λ → Prop",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-17"
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261017T021601-L-694163",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261017T021601-L-694163",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
