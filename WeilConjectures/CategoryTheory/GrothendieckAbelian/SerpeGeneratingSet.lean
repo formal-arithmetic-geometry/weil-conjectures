@@ -320,6 +320,8 @@ lemma generatingMonoQuasiIsos_rlp [Fact κ.IsRegular] (hκ : Cardinal.aleph0 < �
     exact MorphismProperty.transfiniteCompositionsOfShape_le_llp_rlp _ _ _ h.mem _ (by simpa)
   · exact MorphismProperty.antitone_rlp (generatingMonoQuasiIsos_le G κ)
 
+attribute [local instance] fact_isRegular_serpeCardinal
+
 variable (C) in
 /-- A morphism of cochain complexes has the right lifting property with respect to the Serpé
 generating set if and only if it has the right lifting property with respect to all

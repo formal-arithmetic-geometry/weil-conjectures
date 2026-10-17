@@ -12,6 +12,7 @@ public import Mathlib.CategoryTheory.Sites.LocallySurjective
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
+public import WeilConjectures.AlgebraicGeometry.Sites.UnitComparison
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-!
@@ -30,10 +31,6 @@ since base change is representably flat.
 For `f : T' ⟶ T`, the restriction of sections of `t^* G` to sections of `(f ≫ t)^* G` along a
 morphism `m : V' ⟶ V` over `f` is `AlgebraicGeometry.Etale.restrictAlong`; it sends `φ^* g` to
 `(m ≫ φ)^* g` (`AlgebraicGeometry.Etale.restrictAlong_pullSection`).
-
-For `h₁ : T ⟶ S` and `h₂ : S ⟶ R`, the unit of `h₁^* ⊣ h₁_*` induces the comparison map
-`AlgebraicGeometry.Etale.unitComparison : h₂_* h₂^* G ⟶ (h₁ ≫ h₂)_* (h₁ ≫ h₂)^* G`, which on
-sections is a restriction (`AlgebraicGeometry.Etale.unitComparison_hom_app_eq`).
 -/
 
 @[expose] public section
@@ -45,40 +42,6 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry
 
 namespace Etale
-
-section Comparison
-
-variable {R S T : Scheme.{u}}
-
-/-- The comparison map `h₂_* h₂^* G ⟶ h₁₂_* h₁₂^* G` for `h₁₂ = h₁ ≫ h₂`, induced by the unit of
-`h₁^* ⊣ h₁_*` at `h₂^* G` and the composition isomorphisms of pushforwards and pullbacks. -/
-noncomputable def unitComparison (h₁ : T ⟶ S) (h₂ : S ⟶ R) (h₁₂ : T ⟶ R)
-    (hh₁₂ : h₁₂ = h₁ ≫ h₂) (G : Sheaf R.smallEtaleTopology AddCommGrpCat.{u + 1}) :
-    (h₂)_*[AddCommGrpCat.{u + 1}].obj ((h₂)^*[AddCommGrpCat.{u + 1}].obj G) ⟶
-      (h₁₂)_*[AddCommGrpCat.{u + 1}].obj ((h₁₂)^*[AddCommGrpCat.{u + 1}].obj G) :=
-  (h₂)_*[AddCommGrpCat.{u + 1}].map
-      ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} h₁).unit.app
-        ((h₂)^*[AddCommGrpCat.{u + 1}].obj G)) ≫
-    (lowerStarComp AddCommGrpCat.{u + 1} h₁ h₂ h₁₂ hh₁₂).hom.app _ ≫
-      (h₁₂)_*[AddCommGrpCat.{u + 1}].map
-        ((upperStarComp AddCommGrpCat.{u + 1} h₁ h₂ h₁₂ hh₁₂).inv.app G)
-
-/-- The comparison map is compatible with the units: the unit of `h₂` followed by the comparison
-map is the unit of `h₁ ≫ h₂`. -/
-@[reassoc]
-lemma unit_app_comp_unitComparison (h₁ : T ⟶ S) (h₂ : S ⟶ R) (h₁₂ : T ⟶ R)
-    (hh₁₂ : h₁₂ = h₁ ≫ h₂) (G : Sheaf R.smallEtaleTopology AddCommGrpCat.{u + 1}) :
-    (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} h₂).unit.app G ≫
-        unitComparison h₁ h₂ h₁₂ hh₁₂ G =
-      (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} h₁₂).unit.app G := by
-  have h := upperStarComp_hom_app_unit_app AddCommGrpCat.{u + 1} h₁ h₂ G h₁₂ hh₁₂
-  rw [Adjunction.comp_unit_app] at h
-  rw [← cancel_mono ((h₁₂)_*[AddCommGrpCat.{u + 1}].map
-    ((upperStarComp AddCommGrpCat.{u + 1} h₁ h₂ h₁₂ hh₁₂).hom.app G)), h, unitComparison]
-  simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app, Functor.comp_obj,
-    CategoryTheory.Functor.map_id, Category.comp_id]
-
-end Comparison
 
 variable {R T : Scheme.{u}} (t : T ⟶ R)
 
@@ -344,7 +307,7 @@ lemma unitComparison_hom_app_eq (W : R.Etale) :
     · simp
     · simp [pullback.condition]
   change _ ≫ ((lowerStarComp AddCommGrpCat.{u + 1} f t t' ht').hom.app _).hom.app (op W) ≫ _ = _
-  rw [lowerStarComp_hom_app_hom_app AddCommGrpCat.{u + 1}, hp]
+  rw [lowerStarComp_hom_app_hom_app, hp]
   exact congrArg (_ ≫ ·)
     (((upperStarComp AddCommGrpCat.{u + 1} f t t' ht').inv.app G).hom.naturality _)
 
@@ -489,24 +452,11 @@ lemma overlapSnd_left {V V₁ V₂ : X.Etale} (a₁ : V₁ ⟶ V) (a₂ : V₂ �
     (overlapSnd a₁ a₂).left = pullback.snd a₁.left a₂.left :=
   rfl
 
-/-- A sheaf on the small étale site satisfies the sheaf condition for every jointly surjective
-family. -/
-lemma isSheafFor_ofArrows {V : X.Etale} {ι : Type*} {V' : ι → X.Etale} (a : ∀ i, V' i ⟶ V)
-    (ha : ∀ x : V.left, ∃ i, x ∈ Set.range (a i).left) :
-    Presieve.IsSheafFor (F.obj ⋙ forget AddCommGrpCat.{u + 1}) (Presieve.ofArrows V' a) := by
-  have hS : Sieve.ofArrows V' a ∈ X.smallEtaleTopology V := by
-    rw [Scheme.ofArrows_mem_smallEtaleTopology_iff]
-    ext x
-    simpa using ha x
-  have hsh := (isSheaf_iff_isSheaf_of_type _ _).1
-    (Presheaf.isSheaf_comp_of_isSheaf _ F.obj (forget AddCommGrpCat.{u + 1}) F.property) _ hS
-  exact (Presieve.isSheafFor_iff_generate _).2 hsh
-
 /-- A section of a sheaf vanishing on a jointly surjective family vanishes. -/
 lemma eq_zero_of_forall_map_eq_zero {V : X.Etale} {ι : Type*} {V' : ι → X.Etale}
     (a : ∀ i, V' i ⟶ V) (ha : ∀ x : V.left, ∃ i, x ∈ Set.range (a i).left)
     (s : F.obj.obj (op V)) (hs : ∀ i, F.obj.map (a i).op s = 0) : s = 0 :=
-  (isSheafFor_ofArrows F a ha).isSeparatedFor.ext fun _ _ ⟨i⟩ ↦ by
+  (Scheme.isSheafFor_ofArrows F a (Set.iUnion_eq_univ_iff.2 ha)).isSeparatedFor.ext fun _ _ ⟨i⟩ ↦ by
     change F.obj.map (a i).op s = F.obj.map (a i).op 0
     rw [hs i, map_zero]
 
@@ -517,7 +467,8 @@ lemma exists_map_eq_of_compatible {V : X.Etale} {ι : Type*} {V' : ι → X.Etal
     (hσ : ∀ i j, F.obj.map (overlapFst (a i) (a j)).op (σ i) =
       F.obj.map (overlapSnd (a i) (a j)).op (σ j)) :
     ∃ s : F.obj.obj (op V), ∀ i, F.obj.map (a i).op s = σ i := by
-  obtain ⟨s, hs, -⟩ := (Presieve.isSheafFor_arrows_iff _ _).1 (isSheafFor_ofArrows F a ha) σ
+  obtain ⟨s, hs, -⟩ := (Presieve.isSheafFor_arrows_iff _ _).1
+    (Scheme.isSheafFor_ofArrows F a (Set.iUnion_eq_univ_iff.2 ha)) σ
     (fun i j Z gi gj h ↦ by
       have hl : gi.left ≫ (a i).left = gj.left ≫ (a j).left := by
         simpa using congrArg (fun c ↦ c.left) h

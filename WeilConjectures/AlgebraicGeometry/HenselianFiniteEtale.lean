@@ -8,8 +8,9 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Henselian
-public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.RepresentableLocallyConstant
+public import WeilConjectures.Mathlib.RingTheory.LocalRing.Basic
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantEtale
 
 /-!
 # Finite étale schemes over a proper scheme over a henselian pair
@@ -43,6 +44,8 @@ Spec A/I --> Spec A
 
 - `AlgebraicGeometry.Scheme.bijective_appTop_idempotent_of_henselianRing`: idempotent lifting
   for the structure sheaf of a proper scheme over a henselian pair.
+- `AlgebraicGeometry.Scheme.injective_appTop_idempotent_of_le_jacobson`: the uniqueness half of
+  the idempotent lifting, valid whenever `I` lies in the Jacobson radical.
 - `AlgebraicGeometry.Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing`:
   finite étale lifting over a proper scheme over a henselian pair.
 - `AlgebraicGeometry.Scheme.isEquivalence_pullback_finiteEtale_of_henselianLocalRing`:
@@ -74,6 +77,106 @@ namespace AlgebraicGeometry
 instance isStableUnderBaseChange_isFinite_inf_etale :
     (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).IsStableUnderBaseChange :=
   MorphismProperty.IsStableUnderBaseChange.inf
+
+/-- The basic open `D(e)` of an idempotent global section `e` is closed: its complement is
+the basic open `D(1 - e)` of the complementary idempotent. -/
+lemma Scheme.isClosed_basicOpen_of_isIdempotentElem {X : Scheme.{u}} {e : Γ(X, ⊤)}
+    (he : IsIdempotentElem e) : IsClosed (X.basicOpen e : Set X) := by
+  have hcompl : (X.basicOpen e : Set X)ᶜ = X.basicOpen (1 - e) := by
+    ext x
+    have hx := IsLocalRing.eq_zero_or_eq_one_of_isIdempotentElem
+      (he.map (X.presheaf.germ ⊤ x trivial).hom)
+    simp only [Set.mem_compl_iff, SetLike.mem_coe, Scheme.mem_basicOpen_top, map_sub, map_one]
+    rcases hx with h | h <;> simp [h]
+  rw [← isOpen_compl_iff, hcompl]
+  exact (X.basicOpen (1 - e)).isOpen
+
+/-- An idempotent global section `e` whose basic open `D(e)` is empty is zero: each germ of `e`
+is an idempotent of a local ring, hence `0` or `1`, and it is not `1` since `D(e) = ∅`. -/
+lemma Scheme.eq_zero_of_isIdempotentElem_of_basicOpen_eq_bot {X : Scheme.{u}} {e : Γ(X, ⊤)}
+    (he : IsIdempotentElem e) (h : X.basicOpen e = ⊥) : e = 0 := by
+  refine TopCat.Presheaf.section_ext X.sheaf ⊤ e 0 fun x _ ↦ ?_
+  rcases IsLocalRing.eq_zero_or_eq_one_of_isIdempotentElem
+      (he.map (X.presheaf.germ ⊤ x trivial).hom) with h' | h'
+  · rw [map_zero]
+    exact h'
+  · have hx : x ∈ X.basicOpen e := by
+      rw [Scheme.mem_basicOpen_top]
+      change IsUnit ((X.presheaf.germ ⊤ x trivial).hom e)
+      rw [h']
+      exact isUnit_one
+    rw [h] at hx
+    exact absurd hx (by simp)
+
+/-- Every nonempty closed subset `C` of a scheme proper over `Spec A` meets the
+closed fibre over `V(I)` when `I` lies in the Jacobson radical: the image of `C` is closed, so
+it contains a closed point of `Spec A`, i.e. a maximal ideal, which contains `I`. This is the
+nonemptiness half of `AlgebraicGeometry.Scheme.Hom.isConnected_inter_preimage_zeroLocus`. -/
+theorem Scheme.Hom.nonempty_inter_preimage_zeroLocus {A : Type u} [CommRing A]
+    (I : Ideal A) (hI : I ≤ Ideal.jacobson ⊥) {Y : Scheme.{u}} (p : Y ⟶ Spec (.of A))
+    [IsProper p] {C : Set Y} (hC : IsClosed C) (hne : C.Nonempty) :
+    (C ∩ p ⁻¹' PrimeSpectrum.zeroLocus (I : Set A)).Nonempty := by
+  obtain ⟨x, ⟨y, hy, rfl⟩, hx⟩ :=
+    (p.isClosedMap C hC).exists_closed_singleton (hne.image p)
+  have hmax : (p y : PrimeSpectrum A).asIdeal.IsMaximal :=
+    (PrimeSpectrum.isClosed_singleton_iff_isMaximal _).1 hx
+  refine ⟨y, hy, ?_⟩
+  change (I : Set A) ⊆ (p y : PrimeSpectrum A).asIdeal
+  exact fun a ha ↦ Ideal.mem_sInf.mp (hI ha) ⟨bot_le, hmax⟩
+
+/-- **Uniqueness of idempotent lifts to a proper scheme.** Let `I ⊆ A` be an ideal contained in
+the Jacobson radical (e.g. `(A, I)` a henselian pair), `f : Y ⟶ Spec A` proper and
+`i : Y₀ ⟶ Y` the closed fibre over `Spec A/I`. Then restriction along `i` is injective on
+idempotent global sections. If `e₁, e₂` are idempotents with the same restriction, then the
+idempotent `d = e₁ + e₂ - 2 e₁ e₂` restricts to `0`, so the clopen `D(d)` misses `Y₀`; since
+every nonempty closed subset of `Y` meets `Y₀`, `D(d) = ∅`, hence `d = 0` and `e₁ = e₂`.
+This is the injectivity half of
+`AlgebraicGeometry.Scheme.bijective_appTop_idempotent_of_henselianRing`. -/
+theorem Scheme.injective_appTop_idempotent_of_le_jacobson {A : Type u} [CommRing A]
+    (I : Ideal A) (hI : I ≤ Ideal.jacobson ⊥) {Y Y₀ : Scheme.{u}} (f : Y ⟶ Spec (.of A))
+    [IsProper f] (i : Y₀ ⟶ Y) (f₀ : Y₀ ⟶ Spec (.of (A ⧸ I)))
+    (h : IsPullback i f₀ f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))) :
+    Function.Injective (fun e : {e : Γ(Y, ⊤) // IsIdempotentElem e} ↦
+      (⟨i.appTop.hom e.1, e.2.map i.appTop.hom⟩ : {e : Γ(Y₀, ⊤) // IsIdempotentElem e})) := by
+  rintro ⟨e₁, h₁⟩ ⟨e₂, h₂⟩ heq
+  have heq' : i.appTop.hom e₁ = i.appTop.hom e₂ := congrArg Subtype.val heq
+  have h₁' : e₁ * e₁ = e₁ := h₁
+  have h₂' : e₂ * e₂ = e₂ := h₂
+  set d : Γ(Y, ⊤) := e₁ + e₂ - 2 * e₁ * e₂ with hd_def
+  have hd : IsIdempotentElem d := by
+    change d * d = d
+    rw [hd_def]
+    linear_combination (1 - 4 * e₂ + 4 * e₂ ^ 2) * h₁' + h₂'
+  have hid : i.appTop.hom d = 0 := by
+    have h₂'' : i.appTop.hom e₂ * i.appTop.hom e₂ = i.appTop.hom e₂ := h₂.map i.appTop.hom
+    rw [hd_def, map_sub, map_add, map_mul, map_mul, map_ofNat, heq']
+    linear_combination (-2) * h₂''
+  -- The closed fibre is the preimage of `V(I)`.
+  have hrange : Set.range i = f ⁻¹' PrimeSpectrum.zeroLocus (I : Set A) := by
+    have hq := range_comap_of_surjective (A ⧸ I) (Ideal.Quotient.mk I)
+      Ideal.Quotient.mk_surjective
+    rw [Ideal.mk_ker] at hq
+    rw [← h.isoPullback_hom_fst, Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp,
+      Set.range_eq_univ.2 h.isoPullback.hom.surjective, Set.image_univ,
+      Scheme.Pullback.range_fst]
+    exact congrArg (f ⁻¹' ·) hq
+  have hbot : Y.basicOpen d = ⊥ := by
+    by_contra hne
+    obtain ⟨y, hy, hy₀⟩ := f.nonempty_inter_preimage_zeroLocus I hI
+      (isClosed_basicOpen_of_isIdempotentElem hd)
+      (not_not.mp (mt (TopologicalSpace.Opens.not_nonempty_iff_eq_bot _).mp hne))
+    rw [← hrange] at hy₀
+    obtain ⟨y₀, rfl⟩ := hy₀
+    have hmem : y₀ ∈ i ⁻¹ᵁ Y.basicOpen d := hy
+    rw [Scheme.preimage_basicOpen_top] at hmem
+    change y₀ ∈ Y₀.basicOpen (i.appTop.hom d) at hmem
+    rw [hid, Scheme.basicOpen_zero] at hmem
+    exact absurd hmem (by simp)
+  have hd0 : d = 0 := eq_zero_of_isIdempotentElem_of_basicOpen_eq_bot hd hbot
+  rw [hd_def] at hd0
+  refine Subtype.ext ?_
+  change e₁ = e₂
+  linear_combination (e₁ - e₂) * hd0 - (1 - 2 * e₂) * h₁' + (1 - 2 * e₁) * h₂'
 
 /-- A sheaf of sets `E` on the small étale site of `T` is *finite locally constant* if there
 is an étale cover of `T` (`AlgebraicGeometry.Scheme.etalePrecoverage`) such that the
@@ -108,22 +211,8 @@ theorem Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso (T : Scheme.{u}) :
         IsFiniteLocallyConstantSheafOfTypes ⟨_, h⟩) ∧
     ∀ E : Sheaf T.smallEtaleTopology (Type (u + 1)), IsFiniteLocallyConstantSheafOfTypes E →
       ∃ (P : Scheme.{u}) (π : P ⟶ T) (_ : IsFinite π) (_ : Etale π),
-        Nonempty (E.obj ≅ uliftYoneda.{u + 1}.obj (Scheme.Etale.mk π)) := by
-  refine ⟨fun P π _ _ ↦ ?_, fun E hE ↦ ?_⟩
-  · let X : T.Etale := Scheme.Etale.mk π
-    have : IsFinite X.hom := ‹IsFinite π›
-    refine ⟨(T.smallEtaleTopology.uliftYoneda.{u + 1}.obj X).property, ?_, ?_⟩
-    · choose U g hg S hS fst hy hpb using
-        fun y ↦ FiniteEtale.exists_etale_isPullback_sigma ⟨X, this⟩ y
-      let 𝒰 : Scheme.Cover.{u} Scheme.etalePrecoverage T :=
-        Scheme.Cover.mkOfCovers T U g (fun y ↦ ⟨y, hy y⟩) hg
-      exact ⟨𝒰, fun y ↦ Etale.isConstant_over_uliftYoneda_of_isPullback (hpb y)⟩
-    · exact ⟨fun Ω _ _ s ↦ (ConcreteCategory.isFinitelyGenerated_iff_finite _).2
-        (Etale.finite_sheafFiber_uliftYoneda X s)⟩
-  · obtain ⟨𝒰, h𝒰⟩ := hE.1
-    obtain ⟨X, hX, ⟨r⟩⟩ := Etale.exists_representableBy_of_isConstant E 𝒰 h𝒰 hE.2
-    exact ⟨X.left, X.hom, hX, X.prop,
-      ⟨((Functor.RepresentableBy.equivUliftYonedaIso _ _) r).symm⟩⟩
+        Nonempty (E.obj ≅ uliftYoneda.{u + 1}.obj (Scheme.Etale.mk π)) :=
+  isFiniteLocallyConstant_yoneda_and_exists_iso' T
 
 section Henselian
 
@@ -136,13 +225,14 @@ henselian pair, `f : Y ⟶ Spec A` proper and `i : Y₀ ⟶ Y` the closed fibre 
 Then restriction `Γ(Y, 𝒪_Y) ⟶ Γ(Y₀, 𝒪_{Y₀})` induces a bijection between the idempotents
 of the two rings; equivalently the open and closed subschemes of `Y₀` are exactly the closed
 fibres of those of `Y`. The restriction map itself need not be bijective.
+Injectivity is `AlgebraicGeometry.Scheme.injective_appTop_idempotent_of_le_jacobson`.
 (blueprint: `thm-weil-pbc-henselian-idempotent-lifting`) -/
 @[stacks 0A0B]
 theorem Scheme.bijective_appTop_idempotent_of_henselianRing
     (h : IsPullback i f₀ f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))) :
     Function.Bijective (fun e : {e : Γ(Y, ⊤) // IsIdempotentElem e} ↦
       (⟨i.appTop.hom e.1, e.2.map i.appTop.hom⟩ : {e : Γ(Y₀, ⊤) // IsIdempotentElem e})) :=
-  sorry
+  ⟨injective_appTop_idempotent_of_le_jacobson I HenselianRing.jac f i f₀ h, sorry⟩
 
 /-- **Finite étale lifting over a proper scheme over a henselian pair.** Let `(A, I)` be a
 henselian pair, `f : Y ⟶ Spec A` proper and `i : Y₀ ⟶ Y` the closed fibre over `Spec A/I`.

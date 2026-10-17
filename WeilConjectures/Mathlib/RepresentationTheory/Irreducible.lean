@@ -17,10 +17,10 @@ The constituents of a finite-dimensional representation are the irreducible succ
 quotients of a composition series, counted with multiplicity; equivalently, by Jordan-Hölder,
 the irreducible subquotients. Irreducibility itself is `Representation.IsIrreducible`.
 
-`Representation.IsConstituent` forgets the multiplicity, being a `Prop`. Recording it would
-need the Jordan-Hölder multiset of composition factors of a finite-dimensional
-representation, which Mathlib does not have; it is what the rank `N_γ` and the weight sum
-`B_γ` of blueprint `sk-d-real-detweights` are sums over.
+`Representation.IsConstituent` forgets the multiplicity, being a `Prop`. Invariants of the
+composition factors counted with multiplicity are recorded by
+`Subrepresentation.factorMultiset` (in `WeilConjectures.RepresentationTheory.CompositionFactors`);
+the rank `N_γ` and the weight sum `B_γ` of blueprint `sk-d-real-detweights` are sums over it.
 
 ## Main definitions
 
@@ -40,6 +40,8 @@ representation, which Mathlib does not have; it is what the rank `N_γ` and the 
   a covering pair of subrepresentations.
 - `Subrepresentation.exists_covBy_chain`: a covering pair of subrepresentations of a
   finite-dimensional representation is a step of a composition series.
+- `Representation.IsIrreducible.dual`: the contragredient of a finite-dimensional irreducible
+  representation is irreducible.
 -/
 
 @[expose] public section
@@ -290,5 +292,30 @@ theorem IsConstituent.comp (hσ : σ.IsConstituent ρ) {f : H →* G} (hf : Func
   refine isConstituent_of_equiv_subquotient (hσ.1.comp hf) (N := N') (M := M') hNM.le
     (Equiv.mk e.toLinearEquiv fun h ↦ ?_)
   exact e.isIntertwining' (f h)
+
+end Representation
+
+namespace Representation
+
+variable {k G V : Type*} [Field k] [Group G] [AddCommGroup V] [Module k V]
+  {ρ : Representation k G V}
+
+/-- The contragredient of a finite-dimensional irreducible representation is irreducible: the
+annihilator in `V` of an invariant subspace of `V^∨` is invariant, hence `0` or `V`.
+(blueprint: part L3 of `sk-r-linear-library`) -/
+theorem IsIrreducible.dual [FiniteDimensional k V] (h : ρ.IsIrreducible) :
+    ρ.dual.IsIrreducible := by
+  obtain ⟨hV, hU⟩ := isIrreducible_iff.1 h
+  refine isIrreducible_iff.2 ⟨(Module.nontrivial_dual_iff k).2 hV, fun T hT ↦ ?_⟩
+  have hC : ∀ g, ∀ v ∈ T.dualCoannihilator, ρ g v ∈ T.dualCoannihilator := fun g v hv ↦ by
+    rw [Submodule.mem_dualCoannihilator] at hv ⊢
+    intro f hf
+    have := hv _ (hT g⁻¹ f hf)
+    simp only [dual_apply, inv_inv] at this
+    exact this
+  rw [← Subspace.dualCoannihilator_dualAnnihilator_eq (W := T)]
+  rcases hU _ hC with h | h <;> rw [h]
+  · exact Or.inr Submodule.dualAnnihilator_bot
+  · exact Or.inl Submodule.dualAnnihilator_top
 
 end Representation

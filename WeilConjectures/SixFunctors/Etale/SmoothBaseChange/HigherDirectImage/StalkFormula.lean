@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyLimit
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
+public import WeilConjectures.CategoryTheory.Abelian.Ext.MapExactFunctor
+public import WeilConjectures.CategoryTheory.DerivedCategory.ExtPlus
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 
 /-!

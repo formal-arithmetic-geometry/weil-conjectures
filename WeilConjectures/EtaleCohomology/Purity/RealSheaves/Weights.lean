@@ -22,10 +22,9 @@ This file defines these notions, punctual `ι`-purity, the bound `weights ≤ w`
 and the determinant weight `dw_ι(V) = wt_ι(det V) / rank V`.
 
 The rank `N_γ` and the weight sum `B_γ` of `sk-d-real-detweights` are sums over the family of
-irreducible constituents of a semisimple Weil sheaf *counted with multiplicity*. That family
-needs the Jordan–Hölder multiset of constituents of a representation, which does not exist in
-Mathlib, and the only consumer of `N_γ` and `B_γ` is the proof of `sk-p-real-purity`; they are
-therefore not stated here.
+irreducible constituents of a semisimple Weil sheaf *counted with multiplicity*; they are defined
+in `WeilConjectures.EtaleCohomology.Purity.RealSheaves.DetWeights`
+(`AlgebraicGeometry.WeilGroup.rankAbove`, `AlgebraicGeometry.WeilGroup.weightSumAbove`).
 
 ## Main definitions
 

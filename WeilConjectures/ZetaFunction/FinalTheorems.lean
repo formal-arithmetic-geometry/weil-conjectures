@@ -206,7 +206,7 @@ theorem riemann_hypothesis {i : ℕ} (hi : i ≤ 2 * d) {P : Polynomial ℤ}
   refine ⟨fun α hα ↦ ⟨⟨_, hmon, ?_⟩, isWeilNumber_of_mem_roots (hmon.ne_zero) hrroot hα⟩,
     fun β hβ ↦ isWeilNumber_of_mem_roots hP0 (fun y hy ↦ by rw [hroot y hy, neg_div]) hβ,
     fun l _ _ α hα ↦ ?_⟩
-  · rw [show algebraMap ℤ ℂ = Int.castRingHom ℂ from RingHom.ext_int _ _, ← eval_map]
+  · rw [show algebraMap ℤ ℂ = Int.castRingHom ℂ from RingHom.ext_int _ _, ← Polynomial.eval_map]
     exact (Polynomial.mem_roots
       ((Polynomial.map_ne_zero_iff (RingHom.injective_int _)).2 hmon.ne_zero)).1 hα
   · rw [← Polynomial.reverse_map (RingHom.injective_int _), hP l, frobeniusCharpolyRev_def,

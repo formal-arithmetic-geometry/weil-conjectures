@@ -646,7 +646,7 @@ theorem IsHilbertSubscheme.mul [SmoothOfRelativeDimension 1 f] {d₁ d₂ : ℕ}
     (J := I₂)
   refine ⟨inferInstance, inferInstance,
     ((Scheme.IdealSheafData.isRelativeEffectiveCartier_iff_locallyQuasiFinite _).mp
-      ⟨hI₁.mul hI₂, inferInstance⟩).2.2, fun t ↦ ?_⟩
+      ⟨hI₁.mul_effectiveCartier hI₂, inferInstance⟩).2.2, fun t ↦ ?_⟩
   rw [Scheme.IdealSheafData.finrank_subschemeι_mul_comp _ hI₁ hI₂, hr₁, hr₂]
 
 /-- **The addition morphism on Hilbert schemes.** Let `f : X ⟶ S` be separated and smooth of

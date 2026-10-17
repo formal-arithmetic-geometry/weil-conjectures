@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.LinearAlgebra.Dual.Lemmas
 public import Mathlib.RepresentationTheory.Irreducible
 public import Mathlib.RepresentationTheory.Subrepresentation
 public import WeilConjectures.Mathlib.RepresentationTheory.Basic
@@ -33,6 +34,8 @@ quotient is the honest subquotient `S / U`.
 * `Subrepresentation.isIrreducible_toRepresentation_iff_isAtom`: a subrepresentation is
   irreducible if and only if it is an atom of the lattice of subrepresentations.
 * `Subrepresentation.subquotient`: the representation of `W` on `S ⧸ U`.
+* `Subrepresentation.dualAnnihilator`, `Subrepresentation.subquotientDualEquiv`: the annihilator
+  `U^⊥` of a subrepresentation in the contragredient, and the equivalence `U^⊥ / S^⊥ ≅ (S / U)^∨`.
 * `Subrepresentation.translate`: translation by `g` of subrepresentations of the restriction to a
   normal subgroup.
 * `Subrepresentation.orderIsoOfForallIff`: representations with the same invariant subspaces have
@@ -213,6 +216,87 @@ theorem toSubmodule_le_toSubmodule {S T : Subrepresentation ρ} :
     S.toSubmodule ≤ T.toSubmodule ↔ S ≤ T :=
   Iff.rfl
 
+section Dual
+
+/-- The *annihilator* `U^⊥` of a subrepresentation `U`: the linear forms vanishing on `U`, a
+subrepresentation of the contragredient representation. -/
+def dualAnnihilator (U : Subrepresentation ρ) : Subrepresentation ρ.dual where
+  toSubmodule := U.toSubmodule.dualAnnihilator
+  apply_mem_toSubmodule w f hf := by
+    rw [Submodule.mem_dualAnnihilator] at hf ⊢
+    intro x hx
+    rw [Representation.dual_apply, Module.Dual.transpose_apply, LinearMap.comp_apply]
+    exact hf _ (U.apply_mem_toSubmodule w⁻¹ hx)
+
+/-- A linear form lies in `U^⊥` if and only if it vanishes on `U`. -/
+theorem mem_dualAnnihilator {U : Subrepresentation ρ} {f : Module.Dual k V} :
+    f ∈ U.dualAnnihilator ↔ ∀ x ∈ U, f x = 0 :=
+  Submodule.mem_dualAnnihilator f
+
+/-- Taking annihilators reverses inclusions. -/
+theorem dualAnnihilator_antitone : Antitone (dualAnnihilator : Subrepresentation ρ → _) :=
+  fun _ _ h ↦ Submodule.dualAnnihilator_anti (toSubmodule_le_toSubmodule.2 h)
+
+@[simp]
+theorem dualAnnihilator_bot : (⊥ : Subrepresentation ρ).dualAnnihilator = ⊤ :=
+  toSubmodule_injective Submodule.dualAnnihilator_bot
+
+@[simp]
+theorem dualAnnihilator_top : (⊤ : Subrepresentation ρ).dualAnnihilator = ⊥ :=
+  toSubmodule_injective Submodule.dualAnnihilator_top
+
+/-- For `U ≤ S`, a linear form on `V` vanishing on `U` induces a linear form on the subquotient
+`S / U`. -/
+noncomputable def dualAnnihilatorToDualSubquotient (U S : Subrepresentation ρ) :
+    U.dualAnnihilator.toSubmodule →ₗ[k]
+      Module.Dual k (S.toSubmodule ⧸ U.toSubmodule.comap S.toSubmodule.subtype) where
+  toFun f := Submodule.liftQ _ ((f : Module.Dual k V) ∘ₗ S.toSubmodule.subtype) fun x hx ↦
+    mem_dualAnnihilator.1 f.2 x hx
+  map_add' _ _ := Submodule.linearMap_qext _ rfl
+  map_smul' _ _ := Submodule.linearMap_qext _ rfl
+
+@[simp]
+theorem dualAnnihilatorToDualSubquotient_apply_mk (U S : Subrepresentation ρ)
+    (f : U.dualAnnihilator.toSubmodule) (x : S.toSubmodule) :
+    dualAnnihilatorToDualSubquotient U S f (Submodule.Quotient.mk x) = (f : Module.Dual k V) x :=
+  rfl
+
+/-- The kernel of `U^⊥ → (S / U)^∨` is `S^⊥`. -/
+theorem ker_dualAnnihilatorToDualSubquotient (U S : Subrepresentation ρ) :
+    LinearMap.ker (dualAnnihilatorToDualSubquotient U S) =
+      S.dualAnnihilator.toSubmodule.comap U.dualAnnihilator.toSubmodule.subtype := by
+  ext f
+  simp only [LinearMap.mem_ker, Submodule.mem_comap, Submodule.subtype_apply]
+  refine ⟨fun h ↦ mem_dualAnnihilator.2 fun x hx ↦ ?_, fun h ↦ Submodule.linearMap_qext _ ?_⟩
+  · simpa using congr($h (Submodule.Quotient.mk ⟨x, hx⟩))
+  · exact LinearMap.ext fun x ↦ mem_dualAnnihilator.1 h x x.2
+
+/-- For `U ≤ S`, every linear form on `S / U` comes from a linear form on `V` vanishing on `U`. -/
+theorem dualAnnihilatorToDualSubquotient_surjective {U S : Subrepresentation ρ} (h : U ≤ S) :
+    Function.Surjective (dualAnnihilatorToDualSubquotient U S) := by
+  intro φ
+  obtain ⟨g, hg⟩ := LinearMap.exists_extend (φ ∘ₗ Submodule.mkQ _ : S.toSubmodule →ₗ[k] k)
+  have hgU : g ∈ U.dualAnnihilator := mem_dualAnnihilator.2 fun x hx ↦ by
+    have := congr($hg ⟨x, h hx⟩)
+    simp only [LinearMap.comp_apply, Submodule.subtype_apply, Submodule.mkQ_apply] at this
+    rw [this]
+    exact (congrArg φ ((Submodule.Quotient.mk_eq_zero _).2 hx)).trans (map_zero φ)
+  exact ⟨⟨g, hgU⟩, Submodule.linearMap_qext _ hg⟩
+
+/-- **The contragredient of a subquotient.** For subrepresentations `U ≤ S`, the subquotient
+`U^⊥ / S^⊥` of the contragredient representation is the contragredient of the subquotient `S / U`.
+(blueprint: part L3 of `sk-r-linear-library`) -/
+noncomputable def subquotientDualEquiv {U S : Subrepresentation ρ} (h : U ≤ S) :
+    (U.dualAnnihilator.subquotient S.dualAnnihilator).Equiv (S.subquotient U).dual :=
+  .mk ((Submodule.quotEquivOfEq _ _ (ker_dualAnnihilatorToDualSubquotient U S).symm).trans
+    ((dualAnnihilatorToDualSubquotient U S).quotKerEquivOfSurjective
+      (dualAnnihilatorToDualSubquotient_surjective h))) fun w ↦ by
+    refine Submodule.linearMap_qext _ (LinearMap.ext fun f ↦ Submodule.linearMap_qext _
+      (LinearMap.ext fun x ↦ ?_))
+    rfl
+
+end Dual
+
 section Equiv
 
 variable {V' : Type*} [AddCommGroup V'] [Module k V'] {σ : Representation k W V'}
@@ -266,6 +350,12 @@ theorem detCharacter_subquotient_orderIsoMapComap (e : ρ.Equiv σ) (S U : Subre
     ((orderIsoMapComap e S).subquotient (orderIsoMapComap e U)).detCharacter =
       (S.subquotient U).detCharacter :=
   (subquotientEquiv e S U).detCharacter_eq
+
+/-- Subquotients can be transported along an equivalence of representations `e : ρ ≅ σ`: every
+subquotient `S / U` of `σ` is equivalent to a subquotient `S' / U'` of `ρ`. -/
+theorem exists_subquotient_equiv_of_equiv (e : ρ.Equiv σ) (U S : Subrepresentation σ) :
+    ∃ U' S' : Subrepresentation ρ, Nonempty ((S'.subquotient U').Equiv (S.subquotient U)) :=
+  ⟨_, _, ⟨(subquotientEquiv e.symm S U).symm⟩⟩
 
 end Equiv
 
@@ -413,6 +503,9 @@ theorem _root_.Representation.IsIrreducible.nontrivial (hirr : ρ.IsIrreducible)
 theorem mem_inf {U S : Subrepresentation ρ} {x : V} : x ∈ U ⊓ S ↔ x ∈ U ∧ x ∈ S :=
   Iff.rfl
 
+theorem mem_sup {U S : Subrepresentation ρ} {x : V} : x ∈ U ⊔ S ↔ ∃ a ∈ U, ∃ b ∈ S, a + b = x :=
+  Submodule.mem_sup
+
 instance [FiniteDimensional k V] : WellFoundedLT (Subrepresentation ρ) :=
   StrictMono.wellFoundedLT (f := toSubmodule) fun _ _ h ↦ h
 
@@ -483,6 +576,31 @@ noncomputable def subquotientComapEquiv (f : ρ.IntertwiningMap σ) (hf : Functi
       obtain ⟨x, rfl⟩ := hf y
       exact ⟨x, ‹f x ∈ S›, by rw [sub_self]; exact U.toSubmodule.zero_mem⟩
 
+/-- An injective intertwining map `f` identifies the subquotient `f(S) / f(U)` with `S / U`. -/
+noncomputable def subquotientMapEquiv (f : ρ.IntertwiningMap σ) (hf : Function.Injective f)
+    (U S : Subrepresentation ρ) : ((map f S).subquotient (map f U)).Equiv (S.subquotient U) :=
+  (subquotientEquivOfIntertwiningMap f (U := U) (S := S) (U' := map f U) (S' := map f S)
+    (fun x hx ↦ ⟨x, hx, rfl⟩) (fun x _ hx ↦ ⟨x, hx, rfl⟩)
+    (fun x _ hx ↦ by
+      obtain ⟨y, hy, hxy⟩ := mem_map.1 hx
+      exact hf hxy ▸ hy) fun y hy ↦ by
+      obtain ⟨x, hx, rfl⟩ := mem_map.1 hy
+      exact ⟨x, hx, by rw [sub_self]; exact Submodule.zero_mem _⟩).symm
+
+theorem map_bot (f : ρ.IntertwiningMap σ) : map f ⊥ = ⊥ :=
+  toSubmodule_injective (Submodule.map_bot _)
+
+theorem comap_top (f : ρ.IntertwiningMap σ) : comap f ⊤ = ⊤ :=
+  toSubmodule_injective (Submodule.comap_top _)
+
+theorem map_mono (f : ρ.IntertwiningMap σ) {S T : Subrepresentation ρ} (h : S ≤ T) :
+    map f S ≤ map f T :=
+  fun _ ⟨x, hx, hxy⟩ ↦ ⟨x, h hx, hxy⟩
+
+theorem comap_mono (f : ρ.IntertwiningMap σ) {S T : Subrepresentation σ} (h : S ≤ T) :
+    comap f S ≤ comap f T :=
+  fun _ hx ↦ h hx
+
 end IntertwiningMap
 
 /-- The subquotient `S / (U ∩ S)` is the subquotient `S / U`. -/
@@ -492,6 +610,17 @@ noncomputable def subquotientInfEquiv (U S : Subrepresentation ρ) :
     (fun _ hxS hx ↦ mem_inf.2 ⟨hx, hxS⟩) fun y hy ↦ ⟨y, hy, by
       rw [Representation.IntertwiningMap.id_apply, sub_self]; exact U.toSubmodule.zero_mem⟩
 
+/-- The **second isomorphism theorem** for subrepresentations: `S / (U ⊓ S) ≅ (U ⊔ S) / U`. -/
+noncomputable def subquotientSupEquiv (U S : Subrepresentation ρ) :
+    (S.subquotient (U ⊓ S)).Equiv ((U ⊔ S).subquotient U) :=
+  subquotientEquivOfIntertwiningMap (.id ρ) (fun x hx ↦
+    mem_sup.2 ⟨0, U.toSubmodule.zero_mem, x, hx, zero_add x⟩)
+    (fun _ _ hx ↦ (mem_inf.1 hx).1) (fun _ hxS hxU ↦ mem_inf.2 ⟨hxU, hxS⟩) fun y hy ↦ by
+      obtain ⟨a, ha, b, hb, rfl⟩ := mem_sup.1 hy
+      refine ⟨b, hb, ?_⟩
+      rw [Representation.IntertwiningMap.id_apply, sub_add_cancel_right]
+      exact U.toSubmodule.neg_mem ha
+
 /-- If the subquotient `S / U` is irreducible, then `U ∩ S < S`. -/
 theorem inf_lt_of_isIrreducible {U S : Subrepresentation ρ}
     (hirr : (S.subquotient U).IsIrreducible) : U ⊓ S < S := by
@@ -500,10 +629,14 @@ theorem inf_lt_of_isIrreducible {U S : Subrepresentation ρ}
   refine (Submodule.mem_bot k).2 ((Submodule.Quotient.mk_eq_zero _).2 ?_)
   exact (mem_inf.1 (h.symm ▸ x.2 : (x : V) ∈ U ⊓ S)).1
 
+/-- The subrepresentation `⊤` is equivalent to `ρ`. -/
+def topEquiv : (⊤ : Subrepresentation ρ).toRepresentation.Equiv ρ :=
+  .mk Submodule.topEquiv fun _ ↦ rfl
+
 /-- The subquotient `⊤ / ⊥` of `ρ` is equivalent to `ρ`. -/
 noncomputable def topSubquotientBotEquiv (ρ : Representation k W V) :
     ((⊤ : Subrepresentation ρ).subquotient ⊥).Equiv ρ :=
-  (subquotientBotEquiv ⊤).trans (.mk Submodule.topEquiv fun _ ↦ rfl)
+  (subquotientBotEquiv ⊤).trans topEquiv
 
 /-- If `S / U` is irreducible and a subrepresentation `T` meets `S` outside of `U`, then `T ∩ S`
 generates `S` modulo `U`. -/

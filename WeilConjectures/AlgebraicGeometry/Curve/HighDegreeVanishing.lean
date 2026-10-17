@@ -176,7 +176,7 @@ theorem Etale.subsingleton_H_of_isTorsion [CompactSpace X] [QuasiSeparatedSpace 
     rw [hd, mul_nsmul', smul_comm, hms, smul_zero]
   refine subsingleton_of_forall_eq 0 fun x ↦ ?_
   have := essentiallySmallSelf.{u + 1} (ULift.{u} ℕ)
-  obtain ⟨n, y, rfl⟩ := (Scheme.H_map_bijective_of_isColimit_of_essentiallySmall X hc q).1 x
+  obtain ⟨n, y, rfl⟩ := (Scheme.H_map_isColimit_of_isFiltered_of_large X hc q).1 x
   have : Subsingleton (Sheaf.H (K n) q) := h _ (N n) (Nat.factorial_pos _) (by
     rw [← cancel_mono (kernel.ι (N n • 𝟙 F)), zero_comp, Preadditive.nsmul_comp,
       Category.id_comp, ← Category.comp_id (kernel.ι _), ← Preadditive.comp_nsmul,

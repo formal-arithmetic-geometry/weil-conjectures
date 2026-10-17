@@ -1,11 +1,12 @@
 /-
-Copyright (c) 2026 Christian Merten. All rights reserved.
+Copyright (c) 2026 Christian Merten, Nailin Guan. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Christian Merten
+Authors: Christian Merten, Nailin Guan
 -/
 module
 
 public import Mathlib.CategoryTheory.Adjunction.Mates
+public import Mathlib.CategoryTheory.Equivalence
 
 /-!
 # Coherence of the conjugation bijection, in isomorphism form
@@ -40,6 +41,9 @@ and it is the latter that one wants when transporting the coherence of a pseudof
   conjugating an isomorphism `ED ⋙ M ≅ M ⋙ EC` for self-equivalences `EC` and `ED`.
 - `CategoryTheory.mateEquiv_eq_of_unit`, `CategoryTheory.conjugateEquiv_eq_of_unit`: a mate, resp. a
   conjugate, is determined by its compatibility with the units.
+- `CategoryTheory.isIso_mateEquiv_of_isEquivalence`: for adjunctions `L₁ ⊣ R₁` and `L₂ ⊣ R₂` and
+  equivalences `G` and `H`, the mate `R₁ ⋙ G ⟶ H ⋙ R₂` of an isomorphism
+  `G ⋙ L₂ ≅ L₁ ⋙ H` is an isomorphism.
 -/
 
 @[expose] public section
@@ -407,6 +411,84 @@ lemma conjugateEquiv_eq_of_unit (α : L₂ ⟶ L₁) (β : R₁ ⟶ R₂)
   apply (adj₂.homEquiv _ _).injective
   rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, ← h, unit_conjugateEquiv_symm adj₁ adj₂]
 
+/-- Blueprint `lem-trf-adjoint-mate`: mates along an isomorphism of left adjoints. For
+adjunctions `L₁ ⊣ R₁`, `L₂ ⊣ R₂` and a natural isomorphism `α : L₁ ≅ L₂`, the conjugate
+`β = conjugateIsoEquiv adj₁ adj₂ α.symm : R₁ ≅ R₂`
+
+1. is given by `β = R₂ ε₁ ∘ R₂ α⁻¹ R₁ ∘ η₂ R₁`, with inverse `β⁻¹ = R₁ ε₂ ∘ R₁ α R₂ ∘ η₁ R₂`;
+2. carries the units and the counits to each other: `R₂ α ∘ β L₁ ∘ η₁ = η₂` and
+   `ε₂ ∘ α R₂ ∘ L₁ β = ε₁`;
+3. is the unique natural isomorphism `R₁ ≅ R₂` with the unit compatibility of (2). -/
+theorem conjugateIsoEquiv_symm_spec (α : L₁ ≅ L₂) :
+    (∀ b, (conjugateIsoEquiv adj₁ adj₂ α.symm).hom.app b =
+      adj₂.unit.app (R₁.obj b) ≫ R₂.map (α.inv.app (R₁.obj b)) ≫ R₂.map (adj₁.counit.app b)) ∧
+    (∀ b, (conjugateIsoEquiv adj₁ adj₂ α.symm).inv.app b =
+      adj₁.unit.app (R₂.obj b) ≫ R₁.map (α.hom.app (R₂.obj b)) ≫ R₁.map (adj₂.counit.app b)) ∧
+    (∀ a, adj₁.unit.app a ≫ (conjugateIsoEquiv adj₁ adj₂ α.symm).hom.app (L₁.obj a) ≫
+      R₂.map (α.hom.app a) = adj₂.unit.app a) ∧
+    (∀ b, L₁.map ((conjugateIsoEquiv adj₁ adj₂ α.symm).hom.app b) ≫ α.hom.app (R₂.obj b) ≫
+      adj₂.counit.app b = adj₁.counit.app b) ∧
+    (∀ β : R₁ ≅ R₂, (∀ a, adj₁.unit.app a ≫ β.hom.app (L₁.obj a) ≫ R₂.map (α.hom.app a) =
+      adj₂.unit.app a) → β = conjugateIsoEquiv adj₁ adj₂ α.symm) := by
+  refine ⟨fun b ↦ ?_, fun b ↦ ?_, fun a ↦ ?_, fun b ↦ ?_, fun β hβ ↦ ?_⟩
+  · simp [conjugateEquiv_apply_app]
+  · simp [conjugateEquiv_apply_app]
+  · have h := unit_conjugateEquiv adj₁ adj₂ α.inv a
+    simp only [conjugateIsoEquiv_apply_hom, Iso.symm_hom]
+    rw [reassoc_of% h, ← Functor.map_comp, Iso.inv_hom_id_app, Functor.map_id, Category.comp_id]
+  · have h := conjugateEquiv_counit adj₁ adj₂ α.inv b
+    simp only [conjugateIsoEquiv_apply_hom, Iso.symm_hom]
+    rw [α.hom.naturality_assoc, h, Iso.hom_inv_id_app_assoc]
+  · ext1
+    refine (conjugateEquiv_eq_of_unit adj₁ adj₂ α.inv β.hom fun a ↦ ?_).symm
+    rw [← hβ a, Category.assoc, Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app,
+      Functor.map_id, Category.comp_id]
+
 end ConjugateUnit
+
+section MateEquivalence
+
+/-! ### Mates along equivalences
+
+The mate of an isomorphism is not an isomorphism in general. It is when the two vertical functors
+of the square are equivalences: their inverses are right adjoints, so the mate can be taken a
+second time, and the iterated mate is the conjugate of the original transformation
+(`CategoryTheory.iterated_mateEquiv_conjugateEquiv`), an isomorphism; since the units and counits
+of the equivalences are isomorphisms, this forces the first mate to be an isomorphism. -/
+
+variable {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄}
+  [Category.{v₁} C] [Category.{v₂} D] [Category.{v₃} E] [Category.{v₄} F]
+  {G : C ⥤ E} {H : D ⥤ F} {L₁ : C ⥤ D} {R₁ : D ⥤ C} {L₂ : E ⥤ F} {R₂ : F ⥤ E}
+  (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
+
+/-- The mate `R₁ ⋙ G ⟶ H ⋙ R₂` of an isomorphism `G ⋙ L₂ ≅ L₁ ⋙ H` along adjunctions
+`L₁ ⊣ R₁` and `L₂ ⊣ R₂` is an isomorphism when the vertical functors `G` and `H` are
+equivalences. -/
+theorem isIso_mateEquiv_of_isEquivalence [G.IsEquivalence] [H.IsEquivalence]
+    (α : TwoSquare G L₁ L₂ H) [IsIso α.natTrans] :
+    IsIso (mateEquiv adj₁ adj₂ α).natTrans := by
+  let adj₃ := G.asEquivalence.toAdjunction
+  let adj₄ := H.asEquivalence.toAdjunction
+  have : IsIso (mateEquiv adj₄ adj₃ (mateEquiv adj₁ adj₂ α)).natTrans := by
+    rw [iterated_mateEquiv_conjugateEquiv adj₁ adj₂ adj₃ adj₄]
+    exact conjugateEquiv_iso (adj₁.comp adj₄) (adj₃.comp adj₂) α.natTrans
+  have (d : D) : IsIso ((mateEquiv adj₁ adj₂ α).natTrans.app d) := by
+    have : IsIso (adj₃.unit.app (R₁.obj d)) := by
+      simp only [adj₃, Equivalence.toAdjunction_unit]
+      infer_instance
+    have : IsIso (adj₄.unit.app d) := by
+      simp only [adj₄, Equivalence.toAdjunction_unit]
+      infer_instance
+    have h : G.asEquivalence.inverse.map ((mateEquiv adj₁ adj₂ α).natTrans.app d) =
+        inv (adj₃.unit.app (R₁.obj d)) ≫ R₁.map (adj₄.unit.app d) ≫
+          (mateEquiv adj₄ adj₃ (mateEquiv adj₁ adj₂ α)).natTrans.app (H.obj d) :=
+      (IsIso.eq_inv_comp _).mpr (unit_mateEquiv adj₄ adj₃ (mateEquiv adj₁ adj₂ α) d).symm
+    have : IsIso (G.asEquivalence.inverse.map ((mateEquiv adj₁ adj₂ α).natTrans.app d)) := by
+      rw [h]
+      infer_instance
+    exact isIso_of_reflects_iso _ G.asEquivalence.inverse
+  exact NatIso.isIso_of_isIso_app _
+
+end MateEquivalence
 
 end CategoryTheory

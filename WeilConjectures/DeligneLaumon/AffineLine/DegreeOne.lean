@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.DeligneLaumon.AffineLine.FourierWeight
 public import WeilConjectures.DeligneLaumon.AffineLine.Purity
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafSemicontinuity
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.WeilSheaf.CohomologyShift
 public import WeilConjectures.WeilSheaf.HomologyShift
@@ -49,13 +50,12 @@ The degree-one bound is derived along the blueprint argument from the boundary s
 `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage` and the stationary
 phase
 `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_origin_of_isFourierPartner`.
+The boundary semicontinuity is the case of the affine line of
+`AlgebraicGeometry.WeilSheaf.hasWeightsAtMost_directImage`.
 
 ## TODO
 
-Prove the boundary semicontinuity
-`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage`
-(`lem-wf-boundary-semicontinuity`) and the stalk formula at the origin
-(`lem-fd-stalk-at-origin`), which are stated with `sorry`.
+Prove the stalk formula at the origin (`lem-fd-stalk-at-origin`), which is stated with `sorry`.
 -/
 
 @[expose] public section
@@ -159,7 +159,7 @@ theorem hasWeightsAtMost_directImage (D : LisseOnDenseOpen k₀ l) {ι : PadicAl
     simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k₀))
   have : GeometricallyConnected (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) :=
     GeometricallyConnected.of_geometricallyIrreducible _
-  exact IsLisse.hasWeightsAtMost_directImage D.j D.isDominant.denseRange D.lisse hβ
+  exact WeilSheaf.hasWeightsAtMost_directImage D.j ι D.lisse hβ
 
 /-- *The origin fibre is the stationary-phase contribution.* If the Fourier transform of the
 middle extension `(j_*M)[1]` is the middle extension `(j'_*M')[1]` of `D'`, then the fibre of

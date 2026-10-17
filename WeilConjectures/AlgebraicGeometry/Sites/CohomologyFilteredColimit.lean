@@ -5,294 +5,431 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
-public import WeilConjectures.CategoryTheory.Abelian.ExtFilteredColimit
-public import WeilConjectures.Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.Algebra.Category.Grp.Ulift
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.CategoryTheory.Sites.Point.Conservative
+public import Mathlib.CategoryTheory.Sites.Point.Skyscraper
+public import WeilConjectures.AlgebraicGeometry.Sites.FilteredColimitSections
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-!
 # Étale cohomology of a qcqs scheme commutes with filtered colimits
 
-Let `X` be a quasi-compact quasi-separated scheme and `D` a filtered diagram of abelian étale
-sheaves on `X` with colimit `c`. We show that `Hᵠ(X, c.pt)` is the colimit of the `Hᵠ(X, D_j)`
-([Stacks 03Q6]).
-
-The argument follows [Stacks 0739]:
-
-* sections over an étale `X`-scheme `W` with quasi-compact quasi-separated underlying scheme
-  commute with filtered colimits: a section of `c.pt` comes locally from some stage, finitely
-  many affine pieces suffice, and the local sections glue at a common later stage, their
-  differences on the quasi-compact overlaps dying at a later stage;
-* hence the Čech complexes of a filtered colimit of injective sheaves, on finite families of
-  qcqs étale `X`-schemes, are filtered colimits of exact complexes, so exact in positive degrees,
-  and the Čech criterion `CategoryTheory.Sheaf.subsingleton_H_succ_of_exactAt_cechComplex` shows
-  that a filtered colimit of injective sheaves has no higher cohomology;
-* the general case follows by dimension shifting,
-  `CategoryTheory.Abelian.Ext.commutesWithColimit_of_isFiltered`.
+Let `X` be a quasi-compact quasi-separated scheme and `c` a colimit cocone of a filtered diagram
+`D : K ⥤ Sh(X_ét, Ab)` of abelian étale sheaves. Then `colim_k Hᵠ(X, D_k) ⟶ Hᵠ(X, c.pt)` is
+bijective for every `q` ([Stacks 03Q6]).
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.exists_app_eq_of_isColimit_addCommGrpCat`: every section of a
-  filtered colimit of abelian étale sheaves over a qcqs étale `X`-scheme comes from some stage.
-- `AlgebraicGeometry.Scheme.exists_map_app_eq_zero_of_isColimit`: a section of some stage
-  which vanishes in the colimit, over an étale `X`-scheme with quasi-compact underlying space,
-  vanishes at a later stage.
-- `AlgebraicGeometry.Scheme.subsingleton_H_succ_of_isColimit_of_injective`: on a qcqs scheme, a
-  filtered colimit of injective abelian sheaves has no higher cohomology.
-- `AlgebraicGeometry.Scheme.H_map_bijective_of_isColimit_of_isFiltered`: étale cohomology of a
-  qcqs scheme commutes with filtered colimits; for essentially `(u + 1)`-small index categories
-  of any size, see `AlgebraicGeometry.Scheme.H_map_bijective_of_isColimit_of_essentiallySmall`.
+- `AlgebraicGeometry.Scheme.exists_app_eq_of_isColimit_ab`,
+  `AlgebraicGeometry.Scheme.exists_map_eq_of_isColimit_ab`: sections over a quasi-compact
+  quasi-separated étale `X`-scheme commute with filtered colimits of abelian étale sheaves.
+- `AlgebraicGeometry.Scheme.subsingleton_H_succ_of_isColimit_of_injective`: a filtered colimit
+  of injective abelian étale sheaves on a qcqs scheme has no higher cohomology.
+- `AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered_small`: étale cohomology of a qcqs
+  scheme commutes with filtered colimits indexed by a `u + 1`-small category.
+- `AlgebraicGeometry.Scheme.H_map_of_directed_of_locally`: étale cohomology of a qcqs scheme
+  commutes with directed unions of subsheaves, indexed by a type of arbitrary size.
+- `AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered_of_large`: étale cohomology of a qcqs
+  scheme commutes with filtered colimits indexed by a category of arbitrary size.
+
+## Implementation notes
+
+The proof is the one sketched in [Stacks 03Q6]. Sections over quasi-compact quasi-separated
+étale `X`-schemes commute with filtered colimits, hence so do the Čech complexes on finite
+families of such schemes. A filtered colimit of injective sheaves (which need not be injective)
+therefore has exact Čech complexes in positive degrees, so it has no higher cohomology by the
+Čech criterion `CategoryTheory.Sheaf.subsingleton_H_succ_of_exactAt_cechComplex`. Embedding the
+diagram functorially into a diagram of injective sheaves (by the functorial factorization of
+`CategoryTheory.IsGrothendieckAbelian`), filtered colimits being exact, we conclude by dimension
+shifting along the long exact cohomology sequences.
+
+For filtered categories which are not `u + 1`-small, colimits of other diagrams of that shape
+need not exist, so dimension shifting is not available directly. Instead we use that the stalk
+functors at geometric points, being left adjoints, preserve colimits of any size: this shows
+that the images of the legs of the colimit cocone form a directed family of subsheaves locally
+exhausting the colimit, and that the kernels of the transition maps locally exhaust the kernels
+of the legs. Reindexing directed families of subsheaves by their `u + 1`-small families of
+sections reduces to the small case.
 -/
 
 @[expose] public section
 
-universe w w' u
+universe w w₁ w₂ v₁ u₁ u
 
 open CategoryTheory Limits Opposite
 
-namespace AlgebraicGeometry.Scheme
+/-! ### Filtered colimits of arbitrary size -/
 
-variable {X : Scheme.{u}} {J : Type (u + 1)} [Category.{u + 1} J] [IsFiltered J]
-  {D : J ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone D}
+namespace AddCommGrpCat
+
+variable {𝒥 : Type w₁} [Category.{w₂} 𝒥] [IsFiltered 𝒥] {G : 𝒥 ⥤ AddCommGrpCat.{w}}
+  {d : Cocone G}
+
+/-- Every element of a colimit of a filtered diagram of abelian groups of arbitrary size comes
+from some member of the diagram (the colimit is preserved by the universe lift, after which it
+is computed on the underlying types). -/
+lemma exists_ι_apply_eq_of_isColimit (hd : IsColimit d) (x : d.pt) :
+    ∃ (j : 𝒥) (y : G.obj j), d.ι.app j y = x := by
+  have : PreservesFilteredColimitsOfSize.{w₂, w₁}
+      (CategoryTheory.forget AddCommGrpCat.{max w w₁ w₂}) :=
+    preservesFilteredColimitsOfSize_shrink.{w₁, max w w₁ w₂, w₂, max w w₁ w₂} _
+  have hd' := isColimitOfPreserves AddCommGrpCat.uliftFunctor.{max w₁ w₂} hd
+  obtain ⟨j, y, hy⟩ := Concrete.isColimit_exists_rep _ hd' (ULift.up x)
+  exact ⟨j, y.down, congrArg ULift.down hy⟩
+
+/-- An element of a member of a filtered diagram of abelian groups of arbitrary size which
+vanishes in the colimit vanishes in a later member of the diagram. -/
+lemma exists_map_eq_zero_of_isColimit (hd : IsColimit d) {j : 𝒥} (y : G.obj j)
+    (hy : d.ι.app j y = 0) : ∃ (j' : 𝒥) (a : j ⟶ j'), G.map a y = 0 := by
+  have : PreservesFilteredColimitsOfSize.{w₂, w₁}
+      (CategoryTheory.forget AddCommGrpCat.{max w w₁ w₂}) :=
+    preservesFilteredColimitsOfSize_shrink.{w₁, max w w₁ w₂, w₂, max w w₁ w₂} _
+  have hd' := isColimitOfPreserves AddCommGrpCat.uliftFunctor.{max w₁ w₂} hd
+  obtain ⟨j', a, b, hab⟩ := Concrete.isColimit_exists_of_rep_eq _ hd'
+    (ULift.up y : (G ⋙ AddCommGrpCat.uliftFunctor.{max w₁ w₂}).obj j)
+    (0 : (G ⋙ AddCommGrpCat.uliftFunctor.{max w₁ w₂}).obj j)
+    (congrArg ULift.up (hy.trans (map_zero _).symm))
+  refine ⟨IsFiltered.coeq a b, a ≫ IsFiltered.coeqHom a b, ?_⟩
+  have h₁ := congrArg ULift.down hab
+  change G.map a y = G.map b 0 at h₁
+  rw [map_zero] at h₁
+  rw [G.map_comp, ConcreteCategory.comp_apply, h₁, map_zero]
+
+end AddCommGrpCat
+
+namespace CategoryTheory.GrothendieckTopology
+
+variable {C : Type u₁} [Category.{v₁} C] {J : GrothendieckTopology C} [LocallySmall.{w} C]
+  [HasSheafify J (Type w)] [J.WEqualsLocallyBijective (Type w)]
+  {P : ObjectProperty (GrothendieckTopology.Point.{w} J)} [ObjectProperty.Small.{w} P]
+  {𝒥 : Type w₁} [Category.{w₂} 𝒥] [IsFiltered 𝒥] {D : 𝒥 ⥤ Sheaf J AddCommGrpCat.{w}}
+  {c : Cocone D}
+
+/-- **Sections of a filtered colimit of arbitrary size are locally lifted.** On a site with a
+conservative family of points, every section of the colimit `c.pt` of a filtered diagram of
+abelian sheaves is, on the members of a covering sieve, the image of a section of some `D j`.
+-/
+lemma exists_mem_forall_exists_app_eq_of_isColimit (hP : P.IsConservativeFamilyOfPoints)
+    (hc : IsColimit c) {X : C} (s : c.pt.obj.obj (op X)) :
+    ∃ R ∈ J X, ∀ ⦃Y : C⦄ (f : Y ⟶ X), R f →
+      ∃ (j : 𝒥) (t : (D.obj j).obj.obj (op Y)),
+        (c.ι.app j).hom.app (op Y) t = c.pt.obj.map f.op s := by
+  let R : Sieve X :=
+    { arrows Y f := ∃ (j : 𝒥) (t : (D.obj j).obj.obj (op Y)),
+        (c.ι.app j).hom.app (op Y) t = c.pt.obj.map f.op s
+      downward_closed {Y Z f} := by
+        rintro ⟨j, t, ht⟩ g
+        refine ⟨j, (D.obj j).obj.map g.op t, ?_⟩
+        rw [NatTrans.naturality_apply, ht, op_comp, Functor.map_comp, ConcreteCategory.comp_apply]
+        rfl }
+  refine ⟨R, ?_, fun _ _ hf ↦ hf⟩
+  obtain ⟨I, Y, f, hf⟩ := R.exists_eq_ofArrows
+  rw [hf, hP.jointly_reflect_ofArrows_mem_of_small]
+  intro Φ x
+  have hd := isColimitOfPreserves (Φ.obj.sheafFiber (A := AddCommGrpCat.{w})) hc
+  obtain ⟨j, p, hp⟩ := AddCommGrpCat.exists_ι_apply_eq_of_isColimit hd
+    (Φ.obj.toPresheafFiber X x c.pt.obj s)
+  obtain ⟨Y₁, y₁, t, rfl⟩ := Φ.obj.toPresheafFiber_jointly_surjective (P := (D.obj j).obj) p
+  -- the two germs live over a common neighbourhood `Z` of `x` and `y₁`
+  let Z := IsCofiltered.min (Φ.obj.fiber.elementsMk X x) (Φ.obj.fiber.elementsMk Y₁ y₁)
+  let f₁ := IsCofiltered.minToLeft (Φ.obj.fiber.elementsMk X x) (Φ.obj.fiber.elementsMk Y₁ y₁)
+  let f₂ := IsCofiltered.minToRight (Φ.obj.fiber.elementsMk X x) (Φ.obj.fiber.elementsMk Y₁ y₁)
+  have e₁ : Φ.obj.toPresheafFiber X x c.pt.obj s =
+      Φ.obj.toPresheafFiber Z.1 Z.2 c.pt.obj (c.pt.obj.map f₁.1.op s) := by
+    rw [← ConcreteCategory.comp_apply, Φ.obj.toPresheafFiber_w, f₁.2]
+  have e₂ : (Φ.obj.sheafFiber.map (c.ι.app j)) (Φ.obj.toPresheafFiber Y₁ y₁ (D.obj j).obj t) =
+      Φ.obj.toPresheafFiber Z.1 Z.2 c.pt.obj
+        (c.pt.obj.map f₂.1.op ((c.ι.app j).hom.app (op Y₁) t)) := by
+    rw [← ConcreteCategory.comp_apply, Φ.obj.toPresheafFiber_w, f₂.2]
+    exact ConcreteCategory.congr_hom
+      (Φ.obj.toPresheafFiber_naturality (c.ι.app j).hom Y₁ y₁) t
+  change (Φ.obj.sheafFiber.map (c.ι.app j)) _ = _ at hp
+  rw [e₂, e₁, GrothendieckTopology.Point.toPresheafFiber_eq_iff'] at hp
+  obtain ⟨W, g, w, hw, hg⟩ := hp
+  have hgR : R (g ≫ f₁.1) := by
+    refine ⟨j, (D.obj j).obj.map (g ≫ f₂.1).op t, ?_⟩
+    rw [NatTrans.naturality_apply]
+    change c.pt.obj.map (g ≫ f₂.1).op ((c.ι.app j).hom.app _ t) = _
+    rw [op_comp, Functor.map_comp, ConcreteCategory.comp_apply, hg, ← ConcreteCategory.comp_apply,
+      ← Functor.map_comp, ← op_comp]
+  rw [hf] at hgR
+  obtain ⟨V, a, b, ⟨i⟩, hab⟩ := hgR
+  refine ⟨i, Φ.obj.fiber.map a w, ?_⟩
+  rw [← Functor.map_comp_apply, hab, Functor.map_comp_apply, hw, f₁.2]
+
+/-- **Sections of a filtered colimit of arbitrary size are locally separated.** On a site with
+a conservative family of points, a section of `D j` which vanishes in the colimit `c.pt`
+vanishes, on the members of a covering sieve, in some later `D j'`. -/
+lemma exists_mem_forall_exists_map_eq_zero_of_isColimit (hP : P.IsConservativeFamilyOfPoints)
+    (hc : IsColimit c) {X : C} {j : 𝒥} (s : (D.obj j).obj.obj (op X))
+    (hs : (c.ι.app j).hom.app (op X) s = 0) :
+    ∃ R ∈ J X, ∀ ⦃Y : C⦄ (f : Y ⟶ X), R f →
+      ∃ (j' : 𝒥) (a : j ⟶ j'), (D.map a).hom.app (op Y) ((D.obj j).obj.map f.op s) = 0 := by
+  let R : Sieve X :=
+    { arrows Y f := ∃ (j' : 𝒥) (a : j ⟶ j'),
+        (D.map a).hom.app (op Y) ((D.obj j).obj.map f.op s) = 0
+      downward_closed {Y Z f} := by
+        rintro ⟨j', a, ha⟩ g
+        refine ⟨j', a, ?_⟩
+        rw [op_comp, Functor.map_comp, ConcreteCategory.comp_apply, NatTrans.naturality_apply,
+          ha, map_zero] }
+  refine ⟨R, ?_, fun _ _ hf ↦ hf⟩
+  obtain ⟨I, Y, f, hf⟩ := R.exists_eq_ofArrows
+  rw [hf, hP.jointly_reflect_ofArrows_mem_of_small]
+  intro Φ x
+  have hd := isColimitOfPreserves (Φ.obj.sheafFiber (A := AddCommGrpCat.{w})) hc
+  have h0 : (Φ.obj.sheafFiber.map (c.ι.app j)) (Φ.obj.toPresheafFiber X x (D.obj j).obj s) =
+      0 := by
+    have := ConcreteCategory.congr_hom
+      (Φ.obj.toPresheafFiber_naturality (c.ι.app j).hom X x) s
+    refine this.trans ?_
+    rw [ConcreteCategory.comp_apply, hs, map_zero]
+  obtain ⟨j', a, ha⟩ := AddCommGrpCat.exists_map_eq_zero_of_isColimit hd _ h0
+  have ha' : Φ.obj.toPresheafFiber X x (D.obj j').obj ((D.map a).hom.app (op X) s) =
+      Φ.obj.toPresheafFiber X x (D.obj j').obj 0 := by
+    rw [map_zero, ← ha]
+    exact (ConcreteCategory.congr_hom
+      (Φ.obj.toPresheafFiber_naturality (D.map a).hom X x) s).symm
+  rw [GrothendieckTopology.Point.toPresheafFiber_eq_iff'] at ha'
+  obtain ⟨W, g, w, hw, hg⟩ := ha'
+  have hgR : R g := ⟨j', a, by rw [NatTrans.naturality_apply, hg, map_zero]⟩
+  rw [hf] at hgR
+  obtain ⟨V, p, b, ⟨i⟩, hab⟩ := hgR
+  exact ⟨i, Φ.obj.fiber.map p w, by rw [← Functor.map_comp_apply, hab, hw]⟩
+
+end CategoryTheory.GrothendieckTopology
+
+namespace AlgebraicGeometry.Scheme
 
 section Sections
 
-omit [IsFiltered J] in
-/-- The legs of a cocone of abelian sheaves are compatible with the transition maps, on
-sections. -/
-lemma cocone_ι_app_map_apply (c : Cocone D) {i i' : J} (f : i ⟶ i') (V : X.Etaleᵒᵖ)
-    (v : (D.obj i).obj.obj V) :
-    (c.ι.app i').hom.app V ((D.map f).hom.app V v) = (c.ι.app i).hom.app V v := by
-  rw [← c.w f]
-  rfl
+variable {X : Scheme.{u}} {K : Type (u + 1)} [SmallCategory K] [IsFiltered K]
+  {F : K ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone F}
 
-omit [IsFiltered J] in
-/-- The transition maps of a diagram of abelian sheaves are functorial, on sections. -/
-lemma map_comp_hom_app_apply (D : J ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
-    {i i' i'' : J} (f : i ⟶ i') (g : i' ⟶ i'') (V : X.Etaleᵒᵖ) (v : (D.obj i).obj.obj V) :
-    (D.map (f ≫ g)).hom.app V v = (D.map g).hom.app V ((D.map f).hom.app V v) := by
-  rw [D.map_comp]
-  rfl
+omit [IsFiltered K] in
+/-- The presheaf colimit of a diagram of abelian étale sheaves, with its comparison map to the
+sheaf colimit: the comparison is locally surjective and locally injective, being the
+sheafification map. -/
+lemma exists_presheafColimit_ab (hc : IsColimit c) :
+    ∃ (E : Cocone (F ⋙ sheafToPresheaf _ _)) (_ : IsColimit E) (φ : E.pt ⟶ c.pt.obj),
+      Presheaf.IsLocallySurjective X.smallEtaleTopology φ ∧
+      Presheaf.IsLocallyInjective X.smallEtaleTopology φ ∧
+      ∀ k, E.ι.app k ≫ φ = (c.ι.app k).hom := by
+  let E := colimit.cocone (F ⋙ sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+  let hE : IsColimit E := colimit.isColimit _
+  let e := (Sheaf.isColimitSheafifyCocone E hE).coconePointUniqueUpToIso hc
+  refine ⟨E, hE, toSheafify _ E.pt ≫ e.hom.hom, ?_, ?_, fun k ↦ ?_⟩
+  · infer_instance
+  · infer_instance
+  · rw [← Category.assoc, ← Sheaf.sheafifyCocone_ι_app_val,
+      ← ObjectProperty.FullSubcategory.comp_hom,
+      IsColimit.comp_coconePointUniqueUpToIso_hom]
 
-variable (D) in
-/-- Sections of the objectwise colimit of the presheaves underlying a filtered diagram of
-abelian sheaves come from some stage. -/
-lemma exists_colimit_ι_app_eq (V : X.Etaleᵒᵖ)
-    (t : (colimit (D ⋙ sheafToPresheaf _ _)).obj V) :
-    ∃ (j : J) (x : (D.obj j).obj.obj V),
-      (colimit.ι (D ⋙ sheafToPresheaf _ _) j).app V x = t := by
-  exact Concrete.isColimit_exists_rep _
-    (isColimitOfPreserves ((CategoryTheory.evaluation _ _).obj V) (colimit.isColimit _)) t
-
-variable (D) in
-/-- A section of a stage of a filtered diagram of abelian sheaves which vanishes in the
-objectwise colimit of the underlying presheaves vanishes at a later stage. -/
-lemma exists_map_app_eq_zero_of_colimit_ι_app_eq_zero (V : X.Etaleᵒᵖ) {j : J}
-    (x : (D.obj j).obj.obj V) (hx : (colimit.ι (D ⋙ sheafToPresheaf _ _) j).app V x = 0) :
-    ∃ (k : J) (φ : j ⟶ k), (D.map φ).hom.app V x = 0 := by
-  obtain ⟨k, φ, ψ, h⟩ := Concrete.isColimit_exists_of_rep_eq _
-    (isColimitOfPreserves ((CategoryTheory.evaluation _ _).obj V)
-      (colimit.isColimit (D ⋙ sheafToPresheaf _ _))) x 0 (by erw [hx, map_zero])
-  exact ⟨k, φ, h.trans (map_zero _)⟩
-
-/-- The two composites of an isomorphism of abelian sheaves and its inverse, on sections. -/
-lemma _root_.CategoryTheory.Sheaf.iso_hom_app_inv_app_apply {C : Type*} [Category C]
-    {K : GrothendieckTopology C} {F G : Sheaf K AddCommGrpCat.{u + 1}} (e : F ≅ G) (V : Cᵒᵖ)
-    (s : G.obj.obj V) : e.hom.hom.app V (e.inv.hom.app V s) = s := by
-  rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app,
-    ← ObjectProperty.FullSubcategory.comp_hom, e.inv_hom_id]
-  rfl
-
-omit [IsFiltered J] in
-/-- The comparison of a colimit cocone of abelian sheaves with the sheafification of the
-objectwise colimit of the underlying presheaves. -/
-lemma sheafifyCocone_ι_app_comp_coconePointUniqueUpToIso (hc : IsColimit c) (j : J) :
-    ((Sheaf.sheafifyCocone (colimit.cocone (D ⋙ sheafToPresheaf _ _))).ι.app j).hom ≫
-      ((Sheaf.isColimitSheafifyCocone _ (colimit.isColimit _)).coconePointUniqueUpToIso
-        hc).hom.hom = (c.ι.app j).hom := by
-  rw [← ObjectProperty.FullSubcategory.comp_hom, IsColimit.comp_coconePointUniqueUpToIso_hom]
-
-omit [IsFiltered J] in
-/-- The comparison of a colimit cocone of abelian sheaves with the sheafification of the
-objectwise colimit of the underlying presheaves, in the other direction. -/
-lemma sheafifyCocone_ι_app_eq (hc : IsColimit c) (j : J) :
-    ((Sheaf.sheafifyCocone (colimit.cocone (D ⋙ sheafToPresheaf _ _))).ι.app j).hom =
-      (c.ι.app j).hom ≫
-        ((Sheaf.isColimitSheafifyCocone _ (colimit.isColimit _)).coconePointUniqueUpToIso
-        hc).inv.hom := by
-  rw [← ObjectProperty.FullSubcategory.comp_hom, IsColimit.comp_coconePointUniqueUpToIso_inv]
-
-/-- **Sections of a filtered colimit come locally from a stage.** -/
-lemma exists_mem_forall_exists_of_isColimit (hc : IsColimit c) {W : X.Etale}
+/-- **Sections of a filtered colimit of abelian sheaves are locally lifted.** Every section of
+`c.pt` over `W` is, on the members of a covering sieve of `W`, the image of a section of some
+`F k`. -/
+lemma exists_mem_forall_exists_app_eq_ab (hc : IsColimit c) {W : X.Etale}
     (s : c.pt.obj.obj (op W)) :
     ∃ R ∈ X.smallEtaleTopology W, ∀ ⦃V : X.Etale⦄ (f : V ⟶ W), R f →
-      ∃ (j : J) (x : (D.obj j).obj.obj (op V)),
-        (c.ι.app j).hom.app (op V) x = c.pt.obj.map f.op s := by
-  let e := (Sheaf.isColimitSheafifyCocone _ (colimit.isColimit _)).coconePointUniqueUpToIso hc
-  refine ⟨_, Presheaf.imageSieve_mem X.smallEtaleTopology
-    (toSheafify X.smallEtaleTopology (colimit (D ⋙ sheafToPresheaf _ _)))
-    (e.inv.hom.app (op W) s), fun V f ⟨t, ht⟩ ↦ ?_⟩
-  obtain ⟨j, x, rfl⟩ := exists_colimit_ι_app_eq D (op V) t
-  refine ⟨j, x, ?_⟩
-  have h₁ := Sheaf.sheafifyCocone_ι_app_val (colimit.cocone (D ⋙ sheafToPresheaf _ _)) j
-  simp only [colimit.cocone_ι, colimit.cocone_x] at h₁
-  have h₂ := congrArg (fun φ ↦ φ.app (op V) x)
-    ((sheafifyCocone_ι_app_comp_coconePointUniqueUpToIso hc j).symm.trans
-      (congrArg (· ≫ e.hom.hom) h₁))
-  simp only [NatTrans.comp_app, ConcreteCategory.comp_apply] at h₂
-  refine h₂.trans ?_
-  erw [ht, NatTrans.naturality_apply e.hom.hom f.op]
-  congr 1
-  exact Sheaf.iso_hom_app_inv_app_apply e _ s
+      ∃ (k : K) (t : (F.obj k).obj.obj (op V)),
+        (c.ι.app k).hom.app (op V) t = c.pt.obj.map f.op s := by
+  obtain ⟨E, hE, φ, hs, -, hφ⟩ := exists_presheafColimit_ab hc
+  refine ⟨_, Presheaf.imageSieve_mem _ φ s, fun V f ⟨p, hp⟩ ↦ ?_⟩
+  have hEV := isColimitOfPreserves ((CategoryTheory.evaluation _ _).obj (op V)) hE
+  obtain ⟨k, t, rfl⟩ := Concrete.isColimit_exists_rep _ hEV p
+  refine ⟨k, t, Eq.trans ?_ hp⟩
+  rw [← hφ k]
+  rfl
 
-/-- **A section vanishing in a filtered colimit vanishes locally at a later stage.** -/
-lemma exists_mem_forall_exists_eq_zero_of_isColimit (hc : IsColimit c) {W : X.Etale} {j : J}
-    (x : (D.obj j).obj.obj (op W)) (hx : (c.ι.app j).hom.app (op W) x = 0) :
+/-- **Sections of a filtered colimit of abelian sheaves are locally separated.** Two sections
+of `F k` over `W` with the same image in `c.pt` agree, on the members of a covering sieve of
+`W`, in some later `F k'`. -/
+lemma exists_mem_forall_exists_map_eq_ab (hc : IsColimit c) {W : X.Etale} {k : K}
+    (t t' : (F.obj k).obj.obj (op W))
+    (h : (c.ι.app k).hom.app (op W) t = (c.ι.app k).hom.app (op W) t') :
     ∃ R ∈ X.smallEtaleTopology W, ∀ ⦃V : X.Etale⦄ (f : V ⟶ W), R f →
-      ∃ (k : J) (φ : j ⟶ k), (D.map φ).hom.app (op V) ((D.obj j).obj.map f.op x) = 0 := by
-  have h₁ := Sheaf.sheafifyCocone_ι_app_val (colimit.cocone (D ⋙ sheafToPresheaf _ _)) j
-  simp only [colimit.cocone_ι, colimit.cocone_x] at h₁
-  have h₂ := congrArg (fun φ ↦ φ.app (op W) x) (h₁.symm.trans (sheafifyCocone_ι_app_eq hc j))
-  simp only [NatTrans.comp_app, ConcreteCategory.comp_apply] at h₂
-  have h : (toSheafify X.smallEtaleTopology (colimit (D ⋙ sheafToPresheaf _ _))).app (op W)
-      ((colimit.ι (D ⋙ sheafToPresheaf _ _) j).app (op W) x) =
-      (toSheafify X.smallEtaleTopology (colimit (D ⋙ sheafToPresheaf _ _))).app (op W) 0 := by
-    refine h₂.trans ?_
-    rw [hx, map_zero, map_zero]
-  refine ⟨_, Presheaf.equalizerSieve_mem X.smallEtaleTopology
-    (toSheafify X.smallEtaleTopology (colimit (D ⋙ sheafToPresheaf _ _))) _ _ h,
-    fun V f hf ↦ ?_⟩
-  change (colimit (D ⋙ sheafToPresheaf _ _)).map f.op _ =
-    (colimit (D ⋙ sheafToPresheaf _ _)).map f.op 0 at hf
-  rw [map_zero] at hf
-  exact exists_map_app_eq_zero_of_colimit_ι_app_eq_zero D (op V) _
-    ((NatTrans.naturality_apply (colimit.ι (D ⋙ sheafToPresheaf _ _) j) f.op x).trans hf)
+      ∃ (k' : K) (a : k ⟶ k'),
+        (F.map a).hom.app (op V) ((F.obj k).obj.map f.op t) =
+          (F.map a).hom.app (op V) ((F.obj k).obj.map f.op t') := by
+  obtain ⟨E, hE, φ, -, hi, hφ⟩ := exists_presheafColimit_ab hc
+  have h' : φ.app (op W) ((E.ι.app k).app (op W) t) =
+      φ.app (op W) ((E.ι.app k).app (op W) t') := by
+    change (E.ι.app k ≫ φ).app _ t = (E.ι.app k ≫ φ).app _ t'
+    rw [hφ]
+    exact h
+  refine ⟨_, Presheaf.equalizerSieve_mem _ φ _ _ h', fun V f hf ↦ ?_⟩
+  have hEV := isColimitOfPreserves ((CategoryTheory.evaluation _ _).obj (op V)) hE
+  have hf' : (E.ι.app k).app (op V) ((F.obj k).obj.map f.op t) =
+      (E.ι.app k).app (op V) ((F.obj k).obj.map f.op t') := by
+    have hn := (E.ι.app k).naturality f.op
+    have e1 := ConcreteCategory.congr_hom hn t
+    have e2 := ConcreteCategory.congr_hom hn t'
+    simp only [ConcreteCategory.comp_apply] at e1 e2
+    erw [e1, e2]
+    exact hf
+  obtain ⟨k', a, b, hab⟩ := Concrete.isColimit_exists_of_rep_eq _ hEV _ _ hf'
+  refine ⟨_, a ≫ IsFiltered.coeqHom a b, ?_⟩
+  let q := IsFiltered.coeqHom a b
+  calc (F.map (a ≫ q)).hom.app (op V) ((F.obj k).obj.map f.op t)
+      = (F.map q).hom.app (op V) ((F.map a).hom.app (op V) ((F.obj k).obj.map f.op t)) := by
+        rw [F.map_comp]; rfl
+    _ = (F.map q).hom.app (op V) ((F.map b).hom.app (op V) ((F.obj k).obj.map f.op t')) :=
+        congrArg _ hab
+    _ = (F.map (b ≫ q)).hom.app (op V) ((F.obj k).obj.map f.op t') := by
+        rw [F.map_comp]; rfl
+    _ = _ := by rw [← IsFiltered.coeq_condition a b]
 
-/-- **Sections of a filtered colimit over a quasi-compact étale `X`-scheme, injectivity.** Let
-`c` be a colimit of a filtered diagram `D` of abelian étale sheaves on `X`, and `W` an étale
-`X`-scheme with quasi-compact underlying space. A section of `D_j` over `W` which vanishes in
-`c.pt` vanishes in some `D_k`, `j ⟶ k`. -/
-lemma exists_map_app_eq_zero_of_isColimit (hc : IsColimit c) {W : X.Etale}
-    [CompactSpace W.left] {j : J} (x : (D.obj j).obj.obj (op W))
-    (hx : (c.ι.app j).hom.app (op W) x = 0) :
-    ∃ (k : J) (φ : j ⟶ k), (D.map φ).hom.app (op W) x = 0 := by
-  obtain ⟨R, hR, hloc⟩ := exists_mem_forall_exists_eq_zero_of_isColimit hc x hx
+/-- **Sections over a quasi-compact `W` of a filtered colimit of abelian sheaves are separated
+at a finite stage.** Two sections of `F k` over `W` with the same image in `c.pt` agree in some
+later `F k'`. -/
+theorem exists_map_eq_of_isColimit_ab (hc : IsColimit c) {W : X.Etale} [CompactSpace W.left]
+    {k : K} (t t' : (F.obj k).obj.obj (op W))
+    (h : (c.ι.app k).hom.app (op W) t = (c.ι.app k).hom.app (op W) t') :
+    ∃ (k' : K) (a : k ⟶ k'), (F.map a).hom.app (op W) t = (F.map a).hom.app (op W) t' := by
+  obtain ⟨R, hR, hloc⟩ := exists_mem_forall_exists_map_eq_ab hc t t' h
   obtain ⟨n, U, g, hRg, -, hcov⟩ := exists_finite_affine_of_mem_smallEtaleTopology hR
-  choose k φ hφ using fun a ↦ hloc (g a) (hRg a)
-  obtain ⟨m, ψ, h, hh⟩ := IsFiltered.exists_forall_comp_eq k φ
-  refine ⟨m, ψ, (isSheafFor_ofArrows (D.obj m) g hcov).isSeparatedFor.ext ?_⟩
-  rintro Z f ⟨a⟩
-  change (D.obj m).obj.map _ _ = (D.obj m).obj.map _ 0
-  rw [map_zero, ← NatTrans.naturality_apply, ← hh a, map_comp_hom_app_apply, hφ a, map_zero]
+  choose k₁ a₁ ha₁ using fun i ↦ hloc (g i) (hRg i)
+  obtain ⟨k', A, b, hb⟩ := IsFiltered.exists_comp_eq_of_finite a₁
+  refine ⟨k', A, (isSheafFor_ofArrows (F.obj k') g hcov).isSeparatedFor.ext ?_⟩
+  rintro Z f ⟨i⟩
+  change (F.obj k').obj.map (g i).op _ = (F.obj k').obj.map (g i).op _
+  have hnat (z : (F.obj k).obj.obj (op W)) : (F.obj k').obj.map (g i).op ((F.map A).hom.app _ z) =
+      (F.map (b i)).hom.app _ ((F.map (a₁ i)).hom.app _ ((F.obj k).obj.map (g i).op z)) := by
+    rw [← hb i, F.map_comp]
+    exact (NatTrans.naturality_apply (F.map (a₁ i) ≫ F.map (b i)).hom (g i).op z).symm
+  rw [hnat, hnat, ha₁ i]
 
-/-- **Sections of a filtered colimit over a qcqs étale `X`-scheme, surjectivity.** Let `c` be a
-colimit of a filtered diagram `D` of abelian étale sheaves on `X`, and `W` an étale `X`-scheme
-with quasi-compact quasi-separated underlying scheme. Every section of `c.pt` over `W` comes
-from some `D_j`. -/
-lemma exists_app_eq_of_isColimit_addCommGrpCat (hc : IsColimit c) {W : X.Etale}
-    [CompactSpace W.left] [QuasiSeparatedSpace W.left] (s : c.pt.obj.obj (op W)) :
-    ∃ (j : J) (x : (D.obj j).obj.obj (op W)), (c.ι.app j).hom.app (op W) x = s := by
-  classical
-  obtain ⟨R, hR, hloc⟩ := exists_mem_forall_exists_of_isColimit hc s
+/-- **Sections over a quasi-compact `W` of a filtered colimit of abelian sheaves vanish at a
+finite stage.** A section of `F k` over `W` which vanishes in `c.pt` vanishes in some later
+`F k'`. -/
+theorem exists_map_eq_zero_of_isColimit_ab (hc : IsColimit c) {W : X.Etale}
+    [CompactSpace W.left] {k : K} (t : (F.obj k).obj.obj (op W))
+    (h : (c.ι.app k).hom.app (op W) t = 0) :
+    ∃ (k' : K) (a : k ⟶ k'), (F.map a).hom.app (op W) t = 0 := by
+  obtain ⟨k', a, ha⟩ := exists_map_eq_of_isColimit_ab hc t 0 (by rw [h, map_zero])
+  exact ⟨k', a, by rw [ha, map_zero]⟩
+
+/-- **Sections over a quasi-compact quasi-separated `W` of a filtered colimit of abelian
+sheaves come from a finite stage.** Every section of `c.pt` over `W` is the image of a section
+of some `F k` (Stacks 0738). -/
+theorem exists_app_eq_of_isColimit_ab (hc : IsColimit c) {W : X.Etale} [CompactSpace W.left]
+    [QuasiSeparatedSpace W.left] (s : c.pt.obj.obj (op W)) :
+    ∃ (k : K) (t : (F.obj k).obj.obj (op W)), (c.ι.app k).hom.app (op W) t = s := by
+  obtain ⟨R, hR, hloc⟩ := exists_mem_forall_exists_app_eq_ab hc s
   obtain ⟨n, U, g, hRg, hU, hcov⟩ := exists_finite_affine_of_mem_smallEtaleTopology hR
-  choose j x hx using fun a ↦ hloc (g a) (hRg a)
-  obtain ⟨k, hk⟩ := IsFiltered.exists_forall_nonempty_hom j
-  let x' (a : Fin n) : (D.obj k).obj.obj (op (U a)) := (D.map (hk a).some).hom.app _ (x a)
-  have hx' (a : Fin n) : (c.ι.app k).hom.app _ (x' a) = c.pt.obj.map (g a).op s := by
-    rw [← hx a]
-    exact cocone_ι_app_map_apply c _ _ _
-  -- the differences on the overlaps die at a later stage
-  have hW (a b : Fin n) : CompactSpace (pullback (g a) (g b)).left := by
-    have := hU a
-    have := hU b
-    exact (compactSpace_and_quasiSeparatedSpace_pullback (g a) (g b)).1
-  let d (a b : Fin n) := (D.obj k).obj.map (pullback.fst (g a) (g b)).op (x' a) -
-    (D.obj k).obj.map (pullback.snd (g a) (g b)).op (x' b)
-  have hd (a b : Fin n) : (c.ι.app k).hom.app _ (d a b) = 0 := by
-    rw [map_sub, NatTrans.naturality_apply, NatTrans.naturality_apply, hx', hx']
-    change c.pt.obj.map (pullback.fst (g a) (g b)).op (c.pt.obj.map (g a).op s) -
-      c.pt.obj.map (pullback.snd (g a) (g b)).op (c.pt.obj.map (g b).op s) = 0
+  choose k₁ t₁ ht₁ using fun i ↦ hloc (g i) (hRg i)
+  obtain ⟨k, ⟨b⟩⟩ := IsFiltered.exists_cocone_of_finite k₁
+  let t₂ (i : Fin n) : (F.obj k).obj.obj (op (U i)) := (F.map (b i)).hom.app _ (t₁ i)
+  have ht₂ (i : Fin n) : (c.ι.app k).hom.app _ (t₂ i) = c.pt.obj.map (g i).op s := by
+    rw [← ht₁ i, ← c.w (b i)]
+    rfl
+  -- on the overlaps the local lifts agree at a later stage
+  have hpair (ij : Fin n × Fin n) : ∃ (k' : K) (a : k ⟶ k'),
+      (F.map a).hom.app _ ((F.obj k).obj.map (pullback.fst (g ij.1) (g ij.2)).op (t₂ ij.1)) =
+        (F.map a).hom.app _ ((F.obj k).obj.map (pullback.snd (g ij.1) (g ij.2)).op
+          (t₂ ij.2)) := by
+    have := hU ij.1
+    have := hU ij.2
+    obtain ⟨_, _⟩ := compactSpace_and_quasiSeparatedSpace_pullback (g ij.1) (g ij.2)
+    refine exists_map_eq_of_isColimit_ab hc _ _ ?_
+    rw [NatTrans.naturality_apply, NatTrans.naturality_apply, ht₂, ht₂]
+    change c.pt.obj.map _ (c.pt.obj.map _ s) = c.pt.obj.map _ (c.pt.obj.map _ s)
     rw [← ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply, ← Functor.map_comp,
-      ← Functor.map_comp, ← op_comp, ← op_comp, pullback.condition, sub_self]
-  choose m φ hφ using fun ab : Fin n × Fin n ↦
-    exists_map_app_eq_zero_of_isColimit hc (d ab.1 ab.2) (hd ab.1 ab.2)
-  obtain ⟨l, ψ, h, hh⟩ := IsFiltered.exists_forall_comp_eq m φ
-  let z (a : Fin n) : (D.obj l).obj.obj (op (U a)) := (D.map ψ).hom.app _ (x' a)
+      ← Functor.map_comp, ← op_comp, ← op_comp, pullback.condition]
+  choose k₂ a₂ ha₂ using hpair
+  obtain ⟨k', A, b', hb'⟩ := IsFiltered.exists_comp_eq_of_finite a₂
+  let z (i : Fin n) : (F.obj k').obj.obj (op (U i)) := (F.map A).hom.app _ (t₂ i)
+  have hz (i : Fin n) : (c.ι.app k').hom.app _ (z i) = c.pt.obj.map (g i).op s := by
+    rw [← ht₂ i, ← c.w A]
+    rfl
+  have hA (ij : Fin n × Fin n) :
+      (F.obj k').obj.map (pullback.fst (g ij.1) (g ij.2)).op (z ij.1) =
+        (F.obj k').obj.map (pullback.snd (g ij.1) (g ij.2)).op (z ij.2) := by
+    have e (j : Fin n) (r : pullback (g ij.1) (g ij.2) ⟶ U j) :
+        (F.obj k').obj.map r.op (z j) =
+          (F.map (b' ij)).hom.app _
+            ((F.map (a₂ ij)).hom.app _ ((F.obj k).obj.map r.op (t₂ j))) := by
+      change (F.obj k').obj.map r.op ((F.map A).hom.app _ (t₂ j)) = _
+      rw [← hb' ij, F.map_comp]
+      exact (NatTrans.naturality_apply (F.map (a₂ ij) ≫ F.map (b' ij)).hom r.op (t₂ j)).symm
+    rw [e, e, ha₂ ij]
   obtain ⟨y, hy, -⟩ := ((Presieve.isSheafFor_arrows_iff_pullbacks _ g).1
-    (isSheafFor_ofArrows (D.obj l) g hcov)) z fun a b ↦ by
-      change (D.obj l).obj.map _ ((D.map ψ).hom.app _ (x' a)) =
-        (D.obj l).obj.map _ ((D.map ψ).hom.app _ (x' b))
-      rw [← sub_eq_zero, ← NatTrans.naturality_apply (D.map ψ).hom,
-        ← NatTrans.naturality_apply (D.map ψ).hom, ← map_sub,
-        ← hh (a, b), map_comp_hom_app_apply]
-      erw [hφ (a, b)]
-      exact map_zero _
-  refine ⟨l, y, (isSheafFor_ofArrows c.pt g hcov).isSeparatedFor.ext ?_⟩
-  rintro Z f ⟨a⟩
+    (isSheafFor_ofArrows (F.obj k') g hcov)) z fun i j ↦ hA (i, j)
+  refine ⟨k', y, (isSheafFor_ofArrows c.pt g hcov).isSeparatedFor.ext ?_⟩
+  rintro Z f ⟨i⟩
   change c.pt.obj.map _ _ = c.pt.obj.map _ _
-  erw [← NatTrans.naturality_apply]
-  erw [hy a]
-  exact (cocone_ι_app_map_apply c ψ _ (x' a)).trans (hx' a)
+  rw [← hz i]
+  erw [← hy i]
+  exact (NatTrans.naturality_apply (c.ι.app k').hom (g i).op y).symm
 
 end Sections
+
 section Cech
 
 open Presheaf
 
-/-- Let `c` be a colimit of a filtered diagram `D` of injective abelian étale sheaves on `X`. On
-a finite family of étale `X`-schemes over `V` whose Čech nerve has quasi-compact
-quasi-separated members, the Čech complex of `c.pt` is exact in positive degrees: a Čech
-cocycle comes from a cochain of some `D_k` whose differential vanishes at a later stage `D_l`,
-whose Čech complex is exact. -/
-lemma exactAt_cechComplex_of_isColimit_of_injective [∀ j, Injective (D.obj j)]
-    (hc : IsColimit c) {V : X.Etale} {n : ℕ} (U : Fin n → Over V)
-    (hU : ∀ (k : ℕ) (y : Fin (k + 1) → Fin n), CompactSpace (cechNerveObj U y).left.left ∧
-      QuasiSeparatedSpace (cechNerveObj U y).left.left)
-    (q : ℕ) : ((cechComplex U).obj c.pt.obj).ExactAt (q + 1) := by
-  classical
+variable {X : Scheme.{u}} {K : Type (u + 1)} [SmallCategory K] [IsFiltered K]
+  {F : K ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone F}
+
+/-- Let `c` be a colimit of a filtered diagram of abelian étale sheaves `F k` whose Čech
+complexes on a finite family `U` of étale `X`-schemes over `V` are exact in positive degrees.
+If the Čech nerve of `U` has quasi-compact quasi-separated members, then the Čech complex of
+`c.pt` on `U` is exact in positive degrees: Čech cochains of `c.pt` come from a finite stage,
+and so do the relations between them. -/
+lemma exactAt_cechComplex_of_isColimit (hc : IsColimit c) {V : X.Etale} {n : ℕ}
+    (U : Fin n → Over V)
+    (hU : ∀ (k : ℕ) (y : Fin (k + 1) → Fin n),
+      CompactSpace (cechNerveObj U y).left.left ∧ QuasiSeparatedSpace (cechNerveObj U y).left.left)
+    (q : ℕ) (hF : ∀ k, ((cechComplex U).obj (F.obj k).obj).ExactAt (q + 1)) :
+    ((cechComplex U).obj c.pt.obj).ExactAt (q + 1) := by
   rw [exactAt_cechComplex_iff]
   intro z hz
-  choose j w hw using fun y : Fin (q + 2) → Fin n ↦
+  -- the cochain `z` comes from a finite stage `k`
+  choose k₁ t₁ ht₁ using fun y : Fin (q + 2) → Fin n ↦
     have := (hU (q + 1) y).1
     have := (hU (q + 1) y).2
-    exists_app_eq_of_isColimit_addCommGrpCat hc (W := (cechNerveObj U y).left) (z y)
-  obtain ⟨k, hk⟩ := IsFiltered.exists_forall_nonempty_hom j
-  let w' : ((cechComplex U).obj (D.obj k).obj).X (q + 1) := fun y ↦
-    (D.map (hk y).some).hom.app _ (w y)
-  have hw' : ((cechComplex U).map (Y := c.pt.obj) (c.ι.app k).hom).f (q + 1) w' = z := by
+    exists_app_eq_of_isColimit_ab hc (z y)
+  obtain ⟨k, ⟨b⟩⟩ := IsFiltered.exists_cocone_of_finite k₁
+  let z' : ((cechComplex U).obj (F.obj k).obj).X (q + 1) := fun y ↦
+    (F.map (b y)).hom.app _ (t₁ y)
+  have hz' : ((cechComplex U).map (c.ι.app k).hom).f (q + 1) z' = z := by
     funext y
-    exact (cocone_ι_app_map_apply c (hk y).some _ (w y)).trans (hw y)
-  have hdw (y : Fin (q + 3) → Fin n) :
-      (c.ι.app k).hom.app _ ((((cechComplex U).obj (D.obj k).obj).d (q + 1) (q + 2) w') y) =
-        0 := by
-    have := congr_fun (cechComplex_map_f_d_apply U (Q := c.pt.obj) (c.ι.app k).hom (q + 1) w') y
-    rw [hw', hz] at this
-    exact this
-  choose m φ hφ using fun y : Fin (q + 3) → Fin n ↦
-    have := (hU (q + 2) y).1
-    exists_map_app_eq_zero_of_isColimit hc _ (hdw y)
-  obtain ⟨l, ψ, h, hh⟩ := IsFiltered.exists_forall_comp_eq m φ
-  have hdw'' : ((cechComplex U).obj (D.obj l).obj).d (q + 1) (q + 2)
-      (((cechComplex U).map (D.map ψ).hom).f (q + 1) w') = 0 := by
-    rw [← cechComplex_map_f_d_apply]
-    funext y
-    rw [cechComplex_map_f_apply, ← hh y, map_comp_hom_app_apply, hφ y, map_zero]
+    rw [cechComplex_map_f_apply, ← ht₁ y, ← c.w (b y)]
     rfl
-  obtain ⟨b, hb⟩ := (exactAt_cechComplex_iff U _ q).1
-    (Sheaf.exactAt_cechComplex_of_injective (D.obj l) U q) _ hdw''
-  refine ⟨((cechComplex U).map (Y := c.pt.obj) (c.ι.app l).hom).f q b, ?_⟩
-  rw [← cechComplex_map_f_d_apply, hb, ← hw']
+  -- its differential vanishes at a later stage `k'`
+  have hd (y : Fin (q + 3) → Fin n) : ∃ (k' : K) (a : k ⟶ k'),
+      (F.map a).hom.app _ (((cechComplex U).obj (F.obj k).obj).d (q + 1) (q + 2) z' y) = 0 := by
+    have := (hU (q + 2) y).1
+    refine exists_map_eq_zero_of_isColimit_ab hc _ ?_
+    rw [← cechComplex_map_f_apply, cechComplex_map_f_d_apply, hz']
+    change ((cechComplex U).obj c.pt.obj).d (q + 1) (q + 2) z y = 0
+    rw [hz]
+    rfl
+  choose k₂ a₂ ha₂ using hd
+  obtain ⟨k', A, b', hb'⟩ := IsFiltered.exists_comp_eq_of_finite a₂
+  let z'' := ((cechComplex U).map (F.map A).hom).f (q + 1) z'
+  have hz'' : ((cechComplex U).obj (F.obj k').obj).d (q + 1) (q + 2) z'' = 0 := by
+    funext y
+    rw [← cechComplex_map_f_d_apply, cechComplex_map_f_apply, ← hb' y, F.map_comp]
+    change (F.map (b' y)).hom.app _ ((F.map (a₂ y)).hom.app _ _) = 0
+    rw [ha₂ y, map_zero]
+  obtain ⟨e, he⟩ := (exactAt_cechComplex_iff U _ q).1 (hF k') z'' hz''
+  refine ⟨((cechComplex U).map (c.ι.app k').hom).f q e,
+    (cechComplex_map_f_d_apply U (c.ι.app k').hom q e).symm.trans ?_⟩
+  rw [he, ← hz']
   funext y
-  exact cocone_ι_app_map_apply c ψ _ (w' y)
+  rw [cechComplex_map_f_apply, cechComplex_map_f_apply, ← c.w A]
+  rfl
 
 variable (X) in
-/-- **A filtered colimit of injective sheaves is acyclic on a qcqs scheme.** On a quasi-compact
-quasi-separated scheme `X`, a filtered colimit of injective abelian étale sheaves has no higher
-cohomology. This follows from the Čech criterion
+/-- On a quasi-compact quasi-separated scheme `X`, a filtered colimit of injective abelian étale
+sheaves has no higher cohomology. This follows from the Čech criterion
 `CategoryTheory.Sheaf.subsingleton_H_succ_of_exactAt_cechComplex` applied to the étale
 `X`-schemes with quasi-compact quasi-separated underlying scheme, by
-`AlgebraicGeometry.Scheme.exactAt_cechComplex_of_isColimit_of_injective`. -/
-theorem subsingleton_H_succ_of_isColimit_of_injective [CompactSpace X] [QuasiSeparatedSpace X]
-    [∀ j, Injective (D.obj j)] (hc : IsColimit c) (q : ℕ) :
+`AlgebraicGeometry.Scheme.exactAt_cechComplex_of_isColimit`. -/
+theorem subsingleton_H_succ_of_isColimit_of_injective [CompactSpace X]
+    [QuasiSeparatedSpace X] [∀ k, Injective (F.obj k)] (hc : IsColimit c) (q : ℕ) :
     Subsingleton (Sheaf.H c.pt (q + 1)) := by
   let T : X.Etale := Etale.mk (𝟙 X)
   have hT : IsTerminal T := MorphismProperty.Over.mkIdTerminal _ X
@@ -311,81 +448,524 @@ theorem subsingleton_H_succ_of_isColimit_of_injective [CompactSpace X] [QuasiSep
       inferInstanceAs (QuasiSeparatedSpace (U (y l)).left)⟩
   exact Sheaf.subsingleton_H_succ_of_exactAt_cechComplex hT B
     ⟨‹CompactSpace X›, ‹QuasiSeparatedSpace X›⟩ hcov c.pt
-    (fun V hV n U hU _ q ↦ exactAt_cechComplex_of_isColimit_of_injective hc U hU q) q
+    (fun V hV n U hU _ q ↦ exactAt_cechComplex_of_isColimit hc U hU q
+      fun k ↦ Sheaf.exactAt_cechComplex_of_injective (F.obj k) U q) q
 
 end Cech
 
-/-- On a qcqs scheme, the functor of global sections `H⁰(X, -)` commutes with filtered
-colimits of abelian étale sheaves. -/
-lemma commutesWithColimit_zero [CompactSpace X] [QuasiSeparatedSpace X] (hc : IsColimit c) :
-    Abelian.Ext.CommutesWithColimit
-      ((constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
-        (AddCommGrpCat.of (ULift ℤ))) 0 c := by
-  let T : X.Etale := Etale.mk (𝟙 X)
-  have hT : IsTerminal T := MorphismProperty.Over.mkIdTerminal _ X
-  have : CompactSpace T.left := ‹CompactSpace X›
-  have : QuasiSeparatedSpace T.left := ‹QuasiSeparatedSpace X›
-  refine ⟨fun x ↦ ?_, fun j y hy ↦ ?_⟩
-  · obtain ⟨j, y, hy⟩ :=
-      exists_app_eq_of_isColimit_addCommGrpCat hc (Sheaf.H.equiv₀ c.pt hT x)
-    refine ⟨j, (Sheaf.H.equiv₀ _ hT).symm y, (Sheaf.H.equiv₀ c.pt hT).injective ?_⟩
-    refine (Sheaf.H.equiv₀_naturality hT (c.ι.app j) _).symm.trans ?_
-    rw [AddEquiv.apply_symm_apply, hy]
-  · obtain ⟨k, φ, hφ⟩ := exists_map_app_eq_zero_of_isColimit hc (Sheaf.H.equiv₀ _ hT y)
-      ((Sheaf.H.equiv₀_naturality hT (c.ι.app j) y).trans
-        ((congrArg (Sheaf.H.equiv₀ c.pt hT) hy).trans (map_zero _)))
-    exact ⟨k, φ, (Sheaf.H.equiv₀ _ hT).injective
-      ((Sheaf.H.equiv₀_naturality hT (D.map φ) y).symm.trans (hφ.trans (map_zero _).symm))⟩
+section InjectiveFunctor
+
+open ZeroObject
+
+variable {C : Type*} [Category* C] [Abelian C] [IsGrothendieckAbelian.{w} C]
+  {K : Type*} [Category* K] (D : K ⥤ C)
+
+/-- The diagram of the morphisms `D k ⟶ 0` to a zero object, as a diagram of arrows. -/
+noncomputable def _root_.CategoryTheory.Functor.arrowToZero : K ⥤ Arrow C where
+  obj k := Arrow.mk (0 : D.obj k ⟶ 0)
+  map a := Arrow.homMk (D.map a) (𝟙 0) (by simp)
+
+/-- A functorial injective object containing `D k`: the middle object of the functorial
+factorization of `D k ⟶ 0` into a monomorphism followed by a morphism with the right lifting
+property with respect to monomorphisms. -/
+noncomputable def _root_.CategoryTheory.Functor.injectiveExtension : K ⥤ C :=
+  D.arrowToZero ⋙
+    (MorphismProperty.functorialFactorizationData (MorphismProperty.monomorphisms C)
+      (MorphismProperty.monomorphisms C).rlp).Z
+
+/-- The natural monomorphism `D ⟶ D.injectiveExtension` into a diagram of injectives. -/
+noncomputable def _root_.CategoryTheory.Functor.toInjectiveExtension :
+    D ⟶ D.injectiveExtension where
+  app k := (MorphismProperty.functorialFactorizationData (MorphismProperty.monomorphisms C)
+      (MorphismProperty.monomorphisms C).rlp).i.app (D.arrowToZero.obj k)
+  naturality _ _ a := (MorphismProperty.functorialFactorizationData
+    (MorphismProperty.monomorphisms C) (MorphismProperty.monomorphisms C).rlp).i.naturality
+      (D.arrowToZero.map a)
+
+instance (k : K) : Injective (D.injectiveExtension.obj k) :=
+  inferInstanceAs (Injective (IsGrothendieckAbelian.monoMapFactorizationDataRlp
+    (0 : D.obj k ⟶ 0)).Z)
+
+instance (k : K) : Mono (D.toInjectiveExtension.app k) :=
+  inferInstanceAs (Mono (IsGrothendieckAbelian.monoMapFactorizationDataRlp
+    (0 : D.obj k ⟶ 0)).i)
+
+end InjectiveFunctor
+
+section DimensionShifting
+
+variable {X : Scheme.{u}} {K : Type (u + 1)} [SmallCategory K] [IsFiltered K]
+
+/-- The pointwise short complex `D k ⟶ I k ⟶ Q k` of a composable pair of morphisms of
+diagrams with vanishing composite. -/
+noncomputable abbrev shortComplexApp {D I Q : K ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    (ι : D ⟶ I) (π : I ⟶ Q) (h : ι ≫ π = 0) (k : K) :
+    ShortComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
+  ShortComplex.mk (ι.app k) (π.app k) (by rw [← NatTrans.comp_app, h, NatTrans.app_zero])
+
+/-- The transition morphisms between the pointwise short complexes
+`AlgebraicGeometry.Scheme.shortComplexApp`. -/
+noncomputable def shortComplexAppMap
+    {D I Q : K ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    (ι : D ⟶ I) (π : I ⟶ Q) (h : ι ≫ π = 0) {k k' : K} (a : k ⟶ k') :
+    shortComplexApp ι π h k ⟶ shortComplexApp ι π h k' where
+  τ₁ := D.map a
+  τ₂ := I.map a
+  τ₃ := Q.map a
+  comm₁₂ := ι.naturality a
+  comm₂₃ := π.naturality a
+
+/-- **Dimension shifting for filtered colimits.** Let `0 → D → I → Q → 0` be a short exact
+sequence of diagrams of abelian sheaves with `I` pointwise injective, mapping to a short exact
+sequence `0 → c.pt → cI.pt → cQ.pt → 0` of cocone points with `H^{n + 1}(cI.pt) = 0`. If
+`Hⁿ(cI.pt)` is covered by the `Hⁿ(I k)` and `colim_k Hⁿ(Q k) ⟶ Hⁿ(cQ.pt)` is bijective, then
+`colim_k H^{n + 1}(D k) ⟶ H^{n + 1}(c.pt)` is bijective. -/
+lemma H_map_isColimit_succ_of_shortExact
+    {D I Q : K ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (ι : D ⟶ I) (π : I ⟶ Q)
+    (h : ι ≫ π = 0) (hS : ∀ k, (shortComplexApp ι π h k).ShortExact)
+    [∀ k, Injective (I.obj k)] {c : Cocone D} {cI : Cocone I} {cQ : Cocone Q}
+    (f : c.pt ⟶ cI.pt) (g : cI.pt ⟶ cQ.pt) (hfg : f ≫ g = 0)
+    (hS' : (ShortComplex.mk f g hfg).ShortExact)
+    (hf : ∀ k, c.ι.app k ≫ f = ι.app k ≫ cI.ι.app k)
+    (hg : ∀ k, cI.ι.app k ≫ g = π.app k ≫ cQ.ι.app k) (n : ℕ)
+    (hI : Subsingleton (Sheaf.H cI.pt (n + 1)))
+    (surjI : ∀ x : Sheaf.H cI.pt n, ∃ (k : K) (y : Sheaf.H (I.obj k) n),
+      Sheaf.H.map (cI.ι.app k) n y = x)
+    (surjQ : ∀ x : Sheaf.H cQ.pt n, ∃ (k : K) (y : Sheaf.H (Q.obj k) n),
+      Sheaf.H.map (cQ.ι.app k) n y = x)
+    (injQ : ∀ (k : K) (y : Sheaf.H (Q.obj k) n), Sheaf.H.map (cQ.ι.app k) n y = 0 →
+      ∃ (k' : K) (a : k ⟶ k'), Sheaf.H.map (Q.map a) n y = 0) :
+    (∀ x : Sheaf.H c.pt (n + 1), ∃ (k : K) (y : Sheaf.H (D.obj k) (n + 1)),
+      Sheaf.H.map (c.ι.app k) (n + 1) y = x) ∧
+    ∀ (k : K) (y : Sheaf.H (D.obj k) (n + 1)), Sheaf.H.map (c.ι.app k) (n + 1) y = 0 →
+      ∃ (k' : K) (a : k ⟶ k'), Sheaf.H.map (D.map a) (n + 1) y = 0 := by
+  let S' := ShortComplex.mk f g hfg
+  -- the morphisms from the pointwise short exact sequences to the colimit one
+  let φ (k : K) : shortComplexApp ι π h k ⟶ S' :=
+    { τ₁ := c.ι.app k
+      τ₂ := cI.ι.app k
+      τ₃ := cQ.ι.app k
+      comm₁₂ := hf k
+      comm₂₃ := hg k }
+  have : Subsingleton (Sheaf.H S'.X₂ (n + 1)) := hI
+  refine ⟨fun x ↦ ?_, fun k y hy ↦ ?_⟩
+  · obtain ⟨z, rfl⟩ := Sheaf.H.δSucc_surjective hS' n x
+    obtain ⟨k, z', rfl⟩ := surjQ z
+    exact ⟨k, Sheaf.H.δSucc (hS k) n z', Sheaf.H.map_δSucc (hS k) hS' (φ k) n z'⟩
+  · have : Subsingleton (Sheaf.H (shortComplexApp ι π h k).X₂ (n + 1)) :=
+      inferInstanceAs (Subsingleton (Sheaf.H (I.obj k) (n + 1)))
+    obtain ⟨w, rfl⟩ := Sheaf.H.δSucc_surjective (hS k) n y
+    have hw : Sheaf.H.δSucc hS' n (Sheaf.H.map (cQ.ι.app k) n w) = 0 := by
+      rw [← hy]
+      exact (Sheaf.H.map_δSucc (hS k) hS' (φ k) n w).symm
+    obtain ⟨v, hv⟩ := ((Sheaf.H.exact_map_δSucc hS' n) _).1 hw
+    obtain ⟨k₁, v₁, rfl⟩ := surjI v
+    -- the images of `w` and of `v₁` agree in `Hⁿ(cQ.pt)`, hence at a finite stage
+    let m := IsFiltered.max k k₁
+    let a : k ⟶ m := IsFiltered.leftToMax k k₁
+    let b : k₁ ⟶ m := IsFiltered.rightToMax k k₁
+    have hm : Sheaf.H.map (cQ.ι.app m) n
+        (Sheaf.H.map (Q.map a) n w - Sheaf.H.map (Q.map b) n (Sheaf.H.map (π.app k₁) n v₁)) =
+          0 := by
+      rw [map_sub, ← Sheaf.H.map_comp_apply, ← Sheaf.H.map_comp_apply,
+        ← Sheaf.H.map_comp_apply, cQ.w a, cQ.w b,
+        ← hg, Sheaf.H.map_comp_apply]
+      exact sub_eq_zero.2 hv.symm
+    obtain ⟨k', a', ha'⟩ := injQ m _ hm
+    refine ⟨k', a ≫ a', ?_⟩
+    change Sheaf.H.map (shortComplexAppMap ι π h (a ≫ a')).τ₁ (n + 1) _ = 0
+    rw [Sheaf.H.map_δSucc (hS k) (hS k') (shortComplexAppMap ι π h (a ≫ a')) n w]
+    change Sheaf.H.δSucc (hS k') n (Sheaf.H.map (Q.map (a ≫ a')) n w) = 0
+    rw [map_sub, sub_eq_zero, ← Sheaf.H.map_comp_apply, ← Sheaf.H.map_comp_apply,
+      ← Q.map_comp, ← Q.map_comp, ← Sheaf.H.map_comp_apply, ← π.naturality,
+      Sheaf.H.map_comp_apply] at ha'
+    rw [ha']
+    exact ((Sheaf.H.exact_map_δSucc (hS k') n) _).2 ⟨_, rfl⟩
 
 variable (X) in
-/-- **Étale cohomology commutes with filtered colimits on a qcqs scheme.** Let `X` be
-quasi-compact and quasi-separated and let `c` be a colimit cocone of a filtered diagram `D` of
-abelian étale sheaves on `X`. Then for every `q` the canonical map
-`colim_j Hᵠ(X, D_j) ⟶ Hᵠ(X, colim_j D_j)` is bijective; this is spelled out elementwise: every
-class on the colimit comes from some `D_j`, and a class on `D_j` which dies on the colimit
-already dies on some `D_k`, `j ⟶ k`. (blueprint: `lem-weil-pbc-cohomology-filtered-colimit`) -/
+/-- **Global sections of a qcqs scheme commute with filtered colimits**, in terms of `H⁰`. -/
+lemma H_zero_map_isColimit [CompactSpace X] [QuasiSeparatedSpace X]
+    {D : K ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone D}
+    (hc : IsColimit c) :
+    (∀ x : Sheaf.H c.pt 0, ∃ (k : K) (y : Sheaf.H (D.obj k) 0),
+      Sheaf.H.map (c.ι.app k) 0 y = x) ∧
+    ∀ (k : K) (y : Sheaf.H (D.obj k) 0), Sheaf.H.map (c.ι.app k) 0 y = 0 →
+      ∃ (k' : K) (a : k ⟶ k'), Sheaf.H.map (D.map a) 0 y = 0 := by
+  let T : X.Etale := Etale.mk (𝟙 X)
+  have hT : IsTerminal T := MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale _
+  have : CompactSpace T.left := ‹CompactSpace X›
+  have : QuasiSeparatedSpace T.left := ‹QuasiSeparatedSpace X›
+  refine ⟨fun x ↦ ?_, fun k y hy ↦ ?_⟩
+  · obtain ⟨k, t, ht⟩ := exists_app_eq_of_isColimit_ab hc (Sheaf.H.equiv₀ c.pt hT x)
+    refine ⟨k, (Sheaf.H.equiv₀ _ hT).symm t, ?_⟩
+    rw [Sheaf.H.equiv₀_symm_naturality, ht]
+    exact (Sheaf.H.equiv₀ c.pt hT).symm_apply_apply x
+  · have h0 : (c.ι.app k).hom.app (op T) (Sheaf.H.equiv₀ _ hT y) = 0 := by
+      rw [Sheaf.H.equiv₀_naturality, hy, map_zero]
+    obtain ⟨k', a, ha⟩ := exists_map_eq_zero_of_isColimit_ab hc _ h0
+    refine ⟨k', a, (Sheaf.H.equiv₀ _ hT).injective ?_⟩
+    rw [← Sheaf.H.equiv₀_naturality, ha, map_zero]
+
+end DimensionShifting
+
+/-- **Étale cohomology commutes with `u + 1`-small filtered colimits on a qcqs scheme.** Let
+`X` be quasi-compact and quasi-separated and let `c` be a colimit cocone of a filtered diagram
+`D : K ⥤ Sh(X_ét, Ab)` indexed by a `u + 1`-small category. Then for every `q` the canonical
+map `colim_k Hᵠ(X, D_k) ⟶ Hᵠ(X, c.pt)` is bijective, spelled out elementwise.
+
+Degree zero is `AlgebraicGeometry.Scheme.H_zero_map_isColimit`. In higher degrees, we embed `D`
+into the diagram of injective sheaves `D.injectiveExtension` with cokernel `Q`; since filtered
+colimits are exact, the colimit sequence `0 → c.pt → colim I → colim Q → 0` is short exact,
+`colim I` has no higher cohomology
+(`AlgebraicGeometry.Scheme.subsingleton_H_succ_of_isColimit_of_injective`), and we conclude by
+`AlgebraicGeometry.Scheme.H_map_isColimit_succ_of_shortExact`. -/
 @[stacks 03Q6]
-theorem H_map_bijective_of_isColimit_of_isFiltered [CompactSpace X] [QuasiSeparatedSpace X]
+theorem H_map_isColimit_of_isFiltered_small (X : Scheme.{u}) [CompactSpace X]
+    [QuasiSeparatedSpace X] {K : Type (u + 1)} [SmallCategory K] [IsFiltered K]
+    {D : K ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone D}
+    (hc : IsColimit c) (q : ℕ) :
+    (∀ x : Sheaf.H c.pt q, ∃ (k : K) (y : Sheaf.H (D.obj k) q),
+      Sheaf.H.map (c.ι.app k) q y = x) ∧
+    ∀ (k : K) (y : Sheaf.H (D.obj k) q), Sheaf.H.map (c.ι.app k) q y = 0 →
+      ∃ (k' : K) (a : k ⟶ k'), Sheaf.H.map (D.map a) q y = 0 := by
+  induction q generalizing D c with
+  | zero => exact H_zero_map_isColimit X hc
+  | succ n ih =>
+    let I := D.injectiveExtension
+    let ι := D.toInjectiveExtension
+    let π := cokernel.π ι
+    have h : ι ≫ π = 0 := cokernel.condition ι
+    have : Mono ι := NatTrans.mono_of_mono_app ι
+    have hSf : (ShortComplex.mk ι π h).ShortExact :=
+      .mk' (ShortComplex.exact_cokernel ι) inferInstance inferInstance
+    have hS (k : K) : (shortComplexApp ι π h k).ShortExact :=
+      hSf.map_of_exact ((CategoryTheory.evaluation K _).obj k)
+    let f : c.pt ⟶ colimit I := hc.desc ((Cocone.precompose ι).obj (colimit.cocone I))
+    let g : colimit I ⟶ colimit (cokernel ι) := colimMap π
+    have hf (k : K) : c.ι.app k ≫ f = ι.app k ≫ colimit.ι I k := hc.fac _ k
+    have hg (k : K) : colimit.ι I k ≫ g = π.app k ≫ colimit.ι _ k := ι_colimMap π k
+    have hfg : f ≫ g = 0 := hc.hom_ext fun k ↦ by
+      rw [reassoc_of% (hf k), hg, ← NatTrans.comp_app_assoc, h, NatTrans.app_zero, zero_comp,
+        comp_zero]
+    let e₁ : colimit D ≅ c.pt := (colimit.isColimit D).coconePointUniqueUpToIso hc
+    have hS' : (ShortComplex.mk f g hfg).ShortExact := by
+      let e : (ShortComplex.mk ι π h).map colim ≅ ShortComplex.mk f g hfg :=
+        ShortComplex.isoMk e₁ (Iso.refl _) (Iso.refl _) (colimit.hom_ext fun k ↦ ?_)
+          (colimit.hom_ext fun k ↦ ?_)
+      · exact ShortComplex.shortExact_of_iso e (hSf.map_of_exact colim)
+      · simp only [colimit.comp_coconePointUniqueUpToIso_hom_assoc, hf, ShortComplex.map_f,
+          colim_map, Iso.refl_hom, Category.comp_id, ι_colimMap, e₁]
+        rfl
+      · simp only [Iso.refl_hom, Category.id_comp, ι_colimMap, ShortComplex.map_g, colim_map,
+          Category.comp_id, g]
+    exact H_map_isColimit_succ_of_shortExact ι π h hS f g hfg hS' hf hg n
+      (subsingleton_H_succ_of_isColimit_of_injective X (colimit.isColimit I) n)
+      (ih (colimit.isColimit I)).1 (ih (colimit.isColimit _)).1 (ih (colimit.isColimit _)).2
+
+section DirectedUnion
+
+variable {X : Scheme.{u}}
+
+/-- **Filtered unions of subsheaves.** A cocone of a `u + 1`-small filtered diagram of abelian
+étale sheaves whose legs are monomorphisms is a colimit cocone as soon as every section of the
+cocone point is locally in the image of some leg: the comparison map from the colimit is a
+monomorphism since filtered colimits are exact, and an epimorphism since it is locally
+surjective. -/
+noncomputable def isColimitOfMonoOfLocallySurjectiveAb {K : Type (u + 1)} [SmallCategory K]
+    [IsFiltered K] {D : K ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (c : Cocone D)
+    [∀ k, Mono (c.ι.app k)]
+    (h : ∀ (V : X.Etale) (s : c.pt.obj.obj (op V)), ∃ R ∈ X.smallEtaleTopology V,
+      ∀ ⦃W : X.Etale⦄ (g : W ⟶ V), R g →
+        ∃ (k : K) (t : (D.obj k).obj.obj (op W)),
+          (c.ι.app k).hom.app (op W) t = c.pt.obj.map g.op s) :
+    IsColimit c := by
+  have : IsConnected K := IsFiltered.isConnected _
+  let φ := colimit.desc D c
+  have hmono : Mono φ := by
+    let α : D ⟶ (Functor.const _).obj c.pt := { app k := c.ι.app k }
+    have : Mono α := NatTrans.mono_of_mono_app _
+    have : Mono (colim.map α) := inferInstance
+    let e := (colimit.isColimit ((Functor.const K).obj c.pt)).coconePointUniqueUpToIso
+      (isColimitConstCocone K c.pt)
+    have : φ = colim.map α ≫ e.hom := by
+      refine colimit.hom_ext fun k ↦ ?_
+      simp [φ, e, α]
+    rw [this]
+    infer_instance
+  have hepi : Epi φ := by
+    have : Sheaf.IsLocallySurjective φ := by
+      refine ⟨fun {V} s ↦ ?_⟩
+      obtain ⟨R, hR, hRs⟩ := h V s
+      refine X.smallEtaleTopology.superset_covering ?_ hR
+      intro W g hg
+      obtain ⟨k, t, ht⟩ := hRs g hg
+      refine ⟨(colimit.ι D k).hom.app (op W) t, ?_⟩
+      rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app,
+        ← ObjectProperty.FullSubcategory.comp_hom, colimit.ι_desc]
+      exact ht
+    exact Sheaf.epi_of_isLocallySurjective _
+  have : IsIso ((colimit.isColimit D).desc c) := isIso_of_mono_of_epi φ
+  exact IsColimit.ofPointIso (colimit.isColimit D)
+
+/-- A morphism of abelian étale sheaves `g` whose image is sectionwise contained in the image of
+a monomorphism `f` composes to zero with the cokernel of `f`. -/
+lemma comp_cokernel_π_eq_zero {A B F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    (f : A ⟶ F) (g : B ⟶ F)
+    (h : ∀ (V : X.Etale) (t : B.obj.obj (op V)), ∃ t', f.hom.app (op V) t' = g.hom.app (op V) t) :
+    g ≫ cokernel.π f = 0 := by
+  refine (sheafToPresheaf _ _).map_injective (NatTrans.ext (funext fun V ↦ ?_))
+  ext t
+  obtain ⟨t', ht'⟩ := h V.unop t
+  change (cokernel.π f).hom.app V (g.hom.app V t) = 0
+  rw [← ht', ← ConcreteCategory.comp_apply, ← NatTrans.comp_app,
+    ← ObjectProperty.FullSubcategory.comp_hom, cokernel.condition]
+  rfl
+
+/-- **Cohomology of a directed union of subsheaves.** Let `X` be quasi-compact and
+quasi-separated, and let `m i : A i ⟶ F` be a directed family of subsheaves of an abelian étale
+sheaf `F`, indexed by a type of arbitrary size, such that every section of `F` is locally a
+section of some `A i`. Then every class in `Hᵠ(X, F)` comes from some `A i`, and a class on
+`A i` which vanishes on `F` vanishes on some larger `A i'`.
+
+The subsheaves are reindexed by their (`u + 1`-small) families of sections, so that this
+follows from `AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered_small`. -/
+theorem H_map_of_directed_of_locally (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
+    {F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {ι : Type*} [Nonempty ι]
+    {A : ι → Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (m : ∀ i, A i ⟶ F)
+    [∀ i, Mono (m i)]
+    (hdir : ∀ i i', ∃ (i'' : ι) (φ : A i ⟶ A i'') (φ' : A i' ⟶ A i''),
+      φ ≫ m i'' = m i ∧ φ' ≫ m i'' = m i')
+    (hloc : ∀ (V : X.Etale) (s : F.obj.obj (op V)), ∃ R ∈ X.smallEtaleTopology V,
+      ∀ ⦃W : X.Etale⦄ (g : W ⟶ V), R g →
+        ∃ (i : ι) (t : (A i).obj.obj (op W)), (m i).hom.app (op W) t = F.obj.map g.op s)
+    (q : ℕ) :
+    (∀ x : Sheaf.H F q, ∃ (i : ι) (y : Sheaf.H (A i) q), Sheaf.H.map (m i) q y = x) ∧
+    ∀ (i : ι) (y : Sheaf.H (A i) q), Sheaf.H.map (m i) q y = 0 →
+      ∃ (i' : ι) (φ : A i ⟶ A i') (_ : φ ≫ m i' = m i), Sheaf.H.map φ q y = 0 := by
+  -- the families of sections of the subsheaves
+  let rng (i : ι) : (V : X.Etale) → Set (F.obj.obj (op V)) :=
+    fun V ↦ Set.range ((m i).hom.app (op V))
+  let K := {T : (V : X.Etale) → Set (F.obj.obj (op V)) // ∃ i, rng i = T}
+  let idx (T : K) : ι := T.2.choose
+  have hidx (T : K) : rng (idx T) = T.1 := T.2.choose_spec
+  have hle {i i' : ι} (h : rng i ≤ rng i') : m i ≫ cokernel.π (m i') = 0 :=
+    comp_cokernel_π_eq_zero _ _ fun V t ↦ h V ⟨t, rfl⟩
+  have hrng {i i' : ι} (φ : A i ⟶ A i') (hφ : φ ≫ m i' = m i) : rng i ≤ rng i' := by
+    rintro V _ ⟨t, rfl⟩
+    exact ⟨φ.hom.app _ t, by rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app,
+      ← ObjectProperty.FullSubcategory.comp_hom, hφ]⟩
+  have : IsDirectedOrder K := ⟨fun T₁ T₂ ↦ by
+    obtain ⟨i'', φ, φ', hφ, hφ'⟩ := hdir (idx T₁) (idx T₂)
+    exact ⟨⟨rng i'', i'', rfl⟩, (hidx T₁).symm.le.trans (hrng φ hφ),
+      (hidx T₂).symm.le.trans (hrng φ' hφ')⟩⟩
+  have : Nonempty K := ⟨⟨rng (Classical.arbitrary ι), _, rfl⟩⟩
+  -- the diagram of subsheaves indexed by their families of sections
+  let G : K ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} :=
+    { obj T := A (idx T)
+      map {T T'} h := Abelian.monoLift (m (idx T')) (m (idx T))
+        (hle (by rw [hidx, hidx]; exact leOfHom h))
+      map_id T := by
+        rw [← cancel_mono (m (idx T)), Abelian.monoLift_comp, Category.id_comp]
+      map_comp {T T' T''} h h' := by
+        rw [← cancel_mono (m (idx T'')), Abelian.monoLift_comp, Category.assoc,
+          Abelian.monoLift_comp, Abelian.monoLift_comp] }
+  let cG : Cocone G :=
+    { pt := F
+      ι :=
+        { app T := m (idx T)
+          naturality T T' h := by
+            simp only [Functor.const_obj_obj, Functor.const_obj_map, Category.comp_id]
+            exact Abelian.monoLift_comp _ _ _ } }
+  have : ∀ T, Mono (cG.ι.app T) := fun T ↦ inferInstanceAs (Mono (m (idx T)))
+  have hcG : IsColimit cG := isColimitOfMonoOfLocallySurjectiveAb cG fun V s ↦ by
+    obtain ⟨R, hR, hRs⟩ := hloc V s
+    refine ⟨R, hR, fun W g hg ↦ ?_⟩
+    obtain ⟨i, t, ht⟩ := hRs g hg
+    let T : K := ⟨rng i, i, rfl⟩
+    obtain ⟨t', ht'⟩ : (m i).hom.app (op W) t ∈ rng (idx T) W := by
+      rw [hidx]
+      exact ⟨t, rfl⟩
+    exact ⟨T, t', ht'.trans ht⟩
+  obtain ⟨hsurj, hinj⟩ := H_map_isColimit_of_isFiltered_small X hcG q
+  refine ⟨fun x ↦ ?_, fun i y hy ↦ ?_⟩
+  · obtain ⟨T, y, hy⟩ := hsurj x
+    exact ⟨idx T, y, hy⟩
+  · let T : K := ⟨rng i, i, rfl⟩
+    let φ₀ : A i ⟶ A (idx T) := Abelian.monoLift (m (idx T)) (m i) (hle (by rw [hidx]))
+    have hφ₀ : φ₀ ≫ m (idx T) = m i := Abelian.monoLift_comp _ _ _
+    obtain ⟨T', h, hh⟩ := hinj T (Sheaf.H.map φ₀ q y) (by
+      change Sheaf.H.map (m (idx T)) q _ = 0
+      rw [← Sheaf.H.map_comp_apply, hφ₀, hy])
+    refine ⟨idx T', φ₀ ≫ G.map h, ?_, ?_⟩
+    · rw [Category.assoc]
+      change φ₀ ≫ G.map h ≫ cG.ι.app T' = _
+      rw [cG.w h]
+      exact hφ₀
+    · rw [Sheaf.H.map_comp_apply]
+      exact hh
+
+end DirectedUnion
+
+section General
+
+variable {X : Scheme.{u}}
+
+/-- A section of an abelian étale sheaf which is killed by a morphism lifts to the kernel. -/
+lemma exists_kernel_ι_app_eq_ab {G H : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    (ψ : G ⟶ H) {W : X.Etale} (x : G.obj.obj (op W)) (hx : ψ.hom.app (op W) x = 0) :
+    ∃ t : (kernel ψ).obj.obj (op W), (kernel.ι ψ).hom.app (op W) t = x := by
+  let E := sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
+    (CategoryTheory.evaluation _ _).obj (op W)
+  let e := PreservesKernel.iso E ψ ≪≫ AddCommGrpCat.kernelIsoKer (E.map ψ)
+  refine ⟨e.inv ⟨x, hx⟩, ?_⟩
+  have h₁ := PreservesKernel.iso_inv_ι E ψ
+  have h₂ := AddCommGrpCat.kernelIsoKer_inv_comp_ι (E.map ψ)
+  change (e.inv ≫ E.map (kernel.ι ψ)) ⟨x, hx⟩ = x
+  rw [Iso.trans_inv, Category.assoc, h₁, h₂]
+  rfl
+
+/-- A monomorphism of abelian étale sheaves is injective on sections. -/
+lemma injective_app_of_mono_ab {A B : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    (f : A ⟶ B) [Mono f] (V : X.Etaleᵒᵖ) : Function.Injective (f.hom.app V) :=
+  Sheaf.injective_app_f (S := ShortComplex.mk f (cokernel.π f) (cokernel.condition f))
+    (.mk' (ShortComplex.exact_cokernel f) inferInstance inferInstance) V
+
+/-- The zero morphism induces the zero map on cohomology. -/
+lemma H_map_zero_apply {A B : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (n : ℕ)
+    (x : Sheaf.H A n) : Sheaf.H.map (0 : A ⟶ B) n x = 0 := by
+  rw [Sheaf.H.map_apply, Abelian.Ext.mk₀_zero, Abelian.Ext.comp_zero]
+
+/-- **Étale cohomology commutes with filtered colimits on a qcqs scheme**, for filtered
+categories of arbitrary size.
+
+The images `I j` of the legs `D j ⟶ c.pt` form a directed family of subsheaves of `c.pt` whose
+sections locally exhaust those of `c.pt`, and the kernels of the transition maps `D j ⟶ D j'`
+form a directed family of subsheaves of the kernel `K j` of `D j ⟶ c.pt` whose sections locally
+exhaust those of `K j`; both facts are checked on stalks at geometric points, the stalk
+functors commuting with colimits. By `AlgebraicGeometry.Scheme.H_map_of_directed_of_locally`
+cohomology commutes with both directed unions, and we conclude by a diagram chase in the long
+exact sequences of `0 → K j → D j → I j → 0`. -/
+theorem H_map_isColimit_of_isFiltered_of_large (X : Scheme.{u}) [CompactSpace X]
+    [QuasiSeparatedSpace X] {J : Type w₁} [Category.{w₂} J] [IsFiltered J]
+    {D : J ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone D}
     (hc : IsColimit c) (q : ℕ) :
     (∀ x : Sheaf.H c.pt q, ∃ (j : J) (y : Sheaf.H (D.obj j) q),
       Sheaf.H.map (c.ι.app j) q y = x) ∧
     ∀ (j : J) (y : Sheaf.H (D.obj j) q), Sheaf.H.map (c.ι.app j) q y = 0 →
-      ∃ (k : J) (φ : j ⟶ k), Sheaf.H.map (D.map φ) q y = 0 := by
-  have : IsFiltered (AsSmall.{u + 1} J) := IsFiltered.of_equivalence AsSmall.equiv
-  have : HasExactColimitsOfShape J (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
-    HasExactColimitsOfShape.of_domain_equivalence _ AsSmall.equiv.symm
-  exact Abelian.Ext.commutesWithColimit_of_isFiltered _
-    (fun _ _ hc ↦ commutesWithColimit_zero hc)
-    (fun _ _ hc _ q x ↦ (subsingleton_H_succ_of_isColimit_of_injective X hc q).elim _ _) q D c hc
+      ∃ (j' : J) (φ : j ⟶ j'), Sheaf.H.map (D.map φ) q y = 0 := by
+  have hP := isConservativeFamilyOfPoints_ulift_pointSmallEtale X
+  have : Nonempty J := IsFiltered.nonempty
+  -- the images of the legs
+  let I (j : J) := image (c.ι.app j)
+  let m (j : J) : I j ⟶ c.pt := image.ι (c.ι.app j)
+  let e (j : J) : D.obj j ⟶ I j := factorThruImage (c.ι.app j)
+  have hem (j : J) : e j ≫ m j = c.ι.app j := image.fac _
+  let ρ {j j' : J} (a : j ⟶ j') : I j ⟶ I j' := image.lift
+    { I := I j', m := m j', e := D.map a ≫ e j', fac := by rw [Category.assoc, hem, c.w a] }
+  have hρ {j j' : J} (a : j ⟶ j') : ρ a ≫ m j' = m j := image.lift_fac _
+  have heρ {j j' : J} (a : j ⟶ j') : e j ≫ ρ a = D.map a ≫ e j' := by
+    rw [← cancel_mono (m j'), Category.assoc, hρ, hem, Category.assoc, hem, c.w a]
+  have himage (n : ℕ) := H_map_of_directed_of_locally X m
+    (fun j j' ↦ ⟨IsFiltered.max j j', ρ (IsFiltered.leftToMax j j'),
+      ρ (IsFiltered.rightToMax j j'), hρ _, hρ _⟩) (fun V s ↦ by
+      obtain ⟨R, hR, hRs⟩ :=
+        GrothendieckTopology.exists_mem_forall_exists_app_eq_of_isColimit hP hc s
+      refine ⟨R, hR, fun W g hg ↦ ?_⟩
+      obtain ⟨j, t, ht⟩ := hRs g hg
+      exact ⟨j, (e j).hom.app _ t, by rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app,
+        ← ObjectProperty.FullSubcategory.comp_hom, hem]; exact ht⟩) n
+  -- the short exact sequences `0 → K j → D j → I j → 0`
+  let κ (j : J) := kernel.ι (c.ι.app j)
+  have hκe (j : J) : κ j ≫ e j = 0 := by
+    rw [← cancel_mono (m j), Category.assoc, hem, kernel.condition, zero_comp]
+  let S (j : J) := ShortComplex.mk (κ j) (e j) (hκe j)
+  have hS (j : J) : (S j).ShortExact := by
+    refine .mk' (ShortComplex.exact_of_f_is_kernel _ (KernelFork.IsLimit.ofι _ _
+      (fun g hg ↦ kernel.lift _ g (by rw [← hem, ← Category.assoc, hg, zero_comp]))
+      (fun g hg ↦ kernel.lift_ι _ _ _)
+      (fun g hg l hl ↦ by rw [← cancel_mono (κ j), hl, kernel.lift_ι])))
+      inferInstance inferInstance
+  let τ {j j' : J} (a : j ⟶ j') : S j ⟶ S j' :=
+    { τ₁ := kernel.lift _ (κ j ≫ D.map a) (by rw [Category.assoc, c.w a, kernel.condition])
+      τ₂ := D.map a
+      τ₃ := ρ a
+      comm₁₂ := kernel.lift_ι _ _ _
+      comm₂₃ := (heρ a).symm }
+  -- the kernels of the transition maps out of `D j`
+  let mk (j : J) (a : (j' : J) × (j ⟶ j')) : kernel (D.map a.2) ⟶ kernel (c.ι.app j) :=
+    kernel.lift _ (kernel.ι (D.map a.2)) (by
+      rw [← c.w a.2, ← Category.assoc, kernel.condition, zero_comp])
+  have hmk (j : J) (a : (j' : J) × (j ⟶ j')) : mk j a ≫ κ j = kernel.ι (D.map a.2) :=
+    kernel.lift_ι _ _ _
+  have : ∀ j a, Mono (mk j a) := fun j a ↦ mono_of_mono_fac (hmk j a)
+  have : ∀ j : J, Nonempty ((j' : J) × (j ⟶ j')) := fun j ↦ ⟨⟨j, 𝟙 j⟩⟩
+  have hsub (j : J) {j₁ j₃ : J} (a₁ : j ⟶ j₁) (b : j₁ ⟶ j₃) (a : j ⟶ j₃) (h : a₁ ≫ b = a) :
+      ∃ φ : kernel (D.map a₁) ⟶ kernel (D.map a), φ ≫ mk j ⟨j₃, a⟩ = mk j ⟨j₁, a₁⟩ := by
+    subst h
+    refine ⟨kernel.lift _ (kernel.ι (D.map a₁)) (by
+      rw [D.map_comp, ← Category.assoc, kernel.condition, zero_comp]), ?_⟩
+    rw [← cancel_mono (κ j), Category.assoc, hmk, hmk, kernel.lift_ι]
+  have hker (j : J) (n : ℕ) := H_map_of_directed_of_locally X (ι := (j' : J) × (j ⟶ j'))
+    (A := fun a ↦ kernel (D.map a.2))
+    (mk j) (fun a₁ a₂ ↦ by
+      let j₃ := IsFiltered.coeq (a₁.2 ≫ IsFiltered.leftToMax a₁.1 a₂.1)
+        (a₂.2 ≫ IsFiltered.rightToMax a₁.1 a₂.1)
+      let b₁ := IsFiltered.leftToMax a₁.1 a₂.1 ≫ IsFiltered.coeqHom
+        (a₁.2 ≫ IsFiltered.leftToMax a₁.1 a₂.1) (a₂.2 ≫ IsFiltered.rightToMax a₁.1 a₂.1)
+      let b₂ := IsFiltered.rightToMax a₁.1 a₂.1 ≫ IsFiltered.coeqHom
+        (a₁.2 ≫ IsFiltered.leftToMax a₁.1 a₂.1) (a₂.2 ≫ IsFiltered.rightToMax a₁.1 a₂.1)
+      have h₂ : a₂.2 ≫ b₂ = a₁.2 ≫ b₁ := by
+        simp only [b₁, b₂, ← Category.assoc]
+        exact (IsFiltered.coeq_condition _ _).symm
+      obtain ⟨φ₁, hφ₁⟩ := hsub j a₁.2 b₁ (a₁.2 ≫ b₁) rfl
+      obtain ⟨φ₂, hφ₂⟩ := hsub j a₂.2 b₂ (a₁.2 ≫ b₁) h₂
+      exact ⟨⟨j₃, a₁.2 ≫ b₁⟩, φ₁, φ₂, hφ₁, hφ₂⟩) (fun V s ↦ by
+      have hs : (c.ι.app j).hom.app (op V) ((κ j).hom.app (op V) s) = 0 := by
+        rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app,
+          ← ObjectProperty.FullSubcategory.comp_hom, kernel.condition]
+        rfl
+      obtain ⟨R, hR, hRs⟩ :=
+        GrothendieckTopology.exists_mem_forall_exists_map_eq_zero_of_isColimit hP hc _ hs
+      refine ⟨R, hR, fun W g hg ↦ ?_⟩
+      obtain ⟨j', a, ha⟩ := hRs g hg
+      obtain ⟨t, ht⟩ := exists_kernel_ι_app_eq_ab (D.map a) _ ha
+      refine ⟨⟨j', a⟩, t, injective_app_of_mono_ab (κ j) _ ?_⟩
+      rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app,
+        ← ObjectProperty.FullSubcategory.comp_hom, hmk, ht, NatTrans.naturality_apply]) n
+  refine ⟨fun x ↦ ?_, fun j y hy ↦ ?_⟩
+  · obtain ⟨j, z, rfl⟩ := (himage q).1 x
+    obtain ⟨⟨j', a⟩, w, hw⟩ := (hker j (q + 1)).1 (Sheaf.H.δSucc (hS j) q z)
+    have hz : Sheaf.H.δSucc (hS j') q (Sheaf.H.map (ρ a) q z) = 0 := by
+      rw [← Sheaf.H.map_δSucc (hS j) (hS j') (τ a), ← hw, ← Sheaf.H.map_comp_apply]
+      have h0 : mk j ⟨j', a⟩ ≫ (τ a).τ₁ = 0 := by
+        rw [← cancel_mono (κ j'), Category.assoc]
+        change mk j ⟨j', a⟩ ≫ kernel.lift _ (κ j ≫ D.map a) _ ≫ κ j' = _
+        rw [kernel.lift_ι, ← Category.assoc, hmk, kernel.condition, zero_comp]
+      rw [h0, H_map_zero_apply]
+    obtain ⟨y', hy'⟩ := ((Sheaf.H.exact_map_δSucc (hS j') q) _).1 hz
+    refine ⟨j', y', ?_⟩
+    change Sheaf.H.map (e j') q y' = _ at hy'
+    rw [← hem, Sheaf.H.map_comp_apply, hy', ← Sheaf.H.map_comp_apply, hρ]
+    rfl
+  · have h₁ : Sheaf.H.map (m j) q (Sheaf.H.map (e j) q y) = 0 := by
+      rw [← Sheaf.H.map_comp_apply, hem]
+      exact hy
+    obtain ⟨j₂, φ, hφ, hφy⟩ := (himage q).2 j _ h₁
+    let j₃ := IsFiltered.max j j₂
+    let b := IsFiltered.leftToMax j j₂
+    let b' := IsFiltered.rightToMax j j₂
+    have hρb : ρ b = φ ≫ ρ b' := by
+      rw [← cancel_mono (m j₃), Category.assoc, hρ, hρ, hφ]
+    have h₂ : Sheaf.H.map (e j₃) q (Sheaf.H.map (D.map b) q y) = 0 := by
+      rw [← Sheaf.H.map_comp_apply, ← heρ, Sheaf.H.map_comp_apply, hρb,
+        Sheaf.H.map_comp_apply, hφy, map_zero]
+    obtain ⟨w, hw⟩ := ((Sheaf.H.exact_map_map (hS j₃) q) _).1 h₂
+    obtain ⟨⟨j₄, a⟩, w', rfl⟩ := (hker j₃ q).1 w
+    refine ⟨j₄, b ≫ a, ?_⟩
+    change Sheaf.H.map (κ j₃) q _ = _ at hw
+    rw [D.map_comp, Sheaf.H.map_comp_apply, ← hw, ← Sheaf.H.map_comp_apply,
+      ← Sheaf.H.map_comp_apply, ← Category.assoc, hmk, kernel.condition, H_map_zero_apply]
 
-variable (X) in
-/-- **Étale cohomology commutes with essentially small filtered colimits on a qcqs scheme.**
-The version of `AlgebraicGeometry.Scheme.H_map_bijective_of_isColimit_of_isFiltered` for a
-filtered index category `K` of any size which is essentially `(u + 1)`-small, for instance a
-`u`-small category or a preorder in `Type (u + 1)`.
-(blueprint: `lem-weil-pbc-cohomology-filtered-colimit`) -/
-@[stacks 03Q6]
-theorem H_map_bijective_of_isColimit_of_essentiallySmall [CompactSpace X] [QuasiSeparatedSpace X]
-    {K : Type w} [Category.{w'} K] [IsFiltered K] [EssentiallySmall.{u + 1} K]
-    {E : K ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {d : Cocone E} (hd : IsColimit d)
-    (q : ℕ) :
-    (∀ x : Sheaf.H d.pt q, ∃ (k : K) (y : Sheaf.H (E.obj k) q),
-      Sheaf.H.map (d.ι.app k) q y = x) ∧
-    ∀ (k : K) (y : Sheaf.H (E.obj k) q), Sheaf.H.map (d.ι.app k) q y = 0 →
-      ∃ (k' : K) (φ : k ⟶ k'), Sheaf.H.map (E.map φ) q y = 0 := by
-  let e := equivSmallModel.{u + 1} K
-  have : IsFiltered (SmallModel.{u + 1} K) := IsFiltered.of_equivalence e
-  have h := H_map_bijective_of_isColimit_of_isFiltered X
-    ((IsColimit.whiskerEquivalenceEquiv e.symm).1 hd) q
-  refine ⟨fun x ↦ ?_, fun k y hy ↦ ?_⟩
-  · obtain ⟨j, y, hy⟩ := h.1 x
-    exact ⟨_, y, hy⟩
-  · obtain ⟨j, φ, hφ⟩ := h.2 (e.functor.obj k) (Sheaf.H.map (E.map (e.unit.app k)) q y) (by
-      change Sheaf.H.map (d.ι.app _) q (Sheaf.H.map (E.map (e.unit.app k)) q y) = 0
-      rw [← Sheaf.H.map_comp_apply, d.w]
-      exact hy)
-    refine ⟨_, e.unit.app k ≫ e.inverse.map φ, ?_⟩
-    rw [E.map_comp, Sheaf.H.map_comp_apply]
-    exact hφ
+end General
 
 end AlgebraicGeometry.Scheme

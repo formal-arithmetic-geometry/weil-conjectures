@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheaf
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
-public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimitModule
+public import WeilConjectures.AlgebraicGeometry.Sites.FilteredColimitSections
 public import WeilConjectures.CategoryTheory.Sites.SemiSimplicialHypercover.Refinement
 public import WeilConjectures.CategoryTheory.Sites.SemiSimplicialHypercover.Map
 

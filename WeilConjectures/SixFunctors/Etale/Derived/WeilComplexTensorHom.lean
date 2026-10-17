@@ -155,12 +155,13 @@ instance isTriangulated_derivedHom_obj
   (derivedTensorHomAdjunction _ K.unop).isTriangulated_rightAdjoint
 
 variable {k : Type u} [Field k] {X} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
-  [QuasiCompact aX] [HasInvertibleExponent Λ X]
+  [QuasiCompact aX] [HasInvertibleExponent Λ X] [IsAlgClosed k]
 
 /-- Blueprint `def-wf-internal-hom`: the derived internal hom `RHom(-, -)` of `Dctf(X, Λ)`, for
-`X` of finite type over a field on which the exponent of `Λ` is invertible: the restriction of
-the derived internal hom of `D(X_ét)`, which preserves the constructible complexes of finite Tor
-amplitude (`AlgebraicGeometry.Etale.constructibleFiniteTor_derivedHom`). -/
+`X` of finite type over an algebraically closed field on which the exponent of `Λ` is
+invertible: the restriction of the derived internal hom of `D(X_ét)`, which preserves the
+constructible complexes of finite Tor amplitude
+(`AlgebraicGeometry.Etale.constructibleFiniteTor_derivedHom`). -/
 noncomputable def derivedHom :
     (DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X)ᵒᵖ ⥤
       DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X ⥤
@@ -223,40 +224,6 @@ instance (K : (DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X)ᵒᵖ) :
     fun _ hM ↦ constructibleFiniteTor_derivedHom Λ aX K.unop.property hM).IsTriangulated)
 
 end DerivedCategoryFiniteTor
-
-
-/-! ### Naturality of the tensor comparison of `Lg^*` -/
-
-section Naturality
-
-variable {Λ} {Z Y : Scheme.{u}} (g : Z ⟶ Y)
-
-omit [Finite Λ] in
-@[reassoc]
-lemma leftDerivedUpperStarTensorIso_hom_naturality_left
-    {K K' : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (f : K ⟶ K') (M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    L((g)^*[ModuleCat.{u + 1} Λ]).map (((-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).map f).app M) ≫
-        (leftDerivedUpperStarTensorIso _ g K' M).hom =
-      (leftDerivedUpperStarTensorIso _ g K M).hom ≫
-        ((-⊗ᴸ-(Z)[ModuleCat.{u + 1} Λ]).map (L((g)^*[ModuleCat.{u + 1} Λ]).map f)).app _ :=
-  NatTrans.congr_app ((leftDerivedUpperStarTensorNatIso _ g).hom.naturality f) M
-
-omit [Finite Λ] in
-@[reassoc]
-lemma leftDerivedUpperStarTensorIso_hom_naturality_right
-    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    {M M' : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (h : M ⟶ M') :
-    L((g)^*[ModuleCat.{u + 1} Λ]).map (((-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).obj K).map h) ≫
-        (leftDerivedUpperStarTensorIso _ g K M').hom =
-      (leftDerivedUpperStarTensorIso _ g K M).hom ≫
-        ((-⊗ᴸ-(Z)[ModuleCat.{u + 1} Λ]).obj _).map (L((g)^*[ModuleCat.{u + 1} Λ]).map h) :=
-  ((leftDerivedUpperStarTensorNatIso _ g).hom.app K).naturality h
-
-end Naturality
-
-
 
 /-! ### The internal-hom comparison of `Lg^*` along an isomorphism -/
 

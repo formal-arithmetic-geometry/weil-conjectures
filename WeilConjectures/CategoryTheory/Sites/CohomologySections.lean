@@ -7,6 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTransport
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyTorsion
 
 /-!
@@ -60,21 +61,6 @@ end SectionsExactAt
 section Criterion
 
 variable [HasSheafify J AddCommGrpCat.{w}] {T : C}
-
-/-- Morphisms from the constant sheaf `ℤ` to `G` are the global sections of `G`: a morphism
-`φ` corresponds to the section `φ(1)` over the terminal object `T`. -/
-noncomputable def constantHomEquiv (hT : IsTerminal T) (G : Sheaf J AddCommGrpCat.{w}) :
-    ((constantSheaf J AddCommGrpCat.{w}).obj (AddCommGrpCat.of (ULift ℤ)) ⟶ G) ≃
-      G.obj.obj (op T) :=
-  ((constantSheafAdj J AddCommGrpCat.{w} hT).homEquiv _ G).trans
-    (AddCommGrpCat.uliftZMultiplesAddEquiv _).toEquiv
-
-lemma constantHomEquiv_comp (hT : IsTerminal T) {G G' : Sheaf J AddCommGrpCat.{w}}
-    (φ : (constantSheaf J AddCommGrpCat.{w}).obj (AddCommGrpCat.of (ULift ℤ)) ⟶ G)
-    (g : G ⟶ G') :
-    constantHomEquiv hT G' (φ ≫ g) = g.hom.app (op T) (constantHomEquiv hT G φ) := by
-  simp only [constantHomEquiv, Equiv.trans_apply, Adjunction.homEquiv_naturality_right]
-  rfl
 
 lemma constantHomEquiv_zero (hT : IsTerminal T) (G : Sheaf J AddCommGrpCat.{w}) :
     constantHomEquiv hT G 0 = 0 := by

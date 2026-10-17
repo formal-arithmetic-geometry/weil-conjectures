@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
-public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.AffineDescent
+public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.AffineCoaction
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 
 /-!
@@ -200,9 +200,9 @@ lemma γ_v : (γC F p r).left ≫ V.hom.left = pullback.snd (V.hom.left ≫ p.le
   congr_arg (fun f ↦ f.left) (γC_hom F p r)
 
 /-- The coaction is counital. -/
-lemma d_γ : AffineCoaction.d p.left V.hom.left ≫ (γC F p r).left = 𝟙 _ := by
+lemma d_γ : coactionUnit p.left V.hom.left ≫ (γC F p r).left = 𝟙 _ := by
   let dC : V.left ⟶ PC p (V := V) :=
-    homMk (AffineCoaction.d p.left V.hom.left) (by
+    homMk (coactionUnit p.left V.hom.left) (by
       change _ ≫ pullback.snd _ _ ≫ W.hom = _
       rw [pullback.lift_snd_assoc, over_w])
   have h₁ : dC ≫ pr₁C p = 𝟙 _ := hom_ext (by simp [dC])
@@ -213,8 +213,8 @@ lemma d_γ : AffineCoaction.d p.left V.hom.left ≫ (γC F p r).left = 𝟙 _ :=
   exact congr_arg (fun f ↦ f.left) this
 
 /-- The coaction is coassociative. -/
-lemma γ₁_γ : AffineCoaction.γ₁ p.left V.hom.left (γC F p r).left (γ_v F p r) ≫ (γC F p r).left =
-    AffineCoaction.π₁ p.left V.hom.left ≫ (γC F p r).left := by
+lemma γ₁_γ : coactionMap p.left V.hom.left (γC F p r).left (γ_v F p r) ≫ (γC F p r).left =
+    coactionForget p.left V.hom.left ≫ (γC F p r).left := by
   let P₂C : Y.Etale := Etale.mk
     (pullback.snd (pullback.snd (V.hom.left ≫ p.left) p.left ≫ p.left) p.left ≫ W.hom)
   let fstC : P₂C ⟶ PC p (V := V) := homMk (pullback.fst _ _) (by
@@ -224,11 +224,11 @@ lemma γ₁_γ : AffineCoaction.γ₁ p.left V.hom.left (γC F p r).left (γ_v F
     simp only [Category.assoc, w_left] at this
     exact this)
   let γ₁C : P₂C ⟶ PC p (V := V) := homMk
-    (AffineCoaction.γ₁ p.left V.hom.left (γC F p r).left (γ_v F p r)) (by
+    (coactionMap p.left V.hom.left (γC F p r).left (γ_v F p r)) (by
       change _ ≫ pullback.snd _ _ ≫ W.hom = pullback.snd _ _ ≫ W.hom
       simp)
   let π₁C : P₂C ⟶ PC p (V := V) := homMk
-    (AffineCoaction.π₁ p.left V.hom.left) (by
+    (coactionForget p.left V.hom.left) (by
       change _ ≫ pullback.snd _ _ ≫ W.hom = pullback.snd _ _ ≫ W.hom
       simp)
   have e₁ : γ₁C ≫ pr₁C p = fstC ≫ γC F p r := hom_ext (by simp [γ₁C, fstC])

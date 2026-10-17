@@ -203,14 +203,14 @@ private theorem wnorm_mul_le {r : ℝ} (hr : 0 ≤ r) (f g : Polynomial ℂ) :
   refine Summable.tsum_le_tsum (fun n ↦ ?_) (summable_wnorm r _)
     (summable_norm_sum_mul_antidiagonal_of_summable_norm ha hb).of_norm
   rw [Polynomial.coeff_mul]
-  calc ‖∑ p ∈ Finset.antidiagonal n, f.coeff p.1 * g.coeff p.2‖ * r ^ n
-      ≤ (∑ p ∈ Finset.antidiagonal n, ‖f.coeff p.1‖ * ‖g.coeff p.2‖) * r ^ n := by
+  calc ‖∑ p ∈ Finset.HasAntidiagonal.antidiagonal n, f.coeff p.1 * g.coeff p.2‖ * r ^ n
+      ≤ (∑ p ∈ Finset.HasAntidiagonal.antidiagonal n, ‖f.coeff p.1‖ * ‖g.coeff p.2‖) * r ^ n := by
         gcongr
         exact (norm_sum_le _ _).trans (Finset.sum_le_sum fun _ _ ↦ norm_mul_le _ _)
-    _ = ∑ p ∈ Finset.antidiagonal n, a p.1 * b p.2 := by
+    _ = ∑ p ∈ Finset.HasAntidiagonal.antidiagonal n, a p.1 * b p.2 := by
         rw [Finset.sum_mul]
         refine Finset.sum_congr rfl fun p hp ↦ ?_
-        rw [← Finset.mem_antidiagonal.1 hp, pow_add]
+        rw [← Finset.HasAntidiagonal.mem_antidiagonal.1 hp, pow_add]
         ring
 
 private theorem wnorm_one (r : ℝ) : wnorm r 1 = 1 := by
@@ -498,8 +498,10 @@ noncomputable def boundaryPolynomial (ρ : Representation (PadicAlgCl l) WU.carr
     (s : ↥((Set.range j.base)ᶜ)) : Polynomial ℂ :=
   ((D.boundaryFrobenius l ρ s).charpolyRev.map ι).comp (Polynomial.X ^ p.degreeOver s.1)
 
-/-- Blueprint `lem-wf-euler-product-middle-extension`: Graded Euler-product identity for a
-middle extension.
+/-- The Euler-product identity of `lem-wf-euler-product-middle-extension`, transported to the
+representation side, as a hypothesis on a boundary datum. (The blueprint node itself is the
+sheaf-level identity
+`AlgebraicGeometry.WeilSheaf.coeff_prod_inv_localPolynomial_stalk_directImage`.)
 
 Let `X'₀ ⊆ C₀` be an affine open, a smooth geometrically connected affine curve, and let
 `j' : U'₀ = U₀ ∩ X'₀ ↪ X'₀`. For the middle extension `j'_* ℱ` of a lisse Weil sheaf `ℱ` the
@@ -595,9 +597,8 @@ theorem exists_card_filter_degreeOver_le {X' : C.Opens} (hX' : IsAffineOpen X') 
     simp
   -- the points of `t` of degree `e`, as points of `X'₀`
   let φ : {x : U.finitePoints | j.base x.1 ∈ X'} → X'.toScheme.finitePoints := fun x ↦
-    ⟨⟨j.base x.1.1, x.2⟩, by
-      rw [← Scheme.Hom.mem_finitePoints_iff_of_isIso X'.ι]
-      exact (Scheme.Hom.mem_finitePoints_iff_of_isIso j x.1.1).2 x.1.2⟩
+    ⟨⟨j.base x.1.1, x.2⟩, (Scheme.Hom.mem_finitePoints_iff_of_isIso X'.ι _).1
+      ((Scheme.Hom.mem_finitePoints_iff_of_isIso j x.1.1).2 x.1.2)⟩
   have hφ : Function.Injective φ := fun x y h ↦ by
     have h' : j.base x.1.1 = j.base y.1.1 := congrArg (fun z ↦ z.1.1) h
     exact Subtype.ext (Subtype.ext (j.isOpenEmbedding.injective h'))
@@ -845,7 +846,8 @@ theorem frobeniusWeight_le_of_hasEigenvalue_boundaryFrobenius [SmoothOfRelativeD
     linarith
   linarith
 
-/-- Blueprint `lem-wf-boundary-semicontinuity`: Boundary semicontinuity of weights on a curve.
+/-- Boundary semicontinuity of weights on a curve (`lem-wf-boundary-semicontinuity`), on the
+representation side and conditional on the Euler-product hypothesis `hD`.
 
 Let `j : U₀ ↪ C₀` be a dense open of a smooth geometrically connected curve over `𝔽_q` with
 finite complement, and let `ℱ` be a lisse Weil sheaf on `U₀` such that every local Frobenius
@@ -893,7 +895,8 @@ theorem hasEigenvalue_boundaryFrobenius_of_forall_inertia
     simp [boundaryFrobenius, hv.apply_eq_smul]
   · exact fun h ↦ hv.2 (congrArg Subtype.val h)
 
-/-- Blueprint `cor-wf-unramified-boundary-purity`: Purity at an unramified boundary point.
+/-- Purity at an unramified boundary point (first part of `cor-wf-unramified-boundary-purity`),
+conditional on the Euler-product hypothesis `hD`.
 
 Let `ℱ` be lisse and punctually `ι`-pure of weight `w` on `U₀`, and let `s` be a boundary point
 at which the inertia `I_s` acts trivially. Then the extended stalk `(j_* ℱ)_s̄ = V` is pure of

@@ -75,6 +75,14 @@ noncomputable def frobeniusEnd (M : FrobeniusModule.{u, v} K) :
     Module.End K M.carrier :=
   M.frobenius.toLinearMap
 
+/-- The Frobenius of a Frobenius module is an automorphism, so its eigenvalues are nonzero. -/
+theorem ne_zero_of_hasEigenvalue {M : FrobeniusModule.{u, v} K} {β : K}
+    (hβ : M.frobeniusEnd.HasEigenvalue β) : β ≠ 0 := by
+  rintro rfl
+  obtain ⟨x, hx⟩ := hβ.exists_hasEigenvector
+  rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff, zero_smul] at hx
+  exact hx.2 (M.frobenius.injective (hx.1.trans (map_zero _).symm))
+
 /-- An isomorphism of Frobenius modules: a `K`-linear isomorphism intertwining the two
 Frobenius automorphisms. -/
 structure Equiv (M N : FrobeniusModule.{u, v} K) where
@@ -83,6 +91,12 @@ structure Equiv (M N : FrobeniusModule.{u, v} K) where
   /-- The isomorphism intertwines the two Frobenius automorphisms. -/
   map_frobenius (x : M.carrier) :
     toLinearEquiv (M.frobenius x) = N.frobenius (toLinearEquiv x)
+
+/-- The identity isomorphism of a Frobenius module. -/
+@[simps toLinearEquiv]
+def Equiv.refl (M : FrobeniusModule.{u, v} K) : M.Equiv M where
+  toLinearEquiv := LinearEquiv.refl K M.carrier
+  map_frobenius _ := rfl
 
 /-- The inverse of an isomorphism of Frobenius modules. -/
 @[simps toLinearEquiv]

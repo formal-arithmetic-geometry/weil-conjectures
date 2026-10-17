@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Biproducts
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSections
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
 
 /-!
 # Constructible `ℓ`-adic sheaves on the spectrum of an algebraically closed field

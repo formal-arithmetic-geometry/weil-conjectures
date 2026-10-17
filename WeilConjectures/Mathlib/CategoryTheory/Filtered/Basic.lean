@@ -6,42 +6,45 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.Data.Fintype.Basic
 
 /-!
-# Finite families of morphisms in a filtered category
+# Finitely many properties at a common stage of a cofiltered category
 
-In a filtered category, finitely many objects admit a common target, and finitely many
-morphisms `f a : j ⟶ k a` out of a common source can be completed to a commuting cocone.
+If finitely many properties of morphisms `k ⟶ j` into a fixed object `j` of a cofiltered category
+each hold for some morphism and are stable under precomposition, then they all hold for a common
+morphism (`CategoryTheory.IsCofiltered.exists_forall_of_finite`).
 -/
 
 @[expose] public section
 
-namespace CategoryTheory.IsFiltered
+namespace CategoryTheory.IsCofiltered
 
-variable {C : Type*} [Category* C] [IsFiltered C]
+variable {C : Type*} [Category* C] [IsCofiltered C]
 
-/-- In a filtered category, finitely many objects admit morphisms to a common object. -/
-lemma exists_forall_nonempty_hom {ι : Type*} [Finite ι] (k : ι → C) :
-    ∃ m : C, ∀ a, Nonempty (k a ⟶ m) := by
+/-- Finitely many properties of morphisms into `j`, each of which holds for some morphism into `j`
+and is stable under precomposition, hold simultaneously for some morphism into `j`. -/
+theorem exists_forall_of_finite {ι : Type*} [Finite ι] {j : C}
+    (P : ι → ∀ {k : C}, (k ⟶ j) → Prop)
+    (hP : ∀ i {k k' : C} (u : k' ⟶ k) (t : k ⟶ j), P i t → P i (u ≫ t))
+    (h : ∀ i, ∃ (k : C) (t : k ⟶ j), P i t) : ∃ (k : C) (t : k ⟶ j), ∀ i, P i t := by
   classical
   have := Fintype.ofFinite ι
-  obtain ⟨m, hm⟩ := sup_objs_exists (Finset.univ.image k)
-  exact ⟨m, fun a ↦ hm (Finset.mem_image_of_mem _ (Finset.mem_univ a))⟩
+  suffices H : ∀ s : Finset ι, ∃ (k : C) (t : k ⟶ j), ∀ i ∈ s, P i t by
+    obtain ⟨k, t, hk⟩ := H Finset.univ
+    exact ⟨k, t, fun i ↦ hk i (Finset.mem_univ i)⟩
+  intro s
+  induction s using Finset.induction_on with
+  | empty => exact ⟨j, 𝟙 j, by simp⟩
+  | insert i s _ ih =>
+    obtain ⟨k₁, t₁, h₁⟩ := ih
+    obtain ⟨k₂, t₂, h₂⟩ := h i
+    let a := minToLeft k₁ k₂ ≫ t₁
+    let b := minToRight k₁ k₂ ≫ t₂
+    refine ⟨eq a b, eqHom a b ≫ a, fun i' hi' ↦ ?_⟩
+    rcases Finset.mem_insert.mp hi' with rfl | hi'
+    · rw [eq_condition]
+      simpa only [b, Category.assoc] using hP i' (eqHom a b ≫ minToRight k₁ k₂) t₂ h₂
+    · simpa only [a, Category.assoc] using hP i' (eqHom a b ≫ minToLeft k₁ k₂) t₁ (h₁ i' hi')
 
-/-- In a filtered category, finitely many morphisms `f a : j ⟶ k a` out of a common source can
-be completed to a commuting cocone: there are `g : j ⟶ m` and `h a : k a ⟶ m` with
-`f a ≫ h a = g` for all `a`. -/
-lemma exists_forall_comp_eq {ι : Type*} [Finite ι] {j : C} (k : ι → C) (f : ∀ a, j ⟶ k a) :
-    ∃ (m : C) (g : j ⟶ m) (h : ∀ a, k a ⟶ m), ∀ a, f a ≫ h a = g := by
-  classical
-  have := Fintype.ofFinite ι
-  let O : Finset C := insert j (Finset.univ.image k)
-  have hj : j ∈ O := Finset.mem_insert_self _ _
-  have hk (a : ι) : k a ∈ O :=
-    Finset.mem_insert_of_mem (Finset.mem_image_of_mem _ (Finset.mem_univ a))
-  let H : Finset (Σ' (X Y : C) (_ : X ∈ O) (_ : Y ∈ O), X ⟶ Y) :=
-    Finset.univ.image fun a ↦ ⟨j, k a, hj, hk a, f a⟩
-  exact ⟨sup O H, toSup O H hj, fun a ↦ toSup O H (hk a), fun a ↦
-    toSup_commutes O H hj (hk a) (Finset.mem_image_of_mem _ (Finset.mem_univ a))⟩
-
-end CategoryTheory.IsFiltered
+end CategoryTheory.IsCofiltered

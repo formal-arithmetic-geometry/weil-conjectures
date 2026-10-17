@@ -9,6 +9,7 @@ public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 public import Mathlib.LinearAlgebra.TensorProduct.Pi
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import WeilConjectures.CategoryTheory.Sites.CechComplex
+public import WeilConjectures.RingTheory.FaithfullyFlat.FamilyDescent
 
 /-!
 # Exactness of Čech complexes by faithfully flat base change
@@ -226,16 +227,6 @@ lemma piLeft_apply_eq_rTensor_proj {κ : Type*} [Fintype κ] [DecidableEq κ] {R
   | tmul x n => simp
   | add x x' hx hx' => simp only [map_add, Pi.add_apply, hx, hx']
 
-/-- The `i`-component of an element of `N ⊗ (∏_i M_i)`. -/
-lemma piRight_apply_eq_lTensor_proj {κ : Type*} [Fintype κ] [DecidableEq κ] {R : Type*}
-    [CommRing R] {Mₖ : κ → Type*} [∀ i, AddCommGroup (Mₖ i)] [∀ i, Module R (Mₖ i)] {N : Type*}
-    [AddCommGroup N] [Module R N] (t : N ⊗[R] (∀ i, Mₖ i)) (i : κ) :
-    TensorProduct.piRight R R N Mₖ t i = (LinearMap.proj i).lTensor N t := by
-  induction t using TensorProduct.induction_on with
-  | zero => simp
-  | tmul x n => simp
-  | add x x' hx hx' => simp only [map_add, Pi.add_apply, hx, hx']
-
 variable (U M) in
 /-- **Exactness of Čech complexes by faithfully flat base change.** Let `P` be a presheaf of
 abelian groups on `C` whose sections over the objects `W` of `Over V` are the `A`-modules
@@ -320,8 +311,9 @@ theorem exactAt_cechComplex_of_baseChange [Finite ι] (P : Cᵒᵖ ⥤ AddCommGr
     have hcomm (k : ℕ) (t : ModuleCechCochain U M k ⊗[A] (∀ a, B a)) (a : ι) :
         TensorProduct.piRight A A _ B ((d k).rTensor _ t) a =
           (d k).rTensor (B a) (TensorProduct.piRight A A _ B t a) := by
-      rw [piRight_apply_eq_lTensor_proj, piRight_apply_eq_lTensor_proj, ← LinearMap.comp_apply,
-        ← LinearMap.comp_apply, LinearMap.lTensor_comp_rTensor, LinearMap.rTensor_comp_lTensor]
+      rw [TensorProduct.piRight_apply_eq_lTensor_proj, TensorProduct.piRight_apply_eq_lTensor_proj,
+        ← LinearMap.comp_apply, ← LinearMap.comp_apply, LinearMap.lTensor_comp_rTensor,
+        LinearMap.rTensor_comp_lTensor]
     refine LinearMap.exact_iff.2 (le_antisymm (fun t ht ↦ ?_) ?_)
     · rw [LinearMap.mem_ker] at ht
       have ha (a : ι) :=

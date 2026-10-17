@@ -6,8 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitSection
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Coherence
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Restriction
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Restriction
 
 /-!
 # The canonical morphisms `g^* ℚ̄_ℓ ⟶ ℚ̄_ℓ`

@@ -8,8 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
-public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Comparison
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Iso
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Comparison
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
 
 /-!
 # Pro-étale functors along a base change to `k̄` commute with the Frobenius pullbacks

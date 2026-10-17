@@ -3159,7 +3159,7 @@ The affine case is
 `AlgebraicGeometry.Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine`; the
 general case follows by induction over a finite cover of `X` by affine opens each of which
 lies over an affine open of a fixed stage, gluing the descended charts over a common stage.
-(Blueprint: `lemma:nagata-finite-presentation-descends`.) -/
+(Blueprint: `lemma:nagata-finite-presentation-descends`; `thm-pd-spreading-out`, part (1).) -/
 @[stacks 01ZM]
 theorem Scheme.exists_isPullback_of_finitePresentation [∀ i, CompactSpace (D.obj i)]
     [∀ i, QuasiSeparatedSpace (D.obj i)] {X : Scheme.{u}} (g : X ⟶ c.pt)

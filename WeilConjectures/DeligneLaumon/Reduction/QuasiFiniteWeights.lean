@@ -37,17 +37,9 @@ and conversely for a scheme with a single point.
 
 @[expose] public section
 
-universe u v w
+universe u
 
 open CategoryTheory Limits
-
-/-- The Frobenius of a Frobenius module is an automorphism, so its eigenvalues are nonzero. -/
-theorem FrobeniusModule.ne_zero_of_hasEigenvalue {K : Type w} [Field K]
-    {M : FrobeniusModule.{v, w} K} {β : K} (hβ : M.frobeniusEnd.HasEigenvalue β) : β ≠ 0 := by
-  rintro rfl
-  obtain ⟨x, hx⟩ := hβ.exists_hasEigenvector
-  rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff, zero_smul] at hx
-  exact hx.2 (M.frobenius.injective (hx.1.trans (map_zero _).symm))
 
 namespace AlgebraicGeometry
 

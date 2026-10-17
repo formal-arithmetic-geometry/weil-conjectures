@@ -269,6 +269,24 @@ theorem coheight_le_of_smoothOfRelativeDimension {K : Type u} [Field K] {X : Sch
   rw [coheight_eq_of_isOpenImmersion]
   exact (coheight_le_of_etale_mvPolynomial φ hφ _).1
 
+open Order in
+/-- A closed point of a scheme smooth of relative dimension `n` over a field has codimension
+exactly `n`: in an affine chart étale over `K[X₁, …, Xₙ]` it is a maximal ideal, of height `n`. -/
+theorem coheight_eq_of_smoothOfRelativeDimension_of_isClosed {K : Type u} [Field K]
+    {X : Scheme.{u}} (f : X ⟶ Spec (.of K)) (n : ℕ) [SmoothOfRelativeDimension n f] {x : X}
+    (hx : IsClosed ({x} : Set X)) : coheight x = n := by
+  obtain ⟨V, hV, hxV, φ, hφ⟩ := SmoothOfRelativeDimension.exists_etale_mvPolynomial_of_field f n x
+  obtain ⟨y, hy⟩ : ∃ y, hV.fromSpec y = x := ⟨_, hV.fromSpec_primeIdealOf ⟨x, hxV⟩⟩
+  have hy' : IsClosed ({y} : Set (Spec Γ(X, V))) := by
+    have : hV.fromSpec.base ⁻¹' {x} = {y} := by
+      ext w
+      simp only [Set.mem_preimage, Set.mem_singleton_iff]
+      exact ⟨fun h ↦ hV.fromSpec.isOpenEmbedding.injective (h.trans hy.symm), fun h ↦ h ▸ hy⟩
+    rw [← this]
+    exact hx.preimage hV.fromSpec.base.hom.continuous
+  rw [← hy, coheight_eq_of_isOpenImmersion]
+  exact (coheight_le_of_etale_mvPolynomial φ hφ y).2 hy'
+
 /-- A scheme smooth of relative dimension `n` over a field has dimension at most `n`. It is
 normal and locally noetherian, so its connected components are open and irreducible; each of
 them is smooth of relative dimension `n`, hence of dimension `n` by
