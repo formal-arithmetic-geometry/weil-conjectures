@@ -3,27 +3,52 @@
  "blueprint": {
   "is": "prop-weil-zeta-normalized-presentation",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The normalized reduced integral presentation exists and is unique",
- "statement": "In the situation of [prop-rational-descent], the point-count zeta\nseries has a unique\nnormalized reduced\nintegral presentation: there are unique $A,B\\in\\mathbf Z[T]$ with\n$A(0)=B(0)=1$, $\\gcd(A,B)=1$ in $\\mathbf Q[T]$, and\n$Z(X_0,T)=A(T)/B(T)$.",
+ "statement": "In the situation of [prop-rational-descent], the point-count zeta\nseries has a unique\nnormalized reduced\nintegral presentation: there are unique $A,B\\in\\mathbf Z[T]$ with\n$A(0)=B(0)=1$, $\\gcd(A,B)=1$ in $\\mathbf Q[T]$, and\n$Z(X_0,T)=A(T)/B(T)$.\nThe fraction identity is interpreted as a Taylor-series identity at $T=0$, in the sense of [def-weil-normalized-integral-fraction].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-weil-zeta-normalized-presentation.md",
   "place": "node prop-weil-zeta-normalized-presentation, order 2903"
  },
  "stmt_deps": [
-  "prop-rational-descent"
+  "prop-rational-descent",
+  "def-weil-normalized-integral-fraction"
  ],
  "proof": [
   {
-   "text": "By [prop-weil-zeta-integral-rational] the series lies in\n$1+T\\mathbf Z[[T]]\\cap\\mathbf Q(T)$, and\n[prop-weil-integral-rational-series] applied to it supplies the\nexistence and uniqueness of the normalized reduced integral presentation\nof [def-weil-normalized-integral-fraction].",
+   "text": "Put $Z=Z(X_0,T)$ for the point-count series in the hypotheses. Apply [prop-weil-zeta-integral-rational], whose hypothesis is exactly the same situation of [prop-rational-descent] as here. It gives $Z\\in1+T\\mathbf Z[[T]]\\cap\\mathbf Q(T)$: thus $Z$ has integer coefficients, constant coefficient one, and is rational over $\\mathbf Q$. These are all the hypotheses needed in the next step.",
    "uses": [
-    "prop-weil-zeta-integral-rational",
-    "prop-weil-integral-rational-series",
+    "prop-weil-zeta-integral-rational"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-weil-zeta-normalized-presentation.proof.md",
+    "place": "Proof, the integrality/rationality input followed by Fatou and the normalized-fraction definition"
+   }
+  },
+  {
+   "text": "Apply [prop-weil-integral-rational-series] to this $Z$. Its hypotheses are precisely the three conclusions of step 1. Its conclusion supplies a unique pair $(A,B)$ of polynomials in $\\mathbf Z[T]$ satisfying $A(0)=B(0)=1$, coprimality in $\\mathbf Q[T]$, and $BZ=A$ as an identity in $\\mathbf Z[[T]]$. In particular this gives uniqueness of the pair, with both constant coefficients normalized, rather than merely uniqueness up to a common scalar.",
+   "uses": [
+    "prop-weil-integral-rational-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-weil-zeta-normalized-presentation.proof.md",
+    "place": "Proof, the integrality/rationality input followed by Fatou and the normalized-fraction definition"
+   }
+  },
+  {
+   "text": "By [def-weil-normalized-integral-fraction], the Taylor-series identity $Z(T)=A(T)/B(T)$ in the assertion means exactly $BZ=A$ with the polynomials regarded as formal power series. Thus the conditions in step 2 are exactly the defining conditions in the assertion. The same equivalence applies to any candidate pair $(A_2,B_2)$, so the existence and uniqueness in step 2 give both existence and uniqueness required here.",
+   "uses": [
     "def-weil-normalized-integral-fraction"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-weil-zeta-normalized-presentation.proof.md",
+    "place": "Proof, the integrality/rationality input followed by Fatou and the normalized-fraction definition"
+   }
   }
  ],
  "proof_deps": [
@@ -33,12 +58,69 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-weil-zeta-normalized-presentation.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-weil-zeta-normalized-presentation.proof.md",
+  "place": "Proof, the integrality/rationality input followed by Fatou and the normalized-fraction definition"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "zetaSeries|exists_unique_reduced_int_fraction|normalized.*fraction",
+   "results": "No hits (0), as recorded by this query in searches.jsonl.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rational power series with integer coefficients and constant term one has a unique coprime integer polynomial numerator and denominator with constant terms one",
+   "results": "RatFunc.isCoprime_num_denom, RatFunc.numDenom, num, denom, monic_denom and denominator divisibility results; these give field-polynomial presentations with monic denominator, not integral constant-term-one presentations of the zeta series.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PowerSeries, IsCoprime, Polynomial",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The point-count zeta series of a variety over a finite field has a unique reduced fraction with integer polynomial numerator and denominator both of constant coefficient one",
+   "results": "Hits: Polynomial.existsUnique_hilbertPoly, Polynomial.cardPowDegreeIsAdmissible, wittStructureRat_existsUnique, wittStructureInt_existsUnique, Polynomial.exists_approx_polynomial, Polynomial.exists_partition_polynomial, Polynomial.exists_partition_polynomial_aux, RatFunc.numDenom. These concern Hilbert polynomials, Witt vectors, Laurent-series approximation or rational-function presentations over a field; none gives the stated zeta-series conclusion or integral Fatou theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem (isCoprime_num_denom|monic_denom)|def numDenom",
+   "results": "Three hits: RatFunc.numDenom (Mathlib/FieldTheory/RatFunc/Basic.lean:861), RatFunc.monic_denom (:958), and RatFunc.isCoprime_num_denom (:1004). These give a monic denominator and coprimality over a field; they do not give integral coefficients or constant-term-one normalization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fatou lemma: an integer coefficient rational power series is a quotient of coprime integer polynomials with denominator constant coefficient one",
+   "results": "Hits: LaurentSeries.exists_ratFunc_val_lt, DenomsClearable, Polynomial.existsUnique_hilbertPoly, LaurentSeries.exists_Polynomial_intValuation_lt, denomsClearable_C_mul_X_pow, LaurentSeries.exists_ratFunc_eq_v, RatFunc.laurentAux_div, RatFunc.numDenom. These concern Hilbert polynomials, Witt vectors, Laurent-series approximation or rational-function presentations over a field; none gives the stated zeta-series conclusion or integral Fatou theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A formal power series over the integers that represents a rational function admits a unique relatively prime fraction whose numerator and denominator both have constant coefficient 1",
+   "results": "Eight hits: RatFunc.numDenom; PowerSeries.instUniqueFactorizationMonoid; RatFunc.isCoprime_num_denom; RatFunc.coe_coe; LaurentSeries.LaurentSeries_coe; LaurentSeries.instIsFractionRingPowerSeries; RatFunc.laurentAux_ofFractionRing_mk; RatFunc.coeToLaurentSeries. The rational-function interface normalizes a field-polynomial denominator by its leading coefficient. The other hits concern factorization over a field or embeddings into Laurent series. None asserts integral coefficients and constant coefficients one for the reduced pair.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsCoprime.*(num|denom)|coeff.*zero.*(one|1)|int.*fraction",
+   "results": "Four hits in FieldTheory/RatFunc: Basic.lean:1004 states RatFunc.isCoprime_num_denom; IntermediateField.lean:147 and Luroth.lean:435,446 use it. The theorem only gives coprimality for the field-polynomial numerator and denominator; the applications give no integral normalized presentation.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -66,5 +148,34 @@
   }
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-thm-intfactors"
+ "unit": "sk-thm-intfactors",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-weil-zeta-normalized-presentation",
+  "worker": "stage1",
+  "summary": "Kept every hypothesis and conclusion of the imported statement and explicitly cited the existing definition for the fraction convention. Expanded the imported paragraph into the integrality/rationality input, the existing integral Fatou theorem with all hypotheses checked, and the definitional equivalence BZ=A. No new nodes: the general Fatou result and the two other cited nodes already exist. Checked current main-20261015 sources, exact-project attachment candidates, and logged Mathlib searches.",
+  "blueprint": "Realizes the whole proof of prop-weil-zeta-normalized-presentation: first prop-weil-zeta-integral-rational, then prop-weil-integral-rational-series, finally def-weil-normalized-integral-fraction. This is the normalized integral presentation and uniqueness portion at the start of sk-thm-intfactors step 1, before the weight-stratum arguments.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-zeta-integral-rational",
+    "why": "The explicitly prescribed rationality-unit input gives integer coefficients, constant coefficient one and rationality. The current unit applies this input before Fatou; it does not replace the rationality proof."
+   },
+   {
+    "node": "def-weil-normalized-integral-fraction",
+    "why": "The existing roots-unit definition fixes the meaning of normalized reduced integral presentation and of the Taylor-series quotient; using the definition changes no proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-zeta-integral-rational",
+  "def-weil-normalized-integral-fraction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-b2c61dea5",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-b2c61dea5 (reviewer sub-agent of L); spot-checked: Read in full: the item JSON, the statements of prop-rational-descent, prop-weil-zeta-integral-rational, prop-weil-integral-rational-series and def-weil-normalized-integral-fraction, the blueprint master (order 2903) and main-20261015/20261017 statement and proof files, unit sk-thm-intfactors and chapter sec-zeta-weil. The statement is unchanged from the blueprint. The only addition is a sentence saying the quotient is a Taylor-series identity (BZ=A), which is exactly the cited definition's meaning. Step 1: the integral-rational node is stated literally 'in the situation of prop-rational-descent' and gives Z in 1+TZ[[T]] ∩ Q(T). Step 2: Fatou (prop-weil-integral-rational-series) takes exactly those hypotheses. Its statement, not its proof, gives existence and uniqueness of the ordered pair with A(0)=B(0)=1, coprimality in Q[T] and BZ=A. Step 3 unfolds the definition, also for competing pairs, and is rightly marked elementary. proof_deps equals the union of the uses. Route: the unit cites sk-thm-rationality and sk-def-roots, so both declared tool_uses are already on route; they are redundant but accurate, and I accept them. The unit step opens exactly with rationality then Fatou with uniqueness. No SGA source is cited, and there is no base-change morphism or coefficient-category issue (Z inside Q only). There are no new nodes. An rg over the DAG found no duplicate: the users and the general target assert more or less. Small cases: Spec F_q gives (1,1-T); P^1 gives (1,(1-T)(1-qT)); for an elliptic curve the pair is coprime because #E(F_q)≥1 and the reciprocal roots have absolute value √q; non-reduced and negated pairs are excluded. The Mathlib RatFunc hits are not a leaf. For information only, the live library has Scheme.Hom.existsUnique_isNormalizedIntegralFraction_zetaSeries (RealizationIndependence.lean:57), which is more general and follows the same route. It is not a slopmaster2 attachment and the report does not mention it. No fixes."
+ }
 }
