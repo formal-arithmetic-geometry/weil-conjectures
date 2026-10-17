@@ -2450,6 +2450,7 @@ public import WeilConjectures.CategoryTheory.Sites.CechComplexFunctor
 public import WeilConjectures.CategoryTheory.Sites.CechCriterion
 public import WeilConjectures.CategoryTheory.Sites.CechFreeResolution
 public import WeilConjectures.CategoryTheory.Sites.CechInjective
+public import WeilConjectures.CategoryTheory.Sites.CechInjectiveModule
 public import WeilConjectures.CategoryTheory.Sites.CechSheaf
 public import WeilConjectures.CategoryTheory.Sites.CechSpectralSequence
 public import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
