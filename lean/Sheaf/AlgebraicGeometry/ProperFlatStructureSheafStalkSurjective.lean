@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
+import Sheaf.AlgebraicGeometry.ProperFlatSingleDerivedDirectImagePerfect
 import Sheaf.AlgebraicGeometry.PerfectLocalDegreeZeroUnit
 import Sheaf.AlgebraicGeometry.FlatDerivedStructureUnit
 import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
@@ -96,7 +96,7 @@ theorem surjective_structureSheafMap_stalk_of_proper_flat_fiber
   have hflat : Scheme.Modules.IsFlatOver OX f :=
     Scheme.Modules.isFlatOver_of_isInvertible f OX
   have hperfect : Scheme.IsPerfect S E :=
-    (perfect_derivedDirectImage_baseChange f OX hflat).1
+    properFlat_single_derivedDirectImage_perfect f OX hflat
   obtain ⟨a, e₀, e₁, hcomp, hnegative, hfibre⟩ :=
     exists_flat_derived_structure_unit f
   have hsurj := surjective_stalk_homology_of_perfect_local_unit S E hperfect a s

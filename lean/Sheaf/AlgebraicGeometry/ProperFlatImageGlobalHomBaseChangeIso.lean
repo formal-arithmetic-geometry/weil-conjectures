@@ -15,7 +15,8 @@ import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
 import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorMonoidalRealization
 import Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherentPerfectPart
 import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
-import all Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
+import all Sheaf.AlgebraicGeometry.ProperFlatSingleDerivedDirectImagePerfect
+import all Sheaf.AlgebraicGeometry.ProperFlatDerivedDirectImagePerfect
 
 /-! # Affine global Hom base change out of a proper flat direct image
 Source: Stacks Project, Tag 0AA8, right-hand-side computation in case (1).

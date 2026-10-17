@@ -16,7 +16,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.AlgebraicGeometry.PicardRankMatchOrdinaryRanks
 import Sheaf.AlgebraicGeometry.Picard.TensorDegreeZeroMateSquare
 import Sheaf.AlgebraicGeometry.Picard.CanonicalDirectImageH0Unit
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
+import Sheaf.AlgebraicGeometry.ProperFlatSingleDerivedDirectImagePerfect
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionDetectsIso
+import Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeAffineLocality
+import Sheaf.AlgebraicGeometry.AffineRelativelyFlatCanonicalModuleBaseChange
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 
 /-! # Derived truncation data for universally rank-matched Picard direct images
@@ -161,7 +164,23 @@ theorem picardRankMatch_derived_truncation_data
   let add : ∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Modules.tensorPullback k).Additive :=
     fun k ↦ Modules.canonicalTensorPullbackAdditive k
   have hflat : G.IsFlatOver p := finiteLocallyFree_isFlatOver p G
-  obtain ⟨hperfect, hbc⟩ := perfect_derivedDirectImage_baseChange p G hflat
+  have hperfect := properFlat_single_derivedDirectImage_perfect p G hflat
+  have hbc {Y : Scheme.{u}} (k : Y ⟶ T) φ
+      (hφ : IsDerivedModuleBaseChangeMap p k G φ) : IsIso φ := by
+    obtain ⟨c, hc, rfl⟩ := hφ
+    apply schemeDerived_isIso_of_openRestriction
+    intro y
+    obtain ⟨_, ⟨V, hV, rfl⟩, hyV, _⟩ :=
+      T.isBasis_affineOpens.exists_subset_of_mem_open
+        (Set.mem_univ (k.base y)) isOpen_univ
+    obtain ⟨_, ⟨W, hW, rfl⟩, hyW, hWV⟩ :=
+      Y.isBasis_affineOpens.exists_subset_of_mem_open hyV (k ⁻¹ᵁ V).2
+    refine ⟨W, hyW, ?_⟩
+    exact canonicalModuleBaseChange_isIso_on_affine_open_of_affine_cases
+      (fun f _ _ g _ F _ hF c hc ↦
+        canonicalModuleBaseChange_isIso_affine_of_isFlatOver f g F hF c hc)
+      p k (pullback.fst p k) (pullback.snd p k) (IsPullback.of_hasPullback p k)
+      G hflat c hc ⟨V, hV⟩ ⟨W, hW⟩ hWV
   have ha : IsIso ((DerivedCategory.homologyFunctor
       (SheafOfModules.{u} (moduleRings T.toRingedSpace)) 0).map a) := by
     have hu := Modules.canonicalDirectImageH0Unit p G

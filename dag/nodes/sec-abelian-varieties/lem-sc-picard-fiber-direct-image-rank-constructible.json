@@ -22,21 +22,23 @@
  ],
  "proof": [
   {
-   "text": "Use finitePresentation_projective_sections from [lem-pc-finite-flat-affine-sections-projective] on every affine open of X. Projective modules are flat. Flatness of f gives flatness of the affine coordinate ring over the base coordinate ring; Module.Flat.trans proves E.IsFlatOver f. Finite local freeness supplies finite presentation. Properness supplies quasi-compactness and quasi-separatedness, so apply [lem-pc-rf-perfect-base-change] to K = Rf_*(E[0]) to obtain perfectness and arbitrary canonical module base change.",
+   "text": "Use finitePresentation_projective_sections from [lem-pc-finite-flat-affine-sections-projective] on every affine open of X. Projective modules are flat. Flatness of f gives flatness of the affine coordinate ring over the base coordinate ring; Module.Flat.trans proves E.IsFlatOver f. Finite local freeness supplies finite presentation. Properness supplies quasi-compactness and quasi-separatedness, so apply [lem-pc-rf-perfect-base-change] to K = Rf_*(E[0]) to obtain perfectness and arbitrary canonical module base change. The Lean proof now uses properFlat_single_derivedDirectImage_perfect for the perfectness input, and obtains the canonical comparison and its invertibility from exists_isIso_canonicalModuleBaseChange_of_isFlatOver for the fibre homology isomorphism.",
    "uses": [
     "lem-pc-finite-flat-affine-sections-projective",
     "def-sc-finite-locally-free-sheaf",
     "def-weil-flat-morphism",
-    "lem-pc-rf-perfect-base-change"
+    "lem-pc-proper-flat-single-derived-direct-image-perfect",
+    "lem-pc-relatively-flat-canonical-module-base-change"
    ],
    "elementary": false
   },
   {
-   "text": "For the residue-field morphism g, unpack the universal-property specification of derivedPullback on p = pullback.fst f g, as in [def-pc-derived-pullback]. Identify its underived functor with tensorPullback by functor extensionality, and evaluate its derived counit at E[0] to construct the comparison c. Compose the scheme derived base-change map with Rq_*(c), where q = pullback.snd f g. Its defining witnesses satisfy [def-pc-derived-module-base-change-map], so [lem-pc-rf-perfect-base-change] makes this map invertible. Apply degree-zero homology. The proved source-library Functor.homologyRightDerivedFunctorObjSingleFunctorIso identifies H^0(Rq_*(p^*E[0])) with R^0q_*(p^*E); Mathlib Functor.rightDerivedZeroIsoSelf identifies this with ordinary q_*(p^*E), since pushforward preserves finite limits. These are the right-derived functors defining [def-pc-derived-direct-image]. Evaluate on the whole field spectrum and restrict scalars through GammaSpecIso to obtain the private fibre_homology_iso.",
+   "text": "For the residue-field morphism g, unpack the universal-property specification of derivedPullback on p = pullback.fst f g, as in [def-pc-derived-pullback]. Identify its underived functor with tensorPullback by functor extensionality, and evaluate its derived counit at E[0] to construct the comparison c. Compose the scheme derived base-change map with Rq_*(c), where q = pullback.snd f g. Its defining witnesses satisfy [def-pc-derived-module-base-change-map], so [lem-pc-rf-perfect-base-change] makes this map invertible. Apply degree-zero homology. The proved source-library Functor.homologyRightDerivedFunctorObjSingleFunctorIso identifies H^0(Rq_*(p^*E[0])) with R^0q_*(p^*E); Mathlib Functor.rightDerivedZeroIsoSelf identifies this with ordinary q_*(p^*E), since pushforward preserves finite limits. These are the right-derived functors defining [def-pc-derived-direct-image]. Evaluate on the whole field spectrum and restrict scalars through GammaSpecIso to obtain the private fibre_homology_iso. The Lean proof now uses properFlat_single_derivedDirectImage_perfect for the perfectness input, and obtains the canonical comparison and its invertibility from exists_isIso_canonicalModuleBaseChange_of_isFlatOver for the fibre homology isomorphism.",
    "uses": [
     "def-pc-derived-pullback",
     "def-pc-derived-module-base-change-map",
-    "lem-pc-rf-perfect-base-change",
+    "lem-pc-proper-flat-single-derived-direct-image-perfect",
+    "lem-pc-relatively-flat-canonical-module-base-change",
     "def-pc-derived-direct-image"
    ],
    "elementary": false
@@ -64,7 +66,8 @@
   "lem-pc-finite-flat-affine-sections-projective",
   "def-sc-finite-locally-free-sheaf",
   "def-weil-flat-morphism",
-  "lem-pc-rf-perfect-base-change",
+  "lem-pc-proper-flat-single-derived-direct-image-perfect",
+  "lem-pc-relatively-flat-canonical-module-base-change",
   "def-pc-derived-pullback",
   "def-pc-derived-module-base-change-map",
   "def-pc-derived-direct-image",
@@ -77,9 +80,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/0BDI",
-  "place": "Clause (3), with Tag 0B91(2), following the second proof paragraph of Tag 0BDP",
-  "note": "F1 stage-3 Lean proof: explicit canonical module base change and degree-zero right-derived comparison; pointwise finite-dimensionality and finite-free refinement use existing declarations. No new statements or hypotheses."
+  "document": "Stacks Project",
+  "place": "Tags 0B91(2), 0A1H and 0A1D; B3 retirement adaptation uses the existing perfectness-only and canonical module base-change declarations, without changing the statement."
  },
  "mathlib_searches": [
   {
@@ -151,14 +153,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F1",
+  "reviewer": "C-7a630",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261013T045524-L-127606",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261017T041407-L-2535241",
+  "kind": "interface",
+  "note": "independent cc review: retired item vs coord/repairs.txt line 14; 9 adapted modules vs their originals (bodies/imports only) and against existing replacement declarations (properFlat_single_derivedDirectImage_perfect, exists_isIso_canonicalModuleBaseChange_of_isFlatOver, affine canonical lemmas + schemeDerived_isIso_of_openRestriction); 10 delivered + 13 direct importers compiled clean; caller nodes vs Lean proofs"
  },
  "lean_audit": {
   "master": {

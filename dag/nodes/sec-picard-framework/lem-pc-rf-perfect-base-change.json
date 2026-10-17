@@ -35,60 +35,34 @@
  ],
  "proof": [
   {
-   "text": "Transport the given scheme derived categories to localized open sites by the exact equivalence Scheme.Modules.overEquiv and Mathlib localization transport. Use a dependent function update so the family on S remains the supplied one. The derived tensor unit is the single structure sheaf. On the top open, its degree-zero term is a free rank-one module and its other terms are zero; the singleton coproduct isomorphism and zero retractions prove strict perfectness.",
+   "text": "For the derived perfectness conclusion needed by former users of the retired combined theorem, apply properFlat_single_derivedDirectImage_perfect to the finitely presented relatively flat module. This gives exactly the supplied derived direct image and open-site localization family, without a global family of open localizations. The source-library declaration in the lean attachment remains the affine Cech formulation and is publicly re-exported by the retired module; it is not asserted to be type-equivalent to the removed derived theorem.",
    "uses": [
-    "def-pc-derived-category",
-    "def-pc-perfect-complex"
+    "lem-pc-proper-flat-single-derived-direct-image-perfect"
    ],
-   "elementary": true,
-   "source": {
-    "document": "Stacks Project",
-    "place": "Tags 05RU, 08C4, and 08CM; localization transport via Mathlib Functor.IsLocalization.of_equivalence_source"
-   }
+   "elementary": false
   },
   {
-   "text": "Take K to be G concentrated in degree zero. It is bounded. Its zero terms are finitely presented, by their isomorphism to the free sheaf on no generators, and relatively flat, because their sections are zero modules. Its degree-zero term has these properties by hypothesis. Finite presentation implies quasi-coherence and finite type. The finite-type support theorem makes the support of every term closed. Its reduced induced closed immersion is proper, hence its composition with the proper f is proper. Apply properSupport_perfect_directImage to the perfect tensor unit and K. The left unitor and singleFunctorIsoCompQ identify the resulting direct image with Rf_*(G[0]); compose these isomorphisms with the local perfect witnesses, keeping exactly the original derived category and open-localization family on S.",
+   "text": "For a prescribed IsDerivedModuleBaseChangeMap, unpack its comparison c. At every point of the new base choose an affine base open and an affine neighbourhood mapping into it. Apply canonicalModuleBaseChange_isIso_on_affine_open_of_affine_cases, with canonicalModuleBaseChange_isIso_affine_of_isFlatOver as input, to the actual composite. Detect invertibility by schemeDerived_isIso_of_openRestriction. Former users needing only some canonical invertible composite use the already-stated existential relatively flat module base-change theorem instead. No assertion identifies a merely degreewise cohomology isomorphism with a derived isomorphism.",
    "uses": [
-    "def-weil-proper-morphism",
-    "lem-pc-proper-support-perfect-direct-image",
-    "lem-weil-pbc-finite-type-module-support-closed",
-    "def-weil-pbc-closed-subset-proper-over-base"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project",
-    "place": "Tag 0B91, proof of clause (2), applying Tag 0A1H with E=O_X and G in degree zero"
-   }
-  },
-  {
-   "text": "Unpack the comparison c in IsDerivedModuleBaseChangeMap. Index a cover of T by pairs of affine opens V in S and W in T with W contained in g^{-1}(V); the affine basis supplies such a W through every point. For the chosen pullback square, apply canonicalModuleBaseChange_isIso_on_affine_open_of_affine_cases using canonicalModuleBaseChange_isIso_affine_of_isFlatOver as its affine input. Thus the restriction of the particular displayed composite is invertible on each W, for every comparison c satisfying its predicate. Exact open restriction commutes with every homology functor. Under the equivalence with the localized open site, the sheaf-isomorphism open-cover theorem proves invertibility of every homology map. DerivedCategory.isIso_iff then proves invertibility of the original canonical composite.",
-   "uses": [
-    "lem-pc-affine-relatively-flat-canonical-module-base-change",
     "lem-pc-canonical-module-base-change-affine-locality",
-    "lem-weil-pbc-sheaf-isomorphism-local-open-cover"
+    "lem-pc-affine-relatively-flat-canonical-module-base-change",
+    "lem-sc-derived-open-restriction-detects-iso",
+    "lem-pc-relatively-flat-canonical-module-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project",
-    "place": "Tags 0A1D and 04TN; the affine Cech route of lem-pc-rf-base-change-flat-module"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-derived-category",
-  "def-pc-perfect-complex",
-  "def-weil-proper-morphism",
-  "lem-pc-proper-support-perfect-direct-image",
-  "lem-weil-pbc-finite-type-module-support-closed",
-  "def-weil-pbc-closed-subset-proper-over-base",
-  "lem-pc-affine-relatively-flat-canonical-module-base-change",
+  "lem-pc-proper-flat-single-derived-direct-image-perfect",
   "lem-pc-canonical-module-base-change-affine-locality",
-  "lem-weil-pbc-sheaf-isomorphism-local-open-cover"
+  "lem-pc-affine-relatively-flat-canonical-module-base-change",
+  "lem-sc-derived-open-restriction-detects-iso",
+  "lem-pc-relatively-flat-canonical-module-base-change"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 0B91(2), 0A1H, 0A1D and 04TN; Lean specialization and canonical affine-local assembly by H1"
+  "place": "Tags 0B91(2), 0A1H and 0A1D; B3 retires the combined interface, with existing perfectness-only and canonical base-change APIs applied directly in all callers. Source attachment is the existing affine Cech formulation, not a claimed derived comparison bridge."
  },
  "mathlib_searches": [
   {
@@ -202,12 +176,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-finite-type-module-support-closed",
-  "lem-weil-pbc-closed-subset-proper-over-base-properties",
-  "lem-weil-pbc-finite-type-module-support-closed",
-  "lem-weil-pbc-closed-subset-proper-over-base-properties"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
@@ -224,7 +193,7 @@
   "branch": "sheaf-dag",
   "by": "L",
   "date": "2026-10-17",
-  "note": "2026-10-17 (L): repointed from the sorried duplicate Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange.perfect_derivedDirectImage_baseChange to the source library's sorry-free declarations recorded by the slopmaster2 audit (state closed).",
+  "note": "2026-10-17 (L): repointed from the sorried duplicate Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange.perfect_derivedDirectImage_baseChange to the source library's sorry-free declarations recorded by the slopmaster2 audit (state closed). B3 repair: the Sheaf module is retired with all actual callers adapted atomically. The source attachment is its affine Cech formulation; the stronger derived conclusions are obtained in callers from the existing perfectness-only and canonical base-change APIs, not from this source theorem alone.",
   "superseded": {
    "module": "Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange",
    "declaration": "AlgebraicGeometry.perfect_derivedDirectImage_baseChange"
@@ -295,13 +264,13 @@
   ]
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H1",
+  "reviewer": "C-7a630",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261012T202239-L-704356",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261017T041407-L-2535241",
+  "kind": "interface",
+  "note": "independent cc review: retired item vs coord/repairs.txt line 14; 9 adapted modules vs their originals (bodies/imports only) and against existing replacement declarations (properFlat_single_derivedDirectImage_perfect, exists_isIso_canonicalModuleBaseChange_of_isFlatOver, affine canonical lemmas + schemeDerived_isIso_of_openRestriction); 10 delivered + 13 direct importers compiled clean; caller nodes vs Lean proofs"
  }
 }

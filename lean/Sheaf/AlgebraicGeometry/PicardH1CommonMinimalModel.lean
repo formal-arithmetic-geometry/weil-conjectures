@@ -16,7 +16,7 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
+import Sheaf.AlgebraicGeometry.ProperFlatSingleDerivedDirectImagePerfect
 import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
@@ -50,15 +50,8 @@ private theorem invertible_directImage_isPerfect
       ((DerivedCategory.singleFunctor
         (SheafOfModules.{v} (moduleRings Y.toRingedSpace)) 0).obj M)) := by
   have := Modules.IsInvertible.sheafOfModules_isInvertible M
-  have hadd : ∀ {Y Z : Scheme.{v}} (g : Y ⟶ Z), (Modules.tensorPullback g).Additive := by
-    intro Y Z g
-    let e := (Classical.choose (Modules.exists_tensorPullbackAdjunction g)).leftAdjointUniq
-      (Modules.pullbackPushforwardAdjunction g)
-    exact Functor.additive_of_iso e.symm
-  let : ∀ {Y Z : Scheme.{v}} (g : Y ⟶ Z), (Modules.tensorPullback g).Additive :=
-    fun g ↦ hadd g
-  exact (perfect_derivedDirectImage_baseChange p M
-    (Modules.isFlatOver_of_isInvertible p M)).1
+  exact properFlat_single_derivedDirectImage_perfect p M
+    (Modules.isFlatOver_of_isInvertible p M)
 
 /-- Restrict a bounded free model inside a prescribed neighbourhood. -/
 private theorem refine_residue_model

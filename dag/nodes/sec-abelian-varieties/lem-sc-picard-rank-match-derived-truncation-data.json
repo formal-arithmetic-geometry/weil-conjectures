@@ -28,10 +28,13 @@
    "elementary": false
   },
   {
-   "text": "Use picardRankMatch_ordinary_ranks for finite local freeness of M and the universal ordinary ranks. Set K=Rp_*(G[0]) and a=canonicalSingleDirectImageMap p G. The existing perfect_derivedDirectImage_baseChange theorem gives IsPerfect K and invertibility of every characterised canonical derived module base-change map.",
+   "text": "Use picardRankMatch_ordinary_ranks for finite local freeness of M and the universal ordinary ranks. Set K=Rp_*(G[0]) and a=canonicalSingleDirectImageMap p G. The existing perfect_derivedDirectImage_baseChange theorem gives IsPerfect K and invertibility of every characterised canonical derived module base-change map. The Lean proof now takes perfectness from properFlat_single_derivedDirectImage_perfect. For each prescribed comparison from tensorDegreeZeroMateSquare, it unpacks IsDerivedModuleBaseChangeMap and proves invertibility on affine neighbourhoods using the affine canonical-comparison and affine-locality theorems; schemeDerived_isIso_of_openRestriction then proves invertibility of that same comparison.",
    "uses": [
     "lem-sc-picard-rank-match-ordinary-ranks",
-    "lem-pc-rf-perfect-base-change",
+    "lem-pc-proper-flat-single-derived-direct-image-perfect",
+    "lem-sc-derived-open-restriction-detects-iso",
+    "lem-pc-canonical-module-base-change-affine-locality",
+    "lem-pc-affine-relatively-flat-canonical-module-base-change",
     "def-pc-derived-direct-image",
     "lem-pc-canonical-single-direct-image-comparison"
    ],
@@ -46,11 +49,14 @@
    "elementary": true
   },
   {
-   "text": "For every k apply tensorDegreeZeroMateSquare to obtain e0, phi, its canonical predicate and its equation. The existing perfect base-change theorem makes phi invertible. Define e1=H0(asIso phi) followed by canonicalDirectImageH0Iso. Right-derived images of modules are connective by the nonnegative injective-resolution calculation (Functor.isGE_rightDerivedFunctor_obj_singleFunctor), so transport negative vanishing through H^i(asIso phi). Transport each ordinary rank witness through e1.symm. Finally use Iso.comp_inv_eq to turn beta=e0.hom≫H0(Lk*a)≫e1.hom into the required beta≫e1.inv=e0.hom≫H0(Lk*a).",
+   "text": "For every k apply tensorDegreeZeroMateSquare to obtain e0, phi, its canonical predicate and its equation. The existing perfect base-change theorem makes phi invertible. Define e1=H0(asIso phi) followed by canonicalDirectImageH0Iso. Right-derived images of modules are connective by the nonnegative injective-resolution calculation (Functor.isGE_rightDerivedFunctor_obj_singleFunctor), so transport negative vanishing through H^i(asIso phi). Transport each ordinary rank witness through e1.symm. Finally use Iso.comp_inv_eq to turn beta=e0.hom≫H0(Lk*a)≫e1.hom into the required beta≫e1.inv=e0.hom≫H0(Lk*a). The Lean proof now takes perfectness from properFlat_single_derivedDirectImage_perfect. For each prescribed comparison from tensorDegreeZeroMateSquare, it unpacks IsDerivedModuleBaseChangeMap and proves invertibility on affine neighbourhoods using the affine canonical-comparison and affine-locality theorems; schemeDerived_isIso_of_openRestriction then proves invertibility of that same comparison.",
    "uses": [
     "lem-sc-picard-tensor-degree-zero-mate-square",
     "lem-sc-picard-rank-match-ordinary-ranks",
-    "lem-pc-rf-perfect-base-change",
+    "lem-pc-proper-flat-single-derived-direct-image-perfect",
+    "lem-sc-derived-open-restriction-detects-iso",
+    "lem-pc-canonical-module-base-change-affine-locality",
+    "lem-pc-affine-relatively-flat-canonical-module-base-change",
     "lem-pc-canonical-degree-zero-mate-square",
     "def-pc-derived-direct-image"
    ],
@@ -64,15 +70,17 @@
   "lem-pc-canonical-single-direct-image-comparison",
   "lem-pc-finite-flat-affine-sections-projective",
   "lem-pc-module-pullback-adjunction",
-  "lem-pc-rf-perfect-base-change",
+  "lem-pc-proper-flat-single-derived-direct-image-perfect",
+  "lem-sc-derived-open-restriction-detects-iso",
+  "lem-pc-canonical-module-base-change-affine-locality",
+  "lem-pc-affine-relatively-flat-canonical-module-base-change",
   "lem-sc-picard-rank-match-ordinary-ranks",
   "lem-sc-picard-tensor-degree-zero-mate-square"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/0BDP",
-  "place": "second and third proof paragraphs, derived-image and rank dictionary; Tags 0B91(2), 08HY",
-  "note": "B3 constructs the derived image and canonical unit explicitly, proves H0 invertibility by cancellation, and reduces the ordinary rank dictionary and tensor-form mate transport to two independent smaller statements."
+  "document": "Stacks Project",
+  "place": "Tags 0B91(2), 0A1H and 0A1D; B3 retirement adaptation uses the existing perfectness-only and canonical module base-change declarations, without changing the statement."
  },
  "mathlib_searches": [
   {
@@ -150,13 +158,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "COMPILER",
+  "reviewer": "C-7a630",
   "group": "B3",
   "result": "pass",
-  "landing": "20261013T062516-L-731308",
-  "kind": "interface"
+  "landing": "20261017T041407-L-2535241",
+  "kind": "interface",
+  "note": "independent cc review: retired item vs coord/repairs.txt line 14; 9 adapted modules vs their originals (bodies/imports only) and against existing replacement declarations (properFlat_single_derivedDirectImage_perfect, exists_isIso_canonicalModuleBaseChange_of_isFlatOver, affine canonical lemmas + schemeDerived_isIso_of_openRestriction); 10 delivered + 13 direct importers compiled clean; caller nodes vs Lean proofs"
  },
  "lean_audit": {
   "master": {

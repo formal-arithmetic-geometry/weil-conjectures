@@ -12,7 +12,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.Topology.Constructible
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
+import Sheaf.AlgebraicGeometry.ProperFlatSingleDerivedDirectImagePerfect
+import Sheaf.AlgebraicGeometry.RelativelyFlatCanonicalModuleBaseChange
 import Sheaf.AlgebraicGeometry.PerfectJumpLoci
 import Sheaf.AlgebraicGeometry.StrictlyPerfectFiniteFreeRefinement
 import Sheaf.AlgebraicGeometry.PerfectFiniteResidueCohomologyFinite
@@ -69,24 +70,13 @@ private theorem fibre_homology_iso
   let g := S.fromSpecResidueField s
   let p := pullback.fst f g
   let q := pullback.snd f g
-  obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
-    F, hF, hFmap, hFadd, ε, hε, htri, hK⟩ :=
-    Classical.choose_spec (exists_derivedPullback p)
-  have h : F = Modules.tensorPullback p :=
-    CategoryTheory.Functor.ext hF (fun M N a ↦ hFmap a)
-  subst F
-  let c := ε.app ((HomotopyCategory.singleFunctor
-      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj E) ≫
-    DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
-      ((HomologicalComplex.singleMapHomologicalComplex
-        (Modules.tensorPullback p) (ComplexShape.up ℤ) 0).hom.app E))
-  have hc : IsDerivedModulePullbackComparison p E c := ⟨ε, hε, rfl⟩
+  obtain ⟨c, hc, hiso⟩ := exists_isIso_canonicalModuleBaseChange_of_isFlatOver
+    f g p q (IsPullback.of_hasPullback f g) E hflat
   let φ := schemeDerivedBaseChangeMap f q g p pullback.condition
       ((DerivedCategory.singleFunctor
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj E) ≫
     (schemeDerivedDirectImage q).map c
-  have hφ : IsDerivedModuleBaseChangeMap f g E φ := ⟨c, hc, rfl⟩
-  have : IsIso φ := (perfect_derivedDirectImage_baseChange f E hflat).2 g φ hφ
+  have : IsIso φ := hiso
   let H := DerivedCategory.homologyFunctor
     (SheafOfModules.{u} (moduleRings (Spec (S.residueField s)).toRingedSpace)) 0
   let P := RingedSpace.moduleDirectImage q.toLRSHom.toShHom
@@ -148,7 +138,7 @@ theorem picardFiberDirectImageRank_locallyConstructible {X S : Scheme.{u}}
   let K := (schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor
     (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj E)
   have hflat := finiteLocallyFree_isFlatOver f E
-  have hperfect : IsPerfect S K := (perfect_derivedDirectImage_baseChange f E hflat).1
+  have hperfect : IsPerfect S K := properFlat_single_derivedDirectImage_perfect f E hflat
   have hpseudo : IsPseudoCoherent S K := by
     intro s
     obtain ⟨U, hs, P, hP, hKP⟩ := hperfect s

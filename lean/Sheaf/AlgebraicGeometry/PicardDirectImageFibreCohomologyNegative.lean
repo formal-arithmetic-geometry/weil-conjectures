@@ -15,7 +15,7 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
 
 import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
+import Sheaf.AlgebraicGeometry.RelativelyFlatCanonicalModuleBaseChange
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
@@ -93,24 +93,13 @@ theorem picard_directImage_fibre_cohomology_negative
   let g := W.fromSpecResidueField w
   let p := pullback.fst fW g
   let q := pullback.snd fW g
-  obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
-    F, hF, hFmap, hFadd, ε, hε, htri, hK⟩ :=
-    Classical.choose_spec (exists_derivedPullback p)
-  have h : F = Modules.tensorPullback p :=
-    CategoryTheory.Functor.ext hF (fun M N a ↦ hFmap a)
-  subst F
-  let c := ε.app ((HomotopyCategory.singleFunctor
-      (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj G) ≫
-    DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
-      ((HomologicalComplex.singleMapHomologicalComplex
-        (Modules.tensorPullback p) (ComplexShape.up ℤ) 0).hom.app G))
-  have hc : IsDerivedModulePullbackComparison p G c := ⟨ε, hε, rfl⟩
+  obtain ⟨c, hc, hiso⟩ := exists_isIso_canonicalModuleBaseChange_of_isFlatOver
+    fW g p q (IsPullback.of_hasPullback fW g) G hflat
   let φ := schemeDerivedBaseChangeMap fW q g p pullback.condition
       ((DerivedCategory.singleFunctor
         (SheafOfModules.{v} (moduleRings (pullback f k).toRingedSpace)) 0).obj G) ≫
     (schemeDerivedDirectImage q).map c
-  have hφ : IsDerivedModuleBaseChangeMap fW g G φ := ⟨c, hc, rfl⟩
-  have : IsIso φ := (perfect_derivedDirectImage_baseChange fW G hflat).2 g φ hφ
+  have : IsIso φ := hiso
   let P := RingedSpace.moduleDirectImage q.toLRSHom.toShHom
   have hge := P.isGE_rightDerivedFunctor_obj_singleFunctor
     ((Modules.tensorPullback p).obj G)

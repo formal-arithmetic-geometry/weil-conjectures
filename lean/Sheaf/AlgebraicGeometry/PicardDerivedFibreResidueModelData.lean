@@ -14,7 +14,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Fiber
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
+import Sheaf.AlgebraicGeometry.ProperFlatSingleDerivedDirectImagePerfect
+import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
 import Mathlib.AlgebraicGeometry.AffineScheme
 
@@ -54,16 +55,8 @@ private theorem perfect_of_invertible_directImage
       ((DerivedCategory.singleFunctor
         (SheafOfModules.{v} (moduleRings Y.toRingedSpace)) 0).obj M)) := by
   have := Modules.IsInvertible.sheafOfModules_isInvertible M
-  have hadd : ∀ {Y Z : Scheme.{v}} (g : Y ⟶ Z),
-      (Modules.tensorPullback g).Additive := by
-    intro Y Z g
-    let e := (Classical.choose (Modules.exists_tensorPullbackAdjunction g)).leftAdjointUniq
-      (Modules.pullbackPushforwardAdjunction g)
-    exact Functor.additive_of_iso e.symm
-  letI : ∀ {Y Z : Scheme.{v}} (g : Y ⟶ Z),
-      (Modules.tensorPullback g).Additive := fun g ↦ hadd g
-  exact (perfect_derivedDirectImage_baseChange p M
-    (Modules.isFlatOver_of_isInvertible p M)).1
+  exact properFlat_single_derivedDirectImage_perfect p M
+    (Modules.isFlatOver_of_isInvertible p M)
 
 private theorem restrict_strictlyPerfect_local (X : Scheme.{v}) (U V : X.Opens)
     (h : V ≤ U)

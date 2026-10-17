@@ -21,7 +21,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCo
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import Sheaf.AlgebraicGeometry.LerayDegenerateSections
 import Sheaf.AlgebraicGeometry.AffineHigherDirectImageCohomologyVanishing
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
+import Sheaf.AlgebraicGeometry.ProperFlatSingleDerivedDirectImagePerfect
 import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
 import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
@@ -170,21 +170,14 @@ theorem exists_finiteProjectiveComplex_model_moduleCohomology
   let : ∀ U : (Spec (.of A)).Opens, HasDerivedCategory.{u + 1}
       (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U)) :=
     fun U ↦ HasDerivedCategory.standard _
-  have hadd {Y Z : Scheme.{u}} (k : Y ⟶ Z) : (tensorPullback k).Additive := by
-    obtain ⟨adj⟩ := nonempty_tensorPullbackAdjunction k
-    let : (tensorPullback k).IsLeftAdjoint := ⟨_, ⟨adj⟩⟩
-    exact CategoryTheory.rightExactFunctor_le_additiveFunctor _ _ _ (by
-      rw [CategoryTheory.rightExactFunctor_iff]
-      infer_instance)
-  let : ∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (tensorPullback k).Additive := hadd
   have : F.IsFiniteLocallyFree :=
     SheafOfModules.IsFiniteLocallyFreeOfRank.isFiniteLocallyFree F d
   let E := (schemeDerivedDirectImage f).obj
     ((DerivedCategory.singleFunctor
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F)
   have hE : Scheme.IsPerfect (Spec (.of A)) E :=
-    (perfect_derivedDirectImage_baseChange f F
-      (isFlatOver_of_isFiniteLocallyFree f F)).1
+    properFlat_single_derivedDirectImage_perfect f F
+      (isFlatOver_of_isFiniteLocallyFree f F)
   have hqc : schemeDerivedQCohProperty (Spec (.of A)) E :=
     schemeDerivedQCohProperty_of_isPerfect _ E hE
   let EQ : schemeDerivedQCohCategory (Spec (.of A)) := ⟨E, hqc⟩
