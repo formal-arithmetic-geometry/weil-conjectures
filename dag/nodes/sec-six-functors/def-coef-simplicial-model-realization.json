@@ -1,0 +1,118 @@
+{
+ "id": "def-coef-simplicial-model-realization",
+ "kind": "definition",
+ "title": "Tensor realization and its canonical augmentation map",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a category enriched over small simplicial sets [def-weil-pbc-simplicial-set] with chosen simplicial tensors and cotensors [def-coef-simplicial-tensor-cotensor], and suppose $\\mathcal C$ is cocomplete. Use the tensor transpose of [lem-coef-simplicial-undercategory-model], namely the inverse of the enriched tensor representing isomorphism on vertices. For $X:\\Delta^{\\mathrm{op}}\\to\\mathcal C$, set $D_n=X_n\\otimes\\Delta^n$ and $R_\\alpha=X_n\\otimes\\Delta^m$ for every $\\alpha:[m]\\to[n]$, where $\\Delta^n=\\operatorname{Hom}_\\Delta(-,[n])$. The tensor parameter map $1_A\\otimes f:A\\otimes K\\to A\\otimes L$ is the transpose of $K\\xrightarrow{f}L\\xrightarrow{\\eta_{L,A}}\\underline{\\operatorname{Map}}(A,A\\otimes L)$. Define $l,r:\\coprod_\\alpha R_\\alpha\\rightrightarrows\\coprod_n D_n$ by the summand maps $X(\\alpha)\\otimes1$ into $D_m$ and $1\\otimes\\Delta^\\alpha$ into $D_n$, respectively, and define $|X|=\\operatorname{coeq}(l,r)$. For every natural augmentation $\\varepsilon:X\\to\\operatorname{const}Y$, define $a:\\coprod_n D_n\\to Y$ by transposing the constant simplicial family of $\\varepsilon_n:X_n\\to Y$ on each summand. Naturality gives $a\\circ l=a\\circ r$: on the $\\alpha$ summand these are the transposes of the constant families of $\\varepsilon_m\\circ X(\\alpha)=\\varepsilon_n$. The canonical realization augmentation $|X|\\to Y$ is $\\operatorname{coeq.desc}(a)$ with this equality; equivalently it is the unique arrow whose composite with each summand inclusion is the indicated transpose.",
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set",
+  "def-coef-simplicial-tensor-cotensor",
+  "lem-coef-simplicial-undercategory-model"
+ ],
+ "source": {
+  "document": "https://pages.uoregon.edu/ddugger/hocolim.pdf",
+  "place": "A Primer on Homotopy Colimits, Section 3.1 (realization coequalizer), Section 3.7 (augmentation by collapse), and Section 19.1 (simplicial tensors), printed pp.9,11,90; read online 2026-10-17."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "geometric realization simplicial object tensor coend coequalizer",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"id_tensor_π_preserves_coequalizer_inv_colimMap_desc\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Bimod\", \"type\": \"{X Y Z X' Y' Z' : C} (f g : X ⟶ Y) (f' g' : X' ⟶ Y') (p : Z ⊗ X ⟶ X') (q : Z ⊗ Y ⟶ Y') (wf : (Z ◁ f) ≫ q = p ≫ f')\\n  (wg : (Z ◁ g) ≫ q = p ≫ g') (h : Y' ⟶ Z') (wh : f' ≫ h = g' ≫ h) :\\n  (Z ◁ coequalizer.π f g) ≫\\n      (PreservesCoequalizer.iso (tensorLeft Z) f g).inv ≫\\n        colimMap (parallelPair\", \"doc\": \"In a monoidal category $\\\\mathcal{C}$, given parallel morphisms $f,g : X \\\\to Y$ and $f',g' : X' \\\\to Y'$, along with morphisms $p : Z \\\\otimes X \\\\to X'$, $q : Z \\\\otimes Y \\\\to Y'$ satisfying compatibility\"}\n  {\"name\": \"SSet.toTop\", \"module\": \"Mathlib.AlgebraicTopology.SingularSet\", \"type\": \": SSet.{u} ⥤ TopCat.{u}\", \"doc\": \"The functor from the category of simplicial sets to the category of topological spaces, defined as the left Kan extension of the standard simplex functor (which maps finite ordinals to standard topolo\"}\n  {\"name\": \"π_tensor_id_preserves_coequalizer_inv_colimMap_desc\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Bimod\", \"type\": \"{X Y Z X' Y' Z' : C} (f g : X ⟶ Y) (f' g' : X' ⟶ Y') (p : X ⊗ Z ⟶ X') (q : Y ⊗ Z ⟶ Y') (wf : (f ▷ Z) ≫ q = p ≫ f')\\n  (wg : (g ▷ Z) ≫ q = p ≫ g') (h : Y' ⟶ Z') (wh : f' ≫ h = g' ≫ h) :\\n  (coequalizer.π f g ▷ Z) ≫\\n      (PreservesCoequalizer.iso (tensorRight Z) f g).inv ≫\\n        colimMap (parallelPai\", \"doc\": \"For morphisms $f,g:X\\\\to Y$ and $f',g':X'\\\\to Y'$ in a monoidal category $\\\\mathcal{C}$, with compatible maps $p:X\\\\otimes Z\\\\to X'$, $q:Y\\\\otimes Z\\\\to Y'$, and $h:Y'\\\\to Z'$ satisfying the coherence conditi\"}\n  {\"name\": \"id_tensor_π_preserves_coequalizer_inv_desc\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Bimod\", \"type\": \"{W X Y Z : C} (f g : X ⟶ Y) (h : Z ⊗ Y ⟶ W) (wh : (Z ◁ f) ≫ h = (Z ◁ g) ≫ h) :\\n  (Z ◁ coequalizer.π f g) ≫ (PreservesCoequalizer.iso (tensorLeft Z) f g).inv ≫ coequalizer.desc h wh = h\", \"doc\": \"For objects $W,X,Y,Z$ in a category $\\\\mathcal{C}$, morphisms $f,g:X\\\\to Y$, and a morphism $h:Z\\\\otimes Y\\\\to W$ satisfying $(Z\\\\otimes f)\\\\circ h = (Z\\\\otimes g)\\\\circ h$, the composition of the left-tensor\"}\n  {\"name\": \"CategoryTheory.Limits.coend\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.End\", \"type\": \": C\", \"doc\": \"The coend of a functor $ F : \\\\mathcal{J}^\\\\text{op} \\\\to \\\\text{Functors}(\\\\mathcal{J}, \\\\mathcal{C}) $ is defined as the colimit (specifically the multicoequalizer) of the diagram in $ \\\\mathcal{C} $ const\"}\n  {\"name\": \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"module\": \"Mathlib.AlgebraicTopology.SingularSet\", \"type\": \": SSet.toTop.{u}.IsLeftKanExtension SSet.toTopSimplex.inv\", \"doc\": \"The geometric realization functor from simplicial sets to topological spaces satisfies the left Kan extension property along the standard simplex cosimplicial object, verified via the inverse of the n\"}\n  {\"name\": \"SimplexCategory.toTop₀\", \"module\": \"Mathlib.AlgebraicTopology.TopologicalSimplex\", \"type\": \": CosimplicialObject TopCat.{0}\", \"doc\": \"The cosimplicial object in the category of topological spaces constructed by assigning to each finite ordinal $[n]$ the standard $n$-simplex (the subset of $\\\\mathbb{R}^{n+1}$ consisting of points with\"}\n  {\"name\": \"CategoryTheory.Limits.coequalizer\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Equalizers\", \"type\": \": C\", \"doc\": \"The coequalizer of morphisms $ f $ and $ g $ in a category $ \\\\mathcal{C} $ is defined as the colimit of the diagram formed by the parallel pair $ f, g : X \\\\to Y $. It represents the universal object $\"}",
+   "date": "2026-10-17",
+   "verdict": "No general simplicial-model tensor realization. The coend and coequalizer hits are general categorical limits, SSet.toTop is specific to topological realization, and simplicial enrichment hits supply only mapping objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor coend realization of a simplicial object in a simplicially enriched category",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.SimplicialNerve\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialNerve\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.SimplicialCategory C] → SSet\", \"doc\": \"Given a category $\\\\mathcal{C}$ equipped with a simplicial category structure (enriched over simplicial sets), the simplicial nerve is a simplicial set where each $n$-simplex corresponds to an enriched\"}\n  {\"name\": \"AugmentedSimplexCategory.tensorObjOf\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal\", \"type\": \"SimplexCategory → SimplexCategory → SimplexCategory\", \"doc\": \"Given two objects $[m]$ and $[n]$ in the simplex category (represented by natural numbers $m$ and $n$), their tensor product is defined as the object $[m + n + 1]$, corresponding to the finite ordinal\"}\n  {\"name\": \"CategoryTheory.SimplicialCategory.sHom\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialCategory/Basic\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.SimplicialCategory C] → C → C → SSet\", \"doc\": \"For objects $K$ and $L$ in a category $\\\\mathcal{C}$ enriched over simplicial sets $\\\\mathbf{SSet}$, this denotes the simplicial set of morphisms from $K$ to $L$, defined as the internal hom $K \\\\Rightar\"}\n  {\"name\": \"CategoryTheory.SimplicialObject\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Type (max v u)\", \"doc\": \"A simplicial object in a category $\\\\mathcal{C}$ is a functor from the opposite of the simplex category $\\\\Delta^\\\\text{op}$ to $\\\\mathcal{C}$. The simplex category $\\\\Delta$ has objects given by finite or\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialCategory/SimplicialObject\", \"type\": \"{D : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} D] → CategoryTheory.EnrichedCategory SSet (CategoryTheory.SimplicialObject D)\", \"doc\": \"For any category $ \\\\mathcal{D} $, the category of simplicial objects in $ \\\\mathcal{D} $ is enriched over the category of simplicial sets. This means that the hom-objects between any two simplicial obj\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.Augmented\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Type (max u v)\", \"doc\": \"The category of augmented simplicial objects in $\\\\mathcal{C}$, defined as the comma category between the identity functor on simplicial objects in $\\\\mathcal{C}$ and the constant functor from $\\\\mathcal\"}\n  {\"name\": \"AugmentedSimplexCategory.tensorObj\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Monoidal\", \"type\": \"AugmentedSimplexCategory → AugmentedSimplexCategory → AugmentedSimplexCategory\", \"doc\": \"The tensor product operation on objects in the augmented simplex category, defined by cases: if both objects are from the original simplex category $\\\\Delta$ (represented as $[m]$ and $[n]$), their ten\"}\n  {\"name\": \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [CategoryTheory.SimplicialCategory C] → CategoryTheory.Functor Cᵒᵖ (CategoryTheory.Functor C SSet)\", \"doc\": \"The simplicial hom-functor is a functor from the opposite category $\\\\mathcal{C}^{\\\\text{op}}$ to the category of functors $[\\\\mathcal{C}, \\\\mathbf{SSet}]$, assigning to each object $X \\\\in \\\\mathcal{C}^{\\\\t\"}",
+   "date": "2026-10-17",
+   "verdict": "No general simplicial-model tensor realization. The coend and coequalizer hits are general categorical limits, SSet.toTop is specific to topological realization, and simplicial enrichment hits supply only mapping objects."
+  },
+  {
+   "tool": "grep",
+   "query": "SimplicialTensor|coend|Coend",
+   "results": "[grep] OK 15 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Types/End.lean\", \"line\": \"11\", \"text\": \"# Ends and coends in `Type`\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Types/End.lean\", \"line\": \"13\", \"text\": \"This file constructs explicit ends and coends in `Type` and provides\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Types/End.lean\", \"line\": \"14\", \"text\": \"`ChosenEnds` and `ChosenCoends` instances using these constructions.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Types/End.lean\", \"line\": \"30\", \"text\": \"coends in `Type`. Two terms `⟨j, x⟩` and `⟨j', x'⟩` are related if and only if there is a\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Types/End.lean\", \"line\": \"32\", \"text\": \"`(F.map f.op).app j y = x` and `(F.obj _).map f y = x'`, see `coendRel_iff` below. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/End.lean\", \"line\": \"11\", \"text\": \"# Ends and coends\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/End.lean\", \"line\": \"17\", \"text\": \"We also introduce `coend F` as multicoequalizers of\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/End.lean\", \"line\": \"48\", \"text\": \"/-- The shape of multicoequalizer diagrams involved in the definition of coends. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/End.lean\", \"line\": \"50\", \"text\": \"def multispanShapeCoend : MultispanShape where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/End.lean\", \"line\": \"65\", \"text\": \"/-- Given `F : Jᵒᵖ ⥤ J ⥤ C`, this is the multispan used to define the coend\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Chosen/End.lean\", \"line\": \"11\", \"text\": \"# Chosen ends and coends\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Chosen/End.lean\", \"line\": \"13\", \"text\": \"This file defines typeclasses `ChosenCoendsOfShape` and `ChosenEndsOfShape` which contain the data\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Chosen/End.lean\", \"line\": \"14\", \"text\": \"of a chosen coend and end in `C` for each functor `Jᵒᵖ ⥤ J ⥤ C` of a fixed shape `J`. It also\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Chosen/End.lean\", \"line\": \"15\", \"text\": \"provides `ChosenCoends` and `ChosenEnds` abbreviations for chosen coends and ends of all shapes.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Chosen/End.lean\", \"line\": \"26\", \"text\": \"/-- The data of chosen coends of shape `J` in `C`. -/\"}",
+   "date": "2026-10-17",
+   "verdict": "No general simplicial-model tensor realization. The coend and coequalizer hits are general categorical limits, SSet.toTop is specific to topological realization, and simplicial enrichment hits supply only mapping objects."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-simplicial-realization-extra-degeneracy",
+  "date": "2026-10-17",
+  "group": "Q58"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "The explicit tensor coend realization and induced augmentation map in the terminal extra-degeneracy realization lemma used for the simplicial bar replacement.",
+   "via": [
+    "lem-coef-simplicial-realization-extra-degeneracy",
+    "lem-coef-simplicial-bar-projective-resolution",
+    "lem-coef-presheaf-simplex-hocolim-resolution",
+    "lem-coef-cosimplicial-presheaf-counit",
+    "lem-coef-dugger-homotopically-surjective-map",
+    "lem-coef-combinatorial-presheaf-presentation",
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialModelRealization",
+  "declaration": "CategoryTheory.SimplicialModelRealization.realization",
+  "declarations": [
+   "CategoryTheory.SimplicialModelRealization.summand",
+   "CategoryTheory.SimplicialModelRealization.Operator",
+   "CategoryTheory.SimplicialModelRealization.relationSummand",
+   "CategoryTheory.SimplicialModelRealization.relationLeft",
+   "CategoryTheory.SimplicialModelRealization.relationRight",
+   "CategoryTheory.SimplicialModelRealization.realization",
+   "CategoryTheory.SimplicialModelRealization.augmentationLeg",
+   "CategoryTheory.SimplicialModelRealization.augmentation_condition",
+   "CategoryTheory.SimplicialModelRealization.augmentationMap"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SimplicialModelRealization.lean",
+  "statement": "def realization (T : SimplicialTensorCotensor M) (X : SimplicialObject M) : M",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d89acdbdd",
+  "group": "Q58",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d89acdbdd",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Read the item node, all four stmt_deps and their exact Lean declarations (SatisfiesSM7/cornerMap, Reedy.leftClass/relativeLatching/simplex_reedy_structure, SimplicialTensorCotensor/tensorMap, tensorTranspose), the new def-coef-simplicial-model-realization node and module, the report (Worker report plus Second reading by Q58) and the Dugger 3.11/3.12, 3.1, 3.7, 19.1 source places. Every hypothesis matches: model and SM7 binders are identical to the dependency theorem's; Reedy cofibrancy is leftClass for the opposite epis on the initial map, the correct latching condition; the five terminal extra-degeneracy identities check in composition order and index range, including n=0 and the castSucc ranges; no fibrancy, nonemptiness or universe restriction. The conclusion is WeakEquivalence of the canonical coequalizer-descent augmentation of the explicit all-operator tensor coend, whose right leg is the transpose of Delta^alpha then eta (1 tensor Delta^alpha). The new definition node has real data, its only sorry is the stated naturality Prop, and it duplicates nothing (bar realization is chain-specific). Item node diff is only lean and stmt_deps; lean.statement verbatim for both nodes; all 9 declarations exist. nt_compile.py --json on both files: rc=0, clean (1.8 s, 1.3 s). Pilot gates satisfied. No fixes needed."
+ }
+}

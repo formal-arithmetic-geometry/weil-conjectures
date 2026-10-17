@@ -209,5 +209,23 @@
   "group": "Q90",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-a0b2c4718 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. The item matches the main-20261015 def-trf-scheme-frobenius clause 'Phi = Phi_0 x id_k ... is finite and radicial' exactly: same datum, same morphism (the scalar-extended q-power Frobenius, not the absolute Frobenius of X), no separatedness or reducedness added. Sources: Stacks varieties.tex 0CCB (l.7117), 0CCD (l.7154), 0CCG (l.7254), tags confirmed in tags/tags. Step 1: finite type gives locally finite type, char p follows from p=0 in k_0, and the new lemma applies with n=a. Step 2: pasting gives Y_i^(p/S) = Y_{i+1}; each r_i is a universal homeomorphism (same-unit node), hence radicial (01S4 equivalence in the definition node); the projection induction pi_i C_i = F^i, q_i C_i = f has its base and step written out; fibre-product uniqueness gives C_a = R_a; F_S^a = id from c^q = c, so Phi_0 = pi_a R_a with pi_a an isomorphism. Step 3: Phi is h x id by def-pc-base-change, the square is cartesian, and the leaf gives finite + universally injective = radicial. New node lem-trf-relative-frobenius-finite: self-contained, statement only, true (composite of one-step finite maps by 0CCD/0CCG); tested on F_p[t], F_p[eps]/eps^2, the empty scheme and n=1; not a restated clause. No duplicate: i-relative-frob and d-relative-frob reach the item (citing them would make a cycle) and assume separated models; the existing universal-homeomorphism node gives integral, not finite. New leaf lem-trf-finite-radicial-basechange: Mathlib Finite.lean:55 and :60, UniversallyInjective.lean:88-90 and :92-94 checked, one declaration per clause. Its finite clauses overlap lem-weil-pbc-finite-composition and finite-morphism-permanence(a), but no existing node states the universally-injective clauses, so the leaf is needed. No cycle, proof_deps equals the union of uses, route stays inside the unit, no tool_uses, blueprint from/via/same_as correct. The slopmaster2 IsFrobenius candidates need extra witnesses and are not an exact statement, so splitting is right. No SGA. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a73a9f9f4",
+  "group": "NH",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: FiniteFieldDatum D; X0 : Over (Spec k0) with LocallyOfFiniteType+QuasiCompact (the recorded finite-type rendering, and exactly what relativeFrobenius requires); Phi = D.relativeFrobenius X0, which per its source is Over.pullback.map of iterateFrobenius p^a, the scalar-extended q-Frobenius; conclusion IsFinite ∧ UniversallyInjective (radicial via the recorded 01S4 Mathlib match). No separatedness, reducedness or universe restriction. Edge cases empty/nilpotent/non-separated models, a=1 and p=2 are covered. Only a sorry'd theorem, no definitions. Docstrings give source tags and blueprint, and the theorem docstring sets out the 3 proof steps. lean.statement is verbatim in the file. The private proof import is the recorded module of a proof dependency. Upstream IsFrobenius lemmas are not exact, so existing:false is right. Both report sections are present. nt_compile.py --json on the snapshot gave rc 0 with no warnings. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeFrobeniusFiniteRadicial",
+  "declaration": "WeilConjectures.FiniteFieldDatum.relativeFrobenius_isFinite_isRadicial",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeFrobeniusFiniteRadicial.lean",
+  "statement": "theorem relativeFrobenius_isFinite_isRadicial (D : WeilConjectures.FiniteFieldDatum.{u}) (X₀ : Over (Spec (CommRingCat.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] : IsFinite (D.relativeFrobenius X₀) ∧ UniversallyInjective (D.relativeFrobenius X₀)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

@@ -236,5 +236,23 @@
   "group": "Q12",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-4d5e8fbbd (reviewer sub-agent of L); spot-checked: I read the whole item: its statement, all six steps, the three cited nodes by statement (Nakayama leaf IsLocalRing.map_mkQ_eq_top, unit-criterion leaf IsLocalRing.notMem_maximalIdeal, def Module.Finite), the parent lem-pur-frame-independence (step 2 is its use), blueprint main-20261015 lem-pur-frame-independence.proof.md lines 10-21, and Stacks algebra.tex lemma-NAK 00DV (2),(4),(8) and lemma-characterize-local-ring 00E9 (1)<=>(3). The statement (any two generating c-tuples of a finite module over a local ring are related by unit scalings, swaps and shears) is true and is what the parent needs. It replaces the blueprint's unsupported Smith-normal-form sentence and does not weaken anything. The induction is set up explicitly: Nakayama with N=0 gives M/mM nonzero; a coefficient outside m is a unit; the pivot is explicit; the quotient tails generate Q; the lifted operations commute with q; corrective shears finish; and the matrix order is P=A_s...A_1. Small cases I checked: Z/4 with (2,1)->(1,0), k[eps]/eps^2 with (eps,0)->(0,eps), c=0, c=1, and the non-Noetherian case. There are no new nodes. proof_deps equals the union of uses. The theorem inputs are Mathlib leaves, so they count as tools and no tool_uses is needed. There is no cycle and no SGA. An rg over the DAG and a Mathlib LocalRing grep found no duplicate or leaf. There are no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9d3ed7fb1",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Clause-by-clause match of Module.exists_elementary_generating_tuple_change against the node: local ring (IsLocalRing includes Nontrivial), Module.Finite (the recorded dependency; redundant given hf but stated by the node), generating tuples given by span = top, no minimality/freeness/PID hypothesis; the three operations each with an exactly characterized matrix in GL; P = (List.ofFn A).reverse.prod = A_{s-1}...A_0 with g_i = sum_j P_ij f_j matches the chronological column action. Edge cases c=0 (Fin 0 forces s=0, empty product), M=0, c=1, redundant and non-free tuples, characteristic 2. Node statement checked true independently; node changed only in lean; lean.statement verbatim. Docstrings carry source/blueprint and the 6 proof steps; proof is sorry only; plain imports are exactly the proof-dep Mathlib modules (brief-stage2 l.104); no line over 100 chars; name is new. nt_compile --json clean (rc 0, axioms only sorryAx plus standard). Non-blocking: the Worker report is the recovered stage-1 report, and the Q78 second reading reconstructed the stage-2 Lean itself."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalGeneratingTuples",
+  "declaration": "Module.exists_elementary_generating_tuple_change",
+  "file": "lean/Sheaf/RingTheory/LocalGeneratingTuples.lean",
+  "statement": "theorem exists_elementary_generating_tuple_change {R : Type u} [CommRing R] [IsLocalRing R] {M : Type v} [AddCommGroup M] [Module R M] [Module.Finite R M] (c : ℕ) (f g : Fin c → M) (hf : Submodule.span R (Set.range f) = ⊤) (hg : Submodule.span R (Set.range g) = ⊤) : ∃ (s : ℕ) (x : ℕ → Fin c → M) (A : Fin s → Matrix.GeneralLinearGroup (Fin c) R), x 0 = f ∧ x s = g ∧ (∀ (t : ℕ) (ht : t < s), (∃ (i : Fin c) (u : Rˣ), (∀ k, x (t + 1) k = if k = i then (u : R) • x t i else x t k) ∧ (∀ z : Fin c → R, ∀ k, ((A ⟨t, ht⟩ : Matrix (Fin c) (Fin c) R).mulVec z) k = if k = i then (u : R) * z i else z k)) ∨ (∃ (i j : Fin c), i ≠ j ∧ (∀ k, x (t + 1) k = if k = i then x t j else if k = j then x t i else x t k) ∧ (∀ z : Fin c → R, ∀ k, ((A ⟨t, ht⟩ : Matrix (Fin c) (Fin c) R).mulVec z) k = if k = i then z j else if k = j then z i else z k)) ∨ (∃ (i j : Fin c) (a : R), i ≠ j ∧ (∀ k, x (t + 1) k = if k = i then x t i + a • x t j else x t k) ∧ (∀ z : Fin c → R, ∀ k, ((A ⟨t, ht⟩ : Matrix (Fin c) (Fin c) R).mulVec z) k = if k = i then z i + a * z j else z k))) ∧ ∃ (P : Matrix.GeneralLinearGroup (Fin c) R), (∀ i, g i = ∑ j : Fin c, (P : Matrix (Fin c) (Fin c) R) i j • f j) ∧ P = (List.ofFn A).reverse.prod",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

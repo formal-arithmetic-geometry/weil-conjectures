@@ -327,5 +327,48 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bbb18e46f",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Only the node's lean field changed versus the side-clone base; lean.statement appears verbatim in the file; the 22 declarations match exactly; 9 theorems, all sorry. Clause check: prime ℓ, AddCommGrpCat.{u+1} sheaves; F[ℓ^r] is the categorical kernel of (ℓ^r)•𝟙 (def-pur-abelian-sheaf-kernel); kernel.lift transitions, a cocone and colimit.desc give the canonical map; IsEllPowerTorsion is IsIso of it, shared by both sites; IsEllPowerTorsionLocal is a correct owned equivalent with its iff theorem. IsClassicalAbelian is the recorded IsClassical through forget (universe u+1 matches). H^q uses ProEtale.rightDerivedGlobalSections = R(Sheaf.Γ) on singleFunctor 0; R^q g_* uses ProEtale.lowerStar (the recorded pushforward along base change) with its rightDerivedFunctor. sSup in WithTop ℕ: empty gives 0, unbounded gives ⊤, degree 0 included. Qcqs hypotheses exact on both definitions and comparisons. Finiteness keeps Field K, hK, finite type (LocallyOfFiniteType+QuasiCompact), IsOver, and derives qcqs instances via Mathlib Noetherian lemmas. Upstream R() (HasKInjectiveResolutions) is the same universal total derived functor as the recorded def-sfb node and is what the recorded Etale.cohomology uses: accepted. H4: no existing ℓ-power torsion predicate or cd invariant (IsTorsionAbelianSheaf is all-torsion). nt_compile.py --json on the snapshot module: exit 0, no errors or warnings, 3.7 s. Report has real Worker report and Second reading by Q110 sections. Minor only: redundant [LocallyOfFiniteType g][QuasiCompact g] (implied, matches 'morphisms of finite type')."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CohomologicalDimension",
+  "declaration": "AlgebraicGeometry.ProEtale.cohomologicalDimension",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IsEllPowerTorsionLocal",
+   "AlgebraicGeometry.ProEtale.ellPowerKernel",
+   "AlgebraicGeometry.ProEtale.ellPowerKernelMap_condition",
+   "AlgebraicGeometry.ProEtale.ellPowerKernelMap",
+   "AlgebraicGeometry.ProEtale.ellPowerKernelFunctor_map_id",
+   "AlgebraicGeometry.ProEtale.ellPowerKernelFunctor_map_comp",
+   "AlgebraicGeometry.ProEtale.ellPowerKernelFunctor",
+   "AlgebraicGeometry.ProEtale.ellPowerKernelCocone_naturality",
+   "AlgebraicGeometry.ProEtale.ellPowerKernelCocone",
+   "AlgebraicGeometry.ProEtale.ellPowerKernelColimitMap",
+   "AlgebraicGeometry.ProEtale.IsEllPowerTorsion",
+   "AlgebraicGeometry.ProEtale.isEllPowerTorsion_iff_local",
+   "AlgebraicGeometry.ProEtale.IsClassicalAbelian",
+   "AlgebraicGeometry.ProEtale.IsNonzeroProEtaleCohomology",
+   "AlgebraicGeometry.ProEtale.IsNonzeroProEtaleHigherDirectImage",
+   "AlgebraicGeometry.ProEtale.cohomologicalDimension",
+   "AlgebraicGeometry.ProEtale.relativeCohomologicalDimension",
+   "AlgebraicGeometry.ProEtale.etaleCohomologicalDimension",
+   "AlgebraicGeometry.ProEtale.cohomologicalDimension_eq_etaleCohomologicalDimension",
+   "AlgebraicGeometry.ProEtale.relativeCohomologicalDimension_eq_etale",
+   "AlgebraicGeometry.ProEtale.relativeCohomologicalDimension_lt_top_of_finiteType",
+   "AlgebraicGeometry.ProEtale.cohomologicalDimension_lt_top_of_finiteType"
+  ],
+  "statement": "def cohomologicalDimension (ℓ : ℕ) (hℓ : Nat.Prime ℓ) (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] : WithTop ℕ",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Exact canonical kernel-colimit torsion condition shared by abelian sheaves on either site; qcqs absolute and relative suprema; cohomology is homology of derived global sections and of the derived direct image on degree-zero sheaves. The comparison clauses and both finite-type finiteness clauses retain all hypotheses of the node, including finite ell-dimension of the field and the K-morphism condition.",
+  "file": "lean/Sheaf/AlgebraicGeometry/CohomologicalDimension.lean"
  }
 }
