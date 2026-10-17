@@ -12,9 +12,135 @@
   "def-coef-infinity-category-of-spaces",
   "lem-coef-infinity-hom-bifunctor-functoriality"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $E(A,B)=\\operatorname{Fun}(A,B)$ for small Kan complexes. This is a small Kan complex by [lem-coef-kan-coherent-nerve-quasicategory]; its sets of simplices are small sets of simplicial maps by [def-coef-infinity-category-of-spaces]. The homotopy equivalence $E(A,B)\\to\\operatorname{Map}_{\\mathcal S_{\\mathcal V}}(A,B)$ in [lem-coef-point-family-q-counit-identification] proves local smallness of $\\mathcal S_{\\mathcal V}$. For small $M$, [lem-cbc-enhanced-functor-cone-calculus] makes $\\mathcal F_M$ a quasicategory. Apply [lem-coef-coherent-end-twisted-arrow-formula] with $C=M$ and $\\mathcal E=\\mathcal S_{\\mathcal V}$: every mapping space of $\\mathcal F_M$ has the small Kan limit model it states. The hypotheses require only small $M$ and locally small target, not smallness of the target's collection of objects. Now [lem-coef-infinity-hom-bifunctor-functoriality], in a universe containing $\\mathcal F_M$, supplies its coherent Hom with values in $\\mathcal S_{\\mathcal V}$. This proves the preliminary local-smallness clause before it is used to define $R_Q$.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-kan-coherent-nerve-quasicategory",
+    "lem-coef-point-family-q-counit-identification",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-coherent-end-twisted-arrow-formula",
+    "lem-coef-infinity-hom-bifunctor-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 5.7.3, printed p.244; derivation here uses the existing coherent-end statement and the small spatial mapping-complex comparison instead of introducing another local-smallness lemma."
+   }
+  },
+  {
+   "text": "For small Kan $A$, put $P_A(Z)=A\\times Z$ and $H_A(C)=E(A,C)$. Products are Kan by pairing horn fillers. On an $n$-simplex $f:Z\\times\\Delta^n\\to Z'$, $P_A(f)$ is $(a,z,t)\\mapsto(a,f(z,t))$. For $f:A'\\times\\Delta^n\\to A$, $g:C\\times\\Delta^n\\to C'$ and $u:A\\times\\Delta^n\\to C$, the enriched Hom action is $(a',t)\\mapsto g(u(f(a',t),t),t)$. Substitution verifies units, composition and simplex restriction, giving an enriched bifunctor $E:\\mathbf{Kan}^{\\mathrm{op}}\\times\\mathbf{Kan}\\to\\mathbf{Kan}$. Its fixed-$A$ action is $H_A$. In the coherent-nerve definition of [def-coef-infinity-category-of-spaces], enriched functors into a product are pairs; reversing $i\\mapsto n-i$ on objects and subsets of $\\mathfrak C[\\Delta^n]$ identifies the nerve of an enriched opposite with the opposite nerve. Thus $E$ is coherent in both variables. Degreewise currying gives\n$$E(A\\times Z,C)\\cong E(Z,E(A,C)).$$\nThe inverse evaluates $u(z)$ on $a$; both composites are identities on maps $A\\times Z\\times\\Delta^n\\to C$. Under [lem-coef-point-family-q-counit-identification] this gives the mapping-space equivalence induced by evaluation $P_AH_A(C)\\to C$, including composition homotopies and parameters. Apply [lem-coef-parametric-universal-arrows] with $T=P_A$ and $\\mathcal D_0=\\mathcal S_{\\mathcal V}$. These evaluation universal arrows determine $H_A$ up to compatible contractible choice, and give its coherent-diagram adjunction for every parameter shape. Permuting the first two factors gives\n$$\\sigma_{A,B,C}:\\operatorname{Map}(A,\\operatorname{Map}(B,C))\\simeq\\operatorname{Map}(B,\\operatorname{Map}(A,C)).$$\nOn enriched models this permutes $A,B$ in maps $A\\times B\\times\\Delta^n\\to C$. Its square is the identity; substitution verifies naturality in all three variables.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-point-family-q-counit-identification",
+    "lem-coef-parametric-universal-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/05UY",
+    "place": "Cartesian closure of spaces, specialized to the point base; explicit exponential calculation and coherent-diagram adjunction using the existing parametric universal-arrow statement. Agent expansion, not quotation of an additional theorem."
+   }
+  },
+  {
+   "text": "Here is the limit comparison needed below, derived in three equivalences. Let $D:J\\to\\mathcal S_{\\mathcal V}$ have a limiting cone $\\lambda:\\Delta_J B\\to D$, with $J$ small. For every small space $Z$, Step 2 and the limiting-cone criterion of [lem-cbc-enhanced-functor-cone-calculus] give\n$$\\begin{aligned}\\operatorname{Map}(Z,H_A B)&\\simeq\\operatorname{Map}(P_A Z,B)\\\\&\\simeq\\operatorname{Map}_{\\operatorname{Fun}(J,\\mathcal S_{\\mathcal V})}(\\Delta_J(P_A Z),D)\\\\&\\simeq\\operatorname{Map}_{\\operatorname{Fun}(J,\\mathcal S_{\\mathcal V})}(\\Delta_J Z,H_A D).\\end{aligned}$$\nThe last equivalence is exactly the coherent-diagram clause of [lem-coef-parametric-universal-arrows]. The composite is postcomposition with $H_A\\lambda$, since the first and last maps are evaluation adjunctions and the middle map is composition with $\\lambda$. Applying the same cone criterion again says that $H_A\\lambda$ is limiting. Thus $\\operatorname{Map}(A,\\lim_J D)\\simeq\\lim_J\\operatorname{Map}(A,D(-))$ with its actual cone-leg comparison; it is natural in $A,D$ and in restriction of the cone because the three displayed maps are. We need this only for the small limits supplied by the coherent-end node.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-parametric-universal-arrows"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, mapping-limit comparison: elementary preservation-of-limits calculation from the previously established adjunction and the cited cone test."
+   }
+  },
+  {
+   "text": "The transposition of $W$ is the degreewise exponential identity for internal functor simplicial sets in [def-cbc-enhanced-diagrams-cones]: a map $K^{\\mathrm{op}}\\times L\\times\\Delta^n\\to\\mathcal S_{\\mathcal V}$ is the corresponding map $K^{\\mathrm{op}}\\times\\Delta^n\\to\\operatorname{Fun}(L,\\mathcal S_{\\mathcal V})$. Compose its opposite, paired with the constant object $Q$, with the coherent Hom bifunctor supplied by [lem-coef-infinity-hom-bifunctor-functoriality]. This constructs $R_Q:K\\to\\mathcal S_{\\mathcal V}$, with small values by Step 1. For $T_{F,Q}$ compose $F^{\\mathrm{op}}\\times Q$ with the spatial Hom bifunctor: an arrow of $K^{\\mathrm{op}}$ acts by precomposition with the corresponding $F$-arrow and an arrow of $L$ acts by postcomposition with the $Q$-arrow. Thus their arrows and higher simplices are specified by precomposition and postcomposition, rather than being separately chosen from an objectwise formula. Write $a:k_0\\to k_1$ and $b:l_0\\to l_1$ for vertices of $\\operatorname{Tw}(K)$ and $\\operatorname{Tw}(L)$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-hom-bifunctor-functoriality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, coherent transposition before identity evaluation; construction of the two diagrams in the item."
+   }
+  },
+  {
+   "text": "Use the explicit construction of $\\operatorname{Tw}$ in [lem-coef-twisted-arrow-left-fibration]. Opposite of the ordered join $[n]^{\\mathrm{op}}\\star[n]$ is the same ordered join with its two blocks exchanged. Consequently taking opposite and exchanging the blocks defines a simplicial isomorphism\n$$\\iota_K:\\operatorname{Tw}(K)\\cong\\operatorname{Tw}(K^{\\mathrm{op}}),\\qquad(k_0\\to k_1)\\longmapsto(k_1\\to k_0\\text{ in }K^{\\mathrm{op}}).$$\nIt commutes with every operator because block exchange commutes with $\\theta^{\\mathrm{op}}\\star\\theta$. Its projections exchange source and target. Also maps from that join to $K^{\\mathrm{op}}\\times L$ are precisely pairs of maps to its factors, degree by degree, so $\\operatorname{Tw}(K^{\\mathrm{op}}\\times L)=\\operatorname{Tw}(K^{\\mathrm{op}})\\times\\operatorname{Tw}(L)$. These are identities of whole simplicial indexing diagrams; no reversal of the arrows of $\\operatorname{Tw}(K)$ is inserted.",
+   "uses": [
+    "lem-coef-twisted-arrow-left-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03P7",
+    "place": "Index calculation for the coherent-end formula; agent verification from the degreewise twisted-arrow definition."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-coherent-end-twisted-arrow-formula] first to $F,R_Q$ over $K$, and then to $W(k_1,-),Q$ over $L$. Their values lie in the locally small $\\mathcal S_{\\mathcal V}$ by Step 1. Use Step 3 for each small $\\operatorname{Tw}(L)$-limit, with $A=F(k_0)$. This gives\n$$\\begin{aligned}\\operatorname{Map}_{\\mathcal F_K}(F,R_Q)&\\simeq\\lim_a\\operatorname{Map}\\bigl(F(k_0),\\operatorname{Map}_{\\mathcal F_L}(W(k_1,-),Q)\\bigr)\\\\&\\simeq\\lim_a\\operatorname{Map}\\bigl(F(k_0),\\lim_b\\operatorname{Map}(W(k_1,l_0),Q(l_1))\\bigr)\\\\&\\simeq\\lim_a\\lim_b\\operatorname{Map}\\bigl(F(k_0),\\operatorname{Map}(W(k_1,l_0),Q(l_1))\\bigr).\\end{aligned}$$\nAll limits are coherent limits of small diagrams of small spaces. The inner-end equivalence is coherent in $k_1$ and $Q$ by the naturality clause of the cited end formula; precomposition in $F(k_0)$ gives the outer diagram. Hence these are comparisons of the indexed coherent diagrams, including their cone legs, before their limits are taken.",
+   "uses": [
+    "lem-coef-coherent-end-twisted-arrow-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03P7",
+    "place": "Example 8.3.4.22 twice, together with Step 3 for the inner mapping-limit comparison; the displayed iterated calculation is agent-formulated."
+   }
+  },
+  {
+   "text": "On the coherent integrand in Step 6 apply the spatial permutation $\\sigma$ of Step 2 with $A=F(k_0)$, $B=W(k_1,l_0)$ and $C=Q(l_1)$. This identifies it with\n$$I(a,b)=\\operatorname{Map}\\bigl(W(k_1,l_0),\\operatorname{Map}(F(k_0),Q(l_1))\\bigr).$$\nIts inverse is the same permutation. By the equivalence-and-inverse-homotopy clause of [lem-coef-coherent-end-twisted-arrow-formula], taking the two limits gives an equivalence to $\\lim_a\\lim_b I(a,b)$. On the other hand apply that node's product formula to $W,T_{F,Q}$ on $K^{\\mathrm{op}}\\times L$, and reindex by Step 5. The source of $\\iota_K(a)$ is $k_1$ and its target is $k_0$, so its double-end integrand is exactly $I(a,b)$, with precisely these variances. The node allows either order of the two limits; therefore\n$$\\operatorname{Map}_{\\mathcal F_{K^{\\mathrm{op}}\\times L}}(W,T_{F,Q})\\simeq\\lim_a\\lim_b I(a,b).$$\nCompose Step 6, the integrand permutation and the inverse of this last end comparison. This proves the required equivalence of whole mapping spaces, with a coherent inverse.",
+   "uses": [
+    "lem-coef-coherent-end-twisted-arrow-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03P7",
+    "place": "Product coherent-end formula, Fubini, and spatial argument permutation; endpoint bookkeeping is the calculation in Step 5."
+   }
+  },
+  {
+   "text": "Evaluate the construction at $a=1_k$ and $b=1_l$. By the evaluation clause of [lem-coef-coherent-end-twisted-arrow-formula], the first end projection takes $\\alpha$ to $\\alpha_k:F(k)\\to\\operatorname{Map}_{\\mathcal F_L}(W(k,-),Q)$; the second projects the latter mapping space to $\\operatorname{Map}(W(k,l),Q(l))$. Step 3's comparison is the map of this evaluation cone. The permutation of Step 2 then takes this family to $w\\mapsto[x\\mapsto\\alpha_k(x)_l(w)]$. Finally the inverse product-end comparison has this very same identity-arrow projection. Thus the component formula is $\\tau_{k,l}(w)(x)=\\alpha_k(x)_l(w)$. These are maps of the entire Kan complexes: the projection, evaluation and permutation all commute with restriction of a parameter simplex. This identifies the coherent evaluation transformation, rather than merely its values on vertices. The reverse construction interchanges $x,w$ once more and uses the inverse cone comparisons, whose inverse homotopies were retained in Step 7.",
+   "uses": [
+    "lem-coef-coherent-end-twisted-arrow-formula",
+    "lem-coef-point-family-q-counit-identification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, specification of the mapping equivalence by evaluation; explicit identity-arrow calculation for the spatial interchange."
+   }
+  },
+  {
+   "text": "Each comparison above is natural in the input diagrams: precomposition by $F'\\to F$, precomposition by $W'\\to W$, and postcomposition by $Q\\to Q'$ act on both sides of the elementary formula by the same substitution. Their composition and higher compatibility are those of [lem-coef-infinity-hom-bifunctor-functoriality], the parameter-compatible mapping comparison and the restriction-natural coherent-end formula. More explicitly, for $u:K'\\to K$ and $v:L'\\to L$, put $F'=Fu$, $Q'=Qv$, $W'=W(u^{\\mathrm{op}}\\times v)$. Restriction gives $R_Q u\\to R'_{Q'}$; use this map after restricting on the left, and restrict along $u^{\\mathrm{op}}\\times v$ on the right. Both composites evaluate to $\\alpha_{u(k')}(x)_{v(l')}(w)$. They commute coherently because restriction commutes with the same cone projections and simplicial permutation, as stated by [lem-coef-coherent-end-twisted-arrow-formula]. Write the equivalence as $\\Phi:X\\to Y$, with inverse $\\Psi$. A family $h:P\\to X$ is sent to $\\Phi h:P\\to Y$; the inverse is $h\\mapsto\\Psi h$. Whiskering the two inverse homotopies with $h$ gives the family inverse homotopies. These operations commute with every $P'\\to P$, in any containing universe. Empty $K$ or $L$ gives a terminal transformation space on both sides: an empty-shape end is the point, and when $L$ is empty $R_Q$ is point-valued. Empty values require no change: $E(\\varnothing,C)=*$ and $E(A,\\varnothing)$ is empty for nonempty $A$, while $E(\\varnothing,\\varnothing)=*$. No step selected a point of an empty space.",
+   "uses": [
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-coef-point-family-q-counit-identification",
+    "lem-coef-coherent-end-twisted-arrow-formula"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, compatibility of the mapping calculation and its specified maps; explicit restriction square, parameter and empty-case verification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-coherent-end-twisted-arrow-formula",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-kan-coherent-nerve-quasicategory",
+  "lem-coef-parametric-universal-arrows",
+  "lem-coef-point-family-q-counit-identification",
+  "lem-coef-twisted-arrow-left-fibration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, coherent mapping-space adjunction foundation. Online Kerodon coherent-end and Cisinski local-smallness references are checked, but no archived source proves the displayed interchange verbatim; the explicit argument is by Q25."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -78,10 +204,59 @@
    "results": "{\"t\": \"2026-10-17T05:31:52Z\", \"tool\": \"grep\", \"query\": \"^noncomputable def homEquiv|^noncomputable abbrev enrichedHom\", \"sub\": \"CategoryTheory/Enriched\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\"], \"digest\": \"835dec575c34d782\"}",
    "date": "2026-10-17",
    "verdict": "Second reader: no match. Read Mathlib/CategoryTheory/Enriched/FunctorCategory.lean:40-110. homEquiv identifies ordinary natural transformations with maps from the tensor unit to a strict enriched end; it is not the stated equivalence between coherent transformation spaces for arbitrary K and L."
+  },
+  {
+   "tool": "grep",
+   "query": "quasicategory|twistedArrow|TwistedArrow",
+   "results": "{\"t\": \"2026-10-17T05:52:07Z\", \"tool\": \"grep\", \"query\": \"quasicategory|twistedArrow|TwistedArrow\", \"sub\": \"CategoryTheory/Enriched\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read StrictBicategory.lean:15-33,50-57 (Cat enrichment of homotopy categories), Monoidal/Closed/FunctorCategory/Basic.lean:33-89 (ordinary Category natural-transformation Hom sets), Limits/Fubini.lean:13-54 (ordinary-category limits), and Monoidal/Closed/FunctorToTypes.lean:29-36 (Type-valued ordinary diagrams). None states this equivalence of whole coherent transformation spaces over arbitrary small quasicategories. The second semantic phrasing did not change this verdict."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent end formula and symmetry of iterated function spaces for space valued infinity category diagrams",
+   "results": "{\"t\": \"2026-10-17T05:52:08Z\", \"tool\": \"leansearch\", \"query\": \"Coherent end formula and symmetry of iterated function spaces for space valued infinity category diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm\", \"Mathlib.Tactic.BicategoryLike.CoherenceHom.unfold\", \"CategoryTheory.Limits.IsLimit.ofConeOfConeUncurry\", \"Mathlib.Tactic.BicategoryLike.CoherenceHom\", \"CategoryTheory.Limits.DiagramOfCones.mkOfHasLimits\", \"CategoryTheory.Limits.diagramOfConesInhabited\", \"Mathlib.Tactic.Coherence.coherence_loop\", \"Mathlib.Tactic.BicategoryLike.CoherenceHom.e\"], \"digest\": \"009551bb991321fd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read StrictBicategory.lean:15-33,50-57 (Cat enrichment of homotopy categories), Monoidal/Closed/FunctorCategory/Basic.lean:33-89 (ordinary Category natural-transformation Hom sets), Limits/Fubini.lean:13-54 (ordinary-category limits), and Monoidal/Closed/FunctorToTypes.lean:29-36 (Type-valued ordinary diagrams). None states this equivalence of whole coherent transformation spaces over arbitrary small quasicategories. The second semantic phrasing did not change this verdict."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.FunctorCategory.adj",
+   "results": "{\"t\": \"2026-10-17T05:52:08Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonoidalClosed.FunctorCategory.adj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosed.FunctorCategory.adj\"], \"digest\": \"55f95ccf1aaed7b3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read StrictBicategory.lean:15-33,50-57 (Cat enrichment of homotopy categories), Monoidal/Closed/FunctorCategory/Basic.lean:33-89 (ordinary Category natural-transformation Hom sets), Limits/Fubini.lean:13-54 (ordinary-category limits), and Monoidal/Closed/FunctorToTypes.lean:29-36 (Type-valued ordinary diagrams). None states this equivalence of whole coherent transformation spaces over arbitrary small quasicategories. The second semantic phrasing did not change this verdict."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence of spaces of coherent natural transformations by interchanging space-valued arguments in two variables over small quasicategories",
+   "results": "{\"t\": \"2026-10-17T05:52:10Z\", \"tool\": \"leanfinder\", \"query\": \"Equivalence of spaces of coherent natural transformations by interchanging space-valued arguments in two variables over small quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.catEnrichedOrdinaryCategory\", \"SSet.yonedaEquiv\", \"SSet.yonedaEquiv_comp\", \"SSet.OneTruncation₂.nerveHomEquiv\", \"SSet.hoFunctor.unitHomEquiv\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.Truncated.nerve₂Adj\", \"SSet.OneTruncation₂.ofNerve₂.natIso_inv_app_map\"], \"digest\": \"a020f73eac4c3ce8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read StrictBicategory.lean:15-33,50-57 (Cat enrichment of homotopy categories), Monoidal/Closed/FunctorCategory/Basic.lean:33-89 (ordinary Category natural-transformation Hom sets), Limits/Fubini.lean:13-54 (ordinary-category limits), and Monoidal/Closed/FunctorToTypes.lean:29-36 (Type-valued ordinary diagrams). None states this equivalence of whole coherent transformation spaces over arbitrary small quasicategories. The second semantic phrasing did not change this verdict."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor Hom symmetry for natural transformation spaces in infinity categories of functors to Kan complexes, using limits over twisted arrow categories",
+   "results": "{\"t\": \"2026-10-17T05:52:52Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor Hom symmetry for natural transformation spaces in infinity categories of functors to Kan complexes, using limits over twisted arrow categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.instMonoidalOfNatNatCatHoFunctor₂\", \"CategoryTheory.FunctorToTypes.functorHomEquiv_symm_apply_app_app\", \"SSet.Truncated.hoFunctor.monoidal\", \"CategoryTheory.Functor.homObjEquiv\", \"CategoryTheory.FunctorToTypes.functorHomEquiv\", \"CategoryTheory.Enriched.Functor.natTransEquiv_symm_whiskerRight_functorHom_app\", \"CategoryTheory.Functor.homObjEquiv_symm_apply_app\", \"SSet.instMonoidalClosed\"], \"digest\": \"b50449bac7cc1517\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read StrictBicategory.lean:15-33,50-57 (Cat enrichment of homotopy categories), Monoidal/Closed/FunctorCategory/Basic.lean:33-89 (ordinary Category natural-transformation Hom sets), Limits/Fubini.lean:13-54 (ordinary-category limits), and Monoidal/Closed/FunctorToTypes.lean:29-36 (Type-valued ordinary diagrams). None states this equivalence of whole coherent transformation spaces over arbitrary small quasicategories. The second semantic phrasing did not change this verdict."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorHom|tensor_hom|closed.*curry|curry.*closed|enriched.*end",
+   "results": "{\"t\": \"2026-10-17T05:59:36Z\", \"tool\": \"grep\", \"query\": \"tensorHom|tensor_hom|closed.*curry|curry.*closed|enriched.*end\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/MarkovCategory/Positive.lean\", \"Mathlib/CategoryTheory/Action/Monoidal.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\"], \"digest\": \"76baf39644658b21\"}",
+   "date": "2026-10-17",
+   "verdict": "Second independent reading: no match. Read CategoryTheory/Functor/FunctorHom.lean:32-143, Monoidal/Closed/FunctorCategory/Basic.lean:33-89, and Enriched/Opposite.lean:10-58. These treat ordinary Category functors, Hom sets, and strict enriched categories. They do not assert equivalences of coherent transformation spaces for arbitrary quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For small infinity categories and space valued bifunctors, natural transformations from F to Map(W,Q) are equivalent to natural transformations from W to Map(F,Q)",
+   "results": "{\"t\": \"2026-10-17T05:59:38Z\", \"tool\": \"leanfinder\", \"query\": \"For small infinity categories and space valued bifunctors, natural transformations from F to Map(W,Q) are equivalent to natural transformations from W to Map(F,Q)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.functorHomEquiv\", \"CategoryTheory.Presheaf.restrictedULiftYonedaHomEquiv'\", \"CategoryTheory.Localization.lift₂NatTrans\", \"CategoryTheory.Localization.lift₂NatTrans_app_app\", \"CategoryTheory.Localization.natTrans₂_ext\", \"CategoryTheory.Localization.lift₃NatTrans\", \"CategoryTheory.Localization.lift₂NatIso_hom\", \"CategoryTheory.Limits.PreservesFiniteLimitsOfIsFilteredCostructuredArrowYonedaAux.functorToInterchangeIso\"], \"digest\": \"6548dd1573c50ec8\"}",
+   "date": "2026-10-17",
+   "verdict": "Second independent reading: no match. Read CategoryTheory/Functor/FunctorHom.lean:32-143, Monoidal/Closed/FunctorCategory/Basic.lean:33-89, and Enriched/Opposite.lean:10-58. These treat ordinary Category functors, Hom sets, and strict enriched categories. They do not assert equivalences of coherent transformation spaces for arbitrary quasicategories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-space-presheaf-right-kan-mapping-formula",
@@ -112,5 +287,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-spatial-mapping-interchange",
+  "worker": "stage1",
+  "summary": "Proved local smallness by the existing coherent-end node and the spatial mapping comparison. Constructed exponential universal arrows and their simplicial interchange, derived the needed limit comparison with the existing parametric universal-arrow and cone statements, and computed both transformation spaces as the same double end. Checked endpoint variances, identity evaluation, coherent restrictions, arbitrary containing-universe parameters and empty cases. No new nodes and no Mathlib leaf; retained the statement and all inherited searches. Avoided cyclic broad foundations by writing the short adjunction-and-cone calculation from existing independent statements.",
+  "blueprint": "Realizes prop-coef-integral-exceptional-adjoint proof paragraph 2: scalar coherent transposition underlying the displayed mapping adjunction, before identity evaluation. This is the inherited local foundational branch, with no change to the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic quasicategory and limiting-cone mapping criterion for the elementary exponential-adjunction limit comparison; no geometric unit step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-8733b601f",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-8733b601f (reviewer sub-agent of L); spot-checked: Read in full: the item's statement and all 9 steps, the full statements of all 9 cited nodes, the parent lem-coef-space-presheaf-right-kan-mapping-formula steps 1-2, and the ancestor prop-coef-integral-exceptional-adjoint paragraph 2 in blueprint main-20261015. Statement unchanged. Variances checked: R_Q is covariant on K and T is a functor on K^op x L. I tested K empty, L empty, K=L=Delta^0, K=Delta^1 with L=Delta^0, and empty values myself. Step 5: Tw(K) is isomorphic to Tw(K^op) with source and target exchanged; I checked this against the twisted-arrow node's definition, (Delta^{n,op} join Delta^n)^op = Delta^{n,op} join Delta^n with the blocks exchanged, and in ordinary categories. Step 7: the integrand Map(W(k1,l0),Map(F(k0),Q(l1))) matches on both sides. Hypotheses checked: the end node needs V-small C and a target with V-small mapping spaces; S_V and Fun(M,S_V) have literally small mapping spaces. The parametric-universal-arrows node is applied with T=P_A and D_0=S_V. The cone criterion is used in step 3 for limit preservation. Minor remark, not a fault: the coherent identification of N_hc E(A,-) with H_S(A,-) rests on the enriched counit and beta from the point-family node, which is enough at one level. No new nodes. Every uses entry is in proof_deps, and BFS shows no cycle. Duplicate candidates lem-coef-space-presheaf-cocompletion and lem-coef-cat-infinity-colimits-cartesian-closure both reach the item through its parent, so the inline exponential in steps 2-3 is justified. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc), a generic limiting-cone criterion. Sources: online Kerodon 03P7 and Cisinski 5.7.3 with WANTED entries, proof_origin agent, no SGA. Three-kind Mathlib searches recorded; no match. No fixes."
  }
 }

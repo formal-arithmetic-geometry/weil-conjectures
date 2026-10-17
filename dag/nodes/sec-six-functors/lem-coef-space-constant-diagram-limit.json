@@ -4,10 +4,121 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-category-of-spaces"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "status": "unsplit",
+ "proof": [
+  {
+   "text": "Put $C=\\mathcal S_{\\mathcal U}=N_{\\mathrm{hc}}\\mathbf{Kan}_{\\mathcal U}$ and write $E(A,B)=\\operatorname{Fun}(A,B)$. By [lem-cbc-kan-functor-space-kan], $E(A,B)$ is a small Kan complex whenever $B$ is Kan; smallness follows from the degreewise sets of maps between small simplicial sets. Thus [lem-coef-kan-coherent-nerve-quasicategory] makes $C$ a quasicategory, and [lem-cbc-enhanced-functor-cone-calculus] makes $D=\\operatorname{Fun}(K,C)$ a quasicategory. All collections of small Kan complexes are handled in a containing universe. For either quasicategory $H=C,D$, let $M_H(a,b)$ be its right-pinched mapping space and $U_H(a,b)$ its arrow mapping space. The specified map $j_H:M_H(a,b)\\to U_H(a,b)$ of [lem-coef-infinity-pinch-comparison] is a natural homotopy equivalence.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-kan-functor-space-kan",
+    "lem-coef-kan-coherent-nerve-quasicategory",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03EX",
+    "place": "Kerodon 03F6, locally Kan hypotheses; fixed universe conventions"
+   }
+  },
+  {
+   "text": "Construct the enriched-to-arrow comparison rather than using the cyclic general coherent-nerve comparison. For Kan $A,B$, put $T=E(A,B)$. The simplex-colimit description in [lem-coef-pinched-rigidification-resolution] and the definition of $C$ identify $M_C(A,B)=\\operatorname{Sing}_QT$: an $n$-simplex is precisely the enriched functor from the right-pinched $J^n$, whose only nonidentity datum is a map $Q^n\\to T$. Define $q^n:Q^n\\to\\Delta^n$ on an endpoint-containing subset $S$ in $\\mathfrak C[\\Delta^{n+1}](i,n+1)$ by $\\max(S\\setminus\\{n+1\\})$. All morphisms inside the collapsed initial face go to an identity; union with a preceding subset leaves this maximum unchanged. Hence the formula descends to $Q^n$. Monotone ordinal maps preserve maxima, so $q$ is cosimplicial. Compare it to the cosimplicial $p$ supplied by the cited resolution: pointwise maximum gives $r^n=\\max(p^n,q^n)$ and inequalities $p^n\\leq r^n\\geq q^n$. They give simplicial homotopies, natural in $n$, and descend through the coend to $p_S\\simeq r_S\\simeq q_S$ for every simplicial set $S$. Homotopic maps induce identical maps on the edge-component sets in [lem-cbc-realization-weak-equivalence], so $q_S$ is a weak equivalence, since $p_S$ is. Define $\\alpha:T\\to M_C(A,B)$ by $t\\mapsto t q^n$ in degree $n$. The evaluation counit satisfies $e_T|\\alpha|_Q=q_T$, directly on every coend summand. Since $e_T$ and $q_T$ are weak equivalences, so is $|\\alpha|_Q$. Naturality gives $p_{M_C}|\\alpha|_Q=\\alpha p_T$, and two-out-of-three makes $\\alpha$ a weak equivalence. Two-out-of-three here also follows from the bijection criterion in [lem-cbc-realization-weak-equivalence]. Both ends are Kan, so [lem-cbc-kan-whitehead-inverse] gives a homotopy inverse. Consequently $b_{A,B}=j_C\\alpha:E(A,B)\\to U_C(A,B)$ is a homotopy equivalence, natural in enriched maps and their simplex parameters.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-cbc-realization-weak-equivalence",
+    "lem-cbc-kan-whitehead-inverse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03EX",
+    "place": "Kerodon 4.6.7.7 (06QR); HTT 2.2.2; explicit maximum-map comparison"
+   }
+  },
+  {
+   "text": "For Kan $A,B$, currying gives the actual simplicial isomorphism $U_D(\\Delta_KA,\\Delta_KB)=\\operatorname{Fun}(K,U_C(A,B))$. On each side an $n$-simplex is a map $K\\times\\Delta^n\\times\\Delta^1\\to C$ with its two interval endpoints constant at $A$ and $B$; interchanging the parameter factors gives the inverse. Postcomposition by $b_{A,B}$ is a homotopy equivalence on these internal functor objects: postcompose with a homotopy inverse and evaluate its two homotopies at each point of $K$ with the same interval parameter. With $j_D$, this gives a natural zigzag of equivalences\n$$M_D(\\Delta_KA,\\Delta_KB)\\xrightarrow{j_D}U_D(\\Delta_KA,\\Delta_KB)=\\operatorname{Fun}(K,U_C(A,B))\\xleftarrow{\\operatorname{Fun}(K,b_{A,B})}\\operatorname{Fun}(K,E(A,B)).$$\nIt applies to all simplex parameters, including empty $K$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03EX",
+    "place": "Kerodon 03F3; explicit constant-diagram arrow-space currying"
+   }
+  },
+  {
+   "text": "Check the composition comparison needed for the particular cone. Use $V,\\theta,\\ell$ of [lem-coef-infinity-mapping-composition]. For $f:\\Delta^n\\to E(A,B)$ and $g:\\Delta^n\\to E(B,T)$, define a map $\\Delta^2\\times\\Delta^n\\to C$ as follows. Its three layers are $A,B,T$, with identity within-layer morphisms. On an endpoint-containing subset joining layers $0$ to $1$, evaluate $f$ at the largest parameter among its layer-$0$ vertices; on layers $1$ to $2$, evaluate $g$ at the largest layer-$1$ parameter. On layers $0$ to $2$, put $s=\\max\\{i:(0,i)\\text{ lies in the subset}\\}$ and $t=\\max\\{i:(a,i)\\text{ lies in the subset},a\\leq1\\}$ and use $g(t)f(s)$. Inclusion of subsets preserves these maxima monotonically. Splitting at layer $1$ is enriched composition, and splitting within an endpoint layer inserts an identity, so these formulas define enriched functors on all simplices and agree on their faces. Monotone parameter changes commute with maxima. The three edges are $b(f),b(g),b(gf)$, since $t=s$ on the $02$ face. The characterization by $\\theta$ and $\\ell$ therefore identifies enriched composition with coherent composition up to homotopy, with all shared parameters retained. For $D$, currying gives $V_D(\\Delta_KA,\\Delta_KB,\\Delta_KT)=\\operatorname{Fun}(K,V_C(A,B,T))$ and both restriction maps act pointwise; hence the identical comparison holds pointwise in $K$. Naturality of $j$ under the constant-diagram map identifies that map on enriched mapping objects with the constant-family inclusion.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03EX",
+    "place": "Kerodon 4.6.8.19 (02LN); explicit three-layer composition calculation"
+   }
+  },
+  {
+   "text": "Put $L=E(K,X)$, a small Kan complex by Step 1. Transpose the simplicial evaluation map $K\\times L\\to X$ to $e:K\\to E(L,X)$. Composing with $b_{L,X}$ and using Step 3 gives a vertex of $U_D(\\Delta_KL,\\Delta_KX)$, namely the coherent evaluation transformation $\\lambda:\\Delta_KL\\to\\Delta_KX$. For every small Kan complex $Z$, composition with this cone gives the limiting-cone test map\n$$M_C(Z,L)\\longrightarrow M_D(\\Delta_KZ,\\Delta_KX).$$\nSteps 2--4 identify this actual map, up to homotopy, with\n$$E(Z,E(K,X))\\longrightarrow E(K,E(Z,X)).$$\nIt sends $h$ to the family $(k,z)\\mapsto h(z)(k)$. This is a simplicial isomorphism: its inverse sends a family $a(k)(z)$ to $z\\mapsto(k\\mapsto a(k)(z))$. In degree $n$ both directions merely exchange $K$ and $Z$ in maps $Z\\times K\\times\\Delta^n\\to X$, and restriction of the last parameter commutes with that exchange. Thus the test map is an equivalence for every $Z$. The limiting-cone criterion of [lem-cbc-enhanced-functor-cone-calculus] proves that $\\lambda$ is limiting. Its leg at $k$ is evaluation $f\\mapsto f(k)$ by construction. Step 2 identifies $E(K,X)$ with the right-pinched $\\operatorname{Map}_C(K,X)$ by a canonical natural weak equivalence, so this gives precisely the apex and cone asserted in the item.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03EX",
+    "place": "Kerodon 03F3 and 03F7; explicit cotensor currying verifies the limiting-cone criterion"
+   }
+  },
+  {
+   "text": "For a map $u:K'\\to K$, the apex map is $u^*:E(K,X)\\to E(K',X)$, $f\\mapsto f u$; evaluation obeys $\\mathrm{ev}_{K',X}(k',f u)=\\mathrm{ev}_{K,X}(u(k'),f)$. For $v:X\\to X'$, postcomposition gives $v_*f=vf$ and $\\mathrm{ev}_{K,X'}(k,vf)=v(\\mathrm{ev}_{K,X}(k,f))$. Both equations hold as identities of simplicial maps, and substitution of a simplex parameter into either identity gives the corresponding identity with parameters. Products and repeated parameters use the diagonal of the parameter simplex. The comparison maps $q,\\alpha,j$ and the three-layer construction commute with these substitutions, so these identities identify the coherent cone comparisons and their higher parameters, not just their vertex components. The limiting-cone test in Step 5 is the currying isomorphism itself and commutes with these equations. This proves the required naturalities. Finally the contractibility of the full subcategory of limiting cones in [lem-cbc-enhanced-functor-cone-calculus] makes the resulting identification canonical as a limit identification; no arbitrary choice of an unrelated limit object is involved.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/03EX",
+    "place": "Kerodon 03EX; direct evaluation equations give naturality in all parameters"
+   }
+  },
+  {
+   "text": "For $K=\\varnothing$, degreewise $E(K,X)=\\Delta^0$, and the isomorphism in Step 5 has singleton source and target for every $Z$. The evaluation cone is therefore limiting by that same test, so no nonemptiness hypothesis was used. For $K=\\Delta^0$ it is the identity cone on $X$. For $X=\\Delta^0$ all mapping objects and evaluations are terminal. If $X=\\varnothing$ and $K$ is nonempty then $E(K,X)=\\varnothing$, while $E(\\varnothing,\\varnothing)=\\Delta^0$ when $K$ is empty; in both cases the currying test remains the displayed degreewise isomorphism.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/03EX",
+    "place": "Kerodon 7.1.2.7 (03F4); explicit empty and point checks"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-category-of-spaces",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-kan-functor-space-kan",
+  "lem-coef-kan-coherent-nerve-quasicategory",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-pinched-rigidification-resolution",
+  "lem-cbc-realization-weak-equivalence",
+  "lem-cbc-kan-whitehead-inverse",
+  "lem-coef-infinity-mapping-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/03EX",
+  "place": "03F3 and 03F7, with constant-diagram mapping spaces and composition expanded using the existing pinched-resolution and arrow-space comparison nodes; archival copy WANTED"
+ },
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-right-fibration-constant-right-kan",
@@ -23,25 +134,25 @@
  },
  "mathlib_searches": [
   {
-   "tool": "leanfinder",
-   "query": "The limit of a constant diagram of spaces indexed by a Kan complex K is the mapping space from K to X, with evaluation cone",
-   "results": "{\"t\": \"2026-10-17T04:09:31Z\", \"tool\": \"leanfinder\", \"query\": \"The limit of a constant diagram of spaces indexed by a Kan complex K is the mapping space from K to X, with evaluation cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hasLimits\", \"SSet.toTop\", \"SSet.const\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"TopCat.toSSet\", \"SSet.Truncated.hasLimits\", \"TopCat.toSSetObjEquiv\", \"CategoryTheory.SimplicialObject.instHasLimits\"], \"digest\": \"76573a577c8ea330\"}",
-   "date": "2026-10-17",
-   "verdict": "No exact match: hits concern simplicial-set limits or ordinary evaluation adjoints, not Kan-complex cotensors in spaces."
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Limits.IsLimit, Functor.const",
-   "results": "{\"t\": \"2026-10-17T04:09:32Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.IsLimit, Functor.const\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Functor.const'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-17",
-   "verdict": "No match: query identifier unavailable; ordinary IsLimit APIs do not state the infinity-space result."
-  },
-  {
    "tool": "grep",
-   "query": "constant.*[Ll]imit|[Cc]one|[Mm]ap",
-   "results": "{\"t\": \"2026-10-17T04:09:32Z\", \"tool\": \"grep\", \"query\": \"constant.*[Ll]imit|[Cc]one|[Mm]ap\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\"], \"digest\": \"8f908f8e9d076e10\"}",
+   "query": "cotensor|homotopy.coherent.*limit|constant.*diagram",
+   "results": "{\"t\": \"2026-10-17T05:59:33Z\", \"tool\": \"grep\", \"query\": \"cotensor|homotopy.coherent.*limit|constant.*diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/ModelTheory/ElementaryMaps.lean\", \"Mathlib/Condensed/Discrete/Colimit.lean\", \"Mathlib/Condensed/Discrete/Colimit.lean\", \"Mathlib/Condensed/Discrete/Colimit.lean\", \"Mathlib/Condensed/Discrete/Colimit.lean\", \"Mathlib/Condensed/Discrete/Colimit.lean\", \"Mathlib/Condensed/Discrete/Characterization.lean\", \"Mathlib/Condensed/Discrete/Characterization.lean\"], \"digest\": \"16eb54fdfba141f4\"}",
    "date": "2026-10-17",
-   "verdict": "No matching constant-space limit theorem in AlgebraicTopology/Quasicategory."
+   "verdict": "No exact match. Read Mathlib/CategoryTheory/Limits/Connected.lean:50-108: ordinary constant-diagram limits discard higher groupoid information. The other hits give ordinary SSet cartesian closure or strict Segal extensions, not the coherent evaluation limit in spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "limits of constant diagrams of infinity groupoids are function spaces",
+   "results": "{\"t\": \"2026-10-17T05:59:33Z\", \"tool\": \"leansearch\", \"query\": \"limits of constant diagrams of infinity groupoids are function spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsEventuallyConstantTo.hasLimit\", \"CategoryTheory.Limits.limitConstTerminal\", \"CategoryTheory.Limits.hasLimit_const_of_isConnected\", \"CategoryTheory.Grpd.piLimitFanIsLimit\", \"CategoryTheory.Functor.IsEventuallyConstantTo.isLimitCone\", \"GrpCat.limitGroup\", \"CategoryTheory.Limits.preservesLimits_const\", \"CategoryTheory.Limits.preservesColimits_const\"], \"digest\": \"82e68a3ffc6260e8\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match. Read Mathlib/CategoryTheory/Limits/Connected.lean:50-108: ordinary constant-diagram limits discard higher groupoid information. The other hits give ordinary SSet cartesian closure or strict Segal extensions, not the coherent evaluation limit in spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homotopy coherent cones on a constant simplicial diagram are represented by cotensors in Kan complexes",
+   "results": "{\"t\": \"2026-10-17T05:59:35Z\", \"tool\": \"leanfinder\", \"query\": \"homotopy coherent cones on a constant simplicial diagram are represented by cotensors in Kan complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.instMonoidalClosed\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.lift\", \"SSet.ι₁\", \"SSet.instCartesianMonoidalCategory\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.cechNerveTerminalFrom\", \"SSet.Augmented\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\"], \"digest\": \"16755bc59b3d9dab\"}",
+   "date": "2026-10-17",
+   "verdict": "No exact match. Read Mathlib/CategoryTheory/Limits/Connected.lean:50-108: ordinary constant-diagram limits discard higher groupoid information. The other hits give ordinary SSet cartesian closure or strict Segal extensions, not the coherent evaluation limit in spaces."
   }
  ],
  "mathlib_match": null,
@@ -73,5 +184,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-space-constant-diagram-limit",
+  "worker": "stage1",
+  "summary": "Second reader replaced the unsupported opposite-indexing argument by an explicit, noncircular mapping-space proof: Kan enrichment, maximum-map nerve comparison, constant-diagram arrow-space currying, composition compatibility, evaluation and the limiting-cone test, coherent naturality, and empty cases. No new nodes; statement unchanged.",
+  "blueprint": "The imported item's route is the independent constant-space limit calculation recorded under prop-coef-integral-exceptional-adjoint; the current main-20261015 ancestor has no corresponding right-fibration sentence, so the mismatch remains explicit in blueprint.from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-kan-functor-space-kan",
+    "why": "Generic simplicial/Kan and cone calculus used by the explicit mapping-space proof; this unit has no duplicate of this foundational statement."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic simplicial/Kan and cone calculus used by the explicit mapping-space proof; this unit has no duplicate of this foundational statement."
+   },
+   {
+    "node": "lem-cbc-realization-weak-equivalence",
+    "why": "Generic simplicial/Kan and cone calculus used by the explicit mapping-space proof; this unit has no duplicate of this foundational statement."
+   },
+   {
+    "node": "lem-cbc-kan-whitehead-inverse",
+    "why": "Generic simplicial/Kan and cone calculus used by the explicit mapping-space proof; this unit has no duplicate of this foundational statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-kan-functor-space-kan",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-realization-weak-equivalence",
+  "lem-cbc-kan-whitehead-inverse"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-d3d996f16",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-d3d996f16 (reviewer sub-agent of L); spot-checked: I read the whole delivery and wrote no fixes; details are in review.md. There are no new nodes, the statement is unchanged (empty K and naturality kept), and traversing the snapshot DAG shows none of the ten cited nodes reaches the item, so there is no cycle. Step 1: the Kan functor-space, coherent-nerve, cone-calculus and pinch-comparison nodes are applied within their hypotheses. Step 2: I checked that M_C(A,B)=Sing_Q E(A,B), that q^n=max(S minus {n+1}) descends and is cosimplicial, that max(p,q) gives the homotopies to p, that e_T|alpha|=q_T, and that the Whitehead inverse applies. Step 3: currying gives U_D=Fun(K,U_C). Step 4: I checked the three-layer functor at every split; its edges are b(f), b(g), b(gf), so by the theta/ell characterisation the coherent composition agrees with enriched composition up to homotopy. Step 5: the cone-criterion test map is homotopic to the currying isomorphism, so the evaluation cone is limiting. Step 6: naturality follows from strict evaluation identities; the step is terse but acceptable. Step 7: the cases K empty, Delta^0, and X empty or a point all check. lem-coef-right-fibration-section-limit is not a duplicate: it indexes over K^op and covers a different fibration. The two general comparison nodes the reader avoided (space-transport, coherent-nerve) both reach the item, so avoiding them was right. I accept the four sk-prop-sf-cbc tool_uses as generic black boxes. Kerodon 03F3/03F7 has no archival copy (marked WANTED); the statement agrees with those results as I know them."
  }
 }
