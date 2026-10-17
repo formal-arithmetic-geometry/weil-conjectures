@@ -122,6 +122,12 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_one_of_iso_upperStar
     rw [← Scheme.Opens.ι_comp_over, ← zero_add (1 : ℕ)]
     infer_instance
   have := SmoothOfRelativeDimension.smooth 1 (W.toScheme ↘ Spec (CommRingCat.of k₀))
+  -- `W` is quasi-compact, as an open of the noetherian scheme `ℙ¹`
+  have : IsLocallyNoetherian (ProjectiveLine (Spec (CommRingCat.of k₀))) :=
+    LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine (Spec (.of k₀)) ↘ Spec (.of k₀))
+  have : QuasiCompact (W.toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← Scheme.Opens.ι_comp_over]
+    infer_instance
   have : IrreducibleSpace W := GeometricallyIrreducible.irreducibleSpace_of_subsingleton
     (f := W.toScheme ↘ Spec (CommRingCat.of k₀))
   have : IsDominant j' := ⟨j'.isOpenEmbedding.isOpenMap.denseRange_of_isPreirreducibleSpace⟩

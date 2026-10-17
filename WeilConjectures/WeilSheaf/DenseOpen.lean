@@ -101,9 +101,9 @@ theorem upperStar_map_bijective_of_isLisse
   exact (upperStarLowerStarAdjunction j).map_bijective_of_isIso_unit_app A
 
 /-- *Restriction to a dense open of a curve preserves irreducibility.* Let `X` be a smooth
-geometrically connected curve over `k₀` and `j : U ↪ X` a dense open immersion. The restriction
-`j^*` carries irreducible lisse Weil sheaves on `X` to irreducible lisse Weil sheaves on `U`: the
-Weil group of `U` surjects onto that of `X`.
+geometrically connected quasi-compact curve over `k₀` and `j : U ↪ X` a dense open immersion.
+The restriction `j^*` carries irreducible lisse Weil sheaves on `X` to irreducible lisse Weil
+sheaves on `U`: the Weil group of `U` surjects onto that of `X`.
 
 A lisse Weil subsheaf `G'` of `j^* M` has a lisse direct image `j_* G'`: on the geometric curves
 this is `AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.adicLowerStar_of_mono`, by the surjectivity
@@ -115,6 +115,7 @@ of `M` applies.
 theorem IsIrreducibleLisse.upperStar_of_isDominant
     [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
     (j : U ⟶ X) [IsOpenImmersion j] [IsDominant j] [j.IsOver (Spec (CommRingCat.of k₀))]
     {M : WeilSheaf k₀ l X} (hM : M.IsIrreducibleLisse) :
     ((upperStar j).obj M).IsIrreducibleLisse := by
@@ -141,6 +142,10 @@ theorem IsIrreducibleLisse.upperStar_of_isDominant
   have : IsLocallyNoetherian (X ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
     LocallyOfFiniteType.isLocallyNoetherian
       (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
+  have : QuasiCompact (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure :=
+    inferInstanceAs (QuasiCompact (Limits.pullback.snd _ _))
+  have := QuasiCompact.compactSpace_of_compactSpace
+    (X ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
   have : Nonempty (U ↘ Spec (CommRingCat.of k₀)).geometricFiber := not_isEmpty_iff.1 fun _ ↦
     hjM (isZero_iff_isZero_carrier.2 (ProEtale.isZero_adicSheaf_of_isEmpty l _))
   have : LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀)) := by
