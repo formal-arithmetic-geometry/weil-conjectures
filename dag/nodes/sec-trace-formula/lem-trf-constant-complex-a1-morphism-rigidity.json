@@ -15,9 +15,90 @@
   "def-weil-pbc-derived-inverse-image",
   "lem-weil-pbc-exchange-forget-coefficients"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work first in the ambient derived categories of small etale A-module sheaves. The point s has the trivial etale topos: by [lem-kun-0ezp] each etale s-scheme U is a disjoint union of copies of s. The sheaf axiom for that covering gives F(U)=product_{u in U} F(s), naturally in U. Thus evaluation at s and the constant-module sheaf functor are inverse equivalences, also on A-module sheaves since the action is evaluated componentwise. They are exact inverse equivalences and therefore remain inverse when applied termwise to complexes and localized at quasi-isomorphisms. We henceforth identify D(s_et,A) with D(A) and Rp_* with RΓ(T,-) under this identification. In particular RΓ(s,Q)=Q; this uses no projectivity or finite Tor dimension of Q.",
+   "uses": [
+    "lem-kun-0ezp"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 3.1.4, specialization Y=Spec k; point-topos identification expanded using Stacks Tag 0EZP."
+   }
+  },
+  {
+   "text": "First establish that the canonical etale unit η^e_A:A_s→Rp_{et,*}A_T of the derived adjunction p^*⊣Rp_* of [def-kun-kunneth-map] is invertible. The base field and finite ring in [def-pur-conventions] agree with the present k,A. Apply [lem-pur-affine-line-ordinary-invariance] with X=s and r=0; on the small etale site A(0)_X=A_X by definition [lem-asd-etale-finite-twist-pullback], so the adjunction unit A_s→Rp_*A_T is an isomorphism. This unit is η^e_A: by the Hom bijection of [def-kun-kunneth-map], for a degree-zero sheaf F on s and a K-injective resolution p^{-1}F→I, the derived unit is F→p_*p^{-1}F→p_*I, the sheaf unit followed by the edge map, with p^{-1}A_s identified with A_T by [lem-kun-pullback-constant]. No boundedness hypothesis is involved, since A_s is a single sheaf in degree zero.",
+   "uses": [
+    "def-kun-kunneth-map",
+    "def-pur-conventions",
+    "lem-pur-affine-line-ordinary-invariance",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-kun-pullback-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-a1-direct-image.md",
+    "place": "Statement (affine-line acyclicity of the constant coefficient), in the small etale form recorded by lem-pur-affine-line-ordinary-invariance for X=Spec k, r=0."
+   }
+  },
+  {
+   "text": "For arbitrary Q as in the statement apply [lem-pur-ordinary-kunneth-finite-ring] to X=T, Y=s, K=A_T and L=Q. Both schemes are separated finite-type over k, and its finite ring is exactly A; its categories are unbounded and it imposes no finite Tor hypothesis. Use the constant-pullback identification [lem-kun-pullback-constant] and the canonical tensor-unit constraints [lem-kun-tensor-unit] to obtain the canonical isomorphism κ_Q:Rp_*A_T⊗_A^L Q→Rp_*p^*Q. Consider\nQ≅A⊗_A^L Q --(η^e_A⊗1)--> Rp_*A_T⊗_A^L Q --κ_Q--> Rp_*p^*Q.\nThis composite is exactly η^e_Q, not merely some isomorphism between the two objects. In fact [def-kun-kunneth-map] defines κ as the adjunct of the tensor product of the pulled-back counits. The adjunct of the displayed composite is therefore the tensor product of ε^e_{A_T} p^*(η^e_A)=id_{A_T} (the triangle identity) and the identity on p^*Q (the Y=s structure map is the identity). After the same unit constraints this is id_{p^*Q}, whose adjunct is η^e_Q. Step 2 and Kunneth now show that η^e_Q is invertible, even when Q is nonperfect.",
+   "uses": [
+    "lem-pur-ordinary-kunneth-finite-ring",
+    "lem-kun-pullback-constant",
+    "lem-kun-tensor-unit",
+    "def-kun-kunneth-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-ordinary-kunneth-finite-ring.md",
+    "place": "Statement, with X=affine line, Y=Spec k, K=A_T, L=Q; the canonical-map definition is expanded via its two counits."
+   }
+  },
+  {
+   "text": "Use the derived module adjunction p^*⊣Rp_* specified in [def-kun-kunneth-map]. Given v:p^*P→p^*Q, its adjunct is Rp_*(v) η^e_P. Put w=(η^e_Q)^{-1} Rp_*(v) η^e_P:P→Q. Naturality of η gives that the adjunct of p^*w is η^e_Q w=Rp_*(v) η^e_P. Injectivity of the adjunction Hom bijection yields v=p^*w. The objects P,Q lie in the bounded constructible full subcategory, so w is a morphism there too. This is a direct calculation with the adjunction, not an internal-Hom tensor formula requiring a dualizable P.",
+   "uses": [
+    "def-kun-kunneth-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 3.1.4, affine-line/point case: replace the internal-Hom shortcut by the adjunction Hom bijection."
+   }
+  },
+  {
+   "text": "For any c∈k, pi_c=id_s. The canonical sheaf composition maps and identity map of [lem-weil-pbc-inverse-image-composition](2),(3) give i_c^*p^*≅id. Their module lifts are the natural A-linear maps of [lem-weil-pbc-inverse-image-composition-module-linear](2); applying them termwise descends to derived inverse image as in [def-weil-pbc-derived-inverse-image]. Naturality with respect to w gives i_c^*(p^*w)=w under exactly these canonical identifications. Step 4 therefore gives i_a^*v=w=i_b^*v. The equality holds in the full bounded constructible subcategory used in the statement. No step imposed a Tor-amplitude condition on P or Q.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-inverse-image-composition-module-linear",
+    "def-weil-pbc-derived-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 3.1.4, equality of restrictions at points; canonical composition identifications made explicit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-kunneth-map",
+  "def-pur-conventions",
+  "def-weil-pbc-derived-inverse-image",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-kun-0ezp",
+  "lem-kun-pullback-constant",
+  "lem-kun-tensor-unit",
+  "lem-pur-affine-line-ordinary-invariance",
+  "lem-pur-ordinary-kunneth-finite-ring",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-inverse-image-composition-module-linear"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "Lemma 3.1.4 specialized to X=A1, Y=Spec k; expanded using affine-line acyclicity, finite-ring unbounded Kunneth, and adjunction to avoid a perfectness assumption."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +134,45 @@
    "results": "8 hits: AlgebraicGeometry.instIsAffineFiberOfIsAffineHom, AlgebraicGeometry.exists_map_preimage_eq_map_preimage, AlgebraicGeometry.AffineSpace.isPullback_map, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
    "date": "2026-10-17",
    "verdict": "no match: read returned signatures; these concern scheme restriction, structure sheaves, ordinary stalk specialization or chain-complex restriction, not etale derived morphism rigidity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family of morphisms between constant bounded derived etale torsion complexes on affine line has the same restrictions at zero and one.",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, StandardEtalePair.hom_ext, StandardEtalePair.hom_ext_iff, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.AffineSpace.hom_ext",
+   "date": "2026-10-17",
+   "verdict": "no match: Q118 read the returned signatures; these are scheme/affine-space or ordinary complex restriction results, not rigidity in derived etale finite-coefficient categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"etale\", \"homotopy\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: Q118 read the returned signatures; these are scheme/affine-space or ordinary complex restriction results, not rigidity in derived etale finite-coefficient categories."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*invarian|invarian.*homotopy|constant.*(cohomology|derived)",
+   "results": "0 hits: ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match: Q118 read the returned signatures; these are scheme/affine-space or ordinary complex restriction results, not rigidity in derived etale finite-coefficient categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The restrictions at any two rational points of affine line of a morphism between constant bounded derived etale complexes with finite prime to characteristic coefficients are equal.",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.resLE.congr_simp, AlgebraicGeometry.morphismRestrictRestrictBasicOpen, AlgebraicGeometry.StructureSheaf.res_const', HomologicalComplex.restriction.congr_simp, AlgebraicGeometry.morphismRestrict_base_coe, HomologicalComplex.restrictionMap, AlgebraicGeometry.AffineTargetMorphismProperty.ext_iff, LinearMap.restrict.congr_simp",
+   "date": "2026-10-17",
+   "verdict": "no match: Q118 read the returned signatures; these are scheme/affine-space or ordinary complex restriction results, not rigidity in derived etale finite-coefficient categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback to affine line of bounded constructible complexes on an algebraically closed point: every morphism has equal fibres at all rational points, also for nonperfect torsion modules.",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.Scheme.Pullback.SpecOfPoint, AlgebraicGeometry.AffineSpace.isPullback_map, AlgebraicGeometry.instIsAffineFiberOfIsAffineHom, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.exists_map_preimage_eq_map_preimage",
+   "date": "2026-10-17",
+   "verdict": "no match: Q118 read the returned signatures; these are scheme/affine-space or ordinary complex restriction results, not rigidity in derived etale finite-coefficient categories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-dnc-contractible-constant-defect",
@@ -77,5 +193,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-constant-complex-a1-morphism-rigidity",
+  "worker": "stage1",
+  "summary": "Q118 checked Varshavsky Lemma 3.1.4 and the current blueprint contraction use, retained the full statement without a Tor hypothesis, found no finished project declaration or Mathlib match, and split into five steps using existing point-site, affine-line acyclicity, site-comparison, unbounded finite-ring Kunneth and adjunction nodes. No new nodes or unit changes. Maintainer reader fix: step 2 now cites lem-pur-affine-line-ordinary-invariance (etale unit isomorphism directly) instead of transporting the pro-etale unit of lem-pur-a1-direct-image through six site-comparison nodes.",
+  "blueprint": "Realizes the parameter-independence subargument in Claim 3.2.3 of lem-trf-local-term-locality through the existing constant-defect chain; this is the Lemma 3.1.4 input for the Lemma 3.1.3 contraction family, not a replacement of the unit contraction route.",
+  "tool_uses": [
+   {
+    "node": "def-kun-kunneth-map",
+    "why": "Steps 3–4 use its specified unbounded derived module adjunction and the counit definition of the canonical Kunneth map."
+   },
+   {
+    "node": "def-pur-conventions",
+    "why": "Step 2 checks that the purity finite coefficient ring and base field equal those of this item."
+   },
+   {
+    "node": "def-weil-pbc-derived-inverse-image",
+    "why": "Step 5 applies the exact inverse image and its composition maps termwise in derived categories."
+   },
+   {
+    "node": "lem-kun-0ezp",
+    "why": "Step 1 uses only the separably closed point-site description to identify its module sheaves with modules; this is a generic etale-site tool."
+   },
+   {
+    "node": "lem-kun-pullback-constant",
+    "why": "Step 3 identifies pullback of the coefficient module with the coefficient unit on the product."
+   },
+   {
+    "node": "lem-kun-tensor-unit",
+    "why": "Step 3 uses the derived tensor unit constraints for arbitrary complexes."
+   },
+   {
+    "node": "lem-pur-ordinary-kunneth-finite-ring",
+    "why": "Step 3 uses the generic unbounded finite-ring Kunneth theorem, which admits nonperfect inputs; no result of sk-i-curve-zero supplies this."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition",
+    "why": "Step 5 uses the natural composition and identity maps for sheaf inverse image."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition-module-linear",
+    "why": "Step 5 uses the A-linear lifts of those same canonical composition maps."
+   },
+   {
+    "node": "lem-pur-affine-line-ordinary-invariance",
+    "why": "Step 2 takes from its statement (X=Spec k, r=0) that the small etale unit A_s→Rp_*A_T is an isomorphism; generic affine-line acyclicity, no node of sk-i-curve-zero gives it."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Step 2 uses only its definition A_T(0)=A_T of the zero etale twist."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-kun-kunneth-map",
+  "def-pur-conventions",
+  "def-weil-pbc-derived-inverse-image",
+  "lem-kun-0ezp",
+  "lem-kun-pullback-constant",
+  "lem-kun-tensor-unit",
+  "lem-pur-ordinary-kunneth-finite-ring",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-pur-affine-line-ordinary-invariance",
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-a6f5b6d47",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-a6f5b6d47 (reviewer sub-agent of L); spot-checked: I read the item, all 21 cited statements (6 stmt_deps, 15 proof_deps), the parent's step 6 (étale D^b_c, P=Q=E, so the coefficient category matches), the sk-i-curve-zero unit and Varshavsky arXiv math/0505564 Def. 3.1.1, Ex. 3.1.2, Lemmas 3.1.3 and 3.1.4 with proof (pp. 22-23). The statement is unchanged and true. It is Lemma 3.1.4 with X=A^1, Y=Spec k, without a perfectness hypothesis, which is not needed: p^* is fully faithful because the unit Q->Rp_*p^*Q is invertible for every Q, using affine-line acyclicity and the unbounded finite-ring Kunneth node. ell != char k is needed (H^1(A^1,F_p) != 0) and is present. Tested on Hom(A,A[1])=0, Q=residue field, P=0 and a=b. Step 1 (lem-kun-0ezp point site), step 3 (I recomputed that the Kunneth adjunct is the identity, so the composite is eta_Q), step 4 (adjunction gives v=p^*w) and step 5 (composition and identity maps c_{u,v}, e_X, made A-linear) are all correct. The original step 2, a pro-etale-to-etale canonical-mate transport, is also correct (I recomputed the transpose). But it re-derives what lem-pur-affine-line-ordinary-invariance (split, reviewed) states directly on the small etale site for X=Spec k, r=0, with A_T(0)=A_T by lem-asd-etale-finite-twist-pullback. FIX: step 2 now cites those two nodes and identifies the unit with the derived unit of def-kun-kunneth-map. Six comparison nodes leave proof_deps and tool_uses, and proof_deps was recomputed. No new nodes, no duplicates, no restated clause, no SGA, no cycle (checked by BFS). The contraction route is unchanged. Accepted tool_uses: def-kun-kunneth-map, def-pur-conventions, def-weil-pbc-derived-inverse-image, lem-kun-0ezp, lem-kun-pullback-constant, lem-kun-tensor-unit, lem-pur-ordinary-kunneth-finite-ring, lem-weil-pbc-inverse-image-composition, lem-weil-pbc-inverse-image-composition-module-linear, lem-pur-affine-line-ordinary-invariance, lem-asd-etale-finite-twist-pullback.; 1 file(s) fixed by the reviewer"
  }
 }
