@@ -154,19 +154,22 @@ theorem tensorCounit_oneKFlat_coordinates
     (hτ : IsCanonicalPullbackTensorComparison k τ) :
     ∃ a : DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj G ≅
         DerivedCategory.Q.obj (CochainComplex.mapBifunctor P G
-          (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf))),
+          (@curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) _
+            (SheafOfModules.monoidalCategory X.sheaf))),
       ∃ b : (DerivedCategory.Q
           (C := SheafOfModules.{u} (moduleRings T.toRingedSpace))).obj
           (((Scheme.Modules.tensorPullback k).mapHomologicalComplex (.up ℤ)).obj
             (CochainComplex.mapBifunctor P G
-              (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))) ≅
+              (@curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) _
+            (SheafOfModules.monoidalCategory X.sheaf)))) ≅
         (derivedPullback k).obj (DerivedCategory.Q.obj P) ⊗ (DerivedCategory.Q
           (C := SheafOfModules.{u} (moduleRings T.toRingedSpace))).obj
           (((Scheme.Modules.tensorPullback k).mapHomologicalComplex (.up ℤ)).obj G),
         (derivedPullback k).map a.hom ≫
           (SingleComplexBaseChange.counit k).app
             ((HomotopyCategory.quotient _ (.up ℤ)).obj (CochainComplex.mapBifunctor P G
-              (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))) ≫ b.hom =
+              (@curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) _
+            (SheafOfModules.monoidalCategory X.sheaf)))) ≫ b.hom =
           τ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj G) ≫
             (derivedPullback k).obj (DerivedCategory.Q.obj P) ◁
             (SingleComplexBaseChange.counit k).app
