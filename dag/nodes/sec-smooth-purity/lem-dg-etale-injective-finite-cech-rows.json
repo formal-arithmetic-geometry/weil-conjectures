@@ -14,7 +14,10 @@
   "def-weil-pbc-constant-sheaf",
   "def-sp-injective-resolutions",
   "def-weil-pbc-inverse-image",
-  "def-weil-pbc-direct-image"
+  "def-weil-pbc-direct-image",
+  "def-sc-alternating-cech-total-complex",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "def-weil-pbc-etale-sheaves"
  ],
  "proof": [
   {
@@ -286,5 +289,31 @@
   "group": "Q68",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-2f5730e25 (reviewer sub-agent of L); spot-checked: I read the item, every cited node statement, the parent thm-dg-finite-type-constructibility and blueprint main-20261015 paragraph 2 (the finite strictly increasing Cech rows exact by index insertion, injectives kept under open restriction because extension by zero is exact), and Stacks 02FU (cohomology.tex lemma-covering-resolution), 08FI, 015Z, 03DJ, 0136 and 0137. The statement is true and is not weakened, and it matches the parent's coefficients: commutative A, A_X-modules on X_et. Small cases tested: r=0 (X empty, J=0), r=1, an empty U_I, a repeated open and two disjoint opens. It is not a duplicate: lem-sc-etale-open-cech-injective-augmentation, lem-pc-s3-alternating-cech-sheaf-insertion-homotopy and lem-sc-injective-terms-alternating-cech-augmentation are section-level or Zariski statements. It does not restate a clause of its parent. I checked the signs by hand: d^2=0, and the insertion homotopy gives dh+hd=1 for k in S and k not in S, for s<k and s>k, in degree -1 and in the top degree. Steps 4 and 5 are correct: sheaf exactness from local lifts, and a cycle induction that is properly set up and splits because a retract of an injective is injective. One repairable fault, fixed: step 1 used three facts without citing a node. These are that the open inclusion is etale, that the inverse image u^{-1} equals the localized restriction, and that A_U is isomorphic to A_X|_U. I added lem-weil-pbc-open-immersion-etale, lem-weil-pbc-etale-inverse-image-restriction and lem-pur-ring-presheaf-sheafification-localization, made step 2 refer to the step-1 identification, and recomputed proof_deps. Tool uses accepted: lem-pur-site-restriction-module-adjunction-exact, lem-weil-pbc-etale-site-localization-open, and the added lem-weil-pbc-etale-inverse-image-restriction. No SGA, and no cycle (checked by a depth-first search over the snapshot). The delivery has no new nodes and the statement is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-02aa144f7",
+  "group": "Q11",
+  "result": "fix",
+  "note": "Lean statement matches node clause by clause: X:Scheme.{u}, A:Type(u+1) CommRing (the Sheaf (ModuleCat.{u+1} A) encoding authorized by L's 2026-10-11 decision in def-weil-pbc-etale-sheaves), Fin r opens with iSup U = ⊤ (r=0 forces X empty), U_I = alternatingCechIntersection, Injective J; T p is a limit fan onto lowerStar(openImmersionRestriction J) (rfl test file: sections are J(W x_X U_I); canonically iso to upperStar via upperStarIsoOpenImmersionRestriction); component equations give the signed face differential and the restriction augmentation (determined by the limit); IsZero for p≥r; Mono ε, Exact(ε,d0), ExactAt(p+1); IsSplitMono(kernel.ι(d p)) (cycle retractions, not segment splitting); Injective(T p); r=0→IsZero J. Edge cases r=0, r=1, empty/repeated opens, empty U_I, p≥r, zero ring checked. No hollow defs, sorry-only proof, docstrings ok, lean.statement verbatim, stmt_deps additions are existing nodes with no cycle. nt_compile.py exit 0, no errors or warnings; #print axioms shows sorryAx. Only fault: H11/H1, the 'Second reading by Q11' section says no independent reading was made; fixed by a complete replacement report fixes/lem-dg-etale-injective-finite-cech-rows.report.md (Worker report kept word for word, real clause-by-clause second reading added). Minor: two imports referenced only in docstrings, not blocking."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleInjectiveFiniteCechRows",
+  "declaration": "AlgebraicGeometry.Etale.dg_etale_injective_finite_cech_rows",
+  "declarations": [
+   "AlgebraicGeometry.Etale.finiteCechTestObject",
+   "AlgebraicGeometry.Etale.finiteCechTestProjection",
+   "AlgebraicGeometry.Etale.finiteCechTestInclusion",
+   "AlgebraicGeometry.Etale.finiteCechOpenTerm",
+   "AlgebraicGeometry.Etale.dg_etale_injective_finite_cech_rows"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleInjectiveFiniteCechRows.lean",
+  "statement": "theorem dg_etale_injective_finite_cech_rows (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] (r : ℕ) (U : Fin r → X.Opens) (hU : iSup U = ⊤) (J : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) [Injective J] : ∃ (T : ℕ → Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) (π : ∀ (p : ℕ) (t : Fin (p + 1) ↪o Fin r), T p ⟶ finiteCechOpenTerm A J (alternatingCechIntersection U t)) (d : ∀ p : ℕ, T p ⟶ T (p + 1)) (hdd : ∀ p : ℕ, d p ≫ d (p + 1) = 0) (ε : J ⟶ T 0), (∀ p : ℕ, Nonempty (IsLimit (Fan.mk (T p) (π p)))) ∧ (∀ (p : ℕ) (t : Fin (p + 2) ↪o Fin r) (W : X.Etale) (s : (T p).obj.obj (op W)), ((π (p + 1) t).hom.app (op W)) (((d p).hom.app (op W)) s) = ∑ a : Fin (p + 2), (-1 : ℤ) ^ a.val • J.obj.map (finiteCechTestInclusion W (alternatingCechIntersection_face_le U p t a)).op (((π p ((Fin.succAboveOrderEmb a).trans t)).hom.app (op W)) s)) ∧ (∀ (t : Fin 1 ↪o Fin r) (W : X.Etale) (s : J.obj.obj (op W)), ((π 0 t).hom.app (op W)) ((ε.hom.app (op W)) s) = J.obj.map (finiteCechTestProjection W (alternatingCechIntersection U t)).op s) ∧ (∀ p : ℕ, r ≤ p → IsZero (T p)) ∧ (∃ hε : ε ≫ d 0 = 0, (ShortComplex.mk ε (d 0) hε).Exact) ∧ Mono ε ∧ (∀ p : ℕ, (CochainComplex.of T d hdd).ExactAt (p + 1)) ∧ (∀ p : ℕ, IsSplitMono (kernel.ι (d p))) ∧ (∀ p : ℕ, Injective (T p)) ∧ (r = 0 → IsZero J)",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the coexisting fixed-coefficient Sheaf(ModuleCat A) encoding authorized by def-weil-pbc-etale-sheaves. Open restriction is the existing sectionwise model of upperStar. Finite products present the finite sums, with every differential and augmentation component specified on every etale test object. Exactness and retractions of cycle inclusions are stated separately."
  }
 }
