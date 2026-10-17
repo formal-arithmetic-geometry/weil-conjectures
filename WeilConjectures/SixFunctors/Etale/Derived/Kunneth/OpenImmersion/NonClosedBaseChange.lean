@@ -64,25 +64,26 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isPullback_strictLocalization {S : 
   have hcD : IsLimit cD := isLimitOfPreserves (CategoryTheory.Over.forget S) hcO
   let w : D₀ ⋙ CategoryTheory.Over.forget S ⟶ (Functor.const I₀).obj S :=
     { app k := (D₀.obj k).hom
-      naturality k k' a := by simp }
-  have hw (k : I₀) : cD.π.app k ≫ w.app k = strictLocalizationToBase s := by
-    simp [cD, cO, w, D₀]
+      naturality k k' a := (CategoryTheory.Over.w (D₀.map a)).trans (Category.comp_id _).symm }
+  have hw (k : I₀) : cD.π.app k ≫ w.app k = strictLocalizationToBase s :=
+    CategoryTheory.Over.w (cO.π.app k)
   let cP := constPullbackCone f w cD uW r hw hW'.w
   have hP : IsLimit cP := isLimitConstPullbackCone f w hcD uW r hw hW'
   let P := pullback ((Functor.const I₀).map f) w
   let D' : I₀ ⥤ CategoryTheory.Over W :=
     P.toOver W (fun k ↦ (pullback.fst ((Functor.const I₀).map f) w).app k)
-      (fun a ↦ by simpa using (pullback.fst ((Functor.const I₀).map f) w).naturality a)
+      (fun a ↦ ((pullback.fst ((Functor.const I₀).map f) w).naturality a).trans
+        (Category.comp_id _))
   let c' : Cone D' :=
     { pt := CategoryTheory.Over.mk uW
       π :=
-        { app k := CategoryTheory.Over.homMk (cP.π.app k) (by simp [cP])
-          naturality k k' a := by
-            ext
-            simpa using cP.π.naturality a } }
+        { app k := CategoryTheory.Over.homMk (cP.π.app k)
+            (constPullbackCone_π_app_fst f w cD uW r hw hW'.w k)
+          naturality k k' a := CategoryTheory.Over.OverMorphism.ext (cP.π.naturality a) } }
   have hc' : IsLimit ((CategoryTheory.Over.forget W).mapCone c') := hP
   have hiso (k : I₀) := isPullback_pullback_evaluation ((Functor.const I₀).map f) w k
-  have hét (k : I₀) : Etale (w.app k) := inferInstanceAs (Etale (D₀.obj k).hom)
+  have haffk (k : I₀) : IsAffine ((D₀ ⋙ CategoryTheory.Over.forget S).obj k) := (ι₀.obj k).2
+  have hét (k : I₀) : Etale (w.app k) := (ι₀.obj k).obj.1.prop
   have hsm (k : I₀) : Smooth (D'.obj k).hom :=
     MorphismProperty.of_isPullback (P := @Smooth) (hiso k).flip inferInstance
   have hqc (k : I₀) : QuasiCompact (D'.obj k).hom :=
@@ -93,7 +94,7 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isPullback_strictLocalization {S : 
       (QuasiSeparated.of_quasiSeparatedSpace _)
   have haff {k k' : I₀} (a : k ⟶ k') : IsAffineHom (D'.map a).left :=
     MorphismProperty.of_isPullback (P := @IsAffineHom)
-      (isPullback_map_pullback_const f w a).flip inferInstance
+      (isPullback_map_pullback_const f w a).flip (isAffineHom_of_isAffine _)
   exact Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth Λ g D' c' hc' (h := h) sq q F
 
 /-- Stalks are computed by pullback (blueprint `lem-kun-stalk-as-pullback`): if the pullback

@@ -99,11 +99,11 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isSeparableExtension {K L : Type u}
     exact (HasRingHomProperty.Spec_iff (P := @Smooth)).2
       ((RingHom.smooth_algebraMap).2 inferInstance)
   have : ∀ A, Smooth (pX.app A) := fun A ↦
-    MorphismProperty.of_isPullback (IsPullback.of_hasPullback σ (π.app A)) inferInstance
+    MorphismProperty.of_isPullback (IsPullback.of_hasPullback σ (π.app A)).flip inferInstance
   have : ∀ A, QuasiCompact (pX.app A) := fun A ↦
-    MorphismProperty.of_isPullback (IsPullback.of_hasPullback σ (π.app A)) inferInstance
+    MorphismProperty.of_isPullback (IsPullback.of_hasPullback σ (π.app A)).flip inferInstance
   have : ∀ A, QuasiSeparated (pX.app A) := fun A ↦
-    MorphismProperty.of_isPullback (IsPullback.of_hasPullback σ (π.app A)) inferInstance
+    MorphismProperty.of_isPullback (IsPullback.of_hasPullback σ (π.app A)).flip inferInstance
   have : ∀ {A B : 𝒜ᵒᵖ} (f : A ⟶ B), IsAffineHom (D₀.map f) := fun f ↦
     (inferInstance : IsAffineHom (Spec.map _))
   have : Scheme.IsTorsionSheafOfInvertibleOrder S F :=
@@ -152,9 +152,9 @@ theorem Etale.isIso_baseChangeHomologyMap_of_fieldExtension {K L : Type u} [Fiel
   let p₂ := pullback.fst σ' πL
   let σ₂ := pullback.snd σ' πL
   have : IsUniversalHomeomorphism p₁ :=
-    MorphismProperty.of_isPullback (IsPullback.of_hasPullback σ πK) inferInstance
+    MorphismProperty.of_isPullback (IsPullback.of_hasPullback σ πK).flip inferInstance
   have : IsUniversalHomeomorphism p₂ :=
-    MorphismProperty.of_isPullback (IsPullback.of_hasPullback σ' πL) inferInstance
+    MorphismProperty.of_isPullback (IsPullback.of_hasPullback σ' πL).flip inferInstance
   let r : pullback σ' πL ⟶ pullback σ πK := pullback.lift (p₂ ≫ p) (σ₂ ≫ ι) (by
     rw [Category.assoc, hS.w, ← Category.assoc, pullback.condition, Category.assoc, hcomm,
       Category.assoc])
@@ -167,8 +167,8 @@ theorem Etale.isIso_baseChangeHomologyMap_of_fieldExtension {K L : Type u} [Fiel
   let e₁ := pullback.fst g p₁
   let g₁ := pullback.snd g p₁
   have sq₁ : IsPullback e₁ g₁ g p₁ := IsPullback.of_hasPullback g p₁
-  have : QuasiCompact g₁ := MorphismProperty.of_isPullback sq₁.flip inferInstance
-  have : QuasiSeparated g₁ := MorphismProperty.of_isPullback sq₁.flip inferInstance
+  have : QuasiCompact g₁ := MorphismProperty.of_isPullback sq₁ inferInstance
+  have : QuasiSeparated g₁ := MorphismProperty.of_isPullback sq₁ inferInstance
   let a₂ := pullback.fst h p₂
   let b₂ := pullback.snd h p₂
   have sq₃ : IsPullback a₂ b₂ h p₂ := IsPullback.of_hasPullback h p₂

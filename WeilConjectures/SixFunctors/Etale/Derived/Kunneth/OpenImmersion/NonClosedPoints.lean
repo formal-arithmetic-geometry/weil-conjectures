@@ -111,8 +111,10 @@ theorem Etale.isIso_sheafFiber_baseChangeHomologyMap_of_not_isClosed_fst {K : Ty
   let j' := pullback.snd j t
   let uY := pullback.fst h uX
   let h' := pullback.snd h uX
+  have c1 : uY ≫ h = h' ≫ uX := pullback.condition
+  have hℓK' : ℓ ≫ κ = t ≫ aX := hℓK
   let e' : pullback h uX ⟶ pullback j t := pullback.lift (uY ≫ e) (h' ≫ q₁') (by
-    rw [Category.assoc, sq.w, pullback.condition_assoc, hX'W, Category.assoc])
+    rw [Category.assoc, sq.w, ← Category.assoc, c1, Category.assoc, hX'W, Category.assoc])
   have he : e' ≫ uT = uY ≫ e := pullback.lift_fst _ _ _
   have bT : IsPullback uT j' j t := IsPullback.of_hasPullback j t
   have bX : IsPullback uY h' h uX := IsPullback.of_hasPullback h uX
@@ -137,15 +139,16 @@ theorem Etale.isIso_sheafFiber_baseChangeHomologyMap_of_not_isClosed_fst {K : Ty
   have hF : IsIso (Etale.baseChangeHomologyMap Λ sq' i (((uT)^*[ModuleCat.{u + 1} Λ]).obj F)) := by
     let aYL := pullback.snd aY κ
     let q₂' : pullback q₁ t ⟶ pullback aY κ := pullback.lift (uX ≫ q₂) (q₁' ≫ ℓ) (by
-      rw [Category.assoc, ← hW.w, ← Category.assoc, hX'W, Category.assoc, Category.assoc, hℓK])
+      rw [Category.assoc, ← hW.w, ← Category.assoc, hX'W, Category.assoc, Category.assoc, hℓK'])
+    have hq₂ : q₂' ≫ pullback.fst aY κ = uX ≫ q₂ := pullback.lift_fst _ _ _
     have hWL : IsPullback q₁' q₂' ℓ aYL := by
       have H := (IsPullback.of_hasPullback q₁ t).paste_horiz hW.flip
-      rw [← hℓK, ← pullback.lift_fst (uX ≫ q₂) (q₁' ≫ ℓ) _] at H
+      rw [← hℓK', ← hq₂] at H
       exact (IsPullback.of_right H (pullback.lift_snd _ _ _)
         (IsPullback.of_hasPullback aY κ)).flip
     let qN : D ⟶ (Functor.const I).obj (Spec (.of L)) :=
       { app := qD
-        naturality a b f := by simpa using hqmap f }
+        naturality a b f := (hqmap f).trans (Category.comp_id _).symm }
     have : ∀ i, LocallyOfFiniteType (qN.app i) := hqlft
     have : ∀ i, IsAffine (D.obj i) := hDaff
     have : ∀ {a b : I} (f : a ⟶ b), IsAffineHom (D.map f) := fun f ↦ hDmap f
@@ -193,14 +196,16 @@ theorem Etale.isIso_sheafFiber_baseChangeHomologyMap_of_not_isClosed_snd {K : Ty
   let jL := pullback.snd j pX
   let uX := pullback.fst q₂ t
   let r := pullback.snd q₂ t
+  have c2 : uX ≫ q₂ = r ≫ t := pullback.condition
+  have hℓK' : ℓ ≫ κ = t ≫ aY := hℓK
   let p' : pullback q₂ t ⟶ pullback aX κ := pullback.lift (uX ≫ q₁) (r ≫ ℓ) (by
-    rw [Category.assoc, hW.w, ← Category.assoc, pullback.condition, Category.assoc,
-      Category.assoc, hℓK])
+    rw [Category.assoc, hW.w, ← Category.assoc, c2, Category.assoc, Category.assoc, hℓK'])
   have hp : p' ≫ pX = uX ≫ q₁ := pullback.lift_fst _ _ _
   let uY := pullback.fst h uX
   let h' := pullback.snd h uX
+  have c1 : uY ≫ h = h' ≫ uX := pullback.condition
   let e' : pullback h uX ⟶ pullback j pX := pullback.lift (uY ≫ e) (h' ≫ p') (by
-    rw [Category.assoc, sq.w, pullback.condition_assoc, Category.assoc, hp])
+    rw [Category.assoc, sq.w, ← Category.assoc, c1, Category.assoc, ← hp, Category.assoc])
   have he : e' ≫ uT = uY ≫ e := pullback.lift_fst _ _ _
   have bT : IsPullback uT jL j pX := IsPullback.of_hasPullback j pX
   have bX : IsPullback uY h' h uX := IsPullback.of_hasPullback h uX
@@ -226,11 +231,11 @@ theorem Etale.isIso_sheafFiber_baseChangeHomologyMap_of_not_isClosed_snd {K : Ty
   have hF : IsIso (Etale.baseChangeHomologyMap Λ sq' i (((uT)^*[ModuleCat.{u + 1} Λ]).obj F)) := by
     have hWL : IsPullback p' r aXL ℓ := by
       have H := (IsPullback.of_hasPullback q₂ t).paste_horiz hW
-      rw [← hℓK, ← hp] at H
+      rw [← hℓK', ← hp] at H
       exact IsPullback.of_right H (pullback.lift_snd _ _ _) (IsPullback.of_hasPullback aX κ)
     let qN : D ⟶ (Functor.const I).obj (Spec (.of L)) :=
       { app := qD
-        naturality a b f := by simpa using hqmap f }
+        naturality a b f := (hqmap f).trans (Category.comp_id _).symm }
     have : ∀ i, LocallyOfFiniteType (qN.app i) := hqlft
     have : ∀ i, IsAffine (D.obj i) := hDaff
     have : ∀ {a b : I} (f : a ⟶ b), IsAffineHom (D.map f) := fun f ↦ hDmap f
@@ -259,14 +264,17 @@ theorem Etale.openImmersionBaseChangeAtNonClosed_of_below {N : WithBot ℕ∞}
   · by_cases h₂ : IsClosed ({q₂.base z} : Set Y)
     · exfalso
       refine hz ?_
+      have e₁ : (pullback.fst aX aY).base (hW.isoPullback.hom.base z) = q₁.base z :=
+        congrArg (fun f ↦ f.base z) hW.isoPullback_hom_fst
+      have e₂ : (pullback.snd aX aY).base (hW.isoPullback.hom.base z) = q₂.base z :=
+        congrArg (fun f ↦ f.base z) hW.isoPullback_hom_snd
       have hc := (Scheme.Pullback.isClosed_singleton_iff aX aY (hW.isoPullback.hom.base z)).2
-        ⟨by rwa [← Scheme.Hom.comp_apply, hW.isoPullback_hom_fst],
-          by rwa [← Scheme.Hom.comp_apply, hW.isoPullback_hom_snd]⟩
+        ⟨by rw [e₁]; exact h₁, by rw [e₂]; exact h₂⟩
+      have hl : Function.LeftInverse hW.isoPullback.inv.base hW.isoPullback.hom.base :=
+        fun w ↦ congrArg (fun f ↦ f.base w) hW.isoPullback.hom_inv_id
       have : ({z} : Set W) = hW.isoPullback.hom.base ⁻¹' {hW.isoPullback.hom.base z} := by
         ext w
-        simp only [Set.mem_singleton_iff, Set.mem_preimage]
-        refine ⟨fun hw ↦ hw ▸ rfl, fun hw ↦ ?_⟩
-        simpa using congrArg hW.isoPullback.inv.base hw
+        exact ⟨fun hw ↦ hw ▸ rfl, fun hw ↦ hl.injective hw⟩
       rw [this]
       exact hc.preimage hW.isoPullback.hom.continuous
     · exact Etale.isIso_sheafFiber_baseChangeHomologyMap_of_not_isClosed_snd Λ aX aY j q₁ q₂ hW

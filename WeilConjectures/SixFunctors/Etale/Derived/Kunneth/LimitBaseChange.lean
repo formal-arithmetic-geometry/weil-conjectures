@@ -93,11 +93,11 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit {I : Type u} [Category.{u} 
       (((w.app i)^*[ModuleCat.{u + 1} Λ]).obj G))) :
     IsIso (Etale.baseChangeHomologyMap Λ sq₀ q (((w₀)^*[ModuleCat.{u + 1} Λ]).obj G)) := by
   have : ∀ i, QuasiCompact (h.app i) := fun i ↦
-    MorphismProperty.of_isPullback (hsq i).flip inferInstance
+    MorphismProperty.of_isPullback (hsq i) inferInstance
   have : ∀ i, QuasiSeparated (h.app i) := fun i ↦
-    MorphismProperty.of_isPullback (hsq i).flip inferInstance
-  have : QuasiCompact h₀ := MorphismProperty.of_isPullback sq₀.flip inferInstance
-  have : QuasiSeparated h₀ := MorphismProperty.of_isPullback sq₀.flip inferInstance
+    MorphismProperty.of_isPullback (hsq i) inferInstance
+  have : QuasiCompact h₀ := MorphismProperty.of_isPullback sq₀ inferInstance
+  have : QuasiSeparated h₀ := MorphismProperty.of_isPullback sq₀ inferInstance
   let K := (DerivedCategory.Plus.singleFunctor (Sheaf W.smallEtaleTopology
     (ModuleCat.{u + 1} Λ)) 0).obj G
   have hw' : ∀ i, cY.π.app i ≫ (e ≫ w).app i = e₀ ≫ w₀ := fun i ↦ by
@@ -132,7 +132,8 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit {I : Type u} [Category.{u} 
       rw [← Functor.map_comp, ← Functor.map_comp, ← NatTrans.comp_app, ← NatTrans.comp_app,
         Etale.LimitStage.transition_comp, Etale.LimitStage.transition_comp, hc]
     · rw [← Functor.map_comp, ← NatTrans.comp_app, Etale.LimitStage.transition_comp, 𝒜.w]
-    · exact (ConcreteCategory.isIso_iff_bijective _).1 inferInstance
+    · rw [Functor.comp_map]
+      exact (ConcreteCategory.isIso_iff_bijective _).1 inferInstance
   rw [Etale.isIso_baseChangeHomologyMap_iff_upperStar Λ sq₀ q w₀ G]
   exact Etale.LimitStage.isIso_homology_baseChange_of_isIso Λ β₀ q K hβ₀
 
@@ -171,17 +172,17 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_of_forall {I : Type u} [Cat
     QuasiCompact.compactSpace_of_compactSpace (g.app i)
   have : ∀ i, QuasiSeparatedSpace (T.obj i) := fun i ↦
     quasiSeparatedSpace_of_quasiSeparated (g.app i)
-  have : QuasiCompact h₀ := MorphismProperty.of_isPullback sq₀.flip inferInstance
-  have : QuasiSeparated h₀ := MorphismProperty.of_isPullback sq₀.flip inferInstance
+  have : QuasiCompact h₀ := MorphismProperty.of_isPullback sq₀ inferInstance
+  have : QuasiSeparated h₀ := MorphismProperty.of_isPullback sq₀ inferInstance
   have hc₀ := Etale.isColimitDescentCocone (Λ := Λ) hT F
+  have := Etale.preservesFilteredColimitsOfSize_higherDirectImage Λ g₀ q
+  have := Etale.preservesFilteredColimitsOfSize_higherDirectImage Λ h₀ q
   have := preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1}
     (DerivedCategory.Plus.singleFunctor (Sheaf cT.pt.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
       R+((g₀)_*[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.Plus.homologyFunctor _ q)
   have := preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1}
     (DerivedCategory.Plus.singleFunctor (Sheaf cY.pt.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
       R+((h₀)_*[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.Plus.homologyFunctor _ q)
-  have := Etale.preservesFilteredColimitsOfSize_higherDirectImage Λ g₀ q
-  have := Etale.preservesFilteredColimitsOfSize_higherDirectImage Λ h₀ q
   have : PreservesColimitsOfSize.{u, u} ((p₀)^*[ModuleCat.{u + 1} Λ]) :=
     (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p₀).leftAdjoint_preservesColimits
   have : PreservesColimitsOfSize.{u, u} ((e₀)^*[ModuleCat.{u + 1} Λ]) :=
@@ -294,14 +295,17 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth_of_qcqs [IsCofiltere
     [Scheme.IsTorsionSheafOfInvertibleOrder S F] :
     IsIso (Etale.baseChangeHomologyMap Λ sq q F) := by
   have : IsConnected I := IsCofiltered.isConnected I
+  have : ∀ i, CompactSpace (((Functor.const I).obj S).obj i) := fun _ ↦
+    inferInstanceAs (CompactSpace S)
+  have : ∀ i, QuasiSeparatedSpace (((Functor.const I).obj S).obj i) :=
+    fun _ ↦ inferInstanceAs (QuasiSeparatedSpace S)
   have : ∀ i, CompactSpace (X.obj i) := fun i ↦ QuasiCompact.compactSpace_of_compactSpace (p.app i)
   have : ∀ i, QuasiSeparatedSpace (X.obj i) := fun i ↦ quasiSeparatedSpace_of_quasiSeparated
     (p.app i)
-  have : ∀ i, CompactSpace (((Functor.const I).obj S).obj i) := fun _ ↦ ‹CompactSpace S›
-  have : ∀ i, QuasiSeparatedSpace (((Functor.const I).obj S).obj i) :=
-    fun _ ↦ ‹QuasiSeparatedSpace S›
-  have : ∀ i, QuasiCompact (((Functor.const I).map g).app i) := fun _ ↦ ‹QuasiCompact g›
-  have : ∀ i, QuasiSeparated (((Functor.const I).map g).app i) := fun _ ↦ ‹QuasiSeparated g›
+  have : ∀ i, QuasiCompact (((Functor.const I).map g).app i) := fun _ ↦
+    inferInstanceAs (QuasiCompact g)
+  have : ∀ i, QuasiSeparated (((Functor.const I).map g).app i) := fun _ ↦
+    inferInstanceAs (QuasiSeparated g)
   have : ∀ {i j : I} (f : i ⟶ j), IsAffineHom (((Functor.const I).obj S).map f) :=
     fun _ ↦ (inferInstance : IsAffineHom (𝟙 S))
   have : ∀ {i j : I} (f : i ⟶ j), IsAffineHom (((Functor.const I).obj T).map f) :=
@@ -330,12 +334,16 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth_of_qcqs [IsCofiltere
     hX
   have key := Etale.isIso_baseChangeHomologyMap_of_isLimit Λ p ((Functor.const I).map g) e' h'
     hsq (isLimitConstCone I S) hX (isLimitConstCone I T) hcY (p₀ := p₀) (g₀ := g) (e₀ := e)
-    (h₀ := h) (fun i ↦ by simp [hp₀]) (fun i ↦ by simp) (fun i ↦ by simp [cY, e'])
-    (fun i ↦ by simp [cY, h']) sq (𝟙 _) (𝟙 T) (fun i ↦ by simp) F q (fun i ↦ ?_)
+    (h₀ := h) (fun i ↦ (Category.comp_id _).trans (hp₀ i).symm)
+    (fun _ ↦ (Category.comp_id _).trans (Category.id_comp _).symm)
+    (fun _ ↦ (Category.comp_id _).trans (pullback.lift_fst _ _ _).symm)
+    (fun i ↦ by simp [cY, h']) sq (𝟙 _) (𝟙 T) (fun _ ↦ Category.id_comp _) F q (fun i ↦ ?_)
   · exact (Etale.isIso_baseChangeHomologyMap_iff_of_iso Λ sq q
       ((Etale.upperStarId (ModuleCat.{u + 1} Λ) T).app F)).1 key
   · refine (Etale.isIso_baseChangeHomologyMap_iff_of_iso Λ (hsq i) q
       ((Etale.upperStarId (ModuleCat.{u + 1} Λ) T).app F)).2 ?_
+    have : Scheme.IsTorsionSheafOfInvertibleOrder (((Functor.const I).obj S).obj i) F :=
+      inferInstanceAs (Scheme.IsTorsionSheafOfInvertibleOrder S F)
     exact Etale.isIso_baseChangeHomologyMap_of_smooth Λ (p.app i) g (e'.app i) (h'.app i)
       (hsq i) q F
 
@@ -372,6 +380,7 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth' {S T : Scheme.{u}} 
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [Scheme.IsTorsionSheafOfInvertibleOrder S F] :
     IsIso (Etale.baseChangeHomologyMap Λ sq q F) := by
+  have : IsConnected I := IsCofiltered.isConnected I
   -- the cover of `S` by its affine opens and its pullbacks
   let a (V : S.affineOpens) := pullback.fst p₀ V.1.ι
   let f (V : S.affineOpens) := pullback.snd p₀ V.1.ι
@@ -385,14 +394,14 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth' {S T : Scheme.{u}} 
     (fun V ↦ IsPullback.of_hasPullback (g' V) (f V)) sq q F (fun V ↦ ?_)
   · obtain ⟨_, ⟨V, hV, rfl⟩, hxV, -⟩ := S.isBasis_affineOpens.exists_subset_of_mem_open
       (Set.mem_univ (p₀.base x)) isOpen_univ
-    obtain ⟨y, hy, -⟩ := Scheme.Pullback.exists_preimage_pullback (f := p₀) (g := V.ι) x
-      ⟨p₀.base x, hxV⟩ rfl
+    obtain ⟨y, hy, -⟩ := Scheme.Pullback.exists_preimage_pullback (f := p₀)
+      (g := Scheme.Opens.ι V) x (⟨p₀.base x, hxV⟩ : (V : Scheme.{u})) rfl
     exact ⟨⟨V, hV⟩, y, hy⟩
   · -- the restricted system over the affine open `V`
     have : QuasiCompact (g' V) :=
-      MorphismProperty.of_isPullback (IsPullback.of_hasPullback g V.1.ι).flip inferInstance
+      MorphismProperty.of_isPullback (IsPullback.of_hasPullback g V.1.ι) inferInstance
     have : QuasiSeparated (g' V) :=
-      MorphismProperty.of_isPullback (IsPullback.of_hasPullback g V.1.ι).flip inferInstance
+      MorphismProperty.of_isPullback (IsPullback.of_hasPullback g V.1.ι) inferInstance
     let Xr := Etale.smoothLimitPullbackFunctor V.1.ι X p
     let pr : Xr ⟶ (Functor.const I).obj V.1 :=
       { app i := pullback.fst V.1.ι (p.app i)
@@ -401,11 +410,11 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth' {S T : Scheme.{u}} 
       { app i := pullback.snd V.1.ι (p.app i)
         naturality i j φ := by simp [Xr] }
     have : ∀ i, Smooth (pr.app i) := fun i ↦
-      MorphismProperty.of_isPullback (IsPullback.of_hasPullback V.1.ι (p.app i)) inferInstance
+      MorphismProperty.of_isPullback (IsPullback.of_hasPullback V.1.ι (p.app i)).flip inferInstance
     have : ∀ i, QuasiCompact (pr.app i) := fun i ↦
-      MorphismProperty.of_isPullback (IsPullback.of_hasPullback V.1.ι (p.app i)) inferInstance
+      MorphismProperty.of_isPullback (IsPullback.of_hasPullback V.1.ι (p.app i)).flip inferInstance
     have : ∀ i, QuasiSeparated (pr.app i) := fun i ↦
-      MorphismProperty.of_isPullback (IsPullback.of_hasPullback V.1.ι (p.app i)) inferInstance
+      MorphismProperty.of_isPullback (IsPullback.of_hasPullback V.1.ι (p.app i)).flip inferInstance
     have : ∀ {i j : I} (φ : i ⟶ j), IsAffineHom (Xr.map φ) := fun φ ↦
       (inferInstance : IsAffineHom ((Etale.smoothLimitPullbackFunctor V.1.ι X p).map φ))
     let cr : Cone Xr :=
@@ -421,7 +430,7 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_smooth' {S T : Scheme.{u}} 
       (fun i ↦ by
         refine IsPullback.of_right ?_ (by simp [cr, sr])
           (IsPullback.of_hasPullback V.1.ι (p.app i))
-        simp only [cr, pr, pullback.lift_fst, hp₀]
+        simp only [cr, pullback.lift_fst, hp₀]
         exact (IsPullback.of_hasPullback p₀ V.1.ι).flip)
       hX
     have : Scheme.IsTorsionSheafOfInvertibleOrder V.1 (((c' V)^*[ModuleCat.{u + 1} Λ]).obj F) :=

@@ -128,17 +128,25 @@ theorem isStalkColimit_varyingBaseSystem [IsCofiltered I] (hS : IsLimit cS) (hT 
   have inv' {α β : LimitStage cS.pt W} (φ : LimitStage.Hom α β) (ψ : LimitStage.Hom β α)
       (h : φ.comp ψ = LimitStage.Hom.id α) (y) : θ φ (θ ψ y) = y :=
     LimitStage.transition_apply_inv Λ q x K φ ψ h y
-  let ζ : LimitStage.Hom ℰ.pt 𝒜.pt := ⟨𝟙 _, 𝟙 _, by simp [ℰ, 𝒜], by simp [ℰ, 𝒜], by simp [ℰ, 𝒜]⟩
-  let ζ' : LimitStage.Hom 𝒜.pt ℰ.pt := ⟨𝟙 _, 𝟙 _, by simp [ℰ, 𝒜], by simp [ℰ, 𝒜], by simp [ℰ, 𝒜]⟩
+  let ζ : LimitStage.Hom ℰ.pt 𝒜.pt := ⟨𝟙 _, 𝟙 _, by simp [ℰ, 𝒜], by simp [ℰ, 𝒜],
+    by simp [ℰ, 𝒜]; exact (Category.id_comp _).symm⟩
+  let ζ' : LimitStage.Hom 𝒜.pt ℰ.pt := ⟨𝟙 _, 𝟙 _, by simp [ℰ, 𝒜], by simp [ℰ, 𝒜],
+    by simp [ℰ, 𝒜]; exact Category.id_comp _⟩
   let ξ (j : I) : LimitStage.Hom (𝒟 j).pt (ℰ.obj j) :=
-    ⟨𝟙 _, 𝟙 _, by simp [ℰ, 𝒟, hg₀], by simp [ℰ, 𝒟], by simp [ℰ, 𝒟, hw₀]⟩
+    ⟨𝟙 _, 𝟙 _, by simp [ℰ, 𝒟, hg₀]; rfl, by simp [ℰ, 𝒟],
+      by simp [ℰ, 𝒟]; exact (Category.id_comp _).trans (hw₀ j).symm⟩
   let ξ' (j : I) : LimitStage.Hom (ℰ.obj j) (𝒟 j).pt :=
-    ⟨𝟙 _, 𝟙 _, by simp [ℰ, 𝒟, hg₀], by simp [ℰ, 𝒟], by simp [ℰ, 𝒟, hw₀]⟩
+    ⟨𝟙 _, 𝟙 _, by simp [ℰ, 𝒟, hg₀]; rfl, by simp [ℰ, 𝒟],
+      by simp [ℰ, 𝒟]; exact (hw₀ j).trans (Category.id_comp _).symm⟩
   let σD (j : I) (U : Over j) : LimitStage.Hom (ℰ.obj j) ((𝒟 j).obj U) := (ξ' j).comp ((𝒟 j).π U)
   let ρ (k : I) : LimitStage.Hom ((𝒟 k).obj (Over.mk (𝟙 k))) (𝒜.obj k) :=
-    ⟨𝟙 _, 𝟙 _, by simp [𝒜, 𝒟], by simp [𝒜, 𝒟], by simp [𝒜, 𝒟]⟩
+    ⟨𝟙 _, 𝟙 _,
+      by simp [𝒜, 𝒟]; exact ((congrArg (· ≫ g.app k) (T.map_id k)).trans (Category.id_comp _)).symm,
+      by simp [𝒜, 𝒟],
+      by simp [𝒜, 𝒟]; exact ((congrArg (· ≫ w.app k) (T.map_id k)).trans (Category.id_comp _)).symm⟩
   let ψ {j : I} (U : Over j) : LimitStage.Hom (𝒜.obj U.left) ((𝒟 j).obj U) :=
-    ⟨𝟙 _, S.map U.hom, by simp [𝒜, 𝒟], by simp [𝒜, 𝒟], by simp [𝒜, 𝒟]⟩
+    ⟨𝟙 _, S.map U.hom, by simp [𝒜, 𝒟]; exact g.naturality U.hom, by simp [𝒜, 𝒟],
+      by simp [𝒜, 𝒟]; exact (w.naturality U.hom).trans (Category.comp_id _)⟩
   refine ⟨fun b ↦ ?_, fun k a ha ↦ ?_⟩
   · obtain ⟨j, e, he⟩ := hE.1 (θ ζ b)
     obtain ⟨U, d, hd⟩ := (hD j).1 (θ (ξ j) e)
@@ -148,7 +156,8 @@ theorem isStalkColimit_varyingBaseSystem [IsCofiltered I] (hS : IsLimit cS) (hT 
       change θ ((ξ' j).comp ((𝒟 j).π U)) d = e
       rw [← tc', this, inv' _ _ (LimitStage.Hom.ext (by simp [ξ, ξ']) (by simp [ξ, ξ']))]
     have hχ : (𝒜.π U.left).comp (ψ U) = ζ'.comp ((ℰ.π j).comp (σD j U)) :=
-      LimitStage.Hom.ext (by simp [ζ', ψ, σD, ξ', 𝒜, ℰ, 𝒟]) (by simp [ζ', ψ, σD, ξ', 𝒜, ℰ, 𝒟])
+      LimitStage.Hom.ext (by simp [ζ', ψ, σD, ξ', 𝒜, ℰ, 𝒟]; exact (Category.id_comp _).symm)
+        (by simp [ζ', ψ, σD, ξ', 𝒜, ℰ, 𝒟]; exact (Category.comp_id _).symm)
     have hinv := inv' ζ' ζ (LimitStage.Hom.ext (by simp [ζ, ζ']) (by simp [ζ, ζ'])) b
     change θ (𝒜.π U.left) (θ (ψ U) d) = b
     have he0 : θ (ℰ.π j) e = θ ζ b := he
@@ -156,7 +165,8 @@ theorem isStalkColimit_varyingBaseSystem [IsCofiltered I] (hS : IsLimit cS) (hT 
   · let e := θ (σD k (Over.mk (𝟙 k))) (θ (ρ k) a)
     have he0 : θ (ℰ.π k) e = 0 := by
       have hχ : ((ℰ.π k).comp (σD k (Over.mk (𝟙 k)))).comp (ρ k) = ζ.comp (𝒜.π k) :=
-        LimitStage.Hom.ext (by simp [ζ, ρ, σD, ξ', 𝒜, ℰ, 𝒟]) (by simp [ζ, ρ, σD, ξ', 𝒜, ℰ, 𝒟])
+        LimitStage.Hom.ext (by simp [ζ, ρ, σD, ξ', 𝒜, ℰ, 𝒟]; exact Category.id_comp _)
+          (by simp [ζ, ρ, σD, ξ', 𝒜, ℰ, 𝒟]; exact Category.comp_id _)
       have : θ (𝒜.π k) a = 0 := ha
       simp only [e]
       rw [tc', tc', hχ, ← tc', this, map_zero]
@@ -165,7 +175,8 @@ theorem isStalkColimit_varyingBaseSystem [IsCofiltered I] (hS : IsLimit cS) (hT 
     have hd0 : θ ((𝒟 j).π (Over.mk (𝟙 j))) (θ (ρ j) aj) = 0 := by
       have hχ : ((σD j (Over.mk (𝟙 j))).comp (ρ j)).comp (𝒜.map f) =
           (ℰ.map f).comp ((σD k (Over.mk (𝟙 k))).comp (ρ k)) :=
-        LimitStage.Hom.ext (by simp [ρ, σD, ξ', 𝒜, ℰ, 𝒟]) (by simp [ρ, σD, ξ', 𝒜, ℰ, 𝒟])
+        LimitStage.Hom.ext (by simp [ρ, σD, ξ', 𝒜, ℰ, 𝒟]; exact (Category.id_comp _).symm)
+          (by simp [ρ, σD, ξ', 𝒜, ℰ, 𝒟]; exact (Category.id_comp _).trans (Category.comp_id _).symm)
       have h1 : θ (ℰ.map f) e = 0 := hf
       have h2 : θ (σD j (Over.mk (𝟙 j))) (θ (ρ j) aj) = 0 := by
         simp only [aj]
@@ -178,7 +189,8 @@ theorem isStalkColimit_varyingBaseSystem [IsCofiltered I] (hS : IsLimit cS) (hT 
     obtain ⟨V, φ, hφ⟩ := (hD j).2 (Over.mk (𝟙 j)) (θ (ρ j) aj) hd0
     refine ⟨V.left, V.hom ≫ f, ?_⟩
     have hχ : 𝒜.map (V.hom ≫ f) = (((ψ V).comp ((𝒟 j).map φ)).comp (ρ j)).comp (𝒜.map f) :=
-      LimitStage.Hom.ext (by simp [ψ, ρ, 𝒜, 𝒟, ← Over.w φ]) (by simp [ψ, ρ, 𝒜, 𝒟])
+      LimitStage.Hom.ext (by simp [ψ, ρ, 𝒜, 𝒟, ← Over.w φ])
+        (by simp [ψ, ρ, 𝒜, 𝒟]; exact congrArg (S.map V.hom ≫ ·) (Category.id_comp _).symm)
     have hφ' : θ ((𝒟 j).map φ) (θ (ρ j) aj) = 0 := hφ
     change θ (𝒜.map (V.hom ≫ f)) a = 0
     rw [hχ, ← tc', ← tc', ← tc']

@@ -35,6 +35,16 @@ noncomputable abbrev singleComplex {X : Scheme.{u}}
     CochainComplex.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   ⟨(HomologicalComplex.single _ (.up ℤ) 0).obj G, 0, inferInstance⟩
 
+/-- `G[0] ≅ Q(G placed in degree 0)` in the bounded below derived category. -/
+noncomputable def singleFunctorIsoQObj {X : Scheme.{u}}
+    (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    (DerivedCategory.Plus.singleFunctor _ 0).obj G ≅
+      DerivedCategory.Plus.Q.obj (singleComplex Λ G) :=
+  DerivedCategory.Plus.ι.preimageIso (X := (DerivedCategory.Plus.singleFunctor _ 0).obj G)
+    (Y := DerivedCategory.Plus.Qh.obj ((HomotopyCategory.Plus.quotient _).obj (singleComplex Λ G)))
+    ((DerivedCategory.singleFunctorIsoCompQ _ 0).app G ≪≫
+      (DerivedCategory.quotientCompQhIso _).symm.app _)
+
 namespace LimitStage
 
 variable {B W : Scheme.{u}}
