@@ -18,7 +18,9 @@
   "def-pc-flat-sheaf-modules",
   "def-pc-cochain-complex-modules",
   "def-pc-kflat-complex",
-  "def-pc-tensor-complex-sheaves"
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-etale-constant-ring-module-equivalence",
+  "lem-pur-site-constant-module-hom"
  ],
  "proof": [
   {
@@ -153,5 +155,29 @@
   "group": "Q133",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-68fe606c3 (reviewer sub-agent of L); spot-checked: I read the item, all cited statements, unit sk-thm-sf-compatibility, the blueprint ancestor lem-pur-co-smooth-etale-locality and Stacks 0GKF (more-etale.tex:1808). The statement matches 0GKF as expanded in the item's source and is not weakened. I tested it on u=id, X⊔X→X, an open immersion, the stalk formula and empty/zero cases. Batch-5 check: the step uses only the clause 'u_! is exact' of lem-amb-etale-adjoint-locality, which is outside the trace formula and Poincaré duality. The flagged node lem-pod-separated-finite-type-base-change is a generic Mathlib leaf (separated finite type is stable under base change), reached only through the compact-support clause the item does not use. That citation's closure is 9615 nodes and includes four more sec-poincare-duality nodes, so I replaced it in all steps and in proof_deps with lem-weil-pbc-etale-restriction-injectives. That node states exactly 'v_! is exact on constant-ring module sheaves'; its unit sk-thm-iff is in the route (through sk-thm-purity-transport) and its 6-node closure has no trace-formula or duality nodes. I also added two missing symmetry arguments: in step 1, tensor symmetry, because def-pc-flat-sheaf-modules tests G⊗F; in step 2, the signed Tot symmetry with its chain check, because def-pc-kflat-complex puts the acyclic complex first. Steps 1–3 are otherwise correct. No new nodes, no tool_uses, no drops.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSumFlatKFlat",
+  "declaration": "AlgebraicGeometry.Scheme.etaleSum_preserves_flat_kflat",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.etaleSumFlatModuleRealization",
+   "AlgebraicGeometry.Scheme.etaleSumFlatComplexRealization",
+   "AlgebraicGeometry.Scheme.etaleSumFlatComplexExtension",
+   "AlgebraicGeometry.Scheme.etaleSum_preserves_flat_kflat"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSumFlatKFlat.lean",
+  "statement": "theorem etaleSum_preserves_flat_kflat {U X : Scheme.{u}} (f : U ⟶ X) [hf : Etale f] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (A : Type (u + 1)) [CommRing A] : (∀ F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A), SheafOfModules.IsFlatOnSite (J := U.smallEtaleTopology) (R := (constantSheaf U.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)) ((etaleSumFlatModuleRealization U A).obj F) → SheafOfModules.IsFlatOnSite (J := X.smallEtaleTopology) (R := (constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)) ((etaleSumFlatModuleRealization X A).obj ((Etale.etaleLowerShriek (ModuleCat.{u + 1} A) f hf).obj F))) ∧ (∀ P : CochainComplex (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ, CochainComplex.IsKFlatIndependentCoefficients (J := U.smallEtaleTopology) (R := (constantSheaf U.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)) ((etaleSumFlatComplexRealization U A).obj P) → CochainComplex.IsKFlatIndependentCoefficients (J := X.smallEtaleTopology) (R := (constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)) ((etaleSumFlatComplexRealization X A).obj ((etaleSumFlatComplexExtension f hf A).obj P))) ∧ (∀ P : CochainComplex (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ, CochainComplex.IsKFlatIndependentCoefficients (J := U.smallEtaleTopology) (R := (constantSheaf U.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)) ((etaleSumFlatComplexRealization U A).obj P) → (∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := U.smallEtaleTopology) (R := (constantSheaf U.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)) ((etaleSumFlatModuleRealization U A).obj (P.X n))) → CochainComplex.IsKFlatIndependentCoefficients (J := X.smallEtaleTopology) (R := (constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)) ((etaleSumFlatComplexRealization X A).obj ((etaleSumFlatComplexExtension f hf A).obj P)) ∧ ∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := X.smallEtaleTopology) (R := (constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)) ((etaleSumFlatModuleRealization X A).obj (((etaleSumFlatComplexExtension f hf A).obj P).X n)))",
+  "branch": "newtargets-dag",
+  "by": "N1",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-81a557e1b",
+  "group": "N1",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, edge cases, canonical constructions, report sections, and side-overlay compilation all checked successfully."
  }
 }
