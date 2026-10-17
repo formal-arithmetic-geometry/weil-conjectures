@@ -1,132 +1,136 @@
 {
-  "id": "lem-weil-pbc-formal-completion-pullback-normalized",
-  "kind": "statement",
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "title": "Completion pullback normalized on quotient projections",
-  "statement": "Let $a:X\\to Y$ be a scheme morphism with $Y$ Noetherian, $J\\subset\\mathcal O_Y$ an ideal sheaf and $F$ a coherent module [def-weil-pbc-coherent-formal-module, pqf-def-coherent, def-pc-module-pullback]. Suppose $I=J.\\operatorname{comap}(a)$ and a module $M$ on $X$ is supplied with $h_M:M=a^*F$. There exists an isomorphism $e:a^*(F^{\\wedge}_J)\\simeq M^{\\wedge}_I$ of inverse systems, and for every level $n$ the pulled quotient projection followed by $e_n$ is $h_M^{-1}$ followed by the quotient projection $M\\to M/I^{n+1}M$. The normalization specifies the quotient comparison on all levels.",
-  "stmt_deps": [
-    "def-weil-pbc-coherent-formal-module",
-    "pqf-def-coherent",
-    "def-pc-module-pullback"
-  ],
-  "source": {
-    "document": "https://stacks.math.columbia.edu/tag/0887",
-    "place": "Proof, pullback of ideal-power quotients; completion identity in the proof of 088B"
-  },
-  "proof": [
-    {
-      "text": "Eliminate the supplied ideal and module equalities. Take the inverse of completionPullbackIso at F, from the existing formal-system pullback construction. Its component at n is the inverse powerQuotientIso. The existing powerQuotientIso projection equation says that the new quotient projection followed by its forward comparison is a* of the original projection. Postcompose with its inverse and cancel the isomorphism. This proves exactly the normalized equation. Naturality and compatibility with transitions are already part of completionPullbackIso. Pulled quotient projections are epimorphisms because pullback is a left adjoint, so the normalization determines the comparison uniquely; no arbitrary data is selected. Zero modules, zero/unit ideals and empty schemes use the same equations.",
-      "uses": [
-        "lem-weil-pbc-formal-systems-pullback",
-        "def-pc-module-pullback"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-weil-pbc-formal-completion-pullback-normalized",
+ "kind": "statement",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "title": "Completion pullback normalized on quotient projections",
+ "statement": "Let $a:X\\to Y$ be a scheme morphism with $Y$ Noetherian, $J\\subset\\mathcal O_Y$ an ideal sheaf and $F$ a coherent module [def-weil-pbc-coherent-formal-module, pqf-def-coherent, def-pc-module-pullback]. Suppose $I=J.\\operatorname{comap}(a)$ and a module $M$ on $X$ is supplied with $h_M:M=a^*F$. There exists an isomorphism $e:a^*(F^{\\wedge}_J)\\simeq M^{\\wedge}_I$ of inverse systems, and for every level $n$ the pulled quotient projection followed by $e_n$ is $h_M^{-1}$ followed by the quotient projection $M\\to M/I^{n+1}M$. The normalization specifies the quotient comparison on all levels.",
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "pqf-def-coherent",
+  "def-pc-module-pullback"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0887",
+  "place": "Proof, pullback of ideal-power quotients; completion identity in the proof of 088B"
+ },
+ "proof": [
+  {
+   "text": "Eliminate the supplied ideal and module equalities. Take the inverse of completionPullbackIso at F, from the existing formal-system pullback construction. Its component at n is the inverse powerQuotientIso. The existing powerQuotientIso projection equation says that the new quotient projection followed by its forward comparison is a* of the original projection. Postcompose with its inverse and cancel the isomorphism. This proves exactly the normalized equation. Naturality and compatibility with transitions are already part of completionPullbackIso. Pulled quotient projections are epimorphisms because pullback is a left adjoint, so the normalization determines the comparison uniquely; no arbitrary data is selected. Zero modules, zero/unit ideals and empty schemes use the same equations.",
+   "uses": [
     "lem-weil-pbc-formal-systems-pullback",
     "def-pc-module-pullback"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "https://stacks.math.columbia.edu/tag/0887",
-    "place": "Projection normalization of the existing quotient-comparison construction and completion identity of 088B"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "pullback of completion inverse system isomorphism normalized on ideal power quotient projections",
-      "results": "LeanFinder returned eight AdicCompletion ring/module algebra equivalence tools, none about scheme-module quotient diagrams. Local search found the private proved completionPullbackIso and powerQuotientIso_π in FormalSystemsPullback, which this proof uses.",
-      "date": "2026-10-13",
-      "verdict": "generic helpers used; no standalone normalized interface"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Adjunction.unit_naturality",
-      "results": "Generic functor/adjunction tools; normalized completion systems are project definitions, not Mathlib declarations.",
-      "date": "2026-10-13",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "grep",
-      "query": "formalCompletionSystem|completionPullbackIso|powerQuotientIso",
-      "results": "Mathlib grep returned zero hits. Local project search found and reused the private proved completion comparison and its projection equation.",
-      "date": "2026-10-13",
-      "verdict": "project helpers reused"
-    },
-    {
-      "tool": "leansearch",
-      "query": "pullback of completion inverse system isomorphism normalized on ideal power quotient projections",
-      "results": "Service unavailable: Internal Server Error.",
-      "date": "2026-10-13"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.FormalFlatQuotientMateData",
-    "date": "2026-10-13",
-    "group": "D2"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-weil-pbc-finite-etale-lifting",
-      "place": "Formal flat quotient mate data: normalized completion-pullback comparison in the quotient projection equation",
-      "via": [
-        "lem-weil-pbc-formal-flat-quotient-mate-data",
-        "lem-weil-pbc-formal-comparison-flat-transport-square",
-        "lem-weil-pbc-formal-comparison-completed-affine-data",
-        "lem-weil-pbc-formal-comparison-completed-affine-restriction-iso",
-        "lem-weil-pbc-formal-comparison-completed-affine-model",
-        "lem-weil-pbc-formal-systems-push-pull-affine-annihilation"
-      ]
-    },
-    "same_as": []
-  },
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.FormalCompletionPullbackNormalized",
-    "file": "lean/Sheaf/AlgebraicGeometry/FormalCompletionPullbackNormalized.lean",
-    "declaration": "AlgebraicGeometry.exists_formalCompletionPullback_normalized",
-    "statement": "theorem exists_formalCompletionPullback_normalized\n    {X Y : Scheme.{u}} [IsNoetherian Y] (a : X ⟶ Y) (J : Y.IdealSheafData)\n    (F : CoherentModules Y) (I : X.IdealSheafData) (hI : J.comap a = I)\n    (M : X.Modules) (hM : M = (Scheme.Modules.tensorPullback a).obj F.obj) :\n    ∃ e : formalCompletionSystem J F.obj ⋙ Scheme.Modules.tensorPullback a ≅\n        formalCompletionSystem I M,\n      ∀ n : ℕ, (Scheme.Modules.tensorPullback a).map\n          (formalModuleQuotientπ J (n + 1) F.obj) ≫ e.hom.app (op n) =\n        eqToHom hM.symm ≫ formalModuleQuotientπ I (n + 1) M",
-    "branch": "sheaf-dag",
-    "by": "D2",
-    "date": "2026-10-13"
-  },
-  "reviewed": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "D2",
-    "result": "pass",
-    "landing": "20261013T142853-L-496460",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "D2",
-    "result": "pass",
-    "landing": "20261013T142853-L-496460",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-formal-systems-pullback",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0887",
+  "place": "Projection normalization of the existing quotient-comparison construction and completion identity of 088B"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "pullback of completion inverse system isomorphism normalized on ideal power quotient projections",
+   "results": "LeanFinder returned eight AdicCompletion ring/module algebra equivalence tools, none about scheme-module quotient diagrams. Local search found the private proved completionPullbackIso and powerQuotientIso_π in FormalSystemsPullback, which this proof uses.",
+   "date": "2026-10-13",
+   "verdict": "generic helpers used; no standalone normalized interface"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_naturality",
+   "results": "Generic functor/adjunction tools; normalized completion systems are project definitions, not Mathlib declarations.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "formalCompletionSystem|completionPullbackIso|powerQuotientIso",
+   "results": "Mathlib grep returned zero hits. Local project search found and reused the private proved completion comparison and its projection equation.",
+   "date": "2026-10-13",
+   "verdict": "project helpers reused"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pullback of completion inverse system isomorphism normalized on ideal power quotient projections",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalFlatQuotientMateData",
+  "date": "2026-10-13",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Formal flat quotient mate data: normalized completion-pullback comparison in the quotient projection equation",
+   "via": [
+    "lem-weil-pbc-formal-flat-quotient-mate-data",
+    "lem-weil-pbc-formal-comparison-flat-transport-square",
+    "lem-weil-pbc-formal-comparison-completed-affine-data",
+    "lem-weil-pbc-formal-comparison-completed-affine-restriction-iso",
+    "lem-weil-pbc-formal-comparison-completed-affine-model",
+    "lem-weil-pbc-formal-systems-push-pull-affine-annihilation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalCompletionPullbackNormalized",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalCompletionPullbackNormalized.lean",
+  "declaration": "AlgebraicGeometry.exists_formalCompletionPullback_normalized",
+  "statement": "theorem exists_formalCompletionPullback_normalized\n    {X Y : Scheme.{u}} [IsNoetherian Y] (a : X ⟶ Y) (J : Y.IdealSheafData)\n    (F : CoherentModules Y) (I : X.IdealSheafData) (hI : J.comap a = I)\n    (M : X.Modules) (hM : M = (Scheme.Modules.tensorPullback a).obj F.obj) :\n    ∃ e : formalCompletionSystem J F.obj ⋙ Scheme.Modules.tensorPullback a ≅\n        formalCompletionSystem I M,\n      ∀ n : ℕ, (Scheme.Modules.tensorPullback a).map\n          (formalModuleQuotientπ J (n + 1) F.obj) ≫ e.hom.app (op n) =\n        eqToHom hM.symm ≫ formalModuleQuotientπ I (n + 1) M",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261013T142853-L-496460",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261017T003424-L-3316109",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.exists_formalCompletionPullback_normalized"
+  ],
+  "sorry_after": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

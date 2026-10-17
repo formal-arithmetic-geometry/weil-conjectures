@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import all Sheaf.AlgebraicGeometry.FormalSystemsPullback
+import all WeilConjectures.AlgebraicGeometry.FormalSystemsPullback
 
 /-! # Pullback of completion with normalized quotient projections
 
@@ -47,6 +47,18 @@ theorem exists_formalCompletionPullback_normalized
       ∀ n : ℕ, (Scheme.Modules.tensorPullback a).map
           (formalModuleQuotientπ J (n + 1) F.obj) ≫ e.hom.app (op n) =
         eqToHom hM.symm ≫ formalModuleQuotientπ I (n + 1) M := by
-  sorry
+  subst I
+  subst M
+  refine ⟨((completionPullbackIso a J).app F).symm, ?_⟩
+  intro n
+  have hF : F.obj.IsQuasicoherent :=
+    ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType Y _).mp
+      F.property).1
+  change (Scheme.Modules.tensorPullback a).map (formalModuleQuotientπ J (n + 1) F.obj) ≫
+    (powerQuotientIso a J F.obj hF (n + 1)).inv =
+      𝟙 _ ≫ formalModuleQuotientπ (J.comap a) (n + 1)
+        ((Scheme.Modules.tensorPullback a).obj F.obj)
+  rw [Category.id_comp, ← powerQuotientIso_π a J F.obj hF (n + 1)]
+  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
 
 end AlgebraicGeometry
