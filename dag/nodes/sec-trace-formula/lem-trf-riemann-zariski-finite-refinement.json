@@ -2,7 +2,7 @@
  "id": "lem-trf-riemann-zariski-finite-refinement",
  "kind": "statement",
  "title": "Valuation neighbourhoods and common finite Riemann--Zariski refinement",
- "statement": "Let $T$ be an integral scheme [def-pc-integral-scheme] of finite type over $\\mathbf Z$, let $k(T)$ be its function field, and fix a separable closure $L$ of $k(T)$. An $L$-model is an integral scheme $T_i$ with a factorization $\\operatorname{Spec}L\\to T_i\\to T$ taking the point to the generic point, with $T_i\\to T$ proper [def-weil-proper-morphism]. An $L$-quasi-model has instead $T_i\\to T$ separated and of finite type. Thus the function fields of these models are finite separable extensions of $k(T)$. Define $RZ_L(T)$ as the space of compatible families of points in all $L$-models, with the coarsest topology making all projections continuous. This space is quasi-compact, and its points are precisely centred valuation rings $V$ of $L$ together with a morphism $\\operatorname{Spec}V\\to T$ agreeing with the generic map. Each such $V$ has finite height. An $L$-quasi-model $U$ gives an open injection $RZ_L(U)\\hookrightarrow RZ_L(T)$. These opens cover $RZ_L(T)$ whenever the quasi-models give a neighbourhood for every valuation point. For finitely many $L$-quasi-models $U_i$, there is an $L$-model $T'\\to T$ and open subschemes $W_i\\subset T'$ with proper dominant $T$-morphisms $W_i\\to U_i$ (that is, the composite $W_i\\to U_i\\to T$ equals $W_i\\subset T'\\to T$) having finite separable generic field extensions, compatible with the maps from $\\operatorname{Spec}L$. If the opens $RZ_L(U_i)$ cover $RZ_L(T)$, the $W_i$ cover $T'$. Finite type for scheme morphisms has the meaning of [def-weil-finite-type-morphism].",
+ "statement": "Let $T$ be an integral scheme [def-pc-integral-scheme] of finite type over $\\mathbf Z$, let $k(T)$ be its function field, and fix a separable closure $L$ of $k(T)$ [def-kun-separably-closed]. An $L$-model is an integral scheme $T_i$ with a factorization $\\operatorname{Spec}L\\to T_i\\to T$ of the generic map $\\operatorname{Spec}L\\to\\operatorname{Spec}k(T)\\to T$ whose first arrow takes the point of $\\operatorname{Spec}L$ to the generic point of $T_i$, with $T_i\\to T$ proper [def-weil-proper-morphism]. An $L$-quasi-model has instead $T_i\\to T$ separated and of finite type. Thus the function fields of these models are finite separable extensions of $k(T)$. Morphisms of models are $T$-morphisms commuting with the specified maps from $\\operatorname{Spec}L$. Define $RZ_L(T)$ as the space of families of points in all $L$-models compatible with these morphisms, with the coarsest topology making all projections continuous. This space is quasi-compact, and its points are precisely centred valuation rings $V$ of $L$ together with a morphism $\\operatorname{Spec}V\\to T$ agreeing with the generic map. Here valuation ring means a subring $V\\subseteq L$ with $a\\in V$ or $a^{-1}\\in V$ for every $a\\in L^\\times$, and finite height means a finite bound on the lengths of strict chains of prime ideals. Each such $V$ has finite height. For an $L$-quasi-model $U$, define $RZ_L(U)$ by the same construction with $U$ in place of $T$, using the specified generic map $\\operatorname{Spec}L\\to U$. An $L$-quasi-model $U$ gives an open injection $RZ_L(U)\\hookrightarrow RZ_L(T)$. Its image consists precisely of those pairs $(V,\\operatorname{Spec}V\\to T)$ admitting a lift $\\operatorname{Spec}V\\to U$ compatible with $\\operatorname{Spec}L$. These opens cover $RZ_L(T)$ whenever every valuation point admits such a lift to one of the quasi-models. For finitely many $L$-quasi-models $U_i$, there is an $L$-model $T'\\to T$ and open subschemes $W_i\\subset T'$ with proper dominant $T$-morphisms $W_i\\to U_i$ (that is, the composite $W_i\\to U_i\\to T$ equals $W_i\\subset T'\\to T$) having finite separable generic field extensions, compatible with the maps from $\\operatorname{Spec}L$. If the opens $RZ_L(U_i)$ cover $RZ_L(T)$, the $W_i$ cover $T'$. Finite type for scheme morphisms has the meaning of [def-weil-finite-type-morphism].",
  "source": {
   "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
   "place": "§3.2: Proposition 3.2.1, Lemma 3.2.2, Corollaries 3.2.4--3.2.5, Proposition 3.2.6, Corollary 3.2.7; finite height by §2.1.2 (Abhyankar inequality), as used in proof of Theorem 1.5, p. 36.",
@@ -11,11 +11,190 @@
  "stmt_deps": [
   "def-pc-integral-scheme",
   "def-weil-finite-type-morphism",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "def-kun-separably-closed"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $K=k(T)$. A nonempty affine chart on a quasi-model gives a finitely generated domain over an affine domain on $T$, with fraction field embedded in $L$ by the generic map. Its finitely many algebra generators are algebraic and separable over $K$, so their compositum is finite separable over $K$ and contains that fraction field. Thus every model and quasi-model has finite separable function field over $K$. Similarly the fraction field of a nonempty affine chart of $T$ is generated as a field by finitely many elements over its prime field. These observations use only adjoining finitely many algebraic elements and taking fractions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§3.2, opening definitions, p. 15."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-type-over-noetherian], $T$ and every finite-type $T$-scheme are Noetherian, hence quasi-compact; [lem-weil-pbc-locally-noetherian-quasi-separated] makes them quasi-separated. We will repeatedly take the closure of the image of $\\operatorname{Spec}L$ in a scheme $P$ proper over $T$, with its reduced induced structure from [lem-weil-pbc-reduced-induced-closed-subscheme]. This is integral: the closure of one point is irreducible, and the induced scheme is reduced and nonempty. On an affine chart through that point its coordinate ring is the quotient by the kernel of the map to $L$, so the generic map factors through it. This closed subscheme is proper over $T$ by [lem-weil-pbc-closed-immersion-proper]. In particular it is an $L$-model whenever the prescribed generic map to $P$ lies over the generic map to $T$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§3.2, opening paragraph and Lemma 3.2.3, pp. 15--16; reduced-closure construction. Stacks Tags 01T6, 01OY, 01W5."
+   }
+  },
+  {
+   "text": "For two $L$-models $X,Y$, the product $X\\times_TY$ is proper over $T$ by [lem-weil-pbc-proper-base-change] and [lem-weil-pbc-proper-composition]. The reduced closure of the prescribed point of $\\operatorname{Spec}L$ in it, constructed in Step 2, dominates both models and is a common refinement. Any two refinement maps into $Y$ agree: their equalizer is the inverse image of the closed diagonal of the separated map $Y\\to T$; its defining ideal vanishes at the generic point of the integral source, so is zero on every affine domain. Thus, after choosing one representative per isomorphism class, the models form a directed partially ordered set under refinement. This is a set: finite-type schemes over the fixed Noetherian scheme $T$ have finite affine presentations and finite gluing data, and their specified generic maps take values in the set $L$.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§3.2, opening paragraph: schematic images in fibre products, p. 15."
+   }
+  },
+  {
+   "text": "Every model is qcqs by Step 2, so [lem-weil-pbc-qcqs-scheme-spectral] makes its underlying space spectral. Every refinement map is proper by [lemma-nagata-proper-to-separated-target], because its source is proper over $T$ and its target is separated over $T$. In particular it is quasi-compact, so its inverse images of quasi-compact opens are quasi-compact. The directed system from Step 3 therefore satisfies precisely the hypotheses of [lem-weil-pbc-spectral-directed-limit-spectral]. The space of compatible points with the topology specified in the statement is its topological inverse limit. That node makes it spectral, hence quasi-compact by [def-weil-spectral-space].",
+   "uses": [
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "lemma-nagata-proper-to-separated-target",
+    "lem-weil-pbc-spectral-directed-limit-spectral",
+    "def-weil-spectral-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 3.2.1, p. 15; Stacks Tags 094L, 01W6, 0A2Z."
+   }
+  },
+  {
+   "text": "Let $x=(x_i)$ be a compatible family. The local homomorphisms $\\mathcal O_{X_i,x_i}\\to\\mathcal O_{X_j,x_j}$ for refinements are injective subring maps in $L$, because refinement maps dominate their integral targets. Their directed union $R_x\\subseteq L$ is local: the union of their maximal ideals is an ideal, every element outside it has its inverse already in a local ring in the system, and each local ring maps locally to the union. The model $T$ itself belongs to the system. Hence $\\operatorname{Spec}R_x\\to\\operatorname{Spec}\\mathcal O_{T,x_T}\\to T$ has the prescribed generic restriction. It remains to prove that $R_x$ is a valuation ring of all of $L$, rather than merely a local subring.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 3.2.2 and the stalk union preceding Corollary 3.2.4, p. 16."
+   }
+  },
+  {
+   "text": "Use the two standard opens of $\\mathbf P^1_{\\mathbf Z}=\\operatorname{Proj}\\mathbf Z[T_0,T_1]$ from [def-nagata-affine-proj]. By [lemma-nagata-relative-affine-space-open-immersion] each is $\\mathbf A^1_{\\mathbf Z}$, interchanging $T_0,T_1$ for the second; their coordinates $T_1/T_0$ and $T_0/T_1$ multiply to $1$ on the overlap, and they cover since the irrelevant ideal is $(T_0,T_1)$. For $f\\in L^\\times$, the ring map $\\mathbf Z[t]\\to L$, $t\\mapsto f$, followed by the first chart gives the prescribed map $\\operatorname{Spec}L\\to T\\times_{\\mathbf Z}\\mathbf P^1_{\\mathbf Z}$ whose projective coordinate is $[1:f]$. The projection of this product is proper by [lemma-nagata-projective-space-base-change-proper]. Its reduced generic closure is an $L$-model by Step 2. At the coordinate $x_f$ of $x$ on that model, one of the two standard affine charts of $\\mathbf P^1$ applies: the pullback of its coordinate is respectively $f$ or $f^{-1}$. Thus at least one of $f,f^{-1}$ belongs to $\\mathcal O_{X_f,x_f}\\subseteq R_x$. By the definition of valuation ring in the statement this proves the assertion; it also gives $\\operatorname{Frac}R_x=L$. This is the graph construction used to obtain valuations, not a citation of a valuation-points clause.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-nagata-affine-proj",
+    "lemma-nagata-relative-affine-space-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 3.2.3 and Corollary 3.2.4, p. 16."
+   }
+  },
+  {
+   "text": "Conversely let $V$ be a valuation ring of $L$ with a specified morphism $\\operatorname{Spec}V\\to T$. For each proper model, [lemma-nagata-proper-separated-valuation-extension] gives the unique extension of its generic map to $\\operatorname{Spec}V$. Uniqueness makes their closed-point images compatible, producing $x\\in RZ_L(T)$. The local ring maps show that $V$ dominates the union $R_x$. Both are valuation rings with the same fraction field $L$, so [lemma-nagata-valuation-intersection], applied with both fields equal to $L$, gives $V=R_x$. In the other direction, each local inclusion $\\mathcal O_{X_i,x_i}\\subseteq R_x$ already gives a lift with closed-point image $x_i$, so the same uniqueness recovers the original family. The two constructions are inverse and remember the specified map to $T$; this matters even if $T$ is not separated over $\\mathbf Z$.",
+   "uses": [
+    "lemma-nagata-proper-separated-valuation-extension",
+    "lemma-nagata-valuation-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Corollary 3.2.5, p. 16."
+   }
+  },
+  {
+   "text": "For any such $V$, restrict to $A=V\\cap K$. The extension $L/K$ is algebraic, so [lem-trf-valuation-algebraic-height] identifies its height with that of $A$. Step 1 shows that $K$ is finitely generated over its prime field. If its absolute transcendence degree is $d$, [lem-trf-abhyankar-finite-type-field-height] bounds the height of $A$ by $d+1$. Consequently $V$ has finite height. Neither discreteness nor finite generation of $V$ is assumed.",
+   "uses": [
+    "lem-trf-valuation-algebraic-height",
+    "lem-trf-abhyankar-finite-type-field-height"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§2.1, prime/convex-subgroup correspondence and finite-extension inequality, pp. 7--8; Corollary 2.1.3(i), p. 8."
+   }
+  },
+  {
+   "text": "For an $L$-quasi-model $U\\to T$, apply [thm-nagata-compactification]: $T$ is qcqs by Step 2 and $U\\to T$ is separated of finite type. Replace its compactification by the reduced generic closure from Step 2, denoted $\\overline U$. This still contains $U$ as an open subscheme, since closure restricted to the reduced integral open $U$ is all of $U$. By Step 1, $k(U)$ is an intermediate finite separable extension of $k(T)$ in $L$, so $L$ is also a separable closure of $k(U)$. The point descriptions in Steps 5--7 therefore apply also over $U$. By [lemma-nagata-separated-valuation-lift-unique] a valuation morphism to $T$ has at most one compatible lift to $U$, so the induced map on valuation sets is injective. Its image is exactly $p_{\\overline U}^{-1}(U)$: if a lift to $U$ exists its extension to $\\overline U$ is the unique proper lift; conversely, when the proper lift sends the closed point into $U$, it factors through $U$, since every point of the spectrum of a local ring generalizes its closed point and open subsets are stable under generalization. This identifies the image with an open subset without treating $U$ as a subset of $T$.",
+   "uses": [
+    "thm-nagata-compactification",
+    "lemma-nagata-separated-valuation-lift-unique",
+    "lemma-nagata-proper-separated-valuation-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Corollary 3.2.7, p. 17; compactification proof of its open-image assertion."
+   }
+  },
+  {
+   "text": "The identification of Step 9 is a homeomorphism onto that open. Indeed for any proper $U$-model $A$ and open subset $O\\subseteq A$, compactify $A$ over $T$ using [thm-nagata-compactification] (the composite is separated of finite type) and take its reduced generic closure $\\overline A$. Then $A$, and hence $O$, is open in $\\overline A$. By proper lifting over $U$ from [lemma-nagata-proper-separated-valuation-extension], the inverse image of $O$ under the projection $RZ_L(U)\\to A$ corresponds exactly to $p_{\\overline A}^{-1}(O)$ in $RZ_L(T)$, by uniqueness of the lift to $\\overline A$. These are all generating opens for the source topology. Conversely, for any proper $T$-model $B$, the reduced generic closure in $B\\times_TU$ is a proper $U$-model, by [lem-weil-pbc-proper-base-change] and [lem-weil-pbc-closed-immersion-proper], and its map to $B$ computes the restricted projection to $B$. Thus the set injection is continuous as well. This proves the asserted open injection, including its topology.",
+   "uses": [
+    "thm-nagata-compactification",
+    "lemma-nagata-proper-separated-valuation-extension",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Corollary 3.2.7 and its cofinal-compactification argument, p. 17."
+   }
+  },
+  {
+   "text": "For finitely many quasi-models $U_i$, form the integral compactifications $\\overline U_i$ from Step 9. Their product over $T$ is proper by [lem-weil-pbc-proper-base-change] and [lem-weil-pbc-proper-composition]. Let $T\\prime$ be the reduced closure of the specified $\\operatorname{Spec}L$ in that product, as in Step 2. Each projection $q_i:T\\prime\\to\\overline U_i$ is proper by [lemma-nagata-proper-to-separated-target], and it is dominant because the prescribed generic point maps to the generic point of $U_i$. Put $W_i=q_i^{-1}(U_i)$, an open containing the generic point of $T\\prime$. Its map to $U_i$ is the base change of $q_i$, so is proper by [lem-weil-pbc-proper-base-change] and is dominant. Step 1 shows that $k(T\\prime)/K$ is finite separable; its intermediate fields $k(U_i)$ therefore give finite separable extensions $k(T\\prime)/k(U_i)$ as well. All maps respect $\\operatorname{Spec}L$ and their composites to $T$ agree by their construction from the product. For an empty family take $T\\prime=T$.",
+   "uses": [
+    "thm-nagata-compactification",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
+    "lemma-nagata-proper-to-separated-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 3.2.6, pp. 16--17; product of compactifications gives the common refinement."
+   }
+  },
+  {
+   "text": "The neighbourhood-cover condition says precisely that every pair $(V,\\operatorname{Spec}V\\to T)$ admits a lift to some $U_i$. By Steps 7 and 9 this is equivalent to the sets $RZ_L(U_i)$ covering $RZ_L(T)$. For any point $y\\in T\\prime$, use [lemma-nagata-local-domain-valuation-dominates] on $\\mathcal O_{T\\prime,y}$ in its fraction field $k(T\\prime)$, then [lemma-nagata-valuation-ring-extension] to extend the resulting valuation to $L$. This gives a valuation ring $V$ of $L$ dominating $\\mathcal O_{T\\prime,y}$, so a morphism $\\operatorname{Spec}V\\to T\\prime$ with closed-point image $y$. The cover supplies a lift of its $T$-morphism to some $U_i$. Its composite into $\\overline U_i$ agrees with $q_i$ composed with the map to $T\\prime$, by [lemma-nagata-proper-separated-valuation-extension]. Hence $q_i(y)\\in U_i$ and $y\\in W_i$. Since $y$ was arbitrary, the $W_i$ cover $T\\prime$. This proves the covering clause from domination and uniqueness, without borrowing any covering assertion from a new node or a document.",
+   "uses": [
+    "lemma-nagata-local-domain-valuation-dominates",
+    "lemma-nagata-valuation-ring-extension",
+    "lemma-nagata-proper-separated-valuation-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 3.2.1, surjectivity argument, p. 15, combined with Proposition 3.2.6, pp. 16--17; final cover argument written explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-affine-proj",
+  "def-weil-proper-morphism",
+  "def-weil-spectral-space",
+  "lem-trf-abhyankar-finite-type-field-height",
+  "lem-trf-valuation-algebraic-height",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-spectral-directed-limit-spectral",
+  "lemma-nagata-local-domain-valuation-dominates",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-nagata-proper-separated-valuation-extension",
+  "lemma-nagata-proper-to-separated-target",
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "lemma-nagata-separated-valuation-lift-unique",
+  "lemma-nagata-valuation-intersection",
+  "lemma-nagata-valuation-ring-extension",
+  "thm-nagata-compactification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "§3.2 graph constructions and compactification argument, with the valuation-height inputs of §2.1. The source was read online; its local archive is still WANTED, so the proof remains marked agent-written."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,7 +226,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-temkin-stable-modification",
@@ -59,7 +238,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Valuation neighbourhoods and common finite Riemann--Zariski refinement.",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: the Temkin valuation-neighbourhood and common-finite-refinement component of the Riemann--Zariski argument.",
    "via": [
     "lem-trf-temkin-stable-modification",
     "lem-trf-stable-modification-flat-curve-pair",
@@ -73,5 +252,109 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-riemann-zariski-finite-refinement",
+  "worker": "stage1",
+  "summary": "Repair of the returned relabelling: removed four unlanded clause copies, reused existing spectral-limit/Nagata/valuative/closure tools, and wrote the generic-graph, valuation bijection, open-subspace, product-refinement and pointwise cover arguments explicitly. Two new statement-only arithmetic valuation facts supply algebraic height invariance and the Abhyankar bound. Model transition maps and the meaning of valuation centres/lifts are now explicit.",
+  "blueprint": "Preserves the inherited ancestor and via chain for the semistable-alteration expansion of the specialization/nearby-cycle proof component. All twelve steps realize the Riemann--Zariski subargument of lem-trf-temkin-stable-modification, rather than replacing the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic Closed immersions are proper, used only for the explicitly written model/valuation argument; the trace-formula unit supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6), used only for the explicitly written model/valuation argument; the trace-formula unit supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic A locally Noetherian scheme is quasi-separated (Stacks 01OY), used only for the explicitly written model/valuation argument; the trace-formula unit supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic Properness is stable under base change, used only for the explicitly written model/valuation argument; the trace-formula unit supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Generic Properness is stable under composition, used only for the explicitly written model/valuation argument; the trace-formula unit supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-scheme-spectral",
+    "why": "Generic The underlying space of a quasi-compact quasi-separated scheme is spectral, used only for the explicitly written model/valuation argument; the trace-formula unit supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic Reduced induced closed subscheme structure on a closed subset: existence and uniqueness, used only for the explicitly written model/valuation argument; the trace-formula unit supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-spectral-directed-limit-spectral",
+    "why": "Generic A directed limit of spectral spaces along spectral maps is spectral, with spectral projections, used only for the explicitly written model/valuation argument; the trace-formula unit supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "lemma-nagata-local-domain-valuation-dominates",
+    "why": "Generic Valuation domination of a local domain, used only for the explicitly written model/valuation argument; the trace-formula unit supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic Projective space is proper over its base, used only for the explicitly written model/valuation argument; the trace-formula unit supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "lemma-nagata-proper-separated-valuation-extension",
+    "why": "Generic Valuative extension to a proper separated morphism, used only for the explicitly written model/valuation argument; the trace-formula unit supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "lemma-nagata-proper-to-separated-target",
+    "why": "Generic [stacks-project], used only for the explicitly written model/valuation argument; the trace-formula unit supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "lemma-nagata-separated-valuation-lift-unique",
+    "why": "Generic Uniqueness of a valuation lift for a separated morphism, used only for the explicitly written model/valuation argument; the trace-formula unit supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "lemma-nagata-valuation-intersection",
+    "why": "Generic Intersection with a dominating valuation ring, used only for the explicitly written model/valuation argument; the trace-formula unit supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "lemma-nagata-valuation-ring-extension",
+    "why": "Generic Extension of a valuation ring to a field extension, [stacks-project], used only for the explicitly written model/valuation argument; the trace-formula unit supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic Nagata compactification, [stacks-project], used only for the explicitly written model/valuation argument; the trace-formula unit supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "lemma-nagata-relative-affine-space-open-immersion",
+    "why": "The standard affine chart in projective space constructs the generic point and gives the local function or reciprocal in Step 6; it is a generic scheme tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-spectral-directed-limit-spectral",
+  "lemma-nagata-local-domain-valuation-dominates",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-nagata-proper-separated-valuation-extension",
+  "lemma-nagata-proper-to-separated-target",
+  "lemma-nagata-separated-valuation-lift-unique",
+  "lemma-nagata-valuation-intersection",
+  "lemma-nagata-valuation-ring-extension",
+  "thm-nagata-compactification",
+  "lemma-nagata-relative-affine-space-open-immersion"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-771bcc399",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-771bcc399 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited node statement, the four citers, unit sk-i-curve-zero, and Temkin v3 (fetched from arXiv to /tmp; the archive copy is still WANTED) at §2.1 pp. 7-8, Cor. 2.1.3(i), §3.2 pp. 15-17 (Prop. 3.2.1 to Cor. 3.2.7) and the proof of Thm 1.5 on p. 36. All twelve steps are correct and use only the statements of the nodes they cite. Steps 3-7 follow Temkin's route (schematic image, the limit, the graph of Lemma 3.2.3, domination as in Cor. 3.2.5). Step 4 replaces the constructible-topology proof of Prop. 3.2.1 with the existing spectral-limit node (0A2Z). Steps 9-12 replace Prop. 3.2.6 with Nagata compactification, the reduced closure in a product, and uniqueness of proper lifts. Step 6 builds its map in Mathlib Proj P^1_Z, not inside P(n;S). Both new nodes are true, self-contained and statement-only. Algebraic-height invariance holds because Gamma_E/Gamma_K is torsion, which makes convex subgroups correspond. The Abhyankar bound is Cor. 2.1.3(i) specialized to fields finitely generated over the prime field; Q(x) shows the bound is sharp. I checked small cases. Neither node restates a clause of the item. rg found no duplicate; lem-trf-birational-quasi-modification-common-cover is a different statement (birational refinement, not generically finite). The 17 declared generic tool_uses (lem-weil-pbc-* and Nagata-chapter nodes) are accepted. Two fixes: (1) the item's L-model clause was ambiguous; it now says the factorization is of the generic map and its first arrow sends the point to the generic point of T_i. This is Temkin's schematic dominance and the reading every step uses; the other reading makes the 'finite separable function fields' sentence and Step 5 false. (2) The source place of lem-trf-valuation-algebraic-height now puts the fundamental inequality at the foot of p. 7, not p. 8. No nodes dropped.; 2 file(s) fixed by the reviewer"
  }
 }
