@@ -10,7 +10,11 @@
  "stmt_deps": [
   "def-coef-categorical-pattern-fibrancy",
   "lem-coef-marked-point-cartesian-model",
-  "lem-coef-kan-quillen-right-proper"
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-finite-inverse-tetrahedron",
+  "lem-coef-marked-anodyne-lifting-calculus",
+  "lem-coef-marked-relative-cartesian-model",
+  "def-coef-infinity-marked-coanodyne"
  ],
  "proof": [
   {
@@ -267,5 +271,47 @@
   "group": "Q07",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-47650a423 (reviewer sub-agent of L); spot-checked: I read all of the item, the four new nodes, every cited statement and the unit record. As the source I read HA Appendix B from a local HA.pdf: B.0.26, B.1.1, B.1.6 with B.1.7 and its proof, B.1.8, B.1.9/B.1.10, B.1.11–B.1.13, B.1.14 and B.2.2. Item statement: the seven generator types match B.1.1. Full scaling makes the conditions on scaled 2-simplices vacuous. The recognition clause is B.1.6, and since the DAG's fibrancy definition uses global cocartesian edges, C0 over every simplex gives them directly. In the product clause P x P0 = P, which I checked against B.1.8: the cones are p_alpha x {s'} and P0 adds none. B.1.14's printed 'P0-anodyne' typo is correctly read as P-anodyne, as its proof and B.2.2 require. Nothing in the statement is weakened, and I tested the edge cases: empty K, n=0 and marking-only generators. Steps 1-4 follow the B.1.6 proof case by case. In Step 2 the triangle orientation and the s1(f) base are correct, and A1 is applied over the constant map. In Step 3, C2 is exactly the boundary problem for X_{/f} -> C_{/qf} with final vertex s, and the order of use is not circular: the cones are shown to be q-limits before the section test needs that. Step 4 handles the B1 marking through a fiber equivalence plus composition. Step 5 is genuinely elementary. Steps 7-9 follow the B.1.14 proof, using reversal plus the right-fibration tool. proof_deps equals the union of the step uses, and there is no cycle. New nodes: (1) product-cells: (a),(b) are the generator cases of B.1.9 and (c) is B.1.13, with n=2, i=0 handled through B.1.11. It is generator-level and strictly smaller than the item. (2) finite-inverse-tetrahedron: Q has vertices A=[0]=[2] and B=[1]=[3], and the central edge has both inverses. It is true and not stated elsewhere: grep finds Δ^{1,3} only in this item, the helper and two citers of the item. (3) cone-limit-section-test: HA B.0.26 / HTT 3.3.3.1. I checked fullness via relative right Kan extension, the isofibration claim and empty K. It is not lem-cbc-cocartesian-sections-limit. (4) join-slice-recognition: the converse of the forward join-boundary node. The corner lemma needs an isofibration, and this q need not be one. q_f is inner by HTT 2.1.2.1. All four have the B1-B7 form, created.item set to this item, correct from/via, and three kinds of search. The three off-route lem-cbc nodes are accepted as tool_uses: the outer-horn lift, the outer-horn equivalence criterion, and the right-fibration-over-Kan fact. These are not target nodes, so no base-change or coefficient question arises. No SGA is used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PatternAnodyneLiftingProducts",
+  "declaration": "SSet.Enhanced.PatternAnodyne.pattern_anodyne_lifting_products",
+  "declarations": [
+   "SSet.Enhanced.PatternAnodyne.markImage",
+   "SSet.Enhanced.PatternAnodyne.b0",
+   "SSet.Enhanced.PatternAnodyne.finalCone",
+   "SSet.Enhanced.PatternAnodyne.boundaryJoin",
+   "SSet.Enhanced.PatternAnodyne.c2",
+   "SSet.Enhanced.PatternAnodyne.forgetMap",
+   "SSet.Enhanced.PatternAnodyne.overObject",
+   "SSet.Enhanced.PatternAnodyne.liftMap",
+   "SSet.Enhanced.PatternAnodyne.overGenerator",
+   "SSet.Enhanced.PatternAnodyne.generators",
+   "SSet.Enhanced.PatternAnodyne.anodyne",
+   "SSet.Enhanced.PatternAnodyne.cof",
+   "SSet.Enhanced.PatternAnodyne.terminal",
+   "SSet.Enhanced.PatternAnodyne.toTerminal",
+   "SSet.Enhanced.PatternAnodyne.pointPattern",
+   "SSet.Enhanced.PatternAnodyne.overPoint",
+   "SSet.Enhanced.PatternAnodyne.mapOverPoint",
+   "SSet.Enhanced.PatternAnodyne.product",
+   "SSet.Enhanced.PatternAnodyne.toOver",
+   "SSet.Enhanced.PatternAnodyne.toOverMap",
+   "SSet.Enhanced.PatternAnodyne.pattern_anodyne_lifting_products"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PatternAnodyneLiftingProducts.lean",
+  "statement": "theorem pattern_anodyne_lifting_products (P : CategoricalPattern.{u}) : (generators P).IsSmall.{u} ∧ anodyne P ≤ cof P ∧ (∀ Z : P.Object, IsCategoricalPatternFibered P Z ↔ (generators P).rlp (toTerminal Z)) ∧ (∀ X : Marked.{u}, IsCategoricalPatternFibered pointPattern (overPoint X) ↔ Marked.IsNaturallyFibrant X) ∧ (∀ {A A' : P.Object} {L L' : Marked.{u}} (i : A ⟶ A') (j : L ⟶ L'), cof P i → Marked.cof j → (∃ (B : P.Object) (p : B ⟶ product A' L'), Marked.IsPushoutProduct (forgetMap i) j (forgetMap p)) ∧ ∀ (B : P.Object) (p : B ⟶ product A' L'), Marked.IsPushoutProduct (forgetMap i) j (forgetMap p) → (anodyne P i ∨ anodyne pointPattern (mapOverPoint j)) → anodyne P p) ∧ (∀ (Z : P.Object), IsCategoricalPatternFibered P Z → (∀ A : P.Object, KanComplex (Marked.Over.mapSharp (toOver A) (toOver Z))) ∧ ∀ {A A' : P.Object} (i : A ⟶ A'), cof P i → HomotopicalAlgebra.Fibration (Marked.Over.mapSharpPre (toOverMap i) (toOver Z)) ∧ (anodyne P i → (SSet.modelCategoryQuillen.I).rlp (Marked.Over.mapSharpPre (toOverMap i) (toOver Z))))",
+  "branch": "newtargets-dag",
+  "by": "Q160",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "All seven generator families and their weak saturation are explicit definitions. Uses the recorded pattern slice, existing marked primitives and the existing relative sharp mapping construction via the canonical fully faithful conversion to the slice over the sharp underlying base. Added four already landed statement dependencies for the reused inverse tetrahedron, triangle marking, induced marking, initial horn and relative mapping declarations; no dependency node is changed. The only postponed theorem is this node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-922f5ebad",
+  "group": "Q160",
+  "result": "pass",
+  "note": "All clauses and dependencies match; no hollow definitions or duplicate notions; required report sections and docstrings are present; per-file scompile passed locally and with server confirmation."
  }
 }
