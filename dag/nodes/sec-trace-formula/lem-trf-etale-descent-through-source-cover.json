@@ -12,9 +12,78 @@
   "def-weil-surjective-morphism",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-weil-etale-morphism], $p$ is flat and locally of finite presentation. By [lem-weil-pbc-etale-smooth-zero-dimensional-fibres] applied to $h\\circ p$, this composite is smooth. Apply [lem-sbc-smooth-flat-surjective-source-descent] with $X\\prime=Y$, source map $q=p$ and structural map $f=h$. Its flatness, surjectivity and local-finite-presentation hypotheses on $q$ are precisely those just checked and the given surjectivity; its smooth-composite hypothesis is the preceding assertion. Hence $h$ is smooth. In particular $h$ is locally of finite presentation by [def-sbc-smooth-morphisms]. This application does not require $p$ to be quasi-compact.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-sbc-smooth-flat-surjective-source-descent",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 05B5, lemma-smooth-permanence, smooth case; this supplies the smoothness step of morphisms.tex Tag 02K6 (lemma-etale-permanence-two), cited by Tag 02KM in the proof of Tag 036W."
+   }
+  },
+  {
+   "text": "Both $p$ and $h$ are locally of finite type. Here is the elementary implication from the local finite presentation already obtained. For either morphism $f$ and any affine target open $V$, the affine-basis assertion [lem-weil-pbc-affine-opens-basis] covers $f^{-1}(V)$ by affine opens $U$. By [lem-weil-pbc-lfp-affine-opens-finite-presentation], each corresponding algebra has the form $R[t_1,\\ldots,t_n]/(g_1,\\ldots,g_m)$, where $R=\\mathcal O(V)$. The images of the finitely many $t_i$ generate this algebra over $R$. This is exactly the affine-cover condition for local finite type in [def-weil-finite-type-morphism]. No finiteness of the open cover is needed.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TW, lemma-finite-presentation-finite-type; the elementary argument expands the omitted proof using Tag 01TQ and schemes.tex Tag 01IT."
+   }
+  },
+  {
+   "text": "Fix $x\\in X$. By [def-weil-surjective-morphism], choose $y\\in Y$ with $p(y)=x$, and put $t=h(x)$. Apply [lem-weil-pbc-etale-smooth-zero-dimensional-fibres] to the two given etale morphisms $p$ and $h\\circ p$. For their scheme-theoretic fibres it gives $\\dim_y(Y_x)=0$ and $\\dim_y(Y_t)=0$, respectively. Since $p$ is flat at $y$ and $p,h$ are locally of finite type by Steps 1--2, [lem-sbc-flat-composite-fibre-dimension-at-point], with $a=p$ and $f=h$, gives $$0=\\dim_y(Y_t)=\\dim_y(Y_x)+\\dim_x(X_t)=0+\\dim_x(X_t).$$ Thus $\\dim_x(X_t)=0$. These are dimensions at a point of the fibres, not merely dimensions of their local rings. Each fibre considered contains the indicated point, even if other fibres are empty.",
+   "uses": [
+    "def-weil-surjective-morphism",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-sbc-flat-composite-fibre-dimension-at-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02K6, lemma-etale-permanence-two, proof: zero relative dimensions and Tag 02JS (lemma-dimension-fibre-at-a-point-additive), flat equality case; Tag 02GL and the remark after Definition 02GI identify the two zero dimensions."
+   }
+  },
+  {
+   "text": "For each $x\\in X$, apply [lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension] to $h$, using global smoothness from Step 1 and $\\dim_x(X_{h(x)})=0$ from Step 3. It provides an open neighbourhood $U_x\\subseteq X$ of $x$ on which $h$ is etale. The $U_x$ cover $X$, so [lem-weil-pbc-etale-local-on-source] shows that $h$ is etale. If $X$ is empty, its empty open covering satisfies the same locality statement, so this argument also includes the empty case. Surjectivity of $p$ forces $X$ to be empty whenever $Y$ is empty. All invoked results are local statements over arbitrary schemes; none adds separation, global finite type or Noetherian assumptions.",
+   "uses": [
+    "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension",
+    "lem-weil-pbc-etale-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02K6, lemma-etale-permanence-two, conclusion; smooth relative dimension zero is etale, remark after Definition 02GI; Tag 02GJ, lemma-etale-characterize, locality on the source."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-surjective-morphism",
+  "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension",
+  "lem-weil-pbc-etale-local-on-source"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02K6 (lemma-etale-permanence-two), smoothness and additive fibre-dimension proof, as used through descent.tex Tag 02KM in Tag 036W. The otherwise missing local finite presentation is obtained together with smoothness from the smooth case of descent.tex Tag 05B5; Tag 01TW is expanded elementarily."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +133,52 @@
    "results": "{\"t\": \"2026-10-17T21:48:47Z\", \"tool\": \"grep\", \"query\": \"of_comp_faithfullyFlat|of_comp.*[Ff]aithfully|of_restrictScalars.*[Ff]lat|of_comp.*[Ee]tale\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Unramified/Finite.lean\"], \"digest\": \"851a8919f37edd1e\"}; Read Etale.lean:130: Etale.of_comp cancels the second arrow, not the surjective first arrow here. Read Etale/Descent.lean:85 and :108: those descend along base change on the target. Neither is this source-cover assertion; no one-line specialization was found. RingHom.Etale.propertyIsLocal gives Zariski locality only.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Etale.*of_comp|of_comp.*[Ee]tale|[Ee]tale.*[Dd]escent|[Dd]escent.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-17T22:19:05Z\", \"tool\": \"grep\", \"query\": \"Etale.*of_comp|of_comp.*[Ee]tale|[Ee]tale.*[Dd]escent|[Dd]escent.*[Ee]tale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\"], \"digest\": \"f095653749f85c7f\"}; Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:130-140: Etale.of_comp and HasOfPostcompProperty conclude etaleness of the first arrow from the second arrow and composite, whereas this item concludes it for the second arrow from the first arrow and composite. LocalFlatDescent.lean:47-48 descends etaleness after target base change, not source precomposition. The other hits concern composition, base change, or a surjective ring homomorphism; none is this statement or a one-line specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If p is a surjective etale morphism and h composed with p is etale then h is etale",
+   "results": "{\"t\": \"2026-10-17T22:19:05Z\", \"tool\": \"leansearch\", \"query\": \"If p is a surjective etale morphism and h composed with p is etale then h is etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.stableUnderComposition\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.FormallyEtale.comp\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale\", \"Algebra.IsStandardEtale.of_surjective\", \"RingHom.Etale\"], \"digest\": \"7ce4e798fe3fa01c\"}; Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:130-140: Etale.of_comp and HasOfPostcompProperty conclude etaleness of the first arrow from the second arrow and composite, whereas this item concludes it for the second arrow from the first arrow and composite. LocalFlatDescent.lean:47-48 descends etaleness after target base change, not source precomposition. The other hits concern composition, base change, or a surjective ring homomorphism; none is this statement or a one-line specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"Surjective\"",
+   "results": "{\"t\": \"2026-10-17T22:19:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"Surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.iff_of_surjective\", \"Algebra.IsStandardEtale.of_surjective\", \"AlgebraicGeometry.instDescendsAlongSchemeEtaleMinMorphismPropertySurjectiveFlatQuasiCompact\", \"AlgebraicGeometry.Scheme.pointSmallEtaleFiberObjToPreimage_surjective\"], \"digest\": \"985fc0907f4d5f76\"}; Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:130-140: Etale.of_comp and HasOfPostcompProperty conclude etaleness of the first arrow from the second arrow and composite, whereas this item concludes it for the second arrow from the first arrow and composite. LocalFlatDescent.lean:47-48 descends etaleness after target base change, not source precomposition. The other hits concern composition, base change, or a surjective ring homomorphism; none is this statement or a one-line specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etaleness of a scheme morphism descends along a surjective etale cover of its source",
+   "results": "{\"t\": \"2026-10-17T22:19:06Z\", \"tool\": \"leanfinder\", \"query\": \"Etaleness of a scheme morphism descends along a surjective etale cover of its source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"Algebra.IsStandardEtale.of_surjective\", \"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.Scheme.instCategoryEtale\"], \"digest\": \"a9ae5018ac947554\"}; Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:130-140: Etale.of_comp and HasOfPostcompProperty conclude etaleness of the first arrow from the second arrow and composite, whereas this item concludes it for the second arrow from the first arrow and composite. LocalFlatDescent.lean:47-48 descends etaleness after target base change, not source precomposition. The other hits concern composition, base change, or a surjective ring homomorphism; none is this statement or a one-line specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "of_comp.*[Ff]lat.*[Ss]urjective|[Ee]tale.*[Ss]urjective|[Ss]urjective.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-17T22:19:16Z\", \"tool\": \"grep\", \"query\": \"of_comp.*[Ff]lat.*[Ss]urjective|[Ee]tale.*[Ss]urjective|[Ss]urjective.*[Ee]tale\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\"], \"digest\": \"53eab4903714409f\"}; Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:130-140: Etale.of_comp and HasOfPostcompProperty conclude etaleness of the first arrow from the second arrow and composite, whereas this item concludes it for the second arrow from the first arrow and composite. LocalFlatDescent.lean:47-48 descends etaleness after target base change, not source precomposition. The other hits concern composition, base change, or a surjective ring homomorphism; none is this statement or a one-line specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cancel a faithfully flat etale first arrow from an etale composite of scheme morphisms to prove the second arrow etale",
+   "results": "{\"t\": \"2026-10-17T22:19:18Z\", \"tool\": \"leanfinder\", \"query\": \"Cancel a faithfully flat etale first arrow from an etale composite of scheme morphisms to prove the second arrow etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"Algebra.Etale.comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"RingHom.Etale.stableUnderComposition\", \"Algebra.IsEtaleAt.comp\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"fa6ff5cbcf8a54f9\"}; Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:130-140: Etale.of_comp and HasOfPostcompProperty conclude etaleness of the first arrow from the second arrow and composite, whereas this item concludes it for the second arrow from the first arrow and composite. LocalFlatDescent.lean:47-48 descends etaleness after target base change, not source precomposition. The other hits concern composition, base change, or a surjective ring homomorphism; none is this statement or a one-line specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-smooth-branches-strict-chart",
@@ -106,5 +217,44 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-etale-descent-through-source-cover",
+  "worker": "stage1",
+  "summary": "Kept the full arbitrary-schemes statement. Split the source-cover assertion into smooth source descent, an elementary local-finite-presentation to local-finite-type step, flat additive fibre dimensions at a lifted point, and etaleness near each point followed by Zariski source locality. All inputs already exist; no new nodes. Distinguished source descent from Mathlib target-base-change descent and opposite-arrow etale cancellation.",
+  "blueprint": "Historical semistable auxiliary branch in blueprint.from.place, through lem-trf-valuation-smooth-branches-strict-chart Step 7: descend the explicit etale chart through its surjective etale source cover. This foundational tool does not replace or alter the current contracting-correspondence unit proof. Historical ancestry is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-flat-surjective-source-descent",
+    "why": "Generic smooth source-descent theorem (Stacks 05B5, smooth case), used only to establish smoothness of h; the trace-formula unit supplies no scheme-theoretic smooth descent theorem."
+   },
+   {
+    "node": "lem-sbc-flat-composite-fibre-dimension-at-point",
+    "why": "Generic flat fibre-dimension addition formula (Stacks 02JS), used to descend zero relative dimension at a lifted point; this foundational dimension formula is not supplied by the trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Generic etale-to-smooth-relative-dimension-zero implication for both given etale maps; no trace-formula unit node provides this foundational scheme-theoretic interface."
+   },
+   {
+    "node": "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension",
+    "why": "Generic smooth-and-zero-fibre-dimension criterion for etaleness near a point; this is the final scheme-theoretic step of Stacks 02K6, not an alternative proof of the trace-formula unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q73-e5064d487",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q73-e5064d487 (reviewer sub-agent of L); spot-checked: Reviewed the statement, all four proof steps, every cited node, unit route, and Stacks sources 036W, 05B5, 02K6, 02JS, 01TW, 01TQ, 01IT, and 02GJ. Hypotheses and fibre-map orientations are correct; edge cases and Mathlib comparisons check out. No repair needed. See review.md."
  }
 }
