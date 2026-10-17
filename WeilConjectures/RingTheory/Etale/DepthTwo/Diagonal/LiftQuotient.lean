@@ -102,9 +102,12 @@ lemma existsUnique_liftQuot_succ (hJ : ∀ n, IsRegularPair a b (C ⧸ J ^ n))
     apply hinj
     calc (Algebra.TensorProduct.includeRight : _ →ₐ[O] Localization.Away a ⊗[O] _) (fac (F t))
         = reduceAwayQuot J a m (Algebra.TensorProduct.includeRight (F t)) := by simp [fac]
-      _ = reduceAwayQuot J a m (Ga (iRa t)) := by rw [← AlgHom.comp_apply _ F, hF]; rfl
+      _ = reduceAwayQuot J a m (Ga (iRa t)) := by
+        rw [← AlgHom.comp_apply _ F, hF]
+        rfl
       _ = Algebra.TensorProduct.includeRight (f t) := by
-        rw [← AlgHom.comp_apply, hGa]; simp [iRa]
+        rw [← AlgHom.comp_apply, hGa]
+        simp [iRa]
   -- uniqueness
   have huniq (F₁ F₂ : T →ₐ[O] C ⧸ J ^ (m + 1)) (h₁ : fac.comp F₁ = f) (h₂ : fac.comp F₂ = f) :
       F₁ = F₂ := by
@@ -134,13 +137,14 @@ lemma existsUnique_liftQuot (hJ : ∀ n, IsRegularPair a b (C ⧸ J ^ n))
   | base =>
     let e := Ideal.quotientEquivAlgOfEq O (pow_one J).symm
     have hfe : (Ideal.Quotient.factorₐ O (Ideal.pow_le_self one_ne_zero)).comp e.toAlgHom =
-        AlgHom.id O (C ⧸ J) := Ideal.Quotient.algHom_ext _ (by ext; rfl)
+        AlgHom.id O (C ⧸ J) := Ideal.Quotient.algHom_ext _ (AlgHom.ext fun _ ↦ rfl)
     have hef : e.toAlgHom.comp (Ideal.Quotient.factorₐ O (Ideal.pow_le_self one_ne_zero)) =
-        AlgHom.id O (C ⧸ J ^ 1) := Ideal.Quotient.algHom_ext _ (by ext; rfl)
-    refine ⟨e.toAlgHom.comp φ, by beta_reduce; rw [← AlgHom.comp_assoc, hfe, AlgHom.id_comp],
-      fun F hF ↦ ?_⟩
-    beta_reduce at hF
-    rw [← hF, ← AlgHom.comp_assoc, hef, AlgHom.id_comp]
+        AlgHom.id O (C ⧸ J ^ 1) := Ideal.Quotient.algHom_ext _ (AlgHom.ext fun _ ↦ rfl)
+    refine ⟨e.toAlgHom.comp φ, ?_, fun F hF ↦ ?_⟩
+    · beta_reduce
+      rw [← AlgHom.comp_assoc, hfe, AlgHom.id_comp]
+    · beta_reduce at hF
+      rw [← hF, ← AlgHom.comp_assoc, hef, AlgHom.id_comp]
   | succ m hm ih =>
     obtain ⟨f, hf, hfu⟩ := ih
     obtain ⟨F, hF, hFu⟩ := existsUnique_liftQuot_succ J a b hJ hm f
@@ -148,11 +152,13 @@ lemma existsUnique_liftQuot (hJ : ∀ n, IsRegularPair a b (C ⧸ J ^ n))
         (Ideal.Quotient.factorₐ O (Ideal.pow_le_pow_right (I := J) m.le_succ)) =
         Ideal.Quotient.factorₐ O (Ideal.pow_le_self (n := m + 1) (by omega)) :=
       Ideal.Quotient.factorₐ_comp _ _ _
-    refine ⟨F, by beta_reduce; rw [← hcomp, AlgHom.comp_assoc, hF, hf], fun F' hF' ↦ hFu F' ?_⟩
-    beta_reduce at hF' ⊢
-    refine hfu _ ?_
-    beta_reduce
-    rw [← AlgHom.comp_assoc, hcomp, hF']
+    refine ⟨F, ?_, fun F' hF' ↦ hFu F' ?_⟩
+    · beta_reduce
+      rw [← hcomp, AlgHom.comp_assoc, hF, hf]
+    · beta_reduce at hF' ⊢
+      refine hfu _ ?_
+      beta_reduce
+      rw [← AlgHom.comp_assoc, hcomp, hF']
 
 /-- **Lifting points to an adically complete algebra.** If `(a, b)` is a regular pair on all
 `C / Jⁿ`, `C` is `J`-adically complete and `O_a ⊗ T`, `O_b ⊗ T` are formally étale over `O`, then
@@ -211,7 +217,7 @@ theorem exists_ringHom_lift_of_isAdicComplete (ι : O →+* C) (J : Ideal C) [Is
     rw [hs, hs] at hy
     obtain ⟨z, hz⟩ := (Submodule.mem_smul_pointwise_iff_exists _ _ _).1
       (h3 m ((Submodule.mem_smul_pointwise_iff_exists _ _ _).2 ⟨y, hy⟩))
-    exact (Submodule.mem_smul_pointwise_iff_exists _ _ _).2 ⟨z, by rw [hs]; exact hz⟩
+    exact (Submodule.mem_smul_pointwise_iff_exists _ _ _).2 ⟨z, hz.1, (hs a z).trans hz.2⟩
   let φ' : T →ₐ[O] C ⧸ J :=
     { φ with commutes' := fun x ↦ RingHom.congr_fun hφ x }
   obtain ⟨ψ, hψ⟩ := exists_liftAlgHom_of_isAdicComplete J a b hJ' φ'

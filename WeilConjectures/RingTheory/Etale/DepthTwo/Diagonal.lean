@@ -28,13 +28,16 @@ is a prime `Q` of the completion `R^` of `R` along `ker μ` lying over the maxim
 (through `p₂`) with `p₁ b ∉ Q`, then `T` is étale over `O`
 (`RingTheory.DepthTwo.etale_of_diagonal`).
 
-Proof. The two pullbacks `T' = R ⊗_{p₁} T` and `T'' = R ⊗_{p₂} T` agree along the diagonal. Since
-`T'` is étale over `D(a) ∪ D(p₁ b)` and `(a, p₁ b)` is a regular pair on every `T'' / Iⁿ T''`,
-the identification `T' / I T' = T = T'' / I T''` lifts uniquely to `T' → T''^`
-(as in `RingTheory.DepthTwo.exists_liftAlgHom`); symmetrically (exchanging the roles through `τ`)
-it lifts to `T'' → T'^`, and by uniqueness of lifts the two lifts are inverse isomorphisms
-`R^ ⊗ T' ≅ R^ ⊗ T''`. At `Q` the left side is étale (as `p₁ b` is invertible), hence so is
-`R^_Q ⊗_O T`, and `T` is étale over `O` by faithfully flat descent along `O → R^_Q`.
+Proof. The two pullbacks `R^ ⊗_{p₁} T` and `R^ ⊗_{p₂} T` agree along the diagonal. Since `T` is
+étale over `D(a) ∪ D(b)` and `(p₁ a, p₁ b)` is a regular pair on every `(R^ ⊗_{p₂} T) / Iⁿ` (these
+are flat base changes of `T`, and `p₁ b ≡ p₂ b` modulo `I`), the identification
+`T = (R^ ⊗_{p₂} T) / I` lifts to a ring map `T → R^ ⊗_{p₂} T` which is `O`-linear through `p₁`
+(`RingTheory.DepthTwo.exists_ringHom_lift_of_isAdicComplete`). Together with the involution of
+`R^` induced by `τ` it gives an endomorphism of `R^ ⊗_{p₂} T`, semilinear for that involution,
+whose square is the identity modulo `I`; by Nakayama it is an automorphism
+(`RingTheory.DepthTwo.exists_semilinear_ringEquiv`). Hence `R^ ⊗_{p₂} T` is étale over
+`D(p₁ b)`, as it is over `D(p₂ b)`, and `T` is étale over `O` by faithfully flat descent along
+`O → R^_{p₁ b}` (faithfully flat as `Q` lies over the closed point of `O`).
 
 This is the key step of purity for normal covers of a scheme smooth over a normal base
 (`AlgebraicGeometry.Scheme.Hom.mem_etaleLocus_fromNormalization_of_smooth`), an input of blueprint
@@ -253,5 +256,69 @@ theorem exists_semilinear_ringEquiv (τ : R ≃+* R) (hτ : ∀ r, τ (τ r) = r
     ⟨fun x y h ↦ hbij.1 (by simp only [g, LinearMap.coe_mk, AddHom.coe_mk, h]),
       fun y ↦ ⟨σ₀ (hbij.2 y).choose, (hbij.2 y).choose_spec⟩⟩
   exact ⟨RingEquiv.ofBijective σ₀ hσ₀, hσ₀f⟩
+
+/-- The completion of `R` along the diagonal. -/
+local notation "𝓡" => AdicCompletion (RingHom.ker (algebraMap R O)) R
+
+set_option linter.unusedSectionVars false in
+/-- **Étaleness through the diagonal.** See the module docstring. Here `p₂ = algebraMap O R`, the
+section is `algebraMap R O` and `p₁ = τ ∘ p₂`. -/
+theorem etale_of_diagonal (τ : R ≃+* R) (hτ : ∀ r, τ (τ r) = r)
+    (hτμ : ∀ r, algebraMap R O (τ r) = algebraMap R O r)
+    {T : Type*} [CommRing T] [Algebra O T] [Module.Finite O T] {a b : O}
+    (ha : τ (algebraMap O R a) = algebraMap O R a) (hT : IsRegularPair a b T)
+    [Algebra.Etale (Localization.Away a) (Localization.Away a ⊗[O] T)]
+    [Algebra.Etale (Localization.Away b) (Localization.Away b ⊗[O] T)]
+    (Q : Ideal (AdicCompletion (RingHom.ker (algebraMap R O)) R)) [Q.IsPrime]
+    (hQ : Q.comap (algebraMap O (AdicCompletion (RingHom.ker (algebraMap R O)) R)) =
+      maximalIdeal O)
+    (hQb : algebraMap R (AdicCompletion (RingHom.ker (algebraMap R O)) R)
+      (τ (algebraMap O R b)) ∉ Q) :
+    Algebra.Etale O T := by
+  set s := algebraMap O 𝓡 b with hs
+  obtain ⟨σ, hσ⟩ := exists_semilinear_ringEquiv τ hτ hτμ ha hT
+  set θ := completionSwap τ hτ hτμ
+  -- `R^ ⊗_{p₂} T` is étale over `D(p₂ b)`
+  have : Algebra.Etale (Localization.Away s) (Localization.Away s ⊗[O] T) :=
+    etale_tensor_of_isUnit b _ (by
+      rw [IsScalarTower.algebraMap_apply O 𝓡 (Localization.Away s)]
+      exact IsLocalization.Away.algebraMap_isUnit s)
+  have : Algebra.Etale (Localization.Away s) (Localization.Away s ⊗[𝓡] (𝓡 ⊗[O] T)) :=
+    .of_equiv (Algebra.TensorProduct.cancelBaseChange O 𝓡 _ _ T).symm
+  -- hence over `D(p₁ b)`, by the semilinear automorphism
+  have h := etale_away_of_semilinear θ σ hσ s
+  have hθs : θ s = algebraMap R 𝓡 (τ (algebraMap O R b)) := by
+    rw [hs, IsScalarTower.algebraMap_apply O R 𝓡]
+    exact completionSwap_algebraMap τ hτ hτμ _
+  rw [hθs] at h
+  set s' := algebraMap R 𝓡 (τ (algebraMap O R b))
+  set L := Localization.Away s'
+  have : Algebra.Etale L (L ⊗[O] T) :=
+    .of_equiv (Algebra.TensorProduct.cancelBaseChange O 𝓡 L L T)
+  -- `O → R^_{p₁ b}` is faithfully flat, as `Q` lies over the closed point
+  have : Module.FaithfullyFlat O L := by
+    have : Module.Flat O 𝓡 := Module.Flat.trans O R 𝓡
+    have : Module.Flat O L := Module.Flat.trans O 𝓡 L
+    rw [Module.FaithfullyFlat.iff_flat_and_proper_ideal]
+    refine ⟨inferInstance, fun J hJ htop ↦ ?_⟩
+    have hu : IsUnit (algebraMap 𝓡 (Localization.AtPrime Q) s') :=
+      (IsLocalization.AtPrime.isUnit_to_map_iff _ Q s').2 hQb
+    let G : L →+* ResidueField (Localization.AtPrime Q) :=
+      (residue (Localization.AtPrime Q)).comp (awayLift s' hu).toRingHom
+    have hG (x : O) (hx : x ∈ J) : G (algebraMap O L x) = 0 := by
+      rw [IsScalarTower.algebraMap_apply O 𝓡 L, RingHom.comp_apply, AlgHom.toRingHom_eq_coe,
+        RingHom.coe_coe, awayLift_algebraMap, residue_eq_zero_iff,
+        IsLocalization.AtPrime.to_map_mem_maximal_iff _ Q, ← Ideal.mem_comap, hQ]
+      exact le_maximalIdeal hJ hx
+    have h1 : (1 : L) ∈ J • (⊤ : Submodule O L) := by
+      rw [htop]
+      exact Submodule.mem_top
+    have h0 : ∀ y ∈ J • (⊤ : Submodule O L), G y = 0 := by
+      intro y hy
+      induction hy using Submodule.smul_induction_on' with
+      | smul r hr n _ => rw [Algebra.smul_def, map_mul, hG r hr, zero_mul]
+      | add x _ y _ hx hy => rw [map_add, hx, hy, add_zero]
+    exact one_ne_zero ((map_one G).symm.trans (h0 1 h1))
+  exact .of_etale_tensorProduct_of_faithfullyFlat L
 
 end RingTheory.DepthTwo

@@ -107,7 +107,7 @@ lemma isRegularPair_algebraMap {O : Type*} [CommRing O] [Algebra O A] [Module O 
   rw [hs, hs] at hy
   obtain ⟨z, hz⟩ := (Submodule.mem_smul_pointwise_iff_exists _ _ _).1
     (h3 m ((Submodule.mem_smul_pointwise_iff_exists _ _ _).2 ⟨y, hy⟩))
-  exact (Submodule.mem_smul_pointwise_iff_exists _ _ _).2 ⟨z, by rw [hs]; exact hz⟩
+  exact (Submodule.mem_smul_pointwise_iff_exists _ _ _).2 ⟨z, hz.1, (hs a z).trans hz.2⟩
 
 end Regular
 
