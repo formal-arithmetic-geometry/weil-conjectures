@@ -18,7 +18,6 @@
   "def-weil-pbc-scheme-conventions",
   "def-weil-pbc-proetale-modules",
   "def-weil-pbc-etale-origin-witness",
-  "lem-cbc-etale-local-compact-support-extension",
   "lem-weil-pbc-comparison-pullback",
   "thm-weil-pbc-site-comparison",
   "def-weil-pbc-proetale-operations"
@@ -298,7 +297,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "split",
+ "status": "unsplit",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -402,33 +401,5 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-1565b93c9 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, the statements of all 27 cited nodes, the master and main-20261015 blueprint statement and proof (main-20261017 proof identical), the unit sk-prop-sf-cbc (it has no steps) and the Mathlib FullyFaithful.lean lines 195-222. Steps 1-6 are kept as reviewed; I re-checked their hypotheses: Nagata on an affine V, the open part j quasi-compact via the separated proper p, finite-torsion base change on each chart, b_p for qcqs p and p', and stalkwise detection of an already-built global E_L. Steps 7-10 are correct: the inverse of Phi_L is S A(E^-1) T^-1; the lift u of alpha'^-1 alpha comes from full faithfulness on D+; the naturality and cancellation chain re-derives, and the endpoints P(K), Q(K) do not depend on the witness. New node lem-cbc-global-transport-chart-normalization: every arrow type-checks, and I proved J Phi p_g(D)^-1 = Phi^c from three equalities: naturality of a gives S^c A(l_g q) = p_g(D) S, substitution gives J T = T^c A(q'), and the extension lemma gives q' E = E^c l_g q. It claims no invertibility and no witness independence, so it does not restate the item (D1 ok). It is self-contained, its stmt_deps match its citations exactly, and no duplicate exists (checked the nearest DAG hits: transport-identifies-exchange, sf-class-compact-support-comparison, pur-compact-support-transport, fix-lem-exchanges). New node lem-cbc-fully-faithful-isomorphism-lift is an exact match for FullyFaithful.isoEquiv at line 217 (inverse preimageIso at line 205). Coefficients stay the constant Lambda pro-etale D+ categories; no hypothesis is added and nothing is weakened. No SGA source is used, no new tool_uses are needed, and I made no fixes."
- },
- "lean": {
-  "module": "Sheaf.Paper.FiniteLevelProEtaleCompactSupportBaseChange",
-  "declaration": "AlgebraicGeometry.ProEtale.finiteLevelCompactSupportExchange_isIso",
-  "declarations": [
-   "AlgebraicGeometry.ProEtale.cbcCoefficientPullbackComparison",
-   "AlgebraicGeometry.ProEtale.cbcDerivedPullbackComparison",
-   "AlgebraicGeometry.ProEtale.cbcComparisonUnitIso",
-   "AlgebraicGeometry.ProEtale.cbcTransportedCompactSupport",
-   "AlgebraicGeometry.ProEtale.cbcCompactSupportComparison",
-   "AlgebraicGeometry.ProEtale.finiteLevelCompactSupportExchange",
-   "AlgebraicGeometry.ProEtale.finiteLevelCompactSupportExchange_isIso"
-  ],
-  "file": "lean/Sheaf/Paper/FiniteLevelProEtaleCompactSupportBaseChange.lean",
-  "statement": "theorem finiteLevelCompactSupportExchange_isIso (D : Etale.LocalCompactSupportExtension Λ) {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} {g : Y' ⟶ Y} {g' : X' ⟶ X} [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (sq : IsPullback g' f' f g) (K : FiniteCoefficientDerivedCategoryPlus X Λ) (W : EtaleOriginWitness X Λ K) : IsIso (finiteLevelCompactSupportExchange Λ D sq K W) ∧ ∀ (W' : EtaleOriginWitness X Λ K) (e : W.L ≅ W'.L), (finiteCoefficientComparison X Λ).mapDerivedCategoryPlus.mapIso e ≪≫ W'.alpha = W.alpha → finiteLevelCompactSupportExchange Λ D sq K W = finiteLevelCompactSupportExchange Λ D sq K W'",
-  "branch": "newtargets-dag",
-  "by": "Q24",
-  "date": "2026-10-16",
-  "existing": false,
-  "note": "The coherent extension data are supplied by the prerequisite existence theorem; the statement holds for every such simultaneously normalized system. Endpoints are A H Rnu, independent of the retained witness. The arrow is the prescribed conjugate of the specified etale exchange."
- },
- "reviewed_lean": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-9dc0c4d6b",
-  "group": "Q24",
-  "result": "pass",
-  "note": "Wrote review.md. Statements, dependencies, sources, canonical constructions, universes, edge cases, docstrings and records match. All three immutable Lean files compiled through scompile.py with exit 0 and no diagnostics. No fixes required."
  }
 }
