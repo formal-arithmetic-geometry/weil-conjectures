@@ -183,5 +183,23 @@
   "result": "pass"
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-def-roots"
+ "unit": "sk-def-roots",
+ "lean": {
+  "module": "Sheaf.Algebra.Polynomial.ReciprocalRootFactorization",
+  "declaration": "Polynomial.reciprocal_root_factorization",
+  "file": "lean/Sheaf/Algebra/Polynomial/ReciprocalRootFactorization.lean",
+  "statement": "theorem reciprocal_root_factorization {K : Type u} [Field K] {L : Type v} [Field L] [IsAlgClosed L] (ι : K →+* L) (P : K[X]) (h0 : P.eval 0 = 1) : (∀ β : L, (P.map ι).IsRoot β → β ≠ 0) ∧ Set.BijOn (fun β : L ↦ β⁻¹) {β : L | (P.map ι).IsRoot β} {α : L | α ≠ 0 ∧ (P.map ι).IsRoot α⁻¹} ∧ (∃ α : Fin P.natDegree → Lˣ, P.map ι = ∏ j, (1 - C (↑(α j) : L) * X)) ∧ (∀ α : Fin P.natDegree → Lˣ, P.map ι = ∏ j, (1 - C (↑(α j) : L) * X) → (∀ a : Lˣ, Fintype.card {j : Fin P.natDegree // α j = a} = rootMultiplicity (↑a⁻¹ : L) (P.map ι) ∧ rootMultiplicity (↑a⁻¹ : L) (P.map ι) = rootMultiplicity (↑a : L) (P.map ι).reverse) ∧ (∀ a : Lˣ, (∃ j, α j = a) ↔ (P.map ι).IsRoot (↑a⁻¹ : L)) ∧ (∀ α' : Fin P.natDegree → Lˣ, P.map ι = ∏ j, (1 - C (↑(α' j) : L) * X) → ∃ σ : Equiv.Perm (Fin P.natDegree), ∀ j, α' j = α (σ j)))",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8a7512da5",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause (roots nonzero; the specific β↦β⁻¹ bijection onto {α≠0, P_L(α⁻¹)=0}; ∃ α : Fin natDegree → Lˣ with P_L = ∏(1 - C α_j X); for every such family, counts = rootMultiplicity α⁻¹ P_L = rootMultiplicity α (reverse P_L), occurrence iff reciprocal root, uniqueness up to Equiv.Perm). No extra hypotheses (no injectivity, algebraicity or separability); independent universes u,v. Dependencies use Mathlib Field/IsAlgClosed/IsRoot/rootMultiplicity/reverse, consistent with the recorded bindings, including reciprocal_polynomial_of_constantCoeff_one's reverse. Edge cases r=0, P=0 excluded, repeated roots and K=L checked. Upstream eq_prod_one_sub_inv_roots and roots_reverse_of_monic are only partial, so a new module is justified. Docstrings carry the source place, blueprint tag and seven-step proof; proof is only sorry; node lean.statement is verbatim in the file; report sections present. nt_compile (--json, side overlay): clean in 3.0 s; axioms only sorryAx plus standard. No findings."
+ }
 }

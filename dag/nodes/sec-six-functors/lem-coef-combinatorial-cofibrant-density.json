@@ -28,7 +28,8 @@
  "stmt_deps": [
   "def-coef-complete-algebroid",
   "lem-coef-reedy-model-structure",
-  "lem-coef-hocolim-reindexing-zigzags"
+  "lem-coef-hocolim-reindexing-zigzags",
+  "lem-coef-space-valued-straightening"
  ],
  "proof": [
   {
@@ -201,5 +202,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CombinatorialCofibrantDensity",
+  "declaration": "HomotopicalAlgebra.combinatorial_cofibrant_density",
+  "file": "lean/Sheaf/CategoryTheory/CombinatorialCofibrantDensity.lean",
+  "statement": "theorem combinatorial_cofibrant_density (hM : CombinatorialModelCategory.{u, v, w} M) {κ : Cardinal.{w}} [Fact κ.IsRegular] (hLocal : IsCardinalLocallyPresentable M κ) (hfiltered : ∀ (I : Type v) [SmallCategory I] [IsCardinalFiltered I κ] (F G : I ⥤ M) (α : F ⟶ G), (∀ i : I, weakEquivalences M (α.app i)) → weakEquivalences M (colim.map α)) (Q : M ⥤ M) (q : Q ⟶ 𝟭 M) (hqWeak : ∀ X : M, weakEquivalences M (q.app X)) (hqCofibrant : ∀ X : M, IsCofibrant (Q.obj X)) (hqPresentable : ∀ X : M, isCardinalPresentable M κ X → isCardinalPresentable M κ (Q.obj X)) {C : Type v} [SmallCategory C] (ι : C ⥤ M) (hι : ι.FullyFaithful) (hC : ∀ c : C, IsCofibrant (ι.obj c) ∧ isCardinalPresentable M κ (ι.obj c)) (hRepresentative : ∀ Y : M, IsCofibrant Y → isCardinalPresentable M κ Y → ∃ c : C, Nonempty (ι.obj c ≅ Y)) (X : M) (R : ProjectiveHocolimReplacement (M := M) (CostructuredArrow ι X)) : weakEquivalences M (canonicalCofibrantDensityAugmentation ι X R)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "HomotopicalAlgebra.canonicalCofibrantDensityAugmentation",
+   "HomotopicalAlgebra.combinatorial_cofibrant_density"
+  ],
+  "note": "The helper canonicalCofibrantDensityAugmentation is the actual composite colim(Q_J V_X) -> colim V_X -> X (projective-replacement augmentation followed by the colimit map of the comma arrows), listed so the declaration index assigns it to this node. The comparison category and presentability use the universes of the landed hocolim interface (indexing categories in the hom universe v, presentability cardinals in w); downstream use is at w = v.",
+  "fixed_by": "NT-stage2-cc-c785af2df"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c785af2df",
+  "group": "NH",
+  "result": "fix",
+  "note": "Statement correct clause by clause against the node and Dugger Prop. 4.7: combinatorial hypothesis via the landed CombinatorialModelCategory.{u,v,w}, local kappa-presentability, filtered-colimit preservation of weak equivalences (not stronger), functorial cofibrant replacement preserving presentability, small full representative C, comma category CostructuredArrow, canonical augmentation built as the real composite, any X with no fibrancy. Universes follow the landed hocolim interface (shapes in v, presentability in w); the intended case is w=v; w<=v works and the thin w>v case was tested. nt_compile rc 0 with no errors; only sorryAx beyond standard axioms; no duplicates. FIX: the lean-record adds a declarations list including the helper canonicalCofibrantDensityAugmentation. Landing note: the SpaceValuedStraightening repair is byte-identical to Q19's already-landed one, so use --revert-nodes lem-coef-space-valued-straightening. Not this delivery's fault: source.place still says p.187 instead of p.188.; reverted the delivery's change of existing node(s) lem-coef-space-valued-straightening (--revert-nodes; kept as on newtargets-dag)"
  }
 }

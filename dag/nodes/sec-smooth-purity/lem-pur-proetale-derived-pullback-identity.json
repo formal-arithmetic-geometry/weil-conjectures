@@ -273,5 +273,31 @@
   "group": "Q112",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q112-6ab5939c4 (reviewer sub-agent of L); spot-checked: Read the full item, report, DAG guidance, unit/chapter, all cited node statements, and cited Stacks/Mathlib sources. Verified all seven proof steps, coefficient-map normalization, module scalar transport, unbounded derived localization, route compliance, duplicate searches, and zero-ring/empty-scheme cases. No new nodes or repairs required; accepted tool uses are the inverse-image comparison and scalar-extension lemmas. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleDerivedPullbackIdentity",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleDerivedPullback_identity",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleIdentityTransportedInverseImage",
+   "AlgebraicGeometry.Scheme.proEtaleIdentityModuleCoprojection",
+   "AlgebraicGeometry.Scheme.proEtaleIdentityPullbackTmul",
+   "AlgebraicGeometry.Scheme.proEtaleIdentityLocalization",
+   "AlgebraicGeometry.Scheme.proEtaleDerivedPullback_identity"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleDerivedPullbackIdentity.lean",
+  "statement": "theorem proEtaleDerivedPullback_identity (X : Scheme.{u}) (A : Type u) [CommRing A] [Finite A] : ∃ e : proEtaleSheafInverseImage (𝟙 X) CommRingCat.{u + 1} ≅ 𝟭 (Sheaf (ProEt.topology X) CommRingCat.{u + 1}), (∀ (F : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (U : X.ProEt), (e.hom.app F).hom.app (op U) = ((proEtaleIsoInverseImageIdentification (𝟙 X) CommRingCat.{u + 1}).hom.app F).app (op U) ≫ F.obj.map ((MorphismProperty.Over.mapId (P := @WeaklyEtale) ⊤ X (𝟙 X) rfl).inv.app U).op) ∧ e.hom.app (proEtaleConstantRing X A) = proEtaleCoefficientInverseImageMap (𝟙 X) A ∧ ∃ eM : proEtaleIdentityTransportedInverseImage X A ≅ 𝟭 (proEtaleRingModules X (proEtaleConstantRing X A)), (∀ (M : proEtaleRingModules X (proEtaleConstantRing X A)) (U : X.ProEt) (m : M.val.obj (op U)), (eM.inv.app M).val.app (op U) m = proEtaleIdentityModuleCoprojection X A M U m) ∧ ∃ alpha : proEtaleConstantRingPullback.{u} A (𝟙 X) ≅ 𝟭 (proEtaleRingModules X (proEtaleConstantRing X A)), (∀ (M : proEtaleRingModules X (proEtaleConstantRing X A)) (U : X.ProEtᵒᵖ) (m : ((proEtaleModuleInverseImage (𝟙 X) (proEtaleConstantRing X A)).obj M).val.obj U) (a : (proEtaleConstantRing X A).obj.obj U), (alpha.hom.app M).val.app U (proEtaleIdentityPullbackTmul X A M U m a) = a • (eM.hom.app M).val.app U m) ∧ (∀ (M : proEtaleRingModules X (proEtaleConstantRing X A)) (U : X.ProEtᵒᵖ) (m : M.val.obj U), (alpha.inv.app M).val.app U m = proEtaleIdentityPullbackTmul X A M U ((eM.inv.app M).val.app U m) 1) ∧ ∃ b : (proEtaleConstantRingPullback.{u} A (𝟙 X)).mapHomologicalComplex (ComplexShape.up ℤ) ≅ 𝟭 (CochainComplex (proEtaleRingModules X (proEtaleConstantRing X A)) ℤ), (∀ (K : CochainComplex (proEtaleRingModules X (proEtaleConstantRing X A)) ℤ) (j : ℤ), (b.hom.app K).f j = alpha.hom.app (K.X j)) ∧ ∃ gamma : proEtaleConstantRingDerivedPullback.{u} A (𝟙 X) ≅ 𝟭 (proEtaleDerivedCategory X A), ∀ K : CochainComplex (proEtaleRingModules X (proEtaleConstantRing X A)) ℤ, gamma.hom.app ((proEtaleIdentityLocalization X A).obj K) = (proEtaleRingDerivedPullbackFactors (𝟙 X) (proEtaleConstantRing X A) (proEtaleConstantRing X A) (proEtaleConstantRingComparison (𝟙 X) A)).hom.app K ≫ (proEtaleIdentityLocalization X A).map (b.hom.app K)",
+  "branch": "newtargets-dag",
+  "by": "Q82",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The single theorem includes the specified coefficient equality, the module comparison normalized by its distinguished small-model coprojection, both scalar-transport tensor formulas, and the representative-normalized natural isomorphism on ordinary unbounded derived categories. The four helpers have actual data: restriction of scalars, the published module adjunction unit followed by identity fibre-product restriction, the actual ordinary tensor sheafification unit, and Mathlib localization Q with existing sheafification instances explicitly instantiated. No new coefficient category or arbitrary choice of comparison is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-420aab1a7",
+  "group": "Q82",
+  "result": "pass",
+  "note": "Read the item node, all 7 statement dependencies and their recorded Lean (ProEtaleInverseImage, IsoSectionwiseInverseImage/ProEtaleIsomorphismInverseImage, ProEtaleOperations, ProEtaleConstantRingOperations, TensorProduct changeOfRings), the report and the module. The commit touches only the report, the module and a complete lean record; the statement is verbatim. Clauses match: e is pinned sectionwise to proEtaleIsoInverseImageIdentification followed by Over.mapId restriction, and e at A_X equals the specified coefficient map. eM is the inverse-image module with scalars restricted along c inverse, and eM inverse is pinned to the (U, delta_U) adjunction-unit coprojection. alpha has both tensor formulas on the actual changeOfRings sheafification generators (scalar first). b is termwise alpha, and gamma's value at Q K is the mapDerivedCategoryFactors component followed by Q(b) for all unbounded K. No extra hypotheses; the zero ring and empty scheme are covered; a single universe u is used with site universes u+1/u and no forced equality. Helpers carry real data, docstrings have source and blueprint tags, the only sorry is the theorem proof, and there is no substitute or duplicate notion. The Second reading section is the accepted 2026-10-17 placeholder. nt_compile.py --json on the module path: 20.6 s, exit code 0, no errors or warnings."
  }
 }

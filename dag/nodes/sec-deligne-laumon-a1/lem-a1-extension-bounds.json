@@ -12,7 +12,9 @@
   "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-extension-bounds.md",
   "place": "node lem-a1-extension-bounds, order 2790"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-frobenius-module-weights"
+ ],
  "proof": [
   {
    "text": "Choose the Frobenius-stable filtrations of $V'$ and $V''$ given by\n[def-weil-frobenius-module-weights] (of weights at most $w$);\npull back the filtration of $V''$ along the projection\n$V\\to V''$ and splice it after the filtration of $V'$. The graded\npieces are the graded pieces of $V'$ and the graded pieces of\n$V''$, so all their weights are at most $w$; by\n[def-weil-frobenius-module-weights] the module $V$ is mixed of\nweights at most $w$.",
@@ -66,5 +68,23 @@
   }
  },
  "chapter": "sec-deligne-laumon-a1",
- "unit": "sk-thm-dl-a1-upper"
+ "unit": "sk-thm-dl-a1-upper",
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.FrobeniusModuleExtensionBounds",
+  "declaration": "FrobeniusModule.IsMixedOfWeightsAtMost.of_shortExact",
+  "file": "lean/Sheaf/LinearAlgebra/FrobeniusModuleExtensionBounds.lean",
+  "statement": "theorem IsMixedOfWeightsAtMost.of_shortExact (p a ell : ℕ) [Fact (Nat.Prime p)] (ha : 1 ≤ a) [Fact (Nat.Prime ell)] (hellp : ell ≠ p) (Qlb : Type v) [Field Qlb] [Algebra (ℚ_[ell]) Qlb] (hQ : IsAlgClosure (ℚ_[ell]) Qlb) (iota : Qlb ≃+* ℂ) (A : FrobeniusModule.{u₁, v} Qlb) (B : FrobeniusModule.{u₂, v} Qlb) (C : FrobeniusModule.{u₃, v} Qlb) (f : A.carrier →ₗ[Qlb] B.carrier) (g : B.carrier →ₗ[Qlb] C.carrier) (hf : ∀ x : A.carrier, f (A.frobenius x) = B.frobenius (f x)) (hg : ∀ x : B.carrier, g (B.frobenius x) = C.frobenius (g x)) (hinj : Function.Injective f) (hexact : Function.Exact f g) (hsurj : Function.Surjective g) (w : ℝ) (hA : IsMixedOfWeightsAtMost p a ell ha hellp Qlb hQ iota A w) (hC : IsMixedOfWeightsAtMost p a ell ha hellp Qlb hQ iota C w) : IsMixedOfWeightsAtMost p a ell ha hellp Qlb hQ iota B w",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-182b88e01",
+  "group": "Q42",
+  "result": "pass",
+  "note": "I read the node, the source (master order 2790 and main-20261015/17 order 3134, same text), the landed def-weil-frobenius-module-weights module and the upstream FrobeniusModule structure. Every clause matches: three FrobeniusModule.{u1/u2/u3,v} Qlb with independent carrier universes; Frobenius-equivariant linear f and g; short exactness as injective f, Function.Exact f g and surjective g; the landed filtration predicate IsMixedOfWeightsAtMost with the same p, a, ell, ha, hellp, Qlb, hQ, iota on A and C and in the conclusion on B; w real. No extra assumptions and no universe restriction. The upstream HasWeightsAtMost.of_functionExact uses a different notion, the eigenvalue bound, so not reusing it is right. Edge cases checked: zero module (m=0), one end zero, a non-split Jordan block, different weights on the two ends, ell=2. stmt_deps gains only the landed weight node, which brief-stage2 l.140 allows; no other node field changed. lean.statement matches the file signature verbatim. The proof is only sorry, with no new definitions or nodes. Docstrings carry the source place, the blueprint tag and the proof steps; minor and accepted: they cite main-20261015 order 3134, not master order 2790. The report has a Worker report and a Second reading by Q42. nt_compile.py --json compiled the item cleanly in 2.7 s with no warnings. No findings."
+ }
 }

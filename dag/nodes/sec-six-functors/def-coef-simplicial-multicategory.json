@@ -1,0 +1,116 @@
+{
+ "id": "def-coef-simplicial-multicategory",
+ "kind": "definition",
+ "title": "Nonsymmetric simplicial multicategories and simplicial multifunctors",
+ "status": "split",
+ "statement": "Use simplicial sets [def-weil-pbc-simplicial-set] and Kan complexes [def-cbc-enhanced-diagrams-cones] in a fixed small universe. A nonsymmetric simplicial multicategory $P$ consists of a small set of colors, simplicial operation sets $P(c_1,\\ldots,c_n;d)$ for every finite ordered input list, including $n=0$, unary unit vertices, and simplicial substitution maps $P(y_1,\\ldots,y_m;z)\\times\\prod_{i=1}^m P(x_{i,1},\\ldots,x_{i,k_i};y_i)\\to P(x_{1,1},\\ldots,x_{m,k_m};z)$. Substitution is associative for three ordered levels and has the unary units as left and right units. Locally Kan means that every operation set, including each nullary set, is Kan. A simplicial multifunctor is a color map together with simplicial maps on all operation sets preserving the unary units and substitution.",
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "source": {
+  "document": "https://arxiv.org/html/1312.3178v4",
+  "place": "Definition 3.1.6; fibrancy in Lemma 3.1.8 and functorial category-of-operators construction of Definition 3.1.7."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "simplicial multicategory nonsymmetric operad category of operators",
+   "results": "OK 8 hits: CategoryTheory.SimplicialCategory, SSet, CategoryTheory.SimplicialObject, CategoryTheory.SimplicialNerve, CategoryTheory.CosimplicialObject, CategoryTheory.CosimplicialObject.instCategory, SimplexCategory.smallCategory, CategoryTheory.SimplicialObject.instSimplicialCategorySSet. No multicategory or operator construction.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coherent nerve of the category of operators of a locally Kan nonsymmetric simplicial multicategory is a nonsymmetric infinity operad",
+   "results": "OK 8 hits: CategoryTheory.nerve, CategoryTheory.nerveFunctor, CategoryTheory.Nerve.quasicategory, CategoryTheory.Nerve.isStrictSegal, CategoryTheory.SimplicialNerve, CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂, CategoryTheory.Nerve.nerveFunctor₂. None defines a multicategory.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplicialCategory, nerve",
+   "results": "OK 0 hits; loogle: unknown identifier 'SimplicialCategory'. Local source confirms CategoryTheory.SimplicialCategory is the binary enrichment API, not a multicategory.",
+   "date": "2026-10-17",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Multicategory|multicategory|operatorCategory|stringCategory in Mathlib/CategoryTheory, WeilConjectures, and lean/Sheaf; SimplicialMulticategory|SimplicialOperatorNerve in dag/lean_names_upstream.json; blueprint_refs.py search simplicial multicategory; rg -l simplicial multicategory dag/nodes",
+   "results": "msearch grep: OK 0 hits. Source and side Lean searches: no matches. Upstream names: no matches. Blueprint search: 0 blueprint nodes. DAG text matches only the assigned statement and its consumers lem-coef-operad-groupoid-operator-map and lem-coef-many-object-operad-accessibility; no definition node.",
+   "date": "2026-10-17",
+   "verdict": "new definition required"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-simplicial-operator-nerve",
+  "date": "2026-10-17",
+  "group": "Q03"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Finite-coefficient enriched diagram realization: the simplicial multicategory input to Definitions 3.1.6--3.1.7 and Lemma 3.1.8.",
+   "via": [
+    "lem-coef-simplicial-operator-nerve",
+    "lem-coef-many-object-operad-accessibility",
+    "lem-coef-algebroid-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialMulticategory",
+  "declaration": "CategoryTheory.SimplicialMulticategory.Data",
+  "declarations": [
+   "CategoryTheory.SimplicialMulticategory.flatten",
+   "CategoryTheory.SimplicialMulticategory.Data",
+   "CategoryTheory.SimplicialMulticategory.IsLocallyKan",
+   "CategoryTheory.SimplicialMulticategory.Map"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SimplicialMulticategory.lean",
+  "statement": "structure Data",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Actual operation spaces and all degreewise unit/substitution data. Both unit equations and the three-level associativity equation are explicit; HEq only suppresses canonical finite-list reindexing. Includes local Kan fibrancy and simplicial multifunctors."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8c6384c14",
+  "group": "Q03",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8c6384c14",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Read the item node, its 5 statement deps and their exact side declarations (CoherentNerveComparisonStatement with pinned vertex and edge comparison, IsOperad, Algebroid.power/objectDiagram/domain, SimplicialGroupoid.IsFibrant, leftFibration, cocartesianFibrationOver, IsMonoidalTransport) and both delivered modules. Every clause matches: the operator mapping formula with 0-based block indexing, composition by substitution, projection to the nerve of Δ^op fixed on vertices and edges, IsOperad under IsLocallyKan P, the unary fiber at [1], the string formula and composition, the cocartesian fibration and comparison equivalence with the relative nerve of [n]↦X^(n+1) with coordinate-selection transports, naturality on both sides, and left fibration for fibrant simplicial groupoids. No stronger hypotheses; the unconditional fiber isomorphisms hold strictly. Edge cases (empty words, nullary/empty operation spaces, non-injective φ, [0] fiber = C, a single universe u) are fine. The multicategory definition is real and its HEq axioms are satisfiable (lexicographic finSigmaFinEquiv); no duplicate in Mathlib or side. No hollow definitions or choice; a single sorry; docstrings and blueprint ids present; lean.statement verbatim; statement text unchanged; the report has the Worker report and Second reading by Q03 sections. nt_compile --json on both modules: exit 0, no diagnostics, twice. Minor: the report mentions a copied straightening node record that is absent from the snapshot; the module copy is the same as side's apart from one trailing blank line.; reverted the delivery's change of existing node(s) lem-coef-space-valued-straightening (--revert-nodes; kept as on newtargets-dag)"
+ }
+}

@@ -284,5 +284,36 @@
   "group": "Q74",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q74-f0c25b555 (reviewer sub-agent of L); spot-checked: Read all six steps, cited statements, sources and route. Corrected C1/C4 in Step 6 by citing the existing normalized derived coefficient adjunction. Canonical cone comparison, completed coefficients, finite reductions and edge cases check out; no cycles or new nodes. Statement unchanged. Review and corrected JSON written under the review directory.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralLineTensorComparison",
+  "declaration": "WeilConjectures.integralLineTensorComparison",
+  "declarations": [
+   "WeilConjectures.integralLineSingle",
+   "WeilConjectures.integralLineOrdinary",
+   "WeilConjectures.integralLineCompleted",
+   "WeilConjectures.integralLineComparison",
+   "WeilConjectures.integralLineComplex",
+   "WeilConjectures.integralLineRepresentativeIso",
+   "WeilConjectures.integralLineFiniteComplex",
+   "WeilConjectures.integralLineFiniteTensor",
+   "WeilConjectures.integralLineFiniteRestrict",
+   "WeilConjectures.integralLineRoosProjection",
+   "WeilConjectures.integralLineTensorComparison"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralLineTensorComparison.lean",
+  "statement": "theorem integralLineTensorComparison (_hl : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (C : D l E X none) (hC : IsComplete l E X none C) (T : Mod l E X none) [T.IsFiniteLocallyFreeOfRank 1] : IsIso ((integralLineComparison l E X).app (C, T)) ∧ (∀ (C' : D l E X none) (_hC' : IsComplete l E X none C') (f : C ⟶ C') (T' : Mod l E X none) [T'.IsFiniteLocallyFreeOfRank 1] (eT : T ≅ T'), (integralLineOrdinary l E X).map (f, eT.hom) ≫ (integralLineComparison l E X).app (C', T') = (integralLineComparison l E X).app (C, T) ≫ (integralLineCompleted l E X).map (f, eT.hom)) ∧ ∀ (P : (Good l E X none).FullSubcategory) (e : DerivedCategory.Q.obj P.obj ≅ C), ∃ (hT : CochainComplex.IsKFlatIndependentCoefficients (J := topology X none) (R := ring l E X none) ((integralLineSingle l E X).obj T)) (hS : Good l E X none (integralLineComplex l E X P.obj T)), (integralLineRepresentativeIso l E X P T hT C e).hom ≫ (integralLineComparison l E X).app (C, T) ≫ (completion l E X none).map (integralLineRepresentativeIso l E X P T hT C e).inv ≫ (completionComparison l E X none).hom.app ⟨integralLineComplex l E X P.obj T, hS⟩ = DerivedCategory.Q.map (roosUnit l E X none (integralLineComplex l E X P.obj T)) ∧ ∀ n : ℕ, ∃ β : (integralLineFiniteComplex l E X n).obj (integralLineComplex l E X P.obj T) ≅ integralLineFiniteTensor l E X P.obj T n, (∀ (p q k : ℤ) (hpq : p + q = k) (V : X.ProEtᵒᵖ) (a : (finite l E X none n).obj.obj V) (x : (P.obj.X p).val.obj V) (y : (((integralLineSingle l E X).obj T).X q).val.obj V), (β.hom.f k).val.app V (generator l E X none n ((integralLineComplex l E X P.obj T).X k) V a (coefficientTensorGenerator.{u, t + 1, t} (topology X none) (ring l E X none) P.obj ((integralLineSingle l E X).obj T) p q k hpq V x y)) = coefficientTensorGenerator.{u, t + 1, t} (topology X none) (finite l E X none n) ((integralLineFiniteComplex l E X n).obj P.obj) ((integralLineFiniteComplex l E X n).obj ((integralLineSingle l E X).obj T)) p q k hpq V (generator l E X none n (P.obj.X p) V a x) (generator l E X none n (((integralLineSingle l E X).obj T).X q) V 1 y)) ∧ (integralLineComparison l E X).app (C, T) ≫ (completion l E X none).map (integralLineRepresentativeIso l E X P T hT C e).inv ≫ (completionComparison l E X none).hom.app ⟨integralLineComplex l E X P.obj T, hS⟩ ≫ DerivedCategory.Q.map (integralLineRoosProjection l E X (integralLineComplex l E X P.obj T) n ≫ (integralLineFiniteRestrict l E X n).map β.hom) = (integralLineRepresentativeIso l E X P T hT C e).inv ≫ DerivedCategory.Q.map (((augmentation l E X none).app (integralLineComplex l E X P.obj T)).app (op n) ≫ (integralLineFiniteRestrict l E X n).map β.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q135",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a664bc19c",
+  "group": "Q135",
+  "result": "pass",
+  "note": "Read the node, all 5 statement dependencies and the dependency Lean (IntegralDerivedOperationsOnSlices in full, the IsFiniteLocallyFreeOfRank definition). Every clause matches: completed ring R, derived complete C (IsComplete), T locally free of rank 1 in degree 0, ordinary tensor through the recorded duality model and coefficientTotalTensor, the recorded completedTensor. The comparison is the fixed whiskered completionUnit, with IsIso asserted; naturality in C and in line isomorphisms is stated; the representative clause equals Q.map roosUnit (c,0) for every good P and every e; the finite clause has beta pinned down on generators and uses the actual cone projection. No stronger assumptions; universes t and u independent (checked with pp.universes); edge cases covered. Ten helpers built from existing constructions, one sorry, docstrings with source and blueprint. lean.statement matches the file exactly; only the node's lean field changed. nt_compile: clean in 19.5 s on the rerun (the first run timed out on a dependency under load around 130); axioms propext, sorryAx, Classical.choice, Quot.sound. The second-reading section is the 2026-10-17 placeholder, accepted as in earlier reviews. No findings that block landing."
  }
 }

@@ -160,5 +160,56 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OperadicCorrespondence",
+  "declaration": "SSet.Enhanced.Operadic.Correspondence",
+  "declarations": [
+   "SSet.Enhanced.Operadic.IsActiveArrow",
+   "SSet.Enhanced.Operadic.IsActiveEdge",
+   "SSet.Enhanced.Operadic.IsActiveDiagram",
+   "SSet.Enhanced.Operadic.fiberInclusion",
+   "SSet.Enhanced.Operadic.fiberProjection",
+   "SSet.Enhanced.Operadic.HasRelativeSegalLimits",
+   "SSet.Enhanced.Operadic.Family",
+   "SSet.Enhanced.Operadic.IsFamilyMap",
+   "SSet.Enhanced.Operadic.familyMaps",
+   "SSet.Enhanced.Operadic.Correspondence",
+   "SSet.Enhanced.Operadic.zeroProjection",
+   "SSet.Enhanced.Operadic.IsConstantOverZero",
+   "SSet.Enhanced.Operadic.endpointZeroFiber",
+   "SSet.Enhanced.Operadic.targetColors",
+   "SSet.Enhanced.Operadic.targetColorInclusion",
+   "SSet.Enhanced.Operadic.activeTargetSlice",
+   "SSet.Enhanced.Operadic.activeTargetSource",
+   "SSet.Enhanced.Operadic.activeSlice",
+   "SSet.Enhanced.Operadic.activeSliceDiagram",
+   "SSet.Enhanced.Operadic.activeSliceToTarget",
+   "SSet.Enhanced.Operadic.IsInducedActiveCocone",
+   "SSet.Enhanced.Operadic.activeCocones",
+   "SSet.Enhanced.Operadic.activeCoconeInclusion",
+   "SSet.Enhanced.Operadic.activeColorCocones",
+   "SSet.Enhanced.Operadic.activeColorCoconeInclusion",
+   "SSet.Enhanced.Operadic.IsWeaklyOperadicallyColimiting",
+   "SSet.Enhanced.Operadic.blockArrow",
+   "SSet.Enhanced.Operadic.IsTupleConcatenation",
+   "SSet.Enhanced.Operadic.IsOperadicallyColimiting",
+   "SSet.Enhanced.Operadic.IsOperadicLeftKanExtension"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/OperadicCorrespondence.lean",
+  "statement": "structure Correspondence extends Family (Δ[1] : SSet.{u})",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of returned head 0686bf608efc: actual strict parameter fibers, full product-relative Segal limits, canonical active sharp slices and simplex-normalized induced cocones; zero-fiber-only Kan conditions; operadic colimits use canonical active color-cocone restriction and coherent inert block concatenations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ee8f0202",
+  "group": "NB",
+  "result": "pass",
+  "note": "Read the node, its 6 stmt_deps' exact declarations, the source place (GH A.3.1-A.3.3, A.2.1/A.2.2), the 328-line module and the report. Each clause matches: Family has the isofibration to the full product Delta^op x S, actual strict fibres satisfying IsGeneralizedOperad with no Kan clause, and product-relative Segal limits copied from the dependency's own convention. IsFamilyMap/familyMaps use the fixed-base overFunctors. Correspondence = Family Delta[1], verbatim lean.statement. Constancy is a cocartesian transport cylinder with an equivalence. Kan is required only on the two [0]-fibres. J_b is the strict pullback of the active sharp slice; I checked that this equals the slice of M_act. The induced cocone is unique. The weak colimit uses the canonical restriction of active colour cocones, giving the fibrewise mapping-space test. Operadic colimits test both one-sided concatenations with correct block offsets, n=0 included. No hollow defs, no sorry, docstrings and line widths fine, no stronger assumptions, single universe u. nt_compile.py: rc 0, 10.5 s, no warnings. The delivery's redundant lem-coef-space-valued-straightening change is already on main (Q19); the landing tool retries with --revert-nodes on the merge tool's refusal, so no fix is needed.; reverted the delivery's change of existing node(s) lem-coef-space-valued-straightening (--revert-nodes; kept as on newtargets-dag)"
  }
 }

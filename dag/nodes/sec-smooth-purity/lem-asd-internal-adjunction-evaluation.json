@@ -275,5 +275,24 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q18-f15e12c2d (reviewer sub-agent of L); spot-checked: Reviewed item and all seven steps against every cited DAG statement, current/master blueprint proofs, and Stacks Tags 07A6, 08J9, 08JA, 0GL1, 070I, 070K, and 0037. Verified finite-coefficient ordinary unbounded etale categories, compactification/Noetherian hypotheses, projection-map normalization, counit direction, natural Hom-bijection evaluation, edge cases, and no duplicate or circular nodes. Full review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.SmoothPurity.InternalAdjunctionEvaluation",
+  "declaration": "AlgebraicGeometry.Etale.internalAdjunctionEvaluation",
+  "statement": "theorem internalAdjunctionEvaluation (A : Type (u + 1)) [CommRing A] [Finite A] {X S : Scheme.{u}} (f : X ⟶ S) [HasCompactification f] [IsLocallyNoetherian X] [CompactSpace X] [IsLocallyNoetherian S] [CompactSpace S] (M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat A))) (K Q : DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat A))) (h : Q ⟶ (R((f)_*[ModuleCat A])).obj (((RHom(X)[ModuleCat A]).obj (op M)).obj ((R(f)^![ModuleCat A]).obj K))) : ((derivedTensorSymmetry (ModuleCat A) S).hom.app Q).app ((R(f)_![ModuleCat A]).obj M) ≫ ((derivedTensorHomAdjunction (ModuleCat A) ((R(f)_![ModuleCat A]).obj M)).homEquiv Q K).symm (h ≫ (((derivedHomRightDerivedLowerShriekIsoOfFinite A f).app (op M)).app K).hom) = ((derivedTensorSymmetry (ModuleCat A) S).hom.app Q).app ((R(f)_![ModuleCat A]).obj M) ≫ ((projectionMap (ModuleCat A) f).app M).app Q ≫ (R(f)_![ModuleCat A]).map (((derivedTensorHomAdjunction (ModuleCat A) M).homEquiv (L((f)^*[ModuleCat A]).obj Q) ((R(f)^![ModuleCat A]).obj K)).symm (((derivedUpperStarLowerStarAdjunction (ModuleCat A) f).homEquiv Q (((RHom(X)[ModuleCat A]).obj (op M)).obj ((R(f)^![ModuleCat A]).obj K))).symm h)) ≫ (rightDerivedUpperShriekAdjunction (ModuleCat A) f).counit.app K",
+  "by": "Q64",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/SmoothPurity/InternalAdjunctionEvaluation.lean",
+  "branch": "newtargets-dag",
+  "fixed_by": "NT-stage2-cc-ada15ea8a"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ada15ea8a",
+  "group": "Q64",
+  "result": "fix",
+  "note": "Statement correct in substance: the LHS and RHS match the node clause by clause (tensor-Hom transpose of alpha∘h = eps∘Rf_!(p)∘Pi). The canonical symmetry conjugates both sides consistently and the inner swaps of Pi cancel. projectionMap is the recorded adjoint-of-counit proper map followed by the open comparison; alpha is its conjugate. Edge cases and universes checked; no hollow definitions, sorry only, docstrings with source/blueprint, statement verbatim. FIX 1: removed the binder [IsIso (projectionMap (ModuleCat A) f)], which the node does not assume and which follows from Finite A; alpha now uses the recorded prop-asd-internal-adjunction declaration derivedHomRightDerivedLowerShriekIsoOfFinite A f (same isomorphism). FIX 2: the report falsely claimed lem-kun-tensor-sym was added to stmt_deps (it is reachable through lem-amb-proper-coproducts-projection); report corrected. Delivered and fixed files both compile with nt_compile.py --json, no errors or warnings (13.3 s / 13.9 s). Fixes: fixes/InternalAdjunctionEvaluation.lean, fixes/lem-asd-internal-adjunction-evaluation.report.md."
  }
 }

@@ -30,7 +30,8 @@
   "lem-coef-presentable-infinity-adjoints",
   "def-coef-presentable-infinity-category",
   "lem-coef-infinity-small-localization-saturation",
-  "lem-coef-operadic-algebra-presentability"
+  "lem-coef-operadic-algebra-presentability",
+  "lem-coef-accessible-localization-small-generators"
  ],
  "proof": [
   {
@@ -370,5 +371,44 @@
   "group": "Q20",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-01abbc5d9 (reviewer sub-agent of L); spot-checked: I read the item in full: all 12 steps, all 13 cited statements, the unit sk-prop-sf-biduality-general and chapter sec-six-functors, and the user lem-coef-algebroid-segal-localization-model. The source is Chu-Haugseng arXiv:2006.08269v2 §7, read online: Prop 7.6 relative-adjoint criterion, Rem 7.7/7.9/7.10, Not 7.11, Cor 7.12 hypotheses (1)/(2) and conclusions (i)-(iii). Cor 7.20 did not render in my fetch; Step 9, which uses it, is elementary and I checked it directly. The statement is true and not weakened. Step checks: (2) the block formula a(j-1)<k<=a(j) holds, including empty blocks, and it needs two-sided stability, which is assumed. (3) Fibre mapping spaces come from the K=Delta^0 pointwise-transport lemma plus homotopy-fibre detection over a discrete base, which gives universal arrows. (4) The dual parametric universal-arrow lemma gives a relative adjunction; q l = p holds because the base is the nerve of an ordinary category. The cocartesian criterion is applied only after q is shown inner. (5) Monoidal axioms are inherited by fullness; the tensor is L(iu (x) iv) and the unit is L1. (6) Two-variable colimit preservation uses iu (x) eta in W. (7) The universal property comes from F(eta) and H(epsilon) being componentwise equivalences. (8) Only cocompleteness of E is used. (9) The saturation closure matches the cited node exactly, so elementary=true is justified. (10)/(11) Generalized operads with non-discrete Kan O_[0] are handled, and the adjunction on algebras passes through hofibres over the identity. Acyclic over a 523-node closure, no SGA, no new nodes, and the tool use lem-cbc-enhanced-functor-cone-calculus is accepted. Two fixes: (1) B3, added def-coef-monoidal-infinity-category to the statement and to stmt_deps; (2) source.place no longer attributes the W-inverting universal property to Prop 7.6, which is only the relative-adjoint criterion; that property is agent-written. Not a defect: the report's line saying created.item/group were changed to the item/Q20 is wrong. The file keeps the correct historical Q39 creation record, and I left it unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AssociativeReflectiveLocalization",
+  "declaration": "SSet.Enhanced.AssociativeLocalization.associative_reflective_localization",
+  "declarations": [
+   "SSet.Enhanced.AssociativeLocalization.Inverted",
+   "SSet.Enhanced.AssociativeLocalization.TensorCompatible",
+   "SSet.Enhanced.AssociativeLocalization.IsLocalList",
+   "SSet.Enhanced.AssociativeLocalization.localOperad",
+   "SSet.Enhanced.AssociativeLocalization.localProjection",
+   "SSet.Enhanced.AssociativeLocalization.strong",
+   "SSet.Enhanced.AssociativeLocalization.strongInclusion",
+   "SSet.Enhanced.AssociativeLocalization.Inverts",
+   "SSet.Enhanced.AssociativeLocalization.IsCocontinuous",
+   "SSet.Enhanced.AssociativeLocalization.restriction",
+   "SSet.Enhanced.AssociativeLocalization.Universal",
+   "SSet.Enhanced.AssociativeLocalization.IsPostcomposition",
+   "SSet.Enhanced.AssociativeLocalization.HasLocalColours",
+   "SSet.Enhanced.AssociativeLocalization.IsWhiskered",
+   "SSet.Enhanced.AssociativeLocalization.AlgebraAdjunction",
+   "SSet.Enhanced.AssociativeLocalization.RestrictionNatural",
+   "SSet.Enhanced.AssociativeLocalization.Conclusions",
+   "SSet.Enhanced.AssociativeLocalization.associative_reflective_localization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/AssociativeReflectiveLocalization.lean",
+  "statement": "theorem associative_reflective_localization {E U : SSet.{max (u + 1) v}} [Quasicategory E] [Quasicategory U] (p : E ⟶ monoidalSimplexBase.{max (u + 1) v}) (hp : Algebroid.IsPresentablyMonoidal.{u, v} p) (L : monoidalUnderlying p ⟶ U) (i : U ⟶ monoidalUnderlying p) (adj : CoherentAdjunction L i) (hi : IsFullyFaithful i) (ha : Nonsymmetric.IsAccessibleFunctor.{u} (L ≫ i)) : (TensorCompatible p L (Inverted L) → Conclusions.{u, v} p L i) ∧ (∀ S : Set ((monoidalUnderlying p) _⦋1⦌), Small.{u} S → (∀ f : (monoidalUnderlying p) _⦋1⦌, Inverted L f ↔ strongSaturation.{u} (monoidalUnderlying p) S f) → TensorCompatible p L (fun f ↦ f ∈ S) → TensorCompatible p L (Inverted L) ∧ Conclusions.{u, v} p L i)",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The canonical full sub-operad on local lists, with its presentably monoidal projection and a relative coherent adjunction. Its color fiber is coherently equivalent to the given reflective target. Includes normalized monoidal universal properties on entire diagram categories, their cocontinuous restrictions, the small-generator alternative, the full local-color algebra subcategory for all generalized operads, and coherent algebra adjunctions with units/counits normalized on all simplices and restriction naturality. The added landed statement dependency supplies IsInEssentialImage; accessibility uses the recorded Nonsymmetric.IsAccessibleFunctor on iL. All helpers belong to this localization interface; no new independent notion or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5916ccb9b",
+  "group": "NN",
+  "result": "pass",
+  "note": "Read the node, the 7 stmt_deps and their exact declarations (MonoidalInfinityCategory, CompleteAlgebroid, OperadicAlgebraPresentability, AccessibleLocalizationSmallGenerators, EnhancedDiagramsCones, EnhancedStrongSaturation, PresentableInfinityCategory, CoherentAdjunction), the module, report and node records. Every clause matches: presentably monoidal nonsymmetric V; CoherentAdjunction L i + fully faithful i + accessible iL; W stable on both sides; the local-list full sub-operad, shown presentably monoidal with strong reflector and lax inclusion and identified with U by a specified equivalence (unit L1, tensor L(iu⊗iu')); universal property on all ihom K, including transformations, and its cocontinuous restriction; small-S generator criterion via strongSaturation; local-colour algebras for every generalized operad; normalized algebra adjunction for small operads; restriction naturality. Edge cases (empty list, nullary tensor, empty S and diagrams, nonterminal Kan zero fibre) and the common max(u+1) v universe are acceptable. No hollow definitions, only the theorem is sorry, docstrings carry source, blueprint id and all 12 steps, lines are <=100. lean.statement is verbatim and the declarations match. The stmt_deps gain is a landed node, no cycle. The SpaceValuedStraightening dependency module is identical to the current version. nt_compile.py on the module plus a #print check: rc=0, no errors or warnings. Minor, not defects: IsAccessibleFunctor and IsAccessibleEndofunctor unfold to the same predicate; the coherent-diagrams clause is rendered as equivalence on every diagram category, following node step 12.; reverted the delivery's change of existing node(s) lem-coef-space-valued-straightening (--revert-nodes; kept as on newtargets-dag)"
  }
 }

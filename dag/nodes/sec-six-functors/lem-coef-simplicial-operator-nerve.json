@@ -27,7 +27,9 @@
  "stmt_deps": [
   "def-coef-complete-algebroid",
   "lem-coef-operadic-algebra-presentability",
-  "lem-coef-coherent-nerve-comparison"
+  "lem-coef-coherent-nerve-comparison",
+  "def-coef-simplicial-multicategory",
+  "def-coef-simplicial-groupoid"
  ],
  "proof": [
   {
@@ -351,5 +353,39 @@
   "group": "Q51",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-61b4d15fe (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all 11 steps, the statement of each of the 12 cited nodes, and the unit and citer records. I also checked the source in Gepner–Haugseng arXiv:1312.3178 (PDF extracted locally): Def. 3.1.6–3.1.7, Lemma 3.1.8, Def. 4.1.1, Rem. 4.1.2/4.1.4, Def. 4.2.2 and Prop. 4.2.3(i)–(iv) with proof, pp. 20 and 36–38. Both displayed formulas match GH exactly, with GH's fibrant read as Kan / locally Kan. The source prints NC^{×n} in the proof of (iv); that is a typo for n+1 (Def. 4.2.2 and Rem. 4.1.2), and the node correctly uses n+1. The statement is unchanged and not weakened. I checked each step by hand. Steps 1–2: the block endpoints under substitution and the inner lifting over N(Δ^op) are correct. Steps 3 and 5: the inert and identity-component lifts give strict pullbacks over discrete Hom sets, including m=0, empty nullary operations and non-injective φ. Step 4: the mapping Segal map is literally the factor P(c_{φ(i-1)+1..φ(i)}; d_i), and n=0 gives a point fibre. Steps 7–9: these follow GH (iii)–(iv) using the restriction and projection clauses of the right-Kan node and the opposite form of the marked fibrewise criterion. Step 10: an edge factors as e_φ followed by a vertical equivalence; equivalence edges are cocartesian by the outer-horn tool, so the edge is cocartesian by the composition lemma, which gives the left fibration. Step 11 now claims only coherent naturality. I accept the tool use of lem-cbc-inner-fibration-equivalence-outer-horn-lift: it is a generic lemma, and no same-unit node states that equivalence edges are cocartesian. There are no new nodes. An rg search for the operator and string constructions found no duplicate, and there is no cycle. proof_deps matches the step uses, and no SGA is used. I made no changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialOperatorNerve",
+  "declaration": "CategoryTheory.SimplicialOperatorNerve.simplicial_operator_nerve",
+  "declarations": [
+   "CategoryTheory.SimplicialOperatorNerve.Word",
+   "CategoryTheory.SimplicialOperatorNerve.String",
+   "CategoryTheory.SimplicialOperatorNerve.blockLength",
+   "CategoryTheory.SimplicialOperatorNerve.blockIndex",
+   "CategoryTheory.SimplicialOperatorNerve.operatorHom",
+   "CategoryTheory.SimplicialOperatorNerve.stringHom",
+   "CategoryTheory.SimplicialOperatorNerve.UnaryModel",
+   "CategoryTheory.SimplicialOperatorNerve.OperatorModel",
+   "CategoryTheory.SimplicialOperatorNerve.StringModel",
+   "CategoryTheory.SimplicialOperatorNerve.StringFibers",
+   "CategoryTheory.SimplicialOperatorNerve.OperatorMap",
+   "CategoryTheory.SimplicialOperatorNerve.Statement",
+   "CategoryTheory.SimplicialOperatorNerve.simplicial_operator_nerve"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SimplicialOperatorNerve.lean",
+  "statement": "theorem simplicial_operator_nerve (N : CategoryTheory.CoherentNerveComparisonStatement.{u}) : Nonempty (CategoryTheory.SimplicialOperatorNerve.Statement.{u} N)",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The existence theorem supplies uniquely specified enriched operator/unary/string models, natural in simplicial multifunctors and functors. Every enriched composition and projection is normalized; fibers are normalized on all simplices. The relative-nerve comparison specifies the whole coherent power diagram and its coordinate-selection transports. No object is chosen from the postponed existence theorem. Returned-head repair: explicitly qualify the comparison binder and SimplicialOperatorNerve.Statement in the theorem signature. CofibrantSimplicialInversion.Statement is a distinct structure describing degreewise localization and homotopy pushouts, not the operator/string construction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8c6384c14",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Read the item node, its 5 statement deps and their exact side declarations (CoherentNerveComparisonStatement with pinned vertex and edge comparison, IsOperad, Algebroid.power/objectDiagram/domain, SimplicialGroupoid.IsFibrant, leftFibration, cocartesianFibrationOver, IsMonoidalTransport) and both delivered modules. Every clause matches: the operator mapping formula with 0-based block indexing, composition by substitution, projection to the nerve of Δ^op fixed on vertices and edges, IsOperad under IsLocallyKan P, the unary fiber at [1], the string formula and composition, the cocartesian fibration and comparison equivalence with the relative nerve of [n]↦X^(n+1) with coordinate-selection transports, naturality on both sides, and left fibration for fibrant simplicial groupoids. No stronger hypotheses; the unconditional fiber isomorphisms hold strictly. Edge cases (empty words, nullary/empty operation spaces, non-injective φ, [0] fiber = C, a single universe u) are fine. The multicategory definition is real and its HEq axioms are satisfiable (lexicographic finSigmaFinEquiv); no duplicate in Mathlib or side. No hollow definitions or choice; a single sorry; docstrings and blueprint ids present; lean.statement verbatim; statement text unchanged; the report has the Worker report and Second reading by Q03 sections. nt_compile --json on both modules: exit 0, no diagnostics, twice. Minor: the report mentions a copied straightening node record that is absent from the snapshot; the module copy is the same as side's apart from one trailing blank line.; reverted the delivery's change of existing node(s) lem-coef-space-valued-straightening (--revert-nodes; kept as on newtargets-dag)"
  }
 }

@@ -212,5 +212,32 @@
   "group": "Q138",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-76d3aa681 (reviewer sub-agent of L); spot-checked: I read the whole item and every node it cites, unit sk-lem-geo-cartier with blueprint paragraph 4, parent step 5 and the Stacks sources (07A6, 0D6D, 0G7E, 07A4, 0H7J, 03P5, 03QP(1) at etale-cohomology.tex l.8245). Statement: as far as I can tell it is unchanged (I did not run git) and it is true. It is a closed immersion with finite rings A->B->C and no flatness, in the ordinary etale constant-ring D(Z_et,-) category, the same as the parent's etale steps. The morphism is specified as the adjunct of i_* of the coefficient unit. It generalizes lem-asd-supported-kummer-scalar-source (Z/N->A only, no coherence) rather than duplicating it. Small cases D empty, D=Z, A=B, B=0 and nonflat Z/4->Z/2->F_4 all check, including (a.b).c=abc on both sides of the composition identity. Steps 1, 3, 4 and 5 are correct from the normalized unit and adjunct formulas and from the transitivity node's unit equality; I checked the adjunct computation for step 5. Faults repaired in fixes/: (C4/C1) step 2 cited the global-sections node lem-weil-pbc-constant-sheaf-sections-locally-constant and no node for the closed-pushforward stalk, which is not elementary on D (03QP). It now proves that i is finite and that its geometric fibre is one point or empty, and cites lemma-weil-pbc-finite-stalk-formula, lem-weil-pbc-constant-sheaf-geometric-stalk and prop-weil-pbc-geometric-stalks-exact, computing the stalk map as multiplication A(x)_A B->B. Step 3: removed an unproved parenthetical about naturality in closed immersions. proof_deps are recomputed. The unit cites no units, so I declared and accept split_report.tool_uses for 7 generic tools: the derived coefficient adjunction, successive derived normalization, stalk-as-pullback, inverse-image monoidality, the finite stalk formula, the constant-sheaf stalk and stalk conservativity. No new nodes, no statement, target or blueprint field changed, no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.GeoCartierCoeffExtension",
+  "declaration": "AlgebraicGeometry.Etale.geoCartierCoeffExtension",
+  "declarations": [
+   "AlgebraicGeometry.Etale.supportedConstantModule",
+   "AlgebraicGeometry.Etale.coefficientUnitModule",
+   "AlgebraicGeometry.Etale.supportedConstantDerived",
+   "AlgebraicGeometry.Etale.coefficientUnitDerived",
+   "AlgebraicGeometry.Etale.supportedCoefficientComparison",
+   "AlgebraicGeometry.Etale.geoCartierCoeffExtension"
+  ],
+  "file": "lean/Sheaf/SixFunctors/GeoCartierCoeffExtension.lean",
+  "statement": "theorem geoCartierCoeffExtension {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C] [Finite A] [Finite B] [Finite C] {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i] (φ : A →+* B) (ψ : B →+* C) : IsIso (supportedCoefficientComparison φ i) ∧ IsIso (supportedCoefficientComparison ψ i) ∧ IsIso (supportedCoefficientComparison (ψ.comp φ) i) ∧ coefficientUnitDerived (ψ.comp φ) i = coefficientUnitDerived φ i ≫ (Sheaf.derivedRestrictScalars Z.smallEtaleTopology φ).map (coefficientUnitDerived ψ i) ≫ (Sheaf.derivedRestrictScalarsCompIso Z.smallEtaleTopology rfl).hom.app (supportedConstantDerived (A := C) i) ∧ supportedCoefficientComparison (RingHom.id A) i = (AlgebraicGeometry.ProEtale.normalizedOriginScalarUnit Z.smallEtaleTopology (RingHom.id A) rfl).hom.app (supportedConstantDerived (A := A) i) ∧ (AlgebraicGeometry.ProEtale.pbcFixedScalarExtension Z.smallEtaleTopology ψ).map (supportedCoefficientComparison φ i) ≫ supportedCoefficientComparison ψ i = (AlgebraicGeometry.ProEtale.pbcFixedScalarExtensionComp Z.smallEtaleTopology φ ψ (ψ.comp φ) rfl).hom.app (supportedConstantDerived (A := A) i) ≫ supportedCoefficientComparison (ψ.comp φ) i",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of L H3 at returned head 6797fe139f26: replaces arbitrary existential coefficient maps by real direct-image coefficient-unit constructions and their specified adjuncts; identity normalization uses the existing canonical normalizedOriginScalarUnit. The natural-language statement is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7c60be9db",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Read the node, all 8 statement dependencies, the module, the report and the exact declarations: pbcFixedScalarExtension (= recorded scalarExtension of lem-pur-derived-change-of-rings), pbcFixedScalarExtensionComp (leftAdjointCompIso of derivedRestrictScalarsCompIso), normalizedOriginScalarUnit (leftAdjointIdIso of the sectionwise identity), lowerStarRestrictScalarsIso (Iso.refl), restrictScalarsCompIso and Mathlib mapDerivedCategorySingleFunctor. Hypotheses match the node (closed immersion; finite comm rings in Type (u+1), the recorded coefficient universe; no flatness or boundedness). α is the concrete adjunct of i_* of the constant 1↦1 unit; the earlier H3 fault (arbitrary existential maps) is fixed and the helpers do real construction. Checked truth: IsIso for φ, ψ, ψφ (stalk argument, holds for non-flat maps); conjunct 4 unit cocycle true by the constant-sheaf adjunction and canonical coherences; identity clause true via conjugateEquiv_leftAdjointIdIso_hom; composition clause reduces to conjunct 4 by conjugation, direction matches a_{A,B,C}. Edge cases D empty, D=Z, A=B, zero rings, ZMod 4→ZMod 2 are covered. One sorry, in the theorem only; docstrings carry the source and blueprint tag; the docstring carries the node's 5 proof steps. lean.statement is verbatim; only the lean field differs from the shared node; the report has a real Worker report and Second reading by Q05. nt_compile.py --json: exit 0, no diagnostics, item file 13.0 s. Notes, not faults: conjunct 4 is an extra true unit-level clause; the associator uses the fixed-ring pbcFixedScalarExtensionComp, which is the unit-characterised iso of lem-sfb in the ModuleCat encoding."
  }
 }

@@ -277,5 +277,26 @@
   "group": "Q11",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q11-8cf8dcb3e (reviewer sub-agent of L); spot-checked: Read the complete item, ten proof steps, eight cited statements, sources and unit/chapter route. Verified the unbounded contraction, canonical cohomology Hom bijection, perfection and arbitrary-splitting comparison; checked edge cases and DAG reuse/cycles. No new nodes or repairs. Detailed checks are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FieldComplexCohomologySplitting",
+  "declaration": "DerivedCategory.field_complex_cohomology_splitting",
+  "declarations": [
+   "DerivedCategory.field_complex_cohomology_splitting"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/FieldComplexCohomologySplitting.lean",
+  "statement": "theorem field_complex_cohomology_splitting (F : Type u) [Field F] : (∀ P : CochainComplex (ModuleCat.{u} F) ℤ, (∃ V T : ∀ n : ℤ, Submodule F (P.X n), (∀ n : ℤ, Disjoint (LinearMap.range (P.d (n - 1) n).hom) (V n) ∧ LinearMap.range (P.d (n - 1) n).hom ⊔ V n = LinearMap.ker (P.d n (n + 1)).hom ∧ IsCompl (LinearMap.ker (P.d n (n + 1)).hom) (T n))) ∧ (∀ V T : ∀ n : ℤ, Submodule F (P.X n), (∀ n : ℤ, Disjoint (LinearMap.range (P.d (n - 1) n).hom) (V n) ∧ LinearMap.range (P.d (n - 1) n).hom ⊔ V n = LinearMap.ker (P.d n (n + 1)).hom ∧ IsCompl (LinearMap.ker (P.d n (n + 1)).hom) (T n)) → ∃ E : HomotopyEquiv ({ X := fun n ↦ P.homology n, d := fun _ _ ↦ 0 } : CochainComplex (ModuleCat.{u} F) ℤ) P, (∀ n : ℤ, LinearMap.range (E.hom.f n).hom = V n) ∧ (∀ n : ℤ, LinearMap.ker (E.inv.f n).hom = LinearMap.range (P.d (n - 1) n).hom ⊔ T n) ∧ (∀ (n : ℤ) (x : P.cycles n), E.inv.f n (P.iCycles n x) = P.homologyπ n x))) ∧ (∀ (P Q : CochainComplex (ModuleCat.{u} F) ℤ) (f : P ⟶ Q), QuasiIso f → ∃ E : HomotopyEquiv P Q, E.hom = f) ∧ (∀ P Q : DerivedCategory (ModuleCat.{u} F), Function.Bijective (fun f : P ⟶ Q ↦ fun n : ℤ ↦ (homologyFunctor (ModuleCat.{u} F) n).map f)) ∧ (∀ P : DerivedCategory (ModuleCat.{u} F), pointFiniteDimensional F P → (∃ (H : CochainComplex (ModuleCat.{u} F) ℤ) (a b : ℤ), (∀ n m : ℤ, H.d n m = 0) ∧ (∀ n : ℤ, Nonempty (H.X n ≅ (homologyFunctor (ModuleCat.{u} F) n).obj P)) ∧ H.IsStrictlyGE a ∧ H.IsStrictlyLE b ∧ (∀ n : ℤ, FiniteDimensional F (H.X n)) ∧ Nonempty (P ≅ Q.obj H)) ∧ IsPerfectRingComplex P) ∧ (∀ (P : DerivedCategory (ModuleCat.{u} F)) (_hP : pointFiniteDimensional F P) (e : P ⟶ P), e ≫ e = e → (∃ S N : CochainComplex (ModuleCat.{u} F) ℤ, (∀ n m : ℤ, S.d n m = 0 ∧ N.d n m = 0) ∧ (∀ n : ℤ, Nonempty (S.X n ≅ ModuleCat.of F (LinearMap.range ((homologyFunctor (ModuleCat.{u} F) n).map e).hom)) ∧ Nonempty (N.X n ≅ ModuleCat.of F (LinearMap.ker ((homologyFunctor (ModuleCat.{u} F) n).map e).hom))) ∧ ∃ (i : Q.obj S ⟶ P) (r : P ⟶ Q.obj S) (j : Q.obj N ⟶ P) (s : P ⟶ Q.obj N), i ≫ r = 𝟙 (Q.obj S) ∧ r ≫ i = e ∧ j ≫ s = 𝟙 (Q.obj N) ∧ s ≫ j = 𝟙 P - e ∧ ∃ α : P ≅ Q.obj S ⊞ Q.obj N, α.hom = biprod.lift r s ∧ α.inv = biprod.desc i j ∧ ∀ v : P ⟶ P, v ≫ e = e ≫ v → α.inv ≫ (e ≫ v) ≫ α.hom = biprod.map (i ≫ v ≫ r) 0) ∧ (∀ (v : P ⟶ P) (_hv : v ≫ e = e ≫ v) (S S' : DerivedCategory (ModuleCat.{u} F)) (i : S ⟶ P) (r : P ⟶ S) (i' : S' ⟶ P) (r' : P ⟶ S'), i ≫ r = 𝟙 S → r ≫ i = e → i' ≫ r' = 𝟙 S' → r' ≫ i' = e → (i ≫ r') ≫ (i' ≫ r) = 𝟙 S ∧ (i' ≫ r) ≫ (i ≫ r') = 𝟙 S' ∧ (i ≫ v ≫ r) ≫ (i ≫ r') = (i ≫ r') ≫ (i' ≫ v ≫ r')))",
+  "branch": "newtargets-dag",
+  "by": "N4",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3fe62418c",
+  "group": "N4",
+  "result": "pass",
+  "note": "Node statement/deps/proof unchanged vs side clone; lean.statement verbatim equal to file signature. All clauses checked against node: complements Z=B⊕V, P=Z⊕T with normalized HomotopyEquiv H(P)→P for every choice (range V, ker B⊔T, inv on cycles = homologyπ); QuasiIso f → HomotopyEquiv with hom=f; canonical Hom_D(P,Q)→∏_n Hom(H^nP,H^nQ) bijective; pointFiniteDimensional ⇒ bounded FD zero-differential model and IsPerfectRingComplex; idempotent splitting S≅im H(e), N≅ker H(e), i≫r=1, r≫i=e, j/s split 1−e, α=lift r s/desc i j with block identity (entries verified); arbitrary-splitting inverse and intertwining equations match (r'i)(rvi)=(r'vi')(r'i) in diagram order. Same HasDerivedCategory instance and universe u as dependencies; no extra hypotheses; edge cases P=0, empty support, e=0/1, v=0, unbounded/infinite-dim covered. No definitions, one sorry, docstrings with source and blueprint tag and 10 proof steps. nt_compile.py on the snapshot file: rc=0, 8.0 s, no errors or warnings. Second-reading section is an openly labelled self-review; this independent review covers it, not a fault."
  }
 }

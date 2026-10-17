@@ -213,5 +213,36 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q53-264872b31 (reviewer sub-agent of L); spot-checked: Read the item, cited statements, sources and route in full. Corrected Step 4’s coslice specialization and declared the accepted relative-coslice tool use. All 171 finite checks passed; dependency closure is acyclic. Statement unchanged; no new nodes. Details in review.md and corrected JSON under fixes/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.JoinPullbackSimplexExtension",
+  "declaration": "SSet.Enhanced.JoinPullbackSimplex.join_pullback_simplex_extension",
+  "declarations": [
+   "SSet.Enhanced.JoinPullbackSimplex.baseDiagram",
+   "SSet.Enhanced.JoinPullbackSimplex.total",
+   "SSet.Enhanced.JoinPullbackSimplex.terminal",
+   "SSet.Enhanced.JoinPullbackSimplex.lifted",
+   "SSet.Enhanced.JoinPullbackSimplex.extensions",
+   "SSet.Enhanced.JoinPullbackSimplex.restrictedCoslice",
+   "SSet.Enhanced.JoinPullbackSimplex.cosliceProjection",
+   "SSet.Enhanced.JoinPullbackSimplex.terminalEvaluation",
+   "SSet.Enhanced.JoinPullbackSimplex.lastVertex",
+   "SSet.Enhanced.JoinPullbackSimplex.join_pullback_simplex_extension"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/JoinPullbackSimplexExtension.lean",
+  "statement": "theorem join_pullback_simplex_extension (C J : Type u) [SmallCategory C] [SmallCategory J] (E : SSet.{u}) [Quasicategory E] (p : E ⟶ nerve C) (hp : InnerFibration p) (d : ℕ) (τ : Δ[d] ⟶ E) (g : orderedJoinFunctor.obj (Δ[d], nerve J) ⟶ nerve C) (hg : orderedJoinInl Δ[d] (nerve J) ≫ g = τ ≫ p) : Quasicategory (total p g) ∧ Mono (pullback.fst (pullback.snd p g) (orderedJoinInr Δ[d] (nerve J))) ∧ Subfunctor.range (pullback.fst (pullback.snd p g) (orderedJoinInr Δ[d] (nerve J))) = fullSubcomplex (total p g) (Set.range ((pullback.fst (pullback.snd p g) (orderedJoinInr Δ[d] (nerve J))).app (op ⦋0⦌))) ∧ SSet.yonedaEquiv (lifted p τ g hg) ∈ (total p g).nonDegenerate d ∧ (∀ i : Fin (d + 1), SSet.yonedaEquiv (SSet.stdSimplex.map (SimplexCategory.const ⦋0⦌ ⦋d⦌ i) ≫ lifted p τ g hg) ∉ Set.range ((pullback.fst (pullback.snd p g) (orderedJoinInr Δ[d] (nerve J))).app (op ⦋0⦌))) ∧ Quasicategory (extensions p τ g hg) ∧ (∃ e : extensions p τ g hg ≅ restrictedCoslice p τ g hg, (∀ (n : SimplexCategoryᵒᵖ) (s : (extensions p τ g hg).obj n), ((cosliceProjection p τ g hg).app n (e.hom.app n s)).extension ≫ pullback.fst p g = ((pullback.fst (coherentCoslicePostcompose τ p) (baseDiagram (τ ≫ p) g hg)).app n s).extension) ∧ e.hom ≫ terminalEvaluation p τ g hg ≫ pullback.snd (pullback.snd p g) (orderedJoinInr Δ[d] (nerve J)) = pullback.snd (coherentCoslicePostcompose τ p) (baseDiagram (τ ≫ p) g hg) ∧ leftFibration (e.hom ≫ terminalEvaluation p τ g hg)) ∧ IsIso (coherentCosliceRestriction (lastVertex d) (τ ≫ p)) ∧ (∀ (n : SimplexCategoryᵒᵖ) (s : (nerve J).obj n), ((coherentCosliceRestriction (lastVertex d) (τ ≫ p)).app n ((baseDiagram (τ ≫ p) g hg).app n s)).extension = orderedJoinFunctor.map (CategoryTheory.Prod.mkHom (lastVertex d) (SSet.yonedaEquiv.symm s)) ≫ g)",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the published ordered join, pure-factor inclusions, full-subcategory predicate, horn predicates, and coherent join coslices. Helpers give the actual pullbacks, lifted simplex and canonical beta. The comparison is characterized by its entire E-extension and terminal N(J) coordinate; last-vertex restriction is the existing coherentCosliceRestriction, asserted to be an isomorphism. No statement correction or dependency repair."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e71bcb304",
+  "group": "NU",
+  "result": "pass",
+  "note": "Clause-by-clause check of the node against the Lean, using the side-clone declarations: total/terminal/lifted are real pullbacks; the coslices are coherentJoinCoslice; baseDiagram restricts along id⋆σ with a proved naturality field; L is the node's pullback; V is a quasicategory; U is mono with range = fullSubcomplex; τ̄ is nondegenerate with no vertex in U; e is fixed by the whole-E-extension and ρ equations (so canonical); the left-fibration and L-quasicategory clauses, the last-vertex IsIso of coherentCosliceRestriction and the β equation are all present. No extra hypotheses; J empty, d=0 and degenerate τ covered; single universe u, everything bound. Docstrings carry the source and blueprint; the only sorry is the theorem proof; lean.statement is verbatim; the node changed only in lean. nt_compile --json clean (4.6 s, exit 0). Process note: 'Second reading by NU' is a disclaimer, not a reading (cause: dispatcher brief; Q63 precedent); my independent reading found no fault, so I did not return."
  }
 }
