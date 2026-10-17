@@ -15,9 +15,141 @@
   "def-coef-operadic-correspondence",
   "def-coef-monoidal-infinity-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B=N(\\Delta^{\\mathrm{op}}_{\\mathrm{act}})$, $C=\\mathcal V^\\otimes\\times_{N(\\Delta^{\\mathrm{op}})}B$, $T=c|_K$, and $v=c(*)$. The monoidal projection is an inner fibration, so its pullback $q:C\\to B$ is an inner fibration and $C$ is a quasicategory. Here $B$ is the nerve of a category, whose inner horns fill by composition; lifting first to $B$ and then to $C$ proves the assertion. The object $[1]$ is terminal in $\\Delta^{\\mathrm{op}}_{\\mathrm{act}}$: the opposite endpoint-preserving map $[1]\\to[r]$ must send $0$ to $0$ and $1$ to $r$, including $r=0$. Thus any simplex all of whose vertices are colors projects constantly to $[1]$, and a cone from any fixed base diagram to a color has a unique base extension. Define $X=C_{T/}$ and $Y=B_{qT/}$ by their join simplices. Apply the relative-coslice lemma with $K_0=\\varnothing$ to factor $Q:X\\to Y$ as a left fibration $X\\to C\\times_B Y$ followed by the pullback of $q$. Both factors are inner fibrations, and filling successively proves that $Q$ is an inner fibration. The same lemma with target the point says that $C_{h/}\\to C$ is a left fibration for every fixed diagram $h$. These constructions are made in a containing universe, so no size change or colimit existence is implicit.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-monoidal-infinity-category",
+    "def-coef-infinity-fibrations",
+    "lem-cbc-relative-coslice-left-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 3.1.1.7, coslice setup; nonsymmetric base from GH Definition A.2.1."
+   }
+  },
+  {
+   "text": "For $h=T,c$ put $Z_h=\\mathcal V\\times_C C_{h/}$ and let $\\psi:Z_c\\to Z_T$ be restriction. The relative-coslice lemma with $q:C\\to\\Delta^0$ and $K\\hookrightarrow K^{\\triangleright}$ proves that $\\psi$ is a left fibration; its restriction to color apices is a pullback. Both $Z_h\\to\\mathcal V$ are left fibrations as well. The join-slice comparison identifies their fibers at $w\\in\\mathcal V$ with the spaces of coherent cocones on $h$ with apex $w$, naturally in $h$ and its restrictions. In particular the fiber for $T$ is the active-cocone space in the definition of weak operadic colimit. To identify the fiber for $c$, let $A=K^{\\triangleright}$ and take the target-fixed arrow right fibration $E_w\\to C$. Its sections over $h:L\\to C$ are exactly the fixed-source, fixed-target arrow transformations $h\\to\\Delta_Lw$, by currying. Taking $\\varnothing\\hookrightarrow K$ in the cone-monomorphism lemma makes $\\{*\\}\\hookrightarrow A$ right anodyne. Right-fibration exponentiation, pulled back to the fixed diagram $c$, therefore makes evaluation $\\Gamma_c(E_w)\\to\\Gamma_v(E_w)$ a trivial Kan fibration. It is a weak homotopy equivalence by the Kan model theorem. The join-slice comparison, for $A$ and for the point, now identifies this map with the apex restriction $Z_c(w)\\to\\operatorname{Map}_C(v,w)$ up to its natural equivalences. All these comparisons commute with restriction to $K$. Write $e_w:Z_c(w)\\to\\operatorname{Map}_C(v,w)$ for this apex equivalence and $c^*$ for composition with $c$ into the coherent $T$-cocone space. After the stated comparisons, naturality gives $\\psi_w\\simeq c^*e_w$, including the higher coherences. Since $e_w$ is an equivalence, the defining mapping-space condition and two-out-of-three show that $c$ is weakly operadically colimiting if and only if every fiber map $\\psi_w$ is a weak homotopy equivalence.",
+   "uses": [
+    "def-coef-operadic-correspondence",
+    "lem-cbc-relative-coslice-left-fibration",
+    "lem-coef-join-slice-cocone-comparison",
+    "lem-coef-infinity-arrow-target-right-fibration",
+    "lem-coef-infinity-cone-mono-right-anodyne",
+    "lem-coef-infinity-right-fibration-exponentiation",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1312.3178v4",
+    "place": "GH Definition A.2.1 and Remark A.2.2, mapping-space interpretation; general cone comparisons expanded using the cited statements."
+   }
+  },
+  {
+   "text": "The fiber condition of Step 2 is equivalent to $\\psi$ being a trivial Kan fibration. For the forward implication, classify $Z_c\\to\\mathcal V$ and $Z_T\\to\\mathcal V$ by space-valued transport. The map $\\psi$ corresponds to a coherent transformation with precisely these fiber maps as its components. The componentwise equivalence criterion makes this transformation an equivalence. The mapping-space and composition compatibility of transport supplies an inverse map over $\\mathcal V$, with inverse homotopies in the Kan complexes of maps over $\\mathcal V$. The inverse homotopies are therefore equivalence edges after forgetting the base, so $\\psi$ is a functor equivalence of total quasicategories. Since $\\psi$ is a left fibration, the left-fibration equivalence-lifting lemma makes it an isofibration; the Joyal characterization makes it a Joyal fibration and a Joyal weak equivalence. The weak factorization system in the Joyal model structure then gives lifting against every monomorphism, in particular every boundary, including dimension zero. This is a trivial Kan fibration. Conversely, each fiber map of a trivial Kan fibration is again a trivial Kan fibration: a boundary lifting square in a pullback is the same square upstairs with its fixed base coordinate. The Kan model theorem makes each such map a weak homotopy equivalence, giving Step 2's condition. This proves both implications without identifying arbitrary categorical equivalences with strict-fiber equivalences.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-cbc-left-fibration-equivalence-lift",
+    "lem-coef-joyal-quasicategory-characterizations",
+    "lem-coef-joyal-model-structure",
+    "def-weil-pbc-trivial-kan-fibration",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "GH Remark A.2.2 / HA Remark 3.1.1.5; the fiberwise-to-total argument is written out."
+   }
+  },
+  {
+   "text": "Assume now that $c$ is weakly operadically colimiting, and fix the specified boundary $u$ and base extension $a$ in dimension $d>0$. Under the degreewise join formula these are a map $U:\\partial\\Delta^d\\to X$ and a map $A:\\Delta^d\\to Y$ with $QU=A|_{\\partial\\Delta^d}$; $U(0)=c$ and the apex of $U(d)$ is a color $w$. Define the monotone map $r:[d]\\times[1]\\to[d]$ by $r(i,0)=i$ and $r(i,1)=d$. Inside $P=\\Delta^d\\times\\Delta^1$ set $W=(\\partial\\Delta^d\\times\\{0\\})\\cup(\\Lambda_d^d\\times\\Delta^1)\\cup(\\Delta^d\\times\\{1\\})$. Its image under $r$ lies in $\\partial\\Delta^d$: every simplex of $\\Lambda_d^d$ omits some vertex $j<d$, and applying $r$ can add only the vertex $d$, so it still omits $j$; on the bottom boundary $r$ is the identity and on the top row it is constant. Thus $g_0=U(r|_W)$ is defined and lies over the prescribed map $Ar:P\\to Y$. It is constant with value $U(d)$ on the top row, and $g_0(0,0)=c$. A lift over the entire prism, restricted to its bottom row, gives exactly the required filler of $U$ over $A$. The join degree formula turns its two exact restriction equations into those requested for $\\widetilde u$.",
+   "uses": [
+    "def-coef-infinity-relative-cone"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 3.1.1.7, contraction setup; elementary calculation of the domain and its restriction."
+   }
+  },
+  {
+   "text": "Enlarge $W$ first by the $d$ simplices $b_i:\\Delta^d\\to P$ ($1\\leq i\\leq d$), whose vertex $j$ is $(j,0)$ for $j\\leq d-i$ and $(j-1,1)$ for $j>d-i$. Put $t=d-i$; its two blocks are $(0,0),\\ldots,(t,0)$ and $(t,1),\\ldots,(d-1,1)$. Deleting position $j<t$ or $j>t+1$ omits a first coordinate less than $d$, so that face lies in $\\Lambda_d^d\\times\\Delta^1\\subset W$. Deleting position $t+1$ gives a bottom-row boundary face when $i=1$, and for $i>1$ gives the face of $b_{i-1}$ obtained by deleting its last bottom vertex. Deleting position $t$ gives $(0,0),\\ldots,(t-1,0),(t,1),\\ldots,(d-1,1)$. If $t>0$, this face is mixed and has every first coordinate $0,\\ldots,d-1$, hence is not in $W$; it is in no earlier $b_h$, since $h<i$ implies $d-h>t$, whereas the displayed face contains $(t,1)$. Every proper subface of this missing face lies in another codimension-one face. Thus, for $i<d$, the old intersection is exactly $\\Lambda_t^d$, with $0<t<d$, and the inner fibration $Q$ fills the cell over the fixed map $Ar$. For $i=d$, $t=0$, the formerly missing face is entirely in the top row, so the old intersection is the full $\\partial\\Delta^d$. Keep this last boundary for Step 6. When $d=1$ there are no inner cells in this phase and both endpoints of $b_1$ are already present. In every case $b_i$ itself is new: it is mixed with all first coordinates $0,\\ldots,d-1$, and an earlier cell has no upper vertex $(t,1)$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 3.1.1.7, first prism filtration, with its final attachment made explicit."
+   }
+  },
+  {
+   "text": "The remaining first-phase cell $b_d$ has vertices $(0,0),(0,1),\\ldots,(d-1,1)$. Its first vertex is $c$ in $X$; its other vertices, with all intervening simplices on that face, form the constant diagram with value $U(d)$, whose apex is $w\\in\\mathcal V$. Under associativity of the ordered join, its full boundary over $X$ therefore consists of a map $\\partial\\Delta^{d-1}\\to Z_c$ together with its prescribed extension $\\Delta^{d-1}\\to Z_T$. Indeed $\\Delta^d=\\{0\\}\\star\\Delta^{d-1}$, and the two parts of its boundary are the face without $0$ and $\\{0\\}\\star\\partial\\Delta^{d-1}$. This is precisely a boundary lifting problem for $\\psi$. Step 3 fills it, also when $d-1=0$. It fills the cell over $Ar$: all its vertices after the first lie over $[1]$, so the terminality calculation in Step 1 makes its base extension from $qc$ unique. We have now extended $g_0$ across all $b_i$ with its old values fixed.",
+   "uses": [
+    "def-coef-infinity-relative-cone",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 3.1.1.7, exceptional first-phase cell; GH Remark A.2.2 gives precisely this lifting property."
+   }
+  },
+  {
+   "text": "Finally adjoin, in the order $k=1,\\ldots,d+1$, the maximal prism simplices $s_k:\\Delta^{d+1}\\to P$ with $s_k(j)=(j,0)$ for $j<k$ and $s_k(j)=(j-1,1)$ for $j\\geq k$. Deleting a position $j<k-1$, or $k<j<d+1$, omits a first coordinate less than $d$, so that face lies in $W$. Deleting position $k-1$ gives the top row when $k=1$, and for $k>1$ gives the face of $s_{k-1}$ with its first upper vertex removed. If $k\\leq d$, deleting the last position $d+1$ gives $b_{d-k+1}$, already attached. The remaining face, obtained by deleting position $k$, is $(0,0),\\ldots,(k-1,0),(k,1),\\ldots,(d,1)$. For $k\\leq d$ it is mixed with all first coordinates, so not in $W$, and its upper vertex $(d,1)$ excludes every $b_i$. Its bottom vertex $(k-1,0)$ excludes every earlier $s_l$, whose bottom block stops at $l-1<k-1$. For $k=d+1$ the remaining face is the entire bottom simplex, also absent from $W$ and all earlier cells because they omit $(d,0)$. Consequently each old intersection is exactly $\\Lambda_k^{d+1}$; all proper subfaces of its missing face belong to another face. For $k\\leq d$ this horn is inner, and $Q$ fills it over $Ar$. For $k=d+1$, the last edge is $(d,0)\\to(d,1)$, already in $\\Lambda_d^d\\times\\Delta^1\\subset W$. Its image under $r$ is the degenerate edge at $d$, so its image in $X$ under $g_0$ is a degenerate edge, an equivalence. The equivalence-edge outer-horn lemma, in dimension $d+1\\geq2$, fills the final horn over $Ar$. The $s_k$ exhaust $P$: each maximal chain of $[d]\\times[1]$ uses every first coordinate and changes its second coordinate exactly once, at $k-1$ for exactly one $k$. Every chain extends to a maximal chain. Restriction to the bottom row gives the requested $\\widetilde u$ as in Step 4. No equivalence condition on an original boundary arrow was used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "lem-cbc-inner-fibration-equivalence-outer-horn-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 3.1.1.7, second prism filtration and final outer horn."
+   }
+  },
+  {
+   "text": "Conversely, assume the boundary condition in the statement. Take any boundary lifting problem for $\\psi$ in dimension $m\\geq0$. Its lower simplex is a map $K\\star\\Delta^m\\to C$ with its final block in $\\mathcal V$; its upper boundary is a map $(K\\star\\{0\\})\\star\\partial\\Delta^m\\to C$ whose initial part is $c$. Glue these along $K\\star\\partial\\Delta^m$. Associativity and the degreewise join formula identify the union with $K\\star\\partial\\Delta^{m+1}$: the face without the initial post-$K$ vertex is the lower simplex, and the other faces are the upper boundary. The restriction at that initial vertex is $c$, and the final vertex is a color. The unique active maps to $[1]$ give a specified base extension $K\\star\\Delta^{m+1}\\to B$ of its projection, as in Step 1; this construction agrees on the overlap because those same maps are unique. Apply the assumed condition with $d=m+1>0$. Its filler gives the requested $m$-simplex in $Z_c$, fixing the upper boundary and mapping to the specified lower simplex. For $m=0$ the join $\\{0\\}\\star\\partial\\Delta^0$ is just the initial point and the construction glues $c$ and the prescribed $T$-cocone along $K$; thus surjectivity on vertices is included. Consequently $\\psi$ is a trivial Kan fibration, and Steps 3 and 2 show that $c$ is weakly operadically colimiting. Nothing in the proof requires $K$ to have vertices: for $K=\\varnothing$, the join coslices are the corresponding ambient categories and the same formulas apply. The apex $v$ was never assumed to lie over $[1]$; only the test apices $w$ were colors.",
+   "uses": [
+    "def-coef-infinity-relative-cone",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Proposition 3.1.1.7, reverse implication, including the dimension-zero lifting problem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "def-coef-infinity-relative-cone",
+  "def-coef-monoidal-infinity-category",
+  "def-coef-operadic-correspondence",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+  "lem-cbc-left-fibration-equivalence-lift",
+  "lem-cbc-relative-coslice-left-fibration",
+  "lem-coef-infinity-arrow-target-right-fibration",
+  "lem-coef-infinity-cone-mono-right-anodyne",
+  "lem-coef-infinity-right-fibration-exponentiation",
+  "lem-coef-join-slice-cocone-comparison",
+  "lem-coef-joyal-model-structure",
+  "lem-coef-joyal-quasicategory-characterizations",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-space-transport-classification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Proposition 3.1.1.7, printed pp. 319–321, reconstructed for the nonsymmetric terminal active color using GH Definition A.2.1 and Remark A.2.2. Sources read online, not archived; the mapping-space comparison and the final first-phase boundary attachment are expanded explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,10 +199,59 @@
    "results": "{\"t\": \"2026-10-17T00:48:59Z\", \"tool\": \"grep\", \"query\": \"operad|Operad|cocartesian.*horn|active.*slice|Segal.*cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Tactic/CategoryTheory/Slice.lean\", \"Mathlib/Algebra/NonAssoc/PreLie/Basic.lean\", \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\"], \"digest\": \"22cc050e391fe366\"}",
    "date": "2026-10-17",
    "verdict": "no match: independent second reading; semantic hits are ordinary category constructions, strict Segal data, Cartesian products of simplicial sets or ordinary horn fillers. The broad source grep finds only comments and an operads reference; no declaration supplies this quasicategorical operadic statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weak operadic colimit diagrams characterized by active join boundary lifting with final vertex a color",
+   "results": "{\"t\": \"2026-10-17T02:39:00Z\", \"tool\": \"leanfinder\", \"query\": \"Weak operadic colimit diagrams characterized by active join boundary lifting with final vertex a color\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Subcomplex.MulticoequalizerDiagram.isColimit\", \"SSet.Subcomplex.MulticoequalizerDiagram.isColimit'\", \"SSet.horn.isColimit\", \"HomotopicalAlgebra.AttachCells.isColimit₁\", \"CategoryTheory.Limits.hasInitialChangeDiagram\", \"HomotopicalAlgebra.AttachCells.isColimit₂\", \"CategoryTheory.MorphismProperty.colimitsOfShape_discrete_le_llp_rlp\", \"CategoryTheory.MorphismProperty.colimitsOfShape.of_isColimit\"], \"digest\": \"d5fb7070bb16e531\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: displayed hits are ordinary category colimits, ordinary simplicial horns or cell-colimit constructions; none gives a weak infinity-operadic colimit or this active join-boundary test. Both semantic phrasings, the Loogle result and the zero-hit source grep were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weak operadic colimits in monoidal infinity categories satisfy a join boundary extension criterion",
+   "results": "{\"t\": \"2026-10-17T02:39:10Z\", \"tool\": \"leansearch\", \"query\": \"Weak operadic colimits in monoidal infinity categories satisfy a join boundary extension criterion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.isColimitOfConeOfCoconeRightOp\", \"CommMonCat.FilteredColimits.colimit\", \"MonCat.Colimits.colimit\", \"CategoryTheory.Mon.hasLimitsOfShape\", \"CommMonCat.FilteredColimits.colimitCoconeIsColimit\", \"MonCat.FilteredColimits.colimitCoconeIsColimit\", \"CategoryTheory.MorphismProperty.colimitsOfShape.mk\", \"CategoryTheory.Mon.limitConeIsLimit\"], \"digest\": \"6552f1cc605f4260\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: displayed hits are ordinary category colimits, ordinary simplicial horns or cell-colimit constructions; none gives a weak infinity-operadic colimit or this active join-boundary test. Both semantic phrasings, the Loogle result and the zero-hit source grep were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicategory\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-17T02:39:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicategory\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: displayed hits are ordinary category colimits, ordinary simplicial horns or cell-colimit constructions; none gives a weak infinity-operadic colimit or this active join-boundary test. Both semantic phrasings, the Loogle result and the zero-hit source grep were read."
+  },
+  {
+   "tool": "grep",
+   "query": "operadic.*colimit|weak.*operadic|active.*coslice",
+   "results": "{\"t\": \"2026-10-17T02:39:11Z\", \"tool\": \"grep\", \"query\": \"operadic.*colimit|weak.*operadic|active.*coslice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: displayed hits are ordinary category colimits, ordinary simplicial horns or cell-colimit constructions; none gives a weak infinity-operadic colimit or this active join-boundary test. Both semantic phrasings, the Loogle result and the zero-hit source grep were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The universal property of an operadic colimit fills coherent active cones over simplex boundaries",
+   "results": "{\"t\": \"2026-10-17T02:39:13Z\", \"tool\": \"leanfinder\", \"query\": \"The universal property of an operadic colimit fills coherent active cones over simplex boundaries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn₃₁.desc.multicofork\", \"SSet.horn₃₂.desc.multicofork\", \"SimplicialObject.Splitting.isColimit\", \"SSet.horn₃₁.ι₀_desc\", \"SimplicialObject.Splitting.isColimit'\", \"SSet.horn₃₂.desc\", \"SSet.horn₃₁.desc\", \"SSet.horn.isColimit\"], \"digest\": \"797c79dddeb6e44d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: displayed hits are ordinary category colimits, ordinary simplicial horns or cell-colimit constructions; none gives a weak infinity-operadic colimit or this active join-boundary test. Both semantic phrasings, the Loogle result and the zero-hit source grep were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left fibration of infinity categories is a trivial Kan fibration when each map between its fibers is a weak equivalence",
+   "results": "{\"t\": \"2026-10-17T02:54:37Z\", \"tool\": \"leanfinder\", \"query\": \"A left fibration of infinity categories is a trivial Kan fibration when each map between its fibers is a weak equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.trivialFibrations_sub_weakEquivalences\", \"HomotopicalAlgebra.trivialFibrations_sub_fibrations\", \"HomotopicalAlgebra.mem_trivialFibrations_iff\", \"HomotopicalAlgebra.trivialFibrations\", \"HomotopicalAlgebra.mem_trivialFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibration_iff\"], \"digest\": \"cd4d6ffd436c5fd1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independently read the generic model-category and Quillen horn-fibration hits; none states the left-fibration fiberwise equivalence criterion or the operadic join-boundary property. The source grep has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "Quasicategory.*[Cc]olimit|[Oo]peradic|[Ll]eft[Ff]ibration",
+   "results": "{\"t\": \"2026-10-17T02:55:06Z\", \"tool\": \"grep\", \"query\": \"Quasicategory.*[Cc]olimit|[Oo]peradic|[Ll]eft[Ff]ibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: independently read the generic model-category and Quillen horn-fibration hits; none states the left-fibration fiberwise equivalence criterion or the operadic join-boundary property. The source grep has zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-correspondence-kan-filling",
@@ -96,5 +277,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operadic-active-cone-boundary",
+  "worker": "stage1",
+  "summary": "Retained the statement. Expanded the active join-coslice mapping-space test and its trivial Kan fibration interpretation using existing general nodes; proved both implications by the explicit contraction prism and by translating all boundaries for the color-apex restriction, including dimension zero. Corrected the uniform horn description at the last first-phase prism cell to its actual full boundary. No new nodes and no Mathlib leaves. Second reading expanded both face-deletion calculations and made the mapping-space comparison and inverse homotopies explicit; statement unchanged.",
+  "blueprint": "Proof paragraph 2, derived coefficient mapping-complex adjunction before R lim; operadic free extension in the fixed-object rectification chain: the operadic Kan-extension existence and parameter extension used to make the derived adjunction coherent. This prerequisite supplies active join-boundary criterion for a weak operadic colimit.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-relative-coslice-left-fibration",
+    "why": "General relative join-coslice restriction and apex left fibrations are used to form the test map and the inner coslice projection; no coefficient or geometric theorem is used, and this unit has no substitute with this relative statement."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Only its componentwise criterion for equivalences of coherent transformations is used with space-valued transport; this is general quasicategory infrastructure."
+   },
+   {
+    "node": "lem-cbc-left-fibration-equivalence-lift",
+    "why": "Its isofibration assertion upgrades the already constructed left fibration to a Joyal fibration; the coefficient unit has no equivalent lifting statement."
+   },
+   {
+    "node": "lem-cbc-inner-fibration-equivalence-outer-horn-lift",
+    "why": "Only the general last-edge-equivalence horn filler closes the contraction prism; it does not replace any unit-level coefficient argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-relative-coslice-left-fibration",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-left-fibration-equivalence-lift",
+  "lem-cbc-inner-fibration-equivalence-outer-horn-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-b1db7f569",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-b1db7f569 (reviewer sub-agent of L); spot-checked: PASS, no fixes. Statement and stmt_deps are unchanged against the side-DAG base. The statement is the nonsymmetric, absolute case of HA Prop. 3.1.1.7: weakly colimiting as defined in def-coef-operadic-correspondence, d>0, tuple apex allowed, only the last test vertex a color. Because [1] is terminal in Delta^op_act, the specified base extension a is unique whenever it exists, so it is harmless. The parent kan-filling uses the item in exactly this form in its Step 3. Steps 1-3: Q is an inner fibration via relative-coslice with K0 empty. psi is a left fibration, being a pullback of rho for K in K^triangleright with target the point. The apex comparison uses: the E_w right fibration, the point into K^triangleright being right anodyne, exponentiation pulled back to c, and the join-slice fiber comparison. Fiber equivalences make psi a trivial Kan fibration via transport, the componentwise criterion, isofibration, the Joyal characterizations and the WFS, including the empty set into Delta^0. The converse is a pullback to fibers. Steps 4-7: r(W) lies in the boundary of Delta^d; I re-derived every face deletion. b_i attaches along Lambda^d_{d-i}, b_d along its full boundary, filled by psi including vertex surjectivity at d=1. s_k attaches along inner horns, and s_{d+1} along Lambda_{d+1}^{d+1}, whose last edge is degenerate and is filled by the dual outer-horn lemma. The worker's correction of HA's uniform horn display is right. My own script on [d]x[1], d=1..5, confirms the attachments and exhaustion. Step 8: the gluing equals K*boundary(Delta^{m+1}), the base extension is by unique active maps (2-simplex compatibility checked), and m=0 is covered. No cycle (closure of 652 nodes). The 14 Mathlib searches cover all 3 kinds. HA and GH are not archived: WANTED is recorded and proof_origin is agent. No SGA. No new nodes. lem-coef-operadic-colimit-active-join-boundary (symmetric, cocartesian q, one direction, operadic hypothesis) is related but not a duplicate. Accepted tool_uses: the four sk-prop-sf-cbc lemmas (relative-coslice-left-fibration, enhanced-functor-cone-calculus componentwise criterion, left-fibration-equivalence-lift isofibration clause, inner-fibration-equivalence-outer-horn-lift dual clause), as generic black boxes. Not a target, so the base-change and coefficient checks do not apply."
  }
 }
