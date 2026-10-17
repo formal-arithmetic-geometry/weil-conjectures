@@ -153,5 +153,24 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-2dfd6b23f (reviewer sub-agent of L); spot-checked: The mathematics is correct; I read it all. The item says a valuation ring of a field K finitely generated over its prime field has height at most trdeg+1. That matches how lem-trf-riemann-zariski-finite-refinement uses it in step 8, and small cases agree (F_p; Q with Z_(p), height 1 = d+1; Q(x) with rank-2 valuations, height 2). Steps: 2 applies the relative Abhyankar inequality to get rrk(Gamma_K/Gamma_F) <= d. 3 needs Gamma_F -> Gamma_K injective, since A_F^x = A^x cap F^x, and tensoring with Q exact; then the prime-field node gives rrk(Gamma_F) <= 1, so rrk(Gamma_K) <= d+1. 4 uses height <= rrk. The three new nodes are true standard results, tested on small cases: the relative inequality on Q(x) with the Gauss and x-adic valuations, and Q with Z_(p) (the counterexample to the old absolute form); valuations of Q and F_p; Z_(p), lexicographic Z^2, and value group Q+Q*sqrt2. They are strictly smaller than the item and duplicate no existing node (rg over dag/nodes; the sbc Abhyankar nodes are the tame-ramification lemma; lem-trf-valuation-algebraic-height and lem-trf-valuation-value-group-torsion state different things). Everything is in the same unit, so there are no tool_uses. The Temkin 0707.3953 PDF is not in literature/ and Stacks has no Abhyankar inequality, so I could not check §2.1 / Cor 2.1.3(i) against the text: proof_origin is agent with WANTED, and the mathematics agrees with Bourbaki AC VI §10.3. FIX, in fixes/dag/nodes/sec-trace-formula: (B4) the three new statements were plain text, now TeX; (B3) 'valuation ring' and m_A were used without a definition, now defined inline, and the wrong phrase 'ordered-group quotient' became 'quotient abelian group'; item step 3 now writes out the injectivity and the flatness of Q. No statement's meaning changed and no node is dropped.; 4 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.AbhyankarFiniteTypeFieldHeight",
+  "file": "lean/Sheaf/TraceFormula/AbhyankarFiniteTypeFieldHeight.lean",
+  "declaration": "abhyankar_finite_type_field_height",
+  "statement": "theorem abhyankar_finite_type_field_height (F : Type u) (K : Type v) [Field F] [Field K] [Algebra F K] (hprime : (⊥ : Subfield K) = (algebraMap F K).fieldRange) (hfg : (⊤ : IntermediateField F K).FG) (d : ℕ) (hd : Algebra.trdeg F K = d) : ∀ (A : ValuationSubring K) (n : ℕ) (p : Fin (n + 1) → PrimeSpectrum A), StrictMono p → n ≤ d + 1",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-Codex-c13ee0940"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c13ee0940",
+  "group": "Q38",
+  "result": "fix",
+  "note": "Statement, source, dependencies, universes and edge cases agree. Fixed H8: added the theorem’s source place and four-step proof plan. Complete replacements are under fixes/; original and corrected modules compile cleanly through scompile.py. Full findings are in review.md."
  }
 }
