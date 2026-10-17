@@ -51,6 +51,8 @@ push an `Ext`-class forward along `G` and precompose with the comparison of cons
   image of `Hⁿ(S.X₂)` (`CategoryTheory.Sheaf.H.connecting_eq_zero_iff`).
 - `CategoryTheory.Sheaf.functorHZeroIso`: `H⁰` is the functor of sections over a terminal
   object.
+- `CategoryTheory.Sheaf.H.bijective_map_of_isIso`: an isomorphism of sheaves induces bijections on
+  cohomology.
 -/
 
 @[expose] public section
@@ -366,5 +368,14 @@ lemma Sheaf.H.map_nsmul_apply {C : Type u} [Category.{v} C] {J : GrothendieckTop
   induction m with
   | zero => rw [zero_smul, zero_smul, H.map_apply, Ext.mk₀_zero, Ext.comp_zero]
   | succ m ih => rw [succ_nsmul, succ_nsmul, H.map_add_apply, ih]
+
+/-- An isomorphism of sheaves induces a bijection on cohomology. -/
+lemma Sheaf.H.bijective_map_of_isIso {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
+    [HasSheafify J AddCommGrpCat.{w}] [HasExt.{w'} (Sheaf J AddCommGrpCat.{w})]
+    {F G : Sheaf J AddCommGrpCat.{w}} (f : F ⟶ G) [IsIso f] (n : ℕ) :
+    Function.Bijective (H.map f n) :=
+  Function.bijective_iff_has_inverse.2 ⟨H.map (inv f) n,
+    fun x ↦ by rw [← H.map_comp_apply, IsIso.hom_inv_id, H.map_id_apply],
+    fun x ↦ by rw [← H.map_comp_apply, IsIso.inv_hom_id, H.map_id_apply]⟩
 
 end CategoryTheory
