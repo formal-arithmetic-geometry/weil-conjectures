@@ -8,6 +8,8 @@ module
 public import WeilConjectures.RingTheory.Etale.Abhyankar
 public import WeilConjectures.RingTheory.Etale.DepthTwo.SmoothPurity
 public import WeilConjectures.RingTheory.Etale.DepthTwo.Spreading
+public import WeilConjectures.RingTheory.Etale.TraitSection.ReductionProof
+public import WeilConjectures.RingTheory.DiscreteValuationRing.EtaleRootsOfUnity
 
 /-!
 # Étaleness of the normalization near a section over a trait
@@ -38,7 +40,7 @@ section; by uniqueness of the lifts they are invariant under `Γ = Gal(K₂/K₁
 
 universe u
 
-open TensorProduct
+open TensorProduct IsLocalRing
 
 namespace Algebra
 
@@ -76,7 +78,31 @@ theorem etale_localization_integralClosure_of_height_eq_one (ε : B →ₐ[R₀]
         (Localization.AtPrime (q.comap ε) ⊗[B] integralClosure B L) ∧
       Module.Finite (Localization.AtPrime (q.comap ε))
         (Localization.AtPrime (q.comap ε) ⊗[B] integralClosure B L) := by
-  sorry
+  have hq0 : q ≠ ⊥ := by
+    rintro rfl
+    rw [Ideal.height_bot] at hq
+    exact zero_ne_one hq
+  let A := Localization.AtPrime q
+  obtain ⟨_, _⟩ := IsLocalization.AtPrime.isDiscreteValuationRing_of_height_eq_one q hq A
+  have hnA : IsUnit (Nat.card G : A) := by simpa using hG.map (algebraMap R₀ A)
+  obtain ⟨A₁, _, _, _, _, hEt, hloc, hff, ζ, hζ⟩ :=
+    IsDiscreteValuationRing.exists_etale_isPrimitiveRoot hnA
+  letI : Algebra R₀ A₁ := ((algebraMap A A₁).comp (algebraMap R₀ A)).toAlgebra
+  have : IsScalarTower R₀ A A₁ := .of_algebraMap_eq' rfl
+  have : Module.Flat R₀ A := IsLocalization.flat A q.primeCompl
+  have : Module.Flat R₀ A₁ := Module.Flat.trans R₀ A A₁
+  have hinj : Function.Injective (algebraMap R₀ A₁) := by
+    rw [IsScalarTower.algebraMap_eq R₀ A A₁]
+    exact (FaithfulSMul.algebraMap_injective A A₁).comp
+      (IsLocalization.injective A q.primeCompl_le_nonZeroDivisors)
+  have hq₁ : (maximalIdeal A₁).comap (algebraMap R₀ A₁) = q := by
+    have hmax : (maximalIdeal A₁).comap (algebraMap A A₁) = maximalIdeal A := by
+      ext x
+      simp [IsLocalRing.mem_maximalIdeal, mem_nonunits_iff, isUnit_map_iff]
+    rw [IsScalarTower.algebraMap_eq R₀ A A₁, ← Ideal.comap_comap, hmax]
+    exact Localization.AtPrime.under_maximalIdeal
+  exact etale_localization_integralClosure_of_baseChange (Bk := Bk) ε q hq0 G hfix hrank hG φ hφ
+    hφinj A₁ hinj hq₁ hζ (by sorry)
 
 include Bk in
 /-- **Étaleness of the normalization near a section over a trait** (trait case of the proof of
