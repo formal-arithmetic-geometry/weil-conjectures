@@ -4550,6 +4550,8 @@ public import WeilConjectures.WeilSheaf.DualIrreducible
 public import WeilConjectures.WeilSheaf.ExtensionByZero
 public import WeilConjectures.WeilSheaf.FiniteEtaleLisse
 public import WeilConjectures.WeilSheaf.FiniteLength
+public import WeilConjectures.WeilSheaf.FiniteLeray
+public import WeilConjectures.WeilSheaf.FinitePointCohomology
 public import WeilConjectures.WeilSheaf.Finiteness
 public import WeilConjectures.WeilSheaf.Fourier
 public import WeilConjectures.WeilSheaf.FourierInversion
@@ -4591,6 +4593,8 @@ public import WeilConjectures.WeilSheaf.OpenImmersion
 public import WeilConjectures.WeilSheaf.OpenImmersionRestriction
 public import WeilConjectures.WeilSheaf.Operations
 public import WeilConjectures.WeilSheaf.PoincareDuality
+public import WeilConjectures.WeilSheaf.PoincareDualityLisse
+public import WeilConjectures.WeilSheaf.ProperBaseChange
 public import WeilConjectures.WeilSheaf.ProperCohomology
 public import WeilConjectures.WeilSheaf.ProperCohomology.LowerShriek
 public import WeilConjectures.WeilSheaf.ProperCohomology.OpenImmersion
@@ -4642,6 +4646,7 @@ public import WeilConjectures.ZetaFunction.FinalTheorems
 public import WeilConjectures.ZetaFunction.HasseWeil
 public import WeilConjectures.ZetaFunction.IntegralFactors
 public import WeilConjectures.ZetaFunction.IntegralFrobeniusFactors
+public import WeilConjectures.ZetaFunction.LissePurity
 public import WeilConjectures.ZetaFunction.Rationality
 public import WeilConjectures.ZetaFunction.RealizationIndependence
 public import WeilConjectures.ZetaFunction.RelativePurity
