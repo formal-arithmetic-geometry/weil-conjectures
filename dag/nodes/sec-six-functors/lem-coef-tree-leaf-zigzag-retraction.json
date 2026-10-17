@@ -10,9 +10,67 @@
  "stmt_deps": [
   "def-coef-zigzag-homotopy-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $e$ be the unique edge incident to $l$. The inclusion of the graph of $T'$, fixing every vertex and edge of $T'$, extends uniquely to the free path functor $i:C_{T'}\\to C_T$. The graph map sending $l$ to $a$, sending $e$ to the identity $1_a$, and fixing every other vertex and generating edge extends uniquely to a functor $r:C_T\\to C_{T'}$: images of a directed edge word are obtained by replacing each occurrence of $e$ by $1_a$ and composing. Since $r$ fixes every generator in $C_{T'}$, the composite $r i$ is the identity functor.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Section 5.8(iii), printed p.25: finite-tree contraction by deleting a leaf; the fixed-word diagram-category formulation is expanded here."
+   }
+  },
+  {
+   "text": "Apply $i$ and $r$ componentwise to the finite vertex-and-horizontal-arrow diagrams defining $Z_w^{C_{T'} }(x,y)$ and $Z_w^{C_T}(x,y)$, and apply them componentwise to commuting vertical diagrams. Functoriality preserves the prescribed direction of each horizontal arrow, commutativity, identities, and composition; because $x,y\\ne l$ and both functors fix $T'$, endpoint components remain identities. This gives functors $I_w$ and $R_w$ in the stated directions. Applying $r i=1$ to every component gives $R_wI_w=1$ strictly, on objects and morphisms.",
+   "uses": [
+    "def-coef-zigzag-homotopy-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Section 5.8(iii), printed p.25: finite-tree contraction by deleting a leaf; the fixed-word diagram-category formulation is expanded here."
+   }
+  },
+  {
+   "text": "Suppose the incident edge is oriented $e:l\\to a$. First, on $C_T$ itself, put $c_l=e:l\\to a$ and $c_u=1_u$ for $u\\ne l$; we check $c_v\\circ f=i r(f)\\circ c_u$ for every arrow $f:u\\to v$ of $C_T$. Since the only edge at $l$ leaves $l$, no nonidentity directed path ends at $l$ or passes through $l$. Hence there are three cases. (a) $u,v\\ne l$: $f$ avoids $l$, so $ir(f)=f$ and both sides equal $f$. (b) $u=l\\ne v$: $f=g\\circ e$ with $g:a\\to v$ avoiding $l$, so $ir(f)=g$ and both sides equal $g\\circ e$. (c) $u=v=l$: the only arrow is $1_l$, $ir(1_l)=1_a$, and both sides equal $e$. The case $u\\ne l=v$ has no arrows. So $c:1_{C_T}\\Rightarrow ir$ is a natural transformation. For a zigzag diagram $D$ in $Z_w^{C_T}(x,y)$, take the components $c_{D_j}$ at its vertices $D_j$. They are arrows of $C_T$, so they are allowed vertical arrows because the pair in [def-coef-zigzag-homotopy-calculus] is $(C_T,C_T)$, and the endpoint components are identities because $x,y\\ne l$. Every horizontal arrow of $D$, whether it is displayed rightward or leftward, is an arrow $f:u\\to v$ of $C_T$, so the square above shows that these components form a commuting morphism $D\\to I_wR_wD$. A morphism $\\varphi:D\\to D'$ consists of vertical arrows $\\varphi_j:D_j\\to D'_j$ of $C_T$, and the same square for $f=\\varphi_j$ gives $I_wR_w(\\varphi)\\circ c_D=c_{D'}\\circ\\varphi$. This is the natural transformation $1\\Rightarrow I_wR_w$.",
+   "uses": [
+    "def-coef-zigzag-homotopy-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Section 5.8(iii), printed p.25: finite-tree contraction by deleting a leaf; the fixed-word diagram-category formulation is expanded here."
+   }
+  },
+  {
+   "text": "Suppose instead that $e$ is oriented $a\\to l$. On $C_T$ put $c_l=e:a\\to l$ and $c_u=1_u$ for $u\\ne l$; we check $f\\circ c_u=c_v\\circ ir(f)$ for every arrow $f:u\\to v$. Since the only edge at $l$ enters $l$, no nonidentity directed path starts at $l$ or passes through $l$. (a) $u,v\\ne l$: $f$ avoids $l$ and both sides equal $f$. (b) $u\\ne l=v$: $f=e\\circ g$ with $g:u\\to a$ avoiding $l$, $ir(f)=g$, and both sides equal $e\\circ g$. (c) $u=v=l$: $f=1_l$, $ir(f)=1_a$, and both sides equal $e$. The case $u=l\\ne v$ has no arrows. So $c:ir\\Rightarrow1_{C_T}$ is natural. As in the previous step, its components at the vertices of a zigzag $D$ are allowed vertical arrows with identity endpoint components, because $x,y\\ne l$. Applying the square to horizontal arrows of $D$, in either displayed direction, gives a morphism $I_wR_wD\\to D$. Applying it to the vertical arrows of a morphism $D\\to D'$ gives naturality in $D$. This gives the natural transformation $I_wR_w\\Rightarrow1$.",
+   "uses": [
+    "def-coef-zigzag-homotopy-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Section 5.8(iii), printed p.25: finite-tree contraction by deleting a leaf; the fixed-word diagram-category formulation is expanded here."
+   }
+  },
+  {
+   "text": "The constructions work for every finite signed word $w$, including the empty word and words with repeated vertices, because the component family is indexed by the finitely many diagram vertices and all checks are componentwise. Therefore the induced functors have the strict retraction $R_wI_w=1$ and the orientation-dependent natural transformation with the stated endpoint identities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+    "place": "Section 5.8(iii), printed p.25: finite-tree contraction by deleting a leaf; the fixed-word diagram-category formulation is expanded here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-zigzag-homotopy-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-2.pdf",
+  "place": "Section 5.8(iii), printed p.25; explicit leaf-collapse verification for fixed-word zigzag diagram categories."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -51,7 +109,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-free-factor-hammock-comparison",
@@ -78,5 +136,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-tree-leaf-zigzag-retraction",
+  "worker": "stage1",
+  "summary": "Checked the leaf-collapse statement against the Dwyer–Kan finite-tree contraction route and the existing definition of fixed-word zigzag categories. Expanded the proof into the graph-level retraction, induced componentwise functors, and the two orientation-specific naturality checks; no new child nodes are needed because the remaining facts are direct consequences of the free-path and zigzag definitions.",
+  "blueprint": "Realizes prop-coef-integral-exceptional-adjoint, proof paragraph 2: the hidden finite-tree contraction input in the Dwyer–Kan 5.8(iii) route, used by the fixed-word hammock comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-26012c480",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-26012c480 (reviewer sub-agent of L); spot-checked: I read the item in full, together with its only cited node def-coef-zigzag-homotopy-calculus, the parent lem-coef-free-factor-hammock-comparison (step 4 uses the item exactly as stated, with x=y≠l) and the neighbouring nodes. The source, Dwyer–Kan §5.8(iii), is not in literature/; it is recorded as WANTED, proof_origin=agent is correct, and I checked the statement directly. Statement: true, and no hypothesis was added or dropped. I tested the one-edge tree in both orientations, a three-vertex path with words +- and -+, the empty word, repeated l, and identity arrows at l. R_wI_w=1 holds strictly. x,y≠l is needed for the endpoint identities. A tree with a single vertex has no leaf, so that case does not arise. Steps 1, 2 and 5 are correct. Steps 3 and 4 had an argument gap that I repaired: step 3 (orientation l→a) never handled paths ending at l, and step 4 (orientation a→l) never handled paths starting at l; both left naturality in D (vertical arrows) implicit. Fix: fixes/dag/nodes/sec-six-functors/lem-coef-tree-leaf-zigzag-retraction.json changes only the texts of steps 3 and 4. Each now proves c: 1_{C_T}⇒ir (or ir⇒1_{C_T}) by a full four-case analysis on arrows, then applies the square to horizontal arrows and to vertical arrows. uses, the statement and all other fields are unchanged. There are no new nodes. My duplicate search over the whole DAG (tree/leaf with zigzag/free category) found only distinct siblings. The item does not restate its parent. The blueprint from/via is consistent with the parent. There are no off-unit uses or tool_uses, no SGA, and no target is involved.; 1 file(s) fixed by the reviewer"
  }
 }
