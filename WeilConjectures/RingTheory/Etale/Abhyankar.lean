@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.IsAdjoinRoot
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
@@ -19,7 +20,7 @@ a finite étale `F`-algebra with an action of a finite group `G` by `F`-algebra 
 such that `L` is Galois with group `G` (`[L : F] = |G|` and `L^G = F`). Assume `|G|` divides an
 integer `n` invertible in `O`. Then the extension is tamely ramified, and after adjoining an
 `n`-th root `t` of `π` it becomes unramified: the integral closure of `O₂ = O[t]/(tⁿ - π)` in
-`O₂ ⊗_O L` is finite étale over `O₂`
+`O₂ ⊗_O L` is finite étale over `O₂` (here `O₂` is any `O`-algebra presented as `O[X]/(Xⁿ - π)`)
 (`IsDiscreteValuationRing.etale_integralClosure_adjoinRoot`).
 
 This is Abhyankar's lemma ([Stacks 0EYG], [Stacks 09E8] for the tameness), an input of the trait
@@ -44,11 +45,10 @@ theorem etale_integralClosure_adjoinRoot (G : Type*) [Group G] [Finite G]
     [MulSemiringAction G L] [SMulCommClass G F L]
     (hrank : Module.finrank F L = Nat.card G)
     (hfix : ∀ x : L, (∀ g : G, g • x = x) → x ∈ Set.range (algebraMap F L))
-    {n : ℕ} (hGn : Nat.card G ∣ n) (hn : IsUnit (n : O)) {π : O} (hπ : Irreducible π) :
-    Algebra.Etale (AdjoinRoot (X ^ n - C π))
-        (integralClosure (AdjoinRoot (X ^ n - C π)) (AdjoinRoot (X ^ n - C π) ⊗[O] L)) ∧
-      Module.Finite (AdjoinRoot (X ^ n - C π))
-        (integralClosure (AdjoinRoot (X ^ n - C π)) (AdjoinRoot (X ^ n - C π) ⊗[O] L)) := by
+    {n : ℕ} (hGn : Nat.card G ∣ n) (hn : IsUnit (n : O)) {π : O} (hπ : Irreducible π)
+    (O₂ : Type u) [CommRing O₂] [Algebra O O₂] (hO₂ : IsAdjoinRoot O₂ (X ^ n - C π)) :
+    Algebra.Etale O₂ (integralClosure O₂ (O₂ ⊗[O] L)) ∧
+      Module.Finite O₂ (integralClosure O₂ (O₂ ⊗[O] L)) := by
   sorry
 
 end IsDiscreteValuationRing
