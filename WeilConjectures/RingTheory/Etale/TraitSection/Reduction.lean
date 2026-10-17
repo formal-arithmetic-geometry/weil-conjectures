@@ -82,3 +82,20 @@ theorem AlgHom.mem_range_algebraMap_of_forall_baseChange_eq {S L T ι : Type*} [
         TensorProduct.smul_tmul]
   rw [← hz]
   exact key z
+
+/-- Let `A₁` be a discrete valuation ring which is an `R₀`-algebra, and `r₀ ∈ R₀` nonzero with
+image in the maximal ideal of `A₁`. Then every nonzero element of `A₁` divides the image of a
+nonzero element of `R₀`. -/
+theorem IsDiscreteValuationRing.exists_dvd_algebraMap {R₀ A₁ : Type*} [CommRing R₀]
+    [CommRing A₁] [IsDomain A₁] [IsDiscreteValuationRing A₁] [Algebra R₀ A₁] {r₀ : R₀}
+    (hr₀ : algebraMap R₀ A₁ r₀ ≠ 0) (hm : algebraMap R₀ A₁ r₀ ∈ IsLocalRing.maximalIdeal A₁)
+    {a : A₁} (ha : a ≠ 0) : ∃ m : ℕ, a ∣ algebraMap R₀ A₁ (r₀ ^ m) ∧
+      algebraMap R₀ A₁ (r₀ ^ m) ≠ 0 := by
+  obtain ⟨ϖ, hϖ⟩ := IsDiscreteValuationRing.exists_irreducible A₁
+  obtain ⟨m, u, rfl⟩ := IsDiscreteValuationRing.eq_unit_mul_pow_irreducible ha hϖ
+  have hdvd : ϖ ∣ algebraMap R₀ A₁ r₀ := by
+    rw [← Ideal.mem_span_singleton, ← (irreducible_iff_uniformizer ϖ).1 hϖ]
+    exact hm
+  refine ⟨m, ?_, by rw [map_pow]; exact pow_ne_zero m hr₀⟩
+  rw [map_pow]
+  exact (Units.mul_left_dvd.2 dvd_rfl).trans (pow_dvd_pow_of_dvd hdvd m)
