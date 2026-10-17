@@ -35,8 +35,10 @@ namespace Etale
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 /-- The characteristic of a finite ring is nonzero. -/
-instance neZero_ringChar_of_finite : NeZero (ringChar Λ) :=
+theorem neZero_ringChar_of_finite : NeZero (ringChar Λ) :=
   ⟨CharP.char_ne_zero_of_finite Λ (ringChar Λ)⟩
+
+attribute [local instance] neZero_ringChar_of_finite
 
 variable (k : Type u) [Field k] [IsAlgClosed k] [HasInvertibleExponent Λ (Spec (.of k))]
 

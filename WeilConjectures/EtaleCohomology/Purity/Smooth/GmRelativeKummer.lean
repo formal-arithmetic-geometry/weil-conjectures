@@ -49,6 +49,8 @@ open Scheme
 
 namespace Etale
 
+attribute [local instance] neZero_ringChar_of_finite
+
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 /-- The Kummer class of the coordinate of `𝔾_{m,Ω}` is free of rank one over every
