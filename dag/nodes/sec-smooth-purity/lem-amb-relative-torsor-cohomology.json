@@ -156,17 +156,69 @@
    }
   },
   {
-   "text": "For canonicity and pullback naturality extend the relative construction to bounded below complexes. Write $F(I)=C(\\Gamma(T,I)\\to\\Gamma(V,j^{-1}I))$ on the homotopy category. The homotopy formula in step 7 shows that this is a functor. Its shift isomorphism $F(I[1])\\to F(I)[1]$ is $(a,b)\\mapsto(a,-b)$: the respective differentials are $(-da,r(a)+db)$ and $(-da,-r(a)+db)$. For a chain map $f:I\\to J$, order the summands of $F(\\operatorname{Cone}(f))^n$ as $(x,y,z,w)\\in A_J^n\\oplus A_I^{n+1}\\oplus B_J^{n-1}\\oplus B_I^n$. Its differential is $(d_Jx+f_Ty,-d_Iy,r_Jx-d_Jz-f_Vw,r_Iy+d_Iw)$. Write $\\Phi(x,y,z,w)=(x,z,y,-w)$. In the target order $(X,Z,Y,W)$, the cone differential is $d_{\\mathrm{out}}(X,Z,Y,W)=(d_JX+f_TY,r_JX-d_JZ+f_VW,-d_IY,-r_IY+d_IW)$. Substituting $(X,Z,Y,W)=(x,z,y,-w)$ gives the identity $$d_{\\mathrm{out}}\\Phi(x,y,z,w)=(d_Jx+f_Ty,r_Jx-d_Jz-f_Vw,-d_Iy,-r_Iy-d_Iw)=\\Phi d_{\\mathrm{in}}(x,y,z,w).$$ Thus $\\Phi$ is an isomorphism of complexes, with inverse $(X,Z,Y,W)\\mapsto(X,Y,Z,-W)$. It respects the cone inclusion. For the boundary convention $-p$, the two routes to $F(I)[1]$ both give $(-y,w)$: one first projects by $-p$ to $F(I[1])$ and applies $(a,b)\\mapsto(a,-b)$, while the other applies $\\Phi$ and then the outer $-p$. Thus $F$ is exact. Bounded below K-injective complexes represent every object of $D^+$ by the injective-representative theorem, and their homotopy morphisms are exactly their derived morphisms by K-injective Hom-to-derived bijectivity. Use bounded below complexes of injective objects as the representatives. Their shifts and cones remain bounded below and termwise injective: each cone term is a finite sum of injectives, and a map into that sum extends across a monomorphism by extending its two components using the definition of injectivity. The cited bounded-below theorem then makes each shift and cone K-injective. Hence $F$ defines an exact functor on $D^+$ by computing on these representatives, without invoking an unbounded existence theorem.\nChoose degreewise splittings of the horseshoe in step 9 and write $I_2=I_1\\oplus I_3$ with differential $\\begin{pmatrix}d_1&t\\\\0&d_3\\end{pmatrix}$. The equality $d_2^2=0$ gives $d_1t+td_3=0$, so the off-diagonal is a chain map $t:I_3\\to I_1[1]$. To check its boundary sign with the cited cone convention, let $\\alpha:I_1\\to I_2$ be the inclusion and let $q:\\operatorname{Cone}(\\alpha)\\to I_3$ project $((a,c),e)$ to $c$. It has a chain section $\\sigma(c)=((0,c),-tc)$. Its kernel consists of $(a,e)$ with differential $(d_1a+e,-d_1e)$; the homotopy $(a,e)\\mapsto(0,a)$ contracts this kernel. Hence $q$ is a homotopy equivalence, and the boundary $-p q^{-1}$ is represented by $-p\\sigma=t$. The horseshoe augmentations identify this cone triangle with the distinguished triangle of $0\\to G_1\\to G_2\\to G_3\\to0$; thus $t$ represents its coefficient boundary $w:G_3\\to G_1[1]$. This explicitly identifies the morphism supplied by the short-exact-sequence triangle theorem rather than assuming a sign for it. The differential of the split relative sequence has off-diagonal $(a,b)\\mapsto(t_Ta,-t_Vb)$, which is precisely $F(t)$ followed by the displayed shift isomorphism. For a closed $(a,b)$ the lift $(0,(a,b))$ therefore has differential equal to this off-diagonal; the lift-and-differentiate boundary in step 9 is $H^q(F(w))$.\nFor scheme pullback, the unit followed by the comparisons of step 7 defines a natural transformation on these derived relative functors. To verify naturality explicitly, for $f:I\\to L$ and a comparison $u_I:h^{-1}I\\to I'$ choose $u_L:h^{-1}L\\to L'$ and a target comparison $f':I'\\to L'$. The maps $u_Lh^{-1}f$ and $f'u_I$ into the K-injective $L'$ represent the same derived morphism and so differ by $dH+Hd$. The unit is natural on both $T$ and $V$; applying sections yields the compatible homotopies on their restriction maps, and $(a,b)\\mapsto(Ha,-Hb)$ makes the resulting relative square commute up to homotopy. This applies to $f=t$ as well as to ordinary coefficient maps. The derived-unit description identifies its absolute component with the required cohomology pullback; the displayed shift isomorphism identifies its relative shifted component. Exact inverse image preserves the short exact coefficient sequence and its cone triangle, so its image of $w$ is the pulled-back coefficient boundary. Consequently $H^q(F(w))$ commutes with scheme pullback. For a morphism of coefficient sequences, the horseshoe-morphism-lift theorem supplies a morphism of their short exact resolution sequences in the same sheaf category, and complex long-exact naturality proves the boundary square. Applying this to identity coefficient-sequence maps proves independence of horseshoe choices. Together with step 9's projection square these give all the asserted connecting-map compatibilities.",
+   "text": "Apply [lem-amb-signed-fibre-triangulated] with $A=\\Gamma(T,-)$, $B=\\Gamma(V,j^{-1}(-))$ and $r$ restriction. These are additive functors by the sectionwise abelian group operations. It supplies the exact homotopy functor $F_T$, the shift comparison $(a,b)\\mapsto(a,-b)$ and the cone comparison $(x,y,z,w)\\mapsto(x,z,y,-w)$, with the boundary $-p$ respected. By step 1 and the definition of derived sections, its value on an injective representative computes exactly the relative cone in the statement, not a different cohomology theory.",
    "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-sf-derived-ses-triangle",
+    "lem-amb-signed-fibre-triangulated",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FI, lemma-restrict-K-injective-to-open; relative cone proof of functoriality, compare Cohomology Tags 0G71 and 0G78"
+   }
+  },
+  {
+   "text": "Apply [lem-amb-bounded-injective-fibre-descent] to this $F_T$, first with $E=\\mathrm{id}$ and $\\tau=\\mathrm{id}$. Enough injectives holds for the etale abelian-sheaf category by [lem-weil-pbc-site-sheaves-enough-injectives]. We obtain an exact functor $RF_T$ on $D^+$, computed on the same bounded below injective complexes as in steps 1 and 9, and canonical identifications under changes of those representatives. Thus it is legitimate to apply the relative construction to every derived coefficient morphism, including a boundary into a shift.",
+   "uses": [
+    "lem-amb-bounded-injective-fibre-descent",
+    "lem-weil-pbc-site-sheaves-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FI, lemma-restrict-K-injective-to-open; relative cone proof of functoriality, compare Cohomology Tags 0G71 and 0G78"
+   }
+  },
+  {
+   "text": "Split the horseshoe rows of step 9, writing $I_2=I_1\\oplus I_3$ with differential $\\begin{pmatrix}d_1&t\\\\0&d_3\\end{pmatrix}$. The split-connecting-morphism node gives the chain map $t:I_3\\to I_1[1]$. The split-boundary comparison identifies its derived class with the canonical cone boundary. Naturality of the complex-SES triangle for the horseshoe augmentation therefore identifies this class with the coefficient boundary $w:G_3\\to G_1[1]$. For the relative split sequence the off-diagonal is $(a,b)\\mapsto(t_Ta,-t_Vb)$, since its second differential is $r-d_V$. This is $s_{I_1}F_T(t)$. The split connecting formula now says that the lift-and-differentiate boundary in step 9 is $H^q(s_{I_1}RF_T(w))$. This also fixes its sign.",
+   "uses": [
+    "lem-weil-pbc-degreewise-split-connecting-morphism",
+    "lem-sc-p1-split-ses-boundary-comparison",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-pbc-complex-ses-connecting-formula",
+    "lem-amb-signed-fibre-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FI, lemma-restrict-K-injective-to-open; relative cone proof of functoriality, compare Cohomology Tags 0G71 and 0G78"
+   }
+  },
+  {
+   "text": "For $h:T'\\to T$ and $V'=h^{-1}V$ apply [lem-amb-bounded-injective-fibre-descent] with $E=h^{-1}$, $F=F_T$, $F'=F_{T'}$. Exactness of $E$ is [prop-weil-pbc-inverse-image-modules-exact]. The sheaf adjunction unit gives the section maps on $T$ and $V$ and their restriction square (the same square as step 7); its naturality is part of [lem-weil-pbc-etale-inverse-image-algebraic-structures]. These maps define $\\tau$. They commute with the signed shift comparison because they act separately on the two summands. The descent lemma makes the comparison natural for all derived morphisms and shifts, including $w$. Its absolute component is precisely the pullback of [lem-weil-pbc-cohomology-pullback-derived-unit]. It remains to see that $D^+h^{-1}(w)$ is the boundary $w'$ of the pulled-back sequence $0\\to h^{-1}G_1\\to h^{-1}G_2\\to h^{-1}G_3\\to0$. By step 12, $w=Q(\\epsilon_1)[1]^{-1}Q(t)Q(\\epsilon_3)$ for the horseshoe augmentations $\\epsilon_k$. Applying the additive exact functor $h^{-1}$ termwise to the split horseshoe gives a degreewise split short exact sequence of complexes, with the pulled-back splitting maps, resolving the pulled-back coefficient sequence; its split boundary $\\pi d s$ is $h^{-1}t$ [lem-weil-pbc-degreewise-split-connecting-morphism]. By [lem-sc-p1-split-ses-boundary-comparison] its canonical boundary is $Q(h^{-1}t)$, and naturality of [lem-weil-pbc-complex-ses-triangle] for the quasi-isomorphic augmentation $h^{-1}\\epsilon$ gives $w'=Q(h^{-1}\\epsilon_1)[1]^{-1}Q(h^{-1}t)Q(h^{-1}\\epsilon_3)$. Since the derived inverse image is computed termwise compatibly with shifts [def-weil-pbc-derived-inverse-image], this is $D^+h^{-1}(w)$. Applying $H^q$ to the naturality square for $w$ and substituting step 12 on $T$ and on $T'$ proves pullback compatibility of the relative connecting maps.",
+   "uses": [
+    "lem-amb-bounded-injective-fibre-descent",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
     "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-pbc-degreewise-split-connecting-morphism",
+    "lem-sc-p1-split-ses-boundary-comparison",
+    "def-weil-pbc-derived-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FI, lemma-restrict-K-injective-to-open; relative cone proof of functoriality, compare Cohomology Tags 0G71 and 0G78"
+   }
+  },
+  {
+   "text": "For a morphism of coefficient short exact sequences, use [lem-weil-pbc-horseshoe-morphism-lift] within the same sheaf category to lift it to the two chosen horseshoes. Taking sections and relative cones gives a morphism of the split short exact complex sequences of step 9. By [lem-weil-pbc-complex-ses-long-exact-naturality] its connecting square commutes. Apply this also to the identity coefficient-sequence morphism and two choices of horseshoe; the representative identifications from step 11 identify the horizontal comparisons with the identity derived maps. Thus the boundaries are independent of horseshoe choices. Combine coefficient naturality with step 13 for pullback followed by any coefficient map, and with step 9's projection square for forgetting support. These are all the claimed connecting-map compatibilities.",
+   "uses": [
     "lem-weil-pbc-horseshoe-morphism-lift",
     "lem-weil-pbc-complex-ses-long-exact-naturality",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-dplus-injective-representative",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "def-sp-injective-resolutions"
+    "lem-amb-bounded-injective-fibre-descent"
    ],
    "elementary": false,
    "source": {
@@ -182,15 +234,21 @@
   "def-weil-abstract-derived-category",
   "def-weil-pbc-abelian-etale-sheaves",
   "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-derived-inverse-image",
   "def-weil-pbc-etale-cohomology",
+  "lem-amb-bounded-injective-fibre-descent",
+  "lem-amb-signed-fibre-triangulated",
   "lem-sc-etale-contracted-product-exists",
   "lem-sc-etale-torsor-h1-functoriality",
+  "lem-sc-p1-split-ses-boundary-comparison",
   "lem-sc-torsor-h1",
-  "lem-sf-derived-ses-triangle",
   "lem-weil-pbc-cohomology-pullback-derived-unit",
   "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-complex-ses-connecting-formula",
   "lem-weil-pbc-complex-ses-homology-long-exact",
   "lem-weil-pbc-complex-ses-long-exact-naturality",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-degreewise-split-connecting-morphism",
   "lem-weil-pbc-dplus-injective-representative",
   "lem-weil-pbc-etale-inverse-image-algebraic-structures",
   "lem-weil-pbc-etale-inverse-image-restriction",
@@ -353,7 +411,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-amb-cartier-kummer-map",
   "by": "worker",
@@ -375,10 +433,10 @@
  },
  "merged_into": null,
  "split_report": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "item": "lem-amb-relative-torsor-cohomology",
   "worker": "stage1",
-  "summary": "Proved the relative classification explicitly using cocycles (a,b), lifting torsors dt=a with chosen section b, and boundaries (dx,res x). Proved injectivity by gluing the difference of equivariant maps and surjectivity using the existing named canonical torsor extension and injectivity of I^0. Wrote comparison homotopies, coefficient/pullback maps, and horseshoe/derived boundary naturality. No new nodes: the first draft child nodes merely restated clauses and were removed during self-review. Second reading expands the signed shift/cone isomorphisms and horseshoe off-diagonal boundary; bounded-below K-injective equivalence replaces an unjustified unbounded total-derived invocation. Repair 2026-10-14: corrected the second and fourth cone-intertwining components by writing the target differential in independent variables and substituting Phi; checked the -p boundary square and the horseshoe boundary using an explicit contracted kernel. Completed renewed cited-statement, global duplicate and archived-master audits; no new nodes.",
+  "summary": "Repair of the human return: statement, Lean record and steps 1-9 unchanged. Replaced the 4817-character step 10 by five short steps, exposing signed-fibre triangulatedness and bounded-below injective comparison as two new statement-only nodes. Reused existing degreewise split boundary, canonical cone-boundary comparison, complex-SES triangle and cocycle-boundary formula nodes. Preserved the injective-resolution, off-diagonal and derived-unit route, checked signs and arbitrary coefficient/pullback naturality; every non-elementary step has fewer than 2000 characters.",
   "blueprint": "The first two proof paragraphs of lem-amb-cartier-kummer-map: relative cocycle with specified open trivialization and its comparison with injective resolutions, followed by natural Kummer boundaries.",
   "tool_uses": [
    {
@@ -419,10 +477,6 @@
    },
    {
     "node": "lem-sc-torsor-h1",
-    "why": "Generic sheaf or homological-algebra input for the explicit relative injective-resolution construction; no node of this unit states this tool and no compact-support base-change unit step is replaced."
-   },
-   {
-    "node": "lem-sf-derived-ses-triangle",
     "why": "Generic sheaf or homological-algebra input for the explicit relative injective-resolution construction; no node of this unit states this tool and no compact-support base-change unit step is replaced."
    },
    {
@@ -492,6 +546,26 @@
    {
     "node": "prop-weil-pbc-inverse-image-modules-exact",
     "why": "Generic sheaf or homological-algebra input for the explicit relative injective-resolution construction; no node of this unit states this tool and no compact-support base-change unit step is replaced."
+   },
+   {
+    "node": "lem-sc-p1-split-ses-boundary-comparison",
+    "why": "Generic split-complex boundary or natural SES-triangle tool used to identify the horseshoe off-diagonal with the coefficient boundary; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic split-complex boundary or natural SES-triangle tool used to identify the horseshoe off-diagonal with the coefficient boundary; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-degreewise-split-connecting-morphism",
+    "why": "Generic split-complex boundary or natural SES-triangle tool used to identify the horseshoe off-diagonal with the coefficient boundary; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-connecting-formula",
+    "why": "Generic split-complex boundary or natural SES-triangle tool used to identify the horseshoe off-diagonal with the coefficient boundary; no step of the unit route is replaced."
+   },
+   {
+    "node": "def-weil-pbc-derived-inverse-image",
+    "why": "Step 13 takes from its statement only that derived inverse image is termwise inverse image on representatives, compatibly with shifts; a generic notion, no node of this unit defines it."
    }
   ]
  },
@@ -523,15 +597,20 @@
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
   "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
   "lem-weil-pbc-site-sheaves-enough-injectives",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sc-p1-split-ses-boundary-comparison",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-degreewise-split-connecting-morphism",
+  "lem-weil-pbc-complex-ses-connecting-formula",
+  "def-weil-pbc-derived-inverse-image"
  ],
  "reviewed": {
-  "date": "2026-10-14",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-Codex-NL-b79fbea5b",
-  "group": "NL",
+  "reviewer": "NT-cc-NQ-da3ebf99c",
+  "group": "NQ",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NL-b79fbea5b (reviewer sub-agent of L); spot-checked: Read the full mathematics, all cited statements, source locations, and unit/chapter route. Verified all ten steps, repaired cone and boundary signs, arbitrary coefficient/pullback naturality, edge cases, and duplicate/cycle checks. Exact master target morphisms and coefficient categories remain distinct and unchanged. No fixes needed; review.md records the checks and accepted tool_uses."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-da3ebf99c (reviewer sub-agent of L); spot-checked: FIX for one citation gap (C4) in step 13; everything else passes. I read the item in full (14 steps), both new nodes, and the statement of every cited node. I checked the sources: Stacks derived.tex 014E definition-cone and 05TK lemma-resolution-functor-quasi-inverse (with its proof), the tags 013T, 0152, 05TN, 03AJ and 08FI in tags/tags, and the blueprint text of the ancestor lem-amb-cartier-kummer-map in main-20261015. The statement, Lean record and steps 1-9 are equal to the returned side-DAG node. This is not a target node, so the base-change morphism and coefficient-category checks do not apply here; the coefficients are Ab(T_et), unchanged, and no SGA source is cited. I recomputed every sign of lem-amb-signed-fibre-triangulated: the cone isomorphism Phi=(x,z,y,-w), the boundary (both routes give (-y,w)), the shift (a,b)->(a,-b) and the homotopy (Ha,-Hb). I tested it with r=id, r=0, A=0 and complexes in one degree. lem-amb-bounded-injective-fibre-descent is true: 05TK gives the equivalence, and J is K-injective so the comparison map u exists and is unique up to homotopy. E need not preserve injectives. In step 12 I checked t=pi d s and that the off-diagonal (t_T a,-t_V b) equals s F_T(t). Neither new node duplicates an existing one or restates a clause of the item. There is no cycle. The new off-unit tool uses are lem-sc-p1-split-ses-boundary-comparison and three Mathlib leaves; I accept them. Fault (C4): step 13 used the formula delta=-p q^{-1} for the boundary of a short exact sequence, which no cited statement gives; lem-weil-pbc-complex-ses-triangle only says a natural delta exists. The result is true and follows from nodes the item already cites. I rewrote step 13 to derive D^+h^{-1}(w)=w' through the pulled-back split horseshoe, using lem-weil-pbc-degreewise-split-connecting-morphism, lem-sc-p1-split-ses-boundary-comparison, triangle naturality and def-weil-pbc-derived-inverse-image. That definition is added to proof_deps and declared in split_report.tool_uses. The corrected item is fixes/dag/nodes/sec-smooth-purity/lem-amb-relative-torsor-cohomology.json, and the full checks are in review.md.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-15",

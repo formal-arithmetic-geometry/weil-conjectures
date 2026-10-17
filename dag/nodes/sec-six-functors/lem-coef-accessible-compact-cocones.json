@@ -46,15 +46,11 @@
    }
   },
   {
-   "text": "Let $I$ be any small $\\beta$-filtered quasicategory, without a bound on its cardinality. The filtered weak-contractibility assertion of the coslice-colimit node shows that $I$ is weakly contractible. Consequently $I\\to *$ satisfies the comma criterion (its sole comma is $I$), and the cofinal-comma node shows that restriction identifies cocones on an object of any quasicategory with cocones on its constant $I$-diagram. In particular $*\\to H$ with value $p$ preserves $I$-colimits. Pointwise colimits give $I$-colimits in $H$, in $\\operatorname{Arr}(H)$ and in $H\\times H$; the constant-diagram functor $\\Delta_K:\\mathcal C\\to H$ preserves them. Model $Q$ as the strict pullback of\n$$\\operatorname{Arr}(H)\\xrightarrow{(\\operatorname{ev}_0,\\operatorname{ev}_1)}H\\times H\\xleftarrow{(p,\\Delta_K)}*\\times\\mathcal C.$$\nThe endpoint restriction is an isofibration by the exponential-corner node applied to $\\partial\\Delta^1\\subseteq\\Delta^1$ and $H\\to *$. The isofibration-pullback node therefore identifies this strict pullback with the categorical homotopy pullback (enlarge the ambient universe so all displayed categories are small there). Both legs preserve $I$-colimits, so the pullback-colimit node supplies colimits in $Q$ and characterizes them by their two components. For a cocone already in $Q$, its source component in $H$ is the constant identity cocone at $p$, which is colimiting by the preceding argument. Its target component is obtained by applying $\\Delta_K$ to its apex cocone. Hence an apex colimit gives a colimit in $Q$. Conversely a colimit in $Q$ gives a colimit in $*\\times\\mathcal C$, hence an apex colimit. For a chosen colimiting apex cocone with vertex $c$, start with a colimit in $Q$ with vertex $(c_0,u_0)$. The two apex colimit cocones are initial objects of the same cocone category, so there is an equivalence between them, with apex component $e:c_0\\simeq c$ and its coherent compatibility with the diagram. Postcompose $u_0$ with $\\Delta_K(e)$ to obtain the new cocone $p\\to\\Delta_Kc$. Postcomposing the colimit cocone in $Q$ with this equivalence, and using the compatibility just specified, gives a colimit whose apex cocone is identified with the chosen one. Componentwise equivalences and the cocone calculus justify these compositions, including their higher simplices. The cores of colimit-cocone categories in $Q$ and $\\mathcal C$ are nonempty contractible spaces by the coherent cocone calculus. The induced map between them is therefore an equivalence; its homotopy fiber over the chosen apex cocone is contractible. This is precisely the space of lifts, with the identification of their apex cocone included. Thus $U$ creates and detects all the colimits claimed.",
+   "text": "Let $I$ be any small $\\beta$-filtered quasicategory, with no bound on its cardinality. The filtered weak-contractibility clause of [lem-coef-infinity-coslice-colimit-formula] makes $I$ weakly contractible. By $\\beta$-accessibility, $\\mathcal C$ admits all $I$-colimits. Apply [lem-coef-infinity-weakly-contractible-cocone-colimits] to $p:K\\to\\mathcal C$. It supplies $I$-colimits in $Q$, detects a colimiting cocone precisely by its apex cocone, and identifies the lift space of every specified colimiting apex cocone as contractible. The lift includes the equivalence identifying the image apex cocone with the specified one. This proves all the creation and detection assertions, for every small $\\beta$-filtered $I$.",
    "uses": [
     "lem-coef-infinity-coslice-colimit-formula",
-    "lem-coef-infinity-cofinal-comma-criterion",
-    "lem-coef-infinity-yoneda-presheaf-limits",
-    "lem-coef-infinity-isofibration-exponentiation",
-    "lem-coef-infinity-isofibration-pullback-limit",
-    "lem-coef-accessible-pullback-filtered-colimit",
-    "lem-cbc-enhanced-functor-cone-calculus"
+    "def-coef-presentable-infinity-category",
+    "lem-coef-infinity-weakly-contractible-cocone-colimits"
    ],
    "elementary": false,
    "source": {
@@ -108,13 +104,11 @@
    }
   },
   {
-   "text": "Let $D\\subseteq\\mathcal C$ be the replete full subcategory of $\\beta$-compact objects and $Q_D\\subseteq Q$ the full subcategory of cocones whose apex lies in $D$. Since $D$ is full, $Q_D$ is exactly the coherent cocone category $D_{p/}$: fullness identifies all its transformations, their compatibility homotopies and their higher simplices with those in $\\mathcal C$, and every vertex of $p$ lies in $D$. $Q_D$ is replete in $Q$, because $U$ carries equivalences to equivalences and $D$ is replete. Essential smallness. By the compact-slice-density node, $D$ is equivalent to a small quasicategory $D_0$; the images of the vertices of $D_0$ form a small family $(d_j)_{j\\in J}$ in $D$ such that every object of $D$ is equivalent to some $d_j$. By step 1, $H$ and $Q$ are locally small, so each set $\\pi_0\\operatorname{Map}_H(p,\\Delta_Kd_j)$ is small; choose representatives $u_{j,s}$, $s\\in S_j$, of its components and put $x_{j,s}=(d_j,u_{j,s})\\in Q_D$. This is a small family. Let $q=(c,u)\\in Q_D$. Choose an equivalence $e:c\\to d_j$ and then $s\\in S_j$ and a path $\\gamma$ in $\\operatorname{Map}_H(p,\\Delta_Kd_j)$ from $\\Delta_K(e)u$ to $u_{j,s}$. By the dual cocone fiber formula of the cone-calculus node (step 1), $(e,\\gamma)$ is a point $\\phi\\in\\operatorname{Map}_Q(q,x_{j,s})$ lying over $e$. For every $r=(d,v)\\in Q$, precomposition with $\\phi$ is the map of homotopy fibers over $v$ induced by the square whose top is precomposition with $e$, $\\operatorname{Map}_{\\mathcal C}(d_j,d)\\to\\operatorname{Map}_{\\mathcal C}(c,d)$, whose bottom is the identity of $\\operatorname{Map}_H(p,\\Delta_Kd)$, and which commutes up to the homotopy $\\Delta_K(a)\\gamma$ between $a\\mapsto\\Delta_K(ae)u$ and $a\\mapsto\\Delta_K(a)u_{j,s}$. The top map is an equivalence because $e$ is one, so the induced map of homotopy fibers over the same point $v$ is an equivalence (the path-space model of the homotopy fiber in [def-cbc-enhanced-diagrams-cones] is invariant under an equivalence of total spaces over a fixed base). Thus precomposition with $\\phi$ gives equivalences $\\operatorname{Map}_Q(x_{j,s},r)\\to\\operatorname{Map}_Q(q,r)$, naturally in $r$. By full faithfulness of the Yoneda functor of the Yoneda node, applied to $Q^{\\mathrm{op}}$ in a universe in which $Q$ is small, and the vertexwise criterion for equivalences of coherent transformations in the cone-calculus node, $\\phi$ is an equivalence in $Q$. Hence $Q_D$ is the full subcategory of the locally small quasicategory $Q$ on all objects equivalent to a member of the small family $(x_{j,s})$, and the small-full-subcategory node shows that $Q_D$ is essentially small. No claim about the size of an unrestricted large slice is used. Step 5 says all objects of $Q_D$ are $\\beta$-compact.",
+   "text": "Let $D\\subseteq\\mathcal C$ be the replete full subcategory of all $\\beta$-compact objects and $Q_D\\subseteq Q$ the full subcategory on cocones with apex in $D$. The compact-slice-density node says that $D$ is essentially small. Every vertex of $p$ lies in $D$, so the definition of a full subcategory makes the entire simplicial diagram $p$ factor through $D$. By step 1, $\\mathcal C$ is locally small. Apply [lem-coef-infinity-essentially-small-cocones] to this factorization: it identifies $D_{p/}$ with $Q_D$ and proves that $Q_D$ is essentially small. This application accounts for the higher compatibility simplices as well as the apices. The subcategory $Q_D$ is replete, since apex projection preserves equivalences and $D$ is replete. Step 5 makes all its objects $\\beta$-compact in $Q$.",
    "uses": [
     "lem-coef-accessible-compact-slice-density",
     "def-cbc-enhanced-diagrams-cones",
-    "lem-cbc-enhanced-functor-cone-calculus",
-    "lem-coef-infinity-yoneda-presheaf-limits",
-    "lem-coef-infinity-small-full-subcategory"
+    "lem-coef-infinity-essentially-small-cocones"
    ],
    "elementary": false,
    "source": {
@@ -123,16 +117,13 @@
    }
   },
   {
-   "text": "Fix $q=(c,u)\\in Q$. The compact-slice-density node gives an essentially small $\\beta$-filtered category $E=D_{/c}$ with its canonical source cocone colimiting at $c$. The boundary $u$ is a diagram $\\widetilde p:K\\to E$, because every $p(v)$ is compact. Replace $E$ by a small equivalent model and transport this diagram; filteredness and the stated colimit cocone are invariant under the equivalence by transporting cocones along a quasi-inverse and using the mapping-space colimit criterion. Put $T=E_{\\widetilde p/}$ and let $V:T\\to E$ be its apex projection. It is small by the explicit cocone pullback construction, and is $\\beta$-filtered by the filtered-cocone clause of the cofinal-coslice node, since $K$ is $\\beta$-small. For $e\\in E$, an object of $(e\\downarrow V)$ is a cocone from $\\widetilde p$ to $t$ together with an arrow $e\\to t$. Compute this comma using the arrow model: the endpoint restriction in $E$ is an isofibration, and so is its pullback with source fixed at $e$. The isofibration-pullback node therefore says that the strict pullback of this arrow category along $V$ computes the categorical homotopy comma. This model identifies the entire coherent comma category with $E_{(\\widetilde p\\amalg e)/}$, where the boundary has shape $K\\amalg\\Delta^0$: both descriptions consist of those transformations, their triangles, and their higher simplices, and restriction to the two summands gives inverse descriptions in each simplicial degree. That boundary is $\\beta$-small. Hence its cocone category is $\\beta$-filtered by the same cofinal-coslice node, and weakly contractible by the filtered weak-contractibility clause of the coslice-colimit node. Apply the cofinal-comma criterion to the small categories $T,E$. Restriction along $V$ preserves the canonical colimit cocone $E\\to\\mathcal C$ with apex $c$. Each object of $T$ gives a cocone under $p$ with compact apex together with an arrow to $q$: its arrows to $c$ and all boundary compatibilities come from its definition as a cocone inside $D_{/c}$. These assemble to a diagram $T\\to Q_D$ and cocone to $q$. Its apex cocone is the just-proved colimit $c$, so step 2 makes it a colimit in $Q$. We have presented every $q$ as a small $\\beta$-filtered colimit of objects of $Q_D$.",
+   "text": "Fix $q=(c,u)\\in Q$. The compact-slice-density node gives an essentially small $\\beta$-filtered category $E=D_{/c}$ and its canonical source colimit cocone at $c$. The boundary $u$ gives a diagram $\\widetilde p:K\\to E$, since every $p(v)$ is compact. Choose a small equivalent model of $E$ and transport this diagram and cocone along its specified quasi-inverse. The equivalence-invariance node and the cofinal-comma criterion preserve the colimit cocone; transporting a test diagram and its extension along the quasi-inverse preserves $\\beta$-filteredness. Work with that small model. By [lem-coef-infinity-filtered-cocone-apex-cofinal], $T=E_{\\widetilde p/}$ is small and $\\beta$-filtered, and its apex projection $V:T\\to E$ has weakly contractible comma categories; here $K$ is $\\beta$-small since $\\alpha<\\beta$. The cofinal-comma criterion implies that restriction of the source diagram along $V$ is still colimiting at $c$. A cocone in $D_{/c}$ consists of a compact apex $d\\to c$, a transformation $p\\to\\Delta_Kd$, and its coherent compatibility with $u$. Forgetting the arrows to $c$ gives a diagram $T\\to Q_D$; retaining them gives its cocone to $q$, with those same simplices and restriction operators. Its apex cocone is the restricted source colimit just obtained. Step 2 therefore makes this a colimit in $Q$. Thus every $q$ is a small $\\beta$-filtered colimit of objects of $Q_D$.",
    "uses": [
     "lem-coef-accessible-compact-slice-density",
-    "lem-coef-infinity-cofinal-coslice-calculus",
-    "lem-coef-infinity-coslice-colimit-formula",
+    "lem-coef-infinity-cofinal-colimit-restriction",
     "lem-coef-infinity-cofinal-comma-criterion",
     "def-cbc-enhanced-diagrams-cones",
-    "lem-coef-infinity-yoneda-presheaf-limits",
-    "lem-coef-infinity-isofibration-exponentiation",
-    "lem-coef-infinity-isofibration-pullback-limit"
+    "lem-coef-infinity-filtered-cocone-apex-cofinal"
    ],
    "elementary": false,
    "source": {
@@ -160,19 +151,18 @@
   "lem-coef-space-transport-classification",
   "lem-coef-spaces-small-colimits-universe",
   "lem-coef-infinity-coslice-colimit-formula",
-  "lem-coef-infinity-cofinal-comma-criterion",
+  "lem-coef-infinity-weakly-contractible-cocone-colimits",
   "lem-coef-infinity-yoneda-presheaf-limits",
-  "lem-coef-infinity-isofibration-exponentiation",
-  "lem-coef-infinity-isofibration-pullback-limit",
-  "lem-coef-accessible-pullback-filtered-colimit",
   "lem-coef-infinity-arrow-morphism-square",
   "lem-coef-spaces-kappa-limit-filtered-colimit",
   "lem-coef-infinity-mapping-excision",
   "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-accessible-compact-slice-density",
-  "lem-coef-infinity-small-full-subcategory",
-  "lem-coef-infinity-cofinal-coslice-calculus",
+  "lem-coef-infinity-essentially-small-cocones",
+  "lem-coef-infinity-cofinal-colimit-restriction",
+  "lem-coef-infinity-cofinal-comma-criterion",
+  "lem-coef-infinity-filtered-cocone-apex-cofinal",
   "lem-coef-infinity-compact-stage-factorization"
  ],
  "proof_origin": {
@@ -281,7 +271,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-compact-approximation",
@@ -306,7 +296,7 @@
   "date": "2026-10-17",
   "item": "lem-coef-accessible-compact-cocones",
   "worker": "stage1",
-  "summary": "Kept the statement. Expanded filtered colimit creation by an isofibration pullback, bounded-diagram compactness by cells and spines, compact-apex generation by the compact-source slice and an explicit comma-category cofinality test, and the converse by a compact-stage retract. Reused every foundational input; no new nodes, no ordinary-category result mistaken for an infinity-category result.",
+  "summary": "Repair of the human re-split return: retained the natural statement and Lean record verbatim, and retained steps 1,3,4,5,8 verbatim. Extracted the arguments formerly hidden in steps 2,6,7 as three statement-only generic infinity-category lemmas: weakly contractible colimit creation, essential smallness of fixed-boundary cocones, and cofinality of the filtered-cocone apex projection. Shortened those three steps to explicit applications with hypotheses checked. No Mathlib matches; all new searches actually run and recorded. The generic equivalence-invariance node is reused in step 7.",
   "blueprint": "Preserves the inherited ancestry to prop-coef-integral-exceptional-adjoint, proof paragraph 2 mapping-complex adjunction infrastructure; makes precise the compact-cocone input used by lem-coef-infinity-compact-approximation. The current main-20261015 paragraph has the mapping-complex calculation, not an explicit HTT citation.",
   "tool_uses": [
    {
@@ -319,12 +309,12 @@
   "lem-cbc-enhanced-functor-cone-calculus"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q13-5186e65e8",
-  "group": "Q13",
+  "reviewer": "NT-cc-Q53-989a76543",
+  "group": "Q53",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-5186e65e8 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 8 steps, every cited statement, the citer lem-coef-infinity-compact-approximation (steps 6-7) and unit sk-prop-sf-biduality-general. HTT 5.4.5.13-15 and 5.3.4.13 are not archived (WANTED) and there is no network access here, so the HTT places were checked from memory; each step was checked independently against the cited DAG statements. The statement is true without alpha-accessibility and is not weakened. Small cases: K empty (Q=C); C=N(Set), K=pt with |A|<beta (compact objects are A->X with |X|<beta); C terminal; C empty; stable C with p=0. Steps 1-5, 7 and 8 are correct. Step 2 uses the exact pullback definition of the cocone category, an isofibration, a homotopy pullback and componentwise colimits, with no size bound on I. Steps 3-4 need only beta-smallness, via spine, skeleta, 017R and the countable tower. Step 7's comma (e|V)=E_{(p~+e)/} is beta-filtered, hence cofinal. Step 8 uses compact-stage factorization and the retract argument. No cycle (closure of 341 nodes); no duplicate (diagram-presentations needs smaller-rank accessibility). The tool use of lem-cbc-enhanced-functor-cone-calculus is accepted. Repaired one fault, C2/E5 in step 6: it was marked elementary and proved essential smallness of Q_D by an uncited simplexwise 'precompose with the inverse of FGp~p' transport. It is rewritten, using only cited statements, through a small family of representatives (d_j,u_{j,s}), the fiber formula, Yoneda and the existing node lem-coef-infinity-small-full-subcategory (HTT 5.4.1.7, same unit). The step is now elementary=false and proof_deps is recomputed. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-accessible-compact-cocones.json.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-989a76543 (reviewer sub-agent of L); spot-checked: I read the whole delivery and found no faults; no fixes. The item's statement, Lean record and steps 1,3,4,5,8 are unchanged. Steps 2, 6 and 7 now hand their arguments to three statement-only unsplit nodes, and every step is under 2000 characters (longest 1564). proof_deps equals the union of the step uses. The new nodes have no proof deps, so there is no cycle. Their created and blueprint fields (from.node prop-coef-integral-exceptional-adjoint, via starting with the item, same_as empty) are correct, and each records three kinds of Mathlib search. Checked against the cited statements: step 2 uses coslice-colimit-formula (filtered implies weakly contractible), accessibility (filtered colimits exist) and new node 1. Steps 3-4 use spine, excision, nondegenerate decomposition and beta-small interchange with an uncountable beta, empty L included. Step 5 is the fibre formula as a finite limit with a natural basepoint. Step 6 uses compact-slice-density, step 1's local smallness and new node 2. Step 7 uses D_{/c}, a small model, new node 3 with K beta-small since alpha<beta, the comma criterion and step 2's detection. Step 8 has the accessibility clauses, compact-stage factorization, the retract argument and the empty K/C cases. New node 1 (weakly contractible creation) is true, HTT 1.2.13.8-type; tested on K empty and I a point. It generalizes the creation clause to arbitrary weakly contractible I and C with no accessibility, so I judge it a tool lemma, not a restatement (D1). It is not cofinal-coslice-calculus, which only covers tau-small kappa-filtered colimits. New node 2 is true: D_{p/} equals Q_D because D is full, and smallness comes from small apex representatives, small pi0 of Map_H(p,Delta d) and small-full-subcategory; tested on empty D and empty K. New node 3 is true: (e down V) is equivalent to E_{p/} x_E E_{e/}, which is E_{(p+e)/}; K plus a point is kappa-small, so the comma is filtered and hence weakly contractible; tested on K empty, terminal E and finite subsets at aleph0. No duplicates found by rg over dag/nodes (cofinal-coslice-calculus, small-full-subcategory, relative-cocone-parameters, join-slice-cocone-comparison and filtered-cofinal-pullback were compared). HTT is not archived; WANTED is recorded and the places were checked from knowledge. No SGA is used. The route stays in the unit, and the one off-unit tool use, lem-cbc-enhanced-functor-cone-calculus, was already declared and is accepted again. No target is weakened."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.AccessibleCompactCocones",

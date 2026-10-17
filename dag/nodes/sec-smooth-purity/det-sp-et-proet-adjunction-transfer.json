@@ -25,7 +25,7 @@
  ],
  "proof": [
   {
-   "text": "Let $E_T=\\nu_T^*$ and write $\\alpha_T:E_TQ_T\\xrightarrow{\\sim}\\mathrm{id}$ for the counit isomorphism of the chosen equivalence. For arbitrary $M'\\in\\Dctf(X,A)$ and $N'\\in\\Dctf(Y,A)$, put $M=Q_XM'$ and $N=Q_YN'$, and use $\\alpha_X(M')$ and $\\alpha_Y(N')$ to identify $M'\\simeq E_XM$ and $N'\\simeq E_YN$. Full faithfulness of $E_X,E_Y$ on bounded-below complexes is supplied by [thm-weil-pbc-site-comparison]; all objects below are bounded because $G$ and $Rf^{\\mathrm{ét}}_!$ have the stated $\\Dctf$ domains and codomains. Together with the assumed natural isomorphism $c_f$, it gives bijections\n$$\n\\Hom(M',G^{\\mathrm{pro}}N')\\simeq\\Hom(E_XM,E_XGN)\\simeq\\Hom(M,GN)\\simeq\\Hom(Rf^{\\mathrm{ét}}_!M,N)\\simeq\\Hom(E_YRf^{\\mathrm{ét}}_!M,E_YN)\\simeq\\Hom(Rf_!M',N').\n$$\nThe middle bijection is the assumed étale adjunction, and the last is precomposition with $c_f(M)^{-1}$, followed by $\\alpha_Y(N')$ and the source equivalence isomorphism. For a morphism $u':M'_1\\to M'_2$, its represented morphism is $E_XQ_Xu'$, by naturality of $\\alpha_X$; naturality of full faithfulness, of the étale adjunction, and of $c_f$ therefore gives naturality of this chain in $M'$. For $v':N'_1\\to N'_2$, use $Q_Yv'$ and naturality of $\\alpha_Y$ and the same bijections to obtain naturality in $N'$. Thus the chain is the required adjunction Hom bijection. Following the identity of $G^{\\mathrm{pro}}N'$ gives the well-typed map\n$$\n\\varepsilon^{\\mathrm{pro}}_{N'}=\\alpha_Y(N')\\circ E_Y(\\varepsilon^{\\mathrm{ét}}_{Q_YN'})\\circ c_f(GQ_YN')^{-1}:Rf_!G^{\\mathrm{pro}}N'\\longrightarrow N'.\n$$\nAt $N'=E_YN$, the equivalence isomorphism $Q_YE_YN\\simeq N$ identifies this with the displayed counit of the statement, by naturality of the étale counit and $c_f$. The natural Hom bijection defines the adjunction, so its unit and counit satisfy the triangle identities.",
+   "text": "Put $E_T=\\nu_T^*$ and let $\\alpha_T:E_TQ_T\\xrightarrow{\\sim}\\mathrm{id}$ be the chosen equivalence counit. For $M'\\in\\Dctf(X,A)$ and $N'\\in\\Dctf(Y,A)$ set $M=Q_XM'$ and $N=Q_YN'$. All objects used below are bounded, since the stated functors have the indicated $\\Dctf$ domains and codomains. The full faithfulness in [thm-weil-pbc-site-comparison], the assumed étale adjunction and the given $c_f$ give bijections\n$$\\Hom(M',E_XGN)\\simeq\\Hom(E_XM,E_XGN)\\simeq\\Hom(M,GN)\\simeq\\Hom(Rf^{\\mathrm{ét}}_!M,N)\\simeq\\Hom(E_YRf^{\\mathrm{ét}}_!M,E_YN)\\simeq\\Hom(Rf_!M',N').$$\nThe first map precomposes with $\\alpha_X(M')$; the last sends $h$ to $\\alpha_Y(N')\\circ h\\circ c_f(M)^{-1}\\circ Rf_!(\\alpha_X(M')^{-1})$. Each is natural: representing $u':M'_1\\to M'_2$ by $E_XQ_Xu'$ commutes with $\\alpha_X$ by its naturality, and representing $v':N'_1\\to N'_2$ by $E_YQ_Yv'$ commutes with $\\alpha_Y$. The two full-faithfulness bijections commute with composition; the other squares are precisely naturality of the étale adjunction and $c_f$. Thus the inverse of this chain is a natural adjunction Hom bijection for $Rf_!\\dashv E_XGQ_Y$.",
    "uses": [
     "thm-weil-pbc-site-comparison"
    ],
@@ -36,15 +36,45 @@
    }
   },
   {
-   "text": "First check the finite coefficient convention in the Brown statement. By [sk-def-sfb-pulled-back-coefficients] its coefficient ring is $p_T^*\\underline A$. The functor $p_T^*$ is a strong monoidal left adjoint by [sk-def-sfb-pullback-from-point], so it preserves finite sums and cokernels and sends the constant integer unit to the constant integer unit. Present the finite additive group $A$ by generators $[a]$ for $a\\in A$ and relations $[0]=0$ and $[a]+[b]=[a+b]$. The same presentation in locally constant sheaves presents $\\underline A$ on the point and the constant sheaf $A_T$ on $T$: each locally constant section lifts on its constant pieces, and the displayed relations identify exactly sections with the same value in $A$. Applying $p_T^*$ to this presentation gives a canonical additive identification $p_T^*\\underline A\\simeq A_T$. This $A_T$ is also the ring sheaf $\\Lambda_{T,\\mathrm{proét}}=(U\\mapsto\\operatorname{Cont}(\\pi_0(|U|),A))^\\#$ of [def-weil-pbc-proetale-modules]: a continuous function $\\pi_0(|U|)\\to A$ has finitely many clopen fibres, whose preimages decompose $U$ into finitely many disjoint open subschemes, a pro-étale covering on each member of which the function is constant; and the map from the constant presheaf is injective on nonempty $U$, while the empty object is covered by the empty family. So the map of presheaves from the constant presheaf $A$ to $U\\mapsto\\operatorname{Cont}(\\pi_0(|U|),A)$ is locally bijective, hence an isomorphism after sheafification, and it respects the pointwise addition, multiplication and unit. It respects multiplication since the product on generators is $[a][b]=[ab]$, and respects the unit $[1]$. An action $A_T\\otimes M\\to M$ satisfying the two equations in [sk-def-sfb-module-objects] is precisely a sheaf of $A_T$-modules; the morphism equation is precisely linearity. Thus the finite-stage Brown module-object categories and their derived categories are the constant-ring module categories used here, without completion or rationalization.\n\nThe standing schemes and finite admissible coefficient ring satisfy every hypothesis of [sk-prop-sf-existence], which gives $Rf_!\\dashv f^!$ on the localizing closures. The first two assertions of [sk-prop-sf-rf-shriek-preservation] supply the additional fact needed here: $f^!$ sends $\\Dctf(Y,A)$ into $\\Dctf(X,A)$, and this adjunction restricts to those categories. Explicitly, the closures are full ambient subcategories containing $\\Dctf$ by [sk-def-localizing-closure], so for $M',N'$ in $\\Dctf$ the Brown bijection $\\Hom(Rf_!M',N')\\simeq\\Hom(M',f^!N')$ is exactly a bijection in the smaller full categories, with the original counit. Now apply [det-sp-unique-right-adjoint] to $F=Rf_!$, $G^{\\mathrm{pro}}$ from step 1, and $J=f^!|_{\\Dctf}$. Its component $\\gamma_{N'}:G^{\\mathrm{pro}}N'\\to JN'$ is the $J$-transpose of $\\varepsilon^{\\mathrm{pro}}_{N'}$, hence satisfies $\\varepsilon^{\\mathrm{Brown}}_{N'}\\circ Rf_!(\\gamma_{N'})=\\varepsilon^{\\mathrm{pro}}_{N'}$. The cited statement says these components are natural, invertible, and the only counit-compatible family. This proves the required unique counit-preserving identification.",
+   "text": "The counit is the image of $\\mathrm{id}_{G^{\\mathrm{pro}}N'}$ under the preceding chain. Using the equivalence triangle identities at $GQ_YN'$ yields\n$$\\varepsilon^{\\mathrm{pro}}_{N'}=\\alpha_Y(N')\\circ E_Y(\\varepsilon^{\\mathrm{ét}}_{Q_YN'})\\circ c_f(GQ_YN')^{-1}:Rf_!G^{\\mathrm{pro}}N'\\longrightarrow N'.$$\nFor $N'=E_YN$, identify $Q_YE_YN$ with $N$ using the inverse equivalence unit. The equivalence triangle identity and naturality of $\\varepsilon^{\\mathrm{ét}}$ and $c_f$ reduce the formula to\n$$\\varepsilon^{\\mathrm{pro}}_{E_YN}=E_Y(\\varepsilon^{\\mathrm{ét}}_N)\\circ c_f(GN)^{-1}.$$\nFor completeness, a natural Hom bijection gives its unit by transposing $\\mathrm{id}_{Rf_!M'}$ and its counit by transposing $\\mathrm{id}_{G^{\\mathrm{pro}}N'}$ in the opposite direction. Naturality implies that composing these two maps in either triangle transposes an identity to itself, so bijectivity gives the two triangle identities. This is the elementary Hom-bijection definition of adjunction, with the stated counit.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/det-sp-et-proet-adjunction-transfer.proof.md",
+    "place": "Proof, first paragraph"
+   }
+  },
+  {
+   "text": "Check the coefficient identification before invoking Brown restriction. By [lem-weil-pbc-finite-discrete-condensed-ring-constant] the finite discrete ring $\\underline A$ is the sheafified constant ring on profinite sets. Apply [lem-weil-pbc-finite-discrete-scheme-ring-constant] with $B=A$: its input is exactly the preceding ring isomorphism, and it identifies $p_T^*\\underline A$ with the sheafified constant ring on $T_{\\mathrm{proét}}$. The ring in [def-weil-pbc-proetale-modules] is the same constant ring: a continuous function $\\pi_0(|U|)\\to A$ has finitely many clopen fibres, whose inverse images form a disjoint open cover of $U$, on each member of which it is constant. Equal constant functions have equal values on every nonempty member; on the empty object the empty cover applies. Thus sheafifying the constant-presheaf map to this function presheaf gives an isomorphism of rings. By [def-weil-pbc-internal-abelian-sheaf-module-equivalence], internal modules over this ring are ordinary module sheaves with the identical underlying abelian sheaf. Applying this equivalence and its inverse degreewise preserves kernels, cokernels and hence quasi-isomorphisms; the inverse functors and their isomorphisms descend through localization. This is the termwise derived equivalence stipulated in [sk-prop-sf-rf-shriek-preservation]. Its coefficient conventions therefore agree with the item.",
    "uses": [
+    "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "lem-weil-pbc-finite-discrete-scheme-ring-constant",
     "def-weil-pbc-proetale-modules",
-    "sk-def-sfb-pulled-back-coefficients",
-    "sk-def-sfb-pullback-from-point",
-    "sk-def-sfb-module-objects",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "sk-prop-sf-rf-shriek-preservation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/det-sp-et-proet-adjunction-transfer.proof.md",
+    "place": "Proof, second paragraph: restriction theorem and counit-compatible uniqueness; the ambient comparison-class formula is not needed for the item."
+   }
+  },
+  {
+   "text": "The hypotheses of [sk-prop-sf-existence] hold: $p>0$, $\\ell\\ne p$, separated finite-type $k$-schemes and morphism, finite commutative $\\ell$-primary $A$, and the fixed compactification. It gives $Rf_!\\dashv f^!$ on the localizing closures, using the coefficient identification of Step 3. The first two conclusions of [sk-prop-sf-rf-shriek-preservation] say that this $f^!$ preserves $\\Dctf$ and that the adjunction restricts there. In detail, [sk-def-localizing-closure] makes each closure a full ambient subcategory containing $\\Dctf$. For $M',N'$ in the latter full subcategories the ambient Hom sets and the Brown Hom sets are identical. The restricted bijection thus has exactly the original Brown counit. Write $J=f^!|_{\\Dctf}$.",
+   "uses": [
     "sk-prop-sf-existence",
     "sk-prop-sf-rf-shriek-preservation",
-    "sk-def-localizing-closure",
+    "sk-def-localizing-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/det-sp-et-proet-adjunction-transfer.proof.md",
+    "place": "Proof, second paragraph: restriction theorem and counit-compatible uniqueness; the ambient comparison-class formula is not needed for the item."
+   }
+  },
+  {
+   "text": "Apply [det-sp-unique-right-adjoint] to the functor $F=Rf_!$ and its two right adjoints $G^{\\mathrm{pro}}$ (Steps 1–2) and $J$ (Step 4). The component $\\gamma_{N'}:G^{\\mathrm{pro}}N'\\to JN'$ is the $J$-transpose of $\\varepsilon^{\\mathrm{pro}}_{N'}$ and satisfies\n$$\\varepsilon^{\\mathrm{Brown}}_{N'}\\circ Rf_!(\\gamma_{N'})=\\varepsilon^{\\mathrm{pro}}_{N'}.$$\nThe cited statement makes these components natural, invertible and uniquely determined by this equation. This proves the unique counit-preserving identification with the Brown restriction.",
+   "uses": [
     "det-sp-unique-right-adjoint"
    ],
    "elementary": false,
@@ -56,19 +86,19 @@
  ],
  "proof_deps": [
   "thm-weil-pbc-site-comparison",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
   "def-weil-pbc-proetale-modules",
-  "sk-def-sfb-pulled-back-coefficients",
-  "sk-def-sfb-pullback-from-point",
-  "sk-def-sfb-module-objects",
-  "sk-prop-sf-existence",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
   "sk-prop-sf-rf-shriek-preservation",
+  "sk-prop-sf-existence",
   "sk-def-localizing-closure",
   "det-sp-unique-right-adjoint"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/det-sp-et-proet-adjunction-transfer.proof.md",
-  "place": "Both proof paragraphs, with quasi-inverse coherence and the missing finite-coefficient restriction citation made explicit."
+  "place": "Both proof paragraphs; explicit natural Hom chain, counit, finite-discrete coefficient identifications and Brown restriction."
  },
  "mathlib_searches": [
   {
@@ -175,10 +205,110 @@
    },
    "date": "2026-10-16",
    "verdict": "No exact match for the whole item: generic categorical transport and uniqueness declarations do not supply the geometric preservation of Dctf by the Brown adjoint. Mathlib Adjunction/Restrict.lean:42-77, Basic.lean:497-518 and Unique.lean:102-142 were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a right adjoint between etale and pro-etale constructible finite Tor derived categories along comparison equivalences and identify with a Brown right adjoint",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.derived",
+     "Condensed.profiniteSolidCounit",
+     "LightCondMod.LocallyConstant.adjunction",
+     "CategoryTheory.Adjunction.derived'",
+     "CategoryTheory.Functor.sheafAdjunctionCocontinuous",
+     "CategoryTheory.Adjunction.localization",
+     "CondensedMod.LocallyConstant.adjunction",
+     "CategoryTheory.Adjunction.isLocalization_rightAdjoint"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "No match for the whole geometric statement; generic categorical transport/uniqueness only. Read Adjunction/Basic.lean:436–450,497–518, Restrict.lean:42–77 and Unique.lean:102–142."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointUniq|ofNatIsoLeft|restrictFullyFaithful",
+   "results": {
+    "hits": 21,
+    "top": [
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Restrict.lean",
+     "Mathlib/CategoryTheory/Adjunction/Restrict.lean",
+     "Mathlib/CategoryTheory/Adjunction/Restrict.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "No match for the whole geometric statement; generic categorical transport/uniqueness only. Read Adjunction/Basic.lean:436–450,497–518, Restrict.lean:42–77 and Unique.lean:102–142."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A right adjoint on bounded constructible finite Tor etale complexes transfers to proetale complexes and equals the restricted Brown adjoint",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.rightAdjoint_preservesLimits",
+     "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward",
+     "CategoryTheory.Functor.instPreservesLimitsOfSizeOfIsRightAdjoint",
+     "CategoryTheory.Functor.rightAdjointObjIsDefined_limit",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "PresheafOfModules.instIsRightAdjointPushforward",
+     "SheafOfModules.instIsRightAdjointPushforward",
+     "CondensedMod.LocallyConstant.adjunction"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "No match for the whole geometric statement; generic categorical transport/uniqueness only. Read Adjunction/Basic.lean:436–450,497–518, Restrict.lean:42–77 and Unique.lean:102–142."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalences transport an adjunction with natural Hom bijections and identify two right adjoints uniquely preserving counits",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.homEquiv_symm_rightAdjointUniq_hom_app",
+     "CategoryTheory.Adjunction.rightAdjointUniq",
+     "CategoryTheory.Adjunction.rightAdjointUniq_hom_counit",
+     "CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit",
+     "CategoryTheory.Adjunction.rightAdjointUniq_hom_counit_assoc",
+     "CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit_assoc",
+     "CategoryTheory.Adjunction.rightAdjointUniq_trans",
+     "CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "No match for the whole geometric statement; generic categorical transport/uniqueness only. Read Adjunction/Basic.lean:436–450,497–518, Restrict.lean:42–77 and Unique.lean:102–142."
+  },
+  {
+   "tool": "grep",
+   "query": "mkOfHomEquiv|ofNatIsoLeft|rightAdjointUniq",
+   "results": {
+    "hits": 19,
+    "top": [
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Evaluation.lean",
+     "Mathlib/CategoryTheory/Adjunction/Evaluation.lean",
+     "Mathlib/CategoryTheory/Adjunction/Restrict.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-17",
+   "verdict": "No match for the whole geometric statement; generic categorical transport/uniqueness only. Read Adjunction/Basic.lean:436–450,497–518, Restrict.lean:42–77 and Unique.lean:102–142."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -198,35 +328,41 @@
   "date": "2026-10-17",
   "item": "det-sp-et-proet-adjunction-transfer",
   "worker": "stage1",
-  "summary": "Second reading found and repaired the unsupported inference from an adjunction on localizing closures to an adjunction on Dctf. Restored the standing field and scheme hypotheses needed to name that Brown adjoint; made the quasi-inverse isomorphisms and counit components explicit. Cited the existing finite-coefficient preservation and generic uniqueness nodes, and reused all other existing statements. No new nodes or Lean work. Made the finite discrete pulled-back coefficient convention explicit by the finite generators-and-relations calculation, so ordinary and module-object categories are not silently identified.",
-  "blueprint": "Step 1 realizes the first proof paragraph Hom chain and counit, including the equivalence identifications. Step 2 realizes the second paragraph restriction theorem and counit-compatible uniqueness. Its extra ambient comparison-class formula is outside the item conclusion and is omitted.",
+  "summary": "Retained the current corrected statement and reviewed mathematical route. Replaced the long inline coefficient comparison by existing finite-discrete ring and internal-module equivalence nodes. Separated the natural Hom bijection, counit calculation, coefficient conventions, Brown restriction and unique identification into five steps. No new nodes. No Lean writing or compilation.",
+  "blueprint": "Steps 1–2 realize paragraph 1 of the blueprint proof. Steps 3–5 realize paragraph 2 through coefficient identification, the restriction theorem and counit-preserving uniqueness. The optional ambient-adjoint formula is not a conclusion of the item.",
   "tool_uses": [
    {
-    "node": "sk-prop-sf-rf-shriek-preservation",
-    "why": "The first two clauses are exactly the finite-coefficient restriction theorem invoked by the blueprint second paragraph. They supply preservation and restriction of the fixed Brown adjoint, not a replacement for the unit site-comparison route; no node of this unit proves that preservation."
-   },
-   {
-    "node": "det-sp-unique-right-adjoint",
-    "why": "The generic transpose-of-counits uniqueness lemma identifies the two already constructed adjoints. It supplies no geometric site comparison and replaces no unit step."
-   },
-   {
     "node": "thm-weil-pbc-site-comparison",
-    "why": "Bounded-below full faithfulness of nu_T^*: this is the content of the cited unit sk-prop-sf-comparison (whose Uses name exactly this theorem), which has no node of its own; the blueprint proof cites it directly."
+    "why": "Bounded-below full faithfulness, directly invoked by the blueprint Hom chain and its comparison unit."
+   },
+   {
+    "node": "sk-prop-sf-rf-shriek-preservation",
+    "why": "Finite-coefficient Brown restriction, explicitly invoked as the restriction theorem in the blueprint second paragraph; no geometric route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "why": "Generic finite-discrete coefficient ring comparison needed to match the Brown and ordinary categories."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+    "why": "Generic pullback of the finite-discrete constant ring identification; no node of this unit supplies it."
    }
   ]
  },
  "tool_uses": [
   "sk-prop-sf-rf-shriek-preservation",
   "det-sp-unique-right-adjoint",
-  "thm-weil-pbc-site-comparison"
+  "thm-weil-pbc-site-comparison",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-N1-772d2dc57",
-  "group": "N1",
+  "reviewer": "NT-cc-Q110-5bb8f0ac4",
+  "group": "Q110",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-772d2dc57 (reviewer sub-agent of L); spot-checked: Read the item against the main-20261015 blueprint statement and both proof paragraphs, the unit sk-prop-sp-et-proet, the cited unit sk-prop-sf-comparison and the full statements of every cited node. Statement: the added standing setting (char p>0, l!=p, separated finite-type k-schemes) is the domain the cited Brown adjoint of sk-prop-sf-existence needs, and both citers already use it. The equivalences and c_f are hypotheses, which is how the blueprint proof and det-sp-reduction-exceptional use them. Q_Y replaces (nu_Y^*)^{-1}. No conclusion is dropped. Step 1: checked every link of the Hom chain (alpha_X, thm-weil-pbc-site-comparison D+ full faithfulness, the etale adjunction, c_f(M)^{-1} in the right direction, alpha_Y). Naturality holds in both variables, and the counit formula type-checks and reduces to the displayed one at N'=E_Y N. Step 2: p_T^* is a strong monoidal left adjoint and carries the finite presentation of A to A_T. Module objects are sheaves of modules. sk-prop-sf-rf-shriek-preservation clauses 1-2 give the restriction to Dctf, its deps do not reach the item, and there is no cycle. Full closures keep the Brown counit, and the Mathlib-leaf uniqueness det-sp-unique-right-adjoint gives the counit-compatible isomorphism. Dropping the blueprint's ambient formula is correct. FIX 1: step 2 never identified A_T with the ring (U -> Cont(pi_0|U|,A))^# of def-weil-pbc-proetale-modules. I added the clopen-fibre / finite disjoint cover argument and added that node to uses and proof_deps. FIX 2: I recorded thm-weil-pbc-site-comparison in split_report.tool_uses: it lies outside the unit closure but is exactly the content of the cited unit sk-prop-sf-comparison, which has no node of its own. Accepted tool uses: thm-weil-pbc-site-comparison, sk-prop-sf-rf-shriek-preservation (the blueprint's restriction theorem), det-sp-unique-right-adjoint (Mathlib leaf). No new nodes and no duplicates found. Edge cases f=id with G=id and the empty scheme were checked. No SGA source is cited.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-5bb8f0ac4 (reviewer sub-agent of L); spot-checked: Read the main-20261015 blueprint statement and both proof paragraphs, the unit sk-prop-sp-et-proet, every cited statement and the statement deps; review.md records each check. The statement is the one reviewed on 2026-10-16, not weakened: the added standing setting is exactly where the Brown f^! of sk-prop-sf-existence exists. The base-change morphism c_f uses the same chosen compactification as Rf_! and Rf^et_!. Step 3 identifies the coefficient categories (p_T^*A, the constant ring, Cont(pi0|U|,A)^#, module objects vs module sheaves) without assuming it. Step 1: I checked every map of the Hom chain (alpha_X precomposition, full faithfulness on bounded objects, the etale adjunction, c_f(M)^{-1}, alpha_Y) and its naturality. Step 2: I recomputed the counit, alpha_Y(N') o E_Y(eps_{Q_Y N'}) o c_f(G Q_Y N')^{-1}, and its reduction at N'=E_Y N. That reduction needs adjoint-equivalence data, which is the standard meaning of the statement's wording and can always be chosen; remark only, no change. Step 3: the finite-discrete condensed lemma's ring-object isomorphism is the monoidal input of the scheme lemma. The clopen-fibre cover and the empty cover give the comparison with def-weil-pbc-proetale-modules, and the internal-module equivalence is exact termwise, so it descends to derived categories. Step 4 uses only clauses 1-2 of sk-prop-sf-rf-shriek-preservation; the localizing closure is full, so the Brown counit is kept. Step 5 applies the Mathlib leaf det-sp-unique-right-adjoint with the correct direction of gamma. No cycle (read-only walk of the snapshot DAG); proof_deps equals the union of uses. Accepted tool_uses: thm-weil-pbc-site-comparison (the content of the cited unit sk-prop-sf-comparison), sk-prop-sf-rf-shriek-preservation (the blueprint's restriction theorem), and the two lem-weil-pbc-finite-discrete-* ring identifications. No new nodes; no duplicate found (pur9-def-transported-adjoint defines a different functor). Edge cases f=id, empty X or Y, A=0 and A=Z/l^2 hold. No SGA source. No fixes."
  },
  "lean_audit": {
   "master": {
