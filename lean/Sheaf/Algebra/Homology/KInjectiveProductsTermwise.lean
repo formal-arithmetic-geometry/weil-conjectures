@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import Sheaf.CategoryTheory.KInjectiveBridge
+import WeilConjectures.CategoryTheory.KInjectiveBridge
 
 /-! # Statements of the new targets (batch 2) about `KInjectiveProducts`
 

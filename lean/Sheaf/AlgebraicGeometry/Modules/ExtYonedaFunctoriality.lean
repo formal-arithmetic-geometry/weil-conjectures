@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology
 import Sheaf.AlgebraicGeometry.LocallyFreeExtSecondNaturality
 import Sheaf.AlgebraicGeometry.Modules.ExtYonedaAssociativity
 import Sheaf.Topology.RingedSpaceModuleCohomology
+import WeilConjectures.Topology.RingedSpaceModuleCohomology
 
 /-!
 # Functoriality of Ext and the structure-sheaf cohomology comparison

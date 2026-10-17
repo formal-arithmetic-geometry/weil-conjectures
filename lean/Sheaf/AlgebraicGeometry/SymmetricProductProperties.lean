@@ -13,6 +13,7 @@ import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceFunctorOfPoints
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
+import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 
 /-!
 # No common zero and permutation invariance

@@ -19,6 +19,7 @@ import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
 import Sheaf.AlgebraicGeometry.IntegralEtaleDirectImageExact
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.CriticalMap
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Integral surjective base change on the target

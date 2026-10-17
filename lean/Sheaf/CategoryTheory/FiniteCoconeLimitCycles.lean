@@ -10,6 +10,9 @@ public import Sheaf.CategoryTheory.ExactCoupleConvergence
 import Sheaf.CategoryTheory.DerivedCoupleExact
 import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subobject
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
+import WeilConjectures.CategoryTheory.DerivedCoupleExact
+import WeilConjectures.CategoryTheory.ExactCouple
+import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 
 /-! # Finite-tail limiting subobjects
 

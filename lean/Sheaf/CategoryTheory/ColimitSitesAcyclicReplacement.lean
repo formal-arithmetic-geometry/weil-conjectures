@@ -16,6 +16,7 @@ import Sheaf.Paper.ColimitSitesInjectiveSystem
 import WeilConjectures.CategoryTheory.SiteCechComplex
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
 import Sheaf.CategoryTheory.SiteCoveringAxioms
+import WeilConjectures.CategoryTheory.SiteCechVanishingCriterion
 
 /-! # Acyclic coefficient replacements on colimit sites.
 

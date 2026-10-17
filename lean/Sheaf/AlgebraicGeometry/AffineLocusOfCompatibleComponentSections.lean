@@ -13,6 +13,9 @@ public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 import Sheaf.AlgebraicGeometry.IsAffineOfFiniteClosedCover
 import Sheaf.AlgebraicGeometry.NonvanishingTensorPullback
 import Sheaf.Paper.NonvanishingSectionTrivializes
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import WeilConjectures.AlgebraicGeometry.NonvanishingSectionTrivializes
+import WeilConjectures.AlgebraicGeometry.NonvanishingTensorPullback
 
 /-! # Affineness of a compatible component section locus
 

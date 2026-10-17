@@ -10,6 +10,8 @@ public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 import all Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Resolution
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 
 /-! # Maps of computing resolutions across a scheme morphism
 

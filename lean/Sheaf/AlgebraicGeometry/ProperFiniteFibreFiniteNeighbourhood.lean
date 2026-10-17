@@ -9,6 +9,7 @@ import Sheaf.AlgebraicGeometry.ProperBasic
 import Sheaf.AlgebraicGeometry.QuasiFiniteIffFiniteFibres
 import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
 import Sheaf.AlgebraicGeometry.QuasiFiniteLocusOpen
+import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
 
 /-!
 # Proper morphisms with finite fibres are finite near a point

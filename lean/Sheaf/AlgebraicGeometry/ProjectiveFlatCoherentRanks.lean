@@ -19,6 +19,10 @@ import Sheaf.AlgebraicGeometry.LocalizedPullbackPerfectModel
 import Sheaf.AlgebraicGeometry.FiniteFreeComplexHomologyUpperSemicontinuous
 import Sheaf.AlgebraicGeometry.ProjectiveNoetherianDirectImagePerfect
 import Sheaf.AlgebraicGeometry.ProjectiveNoetherianPerfectBaseChange
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.RfPerfect
+import WeilConjectures.AlgebraicGeometry.PQFCohomology
+import WeilConjectures.AlgebraicGeometry.TensorPullback
+import WeilConjectures.RingTheory.FiniteProjectiveStandardFreeCover
 
 /-! # Constructible geometric fibre dimensions of coherent cohomology
 

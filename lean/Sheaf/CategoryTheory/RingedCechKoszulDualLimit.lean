@@ -26,6 +26,7 @@ import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
 import Sheaf.Algebra.Homology.KInjectiveProductsTermwise
 import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 
 /-!
 # Extended Cech complex and the strict Koszul dual limit

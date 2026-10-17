@@ -13,6 +13,9 @@ import Sheaf.AlgebraicGeometry.BoundedAllowableTorsionSmoothBaseChange
 import Sheaf.AlgebraicGeometry.AllowableTorsionInverseImage
 import WeilConjectures.AlgebraicGeometry.GeometricPointFieldExtension
 import Sheaf.AlgebraicGeometry.QcqsHigherImagesPrimeTorsion
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Bounded-below derived smooth base change

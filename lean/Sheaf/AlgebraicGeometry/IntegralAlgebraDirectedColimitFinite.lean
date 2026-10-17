@@ -16,6 +16,8 @@ import WeilConjectures.AlgebraicGeometry.QuasiCoherentModuleColimitAffineSection
 import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
 import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Sheaf.RingTheory.SymmetricAlgebraFinitePresentation
+import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import WeilConjectures.RingTheory.SymmetricAlgebraFinitePresentation
 
 /-! # Integral quasi-coherent algebras as directed colimits
 

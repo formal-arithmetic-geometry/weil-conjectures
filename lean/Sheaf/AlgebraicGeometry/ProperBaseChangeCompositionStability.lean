@@ -13,6 +13,8 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
 import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
+import WeilConjectures.CategoryTheory.ExactCoupleConvergence
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LeraySpectralSequence
 
 @[expose] public section
 

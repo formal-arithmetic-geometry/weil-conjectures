@@ -30,6 +30,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleStratificationLocalGluingCore
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Mathlib.CategoryTheory.Sites.ConstantSheaf
 import Mathlib.CategoryTheory.Sites.Sheafification
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import WeilConjectures.AlgebraicGeometry.Sites.InverseImageRepresentable
+import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 /-!
 # Fixed points of Frobenius-semilinear vector-bundle endomorphisms

@@ -13,6 +13,7 @@ public import Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.FunctionField
 import Sheaf.AlgebraicGeometry.IsFiniteLocallyFreeOfCoherentFreeStalks
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
+import WeilConjectures.AlgebraicGeometry.Coherent
 
 /-!
 # Torsion-free coherent modules on regular curves

@@ -24,6 +24,8 @@ import Sheaf.AlgebraicGeometry.QuasiFiniteShriekConstructible
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.CategoryTheory.TruncationHypercohomology
 
 /-!
 # Constructibility of the etale compact-support candidate

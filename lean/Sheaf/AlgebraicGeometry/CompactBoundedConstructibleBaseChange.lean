@@ -22,6 +22,8 @@ import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Sheaf.AlgebraicGeometry.OpenImmersionExtensionZeroBaseChange
+import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Bounded constructibility and base change for compact direct images

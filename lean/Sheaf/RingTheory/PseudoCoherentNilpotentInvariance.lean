@@ -17,6 +17,7 @@ import Mathlib.Algebra.Module.Projective
 import Mathlib.RingTheory.Flat.Basic
 import Sheaf.RingTheory.NilpotentProjectiveComplexLift
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
+import WeilConjectures.RingTheory.NakayamaNilpotent
 
 /-!
 # Pseudo-coherence across a nilpotent quotient

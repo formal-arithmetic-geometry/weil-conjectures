@@ -24,6 +24,7 @@ import Sheaf.AlgebraicGeometry.FiniteDiscreteFiber
 import WeilConjectures.Mathlib.AlgebraicGeometry.Properties
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Sheaf.RingTheory.MinimalPrimeFiniteTypeFiniteAway
+import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
 
 /-!
 # Finiteness over an open containing all component generic points

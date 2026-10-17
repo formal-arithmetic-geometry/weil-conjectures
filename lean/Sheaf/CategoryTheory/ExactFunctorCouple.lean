@@ -8,6 +8,10 @@ module
 public import Sheaf.CategoryTheory.HalfPlaneConvergence
 import Sheaf.CategoryTheory.ExactFunctorHalfPlane
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Images
+import WeilConjectures.CategoryTheory.ExactCouple
+import WeilConjectures.CategoryTheory.ExactCoupleConvergence
+import WeilConjectures.CategoryTheory.HalfPlaneConvergence
+import WeilConjectures.CategoryTheory.PBCFiltration
 
 /-!
 # Exact functors transport exact couples

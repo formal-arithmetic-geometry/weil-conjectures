@@ -19,6 +19,9 @@ import Sheaf.AlgebraicGeometry.NowhereDenseDimensionDrop
 import Sheaf.RingTheory.HilbertAffineDenominatorModule
 import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
 import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 
 /-! # Regular-section exact sequences give lower-dimensional differences
 

@@ -25,6 +25,7 @@ import Sheaf.CategoryTheory.RingedSliceExtensionTensor
 import Sheaf.Paper.SiteBoundedConstantModel
 import Sheaf.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
 import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 
 /-! # Derived tensor preserves locally constant finite type cohomology
 

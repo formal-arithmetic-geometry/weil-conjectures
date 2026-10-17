@@ -21,6 +21,7 @@ import Mathlib.AlgebraicGeometry.Restrict
 import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 
 /-!
 # Uniform dimension bound for fibres of a finite-type morphism

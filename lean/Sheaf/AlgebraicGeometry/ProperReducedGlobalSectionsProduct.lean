@@ -16,6 +16,8 @@ import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 import WeilConjectures.Mathlib.RingTheory.Artinian.Ring
+import WeilConjectures.AlgebraicGeometry.Coherent
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-!
 # Global functions on a proper reduced scheme over an algebraically closed field

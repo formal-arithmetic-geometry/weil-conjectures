@@ -19,6 +19,7 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import WeilConjectures.SixFunctors.Finite.Stalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.ConstructibleOfFiniteDirectImage
+import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 
 /-!
 # Finite direct image reflects bounded constructibility

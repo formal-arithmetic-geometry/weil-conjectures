@@ -2,6 +2,7 @@
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
+import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
 
 /-! Componentwise geometric inputs for cartesian extension by zero. -/
 

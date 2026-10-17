@@ -13,6 +13,11 @@ import Sheaf.AlgebraicGeometry.AmpleIdealSection
 import Sheaf.AlgebraicGeometry.AffineCapSectionOpen
 import Sheaf.AlgebraicGeometry.NonvanishingGeneratingLocus
 import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import WeilConjectures.AlgebraicGeometry.AmpleIso
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import WeilConjectures.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Ideal-supported affine sections of ample pullbacks
 

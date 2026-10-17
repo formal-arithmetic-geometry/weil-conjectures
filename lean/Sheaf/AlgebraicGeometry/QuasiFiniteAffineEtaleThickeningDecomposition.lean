@@ -26,6 +26,8 @@ import Sheaf.AlgebraicGeometry.DescendQuasiFiniteAffine
 import Sheaf.AlgebraicGeometry.FiniteAffineSectionCover
 import Sheaf.AlgebraicGeometry.Morphisms.GenericFiniteOpenNeighborhood
 import WeilConjectures.Mathlib.Algebra.Category.Ring.FinitePresentation
+import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
+import WeilConjectures.AlgebraicGeometry.Thickening
 
 /-!
 # Finite etale thickenings after surjective affine base change

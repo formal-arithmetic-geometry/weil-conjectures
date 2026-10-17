@@ -25,6 +25,7 @@ import Sheaf.AlgebraicGeometry.FiniteReflectsBoundedConstructible
 import Sheaf.AlgebraicGeometry.OpenClosedRecollement
 import Sheaf.AlgebraicGeometry.ProperBoundedConstructible
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Recovering bounded constructibility at a finite boundary

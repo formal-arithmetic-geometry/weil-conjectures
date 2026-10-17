@@ -25,6 +25,9 @@ import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import Sheaf.CategoryTheory.RingedSiteModules
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import Sheaf.AlgebraicGeometry.ProjectiveCurveConstant
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.CategoryTheory.Abelian.HorseshoeDeltaFunctor
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 
 /-!
 # Constructible higher direct images of finite constant groups on curve families

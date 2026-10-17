@@ -28,6 +28,11 @@ import Sheaf.AlgebraicGeometry.ModulePullbackTensor
 import Sheaf.AlgebraicGeometry.FinitePresentationZeroMapDescent
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
+import WeilConjectures.AlgebraicGeometry.CoherentLocalFinitePresentation
+import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
+import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 
 /-! # Spreading finite algebras from the generic fibre
 

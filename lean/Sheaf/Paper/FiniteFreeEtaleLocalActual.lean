@@ -21,6 +21,8 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Sheaf.Paper.SiteRestrictionExact
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.AlgebraicGeometry.SiteRestrictionExact
 
 /-!
 # Local chain representatives for finite free constant complexes

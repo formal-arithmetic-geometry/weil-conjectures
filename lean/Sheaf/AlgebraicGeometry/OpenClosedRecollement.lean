@@ -15,6 +15,9 @@ import WeilConjectures.SixFunctors.OpenClosed.Exact
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-!
 # Functorial open-closed recollement

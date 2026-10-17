@@ -16,6 +16,8 @@ import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry
 import Sheaf.CategoryTheory.GrothendieckDerivedCoproductsColimit
 import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 import Sheaf.Paper.EtaleFlatKFlatResolution
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 
 /-!
 # Derived tensor products of étale sheaves preserve direct sums

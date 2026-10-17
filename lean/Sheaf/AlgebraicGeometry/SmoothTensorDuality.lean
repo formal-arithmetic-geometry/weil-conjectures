@@ -43,6 +43,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
 import Sheaf.AlgebraicGeometry.ProperProjectionFormula
+import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-! # Smooth tensor duality for ordinary etale coefficients
 

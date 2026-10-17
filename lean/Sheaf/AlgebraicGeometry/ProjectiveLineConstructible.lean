@@ -32,6 +32,8 @@ import Sheaf.CategoryTheory.CartanEilenbergExists
 import Sheaf.CategoryTheory.HypercohomologyFirstPage
 import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 import WeilConjectures.SixFunctors.BaseChange.EtaleDerived
+import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LeraySpectralSequence
 
 /-!
 # Constructible coefficients on the projective line

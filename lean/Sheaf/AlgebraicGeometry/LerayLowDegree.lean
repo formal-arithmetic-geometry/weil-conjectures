@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Homology.ExactSequence
 import Sheaf.CategoryTheory.LerayFiveTerm
 import Sheaf.Paper.PQFCohomology
 import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
+import WeilConjectures.AlgebraicGeometry.PQFCohomology
 
 /-!
 # Low degree terms of the Leray spectral sequence

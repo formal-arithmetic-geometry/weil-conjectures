@@ -6,6 +6,8 @@ import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subobject
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 import Sheaf.CategoryTheory.FiniteCoconeLimitCycles
 import Sheaf.CategoryTheory.FiniteCoconeLimitBoundaries
+import WeilConjectures.CategoryTheory.ExactCouple
+import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 
 /-! Canonical weak-convergence maps for a finite diagonal exact couple.
 Source: Stacks Project, Homology, Tag 012W.

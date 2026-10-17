@@ -11,6 +11,11 @@ import Sheaf.CategoryTheory.DerivedCoupleExact
 import all Sheaf.CategoryTheory.FinitePageImageLift
 import Sheaf.CategoryTheory.DerivedCoupleKernelIdentities
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
+import WeilConjectures.CategoryTheory.DerivedCoupleExact
+import WeilConjectures.CategoryTheory.DerivedCoupleKernelIdentities
+import WeilConjectures.CategoryTheory.ExactCouple
+import WeilConjectures.CategoryTheory.ExactCoupleConvergence
+import WeilConjectures.CategoryTheory.FinitePageImageLift
 
 /-!
 # Finite cycles of an exact couple

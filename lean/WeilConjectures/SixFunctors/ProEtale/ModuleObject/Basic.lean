@@ -15,6 +15,10 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 
 import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
+import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Sheaf.CategoryTheory.SiteInverseImageTensor
+import Sheaf.RingTheory.IndEtaleStability
+import Sheaf.RingTheory.IndPrincipalZariski
 
 /-!
 

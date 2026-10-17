@@ -13,6 +13,7 @@ import WeilConjectures.CategoryTheory.EffaceableDeltaFunctorUniversal
 import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
 import Sheaf.Topology.ClosedImmersionPushforwardCohomology
 import Sheaf.Topology.ClosedImmersionPushforwardExact
+import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
 
 /-!
 # Closed-pushforward cohomology comparison and boundaries

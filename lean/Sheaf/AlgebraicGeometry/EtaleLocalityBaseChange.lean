@@ -19,6 +19,7 @@ import Sheaf.Paper.SiteRestrictionExact
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 import Sheaf.AlgebraicGeometry.IsIsoIffOfJointlySurjectiveEtaleFamily
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.AlgebraicGeometry.SiteRestrictionExact
 
 /-!
 # Etale locality of base change

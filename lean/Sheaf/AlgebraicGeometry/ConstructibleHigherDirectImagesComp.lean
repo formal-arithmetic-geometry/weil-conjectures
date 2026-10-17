@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.ConstructibleHigherDirectImages
 import Sheaf.AlgebraicGeometry.EtaleGrothendieckSpectralSequence
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LeraySpectralSequence
 
 /-!
 # Composition for constructibility of higher direct images

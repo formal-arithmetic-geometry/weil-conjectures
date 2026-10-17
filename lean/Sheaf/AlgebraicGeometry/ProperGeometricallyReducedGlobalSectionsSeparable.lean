@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.FieldTheory.SeparableExtension
 import Sheaf.FieldTheory.FiniteExtensionTensorAlgebraicClosureReduced
 import Sheaf.Paper.EulerCharacteristicWellDefined
+import WeilConjectures.AlgebraicGeometry.Cohomology.EulerCharProper
 
 /-!
 # Separability of global sections of a proper geometrically reduced scheme

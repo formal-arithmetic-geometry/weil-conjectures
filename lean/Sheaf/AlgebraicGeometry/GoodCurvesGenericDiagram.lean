@@ -37,6 +37,8 @@ import Sheaf.AlgebraicGeometry.OpenImmersionInverseLimitDescent
 import Sheaf.AlgebraicGeometry.ProperFibreDimensionUpperSemicontinuous
 import Sheaf.AlgebraicGeometry.ProperSmoothGeometricComponentsLocallyConstant
 import Sheaf.AlgebraicGeometry.ReducedAlgebraicNormalizationFieldChange
+import WeilConjectures.AlgebraicGeometry.EtaleInverseLimitDescent
+import WeilConjectures.AlgebraicGeometry.Thickening
 
 /-!
 # Good curve diagrams near a generic point

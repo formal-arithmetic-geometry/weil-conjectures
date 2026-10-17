@@ -12,6 +12,7 @@ import Sheaf.AlgebraicGeometry.AmpleImmersionAffineBase
 import Sheaf.AlgebraicGeometry.CompleteLinearSystemClosed
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceFunctorOfPoints
 import WeilConjectures.AlgebraicGeometry.Modules.VeryAmple
+import WeilConjectures.AlgebraicGeometry.AmpleImmersionAffineBase
 
 /-!
 # Ampleness from affine nonvanishing loci

@@ -17,6 +17,7 @@ import Mathlib.CategoryTheory.Sites.LocallyBijective
 import Sheaf.CategoryTheory.ModuleAbelianEvaluationComparison
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 import WeilConjectures.CategoryTheory.SiteCechComplex
+import WeilConjectures.CategoryTheory.SiteCechVanishingCriterion
 
 /-!
 # Object evaluation acyclicity of direct images of injective modules

@@ -18,6 +18,7 @@ import Sheaf.AlgebraicGeometry.EtaleShriekQcqsComposition
 import Sheaf.AlgebraicGeometry.OpenClosedRecollement
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
 
 /-!
 # Open-closed localization for relative etale compact support

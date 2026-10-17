@@ -32,6 +32,7 @@ import Sheaf.CategoryTheory.DoubleComplexTotal
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageExact
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import Sheaf.CategoryTheory.RingedSiteCechRefinementSquare
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 
 /-! # Quasi-coherent cohomology comparison and pullback
 

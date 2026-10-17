@@ -15,6 +15,7 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction
+import WeilConjectures.AlgebraicGeometry.GaloisCategories
 
 /-!
 # The fundamental-group equivalence and base change

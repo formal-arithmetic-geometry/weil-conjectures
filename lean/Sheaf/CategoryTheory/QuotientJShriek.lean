@@ -11,6 +11,8 @@ public import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 
 /-!
 # The canonical extension-by-zero generator epimorphism

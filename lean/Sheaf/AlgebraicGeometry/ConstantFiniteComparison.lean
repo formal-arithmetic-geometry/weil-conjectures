@@ -31,6 +31,9 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
 import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import Sheaf.AlgebraicGeometry.FiniteConstructibleDirectImage
 import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
+import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LeraySpectralSequence
 
 /-!
 # Constant coefficients under a finite comparison

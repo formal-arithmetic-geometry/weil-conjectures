@@ -13,6 +13,7 @@ public import Mathlib.Algebra.Homology.HomologySequence
 
 import Sheaf.CategoryTheory.FilteredHomologyCoupleQuotientPages
 import Sheaf.CategoryTheory.FilteredQuotientFirstConnecting
+import Sheaf.CategoryTheory.FilteredHomologyExactCouple
 /-!
 # Exact-couple comparison for representative quotient differentials
 

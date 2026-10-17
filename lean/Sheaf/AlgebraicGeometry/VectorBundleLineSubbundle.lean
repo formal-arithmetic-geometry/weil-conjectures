@@ -20,6 +20,8 @@ import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 import Sheaf.AlgebraicGeometry.RegularCurveTorsionfreeFree
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
+import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 
 @[expose] public section
 

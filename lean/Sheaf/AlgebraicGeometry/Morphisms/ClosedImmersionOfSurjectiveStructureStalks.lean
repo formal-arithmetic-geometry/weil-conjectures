@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
+import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 
 /-!
 # Closed immersions from surjective structure-sheaf stalk maps

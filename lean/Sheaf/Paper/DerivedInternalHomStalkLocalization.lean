@@ -12,6 +12,7 @@ import Sheaf.Algebra.Homology.DerivedHomProjectiveResolution
 import Sheaf.Algebra.Homology.ModuleStalkExact
 import Sheaf.AlgebraicGeometry.CoherentAffineFreeResolution
 import Sheaf.Paper.DerivedInternalHomRestrictOpen
+import WeilConjectures.Algebra.Homology.ModuleStalkExact
 
 @[expose] public section
 

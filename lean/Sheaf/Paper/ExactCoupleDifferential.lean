@@ -18,6 +18,8 @@ import WeilConjectures.SixFunctors.BaseChange.Derived
 import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.Algebra.Homology.ExactCouple.Basic
+import WeilConjectures.CategoryTheory.ExactCouple
+import WeilConjectures.CategoryTheory.TruncationCouple
 
 /-! # Compatibility of the exact-couple differential
 

@@ -16,6 +16,7 @@ import Sheaf.AlgebraicGeometry.ModuleFinitePresentationExtension
 import Sheaf.AlgebraicGeometry.ModuleFiniteTypeSubmoduleExtension
 import Sheaf.AlgebraicGeometry.ModuleStalkFilteredColimit
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 
 /-!
 # Quasi-coherent modules as filtered colimits of finitely presented modules

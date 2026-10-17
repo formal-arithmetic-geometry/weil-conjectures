@@ -22,6 +22,7 @@ import Sheaf.AlgebraicGeometry.StrictHenselization
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
 import Sheaf.AlgebraicGeometry.ZeroDimensionalSpectrumProfinite
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 
 /-! # Testing a strict-local comparison on every geometric strict-local fibre
 

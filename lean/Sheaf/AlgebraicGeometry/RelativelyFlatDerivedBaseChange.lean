@@ -13,6 +13,7 @@ import Sheaf.AlgebraicGeometry.BaseChangeMapCech
 import Sheaf.AlgebraicGeometry.CechResolution
 import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 
 /-! # Derived base change for a relatively flat module
 

@@ -39,6 +39,11 @@ import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
 import Sheaf.AlgebraicGeometry.LeraySpectralSequence
 import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectBaseChange
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
+import WeilConjectures.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Structure-sheaf direct images for smooth proper curves
 

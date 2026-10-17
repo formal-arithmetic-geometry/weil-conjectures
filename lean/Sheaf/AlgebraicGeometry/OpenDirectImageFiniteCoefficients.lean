@@ -18,6 +18,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 import Sheaf.CategoryTheory.TruncationHypercohomology
 import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 import Sheaf.AlgebraicGeometry.OpenDirectImageOverField
+import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import WeilConjectures.CategoryTheory.TruncationHypercohomology
 
 /-!
 # Open direct images with finite allowable coefficients

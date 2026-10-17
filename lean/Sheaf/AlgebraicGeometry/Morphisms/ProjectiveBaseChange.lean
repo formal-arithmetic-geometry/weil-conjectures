@@ -10,6 +10,7 @@ public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 import WeilConjectures.AlgebraicGeometry.Modules.VeryAmple
 import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Projective morphisms are stable under base change

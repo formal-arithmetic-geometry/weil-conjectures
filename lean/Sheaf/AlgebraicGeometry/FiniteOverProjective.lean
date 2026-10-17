@@ -17,6 +17,8 @@ import Sheaf.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.AmpleImmersionAffineBase
 import WeilConjectures.AlgebraicGeometry.Ample
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import WeilConjectures.AlgebraicGeometry.AmpleImmersionAffineBase
+import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 
 /-! # Finite covers of projective schemes over affine opens
 

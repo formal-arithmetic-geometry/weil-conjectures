@@ -20,6 +20,8 @@ import Mathlib.Algebra.Homology.HomologySequence
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import WeilConjectures.CategoryTheory.SiteCechComplex
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import WeilConjectures.CategoryTheory.InjectiveModulePresheaf
 
 /-!
 # Injectives and the module Čech acyclicity criterion

@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Category.Grp.Colimits
 public import Sheaf.CategoryTheory.FiniteFiltrationInduction
 import Sheaf.CategoryTheory.Filtration
 import WeilConjectures.CategoryTheory.Abelian.Filtration
+import WeilConjectures.CategoryTheory.PBCFiltration
 
 /-!
 # The filtration and graded pieces of a finite filtered colimit

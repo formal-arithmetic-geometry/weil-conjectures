@@ -30,6 +30,10 @@ import WeilConjectures.AlgebraicGeometry.Curve.Estimate
 import WeilConjectures.ConstructibleSheaf.Defs
 import Sheaf.Paper.FiniteCoproductCohomologyAssembly
 import Sheaf.AlgebraicGeometry.ProjectiveFlatCoherentRanks
+import WeilConjectures.AlgebraicGeometry.Coherent
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.Topology.RingedSpaceModuleCohomology
+import WeilConjectures.Topology.RingedSpaceModuleEnoughInjectives
 
 /-!
 # Betti cardinalities of smooth projective curve families

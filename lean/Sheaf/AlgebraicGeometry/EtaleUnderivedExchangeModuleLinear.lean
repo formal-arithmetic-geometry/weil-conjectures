@@ -11,6 +11,7 @@ import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Linearity of the underived exchange morphism

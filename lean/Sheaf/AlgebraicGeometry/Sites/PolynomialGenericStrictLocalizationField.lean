@@ -16,6 +16,7 @@ import Mathlib.RingTheory.KrullDimension.Field
 import WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField
 import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
 import Mathlib.RingTheory.KrullDimension.Zero
+import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
 
 /-! # Strict localization at a generic point of polynomial affine space
 

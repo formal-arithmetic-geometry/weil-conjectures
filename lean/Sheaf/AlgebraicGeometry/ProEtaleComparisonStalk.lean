@@ -22,6 +22,10 @@ import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.AlgebraicGeometry.ProEtaleComparisonPullbackSections
+import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
+import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 
 /-!
 # Etale-to-pro-etale comparison on geometric stalks

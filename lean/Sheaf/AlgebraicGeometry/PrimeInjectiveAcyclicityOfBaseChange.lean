@@ -17,6 +17,7 @@ import WeilConjectures.SixFunctors.BaseChange.Derived
 import WeilConjectures.SixFunctors.BaseChange.Square
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
 
 /-!
 # Proper base change implies injective acyclicity

@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
 
 /-!
 # Proper base change for torsion abelian sheaves

@@ -13,6 +13,7 @@ import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Sheaf.Algebra.Homology.TowerEvaluationKInjective
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
+import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 
 /-!
 # Lifting compatible derived maps of sequential towers

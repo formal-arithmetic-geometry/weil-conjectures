@@ -12,6 +12,8 @@ public import Mathlib.Topology.Sheaves.Flasque
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import Sheaf.Algebra.Homology.ModuleStalkExact
 import Sheaf.AlgebraicGeometry.Modules.ExtensionByZeroAdjunction
+import WeilConjectures.Algebra.Homology.ModuleStalkExact
+import WeilConjectures.AlgebraicGeometry.Modules.ExtensionByZeroAdjunction
 
 /-! # Flasqueness of internal Hom into an injective module
 

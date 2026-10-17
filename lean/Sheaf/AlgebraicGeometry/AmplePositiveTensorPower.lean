@@ -11,6 +11,7 @@ import all WeilConjectures.AlgebraicGeometry.SectionNonvanishingZeroLocus
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # Positive tensor powers preserve absolute ampleness
 

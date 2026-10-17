@@ -22,6 +22,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 import Sheaf.CategoryTheory.Triangulated.DerivedLimitProducts
 import Sheaf.Paper.KoszulQuotientLimit
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 
 /-!
 # Reduction of adic completion

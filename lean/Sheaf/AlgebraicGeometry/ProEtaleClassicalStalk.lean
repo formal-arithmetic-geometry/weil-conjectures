@@ -27,6 +27,7 @@ import WeilConjectures.Mathlib.RingTheory.Etale.Weakly
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
 import Sheaf.CategoryTheory.SiteCoveringAxioms
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 
 /-!
 # Classical pro-etale stalks

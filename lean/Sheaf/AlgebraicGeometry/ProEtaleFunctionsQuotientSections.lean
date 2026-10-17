@@ -20,6 +20,7 @@ import Sheaf.AlgebraicGeometry.AffineSepclosedEtaleAcyclic
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Sheaf.RingTheory.WeaklyEtaleField
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 
 /-!
 # Affine sections of functions modulo the constant pro-etale sheaf

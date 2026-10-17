@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Linearity of extension of graph sections over the constant ring sheaf

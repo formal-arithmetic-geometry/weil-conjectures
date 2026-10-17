@@ -21,6 +21,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
+import WeilConjectures.AlgebraicGeometry.PQFCohomology
+import WeilConjectures.CategoryTheory.RightDerivedExactComposite
 
 /-!
 # The canonical locally free Ext comparison

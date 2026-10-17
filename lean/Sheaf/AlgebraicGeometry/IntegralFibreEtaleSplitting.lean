@@ -17,6 +17,7 @@ import Mathlib.AlgebraicGeometry.Fiber
 import Mathlib.RingTheory.Spectrum.Prime.Topology
 import Mathlib.RingTheory.Ideal.GoingUp
 import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+import WeilConjectures.RingTheory.LiftIdempotentUpstairs
 
 /-!
 # Étale splitting of an integral morphism with finite fibre

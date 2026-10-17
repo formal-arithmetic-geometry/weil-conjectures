@@ -13,6 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 import Sheaf.AlgebraicGeometry.FiniteSchemeCohomologyTensor
 import Sheaf.AlgebraicGeometry.ZeroSupportFiniteScheme
 import WeilConjectures.Mathlib.Topology.KrullDimension
+import WeilConjectures.AlgebraicGeometry.Coherent
 
 /-! # Euler characteristic of modules with zero-dimensional support
 

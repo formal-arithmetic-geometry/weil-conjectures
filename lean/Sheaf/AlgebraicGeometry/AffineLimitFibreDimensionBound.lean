@@ -18,6 +18,7 @@ import Sheaf.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 
 /-!
 # Fibre dimension bounds descend in affine inverse systems

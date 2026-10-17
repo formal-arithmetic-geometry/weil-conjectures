@@ -12,6 +12,7 @@ import Sheaf.AlgebraicGeometry.SectionsMorphismToProjPolynomialRing
 import Sheaf.Paper.NonvanishingSectionTrivializes
 import WeilConjectures.AlgebraicGeometry.Modules.VeryAmple
 import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.AlgebraicGeometry.NonvanishingSectionTrivializes
 
 /-!
 # Very ampleness on a finite disjoint union

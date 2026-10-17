@@ -14,6 +14,7 @@ import Sheaf.Paper.AdicTowerReconstruction
 import Sheaf.RingTheory.FiniteModuleComplete
 import Sheaf.RingTheory.FiniteOverCompleteRing
 import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import WeilConjectures.RingTheory.FiniteModuleComplete
 
 /-!
 # Adic systems of finite modules over p-adic coefficient rings

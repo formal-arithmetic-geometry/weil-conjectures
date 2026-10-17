@@ -13,6 +13,7 @@ import WeilConjectures.SixFunctors.BaseChange.Pasting
 import WeilConjectures.SixFunctors.BaseChange.Square
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
 
 /-!
 # Identity and pasting laws of derived square isomorphisms

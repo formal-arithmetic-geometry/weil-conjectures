@@ -13,6 +13,7 @@ import Sheaf.CategoryTheory.FilteredHomologyTowerDifferential
 import Sheaf.CategoryTheory.FilteredComplexDifferentialRepresentativesCover
 import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 import Sheaf.CategoryTheory.ExactCouple
+import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 /-!
 # Derived homology-couple pages as representative quotients
 

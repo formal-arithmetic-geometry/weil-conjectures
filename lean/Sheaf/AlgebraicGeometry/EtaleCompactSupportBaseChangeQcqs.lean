@@ -23,6 +23,7 @@ import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 import Sheaf.AlgebraicGeometry.ExchangeForgetCoefficients
 import WeilConjectures.SixFunctors.BaseChange.Derived
 import Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChange
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Arbitrary base change for compact support on qcqs etale sites

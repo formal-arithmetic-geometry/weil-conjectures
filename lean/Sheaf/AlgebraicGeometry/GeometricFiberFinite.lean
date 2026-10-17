@@ -22,6 +22,7 @@ import Sheaf.AlgebraicGeometry.LerayBounded
 import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
 
 /-!
 # Finite-coefficient geometric-fibre formula

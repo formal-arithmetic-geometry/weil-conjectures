@@ -27,6 +27,7 @@ import Sheaf.AlgebraicGeometry.Morphisms.FiniteNormalDenseOpenIso
 import Sheaf.AlgebraicGeometry.NagataRelativeGluingAxiomsEventually
 import Sheaf.AlgebraicGeometry.NormalityPerfectClosureTest
 import Sheaf.AlgebraicGeometry.ReducedAlgebraicNormalizationFieldChange
+import WeilConjectures.AlgebraicGeometry.HomeomorphPurelyInseparableBaseChange
 
 /-!
 # Geometrically normal normalization after purely inseparable extension

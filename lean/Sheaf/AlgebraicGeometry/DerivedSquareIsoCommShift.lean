@@ -10,6 +10,7 @@ public import Mathlib.CategoryTheory.Shift.CommShift
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 import Sheaf.AlgebraicGeometry.DerivedCategories
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
 
 /-!
 # Shift compatibility of the derived square isomorphism

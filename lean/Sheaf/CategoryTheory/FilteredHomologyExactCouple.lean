@@ -9,6 +9,7 @@ public import Sheaf.CategoryTheory.ExactCouple
 public import Sheaf.CategoryTheory.FilteredHomologyCoupleData
 
 public import Sheaf.CategoryTheory.FilteredHomologyCoupleExactness
+import WeilConjectures.CategoryTheory.ExactCouple
 
 /-!
 # The concrete filtered homology exact couple

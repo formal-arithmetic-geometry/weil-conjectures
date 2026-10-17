@@ -60,6 +60,8 @@ import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.CategoryTheory.Sites.Point.Basic
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-! # Etale locality of the ordinary ambient adjoint
 

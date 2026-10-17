@@ -12,6 +12,7 @@ import Sheaf.AlgebraicGeometry.AssociatedPointsEqWeaklyAssociatedPoints
 import Sheaf.AlgebraicGeometry.MeromorphicGenericProduct
 import Sheaf.Topology.PresheafModuleStalkFunctor
 import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Meromorphic sections and generic-point products

@@ -15,6 +15,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.Adjunction.Basic
 import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointBaseChange
 import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 
 /-!
 # Base change of a right adjoint on the self-product

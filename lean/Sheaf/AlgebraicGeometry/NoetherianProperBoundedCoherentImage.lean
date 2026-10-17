@@ -21,6 +21,11 @@ import Sheaf.CategoryTheory.TruncationHypercohomology
 import Mathlib.Data.Int.Interval
 import all Sheaf.AlgebraicGeometry.DerivedDirectImageBoundedBelowQCoh
 import all Sheaf.CategoryTheory.HalfPlaneWeakConvergence
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelSum
+import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+import WeilConjectures.CategoryTheory.HalfPlaneWeakConvergence
+import WeilConjectures.CategoryTheory.TruncationHypercohomology
 
 /-! # Bounded coherent direct image in the Noetherian proper case
 

@@ -15,6 +15,8 @@ import Sheaf.FieldTheory.SeparableTensorAlgebraicClosure
 import Sheaf.Paper.EulerCharacteristicWellDefined
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
+import WeilConjectures.AlgebraicGeometry.Cohomology.EulerCharProper
+import WeilConjectures.AlgebraicGeometry.GlobalSectionsProper
 
 /-!
 # Components after base change to an algebraic closure

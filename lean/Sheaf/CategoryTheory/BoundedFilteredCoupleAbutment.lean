@@ -11,6 +11,9 @@ public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import Sheaf.CategoryTheory.FilteredCohomologyDiagonalColimit
 import Sheaf.CategoryTheory.FiniteCoconeExactCouple
+import WeilConjectures.CategoryTheory.ExactCouple
+import WeilConjectures.CategoryTheory.ExactCoupleConvergence
+import WeilConjectures.CategoryTheory.PBCFiltration
 
 /-!
 # Finite abutment of a filtered-complex exact couple

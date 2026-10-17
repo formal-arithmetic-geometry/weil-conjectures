@@ -21,6 +21,7 @@ import Sheaf.AlgebraicGeometry.ProperOpenSection
 import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Composition and identity of proper-open comparison maps

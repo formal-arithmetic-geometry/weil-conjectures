@@ -11,6 +11,7 @@ import Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence
 import Sheaf.CategoryTheory.ExactCoupleConvergence
 import Sheaf.CategoryTheory.FiniteFiltrationInduction
 import Sheaf.CategoryTheory.SpectralSequencePageInduction
+import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 
 /-! # Flat comparison of filtered cochain complexes
 

@@ -14,6 +14,8 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomFinitePresentationKer
 import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Sheaf.Topology.ModuleColimitRestriction
 import Sheaf.Topology.SheafIsomorphismLocalOpenCover
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
 
 /-!
 # Sheaf Hom out of a module of finite presentation commutes with directed colimits

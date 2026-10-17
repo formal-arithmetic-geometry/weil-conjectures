@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.RationalFunctionRing
 public import Mathlib.AlgebraicGeometry.Properties
 import Sheaf.Topology.PresheafModuleStalkFunctor
+import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Rational functions and generic stalks

@@ -7,6 +7,7 @@ public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 import Sheaf.RingTheory.AnnihilatorEqIffMinimalPrimeOfFG
 import Sheaf.Topology.PresheafModuleStalkFunctor
+import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
 @[expose] public section
 

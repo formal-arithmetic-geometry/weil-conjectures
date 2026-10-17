@@ -28,6 +28,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
+import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
 
 /-!
 # Normalization of compact supports for an etale morphism

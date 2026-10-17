@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 
 import all Sheaf.Algebra.Homology.LowerTruncationTransitionKernel
 import all Sheaf.Algebra.Homology.UpperTruncationStepSES
+import WeilConjectures.Algebra.Homology.UpperTruncationStepSES
 
 /-!
 # Epimorphy of a truncated lower projection

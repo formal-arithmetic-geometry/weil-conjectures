@@ -10,6 +10,7 @@ public import Sheaf.Topology.RingedSpaceModuleCohomology
 import Sheaf.AlgebraicGeometry.ModuleAbelianZariskiCohomology
 import Sheaf.Topology.FlasqueZariskiAcyclic
 import Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural
+import WeilConjectures.AlgebraicGeometry.ZariskiModuleAbelianCohomologyNatural
 
 /-! # Acyclicity of internal Hom into an injective module
 

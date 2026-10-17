@@ -22,6 +22,8 @@ import Sheaf.CategoryTheory.CartanEilenbergExists
 import Sheaf.CategoryTheory.HypercohomologyFirstPage
 import Sheaf.CategoryTheory.ExactCoupleConvergence
 import Sheaf.AlgebraicGeometry.FiniteConstructibleDirectImage
+import WeilConjectures.CategoryTheory.ExactCoupleConvergence
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LeraySpectralSequence
 
 /-!
 # Constructibility descends through a finite surjection

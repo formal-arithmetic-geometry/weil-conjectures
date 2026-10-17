@@ -14,6 +14,7 @@ import Sheaf.Topology.PresheafModuleStalkFunctor
 import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.CategoryTheory.SiteCoveringAxioms
+import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Invertible modules and their generic stalk

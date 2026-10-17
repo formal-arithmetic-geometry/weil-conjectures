@@ -31,6 +31,7 @@ import WeilConjectures.SixFunctors.BaseChange.Square
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison
 public import Mathlib.CategoryTheory.Adjunction.CompositionIso
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Proper/open interchange and its coherence

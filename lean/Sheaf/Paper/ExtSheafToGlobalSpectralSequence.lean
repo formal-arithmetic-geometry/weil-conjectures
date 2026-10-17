@@ -17,6 +17,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.Ext
 import Sheaf.CategoryTheory.GrothendieckSpectralSequence
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import WeilConjectures.AlgebraicGeometry.PQFCohomology
 
 /-! # The local-to-global spectral sequence for sheaf Ext
 

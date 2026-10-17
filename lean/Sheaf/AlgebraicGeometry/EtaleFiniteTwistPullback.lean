@@ -32,6 +32,11 @@ import WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSh
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullback
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
+import WeilConjectures.AlgebraicGeometry.Sites.InverseImageRepresentable
 /-!
 # Finite Tate sheaves and inverse image
 Source: Stacks Project, Etale Cohomology, Tags 03PK and 03Q1; Modules on Sites,

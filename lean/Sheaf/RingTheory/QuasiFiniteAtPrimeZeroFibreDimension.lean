@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Scheme
 import Mathlib.RingTheory.Spectrum.Prime.Noetherian
 import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.ZeroDimensionalNoetherianFiniteDiscrete
+import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 
 /-!
 # Quasi-finiteness at a prime and zero dimension of the fibre at that point

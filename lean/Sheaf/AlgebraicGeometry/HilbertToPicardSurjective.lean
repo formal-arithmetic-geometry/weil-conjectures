@@ -24,6 +24,8 @@ import WeilConjectures.AlgebraicGeometry.Picard.Defs
 import WeilConjectures.AlgebraicGeometry.Picard.Degree
 import WeilConjectures.AlgebraicGeometry.Picard.RationalPoint
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.Cohomology.EulerCharProper
 
 /-!
 # Surjectivity of the Hilbert-to-Picard morphism

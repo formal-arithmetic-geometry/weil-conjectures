@@ -20,6 +20,7 @@ import Sheaf.AlgebraicGeometry.RemoveEmbeddedPoints
 import Sheaf.Paper.SchemeTheoreticSupport
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
 import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
+import WeilConjectures.AlgebraicGeometry.SchemeTheoreticSupport
 
 /-! # Snapper's numerical polynomial for several invertible twists
 

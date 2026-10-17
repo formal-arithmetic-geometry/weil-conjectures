@@ -20,6 +20,7 @@ import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.UnderivedExchange
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LeraySpectralSequence
 
 /-!
 # Cancellation of proper base change along a proper surjection

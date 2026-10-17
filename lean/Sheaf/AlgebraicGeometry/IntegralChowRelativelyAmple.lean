@@ -20,6 +20,8 @@ import WeilConjectures.AlgebraicGeometry.ChowLemma
 import Sheaf.AlgebraicGeometry.ProjectiveAmpleInvertible
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+import WeilConjectures.AlgebraicGeometry.ProjectiveAmpleInvertible
+import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 /-! # Integral Chow modification with relatively ample twist
 

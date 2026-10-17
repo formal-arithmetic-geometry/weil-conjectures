@@ -24,6 +24,7 @@ import Sheaf.AlgebraicGeometry.DerivedExchangeTermwise
 import WeilConjectures.SixFunctors.BaseChange.Square
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Extension by zero under a proper modification

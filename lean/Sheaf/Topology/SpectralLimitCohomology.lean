@@ -24,6 +24,9 @@ import Sheaf.Topology.SpectralDirectedLimit
 import Sheaf.Topology.SpectralLimitDescendOpens
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Sheaf.Topology.SpectralLimitSheafSections
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
+import WeilConjectures.CategoryTheory.SiteCechVanishingCriterion
 
 /-!
 # Cohomological continuity on directed spectral limits

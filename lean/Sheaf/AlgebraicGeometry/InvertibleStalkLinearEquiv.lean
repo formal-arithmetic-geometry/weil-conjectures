@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Ample
 import all Sheaf.Paper.NonvanishingSectionTrivializes
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import WeilConjectures.AlgebraicGeometry.NonvanishingSectionTrivializes
+import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
 /-! # The stalk of an invertible module has rank one
 

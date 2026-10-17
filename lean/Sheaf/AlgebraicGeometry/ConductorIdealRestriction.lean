@@ -13,6 +13,8 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
 import Sheaf.AlgebraicGeometry.ConductorIdealZeroIntersection
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitQuotient
+import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 /-!
 # Restriction of the ideal of the complementary components

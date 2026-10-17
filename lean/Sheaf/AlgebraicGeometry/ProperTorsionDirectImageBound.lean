@@ -28,6 +28,8 @@ import Sheaf.AlgebraicGeometry.GeometricPointPullbackStalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
 import Sheaf.AlgebraicGeometry.Sites.FiniteTypeTorsionCohomologicalDimension
+import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
+import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 
 /-!
 # Proper direct-image bound for torsion étale sheaves

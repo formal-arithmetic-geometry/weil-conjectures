@@ -12,6 +12,7 @@ import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 import Sheaf.AlgebraicGeometry.ModulePullbackTensor
 import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 
 /-! # Internal Hom exchange with the canonical base-change mate
 Source: Stacks Project, duality.tex, Tag 0AA8, lemma-more-base-change,

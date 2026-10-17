@@ -17,6 +17,8 @@ import Sheaf.AlgebraicGeometry.FormalFunctionsStalk
 import Sheaf.Paper.ZariskiModuleAbelianCohomologyAgree
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
+import WeilConjectures.AlgebraicGeometry.ZariskiModuleAbelianCohomologyAgree
 
 /-! # Formal functions vanishing over finite fibres
 

@@ -19,6 +19,7 @@ import Sheaf.CategoryTheory.DoubleComplexTotal
 import Sheaf.CategoryTheory.BoundedFilteredComplexPageCore
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 
 /-!
 # Bounded constructibility of finite-type direct images

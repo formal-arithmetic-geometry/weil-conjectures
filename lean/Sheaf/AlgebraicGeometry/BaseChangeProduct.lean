@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Pullbacks
 import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Base change commutes with a fibre product

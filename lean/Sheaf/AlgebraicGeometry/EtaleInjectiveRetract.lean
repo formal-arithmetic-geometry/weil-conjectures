@@ -11,6 +11,7 @@ public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # The retract supplied by a surjective scheme morphism

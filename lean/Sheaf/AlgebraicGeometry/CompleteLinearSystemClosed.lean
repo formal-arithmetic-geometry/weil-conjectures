@@ -14,6 +14,8 @@ import Sheaf.AlgebraicGeometry.ProjectiveSpaceFunctorOfPoints
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts
 import Sheaf.Paper.EulerCharacteristicWellDefined
 import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.Cohomology.EulerCharProper
 
 /-!
 # The complete linear system of a closed-immersion subsystem

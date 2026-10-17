@@ -22,6 +22,7 @@ import Sheaf.AlgebraicGeometry.FiniteLisseFieldDual
 import WeilConjectures.Compactification.BaseChange
 import Sheaf.AlgebraicGeometry.SmoothTensorDuality
 import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
+import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 
 /-!
 # Generic direct images from a smooth source

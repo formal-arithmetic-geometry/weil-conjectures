@@ -16,6 +16,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
 import WeilConjectures.AlgebraicGeometry.Modules.Ext
 import WeilConjectures.AlgebraicGeometry.Modules.HomTensor.Basic
+import WeilConjectures.CategoryTheory.RightDerivedExactComposite
 
 /-!
 # Naturality of the locally free Ext comparison

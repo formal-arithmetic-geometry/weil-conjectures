@@ -9,6 +9,9 @@ public import Sheaf.CategoryTheory.ExactCoupleConvergence
 public import Sheaf.CategoryTheory.Filtration
 import WeilConjectures.Algebra.Homology.ExactCouple.Basic
 import WeilConjectures.CategoryTheory.Abelian.Filtration
+import WeilConjectures.CategoryTheory.ExactCouple
+import WeilConjectures.CategoryTheory.ExactCoupleConvergence
+import WeilConjectures.CategoryTheory.PBCFiltration
 
 /-!
 # Edge collapse and edge maps

@@ -17,6 +17,7 @@ import Sheaf.AlgebraicGeometry.GeometricallyConnectedAlgebraicClosure
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Clopen dimension loci in proper smooth connected families

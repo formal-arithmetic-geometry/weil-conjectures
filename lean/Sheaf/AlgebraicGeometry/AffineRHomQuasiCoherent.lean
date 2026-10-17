@@ -14,6 +14,7 @@ import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
 import Sheaf.Algebra.Homology.DerivedHomProjectiveResolution
 import Sheaf.Algebra.Homology.ModuleStalkExact
 import Sheaf.RingTheory.FiniteFreeResolution
+import WeilConjectures.Algebra.Homology.ModuleStalkExact
 
 /-! # Affine derived Hom of finite modules has quasi-coherent cohomology
 

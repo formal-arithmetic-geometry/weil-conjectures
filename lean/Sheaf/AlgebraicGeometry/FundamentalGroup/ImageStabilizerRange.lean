@@ -8,6 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction
 import Sheaf.AlgebraicGeometry.GaloisCategories
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
+import WeilConjectures.AlgebraicGeometry.GaloisCategories
 /-!
 # Image of the finite étale fundamental-group map
 

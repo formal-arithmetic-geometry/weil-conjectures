@@ -20,6 +20,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.FiniteEtalePushforwardConstructible
 import Sheaf.AlgebraicGeometry.ConstructibleModuleSurjectiveDescent
+import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
 
 /-!
 # Finite finitely presented pushforward preserves constructibility

@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 import Sheaf.AlgebraicGeometry.DerivedCategory
+import WeilConjectures.AlgebraicGeometry.DerivedCategory
+import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 
 /-!
 # Coherence of canonical unbounded derived direct images

@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Sheaf.CategoryTheory.Filtration
 import WeilConjectures.CategoryTheory.Abelian.Filtration
+import WeilConjectures.CategoryTheory.PBCFiltration
 
 /-!
 # Collapse of a first-quadrant spectral sequence supported in its bottom row

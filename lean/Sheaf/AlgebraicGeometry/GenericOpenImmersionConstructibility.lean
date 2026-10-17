@@ -39,6 +39,8 @@ import Sheaf.AlgebraicGeometry.FiniteGenericRadicialSmoothing
 import Sheaf.AlgebraicGeometry.FiniteRadicialExchangeDescent
 import Sheaf.AlgebraicGeometry.ProjectiveCoordinateBoundary
 import Sheaf.AlgebraicGeometry.SmoothGenericDirectImage
+import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Generic bounded constructibility for an open immersion

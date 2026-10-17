@@ -23,6 +23,9 @@ import Sheaf.Topology.NoetherianTopologicalCohomologyVanishing
 import Mathlib.CategoryTheory.Limits.HasLimits
 import Sheaf.Topology.ModuleMayerVietoris
 import Sheaf.Topology.PuncturedNeighborhoodCohomologyColimit
+import WeilConjectures.AlgebraicGeometry.PQFCohomology
+import WeilConjectures.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
+import WeilConjectures.Topology.RingedSpaceModuleEnoughInjectives
 
 /-! # Surjectivity of top-degree cohomology restriction
 

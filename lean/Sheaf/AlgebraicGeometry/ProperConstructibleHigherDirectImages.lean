@@ -21,6 +21,8 @@ import Sheaf.AlgebraicGeometry.ConstructibleModificationTransfer
 import Sheaf.AlgebraicGeometry.DerivedOpenRestriction
 import Sheaf.AlgebraicGeometry.NoetherianChowModification
 import Sheaf.AlgebraicGeometry.ProjectiveConstructibleHigherDirectImages
+import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Proper direct-image constructibility

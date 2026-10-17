@@ -35,6 +35,8 @@ import WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations
 import WeilConjectures.ConstructibleSheaf.Defs
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine
+import WeilConjectures.AlgebraicGeometry.EtaleSetSectionsFlatConnectedFibres
+import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
 
 /-!
 # Prime coefficients in proper smooth curve families

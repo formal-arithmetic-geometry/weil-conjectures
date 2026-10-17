@@ -22,6 +22,7 @@ import Mathlib.AlgebraicGeometry.Properties
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Sheaf.EtaleCohomology.EtaleSectionZeroOpen
+import WeilConjectures.AlgebraicGeometry.GeometricStalkColimits
 
 /-! # A sheaf supported in low dimension is a filtered union
 

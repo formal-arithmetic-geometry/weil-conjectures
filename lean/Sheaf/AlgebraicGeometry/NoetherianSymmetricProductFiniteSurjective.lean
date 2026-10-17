@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 import Sheaf.AlgebraicGeometry.SymmetricProductFinite
 import Sheaf.AlgebraicGeometry.SymmetricProductSurjective
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SymmetricProduct
 
 /-!
 # A finite symmetric-product cover over a Noetherian base

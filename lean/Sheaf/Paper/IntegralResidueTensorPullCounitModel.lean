@@ -6,6 +6,9 @@ module
 
 public import Sheaf.Paper.IntegralResidueTensorPullPresentation
 public import Sheaf.Paper.IntegralResidueScalarCounitModel
+import Sheaf.Paper.IntegralReductionTensor
+import Sheaf.Paper.IntegralResidueTensorModel
+import Sheaf.Paper.IntegralResidueTensorPresentation
 
 /-! Normalization of the coefficient-adjusted tensor presentation on X. -/
 

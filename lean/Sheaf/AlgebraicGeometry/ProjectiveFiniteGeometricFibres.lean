@@ -14,6 +14,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Sheaf.AlgebraicGeometry.FiniteIffProperFiniteFibres
+import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
 
 /-!
 # Projective morphisms with finite geometric fibres are finite

@@ -9,6 +9,7 @@ public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.Topology.LocallyConstant.Basic
 import Sheaf.Topology.ClosedPushforwardConstantStalks
+import WeilConjectures.Topology.ClosedPushforwardConstantStalks
 
 /-!
 # Inverse image of a constant sheaf pushed forward from a closed subset

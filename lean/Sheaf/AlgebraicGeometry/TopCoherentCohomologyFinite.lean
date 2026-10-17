@@ -34,6 +34,12 @@ import Sheaf.AlgebraicGeometry.LerayAcyclicPushforwardLinearComparison
 import WeilConjectures.AlgebraicGeometry.ChowLemma.ClosedModel
 import WeilConjectures.AlgebraicGeometry.Cohomology.Projective
 import Sheaf.AlgebraicGeometry.TopDegreeOpenRestrictionSurjective
+import WeilConjectures.Algebra.Homology.ModuleStalkExact
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
+import WeilConjectures.AlgebraicGeometry.PQFCohomology
+import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 
 /-! # Finite-dimensional top coherent cohomology
 

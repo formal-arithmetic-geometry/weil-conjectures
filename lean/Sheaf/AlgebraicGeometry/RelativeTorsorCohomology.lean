@@ -32,6 +32,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.CohomologyPullbackCanonicalArrows
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.CategoryTheory.Abelian.HorseshoeResolutions
 
 
 

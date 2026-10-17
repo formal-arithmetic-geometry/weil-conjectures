@@ -5,6 +5,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.IntegralResidueTensorModel
+import Sheaf.Paper.IntegralReductionTensor
+import Sheaf.Paper.IntegralResidueOrdinaryMonoidal
+import Sheaf.Paper.IntegralResiduePullSquare
+import Sheaf.Paper.IntegralResiduePullSquareData
 
 /-! Scalar-counit normalization for the residue pull square.
 

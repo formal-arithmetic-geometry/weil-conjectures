@@ -16,6 +16,10 @@ import Sheaf.Topology.RingedSpaceModuleCohomology
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
+import WeilConjectures.CategoryTheory.RightDerivedExactComposite
+import WeilConjectures.Topology.RingedSpaceModuleCohomology
 
 /-!
 # Second-variable naturality of the locally free Ext comparison

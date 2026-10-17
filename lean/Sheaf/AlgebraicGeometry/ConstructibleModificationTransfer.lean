@@ -17,6 +17,8 @@ import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 import Sheaf.AlgebraicGeometry.EtaleConstantModuleDirectImageLeftExact
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LeraySpectralSequence
 
 /-!
 # Constructibility transfers across a proper modification

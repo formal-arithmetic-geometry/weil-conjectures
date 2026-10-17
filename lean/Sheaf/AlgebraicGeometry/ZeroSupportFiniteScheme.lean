@@ -21,6 +21,9 @@ import Sheaf.AlgebraicGeometry.ZeroDimensionalClosedSubschemeFinite
 import Sheaf.Paper.SchemeTheoreticSupport
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
 import WeilConjectures.Mathlib.Topology.KrullDimension
+import WeilConjectures.AlgebraicGeometry.Coherent
+import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
+import WeilConjectures.AlgebraicGeometry.SchemeTheoreticSupport
 
 /-! # Finite scheme supporting a coherent module
 

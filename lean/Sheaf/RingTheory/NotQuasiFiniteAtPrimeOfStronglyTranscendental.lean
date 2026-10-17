@@ -10,6 +10,7 @@ public import Sheaf.RingTheory.QuasiFiniteAtPrime
 import Sheaf.RingTheory.FibrePrimesResidueFields
 import Sheaf.RingTheory.IsolatedPrimeResidueFinite
 import Sheaf.RingTheory.QuasiFiniteFourRings
+import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 
 /-!
 # A transcendental generator prevents quasi-finiteness for domains

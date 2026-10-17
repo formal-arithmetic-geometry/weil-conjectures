@@ -22,6 +22,7 @@ import Sheaf.RingTheory.WeaklyEtaleField
 import Mathlib.AlgebraicGeometry.Stalk
 import Sheaf.AlgebraicGeometry.StrictHenselization
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 
 /-!
 # Lifting geometric specializations to strict local schemes

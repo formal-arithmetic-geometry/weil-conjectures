@@ -14,6 +14,7 @@ import Sheaf.Algebra.Homology.TowerEvaluationKInjective
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 
 /-!
 # Derived direct image and strict tower limits

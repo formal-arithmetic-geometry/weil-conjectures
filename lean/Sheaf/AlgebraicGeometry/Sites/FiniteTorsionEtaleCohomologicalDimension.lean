@@ -27,6 +27,7 @@ import Sheaf.AlgebraicGeometry.AffineDirectImageSupportBound
 import Sheaf.AlgebraicGeometry.EtaleHigherDirectImageStalkCriterion
 import Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimensionOfAffine
 import Sheaf.AlgebraicGeometry.Sites.SeparablyClosedPointCohomologicalDimension
+import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 
 /-!
 # Finiteness of torsion étale cohomological dimension

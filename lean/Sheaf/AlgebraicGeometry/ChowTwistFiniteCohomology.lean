@@ -19,6 +19,9 @@ import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 import all Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 
 /-! # Finite cohomology of a sufficiently large Chow twist
 

@@ -31,6 +31,7 @@ import Sheaf.AlgebraicGeometry.EtaleShriekRelativeMayerVietoris
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
 import Sheaf.AlgebraicGeometry.ConstructibleStratificationAssembly
 import WeilConjectures.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Constructible compact support for constant finite coefficients on affine smooth curves

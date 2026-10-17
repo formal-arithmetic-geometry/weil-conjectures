@@ -29,6 +29,8 @@ import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.ClosedProperSupportLocality
 import Sheaf.AlgebraicGeometry.ProperSupportGeometricStalk
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 
 /-!
 # Composition and base change for sections with proper support

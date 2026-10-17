@@ -11,6 +11,8 @@ public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 import Sheaf.AlgebraicGeometry.TensorPullback
 import Sheaf.Topology.GlueSheavesOfModules
 import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import WeilConjectures.AlgebraicGeometry.NonvanishingSectionTrivializes
+import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 /-! # Morphism to polynomial Proj from generating sections
 

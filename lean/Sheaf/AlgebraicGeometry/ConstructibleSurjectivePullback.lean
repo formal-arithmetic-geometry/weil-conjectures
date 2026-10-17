@@ -23,6 +23,7 @@ import Sheaf.AlgebraicGeometry.ConstructibleColimitFactorization
 import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Constructibility descends through surjective pullback

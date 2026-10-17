@@ -11,6 +11,7 @@ public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts
+import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 
 /-!
 # Standard affine charts of a fibre power of the projective line

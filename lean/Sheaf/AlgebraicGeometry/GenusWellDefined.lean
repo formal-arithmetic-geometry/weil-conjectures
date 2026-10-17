@@ -17,6 +17,7 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Well-definedness of the genus

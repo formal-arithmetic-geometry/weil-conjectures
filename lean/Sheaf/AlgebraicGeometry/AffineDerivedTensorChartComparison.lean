@@ -13,6 +13,8 @@ import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatRestriction
 import Sheaf.AlgebraicGeometry.AffineChartTotalTensor
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import WeilConjectures.AlgebraicGeometry.AffineDerivedTildeHomologyComparison
+import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 
 /-! # Derived tensor through the canonical affine spectrum chart
 

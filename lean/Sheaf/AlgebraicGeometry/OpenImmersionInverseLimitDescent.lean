@@ -17,6 +17,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
 import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Gluing
+import WeilConjectures.AlgebraicGeometry.EtaleInverseLimitDescent
 
 /-!
 # Eventual descent of open immersions along qcqs inverse limits

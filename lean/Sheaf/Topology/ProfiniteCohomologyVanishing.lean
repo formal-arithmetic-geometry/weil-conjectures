@@ -17,6 +17,8 @@ import Mathlib.CategoryTheory.Abelian.Basic
 import Mathlib.Algebra.Homology.ExactSequence
 import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
 import Sheaf.CategoryTheory.SiteCoveringAxioms
+import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
+import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Abelian sheaf cohomology on a profinite topological space

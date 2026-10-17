@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 import Sheaf.AlgebraicGeometry.GeometricStalkAsPullback
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
 
 /-!
 # Geometric stalks of cohomology sheaves

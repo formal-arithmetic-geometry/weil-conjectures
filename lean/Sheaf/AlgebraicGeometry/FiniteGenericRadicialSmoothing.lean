@@ -27,6 +27,7 @@ import Mathlib.AlgebraicGeometry.Fiber
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import Mathlib.RingTheory.FiniteType
 import Mathlib.AlgebraicGeometry.Noetherian
+import WeilConjectures.RingTheory.SingularIdeal
 
 /-! # Generic smoothing after a finite radicial base change
 

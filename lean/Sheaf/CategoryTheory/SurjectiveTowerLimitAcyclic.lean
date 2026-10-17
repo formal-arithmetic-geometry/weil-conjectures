@@ -11,6 +11,7 @@ import Sheaf.Algebra.Category.ModuleCat.TowerLimitExactSurjectiveKernels
 import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
 import Sheaf.CategoryTheory.InjectiveSplitTower
 import Sheaf.CategoryTheory.InjectiveTowerEmbedding
+import WeilConjectures.CategoryTheory.Abelian.HorseshoeDeltaFunctor
 
 /-!
 # Acyclicity of inverse limits for surjective towers

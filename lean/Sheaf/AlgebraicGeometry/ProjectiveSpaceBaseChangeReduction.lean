@@ -18,6 +18,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Zero
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty
 import WeilConjectures.SixFunctors.Finite.BaseChange
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SymmetricProduct
 
 /-!
 # Reduction of projective-space base change to the projective line

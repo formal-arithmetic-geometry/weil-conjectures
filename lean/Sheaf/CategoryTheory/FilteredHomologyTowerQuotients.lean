@@ -16,6 +16,11 @@ import Sheaf.CategoryTheory.FilteredHomologyTowerDifferential
 import all Sheaf.CategoryTheory.FilteredHomologyTowerForwardRepresentatives
 import Sheaf.CategoryTheory.FiniteCycleFormula
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
+import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import Sheaf.CategoryTheory.FilteredComplexPageDifferential
+import Sheaf.CategoryTheory.FilteredHomologyCoupleData
+import WeilConjectures.CategoryTheory.ExactCouple
+import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 
 /-! # Representative comparisons with the canonical exact-couple tower
 

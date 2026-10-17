@@ -16,6 +16,7 @@ public import Mathlib.CategoryTheory.Functor.OfSequence
 
 import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact
 import Sheaf.CategoryTheory.Triangulated.DerivedLimitProducts
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 
 /-!
 # Surjective towers of module complexes

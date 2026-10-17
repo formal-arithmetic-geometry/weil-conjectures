@@ -12,6 +12,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
+import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 
 /-!
 

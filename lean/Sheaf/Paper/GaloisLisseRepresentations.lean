@@ -21,6 +21,7 @@ import Sheaf.Paper.LisseAdicSheaves
 import Sheaf.RepresentationTheory.ProfiniteStableLattice
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
+import WeilConjectures.AlgebraicGeometry.LisseModuleSheaves
 
 /-!
 # Galois representations attached to lisse sheaves

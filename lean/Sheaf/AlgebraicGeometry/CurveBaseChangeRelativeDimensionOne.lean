@@ -12,6 +12,7 @@ public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.Dimension
 import Sheaf.AlgebraicGeometry.DimensionLocallyAlgebraic
 import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Relative dimension of a base change of a smooth curve

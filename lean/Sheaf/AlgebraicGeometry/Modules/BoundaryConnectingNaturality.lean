@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
 import Sheaf.Topology.RingedSpaceModuleCohomology
+import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
+import WeilConjectures.Topology.RingedSpaceModuleCohomology
 
 /-!
 # Naturality of the degree-zero boundary under pullback

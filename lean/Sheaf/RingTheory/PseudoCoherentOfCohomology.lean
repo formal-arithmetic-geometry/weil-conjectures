@@ -14,6 +14,7 @@ import Sheaf.RingTheory.MPseudoCoherentShift
 import Sheaf.RingTheory.MPseudoCoherentVanishingBase
 import Sheaf.RingTheory.PseudoCoherentDistinguishedTriangle
 import Sheaf.RingTheory.MPseudoCoherent
+import WeilConjectures.CategoryTheory.TruncationTriangle
 
 /-!
 # Pseudo-coherence from pseudo-coherent cohomology

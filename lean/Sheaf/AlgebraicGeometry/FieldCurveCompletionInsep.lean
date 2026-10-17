@@ -31,6 +31,8 @@ import Sheaf.AlgebraicGeometry.GeonormalDimOneSmooth
 import Sheaf.AlgebraicGeometry.NormalizationGeonormalInsep
 import Sheaf.AlgebraicGeometry.NormalizationProjectiveComponents
 import Sheaf.AlgebraicGeometry.ReducedAlgebraicNormalizationFieldChange
+import WeilConjectures.AlgebraicGeometry.GlobalSectionsProper
+import WeilConjectures.AlgebraicGeometry.HomeomorphPurelyInseparableBaseChange
 
 /-!
 # Smooth projective completions after an inseparable field extension

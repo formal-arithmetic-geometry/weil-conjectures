@@ -25,6 +25,7 @@ import Sheaf.AlgebraicGeometry.LisseOpenRelativeLineConstructibility
 import Sheaf.AlgebraicGeometry.Morphisms.GenericFiniteOpenNeighborhood
 import Sheaf.AlgebraicGeometry.QuasiFiniteShriekConstructible
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Constructibility for compact support on a relative affine line

@@ -13,6 +13,8 @@ import WeilConjectures.AlgebraicGeometry.EtalePointedMapRigidity
 import Sheaf.Paper.StrictHenselizationMapExists
 import Sheaf.Paper.StrictHenselizationPointedMap
 import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
+import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 
 /-!
 # The distinguished geometric closed point lies over the original point

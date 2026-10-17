@@ -17,6 +17,7 @@ import WeilConjectures.FieldTheory.SeparableExtension
 import WeilConjectures.FieldTheory.SeparablyGeneratedTensorReduced
 import Sheaf.AlgebraicGeometry.GeometricReducednessFromGenericStalks
 import Sheaf.RingTheory.PowerGeneratedSpectrumHomeomorphism
+import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Geometric reducedness after a finite purely inseparable extension
