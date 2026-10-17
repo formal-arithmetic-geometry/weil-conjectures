@@ -20,9 +20,10 @@
  ],
  "proof": [
   {
-   "text": "For a finite-dimensional vector space over the characteristic-zero field $\\Lambda$, clause (1) of [prop-trace-determinant] gives $\\det(1-TG)^{-1}=\\exp(\\sum_{r\\ge1}\\operatorname{Tr}(G^r)T^r/r)$, and clause (2) gives its alternating version. Substituting $T^e$ for $T$ gives the local identity with $T^{er}$. These statements apply over $E$ directly and over $\\overline{\\mathbf Q}_\\ell$; no integral Weil structure is required. We will also use [lem-weil-power-series-exp-hom] for finite sums. For an infinite family whose terms have orders tending to infinity, the same identity holds coefficientwise: by [def-weil-power-series-exponential], the coefficient of $T^N$ in $\\exp(U)$ depends only on $U$ modulo $T^{N+1}$, so the finite-sum identity passes to the $T$-adic limit.",
+   "text": "For a finite-dimensional vector space over the characteristic-zero field $E$, [lem-weil-exp-trace-determinant] gives $\\det(1-TG)^{-1}=\\exp(\\sum_{r\\ge1}\\operatorname{Tr}(G^r)T^r/r)$ for every endomorphism $G$. Over $\\overline{\\mathbf Q}_\\ell$, [lem-zl-euler-product-identity] gives the same formula for the cohomological Frobenius modules constructed in Step 2. This is the logarithmic-determinant route of blueprint Step 0; no integral Weil structure is required. For a finite graded family, put $S_i=\\sum_{r\\ge1}\\operatorname{Tr}(G_i^r)T^r/r$. The finite-sum identity of [lem-weil-power-series-exp-hom] gives $\\exp(\\sum_i(-1)^iS_i)=\\prod_i\\exp(S_i)^{(-1)^i}=\\prod_i\\det(1-TG_i)^{(-1)^{i+1}}$; the negative signs use $\\exp(S_i)\\exp(-S_i)=\\exp(0)=1$. Substituting $T^e$ for $T$ gives the local identity with $T^{er}$. For an infinite family whose terms have orders tending to infinity, the same identity holds coefficientwise: by [def-weil-power-series-exponential], the coefficient of $T^N$ in $\\exp(U)$ depends only on $U$ modulo $T^{N+1}$, so the finite-sum identity passes to the $T$-adic limit.",
    "uses": [
-    "prop-trace-determinant",
+    "lem-weil-exp-trace-determinant",
+    "lem-zl-euler-product-identity",
     "lem-weil-power-series-exp-hom",
     "def-weil-power-series-exponential"
    ],
@@ -74,9 +75,8 @@
    }
   },
   {
-   "text": "Multiply the trace identity of Step 4 by $T^m/m$ and sum over $m\\ge1$. Reindexing $m=e_xr$ gives\n$$\\sum_{m\\ge1}\\sum_i(-1)^i\\operatorname{Tr}(F^m\\mid H_c^i(X,K))T^m/m=\\sum_x\\sum_{r\\ge1}t_x(r)T^{e_xr}/r,$$\nsince $e_x/m=1/r$. Step 3 makes this reindexing finite in every coefficient. Apply the formal exponential to both sides. Clause (2) of [prop-trace-determinant] identifies the left-hand side after exponentiating with the finite alternating cohomological determinant product. On the right, [lem-weil-power-series-exp-hom] and the coefficient formula of [def-weil-power-series-exponential] (Step 1) allow exponentiation through the locally finite sum; the determinant identity with $T^{e_x}$ in place of $T$ identifies the $x$-factor with $\\det(1-T^{e_x}F_x\\mid K_{\\bar x})^{-1}$. This proves clause (2) directly, without requiring an uncited logarithm theorem.",
+   "text": "Multiply the trace identity of Step 4 by $T^m/m$ and sum over $m\\ge1$. Reindexing $m=e_xr$ gives\n$$\\sum_{m\\ge1}\\sum_i(-1)^i\\operatorname{Tr}(F^m\\mid H_c^i(X,K))T^m/m=\\sum_x\\sum_{r\\ge1}t_x(r)T^{e_xr}/r,$$\nsince $e_x/m=1/r$. Step 3 makes this reindexing finite in every coefficient. Apply the formal exponential to both sides. The finite alternating determinant identity established in Step 1 identifies the left-hand side after exponentiating with the finite alternating cohomological determinant product. On the right, [lem-weil-power-series-exp-hom] and the coefficient formula of [def-weil-power-series-exponential] (Step 1) allow exponentiation through the locally finite sum; the determinant identity with $T^{e_x}$ in place of $T$ identifies the $x$-factor with $\\det(1-T^{e_x}F_x\\mid K_{\\bar x})^{-1}$. This proves clause (2) directly, without requiring an uncited logarithm theorem.",
    "uses": [
-    "prop-trace-determinant",
     "lem-weil-power-series-exp-hom",
     "def-weil-power-series-exponential"
    ],
@@ -134,11 +134,12 @@
   "lem-sf-separably-closed-torsion-cd",
   "lem-trf-compactification-cohomology",
   "lem-trf-local-frobenius-conjugacy",
+  "lem-weil-exp-trace-determinant",
   "lem-weil-pbc-integral-stratified-perfect-characterization",
   "lem-weil-pbc-nakayama-jacobson",
   "lem-weil-power-series-exp-hom",
+  "lem-zl-euler-product-identity",
   "prop-constructible-truncations",
-  "prop-trace-determinant",
   "prop-trf-adic-coefficient-morphism-systems",
   "prop-trf-rational-frobenius-integral-model",
   "prop-trf-trace-formal-laws",
@@ -310,8 +311,8 @@
   "blueprint": "Steps 0–6 realize the identically named blueprint proof: determinant-trace identity; powers and finiteness; local finiteness; grouping by closed points; logarithmic/exponential identity; curve range; coefficientwise embedding.",
   "tool_uses": [
    {
-    "node": "prop-trace-determinant",
-    "why": "Generic characteristic-zero determinant/trace algebra used in blueprint Steps 0 and 4; no trace-transport statement supplies the generic identity over E."
+    "node": "lem-weil-exp-trace-determinant",
+    "why": "Closed generic characteristic-zero determinant/trace identity for the E stage in blueprint Step 0; the algebraically closed Frobenius-module case uses the source-cited lem-zl-euler-product-identity in sk-prop-logdet. Finite alternating products follow from the exponential homomorphism."
    },
    {
     "node": "lem-weil-power-series-exp-hom",
@@ -340,7 +341,7 @@
   ]
  },
  "tool_uses": [
-  "prop-trace-determinant",
+  "lem-weil-exp-trace-determinant",
   "lem-weil-power-series-exp-hom",
   "lem-weil-pbc-integral-stratified-perfect-characterization",
   "prop-weil-pbc-integral-tstructure",
