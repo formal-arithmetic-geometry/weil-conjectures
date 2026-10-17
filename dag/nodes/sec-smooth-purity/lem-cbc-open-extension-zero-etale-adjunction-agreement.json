@@ -1,0 +1,71 @@
+{
+ "id": "lem-cbc-open-extension-zero-etale-adjunction-agreement",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-cbc-derived-extension-zero-base-change",
+   "place": "Returned split, Step 2 (via the underived compatibility lemma): the identification of the open-immersion extension by zero and its adjunction, used by the canonical map of lem-cbc-extension-zero-base-change, with the etale extension by zero and adjunction used by the module base-change map beta; makes precise the blueprint proof's 'degreewise isomorphisms of [lem-cbc-extension-zero-base-change]' as the map beta^{-1}.",
+   "via": [
+    "lem-cbc-derived-extension-zero-base-change-underived-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Open-immersion and etale extension by zero have the same adjunction",
+ "statement": "Let $\\Lambda$ be a commutative ring, let $j:U\\hookrightarrow X$ be an open immersion of schemes [def-weil-open-immersion], which is etale [lem-weil-pbc-open-immersion-etale], and let $\\Mod(T_{\\Et},\\Lambda)$ be the category of sheaves of $\\Lambda$-modules on the small etale site of $T=U,X$ [def-weil-sheaf-of-modules-category]. Let $j_!$ be the extension by zero of [def-weil-pbc-extension-by-zero], the sheafification of the presheaf $j_{p!}F$, with the adjunction $j_!\\dashv j^{-1}$ of [lem-weil-pbc-extension-by-zero-adjunction] (unit $\\eta_j$, counit $\\varepsilon_j$), where $j^{-1}$ is the inverse image [def-weil-pbc-inverse-image]. Let $j^{\\mathrm{et}}_!$ be the extension $v_!$ of [def-weil-pbc-etale-sum-extension] for $v=j$, the sheafification of $V\\mapsto\\bigoplus_{s\\in\\Hom_X(V,U)}F(V,s)$, with the adjunction $j^{\\mathrm{et}}_!\\dashv j^{-1}$ of [lem-weil-pbc-etale-restriction-injectives] (unit $\\eta^{\\mathrm{et}}_j$, counit $\\varepsilon^{\\mathrm{et}}_j$), the adjunction used in [def-weil-pbc-etale-shriek-base-change-map]. For $F\\in\\Mod(U_{\\Et},\\Lambda)$ and $V\\in X_{\\Et}$ let $\\iota_{F,V}:(j_{p!}F)(V)\\to\\bigoplus_{s\\in\\Hom_X(V,U)}F(V,s)$ be the inclusion of $F(V\\xrightarrow{\\varphi}U)$ as the unique summand when $V$ factors through $U$ by $\\varphi$, and the zero map of zero modules otherwise, and let $\\kappa_F:j_!F\\to j^{\\mathrm{et}}_!F$ be the sheafification [def-weil-pbc-sheafification] of $\\iota_F$. Then $\\kappa$ is a natural isomorphism $j_!\\xrightarrow{\\sim}j^{\\mathrm{et}}_!$ of functors $\\Mod(U_{\\Et},\\Lambda)\\to\\Mod(X_{\\Et},\\Lambda)$, and it identifies the two adjunctions: for $F\\in\\Mod(U_{\\Et},\\Lambda)$, $G\\in\\Mod(X_{\\Et},\\Lambda)$ and $\\alpha:F\\to j^{-1}G$, the transpose of $\\alpha$ under the adjunction of [lem-weil-pbc-extension-by-zero-adjunction] is the transpose of $\\alpha$ under the adjunction of [lem-weil-pbc-etale-restriction-injectives] composed with $\\kappa_F$. Equivalently $\\eta^{\\mathrm{et}}_{j,F}=j^{-1}(\\kappa_F)\\circ\\eta_{j,F}$ and $\\varepsilon_{j,G}=\\varepsilon^{\\mathrm{et}}_{j,G}\\circ\\kappa_{j^{-1}G}$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03DI (lemma-extension-by-zero), statement and proof: the hom bijection alpha -> alpha' through the presheaf V -> sum over Mor(V,U); with etale-cohomology.tex Tag 03S3 (definition-extension-zero) and the following paragraph (j_! is the sheafification of j_{p!}, characterized by the functorial Hom isomorphism)"
+ },
+ "stmt_deps": [
+  "def-weil-open-immersion",
+  "lem-weil-pbc-open-immersion-etale",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-extension-by-zero",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-sum-extension",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "def leftAdjointUniq|homEquiv_leftAdjointUniq_hom_app|leftAdjointUniq_hom_counit in Mathlib/CategoryTheory/Adjunction/ (rg over /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib)",
+   "results": "CategoryTheory.Adjunction.leftAdjointUniq (Adjunction/Unique.lean:36), homEquiv_leftAdjointUniq_hom_app (40), unit_leftAdjointUniq_hom (46), leftAdjointUniq_hom_counit (60); Adjunction.ofNatIsoLeft (Adjunction/Basic.lean:497)",
+   "date": "2026-10-17",
+   "verdict": "no match: generic uniqueness of left adjoints gives some isomorphism compatible with units, not that it is the sectionwise identification kappa of the two small-etale extension-by-zero presheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "extension by zero|extensionByZero|smallEtale in Mathlib",
+   "results": "only Mathlib/NumberTheory/MulChar/Basic.lean for 'extension by zero' (characters); smallEtale only in Mathlib/AlgebraicGeometry/Sites/{Etale,EtalePoint,AffineEtale}.lean, no extension by zero",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-derived-extension-zero-base-change-underived-compatibility",
+  "date": "2026-10-17",
+  "group": "Q58"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}

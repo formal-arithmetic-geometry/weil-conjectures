@@ -2,7 +2,7 @@
  "id": "lem-cbc-derived-extension-zero-base-change-underived-compatibility",
  "kind": "statement",
  "title": "Underived canonical open base-change compatibility",
- "statement": "Let $U'\\xrightarrow{g_U}U$ and $X'\\xrightarrow{g}X$ form an open-immersion square with open immersions $j:U\\to X$ and $j':U'\\to X'$, let $\\Lambda$ be a finite commutative ring, and let $F$ be a sheaf of $\\Lambda$-modules on $U_{\\mathrm{Et}}$. Let $b_{g,F}:g^{-1}j_!F\\xrightarrow{\\sim}j'_!g_U^{-1}F$ be the canonical map of [lem-cbc-extension-zero-base-change], and let $\\beta_F:j'_!g_U^{-1}F\\to g^{-1}j_!F$ be the module base-change map of [def-weil-pbc-etale-shriek-base-change-map]. Then $b_{g,F}=\\beta_F^{-1}$. More explicitly, under $j'_!\\dashv j'^{-1}$ the map $b_{g,F}^{-1}$ is the transpose of $s_g\\circ g_U^{-1}(\\eta_{j,F})$, where $\\eta_{j,F}:F\\to j^{-1}j_!F$ is the extension-by-zero unit and $s_g:g_U^{-1}j^{-1}\\xrightarrow{\\sim}j'^{-1}g^{-1}$ is the module-linear cartesian inverse-image identification. After identifying both restrictions with $g_U^{-1}F$ through these units and $s_g$, the restriction of $b_{g,F}$ is the identity.",
+ "statement": "Let $U'\\xrightarrow{g_U}U$ and $X'\\xrightarrow{g}X$ form an open-immersion square with open immersions $j:U\\to X$ and $j':U'\\to X'$, let $\\Lambda$ be a finite commutative ring, and let $F$ be a sheaf of $\\Lambda$-modules on $U_{\\mathrm{Et}}$. Let $b_{g,F}:g^{-1}j_!F\\xrightarrow{\\sim}j'_!g_U^{-1}F$ be the canonical map of [lem-cbc-extension-zero-base-change], and let $\\beta_F:j'_!g_U^{-1}F\\to g^{-1}j_!F$ be the module base-change map of [def-weil-pbc-etale-shriek-base-change-map] for this square, read through the identifications $\\kappa$ of the etale extensions by zero along $j$ and $j'$ with $j_!$ and $j'_!$ [lem-cbc-open-extension-zero-etale-adjunction-agreement]. Then $b_{g,F}=\\beta_F^{-1}$. More explicitly, under $j'_!\\dashv j'^{-1}$ the map $b_{g,F}^{-1}$ is the transpose of $s_g\\circ g_U^{-1}(\\eta_{j,F})$, where $\\eta_{j,F}:F\\to j^{-1}j_!F$ is the extension-by-zero unit and $s_g:g_U^{-1}j^{-1}\\xrightarrow{\\sim}j'^{-1}g^{-1}$ is the module-linear cartesian inverse-image identification. After identifying both restrictions with $g_U^{-1}F$ through these units and $s_g$, the restriction of $b_{g,F}$ is the identity.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tags 03S6 (lemma-shriek-base-change) and 0F70 (lemma-jshriek-open), with the module-mate construction in the project's base-change definition"
@@ -14,11 +14,99 @@
   "lem-weil-pbc-etale-shriek-base-change-modules",
   "lem-weil-pbc-extension-by-zero-adjunction",
   "lem-weil-pbc-extension-by-zero-unit-iso",
-  "lem-weil-pbc-inverse-image-composition-module-linear"
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-cbc-open-extension-zero-etale-adjunction-agreement"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=j_!F$, $N=g^{-1}A$, and write $\\eta^g,\\varepsilon^g$ for the unit and counit of $g^{-1}\\dashv g_*$, and $\\eta^{g_U},\\varepsilon^{g_U}$ for those of $g_U^{-1}\\dashv g_{U*}$. These are the module adjunctions of [prop-weil-pbc-inverse-image-modules-exact]. The square comparison $s_g:g_U^{-1}j^{-1}\\xrightarrow{\\sim}j'^{-1}g^{-1}$ is the inverse-image comparison of the flipped square in [def-weil-pbc-underived-exchange]. Its components are module-linear: it is a composite of the composition isomorphisms of [lem-weil-pbc-inverse-image-composition-module-linear] and their inverses. Denote the module underived exchange for that flipped square by $E:j^{-1}g_*\\to g_{U*}j'^{-1}$. It is a natural transformation on modules by [lem-weil-pbc-underived-exchange-module-linear]. By its defining adjunction formula, its transpose at any module sheaf $P$ on $X'$ is\n$$\\varepsilon^{g_U}_{j'^{-1}P}\\circ g_U^{-1}(E_P)=j'^{-1}(\\varepsilon^g_P)\\circ s_{g_*P}.$$\nThis is just the definition of exchange, with $f=g$, $f'=g_U$ and the two horizontal arrows $j,j'$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-underived-exchange",
+    "lem-weil-pbc-inverse-image-composition-module-linear",
+    "lem-weil-pbc-underived-exchange-module-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6 (lemma-shriek-base-change), comparison of the right adjoints, expanded using the module exchange definition"
+   }
+  },
+  {
+   "text": "The definition [def-weil-pbc-etale-shriek-base-change-map] is applied to the square of Step 1: its $f,f',j,j'$ are $g,g_U,j,j'$, its square isomorphism is $\\theta=s_g$, and its formulas use only the commutative square and $\\theta$; the cartesian identification is the chosen one of [def-cbc-open-immersion-square]. That definition uses the etale extensions by zero along $j,j'$ with the adjunctions of [lem-weil-pbc-etale-restriction-injectives]. By [lem-cbc-open-extension-zero-etale-adjunction-agreement] for $j$ and for $j'$, the isomorphisms $\\kappa$ identify these functors with the extensions by zero of [def-weil-pbc-extension-by-zero] and carry units to units and counits to counits of the adjunctions of [lem-weil-pbc-extension-by-zero-adjunction]; transporting $\\beta_F$ along $\\kappa$ (as the statement does) therefore gives the same formula with $\\eta_j,\\eta_{j'},\\varepsilon_{j'}$ the units and counits of [lem-weil-pbc-extension-by-zero-adjunction], which is the adjunction defining $b_{g,F}$. With this reading, the definition says that $\\beta_F$ is the transpose, under $j'_!g_U^{-1}\\dashv g_{U*}j'^{-1}$, of\n$$t=E_N\\circ j^{-1}(\\eta^g_A)\\circ\\eta_{j,F}:F\\longrightarrow g_{U*}j'^{-1}N.$$\nHere its displayed formula for $\\eta_{1,F}$ is exactly $j^{-1}(\\eta^g_A)\\circ\\eta_{j,F}$. The hom bijection for a composite adjunction is the composite of the two hom bijections [def-weil-pbc-composite-adjunction]. Therefore, writing $\\delta$ for the transpose of $\\beta_F$ under $j'_!\\dashv j'^{-1}$, its transpose under $g_U^{-1}\\dashv g_{U*}$ is $t$. Applying the inverse hom bijection gives\n$$\\delta=\\varepsilon^{g_U}_{j'^{-1}N}\\circ g_U^{-1}(E_N)\\circ g_U^{-1}j^{-1}(\\eta^g_A)\\circ g_U^{-1}(\\eta_{j,F}).$$",
+   "uses": [
+    "def-weil-pbc-etale-shriek-base-change-map",
+    "def-weil-pbc-composite-adjunction",
+    "def-cbc-open-immersion-square",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "def-weil-pbc-extension-by-zero",
+    "lem-cbc-open-extension-zero-etale-adjunction-agreement",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6 (lemma-shriek-base-change), proof: the two composite adjunctions; explicit formula of the cited module-mate definition"
+   }
+  },
+  {
+   "text": "Substitute Step 1 at $P=N$ in the formula for $\\delta$. Naturality of the comparison $s_g$ along $\\eta^g_A:A\\to g_*N$ gives\n$$s_{g_*N}\\circ g_U^{-1}j^{-1}(\\eta^g_A)=j'^{-1}g^{-1}(\\eta^g_A)\\circ s_A.$$\nConsequently\n$$\\delta=j'^{-1}\\!\\left(\\varepsilon^g_N\\circ g^{-1}(\\eta^g_A)\\right)\\circ s_A\\circ g_U^{-1}(\\eta_{j,F})=s_A\\circ g_U^{-1}(\\eta_{j,F}).$$\nThe last equality is the triangle identity for $g^{-1}\\dashv g_*$, at $A$, since $N=g^{-1}A$; the module units and counits are those of the underlying abelian adjunction by [prop-weil-pbc-inverse-image-modules-exact]. This is solely functoriality, naturality, and the defining adjunction identities. All domains are module sheaves on $U'$ and all arrows were identified as linear in Step 1.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6 (lemma-shriek-base-change); categories.tex Tag 0037 (definition-adjoint), unit/counit description and triangle identity"
+   }
+  },
+  {
+   "text": "The characterization in [lem-cbc-extension-zero-base-change] says precisely that $b_{g,F}^{-1}$ has transpose $s_A\\circ g_U^{-1}(\\eta_{j,F})$ under $j'_!\\dashv j'^{-1}$ of [lem-weil-pbc-extension-by-zero-adjunction]. Step 3 gives the same transpose for $\\beta_F$ (read through $\\kappa$ as in Step 2). The hom bijection of [lem-weil-pbc-extension-by-zero-adjunction] is given by the same sectionwise formula for every commutative $\\Lambda$, so it commutes with forgetting the module structures; its injectivity for $\\Lambda=\\mathbf Z$ gives equality of the underlying abelian maps, $b_{g,F}^{-1}=\\beta_F$, and in particular $b_{g,F}$ is $\\Lambda$-linear. Since $b_{g,F}$ is an isomorphism by [lem-cbc-extension-zero-base-change], $\\beta_F$ is invertible and $b_{g,F}=\\beta_F^{-1}$; for the fibre-product square this invertibility is also [lem-weil-pbc-etale-shriek-base-change-modules]. In particular Step 3 gives the requested explicit transpose for $b_{g,F}^{-1}$.",
+   "uses": [
+    "lem-cbc-extension-zero-base-change",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-etale-shriek-base-change-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03S6 (lemma-shriek-base-change) and 0F70 (lemma-jshriek-open), uniqueness via the extension-by-zero adjunction"
+   }
+  },
+  {
+   "text": "Set $H=g_U^{-1}F$, $a=\\eta_{j',H}:H\\to j'^{-1}j'_!H$ and $d=s_A\\circ g_U^{-1}(\\eta_{j,F}):H\\to j'^{-1}N$. Both $a$ and $d$ are isomorphisms: [lem-weil-pbc-extension-by-zero-unit-iso] gives the unit isomorphisms on underlying abelian sheaves. They are isomorphisms on module sheaves too, because they are linear and their inverses are linear (if $v$ is a linear bijection, $v^{-1}(\\lambda y)=\\lambda v^{-1}(y)$ follows by applying $v$; inverses commute with sheaf restrictions by cancellation). By the definition of transpose for the module adjunction [lem-weil-pbc-extension-by-zero-adjunction], Step 3 says\n$$j'^{-1}(\\beta_F)\\circ a=d.$$\nTaking inverses and using $b_{g,F}=\\beta_F^{-1}$ gives\n$$a^{-1}\\circ j'^{-1}(b_{g,F})\\circ d=\\mathrm{id}_H.$$\nThis is exactly the asserted restriction identity with both restrictions identified through the units and $s_g$.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-unit-iso",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F70 (lemma-jshriek-open), unit isomorphism; Tag 03S6, restriction of the canonical comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-open-immersion-square",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-underived-exchange",
+  "lem-cbc-extension-zero-base-change",
+  "lem-cbc-open-extension-zero-etale-adjunction-agreement",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-unit-iso",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-weil-pbc-underived-exchange-module-linear",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03S6 (lemma-shriek-base-change) and 0F70 (lemma-jshriek-open), expanded module-mate computation; categories.tex Tag 0037 (definition-adjoint)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -54,10 +142,52 @@
    "results": "CategoryTheory.conjugateEquiv; CategoryTheory.conjugateEquiv_id; CategoryTheory.conjugateEquiv_iso; CategoryTheory.conjugateEquiv_of_iso; CategoryTheory.conjugateEquiv_symm_id; CategoryTheory.conjugateEquiv_symm_iso; CategoryTheory.conjugateEquiv_symm_of_iso; CategoryTheory.conjugateEquiv_adjunction_id",
    "date": "2026-10-17",
    "verdict": "no match: generic conjugation of adjunctions does not identify the small-etale base-change mate with the cartesian inverse-image transpose or its restriction normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "openImmersionLowerShriekBaseChangeMap|extension.?by.?zero",
+   "results": "Mathlib/NumberTheory/MulChar/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the small-etale module statement; generic adjunction and Zariski restriction hits do not state the canonical geometric comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv, CategoryTheory.Adjunction.comp",
+   "results": "CategoryTheory.conjugateEquiv_leftUnitor_hom; CategoryTheory.conjugateEquiv_rightUnitor_hom; CategoryTheory.iterated_mateEquiv_conjugateEquiv; CategoryTheory.conjugateEquiv_whiskerLeft; CategoryTheory.conjugateEquiv_whiskerRight; CategoryTheory.conjugateEquiv_associator_hom; CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm; CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv",
+   "date": "2026-10-17",
+   "verdict": "no match for the small-etale module statement; generic adjunction and Zariski restriction hits do not state the canonical geometric comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change mate for extension by zero along open immersions of etale sheaves transpose unit restriction identity",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.restrictFunctorId_hom_app_app; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_hom_c_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorId; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict",
+   "date": "2026-10-17",
+   "verdict": "no match for the small-etale module statement; generic adjunction and Zariski restriction hits do not state the canonical geometric comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules on small etale sites the open immersion extension by zero base change mate has transpose pulled back unit and restricts to identity",
+   "results": "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pullbackObjUnitToUnit; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; SheafOfModules.conjugateEquiv_pullbackId_hom; SheafOfModules.pullback_id_comp; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app",
+   "date": "2026-10-17",
+   "verdict": "no match for the small-etale module statement; generic adjunction and Zariski restriction hits do not state the canonical geometric comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "unit_conjugateEquiv_symm|unit_conjugateEquiv|homEquiv_unit",
+   "results": "Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the small-etale module statement; generic adjunction and Zariski restriction hits do not state the canonical geometric comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley left mate transpose of inverse image composition isomorphism extension by zero adjunction unit",
+   "results": "CategoryTheory.unit_mateEquiv_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_apply; CategoryTheory.mateEquiv_symm_apply; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.mateEquiv; CategoryTheory.ExponentiableMorphism.coev_ev",
+   "date": "2026-10-17",
+   "verdict": "no match for the small-etale module statement; generic adjunction and Zariski restriction hits do not state the canonical geometric comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "cor-cbc-derived-extension-zero-base-change",
@@ -74,5 +204,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-derived-extension-zero-base-change-underived-compatibility",
+  "worker": "stage1",
+  "summary": "Kept the statement. Expanded the composite-adjunction transpose of the specified module beta, substituted the exchange definition, and wrote out naturality plus the triangle identity to identify its transpose with the pulled-back extension unit. Adjunction injectivity identifies b with beta inverse. Wrote the restriction identity as an equation using both unit isomorphisms. No new nodes or Mathlib leaves. Maintainer reader (Q58 review): added the statement-only lemma lem-cbc-open-extension-zero-etale-adjunction-agreement identifying the open-immersion extension by zero and its adjunction (used by b) with the etale extension by zero and adjunction (used by beta), cited in the statement and Step 2; Step 4 now derives the invertibility of beta from that of b and compares underlying abelian maps.",
+  "blueprint": "Expands the parent cor-cbc-derived-extension-zero-base-change proof's degreewise isomorphisms and named compatibilities: its returned Step 2, comparison of the module mate beta with the transpose of the pulled-back unit and restriction normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-inverse-image-composition-module-linear",
+    "why": "Generic comparison for module inverse images makes the cartesian comparison linear; no cbc-unit node gives this functorial module comparison."
+   },
+   {
+    "node": "lem-weil-pbc-underived-exchange-module-linear",
+    "why": "Generic tool ensuring the specified abelian exchange is the same module-linear exchange used by beta; no cbc-unit node replaces it."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic module inverse-image adjunction, including agreement of its units and counits with the underlying abelian adjunction, needed to compute the transpose."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-weil-pbc-underived-exchange-module-linear",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-fb1c9c7e3",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-fb1c9c7e3 (reviewer sub-agent of L); spot-checked: I read the item, its 5 steps and every cited statement, plus the nodes that β's definition rests on: etale-sum-extension, etale-restriction-injectives (statement and proof), extension-by-zero, cartesian-square, underived-exchange (with blueprint_update). I also read unit sk-prop-sf-cbc, the parent cor and its main-20261015 blueprint text, and Stacks 03S3, 03S5, 0F70, 03S6 (etale-cohomology) and 03DI (sites-modules). I recomputed Steps 1, 3 and 5. Step 1: the exchange transpose formula, with s_g=θ in the right direction. Step 3: naturality plus the triangle identity gives δ=s_A∘g_U^{-1}η_{j,F}. Step 5: a^{-1}∘j'^{-1}(b)∘d=id. Edge cases checked: U empty, F=0, Λ=0, g=id, j=id. Fault 1 (C3/E6, silent identification): b uses the explicit open-immersion j_! and adjunction (lem-weil-pbc-extension-by-zero-adjunction). β (def-weil-pbc-etale-shriek-base-change-map) uses the étale sum extension and the adjunction of lem-weil-pbc-etale-restriction-injectives, whose statement does not give a unit. In slopmaster2 these are separate constructions (openImmersionLowerShriekUpperStarAdjunction vs etaleLowerShriekUpperStarAdjunction) and no lemma relates them. Step 2 and Steps 4–5 equated the two units and counits without a citation. The identification is true by Stacks 03DI. Repair: I added the statement-only node lem-cbc-open-extension-zero-etale-adjunction-agreement. It says the sectionwise identification κ: j_!→j^et_! is a natural isomorphism that takes units to units and counits to counits. The item statement now reads β through κ (conclusion unchanged, nothing weakened), and Step 2 cites the new node. Fault 2 (Step 4): the delivery used the module hom bijection for b, which is a priori only an abelian map, and cited the fibre-product-only lemma lem-weil-pbc-etale-shriek-base-change-modules for β invertible. Step 4 now compares underlying abelian maps through the Λ-independent sectionwise bijection, and gets β invertible from b being an isomorphism. I recomputed proof_deps. The new node records only grep searches, because LeanSearch, Loogle and LeanFinder are not reachable here; it may need the other two search kinds added on the Codex machine. Mathlib's leftAdjointUniq is a generic iso of left adjoints; it does not give that iso as κ, so the verdict is no match. I accepted the three declared tool uses. Corrected files: fixes/dag/nodes/sec-smooth-purity/{item,new node}.json; details in review.md.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }
