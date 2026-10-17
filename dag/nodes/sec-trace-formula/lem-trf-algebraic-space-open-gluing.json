@@ -437,5 +437,27 @@
   "group": "Q44",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q44-a7233224c (reviewer sub-agent of L); spot-checked: Read the item and all seven steps against Stacks 02WR and cited statements/sources. Hypotheses, sheaf-coproduct base change, diagonal gluing, and composite atlas check out, including empty and infinite-family cases. No new nodes, duplicates, cycles, or long steps. Accepted both declared generic tool uses. Detailed checks recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceOpenGluing",
+  "declaration": "AlgebraicGeometry.algebraicSpace_of_open_gluing",
+  "declarations": [
+   "AlgebraicGeometry.algebraicSpace_of_open_gluing"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceOpenGluing.lean",
+  "statement": "theorem algebraicSpace_of_open_gluing {S : Scheme.{u}} (F : Sheaf (Scheme.fppfTopology.over S) (Type u)) (I : Type w) (Fi : I → Sheaf (Scheme.fppfTopology.over S) (Type u)) (H : Sheaf (Scheme.fppfTopology.over S) (Type u)) (j : ∀ i : I, (Fi i) ⟶ H) (hcol : IsColimit (Cofan.mk H j)) (ι : ∀ i : I, (Fi i) ⟶ F) (q : H ⟶ F) (hfac : ∀ i : I, j i ≫ q = ι i) (hmono : ∀ i : I, Mono (ι i)) (hFi : ∀ i : I, AlgebraicSpace.IsAlgebraicSpace (Fi i)) (hopen : ∀ i : I, AlgebraicSpace.IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) (ι i).hom) (hq : Epi q) (hcop : AlgebraicSpace.IsAlgebraicSpace H) : AlgebraicSpace.IsAlgebraicSpace F",
+  "by": "Q64",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The set-indexed sheaf coproduct is represented explicitly by injections j into H together with hcol : IsColimit (Cofan.mk H j); q : H ⟶ F is the canonical coproduct map, hfac identifies its summand restrictions with the family maps, hq expresses sheaf surjectivity, and hcop expresses algebraicity of H.",
+  "branch": "newtargets-dag"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f2ae7e151",
+  "group": "Q64",
+  "result": "pass",
+  "note": "Statement, dependencies, source proof steps, edge cases, docstrings, route-pivot constraints, report sections, and compiler evidence checked successfully."
  }
 }

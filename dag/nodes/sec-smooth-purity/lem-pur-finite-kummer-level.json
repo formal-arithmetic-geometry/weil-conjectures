@@ -20,7 +20,9 @@
   "def-weil-scheme-morphism-properties",
   "def-pur-roots-of-unity-sheaf",
   "def-pur-sheaf-tensor-product",
-  "def-weil-proetale-inverse-image"
+  "def-weil-proetale-inverse-image",
+  "def-pur-roots-of-unity-inverse-image",
+  "lem-pur-tate-inverse-limit-base-change"
  ],
  "proof": [
   {
@@ -428,5 +430,37 @@
   "group": "Q107",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-09678e784 (reviewer sub-agent of L); spot-checked: I read all of it: the item, its 12 steps, the 3 new nodes, every cited statement, the blueprint text (identical in main-20261015 and master), unit sk-def-purity-conv and chapter sec-smooth-purity, and the Stacks tags (06YQ, 03EI, 06YP, 06YT, 06YU, 00W2, 03CO, 03EL, 03PK, 040M; all labels match). No SGA is cited. The item statement is unchanged and not weakened; it works over the constant (Z_ell)_T and never identifies it with the completed sheaf. Step checks: ker p_N = ell^N L by y_r = x_{r+N}; surjectivity of rho comes from a mono between locally free rank-one R_N-lines, since a nonunit kills ell^{N-1}; I checked there is no cycle with lem-pur-twist-sheaf-locally-free. Steps 6-8 apply the new nodes with their hypotheses verified (ell^N injective on L, the bottom augmentation is a quasi-isomorphism, D is flat componentwise). Step 9 uses the root-cover node with g=1. Step 10's Yoneda/coyoneda argument gives delta = theta^{-1}. Steps 11-12 rest on node 3 and the exactness of finite-constant pullback. New nodes: all three statements are correct. Tests: two-term resolution on L=Z_ell, Q_ell and 0, with Z/ell correctly excluded; cone comparison with Z/ell on the point, which shows the conditional form is needed; tower lemma with identity h, zero towers and empty T. None duplicates an existing node: the near candidates are ring-level, single-cone or plain f^{-1}Lambda(d) statements. None restates a clause of the item. Accepted tool use: lem-pe-constant-left-module-inverse-image, a generic constant-ring pullback needed for the infinite discrete ring Z_ell. Fixes in fixes/dag/nodes/sec-smooth-purity: (1) descriptive titles for the three new nodes, replacing the id-derived ones; (2) in lem-pur-tate-inverse-limit-base-change, the hypothesis that the constant-ring pullback maps are isomorphisms moved into the first paragraph, where R_{T'}-linearity first needs it; the mathematics is unchanged. Not edited: the item still carries the stale reviewed record of 2026-10-16, which the merge must overwrite. I could not check the Mathlib search log from this machine. Details are in review.md.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityFiniteKummerLevel",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteKummerLevel",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.kummerCoefficient",
+   "WeilConjectures.PurityFiniteSetting.kummerRingSheaf",
+   "WeilConjectures.PurityFiniteSetting.kummerLine",
+   "WeilConjectures.PurityFiniteSetting.kummerScalarMap",
+   "WeilConjectures.PurityFiniteSetting.kummerRootsTensor",
+   "WeilConjectures.PurityFiniteSetting.kummerSourceTensor",
+   "WeilConjectures.PurityFiniteSetting.kummerTargetTensor",
+   "WeilConjectures.PurityFiniteSetting.IsKummerComparison",
+   "WeilConjectures.PurityFiniteSetting.kummerTensorMap",
+   "WeilConjectures.PurityFiniteSetting.KummerDerivedCompatible",
+   "WeilConjectures.PurityFiniteSetting.KummerBaseChangeCompatible",
+   "WeilConjectures.PurityFiniteSetting.finiteKummerLevel"
+  ],
+  "file": "lean/Sheaf/Paper/PurityFiniteKummerLevel.lean",
+  "statement": "theorem finiteKummerLevel (P : PurityFiniteSetting.{u}) (h : P.ramificationIndex ∣ P.level) : 1 ≤ P.kummerLevel ∧ P.level = P.ramificationIndex * P.kummerLevel ∧ (-Real.log (Padic.coefficientExtensionAbsoluteValue P.coefficients.l P.extension (P.coefficients.l : P.extension)) / Real.log P.coefficients.l = 1) ∧ (-Real.log (Padic.coefficientExtensionAbsoluteValue P.coefficients.l P.extension (Padic.coefficientExtensionUniformizer P.coefficients.l P.extension).val) / Real.log P.coefficients.l = (P.ramificationIndex : ℝ)⁻¹) ∧ (P.level : ℝ) * (-Real.log (Padic.coefficientExtensionAbsoluteValue P.coefficients.l P.extension (Padic.coefficientExtensionUniformizer P.coefficients.l P.extension).val) / Real.log P.coefficients.l) = P.kummerLevel ∧ Padic.coefficientExtensionIdeal P.coefficients.l P.extension P.level = Ideal.span ({(P.exponent : Padic.coefficientExtensionIntegers P.coefficients.l P.extension)} : Set (Padic.coefficientExtensionIntegers P.coefficients.l P.extension)) ∧ (∃ r : P.Ring ≃+* (Padic.coefficientExtensionIntegers P.coefficients.l P.extension ⧸ Ideal.span ({(P.exponent : Padic.coefficientExtensionIntegers P.coefficients.l P.extension)} : Set (Padic.coefficientExtensionIntegers P.coefficients.l P.extension))), ∀ x : Padic.coefficientExtensionIntegers P.coefficients.l P.extension, r (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal P.coefficients.l P.extension P.level) x) = Ideal.Quotient.mk (Ideal.span ({(P.exponent : Padic.coefficientExtensionIntegers P.coefficients.l P.extension)} : Set (Padic.coefficientExtensionIntegers P.coefficients.l P.extension))) x) ∧ (P.exponent : P.Ring) = 0 ∧ (∀ j : ℕ, ((P.coefficients.l ^ j : ℕ) : P.Ring) = 0 → P.kummerLevel ≤ j) ∧ ∀ n : ℕ, P.level = n + 1 → ∃ N : ℕ, P.kummerLevel = N + 1 ∧ ∃ a : ZMod (P.coefficients.l ^ (N + 1)) →+* P.kummerCoefficient n, ∃ f : ℕ, Nat.card (Padic.coefficientExtensionResidueField P.coefficients.l P.extension) = P.coefficients.l ^ f ∧ (∃ b : P.kummerCoefficient n ≃+ (Fin (P.ramificationIndex * f) → ZMod (P.coefficients.l ^ (N + 1))), ∀ (z : ZMod (P.coefficients.l ^ (N + 1))) (x : P.kummerCoefficient n), b (a z * x) = z • b x) ∧ ∃ α : ∀ (T : Scheme.{u}) (_hT : ∀ x : T, IsUnit (P.coefficients.l : T.presheaf.stalk x)), P.kummerLine n T ≅ P.kummerRootsTensor n N a T, (∀ (T : Scheme.{u}) (hT : ∀ x : T, IsUnit (P.coefficients.l : T.presheaf.stalk x)), P.IsKummerComparison n N a T (α T hT) ∧ (∀ γ : P.kummerLine n T ≅ P.kummerRootsTensor n N a T, P.IsKummerComparison n N a T γ → γ = α T hT) ∧ P.KummerDerivedCompatible n N a T (α T hT)) ∧ P.KummerBaseChangeCompatible n N a α",
+  "branch": "newtargets-dag",
+  "by": "Q122",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f04435994",
+  "group": "Q122",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, edge cases, docstrings, universes, route-pivot compliance, and recorded compilation were checked; no substantive defect found."
  }
 }

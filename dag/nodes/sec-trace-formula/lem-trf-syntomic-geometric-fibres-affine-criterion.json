@@ -254,18 +254,18 @@
   "file": "lean/Sheaf/TraceFormula/SyntomicGeometricFibresAffineCriterion.lean",
   "statement": "theorem syntomic_geometric_fibres_affine_criterion {X Y : Scheme.{u}} (f : X ⟶ Y) : ((Flat f ∧ LocallyOfFinitePresentation f ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (ybar : Spec (.of Ω) ⟶ Y), IsLocalCompleteIntersectionOver Ω (Limits.pullback f ybar) (Limits.pullback.snd f ybar)) ↔ (∀ (V : Y.Opens) (hV : IsAffineOpen V) (U : X.Opens) (hU : IsAffineOpen U) (hUV : U ≤ f ⁻¹ᵁ V), IsSyntomicAffineChart f V U hUV)) ∧ ((∀ (V : Y.Opens) (hV : IsAffineOpen V) (U : X.Opens) (hU : IsAffineOpen U) (hUV : U ≤ f ⁻¹ᵁ V), IsSyntomicAffineChart f V U hUV) ↔ (∃ (I : Type u) (V : I → Y.Opens), (∀ i, IsAffineOpen (V i)) ∧ (∀ y : Y, ∃ i, y ∈ V i) ∧ ∀ i, ∃ (J : Type u) (U : J → X.Opens), (∀ j, IsAffineOpen (U j)) ∧ (∀ x : X, x ∈ f ⁻¹ᵁ V i → ∃ j, x ∈ U j) ∧ ∀ j, ∃ hUV : U j ≤ f ⁻¹ᵁ V i, IsSyntomicAffineChart f (V i) (U j) hUV))",
   "branch": "newtargets-dag",
-  "by": "Q81",
+  "by": "Q92",
   "date": "2026-10-17",
   "existing": false,
-  "note": "The two named helper predicates encode the scheme-over-a-field local-complete-intersection notion and the three affine chart conditions appearing in the item; their data are explicit and non-hollow.",
-  "fixed_by": "NT-stage2-Codex-3fff89ff9"
+  "note": "The recorded source module was a legacy non-module file and could not be imported by a module-form stage-2 file. This dependency module states the same three declarations verbatim with a module header, so the consumer can import and reuse AlgebraicGeometry.IsLocalCompleteIntersectionOver without redeclaring it.",
+  "fixed_by": "NT-stage2-Codex-7ccc0a8da"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-3fff89ff9",
-  "group": "Q81",
+  "reviewer": "NT-stage2-Codex-7ccc0a8da",
+  "group": "Q92",
   "result": "fix",
-  "note": "Statement, dependencies, sources, edge cases and universes pass. Complete module/report replacements repair H8 documentation and H9 import omissions; scompile.py confirms both versions compile cleanly."
+  "note": "Substantive review passed; complete replacement files are in fixes/. scompile reproduced the criterion module, while sibling compilation hit an overlay/cache dependency-order error."
  }
 }

@@ -260,5 +260,23 @@
   "group": "Q81",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q81-724102fa2 (reviewer sub-agent of L); spot-checked: Read the item, all eight steps, every cited statement, and relevant blueprint and source passages. Verified 01ZM/01ZP descent hypotheses, closed-subscheme identification, semilinear Frobenius, edge cases, duplicate candidates, and route restrictions. No new nodes, cycles, forbidden dependencies, or steps over 2000 characters. Accepted both declared generic tool uses. Full review written to review.md; no repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteFieldClosedSubschemeDescent",
+  "declaration": "WeilConjectures.FiniteFieldDatum.exists_closed_subscheme_finiteField_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFieldClosedSubschemeDescent.lean",
+  "statement": "theorem exists_closed_subscheme_finiteField_descent (D : WeilConjectures.FiniteFieldDatum.{u}) (X₀ : Over (Spec (CommRingCat.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] (C : Scheme.{u}) (i : C ⟶ (D.geometricFiber X₀).left) [IsClosedImmersion i] : ∃ (m : ℕ) (hm : 1 ≤ m) (Cₘ : Over (Spec (CommRingCat.of (D.extensionSubfield m hm)))) (iₘ : Cₘ ⟶ (Over.pullback (Spec.map (CommRingCat.ofHom (D.extensionEmbedding m hm)))).obj X₀), IsClosedImmersion iₘ.left ∧ (∃ e : Over.mk (i ≫ (D.geometricFiber X₀).hom) ≅ (Over.pullback (Spec.map (CommRingCat.ofHom (D.extensionSubfield m hm).subtype))).obj Cₘ, e.hom.left ≫ pullback.fst Cₘ.hom (Spec.map (CommRingCat.ofHom (D.extensionSubfield m hm).subtype)) ≫ iₘ.left ≫ pullback.fst X₀.hom (Spec.map (CommRingCat.ofHom (D.extensionEmbedding m hm))) = i ≫ pullback.fst X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))) ∧ ∃ φ : Aut C, φ.hom ≫ i = i ≫ (D.geometricFrobenius X₀ ^ m).hom",
+  "branch": "newtargets-dag",
+  "by": "Q150",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-febca3034",
+  "group": "Q150",
+  "result": "pass",
+  "note": "Reviewed the immutable node, all dependencies, source passage, Lean module, report sections, edge cases, route restrictions, and declaration details. scompile.py verified both sandbox and library compilation with no errors; no fixes needed."
  }
 }

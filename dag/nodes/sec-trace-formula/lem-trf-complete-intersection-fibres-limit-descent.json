@@ -17,7 +17,8 @@
   "def-weil-flat-morphism",
   "def-weil-geometric-point",
   "def-weil-geometric-fibre",
-  "def-weil-pbc-complete-intersection-over-field"
+  "def-weil-pbc-complete-intersection-over-field",
+  "def-trf-local-complete-intersection-scheme-over-field"
  ],
  "proof": [
   {
@@ -246,5 +247,28 @@
   "group": "N4",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-44fdd4150 (reviewer sub-agent of L); spot-checked: I read the whole item, both new nodes, every cited statement, and the Stacks sources: limits.tex Situation situation-descent-property and 0C3L lemma-descend-syntomic, algebra 0C33 lemma-colimit-lci, morphisms 01UD lemma-syntomic-characterize, 01UF lemma-syntomic-flat-fibres and lemma-local-complete-intersection, and algebra 00SJ lemma-lci-field-change. The item follows the 0C3L route. Step 1 builds a finite affine reduction using qc of g_0 (qcqs-permanence (1)) and the definition of a quasi-compact morphism, and never assumes affine intersections. Step 2 uses the uniform arrow isomorphism of the affine-chart tensor comparison. All of its hypotheses hold, and I checked in its proof that the finite presentation is on the ring map B to C, which is exactly 0C33 hypothesis (2). Steps 3 and 6 apply the new criterion (1)=>(2) and (3)=>(1). Step 4 is 0C33 on each chart, then one common bound i fixed before j is quantified. Step 5 is the 00SN base-change argument and is genuinely elementary: I checked C_j = B_j (x)_{B_k} C_k on pure tensors, and the fibre factors through kappa(p). Both new nodes are true. The criterion follows from 01UF, 01UD and 00SJ plus affine-locality of lci; the ring node is exactly 0C33 (syntomic case) with 00SL expanded. I tested constant systems, identity maps, zero rings and empty fibres, and non-Noetherian bases. rg over the DAG and a blueprint grep found no duplicates, so same_as [] is correct. Neither new node restates a clause of the parent, and there is no cycle. I accept the three declared tool uses (limit-affine-transition, affine-chart-tensor-comparison, lci-field-change) as generic black boxes. The item is not a target node and no SGA source is used. Fix: in lem-trf-syntomic-geometric-fibres-affine-criterion I added the missing [def-pc-fibre-product] citation for the arbitrary geometric fibre to both the statement and stmt_deps (B3). Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.CompleteIntersectionFibresLimitDescent",
+  "declaration": "AlgebraicGeometry.completeIntersectionFibres_limit_descent",
+  "file": "lean/Sheaf/TraceFormula/CompleteIntersectionFibresLimitDescent.lean",
+  "statement": "theorem completeIntersectionFibres_limit_descent {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)] (c : Cone D) (hc : IsLimit c) (i₀ : I) (U₀ V₀ : Scheme.{u}) [CompactSpace U₀] [QuasiSeparatedSpace U₀] [CompactSpace V₀] [QuasiSeparatedSpace V₀] (u₀ : U₀ ⟶ D.obj (op i₀)) (v₀ : V₀ ⟶ D.obj (op i₀)) (g₀ : U₀ ⟶ V₀) (h₀ : g₀ ≫ v₀ = u₀) [LocallyOfFinitePresentation g₀] (hflat : Flat (canonicalBaseChangeMap g₀ u₀ v₀ (c.π.app (op i₀)) h₀)) (hfib : ∀ (Ω : Type (max u v)) [Field Ω] [IsAlgClosed Ω] (y : pullback (C := Scheme.{u}) v₀ (c.π.app (op i₀))) (φ : (pullback (C := Scheme.{u}) v₀ (c.π.app (op i₀))).residueField y →+* Ω), IsLocalCompleteIntersectionOverExtension _ ((canonicalBaseChangeMap g₀ u₀ v₀ (c.π.app (op i₀)) h₀).fiber y) ((canonicalBaseChangeMap g₀ u₀ v₀ (c.π.app (op i₀)) h₀).fiberToSpecResidueField y) Ω φ) : ∃ i : I, ∃ hi : i₀ ≤ i, ∀ j : I, ∀ hj : i ≤ j, Flat (canonicalBaseChangeMap g₀ u₀ v₀ (D.map (homOfLE (hi.trans hj)).op) h₀) ∧ LocallyOfFinitePresentation (canonicalBaseChangeMap g₀ u₀ v₀ (D.map (homOfLE (hi.trans hj)).op) h₀) ∧ (∀ (Ω : Type (max u v)) [Field Ω] [IsAlgClosed Ω] (y : pullback (C := Scheme.{u}) v₀ (D.map (homOfLE (hi.trans hj)).op)) (φ : (pullback (C := Scheme.{u}) v₀ (D.map (homOfLE (hi.trans hj)).op)).residueField y →+* Ω), IsLocalCompleteIntersectionOverExtension _ ((canonicalBaseChangeMap g₀ u₀ v₀ (D.map (homOfLE (hi.trans hj)).op) h₀).fiber y) (Scheme.Hom.fiberToSpecResidueField (canonicalBaseChangeMap g₀ u₀ v₀ (D.map (homOfLE (hi.trans hj)).op) h₀) y) Ω φ)",
+  "branch": "newtargets-dag",
+  "by": "Q92",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.canonicalBaseChangeMap",
+   "AlgebraicGeometry.completeIntersectionFibres_limit_descent"
+  ],
+  "fixed_by": "NT-stage2-Codex-7ccc0a8da"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7ccc0a8da",
+  "group": "Q92",
+  "result": "fix",
+  "note": "Substantive review passed; complete replacement files are in fixes/. scompile reproduced the criterion module, while sibling compilation hit an overlay/cache dependency-order error."
  }
 }
