@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "prop-weil-pbc-levelwise-truncations",
-   "place": "Current blueprint proof Step 1, tensoring the truncation triangle: the derived scalar-extension functor carries distinguished triangles to distinguished triangles with the shift induced from complexes (used through the item's shift and connecting-square clauses).",
+   "place": "Current blueprint proof Step 1, tensoring the truncation triangle: the derived scalar-extension functor carries distinguished triangles to distinguished triangles with the shift induced from complexes; the counit and shift comparison are the naturality data used in that tensoring argument.",
    "via": [
     "lem-weil-pbc-scalar-extension-unit-triangles"
    ]
@@ -27,20 +27,159 @@
   "lem-pur-left-derived-from-kflat-class",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-weil-sheaf-of-modules-category], the smallness hypothesis makes both sheaf-module categories abelian. Their homotopy categories and the localization functors have the cone triangulations of [lem-pur-homotopy-category-triangulated]. Termwise tensor is additive: on local tensor generators its map sends $m\\otimes s$ to $f(m)\\otimes s$, so it preserves sums of maps. It preserves the biproduct identities and hence the biproduct $L^r\\oplus P^{r+1}$ in the cone formula of [def-weil-abstract-derived-category]. Under this identification its cone differential is $\\begin{pmatrix}d_L\\otimes1&f\\otimes1\\\\0&-d_P\\otimes1\\end{pmatrix}$, exactly the cone differential of $E(f)$. If $f-g=dh+hd$, then $E(f)-E(g)=dE(h)+E(h)d$, so it descends to homotopy categories. The cone inclusion and negative projection are preserved as well. Thus $E$ carries cone triangles to cone triangles; since distinguished triangles are their isomorphic copies, $E$, and then $B:=Q_S\\circ E$, are exact.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-pur-homotopy-category-triangulated",
+    "def-weil-abstract-derived-category",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definitions 05RR, 05RU and the cone construction in Section 13.11; literature/stacks-project/sites-modules.tex, Tag 03EK"
+   }
+  },
+  {
+   "text": "Take the resolving class to be K-flat complexes with flat terms. Every complex has such a quasi-isomorphic resolution by [lem-pc-kflat-resolution]. Clause (1) of [lem-pur-derived-change-of-rings] says that termwise change of rings sends every quasi-isomorphism between these complexes to a quasi-isomorphism, so $B$ inverts these arrows. The two hypotheses of [lem-pur-left-derived-from-kflat-class] therefore hold for $B:K(R)\\to D(S)$. It supplies the everywhere-defined left derived functor $F$, the counit $\\varepsilon:F\\circ Q_R\\to B$ with its right Kan universal property, and invertibility of $\\varepsilon_P$ on the resolving class. This is the derived tensor functor of clause (2) of [lem-pur-derived-change-of-rings]. Neither resolution existence nor clause (1) requires flatness of $S$ over $R$ or boundedness.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-kflat-resolution",
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 06YT, 06YY; literature/stacks-project/derived.tex, Tag 06XN"
+   }
+  },
+  {
+   "text": "For every $P$, both $E(P[1])$ and $E(P)[1]$ have degree-$r$ term $P^{r+1}\\otimes_R S$ and differential $-d_P\\otimes1$. Hence the degreewise identities give the natural isomorphism $\\theta_P$. For an integer shift $n$, replace $1$ by $n$ and the minus sign by $(-1)^n$; composition of these identities gives the zero and addition coherence identities. Together with the localization shift structure, this gives the coherent shift comparison of $B=Q_S\\circ E$, whose degree-one component is $b_P=s'_{E(P)}\\circ Q_S(\\theta_P):B(P[1])\\to B(P)[1]$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05SU(2), together with the complex-shift definition in Section 13.11 and the termwise tensor construction in sites-modules.tex Tag 03EK"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-right-kan-extension-coherent-shift] with source $K(R)$, localization $Q_R:K(R)\\to D(R)$, original functor $B=Q_S\\circ E:K(R)\\to D(S)$, right Kan extension $F$, and counit $\\varepsilon$. Here the functor in that theorem with codomain $D(S)$ is $B$, rather than $E$ with codomain $K(S)$. The preceding steps provide the coherent shifts of $Q_R$ and $B$ and the required universal property. The theorem gives coherent natural isomorphisms $\\sigma_X:F(X[1])\\to F(X)[1]$ making $\\varepsilon$ commute with shifts. Expanding that assertion at $P$, using the component $b_P$ computed above, gives precisely $\\varepsilon_P[1]\\circ\\sigma_{Q_RP}\\circ F(s_P)=s'_{E(P)}\\circ Q_S(\\theta_P)\\circ\\varepsilon_{P[1]}$.",
+   "uses": [
+    "lem-pur-right-kan-extension-coherent-shift",
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05SU(2) and Proposition 05SE, LF part; generic universal-property formulation"
+   }
+  },
+  {
+   "text": "For uniqueness no coherence assumption on a competing family is needed. Put $H(X)=F(X[1])[-1]$. A natural family $\\sigma$ determines a transformation $a^\\sigma:H\\to F$ with component $\\sigma_X[-1]$, using the canonical inverse-shift identifications. If $\\sigma$ and $\\tau$ satisfy the displayed counit equation, shifting that equation by $[-1]$ and cancelling the common isomorphism $F(s_P)[-1]$ shows $\\varepsilon_P\\circ a^\\sigma_{Q_RP}=\\varepsilon_P\\circ a^\\tau_{Q_RP}$ for every $P$. Injectivity of the universal correspondence for the test functor $H$, stated in [lem-pur-left-derived-from-kflat-class], gives $a^\\sigma=a^\\tau$. Applying $[1]$ gives $\\sigma=\\tau$.",
+   "uses": [
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Proposition 05SE, LF part; Lemma 05SU(2)"
+   }
+  },
+  {
+   "text": "Let $\\Delta=(X\\xrightarrow{u}Y\\xrightarrow{v}Z\\xrightarrow{w}X[1])$ be distinguished in $D(R)$. By [lem-pur-quasi-isos-saturated-triangulated] the quasi-isomorphisms $W$ of $K(R)$ are a saturated triangulated multiplicative system (so right calculus of fractions and two-out-of-three hold) and $Q_R$ is the shift-compatible localization at $W$. By [lem-pur-resolving-class-essential-constancy] for $B$, $W$ and the K-flat flat-term class (its two hypotheses are those of step 2), the denominator diagram of $B$ is essentially constant at every complex. Apply [lem-pur-left-derived-kan-source-triangles] with $D=K(R)$, $D'=D(S)$, $L=D(R)$, exact $B$ (step 1), $Q=Q_R$, $LF=F$ with $\\sigma$ (step 4) and $\\alpha=\\varepsilon$, a right Kan extension (step 2) commuting with shifts (step 4): for every distinguished $T=(K\\xrightarrow{f}M\\xrightarrow{g}N\\xrightarrow{h}K[1])$ of $K(R)$, $F(Q_RK)\\to F(Q_RM)\\to F(Q_RN)\\xrightarrow{\\sigma_{Q_RK}F(s_KQ_Rh)}F(Q_RK)[1]$ is distinguished, i.e. $(F,\\sigma)$ maps $Q_R(T)$ to a distinguished triangle. By [lem-pur-localization-triangles-05r6] (its triangulation is that of $D(R)$, by uniqueness) there is a triangle isomorphism $(a,b,c):\\Delta\\to Q_R(T)$, with last arrow $w'$ of $Q_R(T)$. Then $(Fa,Fb,Fc)$ is a triangle isomorphism from $(FX,FY,FZ,Fu,Fv,\\sigma_XF(w))$ to the image of $Q_R(T)$: the first two squares are $F$ of those of $(a,b,c)$, and $F(a)[1]\\sigma_XF(w)=\\sigma F(a[1])F(w)=\\sigma F(w')F(c)$ by naturality of $\\sigma$. By (TR1) of [def-weil-triangulated-category] the first triangle is distinguished. $F$ is additive, being exact by [lem-pur-left-derived-from-kflat-class]. Hence $(F,\\sigma)$ is exact with the comparison of the statement, not merely some comparison.",
+   "uses": [
+    "lem-pur-quasi-isos-saturated-triangulated",
+    "lem-pur-resolving-class-essential-constancy",
+    "lem-pur-left-derived-kan-source-triangles",
+    "lem-pur-localization-triangles-05r6",
+    "lem-pur-left-derived-from-kflat-class",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Proposition Tag 05SE (proposition-derived-functor) (2),(7), LF part, with Tag 05SU (lemma-derived-shift) and Tag 05R6 for triangles of the localization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-triangulated-category",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-homotopy-category-triangulated",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pur-left-derived-kan-source-triangles",
+  "lem-pur-localization-triangles-05r6",
+  "lem-pur-quasi-isos-saturated-triangulated",
+  "lem-pur-resolving-class-essential-constancy",
+  "lem-pur-right-kan-extension-coherent-shift"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 05SU(2), 05SE (LF part), 06XN and 06YY, with the termwise cone calculation from sites-modules.tex Tag 03EK"
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "grep -rn \"CommShift\" /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib/CategoryTheory/Functor/Derived/*.lean /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib/CategoryTheory/Localization/DerivabilityStructure/*.lean; grep -rln \"leftDerived.*commShift\\|commShift.*leftDerived\\|LeftDerived.*CommShift\" /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib",
-   "results": "none (no CommShift statement in Functor/Derived or DerivabilityStructure; no file pairs leftDerived with commShift). grep -rln totalLeftDerived finds only Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, which has no shift structure.",
+   "tool": "leanfinder",
+   "query": "A left derived functor of extension of scalars for sheaves of modules commutes with shifts uniquely compatibly with its derived counit and is triangulated",
+   "results": "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; no declaration for the full sheaf scalar-extension statement",
    "date": "2026-10-17",
-   "verdict": "no match (single grep search by the maintainer reader; LeanSearch and Loogle/LeanFinder are not reachable on the review server, so the lead must add those two kinds before the node leaves the queue)"
+   "verdict": "no exact match; generic induced-derived-functor and CommShift declarations"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsLeftDerivedFunctor, Functor.CommShift",
+   "results": "0 hits; unknown identifier Functor.IsLeftDerivedFunctor",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars commutes with shifts and preserves distinguished triangles",
+   "results": "CategoryTheory.Adjunction.IsTriangulated.commShift; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; no exact scalar-extension counit theorem",
+   "date": "2026-10-17",
+   "verdict": "no exact match; generic derived-category results"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*commShift|commShift.*leftDerived|LeftDerived.*CommShift|IsTriangulated in CategoryTheory/Functor/Derived",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right Kan extension along a functor commuting with integer shifts has a unique shift isomorphism compatible with its counit",
+   "results": "CategoryTheory.Functor.rightKanExtensionUnique; CategoryTheory.Functor.rightKanExtensionUniqueOfIso; no direct coherent-shift theorem in this query",
+   "date": "2026-10-17",
+   "verdict": "no exact match; generic right-Kan uniqueness APIs"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift",
+   "results": "CategoryTheory.Functor.CommShift and CommShift composition/identity APIs",
+   "date": "2026-10-17",
+   "verdict": "generalization: generic CommShift API"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLeftDerivedFunctor|CommShift|PreservesFiniteLimits in Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+   "results": "ExactFunctor.lean lines 30, 80-87: induced derived functor, CommShift and IsTriangulated instances for exact additive functors; no left-derived counit theorem",
+   "date": "2026-10-17",
+   "verdict": "generalization: exact abelian functor case only"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +196,84 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sbc-derived-scalar-extension-counit-shift",
+  "worker": "stage1",
+  "summary": "Retained the unchanged item statement and seven logged Mathlib searches from the interrupted attempt. Rechecked all dependencies against the current shared DAG, repaired stale citation attributions, and made explicit the homotopy/cone calculation, the K-flat hypotheses, B=Q_S∘E in the Kan theorem, and uniqueness by the universal correspondence. The six steps finish with triangulated exactness. No new nodes are needed. Maintainer reader (Q105 review): step 6 rewritten to prove exactness for the counit-compatible sigma itself via lem-pur-left-derived-kan-source-triangles and 05R6, instead of identifying an unspecified shift comparison of lem-pur-left-derived-exact-when-defined.",
+  "blueprint": "Realizes the ancestor blueprint proof clause for derived scalar extension in prop-weil-pbc-levelwise-truncations: tensoring distinguished truncation triangles, using the derived-functor counit and its shift compatibility; the item also records the generic 05SE exactness conclusion.",
+  "tool_uses": [
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "The item is in a remark unit with no explicit proof route; its statement needs the general derived localization, shifts, and distinguished triangles."
+   },
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "The item needs the termwise sheaf change-of-rings complex and its degreewise shift identity."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "The item specializes the general K-flat change-of-rings construction to R→S."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "The item needs the universal counit and everywhere-defined left derived functor computed on K-flat complexes."
+   },
+   {
+    "node": "lem-pur-right-kan-extension-coherent-shift",
+    "why": "The item needs the generic right-Kan universal-property construction of coherent shifts."
+   },
+   {
+    "node": "lem-pur-quasi-isos-saturated-triangulated",
+    "why": "The item uses the quasi-isomorphism localization as the saturated triangulated system required by the exactness theorem."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "The item uses K-flat resolutions for arbitrary, possibly unbounded complexes."
+   },
+   {
+    "node": "def-weil-triangulated-category",
+    "why": "The final clause is the definition of an exact functor carrying distinguished triangles with its shift comparison."
+   },
+   {
+    "node": "def-weil-sheaf-of-modules-category",
+    "why": "The small-site hypothesis supplies the abelian sheaf-module categories used by the generic homotopy-category and K-flat theorems."
+   },
+   {
+    "node": "lem-pur-homotopy-category-triangulated",
+    "why": "This existing Mathlib leaf supplies the triangulated homotopy category and exact localization needed for the termwise cone calculation."
+   },
+   {
+    "node": "lem-pur-left-derived-kan-source-triangles",
+    "why": "Step 6 needs distinguishedness of (F,sigma) on images of homotopy-category triangles for the counit-compatible shift sigma of step 4; no node of the remark unit gives it."
+   },
+   {
+    "node": "lem-pur-resolving-class-essential-constancy",
+    "why": "Step 6 needs essential constancy of the denominator diagrams of B from the K-flat resolving class, a generic derived-functor tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pur-right-kan-extension-coherent-shift",
+  "lem-pur-quasi-isos-saturated-triangulated",
+  "lem-pc-kflat-resolution",
+  "def-weil-triangulated-category",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-homotopy-category-triangulated",
+  "lem-pur-left-derived-kan-source-triangles",
+  "lem-pur-resolving-class-essential-constancy"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-9693d743d",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-9693d743d (reviewer sub-agent of L); spot-checked: I read all six steps in full, the statements of all 12 cited nodes, unit sk-rem-rest (a remark with no steps, so no route), the reviewed parent lem-weil-pbc-scalar-extension-unit-triangles, Stacks derived.tex 05SU (l.4657) and 05SE (l.4895), sites-cohomology.tex 06YY (l.3585), and the main-20261015 prop-weil-pbc-levelwise-truncations proof Step 1. The statement is true, and its coefficient categories match 06YY: R- and S-module sheaves on a small site, unbounded, with no flatness or boundedness assumed. The displayed equation is exactly the condition that the counit ε commutes with shifts. Edge cases checked: S=0, R=S, P=0, unbounded P. The delivery has no new nodes. I searched for duplicates (counit/shift, derived change of rings, 05SU) and found none.\n\nSteps 1-5 are correct as written. Step 1: the termwise tensor preserves the cone matrix and homotopies. Step 2: both hypotheses of lem-pur-left-derived-from-kflat-class hold, from lem-pc-kflat-resolution and clause (1) of lem-pur-derived-change-of-rings. Step 3: θ is the identity in every degree. Step 4: lem-pur-right-kan-extension-coherent-shift applies to B=Q_S∘E, and expanding its conclusion gives the displayed equation. Step 5: uniqueness follows from injectivity of the Kan correspondence for H=[-1]F[1].\n\nOne fault, C3/C4, in step 6. The step took exactness from lem-pur-left-derived-exact-when-defined, whose statement never says which shift comparison it uses. It then identified that comparison with the step-4 σ by step 5's uniqueness. But step 5 only applies to comparisons already known to satisfy the counit equation, and that fact is in the cited node's proof, not its statement. The point matters: with -σ the image triangles are not distinguished. I rewrote step 6 using statements only. lem-pur-quasi-isos-saturated-triangulated and lem-pur-resolving-class-essential-constancy give essential constancy. lem-pur-left-derived-kan-source-triangles, applied with σ from step 4, makes images of homotopy-category triangles distinguished. lem-pur-localization-triangles-05r6 (Mathlib leaf) and TR1 extend this to every triangle, with the third square written out from naturality of σ. proof_deps and tool_uses are updated: lem-pur-left-derived-exact-when-defined is dropped, kan-source-triangles and resolving-class-essential-constancy are added. I checked that the new citations create no cycle. All other declared tool_uses are accepted as generic black boxes, since the remark unit has no route. The corrected file is at fixes/dag/nodes/sec-smooth-base-change/lem-sbc-derived-scalar-extension-counit-shift.json; details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -1,0 +1,109 @@
+{
+ "id": "lem-trf-site-point-fibre",
+ "kind": "statement",
+ "title": "Fibre of a topos point as a filtered colimit over pointed site objects",
+ "statement": "Let $\\mathcal C$ be a small site with finite limits [def-weil-pbc-sites-and-cohomology, def-weil-size-convention]. Let $p:\\mathbf{Set}\\to\\operatorname{Sh}(\\mathcal C)$ be a geometric morphism, that is, an adjunction $p^{-1}\\dashv p_*$ with $p^{-1}$ preserving finite limits [def-weil-pbc-ringed-topos-morphism]. For $T\\in\\mathcal C$ put $L_p(T)=p^{-1}(h_T^\\#)$, where $h_T(V)=\\operatorname{Hom}_{\\mathcal C}(V,T)$ and $(-)^\\#$ is sheafification [def-weil-pbc-sheafification]. Write $\\mathcal N_p$ for the category of pairs $(T,a)$ with $a\\in L_p(T)$, an arrow being $b:T\\to T'$ with $L_p(b)(a)=a'$. Then $\\mathcal N_p$ is small and cofiltered. For every commutative ring $\\Lambda$ and every sheaf $F$ of modules over the constant ring sheaf $\\Lambda_{\\mathcal C}$ [def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category], the canonical map\n$$\\varinjlim_{(T,a)\\in\\mathcal N_p^{\\mathrm{op}}}F(T)\\ \\xrightarrow{\\ \\sim\\ }\\ p^*_{\\Lambda}F$$\nis an isomorphism of $\\Lambda$-modules, natural in $F$. Here $p^*_{\\Lambda}$ is the constant-coefficient inverse image [lem-pe-constant-left-module-inverse-image], and the map sends a section $s:h_T^\\#\\to F$ and $a$ to $p^{-1}(s)(a)$ on underlying sets. The functor $p^*_{\\Lambda}$ is exact. Colimits of $\\Lambda$-modules indexed by $\\mathcal N_p^{\\mathrm{op}}$ are exact; these assertions remain true after replacing $\\mathcal N_p$ by any small full initial subcategory.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00YA (lemma-point-site-topos), part (2), and 00Y8 (lemma-point-pushforward-sheaf); cofilteredness from finite limits of the fibre functor, and constant-module inverse image as specified by the cited lem-pe-constant-left-module-inverse-image. Intrinsic site-point colimit and exactness also Mathlib/CategoryTheory/Sites/Point/Basic.lean:69-97,139-147,277-291 and Point/Skyscraper.lean:222-235,295-297."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pe-constant-left-module-inverse-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The sheaf fiber functor at a point of an arbitrary site preserves finite limits and finite colimits and is computed as a colimit over the category of elements",
+   "results": "CategoryTheory.GrothendieckTopology.Point.sheafFiber; CategoryTheory.GrothendieckTopology.Point.fiber; CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall; CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsFunctorOppositePresheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize; CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeFunctorOppositePresheafFiber; CategoryTheory.GrothendieckTopology.Point.presheafFiber; CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize; CategoryTheory.preservesFiniteLimits_presheafToSheaf",
+   "date": "2026-10-17",
+   "verdict": "candidate: Mathlib implements fibre and exactness for an intrinsic GrothendieckTopology.Point; not an exact match for the reconstruction from an arbitrary geometric-morphism datum p. The site/topos-point comparison of Stacks 00YA is an additional theorem, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Point\", \"sheafFiber\"",
+   "results": "CategoryTheory.GrothendieckTopology.Point.presheafFiber; CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeFunctorOppositePresheafFiber; CategoryTheory.GrothendieckTopology.Point.sheafFiber; CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsFunctorOppositePresheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize; CategoryTheory.GrothendieckTopology.Point.shrinkYonedaCompPresheafFiberIso; CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize; CategoryTheory.GrothendieckTopology.Point.toPresheafFiber; CategoryTheory.GrothendieckTopology.Point.W_isInvertedBy_presheafFiber'",
+   "date": "2026-10-17",
+   "verdict": "candidate: Mathlib implements fibre and exactness for an intrinsic GrothendieckTopology.Point; not an exact match for the reconstruction from an arbitrary geometric-morphism datum p. The site/topos-point comparison of Stacks 00YA is an additional theorem, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a point of a Grothendieck site the additive fiber functor on sheaves is a filtered colimit of sections over pointed objects and is exact",
+   "results": "CategoryTheory.GrothendieckTopology.Point.instHasExactColimitsOfShapeOppositeElementsFiberOfLocallySmallOfAB5OfSizeOfHasFiniteLimits; CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall; CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfShapeOppositeElementsFiberForget; CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeFunctorOppositePresheafFiber; CategoryTheory.GrothendieckTopology.Point.sheafFiber; CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize; CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsFunctorOppositePresheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize; CategoryTheory.GrothendieckTopology.Point.instHasColimitsOfShapeOppositeElementsFiber",
+   "date": "2026-10-17",
+   "verdict": "candidate: Mathlib implements fibre and exactness for an intrinsic GrothendieckTopology.Point; not an exact match for the reconstruction from an arbitrary geometric-morphism datum p. The site/topos-point comparison of Stacks 00YA is an additional theorem, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "structure Point|isColimitPresheafFiberCocone|PreservesFiniteLimits|def sheafFiber",
+   "results": "69; 145; 277; 286; 287",
+   "date": "2026-10-17",
+   "verdict": "candidate: Mathlib implements fibre and exactness for an intrinsic GrothendieckTopology.Point; not an exact match for the reconstruction from an arbitrary geometric-morphism datum p. The site/topos-point comparison of Stacks 00YA is an additional theorem, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "instPreservesFiniteColimitsSheafSheafFiber|PreservesFiniteColimits \\(Φ.sheafFiber",
+   "results": "295",
+   "date": "2026-10-17",
+   "verdict": "candidate: Mathlib implements fibre and exactness for an intrinsic GrothendieckTopology.Point; not an exact match for the reconstruction from an arbitrary geometric-morphism datum p. The site/topos-point comparison of Stacks 00YA is an additional theorem, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "ofGeometric|geometricMorphism|of.*[Aa]djunction|of.*[Ss]heafFiber|toTopos",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean; Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean; Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean; Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean; Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean; Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean; Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean; Mathlib/CategoryTheory/Sites/Point/Map.lean",
+   "date": "2026-10-17",
+   "verdict": "candidate: Mathlib implements fibre and exactness for an intrinsic GrothendieckTopology.Point; not an exact match for the reconstruction from an arbitrary geometric-morphism datum p. The site/topos-point comparison of Stacks 00YA is an additional theorem, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Point\", \"of\"",
+   "results": "Lean.Order.le_apply_of_point_meet_le; Lean.Order.point_meet_le_of_le_apply; Function.exists_fixed_point_of_surjective; Set.eq_endpoints_or_mem_Ioo_of_mem_Icc; Equiv.pointReflection_fixed_iff_of_injective_two_nsmul; Equiv.injective_pointReflection_left_of_injective_two_nsmul; fixedPointsSubAddOfNormal; fixedPointsSubMulOfNormal",
+   "date": "2026-10-17",
+   "verdict": "candidate: Mathlib implements fibre and exactness for an intrinsic GrothendieckTopology.Point; not an exact match for the reconstruction from an arbitrary geometric-morphism datum p. The site/topos-point comparison of Stacks 00YA is an additional theorem, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a geometric morphism p from Sets to the sheaf topos of a small site, restrict its inverse image to sheafified representables; recover p inverse image on all abelian or module sheaves by the filtered colimit over pointed objects",
+   "results": "CategoryTheory.GrothendieckTopology.Point.presheafToSheafCompSheafFiber; SheafOfModules.sheafificationCompPullback; CategoryTheory.GrothendieckTopology.Point.instIsIsoMapFunctorOppositePresheafFiberToSheafify; CategoryTheory.Functor.IsDenseSubsite.sheafEquivSheafificationCompatibility; PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom; CategoryTheory.Sheaf.adjunction; PresheafOfModules.sheafificationCompToSheaf; PresheafOfModules.sheafifyHomEquiv'",
+   "date": "2026-10-17",
+   "verdict": "candidate: Mathlib implements fibre and exactness for an intrinsic GrothendieckTopology.Point; not an exact match for the reconstruction from an arbitrary geometric-morphism datum p. The site/topos-point comparison of Stacks 00YA is an additional theorem, not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-oriented-point-cohomology",
+  "date": "2026-10-17",
+  "group": "Q35"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.GrothendieckTopology.Point.isColimitPresheafFiberCocone",
+  "file": "Mathlib/CategoryTheory/Sites/Point/Basic.lean",
+  "how": "Lines 145-147 give the intrinsic point fibre colimit; lines 277-291 give sheaf fibre and finite-limit preservation; Point/Skyscraper.lean:295-297 gives finite-colimit preservation. Missing is reconstruction/identification of this intrinsic point from an arbitrary geometric-morphism datum p, as in Stacks 00YA(2)."
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof paragraph “(1) and (2)”: Varshavsky’s specialization-to-the-normal-cone construction in §§1.3–1.4, including passage from oriented nearby cycles to the geometric specialization and its maps; geometric slice evaluated through Illusie (1.3.1); evaluation at an oriented point in Illusie (1.3.1), using the general point-of-site/topos comparison",
+   "via": [
+    "lem-trf-oriented-point-cohomology",
+    "lem-trf-nearby-geometric-slice",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

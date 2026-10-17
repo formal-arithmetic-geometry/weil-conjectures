@@ -4,13 +4,75 @@
  "stmt_deps": [
   "lem-cbc-dold-kan-normalization-equivalence",
   "lem-cbc-normalized-simplex-chain-diagonal",
-  "lem-coef-kan-quillen-right-proper"
+  "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $V=\\{0,\\ldots,n\\}$ and $H=\\Lambda_k^n$. By the horn definition in [def-cbc-enhanced-diagrams-cones], a monotone string belongs to $H$ exactly when it omits some vertex $j\\ne k$: it then factors through the included face omitting $j$, and conversely every string in that face omits $j$. A strictly increasing string thus fails to belong to $H$ exactly when its vertex set is $V$ or $V\\setminus\\{k\\}$. Denote these strings by $t=[0,\\ldots,n]$ and $u=[0,\\ldots,\\widehat k,\\ldots,n]$. Let $A_r\\subset P(n)_r$ be the free span of all other strict strings. Every sub-string of a horn string still omits the same $j\\ne k$, so the displayed boundary formula of [lem-cbc-normalized-simplex-chain-diagonal] makes $A$ a subcomplex.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-normalized-simplex-chain-diagonal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NU, label definition-kan, preceding horn-description paragraph (lines 5674–5685); explicit agent-written free-chain calculation using the natural q of lem-cbc-normalized-simplex-chain-diagonal."
+   }
+  },
+  {
+   "text": "The degreewise free-module inclusion $\\Lambda[H]\\to F(n)$ is injective: distinct horn strings remain distinct basis vectors. Normalization restricts this inclusion to the positive-face kernels, by [lem-cbc-dold-kan-normalization-equivalence], so $i$ is degreewise injective. Compose with the chain isomorphism $q_n:B\\to P(n)$ of [lem-cbc-normalized-simplex-chain-diagonal]. Since $q_n$ discards noninjective strings, $q_ni(K_r)\\subset A_r$. Conversely, each basis string $v$ of $A_r$ omits some $j\\ne k$, hence is $P(\\delta_j)(v_0)$ for a unique strict string $v_0$ in $P(n-1)_r$. Put $x_0=q_{n-1}^{-1}(v_0)$. The face map $F(n-1)\\to\\Lambda[H]$ takes $x_0$ into $K_r$, since it commutes with all positive faces. Naturality of the stated $q$ gives $q_ni(N(\\delta_j)(x_0))=P(\\delta_j)(v_0)=v$. Extending linearly gives every element of $A_r$. Thus $q_ni:K\\to A$ is a degreewise bijective chain map, hence an isomorphism: its inverse commutes with the differential by composing the chain-map equation with the inverse on each side.",
+   "uses": [
+    "lem-cbc-dold-kan-normalization-equivalence",
+    "lem-cbc-normalized-simplex-chain-diagonal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NU, label definition-kan, preceding horn-description paragraph (lines 5674–5685); explicit agent-written free-chain calculation using the natural q of lem-cbc-normalized-simplex-chain-diagonal."
+   }
+  },
+  {
+   "text": "Use $q_n$ and the preceding identification to work with $A\\subset P(n)$. The quotient in each degree has just the remaining basis vectors: the class of $t$ in degree $n$ and the class of $u$ in degree $n-1$. Set $\\sigma=(-1)^k$. The boundary formula of [lem-cbc-normalized-simplex-chain-diagonal] gives $\\partial t=\\sigma u+h$, where $h=\\sum_{j\\ne k}(-1)^j[0,\\ldots,\\widehat j,\\ldots,n]\\in A_{n-1}$. Every face of $u$ lies in $A$ when $n>1$, while for $n=1$ its differential is zero because it has degree zero. Hence the quotient differential is multiplication by $\\sigma$ and all other differentials are zero. This proves the specified quotient description without changing its sign.",
+   "uses": [
+    "lem-cbc-normalized-simplex-chain-diagonal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NU, label definition-kan, preceding horn-description paragraph (lines 5674–5685); explicit agent-written free-chain calculation using the natural q of lem-cbc-normalized-simplex-chain-diagonal."
+   }
+  },
+  {
+   "text": "Put $b=\\partial t=\\sigma u+h$. Define $s:D^n\\to P(n)$ by sending the standard generator in degree $n$ to $t$ and the standard generator in degree $n-1$ to $b$, with zero maps in all other degrees. This is a chain map: $\\partial t=b$, $\\partial b=\\partial^2t=0$, and these are exactly the two equations for the disk differential, including $n=1$. The map $\\Phi:A\\oplus D^n\\to P(n)$, $(a,z)\\mapsto a+s(z)$, is degreewise invertible. Indeed, in degree $n$ it sends the disk generator to the only basis vector $t$. In degree $n-1$, write an element uniquely as $a+c u$; its inverse is $(a-\\sigma c h,\\sigma c)$ since $\\sigma^2=1$. In every other degree it is the identity on $A$. The inverse of this bijective chain map is again a chain map by its commuting-differential equation. Thus $\\Phi$ is an isomorphism of complexes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NU, label definition-kan, preceding horn-description paragraph (lines 5674–5685); explicit agent-written free-chain calculation using the natural q of lem-cbc-normalized-simplex-chain-diagonal."
+   }
+  },
+  {
+   "text": "Transport $\\Phi$ along the isomorphism $K\\cong A$ from step 2 and $q_n^{-1}:P(n)\\to B$. The resulting isomorphism $K\\oplus D^n\\cong B$ restricts on $K$ to $i$, since $q_ni$ is precisely the inclusion of the identified $A$. Its inverse followed by projection onto $K$ is a chain map $r:B\\to K$ with $ri=\\mathrm{id}_K$. This proves that $i$ is a split monomorphism, as well as the requested direct-sum statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NU, label definition-kan, preceding horn-description paragraph (lines 5674–5685); explicit agent-written free-chain calculation using the natural q of lem-cbc-normalized-simplex-chain-diagonal."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-normalized-simplex-chain-diagonal",
+  "lem-cbc-dold-kan-normalization-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Horn description preceding Tag 08NU (definition-kan); explicit basis and boundary argument, with normalization furnished by the cited existing nodes."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-simplicial-module-model",
@@ -20,7 +82,7 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "title": "Normalized free horn quotient is a two-term disk",
- "statement": "Fix a commutative ring $\\Lambda$, an integer $n\\geq1$ and $0\\leq k\\leq n$. Use simplicial sets and horns as in [lem-coef-kan-quillen-right-proper], and the normalization $N$ on simplicial $\\Lambda$-modules from [lem-cbc-dold-kan-normalization-equivalence]. For a simplicial set $S$, let $\\Lambda[S]$ be the simplicial module freely generated in each degree by $S$ in that degree, with operators induced linearly. Put $K=N\\Lambda[\\Lambda_k^n]$ and $B=N\\Lambda[\\Delta^n]$, and let $i:K\\to B$ be induced by the horn inclusion. Let $D^n$ be the nonnegative chain complex with a free rank-one module in degrees $n$ and $n-1$, zero in other degrees, and differential the identity from degree $n$ to degree $n-1$. Then $i$ is a split monomorphism of chain complexes, and there is an isomorphism $K\\oplus D^n\\cong B$ carrying the summand inclusion of $K$ to $i$. Under the natural nondegenerate-string model $P(n)$ of [lem-cbc-normalized-simplex-chain-diagonal], $K$ is the subcomplex spanned by every strictly increasing string except the top string $[0,\\ldots,n]$ and the omitted face $[0,\\ldots,\\widehat k,\\ldots,n]$. These two classes freely generate $B/iK$ in degrees $n$ and $n-1$, respectively, with differential $(-1)^k$ between them.",
+ "statement": "Fix a commutative ring $\\Lambda$, an integer $n\\geq1$ and $0\\leq k\\leq n$. Use simplicial sets and horns as in [def-cbc-enhanced-diagrams-cones], and the normalization $N$ on simplicial $\\Lambda$-modules from [lem-cbc-dold-kan-normalization-equivalence]. For a simplicial set $S$, let $\\Lambda[S]$ be the simplicial module freely generated in each degree by $S$ in that degree, with operators induced linearly. Put $K=N\\Lambda[\\Lambda_k^n]$ and $B=N\\Lambda[\\Delta^n]$, and let $i:K\\to B$ be induced by the horn inclusion. Let $D^n$ be the nonnegative chain complex with a free rank-one module in degrees $n$ and $n-1$, zero in other degrees, and differential the identity from degree $n$ to degree $n-1$. Then $i$ is a split monomorphism of chain complexes, and there is an isomorphism $K\\oplus D^n\\cong B$ carrying the summand inclusion of $K$ to $i$. Under the natural nondegenerate-string model $P(n)$ of [lem-cbc-normalized-simplex-chain-diagonal], $K$ is the subcomplex spanned by every strictly increasing string except the top string $[0,\\ldots,n]$ and the omitted face $[0,\\ldots,\\widehat k,\\ldots,n]$. These two classes freely generate $B/iK$ in degrees $n$ and $n-1$, respectively, with differential $(-1)^k$ between them.",
  "source": {
   "document": "literature/stacks-project/simplicial.tex",
   "place": "Tag 08NU, label definition-kan, preceding horn-description paragraph in section-kan (lines 5674-5685); Tag 017V, label lemma-splitting-abelian-category; Tag 0FKI, label remark-degenerate-subcomplex. These give the horn combinatorics and normalized/degenerate decomposition; the chain-level disk splitting is the agent-written two-generator consequence detailed in report.md, using lem-cbc-normalized-simplex-chain-diagonal for the exact kernel convention."
@@ -123,6 +185,41 @@
    "results": "OK: 12 hits; ; returned: Polynomial.recOnHorner, SSet.horn, SSet.instHasDimensionLTToSSetHorn, SSet.horn.face, SSet.horn.const, SSet.horn.edge₃, SSet.horn.ι, SSet.horn_obj_eq_univ",
    "date": "2026-10-17",
    "verdict": "No match: inspected MooreComplex.lean:64-161, Horn.lean:27-64 and CategoryWithFibrations.lean:35-105. The hits define normalization, horn combinatorics, and simplicial-set lifting; none states the normalized free-module horn inclusion or its disk splitting."
+  },
+  {
+   "tool": "grep",
+   "query": "horn.*(normal|chain|disk)|(normal|chain|disk).*horn",
+   "results": "{\"t\": \"2026-10-17T12:47:15Z\", \"tool\": \"grep\", \"query\": \"horn.*(normal|chain|disk)|(normal|chain|disk).*horn\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: horn inclusions and normalized Moore functors only; no normalized free-horn disk splitting. Read Horn.lean:27–64 and MooreComplex.lean:64–85,116–140. The second semantic phrasing returned simplex operators and group-resolution boundary formulas, which concern different objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative normalized chain complex of a simplex modulo a horn is a disk complex",
+   "results": "{\"t\": \"2026-10-17T12:47:15Z\", \"tool\": \"leansearch\", \"query\": \"The relative normalized chain complex of a simplex modulo a horn is a disk complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DoldKan.termN[_]\", \"AlgebraicTopology.NormalizedMooreComplex.obj\", \"SSet.KanComplex.hornFilling\", \"CategoryTheory.Idempotents.DoldKan.N\", \"AlgebraicTopology.NormalizedMooreComplex.objX\", \"AlgebraicTopology.normalizedMooreComplex\", \"CategoryTheory.Abelian.DoldKan.N\", \"SSet.horn.face\"], \"digest\": \"28283c641c9d57a6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: horn inclusions and normalized Moore functors only; no normalized free-horn disk splitting. Read Horn.lean:27–64 and MooreComplex.lean:64–85,116–140. The second semantic phrasing returned simplex operators and group-resolution boundary formulas, which concern different objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"horn\", \"chain\"",
+   "results": "{\"t\": \"2026-10-17T12:47:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"horn\\\", \\\"chain\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: horn inclusions and normalized Moore functors only; no normalized free-horn disk splitting. Read Horn.lean:27–64 and MooreComplex.lean:64–85,116–140. The second semantic phrasing returned simplex operators and group-resolution boundary formulas, which concern different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized free module chains on a simplicial horn split off a two term disk from the simplex chain complex",
+   "results": "{\"t\": \"2026-10-17T12:47:17Z\", \"tool\": \"leanfinder\", \"query\": \"Normalized free module chains on a simplicial horn split off a two term disk from the simplex chain complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.horn.ι\", \"SSet.horn.ι_ι\", \"SSet.horn.const\", \"SSet.horn\", \"SSet.horn.primitiveTriangle\", \"SSet.horn.face\", \"SSet.horn₂₀.ι₀₁\", \"SSet.horn.multicoequalizerDiagram\"], \"digest\": \"7bb5b29903876c67\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: horn inclusions and normalized Moore functors only; no normalized free-horn disk splitting. Read Horn.lean:27–64 and MooreComplex.lean:64–85,116–140. The second semantic phrasing returned simplex operators and group-resolution boundary formulas, which concern different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free simplex chains modulo all but one facet have two basis elements and differential plus or minus identity",
+   "results": "{\"t\": \"2026-10-17T12:47:18Z\", \"tool\": \"leanfinder\", \"query\": \"Free simplex chains modulo all but one facet have two basis elements and differential plus or minus identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategoryGenRel.P_δ.δ\", \"Rep.standardComplex.d_of\", \"SimplexCategoryGenRel.generators.δ\", \"Rep.standardComplex.d\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.on_Γ₀_summand_id\", \"Rep.barComplex.d_single\", \"SimplexCategoryGenRel.P_σ.σ\", \"groupHomology.inhomogeneousChains.d_single\"], \"digest\": \"b77dbd4e26b3c70e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: horn inclusions and normalized Moore functors only; no normalized free-horn disk splitting. Read Horn.lean:27–64 and MooreComplex.lean:64–85,116–140. The second semantic phrasing returned simplex operators and group-resolution boundary formulas, which concern different objects."
   }
  ],
  "blueprint": {
@@ -141,5 +238,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-normalized-horn-disk",
+  "worker": "stage1",
+  "summary": "Kept the full statement and proved it in five explicit steps. Identified normalized horn chains using only the stated natural simplex isomorphism and face-kernel definition, calculated the two quotient generators and sign, and split off the disk by replacing the omitted face by the boundary of the top simplex. No new nodes or attachments; no normalization exactness, projectivity or generic splitting theorem is used.",
+  "blueprint": "Current main-20261015 proof, opening 'Choose a compactification c=(j,p)' and the transport by 'lem-weil-pbc-transport-identifies-exchange': supporting hypercover/Dold--Kan primitive lem-cbc-dold-kan-hypercover-quillen, ordinary simplicial-module model input before Proposition 3.15. Normalized horn and disk calculation formerly in step 3."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-59949aae3",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-59949aae3 (reviewer sub-agent of L); spot-checked: I read all of it: AGENTS, stage 1, the brief, GOAL, dag-sync, delivery-errors A-F, the packet, the report, the item JSON, and the full statements of the three cited nodes. I also read the parent lem-cbc-simplicial-module-model (its step 3 uses exactly the K->K+D^n identification) and lem-cbc-disk-lifting-surjective (same D^n convention). Source checks: Stacks simplicial.tex lines 5668-5685 (the horn paragraph before definition-kan, 08NU), and the tag mappings 08NU, 017V and 0FKI, which are correct. The delivery has no new nodes and the statement is unchanged; it is not a duplicate or a restated clause. All five steps are correct. Step 1: horn strings are those omitting some j!=k, so A is a subcomplex. Step 2: injective on the free basis; the preimage is N(delta_j)q_{n-1}^{-1}(v0), using the stated naturality of q, not its proof. Step 3: the boundary of t is sigma*u+h, and n=1 is handled. Step 4: A_n=0, and the inverse (a-sigma*c*h, sigma*c) checks in both directions using only sigma^2=1, so it holds over any ring. Step 5: composition and retraction. Small cases tested: n=1 with k=0,1 and n=2 with k=0,1,2. One repairable fault (C7/route): the statement and step 1 cited the off-unit statement node lem-coef-kan-quillen-right-proper only for the definition of a horn, which the item's own unit gives in def-cbc-enhanced-diagrams-cones in exactly the form used. I replaced that citation in the statement, stmt_deps, step 1 uses and proof_deps, and removed split_report.tool_uses (no off-unit citation is left, so I accepted no tool use). The cycle check is clean. The corrected file is fixes/dag/nodes/sec-smooth-purity/lem-cbc-normalized-horn-disk.json; review.md has the details.; 1 file(s) fixed by the reviewer"
  }
 }

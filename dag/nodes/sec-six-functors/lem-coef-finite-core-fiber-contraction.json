@@ -10,9 +10,109 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-cbc-enhanced-functor-cone-calculus], $A^\\simeq$ and $B^\\simeq$ are Kan complexes. Apply [lem-coef-kan-fiber-path-reversal] to $G^\\simeq:A^\\simeq\\to B^\\simeq$. Besides the displayed $P_b$, this gives the Kan complex $Q_b=\\{b\\}\\times_{B^\\simeq,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,B^\\simeq)\\times_{\\operatorname{ev}_1,B^\\simeq}A^\\simeq$ and simplicial maps $R:P_b\\to Q_b$, $S:Q_b\\to P_b$ with $SR\\simeq\\operatorname{id}_{P_b}$. It suffices to contract finite diagrams in $Q_b$; step 7 will transport the actual homotopy back, including its specified endpoint.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-kan-fiber-path-reversal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Lemma 7.6.7, proof, printed p.388; agent expansion to arbitrary finite simplicial shapes and the stated path-fiber orientation."
+   }
+  },
+  {
+   "text": "Form the relative undercategory $C_b$ and its projection $U$ of [lem-coef-relative-undercategory-limit-creation]; it is the comma quasicategory of [lem-coef-infinity-comma-mapping-pullback] for the cospan $\\Delta^0\\xrightarrow{b}B\\xleftarrow{G}A$. There is a degreewise inclusion $Q_b\\subseteq C_b$: forget that the $A$-simplices and the whole arrow prism in $B$ lie in the cores. Let $K$ be finite, possibly empty, and let $g:K\\to Q_b$ be any map. Regard it as $d:K\\to C_b$. The diagram $Ud$ has a limit in $A$ by hypothesis. Its image under $G$ is a limit cone by limit preservation. The cited relative-undercategory lemma therefore supplies a limiting cone $\\lambda:\\Delta_Kc\\to d$ in $C_b$, with $c=(a,\\psi:b\\to G(a))$. No contractibility of $K$ is used.",
+   "uses": [
+    "lem-coef-relative-undercategory-limit-creation",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-comma-mapping-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Lemma 7.6.7, proof, printed p.388; agent expansion to arbitrary finite simplicial shapes and the stated path-fiber orientation."
+   }
+  },
+  {
+   "text": "Right approximation applied to $\\psi$ gives $v:a'\\to a$ and an equivalence $e:b\\to G(a')$ with $[G(v)e]=[\\psi]$. Put $c'=(a',e)\\in C_b$. The mapping-space formula of [lem-coef-infinity-comma-mapping-pullback] for this cospan, whose $\\Delta^0$-factor $\\operatorname{Map}_{\\Delta^0}(*,*)$ is a point, identifies $\\operatorname{Map}_{C_b}(c',c)$, compatibly with $U$, with the homotopy fiber over $\\psi$ of $\\operatorname{Map}_A(a',a)\\to\\operatorname{Map}_B(b,G(a))$, $v\\mapsto G(v)e$. This fiber is nonempty: the vertex $v$ and a path from its composite class to $\\psi$ give a point of the stated homotopy fiber. Equality in $\\pi_0$ gives such a path, since the mapping spaces are Kan by [lem-cbc-enhanced-functor-cone-calculus]; a finite zigzag can be reversed and composed by filling two-dimensional horns. The natural equivalence of mapping spaces is surjective on components, so it gives an edge $w:c'\\to c$. Its projected class is $[v]$. Thus an equality only in $hB$ has been used to obtain coherent comma data, rather than being treated as a strict triangle.",
+   "uses": [
+    "lem-coef-infinity-comma-mapping-pullback",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Lemma 7.6.7, proof, printed p.388; agent expansion to arbitrary finite simplicial shapes and the stated path-fiber orientation."
+   }
+  },
+  {
+   "text": "Since $C_b$ is a quasicategory by [lem-coef-infinity-comma-mapping-pullback], $\\operatorname{Fun}(K,C_b)$ is a quasicategory by [lem-cbc-enhanced-functor-cone-calculus]. Its two composable edges $\\Delta_Kw$ and $\\lambda$ fill an inner two-horn, giving an edge $h:\\Delta_Kc'\\to d$. By definition [def-cbc-enhanced-diagrams-cones], this is an actual map $H:K\\times\\Delta^1\\to C_b$, with endpoints exactly the constant map at $c'$ and $d$. The inner-horn filler also retains the compatibility with the original limiting cone; no passage to the homotopy category of diagrams is being substituted for this map.",
+   "uses": [
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-comma-mapping-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Lemma 7.6.7, proof, printed p.388; agent expansion to arbitrary finite simplicial shapes and the stated path-fiber orientation."
+   }
+  },
+  {
+   "text": "At a vertex $k\\in K$, write $d(k)=(a_k,e_k:b\\to G(a_k))$ and $t_k=U(h_k):a'\\to a_k$. The coherent square defining the edge $h_k$ in $C_b$ yields $[G(t_k)][e]=[e_k]$ in $hB$; its two triangular faces give this equation by [lem-coef-infinity-mapping-composition]. Both $e$ and $e_k$ are equivalences, so $[G(t_k)]=[e_k][e]^{-1}$ is invertible. The same cited lemma identifies invertible component classes with equivalence edges. Conservativity of $G$ now makes every $t_k$ an equivalence in $A$. This step uses conservativity only on these component edges.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Lemma 7.6.7, proof, printed p.388; agent expansion to arbitrary finite simplicial shapes and the stated path-fiber orientation."
+   }
+  },
+  {
+   "text": "The endpoints of $UH$ carry all edges of $K$ to equivalences, since they are a constant diagram and the $A^\\simeq$-coordinate of $g$. The vertical edges $t_k$ are equivalences by step 5. Every remaining diagonal edge of $K\\times\\Delta^1$ is the composite, up to a triangular face, of a horizontal and a vertical edge; [lem-coef-infinity-mapping-composition] therefore makes it an equivalence as well. Thus $UH$ factors through $A^\\simeq$. The $B$-coordinate of $H$ is a map $K\\times\\Delta^1\\times\\Delta^1\\to B$, whose last interval is the comma arrow. Its layer at 0 is constantly $b$, its layer at 1 is $GUH$, and its transverse edges are $e$ or an $e_k$. All these edges are equivalences. An arbitrary diagonal edge of the triple product is a composite of these coordinate edges, witnessed by the triangular faces of its parameter cube, so is an equivalence by the same composition criterion. Hence this entire map factors through $B^\\simeq$. The pullback equations remain exact, and $H$ factors degreewise through $Q_b$. It contracts $g$ to $q=c'$. For $K=\\varnothing$, the limit in step 2 is the empty limit and step 3 still supplies the vertex $q$; steps about edges are vacuous.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Lemma 7.6.7, proof, printed p.388; agent expansion to arbitrary finite simplicial shapes and the stated path-fiber orientation."
+   }
+  },
+  {
+   "text": "For the original $f:K\\to P_b$, apply steps 2-6 to $g=Rf$. Postcomposing its homotopy with $S$ gives a homotopy from the constant map at $p=S(q)$ to $SRf$. The homotopy $SR\\simeq\\operatorname{id}_{P_b}$ of [lem-coef-kan-fiber-path-reversal], restricted along $f$, joins $SRf$ to $f$. By [lem-cbc-kan-mapping-homotopy-invariance], $\\operatorname{Fun}(K,P_b)$ is Kan (apply its assertion with the identity weak equivalence of $K$). Reverse either of these edges if necessary by an outer two-horn, then compose them by an inner two-horn. The resulting single edge is precisely a simplicial homotopy $K\\times\\Delta^1\\to P_b$ with the required endpoints. Taking the unique map from the empty simplicial set yields a vertex $p\\in P_b$ and the required empty homotopy.",
+   "uses": [
+    "lem-coef-kan-fiber-path-reversal",
+    "lem-cbc-kan-mapping-homotopy-invariance",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Lemma 7.6.7, proof, printed p.388; agent expansion to arbitrary finite simplicial shapes and the stated path-fiber orientation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-mapping-homotopy-invariance",
+  "lem-coef-infinity-comma-mapping-pullback",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-kan-fiber-path-reversal",
+  "lem-coef-relative-undercategory-limit-creation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Foundational expansion along the inherited coherent-rectification ancestry. Mathematical pattern: Cisinski Lemma 7.6.7, printed p.388, read online; arbitrary finite shapes and strict path-fiber orientation are agent expansions. Full online source archive WANTED in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -42,10 +142,32 @@
    "results": "{\"t\": \"2026-10-17T08:35:29Z\", \"tool\": \"leanfinder\", \"query\": \"For a conservative finite limit preserving functor of quasicategories with right approximation, every finite simplicial diagram in a homotopy fiber of the map on cores is homotopic to a constant diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.hoFunctor.preservesTerminal\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"SSet.hoFunctor.preservesTerminal'\", \"SSet.Truncated.HomotopyCategory.descOfTruncation\", \"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk_eq_strictMap\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"SSet.Truncated.HomotopyCategory.descOfTruncation_obj_mk\", \"SSet.Truncated.mapHomotopyCategory\"], \"digest\": \"fc809f6156ae6969\"}",
    "date": "2026-10-17",
    "verdict": "no match: ordinary finite-limit preservation and truncated homotopy-category/nerve maps do not contract finite diagrams in core homotopy fibers; approximation grep hits are bibliography only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Conservative finite limit preserving functor with right approximation contracts every finite simplicial diagram in its core homotopy fiber",
+   "results": "{\"t\": \"2026-10-17T10:50:48Z\", \"tool\": \"leansearch\", \"query\": \"Conservative finite limit preserving functor with right approximation contracts every finite simplicial diagram in its core homotopy fiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.exactFunctor\", \"CategoryTheory.Limits.PreservesFiniteLimits.mk\", \"CategoryTheory.leftExactFunctor\", \"CategoryTheory.Limits.PreservesLimits.preservesFiniteLimits\", \"CategoryTheory.instPreservesFiniteLimitsObjFunctorLeftExactFunctor\", \"CategoryTheory.Limits.isLimitOfPreserves\", \"CategoryTheory.Limits.PreservesLimit.mk\", \"CategoryTheory.Functor.preservesFiniteLimits_of_preservesHomology\"], \"digest\": \"1000c498bc6f4cc4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic searches return ordinary finite-limit and groupoid declarations; the AlgebraicTopology grep hits only simplicial-approximation bibliographies, not coherent core fibers."
+  },
+  {
+   "tool": "grep",
+   "query": "approximation|core.*contract|homotopy.?fiber",
+   "results": "{\"t\": \"2026-10-17T10:51:40Z\", \"tool\": \"grep\", \"query\": \"approximation|core.*contract|homotopy.?fiber\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Nonsingular.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Nonsingular.lean\"], \"digest\": \"b7b198121bd5c446\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic searches return ordinary finite-limit and groupoid declarations; the AlgebraicTopology grep hits only simplicial-approximation bibliographies, not coherent core fibers.",
+   "sub": "AlgebraicTopology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A conservative left exact functor with right approximation has contractible fibers on maximal infinity groupoids",
+   "results": "{\"t\": \"2026-10-17T10:51:50Z\", \"tool\": \"leanfinder\", \"query\": \"A conservative left exact functor with right approximation has contractible fibers on maximal infinity groupoids\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Subgroupoid.ker\", \"CategoryTheory.InducedCategory.groupoid\", \"CategoryTheory.InducedCategory.isGroupoid\", \"CategoryTheory.PreGaloisCategory.PreservesIsConnected\", \"CategoryTheory.Subgroupoid.mem_ker_iff\", \"CategoryTheory.Groupoid.ofFullyFaithfulToGroupoid\", \"CategoryTheory.FreeGroupoid.strictUniversalPropertyFixedTarget\", \"CategoryTheory.Localization.isGroupoid\"], \"digest\": \"30c3eb628fa00810\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the semantic searches return ordinary finite-limit and groupoid declarations; the AlgebraicTopology grep hits only simplicial-approximation bibliographies, not coherent core fibers."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-finite-colimit-approximation",
@@ -76,5 +198,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-finite-core-fiber-contraction",
+  "worker": "stage1",
+  "summary": "Checked the limit/right-approximation proof against Cisinski 7.6.7 and expanded it for every finite simplicial shape. Kept the item statement unchanged. Added two general statement-only foundations: relative undercategory limit creation with its mapping fibers, and endpoint-reversal equivalence of Kan path fibers. Coherent comma arrows turn the hB equality into actual homotopies; conservativity is applied componentwise, and the last step concatenates into one simplicial homotopy. Empty K supplies nonemptiness. No Lean attachment or Mathlib leaf found. Maintainer review FIX: the quasicategory and mapping-space-fiber clauses of the relative undercategory are the Delta^0-source case of the existing lem-coef-infinity-comma-mapping-pullback, which steps 2-4 now cite; the new node keeps only preserved-limit creation.",
+  "blueprint": "Proof paragraph 2, derived coefficient adjunction and inverse-limit calculation: coherent diagram rectification foundation, via the finite-colimit approximation lemma; Cisinski Lemma 7.6.7, proof, forming the limit and the coherent triangle from the approximation.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "General coherent functor-category and Kan-core calculus, used as a foundational tool for the inherited rectification route; it does not replace a step of the biduality unit."
+   },
+   {
+    "node": "lem-cbc-kan-mapping-homotopy-invariance",
+    "why": "General Kan exponentiation used only to concatenate two actual simplicial homotopies while fixing their endpoints."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-cbc-kan-mapping-homotopy-invariance"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-ecde042f5",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-ecde042f5 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, the parent's step 1 and the duplicate candidates in full. The Cisinski and Kerodon sources are not archived (WANTED is filed), so I checked each statement directly on its mathematics; full checks are in review.md. The item's 7-step proof is correct: limit creation for the finite K; right approximation gives w:c'->c; a horn filler gives H; the triangles of the square give [G(t_k)][e]=[e_k], so conservativity makes each t_k an equivalence; 2-out-of-3 places H in Q_b; reversal and Kan concatenation bring it back to P_b. K empty gives nonemptiness. Every hypothesis is used where stated, and there is no cycle (DFS over 140 nodes). The path-reversal node is true and is not a duplicate. Fault (C5): clauses 1 and 3 of lem-coef-relative-undercategory-limit-creation (C_b is a quasicategory; the mapping-space hofib formula) are the C=Delta^0 case of the existing lem-coef-infinity-comma-mapping-pullback (same unit, in the base), which the report missed. Fix: the new node now keeps only preserved-limit creation, identifies C_b with the comma E (that node is added to stmt_deps), and drops the unused conservativity clause. Item steps 2-4 now cite the comma node for the quasicategory and mapping-fiber facts, and proof_deps are recomputed; the item statement is unchanged. I accepted the two declared sk-prop-sf-cbc tool uses (generic quasicategory and Kan foundations).; 2 file(s) fixed by the reviewer"
  }
 }

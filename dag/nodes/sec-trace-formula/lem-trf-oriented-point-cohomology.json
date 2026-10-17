@@ -19,33 +19,240 @@
   "def-pur-kinjective-complex",
   "def-weil-pbc-derived-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "The universal property [lem-trf-oriented-product-universal] constructs $z$ from $(x,y,c)$, and constructs $\\psi$ from the projections of $Z$ with their equality over $S$. Its inverse-image formula gives $\\psi^{-1}(h_T^\\#)=h_{U\\times_VW}$ for a triple $T=(U\\to V\\leftarrow W)$. Apply [lem-trf-oriented-affine-neighbourhood-limit] to choose a small skeleton $I$ of the initial cofiltered category of affine pointed triples. Write $D_i=U_i\\times_{V_i}W_i$, $t_i:D_i\\to Z$ and $q_i:M\\to D_i$. That node gives precisely $M=\\lim_I D_i$, the maps $t_iq_i=r$, affineness of all $D_i$, affine transition maps, and etaleness of $t_i$. We will use the inverse category $I^{\\mathrm{op}}$ for all section colimits.",
+   "uses": [
+    "lem-trf-oriented-product-universal",
+    "lem-trf-oriented-affine-neighbourhood-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.imo.universite-paris-saclay.fr/~luc.illusie/Illusie-nearby-cycles28.pdf",
+    "place": "Illusie, Around the Thom--Sebastiani theorem, §1.3, paragraph immediately preceding (1.3.1), printed p. 7; §1.2, inverse image of a triple after (1.2.1), printed p. 5. Read the author PDF in the browser; the copy named by earlier source metadata is absent locally. Oriented site/point conventions corroborated by literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf, Exposé XI, 1.1, 1.6, 1.8."
+   }
+  },
+  {
+   "text": "The category of constant $\\Lambda$-module sheaves on $Z_{\\mathrm{Et}}$ has enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]. Choose a bounded-below complex $J$ of injectives with $QJ\\cong K$, using [lem-weil-pbc-dplus-injective-representative]. It computes $R\\psi_*K$ as $\\psi_*J$ by [lem-weil-pbc-right-derived-plus-injective]. Apply the general point formula [lem-trf-site-point-fibre], with $p=z$ and its initial affine neighbourhood category. In each degree adjunction and the inverse-image formula of Step 1 identify $(\\psi_*J^m)(T_i)$ with $J^m(D_i)$. Therefore the complex\n$$L=\\varinjlim_{I^{\\mathrm{op}}}J(D_i)$$\nrepresents $z^*R\\psi_*K$. The differentials are restrictions of those of $J$, so these identifications are identifications of complexes, not only of their groups.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-trf-site-point-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GIT, lemma-colimit-complexes; application to the oriented point described in Illusie §1.3, (1.3.1)"
+   }
+  },
+  {
+   "text": "Exactness of the colimit functor from [lem-trf-site-point-fibre] identifies the kernels of $d^n$ and the cokernels defining their quotients by images with the colimits of the corresponding kernels and cokernels. Consequently\n$$H^n(L)=\\varinjlim_{I^{\\mathrm{op}}}H^n(J(D_i))$$\nfor every integer $n$. This is the usual kernel/image computation of cohomology for an exact additive functor.",
+   "uses": [
+    "lem-trf-site-point-fibre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GIT, lemma-colimit-complexes; application to the oriented point described in Illusie §1.3, (1.3.1)"
+   }
+  },
+  {
+   "text": "For each etale object $D_i\\to Z$, [lem-pe-left-module-derived-evaluation-forget] identifies the underlying abelian group of $H^n(J(D_i))$ with $H^n(R\\Gamma_{D_i}(VK))$, where $V$ forgets scalars. To identify object-cohomology with cohomology on $D_i$, take a bounded-below abelian injective representative $B$ of $VK$. By [lem-weil-pbc-cohomology-over-object-localization], restriction of each $B^m$ to $Z_{\\mathrm{Et}}/D_i$ is injective; hence the restricted bounded-below complex computes its derived sections. The site equivalence [lem-weil-pbc-etale-site-localization-open] identifies that slice with $(D_i)_{\\mathrm{Et}}$, and under it the slice restriction of each $B^m$ is $t_i^{-1}B^m$ by the natural isomorphism $\\rho$ of [lem-weil-pbc-etale-inverse-image-restriction], which is exact, so $t_i^{-1}B$ represents $t_i^*VK$. Termwise sections in both descriptions are $B(D_i)$. Finally [lem-pe-constant-left-module-inverse-image] identifies $t_i^*VK$ with $V(t_i^*K)$, and [lem-pe-left-module-derived-evaluation-forget] on $D_i$ gives\n$$H^n(J(D_i))\\cong H^n(D_{i,\\mathrm{Et}},t_i^*K).$$\nThese are the canonical restriction comparisons: localized restriction sends a section to that same section, and the two scalar-forgetting comparisons commute with object restrictions and with global cohomology pullback. Thus they commute both with transition maps and with pullback along $q_i$. No claim that forgetting scalars preserves injectivity is used.",
+   "uses": [
+    "lem-pe-left-module-derived-evaluation-forget",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-cohomology-over-object-localization",
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GIT, lemma-colimit-complexes; application to the oriented point described in Illusie §1.3, (1.3.1)"
+   }
+  },
+  {
+   "text": "Construct the comparison itself before testing its cohomology. Exact inverse image $r^*$ of [lem-pe-constant-left-module-inverse-image] sends $J$ to a representative of $r^*K$. Choose a K-injective resolution $r^*J\\to A$ using [prop-pur-kinjective-resolutions-exist]. Identifying $J(D_i)$ with $\\Gamma(D_i,t_i^*J)$ by [lem-weil-pbc-etale-inverse-image-restriction] (clause 2: the unit is restriction), restriction along $q_i$ gives compatible chain maps $J(D_i)\\to\\Gamma(M,r^*J)\\to\\Gamma(M,A)$. Their colimit gives\n$$\\alpha:L\\longrightarrow\\Gamma(M,A),$$\nwhose target represents $R\\Gamma(M,r^*K)$. Under Step 4, the map induced by $\\alpha$ on $H^n$ is the colimit of the canonical derived pullback maps $H^n(D_i,t_i^*K)\\to H^n(M,r^*K)$: these are defined by the inverse-image unit followed by the derived sections comparison, precisely the restriction and resolution maps just used. The pullback compatibility in [lem-pe-left-module-derived-evaluation-forget] verifies this assertion after forgetting scalars, which is faithful on module homomorphisms.",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pe-left-module-derived-evaluation-forget",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GIT, lemma-colimit-complexes; application to the oriented point described in Illusie §1.3, (1.3.1)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-derived-etale-cohomology-limit] with base $Z$, system $(D_i)_{i\\in I}$ and the bounded-below abelian complex $VK$. Its small cofiltered index, qcqs stages, affine transitions and limit $M$ are exactly those supplied in Step 1; no qcqs assumption on $Z$ is needed. It makes\n$$\\varinjlim_{I^{\\mathrm{op}}}H^n(D_i,t_i^*VK)\\longrightarrow H^n(M,r^*VK)$$\nan isomorphism for every integer $n$. The inverse-image comparison [lem-pe-constant-left-module-inverse-image] and the bounded-below sections comparison [lem-pe-left-module-derived-evaluation-forget] identify this map with the underlying abelian map of $H^n(\\alpha)$ in Step 5. Forgetting scalars preserves these filtered colimits: an element is a class of an element at one stage, and the scalar action is applied at that same stage. A bijective $\\Lambda$-linear map has $\\Lambda$-linear inverse. Hence $H^n(\\alpha)$ is an isomorphism of $\\Lambda$-modules for every $n$.",
+   "uses": [
+    "lem-weil-pbc-derived-etale-cohomology-limit",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-pe-left-module-derived-evaluation-forget"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GIT, lemma-colimit-complexes; application to the oriented point described in Illusie §1.3, (1.3.1)"
+   }
+  },
+  {
+   "text": "The map $\\alpha$ is thus a quasi-isomorphism, so becomes an isomorphism in the localization defining $D^+(\\operatorname{Mod}\\Lambda)$ [def-weil-abstract-derived-category]. Under Step 2 it has the required source and under Step 5 the required target. It is the comparison induced by restrictions to the limit, since each coprojection $J(D_i)\\to L$ followed by $\\alpha$ is exactly that restriction followed by the resolution map. The functorial K-injective resolutions of [prop-pur-kinjective-resolutions-exist] make this construction natural on complexes. For a different injective representative of $K$, comparison through a common resolution gives the same derived morphism: the natural transformation from termwise sections to derived sections, and its uniqueness, are those of [lem-weil-pbc-right-derived-plus-injective]. Both source and target invert quasi-isomorphisms, so the natural comparison descends to $K$ in the derived category and is independent of choices.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GIT, lemma-colimit-complexes; application to the oriented point described in Illusie §1.3, (1.3.1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-pe-left-module-derived-evaluation-forget",
+  "lem-trf-oriented-affine-neighbourhood-limit",
+  "lem-trf-oriented-product-universal",
+  "lem-trf-site-point-fibre",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-weil-pbc-derived-etale-cohomology-limit",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Derived direct image evaluated at a geometric point of an oriented product is the cohomology of its Milnor tube",
-   "results": "8 hits: continuousCohomology, ContinuousCohomology.MultiInd.complex, ContinuousCohomology.MultiInd.d, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, PresheafOfModules.Derivation.d_map, TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst, PresheafOfModules.Derivation.d_app",
+   "query": "The stalk of a derived direct image in an oriented product of etale topoi is the derived sections of a Milnor tube",
+   "results": "smoothSheafCommRing.ι_forgetStalk_hom, smoothSheafCommRing.ι_forgetStalk_hom_apply, smoothSheafCommRing.forgetStalk, TopCat.Presheaf.stalkPullbackInv, TopCat.Presheaf.stalkPushforward, smoothSheafCommRing.ι_forgetStalk_inv_apply, TopCat.Presheaf.germToPullbackStalk, smoothSheafCommRing.ι_forgetStalk_inv",
    "date": "2026-10-17",
-   "verdict": "no match: returned ordinary topological stalks, continuous group cohomology or unrelated presheaves; no oriented-product Milnor-tube comparison"
+   "verdict": "no match: returned generic site, stalk, inverse-system or unrelated declarations; none states the oriented-product Milnor-tube comparison"
   },
   {
-   "tool": "leansearch",
-   "query": "Stalks of the derived direct image for an oriented product of etale topoi are computed by etale cohomology of strict-local fibre products",
-   "results": "8 hits: TopCat.Presheaf.stalk, TopCat.Presheaf.stalkPullbackIso, TopCat.Presheaf.stalkPullbackHom, AlgebraicGeometry.PresheafedSpace.stalkMap.stalkIso, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.LocallyRingedSpace.stalkMap_comp, AlgebraicGeometry.PresheafedSpace.restrictStalkIso, TopCat.stalkToFiber_germ",
+   "tool": "loogle",
+   "query": "\"stalk\", \"sheaf\"",
+   "results": "TopCat.Presheaf.stalk, TopCat.Presheaf.stalkFunctor, TopCat.Presheaf.stalkCongr, TopCat.Presheaf.stalkFunctor_obj, TopCat.Presheaf.stalkSpecializes, TopCat.Presheaf.stalkSpecializes_refl, TopCat.Presheaf.stalkCongr_hom, TopCat.Presheaf.stalkCongr_inv",
    "date": "2026-10-17",
-   "verdict": "no match: returned ordinary topological stalks, continuous group cohomology or unrelated presheaves; no oriented-product Milnor-tube comparison"
+   "verdict": "no match: returned generic site, stalk, inverse-system or unrelated declarations; none states the oriented-product Milnor-tube comparison"
   },
   {
    "tool": "grep",
    "query": "MilnorTube|Milnor.?tube|orientedProduct|oriented.?product|vanishingTopos|nearbyCycles",
-   "results": "0 hits: ",
+   "results": "none",
    "date": "2026-10-17",
-   "verdict": "no match: returned ordinary topological stalks, continuous group cohomology or unrelated presheaves; no oriented-product Milnor-tube comparison"
+   "verdict": "no match: returned generic site, stalk, inverse-system or unrelated declarations; none states the oriented-product Milnor-tube comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Oriented product etale topos derived stalk nearby cycles Milnor tube",
+   "results": "TopCat.Presheaf.stalk, Algebra.FormallyEtale.instTensorProduct, AlgebraicGeometry.Scheme.smallEtaleTopology, TopCat.Presheaf.stalkFunctor, TopCat.Presheaf.sheafifyStalkIso, TopCat.stalkToFiber_germ, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, TopCat.Presheaf.germ",
+   "date": "2026-10-17",
+   "verdict": "no match: returned generic site, stalk, inverse-system or unrelated declarations; none states the oriented-product Milnor-tube comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A point of a site evaluates a sheaf as the filtered colimit over pointed objects, independently of sheafification; its additive stalk functor is exact",
+   "results": "CategoryTheory.GrothendieckTopology.Point.sheafFiber, TopCat.Presheaf.stalkFunctor, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall, CategoryTheory.Sheaf.hasExactColimitsOfShape, TopCat.Presheaf.stalkFunctor_obj, Condensed.hasExactColimitsOfShape, TopCat.Presheaf.stalk, TopCat.stalkToFiber",
+   "date": "2026-10-17",
+   "verdict": "generic site-point candidate only: these hits address fibre colimits/exactness, not the Milnor-tube derived comparison; the candidate is recorded separately in lem-trf-site-point-fibre"
+  },
+  {
+   "tool": "grep",
+   "query": "presheafFiber|isColimitPresheafFiber|sheafFiber.*exact|sheafFiber.*[Ee]xact [CategoryTheory/Sites/Point]",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Presheaf.lean, Mathlib/CategoryTheory/Sites/Point/Presheaf.lean, Mathlib/CategoryTheory/Sites/Point/Presheaf.lean",
+   "date": "2026-10-17",
+   "verdict": "generic site-point candidate only: these hits address fibre colimits/exactness, not the Milnor-tube derived comparison; the candidate is recorded separately in lem-trf-site-point-fibre"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Point\", \"presheafFiber\"",
+   "results": "CategoryTheory.GrothendieckTopology.Point.presheafFiber, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeFunctorOppositePresheafFiber, CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsFunctorOppositePresheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize, CategoryTheory.GrothendieckTopology.Point.shrinkYonedaCompPresheafFiberIso, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber, CategoryTheory.GrothendieckTopology.Point.W_isInvertedBy_presheafFiber', CategoryTheory.GrothendieckTopology.Point.presheafFiberCocone, CategoryTheory.GrothendieckTopology.Point.isColimitPresheafFiberCocone",
+   "date": "2026-10-17",
+   "verdict": "generic site-point candidate only: these hits address fibre colimits/exactness, not the Milnor-tube derived comparison; the candidate is recorded separately in lem-trf-site-point-fibre"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a point of a Grothendieck site, the fiber of a sheaf is a filtered colimit over elements of the fiber functor, and sheafification induces an isomorphism on fibers",
+   "results": "CategoryTheory.GrothendieckTopology.Point.instIsIsoMapFunctorOppositePresheafFiberToSheafify, CategoryTheory.GrothendieckTopology.Point.presheafToSheafCompSheafFiber, TopCat.Presheaf.sheafifyStalkIso, CategoryTheory.GrothendieckTopology.Point.presheafFiber, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall, CategoryTheory.GrothendieckTopology.Point.fiber, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber, CategoryTheory.GrothendieckTopology.sheafification",
+   "date": "2026-10-17",
+   "verdict": "generic site-point candidate only: these hits address fibre colimits/exactness, not the Milnor-tube derived comparison; the candidate is recorded separately in lem-trf-site-point-fibre"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine pointed triple neighborhoods in the left oriented product of etale topoi form a cofinal cofiltered category, and the inverse limit of U fiber product over V W is the fiber product of strict localizations along a specialization",
+   "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc', AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', AlgebraicGeometry.ExistsHomHomCompEqCompAux.c', AlgebraicGeometry.exists_map_eq_top, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'",
+   "date": "2026-10-17",
+   "verdict": "no match: returned generic site, stalk, inverse-system or unrelated declarations; none states the oriented-product Milnor-tube comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "presheafToSheafCompSheafFiber|noncomputable def presheafFiber|noncomputable def sheafFiber|PreservesFiniteLimits.*sheafFiber|preservesColimitsOfShape [CategoryTheory/Sites/Point/Basic.lean]",
+   "results": "96, 139, 183, 205, 206",
+   "date": "2026-10-17",
+   "verdict": "generic site-point candidate only: these hits address fibre colimits/exactness, not the Milnor-tube derived comparison; the candidate is recorded separately in lem-trf-site-point-fibre"
+  },
+  {
+   "tool": "grep",
+   "query": "orientedProduct|oriented.?product|Milnor.?tube|pointed.*triple",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: returned generic site, stalk, inverse-system or unrelated declarations; none states the oriented-product Milnor-tube comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"oriented\", \"Etale\"",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: returned generic site, stalk, inverse-system or unrelated declarations; none states the oriented-product Milnor-tube comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "presheafToSheafCompSheafFiberIso|sheafFiber.*A :=|PreservesFiniteLimits.*sheafFiber|noncomputable def sheafFiber [CategoryTheory/Sites/Point]",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Conservative.lean, Mathlib/CategoryTheory/Sites/Point/Conservative.lean, Mathlib/CategoryTheory/Sites/Point/Conservative.lean",
+   "date": "2026-10-17",
+   "verdict": "generic site-point candidate only: these hits address fibre colimits/exactness, not the Milnor-tube derived comparison; the candidate is recorded separately in lem-trf-site-point-fibre"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse limit of affine etale neighborhoods U over V under W compatible with a specialization is the Milnor tube X strict localization times over S strict localization Y strict localization",
+   "results": "InverseSystem.isNatEquiv_piEquivLim, TopCat.Presheaf.stalkSpecializes, InverseSystem.invLimEquiv_symm_apply_coe, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_preimage_eq, InverseSystem.invLimEquiv.congr_simp, AlgebraicGeometry.isLimitOpensCone, InverseSystem.invLimEquiv",
+   "date": "2026-10-17",
+   "verdict": "no match: returned generic site, stalk, inverse-system or unrelated declarations; none states the oriented-product Milnor-tube comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse limit of etale neighborhoods of an oriented geometric point is the fibre product of strict henselizations",
+   "results": "AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.Scheme.Etale, StandardEtalePair.homEquiv_symm_apply, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.Scheme.instCategoryEtale, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, AlgebraicGeometry.Scheme.Hom.asFiber",
+   "date": "2026-10-17",
+   "verdict": "no match: returned generic site, stalk, inverse-system or unrelated declarations; none states the oriented-product Milnor-tube comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "structure Point|def presheafFiber|def sheafFiber|PreservesFiniteLimits|isCofiltered [CategoryTheory/Sites/Point/Basic.lean]",
+   "results": "69, 72, 79, 96, 139",
+   "date": "2026-10-17",
+   "verdict": "generic site-point candidate only: these hits address fibre colimits/exactness, not the Milnor-tube derived comparison; the candidate is recorded separately in lem-trf-site-point-fibre"
+  },
+  {
+   "tool": "grep",
+   "query": "presheafToSheafCompSheafFiberIso|PreservesFiniteColimits|sheafFiber.*IsLeftAdjoint [CategoryTheory/Sites/Point/Skyscraper.lean]",
+   "results": "234, 281, 288, 293, 295",
+   "date": "2026-10-17",
+   "verdict": "generic site-point candidate only: these hits address fibre colimits/exactness, not the Milnor-tube derived comparison; the candidate is recorded separately in lem-trf-site-point-fibre"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nearby-geometric-slice",
@@ -66,5 +273,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GIT, combined with sites.tex Tag 00YA and the affine-neighbourhood description in Illusie §1.3 (author PDF read online). Source copy of Illusie not present locally, requested in report."
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-oriented-point-cohomology",
+  "worker": "stage1",
+  "summary": "Repaired the retained draft: replaced scheme-stalk citations at a non-scheme topos point with a general site/topos-point lemma, isolated the non-elementary affine pointed triple limit as a geometric lemma, and applied bounded-below continuity directly with canonical restriction maps. Reused the existing bounded-below scalar-forgetting and localization interfaces; no statement change and no Lean attachment.",
+  "blueprint": "The inherited ancestry through nearby-geometric-slice, specialization-external-product and trace-specialization realizes the normal-cone specialization paragraph of lem-trf-local-term-locality (current blueprint_update proof paragraph (1) and (2)). This split supplies the oriented geometric-slice evaluation, following the affine triple neighbourhood route in Illusie §1.3, (1.3.1).",
+  "tool_uses": [
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic exact constant-coefficient inverse image, including underlying abelian and adjunction-unit comparisons."
+   },
+   {
+    "node": "lem-pe-left-module-derived-evaluation-forget",
+    "why": "Generic bounded-below evaluation/scalar-forgetting with pullback compatibility; prevents changing coefficient categories silently."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-over-object-localization",
+    "why": "Generic injective preservation under site localization, used to evaluate complexes on an etale object."
+   },
+   {
+    "node": "lem-weil-pbc-derived-etale-cohomology-limit",
+    "why": "Bounded-below continuity over the affine Milnor-tube presentation; the trace unit does not reprove general etale inverse-limit continuity."
+   },
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Equivalence of the localized small etale site with the small etale site of an arbitrary etale object, not just an open immersion."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic existence of enough injectives in constant-module etale sheaves."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic functorial K-injective resolution existence on small ringed sites."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic identification of etale inverse image with restriction to the localized site, including the unit as restriction; identifies slice restriction on D_i with t_i^{-1}."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-pe-left-module-derived-evaluation-forget",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-weil-pbc-derived-etale-cohomology-limit",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-etale-inverse-image-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-c0842a826",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-c0842a826 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, ILO XI 1.6/1.8/2.3/4.3 (pdftotext), Stacks 00YA and 0GIT, and the Mathlib Point/Basic.lean source. The item statement is unchanged from base, so no target is weakened. The specialization convention (c: S_(g(y))->S_(f(x)) as the 2-arrow gy=>fx) and psi^{-1}(T)=U x_V W agree with ILO. Coefficients stay as constant Lambda-modules: every passage to abelian groups goes through the bounded-below evaluation/forget and constant inverse-image nodes. Both new nodes are true, are not duplicates and do not restate a clause of the item. The affine-neighbourhood lemma checks out: initiality via affine V' containing c^*v; etaleness via the open diagonal of V/S; the limit through c; tested on the point case, on a trait with Z empty, and on f=id with nontrivial c giving an empty M and a zero stalk. The site-point lemma follows from Stacks 00YA(2) plus filtered colimits of modules; its Mathlib candidate is correctly not a leaf. Steps 1-7 check, including the continuity hypotheses (Z arbitrary, affine stages, cofiltered index). One fix: steps 4 and 5 used, without citing it, that slice restriction to D_i is t_i^{-1} and that the unit is restriction. I added lem-weil-pbc-etale-inverse-image-restriction to both steps' uses, to proof_deps and to split_report.tool_uses. I accept the 7 declared generic tool uses plus this one. No SGA source is used.; 1 file(s) fixed by the reviewer"
  }
 }

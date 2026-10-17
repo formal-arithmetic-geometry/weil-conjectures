@@ -21,9 +21,103 @@
   "lem-pur-system-level-projection-formula-coherence",
   "def-pur-co-smoothness"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $H=F_gF_f$ and let $s$ denote tensor symmetry. It is convenient to put\n$$Q_{h,L,M}=s_{F_hM,L}\\,\\mathrm{PF}_{h,M,L}^{-1}\\,F_h(s_{h^*L,M}).$$\nThus $Q_{h,L,M}:F_h(h^*L\\otimes M)\\to L\\otimes F_hM$. By naturality of the specified projection maps [lem-pur-system-level-projection-formula-coherence], $Q$ is natural in both inputs. Put $e_h=\\epsilon_{h,\\mathbf1}$. Naturality of symmetry and the unit constraints rewrites the definition in the statement as\n$$\\sigma_{h,L}=(1_L\\otimes e_h)Q_{h,L,\\Omega_h}.$$\nIn particular $\\sigma_{h,-}$ is natural: for $a:L\\to L'$, substitute $(a\\otimes1)Q_{h,L,\\Omega_h}=Q_{h,L',\\Omega_h}F_h(h^*a\\otimes1)$ and then compose with $1\\otimes e_h$. All notation refers to the actual simultaneous section maps, whose tensor and transpose constructions are supplied by [lem-coef-semilinear-derived-sections].",
+   "uses": [
+    "lem-pur-system-level-projection-formula-coherence",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-adic-reconstruction-trace-coherence.proof.md",
+    "place": "sole proof paragraph: compatible systems of finite-level composition coherence; agent-written counit and projection calculation before inverse limit"
+   }
+  },
+  {
+   "text": "The section adjunction transpose is $u\\mapsto\\epsilon_{h,L}F_h(u)$ by [lem-coef-cartesian-section-adjoint-mates]. The composite counit from [lem-weil-pbc-mate-pasting] is\n$$e^{H}_L=\\epsilon_{g,L}F_g(\\epsilon_{f,G_gL}):HG_fG_gL\\to L.$$\nSince $c$ is the conjugate of $\\alpha$, changing adjunctions gives\n$$e^{H}_L H(c_L)=\\epsilon_{gf,L}\\alpha_{G_{gf}L}.$$\nAlso $\\sigma_{f,\\Omega_g}=\\epsilon_{f,\\Omega_g}F_f(\\rho)$ by the defining transpose of $\\rho$. Hence the $t$ in the statement is $e^{H}_{\\mathbf1}H(\\rho)$. Using $c_{\\mathbf1}\\mu^{-1}=\\rho$ and naturality of $\\alpha$ now gives\n$$\\epsilon_{gf,\\mathbf1}F_{gf}(\\mu^{-1})\\alpha_W=e^{H}_{\\mathbf1}H(c_{\\mathbf1}\\mu^{-1})=t.$$\nThese are equations of section maps, not equations checked only on evaluations.",
+   "uses": [
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-adic-reconstruction-trace-coherence.proof.md",
+    "place": "sole proof paragraph: compatible systems of finite-level composition coherence; agent-written counit and projection calculation before inverse limit"
+   }
+  },
+  {
+   "text": "Put $D=(gf)^*K\\otimes W$. Taking the transpose of $A_K$ using Step 2, then naturality of $\\alpha$, yields\n$$\\begin{aligned}\nA_K^\\flat\n&=e^{H}_K H(c_K)H(\\theta_{gf,K})H(1\\otimes\\mu^{-1})\\\\\n&=\\sigma_{gf,K}F_{gf}(1\\otimes\\mu^{-1})\\alpha_D\\\\\n&=(1_K\\otimes[\\epsilon_{gf,\\mathbf1}F_{gf}(\\mu^{-1})])Q_{gf,K,W}\\alpha_D.\n\\end{aligned}$$\nThe last equality uses the formula of Step 1 and naturality of $Q$ in its third argument [lem-pur-system-level-projection-formula-coherence]; $\\mu^{-1}:W\\to\\Omega_{gf}$ has exactly that type. Here $Q_{gf,K,W}$ is defined: naturality of the projection maps in their first input [lem-pur-system-level-projection-formula-coherence] along the isomorphism $\\mu^{-1}:W\\to\\Omega_{gf}$ gives $\\mathrm{PF}_{gf,W,K}=F_{gf}(\\mu\\otimes1)\\,\\mathrm{PF}_{gf,\\Omega_{gf},K}\\,(F_{gf}(\\mu^{-1})\\otimes1)$, and $\\mathrm{PF}_{gf,\\Omega_{gf},K}$ is invertible since it occurs in $\\theta_{gf,K}$. The transpose formula is the one in [lem-coef-cartesian-section-adjoint-mates].",
+   "uses": [
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-pur-system-level-projection-formula-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-adic-reconstruction-trace-coherence.proof.md",
+    "place": "sole proof paragraph: compatible systems of finite-level composition coherence; agent-written counit and projection calculation before inverse limit"
+   }
+  },
+  {
+   "text": "Define\n$$Q_{H,K,W}=Q_{g,K,F_fW}\\,F_g(Q_{f,g^*K,W}):HD\\to K\\otimes HW.$$\nInvert the projection-composition equation of [lem-pur-system-level-projection-formula-coherence] at $(M,N)=(W,K)$ and insert the symmetries in the definition of $Q$. It gives\n$$Q_{gf,K,W}\\alpha_D=(1_K\\otimes\\alpha_W)Q_{H,K,W}.$$\nFor clarity, expansion of $Q_H$ cancels the adjacent factors $F_g(s_{g^*K,F_fW})F_g(s_{F_fW,g^*K})$ and gives\n$$Q_{H,K,W}=s_{HW,K}\\mathrm{PF}_{\\mathrm{comp}}^{-1}H(s_{(gf)^*K,W}).$$\nNaturality of $\\alpha$ moves the input symmetry through it; naturality of the output symmetry moves it through $\\alpha_W$. No symmetry compatibility of $F_h$ as a monoidal functor is being presumed. Combining this equation with Steps 2 and 3 shows\n$$A_K^\\flat=(1_K\\otimes t)Q_{H,K,W}.$$\nExpanding $Q_H$ and canceling the intermediate symmetry twice identifies it with tensor symmetry followed by $\\mathrm{PF}_{\\mathrm{comp}}^{-1}$ and the final symmetry $HW\\otimes K\\to K\\otimes HW$. Thus this is precisely the common transpose displayed in the statement.",
+   "uses": [
+    "lem-pur-system-level-projection-formula-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-adic-reconstruction-trace-coherence.proof.md",
+    "place": "sole proof paragraph: compatible systems of finite-level composition coherence; agent-written counit and projection calculation before inverse limit"
+   }
+  },
+  {
+   "text": "Set $T=g^*K\\otimes\\Omega_g$ and $a=\\theta_{g,K}:T\\to G_gK$. The reassociation in $B_K$ identifies $D$ with $f^*T\\otimes\\Omega_f$. Under the composite adjunction its transpose is\n$$\\begin{aligned}\nB_K^\\flat\n&=\\epsilon_{g,K}F_g\\bigl(\\sigma_{f,G_gK}F_f(f^*a\\otimes1)\\bigr)\\\\\n&=\\epsilon_{g,K}F_g(a)\\,F_g(\\sigma_{f,T})\n=\\sigma_{g,K}F_g(\\sigma_{f,T}).\n\\end{aligned}$$\nThe middle equality is the naturality proved in Step 1, applied to this actual section morphism $a$, and the last is the counit formula for the transpose of $\\theta_{g,K}$. Here $\\sigma_{f,T}$ is defined because $\\mathrm{PF}_{f,\\Omega_f,T}$ is invertible: apply [lem-pur-system-projection-tensor-associativity] with $h=f$, $L=g^*K$, $L'=\\Omega_g$, $M=\\Omega_f$; its two invertibility hypotheses are $\\mathrm{PF}_{f,\\Omega_f,\\Omega_g}$, which occurs in $\\rho=\\theta_{f,\\Omega_g}$, and $\\mathrm{PF}_{f,W,g^*K}$, a factor of the displayed $\\mathrm{PF}_{\\mathrm{comp}}$, and it concludes that $\\mathrm{PF}_{f,\\Omega_f,g^*K\\otimes\\Omega_g}$ is invertible. Naturality of $\\sigma_{f,-}$ at $a$ uses this and the invertibility of $\\mathrm{PF}_{f,\\Omega_f,G_gK}$, which occurs in $\\theta_{f,G_gK}$. [lem-coef-cartesian-section-adjoint-mates] supplies that formula and the section counits, and [lem-weil-pbc-mate-pasting] supplies the composite counit.",
+   "uses": [
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-weil-pbc-mate-pasting",
+    "lem-pur-system-projection-tensor-associativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-adic-reconstruction-trace-coherence.proof.md",
+    "place": "sole proof paragraph: compatible systems of finite-level composition coherence; agent-written counit and projection calculation before inverse limit"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-system-projection-tensor-associativity] for $h=f$, $L=g^*K$, $L'=\\Omega_g$ and $M=\\Omega_f$. Its two invertibility hypotheses, $\\mathrm{PF}_{f,\\Omega_f,\\Omega_g}$ (in $\\rho$) and $\\mathrm{PF}_{f,W,g^*K}$ (a factor of $\\mathrm{PF}_{\\mathrm{comp}}$), are among the displayed inputs; its conclusion supplies the invertibility of $\\mathrm{PF}_{f,\\Omega_f,T}$ needed for $\\sigma_{f,T}=(1_T\\otimes e_f)Q_{f,T,\\Omega_f}$, as already used in Step 5. Its equation and Step 1 give, writing $b=\\sigma_{f,\\Omega_g}:F_fW\\to\\Omega_g$,\n$$\\begin{aligned}\n\\sigma_{f,T}\n&=(1_{g^*K}\\otimes1_{\\Omega_g}\\otimes e_f)(1_{g^*K}\\otimes Q_{f,\\Omega_g,\\Omega_f})Q_{f,g^*K,W}\\\\\n&=(1_{g^*K}\\otimes b)Q_{f,g^*K,W}.\n\\end{aligned}$$\nThe canonical pullback tensor comparison in that lemma is exactly the reassociation used in $B_K$. This is the tensor-variable identity missing from mere naturality or composition coherence of the projection maps.",
+   "uses": [
+    "lem-pur-system-projection-tensor-associativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-adic-reconstruction-trace-coherence.proof.md",
+    "place": "sole proof paragraph: compatible systems of finite-level composition coherence; agent-written counit and projection calculation before inverse limit"
+   }
+  },
+  {
+   "text": "By naturality in the third input of $Q_g$ [lem-pur-system-level-projection-formula-coherence],\n$$Q_{g,K,\\Omega_g}F_g(1_{g^*K}\\otimes b)=(1_K\\otimes F_gb)Q_{g,K,F_fW}.$$\nSubstitute Step 6 into Step 5 and use $\\sigma_{g,K}=(1_K\\otimes e_g)Q_{g,K,\\Omega_g}$. This gives\n$$B_K^\\flat=(1_K\\otimes e_gF_gb)Q_{g,K,F_fW}F_g(Q_{f,g^*K,W})=(1_K\\otimes t)Q_{H,K,W}=A_K^\\flat.$$\nThe hom-set adjunction bijection of [lem-coef-cartesian-section-adjoint-mates], applied twice, is injective. It therefore gives $A_K=B_K$ and the claimed formula for their common transpose. Every equality was obtained within the section category; inverse limits and faithfulness of derived evaluation are unnecessary.",
+   "uses": [
+    "lem-pur-system-level-projection-formula-coherence",
+    "lem-coef-cartesian-section-adjoint-mates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-adic-reconstruction-trace-coherence.proof.md",
+    "place": "sole proof paragraph: compatible systems of finite-level composition coherence; agent-written counit and projection calculation before inverse limit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-cartesian-section-adjoint-mates",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-system-level-projection-formula-coherence",
+  "lem-pur-system-projection-tensor-associativity",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-adic-reconstruction-trace-coherence.proof.md",
+  "place": "sole proof paragraph: compatible systems of finite-level composition coherence; agent-written counit and projection calculation before inverse limit"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -66,10 +160,45 @@
    "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, LightCondensed.ihomPoints_symm_comp, CategoryTheory.Equivalence.counitIso_inv_app_tensor_comp_functor_map_δ_inverse, CategoryTheory.Equivalence.counitInv_app_tensor_comp_functor_map_δ_inverse, rTensor.inverse_of_rightInverse_comp_rTensor",
    "date": "2026-10-17",
    "verdict": "no match: MonoidalClosed.compTranspose is composition of internal-Hom evaluations; frobeniusMorphism assumes Cartesian tensor; isMonoidal_comp composes monoidal adjunctions. None states the specified exceptional-system tensor transpose identity for compact supports, which need not be monoidal."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|ProjectionFormula",
+   "results": "0 hits:  [Mathlib/CategoryTheory]",
+   "date": "2026-10-17",
+   "verdict": "no match: composite counits and internal-Hom transposes do not state this exceptional compact-support system tensor-transpose identity; no monoidal structure on F_h is assumed"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of counit tensor transposes for exceptional right adjoints and projection formulas",
+   "results": "8 hits: CategoryTheory.Bicategory.Adjunction.compCounit, CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.comp_counit, CategoryTheory.Adjunction.counit, TensorProduct.counit_def, CategoryTheory.Adjunction.CoreUnitCounit.counit, CategoryTheory.Adjunction.counitAsIsoOfIso, CategoryTheory.Bicategory.Adjunction.comp_counit",
+   "date": "2026-10-17",
+   "verdict": "no match: composite counits and internal-Hom transposes do not state this exceptional compact-support system tensor-transpose identity; no monoidal structure on F_h is assumed"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointOplaxMonoidal, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.IsMonoidal, CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal, CategoryTheory.Adjunction.instIsMonoidal, CategoryTheory.Adjunction.instIsMonoidal_1, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε",
+   "date": "2026-10-17",
+   "verdict": "no match: composite counits and internal-Hom transposes do not state this exceptional compact-support system tensor-transpose identity; no monoidal structure on F_h is assumed"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For compact support and exceptional adjunctions the counit defined tensor map pullback K tensor exceptional unit to exceptional K is compatible with composition",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom, CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.unit_pushforwardId_hom",
+   "date": "2026-10-17",
+   "verdict": "no match: composite counits and internal-Hom transposes do not state this exceptional compact-support system tensor-transpose identity; no monoidal structure on F_h is assumed"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of inverse projection formula maps tensored with adjunction counits gives the same adjoint transpose",
+   "results": "8 hits: CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, TensorProduct.adjoint_map, CategoryTheory.MonoidalClosed.compTranspose, CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight, contractLeft_assoc_coevaluation', CategoryTheory.MonoidalClosed.compTranspose_eq, CategoryTheory.tensorRightHomEquiv_tensor",
+   "date": "2026-10-17",
+   "verdict": "no match: composite counits and internal-Hom transposes do not state this exceptional compact-support system tensor-transpose identity; no monoidal structure on F_h is assumed"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-pur-adic-reconstruction-trace-coherence",
@@ -86,5 +215,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-system-tensor-transpose-composition",
+  "worker": "stage1",
+  "summary": "Statement preserved. Seven-step counit and projection calculation, with a single statement-only child for tensor-variable projection associativity. The two transposes are explicitly reduced to the displayed trace t before inverse limit. All searches are logged; no Lean writes or compilation.",
+  "blueprint": "Realizes the sole composition-coherence paragraph of prop-pur-adic-reconstruction-trace-coherence along unit transport Step 2: its general-input tensor-transpose calculation, with no orientation or faithfulness of evaluation.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Supplies the simultaneous tensor/pullback section models for the coherence calculation; no geometric purity argument is replaced."
+   },
+   {
+    "node": "lem-coef-cartesian-section-adjoint-mates",
+    "why": "Supplies actual section adjunction transposes and counits, including their compatibility; generic categorical input to the purity route."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Supplies composite counits and changing-adjunction conjugacy for the specified compact-support comparison."
+   },
+   {
+    "node": "lem-pur-system-level-projection-formula-coherence",
+    "why": "Supplies naturality and geometric composition of the specified compact-support system projection map; the purity unit has no independent such theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-coef-cartesian-section-adjoint-mates",
+  "lem-weil-pbc-mate-pasting",
+  "lem-pur-system-level-projection-formula-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q138-9e9cf9aad",
+  "group": "Q138",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-9e9cf9aad (reviewer sub-agent of L); spot-checked: I read the whole item, the new child, all cited statements, Stacks 0B56 (sites-cohomology.tex l.13665, the counit-transpose projection map), the blueprint main-20261015 trace-coherence proof paragraph, the unit sk-thm-purity-transport and the parent's Step 8. The item statement is unchanged; the coefficient category is the same N_W throughout; no SGA source is used. I recomputed Steps 1-7: sigma=(1⊗e)Q; t=e^H_1 H(rho) with c_1 mu^{-1}=rho; A^flat=(1⊗t)Q_H through the composition identity, where the adjacent symmetries cancel; B^flat=sigma_g F_g(sigma_{f,T}) =(1⊗t)Q_H through the child and naturality of Q_g; transpose injectivity then gives A_K=B_K. All of this is correct. Two invertibility gaps, repaired in fixes/: (1) E1: Steps 5-6 need PF_{f,Omega_f,g^*K⊗Omega_g}, which is not among the displayed inputs, and Step 6's justification was circular. I strengthened the child to the standard un-inverted identity P_{M,L'⊗L}=P_{M⊗h^*L',L}(P_{M,L'}⊗1); it now assumes only P_{M,L'} and P_{h^*L'⊗M,L} invertible and concludes that P_{M,L⊗L'} is invertible together with the Q equation. Step 5 now cites the child (elementary=false) and Step 6's text is corrected. (2) Step 3 used Q_{gf,K,W} without showing it is defined; PF_{gf,W,K} is now shown invertible by naturality along the isomorphism mu^{-1} from PF_{gf,Omega_gf,K}, which occurs in theta_{gf,K}. The child is not a duplicate: I checked clopen-tensor-compatibility, compactification-pf-substitution, sf-kunneth-coherence, prop-sf-pf-coherence, def-sfb-projection-formula and cbc-strict-tower-proper-open-calculus. It is strictly smaller than the item and tests correctly on h=id, a unit L or L', and modules over a point. I accept the four declared tool_uses: generic section, adjunction and projection calculus.; 2 file(s) fixed by the reviewer"
  }
 }

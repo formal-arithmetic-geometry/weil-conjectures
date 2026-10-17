@@ -1,0 +1,101 @@
+{
+ "id": "lem-weil-pbc-closed-finite-etale-zariski-local",
+ "kind": "statement",
+ "title": "Closed immersion, finiteness and etaleness are local on the target",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] and let $(U_i)_{i\\in I}$ be any open covering of $Y$. For each $i$ let $f_i:f^{-1}(U_i)\\to U_i$ be its restriction, equivalently its base change to $U_i$ [def-pc-fibre-product]. Then (1) $f$ is a closed immersion [def-weil-closed-immersion] if and only if every $f_i$ is a closed immersion; (2) $f$ is finite [def-weil-finite-integral-morphism] if and only if every $f_i$ is finite; and (3) $f$ is etale [def-weil-etale-morphism] if and only if every $f_i$ is etale.",
+ "source": {
+  "document": "Mathlib/AlgebraicGeometry/Morphisms/Basic.lean",
+  "place": "IsZariskiLocalAtTarget.iff_of_openCover, lines 164-166; instances: ClosedImmersion.lean:358, Finite.lean:47, Etale.lean:56, Basic.lean:588 and RingHomProperties.lean:291"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The properties closed immersion finite and etale of a scheme morphism can be checked on any open cover of the target",
+   "results": "8 hits; AlgebraicGeometry.IsPreimmersion.instIsZariskiLocalAtTarget; AlgebraicGeometry.IsZariskiLocalAtTarget.of_openCover; AlgebraicGeometry.IsZariskiLocalAtTarget.iff_of_openCover; AlgebraicGeometry.IsLocalAtTarget.of_openCover; AlgebraicGeometry.IsLocalAtTarget.iff_of_openCover; AlgebraicGeometry.IsImmersion.instIsZariskiLocalAtTarget; AlgebraicGeometry.IsZariskiLocalAtTarget.of_range_subset_iSup; AlgebraicGeometry.IsLocalAtSource.iff_of_openCover",
+   "date": "2026-10-17",
+   "verdict": "generalization: locality theorem for any Zariski-local morphism property"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersions finite morphisms and etale morphisms can be checked on an open cover of the target scheme",
+   "results": "8 hits; AlgebraicGeometry.IsImmersion.instIsZariskiLocalAtTarget; AlgebraicGeometry.IsPreimmersion.instIsZariskiLocalAtTarget; AlgebraicGeometry.Scheme.etalePretopology; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.IsZariskiLocalAtTarget.of_openCover; AlgebraicGeometry.IsEtale; AlgebraicGeometry.Scheme.smallEtalePretopology; AlgebraicGeometry.IsZariskiLocalAtTarget.of_range_subset_iSup",
+   "date": "2026-10-17",
+   "verdict": "match: IsZariskiLocalAtTarget.of_openCover with the three instances"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme morphism is finite, etale, or a closed immersion if its restrictions above an open covering of the target have the corresponding property",
+   "results": "8 hits; AlgebraicGeometry.IsClosedImmersion; AlgebraicGeometry.IsFinite.instOfIsClosedImmersion; AlgebraicGeometry.instIsClosedImmersionMorphismRestrict; AlgebraicGeometry.IsFinite; AlgebraicGeometry.IsClosedImmersion.isZariskiLocalAtTarget; AlgebraicGeometry.IsFinite.instMorphismRestrict; AlgebraicGeometry.IsFinite.recOn; AlgebraicGeometry.isClosedImmersion_iff_isAffineHom",
+   "date": "2026-10-17",
+   "verdict": "match: closed-immersion target-locality instance; general locality criterion covers all three"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsZariskiLocalAtTarget.iff_of_openCover",
+   "results": "1 hits; AlgebraicGeometry.IsZariskiLocalAtTarget.iff_of_openCover",
+   "date": "2026-10-17",
+   "verdict": "generalization: specialize the same iff once for each of the three properties"
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedImmersion.isZariskiLocalAtTarget|instance : HasAffineProperty @IsFinite|instance : HasRingHomProperty @Etale|theorem iff_of_openCover",
+   "results": "6 hits; Mathlib/AlgebraicGeometry/Morphisms/Finite.lean; Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean; Mathlib/AlgebraicGeometry/Morphisms/Basic.lean; Mathlib/AlgebraicGeometry/Morphisms/Basic.lean; Mathlib/AlgebraicGeometry/Morphisms/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "match: theorem Basic.lean:164 and instances ClosedImmersion.lean:358, Finite.lean:47, Etale.lean:56"
+  },
+  {
+   "tool": "grep",
+   "query": "HasRingHomProperty.isZariskiLocalAtTarget|IsZariskiLocalAtTarget",
+   "results": "5 hits; 57; 291; 393; 402; 403",
+   "date": "2026-10-17",
+   "verdict": "match: RingHomProperties.lean:291 supplies the inferred Etale locality instance"
+  },
+  {
+   "tool": "grep",
+   "query": "class HasAffineProperty|HasAffineProperty.isZariskiLocalAtTarget|instance.*IsZariskiLocalAtTarget|instance.*HasAffineProperty",
+   "results": "3 hits; 423; 483; 588",
+   "date": "2026-10-17",
+   "verdict": "match: Basic.lean:588 supplies the inferred IsFinite locality instance"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsZariskiLocalAtTarget.iff_of_openCover",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Basic.lean",
+  "line": 164,
+  "how": "specializes in one line: apply iff_of_openCover (Basic.lean:164-166) for each of P=IsClosedImmersion, IsFinite, Etale. All three hypotheses are inferred instances, with no additional scheme assumptions: IsClosedImmersion.isZariskiLocalAtTarget (ClosedImmersion.lean:358-359); IsFinite HasAffineProperty instance (Finite.lean:47-53) and HasAffineProperty.instIsZariskiLocalAtTarget (Basic.lean:588); Etale HasRingHomProperty instance (Etale.lean:56-60) and HasRingHomProperty.instIsZariskiLocalAtTarget (RingHomProperties.lean:291). These are the same closed-immersion, finite, and etale notions as the statement dependencies; Etale.lean:38-44 uses affine etale ring maps, the equivalent convention explicitly included in def-weil-etale-morphism."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-quasifinite-affine-etale-thickening-decomposition",
+  "date": "2026-10-17",
+  "group": "Q64"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "095K(1), assembly of the finitely many affine strata: check the closed thickening and finite etale structural morphism on the open-and-closed base components.",
+   "via": [
+    "lem-weil-pbc-quasifinite-affine-etale-thickening-decomposition",
+    "lem-weil-pbc-finite-fp-pushforward-constructible",
+    "lem-weil-pbc-etale-quasifinite-shriek-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
