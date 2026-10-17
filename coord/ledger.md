@@ -15840,3 +15840,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:55 L: merged deliver/D2/Sheaf.AlgebraicGeometry.AffineDerivedTensorChartComparison (stage 3; reviewer PASS; after a return; landing 20261017T135549-L-3278572 (proof); batch 20261017T135545; modules 1; new nodes 0)
 - 14:16 L: merged deliver/A2/Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructible (stage 3; reviewer PASS; first push; landing 20261017T141635-L-3672321 (interface); batch 20261017T141632; modules 3; new nodes 2)
 - 14:16 L: merged deliver/A3/Sheaf.AlgebraicGeometry.EllAdicLocalizingCohomologicalRepresentability (stage 3; reviewer PASS; first push; landing 20261017T141635-L-3672669 (interface); batch 20261017T141632; modules 5; new nodes 4)
+- 14:16 L: merged deliver/C1/Sheaf.AlgebraicGeometry.EllAdicProperLocalizingCoproducts (stage 3; reviewer PASS; first push; landing 20261017T141636-L-3673008 (interface); batch 20261017T141632; modules 3; new nodes 2)

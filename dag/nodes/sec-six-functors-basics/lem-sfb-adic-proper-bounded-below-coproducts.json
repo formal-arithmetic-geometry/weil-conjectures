@@ -1,0 +1,149 @@
+{
+ "id": "lem-sfb-adic-proper-bounded-below-coproducts",
+ "kind": "statement",
+ "title": "Qcqs derived pushforward preserves coproducts with a common lower bound",
+ "statement": "Fix universes u and u+1. Let $\\Lambda$ be any commutative condensed ring with specified multiplication, and let $f:X\\to Y$ be a quasi-compact quasi-separated morphism of schemes in universe u [sk-def-sfb-module-pushforward-pullback]. Put $\\Lambda_T=p_T^*\\Lambda$ and $D_T=D(\\operatorname{Mod}_{\\Lambda_T})$ for $T=X,Y$, using ordinary module sheaves and ordinary unbounded derived categories [sk-def-sfb-module-derived-pushpull]. Let I be any type in universe u+1, let N be an integer, and let $K_i\\in D_X$ for i in I satisfy $H^n(K_i)=0$ whenever n<N [def-kun-truncations]. Then the actual total derived pushforward $Rf_*:D_X\\to D_Y$ preserves the colimit of this I-indexed discrete diagram. Equivalently, the canonical coproduct comparison $\\bigoplus_i Rf_*K_i\\to Rf_*(\\bigoplus_iK_i)$ is an isomorphism. I may be empty. No adic, constructibility, properness, finite-type, or common upper-bound assumption is required.",
+ "stmt_deps": [
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-kun-truncations"
+ ],
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1), the existing ordinary bounded-below continuity input, applied to finite partial sums. The finite-partial-sum universal property is also formalized by WeilConjectures.Mathlib.CategoryTheory.Preadditive.LiftToFinset."
+ },
+ "proof": [
+  {
+   "text": "Choose complex representatives E_i, zero in all degrees below N, and isomorphisms Q(E_i)≅K_i. Form the filtered diagram S of finite partial sums of E_i. Its objects remain zero below N; evaluation in each degree preserves their finite coproduct cocones.",
+   "uses": [
+    "def-kun-truncations",
+    "lem-sfb-modobj-grothendieck"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any output degree q, apply ordinary qcqs continuity to S. Because S is strictly zero below N, the good-truncation cocone in the continuity theorem is a colimit cocone: its truncation maps are isomorphisms. Invertibility of that theorem’s canonical comparison makes its image under Q followed by Rf_* and H^q a colimit cocone as well.",
+   "uses": [
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite-partial-sum coproduct universal property needs only preservation of this one filtered diagram. Additivity preserves each finite sum, so the preceding colimit cocone gives preservation of the coproduct E_i under H^q Rf_* Q. This universal-property proof includes the empty family.",
+   "uses": [
+    "lem-sfb-modobj-grothendieck"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Exact coproducts in the module Grothendieck category imply that derived homology preserves coproducts. Factor the coproduct comparison for H^q Rf_* Q as the homology coproduct comparison followed by H^q of the Rf_* Q comparison. The first factor and the composite are invertible, hence the latter is invertible. Homology detects derived isomorphisms, proving that Rf_* Q preserves this coproduct. Since Q sends the termwise coproduct cocone to a derived coproduct cocone, Rf_* preserves the coproduct of Q(E_i). Transport along the representative isomorphisms.",
+   "uses": [
+    "lem-sfb-modobj-grothendieck",
+    "lem-kun-grothendieck-derived-coproducts",
+    "lem-grothendieck-derived-has-coproducts"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-kun-truncations",
+  "lem-grothendieck-derived-has-coproducts",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-sfb-modobj-grothendieck",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1), the existing ordinary bounded-below continuity input, applied to finite partial sums. The finite-partial-sum universal property is also formalized by WeilConjectures.Mathlib.CategoryTheory.Preadditive.LiftToFinset."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coproduct.*[Ff]iltered|[Ff]iltered.*coproduct|preserves.*[Cc]oproduct",
+   "results": "25 hits: Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Light/Functors.lean, Mathlib/Condensed/Light/Functors.lean, Mathlib/Condensed/Functors.lean, Mathlib/Condensed/Functors.lean",
+   "date": "2026-10-17",
+   "verdict": "Component facts only; no exact statement for the coefficient-specific tail upper bound or for ordinary qcqs bounded-below derived coproduct preservation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.preservesColimit_of_preserves_colimit_cocone",
+   "results": "1 hits: CategoryTheory.Limits.preservesColimit_of_preserves_colimit_cocone",
+   "date": "2026-10-17",
+   "verdict": "Component facts only; no exact statement for the coefficient-specific tail upper bound or for ordinary qcqs bounded-below derived coproduct preservation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward of a quasi-compact quasi-separated morphism on module sheaves preserves arbitrary coproducts of complexes with a common lower cohomology bound, using filtered colimits of finite partial sums",
+   "results": "8 hits: Condensed.instAB4CondensedMod, Condensed.instAB5CondensedMod, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, Condensed.instAB4StarCondensedMod, LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.sheafPushforwardCocontinuous, Condensed.hasExactColimitsOfShape",
+   "date": "2026-10-17",
+   "verdict": "Component facts only; no exact statement for the coefficient-specific tail upper bound or for ordinary qcqs bounded-below derived coproduct preservation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive functor preserving the filtered colimit of finite partial sums preserves the coproduct; derived pushforward preserves coproducts of uniformly bounded below complexes",
+   "results": "8 hits: CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive, CategoryTheory.Limits.isColimitOfHasCoproductOfPreservesColimit, CategoryTheory.Functor.preservesFiniteProductsOfAdditive, CategoryTheory.Limits.PreservesFiniteCoproducts.mk, CategoryTheory.Limits.PreservesColimits.preservesFilteredColimits, CategoryTheory.Limits.preservesCoproduct_of_preservesBiproduct, CategoryTheory.Limits.preservesBinaryCoproducts_of_preservesBinaryBiproducts, instAdditiveFunctorColim",
+   "date": "2026-10-17",
+   "verdict": "Component support, representative and additive-functor lemmas only; no exact statement of the proposed theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EllAdicProperLocalizingCoproducts",
+  "date": "2026-10-17",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-proper-pushforward-left-adjoint-e",
+   "place": "Identity compactification, proper coproduct-preservation step: continuity on each uniformly bounded-below truncated family.",
+   "via": [
+    "lem-sfb-adic-proper-localizing-coproducts"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EllAdicProperBoundedBelowCoproducts",
+  "file": "lean/Sheaf/AlgebraicGeometry/EllAdicProperBoundedBelowCoproducts.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.condensed_boundedBelow_preservesCoproduct",
+  "statement": "theorem condensed_boundedBelow_preservesCoproduct\n    (I : Type (u + 1)) (N : ℤ)\n    (K : I → DerivedCategory\n      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))\n    (hN : ∀ i, (K i).IsGE N) :\n    PreservesColimit (Discrete.functor K) R((f)_*⟦Λ⟧)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-17"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261017T141636-L-3673008",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261017T141636-L-3673008",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
