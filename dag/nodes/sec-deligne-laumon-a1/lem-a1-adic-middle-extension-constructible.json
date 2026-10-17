@@ -224,5 +224,37 @@
   "group": "Q74",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q74-30788be20 (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, all cited node statements, blueprint proof, and Bhatt–Scholze source material. The unchanged statement has all hypotheses and the ordinary degree-zero coefficient convention. Steps 1–3 correctly establish geometric hypotheses, adic constructibility, t-exact boundary pullback, and induced Frobenius structures; no step exceeds 2000 characters or hides a separate lemma. No duplicates, cycles, SGA citations, batch-5 violations, or Mathlib matches. Accepted the recorded generic tool uses and wrote review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdicMiddleExtensionConstructible",
+  "declaration": "WeilConjectures.adic_middleExtension_constructible",
+  "declarations": [
+   "WeilConjectures.adicMiddleExtensionGeometricMap",
+   "WeilConjectures.adicMiddleExtensionGeometricProperties",
+   "WeilConjectures.adicMiddleExtensionGeometricNoetherian",
+   "WeilConjectures.adicMiddleExtensionGeometricSeparated",
+   "WeilConjectures.adicMiddleExtensionBoundaryProperties",
+   "WeilConjectures.adicMiddleExtensionBoundaryFiber",
+   "WeilConjectures.AdicMiddleExtensionLattice",
+   "WeilConjectures.adicMiddleExtensionIntegralComplex",
+   "WeilConjectures.adicMiddleExtensionLisse_mem",
+   "WeilConjectures.adicMiddleExtensionLisseObject",
+   "WeilConjectures.adic_middleExtension_constructible"
+  ],
+  "file": "lean/Sheaf/Paper/AdicMiddleExtensionConstructible.lean",
+  "statement": "theorem adic_middleExtension_constructible (D : FiniteFieldDatum.{u}) (c : MiddleExtensionCurve D) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Ω : Type (u + 1)) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (Z₀ : Over (Spec (.of D.k₀))) (i₀ : Z₀ ⟶ c.C) [IsClosedImmersion i₀.left] [IsReduced Z₀.left] (_complement : Set.range i₀.left.base = (Set.range c.j.left.base)ᶜ) (E : Padic.FiniteCoefficientFields l Ω) (F : AdicMiddleExtensionLattice D c l hl Ω E) (_θ : (sfCommonStageWeilFrobeniusPullback D l hl c.U Ω).obj (adicMiddleExtensionLisseObject D c l hl Ω E F) ≅ adicMiddleExtensionLisseObject D c l hl Ω E F) : ∃ A : sfIntegralConstructibleCategory l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) (D.geometricFiber c.C).left, A.obj = adicMiddleExtensionIntegralComplex l Ω E (adicMiddleExtensionGeometricMap D c.j) F.obj ∧ sfCommonStageHeartProperty l (D.geometricFiber c.C).left Ω ((GeneralAlgebraicallyClosedCoefficients.inclusion E).obj ((sfRationalConstructibleLocalization l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) (D.geometricFiber c.C).left).obj A)) ∧ sfCommonStageHeartProperty l (adicMiddleExtensionBoundaryFiber D c Z₀ i₀).left Ω ((@commonStageDerivedPullback l _ Ω _ _ _ _ _ (adicMiddleExtensionGeometricMap D i₀) (fun x ↦ @sfWeilPrimeInvertible D l _ hl Z₀ (adicMiddleExtensionBoundaryProperties D c Z₀ i₀).1 (adicMiddleExtensionBoundaryProperties D c Z₀ i₀).2 x) (fun x ↦ sfWeilPrimeInvertible D l hl c.C x)).obj ((GeneralAlgebraicallyClosedCoefficients.inclusion E).obj ((sfRationalConstructibleLocalization l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) (D.geometricFiber c.C).left).obj A)))",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "An arbitrary finite-stage lisse lattice and a Weil isomorphism in the actual common-stage category present the lisse Qbar-Weil input. Ordinary direct image is the recorded finite-level sheaf-limit construction, transported by integralDetailedCoefficientComparison and placed in degree zero. The existential integral carrier fixes this actual object; the two conclusions use the recorded common-stage heart and completed pullback. Heart membership forgets the Weil isomorphism, so no new or arbitrary Frobenius structure is selected. Finite type of the boundary and domain instances are derived rather than assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c673571c0",
+  "group": "NB",
+  "result": "pass",
+  "note": "Read node, 4 stmt deps, source place, module, report, and dependency Lean (CurveMiddleExtension, SfWeilSheafComplex, FiniteFieldFiber.geometricFiber, IntegralStratifiedPerfectCharacterization). Only the lean field of the node changed; lean.statement verbatim; 11/11 declarations. Hypotheses match exactly (MiddleExtensionCurve bundle, reduced closed complement with derived finite type, base changes to k via the same Over.pullback, lisse lattice at any stage E with any common-stage Frobenius iso); A is the dependency's ordinary middleExtensionIntegralSheaf moved by the canonical ∃! coefficient comparison, in degree 0, no Rj_*; B is the recorded commonStageDerivedPullback along geometric i of the same A; both heart predicates are the recorded sfCommonStageHeartProperty. Weil structures are not constructed, but the conclusion is carrier heart membership (sfCommonStageWeilSheaf is the heart inverse image under forget), so the proposition is unchanged; the citer prop-a1-curve-boundary-sequence must build θ_A itself (non-blocking). Edge cases empty C/Z, j=id, F=0, torsion and disconnected curves are covered; no hollow defs; all theorems sorry with proof docstrings. nt_compile --json on the snapshot against the side overlay: rc 0, no diagnostics, 6.1 s. Minor: the second reading is the author's self-check; two proof-only Mathlib imports are unreferenced."
  }
 }
