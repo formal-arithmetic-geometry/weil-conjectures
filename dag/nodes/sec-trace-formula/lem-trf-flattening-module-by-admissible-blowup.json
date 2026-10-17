@@ -16,9 +16,222 @@
   "pqf-def-coherent",
   "def-weil-pbc-module-finite-type-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First prove only flatness of the strict transform, for all data in the statement. Since $S$ and $X\\to S$ are quasi-compact and locally finite presentation implies locally finite type, $X\\to S$ is of finite type and $X$ is quasi-compact. The uniform fibre-dimension bound [lem-fin-finite-type-fibre-dimension-bound] bounds the dimensions of all fibre supports. Use strong induction on an integer $d\\geq-1$ bounding $\\dim\\operatorname{Supp}(\\mathcal F_s)$ for every $s$, with the empty support assigned dimension $-1$. For $d=-1$, every fibre module is zero; the residue-field criterion in [lem-weil-pbc-support-pullback-finite-type] gives $\\mathcal F=0$. The unit-ideal blowup is the identity and its strict transform is zero, hence flat.",
+   "uses": [
+    "lem-fin-finite-type-fibre-dimension-bound",
+    "lem-weil-pbc-support-pullback-finite-type",
+    "def-nagata-admissible-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0815, proof paragraph 1; induction base made explicit."
+   }
+  },
+  {
+   "text": "Assume the flatness assertion for every smaller bound than $d\\geq0$. By [lem-trf-etale-flattening-descent] it suffices to solve it on etale neighbourhoods covering $X$, with quasi-compact etale base neighbourhoods. Finite subcovers suffice since $X$ is quasi-compact. In particular take finite affine open charts of the base and then of the source. The bases can be made jointly surjective even when $X\\to S$ is not surjective: adjoin diagrams with source $\\varnothing$ and affine base charts, for which the unit-ideal blowup already solves flatness. At points outside the closed support of $\\mathcal F$, use its zero restriction. Thus fix a point $x$ of a fibre support and affine neighbourhoods of $x$ and $s=f(x)$.",
+   "uses": [
+    "lem-trf-etale-flattening-descent",
+    "lem-weil-pbc-support-pullback-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0815, first paragraph; Tag 0814, finite etale covering hypotheses."
+   }
+  },
+  {
+   "text": "Put $n=\\dim_x\\operatorname{Supp}(\\mathcal F_s)\\leq d$. Apply [lem-trf-elementary-module-devissage]. It gives affine etale neighbourhoods $X',S'$, a finitely presented closed immersion $i:Z'\\to X'$, a finite $\\pi:Z'\\to Y'$, and $\\mathcal G$ with $i_*\\mathcal G\\cong g^*\\mathcal F$, where $Y'\\to S'$ is smooth of relative dimension $n$ with geometrically integral fibres. Set $\\mathcal N=\\pi_*\\mathcal G$. It is finite type and quasi-coherent by [lem-pc-f3-finite-pushforward-finite-type]. We will flatten $\\mathcal N$ on this smooth family, then recover flatness of $g^*\\mathcal F$. This is a local replacement around every point, including those where the local fibre-support dimension is smaller than $d$.",
+   "uses": [
+    "lem-trf-elementary-module-devissage",
+    "lem-pc-f3-finite-pushforward-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0815, second paragraph; Tag 057S."
+   }
+  },
+  {
+   "text": "Check finite presentation over the preserved open before making this replacement. On affine charts over $S'$, $X'$ is finitely presented over $S'$; the same holds for $Z'$ because $i$ is finitely presented. Smoothness gives finite presentation of the affine $Y'$ over $S'$. Hence [lem-weil-pbc-finite-presentation-over-finite-type-algebra] makes the finite morphism $\\pi$ finitely presented as well. Restrict $S\\prime$ to an affine open of the preserved open when checking finite presentation over $U$. Since all the maps to $S\\prime$ here are affine, the three source restrictions are affine. Write $B,C,D$ for the rings of $X\\prime,Z\\prime,Y\\prime$ on these restrictions, with $C=B/J$. The module underlying $\\mathcal G$ is finitely presented over $B$ because $i_*\\mathcal G=g^*\\mathcal F$ is so: tensor a finite presentation on $X_U$ with the affine chart ring of $X\\prime$ to obtain a finite presentation of the pullback. It is finitely presented over $C$: for a presentation $B^a\\to B^b\\to M\\to0$, the kernel of $C^b\\to M$ is the image of the finitely generated kernel of $B^b\\to M$. The finite finitely presented algebra $C/D$ is a finitely presented $D$-module by [lem-weil-pbc-finite-algebra-presentation-module-presentation], and transitivity [lem-pc-module-finite-presentation-transitive] makes $\\mathcal N_U$ finitely presented over $Y'_U$. Affine module presentations are identified with sheaf presentations by [lem-weil-pbc-quasi-coherent-finite-type-affine].",
+   "uses": [
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "sbc-lem-smooth-criterion",
+    "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+    "lem-weil-pbc-finite-algebra-presentation-module-presentation",
+    "lem-pc-module-finite-presentation-transitive",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0815, second paragraph hypotheses; Algebra Tags 00F4, 0561, 0564."
+   }
+  },
+  {
+   "text": "Check relative flatness under the paired etale neighbourhoods as well. On affine charts write $R\\to A\\to B$ for the original base, original source, and etale source neighbourhood, and write $R\\to R'$ for the etale base neighbourhood. If $N$ is $R$-flat, then $B\\otimes_A N$ is $R$-flat: for an injection $L\\to L'$ of $R$-modules, tensor first with $N$, then with the flat $A$-algebra $B$, using $L\\otimes_R(B\\otimes_A N)=B\\otimes_A(L\\otimes_RN)$. Flatness of $B/A$ is [lem-weil-pbc-etale-algebra-flat]. The $R'$-action is the one provided by the diagram. Since $R'/R$ is etale, its diagonal is open and its differentials vanish [def-weil-etale-morphism, def-weil-unramified-morphism]; by [lem-weil-pbc-formally-unramified-ring-iff-kahler-zero] it is formally unramified, and it is finite type. Apply [lem-sc-unramified-flat-of-base-flat] to conclude $R'$-flatness. The affine relative-flatness criterion converts this back into stalk flatness. Thus $g^*\\mathcal F$ really is relatively flat over $U\\times_SS'$ before its affine pushforwards are taken.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-flat",
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism",
+    "lem-weil-pbc-formally-unramified-ring-iff-kahler-zero",
+    "lem-sc-unramified-flat-of-base-flat",
+    "lem-pc-affine-chart-relative-flat-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0815, second paragraph, relative flatness hypotheses; flat.tex Tag 05B9 and its affine unramified generalization."
+   }
+  },
+  {
+   "text": "Relative flatness is preserved and reflected by either affine pushforward here. Indeed on affine charts $\\operatorname{Spec}C\\to\\operatorname{Spec}B\\to\\operatorname{Spec}R$, pushforward retains exactly the same underlying $R$-module. Apply [lem-pc-affine-chart-relative-flat-criterion] on both affine schemes: flatness of this module over $R$ is equivalent to relative stalk flatness. Consequently $\\mathcal G_U$ and $\\mathcal N_U$ are flat over $U\\times_SS'$. The same argument works after every base blowup. By [lem-trf-strict-transform-affine-pushforward], the strict transform of $i_*\\mathcal G$ is $i_{b,*}\\mathcal G^b$ and that of $\\pi_*\\mathcal G$ is $\\pi_{b,*}\\mathcal G^b$. Thus flattening $\\mathcal N$ suffices to flatten $g^*\\mathcal F$, with every comparison on the actual fibre products.",
+   "uses": [
+    "lem-pc-affine-chart-relative-flat-criterion",
+    "lem-trf-strict-transform-affine-pushforward"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0815, second paragraph; Morphisms Tag 0FLM, affine module calculation; Divisors Tag 080G."
+   }
+  },
+  {
+   "text": "We are reduced to affine $X\\to S$ smooth of relative dimension $n\\leq d$ with geometrically integral fibres, and a finite-type module $\\mathcal F$ finitely presented and flat over $U$. Smoothness gives flatness and finite presentation. Apply [lem-trf-generic-free-blowup] to obtain a $U$-admissible blowup and a fibrewise nonempty open $V$ where the strict transform is finite locally free. Work on affine base charts after this blowup. The family remains smooth by [lem-pc-proper-base-change] (2); its fibres remain geometrically integral of dimension $n$, by the meaning of geometric integrality and [lem-pc-dim-base-change]. The module remains finite type and retains its prescribed restriction over $U$ by [lem-trf-module-admissible-blowup-calculus]. That calculus also identifies any subsequent strict transform with a single admissible blowup of the original local base.",
+   "uses": [
+    "lem-trf-generic-free-blowup",
+    "sbc-lem-smooth-criterion",
+    "lem-pc-proper-base-change",
+    "lem-pc-dim-base-change",
+    "lem-trf-module-admissible-blowup-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0815, third paragraph, first two sentences; Tag 0811."
+   }
+  },
+  {
+   "text": "Fix $s\\in S$ and the generic point $\\xi$ of the integral fibre $X_s$. Since $V_s$ is nonempty it contains $\\xi$. Write $X=\\operatorname{Spec}A$, $S=\\operatorname{Spec}R$ and $\\mathcal F=\\widetilde N$. Choose finitely many elements of $N$ whose images are a basis of $N\\otimes_A\\kappa(\\xi)$; fractions can be cleared by their invertible denominators in $\\kappa(\\xi)$. They define $\\alpha:A^{\\oplus r}\\to N$. On a neighbourhood inside $V$, the module is finite free; a nonvanishing determinant minor therefore makes $\\alpha$ an isomorphism on an open $W$ containing $\\xi$. The image of $W$ in $S$ is open by [lem-weil-pbc-flat-finite-presentation-open]; replace $S$ by an affine neighbourhood of $s$ in that image. Now $W\\to S$ is surjective, so $\\alpha$ is an isomorphism at the generic point of every fibre. On $W$ the module is relatively flat, since the family is flat and the module is free there.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-flat-finite-presentation-open",
+    "sbc-lem-smooth-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0815, third paragraph: choice of alpha, isomorphism open W and shrinking the base."
+   }
+  },
+  {
+   "text": "Let $\\mathcal H=\\operatorname{coker}(\\alpha)$. Apply [lem-trf-free-subtraction-flatness] to $R\\to A$ and $N$. Its generic-basis and generic-flatness hypotheses hold by the preceding step. Hence $0\\to\\mathcal O_X^{\\oplus r}\\to\\mathcal F\\to\\mathcal H\\to0$ remains exact after every base change, and $\\mathcal H$ has the same relative flat locus as $\\mathcal F$. In particular $\\mathcal H_U$ is flat. It is finitely presented by [lem-weil-pbc-module-finite-presentation-cokernel], since $\\mathcal O_{X_U}^{\\oplus r}$ is finite type and $\\mathcal F_U$ is finitely presented. The cokernel is finite type and quasi-coherent, as is seen directly by taking the cokernel of the corresponding modules on affine charts.",
+   "uses": [
+    "lem-trf-free-subtraction-flatness",
+    "lem-weil-pbc-module-finite-presentation-cokernel",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0815, third paragraph: universal injectivity and definition of H."
+   }
+  },
+  {
+   "text": "The induction bound strictly decreases. For each $s$, $\\mathcal H_s$ vanishes on the nonempty open $W_s$ of the integral $n$-dimensional fibre $X_s$. Its support is closed by [lem-weil-pbc-support-pullback-finite-type], so it is a proper closed subset. Every chain of irreducible closed subsets in this support extends by appending $X_s$, and therefore has length at most $n-1$. Thus $\\dim\\operatorname{Supp}(\\mathcal H_s)\\leq n-1<d$ (or $\\leq d-1$ when $n=d$). For $n=0$ the proper closed subset is empty. Apply the induction hypothesis to $\\mathcal H$ with bound $n-1$, including its base case if $n=0$: all the finite-type, finite-presentation-over-$U$, and relative-flatness-over-$U$ hypotheses were checked above. It yields an admissible blowup on which $\\mathcal H^b$ is flat.",
+   "uses": [
+    "lem-weil-pbc-support-pullback-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0815, third paragraph, induction application; dimension decrease made explicit."
+   }
+  },
+  {
+   "text": "By [lem-trf-strict-transform-universal-exact] the strict transforms fit into $0\\to(\\mathcal O_X^{\\oplus r})^b\\to\\mathcal F^b\\to\\mathcal H^b\\to0$. Because $X\\to S$ is flat, [lem-trf-module-admissible-blowup-calculus] identifies the first term with $\\mathcal O_{X\\times_SS^b}^{\\oplus r}$. On $W\\times_SS^b$ the strict transform of $\\mathcal F$ is its finite free pullback, by the same calculus applied to the restriction. This open is fibrewise nonempty: nonempty fibres remain nonempty after a field extension, since tensoring a nonzero vector space with a field extension is faithful. Thus the transformed map is again a basis at every fibre generic point and $\\mathcal F^b$ is flat there. Apply [lem-trf-free-subtraction-flatness] on each affine chart of $S^b$: its cokernel is precisely $\\mathcal H^b$ by the displayed exact sequence, and is flat by construction. The flatness equivalence gives flatness of $\\mathcal F^b$ everywhere. This solves the smooth local problem.",
+   "uses": [
+    "lem-trf-strict-transform-universal-exact",
+    "lem-trf-module-admissible-blowup-calculus",
+    "lem-trf-free-subtraction-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0815, third paragraph: displayed exact sequence and transfer of flatness from H to F."
+   }
+  },
+  {
+   "text": "Combine the preliminary blowup with the induction blowup by [lem-trf-module-admissible-blowup-calculus], retaining its specified centre with zero set the union of the two centre supports. Apply [lem-trf-etale-flattening-descent] first to the affine base neighbourhoods of the smooth family, then to the original elementary devissage neighbourhoods. Step 6 transfers the solved flatness back across $\\pi$ and $i$. Quasi-compactness extracts finite source covers at each gluing. Include the empty-source base charts described in step 2 if needed. Thus the induction is complete and a single $U$-admissible blowup makes the original module strict transform flat.",
+   "uses": [
+    "lem-trf-module-admissible-blowup-calculus",
+    "lem-trf-etale-flattening-descent",
+    "lem-trf-strict-transform-affine-pushforward",
+    "lem-pc-affine-chart-relative-flat-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0815, paragraphs 1--3; Tag 0814; successive blowups as in Tag 080Y."
+   }
+  },
+  {
+   "text": "It remains to establish finite presentation of that strict transform. On the flattened (qcqs) base, [lemma-nagata-qc-open-complement-ideal-exists] gives a finite-type quasi-coherent ideal whose zero set is the complement of the preserved quasi-compact open $U$; apply [det-nagata-boundary-divisor-cartier] to it. It gives a further admissible blowup on which $U$ is scheme-theoretically dense. Since the module is already relatively flat, [lem-trf-module-admissible-blowup-calculus] says its new strict transform is its pullback, hence still flat and finite type. Its restriction over $U$ is still the original finitely presented module. The ambient morphism is still locally of finite presentation by affine base change [lem-weil-pbc-finite-presentation-base-change-composition]. The base is qcqs, so its quasi-compact open $U$ is retrocompact: its intersection with each quasi-compact open is quasi-compact by quasi-separatedness. Apply [lem-trf-flat-finite-type-dense-presentation] to conclude finite presentation on the entire ambient fibre product. Finally compose the two base blowups using the calculus, including the module strict-transform identification. The resulting blowup has both conclusions of the item.",
+   "uses": [
+    "lemma-nagata-qc-open-complement-ideal-exists",
+    "det-nagata-boundary-divisor-cartier",
+    "lem-trf-module-admissible-blowup-calculus",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-trf-flat-finite-type-dense-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0815, last paragraph; Tags 081N and 080Y."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-weil-pbc-support-pullback-finite-type",
+  "def-nagata-admissible-blowup",
+  "lem-trf-etale-flattening-descent",
+  "lem-trf-elementary-module-devissage",
+  "lem-pc-f3-finite-pushforward-finite-type",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "sbc-lem-smooth-criterion",
+  "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+  "lem-weil-pbc-finite-algebra-presentation-module-presentation",
+  "lem-pc-module-finite-presentation-transitive",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-etale-algebra-flat",
+  "def-weil-etale-morphism",
+  "def-weil-unramified-morphism",
+  "lem-weil-pbc-formally-unramified-ring-iff-kahler-zero",
+  "lem-sc-unramified-flat-of-base-flat",
+  "lem-pc-affine-chart-relative-flat-criterion",
+  "lem-trf-strict-transform-affine-pushforward",
+  "lem-trf-generic-free-blowup",
+  "lem-pc-proper-base-change",
+  "lem-pc-dim-base-change",
+  "lem-trf-module-admissible-blowup-calculus",
+  "lem-weil-pbc-flat-finite-presentation-open",
+  "lem-trf-free-subtraction-flatness",
+  "lem-weil-pbc-module-finite-presentation-cokernel",
+  "lem-trf-strict-transform-universal-exact",
+  "det-nagata-boundary-divisor-cartier",
+  "lem-trf-flat-finite-type-dense-presentation",
+  "lemma-nagata-qc-open-complement-ideal-exists"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0815, theorem-flatten-module, complete proof; supporting lemmas cited by their Stacks tags."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,13 +278,41 @@
   {
    "tool": "loogle",
    "query": "\"strictTransform\"",
-   "results": "0 hits; ; candidates: . None states the geometric strict-transform or flattening assertion.",
+   "results": "[loogle] OK 0 hit(s); ; none states the item assertion. Full responses retained in search-results/item-loogle.txt.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatten a finite type quasi coherent module by a blowup of the base preserving its flat finitely presented locus",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.UniversallyOpen.of_flat, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, Module.Flat.exists_factorization_of_isFinitelyPresented, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, Module.flat_of_isLocalized_span, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.flat_of_affine_subset; none states the item assertion. Full responses retained in search-results/item-leanfinder.txt.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raynaud Gruson flattening module by admissible blowing up",
+   "results": "[leanfinder] OK 8 hit(s); Algebra.HasGoingDown.of_flat, Module.Flat.exists_factorization_of_isFinitelyPresented, Module.flat_of_isLocalized_maximal, Module.Flat.of_forall_exists_factorization, Module.flat_of_isLocalized_span, Module.flat_of_localized_maximal, Module.Flat, Module.FaithfullyFlat; none states the item assertion. Full responses retained in search-results/item-leanfinder-second.txt.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatten a finite type quasi coherent module by a blowup of the base preserving its flat finitely presented locus",
+   "results": "[leansearch] OK 8 hit(s); Module.Flat.of_flat_tensorProduct, Module.Flat.of_isLocalizedModule, SheafOfModules.quasicoherentDataOfIsFinitePresentation, Module.flat_of_isLocalized_span, Module.FaithfullyFlat.toFlat, RingHom.Flat, Module.flat_iff_of_isLocalization, Module.Flat.of_forall_exists_factorization; none states the item assertion. Full responses retained in search-results/item-leansearch.txt.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "flattening|strictTransform",
+   "results": "[grep] OK 0 hit(s); ; none states the item assertion. Full responses retained in search-results/item-grep.txt.",
    "date": "2026-10-17",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-flattening-by-admissible-blowup",
@@ -97,5 +338,139 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-flattening-module-by-admissible-blowup",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0815 by fibre-support-dimension induction, seven statement-only tools, explicit affine pushforward checks, dimension drop and final dense-open finite-presentation step. Statement unchanged. Existing algebra, support, geometry and module nodes are reused. No Lean proof attachment or Mathlib match.",
+  "blueprint": "Ancestor lem-trf-local-term-locality proof (1)--(2), semistable-alteration input, via the existing flattening branch: module theorem used by the structure-sheaf reduction in Stacks 081R. The seven children make explicit the supporting lemmas of Stacks 0815.",
+  "tool_uses": [
+   {
+    "node": "lem-fin-finite-type-fibre-dimension-bound",
+    "why": "Generic algebraic or scheme/module permanence used in the Stacks 0815 argument; this unit has no alternative node stating this tool."
+   },
+   {
+    "node": "lem-weil-pbc-support-pullback-finite-type",
+    "why": "Generic algebraic or scheme/module permanence used in the Stacks 0815 argument; this unit has no alternative node stating this tool."
+   },
+   {
+    "node": "def-nagata-admissible-blowup",
+    "why": "Generic algebraic or scheme/module permanence used in the Stacks 0815 argument; this unit has no alternative node stating this tool."
+   },
+   {
+    "node": "lem-pc-f3-finite-pushforward-finite-type",
+    "why": "Generic algebraic or scheme/module permanence used in the Stacks 0815 argument; this unit has no alternative node stating this tool."
+   },
+   {
+    "node": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "why": "Generic algebraic or scheme/module permanence used in the Stacks 0815 argument; this unit has no alternative node stating this tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-base-change-composition",
+    "why": "Generic algebraic or scheme/module permanence used in the Stacks 0815 argument; this unit has no alternative node stating this tool."
+   },
+   {
+    "node": "sbc-lem-smooth-criterion",
+    "why": "Generic algebraic or scheme/module permanence used in the Stacks 0815 argument; this unit has no alternative node stating this tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+    "why": "Generic algebraic or scheme/module permanence used in the Stacks 0815 argument; this unit has no alternative node stating this tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-algebra-presentation-module-presentation",
+    "why": "Generic algebraic or scheme/module permanence used in the Stacks 0815 argument; this unit has no alternative node stating this tool."
+   },
+   {
+    "node": "lem-pc-module-finite-presentation-transitive",
+    "why": "Generic algebraic or scheme/module permanence used in the Stacks 0815 argument; this unit has no alternative node stating this tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic algebraic or scheme/module permanence used in the Stacks 0815 argument; this unit has no alternative node stating this tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-flat",
+    "why": "Generic algebraic or scheme/module permanence used in the Stacks 0815 argument; this unit has no alternative node stating this tool."
+   },
+   {
+    "node": "def-weil-etale-morphism",
+    "why": "Generic algebraic or scheme/module permanence used in the Stacks 0815 argument; this unit has no alternative node stating this tool."
+   },
+   {
+    "node": "def-weil-unramified-morphism",
+    "why": "Generic algebraic or scheme/module permanence used in the Stacks 0815 argument; this unit has no alternative node stating this tool."
+   },
+   {
+    "node": "lem-weil-pbc-formally-unramified-ring-iff-kahler-zero",
+    "why": "Generic algebraic or scheme/module permanence used in the Stacks 0815 argument; this unit has no alternative node stating this tool."
+   },
+   {
+    "node": "lem-sc-unramified-flat-of-base-flat",
+    "why": "Generic algebraic or scheme/module permanence used in the Stacks 0815 argument; this unit has no alternative node stating this tool."
+   },
+   {
+    "node": "lem-pc-affine-chart-relative-flat-criterion",
+    "why": "Generic algebraic or scheme/module permanence used in the Stacks 0815 argument; this unit has no alternative node stating this tool."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic algebraic or scheme/module permanence used in the Stacks 0815 argument; this unit has no alternative node stating this tool."
+   },
+   {
+    "node": "lem-pc-dim-base-change",
+    "why": "Generic algebraic or scheme/module permanence used in the Stacks 0815 argument; this unit has no alternative node stating this tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-finite-presentation-open",
+    "why": "Generic algebraic or scheme/module permanence used in the Stacks 0815 argument; this unit has no alternative node stating this tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-finite-presentation-cokernel",
+    "why": "Generic algebraic or scheme/module permanence used in the Stacks 0815 argument; this unit has no alternative node stating this tool."
+   },
+   {
+    "node": "det-nagata-boundary-divisor-cartier",
+    "why": "Generic algebraic or scheme/module permanence used in the Stacks 0815 argument; this unit has no alternative node stating this tool."
+   },
+   {
+    "node": "lemma-nagata-qc-open-complement-ideal-exists",
+    "why": "Step 13 needs a finite-type ideal with zero set S\\U to apply det-nagata-boundary-divisor-cartier; generic Nagata blowup tool, no node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-weil-pbc-support-pullback-finite-type",
+  "def-nagata-admissible-blowup",
+  "lem-pc-f3-finite-pushforward-finite-type",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "sbc-lem-smooth-criterion",
+  "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+  "lem-weil-pbc-finite-algebra-presentation-module-presentation",
+  "lem-pc-module-finite-presentation-transitive",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-etale-algebra-flat",
+  "def-weil-etale-morphism",
+  "def-weil-unramified-morphism",
+  "lem-weil-pbc-formally-unramified-ring-iff-kahler-zero",
+  "lem-sc-unramified-flat-of-base-flat",
+  "lem-pc-affine-chart-relative-flat-criterion",
+  "lem-pc-proper-base-change",
+  "lem-pc-dim-base-change",
+  "lem-weil-pbc-flat-finite-presentation-open",
+  "lem-weil-pbc-module-finite-presentation-cokernel",
+  "det-nagata-boundary-divisor-cartier",
+  "lemma-nagata-qc-open-complement-ideal-exists"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-fdae5604f",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-fdae5604f (reviewer sub-agent of L); spot-checked: I read the item, all seven new nodes and every cited statement in full, and checked them against literature/stacks-project: flat.tex 0815 (statement and full proof), 0814, 0811, 080Y, 057S, 05I3 and 081N; divisors.tex 080K, 080I, 080F, 080W and 080G; algebra 05CL. The item statement is unchanged and faithful to 0815: 'f quasi-compact' over a qcqs S is equivalent to 'X quasi-compact'. All 13 steps check out. The base case uses 056J(2). The empty-source diagrams make the bases cover S, as 0814 needs. The finite-presentation check across i and pi uses 00F4(4), 0564 and transitivity, and the kernel argument over B/J is right. Flatness over R' uses the etale-flat and unramified flat-of-base-flat statements. The hypotheses of 0811 are met. alpha and W are built with the image of W open by 00I1, and W->S is surjective, so the fibres are nonempty as the free-subtraction node needs. The dimension drop to n-1 is proved explicitly. The 080W exact sequence and the flatness equivalence move flatness from H back to F on affine charts of the blowup. Gluing uses calculus (1) and 0814. The final finite-presentation step uses 081N. New nodes: all are statement-only, self-contained, with created and blueprint fields set and five searches each; none restates a clause of the item. I tested them on small cases: free-subtraction is checked by localising at p, with R=k, A=k[t], N=A+A/(t), plus the k[eps] example showing the flatness hypothesis is needed; generic-free-blowup with U empty; dense-presentation over a DVR; devissage over a field. Duplicate search over dag/nodes by tag and phrase: thm-nagata-composition-of-blowups states only the scheme part of calculus (1), and lem-trf-strict-transform-composition is the scheme version of 080I(2); neither duplicates the module calculus node. I accept the 22 declared tool uses as generic black boxes. Fix (C1/C4): step 13 applied det-nagata-boundary-divisor-cartier without citing where the ideal with V(I)=S\\U comes from. I added lemma-nagata-qc-open-complement-ideal-exists to the step-13 text, its uses, proof_deps and split_report.tool_uses, and checked that this creates no cycle. The corrected item is at fixes/dag/nodes/sec-trace-formula/lem-trf-flattening-module-by-admissible-blowup.json.; 1 file(s) fixed by the reviewer"
  }
 }
