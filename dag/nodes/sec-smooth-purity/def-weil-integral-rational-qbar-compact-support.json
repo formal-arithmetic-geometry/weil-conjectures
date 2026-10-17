@@ -100,27 +100,27 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "lean": {
-  "module": "Sheaf.Paper.IntegralRationalQbarCompactSupport",
-  "declaration": "WeilConjectures.sfQbarCompactSupportValue",
+  "module": "Sheaf.Paper.QcqsCompactSupportRealization",
+  "declaration": "WeilConjectures.sfQcqsCompactSupportRealization",
   "declarations": [
-   "WeilConjectures.sfIntegralCompactSupportValue",
-   "WeilConjectures.sfRationalCompactSupportValue",
-   "WeilConjectures.sfQbarCompactSupportValue"
+   "WeilConjectures.SfQcqsCompactSupportRealizationSpec",
+   "WeilConjectures.sfQcqsCompactSupportRealization_existsUnique",
+   "WeilConjectures.sfQcqsCompactSupportRealization"
   ],
-  "file": "lean/Sheaf/Paper/IntegralRationalQbarCompactSupport.lean",
-  "statement": "def sfQbarCompactSupportValue (K₀ : Type u) [Field K₀] (_hl : IsUnit (l : K₀)) [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))] [LocallyOfFiniteType (X ↘ Spec (.of K₀))] [QuasiCompact (X ↘ Spec (.of K₀))] [LocallyOfFiniteType (Y ↘ Spec (.of K₀))] [QuasiCompact (Y ↘ Spec (.of K₀))] [f.IsOver (Spec (.of K₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (c : Compactification f) (E₀ : Padic.FiniteCoefficientFields l Ω) (K : sfIntegralConstructibleCategory l (Coefficient.{u} l Ω E₀) X) : generalAlgebraicallyClosedConstructibleCategory l Ω Y",
+  "file": "lean/Sheaf/Paper/QcqsCompactSupportRealization.lean",
+  "statement": "def sfQcqsCompactSupportRealization : (sfIntegralConstructible l E X).ι ⋙ image (completed l E) c ≅ sfCompactSupportFiniteIntegralFunctor l K₀ hl c E ⋙ (sfIntegralConstructible l E Y).ι",
   "branch": "newtargets-dag",
-  "by": "Q32",
+  "by": "Q49",
   "date": "2026-10-17",
   "existing": false,
-  "note": "The three definitions choose a derived-limit object using the complete existence theorem, retain the integral constructibility witness, localize unchanged integral objects, and return the literal finite-stage pair. The compact-support tower and canonical transitions are the published datum-free interfaces. Second reading removes all HasProduct binders: the published integralOperationsDerivedCountableProducts theorem supplies countable products internally on the identical completed-coefficient derived category. Its already landed owning node is cited in stmt_deps."
+  "note": "Section 1(B): the previous module gives object values only, not a natural identification of the recorded integral functor with the completed proper/open construction on all constructible inputs. The published PurCompactSupport.recordedIdentification has separated structure-morphism and finite-Tor-domain binders, unusable for this qcqs consumer. Reexport all original value definitions unchanged, reuse the normalized finite integral/rational actions, and supply the equivalent Roos-projection-normalized natural identification for arbitrary finite-type base-field schemes. Finite Tor follows from the residue-Tor theorem and is not a new hypothesis."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-30407d6a2",
-  "group": "Q32",
+  "reviewer": "NT-stage2-cc-8727e1a82",
+  "group": "Q49",
   "result": "pass",
-  "note": "Read the node, the snapshot module, the report (real Worker report and Second reading by Q32 sections) and the dependency declarations (sfCompactSupportTerm/Transition, sfIntegralCompactSupport_constructible, integralOperationsDerivedCountableProducts, exists_isDerivedLimit_and_iso, sfRationalConstructibleLocalization, generalAlgebraicallyClosedConstructibleCategory=Pair, Coefficient=Shrink). Every hypothesis matches the node exactly: field K0, finite-type X and Y, separated finite-type f, l prime and invertible, finite E, one fixed compactification c. Terms and transitions match the specified tower (exponent n+1). The derived limit is chosen via the landed countable-products theorem plus exists_isDerivedLimit_and_iso, with no extra HasProduct binder. Integral membership comes from the constructibility theorem, the rational value is the unchanged-object localization, and the Qbar value is the literal pair (E0, Rf_!K_E) with the closure universe v independent. No independence claims are folded in. Edge cases (n=0, empty schemes, zero complex, char l, universes) are fine. No hollow data, no sorry or proof in the file, and source/blueprint docstrings are present. lean.statement matches the signature apart from the noncomputable modifier. Only the item's lean and stmt_deps changed; the added stmt_dep lem-pur-integral-operations-well-defined is a landed node and creates no cycle. nt_compile.py ran twice: rc=0, 3.5 s and 3.9 s, no errors or warnings. Non-blocking: two upstream definitions, sfAmbientCompactSupportCandidate and sfIntrinsicCompactSupport, are duplicates."
+  "note": "Read node, Stacks 0F7J, BS 6.7.6/6.7.7/6.1.13 as cited, all 12 stmt_deps and the side dependency declarations (CompactSupportFiniteAction, CompactSupportCoefficientAction, PurCompactSupport incl. recordedIdentification, FiniteFieldDatum, Pair/inclusion). Hypotheses exact: D.k = alg. closure of the finite field, l prime with l != p, Omega in independent universe v, X/Y/Z finite type with no separatedness over k (qs automatic), f/g separated finite type, cf/cg/cfg universally quantified. Conclusions: integral ∃! with the 0F7J proper/open tower (V, b, c, p_Y, a=bc, Gamma = open adjunct of inverse Lambda) and normalized refinement independence; a qualifying tower with refinements always exists and the IsIso witnesses always hold; rational ∃! = localization of the integral component; Qbar ∃! on Pair with component inclusion E0 of the rational compositor (HEq types agree via obj/finite_eq/value_eq). §1(B) module for def-weil-integral-rational-qbar-compact-support justified: the old identification needs separated bases and finite Tor; the new module re-exports the values and copies the IsRecordedIdentification normalization. Node diffs: item only lean + stmt_deps (+4 landed nodes); dep only lean with note; statements verbatim. No hollow defs, all theorems sorry, docstrings with source/blueprint/proof steps, lines <=100, proper imports, real pro-etale completed coefficients. nt_compile --json on both modules: rc=0 twice, 3.2 s and 8.2 s, no warnings. Non-blocking: general-K0 uniqueness of sfQcqsCompactSupportRealization_existsUnique relies on reductions (fine over F̄_q; restrict to FiniteFieldDatum at stage 3 if it fails); dep record's main declaration is now the realization iso, values re-exported."
  }
 }

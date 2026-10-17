@@ -325,5 +325,24 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-965379ba9 (reviewer sub-agent of L); spot-checked: Read the full item, all ten proof steps, every cited node statement, unit/chapter route, Stacks tags 00GT/00DS/00FN/00GN/0307/00OI/00E3/00OK, and Swanson–Huneke Lemma 4.8.4. The hypotheses and localization/base-field identifications check out, edge cases were tested, no duplicate or restated node exists, no long-step issue occurs, and route/SGA restrictions are satisfied. The source’s unsupported “local module-finite” phrase is correctly identified and replaced by the valid integral-extension dimension argument."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-08a9ad14e",
+  "group": "N9",
+  "result": "fix",
+  "note": "Lean omitted the node's and Swanson-Huneke 4.8.4's hypothesis that R is Noetherian (H3), and the report and second reading wrongly claim every hypothesis is kept. Counterexample without it: a non-Noetherian rank-1 valuation domain R has N=R, C=R and C_p=R not Noetherian, so the statement is false. fixes/NormalizationFiniteLocalModel.lean adds [IsNoetherianRing R] and a docstring mention, nothing else; the report is appended. Every other clause matches the node: finite type, prime contraction, uniqueness, local Noetherian domain C_p, dim C_p = dim N_Q = ht Q, and N_Q the integral closure of C_p in K via jC and jQ fixed by their compatibility equations. No hollow definitions, universes free, docstrings carry the source place and blueprint id, sorry only. Delivered and fixed files compile clean with nt_compile.py --json; a deliberate error was reported, so the clean result is real."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.NormalizationFiniteLocalModel",
+  "declaration": "exists_finiteType_intermediate_algebra_isolating_prime",
+  "file": "lean/Sheaf/TraceFormula/NormalizationFiniteLocalModel.lean",
+  "statement": "theorem exists_finiteType_intermediate_algebra_isolating_prime (R : Type u) (K : Type v) [CommRing R] [IsDomain R] [IsNoetherianRing R] [Field K] [Algebra R K] [IsFractionRing R K] (Q : Ideal (integralClosure R K)) [Q.IsPrime] : ∃ C : Subalgebra R (integralClosure R K), Algebra.FiniteType R C ∧ let p : Ideal C := Ideal.comap (algebraMap C (integralClosure R K)) Q p.IsPrime ∧ (∀ Q' : Ideal (integralClosure R K), Q'.IsPrime → Ideal.comap (algebraMap C (integralClosure R K)) Q' = p → Q' = Q) ∧ IsDomain (Localization.AtPrime p) ∧ IsNoetherianRing (Localization.AtPrime p) ∧ ringKrullDim (Localization.AtPrime p) = ringKrullDim (Localization.AtPrime Q) ∧ ringKrullDim (Localization.AtPrime Q) = (Q.height : WithBot ℕ∞) ∧ (∃ jC : Localization.AtPrime p →+* K, ∃ jQ : Localization.AtPrime Q →+* K, jC.comp (algebraMap C (Localization.AtPrime p)) = (algebraMap (integralClosure R K) K).comp (algebraMap C (integralClosure R K)) ∧ jQ.comp (algebraMap (integralClosure R K) (Localization.AtPrime Q)) = algebraMap (integralClosure R K) K ∧ (letI : Algebra (Localization.AtPrime p) K := jC.toAlgebra letI : Algebra (Localization.AtPrime Q) K := jQ.toAlgebra IsIntegralClosure (Localization.AtPrime Q) (Localization.AtPrime p) K))",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-08a9ad14e"
  }
 }

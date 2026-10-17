@@ -11,7 +11,8 @@
   "def-trf-geometric-morphism",
   "def-weil-pbc-sheafification",
   "def-weil-pbc-kahler-differentials",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-algebraic-inverse-image"
  ],
  "proof": [
   {
@@ -189,5 +190,43 @@
   "group": "Q42",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q42-24690dc35 (reviewer sub-agent of L); spot-checked: Two repairable faults found. The free-module node is ill-typed: with f:Sh(D)→Sh(C), its B and E must be sheaves on Sh(C), not “on the source”; corrected JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-geometric-inverse-image-free-module.json. The item’s created.item incorrectly names lem-trf-affine-cotangent-comparison; corrected in fixes/dag/nodes/sec-trace-formula/lem-trf-topos-inverse-image-differentials.json. Full review and source checks are in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-831cd8851",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Read node, base node delta (lean record + added landed stmt_dep def-weil-pbc-algebraic-inverse-image), Stacks 08TP/08TQ (sites-modules.tex 6034-6088), GeometricMorphism (comp inverse order checked), ringedSiteModules, AlgebraicInverseImageOfUniverses (all graph laws), Mathlib relativeDifferentials'/derivation'/isUniversal'/module sheafification. Every clause matched: real sheafified differentials omega and derivation, unique normalized module-sheaf iso via IsComparison, naturality with constructed canonical squareMap, identity and composition coherence; checked each stated form is true and not stronger than the node (no extra FA/module-comparison hypotheses needed). Universes: common value universe w, independent site universes, EssentiallySmall.{w}. Edge cases ok. No duplicate notion (upstream only scheme-specific differentials). No hollow defs, 4 sorries, docstrings with source/blueprint/proof steps, statement field verbatim. nt_compile.py --json: exit 0, clean, 32 s. Second-reading section follows the accepted 2026-10-17 direct-delivery practice."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.InverseImageDifferentials",
+  "declaration": "CategoryTheory.SheafDifferentials.inverseDifferentials_existsUnique",
+  "declarations": [
+   "CategoryTheory.SheafDifferentials.ring",
+   "CategoryTheory.SheafDifferentials.sets",
+   "CategoryTheory.SheafDifferentials.moduleSets",
+   "CategoryTheory.SheafDifferentials.omega",
+   "CategoryTheory.SheafDifferentials.derivation",
+   "CategoryTheory.SheafDifferentials.d",
+   "CategoryTheory.SheafDifferentials.setsMap",
+   "CategoryTheory.SheafDifferentials.squareDerivation",
+   "CategoryTheory.SheafDifferentials.squareMap",
+   "CategoryTheory.SheafDifferentials.squareSetsMap",
+   "CategoryTheory.SheafDifferentials.RingMapCompatibility",
+   "CategoryTheory.SheafDifferentials.comparison",
+   "CategoryTheory.SheafDifferentials.IsComparison",
+   "CategoryTheory.SheafDifferentials.inverseDifferentials_existsUnique",
+   "CategoryTheory.SheafDifferentials.inverseDifferentials_naturality",
+   "CategoryTheory.SheafDifferentials.inverseDifferentials_identity",
+   "CategoryTheory.SheafDifferentials.inverseDifferentials_composition"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/InverseImageDifferentials.lean",
+  "statement": "theorem inverseDifferentials_existsUnique (f : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w))) {A B : Sheaf J CommRingCat.{w}} {AI BI : Sheaf K CommRingCat.{w}} (φ : A ⟶ B) (ψ : AI ⟶ BI) (FA : SheafOfModules.AlgebraicInverseImageOfUniverses.{uC, vC, uD, vD, w, w} f.inverse A AI) (F : SheafOfModules.AlgebraicInverseImageOfUniverses.{uC, vC, uD, vD, w, w} f.inverse B BI) (h : RingMapCompatibility f φ ψ FA F) : ∃! e : F.modules.obj (omega φ) ≅ omega ψ, IsComparison f φ ψ F e",
+  "branch": "newtargets-dag",
+  "by": "Q75",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The primary theorem is the uniquely normalized module-sheaf isomorphism. The same module constructs the actual sheafification, its universal derivation and canonical ring-square maps, and states naturality, identity and composition coherence in the three companion theorems listed in declarations. Algebraic inverse-image presentations specify the finite-product transported operations; no arbitrary module map is substituted."
  }
 }

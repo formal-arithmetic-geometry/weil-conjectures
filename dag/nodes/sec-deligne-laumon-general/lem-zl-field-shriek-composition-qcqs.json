@@ -21,7 +21,11 @@
   "def-weil-rationalization-karoubi",
   "def-weil-compactifications-refinements",
   "def-weil-l-adic-coefficient-extension",
-  "def-compact-support-direct-image-detailed"
+  "def-compact-support-direct-image-detailed",
+  "def-weil-compact-support-finite-action",
+  "def-weil-compact-support-coefficient-action",
+  "lem-weil-compact-support-finite-field-independence",
+  "lem-pur-compact-support-integral-coefficient-comparison"
  ],
  "proof": [
   {
@@ -391,5 +395,39 @@
   "group": "Q06",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q06-8b5501db4 (reviewer sub-agent of L); spot-checked: Reviewed the item, all eight steps, cited node statements, Stacks 0F7J, Bhatt–Scholze, coefficient categories, route constraints, edge cases, and searches. Step 2 asserted normalized transition isomorphisms without citing lem-sf-compact-support-restriction-of-scalars or lem-weil-proetale-direct-image-restriction-of-scalars; the corrected whole DAG JSON adds both dependencies. Review written to review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8727e1a82",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Read node, Stacks 0F7J, BS 6.7.6/6.7.7/6.1.13 as cited, all 12 stmt_deps and the side dependency declarations (CompactSupportFiniteAction, CompactSupportCoefficientAction, PurCompactSupport incl. recordedIdentification, FiniteFieldDatum, Pair/inclusion). Hypotheses exact: D.k = alg. closure of the finite field, l prime with l != p, Omega in independent universe v, X/Y/Z finite type with no separatedness over k (qs automatic), f/g separated finite type, cf/cg/cfg universally quantified. Conclusions: integral ∃! with the 0F7J proper/open tower (V, b, c, p_Y, a=bc, Gamma = open adjunct of inverse Lambda) and normalized refinement independence; a qualifying tower with refinements always exists and the IsIso witnesses always hold; rational ∃! = localization of the integral component; Qbar ∃! on Pair with component inclusion E0 of the rational compositor (HEq types agree via obj/finite_eq/value_eq). §1(B) module for def-weil-integral-rational-qbar-compact-support justified: the old identification needs separated bases and finite Tor; the new module re-exports the values and copies the IsRecordedIdentification normalization. Node diffs: item only lean + stmt_deps (+4 landed nodes); dep only lean with note; statements verbatim. No hollow defs, all theorems sorry, docstrings with source/blueprint/proof steps, lines <=100, proper imports, real pro-etale completed coefficients. nt_compile --json on both modules: rc=0 twice, 3.2 s and 8.2 s, no warnings. Non-blocking: general-K0 uniqueness of sfQcqsCompactSupportRealization_existsUnique relies on reductions (fine over F̄_q; restrict to FiniteFieldDatum at stage 3 if it fails); dep record's main declaration is now the realization iso, values re-exported."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FieldShriekCompositionQcqs",
+  "declaration": "WeilConjectures.sfFieldShriekCompositionQbar_existsUnique",
+  "declarations": [
+   "WeilConjectures.sfCompositionPullSquare",
+   "WeilConjectures.sfCompositionLambda",
+   "WeilConjectures.sfCompositionGamma",
+   "WeilConjectures.sfCompositionOpenComp",
+   "WeilConjectures.sfCompositionOpenCongr",
+   "WeilConjectures.sfCompletedCompositionOnTower",
+   "WeilConjectures.SfCompletedRefinementSpec",
+   "WeilConjectures.SfIntegralCompositionSpec",
+   "WeilConjectures.sfFieldShriekCompositionIntegral_existsUnique",
+   "WeilConjectures.sfFieldShriekCompositionIntegral",
+   "WeilConjectures.sfFieldShriekCompositionRational_existsUnique",
+   "WeilConjectures.sfFieldShriekCompositionRational",
+   "WeilConjectures.sfFieldShriekCompositionQbar_existsUnique"
+  ],
+  "file": "lean/Sheaf/Paper/FieldShriekCompositionQcqs.lean",
+  "statement": "theorem sfFieldShriekCompositionQbar_existsUnique (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (Sf : SfCompactSupportCoefficientAction l D.k (coefficientPrimeUnit l D hl) Ω cf) (Sg : SfCompactSupportCoefficientAction l D.k (coefficientPrimeUnit l D hl) Ω cg) (Sfg : SfCompactSupportCoefficientAction l D.k (coefficientPrimeUnit l D hl) Ω cfg) : ∃! γ : Sf.system.functor ⋙ Sg.system.functor ≅ Sfg.system.functor, ∀ (E₀ : Padic.FiniteCoefficientFields l Ω) (K : Stage l Ω X E₀), HEq (γ.hom.app ⟨E₀, K⟩) ((inclusion (l := l) (Ω := Ω) (Y := Z) E₀).map ((sfFieldShriekCompositionRational D l hl cf cg cfg (AlgebraicallyClosedCoefficients.Coefficient l Ω E₀)).hom.app K))",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Both field cases are stated: integral proper/open and refinement normalization, raw rationalization of that canonical component, and its class on every finite-stage pair. No separated structure morphism, finite-Tor input, or arbitrary comparison is assumed. The normalized coefficient actions are universally quantified; their existence is the recorded finite-field-independence theorem."
  }
 }
