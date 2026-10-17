@@ -8,7 +8,6 @@ public import Sheaf.Paper.CondensedCoefficientComparisons
 import all Sheaf.Paper.CondensedFiniteModelProofAPI
 import Mathlib.CategoryTheory.Adjunction.CompositionIso
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
-import Mathlib.Topology.Algebra.Module.FiniteDimension
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 
 /-! # Exact condensed coefficient changes and their derived tensor calculus
