@@ -53,10 +53,6 @@ phase
 `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_origin_of_isFourierPartner`.
 The boundary semicontinuity is the case of the affine line of
 `AlgebraicGeometry.WeilSheaf.hasWeightsAtMost_directImage`.
-
-## TODO
-
-Prove the stalk formula at the origin (`lem-fd-stalk-at-origin`), which is stated with `sorry`.
 -/
 
 @[expose] public section

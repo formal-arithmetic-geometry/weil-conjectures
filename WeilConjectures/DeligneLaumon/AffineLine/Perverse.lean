@@ -18,7 +18,7 @@ public import WeilConjectures.WeilSheaf.HomologyShift
 public import WeilConjectures.WeilSheaf.HomologySequence
 public import WeilConjectures.WeilSheaf.SupportSubobject
 public import WeilConjectures.Mathlib.CategoryTheory.Simple
-public import WeilConjectures.DeligneLaumon.AffineLine.FourierAmplitude
+public import WeilConjectures.DeligneLaumon.AffineLine.FourierTopSupport
 
 /-!
 # The curve perverse t-structure and Fourier exactness

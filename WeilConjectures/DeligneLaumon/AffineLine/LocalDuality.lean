@@ -54,49 +54,27 @@ proof would need the triviality of lisse `ℓ`-adic sheaves on `ℙ¹_k̄`.
 - `AlgebraicGeometry.exists_exact_compactlySupportedCohomology_boundary`: the boundary sequence
   in degrees zero and one.
 
-## TODO
+## Implementation notes
 
-- Prove the local boundary pairing. The proof of the blueprint uses Verdier duality, dualizing
-  complexes and the exceptional inverse image `Ri^!` for `ℚ̄_ℓ`-Weil complexes
-  (`thm-coef-qbar-verdier`, `fix-cor-verdier-exchange`, `def-weil-exceptional-inverse-image`),
-  none of which exists yet for `AlgebraicGeometry.WeilComplex`: the pro-étale Verdier dual
-  `AlgebraicGeometry.ProEtale.verdierDual` is for sheaves with values in a fixed coefficient
-  category, not for `ℚ̄_ℓ,X`-modules with a Weil structure.
-  The alternative local route, `(j_*F)_s̄ = V^{I_s}` and `(R¹j_*F)_s̄ = H¹(I_s, V)` for the
-  inertia representation `V` of `F` at `s`, followed by linear algebra over the tame quotient,
-  is not available either: it needs the stalk of `Rj̄_*` at `s̄` as the pro-étale cohomology of
-  the punctured strict henselization, and the comparison of pro-étale cohomology of a field
-  with `ℚ̄_ℓ,X`-coefficients with continuous Galois cohomology.
-- The maps `g` and `h` of `AlgebraicGeometry.exists_exact_compactlySupportedCohomology_boundary`
-  should be the maps induced by the canonical arrow `WeilSheaf.extensionByZeroToDirectImage j`
-  from `j_!F` to `j_*F`. This needs the identification `H_c(U, F) ≅ H_c(C, j_!F)` and the
-  functoriality of `compactlySupportedCohomology`; once they exist, the existential statement
-  should be replaced by one about these maps.
--/
-
-/-
-Plan of the proof of `exists_linearEquiv_dual_stalk_higherDirectImage` (work in progress).
-
-Route: the Verdier duality argument of the blueprint, with the nodes of other sections stated
-for Weil complexes in `WeilConjectures.WeilSheaf.VerdierDual` (each with `sorry`, each with its
-blueprint id), and with honest data:
-* `Rf^!` is the right adjoint of `Rf₀!` on Weil complexes (`WeilComplex.upperShriek`); that it
-  exists is the constructible adjunction of `thm-coef-qbar-verdier`;
-* `ω_X = Ra_X^! ℚ̄_ℓ` and `𝔻_X = RHom(-, ω_X)` (`ProEtaleWeilSheaf.derivedHom`).
-Nodes used: `thm-coef-qbar-verdier` (adjunction, typing of `𝔻`, exactness, biduality,
+The local boundary pairing follows the Verdier duality argument of the blueprint. The nodes of
+other sections it uses are stated for Weil complexes in `WeilConjectures.WeilSheaf.VerdierDual`,
+each with its blueprint id: `thm-coef-qbar-verdier` (the adjunction `Rf₀! ⊣ Rf^!`, biduality,
 `Rf^! = 𝔻 f^* 𝔻`), `fix-cor-verdier-exchange` (for `j`),
 `cor-pur-adic-and-rational-smooth-dualizing-complexes` (`ω_U = ℚ̄_ℓ(1)[2]`, `ω_Z = ℚ̄_ℓ`),
-`lem-sf-hom-finite-projective` (`RHom(P, N) = P^∨ ⊗ N` for lisse `P`),
-`prop-sf-localization-all-stages` (4) (`Ri^! Rj_* = 0`, unit of `Ri_! ⊣ Ri^!`).
-Proved here:
-1. `𝔻_C Rj_* G ≅ j_! 𝔻_U G` (exchange + biduality);
-2. `Ri^! 𝔻_C K ≅ 𝔻_Z i^* K` (`Rf^! = 𝔻 f^* 𝔻` + biduality);
-3. `Ri^! j_! G ≅ i^* Rj_* G [-1]` (open–closed triangle, `j^* Rj_* = 𝟭`, step (4) of the
-   localization node);
+`lem-sf-hom-finite-projective` (`RHom(P, N) = P^∨ ⊗ N` for lisse `P`) and
+`prop-sf-localization-all-stages` (`Ri^! Rj_* = 0`). The steps proved here are:
+1. `𝔻_C Rj_* G ≅ j_! 𝔻_U G` (exchange and biduality);
+2. `Ri^! 𝔻_C K ≅ 𝔻_Z i^* K`;
+3. `Ri^! j_! G ≅ i^* Rj_* G [-1]` (open–closed triangle and `j^* Rj_* = 𝟭`);
 4. `𝔻_Z A(F) ≅ A(F^∨(1))[1]` for `A(F) = i^* Rj_* F`, using `𝔻_U F ≅ F^∨(1)[2]`;
-5. `𝔻_Z` is t-exact on the finite reduced `Z` (dévissage from `𝔻_Z (G[0]) ≅ G^∨[0]`), hence
-   `𝓗⁻¹(𝔻_Z A) ≅ (𝓗¹ A)^∨` as Weil sheaves on `Z`; taking stalks at `s`, with
-   `(G^∨)_s = (G_s)^∨` and the twist `(1)` acting by `q_s⁻¹` on the local Frobenius, gives `e`.
+5. `𝔻_Z` is t-exact on the finite reduced `Z`, hence `𝓗⁻¹(𝔻_Z A) ≅ (𝓗¹ A)^∨` as Weil sheaves
+   on `Z`; taking stalks at `s`, with `(G^∨)_s = (G_s)^∨` and the twist `(1)` acting by `q_s⁻¹`
+   on the local Frobenius, gives the pairing.
+
+The maps `g` and `h` of `AlgebraicGeometry.exists_exact_compactlySupportedCohomology_boundary`
+are only asserted to exist; they should be the maps induced by
+`WeilSheaf.extensionByZeroToDirectImage j`, which needs the identification
+`H_c(U, F) ≅ H_c(C, j_!F)` and the functoriality of `compactlySupportedCohomology`.
 -/
 
 @[expose] public section

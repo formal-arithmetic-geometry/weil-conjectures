@@ -1176,6 +1176,7 @@ public import WeilConjectures.AlgebraicGeometry.GenericFiber.GeometricGenericFib
 public import WeilConjectures.AlgebraicGeometry.GenericFiber.ProjectiveCoordinate
 public import WeilConjectures.AlgebraicGeometry.GenericFiber.RadicialSmoothing
 public import WeilConjectures.AlgebraicGeometry.GenericFiniteness
+public import WeilConjectures.AlgebraicGeometry.GenericPointProjection
 public import WeilConjectures.AlgebraicGeometry.GenericStalkVanishingPropagation
 public import WeilConjectures.AlgebraicGeometry.GeometricFiberFiniteEtale
 public import WeilConjectures.AlgebraicGeometry.GeometricFibreDimension
@@ -3864,7 +3865,6 @@ public import WeilConjectures.RingTheory.UniversalFirstOrderThickeningUniqueness
 public import WeilConjectures.RingTheory.UnramifiedSmoothConormalChartFlat
 public import WeilConjectures.RingTheory.ZariskiPairFlatIntegralIsomorphism
 public import WeilConjectures.RingTheory.ZariskiPairRankOnePropagation
-public import WeilConjectures.Scratch.artingabber
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 public import WeilConjectures.SixFunctors.BaseChange.DerivedForget
@@ -4191,6 +4191,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectIma
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.TransitionMono
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.TransitionSplitMono
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Induction
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.CriticalMap
