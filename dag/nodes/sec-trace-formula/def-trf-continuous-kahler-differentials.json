@@ -1,0 +1,131 @@
+{
+ "id": "def-trf-continuous-kahler-differentials",
+ "kind": "definition",
+ "title": "Continuous Kähler differentials for an adic algebra",
+ "status": "split",
+ "statement": "Let $R$ and $B$ be commutative rings, $B$ an $R$-algebra, and $J\\subseteq B$ an ideal. For $n\\geq 0$ put $E_n=\\Omega_{(B/J^{n+1})/R}$, using Kähler differentials and their universal derivations [def-weil-pbc-kahler-differentials], with the $B$-module structure through the quotient map. The quotient map $B/J^{n+2}\\to B/J^{n+1}$ induces a $B$-linear map $t_n:E_{n+1}\\to E_n$ sending $\\mathrm d(b\\bmod J^{n+2})$ to $\\mathrm d(b\\bmod J^{n+1})$. Define $\\widehat\\Omega_{B/R,J}=\\{(z_n)\\in\\prod_{n\\geq0}E_n:t_n(z_{n+1})=z_n\\text{ for all }n\\geq0\\}$, with componentwise addition and $B$-scalar action. Its canonical $R$-derivation is $\\widehat{\\mathrm d}_{R,J}:B\\to\\widehat\\Omega_{B/R,J}$, $b\\mapsto(\\mathrm d(b\\bmod J^{n+1}))_{n\\geq0}$. This is the inverse limit over the positive adic quotients.",
+ "stmt_deps": [
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4D, the completion/Jacobian differential comparison, expanded using Algebra Tags 07BK and 00RO; the inverse-limit construction in lem-trf-completion-kahler-differential-comparison."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse limit modules of Kahler differentials quotient powers ideal continuous differential",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CommRingCat.KaehlerDifferential\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Differentials.Basic\", \"type\": \": ModuleCat.{u} B\", \"doc\": \"For a homomorphism $ f : A \\\\to B $ of commutative rings, this constructs the module of Kähler differentials $ \\\\Omega_{B/A} $ as an object in the category of $ B $-modules. It is the universal $ B $-mo\"}\n  {\"name\": \"KaehlerDifferential.fromIdeal\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → ↥(KaehlerDifferential.ideal R S) →ₗ[TensorProduct R S S] Ω[S⁄R]\", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $S$ be an $R$-algebra. The module of Kähler differentials $\\\\Omega_{S/R}$ is defined as the quotient $I/I^2$, where $I$ is the kernel of the multiplication\"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n  {\"name\": \"KaehlerDifferential.quotKerTotalEquiv\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → ((S →₀ S) ⧸ KaehlerDifferential.kerTotal R S) ≃ₗ[S] Ω[S⁄R]\", \"doc\": \"Let $R$ and $S$ be commutative rings, where $S$ is an $R$-algebra. This statement provides the canonical $S$-linear isomorphism between the module of Kähler differentials, $\\\\Omega_{S/R}$, and its cons\"}\n  {\"name\": \"Module.DirectLimit.inhabited\", \"module\": \"Mathlib.Algebra.Colimit.Module\", \"type\": \"{R : Type u_1} →\\n  [inst : Semiring R] →\\n    {ι : Type u_2} →\\n      [inst_1 : Preorder ι] →\\n        (G : ι → Type u_3) →\\n          [inst_2 : DecidableEq ι] →\\n            [inst_3 : (i : ι) → AddCommMonoid (G i)] →\\n              [inst_4 : (i : ι) → Module R (G i)] →\\n                (f : (i j : ι) → i \", \"doc\": \"Given a semiring $ R $, a preorder $ \\\\iota $, and a direct system of $ R $-modules $ \\\\{G_i\\\\} $ indexed by $ \\\\iota $ with transition maps $ f_{ij} $, the direct limit module $ \\\\varinjlim G_i $ is const\"}\n  {\"name\": \"TopModuleCat.isLimit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Topology.Basic\", \"type\": \"{J : Type*} [Category* J] {F : J ⥤ TopModuleCat R} {c : Cone (F ⋙ forget₂ _ (ModuleCat R))} (hc : IsLimit c) :\\n  IsLimit (ofCone c)\", \"doc\": \"Given a topological ring $ R $, a diagram $ F: J \\to \\text{TopModuleCat}(R) $, and a cone $ c $ over the composition of $ F $ with the forgetful functor to $ \\text{ModuleCat}(R) $ that satisfies the univ\"}\n  {\"name\": \"KaehlerDifferential.isLocalizedModule_map\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \"(M : Submonoid S) [IsLocalization M T] : IsLocalizedModule M (map R R S T)\", \"doc\": \"Let $R$ and $S$ be commutative rings, where $S$ is an $R$-algebra. Let $M$ be a submonoid of $S$, and let $T$ be the localization of $S$ at $M$. This instance states that the formation of the module o\"}\n  {\"name\": \"AdicCompletion.of_apply\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"(x : M) (n : ℕ) : (of I M x).1 n = mkQ (I ^ n • ⊤ : Submodule R M) x\", \"doc\": \"The canonical $ R $-linear map sending each element $ m $ of an $ R $-module $ M $ to its image in the $ I $-adic completion of $ M $, defined as the inverse limit $ \\\\varprojlim M/I^nM $. This map con\"}\n",
+   "date": "2026-10-17",
+   "verdict": "No existing inverse-limit module of continuous differentials found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "module of continuous Kahler differentials inverse limit of differentials of adic quotients",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"KaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type v\", \"doc\": \"The module of Kähler differentials $\\\\Omega_{S/R}$ for an $R$-algebra $S$, which is the universal $S$-module generated by symbols $ds$ for $s \\\\in S$ subject to the relations $d(r) = 0$ for $r \\\\in R$, $\"}\n  {\"name\": \"instR\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Module R ↥(KaehlerDifferential.ideal R S).cotangentIdeal\", \"doc\": \"For commutative rings $ R $ and $ S $ with $ S $ as an $ R $-algebra, the cotangent ideal $ \\\\mathfrak{I}/\\\\mathfrak{I}^2 $ (where $ \\\\mathfrak{I} $ is the Kähler differential ideal in $ S \\\\otimes_R S $)\"}\n  {\"name\": \"CommRingCat.KaehlerDifferential\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Basic\", \"type\": \"{A B : CommRingCat} → (A ⟶ B) → ModuleCat ↑B\", \"doc\": \"For a homomorphism $ f : A \\\\to B $ of commutative rings, this constructs the module of Kähler differentials $ \\\\Omega_{B/A} $ as an object in the category of $ B $-modules. It is the universal $ B $-mo\"}\n  {\"name\": \"KaehlerDifferential.D_tensorProductTo\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (x : ↥(KaehlerDifferential.ideal R S)),\\n  (KaehlerDifferential.D R S).tensorProductTo ↑x = (KaehlerDifferential.ideal R S).toCotangent x\", \"doc\": \"For any element $x$ in the ideal of the module of Kähler differentials $\\\\Omega_{S/R}$, the canonical $S$-linear map induced by the tensor product construction coincides with the quotient map sending $\"}\n  {\"name\": \"KaehlerDifferential.fromIdeal\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → ↥(KaehlerDifferential.ideal R S) →ₗ[TensorProduct R S S] Ω[S⁄R]\", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $S$ be an $R$-algebra. The module of Kähler differentials $\\\\Omega_{S/R}$ is defined as the quotient $I/I^2$, where $I$ is the kernel of the multiplication\"}\n  {\"name\": \"Algebra.Extension.toKaehler\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → (P : Algebra.Extension R S) → P.CotangentSpace →ₗ[S] Ω[S⁄R]\", \"doc\": \"The linear map from the cotangent space of the algebra extension to the module of Kähler differentials $\\\\Omega_{S/R}$, induced by the base change isomorphism for Kähler differentials that identifies $\"}\n  {\"name\": \"KaehlerDifferential.quotKerTotalEquiv_symm_apply\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"∀ (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (a : Ω[S⁄R]),\\n  (KaehlerDifferential.quotKerTotalEquiv R S).symm a =\\n    (KaehlerDifferential.derivationQuotKerTotal R S).liftKaehlerDifferential a\", \"doc\": \"For commutative rings $ R $ and $ S $ with $ S $ an $ R $-algebra, the inverse of the quotient-kernel-total equivalence $ \\\\Omega_{S/R} \\\\to (S \\\\to_0 S)/\\\\ker(\\\\text{total}) $ maps each Kähler differentia\"}\n  {\"name\": \"KaehlerDifferential.derivationQuotKerTotal\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Derivation R S ((S →₀ S) ⧸ KaehlerDifferential.kerTotal R S)\", \"doc\": \"For commutative rings $ R $ and $ S $ with $ S $ an $ R $-algebra, this is the universal derivation from $ S $ to the module of Kähler differentials $ \\\\Omega_{S/R} $, constructed as the quotient of th\"}\n",
+   "date": "2026-10-17",
+   "verdict": "No existing inverse-limit module of continuous differentials found."
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*[Dd]ifferential|[Dd]ifferential.*[Cc]ompletion",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "No existing inverse-limit module of continuous differentials found."
+  },
+  {
+   "tool": "grep source",
+   "query": "rg -n -i \"continuous.*kahler|kahler.*continuous|completion.*differential|differential.*completion\" /home/ubuntu/weil-src-slopmaster2/WeilConjectures",
+   "results": "No matches.",
+   "date": "2026-10-17",
+   "verdict": "No definition of the inverse-limit module; mentions in consumers or completed tensor modules do not construct it."
+  },
+  {
+   "tool": "grep side",
+   "query": "rg -n -i \"continuous.*kahler|kahler.*continuous|completion.*differential|differential.*completion\" /home/ubuntu/weil-newtargets-shared/lean/Sheaf/RingTheory",
+   "results": "/home/ubuntu/weil-newtargets-shared/lean/Sheaf/RingTheory/CompletedJacobianPresentation.lean:30:/-- The scalar extension of Kähler differentials to the maximal-ideal completion.\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/RingTheory/CompletedJacobianPresentation.lean:36:  LocalCompletion A ⊗[A] KaehlerDifferential k A\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/RingTheory/CompletedJacobianPresentation.lean:48:  ∃ D : Derivation k (LocalCompletion A) (CompletedDifferentials k A),\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/RingTheory/CompletedJacobianPresentation.lean:50:      (1 : LocalCompletion A) ⊗ₜ[A] KaehlerDifferential.D k A a) ∧\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/RingTheory/CompletedJacobianPresentation.lean:54:        (⊤ : Submodule (LocalCompletion A) (CompletedDifferentials k A))) ∧\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/RingTheory/CompletedJacobianPresentation.lean:55:    ∃ π : (Fin n → LocalCompletion A) →ₗ[LocalCompletion A] CompletedDifferentials k A,\n",
+   "date": "2026-10-17",
+   "verdict": "No definition of the inverse-limit module; mentions in consumers or completed tensor modules do not construct it."
+  },
+  {
+   "tool": "grep DAG",
+   "query": "rg -l -i \"continuous.*differential|differential.*continuous\" /home/ubuntu/weil-newtargets-shared/dag/nodes/sec-trace-formula",
+   "results": "/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-trace-formula/lem-trf-formal-power-series-continuous-free.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-trace-formula/lem-trf-completed-jacobian-differentials.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-trace-formula/def-trf-total-etale-augmentation-adjunction.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-trace-formula/lem-trf-specialization-external-product.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-trace-formula/lem-trf-nodal-normalization-adjunction.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-trace-formula/lem-trf-separable-closed-point-formal-presentation.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-trace-formula/def-trf-formal-power-series-partial-derivative.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-trace-formula/lem-trf-formal-power-series-continuous-differentials.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-trace-formula/lem-trf-formal-power-series-continuous-conormal.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-trace-formula/lem-trf-completion-kahler-differential-comparison.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-trace-formula/def-trf-completed-jacobian-presentation.json\n",
+   "date": "2026-10-17",
+   "verdict": "No definition of the inverse-limit module; mentions in consumers or completed tensor modules do not construct it."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-completion-kahler-differential-comparison",
+  "date": "2026-10-17",
+  "group": "Q31"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The inverse-limit module and canonical continuous differential in the completion/Jacobian comparison, Stacks Curves Tag 0C4D.",
+   "via": [
+    "lem-trf-completion-kahler-differential-comparison",
+    "lem-trf-completed-jacobian-differentials",
+    "lem-trf-separable-closed-point-formal-presentation",
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.RingTheory.ContinuousKaehlerDifferential",
+  "declaration": "KaehlerDifferential.Continuous",
+  "declarations": [
+   "KaehlerDifferential.adicTransition",
+   "KaehlerDifferential.continuousSubmodule",
+   "KaehlerDifferential.Continuous",
+   "KaehlerDifferential.continuousD"
+  ],
+  "file": "lean/Sheaf/RingTheory/ContinuousKaehlerDifferential.lean",
+  "statement": "abbrev Continuous (J : Ideal B)",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-69c7ff2cd",
+  "group": "Q31",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-69c7ff2cd",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Statement, dependencies, constructions, docstrings, edge cases, route-pivot compliance, report sections, and per-file compiler evidence checked; delivery is correct."
+ }
+}

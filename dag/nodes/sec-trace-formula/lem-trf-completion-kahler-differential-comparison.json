@@ -13,7 +13,10 @@
   "def-weil-pbc-separable-algebraic-extension",
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-kahler-differentials",
-  "def-weil-pbc-module-tensor-product"
+  "def-weil-pbc-module-tensor-product",
+  "def-trf-continuous-kahler-differentials",
+  "def-trf-completed-jacobian-presentation",
+  "def-trf-formal-local-presentation"
  ],
  "proof": [
   {
@@ -230,5 +233,27 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-938f31b58 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, sources, and unit/chapter route. Verified completion hypotheses, shifted inverse-limit maps, both composites including r=1, and edge cases. All 18 citation quotations match; no cycles, duplicates, prohibited dependencies, or long-step violations found. Detailed checks written to review.md; no fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompletionKaehlerDifferentialComparison",
+  "declaration": "Algebra.completion_kahler_differential_comparison",
+  "declarations": [
+   "Algebra.IsCompletedDifferentialExtension",
+   "Algebra.completion_kahler_differential_comparison"
+  ],
+  "file": "lean/Sheaf/RingTheory/CompletionKaehlerDifferentialComparison.lean",
+  "statement": "theorem completion_kahler_differential_comparison {k : Type u} {S : Type v} [Field k] [CommRing S] [Algebra k S] (hS : (algebraMap k S).FiniteType) (p : Ideal S) [p.IsMaximal] [FiniteDimensional k p.ResidueField] [Algebra.IsSeparable k p.ResidueField] [Algebra p.ResidueField (LocalCompletion (Localization.AtPrime p))] [IsScalarTower k p.ResidueField (LocalCompletion (Localization.AtPrime p))] (hσ : ∀ c : p.ResidueField, AdicCompletion.evalOneₐ (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (algebraMap p.ResidueField (LocalCompletion (Localization.AtPrime p)) c) = c) : ∃ D : Derivation k (LocalCompletion (Localization.AtPrime p)) (CompletedDifferentials k (Localization.AtPrime p)), IsCompletedDifferentialExtension k (Localization.AtPrime p) D ∧ (∀ D' : Derivation k (LocalCompletion (Localization.AtPrime p)) (CompletedDifferentials k (Localization.AtPrime p)), IsCompletedDifferentialExtension k (Localization.AtPrime p) D' → D' = D) ∧ ∃ e : CompletedDifferentials k (Localization.AtPrime p) ≃ₗ[ LocalCompletion (Localization.AtPrime p)] KaehlerDifferential.Continuous p.ResidueField (LocalCompletion (Localization.AtPrime p)) ((IsLocalRing.maximalIdeal (Localization.AtPrime p)).map (algebraMap (Localization.AtPrime p) (LocalCompletion (Localization.AtPrime p)))), (∀ a : Localization.AtPrime p, e ((1 : LocalCompletion (Localization.AtPrime p)) ⊗ₜ[Localization.AtPrime p] KaehlerDifferential.D k (Localization.AtPrime p) a) = KaehlerDifferential.continuousD _ _ _ (algebraMap (Localization.AtPrime p) (LocalCompletion (Localization.AtPrime p)) a)) ∧ (∀ e' : CompletedDifferentials k (Localization.AtPrime p) ≃ₗ[ LocalCompletion (Localization.AtPrime p)] KaehlerDifferential.Continuous p.ResidueField (LocalCompletion (Localization.AtPrime p)) ((IsLocalRing.maximalIdeal (Localization.AtPrime p)).map (algebraMap (Localization.AtPrime p) (LocalCompletion (Localization.AtPrime p)))), (∀ a : Localization.AtPrime p, e' ((1 : LocalCompletion (Localization.AtPrime p)) ⊗ₜ[Localization.AtPrime p] KaehlerDifferential.D k (Localization.AtPrime p) a) = KaehlerDifferential.continuousD _ _ _ (algebraMap (Localization.AtPrime p) (LocalCompletion (Localization.AtPrime p)) a)) → e' = e) ∧ ∀ x : LocalCompletion (Localization.AtPrime p), e (D x) = KaehlerDifferential.continuousD _ _ _ x",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-69c7ff2cd",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Statement, dependencies, constructions, docstrings, edge cases, route-pivot compliance, report sections, and per-file compiler evidence checked; delivery is correct."
  }
 }

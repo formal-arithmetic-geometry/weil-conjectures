@@ -281,5 +281,23 @@
   "group": "Q19",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q19-c8f97e61a (reviewer sub-agent of L); spot-checked: Reviewed the item and new node against Stacks Tags 0570 and 056Y, all cited DAG statements, the unit/chapter route, and edge cases. The induction, base-case quasi-finiteness, fibre quotient, flat hypersurface, and dimension/depth descent are correctly supported. No duplicate, route violation, long-step issue, false hypothesis, or missing repair was found. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.CohenMacaulayClosedPointSlice",
+  "declaration": "AlgebraicGeometry.exists_flat_locallyQuasiFinite_slice_of_closed_fibre_depth_eq_ringKrullDim",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/CohenMacaulayClosedPointSlice.lean",
+  "statement": "theorem exists_flat_locallyQuasiFinite_slice_of_closed_fibre_depth_eq_ringKrullDim {X S : Scheme.{u}} (f : X ⟶ S) [Flat f] [LocallyOfFinitePresentation f] (s : S) (x : f.fiber s) (hx : x ∈ closedPoints (f.fiber s)) [IsNoetherianRing ((f.fiber s).presheaf.stalk x)] (hdepth : (IsLocalRing.depth (R := (f.fiber s).presheaf.stalk x) ((f.fiber s).presheaf.stalk x) : WithBot ℕ∞) = ringKrullDim ((f.fiber s).presheaf.stalk x)) : ∃ (Z : Scheme.{u}) (i : Z ⟶ X) (z : (i ≫ f).fiber s), i ((i ≫ f).fiberι s z) = f.fiberι s x ∧ Flat (i ≫ f) ∧ LocallyOfFinitePresentation (i ≫ f) ∧ (∀ z' : (i ≫ f).fiber s, z' = z) ∧ (i ≫ f).IsLocallyQuasiFinite",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a59d5394d",
+  "group": "Q55",
+  "result": "fix",
+  "note": "Statement, dependencies, source, universes, edge cases, and per-file compilation passed. Replaced the H11 second-reading placeholder with a complete independent review in fixes/lem-trf-cm-closed-point-flat-quasifinite-slice.report.md. Full findings are in review.md; no Lean or node changes needed."
  }
 }
