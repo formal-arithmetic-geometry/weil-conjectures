@@ -11,9 +11,56 @@
   "def-weil-t-structure",
   "def-weil-endofunctor-fixed-pair-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an integer $n$. Since $\\Phi$ is exact it commutes with $[1]$ up to natural isomorphism, and $\\mathcal T^{\\le n}=\\mathcal T^{\\le0}[-n]$, $\\mathcal T^{\\ge n}=\\mathcal T^{\\ge0}[-n]$ are strictly full [def-weil-t-structure]; hence $\\Phi$ preserves $\\mathcal T^{\\le n}$ and $\\mathcal T^{\\ge n+1}$ for every $n$. For $X\\in\\mathcal T$ take the truncation triangle $\\tau^{\\le n}X\\xrightarrow{\\iota_X}X\\xrightarrow{\\pi_X}\\tau^{\\ge n+1}X\\to$ of [lem-weil-heart-short-exact-triangles], clause 1. Applying $\\Phi$ gives a distinguished triangle $\\Phi\\tau^{\\le n}X\\to\\Phi X\\to\\Phi\\tau^{\\ge n+1}X\\to$ with outer terms in $\\mathcal T^{\\le n}$ and $\\mathcal T^{\\ge n+1}$, so by the uniqueness up to unique isomorphism in that clause there are unique isomorphisms $c_X:\\Phi\\tau^{\\le n}X\\xrightarrow{\\sim}\\tau^{\\le n}\\Phi X$, $d_X:\\Phi\\tau^{\\ge n+1}X\\xrightarrow{\\sim}\\tau^{\\ge n+1}\\Phi X$ with $\\iota_{\\Phi X}c_X=\\Phi(\\iota_X)$ and $d_X\\Phi(\\pi_X)=\\pi_{\\Phi X}$. For $f:X\\to Y$, both $c_Y\\Phi(\\tau^{\\le n}f)$ and $\\tau^{\\le n}(\\Phi f)c_X$ are maps $\\Phi\\tau^{\\le n}X\\to\\tau^{\\le n}\\Phi Y$ whose composite with $\\iota_{\\Phi Y}$ is $\\Phi(f\\iota_X)$; by the right adjunction of the same clause (source in $\\mathcal T^{\\le n}$) they agree, so $c$ is natural; dually $d$ is natural. For a fixed pair $(X,\\theta)$ put $\\theta^{\\le n}=\\tau^{\\le n}(\\theta)\\circ c_X:\\Phi\\tau^{\\le n}X\\xrightarrow{\\sim}\\tau^{\\le n}X$ and $\\theta^{\\ge n+1}=\\tau^{\\ge n+1}(\\theta)\\circ d_X$. Then $\\iota_X\\theta^{\\le n}=\\iota_X\\tau^{\\le n}(\\theta)c_X=\\theta\\,\\iota_{\\Phi X}c_X=\\theta\\,\\Phi(\\iota_X)$, so $\\iota_X$ is a morphism of fixed pairs [def-weil-endofunctor-fixed-pair-category]; dually for $\\pi_X$. If $f:(X,\\theta)\\to(Y,\\theta')$ is a morphism of fixed pairs, then $\\tau^{\\le n}(f)\\theta^{\\le n}=\\tau^{\\le n}(f\\theta)c_X=\\tau^{\\le n}(\\theta'\\Phi f)c_X=\\tau^{\\le n}(\\theta')c_Y\\Phi(\\tau^{\\le n}f)=\\theta'^{\\le n}\\Phi(\\tau^{\\le n}f)$ by naturality of $c$, and dually for $\\tau^{\\ge n+1}$. Identities and composites are those of $\\mathcal T$, so these assignments are functors on $\\mathcal T^\\Phi$ lifting $\\tau^{\\le n},\\tau^{\\ge n+1}$ (every $\\tau^{\\ge m}$ is some $\\tau^{\\ge n+1}$).",
+   "uses": [
+    "def-weil-t-structure",
+    "def-weil-endofunctor-fixed-pair-category",
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Propositions 1.3.3–1.3.4; uniqueness and functoriality of truncation triangles"
+   }
+  },
+  {
+   "text": "Let $(M,\\theta_M)$ be a fixed pair with $M\\in\\mathcal T^{\\le n}$ and $(X,\\theta)$ any fixed pair. By the right adjunction of [lem-weil-heart-short-exact-triangles], clause 1, $h\\mapsto\\iota_Xh$ is a bijection $\\operatorname{Hom}_{\\mathcal T}(M,\\tau^{\\le n}X)\\to\\operatorname{Hom}_{\\mathcal T}(M,X)$. If $h$ is equivariant so is $\\iota_Xh$, a composite of morphisms of fixed pairs (step 1, [def-weil-endofunctor-fixed-pair-category]). Conversely let $g=\\iota_Xh$ be equivariant. The two maps $h\\theta_M$ and $\\theta^{\\le n}\\Phi(h)$ from $\\Phi M$ to $\\tau^{\\le n}X$ satisfy $\\iota_Xh\\theta_M=g\\theta_M=\\theta\\Phi(g)$ and $\\iota_X\\theta^{\\le n}\\Phi(h)=\\theta\\Phi(\\iota_X)\\Phi(h)=\\theta\\Phi(g)$; since $\\Phi M\\in\\mathcal T^{\\le n}$ (step 1), injectivity of the same adjunction bijection for the source $\\Phi M$ gives $h\\theta_M=\\theta^{\\le n}\\Phi(h)$, so $h$ is equivariant. Thus the bijection restricts to $\\operatorname{Hom}_{\\mathcal T^\\Phi}(M,\\tau^{\\le n}X)\\cong\\operatorname{Hom}_{\\mathcal T^\\Phi}(M,X)$. Dually, for a fixed pair $M$ with $M\\in\\mathcal T^{\\ge n+1}$, $h\\mapsto h\\pi_X$ restricts the left adjunction bijection to $\\operatorname{Hom}_{\\mathcal T^\\Phi}(\\tau^{\\ge n+1}X,M)\\cong\\operatorname{Hom}_{\\mathcal T^\\Phi}(X,M)$: if $g=h\\pi_X$ is equivariant, the two maps $h\\theta^{\\ge n+1}$ and $\\theta_M\\Phi(h)$ from $\\Phi\\tau^{\\ge n+1}X$ to $M$ both give $g\\theta=\\theta_M\\Phi(g)$ after precomposition with $\\Phi(\\pi_X)=d_X^{-1}\\pi_{\\Phi X}$ (for the first, $h\\tau^{\\ge n+1}(\\theta)d_X\\Phi(\\pi_X)=h\\tau^{\\ge n+1}(\\theta)\\pi_{\\Phi X}=h\\pi_X\\theta$); since $M\\in\\mathcal T^{\\ge n+1}$, injectivity of the left adjunction bijection for $\\Phi X$, transported along $d_X$, makes them equal, so $h$ is equivariant.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category",
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Proposition 1.3.3; truncation adjunctions, with the fixed-pair naturality consequence made explicit"
+   }
+  },
+  {
+   "text": "Suppose first $X\\in\\mathcal T^{\\ge0}$ and let $(M,\\theta_M)$ be a fixed pair with $M\\in\\mathcal T^{\\le-1}$. Write $M=A[1]$ with $A\\in\\mathcal T^{\\le0}$; then $\\operatorname{Hom}_{\\mathcal T}(M,X)\\cong\\operatorname{Hom}_{\\mathcal T}(A,X[-1])=0$ by axiom 2 of [def-weil-t-structure]. So the underlying morphism of any equivariant $M\\to X$ is zero, and the morphism is zero since the forgetful functor of [def-weil-endofunctor-fixed-pair-category] is faithful (its zero morphism is the underlying zero map). Conversely assume every equivariant map from such a fixed pair to $(X,\\theta)$ is zero. By step 1 with $n=-1$, $(A,\\theta^{\\le-1})=(\\tau^{\\le-1}X,\\theta^{\\le-1})$ is a fixed pair with $A\\in\\mathcal T^{\\le-1}$ and $\\iota_X:A\\to X$ is equivariant, so $\\iota_X=0$. Under the bijection of step 2, $\\operatorname{id}_A\\in\\operatorname{Hom}_{\\mathcal T^\\Phi}(A,A)$ maps to $\\iota_X=0$, as does $0$; injectivity gives $\\operatorname{id}_A=0$, so $A$ is a zero object. In the distinguished truncation triangle $A\\to X\\xrightarrow{\\pi_X}\\tau^{\\ge0}X\\to A[1]$ of [lem-weil-heart-short-exact-triangles], clause 1, the two terms $A$, $A[1]$ are zero, so $\\pi_X$ is an isomorphism (long exact Hom sequence; elementary). As $\\tau^{\\ge0}X\\in\\mathcal T^{\\ge0}$ and the class is strictly full, $X\\in\\mathcal T^{\\ge0}$. This is BBD 1.3.4 ((a)$\\Leftrightarrow$(b)) with Hom taken in $\\mathcal T^\\Phi$. Edge cases: $X=0$ satisfies both sides; for $X\\in\\mathcal T^{\\le-1}$ nonzero, $(X,\\theta)$ itself is a test pair with $\\operatorname{id}\\neq0$, matching $X\\notin\\mathcal T^{\\ge0}$.",
+   "uses": [
+    "def-weil-t-structure",
+    "def-weil-endofunctor-fixed-pair-category",
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Proposition 1.3.4; orthogonality characterization, transported through fixed-pair adjunction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-t-structure",
+  "def-weil-endofunctor-fixed-pair-category",
+  "lem-weil-heart-short-exact-triangles"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+  "place": "Propositions 1.3.3–1.3.4, with the fixed-pair consequence expanded from uniqueness and naturality"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -59,7 +106,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-a1-fourier-t-exact",
@@ -76,5 +123,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-fixed-pair-truncation-orthogonality",
+  "worker": "stage1",
+  "summary": "No new child nodes are needed: the existing truncation-and-adjunction node [lem-weil-heart-short-exact-triangles] states the underlying universal properties and orthogonality, while the fixed-pair equations are checked directly from the definition and the canonical uniqueness comparisons. The proof first transports both truncation functors and their maps through the t-exact autoequivalence, then restricts the two truncation adjunction bijections to equivariant morphisms, and finally applies the lifted -1 truncation to prove the fixed-pair right-orthogonality criterion. The statement and hypotheses were retained unchanged.",
+  "blueprint": "Realizes thm-a1-fourier-t-exact.proof.md Step 3's appeal to truncation orthogonality and its Frobenius-pair interpretation; the generic fixed-pair lemma is made explicit here.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-ce5e837ee",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-ce5e837ee (reviewer sub-agent of L); spot-checked: I read all of the item's mathematics against its sources. The statement is true and is the fixed-pair form of BBD Prop. 1.3.3 (p.29: truncation adjoints, triangle unique up to unique iso) and 1.3.4 (p.30: D^{>=1} is the right orthogonal of D^{<=0}), shifted by one. It matches blueprint main-20261015 thm-a1-fourier-t-exact.proof.md Step 3 (lines 107-130) and what parent thm-a1-fourier-t-exact uses in steps 2, 11 and 13. The extra hypothesis that the inverse of Phi preserves the classes is unused but harmless; the target is not weakened. Small cases tested: X=0; a nonzero X in T^{<=-1}, which is its own test pair; Phi=id, which gives BBD 1.3.4 with ordinary Homs. Cited statements checked: def-weil-t-structure axiom 2 and strict fullness; def-weil-endofunctor-fixed-pair-category morphism equation and faithful forgetful functor; lem-weil-heart-short-exact-triangles clause 1 (uniqueness, functors, both adjunctions, boundedness not needed). Route: lem-weil-heart-short-exact-triangles has slopmaster2 state closed, so it is a finished node and not on the route; no tool_uses declared or accepted. No new nodes. No duplicate of a fixed-pair truncation or orthogonality lemma found by grep over dag/nodes. No SGA citation. This is not a target node. Repairs, in one file (fixes/dag/nodes/sec-deligne-laumon-a1/lem-a1-fixed-pair-truncation-orthogonality.json), step texts only, all other fields unchanged: (1) Step 3 credited the Hom-vanishing to lem-weil-heart-short-exact-triangles, whose statement does not contain it (error C4). It now cites def-weil-t-structure axiom 2 with M=A[1], which was already in the step's uses. (2) Steps 1-2 said only that naturality and the fixed-pair equations make the maps equivariant (error E5). They now give the comparisons c_X and d_X from uniqueness, naturality of c from the adjunction, the equivariance equations for iota, pi and tau(f), and both directions of the restricted adjunction bijections, including the fact used there that Phi M stays in T^{<=n} (resp. T^{>=n+1}).; 1 file(s) fixed by the reviewer"
  }
 }
