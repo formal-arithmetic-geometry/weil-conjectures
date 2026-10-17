@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-weil-size-convention",
   "def-weil-pbc-simplicial-set",
-  "def-weil-pbc-sheafification"
+  "def-weil-pbc-sheafification",
+  "def-cbc-local-simplicial-presheaf-maps"
  ],
  "proof": [
   {
@@ -247,5 +248,23 @@
   "group": "Q40",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-7d07b66c4 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new leaf, every cited statement, unit sk-prop-sf-cbc, and Dugger–Isaksen arXiv:math/0205025 (fetched; Lemma 2.1, Def 3.1/RH, Prop 3.6, Lemma 5.1, Thm 5.2, Lemma 6.8, Prop 6.9, Def 6.11, Thm 6.15). Statement: it is exactly the forward direction of DI Thm 6.15(a) for objectwise Kan F and G, with the hypothesis in DI Prop 6.9 form. The four equations are the universal property of RH(Δⁿ,∂Δⁿ), no fibration hypothesis is imposed, and choices need not be compatible. Small cases checked: n=0, n=1, trivial site, empty sieve, empty F. Steps 1–9 match DI Lemma 6.8, Prop 3.6, Lemma 5.1, Thm 5.2 and the 6.15 proof. The face compatibilities in step 8, including n=1, the horn cone vertex, the quotients K/A and D/A, and the finite sieve assembly were all verified by hand. New leaf lem-cbc-set-presheaf-sheafification-local-bijection: confirmed against Mathlib LocallyBijective.lean:114-116 and 160-161, Localization.lean:80-82, LocallyInjective.lean:71-73, LocallySurjective.lean:94-100 and LeftExact.lean:313-314. It passes B1-B9. The nearest existing node, lem-weil-pbc-large-set-sheafification, is a universe generalization in another unit with no explicit clauses; it is noted, not a duplicate, and the leaf is kept. No cycle: the item's 64-node closure excludes it, and the local-acyclic parent is not cited. No duplicate of the item exists in the DAG. Accepted tool_use: lem-coef-kan-quillen-model-right-proper-core, the generic Kan-Quillen model axioms. FIX: step 5 inferred weak contractibility of the horn from a contraction of Δⁿ without citing the needed fact (C1/C2). The step now writes the contraction [n]x[1]->[n] and cites lem-cbc-simplicial-homotopy-equivalence-weak. proof_deps is unchanged and still equals the union of the uses. The corrected item file is in fixes/dag/nodes/sec-smooth-purity/. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-35c581ee1",
+  "group": "NC",
+  "result": "pass",
+  "note": "Clause-by-clause check against node and DI Thm 6.15(a): small site, Kan values, IsLocalWeakEquivalence (literal pi0 sheafification iso plus local surjectivity/injectivity of Pi on all objects and vertices, equivalent to slice homotopy-sheaf isos, not stronger), boundary square, covering sieve with independent lifts, and all four equations (iota0/iota1 orientation, fixed boundary via whisker/fst) match. n=0 (boundary_zero), n=1, empty sieve and empty values not excluded; universes only the dependency's max u w. Node differs from base only in lean and stmt_deps gaining the landed def-cbc-local-simplicial-presheaf-maps; lean.statement verbatim. One sorry theorem, no defs, docstrings carry source, blueprint tag and all nine proof steps; no line over 100 chars; report has Worker report and Second reading by NC. nt_compile --json rc=0 with no errors or warnings; probe confirmed elaborated universes, axioms and that errors are reported. No findings needing action."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LocalWeakEquivalenceHomotopyLifting",
+  "declaration": "CategoryTheory.LocalSimplicialPresheaf.local_relative_homotopy_lifting",
+  "file": "lean/Sheaf/CategoryTheory/LocalWeakEquivalenceHomotopyLifting.lean",
+  "statement": "theorem local_relative_homotopy_lifting {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (F G : Cᵒᵖ ⥤ SSet.{max u w}) (hF : ∀ V : C, SSet.KanComplex (F.obj (op V))) (hG : ∀ V : C, SSet.KanComplex (G.obj (op V))) (f : F ⟶ G) (hw : IsLocalWeakEquivalence J f) (V : C) (n : ℕ) (a : (SSet.boundary n : SSet.{max u w}) ⟶ F.obj (op V)) (b : (SSet.stdSimplex.obj ⦋n⦌ : SSet.{max u w}) ⟶ G.obj (op V)) (hab : a ≫ f.app (op V) = (SSet.boundary n).ι ≫ b) : ∃ S : Sieve V, S ∈ J V ∧ ∀ (W : C) (r : W ⟶ V), S r → ∃ (c : SSet.stdSimplex.obj ⦋n⦌ ⟶ F.obj (op W)) (H : SSet.stdSimplex.obj ⦋n⦌ ⊗ SSet.stdSimplex.obj ⦋1⦌ ⟶ G.obj (op W)), (SSet.boundary n).ι ≫ c = a ≫ F.map r.op ∧ SSet.ι₀ ≫ H = c ≫ f.app (op W) ∧ SSet.ι₁ ≫ H = b ≫ G.map r.op ∧ (SSet.boundary n).ι ▷ SSet.stdSimplex.obj ⦋1⦌ ≫ H = fst _ _ ≫ a ≫ F.map r.op ≫ f.app (op W)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

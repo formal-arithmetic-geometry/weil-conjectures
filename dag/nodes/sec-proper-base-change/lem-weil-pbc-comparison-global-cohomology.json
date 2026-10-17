@@ -105,27 +105,28 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-385aceae8 (reviewer sub-agent of L); spot-checked: The mathematics and source route check out. Repair the new node’s incorrect citation of the étale derived-category definition for a pro-étale complex, add the exact pro-étale module dependency, define both derived section functors at terminal objects, and add complete created metadata. Corrected JSON is in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-derived-sections-pushforward.json; full checks are in review.md.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ComparisonGlobalCohomology",
-  "declaration": "AlgebraicGeometry.ProEtale.isIso_comparisonGlobalSections",
+  "module": "Sheaf.AlgebraicGeometry.ComparisonGlobalCohomologyFiniteNormalized",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_finiteComparisonGlobalSections",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.comparisonGlobalSections",
-   "AlgebraicGeometry.ProEtale.isIso_comparisonGlobalSections"
+   "AlgebraicGeometry.ProEtale.finiteComparisonGlobalSectionsUnit",
+   "AlgebraicGeometry.ProEtale.finiteComparisonGlobalSections",
+   "AlgebraicGeometry.ProEtale.isIso_finiteComparisonGlobalSections"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/ComparisonGlobalCohomology.lean",
-  "statement": "theorem isIso_comparisonGlobalSections (T : Scheme.{u}) (Λ : Type (u + 1)) [Ring Λ] [Finite Λ] : IsIso (comparisonGlobalSections T Λ)",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComparisonGlobalCohomologyFiniteNormalized.lean",
+  "statement": "theorem isIso_finiteComparisonGlobalSections (T : Scheme.{u}) (A : Type (u + 1)) [Ring A] [Finite A] : IsIso (finiteComparisonGlobalSections T A)",
   "branch": "newtargets-dag",
-  "by": "ND",
-  "date": "2026-10-15",
-  "existing": false
+  "by": "Q76",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The old recorded module cannot be imported against the live finite-coefficient library: the retired ProEtale.Derived.LowerShriek and UpperLowerStar.Iso collide with their FiniteCoefficient owners. This interface states exactly the same finite-ring D+ ordinary global comparison using right derived terminal evaluation and the actual adjunction unit; canonical right-derived-plus compatibility gives its ordinary RΓ formulation. No lower-shriek API, arbitrary natural isomorphism, or extra assumption is used."
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-13dd591b2",
-  "group": "ND",
+  "reviewer": "NT-stage2-cc-62c866232",
+  "group": "Q76",
   "result": "pass",
-  "note": "Reviewed immutable statements, dependencies, canonical map, source correction and both citers, universes, edge cases, docstrings, and report sections. Per-file scompile.py reproduced cleanly. No delivery errors found; checks recorded in review.md.",
-  "statement_corrected": true
+  "note": "Read the node, all 19 statement deps, the source/blueprint places, both delivered modules, the report and the exact upstream/side declarations. Every hypothesis and conclusion clause matches: any n and N with l^N A = 0 and no e|n restriction; A(1) is finiteEtaleTateSheaf (A tensor mu_m); f is fixed by the 1 tensor z generator; kappa is built from the recorded Kummer extClass (same Yoneda convention as kummerDelta0) through the cocycle-normalized Ext comparison; H^q_Z uses the recorded generic supportedSectionsFunctor over the recorded Punctured open, valued in ModuleCat A; the boundary is fixed as the snake delta with IsIso; rho is a module iso with normalization and uniqueness; vanishing holds for all q != 2; residue r*1 for all c, r; the idealX valuation clauses give ord_0; the pro-etale version uses comparisonUpperStar with IsIso cU and consistent cZ squares. Helpers are justified because the recorded affine-line Kummer class needs e|n and recorded etale support is AddCommGrp-only; no hollow defs; one sorry per file. The section 1(B) repair of lem-weil-pbc-comparison-global-cohomology is verified: the old module fails with an import collision on ProEtale.Derived.LowerShriek vs FiniteCoefficient.Derived.LowerShriek; the replacement states the same D+ comparison with no added hypothesis, lean-only with a note. Added stmt_deps are acyclic; statements verbatim; lines at most 100; nt_compile --json of both siblings is clean (main module 15.6s/19.6s). Minor only: superseded second-reading stub; the global-comparison dep is recorded in stmt_deps although only imported for the proof plan."
  },
  "statement_change": {
   "date": "2026-10-15",

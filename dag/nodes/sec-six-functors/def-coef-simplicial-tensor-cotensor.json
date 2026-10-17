@@ -90,14 +90,16 @@
   "declaration": "CategoryTheory.SimplicialTensorCotensor",
   "declarations": [
    "CategoryTheory.SimplicialTensorCotensor",
-   "CategoryTheory.SimplicialTensorCotensor.tensorMap"
+   "CategoryTheory.SimplicialTensorCotensor.tensorMap",
+   "CategoryTheory.SimplicialTensorCotensor.parameterMap"
   ],
   "file": "lean/Sheaf/CategoryTheory/SimplicialTensorCotensor.lean",
   "statement": "structure SimplicialTensorCotensor (C : Type u) [Category.{v} C] [SimplicialCategory C]",
   "branch": "newtargets-dag",
-  "by": "Q63",
-  "date": "2026-10-16",
-  "existing": false
+  "by": "N0",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Section 1(B) interface repair: the recorded structure and tensorMap provide objects, universal enriched elements, and tensor maps in the category variable, but expose no map induced by a simplicial-set parameter map. The module preserves all existing declarations and adds parameterMap via the inverse enriched representing isomorphism. Equivalent helpers in the downstream bar-resolution/undercategory modules cannot be imported here: their dependency paths return to this recognition item."
  },
  "reviewed": {
   "date": "2026-10-16",
@@ -108,11 +110,11 @@
   "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-d08ad03a4",
-  "group": "Q63",
+  "reviewer": "NT-stage2-cc-06d2bb69c",
+  "group": "N0",
   "result": "pass",
-  "note": "Read the node, both stmt deps, the new def-coef-simplicial-tensor-cotensor node, both modules, the report (Worker report and Second reading by Q63 present) and the Mathlib declarations used. All 12 hypothesis and conclusion clauses match Riehl 13.2.1 as stated in the node: SimplicialCategory, HasCo/LimitsOfSize.{v,v}, IsLocallyPresentable.{v} (regular κ, κ-presentable generators), canonical universal-element tensor/cotensor isos and tensorMap, J.IsSmall, rlp/llp, hT for all K. The arrow enrichment is Mathlib enrichedOrdinaryCategory on Fin 2 ⥤ C, which is the square equalizer. The naturality conjuncts have the right eHomWhisker directions (i_g b = E(b,c) i_f, p_g E(b,c) = c p_f). Only lean and stmt_deps (gaining the new node) changed on the item; the deps are byte-identical; lean.statement strings are verbatim; the new-node fields conform to H12. No duplicate in Mathlib or the project. No hollow data, only sorry, docstrings present, universes u and v independent. nt_compile.py --json: both files clean (0.9 s and 1.1 s), axioms propext/sorryAx/choice/Quot.sound. No findings of substance."
+  "note": "Read node, both stmt deps (boundary-collapse-test node and Lean, tensor-cotensor node and module), delivered modules, report and records. Clause by clause: inherited complete/cocomplete and functorial-factorization conventions only; hall; Mathlib IsStableUnderFilteredColimits.{w,w} (arbitrary colimit cocones of objectwise-W maps, i.e. arrow-category filtered colimits); hpushout pins the canonical pushout-product map by both pushout equations and requires Cofibration q; hcollapse uses the [m]->[0] parameter map into the chosen X⊗Δ⁰; conclusion is J.rlp of the correct pullback.lift (eHomWhiskerRight/Left, eHom_whisker_exchange.symm) plus a realization-based weak homotopy equivalence when i or p is weak. Universes u,v,w independent, nothing auto-bound. §1(B) parameterMap is canonical, built from real data via the inverse representing iso, same pattern as tensorMap, with source/blueprint docstring; dependency node changes only in lean. lean.statement verbatim for item and dependency; Worker report and Second reading by N0 present; proof is sorry only; six-step docstring. nt_compile.py --json on both files: rc=0, no errors or warnings. Non-blocking: downstream barTensorParameterMap/tensorTranspose duplicate parameterMap and could later be consolidated onto it."
  }
 }

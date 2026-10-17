@@ -275,5 +275,24 @@
   "group": "Q65",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-b85111ccb (reviewer sub-agent of L); spot-checked: The delivery is one commit with the item and its report, and no new nodes. Statement: this is the HTT 2.1.2.7/2.1.2.10 lifting property: the pushout product of {0}->Delta^1 with a monomorphism A ⊆ K lifts against any left fibration of arbitrary simplicial sets. I tested it on K empty, A=K, A empty with K a point (which is exactly the Lambda^1_0 lifting in the definition), and E empty. I also checked that the endpoint orientation matters: with the final endpoint the statement fails for the left fibration {1}->Delta^1. The citer, straightening step 5 (K=E arbitrary, A=X_c), uses it within its hypotheses. Step 1: the opposite operation from relative-cone-equivalence clause (4) uses the same reversal formula and is an automorphism of sSet; r_n is simplicial and sends the opposite of Lambda^n_i to Lambda^n_{n-i}, so {0}^op goes to {1}=Lambda^1_1, a right horn. j^op is literally the pushout product in right-anodyne-product with i=Lambda^1_1 and k=A^op->K^op. Closure under isomorphisms and composition covers the isomorphic arrow. Step 2: the horn index ranges reverse correctly, so p^op is a right fibration. The exponentiation node allows arbitrary small simplicial sets. (h^op,u^op) is a target vertex, and vertex surjectivity (Stacks 08NL, simplicial.tex lines 5533-5545) gives an exact lift. Step 3 is genuinely elementary: the pushout equals the union degree by degree, and taking opposites twice returns the original maps. I found no cycle in the transitive closure, and all cited statements are in the same unit, so no tool_uses are needed. I searched the DAG for left-anodyne, cylinder, pushout-product and fibration-exponentiation nodes and found no duplicate. No SGA is used. HTT and Kerodon are online only, so I could not check them from literature/; they are recorded as WANTED, with proof_origin set to agent. No changes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3d04e631e",
+  "group": "NN",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: A : K.Subcomplex; horn 1 0 = {0} (Mathlib Horn.lean:32, orientation checked; the {1} variant would be false); A.unionProd (horn 1 0) = K×{0} ∪ A×Δ¹ (Monoidal.lean:248); leftFibration = HTT Def 2.0.0.3 lifting for n≥1, 0≤i<n with no qcat instances; compat and both conclusions exact; no extra hypotheses, uniqueness or universe restriction; lean.statement verbatim in file. Math is HTT Cor 2.1.2.7/2.1.2.10. Edge cases A=⊥, A=K, empty K/E/B, n=0 fine. No definitions, sorry only, source/blueprint docstrings present, stmt_deps imported publicly via recorded modules, no duplicate in Mathlib or side lean/Sheaf. Report has real Worker report and Second reading by NN sections (lost handoff disclosed). nt_compile.py --json rc=0, no errors or warnings. Cosmetic only: report lines 13-14 have 'Definition the project server' where a redaction replaced the HTT numbers 2.0.0.3/2.1.2.7/2.1.2.10; node and docstrings carry the correct places."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LeftFibrationRelativeCylinderLifting",
+  "declaration": "SSet.Enhanced.leftFibration_relativeCylinder_lifting",
+  "file": "lean/Sheaf/CategoryTheory/LeftFibrationRelativeCylinderLifting.lean",
+  "statement": "theorem leftFibration_relativeCylinder_lifting {K E B : SSet.{u}} (A : K.Subcomplex) (p : E ⟶ B) (hp : leftFibration p) (u : (A.unionProd (horn 1 0)).toSSet ⟶ E) (h : K ⊗ Δ[1] ⟶ B) (compat : u ≫ p = (A.unionProd (horn 1 0)).ι ≫ h) : ∃ lift : K ⊗ Δ[1] ⟶ E, (A.unionProd (horn 1 0)).ι ≫ lift = u ∧ lift ≫ p = h",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing leftFibration predicate publicly reexported by the recorded InfinityFibrationsOverSimplicialBases module. A : K.Subcomplex is the arbitrary degreewise simplicial inclusion; Mathlib Subcomplex.unionProd and horn 1 0 give the exact relative cylinder and its inclusion, without new definitions or extra hypotheses. Reconstructed missing sandbox handoff during second reading."
  }
 }

@@ -189,5 +189,35 @@
   "group": "Q09",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-7478a02dc (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-gapped-face-inner-horn-presentation and every cited statement (def-cbc-enhanced-diagrams-cones, lem-coef-infinity-mapping-composition, lem-coef-infinity-pinch-comparison, lem-coef-kan-realization-serre) in full, plus the parent's use of the item. HTT §4.4.5 is not in the local literature: it is correctly reported as WANTED with proof_origin agent. Because I could not open the source, I proved the statements myself. New node: I proved it true by pairing each S⊇J (with j∉S) against S∪{j} and attaching in order of increasing |S|. Each attaching map is exactly the horn at j, which is inner because i<j<k. Tested on n=2 J={0,2} (Λ²₁), n=3 J={0,3}, and n=4 J={1,3}. The gap hypothesis excludes the false outer cases. It is statement-only, self-contained, carries 8 logged searches, and no DAG duplicate turned up (rg plus reading 7 nearby inner-horn and filtration nodes). It does not restate any clause of the item. Steps 1–2: nondegenerate simplices of N(R) are words with no YY; T_1 = Ret = Δ²/Δ^{02}; the pushout T_{m-1}∐_{K_m}Δ^{2m} = T_m is bijective in each degree. Step 3: the new node applies with n=2m and gap 1<2<3. Step 4: the union is a simplicial map. Step 5: the right-pinched orientation, checked against def-cbc, gives the edge 1_v→c as the triangle (1_v,c;1_v). Step 6: the Λ³₁ faces on (v,v,u,v) agree on shared edges, and the filler's d₁ has edges (a,b;1_v), which factors through Ret. Same unit throughout, no tool_uses, no SGA, proof_deps match the step uses, no changes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ccef0dfeb",
+  "group": "NU",
+  "result": "fix",
+  "note": "Checked: the composition table of R (diagrammatic order), Ret as the range of the (s,r;1_Y) triangle, the AsSmall.{u} universe lift, the endpoint equations, both conclusion clauses, docstrings and source places, the sorry-only proof, the Worker report and Second reading sections, the verbatim lean.statement, and that there is no statement_change and no citer. Finding (substance, H3): WeakRetractionEdgeHomotopic used Mathlib's free SSet.Homotopy (relative to ⊥, endpoints not fixed). Any loop c:v→v is freely homotopic to σ0 v (square of two σ1 c triangles), so the hypothesis said nothing and clause 1 was false (nerve of the monoid {1,0}, a=b=0). FIX: one complete replacement file, fixes/lean/Sheaf/CategoryTheory/WeakRetractionCoherentExtension.lean. It redefines the predicate through Mathlib's endpoint-fixing SSet.Truncated.HomotopicL on SSet.Edge and swaps the free-homotopy import for CompStruct and Quasicategory.TwoTruncated. The theorem signature is unchanged, so lean.statement is still verbatim. nt_compile: the delivered file compiled with no errors; the fixed file compiles with no errors or warnings after one long docstring line was shortened."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.WeakRetractionCoherentExtension",
+  "declaration": "SSet.Enhanced.weak_retraction_coherent_extension",
+  "declarations": [
+   "SSet.Enhanced.WeakRetractionObject",
+   "SSet.Enhanced.WeakRetractionHom",
+   "SSet.Enhanced.weakRetractionS",
+   "SSet.Enhanced.weakRetractionR",
+   "SSet.Enhanced.weakRetractionBase",
+   "SSet.Enhanced.weakRetractionTriangle",
+   "SSet.Enhanced.weakRetractionRet",
+   "SSet.Enhanced.weakRetractionRetInclusion",
+   "SSet.Enhanced.WeakRetractionEdgeHomotopic",
+   "SSet.Enhanced.weak_retraction_coherent_extension"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/WeakRetractionCoherentExtension.lean",
+  "statement": "theorem weak_retraction_coherent_extension : (∀ (E : SSet.{u}) [Quasicategory E] (u v : E _⦋0⦌) (a b : E _⦋1⦌), E.δ 1 a = v → E.δ 0 a = u → E.δ 1 b = u → E.δ 0 b = v → (∃ (c : E _⦋1⦌) (t : E _⦋2⦌), E.δ 2 t = a ∧ E.δ 0 t = b ∧ E.δ 1 t = c ∧ WeakRetractionEdgeHomotopic c (E.σ 0 v)) → ∃ F : weakRetractionBase ⟶ E, F.app (op ⦋0⦌) (ComposableArrows.mk₀ ((AsSmall.up (C := WeakRetractionObject)).obj WeakRetractionObject.X)) = u ∧ F.app (op ⦋0⦌) (ComposableArrows.mk₀ ((AsSmall.up (C := WeakRetractionObject)).obj WeakRetractionObject.Y)) = v ∧ F.app (op ⦋1⦌) (ComposableArrows.mk₁ ((AsSmall.up (C := WeakRetractionObject)).map weakRetractionS)) = a ∧ F.app (op ⦋1⦌) (ComposableArrows.mk₁ ((AsSmall.up (C := WeakRetractionObject)).map weakRetractionR)) = b) ∧ (∀ (E : SSet.{u}) [Quasicategory E] (f : weakRetractionRet ⟶ E), ∃ F : weakRetractionBase ⟶ E, weakRetractionRetInclusion ≫ F = f)",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
