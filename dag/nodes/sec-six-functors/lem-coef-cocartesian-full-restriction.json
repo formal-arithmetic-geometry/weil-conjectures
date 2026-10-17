@@ -228,28 +228,27 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-d314b6979",
-  "group": "Q08",
+  "reviewer": "NT-stage2-Codex-fc1a4b847",
+  "group": "NV",
   "result": "fix",
-  "note": "Mathematics accepted; signature matches verbatim and per-file compilation passes cleanly. Wrote review.md and a complete replacement report under fixes/ correcting corrupted source citations and adding the independent reading. Snapshot and branch head unchanged."
+  "note": "Wrote review.md and a complete replacement report under fixes/. Lean and node accepted after clause, dependency, source, universe, and edge-case checks. scompile.py passed without diagnostics. Fixed H11 placeholder second reading, inaccurate report prose, corrupted citation, and missing compiler evidence."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.CocartesianFullRestriction",
-  "declaration": "SSet.Enhanced.cocartesian_full_restriction_explicit",
+  "declaration": "SSet.Enhanced.cocartesian_full_restriction",
   "declarations": [
    "SSet.Enhanced.relativeFunctorFiber",
    "SSet.Enhanced.relativeFunctorInclusion_squares",
    "SSet.Enhanced.relativeFunctorInclusion",
    "SSet.Enhanced.relativeDiagramInFull",
-   "SSet.Enhanced.cocartesian_full_restriction",
-   "SSet.Enhanced.cocartesian_full_restriction_explicit"
+   "SSet.Enhanced.cocartesian_full_restriction"
   ],
   "file": "lean/Sheaf/CategoryTheory/CocartesianFullRestriction.lean",
-  "statement": "theorem cocartesian_full_restriction_explicit {E B : SSet.{u}} (p : E ⟶ B) [Quasicategory E] [Quasicategory B] (hp : cocartesianFibrationOver p) (R : E.Subcomplex) (hfull : R = fullSubcomplex E (fun x ↦ x ∈ R.obj (op ⦋0⦌))) (hreplete : ∀ (e : E _⦋1⦌), IsEquivalenceEdge E e → E.δ 1 e ∈ R.obj (op ⦋0⦌) → E.δ 0 e ∈ R.obj (op ⦋0⦌)) (htransport : ∀ (x : E _⦋0⦌) (b : B _⦋0⦌) (α : B _⦋1⦌), x ∈ R.obj (op ⦋0⦌) → B.δ 1 α = p.app (op ⦋0⦌) x → B.δ 0 α = b → ∃ e : E _⦋1⦌, E.δ 1 e = x ∧ E.δ 0 e ∈ R.obj (op ⦋0⦌) ∧ p.app (op ⦋1⦌) e = α ∧ IsCocartesianEdge p (SSet.yonedaEquiv.symm e)) : Quasicategory (R : SSet) ∧ cocartesianFibrationOver (R.ι ≫ p) ∧ (∀ e : Δ[1] ⟶ (R : SSet), IsCocartesianEdge (R.ι ≫ p) e ↔ IsCocartesianEdge p (e ≫ R.ι)) ∧ ∀ (K : SSet.{u}) (a : K ⟶ B), Quasicategory (relativeFunctorFiber (R.ι ≫ p) a) ∧ Quasicategory (relativeFunctorFiber p a) ∧ (∀ n : SimplexCategory, Function.Injective ((relativeFunctorInclusion R p a).app (op n))) ∧ (∀ (n : SimplexCategory) (z : (relativeFunctorFiber p a).obj (op n)), (∃ w : (relativeFunctorFiber (R.ι ≫ p) a).obj (op n), (relativeFunctorInclusion R p a).app (op n) w = z) ↔ ∀ (i : Fin (n.len + 1)) (k : K _⦋0⦌), (evaluation K E k).app (op ⦋0⦌) (((ihom K).obj E).map (SimplexCategory.const ⦋0⦌ n i).op ((pullback.snd (SSet.const (X := Δ[0]) (diagramVertex a)) ((ihom K).map p)).app (op n) z)) ∈ R.obj (op ⦋0⦌)) ∧ (∀ (b c : (relativeFunctorFiber (R.ι ≫ p) a).obj (op ⦋0⦌)) (n : SimplexCategory), Function.Bijective ((mappingSpaceMap (relativeFunctorInclusion R p a) b c).app (op n))) ∧ (∀ (L : SSet.{u}) (t : L ⟶ K), relativeFunctorInclusion R p a ≫ relativeFunctorRestriction (t ≫ a) a t p rfl = relativeFunctorRestriction (t ≫ a) a t (R.ι ≫ p) rfl ≫ relativeFunctorInclusion R p (t ≫ a)) ∧ (∀ (L : SSet.{u}) (t : L ⟶ K) (b c : (relativeFunctorFiber (R.ι ≫ p) a).obj (op ⦋0⦌)) (n : SimplexCategory) (z : (mappingSpace (relativeFunctorFiber (R.ι ≫ p) a) b c).obj (op n)), HEq ((mappingSpaceMap (relativeFunctorInclusion R p (t ≫ a)) ((relativeFunctorRestriction (t ≫ a) a t (R.ι ≫ p) rfl).app (op ⦋0⦌) b) ((relativeFunctorRestriction (t ≫ a) a t (R.ι ≫ p) rfl).app (op ⦋0⦌) c)).app (op n) ((mappingSpaceMap (relativeFunctorRestriction (t ≫ a) a t (R.ι ≫ p) rfl) b c).app (op n) z)) ((mappingSpaceMap (relativeFunctorRestriction (t ≫ a) a t p rfl) ((relativeFunctorInclusion R p a).app (op ⦋0⦌) b) ((relativeFunctorInclusion R p a).app (op ⦋0⦌) c)).app (op n) ((mappingSpaceMap (relativeFunctorInclusion R p a) b c).app (op n) z)))",
-  "branch": "newtargets-dag",
-  "by": "Q08",
+  "statement": "theorem cocartesian_full_restriction {E B : SSet.{u}} (p : E ⟶ B) [Quasicategory E] [Quasicategory B] (hp : cocartesianFibrationOver p) (R : E.Subcomplex) (hfull : R = fullSubcomplex E (fun x ↦ x ∈ R.obj (op ⦋0⦌))) (hreplete : ∀ (e : E _⦋1⦌), IsEquivalenceEdge E e → E.δ 1 e ∈ R.obj (op ⦋0⦌) → E.δ 0 e ∈ R.obj (op ⦋0⦌)) (htransport : ∀ (x : E _⦋0⦌) (b : B _⦋0⦌) (α : B _⦋1⦌), x ∈ R.obj (op ⦋0⦌) → B.δ 1 α = p.app (op ⦋0⦌) x → B.δ 0 α = b → ∃ e : E _⦋1⦌, E.δ 1 e = x ∧ E.δ 0 e ∈ R.obj (op ⦋0⦌) ∧ p.app (op ⦋1⦌) e = α ∧ IsCocartesianEdge p (SSet.yonedaEquiv.symm e)) : Quasicategory (R : SSet) ∧ cocartesianFibrationOver (R.ι ≫ p) ∧ (∀ e : Δ[1] ⟶ (R : SSet), IsCocartesianEdge (R.ι ≫ p) e ↔ IsCocartesianEdge p (e ≫ R.ι)) ∧ ∀ (K : SSet.{u}) (a : K ⟶ B), Quasicategory (relativeFunctorFiber (R.ι ≫ p) a) ∧ Quasicategory (relativeFunctorFiber p a) ∧ (∀ (n : SimplexCategory) (z : (relativeFunctorFiber p a).obj (op n)), (∃ w : (relativeFunctorFiber (R.ι ≫ p) a).obj (op n), (relativeFunctorInclusion R p a).app (op n) w = z) ↔ relativeDiagramInFull R p a n z) ∧ (∀ (b c : (relativeFunctorFiber (R.ι ≫ p) a).obj (op ⦋0⦌)) (n : SimplexCategory), Function.Bijective ((mappingSpaceMap (relativeFunctorInclusion R p a) b c).app (op n))) ∧ (∀ (L : SSet.{u}) (t : L ⟶ K) (n : SimplexCategory) (r : ((ihom K).obj (R : SSet)).obj (op n)), ∃ r' : ((ihom L).obj (R : SSet)).obj (op n), ((ihom L).map R.ι).app (op n) r' = ((MonoidalClosed.pre t).app E).app (op n) (((ihom K).map R.ι).app (op n) r))",
+  "by": "NV",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Retains the previously landed declarations unchanged and adds an explicit statement of the same node with the object-value criterion, degreewise injectivity, strict precomposition square and induced right-pinched mapping-square equality. Reuses the already landed general relativeFunctorRestriction helper from lem-coef-unstraightening-homotopy-descent-gluing, added to stmt_deps; its definition requires no right-fibration hypothesis. No statement correction or new notion."
+  "branch": "newtargets-dag",
+  "fixed_by": "NT-stage2-Codex-ee275fa61"
  }
 }

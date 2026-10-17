@@ -227,5 +227,28 @@
   "group": "Q64",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-967af1412 (reviewer sub-agent of L); spot-checked: I read the whole delivery, its sources and the Mathlib file the new leaf cites. The item statement is unchanged; I compared it against the side project's current node. There are no cycles. All cited statements are in unit sk-prop-sf-biduality-general, so no tool_uses are needed, and no SGA source is used. Step 1: the product of Kan complexes is Kan, by filling horns one coordinate at a time; the empty product is Δ^0. This step is correctly marked elementary. Step 2: the hypotheses of lem-coef-coherent-weight-limit-recognition all hold. The mapping simplicial sets are Kan by the last clause of lem-coef-kan-coherent-nerve-quasicategory. Since J is discrete, 𝔆[J] is discrete, Δ^0⋆J is a fan of single edges, and B(b,j)=Δ^0. Then Nat(W_J,Fun(Z,K_-)) is ∏Fun(Z,K_j)≅Fun(Z,∏K_j), so postcomposition with the projections is an isomorphism. For discrete J the cone-comparison map of lem-coef-infinity-join-cone-calculus is an isomorphism, so the conclusion is exactly the item's comma-cone sense. For J empty this gives a terminal Δ^0. Gap repaired: step 2 did not say that P=∏K_j is 𝒲-small, which it must be to be an object of Kan_𝒲; I added that sentence. Step 3: the factorization of (1,f_j) through a trivial cofibration and a Kan fibration is correct. r_j and q_j are Kan fibrations because L_j and K_j are Kan, and they are weak equivalences by two-out-of-three. Step 4: with RI=1 and QI=∏f_j, two-out-of-three gives the last clause. New node lem-coef-model-product-weak-equivalence is a correct Mathlib leaf. Instances.lean:276 carries the section hypothesis that every f_i is a fibration, and lines 283–288 give the weak-equivalence instance for Pi.map. Basic.lean:85–91 supplies the required weak factorization system. The node is a self-contained statement with no proof, its blueprint fields and searches are present, it holds for J empty, and it does not restate a clause of the item. Searching the whole DAG found no duplicate for either node. The fix is the whole item file at fixes/dag/nodes/sec-six-functors/lem-coef-kan-nerve-small-products.json. The review is in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-531b06400",
+  "group": "NB",
+  "result": "pass",
+  "note": "Audited the immutable node, dependencies, report, module, declarations, docstrings, universes, edge cases, searches, and exact statement. Reproduced scompile.py successfully with local overlay and server confirmation; no defects or fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.KanNerveSmallProducts",
+  "declaration": "CategoryTheory.kan_nerve_small_products",
+  "declarations": [
+   "CategoryTheory.degreewiseKanProduct",
+   "CategoryTheory.degreewiseKanProductProjection",
+   "CategoryTheory.degreewiseKanProductMap"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/KanNerveSmallProducts.lean",
+  "statement": "theorem kan_nerve_small_products {J : Type u} (K : J → SSet.{u}) (hK : ∀ j, SSet.KanComplex (K j)) : (∃ hP : SSet.KanComplex (degreewiseKanProduct K), ∃ F : SSet.uliftFunctor.{u + 1, u}.obj (nerve (Discrete J)) ⟶ Spaces.infinityCategory, (∀ j : J, (F.app (op ⦋0⦌) (ULift.up (nerveEquiv.symm (Discrete.mk j)))).obj (.mk (ULift.up 0)) = (⟨K j, hK j⟩ : Spaces.Kan)) ∧ ∃ t : (SSet.Enhanced.coneCategory F) _⦋0⦌, t.1.1.obj (.mk (ULift.up 0)) = (⟨degreewiseKanProduct K, hP⟩ : Spaces.Kan) ∧ (∀ j : J, HEq (((SSet.Enhanced.evaluation (SSet.uliftFunctor.{u + 1, u}.obj (nerve (Discrete J))) Spaces.infinityCategory (ULift.up (nerveEquiv.symm (Discrete.mk j)))).app _ (t.1.2.app (op ⦋1⦌) (SimplexCategory.const ⦋1⦌ ⦋0⦌ 0).op (SSet.yonedaEquiv (𝟙 (Δ[1] : SSet.{u + 1}))))).map (.mk (ULift.up 0)) (.mk (ULift.up 1))) (toUnit (SimplicialCategory.sHom (SimplicialThickening.mk (ULift.up.{u, 0} (0 : Fin 2))) (SimplicialThickening.mk (ULift.up.{u, 0} (1 : Fin 2)))) ≫ eHomEquiv SSet (ObjectProperty.homMk (degreewiseKanProductProjection K j) : (⟨degreewiseKanProduct K, hP⟩ : Spaces.Kan) ⟶ ⟨K j, hK j⟩))) ∧ SSet.Enhanced.IsLimiting F t) ∧ (∀ {L : J → SSet.{u}} (_hL : ∀ j, SSet.KanComplex (L j)) (f : ∀ j, K j ⟶ L j), (∀ j, SSet.Enhanced.IsWeakHomotopyEquivalence (f j)) → SSet.Enhanced.IsWeakHomotopyEquivalence (degreewiseKanProductMap f))",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
