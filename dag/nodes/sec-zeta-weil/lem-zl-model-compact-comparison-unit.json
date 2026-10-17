@@ -1,0 +1,81 @@
+{
+ "id": "lem-zl-model-compact-comparison-unit",
+ "kind": "statement",
+ "title": "The specified model compact-support comparison is the proper-unit map",
+ "statement": "Fix the finite-field datum $(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and a separated finite-type $k_0$-scheme $X_0$ [def-weil-scheme-morphism-properties]. Put $X=X_0\\times_{k_0}k$, $s=\\operatorname{Spec}k$, and $f=a_X:X\\to s$. Let $\\Phi$ be the $k$-linear model Frobenius, the base change of the $q$-power Frobenius of $X_0$, and let $h=\\Phi^r$, $r\\geq1$. Write $\\mathcal D_T=D^b_c(T)[[\\underline\\Omega]]$ for the actual bounded constructible module-object category with $\\underline\\Omega=\\operatorname{Profinite.padicAlgClRingObj}(\\ell)$ [sk-def-sfb-qlbar-condensed, sk-def-sfb-bounded-constructible]. Use its restricted derived pullback/direct-image adjunction [sk-def-sfb-dc-restricted-functors] with this coefficient ring, and its chosen-compactification functor $P=Rf_!^{\\mathrm{cond}}$ [sk-def-sfb-dc-lower-shriek].\n\nFor $M\\in\\mathcal D_X$, define the proper-unit map $d^{\\mathrm{cond}}_{h,M}:PM\\to PLh^*M$ by the ordered composite\n$$PM\\xrightarrow{P(\\eta_{h,M})}PRh_*Lh^*M\\xrightarrow{P(Rh_*\\simeq Rh_!)}PRh_!Lh^*M\\xrightarrow{\\mathrm{comp}}R(fh)_!Lh^*M\\xrightarrow{fh=f}PLh^*M.$$\nHere $\\eta_h$ is the unit of $Lh^*\\dashv Rh_*$, and every proper-coincidence and composition comparison is the one used by the module-object compact-support construction, including comparison with the chosen compactifications. Properness holds because $h$ is a positive iterate of finite model Frobenius [lem-trf-scheme-frobenius-finite-radicial]. Let $\\Theta_{h,M}:PM\\to PLh^*M$ be the underlying arrow of the specific compactCohomologyFrobeniusComparison used to define weilCompactCohomology for $h$ in [nt-assume-trace-formula], after the canonical identity pullback on $s$ is removed. Then\n$$\\Theta_{h,M}=d^{\\mathrm{cond}}_{h,M}.$$\nThis equality is natural in $M$. In particular the globalOperator of any Weil object $(M,w:Lh^*M\\xrightarrow{\\sim}M)$ in that interface is $P(w)\\circ d^{\\mathrm{cond}}_{h,M}$. No adic coefficients, geometric Galois Frobenius, trace identity, or duality is asserted.",
+ "source": {
+  "document": "literature/upstream-pr1473-495bc3883/Statement.lean",
+  "place": "AlgebraicGeometry.ProEtale.CondensedRing.compactCohomologyFrobeniusComparison, weilCompactCohomology and WeilBoundedConstructibleOfEnd.globalOperator (the archive cited by nt-assume-trace-formula). The definition of compactCohomologyFrobeniusComparison is literally the composite: identity pullback on s (boundedConstructibleUpperStarId with unitors), the unit of boundedConstructibleUpperStarLowerStarAdjunction for Phi, the inverse of boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl, the inverse of boundedConstructibleLowerShriekComp_padicAlgCl, and eqToIso for Phi >> a_X = a_X; weilCompactCohomology is IsoAlgebra.mapOfNatIso of it and globalOperator is its frobenius.hom for the m-th iterate between eqToHom casts. Read by the maintainer reader in the read-only checkout lean/WeilConjectures/TraceFormula/Statement.lean, lines 108-148 and 182-196, whose declarations and docstrings are those named by nt-assume-trace-formula. The asserted equality is the unfolding of this definition; the blueprint counterpart of the recipe is sec-trace-formula/sk-d-weil/_section.md (global graph-operator paragraph) and prop-trf-graph-operator.proof.md."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-dc-restricted-functors",
+  "sk-def-sfb-dc-lower-shriek",
+  "lem-trf-scheme-frobenius-finite-radicial",
+  "nt-assume-trace-formula"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The global operator of a Weil object for a proper scheme endomorphism is compactly supported pushforward of its coefficient map composed with the pullback direct image adjunction unit",
+   "results": "8 hits; ; returned names/files: AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.unitToPushforwardObjUnit, AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom, AlgebraicGeometry.Scheme.Modules.pushforward_map_app, AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r. Only ordinary adjunctions, discrete condensed functors or ring Frobenius; no compact-support module-object implementation or adic realization comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactCohomologyFrobeniusComparison|weilCompactCohomology|compactlySupported.*[Aa]djunction",
+   "results": "0 hits; ; returned names/files: . Only ordinary adjunctions, discrete condensed functors or ring Frobenius; no compact-support module-object implementation or adic realization comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, AlgebraicGeometry.Scheme",
+   "results": "6 hits; ; returned names/files: AlgebraicGeometry.Scheme.Hom.opensFunctorAdjunction, AlgebraicGeometry.ΓSpec.adjunction, AlgebraicGeometry.Scheme.kerAdjunction, AlgebraicGeometry.algΓAlgSpecAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction. Only ordinary adjunctions, discrete condensed functors or ring Frobenius; no compact-support module-object implementation or adic realization comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The specified model Frobenius comparison on compactly supported condensed sheaf cohomology is the map induced by the pullback pushforward adjunction unit",
+   "results": "8 hits; ; returned names/files: CategoryTheory.ExponentiableMorphism.coev, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal. Only ordinary adjunctions, discrete condensed functors or ring Frobenius; no compact-support module-object implementation or adic realization comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper endomorphism the canonical unit map on compact supports agrees with the model Frobenius comparison for derived module objects",
+   "results": "8 hits; ; returned names/files: coe_frobeniusEquiv, frobeniusEquiv_apply, iterateFrobeniusEquiv_one, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, coe_frobeniusEquiv_symm_comp_coe_frobenius, coe_frobenius_comp_coe_frobeniusEquiv_symm, LightCondensed.ihomPoints_symm_comp, CompHausLike.LocallyConstantModule.functor_map_val. Only ordinary adjunctions, discrete condensed functors or ring Frobenius; no compact-support module-object implementation or adic realization comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-condensed-global-frobenius-comparison",
+  "date": "2026-10-18",
+  "group": "NJ"
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-thm-rationality",
+ "blueprint": {
+  "from": {
+   "node": "sk-thm-rationality",
+   "place": "First sentence: the trace-to-determinant factorization requires the specific model-Frobenius operator, not merely its underlying compact-support object; The specified model compact-support comparison is the proper-unit map",
+   "via": [
+    "lem-zl-condensed-global-frobenius-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

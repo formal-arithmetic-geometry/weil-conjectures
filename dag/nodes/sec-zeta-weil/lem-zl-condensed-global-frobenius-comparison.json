@@ -17,9 +17,140 @@
   "lem-zl-condensed-point-supertrace",
   "nt-assume-trace-formula"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the normalized constant integral object $M=\\widehat{\\mathbf Z}_{\\ell,Y}[0]$ and its geometric Weil map $u:Lg_Y^*M\\xrightarrow{\\sim}M$. Its reductions are $M_n=(\\mathbf Z_\\ell/\\ell^n)_Y[0]$, with the quotient transitions, by [lem-zl-constant-weil-datum] and [lem-weil-constant-coefficient-objects-constructible]. Each $M_n$ has Tor amplitude $[0,0]$: tensoring the coefficient unit with any module returns that module in degree zero, by multiplication with inverse $z\\mapsto1\\otimes z$ [def-weil-finite-tor-amplitude]. The reductions of $u$ are the normalized geometric maps $u_n$; their scheme maps are $\\psi_n=u_n\\kappa_n$. Apply [prop-trf-rational-frobenius-integral-model] with this actual $u$ and $N=0$, so its rational map is exactly the constant geometric Weil structure, with no denominator or scalar rescaling.",
+   "uses": [
+    "lem-zl-constant-weil-datum",
+    "lem-weil-constant-coefficient-objects-constructible",
+    "def-weil-constant-weil-structure",
+    "def-weil-finite-tor-amplitude",
+    "prop-trf-rational-frobenius-integral-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "Clauses (2)–(3): normalized coefficient maps and their global realization"
+   }
+  },
+  {
+   "text": "For $m\\geq1$ the same rational-model theorem gives the actual finite-level iterates $\\psi_{n,m}=u_n^{[m]}\\kappa_n^{(m)}$ and graph operators $T_{c_m}(\\psi_{n,m})$. The comparison in [prop-trf-graph-frobenius-operator] uses exactly this canonical $\\kappa^{(m)}$, and gives\n$$T_{c_m}(\\psi_{n,m})=R\\Gamma_c(Y,u_n^{[m]})\\,g_{\\gamma,c}^{m,*}.$$\nIts hypotheses hold by Step 1 and separated finite type of $Y_0$. In particular the scheme map is the model Frobenius fixing $k$, whereas $g_Y$ is the geometric Galois map; they have not been equated as scheme morphisms. Clause (3) of [prop-trf-rational-frobenius-integral-model] identifies the whole-tower realization of these graph maps with\n$$U_m=R\\Gamma_c(Y,u^{[m]})\\,V_{m,M},$$\nwhere $V_{m,M}$ is the integral transport along $g_Y^m$. This uses its assertion about realization, not faithfulness of separate reduction functors.",
+   "uses": [
+    "prop-trf-rational-frobenius-integral-model",
+    "prop-trf-graph-frobenius-operator",
+    "lem-trf-integral-compact-transport-recurrence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "Clauses (2)–(3): normalized coefficient maps and their global realization"
+   }
+  },
+  {
+   "text": "Here is the power calculation before rationalization. Write $H=R\\Gamma_c(Y,-)$, $P_m=L(g_Y^m)^*$ and $c_m:P_1P_m\\simeq P_{m+1}$. Define $u^{[m]}$ by composing $m$ pulled-back copies of $u$, so $u^{[m+1]}c_m=uP_1(u^{[m]})$. The whole-system recurrence and naturality in [lem-trf-integral-compact-transport-recurrence] give\n$$\\begin{aligned}\nU_{m+1}&=H(u^{[m+1]})H(c_m)V_{1,P_mM}V_{m,M}\\\\\n&=H(u)H(P_1u^{[m]})V_{1,P_mM}V_{m,M}\\\\\n&=H(u)V_{1,M}H(u^{[m]})V_{m,M}=U_1U_m.\n\\end{aligned}$$\nThus $U_m=U_1^m$ by induction starting at $m=1$. By the rational-model theorem with $N=0$, and its explicit identification at $m=1$ with [def-weil-global-geometric-frobenius], $U_1[1/\\ell]=F_E$ including the point transport. Hence $U_m[1/\\ell]=F_E^m$. Rationalization preserves this finite composition.",
+   "uses": [
+    "lem-trf-integral-compact-transport-recurrence",
+    "prop-trf-rational-frobenius-integral-model",
+    "def-weil-global-geometric-frobenius"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "Clauses (2)–(3): normalized coefficient maps and their global realization"
+   }
+  },
+  {
+   "text": "Let $h=\\Phi^m$ and $P_\\Omega=Ra_{Y!}^{\\mathrm{cond}}$. Put $\\Theta_m=\\operatorname{compactCohomologyFrobeniusComparison}$ at $K$, with the identity pullback on $s$ removed. By the definition of the Weil compact-support pushforward in [nt-assume-trace-formula], $G_m=P_\\Omega(\\phi_m)\\Theta_m$. The implementation-normalization lemma [lem-zl-model-compact-comparison-unit] gives\n$$G_m=P_\\Omega(\\phi_m)d^{\\mathrm{cond}}_{h,K}.$$\nThis computes the exact comparison specified in the question. It does not substitute a chosen equivariant structure for the one in the interface.",
+   "uses": [
+    "nt-assume-trace-formula",
+    "lem-zl-model-compact-comparison-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/_section.md",
+    "place": "Global graph operator; concrete module-object comparison is isolated as a new implementation-normalization obligation"
+   }
+  },
+  {
+   "text": "Apply [lem-zl-proper-unit-condensed-realization] to $M$ and $h=\\Phi^m$. These maps are proper: model Frobenius is finite by [lem-trf-scheme-frobenius-finite-radicial]; it is therefore proper by [lem-weil-pbc-finite-proper], and finite composition of proper maps is proper by [lem-weil-pbc-proper-composition]. The reductions of $M$ satisfy the required Tor condition by Step 1. Completed pullback of this coefficient unit is again the coefficient unit: at each quotient the tensor-unit map sends $a\\otimes b$ to $ab$, and the maps commute with quotient reductions; completion uses this same unit tower. Hence the two rational compact cohomology complexes are bounded finite-dimensional, as required by [lem-zl-assumed-trace-determinant-bridge]. Use its specified coefficient realization $K=\\mathcal R_Y(M)$ and comparison $\\sigma_Y=b_M$. With $M'=Lh^*_{\\mathrm{comp}}M$, the new proper-unit lemma yields\n$$b_{M'}P_\\Omega(c_{h,M}^{-1})d^{\\mathrm{cond}}_{h,K}\n=\\rho_{E,s}(D_{h,M,E})\\sigma_Y,$$\nwhere $D_{h,M,E}=\\operatorname{Fib}_s(R\\lim d_{h,\\bullet})[1/\\ell]$. The assertion is on whole towers and includes the point comparison.",
+   "uses": [
+    "lem-zl-proper-unit-condensed-realization",
+    "lem-trf-scheme-frobenius-finite-radicial",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-composition",
+    "lem-zl-assumed-trace-determinant-bridge"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.7.6–6.7.7 and 6.8.14–6.8.15; proper-unit coherence is explicitly the statement-only prerequisite cited here"
+   }
+  },
+  {
+   "text": "Let $v_m:M'\\to M$ be the integral model coefficient map obtained by the normalized coefficient-unit pullback isomorphism, with its prescribed iterates. By [lem-zl-assumed-trace-determinant-bridge] this is the map whose realization gives $\\phi_m$; the pullback comparison is $c_{h,M}$, so $\\phi_m=\\mathcal R_Y(v_m)c_{h,M}^{-1}$. Its finite reductions are $\\psi_{n,m}$ of Steps 1–2: the initial maps agree by [lem-zl-constant-weil-datum], and the iterates agree by induction using the same pullback compositors preserved by [lem-weil-pbc-condensed-e-realization]. Naturality of $b$ in [lem-zl-proper-unit-condensed-realization], followed by its unit equality from Step 5, now gives\n$$\\begin{aligned}\n\\sigma_YG_m\n&=b_MP_\\Omega(\\mathcal R_Y(v_m))P_\\Omega(c_{h,M}^{-1})d^{\\mathrm{cond}}_{h,K}\\\\\n&=\\rho_{E,s}(C(v_m))b_{M'}P_\\Omega(c_{h,M}^{-1})d^{\\mathrm{cond}}_{h,K}\\\\\n&=\\rho_{E,s}(C(v_m)D_{h,M,E})\\sigma_Y.\n\\end{aligned}$$\nHere $C(v_m)$ means the rationalized compact-support map on coefficient complexes, and all intermediate sources are those displayed in Step 5.",
+   "uses": [
+    "lem-zl-assumed-trace-determinant-bridge",
+    "lem-zl-constant-weil-datum",
+    "lem-weil-pbc-condensed-e-realization",
+    "lem-zl-proper-unit-condensed-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "Clauses (2)–(3): normalized coefficient maps and their global realization"
+   }
+  },
+  {
+   "text": "At finite level the definition of $d_{h,n}$ in [lem-zl-proper-unit-condensed-realization] and [prop-trf-graph-operator] identify $P_n(\\psi_{n,m})d_{h,n}$ with $T_{c_m}(\\psi_{n,m})$. The whole-system naturality in that realization lemma says the corresponding integral composite is the realization of these same graph maps. Clause (3) of [prop-trf-rational-frobenius-integral-model] identifies it with $U_m$. Therefore $C(v_m)D_{h,M,E}=U_m[1/\\ell]=F_E^m$ by Step 3. Substituting this equality in Step 6 proves exactly\n$$\\sigma_YG_m=\\rho_{E,s}(F_E^m)\\sigma_Y.$$\nThe argument uses the finite graph comparison, its coherent integral realization, and the two specified proper-unit comparisons. No trace-formula equality or Poincare duality enters.",
+   "uses": [
+    "lem-zl-proper-unit-condensed-realization",
+    "prop-trf-graph-operator",
+    "prop-trf-rational-frobenius-integral-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "Clauses (2)–(3): normalized coefficient maps and their global realization"
+   }
+  },
+  {
+   "text": "Apply $H^i$ to the equality just proved. The cohomology comparison for the finite-matrix functor in [lem-zl-condensed-point-supertrace] is natural in chain maps: its matrices are the same scalar-extended matrices. Hence under $H^i(\\sigma_Y)$ the map $H^i(G_m)$ is $H^i(F_E^m)\\otimes_E\\Omega$, which equals $H^i(F_E)^m\\otimes_E\\Omega$ because cohomology preserves composition. This is the claimed statement for every integer $i$, including degrees with zero cohomology. The convention is the geometric one throughout, fixed by [def-weil-global-geometric-frobenius] and the canonical $\\kappa$ in the finite graph theorem; no inverse of that operator has been introduced.",
+   "uses": [
+    "lem-zl-condensed-point-supertrace",
+    "def-weil-global-geometric-frobenius"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rationality/sk-thm-rationality.proof.md",
+    "place": "First sentence: identify the geometric Frobenius in the finite determinant factors"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-constant-weil-datum",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "def-weil-constant-weil-structure",
+  "def-weil-finite-tor-amplitude",
+  "prop-trf-rational-frobenius-integral-model",
+  "prop-trf-graph-frobenius-operator",
+  "lem-trf-integral-compact-transport-recurrence",
+  "def-weil-global-geometric-frobenius",
+  "nt-assume-trace-formula",
+  "lem-zl-model-compact-comparison-unit",
+  "lem-zl-proper-unit-condensed-realization",
+  "lem-trf-scheme-frobenius-finite-radicial",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-proper-composition",
+  "lem-zl-assumed-trace-determinant-bridge",
+  "lem-weil-pbc-condensed-e-realization",
+  "prop-trf-graph-operator",
+  "lem-zl-condensed-point-supertrace"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rationality/sk-thm-rationality.proof.md",
+  "place": "First sentence: missing specified-operator comparison, assembled from the trace-transport route and two isolated proper-unit coherence obligations"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,7 +189,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-thm-rationality",
@@ -75,5 +206,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-condensed-global-frobenius-comparison",
+  "worker": "stage1",
+  "summary": "Split the exact operator comparison through the normalized constant integral datum, the existing finite graph/geometric comparison, coherent integral realization, and an explicit power induction. Two new statement-only nodes isolate the concrete model-comparison proper-unit normalization and proper-unit compatibility with whole-tower adic-to-condensed realization; no trace identity or duality is used. The statement and imported metadata are retained.",
+  "blueprint": "sk-thm-rationality.proof.md first sentence, realizing the geometric Frobenius in the trace-to-determinant input; the descendant obligations are not verbatim blueprint theorems.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-constant-coefficient-objects-constructible",
+    "why": "Generic The constant coefficient objects are bounded constructible interface supplies the stated coefficient, adjunction, graph or whole-system transport tool; the rationality unit does not reprove this infrastructure."
+   },
+   {
+    "node": "prop-trf-rational-frobenius-integral-model",
+    "why": "Generic Integral models of rational Frobenius operators interface supplies the stated coefficient, adjunction, graph or whole-system transport tool; the rationality unit does not reprove this infrastructure."
+   },
+   {
+    "node": "prop-trf-graph-frobenius-operator",
+    "why": "Generic Graph construction of the global Frobenius operator interface supplies the stated coefficient, adjunction, graph or whole-system transport tool; the rationality unit does not reprove this infrastructure."
+   },
+   {
+    "node": "lem-trf-integral-compact-transport-recurrence",
+    "why": "Generic Coherent integral compact-support transport recurrence interface supplies the stated coefficient, adjunction, graph or whole-system transport tool; the rationality unit does not reprove this infrastructure."
+   },
+   {
+    "node": "nt-assume-trace-formula",
+    "why": "Generic Assumption (batch 5): Grothendieck-Lefschetz trace formula, trace_globalOperator_eq_sum_trace_stalkFrobenius interface supplies the stated coefficient, adjunction, graph or whole-system transport tool; the rationality unit does not reprove this infrastructure."
+   },
+   {
+    "node": "lem-trf-scheme-frobenius-finite-radicial",
+    "why": "Generic Finiteness and radiciality of the scalar-extended scheme Frobenius interface supplies the stated coefficient, adjunction, graph or whole-system transport tool; the rationality unit does not reprove this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Generic Finite morphisms are proper interface supplies the stated coefficient, adjunction, graph or whole-system transport tool; the rationality unit does not reprove this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Generic Properness is stable under composition interface supplies the stated coefficient, adjunction, graph or whole-system transport tool; the rationality unit does not reprove this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-e-realization",
+    "why": "Generic Realization of rationalized integral coefficients in condensed E module objects interface supplies the stated coefficient, adjunction, graph or whole-system transport tool; the rationality unit does not reprove this infrastructure."
+   },
+   {
+    "node": "prop-trf-graph-operator",
+    "why": "Generic Graph construction of the global operator interface supplies the stated coefficient, adjunction, graph or whole-system transport tool; the rationality unit does not reprove this infrastructure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-constant-coefficient-objects-constructible",
+  "prop-trf-rational-frobenius-integral-model",
+  "prop-trf-graph-frobenius-operator",
+  "lem-trf-integral-compact-transport-recurrence",
+  "nt-assume-trace-formula",
+  "lem-trf-scheme-frobenius-finite-radicial",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-condensed-e-realization",
+  "prop-trf-graph-operator"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-329ab19a4",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-329ab19a4 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, the statement of every cited node, the rationality unit, Bhatt–Scholze 6.7.6–6.7.8, 6.7.14 and 6.8.14–6.8.15, and the PR1473 Lean definitions (read-only at /home/ubuntu/weil-conjectures-sheaf/lean/WeilConjectures/TraceFormula/Statement.lean, lines 108–196). (1) Steps 1–8 are correct. Tor amplitude is [0,0] uniformly in n. I re-derived Step 3's power recurrence U_{m+1}=U_1U_m from the recurrence lemma's clause 2 and the naturality of V_1; the base case U_1[1/l]=F_E comes from the integral-model proposition with N=0. Phi^m is proper (finite, hence proper, closed under composition). Step 6 uses naturality of b; Step 7 combines prop-trf-graph-operator with clause 3 of the integral-model proposition; Step 8 takes H^i. The q^m convention is consistent. (2) The new node lem-zl-model-compact-comparison-unit is true: the definition of compactCohomologyFrobeniusComparison is literally the identity pullback on s, then the unit of LPhi*⊣RPhi_*, then the inverse of LowerShriekIsoLowerStar_padicAlgCl, then the inverse of LowerShriekComp_padicAlgCl, then eqToIso Phi≫a=a. globalOperator is P(phi_m) composed with that comparison. The node is a definitional unfolding, kept as a node because the assumption's statement does not display the composite. FIX: its source record said the archive was WANTED; I replaced it with the declarations and the lines read (fixes/dag/nodes/sec-zeta-weil/lem-zl-model-compact-comparison-unit.json, only the source field changed). (3) The new node lem-zl-proper-unit-condensed-realization is a true coherence statement. It covers compatibility with Rh_*≃Rh_! and with compact-support composition, which neither lem-pur-compact-support-condensed-realization nor lem-weil-pbc-condensed-e-realization states. It is not a duplicate of lem-trf-proper-compact-unit-reduction or the other candidates. Neither new node restates the item. (4) Batch-5 flags: all six citations are accepted as genuinely outside both assumptions. nt-assume-trace-formula concerns the model-Frobenius condensed globalOperator, and both it and the bridge exclude any comparison with the Galois Frobenius on cohomology. The trf nodes (integral model, graph = Galois transport, transport recurrence, graph-operator formula) are operator comparisons with no trace content, and the assumption leaf cannot replace them. lem-zl-constant-weil-datum reaches sec-trace-formula only through the definition def-trf-adic-system. lem-weil-pbc-condensed-e-realization reaches sec-poincare-duality only through general coefficient material such as def-pod-ring-scalar-extension. No transitive closure of a cited node reaches a trace-formula or Poincaré-duality theorem, or an nt-target. I accept the 10 declared tool uses; review.md gives my reasons in place of the delivery's boilerplate.; 1 file(s) fixed by the reviewer"
  }
 }
