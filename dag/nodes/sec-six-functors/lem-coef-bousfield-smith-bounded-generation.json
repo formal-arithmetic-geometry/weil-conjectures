@@ -11,9 +11,87 @@
   "lem-coef-simplicial-space-reedy-cartesian",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal A=\\mathrm{sS}^{[1]}$. By currying, this is a category of Set-valued presheaves on the small category $(\\Delta\\times\\Delta)\\times[1]^{\\mathrm{op}}$. Sets have pullbacks, given by pairs with equal images. The Set and presheaf clauses of [lem-coef-presheaf-local-presentability] therefore make $\\mathcal A$ locally presentable. Apply [lem-coef-simplicial-local-equivalences-accessible] to $f$ and denote its replete subcategory by $\\mathcal B=W_f^{\\mathrm{mono}}$. Fix the regular cardinal $\\lambda$ and small generating family supplied there. In particular $\\mathcal B$ is closed under small $\\lambda$-filtered colimits in $\\mathcal A$. This supplies both hypotheses of condition (i) of the accessible-subdiagram criterion, without assuming a localized model structure.",
+   "uses": [
+    "lem-coef-presheaf-local-presentability",
+    "lem-coef-simplicial-local-equivalences-accessible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+    "place": "Lemmas 4.5–4.6, printed p. 43; monomorphism-restricted accessibility is the separately stated auxiliary lemma."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-accessible-functor-presentability-ranks] to the identity of $\\mathcal A$ with lower rank $\\lambda$; it gives a regular $\\rho\\geq\\lambda$. The same statement supplies arbitrarily large regular $\\gamma$ sharply above $\\rho$. Choose one uncountable, larger than the countable bisimplicial indexing category, and above the fixed bound in condition (ii) of [lem-coef-accessible-subdiagram-criterion] for $(\\mathcal A,\\mathcal B,\\lambda)$. Then $\\lambda\\ll\\gamma$: for $a<\\gamma$ and $b<\\lambda\\leq\\rho$, sharpness gives $a^b<\\gamma$. These choices depend only on $f$ and the fixed universe, not the later arrow or subspace.",
+   "uses": [
+    "lem-coef-accessible-functor-presentability-ranks",
+    "lem-coef-accessible-subdiagram-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition A.2.6.3 and Proposition A.2.6.5, printed pp. 819–820; existence of sufficiently large sharp ranks."
+   }
+  },
+  {
+   "text": "Now let $X\\hookrightarrow Y$ and $C\\subseteq Y$ satisfy the item hypotheses. By [lem-coef-simplicial-space-small-subobjects], $I=I_\\gamma(Y)$ is a small $\\gamma$-filtered poset, and the diagram $T(B)=(X\\cap B\\hookrightarrow B)$ has colimit $X\\hookrightarrow Y$. Its terms are $\\gamma$-presentable in the arrow category: both their endpoints have total size less than $\\gamma$, so the arrow-presentability clause of that same lemma applies. Its colimit belongs to $\\mathcal B$ because the given arrow is monomorphic and an $f$-local equivalence. Also $C\\in I$.",
+   "uses": [
+    "lem-coef-simplicial-space-small-subobjects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Auxiliary bounded-presheaf presentation argument beneath the ancestor derived-adjunction paragraph."
+   }
+  },
+  {
+   "text": "Use implication (i)$\\Rightarrow$(ii) of [lem-coef-accessible-subdiagram-criterion] with $\\sigma=\\lambda$, $\\tau=\\gamma$, ambient category $\\mathcal A$, subcategory $\\mathcal B$, diagram $T:I\\to\\mathcal A$, and prescribed subset $S=\\{C\\}$. Steps 1–3 verify its closure, generation, local presentability, sharpness, size, presentability and colimit hypotheses. Since $\\gamma$ is infinite, $|S|<\\gamma$. Obtain $J\\subseteq I$ containing $C$, of cardinality less than $\\gamma$, $\\lambda$-filtered in its inherited order, whose arrow colimit belongs to $\\mathcal B$.",
+   "uses": [
+    "lem-coef-accessible-subdiagram-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.2.6.5, printed p. 820, small filtered subdiagram approximation."
+   }
+  },
+  {
+   "text": "Set $D=\\bigcup_{B\\in J}B$ in every bidegree. Each simplicial operator preserves every $B$, hence preserves their union, so $D$ is a simplicial subspace of $Y$. Regularity and $|J|,|B|<\\gamma$ give $|D|<\\gamma$, and $C\\in J$ gives $C\\subseteq D$. The restricted arrow diagram has colimit $X\\cap D\\hookrightarrow D$, directly by [def-weil-pbc-category-colimit]: a compatible cocone defines its map on an element using any $B$ containing that element; two choices agree in a common upper bound in the nonempty directed poset $J$. The maps commute with operators because the cocone legs do. Apply this to both endpoints; the cocone squares give the square between the resulting maps, uniquely. On the source endpoint use the set identity $\\bigcup_{B\\in J}(X\\cap B)=X\\cap D$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Elementary degreewise union and cocone computation for the chosen small directed family; written by the worker."
+   }
+  },
+  {
+   "text": "By uniqueness of colimits the arrow of Step 5 is isomorphic to the colimit of Step 4. Repleteness of $\\mathcal B$ puts $X\\cap D\\hookrightarrow D$ in $\\mathcal B$, hence it is an $f$-local equivalence. Together with the containment and cardinal bound of Step 5, this proves the assertion for the single cardinal $\\gamma$ fixed in Step 2.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Elementary conclusion of the auxiliary Bousfield–Smith bounded-subobject argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-coef-accessible-functor-presentability-ranks",
+  "lem-coef-accessible-subdiagram-criterion",
+  "lem-coef-presheaf-local-presentability",
+  "lem-coef-simplicial-local-equivalences-accessible",
+  "lem-coef-simplicial-space-small-subobjects"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Auxiliary descendant bounded-subobject argument, expanding Rezk Proposition 9.1 final paragraph through the ordinary accessible-subdiagram criterion HTT A.2.6.5. The ancestor blueprint supplies only the coefficient-adjunction context, not this homotopy-theoretic proof."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,7 +130,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-local-bounded-lifting",
@@ -64,7 +142,7 @@
  "blueprint": {
   "from": {
    "node": "prop-coef-integral-exceptional-adjoint",
-   "place": "Auxiliary Rezk Proposition 9.1 final paragraph, Bousfield–Smith cardinality argument: bounded enlargement C inside a local-equivalence monomorphism X into Y, with X intersection D into D a local equivalence. Supports the inherited localization-interval-criterion chain from the ancestor mapping-complex adjunction paragraph.",
+   "place": "Ancestor proof paragraph 2, derived coefficient adjunction before the displayed derived-limit calculation; auxiliary descendant Rezk Proposition 9.1 final-paragraph Bousfield–Smith bounded-subobject argument. The Rezk argument is not literally a paragraph of the ancestor blueprint.",
    "via": [
     "lem-coef-simplicial-local-bounded-lifting",
     "lem-coef-simplicial-space-localization-interval-criterion",
@@ -84,5 +162,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-bousfield-smith-bounded-generation",
+  "worker": "stage1",
+  "summary": "Preserved the item statement. Obtain accessibility of monomorphic local equivalences from a separate statement-only input, choose a sufficiently large sharp regular rank, apply the existing ordinary accessible-subdiagram criterion to bounded intersection arrows, and compute the selected colimit by an explicit union cocone. Two new statement-only inputs: monomorphism-restricted local-equivalence accessibility, and bounded bisimplicial-arrow presentability/exhaustion. No localized model structure or coherent-localization comparison is cited.",
+  "blueprint": "Ancestor proof paragraph 2, derived coefficient adjunction before the displayed derived-limit calculation; auxiliary descendant Rezk Proposition 9.1 final-paragraph Bousfield–Smith bounded-subobject argument. The Rezk argument is not literally a paragraph of the ancestor blueprint."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-bc84f77ec",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-bc84f77ec (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited node statement in full. The item statement is unchanged, it is not a target, and it has no base-change morphism or coefficient category to compare. Step 1: the arrow category is presheaves on (Δ×Δ)×[1]^op, and the Mathlib leaf lem-coef-presheaf-local-presentability (Set clause, then the Fun(C^op,Set) clause, with pullbacks) makes it locally presentable. The new accessibility node supplies exactly the standing hypotheses and condition (i) of lem-coef-accessible-subdiagram-criterion. Step 2: the ranks node with H=id gives rho>=lambda, its 'more generally' clause gives gamma with rho<<gamma above the criterion bound, aleph_1 and #mor(Δ×Δ), and lambda<<gamma follows. Steps 3-4: I checked every hypothesis of criterion (ii); its conclusion is the J the proof uses. Steps 5-6 are genuinely elementary: a directed union is the objectwise colimit, |D|<gamma by regularity, and repleteness finishes. New node lem-coef-simplicial-local-equivalences-accessible is true: W_f is accessible and accessibly embedded, monomorphisms are filtered-colimit closed and accessible, and the intersection of the two is accessible. It is not a restatement of the item and not a duplicate. Every existing candidate (lem-cbc-homotopy-local-equivalences-accessible, lem-coef-model-weak-equivalences-accessible, lem-coef-accessible-localization-small-generators, lem-coef-dugger-*, lem-coef-smith-model-recognition) reaches the item in the graph, which I checked by script, so citing any of them would create a cycle. New node lem-coef-simplicial-space-small-subobjects is true by the category-of-elements argument over a countable index category with gamma uncountable, plus exhaustion by countable generated subspaces; I tested it on empty, representable and identity arrows. The DAG is acyclic, proof_deps equals the union of uses, every cited statement is in unit sk-prop-sf-biduality-general, no tool_uses are needed and there is no SGA citation. Hirschhorn, Rezk, Barwick and HTT stay WANTED and could not be checked locally; the proof is correctly marked agent-written and relies only on the DAG statements I checked. No fixes."
  }
 }

@@ -1,0 +1,110 @@
+{
+ "id": "lem-coef-simplicial-space-small-subobjects",
+ "kind": "statement",
+ "title": "Small simplicial subspaces are presentable and filteredly exhaust a monomorphism",
+ "statement": "Fix a universe $\\mathcal U$ and write $\\mathrm{sS}=\\operatorname{Fun}(\\Delta^{\\mathrm{op}},\\mathrm{sSet})$, with simplicial sets as in [def-weil-pbc-simplicial-set]. Write $|B|=|\\coprod_{p,q\\geq0}B_{p,q}|$. All diagrams and Hom sets are small relative to $\\mathcal U$. An infinite cardinal $\\gamma$ is regular if unions of fewer than $\\gamma$ sets of size less than $\\gamma$ have size less than $\\gamma$. A category is $\\gamma$-filtered if every diagram with fewer than $\\gamma$ morphisms has a cocone. An object is $\\gamma$-presentable if its ordinary Hom functor preserves small $\\gamma$-filtered colimits, with colimits as in [def-weil-pbc-category-colimit]. For every uncountable regular small cardinal $\\gamma$ larger than the number of morphisms of $\\Delta\\times\\Delta$, every arrow $A\\to B$ in $\\mathrm{sS}$ with $|A|,|B|<\\gamma$ is $\\gamma$-presentable as an object of the arrow category $\\mathrm{sS}^{[1]}$. If $X\\hookrightarrow Y$ is a monomorphism, the small poset $I_\\gamma(Y)$ of simplicial subspaces $B\\subseteq Y$ with $|B|<\\gamma$, ordered by inclusion, is $\\gamma$-filtered. The canonical cocone from the diagram $(X\\cap B\\hookrightarrow B)_{B\\in I_\\gamma(Y)}$ to $X\\hookrightarrow Y$ is a colimit cocone in the arrow category. Subspaces and intersections are computed in every bidegree.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Agent-formulated bounded-presheaf presentation input to the auxiliary descendant Bousfield–Smith argument under ancestor proof paragraph 2. Not a literal statement of the ancestor blueprint. Presentability follows by the small category-of-elements presentation by representables for presheaves on the countable bisimplicial arrow indexing category; the filtered-union clause is the degreewise colimit construction. No specific Stacks tag for the cardinal-presentability assertion was identified."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a simplicial space, subspaces of total size below a regular cardinal are presentable and form a filtered union",
+   "results": "SSet.Finite.instIsFinitelyPresentable; HasCardinalLT.isCardinalPresentable; SSet.Finite.instIsFinitelyPresentableObjSimplexCategoryStdSimplex; CategoryTheory.IsCardinalPresentable; CategoryTheory.Limits.ColimitPresentation.isCardinalPresentable. No exact bisimplicial-subspace theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match: generic finite simplicial-set and type presentability declarations do not state the bisimplicial bounded-subspace theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "Presheaf.IsPresentable, SimplicialObject.presentable",
+   "results": "[loogle] OK 0 hit(s); unknown identifier Presheaf.IsPresentable.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "presentable|filtered.*subobject|subobject.*filtered (CategoryTheory)",
+   "results": "Mathlib generic presentability and subobject declarations; no bounded simplicial-subspace theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An infinite regular cardinal bounds the total elements of a bisimplicial set if and only if its inclusion arrow is cardinal presentable; all bounded subobjects give a filtered union",
+   "results": "{\"t\": \"2026-10-17T04:49:25Z\", \"tool\": \"leanfinder\", \"query\": \"An infinite regular cardinal bounds the total elements of a bisimplicial set if and only if its inclusion arrow is cardinal presentable; all bounded subobjects give a filtered union\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.ColimitPresentation.isCardinalPresentable\", \"HasCardinalLT.isCardinalPresentable\", \"CategoryTheory.isCardinalPresentable\", \"CategoryTheory.IsCardinalPresentable\", \"CategoryTheory.isCardinalPresentable_iff\", \"CategoryTheory.ObjectProperty.ColimitOfShape.isCardinalPresentable\", \"SSet.Finite.instIsFinitelyPresentable\", \"CategoryTheory.IsCardinalLocallyPresentable\"], \"digest\": \"b6dee8a10ebbffc2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned generic presentability, finite simplicial-set and monomorphism declarations; none asserts this combination for bisimplicial arrows."
+  },
+  {
+   "tool": "grep",
+   "query": "presentable.*(Arrow|Functor)|isCardinalPresentable.*[Ff]unctor",
+   "results": "{\"t\": \"2026-10-17T04:49:49Z\", \"tool\": \"grep\", \"query\": \"presentable.*(Arrow|Functor)|isCardinalPresentable.*[Ff]unctor\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"Mathlib/CategoryTheory/Presentable/Basic.lean\", \"Mathlib/CategoryTheory/Presentable/Limits.lean\", \"Mathlib/CategoryTheory/Presentable/Limits.lean\"], \"digest\": \"2b3a8cb35ec76995\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned generic presentability, finite simplicial-set and monomorphism declarations; none asserts this combination for bisimplicial arrows."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCardinalPresentable\", \"SimplicialObject\"",
+   "results": "{\"t\": \"2026-10-17T04:49:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCardinalPresentable\\\", \\\"SimplicialObject\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned generic presentability, finite simplicial-set and monomorphism declarations; none asserts this combination for bisimplicial arrows."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded bisimplicial subobjects and their inclusion arrows are cardinal presentable and exhaust every monomorphism by a filtered union",
+   "results": "{\"t\": \"2026-10-17T04:49:49Z\", \"tool\": \"leansearch\", \"query\": \"Bounded bisimplicial subobjects and their inclusion arrows are cardinal presentable and exhaust every monomorphism by a filtered union\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.finite_of_mono\", \"SSet.Finite.instIsFinitelyPresentable\", \"CategoryTheory.instEssentiallySmallIsCardinalPresentableOfHasCardinalFilteredGenerator\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsDenseFullSubcategoryIsCardinalPresentableι\", \"HasCardinalLT.Set.isFiltered_of_aleph0_le\", \"SSet.Subcomplex.instMonoι\", \"SSet.instIsStableUnderFilteredColimitsMonomorphisms\", \"CategoryTheory.Subobject.hasCardinalLT_of_mono\"], \"digest\": \"63238f9fde849b40\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the returned generic presentability, finite simplicial-set and monomorphism declarations; none asserts this combination for bisimplicial arrows."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A presheaf with fewer than kappa total elements on a category with fewer than kappa morphisms is kappa presentable, including presheaves representing commuting squares",
+   "results": "{\"t\": \"2026-10-17T04:57:30Z\", \"tool\": \"leanfinder\", \"query\": \"A presheaf with fewer than kappa total elements on a category with fewer than kappa morphisms is kappa presentable, including presheaves representing commuting squares\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.instIsCardinalPresentableFunctorOppositeTypeObjUliftYonedaOfHasColimitsOfSize\", \"CategoryTheory.Presheaf.instIsCardinalLocallyPresentableFunctorOppositeOfHasPullbacks\", \"CategoryTheory.Presheaf.instIsCardinalPresentableFunctorOppositeFreeYonedaOfHasColimitsOfSize\", \"CategoryTheory.isCardinalPresentable\", \"CategoryTheory.Limits.ColimitPresentation.isCardinalPresentable\", \"CategoryTheory.isCardinalPresentable_iff\", \"CategoryTheory.IsCardinalPresentable\", \"CategoryTheory.ObjectProperty.ColimitOfShape.isCardinalPresentable\"], \"digest\": \"69734d6ecbee1be2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Presheaf.lean:47-56 gives representable presentability, and CardinalFilteredPresentation gives a criterion with a cardinally bounded presentation supplied as input. Neither supplies the bounded category-of-elements presentation of a bisimplicial arrow or its subspace exhaustion in one line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-bousfield-smith-bounded-generation",
+  "date": "2026-10-17",
+  "group": "Q120"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Ancestor proof paragraph 2, derived coefficient adjunction before the displayed derived-limit calculation; auxiliary descendant Rezk Proposition 9.1 final-paragraph Bousfield–Smith bounded-subobject argument. The Rezk argument is not literally a paragraph of the ancestor blueprint.",
+   "via": [
+    "lem-coef-bousfield-smith-bounded-generation",
+    "lem-coef-simplicial-local-bounded-lifting",
+    "lem-coef-simplicial-space-localization-interval-criterion",
+    "lem-coef-segal-cartesian-exponent",
+    "lem-coef-rezk-explicit-completion",
+    "lem-coef-segal-dk-diagonal-equivalence",
+    "lem-coef-diagonal-coherent-nerve-comparison",
+    "lem-coef-cofibrant-simplicial-inversion",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

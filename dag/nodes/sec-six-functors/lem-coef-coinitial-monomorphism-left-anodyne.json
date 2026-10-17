@@ -13,9 +13,87 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-infinity-slice-right-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=K^{\\mathrm{op}}$, $B=L^{\\mathrm{op}}$ and $i=j^{\\mathrm{op}}$. Clause (4) of [lem-coef-infinity-relative-cone-equivalence] says that opposites preserve quasicategories, while order reversal is a degreewise bijection on simplices, so $A,B$ are small quasicategories and $i$ remains degreewise injective. Reversing a join interchanges its two ordered blocks, so for every vertex $l$ there is a degreewise isomorphism\n$$A\\times_B B_{l/}\\cong(K\\times_L L_{/l})^{\\mathrm{op}}.$$\nIt respects the projections: the final vertex $l$ becomes the initial vertex, and the initial variable face becomes the final variable face. Weak contractibility is unchanged by opposites. Explicitly, on the realization convention of [def-cbc-enhanced-diagrams-cones] the map $|T^{\\mathrm{op}}|\\to|T|$ sends $[x,(t_0,\\ldots,t_n)]$ to $[x,(t_n,\\ldots,t_0)]$. The formula for reversed operators makes this well defined under the quotient identifications, and the same formula is its continuous inverse. Thus every displayed strict outgoing comma for $i$ is weakly contractible.",
+   "uses": [
+    "lem-coef-infinity-relative-cone-equivalence",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 4.1.3.1, opposite join-comma identification; reversal calculation written explicitly."
+   }
+  },
+  {
+   "text": "The strict pullback in Step 1 computes the infinity-categorical comma required by the comma criterion in Step 3. Indeed [lem-coef-infinity-slice-right-fibration] gives the right fibration $L_{/l}\\to L$. Opposites turn its right horn lifting problems into left horn lifting problems, since the missing index $r$ becomes $m-r$. Hence $B_{l/}\\to B$ is a left fibration between quasicategories. By [lem-cbc-left-fibration-equivalence-lift] it is an isofibration. Apply [lem-coef-infinity-isofibration-pullback-limit] with $E=B_{l/}$, $T=A$ and $g=i$: the degreewise pullback $A\\times_B B_{l/}$ is a quasicategory and represents $A\\times_B^h B_{l/}$. Here $B_{l/}$ is a model of the coherent category of arrows out of $l$: [lem-coef-infinity-slice-arrow-equivalence], applied to $\\mathcal C=L$ and $y=l$, has $S_l=L_{/l}$ (since $\\Delta^n\\star\\Delta^0=\\Delta^{n+1}$ with the same operators) and gives an equivalence $\\delta_l:L_{/l}\\to\\operatorname{Fun}(\\Delta^1,L)\\times_{\\operatorname{ev}_1,L}\\{l\\}$ over $L$. Taking opposites, using $\\operatorname{Fun}(\\Delta^1,L)^{\\mathrm{op}}\\cong\\operatorname{Fun}(\\Delta^1,B)$ with endpoints interchanged, gives an equivalence over $B$ from $B_{l/}$ to the arrow model $\\{l\\}\\times_{B,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,B)$ used for $J_{j/}$ in the criterion. Cat$_\\infty$ pullbacks of equivalent cospans agree, so $A\\times_B B_{l/}$ is the comma $A\\times^h_B B_{l/}$ of the criterion; all faces other than the fixed initial vertex remain variable. Thus the contractibility assumption of the cited comma criterion holds for exactly its infinity-categorical pullbacks, without treating an arbitrary strict pullback as a homotopy pullback.",
+   "uses": [
+    "lem-coef-infinity-slice-right-fibration",
+    "lem-cbc-left-fibration-equivalence-lift",
+    "lem-coef-infinity-isofibration-pullback-limit",
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-slice-arrow-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 4.1.3.1, join-comma model; slice fibration and homotopy-pullback hypotheses checked."
+   }
+  },
+  {
+   "text": "For each comma $T=A\\times_B B_{l/}$, the map $T\\to\\Delta^0$ is a weak homotopy equivalence by Steps 1-2. Apply [lem-cbc-simplicial-groupoid-localization] to this map, with Kan target $\\Delta^0$. For every quasicategory $\\mathscr C$, it identifies $\\operatorname{Fun}(\\Delta^0,\\mathscr C)$ with the full functor category on diagrams from $T$ inverting all edges, including all mapping spaces. Thus $T\\to\\Delta^0$ presents its localization at all edges. This verifies precisely the contractible-space-after-inverting-arrows convention in [lem-coef-infinity-cofinal-comma-criterion]. Apply that criterion to $i:A\\to B$: for every quasicategory $\\mathcal E$ in a containing universe and every coherent diagram $H:B\\to\\mathcal E$, the actual restriction $\\mathcal E_{H/}\\to\\mathcal E_{Hi/}$ is a functor equivalence over $\\mathcal E$. This is its cocone-category conclusion, with no assumption that $H$ has a colimit.",
+   "uses": [
+    "lem-coef-infinity-cofinal-comma-criterion",
+    "lem-cbc-simplicial-groupoid-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Theorem 4.1.3.1 and Proposition 4.1.1.8, universal cocone conclusion."
+   }
+  },
+  {
+   "text": "The map $i$ is degreewise injective between small quasicategories by Step 1, and Step 3 gives its universal cocone restriction property. The reverse implication in [lem-coef-universal-cocone-restriction-right-anodyne] therefore shows that $i=j^{\\mathrm{op}}$ is right anodyne. This recognition lemma requires no full-subcategory hypothesis, as needed here.",
+   "uses": [
+    "lem-coef-universal-cocone-restriction-right-anodyne"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 4.1.1.8 and Proposition 4.1.1.3(4), applied to the opposite monomorphism."
+   }
+  },
+  {
+   "text": "Finally reverse the weakly saturated construction of $i$. Order reversal is an involutive automorphism of the category of simplicial sets, so it preserves pushout diagrams, ordinal-indexed colimit diagrams and arrow-retract equations. The opposite of the right horn inclusion $\\Lambda_r^m\\hookrightarrow\\Delta^m$, $0<r\\leq m$, is isomorphic to $\\Lambda_{m-r}^m\\hookrightarrow\\Delta^m$, with $0\\leq m-r<m$. These are exactly the left horn generators in the statement. Thus the class of maps whose opposites are left anodyne contains all right horn generators and is closed under isomorphisms, pushouts, transfinite compositions and retracts. The minimality in [def-coef-infinity-right-anodyne] implies that the opposite of every right-anodyne map is left anodyne. Apply this to $i$ and use $(j^{\\mathrm{op}})^{\\mathrm{op}}=j$. At no point was the image assumed full.",
+   "uses": [
+    "def-coef-infinity-right-anodyne"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 2.0.0.3 and Proposition 4.1.1.3(4), explicit reversal of the weak saturation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "def-coef-infinity-right-anodyne",
+  "lem-cbc-left-fibration-equivalence-lift",
+  "lem-cbc-simplicial-groupoid-localization",
+  "lem-coef-infinity-cofinal-comma-criterion",
+  "lem-coef-infinity-isofibration-pullback-limit",
+  "lem-coef-infinity-relative-cone-equivalence",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-universal-cocone-restriction-right-anodyne"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Source-checked opposite argument combining Theorem 4.1.3.1 with Propositions 4.1.1.8 and 4.1.1.3(4); archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -61,7 +139,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-operadic-family-cell-presentation",
@@ -88,5 +166,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-coinitial-monomorphism-left-anodyne",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Wrote the opposite comma and realization calculations, justified the strict comma as an infinity-categorical pullback, reused the general comma criterion, and isolated the universal cocone recognition theorem as one statement-only prerequisite without a fullness assumption. Reversed the horn generators and weak saturation explicitly. No Lean attachment or Mathlib leaf.",
+  "blueprint": "Proof paragraph 2, derived coefficient mapping-complex adjunction before R lim; operadic free extension in the fixed-object rectification chain: the operadic Kan-extension existence and parameter extension used to make the derived adjunction coherent. This prerequisite supplies source-cell presentation for the operadic outer-horn problem. Local source-cell cone comparison: Contractible incoming commas imply a left-anodyne monomorphism. Steps 1-5 realize this local source-cell cone comparison through Quillen A and weak saturation, retaining the inherited unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-left-fibration-equivalence-lift",
+    "why": "Generic left-fibration isofibration property justifies the comma pullback model; the unit has no independent statement of this lifting tool."
+   },
+   {
+    "node": "lem-cbc-simplicial-groupoid-localization",
+    "why": "Generic localization universal property converts the realization definition of weak contractibility into the all-arrows-inverted convention used by the comma criterion; no unit route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-left-fibration-equivalence-lift",
+  "lem-cbc-simplicial-groupoid-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-ND-73fb1e694",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-73fb1e694 (reviewer sub-agent of L); spot-checked: I read all of the item, the new node and every cited statement, including the comma criterion's full proof. HTT is not in literature/ (WANTED) and I had no web access, so I checked against my knowledge of HTT, not the PDF; page numbers were not re-checked. The item is the dual of HTT Thm 4.1.3.1 combined with Prop 4.1.1.3(4): incoming commas K x_L L_{/l} and left horns 0<=i<m, oriented correctly. Cases checked: {0} and {1} in Delta^1, the non-full Lambda^2_0 in Delta^2, K=L, and the empty case. Steps 1 and 5 (op realization; (Lambda^m_r)^op = Lambda^m_{m-r} and transport of saturation) are genuinely elementary. Step 3: groupoid localization correctly turns weak contractibility into the comma criterion's 'invert all arrows' convention, and the criterion gives the actual cocone restriction equivalence with no colimits assumed; its proof works in any containing universe. Step 4 meets every hypothesis of the new node. The new node lem-coef-universal-cocone-restriction-right-anodyne is HTT 4.1.1.8 with 4.1.1.3(4) for monomorphisms of quasicategories; join and arrow cocone models are equivalent (HTT 4.2.1.5). It is true and tested on {1} and {0} in Delta^1 and on the empty map into a nonempty B. B1-B7 hold, six real Mathlib searches are recorded with no match, and it is not a duplicate: anodyne-cocones has only the forward direction, while cofinal-mono-right-anodyne and cofinal-relative-join-slice-restriction both need a full image. It does not restate the item. I accept both tool_uses (left fibration is an isofibration; localization at all edges). One fault, which I fixed (C1/C4): Step 2 replaced the comma criterion's arrow model {j} x_{J,ev0} Fun(Delta^1,J) with the join slice B_{l/} without a cited equivalence. The corrected item now cites the same-unit lem-coef-infinity-slice-arrow-equivalence (S_l = L_{/l}), dualizes it by opposites and updates proof_deps. I checked that this adds no cycle. No statement was changed and no node was dropped.; 1 file(s) fixed by the reviewer"
  }
 }

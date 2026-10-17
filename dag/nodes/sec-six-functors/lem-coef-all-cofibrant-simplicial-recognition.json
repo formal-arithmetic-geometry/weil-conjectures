@@ -11,9 +11,90 @@
   "lem-coef-simplicial-boundary-collapse-test",
   "def-coef-simplicial-tensor-cotensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First fix an object $X\\in\\mathcal M$ and consider $V_X(K)=X\\otimes K$. The tensor--cotensor adjunction in [def-coef-simplicial-tensor-cotensor] makes $V_X$ a left adjoint in the simplicial-set variable, so it preserves all small colimits. Explicitly, a map $X\\otimes\\operatorname{colim}_a K_a\\to Y$ corresponds to a simplicial map $\\operatorname{colim}_a K_a\\to\\underline{\\operatorname{Map}}(X,Y)$, hence to compatible maps $K_a\\to\\underline{\\operatorname{Map}}(X,Y)$, hence to a cocone of maps $X\\otimes K_a\\to Y$. These bijections respect the coprojections, proving the colimit universal property of [def-weil-pbc-category-colimit]. Likewise, for fixed $K$, maps $(\\operatorname{colim}_aX_a)\\otimes K\\to Y$ correspond to maps $\\operatorname{colim}_aX_a\\to Y^K$, and thus to compatible maps $X_a\\otimes K\\to Y$. This proves colimit preservation in the model-category variable as well, including the initial object. For every monomorphism $K\\hookrightarrow L$, the pushout-product hypothesis applied to the cofibration $0\\to X$ identifies $X\\otimes K\\to X\\otimes L$ as a cofibration (the tensor with the initial object is initial by the same adjunction). The collapse hypothesis gives $V_X(\\Delta^m)\\to V_X(\\Delta^0)$ a weak equivalence. Therefore [lem-coef-simplicial-boundary-collapse-test], applied to $V_X$, says that $X\\otimes-$ carries every weak homotopy equivalence of simplicial sets to a weak equivalence in $\\mathcal M$.",
+   "uses": [
+    "def-coef-simplicial-tensor-cotensor",
+    "lem-coef-simplicial-boundary-collapse-test",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.3.1.7, proof of preservation in the simplicial-set variable; enriched adjunction and horn induction"
+   }
+  },
+  {
+   "text": "For the walking span $x\\leftarrow a\\to b$, give $x,a,b$ degrees $0,1,2$, with $a\\to x$ negative and $a\\to b$ positive. By [lem-coef-reedy-model-structure], its latching objects are $0,0,A$ and its matching objects are $*,X,*$; hence a span $X\\leftarrow A\\to B$ is Reedy cofibrant when $X,A$ are cofibrant and $A\\to B$ is a cofibration. For a constant transformation on $p:U\\to V$, the relative matching maps are $p$ at $x,b$ and the isomorphism $U\\to V\\times_VU$ at $a$, so the constant functor preserves fibrations and trivial fibrations. Applying [lem-coef-reedy-colimit-comparison] to an objectwise weak comparison of such spans gives a weak comparison of their colimits, hence of the corresponding pushouts. For the small discrete category in degree zero, latching objects are initial, matching objects terminal, and Reedy cofibrancy is component cofibrancy. Constant diagrams again preserve fibrations and trivial fibrations, and [lem-coef-reedy-colimit-comparison] gives that an objectwise weak map between cofibrant families induces a weak map on coproducts. The empty coproduct is the identity of the initial object.",
+   "uses": [
+    "lem-coef-reedy-model-structure",
+    "lem-coef-reedy-colimit-comparison",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.3.1.7, elementary model-category colimit inputs; proved here by the mixed Reedy span and split Brown factorization"
+   }
+  },
+  {
+   "text": "The preceding span comparison also gives the precise left properness needed here. If $v:A\\to B$ is a cofibration and $w:A\\to A'$ weak, compare the spans $(A\\xleftarrow{1}A\\xrightarrow{v}B)$ and $(A'\\xleftarrow{w}A\\xrightarrow{v}B)$ by $(w,1,1)$. All their objects are cofibrant by hypothesis; both right legs are $v$. Step 2 therefore gives a weak map $A\\amalg_A B\\to A'\\amalg_A B$. The first pushout is canonically $B$: its inverse maps are obtained from the cocone $(v,1_B)$ and the coprojection of $B$, and both composites are identities by the pushout universal property. Under this identification and interchange of the two pushout legs, the comparison is exactly $B\\to B\\amalg_A A'$. Thus pushout of a weak equivalence along any cofibration is weak. Isomorphisms used in this identification are weak since their inverses fill every lifting square, placing them in the trivial-fibration class.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.2.4.2 as used in A.3.1.7; elementary specialization of Step 2"
+   }
+  },
+  {
+   "text": "Fix a weak equivalence $g:C\\to C'$ in $\\mathcal M$. First, for every $n$, $g\\otimes\\Delta^n$ is a weak equivalence: the naturality square for collapse to $\\Delta^0$ has the two vertical maps weak by hypothesis and bottom map $g$, so two-out-of-three applies. We prove by induction on $n\\geq-1$ that $g\\otimes K$ is a weak equivalence for every simplicial set $K$ of dimension at most $n$. For $n=-1$, $K=\\varnothing$ and its tensor comparison is the identity on the initial object. For clarity, index the filtration of [lem-coef-infinity-monomorphism-boundary-cells] for $\\varnothing\\hookrightarrow K$ by $K_{-1}=Z_0$ and $K_r=Z_{r+1}$. The stage $r$ pushout adds exactly the nondegenerate $r$-simplices and their degeneracies: a simplex of $\\Delta^r$ outside its boundary is a surjection onto $[r]$, hence a degeneracy of its top simplex. Thus $K_r$ is the $r$-skeleton, generated by the nondegenerate simplices of dimensions at most $r$. In particular $\\partial\\Delta^n$ has dimension at most $n-1$, since its generating faces are proper. At the inductive step, if $K$ has dimension at most $n$, no cells occur after stage $n$, so $K=K_n$ is the pushout attaching its nondegenerate $n$-simplices to $K_{n-1}$ with a small coproduct of $\\partial\\Delta^n\\to\\Delta^n$. The comparisons on the skeleton and each boundary are weak equivalences by induction; those on simplices are weak equivalences by the collapse square. The coproduct comparison proved in Step 2 makes the coproduct comparisons weak equivalences. For both $D=C,C'$, the map $D\\otimes\\partial\\Delta^n\\to D\\otimes\\Delta^n$ is a cofibration by the pushout-product hypothesis with $0\\to D$; its coproduct is a cofibration because a lifting square against a trivial fibration splits into summand squares, whose fillers assemble uniquely. Tensor preserves the attaching pushout by [def-coef-simplicial-tensor-cotensor]. All six objects in the two resulting spans are cofibrant by the all-objects hypothesis; the span comparison proved in Step 2 therefore makes $g\\otimes K$ a weak equivalence. This completes the finite-dimensional induction, including $n=0$ with empty boundaries and empty sets of attaching cells. For an arbitrary small $K$, the same boundary-cell node writes $K$ as the sequential colimit of its finite-dimensional skeleta. The indexing category $\\mathbb N$ is small, nonempty and filtered. Tensor preserves this colimit and the assumed filtered-colimit stability of weak equivalences in the arrow category gives that $g\\otimes K$ is a weak equivalence. Thus tensor preserves weak equivalences also in the model-category variable.",
+   "uses": [
+    "def-coef-simplicial-tensor-cotensor",
+    "lem-coef-infinity-monomorphism-boundary-cells"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.3.1.7, preservation in the model-category variable, expanded using skeletal induction and the given filtered-colimit hypothesis in place of Zorn"
+   }
+  },
+  {
+   "text": "Let $i:C\\to C'$ be a cofibration and $j:K\\hookrightarrow L$ a monomorphism. Put $P=(C\\otimes L)\\amalg_{C\\otimes K}(C'\\otimes K)$ and let $q:P\\to C'\\otimes L$ be its pushout product, a cofibration by hypothesis. Suppose first that $i$ is a weak equivalence. Step 4 makes $i\\otimes K$ and $i\\otimes L$ weak equivalences. The map $C\\otimes K\\to C\\otimes L$ is a cofibration by the pushout-product hypothesis with $0\\to C$. Apply Step 3 to this cofibration and the weak equivalence $i\\otimes K$: its pushout $a:C\\otimes L\\to P$ is weak. Since $qa=i\\otimes L$ is weak, two-out-of-three makes $q$ weak. Suppose instead that $j$ is a weak homotopy equivalence. Step 1 makes $C\\otimes j$ and $C'\\otimes j$ weak. The map $i\\otimes K$ is a cofibration by the pushout-product hypothesis with $\\varnothing\\hookrightarrow K$. Apply Step 3 to $i\\otimes K$ and $C\\otimes j$: its pushout $b:C'\\otimes K\\to P$ is weak. Now $qb=C'\\otimes j$ is weak, so $q$ is weak. Thus in either case the pushout product is a trivial cofibration.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition A.3.1.7, proof of the trivial pushout-product assertion"
+   }
+  },
+  {
+   "text": "For a cofibration $i:A\\to B$ and fibration $p:Y\\to Z$, put $r:\\underline{\\operatorname{Map}}(B,Y)\\to\\underline{\\operatorname{Map}}(A,Y)\\times_{\\underline{\\operatorname{Map}}(A,Z)}\\underline{\\operatorname{Map}}(B,Z)$. A square from $u:K\\to L$ to $r$ specifies maps $B\\otimes K\\to Y$, $A\\otimes L\\to Y$ and $B\\otimes L\\to Z$, whose restrictions agree. The enriched adjunctions in [def-coef-simplicial-tensor-cotensor] and the pushout universal property identify these data with a square from $i\\square u$ to $p$. A diagonal in either square corresponds to a map $B\\otimes L\\to Y$ satisfying the same restrictions, so diagonals correspond. By [lem-coef-kan-quillen-right-proper], every Kan fibration has the right lifting property against every horn inclusion $u$. Consequently $u$ has the left lifting property against all fibrations, so the trivial-cofibration/fibration weak factorization system in that node makes $u$ a trivial cofibration of simplicial sets. Step 5 makes $i\\square u$ a trivial cofibration of $\\mathcal M$, hence it lifts against $p$. The horn lifting criterion in the Kan node makes $r$ a Kan fibration. If $i$ is weak, use every boundary inclusion $u$: Step 5 makes $i\\square u$ trivial, so it lifts against $p$. If $p$ is weak, the hypothesis makes $i\\square u$ a cofibration, which lifts against the trivial fibration $p$. In either case $r$ lifts every boundary, including the empty boundary in dimension zero, so the boundary criterion in the Kan node makes it a trivial Kan fibration. With the given enrichment, tensors and cotensors, these are exactly all clauses of the asserted simplicial model axiom.",
+   "uses": [
+    "def-coef-simplicial-tensor-cotensor",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark A.3.1.6 and Proposition A.3.1.7, equivalence of pushout-product and mapping-space axioms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-simplicial-tensor-cotensor",
+  "def-weil-pbc-category-colimit",
+  "lem-coef-infinity-monomorphism-boundary-cells",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-reedy-colimit-comparison",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-simplicial-boundary-collapse-test"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, derived coefficient adjunction and coherent naturality: foundational simplicial presentation used through the existing ancestry. Agent-expanded proof of HTT Proposition A.3.1.7, read online (not archived)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +137,101 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-17",
    "verdict": "no exact match or one-line specialization; returned declarations concern generic simplicial-set boundary/horn/model-category infrastructure and do not state the requested theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "simplicial.*model|pushoutProduct|pushout product",
+   "results": "[grep] OK 0 hit(s): none",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "criterion recognizing simplicial model structure from tensor pushout products simplex contraction",
+   "results": "[leansearch] OK 8 hit(s): HomotopicalAlgebra.ModelCategory.mk', SSet.modelCategoryQuillen.instCategoryWithCofibrations, AugmentedSimplexCategory.tensorHom, SSet.modelCategoryQuillen.cofibrations_eq, SSet.modelCategoryQuillen.fibrations_eq, SSet.modelCategoryQuillen.mono_of_cofibration, SSet.instFiniteObjOppositeSimplexCategoryTensorObj, SSet.modelCategoryQuillen.cofibration_of_mono",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern generic model-category or simplicial-set infrastructure and do not state Proposition A.3.1.7."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModelCategory Simplicial pushout product mapping fibration",
+   "results": "[loogle] OK 0 hit(s): none",
+   "date": "2026-10-17",
+   "verdict": "unavailable: Loogle rejected the query as an unknown identifier; no absence inference made from this query."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "simplicial model category recognition criterion filtered colimits all objects cofibrant tensor simplex collapse",
+   "results": "[leanfinder] OK 8 hit(s): SSet.modelCategoryQuillen.instCategoryWithCofibrations, SSet.modelCategoryQuillen.instCategoryWithFibrations, HomotopicalAlgebra.ModelCategory, HomotopicalAlgebra.ModelCategory.mk', HomotopicalAlgebra.ModelCategory.cm1b, SSet.modelCategoryQuillen.fibrations_eq, HomotopicalAlgebra.bifibrantObjects, HomotopicalAlgebra.IsCofibrant",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern generic model-category or simplicial-set infrastructure and do not state Proposition A.3.1.7."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*pushout|left proper",
+   "results": "[grep] OK 2 hit(s): Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/LeftHomotopy.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern generic model-category or simplicial-set infrastructure and do not state Proposition A.3.1.7."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left proper model category pushout along cofibration is homotopy pushout",
+   "results": "[leanfinder] OK 8 hit(s): HomotopicalAlgebra.instWeakEquivalenceInlOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration, HomotopicalAlgebra.instWeakEquivalenceInrOfIsStableUnderCobaseChangeTrivialCofibrationsOfCofibration, HomotopicalAlgebra.instCofibrationInlOfIsStableUnderCobaseChangeCofibrations, HomotopicalAlgebra.instCofibrationInrOfIsStableUnderCobaseChangeCofibrations, HomotopicalAlgebra.Precylinder.LeftHomotopy.trans, HomotopicalAlgebra.instIsStableUnderCobaseChangeCofibrations, HomotopicalAlgebra.instIsStableUnderCobaseChangeTrivialCofibrations, HomotopicalAlgebra.Precylinder.LeftHomotopy.trans_h",
+   "date": "2026-10-17",
+   "verdict": "no match: returned declarations concern generic model-category or simplicial-set infrastructure and do not state Proposition A.3.1.7."
+  },
+  {
+   "tool": "loogle",
+   "query": "homotopy pushout cofibration model category",
+   "results": "[loogle] OK 0 hit(s): none",
+   "date": "2026-10-17",
+   "verdict": "unavailable: Loogle rejected the query as an unknown identifier; no absence inference made from this query."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.ModelCategory, CategoryTheory.SimplicialObject",
+   "results": "{\"t\": \"2026-10-17T04:01:42Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.ModelCategory, CategoryTheory.SimplicialObject\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: signatures read; generic simplicial enrichment and model-category classes are separate, and no compatible-model recognition theorem is supplied."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial enrichment on a model category is compatible if tensoring simplices contracts and pushout product preserves cofibrations",
+   "results": "{\"t\": \"2026-10-17T04:01:47Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial enrichment on a model category is compatible if tensoring simplices contracts and pushout product preserves cofibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\", \"CategoryTheory.SimplicialCategory\", \"SSet.instMonoidalClosed\"], \"digest\": \"d159ac8a4a64ed18\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: signatures read; generic simplicial enrichment and model-category classes are separate, and no compatible-model recognition theorem is supplied."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicially enriched model category is a simplicial model category if the tensor pushout product is a cofibration and standard simplices act by weak equivalences",
+   "results": "{\"t\": \"2026-10-17T04:11:55Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicially enriched model category is a simplicial model category if the tensor pushout product is a cofibration and standard simplices act by weak equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.ModelCategory\", \"HomotopicalAlgebra.BifibrantObject\", \"HomotopicalAlgebra.ModelCategory.categoryWithCofibrations\", \"HomotopicalAlgebra.ModelCategory.categoryWithFibrations\", \"HomotopicalAlgebra.bifibrantObjects\"], \"digest\": \"742a2c80a09c8478\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and Mathlib source; ordinary model axioms, simplicial enrichment and simplicial-set pushout products do not give this general enriched-model recognition theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialCategory\", \"ModelCategory\"",
+   "results": "{\"t\": \"2026-10-17T04:12:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialCategory\\\", \\\"ModelCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and Mathlib source; ordinary model axioms, simplicial enrichment and simplicial-set pushout products do not give this general enriched-model recognition theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "simplicialModel|simplicial.*model|pushout.?product|left.?Quillen.?bifunctor",
+   "results": "{\"t\": \"2026-10-17T04:12:15Z\", \"tool\": \"grep\", \"query\": \"simplicialModel|simplicial.*model|pushout.?product|left.?Quillen.?bifunctor\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\"], \"digest\": \"1144225fe2de6ab9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and Mathlib source; ordinary model axioms, simplicial enrichment and simplicial-set pushout products do not give this general enriched-model recognition theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of a simplicial enrichment with a model structure from weak equivalences C tensor simplex to C and cofibration pushout products",
+   "results": "{\"t\": \"2026-10-17T04:12:31Z\", \"tool\": \"leansearch\", \"query\": \"Compatibility of a simplicial enrichment with a model structure from weak equivalences C tensor simplex to C and cofibration pushout products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.SimplicialCategory\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"CategoryTheory.instCategorySimplicialObject\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\", \"SSet.modelCategoryQuillen.mono_of_cofibration\"], \"digest\": \"a48ca13b6997c1d5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures and Mathlib source; ordinary model axioms, simplicial enrichment and simplicial-set pushout products do not give this general enriched-model recognition theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-simplicial-right-fibration-presentation",
@@ -86,5 +258,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-all-cofibrant-simplicial-recognition",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Six-step proof: tensor colimit preservation and the boundary/collapse criterion; span and coproduct comparison using one new acyclic Reedy-colimit comparison node; left properness by span comparison; finite skeletal induction and filtered colimits for tensor preservation in the model-category variable; both trivial pushout-product cases; explicit lifting transposition to the mapping-space axiom. One new statement-only unsplit node; no new Mathlib leaves. Independent second reading checked all six steps, every cited statement, the textbook sources and edge cases, and refreshed the contradictory historical summary.",
+  "blueprint": "The existing ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2 displays the derived coefficient R Hom / inverse-limit adjunction. This item supplies the simplicial-model recognition tool used in its existing finite-diagram enhancement ancestry; it is not an assertion directly printed in that blueprint paragraph. Steps 1-6 realize the technical input already recorded in blueprint.from.place.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-a1c8c273b",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-a1c8c273b (reviewer sub-agent of L); spot-checked: I read the full item and the new node lem-coef-reedy-colimit-comparison, plus every cited statement: tensor-cotensor, category-colimit, boundary-cells, Kan model, Reedy model, boundary-collapse test and Brown split factorizations. The item's statement, stmt_deps, unit and blueprint field are byte-identical to the live item, which is still unsplit; the new id does not exist live. HTT and Hovey are not archived and network access is blocked here, so I checked HTT A.3.1.7 (sufficient direction) and Remark A.3.1.6 from my own knowledge. The item matches them hypothesis by hypothesis, and the proof is correctly marked agent with WANTED lines. Step 1: the representing isomorphisms give colimit preservation in both variables, and the pushout product with 0->X gives the boundary cofibrations needed by the collapse test's statement. Step 2: I recomputed the mixed span's latching (0,0,A), matching (*,X,*) and constant relative matching maps (p, iso, p), and checked the discrete and empty cases. Step 3: the (w,1,1) comparison correctly gives cobase change. It restates the existing lem-coef-all-cofibrant-left-proper, but that node reaches the item through model-cofibrant-colimit-comparison, so citing it would close a cycle (graph traversal run). Step 4, 2609 characters: one dimension induction. Its parts are the skeleton reindexing K_r=Z_{r+1}, the empty and n=0 cases, coproducts of cofibrations, Step 2's comparisons and the sequential filtered colimit. It hides no further lemma and may stay. Step 5: both pushout directions are correct. Step 6: the lifting transposition and horn/boundary criteria from the Kan node are correct. New node: true, by the colim-const adjunction plus Brown factorization in the Reedy model category. I tested J empty, a point, discrete J, the span and the terminal category. It is statement-only and self-contained with its notions cited, acyclic, and has no duplicate in the DAG or blueprint (no Reedy node in the blueprint). Mathlib searches cover all three kinds. No SGA, no target, base-change or coefficient change, no fixes, no tool_uses."
  }
 }
