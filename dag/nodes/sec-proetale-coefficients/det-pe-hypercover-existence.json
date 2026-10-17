@@ -25,7 +25,8 @@
   "def-weil-pbc-scheme-conventions",
   "def-weil-affine-spectrum",
   "def-weil-pbc-simplicial-object",
-  "def-weil-pbc-simplicial-coskeleton"
+  "def-weil-pbc-simplicial-coskeleton",
+  "lem-weil-pbc-matching-object-proper-faces"
  ],
  "proof": [
   {
@@ -331,5 +332,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fda268921",
+  "group": "N5",
+  "result": "pass",
+  "note": "The statement matches the node and Stacks 09A1 clause by clause. Hypotheses: U qcqs as a scheme (CompactSpace and QuasiSeparatedSpace of U.left), no assumption on X. Clause 1: finite Pi of IsWContractibleRing rings, empty product included. Clause 2: every quasi-compact V has a single ProEt.precoverage covering map from Spec D with D w-contractible, V not assumed quasi-separated. Clause 3: SimplicialObject (Over U); every term equals ProEt.mk of Spec D_r with D_r w-contractible; weak contractibility is the first condition of proetale_weakContractible_equivalences; W0 -> U is a singleton cover; the proper-face limit cone in Over U (degree one W0 x_U W0) has the canonical matching map, fixed by its projection equations, as a singleton cover. Checked edge cases (empty I, V, U), universes, stmt_deps, proof-dep imports, verbatim lean.statement, sorry-only proof, docstrings, and both report sections. No duplicate declaration found. nt_compile.py --json on the snapshot file: rc=0, no errors or warnings."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtale.HypercoverExistence",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtale/HypercoverExistence.lean",
+  "declaration": "AlgebraicGeometry.exists_proetale_hypercover_single_affine",
+  "statement": "theorem exists_proetale_hypercover_single_affine (X : Scheme.{u}) (U : X.ProEt) (hUqc : CompactSpace U.left) (hUqs : QuasiSeparatedSpace U.left) : (∀ (I : Type u) [Finite I] (D : I → Type u) [∀ i, CommRing (D i)] [∀ i, IsWContractibleRing (D i)], IsWContractibleRing (∀ i, D i)) ∧ (∀ (V : X.ProEt), CompactSpace V.left → ∃ (D : CommRingCat.{u}) (f : Spec D ⟶ X) (hf : WeaklyEtale f) (g : @Scheme.ProEt.mk X _ f hf ⟶ V), IsWContractibleRing D ∧ Presieve.singleton g ∈ (Scheme.ProEt.precoverage X) V) ∧ ∃ (W : SimplicialObject (Over U)), (∀ (r : ℕ), ∃ (D : CommRingCat.{u}) (f : Spec D ⟶ X) (hf : WeaklyEtale f), IsWContractibleRing D ∧ (W _⦋r⦌).left = @Scheme.ProEt.mk X _ f hf ∧ (∀ (F : Sheaf (Scheme.ProEt.topology X) (Type (u + 1))) (φ : F ⟶ (Scheme.ProEt.topology X).uliftYoneda.{u + 1}.obj (W _⦋r⦌).left) [Epi φ], ∃ s : (Scheme.ProEt.topology X).uliftYoneda.{u + 1}.obj (W _⦋r⦌).left ⟶ F, s ≫ φ = 𝟙 _)) ∧ Presieve.singleton (W _⦋0⦌).hom ∈ (Scheme.ProEt.precoverage X) U ∧ (∀ (r : ℕ), ∃ (c : Cone (SimplicialObject.properFaceDiagram W (r + 1))) (μ : W _⦋r + 1⦌ ⟶ c.pt), Nonempty (IsLimit c) ∧ Presieve.singleton μ.left ∈ (Scheme.ProEt.precoverage X) c.pt.left ∧ (∀ (a : SimplicialObject.ProperFaceCategory (r + 1)), μ ≫ c.π.app (Opposite.op a) = W.map a.obj.hom.op))",
+  "by": "N5",
+  "date": "2026-10-17",
+  "branch": "newtargets-dag"
  }
 }

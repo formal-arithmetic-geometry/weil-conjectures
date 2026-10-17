@@ -170,5 +170,23 @@
   "group": "Q12",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-048dfa6a7 (reviewer sub-agent of L); spot-checked: I read all the mathematics in full and made no repairs; the full review is in review.md. Item statement: identical to the base and to the read-only copies in both projects. It agrees with Stacks 0FUD/063U (divisors.tex). The restriction to primes q' that contain the f'_j is needed: without it, k[t] with f=t and q'=(t-1) is a counterexample. The report records this as a source error. Steps: step 1 uses 00LN(1) (regular implies quasi-regular). Step 2 applies the new 0CEP(1) node to R→κ(p), which needs only flatness of A/J; the fibre is finite type over a field, hence Noetherian. Step 3 localizes the associated-graded isomorphism exactly and applies the new 061S node in the Noetherian local fibre. Step 4 applies the 061L node, with γ=ā/r so a∉q, then checks finite presentation and flatness of A[1/a]. Step 5 checks every hypothesis of the 062Y fibre-Cartier leaf, which is the Lean declaration Fiber.lean:981 (read): flat and finitely presented D_e, a field with kernel p, a principal ideal, and g_P=1 at all fibre primes. It also checks v=t·f_{e+1}, so f_{e+1} is a nonzerodivisor, and that each new denominator c/h^n gives a principal open not containing q. Step 6 uses 00HL with N=R' and no flatness of R', then the weakly-regular localization at q' with h'∉q'. Long step 5 (2303 characters): it is the single 063U induction, now with its invariant, base case and inductive step stated. Its only non-elementary input is the cited 062Y leaf, and the rest is short checks. Splitting it would put the whole item into a child, the D1/D2 fault this repair removed, so it may stay. New nodes: 0CEP(1) and 061S (with M=A) match their Stacks sources hypothesis by hypothesis. Both are statement-only and meet B1–B7. Small cases agree: b=0, a unit generator, Z[x]/(2x) with f=x (hypothesis fails), and k[x,y]/(xy) localized with f=x (hypothesis fails, and x is a zerodivisor). Both are strictly smaller than the item. An rg search for 0CEP, 061S, quasi-regular, 063U and 062Y found no duplicates. Mathlib RegularSequence.lean:21 lists quasi-regular sequences as TODO. Route: lem-pur-regular-sequence-graded-polynomial is in unit sk-def-purity-conv, which this item's unit cites. The declared tool use lem-exc-regular-sequence-principal-neighbourhood is in fact in the item's own unit, so the declaration is redundant; accepting it is harmless. No SGA source, no cycle, and proof_deps equals the union of the steps' uses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f6c1afead",
+  "group": "NY",
+  "result": "pass",
+  "note": "Node differs from base only in lean; lean.statement verbatim in file. Every clause matches the node and Stacks 063U/0FUD: R, A, R' in independent universes u v w; Module.Flat R A; Algebra.FinitePresentation; f : Fin b → A with RingTheory.Sequence.IsRegular; Module.Flat R (A ⧸ span (range f)); arbitrary Algebra R R' with no flatness; primes q of A ⊗[R] R' containing f j ⊗ₜ 1; conclusion is IsRegular of the images in Localization.AtPrime q, in order, with the nonzero final quotient. No extra assumptions. Edge cases fine: b=0, A'=0 vacuous, A=0, unit f_j, non-flat Z[t] over Z to F2. No duplicate in side Sheaf RingTheory modules or Mathlib. Gates met: theorem only, proof sorry, source and blueprint docstrings, six-step proof docstring, autoImplicit false, lines ≤ 100 chars, no pro-etale content; report has Worker report and Second reading by NY. nt_compile.py --json against the side overlay: clean, 2.0 s, exit 0, no errors or warnings. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RelativeRegularEquationsBaseChange",
+  "declaration": "RingTheory.Sequence.isRegular_localizationAtPrime_tensorProduct_of_flat_quotient",
+  "file": "lean/Sheaf/RingTheory/RelativeRegularEquationsBaseChange.lean",
+  "statement": "theorem isRegular_localizationAtPrime_tensorProduct_of_flat_quotient {R : Type u} {A : Type v} {R' : Type w} [CommRing R] [CommRing A] [CommRing R'] [Algebra R A] [Algebra R R'] [Module.Flat R A] [Algebra.FinitePresentation R A] {b : ℕ} (f : Fin b → A) (hreg : IsRegular A (List.ofFn f)) [Module.Flat R (A ⧸ Ideal.span (Set.range f))] (q : Ideal (A ⊗[R] R')) [q.IsPrime] (hmem : ∀ j : Fin b, f j ⊗ₜ[R] (1 : R') ∈ q) : IsRegular (Localization.AtPrime q) (List.ofFn fun j : Fin b ↦ algebraMap (A ⊗[R] R') (Localization.AtPrime q) (f j ⊗ₜ[R] (1 : R')))",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

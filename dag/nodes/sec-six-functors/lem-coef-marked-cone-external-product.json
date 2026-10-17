@@ -29,7 +29,9 @@
  "stmt_deps": [
   "lem-coef-coherent-nerve-comparison",
   "lem-coef-marked-point-cartesian-model",
-  "lem-coef-simplicial-projective-model-calculus"
+  "lem-coef-simplicial-projective-model-calculus",
+  "lem-coef-unmarked-straightening-quillen",
+  "lem-coef-pinched-cube-latching"
  ],
  "proof": [
   {
@@ -341,5 +343,42 @@
   "group": "Q125",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-64932ac65 (reviewer sub-agent of L); spot-checked: Read in full: the 13-step proof of the unchanged statement, which matches HTT Prop 3.2.1.13 (arbitrary simplicial categories, no local Kan hypothesis, objectwise equivalence; HTT is not archived, a WANTED line is in the report, proof_origin=agent). I checked it against all 14 cited statements. Steps 1-2: colimit preservation, a_! substitution, and pi_! as the enriched coend (correct because v has no outgoing arrows); product Fubini. Step 3: general base/index reduced to the canonical generator node via pi_! left Quillen. Step 4: hypotheses of clause (b) of lem-coef-model-cofibrant-colimit-comparison checked objectwise. Step 5: inner anodyne gives a retract of an inner-horn cell map by the small-object node; flat marking is a left adjoint. Step 6: free point diagram, co-Yoneda. Step 7: four free cells verified. Step 8: recomputed C[(Delta^1)^2 * Delta^0] as two C[Delta^3] glued over C[Delta^2]; the coend collapses {adv}->{abdv}, giving V = H_b glued to H_c along r, with b,c,d isomorphisms. Step 9: H is the pushout along Lambda^2_2 (marking stays minimal). Steps 10-11: span comparisons and the marking lists AB,CD / AC,BD / four sides plus r, with t unmarked, all verified. Step 12: left Quillen preservation between cofibrant objects. Step 13: the induction is well-founded and not circular. No new nodes. Not a duplicate of lem-coef-unstraightening-external-products (that is the unmarked right-adjoint isomorphism). No cycle. uses equal proof_deps. Tool use lem-cbc-spine-inner-anodyne accepted. FIX: step 13 now cites lem-coef-infinity-monomorphism-boundary-cells for the top-simplex pushout and the edge attachment; no other field changed.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f210fe469",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Checked node vs Lean clause by clause. Inputs: Over (sharp S), SCat.{u} indices, arbitrary u:C[S]->I^op. Reuses the existing unmarked conePushout/value/valueAction. Marking: degenerate edges plus valueAction(t,g) for coning edge {0,2}->{0,1,2}, d=u(source e), all g in hom I d i; HEq endpoints satisfiable. productIndex/productFunctor/productInput are real data. ComparisonFamily is fixed uniquely by the four pushout-leg equations and first/second_value, with enriched and input naturality, and objectwise Marked.weak. No local Kan hypothesis; one small universe; nothing chosen from the sorry. Node changed only in lean and stmt_deps (two landed deps added). Docstrings carry source, blueprint id and all 13 proof steps; statement field verbatim (line 517); no line over 100 chars. No product enrichment in Mathlib or the project. Q61 MappingSimplexConeFibers only covers the special case and lists this item in proof_deps (cycle), so not importing it is correct. nt_compile.py: rc=0, module 3.2 s, no errors or warnings, run twice. Cosmetic only: report.md shows 'the project server' in place of HTT numbers 3.2.1.x."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.MarkedConeExternalProduct",
+  "declaration": "SSet.MarkedCone.marked_cone_external_product",
+  "declarations": [
+   "SSet.MarkedCone.productEnrichment",
+   "SSet.MarkedCone.productIndex",
+   "SSet.MarkedCone.firstProjection",
+   "SSet.MarkedCone.secondProjection",
+   "SSet.MarkedCone.productFunctor",
+   "SSet.MarkedCone.Input",
+   "SSet.MarkedCone.underlyingInput",
+   "SSet.MarkedCone.underlyingInputMap",
+   "SSet.MarkedCone.productInput",
+   "SSet.MarkedCone.productInputMap",
+   "SSet.MarkedCone.edgeTriangle",
+   "SSet.MarkedCone.markedValue",
+   "SSet.MarkedCone.externalAction",
+   "SSet.MarkedCone.ComparisonFamily",
+   "SSet.MarkedCone.ExternalProductStatement",
+   "SSet.MarkedCone.marked_cone_external_product"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/MarkedConeExternalProduct.lean",
+  "statement": "theorem marked_cone_external_product : Nonempty ExternalProductStatement.{u}",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the canonical unmarked enriched cone pushout, values and actions. The input marking is explicit, and both projection functors and all component maps are fixed by their pushout-leg and mapping-object equations. The theorem packages the construction with both naturality assertions and the absolute marked weak-equivalence conclusion; no definition chooses data from its sorry. Two already-landed statement dependencies are added for the reused constructions."
  }
 }
