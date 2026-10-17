@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.RingTheory.Etale.TraitSection.KummerIntegralClosure
+public import WeilConjectures.RingTheory.Etale.TraitSection.Points
 public import WeilConjectures.RingTheory.Etale.Abhyankar
 public import WeilConjectures.RingTheory.Etale.DepthTwo.SmoothPurity
 
@@ -55,7 +56,7 @@ noncomputable abbrev sectionLocalization (ε : B →ₐ[A] A) : Type u :=
   Localization.AtPrime ((maximalIdeal A).comap ε)
 
 include Bk in
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 3200000 in
 /-- **The normalization after the tame Kummer base change is finite étale** at the section.
 (Gap: purity over `A₂` and Abhyankar's lemma, see the module docstring.) -/
 theorem etale_finite_integralClosure_kummer (ε : B →ₐ[A] A) (G : Type*) [Group G] [Finite G]
@@ -72,10 +73,10 @@ theorem etale_finite_integralClosure_kummer (ε : B →ₐ[A] A) (G : Type*) [Gr
   sorry
 
 include Bk in
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 3200000 in
 /-- **The points along the section** split the closed fibre of the normalization after the tame
-Kummer base change, and are invariant under the Kummer action. (Gap: see the module
-docstring.) -/
+Kummer base change, and are invariant under the Kummer action
+(`Algebra.TraitSection.exists_points_kummer`). -/
 theorem exists_points_integralClosure_kummer (ε : B →ₐ[A] A) (G : Type*) [Group G] [Finite G]
     {K : Type u} [Field K] [Algebra A K] [IsFractionRing A K]
     (φ : Fin (Nat.card G) → (L →+* K))
@@ -86,6 +87,8 @@ theorem exists_points_integralClosure_kummer (ε : B →ₐ[A] A) (G : Type*) [G
     letI R := sectionLocalization A ε
     letI R' := AdjoinRoot (X ^ Nat.card G - C (algebraMap A R ϖ))
     letI := NeZero.of_pos (Nat.card_pos (α := G))
+    Algebra.FormallyUnramified R' (integralClosure R' (R' ⊗[R] (R ⊗[B] L))) →
+    Algebra.EssFiniteType R' (integralClosure R' (R' ⊗[R] (R ⊗[B] L))) →
     ∃ ψ : Fin (Nat.card G) → (integralClosure R' (R' ⊗[R] (R ⊗[B] L)) →ₐ[R'] ResidueField R'),
       Function.Injective ψ ∧
       haveI hζR : algebraMap A R ζ ^ Nat.card G = 1 := by rw [← map_pow, hζ, map_one]
@@ -95,8 +98,62 @@ theorem exists_points_integralClosure_kummer (ε : B →ₐ[A] A) (G : Type*) [G
       ∀ j (g : Multiplicative (ZMod (Nat.card G))) t,
         ψ j (Algebra.IsInvariant.integralClosureMap (R := R) (R' := R') (M := R ⊗[B] L)
           (Multiplicative (ZMod (Nat.card G))) g t) = ψ j t := by
-  sorry
+  intro hU hE
+  let R := sectionLocalization A ε
+  set P := (maximalIdeal A).comap ε
+  have hunit (b : P.primeCompl) : IsUnit (ε.toRingHom b) := by
+    by_contra h
+    exact b.2 (by simpa [P, Ideal.mem_comap] using h)
+  let σ₀ : R →+* A := IsLocalization.lift (M := P.primeCompl) (S := R) hunit
+  have hσB (b : B) : σ₀ (algebraMap B R b) = ε b := IsLocalization.lift_eq hunit b
+  let σ : R →ₐ[A] A :=
+    { σ₀ with
+      commutes' := fun a ↦ by
+        change σ₀ (algebraMap A R a) = _
+        rw [IsScalarTower.algebraMap_apply A B R, hσB]
+        simp }
+  letI : Algebra B K := ((algebraMap A K).comp ε.toRingHom).toAlgebra
+  let f₁ : R →ₐ[B] K :=
+    { (algebraMap A K).comp σ.toRingHom with
+      commutes' := fun b ↦ by
+        change algebraMap A K (σ₀ (algebraMap B R b)) = _
+        rw [hσB]
+        rfl }
+  let f₂ (j : Fin (Nat.card G)) : L →ₐ[B] K :=
+    { φ j with commutes' := fun b ↦ congr($(hφ j) b) }
+  let χ (j : Fin (Nat.card G)) : R ⊗[B] L →+* K :=
+    (Algebra.TensorProduct.lift f₁ (f₂ j) fun _ _ ↦ Commute.all _ _).toRingHom
+  have hχ (j : Fin (Nat.card G)) :
+      (χ j).comp (algebraMap R (R ⊗[B] L)) = (algebraMap A K).comp σ.toRingHom :=
+    RingHom.ext fun r ↦ by simp [χ, f₁, Algebra.TensorProduct.algebraMap_apply]
+  have hχinj (j l : Fin (Nat.card G))
+      (H : ∀ m : R ⊗[B] L, IsIntegral R m → χ j m = χ l m) : j = l := by
+    have hinj : Function.Injective (algebraMap A K) := IsFractionRing.injective A K
+    have hT (t : integralClosure B L) : φ j t = φ l t := by
+      have hm : IsIntegral R ((1 : R) ⊗ₜ[B] (t : L)) :=
+        (t.2.map (Algebra.TensorProduct.includeRight : L →ₐ[B] R ⊗[B] L)).tower_top
+      simpa [χ, f₁, f₂] using H _ hm
+    refine hφinj (RingHom.ext fun x ↦ ?_)
+    have hx : IsIntegral Bk x := Algebra.IsIntegral.isIntegral x
+    obtain ⟨⟨_, r, hr, rfl⟩, hm⟩ := IsIntegral.exists_multiple_integral_of_isLocalization
+      (Algebra.algebraMapSubmonoid B (nonZeroDivisors A)) x hx
+    have h1 := hT ⟨_, hm⟩
+    simp only [Submonoid.smul_def, Algebra.smul_def, map_mul] at h1
+    have hr0 : φ j (algebraMap B L (algebraMap A B r)) ≠ 0 := by
+      rw [← RingHom.comp_apply, hφ]
+      simpa using (map_ne_zero_iff _ hinj).2 (nonZeroDivisors.ne_zero hr)
+    have hjl' : φ j (algebraMap B L (algebraMap A B r)) =
+        φ l (algebraMap B L (algebraMap A B r)) := by
+      have h1 := congrArg (· (algebraMap A B r)) (hφ j)
+      have h2 := congrArg (· (algebraMap A B r)) (hφ l)
+      simp only [RingHom.comp_apply] at h1 h2
+      rw [h1, h2]
+    rw [← hjl'] at h1
+    exact mul_left_cancel₀ hr0 h1
+  exact Algebra.TraitSection.exists_points_kummer hϖ σ χ hχ hχinj hζ
 
+set_option synthInstance.maxHeartbeats 400000 in
+set_option maxHeartbeats 3200000 in
 include Bk in
 /-- **Étaleness of the normalization at a section over a trait containing the `|G|`-th roots of
 unity.** See the module docstring. -/
@@ -139,7 +196,9 @@ theorem etale_localization_integralClosure_of_isPrimitiveRoot (ε : B →ₐ[A] 
       (AdjoinRoot.injective_algebraMap_X_pow_sub_C n (algebraMap A R ϖ))
   obtain ⟨hE', hF', hk⟩ := etale_finite_integralClosure_kummer (Bk := Bk) ε G hfix hrank hG hϖ
   obtain ⟨ψ, hψ, hψΓ⟩ := exists_points_integralClosure_kummer (Bk := Bk) ε G φ hφ hφinj hϖ
-    hζ.pow_eq_one
+    hζ.pow_eq_one ⟨hE'.formallyEtale.subsingleton_kaehlerDifferential⟩
+    (@_root_.Algebra.EssFiniteType.of_finiteType _ _ _ _ _
+      (@_root_.Algebra.FiniteType.of_finitePresentation _ _ _ _ _ hE'.finitePresentation))
   obtain ⟨hE, hF⟩ := RingTheory.InvariantsDescent.etale_and_finite_integralClosure_of_kummer
     n (algebraMap A R ϖ) hζR hu hn hinj hk ψ hψ hψΓ
   let e₀ : R ⊗[B] integralClosure B L ≃ₐ[R] integralClosure R M :=
