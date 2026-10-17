@@ -57,8 +57,9 @@ noncomputable instance monoidalCategory_boundedConstructible :
 
 attribute [local instance] DerivedCategory.braidedCategoryOfKFlat in
 /-- The Koszul braiding of the derived tensor product on `Dᵇc(X)⟦Λ⟧`: the restriction
-(`ObjectProperty.fullBraidedSubcategory`) of the braiding `DerivedCategory.braidedCategoryOfKFlat` of
-`D(Mod_{Λ_X})`. It is not an instance, see the module docstring. -/
+(`ObjectProperty.fullBraidedSubcategory`) of the braiding
+`DerivedCategory.braidedCategoryOfKFlat` of `D(Mod_{Λ_X})`. It is not an instance, see the module
+docstring. -/
 @[instance_reducible]
 noncomputable def boundedConstructibleBraiding : BraidedCategory (Dᵇc(X.left)⟦Λ⟧) :=
   ObjectProperty.fullBraidedSubcategory _

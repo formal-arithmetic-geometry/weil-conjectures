@@ -14,7 +14,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectTrace
 
 This file proves item (3) (scalar extension) of blueprint `prop-trf-trace-formal-laws`
 (subsection `sk-p-trace`) for the categorical trace in the derived category, with the Koszul
-braiding `DerivedCategory.braidedCategory` of the derived tensor product: for a ring
+braiding `DerivedCategory.braidedCategoryOfKFlat` of the derived tensor product: for a ring
 homomorphism `φ : R →+* B`, `φ (tr_R (v ∣ P)) = tr_B (v ⊗ B ∣ P ⊗^L B)`.
 
 ## Main results
@@ -91,10 +91,10 @@ theorem exists_trace_eq_algebraMap_and_trace_extendScalars_eq_algebraMap
     (hw' : w' ≫ e'.hom =
       e'.hom ≫ Q.map (((ModuleCat.extendScalars φ).mapHomologicalComplex _).map v)) :
     ∃ a : R,
-      (letI := braidedCategory (ModuleCat.{u} R)
+      (letI := braidedCategoryOfKFlat (ModuleCat.{u} R)
       MonoidalCategory.trace w =
         algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R)))) a) ∧
-      (letI := braidedCategory (ModuleCat.{u} B)
+      (letI := braidedCategoryOfKFlat (ModuleCat.{u} B)
       MonoidalCategory.trace w' =
         algebraMap B (End (𝟙_ (DerivedCategory (ModuleCat.{u} B)))) (φ a)) := by
   refine ⟨_, trace_eq_algebraMap_sum_negOnePow_linearMapTrace P v s hs hfree hfin K w e hw, ?_⟩

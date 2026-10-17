@@ -29,7 +29,7 @@ components of `v`.
 ## Main results
 
 - `DerivedCategory.trace_eq_algebraMap_sum_negOnePow_linearMapTrace`: the alternating sum
-  formula, for the Koszul braiding `DerivedCategory.braidedCategory` of the derived tensor
+  formula, for the Koszul braiding `DerivedCategory.braidedCategoryOfKFlat` of the derived tensor
   product.
 - `DerivedCategory.trace_eq_algebraMap_sum_negOnePow_linearMapTrace_of_braiding_hom_μ`: the
   same for any braiding for which `Qh` is braided on K-flat complexes.
@@ -59,6 +59,8 @@ The right hand side is an element of `R`, read in `End (𝟙_ D(R))` through the
 -/
 
 @[expose] public section
+
+attribute [local instance] HomotopyCategory.koszulBraidedCategory
 
 universe u
 
@@ -99,8 +101,8 @@ of the ordinary `R`-module traces of the components of `v`:
 
 provided the braiding of `D(R)` is the Koszul one in the sense that the lax monoidal structure
 of `Qh : K(R) ⥤ D(R)` intertwines the Koszul braiding of K-flat complexes with the braiding
-of `D(R)`. This holds for the braiding `DerivedCategory.braidedCategory` of the derived tensor
-product (`DerivedCategory.braiding_hom_μ_Qh`). -/
+of `D(R)`. This holds for the braiding `DerivedCategory.braidedCategoryOfKFlat` of the derived
+tensor product (`DerivedCategory.braiding_hom_μ_Qh`). -/
 theorem trace_eq_algebraMap_sum_negOnePow_linearMapTrace_of_braiding_hom_μ
     [BraidedCategory (DerivedCategory (ModuleCat.{u} R))]
     (hβ : ∀ X Y : HomotopyCategory (ModuleCat.{u} R) (.up ℤ),
@@ -149,10 +151,10 @@ theorem trace_eq_algebraMap_sum_negOnePow_linearMapTrace_of_braiding_hom_μ
 
 
 /-- Blueprint `sk-p-trace`, via `lem-trf-chain-supertrace`: for the braiding
-`DerivedCategory.braidedCategory` of the derived tensor product on `D(R)` (the Koszul braiding
-of complexes, descended along K-flat resolutions), the categorical trace of a chain endomorphism
-`v` of a bounded complex `P` of finitely generated free `R`-modules is the alternating sum of
-the traces of its components:
+`DerivedCategory.braidedCategoryOfKFlat` of the derived tensor product on `D(R)` (the Koszul
+braiding of complexes, descended along K-flat resolutions), the categorical trace of a chain
+endomorphism `v` of a bounded complex `P` of finitely generated free `R`-modules is the alternating
+sum of the traces of its components:
 
 `tr_R (v ∣ P) = ∑ i, (-1) ^ i * Tr_R (v ^ i ∣ P ^ i)`. -/
 theorem trace_eq_algebraMap_sum_negOnePow_linearMapTrace
@@ -161,11 +163,11 @@ theorem trace_eq_algebraMap_sum_negOnePow_linearMapTrace
     (hfree : ∀ i, Module.Free R (P.X i)) (hfin : ∀ i, Module.Finite R (P.X i))
     (K : DerivedCategory (ModuleCat.{u} R)) [HasRightDual K] (w : K ⟶ K)
     (e : K ≅ Q.obj P) (hw : w ≫ e.hom = e.hom ≫ Q.map v) :
-    letI := braidedCategory (ModuleCat.{u} R)
+    letI := braidedCategoryOfKFlat (ModuleCat.{u} R)
     MonoidalCategory.trace w =
       algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R))))
         (∑ i ∈ s, (i.negOnePow : ℤ) • LinearMap.trace R (P.X i) (v.f i).hom) :=
-  letI := braidedCategory (ModuleCat.{u} R)
+  letI := braidedCategoryOfKFlat (ModuleCat.{u} R)
   trace_eq_algebraMap_sum_negOnePow_linearMapTrace_of_braiding_hom_μ
     (fun X Y _ _ ↦ braiding_hom_μ_Qh X Y) P v s hs hfree hfin K w e hw
 

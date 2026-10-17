@@ -14,7 +14,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectTrace
 
 This file proves two of the formal laws of blueprint `prop-trf-trace-formal-laws`
 (subsection `sk-p-trace`) for the categorical trace in the derived category `D(R)`, with the
-Koszul braiding `DerivedCategory.braidedCategory` of the derived tensor product.
+Koszul braiding `DerivedCategory.braidedCategoryOfKFlat` of the derived tensor product.
 
 ## Main results
 
@@ -66,9 +66,9 @@ theorem trace_eq_trace_add_trace_of_shortExact
     (e₁ : K₁ ≅ Q.obj S.X₁) (e₂ : K₂ ≅ Q.obj S.X₂) (e₃ : K₃ ≅ Q.obj S.X₃)
     (hw₁ : w₁ ≫ e₁.hom = e₁.hom ≫ Q.map φ.τ₁) (hw₂ : w₂ ≫ e₂.hom = e₂.hom ≫ Q.map φ.τ₂)
     (hw₃ : w₃ ≫ e₃.hom = e₃.hom ≫ Q.map φ.τ₃) :
-    letI := braidedCategory (ModuleCat.{u} R)
+    letI := braidedCategoryOfKFlat (ModuleCat.{u} R)
     MonoidalCategory.trace w₂ = MonoidalCategory.trace w₁ + MonoidalCategory.trace w₃ := by
-  let := braidedCategory (ModuleCat.{u} R)
+  let := braidedCategoryOfKFlat (ModuleCat.{u} R)
   have hS' (i : ℤ) := (HomologicalComplex.shortExact_iff_degreewise_shortExact S).1 hS i
   have hexact (i : ℤ) : Function.Exact (S.f.f i) (S.g.f i) :=
     (ShortComplex.ShortExact.moduleCat_exact_iff_function_exact _).1 (hS' i).exact
@@ -115,7 +115,7 @@ theorem trace_eq_algebraMap_sum_negOnePow_trace_homologyMap
     (hs : ∀ i ∉ s, IsZero (P.X i)) (hfin : ∀ i, Module.Finite Λ (P.X i))
     (K : DerivedCategory (ModuleCat.{u} Λ)) [HasRightDual K] (w : K ⟶ K)
     (e : K ≅ Q.obj P) (hw : w ≫ e.hom = e.hom ≫ Q.map v) :
-    letI := braidedCategory (ModuleCat.{u} Λ)
+    letI := braidedCategoryOfKFlat (ModuleCat.{u} Λ)
     MonoidalCategory.trace w =
       algebraMap Λ (End (𝟙_ (DerivedCategory (ModuleCat.{u} Λ))))
         (∑ i ∈ s, (i.negOnePow : ℤ) •
