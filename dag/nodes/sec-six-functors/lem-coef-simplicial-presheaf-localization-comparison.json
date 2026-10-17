@@ -31,7 +31,11 @@
  },
  "stmt_deps": [
   "def-coef-complete-algebroid",
-  "def-weil-pbc-simplicial-set"
+  "def-weil-pbc-simplicial-set",
+  "def-coef-infinity-category-of-spaces",
+  "def-coef-coherent-localization-interface",
+  "lem-cbc-grothendieck-presheaf-coherent-straightening",
+  "lem-coef-simplicial-presheaf-projective-model"
  ],
  "proof": [
   {
@@ -229,5 +233,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialPresheafLocalizationComparison",
+  "declaration": "SSet.ProjectivePresheaf.simplicial_presheaf_localization_comparison",
+  "declarations": [
+   "SSet.ProjectivePresheaf.IsLocalAt",
+   "SSet.ProjectivePresheaf.localPresheaves",
+   "SSet.ProjectivePresheaf.simplicial_presheaf_localization_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SimplicialPresheafLocalizationComparison.lean",
+  "statement": "theorem simplicial_presheaf_localization_comparison (D : Type u) [SmallCategory D] (I : Type u) (S : I → Arrow (Dᵒᵖ ⥤ SSet.{u})) (m : ModelCategory (Dᵒᵖ ⥤ SSet.{u})) (hW : m.categoryWithWeakEquivalences.weakEquivalences = (KanQuillen.weakEquivalenceStructure.weakEquivalences).functorCategory Dᵒᵖ) (hF : m.categoryWithFibrations.fibrations = (modelCategoryQuillen.J.rlp).functorCategory Dᵒᵖ) : ∃ E : CategoryTheory.SimplicialCategory (Dᵒᵖ ⥤ SSet.{u}), IsUsualEnrichment E ∧ ∃ (Q : (Dᵒᵖ ⥤ SSet.{u}) ⥤ (Dᵒᵖ ⥤ SSet.{u})) (ε : Q ⟶ 𝟭 _), (∀ X : Dᵒᵖ ⥤ SSet.{u}, m.categoryWithCofibrations.cofibrations (initial.to (Q.obj X)) ∧ m.categoryWithFibrations.fibrations (ε.app X) ∧ m.categoryWithWeakEquivalences.weakEquivalences (ε.app X)) ∧ ∃ q : largeNerve.{u + 1, u, max (u + 1) v} SSet.{u} ⟶ SSet.uliftFunctor.{max (u + 1) v}.obj Spaces.infinityCategory.{u}, IsLocalization (fun _ _ f ↦ Enhanced.IsWeakHomotopyEquivalence f) q ∧ (∃ j : largeNerve.{u + 1, u, max (u + 1) v} Spaces.Kan.{u} ⟶ SSet.uliftFunctor.{max (u + 1) v}.obj Spaces.infinityCategory.{u}, SimplicialModelLocalization.IsOrdinaryNerveMap j ∧ Enhanced.AreNaturallyEquivalent (SimplicialModelLocalization.inclusionNerve (fun K : SSet.{u} ↦ K.KanComplex) ≫ q) j) ∧ IsLocalization ((KanQuillen.weakEquivalenceStructure.weakEquivalences).functorCategory Dᵒᵖ) (comparison.{u + 1, u, u, u, max (u + 1) v} Dᵒᵖ SSet.{u} _ q) ∧ ∃ mS : ModelCategory (Dᵒᵖ ⥤ SSet.{u}), mS.categoryWithCofibrations.cofibrations = m.categoryWithCofibrations.cofibrations ∧ mS.categoryWithWeakEquivalences.weakEquivalences = (@localEquivalences _ _ m E Q I (fun i ↦ (S i).left) (fun i ↦ (S i).right) (fun i ↦ (S i).hom)) ∧ (∀ Z : Dᵒᵖ ⥤ SSet.{u}, mS.categoryWithFibrations.fibrations (terminal.from Z) ↔ (@IsLocal _ _ m E Q I (fun i ↦ (S i).left) (fun i ↦ (S i).right) (fun i ↦ (S i).hom)) Z) ∧ ∃ qS : largeNerve.{u + 1, u, max (u + 1) v} (Dᵒᵖ ⥤ SSet.{u}) ⟶ (localPresheaves S q).toSSet, IsLocalization (@localEquivalences _ _ m E Q I (fun i ↦ (S i).left) (fun i ↦ (S i).right) (fun i ↦ (S i).hom)) qS ∧ Enhanced.AreNaturallyEquivalent (SimplicialModelLocalization.inclusionNerve (@IsLocal _ _ m E Q I (fun i ↦ (S i).left) (fun i ↦ (S i).right) (fun i ↦ (S i).hom)) ≫ qS ≫ (localPresheaves S q).ι) (SimplicialModelLocalization.inclusionNerve (@IsLocal _ _ m E Q I (fun i ↦ (S i).left) (fun i ↦ (S i).right) (fun i ↦ (S i).hom)) ≫ comparison.{u + 1, u, u, u, max (u + 1) v} Dᵒᵖ SSet.{u} _ q)",
+  "branch": "newtargets-dag",
+  "by": "Q75",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing projective mapping construction, the actual Kan-complex coherent nerve, the existing coherent presheaf functor object, and the whole functor-category localization predicate. The first localization is the actual curried objectwise evaluation. The local target is the full orthogonal subcategory, defined independently of the Bousfield model. Source evaluation on squares to id_Z is the canonical precomposition mapping-space test. The local comparison is normalized on all simplices of the ordinary full subcategory of fibrant local representatives. The ambient universe is max (u+1) v; no nonemptiness or endpoint cofibrancy condition is imposed. Added statement dependencies are already landed interfaces."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f4af29ac2",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Verified statement/dependencies, canonical locality constructions, docstrings, edge cases, source alignment, required report sections, and scompile local/server compilation; no fixes needed."
  }
 }

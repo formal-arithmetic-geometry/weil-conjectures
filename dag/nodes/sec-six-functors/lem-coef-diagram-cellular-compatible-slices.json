@@ -308,5 +308,29 @@
   "group": "Q14",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-4aa6440e9 (reviewer sub-agent of L); spot-checked: I read the whole item, including all 11 steps and every cited statement. The delivery is one commit containing the item and its report, with no new nodes, and the statement and stmt_deps are unchanged. Source: HTT A.3.3.15-16 is not archived in literature/. The WANTED line is recorded and proof_origin is by=agent, so I checked the proof directly as mathematics; it is self-contained. No SGA is cited. This is an auxiliary lemma, so no base-change morphism or coefficient category is involved. Reading of the statement: 'slice' means the canonical root maps and canonical tree maps are natural. That is the only reading the data allow, and it is how both Step 7 and the citer lem-coef-scat-injective-universe-generators use it, there in the pushout amalgamation along N'. Step 1: the forgetful functor from R/A creates nonempty filtered colimits, free objects are presentable via Hom adjunction, and 1_R is presentable. Step 2: I checked every hypothesis of lem-coef-small-tree-presentable-vertices in F(d)/A: small Homs, all colimits, initial root presentable, free endpoints presentable, |B|<kappa. I also checked that the pushout transported into the undercategory is the original cell square. Step 3: I checked smallness and kappa-filteredness of the family poset, the colimit presentations over each tail for G(e) and M(e), and that these use only downward-closure of A_e, never its size. Step 4: I checked the uses of elementwise clauses (1)-(3) and the bound of fewer than kappa requirements (composable pairs bounded by |Mor|^2). Steps 5-8: I recomputed the intersection comparison q^e M(alpha) m = G(alpha) q^d m = G(alpha) g k, and the transition and composition comparisons in G(e), G(h), M(e), M(h). Enlargement only postcomposes both sides, so no cancellation is used. Steps 9-11: I recomputed functoriality of U and V, naturality of F->X, X->G and H->M, and the k-naturality square leg by leg. The edge cases pass: empty D, automorphisms, A_d empty or equal to T_d, T_d empty, nonmonic cells, and non-presentable roots. Citations: the two same-unit nodes, plus Mathlib leaves and definitions as tools. No tool_uses are needed and there is no cycle. Duplicate check: I compared six nearby cellular-tree nodes (good-subset-enlargement, small-cellular-tree-descent, diagram-compact-pushout-descent, partial-cellular-root-descent-extension, cellular-tree-presentable-approximations, good-tree-idempotent-enlargement); none states this result. No fixes were needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DiagramCellularCompatibleSlices",
+  "declaration": "CategoryTheory.CellularTree.diagram_cellular_compatible_slices",
+  "declarations": [
+   "CategoryTheory.CellularTree.diagramSliceTargetMap",
+   "CategoryTheory.CellularTree.DiagramSlice",
+   "CategoryTheory.CellularTree.IsDiagramSliceExtension",
+   "CategoryTheory.CellularTree.diagram_cellular_compatible_slices"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DiagramCellularCompatibleSlices.lean",
+  "statement": "theorem diagram_cellular_compatible_slices {A : Type u} [Category.{v} A] (κ : Cardinal.{v}) [Fact κ.IsRegular] (hκ : Cardinal.aleph0 < κ) [IsCardinalLocallyPresentable A κ] {D : Type v} [SmallCategory D] (hD : HasCardinalLT (Σ d : D, Σ e : D, (d ⟶ e)) κ) {F G : D ⥤ A} (f : F ⟶ G) (L : MorphismProperty A) (hL : ∀ (P Q : A) (i : P ⟶ Q), L i → IsCardinalPresentable P κ ∧ IsCardinalPresentable Q κ) (T : D → Type v) [∀ d : D, PartialOrder (T d)] [∀ d : D, WellFoundedLT (T d)] (trees : ∀ d : D, CellularTree L (F.obj d) (T d)) (good : ∀ d : D, (trees d).IsGood κ) (realization : ∀ d : D, subsetObj (trees d).diagram Set.univ ≅ Under.mk (f.app d)) (A₀ : ∀ d : D, Set (T d)) (M : DiagramSlice f trees realization A₀) (E : ∀ d : D, Set (T d)) (hE : ∀ d : D, HasCardinalLT (E d) κ) : ∃ (B : ∀ d : D, Set (T d)) (N : DiagramSlice f trees realization B) (N' : DiagramSlice f trees realization (fun d ↦ B d ∩ A₀ d)), (∀ d : D, E d ⊆ B d ∧ HasCardinalLT (B d) κ) ∧ IsDiagramSliceExtension f trees realization N' N (fun _ ↦ Set.inter_subset_left) ∧ IsDiagramSliceExtension f trees realization N' M (fun _ ↦ Set.inter_subset_right)",
+  "branch": "newtargets-dag",
+  "by": "N4",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a8643366d",
+  "group": "N4",
+  "result": "fix",
+  "note": "Mathematics and verbatim Lean statement match the node and source; per-file compilation reproduced cleanly. review.md records all checks. fixes/ contains a complete replacement report repairing the placeholder second reading (H1/H11)."
  }
 }
