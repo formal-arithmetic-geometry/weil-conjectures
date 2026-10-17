@@ -8,9 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import all Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import all Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import all WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Mathlib.RingTheory.Support
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
@@ -36,7 +35,26 @@ private theorem powers_range {X : Scheme.{u}} {I : X.Modules}
     (LinearMap.range ((idealSheafPower ι n).2.val.app (op V.1)).hom :
       Ideal Γ(X, V.1)) =
       (LinearMap.range (ι.val.app (op V.1)).hom : Ideal Γ(X, V.1)) ^ n := by
-  sorry
+  induction n using Nat.twoStepInduction with
+  | zero => change LinearMap.range LinearMap.id = _; simp
+  | one => simp [idealSheafPower]
+  | more n _ ih =>
+    have := Modules.powers_qc ι (n + 1)
+    change LinearMap.range
+      (((idealSheafPower ι (n + 1)).2.val.app (op V.1)).hom.comp
+        ((idealModuleProductι ι (idealSheafPower ι (n + 1)).1).val.app (op V.1)).hom) = _
+    rw [LinearMap.range_comp]
+    have hr : LinearMap.range ((idealModuleProductι ι
+        (idealSheafPower ι (n + 1)).1).val.app (op V.1)).hom =
+        (LinearMap.range (ι.val.app (op V.1)).hom : Ideal Γ(X, V.1)) •
+          (⊤ : Submodule Γ(X, V.1) Γ((idealSheafPower ι (n + 1)).1, V.1)) :=
+      SetLike.coe_injective (Modules.multiplication_range ι
+        (idealSheafPower ι (n + 1)).1 V)
+    rw [hr, Submodule.map_smul'', Submodule.map_top, ih, Ideal.smul_eq_mul]
+    change (LinearMap.range (ι.val.app (op V.1)).hom : Ideal Γ(X, V.1)) *
+      (LinearMap.range (ι.val.app (op V.1)).hom : Ideal Γ(X, V.1)) ^ (n + 1) =
+      (LinearMap.range (ι.val.app (op V.1)).hom : Ideal Γ(X, V.1)) ^ (n + 2)
+    exact (pow_succ' _ _).symm
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem basicOpen_le_surjective_stalk {X : Scheme.{u}} {I : X.Modules}
@@ -137,8 +155,6 @@ private theorem local_affine_zero {X : Scheme.{u}} {M N : X.Modules}
     rw [← local_app_res φ (hWA.trans hAT), map_zero]
     exact hb i.1 _
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 800000 in
 -- Allow elaboration of repeated restrictions to the over-site.
@@ -249,14 +265,11 @@ private theorem local_affine_eventually_zero
     exact hker hmem
   have := Modules.powers_qc ι (n + k)
   exact ⟨n + k, hnm, local_affine_zero χ A hAT hzero⟩
--/
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 800000 in
 -- Allow elaboration of repeated restrictions to the over-site.
-/ -- Two local maps with equal evaluation agree on a sufficiently high ideal power
+/-- Two local maps with equal evaluation agree on a sufficiently high ideal power
 on their quasi-compact overlap. No lifting or quotient construction is asserted.
 
 Source: Stacks Project, Properties, Lemma 01PM (injectivity) and Lemma 01PQ
@@ -278,7 +291,7 @@ inclusions identify all r with the genuine inclusions and give their
 composition law; restriction to the maximum preserves vanishing. Sheaf
 separation now makes the two restricted maps equal on the whole overlap,
 hence on every W contained in it. An empty overlap needs no affine opens
-and the same separation argument works at degree n. - /
+and the same separation argument works at degree n. -/
 theorem ideal_power_local_maps_eventually_agree
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]
@@ -379,7 +392,6 @@ theorem ideal_power_local_maps_eventually_agree
   change (r n m hnm).val.app (op W) ≫ (αW - βW) = 0 at hh
   rw [Preadditive.comp_sub] at hh
   exact sub_eq_zero.mp hh
--/
 
 
 end AlgebraicGeometry.Scheme
