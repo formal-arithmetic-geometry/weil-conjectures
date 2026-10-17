@@ -15,48 +15,243 @@
   "def-weil-pbc-strict-henselization-limit",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $d_a:X_a\\to X$ and $\\pi_a:(X_a)_{\\mathrm{Et}}\\to\\mathbf{Set}$. The two morphisms $d_a$ and $b\\pi_a$ to $X_{\\mathrm{Et}}$ and $S_{\\mathrm{Et}}$, with the $2$-arrow $b\\pi_a\\Rightarrow a\\pi_a=fd_a$ specified by $c$, define $e=e^f_{a,b}$ by [lem-trf-oriented-product-universal]. Its composite with a geometric point $x$ is $(x,b,c)$. The inverse image on constant modules is exact by [lem-pe-constant-left-module-inverse-image], for this arbitrary geometric morphism; no factorization into scheme maps is needed. For a triple $C=(U\\to V\\leftarrow W)$, write $V_a=a^*V$, $W_b=b^*W$ and $c^*:V_a\\to V_b$. The universal-product formula gives\n$$e^{-1}h_C^\\#=\\coprod_{v\\in V_a,\\ w\\in W_b,\\ c^*v=\\operatorname{image}(w)}h_{U_{a,v}},$$\nwhere $U_{a,v}$ is the fibre over $v$ of $U\\times_Sa\\to V\\times_Sa$. These are sheaves represented by the indicated etale objects of $X_a$.",
+   "uses": [
+    "lem-trf-oriented-product-universal",
+    "def-trf-oriented-nearby-cycles",
+    "lem-pe-constant-left-module-inverse-image",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI, 1.4 (explicit inverse image), 1.9 and 2.2 (specialization arrow)."
+   }
+  },
+  {
+   "text": "We construct a morphism before testing stalks. Put $r_b:X_{(b)}\\to X$. Fix $C,v,w$ as in step 1. The pointed-neighbourhood limit [def-weil-pbc-strict-henselization-limit] gives lifts $\\widetilde v:S_{(a)}\\to V$ and $\\widetilde w:S_{(b)}\\to W$. The germ bijection of [lem-weil-pbc-sets-strictly-henselian-open-sections-stalk], applied to the representable sheaf on $S_{(b)}$, identifies lifts with their closed geometric germs; strict henselianity is supplied by [lem-weil-pbc-strict-henselization-functoriality]. Thus the relation $c^*v=\\operatorname{image}(w)$ says that the composite of $\\widetilde w$ with $W\\to V$ is $\\widetilde v c$; it is equality of the same pointed-neighbourhood projections. Put $E_v=U\\times_V S_{(a)}$. It is an etale object of $X_{(a)}$: in its small etale site it is the pullback of $U\\times_SS_{(a)}\\to X\\times_SV\\times_SS_{(a)}$ along the section defined by $\\widetilde v$, so [lem-weil-pbc-etale-base-change-finite-limits] applies. Its fibre over $a$ is $U_{a,v}$. There is a specific map\n$$\\ell_{C,v,w}:E_v\\times_{S_{(a)}}S_{(b)}\\longrightarrow U\\times_VW,$$\nwith projections to $U$ and to $W$ given respectively by $E_v\\to U$ and $\\widetilde w$. The equality just checked is exactly the fibre-product condition.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI, 1.4 and 4.3; pointed lifts from strict localizations, 2.7."
+   }
+  },
+  {
+   "text": "For a module sheaf $F$ on $X$, set $B_F=i_a^*j_{b,*}r_b^*F$. By [lem-trf-oriented-point-cohomology], $\\psi_f^{-1}h_C^\\#=h_{U\\times_VW}$, hence $(\\psi_{f,*}F)(C)=F(U\\times_VW)$. For each $v,w$ define the homomorphism\n$$F(U\\times_VW)\\longrightarrow (r_b^*F)(E_v\\times_{S_{(a)}}S_{(b)})=(j_{b,*}r_b^*F)(E_v)\\longrightarrow B_F(U_{a,v}).$$\nThe first arrow is inverse-image restriction along $\\ell_{C,v,w}$, and the last is the inverse-image unit for $i_a$ evaluated on $E_v$. The direct-image and module-unit formulas are those of [def-weil-pbc-direct-image] and [prop-weil-pbc-inverse-image-modules-exact]. Combine these arrows on the disjoint components of $e^{-1}h_C^\\#$ from step 1. If $C'\\to C$ is a triple map, its maps on $E_v$ and on $U\\times_VW$ commute with $\\ell$, by equality of their two projections. Restrictions and inverse-image units are natural, so these homomorphisms commute with every triple restriction. They are therefore a morphism of sheaves $\\psi_{f,*}F\\to e_*B_F$ on the triple site. Adjunction gives an actual natural sheaf morphism\n$$\\chi_F:e^*\\psi_{f,*}F\\longrightarrow i_a^*j_{b,*}r_b^*F.$$\nThis construction uses sections on all objects, rather than an inference that stalk isomorphisms glue.",
+   "uses": [
+    "lem-trf-oriented-product-universal",
+    "lem-trf-oriented-point-cohomology",
+    "def-weil-pbc-direct-image",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI, 1.4 and 4.3 (triple-site inverse image and section restrictions)."
+   }
+  },
+  {
+   "text": "Choose a bounded-below injective complex $I$ representing $K$, using [lem-weil-pbc-module-sheaves-enough-injectives] and [lem-weil-pbc-dplus-injective-representative]. Apply $\\chi$ degreewise and then the right-derived unit for $j_{b,*}$ to define\n$$\\alpha_K:e^*R\\Psi_fK=e^*\\psi_{f,*}I\\xrightarrow{\\chi_I}i_a^*j_{b,*}r_b^*I\\longrightarrow i_a^*Rj_{b,*}r_b^*I=i_a^*Rj_{b,*}r_b^*K.$$\nThis is a global derived morphism. The last arrow is the unit in [def-sfb-right-derived-functor], so it does not assume that $r_b^*I$ is injective or $j_{b,*}$-acyclic. A map of coefficients is represented by a chain map into injective representatives, unique up to homotopy by [lem-weil-pbc-kinjective-hom-derived]. Naturality of $\\chi$ and of the derived unit makes the displayed map commute with these chain maps. Additive functors preserve homotopies; a change between injective representatives is a homotopy equivalence by that same node. Thus the construction is independent of representatives and natural in $K$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI, 4.3; derivation of the explicit restriction morphism. Stacks Tags 070G (K-injective computation) and 09T5 (derived adjunction)."
+   }
+  },
+  {
+   "text": "Now test this existing map. At a geometric point $x$ of $X_a$, the left stalk is $R\\Gamma(M_x,r_x^*K)$ by [lem-trf-oriented-point-cohomology], with $M_x=X_{(x)}\\times_{S_{(a)}}S_{(b)}$. By [lem-weil-pbc-morphism-affine-schemes-affine] and [lem-weil-pbc-affine-morphism-permanence], $S_{(b)}\\to S_{(a)}$ and its base change $j_b$ are affine, so $j_b$ is quasi-compact and quasi-separated. The strict-local stalk formula [prop-weil-pbc-strict-henselization-stalk-formula] computes the right stalk by the same tube: [lem-trf-ind-etale-strict-local-invariance] identifies the strict localization of $X_{(a)}$ at $x$ with that of $X$, because $X_{(a)}\\to X$ is a base change of a strict localization. This includes extension of the chosen geometric fields. The functorial maps of [lem-weil-pbc-strict-henselization-functoriality] identify the structural maps of the tubes. The scalar comparisons [lem-kun-unbounded-abelian-exchange-comparison] and [lem-pe-left-module-derived-evaluation-forget] allow applying the abelian stalk formula to constant-module coefficients, and preserve the restriction maps. All cohomology sheaves are torsion since $mK=0$; no invertibility of $m$ is needed.",
+   "uses": [
+    "lem-trf-oriented-point-cohomology",
+    "prop-weil-pbc-strict-henselization-stalk-formula",
+    "lem-trf-ind-etale-strict-local-invariance",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-kun-unbounded-abelian-exchange-comparison",
+    "lem-pe-left-module-derived-evaluation-forget",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI, 2.7 and 4.3; Stacks Tag 03Q9 (canonical derived stalk map), Tags 05WR and 0GIP (strict-local invariance)."
+   }
+  },
+  {
+   "text": "The stalk map of $\\alpha_K$ is the restriction map to that common tube, not merely an unspecified isomorphism of its endpoints. Indeed $\\chi_I$ sends a representative section on $U\\times_VW$ to its restriction along $\\ell_{C,v,w}$; at $x$ the maps $\\ell$ converge to $M_x\\to U\\times_VW$. The derived unit in step 4 is the canonical comparison from sections to derived sections. These are precisely the two canonical restriction maps in [lem-trf-oriented-point-cohomology] and [prop-weil-pbc-strict-henselization-stalk-formula]. Both identify the stalk map with the identity of $R\\Gamma(M_x,r_x^*K)$. Consequently every stalk of $\\alpha_K$ is invertible. Forget the scalar action and apply [lem-weil-pbc-derived-stalk-conservative]; the exact conservative scalar-forgetting functor of [lem-kun-unbounded-abelian-exchange-comparison] then makes $\\alpha_K$ invertible in modules. This is the only use of derived stalk conservativity: it proves invertibility of the map already constructed.",
+   "uses": [
+    "lem-trf-oriented-point-cohomology",
+    "prop-weil-pbc-strict-henselization-stalk-formula",
+    "lem-weil-pbc-derived-stalk-conservative",
+    "lem-kun-unbounded-abelian-exchange-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI, 2.7 and 4.3; Stacks Tag 03Q9, normalization by canonical restriction."
+   }
+  },
+  {
+   "text": "Fix $h:T\\to S$, write $\\widetilde h:X_T\\to X$, $v:V_{f_T}\\to V_f$, $e_T=e^{f_T}_{a_T,b_T}$, and denote the induced maps by $q_a:X_{a_T}\\to X_a$, $q_A:X_{T,(a_T)}\\to X_{(a)}$, $q_B:X_{T,(b_T)}\\to X_{(b)}$. Write $i_T,j_T,r_{b_T}$ for the three maps over $T$. Thus $q_Ai_T=i_aq_a$, $q_Aj_T=j_bq_B$, and $r_bq_B=\\widetilde h r_{b_T}$. The universal product gives $ve_T\\cong eq_a$ with coherent projection identifications. Let $K_b=r_b^*K$. Define $E:q_A^*Rj_{b,*}K_b\\to Rj_{T,*}q_B^*K_b$ to be the adjunct of\n$$j_T^*q_A^*Rj_{b,*}K_b\\cong q_B^*j_b^*Rj_{b,*}K_b\\xrightarrow{q_B^*\\varepsilon_{j_b}}q_B^*K_b.$$\nDefine the sliced map $\\gamma=i_T^*E$ after $q_a^*i_a^*\\cong i_T^*q_A^*$, with target coefficients $q_B^*K_b\\cong r_{b_T}^*\\widetilde h^*K$. Its type is\n$$\\gamma:q_a^*i_a^*Rj_{b,*}K_b\\longrightarrow i_T^*Rj_{T,*}r_{b_T}^*\\widetilde h^*K.$$\nThese are the ordinary adjunctions of [def-trf-oriented-nearby-cycles]; [lem-weil-pbc-inverse-image-composition-module-linear] fixes the scheme inverse-image comparisons. No Cartesian assertion about the square of $j_b,j_T$ is required.",
+   "uses": [
+    "def-trf-oriented-nearby-cycles",
+    "lem-trf-oriented-product-universal",
+    "lem-weil-pbc-inverse-image-composition-module-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI, 1.9 and 4.3; definition of the ordinary counit-mate comparison."
+   }
+  },
+  {
+   "text": "We check the sheaf comparison square on generators, so that the later derived equality is global. Base change $C$ to $C_T$ and choose a component $(v_T,w_T)$ of $e_T^{-1}v^{-1}h_C^\\#$; it maps to $(v,w)$ in step 1. Let $D=U\\times_VW$, $D_T=D\\times_X X_T$, $E_v$ be as in step 2, and $E_{v_T}$ its analogue. There is a commutative square\n$$\\begin{matrix}E_{v_T}\\times_{T_{(a_T)}}T_{(b_T)}&\\xrightarrow{\\ell_T}&D_T\\\\ \\downarrow k&&\\downarrow\\\\ E_v\\times_{S_{(a)}}S_{(b)}&\\xrightarrow{\\ell}&D.\\end{matrix}$$\nThe $U$-projections agree by fibre-product functoriality and the $W$-projections agree by the compatibility of the pointed-neighbourhood lifts with $c,c_T$. Hence $\\ell k$ equals the other composite. For $s\\in F(D)$ both routes through the sheaf square send $s$ to its inverse-image restriction along this single composite, then to the closed fibre by the $i_T$-unit. Naturality of that unit gives equality of the routes on every $C$ and every component. The underived ordinary exchange sends $s$ to precisely its pullback on $D_T$: its adjunct is inverse-image composition followed by the counit, as is checked by evaluating the adjunction on $h_C^\\#$. Thus this is equality for the specified ordinary sheaf mates and the specified $\\chi$ maps, rather than equality of their geometric stalks.",
+   "uses": [
+    "lem-trf-oriented-product-universal",
+    "lem-trf-oriented-point-cohomology",
+    "def-trf-oriented-nearby-cycles",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-inverse-image-composition-module-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI, 1.4, 1.9 and 4.3; explicit restriction-square verification on triples."
+   }
+  },
+  {
+   "text": "Derive the square of step 8 with its units. For an injective representative $I$ of $K$, take an injective replacement $\\widetilde h^*I\\to J$ over $X_T$. The ordinary oriented map is represented by $v^*\\psi_{f,*}I\\to\\psi_{f_T,*}\\widetilde h^*I\\to\\psi_{f_T,*}J$. On the sliced side apply the $j_b,j_T$ derived units to the sheaf square, and use naturality of $\\chi$ for the map $\\widetilde h^*I\\to J$. After replacing the complexes on $X_{(b)}$ and $X_{T,(b_T)}$ by K-injectives, the two composites are images of that same sheaf square. Maps into these replacements and changes of replacements are determined up to homotopy by [lem-weil-pbc-kinjective-hom-derived]; the universal derived units in [def-sfb-right-derived-functor] therefore give equality of the resulting derived transformations. The adjunctions have the original composite counits, by [lem-sfb-derived-composition-adjunction-normalization]. Thus the represented oriented and sliced arrows are exactly the mates defining $\\beta$ and $\\gamma$, not different arrows with the same endpoints. With $\\rho:e_T^*v^*\\cong q_a^*e^*$ the result is the typed equality\n$$\\alpha_{\\widetilde h^*K,T}\\circ e_T^*\\beta_{\\widetilde h,h,K}=\\gamma\\circ q_a^*\\alpha_K\\circ\\rho_{R\\Psi_fK}.$$\nThis proves the required counit-mate identification.",
+   "uses": [
+    "def-trf-oriented-nearby-cycles",
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sfb-derived-composition-adjunction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI, 1.9 and 4.3; Stacks Tags 070G, 09T5 and 0D6E, with the explicit sheaf square from step 8."
+   }
+  },
+  {
+   "text": "For $U\\xrightarrow{k}T\\xrightarrow{h}S$, write $p_A,p_B,p_a$ for the maps from the strict-local and fibre schemes over $U$ to those over $T$. Before mating, the two $j$-squares have inverse-image identifications\n$$j_U^*p_A^*q_A^*\\cong p_B^*j_T^*q_A^*\\cong p_B^*q_B^*j_b^*.$$\nTheir composite is the inverse-image identification for $(q_Ap_A,q_Bp_B)$: the fibre-product projections agree and [lem-weil-pbc-inverse-image-composition-module-linear] uses precisely these comparisons. Part 1 of [lem-weil-pbc-mate-pasting] therefore gives $E_{hk}=(E_kq_B^*)\\circ p_A^*E_h$. Restricting by $i_U^*$ and using $p_Ai_U=i_Tp_a$ gives $\\gamma_{hk}=\\gamma_k\\circ p_a^*\\gamma_h$ with its coefficient identifications. The identical pasting statement applied to $v\\psi_{f_T}\\cong\\psi_f\\widetilde h$ gives $\\beta_{hk}=\\beta_k\\circ v_k^*\\beta_h$. Parts 2--3 of the mate-pasting node and [lem-sfb-derived-composition-adjunction-normalization] ensure these are the canonical derived composite adjunctions. The identifications $\\rho$ compose by uniqueness in the universal product. Inserting these three equalities into step 9 proves the compatibility for successive base changes, as an equality of natural transformations. No faithfulness of derived stalks is asserted.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-inverse-image-composition-module-linear",
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "lem-trf-oriented-product-universal",
+    "def-trf-oriented-nearby-cycles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI, 1.9 (successive squares); mate-pasting identities, Stacks Tags 0E46 and 0E47."
+   }
+  },
+  {
+   "text": "For the final clause, let $A\\in D(V_f,\\Lambda)$ and $r\\in\\mathbf Z$. Exactness in step 1 gives $\\mathcal H^i(e^*A)=e^*\\mathcal H^i(A)$, so vanishing of the former follows from vanishing of the latter. Conversely every point $z_{x,b,c}$ in [lem-trf-oriented-product-points-conservative] factors as $e_{a,b}x'$, taking $a=f(x)$ and the geometric point $x'$ of $X_a$ supplied by $x$ and its common geometric field. If all slice cohomology sheaves vanish for $i\\le r$, each such point kills $\\mathcal H^i(A)$. Apply the sheaf-level conservative family of that node to $0\\to\\mathcal H^i(A)$; the cohomology sheaf is zero. This works for unbounded $A$, since the inverse images are exact and applied termwise, and for every integer $r$.",
+   "uses": [
+    "lem-trf-oriented-product-points-conservative",
+    "lem-pe-constant-left-module-inverse-image",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé XI, 2.3--2.4 (points and conservativity), with exact constant-coefficient inverse images."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sfb-right-derived-functor",
+  "def-trf-oriented-nearby-cycles",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-kun-unbounded-abelian-exchange-comparison",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-pe-left-module-derived-evaluation-forget",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-trf-oriented-point-cohomology",
+  "lem-trf-oriented-product-points-conservative",
+  "lem-trf-oriented-product-universal",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "prop-pur-kinjective-resolutions-exist",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-weil-pbc-strict-henselization-stalk-formula"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Illusie, Exposé XI §§1.4, 1.9, 2.2–2.3, 2.7 and 4.3; agent synthesis of the specialization-slice consequence; Orgogozo §1 pp. 2–3 is unavailable locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Restriction of oriented nearby cycles to a geometric specialization slice is i inverse image R j direct image on the special fibre",
-   "results": "{\"t\": \"2026-10-17T16:19:43Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of oriented nearby cycles to a geometric specialization slice is i inverse image R j direct image on the special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.restrictionCyclesIso_inv_iCycles\", \"HomologicalComplex.restrictionCyclesIso_hom_iCycles\", \"AlgebraicGeometry.Scheme.restrictFunctorΓ\", \"germ_skyscraperPresheafStalkOfSpecializes_hom_assoc\", \"AlgebraicGeometry.opensDiagram_map\", \"TopCat.Presheaf.stalkSpecializes_stalkPushforward_apply\", \"germ_skyscraperPresheafStalkOfSpecializes_hom\", \"AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app\"], \"digest\": \"a5ce2303a6e4e70b\"}",
-   "date": "2026-10-18",
-   "verdict": "no match: inspected returned signatures; ordinary sheaf composition, topological stalk specialization, homological cycles, or normed-ring units do not give oriented nearby-cycle slice or proper-source comparisons."
-  },
-  {
-   "tool": "grep",
-   "query": "nearby|vanishingTopos|MilnorTube",
-   "results": "{\"t\": \"2026-10-17T16:19:43Z\", \"tool\": \"grep\", \"query\": \"nearby|vanishingTopos|MilnorTube\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-18",
-   "verdict": "no match: inspected returned signatures; ordinary sheaf composition, topological stalk specialization, homological cycles, or normed-ring units do not give oriented nearby-cycle slice or proper-source comparisons."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Geometric specialization slices detect cohomology of oriented nearby cycles by i inverse image R j direct image for arbitrary schemes",
-   "results": "{\"t\": \"2026-10-17T16:20:03Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric specialization slices detect cohomology of oriented nearby cycles by i inverse image R j direct image for arbitrary schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.stalkSpecializes_stalkPushforward_apply\", \"germ_skyscraperPresheafStalkOfSpecializes_hom_assoc\", \"TopCat.Presheaf.stalkSpecializes_comp_apply\", \"germ_skyscraperPresheafStalkOfSpecializes_hom\", \"skyscraperPresheafCoconeOfSpecializes_ι_app\", \"TopCat.Presheaf.stalkSpecializes_stalkPushforward\", \"TopCat.Presheaf.stalkSpecializes_stalkPushforward_assoc\", \"AlgebraicGeometry.Scheme.Hom.appLE_map'\"], \"digest\": \"a555727c733592eb\"}",
-   "date": "2026-10-18",
-   "verdict": "no match: inspected returned signatures; ordinary sheaf composition, topological stalk specialization, homological cycles, or normed-ring units do not give oriented nearby-cycle slice or proper-source comparisons."
-  },
-  {
-   "tool": "leansearch",
-   "query": "Restriction of nearby cycles to special fibre over a specialization equals derived direct image from strict localization of the generization",
-   "results": "{\"t\": \"2026-10-17T16:20:04Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of nearby cycles to special fibre over a specialization equals derived direct image from strict localization of the generization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkSpecializes\", \"AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkSpecializes_apply\", \"AlgebraicGeometry.StructureSheaf.stalkSpecializes_stalk_to_fiber\", \"AlgebraicGeometry.LocallyRingedSpace.stalkSpecializes_stalkMap\", \"AlgebraicGeometry.LocallyRingedSpace.stalkSpecializes_stalkMap_apply\", \"TopCat.Presheaf.stalkSpecializes\", \"AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk\", \"AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk\"], \"digest\": \"26b74d29fa47c0cd\"}",
-   "date": "2026-10-18",
-   "verdict": "no match: inspected returned signatures; ordinary sheaf composition, topological stalk specialization, homological cycles, or normed-ring units do not give oriented nearby-cycle slice or proper-source comparisons."
+   "query": "Restriction of oriented nearby cycles to an arbitrary geometric specialization slice is i inverse image R j direct image",
+   "results": "{\"t\": \"2026-10-17T16:51:53Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of oriented nearby cycles to an arbitrary geometric specialization slice is i inverse image R j direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.restrictionCyclesIso_inv_iCycles\", \"HomologicalComplex.restrictionCyclesIso_hom_iCycles\", \"HomologicalComplex.restrictionCyclesIso_inv_iCycles_assoc\", \"HomologicalComplex.restrictionCyclesIso\", \"HomologicalComplex.restrictionCyclesIso_hom_iCycles_assoc\", \"AlgebraicGeometry.Scheme.restrictFunctorΓ\", \"AlgebraicGeometry.morphismRestrictRestrict\", \"AlgebraicGeometry.Scheme.restrictRestrictComm\"], \"digest\": \"d77982ed22f5f187\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned homological-complex restriction and scheme restriction declarations are unrelated to nearby cycles."
   },
   {
    "tool": "loogle",
-   "query": "\"nearbyCycles\"",
-   "results": "{\"t\": \"2026-10-17T16:20:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"nearbyCycles\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "nearbyCycles, VanishingTopos, GeometricMorphism",
+   "results": "{\"t\": \"2026-10-17T16:51:53Z\", \"tool\": \"loogle\", \"query\": \"nearbyCycles, VanishingTopos, GeometricMorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'nearbyCycles'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: service returned unknown identifier 'nearbyCycles'."
+  },
+  {
+   "tool": "grep",
+   "query": "nearby|vanishingTopos|RΨ|Rj_\\*",
+   "results": "{\"t\": \"2026-10-17T16:51:53Z\", \"tool\": \"grep\", \"query\": \"nearby|vanishingTopos|RΨ|Rj_\\\\*\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: no nearby-cycle or oriented-product declarations in the searched Mathlib subtree."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric specialization slice of nearby cycles equals derived direct image from strict localization and detects cohomology",
+   "results": "{\"t\": \"2026-10-17T16:51:54Z\", \"tool\": \"leansearch\", \"query\": \"Geometric specialization slice of nearby cycles equals derived direct image from strict localization and detects cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkSpecializes\", \"AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkSpecializes_apply\", \"AlgebraicGeometry.LocallyRingedSpace.stalkSpecializes_stalkMap\", \"AlgebraicGeometry.StructureSheaf.stalkSpecializes_stalk_to_fiber\", \"AlgebraicGeometry.StructureSheaf.stalkSpecializes_stalk_to_fiber_assoc\", \"AlgebraicGeometry.StructureSheaf.stalkSpecializes_stalk_to_fiber_apply\", \"AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk\", \"AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk\"], \"digest\": \"31ce1254a0b0849e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned stalk-specialization and structure-sheaf declarations do not state the nearby-cycle slice."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical sheaf restriction from oriented nearby cycles to geometric fibre slices constructed on triple site generators and compatible with adjunction mate pasting",
+   "results": "{\"t\": \"2026-10-17T20:34:22Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical sheaf restriction from oriented nearby cycles to geometric fibre slices constructed on triple site generators and compatible with adjunction mate pasting\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"CategoryTheory.Sheaf.ΓRes_map_assoc\", \"AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app\", \"AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app\", \"AlgebraicGeometry.Scheme.ofRestrict_app\", \"AlgebraicGeometry.PresheafedSpace.ofRestrict_c_app\", \"CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber\", \"CategoryTheory.Sheaf.ΓRes_map\"], \"digest\": \"867071d8ad2df9a4\"}",
    "date": "2026-10-18",
-   "verdict": "no match: inspected returned signatures; ordinary sheaf composition, topological stalk specialization, homological cycles, or normed-ring units do not give oriented nearby-cycle slice or proper-source comparisons."
+   "verdict": "no match: inspected all eight returned signatures; scheme open-module adjunctions, global-section restrictions, sheafed-space open restrictions and site-point fibre maps do not construct the oriented specialization-slice comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nearby-proper-source-exchange",
@@ -79,5 +274,119 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-nearby-specialization-slice",
+  "worker": "stage1",
+  "summary": "Repair of A4, C3/C4 and E5: correct created.item; construct a global sheaf restriction on triple-site generators, derive it using the right-derived unit, and use stalk conservativity only for invertibility. Explicitly type the sliced counit mate; prove its compatibility first on all triple sections and then through normalized derived units. Prove successive compatibility by mate pasting, without inferring equality from derived stalks. Add the actual constant-module scalar-forgetting and ind-etale strict-local invariance inputs. Statement and hypotheses unchanged; no new nodes.",
+  "blueprint": "Realizes the specialization-slice consequence in the ancestor proof place “restriction to arbitrary geometric specialization slices,” including its counit comparison and detection clauses.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+    "why": "General qcqs torsion bounded-below stalk formula, applied to the affine strict-local map j_b."
+   },
+   {
+    "node": "lem-weil-pbc-derived-stalk-conservative",
+    "why": "Used only to reflect invertibility of the constructed alpha after scalar forgetting."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Canonical pointed-neighbourhood structural maps identifying the two tubes."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Scheme module direct-image adjunction, units and counits used in the restriction construction."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Exact module inverse image for an arbitrary geometric morphism, including e and its point pullbacks."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Construct E_v as a finite limit of etale objects over X_(a)."
+   },
+   {
+    "node": "def-weil-pbc-direct-image",
+    "why": "Sectionwise scheme module pushforward formula and inverse-image restriction units."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Enough injectives in constant-module sheaves on X."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Bounded-below injective representatives and their K-injectivity."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Homotopy representation of derived maps into injectives and independence of the global construction."
+   },
+   {
+    "node": "def-sfb-right-derived-functor",
+    "why": "The canonical derived unit constructs alpha even when r_b^*I is not injective."
+   },
+   {
+    "node": "lem-kun-unbounded-abelian-exchange-comparison",
+    "why": "Exact conservative scalar forgetting and the canonical derived direct-image comparison."
+   },
+   {
+    "node": "lem-pe-left-module-derived-evaluation-forget",
+    "why": "Scalar-forgetting compatibility of bounded-below cohomology and its restriction maps."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition-module-linear",
+    "why": "The canonical module-linear composition comparisons and their unit normalization."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Functorial K-injective replacements on small constant-ring module sites."
+   },
+   {
+    "node": "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
+    "why": "Closed germs uniquely determine global sections on a strict localization; applied to representable etale objects."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-affine-schemes-affine",
+    "why": "Affineness of the map between the two affine strict localizations."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Affineness persists after base change and supplies the qcqs hypothesis for the stalk theorem."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Derived composite adjunctions retain the original composite counit in the mate calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-sfb-right-derived-functor",
+  "lem-kun-unbounded-abelian-exchange-comparison",
+  "lem-pe-left-module-derived-evaluation-forget",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-sfb-derived-composition-adjunction-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NO-71d280447",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-71d280447 (reviewer sub-agent of L); spot-checked: Mathematics and all eleven proof steps checked against cited nodes and ILO/Stacks sources. The immutable item has an A4 metadata fault: created.item is lem-trf-nearby-proper-source-exchange instead of lem-trf-nearby-specialization-slice. Corrected full DAG JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-nearby-specialization-slice.json; review.md records the detailed checks. No nodes dropped.; 1 file(s) fixed by the reviewer"
  }
 }
