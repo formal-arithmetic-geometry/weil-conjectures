@@ -16,9 +16,65 @@
   "def-pc-fibre-product",
   "def-weil-finite-integral-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The assumed finite morphism $X_U\\to U$ is quasi-finite by [pqf-lem-finite-qf], and by [pqf-lem-qf-locqf-qc] a quasi-finite morphism is locally quasi-finite. By clause (3) of [pqf-def-quasifinite] a quasi-finite morphism is of finite type, hence locally of finite type in the sense of [def-weil-finite-type-morphism] (finite type is locally of finite type and quasi-compact), so [lem-trf-locally-quasi-finite-relative-dimension-zero] applies to $X_U\\to U$. Its forward implication (locally quasi-finite implies relative dimension zero) gives $\\dim_x((X_U)_{u})=0$ for every $x\\in X_U$ with image $u\\in U$; in particular $X_U\\to U$ has relative dimension at most $0$.",
+   "uses": [
+    "pqf-lem-finite-qf",
+    "pqf-lem-qf-locqf-qc",
+    "pqf-def-quasifinite",
+    "def-weil-finite-type-morphism",
+    "lem-trf-locally-quasi-finite-relative-dimension-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0B48 proof, first sentence via Tag 081L; finite morphisms are quasi-finite by Tag 01TD/01TJ."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-flat-fp-relative-dimension-dense-open] with $e=0$. Its hypotheses are exactly the given flatness and local finite-presentation hypotheses on $f$, the density of $U$, and the bound of Step 1 for $X_U\\to U$. Hence $\\dim_x(X_{f(x)})\\leq0$ for every $x\\in X$. Since the point of $X_{f(x)}$ over $x$ lies in every open neighbourhood used in [def-kun-topological-dimension-at-point], each such neighbourhood is nonempty and has dimension $\\geq0$; so $\\dim_x(X_{f(x)})=0$ for every $x\\in X$, i.e. $f$ has relative dimension zero.",
+   "uses": [
+    "lem-trf-flat-fp-relative-dimension-dense-open",
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 081L, alternative (1), applied with e=0."
+   }
+  },
+  {
+   "text": "Since $f$ is proper, it is of finite type by [def-weil-proper-morphism], hence locally of finite type [def-weil-finite-type-morphism]. So the converse implication of [lem-trf-locally-quasi-finite-relative-dimension-zero] (relative dimension zero implies locally quasi-finite) applies to $f$ and, by Step 2, shows that $f$ is locally quasi-finite. Since $f$ is proper and locally quasi-finite, the Mathlib leaf [pqf-lem-proper-lqf-finite] gives that $f$ is finite.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-trf-locally-quasi-finite-relative-dimension-zero",
+    "pqf-lem-proper-lqf-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0B48 proof, remaining sentences: Morphisms Tag 0397 and More on Morphisms Tag 02LS."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-dimension-at-point",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "lem-trf-flat-fp-relative-dimension-dense-open",
+  "lem-trf-locally-quasi-finite-relative-dimension-zero",
+  "pqf-def-quasifinite",
+  "pqf-lem-finite-qf",
+  "pqf-lem-proper-lqf-finite",
+  "pqf-lem-qf-locqf-qc"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0B48, lemma-proper-flat-finite-over-dense-open, using Tag 081L and Morphisms Tag 0397."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,7 +120,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finite-after-blowup",
@@ -88,5 +144,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-proper-flat-finite-dense-open",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks Tag 0B48 and split its proof into the dense-open relative-dimension theorem (Tag 081L) and the zero-dimensional-fibre criterion for local quasi-finiteness (Tag 0397), then applied the existing Mathlib leaf that proper locally quasi-finite morphisms are finite. The hypotheses, base change over U, density convention, and local finite-presentation implication to local finite type were all verified. No Lean declaration carries the blueprint tag.",
+  "blueprint": "Supports the Orgogozo modification input recorded under lem-trf-local-term-locality: the finite-after-blowing-up branch invokes Tag 0B48 after flattening.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-qf-locqf-qc",
+    "why": "Step 1 takes only 'quasi-finite implies locally quasi-finite' (Stacks 01TJ) as a generic black box for the finite morphism X_U -> U; unit sk-i-curve-zero has no node for it and no route step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-qf-locqf-qc"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-a392014a2",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-a392014a2 (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, every cited node's statement, and the sources at the cited places (flat.tex Tag 081L l.3019 and Tag 0B48 l.3053, with proofs; morphisms.tex relative-dimension definition l.5564 and Tag 0397 l.5641). The item matches 0B48 with the locally-of-finite-presentation alternative and is not weakened. Its hypotheses are exactly what step 4 of lem-trf-finite-after-blowup supplies. The two new nodes state Stacks 081L(1) and Stacks 0397. They are not duplicates: lem-weil-pbc-ring-quasifinite-zero-fibre-dimension is only the affine pointwise version, and I checked 01TH, 02FZ and the flat specialization nodes. Neither restates a clause of the item. I tested both on small cases: Spec k(x) shows 0397 needs locally finite type, and k[t,x]/(tx) shows 081L needs flatness. Mathlib has no leaf for either; the nearest is locallyQuasiFinite_iff_isDiscrete_preimage_singleton at QuasiFinite.lean:276, which is about discrete fibres. Repairs: (1) Step 3 claimed lfp implies lft by definition, which is the locality lemma 01T2 and not a definition (C4); it now gets lft from proper (finite type) via def-weil-proper-morphism. (2) Step 1 never checked the lft hypothesis of the 0397 node for X_U to U and mislabelled which direction it used; it now argues from pqf-def-quasifinite (3) and def-weil-finite-type-morphism, and Step 2 now spells out why dim at most 0 means dim 0 (E1). (3) The 081L node used an undefined u(x) and an undefined 'dense' (B2/B3); both nodes now cite def-pc-scheme-fibre, and copy-pasted search verdict texts were corrected. Accepted tool use: pqf-lem-qf-locqf-qc (quasi-finite implies locally quasi-finite, other unit, not closed) is added to split_report.tool_uses. The report mentions a citations.json that the delivery does not contain. No SGA.; 3 file(s) fixed by the reviewer"
  }
 }
