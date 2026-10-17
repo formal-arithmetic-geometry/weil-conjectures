@@ -217,5 +217,23 @@
   "group": "Q61",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-b44cafe7d (reviewer sub-agent of L); spot-checked: Read the item in full; the delivery has no new nodes. The statement is Stacks Algebra 030V (lemma-geometrically-reduced-finite-purely-inseparable-extension), (1)<=>(5), checked against algebra.tex with definition-geometrically-reduced expanded. No hypothesis is added or dropped, and arbitrary and zero algebras are allowed. Step 1 ((2)=>(1)) is elementary, and E=k is valid under def-weil-pbc-finite-purely-inseparable-extension. Step 2 uses lem-weil-pbc-make-separably-generated (04KM): the statement gives the square, F=k(a_i) is finitely generated, and (1) applies to E. Step 3: D=E⊗C is reduced; lem-weil-pbc-separably-generated-tensor-reduced (030U, separably generated case) needs a field E, a reduced commutative E-algebra and F'/E separably generated, and all hold. The Mathlib leaf cancelBaseChange (R=k, S=E, A=F', B=C) gives F'⊗_kC, and the k-structures agree because the square commutes. Step 4 reflects nilpotents along the injective map F⊗C->F'⊗C, using flatness over a field (Mathlib leaf) and the definition of flatness. Step 5 writes out Stacks lemma-limit-argument (1) by a finite tensor expression and an injective ring map; r=0 is handled. proof_deps equals the union of uses, and only cited statements are used. Edge cases: C=0, characteristic 0, k=F_p(t) with C=k[u]/(u^p-t), k[eps]/eps^2, and C not finitely generated. Duplicate search (rg for 030V, geometrically reduced and purely inseparable over dag/nodes, plus the main-20261015 blueprint): the candidates lem-pc-inseparable-tensor-nilpotent, lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable, lem-pur-finite-inseparable-geometric-reduction, lem-weil-pbc-finite-purely-inseparable-scalar-descent and lem-kun-geometric-reduced-perfect are all different statements. Read Mathlib GeometricallyReduced.lean: no match. The dependency closure has no cycle and there are no SGA citations. Accepted tool uses: lem-weil-pbc-make-separably-generated and lem-weil-pbc-separably-generated-tensor-reduced, as generic commutative-algebra black boxes that the Stacks proof invokes; the unit sk-i-curve-zero has no replacement. Not a target node, so the base-change and coefficient checks do not apply. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9e8213bcc",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Statement matches Stacks 030V (1)<=>(5) and the node clause by clause: k field, arbitrary CommRing C with Algebra k C, finite (Module.Finite) purely inseparable (IsPurelyInseparable) test fields on the left, all field extensions on the right, IsReduced (C ⊗[k] _), tensor order as in the node. Test fields in Type (max u v) follow brief-stage2.md:64 and are not vacuous (ULift k gives E=k); no loss since reducedness is decided on finitely generated subfields. Edge cases C=0, char 0, F_p(t) example, nonreduced C, non-finitely-generated C/K checked. lean.statement equals the file signature exactly; only the lean field differs from the landed node; docstrings carry source, blueprint tag and the 5 proof steps; proof is sorry only; no definitions; report has Worker report and Second reading by Q77. No duplicate in Mathlib GeometricallyReduced.lean (closure-based, all-fields comparison is a TODO) or in project lean/Sheaf. nt_compile.py --json: 1.7 s, exit 0, no messages. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GeometricReducednessFiniteInseparableTest",
+  "declaration": "Algebra.isReduced_tensorProduct_iff_forall_finitePurelyInseparable",
+  "file": "lean/Sheaf/RingTheory/GeometricReducednessFiniteInseparableTest.lean",
+  "statement": "theorem isReduced_tensorProduct_iff_forall_finitePurelyInseparable (k : Type u) (C : Type v) [Field k] [CommRing C] [Algebra k C] : (∀ (E : Type (max u v)) [Field E] [Algebra k E] [Module.Finite k E] [IsPurelyInseparable k E], IsReduced (C ⊗[k] E)) ↔ (∀ (K : Type (max u v)) [Field K] [Algebra k K], IsReduced (C ⊗[k] K))",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-18",
+  "existing": false
  }
 }
