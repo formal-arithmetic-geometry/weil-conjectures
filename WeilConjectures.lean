@@ -3745,6 +3745,7 @@ public import WeilConjectures.RingTheory.IndStandardSmooth
 public import WeilConjectures.RingTheory.InertiaUnramifiedPoint
 public import WeilConjectures.RingTheory.IntegralIdempotentAnnihilatingPolynomial
 public import WeilConjectures.RingTheory.IntegrallyClosed.DepthTwo
+public import WeilConjectures.RingTheory.Invariant.Kummer
 public import WeilConjectures.RingTheory.JacobianPresentationLift
 public import WeilConjectures.RingTheory.Kaehler.LocalizationPolynomial
 public import WeilConjectures.RingTheory.Kaehler.Trace
