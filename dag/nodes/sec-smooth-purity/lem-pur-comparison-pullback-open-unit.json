@@ -1,0 +1,81 @@
+{
+ "id": "lem-pur-comparison-pullback-open-unit",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-kunneth-supported",
+   "place": "Proof paragraph 4: 'the exact comparison functor in [thm-weil-pbc-site-comparison] commutes with pullback by [lem-weil-pbc-comparison-pullback]': the unit normalization of that pullback comparison for an open immersion, used to transport the comparison adjunction units under open restriction.",
+   "via": [
+    "lem-pur-derived-support-comparison-direct-image",
+    "lem-pur-support-site-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Open-restriction compatibility of the comparison adjunction unit with the canonical pullback comparison",
+ "statement": "Let $A$ be a finite commutative ring, $T$ a scheme [def-pc-scheme] and $j:V\\hookrightarrow T$ an open immersion [def-weil-open-immersion]. Use ordinary sheaves of modules over the constant ring sheaves $A_T,A_V$ [def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category] on the small etale and pro-etale sites [def-weil-pbc-etale-site, def-weil-pbc-proetale-site]. For $S=T,V$ let $\\nu_S^*\\dashv\\nu_{S,*}$ be the comparison adjunction on these module sheaves, with unit $\\eta^S$ [def-weil-pbc-site-comparison-morphism]. Let $j_{\\mathrm{et}}^{-1}$ and $j_{\\mathrm{proet}}^{-1}$ be the inverse images along $j$ [def-weil-pbc-inverse-image, def-weil-proetale-inverse-image], identified with restriction to the objects over $V$, $G|_V(W\\to V)=G(W\\to V\\to T)$, by the canonical isomorphisms of [lem-weil-pbc-etale-inverse-image-restriction] and [lem-sfb-proetale-object-inverse-image-restriction] (for module sheaves, applied to the underlying abelian sheaves; they commute with each scalar endomorphism by naturality). Under these identifications let $c_G:j_{\\mathrm{et}}^{-1}\\nu_{T,*}G\\to\\nu_{V,*}j_{\\mathrm{proet}}^{-1}G$ be the identity of sections $G(W\\to T)=G(W\\to T)$ on every etale $W\\to V$, for $G$ a pro-etale module sheaf on $T$. Let $a:j_{\\mathrm{proet}}^{-1}\\nu_T^*\\xrightarrow{\\sim}\\nu_V^*j_{\\mathrm{et}}^{-1}$ be the inverse of the canonical comparison isomorphism $\\nu_V^*j_{\\mathrm{et}}^{-1}\\xrightarrow{\\sim}j_{\\mathrm{proet}}^{-1}\\nu_T^*$ of [lem-weil-pbc-comparison-pullback] for $u=j$. Then for every sheaf $F$ of $A_T$-modules on $T_{\\mathrm{et}}$\n$$\\nu_{V,*}(a_F)\\circ c_{\\nu_T^*F}\\circ j_{\\mathrm{et}}^{-1}(\\eta^T_F)=\\eta^V_{j_{\\mathrm{et}}^{-1}F}:\\ j_{\\mathrm{et}}^{-1}F\\longrightarrow\\nu_{V,*}\\nu_V^*j_{\\mathrm{et}}^{-1}F.$$\nEquivalently, for every etale $W\\to V$ and $s\\in F(W\\to T)$, the section $\\eta^T_F(s)\\in(\\nu_T^*F)(W\\to T)=(j_{\\mathrm{proet}}^{-1}\\nu_T^*F)(W\\to V)$ is carried by $a_F$ to $\\eta^V_{F|_V}(s)\\in(\\nu_V^*(F|_V))(W\\to V)$. The comparison $a$ is the canonical one of [lem-weil-pbc-comparison-pullback], not an independently chosen isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00WX (lemma-adjoint-sheaves), the presheaf-colimit/sheafification adjunction for continuous functors, applied to the two composite site functors through V_et; the unit normalization is the agent elaboration extracted by the maintainer reader from step 6 of lem-pur-derived-support-comparison-direct-image (normalization of lem-weil-pbc-comparison-pullback as conjugate of the sectionwise direct-image identity)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-inverse-image",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-weil-pbc-comparison-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rg -li 'proetale|ProEtale' /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib",
+   "results": "Mathlib/AlgebraicGeometry/Sites/Proetale.lean (pro-etale topology, ProEt site, forget functor continuity; no etale-proetale comparison morphism, no inverse-image comparison), Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'unit_conjugateEquiv|conjugateIsoEquiv' /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean:300 unit_conjugateEquiv, :311 unit_conjugateEquiv_symm; CompositionIso.lean, Unique.lean (generic conjugate calculus only)",
+   "date": "2026-10-17",
+   "verdict": "no match: generic mate calculus, not the comparison-site statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale proetale comparison adjunction unit compatible with restriction to an open subscheme",
+   "results": "not run: the LeanSearch/LeanFinder service (msearch.py) is reachable only from the Codex machine, not from the review server",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-derived-support-comparison-direct-image",
+  "date": "2026-10-17",
+  "group": "Q53"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ }
+}
