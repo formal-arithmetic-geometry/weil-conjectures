@@ -14,7 +14,10 @@
   "def-weil-pbc-etale-constructible-sheaf",
   "def-trf-oriented-nearby-cycles",
   "def-constructible-stratification",
-  "lem-trf-oriented-product-universal"
+  "lem-trf-oriented-product-universal",
+  "lem-trf-oriented-point-cohomology",
+  "lem-cbc-constant-ring-module-sheaves",
+  "def-sfb-site-derived-constant-module-functor"
  ],
  "proof": [
   {
@@ -161,5 +164,41 @@
   "group": "Q103",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q103-61f5993a3 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass. The three new nodes omit the lean_audit records claimed by the report; corrected whole JSON files are under fixes/dag/nodes/sec-trace-formula/. No nodes dropped.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PsiGoodOrientedCohomologyStrata",
+  "declaration": "AlgebraicGeometry.OrientedNearbyCycles.PsiGoodStrata.exists_constructible_cohomology_strata",
+  "declarations": [
+   "AlgebraicGeometry.OrientedNearbyCycles.PsiGoodStrata.fixedSheaf",
+   "AlgebraicGeometry.OrientedNearbyCycles.PsiGoodStrata.upContinuous",
+   "AlgebraicGeometry.OrientedNearbyCycles.PsiGoodStrata.etaleFixed",
+   "AlgebraicGeometry.OrientedNearbyCycles.PsiGoodStrata.productSite",
+   "AlgebraicGeometry.OrientedNearbyCycles.PsiGoodStrata.restrictBeta",
+   "AlgebraicGeometry.OrientedNearbyCycles.PsiGoodStrata.restrictSite",
+   "AlgebraicGeometry.OrientedNearbyCycles.PsiGoodStrata.restrictSite_properties",
+   "AlgebraicGeometry.OrientedNearbyCycles.PsiGoodStrata.restrictSite_continuous",
+   "AlgebraicGeometry.OrientedNearbyCycles.PsiGoodStrata.restrictSite_finiteLimits",
+   "AlgebraicGeometry.OrientedNearbyCycles.PsiGoodStrata.vanishing_finiteLimits",
+   "AlgebraicGeometry.OrientedNearbyCycles.PsiGoodStrata.product_finiteLimits",
+   "AlgebraicGeometry.OrientedNearbyCycles.PsiGoodStrata.restrictionModules",
+   "AlgebraicGeometry.OrientedNearbyCycles.PsiGoodStrata.degreeZero",
+   "AlgebraicGeometry.OrientedNearbyCycles.PsiGoodStrata.cohomology",
+   "AlgebraicGeometry.OrientedNearbyCycles.PsiGoodStrata.exists_constructible_cohomology_strata"
+  ],
+  "file": "lean/Sheaf/Paper/PsiGoodOrientedCohomologyStrata.lean",
+  "statement": "theorem exists_constructible_cohomology_strata {X S : Scheme.{u}} [IsLocallyNoetherian S] [CompactSpace S] (f : X ⟶ S) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (m : ℕ) (_hm : 1 ≤ m) (_hΛ : (m : Λ) = 0) (_hS : IsUnit (m : Γ(S, ⊤))) (L : (etaleDatum.{u, u + 1} X).modules (Coeff.{u, u + 1} Λ)) (_hc : Scheme.IsConstructibleEtaleModuleSheaf (etaleFixed X (Coeff Λ) L)) (_hgood : IsPsiGood f Λ (degreeZero X Λ L)) (q : ℤ) (_hq : 0 ≤ q) : ∃ (A : Scheme.LocallyClosedStratification X) (B : Scheme.LocallyClosedStratification S), (∀ a : Fin A.n, Topology.IsConstructible (A.stratum a)) ∧ (∀ b : Fin B.n, Topology.IsConstructible (B.stratum b)) ∧ ∀ (a : Fin A.n) (b : Fin B.n), ∃ R : (productSite (A.immersion a ≫ f) (B.immersion b)).topology.Cover (⊤_ (productSite (A.immersion a ≫ f) (B.immersion b)).objects), ∀ (Z : (productSite (A.immersion a ≫ f) (B.immersion b)).objects) (r : Z ⟶ ⊤_ (productSite (A.immersion a ≫ f) (B.immersion b)).objects), R r → ∃ M : ModuleCat.{u + 1} (Coeff.{u, u + 1} Λ), Finite M ∧ Nonempty ((fixedSheaf (productSite (A.immersion a ≫ f) (B.immersion b)) (Coeff Λ) (((restrictionModules f (A.immersion a) (B.immersion b)).modulePull (Coeff Λ)).obj (cohomology f Λ L q))).over Z ≅ (constantSheaf ((productSite (A.immersion a ≫ f) (B.immersion b)).topology.over Z) (ModuleCat.{u + 1} (Coeff.{u, u + 1} Λ))).obj M)",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The conclusion is expanded into the two recorded finite locally closed stratifications, constructible parts, and covering-sieve trivializations with finite constant module values. Canonical site/scalar transports reuse the published two-map oriented datum, constant-ring module restriction and CommRingCat-to-RingCat comparison. Coeff is the existing canonical ULift of Lambda, transported along ULift.ringEquiv; there is no new coefficient or map assumption. Named helper properties specify only the canonical transports required to type this statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0371afd50",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: Noetherian S as IsLocallyNoetherian+CompactSpace, f of finite presentation as LOFP+QC+QS, finite Lambda with m invertible on S, L constructible via the recorded IsConstructibleEtaleModuleSheaf after canonical transport only, IsPsiGood on L[0], q>=0 bound before the existential partitions, two LocallyClosedStratifications with constructible strata, covering sieves of the terminal triple with finite constant module values. restrictSite (Comma.map with etaleBaseChangeComp) checked by hand as the canonical ILO XI 1.9 stratum site functor; its equality with the universal-property lift is stated only in a docstring, which is acceptable because the two maps are canonically isomorphic. Lambda in Type (u+1) is forced by the recorded constructible-sheaf predicate and openly documented, not a hidden restriction. The 3 postponed transport properties are true and documented. No hollow definitions, only sorry proofs, all 15 declarations listed, no duplicate notion, no pro-etale substitute, statement field verbatim, item statement text unchanged, report has worker and second-reading sections. nt_compile --json at the library path: the first 3 attempts timed out on the dependency OrientedPointCohomology under load ~160; the next attempt compiled PsiGoodOrientedCohomologyStrata cleanly in 7.0 s with no errors or warnings."
  }
 }

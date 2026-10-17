@@ -13,7 +13,8 @@
   "def-sc-invertible-module",
   "def-weil-pbc-generating-sections",
   "def-pc-zero-scheme",
-  "def-pc-base-change"
+  "def-pc-base-change",
+  "def-weil-pbc-morphism-to-projective-space-by-sections"
  ],
  "proof": [
   {
@@ -140,5 +141,30 @@
   "group": "Q91",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-4b312d1e3 (reviewer sub-agent of L); spot-checked: Read Stacks varieties.tex Situation 0FD3 and Lemma 0FD6 (l.10908-11060, whole proof), the blueprint ancestor lem-zl-bertini-finite-cover-curve (master proof para 2 uses 0FD6 on X minus S), and every cited node. The item agrees with 0FD6 hypothesis by hypothesis, including 'general'; the delivery did not change or weaken its statement. The split is genuine: steps for the universal family and its fibres, the new estimate node, the open complement plus smooth base change, and the elementary 'general'. The new node lem-zl-bertini-singular-locus-dimension (dim Sigma < r, so q(Sigma) lies in a proper closed subset) is true and strictly smaller than the item. I tested it on Y empty, Y=Spec k with r=1 (Sigma={0}) and P^1 with O(1) (Sigma={0}xP^1, dim 1<2). I also checked that the source's count stays valid at non-flat points. No duplicate found by rg (bertini, 0FD6, universal divisor, singular/smooth locus). Two faults, both fixed in fixes/: (1) B2/B3: the new node did not introduce psi, the universal section/H_univ or 'non-smooth locus', and did not cite the P(V) morphism. Its statement now defines them and cites def-weil-pbc-morphism-to-projective-space-by-sections. (2) C1/C4: step 3 cited def-pc-base-change for smoothness of fibres. It now cites lem-weil-pbc-smooth-local-on-source (Mathlib leaf) and lem-pc-proper-base-change(2) (Lean-closed), so no tool_uses are needed. blueprint.from.place on both nodes now names the blueprint proof sentence. Step 1's base change of the zero scheme along a non-flat map follows from the definition in a few lines; I accepted it as written. No SGA source is cited. Not a target node.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BertiniSmoothMember",
+  "declaration": "AlgebraicGeometry.exists_open_smooth_bertiniMember",
+  "declarations": [
+   "AlgebraicGeometry.bertiniCoefficientPoint",
+   "AlgebraicGeometry.bertiniMemberSection",
+   "AlgebraicGeometry.bertiniSectionFamily",
+   "AlgebraicGeometry.exists_open_smooth_bertiniMember"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/BertiniSmoothMember.lean",
+  "statement": "theorem exists_open_smooth_bertiniMember {k : Type u} [Field k] {Y : Scheme.{u}} (f : Y ⟶ Spec (CommRingCat.of k)) [Smooth f] (L : Y.Modules) [L.IsInvertible] {V : Type u} [AddCommGroup V] [Module k V] {I : Type u} [Fintype I] (b : Module.Basis I k V) (ψ : V →+ Γ(L, ⊤)) (_hlinear : ∀ (c : k) (v : V), ψ (c • v) = f.appTop ((Scheme.ΓSpecIso (CommRingCat.of k)).inv c) • ψ v) (hgen : Epi (L.freeHomEquiv.symm (bertiniSectionFamily L (fun i ↦ ψ (b i))))) [IsImmersion (ProjectiveSpace.homOfGeneratingSections I f L (bertiniSectionFamily L (fun i ↦ ψ (b i))) hgen)] : ∃ U : (Spec (CommRingCat.of (MvPolynomial I k))).Opens, (U : Set (Spec (CommRingCat.of (MvPolynomial I k)))).Nonempty ∧ ∀ (K : Type u) [Field K] [Algebra k K] (a : I → K), Set.range (bertiniCoefficientPoint (k := k) a) ⊆ (U : Set _) → Smooth ((Scheme.Modules.homOfGlobalSection ((Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj L) (bertiniMemberSection f L (fun i ↦ ψ (b i)) a)).zeroLocus.subschemeι ≫ pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K))))",
+  "branch": "newtargets-dag",
+  "by": "Q107",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "An arbitrary finite basis indexes the affine coefficient space. The k-linear map is an additive map to top-open sections with its canonical scalar law written explicitly; general means a single nonempty open that works for every extension field. Helpers construct its actual coefficient point, pulled-back section and compatible global-section family."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-654778d41",
+  "group": "Q107",
+  "result": "pass",
+  "note": "Read node, 7 stmt_deps, Stacks varieties.tex Situation 0FD3/Lemma 0FD6 (l.10908-10964), module, report, and declarations homOfGlobalSection, Hom.zeroLocus, tensorSectionsUnit, tensorPullback, ProjectiveSpace.homOfGeneratingSections. Every clause matches: Smooth f; IsInvertible L; finite basis b (I may be empty); additive psi plus canonical scalar law via f.appTop and GammaSpecIso; Epi generation on psi(b_i); IsImmersion of the recorded map to P(I;Spec k); a single nonempty open U in Spec k[x_I] before all K-points (eval2 point, range in U); smoothness of the zero scheme of sum a_i psi(b_i) on the pullback Y_K over Spec K. Statement field unchanged from base; stmt_deps gained only the landed P(V)-morphism node (permitted); lean.statement verbatim. Helpers are real constructions; the Classical.choose adjunction unit can change the section only by a global unit, so the zero locus is unchanged. Edge cases: empty Y, V=0, finite k, any characteristic. Single universe u including K: natural and loses nothing. rg/grep found no duplicate or name collision. nt_compile clean (9.0 s/6.1 s, no diagnostics); a probe with #check, #print axioms and a deliberate error confirmed elaboration, sorryAx only. The Second reading section was a second pass by the same worker: process remark, not a fault."
  }
 }

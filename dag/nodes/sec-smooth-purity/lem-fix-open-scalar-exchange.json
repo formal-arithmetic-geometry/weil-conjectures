@@ -215,5 +215,35 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-9f8ff389e (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. Repaired one C1/C4 citation gap in steps 3–4 by citing the existing exact inverse-mate normalization theorem. Statement unchanged; no new nodes. Corrected dependency closure is acyclic. Review and whole corrected JSON written under the review directory.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.OpenScalarExchange",
+  "declaration": "AlgebraicGeometry.ProEtale.openScalarExchange",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.scalarExtension",
+   "AlgebraicGeometry.ProEtale.scalarRestriction",
+   "AlgebraicGeometry.ProEtale.constantPullback",
+   "AlgebraicGeometry.ProEtale.openExtension",
+   "AlgebraicGeometry.ProEtale.tensorPullbackIso",
+   "AlgebraicGeometry.ProEtale.openScalarIso",
+   "AlgebraicGeometry.ProEtale.openBaseChangeIso",
+   "AlgebraicGeometry.ProEtale.openScalarExchange"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/OpenScalarExchange.lean",
+  "statement": "theorem openScalarExchange {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X) (sq : OpenImmersionSquare gU j' j g) [IsOpenImmersion j] [IsOpenImmersion j'] (K : DerivedCategory (Scheme.proEtaleRingModules U (Scheme.proEtaleConstantRing U A))) : (constantPullback g).map ((openScalarIso φ j).hom.app K) ≫ (openBaseChangeIso gU j' j g sq).hom.app ((scalarExtension φ U).obj K) ≫ (openExtension j').map ((tensorPullbackIso φ gU).hom.app K) = (tensorPullbackIso φ g).hom.app ((openExtension j).obj K) ≫ (scalarExtension φ X').map ((openBaseChangeIso gU j' j g sq).hom.app K) ≫ (openScalarIso φ j').hom.app ((constantPullback gU).obj K)",
+  "branch": "newtargets-dag",
+  "by": "Q108",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reviewer fix (one definition per notion, H4): the open base-change map e_j is now the recorded dependency declaration AlgebraicGeometry.ProEtale.StrictTower.singleBeta of lem-cbc-proetale-extension-zero-base-change, at the lifted coefficient ring ULift A (its constant coefficients, module pullback and open extension are definitionally proEtaleConstantRing, constantPullback and openExtension here); the delivered private mate construction openBaseChangeMate and its postponed invertibility theorem openBaseChangeMate_isIso are removed. Helper docstrings now carry source places and blueprint ids, and the item docstring carries the node's proof steps. The item theorem's signature is unchanged; it is the only postponed proof in the module.",
+  "fixed_by": "NT-stage2-cc-124eeee3e"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-124eeee3e",
+  "group": "Q108",
+  "result": "fix",
+  "note": "Checked every clause against the node, the nine dependency records and Stacks 03S6/07A4/07A6/09AE. Objects, directions and composition order in openScalarExchange all match, lean.statement is verbatim, there are no extra hypotheses, and Type u for finite rings is harmless. Finding (H4/dependency): openBaseChangeIso was a private second construction of e_j (an ambient-pullback mate) with an un-noded postponed theorem openBaseChangeMate_isIso, instead of the recorded StrictTower.singleBeta of lem-cbc-proetale-extension-zero-base-change, which proof steps 3-4 rely on through lem-cbc-finite-open-exchange-scalars. Fixed: openBaseChangeIso := StrictTower.singleBeta (ULift A) gU j' j g sq.w (IsPullback.of_iso_pullback ...), which is definitionally in the same coordinates (confirmed by compilation); openBaseChangeMate and openBaseChangeMate_isIso removed and lean.declarations updated. Also added source/blueprint docstrings to the helpers and the node proof steps to the theorem docstring (H8), and appended a fix section to the report. nt_compile --json: delivered file 9.0 s and 10.9 s clean (first try timed out on a dependency override under load); fixed file 3.7 s clean. Fix files: OpenScalarExchange.lean, lem-fix-open-scalar-exchange.lean-record.json, lem-fix-open-scalar-exchange.report.md."
  }
 }

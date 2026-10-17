@@ -249,5 +249,31 @@
   "group": "Q136",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-b39c6d8ad (reviewer sub-agent of L); spot-checked: I read the item in full: its statement is unchanged, it has 9 steps and the delivery creates no new nodes. I also read the statements of all 5 cited nodes, the citer lem-cbc-cosimplicial-complex-holim (step 1), the sk-prop-sf-cbc unit record, Stacks 0A8H/0A5Y/0A8I and Mathlib KProjective.lean 35-51. I recomputed every sign. The Hom differential d_B f-(-1)^n f d_A matches 0A8H, and both delta^2=0 and the Leibniz rule hold. Both curry maps commute with the differentials; for the (-1)^{pq} curry the dt term gets (-1)^{n+pq} and the da term (-1)^{n+p(q+1)}. The kernel of c is Hom(coker i, ker p) by the universal properties. The degreewise lift w=ur+lq satisfies wi=u and pw=v(ir+sq)=v, using the model node's split injection, projective terms of the cokernel and termwise surjective p. If p is a quasi-isomorphism, the long exact sequence (Tag 0117) gives K acyclic, and the dg-projective clause then gives Hom(P,K) acyclic. If i is a quasi-isomorphism, P is acyclic, so 1_P=dh+hd, and S(f)=(-1)^n fh is a contraction of Hom(P,K). The axiom matches the opening definition of lem-coef-quillen-section-rectification, with the model at R=Z. The coefficient category Ch(Mod_R) matches the parent's Lambda. The statement holds on the edge cases R=0, i=id, p=id and R=Z/m. A search of the DAG found no duplicate: the flat model, the dg-module classification and the enriched-diagram nodes do not state this assertion. A dependency search shows no cycle, and proof_deps equals the union of the steps' uses. Accepted tool_uses: lem-coef-projective-cochain-monoidal-model and lem-coef-quillen-section-rectification, the latter for its definition only. Both are generic algebraic black boxes and replace no step of the unit. No fixes were made; review.md is written."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ProjectiveCochainDgCompatibility",
+  "declaration": "HomotopicalAlgebra.projectiveCochainDgCompatibility",
+  "file": "lean/Sheaf/CategoryTheory/ProjectiveCochainDgCompatibility.lean",
+  "statement": "theorem projectiveCochainDgCompatibility (R : Type u) [CommRing R] : Nonempty (ProjectiveCochainDgCompatibility R)",
+  "branch": "newtargets-dag",
+  "by": "Q113",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "HomotopicalAlgebra.moduleHomComplexAb",
+   "HomotopicalAlgebra.moduleHomCochainAb",
+   "HomotopicalAlgebra.moduleHomCochainCompAb",
+   "HomotopicalAlgebra.ProjectiveCochainDgCompatibility",
+   "HomotopicalAlgebra.projectiveCochainDgCompatibility"
+  ],
+  "fixed_by": "NT-stage2-cc-841ca2277"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-841ca2277",
+  "group": "Q113",
+  "result": "fix",
+  "note": "Head 841ca22's module is byte-identical to daad059's, whose earlier FIX never landed; I re-checked every point independently. F1 (H3): enriched_comp_cochain pinned eComp only on degree-0 cochain maps, which already follows from homEquiv_comp, enriched_eHomEquiv_ofHom and ofHom_comp, so eComp stayed free in nonzero degrees although IsHomComparison's legs and TensorCotensor use it. Fixed: eComp on each summand Hom^n(A,B)⊗Hom^m(B,C) through ιTensorObj is (n*m).negOnePow • Cochain.comp f g. The sign is forced by Mathlib's ε₂=(-1)^p and δ_comp; the composition is associative and unital, and whiskering by degree-0 maps has sign 1. F2: the kernel clause was a bare Nonempty iso; it is now the canonical w↦ι∘w∘π (eHomWhiskerRight cokernel.π ≫ eHomWhiskerLeft kernel.ι) shown to be an iso onto kernel h. F3: source/blueprint docstrings on the 3 helpers, plus a lean-record override listing declarations. F4: the second reading predates the repair and missed F1; the fixed report adds a maintainer-fix section. Passed: ring and universes (u, CombinatorialModelCategory.{u+1,u,u}); projective model dep; cofibration and fibration hypotheses no stronger than the node's; degreewise surjectivity; both quasi-iso alternatives; edge cases R=0, Z/m, id maps, unbounded; no hollow defs; no duplicate; sorry only on the theorem; lean.statement verbatim with signature unchanged. nt_compile --json: delivered clean in 9.6 s (reproduces the delivery's claim), fixed clean in 10.9 s. Fixes: fixes/ProjectiveCochainDgCompatibility.lean, fixes/lem-cbc-projective-cochain-dg-compatibility.report.md, fixes/lem-cbc-projective-cochain-dg-compatibility.lean-record.json."
  }
 }

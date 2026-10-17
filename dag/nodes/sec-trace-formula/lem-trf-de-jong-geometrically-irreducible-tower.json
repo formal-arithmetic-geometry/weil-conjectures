@@ -22,7 +22,8 @@
   "def-weil-finite-integral-morphism",
   "def-weil-geometric-fibre",
   "def-pc-fibre-product",
-  "def-sc-generic-point"
+  "def-sc-generic-point",
+  "def-trf-orgogozo-induction-data"
  ],
  "proof": [
   {
@@ -376,5 +377,28 @@
   "group": "Q49",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-c40d7235b (reviewer sub-agent of L); spot-checked: I read the item, all 11 steps, both new nodes and the statements of all 24 cited nodes. The item statement is unchanged: it is de Jong 5.9 without the group, projectivity and boundary, and no target is weakened. de Jong 1997 is not in literature/; it is recorded as WANTED and proof_origin is agent. I cross-checked against the local ILO Travaux de Gabber, Exp. IX Thm 1.2, which states de Jong 2.4 for f proper between excellent integral Noetherian schemes with no base projectivity, and Exp. VII 3.4. Each step was checked against the hypotheses in force. Step 2: Nagata via 07QV and 032R/032F gives a finite normalization in K'. Step 3: a surjective closed immersion keeps the space under base change, so (W_K')_red is geometrically integral. Step 6: points over the generic point are primes of the Artinian algebra k(B)⊗L, so they are generic points of components, and the induction runs at r=d-1. Step 7: the fibre of finite dominant B_2→B over η_B is the generic point alone, so the dense-open composition of alterations is valid. Steps 8 and 9 (flat base change; P integral via D↪D⊗Frac A) are correctly elementary. Step 10: I traced the commutativity gh=bq_1⋯q_d through every square. Step 11: the dimension bookkeeping via 02JX is not circular. Both new nodes are true and statement-only. N1 (marked semistable curve over an arbitrary excellent base) is not a duplicate: the existing dejong-relative-marked-semistable and relative-marked-nodal-reduction nodes require a projective-over-affine base, a smooth generic curve and an étale divisor. N2 (geometrically integral curve factorization) has a proof via a separating transcendence basis, graph closure, normalization and Stein factorization. It is not a duplicate of the field/trait factorization nodes. Neither new node restates the item. I accept the ten declared generic tool uses. Fix: N1 used 'geometric fibres' without citing a definition (B3); I added [def-weil-geometric-fibre] to its statement and stmt_deps in fixes/dag/nodes/sec-trace-formula/lem-trf-excellent-base-marked-semistable-curve.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DeJongGeometricallyIrreducibleTower",
+  "declaration": "AlgebraicGeometry.exists_deJong_geometricallyIrreducibleTower",
+  "declarations": [
+   "AlgebraicGeometry.towerComposite",
+   "AlgebraicGeometry.exists_deJong_geometricallyIrreducibleTower"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DeJongGeometricallyIrreducibleTower.lean",
+  "statement": "theorem exists_deJong_geometricallyIrreducibleTower (S W : Scheme.{u}) [IsIntegral S] [IsIntegral W] [IsLocallyNoetherian S] [CompactSpace S] [IsLocallyNoetherian W] [CompactSpace W] (hS : IsExcellentScheme S) (hW : IsExcellentScheme W) (hSdim : ∃ n : ℕ, topologicalKrullDim S ≤ (n : WithBot ℕ∞)) (hWdim : ∃ n : ℕ, topologicalKrullDim W ≤ (n : WithBot ℕ∞)) (g : W ⟶ S) [IsProper g] [IsDominant g] (η : S) (hη : IsGenericPoint η Set.univ) (d : ℕ) (hd : 1 ≤ d) (hηdim : topologicalKrullDim (g.fiber η) = (d : WithBot ℕ∞)) (hηirr : GeometricallyIrreducible (g.fiberToSpecResidueField η)) : ∃ (P : Fin (d + 1) → Scheme.{u}) (b : P 0 ⟶ S) (h : P ⟨d, Nat.lt_succ_self d⟩ ⟶ W) (q : ∀ j : Fin d, P j.succ ⟶ P j.castSucc), (∀ i : Fin (d + 1), IsIntegral (P i) ∧ IsExcellentScheme (P i) ∧ IsLocallyNoetherian (P i) ∧ CompactSpace (P i) ∧ ∃ n : ℕ, topologicalKrullDim (P i) ≤ (n : WithBot ℕ∞)) ∧ IsAlteration b ∧ IsAlteration h ∧ (∀ j : Fin d, IsProper (q j) ∧ Flat (q j) ∧ LocallyOfFinitePresentation (q j) ∧ ∀ y : P j.castSucc, IsSemistableGeometricCurve (pullback.snd (q j) (geometricPoint (P j.castSucc) y))) ∧ h ≫ g = towerComposite P q ≫ b",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "P 0 is S₁. The added landed definition dependency supplies IsExcellentScheme, IsAlteration, geometricPoint and IsSemistableGeometricCurve. On integral schemes its alteration component condition follows from surjectivity; properness plus locally finite presentation gives finite presentation."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ca523adb1",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Item node unchanged except lean and an allowed landed stmt_dep (def-trf-orgogozo-induction-data). Lean matches the node clause by clause: integral, excellent (every affine ring), Noetherian (locally Noetherian + CompactSpace), finite dimension, proper dominant g, generic point, generic fibre geometrically irreducible of dimension d>=1. Conclusion: P : Fin (d+1) with P 0 = S1, all stages integral/excellent/Noetherian/finite-dimensional, b and h alterations (IsAlteration's component clause automatic for integral schemes), each q_j proper, flat and locally of finite presentation (= finite presentation since proper), geometric fibres at the algebraic closure (exactly def-weil-geometric-fibre) satisfy IsSemistableGeometricCurve (connected so nonempty, reduced, pure dim 1, smooth or scalar-compatible node), h>>g = towerComposite >> b with the recursion checked. Mathlib's universe-u GeometricallyIrreducible is equivalent. Edge cases d=0, d=1, empty, any characteristic checked. No hollow definitions, docstrings carry source and blueprint, sorry only, no duplicate found. nt_compile --json on the snapshot is clean (4.7 s); a probe file confirmed errors are printed. No findings that block landing."
  }
 }

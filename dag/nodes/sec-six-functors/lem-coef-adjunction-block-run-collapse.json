@@ -126,5 +126,40 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-8ca7e13c2 (reviewer sub-agent of L); spot-checked: I read the item, its only citer lem-coef-adjunction-two-block-splicing (all 5 steps), def-cbc-enhanced-diagrams-cones, the squiggle-normal-form statement (it uses the same two-letter deletion), unit sk-prop-sf-biduality-general and chapter sec-six-functors. Riehl-Verity Prop. 3.2.2 is not in literature/ (WANTED is already recorded and proof_origin is agent), so I could not check the cited place and checked the mathematics independently instead. An exhaustive script covered r<=4, all four (p,q), width<=10 and every 0<=h<=r: 1,654,284 cases. In every case each maximal chi_h-run has odd length, R(C_h x) collapses each 1-run to h+1 and keeps the 0-runs, and R(D_h x) collapses each 0-run to 0 and shifts each 1-run by -h. This includes r=0, h=0, h=r, singletons and single runs. Steps 2-4 are correct and genuinely elementary: boundary letters are unequal, an odd constant run reduces to one letter, and the leftmost-pair algorithm reduces the runs independently. Step 1 left out the last run's parity: it needs the direction of s_{w-1} fixed by q, which the step never used outside the single-run case. I rewrote step 1 as an explicit case analysis (interior, first, last, single run) in fixes/dag/nodes/sec-six-functors/lem-coef-adjunction-block-run-collapse.json; only the step 1 text changed. There are no new nodes. rg over dag/nodes found no duplicate or generalization. The statement is self-contained and strictly smaller than the parent's bijection. No route departure, no tool_uses, no SGA. The statement is unchanged and no target is touched.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AdjunctionBlockRunCollapse",
+  "declaration": "CategoryTheory.AdjunctionWord.block_run_collapse",
+  "declarations": [
+   "CategoryTheory.AdjunctionWord.IsAlternating",
+   "CategoryTheory.AdjunctionWord.IsWord",
+   "CategoryTheory.AdjunctionWord.thresholdRuns",
+   "CategoryTheory.AdjunctionWord.lowerRestriction",
+   "CategoryTheory.AdjunctionWord.upperRestriction",
+   "CategoryTheory.AdjunctionWord.eraseFirstPair",
+   "CategoryTheory.AdjunctionWord.reduceWithTraceAux",
+   "CategoryTheory.AdjunctionWord.reduceWithTrace",
+   "CategoryTheory.AdjunctionWord.reduce",
+   "CategoryTheory.AdjunctionWord.lowerRun",
+   "CategoryTheory.AdjunctionWord.upperRun",
+   "CategoryTheory.AdjunctionWord.taggedRestriction",
+   "CategoryTheory.AdjunctionWord.NoCrossRunDeletion",
+   "CategoryTheory.AdjunctionWord.block_run_collapse"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/AdjunctionBlockRunCollapse.lean",
+  "statement": "theorem block_run_collapse (r h : ℕ) (p q : Bool) (x : List ℕ) (hx : IsWord r p q x) (hh : h ≤ r) : (∀ b ∈ thresholdRuns h x, Odd b.length) ∧ reduce (x.map (lowerRestriction h)) = (thresholdRuns h x).flatMap (lowerRun h) ∧ reduce (x.map (upperRestriction h)) = (thresholdRuns h x).flatMap (upperRun h) ∧ NoCrossRunDeletion h (lowerRestriction h) x ∧ NoCrossRunDeletion h (upperRestriction h) x ∧ IsAlternating p (reduce (x.map (lowerRestriction h))) ∧ IsAlternating p (reduce (x.map (upperRestriction h)))",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The helpers implement precisely the finite words, maximal threshold runs, two interval maps, and deterministic reduction introduced inline by this node. Original run-number tags record every actual deleted pair. All data are explicit; the sole theorem is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-20c92ad8a",
+  "group": "NV",
+  "result": "pass",
+  "note": "Read node, dep def-cbc-enhanced-diagrams-cones, module, report. Every clause matches: IsWord gives both endpoints, the {0..r+1} bound, nonemptiness and strict alternation with the correct starting sign; thresholdRuns gives maximal chi_h runs; lowerRestriction/upperRestriction (truncated subtraction) are C_h/D_h; eraseFirstPair/reduce is leftmost equal-pair deletion and length fuel is sufficient; the two flatMap equalities, NoCrossRunDeletion (run-ordinal tags) and IsAlternating p of both reductions render the collapse, no-crossing, order and direction clauses. No extra hypotheses, universe u explicit, autoImplicit false. Only the item theorem uses sorry, no hollow defs, all docstrings carry source and blueprint, the proof steps are in the docstring, lean.statement is verbatim and all 14 declarations exist. The node changes only its lean field; no duplicate in Mathlib or the project. My own Python transcription of the Lean definitions passed all 1,654,284 cases (r<=4, length<=11, all p,q,h). nt_compile (--json) compiled the module in 11.6 s and 8.0 s, exit 0, no errors. Observation only: the second reading is the author's own pass under direct delivery, but it is substantive."
  }
 }

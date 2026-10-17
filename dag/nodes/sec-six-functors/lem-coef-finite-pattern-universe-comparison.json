@@ -223,5 +223,37 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-624c017fb (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-coef-fibrant-pattern-homotopy-inverse, the statements of all six cited nodes, the unit and chapter records and the blueprint ancestor. I also read Higher Algebra (2017) B.1.14, B.2.1, B.2.2, B.2.3 and B.2.4 with its whole proof (printed pp.1481-1485), from a copy already cached on this server. The new node is exactly B.2.4 (1)<=>(2): a map of P-fibered objects is a weak equivalence iff it has an inverse g and homotopies over (B,S) built from the interval with every edge marked. Its weak-equivalence notion agrees with the source's via the mapping test in model-calculus. I checked both directions (two tests on pi_0 plus horn filling; precomposition homotopies). Edge cases checked: identity map, empty base, empty or absent cones, empty source; no finiteness is needed. It satisfies B1-B7. Duplicate search over the DAG and blueprint: edge-detection is (1)<=>(3), fixed-cylinder detection is a generic class-bijection test, induced-fibration-test is about fibrations, and the recognition/nerve nodes state other things, so there is no duplicate and no restatement of an item clause. Mathlib's Whitehead lemmas are not a one-line specialization. Steps 1-5 and 7 are unchanged and I re-verified them. The new step 6 is valid: g, H and J are maps between the same smaller objects in both universes, and the criterion tests against every fibrant object of its own universe. Fix: step 6 used the new criterion, whose hypothesis is P-fibered, while it only had 'fibrant (step 2)'. I added the citation of lem-coef-categorical-pattern-model-calculus for fibrant = P-fibered (already in proof_deps) and updated the step's outdated source place. The item statement, proof_deps and all other fields are unchanged. No SGA source is used, no tool use is introduced, and there is no cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FinitePatternUniverseComparison",
+  "declaration": "SSet.Enhanced.CategoricalPattern.finite_pattern_universe_comparison",
+  "declarations": [
+   "SSet.Enhanced.CategoricalPattern.PatternUniverseLift",
+   "SSet.Enhanced.CategoricalPattern.PatternUniverseLift.uliftMap",
+   "SSet.Enhanced.CategoricalPattern.PatternUniverseLift.object",
+   "SSet.Enhanced.CategoricalPattern.PatternUniverseLift.map",
+   "SSet.Enhanced.CategoricalPattern.PatternUniverseLift.inclusion",
+   "SSet.Enhanced.CategoricalPattern.boundaryPatternGenerator",
+   "SSet.Enhanced.CategoricalPattern.markedEdgePatternGenerator",
+   "SSet.Enhanced.CategoricalPattern.patternGeneratingCofibrations",
+   "SSet.Enhanced.CategoricalPattern.FunctorialPatternReplacement",
+   "SSet.Enhanced.CategoricalPattern.PatternUniverseComparisonData",
+   "SSet.Enhanced.CategoricalPattern.finite_pattern_universe_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FinitePatternUniverseComparison.lean",
+  "statement": "theorem finite_pattern_universe_comparison (P : CategoricalPattern.{u}) (finite_cone : ∀ a : P.index, SSet.Finite (P.cone a)) : ∃ (P' : CategoricalPattern.{max u v}) (L : PatternUniverseLift.{u, v} P P') (K : SSet.Marked.CartesianModelStatement.{u}) (K' : SSet.Marked.CartesianModelStatement.{max u v}) (M : ModelStatement P K) (M' : ModelStatement P' K'), Nonempty (PatternUniverseComparisonData P P' L K K' M M')",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-5a6118f5e"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5a6118f5e",
+  "group": "Q22",
+  "result": "fix",
+  "note": "Read the node, the 4 stmt_deps and their Lean (CategoricalPattern, ModelStatement, Marked.enlarge/flat/sharp, overGenerator, leftJoinCone), the module, the report and the previous RETURN review (8f2a7dfb3926). Re-delivery repaired the named generators and their common image (fault 3), added the canonical L.inclusion and cone-diagram compatibility. Remaining faults fixed in fixes/FinitePatternUniverseComparison.lean: F1 (H3, arbitrary map) PatternUniverseComparisonData still had a free `inclusion` functor field and the lift was bound as `_`; now parameterised by L : PatternUniverseLift with every clause along L.inclusion and the theorem naming L. F2 (H3) cone_map was unconstrained at the cone apex (K_a=Δ^0 counterexample lets p'_a differ from p_a); added cone_map_apex, which with cone_map_restrict pins the map to the join of the identity with `cone a`. F3 (H8) source/blueprint docstrings added to uliftMap, object, map, inclusion and the three generator definitions. All other clauses match the node; edge cases (empty index set and cones, n=0, v=0, empty base) are covered; no hollow definitions, no extra assumptions, only sorry. nt_compile of both the delivered and the fixed module: no errors or warnings (3.3 s and 3.8 s); an injected error was reported, so the clean results are real. lean.statement is re-read from the fixed file; no citers yet. Report fix appends a Maintainer fix section."
  }
 }

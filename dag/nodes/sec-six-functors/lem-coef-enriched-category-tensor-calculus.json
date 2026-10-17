@@ -29,7 +29,15 @@
  },
  "stmt_deps": [
   "def-weil-abstract-derived-category",
-  "def-coef-complete-algebroid"
+  "def-coef-complete-algebroid",
+  "lem-coef-algebroid-bilinear-colimits",
+  "lem-coef-algebroid-object-space-fibration",
+  "def-coef-symmetric-operadic-approximation",
+  "lem-coef-relative-symmetric-monoidal-localization",
+  "lem-coef-algebroid-categorical-homotopy",
+  "def-coef-integral-derived-coefficients",
+  "def-coef-coherent-adjunction-data",
+  "lem-coef-enrichment-change-adjunction"
  ],
  "proof": [
   {
@@ -334,5 +342,49 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EnrichedCategoryTensorCalculus",
+  "declaration": "SSet.Enhanced.Algebroid.TensorCalculus.enriched_category_tensor_calculus",
+  "declarations": [
+   "SSet.Enhanced.Algebroid.TensorCalculus.SymmetricExtension",
+   "SSet.Enhanced.Algebroid.TensorCalculus.MultiplicationCoherence",
+   "SSet.Enhanced.Algebroid.TensorCalculus.SymmetricTensor",
+   "SSet.Enhanced.Algebroid.TensorCalculus.rightTensor",
+   "SSet.Enhanced.Algebroid.TensorCalculus.homAt",
+   "SSet.Enhanced.Algebroid.TensorCalculus.homObject",
+   "SSet.Enhanced.Algebroid.TensorCalculus.arrowEdge",
+   "SSet.Enhanced.Algebroid.TensorCalculus.IsUnderlyingMap",
+   "SSet.Enhanced.Algebroid.TensorCalculus.Underlying",
+   "SSet.Enhanced.Algebroid.TensorCalculus.IsUnderlyingEdge",
+   "SSet.Enhanced.Algebroid.TensorCalculus.ClosedTensor",
+   "SSet.Enhanced.Algebroid.TensorCalculus.Evaluations",
+   "SSet.Enhanced.Algebroid.TensorCalculus.Diagrams",
+   "SSet.Enhanced.Algebroid.TensorCalculus.FreeScalarExtension",
+   "SSet.Enhanced.Algebroid.TensorCalculus.FullLimitProperty",
+   "SSet.Enhanced.Algebroid.TensorCalculus.InImage",
+   "SSet.Enhanced.Algebroid.TensorCalculus.targetLimitLeg",
+   "SSet.Enhanced.Algebroid.TensorCalculus.FullLimitObjects",
+   "SSet.Enhanced.Algebroid.TensorCalculus.reversePermutation",
+   "SSet.Enhanced.Algebroid.TensorCalculus.OppositeConstruction",
+   "SSet.Enhanced.Algebroid.TensorCalculus.Statement",
+   "SSet.Enhanced.Algebroid.TensorCalculus.IntegralStatement",
+   "SSet.Enhanced.Algebroid.TensorCalculus.enriched_category_tensor_calculus"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EnrichedCategoryTensorCalculus.lean",
+  "statement": "theorem enriched_category_tensor_calculus : (∀ (E : SSet.{max (u + 1) v}) (hE : Quasicategory E) (p : E ⟶ monoidalSimplexBase.{max (u + 1) v}), @IsPresentablyMonoidal.{u, v} E hE p → ∀ symmetry : SymmetricExtension p, ∀ unit : UnitSection p, Nonempty (@Statement.{u, v} E hE p unit symmetry)) ∧ IntegralStatement.{u}",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Stage-2 statement only. Structures specify the tensor, its coherent operadic normalization, closedness, free scalar extension, cotensors, full-inclusion limits, opposite, and enhanced integral specialization; only the final existence theorem is postponed. Added statement dependencies are already recorded project notions used in its signature and helper interfaces."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c9f2e0541",
+  "group": "NC",
+  "result": "pass",
+  "note": "Read node, source place, all 10 stmt deps' declarations (UnitSection, completeCategory, IsPresentablyMonoidal, IntegralDerivedCoefficients, etc.), report and the full 718-line module. Every node clause matched: universes U in U' (explicit u, v, no equation), presentably symmetric monoidal (IsPresentablyMonoidal plus SymmetricExtension with the correct Cut-functor formula), Cat_V presentable with small limits and equivalences = fully faithful + essentially surjective, closed symmetric tensor (raw BinaryChangeOfEnrichment then completion, fold/block coherence, CoherentAdjunction, curry with checked variance), separate cocontinuity, full-inclusion limits with essential-image membership along actual legs, free enrichment left adjoint to U with Map(1,E(x,y)) and colim_S 1 copowers, cotensors over all small SSet with categorification, Hom(A,E^K) equivalent to Hom(A,E)^K, componentwise equivalences, opposite involution, and D(Z) via IntegralDerivedCoefficients with quasi-isomorphism in all degrees. No hollow defs; the single sorry is the final theorem with the 12-step proof docstring; source and blueprint docstrings present; lean.statement verbatim; all 23 declarations present. The 8 added stmt_deps have Lean records and form no cycle. The §1(B) dependency repair (r.obj and r.map) is minimal: the published file fails at 250:57 and 258:56 and the repaired one compiles. nt_compile --json on both files: exit 0, no errors or warnings. Non-blocking: inline Cut-functor formula duplicates the equivalent IsOrderedBlockFunctor; existential D(Z) model is justified; dependency note replaced the earlier maintainer note."
  }
 }

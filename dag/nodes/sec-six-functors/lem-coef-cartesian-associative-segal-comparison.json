@@ -366,5 +366,50 @@
   "group": "Q112",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-a4a4853d6 (reviewer sub-agent of L); spot-checked: Pass with no changes. I read the item, all 7 steps and every cited statement in full. Shape: one commit, no new nodes, statement unchanged, proof_deps equals the union of the step uses, no cycle (708 ancestors checked). All cited statements are in unit sk-prop-sf-biduality-general; the only other-unit node is the definition def-cbc-enhanced-diagrams-cones, so no tool_uses are needed. The item is not a target, so the base-change morphism and coefficient-category check does not apply. No SGA source. Sources: Lurie's Higher Algebra is not in literature/; it is recorded as WANTED and proof_origin is agent. I checked the statement against HA Construction 4.1.2.9, Propositions 4.1.2.10, 4.1.2.11, 4.1.3.19 and 2.4.2.5 as I know them, and against the DAG's definitions. Statement: Ass^⊗ is the S=∅ part of LM^⊗ in def-coef-left-module-operadic-encoding, and the Cut formula matches both that node and lm-prism-approximation. Small cases: in C=Set, monoids correspond to bar-construction Segal diagrams with components f^n; at r=0 the empty block gives the unit; at n=0, F[0] is terminal; for C terminal both sides are contractible. Steps: (1) the identification of A with Ass^⊗ is correctly elementary. (2) The Cut approximation, the colour fibre and the interval-inclusion marking are all in the statement of lem-coef-lm-prism-approximation. (3) The Ass pullback is an inner fibration that lifts equivalences, with the fibre and output-product properties coming from recognition's block formula. (4) The hypotheses of operadic-approximation-restriction are met, and lifts of Cut are exactly sections of C^×_pl. (5) N(Δ^op) with the identity satisfies the generalized-operad axioms (i)–(iii) with a Kan zero fibre, and Mon_M becomes Mon_Δ. The envelope node's proof defines C^× as the same product-diagram subcategory of Q as recognition's P, so this model is literally the envelope; π and Π are matched through parametric-universal-arrows. (6) Operations, unit and f^n components follow, and the step is correctly marked non-elementary. (7) Naturality comes from the cited nodes' naturality clauses and h^×. Minor nit, not a fault: source.place still says 'retained sandbox HA.txt'."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartesianAssociativeSegalComparison",
+  "declaration": "SSet.Enhanced.CartesianAssociativeSegal.cartesian_associative_segal_comparison",
+  "declarations": [
+   "SSet.Enhanced.CartesianAssociativeSegal.associativePullback",
+   "SSet.Enhanced.CartesianAssociativeSegal.associativeProjection",
+   "SSet.Enhanced.CartesianAssociativeSegal.associativeAlgebras",
+   "SSet.Enhanced.CartesianAssociativeSegal.planarAlgebras",
+   "SSet.Enhanced.CartesianAssociativeSegal.monDelta",
+   "SSet.Enhanced.CartesianAssociativeSegal.restrictionMap",
+   "SSet.Enhanced.CartesianAssociativeSegal.associativeSectionInclusion",
+   "SSet.Enhanced.CartesianAssociativeSegal.planarSectionInclusion",
+   "SSet.Enhanced.CartesianAssociativeSegal.associativeEnvelopeInclusion",
+   "SSet.Enhanced.CartesianAssociativeSegal.planarEnvelopeInclusion",
+   "SSet.Enhanced.CartesianAssociativeSegal.productEvaluationOnAssociativePullback",
+   "SSet.Enhanced.CartesianAssociativeSegal.actualProductComposite",
+   "SSet.Enhanced.CartesianAssociativeSegal.normalizedProductComparison",
+   "SSet.Enhanced.CartesianAssociativeSegal.associativeUnderlying",
+   "SSet.Enhanced.CartesianAssociativeSegal.planarUnderlying",
+   "SSet.Enhanced.CartesianAssociativeSegal.segalDiagram",
+   "SSet.Enhanced.CartesianAssociativeSegal.segalEvaluation",
+   "SSet.Enhanced.CartesianAssociativeSegal.segalProductDiagram",
+   "SSet.Enhanced.CartesianAssociativeSegal.SegalProductClause",
+   "SSet.Enhanced.CartesianAssociativeSegal.OperationUnitClause",
+   "SSet.Enhanced.CartesianAssociativeSegal.comparedFamily",
+   "SSet.Enhanced.CartesianAssociativeSegal.CoherentTransformationClause",
+   "SSet.Enhanced.CartesianAssociativeSegal.FiniteProductNaturalityClause",
+   "SSet.Enhanced.CartesianAssociativeSegal.ComparisonAssertions",
+   "SSet.Enhanced.CartesianAssociativeSegal.cartesian_associative_segal_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CartesianAssociativeSegalComparison.lean",
+  "statement": "theorem cartesian_associative_segal_comparison (C : SSet.{u}) [Quasicategory C] (hC : HasFiniteProducts C) : Nonempty (ComparisonAssertions C)",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b196aa2c5",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Clause-by-clause check of the node against Lean: no extra hypotheses (HasFiniteProducts resolves to CartesianEnvelope, n=0 included); Ass/Cut/sections/Mon_Delta use existing project declarations (lmAlgebraBase, lmCut, operadicSections, monoids). The restriction equivalence is on the actual operadicSectionRestriction; the Segal comparison is pinned by Phi ≫ monoidInclusion = restriction ≫ post(productEvaluation), with monoidInclusion mono. The underlying equations are true: lmCut at vertex 1 = lmAlgebraVertex 1, proved by ComposableArrows.ext₀; rfl. Operation/unit clause covers r=0 (tensor arrow gives one word of all inputs); the Segal cones fix apex and actual rho_i legs; components-are-f^n is rendered as squares plus terminal endpoints at n=0. Naturality: ht, Hass, Hpl and Hmon are each uniquely pinned, and the squares hold strictly because productEvaluation is full-subset evaluation and parameterPostcompose is pointwise. Only the item's lean field differs from the clone; dependency node copies identical; lean.statement verbatim; the 25 declarations match the file; docstrings with source and blueprint; seven-step proof docstring; only sorry is the theorem. nt_compile --json against the side overlay: rc=0 with no diagnostics (19.3 s, 19.9 s; warn.sorry=false). Non-blocking: report's source paragraph has HA numbers replaced by 'the project server'; second reading done by the group's own worker."
  }
 }

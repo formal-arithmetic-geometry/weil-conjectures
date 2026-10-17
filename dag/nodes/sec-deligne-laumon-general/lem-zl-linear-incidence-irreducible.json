@@ -212,5 +212,23 @@
   "group": "NL",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-0f6d3757b (reviewer sub-agent of L); spot-checked: I read the whole item and every cited node statement. The source is Stacks more-morphisms.tex Tag 0G4F, label lemma-bertini-irreducible; I checked its middle proof paragraph at lines 9050-9132 and confirmed the tag in tags/tags. The item's hypotheses match that paragraph with nothing dropped: A is a finite-type k-domain, some f_i is nonzero, and every minimal prime over J has height at least 2 (vacuous when J=A). Reducedness is explicitly not claimed. This is exactly how the parent lem-zl-bertini-irreducible-member uses the item. I tested the statement on small cases and it holds: r=1 forces f_1 to be a unit; J=A; A=k[u,v] with f=(u,v). The excluded case A=k[u] with f=(u,u) gives u(x_1+x_2), which is reducible, so the height hypothesis is needed. Step 1: B is Noetherian (the ring clause of lem-wf-affine-noetherian-components) and a domain; L is nonzero. Steps 2-3 (marked elementary): the substitution kernel K_j is prime, contains L and meets A only in 0, all from the fraction definition and the polynomial universal property. The 'clear denominators' argument is written out, with the telescoping identity, one power f_j^N, and descent by coefficientwise injectivity. Step 4: lem-weil-pbc-noetherian-height-quotient-bound is applied with t=1 and ht(Q/(L))=0, giving ht(Q)<=1; its height definition agrees with the item's. Step 5: the extended primes uB are kernels onto (A/u)[x], so a chain below a minimal prime of J lifts to a length-2 chain under Q, which is a contradiction. This also covers J=A. Step 6: Q=K_j and then Q=K_1, and a minimal prime exists through lem-weil-pbc-prime-contains-minimal-prime. Step 7: Spec(B/(L))=V(K_1/(L)), which is irreducible by Tag 00ES clause (2). Every non-elementary node the proof cites is a Mathlib leaf, so no tool_uses are needed. proof_deps equals the union of the steps' uses. There are no new nodes and no SGA citation. An rg search of the DAG found no duplicate or generalization. The item is not a target, so there is no base-change morphism to check. I made no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LinearIncidenceIrreducible",
+  "declaration": "linear_incidence_irreducible",
+  "file": "lean/Sheaf/AlgebraicGeometry/LinearIncidenceIrreducible.lean",
+  "statement": "theorem linear_incidence_irreducible (k : Type u) [Field k] (A : Type v) [CommRing A] [Algebra k A] [Algebra.FiniteType k A] [IsDomain A] (r : ℕ) (hr : 0 < r) (f : Fin r → A) (hf : ∃ i, f i ≠ 0) (hJ : ∀ p : Ideal A, p ∈ (Ideal.span (Set.range f)).minimalPrimes → (2 : ℕ∞) ≤ p.height) : IrreducibleSpace (Spec (CommRingCat.of (MvPolynomial (Fin r) A ⧸ Ideal.span {∑ i : Fin r, MvPolynomial.C (f i) * MvPolynomial.X i})))",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8de679d05",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Read node, 5 stmt deps, Stacks 0G4F lines 9040-9132, module, report (Worker report + Second reading by Q110 present). Lean matches node clause by clause: Field k; FiniteType k-algebra domain A (no extra instances, independent universes u v); 0<r; f : Fin r → A with ∃ i, f i ≠ 0; J = span (range f); ∀ p ∈ J.minimalPrimes, 2 ≤ p.height (Mathlib Ideal.height = chain height for primes; vacuous for J = ⊤); conclusion IrreducibleSpace (Spec (CommRingCat.of (MvPolynomial (Fin r) A ⧸ span {∑ C (f i) * X i}))), no reducedness. lean.statement equals signature verbatim; node copy differs from side clone only in lean field; no statement_change, no new nodes. Edge cases r=1, J=A, f≡0 and the height counterexample checked. Docstrings carry source place, blueprint tag and proof steps; sorry only; Mathlib-only imports; no name clash. nt_compile.py --json (path form rejects snapshot path): exit 0, 11.5 s and 6.3 s, no errors or warnings (tool does not print the sorry warning, confirmed by a probe). No findings."
  }
 }

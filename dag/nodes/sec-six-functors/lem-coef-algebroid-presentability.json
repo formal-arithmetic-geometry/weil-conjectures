@@ -231,11 +231,10 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-cc-14578032e",
-  "group": "Q69",
+  "reviewer": "NT-stage2-cc-0e0651baa",
+  "group": "NN",
   "result": "pass",
-  "note": "Repairs my RETURN of 3f7fa881a978 as asked. Lean concludes (∃h, IsPresentable total) ∧ HasGraphwiseLimits p (identical to 2435135cae27) ∧ (∃h, IsPresentable completeCategory) ∧ HasCompleteGraphwiseLimits p unit ∧ ∃F, CoherentAdjunction F forgetGraph ∧ F≫algebraSpace=graphSpace ∧ RepresentsFixedEndpointEdges. Every node clause matches the Lean; hypotheses are exact (unit:UnitSection is the canonical representative); universes are independent and every variable is bound; lean.statement matches the file up to line breaks; all 16 declarations are present. The corrected statement contains the original in full and adds the complete clauses (GH 5.4.2/5.4.5); old_statement is archived. The side DAG has exactly the eight audited citers, all correctly holds:true (read collage-crossing step 6, flexible-weight step 8, free-edge-square); no Lean module imports the item. The new proof step 3 avoids algebroid-completion; no cycle; proof_deps equals the steps' uses. No hollow definitions; only the theorem is sorry; docstrings carry source, blueprint and proof plan; no duplicates in side or Mathlib. AlgebroidGraph, the def-coef-algebroid-graph node and the SpaceValuedStraightening §1(B) dependency are unchanged from the previously reviewed copies (the live copy differs only by a comment). nt_compile --json of SpaceValuedStraightening, AlgebroidGraph and AlgebroidPresentability: exit 0, no errors, no warnings. Cosmetic only: the module heading says 'complete algebroids'.",
-  "statement_corrected": true
+  "note": "Re-delivery of Q69's landed, Lean-reviewed module and node: the Lean file is byte-identical except the Authors line; the node differs only in lean.by/date (by=<G> as the brief prescribes). Independent clause check: IsPresentablyMonoidal and UnitSection hypotheses exact; ambient and complete IsPresentable; HasGraphwiseLimits and HasCompleteGraphwiseLimits give limiting object-space and mapping-object cones over the full coherent cone; CoherentAdjunction F forgetGraph with F≫algebraSpace=graphSpace; RepresentsFixedEndpointEdges is initiality in the comma under v (x=y allowed). Universes u,v bound and independent; empty shape covered. No hollow definitions, sorry only, docstrings carry source, blueprint and proof plan, lean.statement verbatim, imports match stmt_deps/proof_deps, the §1(C) correction and its 8 citer audits unchanged. nt_compile of the side tree's copy (identical apart from the Authors comment): exit 0, no errors or warnings. Cosmetic only: Authors/lean.by re-attribution and the 'complete algebroids' heading."
  },
  "statement_change": {
   "date": "2026-10-17",
@@ -392,8 +391,8 @@
   "file": "lean/Sheaf/CategoryTheory/AlgebroidPresentability.lean",
   "statement": "theorem algebroid_presentability {E : SSet.{max (u + 1) v}} [Quasicategory E] (p : E ⟶ monoidalSimplexBase.{max (u + 1) v}) (hp : IsPresentablyMonoidal.{u, v} p) (unit : UnitSection p) : (∃ h : Quasicategory (total.{u, v} p), @Presentability.IsPresentable.{u, v} (total.{u, v} p) h) ∧ HasGraphwiseLimits.{u, v} p ∧ (∃ h : Quasicategory (completeCategory.{u, v} unit), @Presentability.IsPresentable.{u, v} (completeCategory.{u, v} unit) h) ∧ HasCompleteGraphwiseLimits.{u, v} p unit ∧ ∃ F : graphs.{u, v} p ⟶ total.{u, v} p, Nonempty (HomotopicalAlgebra.ModelInfinity.CoherentAdjunction F (forgetGraph universalFamily.{u, v}.hom p)) ∧ F ≫ algebraSpace universalFamily.{u, v}.hom p = graphSpace universalFamily.{u, v}.hom p ∧ RepresentsFixedEndpointEdges.{u, v} p F",
   "branch": "newtargets-dag",
-  "by": "Q69",
-  "date": "2026-10-17",
+  "by": "NN",
+  "date": "2026-10-18",
   "existing": false,
   "note": "Restores the true ambient presentability and HasGraphwiseLimits clauses while retaining the completeCategory and HasCompleteGraphwiseLimits clauses requested by the source correction; free adjunction and fixed-endpoint probe remain ambient."
  }

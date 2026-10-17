@@ -298,5 +298,39 @@
   "group": "Q142",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-1771941e6 (reviewer sub-agent of L); spot-checked: Read in full: the item, its 10 steps, the new node, every cited statement (24 proof deps, 6 stmt deps), the ancestor det-sf-comparison-affine-continuity Step 1, and Stacks sites.tex 00YV (incl. the fixed-ring lambda_r paragraph, which is left modules over a noncommutative R), 0H7J, 00YR, 00XZ/00Y0 and lemma-localize-cocontinuous. The item statement is unchanged; the coefficient category is the same as the ancestor's (left modules over sheafified constant Lambda); no target or base-change morphism is involved. Step 1: the constant set sheaf is a coproduct of terminal sheaves, and L preserves that coproduct and the terminal sheaf; correct. Step 2: the ring transport, checked on constant scalars and extended by local constancy; correct. Steps 3-5: the action L(a)p^-1(c^-1 x 1), gamma = R(c) eta, and the adjunction-bijection naturality equations against the lifting leaf; correct. Step 6: kernels as set equalizers, L a left adjoint, the faithful exact forgetful functor; no longer cites the morphism-of-sites-only node; correct. Step 7: uniqueness from the conjugate-iso lemma. Step 8 (the return repair): checked continuity (a),(b) and cocontinuity of C/U -> C against the definitions; these are the hypotheses of lem-weil-pbc-continuous-cocontinuous-topos-adjunction, which gives restriction as g^-1. Reusing that general node correctly replaces the earlier rejected helper. Step 9: localization via lem-pur-ring-presheaf-sheafification-localization and coproduct uniqueness. Step 10: derived factorization and bounded-below nodes. Mechanical: proof_deps equals the union of uses, all ids exist and none is merged, no cycle. New leaf lem-pe-ring-sheafification-underlying-sets verified in Mathlib source: sheafifyComposeIso (PreservesSheafification.lean:233) and sheafComposeIso_hom_fac (:239), with the concrete PreservesSheafification instance (:305-314) satisfied by RingCat (Limits.lean:403, FilteredColimits.lean:309, Basic.lean:360, LeftExact.lean:308-312). It is a generalization, not a duplicate, of lem-pc-sites-sheafification-underlying-sets (commutative rings only) and lem-weil-pbc-ring-sheafification-underlying-sets (etale site only). Accepted tool_uses: sections-local, sheaf-algebraic-structures-objects, module-sheaves-colimits-forgetful, exact-functor-bounded-below, continuous-cocontinuous-topos-adjunction. Minor, unchanged: steps 1, 7 and 9 give document sites.tex while also naming Categories/Modules-on-Sites tags; every tag exists. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ConstantLeftModuleInverseImage",
+  "declaration": "CategoryTheory.constant_left_module_inverse_image",
+  "file": "lean/Sheaf/CategoryTheory/ConstantLeftModuleInverseImage.lean",
+  "statement": "theorem constant_left_module_inverse_image {C D : Type u} [SmallCategory C] [SmallCategory D] (J : GrothendieckTopology C) (K : GrothendieckTopology D) (Λ : Type u) [Ring Λ] [HasWeakSheafify J RingCat.{u}] [HasWeakSheafify K RingCat.{u}] (L : Sheaf J (Type u) ⥤ Sheaf K (Type u)) (R : Sheaf K (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ R) (hL : PreservesFiniteLimits L) : Nonempty (ConstantLeftModuleInverseImageData.{u, w} J K Λ L R adj hL)",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.ConstantLeftModuleInverseImage.Modules",
+   "CategoryTheory.ConstantLeftModuleInverseImage.V",
+   "CategoryTheory.ConstantLeftModuleInverseImage.U",
+   "CategoryTheory.ConstantLeftModuleInverseImage.W",
+   "CategoryTheory.ConstantLeftModuleInverseImage.IsAddition",
+   "CategoryTheory.ConstantLeftModuleInverseImage.IsScalar",
+   "CategoryTheory.ConstantLeftModuleInverseImage.CoeffSet",
+   "CategoryTheory.ConstantLeftModuleInverseImage.IsRingAdd",
+   "CategoryTheory.ConstantLeftModuleInverseImage.IsRingMul",
+   "CategoryTheory.ConstantLeftModuleInverseImageLift",
+   "CategoryTheory.ConstantLeftModuleInverseImageData",
+   "CategoryTheory.constant_left_module_inverse_image"
+  ],
+  "note": "Reviewer fix (stage-2 maintainer review of head 64ae246e52f8): the vacuous ringSheaf/ringSheafIso/ringUnderlying_is_ring fields were replaced by ring_add/ring_mul, which state that ringUnderlying carries the addition and multiplication transported by L (L(m) after the inverse product comparison) to those of the target constant ring (new sectionwise predicates IsRingAdd/IsRingMul on the new abbreviation CoeffSet); the derived clause quantifies over HasDerivedCategory.{w} for an arbitrary localization universe w instead of the fixed u+2.",
+  "fixed_by": "NT-stage2-cc-64ae246e5"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-64ae246e5",
+  "group": "Q43",
+  "result": "fix",
+  "note": "Read the node, all 6 stmt_deps, Stacks 00YV/0H7J/00XZ, the module, the report and the previous return. H3: the repair fields ringSheaf/ringSheafUnderlyingIso/ringSheafIso/ringUnderlying_is_ring are trivially satisfiable (ringSheaf := Λ_D, Iso.refl), so the ring-sheaf isomorphism clause was still vacuous. Fixed by replacing them with ring_add/ring_mul: inv(prodComparison L A A) ≫ L.map m ≫ c = prod.map c c ≫ m', with the sectionwise predicates IsRingAdd/IsRingMul (order kept) and the new abbreviation CoeffSet. Universe: derivedFunctor used only HasDerivedCategory.{u+2}, which excludes the standard u+1 and the project's polymorphic w; fixed to HasDerivedCategory.{w} with Data.{u, w}. All other clauses (abelian/scalar transport, exactness, V f*≅f⁻¹V, unit, composition/presentation uniqueness, localization via J.over/overPullback/overFunctor⋙restrictScalars, quasi-iso, D⁺ factorization) and the edge cases checked. One sorry, docstrings and the full H8 proof present, node fields unchanged. nt_compile: delivered clean (34.7 s); fixed module clean (31.3 s). Fixes: module, lean-record.json (verbatim statement and declarations), report.md."
  }
 }

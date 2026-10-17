@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-weil-matrix",
   "def-weil-pbc-matrix-determinant",
-  "def-weil-submatrix"
+  "def-weil-submatrix",
+  "def-trf-minor-ideal"
  ],
  "proof": [
   {
@@ -187,5 +188,23 @@
   "group": "Q68",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-a11c1b214 (reviewer sub-agent of L); spot-checked: I read the item, the new node, the cited statements (def-weil-matrix, def-weil-submatrix, def-weil-pbc-matrix-determinant, lem-weil-pbc-cauchy-binet, lem-weil-pbc-matrix-adjugate-identity), the parent's three uses of the item, and the source. Stacks 07Z7 (more-algebra.tex l.1326, lemma-ideals-generated-by-minors; the tag is confirmed in tags/tags) states parts (1)-(3) for appended rows and left multiplication, with the proof omitted except for an expansion hint. The item states the transposed column and right-multiplication form, which is exactly what the parent uses; no hypothesis is added or dropped and nothing is weakened. Step 1 (reduction to generators, r=0, oversized minors) is elementary and correct. Step 2: each cofactor of an (r+1)-minor is an r-minor of A, so the clause holds. Step 3: the induction on d is set up correctly, quantified over all matrices, with base d=0 and two cases (the minor omits or contains the last column); it is not circular. Step 4: Cauchy-Binet applied with m=r to A_I and C_J, with (AC)_{I,J}=A_I C_J checked entry by entry, covers n<r and r=0. Cauchy-Binet is outside this unit but its Lean is closed in slopmaster2, so I accept the declared tool_uses entry. Edge cases checked: empty matrices, r=0, r>min(p,n), d=0, the zero ring, zero divisors, characteristic 2. Fault found (C5 / brief section 2, special case of an existing node): the new Mathlib leaf lem-trf-determinant-column-expansion (Matrix.det_succ_column, l.787) is true, but it is the (j,j) diagonal entry of the existing leaf lem-weil-pbc-matrix-adjugate-identity (adj(M)M=det(M)1, with adj_{ji}=(-1)^{i+j}det M^{(i,j)}). Fix: Steps 2-3 now cite that node with the diagonal-entry computation written out, proof_deps is updated, the split_report summary records the change, and the new node is dropped (nothing else cites it). The dropped node also cited det_fin_zero at l.797-798; it is at l.796. Corrected file: fixes/dag/nodes/sec-trace-formula/lem-trf-fitting-ideal-minor-inclusions.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.Matrix.MinorIdealInclusions",
+  "declaration": "Matrix.minorIdeal_inclusions",
+  "file": "lean/Sheaf/LinearAlgebra/Matrix/MinorIdealInclusions.lean",
+  "statement": "theorem minorIdeal_inclusions {R : Type u} [CommRing R] (p n r d : ℕ) (A : Matrix (Fin p) (Fin n) R) : minorIdeal p n (r + 1) A ≤ minorIdeal p n r A ∧ (∀ (B : Matrix (Fin p) (Fin (n + d)) R), (∀ (i : Fin p) (j : Fin n), B i (Fin.castAdd d j) = A i j) → minorIdeal p (n + d) (r + d) B ≤ minorIdeal p n r A) ∧ (∀ (C : Matrix (Fin n) (Fin n) R), minorIdeal p n r (A * C) ≤ minorIdeal p n r A)",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-76e5965d4",
+  "group": "N0",
+  "result": "fix",
+  "note": "Read node, Stacks 07Z7 (more-algebra.tex l.1326, transposed form), all stmt_deps records, proof-dep records, both modules and report. Lean matches each clause exactly (CommRing R, Fin p x Fin n, (1) r+1 vs r, (2) Fin.castAdd d first-columns hypothesis with r+d, (3) A*C); minorIdeal is a real Ideal.span with increasing orderEmbOfFin, giving J_0 = top and J_r = bot for oversized r; edge cases r=0, p/n=0, d=0, zero ring covered; no extra hypotheses; lean.statement verbatim; item changed only in lean and stmt_deps; new-node fields fine; no duplicate notion. Compiled clean with nt_compile.py --json, as delivered and fixed (error-probe confirmed reporting). Fixes: (1) def-trf-minor-ideal.json had single-backslash \\times escapes, parsing as TAB+'imes' -> corrected to \\\\times; (2) item module imported duplicate Sheaf.LinearAlgebra.Matrix.CauchyBinet instead of recorded WeilConjectures.LinearAlgebra.Matrix.CauchyBinet -> MinorIdealInclusions.lean and report.md corrected."
  }
 }

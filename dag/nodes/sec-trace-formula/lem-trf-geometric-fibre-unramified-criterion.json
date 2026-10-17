@@ -196,5 +196,23 @@
   "group": "N7",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-f5224bf7f (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks morphisms.tex 7790-7843 (02G7, 02G8). Descent 02VM and base change 02GA were checked through the statements of the existing nodes that record them. The item statement is correct and complete: it assumes only local finite type, empty fibres are allowed, and unramified means the Stacks 02G4 notion, not G-unramified. Small cases agree: Spec Z/p->Spec Z, Spec F_p(t^{1/p})->Spec F_p(t) (non-reduced geometric fibre), the empty scheme and the identity. Step 1: the geometric-fibre definition makes h_sbar a base change, and 02GA gives stability. Step 2: the geometric-fibre definition identifies it with the base change of the ordinary fibre Z_s; Spec Omega->Spec kappa(s) is an fpqc cover; 02VM descends unramifiedness with X=Z_s and a single cover. Step 3: the forward direction of the new 02G7(1) node. Step 4: the new 02G8(2) node, using local finite type and step 3. Both new nodes are exact source lemmas, carry statements only, are strictly smaller than the item and are not duplicates: the existing pbc nodes cover only the affine or topological case. There are no cycles and no SGA. I accepted the three declared tool uses (unramified-base-change-open, field-extension-fpqc-cover, galois-fpqc-descend-unramified) as generic black-box facts outside unit sk-i-curve-zero's route. Fixes: (B9) blueprint.from.place on the item and both new nodes now names the place in the ancestor lem-trf-local-term-locality's proof that the parent chain uses, instead of Stacks line numbers or the parent's proof; (B3) lem-trf-unramified-ordinary-fibre-criterion now cites def-weil-affine-spectrum and def-pc-field-extension in its statement and stmt_deps. No content changed.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricFibreUnramifiedCriterion",
+  "declaration": "AlgebraicGeometry.unramified_iff_unramified_geometric_fibres",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricFibreUnramifiedCriterion.lean",
+  "statement": "theorem unramified_iff_unramified_geometric_fibres {Z B : Scheme.{u}} (h : Z ⟶ B) [LocallyOfFiniteType h] : (LocallyOfFiniteType h ∧ IsOpenImmersion (pullback.diagonal h)) ↔ ∀ s : B, LocallyOfFiniteType (pullback.snd h (Spec.map (CommRingCat.ofHom (algebraMap (B.residueField s) (AlgebraicClosure (B.residueField s)))) ≫ B.fromSpecResidueField s)) ∧ IsOpenImmersion (pullback.diagonal (pullback.snd h (Spec.map (CommRingCat.ofHom (algebraMap (B.residueField s) (AlgebraicClosure (B.residueField s)))) ≫ B.fromSpecResidueField s)))",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-018163f2a",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Theorem unramified_iff_unramified_geometric_fibres matches the node clause by clause against Stacks 02G8(2)/02G7/Descent 02VM. Only hypothesis: [LocallyOfFiniteType h]. Quantifies over all s : B. Geometric point is Spec.map(algebraMap κ(s) → AlgebraicClosure) ≫ fromSpecResidueField s, exactly as recorded in def-weil-geometric-fibre; the fibre map is pullback.snd. Unramified is the recorded inline LocallyOfFiniteType ∧ IsOpenImmersion(diagonal) on both sides. No universe restriction. Edge cases checked: empty base, source and fibres; identity; Spec Z/p → Spec Z; purely inseparable extension; non-quasi-compact. Node diff adds only the lean record and the statement field is verbatim in the file. Imports follow the convention and the three proof-dependency modules exist. Docstrings carry source, blueprint id and the four proof steps; proof is sorry only; no duplicate found. nt_compile.py --json: clean in 2.5 s (verified to be a real compile with an injected-error control). Minor: the report's Second reading section is labelled a self-review; this maintainer review is the independent reading."
  }
 }

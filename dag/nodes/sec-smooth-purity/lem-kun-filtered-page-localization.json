@@ -296,5 +296,53 @@
   "group": "Q86",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-e3fb9ca0b (reviewer sub-agent of L); spot-checked: I read the item, all 11 steps, the new node and every cited statement. The mathematics is correct. Checked against Stacks homology.tex: 012K section-filtered-complex (Z_r, B_r and d_r formulas), 012M, 012O, 012P with equation-graded-cohomology (this gives C_a/(D_a+B_a) for steps 7 and 8, which I re-derived by hand), and 012W. The tags 05S1, 05S2 and 04VK resolve correctly. The new node lem-kun-filtered-page-functor-normalized fixes the core's existential witness S so that its successor isomorphisms H(E_r)≅E_{r+1} are the canonical ones (class of z in Z_{r+1} goes to its class) and natural. That is the 012K/012M/012O construction. It is not a duplicate: canonical-quotient-functor, canonical-sequence (page two only), homology-naturality, normalized-homology and blueprint thm-sp-spectral-object-yields each lack the combination. It is not a restatement of the item, and step 9 needs it. The steps check out: step 3 (cone filtration and truncated G^i on F^aC, degreewise-acyclic criterion), steps 4-5 (page induction, image lift), step 6 (localization UP clause 2, H^n factoring through ω), step 9 (stationary Z_t and B_t, zero differentials since a+t≥h and a-t<ℓ) and step 10 (right fractions with t' large enough for the roof, then descent from t' to t). Edge cases tested: zero complex, one-step and two-step filtrations, columns outside [ℓ,h). Accepted tool_uses: lem-sp-bounded-filtered-page-core, lem-sp-degreewise-filtered-acyclic, lem-pur-quasi-iso-cone-acyclic (closed). Fixes: (1) B4: the new node's statement was plain text; rewritten in TeX with the normalization and naturality equation spelled out, content unchanged. (2) B5: the new node's source cited section numbers 12.24.x, now tags and labels; the item's source cited a nonexistent label, now 012K section-filtered-complex and equation-graded-cohomology. (3) Removed the unused tool_use lem-sp-filtered-complex-normalized-homology, which no proof step cites; also reworded a garbled sentence in step 9. Non-blocking note: step 2 of the citer lem-kun-bounded-tensor-tor-spectral-sequence should cite the normalized node so its E' is visibly the item's S.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FilteredPageLocalization",
+  "declaration": "CategoryTheory.filteredPageLocalization",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredPageLocalization.lean",
+  "statement": "theorem filteredPageLocalization (R : Type u) [CommRing R] : Nonempty (FilteredPageLocalizationData R)",
+  "declarations": [
+   "CategoryTheory.finiteFilteredModuleDerivedCategory",
+   "CategoryTheory.finiteFilteredModuleLocalizationFunctor",
+   "CategoryTheory.finiteFilteredPageTransition",
+   "CategoryTheory.finiteFilteredPageTransition_projection",
+   "CategoryTheory.finiteFilteredPageFunctor",
+   "CategoryTheory.finiteFilteredPageFirstIso",
+   "CategoryTheory.finiteFilteredPageImageIso",
+   "CategoryTheory.finiteFilteredModuleCohomology",
+   "CategoryTheory.finiteFilteredCohomologyImage",
+   "CategoryTheory.finiteFilteredCohomologyImage_succ_le",
+   "CategoryTheory.finiteFilteredCohomologyFiltration",
+   "CategoryTheory.finiteFilteredCohomology",
+   "CategoryTheory.finiteFilteredCohomologyForget",
+   "CategoryTheory.finiteFilteredComplexForget",
+   "CategoryTheory.finiteFilteredDerivedQuotient",
+   "CategoryTheory.finiteFilteredOrdinaryDerivedCategory",
+   "CategoryTheory.finiteFilteredOrdinaryQ",
+   "CategoryTheory.finiteFilteredOrdinaryH",
+   "CategoryTheory.finiteFilteredOrdinaryHComparison",
+   "CategoryTheory.finiteFilteredAmbientQuotient",
+   "CategoryTheory.finiteFilteredAmbientMap",
+   "CategoryTheory.finiteFilteredQuotientImage",
+   "CategoryTheory.finiteFilteredWindowToAmbient",
+   "CategoryTheory.finiteFilteredAmbientQuotientMap",
+   "CategoryTheory.finiteFilteredDescendedMap",
+   "CategoryTheory.FilteredPageStationaryComparison",
+   "CategoryTheory.FilteredPageLocalizationData",
+   "CategoryTheory.filteredPageLocalization"
+  ],
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a612f766d",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Re-delivery fixes every point of the 3bffe6b5a5e0 RETURN: stationary image now in H^n(U/F^{a+1}) (cokernel of step (a+1)); first iso pinned to the normalized core eI by core_normalization; second iso pinned by forward/inverse representative equations; all clauses present (Sbar/eS, Hbar/eH descent with I-step and quotient maps, homotopy_invariance, quasiIso_representatives for every W representative, omega to Mathlib DerivedCategory with ordinary_normalization, page_one/page_one_chain with H^{a+b}(gr^a f), imageDerived/image_chain, stationary naturality for all D_f morphisms with endpoint bounds only, successor_agreement via S's own normalized .iso). Checked satisfiability: core_normalization holds at stationary t; successor agreement is consistent with the dependency's eZ normalization. No hollow defs; 3 named sorry theorems; 28/28 declarations recorded; signature verbatim; only the lean field changed; R : Type u with no extra hypotheses or universe restriction. nt_compile --json on the snapshot file: rc 0, ~24 s, no diagnostics (lakefile sets warn.sorry=false). Non-blocking: quasiIso_pages is automatically true; finiteFilteredModuleCohomology is unused; HasDerivedCategory.standard is a model choice; the citer's step 2 should eventually cite the normalized node."
  }
 }

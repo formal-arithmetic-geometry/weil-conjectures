@@ -87,13 +87,27 @@
   }
  },
  "lean": {
-  "branch": "slopmaster2",
+  "module": "WeilConjectures.Blowup.AdmissibleBlowup",
+  "declaration": "AlgebraicGeometry.IsAdmissible",
   "declarations": [
    "AlgebraicGeometry.IsAdmissible",
    "AlgebraicGeometry.Scheme.IdealSheafData.disjoint_support_iff_comap_ι_eq_top",
    "AlgebraicGeometry.Scheme.IdealSheafData.blowup",
    "AlgebraicGeometry.Scheme.IdealSheafData.blowupMap"
   ],
-  "note": "attached by the lead's tool attach.py 2026-10-17 05:57 UTC for group Q02, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: IsAdmissible records the"
+  "statement": "structure IsAdmissible where",
+  "branch": "slopmaster2",
+  "by": "Q77",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "The sorry-free upstream structure AlgebraicGeometry.IsAdmissible is the exact U-admissible blow-up-center notion: it stores a finite-type quasi-coherent ideal I on X and disjointness of U from I.support, which the source docstring identifies as equivalent to I|_U = O_U; its canonical I.blowup and I.blowupMap give the blow-up and structure morphism in the node statement. Signature and fields were read in WeilConjectures/Blowup/AdmissibleBlowup.lean lines 133-143."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9ee78fda9",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Existing attachment AlgebraicGeometry.IsAdmissible (WeilConjectures.Blowup.AdmissibleBlowup) is the blueprint's own lean target for the source def-nagata-admissible-blowup. Its fields: I : X.IdealSheafData (quasi-coherent ideal), finiteType : I.ofFiniteType (real FG-on-affines predicate), and disjoint_support, which is equivalent to I|_U = O_U by the proved disjoint_support_iff_comap_ι_eq_top. I.blowup/I.blowupMap glue Proj of the Rees algebra over affine opens. Dropping the node's qcqs ambient context only generalises the definition; there is no stronger assumption and no universe restriction (Type u). lean.statement 'structure IsAdmissible where' matches the source line verbatim. The commit touches only the report and the node's lean field, which completes a partial attach.py record with all required fields; stmt_deps is empty as in the blueprint. Worker report and Second reading by Q77 are present. nt_compile --json check file: clean in 5.3 s, #print shows the recorded signature and fields, and the upstream axioms are only propext/choice/Quot.sound. Edge cases (empty scheme, U=⊤/⊥, unit/zero ideal) agree with the node."
  }
 }

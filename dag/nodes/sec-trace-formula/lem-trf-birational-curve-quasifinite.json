@@ -220,5 +220,24 @@
   "group": "Q76",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-bf7038422 (reviewer sub-agent of L); spot-checked: I read the item, its five steps and the statement of every cited node in full. The statement is true: it is the integral-curve case of Stacks 0AB6 condition (1), checked in varieties.tex lines 3186-3265 and confirmed as tag 0AB6 in tags/tags. It is unchanged. The added separatedness and over-k notion dependencies are correct. The delivery has no new nodes, and proof_deps equals the union of the steps' uses. Step 1 uses lem-sc-scheme-sober uniqueness and the definition of Krull dimension: a non-generic, non-closed point would give a chain cl{z} ⊊ cl{x} ⊊ X of length 2, and a closed generic point would make dim 0. Step 2 is elementary and uses continuity plus density. Step 3 applies lem-kun-closed-point-field (a) in both directions, to E and C over the same k, with the k-embedding κ(y)→κ(x) from def-weil-residue-field. Step 4 shows the generic fibre is {η_E}, and each closed fibre is a closed subset whose points are all closed, so lem-kun-finite-closed-subscheme gives finiteness, including an empty fibre. Step 5 has exactly the hypotheses of pqf-lem-locqf-fibre-discrete, and its conclusion is pointwise quasi-finiteness in the pqf-def-quasifinite sense. I also checked from its blueprint proof that this cited lemma is true. Small cases tested: t↦t^n including the inseparable case, A^1∖{0}⊂A^1, normalization of a nodal cubic, a non-algebraically-closed k, and a constant map, which dominance excludes. Duplicate search over dag/nodes for 0AB6, quasi-finite or finite-fibre curve statements and dominant-titled nodes found none; lem-trf-closed-dominant-dimension is a different result. The item does not restate a clause of its parent lem-trf-proper-birational-curve-finite; it is that parent's step-1 input. The unit sk-i-curve-zero route is unchanged. I accept all four declared tool_uses (lem-sc-scheme-sober, lem-kun-closed-point-field, lem-kun-finite-closed-subscheme, pqf-lem-locqf-fibre-discrete) as black-box uses of their written statements. No SGA, no target touched, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DominantIntegralCurveQuasiFinite",
+  "declaration": "AlgebraicGeometry.quasiFiniteAtPoint_of_dominant_integral_curves",
+  "file": "lean/Sheaf/AlgebraicGeometry/DominantIntegralCurveQuasiFinite.lean",
+  "statement": "theorem quasiFiniteAtPoint_of_dominant_integral_curves {k : Type u} [Field k] {C E : Scheme.{u}} [C.Over (Spec (.of k))] [E.Over (Spec (.of k))] [IsIntegral C] [IsIntegral E] [IsSeparated (C ↘ Spec (.of k))] [IsSeparated (E ↘ Spec (.of k))] [LocallyOfFiniteType (C ↘ Spec (.of k))] [QuasiCompact (C ↘ Spec (.of k))] [LocallyOfFiniteType (E ↘ Spec (.of k))] [QuasiCompact (E ↘ Spec (.of k))] (hC : topologicalKrullDim C = 1) (hE : topologicalKrullDim E = 1) (p : E ⟶ C) [p.IsOver (Spec (.of k))] [IsDominant p] [LocallyOfFiniteType p] (hfinite : (p.stalkMap (genericPoint E)).hom.Finite) : ∀ x : E, p.IsQuasiFiniteAtPoint x",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The finite function-field extension is RingHom.Finite for the canonical stalkMap at genericPoint E; dominance identifies p(genericPoint E) with genericPoint C, and the generic stalks are the recorded integral-scheme function fields. The conclusion uses the recorded Stacks IsQuasiFiniteAtPoint predicate, not Mathlib QuasiFiniteAt alone."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-24e5fda4f",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Every node clause has a matching Lean hypothesis or conclusion: k field; C,E Scheme.{u} over Spec k; IsIntegral; IsSeparated, LocallyOfFiniteType and QuasiCompact on the structure maps; topologicalKrullDim = 1; p IsOver, IsDominant, LocallyOfFiniteType; finite k(C)⊆k(E) as RingHom.Finite of p.stalkMap (genericPoint E), which is canonical and equal to the side Hom.functionFieldMap up to the stalkSpecializes iso, since dominance gives p(η_E)=η_C; conclusion ∀ x, Stacks-01TD IsQuasiFiniteAtPoint. No stronger assumptions. Edge cases checked (empty, dim 0, constant, empty fibres, inseparable, universes). lean.statement matches the file verbatim; only the lean field was added to the node. Docstrings have the source, the blueprint id and the five proof steps; the proof is sorry only; imports are correct; lines ≤100. nt_compile --json: clean, rc=0. Worker report and second reading are present; the second reading was by the same worker but checks each clause. Observation only: the existing Scheme.Hom.functionFieldMap could have been used."
  }
 }

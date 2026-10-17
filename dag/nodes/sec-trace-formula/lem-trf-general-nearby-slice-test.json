@@ -14,7 +14,10 @@
   "def-trf-oriented-nearby-cycles",
   "def-weil-geometric-point",
   "def-weil-pbc-strict-henselization-limit",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "def-weil-pbc-strict-henselization-point-evaluation",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "lem-weil-pbc-strict-henselization-functoriality"
  ],
  "proof": [
   {
@@ -194,5 +197,48 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-8ab671213 (reviewer sub-agent of L); spot-checked: I read the item in full, the statements of all cited nodes, the unit sk-i-curve-zero and the chapter route, the single citer (lem-trf-nearby-proper-hyperdescent), and ILO Exposé XI 1.8–1.12, 2.2–2.3 and 4.1–4.4 in the local PDF. Orgogozo's paper is not in the local literature and reviewers have no network access, so I could not reread Lemma 3.1.1; the WANTED line stays. Instead I checked the slice formula at stalks: both sides compute RΓ(X_(x)×_{S_(a)}S_(b),K). The points (x,b,c) give every point of V_f. The coefficient category is the same in both nodes: D(Mod Λ_X) on the small étale site, and the item's D^b lies inside the node's D^+. β is the counit mate, as in ILO 1.9/4.3. The item is a corollary of the existing same-unit lem-trf-nearby-specialization-slice. The split uses that node's statement clauses (slice isomorphism, compatibility over T, exact e^*, detection of H^{≤r}) and adds a correct cone passage. For the cone, e^*C(α)=C(e^*α) termwise by lem-sf-exact-functor-derived-triangulated, with no shift. There are no new nodes, no cycle (checked by traversal), no duplicates beyond the reused general node, no SGA source and no tool_uses. Two repairs are in fixes/: (1) C1/E5: step 1 only argued finite type for an affine open of U that maps into an affine open of S; it now cites the Mathlib leaf lem-sfb-finite-type-composition-base-change (2), with proof_deps updated. (2) B2/E3: the statement's sentence 'every such sliced comparison cone', after choosing a fixed b→a, can be read with b→a fixed. That reading is false, since slices above one pair are not conservative on V_{f_T}. I rewrote the sentence to quantify over every specialization b→a of S and every compatible b_T→a_T, writing 𝓗^q. This is the reading the proof and the citer use, so it is a clarification, not a weakening. Small cases checked: X=∅, Λ=0, T=∅, g=id, punctual S, strictly henselian trait, negative r.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GeneralNearbySliceTest",
+  "declaration": "AlgebraicGeometry.OrientedNearbyCycles.general_nearby_slice_test",
+  "declarations": [
+   "AlgebraicGeometry.OrientedNearbyCycles.general_nearby_slice_test",
+   "AlgebraicGeometry.OrientedNearbyCycles.SliceSpecialization",
+   "AlgebraicGeometry.OrientedNearbyCycles.SliceSpecialization.fibre",
+   "AlgebraicGeometry.OrientedNearbyCycles.SliceSpecialization.specialTube",
+   "AlgebraicGeometry.OrientedNearbyCycles.SliceSpecialization.genericTube",
+   "AlgebraicGeometry.OrientedNearbyCycles.SliceSpecialization.i",
+   "AlgebraicGeometry.OrientedNearbyCycles.SliceSpecialization.j",
+   "AlgebraicGeometry.OrientedNearbyCycles.SliceSpecialization.complex",
+   "AlgebraicGeometry.OrientedNearbyCycles.SliceChange",
+   "AlgebraicGeometry.OrientedNearbyCycles.slicePullSquare",
+   "AlgebraicGeometry.OrientedNearbyCycles.ordinarySliceComparison",
+   "AlgebraicGeometry.OrientedNearbyCycles.sliceStalk",
+   "AlgebraicGeometry.OrientedNearbyCycles.slicePoint",
+   "AlgebraicGeometry.OrientedNearbyCycles.IsSpecializationSlice",
+   "AlgebraicGeometry.OrientedNearbyCycles.sliceVanishing",
+   "AlgebraicGeometry.OrientedNearbyCycles.sliceConeVanishing",
+   "AlgebraicGeometry.OrientedNearbyCycles.SpecializationSliceFamily",
+   "AlgebraicGeometry.OrientedNearbyCycles.sliceModules",
+   "AlgebraicGeometry.OrientedNearbyCycles.sliceBoundedInclusion",
+   "AlgebraicGeometry.OrientedNearbyCycles.SliceFormula",
+   "AlgebraicGeometry.OrientedNearbyCycles.sliceSquare",
+   "AlgebraicGeometry.OrientedNearbyCycles.GeneralNearbySliceStatement"
+  ],
+  "file": "lean/Sheaf/Paper/GeneralNearbySliceTest.lean",
+  "statement": "theorem general_nearby_slice_test {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] (Λ : Type v) [CommRing Λ] [Finite Λ] (m : ℕ) (hm : 1 ≤ m) (hmΛ : ∀ x : Λ, m • x = 0) (hmS : IsUnit (m : Γ(S, ⊤))) : ∃ E : SpecializationSliceFamily.{u, v}, (∀ {Y B : Scheme.{u}} (f' : Y ⟶ B) (d : SliceSpecialization B), IsSpecializationSlice f' d (E f' d)) ∧ GeneralNearbySliceStatement E f Λ ∧ ∀ (U : Scheme.{u}) (a : U ⟶ S), GeneralNearbySliceStatement E (pullback.snd f a) Λ",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Owning-node helpers spell out strict-local specialization diagrams, their induced maps, the independently counit-defined sliced comparison, and the oriented-point normalization of geometric slice morphisms. The theorem gives natural bounded slice isomorphisms, equality of ordinary comparisons, the all-specializations cone criterion in every integer degree, and all preliminary base changes. No cone or geometric morphism is defined by arbitrary existence choice."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bb9807aa6",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Read node, all 9 stmt_deps records, source lemma lem-trf-nearby-specialization-slice, citer lem-trf-nearby-proper-hyperdescent, OrientedNearbyCycles interface and the module in full. Every clause matches: finite type = LocallyOfFiniteType+QuasiCompact; m>=1 annihilating, IsUnit on Γ(S) (empty-S case ok); bounded K via IsBounded; X_(b) is the pullback along the full S_(b) structural map; i/j via closed-point evaluation and c; ordinarySliceComparison checked step by step (iComm square, j base-change transpose of counit, genericLeft restriction) with correct source/target; compatibility equation sliceSquare(γ)≫h^*ρ≫comparison = e_T^*β≫σ well-typed; cone iff over all r:ℤ with d over S and d' over T both inside the quantifier, all distinguished cones; preliminary base change ∀U a. Existential E is constrained by IsSpecializationSlice (stalk at each x = explicit oriented point (x,b,c), natural in triples), exactly the source lemma's defining property; the citer uses only the E-free cone criterion. stmt_deps gain three landed nodes only (permitted); nothing else in the node changed. No hollow defs, single sorry, docstrings with source/blueprint, statement verbatim, 22 declarations present, no name collisions. nt_compile --json at Sheaf/Paper/GeneralNearbySliceTest.lean: rc 0, 13.3 s, no errors or warnings (warn.sorry=false confirmed by probe)."
  }
 }

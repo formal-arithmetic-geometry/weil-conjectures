@@ -20,7 +20,9 @@
   "def-pc-scheme-fibre",
   "def-pc-geometrically-irreducible",
   "def-weil-closed-immersion",
-  "def-weil-finite-integral-morphism"
+  "def-weil-finite-integral-morphism",
+  "def-trf-nodal-geometric-fibres",
+  "def-trf-effective-cartier-center"
  ],
  "proof": [
   {
@@ -179,5 +181,23 @@
   "group": "Q88",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-b2a47bf2a (reviewer sub-agent of L); spot-checked: I read the item, all 4 new nodes, every cited statement and the sources in full: ILO IX Thm 1.2 pp.130-131 with the nodal-curve paragraph, ILO II 2.3 for alterations, Stacks morphisms.tex 01W8, 01WE and 087S with their proofs. The source node lem-trf-dejong-relative-marked-semistable matches ILO 1.2(i),(iii)-(vi) with G={1}. Its extra hypotheses (f dominant, Y projective over an affine base) only weaken it, and its derived clauses are a few lines each: excellence from finite type, D proper as a closed subscheme of a projective X', geometric integrality because rare T' misses the generic point. The earlier E2 error (T' as the singular locus) is gone. Step 2 is now correct: Y ↪ P^N_R gives an ample sheaf (lem-weil-pbc-projective-ample-invertible); 087S makes b H-projective; 01WE makes Y'→Spec R H-projective; the ample sheaf on Y' and 087S again make f' H-projective. Step 3 is a pure renaming. Step 4 is étale ⇒ unramified ⇒ locally quasi-finite (02V5), and proper + locally quasi-finite ⇒ finite (02LS). The item statement is unchanged; no new node duplicates an existing one or restates the item. I accept the three declared tool_uses (all generic scheme theory; pqf-lem-proper-lqf-finite is a Mathlib leaf). No SGA source is used. FIX of two missing-notion citations (B3/B2): def-trf-projective-bundle-morphism now cites pqf-def-coherent, def-nagata-relative-proj, lem-weil-pbc-quasi-coherent-symmetric-algebra and lem-weil-pbc-symmetric-algebra-graded; lem-trf-dejong-relative-marked-semistable now defines generically finite and effective Cartier divisor inline, citing def-weil-finite-integral-morphism and def-weil-closed-immersion. Full checks are in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeMarkedNodalReduction",
+  "declaration": "AlgebraicGeometry.exists_relativeMarkedNodalReduction",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeMarkedNodalReduction.lean",
+  "statement": "theorem exists_relativeMarkedNodalReduction {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] [IsDominant f] [IsIntegral X] [IsIntegral Y] [IsNoetherian X] [IsNoetherian Y] (hX : ∀ U : X.Opens, IsAffineOpen U → IsExcellent Γ(X, U)) (hY : ∀ U : Y.Opens, IsAffineOpen U → IsExcellent Γ(Y, U)) (R : Type u) [CommRing R] [IsNoetherianRing R] (p : Y ⟶ Spec (CommRingCat.of R)) [IsHProjective p] (y : Y) (hy : IsGenericPoint y Set.univ) [Smooth (f.fiberToSpecResidueField y)] [IrreducibleSpace (f.fiber y)] (hdim : topologicalKrullDim (f.fiber y) = 1) (Z : Scheme.{u}) (j : Z ⟶ X) [IsClosedImmersion j] (hZ : IsNowhereDense (Set.range j)) [Etale ((j ≫ f).fiberToSpecResidueField y)] : ∃ (X' Y' : Scheme.{u}) (a : X' ⟶ X) (b : Y' ⟶ Y) (f' : X' ⟶ Y'), a ≫ f = f' ≫ b ∧ IsProper a ∧ IsDominant a ∧ (∃ U : X.Opens, Dense (U : Set X) ∧ IsFinite (a ∣_ U)) ∧ IsProper b ∧ IsDominant b ∧ IsHProjective b ∧ (∃ U : Y.Opens, Dense (U : Set Y) ∧ IsFinite (b ∣_ U)) ∧ IsIntegral X' ∧ IsIntegral Y' ∧ (∀ U : X'.Opens, IsAffineOpen U → IsExcellent Γ(X', U)) ∧ (∀ U : Y'.Opens, IsAffineOpen U → IsExcellent Γ(Y', U)) ∧ IsHProjective f' ∧ Flat f' ∧ (∃ hfp : LocallyOfFinitePresentation f', @HasNodalGeometricFibres _ _ f' hfp) ∧ (∃ (T : Set Y') (hT : IsClosed T) (D : Scheme.{u}) (i : D ⟶ X'), IsNowhereDense T ∧ IsEffectiveCartierCenter i ∧ Smooth (f' ∣_ (⟨Tᶜ, hT.isOpen_compl⟩ : Y'.Opens)) ∧ IsFinite (i ≫ f') ∧ Etale (i ≫ f') ∧ (∀ d : D, (f'.stalkMap (i d)).hom.FormallySmooth) ∧ a ⁻¹' Set.range j ⊆ Set.range i ∪ f' ⁻¹' T) ∧ ∃ y' : Y', IsGenericPoint y' Set.univ ∧ Smooth (f'.fiberToSpecResidueField y') ∧ GeometricallyIntegral (f'.fiberToSpecResidueField y')",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-466072658",
+  "group": "NR",
+  "result": "fix",
+  "note": "Lean theorem AlgebraicGeometry.exists_relativeMarkedNodalReduction matches the node and ILO IX Thm 1.2 (i),(iii)-(vi) clause by clause. Inputs: proper dominant f; integral Noetherian schemes, excellent on every affine open; Y H-projective over Spec R with R Noetherian; generic fibre smooth, irreducible, dimension 1; Z a closed immersion, nowhere dense, with étale generic fibre. Outputs: square; proper dominant a and b, generically finite as finite over a dense open with no degree condition; b H-projective; excellent integral sources; f' H-projective, flat, finitely presented; landed HasNodalGeometricFibres, where connected plus dimension 1 gives pure dimension 1 and nonemptiness follows from flat proper surjectivity; T closed nowhere dense with f' smooth off T; D an effective Cartier centre, finite étale over Y', in f'.smoothLocus (definitional, checked by compiled Iff.rfl); boundary inclusion; generic fibre smooth and geometrically integral. No extra assumptions, all universes u, lean.statement verbatim, item node changed only in lean and stmt_deps, docstrings carry source, blueprint id and the 4 proof steps. nt_compile clean twice (rc=0, no warnings). Fix F1 (H12 field part): the new node def-trf-effective-cartier-center did not cite the DAG nodes of the notions it uses. The complete replacement fixes/def-trf-effective-cartier-center.json adds [def-nagata-invertible-ideal] and [def-nagata-effective-cartier-ideal] to its statement and stmt_deps, and nothing else changes."
  }
 }

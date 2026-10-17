@@ -390,5 +390,40 @@
   "group": "N3",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-ad8c3d371 (reviewer sub-agent of L); spot-checked: Verdict FIX, after reading the whole item. I read all 8 steps and every cited statement. I read the main-20261015 thm-sf-comp-composition Construction paragraph and the DAG node's own construction steps 3-7. I read the unit sk-d-weil-push and the general-field citer. All three points of the previous return are fixed. E1/C4: the two finite-field-only tower nodes are gone, and every tool is now stated for Noetherian or arbitrary schemes with a finite ring, so the item keeps an arbitrary field k. C3: alpha is computed from its own defining construction, under both readings of it. In the blueprint reading the map is over-Y proper base change. In the DAG reading it is the site conjugate of the etale gamma_Q. Both give gamma. E3: Step 5 uses the adjunction only to prove an equality. Invertibility comes in Step 8 from chi = alpha_{p,b}^{-1} alpha_{i,r}. On the models (i,id),(b,p) and (id,p),(b,id), alpha_{i,r} = T and alpha_{p,b} = id, and both are isomorphisms by the statement of thm-sf-comp-composition. Hypotheses checked: Noetherian and qcqs for the coefficient-mate site clause and for the exchange transport with (f,f',g,g') = (p,r,i,b). Etale-origin witnesses for J_jM and J_bN. Ex^p is the ambient ringed exchange, which is the exchange used by thm-weil-pbc-finite-level-proetale. The direction of D and the uniqueness of E were checked from the conjugate-iso unit equation. Small cases checked: i=b=id, p=r=id and U empty. The coefficient category is ordinary constant-Lambda pro-etale, the same as in the composition theorem. No new nodes, no duplicate, no cycle, no SGA. One fix, a missing citation in Step 3 (C4). Step 3 identifies the etale gamma_Q of lem-cbc-proper-open-interchange-coherence with the Gamma^et named in lem-sp-proper-open-coefficient-mate. That needs the representative clause of lem-amb-unbounded-proper-open-interchange, which the step did not cite. I added that node to Step 3's uses and to proof_deps, declared it as a tool use, and made the sentence precise. The whole corrected node is in fixes/dag/nodes/sec-trace-formula/. I accept all the declared tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProEtaleCompositionTowerNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.proEtaleCompositionTowerNormalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.towerP",
+   "AlgebraicGeometry.ProEtale.towerJ",
+   "AlgebraicGeometry.ProEtale.towerPull",
+   "AlgebraicGeometry.ProEtale.towerPullPushAdjunction",
+   "AlgebraicGeometry.ProEtale.towerPullSquare",
+   "AlgebraicGeometry.ProEtale.towerExchange",
+   "AlgebraicGeometry.ProEtale.towerOpenUnit",
+   "AlgebraicGeometry.ProEtale.towerLambda",
+   "AlgebraicGeometry.ProEtale.towerGamma",
+   "AlgebraicGeometry.ProEtale.towerOpenComposition",
+   "AlgebraicGeometry.ProEtale.towerCandidateComparison",
+   "AlgebraicGeometry.ProEtale.towerOriginComposition",
+   "AlgebraicGeometry.ProEtale.towerOpenCongr",
+   "AlgebraicGeometry.ProEtale.proEtaleCompositionTowerNormalization"
+  ],
+  "file": "lean/Sheaf/Paper/ProEtaleCompositionTowerNormalization.lean",
+  "statement": "theorem proEtaleCompositionTowerNormalization (k : Type u) [Field k] (l : ℕ) [Fact l.Prime] (_hl : IsUnit (l : k)) (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) (hn : 1 ≤ n) {U V W : Scheme.{u}} [U.Over (Spec (.of k))] [V.Over (Spec (.of k))] [W.Over (Spec (.of k))] [IsSeparated (U ↘ Spec (.of k))] [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))] [IsSeparated (V ↘ Spec (.of k))] [LocallyOfFiniteType (V ↘ Spec (.of k))] [QuasiCompact (V ↘ Spec (.of k))] [IsSeparated (W ↘ Spec (.of k))] [LocallyOfFiniteType (W ↘ Spec (.of k))] [QuasiCompact (W ↘ Spec (.of k))] (h : U ⟶ V) (f : V ⟶ W) [h.IsOver (Spec (.of k))] [f.IsOver (Spec (.of k))] [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (d : Compactification f) (e : Compactification (h ≫ d.i)) : let Λ := Padic.coefficientExtensionRing l E n letI : Finite Λ := Padic.finite_coefficientExtensionRing l E n hn let b := pullback.fst e.g d.i let r := e.restrict.g let w : b ≫ e.g = r ≫ d.i := e.isPullback_restrict.w.symm (∀ (N : DerivedCategory (Sheaf (Scheme.ProEt.topology e.restrict.Z) (ModuleCat.{u + 1} Λ))) (K : DerivedCategory.Plus (Sheaf e.restrict.Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (_eN : (comparisonUpperStar (ModuleCat.{u + 1} Λ) e.restrict.Z).mapDerivedCategory.obj K.obj ≅ N), ∃ hLambda : IsIso (towerLambda Λ b d.i r e.g w N), IsIso (towerGamma Λ b d.i r e.g w N hLambda)) ∧ ∀ L : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)), let M := (comparisonUpperStar (ModuleCat.{u + 1} Λ) U).mapDerivedCategory.obj L.obj let N := (towerJ Λ e.restrict.i).obj M ∃ hLambda : IsIso (towerLambda Λ b d.i r e.g w N), (towerOriginComposition Λ h f d e L = (towerP Λ d.g).map (towerGamma Λ b d.i r e.g w N hLambda) ≫ (finiteDirectImageComposition Λ e.g d.g).inv.app ((towerJ Λ b).obj N) ≫ (towerP Λ (e.g ≫ d.g)).map (((towerOpenComposition Λ e.restrict.i b) ≪≫ towerOpenCongr Λ e.restrict_i_fst).hom.app M)) ∧ IsIso (towerGamma Λ b d.i r e.g w N hLambda)",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of 37a2252d1a51: actual ordinary constant-module pro-etale P/J, canonical originCompositionAmbient conjugated to the three supplied candidate compactifications through the canonical common-refinement/site comparisons, and independently constructed unit-square-counit exchange, inverse-open-unit lambda, adjoint gamma, inverse finiteDirectImageComposition and adjunction open compositor. The theorem includes field/finite-type and exact coefficient data, all witnessed-input gamma invertibility, and the specified-map equality. No etale compositor alias remains."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9cfed8de4",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Read node, 17 stmt-dep records, source (thm-sf-comp-composition Construction; Stacks 0F7B/0F7J), item module and both dependency modules, plus upstream Compactification.comp/restrict, compactSupportSiteComparison, originCompositionAmbient, the derived adjunctions and the open adjunction. Clause check: field k with l invertible, Lambda = coefficientExtensionRing with Finite from the recorded theorem, separated finite-type k-schemes and maps with no properness; d, e give (i,q),(a,qp); b/r/j are pullback.fst/e.restrict.g/e.restrict.i, with bj=a by restrict_i_fst and the Cartesian square by isPullback_restrict. towerExchange is the unit-square-counit mate; towerLambda = Ex at J_bN then P_r(eta_b^-1); towerGamma is the J_i -| i^* adjunct of lambda^-1. LHS is originCompositionAmbient conjugated by towerCandidateComparison, built from the same compactSupportSiteComparison as originComposition. RHS = P_q gamma, then finiteDirectImageComposition.inv, then P_qp(E), with E the leftAdjointUniq compositor J_bJ_j -> J_a; orientations correct. lambda/gamma invertibility holds for every witnessed N, and the formula plus gamma iso for N = J_j nu^*L. Edge cases: identities, empty U, universes (E in Type (u+1) only to match the coefficient universe). lean.statement verbatim; 14 declarations match the file; dependency modules change imports only; node fields unchanged. nt_compile --json: all 3 files clean (3.3/14.3/12.7 s). Of 5 direct importers 1 compiles; the other 4 fail identically on baseline, so no regression. Observation only: towerExchange duplicates upstream ProEtale.derivedBaseChangeMap up to the L(i^*) vs exact-pullback conjugation, so the proof will need a bridge lemma. No fixes.; reverted the delivery's change of existing node(s) lem-weil-derived-direct-image-composition, thm-sf-comp-composition (--revert-nodes; kept as on newtargets-dag)"
  }
 }

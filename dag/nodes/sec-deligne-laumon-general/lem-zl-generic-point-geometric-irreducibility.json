@@ -220,5 +220,23 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-abcd6345e (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the Stacks sources: varieties.tex 054Q (ll.1446-1490), 038G (ll.1404-1442) and algebra.tex 037N (ll.11235-11257). The item matches 054Q (1)<=>(2) with no added hypotheses; the statement is unchanged. Step 1: the reduction node gives the homeomorphism after every base change, and Y_L = Y x_X X_L, so geometric irreducibility of Y and X agree; the closed-immersion node gives the k-linear isomorphism kappa(xi)=kappa(eta). Step 2: def-pc-integral-scheme makes Y integral; the fraction-field node states eta in U, that O(U) is a domain, that the stalk is a field and that the germ is injective; the affine opens give a directed cofinal system without assuming the intersection is affine. Steps 3 and 4 are exactly 054Q's two proofs, using 038G and 037N(1)/(3); reducing first avoids the nilpotent-kernel lemma. New node affine-local: 038G restricted to irreducible X; the restriction is needed, since (2) holds vacuously for the empty scheme but (1) fails. Tested on Spec C/R, A^1 and k[t,eps]/eps^2. New node subalgebra-colimit: true, including with non-injective transitions (a directed colimit is nonzero and its nilradical is prime). Duplicate search over dag/nodes (tags, labels, 'geometrically irreducible', colimit): no existing node states either result; the product nodes differ, and neither new node restates a clause of the item. Blueprint ancestry is bertini-finite-cover-curve paragraph 3 (0G4F) via the parent. No SGA. I accept tool_uses for the reduction-universal-homeomorphism and closed-immersion-residue-field-iso nodes (generic sk-thm-p1 tools; the unit has no substitute). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericPointGeometricIrreducibility",
+  "declaration": "AlgebraicGeometry.geometricallyIrreducible_iff_genericResidueField",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericPointGeometricIrreducibility.lean",
+  "statement": "theorem geometricallyIrreducible_iff_genericResidueField (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IrreducibleSpace X] (ξ : X) (hξ : IsGenericPoint ξ (Set.univ : Set X)) : GeometricallyIrreducible (X ↘ Spec (.of k)) ↔ GeometricallyIrreducible (X.fromSpecResidueField ξ ≫ X ↘ Spec (.of k))",
+  "branch": "newtargets-dag",
+  "by": "Q109",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ff1dfb8e6",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Lean theorem geometricallyIrreducible_iff_genericResidueField matches node and Stacks 054Q (1)<=>(2) clause by clause: IrreducibleSpace X, arbitrary generic point via IsGenericPoint, canonical fromSpecResidueField composite as induced k-structure, GeometricallyIrreducible over original k on both sides; no extra hypotheses; universe u forced by Mathlib geometrically and recorded in the dependency's mathlib_match. Edge cases (empty, nonreduced, Spec C/R, inseparable) fine. Node changes only the lean field and the statement matches the file verbatim; private imports are the recorded proof-dep modules; docstrings carry source, blueprint id and 5 proof steps; no definitions, proof is only sorry. nt_compile (--json) clean, rc 0, 4-8 s, and a broken control copy showed the tool reports errors. Report has Worker report and Second reading by Q109. No findings."
  }
 }

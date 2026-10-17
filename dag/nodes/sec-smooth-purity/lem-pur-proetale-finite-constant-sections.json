@@ -156,5 +156,23 @@
   "group": "Q38",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-a4f306cb3 (reviewer sub-agent of L); spot-checked: I read the item in full; it has no new nodes. I read every cited statement, the unit sk-prop-a1-kummer, the parent chain up to thm-pur-affine-line-orientation (its blueprint_update final sentence is the item's from.place, and via is correct), Bhatt–Scholze Lemma 4.2.12 on printed p.30 (the discrete-T clause matches the item exactly) and Stacks proetale.tex example-functions-mod-locally-constant-functions (0F6D, context only). The Mathlib leaf isSheaf_fpqcTopology_continuousMapPresheafAb at ConstantSheaf.lean:116 is exact; the discrete-to-constant identification is a TODO in Mathlib, so the split is right. The statement is true and unchanged; I tested A=0, V empty, an infinite disjoint union of points (not quasi-compact), V=Spec LC(S,k) and disconnected V. The duplicate search found only étale-site, condensed and O_E/E-coefficient neighbours, none stating this item. No SGA is cited, no tool_uses are needed and there is no cycle. Three repairable faults, fixed in fixes/dag/nodes/sec-smooth-purity/lem-pur-proetale-finite-constant-sections.json: (1) step 1's source.document had Cyrillic letters (a path that does not exist), now corrected; (2) steps 1 and 2 used weak-étale base change and composition (fibre products U_i×_U U_j and the clopen fibres V_a as objects of X_proet) without citing a node, so I added lem-weil-pbc-weakly-etale-composition-base-change and wrote out why clopen pieces of an affine are affine and why open immersions are weakly étale; (3) C4: step 2 concluded that locally bijective implies isomorphism after sheafification while citing only def-weil-pbc-sheafification, which gives only the universal property, so I added the Mathlib leaves lem-pe-ring-sheafification-underlying-sets and lem-cbc-set-presheaf-sheafification-local-bijection and wrote out the comparison. Step 3 was reworded to match, and proof_deps is the union of the steps' uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.ProEtaleFiniteConstantSections",
+  "declaration": "AlgebraicGeometry.proEtale_finite_constant_sections",
+  "file": "lean/Sheaf/SecSmoothPurity/ProEtaleFiniteConstantSections.lean",
+  "statement": "theorem proEtale_finite_constant_sections (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A] [TopologicalSpace A] [DiscreteTopology A] : ∃ θ : ∀ V : X.ProEt, RingEquiv (↑(((constantSheaf (Scheme.ProEt.topology X) RingCat.{u + 1}).obj (RingCat.of A)).obj.obj (Opposite.op V))) C(V.left, A), (∀ (V : X.ProEt) (a : A), θ V (((toSheafify (Scheme.ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj (RingCat.of A))).app (Opposite.op V)) a) = ContinuousMap.const V.left a) ∧ (∀ {V W : X.ProEt} (h : W ⟶ V) (s : (((constantSheaf (Scheme.ProEt.topology X) RingCat.{u + 1}).obj (RingCat.of A)).obj.obj (Opposite.op V))), θ W (((constantSheaf (Scheme.ProEt.topology X) RingCat.{u + 1}).obj (RingCat.of A)).obj.map h.op s) = (θ V s).comp h.left.base.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-282f101c9",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Delivery 282f101c96 adds only the module, the node's lean record (statement field verbatim equal to the file signature) and the report (Worker report and Second reading sections present). Every clause matches the node: Scheme.{u}, the recorded Mathlib Scheme.ProEt/ProEt.topology, the recorded constantSheaf … RingCat.{u+1} as A_X, Finite CommRing A with DiscreteTopology, RingEquiv to C(V.left,A), normalization through the actual toSheafify unit, naturality via comp h.left.base.hom, no qc/connected/nonempty hypotheses. The existence form is unique given these clauses, so it renders 'canonical'. A : Type (u+1) matches the value-category universe and the side étale analogue Etale.constantSheafIsoContinuousMapSheaf; no finite ring is lost. Edge cases A=0, empty V, disconnected and non-qc V are covered. Source B-S Lemma 4.2.12 p.30 checked. Docstrings carry the source and blueprint tag; no definitions; proof is sorry only. No duplicate in Mathlib or the side framework. nt_compile --json clean (15.0 s, no errors or warnings). No fixes needed."
  }
 }

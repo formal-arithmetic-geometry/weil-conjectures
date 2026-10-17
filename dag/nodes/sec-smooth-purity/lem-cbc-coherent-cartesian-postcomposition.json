@@ -10,7 +10,10 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
-  "lem-coef-coherent-nerve-comparison"
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-rigidification-postcomposition-comparison",
+  "def-coef-infinity-relative-cone",
+  "lem-coef-kan-quillen-model-right-proper-core"
  ],
  "proof": [
   {
@@ -214,5 +217,29 @@
   "group": "Q08",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-f4a8efdaf (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, the new node lem-cbc-coherent-square-comparison-data, every cited statement, unit sk-prop-sf-cbc, the ancestor proof thm-cbc-finite-level-proetale and six duplicate candidates. The item statement is unchanged and true; it is HTT 2.4.4.3 in coherent-realization form. HTT and Kerodon are not in literature/ and the worker records them as WANTED. This is not a target node, so the master-source base-change check does not apply, and no SGA is cited. Edge cases checked: p=id, B=Δ^0, empty mapping sets and degenerate e. Step 1 matches the hypotheses of lem-coef-infinity-cartesian-mapping-criterion. All four squares have Kan corners where cube invariance needs them. The new node is true, statement-only, strictly smaller than the item, asserts no pullback property and is not a duplicate. Three repairable faults, fixed in fixes/: (1) the boundary paths in the new node ended at v'b'a and v'c'a, and Step 2 ended both at v'c'a; the common endpoint is v'g'a. The letters a,b,c were also used both for vertices and for corner maps; they are now ā,b̄,c̄,d̄. (2) B2/E5: the new node called p a 'simplicial functor' and spoke of 'consecutive squares' without saying where the comparisons go. It now names squares (i), (ii), (iii), the comparisons (i)→(ii) and (iii)→(ii), the horizontal maps, and the fact that the coherent-nerve comparison may be a zigzag (cube invariance allows zigzags). (3) C1: Step 4 went from the path-space sense of Step 3 to the two-leg sense of lem-coef-kan-homotopy-cartesian-invariance and back to the item's definition without citing lem-coef-kan-fibrant-path-recognition. It now cites it, plus cube invariance with constant faces. proof_deps is updated and the added tool_use is declared. The newly cited nodes create no cycle. I accept tool uses lem-coef-infinity-cartesian-mapping-criterion, lem-coef-coherent-nerve-comparison, lem-coef-infinity-kan-homotopy-coherent-cube-invariance, lem-coef-kan-homotopy-cartesian-invariance and lem-coef-kan-fibrant-path-recognition: generic tools from sk-prop-sf-biduality-general. No target is weakened.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CoherentCartesianPostcomposition",
+  "declaration": "SSet.Pinched.coherent_cartesian_postcomposition",
+  "declarations": [
+   "SSet.Pinched.coherentEdge",
+   "SSet.Pinched.IsFunctorialKanHomotopyPullbackSquare",
+   "SSet.Pinched.coherent_cartesian_postcomposition"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CoherentCartesianPostcomposition.lean",
+  "statement": "theorem coherent_cartesian_postcomposition {E B : SSet.{u}} [Quasicategory E] [Quasicategory B] (p : E ⟶ B) (hp : InnerFibration p) (x : E _⦋0⦌) (b c : E _⦋0⦌) (e : Δ[1] ⟶ E) (he₀ : E.δ 1 (SSet.yonedaEquiv e) = b) (he₁ : E.δ 0 (SSet.yonedaEquiv e) = c) (he : Enhanced.IsCartesianEdge p e) : IsFunctorialKanHomotopyPullbackSquare (enrichedPostcomposition (rigidification.obj E) (vertex E x) (vertex E b) (vertex E c) (coherentEdge b c (SSet.yonedaEquiv e) he₀ he₁)) (mappingMap p x b) (mappingMap p x c) (enrichedPostcomposition (rigidification.obj B) (vertex B (p.app _ x)) (vertex B (p.app _ b)) (vertex B (p.app _ c)) (coherentEdge (p.app _ b) (p.app _ c) (p.app _ (SSet.yonedaEquiv e)) (by simpa only [SimplicialObject.δ] using (p.naturality_apply (SimplexCategory.δ 1).op (SSet.yonedaEquiv e)).symm.trans (congrArg (p.app _) he₀)) (by simpa only [SimplicialObject.δ] using (p.naturality_apply (SimplexCategory.δ 0).op (SSet.yonedaEquiv e)).symm.trans (congrArg (p.app _) he₁))))",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the canonical rigidification mappingMap and enrichedPostcomposition declarations. The helper predicate expands the node's functorial Kan-replacement/path-space convention exactly; coherentEdge only transports the canonical edge vertex to the explicitly named endpoint vertices."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4bb370a7b",
+  "group": "NA",
+  "result": "pass",
+  "note": "Statement matches node and HTT Prop. 2.4.4.3 clause by clause: quasicategories E,B in one universe u, InnerFibration p, IsCartesianEdge (horn Λⁿₙ, edge {n−1,n}) with source δ1=b and target δ0=c, arbitrary vertex x; rows are enrichedPostcomposition by the transported canonical edgeVertex in rigidification.obj E / B, verticals are mappingMap p x b / x c with correct types. IsFunctorialKanHomotopyPullbackSquare asserts strict commutation plus ∃ functorial Kan replacement (mono, weak-equivalence unit, Kan targets) such that the homotopyPullbackComparison (constant path, path-space fibre product) is a weak homotopy equivalence. This is independent of the choice of R, equals the right-hand side of the landed kan_fibrant_path_recognition, and assumes no raw corner Kan. Not a duplicate of the raw IsHomotopyPullbackSquare or the two-leg IsHomotopyCartesian. Helpers are not hollow; docstrings carry source and blueprint tags; only proof is sorry; lean.statement is verbatim the signature; node changes only lean plus three landed stmt_deps; report has Worker report and Second reading by NA. Edge cases: empty E, empty mapping sets, p=id, B=Δ⁰, degenerate e, b=c, x=b covered. nt_compile.py --json compiled the snapshot module cleanly in 7.4 s (no error or warning). Minor, no change needed: kan-quillen core stmt_dep is only explanatory; IsCartesianEdge is used instead of the definitionally equal recorded wrapper pCartesianEdge."
  }
 }

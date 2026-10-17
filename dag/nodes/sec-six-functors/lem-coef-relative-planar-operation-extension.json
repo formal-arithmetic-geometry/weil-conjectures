@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-monoidal-block-projection-coherence",
-  "lem-coef-infinity-relative-colimit-completion"
+  "lem-coef-infinity-relative-colimit-completion",
+  "lem-coef-arrow-endomorphism-planar-operad"
  ],
  "proof": [
   {
@@ -160,5 +161,36 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-b79bfb525 (reviewer sub-agent of L); spot-checked: FIX: the statement is unchanged and no node is dropped. I read the item, the cited nodes (def-cbc-enhanced-diagrams-cones, lem-coef-monoidal-block-projection-coherence, lem-coef-infinity-relative-colimit-completion) and both citers (lem-coef-cocomplete-monoidal-tensor steps 4-5, lem-coef-strong-monoidal-operation-morphism-lifting). The statement is true and is not a restated clause of its parent; the parent uses it with T=P_R(C). It holds in the cases r=0, r=1 and j=id. HA 4.8.1.3 is online only and was not opened here (network blocked); the argument was checked mathematically. Three repairable faults. (1) C4: steps 2-5 cited lem-coef-infinity-relative-colimit-completion for full faithfulness and lifting of the hypothesized equivalence for a general T, but that node states these only for j_R:C->P_R(C). (2) C1/E5: the core lifting argument (a simplex with prescribed boundary lifts through a functor equivalence, with a coherent comparison and contractible choice) had no node. (3) D4/E3: step 4's induction was not stated, and its claim that restrictions are 'equal' to the prescribed data is false; they are only equivalent through whiskered theta. Repair in fixes/dag/nodes/sec-six-functors/lem-coef-relative-planar-operation-extension.json. Step 2: E_N and F_N are full functor subcategories, and the whiskered-theta comparisons put the j-image of the t-data in F_N. Step 3: a relative lifting lemma proved from existing same-unit nodes (isofibration-exponentiation, isofibration-pullback-equivalence, joyal-quasicategory-characterizations(2) with Joyal two-out-of-three, isofibration-base-change), with an inner-horn choice so that eta restricts exactly to epsilon on the boundary. Step 4: an explicit inductive claim (I_n) with face-compatible comparisons, and contractibility from a tower with contractible fibres. Step 5: the nullary case and projection-pullback assembly through block-projection. proof_deps updated; the completion node is kept only in stmt_deps, for notation. No cycle, no SGA, no tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativePlanarOperationExtension",
+  "declaration": "SSet.Enhanced.RelativePlanar.relative_planar_operation_extension",
+  "declarations": [
+   "SSet.Enhanced.RelativePlanar.slot",
+   "SSet.Enhanced.RelativePlanar.cocontinuousOperations",
+   "SSet.Enhanced.RelativePlanar.RestrictionEquivalences",
+   "SSet.Enhanced.RelativePlanar.Evaluation",
+   "SSet.Enhanced.RelativePlanar.sourceCorollas",
+   "SSet.Enhanced.RelativePlanar.squareSources",
+   "SSet.Enhanced.RelativePlanar.inputs",
+   "SSet.Enhanced.RelativePlanar.evaluate",
+   "SSet.Enhanced.RelativePlanar.lifts",
+   "SSet.Enhanced.RelativePlanar.relative_planar_operation_extension"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativePlanarOperationExtension.lean",
+  "statement": "theorem relative_planar_operation_extension {C T : SSet.{max (u + 1) v}} [Quasicategory C] [Quasicategory T] (j : C ⟶ T) (hT : SSet.Presentability.HasSmallColimits.{u, max (u + 1) v} T) (R : Set (RelativeCompletion.Relation.{u, max (u + 1) v} C)) (hj : RelativeCompletion.Respects R j) (hrestriction : RestrictionEquivalences R j) : ∃ E : Evaluation j (cocontinuousOperations.{u} T), ∀ b : (inputs E) _⦋0⦌, IsContractible (lifts E b)",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the landed complete tree-system and arrow-corolla spaces. Inputs form a pullback over the source corollas, and lifts are the homotopy fiber of normalized evaluation, retaining the prescribed operations and comparison paths. Added the landed arrow-endomorphism node as a statement dependency; its transitive dependencies do not contain this item."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-72f15281d",
+  "group": "NL",
+  "result": "pass",
+  "note": "I checked all clauses against the node and the Lean of its dependencies (RelativeCompletion, ArrowEndomorphism, EnhancedDiagramsCones, Coyoneda). The hypotheses are not stronger than the node's: Z ranges only over the containing universe and the restriction is actual precomposition. Separate cocontinuity fixes the other slots and has no condition in arity 0. Inputs are the pullback of the source system with the corolla squares, including r=0 and r=1. The conclusion is that the homotopy fibre of normalised evaluation from arrowSystems is contractible; the existential E is pinned by IsColorEvaluation, IsCorolla, source_eq and IsArrowCorollaData, and the arrow-endomorphism Package supplies it because cocontinuousOperations is Closed. Edge cases checked: r=0, r=1, empty C, empty R with j=id, empty shapes, universes max(u+1) v. Node changes from base only by lean and one stmt_dep (the landed arrow-endomorphism node, no cycle). lean.statement is verbatim and the declaration list is exact. No hollow definitions, one sorry, docstrings present. nt_compile: rc 0, clean. The first run timed out at 60 s in the dependency override under load average 171; the retry gave 28.9 s for the dependency and 13.6 s for the item, and an item-only run took 3.4 s. Remarks, not blocking: the second reading is by the same worker, as in accepted precedent; the hypothesis and conclusion use different canonical models of T^r."
  }
 }

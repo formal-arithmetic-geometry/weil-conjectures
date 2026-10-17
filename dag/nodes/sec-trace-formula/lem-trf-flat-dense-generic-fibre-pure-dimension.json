@@ -270,5 +270,23 @@
   "group": "Q69",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-9c27728de (reviewer sub-agent of L); spot-checked: The item and the new node are true, and the proof is complete. I made no fixes. Sources read: more-morphisms.tex 0GSI, 0H3X, 0GSJ and 0GSK (second list, F=O_X), plus Morphisms 02NJ and Topology definition-equidimensional. The item statement is the 0GSK remark specialized to an integral base, unchanged. New node lem-trf-flat-fibre-component-closure-dimension is true: a fibre-component generic point y is a minimal prime of a locally Noetherian fibre, so it lies in Ass_{X/S}(O_X). 0GSJ(2) then makes Y->T of relative dimension d, and Y_t equals B as a set, so d = dim B, which is finite. It needs no Noetherian base, no integral base and no purity. Tests: k[t][x,y]/(x(y-t)); the non-pure k[t][x,y,z]/(xy,xz); empty Z_s; and the blowup of A^2, which shows flatness is needed. The node is strictly smaller than the item, not a restated clause, and statement-only, and its form checks B1-B9 pass. It does not duplicate lem-trf-flat-family-generic-dimension-bound (0H3X gives only an upper bound) or the lem-sbc finite-presentation/Cohen-Macaulay nodes. Steps: (1) going down on affine charts gives eta=(0) in V, a flat ring map and a lift; correct. (2) Choosing the component and passing maximality of C to Z_s is genuinely elementary. (3) The new node is applied with t=eta, y=z, D=C. (4)-(6) cite lft base change, the pure-open local-dimension node, fibre dimension after base change (def-kun-dimension, the same notion on underlying spaces), local Noetherianity, and the constant-local-dimension component criterion; every hypothesis is checked. proof_deps equals the union of uses. There is no SGA citation, and the declared tool_uses are accepted as generic black boxes."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FlatDenseGenericFibrePureDimension",
+  "declaration": "AlgebraicGeometry.flat_dense_generic_fibre_pure_dimension",
+  "file": "lean/Sheaf/TraceFormula/FlatDenseGenericFibrePureDimension.lean",
+  "statement": "theorem flat_dense_generic_fibre_pure_dimension {X S : Scheme.{u}} [IsIntegral S] (f : X ⟶ S) [Flat f] [LocallyOfFiniteType f] (η : S) (hη : IsGenericPoint η (Set.univ : Set S)) (hdense : Dense (Set.range (f.fiberι η))) (d : ℕ) (hgeneric : ∀ C ∈ irreducibleComponents (f.fiber η), topologicalKrullDim C = (d : WithBot ℕ∞)) : (∀ s : S, Nonempty (f.fiber s) → ∀ C ∈ irreducibleComponents (f.fiber s), topologicalKrullDim C = (d : WithBot ℕ∞)) ∧ (∀ s : S, ∀ (Ω : Type u) [Field Ω] [Algebra (S.residueField s) Ω] [IsAlgClosed Ω], Nonempty (pullback (C := Scheme.{u}) (f.fiberToSpecResidueField s) (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) Ω)))) → ∀ C ∈ irreducibleComponents (pullback (C := Scheme.{u}) (f.fiberToSpecResidueField s) (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) Ω)))), topologicalKrullDim C = (d : WithBot ℕ∞))",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5eef5d69b",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Every clause of the node matches the Lean: IsIntegral S; IsGenericPoint η univ; Flat and LocallyOfFiniteType f; Dense (range f.fiberι η); d : ℕ; generic-fibre components have topologicalKrullDim d; both conclusions, for nonempty fibres and for nonempty geometric fibres X_s ×_κ(s) Spec Ω with Ω algebraically closed. Nothing is assumed beyond the node and the quantifier order is the same. Each Lean name is the recorded declaration for its dependency. Edge cases: d = 0 and empty X, fibres and geometric fibres are vacuous. Ω : Type u is forced by the pullback in Scheme.{u} and is the project convention, so it is not a hidden restriction. No new definitions; the only proof is sorry; docstrings give the source (0GSK/0GSJ, 02NJ/02NK), the blueprint tag and the six proof steps. The node changed only in its lean field, and lean.statement matches the signature exactly. nt_compile.py: no errors in 7.8 s; axioms are propext, sorryAx, Classical.choice, Quot.sound. The report has Worker report and Second reading by Q06 sections. Only minor point: the second reading is short."
  }
 }

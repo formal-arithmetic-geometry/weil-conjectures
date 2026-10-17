@@ -11,7 +11,8 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-cocartesian-straightening",
   "lem-coef-day-relative-exponential-model",
-  "lem-coef-infinity-slice-right-fibration"
+  "lem-coef-infinity-slice-right-fibration",
+  "def-coef-infinity-presheaf-yoneda"
  ],
  "proof": [
   {
@@ -297,5 +298,40 @@
   "group": "Q02",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-7ff9c8c85 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node and all 14 cited nodes. Sources fetched and read: Chu–Haugseng arXiv:2006.08269 Def 6.3, Cor 6.4 (with proof), Cor 6.5, Rem 6.6 (pp.12–14), and Shah Notation 4.29 (p.34), Rem 7.4, Def 7.6, Prop 7.7 (with proof, pp.49–50). The statement matches CH 6.3–6.6, including the variance Map(-,d), slices over d and left Kan extension along h^op. The explicit slice action and product cones are marked as agent expansion and strengthen the source; the parent day-model-yoneda node uses them. New node lem-coef-fiberwise-arrow-target-cocartesian: A_p is Shah's O_S(D), and Fr^cocart(id)=ev1 is cocartesian by Prop 7.7 and Rem 7.4. I checked by hand the strict fibres, the transport formula, and that (t,s) preserves cocartesian edges (the source leg of a t-cocartesian edge is p-cocartesian). Small cases B=*, p=id and empty fibres hold. It is not a restatement of the item and not a duplicate: relative-slice-sections fixes the ambient category, lax-comma-target is non-fibrewise, arrow-target-cartesian needs pullbacks, and none states it. Steps 1–9 each use their cited statements as those statements say. The Yoneda composite in step 3 is the identity of H(hd). Step 4 is the cocartesian criterion over Map(E,T) with fibre detection at v=id. Step 5 meets the full-restriction hypotheses exactly. Step 8 is a degreewise join-slice isomorphism and genuinely elementary. All cited statements are in unit sk-prop-sf-biduality-general, so no tool_uses are needed. There is no cycle and no coefficient or base-change data. One B3 fault, fixed: the statement used D_{/d} with no defining node. I added the citation [lem-coef-infinity-slice-right-fibration] to the statement and to stmt_deps; the meaning is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RepresentableRightFibrationClassifier",
+  "declaration": "SSet.Enhanced.RepresentableClassifier.representable_right_fibration_classifier",
+  "declarations": [
+   "SSet.Enhanced.RepresentableClassifier.IsRepresentable",
+   "SSet.Enhanced.RepresentableClassifier.representables",
+   "SSet.Enhanced.RepresentableClassifier.projection",
+   "SSet.Enhanced.RepresentableClassifier.verticalArrows",
+   "SSet.Enhanced.RepresentableClassifier.verticalTarget",
+   "SSet.Enhanced.RepresentableClassifier.verticalSource",
+   "SSet.Enhanced.RepresentableClassifier.relativeEdgeMap",
+   "SSet.Enhanced.RepresentableClassifier.total",
+   "SSet.Enhanced.RepresentableClassifier.universalProjection",
+   "SSet.Enhanced.RepresentableClassifier.CoherentSliceAction",
+   "SSet.Enhanced.RepresentableClassifier.ProductComparison",
+   "SSet.Enhanced.RepresentableClassifier.FiberComparison",
+   "SSet.Enhanced.RepresentableClassifier.Statement",
+   "SSet.Enhanced.RepresentableClassifier.representable_right_fibration_classifier"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RepresentableRightFibrationClassifier.lean",
+  "statement": "theorem representable_right_fibration_classifier (T : CocartesianStraightening.Statement.{u + 1}) (M : DayModel.Statement.{u, u + 1}) : ∃ J : DayModel.Enlargement.{u}, Nonempty (Statement T M.base_quasicategory J M)",
+  "branch": "newtargets-dag",
+  "by": "N1",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the actual RFib full subcategory, join slices and the actual identity unstraightening. Helpers package the replete representable subcomplex, target/source evaluation on the degreewise fibrewise-arrow pullback, and the whole straightened transformation. The normalization is specified in every degree and compared by a coherent natural equivalence. Fibre Yoneda uses the normalized Day-model classifier supplied as an argument, not an arbitrary presheaf equivalence. The slice-product comparison is fixed by its coordinate join maps and base projection, including the empty family."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6b408e6e3",
+  "group": "N1",
+  "result": "pass",
+  "note": "Every node clause matches the Lean through the dependencies' own declarations: RFib and its projection from DayModel; RSl as the full subcategory of arrows equivalent over their base to joinSliceProjection d (Map(-,d) variance); the universal family is DayModel.universalTotal of the enlarged identity, with the enlargement J existential as in the dependency's UniversalData (J is pinned up to equivalence, so no trivialisation); equivalence over Cat, cocartesian preservation, inclusion preservation; fibre clause with objects d -> D_{/d} and Yoneda through M.fibers.comparison and infinityYoneda; coherent slice action pins Phi to the straightening of the actual (target,source) map on every simplex in every degree; finite products, arrow products, ProductComparison with coordinate projections, empty product *->*. No extra hypotheses (T universal, M used only for base_quasicategory and fibers), universes bound. Edge cases checked: empty D, point, empty and singleton families. The only sorry is the theorem proof; no hollow defs; every docstring has the source place and blueprint tag; lean.statement verbatim; the added stmt_dep def-coef-infinity-presheaf-yoneda is a landed node; proof-dep imports complete; report sections present. nt_compile.py --json run twice: exit 0, no errors, 5.5-6.6 s. Non-blocking: verticalArrows duplicates SymmetricMonoidalSegalClassification.pointwiseTotal Δ[1]; the future lem-coef-fiberwise-arrow-target-cocartesian should reuse verticalArrows."
  }
 }

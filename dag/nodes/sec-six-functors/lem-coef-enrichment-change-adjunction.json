@@ -313,10 +313,10 @@
  "reviewed_lean": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-1d7aa4de2",
-  "group": "Q93",
-  "result": "fix",
-  "note": "Reviewed statements, dependencies, source, universes, edge cases and canonical constructions. Supplied complete fixes for two duplicate helpers and the placeholder second reading. Original and fixed modules compile cleanly through scompile.py. Details in review.md; branch unchanged."
+  "reviewer": "NT-stage2-cc-c9f2e0541",
+  "group": "NC",
+  "result": "pass",
+  "note": "Read node, source place, all 10 stmt deps' declarations (UnitSection, completeCategory, IsPresentablyMonoidal, IntegralDerivedCoefficients, etc.), report and the full 718-line module. Every node clause matched: universes U in U' (explicit u, v, no equation), presentably symmetric monoidal (IsPresentablyMonoidal plus SymmetricExtension with the correct Cut-functor formula), Cat_V presentable with small limits and equivalences = fully faithful + essentially surjective, closed symmetric tensor (raw BinaryChangeOfEnrichment then completion, fold/block coherence, CoherentAdjunction, curry with checked variance), separate cocontinuity, full-inclusion limits with essential-image membership along actual legs, free enrichment left adjoint to U with Map(1,E(x,y)) and colim_S 1 copowers, cotensors over all small SSet with categorification, Hom(A,E^K) equivalent to Hom(A,E)^K, componentwise equivalences, opposite involution, and D(Z) via IntegralDerivedCoefficients with quasi-isomorphism in all degrees. No hollow defs; the single sorry is the final theorem with the 12-step proof docstring; source and blueprint docstrings present; lean.statement verbatim; all 23 declarations present. The 8 added stmt_deps have Lean records and form no cycle. The §1(B) dependency repair (r.obj and r.map) is minimal: the published file fails at 250:57 and 258:56 and the repaired one compiles. nt_compile --json on both files: exit 0, no errors or warnings. Non-blocking: inline Cut-functor formula duplicates the equivalent IsOrderedBlockFunctor; existential D(Z) model is justified; dependency note replaced the earlier maintainer note."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.EnrichmentChangeAdjunction",
@@ -349,10 +349,10 @@
   "file": "lean/Sheaf/CategoryTheory/EnrichmentChangeAdjunction.lean",
   "statement": "theorem enrichment_change_adjunction : ChangeAdjunctionStatement.{u, v} ∧ SpaceComparisonStatement.{u, v}",
   "branch": "newtargets-dag",
-  "by": "Q93",
+  "by": "NC",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Canonical postcomposition is fixed on all dependent-functor simplices. The adjoint lax structure is characterized by a relative adjunction over the operadic base. The spaces comparison identifies the actual unstraightened Segal nerve over the entire complete-algebroid category times Delta-op with the usual complete Segal-space nerve, whose object and enriched mapping formulas are specified on every coherent simplex. Helpers characterize and construct these same canonical maps; no data is selected from the postponed theorem. Reuses postcomposeAmbient from Sheaf.CategoryTheory.EnrichedCompletionLocalization; its universal-family specialization is exactly the ambient map used here. Independent maintainer reading: reuse underlyingChange from AlgebroidCocontinuousBaseChange (lem-coef-algebroid-cocontinuous-base-change) and Classification.diagram from QuasicategoryClassificationRealization (lem-coef-quasicategory-classification-realization), removing duplicate underlyingMap and rezkValue helpers. These are concrete definitions, not hypotheses or uses of their owning theorems; the theorem signature and mathematical statement are unchanged.",
+  "note": "Dependency interface repair: the recorded module fails compilation because explicit enrichment arguments in spaceSimplexObject and spaceSimplexMap do not elaborate against the published smallSpaces nerve. Read the actual enrichment directly from r.obj and r.map; these have exactly the nerve simplex types. The statement, canonical nerve normalization and all declared interfaces are unchanged.",
   "fixed_by": "NT-stage2-Codex-1d7aa4de2"
  }
 }

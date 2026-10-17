@@ -291,5 +291,24 @@
   "group": "Q51",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-3c3c16fb9 (reviewer sub-agent of L); spot-checked: Read the whole delivery and checked it against the sources. The item's statement agrees with Stacks 0B49 (flat.tex lemma-finite-after-blowing-up) hypothesis by hypothesis; it is unchanged and not weakened. Its old 'Lemma 29.27.1' label is stale, but the tag and label are right. Step 1: boundary blow-up, then properness, qcqs of S_0 via the separated-to-quasi-separated lemma and permanence (2), and U_0≅U. Step 2: strict-transform restriction via the scheme-image update and restriction to an open; the quasi-compactness of the open immersion comes from the finite-type center, and the step is genuinely elementary. Step 3: properness permanence (a)-(c), then the hypotheses of the 081R flattening node, all checked. Step 4: the density-preservation update applies because U_0 is quasi-compact and schematically dense and J is finite type and U_0-admissible; the topological-density argument is correct; this gives exactly the hypotheses of the 0B48 node. Step 5: holds by definition. Step 6: the composition-of-blowups update gives K with V(K)=V(I)∪b_0(V(J)), which is disjoint from U; then 080I(2). New node lem-trf-proper-flat-finite-dense-open: matches 0B48 with the lfp alternative; tested on U empty, on a non-proper open immersion of the generic point of a DVR, and with flatness dropped; not a duplicate of pqf-lem-proper-lqf-finite. New node lem-trf-strict-transform-composition: matches 080I(2) restricted to finite-type centers, which is where the project's strict-transform definition agrees with Stacks; not a duplicate of thm-nagata-composition-of-blowups, lemma-nagata-admissible-blowup-comp or lemma-nagata-scheme-image-strict-transform. rg over the snapshot DAG for 0B48/0B49/080I/081R and keywords found no other node stating either fact. Neither new node restates a clause of the item, there is no cycle and no SGA is cited. The tool_uses for sk-lem-nagata-boundary-divisor and lem-weil-pbc-proper-fp-permanence are accepted. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteAfterBlowup",
+  "declaration": "AlgebraicGeometry.finiteLocallyFree_after_admissibleBlowup",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteAfterBlowup.lean",
+  "statement": "theorem finiteLocallyFree_after_admissibleBlowup {S X : Scheme.{u}} (f : X ⟶ S) (U : S.Opens) [CompactSpace S] [QuasiSeparatedSpace S] [CompactSpace U.toScheme] [IsProper f] [Scheme.Hom.IsFiniteLocallyFree (Limits.pullback.snd f U.ι)] : ∃ B : IsAdmissible S U, Scheme.Hom.IsFiniteLocallyFree (strictTransformMap f B.I.blowupMap B.I.support.compl)",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-b4ee920d8"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b4ee920d8",
+  "group": "Q49",
+  "result": "fix",
+  "note": "Statement matches node and Stacks 0B49 (flat.tex l.9173) clause by clause: CompactSpace S, QuasiSeparatedSpace S, IsProper f, U : S.Opens with CompactSpace U.toScheme, IsFiniteLocallyFree (pullback.snd f U.ι) => ∃ B : IsAdmissible S U, IsFiniteLocallyFree (strictTransformMap f B.I.blowupMap B.I.support.compl). Strict transform w.r.t. complement of the center as def-nagata-strict-transform (defeq to upstream Scheme.IdealSheafData.strictTransform). Upstream IsAdmissible/strictTransformMap/IsFiniteLocallyFree read in slopmaster2 and the live tree. No added or dropped hypotheses; edge cases (S=∅, U=∅, U=S, non-reduced) and universes ok; no duplicate (rg hits only unrelated FiniteAfterCompletion); no defs, sorry-only proof, report has both sections. Only finding H8: the declaration docstring lacked the node's proof step by step. fixes/FiniteAfterBlowup.lean replaces only that docstring with source place + six steps and cited nodes; signature unchanged so lean.statement stays verbatim; max line 92. nt_compile --json: delivered and fixed files both rc=0, no errors or warnings."
  }
 }
