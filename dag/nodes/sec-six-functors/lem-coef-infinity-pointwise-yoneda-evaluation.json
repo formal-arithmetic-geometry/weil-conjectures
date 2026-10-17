@@ -394,5 +394,43 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-42e601a7a (reviewer sub-agent of L); spot-checked: I read the whole item, all three new nodes, every cited statement, the unit record and paragraph 2 of the main-20261015 proof of prop-coef-integral-exceptional-adjoint. HTT and the Kerodon tags are not archived, and the delivery records WANTED lines for them. I checked the cited facts against the standard results: HTT 2.2.4.1 (Hom^R vs C[S] via the Q-resolution); pointwise Kan extensions have the mapping-space universal property; the colimit of the constant point diagram is |K|; the full essential image; and Yoneda via pointwise Kan extensions. The statement was changed by the second reader, contrary to the report's first section and the Q09 lead_note. I accept the change. I verified the counterexample: for the poset a<i<x with |I| not U-small, C[N P](a,x) has |I| vertices, so the concrete Sing|C[C](a,x)| is not U-small, and def-coef-infinity-category-of-spaces gives no S_U-valued representable for a U'-small E. The corrected statement keeps both universes, both variances, the evaluation and inverse formulas and parameter coherence, adds the existence of small models and holds for every model. All five direct citers are satisfied. Steps 1-4 and 6 check out: the p/theta/u weak equivalences, with no Kan assumption on A(a,x); the slice fiber equals M_x; the prism equals the beta-induced cocone; the Kan-extension node with K=Delta^0, F0=*, beta=eta; the parameterized naturality square; and interval and barycentric reversal. Fault found (E1): Step 5 used 'M_x U-small' literally. For E^op, M_x=Map^R_{E^op}(a,x) is a left-pinched object of E, and the hypothesis on Map_E does not make it a U-small simplicial set; under the project's 'equivalent to a small space' reading it fails even covariantly. Step 2 made the same unneeded claim. I repaired this in fixes/dag/nodes/sec-six-functors/lem-coef-infinity-pointwise-yoneda-evaluation.json, changing only proof text and adding pinch-comparison to Step 5's uses (proof_deps unchanged). Step 5 now builds a U-small Kan complex Y_x with a weak equivalence k_x:Y_x->M_x: from the hypothesis in the covariant case, and in the op case through Y'^op, j^op, U_{E^op}(a,x)=U_E(x,a)^op and a homotopy inverse of j. It then runs the Whitehead and equivalence-edge construction on e_x k_x. Step 2 now uses only U'-smallness. New nodes: none is a duplicate or a restated clause of the item, and each is statement-only, self-contained and has its three search kinds recorded. rigidification-identity-action (tested on Delta^0, discrete with x!=a, BG and the thin poset) is true and strictly smaller than the item, with no transformation-space claim; space-point-cocone-criterion (tested on K empty, point and S^1) is true and distinct from left-fibration-colimit-realization, which needs space-transport classification that leads back to the item; pointwise-lan-mapping-property (tested on K empty and K=Delta^0) is true. The overlay closure has 290 nodes, with no missing or merged node and no cycle, and no dependency reaches the item. I accept the three declared tool_uses (singular-unit-weak, kan-whitehead-inverse, kan-mapping-homotopy-invariance) as generic black boxes outside the sk-prop-sf-cbc route. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityPointwiseYonedaEvaluation",
+  "declaration": "SSet.Enhanced.PointwiseYoneda.infinity_pointwise_yoneda_evaluation",
+  "declarations": [
+   "SSet.Enhanced.PointwiseYoneda.value",
+   "SSet.Enhanced.PointwiseYoneda.liftSpace",
+   "SSet.Enhanced.PointwiseYoneda.liftPair",
+   "SSet.Enhanced.PointwiseYoneda.applyMap",
+   "SSet.Enhanced.PointwiseYoneda.SpaceComparison",
+   "SSet.Enhanced.PointwiseYoneda.transformations",
+   "SSet.Enhanced.PointwiseYoneda.evaluation_diagramVertex",
+   "SSet.Enhanced.PointwiseYoneda.component",
+   "SSet.Enhanced.PointwiseYoneda.evaluate",
+   "SSet.Enhanced.PointwiseYoneda.action",
+   "SSet.Enhanced.PointwiseYoneda.pointAction",
+   "SSet.Enhanced.PointwiseYoneda.IsSmallValued",
+   "SSet.Enhanced.PointwiseYoneda.identityPoint",
+   "SSet.Enhanced.PointwiseYoneda.IsModel",
+   "SSet.Enhanced.PointwiseYoneda.Reconstruction",
+   "SSet.Enhanced.PointwiseYoneda.Assertion",
+   "SSet.Enhanced.PointwiseYoneda.infinity_pointwise_yoneda_evaluation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityPointwiseYonedaEvaluation.lean",
+  "statement": "theorem infinity_pointwise_yoneda_evaluation (E : SSet.{max (u + 1) v}) [Quasicategory E] (_hE : ∀ x y : E _⦋0⦌, ∃ K : SSet.{u}, KanComplex K ∧ ∃ f : SSet.uliftFunctor.{max (u + 1) v, u}.obj K ⟶ mappingSpace E x y, IsWeakHomotopyEquivalence f) (a : E _⦋0⦌) : ∃ (hOp : Quasicategory E.op) (c : SpaceComparison.{max (u + 1) v}), Assertion.{u, v} c E a ∧ @Assertion.{u, v} c E.op hOp ((SimplicialObject.opObjIso (X := E)).inv a)",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Independent reviewed stage-1 split. Uses the published concrete corepresented functor. Small spaces use the full replete presentation by larger Kan complexes admitting a U-small Kan model. The existential comparison is fixed on all subset-chain simplices and has an inverse with both homotopies. No coherent_nerve_comparison theorem or coherent Yoneda theorem supplies any data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-249a24fcf",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Read the node, both stmt_deps (EnhancedDiagramsCones, InfinityCategoryOfSpaces), CoherentNerveComparison, the report (real Worker report and Second reading by Q45) and the module. Node delta is lean only (JSON diff against the side DAG); lean.statement is verbatim in the file; imports match the 2 stmt_deps and the 10 proof_deps with recorded Lean (3 without Lean are not imported); no name clashes; no line over 100 columns. Clause by clause: universes u and W=max(u+1) v stay independent; _hE is local smallness up to weak equivalence; the concrete functors are Spaces.corepresented on E and E.op; IsModel gives small-model existence, an equivalence edge and identity-point normalization; Assertion holds for every model and every small-valued G; evaluation is a full-space equivalence with inverse s and both SSet.Homotopy witnesses; Reconstruction gives the inverse formula with all parameters; one shared comparison serves both variances. Small spaces are presented as the replete full subcategory with small Kan models, consistent with the project convention and the corrected stage-1 node. SpaceComparison is in the conclusion and fixes the forward map on every simplex (HTT max-subset formula), so the existential does not weaken; copying CoherentMappingComparison is justified because citing lem-coef-coherent-nerve-comparison would create a cycle (verified). evaluation_diagramVertex is a true well-definedness sorry that component needs, allowed by brief-stage2 §2. No hollow data; sorry only in the main theorem and that helper. Edge cases checked: empty E, point E, discrete E, empty P(a), large concrete values. nt_compile --json on the snapshot: 40 files, exit code 0, no errors or warnings, item 2.3 s. No fixes needed."
  }
 }
