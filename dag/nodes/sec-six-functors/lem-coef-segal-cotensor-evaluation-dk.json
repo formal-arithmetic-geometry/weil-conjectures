@@ -97,12 +97,43 @@
    }
   },
   {
-   "text": "Fix $x,y\\in W_0$, and write $J:M_W(x,y)\\to M_A(jx,jy)$ and $T:M_A(jx,jy)\\to M_B(s_0x,s_0y)$ for the maps induced by $j,r$; put $b=(jx,jy)$, so that $(r_0\\times r_0)(b)=(s_0x,s_0y)$. We show that $T$ is a weak equivalence onto a union of components of its target, which is Rezk's homotopy-monomorphism property in the form used here. By step 3, for $n=0,1$ the map $r_n$ factors as a weak equivalence $r_n':A_n\\to C_n$ followed by the inclusion of a union of components $C_n\\subseteq B_n$. Write $\\partial$ for the endpoint maps $(d_1,d_0)$. The map $\\partial_B:B_1\\to B_0^2$ sends $C_1$ into $C_0^2$: every component of $C_1$ contains a point $r_1(a)$, because $r_1'$ is surjective on components; then $\\partial_Br_1(a)=(r_0\\times r_0)(\\partial_Aa)\\in C_0^2$; and a connected set maps into one component of $B_0^2$, of which $C_0^2$ is a union. The restriction $\\partial_C:C_1\\to C_0^2$ of the Kan fibration $\\partial_B$ (step 1) is a Kan fibration: a horn $\\Lambda^n_k$, $n\\geq1$, is connected, and its lift $\\Delta^n$ in $B_1$ is connected and meets $C_1$, hence lies in $C_1$. Its strict fiber over $(s_0x,s_0y)$ is $M_B(s_0x,s_0y)\\cap C_1$, a union of components of $M_B(s_0x,s_0y)$, since each component of that fiber lies in one component of $B_1$. The map $r_0'\\times r_0':A_0^2\\to C_0^2$ is a weak equivalence: by step 3, its homotopy fibers are the products of the contractible homotopy fibers of $r_0'$, and we apply the contractible-fiber criterion; all these spaces are Kan complexes. Let $Q=A_0^2\\times_{C_0^2}C_1$ be the strict pullback along $\\partial_C$. Right properness says the projection $Q\\to C_1$ is a weak equivalence, as the pullback of the weak equivalence $r_0'\\times r_0'$ along the Kan fibration $\\partial_C$. The map $u=(\\partial_A,r_1'):A_1\\to Q$ composed with that projection is the weak equivalence $r_1'$. Two-out-of-three therefore makes $u$ a weak equivalence. Both $\\partial_A:A_1\\to A_0^2$ (step 1) and $Q\\to A_0^2$ are Kan fibrations; the latter is a pullback of $\\partial_C$. The map $u$ lies over $A_0^2$. By the fiberwise criterion for Kan fibrations over an arbitrary base, its strict fiber over the vertex $b$ is a weak equivalence. That fiber is $T$ with its target restricted to $M_B(s_0x,s_0y)\\cap C_1$. Hence $T$ factors as a weak equivalence $M_A(jx,jy)\\to M_B(s_0x,s_0y)\\cap C_1$ followed by the inclusion of a union of components. This is the case for any fixed pair, empty fibers included.",
+   "text": "Fix $x,y\\in W_0$ and write $J:M_W(x,y)\\to M_A(jx,jy)$ and $T:M_A(jx,jy)\\to M_B(s_0x,s_0y)$ for the maps induced by $j,r$. Put $b=(jx,jy)$ and $c=(s_0x,s_0y)$. For $n=0,1$, use exactly the classifier factorization of step 3: after currying, $C_n=(W^{F(n)})_{\\mathrm{eq}}\\subseteq B_n$ and $r_n':A_n\\to C_n$ is a weak equivalence. Write $\\partial=(d_1,d_0)$. The map $\\partial_B$ sends $C_1$ into $C_0^2$: each component of $C_1$ meets $r_1'(A_1)$, its endpoint there is in $C_0^2$ by commutation with $r$, and a simplicial map sends each component into one component. Apply [lem-coef-kan-component-restriction-fibration] to $\\partial_B:B_1\\to B_0^2$, a Kan fibration by step 1. It gives a Kan fibration $\\partial_C:C_1\\to C_0^2$ whose fiber over $c$ is $D=M_B(s_0x,s_0y)\\cap C_1$, a union of components of $M_B(s_0x,s_0y)$. It also makes $C_0,C_1$ Kan.",
    "uses": [
-    "lem-coef-segal-cartesian-exponent",
+    "lem-coef-kan-component-restriction-fibration",
+    "lem-coef-segal-equivalence-classifier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Lemma 13.9, printed p. 31: 'i* is a homotopy monomorphism ... whence j* is a weak equivalence'; homotopy monomorphism in the sense of Section 12.2 (weak equivalence onto a union of components), expanded through the fiberwise Kan-fibration criterion."
+   }
+  },
+  {
+   "text": "The map $v=r_0'\\times r_0':A_0^2\\to C_0^2$ is a weak equivalence by [lem-coef-kan-pullback-fibration-invariance]. Explicitly apply that statement to the cospans $A_0\\to\\Delta^0\\leftarrow A_0$ and $C_0\\to\\Delta^0\\leftarrow C_0$, with comparison maps $r_0',1_{\\Delta^0},r_0'$. The first legs are Kan fibrations because $A_0,C_0$ are Kan, and all three comparison maps are weak equivalences. The strict pullbacks and their induced map are exactly the displayed squares and $v$.",
+   "uses": [
+    "lem-coef-kan-pullback-fibration-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Lemma 13.9, printed p. 31: 'i* is a homotopy monomorphism ... whence j* is a weak equivalence'; homotopy monomorphism in the sense of Section 12.2 (weak equivalence onto a union of components), expanded through the fiberwise Kan-fibration criterion."
+   }
+  },
+  {
+   "text": "Form the strict pullback $Q=A_0^2\\times_{C_0^2,v,\\partial_C}C_1$. Its projection $q:Q\\to C_1$ is the pullback of the weak equivalence $v$ along the Kan fibration $\\partial_C$, hence is a weak equivalence by right properness. Endpoint commutation defines $u=(\\partial_A,r_1'):A_1\\to Q$ and gives $qu=r_1'$. Two-out-of-three makes $u$ a weak equivalence. The other projection $Q\\to A_0^2$ is a Kan fibration: a horn lifting problem is a lifting problem for $\\partial_C$ with its prescribed $A_0^2$ coordinate retained.",
+   "uses": [
     "lem-coef-kan-quillen-right-proper",
-    "lem-coef-reedy-model-structure",
-    "lem-coef-space-contractible-fiber-equivalence",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Lemma 13.9, printed p. 31: 'i* is a homotopy monomorphism ... whence j* is a weak equivalence'; homotopy monomorphism in the sense of Section 12.2 (weak equivalence onto a union of components), expanded through the fiberwise Kan-fibration criterion."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-kan-fibration-arbitrary-base-fibers] to $u$ over $A_0^2$: the structure map of $A_1$ is the endpoint Kan fibration from step 1 and that of $Q$ is the Kan fibration from step 8. The theorem gives a weak equivalence on their strict fibers over $b$. The first fiber is $M_A(jx,jy)$. The second is $D$: a simplex of the fiber is a pair $(b,\\gamma)$ with $\\partial_C\\gamma=v(b)=c$, so forgetting its first coordinate and inserting that constant coordinate are inverse simplicial maps. Under these coordinates $u_b$ is exactly $T$ with target restricted to $D$. Thus $T$ factors as a weak equivalence to $D$ followed by inclusion of a union of components, including when those fibers are empty.",
+   "uses": [
     "lem-coef-kan-fibration-arbitrary-base-fibers"
    ],
    "elementary": false,
@@ -112,7 +143,7 @@
    }
   },
   {
-   "text": "Step 5 shows that $TJ$ is a weak equivalence, so it is surjective on components. Then $T$ is surjective on components too: for a component of $M_B(s_0x,s_0y)$, take a preimage component under $TJ$ and apply $J$. By step 6, $T$ lands in the union of components $M_B(s_0x,s_0y)\\cap C_1$. That union therefore meets every component of $M_B(s_0x,s_0y)$, so it is the whole space. Hence $T$ is itself a weak equivalence. Two-out-of-three for the Kan model structure, applied to $TJ$ and $T$, makes $J$ a weak equivalence. This holds for every pair $x,y$, including an empty mapping space: then $M_B(s_0x,s_0y)$ is empty because $TJ$ is a weak equivalence, and so is $M_A(jx,jy)$ because $T$ is one.",
+   "text": "Step 5 shows that $TJ$ is a weak equivalence, so it is surjective on components. Then $T$ is surjective on components too: for a component of $M_B(s_0x,s_0y)$, take a preimage component under $TJ$ and apply $J$. By steps 6–9, $T$ lands in the union of components $M_B(s_0x,s_0y)\\cap C_1$. That union therefore meets every component of $M_B(s_0x,s_0y)$, so it is the whole space. Hence $T$ is itself a weak equivalence. Two-out-of-three for the Kan model structure, applied to $TJ$ and $T$, makes $J$ a weak equivalence. This holds for every pair $x,y$, including an empty mapping space: then $M_B(s_0x,s_0y)$ is empty because $TJ$ is a weak equivalence, and so is $M_A(jx,jy)$ because $T$ is one.",
    "uses": [
     "lem-coef-kan-quillen-right-proper",
     "lem-coef-reedy-model-structure"
@@ -124,7 +155,7 @@
    }
   },
   {
-   "text": "Step 2 and step 7 say exactly that $j$ is a Dwyer--Kan equivalence. Apply the existing two-out-of-six theorem to the three composable maps $1_W:W\\to W$, $j:W\\to A$, and $p_i:A\\to W$. Their successive composites are $j$ and $p_i j=1_W$, both Dwyer--Kan equivalences (identity maps induce identity functors and identity mapping-space maps). The theorem gives that $p_i$ is a Dwyer--Kan equivalence, for $i=0,1$. Step 1 already supplies the asserted Segal condition on $W^E$.",
+   "text": "Step 2 and step 10 say exactly that $j$ is a Dwyer--Kan equivalence. Apply the existing two-out-of-six theorem to the three composable maps $1_W:W\\to W$, $j:W\\to A$, and $p_i:A\\to W$. Their successive composites are $j$ and $p_i j=1_W$, both Dwyer--Kan equivalences (identity maps induce identity functors and identity mapping-space maps). The theorem gives that $p_i$ is a Dwyer--Kan equivalence, for $i=0,1$. Step 1 already supplies the asserted Segal condition on $W^E$.",
    "uses": [
     "lem-coef-segal-dk-two-out-of-six"
    ],
@@ -136,7 +167,9 @@
   }
  ],
  "proof_deps": [
+  "lem-coef-kan-component-restriction-fibration",
   "lem-coef-kan-fibration-arbitrary-base-fibers",
+  "lem-coef-kan-pullback-fibration-invariance",
   "lem-coef-kan-quillen-right-proper",
   "lem-coef-reedy-model-structure",
   "lem-coef-segal-cartesian-exponent",
@@ -215,7 +248,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-segal-categorical-equivalence-dk",
@@ -240,17 +273,17 @@
   "date": "2026-10-17",
   "item": "lem-coef-segal-cotensor-evaluation-dk",
   "worker": "stage1",
-  "summary": "Statement unchanged. Expanded Rezk Lemma 13.9 without citing its parent Proposition 13.8: explicit categorical contraction for homotopy categories, classifier homotopy-monomorphism test, strict two-triangle arrow-space calculation, identity-edge trivial fibrations, and iterated homotopy-fiber cancellation. Existing nodes suffice; zero new nodes. Mathlib searches repeated through msearch.py; no attachment or leaf.",
+  "summary": "Repair of the human return on the 2440-character step 6. Statement and Lean record unchanged; original steps 1–5 retained verbatim and the final component cancellation and DK conclusion retained with step references updated. Extracted the component-restriction/fiber-identification lemma as one new statement-only node, and split the original pullback argument into four short steps citing that node, existing strict-pullback invariance for products, right properness, and the arbitrary-base fiberwise criterion. No new Mathlib leaf; all new-node searches were run through msearch.py.",
   "blueprint": "Proof paragraph 2, displayed derived coefficient adjunction, mapping-space foundation through the cosimplicial-frame/cofibrant-inversion and Rezk-completion chain. Supporting the categorical-equivalence criterion used in Rezk Section 14, proof of assertions (1) and (3); this is additional Segal-space infrastructure, not a literal assertion of the blueprint paragraph. Specific supporting lemma for Proposition 13.8: Lemma 13.9, the three maps W -> W^E -> W.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q25-e9262cf3c",
-  "group": "Q25",
+  "reviewer": "NT-cc-Q02-107dead87",
+  "group": "Q02",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-e9262cf3c (reviewer sub-agent of L); spot-checked: Read the item in full, the seven cited statements, the parent and the unit sk-prop-sf-biduality-general. Also read Rezk at the cited place from the Rochester PDF (Lemma 12.4, §13.1 E, Proposition 13.8 first paragraph, Lemma 13.9 full proof, pp. 30-32). The statement is unchanged and agrees with Rezk 13.9. I tested it on empty W, the discrete nerve of BG (DK equivalence but not levelwise) and the discrete nerve of [1]. Steps 1-5 and 8 are correct: exponent-lemma fibrations; categorical contraction via h_i; classifier giving r_n as a weak equivalence onto V_eq; the two-triangle square, with d_2 T1 the source and d_0 T2 the target and s_1=(s_0,s_1), matching Rezk's square; identity-edge trivial fibrations, with all simplicial identities checked; two-out-of-six on 1_W, j, p_i. Fault (E5): step 6 identified hofib(T) with an iterated homotopy fiber 'by rearranging homotopy pullbacks' and called it an equality. That identification is not strict and no node states it. Repaired with existing same-unit nodes: T factors as a weak equivalence onto a union of components of M_B, through C_n ⊂ B_n, the pullback Q=A_0^2 ×_{C_0^2} C_1, right properness, two-out-of-three, and lem-coef-kan-fibration-arbitrary-base-fibers. Step 7 is adapted to this, and lem-coef-kan-homotopy-pullback-invariance is dropped from proof_deps. Minor fix: step 2 now justifies that U×E is a Segal space (cites the Reedy node). No cycle: the new citation's closure does not reach the item. No new nodes, no SGA, no off-unit citations, no tool_uses. Corrected file: fixes/dag/nodes/sec-six-functors/lem-coef-segal-cotensor-evaluation-dk.json.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-107dead87 (reviewer sub-agent of L); spot-checked: Read the item and the new node lem-coef-kan-component-restriction-fibration in full, the statements of all 8 cited nodes, and the unit sk-prop-sf-biduality-general. All citations are in this unit, so no tool_uses are needed. The new node is correct: the filler of a horn of dimension ≥1 lies in the component of a horn vertex; a fibre is X_y∩X[S], a union of components of X_y; Z[S] is Kan by applying the node to Z→pt. I tested it on empty S, empty Z, a discrete fibration with several components and a non-Kan Y. rg over dag/nodes for components, homotopy monomorphisms and Kan restriction found no duplicate. The node is statement-only, its blueprint from/via is correct and same_as is []. It is strictly smaller than the item and is the citation the human return asked for. Every step of the item checks: step 4 (square = two triangles, s_1=(s_0,s_1)); step 5 (identity-edge pullbacks, sections, two-out-of-three, fibre over (x,y)); step 6 (C_1 lands in C_0^2, c in C_0^2); step 7 (pullback invariance with pt cospans); step 8 (right properness, two-out-of-three); step 9 (arbitrary-base fibres, Q_b≅D); step 10 (π₀ surjectivity gives D=M_B); step 11 (two-out-of-six on 1_W, j, p_i). Edge cases checked: empty W, empty fibres, non-complete W. There is no cycle and proof_deps equals the union of the uses. Rezk Lemma 13.9 is not in literature/ and network access is blocked here, so I could not read it; the proof is correctly marked agent-origin with a WANTED entry, and I checked it mathematically. No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-17",

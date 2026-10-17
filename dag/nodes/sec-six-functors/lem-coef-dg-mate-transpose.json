@@ -11,9 +11,73 @@
   "def-weil-pbc-adjunction-mate",
   "lem-coef-enhanced-localization-universal"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P=GR_1$, $Q=H$, $L=L_2$, $R=R_2$, $\\eta=\\eta_2$ and $\\epsilon=\\epsilon_2$. Work in the enhanced functor categories $\\mathcal E=\\operatorname{Fun}_{\\mathcal V}(\\mathcal D_1,\\mathcal C_2)$ and $\\mathcal F=\\operatorname{Fun}_{\\mathcal V}(\\mathcal D_1,\\mathcal D_2)$, where $\\mathcal V=\\mathbf D(\\mathbf Z)$. The coherent composition, evaluation and currying in [lem-coef-enriched-category-tensor-calculus] give postcomposition by $L,R$, the whiskered transformations $\\eta P$ and $\\epsilon Q$, and morphisms of mapping objects\n$$T:\\mathcal E(P,RQ)\\longrightarrow\\mathcal F(LP,Q),\\quad b\\longmapsto(\\epsilon Q)(Lb),$$\n$$S:\\mathcal F(LP,Q)\\longrightarrow\\mathcal E(P,RQ),\\quad a\\longmapsto(Ra)(\\eta P).$$\nHere the formulas denote composites of enriched mapping-object morphisms, using the points representing $\\eta P$ and $\\epsilon Q$ in enriched composition. They therefore act on the whole derived objects, including generalized inputs from any object of $\\mathcal V$, rather than only on degree-zero morphism classes. All these categories and inputs fit in the enlarged universes of the hypothesis.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent proof of enhanced mate transpose, step 1; expands the specified adjunction-mate calculation underlying proof paragraph 2."
+   }
+  },
+  {
+   "text": "Compute the composite on the entire object $\\mathcal F(LP,Q)$ using the coherent composition of [lem-coef-enriched-category-tensor-calculus]:\n$$TS(a)=(\\epsilon Q)(LRa)(L\\eta P)\\simeq a(\\epsilon LP)(L\\eta P)\\simeq a.$$\nThe first homotopy is the enriched naturality homotopy of the given counit, with variable input $a:LP\\to Q$; it holds as a homotopy of mapping-object morphisms. The second is the given coherent triangle $(\\epsilon L)(L\\eta)\\simeq\\operatorname{id}_L$, whiskered by $P$ and then composed with $a$. Thus this is a homotopy $TS\\simeq\\operatorname{id}$ of morphisms in $\\mathcal V$. No assertion that equality of object components alone detects such a homotopy is used.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent proof of enhanced mate transpose, step 2; expands the specified adjunction-mate calculation underlying proof paragraph 2."
+   }
+  },
+  {
+   "text": "On $\\mathcal E(P,RQ)$ the other composite is\n$$ST(b)=(R\\epsilon Q)(RLb)(\\eta P)\\simeq(R\\epsilon Q)(\\eta RQ)b\\simeq b.$$\nUse enriched naturality of the given unit for the variable input $b:P\\to RQ$, followed by the given triangle $(R\\epsilon)(\\eta R)\\simeq\\operatorname{id}_R$. Coherent composition in [lem-coef-enriched-category-tensor-calculus] lets us whisker and compose these homotopies as homotopies of morphisms of mapping objects. Hence $ST\\simeq\\operatorname{id}$. Together with step 2, $T,S$ are inverse equivalences of the full enhanced transformation objects. These are precisely the counit and unit transposition formulas of the specified enhanced adjunction.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent proof of enhanced mate transpose, step 3; expands the specified adjunction-mate calculation underlying proof paragraph 2."
+   }
+  },
+  {
+   "text": "Set $c=(H\\epsilon_1)(\\alpha R_1):LP\\to Q$. By functoriality of $R_2$, the displayed word for the mate is\n$$\\beta=(R_2H\\epsilon_1)(R_2\\alpha R_1)(\\eta_2GR_1)\\simeq R_2(c)(\\eta_2P)=S(c).$$\nThe order and domains are exactly those in [def-weil-pbc-adjunction-mate]; this reference fixes the mate convention, and its ordinary bijection is not being invoked for enhanced objects. The coherent composition and functoriality of [lem-coef-enriched-category-tensor-calculus] give the displayed identification. Apply the homotopy $TS\\simeq\\operatorname{id}$ from step 2 to $c$. It supplies the specified comparison\n$$T(\\beta)\\simeq c=(H\\epsilon_1)(\\alpha R_1),$$\nwith source $L_2GR_1$ and target $H$, as required.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent proof of enhanced mate transpose, step 4; expands the specified adjunction-mate calculation underlying proof paragraph 2."
+   }
+  },
+  {
+   "text": "For a parameter shape $K$, form the same operations with $K$-diagrams of the given data, units, counits and triangle homotopies. By [lem-coef-enriched-category-tensor-calculus], cotensors retain coherent natural transformations and satisfy $\\operatorname{Fun}_{\\mathcal V}(\\mathcal A,\\mathcal B^K)\\simeq\\operatorname{Fun}_{\\mathcal V}(\\mathcal A,\\mathcal B)^K$; composition, evaluation and currying are coherent. For a map of parameter shapes $u:J\\to K$, evaluation of a diagram on $u$ sends each composite in $T,S$ to the same composite of the restricted inputs: in particular $u^*((\\epsilon Q)(Lb))\\simeq(u^*\\epsilon\\,u^*Q)((u^*L)(u^*b))$, and the analogous formula holds for $S$. It also restricts the naturality homotopies and the two given triangle homotopies used in steps 2 and 3. Restricting the identity $\\beta\\simeq S(c)$ and its $TS$ homotopy therefore gives precisely step 4 for the restricted data. Taking $K=\\Delta^n$ and $u$ a face or degeneracy shows that these comparisons include the simplices and their homotopies, with their compatibility under successive restrictions furnished by the same coherent evaluation. No choices of inverses or componentwise homotopies are made after restricting.",
+   "uses": [
+    "lem-coef-enriched-category-tensor-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+    "place": "Agent proof of enhanced mate transpose, step 5; expands the specified adjunction-mate calculation underlying proof paragraph 2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-enriched-category-tensor-calculus",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Historical master proof paragraph 2, compatibility of specified finite units and counits before derived inverse limit. The enhanced generalization is proved here by explicit mapping-object compositions and triangle homotopies; the blueprint itself does not prove this foundation."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +127,52 @@
    "results": "5 hits: 84, 123, 128, 170, 209",
    "date": "2026-10-17",
    "verdict": "no match: inspected results supply ordinary model, monoidal or categorical mate infrastructure, not this model-enriched statement with its stated hypotheses and coherent conclusions."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|homEquiv.*[Nn]at|enriched.*[Aa]djunction",
+   "results": "{\"t\": \"2026-10-17T09:06:34Z\", \"tool\": \"grep\", \"query\": \"mateEquiv|homEquiv.*[Nn]at|enriched.*[Aa]djunction\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Endofunctor/Algebra.lean\", \"Mathlib/CategoryTheory/Endofunctor/Algebra.lean\", \"Mathlib/CategoryTheory/Endofunctor/Algebra.lean\", \"Mathlib/CategoryTheory/Endofunctor/Algebra.lean\", \"Mathlib/CategoryTheory/Endofunctor/Algebra.lean\", \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\"], \"digest\": \"ff88acc736c32544\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Mates.lean:84-128 states ordinary mate equivalences and component formulas; Enriched/FunctorCategory.lean:16-28,43-70,90-91 concerns enriched ordinary categories and ordinary ends. Neither provides the enhanced D(Z)-mapping-object equivalence with coherent parameter simplices."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"counit\"",
+   "results": "{\"t\": \"2026-10-17T09:06:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"mateEquiv\\\", \\\"counit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\"], \"digest\": \"46db0dd75d6df456\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Mates.lean:84-128 states ordinary mate equivalences and component formulas; Enriched/FunctorCategory.lean:16-28,43-70,90-91 concerns enriched ordinary categories and ordinary ends. Neither provides the enhanced D(Z)-mapping-object equivalence with coherent parameter simplices."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction transpose of natural transformations is compatible with coherent parameters and derived enriched mapping objects",
+   "results": "{\"t\": \"2026-10-17T09:06:34Z\", \"tool\": \"leansearch\", \"query\": \"Adjunction transpose of natural transformations is compatible with coherent parameters and derived enriched mapping objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedη.congr_simp\", \"TopCat.Presheaf.pushforwardToOfIso\", \"CategoryTheory.ParametrizedAdjunction.mk\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"CategoryTheory.Adjunction.toCat_unit_toNatTrans\", \"CategoryTheory.Adjunction.derivedε.congr_simp\", \"CategoryTheory.EnrichedNatTrans\"], \"digest\": \"0500836b5819586d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Mates.lean:84-128 states ordinary mate equivalences and component formulas; Enriched/FunctorCategory.lean:16-28,43-70,90-91 concerns enriched ordinary categories and ordinary ends. Neither provides the enhanced D(Z)-mapping-object equivalence with coherent parameter simplices."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Enriched adjunction between infinity categories induces equivalence of natural transformation mapping objects by unit and counit",
+   "results": "{\"t\": \"2026-10-17T09:06:36Z\", \"tool\": \"leanfinder\", \"query\": \"Enriched adjunction between infinity categories induces equivalence of natural transformation mapping objects by unit and counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv_counitIso\", \"CategoryTheory.Enriched.FunctorCategory.functorHomEquiv_apply_app\", \"CategoryTheory.Enriched.FunctorCategory.homEquiv\", \"CategoryTheory.Enriched.FunctorCategory.functorHomEquiv_id\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv_unitIso\", \"CategoryTheory.EnrichedOrdinaryCategory.homEquiv\", \"CategoryTheory.Enriched.FunctorCategory.homEquiv_apply_π\"], \"digest\": \"42a92c4b92ffaaa0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Mates.lean:84-128 states ordinary mate equivalences and component formulas; Enriched/FunctorCategory.lean:16-28,43-70,90-91 concerns enriched ordinary categories and ordinary ends. Neither provides the enhanced D(Z)-mapping-object equivalence with coherent parameter simplices."
+  },
+  {
+   "tool": "grep",
+   "query": "def mateEquiv|theorem mateEquiv_counit|theorem mateEquiv_counit_symm",
+   "results": "{\"t\": \"2026-10-17T09:08:20Z\", \"tool\": \"grep\", \"query\": \"def mateEquiv|theorem mateEquiv_counit|theorem mateEquiv_counit_symm\", \"sub\": \"CategoryTheory/Adjunction/Mates.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"84\", \"123\", \"128\"], \"digest\": \"99cdd885484a9cec\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Mates.lean:84-128 states ordinary mate equivalences and component formulas; Enriched/FunctorCategory.lean:16-28,43-70,90-91 concerns enriched ordinary categories and ordinary ends. Neither provides the enhanced D(Z)-mapping-object equivalence with coherent parameter simplices."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unit counit formulas define mutually inverse maps on enriched natural transformation complexes by triangle identities",
+   "results": "{\"t\": \"2026-10-17T09:08:22Z\", \"tool\": \"leanfinder\", \"query\": \"Unit counit formulas define mutually inverse maps on enriched natural transformation complexes by triangle identities\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Enriched.FunctorCategory.homEquiv\", \"CategoryTheory.Enriched.FunctorCategory.functorHomEquiv_id\", \"CategoryTheory.Enriched.FunctorCategory.functorHomEquiv_apply_app\", \"CategoryTheory.Enriched.FunctorCategory.functorHomEquiv_comp\", \"CategoryTheory.Enriched.FunctorCategory.homEquiv_apply_π\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv_counitIso\", \"CategoryTheory.Enriched.FunctorCategory.homEquiv_id\", \"CategoryTheory.Enriched.FunctorCategory.homEquiv_apply_π_assoc\"], \"digest\": \"1421c5289b9cbb36\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Mates.lean:84-128 states ordinary mate equivalences and component formulas; Enriched/FunctorCategory.lean:16-28,43-70,90-91 concerns enriched ordinary categories and ordinary ends. Neither provides the enhanced D(Z)-mapping-object equivalence with coherent parameter simplices."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-dg-derived-quillen-calculus",
@@ -87,5 +193,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-dg-mate-transpose",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed transpose and inverse on enhanced transformation objects, wrote both inverse homotopies by enriched naturality and the specified triangles, substituted the exact mate word, and checked restriction on coherent parameter diagrams. Reused the existing enriched tensor/functor-category calculus; no new node or ordinary-only substitute for the enhanced assertion. Searched the Lean project, entire DAG and blueprint, and Mathlib with two semantic phrasings plus Loogle, LeanSearch and grep.",
+  "blueprint": "Realizes the enhanced specified unit/counit mate calculation supporting historical master proof paragraph 2 of prop-coef-integral-exceptional-adjoint, through lem-coef-dg-derived-quillen-calculus. The main-20261015 ancestor has moved to sk-thm-sf-package and contains the statement only; preserved the historical blueprint ancestry and maintainer unit.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-3bc598f62",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-3bc598f62 (reviewer sub-agent of L); spot-checked: I read the item, its cited statements (lem-coef-enriched-category-tensor-calculus, def-weil-pbc-adjunction-mate, lem-coef-enhanced-localization-universal), the source paragraph (master prop-coef-integral-exceptional-adjoint, proof paragraph 2) and the citer lem-coef-dg-derived-quillen-calculus step 10. Step 1: with P=GR1 and Q=H, T(b)=(eps Q)(Lb) and S(a)=(Ra)(eta P) are well-typed on Fun_V(D1,C2) and Fun_V(D1,D2). Step 2: TS is homotopic to id, by counit naturality plus the triangle (eps L)(L eta)=id. Step 3: ST is homotopic to id, by unit naturality plus the triangle (R eps)(eta R)=id. Step 4: beta=R2(c) eta2 P=S(c) with c=(H eps1)(alpha R1), so T(beta) is equivalent to c, and the directions match def-weil-pbc-adjunction-mate. Step 5: restriction is coherent evaluation on cotensors, and the cotensor identity is in the cited node. Every hypothesis used (enriched naturality of the unit and counit, the coherent triangles) is assumed in the statement. Small cases checked: identity adjunctions, zero transformations, empty D1, non-invertible alpha, and the ordinary case against Mathlib mateEquiv. The delivery has no new nodes. lem-cbc-enhanced-equivalence-square-mates, lem-coef-cartesian-section-adjoint-mates and lem-coef-dg-mate-pasting are not duplicates. The route stays in the unit (the only off-unit node is a definition that is a Mathlib leaf), so no tool_uses are needed. There is no SGA citation, and as a non-target node it has no base-change or coefficient check. No fixes were made."
  }
 }

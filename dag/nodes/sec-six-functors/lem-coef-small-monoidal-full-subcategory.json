@@ -12,9 +12,112 @@
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-monoidal-infinity-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $S=N(\\Delta^{\\mathrm{op}})$, $E=D^\\otimes$, and $q=p|_E$. A full subcategory has exactly the simplices whose vertices are in its object class. Hence every inner-horn lifting problem for $q$ has an ambient filler all of whose vertices already belong to $E$; this filler lies in $E$. Thus $q$ is an inner fibration and $E$ is a quasicategory. For two objects of $E$, their right-pinched mapping simplicial sets in $E$ and in $\\mathcal V^\\otimes$ are identical. Restrict the ambient Segal equivalence at $[n]$ to the full subcategories with all coordinates in $D$. An ambient quasi-inverse sends $D^n$ to $E_{[n]}$, since its inert projections are equivalent to the input coordinates and $D$ is replete; the unit and counit also restrict by fullness. Consequently $E_{[n]}\\simeq D^n$. This includes $E_{[0]}\\simeq *$ and $E_{[1]}=D$, since the only projection at $[1]$ is its identity.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-fibrations",
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/2006.08269v2",
+    "place": "Proposition 7.15, final proof paragraph, and Remark 7.17; general restriction argument expanded by the agent"
+   }
+  },
+  {
+   "text": "For a base arrow $\\alpha:[n]\\to[m]$, put $a=\\alpha^{\\mathrm{op}}:[m]\\to[n]$. The coherent block formula of [lem-coef-monoidal-block-projection-coherence] says that its $i$th output is the tensor of the consecutive list $x_{a(i-1)+1},\\ldots,x_{a(i)}$. Each such output belongs to $D$: induct on the length of the list, using the unit for length zero, the input for length one, and binary tensor closure for the induction step. Repleteness removes the choices of Segal identifications and parenthesization. For $m=0$ the target is automatically in $E_{[0]}$. Therefore every ambient cocartesian lift with source in $E$ has target in $E$. This uses the block formula for arbitrary base arrows, including empty blocks and discarded initial or final inputs, rather than assuming only active arrows occur.",
+   "uses": [
+    "lem-coef-monoidal-block-projection-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2006.08269v2",
+    "place": "Proposition 7.15, final proof paragraph, and Remark 7.17; general restriction argument expanded by the agent"
+   }
+  },
+  {
+   "text": "Take an ambient cocartesian lift $v:x\\to z$ of any base arrow with $x\\in E$. Its target lies in $E$ by step 2. Any outer-horn lifting problem that tests cocartesianness of $v$ for $q$ is an ambient lifting problem; its ambient filler has the prescribed vertices and hence lies in the full subcategory $E$. Thus $v$ is $q$-cocartesian. Since such a lift exists for every source and every outgoing base arrow, $q$ is a cocartesian fibration.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/2006.08269v2",
+    "place": "Proposition 7.15, final proof paragraph, and Remark 7.17; general restriction argument expanded by the agent"
+   }
+  },
+  {
+   "text": "Conversely, let $u:x\\to y$ be any $q$-cocartesian edge over $\\alpha$. Choose the ambient lift $v:x\\to z$ of step 3. Apply [lem-coef-infinity-cocartesian-composition-initiality] to $q$: both $u$ and $v$ are initial in the same lift category $L(x,\\alpha)$, so their universal comparison supplies an equivalence $h:z\\to y$ in the target fiber and a triangle $hv\\simeq u$. The inverse and its triangles remain in the ambient category by fullness. Precomposition with $h$ and with its inverse are homotopy inverse maps on ambient mapping spaces: associativity and the inverse triangles identify their composites with precomposition by identity edges, which is homotopic to the identity by [lem-coef-infinity-mapping-composition]. Its base arrow is the identity, so the mapping-space square for $h$ is a homotopy pullback. The criterion [lem-coef-infinity-cocartesian-mapping-criterion] makes $h$ ambient cocartesian. The composition clause of the first cited node, applied now to $p$ and this triangle, makes $u$ ambient cocartesian. This proves that inclusion preserves every cocartesian edge, not just the chosen ambient lifts.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2006.08269v2",
+    "place": "Proposition 7.15, final proof paragraph, and Remark 7.17; general restriction argument expanded by the agent"
+   }
+  },
+  {
+   "text": "The Segal equivalences were proved in step 1. For the relative-limit axiom, choose any $q$-cocartesian inert projections out of $c\\in E_{[n]}$. Step 4 makes them ambient cocartesian. For any test object $d\\in E$ and any base arrow $\\phi:p(d)\\to[n]$, all mapping spaces and their maps to the base are identical to the ambient ones by fullness. Thus the ambient equivalence $\\operatorname{Map}^{\\phi}(d,c)\\simeq\\prod_i\\operatorname{Map}^{\\rho_i\\phi}(d,c_i)$ is precisely the required equivalence in $E$. The empty product for $n=0$ is included. Together with step 3 this verifies every clause of the monoidal definition for $q$.",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/2006.08269v2",
+    "place": "Proposition 7.15, final proof paragraph, and Remark 7.17; general restriction argument expanded by the agent"
+   }
+  },
+  {
+   "text": "The nerve $S$ is $\\mathcal U$-small: the objects of $\\Delta$ are the natural numbers, each morphism set consists of maps between finite ordered sets, and each set of finite strings of such maps is small. Each fiber $E_{[n]}\\simeq D^n$ is essentially $\\mathcal U$-small. Indeed an equivalence $D_0\\simeq D$ with $D_0$ small, supplied by the hypothesis on $D$, gives the finite product equivalence $D_0^n\\simeq D^n$, including $D_0^0=*$. Apply [lem-coef-small-cocartesian-model] to $q$ to obtain a small cocartesian fibration $r:C^\\otimes\\to S$ and an equivalence $F:C^\\otimes\\to E$ over $S$, preserving cocartesian edges and inducing equivalences $F_{[n]}$ on all fibers. No assumption that the original total simplicial set $E$ was already small is used.",
+   "uses": [
+    "def-coef-presentable-infinity-category",
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-small-cocartesian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 3.3.2.3, property (*′), cocartesian dual, and Theorem 3.2.0.1; universe reduction isolated in lem-coef-small-cocartesian-model, applied to the small-model assertion underlying Chu–Haugseng Remark 7.17"
+   }
+  },
+  {
+   "text": "Set $C=C^\\otimes_{[1]}$. Because $F$ preserves cocartesian inert edges, its fiber equivalences identify the Segal map for $C^\\otimes$ with the Segal map for $E$, giving $C^\\otimes_{[n]}\\simeq C^n$. The total equivalence $F$ induces mapping-space equivalences by [lem-cbc-enhanced-functor-cone-calculus]. These lie over the same discrete base mapping sets, so they induce equivalences on the fibers over each base arrow; a weak equivalence over a discrete set is a weak equivalence on each of its components over that set. The relative-limit formulas of step 5 therefore give exactly the relative-limit formulas for $C^\\otimes$. Hence $r$ is monoidal. The composite $C^\\otimes\\xrightarrow F E\\hookrightarrow\\mathcal V^\\otimes$ preserves all cocartesian edges by steps 4 and 6, so its restriction $j:C\\to\\mathcal V$ is strong monoidal. Its fiber factor $C\\xrightarrow{F_{[1]}}D$ is an equivalence and $D\\hookrightarrow\\mathcal V$ is full, so $j$ is fully faithful; its essential image is exactly the given replete $D$.",
+   "uses": [
+    "def-coef-monoidal-infinity-category",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/2006.08269v2",
+    "place": "Proposition 7.15, final proof paragraph, and Remark 7.17; general restriction argument expanded by the agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "def-coef-monoidal-infinity-category",
+  "lem-coef-monoidal-block-projection-coherence",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "def-coef-presentable-infinity-category",
+  "lem-coef-small-cocartesian-model",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/2006.08269v2",
+  "place": "Proposition 7.15 final proof sentence and Remark 7.17, expanded using the cited existing block-coherence and cocartesian-calculus statements; source not archived under literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +160,52 @@
    "results": "{\"t\": \"2026-10-17T07:30:02Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ObjectProperty.fullMonoidalSubcategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.ObjectProperty.fullMonoidalSubcategory\", \"CategoryTheory.ObjectProperty.fullBraidedSubcategory\", \"CategoryTheory.ObjectProperty.fullSymmetricSubcategory\", \"CategoryTheory.ObjectProperty.monoidalι\", \"CategoryTheory.ObjectProperty.fullMonoidalClosedSubcategory\", \"CategoryTheory.ObjectProperty.instMonoidalPreadditiveFullSubcategory\", \"CategoryTheory.ObjectProperty.instBraidedFullSubcategoryι\", \"CategoryTheory.ObjectProperty.instMonoidalFullSubcategoryιOfLE\"], \"digest\": \"a6efb861454f3069\"}",
    "date": "2026-10-17",
    "verdict": "no match: hits concern ordinary monoidal categories or the ordinary category of simplicial sets, not a cocartesian monoidal quasicategory and its small replacement. Read Mathlib/CategoryTheory/Monoidal/Subcategory.lean:39-104 and Category.lean:1007-1019."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cocartesian fibration over a small quasicategory with locally small total space and essentially small fibers admits a small equivalent cocartesian fibration over the same base preserving cocartesian edges",
+   "results": "{\"t\": \"2026-10-17T08:53:09Z\", \"tool\": \"leanfinder\", \"query\": \"A cocartesian fibration over a small quasicategory with locally small total space and essentially small fibers admits a small equivalent cocartesian fibration over the same base preserving cocartesian edges\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CostructuredArrow.essentiallySmall\", \"CategoryTheory.Functor.IsCocartesian.codomainUniqueUpToIso\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.universal_property\", \"CategoryTheory.Functor.IsCocartesian.of_iso_comp\"], \"digest\": \"8e1e33002329bfa7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary categorical SmallModel/fibered-category declarations and basic quasicategory definitions do not supply a cocartesian small model over a fixed base. Read Mathlib/CategoryTheory/EssentiallySmall.lean:48-68, CategoryTheory/FiberedCategory/Cocartesian.lean:48-75 and AlgebraicTopology/Quasicategory/Basic.lean (Quasicategory definition)."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SmallModel",
+   "results": "{\"t\": \"2026-10-17T08:53:09Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SmallModel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.SmallModel\", \"CategoryTheory.smallCategorySmallModel\", \"CategoryTheory.equivSmallModel\", \"CategoryTheory.instLocallySmallSmallModel\", \"CategoryTheory.hasSheafifyEssentiallySmallSite\", \"CategoryTheory.hasSheafComposeEssentiallySmallSite\", \"CategoryTheory.smallSheafify\", \"CategoryTheory.smallSheafificationAdjunction\"], \"digest\": \"ad51587a32d0eed8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary categorical SmallModel/fibered-category declarations and basic quasicategory definitions do not supply a cocartesian small model over a fixed base. Read Mathlib/CategoryTheory/EssentiallySmall.lean:48-68, CategoryTheory/FiberedCategory/Cocartesian.lean:48-75 and AlgebraicTopology/Quasicategory/Basic.lean (Quasicategory definition)."
+  },
+  {
+   "tool": "grep",
+   "query": "cocartesian.*small|small.*cocartesian|essentially.*small.*fiber",
+   "results": "{\"t\": \"2026-10-17T08:53:09Z\", \"tool\": \"grep\", \"query\": \"cocartesian.*small|small.*cocartesian|essentially.*small.*fiber\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary categorical SmallModel/fibered-category declarations and basic quasicategory definitions do not supply a cocartesian small model over a fixed base. Read Mathlib/CategoryTheory/EssentiallySmall.lean:48-68, CategoryTheory/FiberedCategory/Cocartesian.lean:48-75 and AlgebraicTopology/Quasicategory/Basic.lean (Quasicategory definition)."
+  },
+  {
+   "tool": "leansearch",
+   "query": "small model for a cocartesian fibration with essentially small fibers",
+   "results": "{\"t\": \"2026-10-17T08:53:10Z\", \"tool\": \"leansearch\", \"query\": \"small model for a cocartesian fibration with essentially small fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SmallModel\", \"CategoryTheory.Functor.IsFibered.toIsPreFibered\", \"CategoryTheory.smallCategorySmallModel\", \"CategoryTheory.Functor.IsFibered\", \"CategoryTheory.CostructuredArrow.essentiallySmall\", \"CategoryTheory.Functor.IsFibered.of_exists_isStronglyCartesian\", \"HasFibers.noConfusion\", \"CategoryTheory.locallySmall_self\"], \"digest\": \"c15cc942408e1336\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary categorical SmallModel/fibered-category declarations and basic quasicategory definitions do not supply a cocartesian small model over a fixed base. Read Mathlib/CategoryTheory/EssentiallySmall.lean:48-68, CategoryTheory/FiberedCategory/Cocartesian.lean:48-75 and AlgebraicTopology/Quasicategory/Basic.lean (Quasicategory definition)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Shrink the universe of the total quasicategory of a cocartesian fibration over a small base when each fiber is equivalent to a small quasicategory",
+   "results": "{\"t\": \"2026-10-17T09:02:06Z\", \"tool\": \"leanfinder\", \"query\": \"Shrink the universe of the total quasicategory of a cocartesian fibration over a small base when each fiber is equivalent to a small quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat\", \"CategoryTheory.CostructuredArrow.essentiallySmall\", \"CategoryTheory.Nerve.quasicategory\", \"SSet.StrictSegal.quasicategory\", \"CategoryTheory.CostructuredArrow.instSmallOfLocallySmall\", \"SSet.StrictSegal.quasicategory'\", \"SSet.QCat.bicategory\", \"SSet.Quasicategory\"], \"digest\": \"b3c1577f12ed3023\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary categorical SmallModel/fibered-category declarations and basic quasicategory definitions do not supply a cocartesian small model over a fixed base. Read Mathlib/CategoryTheory/EssentiallySmall.lean:48-68, CategoryTheory/FiberedCategory/Cocartesian.lean:48-75 and AlgebraicTopology/Quasicategory/Basic.lean (Quasicategory definition)."
+  },
+  {
+   "tool": "grep",
+   "query": "quasicategory.*(small|fibr)|small.*quasicategory",
+   "results": "{\"t\": \"2026-10-17T09:02:06Z\", \"tool\": \"grep\", \"query\": \"quasicategory.*(small|fibr)|small.*quasicategory\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary categorical SmallModel/fibered-category declarations and basic quasicategory definitions do not supply a cocartesian small model over a fixed base. Read Mathlib/CategoryTheory/EssentiallySmall.lean:48-68, CategoryTheory/FiberedCategory/Cocartesian.lean:48-75 and AlgebraicTopology/Quasicategory/Basic.lean (Quasicategory definition)."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-monoidal-compact-generators",
@@ -86,5 +231,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-small-monoidal-full-subcategory",
+  "worker": "stage1",
+  "summary": "Expanded restriction, all-edge preservation, relative Segal mapping products, and small-model transport without changing the statement. Reused the existing block-coherence and cocartesian-calculus nodes. Added one statement-only general small cocartesian presentation lemma, searched in Mathlib and across the DAG and blueprint.",
+  "blueprint": "Proof paragraph 2, finite coefficient mapping-complex adjunction before R lim: general categorical input to the enriched tensor cocontinuity foundation; Proposition 7.15; restricted-Yoneda argument in proof of Corollary 7.16; Higher Topos Theory Proposition 5.4.2.2 and section 5.3.5; hidden general monoidal restriction and small-model argument of the compact-density input, old step 5; Chu–Haugseng Proposition 7.15 final sentence and Remark 7.17.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic equivalence-to-mapping-space calculus used in step 7 to transport the relative-limit formula; this unit has no replacement for that basic calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-d3bb1f5b8",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-d3bb1f5b8 (reviewer sub-agent of L); spot-checked: I read the item, all seven steps, the new node lem-coef-small-cocartesian-model and the statement of every cited node. I checked both sources online, since neither is archived: Chu–Haugseng arXiv:2006.08269v2 Prop 7.15 (proof: the full subcategory inherits cocartesian morphisms), Cor 7.16 and Rem 7.17; and HTT Remark 3.3.2.3 property (*′), printed p.211, from Lurie's PDF. Step checks: (1) full-subcategory horn fillers stay in D^⊗; the Segal equivalence restricts to the replete preimage D^n. (2) The block-transport clause of lem-coef-monoidal-block-projection-coherence plus induction on block length, using the unit and binary closure. (3) Ambient Λ^n_0 fillers lie in the full subcategory. (4) The initiality comparison h is an equivalence over id_b; the mapping criterion makes h cocartesian, and the 2-of-3 clause then makes every q-cocartesian edge ambient cocartesian. (5) Relative mapping spaces are identical by fullness, including n=0. (6) The new node's hypotheses hold: N(Δ^op) is small and E_[n]≃D_0^n. (7) Segal maps and relative limits transfer through F, which preserves cocartesian edges, and through equivalences of mapping spaces over discrete base sets; j is fully faithful with essential image D. The new node is true: it is the cocartesian dual of HTT (*′) followed by unstraightening over the small base. I tested it on S=pt, Δ^1, an empty base and empty fibers. It is statement-only and self-contained, and it is not a duplicate: I compared it with lem-coef-cocartesian-straightening, which covers only U-small total spaces, and with lem-coef-infinity-small-full-subcategory and the size-calculus nodes. It does not restate a clause of the item. The dependency closure has no cycle and no SGA source is used. I accept the declared tool_use lem-cbc-enhanced-functor-cone-calculus (sk-prop-sf-cbc), a generic black box giving mapping-space equivalences. FIX: the item's source.place cited HTT 5.4.1.7, which the proof does not use; I corrected it to HTT Rem 3.3.2.3 (*′) via lem-coef-small-cocartesian-model in fixes/dag/nodes/sec-six-functors/lem-coef-small-monoidal-full-subcategory.json. The statement and all other fields are unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

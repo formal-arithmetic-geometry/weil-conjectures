@@ -35,7 +35,7 @@
  ],
  "proof": [
   {
-   "text": "Let $T=Rc_{1!}Lc_2^*$ and let $v:TK\\to K$ be the exceptional adjoint of $u$ under the constructible adjunction supplied by its admissibility datum [def-trf-admissibility]. Only this specified adjunction is needed; the ordinary adjunctions used below are those of [fix-prop-adjunctions]. Put $K_U=j_!j^*K$, $K_Z=Ri_*i^*K$, and write $a:K_U\\to K$, $b:K\\to K_Z$ for the localization maps of [prop-sf-open-closed-triangle-all-stages]. All coefficients below remain in $D^b_{ctf}$ by [thm-sf-ctf-stability]. Put $V=c_2^{-1}(U)$ and let $e:V\\hookrightarrow C$ be its open immersion. Invariance says $V\\subset c_1^{-1}(U)$, so $c_1e=jh$ for a map $h:V\\to U$. The open base-change and composition clauses of [prop-functor-package] give\n$$TK_U\\simeq Rc_{1!}e_!(c_2|_V)^*j^*K\\simeq j_!Rh_!(c_2|_V)^*j^*K.$$\nThe vanishing $j^*Ri_*=0$ and the open adjunction in [det-sf-open-closed-sequence-ring-sheaf] and [prop-weil-open-closed-recollement-adjunctions] therefore give $\\operatorname{Hom}(TK_U,K_Z[m])=0$ for every integer $m$. Apply Hom to the target localization triangle, and to its image under the exact functor $T$: these vanishings give bijections\n$$\\operatorname{Hom}(TK_U,K_U)\\xrightarrow{a\\circ-}\\operatorname{Hom}(TK_U,K),\\qquad\n\\operatorname{Hom}(TK_Z,K_Z)\\xrightarrow{-\\circ Tb}\\operatorname{Hom}(TK,K_Z).$$\nThus there are unique $v_U,v_Z$ with $a v_U=v\\,Ta$ and $v_Z\\,Tb=bv$.",
+   "text": "Let $T=Rc_{1!}Lc_2^*$ and let $v:TK\\to K$ be the exceptional adjoint of $u$ under the constructible adjunction supplied by its admissibility datum [def-trf-admissibility]. Only this specified adjunction is needed; the ordinary adjunctions used below are those of [fix-prop-adjunctions]. Put $K_U=j_!j^*K$, $K_Z=Ri_*i^*K$, and write $a:K_U\\to K$, $b:K\\to K_Z$ for the localization maps of [prop-sf-open-closed-triangle-all-stages]. All coefficients below remain in $D^b_{ctf}$ by [thm-sf-ctf-stability]. Put $V=c_2^{-1}(U)$ and let $e:V\\hookrightarrow C$ be its open immersion. Invariance says $V\\subset c_1^{-1}(U)$, so $c_1e=jh$ for a map $h:V\\to U$. The open base-change and composition clauses of [prop-functor-package] give\n$$TK_U\\simeq Rc_{1!}e_!(c_2|_V)^*j^*K\\simeq j_!Rh_!(c_2|_V)^*j^*K.$$\nThe vanishing $j^*Ri_*=0$ and the open adjunction in [det-sf-open-closed-sequence-ring-sheaf] and [prop-weil-open-closed-recollement-adjunctions] therefore give $\\operatorname{Hom}(TK_U,K_Z[m])=0$ for every integer $m$. Apply the Hom exactness statements [lem-weil-pbc-hom-into-triangle-exact] and [lem-weil-pbc-hom-out-of-triangle-exact], including their rotations, to the target localization triangle and its image under the exact functor $T$. The adjacent groups are $\\operatorname{Hom}(TK_U,K_Z[m])$ with $m=0,-1$ or $0,1$, and vanish, so these exact sequences give bijections\n$$\\operatorname{Hom}(TK_U,K_U)\\xrightarrow{a\\circ-}\\operatorname{Hom}(TK_U,K),\\qquad\n\\operatorname{Hom}(TK_Z,K_Z)\\xrightarrow{-\\circ Tb}\\operatorname{Hom}(TK,K_Z).$$\nThus there are unique $v_U,v_Z$ with $a v_U=v\\,Ta$ and $v_Z\\,Tb=bv$.",
    "uses": [
     "fix-prop-adjunctions",
     "prop-sf-open-closed-triangle-all-stages",
@@ -43,7 +43,9 @@
     "prop-functor-package",
     "det-sf-open-closed-sequence-ring-sheaf",
     "prop-weil-open-closed-recollement-adjunctions",
-    "def-trf-admissibility"
+    "def-trf-admissibility",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-weil-pbc-hom-out-of-triangle-exact"
    ],
    "elementary": false,
    "source": {
@@ -52,19 +54,50 @@
    }
   },
   {
-   "text": "Identify these maps with the induced pieces. Under the displayed $TK_U=j_!N$ identification, restricting $v\\,Ta$ to $U$ gives the adjoint of $u|_U$ followed by the open counit. Since $j^*a$ is the identity under $j^*j_!\\simeq1$, the open adjunction says that $v_U$ is its extension by zero. For the closed piece put $D=(C\\times_{c_1,X}Z)_{\\mathrm{red}}$ with $g:D\\hookrightarrow C$. The restricted second leg factors through $Z$: affine locally every element of its defining ideal pulls back to an element in all prime ideals of the reduced source, hence to zero. Denote the two maps $D\\to Z$ by $d_1,d_2$. Base change for $Rc_{1!}$ and invariance under reduction [i-topology] give\n$$i^*TK\\simeq Rd_{1!}d_2^*i^*K.$$\nLet $w:Rd_{1!}d_2^*i^*K\\to i^*K$ be $i^*v$ under this identification. Its exceptional adjoint is the restriction $u|_Z$. Put $L=i^*K$ and use [def-trf-coefficient-pushforward] for the proper diagram $(i,g)$. Write $\\gamma:c_2^*Ri_*L\\to Rg_*d_2^*L$ for its ordinary half and $\\Xi:Rc_{1!}Rg_*\\simeq Ri_*Rd_{1!}$ for proper composition. The exceptional adjoint of the pushed coefficient map is explicitly\n$$q:TK_Z\\xrightarrow{Rc_{1!}\\gamma}Rc_{1!}Rg_*d_2^*L\\xrightarrow{\\Xi}Ri_*Rd_{1!}d_2^*L\\xrightarrow{Ri_*w}Ri_*L=K_Z.$$\nIndeed, substituting $\\delta\\circ Rg_*(u|_Z)\\circ\\gamma$ into the exceptional adjunction cancels its unit against its counit by [def-trf-admissibility], leaving this composite. Under the closed base-change identification $i^*TK_Z\\simeq Rd_{1!}d_2^*L$, the transpose of the first two arrows is the identity: the ordinary transpose of $\\gamma$ is\n$$g^*c_2^*Ri_*L=d_2^*i^*Ri_*L\\xrightarrow{d_2^*\\varepsilon_{i,L}}d_2^*L,$$\nwhere $\\varepsilon_{i,L}:i^*Ri_*L\\to L$ is invertible; the reduction unit and counit cancel under [i-topology]. Thus the transpose of $q$ under $i^*\\dashv Ri_*$ is $w$. Naturality of closed base change identifies $i^*Tb$ with $Rd_{1!}d_2^*(i^*b)$, and $i^*b$ becomes the identity by the ordinary triangle identity and the invertible closed counit. Hence the transpose of $q\\,Tb$ is $i^*v$, which is also the transpose of $bv$. Therefore $q\\,Tb=bv$ and uniqueness in step 1 gives $q=v_Z$. The ordinary transposes and cancellations here use [fix-prop-adjunctions] and [prop-weil-open-closed-recollement-adjunctions]. Consequently the adjoints of $v_U,v_Z$ are exactly $u^U,u^Z$.",
+   "text": "Apply [lem-trf-open-extension-adjoint] with $P=C$, $f=c_1$, $t=c_2$, $V=c_2^{-1}(U)$ and $L=j^*K$. It identifies the exceptional adjoint $p_U$ of $u^U$ with the extension by zero of the adjoint of $u|_U$, and gives $a p_U=v\\,Ta$. The first bijection of step 1 therefore gives $p_U=v_U$.",
    "uses": [
-    "prop-functor-package",
-    "i-topology",
-    "def-trf-coefficient-pushforward",
-    "prop-weil-open-closed-recollement-adjunctions",
-    "fix-prop-adjunctions",
+    "lem-trf-open-extension-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§1.5.9 and §5.3.3, identification of the open graded morphism"
+   }
+  },
+  {
+   "text": "Put $D=(C\\times_{c_1,X}Z)_{\\mathrm{red}}$ and $g:D\\hookrightarrow C$. Invariance makes the second leg factor through $Z$: affine locally its defining ideal pulls back into every prime ideal on $D$, hence to zero because $D$ is reduced. Write $d_1,d_2:D\\to Z$ for the two legs. Apply [lem-trf-reduced-closed-basechange-mate] with $f=c_1,t=c_2$. Its $B_K$ identifies $i^*TK$ with $Rd_{1!}d_2^*i^*K$. Put $L=i^*K$ and $w=i^*v\\circ B_K^{-1}$. By the definition of restriction in the source (Varshavsky §1.1.8(i)), $u|_Z$ is the exceptional adjoint of $w$ for the specified adjunction [def-trf-admissibility].",
+   "uses": [
+    "lem-trf-reduced-closed-basechange-mate",
     "def-trf-admissibility"
    ],
    "elementary": false,
    "source": {
     "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
-    "place": "§1.5.6(a), §1.5.9 and §5.3.3, identification of graded morphisms"
+    "place": "§1.1.8(i), §1.5.6(a) and §5.3.3, reduced closed restriction"
+   }
+  },
+  {
+   "text": "Use [lem-trf-proper-coefficient-adjoint] for the diagram $(i,g):(D,d)\\to(C,c)$, where both maps are closed immersions and hence proper. It gives the exceptional adjoint of $u^Z=[i,g]_!(u|_Z)$ as\n$$q:TK_Z\\xrightarrow{Rc_{1!}\\gamma}Rc_{1!}Rg_*d_2^*L\\xrightarrow{\\Xi}Ri_*Rd_{1!}d_2^*L\\xrightarrow{Ri_*w}Ri_*L=K_Z.$$\nHere $\\gamma$ and $\\Xi$ have exactly the types and normalization stated in [lem-trf-reduced-closed-basechange-mate]. This applies without assuming the second-leg square Cartesian.",
+   "uses": [
+    "lem-trf-proper-coefficient-adjoint",
+    "lem-trf-reduced-closed-basechange-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§1.1.6(a)(ii), §1.5.9 and §5.3.3, closed pushforward"
+   }
+  },
+  {
+   "text": "By [lem-trf-reduced-closed-basechange-mate], the ordinary transpose of $q$ under $i^*\\dashv Ri_*$ is $w\\circ S(\\varepsilon_{i,L})\\circ B_{K_Z}$, where $S=Rd_{1!}d_2^*$. Its last naturality equation says that the transpose of $q\\,Tb$ is $w B_K=i^*v$. The transpose of $bv$ is also $i^*v$, since the ordinary triangle identity of [fix-prop-adjunctions] gives $\\varepsilon_{i,L}\\circ i^*b=1_L$. Equality of transposes gives $q\\,Tb=bv$, so step 1 gives $q=v_Z$. Thus the exceptional adjoints of $v_U,v_Z$ are exactly $u^U,u^Z$.",
+   "uses": [
+    "lem-trf-reduced-closed-basechange-mate",
+    "fix-prop-adjunctions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.3.3, closed graded identification by uniqueness"
    }
   },
   {
@@ -82,7 +115,7 @@
    }
   },
   {
-   "text": "Apply [lem-trf-filtered-trace-additivity] to the filtered adjoint $\\widetilde v:T\\widetilde K\\to\\widetilde K$ constructed in step 3. The filtered comparison of [lem-trf-filtered-operations-hom] identifies our finite-coefficient category and operations with the classical filtered category transported from the étale site used in that lemma; its $u$ and $u_r$ are the exceptional adjoints of the underlying and graded maps, hence are $u$ and the $u^Z,u^U$ of step 3. Only grades zero and one can contribute, and step 3 identified them as $(K_Z,u^Z)$ and $(K_U,u^U)$. Its finite sum is therefore $\\operatorname{Tr}_c(u^Z)+\\operatorname{Tr}_c(u^U)$. Commutativity of addition in the target Hom group gives the order displayed in the statement. The traces here are the Verdier classes of [def-trf-trace-class] on the common fixed scheme, before integration or restriction to a geometric point. For the unit's local-term consequence, suppose additionally that $F$ is proper over $s$, and let $B\\subseteq F$ be clopen. By [sk-d-local-term], $\\operatorname{LT}_B(u)=\\int_F\\operatorname{Tr}_c(u)\\circ e_B$, with the same idempotent $e_B$ for the three classes. Precomposition with $e_B$ is additive in the derived Hom group; applying the $A$-linear integration of [lem-trf-integration-linear] (with $\\beta=F$ and scalar $1$) therefore gives\n$$\\operatorname{LT}_B(u)=\\operatorname{LT}_B(u^U)+\\operatorname{LT}_B(u^Z).$$\nThis conditional scalar consequence is distinct from the class identity, which required no properness hypothesis.",
+   "text": "Apply [lem-trf-filtered-trace-additivity] to the filtered adjoint $\\widetilde v:T\\widetilde K\\to\\widetilde K$ constructed in step 6. The filtered comparison of [lem-trf-filtered-operations-hom] identifies our finite-coefficient category and operations with the classical filtered category transported from the étale site used in that lemma; its $u$ and $u_r$ are the exceptional adjoints of the underlying and graded maps, hence are $u$ and the $u^Z,u^U$ of step 6. Only grades zero and one can contribute, and step 6 identified them as $(K_Z,u^Z)$ and $(K_U,u^U)$. Its finite sum is therefore $\\operatorname{Tr}_c(u^Z)+\\operatorname{Tr}_c(u^U)$. Commutativity of addition in the target Hom group gives the order displayed in the statement. The traces here are the Verdier classes of [def-trf-trace-class] on the common fixed scheme, before integration or restriction to a geometric point. For the unit's local-term consequence, suppose additionally that $F$ is proper over $s$, and let $B\\subseteq F$ be clopen. By [sk-d-local-term], $\\operatorname{LT}_B(u)=\\int_F\\operatorname{Tr}_c(u)\\circ e_B$, with the same idempotent $e_B$ for the three classes. Precomposition with $e_B$ is additive in the derived Hom group; applying the $A$-linear integration of [lem-trf-integration-linear] (with $\\beta=F$ and scalar $1$) therefore gives\n$$\\operatorname{LT}_B(u)=\\operatorname{LT}_B(u^U)+\\operatorname{LT}_B(u^Z).$$\nThis conditional scalar consequence is distinct from the class identity, which required no properness hypothesis.",
    "uses": [
     "lem-trf-filtered-trace-additivity",
     "def-trf-trace-class",
@@ -97,7 +130,7 @@
    }
   },
   {
-   "text": "The qualification at the end of the statement uses only clause (2) of [prop-trf-trace-formal-laws]. Its current statement places the categorical trace on perfect ordinary module complexes, so the three complexes in the warning are in its stated domain. Over $R=\\mathbf Z/4$, the outer complexes $R[-1]$ and $R$ and the middle complex $[R\\xrightarrow{2}R]$ are bounded finite-free complexes. The cited endomorphism has zero maps on the ends and middle map $(0,2)$ in degrees $0,1$, hence middle trace $0-2=-2\\ne0$ and outer traces zero. Thus even perfect complexes do not give trace additivity for arbitrary commuting triangle squares. This is only the warning for the identity correspondence of a point; steps 1–4 prove the geometric identity using the constructed filtered origin. None of those steps uses categorical filtered additivity or invertibility of the coefficient morphism.",
+   "text": "The qualification at the end of the statement uses only clause (2) of [prop-trf-trace-formal-laws]. Its current statement places the categorical trace on perfect ordinary module complexes, so the three complexes in the warning are in its stated domain. Over $R=\\mathbf Z/4$, the outer complexes $R[-1]$ and $R$ and the middle complex $[R\\xrightarrow{2}R]$ are bounded finite-free complexes. The cited endomorphism has zero maps on the ends and middle map $(0,2)$ in degrees $0,1$, hence middle trace $0-2=-2\\ne0$ and outer traces zero. Thus even perfect complexes do not give trace additivity for arbitrary commuting triangle squares. This is only the warning for the identity correspondence of a point; steps 1–7 prove the geometric identity using the constructed filtered origin. None of those steps uses categorical filtered additivity or invertibility of the coefficient morphism.",
    "uses": [
     "prop-trf-trace-formal-laws"
    ],
@@ -116,8 +149,11 @@
   "det-sf-open-closed-sequence-ring-sheaf",
   "prop-weil-open-closed-recollement-adjunctions",
   "def-trf-admissibility",
-  "i-topology",
-  "def-trf-coefficient-pushforward",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-trf-open-extension-adjoint",
+  "lem-trf-reduced-closed-basechange-mate",
+  "lem-trf-proper-coefficient-adjoint",
   "def-trf-bounded-filtered-derived-category",
   "lem-trf-filtered-operations-hom",
   "lem-trf-filtered-trace-additivity",
@@ -166,10 +202,45 @@
    "results": "8 hits: LinearMap.trace_eq_sum_trace_restrict', LinearMap.trace_eq_sum_trace_restrict, LinearMap.trace_eq_zero_of_mapsTo_ne, LinearMap.trace_eq_sum_trace_restrict_of_eq_biSup, LinearMap.trace_comp_eq_zero_of_commute_of_trace_restrict_eq_zero, LieModule.traceForm_eq_sum_genWeightSpaceOf, LieModule.trace_comp_toEnd_genWeightSpace_eq, LinearMap.trace_prodMap",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier trace class additivity for invariant open closed decomposition",
+   "results": "8 hits: LinearMap.trace_eq_sum_trace_restrict, LinearMap.trace_eq_sum_trace_restrict', LinearMap.trace_eq_sum_trace_restrict_of_eq_biSup, SlashInvariantForm.coe_trace, CategoryTheory.Triangulated.TStructure.instAdditiveTruncLT, LinearMap.trace_eq_zero_of_mapsTo_ne, LinearMap.trace_comp_eq_zero_of_commute_of_trace_restrict_eq_zero, LinearMap.trace_comp_cycle'",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\", \"triangle\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|traceClass|trace.class",
+   "results": "19 hits: Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Basic.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Triangulated.lean, Mathlib/CategoryTheory/Triangulated/SpectralObject.lean; directory Mathlib/CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "trace of a filtered cohomological correspondence equals sum of traces of graded pieces",
+   "results": "8 hits: LinearMap.trace_eq_sum_trace_restrict, LinearMap.trace_eq_sum_trace_restrict', LinearMap.trace_prodMap', Matrix.trace_sum, LinearMap.trace_prodMap, LinearMap.trace_eq_sum_trace_restrict_of_eq_biSup, Algebra.trace_prod_apply, Matrix.trace_multiset_sum",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lefschetz Verdier trace additivity for filtered constructible sheaves",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, CategoryTheory.Triangulated.TStructure.instAdditiveTruncLT, DerivedCategory.instAdditiveSingleFunctor, CategoryTheory.Triangulated.TStructure.instAdditiveTruncGE, CategoryTheory.Abelian.Ext.mapExactFunctor_add, CategoryTheory.plusPlusSheaf_preservesZeroMorphisms, CategoryTheory.Functor.instAdditiveOfIsHomological",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -246,8 +317,8 @@
   "date": "2026-10-17",
   "item": "lem-trf-trace-triangle-compatibility",
   "worker": "stage1",
-  "summary": "Completed earlier filtered repair: added the existing sheaf-level open–closed exact sequence and reduction invariance; wrote the support vanishing, the two induced-square identifications, and the unique filtered lift explicitly. Three statement-only nodes expose the filtered category, operations/Hom comparison, and filtered Verdier graded-trace law. Returned-delivery repair: revalidated all citations against the current DAG, refreshed the changed formal-laws quotation, and made step 5 explicitly use only its perfect-complex counterexample. Cited the explicit constructible admissibility datum for exceptional adjunction identities, keeping the ambient admissibility condition out of the argument. Second reader expanded the closed pushforward transpose into its explicit composite and counit calculation. Server-route repair: made the unit local-term consequence explicit using its existing definition and integration linearity. Rebased the returned delivery onto the current formal-laws statement and changed step 5 to cite its present perfect-complex domain explicitly. Current second reading: removed the duplicate graded-trace helper in favor of the existing lem-trf-filtered-trace-additivity and made its étale/pro-étale filtered comparison explicit.",
-  "blueprint": "Induced morphisms paragraph: steps 1–2 identify open and closed maps and step 3 supplies the connecting square. Additivity paragraph: step 3 constructs the filtered lift and step 4 applies the graded Verdier law. Final statement warning: step 5. The invalid point-stalk argument is not used. Step 4 also carries the unit proof sentence on descending to local terms under properness.",
+  "summary": "Repair of the human return: extracted the open-extension adjoint calculation, the general proper-coefficient-pushforward adjoint formula, and the reduced-closed-fibre base-change mate identity into three statement-only nodes. Replaced the returned long step by four short applications and the explicit reduced-source ideal argument. Preserved the exact statement, Lean record, support/uniqueness argument, filtered lift, graded trace sum and triangle warning. Retained all inherited searches and added actual logged searches for each new comparison.",
+  "blueprint": "Induced morphisms paragraph: step 1 constructs the unique supported maps, steps 2–5 identify them using the three extracted comparison lemmas, and step 6 gives all triangle squares by filtered origin. Additivity paragraph: steps 6–7 lift the correspondence and sum its two graded trace classes. Step 7 retains the conditional local-term consequence and step 8 the arbitrary-triangle warning.",
   "tool_uses": [
    {
     "node": "fix-prop-adjunctions",
@@ -306,9 +377,9 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NP-795b58f27",
-  "group": "NP",
+  "reviewer": "NT-cc-Q74-171ec1611",
+  "group": "Q74",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-795b58f27 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, unit sk-i-additivity and Varshavsky 1.5.6, 1.5.9, Prop 1.5.10 and §§5.1.1–5.3.3 in full. The statement is identical to blueprint_update (main-20261015) and nothing is weakened. With the legs swapped, it matches Varshavsky's invariance condition and his closed correspondence c_2^{-1}(Z)_red. Step 1: TK_U≅j_!Rh_!(c_2|_V)^*j^*K, using open base change (prop-functor-package (4)) and composition (3); j^*i_*=0 (det-sf (2)) and the open adjunction then give Hom(TK_U,K_Z[m])=0, so both Hom maps are bijective. This is Varshavsky (5.2). Step 2: the closed piece uses the reduced fibre, !-base change and i-topology. I recomputed the exceptional adjoint of δ∘Rg_*(u|_Z)∘γ from def-trf-coefficient-pushforward as Ri_*w∘Ξ∘Rc_{1!}γ; uniqueness then gives v_Z, and the open piece follows from j_!⊣j^*. Step 3: the filtration F^1=j_!j^*M comes from the exact sequence in det-sf, as in Ex 5.2.3. The only negative grade is gr^{-1}=RHom(TK_U,K_Z) (sign checked against Lemma 5.1.4(i)). Hom=H^0(ωt^{≥0}H) (5.1.5) gives the unique lift, and naturality plus uniqueness identify the grades, as in 5.3.3. Step 4: applies the existing lem-trf-filtered-trace-additivity (Varshavsky Lemma 5.3.2) to ṽ. The local-term additivity follows from sk-d-local-term and lem-trf-integration-linear. Step 5: the Z/4 warning in formal-laws (2) checks out (chain map since 4=0; trace -2). There is no cycle: the item is not reached from its 14214-node dependency closure, and no cited node is merged. I accept the declared tool_uses, including lem-trf-filtered-trace-additivity as the generic Lemma 5.3.2. New nodes: def-trf-bounded-filtered-derived-category matches Varshavsky 5.1.1–5.1.2 and 5.2.1(a) and Stacks 05S2/05S4/05S5, and no existing node defines it. lem-trf-filtered-operations-hom matches 5.1.2(c), 5.1.4, 5.1.5 and 5.2.1–5.2.2. It overlaps only partly with lem-trf-filtered-derived-operation-lifts, which lacks the filtered Hom comparison, f^!, the ⊗/RHom grading and the site comparison, and it restates no clause of the item. The existing lem-trf-invariant-localization-filtered-lift states the conclusion of steps 1–3, but only for reduced Z; writing the argument out instead of citing it is acceptable. FIX (B3): the last clause of lem-trf-filtered-operations-hom spoke of 'the classical filtered étale categories' without defining them; the corrected file defines them as the construction of def-trf-bounded-filtered-derived-category applied to étale sheaves of A-modules. Edge cases K=0, u=0, empty U, empty Z, nonreduced Z and n=1 all reduce correctly. The report's opening section still lists the dropped third node; the delivered files correctly omit it.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-171ec1611 (reviewer sub-agent of L); spot-checked: PASS with no changes; review.md is written and fixes/ is empty. (1) The item's statement is byte-identical to blueprint_update (main-20261015) and is not weakened. (2) I checked the three new nodes by direct adjunction calculation. open-extension-adjoint: t^*j_!≅e_!r^* holds because V=t^{-1}(U) makes the square Cartesian; the adjoint of z_X is j_!w by naturality of Rf_!e_!≅j_!Rh_!; and a∘j_!w=v∘Rf_!t^*a holds through the counit of the composite adjunction for fe=jh. proper-coefficient-adjoint: transposing δ∘Rg_*u∘γ and moving u past Ξ_1 by naturality gives Rf_*v∘Ξ_1∘Rb_{1!}γ; this is a short calculation but was extracted on the return's demand, so I kept it. reduced-closed-basechange-mate: it follows from lem-trf-finite-horizontal-shriek-mate on the Cartesian P_Z square, the reduction equivalence of i-topology, and naturality of B; it puts no Cartesian condition on (t,d_2). (3) Edge cases tested: U=X or empty, Z=X or empty, a nonreduced fibre, identity f,g, u=0, K=0. (4) Item steps: step 1 is Varshavsky (5.2) with exact adjacent vanishing; step 3's restriction w=i^*v∘B_K^{-1} matches Varshavsky §1.1.8(i)/§1.5.6(a) with legs swapped, base-change direction checked; steps 4–5 give q=v_Z by matching transposes and uniqueness; steps 6–8 are retained unchanged from the reviewed split and still check (gr^{-1}=RHom(TK_U,K_Z); Z/4 trace −2). (5) No duplicates: I compared invariant-localization-filtered-lift, trace-class-open-restriction, trace-source-exchange, trace-proper-compatibility and finite-horizontal-shriek-mate. (6) Mechanical: every cited id exists and none is merged; proof_deps equals the union of uses; no cycle (14659-node closure); new nodes have empty proofs, unit sk-i-additivity, four kinds of search each, correct blueprint.from, and no SGA. The declared tool_uses are accepted."
  }
 }

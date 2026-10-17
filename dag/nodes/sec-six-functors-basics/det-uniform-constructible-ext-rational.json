@@ -48,23 +48,44 @@
    }
   },
   {
-   "text": "Fix one source piece $C_k=a_{k,!}L_k$ and target piece $N_t=b_{t,!}M_t$, and choose their finite locally free lattices $L_{k,0},M_{t,0}$ over $\\mathcal O_E$. In the global-source-lattice case use $a,L_0$ instead. By [det-prop-sfb-qlbar-colimit-x-invert-ell], $E_X=\\mathcal O_{E,X}[1/\\ell]$ is flat over $\\mathcal O_{E,X}$, on $X$ and on the two strata. Thus these scalar extensions are exact and agree with their derived functors. Clause (2) of [det-prop-scalar-six-pullback] identifies the derived localizations of the lattice extensions by zero with $C_k,N_t$. The derived scalar adjunction in [sk-def-sfb-coefficient-change] gives\n$$\n\\Ext^q_E(C_k,N_t)=\\operatorname{Hom}_{D(X_{\\mathrm{proét}},\\mathcal O_E)}\\bigl(a_{k,!}L_{k,0},(b_{t,!}M_{t,0})[1/\\ell][q]\\bigr).\n$$\nApply [lem-pc-module-filtered-colimits-tensor] in degree zero to the coefficient localization diagram of [det-prop-sfb-qlbar-colimit-x-invert-ell] and the fixed module $B=b_{t,!}M_{t,0}$. It identifies $E_X\\otimes_{\\mathcal O_{E,X}}B$ with the sheaf-module colimit $\\varinjlim(B\\xrightarrow{\\ell}B\\xrightarrow{\\ell}\\cdots)$. The cocone leg at index $n$ sends a local section $m$ to $\\ell^{-n}m$ in the localized sheaf; its compatibility is $\\ell^{-(n+1)}(\\ell m)=\\ell^{-n}m$. This uses a colimit of sheaves, without asserting that colimits are evaluated objectwise. The index is the small filtered category $\\mathbf N$, and every complex in this system is concentrated in degree zero, so the common lower bound is $0$. The $\\mathcal O_E$ clause of [sk-lem-constructible-ext-continuity] applies: the source is a single $a_{k,!}L_{k,0}$ with a finite locally free lattice, not an arbitrary integral constructible complex. Consequently the displayed group is\n$$\n\\varinjlim_n\\Ext^q_{\\mathcal O_E}(a_{k,!}L_{k,0},b_{t,!}M_{t,0}).\n$$\nThe transition maps in this Ext colimit are induced by multiplication by $\\ell$ on the target. Each term is zero for $q>c_{a_k}$ by [det-uniform-constructible-ext-integral]. Its hypotheses are exactly the torsion node's setting on $X$, the closed/open factorization of this $a_k$, and the two lisse lattices; $b_t$ is locally closed. Thus $\\Ext^q_E(C_k,N_t)=0$ for $q>c_{a_k}$, independently of $t$. For the unsplit global lattice source this argument gives $q>c_a$.",
+   "text": "Fix a source piece $C_k=a_{k,!}L_k$ and target piece $N_t=b_{t,!}M_t$ from Step 2, with lisse $\\mathcal O_E$-lattices $L_{k,0},M_{t,0}$. In the global-source-lattice case use $a,L_0$ instead. Put $A=a_{k,!}L_{k,0}$ and $B=b_{t,!}M_{t,0}$. The localization and flatness statement [det-prop-sfb-qlbar-colimit-x-invert-ell] applies on $X$ and on both strata. Hence derived scalar extension agrees with ordinary tensor with $E$. Clause (2) of [det-prop-scalar-six-pullback] identifies $A_E=C_k$, $B_E=N_t$. The derived adjunction in [sk-def-sfb-coefficient-change] therefore gives\n$$\n\\Ext_E^q(C_k,N_t)\\cong\\operatorname{Hom}_{D(X_{\\mathrm{proét}},\\mathcal O_E)}(A,\\operatorname{Res}_{E/\\mathcal O_E}(E_X\\otimes B)[q]).\n$$",
    "uses": [
-    "det-prop-scalar-six-pullback",
-    "sk-def-sfb-coefficient-change",
-    "sk-lem-constructible-ext-continuity",
-    "det-uniform-constructible-ext-integral",
     "det-prop-sfb-qlbar-colimit-x-invert-ell",
-    "lem-pc-module-filtered-colimits-tensor"
+    "det-prop-scalar-six-pullback",
+    "sk-def-sfb-coefficient-change"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-rational.proof.md",
-    "place": "Coefficients E, localization, scalar adjunction, continuity and integral bound paragraphs"
+    "place": "Coefficients E: flat localization, scalar/lower-shriek comparison and derived adjunction"
    }
   },
   {
-   "text": "Fix $k$. In the target filtration of Step 2, [lem-sc-abelian-ext-covariant-exact] gives the exact segment $\\Ext^q(C_k,N_{t-1})\\to\\Ext^q(C_k,N_t^{\\mathrm{fil}})\\to\\Ext^q(C_k,N_t^{\\mathrm{fil}}/N_{t-1})$. Induct on $t$ for each $q>c_{a_k}$: at $t=0$ Ext into zero is zero by additivity [def-pc-ext], and at the next stage the two end groups vanish by induction and Step 3. Hence $\\Ext^q(C_k,b_!M)=0$ for $q>c_{a_k}$. Next fix $q>d_{a,L}$ and induct along the source filtration $C_s^{\\mathrm{fil}}$. The exact segment from [lem-coef-ext-contravariant-six-term] is $\\Ext^q(C_s^{\\mathrm{fil}}/C_{s-1}^{\\mathrm{fil}},b_!M)\\to\\Ext^q(C_s^{\\mathrm{fil}},b_!M)\\to\\Ext^q(C_{s-1}^{\\mathrm{fil}},b_!M)$. Again its end groups vanish, by the preceding target induction and the source induction hypothesis. The zero-source base case follows from additivity. This proves the $E$ conclusion with the maximum of the $c_{a_k}$, not the cutoff of the original unrefined $a$. If the source has a global lattice, only the target induction is needed and it retains the original $c_a$. An infinite cutoff leaves no $q$ to check; the empty source is zero.",
+   "text": "The ring-module telescope in [det-prop-sfb-qlbar-colimit-x-invert-ell], tensored with $B$, is still colimiting by [lem-pc-module-filtered-colimits-tensor], in degree zero on the pro-étale site (taken small in the sheaf universe). Since $\\mathcal O_{E,X}\\otimes B=B$ and its transition $\\ell\\otimes1$ is multiplication by $\\ell$, this gives\n$$\n\\operatorname{Res}_{E/\\mathcal O_E}(E_X\\otimes B)\\cong\\varinjlim(B\\xrightarrow{\\ell}B\\xrightarrow{\\ell}\\cdots).\n$$\nThe leg at $n$ is $m\\mapsto\\ell^{-n}m$, and compatibility is $\\ell^{-(n+1)}\\ell m=\\ell^{-n}m$. This is a sheaf-module colimit; no objectwise colimit assertion is used.",
+   "uses": [
+    "det-prop-sfb-qlbar-colimit-x-invert-ell",
+    "lem-pc-module-filtered-colimits-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-rational.proof.md",
+    "place": "Coefficients E: target localization as the tensor of the coefficient telescope"
+   }
+  },
+  {
+   "text": "The telescope index is the small filtered category $\\mathbf N$ and all its complexes have the common termwise lower bound $0$. Its source $A=a_{k,!}L_{k,0}$ has a finite locally free integral lattice. Thus the integral clause of [sk-lem-constructible-ext-continuity], applied to Step 4's telescope and Step 3's adjunction, gives\n$$\n\\Ext_E^q(C_k,N_t)\\cong\\varinjlim_n\\Ext^q_{\\mathcal O_E}(a_{k,!}L_{k,0},b_{t,!}M_{t,0}),\n$$\nwith transitions induced by multiplication by $\\ell$ on the target. The integral bound [det-uniform-constructible-ext-integral] kills every term for $q>c_{a_k}$: the standing setting and closed/open factorization are unchanged, and both lattices are lisse. Consequently $\\Ext_E^q(C_k,N_t)=0$ in that range, independently of $t$. With a global source lattice the same calculation uses the original $a$ and gives $q>c_a$.",
+   "uses": [
+    "sk-lem-constructible-ext-continuity",
+    "det-uniform-constructible-ext-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-rational.proof.md",
+    "place": "Coefficients E: integral-source continuity and the integral bound"
+   }
+  },
+  {
+   "text": "Fix $k$. In the target filtration of Step 2, [lem-sc-abelian-ext-covariant-exact] gives the exact segment $\\Ext^q(C_k,N_{t-1})\\to\\Ext^q(C_k,N_t^{\\mathrm{fil}})\\to\\Ext^q(C_k,N_t^{\\mathrm{fil}}/N_{t-1})$. Induct on $t$ for each $q>c_{a_k}$: at $t=0$ Ext into zero is zero by additivity [def-pc-ext], and at the next stage the two end groups vanish by induction and Step 5. Hence $\\Ext^q(C_k,b_!M)=0$ for $q>c_{a_k}$. Next fix $q>d_{a,L}$ and induct along the source filtration $C_s^{\\mathrm{fil}}$. The exact segment from [lem-coef-ext-contravariant-six-term] is $\\Ext^q(C_s^{\\mathrm{fil}}/C_{s-1}^{\\mathrm{fil}},b_!M)\\to\\Ext^q(C_s^{\\mathrm{fil}},b_!M)\\to\\Ext^q(C_{s-1}^{\\mathrm{fil}},b_!M)$. Again its end groups vanish, by the preceding target induction and the source induction hypothesis. The zero-source base case follows from additivity. This proves the $E$ conclusion with the maximum of the $c_{a_k}$, not the cutoff of the original unrefined $a$. If the source has a global lattice, only the target induction is needed and it retains the original $c_a$. An infinite cutoff leaves no $q$ to check; the empty source is zero.",
    "uses": [
     "lem-sc-abelian-ext-covariant-exact",
     "lem-coef-ext-contravariant-six-term",
@@ -77,30 +98,59 @@
    }
   },
   {
-   "text": "For $\\Lambda=\\Qlb$, clause (1) of [sk-thm-sfb-qlbar-two-colimit] gives a finite $E_0$ and lisse model $L^{(0)}$ for the source. Fix $C_0=a_!L^{(0)}$ and its source lattice stratification from Step 2 now, before choosing $b,M$, and let $d_{a,L}$ be its maximum. Steps 3 and 4 prove the $E_0$ bound for this fixed source against every lower-shriek lisse $E_0$-target. For a given $M$, clause (1) on $T$ gives a finite-field model; take a common finite extension $E\\supset E_0$ containing its field of definition and write $C_E=(C_0)_E=a_!L_E$, $N_E=b_!M_E$. Scalar compatibility and transitivity in [det-prop-scalar-six-pullback](2),(3) identify their $\\Qlb$ extensions with $a_!L,b_!M$. The lisse finite models have finite free local bases. Step 1, using [det-sf-open-closed-sequence-ring-sheaf] and [sk-def-sfb-constructible], therefore places both $C_E$ and $N_E$ in $\\Dbc(X,E)$, as required by clause (2) of the two-colimit theorem. That clause identifies the desired Ext group with\n$$\n\\varinjlim_{F\\supset E}\\operatorname{Hom}_{D(X_{\\mathrm{proét}},F)}((C_E)_F,(N_E)_F[q]).\n$$\nFor each finite $F$, scalar adjunction [sk-def-sfb-coefficient-change] identifies its term with $\\Ext^q_{E_0}(C_0,\\operatorname{Res}_{F/E_0}(b_!M_F))$. Restriction is the identity on underlying sheaves [sk-def-sfb-change-of-scalars](1). The underlying functors forming $b_!$ are $i_*^{\\Ab}$ and $u_!^{\\Ab}$ by [def-sfb-module-lower-star] and [def-sfb-module-open-lower-shriek]. Their module actions are obtained by composing the coefficient action with the coefficient morphisms. Composing that action first with $E_{0,X}\\to F_X$ or first with the immersion coefficient morphism gives the same action, by the two compatibility squares in [sk-def-sfb-coefficient-change]. Therefore restriction of scalars commutes with this closed direct image and open extension by zero, including their module structures. The restricted $M_F$ is lisse over $E_0$: on a cover where it is $F_T^{\\oplus r}$, [det-prop-sfb-cartesian-coefficients-finite-free], applied with $E_0\\subset F$ on each member of that cover, identifies its restriction of scalars with $E_{0,T}^{\\oplus r[F:E_0]}$. Its inverse-image compatibility makes these precisely the required local free models. Flatness for the field extensions is [lem-sfb-subfield-flat], so these degree-zero scalar extensions are the derived ones used in the adjunction. Each colimit term thus vanishes by the already proved $E_0$ bound for the fixed source, for $q>d_{a,L}$. Hence its colimit is zero. This restriction-of-scalars argument keeps the same source partition for every $F$ and every target; it requires no new lattice refinement or larger cutoff at any coefficient stage. If the chosen source model has a global lattice, Steps 3 and 4 give its $E_0$ bound with the original $c_a$; scalar adjunction then makes every displayed finite-$F$ term zero for $q>c_a$, so the Hom colimit is zero in that range as well.",
+   "text": "For $\\Lambda=\\Qlb$, clause (1) of [sk-thm-sfb-qlbar-two-colimit] gives a finite $E_0$ and lisse model $L^{(0)}$ for $L$. Fix $C_0=a_!L^{(0)}$ and the source lattice partition of Step 2 before choosing any target. Steps 3–6 prove its $E_0$ bound $d_{a,L}$ against every lower-shriek lisse $E_0$-target. For a given $M$, clause (1) on $T$ gives a finite-field model; a common finite extension $E\\supset E_0$ contains that field. Put $C_E=(C_0)_E=a_!L_E$, $N_E=b_!M_E$. Clauses (2),(3) of [det-prop-scalar-six-pullback] identify their $\\Qlb$ extensions with $a_!L,b_!M$. Their lisse restrictions and zero complements place $C_E,N_E$ in $\\Dbc(X,E)$ by Step 1. Clause (2) of the two-colimit theorem therefore gives\n$$\n\\Ext^q_{\\Qlb}(a_!L,b_!M)\\cong\\varinjlim_{F\\supset E}\\operatorname{Hom}_{D(X_{\\mathrm{proét}},F)}((C_0)_F,(N_E)_F[q]).\n$$",
    "uses": [
     "sk-thm-sfb-qlbar-two-colimit",
-    "det-prop-scalar-six-pullback",
-    "det-sf-open-closed-sequence-ring-sheaf",
-    "sk-def-sfb-constructible",
-    "sk-def-sfb-coefficient-change",
-    "sk-def-sfb-change-of-scalars",
-    "lem-sfb-subfield-flat",
-    "def-sfb-module-lower-star",
-    "def-sfb-module-open-lower-shriek",
-    "det-prop-sfb-cartesian-coefficients-finite-free"
+    "det-prop-scalar-six-pullback"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-rational.proof.md",
-    "place": "Coefficients Qbar paragraph: finite models, bounded constructibility, Hom colimit; fixed-source restriction-of-scalars argument"
+    "place": "Coefficients Qbar: fixed finite source model and bounded-constructible Hom colimit"
+   }
+  },
+  {
+   "text": "For any finite $F\\supset E$, factor $b=i\\circ u$ with $u$ open and $i$ closed. Apply [def-sfb-comap-lower-star-iso] to $i$ and [def-sfb-comap-open-immersion-shriek-iso] to $u$, both with the condensed coefficient inclusion $E_0\\to F$. Composing their module-object isomorphisms gives\n$$\n\\operatorname{Res}_{F/E_0}(b_!M_F)\\cong b_!(\\operatorname{Res}_{F/E_0}M_F).\n$$\nThus lower-shriek restriction of scalars is supplied by existing comparison nodes, including the coefficient actions, rather than an identification of underlying sheaves alone. Restriction is exact by [sk-def-sfb-change-of-scalars](4), so these isomorphisms also apply to the degree-zero derived objects.",
+   "uses": [
+    "def-sfb-comap-lower-star-iso",
+    "def-sfb-comap-open-immersion-shriek-iso",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-rational.proof.md",
+    "place": "Coefficients Qbar: restriction through the two locally closed lower-shriek factors"
+   }
+  },
+  {
+   "text": "The sheaf $M_F$ is lisse: tensor its finite free $E$-local models with $F$, using the flat scalar extension of [lem-sfb-subfield-flat]. On a cover trivializing it as $F^{\\oplus r}$, the finite-free coefficient comparison [det-prop-sfb-cartesian-coefficients-finite-free] for $E_0\\subset F$ gives\n$$\n\\operatorname{Res}_{F/E_0}M_F\\cong E_0^{\\oplus r[F:E_0]}.\n$$\nThat comparison is compatible with inverse image, so it applies on the members of this pro-étale covering. This proves that the restricted target is lisse over $E_0$, with finite rank even when ranks vary between members.",
+   "uses": [
+    "lem-sfb-subfield-flat",
+    "det-prop-sfb-cartesian-coefficients-finite-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-rational.proof.md",
+    "place": "Coefficients Qbar: finite free local models after restriction"
+   }
+  },
+  {
+   "text": "By [det-prop-scalar-six-pullback](2),(3), $(N_E)_F=b_!M_F$ and $(C_E)_F=(C_0)_F$. The derived scalar adjunction [sk-def-sfb-coefficient-change] for $E_0\\to F$ identifies each term of Step 7's Hom colimit with\n$$\n\\Ext^q_{E_0}(C_0,\\operatorname{Res}_{F/E_0}(b_!M_F))\n\\cong\\Ext^q_{E_0}(C_0,b_!(\\operatorname{Res}_{F/E_0}M_F)),\n$$\nwhere Step 8 supplies the second isomorphism. By Step 9 this is a lisse $E_0$-target. The $E_0$ bound from Steps 3–6 annihilates it for $q>d_{a,L}$. Every term of the colimit is zero, so the colimit is zero. The source partition and cutoff were fixed before $b,M,F$ and have not changed. If the finite source model has a lattice on all of $S$, Step 6 gives its bound with $c_a$ instead; the same termwise argument kills this colimit for $q>c_a$.",
+   "uses": [
+    "det-prop-scalar-six-pullback",
+    "sk-def-sfb-coefficient-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-rational.proof.md",
+    "place": "Coefficients Qbar: scalar adjunction and termwise fixed-source vanishing"
    }
   }
  ],
  "proof_deps": [
   "def-pc-ext",
-  "def-sfb-module-lower-star",
-  "def-sfb-module-open-lower-shriek",
+  "def-sfb-comap-lower-star-iso",
+  "def-sfb-comap-open-immersion-shriek-iso",
   "det-lem-coefficient-heart-common-stratification",
   "det-lem-coefficient-heart-filtration",
   "det-prop-scalar-six-pullback",
@@ -258,10 +308,31 @@
    "results": "0 hits: ",
    "date": "2026-10-16",
    "verdict": "no match: no constructible or lisse sheaf declaration in the searched Mathlib source"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|lisse|pro.etale",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: generic Ext/abelian results do not state the geometric rational uniform cutoff"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext",
+   "results": "12 hits: CategoryTheory.Abelian.Ext; CategoryTheory.Abelian.Ext.instAddCommGroup; CategoryTheory.hasExt_iff_small_ext; CategoryTheory.Abelian.Ext.mk₀; CategoryTheory.Abelian.Ext.chgUniv; CategoryTheory.Abelian.Ext.homEquiv₀; CategoryTheory.Abelian.extFunctorObj_obj_coe; CategoryTheory.Abelian.Ext.mk₀_bijective",
+   "date": "2026-10-17",
+   "verdict": "no match: generic Ext/abelian results do not state the geometric rational uniform cutoff"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform vanishing of Ext between extensions by zero of lisse rational coefficient sheaves on the pro etale site",
+   "results": "8 hits: CategoryTheory.Sheaf.H; LightCondensed.instIsGrothendieckAbelianLightCondMod; CategoryTheory.hasInjectiveDimensionLT_iff; CategoryTheory.Abelian.Ext.mapExactFunctor_zero; isZero_Ext_succ_of_projective; CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero; CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_zero; CategoryTheory.InjectiveResolution.extMk_zero",
+   "date": "2026-10-17",
+   "verdict": "no match: generic Ext/abelian results do not state the geometric rational uniform cutoff"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -287,8 +358,8 @@
   "date": "2026-10-17",
   "item": "det-uniform-constructible-ext-rational",
   "worker": "stage1",
-  "summary": "Repair of return ae71e26610: STATEMENT-DISPUTED source refinement does not retain the original c_a. Corrected the statement to the maximum of the cutoffs of fixed source lattice strata, with the original c_a retained only when the finite source model has a global lattice. Cited existing ordered-refinement/open-closed-filtration and Ext-exact-sequence nodes, proved bounded constructibility of lower-shriek finite models before the Qbar Hom colimit, removed the unnecessary coefficient extension in the E preparation, and used restriction of scalars to keep the Qbar source partition independent of targets. No new nodes. The report supplies explicit parent/unit corrections for HUMAN. Second reading added explicit existing coefficient-localization/flatness, tensor-colimit, and finite-free coefficient citations; the source cutoff correction is unchanged.",
-  "blueprint": "Steps 1 and 2 supply hypotheses and the opening lattice/refinement paragraph. Step 3 realizes localization, scalar adjunction, continuity and the integral bound. Step 4 realizes source devissage (maximum) and target devissage (same cutoff) explicitly without the cyclic devissage node. Step 5 realizes finite-field descent and the Hom colimit while keeping the source partition fixed. The source/unit error and parent correction are documented in report.md under Source error.",
+  "summary": "Q131 repairs the dedicated long-step return, preserving the statement, coefficient route, Lean/audit metadata and original Steps 1,2,4. Original Step 3 is now scalar adjunction, coefficient-telescope tensoring, and continuity plus the integral bound. Original Step 5 is finite-model Hom descent, existing pushforward/open-shriek restriction comparisons, finite-free restricted local models, and termwise vanishing. No new nodes: the hidden comparisons are already stated by existing DAG nodes. Every non-elementary step is below 2000 characters.",
+  "blueprint": "Steps 1,2 retain preparation and lattice filtrations; Steps 3–5 realize the E localization/adjunction/continuity paragraph; Step 6 retains the two filtration inductions; Steps 7–10 realize the Qbar finite-model Hom colimit, restriction comparisons and fixed-source vanishing.",
   "tool_uses": [
    {
     "node": "sk-lem-stratified-lattice",
@@ -345,6 +416,14 @@
    {
     "node": "det-prop-sfb-cartesian-coefficients-finite-free",
     "why": "Finite freeness of pulled-back coefficient fields supplies the actual local free E_0 models after restriction of scalars in Step 5."
+   },
+   {
+    "node": "def-sfb-comap-lower-star-iso",
+    "why": "Its existing module-object restriction/pushforward isomorphism supplies the closed factor comparison formerly proved inline."
+   },
+   {
+    "node": "def-sfb-comap-open-immersion-shriek-iso",
+    "why": "Its existing restriction/open-extension isomorphism supplies the open factor comparison formerly proved inline."
    }
   ],
   "source_error": "The blueprint rational opening refinement paragraph and the unit single-stratum formula incorrectly keep c_a after refining S. Refinement produces a_k with different j_k, S_k; only max_k c_{a_k} follows. The pinched affine-plane test in report.md refutes the missing cutoff inequality. Parent sk-lem-uniform-constructible-ext and unit statement/Steps 1,2 require the corrections requested for coord/HUMAN.md in that report."
@@ -363,15 +442,17 @@
   "lem-sfb-subfield-flat",
   "det-prop-sfb-qlbar-colimit-x-invert-ell",
   "lem-pc-module-filtered-colimits-tensor",
-  "det-prop-sfb-cartesian-coefficients-finite-free"
+  "det-prop-sfb-cartesian-coefficients-finite-free",
+  "def-sfb-comap-lower-star-iso",
+  "def-sfb-comap-open-immersion-shriek-iso"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q02-75b544649",
-  "group": "Q02",
+  "reviewer": "NT-cc-Q131-5843f7965",
+  "group": "Q131",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-75b544649 (reviewer sub-agent of L); spot-checked: Read in full: the item, the main-20261015 rational statement and proof, the unit _section and proof, the torsion, integral and devissage nodes, every cited node statement (21 proof_deps), and the reviewed parent. There are no new nodes and the files written are only the item and the report. proof_deps equals the union of step uses, and a DFS over 6429 dependency nodes found no cycle (the devissage node is correctly not cited). On the statement change: the source says 'after refining S and T, Ext=0 for q>c_a', but source refinement replaces a by strata a_k, each with its own closure and complement j_k. The integral node then gives only c_{a_k}, and nothing proves c_{a_k}<=c_a. I checked the pinched-plane test: c_a<=4 with a=id, cd(j_P)>=3 by purity (H^4_m=Λ(-2) on each branch), so the point stratum's cutoff is >=5, and the Z-chain torsor sheaf has no global lattice. The corrected statement (a fixed lattice stratification, d_{a,L}=max(0,c_{a_k}), c_a kept for a global lattice) is the precise content the source proof gives. It is named under Source error (E7) and is not a target weakening; the c_a bound for a source without a global lattice is unproved, not disproved. All citers of sk-lem-uniform-constructible-ext use only the existential d_C. Step checks: (1) Noetherian setting, open/closed parts (1)(2)(4) give restrictions P/0/0, so h_!P is in Dbc. (2) stratified-lattice needs no E'/E, ordered common refinement, filtration with pieces a_{k!}L_k, source fixed before the target. (3) ℓ-localization (qlbar-colimit-x-invert-ell), scalar-six(2), derived adjunction, tensor-colimit, O_E continuity clause, integral cutoff for a_k. (4) covariant and contravariant Ext segments, zero bases by additivity. (5) two-colimit (1),(2), scalar transitivity, Res commutes with b_! (underlying sheaves and the compatibility squares), Res M_F is a lisse E_0 module via cartesian-coefficients-finite-free, so the fixed E_0 source bound kills every term. I accept all 14 declared tool_uses. No SGA. No fixes. MAINTAINER ACTION REQUIRED at merge: the reviewed parent sk-lem-uniform-constructible-ext still says in Step 2 that the item displays the cutoff q>c_a and that c_a is independent of b,M. Its Steps 3-4, its statement's numeric second paragraph and the unit statement must be changed to d_{a,L}, as in the report's HUMAN request; the parent's existential conclusion is unaffected."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-5843f7965 (reviewer sub-agent of L); spot-checked: I read the whole repair: the item, all 10 steps, the statement of every cited node, the main-20261015 source (the rational lemma statement and proof, plus the unit _section and proof) and the released repair note. No fixes needed. (1) The repair note's point is fixed. Old step 3 (2263 characters) is now steps 3-5 and old step 5 (2933 characters) is now steps 7-10. Every non-elementary step is now at most 1416 characters. Compared with the base, the statement is byte-identical, old steps 1-2 are verbatim, and old step 4 (now step 6) changes only one step number. (2) Step checks. Step 3: the ell-localization node gives flatness and E⊗L_0=L; scalar-six-pullback(2) identifies the lower shriek; the derived adjunction follows. Step 4: telescope⊗B through the tensor-colimit node. Step 5: the O_E clause of constructible-ext-continuity (Noetherian X, small filtered index N, lower bound 0, source a_{k!}L_{k,0} finite locally free) and the integral node with cutoff c_{a_k}. Step 6: covariant and contravariant Ext inductions. Step 7: two-colimit (1),(2) with E⊃E_0,E_1, plus Dbc membership from step 1. Step 8: the hidden Res∘b_!≅b_!∘Res is now cited from def-sfb-comap-lower-star-iso and def-sfb-comap-open-immersion-shriek-iso. Both are definition nodes, so they are not route. Step 9: cartesian-coefficients-finite-free gives the lisse E_0 local model. Step 10: the fixed-source E_0 bound kills every colimit term. (3) Bookkeeping: proof_deps equals the union of the step uses; there is no cycle (6472 reachable nodes checked); no SGA source; no new nodes, so no duplicate checks were needed. The 14 tool_uses are unchanged from the reviewed base and I accept them. (4) The d_{a,L} statement correction predates this delivery and matches what the source proof gives (the pinched example has no global lattice). The parent unit's c_a wording still needs the maintainer action recorded in the Q02 note. Minor notation, not a fault: in step 6, N_{t-1} means the filtration term N_{t-1}^{fil}."
  },
  "lean_audit": {
   "master": {

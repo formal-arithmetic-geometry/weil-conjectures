@@ -34,25 +34,57 @@
  ],
  "proof": [
   {
-   "text": "Geometry and coefficient convention. The projection $q$ is proper by [lemma-nagata-projective-space-base-change-proper]. Each $p_i$ is itself the projective-line projection over $P$, after the canonical identification of the two factors, so the same statement applies over $P$. In particular $q$ is separated, and its diagonal $\\Delta$ is closed by the definition in [def-weil-proper-morphism]. The schemes $Y,P,W$ are Noetherian by successive applications of [lem-weil-pbc-finite-type-over-noetherian]: first apply it to $Y\\to\\operatorname{Spec}k$, since a field has only the ideals $0$ and $k$; then apply it to $q:P\\to Y$ and to $p_1:W\\to P$, which are of finite type because they are proper. Also $\\Delta$ is proper by clause (a) of [lem-weil-pbc-closed-immersion-proper]. For each $X\\in\\{Y,P,W\\}$, choose a finite affine open cover of $X$ by spectra of Noetherian rings, using its locally Noetherian and quasi-compact definition. Each chart is a Noetherian topological space by [lem-sc-affine-noetherian-underlying-space]. Every open subset of such a chart is quasi-compact: a cover with no finite subcover would yield a strictly increasing sequence of finite unions of opens, contrary to the ascending chain condition. The intersection of any open subset of $X$ with each of its finitely many charts is therefore quasi-compact, so that open subset is quasi-compact. In particular $Y,P,W$ are qcqs, since each is quasi-compact and every intersection of affine opens is quasi-compact. The structure map $a_Y:Y\\to\\operatorname{Spec}k$ is separated and of finite type by hypothesis. Apply clause (e) of [lem-weil-pbc-proper-fp-permanence] first to $q$ and $a_Y$, and then to $p_1$ and $a_Yq$: since proper maps are separated and locally of finite type, the structure maps $a_P=a_Yq$ and $a_W=a_Yqp_1$ are separated and locally of finite type. Their quasi-compactness can be checked directly: the only open subsets of $\\operatorname{Spec}k$ are the empty set and the whole space, whose inverse images are empty or the quasi-compact schemes $P,W$. Thus both structure maps are of finite type by [def-weil-finite-type-morphism]. This proves that $P,W$, as well as $Y$, satisfy the standing separated-finite-type hypothesis of every rational theorem below; all the displayed arrows are $k$-morphisms by construction. Define $j:W\\setminus\\Delta(P)\\hookrightarrow W$ to be the complement inclusion. For every affine open $V$ of $W$, $j^{-1}(V)=V\\setminus\\Delta(P)$ is quasi-compact, so $j$ is a quasi-compact morphism. This checks the quasi-compact-morphism hypothesis of the open--closed statements. The integer $\\ell$ is a unit on $Y,P,W$ and the open complement, since its image is nonzero in the field $k$ of characteristic $p\\ne\\ell$ and the image of a unit under every structural ring map is a unit. Thus the invertibility hypothesis for the Tate-twist comparisons is satisfied. The chosen $E$ is a finite subextension of the fixed $\\Qlb$, and the latter has the finite-subextension-valued convention required by the current coefficient statement. All coefficient rings are the pulled-back condensed ring sheaves, not discrete constant rational sheaves: [sk-prop-sfb-cartesian-coefficients] identifies their inverse images and their twists with the corresponding coefficient sheaves. In particular module pullback is exact inverse image.",
+   "text": "Properness and Noetherianity. By [lemma-nagata-projective-space-base-change-proper], $q$ is proper, and so are $p_1,p_2$, since each is the projective-line projection over $P$ (with the factors interchanged for $p_1$). By [def-weil-proper-morphism] they are separated and of finite type; thus the diagonal $\\Delta$ of $q$ is closed. Clause (a) of [lem-weil-pbc-closed-immersion-proper] makes $\\Delta$ proper. A field is Noetherian because its only ideals are $0$ and the whole field. Apply [lem-weil-pbc-finite-type-over-noetherian] successively to $Y\\to\\operatorname{Spec}k$, $q$ and $p_1$: $Y,P,W$ are Noetherian, hence locally Noetherian and quasi-compact.",
    "uses": [
     "lemma-nagata-projective-space-base-change-proper",
     "def-weil-proper-morphism",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-sc-affine-noetherian-underlying-space",
     "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+    "place": "Well-definedness (1): proper projections, closed diagonal; existing geometric tools"
+   }
+  },
+  {
+   "text": "Quasi-separatedness and the open complement. The existing Mathlib leaf [lem-weil-pbc-locally-noetherian-quasi-separated] applies to each of the locally Noetherian schemes $Y,P,W$ from Step 1. Together with their quasi-compactness it proves they are qcqs. Put $j:W\\setminus\\Delta(P)\\hookrightarrow W$. For any affine open $V\\subseteq W$, the open subscheme $V\\setminus\\Delta(P)$ of the Noetherian scheme $W$ is Noetherian, hence quasi-compact, by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. This subscheme is $j^{-1}(V)$. Therefore $j$ is a quasi-compact morphism by [def-weil-finite-type-morphism]. These cited leaves supply the topological subclaims formerly proved inline, including the exact hypothesis required for open--closed exactness.",
+   "uses": [
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+    "place": "Well-definedness (1): qcqs and quasi-compact complement; Stacks 01OY and 01OW/01OZ/0052/04ZA through the existing leaves"
+   }
+  },
+  {
+   "text": "Standing geometric setting. The structure map $a_Y:Y\\to\\operatorname{Spec}k$ is separated and of finite type by hypothesis. Clause (e) of [lem-weil-pbc-proper-fp-permanence] applied to $q,a_Y$, and then to $p_1,a_Yq$, makes $a_P=a_Yq$ and $a_W=a_Yqp_1$ separated and locally of finite type. Both maps are quasi-compact: the only opens of $\\operatorname{Spec}k$ are empty and the whole space, and their inverse images are empty or the quasi-compact schemes $P,W$ from Step 1. Thus both maps are of finite type by [def-weil-finite-type-morphism]. Consequently $Y,P,W$ satisfy the separated-finite-type standing hypothesis in the later rational theorems; all displayed arrows are $k$-morphisms by the fibre-product construction. This argument does not require $Y$ proper over $k$.",
+   "uses": [
     "lem-weil-pbc-proper-fp-permanence",
     "def-weil-finite-type-morphism"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
-    "place": "Well-definedness (1): closed diagonal and coefficient system; geometric hypotheses: Stacks Tags 01KU (schemes-lemma-separated-permanence), 01T3 (morphisms-lemma-composition-finite-type), 01W5 (morphisms-lemma-closed-immersion-proper)"
+    "place": "Well-definedness (1)--(3): standing hypotheses; Stacks 01KU and 01T3 composition clauses"
    }
   },
   {
-   "text": "Domains of the functors. The category $\\Dbc$ in this statement uses the finite constant local models of [sk-def-sfb-constructible]: on each stratum its cohomology is locally obtained from a finitely presented scalar module by extension to the coefficient sheaf, and cohomology vanishes outside a finite interval. For these constant-model categories, [det-def-localizing-closure-ctf-equals-bc] identifies $\\Dctf$ with $\\Dbc$ and their localizing closures. Its qcqs hypothesis holds for $Y,P,W$ by Step 1. Thus these are precisely the categories $\\Loc(\\Dctf)$ used in the enclosing unit. Pullbacks preserve these closures and are exact by [det-proper-base-change-unbounded-pullback]. Proper pushforwards preserve them and are exact by [det-proper-image-localizing-proper], including $Rq_*,Rp_{i*},R\\Delta_*$. Closure under derived tensor is [det-thm-sf-pf-field-tensor]. The coefficient sheaf is a rank-one free module, and the Tate sheaf is locally free of rank one by [sk-def-sp-tate-twist], so each has the finite constant local model with scalar module $\\Lambda(*)$ on a single stratum in [sk-def-sfb-constructible]: on a trivializing cover the model is $\\Lambda_U\\otimes_{\\Lambda(*)}\\Lambda(*)\\simeq\\Lambda_U$. The scalar module $\\Lambda(*)$ is free of rank one over itself, hence finitely presented. Concentrated in degree zero, they therefore belong to $\\Dbc$. Consequently tensoring by the Tate sheaf and shifting also preserve these closures. This checks the domain of each object in all three displayed constructions, including unbounded objects in the localizing closure.",
+   "text": "Coefficient convention. The integer $\\ell$ is a unit on $Y,P,W$ and the open complement: its image is nonzero in the field $k$ of characteristic $p\\ne\\ell$, and structural ring maps carry units to units. This verifies the Tate-twist invertibility hypothesis. The fixed $E$ is a finite subextension of $\\Qlb$, whose coefficient ring uses the finite-subextension-valued convention in the statement. The Cartesian-coefficient theorem [sk-prop-sfb-cartesian-coefficients] identifies inverse images of these pulled-back condensed coefficient sheaves, and their Tate twists, with the corresponding coefficient sheaves. It also states that module pullback is exact inverse image. These are the coefficients used throughout the construction.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+    "place": "Well-definedness (1)--(3): Cartesian condensed coefficient system and twist hypotheses"
+   }
+  },
+  {
+   "text": "Domains of the functors. The category $\\Dbc$ in this statement uses the finite constant local models of [sk-def-sfb-constructible]: on each stratum its cohomology is locally obtained from a finitely presented scalar module by extension to the coefficient sheaf, and cohomology vanishes outside a finite interval. For these constant-model categories, [det-def-localizing-closure-ctf-equals-bc] identifies $\\Dctf$ with $\\Dbc$ and their localizing closures. Its qcqs hypothesis holds for $Y,P,W$ by Steps 1--4. Thus these are precisely the categories $\\Loc(\\Dctf)$ used in the enclosing unit. Pullbacks preserve these closures and are exact by [det-proper-base-change-unbounded-pullback]. Proper pushforwards preserve them and are exact by [det-proper-image-localizing-proper], including $Rq_*,Rp_{i*},R\\Delta_*$. Closure under derived tensor is [det-thm-sf-pf-field-tensor]. The coefficient sheaf is a rank-one free module, and the Tate sheaf is locally free of rank one by [sk-def-sp-tate-twist], so each has the finite constant local model with scalar module $\\Lambda(*)$ on a single stratum in [sk-def-sfb-constructible]: on a trivializing cover the model is $\\Lambda_U\\otimes_{\\Lambda(*)}\\Lambda(*)\\simeq\\Lambda_U$. The scalar module $\\Lambda(*)$ is free of rank one over itself, hence finitely presented. Concentrated in degree zero, they therefore belong to $\\Dbc$. Consequently tensoring by the Tate sheaf and shifting also preserve these closures. This checks the domain of each object in all three displayed constructions, including unbounded objects in the localizing closure.",
    "uses": [
     "det-def-localizing-closure-ctf-equals-bc",
     "det-proper-base-change-unbounded-pullback",
@@ -82,7 +114,7 @@
    }
   },
   {
-   "text": "Diagonal tensor identification, with its actual map. Put $A_M=p_1^*M\\otimes^{\\mathbf L}\\Delta_*\\Lambda_P$. The tensor-pullback isomorphism of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], the pullback composition comparison of [lem-weil-pbc-proetale-derived-pullback-composition], and the identities $p_1\\Delta=1$ and $\\Delta^*\\Delta_*\\Lambda_P=\\Lambda_P$, identify $\\Delta^*A_M$ with $M\\otimes^{\\mathbf L}\\Lambda_P=M$. The same tensor-pullback isomorphism gives $j^*A_M=0$ because $j^*\\Delta_*\\Lambda_P=0$. Use the derived pullback/direct-image adjunction of [sk-def-sfb-module-derived-pushpull] to form its unit $a_M:A_M\\to\\Delta_*\\Delta^*A_M=\\Delta_*M$. After $\\Delta^*$ it is an isomorphism: the triangle identity composes it with the invertible closed counit to give $1$. After $j^*$ it is the map $0\\to0$. The identities and closed counit here are supplied by [lem-weil-pbc-proetale-ringed-open-closed], termwise on complexes as in the preceding step. Joint conservativity from Step 3 makes $a_M$ an isomorphism. Define the isomorphism in clause (1) to be $a_M^{-1}$. It is natural in $M$, since $a$ is an adjunction unit followed by natural tensor and pullback identifications.",
+   "text": "Diagonal tensor identification, with its actual map. Put $A_M=p_1^*M\\otimes^{\\mathbf L}\\Delta_*\\Lambda_P$. The tensor-pullback isomorphism of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], the pullback composition comparison of [lem-weil-pbc-proetale-derived-pullback-composition], and the identities $p_1\\Delta=1$ and $\\Delta^*\\Delta_*\\Lambda_P=\\Lambda_P$, identify $\\Delta^*A_M$ with $M\\otimes^{\\mathbf L}\\Lambda_P=M$. The same tensor-pullback isomorphism gives $j^*A_M=0$ because $j^*\\Delta_*\\Lambda_P=0$. Use the derived pullback/direct-image adjunction of [sk-def-sfb-module-derived-pushpull] to form its unit $a_M:A_M\\to\\Delta_*\\Delta^*A_M=\\Delta_*M$. After $\\Delta^*$ it is an isomorphism: the triangle identity composes it with the invertible closed counit to give $1$. After $j^*$ it is the map $0\\to0$. The identities and closed counit here are supplied by [lem-weil-pbc-proetale-ringed-open-closed], termwise on complexes as in the preceding step. Joint conservativity from Step 6 makes $a_M$ an isomorphism. Define the isomorphism in clause (1) to be $a_M^{-1}$. It is natural in $M$, since $a$ is an adjunction unit followed by natural tensor and pullback identifications.",
    "uses": [
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
     "sk-def-sfb-module-derived-pushpull",
@@ -109,7 +141,7 @@
    }
   },
   {
-   "text": "Base change for the final arrow. The cartesian square has $f=q$, $f'=p_2$, $g=q$, $g'=p_1$. Its canonical exchange map $\\beta_M:q^*Rq_*M\\to Rp_{2*}p_1^*M$ is the unit--pullback-comparison--counit composite of [def-weil-pbc-ambient-ringed-exchange]. To apply the bounded rational theorem with its general ring-object constructibility convention, take any constant-model $M\\in\\Dbc(P,\\Lambda)$. On every stratum its cohomology has a finite constant local model, hence is locally finitely presented over the coefficient ring object by the final inclusion of [det-def-sfb-constructible-local-model]. The same finite stratification therefore witnesses constructibility in [sk-def-sfb-bounded-constructible], with the same finite cohomological bounds. Consequently $M$ belongs to the bounded category of [det-thm-sfb-proper-base-change-rational], and clause (3) makes its canonical $\\beta_M$ an isomorphism. This uses only the inclusion from constant-model constructibility into ring-object constructibility. By [det-def-localizing-closure-ctf-equals-bc] the constant-model $\\Dbc$ objects are exactly the $\\Dctf$ generators. The extension statement [det-proper-base-change-unbounded-extension] therefore makes this same $\\beta_M$ an isomorphism for every $M\\in\\Loc(\\Dbc(P,\\Lambda))$. The properness and closure-preservation hypotheses were checked in Steps 1 and 2. Invert $\\beta$ as a natural isomorphism; its direction is $Rp_{2*}p_1^*\\to q^*Rq_*$, as required by clause (2).",
+   "text": "Base change for the final arrow. The cartesian square has $f=q$, $f'=p_2$, $g=q$, $g'=p_1$. Its canonical exchange map $\\beta_M:q^*Rq_*M\\to Rp_{2*}p_1^*M$ is the unit--pullback-comparison--counit composite of [def-weil-pbc-ambient-ringed-exchange]. To apply the bounded rational theorem with its general ring-object constructibility convention, take any constant-model $M\\in\\Dbc(P,\\Lambda)$. On every stratum its cohomology has a finite constant local model, hence is locally finitely presented over the coefficient ring object by the final inclusion of [det-def-sfb-constructible-local-model]. The same finite stratification therefore witnesses constructibility in [sk-def-sfb-bounded-constructible], with the same finite cohomological bounds. Consequently $M$ belongs to the bounded category of [det-thm-sfb-proper-base-change-rational], and clause (3) makes its canonical $\\beta_M$ an isomorphism. This uses only the inclusion from constant-model constructibility into ring-object constructibility. By [det-def-localizing-closure-ctf-equals-bc] the constant-model $\\Dbc$ objects are exactly the $\\Dctf$ generators. The extension statement [det-proper-base-change-unbounded-extension] therefore makes this same $\\beta_M$ an isomorphism for every $M\\in\\Loc(\\Dbc(P,\\Lambda))$. The properness and closure-preservation hypotheses were checked in Steps 1--5. Invert $\\beta$ as a natural isomorphism; its direction is $Rp_{2*}p_1^*\\to q^*Rq_*$, as required by clause (2).",
    "uses": [
     "def-weil-pbc-ambient-ringed-exchange",
     "det-thm-sfb-proper-base-change-rational",
@@ -125,7 +157,7 @@
    }
   },
   {
-   "text": "Finish the unit, including the twist. The rational class $\\delta_\\Lambda$ exists by [det-prop-diagonal-tower-coefficients], from the tower and trace of [det-prop-diagonal-tower-trace]. Tensor it with $1_{p_1^*M}$ and apply $Rp_{2*}$ to obtain the middle arrow in clause (2). To identify its target, apply the Tate-twist clause of [sk-prop-sfb-cartesian-coefficients] to $p_2:W\\to P$, with $d=1$ and $\\Lambda=E$ or $\\Qlb$. Both schemes have $\\ell$ invertible by Step 1, and these are precisely the condensed coefficients specified there; the additional annihilation condition concerns only finite rings and is not needed here. This identifies $\\Lambda_W(1)$ with $p_2^*\\Lambda_P(1)$. Apply [det-thm-sf-pf-field-localizing] to $p_2$, $A=p_1^*M$ and $B=\\Lambda_P(1)$, and shift by $[2]$, to get $Rp_{2*}(p_1^*M(1)[2])\\simeq(Rp_{2*}p_1^*M)(1)[2]$. Then apply $\\beta_M^{-1}(1)[2]$ from Step 6. This specifies the shift and twist implicit in the final base-change arrow. Combining with Steps 4 and 5 gives exactly $\\eta_M:M\\to q^*Rq_*M(1)[2]$ with the displayed order of arrows.",
+   "text": "Finish the unit, including the twist. The rational class $\\delta_\\Lambda$ exists by [det-prop-diagonal-tower-coefficients], from the tower and trace of [det-prop-diagonal-tower-trace]. Tensor it with $1_{p_1^*M}$ and apply $Rp_{2*}$ to obtain the middle arrow in clause (2). To identify its target, apply the Tate-twist clause of [sk-prop-sfb-cartesian-coefficients] to $p_2:W\\to P$, with $d=1$ and $\\Lambda=E$ or $\\Qlb$. Both schemes have $\\ell$ invertible by Step 4, and these are precisely the condensed coefficients specified there; the additional annihilation condition concerns only finite rings and is not needed here. This identifies $\\Lambda_W(1)$ with $p_2^*\\Lambda_P(1)$. Apply [det-thm-sf-pf-field-localizing] to $p_2$, $A=p_1^*M$ and $B=\\Lambda_P(1)$, and shift by $[2]$, to get $Rp_{2*}(p_1^*M(1)[2])\\simeq(Rp_{2*}p_1^*M)(1)[2]$. Then apply $\\beta_M^{-1}(1)[2]$ from Step 9. This specifies the shift and twist implicit in the final base-change arrow. Combining with Steps 7 and 8 gives exactly $\\eta_M:M\\to q^*Rq_*M(1)[2]$ with the displayed order of arrows.",
    "uses": [
     "det-prop-diagonal-tower-coefficients",
     "det-prop-diagonal-tower-trace",
@@ -139,7 +171,7 @@
    }
   },
   {
-   "text": "Construct the counit. Set $A=\\Lambda_P(1)[2]$ and $B=K$ in [det-thm-sf-pf-field-localizing] for the proper map $q$. Tensor symmetry and $q^*K\\otimes^{\\mathbf L}\\Lambda_P(1)[2]=q^*K(1)[2]$ rewrite the inverse projection isomorphism as $Rq_*q^*K(1)[2]\\simeq K\\otimes^{\\mathbf L}Rq_*\\Lambda_P(1)[2]$. The trace of [det-prop-diagonal-tower-trace], extended to $\\Lambda=E,\\Qlb$ by [det-prop-diagonal-tower-coefficients], gives $1_K\\otimes\\operatorname{Tr}_q$ into $K\\otimes^{\\mathbf L}\\Lambda_Y\\simeq K$. Define $\\varepsilon_K$ to be this composite. All these arrows lie in the full localizing subcategories checked in Step 2.",
+   "text": "Construct the counit. Set $A=\\Lambda_P(1)[2]$ and $B=K$ in [det-thm-sf-pf-field-localizing] for the proper map $q$. Tensor symmetry and $q^*K\\otimes^{\\mathbf L}\\Lambda_P(1)[2]=q^*K(1)[2]$ rewrite the inverse projection isomorphism as $Rq_*q^*K(1)[2]\\simeq K\\otimes^{\\mathbf L}Rq_*\\Lambda_P(1)[2]$. The trace of [det-prop-diagonal-tower-trace], extended to $\\Lambda=E,\\Qlb$ by [det-prop-diagonal-tower-coefficients], gives $1_K\\otimes\\operatorname{Tr}_q$ into $K\\otimes^{\\mathbf L}\\Lambda_Y\\simeq K$. Define $\\varepsilon_K$ to be this composite. All these arrows lie in the full localizing subcategories checked in Step 5.",
    "uses": [
     "det-thm-sf-pf-field-localizing",
     "det-prop-diagonal-tower-trace",
@@ -169,12 +201,13 @@
  "proof_deps": [
   "lemma-nagata-projective-space-base-change-proper",
   "def-weil-proper-morphism",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "sk-prop-sfb-cartesian-coefficients",
-  "lem-sc-affine-noetherian-underlying-space",
   "lem-weil-pbc-closed-immersion-proper",
-  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "def-weil-finite-type-morphism",
+  "lem-weil-pbc-proper-fp-permanence",
+  "sk-prop-sfb-cartesian-coefficients",
   "det-def-localizing-closure-ctf-equals-bc",
   "det-proper-base-change-unbounded-pullback",
   "det-proper-image-localizing-proper",
@@ -273,10 +306,87 @@
    "results": "{\"t\": \"2026-10-16T22:28:37Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.id\", \"CategoryTheory.Adjunction.instInhabitedId\", \"CategoryTheory.Adjunction\", \"CategoryTheory.Equivalence.toAdjunction\", \"CategoryTheory.Equivalence.toAdjunction'\", \"CategoryTheory.Adjunction.isLeftAdjoint\", \"CategoryTheory.Adjunction.isRightAdjoint\", \"CategoryTheory.Adjunction.mk'\"], \"digest\": \"6c2f51fe54d106ad\"}",
    "date": "2026-10-16",
    "verdict": "no match: read Mathlib/CategoryTheory/Adjunction/Basic.lean:1-105; generic adjunction data and constructors neither supply the geometric diagonal tensor isomorphism nor construct this class/trace pair."
+  },
+  {
+   "tool": "grep",
+   "query": "projectiveLine|diagonalClass|projectionFormula|ProEtale",
+   "results": "{\"t\": \"2026-10-17T08:39:10Z\", \"tool\": \"grep\", \"query\": \"projectiveLine|diagonalClass|projectionFormula|ProEtale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\"], \"digest\": \"50ba5725e3b1bc44\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: the hits concern generic adjunction/sheafification, scheme permanence, topology, integral cohomology, or Proj charts; none gives all three rational pro-etale construction clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Diagonal tensor isomorphism and trace projection formula constructing the rational projective line unit counit",
+   "results": "{\"t\": \"2026-10-17T08:39:10Z\", \"tool\": \"leansearch\", \"query\": \"Diagonal tensor isomorphism and trace projection formula constructing the rational projective line unit counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Action.diagonalSuccIsoTensorTrivial\", \"Rep.diagonalSuccIsoTensorTrivial\", \"CategoryTheory.Functor.instMonoidalProdDiag\", \"Matrix.diagLinearMap\", \"CategoryTheory.Functor.diag_ε\", \"LinearMap.diag\", \"Bialgebra.TensorProduct.counit_eq_algHom_toLinearMap\", \"CategoryTheory.Limits.diag\"], \"digest\": \"6cc213c6035019bb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: the hits concern generic adjunction/sheafification, scheme permanence, topology, integral cohomology, or Proj charts; none gives all three rational pro-etale construction clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Sheaf",
+   "results": "{\"t\": \"2026-10-17T08:39:11Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.Sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.plusPlusAdjunction\", \"CategoryTheory.sheafificationAdjunction\", \"CategoryTheory.HasSheafify.mk'\", \"CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction\", \"CategoryTheory.GrothendieckTopology.W_iff_isIso_map_of_adjunction\", \"CategoryTheory.GrothendieckTopology.W_adj_unit_app\", \"CategoryTheory.sheafComposeNatIso\", \"CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans\"], \"digest\": \"352ff0439986de05\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: the hits concern generic adjunction/sheafification, scheme permanence, topology, integral cohomology, or Proj charts; none gives all three rational pro-etale construction clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rational pro-etale projective line adjunction unit from the diagonal class and counit from trace",
+   "results": "{\"t\": \"2026-10-17T08:39:21Z\", \"tool\": \"leanfinder\", \"query\": \"Rational pro-etale projective line adjunction unit from the diagonal class and counit from trace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.homEquiv\", \"StandardEtalePair.homEquiv_symm_apply\", \"StandardEtalePair.homEquiv_apply_coe\", \"StandardEtalePresentation.lift_bijective\", \"StandardEtalePair.instFormallyEtaleRing\", \"StandardEtalePair.hasMap_X\", \"StandardEtalePresentation.toPresentation_σ'\", \"Algebra.instIsStandardEtale\"], \"digest\": \"9772579d20f877e3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: the hits concern generic adjunction/sheafification, scheme permanence, topology, integral cohomology, or Proj charts; none gives all three rational pro-etale construction clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex on a scheme identified with its pullback to the product tensor the coefficient sheaf supported on the diagonal; projective space trace and inverse proper base change",
+   "results": "{\"t\": \"2026-10-17T08:40:36Z\", \"tool\": \"leanfinder\", \"query\": \"A complex on a scheme identified with its pullback to the product tensor the coefficient sheaf supported on the diagonal; projective space trace and inverse proper base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc\"], \"digest\": \"d37911906df81542\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: the hits concern generic adjunction/sheafification, scheme permanence, topology, integral cohomology, or Proj charts; none gives all three rational pro-etale construction clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective line over a separated finite type scheme over a field is proper and its product is a separated finite type scheme; its diagonal is proper",
+   "results": "{\"t\": \"2026-10-17T08:41:24Z\", \"tool\": \"leansearch\", \"query\": \"Projective line over a separated finite type scheme over a field is proper and its product is a separated finite type scheme; its diagonal is proper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.IsProper.of_comp_of_isSeparated\", \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"AlgebraicGeometry.IsProper.toIsSeparated\"], \"digest\": \"e58b067fcddbf92d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: the hits concern generic adjunction/sheafification, scheme permanence, topology, integral cohomology, or Proj charts; none gives all three rational pro-etale construction clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSeparated, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "{\"t\": \"2026-10-17T08:41:25Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsSeparated, AlgebraicGeometry.LocallyOfFiniteType\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ext_of_apply_eq\", \"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.instIsOpenImmersionToNormalizationOfLocallyQuasiFiniteOfLocallyOfFiniteType\", \"AlgebraicGeometry.instIsOpenImmersionCompSchemeιQuasiFiniteLocusToNormalization\", \"AlgebraicGeometry.Scheme.Hom.exists_isIso_morphismRestrict_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.exists_mem_and_isIso_morphismRestrict_toNormalization\"], \"digest\": \"92abd276211535d4\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: the hits concern generic adjunction/sheafification, scheme permanence, topology, integral cohomology, or Proj charts; none gives all three rational pro-etale construction clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSeparated|LocallyOfFiniteType|QuasiCompact",
+   "results": "{\"t\": \"2026-10-17T08:41:25Z\", \"tool\": \"grep\", \"query\": \"IsSeparated|LocallyOfFiniteType|QuasiCompact\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean\"], \"digest\": \"5ad7302f01e405f3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: the hits concern generic adjunction/sheafification, scheme permanence, topology, integral cohomology, or Proj charts; none gives all three rational pro-etale construction clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The complement of a closed diagonal in a Noetherian scheme is quasi-compact as an open immersion",
+   "results": "{\"t\": \"2026-10-17T08:41:25Z\", \"tool\": \"leansearch\", \"query\": \"The complement of a closed diagonal in a Noetherian scheme is quasi-compact as an open immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"TopologicalSpace.Closeds.compl\", \"AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact\", \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact\", \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\"], \"digest\": \"7986fb9503a3c15c\"}",
+   "date": "2026-10-17",
+   "verdict": "support search: existing Noetherian open-subscheme and locally Noetherian quasi-separated Mathlib leaves are reused; no new node; this is not a match for the full item"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopologicalSpace.NoetherianSpace.isCompact",
+   "results": "{\"t\": \"2026-10-17T08:41:26Z\", \"tool\": \"loogle\", \"query\": \"TopologicalSpace.NoetherianSpace.isCompact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"TopologicalSpace.NoetherianSpace.isCompact\"], \"digest\": \"91c82972a960f3f7\"}",
+   "date": "2026-10-17",
+   "verdict": "support search: existing Noetherian open-subscheme and locally Noetherian quasi-separated Mathlib leaves are reused; no new node; this is not a match for the full item"
+  },
+  {
+   "tool": "grep",
+   "query": "NoetherianSpace.isCompact|quasiCompact|QuasiCompact",
+   "results": "{\"t\": \"2026-10-17T08:41:26Z\", \"tool\": \"grep\", \"query\": \"NoetherianSpace.isCompact|quasiCompact|QuasiCompact\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Topology/QuasiSeparated.lean\", \"Mathlib/Topology/NoetherianSpace.lean\", \"Mathlib/Topology/NoetherianSpace.lean\", \"Mathlib/Topology/NoetherianSpace.lean\", \"Mathlib/Topology/NoetherianSpace.lean\", \"Mathlib/Topology/NoetherianSpace.lean\", \"Mathlib/Topology/Spectral/Prespectral.lean\"], \"digest\": \"874bad236f602ff6\"}",
+   "date": "2026-10-17",
+   "verdict": "support search: existing Noetherian open-subscheme and locally Noetherian quasi-separated Mathlib leaves are reused; no new node; this is not a match for the full item"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -309,8 +419,8 @@
   "date": "2026-10-17",
   "item": "det-prop-p1-adjunction-rational-unit-counit",
   "worker": "stage1",
-  "summary": "Repair of the returned domain and geometric-hypothesis faults. Defines Dbc by finite constant local models (sk-def-sfb-constructible), so ctf=bc applies on exactly the unit domain. Step 6 explicitly embeds these generators in the general ring-object bounded category using the local-model inclusion, before applying bounded rational base change and its unbounded extension. Step 1 cites existing composition permanence for separated and locally finite-type morphisms and checks quasi-compactness over Spec k directly, proving P and W are standing schemes; it cites closed-immersion properness for Delta. All five previously omitted off-unit tools and the inclusion are declared. The nine-step construction and canonical exchange map are retained, with no new nodes.",
-  "blueprint": "Realizes step 1 of sk-prop-p1-adjunction-rational and every sentence of the node proof: support and joint conservativity (steps 3--4), composition (5), proper base change (6--7), projection formula and trace (8), naturality/exactness (9); steps 1--2 verify the hypotheses and domains. Triangle identities remain in the sibling node.",
+  "summary": "Q149 dedicated long-step repair. Preserve the statement, coefficient domains, canonical exchange, and all eight later construction steps. Replace the 3339-character geometry step by four short steps, citing the existing Mathlib leaves for locally Noetherian quasi-separatedness and Noetherian open subschemes instead of hiding their arguments inline. Retain the existing properness and composition tools. No new nodes.",
+  "blueprint": "Realizes unit sk-prop-p1-adjunction-rational step 1 and the full item well-definedness proof: geometric/coefficient hypotheses (1--4), domains (5), support and diagonal tensor identification (6--7), composition (8), canonical base change (9--10), projection-formula trace counit (11), naturality/exactness (12). Triangle identities remain in the sibling node.",
   "tool_uses": [
    {
     "node": "lemma-nagata-projective-space-base-change-proper",
@@ -407,11 +517,11 @@
   "lem-weil-pbc-proper-fp-permanence"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q06-32d025dc4",
-  "group": "Q06",
+  "reviewer": "NT-cc-Q149-084b403ca",
+  "group": "Q149",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-32d025dc4 (reviewer sub-agent of L); spot-checked: Read in full: the item's statement and all 9 steps, all 30 proof_deps and 12 stmt_deps statements, the main-20261015 blueprint item, its proof, the unit sk-prop-p1-adjunction-rational, the triangle sibling and sk-thm-sf-pf-field (section, proof and -localizing). Stacks 09BM was read in proetale.tex; the tags table confirms the labels for 09AA, 09AH, 09AD, 01KU, 01T3 and 01W5. Statement: clauses 1-3 match the blueprint word for word. The added preamble makes Dbc the constant-local-model category of sk-def-sfb-constructible, and ctf=bc identifies its Loc with the unit's Loc(Dctf), so nothing is weakened. The broader ring-object Dcons enters only in Step 6, through the forward inclusion in det-def-sfb-constructible-local-model; the converse is not used. Base change: square f=q, f'=p2, g=q, g'=p1, with the unit-theta-counit exchange q^*Rq_* -> Rp2_*p1^*, inverted as clause 2 requires. It is an isomorphism on generators by rational proper base change (3) and on Loc by unbounded-extension. This follows the main-20261015 route of sk-thm-sf-pf-field through proper-base-change-unbounded. Step 1: q and the p_i are proper, Delta is proper, and Y, P, W are Noetherian and qcqs. j is quasi-compact (the 09BM hypothesis), and P and W are standing schemes by permanence (e) plus quasi-compactness over Spec k. Steps 3-4: the open-closed sequence on H^n of a cone gives joint conservativity for unbounded complexes, and the adjunction unit a_M is checked on Delta (triangle identity) and on the complement (zero). Steps 7-8: the projection formula is used in the correct orientation, with the twist from cartesian coefficients and the class/trace from the diagonal-tower nodes. Step 9: naturality and exactness are shown without assuming the triangle identities. Edge cases checked: Y empty, zero objects, Y=Spec k, unbounded M, char ell excluded, Qlb(*) a field. proof_deps equals the union of step uses. All 18 off-unit tool_uses are generic tools or on the transitive route, and I accept them. There are no new nodes and no duplicates (the other P^1 adjunction nodes use finite, tower or etale coefficients). No SGA. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-084b403ca (reviewer sub-agent of L); spot-checked: I read the item in full: the unchanged statement, which matches the main-20261015 blueprint clauses 1-3 word for word, and all 12 steps. I read the full statement of all 31 proof_deps and 12 stmt_deps, the unit sk-prop-p1-adjunction-rational, the blueprint item and proof, and the proof of det-thm-sfb-proper-base-change-rational (its BC map is unit-theta-counit and its Dbc is the ring-object category). The return point is repaired: the old 3339-character step 1 is now four steps of 659, 751, 777 and 733 characters, and no step is longer than 1584. Step 1: Nagata properness covers q and p_i through W ≅ P({0,1};P), with the projections swapped (harmless). Separatedness gives a closed diagonal, closed-immersion-proper (a) makes Δ proper, and finite-type-over-noetherian applied three times makes Y, P, W Noetherian. Step 2: the locally-Noetherian-quasi-separated leaf gives qcqs. V minus Δ(P) is an open of a Noetherian scheme, hence quasi-compact, so j is quasi-compact by the definition node; this is the hypothesis the open-closed node needs. Step 3: permanence (e) plus Spec k being a point gives P and W separated of finite type over k, without assuming Y proper. Step 4: cartesian coefficients and twists apply, ℓ is invertible, and module pullback is exact. Step 5: the domain theorems apply in the standing setting, and Λ(1) has a rank-one constant local model. Step 6: the open-closed exact sequence applied to the H^n of a cone gives joint conservativity on unbounded complexes. Step 7: the closed counit is invertible, which follows in a few lines from the cited node's sequence and i^{-1}i_*≅1 (I accept this as elementary); a_M is an isomorphism and a_M^{-1} has clause 1's orientation. Step 8: κ with p2Δ=1. Step 9: the square f=q, f'=p2, g=q, g'=p1; only the forward inclusion from constant model to ring-object constructible is used; rational PBC (3) handles the generators, ctf=bc and unbounded-extension carry it to Loc, and the inverse has the right direction. Step 10: the p2-twist through cartesian coefficients and the localizing projection formula. Step 11: the projection formula for q with A=Λ_P(1)[2] and B=K, then 1⊗Tr. Step 12: naturality and exactness, without assuming the triangle identities. Edge cases checked: Y empty, zero objects, Y=Spec k, unbounded M. proof_deps equals the union of step uses, there is no cycle, no new nodes, no duplicates (the other P^1 adjunction nodes use finite, tower or étale coefficients), and no SGA. I accept the 17 declared tool_uses for cited nodes. The split_report entry lem-sc-affine-noetherian-underlying-space is stale (no longer cited) and should not be recorded. No fixes."
  }
 }
