@@ -6,24 +6,25 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.Fourier
-public import WeilConjectures.WeilSheaf.LowerShriek
-public import WeilConjectures.WeilSheaf.LowerStar
+public import WeilConjectures.WeilSheaf.FourierInversion.OtherSections
+public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
+public import WeilConjectures.WeilSheaf.LowerStarId
 
 /-!
 # The compact support package for Weil complexes
 
-Clauses 3, 4 and 5 of the coefficient and functor package (blueprint `prop-functor-package`),
-for the direct image with compact support `Rf_!` of Weil complexes
-(`AlgebraicGeometry.WeilComplex.derivedLowerShriek`): the composition law and its identity
-equation, the comparison `Rf_! ≅ Rf_*` for proper `f` and the open–closed triangle (clause 3),
-compact support base change (clause 4) and the projection formula for the tensor product with a
-lisse Weil sheaf (clause 5). They are stated here, with `sorry`, as nodes of the six functor
-formalism.
+Forms of clauses 3 and 4 of the coefficient and functor package (blueprint
+`prop-functor-package`) and of the projection formula (blueprint `prop-weil-operations`) for the
+direct image with compact support `Rf_!` of Weil complexes
+(`AlgebraicGeometry.WeilComplex.derivedLowerShriek`), in the shape used by the Fourier
+transform computations of `sec-deligne-laumon-a1`. They are derived from the statements of those
+nodes in `WeilConjectures.WeilSheaf.LowerShriekFunctoriality` and
+`WeilConjectures.WeilSheaf.FourierInversion.OtherSections`.
 
 ## Main statements
 
 - `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriekCompIso`: `R(f ≫ g)_! ≅ Rg_! Rf_!`.
-- `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriekIdIso`: `R(𝟙)_! ≅ 𝟭`.
+- `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriekIdIso`: `R(𝟙)_! K ≅ K`.
 - `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriekIsoDerivedLowerStar`: `Rf_! ≅ Rf_*`
   for proper `f`.
 - `AlgebraicGeometry.WeilComplex.exists_distTriang_derivedLowerShriek_openClosed_comp`: the
@@ -62,17 +63,24 @@ theorem nonempty_derivedLowerShriekCompIso {X Y W : Scheme.{u}}
     [LocallyOfFiniteType (W ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (W ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (W ↘ Spec (CommRingCat.of k₀))] :
-    Nonempty (derivedLowerShriek k₀ l h ≅ derivedLowerShriek k₀ l f ⋙ derivedLowerShriek k₀ l g) :=
-  sorry
+    Nonempty (derivedLowerShriek k₀ l h ≅
+      derivedLowerShriek k₀ l f ⋙ derivedLowerShriek k₀ l g) := by
+  subst hfg
+  exact nonempty_derivedLowerShriek_comp_iso f g
 
 /-- **The identity equation of the composition law**: the direct image with compact support along
-the identity is the identity. (blueprint: `prop-functor-package`, clause 3) -/
+the identity is the identity, `R(𝟙)_! K ≅ K`: the identity is proper, so `R(𝟙)_! K ≅ R(𝟙)_* K`,
+and the pushforward along the identity is the identity. (blueprint: `prop-functor-package`,
+clause 3) -/
 theorem nonempty_derivedLowerShriekIdIso (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-    [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))] :
-    Nonempty (derivedLowerShriek k₀ l (𝟙 X) ≅ 𝟭 (WeilComplex k₀ l X)) :=
-  sorry
+    [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    (K : WeilComplex k₀ l X) : Nonempty ((derivedLowerShriek k₀ l (𝟙 X)).obj K ≅ K) :=
+  ⟨derivedLowerShriekObjIsoDerivedLowerStar (𝟙 X) K ≪≫ ObjectProperty.isoMk _
+    ((Functor.rightDerivedFunctorNatIso (ProEtaleWeilSheaf.lowerStarIdIso k₀ l X)).app K.obj ≪≫
+      (Functor.rightDerivedFunctorIsoMapDerivedCategory (𝟭 _)).app K.obj ≪≫
+      (Functor.mapDerivedCategoryIdIso _).app K.obj)⟩
 
 /-- **Compact support and ordinary direct image agree for proper morphisms**: `Rf_! ≅ Rf_*` for a
 proper morphism `f` of `k₀`-schemes. (blueprint: `prop-functor-package`, clause 3) -/
@@ -83,7 +91,7 @@ theorem nonempty_derivedLowerShriekIsoDerivedLowerStar {X Y : Scheme.{u}}
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] (K : WeilComplex k₀ l X) :
     Nonempty ((derivedLowerShriek k₀ l f).obj K ≅ (derivedLowerStar f).obj K) :=
-  sorry
+  ⟨derivedLowerShriekObjIsoDerivedLowerStar f K⟩
 
 /-- **The open–closed triangle under `Rf_!`**: for a closed immersion `i : Z ↪ X` with open
 complement `j : U ↪ X`, a morphism `f : X ⟶ Y` of `k₀`-schemes and a Weil complex `K` on `X`,
@@ -113,8 +121,19 @@ theorem exists_distTriang_derivedLowerShriek_openClosed_comp {U X Z Y : Scheme.{
         (derivedLowerShriek k₀ l fi).obj ((upperStar i).obj K))
       (γ : (derivedLowerShriek k₀ l fi).obj ((upperStar i).obj K) ⟶
         ((derivedLowerShriek k₀ l fj).obj ((upperStar j).obj K))⟦(1 : ℤ)⟧),
-      Triangle.mk α β γ ∈ distTriang (WeilComplex k₀ l Y) :=
-  sorry
+      Triangle.mk α β γ ∈ distTriang (WeilComplex k₀ l Y) := by
+  have : QuasiCompact j := by
+    have : QuasiCompact (j ≫ f) := hfj ▸ inferInstance
+    exact QuasiCompact.of_comp j f
+  subst hfj hfi
+  obtain ⟨T, hT, ⟨e₁⟩, ⟨e₂⟩, ⟨e₃⟩⟩ := exists_distTriang_derivedLowerShriek_openClosed (k₀ := k₀)
+    (l := l) j i (by rw [hij]; exact isCompl_compl) f K
+  refine ⟨e₁.inv ≫ T.mor₁ ≫ e₂.hom, e₂.inv ≫ T.mor₂ ≫ e₃.hom,
+    e₃.inv ≫ T.mor₃ ≫ (shiftFunctor _ (1 : ℤ)).map e₁.hom, ?_⟩
+  refine isomorphic_distinguished T hT _ (Triangle.isoMk _ _ e₁.symm e₂.symm e₃.symm ?_ ?_ ?_)
+  · simp
+  · simp
+  · simp [← Functor.map_comp]
 
 /-- **Compact support base change**: for a cartesian square
 ```
@@ -142,11 +161,11 @@ theorem nonempty_upperStarDerivedLowerShriekIso_of_isPullback {X Y X' Y' : Schem
     [h.IsOver (Spec (CommRingCat.of k₀))] (hH : IsPullback g f' f h) (K : WeilComplex k₀ l X) :
     Nonempty ((upperStar h).obj ((derivedLowerShriek k₀ l f).obj K) ≅
       (derivedLowerShriek k₀ l f').obj ((upperStar g).obj K)) :=
-  sorry
+  ⟨(nonempty_upperStar_derivedLowerShriek_iso hH).some.app K⟩
 
 /-- **The projection formula** for the tensor product with a lisse Weil sheaf: for a morphism
 `f : X ⟶ Y` of `k₀`-schemes, a lisse Weil sheaf `L` on `Y` and a Weil complex `K` on `X`,
-`L ⊗ Rf_! K ≅ Rf_!(f^*L ⊗ K)`. (blueprint: `prop-functor-package`, clause 5) -/
+`L ⊗ Rf_! K ≅ Rf_!(f^*L ⊗ K)`. (blueprint: `prop-weil-operations`) -/
 theorem nonempty_tensorLisseDerivedLowerShriekIso {X Y : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
@@ -159,7 +178,7 @@ theorem nonempty_tensorLisseDerivedLowerShriekIso {X Y : Scheme.{u}}
       (derivedLowerShriek k₀ l f).obj
         ((tensorLisse ((WeilSheaf.upperStar f).obj L)
           (ProEtale.IsAdicLisseSheaf.upperStar _ hL)).obj K)) :=
-  sorry
+  ⟨(nonempty_iso_derivedLowerShriek_tensorLisse f L hL).some.app K⟩
 
 end WeilComplex
 

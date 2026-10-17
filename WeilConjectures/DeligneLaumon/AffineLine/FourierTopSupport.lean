@@ -167,11 +167,12 @@ theorem mor₂_ne_zero_of_mem_support {V : Scheme.{u}} [V.Over (Spec (CommRingCa
   intro hβ
   obtain ⟨r, hr⟩ := Triangle.coyoneda_exact₂ _ hT (𝟙 _) (by simp [hβ])
   obtain ⟨eId⟩ := nonempty_derivedLowerShriekIdIso (k₀ := k₀) (l := l) (affineLine k₀)
+    (WeilSheaf.toComplex.obj G)
   obtain ⟨eZ⟩ := nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion (l := l) j
     ((WeilSheaf.upperStar j).obj G)
   let H0 := homologySheaf (k₀ := k₀) (l := l) (X := affineLine k₀) 0
   let e₁ : H0.obj ((derivedLowerShriek k₀ l (𝟙 _)).obj (WeilSheaf.toComplex.obj G)) ≅ G :=
-    H0.mapIso (eId.app _) ≪≫ WeilSheaf.toComplexCompHomologySheafIso.app G
+    H0.mapIso eId ≪≫ WeilSheaf.toComplexCompHomologySheafIso.app G
   let e₂ : H0.obj ((derivedLowerShriek k₀ l j).obj ((upperStar j).obj
       (WeilSheaf.toComplex.obj G))) ≅ (WeilSheaf.extensionByZero j).obj
         ((WeilSheaf.upperStar j).obj G) :=
@@ -323,11 +324,11 @@ theorem exists_isNegCoordOver_ne_zero_of_mem_support (ψ : AddChar k₀ (PadicAl
     i hi (𝟙 _) V.ι i (Category.comp_id _) (Category.comp_id _) KG
   have hβ := WeilComplex.mor₂_ne_zero_of_mem_support V.ι G x hx hxj α β γ hT₀
   obtain ⟨eId⟩ := WeilComplex.nonempty_derivedLowerShriekIdIso (k₀ := k₀) (l := l)
-    (affineLine k₀)
+    (affineLine k₀) KG
   have hC : C.obj.IsGE 0 := WeilComplex.isGE_derivedLowerShriek_obj i
     (WeilComplex.isGE_upperStar_obj i (WeilComplex.isGE_toComplex_obj G))
   have hφ := WeilComplex.mor₂_comp_shift_map_ne_zero f g h hT (m + 1) (by simpa using hF₁) hC eG
-    ((eId.app KG).inv ≫ β) fun h0 ↦ hβ ((cancel_epi (eId.app KG).inv).1 (h0.trans comp_zero.symm))
+    (eId.inv ≫ β) fun h0 ↦ hβ ((cancel_epi eId.inv).1 (h0.trans comp_zero.symm))
   -- the inverse transform of `i_*i^*G` is `B[1]`
   let X' := pullback i (affinePlane.fst k₀)
   let q : X' ⟶ Z := pullback.fst i (affinePlane.fst k₀)
@@ -364,7 +365,7 @@ theorem exists_isNegCoordOver_ne_zero_of_mem_support (ψ : AddChar k₀ (PadicAl
     ((fourierTransform ψ⁻¹).commShiftIso (-(m + 1))).app C ≪≫
       (shiftFunctor _ (-(m + 1))).mapIso ((fourierTransform ψ⁻¹).mapIso eC ≪≫ eB) ≪≫
       (shiftFunctorAdd' _ (1 : ℤ) (-(m + 1)) (-m) (by ring)).symm.app _
-  set φ := g ≫ eG.hom ≫ (shiftFunctor _ (-(m + 1))).map ((eId.app KG).inv ≫ β)
+  set φ := g ≫ eG.hom ≫ (shiftFunctor _ (-(m + 1))).map (eId.inv ≫ β)
   have hφ' : (eI.app K).inv ≫ (fourierTransform ψ⁻¹).map φ ≫ ε.hom ≠ 0 := by
     intro h0
     refine hφ ((fourierTransform ψ⁻¹).map_injective ?_)

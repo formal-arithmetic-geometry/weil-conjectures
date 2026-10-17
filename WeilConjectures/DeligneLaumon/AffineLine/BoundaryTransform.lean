@@ -220,9 +220,9 @@ theorem nonempty_iso_fourierTransform_toComplex_of_isPullback
     (derivedLowerShriek k₀ l j).map_isZero
       ((WeilSheaf.toComplex.map_isZero hF).of_iso ((toComplexCompUpperStarIso j).app F))
   have : IsIso β := (Triangle.isZero₁_iff_isIso₂ _ hT).1 h₁
-  obtain ⟨eId⟩ := nonempty_derivedLowerShriekIdIso (k₀ := k₀) (l := l) (affineLine k₀)
+  obtain ⟨eId⟩ := nonempty_derivedLowerShriekIdIso (k₀ := k₀) (l := l) (affineLine k₀) K
   let e₁ : K ≅ (derivedLowerShriek k₀ l i).obj ((WeilComplex.upperStar i).obj K) :=
-    (eId.app K).symm ≪≫ asIso β
+    eId.symm ≪≫ asIso β
   exact ⟨(fourierTransform ψ).mapIso (e₁ ≪≫ (derivedLowerShriek k₀ l i).mapIso
       ((toComplexCompUpperStarIso i).app F)) ≪≫
     (nonempty_iso_fourierTransform_derivedLowerShriek_of_isPullback ψ i q i' π hπ hP
