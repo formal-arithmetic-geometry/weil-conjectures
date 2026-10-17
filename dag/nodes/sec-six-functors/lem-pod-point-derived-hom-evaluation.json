@@ -19,11 +19,127 @@
   "def-pur-sheaf-hom",
   "def-pur-hom-complex",
   "def-pur-sheaf-tensor-product",
+  "lem-weil-point-proetale-sections-exact",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "View ordinary $R$-modules as module sheaves on the one-object site with only the maximal covering sieve. Let $a:\\operatorname{Sh}(s_{\\mathrm{proet}})\\to\\operatorname{Set}$ have inverse image the constant-sheaf functor: a map from the constant presheaf with value $T$ into a sheaf $F$ is precisely a function $T\\to F(s)$, and sheafification gives the same adjunction for constant sheaves [def-weil-pbc-constant-sheaf]. The constant-presheaf functor preserves finite limits objectwise; sheafification preserves finite limits by [lem-weil-pbc-sheafification-sets-exact]. Thus this is a geometric morphism. With ring map $\\underline R\\to B$, its module pullback is exactly $L_R$, by the displayed tensor construction. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the given K-flat complex $c$ with flat terms: $L_Rc$ is K-flat over $B$ (indeed has flat terms). This uses the general ringed-topos assertion, including its flat-term hypothesis, and does not identify the pro-etale topos with sets.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-sheafification-sets-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E (lemma-pullback-K-flat); sites.tex Tag 00WJ (lemma-sheafification-exact)"
+   }
+  },
+  {
+   "text": "By [def-pur-sheaf-hom] and the sectionwise products in [def-pur-hom-complex], the degree-$j$ sections of $\\mathcal Hom_B^\\bullet(L_Rc,I)$ are $\\prod_p\\operatorname{Hom}_B(L_Rc^p,I^{p+j})$. Apply the assumed explicit adjunction separately to each factor. It gives an $R$-linear bijection to $\\prod_p\\operatorname{Hom}_R(c^p,\\Gamma(s,I^{p+j}))$, sending $h^p$ to $x\\mapsto h_s^p(1\\otimes x)$. Its inverse sends a family $t^p$ to the sheaf maps locally given by $b\\otimes x\\mapsto b\\,t^p(x)|_U$, extended from constant sections by sheafification. These are mutual inverses by the assumed adjunction, with no finiteness requirement on the product or on $c^p$.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), definition of the terms; sites-modules.tex Tag 04TT (section-internal-hom)"
+   }
+  },
+  {
+   "text": "The degreewise bijections form a chain isomorphism $q_{c,I}$. In fact [def-pur-hom-complex] gives, for $h$ of degree $j$ and $x\\in c^p$,\n$$q(dh)^p(x)=d_I(h_s^p(1\\otimes x))-(-1)^j h_s^{p+1}(1\\otimes d_cx)=(d\\,q(h))^p(x).$$\nHere the differential on $L_Rc$ is $L_R(d_c)$, so it takes $1\\otimes x$ to $1\\otimes d_cx$. For chain maps $u:c'\\to c$ and $v:I\\to I'$, direct substitution gives $q_{c',I'}(vhu)=\\Gamma(v)q_{c,I}(h)u$ (with $L_Ru$ on the sheaf side). This proves naturality, including naturality of the inverse.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), differential and componentwise composition"
+   }
+  },
+  {
+   "text": "The exact additive functor $L_R$ is left adjoint to $\\Gamma(s,-)$ by hypothesis. Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] with $\\mathcal A=\\operatorname{Mod}(B)$, $\\mathcal B=R\\text{-}\\operatorname{Mod}$, $v=L_R$, $u=\\Gamma(s,-)$. Since $I$ is K-injective, $\\Gamma(s,I)$ is K-injective. Both exactness and the adjunction used here are hypotheses of this item; no injectivity assertion for arbitrary sections functors is being used.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ (lemma-adjoint-preserve-K-injectives)"
+   }
+  },
+  {
+   "text": "The resolution map $B\\to I$ is a quasi-isomorphism. By exactness of sections, in the precise complex form stated in [lem-weil-point-proetale-sections-exact], $\\Gamma(s,B)\\to\\Gamma(s,I)$ is a quasi-isomorphism. Composing it with the assumed constant-value identification $R\\xrightarrow{\\sim}\\Gamma(s,B)$ gives the specified quasi-isomorphism $R\\to\\Gamma(s,I)$. Thus the previous step supplies a K-injective resolution of the module complex $R[0]$.",
+   "uses": [
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ (lemma-adjoint-preserve-K-injectives), together with the item hypothesis that sections are exact"
+   }
+  },
+  {
+   "text": "By [def-pur-derived-internal-hom], the sheaf complex $H=\\mathcal Hom_B^\\bullet(L_Rc,I)$ represents $R\\mathcal Hom_B(L_Rc,B)$, and the same definition on the one-object ringed site says that $\\operatorname{Hom}_R^\\bullet(c,\\Gamma(s,I))$ represents $R\\operatorname{Hom}_R(c,R)$. By [lem-weil-point-proetale-sections-exact], termwise sections preserve quasi-isomorphisms, so $\\Gamma(s,H)$ represents the sections of the former derived object. The chain isomorphism of steps 2--3 therefore gives the asserted derived isomorphism. Independence of the representatives follows from [lem-pur-rhom-well-defined] on each of the two ringed sites, and preservation of the resulting quasi-isomorphisms by sections. The naturality already proved on complexes consequently gives naturality of this comparison in the derived category.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J7 (section-internal-hom), construction using K-injective targets; Tag 0A95 (lemma-RHom-well-defined)"
+   }
+  },
+  {
+   "text": "Use the ordinary derived tensor and the closed structure of [lem-sf-ringed-derived-closed-symmetric-monoidal]. Since $L_Rc$ is K-flat, $L_Rc\\otimes_B H$ represents the sheaf derived evaluation's source; since $c$ is K-flat, $c\\otimes_R\\operatorname{Hom}_R^\\bullet(c,\\Gamma(s,I))$ represents its module counterpart. The evaluation with Hom first is the counit: on complexes it takes $h\\otimes y$ to $h(y)$, as follows by uncurrying the identity of the Hom complex. Reordering to put the argument first uses the specified symmetry of that cited node, and so gives $e(y\\otimes h)=(-1)^{pj}h^p(y)$ for $|y|=p$, $|h|=j$. This formula is a chain map: using [def-pc-tensor-complex-sheaves] and [def-pur-hom-complex], the two $h(dy)$ terms in $e(dy\\otimes h+(-1)^p y\\otimes dh)$ have coefficients $(-1)^{pj+j}$ and $-(-1)^{pj+j}$, while the remaining term is $(-1)^{pj}d_Ih(y)=d_Ie(y\\otimes h)$. This also checks the sign for the ordinary module version.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J7 (section-internal-hom), equation-internal-hom and its counit; Tag 0FPT (lemma-symmetric-monoidal-derived); Tag 0A8X (section-hom-complexes)"
+   }
+  },
+  {
+   "text": "The balancing map needed here is the chain map\n$$\\beta:c\\otimes_R\\Gamma(s,H)\\longrightarrow\\Gamma(s,L_Rc\\otimes_B H),\\qquad x\\otimes h\\longmapsto(1\\otimes x)\\otimes h.$$\nIt is induced by the unit $x\\mapsto1\\otimes x$ and by tensoring sections; balancing and restriction follow from [def-pur-sheaf-tensor-product]. On direct-sum total tensors [def-pc-tensor-complex-sheaves] it is defined on each summand, so no commutation of sections with infinite coproducts is assumed. Its chain-map identity follows from $d(1\\otimes x)=1\\otimes dx$ and the identical tensor signs on both sides. By step 7,\n$$\\Gamma(e)\\beta(x\\otimes h)=(-1)^{pj}h_s^p(1\\otimes x)=e_R(x\\otimes q_{c,I}(h)).$$\nPure tensors generate each summand of the module tensor, hence the two chain maps are equal. Passing to the derived category proves compatibility of the specified derived evaluations under $q_{c,I}$ and this balancing map. The target is $\\Gamma(s,I)\\simeq R$ from step 5. This computation uses ordinary tensor throughout and makes no assertion about derived completion.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J7 (section-internal-hom), evaluation counit; sites-modules.tex Tag 03EK (section-tensor-product)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-constant-sheaf",
+  "lem-pur-rhom-well-defined",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-sheafification-sets-exact",
   "lem-weil-point-proetale-sections-exact"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit adjunction and chain-level evaluation expansion of the blueprint point comparison, using Tags 0G7E, 0A8X, 0A95, 08J7, 0FPT; derived.tex Tag 08BJ; sites.tex Tag 00WJ."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +175,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ProjectiveResolution.isoExt\", \"module\": \"Mathlib/CategoryTheory/Abelian/Ext\", \"type\": \"{R : Type u_1} →\\n  [inst : Ring R] →\\n    {C : Type u_2} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_2} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.Linear R C] →\\n            [inst_4 : CategoryTheory.EnoughProjectives C] →\\n              {X : C} →\\n       \", \"doc\": \"For a ring $ R $, an abelian $ R $-linear category $ \\\\mathcal{C} $, an object $ X $ with projective resolution $ P $, natural number $ n $, and object $ Y $, there is an isomorphism between the $ n $-\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.homLinearEquiv\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Linear\", \"type\": \"{R : Type t} →\\n  [inst : Ring R] →\\n    {C : Type u} →\\n      [inst_1 : CategoryTheory.Category.{v, u} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.Linear R C] →\\n            [inst_4 : CategoryTheory.HasExt C] →\\n              {X Y : C} →\\n                {n : ℕ} \", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ and integer $n$, the equivalence between the Ext group $\\\\operatorname{Ext}^n(X, Y)$ and the hom-set $\\\\operatorname{Hom}_{D(\\\\mathcal{C})}(X[\"}\n  {\"name\": \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"For any presheaf of modules $ M_0 $ over a presheaf of rings $ R_0 $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, and a sheaf of modules $ F $ over the sheafified ring $ R $, there \"}\n  {\"name\": \"ModuleCat.homEquiv_extendScalarsComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R₁ R₂ R₃ : Type u₁} [inst : CommRing R₁] [inst_1 : CommRing R₂] [inst_2 : CommRing R₃] (f₁₂ : R₁ →+* R₂)\\n  (f₂₃ : R₂ →+* R₃) (M : ModuleCat R₁),\\n  ((ModuleCat.extendRestrictScalarsAdj (f₂₃.comp f₁₂)).homEquiv M\\n        (((ModuleCat.extendScalars f₁₂).comp (ModuleCat.extendScalars f₂₃)).obj M))\\n  \", \"doc\": \"For commutative rings $ R_1, R_2, R_3 $ with ring homomorphisms $ f_{12} : R_1 → R_2 $ and $ f_{23} : R_2 → R_3 $, the hom-set equivalence induced by the adjunction between extension and restriction o\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          CategoryTheory.Functor.id (ModuleCat R) ⟶ (ModuleCat.extendScalars f).comp (ModuleCat.restrictScalars f)\", \"doc\": \"Given commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R \\to S $, this natural transformation provides for each $ R $-module $ X $ a canonical $ R $-linear map from $ X $ to the module \"}\n  {\"name\": \"ModuleCat.restrictCoextendScalarsAdj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : Ring R] → [inst_1 : Ring S] → (f : R →+* S) → ModuleCat.restrictScalars f ⊣ ModuleCat.coextendScalars f\", \"doc\": \"Given a ring homomorphism $ f : R → S $, the restriction of scalars functor (mapping $ S $-modules to $ R $-modules) is left adjoint to the coextension of scalars functor (mapping $ R $-modules to $ S\"}\n  {\"name\": \"LightCondensed.freeForgetAdjunction\", \"module\": \"Mathlib/Condensed/Light/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → LightCondensed.free R ⊣ LightCondensed.forget R\", \"doc\": \"The adjunction between the free light condensed $ R $-module functor (constructed by applying the free module functor and sheafifying with respect to the coherent Grothendieck topology on light profin\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.homLinearEquiv_apply\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Linear\", \"type\": \"∀ {R : Type t} [inst : Ring R] {C : Type u} [inst_1 : CategoryTheory.Category.{v, u} C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.Linear R C] [inst_4 : CategoryTheory.HasExt C] {X Y : C}\\n  {n : ℕ} [inst_5 : HasDerivedCategory C] (a : CategoryTheory.Abelian.Ext X Y n),\\n  Category\", \"doc\": \"For any element $ a $ in the Ext group $ \\\\operatorname{Ext}^n(X, Y) $, the image under the $ R $-linear equivalence $ \\\\operatorname{homLinearEquiv} $ coincides with the image under the additive equiva\"}",
    "date": "2026-10-17",
    "verdict": "no match: the returned declarations do not state this geometric comparison, its specified maps and coefficient conventions together"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact extension from modules to sheaves left adjoint to global sections identifies sections of the Hom complex with the module Hom complex, preserving derived evaluation",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"SheafOfModules.unitHomEquiv\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"SheafOfModules.unitHomEquiv_comp_apply\", \"PresheafOfModules.sheafifyHomEquiv\", \"PresheafOfModules.sheafificationHomEquiv\", \"SheafOfModules.unitHomEquiv_symm_comp\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\"]}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give underived adjunctions, generic Hom-complex definitions or condensed internal Hom, not the stated ringed-site comparison with K-flat/K-injective and signed evaluation assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "sections.*(Hom|hom)|Hom.*(adjunction|Adjunction)",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give underived adjunctions, generic Hom-complex definitions or condensed internal Hom, not the stated ringed-site comparison with K-flat/K-injective and signed evaluation assertions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom complex adjunction for constant sheaf extension and global sections with evaluation compatibility",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.constantSheafΓAdj\", \"CategoryTheory.Sheaf.Γ\", \"CategoryTheory.constantSheafAdj\", \"CategoryTheory.Sheaf.ΓHomEquiv\", \"CategoryTheory.Sheaf.ΓObjEquivHom\", \"CategoryTheory.constantPresheafAdj\", \"CategoryTheory.HasGlobalSectionsFunctor\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_left\"]}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give underived adjunctions, generic Hom-complex definitions or condensed internal Hom, not the stated ringed-site comparison with K-flat/K-injective and signed evaluation assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hom\", \"adjunction\"",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.CoreHomEquiv\", \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit\", \"CategoryTheory.Adjunction.mkOfHomEquiv\", \"CategoryTheory.Adjunction.homEquiv\", \"CategoryTheory.Adjunction.homEquiv'\", \"CategoryTheory.Adjunction.CoreHomEquiv.homEquiv\", \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv\", \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit\"]}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give underived adjunctions, generic Hom-complex definitions or condensed internal Hom, not the stated ringed-site comparison with K-flat/K-injective and signed evaluation assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of internal Hom from scalar extended constant complexes identify with Hom into sections by evaluating at one tensor x; differential d f equals d f minus signed f d",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChainComplex.linearYonedaObj_d\", \"ChainComplex.linearYonedaObj\", \"HomologicalComplex.instModuleHom\", \"CochainComplex.HomComplex.instModuleCochain\", \"inhomogeneousCochains.d_eq\", \"CochainComplex.HomComplex_X\", \"LightCondensed.ihom_map_val_app\", \"LightCondensed.ihomPoints\"]}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits give underived adjunctions, generic Hom-complex definitions or condensed internal Hom, not the stated ringed-site comparison with K-flat/K-injective and signed evaluation assertions"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pod-global-duality-map-identification",
@@ -81,5 +232,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pod-point-derived-hom-evaluation",
+  "worker": "stage1",
+  "summary": "Expanded the stated extension-sections adjunction degreewise, checked Hom differentials, proved the K-injective resolution assertion with the existing exact-adjoint lemma, used general ringed-topos K-flat pullback, and compared the specified evaluation chain maps with all Koszul signs. Reused existing nodes throughout; no new nodes or statement change.",
+  "blueprint": "Realizes the point-derived-Hom identification invoked in the second sentence of lem-pod-point-dualizing-complex.proof.md and the final-paragraph identification of the canonical global-duality comparison in thm-pod-identification-of-the-comparison.proof.md, through lem-pod-global-duality-map-identification.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheafification-sets-exact",
+    "why": "Generic finite-limit preservation of set sheafification establishes the structural geometric morphism to sets; no same-unit node supplies this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic preservation of flat-term K-flat complexes by ringed-topos pullback applies to the constant-extension model; no same-unit lemma gives this resolving-class assertion."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic exact-adjoint K-injective preservation applies to the explicitly assumed adjunction."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Generic exact sections and preservation of quasi-isomorphisms for an algebraically closed pro-etale point, also an explicit hypothesis here."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Generic invariance of Hom into K-injectives under quasi-isomorphisms ensures the comparison is independent of representatives."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic ringed-site closed symmetric monoidal structure identifies evaluation as the counit and supplies its specified signed symmetry; it does not replace the geometric unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheafification-sets-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-pur-rhom-well-defined",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q20-065f6f18e",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q20-065f6f18e (reviewer sub-agent of L); spot-checked: Read the full item, report, all 19 dependency statements, unit/chapter route, cited Stacks passages and current blueprint proofs. All eight steps check, including unbounded K-flat hypotheses, adjoint directions, Koszul signs and evaluation compatibility. No new nodes, cycles, target weakening or coefficient-category conflation found. Accepted all six declared generic tool uses. Detailed checks written to review.md."
  }
 }

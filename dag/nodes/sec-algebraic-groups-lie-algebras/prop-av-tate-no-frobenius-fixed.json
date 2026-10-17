@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-av-tate-no-frobenius-fixed",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "No Frobenius-fixed vectors on the Tate module of an abelian variety",
@@ -19,26 +19,127 @@
  ],
  "proof": [
   {
-   "text": "In the finite-field setting of [d-ab-field], the fixed points of\n$x\\mapsto x^q$ in $\\bar k$ are exactly $k_0$: every element of $k_0$ is a\nroot of $T^q-T$ (as $k_0^\\times$ has order $q-1$), and this polynomial has\nat most $q$ roots. Now let $P\\in A=A_0(\\bar k)$ with $\\sigma P=P$. Choose\none of the finitely many affine charts $\\operatorname{Spec}R$ of $A_0$,\n$R=k_0[x_1,\\dots,x_m]/I$, containing the image of $P$; since $\\sigma$ acts\nby coordinates over $k_0$, the point $\\sigma P$ has the same image, and in\nthis chart $P$ is a $k_0$-algebra map $\\varphi:R\\to\\bar k$ with\n$\\sigma\\circ\\varphi=\\varphi$. Hence every $\\varphi(x_i)$ lies in $k_0$, so\n$P\\in A_0(k_0)$ and there are at most $q^m$ such points in the chart.\nThus $A^\\sigma=A_0(k_0)$ is a finite group.\nApply [lem-tate-module-no-fixed] to the abelian group $A$ and the automorphism\n$\\sigma$; it gives $(T_\\ell A)^\\sigma=0$ and $(V_\\ell A)^\\sigma=0$, and the\nsame for $F=\\sigma^{-1}$.",
+   "text": "The datum [d-ab-field] gives the automorphism $\\sigma:z\\mapsto z^q$ of $\\bar k$ over $k_0$ and its coordinate action on $A=A_0(\\bar k)$. Apply clause 3 of [lem-weil-unique-subfield-of-closure] with $k=\\bar k$ and $n=1$: $\\{z\\in\\bar k:z^q=z\\}=\\iota(k_0)$, where $\\iota:k_0\\hookrightarrow\\bar k$ is the structure embedding. Thus a value in $\\bar k$ is fixed by $\\sigma$ exactly when it comes from $k_0$.",
    "uses": [
     "d-ab-field",
-    "lem-tate-module-no-fixed"
+    "lem-weil-unique-subfield-of-closure"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-tate/prop-av-tate-no-frobenius-fixed.proof.md",
+    "place": "first sentence: fixed field of the q-power Frobenius"
+   }
+  },
+  {
+   "text": "By the finite-type convention in [d-ab-field], choose a finite cover $U_j=\\operatorname{Spec}R_j$ of $A_0$, with $R_j$ generated over $k_0$ by $m_j$ elements. A geometric point whose image lies in $U_j$ factors uniquely through this open chart (restrict its morphism and structure-sheaf map to the open). By the contravariant morphism correspondence of [def-weil-affine-spectrum], it is a $k_0$-algebra map $\\varphi:R_j\\to\\bar k$. Precomposing its point map by $\\operatorname{Spec}\\sigma$ replaces $\\varphi$ by $\\sigma\\circ\\varphi$. Hence fixedness is exactly $\\sigma\\varphi(r)=\\varphi(r)$ for every $r\\in R_j$. By Step 1, such a map has a unique corestriction $\\varphi_0:R_j\\to k_0$, and conversely every $k_0$-algebra map to $k_0$ gives a fixed map after composing with $\\iota$. A $k_0$-algebra map is determined by its values on the $m_j$ chosen generators: evaluate the same polynomial expression for any element of $R_j$. Its generator tuple has at most $q^{m_j}$ possibilities. Therefore the fixed geometric points landing in each $U_j$ form a finite set.",
+   "uses": [
+    "d-ab-field",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-tate/prop-av-tate-no-frobenius-fixed.proof.md",
+    "place": "affine-chart paragraph: coordinate maps, corestriction and generator count"
+   }
+  },
+  {
+   "text": "Every geometric point lands in some $U_j$, since the field spectrum has one point [def-weil-affine-spectrum]. The fixed set $A^\\sigma$ is therefore contained in the union of the finitely many finite chart sets of Step 2, and is finite. The chart corestrictions also show $A^\\sigma=A_0(k_0)$ inside $A_0(\\bar k)$: extend the corestricted chart point along $U_j\\hookrightarrow A_0$; conversely rational points have coordinates in $k_0$ and are fixed. No gluing of chart lifts is needed for the finiteness argument. In [d-ab-field], $A$ is an abelian group and $\\sigma$ is a group automorphism, so its fixed set is a subgroup (it contains $0$ and is closed under subtraction).",
+   "uses": [
+    "d-ab-field",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-tate/prop-av-tate-no-frobenius-fixed.proof.md",
+    "place": "conclusion of affine-chart paragraph: the fixed subgroup is finite"
+   }
+  },
+  {
+   "text": "Apply [lem-tate-module-no-fixed] to the abelian group $M=A$, the prime $\\ell$ of [d-ab-field], and the coordinate automorphism $\\sigma$. Its finite-fixed-subgroup hypothesis is Step 3. Its statement gives $(T_\\ell A)^\\sigma=0$ and $(V_\\ell A)^\\sigma=0$, and gives the same conclusions for $\\sigma^{-1}=F$. The actions are exactly the coordinatewise action and its extension to fractions specified in [def-tate-module-abelian-group], so these are all four asserted vanishings, including $(V_\\ell A)^F=0$.",
+   "uses": [
+    "lem-tate-module-no-fixed",
+    "d-ab-field",
+    "def-tate-module-abelian-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-tate/prop-av-tate-no-frobenius-fixed.proof.md",
+    "place": "last sentence: apply the finite-fixed-subgroup Tate-module lemma"
+   }
   }
  ],
  "proof_deps": [
   "d-ab-field",
-  "lem-tate-module-no-fixed"
+  "lem-weil-unique-subfield-of-closure",
+  "def-weil-affine-spectrum",
+  "lem-tate-module-no-fixed",
+  "def-tate-module-abelian-group"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-tate/prop-av-tate-no-frobenius-fixed.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-tate/prop-av-tate-no-frobenius-fixed.proof.md",
+  "place": "entire proof, expanded into four steps along sk-p-tate"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The rational Tate module of an abelian variety over a finite field has no nonzero Frobenius fixed vector",
+   "results": "WittVector.isocrystal_classification; FiniteField.orderOf_frobeniusAlgHom; WittVector.StandardOneDimIsocrystal; FiniteField.frobenius_pow; WittVector.instIsocrystalStandardOneDimIsocrystal; WittVector.exists_frobenius_solution_fractionRing; FiniteField.bijective_frobeniusAlgHom_pow; FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state Tate-module Frobenius-fixed vanishing"
+  },
+  {
+   "tool": "loogle",
+   "query": "TateModule",
+   "results": "loogle: unknown identifier 'TateModule'",
+   "date": "2026-10-17",
+   "verdict": "no match: query parser reports unknown identifier"
+  },
+  {
+   "tool": "grep",
+   "query": "tateModule|rationalTateModule|TateModule",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Frobenius fixed vectors of Tate modules of abelian varieties vanish",
+   "results": "WittVector.verschiebung_frobenius_comm; WittVector.frobenius_verschiebung; WittVector.StandardOneDimIsocrystal.frobenius_apply; WittVector.IsocrystalEquiv.frob_equivariant; WittVector.frobenius_zmodp; WittVector.isocrystal_classification; WittVector.exists_frobenius_solution_fractionRing_aux; WittVector.frobenius",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state Tate-module Frobenius-fixed vanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An automorphism of an abelian group with finite fixed subgroup has zero fixed submodule on its rational l-adic Tate module",
+   "results": "fixedByFinite; groupCohomology.exists_mul_galRestrict_of_norm_eq_one; NumberField.InfinitePlace.IsUnramified.stabilizer_eq_bot; IsArithFrobAt.mul_inv_mem_inertia; FixedPoints.rank_le_card; NumberField.mixedEmbedding.fundamentalCone.integerSetTorsionSMul_stabilizer; IntermediateField.fixingSubgroup_fixedField; IsArithFrobAt.exists_of_isInvariant",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state Tate-module Frobenius-fixed vanishing"
+  },
+  {
+   "tool": "loogle",
+   "query": "FiniteField.frobeniusAlgEquivOfAlgebraic",
+   "results": "FiniteField.frobeniusAlgEquivOfAlgebraic; FiniteField.frobeniusAlgEquivOfAlgebraic_apply; FiniteField.coe_frobeniusAlgEquivOfAlgebraic; FiniteField.coe_frobeniusAlgEquivOfAlgebraic_iterate; FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic; FiniteField.frobeniusAlgEquivOfAlgebraic_symm_apply; FiniteField.bijective_frobeniusAlgEquivOfAlgebraic_pow",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state Tate-module Frobenius-fixed vanishing"
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]ate[Mm]odule|[Aa]belian[Vv]ariety",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse limit of l-power torsion in an abelian group with finite fixed subgroup has no fixed vectors",
+   "results": "DirectLimit.inv_def; AddCommGroup.finite_of_fg_torsion; FixedPoints.subgroup; DirectLimit.inv₀_def; Representation.invariants_eq_inter; CommGroup.torsion; InfiniteGalois.isOpen_mulEquivToLimit_image_fixingSubgroup; InverseSystem.invLimEquiv_symm_apply_coe",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits do not state Tate-module Frobenius-fixed vanishing"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -69,5 +170,29 @@
   }
  },
  "chapter": "sec-algebraic-groups-lie-algebras",
- "unit": "sk-p-tate"
+ "unit": "sk-p-tate",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-av-tate-no-frobenius-fixed",
+  "worker": "stage1",
+  "summary": "Kept the statement and its three statement dependencies. Expanded the finite-field affine-chart proof into four steps, using the existing unique-subfield theorem and affine-spectrum morphism correspondence instead of creating redundant lemmas, and applying the existing finite-fixed-subgroup Tate-module lemma for all four vanishings. Checked the partial closed Lean declarations, recorded genuine Mathlib searches, and supplied exact citation quotes. No new nodes.",
+  "blueprint": "Steps 1–3 realize the fixed-field, affine-coordinate descent and finiteness portion of prop-av-tate-no-frobenius-fixed; Step 4 realizes its final invocation of lem-tate-module-no-fixed. Together these carry the single proof step of sk-p-tate; its group-theoretic portion is carried by lem-tate-module-no-fixed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-unique-subfield-of-closure",
+    "why": "Only clause 3 at n=1 is used as the fixed-field tool for the unit’s own affine-coordinate argument; this supplies the finite-field fact explicitly used by the unit and replaces none of its geometric or Tate-module steps."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-unique-subfield-of-closure"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NV-4e54e984c",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-4e54e984c (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, current blueprint proof, every cited DAG statement, and all cited source locations. The four-step split is mathematically correct: finite-field fixed points, affine generator count, finite fixed subgroup, and Tate-module vanishing for Frobenius and its inverse. Hypotheses, edge cases, duplicate checks, closed Lean declarations, and route/tool-use constraints all pass. Wrote review.md; no repairs or new nodes needed."
+ }
 }

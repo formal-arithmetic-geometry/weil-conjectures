@@ -20,11 +20,63 @@
   "def-kun-projection-formula-map",
   "lem-weil-pbc-ringed-slice-extension-tensor",
   "def-kun-unbounded-exchange",
-  "def-weil-pbc-etale-shriek-base-change-map"
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-etale-open-derived-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let A be a finite commutative ring, let f:X→S be separated finite type and compactifiable between Noetherian schemes, let u:U↪S be open, and put X_U=X×_S U with projection v:X_U→X and map f_U:X_U→U. For K∈D(S_et,A) and M∈D(X_et,A), specialize the general compact-support projection/exchange identity [lem-asd-compact-projection-exchange] to the base-change morphism u. Its cartesian pullback is X_U, its exchange b_M is the compactified exchange C_{f,u,M}, and its projection map Π is the compactified map P_{f,K,M}; the canonical pullback/tensor identifications in that statement are exactly those displayed here. This gives the required equality for any chosen compactification and its base change.",
+   "uses": [
+    "lem-asd-compact-projection-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7L (lemma-base-change-shriek), together with the proper projection/exchange square of sites-cohomology.tex Tag 0E48"
+   }
+  },
+  {
+   "text": "The chosen-compactification maps in the specialization are the maps named in the item: [lem-amb-unbounded-compact-support-comparisons] says that compact-support direct image is independent of compactification and that, on a chosen compactification, the exchange is the proper exchange followed by the inverse degreewise open-extension comparison. [def-amb-etale-compact-support] identifies the compactified functor with Rr_* Dj_!, while [def-weil-pbc-etale-shriek-base-change-map] supplies the normalized open extension comparison. The derived open tensor factor is the canonical natural isomorphism of [lem-pur-etale-open-derived-tensor], and all displayed pullback/tensor transports are the canonical monoidal comparisons of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Therefore the specialized equality is the equality of the actual compactified derived maps, and refinement independence transports it to the canonical C and P of the statement.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "def-amb-etale-compact-support",
+    "def-weil-pbc-etale-shriek-base-change-map",
+    "lem-pur-etale-open-derived-tensor",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0E48 (remark-compatible-with-diagram) and 0GL1 (lemma-j-shriek-and-tensor); more-etale.tex Tag 0F7L"
+   }
+  },
+  {
+   "text": "If the four projection maps in the displayed equality are isomorphisms, compose the equality on the appropriate sides with their inverses and with the inverse exchange isomorphisms. Associativity of composition then gives the stated identity for the inverses; this is the elementary cancellation argument in any category.",
+   "uses": [
+    "lem-asd-compact-projection-exchange",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48 coherence square; inverse statement by categorical cancellation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-etale-compact-support",
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-compact-projection-exchange",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0E48 and 0GL1, with more-etale.tex Tag 0F7L; specialization to the compact-support functor and refinement transport"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,7 +116,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-amb-vector-bundle-purity",
@@ -76,10 +128,39 @@
  "blueprint": {
   "from": {
    "node": "thm-amb-vector-bundle-purity",
-   "place": "Proof paragraph 2: \"Restrict to a trivializing open set of S. The resulting map is the adjoint of the affine-space counit\"; returned step 8 projection/exchange square.",
+   "place": "Proof paragraph 2: “Restrict to a trivializing open set of S. The resulting map is the adjoint of the affine-space counit”; returned Step 8 projection/exchange square.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-amb-shriek-projection-open-restriction",
+  "worker": "stage1",
+  "summary": "Split the item by specializing the existing arbitrary-base compact-support projection/exchange identity to the open base change, then identified its chosen compactification maps with the canonical unbounded compact-support exchange and projection maps using the stated Stacks normalization. The open derived tensor and monoidal pullback comparisons are cited explicitly; the inverse formula is categorical cancellation.",
+  "blueprint": "Realizes the returned Step 8 projection/exchange square in the proof paragraph of thm-amb-vector-bundle-purity: specialize the proper projection/exchange coherence to the open trivializing base change and transport through compactification-independent comparisons.",
+  "tool_uses": [
+   {
+    "node": "lem-asd-compact-projection-exchange",
+    "why": "Generic arbitrary-base ordinary-etale compact-support projection/exchange coherence; the item is its open-immersion specialization, while the unit route supplies the vector-bundle application."
+   },
+   {
+    "node": "lem-pur-etale-open-derived-tensor",
+    "why": "Generic unbounded derived open-extension tensor comparison used to identify the open factor of the compactified projection map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-asd-compact-projection-exchange",
+  "lem-pur-etale-open-derived-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q03-c85ff44a6",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q03-c85ff44a6 (reviewer sub-agent of L); spot-checked: The mathematical split is correct. I repaired stmt_deps to include lem-weil-pbc-ringed-topoi-derived-tensor-pullback, explicitly used by the displayed monoidal pullback identifications. Sources, hypotheses, exchange direction, coefficient category, compactification normalization, inverse cancellation, route, duplicate candidates, and edge cases were checked in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

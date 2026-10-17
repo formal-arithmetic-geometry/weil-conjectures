@@ -14,11 +14,136 @@
   "def-weil-pbc-sheafification",
   "def-weil-pbc-constant-sheaf",
   "def-weil-sheaf-of-modules-category",
-  "lem-pe-constant-left-module-inverse-image"
+  "lem-pe-constant-left-module-inverse-image",
+  "def-galois-finite-limits-colimits",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-initial-functor-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The representable functor $T\\mapsto h_T$ preserves finite limits: at each $V$, its limit comparison is the bijection between maps from $V$ into a limit and compatible families of maps. Sheafification preserves finite limits by the cited theorem, and $p^{-1}$ does so by hypothesis. Thus $L_p$ preserves the terminal object, binary products and equalizers. Its values are sets in the chosen universe, so the disjoint union of the $L_p(T)$ over the small object set, and the sets of arrows between these pairs, are small. The terminal object $1$ of $\\mathcal C$ gives $(1,*)$ in $\\mathcal N_p$. For $(T,a),(U,b)$, the element corresponding to $(a,b)$ in $L_p(T\\times U)$ gives a common source. If $f,g:(T,a)\\rightrightarrows(U,b)$ are parallel, then $L_p(f)(a)=L_p(g)(a)$; preservation of the equalizer $E\\to T$ gives an element $e\\in L_p(E)$ over $a$. The arrow $(E,e)\\to(T,a)$ equalizes $f,g$. These are precisely the three cofilteredness conditions; hence $\\mathcal N_p^{\\mathrm{op}}$ is small filtered.",
+   "uses": [
+    "lem-weil-pbc-sheafification-sets-exact",
+    "def-weil-size-convention",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YA (lemma-point-site-topos), proof of (2), finite-limit argument; Tag 00WJ (lemma-sheafification-exact); cofilteredness written out using products and equalizers"
+   }
+  },
+  {
+   "text": "For every set $E$, the given adjunction, the universal property of sheafification, and Yoneda give natural bijections\n$$(p_*E)(T)\\cong\\operatorname{Hom}(h_T^\\#,p_*E)\\cong\\operatorname{Map}(p^{-1}h_T^\\#,E)=\\operatorname{Map}(L_p(T),E).$$\nFor $b:T\\to T'$, the restriction on the right is precomposition with $L_p(b)$. Indeed Yoneda is natural in $T$, and naturality of the adjunction carries precomposition with $h_b^\\#$ to precomposition with $p^{-1}(h_b^\\#)$. Thus the presheaf $T\\mapsto\\operatorname{Map}(L_p(T),E)$ is naturally the underlying presheaf of the already existing sheaf $p_*E$. No separate covering-surjectivity assertion is needed to establish that it is a sheaf.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-galois-yoneda-hom-bijection",
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YA (2) and Tag 00Y8 (lemma-point-pushforward-sheaf): identify the skyscraper sheaf directly by the given adjunction and Yoneda"
+   }
+  },
+  {
+   "text": "For a sheaf of sets $H$, form $S(H)=\\varinjlim_{(T,a)\\in\\mathcal N_p^{\\mathrm{op}}}H(T)$ in sets (explicitly the disjoint union of the $H(T)$ labelled by $a$, modulo the relations $[T,a,s]=[U,c,H(b)s]$ for $b:(U,c)\\to(T,a)$). A map $S(H)\\to E$ is exactly a family of functions $\\phi_{T,a}:H(T)\\to E$ with $\\phi_{T,a}(s)=\\phi_{U,c}(H(b)s)$ for all such $b$. Currying this family gives $\\tau_T:H(T)\\to\\operatorname{Map}(L_p(T),E)$ by $\\tau_T(s)(a)=\\phi_{T,a}(s)$. The compatibility just displayed is precisely the naturality equation for $\\tau$. Step 2 identifies these natural transformations with sheaf morphisms $H\\to p_*E$. Uncurrying reverses this construction. The colimit universal property therefore gives bijections $\\operatorname{Map}(S(H),E)\\cong\\operatorname{Hom}(H,p_*E)$ natural in $H,E$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00Y7 (lemma-adjoint-point-push-stalk), explicit currying proof, together with the skyscraper identification in step 2"
+   }
+  },
+  {
+   "text": "A section $s\\in H(T)$ corresponds, by Yoneda and sheafification, to $s:h_T^\\#\\to H$. Define $c_H:S(H)\\to p^{-1}H$ by $[T,a,s]\\mapsto p^{-1}(s)(a)$. If $b:(U,c)\\to(T,a)$, the restricted section is $s\\circ h_b^\\#$ and $L_p(b)(c)=a$, so functoriality makes the two images equal. For $v:p^{-1}H\\to E$, its adjunct $H\\to p_*E$, under step 2, sends $s$ to the function $a\\mapsto v(p^{-1}(s)(a))$, by naturality of the adjunction in the map $s$. Hence the bijection of step 3 followed by the given adjunction is exactly precomposition with $c_H$:\n$$\\operatorname{Map}(p^{-1}H,E)\\xrightarrow{\\ c_H^*\\ }\\operatorname{Map}(S(H),E).$$\nThis proves $c_H$ invertible without an additional density assertion: for $E=S(H)$ choose $r:p^{-1}H\\to S(H)$ with $r c_H=1$; injectivity of $c_H^*$ for $E=p^{-1}H$ gives $c_H r=1$. A map $H\\to H'$ composes each section $s$ with that map, so the formula for $c_H$ also proves naturality in $H$.",
+   "uses": [
+    "lem-galois-yoneda-hom-bijection",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YA (lemma-point-site-topos), proof of (2), canonical comparison; bijectivity proved by the adjunction of Tag 00Y7 rather than the final coequalizer-presentation argument"
+   }
+  },
+  {
+   "text": "Now take $H$ to be the underlying sheaf of sets of $F$. Constant scalar sections give a $\\Lambda$-module structure on every $F(T)$, with $\\Lambda$-linear restriction maps. Let $M=\\varinjlim_{\\mathcal N_p^{\\mathrm{op}}}F(T)$ in $\\Lambda$-modules; existence follows from the cited module-colimit theorem. The set colimit $S(H)$ and the underlying set of $M$ are canonically bijective: both are covered by classes of pairs $((T,a),s)$, and in both, two classes are equal exactly when the two sections agree after maps to one common object of $\\mathcal N_p^{\\mathrm{op}}$, by the cited elementwise criteria. The bijection sends each section to its module-colimit class. Under it addition is computed after restricting two representatives to a common pointed object, and multiplication by a fixed $\\lambda\\in\\Lambda$ is computed on one representative, since the module-colimit injections are linear.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YA (2); Algebra Tags 00D6 (lemma-directed-colimit) and 00D7 (lemma-zero-directed-limit); Categories Tag 04AX (section-directed-colimits)"
+   }
+  },
+  {
+   "text": "The cited constant-coefficient inverse-image theorem identifies the underlying set of $p^*_{\\Lambda}F$ with $p^{-1}H$, its addition with $p^{-1}(+)$ using the finite-product comparison, and its scalar endomorphisms with the inverse images of those of $F$. Given two representatives in $M$, restrict them to a common $(T,a)$, where they are $s,t\\in F(T)$. The section $(s,t):h_T^\\#\\to H\\times H$ maps under $p^{-1}$ at $a$ to $(c_H[T,a,s],c_H[T,a,t])$, since its two projections are $s,t$. Composing with $+$ shows $c_H[T,a,s+t]=c_H[T,a,s]+c_H[T,a,t]$. The same composition argument with each scalar endomorphism gives $c_H[T,a,\\lambda s]=\\lambda c_H[T,a,s]$; zero is treated by the zero section. Step 5 therefore turns $c_H$ into the asserted bijective linear canonical map $M\\to p^*_{\\Lambda}F$. Its naturality follows from step 4 and the sectionwise action of module morphisms.",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV (proposition-functoriality-algebraic-structures-topoi), (2) and (6), applied to the comparison of Tag 00YA (2)"
+   }
+  },
+  {
+   "text": "The theorem on constant-coefficient inverse image applies to the geometric morphism $p:\\mathbf{Set}\\to\\operatorname{Sh}(\\mathcal C)$, viewing $\\mathbf{Set}$ as sheaves on the one-object point site. It gives exactness of $p^*_{\\Lambda}$ directly. Independently $\\mathcal N_p^{\\mathrm{op}}$ is small filtered by step 1; the cited Grothendieck-abelian module theorem then gives exactness of colimits of arbitrary $\\mathcal N_p^{\\mathrm{op}}$-diagrams of $\\Lambda$-modules. This does not assert that evaluation $F\\mapsto F(T)$ sends a sheaf epimorphism to a surjection.",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-weil-pbc-ring-modules-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV (proposition-functoriality-algebraic-structures-topoi), (6); Algebra Tag 00DB (lemma-directed-colimit-exact)"
+   }
+  },
+  {
+   "text": "Let $i:\\mathcal N'\\hookrightarrow\\mathcal N_p$ be a small full initial subcategory. Its initiality supplies an object over every object of $\\mathcal N_p$. In particular it is nonempty. A common source in $\\mathcal N_p$ of two objects of $\\mathcal N'$ can be refined by an object of $\\mathcal N'$; fullness puts the two composite arrows in $\\mathcal N'$. An equalizing arrow in $\\mathcal N_p$ for two parallel arrows of $\\mathcal N'$ can likewise be refined from $\\mathcal N'$, and fullness puts the composite equalizing arrow there. Thus $\\mathcal N'$ is cofiltered. For the section diagram $D:\\mathcal N_p^{\\mathrm{op}}\\to\\operatorname{Mod}(\\Lambda)$, regard its opposite as a diagram $D^{\\mathrm{op}}:\\mathcal N_p\\to\\operatorname{Mod}(\\Lambda)^{\\mathrm{op}}$. Apply the cited initial-functor limit theorem to $i$ and $D^{\\mathrm{op}}$, then take opposites: the canonical map $\\varinjlim_{\\mathcal N'^{\\mathrm{op}}}D i^{\\mathrm{op}}\\to\\varinjlim_{\\mathcal N_p^{\\mathrm{op}}}D$ is an isomorphism. Its composite with step 6 has exactly the same representative formula. It is natural, and exactness of colimits on $\\mathcal N'^{\\mathrm{op}}$ follows again from the module theorem because this index is small filtered. The inverse-image functor is still the exact functor of step 7.",
+   "uses": [
+    "lem-weil-pbc-initial-functor-limit",
+    "lem-weil-pbc-ring-modules-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories Tag 002R (lemma-initial), applied in the opposite module category; Algebra Tag 00DB (lemma-directed-colimit-exact)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheafification-sets-exact",
+  "def-weil-size-convention",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sheafification",
+  "lem-galois-yoneda-hom-bijection",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-initial-functor-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00YA (2), 00Y7 and 00Y8: adjunction-based proof of the canonical comparison, with finite-limit/cofilteredness, constant-module operations and initial restriction written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -75,10 +200,45 @@
    "results": "CategoryTheory.GrothendieckTopology.Point.presheafToSheafCompSheafFiber; SheafOfModules.sheafificationCompPullback; CategoryTheory.GrothendieckTopology.Point.instIsIsoMapFunctorOppositePresheafFiberToSheafify; CategoryTheory.Functor.IsDenseSubsite.sheafEquivSheafificationCompatibility; PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom; CategoryTheory.Sheaf.adjunction; PresheafOfModules.sheafificationCompToSheaf; PresheafOfModules.sheafifyHomEquiv'",
    "date": "2026-10-17",
    "verdict": "candidate: Mathlib implements fibre and exactness for an intrinsic GrothendieckTopology.Point; not an exact match for the reconstruction from an arbitrary geometric-morphism datum p. The site/topos-point comparison of Stacks 00YA is an additional theorem, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "ofGeometric|geometricMorphism|ofAdjunction|presheafToSheafCompSheafFiber|isColimitPresheafFiberCocone",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/Map.lean, Mathlib/CategoryTheory/Sites/Point/Conservative.lean, Mathlib/CategoryTheory/Sites/Point/Conservative.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean",
+   "date": "2026-10-17",
+   "verdict": "no exact match: intrinsic site-point fibre results do not reconstruct an arbitrary geometric morphism; candidate source read at Point/Basic.lean:69-97,139-147,277-291 and Point/Skyscraper.lean:222-235."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Recover the inverse image of an arbitrary topos point from sheafified representables by a colimit",
+   "results": "CategoryTheory.Presheaf.colimitOfRepresentable, CategoryTheory.Sheaf.isColimitSheafifyCocone, CategoryTheory.GrothendieckTopology.Point.presheafToSheafCompSheafFiber, CategoryTheory.GrothendieckTopology.Point.sheafFiber, CategoryTheory.GrothendieckTopology.isoSheafify_inv, CategoryTheory.GrothendieckTopology.Point.instIsIsoMapFunctorOppositePresheafFiberToSheafify, CategoryTheory.GrothendieckTopology.Point.presheafFiber, AlgebraicGeometry.PresheafedSpace.colimitPresheafObjIsoComponentwiseLimit_inv_ι_app",
+   "date": "2026-10-17",
+   "verdict": "no exact match: intrinsic site-point fibre results do not reconstruct an arbitrary geometric morphism; candidate source read at Point/Basic.lean:69-97,139-147,277-291 and Point/Skyscraper.lean:222-235."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Point\", \"sheafFiber\"",
+   "results": "CategoryTheory.GrothendieckTopology.Point.presheafFiber, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeFunctorOppositePresheafFiber, CategoryTheory.GrothendieckTopology.Point.sheafFiber, CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsFunctorOppositePresheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize, CategoryTheory.GrothendieckTopology.Point.shrinkYonedaCompPresheafFiberIso, CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber, CategoryTheory.GrothendieckTopology.Point.W_isInvertedBy_presheafFiber'",
+   "date": "2026-10-17",
+   "verdict": "no exact match: intrinsic site-point fibre results do not reconstruct an arbitrary geometric morphism; candidate source read at Point/Basic.lean:69-97,139-147,277-291 and Point/Skyscraper.lean:222-235."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric morphism from sets to sheaves is recovered by the filtered colimit over elements of its inverse image of sheafified representables",
+   "results": "TopCat.Sheaf.restrictHomEquivHom, CategoryTheory.Functor.IsCoverDense.Types.presheafHom, CategoryTheory.Sheaf.freeYonedaHomEquiv, CategoryTheory.Functor.IsCoverDense.Types.presheafHom_app, CategoryTheory.Functor.IsCoverDense.Types.appHom, CategoryTheory.Functor.IsCoverDense.sheafHom, CategoryTheory.GrothendieckTopology.Point.presheafToSheafCompSheafFiber, CategoryTheory.sheafToPresheafCompYonedaCompWhiskeringLeftSheafToPresheaf_hom_app_app_val",
+   "date": "2026-10-17",
+   "verdict": "no exact match: intrinsic site-point fibre results do not reconstruct an arbitrary geometric morphism; candidate source read at Point/Basic.lean:69-97,139-147,277-291 and Point/Skyscraper.lean:222-235."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction from sheaves of sets to sets with a left exact left adjoint determines a fibre functor on the site by evaluating sheafified Yoneda",
+   "results": "CategoryTheory.sheafToPresheaf_isRightAdjoint, CategoryTheory.GrothendieckTopology.Point.presheafToSheafCompSheafFiber, LightCondensed.discreteUnderlyingAdj, LightCondSet.LocallyConstant.adjunction, CompHausLike.LocallyConstant.adjunction, CategoryTheory.GrothendieckTopology.Point.sheafFiber, CategoryTheory.instIsRightAdjointSheafΓ, CategoryTheory.Sheaf.adjunction",
+   "date": "2026-10-17",
+   "verdict": "no exact match: intrinsic site-point fibre results do not reconstruct an arbitrary geometric morphism; candidate source read at Point/Basic.lean:69-97,139-147,277-291 and Point/Skyscraper.lean:222-235."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-oriented-point-cohomology",
@@ -105,5 +265,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-site-point-fibre",
+  "worker": "stage1",
+  "summary": "Split the arbitrary-geometric-point reconstruction into eight explicit steps using existing nodes only. Recover the skyscraper via Yoneda and the given adjunction, prove the canonical comparison bijective by its maps into arbitrary sets, check addition and scalar maps on representatives, then prove exactness and full initial restriction. No statement correction or new nodes. No Lean writing or compilation.",
+  "blueprint": "General point-evaluation tool below the historical lem-trf-local-term-locality proof paragraph (1) and (2), via trace specialization, external product, geometric slice, and oriented-point cohomology. Supplies the pointed-site fibre evaluation used in that ancestry without altering the contracting-correspondence unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheafification-sets-exact",
+    "why": "Finite-limit preservation of set sheafification, needed to prove cofilteredness of the neighbourhood category. This generic categorical tool is not supplied by the contracting-correspondence statements of this unit."
+   },
+   {
+    "node": "lem-galois-yoneda-hom-bijection",
+    "why": "Natural section/sheafified-representable identification, used to identify the given right adjoint and the canonical comparison. This generic categorical tool is not supplied by the contracting-correspondence statements of this unit."
+   },
+   {
+    "node": "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "why": "Existence and exactness of small filtered colimits of ordinary coefficient modules. This generic categorical tool is not supplied by the contracting-correspondence statements of this unit."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "why": "Representatives and eventual equality for a small filtered set colimit. This generic categorical tool is not supplied by the contracting-correspondence statements of this unit."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "why": "Representatives and eventual equality for a small filtered module colimit. This generic categorical tool is not supplied by the contracting-correspondence statements of this unit."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "General constant-coefficient inverse image: underlying algebraic operations and exactness for the given geometric morphism. This generic categorical tool is not supplied by the contracting-correspondence statements of this unit."
+   },
+   {
+    "node": "lem-weil-pbc-initial-functor-limit",
+    "why": "Initial restriction of limits, dualized in the opposite module category to reindex the fibre colimit. This generic categorical tool is not supplied by the contracting-correspondence statements of this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheafification-sets-exact",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-initial-functor-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q55-09b3ca975",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q55-09b3ca975 (reviewer sub-agent of L); spot-checked: Read the complete item, all eight steps, cited statements, Stacks source passages, and current blueprint route. Verified canonical comparison, constant-module coefficients, cofilteredness, exactness, and initial-restriction variance. Small cases and DAG searches found no mathematical gap, circularity, or duplicate. Seven declared tool uses accepted; no fixes needed. Detailed checks recorded in review.md."
  }
 }
