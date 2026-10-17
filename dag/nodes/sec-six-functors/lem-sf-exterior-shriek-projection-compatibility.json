@@ -15,9 +15,94 @@
   "thm-cbc-finite-level-proetale",
   "lem-pur-derived-pullback-tensor-iso"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "All objects in the displayed maps lie in the finite-level bounded constructible finite-Tor domains of [sk-def-sf-operations]: $U_rM$, $U_{t'}Q$, $U_sK$, $U_tQ$, $W$, $M\\otimes^LU_fK$ and the external products are in $D^b_{ctf}$ by clauses (i) and (ii) of [thm-sf-ctf-stability], and $P_fM$, $P_f(M\\otimes^LU_fK)$, $P_FU_rM$ by clause (iv). By (vi) of [sk-def-sf-operations] every such object is of etale origin and bounded below, so [thm-cbc-finite-level-proetale] makes the specified exchange $E_N$ an isomorphism for $N=M$ and $N=M\\otimes^LU_fK$. The projection map of [fix-prop-projection-formula] is natural in both variables and invertible for first argument in $D^b_c$ and second in $D^b_{ctf}$, so $D_f(M,K)$, $D_F(U_rN,U_tQ)$ and $D_F(U_rM,W)$ are defined.",
+   "uses": [
+    "sk-def-sf-operations",
+    "thm-sf-ctf-stability",
+    "thm-cbc-finite-level-proetale",
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Lecture III, Remark 3.13, pp. 24-25; the projection formula as the coherent target-module structure"
+   }
+  },
+  {
+   "text": "Expand the definitions. By [def-exchange-projection], $E_M$ is the compact-support exchange for the Cartesian square with upper map $F=f\\times\\operatorname{id}_Z$, and by [fix-prop-projection-formula] $D_h$ is the inverse of the specified projection map. Hence the left-hand composite is the canonical reassociation followed by $(D_f(M,K)\\boxtimes1_Q)$ and then $(E_{M\\otimes U_fK}^{-1}\\otimes1)D_F(U_r(M\\otimes U_fK),U_tQ)$. The right-hand composite is $(E_M^{-1}\\otimes1_W)D_F(U_rM,W)$ after the canonical map $P_F(\\zeta)$. The pullback/tensor comparisons used to write these composites and the equality of their reassociations are the natural, associative comparisons of [lem-pur-derived-pullback-tensor-iso].",
+   "uses": [
+    "def-exchange-projection",
+    "fix-prop-projection-formula",
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-cbc-exchange-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Definition 5.1 and Remark 3.13; expand the specified projection and exchange maps"
+   }
+  },
+  {
+   "text": "*The maps $\\mathrm{Ku}_!$ for $(f,\\operatorname{id}_Z)$.* Let $N\\in D^b_{ctf}(X,A)$ and $Q'\\in D^b_{ctf}(Z,A)$. By [sk-def-sf-kv-maps](i), $\\mathrm{Ku}_!(N,Q')$ for $f\\times\\operatorname{id}_Z$ is the relative Kunneth map of [sk-thm-sf-kunneth-relative] over $B=Y\\times Z$, for the two maps $F:X\\times Z\\to B$ and $\\operatorname{id}_B$, with inputs $U_rN$ and $U_tQ'$. Its first factor $P_FU_rN$ is then identified with $U_sP_fN$ through the specified exchange of the Cartesian square $(F,r,f,s)$, i.e. by $E_N^{-1}$ [def-exchange-projection, def-cbc-exchange-map]. Clause (iv) of [sk-thm-sf-kunneth-relative] gives $\\kappa^{\\mathrm{rel}}_{F,\\operatorname{id}_B}(U_rN,U_tQ')=\\operatorname{PF}^{-1}_{F,U_rN,U_tQ'}$; with $U_{t'}=U_FU_t$ from [lem-pur-derived-pullback-tensor-iso], therefore $\\mathrm{Ku}_!(N,Q')=C_{N,Q'}$. Two unit normalizations follow from the explicit formula for $\\operatorname{PF}$ in [def-exchange-projection]: for $L=A$ the map $a_{u,M,A}$ is $\\varepsilon\\otimes1$ by the unit compatibility of $\\mu$ in [lem-pur-derived-pullback-tensor-iso], so $\\pi_{u;M,A}=Ru_*(\\varepsilon)\\circ\\eta$ is the unitor by the triangle identity, and the open-immersion part with unit target is the unitor as well. Hence $\\operatorname{PF}_{F,U_rN,A}$ and $\\operatorname{PF}_{\\operatorname{id}_Z,A,Q}$ are the unitors (for $\\operatorname{id}_Z$ use the compactification $(\\operatorname{id},\\operatorname{id})$). In particular $\\mathrm{Ku}_!(M,A_Z)=E_M^{-1}$ up to unitors.",
+   "uses": [
+    "sk-def-sf-kv-maps",
+    "sk-thm-sf-kunneth-relative",
+    "def-exchange-projection",
+    "def-cbc-exchange-map",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+    "place": "definition of the relative Kunneth composite and coherence (iv), the identity-factor projection formula"
+   }
+  },
+  {
+   "text": "*Apply the exterior projection identity.* Apply [lem-sf-exterior-projection-kunneth] with $f_1=f$, $f_2=\\operatorname{id}_Z$, $M_1=M$, $M_2=A_Z$, $B_1=K$, $B_2=Q$; all its hypotheses hold (separated finite type, inputs in $D^b_{ctf}$ by step 1). Then its $f$ is $F$, its $B$ is $W$, its $M$ is $U_rM$ up to the unitor, $C_1=M\\otimes^LU_fK$ and $C_2=A_Z\\otimes^LQ\\cong Q$. By step 3, $K_M=E_M^{-1}$, $K_C=C_{M\\otimes^LU_fK,Q}$, and $\\operatorname{PF}_{f_2,M_2,B_2}$ is the unitor, so its displayed equality reads $$C_{M\\otimes^LU_fK,Q}\\circ P_F(\\delta)\\circ\\operatorname{PF}_{F,U_rM,W}=(\\operatorname{PF}_{f,M,K}\\boxtimes1_Q)\\circ\\xi\\circ(E_M^{-1}\\otimes1_W).$$ Here $\\delta:U_rM\\otimes^LU_FW\\to(M\\otimes^LU_fK)\\boxtimes Q$ and $\\zeta$ are canonical composites of pullback-composition, monoidal-pullback, associativity and unit isomorphisms with the same underlying arrangement of factors; the only interchange moves the unit $A_Z$ past $U_sK$, which carries no Koszul sign. By the coherence clauses of [lem-pur-derived-pullback-tensor-iso] (naturality, associativity, symmetry, units, composition), $\\delta=\\zeta^{-1}$, and in the same way $\\xi=\\operatorname{assoc}^{-1}$ up to the unitor. Since $\\operatorname{PF}_{F,U_rM,W}$ and $\\operatorname{PF}_{f,M,K}$ are isomorphisms [fix-prop-projection-formula], composing on the left with $\\operatorname{assoc}\\circ(D_f(M,K)\\boxtimes1_Q)$ and on the right with $D_F(U_rM,W)\\circ P_F(\\zeta)$ gives $$\\operatorname{assoc}\\circ(D_f(M,K)\\boxtimes1_Q)\\circ C_{M\\otimes^LU_fK,Q}=(E_M^{-1}\\otimes1_W)\\circ D_F(U_rM,W)\\circ P_F(\\zeta),$$ the asserted equality.",
+   "uses": [
+    "lem-sf-exterior-projection-kunneth",
+    "lem-pur-derived-pullback-tensor-iso",
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/_section.md",
+    "place": "alpha, smooth case: projection-formula module compatibility of the exceptional Kunneth transpose; Scholze, Six-Functor Formalisms, Lecture III, Remark 3.13 (D(Y)-linearity of f_!)"
+   }
+  },
+  {
+   "text": "*Naturality.* Every map in both composites ($E$, $\\operatorname{PF}^{-1}$, $\\mathrm{Ku}_!$, the pullback/tensor comparisons, $\\zeta$, $\\operatorname{assoc}$) is natural in $M$, $K$ and $Q$ by [fix-prop-projection-formula], [lem-pur-derived-pullback-tensor-iso] and the naturality of the exchange [def-exchange-projection]; inverses of natural isomorphisms are natural. So the componentwise equality of step 4 is an equality of natural transformations. No exceptional inverse image or smoothness enters.",
+   "uses": [
+    "fix-prop-projection-formula",
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-exchange-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Lecture III, Remark 3.13, pp. 24-25"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-exchange-map",
+  "def-exchange-projection",
+  "fix-prop-projection-formula",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-sf-exterior-projection-kunneth",
+  "sk-def-sf-kv-maps",
+  "sk-def-sf-operations",
+  "sk-thm-sf-kunneth-relative",
+  "thm-cbc-finite-level-proetale",
+  "thm-sf-ctf-stability"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/scholze-six-functor-formalisms.pdf",
+  "place": "Lecture III, Remark 3.13, pp. 24-25, expanded with the projection-formula base-change calculation"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -91,7 +176,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-kv-smooth-transpose",
@@ -110,5 +195,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-exterior-shriek-projection-compatibility",
+  "worker": "stage1",
+  "summary": "Expanded the explicit exterior compact-support projection compatibility into five steps. The proof checks finite-level domains and exchange/projection definitions, applies projection-formula base change to the product square, applies the inverse projection associativity to the two target factors, and identifies both composites by canonical tensor reassociation and naturality. No new nodes were needed. Maintainer-reader repair (2026-10-18): steps 3-5 rewritten as a direct specialization of lem-sf-exterior-projection-kunneth to (f, id_Z, M_2=A_Z, B_1=K, B_2=Q), with Ku_! for the identity factor identified with C through sk-def-sf-kv-maps(i) and sk-thm-sf-kunneth-relative(iv); the step that used the definition def-sfb-projection-formula as if it were a property of the concrete projection map was removed, together with its tool_use; thm-sf-ctf-stability added to step 1 for domain membership.",
+  "blueprint": "Realizes the alpha paragraph of sk-thm-sf-kunneth-verdier (smooth case: the projection-formula module compatibility used to compare the transposes of the exceptional Kunneth map), following Scholze Lecture III Remark 3.13; steps 3-4 realize it through the identity-factor case of the relative Kunneth map and the exterior projection identity of the same unit.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-69455815e",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-69455815e (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery adds no new nodes. I also read the full statement of every cited node, the parent lem-sf-kv-smooth-transpose, unit sk-thm-sf-kunneth-verdier (alpha, smooth case) and Scholze Six-Functor Formalisms Lecture III Rem. 3.13 (pp. 24-25, D(Y)-linearity of f_!). The statement is true and correctly typed: the square (F,r,f,s) is Cartesian, E_M matches the exchange in def-exchange-projection, and the coefficients are finite A_{E,n} with D^b_ctf. I checked Z=Spec k (where it reduces to target associativity of PF_f), f=id and Q=A_Z. The statement is exactly the (f,id_Z) case of lem-sf-exterior-projection-kunneth (M_2=A_Z, B_1=K, B_2=Q). I found three repairable faults and fixed them in fixes/dag/nodes/sec-six-functors/lem-sf-exterior-shriek-projection-compatibility.json. (1) C4: the delivered step 4 took target associativity of the concrete PF_F from the definition def-sfb-projection-formula, which does not say the concrete map satisfies it. That step was also unnecessary, because the exterior lemma with B=W already gives the full identity; I removed it and its tool_use. (2) C1/E5: step 3 identified K_M, K_C with E_M^{-1} and C only by 'reading through E_M'. It now cites sk-def-sf-kv-maps(i) and sk-thm-sf-kunneth-relative(iv) (Ku_! for (f,id_Z) equals C), with the unit normalizations taken from the explicit PF formula in def-exchange-projection and the unit compatibility of mu. The proof is rewritten as steps 3-5: delta=zeta^{-1} and xi=assoc^{-1} by the coherence clauses of lem-pur-derived-pullback-tensor-iso, then the PF isomorphisms are inverted. (3) C1: step 1 now cites thm-sf-ctf-stability (i),(ii),(iv) for membership in D^b_ctf. All ten proof_deps exist and are unmerged, lie in the unit's route and cite no SGA source; the graph is acyclic. No tool_uses are needed. The statement is unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -18,9 +18,246 @@
   "def-weil-open-immersion",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the fixed finite ring $\\Lambda$, its invertible annihilator, and the universal property $P_r$ of [def-trf-orgogozo-induction-data]. We prove $A_{\\mathrm{pr}}(\\delta,r,d)$ simultaneously for all reduced excellent Noetherian bases $S$ of dimension $\\le\\delta$: if $f:X\\to S$ is proper with fibre dimensions $\\le d$ and $K\\in D^b_c(X,\\Lambda)\\cap D^{\\ge0}$, there is an alteration $T\\to S$ carrying $P_r(f_T,K_T)$. Induct lexicographically on $(\\delta,r+2,d)\\in\\mathbf N^3$, with $r\\ge-2$. After proving all $d$ at fixed $(\\delta,r)$ we will deduce the analogous assertion for arbitrary finite-type sources by affine-source compactification. All arbitrary finite-type uses in the induction have smaller $(\\delta,r)$; all uses with unchanged $(\\delta,r)$ have proper source and smaller $d$. For an empty source or base take the identity. For $r=-2$ take the identity: inverse image is exact and a bounded-below injective resolution computes right derived direct image in nonnegative degrees, so the cone of a comparison for $K\\in D^{\\ge0}$ lies in $D^{\\ge-1}$.",
+   "uses": [
+    "def-trf-orgogozo-induction-data",
+    "def-trf-oriented-nearby-cycles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "§3.4, p. 10: triple induction and initial case; general finite-ring coefficients: Lu--Zheng, proof of Theorem 4.27, printed p. 38."
+   }
+  },
+  {
+   "text": "At any stage an alteration carrying $P_r$ can be replaced by a modification carrying $P_r$. Apply [lem-trf-alteration-finite-refinement] to $T\\to S$ to obtain $\\widetilde T\\to T$, $S'\\to S$, and finite surjective $\\widetilde T\\to S'$. Universality in $P_r$ preserves it on $\\widetilde T$; [lem-trf-nearby-finite-base-descent] then gives $P_r$ over $S'$. Thus the induction hypotheses supply modifications as well as alterations, without invoking the theorem being proved. Finitely many such modifications can be replaced by their common refinement [lem-trf-modifications-zariski-refinement]. For a reducible reduced base first work on its finitely many reduced irreducible components; their disjoint union is finite surjective. The componentwise alterations, followed by this finite cover, form an alteration, and the same finite descent and refinement give the modification version on the original base.",
+   "uses": [
+    "def-trf-orgogozo-induction-data",
+    "lem-trf-alteration-finite-refinement",
+    "lem-trf-nearby-finite-base-descent",
+    "lem-trf-modifications-zariski-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "§§2.4--2.6 and 3.4: alterations, finite descent and simultaneous refinement; general finite-ring coefficients: Lu--Zheng, proof of Theorem 4.27, printed p. 38."
+   }
+  },
+  {
+   "text": "Here is the passage from the proper assertions for all $d$ to arbitrary finite-type sources at fixed $(\\delta,r)$. A finite affine cover of $S$ reduces to affine base, with [lem-trf-modifications-zariski-refinement] combining the local modifications. Cover $X$ by finitely many affine opens. On any geometric point in such an open the source's strict localization is unchanged, so the jointly conservative strict-local description [lem-trf-oriented-nearby-strict-local-description] identifies the comparisons before and after restricting to that open, including after any preliminary base change. Each affine chart over affine $S$ embeds into affine space by finitely many algebra generators; [det-nagata-affine-opens-projective] supplies its proper projective closure. Extension by zero to this closure is exact and has the original stalks on the open and zero stalks on its complement [lem-weil-pbc-extension-by-zero-exact, lem-weil-pbc-extension-by-zero-stalks]. Its cohomology is therefore constructible: keep the finitely many original constructible strata and add the closed complementary stratum with zero value [def-weil-pbc-etale-constructible-sheaf]. Apply the proper assertion at the closure's own finite fibre bound [lem-fin-finite-type-fibre-dimension-bound]; that bound need not equal the original chart's bound. Restricting comparisons back gives $P_r$ on each chart. A common modification handles all charts.",
+   "uses": [
+    "lem-trf-modifications-zariski-refinement",
+    "lem-trf-oriented-nearby-strict-local-description",
+    "det-nagata-affine-opens-projective",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-fin-finite-type-fibre-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "Beginning of §3, p. 5, and §3.4, p. 10: affine-source compactification; general finite-ring coefficients: Lu--Zheng, proof of Theorem 4.27, printed p. 38."
+   }
+  },
+  {
+   "text": "For the proper induction step assume all smaller triples known. Reduce to integral bases by Step 2; A finite-type algebra over an excellent ring remains excellent [lem-exc-finite-type-localization-excellent]. For any integral alteration or modification, the dimension formula [lem-exc-dimension-formula-universally-catenary-finite-type-domain] on affine charts reads $\\operatorname{ht}(q)+\\operatorname{trdeg}_{\\kappa(p)}\\kappa(q)=\\operatorname{ht}(p)$, since the generic extension is finite. Thus each local dimension is at most $\\delta$. All ensuing reduced refinements remain excellent Noetherian with the required dimension bound. A bounded nonnegative complex reduces by its finitely many truncation triangles [lem-weil-pbc-truncation-triangle] to its cohomology sheaves: $H^q(K)[-q]$ needs $P_{r-q}$, with $q\\ge0$. The $q=0$ case is the current sheaf assertion proved below; positive $q$ uses a smaller second parameter. If $r-q<-2$, the nonnegative-complex bound from Step 1 suffices. Ordinary comparisons are natural transformations of exact derived functors [def-trf-oriented-nearby-cycles], so their cone long exact sequences transfer the vanishing through these finitely many triangles. We can therefore assume $K=F$ a constructible sheaf in degree zero.",
+   "uses": [
+    "def-trf-orgogozo-induction-data",
+    "lem-weil-pbc-truncation-triangle",
+    "def-trf-oriented-nearby-cycles",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-exc-dimension-formula-universally-catenary-finite-type-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "§3.4, p. 10: bounded-complex reduction, with explicit proper-ambient bookkeeping; general finite-ring coefficients: Lu--Zheng, proof of Theorem 4.27, printed p. 38."
+   }
+  },
+  {
+   "text": "Now let $f$ be proper and $F$ a constructible sheaf. The finite-pushforward embedding [lem-weil-pbc-constructible-module-finite-pushforward-embedding] gives $0\\to F\\to F'\\to Q\\to0$, with $F'=\\bigoplus p_{i,*}\\underline{M_i}$, each $p_i$ finite and each $M_i$ finite. The cokernel $Q$ and these finite direct images are constructible by [thm-constructible-serre] and the proper finiteness statement [lem-weil-pbc-etale-proper-direct-image-finiteness] (relative dimension zero). The induction hypothesis at $(\\delta,r-1,d)$ gives $P_{r-1}(f,Q)$ after a modification. The cone triangle for the short exact sequence has $H^{j-1}(C_Q)\\to H^j(C_F)\\to H^j(C_{F'})$; thus $P_r(f,F')$ suffices. Finite-source exchange [lem-trf-nearby-proper-source-exchange] transfers $P_r(fp_i,\\underline{M_i})$ to $P_r(f,p_{i,*}\\underline{M_i})$. Finite direct sums cause no additional issue, and finite $p_i$ do not increase the fibre dimension. It remains to handle proper morphisms with constant finite module coefficients.",
+   "uses": [
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding",
+    "thm-constructible-serre",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness",
+    "lem-trf-nearby-proper-source-exchange",
+    "def-trf-orgogozo-induction-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "§3.4, pp. 10--11: finite-constant embedding, cokernel degree drop and finite-source exchange; general finite-ring coefficients: Lu--Zheng, proof of Theorem 4.27, printed p. 38."
+   }
+  },
+  {
+   "text": "Replace a proper source by the finite disjoint union of its reduced irreducible components. Its Cech nerve is a proper hypercover, all of whose terms remain finite over the source. Terms in positive simplicial degree only require $P_{r-i}$, with $r-i<r$, so the induction hypothesis handles them after finitely many common refinements. Proper hyperdescent [lem-trf-nearby-proper-hyperdescent] then reduces the degree-zero contribution to proper integral sources, still with constant coefficients and the same fibre bound. This also removes nilpotents of the source; it does not assume that a nonreduced source factors through the reduced image. Thus in what follows both source and base may be taken integral.",
+   "uses": [
+    "def-trf-orgogozo-induction-data",
+    "lem-trf-nearby-proper-hyperdescent",
+    "lem-trf-modifications-zariski-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "§3.4, p. 11: finite component reduction via proper hyperdescent; general finite-ring coefficients: Lu--Zheng, proof of Theorem 4.27, printed p. 38."
+   }
+  },
+  {
+   "text": "For an integral proper source not dominating the integral base, its reduced closed image $F\\subsetneq S$ has dimension at most $\\delta-1$: a strict chain of irreducible closed subsets inside $F$ can be extended by $S$. The source is reduced, so its map factors through $F$. The induction hypothesis on base dimension supplies a modification $F'\\to F$ carrying $P_r$ for $X\\to F$. Apply [lem-trf-modification-closed-image-lifting] to $F'\\to F\\hookrightarrow S$. It supplies $p:S'\\to S$ and $G\\to F\\times_S S'$ finite surjective with an $F$-map $G\\to F'$. Universality gives $P_r$ over $G$; [lem-trf-nearby-finite-base-descent] gives it over $F\\times_S S'$, and [lem-trf-nearby-closed-image] gives it for $X\\times_S S'\\to S'$. The closed-image comparison applies to the possibly nonreduced total transform because the base-changed source factors through it; the finite-descent lemma permits a nonreduced base. If $\\delta=0$, the proper nowhere dense image is empty, so this case is already trivial.",
+   "uses": [
+    "def-trf-orgogozo-induction-data",
+    "lem-trf-modification-closed-image-lifting",
+    "lem-trf-nearby-finite-base-descent",
+    "lem-trf-nearby-closed-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "§3.2, pp. 7--8: lower-dimensional closed image and Gabber lifting; general finite-ring coefficients: Lu--Zheng, proof of Theorem 4.27, printed p. 38."
+   }
+  },
+  {
+   "text": "For a proper dominant integral source use [lem-trf-plurinodal-proper-hypercover]. After an integral alteration of the base, its proper hypercover $Y_\\bullet\\to X_T$ has degree zero a finite disjoint union of plurinodal towers and a proper part with nowhere dense image. The plurinodal towers have length at most $d$, since their length is the original generic fibre dimension. The summand with nowhere dense image, still with constant coefficients, is handled by Step 6 (its finite reduced-component cover; positive simplicial terms need only $P_{r-i}$) followed by Step 7 for each integral component, none of which dominates $T$; Step 7 lowers the base dimension, so no bound on the fibre dimension of this summand is needed. For $1\\le i\\le r+1$, each $Y_i\\to T$ is proper of finite type and has some finite fibre bound $d_i$; apply the hypothesis at $(\\delta,r-i,d_i)$. No bound $d_i\\le d$ is claimed or needed. Successively refine the base to make these finitely many conditions simultaneous. Proper hyperdescent then reduces $P_r$ for $X_T$ to $P_r$ for the constant-coefficient plurinodal towers. Alteration-to-modification descent is available from Step 2.",
+   "uses": [
+    "def-trf-orgogozo-induction-data",
+    "lem-trf-plurinodal-proper-hypercover",
+    "lem-trf-nearby-proper-hyperdescent",
+    "lem-trf-modifications-zariski-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "§§3.3--3.4, pp. 9--11: plurinodal alteration and degree-lowering hyperdescent; general finite-ring coefficients: Lu--Zheng, proof of Theorem 4.27, printed p. 38."
+   }
+  },
+  {
+   "text": "Prove the remaining plurinodal assertion. A tower of length zero is an identity, so its nearby cycles commute with every base change by [lem-trf-nearby-smooth-source-exchange]. For a tower of length $e\\ge1$ write $f=gh$ where $h:X\\to Y$ is its last semistable curve factor and $g:Y\\to T$ has length $e-1$. Fix the finite constant module $M$. Proper finiteness [lem-weil-pbc-etale-proper-direct-image-finiteness], with relative dimension one, gives $Rh_*\\underline M\\in D^{[0,2]}_c(Y,\\Lambda)$; no freeness or finite Tor dimension of $M$ is used. Apply the proper induction hypothesis at $(\\delta,r,e-1)$ to both $(g,Rh_*\\underline M)$ and $(g,\\underline M)$. A common refinement makes both $P_r$ simultaneously true. Both maps are proper and have strictly smaller third parameter, so the modified induction ordering in Step 4 applies.",
+   "uses": [
+    "def-trf-orgogozo-induction-data",
+    "lem-trf-nearby-smooth-source-exchange",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness",
+    "lem-trf-modifications-zariski-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "§4.1, p. 11: factor the tower and apply induction to Rh_* of a constant module; general finite-ring coefficients: Lu--Zheng, proof of Theorem 4.27, printed p. 38."
+   }
+  },
+  {
+   "text": "Take any preliminary base change, any further $T'\\to T$, and any lifted geometric specialization. Let $C$ be the sliced comparison cone for $(f,\\underline M)$ on the geometric special fibre $X_{a'}$. By proper-source exchange [lem-trf-nearby-proper-source-exchange], $Rh_{a',*}C$ is the corresponding sliced cone for $(g,Rh_*\\underline M)$, hence has zero cohomology in degrees $\\le r$. On the smooth locus of $h$, smooth-source exchange [lem-trf-nearby-smooth-source-exchange] identifies each stalk of $C$ with the cone for $(g,\\underline M)$ at its image. The latter also vanishes in degrees $\\le r$. Thus $E=\\tau_{\\le r}C$ is supported on the chosen closed singular subscheme of the curve factor, finite over $Y_{a'}$. All these comparisons are the ordinary counit-defined maps; an abstract isomorphism of the two objects would not suffice.",
+   "uses": [
+    "def-trf-orgogozo-induction-data",
+    "lem-trf-nearby-proper-source-exchange",
+    "lem-trf-nearby-smooth-source-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "§4.1 and Lemma 4.2, pp. 11--12: proper image and smooth-locus calculation of the cone; general finite-ring coefficients: Lu--Zheng, proof of Theorem 4.27, printed p. 38."
+   }
+  },
+  {
+   "text": "The complex $E$ is bounded: for a constant sheaf the two terms of the comparison lie in $D^{\\ge0}$, so $C\\in D^{\\ge-1}$ and $E\\in D^{[-1,r]}$. Right derived direct image is left t-exact, hence $\\tau_{\\le r}Rh_*E\\simeq\\tau_{\\le r}Rh_*C=0$. The ordinary open--closed triangle [lem-weil-pbc-etale-compact-support-open-closed-triangle], with structure map the identity of the geometric special fibre, gives $E\\simeq i_*i^*E$ because its open restriction is zero. On this finite closed support, direct image is exact: its geometric stalk is the finite product of the stalks over that point [lemma-weil-pbc-finite-direct-image-exact, lemma-weil-pbc-finite-stalk-formula]. The stalk and exactness assertions apply to modules by the faithful exact forgetful functor to abelian sheaves [lem-weil-pbc-module-sheaves-colimits-forgetful]; underived direct image has the same sections after forgetting. Consequently $Rh_*E$ is still concentrated in $[-1,r]$, and therefore is zero. Apply [lem-trf-finite-support-defect-conservativity] to $h_{a'}$ and the finite closed support: it gives $E=0$. The choices of the preliminary base change, comparison base change and specialization were arbitrary. The conservative strict-local description [lem-trf-oriented-nearby-strict-local-description] therefore gives $P_r(f,\\underline M)$. This proves the plurinodal case and closes the induction step.",
+   "uses": [
+    "def-trf-orgogozo-induction-data",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lem-trf-finite-support-defect-conservativity",
+    "lem-trf-oriented-nearby-strict-local-description",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-etale-compact-support-open-closed-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "End of §4.1 and Lemma 4.2, p. 12: bounded truncation on finite support detects vanishing; general finite-ring coefficients: Lu--Zheng, proof of Theorem 4.27, printed p. 38."
+   }
+  },
+  {
+   "text": "The lexicographic induction now proves $A_{\\mathrm{pr}}$ for every $d$, and then the finite-type version by Step 3. Every branching operation in the proof used only finitely many refinements at a fixed $r$: the embedding is finite, the cohomology range is finite, and hyperdescent needs degrees only $0,\\ldots,r+1$. Hence each application yields one proper alteration and, by Step 2, one modification; no infinite composite of modifications has been taken. In particular this establishes truncated universal comparison over every integral excellent finite-dimensional arithmetic model.",
+   "uses": [
+    "def-trf-orgogozo-induction-data",
+    "lem-trf-alteration-finite-refinement",
+    "lem-trf-nearby-finite-base-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "§§3.4--4.2: completion of the well-founded induction; general finite-ring coefficients: Lu--Zheng, proof of Theorem 4.27, printed p. 38."
+   }
+  },
+  {
+   "text": "Return to the item, with integral Noetherian $S$ of possibly infinite Krull dimension. Cover $S$ by finitely many affine opens $U_i$. For each $U_i$, [lem-trf-nearby-spread-out] descends $(X_{U_i},K_{U_i})$ to an integral affine finite-type $\\mathbf Z[1/m]$-model $(X_i^0\\to S_i^0,K_i^0)$. Choose $[a_i,b_i]$ containing the cohomology of $K_i^0$ and a finite fibre bound $d_i$ from [lem-fin-finite-type-fibre-dimension-bound]. Use the shifted complex $K_i^0[a_i]$, with cohomology in $[0,b_i-a_i]$, and apply the induction just proved with a sufficiently large $r$, then shift back. Specifically choose the shifted degree at least $2d_i+(b_i-a_i)$: [lem-trf-nearby-dimension-bound] bounds the unshifted nearby cycles after every base change by $[a_i,b_i+2d_i]$, and their cones by $[a_i-1,b_i+2d_i]$. Vanishing through the chosen top degree therefore makes every comparison cone zero. We have obtained a modification of $S_i^0$ for which the original, unshifted complex is universally $\\Psi$-good.",
+   "uses": [
+    "lem-trf-nearby-spread-out",
+    "lem-fin-finite-type-fibre-dimension-bound",
+    "lem-trf-nearby-dimension-bound",
+    "def-trf-orgogozo-induction-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "§2.1, Proposition 2.3 and §3.4: one uniform finite truncation, arithmetic models and shifts; general finite-ring coefficients: Lu--Zheng, proof of Theorem 4.27, printed p. 38."
+   }
+  },
+  {
+   "text": "Pull each arithmetic modification back to $U_i$ and take the reduced closure of the dense isomorphism open as in [lem-trf-nearby-spread-out]. Universality of $P_r$ transfers the vanishing to these modifications of $U_i$; the same uniform bounds turn it into full $\\Psi$-goodness. A global modification $r:S_1\\to S$ dominating all of them exists by [lem-trf-modifications-zariski-refinement]. Goodness persists under arbitrary base change by the two-change quantifier in $P_r$ (or by composing the ordinary comparison maps). The comparison over any $S_2\\to S_1$ is an isomorphism on the opens lying over the $U_i$, hence everywhere. The refinement is proper and is an isomorphism above a dense open $U\\subset S$ whose inverse image is dense; thus it has exactly the modification properties required in the item. Naming the fibre product and its projections gives $X_1,r_X,f_1$, and the definition [def-trf-oriented-nearby-cycles] identifies the conclusion with invertibility of the specified ordinary comparison for every $S_2\\to S_1$.",
+   "uses": [
+    "lem-trf-nearby-spread-out",
+    "lem-trf-modifications-zariski-refinement",
+    "def-trf-orgogozo-induction-data",
+    "def-trf-oriented-nearby-cycles",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "§2.1, p. 3: strict transform, finite Zariski globalization, and the ordinary comparison; general finite-ring coefficients: Lu--Zheng, proof of Theorem 4.27, printed p. 38."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-trf-orgogozo-induction-data",
+  "def-trf-oriented-nearby-cycles",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "det-nagata-affine-opens-projective",
+  "lem-exc-dimension-formula-universally-catenary-finite-type-domain",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-trf-alteration-finite-refinement",
+  "lem-trf-finite-support-defect-conservativity",
+  "lem-trf-modification-closed-image-lifting",
+  "lem-trf-modifications-zariski-refinement",
+  "lem-trf-nearby-closed-image",
+  "lem-trf-nearby-dimension-bound",
+  "lem-trf-nearby-finite-base-descent",
+  "lem-trf-nearby-proper-hyperdescent",
+  "lem-trf-nearby-proper-source-exchange",
+  "lem-trf-nearby-smooth-source-exchange",
+  "lem-trf-nearby-spread-out",
+  "lem-trf-oriented-nearby-strict-local-description",
+  "lem-trf-plurinodal-proper-hypercover",
+  "lem-weil-pbc-constructible-module-finite-pushforward-embedding",
+  "lem-weil-pbc-etale-compact-support-open-closed-triangle",
+  "lem-weil-pbc-etale-proper-direct-image-finiteness",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-truncation-triangle",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "thm-constructible-serre"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+  "place": "Agent-written one-level proof following §§2--4 of the 28-page author PDF (read online; local archival copy WANTED); general finite coefficients as in Lu--Zheng proof of Theorem 4.27. Explicit proper-ambient induction bookkeeping and truncation argument supplied here."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,10 +293,87 @@
    "results": "8 hits: AlgebraicGeometry.ValuativeCriterion.Existence.stableUnderBaseChange, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.IsLocalIso.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; returned signatures read in this session; digest b6f831783f55ceea",
    "date": "2026-10-17",
    "verdict": "no match: ordinary etale stability, homological cycles, normed-ring units and scheme pullback adjunctions do not state oriented nearby-cycle goodness or its modification theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A modification of an integral Noetherian base makes nearby cycles of a bounded constructible torsion etale complex commute with arbitrary base change",
+   "results": "{\"t\": \"2026-10-17T15:18:21Z\", \"tool\": \"leanfinder\", \"query\": \"A modification of an integral Noetherian base makes nearby cycles of a bounded constructible torsion etale complex commute with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.IsEtale.of_comp\"], \"digest\": \"de65d3b3edd236f6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained search of the returned attempt; recorded hits do not state oriented nearby-cycle modification"
+  },
+  {
+   "tool": "loogle",
+   "query": "nearby cycles, Psi-good, modification, base change",
+   "results": "{\"t\": \"2026-10-17T15:18:22Z\", \"tool\": \"loogle\", \"query\": \"nearby cycles, Psi-good, modification, base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `nearby`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained search of the returned attempt; recorded hits do not state oriented nearby-cycle modification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper modification makes bounded constructible torsion nearby cycles universally compatible with arbitrary base change",
+   "results": "{\"t\": \"2026-10-17T15:18:22Z\", \"tool\": \"leansearch\", \"query\": \"A proper modification makes bounded constructible torsion nearby cycles universally compatible with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"CategoryTheory.MorphismProperty.universally_eq_iff\", \"RingHom.IsStableUnderBaseChange\", \"IsLocalizedModule.isBaseChange\", \"IsBaseChange.of_comp\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"IsBaseChange.comp_iff\", \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\"], \"digest\": \"263888f76faf64d0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained search of the returned attempt; recorded hits do not state oriented nearby-cycle modification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Orgogozo theorem proper birational base modification nearby cycle comparison isomorphism",
+   "results": "{\"t\": \"2026-10-17T15:21:56Z\", \"tool\": \"leanfinder\", \"query\": \"Orgogozo theorem proper birational base modification nearby cycle comparison isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left_assoc\", \"AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec\"], \"digest\": \"357352cb7014bd24\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained search of the returned attempt; recorded hits do not state oriented nearby-cycle modification"
+  },
+  {
+   "tool": "loogle",
+   "query": "MorphismProperty.IsStableUnderBaseChange",
+   "results": "{\"t\": \"2026-10-17T15:21:57Z\", \"tool\": \"loogle\", \"query\": \"MorphismProperty.IsStableUnderBaseChange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'MorphismProperty.IsStableUnderBaseChange'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "Orgogozo|nearby|Psi",
+   "results": "{\"t\": \"2026-10-17T15:21:57Z\", \"tool\": \"grep\", \"query\": \"Orgogozo|nearby|Psi\", \"sub\": \"WeilConjectures\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained search of the returned attempt; recorded hits do not state oriented nearby-cycle modification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "General Orgogozo theorem: a finite-presentation morphism over a base with finitely many irreducible components admits a proper modification making nearby cycles Psi-good",
+   "results": "{\"t\": \"2026-10-17T15:27:16Z\", \"tool\": \"leanfinder\", \"query\": \"General Orgogozo theorem: a finite-presentation morphism over a base with finitely many irreducible components admits a proper modification making nearby cycles Psi-good\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.LocallyOfFiniteType\"], \"digest\": \"c1dda9475e09eae8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained search of the returned attempt; recorded hits do not state oriented nearby-cycle modification"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsProper IsStableUnderBaseChange NearbyCycle",
+   "results": "{\"t\": \"2026-10-17T15:27:17Z\", \"tool\": \"loogle\", \"query\": \"IsProper IsStableUnderBaseChange NearbyCycle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `IsProper`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained search of the returned attempt; recorded hits do not state oriented nearby-cycle modification"
+  },
+  {
+   "tool": "grep",
+   "query": "Orgogozo|Psi.?good|nearby.?cycle|modification",
+   "results": "{\"t\": \"2026-10-17T15:27:17Z\", \"tool\": \"grep\", \"query\": \"Orgogozo|Psi.?good|nearby.?cycle|modification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Util/ParseCommand.lean\", \"Mathlib/Probability/Kernel/Disintegration/StandardBorel.lean\", \"Mathlib/Probability/Kernel/Composition/IntegralCompProd.lean\", \"Mathlib/Probability/BrownianMotion/Basic.lean\", \"Mathlib/Probability/BrownianMotion/Basic.lean\", \"Mathlib/Probability/Process/Kolmogorov.lean\", \"Mathlib/Probability/Process/Kolmogorov.lean\", \"Mathlib/Probability/Process/Kolmogorov.lean\"], \"digest\": \"7c93d301250324c8\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained search of the returned attempt; recorded hits do not state oriented nearby-cycle modification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "General proper modification theorem for nearby cycles and arbitrary base change",
+   "results": "{\"t\": \"2026-10-17T15:27:17Z\", \"tool\": \"leansearch\", \"query\": \"General proper modification theorem for nearby cycles and arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"RingHom.FormallySmooth.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange\", \"RingHom.locally_isStableUnderBaseChange\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk\"], \"digest\": \"84c8d70c741e9634\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained search of the returned attempt; recorded hits do not state oriented nearby-cycle modification"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blow\"",
+   "results": "{\"t\": \"2026-10-17T15:49:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"blow\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"BoxIntegral.BoxAdditiveMap.upperSubLower\", \"BoxIntegral.BoxAdditiveMap.upperSubLower_apply\"], \"digest\": \"f6d5e7d245769b27\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained search of the returned attempt; recorded hits do not state oriented nearby-cycle modification"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-trait-nearby-base-change",
@@ -80,5 +394,94 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-orgogozo-good-modification",
+  "worker": "stage1",
+  "summary": "Repaired the returned relabelling: removed the broader theorem dependency and wrote the triple-induction proof, including finite descent, Gabber closed-image lifting, proper hyperdescent, semistable-curve comparison cones, and finite-support detection. New nodes are supporting definitions/lemmas, not clauses of the modification theorem. Original item statement and metadata retained from current shared main; all archived searches retained.",
+  "blueprint": "Realizes the Orgogozo modification input to the trait comparison in the normal-cone specialization of lem-trf-local-term-locality, through the original ancestry; the proof expands the input rather than replacing that route.",
+  "tool_uses": [
+   {
+    "node": "det-nagata-affine-opens-projective",
+    "why": "Generic Projective compactification of an affine piece used with its full stated hypotheses in the Orgogozo argument; this unit has no statement providing this ordinary scheme/sheaf/derived-category tool."
+   },
+   {
+    "node": "lem-exc-dimension-formula-universally-catenary-finite-type-domain",
+    "why": "Generic Dimension formula for finite type extensions of universally catenary domains used with its full stated hypotheses in the Orgogozo argument; this unit has no statement providing this ordinary scheme/sheaf/derived-category tool."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic Excellence is preserved by finite type algebras and localization used with its full stated hypotheses in the Orgogozo argument; this unit has no statement providing this ordinary scheme/sheaf/derived-category tool."
+   },
+   {
+    "node": "lem-fin-finite-type-fibre-dimension-bound",
+    "why": "Generic Uniform dimension bound for fibres of a finite-type morphism used with its full stated hypotheses in the Orgogozo argument; this unit has no statement providing this ordinary scheme/sheaf/derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-module-finite-pushforward-embedding",
+    "why": "Generic A constructible sheaf of $\\Lambda$-modules embeds into a finite sum of finite pushforwards of constant sheaves used with its full stated hypotheses in the Orgogozo argument; this unit has no statement providing this ordinary scheme/sheaf/derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-compact-support-open-closed-triangle",
+    "why": "Generic Open-closed localization for relative etale compact support used with its full stated hypotheses in the Orgogozo argument; this unit has no statement providing this ordinary scheme/sheaf/derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-proper-direct-image-finiteness",
+    "why": "Generic Étale proper direct-image finiteness used with its full stated hypotheses in the Orgogozo argument; this unit has no statement providing this ordinary scheme/sheaf/derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic Extension by zero is exact (étale site) used with its full stated hypotheses in the Orgogozo argument; this unit has no statement providing this ordinary scheme/sheaf/derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Generic Geometric stalks of extension by zero along an open immersion used with its full stated hypotheses in the Orgogozo argument; this unit has no statement providing this ordinary scheme/sheaf/derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic Colimits of sheaves of modules and the forgetful functor to abelian sheaves used with its full stated hypotheses in the Orgogozo argument; this unit has no statement providing this ordinary scheme/sheaf/derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic The truncation triangle tau_{<=q-1}K -> tau_{<=q}K -> H^q(K)[-q] is distinguished used with its full stated hypotheses in the Orgogozo argument; this unit has no statement providing this ordinary scheme/sheaf/derived-category tool."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Generic Exactness of finite direct image used with its full stated hypotheses in the Orgogozo argument; this unit has no statement providing this ordinary scheme/sheaf/derived-category tool."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-stalk-formula",
+    "why": "Generic Geometric stalk formula for finite direct image used with its full stated hypotheses in the Orgogozo argument; this unit has no statement providing this ordinary scheme/sheaf/derived-category tool."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Generic Constructible sheaves form a weak Serre subcategory used with its full stated hypotheses in the Orgogozo argument; this unit has no statement providing this ordinary scheme/sheaf/derived-category tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-nagata-affine-opens-projective",
+  "lem-exc-dimension-formula-universally-catenary-finite-type-domain",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-weil-pbc-constructible-module-finite-pushforward-embedding",
+  "lem-weil-pbc-etale-compact-support-open-closed-triangle",
+  "lem-weil-pbc-etale-proper-direct-image-finiteness",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-truncation-triangle",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "thm-constructible-serre"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-b01bec4e8",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-b01bec4e8 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged from main, not weakened; ordinary small-étale Lambda-modules; the ordinary beta comparison), all 14 steps, the 12 new statement-only nodes, the statement of every cited node, unit sk-i-curve-zero (already realized by its key node) and chapter sec-trace-formula. Sources: neither Orgogozo 2006 nor Lu-Zheng 1712.10216 is in literature/ and network access is blocked, so the source places (Lemmas 2.5, 2.6, 3.1.x, 3.2.1, 3.2.2, Props 2.3, 3.3.1, Lemma 4.2) are unverified by me. The proof is correctly marked by:agent with both papers WANTED, and I checked the mathematics directly. Induction on (delta, r+2, d): every recursive call is lex-smaller, i.e. (delta-1,.,.), (delta, r'<r, .) or (delta, r, e-1<d); the constant case does not loop back to the sheaf case at the same triple. Checked by hand: the r=-2 base, the truncation shift P_{r-q}, the cokernel degree drop to P_{r-1}, hyperdescent bookkeeping (E1 terms vanish for j<=r-i), the Step 11 argument (tau<=r Rh_*E iso tau<=r Rh_*C, finite exactness, finite-support conservativity), the Step 13 shift (r=b-a+2d kills the whole cone), and Gabber lifting on small cases. The new nodes are true as stated as far as I can check, none restates the item, and none duplicates an existing node (searched the whole DAG for flatten, plurinodal, hypercover, descent, admissible blowup, Gabber, modification, nearby-cycle dimension bound, local acyclicity). All 14 off-unit tools are declared and accepted; no SGA. FIX 1: lem-trf-nearby-dimension-bound claimed R^i Psi=0 for i>2d over any base and any finite Lambda, with no invertibility; I restricted it to a Noetherian S with Lambda killed by m invertible on S, keeping the clause for every base change T->S, which covers every use; pqf-def-locnoeth added to stmt_deps. FIX 2: item Step 8 now sends the nowhere-dense summand through Steps 6 and 7 (Step 7 alone needs integral sources). Corrected files are in fixes/dag/nodes/sec-trace-formula/; details in review.md.; 2 file(s) fixed by the reviewer"
  }
 }
