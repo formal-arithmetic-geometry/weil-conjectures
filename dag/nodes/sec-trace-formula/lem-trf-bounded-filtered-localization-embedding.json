@@ -14,9 +14,98 @@
   "def-weil-abstract-derived-category",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Set $\\mathcal C=\\operatorname{Fil}^f(\\mathcal A)$. By [lem-trf-filtered-cone-localization], $K^+(\\mathcal C)$ has the cone triangulation. Its full subcategory consisting of complexes with a uniform finite filtration interval, and its full subcategory of bounded complexes, are closed under zero, shifts and mapping cones: shifting does not change filtration bounds; a cone uses a finite direct sum, so choose the minimum lower filtration bound and maximum upper filtration bound of its two inputs; its cochain bounds are finite when both inputs are bounded. These closure assertions are up to isomorphism, as allowed in [def-weil-triangulated-subcategory]; taking the isomorphism closures leaves all Hom sets on the stated objects unchanged. Thus the inherited cone triangles make $K_F^+$ and $K_F^b$ triangulated and the inclusion exact. The inclusions of the stated categories in their isomorphism closures are fully faithful and essentially surjective: between two such complexes the filtration-preserving chain maps and homotopies are exactly those of the ambient category. The same argument works for the additive category of flags in a specified fixed interval, using the fixed-interval clause of [lem-trf-filtered-cone-localization].",
+   "uses": [
+    "lem-trf-filtered-cone-localization",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05RQ (lemma-bounded-triangulated-subcategories) and 05S6 (lemma-filtered-bounded-derived); finite-filtration restriction of the cone construction in 05S1."
+   }
+  },
+  {
+   "text": "In either $K_F^b$ or $K_F^+$ let $\\mathcal P$ be the full subcategory of graded-acyclic complexes. Zero and shifts remain graded acyclic. If $U,V$ are graded acyclic, every filtered map $f:U\\to V$ induces isomorphisms between the zero cohomology objects in each grade; hence $f\\in W$, and [lem-trf-filtered-cone-localization] says its cone is graded acyclic. A filtered homotopy equivalence induces homotopy equivalences in each grade, so graded acyclicity is invariant under isomorphisms in these homotopy categories. To check closure under distinguished triangles, rotate any triangle until its first two vertices are graded acyclic; their first map induces the isomorphism $0\\to0$ in every grade, hence lies in $W$, and the cone criterion in [lem-trf-filtered-cone-localization] makes the third vertex graded acyclic. Shifts are already covered, so this is the full triangulated subcategory of [def-weil-triangulated-subcategory]. By the cone criterion in [lem-trf-filtered-cone-localization] and the cone-class criterion in [lem-trf-triangulated-subcategory-cone-system], $W=W_{\\mathcal P}$. The latter node therefore supplies a multiplicative system compatible with the triangulation and both fraction calculi in each category. All objects used stay in the same category because these results are being applied internally to the triangulated categories of Step 1. Independently, $W$ satisfies two-out-of-three because the induced cohomology maps in each grade do.",
+   "uses": [
+    "lem-trf-filtered-cone-localization",
+    "def-weil-triangulated-subcategory",
+    "lem-trf-triangulated-subcategory-cone-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05S1 (lemma-filtered-acyclic), 05RG (lemma-construct-multiplicative-system) and 05S6, initial assertion."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-localization-triangles-05r6] to the two multiplicative systems from Step 2. Both localizations are triangulated; their distinguished triangles are precisely triangles isomorphic to images of distinguished homotopy-category triangles. Write $Q_b$ and $Q_+$ for the localization functors. The composite $K_F^b\\hookrightarrow K_F^+\\xrightarrow{Q_+}K_F^+[W_+^{-1}]$ sends $W_b$ to isomorphisms since a map has exactly the same graded complexes in the two categories. By [lem-weil-pbc-localization-universal-property](1), it induces the asserted functor $I$ with $I Q_b\\cong Q_+|_{K_F^b}$. We now check its Hom maps explicitly.",
+   "uses": [
+    "lem-pur-localization-triangles-05r6",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05R6 (proposition-construct-localization), 05S6 and Categories localization universal property."
+   }
+  },
+  {
+   "text": "For bounded $X,Y$, [lem-pc-right-fraction-representation] applied in $K_F^+$ writes any morphism $Q_+X\\to Q_+Y$ as the roof $X\\xleftarrow{s}Z\\xrightarrow{f}Y$ with $s\\in W_+$. Choose $N$ with $X^q=Y^q=0$ for $q>N$. Since $\\operatorname{gr}^ps$ is a quasi-isomorphism, $H^q(\\operatorname{gr}^pZ)=0$ for all $p$ and $q>N$. Apply [lem-trf-filtered-bounded-localization-comparison] to obtain a filtered quasi-isomorphism $j:T=\\tau_{\\le N}Z\\to Z$. The lower cochain bound of $Z$ is preserved, so $T$ is bounded. Its filtration remains uniformly finite, with the same filtration interval as $Z$. The maps $sj:T\\to X$ and $fj:T\\to Y$ are maps in $K_F^b$ and $sj\\in W_b$. Their roof maps to the original roof, since $Q_+(j)$ is invertible and $Q_+(fj)Q_+(sj)^{-1}=Q_+(f)Q_+(s)^{-1}$. Hence $I$ is full. In the fixed-interval case $T$ is in that very interval, as the truncation lemma explicitly asserts.",
+   "uses": [
+    "lem-pc-right-fraction-representation",
+    "lem-trf-filtered-bounded-localization-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05S6 via 05RW (lemma-bounded-derived), fullness argument, using 05S5(2); right-roof version."
+   }
+  },
+  {
+   "text": "Take two bounded roofs $X\\xleftarrow{s_i}Z_i\\xrightarrow{f_i}Y$ whose images agree. Such roofs represent every bounded-localization morphism by [lem-pc-right-fraction-representation] applied in $K_F^b$. In $K_F^+$, [lem-pc-right-fraction-common-refinement] supplies $R$ and $a_i:R\\to Z_i$ with $s_1a_1=s_2a_2=t\\in W_+$ and $f_1a_1=f_2a_2$. Choose $N$ above the cochain support of $X$. Because $t:R\\to X$ is a filtered quasi-isomorphism, all graded cohomology of $R$ vanishes above $N$. By [lem-trf-filtered-bounded-localization-comparison], $j:S=\\tau_{\\le N}R\\to R$ lies in $W_+$ and $S$ is bounded with the same filtration interval as $R$. Precompose the two equalities with $j$. They are equalities already in $K_F^b$: all sources and targets are now bounded, and the homotopies witnessing them are the same filtered homotopies in that full subcategory. The common denominator $tj$ is in $W_b$. Applying [lem-pc-right-fraction-common-refinement] internally in $K_F^b$ shows that the original bounded roofs agree. Thus $I$ is faithful. This proof also stays in a fixed interval when one was imposed.",
+   "uses": [
+    "lem-pc-right-fraction-representation",
+    "lem-pc-right-fraction-common-refinement",
+    "lem-trf-filtered-bounded-localization-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05S6 via 05RW, faithfulness argument; Categories right-fraction equality criterion and 05S5(2)."
+   }
+  },
+  {
+   "text": "Finally, $I$ commutes with shifts: the inclusion and both localization functors do, and [lem-weil-pbc-localization-universal-property](2) descends the comparison and its inverse from complexes. For additivity, the right Ore property of [lem-trf-triangulated-subcategory-cone-system] applied to denominators $s:Z\\to X$ and $t:R\\to X$ gives $a:P\\to Z$ in $W_b$ and $b:P\\to R$ with $sa=tb$. The common denominator $sa$ is in $W_b$, and two-out-of-three gives $b\\in W_b$. In this denominator the sum of roofs is represented by $[sa,fa+gb]$. The inclusion preserves these compositions and sums of chain maps, so its descended functor preserves sums. For a distinguished triangle in the bounded localization, [lem-pur-localization-triangles-05r6] represents it, up to triangle isomorphism, as $Q_b$ of a distinguished triangle in $K_F^b$. The inclusion sends that triangle to a distinguished triangle in $K_F^+$ by Step 1, and $Q_+$ sends it to a distinguished triangle by the same localization-triangle theorem. The descended shift comparison makes its image under $I$ that same triangle up to isomorphism. Thus $I$ is exact. Steps 1--5 and this argument apply both to arbitrary uniform finite filtration intervals depending on the object and to a specified fixed interval, giving both assertions.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "lem-pur-localization-triangles-05r6",
+    "lem-trf-triangulated-subcategory-cone-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05R7 (lemma-universal-property-localization), part (2), and 05R6, applied to the exact inclusion; 05S6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-filtered-cone-localization",
+  "def-weil-triangulated-subcategory",
+  "lem-trf-triangulated-subcategory-cone-system",
+  "lem-pur-localization-triangles-05r6",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pc-right-fraction-representation",
+  "lem-trf-filtered-bounded-localization-comparison",
+  "lem-pc-right-fraction-common-refinement"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05S6, lemma-filtered-bounded-derived: expand the reference to the proof of Tag 05RW with the right-fraction convention and the upper truncation of Tag 05S5(2)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -73,10 +162,24 @@
    "results": "{\"t\": \"2026-10-17T05:03:35Z\", \"tool\": \"leanfinder\", \"query\": \"Fully faithful inclusion of the bounded derived category into the bounded below derived category for complexes of finite flags in an abelian category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instFullSingleFunctor\", \"DerivedCategory.instFaithfulSingleFunctor\", \"ComplexShape.Embedding.fullyFaithfulExtendFunctor\", \"DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh\", \"DerivedCategory.instFaithfulFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.instEssSurjCochainComplexIntQ\"], \"digest\": \"5c392c9d957ec0f6\"}",
    "date": "2026-10-17",
    "verdict": "no match: inspected returned ordinary derived-category and complex-shape extension statements; none concerns localization at graded quasi-isomorphisms for finite flags, whose category is not abelian. Source grep found no filtered-complex localization declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded filtered derived category embeds fully faithfully in the bounded below filtered derived category of any abelian category",
+   "results": "{\"t\": \"2026-10-17T05:32:21Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded filtered derived category embeds fully faithfully in the bounded below filtered derived category of any abelian category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instFullSingleFunctor\", \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"HasDerivedCategory.standard\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.instFaithfulSingleFunctor\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\"], \"digest\": \"1cd68fe1638a6076\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits state ordinary derived-category results, not the finite-filtered exact-category comparison; whole-source grep found no filtered-derived localization API."
+  },
+  {
+   "tool": "grep",
+   "query": "FilteredDerived|filteredDerived|filtered.{0,40}(quasi.?iso|localization)",
+   "results": "{\"t\": \"2026-10-17T05:34:12Z\", \"tool\": \"grep\", \"query\": \"FilteredDerived|filteredDerived|filtered.{0,40}(quasi.?iso|localization)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits state ordinary derived-category results, not the finite-filtered exact-category comparison; whole-source grep found no filtered-derived localization API."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-filtered-derived-hom-calculus",
@@ -96,5 +199,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-bounded-filtered-localization-embedding",
+  "worker": "stage1",
+  "summary": "Expanded the Stacks 05S6 proof (via the 05RW argument and 05S5(2)) into: uniform-bound/bounded cone triangulation, the graded-acyclic cone class as a compatible multiplicative system, descent of the inclusion, right-roof fullness and common-refinement faithfulness via the upper truncation, and shift/additivity/exactness. Reused existing localization, roof, cone-class and truncation nodes; no new nodes (the two proposed children were removed as duplicates of lem-trf-filtered-bounded-localization-comparison and lem-trf-triangulated-subcategory-cone-system). No statement change; no enough-injectives assumption. Preserved the fixed-interval and uniform-filtration requirements.",
+  "blueprint": "Proof paragraph (2), open--closed localization and trace additivity: bounded filtered representatives must compute the same morphisms in the bounded-below resolution model; supporting the filtered lift through lem-trf-invariant-localization-filtered-lift and lem-trf-filtered-derived-hom-calculus.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-right-fraction-representation",
+    "why": "General right-roof representation for any multiplicative system, applied to graded quasi-isomorphisms after Step 2; the trace-formula unit has no separate roof-representation statement."
+   },
+   {
+    "node": "lem-pc-right-fraction-common-refinement",
+    "why": "General equality criterion for two roofs, used to shorten the common refinement; independent of coefficients and not a replacement of the unit route."
+   },
+   {
+    "node": "lem-pur-localization-triangles-05r6",
+    "why": "General triangulation theorem for a compatible multiplicative system, used for exactness and the localized triangle structure; the unit supplies the filtered setting, not this generic theorem."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic descent of a functor and shift natural transformations through localization, with no geometric proper-base-change input."
+   },
+   {
+    "node": "lem-trf-filtered-cone-localization",
+    "why": "Generic cone triangulation of K^+ of finite filtered objects (and of any full additive subcategory, fixed-interval case) and the criterion W = maps with graded-acyclic cone; homological algebra of unit sk-i-global-additivity, which sk-i-curve-zero does not cite, and no node of this unit states it. Maintainer-reader addition."
+   },
+   {
+    "node": "lem-trf-filtered-bounded-localization-comparison",
+    "why": "Only its graded upper-truncation clause (all graded cohomology vanishing above d gives a graded quasi-isomorphism tau^{<=d}K -> K without enlarging [a,b]) is used, for bounded roof representatives; generic homological algebra of unit sk-i-additivity, outside the route of sk-i-curve-zero. Maintainer-reader addition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-right-fraction-representation",
+  "lem-pc-right-fraction-common-refinement",
+  "lem-pur-localization-triangles-05r6",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-trf-filtered-cone-localization",
+  "lem-trf-filtered-bounded-localization-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-0858c3f68",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-0858c3f68 (reviewer sub-agent of L); spot-checked: I read all of it: the item, its six steps, all 8 cited statements, Stacks derived.tex 05S6 (l.4446) with 05S5 and its proof (l.4386), the 05RW fullness and faithfulness argument (l.3805 ff.), 05S1, and the unit sk-i-curve-zero with its transitive uses. The statement is true and unchanged: it is 05S6/05RW with filtration bounds that are uniform in cochain degree. The 05S5 truncations do not enlarge the interval, and the fixed-interval clause is kept. Step checks: (1) cones use the min/max of the filtration bounds, with closure up to isomorphism as def-weil-triangulated-subcategory allows. (2) The graded-acyclic class is replete and closed under triangles (rotate, then a 0->0 map is in W, then the cone criterion). W equals W_P, so the cone-system trW node gives both fraction calculi and compatibility. (3) Descent comes from part (1) of the universal property. (4) Fullness: a right roof, then the upper truncation clause of lem-trf-filtered-bounded-localization-comparison, which matches 05S5(2). (5) Faithfulness: the 04VJ common refinement, truncated, with the equalities holding in the full subcategory K_F^b. (6) Shift via part (2) of the universal property, additivity via Ore plus 2-out-of-3, exactness via 05r6. Edge cases checked: zero complex, a=b, cutoff below the support, contractible tail, and the hypothesis failing below a nonzero graded H^q (which the steps never use). There are no new nodes; the two dropped children really are duplicates. No SGA is cited, and since the item is generic homological algebra there is no base-change morphism or coefficient category to check. Fixes: (a) the off-route unsplit statements lem-trf-filtered-cone-localization (unit sk-i-global-additivity) and lem-trf-filtered-bounded-localization-comparison (unit sk-i-additivity) lie outside sk-i-curve-zero's closure and were not declared, so I added both to split_report.tool_uses as generic tools; (b) the stale split_report.summary, which claimed two new nodes that were later removed, is rewritten. I accept the four declared tool uses, all Mathlib leaves. Maintainer note: the comparison node already states that D^bF -> D^+F is fully faithful (for localizations of complexes); the overlap with this item is a candidate for a merge, and the comparison node's future split must not cite this item, or it creates a cycle.; 1 file(s) fixed by the reviewer"
  }
 }

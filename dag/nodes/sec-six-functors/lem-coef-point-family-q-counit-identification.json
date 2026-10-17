@@ -14,9 +14,145 @@
   "lem-coef-infinity-pinch-comparison",
   "lem-coef-space-point-cocone-criterion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in a containing universe throughout. The internal mapping complexes $T_{X,Y}=\\operatorname{Fun}(X,Y)$ are Kan by [lem-cbc-kan-functor-space-kan]. Thus [lem-coef-kan-coherent-nerve-quasicategory] applies to the simplicial category $\\mathbf{Kan}$ of [def-coef-infinity-category-of-spaces] and makes $\\mathcal S$ a quasicategory. The right-pinch comparison then makes $R_{X,Y}$ and $U_{X,Y}$ Kan and supplies the specified homotopy equivalence $j:R_{X,Y}\\to U_{X,Y}$. These facts apply also when a mapping space is empty.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "lem-cbc-kan-functor-space-kan",
+    "lem-coef-kan-coherent-nerve-quasicategory",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, agent expansion: Kan hypotheses for the concrete space category and its mapping objects"
+   }
+  },
+  {
+   "text": "A map $J^n\\to N_{\\mathrm{hc}}\\mathbf{Kan}$ is equivalently an enriched functor $\\mathfrak C[J^n]\\to\\mathbf{Kan}$: on every simplex this is the coherent-nerve definition, and compatibility on all simplices is the universal property of the simplex colimit defining $\\mathfrak C$. The source has two objects, identity endomorphism spaces, no reverse morphisms, and sole nonidentity mapping space $Q^n$; collapsing the initial face makes all its arrows identities. Fixing the endpoint images $X,Y$ therefore leaves exactly the datum of a map $Q^n\\to T_{X,Y}$. Restriction along a monotone map acts on this datum by precomposition with the corresponding $Q$-operator. This gives the asserted natural simplicial isomorphism $R_{X,Y}\\cong\\operatorname{Sing}_Q T_{X,Y}$. Under it, evaluation on a summand indexed by $\\sigma:J^n\\to\\mathcal S$ is the induced map $Q^n\\to T_{X,Y}$, so it is precisely the evaluation counit $E_{X,Y}$ of the resolution node. That node's summand formula for $\\theta$, followed by the enriched adjunction counit (which evaluates the enriched simplex), gives the very same map on each summand and hence the equivalent formula for $E$.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-pinched-rigidification-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, agent expansion: HTT 2.2.4 opening paragraph: identification with the actual Q evaluation counit"
+   }
+  },
+  {
+   "text": "For a subset $B$ in a morphism from $i\\leq n$ to $n+1$, put $q^n(B)=\\max(B\\setminus\\{n+1\\})$. Union with a subset in the initial face ending at $i$ adds only elements at most $i$ and hence leaves that maximum unchanged. Sending every initial-face arrow to an identity therefore respects composition and descends across the collapse to $Q^n$. The maximum is monotone on subset inclusions, and $\\max(aI)=a(\\max I)$ for every monotone $a:[m]\\to[n]$, including noninjective ones. Thus $q$ is cosimplicial. For the cosimplicial map $p$ furnished by the resolution, set $r^n=\\max(p^n,q^n)$ vertexwise. This defines a simplicial map to the ordinal nerve $\\Delta^n$. The inequalities $p^n\\leq r^n\\geq q^n$ give a natural zigzag of simplicial homotopies: on each simplex, use the smaller value before the interval parameter switches and the larger value afterwards. Monotone ordinal maps preserve maxima, so these homotopies commute with every $Q$-operator. Products with $\\Delta^1$ preserve the coend quotient degreewise, giving $p_A\\simeq r_A\\simeq q_A$ for every $A$. The Kan-target criterion implies two-out-of-three for weak equivalences and says homotopic maps are weak equivalences simultaneously: their precomposition maps agree on edge-components. Since $p_A$ is a weak equivalence, so is $q_A$.",
+   "uses": [
+    "lem-coef-pinched-rigidification-resolution",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-realization-weak-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, agent expansion: explicit maximum map and comparison with the resolution augmentation"
+   }
+  },
+  {
+   "text": "Under Step 2 define $\\alpha:T\\to R$ in degree $n$ by $t\\mapsto tq^n$; cosimplicial naturality makes it simplicial. Evaluating on every coend summand gives the strict equation $EV(\\alpha)=q_T$. Both $E$ (because $T$ is Kan) and $q_T$ are weak equivalences, so $V(\\alpha)$ is one. Naturality of $p$ gives $p_RV(\\alpha)=\\alpha p_T$; since both $p_R,p_T$ are weak equivalences, two-out-of-three makes $\\alpha$ a weak equivalence. It has an actual simplicial homotopy inverse. Indeed the Kan-target criterion applied to $\\alpha$, with test target $T$, gives $g:R\\to T$ such that $g\\alpha$ is in the edge-component of $1_T$. Its injectivity with test target $R$ then gives $\\alpha g$ in the component of $1_R$. The relevant internal functor objects are Kan by [lem-cbc-kan-functor-space-kan]. In a Kan complex an edge can be reversed by an outer two-horn with an identity, and two edges composed by an inner two-horn. Hence every finite edge zigzag compresses to one edge, giving the two required simplicial homotopies. Composing with the homotopy equivalence $j$ proves that $\\beta=j\\alpha$ is a homotopy equivalence.",
+   "uses": [
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-cbc-realization-weak-equivalence",
+    "lem-cbc-kan-functor-space-kan",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, agent expansion: weak equivalence and actual homotopy-inverse construction for alpha and beta"
+   }
+  },
+  {
+   "text": "Simplicially homotopic maps become equal in the ordinary localization used in the statement. To see this without identifying that localization with an unspecified homotopy category, the projection $A\\times\\Delta^1\\to A$ has a section at $0$ and a simplicial contraction given on the interval factor by $\\min(s,t)$. It is a simplicial homotopy equivalence, hence a weak equivalence by [lem-cbc-simplicial-homotopy-equivalence-weak]. Both endpoint inclusions consequently become its unique inverse in the localization. Apply this observation to the zigzag in Step 3 to obtain $[q_T]=[p_T]$. Since $[V(\\alpha)]$ is invertible by Step 4, the strict equations there now give\n$$[E]=[q_T][V(\\alpha)]^{-1}=[p_T][V(\\alpha)]^{-1}=[\\alpha]^{-1}[p_R].$$\nThis is the asserted equation for the actual counit, with the inverse of the specified $\\alpha$.",
+   "uses": [
+    "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "lem-coef-pinched-rigidification-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, agent expansion: calculation of the counit in the specified ordinary localization"
+   }
+  },
+  {
+   "text": "Write $b=\\beta$. For an $n$-simplex $f:\\Delta^n\\to T_{X,Y}$, its prism $b(f)$ has identity arrows within each layer of $[1]\\times[n]$; on a subset $B$ crossing from layer $0$ to layer $1$, its enriched map is $f(s)$ with $s$ the largest parameter among the layer-$0$ vertices. Indeed the pinch sends all layer-$1$ vertices to $n+1$, and $q$ takes the maximum of the remaining vertices. For $g:\\Delta^n\\to T_{Y,Z}$, define a map $\\Phi(g,f):\\Delta^2\\times\\Delta^n\\to\\mathcal S$ on each chain of $[2]\\times[n]$ as follows. Send layers to $X,Y,Z$ and within-layer arrows to identities. On subsets joining $0$ to $1$ use $f$ at the largest layer-$0$ parameter, and on subsets joining $1$ to $2$ use $g$ at the largest layer-$1$ parameter. On a subset joining $0$ to $2$, use $g(t)\\circ f(s)$, where $s$ is the largest layer-$0$ parameter and $t$ the largest parameter in layers $0,1$. These are monotone functions of the subset. Splitting at a layer-$1$ vertex recovers precisely these two maxima, so enriched composition is union-composition; splitting within an outer layer only inserts an identity. The formulas therefore give enriched functors, agree on common faces of chains, and define $\\Phi$ simplicially. Its edges are $b(f),b(g),b(g\\circ f)$; on the $02$ face one has $s=t$. Thus for the triangle-space maps of [lem-coef-infinity-mapping-composition], $\\theta\\Phi=b\\times b$ and $\\ell\\Phi=b\\circ\\mathrm{comp}$. Since $\\theta$ is a homotopy equivalence, that node's formula proves compatibility with coherent composition on the entire mapping complexes.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, agent expansion: explicit three-layer prism for enriched composition"
+   }
+  },
+  {
+   "text": "Constant identity maps in the prism formula of Step 6 give degenerate identity edges, and its two outer composition specializations give the unit homotopies. Take $f=\\eta:*\\to X$ constant in that formula. Enriched composition with it is strictly evaluation $\\operatorname{ev}_\\eta:T_{X,Y}\\to T_{*,Y}=Y$. Consequently the composition compatibility just proved identifies coherent precomposition by the edge $\\eta$ with this evaluation map up to homotopy on the whole mapping space. Each maximum formula commutes with every monotone change of parameter. Further simplicial parameters may therefore be retained throughout the prism construction; its homotopies are homotopies of maps, not merely equalities on components. Applying any enriched functor to all the displayed enriched maps preserves their union-composition and identities, so $\\alpha,\\beta,E$ and these comparison homotopies have the asserted enriched naturality wherever those inputs apply.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, agent expansion: identity, point evaluation, and naturality of the explicit comparison"
+   }
+  },
+  {
+   "text": "The functor quasicategory $D=\\operatorname{Fun}(K,\\mathcal S)$ is a quasicategory by [lem-cbc-enhanced-functor-cone-calculus]. An $n$-simplex of $U_D(\\Delta_KX,\\Delta_KY)$ is exactly a map $K\\times\\Delta^n\\times\\Delta^1\\to\\mathcal S$ with its endpoint restrictions constant at $X,Y$. Currying gives the stated degreewise isomorphism with $\\operatorname{Fun}(K,U_{X,Y})$, respecting all operators. If $g$ is a homotopy inverse to $\\beta$, postcomposition with $g$ and $\\beta$ gives inverse homotopy equivalences on these internal functor objects: evaluate their homotopies at every point of $K$ with the same interval parameter. Combining this with the homotopy equivalence $j_D$ gives the specified natural zigzag\n$$\\operatorname{Map}^R_D(\\Delta_KX,\\Delta_KY)\\longrightarrow\\operatorname{Fun}(K,U_{X,Y})\\longleftarrow\\operatorname{Fun}(K,T_{X,Y}).$$\nAt $X=*$ this constructs a choice of the point-family comparison of [lem-coef-space-point-cocone-criterion]. More explicitly, for the adjoint arrow family $\\gamma:K\\to U_{*,Y}$ its point map is $g\\gamma:K\\to Y$. The two homotopy-inverse equations give $[g\\gamma]=[\\beta_{*,Y}]^{-1}[\\gamma]$ and independence up to homotopy of the inverse chosen. No normalization of an inverse beyond this displayed construction is taken from the criterion node.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "lem-coef-infinity-pinch-comparison",
+    "lem-coef-space-point-cocone-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, agent expansion: constant-diagram currying and the actual point-family normalization"
+   }
+  },
+  {
+   "text": "Every displayed identification is degreewise: simplex restriction gives the operators on $R$, precomposition gives those on $\\operatorname{Sing}_Q$, evaluation descends through the coend relations, and the maximum and three-layer formulas commute with monotone maps. Currying is also degreewise. The resulting equivalence is consequently an equivalence of entire mapping spaces, retains faces and degeneracies, and is natural under restriction in $K$ and enriched changes of the displayed inputs. The identity and composition homotopies in Step 7 supply naturality for point precomposition as well. Empty $K$ gives one-point internal functor objects and the same zigzag; empty enriched mapping spaces give empty $R,U$ in Step 2. Finally, enlarging the containing universe changes none of the displayed simplicial sets, formulas, or their inverse homotopies. Those inverse homotopies still prove the asserted equivalences, and the same formal-localization equation follows from the same homotopies there. This proves universe independence without asserting that the collection of all small spaces stays the same.",
+   "uses": [
+    "def-coef-infinity-category-of-spaces",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-coef-infinity-pinch-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Paragraph 2, agent expansion: parameter and containing-universe checks"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-category-of-spaces",
+  "lem-cbc-kan-functor-space-kan",
+  "lem-coef-kan-coherent-nerve-quasicategory",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-pinched-rigidification-resolution",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-realization-weak-equivalence",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-infinity-mapping-composition",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-space-point-cocone-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, agent proof of the Q-counit and point-family foundation; HTT 2.2.4 opening paragraph checked online"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,10 +202,59 @@
    "results": "{\"t\": \"2026-10-17T04:42:19Z\", \"tool\": \"grep\", \"query\": \"coherent|rigidification|Sing_Q|counit\", \"sub\": \"AlgebraicTopology/SimplicialNerve.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"14\"], \"digest\": \"f98b6724f33a870d\"}",
    "date": "2026-10-17",
    "verdict": "no match: read Mathlib/AlgebraicTopology/SimplicialNerve.lean:14-35 and SimplicialCategory/Basic.lean:65-67; these construct the nerve or identify ordinary arrows with enriched vertices, with no Q-resolution, parameterized point-family comparison, or enriched-counit formula. The other hits concern the ordinary nerve or ordinary Kan extension counits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coherent nerve of Kan complexes has right mapping space Sing_Q of the enriched hom and the Q evaluation counit identifies the canonical point family comparison after the maximum reparametrization",
+   "results": "{\"t\": \"2026-10-17T05:22:50Z\", \"tool\": \"leanfinder\", \"query\": \"The coherent nerve of Kan complexes has right mapping space Sing_Q of the enriched hom and the Q evaluation counit identifies the canonical point family comparison after the maximum reparametrization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialNerve\", \"CategoryTheory.nerveFunctor\", \"CategoryTheory.nerve\", \"SSet.stdSimplex.isoNerve_hom_app_apply\", \"SSet.unitHomEquiv\", \"SSet.OneTruncation₂.nerveHomEquiv_apply\", \"SSet.OneTruncation₂.nerveHomEquiv\", \"CategoryTheory.nerve.homEquiv\"], \"digest\": \"640d2a10812d3a42\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/SimplicialNerve.lean:14-35 and AlgebraicTopology/SimplicialCategory/Basic.lean:45-67. These give the nerve and enriched vertices; they do not give the Q-counit, maximum comparison, or point-family normalization. Other hits are ordinary nerves or ordinary Kan extension counits."
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplicialNerve, counit",
+   "results": "{\"t\": \"2026-10-17T05:22:51Z\", \"tool\": \"loogle\", \"query\": \"SimplicialNerve, counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'SimplicialNerve'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable: the unqualified Loogle identifier was rejected as unknown; the later quoted-name query repaired the search."
+  },
+  {
+   "tool": "grep",
+   "query": "Sing_Q|pinched|rigidification|point.family|coherent.*counit",
+   "results": "{\"t\": \"2026-10-17T05:22:51Z\", \"tool\": \"grep\", \"query\": \"Sing_Q|pinched|rigidification|point.family|coherent.*counit\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/SimplicialNerve.lean:14-35 and AlgebraicTopology/SimplicialCategory/Basic.lean:45-67. These give the nerve and enriched vertices; they do not give the Q-counit, maximum comparison, or point-family normalization. Other hits are ordinary nerves or ordinary Kan extension counits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right mapping spaces of a homotopy coherent nerve compare with enriched mapping Kan complexes by the Q evaluation counit",
+   "results": "{\"t\": \"2026-10-17T05:22:51Z\", \"tool\": \"leansearch\", \"query\": \"Right mapping spaces of a homotopy coherent nerve compare with enriched mapping Kan complexes by the Q evaluation counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightKanExtensionCounit\", \"CategoryTheory.Functor.isPointwiseRightKanExtensionRanCounit\", \"CategoryTheory.Functor.instIsRightKanExtensionRightKanExtensionRightKanExtensionCounit\", \"CategoryTheory.Functor.isPointwiseRightKanExtensionRanCounit.congr_simp\", \"CategoryTheory.Functor.ranCounit\", \"CategoryTheory.nerveAdjunction.isIso_counit\", \"CategoryTheory.Functor.instIsRightKanExtensionPointwiseRightKanExtensionPointwiseRightKanExtensionCounit\", \"CategoryTheory.Functor.ran\"], \"digest\": \"9b4bceaa872f3369\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/SimplicialNerve.lean:14-35 and AlgebraicTopology/SimplicialCategory/Basic.lean:45-67. These give the nerve and enriched vertices; they do not give the Q-counit, maximum comparison, or point-family normalization. Other hits are ordinary nerves or ordinary Kan extension counits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally Kan simplicial category the enriched mapping complex and right mapping space of its coherent nerve are homotopy equivalent through Q coend counit compatible with composition",
+   "results": "{\"t\": \"2026-10-17T05:37:29Z\", \"tool\": \"leanfinder\", \"query\": \"For a locally Kan simplicial category the enriched mapping complex and right mapping space of its coherent nerve are homotopy equivalent through Q coend counit compatible with composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"CategoryTheory.nerveAdjunction\", \"SSet.Truncated.nerve₂Adj\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"SSet.OneTruncation₂.nerveHomEquiv\", \"SSet.OneTruncation₂.nerveHomEquiv_apply\", \"SSet.OneTruncation₂.nerveEquiv\", \"SSet.Truncated.HomotopyCategory.functorEquiv\"], \"digest\": \"1ed67230f9bd6f54\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/SimplicialNerve.lean:14-35 and AlgebraicTopology/SimplicialCategory/Basic.lean:45-67. These give the nerve and enriched vertices; they do not give the Q-counit, maximum comparison, or point-family normalization. Other hits are ordinary nerves or ordinary Kan extension counits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialNerve\", \"counit\"",
+   "results": "{\"t\": \"2026-10-17T05:37:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialNerve\\\", \\\"counit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/SimplicialNerve.lean:14-35 and AlgebraicTopology/SimplicialCategory/Basic.lean:45-67. These give the nerve and enriched vertices; they do not give the Q-counit, maximum comparison, or point-family normalization. Other hits are ordinary nerves or ordinary Kan extension counits."
+  },
+  {
+   "tool": "grep",
+   "query": "coherent|rigidification|Sing_Q|counit",
+   "results": "{\"t\": \"2026-10-17T05:37:30Z\", \"tool\": \"grep\", \"query\": \"coherent|rigidification|Sing_Q|counit\", \"sub\": \"AlgebraicTopology/SimplicialNerve.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"14\"], \"digest\": \"f98b6724f33a870d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/AlgebraicTopology/SimplicialNerve.lean:14-35 and AlgebraicTopology/SimplicialCategory/Basic.lean:45-67. These give the nerve and enriched vertices; they do not give the Q-counit, maximum comparison, or point-family normalization. Other hits are ordinary nerves or ordinary Kan extension counits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-rigidification-identity-action",
@@ -104,5 +289,44 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-point-family-q-counit-identification",
+  "worker": "stage1",
+  "summary": "Nine explicit steps identify right mapping simplices with Sing_Q of the enriched hom, construct the maximum map, prove alpha and beta are homotopy equivalences, calculate the actual evaluation counit in ordinary localization, verify composition by a three-layer prism, specialize to point evaluation, and give constant-diagram currying and the point-map normalization. No new nodes; statement unchanged. All comparison homotopies and inverse calculations are written out.",
+  "blueprint": "Realizes paragraph 2 of prop-coef-integral-exceptional-adjoint: the Q-counit versus point-family mapping comparison underlying the concrete rigidification representable.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-realization-weak-equivalence",
+    "why": "Generic criterion detecting weak equivalences by Kan-target mapping components, used for two-out-of-three and the two-test inverse argument; no geometric unit route is replaced."
+   },
+   {
+    "node": "lem-cbc-kan-functor-space-kan",
+    "why": "Generic fact that internal functor objects into Kan targets are Kan, used for the mapping complexes and for compressing edge zigzags."
+   },
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Generic fact making the cylinder projection a weak equivalence, so homotopic maps become equal in the ordinary localization."
+   },
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic quasicategory property of internal functor objects, needed to apply the right-pinch comparison to Fun(K,S)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-realization-weak-equivalence",
+  "lem-cbc-kan-functor-space-kan",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-53e400169",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-53e400169 (reviewer sub-agent of L); spot-checked: I read all nine steps in full and every cited statement: def-coef-infinity-category-of-spaces, def-cbc-enhanced-diagrams-cones, lem-coef-pinched-rigidification-resolution, lem-coef-infinity-pinch-comparison, lem-coef-infinity-mapping-composition, lem-coef-kan-coherent-nerve-quasicategory, lem-cbc-kan-functor-space-kan, lem-cbc-realization-weak-equivalence, lem-cbc-simplicial-homotopy-equivalence-weak, lem-cbc-enhanced-functor-cone-calculus and lem-coef-space-point-cocone-criterion. I also read blueprint paragraph 2 of prop-coef-integral-exceptional-adjoint and HTT 2.2.4 (Hom^R = Sing_Q Map; the counit composite). HTT is not archived, so it stays WANTED and the proof is marked agent-written. Against live, only split-owned fields changed; the statement is identical. Checks: (1) In step 2, C[J^n] has trivial endomorphisms and empty reverse homs, so R = Sing_Q Fun(X,Y), and E equals theta followed by the counit on each summand. (2) In step 3, q = max(B minus {n+1}) descends because unions with the initial face keep the max; it is cosimplicial for noninjective maps too; max(p,q) is simplicial into the nerve of a total order; the homotopies pass through the coend. (3) In steps 4 and 5, E V(alpha) = q_T holds summandwise, p_R V(alpha) = alpha p_T, the two-test inverse argument and horn compression work, the min(s,t) cylinder applies, and [E] = [alpha]^-1[p_R] has the right orientation. (4) In step 6 the prism layer split gives s(B u B') = s(B) and t = the layer-1 max of B'; on the 02 face s = t; theta Phi = b x b and ell Phi = b o comp. (5) In steps 7 and 8, ev_eta and the identity specializations hold, currying U_D = Fun(K,U) is degreewise, and Fun(K,-) preserves homotopy equivalences. Edge cases checked: n=0, empty X/Y/K, X=Y, X=*. There is no cycle: the item is absent from its 280-node closure. There are no new nodes. An rg duplicate search (Sing_Q, maximum map, evaluation counit) found no existing statement of the item; the point-cocone criterion has a similar construction only in its proof, not its statement. I accept the four declared generic sk-prop-sf-cbc tool uses. No SGA is cited and no fixes were made."
  }
 }
