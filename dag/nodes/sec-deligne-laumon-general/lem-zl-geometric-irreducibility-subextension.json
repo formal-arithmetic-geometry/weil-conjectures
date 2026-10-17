@@ -2,18 +2,50 @@
  "id": "lem-zl-geometric-irreducibility-subextension",
  "kind": "statement",
  "title": "Geometric irreducibility passes to subextensions",
- "statement": "Let $k\\subseteq L\\subseteq K$ be fields [def-pc-field-extension]. If $K/k$ is geometrically irreducible [def-pc-geometrically-irreducible], then $L/k$ is geometrically irreducible.",
+ "statement": "Let $k\\subseteq L\\subseteq K$ be fields [def-pc-field-extension]. Give $\\operatorname{Spec}L$ and $\\operatorname{Spec}K$ [def-weil-affine-spectrum] their structures as schemes over $k$ [def-weil-scheme-over-base] induced by the inclusions from $k$. If $\\operatorname{Spec}K$ is geometrically irreducible over $k$ [def-pc-geometrically-irreducible], then $\\operatorname{Spec}L$ is geometrically irreducible over $k$.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra, Tag 037N (lemma-subalgebra-geometrically-irreducible), part (1)"
  },
  "stmt_deps": [
   "def-pc-field-extension",
+  "def-weil-affine-spectrum",
+  "def-weil-scheme-over-base",
   "def-pc-geometrically-irreducible"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-pc-field-extension], the fields $L$ and $K$ with the specified maps from $k$ are commutative $k$-algebras. The inclusion $u:L\\hookrightarrow K$ is a unital ring homomorphism and is injective. It commutes with the maps from $k$: for $a\\in k$, the image of $a$ in $L$ followed by $u$ is its specified image in $K$, since the inclusions form the given field tower. These are exactly the algebra-map hypotheses checked for the application in Step 2.",
+   "uses": [
+    "def-pc-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037N, lemma-subalgebra-geometrically-irreducible, assertion (1), specialized to fields"
+   }
+  },
+  {
+   "text": "Apply assertion (1) of [lem-zl-geometric-irreducibility-subalgebra-colimit] with $A=L$, $S=K$, and $u$ the inclusion from Step 1. Its definition of a geometrically irreducible $k$-algebra is geometric irreducibility of its associated $k$-scheme $\\operatorname{Spec}A$. The hypothesis on $\\operatorname{Spec}K$ is therefore exactly its hypothesis on $S$. Its conclusion is geometric irreducibility of $\\operatorname{Spec}L$ over $k$, as required. This uses the existing general subalgebra result without a finite-generation, separability, or reducedness assumption.",
+   "uses": [
+    "lem-zl-geometric-irreducibility-subalgebra-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037N, lemma-subalgebra-geometrically-irreducible, assertion (1), specialized to fields"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-field-extension",
+  "lem-zl-geometric-irreducibility-subalgebra-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 037N, lemma-subalgebra-geometrically-irreducible, assertion (1), specialized to fields"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -42,10 +74,58 @@
    "results": "No matching theorem; hits concern geometrically reduced algebras and algebraic independence.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(geometric.*irreducib|irreducib.*geometric)",
+   "results": "12 hits: Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Basic.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean; subdirectory AlgebraicGeometry/Geometrically; no theorem stating geometric irreducibility descent to a subextension. Geometrically reduced results concern a different property; the geometrically irreducible scheme file has composition and open-subscheme results, not this descent theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "87b15516e39f8127"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A subextension of a geometrically irreducible field extension is geometrically irreducible",
+   "results": "8 hits: Algebra.IsGeometricallyReduced.casesOn, Algebra.IsGeometricallyReduced.of_injective, Polynomial.Separable.map_irreducible_of_isPurelyInseparable, Algebra.isGeometricallyReduced_iff, Algebra.IsGeometricallyReduced.mk, IsPurelyInseparable.isAlgebraic, Algebra.IsGeometricallyReduced.of_forall_fg, irreducible_X_pow_sub_C_of_root_adjoin_eq_top; no theorem stating geometric irreducibility descent to a subextension. Geometrically reduced results concern a different property; the geometrically irreducible scheme file has composition and open-subscheme results, not this descent theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "eb05bfd11590ee86"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyIrreducible\"",
+   "results": "12 hits: AlgebraicGeometry.instIsStableUnderBaseChangeSchemeGeometricallyIrreducible, AlgebraicGeometry.GeometricallyIrreducible, AlgebraicGeometry.instSurjectiveOfGeometricallyIrreducible, AlgebraicGeometry.GeometricallyIrreducible.eq_geometrically, AlgebraicGeometry.GeometricallyIrreducible.geometrically_irreducibleSpace, AlgebraicGeometry.GeometricallyIrreducible.mk, AlgebraicGeometry.geometricallyIrreducible_iff, AlgebraicGeometry.instGeometricallyIrreducibleFiberToSpecResidueField; no theorem stating geometric irreducibility descent to a subextension. Geometrically reduced results concern a different property; the geometrically irreducible scheme file has composition and open-subscheme results, not this descent theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "7f88068ce516506f"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For fields k contained in L contained in K, if Spec K is geometrically irreducible over k then Spec L is geometrically irreducible over k",
+   "results": "8 hits: Algebra.IsGeometricallyReduced, Algebra.IsGeometricallyReduced.of_injective, Algebra.isGeometricallyReduced_iff, Algebra.isReduced_of_isGeometricallyReduced, Algebra.IsGeometricallyReduced.of_forall_fg, Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, AlgebraicGeometry.instIrreducibleSpaceCarrierCarrierCommRingCatSpecOfIsDomainCarrier; no theorem stating geometric irreducibility descent to a subextension. Geometrically reduced results concern a different property; the geometrically irreducible scheme file has composition and open-subscheme results, not this descent theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "1ff95db98924ee14"
+  },
+  {
+   "tool": "grep",
+   "query": "(GeometricallyIrreducible.*(of_|descend|surject)|geometrically.*of_comp|geometrically.*surject)",
+   "results": "6 hits: Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean; subdirectory all Mathlib; no theorem stating geometric irreducibility descent to a subextension. Geometrically reduced results concern a different property; the geometrically irreducible scheme file has composition and open-subscheme results, not this descent theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "94ec39e2e103d045"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric irreducibility descends along injective algebra maps or universally surjective morphisms of schemes",
+   "results": "8 hits: Algebra.IsGeometricallyReduced.of_injective, AlgebraicGeometry.UniversallyInjective, AlgebraicGeometry.instIsMultiplicativeSchemeUniversallyInjective, AlgebraicGeometry.UniversallyInjective.universally_injective, AlgebraicGeometry.universallyInjective_isZariskiLocalAtTarget, AlgebraicGeometry.UniversallyInjective.isStableUnderBaseChange, AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme, AlgebraicGeometry.Scheme.Hom.injective; no theorem stating geometric irreducibility descent to a subextension. Geometrically reduced results concern a different property; the geometrically irreducible scheme file has composition and open-subscheme results, not this descent theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "digest": "960a3aa618e89858"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-deligne-laumon-general",
  "unit": "sk-i-dl-general-real",
  "created": {
@@ -65,5 +145,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-geometric-irreducibility-subextension",
+  "worker": "stage1",
+  "summary": "Specialized the existing subalgebra-closure statement lem-zl-geometric-irreducibility-subalgebra-colimit (Tag 037N(1)) to the inclusion L into K, explicitly checking the field-tower algebra-map hypotheses. Expanded the field-extension shorthand in the statement to its associated Spec k-schemes, with no mathematical change. No new nodes; the existing generalization is reused. Repeated semantic, Loogle and source searches found no direct Mathlib match.",
+  "blueprint": "Current main-20261015 proof of lem-zl-bertini-finite-cover-curve paragraph 3 invokes Tag 0G4F; its algebraic input Tag 0G4D uses geometric irreducibility of a subextension in more-morphisms.tex lines 8973-8975. The two steps realize that inherited subextension passage by the existing Tag 037N(1) node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-afba95132",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-afba95132 (reviewer sub-agent of L); spot-checked: Read in full: the item, every cited node statement, Stacks algebra.tex 11207-11253 (definition-geometrically-irreducible and Tag 037N lemma-subalgebra-geometrically-irreducible with its proof), and more-morphisms.tex 8969-8975 (Tag 0G4D, the 'as a subextension' use). The statement change only writes 'K/k' out as 'Spec K over k'; hypotheses and conclusion are the same and the target is not weakened. The citer lem-zl-bertini-field-extension Steps 5 and 8 already use it in that form. Step 1 is elementary: from def-pc-field-extension, L into K is an injective unital map compatible with k. Step 2 applies assertion (1) of the existing same-unit node lem-zl-geometric-irreducibility-subalgebra-colimit. Every hypothesis matches (k a field, commutative unital k-algebras, injective k-compatible u, the same Spec-based definition), and only its statement is used. That node has empty proof_deps, so there is no cycle. No new nodes. The only duplicate is that general node, which is a generalization and is correctly cited. Small cases checked: L=k, L=K, Q(x^2) in Q(x), C over R (hypothesis fails), and the inseparable case F_p(t)(t^(1/p)) (irreducible but nonreduced; no separability assumed). Blueprint from/via and place are correct (paragraph 3 of lem-zl-bertini-finite-cover-curve, through 0G4F/0G4D); same_as is []; no SGA cited; tool_uses is [] and none is needed. Mathlib searches cover all three kinds and are plausible. No fixes."
  }
 }

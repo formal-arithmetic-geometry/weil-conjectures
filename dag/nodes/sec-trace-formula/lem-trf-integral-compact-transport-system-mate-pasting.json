@@ -16,9 +16,96 @@
   "lem-weil-pbc-proetale-derived-pullback-composition",
   "def-weil-frobenius-square-exchange"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work throughout in the simultaneous system derived categories of [lem-coef-semilinear-derived-sections]. Abbreviate $G_r=G_{Y,r}$, $H_r=G_{\\overline X,r}$, $K_r=G_{X,r}$, $S=S_p$, $J=J_j$ and $t=t^Y_m$, $u=t^{\\overline X}_m$, $v=t^X_m$. The system adjunctions supply $P_p\\dashv S$ and $J\\dashv P_j$, where $P_a=a^{-1}$. Write $\\theta_{a,r}:P_aG_{\\mathrm{cod}(a),r}\\xrightarrow{\\sim}G_{\\mathrm{dom}(a),r}P_a$ for the inverse-image square comparison, for $a=p,j$. Since $p,j$ descend to $k_0$, their compositions with the indicated Frobenius powers agree as scheme maps. By the recipe in [def-weil-frobenius-square-exchange], $e_r=e_{p,r}$ is exactly the mate of $\\theta_{p,r}$ and $E_r=(Sb_r)(e_rJ)$. These are the specified system transformations on every complex, rather than transformations reconstructed from their evaluations.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "def-weil-frobenius-square-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "Clause (3), missing system-level compatibility: agent expansion using the simultaneous-model and exchange definitions"
+   }
+  },
+  {
+   "text": "The square comparisons satisfy, for $a=p,j$, the compositor identity\n$$\\theta_{a,m+1}\\,(P_at^{\\mathrm{cod}(a)}_m)=(t^{\\mathrm{dom}(a)}_mP_a)\\,(G_{\\mathrm{dom}(a),1}\\theta_{a,m})\\,(\\theta_{a,1}G_{\\mathrm{cod}(a),m}).$$\nHere is the coherence check on the specified maps. On strict module systems, pullback composition is the canonical isomorphism of inverse-image left adjoints, along the constant-ring identifications. Direct images identify the corresponding composite sections by the canonical iterated base-change identifications; every route sends a section to the same section under the unique map of the iterated fibre product to the unparenthesized product. These identifications commute with the ring quotients and hence with every system transition. Taking the three successive adjunction Hom bijections gives the same Hom bijection for either parenthesization, by [def-weil-pbc-composite-adjunction]. The uniqueness in [lem-weil-pbc-conjugate-iso-unit-equation] therefore makes both displayed paths the same comparison. This also checks the constant coefficient identifications: they are induced by pulling back constant sections and send each element to itself. Exact inverse images give the same equality on complexes. The simultaneous models of [lem-coef-semilinear-derived-sections] preserve composition and the specified coherence, so the equality passes to $D(\\mathscr S)$, with the compositors in the statement (the inverse direction to [lem-weil-pbc-proetale-derived-pullback-composition]). No equality of derived morphisms is inferred from equality at individual levels.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0B65 (lemma-transformation-between-functors-and-adjoints), 0DV0 (lemma-compose-counits); agent application to the exact system inverse images"
+   }
+  },
+  {
+   "text": "Apply clause (1) of [lem-weil-pbc-mate-pasting] with all three adjunctions $P_p\\dashv S$, with $(G,H)=(G_m,H_m)$ and $(G_2,H_2)=(G_1,H_1)$. It identifies the mate of $(H_1\\theta_{p,m})(\\theta_{p,1}G_m)$ with $(e_1H_m)(G_1e_m)$. Step 2 identifies that left-adjoint square with $(uP_p)^{-1}\\theta_{p,m+1}(P_pt)$. Taking mates and using [lem-weil-pbc-mate-whisker] to move $t$ and $u$ outside the mate gives\n$$e_{m+1}\\,(tS)=(Su)\\,(e_1H_m)\\,(G_1e_m).$$\nIn particular this is an identity of natural transformations $G_1G_mS\\to SH_{m+1}$. No proper-base-change isomorphism theorem is used: the identity is for the actual unit--square--counit word, whether or not its components are invertible.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-mate-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47, remark-compose-base-change-horizontal; the omitted mate calculation is supplied by the cited generic pasting and whiskering statements"
+   }
+  },
+  {
+   "text": "For the open factor put $a_r=b_r^{-1}:JK_r\\to H_rJ$. The normalization of [lem-sf-open-tensor-normalization], including its strict-system clause, says that $a_r$ is the $J\\dashv P_j$ adjunct of $\\theta_{j,r}^{-1}$ after insertion of the open unit: its transpose is $K_r\\xrightarrow{K_r\\eta}K_rP_jJ\\xrightarrow{\\theta_{j,r}^{-1}J}P_jH_rJ$. Equivalently its square mate under $J\\dashv P_j$ on both sides is $\\theta_{j,r}^{-1}$, by [def-weil-pbc-adjunction-mate]. Apply clause (1) of [lem-weil-pbc-mate-pasting] to the $a_m,a_1$ squares. Their pasted left square is $(H_1a_m)(a_1K_m)$ and its mate is $(\\theta_{j,1}^{-1}H_m)(K_1\\theta_{j,m}^{-1})$. The inverse of Step 2 for $j$ identifies this with $(P_ju)^{-1}\\theta_{j,m+1}^{-1}(vP_j)$. The mate bijection, with [lem-weil-pbc-mate-whisker] applied to its inverse direction, therefore gives\n$$(H_1a_m)(a_1K_m)=(uJ)^{-1}a_{m+1}(Jv).$$\nInverting this equality and composing with $Jv$ and $uJ$ gives the required open identity\n$$b_{m+1}\\,(uJ)=(Jv)\\,(b_1K_m)\\,(H_1b_m).$$\nAll these operations are in the system categories. Invertibility is used only for the open exchange and the pullback compositors, both supplied by the cited constructions.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-mate-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent calculation from the open-adjunction normalization (Tag 0GL1 is the tensor background only), and generic mate pasting; no claim that 0GL1 states this system identity"
+   }
+  },
+  {
+   "text": "Substitute Steps 3 and 4 into $E_{m+1}(tSJ)$. Functoriality of $S$ gives\n$$E_{m+1}(tSJ)=(SJv)(Sb_1K_m)(SH_1b_m)(e_1H_mJ)(G_1e_mJ).$$\nNaturality of $e_1:G_1S\\to SH_1$ at the actual morphism $b_{m,C}:H_mJC\\to JK_mC$ gives\n$$(SH_1b_m)(e_1H_mJ)=(e_1JK_m)(G_1Sb_m).$$\nReplacing this adjacent pair and regrouping yields\n$$E_{m+1}(tF)=F(v)(E_1K_m)(G_1E_m).$$\nIts component at $C$ is precisely the equation in the statement. Every displayed substitution is between maps with the same endpoints, from $G_1G_mFC$ to $FK_{m+1}C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 1, Global powers: explicit elementary assembly of the system identity"
+   }
+  },
+  {
+   "text": "The equality was obtained by functor composition, adjunction transposition and naturality on the simultaneous system models, all available for unbounded complexes by [lem-coef-semilinear-derived-sections]. It is therefore natural in every $C\\in D(\\mathscr S_X)$ and precedes evaluation and realization. Applying the simultaneous derived sections operation on $s=\\operatorname{Spec}k$ when $Y_0=\\operatorname{Spec}k_0$ preserves equality and gives the stated coefficient-complex tower equation. No inverse limit, boundedness argument, tensor reduction, or finite Tor-amplitude assertion enters the proof. For a general $Y$, the equality already has the displayed source and target over $Y$.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "Clause (3), system identity before derived-limit realization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-frobenius-square-exchange",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-composite-adjunction",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-mate-whisker",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "Clause (3), together with thm-trf-l-function-euler-product.proof.md Step 1 Global powers; explicit system-adjunction pasting argument, using Stacks 0B65/0DV0 and generic mates"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -75,10 +162,45 @@
    "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean. 5 returned hit(s); none states the specified semilinear-system comparison.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|mateEquiv_whisker|semilinear|frobenius.*exchange",
+   "results": "; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean (11 hits). Read the generic Mates.lean statements at lines 170 and 209; they give the reused mate calculus, not the simultaneous semilinear-system compactification construction.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformations for proper direct image and open extension by zero commute with composition of inverse image on coefficient systems",
+   "results": "; AlgebraicGeometry.SheafedSpace.comp_c_app, TopCat.Presheaf.comp_app, CategoryTheory.NatTrans.mapHomologicalComplex_comp, CategoryTheory.sheafComposeNatTrans, CategoryTheory.MorphismProperty.naturalityProperty.isStableUnderComposition, SheafOfModules.pushforwardNatTrans_comp, CategoryTheory.MorphismProperty.IsMultiplicative.naturalityProperty, SheafOfModules.pushforwardComp (8 hits). Read the generic Mates.lean statements at lines 170 and 209; they give the reused mate calculus, not the simultaneous semilinear-system compactification construction.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "; CategoryTheory.mateEquiv_vcomp (1 hits). Read the generic Mates.lean statements at lines 170 and 209; they give the reused mate calculus, not the simultaneous semilinear-system compactification construction.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius powers compactification exchange on derived semilinear sheaf systems satisfies mate pasting before inverse limit",
+   "results": "; Condensed.profiniteSolid, Condensed.isColimitLocallyConstantPresheaf_desc_apply, Condensed.profiniteSolidCounit, Condensed.profiniteSolidification, LightCondensed.ihomPoints_symm_comp, CondensedMod.hom_naturality_apply, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CondensedMod.ofSheafProfinite (8 hits). Read the generic Mates.lean statements at lines 170 and 209; they give the reused mate calculus, not the simultaneous semilinear-system compactification construction.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mate of a pasted square of functors is the composite of the mates with inverse image composition isomorphisms",
+   "results": "; CategoryTheory.mateEquiv_square, CategoryTheory.mateEquiv_hcomp, CategoryTheory.mateEquiv_vcomp, CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.Bicategory.mateEquiv_square, CategoryTheory.mateEquiv_symm_apply (8 hits). Read the generic Mates.lean statements at lines 170 and 209; they give the reused mate calculus, not the simultaneous semilinear-system compactification construction.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-integral-compact-transport-recurrence",
@@ -97,5 +219,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-integral-compact-transport-system-mate-pasting",
+  "worker": "stage1",
+  "summary": "Proved the typed equality on simultaneous semilinear derived systems by inverse-image coherence, proper mate pasting, inverse open-exchange mate pasting, and one explicit naturality interchange. Reused existing nodes; no new nodes, no evaluation faithfulness or boundedness assumption. Statement unchanged.",
+  "blueprint": "thm-trf-l-function-euler-product.proof.md Step 1 Global powers, compatibility with composition before rationalization; prerequisite to prop-trf-rational-frobenius-integral-model.proof.md clause (3).",
+  "tool_uses": [
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Supplies the simultaneous unbounded system operations and specified coherence, prior to evaluation. No node of the trace-transport unit supplies this general tool."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Supplies the open-unit normalized inverse comparison on strict coefficient systems, used as the input for formal mate pasting. No node of the trace-transport unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Generic uniqueness of unit-compatible adjoint comparisons, used to verify the inverse-image cocycle. No node of the trace-transport unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic category-theoretic mate pasting applies to the actual system adjunctions. No node of the trace-transport unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-mate-whisker",
+    "why": "Generic mate naturality inserts the endpoint pullback compositors. No node of the trace-transport unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Identifies the specified direction of the canonical pullback compositor. No node of the trace-transport unit supplies this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-mate-whisker",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-b44b1be7d",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-b44b1be7d (reviewer sub-agent of L); spot-checked: I read the item in full, all 13 cited statements, both blueprint passages (clause (3) of prop-trf-rational-frobenius-integral-model; thm-trf-l-function-euler-product, 'Global powers', on compatibility with composition) and Stacks 0E47 (remark-compose-base-change-horizontal). I confirmed that tags 0B65, 0DV0, 03CB, 0D6D and 0GL1 match the cited labels. The statement typechecks: both sides go from G_1G_mFC to FK_{m+1}C, and t is the inverse of c_{h,k} with h=g, k=g^m. E_r is exactly the system composite e_f^c of def-weil-frobenius-square-exchange item 2, with gamma replaced by gamma^r, on strict semilinear systems; for general Y it is not identified with RGamma_c. I recomputed each step. Step 2's cocycle holds because both paths conjugate the same strict pushforward identification and are therefore equal by uniqueness. Step 3: pasting clause (1) gives (e_1H_m)(G_1e_m), and whiskering by t and u^{-1} gives e_{m+1}(tS)=(Su)(e_1H_m)(G_1e_m), with no invertibility of e used. Step 4: by the open normalization and the triangle identity, the mate of a_r=b_r^{-1} is theta^{-1}; this yields b_{m+1}(uJ)=(Jv)(b_1K_m)(H_1b_m). Step 5 is naturality of e_1 at b_m. Edge cases checked: m=1, p=id, j=id, C=0, noninvertible transitions; no flatness or Tor hypothesis is used. There is no cycle, and all dependencies exist and are unmerged. lem-trf-compact-frobenius-transport-composition is the finite-level analogue, not a duplicate. There are no new nodes. I accept the six declared off-unit tool uses (semilinear derived sections, open tensor normalization, conjugate-iso uniqueness, mate pasting, mate whiskering, pro-étale pullback composition) as generic tools. No SGA source is cited. No changes."
  }
 }

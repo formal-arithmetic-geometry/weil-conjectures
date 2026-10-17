@@ -10,9 +10,116 @@
  "stmt_deps": [
   "def-trf-coherent-topos"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in small-site presentations of the two topoi from [def-trf-coherent-topos]. For a small family of set sheaves $(T_i)$, form the presheaf $P(U)=\\coprod_iT_i(U)$, with restrictions retaining the index. Maps from $P$ to any presheaf are exactly families of maps from the $T_i$, by restriction to the summands. Thus [def-weil-pbc-sheafification] identifies $P^\\#$ with the coproduct in sheaves. The unit $P\\to P^\\#$ sheafifies to an isomorphism by the same universal property; [lem-cbc-set-presheaf-sheafification-local-bijection] therefore implies that each section of this coproduct locally comes from one summand. This construction and argument include the empty family.",
+   "uses": [
+    "def-trf-coherent-topos",
+    "def-weil-pbc-sheafification",
+    "lem-cbc-set-presheaf-sheafification-local-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WH (proposition-sheafification-adjoint), 00WI (lemma-colimit-sheaves), 00WK (lemma-sections-sheafification); the coproduct universal property is written out here."
+   }
+  },
+  {
+   "text": "By Step 1 and [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective], a family $(T_i\\to T)$ has epimorphic coproduct map exactly when every section of $T$ locally lifts to one $T_i$. This criterion is stable under base change: for $R\\to T$ and a section $r$ of $R$, locally lift its image in $T$ to $t_i$; then $(r,t_i)$ is a section of $R\\times_TT_i$. The fibre product has these pairs as its sections by [lem-weil-pbc-site-sheaf-sets-limits-sectionwise]. Composing two such covering families amounts to doing these local lifts successively, and the transitivity axiom of a site combines the coverings. We will use this covering calculus below.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WN (lemma-mono-epi-sheaves), Tag 00W2 (lemma-limit-sheaf), and the covering transitivity axiom; direct local-section argument."
+   }
+  },
+  {
+   "text": "Write $F=u^{-1}$. By [def-trf-coherent-topos], $F$ has a right adjoint and preserves finite limits. By [lem-weil-pbc-left-adjoint-preserves-colimits], it preserves small coproducts and coequalizers. Every epimorphism in a set-sheaf topos is a coequalizer of its kernel pair by [lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer]. Its image under $F$ is consequently a coequalizer, hence an epimorphism (two maps agreeing after the coequalizer arrow are equal by its uniqueness clause). Therefore $F$ preserves covering families, using its coproduct comparison.",
+   "uses": [
+    "def-trf-coherent-topos",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 086K (lemma-coequalizer-surjection), together with Categories Tag 0038 (lemma-adjoint-exact), part (1); applied to the inverse-image adjunction."
+   }
+  },
+  {
+   "text": "The functor $F$ is faithful: if $F(a)=F(b)$, the image of an equalizer $e$ of $a,b$ is an equalizer of two equal arrows, hence is invertible. Conservativity makes $e$ invertible, and $ae=be$ gives $a=b$. Equalizers exist by [lem-weil-pbc-site-sheaf-sets-limits-sectionwise]. Now if $F(p)$ is epi and $ap=bp$, applying $F$ gives $F(a)=F(b)$ and faithfulness gives $a=b$. Thus $F$ reflects epimorphisms, and, since it preserves coproducts by Step 3, it reflects covering families as well.",
+   "uses": [
+    "def-trf-coherent-topos",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00W2 (lemma-limit-sheaf) for equalizers; the remaining argument is the universal property of the equalizer, conservativity and right cancellation."
+   }
+  },
+  {
+   "text": "For any object $T$ of $\\mathcal E$, quasi-compactness of $F(T)$ implies quasi-compactness of $T$. Indeed, take any small covering family $(T_i\\to T)_{i\\in I}$ in the definition [def-trf-coherent-topos]. By Step 3 its image covers $F(T)$. Quasi-compactness gives a finite $J\\subseteq I$ for which $(F(T_j)\\to F(T))_{j\\in J}$ covers. By Step 4 the original finite subfamily covers $T$. This is exactly the definition of quasi-compactness and does not assume that $T$ or the $T_i$ are coherent.",
+   "uses": [
+    "def-trf-coherent-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Agent expansion of the quasi-compactness part of the reflection assertion in §8.1, printed p. 17."
+   }
+  },
+  {
+   "text": "We also need preservation of quasi-compact objects. First, in either topos a finite covering family of quasi-compact objects $(Q_j\\to Q)_{j\\in J}$ has quasi-compact target: pull any cover $(R_i\\to Q)$ back to each $Q_j$ by Step 2, choose a finite set $I_j$ of indices covering $Q_j$, and take $I_0=\\bigcup_{j\\in J}I_j$. The composite covering of $Q$ factors through $(R_i\\to Q)_{i\\in I_0}$, which is therefore covering. This is a finite union argument directly from [def-trf-coherent-topos]; when $J$ is empty the same factorization uses the empty cover.",
+   "uses": [
+    "def-trf-coherent-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Agent expansion of §8.1, printed p. 17: elementary finite-cover quasi-compactness calculation, using the local covering calculus of Step 2."
+   }
+  },
+  {
+   "text": "If $B$ is any quasi-compact object of $\\mathcal E$, the coherent generators in [def-trf-coherent-topos] give a small covering family $(G_i\\to B)$ with coherent $G_i$. Choose a finite subcover using quasi-compactness of $B$. Step 3 sends it to a finite cover of $F(B)$. Coherence of $u$ makes each $F(G_i)$ coherent, hence quasi-compact by definition. Step 6 now gives quasi-compactness of $F(B)$. We have not assumed that quasi-compact objects themselves are coherent.",
+   "uses": [
+    "def-trf-coherent-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Agent expansion of §8.1, printed p. 17: finite coherent-generator cover and coherence of inverse image."
+   }
+  },
+  {
+   "text": "By hypothesis $F(A)$ is coherent, hence quasi-compact and quasi-separated in the sense of [def-trf-coherent-topos]. Step 5 gives quasi-compactness of $A$. For quasi-separatedness, let $B\\to A$ and $C\\to A$ have arbitrary quasi-compact sources. Step 7 gives quasi-compactness of $F(B)$ and $F(C)$, so quasi-separatedness of $F(A)$ makes $F(B)\\times_{F(A)}F(C)$ quasi-compact. Finite-limit preservation identifies this object with $F(B\\times_A C)$. Step 5 implies that $B\\times_A C$ is quasi-compact. As $B,C$ were arbitrary, this proves quasi-separatedness of $A$; together with quasi-compactness, it proves coherence of $A$.",
+   "uses": [
+    "def-trf-coherent-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+    "place": "Agent expansion of the coherent-conservative reflection assertion in §8.1, printed p. 17, using its quasi-compact and quasi-separated terminology."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-coherent-topos",
+  "def-weil-pbc-sheafification",
+  "lem-cbc-set-presheaf-sheafification-local-bijection",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf",
+  "place": "§8.1, printed p. 17: the reflection assertion is stated without proof; the covering, equalizer, and finite-generator argument here is agent-written from the cited Stacks facts. Primary source read online, local archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -41,10 +148,38 @@
    "results": "{\"t\": \"2026-10-17T17:56:53Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse image along a coherent surjective morphism of topoi detects quasi compact quasi separated sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.coherentTopology.isLocallySurjective_iff\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"Condensed.epi_iff_locallySurjective_on_compHaus\", \"CategoryTheory.coherentTopology.presheafIsLocallySurjective_iff\", \"AlgebraicGeometry.QuasiCompact.of_comp\", \"CompHausLike.precoherent\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfForallEffectiveEpiHasPullbackOfPreservesFiniteLimits\"], \"digest\": \"32d9bdb95a968644\"}",
    "date": "2026-10-17",
    "verdict": "no match: read the returned signatures; coherent-site sheaf conditions, condensed objects, quasicoherent module presentations, and scheme base-change properties do not define or assert this topos-theoretic statement."
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.?topos|coherent.?topoi|coherent.?object",
+   "results": "{\"t\": \"2026-10-17T18:13:44Z\", \"tool\": \"grep\", \"query\": \"coherent.?topos|coherent.?topoi|coherent.?object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean\", \"Mathlib/CategoryTheory/Sites/Coherent/Equivalence.lean\"], \"digest\": \"c605340e39c9c599\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures; reflects_precoherent requires full faithfulness and concerns a category-wide finite-family property, sequential-limit results concern covers, and scheme/quasicoherent-module results do not assert reflection of coherent objects in topoi."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent conservative inverse image detects quasi compact quasi separated objects of a topos",
+   "results": "{\"t\": \"2026-10-17T18:13:44Z\", \"tool\": \"leansearch\", \"query\": \"Coherent conservative inverse image detects quasi compact quasi separated objects of a topos\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isCompact_preimage\", \"AlgebraicGeometry.quasiCompact_iff\", \"AlgebraicGeometry.Scheme.Hom.isQuasiSeparated_preimage\", \"CategoryTheory.StructuredArrow.isCoseparating_inverseImage_proj\", \"AlgebraicGeometry.QuasiCompact.isCompact_preimage\", \"CategoryTheory.ObjectProperty.instIsClosedUnderIsomorphismsInverseImage\", \"CategoryTheory.ObjectProperty.instIsClosedUnderSubobjectsInverseImageOfPreservesMonomorphisms\", \"AlgebraicGeometry.QuasiCompact.mk\"], \"digest\": \"9dbbe9926278332d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures; reflects_precoherent requires full faithfulness and concerns a category-wide finite-family property, sequential-limit results concern covers, and scheme/quasicoherent-module results do not assert reflection of coherent objects in topoi."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Coherent\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-17T18:13:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"Coherent\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.QuasicoherentData\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.isQuasicoherent\", \"SheafOfModules.QuasicoherentData.localGeneratorsData\"], \"digest\": \"84dd5f6ef412bd8c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures; reflects_precoherent requires full faithfulness and concerns a category-wide finite-family property, sequential-limit results concern covers, and scheme/quasicoherent-module results do not assert reflection of coherent objects in topoi."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent conservative geometric morphism of Grothendieck topoi reflects coherent objects",
+   "results": "{\"t\": \"2026-10-17T18:13:47Z\", \"tool\": \"leanfinder\", \"query\": \"A coherent conservative geometric morphism of Grothendieck topoi reflects coherent objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.coherentTopology.coverPreserving\", \"CategoryTheory.Functor.reflects_precoherent\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp\", \"CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfForallEffectiveEpiHasPullbackOfPreservesFiniteLimits\", \"LightProfinite.instWEqualsLocallyBijectiveCoherentTopology\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_of_comp\", \"CategoryTheory.coherentTopology.instIsDenseSubsite\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_comp\"], \"digest\": \"c61e4a6096e1f878\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures; reflects_precoherent requires full faithfulness and concerns a category-wide finite-family property, sequential-limit results concern covers, and scheme/quasicoherent-module results do not assert reflection of coherent objects in topoi."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-psi-constructibility-descent",
@@ -67,5 +202,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-coherent-conservative-reflection",
+  "worker": "stage1",
+  "summary": "Proved reflection from the existing definitions by local covering calculus, preservation and reflection of epimorphisms, descent of quasi-compactness, finite coherent-generator covers, and the defining fibre-product test for quasi-separatedness. No statement change and no new nodes; every non-elementary topos fact is an existing cited statement.",
+  "blueprint": "Serves the coherence-reflection input in §8.1 to the proper-surjective constructibility descent of lem-trf-psi-constructibility-descent, along the existing ancestry below lem-trf-local-term-locality. The sk-i-curve-zero route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-set-presheaf-sheafification-local-bijection",
+    "why": "Generic set-presheaf sheafification criterion, used only to obtain local representatives of coproduct sections; no coherent-object theorem is substituted for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-set-presheaf-sheafification-local-bijection"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-b8f13a7a1",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-b8f13a7a1 (reviewer sub-agent of L); spot-checked: PASS. I read the item in full, all 7 cited node statements and the parent's step that uses this item. The delivery has no new nodes, and the statement is unchanged and correct. Step checks: 1 writes the sheaf coproduct as the sheafification of the presheaf coproduct and gets local representatives from lem-cbc (W_iff_isLocallyBijective, small site, Set_U values). 2 combines this with the epi⇔local-surjectivity node into a covering calculus, with base change via sectionwise fibre products. 3 shows u^{-1} preserves coproducts and epis (Stacks 0038(1), and 086K: an epi is the coequalizer of its kernel pair). 4 shows u^{-1} is faithful, because equalizers are reflected by conservativity, and therefore reflects epis and covers. 5 descends quasi-compactness. 6 shows a finite cover by quasi-compact objects has a quasi-compact target (including J empty). 7 shows u^{-1} preserves quasi-compact objects, using a finite cover by coherent generators and the coherence of u; it does not assume quasi-compact equals coherent. 8 checks quasi-separatedness against arbitrary quasi-compact B, C, using left exactness. Stacks tags 00WH, 00WI, 00WK, 00WN, 00W2, 086K and 0038 were checked against tags/tags and sites.tex. Edge cases checked: Set; a diagonal conservative morphism into Set×Set; the non-conservative projection (finite, infinite), which shows Step 4 needs conservativity; empty covers. Duplicate search with rg found only the hypothesis provider lem-trf-proper-base-change-coherent-conservative and the criterion lem-trf-oriented-constructible-coherent, neither a duplicate. Route: all cited nodes are definitions or Mathlib leaves. The declared tool_use of lem-cbc-set-presheaf-sheafification-local-bijection is accepted (it is a Mathlib leaf, so not strictly needed). No SGA source, no fixes. One unread source: the Orgogozo §8.1 draft is not in the local literature, so I did not read it. The proof is correctly marked agent-written with a WANTED request, and I checked it independently."
  }
 }

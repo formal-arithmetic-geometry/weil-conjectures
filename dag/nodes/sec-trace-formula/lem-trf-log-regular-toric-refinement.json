@@ -12,9 +12,97 @@
   "pqf-def-locnoeth",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $Y=\\operatorname{Spec}A$ and let $g:P\\hookrightarrow Q$ be the inclusion. Since $Q$ is a submonoid of the group $P^{\\mathrm{gp}}$, it is integral; together with its assumed finite generation and saturation this makes it fs [def-trf-fs-log-blowup]. The homomorphism $Q^{\\mathrm{gp}}\\to P^{\\mathrm{gp}}$ induced by the inclusion is inverse to $g^{\\mathrm{gp}}$: every $q\\in Q$ is a difference of two elements of $P$, and these differences already generate $P^{\\mathrm{gp}}$. Hence $g^{\\mathrm{gp}}$ is injective with zero, in particular torsion-free, cokernel.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.11, group-isomorphism toric charts; fs monoid conventions of VI 1.1."
+   }
+  },
+  {
+   "text": "Apply [pqf-lem-affine-open-locnoeth] to the locally Noetherian scheme $Y$ and its affine open subscheme $Y=\\operatorname{Spec}A$ itself, whose ring of sections is $A$ [def-weil-affine-spectrum]: $A$ is Noetherian. Choose monoid generators $q_1,\\ldots,q_r$ of $Q$, allowing $r=0$. Then $C$ is generated as an $A$-algebra by the finitely many elements $1\\otimes z^{q_i}$. Indeed a tensor is a sum of pure tensors [def-weil-pbc-module-tensor-product], each second factor is a finite integral linear combination of monomials $z^q$, and each $q$ is a sum of the $q_i$. The multiplication $(a\\otimes u)(b\\otimes v)=ab\\otimes uv$ therefore expresses each pure tensor as an $A$-linear combination of products of these generators. Evaluation gives a surjection $A[T_1,\\ldots,T_r]\\twoheadrightarrow C$, so [lem-weil-pbc-finite-type-algebra-noetherian] makes $C$ Noetherian. The one-member affine open covering of $X=\\operatorname{Spec}C$ by itself, with ring of sections $C$ [def-weil-affine-spectrum], shows that $X$ is locally Noetherian by the definition [pqf-def-locnoeth].",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "def-weil-affine-spectrum",
+    "pqf-def-locnoeth",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN, lemma-Noetherian-permanence; properties.tex Tag 01OW, lemma-locally-Noetherian (affine open of a locally Noetherian scheme), Definition 01OV for the converse. Finite generators of the monoid algebra are written out."
+   }
+  },
+  {
+   "text": "Let $\\beta:Q\\to C$ send $q$ to $1\\otimes z^q$. Apply [lem-trf-associated-log-universal-stalks] to construct its associated log structure $M_X$. Its chart is $Q$, so $(X,M_X)$ is fs by [def-trf-fs-log-blowup]. The map $A\\to C$, $a\\mapsto a\\otimes1$, defines $f:X\\to Y$. The charts define a log morphism over $f$: a chart generator $p$ maps to the class of $g(p)$ and a local unit $u$ maps to $f^\\sharp(u)$. In the chart pushout, the relation identifying $(p+e,u)$ with $(p,\\alpha(e)u)$ maps to the same relation for $Q$, because $f^\\sharp(\\alpha(e))=\\beta(g(e))$. These formulas agree under restriction and on overlaps, hence define the map of log sheaves $f^{-1}N\\to M_X$. They also show compatibility with the structure maps. The chart description and universal property in [lem-trf-associated-log-universal-stalks] identify the resulting source log structure with the one in the statement.",
+   "uses": [
+    "lem-trf-associated-log-universal-stalks",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1, associated log structures and charts; VIII 3.3.8–3.3.11, toric chart construction."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-fibre-product-affine-spectra] with base ring $\\mathbf Z[P]$ and algebras $A$ and $\\mathbf Z[Q]$. It identifies $Y\\times_{\\operatorname{Spec}\\mathbf Z[P]}\\operatorname{Spec}\\mathbf Z[Q]$ with $\\operatorname{Spec}C$, with both projections induced respectively by $a\\mapsto a\\otimes1$ and $z^q\\mapsto1\\otimes z^q$. Thus the comparison morphism for the charts of Step 3 is the identity of $\\operatorname{Spec}C$ under this identification. It is etale [def-weil-etale-morphism]: identity ring maps are finitely presented, flat, and have identity diagonal, an open immersion. This checks the comparison hypothesis, rather than asserting that the underlying morphism $f$ itself is etale.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4 (lemma-fibre-product-affine-schemes) and 01JQ (lemma-fibre-product-affines); morphisms.tex Tag 02GI for the etale identity."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-log-smooth-log-regular] to $f:(X,M_X)\\to(Y,N)$. Both log schemes are locally Noetherian and fs by Steps 1–3; the target is log regular by hypothesis. The compatible global charts $P\\to N$, $Q\\to M_X$ have injective group map with torsion-free cokernel by Step 1, and their comparison is etale by Step 4. All hypotheses of that node are therefore satisfied. Its log-regular-source conclusion proves that $(\\operatorname{Spec}C,M_X)$ is log regular, which is the remaining assertion.",
+   "uses": [
+    "lem-trf-log-smooth-log-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.8, log smooth morphisms over a log regular base have log regular source; VIII 3.3.11, toric log-etale chart changes."
+   }
+  },
+  {
+   "text": "If $C=0$, $X$ is empty: the zero ring has no prime ideals. The constructions above still apply, and the conditions of log regularity at geometric points in [def-trf-fs-log-blowup] are vacuous. Thus no nonemptiness, injectivity of $A\\to C$, or nonzero-ring condition was used.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.2, log regularity is a condition at points; empty chart convention."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fs-log-blowup",
+  "pqf-lem-affine-open-locnoeth",
+  "def-weil-affine-spectrum",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-trf-associated-log-universal-stalks",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-etale-morphism",
+  "lem-trf-log-smooth-log-regular"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.8 and VIII 3.3.11; affine Noetherian and fibre-product bookkeeping from Stacks 00FN, 01OW, 01I4, 01JQ."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +131,38 @@
    "results": "[grep] OK 0 hit(s)\nNo logarithmic structures, log regular chart hypothesis, or monoidal blowup assertion in the hits.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "logRegular|log_regular|logSmooth|log_smooth|logarithmic.structure",
+   "results": "{\"t\": \"2026-10-17T18:12:52Z\", \"tool\": \"grep\", \"query\": \"logRegular|log_regular|logSmooth|log_smooth|logarithmic.structure\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary smooth/etale morphisms, valuative criteria, or monoid regular elements; none supplies logarithmic structures or log regularity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Log etale changes of fine saturated monoid charts with isomorphic group completions preserve log regularity.",
+   "results": "{\"t\": \"2026-10-17T18:12:52Z\", \"tool\": \"leansearch\", \"query\": \"Log etale changes of fine saturated monoid charts with isomorphic group completions preserve log regularity.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.iff_of_equiv\", \"Algebra.FormallyEtale.localization_map\", \"Submonoid.LocalizationMap.map_isRegular\", \"AddSubmonoid.LocalizationMap.map_isAddRegular\", \"RingHom.Etale.respectsIso\", \"isRegular_toColex\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.FormallyEtale.localization_base\"], \"digest\": \"f8951378c65adfe7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary smooth/etale morphisms, valuative criteria, or monoid regular elements; none supplies logarithmic structures or log regularity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogRegular\"",
+   "results": "{\"t\": \"2026-10-17T18:12:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogRegular\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary smooth/etale morphisms, valuative criteria, or monoid regular elements; none supplies logarithmic structures or log regularity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fs log regular affine scheme remains log regular after toric base change A tensor Z[Q] for P contained in saturated Q in P group completion.",
+   "results": "{\"t\": \"2026-10-17T18:12:55Z\", \"tool\": \"leanfinder\", \"query\": \"An fs log regular affine scheme remains log regular after toric base change A tensor Z[Q] for P contained in saturated Q in P group completion.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.stableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.affineAnd_isStableUnderBaseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.HasRingHomProperty.isStableUnderBaseChange\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\"], \"digest\": \"79db8ad57727ef70\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary smooth/etale morphisms, valuative criteria, or monoid regular elements; none supplies logarithmic structures or log regularity."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-log-blowup-normalization",
@@ -71,5 +187,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-log-regular-toric-refinement",
+  "worker": "stage1",
+  "summary": "Preserved the statement, supplied six explicit steps, and reused the existing chart-level log-smooth preservation theorem. Checked local Noetherianity via finite monoid generators and the existing Mathlib leaf pqf-lem-affine-open-locnoeth (affine open of a locally Noetherian scheme) together with the one-chart definition of local Noetherianity; the delivery's separate new affine coordinate-ring leaf was dropped on maintainer review as a combination of that node and the definition. Reused the existing associated-log construction and affine tensor fibre-product theorem, with both projection formulas. No attachment and no statement dispute.",
+  "blueprint": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)–(2), inherited through log-blowup-normalization. The current main-20261015 blueprint uses the contracting-correspondence theorem; this split does not alter that unit route. It supplies the already-created toric-chart preservation input via ILO VI 1.8 and VIII 3.3.11.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-4f54d2430",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-4f54d2430 (reviewer sub-agent of L); spot-checked: Read the item and the new node in full, every cited statement, ILO VI 1.8 (p.70) and VIII 3.3.8-3.3.11 (pp.107-108), and Mathlib Noetherian.lean lines 57-59, 103 and 197-203. The item's statement is byte-identical to the side and live DAGs (still unsplit live), so nothing is weakened. Tested on Q=P, P=N with Q=Z, the N^2 blowup chart, trivial monoids and C=0. All six steps are correct. Step 1: g^gp is an isomorphism. Step 2: finite type over a Noetherian ring gives Noetherian. Step 3: the map f^{-1}N->M_X respects the pushout relation, since f#alpha(e)=beta(g e) is a unit; the map is compatible with structure maps and the charts. Step 4: by pullbackSpecIso with both projections, the comparison is an isomorphism, hence etale. Step 5: every hypothesis of lem-trf-log-smooth-log-regular (same unit) is matched. Step 6: C=0 is vacuous. FIX (C5): the new Mathlib leaf lem-trf-affine-locnoeth-coordinate-ring is true but redundant. Its forward direction is the existing leaf pqf-lem-affine-open-locnoeth applied to Spec A as an affine open of itself, and its converse is the definition pqf-def-locnoeth with a one-member cover. Step 2 now cites those (plus def-weil-affine-spectrum), proof_deps is recomputed, and the node is dropped; nothing else cites it. No tool_uses, no SGA, no cycle, no duplicate of the item found among the 20 log-regular nodes. Corrected item in fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
  }
 }
