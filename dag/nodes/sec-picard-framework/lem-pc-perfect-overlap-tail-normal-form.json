@@ -1,0 +1,138 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Stacks Project, perfect.tex, lemma-quasi-coherence-pullback (Tag 08DW), proof: compatibility with restriction to opens; cohomology.tex, lemma-derived-pullback-composition (Tag 0D5S): the fixed canonical composition comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of pullback composition with a commuting square and restrictions to nested open subschemes",
+   "results": "Eight hits: Scheme.appLE_comp_appLE and associated restricted scheme-map and pullback projection equations; no equation for the project fixed derived-pullback comparisons.",
+   "date": "2026-10-17",
+   "verdict": "Use the project fixed-comparison API."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Naturality and whiskering API; no exact project stage-map formula.",
+   "date": "2026-10-17",
+   "verdict": "Naturality supplies the elementary rearrangements."
+  },
+  {
+   "tool": "grep",
+   "query": "mapIso_trans|inv_hom_id_app_assoc|compositionTo_prism",
+   "results": "25 Mathlib hits including CategoryTheory.Functor.mapIso_trans (Mathlib/CategoryTheory/Iso.lean:484) and uses of Iso.inv_hom_id_app_assoc; these are elementary composition and cancellation APIs.",
+   "date": "2026-10-17",
+   "verdict": "Use elementary functor composition and inverse cancellation together with the existing project comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality and composition of natural isomorphisms of functors, and cancellation of inverse components",
+   "results": "Eight hits, including CategoryTheory.NatIso.naturality_1, naturality_2', cancel_natIso_hom_right_assoc, and cancel_natIso_inv_right. These give elementary rearrangements, not the project-specific restricted pullback comparison.",
+   "date": "2026-10-17",
+   "verdict": "Use these elementary coherence laws with the existing project constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "id": "lem-pc-perfect-overlap-tail-normal-form",
+ "title": "Normalize the constructed composite tail before projection",
+ "statement": "theorem perfectOverlapCompositeStageTailAt_eq_factors\n    {X Y K C S : Scheme.{u}}\n    (f : K ⟶ Y) (gk : X ⟶ K) (g : X ⟶ Y) (hgf : gk ≫ f = g)\n    (pX : X ⟶ C) (pY : Y ⟶ S) (b : C ⟶ S)\n    (hg : IsPullback g pX pY b) (U V L : Y.Opens) (hWL : U ⊓ V ≤ L)\n    (A : schemeDerivedCategory L.toScheme) :\n  let W := U ⊓ V\n  let hP : g ⁻¹ᵁ L ≤ gk ⁻¹ᵁ (f ⁻¹ᵁ L) := by\n    rw [← Scheme.Hom.comp_preimage, hgf]\n  let hT : g ⁻¹ᵁ W ≤ gk ⁻¹ᵁ (f ⁻¹ᵁ W) := by\n    rw [← Scheme.Hom.comp_preimage, hgf]\n  let iX : g ⁻¹ᵁ U ⊓ g ⁻¹ᵁ V ⟶ g ⁻¹ᵁ L := homOfLE (fun _ hx ↦ hWL hx)\n  let iK : f ⁻¹ᵁ U ⊓ f ⁻¹ᵁ V ⟶ f ⁻¹ᵁ L := homOfLE (fun _ hx ↦ hWL hx)\n  let _ξ := perfectOverlapNestedPullbackSquare gk iK iX hP hT\n  let _κ := perfectOverlapCompositeLocalIso f gk g hgf L\n  let r := gk.resLE (f ⁻¹ᵁ W) (g ⁻¹ᵁ W) hT\n  let jX := X.homOfLE (leOfHom iX)\n  let jK := K.homOfLE (leOfHom iK)\n  let p := jK ≫ (f ∣_ L)\n  let t := jX ≫ (g ∣_ L)\n  let e : (g ⁻¹ᵁ U ⊓ g ⁻¹ᵁ V).toScheme ≅ pullback (W.ι ≫ pY) b :=\n    ((isPullback_morphismRestrict g W).paste_vert hg).isoPullback\n  let a := Y.homOfLE hWL\n  let hr : r ≫ p = t := perfectOverlapTailRestrictedComposite f gk g hgf U V L hWL\n  let ht : e.inv ≫ t = pullback.fst (W.ι ≫ pY) b ≫ a :=\n    perfectOverlapTailStageProjection g pX pY b hg U V L hWL\n  let R := derivedPullback e.inv\n  perfectOverlapCompositeStageTailAt f gk g hgf pX pY b hg U V L hWL A =\n    R.map ((derivedPullback r).map\n      ((overlapOpenInclusionPullbackIso K iK).inv.app ((derivedPullback (f ∣_ L)).obj A))) ≫\n    R.map ((derivedPullback r).map ((perfectHomComposition jK (f ∣_ L)).hom.app A)) ≫\n    R.map ((compositionTo r p t hr).hom.app A) ≫\n    (perfectHomComposition e.inv t).hom.app A ≫\n    (eqToIso (congrArg (fun k ↦ derivedPullback k) ht)).hom.app A ≫\n    (perfectHomComposition (pullback.fst (W.ι ≫ pY) b) a).inv.app A",
+ "stmt_deps": [
+  "lem-pc-perfect-overlap-tail-restricted-composite",
+  "lem-pc-perfect-overlap-tail-stage-projection",
+  "lem-pc-perfect-overlap-nested-pullback-square",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-perfect-overlap-composite-stage-tail",
+  "def-pc-perfect-overlap-stage-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "Form the restricted-map square and composite. Apply compositionTo_prism, specialize the three reflexive comparisons to perfectHomComposition, and take hom components. Expand the nested-square inverse; use naturality of the inclusion comparison to move the local composition, and cancel the inverse inclusion pair. Expanding only the remaining named comparison identifies this product with the prism equation. Expand the constructed stage tail and its stage-object factorization, map the local equation through the cartesian pullback, and reassociate.",
+   "uses": [
+    "lem-pc-perfect-overlap-tail-restricted-composite",
+    "lem-pc-perfect-overlap-tail-stage-projection",
+    "lem-pc-perfect-overlap-nested-pullback-square",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-perfect-overlap-composite-stage-tail",
+    "def-pc-perfect-overlap-stage-equivalence",
+    "lem-pc-perfect-hom-comparison-triangle"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-overlap-tail-restricted-composite",
+  "lem-pc-perfect-overlap-tail-stage-projection",
+  "lem-pc-perfect-overlap-nested-pullback-square",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-perfect-overlap-composite-stage-tail",
+  "def-pc-perfect-overlap-stage-equivalence",
+  "lem-pc-perfect-hom-comparison-triangle"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "R1",
+  "date": "2026-10-17",
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Stacks Project, perfect.tex, lemma-quasi-coherence-pullback (Tag 08DW), proof: compatibility with restriction to opens; cohomology.tex, lemma-derived-pullback-composition (Tag 0D5S): the fixed canonical composition comparison."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectOverlapTailProjectionComponent",
+  "date": "2026-10-17",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RF two-open induction: the component equation relating prescribed overlap transport to the cartesian base-change comparison, within the core realization construction. The first half of the component comparison: expand the nested-square inverse and local composition, cancel the inclusion comparisons, and apply the derived-composition prism.",
+   "via": [
+    "lem-pc-perfect-overlap-tail-projection-component",
+    "lem-pc-perfect-overlap-projection-composition-component",
+    "lem-pc-perfect-overlap-composite-object-pin",
+    "lem-pc-perfect-overlap-object-realization-core-of-data",
+    "lem-pc-perfect-overlap-object-realization-core-data",
+    "lem-pc-perfect-overlap-object-realization",
+    "lem-pc-perfect-overlap-hom-presentation",
+    "lem-pc-perfect-overlap-hom-continuity",
+    "lem-pc-perfect-overlap-transition-comparison-core-stage"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectOverlapTailNormalForm",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOverlapTailNormalForm.lean",
+  "declaration": "AlgebraicGeometry.perfectOverlapCompositeStageTailAt_eq_factors",
+  "statement": "theorem perfectOverlapCompositeStageTailAt_eq_factors\n    {X Y K C S : Scheme.{u}}\n    (f : K ⟶ Y) (gk : X ⟶ K) (g : X ⟶ Y) (hgf : gk ≫ f = g)\n    (pX : X ⟶ C) (pY : Y ⟶ S) (b : C ⟶ S)\n    (hg : IsPullback g pX pY b) (U V L : Y.Opens) (hWL : U ⊓ V ≤ L)\n    (A : schemeDerivedCategory L.toScheme) :\n  let W := U ⊓ V\n  let hP : g ⁻¹ᵁ L ≤ gk ⁻¹ᵁ (f ⁻¹ᵁ L) := by\n    rw [← Scheme.Hom.comp_preimage, hgf]\n  let hT : g ⁻¹ᵁ W ≤ gk ⁻¹ᵁ (f ⁻¹ᵁ W) := by\n    rw [← Scheme.Hom.comp_preimage, hgf]\n  let iX : g ⁻¹ᵁ U ⊓ g ⁻¹ᵁ V ⟶ g ⁻¹ᵁ L := homOfLE (fun _ hx ↦ hWL hx)\n  let iK : f ⁻¹ᵁ U ⊓ f ⁻¹ᵁ V ⟶ f ⁻¹ᵁ L := homOfLE (fun _ hx ↦ hWL hx)\n  let _ξ := perfectOverlapNestedPullbackSquare gk iK iX hP hT\n  let _κ := perfectOverlapCompositeLocalIso f gk g hgf L\n  let r := gk.resLE (f ⁻¹ᵁ W) (g ⁻¹ᵁ W) hT\n  let jX := X.homOfLE (leOfHom iX)\n  let jK := K.homOfLE (leOfHom iK)\n  let p := jK ≫ (f ∣_ L)\n  let t := jX ≫ (g ∣_ L)\n  let e : (g ⁻¹ᵁ U ⊓ g ⁻¹ᵁ V).toScheme ≅ pullback (W.ι ≫ pY) b :=\n    ((isPullback_morphismRestrict g W).paste_vert hg).isoPullback\n  let a := Y.homOfLE hWL\n  let hr : r ≫ p = t := perfectOverlapTailRestrictedComposite f gk g hgf U V L hWL\n  let ht : e.inv ≫ t = pullback.fst (W.ι ≫ pY) b ≫ a :=\n    perfectOverlapTailStageProjection g pX pY b hg U V L hWL\n  let R := derivedPullback e.inv\n  perfectOverlapCompositeStageTailAt f gk g hgf pX pY b hg U V L hWL A =\n    R.map ((derivedPullback r).map\n      ((overlapOpenInclusionPullbackIso K iK).inv.app ((derivedPullback (f ∣_ L)).obj A))) ≫\n    R.map ((derivedPullback r).map ((perfectHomComposition jK (f ∣_ L)).hom.app A)) ≫\n    R.map ((compositionTo r p t hr).hom.app A) ≫\n    (perfectHomComposition e.inv t).hom.app A ≫\n    (eqToIso (congrArg (fun k ↦ derivedPullback k) ht)).hom.app A ≫\n    (perfectHomComposition (pullback.fst (W.ι ≫ pY) b) a).inv.app A",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-17"
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261017T013051-L-4174255",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261017T013051-L-4174255",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
