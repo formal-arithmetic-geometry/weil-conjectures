@@ -169,5 +169,37 @@
   "group": "Q37",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-ec15c9bbd (reviewer sub-agent of L); spot-checked: PASS, no fixes written. Read the full item (5 steps, no new nodes), the cited statements (def-cbc-enhanced-diagrams-cones; lem-coef-simplicial-presheaf-projective-model plus its model-category conventions from lem-coef-simplicial-boundary-collapse-test, where each WFS class is exactly the maps lifting against the other; lem-coef-kan-quillen-right-proper; the Eilenberg–Zilber Mathlib leaf), the parent lem-coef-space-geometric-descent step 6, and paragraph 2 of the ancestor prop-coef-integral-exceptional-adjoint. Statement checked by hand: (1) F_cK=Hom(c,-)xK equals h_c in U(C^op), so the variance is right. (2) The coend is the diagonal. (3) Outer-nondegenerate strings (no identity among c_0..c_k; the last arrow c_k->d is absorbed into F_{c_k}) form an inner-closed splitting, so the skeletal pushouts along F_{c_k}(Z(c_0)x boundary of Delta^k) are correct. (4) Every terminal extra-degeneracy identity holds: d_{k+1}h_k=1, d_0h_0=h_{-1}e, d_i h_k=h_{k-1}d_i for i<=k, s_i h_k=h_{k+1}s_i, e h_{-1}=1. Small cases tested: C=[1] with Z=* gives QZ(1)=Delta^1 and QZ(0)=*; discrete C; endomorphisms and isomorphisms; empty C or Z; k=0. Step 3 is correct: monomorphisms are Kan cofibrations, Yoneda moves the lifting problem to component c, and projective cofibrations are exactly the maps lifting against objectwise trivial fibrations. The long step 2 (2017 characters) is one degreewise Eilenberg–Zilber count of the new simplices, with its only non-elementary input cited; rg found no general skeletal/bisimplicial node in the DAG, so it may stay. Duplicate candidates read and ruled out: presheaf-simplex-hocolim-resolution, ordinary-two-sided-bar-comparison, reedy-realization-homotopy-invariance, cone-boundary-projective-cells, fixed-object-simplicial-free-calculus, associative-algebra-diagram-cell-filtration, combinatorial-cofibrant-density, extra-degeneracy-contraction. Route is in-unit or uses a Mathlib leaf or a definition; no tool_uses needed; no cycle; no SGA. Rezk and HTT are not archived, so the proof is correctly marked agent-written and the report lists them as WANTED. Not a target node, so the base-change and coefficient-category check does not apply."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.FreeBarCellFiltration",
+  "declaration": "SSet.FreeBar.free_bar_cell_filtration",
+  "declarations": [
+   "SSet.FreeBar.free",
+   "SSet.FreeBar.freeMap",
+   "SSet.FreeBar.overChain",
+   "SSet.FreeBar.realizationDiagram",
+   "SSet.FreeBar.realization",
+   "SSet.FreeBar.realizationι",
+   "SSet.FreeBar.boundaryFamily",
+   "SSet.FreeBar.diskFamily",
+   "SSet.FreeBar.cellMap",
+   "SSet.FreeBar.CellFiltration",
+   "SSet.FreeBar.free_bar_cell_filtration"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/FreeBarCellFiltration.lean",
+  "statement": "theorem free_bar_cell_filtration (C : Type u) [SmallCategory C] : Nonempty (CellFiltration C)",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Normalized existence statement for the specified canonical free-bar data; the coend and its injections use Mathlib Limits.coend and coend.ι on the existing Cartesian tensor bifunctor. No data is chosen from the postponed theorem. Uses the recorded projective representable and its boundary-lifting description. Mathlib coproducts are written inline to avoid importing the downstream general bar-resolution theorem and creating a DAG cycle. Second reading removed the duplicate custom coend relation shape and index."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-226507d73",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Read the node, both stmt_deps (def-cbc conventions; SimplicialPresheafProjectiveModel representable/generatingCofibrations/cofibration-class clause), the module, the report (real Worker report and Second reading by Q05 sections) and the node JSON (only the lean field changed; lean.statement verbatim; all 11 declarations present). Every clause matches: covariant free diagram via opOp+representable; P stages as Over-d chain coproducts with stage_operator/postcompose/map pinning faces, degeneracies, C-action and Z-naturality; Q is Mathlib coend with pinned injections and the diagonal [x,a]↦P(a)x; filtration with index 0 initial, image of outer degree ≤k, mono inclusions, colimit; nondegenerate-nerve cell index, boundary/disk families and cellMap exact; IsPushout for all k≥0 with the attaching map forced by mono stages; projective cofibrancy equals the dependency's llp class; augmentation Z(c0→d); hMinus/h uniquely pinned, all extra-degeneracy identities and index ranges checked by hand; Z-naturality throughout. Single universe u matches the dependencies; no extra hypotheses. Edge cases checked: empty C, empty Z, k=0, discrete C, C=[1], non-Kan. No hollow data, sole sorry is the item theorem, source/blueprint docstrings and five-step proof present. nt_compile.py --json on the snapshot file: exit 0, no errors or warnings, 5.9 s. Only cosmetic: the worker's report table still mentions the removed custom coend helpers."
  }
 }

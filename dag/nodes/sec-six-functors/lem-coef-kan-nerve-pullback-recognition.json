@@ -9,7 +9,11 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-coherent-nerve-infrastructure"
+  "def-coef-coherent-nerve-infrastructure",
+  "def-coef-infinity-category-of-spaces",
+  "def-coef-finite-limits-square-cones",
+  "def-coef-infinity-relative-cone",
+  "lem-coef-infinity-homotopy-pullback-pasting"
  ],
  "proof": [
   {
@@ -317,5 +321,33 @@
   "group": "Q55",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-c5be61fd5 (reviewer sub-agent of L); spot-checked: The verdict is PASS with no fixes. I read the item, the full statements of all 14 cited nodes, the unit sk-prop-sf-biduality-general, and the blueprint ancestor in master and in main-20261015 sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md; its paragraph 2 is the R lim Hom adjunction, so the corrected from.place is right. The statement is unchanged and true. I tested it on these cases: A or P empty; discrete complexes, where q must be a bijection; D = point, where P = B x C; and B = C = point with D = N(BC2). In the last case P is discrete C2, and different H give a bijective or a non-bijective q, which confirms the clause that H matters. Steps: (1) the quasicategory node and the Kan fibration E_r -> D give P Kan. (2) The currying of Fun(X,P) and the T_q formula check out, and elementary is a fair label. (3) Strict postcomposition commutes with alpha = t q^n, which gives the strict equalities the pullback-invariance node needs; all six spaces are Kan. (4) Postcomposition is strict on R and U and commutes with the pinch map j. The compatibility of beta = j alpha with composition is taken from the existing point-family node's statement, and the homotopy-invariance argument plus two-out-of-three are correct. (5) Uses the iff clause of the terminal-pullback criterion. (6) Whitehead inverse plus exponentiation, and the converse at X = point. (7) Invariance under whole-diagram equivalence. (8) The orientation in C[Delta^2](0,2) and the Kan 2-horn reversal are right, followed by the pointwise-equivalence node. (9) Bookkeeping. No cited dependency reaches the item (280 nodes traversed). No duplicate: lem-coef-simplicial-model-coherent-diagrams generalizes only the strict clause and already depends on this item, so citing it would make a cycle; the kan-pullback-path-comparison, homotopy-pullback-pasting, coherent-weight-limit and brown-localization nodes state different things. There are no new nodes. The Mathlib searches cover all three kinds with no match. Accepted tool_uses: lem-cbc-enhanced-functor-cone-calculus, lem-cbc-kan-whitehead-inverse and lem-cbc-simplicial-homotopy-equivalence-weak, generic space tools with many accepted precedents among sibling coefficient nodes; lem-cbc-kan-functor-space-kan is a Mathlib leaf, so declaring it is harmless. No SGA source is cited, and no base-change morphism or coefficient category is involved."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.KanNervePullbackRecognition",
+  "declaration": "SSet.Enhanced.kan_nerve_pullback_recognition",
+  "statement": "theorem kan_nerve_pullback_recognition : (∀ {A B C D : SSet.{u}} [KanComplex A] [KanComplex B] [KanComplex C] [KanComplex D] (f : A ⟶ B) (g : A ⟶ C) (r : B ⟶ D) (s : C ⟶ D) (hcomm : f ≫ r = g ≫ s), Nonempty (KanSquarePresentation f g r s (f ≫ r ≫ constantDiagrams Δ[1] D)) ∧ ∀ p : KanSquarePresentation f g r s (f ≫ r ≫ constantDiagrams Δ[1] D), (∃ t : SuspensionComparison.SquareCone p.square, IsLimiting (SuspensionComparison.boundary p.square true) t.cone) ↔ IsWeakHomotopyEquivalence (homotopyPullbackComparison f g r s hcomm)) ∧ (∀ {A B C D : SSet.{u}} [KanComplex A] [KanComplex B] [KanComplex C] [KanComplex D] (f : A ⟶ B) (g : A ⟶ C) (r : B ⟶ D) (s : C ⟶ D) (α : A ⟶ (ihom Δ[1]).obj D) (hα₀ : α ≫ evaluation Δ[1] D (stdSimplex.obj₀Equiv.symm 0) = f ≫ r) (hα₁ : α ≫ evaluation Δ[1] D (stdSimplex.obj₀Equiv.symm 1) = g ≫ s), Nonempty (KanSquarePresentation f g r s α) ∧ ∀ p : KanSquarePresentation f g r s α, (∃ t : SuspensionComparison.SquareCone p.square, IsLimiting (SuspensionComparison.boundary p.square true) t.cone) ↔ IsWeakHomotopyEquivalence (specifiedHomotopyPullbackComparison f g r s α hα₀ hα₁)) ∧ (∀ F G : SuspensionComparison.square ⟶ CategoryTheory.Spaces.infinityCategory.{u}, AreNaturallyEquivalent F G → ((∃ t : SuspensionComparison.SquareCone F, IsLimiting (SuspensionComparison.boundary F true) t.cone) ↔ ∃ t : SuspensionComparison.SquareCone G, IsLimiting (SuspensionComparison.boundary G true) t.cone)) ∧ (∀ {A B C D A' B' C' D' : SSet.{u}} [KanComplex A] [KanComplex B] [KanComplex C] [KanComplex D] [KanComplex A'] [KanComplex B'] [KanComplex C'] [KanComplex D'] (f : A ⟶ B) (g : A ⟶ C) (r : B ⟶ D) (s : C ⟶ D) (f' : A' ⟶ B') (g' : A' ⟶ C') (r' : B' ⟶ D') (s' : C' ⟶ D') (a : A ⟶ A') (b : B ⟶ B') (c : C ⟶ C') (d : D ⟶ D'), f ≫ b = a ≫ f' → g ≫ c = a ≫ g' → r ≫ d = b ≫ r' → s ≫ d = c ≫ s' → f ≫ r = g ≫ s → f' ≫ r' = g' ≫ s' → IsWeakHomotopyEquivalence a → IsWeakHomotopyEquivalence b → IsWeakHomotopyEquivalence c → IsWeakHomotopyEquivalence d → (IsHomotopyPullbackSquare f g r s ↔ IsHomotopyPullbackSquare f' g' r' s'))",
+  "by": "NL",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/CategoryTheory/KanNervePullbackRecognition.lean",
+  "branch": "newtargets-dag",
+  "declarations": [
+   "SSet.Enhanced.kanNerveObject",
+   "SSet.Enhanced.kanNerveHom",
+   "SSet.Enhanced.kanNerveEdge",
+   "SSet.Enhanced.kanNerveTriangle",
+   "SSet.Enhanced.kanCommutationEdge",
+   "SSet.Enhanced.KanSquarePresentation",
+   "SSet.Enhanced.kan_nerve_pullback_recognition"
+  ],
+  "note": "Second reading repairs the statement to the unchanged node: actual limiting square cones; unrestricted specified commutation with both coherent triangles; whole-diagram equivalence invariance. Coordinate-reading and presentation helpers belong to this node, contain real data and record the exact homotopy through a function-complex triangle. Existing square-cone and path-comparison definitions are reused."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cd4b3f217",
+  "group": "NL",
+  "result": "pass",
+  "note": "Recompiled the snapshot module with nt_compile.py --json against the side overlay: exit 0, no errors or warnings, axioms propext/sorryAx/Classical.choice/Quot.sound. Clauses checked against the node: strict square via the existing homotopyPullbackComparison (constant path at rf), with presentation existence asserted and every presentation tested; the limiting-cone predicate uses SquareCone, which pins the apex to corner (0,0) and the sweep cone path, over the cospan boundary; the specified-alpha clause has no hcomm and uses specifiedHomotopyPullbackComparison; KanSquarePresentation's triangle witness T (faces diag->rf, alpha, diag->sg) orientation verified by hand; whole-diagram equivalence via AreNaturallyEquivalent preserves and reflects; the zigzag claim follows from clause 4 (one-step strict w.e. invariance of IsHomotopyPullbackSquare) with clauses 1 and 3. No extra assumptions; universes u and u+1 confirmed with pp.universes. Six helpers carry real data and source/blueprint docstrings; the only sorry is the item theorem. stmt_deps cover all owning nodes; no DAG cycle (286 nodes traversed). lean.statement equals the file signature up to whitespace. Report has Worker report and Second reading by NL sections. No statement_change, not a pro-etale item. No findings requiring repair."
  }
 }
