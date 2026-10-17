@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.CategoryTheory.Functor.Currying
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import all Sheaf.AlgebraicGeometry.CoherentFormalModule
+import all WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 import all Sheaf.AlgebraicGeometry.ThickeningSystemPushforwardAdic
 import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
@@ -138,6 +138,141 @@ theorem formalSecondIdealAlgebraization_transitions
         formalCompletionMap I t ≫ (β e).hom =
           (β (e + 1)).hom ≫
             (M.obj ⋙ formalCompletionFunctor K).flip.map (homOfLE (Nat.le_succ e)).op := by
-  sorry
+  classical
+  let F (e : ℕ) : CoherentModules X :=
+    ⟨(Scheme.Modules.pushforward (K ^ (e + 1)).subschemeι).obj (G e).obj,
+      (Scheme.Modules.isCoherent_pushforward_of_isFinite
+        (K ^ (e + 1)).subschemeι (G e).obj (G e).property).1⟩
+  have hz (e : ℕ) := pushforward_power_zero K e (G e)
+  intro e
+  refine ⟨hz e, ?_⟩
+  let i := (K ^ (e + 2)).subschemeι
+  have hsrc : CoherentModuleSupportedOn (F (e + 1)) i :=
+    (powerSupported_iff K (e + 2) (by omega) _).mpr (hz (e + 1))
+  have htgt : CoherentModuleSupportedOn (F e) i := by
+    apply (powerSupported_iff K (e + 2) (by omega) _).mpr
+    obtain ⟨k, hk⟩ := formalModuleQuotient_factor K (𝟙 (F e).obj) (Nat.le_succ (e + 1))
+    have hi : Scheme.idealModuleProductι
+        (Scheme.idealSheafPower K.toModulesι (e + 1)).2 (F e).obj = 0 :=
+      (hz e).eq_zero_of_src _
+    have hm := idealModuleProduct_mono (Scheme.idealSheafPower K.toModulesι (e + 2)).2
+      (F e).obj
+    apply IsZero.of_mono_eq_zero
+      (Scheme.idealModuleProductι (Scheme.idealSheafPower K.toModulesι (e + 2)).2 _)
+    simpa only [Category.comp_id, hi, comp_zero] using hk
+  let A : ObjectProperty.FullSubcategory
+      (fun H : CoherentModules X ↦ CoherentModuleSupportedOn H i) := ⟨F (e + 1), hsrc⟩
+  let B : ObjectProperty.FullSubcategory
+      (fun H : CoherentModules X ↦ CoherentModuleSupportedOn H i) := ⟨F e, htgt⟩
+  let C := supportedCompletion i I
+  obtain ⟨hf, hg⟩ := supportedCompletion_fullyFaithful i I
+    (hthick (e + 2) (by omega) (isNoetherian_of_locallyOfFiniteType i))
+  let : C.Full := hf
+  let : C.Faithful := hg
+  let τ := (M.obj ⋙ formalCompletionFunctor K).flip.map (homOfLE (Nat.le_succ e)).op
+  let a : C.obj A ⟶ C.obj B := (β (e + 1)).hom ≫ τ ≫ (β e).inv
+  let t' : A ⟶ B := C.preimage a
+  let t : (F (e + 1)).obj ⟶ (F e).obj := t'.hom.hom
+  have ht : formalCompletionMap I t = a := C.map_preimage a
+  have htβ : formalCompletionMap I t ≫ (β e).hom = (β (e + 1)).hom ≫ τ := by
+    rw [ht]
+    simp only [a, Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  have hkill : Scheme.idealModuleProductι
+      (Scheme.idealSheafPower K.toModulesι (e + 1)).2 (F (e + 1)).obj ≫ t = 0 := by
+    obtain ⟨k, hk⟩ := formalModuleQuotient_factor K t (Nat.le_refl (e + 1))
+    have hi : Scheme.idealModuleProductι
+        (Scheme.idealSheafPower K.toModulesι (e + 1)).2 (F e).obj = 0 :=
+      (hz e).eq_zero_of_src _
+    rw [hk, hi, comp_zero]
+  let s : formalModuleQuotient K (e + 1) (F (e + 1)).obj ⟶ (F e).obj :=
+    cokernel.desc _ t hkill
+  have hs : formalModuleQuotientπ K (e + 1) (F (e + 1)).obj ≫ s = t :=
+    cokernel.π_desc _ _ _
+  have hscomp : IsIso (formalCompletionMap I s) := by
+    have happ (n : ℕᵒᵖ) : IsIso ((formalCompletionMap I s).app n) := by
+      obtain ⟨θ, hθ⟩ := grothendieckDevissage_secondAdicSystem_comparison I K (F (e + 1)).obj
+      let d := (θ.app (op e)).app n
+      let b := ((formalCompletionFunctor K).mapIso ((β (e + 1)).app n)).app (op e)
+      obtain ⟨c, hc⟩ := formalModuleQuotient_iterated K (M.obj.obj n) (Nat.le_succ (e + 1))
+      have heq : (formalCompletionMap I s).app n ≫ ((β e).app n).hom =
+          d.hom ≫ b.hom ≫ c.hom := by
+        have hpI : Epi (formalModuleQuotientπ I (n.unop + 1)
+            (formalModuleQuotient K (e + 1) (F (e + 1)).obj)) := by
+          dsimp [formalModuleQuotientπ]; infer_instance
+        have hpK : Epi (formalModuleQuotientπ K (e + 1) (F (e + 1)).obj) := by
+          dsimp [formalModuleQuotientπ]; infer_instance
+        apply (cancel_epi (formalModuleQuotientπ I (n.unop + 1)
+          (formalModuleQuotient K (e + 1) (F (e + 1)).obj))).mp
+        apply (cancel_epi (formalModuleQuotientπ K (e + 1) (F (e + 1)).obj)).mp
+        have hθn : formalModuleQuotientπ K (e + 1) (F (e + 1)).obj ≫
+            formalModuleQuotientπ I (n.unop + 1) _ ≫ d.hom =
+            formalModuleQuotientπ I (n.unop + 1) (F (e + 1)).obj ≫
+              formalModuleQuotientπ K (e + 1) _ := by
+          simpa only [d, Iso.app_hom, op_unop] using hθ e n.unop
+        change formalModuleQuotientπ K (e + 1) (F (e + 1)).obj ≫
+            formalModuleQuotientπ I (n.unop + 1) _ ≫
+            (formalCompletionMap I s).app n ≫ ((β e).app n).hom =
+          formalModuleQuotientπ K (e + 1) (F (e + 1)).obj ≫
+            formalModuleQuotientπ I (n.unop + 1) _ ≫ d.hom ≫ b.hom ≫ c.hom
+        have hθn' := congrArg (fun f ↦ f ≫ b.hom ≫ c.hom) hθn
+        simp only [Category.assoc] at hθn'
+        rw [hθn']
+        have hb : formalModuleQuotientπ K (e + 1)
+            (formalModuleQuotient I (n.unop + 1) (F (e + 1)).obj) ≫ b.hom =
+            ((β (e + 1)).app n).hom ≫ formalModuleQuotientπ K (e + 1) _ := by
+          change formalModuleQuotientπ K (e + 1) _ ≫
+            formalModuleQuotientMap K ((β (e + 1)).app n).hom (Nat.le_refl (e + 1)) = _
+          exact cokernel.π_desc _ _ _
+        have hb' := congrArg (fun f ↦
+          formalModuleQuotientπ I (n.unop + 1) (F (e + 1)).obj ≫ f ≫ c.hom) hb
+        simp only [Category.assoc] at hb'
+        rw [hb']
+        have hc' : formalModuleQuotientπ K (e + 1)
+            (((M.obj ⋙ formalCompletionFunctor K).flip.obj (op (e + 1))).obj n) ≫
+            c.hom = τ.app n := hc
+        rw [hc']
+        have htn := congrArg (fun f ↦ f.app n) htβ
+        simp only [NatTrans.comp_app] at htn
+        have hleft : formalModuleQuotientπ K (e + 1) (F (e + 1)).obj ≫
+            formalModuleQuotientπ I (n.unop + 1) _ ≫
+            (formalCompletionMap I s).app n =
+            formalModuleQuotientπ I (n.unop + 1) (F (e + 1)).obj ≫
+              (formalCompletionMap I t).app n := by
+          simp only [formalCompletionMap, formalModuleQuotientMap, formalModuleQuotientπ,
+            cokernel.π_desc]
+          change (formalModuleQuotientπ K (e + 1) (F (e + 1)).obj ≫ s) ≫ _ = _
+          rw [hs]
+        have hleft' := congrArg (fun f ↦ f ≫ ((β e).app n).hom) hleft
+        simp only [Category.assoc] at hleft'
+        rw [hleft']
+        exact congrArg (fun f ↦ formalModuleQuotientπ I (n.unop + 1)
+          (F (e + 1)).obj ≫ f) htn
+      have : IsIso ((formalCompletionMap I s).app n ≫ ((β e).app n).hom) := by
+        rw [heq]
+        infer_instance
+      exact IsIso.of_isIso_comp_right ((formalCompletionMap I s).app n) ((β e).app n).hom
+    let := happ
+    exact NatIso.isIso_of_isIso_app _
+  let j := (K ^ (e + 1)).subschemeι
+  let Q : CoherentModules X := ⟨formalModuleQuotient K (e + 1) (F (e + 1)).obj,
+    (formalCompletionSystem_coherent K (F (e + 1))).1 e⟩
+  have hQ : CoherentModuleSupportedOn Q j :=
+    (powerSupported_iff K (e + 1) (Nat.succ_pos e) Q).mpr
+      ((formalCompletionSystem_coherent K (F (e + 1))).2.1 e)
+  have hB : CoherentModuleSupportedOn (F e) j :=
+    (powerSupported_iff K (e + 1) (Nat.succ_pos e) _).mpr (hz e)
+  let A' : ObjectProperty.FullSubcategory
+      (fun H : CoherentModules X ↦ CoherentModuleSupportedOn H j) := ⟨Q, hQ⟩
+  let B' : ObjectProperty.FullSubcategory
+      (fun H : CoherentModules X ↦ CoherentModuleSupportedOn H j) := ⟨F e, hB⟩
+  let s' : A' ⟶ B' := ObjectProperty.homMk (ObjectProperty.homMk s)
+  obtain ⟨hf', hg'⟩ := supportedCompletion_fullyFaithful j I
+    (hthick (e + 1) (by omega) (isNoetherian_of_locallyOfFiniteType j))
+  let : (supportedCompletion j I).Full := hf'
+  let : (supportedCompletion j I).Faithful := hg'
+  have : IsIso ((supportedCompletion j I).map s') := hscomp
+  have : IsIso s' := isIso_of_reflects_iso s' (supportedCompletion j I)
+  have hiso : IsIso s := inferInstanceAs (IsIso s'.hom.hom)
+  exact ⟨t, ⟨⟨asIso s, hs⟩, htβ⟩⟩
 
 end AlgebraicGeometry
