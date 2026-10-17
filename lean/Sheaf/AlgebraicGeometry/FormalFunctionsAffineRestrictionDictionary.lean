@@ -10,9 +10,8 @@ public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
-import all Sheaf.AlgebraicGeometry.TorsionControlledFormalRestriction
-import all Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import all WeilConjectures.AlgebraicGeometry.TorsionControlledFormalRestriction
+import all WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # The affine restriction dictionary for formal functions
@@ -66,10 +65,8 @@ private noncomputable def affineRestrictionSectionsIso {X Y : Scheme.{u}}
       M.presheaf.map (eqToHom V.ι_image_top).op ≫ t.app (V.ι ''ᵁ ⊤)
     exact (t.mapPresheaf.naturality _).symm
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
-/ -- The affine chart identifies the original sections and quotient system with the
+/-- The affine chart identifies the original sections and quotient system with the
 sections and quotient system of the restricted proper morphism to a spectrum.
 This is a finite-level dictionary; it asserts no completion or limit isomorphism.
 Source: Stacks Project, Theorem 02OC and Lemma 088B; Schemes, Tags 01I8 and 01IC.
@@ -91,7 +88,7 @@ Cancel the quotient epimorphisms to check every transition square, giving b as a
 isomorphism. These steps use only restriction and finite-level quotients; they do not
 use the theorem on formal functions. Empty U, F=0, and zero or unit J satisfy the same
 restriction and cokernel universal properties.
-- /
+-/
 theorem formalFunctions_affine_restriction_dictionary
     {X Y : Scheme.{u}} [IsNoetherian Y]
     (J : Y.IdealSheafData) (f : X ⟶ Y) [IsProper f] (F : CoherentModules X)
@@ -126,7 +123,8 @@ theorem formalFunctions_affine_restriction_dictionary
     have : F.obj.IsQuasicoherent := hF.1
     have : F.obj.IsFiniteType := hF.2
     exact (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType _ _).mpr
-      ⟨inferInstance, Scheme.Modules.finiteType_restrict _ _⟩
+      ⟨Scheme.Modules.isQuasicoherent_restrictFunctor _ _,
+        Scheme.Modules.finiteType_restrict _ _⟩
   have hideal : (J.comap f).comap (f ⁻¹ᵁ U).ι =
       (Scheme.IdealSheafData.ofIdealTop
         ((J.ideal ⟨U, hU⟩).map (Scheme.ΓSpecIso Γ(Y, U)).inv.hom)).comap
@@ -195,6 +193,5 @@ theorem formalFunctions_affine_restriction_dictionary
   rw [← Category.assoc]
   erw [← e.hom.naturality]
   simp
--/
 
 end AlgebraicGeometry
