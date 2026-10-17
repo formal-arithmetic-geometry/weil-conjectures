@@ -329,5 +329,33 @@
   "group": "Q52",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-ef1868d63 (reviewer sub-agent of L); spot-checked: I read all of it: the item's 10 steps, the new node `lem-coef-kan-enriched-hammock-comparison`, and the statements of all 19 cited nodes. The cited sources (HA, HTT, Dwyer–Kan, Hinich) are not in `literature/` and the review service blocks network access, so I could not reopen the source pages. I checked each step against the cited DAG statements instead, and checked DK Prop. 4.8 by direct verification; the report's WANTED lines stand. Steps 2 and 4: every extra-degeneracy identity and index range was rechecked; the reversed direction uses d^V_i=d_{n-i}, h_n=s_{n+1}. Step 5: the exchanged-direction clause of the diagonal lemma applies, and the diagonal is the last-block restriction. Step 6: the latching map is injective by the unique nondegenerate decomposition, and the degree-0 source is empty. Step 7: the coend equals the diagonal, with an explicit adjunction. Step 8: relative matching maps and pushout products (mono with anodyne, mono with mono) give a Quillen pair, then the derived adjunction. Step 9 is repaired: it is now a genuine functor equivalence built from the DK zigzag, the coherent nerve, hammock localization, the strict square ahi=jbv and a natural fibrant replacement with the componentwise criterion. No node that depends on the item is used, so there is no cycle (I computed the full dependency closure). Step 10: the cocone is e_n after projection, checked degree by degree. One phrase is loose: 'inverse of the constant-diagram equivalence' should be read after Kan replacement of diag B; it is correct in substance. The item's statement was tested on X = empty, Δ⁰ and Δ¹, and no Kan hypothesis is used. New node: it is DK 4.8 specialized to sSet with the Kan model structure. I checked directly that the square commutes strictly, including identities. j is a DK equivalence degreewise via the enriched Ex^∞ functor. a works at the π₀ level by the cylinder argument, and b is the classical DK theorem. It is not a duplicate of simplicial-model-nerve-localization (which is downstream of the item), hammock-pair-homotopy-invariance or the other hammock nodes. It restates no clause of the item, and its form fields are complete. FIX: the new node's statement used P^disc and W^disc inside S_0^disc without defining them (a B2 self-containment fault). Two defining sentences were added in fixes/dag/nodes/sec-six-functors/lem-coef-kan-enriched-hammock-comparison.json, with no mathematical change. Accepted tool_uses: lem-cbc-kan-mapping-homotopy-invariance and lem-cbc-enhanced-functor-cone-calculus, both generic tools. Report inaccuracy only: the second reading says it changed the item's created metadata to Q52, but the file still has Q83/lem-coef-enriched-marked-realization, which is the correct value. No SGA source is used and no target is weakened.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.JoinTranslationResolution",
+  "declaration": "SSet.Enhanced.join_translation_resolution",
+  "declarations": [
+   "SSet.Enhanced.joinOrdinals",
+   "SSet.Enhanced.joinTranslations",
+   "SSet.Enhanced.joinTranslationProjection",
+   "SSet.Enhanced.joinTranslationProjections",
+   "SSet.Enhanced.joinTranslationAugmentation",
+   "SSet.Enhanced.joinTranslationAugmentations",
+   "SSet.Enhanced.join_translation_resolution"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/JoinTranslationResolution.lean",
+  "statement": "theorem join_translation_resolution (X : SSet.{u}) : (∀ n : SimplexCategoryᵒᵖ, IsWeakHomotopyEquivalence (joinTranslationProjection X n)) ∧ (∀ (C : SSet.{u + 1}) (q : largeNerve.{u + 1, u, u + 1} SSet.{u} ⟶ C), IsLocalization (fun _ _ f ↦ IsWeakHomotopyEquivalence f) q → IsColimitEdge (diagram q (joinTranslations.obj X)) (object q X) (transformation q (joinTranslationAugmentation X)))",
+  "branch": "newtargets-dag",
+  "by": "Q129",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Constructs the ordered-block translation functor, both canonical restrictions and their naturality transformations using Mathlib ordinal sums, currying and constant functors. The conclusion uses the published coherent localization/diagram/IsColimitEdge interface already imported by KanQuillenRightProper. Quantification over localization presentations expresses the presentation-independent space colimit, without choosing a replacement or an arbitrary cocone. No Kan or nonemptiness hypothesis on X."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5eea30825",
+  "group": "Q129",
+  "result": "pass",
+  "note": "Shape: one commit (parent 6aefb52066) with module, item node (only lean changed, statement verbatim) and report with real Worker report and Second reading by Q129; dependency nodes identical to base. Clause check: t_nX = X(tensorObjOf n m) via Mathlib ordinal sum (castAdd first block, natAdd last block, checked in Augmented/Monoidal.lean), inner and outer operators by currying, disc = Functor.const, p_n = X.map inl', e_n = X.map inr' as natural transformations; naturality in X via joinTranslationProjections/Augmentations; clause 1 uses SSet.Enhanced.IsWeakHomotopyEquivalence; clause 2 = IsColimitEdge(diagram q t_•X, object q X, transformation q e) for every IsLocalization q at realization weak equivalences, the same pattern as the landed DirectConclusion and right_proper_kan_quillen, non-vacuous since the kan-quillen statement dependency asserts such q exists in the same universes. No Kan, nonempty or universe restriction; empty X, point, n=m=0, Delta1 and u=0 covered. diagram/transformation/IsColimitEdge are definitions in FiniteReedyLocalization reached through the public KanQuillenRightProper import, as in the dependency's own landed statement; dependency closures checked, no cycle. Six real definitions, one sorry, all 10 proof steps in the docstring, proof-dependency imports correct, no duplicate (Mathlib, WeilConjectures, lean/Sheaf), lines at most 100. nt_compile.py --json on side overlay: exit 0, no errors or warnings (lakefile sets warn.sorry=false), reproduced twice. HA pages not reopened (no network); checked against the stage-1-reviewed node statement. Non-blocking: garbled HA numbers in report prose, no Main-definitions list, redundant set_option, simpa-built data fields."
  }
 }

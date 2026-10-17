@@ -327,5 +327,32 @@
   "group": "Q65",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-5445b2d8d (reviewer sub-agent of L); spot-checked: I read the whole item and the statements of all six cited nodes: simplicial-object, simplicial-set, chain-complex, tensor-product, size-convention and the Dold–Kan normalization leaf (whose kernels are the faces d_1..d_m, with differential d_0). I also read the unit sk-prop-sf-cbc and the parent lem-cbc-dold-kan-homology, which is the only node citing the item. Its steps use exactly the item's natural isomorphism q_n, the chain-map property of D_n, naturality in every monotone map, coassociativity, and the counit equations. Statement and stmt_deps are unchanged, there are no new nodes, and proof_deps equals the union of the step uses. Every cited node is a definition or a Mathlib leaf, so there is no route problem and no tool_use. I checked each step by hand. Steps 1–2: B is spanned by basis strings and is a subcomplex, and the quotient is P(n) with its differential; the quotient map is natural. Step 3: all five face/degeneracy identities match the standard relations. Steps 4–5: the projector p = T_1…T_r lands in the kernels of d_1..d_r, fixes N, and kills every s_k y, using T_j s_k = s_k T'_{j-1} and then T_{k+1} s_k = 0. Step 6: q is a bijective natural chain map. Step 7: tensor signs, associator and units are correct. Step 8: I recomputed the Alexander–Whitney (front/back face) diagonal; (a, j=a) terms cancel against (a-1, j=a-1) terms, and r=1 checks by hand. Steps 9–11: augmentation, both counits, coassociativity over the double cuts, and naturality for collapsing α (every summand has the collapsed pair in its front or back factor) are correct. My own script over the integers checked 315 cases: p is idempotent, lands in the kernels and kills degenerate strings for n≤3, r≤4, and ∂D = D∂ for n≤5. All passed. The cosimplicial-sheaf Alexander–Whitney cup nodes in sec-abelian-varieties are not duplicates (opposite variance, different objects). The Stacks 017V citation matches simplicial.tex lemma-splitting-abelian-category and is used only for context. Higher Algebra is not archived; it is recorded as WANTED with proof_origin agent, so its place numbers were not checked locally, but the proof is complete on its own. No SGA use, no base-change or coefficient question, no fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.NormalizedSimplexChainDiagonal",
+  "declaration": "AlgebraicTopology.NormalizedSimplex.exists_diagonalData",
+  "declarations": [
+   "AlgebraicTopology.NormalizedSimplex.String",
+   "AlgebraicTopology.NormalizedSimplex.delete",
+   "AlgebraicTopology.NormalizedSimplex.front",
+   "AlgebraicTopology.NormalizedSimplex.back",
+   "AlgebraicTopology.NormalizedSimplex.DiagonalData",
+   "AlgebraicTopology.NormalizedSimplex.exists_diagonalData"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/NormalizedSimplexChainDiagonal.lean",
+  "statement": "theorem exists_diagonalData (Λ : Type u) [CommRing Λ] : Nonempty (DiagonalData Λ)",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Existence of the complete free-simplex and diagonal datum, with every basis, boundary, operator, quotient, diagonal, counit and naturality equation specified in DiagonalData; no choice of arbitrary maps. Mathlib supplies the total chain tensor with its canonical associator and unitors."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-185ecc08c",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Read node (only lean field changed vs side clone), six stmt_deps and their lean records, the module, report (real Worker report and Second reading by Q71) and Mathlib MooreComplex/ComplexShapeSigns/Monoidal. exists_diagonalData : Nonempty (DiagonalData Λ) fully pins every clause: strict-string bases, signed boundary, P(α) zero on collapsed strings for all monotone α, F free on monotone maps with pre/postcomposition, natural iso q into normalizedMooreComplex (= recorded Abelian.DoldKan.N) with the discard-noninjective formula, AW diagonal via ιTensorObj front/back, ε to Λ[0], coassociativity and counits through the canonical α_/λ_/ρ_, naturality of D and ε. Consistency checked by hand. No extra hypotheses; single universe u. Edge cases n=0, r>n, r=0,1, collapsing α, zero ring OK. Docstrings carry the source place, the blueprint id and all 11 steps; one sorry; lean.statement verbatim. No duplicates (Paper AW cup pairings are different objects). nt_compile.py --json rc=0, 5.3 s; a control run confirmed errors are reported and that only sorryAx comes from the main theorem's sorry. Non-blocking: report text has HA place numbers scrubbed to 'the project server'; the helper name String shadows core String within the namespace."
  }
 }

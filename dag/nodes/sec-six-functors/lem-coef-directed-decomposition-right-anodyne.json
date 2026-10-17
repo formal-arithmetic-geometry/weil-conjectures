@@ -29,7 +29,8 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-right-anodyne"
+  "def-coef-infinity-right-anodyne",
+  "lem-coef-infinity-slice-right-fibration"
  ],
  "proof": [
   {
@@ -204,5 +205,32 @@
   "group": "Q24",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-76a5f0050 (reviewer sub-agent of L); spot-checked: I read all of the item's mathematics. The statement is HTT Prop 4.2.3.8 / Remark 4.2.3.9 specialized to an increasing directed cover, with K_F from Notation 4.2.3.1. K_F is the simplicial subset of K⋆N(I) whose mixed simplices (σ; a_{i+1}≤…≤a_n) have σ∈K_{a_{i+1}}. The index count, the join order (consistent with lem-coef-contractible-join-right-anodyne and the parents) and the right-anodyne direction (K=Δ^0 gives Λ^1_1↪Δ^1) are correct. The hypotheses match what both citing parents supply, and nothing is weakened. Step 1 is genuinely elementary. Step 2: I_σ is nonempty and upward closed and its parallel arrows are equal, so the hypotheses of lem-cbc-filtered-nerve-weak-contractibility hold. I accept that node as a declared generic tool use from unit sk-prop-sf-cbc. Step 3: I checked the degreewise pushout through Δ^m⋆N(I_σ)→K_F, (α,chain)↦(σα,chain); the non-boundary simplices (surjective Δ^m part) biject with the new simplices. Step 4: the join lemma (HTT 4.2.3.6) applied to ∂Δ^m↪Δ^m, plus closure under pushouts and transfinite compositions, finishes the proof; the case m=0 is included. I tested K=∅, K=Δ^0 with I={0<1}, the Λ-shaped I_x, non-directed I (excluded by hypothesis) and degenerate simplices. Duplicate search over the DAG found none: lem-coef-decomposition-local-colimit-cocones is HTT 4.2.3.4, a different statement; directed-union-local-colimits, directed-cover-colimit-assembly and directed-cone-cover all use the item rather than state it; cone-mono-right-anodyne covers only joins with Δ^0. The delivery has no new nodes. One fault (C1 plus loose wording): step 3 used the Eilenberg–Zilber unique-degeneracy decomposition without citing a node, said the faces of σ were new, and did not say that a mixed simplex must lie outside the boundary. Fixed: step 3 is rewritten and now cites the Mathlib leaf lem-weil-pbc-simplicial-set-nondegenerate-decomposition, which is also added to proof_deps. The statement is unchanged. No SGA source is used. HTT is not archived; the WANTED entry stands.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DirectedDecompositionRightAnodyne",
+  "declaration": "SSet.Enhanced.rightAnodyneExtensions_directedDecompositionNerveInclusion",
+  "declarations": [
+   "SSet.Enhanced.decompositionUpperInclusion",
+   "SSet.Enhanced.directedDecompositionSubcomplex",
+   "SSet.Enhanced.directedDecomposition",
+   "SSet.Enhanced.directedDecompositionBaseInclusion",
+   "SSet.Enhanced.directedDecompositionNerveInclusion",
+   "SSet.Enhanced.rightAnodyneExtensions_directedDecompositionNerveInclusion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DirectedDecompositionRightAnodyne.lean",
+  "statement": "theorem rightAnodyneExtensions_directedDecompositionNerveInclusion (K : SSet.{u}) (I : Type u) [PartialOrder I] [Nonempty I] (hI : ∀ s : Finset I, ∃ b : I, ∀ a ∈ s, a ≤ b) (B : I → K.Subcomplex) (hB : Monotone B) (hcover : iSup B = ⊤) : rightAnodyneExtensions (directedDecompositionNerveInclusion K B)",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Constructs the decomposition as the union of the pure-factor ranges and the images K_a ⋆ N(I≥a) inside the existing ordered join K ⋆ N(I). For a monotone family its mixed simplices are precisely those specified in the node. The added landed statement dependency owns the existing ordered join inclusions; no notion is redefined."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-95f364d3c",
+  "group": "NW",
+  "result": "pass",
+  "note": "Checked node vs HTT Prop 4.2.3.8/Rem 4.2.3.9 clause by clause. K:SSet.{u}; I:Type u with PartialOrder, Nonempty and the finite-upper-bound hI; B monotone into K.Subcomplex with iSup B = ⊤; conclusion rightAnodyneExtensions of the nerve inclusion; nothing stronger, no quasicategory or cone hypothesis. K_F is the subcomplex of the landed orderedJoinFunctor K⋆N(I): both pure ranges plus ranges of (B a).ι ⋆ nerve(I≥a↪I). By monotonicity a mixed simplex is in it iff σ∈B b₀, which is the node's rule; operators are inherited; join orientation confirmed via joinSlice. Edge cases checked: K empty, singleton I, empty B a, duplicate subsets, dim 0, degeneracies. Docstrings carry source and blueprint; theorem docstring has the 4 proof steps; only the main theorem uses sorry (#print axioms: helpers sorry-free). lean.statement verbatim. stmt_dep slice-right-fibration is landed and owns orderedJoinInl/Inr; orderedJoinFunctor reachable transitively; no cycle; proof-only imports are proof_deps. No duplicate in Mathlib, upstream or lean/Sheaf (general K_F node has no Lean yet). nt_compile.py --json: clean, no errors or warnings; extra #check module confirms signature. Cosmetic only: four HTT numbers in the report replaced by 'the project server' text."
  }
 }
