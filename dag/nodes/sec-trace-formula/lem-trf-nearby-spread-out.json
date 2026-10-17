@@ -14,9 +14,168 @@
   "def-weil-pbc-etale-constructible-sheaf",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write S=Spec(A). Since m is a unit in A, regard A as a filtered colimit of finitely generated integral Z[1/m]-subalgebras. The affine inverse-system presentation of S by finite-type integer stages and the finite-type ring factorization lemma let us choose an integral affine S_0=Spec(A_0), finite type over Z[1/m], and a dominant map a:S→S_0. The inclusion A_0→A is injective because A is a domain, hence a is dominant.",
+   "uses": [
+    "lemma-nagata-noetherian-inverse-system-affine",
+    "lem-weil-pbc-finite-type-ring-map-factors-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "§2.1, p. 3: dominant arithmetic model and finite-presentation descent."
+   }
+  },
+  {
+   "text": "Because S is Noetherian and f is finite type, X is Noetherian. Hence X is quasi-separated. Since S is affine, this makes f quasi-separated: intersections of affine opens in X are quasi-compact. The finite-type hypothesis already gives quasi-compactness of f. Over locally Noetherian S, the locally finite-type f is locally finitely presented. Thus f is of finite presentation, using the locally-finitely-presented, quasi-compact and quasi-separated criterion. Each arithmetic S_j is finite type over Z, hence Noetherian and qcqs by the same Noetherianity and quasi-separatedness lemmas. Apply clause (1) of thm-pd-spreading-out to the arithmetic inverse system of step 1. It gives a stage i and a finitely presented f_i:X_i→S_i with X≅X_i×_{S_i}S. In particular f_i is finite type. This uses a general existence theorem, with no unprovided Nagata gluing data.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "pqf-lem-lft-fp-locnoeth",
+    "def-weil-finite-type-morphism",
+    "def-sbc-locally-finite-presentation",
+    "thm-pd-spreading-out"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM, lemma-descend-finite-presentation (1); Properties 01OY and Morphisms 01TP for finite presentation over the Noetherian base."
+   }
+  },
+  {
+   "text": "For j≥i put X_j=X_i×_{S_i}S_j. Affine charts base change by tensor product, preserving the finite generators; so X_j is finite type over S_j and Noetherian by the finite-type-over-Noetherian lemma (each S_j is finite type over Z). Each X_j is qcqs, by Noetherianity and the quasi-separatedness lemma. The transition maps are affine, because on an affine chart they are base changes of maps between affine S_j. The universal property of fibre products identifies X with lim X_j. Choose a≤b with H^q(K)=0 outside [a,b]. Descend the finitely many constructible sheaves H^q(K) using constructible-module-limit-descent and pass to a common stage, writing their models as M_q. Pullback along a transition g:X_{j'}→X_j preserves their constructibility as Λ-modules: take a stratification (ι_k:Z_k→X_j) witnessing constructibility of M_q, with Λ-linear trivializations ι_k^{-1}M_q|_{U}≅\\underline{M} on an etale cover; the strata g^{-1}(T_k) are locally closed, and constructible since X_{j'} is Noetherian (a locally closed subset of a Noetherian space is constructible; constructible-etale-set-pullback gives the same for the underlying finite abelian sheaves in general); the restriction of g^{-1}M_q to Z_k×_{X_j}X_{j'} is the inverse image of ι_k^{-1}M_q, and the inverse image of the constant Λ-module sheaf \\underline{M} on U is the constant Λ-module sheaf \\underline{M} on U×_{X_j}X_{j'}, so the pulled-back trivializations are Λ-linear on the pulled-back etale cover. Thus all the hypotheses for the bounded derived-Hom continuity node apply to this system.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-constructible-module-limit-descent",
+    "lem-weil-pbc-constructible-etale-set-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09YU (3), lemma-category-is-colimit: essential surjectivity for constructible module sheaves; finite common-stage selection."
+   }
+  },
+  {
+   "text": "Use exactness of site inverse image: the same holds on constant-Λ modules, since kernels and cokernels have the underlying abelian kernels and cokernels with induced Λ-actions. Therefore inverse image acts termwise on the derived category, is triangulated by the exact-functor lemma, and commutes with H^q and smart truncations (kernels and images commute with this exact functor). Write T_q=τ_{≤q}K; the successive truncation-triangle lemma gives exactly T_{q-1}→T_q→H^q(K)[-q]→T_{q-1}[1]. Start with L_{a-1}=0 modeling T_{a-1}=0. For q=a,...,b suppose a bounded constructible L_{q-1} and an inverse-image isomorphism L_{q-1}|_X≅T_{q-1} have been constructed. Under this isomorphism and M_q|_X≅H^q(K), the connecting arrow is a morphism δ_q:M_q|_X[-q]→L_{q-1}|_X[1]. Apply bounded derived-Hom continuity with P=M_q[-q], Q=L_{q-1}, n=1. Its colimit surjectivity represents δ_q by δ_{q,j}:M_{q,j}[-q]→L_{q-1,j}[1] at a later stage j.",
+   "uses": [
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-truncation-triangle",
+    "lem-trf-bounded-constructible-derived-hom-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015F and 08J5; agent finite Postnikov induction for the complex-descent assertion of Orgogozo §2.1."
+   }
+  },
+  {
+   "text": "Take a cone of δ_{q,j} and rotate/shift its distinguished triangle to obtain L_{q-1,j}→L_{q,j}→M_{q,j}[-q]→L_{q-1,j}[1], with L_{q,j}=Cone(δ_{q,j})[-1] and the appropriate rotation signs. The cohomology long exact sequence gives H^q(L_{q,j})≅M_{q,j}, H^t(L_{q,j})≅H^t(L_{q-1,j}) for t<q, and zero outside [a,q]; hence L_{q,j} is bounded constructible. On X the transported connecting arrow equals the one for T_q, by choice of δ_{q,j}. TR3 applied after rotation gives a morphism from the pulled-back triangle to the truncation triangle, with the prescribed isomorphisms on T_{q-1} and H^q(K)[-q]. The two-isomorphisms lemma makes its middle component an isomorphism L_{q,j}|_X≅T_q. This closes the induction. After its finitely many stage enlargements take K_0=L_b and S_0,X_0 at the final stage. Since T_b≅K, K_0|_X≅K. This constructs cones of derived morphisms, without assuming constructible terms or a bounded projective representative of K.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-sf-derived-homology-long-exact",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "TR1–TR3 in Tag 0145; cohomology exactness in Tag 05RS and the homological-functor definition 0147; Tag 014A for two isomorphisms. Agent finite Postnikov construction."
+   }
+  },
+  {
+   "text": "The final A_0=Γ(S_0,O) is finite type over Z: adjoin 1/m and the finitely many Z[1/m]-algebra generators. The integer ring is excellent by lem-trf-integers-excellent, and its finite-type algebra A_0 is excellent by lem-exc-finite-type-localization-excellent with multiplicative subset {1}. Excellence includes Noetherianity by def-exc-excellent-ring. Every principal affine open Spec(A_0[1/t]) also has excellent coordinate ring by the same localization lemma; these opens form an affine basis, so S_0 is excellent. Noetherianity of S_0 also follows directly from the finite-type-over-Z scheme lemma.",
+   "uses": [
+    "lem-trf-integers-excellent",
+    "lem-exc-finite-type-localization-excellent",
+    "def-exc-excellent-ring",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07QW (3) and 07QU; excellence and its finite-type/localization stability."
+   }
+  },
+  {
+   "text": "For dimension, every ideal J of Z is principal: J=0 or choose its least positive element d; Euclidean division by d leaves a remainder in J smaller than d, hence remainder zero. The principal-ideal-ring dimension bound gives dim Z≤1. Excellence already gives Noetherianity of Z. Choose a surjection Z[t_1,...,t_N]→A_0 from its finite set of ring generators. By the Noetherian polynomial-dimension theorem the source has dimension dim Z+N≤N+1. The inverse images of a strict prime chain in A_0 form a strict prime chain in the polynomial ring: inverse images are prime, and surjectivity reflects equality of inverse-image ideals. Thus dim A_0≤N+1, and the ring dimension definition identifies this with dim S_0. This bound does not require Z→A_0 to be injective and applies unchanged to positive characteristic.",
+   "uses": [
+    "lem-trf-principal-ideal-ring-dimension-bound",
+    "lem-trf-integers-excellent",
+    "def-exc-excellent-ring",
+    "lem-sf-noetherian-polynomial-dimension",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/RingTheory/KrullDimension/Polynomial.lean",
+    "place": "MvPolynomial.ringKrullDim_of_isNoetherianRing:120–121; PID.lean:20–21 for the base bound, and elementary prime-chain pullback under the polynomial presentation."
+   }
+  },
+  {
+   "text": "Let q_0:S'_{0}→S_0 be a modification in the current definition of def-trf-orgogozo-induction-data, with dense isomorphism open U_0⊂S_0. Put U=a^{-1}(U_0) and Y=S×_{S_0}S'_{0}. The generic point of integral S maps to the generic point of integral S_0 by dominance, and the latter lies in U_0. Thus U contains the generic point of S and is dense in S. Over U the proper base change Y→S is an isomorphism. Let S' be the reduced closure of this open copy of U in Y. It is closed in Y and hence proper over S by the two properness lemmas. Restriction of the reduced closure to U is U itself, since U is reduced as an open of integral S. Therefore q:S'→S is an isomorphism over the dense open U of its target. Its inverse image of U is dense in S' by the closure construction. The resulting q is finite type, since it is proper; its source S' is Noetherian by the finite-type-over-Noetherian lemma. These are both density requirements in the current modification definition, so q is a modification. The second projection restricted to S' gives S'→S'_0.",
+   "uses": [
+    "def-trf-orgogozo-induction-data",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "§2.1, p. 3: strict transform/reduced closure of the dense isomorphism open."
+   }
+  },
+  {
+   "text": "Fix r and assume P_r((f_0)_{S'_0},(K_0)_{S'_0}). For any T→S' and T'→T, use the composite T→S'→S'_0 as the preliminary base change in this P_r hypothesis, and use the same T'→T as its further base change. The fibre-product universal property identifies X_{S'}×_{S'}T with X_0×_{S_0}T and similarly over T'; the coefficients identify by the already constructed inverse-image isomorphism for K. Thus the ordinary comparison for (f_{S'},K_{S'}) over T'→T is exactly the comparison covered by this instance of the hypothesis. Its cone has H^i=0 for i≤r. Since T and T' were arbitrary, this is P_r(f_{S'},K_{S'}). No identification of nearby cycles with an arbitrary pullback from S'_0 is used: both comparisons are for the same T-family and T'→T.",
+   "uses": [
+    "def-trf-orgogozo-induction-data",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/orgogozo-modifications-cycles-proches.pdf",
+    "place": "§2.1, p. 3: strict-transform base-change of the truncated comparison property."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "def-pc-fibre-product",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-orgogozo-induction-data",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-triangulated-category",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-noetherian-polynomial-dimension",
+  "lem-sf-triangle-morphism-iso",
+  "lem-trf-bounded-constructible-derived-hom-continuity",
+  "lem-trf-integers-excellent",
+  "lem-trf-principal-ideal-ring-dimension-bound",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-constructible-etale-set-pullback",
+  "lem-weil-pbc-constructible-module-limit-descent",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-finite-type-ring-map-factors-filtered-colimit",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-truncation-triangle",
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "pqf-lem-lft-fp-locnoeth",
+  "thm-pd-spreading-out"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Agent expansion of Orgogozo §2.1, printed p. 3 (author PDF read online, local archival PDF WANTED): 01ZM scheme descent, explicit finite Postnikov/cone descent using bounded derived-Hom continuity, arithmetic excellence and polynomial dimension bound, then strict transform and P_r transfer."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,7 +214,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-orgogozo-good-modification",
@@ -67,7 +226,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof of (1) and (2), normal-cone specialization: the Orgogozo modification input to the trait nearby-cycle comparison; supporting argument §2.1, p. 3 (finite-presentation and constructible-complex descent, dominant arithmetic model, strict transform); Lu--Zheng proof of Theorem 4.27 for general coefficients.",
+   "place": "Proof of (1) and (2), normal-cone specialization: the Orgogozo modification input to the trait nearby-cycle comparison; supporting arithmetic spreading-out argument §2.1, p. 3, including scheme/complex descent, arithmetic finiteness and strict transform.",
    "via": [
     "lem-trf-orgogozo-good-modification",
     "lem-trf-trait-nearby-base-change",
@@ -77,5 +236,109 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-nearby-spread-out",
+  "worker": "stage1",
+  "summary": "Repair of all findings at returned head 3ff8c8f6152c: use existing 01ZM spreading-out after proving finite presentation of f over S; add a strictly smaller bounded-derived-Hom continuity interface and give the finite Postnikov/cone induction; supply the missing excellence seed Z; replace the noninjective dimension-formula application with a polynomial presentation and a Mathlib principal-ideal-ring dimension bound. The item statement and coefficient category are unchanged.",
+  "blueprint": "Auxiliary arithmetic-spreading-out paragraph (§2.1, p. 3) of the Orgogozo modification input in the normal-cone specialization branch of lem-trf-local-term-locality.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Preserves excellence from the separately supplied integer-ring seed."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Checks boundedness and constructibility of the newly constructed cone."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Gives the precise successive Postnikov triangle with cohomology sheaf shifted by -q."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Allows exact inverse image to act termwise on derived triangles."
+   },
+   {
+    "node": "lem-sf-noetherian-polynomial-dimension",
+    "why": "Bounds the dimension of a polynomial presentation of A_0 uniformly in characteristic."
+   },
+   {
+    "node": "lem-sf-triangle-morphism-iso",
+    "why": "Identifies the finite-stage cone after pullback with the original truncation."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Gives properness of its reduced closed strict transform."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-etale-set-pullback",
+    "why": "Ensures the pulled-back finite underlying sheaves remain constructible at all stages."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-module-limit-descent",
+    "why": "Descends the finitely many cohomology sheaves, not their derived attachments."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Establishes Noetherianity of X, arithmetic stages, their finite-type models, and the strict-transform source."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-ring-map-factors-filtered-colimit",
+    "why": "Allows the finitely generated ring Z[1/m] to occur at a common arithmetic stage."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Supplies quasi-separatedness for the finite-presentation and etale-limit hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Gives properness of the pullback modification."
+   },
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "Gives exact inverse image; constant-module exactness is inherited from underlying abelian sheaves."
+   },
+   {
+    "node": "lemma-nagata-noetherian-inverse-system-affine",
+    "why": "Presents an affine base as an inverse limit of arithmetic subrings; a generic approximation tool for this auxiliary branch."
+   },
+   {
+    "node": "pqf-lem-lft-fp-locnoeth",
+    "why": "Turns locally finite type over the actual Noetherian S into locally finite presentation."
+   },
+   {
+    "node": "thm-pd-spreading-out",
+    "why": "General existence of a finite-presentation scheme model along arithmetic inverse limits; the unit has no such scheme theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-finite-type-localization-excellent",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-noetherian-polynomial-dimension",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-constructible-etale-set-pullback",
+  "lem-weil-pbc-constructible-module-limit-descent",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-finite-type-ring-map-factors-filtered-colimit",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "pqf-lem-lft-fp-locnoeth",
+  "thm-pd-spreading-out"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-eaf125000",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-eaf125000 (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes and all 31 cited statements (27 proof_deps, 4 stmt_deps) in full. Item statement and coefficient category unchanged: ordinary small-étale Λ-module D^b with constructible cohomology. Steps 1-9 check out. Step 1: Nagata subring system (cofinal with 1/m), dominance via injective subrings. Step 2: X Noetherian and quasi-separated, f quasi-separated over affine S, locally of finite presentation (pqf-lem-lft-fp-locnoeth), so of finite presentation; then 01ZM clause 1. Steps 3-5: constructible-module descent, then Postnikov induction through the new Hom node with n=1, TR1-TR3 after rotation and the two-of-three lemma; amplitude [a,q] verified from the long exact sequence. Step 6: Z excellent, so A_0 excellent (07QW(3), read at more-algebra.tex 13385-13412). Step 7: surjection Z[t_1..t_N]->A_0 gives dim A_0<=N+1, valid in characteristic p (tested F_3, m=2). Step 8: strict transform meets every clause of the modification definition. Step 9: P_r transfer via T->S'->S'_0. New nodes: lem-trf-integers-excellent is true and no duplicate. lem-trf-principal-ideal-ring-dimension-bound is an exact Mathlib match, IsPrincipalIdealRing.krullDimLE_one (PID.lean:20, read). lem-trf-bounded-constructible-derived-hom-continuity is true: it extends the sheaf node lem-trf-constructible-etale-ext-continuity to bounded complexes under the same hypotheses; same argument as duality-operation-squares step 11; no duplicate and no restatement of the item. Off-unit generic tool uses accepted; no SGA; no cycle. Fix applied: step 3 text only. The cited set-pullback lemma gives constructibility of the underlying sheaf of sets only, not Λ-linear trivializations (C4, minor). Step 3 now pulls back the Λ-module stratification explicitly, using that locally closed preimages are constructible on Noetherian X_j' and that constant Λ-sheaves pull back to constant Λ-sheaves. File: fixes/dag/nodes/sec-trace-formula/lem-trf-nearby-spread-out.json. Orgogozo §2.1 is still WANTED locally; proof_origin agent is correct.; 1 file(s) fixed by the reviewer"
  }
 }
