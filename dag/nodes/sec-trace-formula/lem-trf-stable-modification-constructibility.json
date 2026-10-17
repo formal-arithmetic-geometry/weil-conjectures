@@ -18,9 +18,129 @@
   "def-sbc-smooth-morphisms",
   "def-weil-constructible-subset"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $p:Y\\to S$, $q:E\\to S$ and $i:E\\hookrightarrow Y$ for the structure and marking maps. The schemes $Y$ and $E$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since both structure maps are finitely presented and hence of finite type. The closed-subset minimality theorem [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] gives the Noetherian topological property for $Y,E$ and $S$. Apply [lem-trf-nodal-open-locus] to $p$. It gives an open $U\\subseteq Y$ with closed complement $B_Y$. For every $s\\in S$, $Y_s\\cap B_Y$ is empty exactly when the chosen geometric fibre $Y_\\Omega$ has only ordinary nodes as singularities. The fibre criterion in that lemma applies to the given flat finitely presented pure-dimensional curve; it includes smooth fibres.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-trf-nodal-open-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 5.1(ii), printed p. 34; agent expansion of the openness, Chevalley and weighted component-data argument. Primary PDF read online, local archival copy WANTED."
+   }
+  },
+  {
+   "text": "Let $V\\subseteq E$ be the union of all open neighbourhoods on which $q$ is etale, and let $W\\subseteq Y$ be the union of all open neighbourhoods on which $p$ is smooth. These are open by their definitions as unions. Put $B_E=(E\\setminus V)\\cup i^{-1}(Y\\setminus W)$, a closed subset of $E$. The equivalence in [lem-sbc-flat-fibre-etale-neighbourhoods], applied to the flat locally finitely presented map $q$, says that $E_s$ is etale precisely when its fibre avoids $E\\setminus V$. The pointwise equivalence in [lem-trf-smooth-at-point-fibre-criterion], applied to the flat locally finitely presented map $p$, says that $i(E_s)$ lies in the smooth locus of $Y_s$ precisely when $E_s$ avoids $i^{-1}(Y\\setminus W)$. Consequently the two marking conditions hold together exactly when $E_s\\cap B_E=\\varnothing$.",
+   "uses": [
+    "lem-sbc-flat-fibre-etale-neighbourhoods",
+    "lem-trf-smooth-at-point-fibre-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 5.1(ii), printed p. 34; agent expansion of the openness, Chevalley and weighted component-data argument. Primary PDF read online, local archival copy WANTED."
+   }
+  },
+  {
+   "text": "The closed subsets $B_Y\\subseteq Y$ and $B_E\\subseteq E$ are constructible by [def-weil-constructible-subset], since $Y,E$ are Noetherian. Both $p$ and $q$ are quasi-compact and locally of finite presentation, and the Noetherian base $S$ is quasi-compact; it is quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Apply [lem-weil-pbc-chevalley-constructible-image] separately to these two maps and closed subsets. Their images are constructible. By steps 1--2 the semistable set is exactly $C=S\\setminus(p(B_Y)\\cup q(B_E))$. It is constructible by the Boolean-algebra assertion in [def-weil-constructible-subset]. This takes an image of bad points, without assuming either structural curve map proper.",
+   "uses": [
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-chevalley-constructible-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 5.1(ii), printed p. 34; agent expansion of the openness, Chevalley and weighted component-data argument. Primary PDF read online, local archival copy WANTED."
+   }
+  },
+  {
+   "text": "Write $C$ as a finite union of locally closed subsets using [def-weil-constructible-subset]. On each such subset take the reduced induced closed subscheme of a containing open of $S$, using [lem-weil-pbc-reduced-induced-closed-subscheme]; call it $T$. These schemes are Noetherian: an immersion is locally of finite type by [lem-weil-pbc-immersion-base-change-lft], every inverse image of an affine open of $S$ is quasi-compact by [lem-sfb-noetherian-space-compact-subsets] because the immersion identifies it with a subset of $S$, and hence the immersion is of finite type over $S$, so [lem-weil-pbc-finite-type-over-noetherian] applies. Pull back both multipointed pairs to $T$, and later to every reduced closed subscheme of $T$. They remain multipointed by the first clause of [lem-trf-semistable-marked-base-change], and their two maps remain proper by [lem-weil-pbc-proper-base-change]. The geometric fibres, including their markings and maps, are the original fibres: open restrictions and radical quotients do not change residue fields. Every fibre of the source pair over these bases is thus semistable. We do not assert that the pulled-back maps remain modifications.",
+   "uses": [
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-sfb-noetherian-space-compact-subsets",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-trf-semistable-marked-base-change",
+    "lem-weil-pbc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 5.1(ii), printed p. 34; agent expansion of the openness, Chevalley and weighted component-data argument. Primary PDF read online, local archival copy WANTED."
+   }
+  },
+  {
+   "text": "For each $T$ of step 4, prove by Noetherian induction the following claim: every closed subset $Z\\subseteq T$ admits a finite partition into locally closed subsets on each of which the contracted-component multiset $(p_R,a_R,b_R)$ is constant. Induction is valid by [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]; the empty set has the empty partition. Give $Z$ and its irreducible components their reduced induced structures using [lem-weil-pbc-reduced-induced-closed-subscheme]. There are finitely many components by [lem-sc-noetherian-closed-subset-finite-components]. On each component apply [lem-trf-contracted-component-generic-data]; all hypotheses hold by step 4, and a reduced irreducible component is integral by [def-pc-integral-scheme]. Shrink its nonempty open further by deleting its intersections with the other components. The resulting opens are disjoint, and their union $O$ is open dense in $Z$: its complement is the finite union of the componentwise closed complements. On each open the multiset is constant. The closed subset $Z\\setminus O$ is strictly smaller when $Z\\ne\\varnothing$, so the induction hypothesis partitions it. Adding the finitely many chosen opens proves the claim. Taking $Z=T$ gives a finite partition of $T$ into loci with constant multiset.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "def-pc-integral-scheme",
+    "lem-trf-contracted-component-generic-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 5.1(ii), printed p. 34; agent expansion of the openness, Chevalley and weighted component-data argument. Primary PDF read online, local archival copy WANTED."
+   }
+  },
+  {
+   "text": "Fix one of the geometric fibres and a contracted reduced irreducible component $R$. It is proper by [lem-trf-contracted-component-generic-data]. The component-geometry assertion of [lem-trf-nodal-normalization-adjunction] says that the only singularities of $R$ are its self-nodes. Thus $a_R=0$ is equivalent to $R$ being smooth; intersections with other components cause no singularity on $R$ itself. If also $p_R=0$, the smooth proper connected curve $R$ has genus zero and [lem-trf-genus-zero-smooth-proper-line] gives $R\\cong\\mathbf P^1_\\Omega$. Conversely, if $R\\cong\\mathbf P^1_\\Omega$, then [lem-asd-projective-line-genus-zero] gives smoothness and $H^1(R,\\mathcal O_R)=0$, so $a_R=p_R=0$. By the definition of $b_R$, this component is exceptional in the precise sense of the item if and only if its triple has $p_R=0$, $a_R=0$ and $b_R\\leq2$. In particular, a self-node is counted once in $b_R$, rather than twice as branches, and is separately detected by $a_R$.",
+   "uses": [
+    "lem-trf-contracted-component-generic-data",
+    "lem-trf-nodal-normalization-adjunction",
+    "lem-trf-genus-zero-smooth-proper-line",
+    "lem-asd-projective-line-genus-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 5.1(ii), printed p. 34; agent expansion of the openness, Chevalley and weighted component-data argument. Primary PDF read online, local archival copy WANTED."
+   }
+  },
+  {
+   "text": "On each piece of the finite partitions from step 5, the existence of a triple $(0,0,b)$ with $b\\leq2$ is constant. Step 6 identifies this with the existence of an exceptional component. The stable subset of each $T$ is therefore the union of just those pieces on which no such triple occurs. Each piece is locally closed in $T$, hence in $S$, and there are finitely many pieces over the finitely many initial $T$. By [def-weil-constructible-subset], their selected union is constructible in the Noetherian scheme $S$. It equals the stable set because all these $T$ lie in the semistable set $C$ and cover $C$. Together with step 3 this proves both assertions. No stability under generization is used.",
+   "uses": [
+    "def-weil-constructible-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 5.1(ii), printed p. 34; agent expansion of the openness, Chevalley and weighted component-data argument. Primary PDF read online, local archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-trf-nodal-open-locus",
+  "lem-sbc-flat-fibre-etale-neighbourhoods",
+  "lem-trf-smooth-at-point-fibre-criterion",
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-chevalley-constructible-image",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-trf-semistable-marked-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "def-pc-integral-scheme",
+  "lem-trf-contracted-component-generic-data",
+  "lem-trf-nodal-normalization-adjunction",
+  "lem-trf-genus-zero-smooth-proper-line",
+  "lem-asd-projective-line-genus-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Lemma 5.1(ii), printed p. 34, expanded from the primary PDF read online and local Stacks 0DSC; archival Temkin PDF WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +176,38 @@
    "results": "{\"t\": \"2026-10-17T19:50:43Z\", \"tool\": \"leanfinder\", \"query\": \"The set of semistable and geometrically stable fibres of a proper modification of a multipointed curve is constructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_preimage\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"PrimeSpectrum.ConstructibleSetData.isConstructible_toSet\", \"Topology.IsConstructible.preimage\", \"Topology.IsConstructible.image_of_isOpenEmbedding\", \"Topology.IsConstructible.preimage_of_isClosedEmbedding\"], \"digest\": \"3cc80366e1afb283\"}",
    "date": "2026-10-17",
    "verdict": "no match: the returned signatures concern general constructibility, morphism permanence, or valuation rings; they do not state this marked-curve assertion or the valuation-centre inverse-limit identification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructibility of semistable and geometrically stable fibres for a proper modification of multipointed curves",
+   "results": "{\"t\": \"2026-10-17T20:42:42Z\", \"tool\": \"leanfinder\", \"query\": \"Constructibility of semistable and geometrically stable fibres for a proper modification of multipointed curves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.instIsPreimmersionFiberι\", \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\"], \"digest\": \"e7e0080c35aec765\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned proper-morphism permanence and general constructibility signatures do not state the semistable or stable geometric fibre conditions."
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.Hom.isConstructible_image, IsSmooth, IsEtale, exceptional component",
+   "results": "{\"t\": \"2026-10-17T20:42:42Z\", \"tool\": \"loogle\", \"query\": \"Scheme.Hom.isConstructible_image, IsSmooth, IsEtale, exceptional component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Scheme.Hom.isConstructible_image'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned proper-morphism permanence and general constructibility signatures do not state the semistable or stable geometric fibre conditions."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(semistable|stable|nodal|exceptional)|exceptional.*component",
+   "results": "{\"t\": \"2026-10-17T20:42:43Z\", \"tool\": \"grep\", \"query\": \"constructible.*(semistable|stable|nodal|exceptional)|exceptional.*component\", \"sub\": \"Mathlib/AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned proper-morphism permanence and general constructibility signatures do not state the semistable or stable geometric fibre conditions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The semistable and stable fibre loci of a proper modification of a marked relative curve are constructible",
+   "results": "{\"t\": \"2026-10-17T20:42:43Z\", \"tool\": \"leansearch\", \"query\": \"The semistable and stable fibre loci of a proper modification of a marked relative curve are constructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Topology.IsLocallyConstructible\", \"Topology.IsConstructible.isLocallyConstructible\", \"PrimeSpectrum.isClosed_of_stableUnderSpecialization_of_isConstructible\", \"PrimeSpectrum.isOpen_of_stableUnderGeneralization_of_isConstructible\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.of_forall_source_exists_preimage\"], \"digest\": \"6c05bbfcae482666\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned proper-morphism permanence and general constructibility signatures do not state the semistable or stable geometric fibre conditions."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-stable-modification-stability-locus",
@@ -78,5 +226,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-stable-modification-constructibility",
+  "worker": "stage1",
+  "summary": "Kept the item statement, replaced a compressed draft by seven steps: nodal-source open, precise marking tests, Chevalley, base change to reduced loci, Noetherian induction on generic contracted-component data, rational-component recognition, and finite union. Added only two statement-only geometric inputs after complete logged searches. The numerical lemma keeps arithmetic genera, loops, external incidences and marking points, with DISTINCT special points. Properness is used for contracted components, never assumed for the entire source curve.",
+  "blueprint": "Historical stable-modification approximation input to lem-trf-local-term-locality through lem-trf-stable-modification-stability-locus, Temkin Lemma 5.1(ii); these auxiliary geometric steps do not replace the contracting-correspondence route of unit sk-i-curve-zero.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Noetherianity of the total spaces and reduced locally closed bases. This is a generic tool; no unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Well-foundedness of the explicitly stated closed-subset induction. This is a generic tool; no unit proof step is replaced."
+   },
+   {
+    "node": "lem-sbc-flat-fibre-etale-neighbourhoods",
+    "why": "Pointwise fibre criterion for the etale marking condition. This is a generic tool; no unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Quasi-separatedness of the Noetherian base needed by Chevalley. This is a generic tool; no unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-chevalley-constructible-image",
+    "why": "General constructible-image theorem for both closed bad loci. This is a generic tool; no unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Reduced scheme structures on the locally closed loci and irreducible components. This is a generic tool; no unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-immersion-base-change-lft",
+    "why": "Local finite type of stratum immersions, to verify Noetherianity. This is a generic tool; no unit proof step is replaced."
+   },
+   {
+    "node": "lem-sfb-noetherian-space-compact-subsets",
+    "why": "Quasi-compactness of strata and inverse images of affine opens in the Noetherian base. This is a generic tool; no unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Properness of the restricted pair maps, without claiming they remain modifications. This is a generic tool; no unit proof step is replaced."
+   },
+   {
+    "node": "lem-sc-noetherian-closed-subset-finite-components",
+    "why": "Finiteness of irreducible components at each induction stage. This is a generic tool; no unit proof step is replaced."
+   },
+   {
+    "node": "lem-asd-projective-line-genus-zero",
+    "why": "The converse direction: projective-line components are smooth and have zero structure-sheaf H1. This is a generic tool; no unit proof step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sbc-flat-fibre-etale-neighbourhoods",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-chevalley-constructible-image",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-weil-pbc-proper-base-change",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-asd-projective-line-genus-zero"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q37-8ca96722a",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q37-8ca96722a (reviewer sub-agent of L); spot-checked: Read the item, all seven steps, both new nodes, cited statements, Temkin Lemma 5.1(ii), Stacks Tag 0DSC, unit/chapter route, and delivery report. Checked hypotheses, base changes, properness, component data, distinct special-point counting, edge cases, duplicates, searches, and route constraints. No forbidden SGA or dropped machinery; no step exceeds 2000 characters. Review written to review.md."
  }
 }

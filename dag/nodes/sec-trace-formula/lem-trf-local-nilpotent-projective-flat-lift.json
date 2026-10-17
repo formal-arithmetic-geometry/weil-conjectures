@@ -11,9 +11,78 @@
   "def-weil-pbc-flat-ring-map",
   "def-weil-pbc-projective-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose $N\\geq1$ with $I^N=0$. Apply [lem-weil-pbc-nilpotent-projective-module-lift] to the projective $A/I$-module $M/IM$, obtaining a projective $A$-module $P$ and an $A/I$-linear isomorphism $\\alpha:P/IP\\xrightarrow{\\sim}M/IM$. The lifting-along-surjections characterization in [def-weil-pbc-projective-module], applied to $M\\twoheadrightarrow M/IM$ and the composite $P\\to P/IP\\xrightarrow{\\alpha}M/IM$, gives an $A$-linear map $f:P\\to M$ whose reduction is $\\alpha$. By [lem-weil-pbc-projective-module-flat], $P$ is flat; $M$ is flat by hypothesis. No finite generation is required for the lifting lemma or for the projective lifting property.",
+   "uses": [
+    "lem-weil-pbc-nilpotent-projective-module-lift",
+    "def-weil-pbc-projective-module",
+    "lem-weil-pbc-projective-module-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CG, lemma-lift-projective, first three sentences; Tag 07LV, lemma-lift-projective-module; Tag 05CE, definition-projective"
+   }
+  },
+  {
+   "text": "For $X=P$ or $M$ and $0\\leq a<N$, put $Q_a=I^a/I^{a+1}$. Tensor the inclusion $I^a\\hookrightarrow A$ with $X$: [lem-weil-pbc-flat-tensor-exact] makes $I^a\\otimes_A X\\to A\\otimes_A X=X$ injective, and its image under multiplication is precisely $I^aX$, by the definition of ideal multiplication on a module. Thus multiplication identifies $I^a\\otimes_A X$ with $I^aX$, also for $a+1$. Apply [lem-weil-pbc-tensor-right-exact] to $I^{a+1}\\to I^a\\to Q_a\\to0$. Taking the cokernel under these multiplication identifications gives an isomorphism $Q_a\\otimes_A X\\xrightarrow{\\sim}I^aX/I^{a+1}X$, sending $(r\\bmod I^{a+1})\\otimes x$ to $rx\\bmod I^{a+1}X$. This is just the cited exact sequence with its first two terms identified; no additional flatness of $Q_a$ is asserted.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CG, lemma-lift-projective, identification of the graded pieces; Tag 00HD, lemma-flat; Tag 00DF, lemma-tensor-product-exact"
+   }
+  },
+  {
+   "text": "The module $Q_a$ is annihilated by $I$ since $I I^a\\subseteq I^{a+1}$, so it is an $A/I$-module. Clause (2) of [lem-weil-pbc-tensor-over-quotient-ring] identifies $Q_a\\otimes_A X$ with $Q_a\\otimes_{A/I}(X/IX)$. Combined with step 2 this sends $\\bar r\\otimes\\bar x$ to $rx\\bmod I^{a+1}X$. Under these explicit maps, the graded map induced by $f$ sends $rx$ to $rf(x)$, hence corresponds exactly to $1_{Q_a}\\otimes\\alpha$. It is invertible with inverse $1_{Q_a}\\otimes\\alpha^{-1}$: both composites are the identity on pure tensors, which generate the tensor product. Therefore every map $I^aP/I^{a+1}P\\to I^aM/I^{a+1}M$ is bijective.",
+   "uses": [
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CG, lemma-lift-projective, last displayed map and final sentence; Tag 051C, lemma-what-does-it-mean, quotient-ring tensor identification"
+   }
+  },
+  {
+   "text": "Prove by descending induction on $a=N,N-1,\\ldots,0$ that $f_a:I^aP\\to I^aM$ is bijective. For $a=N$ both modules are zero because $I^N=0$. Suppose $f_{a+1}$ is bijective. If $p\\in I^aP$ and $f(p)=0$, injectivity on the $a$th graded piece implies $p\\in I^{a+1}P$, and injectivity of $f_{a+1}$ gives $p=0$. For $m\\in I^aM$, surjectivity on that graded piece supplies $p\\in I^aP$ with $m-f(p)\\in I^{a+1}M$. Surjectivity of $f_{a+1}$ supplies $p_1\\in I^{a+1}P$ with $f(p_1)=m-f(p)$, so $f(p+p_1)=m$. This proves the induction step and therefore bijectivity of $f=f_0:P\\to M$. Its inverse is $A$-linear, since uniqueness of preimages preserves addition and scalar multiplication.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CG, lemma-lift-projective, finite filtrations and the reduction to their graded pieces"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-projective-direct-summand], clause (2), an $A$-module isomorphic to a projective $A$-module is projective. Apply it to $M\\cong P$ from step 4 and the projective module $P$ from step 1. This proves the asserted projectivity of $M$.",
+   "uses": [
+    "lem-weil-pbc-projective-direct-summand"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CG, lemma-lift-projective, second sentence; Tag 05CF, lemma-characterize-projective"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-nilpotent-projective-module-lift",
+  "def-weil-pbc-projective-module",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "lem-weil-pbc-projective-direct-summand"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05CG, lemma-lift-projective; graded-piece identifications and finite-filtration induction expanded from the proof"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,10 +125,52 @@
    "results": "{\"t\": \"2026-10-17T20:40:40Z\", \"tool\": \"grep\", \"query\": \"projective.*nilpotent|nilpotent.*projective\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*nilpotent|nilpotent.*projective",
+   "results": "{\"t\": \"2026-10-17T20:58:03Z\", \"tool\": \"grep\", \"query\": \"projective.*nilpotent|nilpotent.*projective\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat module which is projective modulo a nilpotent ideal is projective",
+   "results": "{\"t\": \"2026-10-17T20:58:03Z\", \"tool\": \"leansearch\", \"query\": \"A flat module which is projective modulo a nilpotent ideal is projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_projective\", \"Module.projective_of_localization_maximal'\", \"Module.Flat.projective_of_finitePresentation\", \"Module.Projective.of_lifting_property\", \"Module.Flat.of_retract\", \"Module.Projective.iff_split'\", \"ModuleCat.projective_of_module_projective\", \"Module.Projective.iff_split\"], \"digest\": \"4f7ae1e0659fa9b9\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: projective_of_finitePresentation and local projectivity criteria require finite presentation, which is not assumed; other hits are projectivity or flatness ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, IsNilpotent",
+   "results": "{\"t\": \"2026-10-17T20:58:03Z\", \"tool\": \"loogle\", \"query\": \"Module.Projective, IsNilpotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat module whose quotient by a nilpotent ideal is projective is projective",
+   "results": "{\"t\": \"2026-10-17T20:58:07Z\", \"tool\": \"leanfinder\", \"query\": \"A flat module whose quotient by a nilpotent ideal is projective is projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.projective_of_finitePresentation\", \"Module.Flat.of_projective\", \"Algebra.FormallyUnramified.projective_of_restrictScalars\", \"Algebra.FormallySmooth.projective_kaehlerDifferential\", \"Module.projective_of_localization_maximal\", \"ModuleCat.projective_of_module_projective\", \"ModuleCat.enoughProjectives\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\"], \"digest\": \"55e7abafe05c12f5\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: projective_of_finitePresentation and local projectivity criteria require finite presentation, which is not assumed; other hits are projectivity or flatness ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "of_projective|iff_rTensor_exact|lTensor_exact",
+   "results": "{\"t\": \"2026-10-17T20:58:31Z\", \"tool\": \"grep\", \"query\": \"of_projective|iff_rTensor_exact|lTensor_exact\", \"sub\": \"RingTheory/Flat/Basic.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"46\", \"52\", \"55\", \"227\", \"323\"], \"digest\": \"b55d114b0407b240\"}",
+   "date": "2026-10-18",
+   "verdict": "ingredients only: projective implies flat and flat tensor exactness, not the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift projectivity of an infinitely generated flat module from a nilpotent quotient ring",
+   "results": "{\"t\": \"2026-10-17T20:58:33Z\", \"tool\": \"leanfinder\", \"query\": \"Lift projectivity of an infinitely generated flat module from a nilpotent quotient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.projective_of_finitePresentation\", \"Module.projective_of_localization_maximal\", \"Module.Flat.of_forall_exists_factorization\", \"Module.Flat.of_projective\", \"Module.Projective.of_lifting_property''\", \"ModuleCat.projective_of_module_projective\", \"ModuleCat.projective_of_categoryTheory_projective\", \"Module.Projective.of_lifting_property\"], \"digest\": \"b19613857c32dd53\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: projective_of_finitePresentation and local projectivity criteria require finite presentation, which is not assumed; other hits are projectivity or flatness ingredients"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-local-noetherian-fibres-projective",
@@ -89,5 +200,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-local-nilpotent-projective-flat-lift",
+  "worker": "stage1",
+  "summary": "Checked Tag 05CG against the existing statement, preserved every hypothesis, and expanded its projective lift, natural graded-piece tensor comparison, and descending finite-filtration induction. Reused all existing nodes; no new nodes or attachment. Mathlib searches find finite-presentation results and the ingredients but not the arbitrary-module theorem.",
+  "blueprint": "Realizes the Tag 05CG nilpotent-projectivity input below the Tag 05FT/05FQ projectivity argument, in the semistable-alteration branch of lem-trf-local-term-locality proof (1)--(2); retains the existing blueprint ancestor and via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-nilpotent-projective-module-lift",
+    "why": "Generic commutative-algebra tool Tag 07LV supplies a projective lift of M/IM, without finite generation; the trace-formula unit has no such module-lifting statement. This supplies the first sentence of Tag 05CG inside its existing projectivity subargument, without replacing a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-nilpotent-projective-module-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q93-790944493",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q93-790944493 (reviewer sub-agent of L); spot-checked: Read the stage documents, packet/report, item, unit/chapter route, cited DAG statements, and Stacks Tags 05CG and 07LV with supporting source passages. The five-step filtration proof is mathematically sound, all hypotheses and tensor identifications check, edge cases pass, searches and duplicate checks are adequate, and the declared projective-lifting tool use is acceptable. No new nodes or repairs are needed; review.md records the detailed checks."
  }
 }

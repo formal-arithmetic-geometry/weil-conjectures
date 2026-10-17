@@ -17,9 +17,85 @@
   "def-weil-etale-morphism",
   "def-weil-closed-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every input satisfying the hypotheses, $d=\\dim_x(X_s)$ is a finite nonnegative integer. Indeed, smoothness includes local finite presentation by [def-sbc-smooth-morphisms]. Choose affine neighbourhoods $U=\\operatorname{Spec}A$ of $x$ and $V=\\operatorname{Spec}R$ of $s$ with $f(U)\\subseteq V$ and $A$ finitely presented over $R$, using [def-sbc-locally-finite-presentation]. The affine fibre-product formula [lem-weil-pbc-fibre-product-affine-spectra] identifies $U_s$ with $\\operatorname{Spec}(A\\otimes_R\\kappa(s))$: the fibre computed over $V$ is also the fibre over $S$, since both have the same universal property. The images of the finitely many algebra generators of $A$ generate this tensor product over $\\kappa(s)$, so $U_s$ is of finite type over that field. Its dimension is finite by [lem-kun-dimension-finite-type]. By [def-kun-topological-dimension-at-point], dimension at $x$ is unchanged on restricting to the open neighbourhood $U_s$, and is at most its dimension: intersect any other neighbourhood with $U_s$ in the minimum defining dimension at a point. We prove the desired conclusion simultaneously for all such inputs by strong induction on $d$. The induction hypothesis is the full assertion, including immersion, etaleness over the same base, and singleton designated fibre, for every smaller value of $d$.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-kun-dimension-finite-type",
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057G, lemma-slice-smooth, proof, affine reduction and induction on d; finiteness and induction quantifiers expanded"
+   }
+  },
+  {
+   "text": "If $d=0$, [lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension], with the smooth open neighbourhood taken to be $X$ itself, gives an open neighbourhood $W\\subseteq X$ of $x$ such that $W\\to S$ is etale. By [lem-weil-pbc-etale-fibre-discrete-separable-points], the point corresponding to $x$ is open in $W_s$. By [def-pc-scheme-fibre], the topology of $W_s$ is precisely the subspace topology on the set-theoretic fibre in $W$. Consequently there is an open $Z\\subseteq W$ whose intersection with that fibre is exactly $\\{x\\}$. Give $Z$ its open subscheme structure and let $z$ be its point $x$. The fibre $Z_s$ has underlying set $\\{z\\}$ by the same fibre-topology statement. Its structural morphism is etale, since the open immersion $Z\\to W$ is etale and etale morphisms compose [lem-weil-pbc-etale-composition-cancellation]. Both $Z\\to W$ and $W\\to X$ are immersions (factor each through its identity closed immersion as in [def-weil-closed-immersion]); their composite $i:Z\\to X$ is an immersion by [lem-weil-pbc-proper-fp-permanence](e). It takes $z$ to $x$ and proves the induction base.",
+   "uses": [
+    "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057G, lemma-slice-smooth, proof, d=0 paragraph; singleton fibre by the subspace topology (Schemes Tag 01K1)"
+   }
+  },
+  {
+   "text": "Let $d>0$. Apply [lem-trf-smooth-separable-hypersurface-slice] to obtain an affine open $U\\subseteq X$ and an effective Cartier divisor $D\\hookrightarrow U$ containing $x$, smooth over $S$, with $\\dim_x(D_s)=d-1$. All its hypotheses are exactly our smoothness, closedness in the fibre, finite separability, and positive dimension. Write $x_D$ for the point of $D$ over $x$. The fibre morphism $D_s\\to U_s$ is a closed immersion by [lem-weil-pbc-proper-fp-permanence](b); here the two fibres are the pullbacks of the closed immersion along $U_s\\to U$. Thus $x_D$ is closed in $D_s$, since its image is a closed point of $U_s$ and a closed immersion is a homeomorphism onto its image [def-weil-closed-immersion]. Moreover its residue field is unchanged: on an affine neighbourhood a closed immersion is $\\operatorname{Spec}(B/I)\\to\\operatorname{Spec}B$, and at the corresponding prime $\\mathfrak p\\supseteq I$ its residue field is $(B/I)_{\\mathfrak p/I}/(\\mathfrak p/I)=B_{\\mathfrak p}/\\mathfrak pB_{\\mathfrak p}$. The residue field at $x$ is also unchanged by the open restriction $U\\subseteq X$ [def-weil-open-immersion]. Therefore $\\kappa(x_D)/\\kappa(s)$ is the same finite separable extension, so the induction hypothesis applies to $D\\to S$ at $x_D$.",
+   "uses": [
+    "lem-trf-smooth-separable-hypersurface-slice",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057G, lemma-slice-smooth, proof, positive-dimensional slicing and verification of the induction hypotheses"
+   }
+  },
+  {
+   "text": "The induction hypothesis produces an immersion $j:Z\\to D$ and $z\\in Z$ with $j(z)=x_D$, such that $Z\\to S$ is etale and $Z_s$ has underlying set $\\{z\\}$. The composite $D\\hookrightarrow U\\hookrightarrow X$ is an immersion by its displayed closed-then-open factorization [def-weil-closed-immersion]. Compose it with $j$; [lem-weil-pbc-proper-fp-permanence](e) shows that $i:Z\\to X$ is an immersion. Its structural morphism to $S$ is exactly the one obtained by induction, since all compositions used are over $S$. Thus $i(z)=x$ and both the etale and singleton-fibre conclusions hold. Since $d-1<d$, this closes the strong induction.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057G, lemma-slice-smooth, proof, final two sentences: induction on D and composition of the immersions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-kun-dimension-finite-type",
+  "def-kun-topological-dimension-at-point",
+  "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-trf-smooth-separable-hypersurface-slice",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 057G, lemma-slice-smooth, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +138,38 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-18",
    "verdict": "No match: no statement giving this geometric approximation or completed-local identification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed point with finite separable residue field in a smooth fibre admits an immersion from an etale scheme with singleton fibre",
+   "results": "{\"t\": \"2026-10-17T20:54:34Z\", \"tool\": \"leanfinder\", \"query\": \"A closed point with finite separable residue field in a smooth fibre admits an immersion from an etale scheme with singleton fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"AlgebraicGeometry.IsEtale\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"79c7b85bb5fcdab0\"}; Returned scheme smoothness definitions, etale chart factorization and residue-field preimmersions, but no immersion slice with singleton fibre.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-17T20:54:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"Smooth\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.Etale.instSmooth\", \"Algebra.FormallyEtale.instFormallySmooth\", \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\", \"Algebra.Etale.iff_formallyUnramified_and_smooth\", \"Algebra.FormallyEtale.iff_formallyUnramified_and_formallySmooth\", \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"Algebra.etaleLocus_eq_unramifiedLocus_inter_smoothLocus\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\"], \"digest\": \"94190ff40bedf286\"}; Returned scheme smoothness definitions, etale chart factorization and residue-field preimmersions, but no immersion slice with singleton fibre.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "slice.smooth|057G|etale.*slice|slice.*etale",
+   "results": "{\"t\": \"2026-10-17T20:54:32Z\", \"tool\": \"grep\", \"query\": \"slice.smooth|057G|etale.*slice|slice.*etale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Returned scheme smoothness definitions, etale chart factorization and residue-field preimmersions, but no immersion slice with singleton fibre.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth morphism has an etale locally closed subscheme through a separable closed fibre point",
+   "results": "{\"t\": \"2026-10-17T20:54:32Z\", \"tool\": \"leansearch\", \"query\": \"A smooth morphism has an etale locally closed subscheme through a separable closed fibre point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\"], \"digest\": \"b260b964f9938269\"}; Returned scheme smoothness definitions, etale chart factorization and residue-field preimmersions, but no immersion slice with singleton fibre.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-relative-completion-etale-approximation",
@@ -77,7 +181,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Tag 057G, lemma-slice-smooth, including the immersion conclusion and Z_s={x} set-theoretically",
+   "place": "Historical auxiliary branch: Tag 057G smooth immersion slice used after pointed finite-stage descent in lem-trf-relative-completion-etale-approximation; proof by induction on fibre dimension. This retains the imported ancestry and does not replace the current contracting-correspondence proof.",
    "via": [
     "lem-trf-relative-completion-etale-approximation",
     "lem-trf-nodal-family-etale-local-model",
@@ -92,5 +196,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-smooth-point-etale-immersion",
+  "worker": "stage1",
+  "summary": "Checked Tag 057G and the partial project Lean slice theorem. Kept the statement; wrote the full strong induction with singleton fibre in dimension zero, one smaller smooth hypersurface input, verification of the residue fields and closedness for induction, and immersion composition. Reused all existing generic tools; one new statement-only hypersurface lemma.",
+  "blueprint": "Historical auxiliary descendant of lem-trf-local-term-locality through lem-trf-relative-completion-etale-approximation: its 057G immersion-slice application. Steps 1-4 realize the affine/finite dimension setup, zero-dimensional singleton-fibre case, one smooth Cartier cut and the induction/composition. The current main-20261015 local-term proof uses contracting correspondences and is not changed.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Finiteness of dimension for the affine finite-type fibre bounds the induction parameter; this generic scheme-dimension input is not a trace-formula step."
+   },
+   {
+    "node": "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension",
+    "why": "The generic smooth dimension-zero criterion supplies the induction base, not an alternative to the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Discreteness of an etale fibre allows an ambient open to isolate the designated point; no local-term theorem is imported."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q01-05cf76237",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q01-05cf76237 (reviewer sub-agent of L); spot-checked: Read the item, new node, cited DAG statements, Stacks Tags 057G/057F/057C and dimension references, route documents, and required review materials. The four induction steps correctly establish finite fibre dimension, the etale singleton-fibre base case, the smooth Cartier dimension-lowering step, residue-field preservation, and immersion composition. Hypotheses and edge cases were checked; the new node is proper, searched, and non-duplicate. No route-pivot machinery or forbidden SGA source appears. Review written to review.md; no repairs needed."
  }
 }
