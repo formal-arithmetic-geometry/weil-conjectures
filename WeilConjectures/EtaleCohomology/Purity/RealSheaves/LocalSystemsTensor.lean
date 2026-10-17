@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Monoidal.Limits.Preserves
 public import Mathlib.CategoryTheory.Monoidal.Subcategory
 public import Mathlib.CategoryTheory.Sites.Point.Monoidal
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.StalkTransport
 public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystems
 
@@ -185,22 +186,6 @@ lemma Scheme.tensorPairing_app (F G : Sheaf Y.smallEtaleTopology (ModuleCat.{u +
 section Galois
 
 variable {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y) [Finite Λ]
-
-/-- The identification of the stalk of a finite locally constant sheaf of `Λ`-modules with that of
-its underlying sheaf of sets, on germs. -/
-lemma Scheme.IsFiniteLocallyConstantSheaf.stalkEquiv_toPresheafFiber
-    {F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (hF : IsFiniteLocallyConstantSheaf F)
-    (V : Y.Etale) (v : (Scheme.pointSmallEtale s).fiber.obj V) (σ : F.obj.obj (.op V)) :
-    hF.stalkEquiv s ((Scheme.pointSmallEtale s).toPresheafFiber V v F.obj σ) =
-      (Scheme.pointSmallEtale s).toPresheafFiber V v
-        (F.obj ⋙ CategoryTheory.forget (ModuleCat.{u + 1} Λ)) σ := by
-  have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
-    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
-  apply (hF.stalkEquiv s).symm.injective
-  rw [Equiv.symm_apply_apply]
-  exact (ConcreteCategory.congr_hom
-    ((Scheme.pointSmallEtale s).toPresheafFiber_presheafFiberCompIso_hom_app
-      (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) V v F.obj) σ).symm
 
 /-- On the stalk at `s`, the pairing `AlgebraicGeometry.Scheme.tensorPairing` is
 `(x, y) ↦ x ⊗ y`, read through `AlgebraicGeometry.Scheme.sheafFiberTensorIso'`. -/
