@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.AlgebraicGeometry.SupportedMapAffineUnionGluing
 import WeilConjectures.AlgebraicGeometry.OpenDerivedLocalizationAdjunction
 import WeilConjectures.AlgebraicGeometry.SupportedMapInitialAmbientLift
+import WeilConjectures.AlgebraicGeometry.OpenDerivedLocalizationData
 
 /-! # One affine attachment for supported stabilized maps
 
@@ -138,7 +139,7 @@ theorem exists_supported_map_affine_attachment
             (Modules.overEquiv U)).mapDerivedCategory.map β := by
   classical
   let Y := W ⊔ V
-  obtain ⟨hY, hYO, _G, _adj⟩ := open_derived_localization_adjunction X Y
+  obtain ⟨hY, ⟨hYO⟩⟩ := open_derived_localization_data X Y
   let := hY
   let := hYO
   let L := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) Y ⋙
