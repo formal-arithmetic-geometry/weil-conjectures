@@ -83,6 +83,8 @@ noncomputable def fourierTransformIso (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullbac
       R(pullback.snd π π')_![ModuleCat.{u + 1} Λ] ⋙ shiftFunctor _ (1 : ℤ) :=
   Functor.isoWhiskerRight (leftDerivedUpperStarIsoMapDerivedCategory _ (pullback.fst π π')).symm _
 
+omit [IsSeparated π] [QuasiCompact π] [HasCompactification π] [IsSeparated π']
+  [HasCompactification π'] in
 /-- **Perverse amplitude of the Fourier transform**, support side: `FT_ψ` carries
 `ᵖD^{≤0}(V) ∩ Dctf(V)` into `ᵖD^{≤1}(V')`. (blueprint: `thm-fd-fourier-perverse`) -/
 theorem isPerverseLE_fourierTransform
