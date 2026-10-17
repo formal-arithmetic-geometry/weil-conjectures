@@ -32,8 +32,8 @@
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 01WL (morphisms-lemma-base-change-finite), 01WN (morphisms-lemma-finite-proper); Tag 0F7L (lemma-base-change-shriek), compactification diagram"
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WL (lemma-base-change-finite), 01WN (lemma-finite-proper); compactification diagram as in more-etale.tex Tag 0F7L (lemma-base-change-shriek)"
    }
   },
   {
@@ -117,23 +117,53 @@
    }
   },
   {
-   "text": "Now let $K$ be the pro-étale $D^b_{ctf}$ object in the statement. The constructible-origin theorem supplies $L\\in D^b_c(X_{\\mathrm{et}},A)$ and an isomorphism $a:\\nu_X^*L\\cong K$. For each qcqs $u$, let $a_u:\\nu_U^*u_e^*\\cong u_p^*\\nu_V^*$ and $b_u:\\nu_V^*Ru_{e,*}\\cong Ru_{p,*}\\nu_U^*$ be the canonical comparisons. Their counit-mate normalization implies the unit identity\n$$Ru_{p,*}(a_{u,M})\\circ b_{u,u_e^*M}\\circ\\nu_V^*(\\eta^e_{u,M})=\\eta^p_{u,\\nu_V^*M}.$$\nTo verify it, transpose under $u_p^*\\dashv Ru_{p,*}$; substitute the stated counit equation for $b_u$, use naturality of $a_u$, and cancel $u_e^*(\\eta^e_u)$ with $\\varepsilon^e_u$ by the triangle identity. Thus the comparison carries each horizontal unit in Step 7 to the actual pro-étale unit. Direct-image comparisons commute with composition; open-extension comparisons commute with open composition, and are the canonical open-adjunction comparisons. The normalized constant-coefficient transport definition fixes the inverse-image, direct-image and open-extension comparisons as mates, so they carry the proper/open interchange defining (C), and the canonical open base change in (O), to their specified pro-étale transports. For the ordinary exchange this named-map identification is precisely the transport-identifies-exchange theorem. For compact supports it is the transported formula in the finite-level pro-étale theorem, and composition is the canonical witnessed-domain law of the compact-support composition theorem. Apply $\\nu_Y^*$ to Step 7 and conjugate by these source and target comparisons: the intervening comparison and inverse comparison cancel, leaving exactly the pro-étale equation of the statement for $\\nu_X^*L$. Naturality conjugates it by $a$ to the equation for $K$. Independence of $c$ and compatibility with composition are clause (4) of the exchange-coherence theorem. All uses remain on bounded-below étale-origin objects supplied above; the package supplies the indicated bounded constructible finite-Tor domains.",
+   "text": "Let $K\\in D^b_{ctf}(X,A)$ be as in the statement. By constructible origin choose $L\\in D^b_c(X_e,A)$ and $a:C_XL\\xrightarrow{\\sim}K$, writing $C_T=\\nu_T^*$. All arrows of the compactification diagram are qcqs by Step 1. Denote the canonical pullback and direct-image comparisons by $a_u:C_Uu_e^*\\cong u_p^*C_V$ and $b_u:C_VRu_{e,*}\\cong Ru_{p,*}C_U$. The canonical-mate theorem identifies $b_u$ as the mate of $a_u^{-1}$. Apply the square-mate unit identity with $L_1=u_e^*$, $L_2=u_p^*$, $G=C_V$, $H=C_U$, and $\\alpha=a_u^{-1}$. It gives $b_{u,u_e^*M}C_V(\\eta^e_{u,M})=Ru_{p,*}(a_{u,M}^{-1})\\eta^p_{u,C_VM}$. Postcomposing with $Ru_{p,*}(a_{u,M})$ cancels the inverse pair, so\n$$Ru_{p,*}(a_{u,M})\\circ b_{u,u_e^*M}\\circ C_V(\\eta^e_{u,M})=\\eta^p_{u,C_VM}.$$\nThis identifies the transported units for $u=p,g$ with the actual units.",
    "uses": [
     "lem-sf-proetale-constructible-origin",
     "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "prop-weil-pbc-comparison-direct-image",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "def-cbc-finite-constant-coefficient-transport",
-    "lem-weil-pbc-transport-identifies-exchange",
-    "thm-cbc-finite-level-proetale",
-    "thm-sf-comp-composition",
-    "fix-lem-exchanges",
-    "prop-functor-package"
+    "lem-pur-mate-unit-compatibility"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099R, proetale section-comparison; Tag 09AF, lemma-jshriek-comparison; canonical mate-normalized finite coefficient transport; blueprint finite-horizontal assertion on the witnessed domain"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-weil-shriek-operator-fibres.proof.md",
+    "place": "Proof (β), finite-horizontal mate assertion; replacement of old Step 8 by explicit site-transport lemmas"
+   }
+  },
+  {
+   "text": "Use the open-base-change site-transport lemma for $(j,j',q,p)$: its equation identifies the specific $\\beta^e$ in (O) with the specific $\\beta^p$ in the pro-etale compactification formula. Use the finite proper/open site-transport lemma on the same square: its equation identifies $\\gamma^e$ in (C) with the canonical open-adjunction map $\\gamma^p$. The corners are Noetherian and $p,q$ finite by Step 1, so both lemmas apply. Ordinary direct-image comparisons commute with composition. For the proper square $(b,b',g,q)$ the transport-identifies-exchange theorem identifies the specified $E^e$ with the ambient pro-etale $E^p$. Together with naturality of $b_{b'}$ and $e_{j'}$, these equations carry $C_{Y'}$ of the etale composite $Rb'_*\\beta^e\\circ E^ej_!$ to the pro-etale composite $Rb'_*\\beta^p\\circ E^pj_!$, which is $\\operatorname{Ex}_!^c$ of the statement by its definition; this transported compactification map is the pro-etale exchange named in the finite-level pro-etale exchange theorem, the map to which the exchange-coherence clause (4) of Step 10 applies. These are equalities of named morphisms, rather than choices of isomorphisms with the same endpoints.",
+   "uses": [
+    "lem-trf-open-base-change-site-transport",
+    "lem-trf-proper-open-site-transport",
+    "prop-weil-pbc-comparison-direct-image",
+    "lem-weil-pbc-transport-identifies-exchange",
+    "thm-cbc-finite-level-proetale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-weil-shriek-operator-fibres.proof.md",
+    "place": "Proof (β), finite-horizontal mate assertion; replacement of old Step 8 by explicit site-transport lemmas"
+   }
+  },
+  {
+   "text": "Apply the proper-factor composition site-transport lemma to the pairs $(p,f)$ and $(f',g)$ in composition order. The maps $p,g$ are proper by Step 1; the other maps are separated finite type. Use the compactifications of Step 6 and the comparison $c_f=C_YRf_!^e\\cong Rf_!^pC_X$ specified by that lemma. Its composition equation and identity-open normalization say that the transported $\\chi^e$ of (C) is exactly $\\chi^p$ in the statement. The equation is valid for bounded-below $L$; no claim that the chosen etale origin has finite Tor amplitude is needed here. On the eventual $D^b_{ctf}$ domain, the operation package supplies the stated restrictions. Compactification independence on that domain is clause (4) of the exchange-coherence theorem.",
+   "uses": [
+    "lem-trf-proper-composition-site-transport",
+    "prop-functor-package",
+    "fix-lem-exchanges"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-weil-shriek-operator-fibres.proof.md",
+    "place": "Proof (β), finite-horizontal mate assertion; replacement of old Step 8 by explicit site-transport lemmas"
+   }
+  },
+  {
+   "text": "Apply $C_Y$ to the equality in Step 7 for $L$ and identify its endpoints using the specified $b$, $a$, and $c$ comparisons from Steps 8–10. The units become the actual pro-etale units by Step 8, the exchange becomes $\\operatorname{Ex}_!^c$ by Step 9, and $\\chi^e$ becomes $\\chi^p$ by Step 10. Functoriality of $C_Y$ preserves the composites; every intermediate comparison is adjacent to its inverse and cancels. Thus the result is exactly\n$$Rg_*(\\operatorname{Ex}_{!,C_XL})\\circ\\eta_{g,Rf_!C_XL}=\\chi_{Lp^*C_XL}\\circ Rf_!(\\eta_{p,C_XL}).$$\nNaturality of the two sides with respect to $a:C_XL\\cong K$ conjugates this equality to the required equality for $K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-weil-shriek-operator-fibres.proof.md",
+    "place": "Proof (β), finite-horizontal mate assertion; replacement of old Step 8 by explicit site-transport lemmas"
    }
   },
   {
@@ -173,14 +203,15 @@
   "cor-cbc-proper-coincidence",
   "lem-sf-proetale-constructible-origin",
   "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-pur-mate-unit-compatibility",
+  "lem-trf-open-base-change-site-transport",
+  "lem-trf-proper-open-site-transport",
   "prop-weil-pbc-comparison-direct-image",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "def-cbc-finite-constant-coefficient-transport",
   "lem-weil-pbc-transport-identifies-exchange",
   "thm-cbc-finite-level-proetale",
-  "thm-sf-comp-composition",
-  "fix-lem-exchanges",
-  "prop-functor-package"
+  "lem-trf-proper-composition-site-transport",
+  "prop-functor-package",
+  "fix-lem-exchanges"
  ],
  "proof_origin": {
   "by": "agent",
@@ -281,7 +312,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-weil-shriek-operator-fibres",
@@ -303,8 +334,8 @@
   "date": "2026-10-17",
   "item": "lem-trf-finite-horizontal-shriek-mate",
   "worker": "stage1",
-  "summary": "Retained the statement and all inherited searches. Proved the finite-horizontal assertion by explicit proper/open unit normalization and ordinary exchange mates on a chosen compactification, then checked the specified pro-etale transport. Reused existing nodes throughout; no new nodes.",
-  "blueprint": "Nearest ancestor lem-trf-weil-shriek-operator-fibres, Proof (β), the sentence identifying compact-support exchange with the finite-horizontal mate: steps 1–7 supply the missing compactification calculation, step 8 checks finite pro-etale coefficient conventions, and step 9 identifies the inverse mate.",
+  "summary": "Q06 repair of the human return: kept the statement, Lean record, route, Steps 1–7 and final mate step unchanged. Replaced the 2011-character Step 8 by four short steps using one exact Mathlib mate-unit leaf and three statement-only geometric transport lemmas. Rebuilt verbatim citations and reviewed the source/hypotheses and duplicate scopes. Maintainer reader FIX: dropped the duplicate new square-mate unit leaf in favour of the existing identical Mathlib leaf lem-pur-mate-unit-compatibility (Step 8); clarified in Step 9 how the transported compactification exchange is identified with def-exchange-projection's Ex_!^c; corrected Step 1's source document to morphisms.tex; removed two stale split_report.tool_uses entries not in proof_deps.",
+  "blueprint": "Proof (β) of lem-trf-weil-shriek-operator-fibres; the old site-transport paragraph is now explicit unit, open/interchange, composition, and equality-conjugation steps.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-finite-morphism-permanence",
@@ -379,10 +410,6 @@
     "why": "Supplies qcqs etale/pro-etale direct-image comparisons compatible with composition."
    },
    {
-    "node": "lem-cbc-proetale-extension-zero-comparison",
-    "why": "Supplies the canonical open-extension comparison between the two sites."
-   },
-   {
     "node": "lem-weil-pbc-transport-identifies-exchange",
     "why": "Identifies the transported ordinary exchange with the named ambient pro-etale exchange."
    },
@@ -391,16 +418,40 @@
     "why": "Identifies the compact-support exchange on witnessed finite pro-etale inputs with its transported compactification formula."
    },
    {
-    "node": "thm-sf-comp-composition",
-    "why": "Identifies the canonical compact-support composition law on the witnessed pro-etale domain."
-   },
-   {
     "node": "fix-lem-exchanges",
     "why": "Provides compactification independence and compatibility with composition on the stated coefficient domains."
    },
    {
     "node": "prop-functor-package",
     "why": "Supplies the declared bounded constructible finite-Tor operation domains and proper/composition identifications of the item."
+   },
+   {
+    "node": "def-exchange-projection",
+    "why": "Existing generic comparison or operation used in the retained finite-horizontal compactification argument; no step of the unit route is replaced."
+   },
+   {
+    "node": "def-weil-sheaf-of-modules-category",
+    "why": "Existing generic comparison or operation used in the retained finite-horizontal compactification argument; no step of the unit route is replaced."
+   },
+   {
+    "node": "def-cbc-exchange-map",
+    "why": "Existing generic comparison or operation used in the retained finite-horizontal compactification argument; no step of the unit route is replaced."
+   },
+   {
+    "node": "def-kun-unbounded-exchange",
+    "why": "Existing generic comparison or operation used in the retained finite-horizontal compactification argument; no step of the unit route is replaced."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "Existing generic comparison or operation used in the retained finite-horizontal compactification argument; no step of the unit route is replaced."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-conjugate",
+    "why": "Existing generic comparison or operation used in the retained finite-horizontal compactification argument; no step of the unit route is replaced."
+   },
+   {
+    "node": "def-weil-pbc-composite-adjunction",
+    "why": "Existing generic comparison or operation used in the retained finite-horizontal compactification argument; no step of the unit route is replaced."
    }
   ]
  },
@@ -428,14 +479,21 @@
   "thm-cbc-finite-level-proetale",
   "thm-sf-comp-composition",
   "fix-lem-exchanges",
-  "prop-functor-package"
+  "prop-functor-package",
+  "def-exchange-projection",
+  "def-weil-sheaf-of-modules-category",
+  "def-cbc-exchange-map",
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-composite-adjunction"
  ],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NC-93f0c8098",
-  "group": "NC",
+  "reviewer": "NT-cc-Q06-f49163c8a",
+  "group": "Q06",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-93f0c8098 (reviewer sub-agent of L); spot-checked: I read all of it: the item, its 9 steps, the full statements of all 32 cited nodes, the blueprint main-20261015 lem-trf-weil-shriek-operator-fibres Proof (β), the unit sk-d-weil-push, and Stacks more-etale 0F7L (lemma-base-change-shriek) and sites-cohomology 07A7, with tags 0F7B/0F7J/0F7L/07A7/0D6E checked against tags/tags. The statement is the β sentence generalized to a finite bottom arrow g, not weakened. The orientation (p = g') and Ex_!^c are those of def-exchange-projection; the source/target types of both sides of the unit equation match; and the inverse-mate form agrees with def-weil-pbc-adjunction-mate by g-transposition. Small cases are consistent: g = id, empty X, j = id (the 07A7 case), and a disjoint union Y'. Step 2 uses lem-cbc-proper-open-interchange-coherence for the square (j', p, q, j) in the right direction and normalization. In Step 4 I checked the sectionwise identity (O) and the agreement of the two open base-change maps. I re-derived (P) by transposition and the triangle identities. The formula (C) for chi matches both the proper-input interchange law and how thm-sf-comp-composition constructs its law (d = (j,b), e = (j',q), V = X', c = id). I verified the four-line substitution in Step 7, and re-derived Step 8's unit-transport identity from the counit normalization of lem-weil-pbc-comparison-direct-image-canonical-mate. No duplicate exists: def-weil-frobenius-square-exchange, lem-trf-adjoint-mate and fix-lem-exchanges (4) do not state this. There is no cycle, the parent is the only citer, and no SGA is used. Searches cover all three kinds. All cited nodes are on the sk-d-weil-push route, so the declared tool_uses are unnecessary and none needs accepting. One cosmetic point, not fixed: Step 1's source.document names more-etale.tex, but 01WL/01WN are in morphisms.tex."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-f49163c8a (reviewer sub-agent of L); spot-checked: Read in full: the item (12 steps), the four new nodes, every cited statement, blueprint main-20261015 lem-trf-weil-shriek-operator-fibres Proof (β), Mathlib Mates.lean 55-155 and the duplicate candidates. Statement unchanged; it is the β sentence generalized to a finite bottom arrow, with pro-étale A_{E,n} D^b_ctf coefficients and def-exchange-projection's Ex_!^c, so no target is weakened. Steps 1-7 and 12 re-derived: (O) sectionwise, (P) by pasting and transpose, (C) from the interchange and identity-open normalization, then the four-line substitution. Step 8 is correct: b_u is the mate of a_u^{-1} with L1=u_e^*, L2=u_p^*, G=C_V, H=C_U, and unit_mateEquiv at line 136 gives the displayed unit equation. In Steps 9-10 the S/T types of the three transport lemmas check, and the lemmas are true canonical-comparison statements with consistent hypotheses (Noetherian, finite r/q, one proper factor). None restates the item; no cycle; all deps exist and are on the route, so no tool_uses need accepting. Faults fixed: (1) C5 duplicate: new leaf lem-trf-square-mate-unit-identity is identical to the existing Mathlib leaf lem-pur-mate-unit-compatibility (same formula, declaration and line); dropped, and Step 8 now cites the existing node. (2) C4 wording: Step 9 said thm-cbc-finite-level-proetale identifies the transported composite with Ex_!^c, but that theorem only gives invertibility; rewritten to derive the identification from the transport equations and naturality of b and e. (3) Step 1 source document changed to morphisms.tex (01WL/01WN), and two stale split_report.tool_uses entries not in proof_deps removed. The corrected item is in fixes/; the decision and step-by-step checks are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

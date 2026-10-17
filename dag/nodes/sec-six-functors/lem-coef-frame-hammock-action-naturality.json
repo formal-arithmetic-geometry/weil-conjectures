@@ -11,9 +11,96 @@
   "lem-coef-hammock-infinity-localization",
   "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write composition in functional order. Identities in $I(P,Q)$ are $(1,1)$, and the composite of $(\\alpha,\\beta)$ followed by $(\\alpha',\\beta')$ is $(\\alpha'\\alpha,\\beta\\beta')$. Its required equality follows by substituting the two given equalities and using functoriality of $P,Q$. Thus this is a small category in the chosen universe. For each arrow of it, naturality of the augmentations gives $p^{m'}P(\\alpha)=p^m$ and $Q(\\beta)i_n=i_{n'}$. Since the two $p$-components and the two $i$-components are in $W$, two-out-of-three gives $P(\\alpha),Q(\\beta)\\in W$. The same calculation applies to $P',Q'$ when these occur below.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Low, Definition 3.1, Lemma 3.4 and Proposition 3.7(ii), printed pp.12-15; agent extension using explicit padded rows, with only weak augmentations."
+   }
+  },
+  {
+   "text": "Use the reduced hammocks and ordinary nerves of [lem-coef-hammock-infinity-localization]. To a chain $t_0\\to\\cdots\\to t_k$, with $t_j=(m_j,n_j,h_j)$, assign the $k+1$ rows $x\\xleftarrow{p^{m_j}}P^{m_j}\\xrightarrow{h_j}Q_{n_j}\\xleftarrow{i_{n_j}}y$. The interior vertical arrows are $U_j=P(\\alpha_j)$ and $V_j=Q(\\beta_j)$ and the endpoint arrows are identities. The defining equality of $I$ gives the middle square; augmentation naturality gives the outer squares. Step 1 supplies the required vertical weak equivalences. Hence these are unreduced hammocks of word $-+-$. Reduction gives a simplicial map: [lem-coef-hammock-graph-colimit-presentation] identifies reduction with the natural maps from the fixed-word diagrams to the reduced mapping simplicial set. Deleting a row composes $U,V$, exactly as in the nerve; repeating a row inserts identities. This constructs $\\gamma_{P,Q}$, including chains with identity columns or repeated vertices.",
+   "uses": [
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-hammock-graph-colimit-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Low, Definition 3.1, Lemma 3.4 and Proposition 3.7(ii), printed pp.12-15; agent extension using explicit padded rows, with only weak augmentations."
+   }
+  },
+  {
+   "text": "For a functor $F:(\\mathcal C,W)\\to(\\mathcal D,V)$, send $(m,n,h)$ to $(m,n,Fh)$ and retain $(\\alpha,\\beta)$ on arrows. Applying $F$ to the defining commutative equation proves this is a functor $I(P,Q)\\to I(FP,FQ)$. Applying $F$ entrywise to each grid in step 2 gives exactly its target grid. The reduction is natural for functors preserving the wide subcategories by [lem-coef-hammock-graph-colimit-presentation]; this includes functors that turn nonidentity arrows into identities. Thus the square involving $N I(F)$, the two $\\gamma$ maps and the hammock functor commutes strictly. The hammock functor in [lem-coef-hammock-infinity-localization] is the same entrywise functor.",
+   "uses": [
+    "lem-coef-hammock-graph-colimit-presentation",
+    "lem-coef-hammock-infinity-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Low, Definition 3.1, Lemma 3.4 and Proposition 3.7(ii), printed pp.12-15; agent extension using explicit padded rows, with only weak augmentations."
+   }
+  },
+  {
+   "text": "Now fix $a,b,c,d$ as in the statement. The equation $p^m a^m=c p'^m$ and two-out-of-three imply $c\\in W$; $b_n i_n=i'_n d$ similarly implies $d\\in W$. On objects set $T(m,n,h)=(m,n,b_n h a^m)$ and keep $(\\alpha,\\beta)$ on arrows. Naturality of $a,b$ gives $Q'(\\beta)b_n h a^m=b_{n'}Q(\\beta)h a^m=b_{n'}h'P(\\alpha)a^m=b_{n'}h'a^{m'}P'(\\alpha)$, so $T:I(P,Q)\\to I(P',Q')$ is a functor. Also $S(m,n,h)=(m,n,h a^m)$ defines $I(P,Q)\\to I(P',Q)$. Write $K=N I(P,Q)$, and abbreviate $p_j=p^{m_j}$, $p'_j=p'^{m_j}$, $i_j=i_{n_j}$, $i'_j=i'_{n_j}$, $A_j=a^{m_j}$, $B_j=b_{n_j}$ and $U'_j=P'(\\alpha_j)$, $V'_j=Q'(\\beta_j)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Low, Definition 3.1, Lemma 3.4 and Proposition 3.7(ii), printed pp.12-15; agent extension using explicit padded rows, with only weak augmentations."
+   }
+  },
+  {
+   "text": "Construct $H_a:K\\times\\Delta^1\\to L^H(\\mathcal C,W)(x',y)$ using the hammock rule of [lem-coef-hammock-infinity-localization]. Given a chain as in step 2 and a monotone $\\theta:[k]\\to[1]$, take row $j$ of word $+ - + -$ to be\n$$x'\\xrightarrow{1}x'\\xleftarrow{p'_j}P'^{m_j}\\xrightarrow{h_j A_j}Q_{n_j}\\xleftarrow{i_j}y\\quad(\\theta(j)=0),$$\n$$x'\\xrightarrow{c}x\\xleftarrow{p_j}P^{m_j}\\xrightarrow{h_j}Q_{n_j}\\xleftarrow{i_j}y\\quad(\\theta(j)=1).$$\nFor adjacent equal choices use the corresponding structure arrows; at a $0\\to1$ change the three internal vertical arrows are $c$, $A_{j+1}U'_j=U_j A_j$, and $V_j$. All are in $W$. The squares commute by $pA=cp'$, naturality of $a$, and $V_jh_j=h_{j+1}U_j$. Endpoint vertical arrows are identities. These formulas respect composition and identities in the chain: for a skipped segment crossing the change, the $P$-column is $A_l U'_{j,l}=U_{j,l}A_j$ by naturality; the other columns compose by functoriality. Thus row restriction agrees with every simplicial operator. Reduce using [lem-coef-hammock-graph-colimit-presentation]. At $\\theta=0$ deleting the first identity column gives $\\gamma_{P',Q}NS$; at $\\theta=1$ it gives $\\gamma_{P,Q}$ precomposed in the hammock category with $c$.",
+   "uses": [
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-hammock-graph-colimit-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Low, Definition 3.1, Lemma 3.4 and Proposition 3.7(ii), printed pp.12-15; agent extension using explicit padded rows, with only weak augmentations."
+   }
+  },
+  {
+   "text": "Construct $H_b:K\\times\\Delta^1\\to L^H(\\mathcal C,W)(x',y')$ with word $- + - +$. At row $j$ use\n$$x'\\xleftarrow{p'_j}P'^{m_j}\\xrightarrow{h_j A_j}Q_{n_j}\\xleftarrow{i_j}y\\xrightarrow{d}y'\\quad(\\theta(j)=0),$$\n$$x'\\xleftarrow{p'_j}P'^{m_j}\\xrightarrow{B_j h_j A_j}Q'_{n_j}\\xleftarrow{i'_j}y'\\xrightarrow{1}y'\\quad(\\theta(j)=1).$$\nThe same-choice vertical arrows are the structure arrows. At the change the internal vertical arrows are $U'_j$, $B_{j+1}V_j=V'_j B_j$, and $d$. These lie in $W$. The central square uses $V_jh_j=h_{j+1}U_j$ and $U_jA_j=A_{j+1}U'_j$; the next square is $bi=i'd$. The two end squares use augmentation naturality and the identity laws. A skipped segment crossing the change has $Q$-column $B_lV_{j,l}=V'_{j,l}B_j$; this verifies compatibility with composition, while repetitions give identities. Hence restricting rows commutes with every simplicial operator. Reduction is simplicial by [lem-coef-hammock-graph-colimit-presentation], with the hammock interpretation of [lem-coef-hammock-infinity-localization]. Its endpoints are $\\gamma_{P',Q}NS$ postcomposed with $d$, and $\\gamma_{P',Q'}NT$, respectively.",
+   "uses": [
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-hammock-graph-colimit-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Low, Definition 3.1, Lemma 3.4 and Proposition 3.7(ii), printed pp.12-15; agent extension using explicit padded rows, with only weak augmentations."
+   }
+  },
+  {
+   "text": "For completeness pass from these explicit simplicial homotopies to the stated homotopy category, meaning simplicial sets localized at weak homotopy equivalences. The projection $r:K\\times\\Delta^1\\to K$ has section $j_0$. The composite $rj_0$ is the identity. On $K\\times\\Delta^1$ the formula $((z,\\theta),\\lambda)\\mapsto(z,\\min(\\theta,\\lambda))$, with minimum evaluated vertexwise, is a simplicial homotopy from $j_0r$ to the identity: monotone maps remain monotone and restriction commutes with minimum. Together with the constant homotopy on $K$, [lem-cbc-simplicial-homotopy-equivalence-weak] therefore makes $r$ a weak homotopy equivalence, without a Kan assumption. Both $j_0$ and $j_1$ become its inverse after localization, so the endpoint maps of every map $K\\times\\Delta^1\\to L$ have equal classes. Apply this to $H_a$ postcomposed with $d$ and to $H_b$. Their common endpoint is $\\gamma_{P',Q}NS$ postcomposed with $d$. Transitivity gives $[\\gamma_{P',Q'}NT]=[d_*c^*\\gamma_{P,Q}]$. Concatenation and reduction are the enriched composition of [lem-coef-hammock-infinity-localization], so $d_*c^*$ is exactly the requested action. Only augmentation naturality, two-out-of-three and the stated weak-equivalence components were used; no assertion that $\\gamma$ is a weak equivalence has entered.",
+   "uses": [
+    "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "lem-coef-hammock-infinity-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/1409.8062",
+    "place": "Low, Definition 3.1, Lemma 3.4 and Proposition 3.7(ii), printed pp.12-15; agent extension using explicit padded rows, with only weak augmentations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-hammock-graph-colimit-presentation",
+  "lem-coef-hammock-infinity-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/1409.8062",
+  "place": "Explicit weak-augmentation extension of Low Definition 3.1, Lemma 3.4 and Proposition 3.7(ii); padded-row homotopies above replace the model-category pushout comparison."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +150,45 @@
    "results": "0 hits; ; ; digest 4f53cda18c2baa0c",
    "date": "2026-10-17",
    "verdict": "no match: ordinary cosimplicial-object definitions, model-category axioms and natural transformations into the ordinary homotopy category do not supply this double-resolution or hammock comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weakly augmented cosimplicial and simplicial diagrams induce natural maps from their index category nerve to hammock localization mapping spaces",
+   "results": "8 hits: SSet.Truncated.HomotopyCategory.homToNerveMk, SSet.Truncated.HomotopyCategory.homToNerveMk_app_one, SSet.Truncated.HomotopyCategory.homToNerveMk_app_edge, SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero, CategoryTheory.nerveMap, CategoryTheory.SimplicialThickening.functor_map, CategoryTheory.SimplicialNerve, CategoryTheory.nerve.functorOfNerveMap; digest 10223857615e12ce",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe ordinary nerves, chain homotopies or cofibrant-object ordinary homotopy categories, not these weakly augmented grids and hammock mapping spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "hammock|weakly.augmented|doubleResolution",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe ordinary nerves, chain homotopies or cofibrant-object ordinary homotopy categories, not these weakly augmented grids and hammock mapping spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of mapping spaces in hammock localization under comparison maps of augmented resolutions",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.iso_hom_naturality, CategoryTheory.ProjectiveResolution.iso_hom_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality_assoc, HomotopicalAlgebra.CofibrantObject.HoCat.ιCompResolutionNatTrans, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality; digest b1209190ce033274",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe ordinary nerves, chain homotopies or cofibrant-object ordinary homotopy categories, not these weakly augmented grids and hammock mapping spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "hammock|augmented.*zigzag|zigzag.*augmented",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe ordinary nerves, chain homotopies or cofibrant-object ordinary homotopy categories, not these weakly augmented grids and hammock mapping spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Commutative grids of weak equivalence zigzags give simplicial homotopies between maps to hammock mapping complexes",
+   "results": "8 hits: homotopic, instQFactorsThroughHomotopyDown, AlgebraicTopology.DoldKan.homotopyPInftyToId_hom, Homotopy.map_eq_of_inverts_homotopyEquivalences, Homotopy.toShortComplex, Homotopy.mkInductiveAux₂, Homotopy.mkInductiveAux₃, Homotopy.mkInductive; digest 7c4513eb2de09c88",
+   "date": "2026-10-17",
+   "verdict": "no match: hits describe ordinary nerves, chain homotopies or cofibrant-object ordinary homotopy categories, not these weakly augmented grids and hammock mapping spaces."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cosimplicial-frame-mapping",
@@ -90,5 +212,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-frame-hammock-action-naturality",
+  "worker": "stage1",
+  "summary": "Kept the statement and its weak-augmentation scope. Proved the index-forgetting map and strict relative-functor naturality, then exhibited two fixed-endpoint padded-row simplicial homotopies for a/c and b/d. Reused the existing reduction and simplicial homotopy-equivalence statements; created no nodes. Read Low online and verified that his model-category naturality proof is only a guide, not a theorem being applied with missing lifting hypotheses.",
+  "blueprint": "Realizes the inherited ancestor place: prop-coef-integral-exceptional-adjoint, derived coefficient adjunction, parent frame comparison former step 12 (localization action under transported weak augmentations). The current main-20261015 ancestor file contains the adjunction statement only; the detailed proof location is retained from the ancestry record.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Generic conversion of an explicit simplicial homotopy equivalence into a weak homotopy equivalence, used for the interval projection only. The biduality unit has no replacement for this simplicial-set tool; it does not replace the coefficient-adjunction route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-57fd9e7f7",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-57fd9e7f7 (reviewer sub-agent of L); spot-checked: I read all seven steps in full and found no faults; no fixes were written. The statement is unchanged and not weakened: the weak-augmentation scope is kept, with no Reedy or model hypotheses and no claim that gamma is a weak equivalence. The delivery creates no new nodes. Step 1: two-out-of-three gives P(alpha), Q(beta) in W. Step 2: the squares hold by the defining equation of I and by augmentation naturality; faces and degeneracies match those of G(-+-) in lem-coef-hammock-graph-colimit-presentation, and reducing into its colimit gives the map into L^H(x,y) of lem-coef-hammock-infinity-localization. Step 3: strict naturality for a functor follows from the naturality stated in the graph-colimit node. Step 4: c and d lie in W by two-out-of-three, and T is a functor (I redid the calculation). Steps 5 and 6: I checked every square of the padded rows (+-+- and -+-+) at the 0-to-1 change, including that the internal vertical maps lie in W; skipped segments commute by naturality of a and b. The word category has the injection -+- to +-+-, so the inserted identity column reduces away in the colimit. Step 7: the min-homotopy is simplicial, the cited lem-cbc lemma applies as stated with no Kan or nonemptiness assumption, so the interval projection is a weak equivalence and j0 and j1 agree in the homotopy category; this gives [gamma_{P',Q'} NT] = [d_* c^* gamma_{P,Q}]. Edge cases checked: W equal to identities, c or d equal to 1, empty I, coinciding endpoints, degenerate chains. The citer lem-coef-cosimplicial-frame-mapping step 16 uses the arrows in the item's directions (c=1, d=r). The dependency closure has no cycle. lem-coef-special-resolution-zigzag-nerve defines the same I(P,Q) but maps into T(x,y) under Reedy hypotheses, so the item is not a duplicate; no blueprint node mentions hammocks, so same_as [] is correct. I accept the declared tool use of lem-cbc-simplicial-homotopy-equivalence-weak: it is used only for the interval projection and replaces no unit step. Low and Hinich are recorded as WANTED and the proof is marked agent-written. Mathlib searches cover all three kinds."
  }
 }
