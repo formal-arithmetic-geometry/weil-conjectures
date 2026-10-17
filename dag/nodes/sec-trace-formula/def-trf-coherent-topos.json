@@ -47,7 +47,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-psi-constructibility-descent",
@@ -70,5 +70,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "def-trf-coherent-topos",
+  "worker": "stage1",
+  "summary": "Audited this definition against Orgogozo, §8.1, and the four existing definition dependencies. The coherent-object, coherent-topos, geometric-morphism, and conservative clauses are retained exactly; all notions needed to state them are already supplied by existing nodes, so no child nodes or proof steps are required.",
+  "blueprint": "The item records the §8.1 finiteness terminology (author draft, printed pp. 17–18) through its inherited blueprint ancestry; no separate blueprint node states this definition."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-d2b0d91f1",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-d2b0d91f1 (reviewer sub-agent of L); spot-checked: I read the item in full, with all four statement dependencies (def-weil-pbc-topos, def-weil-pbc-sites-and-cohomology, def-weil-size-convention, def-trf-geometric-morphism), unit sk-i-curve-zero and the item's four citers. The source is Orgogozo's author PDF; I fetched it read-only and extracted the text. §8.1 (printed pp. 17-18) uses 'topos cohérent', 'objet cohérent (quasi-compact et quasi-séparé)' and the coherent-conservative test without defining them, pointing to SGA4 VI; Lemma 9.1.5 (p. 21) applies that test. Each clause of the item matches the standard notion: quasi-compact (finite epimorphic subfamily), quasi-separated (as SGA4 VI 1.13), coherent object, coherent topos (equivalent to SGA4 VI 2.3 via the comparison lemma), coherent morphism (u^-1 preserves coherent objects, VI 3.3) and conservative. The item does not cite SGA, so the route lock holds. Small cases checked: in Sets the coherent objects are the finite sets and Sets is coherent; Sh(infinite discrete space) is correctly not coherent because the terminal object is not quasi-compact; the empty family behaves correctly. I checked that the definition supports lem-trf-coherent-conservative-reflection: quasi-compactness is reflected through generators plus exactness and conservativity, and quasi-separatedness through fibre products. No duplicate definition exists in the DAG or the main-20261015 blueprint, so same_as [] is correct; mathlib_match null is correct. The delivery changes only status and split_report: no new nodes, no steps, no tool_uses. The inherited created.item/unit mismatch is maintainer-owned and flagged in the report; it is not an A4 fault. No fixes."
  }
 }
