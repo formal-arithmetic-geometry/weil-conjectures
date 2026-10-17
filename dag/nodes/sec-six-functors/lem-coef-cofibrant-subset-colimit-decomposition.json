@@ -261,5 +261,39 @@
   "group": "Q126",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-bc006a393 (reviewer sub-agent of L); spot-checked: I read the whole item and new node and checked every step myself. Step 1 (pushout): the two-face cocone correspondence holds, and arrows that cross from one face to the other factor through U∪{s}. Steps 2-4 (finite downset induction): base case, minimal missing object and downward closure are all set up; latching objects are computed in J; the new leaf is applied with the right orientation. Step 5: A cofibrant and a→C injective follow directly from the hypothesis. Step 6 (B cofibrant): D_T = P_<(T∪{s})∖{T} is downward closed, the containing objects are final in it, and the composite into Z_V is the B-latching map; T=∅ works. Step 7 (a→b injective): J∖{S'} is downward closed and its colimit is b. Step 8: b→colim Z is injective by one-sided pushout stability. Step 9: naturality and |S|=1 hold. Small cases checked: |S|=1, the span case |S|=2, and T={t} in |S|=3. New node lem-coef-set-pushout-injective is an exact Mathlib leaf: Mathlib/CategoryTheory/Limits/Types/Pushouts.lean lines 243-246, pushoutCocone_inr_injective_of_isColimit (variables at line 32), which needs only f injective; the line number agrees in the live and slopmaster2 Mathlib. Its form is correct (B1-B9), three kinds of search are recorded, and the blueprint ancestor and via chain are right. No duplicate in the DAG: I read the hits for latching, proper subsets, set pushout and cobase change, including the abelian pushout-mono and Reedy nodes. The item has every clause its parent lem-coef-sharp-special-colimit-gluing uses. No off-unit statements and no SGA, so no tool_uses to accept. No changes made. Reservation: the cited Rezk sharp-maps §6.3/Prop 6.4 is not in literature/, and the URL was unreachable from this machine. The only local Rezk copies are a different paper (math/9811037). So I could not check the source place; the node is marked as an agent proof with the archive WANTED, and the maintainer should archive that PDF."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.CofibrantSubsetColimitDecomposition",
+  "declaration": "SSet.ProperSubsetDiagram.cofibrant_face_decomposition",
+  "declarations": [
+   "SSet.ProperSubsetDiagram.inclusion",
+   "SSet.ProperSubsetDiagram.latchingCocone",
+   "SSet.ProperSubsetDiagram.latchingMap",
+   "SSet.ProperSubsetDiagram.faceA",
+   "SSet.ProperSubsetDiagram.containingFace",
+   "SSet.ProperSubsetDiagram.faceB",
+   "SSet.ProperSubsetDiagram.faceMap",
+   "SSet.ProperSubsetDiagram.toOppositeFace",
+   "SSet.ProperSubsetDiagram.faceColimitMap",
+   "SSet.ProperSubsetDiagram.fromContainingFace",
+   "SSet.ProperSubsetDiagram.cofibrant_face_decomposition",
+   "SSet.ProperSubsetDiagram.decompositionIso",
+   "SSet.ProperSubsetDiagram.face_decomposition_naturality",
+   "SSet.ProperSubsetDiagram.decompositionIso_naturality"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/CofibrantSubsetColimitDecomposition.lean",
+  "statement": "theorem cofibrant_face_decomposition {S : Finset ι} (s : ι) (hs : s ∈ S) (Z : Set.Iio S ⥤ SSet.{u}) : IsPushout (toOppositeFace s hs Z) (faceColimitMap s hs Z) (colimit.ι Z ⟨S.erase s, Finset.erase_ssubset hs⟩) (fromContainingFace s hs Z) ∧ ((∀ (T : Set.Iio S) (n : ℕ), Function.Injective ((latchingMap Z T).app (.op ⦋n⦌))) → (∀ (T : Set.Iio (S.erase s)) (n : ℕ), Function.Injective ((latchingMap (faceA s Z) T).app (.op ⦋n⦌))) ∧ (∀ (T : Set.Iio (S.erase s)) (n : ℕ), Function.Injective ((latchingMap (faceB s hs Z) T).app (.op ⦋n⦌))) ∧ (∀ n : ℕ, Function.Injective ((toOppositeFace s hs Z).app (.op ⦋n⦌))) ∧ (∀ n : ℕ, Function.Injective ((faceColimitMap s hs Z).app (.op ⦋n⦌))) ∧ (∀ n : ℕ, Function.Injective ((fromContainingFace s hs Z).app (.op ⦋n⦌))))",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab1cbccf2",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Checked every clause of node lem-coef-cofibrant-subset-colimit-decomposition against SSet.ProperSubsetDiagram.cofibrant_face_decomposition and its helpers: proper-subset category Set.Iio S; faceA/faceB/C; colim A -> C is literally the latching map at S.erase s; colim.map and colimit.pre maps; IsPushout outside the cofibrancy implication; cofibrancy of Z/A/B uses one latchingMap condition in every degree; all three injectivities; naturality of the four edges and of decompositionIso via pushout.map (orientation checked). Edge cases |S|=1, |S|=2, T=empty, degree 0 covered; no added DecidableEq/finiteness/mono hypotheses; iota in Type u is harmless. Definitions carry real data; decompositionIso takes its data from the named postponed theorem via isoPushout (allowed pattern, canonical). All theorems are whole-proof sorry; source/blueprint docstrings and node proof steps present; lines <=96. Node differs from side clone only in lean; lean.statement verbatim; all 14 declarations exist. No duplicate notion (only PinchedCubeLatching.lean, unrelated). Report has a real Worker report and Second reading by Q66. nt_compile.py --json: clean, 1.3 s, exit 0. No findings."
  }
 }

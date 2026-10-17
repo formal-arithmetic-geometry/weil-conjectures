@@ -30,7 +30,8 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
   "def-coef-infinity-fibrations",
-  "lem-coef-space-transport-classification"
+  "lem-coef-space-transport-classification",
+  "def-coef-infinity-relative-cone"
  ],
  "proof": [
   {
@@ -293,5 +294,30 @@
   "group": "Q38",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-971c115e8 (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps and the full statements of the 8 cited nodes, plus the parent's Step 3 (its only citer), the unit record and the ancestor proof prop-coef-integral-exceptional-adjoint (main-20261015). HTT is not archived, so I checked Lemma 2.1.3.3, Corollary 5.1.2.3 and Lemma 5.5.4.13 (pp. 479-480) against my knowledge of HTT. The statement is true. Edge cases checked: B empty, B a point, f the identity, X empty. The left-fibration hypothesis on f is needed: without it, a groupoid example gives an empty strict pullback but a contractible homotopy pullback. Steps 1, 2, 4 and 5 are correct, including the horn-index reversal, the identification f_t = f x_{X'} X'_t, the objectwise-limit clause for an arbitrary small simplicial set B, and contractibility of limiting cones. One fault, C4 in Step 3: it concluded that the strict fiber square is a limit in the infinity category S from lem-coef-kan-quillen-right-proper alone, but that node only describes the model-categorical homotopy pullback. Fixed by citing the Kan-cospan clause of lem-coef-simplicial-model-coherent-diagrams (same unit; its closure does not reach the item; lem-coef-spaces-kappa-limit-filtered-colimit Step 6 uses it the same way) and stating that the strict cone of Y_t is the path-object cone restricted along the equivalence Y_t -> P_t. Step 3 uses and proof_deps updated. There are no new nodes; no duplicate found in a DAG-wide search. I accept both tool_uses (lem-cbc-right-fibration-space-fiber, lem-cbc-enhanced-functor-cone-calculus) as generic black-box tools. The report wrongly says created was changed to Q38; the file correctly still names Q77/lem-coef-compact-relative-cocone-factorization, so I left it unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LeftFibrationSectionHomotopyPullback",
+  "declaration": "SSet.Enhanced.left_fibration_section_homotopy_pullback",
+  "declarations": [
+   "SSet.Enhanced.sectionPullbackPostcomposition",
+   "SSet.Enhanced.sectionPullbackMappingSquare",
+   "SSet.Enhanced.sectionPullbackTransportComparison",
+   "SSet.Enhanced.left_fibration_section_homotopy_pullback"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LeftFibrationSectionHomotopyPullback.lean",
+  "statement": "theorem left_fibration_section_homotopy_pullback {B X X' : SSet.{u}} (p : X ⟶ B) (p' : X' ⟶ B) (f : X ⟶ X') (comm : f ≫ p' = p) (hp : leftFibration p) (hp' : leftFibration p') (hf : leftFibration f) (s : B ⟶ X') (hs : s ≫ p' = 𝟙 B) : leftFibration (pullback.fst s f) ∧ sectionPullbackTransportComparison p p' f comm s hs",
+  "branch": "newtargets-dag",
+  "by": "Q83",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Second reading reuses the landed space-transport classification and its full transportOverHom mapping complexes. The conclusion is the limit universal property on the actual postcomposition square, tested against every left fibration after every base restriction. It includes point tests and the actual pullback projections, rather than a homotopy pullback on unrelated total simplicial sets. Added def-coef-infinity-relative-cone only to reuse its canonical constant-path mapping-space comparison. No natural-language statement changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-810ab0952",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Item module LeftFibrationSectionHomotopyPullback: binders B X X' p p' f comm hp hp' hf s hs match the node exactly, one arbitrary universe u, no stronger assumptions. leftFibration (pullback.fst s f) renders that Y->B is a left fibration. sectionPullbackTransportComparison states the homotopy-pullback universal property on the actual square of full transportOverHom mapping complexes, with actual postcomposition by pullback.snd, snd≫p (=fst via comm, pullback condition and hs), f and s, for every restriction u:C->B and every test left fibration; it uses the landed IsHomotopyPullbackSquare. This gives the limit in Fun(B,S) through the landed classification, the pointwise path model at a point and naturality under restriction. Checked true for all test objects (mapping into the pullback gives the pullback of mapping complexes; Kan fibration between Kan complexes), not vacuous. Edge cases checked: B empty, empty fibers, B=Δ0, f the identity, E empty. Gates: no hollow definition, only one sorry, source and blueprint docstrings with the five proof steps. Node diff is the lean attachment plus stmt_dep def-coef-infinity-relative-cone (closure has no cycle); lean.statement is verbatim in the file. Report has Worker report and Second reading by Q83. nt_compile --json on the snapshot file: exit 0, no errors or warnings. Cosmetic only: stale history paragraphs and garbled HTT numbers in the report text."
  }
 }
