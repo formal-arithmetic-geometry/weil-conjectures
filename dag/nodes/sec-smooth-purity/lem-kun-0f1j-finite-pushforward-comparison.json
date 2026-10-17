@@ -18,9 +18,138 @@
   "def-weil-pbc-direct-image",
   "def-weil-pbc-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The two base changes $\\pi'$ and $\\rho$ are finite by [lem-weil-pbc-finite-morphism-permanence](a), and proper by [lem-weil-pbc-finite-proper]. Finite direct image is exact on abelian sheaves by [lemma-weil-pbc-finite-direct-image-exact]. On module sheaves, direct image has that underlying abelian functor [def-weil-pbc-direct-image]; the faithful exact forgetful functor preserves kernels and cokernels [lem-weil-pbc-module-sheaves-colimits-forgetful](1), so the module direct image is exact too. Thus [lem-weil-pbc-exact-functor-derived-functor] identifies $R\\pi'_*=\\pi'_*$ and $R\\rho_*=\\rho_*$ canonically on all complexes used below. No resolution-acyclicity assumption is added.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-finite-proper",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade, final finite-pushforward calculation; Tags 0959 (finite exchange), 03QP (finite exactness), 0F0G (projection formula)"
+   }
+  },
+  {
+   "text": "Finite exchange [lemma-weil-pbc-finite-exchange] for $(\\pi,p)$ identifies $P:=p^{-1}M$ with $\\pi'_*k_{X'_i}$. For $(\\pi',h)$ it gives $E:h^{-1}\\pi'_*k_{X'_i}\\xrightarrow{\\sim}\\rho_*k_{Y_i}$. These are also module isomorphisms, by [lem-weil-pbc-exchange-forget-coefficients]. Inverse image carries the constant coefficient sheaf to itself [prop-weil-pbc-inverse-image-modules-exact](1). Put $A=(f')^{-1}Rg_*\\mathcal F$, $V=e^{-1}\\mathcal F$, $B=(\\pi')^{-1}A$, and $Q=\\rho^{-1}V=e_i^{-1}\\mathcal F$. All inverse-image composition identifications below use [lem-weil-pbc-inverse-image-composition-module-linear]. The map $\\delta=e^{-1}\\varepsilon_g:h^{-1}A\\to V$ pulls back to $\\delta_i=\\rho^{-1}\\delta:h_i^{-1}B\\to Q$, the counit map $e_i^{-1}\\varepsilon_g$.",
+   "uses": [
+    "lemma-weil-pbc-finite-exchange",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-inverse-image-composition-module-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade, final finite-pushforward calculation; Tags 0959 (finite exchange), 03QP (finite exactness), 0F0G (projection formula)"
+   }
+  },
+  {
+   "text": "Apply [lem-kun-0f0g] to finite proper $\\pi'$, torsion ring $k$, first argument $k_{X'_i}$ and second argument $A$. With the tensor unit identification this gives $\\phi_A:\\pi'_*k_{X'_i}\\otimes_k^{\\mathbf L}A\\xrightarrow{\\sim}\\pi'_*B$. Since $B=(f_i')^{-1}Rg_*\\mathcal F$, composing with Step 2 gives precisely the first isomorphism of the item. We use the canonical projection arrow [def-kun-projection-formula-map], whose $(\\pi')^{-1}\\dashv R\\pi'_*$-transpose is $\\varepsilon_{\\pi',k}\\otimes1_B$, with the monoidal pullback identification [lem-kun-inverse-image-monoidal] understood. The tensor unit contributes no higher Tor: its complex is the free rank-one coefficient module in degree zero.",
+   "uses": [
+    "lem-kun-0f0g",
+    "def-kun-projection-formula-map",
+    "lem-kun-inverse-image-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade, final finite-pushforward calculation; Tags 0959 (finite exchange), 03QP (finite exactness), 0F0G (projection formula)"
+   }
+  },
+  {
+   "text": "Apply the same projection formula to $\\rho$ and $V$. Together with $E$ it gives $\\lambda_V:h^{-1}\\pi'_*k_{X'_i}\\otimes_k^{\\mathbf L}V\\xrightarrow{\\sim}\\rho_*Q$. Its $\\rho^{-1}\\dashv R\\rho_*$-transpose is $(\\varepsilon_{\\rho,k}\\otimes1_Q)\\circ(\\rho^{-1}E\\otimes1)$. The canonical composition isomorphisms [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], applied to $h\\rho=\\pi'h_i$ with constant coefficients, give $C:Rh_*\\rho_*Q\\xrightarrow{\\sim}\\pi'_*Rh_{i,*}Q$. Thus $\\Psi=C\\circ Rh_*\\lambda_V$, preceded by Step 2, is the second isomorphism of the item.",
+   "uses": [
+    "lem-kun-0f0g",
+    "def-kun-projection-formula-map",
+    "lem-kun-inverse-image-monoidal",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade, final finite-pushforward calculation; Tags 0959 (finite exchange), 03QP (finite exactness), 0F0G (projection formula)"
+   }
+  },
+  {
+   "text": "We check equality of the maps, including the composition convention. The composition comparison in [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] is the ordinary composite direct-image identification on a K-injective complex: every direct image here preserves K-injectives by [lem-weil-pbc-right-adjoint-preserves-kinjective], since its module inverse image is exact [prop-weil-pbc-inverse-image-modules-exact]. Thus one may take the second K-injective resolution in that comparison to be the identity. The sheaf inverse/direct-image composition isomorphisms are module-linear and carry the composite unit to the ordinary unit [lem-weil-pbc-inverse-image-composition-module-linear]. By the Hom bijection and counit formula of [def-weil-pbc-composite-adjunction], $C$ therefore identifies the two successive adjunction bijections for $(h,\\rho)$ and $(\\pi',h_i)$ with the same bijection for the composite map $Y_i\\to X'$. This also follows directly by applying the two termwise Hom bijections on the chosen K-injective representative, so it requires no further base-change theorem.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-inverse-image-composition-module-linear",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade, final finite-pushforward calculation; Tags 0959 (finite exchange), 03QP (finite exactness), 0F0G (projection formula)"
+   }
+  },
+  {
+   "text": "Write $\\alpha:P\\otimes_k^{\\mathbf L}A\\to Rh_*(h^{-1}P\\otimes_k^{\\mathbf L}V)$ for the comparison, and $\\beta:B\\to Rh_{i,*}Q$ for the untensored comparison. Use $P=\\pi'_*k_{X'_i}$ as in Step 2. To prove $\\Psi\\alpha=\\pi'_*(\\beta)\\phi_A$, use the common composite adjunction of Step 5. By definition the $h$-transpose of $\\alpha$ is $1_{h^{-1}P}\\otimes\\delta$. Naturality of the Hom bijection in its target says that the further $\\rho$-transpose of $Rh_*\\lambda_V\\circ\\alpha$ is the $\\rho$-transpose of $\\lambda_V$ followed after $\\rho^{-1}(1\\otimes\\delta)$. Expanding that transpose by [def-kun-projection-formula-map] yields, on $Y_i$,\n$$s=\\bigl(\\varepsilon_{\\rho,k}\\circ\\rho^{-1}E\\bigr)\\otimes\\rho^{-1}\\delta.$$\nThe source is $\\rho^{-1}h^{-1}P\\otimes_k^{\\mathbf L}\\rho^{-1}h^{-1}A$ and the target is $Q$. Bifunctorial monoidality of inverse image is [lem-kun-inverse-image-monoidal].",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "lem-kun-inverse-image-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade, final finite-pushforward calculation; Tags 0959 (finite exchange), 03QP (finite exactness), 0F0G (projection formula)"
+   }
+  },
+  {
+   "text": "Now transpose $\\pi'_*(\\beta)\\phi_A$ first under $(\\pi')^{-1}\\dashv\\pi'_*$ and then under $h_i^{-1}\\dashv Rh_{i,*}$. Naturality of the first Hom bijection gives $\\beta$ after the transpose $\\varepsilon_{\\pi',k}\\otimes1_B$ of $\\phi_A$. The second gives $\\delta_i$ after its inverse image. Consequently this route is\n$$t= h_i^{-1}(\\varepsilon_{\\pi',k})\\otimes\\rho^{-1}\\delta.$$\nThe source and target are exactly those of $s$ after the cartesian inverse-image identification. The mate definition of finite exchange [def-weil-pbc-underived-exchange] gives\n$$\\varepsilon_{\\rho,k}\\circ\\rho^{-1}E=h_i^{-1}(\\varepsilon_{\\pi',k}).$$\nThis is its defining adjunct identity, on the degree-zero constant sheaf; the equality is module-linear because the underlying unit and counit are those of the module adjunction [prop-weil-pbc-inverse-image-modules-exact](3). Hence $s=t$. Injectivity of the composite Hom bijection proves the required equality of the canonical maps, rather than merely an isomorphism between their objects.",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "def-weil-pbc-underived-exchange",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade, final finite-pushforward calculation; Tags 0959 (finite exchange), 03QP (finite exactness), 0F0G (projection formula)"
+   }
+  },
+  {
+   "text": "If $\\beta$ is invertible, $\\pi'_*(\\beta)$ has inverse $\\pi'_*(\\beta^{-1})$. Since $\\phi_A$ and $\\Psi$ are isomorphisms, the equality of Steps 6--7 gives $\\alpha=\\Psi^{-1}\\pi'_*(\\beta)\\phi_A$, which is invertible. This proves the last clause without assuming the untensored comparison theorem as an additional dependency.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1J, lemma-punctual-base-change-upgrade, final finite-pushforward calculation; Tags 0959 (finite exchange), 03QP (finite exactness), 0F0G (projection formula)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-projection-formula-map",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-underived-exchange",
+  "lem-kun-0f0g",
+  "lem-kun-inverse-image-monoidal",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lemma-weil-pbc-finite-exchange",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F1J final calculation, with explicit adjunction verification of the omitted map compatibility; Tag 0D6E in sites-cohomology.tex and Tag 0DV0 in categories.tex for composition"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -63,10 +192,59 @@
    "results": "{\"t\": \"2026-10-17T08:55:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"pushforward\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match: "
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|baseChange.*[Ff]inite|finite.*[Bb]aseChange",
+   "results": "{\"t\": \"2026-10-17T11:28:15Z\", \"tool\": \"grep\", \"query\": \"projectionFormula|baseChange.*[Ff]inite|finite.*[Bb]aseChange\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean\"], \"digest\": \"ba17dfa227496867\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results read; ordinary algebra/underived sheaf pushforwards, no derived etale finite-pushforward tensor comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale derived finite direct image projection formula compatible with base change comparisons",
+   "results": "{\"t\": \"2026-10-17T11:28:15Z\", \"tool\": \"leansearch\", \"query\": \"Etale derived finite direct image projection formula compatible with base change comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.Etale.baseChange\", \"AlgebraicGeometry.IsEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\"], \"digest\": \"f34967d9b809746e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results read; ordinary algebra/underived sheaf pushforwards, no derived etale finite-pushforward tensor comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite pushforward of a constant etale sheaf reduces a tensor base change morphism to the untensored base change morphism",
+   "results": "{\"t\": \"2026-10-17T11:28:16Z\", \"tool\": \"leanfinder\", \"query\": \"Finite pushforward of a constant etale sheaf reduces a tensor base change morphism to the untensored base change morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"SheafOfModules.pushforwardCongr\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.unitToPushforwardObjUnit\", \"Algebra.Etale.baseChange\", \"SheafOfModules.unitToPushforwardObjUnit_val_app_apply\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\"], \"digest\": \"205c12118eac30b3\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results read; ordinary algebra/underived sheaf pushforwards, no derived etale finite-pushforward tensor comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*pushforward|projectionFormula|derived.*composition",
+   "results": "{\"t\": \"2026-10-17T11:34:36Z\", \"tool\": \"grep\", \"query\": \"finite.*pushforward|projectionFormula|derived.*composition\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results read; ordinary algebra/underived sheaf pushforwards, no derived etale finite-pushforward tensor comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite etale pushforward projection formula naturality base change",
+   "results": "{\"t\": \"2026-10-17T11:34:37Z\", \"tool\": \"leansearch\", \"query\": \"finite etale pushforward projection formula naturality base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardNatTrans_app_val_app_apply\", \"SheafOfModules.pushforwardNatTrans_app_val_app\", \"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\", \"PresheafOfModules.pushforward_map_app_apply\", \"SheafOfModules.pushforward_id_comp\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"SheafOfModules.pushforwardNatTrans_id\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\"], \"digest\": \"5421bea52ba5b80e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results read; ordinary algebra/underived sheaf pushforwards, no derived etale finite-pushforward tensor comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso _ → _",
+   "results": "{\"t\": \"2026-10-17T11:34:37Z\", \"tool\": \"loogle\", \"query\": \"IsIso _ → _\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `IsIso`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results read; ordinary algebra/underived sheaf pushforwards, no derived etale finite-pushforward tensor comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite pushforward constant sheaf tensor comparison untensored base change",
+   "results": "{\"t\": \"2026-10-17T11:34:38Z\", \"tool\": \"leanfinder\", \"query\": \"finite pushforward constant sheaf tensor comparison untensored base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardCongr\", \"SheafOfModules.unitToPushforwardObjUnit\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"SheafOfModules.unitToPushforwardObjUnit_val_app_apply\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pushforwardNatIso\"], \"digest\": \"2de894f7099dc6e5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: results read; ordinary algebra/underived sheaf pushforwards, no derived etale finite-pushforward tensor comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-kun-0f1j",
@@ -83,5 +261,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-kun-0f1j-finite-pushforward-comparison",
+  "worker": "stage1",
+  "summary": "Eight-step split of the finite-pushforward calculation. Reuses finite exchange and exactness, the torsion proper projection formula and module-valued derived composition. Explicit successive Hom transposes prove compatibility with the specified comparison map. No new nodes. Repaired inherited doubled TeX escapes without changing mathematical content. The source drops rho_* in one intermediate displayed line; retained the correctly typed pushforward.",
+  "blueprint": "Nearest ancestor lem-kun-0f1j, final finite-pushforward diagram and calculation in its vector-space paragraph: exchange, finite projection formula, Leray/composition, and the canonical comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "An exact finite direct image computes its own derived functor on every complex."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Finite exchange for abelian sheaves supplies the actual module exchange by the coefficient-forgetting comparison."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Base changes of the given finite morphism are finite; generic geometry input explicitly used by the finite-pushforward diagram."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Finite morphisms are proper, allowing the unit projection formula to be specialized."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition-module-linear",
+    "why": "Module-linear composition identifications and their adjunction normalization."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Faithful exact coefficient forgetting lifts finite exactness from abelian to module sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Exact inverse image ensures that the canonical composition comparison is computed on one K-injective representative."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic module derived direct-image composition realizes the source Leray identification."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Exact finite direct image replaces derived finite direct image; explicitly part of the source finite-pushforward calculation."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-exchange",
+    "why": "Finite exchange identifies pulled-back finite constant pushforwards; no alternate Kunneth proof is used."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Constant coefficients pull back to themselves and give exact module inverse-image adjunctions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lemma-weil-pbc-finite-exchange",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-9b38966f4",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-9b38966f4 (reviewer sub-agent of L); spot-checked: I read every step of the item in full, plus the statement of all 26 cited nodes (base and main-20261015 versions), Stacks 0F1J's last paragraph and 0F0G, the parent lem-kun-0f1j with its main-20261015 proof, and the unit and chapter records. The statement matches what parent Step 8 needs: X'_i=X_i×_K S', Y_i=X'_i×_{S'}T, k=F_ℓ, and no hypothesis was added or dropped. I checked it by hand on π=id, empty X_i, X⊔X→X, and ramified or non-flat π. Steps 1–2: finite base changes are finite and proper; exactness passes from abelian to module sheaves through the exact faithful forgetful functor; finite exchange for (π,p) and (π',h) is module-linear. Steps 3–4: 0F0G for proper π' and ρ with torsion F_ℓ, the transpose formula from def-kun-projection-formula-map, and derived composition via K-injectives. Steps 5–7: I recomputed s=(ε_ρ∘ρ^{-1}E)⊗ρ^{-1}δ and t=h_i^{-1}ε_{π'}⊗ρ^{-1}δ. Their equality is exactly the mate identity of def-weil-pbc-underived-exchange for the square (Y_i,h_i,π',ρ,h). Step 8 is formal. The worker's source error is confirmed: the middle line of 0F1J's final calculation drops ρ_{i,*}, and the main-20261015 blueprint already restores it. There is no cycle (reachability computed) and no new node. A DAG search found no duplicate. The 11 declared tool_uses are generic and accepted. The same-unit lem-kun-leray-finite only gives an unspecified equality of abelian R^q sheaves, which is not enough for this derived equality of maps, so using the derived composition node is justified. The direct transpose calculation stands in for lem-kun-proj-formula-natural without replacing any unit node by an off-unit lemma. No fixes."
  }
 }
