@@ -10,9 +10,91 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $W$ as in the statement and let $\\mathcal E_W$ be the class of arrows $a:A\\to B$ in $\\mathcal P_\\Delta$ for which $\\operatorname{Map}(B,W)\\to\\operatorname{Map}(A,W)$ is an equivalence. The presheaf category has all small colimits by [lem-coef-infinity-presheaf-free-cocompletion], applied to the small category $\\Delta$. By [lem-coef-infinity-yoneda-presheaf-limits], mapping out of any such colimit into $W$ is the corresponding limit of mapping spaces. Thus $\\mathcal E_W$ contains identities and is closed under composition, two-out-of-three and retracts: these assertions follow by applying the mapping-space functor and the corresponding rules for equivalences of spaces. It is closed under cobase change, since mapping out of a pushout gives a homotopy pullback and a pullback of an equivalence is an equivalence.",
+   "uses": [
+    "lem-coef-infinity-presheaf-free-cocompletion",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Definitions 6.1–6.3 and proof of Corollary 6.6, terminal monoidal specialization; degreewise cell transfer made explicit."
+   }
+  },
+  {
+   "text": "The same class is closed under small transfinite compositions. For a continuous sequence $(A_\\alpha)_{\\alpha\\leq\\lambda}$ whose successor maps belong to $\\mathcal E_W$, prove by transfinite induction that $A_0\\to A_\\beta$ belongs to $\\mathcal E_W$. The zero case is the identity and the successor case is composition. At a nonzero limit $\\beta$, [lem-coef-infinity-yoneda-presheaf-limits] gives $\\operatorname{Map}(A_\\beta,W)\\simeq\\lim_{\\alpha<\\beta}\\operatorname{Map}(A_\\alpha,W)$. The restrictions to $A_0$ give an objectwise equivalence from this diagram to the constant diagram with value $\\operatorname{Map}(A_0,W)$ by the inductive hypothesis. Its limit is that value: the nonempty ordinal $\\beta$ has contractible nerve, contracted to its initial element $0$. Taking limits gives precisely restriction to $A_0$. Hence $\\mathcal E_W$ is weakly saturated.",
+   "uses": [
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Definitions 6.1–6.3 and proof of Corollary 6.6, terminal monoidal specialization; degreewise cell transfer made explicit."
+   }
+  },
+  {
+   "text": "Take the terminal monoidal infinity category $C=*$. In [def-coef-segal-presheaf-localization] its structural category $C_\\otimes$ is $\\Delta$: there is one label list in each degree and cartesian transport is unique. The represented labelled simplex is $d\\Delta^n$, and the pullback formula of [lem-coef-labelled-spine-prism-horn-calculus] identifies the represented labelled horn with $d\\Lambda_i^n$. Write $S_n$ for the labelled spine, the iterated presheaf pushout of $n$ edge representables over vertex representables. By the evaluation equivalence of [lem-coef-space-yoneda-density] and the conversion of pushouts to homotopy pullbacks in [lem-coef-infinity-yoneda-presheaf-limits], restriction along $S_n\\to d\\Delta^n$ identifies with the given map $W_n\\to W_1\\times_{W_0}\\cdots\\times_{W_0}W_1$. Therefore every spine inclusion belongs to $\\mathcal E_W$. This uses the homotopy Segal hypothesis alone.",
+   "uses": [
+    "def-coef-segal-presheaf-localization",
+    "lem-coef-labelled-spine-prism-horn-calculus",
+    "lem-coef-space-yoneda-density",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Definitions 6.1–6.3 and proof of Corollary 6.6, terminal monoidal specialization; degreewise cell transfer made explicit."
+   }
+  },
+  {
+   "text": "Prove by induction on $n\\geq2$ that every $d\\Lambda_i^n\\to d\\Delta^n$, $0<i<n$, belongs to $\\mathcal E_W$. For $n=2$ the only horn is the two-edge spine $S_2$, so Step 3 applies. Assume the assertion in dimensions less than $n$. The finite filtration clause of [lem-coef-labelled-spine-prism-horn-calculus], with $C=*$ as in Step 3, expresses $S_n\\to d\\Lambda_i^n$ as a finite composite of pushouts of inner horn inclusions of dimensions strictly less than $n$. Each attaching map belongs to $\\mathcal E_W$ by the induction hypothesis, so Steps 1–2 imply $S_n\\to d\\Lambda_i^n\\in\\mathcal E_W$. The composite $S_n\\to d\\Lambda_i^n\\to d\\Delta^n$ is the spine inclusion of Step 3. Two-out-of-three now gives $d\\Lambda_i^n\\to d\\Delta^n\\in\\mathcal E_W$, completing the induction.",
+   "uses": [
+    "lem-coef-labelled-spine-prism-horn-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Definitions 6.1–6.3 and proof of Corollary 6.6, terminal monoidal specialization; degreewise cell transfer made explicit."
+   }
+  },
+  {
+   "text": "We must compare the statement's degreewise-set weak saturation with the presheaf weak saturation; no preservation of arbitrary pushouts by $d$ is assumed. An ordinary inner horn inclusion has the left lifting property against every inner fibration by definition. This lifting property is closed under pushouts (transpose a square using the pushout property), transfinite composites (choose compatible diagonal lifts successively and glue at limits), and retracts (compose the square and diagonal with the retract maps). Consequently the given $u$ has this lifting property. By [lem-coef-inner-horn-cell-generation], $u$ is a retract of a small continuous transfinite composite of pushouts of small coproducts of ordinary inner horns, with colimits degreewise in sets. These are exactly the hypotheses of [lem-coef-discrete-inner-cell-transfer]; hence $du$ belongs to the presheaf weakly saturated class generated by the discrete inner horn maps.",
+   "uses": [
+    "lem-coef-inner-horn-cell-generation",
+    "lem-coef-discrete-inner-cell-transfer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Definitions 6.1–6.3 and proof of Corollary 6.6, terminal monoidal specialization; degreewise cell transfer made explicit."
+   }
+  },
+  {
+   "text": "Step 4 puts every generator of that presheaf weakly saturated class in $\\mathcal E_W$, and Steps 1–2 show its closure under all three generating operations. Step 5 therefore gives $du\\in\\mathcal E_W$, which is the required restriction equivalence. These are the actual restriction maps, not selected inverses. For a commutative square of maps of simplicial sets, the two iterated restrictions agree; for $W\\to W'$, postcomposition commutes with restriction. The composition laws and their higher coherences in the presheaf category give naturality in both $u$ and $W$. No completeness or Reedy fibrancy assumption has entered.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Definitions 6.1–6.3 and proof of Corollary 6.6, terminal monoidal specialization; degreewise cell transfer made explicit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-segal-presheaf-localization",
+  "lem-coef-discrete-inner-cell-transfer",
+  "lem-coef-infinity-presheaf-free-cocompletion",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-inner-horn-cell-generation",
+  "lem-coef-labelled-spine-prism-horn-calculus",
+  "lem-coef-space-yoneda-density"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/2311.13362v1",
+  "place": "Expanded terminal-monoidal proof of Haugseng Corollary 6.6, read online; archival copy WANTED. Uses the existing lower-dimensional labelled horn filtration and explicit degreewise cell-transfer interface."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +137,31 @@
    "results": "{\"t\": \"2026-10-17T07:20:41Z\", \"tool\": \"grep\", \"query\": \"(structure|def|theorem|lemma).*StrictSegal|quasicategory\", \"sub\": \"AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"8\", \"19\", \"33\", \"34\", \"35\"], \"digest\": \"64524d84b1e2a6f3\"}",
    "date": "2026-10-17",
    "verdict": "no match: the returned StrictSegal and Quasicategory declarations concern set-valued simplicial sets and existence of horn fillers. They do not assert locality of space-valued homotopy Segal diagrams for derived mapping spaces. Read the returned types and Quasicategory/StrictSegal.lean:33-35."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every inner anodyne inclusion induces an equivalence of mapping spaces into any homotopy Segal space",
+   "results": "{\"t\": \"2026-10-17T09:01:54Z\", \"tool\": \"leanfinder\", \"query\": \"Every inner anodyne inclusion induces an equivalence of mapping spaces into any homotopy Segal space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.strictSegal\", \"SSet.StrictSegal.isStrictSegal\", \"CategoryTheory.Nerve.isStrictSegal\", \"SSet.StrictSegal.isRightKanExtension\", \"SSet.StrictSegalCore\", \"SSet.StrictSegal\", \"SSet.IsStrictSegal\", \"SSet.StrictSegal.ofIsStrictSegal\"], \"digest\": \"2670b3e6de8143cd\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned StrictSegal/quasicategory declarations; they concern simplicial sets and horn filler existence, not coherent mapping spaces in space-valued presheaves. Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean:33–35 and SimplicialSet/StrictSegal.lean:14–24."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"StrictSegal\", \"horn\"",
+   "results": "{\"t\": \"2026-10-17T09:05:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"StrictSegal\\\", \\\"horn\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned StrictSegal/quasicategory declarations; they concern simplicial sets and horn filler existence, not coherent mapping spaces in space-valued presheaves. Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean:33–35 and SimplicialSet/StrictSegal.lean:14–24."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A simplicial space satisfying the Segal condition is local for inner horn inclusions and inner anodyne maps",
+   "results": "{\"t\": \"2026-10-17T09:06:21Z\", \"tool\": \"leansearch\", \"query\": \"A simplicial space satisfying the Segal condition is local for inner horn inclusions and inner anodyne maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory\", \"SSet.quasicategory_of_filler\", \"SSet.StrictSegal.quasicategory\", \"SSet.Quasicategory.mk\", \"SSet.StrictSegal.quasicategory'\", \"SSet.Truncated.StrictSegal.isStrictSegal\", \"SSet.modelCategoryQuillen.J\", \"SSet.IsStrictSegal\"], \"digest\": \"8f4ea5b5f099b47b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected the returned StrictSegal/quasicategory declarations; they concern simplicial sets and horn filler existence, not coherent mapping spaces in space-valued presheaves. Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean:33–35 and SimplicialSet/StrictSegal.lean:14–24."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-algebroid-equivalence-nerve",
@@ -83,5 +186,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-segal-space-inner-anodyne-locality",
+  "worker": "stage1",
+  "summary": "Preserved the statement and imported searches. Repaired the incomplete earlier draft by reusing the existing labelled lower-dimensional spine-to-horn filtration instead of creating a Reedy-fibrant horn-locality node. Proved locality by dimension induction and weak saturation, and explicitly matched the degreewise-set inner-anodyne definition to the hypotheses of the existing cell-transfer node using inner-horn cell generation. All citations use node statements, and there are no new nodes.",
+  "blueprint": "Ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2 (finite-coefficient coherent mapping-complex adjunction): the inherited algebroid equivalence-nerve argument requires locality of homotopy Segal spaces; Steps 1–4 realize Haugseng Definitions 6.1–6.3 and Corollaries 6.5–6.6, Steps 5–6 transfer ordinary simplicial-set cells and record naturality.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q155-3dc6b24d5",
+  "group": "Q155",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-3dc6b24d5 (reviewer sub-agent of L); spot-checked: I read the item, its 6 steps and the full statement of all 7 cited nodes. The item's statement is unchanged, it adds no new nodes, and tool_uses is empty because every cited node is in unit sk-prop-sf-biduality-general. I read the source, Haugseng arXiv:2311.13362v1 section 6, online; it is not archived and the worker's report records it as WANTED. Def 6.2 defines the labelled horn by the same pullback formula as the calculus node. Prop 6.4/Cor 6.5 give the filtration from the spine to the horn by lower-dimensional inner horns, and the proof of Cor 6.6 is the n=2 base case plus induction and two-out-of-three, which Steps 3-4 reproduce with the terminal monoidal category C=*. In Step 3, C_* over Delta is Delta itself, the represented simplex is h_[n]=dDelta^n, and the labelled horn is dK; density plus the colimit-to-limit rule identify restriction along the spine with the Segal map. I hand-checked the n=3 filtrations for i=1 and i=2: all are inner 2-horns. Step 1 gives the local class's closure under pushouts, two-out-of-three and retracts via contravariant representables. Step 2 handles the transfinite limit stage correctly: the index category is weakly contractible, so a constant limit is its value. Step 5 turns degreewise-set saturation into presheaf saturation without assuming d preserves pushouts: the lifting class is weakly saturated, then the Mathlib equality (Inner/Basic.lean:89) gives a cell complex, which meets the exact hypotheses of discrete-inner-cell-transfer. Step 6 is elementary. A transitive dependency closure of 596 nodes does not reach the item, so there is no cycle. lem-coef-segal-external-local-equivalences is a different statement and no duplicate exists. The only citer, algebroid-equivalence-nerve Step 6, uses the statement exactly as written. There is no completeness or Reedy fibrancy assumption and no SGA source. No fixes were made."
  }
 }

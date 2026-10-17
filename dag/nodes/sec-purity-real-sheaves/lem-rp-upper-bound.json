@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-rp-upper-bound",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Upper bound via the largest determinant weight",
@@ -13,83 +13,150 @@
   "place": "node lem-rp-upper-bound, order 2664"
  },
  "stmt_deps": [
-  "def-wf-determinantal-weight",
-  "def-wf-weil-category"
+  "d-real-setup",
+  "def-wf-fundamental-representation",
+  "def-wf-iota-real",
+  "def-mg-determinantal-weight-multiset"
  ],
  "proof": [
   {
-   "text": "If $\\mathcal G_0=0$ there is nothing to prove, so assume it is\nnonzero. Choose a composition series as in\n[def-mg-weil-composition-series]. At every closed point, local\nFrobenius is block upper triangular in a basis adapted to that series,\nso its characteristic polynomial is the product ([p-linear-filtration]) of those of the\nsuccessive quotients. Therefore replacing $\\mathcal G_0$ by the\ndirect sum of those quotients, its Weil semisimplification in\n[def-mg-weil-semisimplification], leaves all local characteristic\npolynomials, hence $\\iota$-reality in\n[def-wf-iota-real], unchanged. It also leaves the\ndeterminant-weight multiset unchanged, by its definition in\n[def-mg-determinantal-weight-multiset] together with\n[lem-mg-semisimplification-independent].\nWe make this replacement and keep the same notation. The resulting\nrepresentation is geometrically semisimple by\n[lem-mg-normal-restriction-semisimple].",
+   "text": "If the sheaf is zero there are no local eigenvalues, hence no inequality to check; otherwise work with its nonzero finite-dimensional Weil representation $V$. The exact tensor equivalence [prop-wf-weil-sheaf-representation-equivalence] permits subquotients and direct sums to be interpreted as lisse Weil sheaves. A composition series [def-mg-weil-composition-series] exists by induction on $\\dim V$: choose a nonzero invariant subspace of least positive dimension (which is simple), and apply induction to the quotient of smaller dimension, pulling its filtration back to $V$. Form $V^{\\mathrm{ss}}$ as the direct sum of the simple quotients, as in [def-mg-weil-semisimplification].",
    "uses": [
+    "prop-wf-weil-sheaf-representation-equivalence",
     "def-mg-weil-composition-series",
+    "def-mg-weil-semisimplification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-upper-bound.md",
+    "place": "Proof, first paragraph: composition series and semisimplification"
+   }
+  },
+  {
+   "text": "By [p-real-operations], local Frobenius characteristic polynomials are those of $\\rho(F_x)$ on $V$. This operator preserves the chosen Weil-stable filtration. Applying [p-linear-filtration], its local characteristic polynomial is the product of those of the simple quotients, hence is unchanged upon replacing $V$ by their direct sum. Thus local eigenvalues with multiplicities and $\\iota$-reality [def-wf-iota-real] are unchanged. The same simple factors define the determinant-weight multiset [def-mg-determinantal-weight-multiset]; its independence of choices follows from [lem-mg-semisimplification-independent]. In particular its maximum is still $\\beta$. The direct sum is semisimple as a Weil representation, so [lem-mg-normal-restriction-semisimple] makes it geometrically semisimple. Replace the sheaf by this semisimplification and keep the notation $\\mathcal G_0$. It suffices to prove the estimate for this sheaf, because its local spectra equal the original ones.",
+   "uses": [
+    "p-real-operations",
     "p-linear-filtration",
-    "def-mg-weil-semisimplification",
     "def-wf-iota-real",
     "def-mg-determinantal-weight-multiset",
     "lem-mg-semisimplification-independent",
     "lem-mg-normal-restriction-semisimple"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-upper-bound.md",
+    "place": "Proof, first paragraph: preservation of local spectra and determinant weights"
+   }
   },
   {
-   "text": "Fix $k\\ge1$ and put\n$\\mathcal G^{(2k)}_0:=\\mathcal G_0^{\\otimes 2k}$, the tensor power of\n[def-real-weil-representation-operations]. By\n[cor-mg-det-weight-finite-tensor], whose geometric-semisimplicity\nhypothesis has just been verified, the largest determinant weight of\n$\\mathcal G^{(2k)}_0$ is $2k\\beta$.\nStep 1 (the $H_c^2$-factor). If $\\lambda$ is an eigenvalue of the\nglobal Frobenius $F$ on $H_c^2(U,\\mathcal G^{(2k)})$, then\n[lem-rp-hc2-eigenvalue-determinant-weight] gives a determinant weight\n\n$$\n\\frac{\\log\\bigl(|\\iota(\\lambda q^{-1})|^2\\bigr)}{\\log(q)}\n$$\n\nof $\\mathcal G^{(2k)}_0$. It is therefore at most $2k\\beta$, and\n\n$$\n|\\iota(\\lambda)|^2\\le q^{2k\\beta+2}.\n$$",
+   "text": "Fix an integer $k\\ge1$ and put $\\mathcal H_0=\\mathcal G_0^{\\otimes 2k}$, using [def-real-weil-representation-operations] and its tensor interpretation for sheaves in [prop-wf-weil-sheaf-representation-equivalence]. It is nonzero: the tensor power of a nonzero finite-dimensional vector space over a field has a nonzero pure basis tensor. The smooth curve is normal by [lem-sc-smooth-normal]; geometric semisimplicity was established in step 2. Thus [cor-mg-det-weight-finite-tensor] applies and gives largest constituent determinant weight $2k\\beta$. Write $\\mathcal H$ for its geometric pullback.",
    "uses": [
     "def-real-weil-representation-operations",
+    "prop-wf-weil-sheaf-representation-equivalence",
     "cor-mg-det-weight-finite-tensor",
+    "lem-sc-smooth-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-upper-bound.md",
+    "place": "Proof, second paragraph: even tensor powers and their determinant weights"
+   }
+  },
+  {
+   "text": "Use $q>1$ and the geometric Frobenius convention of [d-real-setup]. If $\\lambda$ is a Frobenius eigenvalue on $H_c^2(U,\\mathcal H)$, [lem-rp-hc2-eigenvalue-determinant-weight] says that $\\log(|\\iota(\\lambda q^{-1})|^2)/\\log q$ is a determinant weight of $\\mathcal H_0$, hence is at most $2k\\beta$. Since $\\log q>0$ and $\\iota(q)=q$, exponentiating gives $|\\iota(\\lambda)|^2\\le q^{2k\\beta+2}$, or $|\\iota(\\lambda)|\\le q^{k\\beta+1}$. Set $R_k=q^{-k\\beta-1}>0$.",
+   "uses": [
+    "d-real-setup",
     "lem-rp-hc2-eigenvalue-determinant-weight"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-upper-bound.md",
+    "place": "Proof, Step 1: the top-cohomology eigenvalue bound"
+   }
   },
   {
-   "text": "Consequently every zero of the coefficientwise complex polynomial\n$\\iota\\det(1-Ft,H_c^2(U,\\mathcal G^{(2k)}))$ has modulus at least\n\n$$\nR_k:=q^{-k\\beta-1}.\n$$",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Step 2 (formal Euler product and local zero-freeness). Apply\n[cor-rp-euler-product] to $\\mathcal G^{(2k)}_0$ and then apply\n$\\iota$ coefficientwise. The resulting formal series is\n\n$$\n\\prod_{x\\in|U_0|} f_x(t),\\qquad\nf_x(t):=\\iota\\det(1-F_xt^{d(x)},\\mathcal G^{(2k)}_{0,\\bar x})^{-1}.\n$$",
+   "text": "Put $D_k(t)=\\iota\\det(1-Ft\\mid H_c^2(U,\\mathcal H))$. Over the algebraically closed coefficient field, [p-linear-triangular] supplies a Frobenius-stable full flag; [p-linear-filtration] then gives $D_k(t)=\\prod_j(1-\\iota(\\lambda_j)t)$. A nonconstant factor has its zero at $\\iota(\\lambda_j)^{-1}$, whose modulus is at least $R_k$ by step 4. A zero eigenvalue would give the constant factor $1$ and no root. Consequently $D_k$ has no zero on $|t|<R_k$, and $D_k(0)=1$. This also covers $H_c^2=0$, when the product is empty and $D_k=1$.",
    "uses": [
-    "cor-rp-euler-product"
+    "p-linear-triangular",
+    "p-linear-filtration"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-upper-bound.md",
+    "place": "Proof, Step 1: zeros of the top-cohomology determinant"
+   }
   },
   {
-   "text": "The family is locally finite in each coefficient because only finitely many\nclosed points have a fixed degree [d-real-cohom]. By\n[lem-rp-even-tensor-positivity], every $f_x$ lies in\n$1+t\\mathbf R_{\\ge0}[[t]]$. The Euler identity identifies the formal\nproduct with the Taylor series at $0$ of the rational function\n\n$$\n\\frac{\\iota\\det(1-Ft,H_c^1(U,\\mathcal G^{(2k)}))}\n{\\iota\\det(1-Ft,H_c^2(U,\\mathcal G^{(2k)}))}.\n$$",
+   "text": "Apply [cor-rp-euler-product] to $\\mathcal H_0$, and apply $\\iota$ coefficientwise. With $d(x)=[k(x):k_0]$, put $P_{x,k}(t)=\\iota\\det(1-F_xt^{d(x)}\\mid\\mathcal H_{0,\\bar x})$ and $f_{x,k}=P_{x,k}^{-1}$. The result is the formal identity $\\prod_x f_{x,k}(t)=N_k(t)/D_k(t)$, where $N_k(t)=\\iota\\det(1-Ft\\mid H_c^1(U,\\mathcal H))$. There are only finitely many closed points of bounded degree, as stated in [d-real-cohom]; since $f_{x,k}=1+O(t^{d(x)})$, the product is locally finite in every coefficient. The positivity assertion of [lem-rp-even-tensor-positivity], applied to the $\\iota$-real sheaf $\\mathcal G_0$ and the even exponent $2k$, gives $f_{x,k}\\in1+t\\mathbf R_{\\ge0}[[t]]$. Substitution $t\\mapsto t^{d(x)}$ preserves nonnegative coefficients and constant term $1$.",
    "uses": [
+    "cor-rp-euler-product",
     "d-real-cohom",
     "lem-rp-even-tensor-positivity"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-upper-bound.md",
+    "place": "Proof, Step 2: Euler identity, local finiteness and nonnegative coefficients"
+   }
   },
   {
-   "text": "Step 1 shows that this function is holomorphic on $|t|<R_k$. Hence\n[lem-rp-positive-product-radius] applies and says that every local\npolynomial\n$\\iota\\det(1-F_xt^{d(x)},\\mathcal G^{(2k)}_{0,\\bar x})$ is zero-free\non that disc.",
+   "text": "The rational function $N_k/D_k$ is holomorphic on $|t|<R_k$ and its Taylor series there is its formal quotient. Explicitly, step 5 factors its denominator into finitely many $1-c_jt$ with $|c_j|\\le R_k^{-1}$. On each closed disc $|t|\\le r<R_k$, expand $(1-c_jt)^{-1}=\\sum_{n\\ge0}c_j^nt^n$; each geometric series converges absolutely and uniformly there, so their finite product, multiplied by $N_k$, has the formal quotient as its convergent power series. This is precisely the elementary finite geometric-series/Cauchy-product argument in the unit's first step; it also handles the empty denominator product.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-upper-bound.md",
+    "place": "Proof, Step 2: the rational function is holomorphic on the required disc"
+   }
+  },
+  {
+   "text": "All hypotheses of [lem-rp-positive-product-radius] are now verified: the product is locally finite, each factor has constant term $1$ and nonnegative coefficients, and its product is the Taylor series of a holomorphic function on the disc of radius $R_k$. Its conclusion says that every $P_{x,k}$ is zero-free on $|t|<R_k$. In particular, no cancellation in the global rational expression can conceal a zero of an individual local denominator.",
    "uses": [
     "lem-rp-positive-product-radius"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-upper-bound.md",
+    "place": "Proof, Step 2: positivity transfers the radius to every local factor"
+   }
   },
   {
-   "text": "Step 3 (the estimate). Let $\\alpha$ be an eigenvalue of $F_x$ on\n$\\mathcal G_{0,\\bar x}$. Then by [p-linear-spectra] $\\alpha^{2k}$ is an eigenvalue of the\n$2k$-fold tensor Frobenius, so\n$t^{d(x)}\\iota(\\alpha)^{2k}=1$ has a root of modulus\n$|\\iota(\\alpha)|^{-2k/d(x)}$. The local zero-freeness from Step 2 gives\n\n$$\n|\\iota(\\alpha)|^{-2k/d(x)}\\ge R_k=q^{-k\\beta-1},\n$$\n\nand therefore\n\n$$\n|\\iota(\\alpha)|^2\\le q^{d(x)(2k\\beta+2)/(2k)}\n=q_x^{\\beta+1/k}.\n$$",
+   "text": "Fix $x$ and a local Frobenius eigenvalue $\\alpha$ of $\\mathcal G_0$. Frobenius is an automorphism, so $\\alpha\\ne0$. Put $a=|\\iota(\\alpha)|>0$ and $d=d(x)\\ge1$. By [p-linear-spectra], $\\alpha^{2k}$ is an eigenvalue on the tensor power $\\mathcal H_{0,\\bar x}$. Choose a complex number $z$ with $z^d=\\iota(\\alpha)^{-2k}$: in polar coordinates take a $d$th root of its positive modulus and divide its argument by $d$. Then $|z|=a^{-2k/d}$ and $1-z^d\\iota(\\alpha)^{2k}=0$, so $P_{x,k}(z)=0$ by applying $1-z^dF_x$ to an eigenvector. Step 8 forces $a^{-2k/d}=|z|\\ge R_k=q^{-k\\beta-1}$. Taking real logarithms and multiplying by the negative number $-d/(2k)$ reverses the inequality and yields $2\\log a\\le d(\\beta+1/k)\\log q$. Since $q_x=q^d$ by [d-real-setup], this is $a^2\\le q_x^{\\beta+1/k}$.",
    "uses": [
-    "p-linear-spectra"
+    "p-linear-spectra",
+    "d-real-setup"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-upper-bound.md",
+    "place": "Proof, Step 3: a tensor eigenvalue gives a local denominator root"
+   }
   },
   {
-   "text": "Letting $k\\to\\infty$ proves\n$|\\iota(\\alpha)|^2\\le q_x^\\beta$.",
+   "text": "The logarithmic inequality in step 9 holds for every positive integer $k$. If $\\delta=2\\log a-\\beta\\log q_x$ were positive, choose $k>\\log q_x/\\delta$. Then step 9 would imply $\\delta\\le\\log q_x/k<\\delta$, a contradiction. Thus $2\\log a\\le\\beta\\log q_x$, and exponentiation gives $|\\iota(\\alpha)|^2\\le q_x^\\beta$. By step 2 this holds for the original sheaf as well.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-upper-bound.md",
+    "place": "Proof, last paragraph: the limit as the even tensor exponent grows"
+   }
   }
  ],
  "proof_deps": [
+  "prop-wf-weil-sheaf-representation-equivalence",
   "def-mg-weil-composition-series",
-  "p-linear-filtration",
   "def-mg-weil-semisimplification",
+  "p-real-operations",
+  "p-linear-filtration",
   "def-wf-iota-real",
   "def-mg-determinantal-weight-multiset",
   "lem-mg-semisimplification-independent",
   "lem-mg-normal-restriction-semisimple",
   "def-real-weil-representation-operations",
   "cor-mg-det-weight-finite-tensor",
+  "lem-sc-smooth-normal",
+  "d-real-setup",
   "lem-rp-hc2-eigenvalue-determinant-weight",
+  "p-linear-triangular",
   "cor-rp-euler-product",
   "d-real-cohom",
   "lem-rp-even-tensor-positivity",
@@ -99,11 +166,54 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-upper-bound.md",
-  "place": "## Proof"
+  "place": "Proof, expanded with explicit elementary calculations; compared with L22.pdf, Lemma 3.3, pp. 5–6, through (3.1)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "hasWeightsAtMost_of_isReal|sq_norm_le_rpow_of_isReal|WeilGroup|determinant.weight",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a real lisse Weil sheaf the Frobenius eigenvalue weights are at most its maximal constituent determinant weight",
+   "results": "Module.End.HasUnifEigenvalue, Module.End.maxUnifEigenspaceIndex_le_finrank, Finsupp.le_weight_of_ne_zero', LieModule.Weight.hasEigenvalueAt, BoundingSieve.weights_nonneg, LieModule.genWeightSpace_le_genWeightSpaceOf, LinearMap.finrank_maxGenEigenspace_eq, LieModule.Weight.mk.sizeOf_spec",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Representation, LinearMap.HasEigenvalue, norm, Real.rpow",
+   "results": "No hits; loogle: unknown identifier 'LinearMap.HasEigenvalue'",
+   "date": "2026-10-17",
+   "verdict": "query rejected (unknown identifier); superseded by the successful Module.End.HasEigenvalue query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A real lisse Weil sheaf on an affine smooth curve over a finite field has local Frobenius eigenvalue weights bounded by the largest determinant weight of its irreducible constituents",
+   "results": "BoundingSieve.weights, LieModule.exists₂_genWeightSpace_smul_add_eq_bot, LieModule.finite_genWeightSpace_ne_bot, LieModule.finite_genWeightSpaceOf_ne_bot, LieModule.genWeightSpace_zsmul_add_ne_bot, LieModule.exists_genWeightSpace_smul_add_eq_bot, LieModule.zero_lt_finrank_genWeightSpace, LieModule.Weight.instFintype",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.End.HasEigenvalue, Real.rpow",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rankin Selberg argument for eigenvalue bounds using nonnegative local Euler factors and determinant weights of tensor powers",
+   "results": "ModularFormClass.exists_petersson_le, DirichletCharacter.norm_LFunction_product_ge_one, NumberField.hermiteTheorem.boundOfDiscBdd, WeakFEPair.hk, DirichletCharacter.norm_LSeries_product_ge_one, WeakFEPair.k, WeakFEPair.ε, NumberField.mixedEmbedding.one_le_convexBodyLTFactor",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -145,5 +255,44 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-p-real-rankin"
+ "unit": "sk-p-real-rankin",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-rp-upper-bound",
+  "worker": "stage1",
+  "summary": "Expanded the imported Rankin–Selberg proof into ten audited steps, added the exact tensor equivalence and the triangular determinant factorization, repaired missing statement dependencies and null elementary flags, and recorded genuine Mathlib searches and all citation quotations. No new nodes or statement change. The candidate Lean theorem rests on sorry and is not attached.",
+  "blueprint": "First paragraph realized by steps 1–2; H_c^2 and tensor bound by steps 3–5; formal Euler product and positivity by steps 6–8; local root estimate and limit by steps 9–10. These realize unit sk-p-real-rankin steps 1 and 2. For an arbitrary upper bound d on constituent weights, beta <= d and q_x > 1 turn the resulting maximum-weight bound into the unit statement.",
+  "tool_uses": [
+   {
+    "node": "prop-wf-weil-sheaf-representation-equivalence",
+    "why": "Exact tensor equivalence transports representation subquotients and tensor powers to lisse Weil sheaves; it supplies the generic sheaf/representation interface, not a replacement for the Rankin–Selberg unit route."
+   },
+   {
+    "node": "lem-mg-normal-restriction-semisimple",
+    "why": "Restriction of a finite-dimensional semisimple representation to the normal geometric subgroup verifies the tensor-weight lemma hypothesis; no lemma inside the unit states this generic normal-subgroup result."
+   },
+   {
+    "node": "lem-mg-semisimplification-independent",
+    "why": "Choice independence identifies the constituent determinant-weight multiset after semisimplification; it is a generic finite-length representation tool, not another purity argument."
+   },
+   {
+    "node": "lem-sc-smooth-normal",
+    "why": "Generic smooth-curve normality verifies the normality hypothesis of the tensor determinant-weight corollary; it supplies no alternative purity route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-wf-weil-sheaf-representation-equivalence",
+  "lem-mg-normal-restriction-semisimple",
+  "lem-mg-semisimplification-independent",
+  "lem-sc-smooth-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q129-ad78e96f0",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-ad78e96f0 (reviewer sub-agent of L); spot-checked: I read the whole item. It has 10 steps and no new nodes. I checked them against the master and main-20261015 blueprint proofs (identical) and against L22.pdf pp. 5-6, Lemma 3.1, Definition 3.2 and Lemma 3.3 up to (3.1); the statement is unchanged and not weakened. The zero sheaf is vacuous: there is no beta and no eigenvalues. The unit's arbitrary-bound form follows by monotonicity, so realized is correct. Checks on cited statements: cor-mg-det-weight-finite-tensor needs a nonzero sheaf, geometric semisimplicity and a normal geometrically connected curve. These come from step 2 (via lem-mg-normal-restriction-semisimple), from lem-sc-smooth-normal and from the item's hypotheses. lem-rp-hc2-eigenvalue-determinant-weight applies to any lisse sheaf and gives R_k=q^{-k beta-1}. cor-rp-euler-product has H_c^1 over H_c^2. lem-rp-even-tensor-positivity(ii) applies with exponent 2k, and the semisimplification stays iota-real because its local polynomials are unchanged (p-real-operations, p-linear-filtration). lem-rp-positive-product-radius has all its hypotheses verified. I re-derived step 9: from a^{-2k/d} >= q^{-k beta-1} it follows that 2 log a <= d(beta+1/k) log q, with q_x=q^{e_x}. The step 10 limit is correct, and steps 7 and 10 are genuinely elementary. Small cases tested: rank 1, negative beta, degree greater than 1, a nonsplit extension, H_c^2=0 and the zero sheaf. proof_deps equals the union of uses, and there is no cycle. The only citer is thm-rp-real-lisse-purity-affine, and its uses are consistent. No duplicate exists and no SGA source is used. I accept all four tool_uses: the representation equivalence, normal-restriction semisimplicity, semisimplification independence and smooth-normal. None replaces a step of the unit route. No fixes were made."
+ }
 }
