@@ -10,7 +10,8 @@
   "place": "Trace-formula consequence in the statement and last proof sentence on Frobenius iterates; functorial transport-power identity extracted from returned Step 8."
  },
  "stmt_deps": [
-  "def-weil-endofunctor-fixed-pair-category"
+  "def-weil-endofunctor-fixed-pair-category",
+  "lem-trf-frobenius-transport-induction"
  ],
  "proof": [
   {
@@ -168,5 +169,28 @@
   "group": "Q41",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-eeafad75f (reviewer sub-agent of L); spot-checked: PASS, no changes. The statement is true and the three-step proof is complete. Full checks are in review.md. Statement: (C(phi) t_K)^m = C(phi^[m]) t_K^[m] for t: C => C∘G and an arbitrary G-algebra (K, phi). It is self-contained and true without invertibility. I checked m=1, m=2 (the naturality at phi), G=id, a constant non-invertible phi on Set, and the empty category. The only dependency, def-weil-endofunctor-fixed-pair-category, defines T-algebras with arbitrary structure maps in its last sentence, so the citation supports what the item uses. Step 1: the recursions u_{m+1}=phi∘G(u_m) and v_{m+1}=t_{G^mK}∘v_m are correctly typed and elementary. Step 2: base case m=1, plus naturality at f=u_m: G^mK->K, giving t_K C(u_m) = C(Gu_m) t_{G^mK}; the direction matches the hypothesis. Step 3: the induction F^{m+1}=F F^m is properly set up and uses no inverse. Use in the parent: prop-trf-karoubi-independence applies it with G=Lg*, C=RGamma_c, t=tau_c and handles the pullback identifications itself. Here G^m is a literal composite, so no coherence is hidden. No target, base-change morphism or coefficient category is involved; the item is purely categorical. The delivery adds no new nodes. Duplicate check: I read lem-trf-frobenius-transport-induction, lem-trf-iterated-weil-cocycle, lem-trf-weil-shriek-iterates and lem-trf-local-frobenius-conjugacy; none states this identity. No off-unit statement or SGA source is cited, and no tool_uses are needed. The 12 Mathlib search records cover all three kinds. I agree it is not a leaf: Endofunctor.Algebra in Mathlib gives only the notion. Blueprint source checked: the last sentence of main-20261015 prop-trf-karoubi-independence.proof.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.NaturalTransportPowers",
+  "declaration": "CategoryTheory.NaturalTransport.inducedEndomorphism_pow",
+  "declarations": [
+   "CategoryTheory.NaturalTransport.structureComposite",
+   "CategoryTheory.NaturalTransport.inducedEndomorphism_pow"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/NaturalTransportPowers.lean",
+  "statement": "theorem inducedEndomorphism_pow {A : Type u₁} [Category.{v₁} A] {B : Type u₂} [Category.{v₂} B] (G : A ⥤ A) (C : A ⥤ B) (t : C ⟶ G ⋙ C) (K : Endofunctor.Algebra G) (m : ℕ) (hm : 1 ≤ m) : (End.of (t.app K.a ≫ C.map K.str)) ^ m = repeated C G t K.a m ≫ C.map (structureComposite K m)",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the landed NaturalTransport.power and NaturalTransport.repeated from lem-trf-frobenius-transport-induction. structureComposite is the ordered composite explicitly introduced by this node, for arbitrary Endofunctor.Algebra structure maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-98e1e9db9",
+  "group": "Q24",
+  "result": "fix",
+  "note": "Lean matches the node; dependencies, universes, edge cases, docstrings and verbatim signature checked. Per-file compilation passed. review.md records all checks; fixes/lem-trf-global-frobenius-iterate-formula.report.md replaces the H11 placeholder with a complete independent reading."
  }
 }
