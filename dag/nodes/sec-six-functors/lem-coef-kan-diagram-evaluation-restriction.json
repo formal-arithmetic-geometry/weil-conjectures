@@ -252,5 +252,42 @@
   "group": "Q121",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-da3225447 (reviewer sub-agent of L); spot-checked: I read all of it: the item, all six steps, and the full statements of the six cited nodes, plus def-coef-coherent-localization-interface, def-weil-size-convention, lem-coef-enriched-diagram-rectification, the only user (lem-coef-universal-left-fibration-identity, steps 6-7), the unit sk-prop-sf-biduality-general with its route, and paragraph 2 of the main-20261015 proof of prop-coef-integral-exceptional-adjoint. Shape: one commit, the item and its report only, no new nodes. The statement and stmt_deps are unchanged from the side-DAG copy, so nothing was weakened. proof_deps equals the union of the step uses. There is no cycle: the 578-node closure does not contain the item and has no missing or merged node. Small cases checked: empty K (everything is terminal); K=Delta^0; the vertex inclusion Delta^0->Delta^1, where the edge X->Y restricts to X; the degenerate map Delta^1->Delta^0; and the replacement, where a projective trivial fibration is objectwise, so Q_K keeps diagrams objectwise Kan. Step 1: v^* preserves W and Kan values objectwise, and the descent follows from the universal property of the localization notation. Step 2 is correctly marked elementary: it substitutes C[v]x1 into the chain formula of the localized-evaluation node and uses naturality of the C -| N_hc unit. Step 3: applying L and the counit LGF~F of system-localization to the strict transformation A->GF gives coherent E_K and v^*-bar. That this strict diagram defines a diagram in WCat_infty is left implicit, but it is one line. Step 4 adds the parameter descent through Fun(B,-); it is correct but partly redundant. Step 5: two-out-of-three shows Q_K preserves W, and the pointwise criterion applies on the large shape N(D_K^f) through the universe enlargement the statement allows. Step 6: the zigzag and its cancellations are correctly typed. Sources: HTT 4.2.4.4 and HA 4.1.7.1-4.1.7.2 are the right places, but neither is in literature/. The report files WANTED lines for both and proof_origin is agent. No SGA source is used, and no target node, base-change morphism or coefficient category is involved. I found no duplicate in the DAG. Tool use accepted: lem-cbc-enhanced-functor-cone-calculus (unit sk-prop-sf-cbc) is outside the transitive unit route and serves as a generic componentwise-equivalence criterion. I made no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-850355404",
+  "group": "Q04",
+  "result": "fix",
+  "note": "H10 noncomputable declaration repaired; H1/H11 report second-reading section completed; repaired scompile passes sandbox and library checks."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.KanDiagramEvaluationRestriction",
+  "declaration": "SSet.KanDiagramEvaluation.kan_diagram_evaluation_restriction",
+  "declarations": [
+   "SSet.KanDiagramEvaluation.CoherentDiagrams",
+   "SSet.KanDiagramEvaluation.RestrictionSystem",
+   "SSet.KanDiagramEvaluation.ContractibleNormalizedLifts",
+   "SSet.KanDiagramEvaluation.ParametricDescent",
+   "SSet.KanDiagramEvaluation.IsProjectiveReplacement",
+   "SSet.KanDiagramEvaluation.raiseNerve",
+   "SSet.KanDiagramEvaluation.lowerNerve",
+   "SSet.KanDiagramEvaluation.evaluatedAugmentation",
+   "SSet.KanDiagramEvaluation.LocalizedRestriction",
+   "SSet.KanDiagramEvaluation.ComparisonFunctors",
+   "SSet.KanDiagramEvaluation.restrictedAugmentation",
+   "SSet.KanDiagramEvaluation.freshRestrictedAugmentation",
+   "SSet.KanDiagramEvaluation.ReplacementZigzags",
+   "SSet.KanDiagramEvaluation.ReplacementIndependence",
+   "SSet.KanDiagramEvaluation.kan_diagram_evaluation_restriction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/KanDiagramEvaluationRestriction.lean",
+  "statement": "theorem kan_diagram_evaluation_restriction (e : ∀ K : SSet.{u}, uliftFunctor.{u + 1}.obj K ⊗ largeNerve.{u + 1, u, 0} (KanDiagrams K) ⟶ Enhanced.smallSpaces.{u}) (he : ∀ K : SSet.{u}, IsChainEvaluation K (e K)) : ∃ R : RestrictionSystem.{u}, (∀ (K' K : SSet.{u}) (v : K' ⟶ K), largeNerveMap (R.functor v) ≫ MonoidalClosed.curry (e K') = MonoidalClosed.curry (e K) ≫ (MonoidalClosed.pre (uliftFunctor.{u + 1}.map v)).app Enhanced.smallSpaces) ∧ (∀ K : SSet.{u}, IsLocalization (SimplicialRightFibration.covKanWeak K) (MonoidalClosed.curry (e K))) ∧ LocalizedRestriction R (fun K ↦ MonoidalClosed.curry (e K)) ∧ (∀ (K : SSet.{u}) (L : SSet.{u + 1}) (q : largeNerve.{u + 1, u, 0} (KanDiagrams K) ⟶ L), IsLocalization (SimplicialRightFibration.covKanWeak K) q → ParametricDescent K L q) ∧ (∀ (K : SSet.{u}) (M : SimplicialRightFibration.CovProjectiveData K) (Q : KanDiagrams K ⥤ KanDiagrams K) (a : Q ⟶ 𝟭 (KanDiagrams K)), IsProjectiveReplacement K M Q a → Enhanced.IsEquivalenceEdge _ (evaluatedAugmentation (MonoidalClosed.curry (e K)) a) ∧ ∀ {P P' : KanDiagrams K} (f : P ⟶ P'), SimplicialRightFibration.covKanWeak K f → SimplicialRightFibration.covKanWeak K (Q.map f)) ∧ ReplacementZigzags R (fun K ↦ MonoidalClosed.curry (e K)) ∧ (∀ K : SSet.{u}, ReplacementIndependence K (MonoidalClosed.curry (e K)))",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Strict precomposition on full enriched components and chains, canonical localized restriction, and entire parameter-diagram descent with contractible normalized lift spaces. Replacement augmentations are evaluated as ordinary natural transformations. The fresh-replacement triangle and contractible equivalence-augmentation space retain replacement independence and its higher coherences. All helper constructions belong to this node; no dependency is copied or repaired.",
+  "fixed_by": "NT-stage2-Codex-850355404"
  }
 }
