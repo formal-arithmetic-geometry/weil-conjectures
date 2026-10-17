@@ -45,9 +45,7 @@ other horizontal equivalence give the required equality. Since a was arbitrary t
 proves exactly the equivalence of the two restriction predicates.
 -/
 theorem IsCurve.dense_open_restriction_comparison {k : Type u} [Field k] [IsAlgClosed k]
-    (P : CurveCoefficientPair k) (hP : (Scheme.IsConstructibleEtaleSheafOfSets
-      ((sheafCompose P.C.smallEtaleTopology
-        (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj P.F)))
+    (P : CurveCoefficientPair k)
     (U : P.C.Opens) (hU : Dense (U : Set P.C)) :
     let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙
       ModuleCat.restrictScalars (ULift.ringEquiv : ULift.{u + 1} ℤ ≃+* ℤ).toRingHom
@@ -57,7 +55,6 @@ theorem IsCurve.dense_open_restriction_comparison {k : Type u} [Field k] [IsAlgC
     let G := (sheafCompose P.C.smallEtaleTopology E).obj F'
     IsCurve.SurjectiveRestrictionTwo (ULift.{u + 1} ℤ) F ↔
       IsCurve.SurjectiveRestrictionTwo (ULift.{u + 1} ℤ) G := by
-  have _hconstructible := hP
   let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙
     ModuleCat.restrictScalars (ULift.ringEquiv : ULift.{u + 1} ℤ ≃+* ℤ).toRingHom
   let T := sheafCompose P.C.smallEtaleTopology E
