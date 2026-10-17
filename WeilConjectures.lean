@@ -3864,7 +3864,6 @@ public import WeilConjectures.RingTheory.UniversalFirstOrderThickeningUniqueness
 public import WeilConjectures.RingTheory.UnramifiedSmoothConormalChartFlat
 public import WeilConjectures.RingTheory.ZariskiPairFlatIntegralIsomorphism
 public import WeilConjectures.RingTheory.ZariskiPairRankOnePropagation
-public import WeilConjectures.ScratchKummer
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 public import WeilConjectures.SixFunctors.BaseChange.DerivedForget
