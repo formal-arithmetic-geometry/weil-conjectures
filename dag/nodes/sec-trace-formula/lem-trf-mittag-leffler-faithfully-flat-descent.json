@@ -12,9 +12,94 @@
   "def-weil-pbc-module-tensor-product",
   "def-trf-mittag-leffler-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-trf-module-finitely-presented-directed-colimit], choose a small nonempty directed partially ordered set $I$, finitely presented $R$-modules $M_i$, transition maps $f_{ij}$, and a colimit identification $M=\\operatorname{colim}_{i\\in I}M_i$ with canonical maps $f_i:M_i\\to M$.",
+   "uses": [
+    "lem-trf-module-finitely-presented-directed-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058G, theorem-lazard proof, finitely presented colimit presentation"
+   }
+  },
+  {
+   "text": "Tensoring this presentation with $S$ gives the directed system $(S\\otimes_RM_i,S\\otimes_Rf_{ij})$ of finitely presented $S$-modules with colimit $S\\otimes_RM$: finite presentations remain finite after scalar extension, and tensor product commutes with the displayed directed colimit. Since $S\\otimes_RM$ is Mittag-Leffler by hypothesis, [lem-trf-mittag-leffler-eventual-domination] gives, for each $i$, an index $j\\ge i$ such that $S\\otimes_Rf_{ij}$ dominates $S\\otimes_Rf_i$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-trf-mittag-leffler-module",
+    "lem-trf-mittag-leffler-eventual-domination"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05A5 proof, first paragraph invoking Proposition 059E after tensoring the finitely presented colimit"
+   }
+  },
+  {
+   "text": "Fix $i$ and the corresponding $j$. Let $N$ be the pushout of $f_i:M_i\\to M$ and $f_{ij}:M_i\\to M_j$, with canonical map $g:M_j\\to N$. Tensoring the pushout square with $S$ gives the pushout of $S\\otimes_Rf_i$ and $S\\otimes_Rf_{ij}$, because scalar extension is a tensor-product left adjoint and therefore preserves this colimit. The pushout relation is the same after the canonical identifications.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05A5 proof, pushout diagram and sentence 'tensorization by S ... is a pushout diagram'"
+   }
+  },
+  {
+   "text": "The domination obtained in Step 2 and the pushout description in Step 3 allow [lem-trf-domination-pushout-universal-injective] to conclude that the base-changed map $S\\otimes_Rg:S\\otimes_RM_j\\to S\\otimes_RN$ is universally injective over $S$.",
+   "uses": [
+    "lem-trf-domination-pushout-universal-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AUM applied to the pushout in Tag 05A5"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-faithfully-flat-universal-injective-reflection] to the faithfully flat map $R\\to S$ and the $R$-linear map $g:M_j\\to N$. Since its scalar extension is universally injective by Step 4, $g$ is universally injective over $R$.",
+   "uses": [
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-trf-faithfully-flat-universal-injective-reflection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05A5 proof, final sentence 'using that R -> S is faithfully flat we conclude ... universally injective'"
+   }
+  },
+  {
+   "text": "By [lem-trf-domination-pushout-universal-injective] again, universal injectivity of the pushout leg $g$ implies that $f_{ij}$ dominates $f_i$. This holds for every $i$ with a suitable $j\\ge i$, so the converse direction of [lem-trf-mittag-leffler-eventual-domination] proves that $M$ is Mittag-Leffler over $R$.",
+   "uses": [
+    "lem-trf-domination-pushout-universal-injective",
+    "lem-trf-mittag-leffler-eventual-domination"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05A5 proof, conclusion via Proposition 059E"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-mittag-leffler-module",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-module-tensor-product",
+  "lem-trf-domination-pushout-universal-injective",
+  "lem-trf-faithfully-flat-universal-injective-reflection",
+  "lem-trf-mittag-leffler-eventual-domination",
+  "lem-trf-module-finitely-presented-directed-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra Tag 05A5, lemma-ffdescent-ML proof; supporting Tags 058G, 059E and 0AUM"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,7 +138,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-countable-projective-faithfully-flat-descent",
@@ -85,5 +170,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-mittag-leffler-faithfully-flat-descent",
+  "worker": "stage1",
+  "summary": "Audited the imported Tag 05A5 statement and expanded its proof into the source's finitely presented colimit, Mittag-Leffler domination, pushout, and faithfully flat reflection argument. Added four statement-only supporting nodes for the general finitely presented colimit presentation, the 059E eventual-domination criterion, the 0AUM pushout criterion, and faithful-flat reflection of universal injectivity. The statement and all hypotheses are unchanged.",
+  "blueprint": "Realizes the imported blueprint ancestor lem-trf-local-term-locality's proof place for the final faithfully flat descent (Tag 05A9) and its supporting invocation of Tag 05A5 in Tag 05A6.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NZ-75716fcce",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-75716fcce (reviewer sub-agent of L); spot-checked: Read the required packet, DAG/unit route, item, all four new nodes, cited statements, and Stacks sources (Tags 05A5, 058G, 059E, 0AUM, 05CK). Hypotheses, tensor orientation, pushout morphism, faithful-flat reflection, edge cases, duplicates, blueprint metadata, searches, acyclicity, and route restrictions check out. Review written to review.md; no fixes or tool_uses accepted."
  }
 }

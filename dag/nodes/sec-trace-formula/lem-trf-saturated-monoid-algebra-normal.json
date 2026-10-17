@@ -10,12 +10,47 @@
  "stmt_deps": [
   "def-trf-fine-fan-blowup"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Let $x\\in k[G]$ be integral over $k[Q]$. By the definition of the group algebra it has a finite support $S=\\{g\\in G:c_g\\ne0\\}$ and an expression $x=\\sum_{g\\in S}c_ge^g$. Apply [lem-trf-integral-support-saturation] with $P=Q$. Its hypotheses hold: $k$ is a field, $Q$ is a finitely generated submonoid of the torsion-free abelian group $G$, and $x$ is integral over $k[Q]$. Therefore every $g\\in S$ belongs to $Q^{\\mathrm{sat}}=\\{h\\in G:\\exists n>0,\\ nh\\in Q\\}$.",
+   "uses": [
+    "lem-trf-integral-support-saturation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.2.9, printed p.104; agent deduction from the support-in-saturation statement"
+   }
+  },
+  {
+   "text": "Fix $g\\in S$. Step 1 gives an integer $n>0$ with $ng\\in Q$. The group-completion hypothesis identifies $G$ with $Q^{\\mathrm{gp}}$, so the saturation condition in [def-trf-fine-fan-blowup] applies to $g$ and gives $g\\in Q$. Hence $S\\subseteq Q$.",
+   "uses": [
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.2.9, printed p.104; agent deduction from the support-in-saturation statement"
+   }
+  },
+  {
+   "text": "The monoid algebra $k[Q]$ consists of the finite formal sums $\\sum_{q\\in Q}a_qe^q$, with multiplication $e^qe^{q\\prime}=e^{q+q\\prime}$. Its map to $k[G]$ sends each monomial to the monomial with the same exponent and coefficient; it is injective because $Q\\subseteq G$. Since $S\\subseteq Q$, the finite coefficient function $a_q=c_q$ on $S$ and $a_q=0$ off $S$ is an element of $k[Q]$ whose image is exactly $x$. Thus $x\\in k[Q]$. For $S=\\varnothing$ the same construction is the zero element. This proves the asserted integral closedness in $k[G]$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.2.9, printed p.104; agent deduction from the support-in-saturation statement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-integral-support-saturation",
+  "def-trf-fine-fan-blowup"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-  "place": "Expose VIII, Lemma 3.2.9 and the monomial-basis normalization argument, printed p.104"
+  "place": "Expose VIII, Lemma 3.2.9, printed p.104; agent deduction from the support-in-saturation statement"
  },
  "mathlib_searches": [
   {
@@ -45,10 +80,66 @@
    "results": "Returned generic integralClosure, IsIntegralClosure, and normal-closure declarations; none identifies saturated monoid algebras.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "([Mm]onoidAlgebra.*(IsIntegrallyClosed|IsIntegralClosure|[Nn]ormal))|((IsIntegrallyClosed|IsIntegralClosure).*([Mm]onoidAlgebra))",
+   "results": "{\"t\": \"2026-10-17T21:47:07Z\", \"tool\": \"grep\", \"query\": \"([Mm]onoidAlgebra.*(IsIntegrallyClosed|IsIntegralClosure|[Nn]ormal))|((IsIntegrallyClosed|IsIntegralClosure).*([Mm]onoidAlgebra))\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures and relevant source. Generic integral-closure/UFD normality statements require normality or factorization hypotheses not supplied here; domain instances and finite-support spanning do not prove saturated monoid-algebra normality. No exact or one-line match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The monoid algebra of a saturated affine monoid over a field is integrally closed in its group algebra.",
+   "results": "{\"t\": \"2026-10-17T21:47:08Z\", \"tool\": \"leansearch\", \"query\": \"The monoid algebra of a saturated affine monoid over a field is integrally closed in its group algebra.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsIntegrallyClosedInSubtypeMemSubalgebraIntegralClosure\", \"IsIntegrallyClosedIn\", \"instIsIntegrallyClosedInSubtypeMemSubringToSubringIntegralClosure\", \"Ring.instIsIntegrallyClosedNormalClosure\", \"GCDMonoid.toIsIntegrallyClosed\", \"minpoly.instAlgebraSubtypeMemSubringSubalgebraIntegralClosure\", \"completeIntegralClosure\", \"UniqueFactorizationMonoid.instIsIntegrallyClosed\"], \"digest\": \"85fd4466afae0c59\"}; Read returned signatures and relevant source. Generic integral-closure/UFD normality statements require normality or factorization hypotheses not supplied here; domain instances and finite-support spanning do not prove saturated monoid-algebra normality. No exact or one-line match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidAlgebra, IsIntegrallyClosed, IsIntegral",
+   "results": "{\"t\": \"2026-10-17T21:47:08Z\", \"tool\": \"loogle\", \"query\": \"MonoidAlgebra, IsIntegrallyClosed, IsIntegral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures and relevant source. Generic integral-closure/UFD normality statements require normality or factorization hypotheses not supplied here; domain instances and finite-support spanning do not prove saturated monoid-algebra normality. No exact or one-line match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a field k and a saturated finitely generated submonoid Q of a torsion-free abelian group G, every element of k[G] integral over k[Q] belongs to k[Q].",
+   "results": "{\"t\": \"2026-10-17T21:47:11Z\", \"tool\": \"leanfinder\", \"query\": \"For a field k and a saturated finitely generated submonoid Q of a torsion-free abelian group G, every element of k[G] integral over k[Q] belongs to k[Q].\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"UniqueFactorizationMonoid.integer_of_integral\", \"IsIntegral.isAlmostIntegral\", \"mem_integralClosure_iff_mem_fg\", \"IsIntegrallyClosed.exists_algebraMap_eq_of_pow_mem_subalgebra\", \"Algebra.zariskisMainProperty_iff_exists_saturation_eq_top\", \"IsIntegrallyClosedIn.exists_algebraMap_eq_of_pow_mem_subalgebra\", \"IsLocalization.exists_isIntegral_smul_of_isIntegral_map\", \"exists_integral_multiples\"], \"digest\": \"f37f28a6d4a116b4\"}; Read returned signatures and relevant source. Generic integral-closure/UFD normality statements require normality or factorization hypotheses not supplied here; domain instances and finite-support spanning do not prove saturated monoid-algebra normality. No exact or one-line match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(saturat|[Ss]emigroup|[Aa]ffine[Mm]onoid).*(integral|[Nn]ormal)|(integral|[Nn]ormal).*(saturat|[Ss]emigroup|[Aa]ffine[Mm]onoid)",
+   "results": "{\"t\": \"2026-10-17T21:47:28Z\", \"tool\": \"grep\", \"query\": \"(saturat|[Ss]emigroup|[Aa]ffine[Mm]onoid).*(integral|[Nn]ormal)|(integral|[Nn]ormal).*(saturat|[Ss]emigroup|[Aa]ffine[Mm]onoid)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"Mathlib/RingTheory/ZariskisMainTheorem.lean\"], \"digest\": \"c32854ff54079114\"}; Read returned signatures and relevant source. Generic integral-closure/UFD normality statements require normality or factorization hypotheses not supplied here; domain instances and finite-support spanning do not prove saturated monoid-algebra normality. No exact or one-line match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral elements of a group algebra over an affine semigroup ring have support in the saturation of the semigroup.",
+   "results": "{\"t\": \"2026-10-17T21:47:28Z\", \"tool\": \"leansearch\", \"query\": \"Integral elements of a group algebra over an affine semigroup ring have support in the saturation of the semigroup.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsIntegral\", \"IsIntegral.of_mem_of_fg\", \"Algebra.IsIntegral\", \"Subalgebra.saturation\", \"MonoidAlgebra.mem_span_support\", \"integralClosure\", \"Algebra.IsInvariant.isIntegral\", \"FreeCommRing.isSupported_int\"], \"digest\": \"36f012cc1d829a99\"}; Read returned signatures and relevant source. Generic integral-closure/UFD normality statements require normality or factorization hypotheses not supplied here; domain instances and finite-support spanning do not prove saturated monoid-algebra normality. No exact or one-line match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddMonoidAlgebra, IsIntegrallyClosedIn",
+   "results": "{\"t\": \"2026-10-17T21:47:28Z\", \"tool\": \"loogle\", \"query\": \"AddMonoidAlgebra, IsIntegrallyClosedIn\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures and relevant source. Generic integral-closure/UFD normality statements require normality or factorization hypotheses not supplied here; domain instances and finite-support spanning do not prove saturated monoid-algebra normality. No exact or one-line match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine semigroup ring of a saturated additive submonoid of a lattice over a field is a normal domain.",
+   "results": "{\"t\": \"2026-10-17T21:47:29Z\", \"tool\": \"leanfinder\", \"query\": \"An affine semigroup ring of a saturated additive submonoid of a lattice over a field is a normal domain.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ring.instIsDomainNormalClosure\", \"FunctionField.ringOfIntegers.instIsDomainSubtypeMemSubalgebraPolynomial\", \"MonoidAlgebra.instIsDomainOfIsCancelAddOfUniqueProds\", \"AddMonoidAlgebra.instIsDomainOfIsCancelAddOfUniqueSums\", \"UniqueFactorizationMonoid.instIsIntegrallyClosed\", \"GCDMonoid.toIsIntegrallyClosed\", \"instIsDomainSubtypeMemSubalgebraIntegralClosure\", \"IsAffineMonoid.toIsMulTorsionFree\"], \"digest\": \"28c5e0361c221b5e\"}; Read returned signatures and relevant source. Generic integral-closure/UFD normality statements require normality or factorization hypotheses not supplied here; domain instances and finite-support spanning do not prove saturated monoid-algebra normality. No exact or one-line match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
  "created": {
@@ -60,7 +151,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "ILO Expose VIII Lemma 3.2.9 proof: affine monoid algebra normalization on a chart.",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, through lem-trf-toric-monoid-comparison: the normality of a saturated affine monoid chart used in the normalized blowup comparison (ILO VIII Lemma 3.2.9, printed p.104).",
    "via": [
     "lem-trf-toric-monoid-comparison",
     "lem-trf-log-regular-desingularization",
@@ -73,5 +164,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-saturated-monoid-algebra-normal",
+  "worker": "stage1",
+  "summary": "Reused the existing integral-support-saturation lemma, then applied the definition of saturation and restricted the finite coefficient function to Q. The original statement is unchanged. Read ILO VIII Lemma 3.2.9; its proof uses classical toric normality rather than a printed support argument, so this deduction remains marked agent-written. No new nodes, no attachments and no Lean work. Repeated Mathlib searches in two phrasings found no exact or one-line match.",
+  "blueprint": "Realizes the affine normality ingredient of the historical toric normalized-blowup comparison below lem-trf-local-term-locality. Retains the existing ancestry and unit binding; it does not replace a current sk-i-curve-zero step or change the chapter/unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q125-84625a6b7",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q125-84625a6b7 (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, unit/chapter route, report, and ILO VIII §§3.1–3.2. The three-step deduction is valid; hypotheses, edge cases, dependency cycles, and duplicate candidates checked. No new nodes or hidden lemmas. The report correctly disclaims the inherited inaccurate “monomial-basis argument” source wording. Full findings written to review.md."
  }
 }
