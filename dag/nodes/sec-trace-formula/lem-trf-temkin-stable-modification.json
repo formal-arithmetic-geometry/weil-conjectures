@@ -23,9 +23,156 @@
   "def-weil-proper-morphism",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-marked-curve-finite-type-model] to the input pair. Its base hypotheses hold since a Noetherian scheme is quasi-compact and quasi-separated and S is integral. Obtain a dominant map S to an integral finite-type Z-scheme T and a multipointed pair (X,D) over T with smooth generic curve and etale generic marking, whose pullback is (C,H). We first construct a stable generic-fibre modification after an alteration of T, and later pull it back to a suitable integral component over S. This reduction is needed: excellence alone does not bound the heights of valuation rings of the original function field.",
+   "uses": [
+    "lem-trf-marked-curve-finite-type-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§3.1 and opening reduction in proof of Theorem 1.5, pp. 35--36."
+   }
+  },
+  {
+   "text": "Fix a separable closure L of k(T). By [lem-trf-riemann-zariski-finite-refinement], every point x of RZ_L(T) is a centred valuation ring V of finite height with fraction field L. Pull (X,D) back to Spec V. Its generic curve is smooth and its generic marking is etale by the base-change assertions of [lem-trf-semistable-marked-base-change], applied on the generic fibre, which is already a semistable marked curve. The hypotheses of [lem-trf-valuation-stable-reduction] therefore hold, including separable closedness and finite height. Choose a stable modification over Spec V. Now [lem-trf-stable-modification-spreading] spreads this specified model to a stable modification over an L-quasi-model U_x of T and gives an open valuation neighbourhood RZ_L(U_x) containing x. No global existence theorem is being invoked here.",
+   "uses": [
+    "lem-trf-riemann-zariski-finite-refinement",
+    "lem-trf-semistable-marked-base-change",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-stable-modification-spreading"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.5.1 and proof of Theorem 1.5, second paragraph, p. 36."
+   }
+  },
+  {
+   "text": "The neighbourhoods RZ_L(U_x) cover RZ_L(T). By quasi-compactness in [lem-trf-riemann-zariski-finite-refinement], retain finitely many U_i. Its common-refinement assertion supplies a proper dominant generically finite T' over T and open subschemes W_i covering T' with proper dominant generically finite maps to U_i (the common generic field can enlarge those of the U_i). Pull the stable models on U_i back to W_i. The geometric semistability and no-exceptional-component conditions persist by [lem-trf-semistable-marked-base-change]; their pair morphisms remain proper by [lem-weil-pbc-proper-fp-permanence](b). Since these base maps are dominant, the generic identifications are still isomorphisms on both the curve and its marking. By [lem-trf-stable-modification-spreading] each model on U_i is an isomorphism (curve and marking) over the preimage of a dense open U_i° of U_i; since W_i is integral and W_i to U_i is dominant, the preimage of U_i° in W_i is a dense open and the pulled-back pair maps are isomorphisms over its preimage, which contains the generic fibre. Smooth generic curve and etale generic marking of (X,D) pulled back to W_i persist by the first clause of [lem-trf-semistable-marked-base-change]. These isomorphism opens are schematically dense: for any affine chart flat over an integral base ring A, multiplication by a nonzero element of A is injective, hence the chart ring embeds in its localization over Frac(A). Any open containing the generic fibre is therefore schematically dense.",
+   "uses": [
+    "lem-trf-riemann-zariski-finite-refinement",
+    "lem-trf-semistable-marked-base-change",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-trf-stable-modification-spreading"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 3.2.6 and final paragraph of proof of Theorem 1.5, p. 36."
+   }
+  },
+  {
+   "text": "Normalize T' in its own function field. The node [lem-weil-pbc-normalization-in-residue-field-extension], with the generic point and the trivial field extension, supplies an integral normal scheme N and an integral birational map to T'. On every affine open Spec A of T', A is a domain of finite type over Z. The integral closure is a finite A-module by [lem-weil-pbc-finite-type-z-domain-normalization-finite]. Thus N to T' is finite; it is proper and surjective, and N is still of finite type over Z. Properness here also follows directly from the integral finite affine description, or the finite-morphism instance of properness in [lem-weil-pbc-finite-proper]. The preimages V_i of W_i cover N. Pull back all the models to V_i; properness is preserved by [lem-weil-pbc-proper-fp-permanence] and semistability and geometric stability by [lem-trf-semistable-marked-base-change]. Each V_i and each intersection is normal and integral, as required in the next step.",
+   "uses": [
+    "lem-weil-pbc-normalization-in-residue-field-extension",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-trf-semistable-marked-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Normalization in the last paragraph of proof of Theorem 1.5, p. 36; finiteness from Stacks 0335; proper finite morphisms from Stacks 01WM."
+   }
+  },
+  {
+   "text": "Over V_i intersect V_j, apply [lem-trf-stable-modification-uniqueness-normal] to the two pulled-back stable modifications of (X,D). The base is normal; both maps have the same generic identification, and (X,D) pulled back to the intersection is a multipointed curve with smooth generic curve and etale generic marking by the first clause of [lem-trf-semistable-marked-base-change], the map to T sending generic point to generic point. It gives a unique isomorphism of pairs over (X,D). On triple intersections the composite of two such isomorphisms and the direct isomorphism both lie over (X,D), so uniqueness makes them equal. Use [lem-weil-pbc-glue-schemes] once for the curves and once for the markings. The compatible maps glue on these open covers (a morphism of locally ringed spaces is given by continuous maps and sheaf maps agreeing on overlaps); the closed-immersion marking glues by its local quotient ideals. This gives a pair (Y,E) over N and a compatible pair map to (X,D) times_T N.",
+   "uses": [
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-weil-pbc-glue-schemes",
+    "def-weil-closed-immersion",
+    "lem-trf-semistable-marked-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Corollary 1.3(i) and gluing in final paragraph of proof of Theorem 1.5, p. 36; Stacks 01JB and 01JC for scheme gluing."
+   }
+  },
+  {
+   "text": "The glued curve and marking are flat and finitely presented with the required pure relative dimensions, nodal curve fibres, etale marking in the smooth locus, and no exceptional contracted rational components: all these properties are local on the open cover V_i by [lem-trf-semistable-marked-base-change]. Each pair map is proper because properness is local on its target: after any base change a closed subset has closed image if this holds on an open cover; the closed-diagonal and finite-type conditions also hold on that cover, so [def-weil-proper-morphism] applies. The isomorphism opens of the local pair maps agree on overlaps as their restrictions are isomorphic over the target, and glue to isomorphism opens containing the whole generic pair (each local one contains the preimage of the dense open from Steps 3--4). Flatness over the integral base proves their schematic density by the affine injection argument of Step 3. We have consequently constructed a stable generic-fibre modification over the integral normal alteration N of T.",
+   "uses": [
+    "lem-trf-semistable-marked-base-change",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Last paragraph of proof of Theorem 1.5, p. 36; local verification of the glued morphism of pairs."
+   }
+  },
+  {
+   "text": "Form Q=S times_T N. Properness is preserved by [lem-weil-pbc-proper-fp-permanence](b). The generic fibre of N over T is the spectrum of a finite separable field extension. Since T is Noetherian, [thm-sc-proper-finite-fibre-finite-neighbourhood], applied at its generic point, gives a dense open U of T over which N is finite. Since S to T is dominant, its inverse image meets the generic point eta of S. The generic fibre Q_eta is the spectrum of a nonzero finite etale algebra over k(eta), so choose one of its field factors. Let S~ be the reduced closed closure of that point in Q: on affine charts its ideal consists of the functions vanishing at the point and is prime. It is integral and proper over S by [lem-weil-pbc-proper-fp-permanence](a),(c), dominant because its image contains eta, and finite over the dense open pulled back from U (restriction of a finite algebra followed by a quotient is finite). It is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], and excellent by [lem-exc-finite-type-localization-excellent] on finite-type affine charts. Pull (Y,E) and both pair maps back along S~ to N, obtaining (C~,H~), b and d. Properness persists by [lem-weil-pbc-proper-fp-permanence], and all the semistable and geometric stability conditions persist by [lem-trf-semistable-marked-base-change]. The generic point of S~ maps to that of N, so both generic pair maps are isomorphisms. Flatness over integral S~ again proves the density of their pulled-back isomorphism opens.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-trf-semistable-marked-base-change",
+    "thm-sc-proper-finite-fibre-finite-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Return from the finite-type approximation in Theorem 1.5; integral component construction and permanence written out from the cited scheme tools. Stacks Tag 02OH, coherent.tex, lemma-proper-finite-fibre-finite-in-neighbourhood, gives the finite open."
+   }
+  },
+  {
+   "text": "It remains to prove the projective-bundle clause for b. Apply [lem-trf-marked-nodal-dualizing-degrees] over S~ to this stable modification; this produces the invertible sheaf L=omega_(C~/S~)(H~), including its interpretation for a nonseparated curve. On a normalized contracted geometric-fibre component its degree is 2g-2+n, counting marking and nodal branches, and the node's contracted-subcurve assertion makes this degree strictly positive. Every geometric fibre of b has dimension at most one, being a closed subscheme of the corresponding geometric fibre of C~ over S~. Both its source and target are Noetherian finite-type schemes over S~ by [lem-weil-pbc-finite-type-over-noetherian]. Now [lem-trf-proper-fibrewise-ample-projective] applies to b and L. It gives a finite-type quasi-coherent module and a closed immersion into its projective bundle. This proves exactly the convention of [def-trf-projective-bundle-morphism], without invoking Temkin Theorem 1.1 as an unsplit black box.",
+   "uses": [
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "def-trf-projective-bundle-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proof of Theorem 1.1, p. 3, via marked dualizing degrees and fibrewise ampleness; Stacks 0B5Y, 0D2S, 01VU for the generic ampleness tool."
+   }
+  },
+  {
+   "text": "The pair-map compatibility already constructed gives b composed with the inclusion of H~ equal to the inclusion of H times_S S~ composed with d. The generic isomorphism of d was retained at each pullback and gluing step. The completed-ring node condition is exactly the semistability condition in the statement. Finally [lem-trf-semistable-marked-base-change] applies to every morphism S1 to S~, with no Noetherian or flatness restriction, giving precisely the asserted persistence of the semistable multipointed form. No claim about the base-changed pair map being a modification is needed for this last assertion.",
+   "uses": [
+    "lem-trf-semistable-marked-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Temkin §1.2 and ILO X Theorem 3.4 Step 4, printed pp. 160--161."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-trf-projective-bundle-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-trf-marked-curve-finite-type-model",
+  "lem-trf-marked-nodal-dualizing-degrees",
+  "lem-trf-proper-fibrewise-ample-projective",
+  "lem-trf-riemann-zariski-finite-refinement",
+  "lem-trf-semistable-marked-base-change",
+  "lem-trf-stable-modification-spreading",
+  "lem-trf-stable-modification-uniqueness-normal",
+  "lem-trf-valuation-stable-reduction",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lem-weil-pbc-proper-fp-permanence",
+  "thm-sc-proper-finite-fibre-finite-neighbourhood"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Theorem 1.5 proof, pp. 35--36, using Proposition 4.5.1 and §3.2; Theorem 1.1 proof, p. 3, decomposed into dualizing degrees and a generic ampleness criterion. PDF archived in this sandbox; see report for checksum and archival-promotion request."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -89,10 +236,24 @@
    "results": "hits=12; top=['Lean.Lsp.SemanticTokenModifier.modification', 'CategoryTheory.Lax.LaxTrans.Modification.id', 'CategoryTheory.Lax.OplaxTrans.Modification.id', 'CategoryTheory.Lax.LaxTrans.Modification.instInhabited', 'CategoryTheory.Lax.OplaxTrans.Modification.instInhabited', 'CategoryTheory.Lax.LaxTrans.Modification', 'CategoryTheory.Lax.OplaxTrans.Modification', 'CategoryTheory.Lax.LaxTrans.Modification.vcomp']; note=; digest=2fd2004175914d47. The name hits concern bicategorical modifications or editor tokens, not relative curves.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat relative curve with etale horizontal markings has a semistable multipointed modification after a generically finite base alteration",
+   "results": "hits=8; top=['AlgebraicGeometry.Flat.stalkMap', 'RingHom.Flat.isStableUnderBaseChange', 'AlgebraicGeometry.Flat.casesOn', 'AlgebraicGeometry.flat_iff', 'AlgebraicGeometry.Scheme.Etale', 'AlgebraicGeometry.Flat', 'AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange', 'IsSMulRegular.of_flat_of_isBaseChange']; none supplies stable modification or nodal-family existence.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Flat, IsProjective",
+   "results": "hits=0; unknown identifier 'IsProjective'; no stable-modification theorem.",
+   "date": "2026-10-17",
+   "verdict": "invalid query"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-stable-modification-flat-curve-pair",
@@ -117,5 +278,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-temkin-stable-modification",
+  "worker": "stage1",
+  "summary": "Replaced all four circular elementary steps. Construct the global model by finite-type approximation, finite-height valuation stable reduction, spreading, Riemann--Zariski finite common refinement, normalization and unique gluing. Return to the excellent base by a generic component; prove projectivity by marked dualizing degrees and a separate general fibrewise ampleness criterion. Arbitrary base change has an explicit dependency. Eight genuinely smaller statement-only nodes created; all searches and prior report retained.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. The nine steps supply the proof of the stable-modification input through the original Temkin route, without changing any unit or chapter.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-normalization-in-residue-field-extension",
+    "why": "Generic scheme tool needed for normalization, open gluing or finite-type/proper permanence in the Temkin construction; the curve-zero unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "why": "Generic scheme tool needed for normalization, open gluing or finite-type/proper permanence in the Temkin construction; the curve-zero unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Generic scheme tool needed for normalization, open gluing or finite-type/proper permanence in the Temkin construction; the curve-zero unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic scheme tool needed for normalization, open gluing or finite-type/proper permanence in the Temkin construction; the curve-zero unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-glue-schemes",
+    "why": "Generic scheme tool needed for normalization, open gluing or finite-type/proper permanence in the Temkin construction; the curve-zero unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme tool needed for normalization, open gluing or finite-type/proper permanence in the Temkin construction; the curve-zero unit has no replacement."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic scheme tool needed for normalization, open gluing or finite-type/proper permanence in the Temkin construction; the curve-zero unit has no replacement."
+   },
+   {
+    "node": "thm-sc-proper-finite-fibre-finite-neighbourhood",
+    "why": "Generic proper-morphism tool giving a finite neighbourhood of the generic fibre; needed to match the finite-over-a-dense-open alteration convention."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-exc-finite-type-localization-excellent",
+  "thm-sc-proper-finite-fibre-finite-neighbourhood"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N4-981d4227d",
+  "group": "N4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-981d4227d (reviewer sub-agent of L); spot-checked: The item statement is unchanged against live, and it agrees with ILO X §3.2.2 and with Thm 3.4 Steps 3-4 (pp.158-161). The nine steps reprove Temkin's theorem along his route: finite-type model, finite-height valuation stable reduction, spreading, Riemann-Zariski finite refinement, normalization, unique gluing over a normal base, a generic component over S, and projectivity from marked dualizing degrees plus a fibrewise ampleness criterion. I checked every step against the statements of the nodes it cites, and checked each of the 8 new nodes mathematically. Small cases tested: height 0, empty marking, nonseparated input. Positivity on contracted components: a P^1 with at most 2 special points is excluded by stability, a nodal rational component has n>=3, and a component with g>=1 and n=0 is impossible by the flat Stein-factorisation dimension argument. No new node duplicates an existing one or restates the item. Repaired in fixes/: (1) C1/C4: base change of non-semistable multipointed pairs, and persistence of the smooth generic curve and etale generic marking, had no node in Steps 2-5 and 7. I added a first clause to lem-trf-semistable-marked-base-change and cited it in Steps 3 and 5. (2) E1/E5: Steps 3, 6 and 7 assumed the isomorphism open contains the generic fibre. I made lem-trf-stable-modification-spreading say it is an isomorphism over the preimage of a dense open of U, cited it in Step 3, and also replaced that node's undefined term 'generic-fibre modification' with 'eta-modification'. (3) The W_i->U_i in lem-trf-riemann-zariski-finite-refinement are now T-morphisms, since T need not be separated. I accept the tool uses of normalization-in-residue-field-extension, z-domain-normalization-finite, finite-type-localization-excellent and proper-finite-fibre-finite-neighbourhood. Limitation: the Temkin PDF (arXiv:0707.3953v3) is not in literature/, and network access is blocked here, so I could not verify Temkin's page and proposition numbers. The maintainer must promote the PDF and its LIST.md entry before merge.; 4 file(s) fixed by the reviewer"
  }
 }
