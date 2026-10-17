@@ -29,9 +29,98 @@
   "lem-coef-combinatorial-localization-presentability",
   "lem-coef-cosimplicial-frame-mapping"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $W_0$ for the original weak equivalences and $\\mathcal Z$ for the originally fibrant $S$-local objects. By [lem-coef-cosimplicial-frame-mapping], the specified $\\operatorname{Map}^h$ is the mapping space in the original homotopy coherent localization, so every arrow of $W_0$ induces equivalences on these spaces. Thus $W_0\\subseteq W_S$. The mapping-space definition shows two-out-of-three for $W_S$ by applying $\\operatorname{Map}^h(-,Z)$ for each $Z\\in\\mathcal Z$. An isomorphism of arrows conjugates each tested map by equivalences, proving repleteness.",
+   "uses": [
+    "lem-coef-cosimplicial-frame-mapping"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+    "place": "Definition 4.1 and Lemma 4.6: original derived mapping-space test."
+   }
+  },
+  {
+   "text": "Choose a small original generating set $I$ of cofibrations. Apply [lem-coef-accessible-small-object-factorization] to $I$ and $\\varnothing\\to X$, obtaining a functor $Q$ and a natural trivial fibration $q_X:QX\\to X$ with $QX$ cofibrant. The right lifting class of $I$ is the original trivial fibrations by combinatoriality. Original cofibrations form the left lifting class against these maps; [lem-coef-lifting-class-closure] and [lem-coef-transfinite-left-lifting] show that this class is weakly saturated, so the left factor is an original cofibration. The middle-object functor is accessible. For a nonempty filtered category, its constant initial diagram has initial colimit: a cocone into any object is unique. Since arrow colimits are computed at endpoints, $X\\mapsto(\\varnothing\\to X)$ preserves filtered colimits. Hence $Q$ is accessible. Naturality gives $q_YQf=fq_X$; step 1 and two-out-of-three yield $f\\in W_S\\Longleftrightarrow Qf\\in W_S$.",
+   "uses": [
+    "lem-coef-accessible-small-object-factorization",
+    "lem-coef-lifting-class-closure",
+    "lem-coef-transfinite-left-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+    "place": "Lemma 4.6, accessible replacement input expanded using HTT Proposition A.1.2.5."
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-framed-localizing-cofibrations] to the original model category and the small set $S$, obtaining $H$. Apply [lem-coef-accessible-small-object-factorization] to $H$ and $QX\\to1$. Let $RX$ be the middle object and $a_X:QX\\to RX$ the left factor. The right factor $RX\\to1$ has all $H$-lifts, so $RX\\in\\mathcal Z$. The map $a_X$ lies in the weak saturation of $H$ and its source $QX$ is cofibrant; the second clause of the framing node therefore gives $a_X\\in W_S$. Since all of $H$ are original cofibrations, [lem-coef-lifting-class-closure] and [lem-coef-transfinite-left-lifting] show that their weak saturation consists of original cofibrations. Thus $a_X$ is a cofibration, and composing it with the initial cofibration of $QX$ shows that $RX$ is cofibrant. No assertion about cellular maps with arbitrary noncofibrant source is used.",
+   "uses": [
+    "lem-cbc-framed-localizing-cofibrations",
+    "lem-coef-accessible-small-object-factorization",
+    "lem-coef-lifting-class-closure",
+    "lem-coef-transfinite-left-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+    "place": "Lemma 4.6, accessible local replacement expanded using the framed lifting-test prerequisite; Hirschhorn Definition 3.3.8, Lemma 3.3.11, Theorem 17.8.4, Proposition 17.8.8, Corollary 17.8.12 and Proposition 17.8.14, without the properness assumptions of Section 4.2."
+   }
+  },
+  {
+   "text": "Functoriality of the second factorization gives $R$ and a natural transformation $a:Q\\to R$, in particular $Rf\\,a_X=a_YQf$. Its middle-object functor preserves sufficiently filtered colimits. The functor $QX\\mapsto(QX\\to1)$ does also: filtered indices are nonempty and connected, and cocones from their constant terminal diagram to $T$ are exactly maps $1\\to T$, so its colimit is $1$. Choose a regular cardinal at least the two accessibility cardinals (the larger of two regular cardinals); filteredness at it implies filteredness at each smaller one. Thus the composite $R$ is accessible. Two-out-of-three applied to the displayed naturality square and $a_X,a_Y\\in W_S$ gives $Qf\\in W_S\\Longleftrightarrow Rf\\in W_S$. Combined with step 2, $f\\in W_S\\Longleftrightarrow Rf\\in W_S$.",
+   "uses": [
+    "lem-coef-accessible-small-object-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+    "place": "Lemma 4.6, constructive accessible local replacement; functoriality and filtered-colimit comparison written out."
+   }
+  },
+  {
+   "text": "Let $u:U\\to V$ be an arrow between objects of $\\mathcal Z$. The mapping spaces of [lem-coef-cosimplicial-frame-mapping] have component sets equal to morphisms in $h\\mathcal M_\\infty$: a component identifies edges exactly by homotopies, which is the definition of $h$ in [lem-coef-localization-homotopy-category]. That node identifies $h\\mathcal M_\\infty$ with the ordinary localization. If $u\\in W_S$, test against $U$ and $V$. Surjectivity of $u^*:[V,U]\\to[U,U]$ supplies $g$ with $gu=1_U$. Injectivity of $u^*:[V,V]\\to[U,V]$ and $(ug)u=u=1_Vu$ give $ug=1_V$. Therefore $u$ is invertible in the original ordinary localization, and [lem-coef-model-localization-detects-weak-equivalences] gives $u\\in W_0$. Conversely $W_0\\subseteq W_S$ by step 1. Since $RX,RY\\in\\mathcal Z$, this proves the decisive equivalence $f\\in W_S\\Longleftrightarrow Rf\\in W_0$.",
+   "uses": [
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-localization-homotopy-category",
+    "lem-coef-model-localization-detects-weak-equivalences"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+    "place": "Lemma 4.6, omitted accessibility inference: explicit inverse in the original homotopy category."
+   }
+  },
+  {
+   "text": "By [lem-coef-model-weak-equivalences-accessible], the full original weak-equivalence subcategory $W_0\\subseteq\\mathcal M^{[1]}$ is replete, accessible and accessibly embedded. Its hypothesis is precisely combinatoriality of the original model structure. Apply [lem-coef-accessible-arrow-inverse-image] to $R:\\mathcal M\\to\\mathcal M$: both underlying categories are locally presentable by the item hypothesis, $R$ is accessible by step 4, and $W_0$ satisfies its subcategory hypothesis. The inverse image is exactly $W_S$ by step 5. The conclusion supplies a regular cardinal $\\lambda$ for which $W_S$ is closed under small $\\lambda$-filtered arrow colimits and generated under those colimits by a small set. Together with step 1 this is every clause of the item, including ambient accessibly embeddedness.",
+   "uses": [
+    "lem-coef-model-weak-equivalences-accessible",
+    "lem-coef-accessible-arrow-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+    "place": "Lemma 4.6, accessibility conclusion, made explicit by existing generic inverse-image theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-framed-localizing-cofibrations",
+  "lem-coef-accessible-arrow-inverse-image",
+  "lem-coef-accessible-small-object-factorization",
+  "lem-coef-cosimplicial-frame-mapping",
+  "lem-coef-lifting-class-closure",
+  "lem-coef-localization-homotopy-category",
+  "lem-coef-model-localization-detects-weak-equivalences",
+  "lem-coef-model-weak-equivalences-accessible",
+  "lem-coef-transfinite-left-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://webhomes.maths.ed.ac.uk/~cbarwick/papers/complete.pdf",
+  "place": "Lemma 4.6, printed p. 43. Constructive expansion of its missing accessibility inference, via framed local replacement; Hirschhorn framing text not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -81,10 +170,38 @@
    "results": "{\"t\": \"2026-10-16T22:51:48Z\", \"tool\": \"grep\", \"query\": \"isCardinalAccessible.*isLocal|isLocallyPresentable_isLocal|[Oo]rthogonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean\", \"Mathlib/Geometry/Euclidean/Incenter.lean\", \"Mathlib/Geometry/Euclidean/Incenter.lean\", \"Mathlib/Geometry/Euclidean/Incenter.lean\", \"Mathlib/Geometry/Euclidean/Incenter.lean\", \"Mathlib/Geometry/Euclidean/Incenter.lean\", \"Mathlib/Geometry/Euclidean/Inversion/Calculus.lean\", \"Mathlib/Geometry/Euclidean/Inversion/Calculus.lean\"], \"digest\": \"fb6660e84e70ba50\"}",
    "date": "2026-10-17",
    "verdict": "no match: second reader inspected OrthogonalReflection.lean:74-103 and ObjectProperty/Local.lean:41-52. These concern ordinary Hom-set bijections for local objects, not equivalences of derived mapping spaces or the local-equivalence arrow category. The broad grep also returned unrelated linear orthogonality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a combinatorial model category local equivalences for a set of maps form an accessible accessibly embedded subcategory of its arrow category",
+   "results": "{\"t\": \"2026-10-17T00:38:00Z\", \"tool\": \"leanfinder\", \"query\": \"In a combinatorial model category local equivalences for a set of maps form an accessible accessibly embedded subcategory of its arrow category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\", \"CategoryTheory.MorphismProperty.isLocallyPresentable_isLocal\", \"CategoryTheory.Functor.isAccessible_of_isCardinalAccessible\", \"CategoryTheory.IsCardinalAccessibleCategory.instIsCardinalFilteredCostructuredArrowFullSubcategoryIsCardinalPresentableι\", \"CategoryTheory.Functor.IsAccessible\", \"CategoryTheory.IsAccessibleCategory\", \"CategoryTheory.instIsAccessibleCategoryOfIsLocallyPresentable\", \"CategoryTheory.Functor.IsCardinalAccessible\"], \"digest\": \"b781704aa3da25f6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected ModelCategory/JoyalTrick.lean:35-80 (model lifting axioms), ModelCategory/Bifibrant.lean (fibrant objects), and CategoryTheory/Localization/Bousfield.lean:49-114 (ordinary Hom-set tests). None constructs framed localizing cofibrations or proves their cofibrant-source cellular mapping-space property."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\"",
+   "results": "{\"t\": \"2026-10-17T00:37:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.isCardinalAccessible_ι_isLocal\"], \"digest\": \"32777ddd4a269f3c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected ModelCategory/JoyalTrick.lean:35-80 (model lifting axioms), ModelCategory/Bifibrant.lean (fibrant objects), and CategoryTheory/Localization/Bousfield.lean:49-114 (ordinary Hom-set tests). None constructs framed localizing cofibrations or proves their cofibrant-source cellular mapping-space property."
+  },
+  {
+   "tool": "grep",
+   "query": "isCardinalAccessible_ι_isLocal|isLocallyPresentable_isLocal",
+   "results": "{\"t\": \"2026-10-17T00:37:57Z\", \"tool\": \"grep\", \"query\": \"isCardinalAccessible_ι_isLocal|isLocallyPresentable_isLocal\", \"sub\": \"CategoryTheory/Presentable\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\"], \"digest\": \"60089fff8a54e993\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected ModelCategory/JoyalTrick.lean:35-80 (model lifting axioms), ModelCategory/Bifibrant.lean (fibrant objects), and CategoryTheory/Localization/Bousfield.lean:49-114 (ordinary Hom-set tests). None constructs framed localizing cofibrations or proves their cofibrant-source cellular mapping-space property."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image of weak equivalences under an accessible local fibrant replacement detects homotopy local equivalences",
+   "results": "{\"t\": \"2026-10-17T00:37:57Z\", \"tool\": \"leansearch\", \"query\": \"The inverse image of weak equivalences under an accessible local fibrant replacement detects homotopy local equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.weakEquivalence_toHoCat_map_iff\", \"HomotopicalAlgebra.FibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.BifibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CofibrantObject.weakEquivalence_homMk_iff\", \"HomotopicalAlgebra.CategoryWithWeakEquivalences.weakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.instIsIsoFunctorWhiskerRightHoCatιCompResolutionNatTransOfIsLocalizationWeakEquivalences\", \"HomotopicalAlgebra.leftHomotopyClassEquivRightHomotopyClass_symm_mk\", \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution\"], \"digest\": \"b89d0ced5678fcb6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected ModelCategory/JoyalTrick.lean:35-80 (model lifting axioms), ModelCategory/Bifibrant.lean (fibrant objects), and CategoryTheory/Localization/Bousfield.lean:49-114 (ordinary Hom-set tests). None constructs framed localizing cofibrations or proves their cofibrant-source cellular mapping-space property."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-general-bousfield-localization",
@@ -92,5 +209,54 @@
   "group": "Q13"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-homotopy-local-equivalences-accessible",
+  "worker": "stage1",
+  "summary": "Preserved the item statement. Replaced the earlier unsupported abstract homotopy-orthogonality node and two redundant auxiliaries by one framed lifting-test node. Explicit accessible cofibrant/local replacement, inverse in the original homotopy category and generic accessible arrow inverse image prove all clauses without properness or enrichment.",
+  "blueprint": "Opening 'Choose a compactification c=(j,p)': the arbitrary-site descent foundation of the affine-local compactification repair, below lem-cbc-dg-presheaf-model-localizations. General set localization, not a new hypercover or exchange theorem. Barwick, Lemma 4.6, using Lemma 4.5, printed p. 43.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-accessible-arrow-inverse-image",
+    "why": "Generic model/presentability tool used to expand Barwick Lemma 4.6 below the arbitrary-site descent foundation; the compact-support base-change unit contains no such general tool."
+   },
+   {
+    "node": "lem-coef-accessible-small-object-factorization",
+    "why": "Generic model/presentability tool used to expand Barwick Lemma 4.6 below the arbitrary-site descent foundation; the compact-support base-change unit contains no such general tool."
+   },
+   {
+    "node": "lem-coef-cosimplicial-frame-mapping",
+    "why": "Generic model/presentability tool used to expand Barwick Lemma 4.6 below the arbitrary-site descent foundation; the compact-support base-change unit contains no such general tool."
+   },
+   {
+    "node": "lem-coef-localization-homotopy-category",
+    "why": "Generic model/presentability tool used to expand Barwick Lemma 4.6 below the arbitrary-site descent foundation; the compact-support base-change unit contains no such general tool."
+   },
+   {
+    "node": "lem-coef-model-localization-detects-weak-equivalences",
+    "why": "Generic model/presentability tool used to expand Barwick Lemma 4.6 below the arbitrary-site descent foundation; the compact-support base-change unit contains no such general tool."
+   },
+   {
+    "node": "lem-coef-model-weak-equivalences-accessible",
+    "why": "Generic model/presentability tool used to expand Barwick Lemma 4.6 below the arbitrary-site descent foundation; the compact-support base-change unit contains no such general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-accessible-arrow-inverse-image",
+  "lem-coef-accessible-small-object-factorization",
+  "lem-coef-cosimplicial-frame-mapping",
+  "lem-coef-localization-homotopy-category",
+  "lem-coef-model-localization-detects-weak-equivalences",
+  "lem-coef-model-weak-equivalences-accessible"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-e5e2c5e7f",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-e5e2c5e7f (reviewer sub-agent of L); spot-checked: I read the delivery in full; review.md has the details. Neither source is in literature/, so I fetched both read-only and checked them at the cited places. Item: the statement is unchanged and matches Barwick Def. 4.2.2-4.2.3 and Lemma 4.6 (printed p. 43). That lemma assumes only a combinatorial M and a small H; left properness enters only at Theorem 4.7. Barwick's proof shows closure under filtered colimits and only asserts accessibility; the delivery proves it constructively. Steps: in step 2, the left factor from I is a cofibration by lifting-class-closure and transfinite-left-lifting, the right factor is a trivial fibration, and functoriality gives q_Y Qf = f q_X. In step 3, the H-injective middle object is fibrant and local, and a_X is a local equivalence by clause 2 because its source QX is cofibrant. Step 4 composes accessible functors. In step 5, Yoneda on pi_0 in hM_inf (the ordinary localization) gives gu=1 and ug=1, and the detection lemma gives u in W_0. In step 6, the arrow inverse image of the accessible class W_0 under the accessible R is W_S. proof_deps equals the union of the uses. New node lem-cbc-framed-localizing-cofibrations: true for H = horns plus J (Hirschhorn Def. 4.2.1-4.2.2). Clause 1 follows from Lemma 3.3.11, which holds in any model category; Prop. 4.2.4 sits under a left-proper heading, but its proof does not use it. Clause 2 follows from Prop. 17.8.14(1), Prop. 17.8.11, Cor. 17.8.12(1), Props. 17.8.13 and 17.8.7, and the tower argument in Thm. 17.8.18. The cofibrant-source restriction is needed and kept, and a retract under U is obtained by factoring the map itself. Small cases (S empty, terminal M, S={0->1}, the n=0 horn) are consistent. The node is statement-only, self-contained TeX with three kinds of logged searches and correct created/blueprint fields. It neither restates a clause of the item nor duplicates general-bousfield-localization, simplicial-bousfield-model-structure, cofibration-local-mapping-test, left-proper-derived-cell-colimits, bousfield-local-fibrations or cosimplicial-frame-mapping. I accept the six declared tool_uses (generic sk-prop-sf-biduality-general infrastructure, the same family accepted for the parent). No SGA is cited, no target, unit or chapter is touched, and I wrote no fixes."
+ }
 }

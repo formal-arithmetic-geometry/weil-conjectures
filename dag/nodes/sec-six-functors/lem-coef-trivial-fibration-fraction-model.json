@@ -20,7 +20,7 @@
  },
  "kind": "statement",
  "title": "Two-arrow fraction model for a pullback-stable denominator class",
- "statement": "Use small ordinary categories, nerves, spaces, quasicategories and coherent functor categories as in [def-cbc-enhanced-diagrams-cones], enlarging universes when needed. Let $\\mathcal A$ be a small ordinary category. Let $W$ contain all isomorphisms and satisfy two-out-of-three. Let $T\\subseteq W$ contain all isomorphisms, be closed under composition, and have pullbacks along every arrow, with the pullback arrows again in $T$. Assume that for every $w:a\\to b$ in $W$ there exist $s:a\\to z$, $p:z\\to a$ and $r:z\\to b$ with $ps=1_a$, $rs=w$, and $p,r\\in T$. No functorial choices are assumed. For $x,y\\in\\mathcal A$ define $R_T(x,y)$ to have objects spans $x\\xleftarrow{t}u\\xrightarrow{f}y$ with $t\\in T$ and morphisms $h:(u,t,f)\\to(u',t',f')$ satisfying $t'h=t$ and $f'h=f$; such an $h$ automatically belongs to $W$.\n\nThere exist a quasicategory $\\mathcal L$ and an essentially surjective functor $q:N\\mathcal A\\to\\mathcal L$ inverting $W$, with the following two properties. For every quasicategory $\\mathcal E$, restriction induces an equivalence from $\\operatorname{Fun}(\\mathcal L,\\mathcal E)$ onto the full subcategory of $\\operatorname{Fun}(N\\mathcal A,\\mathcal E)$ on functors inverting $W$, retaining all coherent transformations. For each $x,y$, the weak homotopy type of $NR_T(x,y)$ is naturally equivalent to $\\operatorname{Map}_{\\mathcal L}(qx,qy)$. This equivalence is natural under postcomposition in $y$ and under functors preserving $W$ and $T$, including coherent compatibility with diagrams of target maps. It sends the component of $(t,f)$ to $q(f)q(t)^{-1}$ in $\\operatorname{Hom}_{h\\mathcal L}(qx,qy)$; consequently every arrow from $qx$ to $qy$ is homotopic, relative to its endpoints, to such a fraction. Here $h\\mathcal L$ has the same objects as $\\mathcal L$ and morphism sets $\\pi_0$ of its mapping spaces.",
+ "statement": "Use small ordinary categories, nerves, spaces, quasicategories and coherent functor categories as in [def-cbc-enhanced-diagrams-cones], enlarging universes when needed. Let $\\mathcal A$ be a small ordinary category. Let $W$ contain all isomorphisms and satisfy two-out-of-three. Let $T\\subseteq W$ contain all isomorphisms and be closed under composition. Require that for every $t:u\\to x$ in $T$ and every arrow $v:y\\to x$, a pullback of $t$ along $v$ exists and its projection $u\\times_x y\\to y$ belongs to $T$. Assume that for every $w:a\\to b$ in $W$ there exist $s:a\\to z$, $p:z\\to a$ and $r:z\\to b$ with $ps=1_a$, $rs=w$, and $p,r\\in T$. No functorial choices are assumed. For $x,y\\in\\mathcal A$ define $R_T(x,y)$ to have objects spans $x\\xleftarrow{t}u\\xrightarrow{f}y$ with $t\\in T$ and morphisms $h:(u,t,f)\\to(u',t',f')$ satisfying $t'h=t$ and $f'h=f$; such an $h$ automatically belongs to $W$.\n\nThere exist a quasicategory $\\mathcal L$ and an essentially surjective functor $q:N\\mathcal A\\to\\mathcal L$ inverting $W$, with the following two properties. For every quasicategory $\\mathcal E$, restriction induces an equivalence from $\\operatorname{Fun}(\\mathcal L,\\mathcal E)$ onto the full subcategory of $\\operatorname{Fun}(N\\mathcal A,\\mathcal E)$ on functors inverting $W$, retaining all coherent transformations. For each $x,y$, the weak homotopy type of $NR_T(x,y)$ is naturally equivalent to $\\operatorname{Map}_{\\mathcal L}(qx,qy)$. This equivalence is natural under postcomposition in $y$ and under functors preserving $W$ and $T$, including coherent compatibility with diagrams of target maps. It sends the component of $(t,f)$ to $q(f)q(t)^{-1}$ in $\\operatorname{Hom}_{h\\mathcal L}(qx,qy)$; consequently every arrow from $qx$ to $qy$ is homotopic, relative to its endpoints, to such a fraction. Here $h\\mathcal L$ has the same objects as $\\mathcal L$ and morphism sets $\\pi_0$ of its mapping spaces.",
  "source": {
   "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
   "place": "Definition 7.1.2 and Proposition 7.1.3 (localization existence); Theorem 7.2.8 and formula (7.2.10.3) (span mapping spaces); Theorem 7.2.16, Corollary 7.2.18 and Definition 7.2.20 (pullback-stable denominators). Online PDF read on 2026-10-17; local archival copy WANTED. No Stacks tag states this result."
@@ -28,62 +28,149 @@
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First construct the localization, without appealing to any model-category localization result that depends on the present item. Regard $NW\\subseteq N\\mathcal A$ as a simplicial subset; two-out-of-three implies composition closure of $W$. Take its small horn completion $NW\\hookrightarrow S=(NW)^{\\mathrm{horn}}$ from [lem-coef-horn-completion-point-colimit], and form the degreewise pushout $P=N\\mathcal A\\amalg_{NW}S$. For any quasicategory $E$, maps from this pushout give the strict pullback of the three internal functor simplicial sets. Since $S$ is Kan, all its edges map to equivalences in $E$. The edge-inverting anodyne-extension theorem says that $\\operatorname{Fun}(S,E)\\to H(NW,E)$ is a trivial Kan fibration. Its pullback is exactly\n$$\\operatorname{Fun}(P,E)\\longrightarrow\\operatorname{Fun}_{W}(N\\mathcal A,E),$$\nwith unrestricted parameter transformations. Thus this map has strict lifts against every boundary.",
+   "uses": [
+    "lem-coef-horn-completion-point-colimit",
+    "lem-coef-edge-inverting-anodyne-extension",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.1.3, pushout construction; Corollary 3.5.13"
+   }
+  },
+  {
+   "text": "Complete $P$ under all inner horns by repeatedly attaching one simplex for every inner-horn map, and take the countable union $P\\hookrightarrow L$. Every inner horn is finite, so a map from it into the union factors through a finite stage and is filled at the next stage; hence $L$ is a small quasicategory. For each boundary lifting problem for $\\operatorname{Fun}(L,E)\\to\\operatorname{Fun}(P,E)$, the exponential adjunction turns the problem over one attached inner horn into a lifting problem against its pushout-product with that boundary. This is inner anodyne by [lem-coef-inner-anodyne-pushout-product], so the inner-fibrancy of $E$ provides a lift. Extend stage by stage and pass to the union. Thus restriction is a trivial Kan fibration, and so is its composite with step 1. Such a boundary-lifting map has a simplicial section and a homotopy inverse: lift the identity of its base to obtain the section and lift along $X\\times\\partial\\Delta^1\\subseteq X\\times\\Delta^1$ to contract the other composite over the base. Boundary lifting implies lifting against all monomorphisms by adjoining nondegenerate simplices in dimension order. For quasicategory source and target the resulting transformations over identities are equivalences (they lie in the contractible Kan fibers); the pointwise criterion therefore makes restriction an equivalence of the full functor quasicategories. The full $W$-inverting subcategory is a quasicategory by the functor-cone calculus. Set $q:N\\mathcal A\\to P\\to L$. The inner-horn attachments of this step add no vertices, but $S$, and hence $P$, may contain vertices not coming from $\\mathcal A$ (the attachments along $\\Lambda^1_i=\\Delta^0$ in the horn completion add vertices); so essential surjectivity of $q$ is not read off from vertices here and is proved in step 3 from the universal property. It inverts $W$ since $NW$ factors through the Kan complex $S$, and the preceding equivalence is exactly the required universal property, including all transformations.",
+   "uses": [
+    "lem-coef-inner-anodyne-pushout-product",
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Proposition 7.1.3 and Remark 7.1.4; inner-horn completion and the boundary-cell lifting argument"
+   }
+  },
+  {
+   "text": "The just-constructed functor is a coherent localization, so [lem-coef-localization-homotopy-category] makes it essentially surjective. Next record the elementary saturation calculation used below. For any coherent functor $G:N\\mathcal A\\to E$ inverting $T$, take $w=rs$ and $ps=1_a$ as in the hypotheses. In $hE$, $G(p)G(s)=1$ and $G(p)$ is invertible, whence $G(s)=G(p)^{-1}$; consequently $G(w)=G(r)G(p)^{-1}$ is invertible. An edge is an equivalence precisely when its homotopy-category image is invertible. Hence $G$ inverts $W$. Conversely $T\\subseteq W$ proves the reverse implication. Thus the full subcategories of $T$-inverting and $W$-inverting functors coincide, including their entire mapping spaces.",
+   "uses": [
+    "lem-coef-localization-homotopy-category",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Remark 7.1.6; Corollary 7.2.18 and Definition 7.2.20"
+   }
+  },
+  {
+   "text": "Fix $x$. Let $I_x$ be the full subcategory of $\\mathcal A/x$ on the arrows $t:u\\to x$ belonging to $T$, with domain functor $\\pi_x:I_x\\to\\mathcal A$. Its terminal object is $1_x$: for $(u,t)$ the unique slice arrow to $1_x$ is $t$. Its terminal cocone maps under $\\pi_x$ to the denominators $t\\in T\\subseteq W$. For each $y$, the comma category $D_{\\pi_x}(y)$ has objects $(t:u\\to x,f:u\\to y)$ and morphisms $h$ with $t'h=t$ and $f'h=f$, so it is exactly $R_T(x,y)$, on both objects and arrows. Postcomposition gives a strict functor $y\\mapsto R_T(x,y)$ from $\\mathcal A$ to ordinary categories. Nerves and their horn completions are therefore functorial in $y$. A morphism $h$ in a span category belongs to $W$ by two-out-of-three applied to $t'h=t$; it need not belong to $T$. All these categories are small, being made from objects and arrows of the small category $\\mathcal A$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-horn-completion-point-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Definition 7.2.2 and the ordinary comma/span identification in Remark 7.2.10; explicit terminal-object and morphism calculations."
+   }
+  },
+  {
+   "text": "For $v:y'\\to y$ in $T$, let $v_*:R_T(x,y')\\to R_T(x,y)$ postcompose the right leg. For $(t:u\\to x,f:u\\to y)$, choose a pullback $u'=u\\times_y y'$ with projections $a:u'\\to u$ and $b:u'\\to y'$. The new span is $(ta,b)$: $a$ is a pullback of $v$, so $a\\in T$ and $ta\\in T$. On morphisms the unique induced map of pullbacks defines a functor $v^*$. This choice is only for the single fixed arrow $v$ and its small set of span objects. A span map from $(t_0,f_0)$ to $v^*(t,f)$ amounts uniquely to a map $k:u_0\\to u$ with $tk=t_0$ and $fk=vf_0$, by the pullback universal property. This is exactly a span map $v_*(t_0,f_0)\\to(t,f)$. These bijections commute with both variables, giving $v_*\\dashv v^*$. The unit and counit give $1\\to v^*v_*$ and $v_*v^*\\to1$, so [lem-coef-nerve-natural-homotopy-equivalence] proves that $Nv_*$ is a weak homotopy equivalence. Now write $B_x(y)=(NR_T(x,y))^{\\mathrm{horn}}$. Functoriality and the natural weak equivalences $NR_T(x,y)\\to B_x(y)$ show that $B_x(v)$ is a weak equivalence. For $w=rs$ and $ps=1$ as in the hypotheses, $B_x(p)B_x(s)=1$. Since $B_x(p)$ is a weak equivalence, $B_x(s)$ induces inverse bijections on components and inverse homotopy-group maps to those of $B_x(p)$, at every source basepoint; hence it too is a weak equivalence. Since $B_x(r)$ is a weak equivalence, so is $B_x(w)=B_x(r)B_x(s)$. Finally the natural completion maps show that $NR_T(x,w)$ is a weak homotopy equivalence. Thus the comma nerves of step 4 are invariant under all of $W$. Only pullbacks of $T$-arrows and their composition closure were used; no functorial splitting of $w$ is required.",
+   "uses": [
+    "lem-coef-nerve-natural-homotopy-equivalence",
+    "lem-coef-horn-completion-point-colimit",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Lemma 7.2.15 and proof of Theorem 7.2.16; Corollary 7.2.18; explicit split-factorization calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-terminal-local-kan-corepresentability] with $A=\\mathcal A$, $I=I_x$, $i_0=1_x$ and $\\pi=\\pi_x$, and with the coherent localization constructed in steps 1-3. The category $W$ is closed under composition by two-out-of-three and contains all isomorphisms, as required. Step 4 establishes smallness, terminality and the condition on the terminal cocone, and identifies the actual comma categories with $R_T(x,y)$. Step 5 verifies weak-equivalence invariance of their nerves. The criterion therefore gives the claimed equivalence $NR_T(x,y)\\simeq\\operatorname{Map}_L(qx,qy)$ with the right-pinched mapping-space convention of the item. Its component formula sends $(t,f)$ to $q(f)q(t)^{-1}$. Surjectivity on components gives a fraction representative for every mapping-space component; by the stated convention for $hL$, equality in that component is homotopy of arrows relative to their endpoints.",
+   "uses": [
+    "lem-coef-terminal-local-kan-corepresentability",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "Theorem 7.2.8 and Remark 7.2.10, formulas (7.2.10.3)-(7.2.10.4)."
+   }
+  },
+  {
+   "text": "For a functor $U:(\\mathcal A,W,T)\\to(\\mathcal A',W',T')$, applying $U$ to both legs and all arrows defines $I_x\\to I'_{Ux}$ and $R_T(x,y)\\to R_{T'}(Ux,Uy)$. It sends $1_x$ to $1_{Ux}$, commutes with the domain functors, and sends every terminal-cocone arrow $t$ to $U(t)$. The localization universal property from steps 1-2 supplies the induced functor $L\\to L'$ and its comparison on $N\\mathcal A$. These are precisely maps of the data in [lem-coef-terminal-local-kan-corepresentability]. Its naturality assertion therefore identifies the maps on the comma-nerve weak homotopy types with the maps on localized mapping spaces. Its comparison is a comparison of coherent functors in $y$, so restriction along every coherent target diagram retains all its higher compatibility simplices. Postcomposition and composites of functors are covered by the same assertion. Preservation of chosen pullbacks is unnecessary: the comparison uses the comma functors, whereas the pullback choices were used only to prove locality in step 5.",
+   "uses": [
+    "lem-coef-terminal-local-kan-corepresentability",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://cisinski.app.uni-regensburg.de/CatLR.pdf",
+    "place": "The canonical functorial comparison in Theorem 7.2.8 and Remark 7.2.10; explicit functors between the ordinary comma categories."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-horn-completion-point-colimit",
+  "lem-coef-edge-inverting-anodyne-extension",
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-inner-anodyne-pushout-product",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-localization-homotopy-category",
+  "lem-coef-nerve-natural-homotopy-equivalence",
+  "lem-coef-terminal-local-kan-corepresentability"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2 coherent coefficient-localization infrastructure. Agent proof with Cisinski Sections 3.5, 6.1 and 7.1-7.2 read online; not locally archived."
+ },
  "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "For a relative category with pullback-stable trivial fibrations and split weak equivalences the nerve of two-arrow spans computes mapping spaces of its infinity localization",
-   "results": "{\"t\": \"2026-10-16T20:42:41Z\", \"tool\": \"leanfinder\", \"query\": \"For a relative category with pullback-stable trivial fibrations and split weak equivalences the nerve of two-arrow spans computes mapping spaces of its infinity localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.homEquiv\", \"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.Nerve.nerveFunctor₂\", \"CategoryTheory.nerve.homEquiv_apply\", \"CategoryTheory.nerve.instFullCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.nerve.homEquiv_symm_apply\", \"CategoryTheory.nerveFunctor.full\", \"CategoryTheory.nerveFunctor\"], \"digest\": \"30a9c19073dfdc0f\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: the ordinary calculus in Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean:203-213 is a statement about hom sets, not nerves of fraction categories or a quasicategorical localization; BrownLemma.lean:40-46 assumes a full model category. Nerve homEquiv concerns an ordinary nerve, not localized mapping spaces."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"RightCalculusOfFractions\"",
-   "results": "{\"t\": \"2026-10-16T20:42:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"RightCalculusOfFractions\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.HasRightCalculusOfFractions\", \"CategoryTheory.MorphismProperty.HasRightCalculusOfFractions.toIsMultiplicative\", \"CategoryTheory.MorphismProperty.instHasLeftCalculusOfFractionsOppositeOpOfHasRightCalculusOfFractions\", \"CategoryTheory.MorphismProperty.instHasRightCalculusOfFractionsOppositeOpOfHasLeftCalculusOfFractions\", \"CategoryTheory.MorphismProperty.instHasLeftCalculusOfFractionsUnopOfHasRightCalculusOfFractionsOpposite\", \"CategoryTheory.MorphismProperty.instHasRightCalculusOfFractionsUnopOfHasLeftCalculusOfFractionsOpposite\", \"CategoryTheory.Localization.essSurj_mapArrow_of_hasRightCalculusOfFractions\", \"CategoryTheory.MorphismProperty.HasRightCalculusOfFractions.exists_rightFraction\"], \"digest\": \"be8059ab7fd65e2b\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: the ordinary calculus in Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean:203-213 is a statement about hom sets, not nerves of fraction categories or a quasicategorical localization; BrownLemma.lean:40-46 assumes a full model category. Nerve homEquiv concerns an ordinary nerve, not localized mapping spaces."
-  },
-  {
-   "tool": "grep",
-   "query": "right.calculus|calculus.of.fractions|Span.*[Ll]ocal|[Ll]ocal.*Span",
-   "results": "{\"t\": \"2026-10-16T20:42:33Z\", \"tool\": \"grep\", \"query\": \"right.calculus|calculus.of.fractions|Span.*[Ll]ocal|[Ll]ocal.*Span\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Construction.lean\", \"Mathlib/CategoryTheory/Localization/Triangulated.lean\", \"Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean\", \"Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean\", \"Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean\", \"Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean\", \"Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean\", \"Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean\"], \"digest\": \"45191192849a9b3c\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: the ordinary calculus in Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean:203-213 is a statement about hom sets, not nerves of fraction categories or a quasicategorical localization; BrownLemma.lean:40-46 assumes a full model category. Nerve homEquiv concerns an ordinary nerve, not localized mapping spaces."
-  },
-  {
-   "tool": "leansearch",
-   "query": "Cocycles with trivial fibration denominators model the derived mapping spaces in the localization of a partial Brown category",
-   "results": "{\"t\": \"2026-10-16T20:42:51Z\", \"tool\": \"leansearch\", \"query\": \"Cocycles with trivial fibration denominators model the derived mapping spaces in the localization of a partial Brown category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.cofibrations_rlp\", \"HomotopicalAlgebra.instFibrationPCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.CofibrantBrownFactorization.mk'_p\", \"HomotopicalAlgebra.FibrantBrownFactorization\", \"HomotopicalAlgebra.trivialFibrations_llp\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic\", \"HomotopicalAlgebra.CofibrantBrownFactorization\", \"HomotopicalAlgebra.FibrantBrownFactorization.toMapFactorizationData\"], \"digest\": \"71cd50f97cc0f7ce\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: the ordinary calculus in Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean:203-213 is a statement about hom sets, not nerves of fraction categories or a quasicategorical localization; BrownLemma.lean:40-46 assumes a full model category. Nerve homEquiv concerns an ordinary nerve, not localized mapping spaces."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "simplicial localization mapping spaces are computed by a category of cocycles with acyclic fibration left leg",
-   "results": "{\"t\": \"2026-10-16T21:24:32Z\", \"tool\": \"leanfinder\", \"query\": \"simplicial localization mapping spaces are computed by a category of cocycles with acyclic fibration left leg\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_one\", \"SSet.Truncated.HomotopyCategory.descOfTruncation_obj_mk\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_edge\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"SSet.Truncated.HomotopyCategory.descOfTruncation\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\"], \"digest\": \"b47d8b73429725e3\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: nerve adjunctions do not compute localized mapping spaces; CofibrantObject.factorsThroughLocalization concerns an ordinary quotient under ModelCategory, not the enhanced fraction model. Loogle and grep found no matches."
-  },
   {
    "tool": "loogle",
    "query": "\"Localization\", \"nerve\"",
-   "results": "{\"t\": \"2026-10-16T21:25:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"Localization\\\", \\\"nerve\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "results": "{\"t\": \"2026-10-17T00:35:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"Localization\\\", \\\"nerve\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: nerve adjunctions do not compute localized mapping spaces; CofibrantObject.factorsThroughLocalization concerns an ordinary quotient under ModelCategory, not the enhanced fraction model. Loogle and grep found no matches."
+   "verdict": "no match: the hits in Localization.CalculusOfFractions concern ordinary hom sets and essential surjectivity of the ordinary arrow functor; ModelCategory.RightHomotopy only constructs ordinary homotopy classes. Neither gives a nerve model for infinity-localized mapping spaces. Loogle and the hammock/span grep return no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinity localization mapping spaces from pullback stable two arrow fractions",
+   "results": "{\"t\": \"2026-10-17T00:35:00Z\", \"tool\": \"leansearch\", \"query\": \"Infinity localization mapping spaces from pullback stable two arrow fractions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.essSurj_mapArrow_of_hasRightCalculusOfFractions\", \"CategoryTheory.MorphismProperty.LeftFraction.Localization.StrictUniversalPropertyFixedTarget.lift\", \"CategoryTheory.MorphismProperty.LeftFraction.Localization.Hom.map\", \"CategoryTheory.Localization.exists_leftFraction\", \"CategoryTheory.MorphismProperty.LeftFraction.map_comp_map_eq_map\", \"CategoryTheory.Localization.essSurj_mapArrow\", \"CategoryTheory.MorphismProperty.LeftFraction.Localization.Q\", \"CategoryTheory.LocalizerMorphism.homMap\"], \"digest\": \"10cdfe02c6ba7562\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits in Localization.CalculusOfFractions concern ordinary hom sets and essential surjectivity of the ordinary arrow functor; ModelCategory.RightHomotopy only constructs ordinary homotopy classes. Neither gives a nerve model for infinity-localized mapping spaces. Loogle and the hammock/span grep return no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a relative category with pullback stable trivial fibrations and split weak equivalences, nerves of two arrow spans compute infinity categorical localized mapping spaces",
+   "results": "{\"t\": \"2026-10-17T00:35:06Z\", \"tool\": \"leanfinder\", \"query\": \"For a relative category with pullback stable trivial fibrations and split weak equivalences, nerves of two arrow spans compute infinity categorical localized mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.OneTruncation₂.nerveHomEquiv\", \"SSet.OneTruncation₂.nerveHomEquiv_apply\", \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"CategoryTheory.nerve.functorOfNerveMap_map\", \"CategoryTheory.nerve.homEquiv_edgeMk_map_nerveMap\", \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"SSet.OneTruncation₂.nerveEquiv\", \"CategoryTheory.nerve.homEquiv\"], \"digest\": \"264c60acc264877f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits in Localization.CalculusOfFractions concern ordinary hom sets and essential surjectivity of the ordinary arrow functor; ModelCategory.RightHomotopy only constructs ordinary homotopy classes. Neither gives a nerve model for infinity-localized mapping spaces. Loogle and the hammock/span grep return no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A category with pullback stable weak equivalence denominators has homotopy mapping spaces given by the classifying spaces of its categories of right fractions",
+   "results": "{\"t\": \"2026-10-17T00:41:13Z\", \"tool\": \"leanfinder\", \"query\": \"A category with pullback stable weak equivalence denominators has homotopy mapping spaces given by the classifying spaces of its categories of right fractions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.RightHomotopyClass\", \"HomotopicalAlgebra.RightHomotopyRel\", \"HomotopicalAlgebra.LeftHomotopyClass\", \"HomotopicalAlgebra.PathObject.RightHomotopy\", \"HomotopicalAlgebra.RightHomotopyClass.mk\", \"HomotopicalAlgebra.RightHomotopyRel.factorsThroughLocalization\", \"HomotopicalAlgebra.RightHomotopyClass.mk_surjective\", \"HomotopicalAlgebra.LeftHomotopyRel.factorsThroughLocalization\"], \"digest\": \"99eb2b7ce2c447b1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits in Localization.CalculusOfFractions concern ordinary hom sets and essential surjectivity of the ordinary arrow functor; ModelCategory.RightHomotopy only constructs ordinary homotopy classes. Neither gives a nerve model for infinity-localized mapping spaces. Loogle and the hammock/span grep return no hits."
   },
   {
    "tool": "grep",
    "query": "hammock|CocycleCategory|homotopyCalculus|TrivialFibration.*Span",
-   "results": "{\"t\": \"2026-10-16T21:25:35Z\", \"tool\": \"grep\", \"query\": \"hammock|CocycleCategory|homotopyCalculus|TrivialFibration.*Span\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "results": "{\"t\": \"2026-10-17T00:34:59Z\", \"tool\": \"grep\", \"query\": \"hammock|CocycleCategory|homotopyCalculus|TrivialFibration.*Span\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: nerve adjunctions do not compute localized mapping spaces; CofibrantObject.factorsThroughLocalization concerns an ordinary quotient under ModelCategory, not the enhanced fraction model. Loogle and grep found no matches."
+   "verdict": "no match: grep of the entire pinned Mathlib source found no hammock, cocycle-category, homotopy-calculus, or trivial-fibration-span comparison declarations."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-brown-fibrant-localization-pullbacks",
@@ -103,5 +190,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-trivial-fibration-fraction-model",
+  "worker": "stage1",
+  "summary": "Rechecked the explicit horn localization and pullback-adjunction proof. Removed a newly cyclic citation of infinity-space-valued-pointwise-lan, whose current split returns through Kan-Quillen right properness to this item. The general input is now exactly the local-comma criterion for an arbitrary putative right calculus at one object; the parent explicitly constructs its terminal indexing category and proves all W-locality by pullbacks and split factorizations. Removed unused constant-point colimit content from the horn-completion input. Preserved the inherited creation stamp and all maintainer-owned metadata.",
+  "blueprint": "Integral exceptional-adjoint proof paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation; this is the coherent localization infrastructure below Brown fibrant localization, not a replacement for the six-functor route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic coherent functor-category and equivalence calculus used in the explicit localization construction; no same-unit statement supplies this full functor-category input without a dependency cycle."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-1f3e067a6",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-1f3e067a6 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and the statement of every cited node in full, and checked the unit and chapter route. Cisinski CatLR is not archived locally and the service blocks network access, so I could not check the cited places in the book. All four nodes already record it as WANTED and the proof is marked agent-written; I checked every statement and step mathematically instead. One fault, repaired: item step 2 said that horn attachments add no vertices, so every vertex of L comes from A and q is essentially surjective. That is false, because the Kan completion S attaches Delta^1 along Lambda^1_i = Delta^0 and so adds vertices. The conclusion still holds: step 3 proves essential surjectivity correctly from lem-coef-localization-homotopy-category. I rewrote that sentence in fixes/dag/nodes/sec-six-functors/lem-coef-trivial-fibration-fraction-model.json (step 2 text only). The item statement keeps the base meaning; the pullback clause is only spelled out. Tested on [1] with W=T=all arrows (R_T(1,1) is contractible, L is a point), on discrete categories, and on T=W=isomorphisms. Step 1: the pushout gives a strict pullback of the trivial fibration H(S,E)->H(NW,E), and Fun(S,E)=H(S,E) because S is Kan. Step 2: inner pushout-products, and a trivial fibration between quasicategories is an equivalence. Step 3: ps=1, rs=w gives T-inverting = W-inverting. Step 4: 1_x is terminal in T/x and the comma category is R_T. Step 5: the pullback adjunction v_* -| v^* holds for v in T (the projection a is in T), and the split gives W-invariance. Steps 6-7: every hypothesis of the criterion is supplied, and U gives a map of data. New nodes: edge-inverting-anodyne is true (marked K^sharp, E^natural lifting) and is not covered by marked-anodyne-lifting-calculus (core only) or simplicial-groupoid-localization (equivalence only). Horn completion is a true small-object argument; the Ex^infty node lacks the anodyne property and is cyclic here. The terminal-local criterion is true (hocolim over I^op of corepresentables, q_!, contractible I, locality) and does not restate the item. No cycles. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus.; 1 file(s) fixed by the reviewer"
  }
 }

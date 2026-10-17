@@ -31,9 +31,250 @@
   "lem-coef-kan-quillen-right-proper",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $O=\\operatorname{Ob}I$ and $\\mathcal B=\\prod_{i\\in O}\\mathcal A$. The product is locally presentable by [lem-coef-accessible-monad-presentability]. On it define\n$$ (TX)_j=\\coprod_{i\\in O} I(i,j)\\otimes X_i. $$\nThe unit inserts the identity vertex in $I(j,j)$ and the multiplication uses $I(j,k)\\times I(i,j)\\to I(i,k)$ and the tensor associativity. Thus the monad identities are precisely the identity and associativity identities of $I$. A $T$-algebra is exactly a family $X_i$ with unital associative action maps $I(i,j)\\otimes X_i\\to X_j$, hence an enriched functor; algebra morphisms are exactly enriched natural transformations. For each simplicial set $K$, $K\\otimes-$ is left adjoint to $(-)^K$, by the tensor/cotensor adjunctions of [def-coef-simplicial-tensor-cotensor]; it therefore preserves colimits (apply the adjunction to the defining cocone). Coproducts also commute with colimits by their universal property. Consequently $T$ preserves all small colimits, in particular filtered colimits. Apply the accessible-monad statement to deduce that $\\mathcal A^I$ is locally presentable, complete and cocomplete. Colimits in it are objectwise: the colimit of each action map exists since $I(i,j)\\otimes-$ preserves that colimit, and the action identities hold after every colimit insertion. Limits are objectwise as well: the action into each limiting value is the unique map with the prescribed projections, whose action identities follow after those projections. All coproduct and product indexing sets above are small.",
+   "uses": [
+    "lem-coef-accessible-monad-presentability",
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, coherent derived coefficient-adjunction foundation; HTT A.3.3.2 and the projective part of A.2.8.2: presentability and pointwise colimits, expanded via an accessible monad"
+   }
+  },
+  {
+   "text": "For $i\\in O$ define $F_iX$ by $(F_iX)_j=I(i,j)\\otimes X$, with action given by composition. A transformation $F_iX\\to P$ is determined by its restriction $X\\to P_i$ at the identity of $i$; conversely a map $a:X\\to P_i$ gives the component $I(i,j)\\otimes X\\xrightarrow{1\\otimes a}I(i,j)\\otimes P_i\\to P_j$. The two constructions are inverse by the identity and composition axioms. For every $n$, tensor associativity identifies $(F_iX)\\otimes\\Delta^n$ with $F_i(X\\otimes\\Delta^n)$. The displayed inverse constructions therefore identify the $n$-simplices of $\\underline{\\operatorname{Map}}(F_iX,P)$ with maps $X\\otimes\\Delta^n\\to P_i$, the $n$-simplices of $\\underline{\\operatorname{Map}}(X,P_i)$. Restriction along each simplex operator commutes with inserting the identity and with the action maps, so these bijections give an isomorphism of simplicial sets, natural in $X,P$. This proves the enriched adjunction. In particular $F_i$ preserves all small colimits. Let $S$ and $T_0$ be small generating cofibrations and generating trivial cofibrations of $\\mathcal A$, and put $S_I=\\{F_i(s)\\}$, $T_I=\\{F_i(t)\\}$. A square against $F_i(s)$ or $F_i(t)$ is, under this adjunction, exactly a square against $s$ or $t$ at $i$, with the same choices of diagonal filler. Hence $S_I^{\\square}$ is exactly the class of objectwise trivial fibrations and $T_I^{\\square}$ exactly the class of objectwise fibrations. This uses only the two generating lifting systems in the hypothesis, with model conventions [lem-coef-simplicial-boundary-collapse-test], and the tensor adjunctions [def-coef-simplicial-tensor-cotensor].",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test",
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, coherent derived coefficient-adjunction foundation; HTT A.3.3.5 and A.2.8.2: free diagrams and the two right lifting classes"
+   }
+  },
+  {
+   "text": "For every domain $A$ of an arrow of $S_I\\cup T_I$, [lem-coef-object-presentability-rank] supplies a small infinite regular $\\tau_A$ for which $\\operatorname{Hom}(A,-)$ preserves $\\tau_A$-filtered colimits. Apply [lem-coef-small-family-regular-bound] to the small family of underlying sets of these cardinals; it gives an infinite regular $\\lambda$ larger than every $\\tau_A$. The ordinal $\\lambda$ is $\\tau_A$-filtered: fewer than $\\tau_A$ of its elements have an upper bound below $\\lambda$ by regularity. Thus each domain Hom functor preserves colimits of $\\lambda$-chains, including the continuous cellular chains required in [lem-coef-small-object-cell-factorization]. Apply that node separately to $S_I$ and $T_I$. It gives functorial cell-map/right-lifting factorizations and identifies each left lifting class with the arrow retracts of its cell maps. Write $C_I={}^{\\square}(S_I^{\\square})$ and $D_I={}^{\\square}(T_I^{\\square})$ for these classes. They form functorial weak factorization systems with the indicated right classes: a map right-orthogonal to the left class is right-orthogonal to its generators, and the converse follows by extending a lift over each cell and passing to retracts. The same lifting argument proves closure of either left class under small coproducts, pushouts and continuous transfinite compositions: solve on each summand, use the pushout universal property, and extend successively with the colimit lift at each limit stage. No choice of a functorial factorization is inferred from a merely existential cellular statement.",
+   "uses": [
+    "lem-coef-object-presentability-rank",
+    "lem-coef-small-family-regular-bound",
+    "lem-coef-small-object-cell-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, coherent derived coefficient-adjunction foundation; HTT A.2.8.2(i)-(iii), used in A.3.3.2: both small-object factorizations and their explicit retract argument"
+   }
+  },
+  {
+   "text": "Every simplicial set is cofibrant in the Kan model structure [lem-coef-kan-quillen-right-proper]. The simplicial model axiom in the hypothesis, transposed by tensor adjunction [def-coef-simplicial-tensor-cotensor] and the model lifting systems [lem-coef-simplicial-boundary-collapse-test], applied to $\\varnothing\\to I(i,j)$, implies that $I(i,j)\\otimes-$ sends cofibrations to cofibrations and trivial cofibrations to trivial cofibrations: indeed, a lifting square from $a\\mathbin\\square b$ to a coefficient fibration $p$ is, by the tensor/mapping adjunction, a lifting square from the simplicial arrow $b$ to the mapping-space arrow associated to $(a,p)$. If $a,b$ are cofibrations, the latter square lifts when $p$ is trivial; if either $a$ or $b$ is trivial, it lifts for every fibration $p$. The two coefficient lifting systems give the claimed pushout-product classes. Therefore the generators $S_I$ evaluate to cofibrations and the generators $T_I$ to trivial cofibrations. Evaluation preserves colimits by Step 1. The lifting-extension and retract arguments of Step 3, now in $\\mathcal A$, show that every $C_I$ map is objectwise a cofibration and every $D_I$ map is objectwise a trivial cofibration. In particular $D_I\\subseteq W_I$, where $W_I$ means objectwise weak equivalence. Since $S_I^{\\square}$ is contained in $T_I^{\\square}$, one also has $D_I\\subseteq C_I$.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-boundary-collapse-test",
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, coherent derived coefficient-adjunction foundation; HTT A.3.3.5: local cofibrancy of the indexing category and evaluation of the cellular generators"
+   }
+  },
+  {
+   "text": "The classes $W_I$ are retract closed and satisfy two-out-of-three, object by object, by the model axioms of [lem-coef-simplicial-boundary-collapse-test]. If $f\\in C_I\\cap W_I$, factor it using Step 3 as $f=pj$, with $j\\in D_I$ and $p$ objectwise a fibration. Step 4 gives $j\\in W_I$, so $p\\in W_I$ by two-out-of-three. Thus $p\\in S_I^{\\square}$ and the left lifting property of $f$ makes $f$ an arrow retract of $j$. It follows that $f\\in D_I$. We have proved $D_I=C_I\\cap W_I$, while $S_I^{\\square}=T_I^{\\square}\\cap W_I$ is the identity already proved in Step 2. The two weak factorization systems of Step 3 are consequently exactly $(C_I,F_I\\cap W_I)$ and $(C_I\\cap W_I,F_I)$ with $F_I$ the objectwise fibrations. Completeness and cocompleteness were proved in Step 1. These are all the model axioms, with functorial factorizations generated by the two small displayed sets; together with local presentability they prove combinatoriality. This argument does not require cofibrant domains for the chosen generating maps.",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, coherent derived coefficient-adjunction foundation; HTT A.2.8.2 projective lifting argument, as invoked in A.3.3.2"
+   }
+  },
+  {
+   "text": "Define the tensor and cotensor of diagrams pointwise, with action maps induced by tensor associativity and by its adjunction, respectively. Their mapping simplicial set is the equalizer\n$$\\prod_i\\underline{\\operatorname{Map}}(P_i,Q_i)\\rightrightarrows\\prod_{i,j}\\underline{\\operatorname{Map}}_{\\mathsf{sSet}}\\bigl(I(i,j),\\underline{\\operatorname{Map}}(P_i,Q_j)\\bigr).$$\nThe two arrows compose the family of maps with the actions of $P$ and $Q$. A map from a parameter $K$ to this equalizer is exactly a family $K\\otimes P_i\\to Q_i$ satisfying enriched naturality, which verifies the asserted tensor and cotensor adjunctions and the enriched-end description. For a generating arrow $F_i(a)$ in either $S_I$ or $T_I$ and a simplicial cofibration $b$, the pushout product is $F_i(a\\mathbin\\square b)$, since $F_i$ commutes with tensors and colimits. The simplicial model axiom in $\\mathcal A$ makes $a\\mathbin\\square b$ a cofibration, trivial if $a$ or $b$ is trivial; $F_i$ preserves these two classes by Step 2's lifting adjunction. Here is the extension from generators to arbitrary projective (trivial) cofibrations, without an assertion that pushout product literally preserves composites. For $b:K\\to L$ and any diagram arrow $p:X\\to Y$, form the cotensor corner map\n$$p^b:X^L\\longrightarrow X^K\\times_{Y^K}Y^L.$$\nThe tensor/cotensor adjunction gives a bijection between lifting squares, and their fillers, from $c\\mathbin\\square b$ to $p$ and from $c$ to $p^b$. If $b$ is a cofibration and $p$ is an objectwise trivial fibration, the calculation for $F_i(a)$ with $a\\in S$ makes every $S_I$ generator lift against $p^b$. Thus $p^b\\in S_I^{\\square}$, and every $c\\in C_I$ lifts against it by definition. It follows that $c\\mathbin\\square b\\in C_I$. If $b$ is trivial and $p$ is any objectwise fibration, the generating pushout products are trivial, so again $p^b\\in S_I^{\\square}$; hence $c\\mathbin\\square b$ lifts against every objectwise fibration and belongs to $D_I$. Finally, for a simplicial cofibration $b$ and an objectwise fibration $p$, the calculation with $a\\in T_0$ gives $p^b\\in T_I^{\\square}$. Every $c\\in D_I$ therefore lifts against $p^b$, so $c\\mathbin\\square b\\in D_I$. By Step 5, $D_I$ is precisely the projective trivial cofibrations. This proves the simplicial model axiom for the actual displayed mapping sets of $\\mathcal A^I$ by tensor adjunction [def-coef-simplicial-tensor-cotensor] and the model lifting systems [lem-coef-simplicial-boundary-collapse-test]. Evaluation preserves cofibrations and trivial cofibrations by Step 4, and fibrations by their definition. Hence a projectively cofibrant fibrant diagram has cofibrant fibrant values, since initial and terminal diagrams are pointwise initial and terminal.",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test",
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, coherent derived coefficient-adjunction foundation; HTT A.3.3.4-A.3.3.5: tensor structure, simplicial compatibility and bifibrant evaluation"
+   }
+  },
+  {
+   "text": "For any simplicial functor $v:I\\to J$, define\n$$ (v_!P)_j=\\int^{i\\in I}J(vi,j)\\otimes P_i. $$\nConcretely this is the coequalizer of the two action maps from $\\coprod_{i,i'}(J(vi',j)\\times I(i,i'))\\otimes P_i$ to $\\coprod_iJ(vi,j)\\otimes P_i$. Smallness of $I$ and cocompleteness of $\\mathcal A$ guarantee its existence. The action of $J$ is induced by composition on its first tensor factor. A transformation from this coequalizer to $Q$ is exactly a family $P_i\\to Q_{vi}$ compatible with the $I$-actions: in one direction restrict to the identity of $vi$, and in the other use the action $J(vi,j)\\otimes Q_{vi}\\to Q_j$. The coequalizer relation is precisely the compatibility needed. Tensoring this coequalizer with a parameter $K$ commutes with its coproducts and coequalizer and replaces each $P_i$ by $K\\otimes P_i$. The identity-vertex and action constructions above then give inverse bijections between maps $K\\otimes v_!P\\to Q$ and maps $K\\otimes P\\to v^*Q$. Taking $K=\\Delta^n$ gives bijections on every degree of the enriched mapping sets; their formulas commute with all simplex operators. Thus they give the simplicial adjunction $v_!\\dashv v^*$. Restriction preserves objectwise fibrations and trivial fibrations, so its left adjoint preserves cofibrations and trivial cofibrations by the adjunction of lifting squares. We have a simplicial Quillen adjunction. To identify $v_!F_iX$, maps from it to any $Q$ correspond, by the two adjunctions, to maps $X\\to Q_{vi}$, which correspond to maps $F_{vi}X\\to Q$. These natural bijections identify $v_!F_iX$ with $F_{vi}X$, compatibly with the identity-vertex units. These arguments only use tensor adjunctions and the model lifting definitions in [lem-coef-simplicial-boundary-collapse-test], with tensor adjunctions [def-coef-simplicial-tensor-cotensor].",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test",
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, coherent derived coefficient-adjunction foundation; HTT A.3.3.7: explicit enriched left Kan extension and its Quillen property"
+   }
+  },
+  {
+   "text": "First suppose that $v$ is a DK equivalence and that every $I(i,k)\\to J(vi,vk)$ is degreewise injective. Put $H=v^*v_!$ and let $\\eta:1\\to H$ be its unit; $H$ preserves all colimits by Step 1 and the left adjunction in Step 7. Call $a:P\\to P'$ good when its relative unit\n$$ r_a: HP\\amalg_P P'\\longrightarrow HP' $$\nis objectwise a trivial cofibration. For $a=F_i(s)$, where $s:A\\to B$ is a generating cofibration of $\\mathcal A$, evaluation at $k$ identifies $r_a$ with\n$$ (J(vi,vk)\\otimes A)\\amalg_{I(i,k)\\otimes A}(I(i,k)\\otimes B)\\longrightarrow J(vi,vk)\\otimes B. $$\nThis is the pushout product of $s$ with $I(i,k)\\to J(vi,vk)$. The second factor is a weak equivalence by DK fully faithfulness and a cofibration by the extra injectivity assumption and [lem-coef-kan-quillen-right-proper]. The simplicial model axiom in the hypothesis, transposed by tensor adjunction [def-coef-simplicial-tensor-cotensor] and the model lifting systems [lem-coef-simplicial-boundary-collapse-test], therefore makes this displayed map a trivial cofibration, without any cofibrancy requirement on $A$ or $B$. Every generating projective cofibration is good.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-boundary-collapse-test",
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, coherent derived coefficient-adjunction foundation; HTT A.3.3.8, condition (*) and the displayed pushout-product map"
+   }
+  },
+  {
+   "text": "The good maps of Step 8 are closed under pushout: if $a'$ is a pushout of $a$, then $r_{a'}$ is the pushout of $r_a$, because $H$ preserves pushouts. For a small family $(a_t)$, the relative unit of $\\coprod_t a_t$ identifies with $\\coprod_t r_{a_t}$, since $H$ preserves coproducts; this is objectwise a trivial cofibration by lifting on each summand. The assignment $a\\mapsto r_a$ is functorial on commutative squares, so it carries an arrow-retract diagram to a retract diagram. Retract closure of trivial cofibrations proves closure of good maps under retracts. To see the transfinite assertion without presuming left properness, let $(P_\\alpha)_{\\alpha\\leq\\lambda}$ be a continuous sequence of good successor maps, and set $Z_\\alpha=HP_\\alpha\\amalg_{P_\\alpha}P_\\lambda$. For each successor $\\alpha+1$, the map $Z_\\alpha\\to Z_{\\alpha+1}$ is a pushout of $r_{P_\\alpha\\to P_{\\alpha+1}}$; at a limit ordinal the sequence is continuous since $H$ preserves colimits. Thus $Z_0\\to Z_\\lambda=HP_\\lambda$ is a transfinite composite of objectwise trivial cofibrations, and it is exactly $r_{P_0\\to P_\\lambda}$. Such composites remain trivial cofibrations by the successive lifting construction against fibrations, with the lift at a limit supplied by the colimit. This construction uses just the weak factorization systems in [lem-coef-simplicial-boundary-collapse-test]. By the cellular-retract description in Step 3 every projective cofibration is good. For a cofibrant $P$ apply this to $0\\to P$: since $H0=0$, its relative unit is $\\eta_P:P\\to v^*v_!P$, hence this unit is an objectwise trivial cofibration.",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, coherent derived coefficient-adjunction foundation; HTT A.3.3.8: the weak saturation of good maps, with the continuous transfinite filtration written out"
+   }
+  },
+  {
+   "text": "We establish the ordinary homotopy tools needed below directly from the model conventions [lem-coef-simplicial-boundary-collapse-test], the tensor/cotensor adjunctions [def-coef-simplicial-tensor-cotensor], and the simplicial model axiom in the hypothesis. This paragraph applies to any simplicial model category $\\mathcal M$, in particular the diagram models just constructed. For a trivial cofibration $a:X\\to Z$ between cofibrant fibrant objects, lifting against $X\\to *$ gives $r:Z\\to X$ with $ra=1$. The simplicial model axiom makes $\\operatorname{Map}(Z,Z)\\to\\operatorname{Map}(X,Z)$ a trivial Kan fibration. The two vertices $ar,1_Z$ restrict to the same vertex $a$, so lifting $\\partial\\Delta^1\\to\\Delta^1$ gives a simplicial homotopy $ar\\simeq1_Z$. For a trivial fibration $p:Z\\to Y$ between cofibrant fibrant objects, lifting $0\\to Y$ gives a section $s$. The trivial Kan fibration $\\operatorname{Map}(Z,Z)\\to\\operatorname{Map}(Z,Y)$ gives a homotopy $sp\\simeq1_Z$. These boundary lifts use precisely the trivial-fibration characterization of [lem-coef-kan-quillen-right-proper]. A weak equivalence $f:X\\to Y$ between cofibrant fibrant objects factors as a trivial cofibration $a:X\\to Z$ followed by a fibration $p:Z\\to Y$; two-out-of-three makes $p$ trivial. The object $Z$ is cofibrant and fibrant. Composing the two displayed homotopy inverses proves that every such $f$ is a simplicial homotopy equivalence. Throughout this proof, finite zigzags of simplicial homotopies are allowed; composition preserves them. The realization of a simplicial set is the disjoint union of the realizations of its vertex edge-components, since every simplex has all its vertices in one such component. Each component is path connected by its edges. Thus equality in $\\pi_0$ is exactly connection by a finite zigzag of edges; for a Kan complex horn fillers concatenate and reverse edges.",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test",
+    "def-coef-simplicial-tensor-cotensor",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, coherent coefficient-adjunction foundation; HTT A.3.3.8: ordinary homotopy preliminary, expanded without coherent-nerve or straightening inputs"
+   }
+  },
+  {
+   "text": "Conversely, a simplicial homotopy equivalence $f:X\\to Y$ between cofibrant fibrant objects is a model weak equivalence. To prove this, factor $f=pa$ with $a:X\\to Z$ a trivial cofibration and $p:Z\\to Y$ a fibration. The previous paragraph gives a homotopy inverse of $a$, so $p$ is also a simplicial homotopy equivalence, with inverse up to homotopy $t:Y\\to Z$. For every cofibrant $C$, the map $\\operatorname{Map}(C,p)$ is a Kan fibration between Kan complexes, and composition with $t$ is its inverse up to a finite zigzag of simplicial homotopies. These simplicial homotopies realize to continuous homotopies by [lem-coef-simplicial-realization-cylinder]; concatenate and reverse them on successive subintervals. The homotopy-equivalence theorem [lem-coef-homotopy-equivalence-weak] therefore makes $\\operatorname{Map}(C,p)$ a weak homotopy equivalence. It is consequently a trivial Kan fibration [lem-coef-kan-quillen-right-proper]. Taking $C=Y$ gives a strict section $s:Y\\to Z$ of $p$. Taking $C=Z$ and lifting the two vertices $sp,1_Z$ over the constant edge at $p$ gives $H:Z\\otimes\\Delta^1\\to Z$ with endpoints $sp,1_Z$ and $pH=p\\circ\\mathrm{pr}_Z$.\nNow let $u:A\\to B$ be any cofibration and let $\\alpha:A\\to Z$, $\\beta:B\\to Y$ satisfy $p\\alpha=\\beta u$. On $(B\\otimes\\{0\\})\\amalg_{A\\otimes\\{0\\}}(A\\otimes\\Delta^1)$ use $s\\beta$ and $H(\\alpha\\otimes1)$. They agree on $A\\otimes\\{0\\}$, and their image in $Y$ is the constant homotopy at $\\beta$. The inclusion of this pushout into $B\\otimes\\Delta^1$ is a trivial cofibration: it is the pushout product of $u$ and $\\{0\\}\\to\\Delta^1$, as proved by transposing lifting squares in Step 4. Lift against $p$; the endpoint at $1$ supplies a lift of the original square. Hence $p$ has the right lifting property against every cofibration, and is a trivial fibration by the model weak factorization system [lem-coef-simplicial-boundary-collapse-test]. Thus $f=pa$ is a weak equivalence. This argument does not require $A$ or $B$ to be cofibrant.",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test",
+    "def-coef-simplicial-tensor-cotensor",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-simplicial-realization-cylinder",
+    "lem-coef-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, coherent coefficient-adjunction foundation; HTT A.3.3.8: Whitehead calculation by explicit parameterized lifting"
+   }
+  },
+  {
+   "text": "The same converse holds between fibrant objects without a cofibrancy hypothesis. Let $f:X\\to Y$ and $g:Y\\to X$ be simplicial homotopy inverses, allowing finite zigzags. Choose trivial fibrations $q_X:X_c\\to X$, $q_Y:Y_c\\to Y$ with cofibrant sources. Their sources are fibrant too. Lift $fq_X$ through $q_Y$ and $gq_Y$ through $q_X$ to obtain $f_c:X_c\\to Y_c$, $g_c:Y_c\\to X_c$. The simplicial model axiom makes $\\operatorname{Map}(X_c,q_X)$ and $\\operatorname{Map}(Y_c,q_Y)$ trivial Kan fibrations. The homotopy zigzag from $gfq_X$ to $q_X$ lifts starting at $g_cf_c$, one edge at a time; either endpoint inclusion is a cofibration and a trivial Kan fibration has the required lifts. Its final vertex lies over $q_X$, and the boundary lifting property connects that vertex to $1_{X_c}$ within that fiber. This proves $g_cf_c\\simeq1_{X_c}$ by a finite zigzag, and the other trivial mapping fibration proves $f_cg_c\\simeq1_{Y_c}$. The preceding paragraph makes $f_c$ a weak equivalence. The equation $q_Yf_c=fq_X$ and two-out-of-three make $f$ a weak equivalence. Only the model lifting systems [lem-coef-simplicial-boundary-collapse-test], tensor adjunctions [def-coef-simplicial-tensor-cotensor], and Kan trivial fibrations [lem-coef-kan-quillen-right-proper] are used.",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test",
+    "def-coef-simplicial-tensor-cotensor",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, coherent coefficient-adjunction foundation; HTT A.3.3.8: fibrant-value equivalences, with the cofibrant replacements and homotopy lifts written out"
+   }
+  },
+  {
+   "text": "Restriction along a simplicial functor $v:I\\to J$ essentially surjective on $\\pi_0$ reflects weak equivalences between fibrant-valued diagrams. Indeed, an invertible vertex class $e:j\\to j'$ has an inverse represented by a vertex, with the two inverse equations connected by finite zigzags of edges. Enriched functoriality sends these to simplicial homotopy inverse equations on the values of each diagram, using [def-coef-simplicial-tensor-cotensor]. The values are fibrant, so Step 12 proves that the image of $e$ is a weak equivalence. Given a transformation $b:Q\\to Q'$ between fibrant-valued $J$-diagrams, choose for any $j$ an isomorphism $vi\\to j$ in $\\pi_0J$ and a representing vertex. Its naturality square has vertical weak equivalences by this argument. If $v^*b$ is a weak equivalence, then $b_{vi}$ is one, and two-out-of-three in that square gives that $b_j$ is one. This is exactly reflection. The model classes and two-out-of-three are [lem-coef-simplicial-boundary-collapse-test]; nothing here asks that the mapping sets of $I$ or $J$ be Kan.",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test",
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, coherent coefficient-adjunction foundation; HTT A.3.3.8: essential-surjectivity reflection"
+   }
+  },
+  {
+   "text": "For completeness construct the ordinary localization used for the final reduction, without the enhanced-localization nodes. For any simplicial model category $\\mathcal M$, let $H(\\mathcal M)$ have bifibrant objects and morphisms $\\pi_0\\operatorname{Map}_{\\mathcal M}(X,Y)$. These mapping sets are Kan by the simplicial model axiom; their compositions are well-defined on components. Steps 10 and 11 say precisely that a map between these objects becomes invertible in $H(\\mathcal M)$ if and only if it is a model weak equivalence: an inverse component is represented by a vertex and the inverse equations are finite homotopy zigzags.\nChoose functorial cofibrant and fibrant replacements $QX\\to X$, $X\\to RX$ from the weak factorization systems [lem-coef-simplicial-boundary-collapse-test]. Naturality and two-out-of-three show that $Q,R$ preserve all weak equivalences. The composite $RQ$ takes values in bifibrant objects, since $QX\\to RQX$ is a cofibration. Thus $q:X\\mapsto RQX$, followed by the component quotient, inverts weak equivalences. Enlarge universes and form the ordinary localization $\\mathcal L$ explicitly by finite strings of arrows and formal inverses of weak equivalences, modulo the composition, identity and inverse relations. Its universal property follows by sending a string to the corresponding composite. The functor $q$ factors through $\\mathcal L$.\nConversely, the functor from bifibrant objects to $\\mathcal L$ identifies the two ends of every simplicial homotopy: if the target $Y$ is fibrant, both evaluations $Y^{\\Delta^1}\\to Y$ are trivial fibrations by the simplicial model axiom and [lem-coef-kan-quillen-right-proper]. Their common constant-path section is a weak equivalence, so their images in $\\mathcal L$ are the same inverse of that section. Tensor/cotensor adjunction [def-coef-simplicial-tensor-cotensor] now identifies the endpoint maps. Hence this functor descends to $H(\\mathcal M)$. The natural zigzag $X\\leftarrow QX\\to RQX$ consists of weak equivalences and identifies the composite $\\mathcal L\\to H(\\mathcal M)\\to\\mathcal L$ with the identity. For bifibrant $X$, $QX$ is itself bifibrant, since $QX\\to X$ is a fibration; the same zigzag lies entirely among bifibrant objects. It gives the inverse natural identification on $H(\\mathcal M)$, with naturality checked on vertex representatives, which represent every morphism there. Thus $\\mathcal L\\simeq H(\\mathcal M)$.\nIn particular a map $a$ of $\\mathcal M$ is weak exactly when its image in $\\mathcal L$ is invertible: invertibility is equivalent to that of $[RQa]$, hence to $RQa$ being weak by Steps 10-11, hence to $a$ being weak by the two natural replacement squares. Moreover every morphism in $\\mathcal L$ between bifibrant representatives is represented by an actual map. This establishes the ordinary saturation and representation facts here, rather than citing a node whose enhanced dependencies lead to straightening.",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test",
+    "def-coef-simplicial-tensor-cotensor",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, coherent coefficient-adjunction foundation; HTT A.3.3.8: ordinary localization and saturation, constructed directly as the bifibrant component quotient"
+   }
+  },
+  {
+   "text": "For cofibrant $P$ and fibrant $Q$ in a simplicial model category, the natural map from $\\pi_0\\operatorname{Map}(P,Q)$ to the ordinary localization Hom set is bijective. Indeed choose a trivial cofibration $P\\to RP$ and a trivial fibration $CQ\\to Q$ with $CQ$ cofibrant. Both $RP,CQ$ are bifibrant. The maps $\\operatorname{Map}(RP,CQ)\\to\\operatorname{Map}(RP,Q)\\to\\operatorname{Map}(P,Q)$ are trivial Kan fibrations, by the simplicial model axiom and [def-coef-simplicial-tensor-cotensor], and therefore induce bijections of components [lem-coef-kan-quillen-right-proper]. Step 14 identifies the first component set with the Hom between these bifibrant objects in the localization, and the replacement arrows identify their endpoints with $P,Q$. Endpoint evaluations of cotensor paths, as in Step 14, show that these identifications send each actual map to its localization class. This also proves naturality wherever source cofibrancy and target fibrancy hold.\nNow consider any simplicial Quillen adjunction $L:\\mathcal M\\rightleftarrows\\mathcal N:U$ between such models. The Brown split factorizations [lem-coef-brown-split-factorizations] show that $L$ preserves weak equivalences between cofibrant objects: write a weak equivalence $f$ between them as $pi$ with $p$ trivial fibration and a cofibration section $s$; two-out-of-three makes both $i$ and $s$ trivial cofibrations. Thus $L(i),L(s)$ are weak, $L(p)L(s)=1$ makes $L(p)$ weak, and $L(f)$ is weak. Dually $U$ preserves weak equivalences between fibrant objects. Consequently $LQ$ and $UR$ preserve all weak equivalences and descend to functors on the ordinary localizations. For cofibrant $P$ and fibrant $Q$ the simplicial adjunction and the preceding component calculation give\n$$\\operatorname{Hom}(\\mathbf LL(P),Q)=\\pi_0\\operatorname{Map}(LP,Q)=\\pi_0\\operatorname{Map}(P,UQ)=\\operatorname{Hom}(P,\\mathbf RU(Q)).$$\nFor arbitrary objects insert the chosen replacements. Naturality of the adjunction bijections and the replacement arrows proves naturality for every actual map; it then holds for formal inverses and composites, so these are natural bijections on the ordinary localizations. They define an ordinary derived adjunction. Its unit and counit are the ordinary adjunction maps with replacement arrows inverted, because the bijections send identities to those maps; their triangle identities follow from the same bijections. A functor already preserving all weak equivalences has its direct localized functor, by its replacement natural weak equivalence. This is an ordinary adjunction argument, with no assertion about infinity localizations.",
+   "uses": [
+    "lem-coef-brown-split-factorizations",
+    "lem-coef-simplicial-boundary-collapse-test",
+    "def-coef-simplicial-tensor-cotensor",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, coherent coefficient-adjunction foundation; HTT A.3.3.7-A.3.3.8: ordinary derived adjunction, proved from mapping components and Brown split factorizations"
+   }
+  },
+  {
+   "text": "Return to a mappingwise injective DK equivalence $v$ and its adjunction of Step 7. For a cofibrant $P$, Step 9 makes $\\eta_P:P\\to v^*v_!P$ a weak equivalence. Its derived unit is represented by $P\\to v^*v_!P\\to v^*R(v_!P)$; restriction preserves all weak equivalences, so this is a weak equivalence, and its class is invertible by Step 14. The ordinary derived restriction reflects isomorphisms: take bifibrant representatives of the source and target diagrams and represent the morphism by an actual map, as Step 14 permits. If its restriction is invertible in the coefficient-diagram localization, the saturation conclusion of Step 14 makes that restricted map weak. Its source and target are fibrant-valued; Step 13 reflects weak equivalences, so the map itself is weak and its original class invertible. The triangle identity of the derived adjunction in Step 15 shows that the image under restriction of every derived counit is inverse to a derived unit. Reflection makes the counit invertible. Thus the ordinary derived restriction and left extension are inverse equivalences for every mappingwise injective DK equivalence. For cofibrant $P$ and fibrant $Q$, Step 15 identifies the ordinary adjunct classes by $[\\bar a]=\\mathbf Rv^*([a])\\eta_P$. The unit is invertible and restriction is an equivalence, so $[a]$ is invertible exactly when $[\\bar a]$ is. Step 14 translates this into the required weak-equivalence test. The only external inputs in this argument are the model conventions [lem-coef-simplicial-boundary-collapse-test] and the tensor conventions [def-coef-simplicial-tensor-cotensor]; the ordinary localization and derived tools were proved in Steps 14-15.",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test",
+    "def-coef-simplicial-tensor-cotensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, coherent coefficient-adjunction foundation; HTT A.3.3.8 under its mappingwise monicity condition: unit, reflection, counit and exact Quillen-equivalence criterion"
+   }
+  },
+  {
+   "text": "Reduce an arbitrary DK equivalence $v:I\\to J$ to the case just proved, using [lem-coef-simplicial-interval-lifting]. If $I$ is empty, essential surjectivity forces $J$ to be empty and both diagram categories are terminal, so all assertions hold. Otherwise let $O=\\operatorname{Ob}I\\amalg\\operatorname{Ob}J$. In the fixed-object model category $\\mathrm{sCat}_O$, factor the map from the disjoint union $I\\amalg J$ to the category having mapping set $\\Delta^0$ between every pair of elements of $O$ as a cofibration $I\\amalg J\\to D$ followed by a trivial fibration. The latter is a trivial Kan fibration on every mapping set, so all $D(x,y)$ are nonempty contractible Kan complexes. The cofibration is mappingwise monic: by the cited node it is an arrow retract of a degreewise free extension; a degreewise free category extension includes the old arrows: its arrows are finite words in old arrows and new generators, reduced only by the old composition and identity relations, so two old arrows cannot become equal, and a retract of an injection is injective (if two source elements have the same image, apply the arrow-retract inclusion, use injectivity there, then the retraction). Write $d_I:I\\to D$ and $d_J:J\\to D$ for its restrictions. Set $K=J\\times D$, $p:K\\to J$, $g=(v,d_I):I\\to K$, and $s=(1_J,d_J):J\\to K$. Every mapping map of $p$ is a trivial Kan fibration, being the pullback of $D(x,y)\\to\\Delta^0$; on $\\pi_0$, $p$ is fully faithful and essentially surjective since $O$ is nonempty and $\\pi_0D$ has one arrow between any two objects. Hence $p$ is a DK equivalence. The identities $pg=v$ and $ps=1_J$ show that $g,s$ are DK equivalences as well (on mapping sets by two-out-of-three; on $\\pi_0$ because a composite and one factor are equivalences). Their mapping maps are monomorphisms: for $g$ its second coordinate is injective, and for $s$ its first coordinate is the identity. This supplies exactly the reduction of HTT A.3.3.8 without imposing local Kan conditions on the original $I$ or $J$. The Kan properties used here are those of [lem-coef-kan-quillen-right-proper], and DK terminology is the inline definition in the item. The fixed-object model of [lem-coef-simplicial-interval-lifting] and its retract-of-free-extension clause have no straightening dependency.",
+   "uses": [
+    "lem-coef-simplicial-interval-lifting",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, coherent coefficient-adjunction foundation; HTT A.3.3.8 after the monicity condition: contractible auxiliary category, using only the independent fixed-object structure"
+   }
+  },
+  {
+   "text": "Apply Step 16 to $g$ and $s$ of Step 17. On ordinary localizations, $s^*$ is therefore an equivalence and $s^*p^*=1$, so $p^*$ is a quasi-inverse to $s^*$: applying a quasi-inverse of $s^*$ to this identity gives $p^*\\cong(s^*)^{-1}$. Thus $v^*=g^*p^*$ is an equivalence. Every restriction preserves all weak equivalences, so these strict restriction identities induce exactly the displayed localized identities. Step 15 provides the derived adjunction for $v_!\\dashv v^*$, whose right side is this direct localization. An adjunction with an equivalence as its right adjoint has invertible unit and counit: full faithfulness identifies its Hom bijection with $\\operatorname{Hom}(LUY,Z)\\cong\\operatorname{Hom}(Y,Z)$, given by precomposition with the counit; testing $Z=LUY$ and $Z=Y$ gives its two-sided inverse. The triangle identity gives invertibility of the unit on $UY$, and essential surjectivity and naturality give it on every object. For cofibrant $P$ and fibrant $Q$, the adjunction comparison of Step 15 sends an actual map $a:v_!P\\to Q$ to its actual adjunct, with $[\\bar a]=\\mathbf Rv^*([a])\\eta_P$. Thus their classes are invertible simultaneously. Step 14's saturation turns that into exactly the weak-equivalence test in the statement, under the model conventions [lem-coef-simplicial-boundary-collapse-test]. Steps 1-7 already proved combinatoriality, the actual simplicial structure, free/evaluation and Kan-extension adjunctions, and evaluation of both cofibration classes. This completes every clause with arbitrary small index categories, including non-Kan mapping sets.",
+   "uses": [
+    "lem-coef-simplicial-boundary-collapse-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Proof paragraph 2, coherent coefficient-adjunction foundation; HTT A.3.3.8: restriction identities, ordinary derived equivalences, and the cofibrant/fibrant adjoint-map criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-accessible-monad-presentability",
+  "def-coef-simplicial-tensor-cotensor",
+  "lem-coef-simplicial-boundary-collapse-test",
+  "lem-coef-object-presentability-rank",
+  "lem-coef-small-family-regular-bound",
+  "lem-coef-small-object-cell-factorization",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-simplicial-realization-cylinder",
+  "lem-coef-homotopy-equivalence-weak",
+  "lem-coef-brown-split-factorizations",
+  "lem-coef-simplicial-interval-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, coherent coefficient adjunction. Projective cellular proof and relative units follow HTT A.2.8.2 and A.3.3.2-A.3.3.8, read by the second reader in the March 10, 2012 PDF at https://www.math.ias.edu/~lurie/papers/highertopoi.pdf. Independent ordinary homotopy, saturation and derived-adjunction arguments and a fixed-object reduction are supplied here to respect the Q72 prerequisite constraint; these additions remain agent-written."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -118,10 +359,52 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.QCat.catEnrichedOrdinaryCategory\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory\", \"type\": \"CategoryTheory.EnrichedOrdinaryCategory CategoryTheory.Cat SSet.QCat\", \"doc\": \"The category of quasi-categories (QCat) is equipped with an ordinary category structure enriched over the category of small categories (Cat). This structure is obtained by transporting the enrichment \"}\n  {\"name\": \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialCategory/SimplicialObject\", \"type\": \"{D : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} D] → CategoryTheory.EnrichedCategory SSet (CategoryTheory.SimplicialObject D)\", \"doc\": \"For any category $ \\\\mathcal{D} $, the category of simplicial objects in $ \\\\mathcal{D} $ is enriched over the category of simplicial sets. This means that the hom-objects between any two simplicial obj\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"{X : SSet.Truncated 2} →\\n  {C : Type u} →\\n    [inst : CategoryTheory.SmallCategory C] →\\n      CategoryTheory.Functor X.HomotopyCategory C ≃ (X ⟶ (SSet.truncation 2).obj (CategoryTheory.nerve C))\", \"doc\": \"For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a natural equivalence between the category of functors from the homotopy category of $X$ to $\\\\mathcal{C}$ and the category o\"}\n  {\"name\": \"SSet.Truncated.nerve₂Adj\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"SSet.Truncated.hoFunctor₂ ⊣ CategoryTheory.Nerve.nerveFunctor₂\", \"doc\": \"The nerve functor from small categories to 2-truncated simplicial sets is left adjoint to the homotopy category functor. For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a n\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.instSimplicialCategory\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialCategory/SimplicialObject\", \"type\": \"{D : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} D] → CategoryTheory.SimplicialCategory (CategoryTheory.SimplicialObject D)\", \"doc\": \"For any category $ \\\\mathcal{D} $, the category of simplicial objects in $ \\\\mathcal{D} $ is a simplicial category, enriched over the category of simplicial sets. This means that the hom-objects between\"}\n  {\"name\": \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"SSet.hoFunctor.IsLeftAdjoint\", \"doc\": \"The functor from the category of simplicial sets to the category of small categories, which maps each simplicial set to its homotopy category, is a left adjoint functor. This functor is constructed by\"}\n  {\"name\": \"CategoryTheory.nerveAdjunction\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"SSet.hoFunctor ⊣ CategoryTheory.nerveFunctor\", \"doc\": \"The nerve functor from small categories to 2-truncated simplicial sets is left adjoint to the homotopy category functor. For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a n\"}\n  {\"name\": \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv\", \"module\": \"Mathlib/CategoryTheory/Enriched/Ordinary/Basic\", \"type\": \"{V : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} V] →\\n    [inst_1 : CategoryTheory.MonoidalCategory V] →\\n      {W : Type u''} →\\n        [inst_2 : CategoryTheory.Category.{v'', u''} W] →\\n          [inst_3 : CategoryTheory.MonoidalCategory W] →\\n            (F : CategoryTheory.Functor V W) →\\n\", \"doc\": \"Given a lax monoidal functor $ F : \\\\mathcal{V} \\\\to \\\\mathcal{W} $ and a category $ \\\\mathcal{C} $ enriched over $ \\\\mathcal{V} $, the category obtained by transporting the enrichment of $ \\\\mathcal{C} $ t\"}\n",
    "date": "2026-10-17",
    "verdict": "no match: returned ordinary projective-object preservation, ordinary-diagram enrichment and existing localization results, not the projective model structure for enriched simplicial diagrams or DK index invariance. Read ModelCategory/Basic.lean and Enriched/FunctorCategory.lean to distinguish their hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective model structures on enriched simplicial diagrams and invariance under Dwyer Kan equivalences",
+   "results": "{\"t\": \"2026-10-17T00:49:58Z\", \"tool\": \"leanfinder\", \"query\": \"Projective model structures on enriched simplicial diagrams and invariance under Dwyer Kan equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\", \"CategoryTheory.SimplicialNerve\", \"CategoryTheory.Idempotents.instIsIdempotentCompleteSimplicialObject\", \"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\", \"CategoryTheory.SimplicialObject.cosk\", \"CategoryTheory.SimplicialCategory\"], \"digest\": \"02d18162c533ee15\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: enrichment instances, model axioms, ordinary projective objects or homotopy-category tools do not state the enriched projective model construction and its DK index invariance."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction along a weak equivalence of simplicial enriched indexing categories gives an equivalence of projective diagram model categories",
+   "results": "{\"t\": \"2026-10-17T00:50:52Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction along a weak equivalence of simplicial enriched indexing categories gives an equivalence of projective diagram model categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.enoughProjectives_iff\", \"CategoryTheory.Equivalence.projectivePresentationOfMapProjectivePresentation\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.Functor.preservesProjectiveObjects_of_isEquivalence\", \"CategoryTheory.Equivalence.map_projective_iff\", \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"instIsEquivalenceLightProfiniteLightDiagramLightProfiniteToLightDiagram\", \"CategoryTheory.TransportEnrichment.forgetEnrichmentEquiv\"], \"digest\": \"c380fe5906b2b3c0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: enrichment instances, model axioms, ordinary projective objects or homotopy-category tools do not state the enriched projective model construction and its DK index invariance."
+  },
+  {
+   "tool": "grep",
+   "query": "whitehead|weakEquivalence_toHoCat_map_iff|exists.*homotopy",
+   "results": "{\"t\": \"2026-10-17T00:52:04Z\", \"tool\": \"grep\", \"query\": \"whitehead|weakEquivalence_toHoCat_map_iff|exists.*homotopy\", \"sub\": \"AlgebraicTopology/ModelCategory\", \"ok\": true, \"n_hits\": 22, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/RightHomotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Homotopy.lean\"], \"digest\": \"f114e9334163e597\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: enrichment instances, model axioms, ordinary projective objects or homotopy-category tools do not state the enriched projective model construction and its DK index invariance."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of projective model category structures for functors enriched over simplicial sets and Quillen equivalence induced by enriched equivalences",
+   "results": "{\"t\": \"2026-10-17T01:16:30Z\", \"tool\": \"leanfinder\", \"query\": \"Existence of projective model category structures for functors enriched over simplicial sets and Quillen equivalence induced by enriched equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"CategoryTheory.Equivalence.projectivePresentationOfMapProjectivePresentation\", \"CategoryTheory.Functor.preservesProjectiveObjects_of_isEquivalence\", \"SSet.QCat\", \"CategoryTheory.instReflectiveSSetCatNerveFunctor\", \"SSet.hoFunctor\", \"CategoryTheory.Equivalence.map_projective_iff\"], \"digest\": \"cc688d7dab0f3c50\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned enrichment, ordinary homotopy-category, or projective-object results do not state enriched projective model existence and DK invariance; grep and Loogle returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "projectiveModel|ProjectiveModel|enriched.*[Qq]uillen|[Dd]wyer.*[Kk]an",
+   "results": "{\"t\": \"2026-10-17T01:16:44Z\", \"tool\": \"grep\", \"query\": \"projectiveModel|ProjectiveModel|enriched.*[Qq]uillen|[Dd]wyer.*[Kk]an\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned enrichment, ordinary homotopy-category, or projective-object results do not state enriched projective model existence and DK invariance; grep and Loogle returned zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedFunctor\", \"ModelCategory\"",
+   "results": "{\"t\": \"2026-10-17T01:16:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedFunctor\\\", \\\"ModelCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned enrichment, ordinary homotopy-category, or projective-object results do not state enriched projective model existence and DK invariance; grep and Loogle returned zero hits."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-enriched-diagram-rectification",
@@ -130,7 +413,13 @@
  },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
- "split_report": null,
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-projective-model-calculus",
+  "worker": "stage1",
+  "summary": "NS reworked the archived cellular argument against the current independent statement conventions. All current statement and maintenance fields retained. Replaced every coherent-nerve, enhanced-localization, derived-adjunction and fixed-object Bergner citation reaching unmarked straightening by explicit ordinary homotopy arguments and the independent fixed-object model. No new nodes. Second reading checked HTT directly, replaced the Step 6 transfinite pushout-product claim by its cotensor lifting proof, expanded relative-unit closure, and removed an unneeded fixed-domain retract assertion.",
+  "blueprint": "Paragraph 2 of current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, the coherent derived coefficient adjunction before its displayed RHom/Rlim calculation; original enrichment/rectification ancestry retained."
+ },
  "lean_audit": {
   "master": {
    "state": "none",
@@ -143,5 +432,13 @@
    "missing": []
   }
  },
- "lead_note": "Q72 maintenance: this is an open proof obligation. The former split is archived in coord/reports/maintenance/Q72-unmarked-straightening-before.json. Reprove it from the independent definitions now named in stmt_deps, without a dependency path to lem-coef-unmarked-straightening-quillen; that general theorem reduces to this prerequisite. No Lean attachment has been invalidated (none was recorded)."
+ "lead_note": "Q72 maintenance: this is an open proof obligation. The former split is archived in coord/reports/maintenance/Q72-unmarked-straightening-before.json. Reprove it from the independent definitions now named in stmt_deps, without a dependency path to lem-coef-unmarked-straightening-quillen; that general theorem reduces to this prerequisite. No Lean attachment has been invalidated (none was recorded).",
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NS-52b747c81",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-52b747c81 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 18 steps, and the full statements of its 11 proof dependencies and 4 statement dependencies. I also read the blueprint place (main-20261015 prop-coef-integral-exceptional-adjoint proof, paragraph 2) and the unit record. The delivery adds no new nodes. proof_deps equals the union of the step uses. Every dependency is in unit sk-prop-sf-biduality-general, apart from one other-unit definition used as a notion, so no tool_uses are needed. I traversed the full dependency closure (183 nodes) myself: there is no cycle and no path to lem-coef-unmarked-straightening-quillen, the nerve-localization node or the model-infinity-derived-adjunction node, so the Q72 constraint holds. The statement is unchanged from the base. It is the S=sSet case of HTT A.3.3.2/A.3.3.7/A.3.3.8, every simplicial set is cofibrant, and nothing is weakened. HTT is not in literature/ and I could not read its pages, so I verified the self-contained proof instead. Steps 1-7: the accessible monad and free diagrams; the right lifting classes; the λ-filtered bound; SM7 transposed so that no cofibrant domains are needed; the retract proof of D_I=C_I∩W_I; the three cotensor corner-map cases; and the enriched Kan-extension Quillen pair. Steps 8-9: the relative unit is a pushout product with a mono weak equivalence. The transfinite argument with Z_α=HP_α⊔_{P_α}P_λ works without left properness, and H0=0 gives η_P. Steps 10-12: the Whitehead arguments, including the endpoint lift L_1 against an arbitrary cofibration, and the fibrant-only version through cofibrant replacements. Step 13: reflection through π0-invertible vertices on fibrant values. Steps 14-15: the finite-string localization is equivalent to the bifibrant π0 category, which gives saturation and representation by actual maps. The derived adjunction comes from mapping components and Ken Brown via the split factorizations. Step 16: invertible unit, reflection, invertible counit, and [ā]=v^*[a][η_P]. Step 17: in the sCat_O factorization the cofibration is mappingwise monic (free extension plus retract), p is a DK equivalence, and g and s are monic DK equivalences; the empty case is handled. Step 18: s^*p^*=1 and v^*=g^*p^* give the Quillen equivalence criterion. I tested the empty, one-object and discrete index cases and found no faults. The only minor issue is a harmless forward reference from Step 2 to Step 6's tensor. No changes made. HTT still needs archiving in literature/."
+ }
 }

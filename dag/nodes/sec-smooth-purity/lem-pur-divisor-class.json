@@ -3,50 +3,226 @@
  "blueprint": {
   "is": "lem-pur-divisor-class",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Kummer class of a divisor and its $c_1$",
- "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $T\\to B$ be smooth of relative dimension $n$ and let\n$D\\hookrightarrow T$ be a closed subfamily, smooth over $B$, of pure\ncodimension one. The *Kummer class of the divisor $D$* is the\nclass $\\operatorname{cl}(D)\\in H^2_D(T,\\Lambda(1))$ of\n[def-pur-frame-class] of a frame of the ideal of $D$, well\ndefined by [lem-pur-frame-independence]. Moreover:\n\n$$\n\\begin{array}{rcll}\n\\text{(a)}& \\operatorname{cl}(D)|_{D\\cap U}=\\partial(\\kappa(f))&\n\\text{for a local equation }f\\text{ of }D\\text{ on }U,&\\\\\n\\text{(b)}& \\operatorname{cl}(D_1+D_2)=\\operatorname{cl}(D_1)+\\operatorname{cl}(D_2),&\n\\text{and forgetting support sends }\\operatorname{cl}(D)\\text{ to }c_1(\\mathcal O_T(D)).&\n\\end{array}\n$$",
+ "statement": "Fix the finite-coefficient setting of [def-pur-conventions], with $\\Lambda=A=A_{E,n}$ and arbitrary $n\\geq1$. In the separated finite-type $k$-scheme setting of [sk-def-purity-conv], let $T\\to B$ be smooth of relative dimension $d$ and let $D\\hookrightarrow T$ be a closed subfamily smooth over $B$, of pure codimension one as in [def-pur-frame-class]. Thus $D$ is an effective Cartier divisor [def-pc-divisor-line-bundle]. There is a canonical Kummer divisor class\n$$\\operatorname{cl}(D)\\in H^2_D(T_{\\mathrm{proet}},A(1))$$\nwith supported cohomology as in [def-pur-support-cohomology] and twist as in [def-coefficient-twists-detailed]. It is the global class constructed from the line bundle $\\mathcal O_T(D)$ with its canonical section trivializing it on $T\\setminus D$, by the relative torsor Kummer connecting map [lem-amb-relative-torsor-cohomology], followed by the coefficient map on roots prescribed in [def-pur-frame-class]. For every etale neighbourhood $U\\to T$ on which $D_U$ has equation $f$, its restriction is\n$$\\operatorname{cl}(D)|_U=\\partial\\kappa(f)\\in H^2_{D_U}(U,A(1)).$$\nIn particular it agrees with the rank-one frame class of [def-pur-frame-class], independently of the equation as in [lem-pur-frame-independence].\n\nThe same relative construction defines $\\operatorname{cl}(E)$ for any effective Cartier divisor $E$ on $T$, including a sum of smooth divisors. If $D_1,D_2$ are such divisors and $Z=|D_1|\\cup|D_2|$, then, after the canonical enlargement-of-support maps,\n$$\\operatorname{cl}(D_1+D_2)=\\operatorname{cl}(D_1)+\\operatorname{cl}(D_2)\\quad\\text{in }H^2_Z(T,A(1)).$$\nHere $D_1+D_2$ is defined by the product of the two Cartier ideals, so locally its equation is $f_1f_2$, not the two-element frame $(f_1,f_2)$. Forgetting support sends $\\operatorname{cl}(D)$ to $c_1(\\mathcal O_T(D))\\in H^2(T,A(1))$. Precisely, $c_1(L)$ means the ordinary etale Kummer connecting image of the frame-torsor class of $L$ [lem-sc-line-bundle-torsor], at exponent $m=\\ell^n$ killing $A$, mapped to the pro-etale twist by the same coefficient morphism as [def-pur-frame-class]. No $\\mathbf Z/m\\mathbf Z$-module structure on $\\mathbf G_m$ is assumed.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-divisor-class.md",
   "place": "node lem-pur-divisor-class, order 1945"
  },
  "stmt_deps": [
   "def-pur-conventions",
+  "sk-def-purity-conv",
+  "def-sbc-smooth-morphisms",
   "def-pur-frame-class",
-  "lem-pur-frame-independence",
+  "def-pc-divisor-line-bundle",
+  "def-pur-support-cohomology",
   "def-coefficient-twists-detailed",
-  "def-weil-derived-cohomology-sheaves"
+  "lem-pur-frame-independence",
+  "lem-amb-relative-torsor-cohomology",
+  "lem-sc-line-bundle-torsor"
  ],
  "proof": [
   {
-   "text": "Use the frame class of [def-pur-frame-class], independent of the local equation by [lem-pur-frame-independence], and the support boundary of [def-pur-support-cohomology] applied to the Kummer datum of [def-pur-affine-line-datum].\n(a) is (def. frame class) $\\operatorname{cl}(f)=\\partial(\\kappa(f))$.\nFor (b), the sum of two effective divisors $D_1,D_2$ has a frame\n$(f_1,f_2)$ on an intersection of the two trivializing opens, and\n$\\kappa(f_1f_2)=\\kappa(f_1)+\\kappa(f_2)$ by\n[lem-pur-kummer-additivity], so\n$\\operatorname{cl}(D_1)+\\operatorname{cl}(D_2)$ is the class of the\nframe $(f_1f_2)$. The forget-support statement is the standard\ncomputation of the Kummer boundary of the group law of\n$\\operatorname{Pic}$: on a trivializing open the class\n$\\operatorname{cl}(D)$ is the boundary of the Kummer class of the\ninverse image of the line bundle $\\mathcal O_T(D)$'s unit section on\n$T\\setminus D$, hence its image in $H^2(T,\\Lambda(1))$ is\n$c_1(\\mathcal O_T(D))$ of [lem-pur-kummer-additivity] (the\nboundary maps in the two long exact sequences to $H^2(T,\\Lambda(1))$,\nand both are the image of the same class of $H^1(T,\\mathbf G_m)$;\nthe statement is local and follows from the sheaf-theoretic\ndescription of $c_1$ via the Kummer sequence).",
+   "text": "Apply [lem-pur-smooth-pair-local-coordinates] to $D\\hookrightarrow T$ over $B$. The ambient finite-type setting is explicitly that of [sk-def-purity-conv]. Thus $T$ and $D$ are finite type over $k$, hence locally Noetherian by [lem-weil-pbc-finite-type-over-noetherian] applied to $\\operatorname{Spec}k$ (a field has just the two ideals $0,k$, so its spectrum is Noetherian). At a point $y\\in D$, the coordinate chart gives a regular sequence $f_1,\\ldots,f_b$ in $R=\\mathcal O_{T,y}$ defining $\\mathcal O_{D,y}$. Each $f_j$ lies in the maximal ideal of its successive quotient and is a nonzerodivisor there. The successive quotients remain Noetherian, since their ideals correspond to ideals of $R$ containing the quotient ideal, and the images of generators generate. Apply [lem-weil-pbc-dimension-quotient-nonzerodivisor] successively to obtain $\\dim R=\\dim\\mathcal O_{D,y}+b$. The pure-codimension convention in [def-pur-frame-class] says the difference is one, so $b=1$. Thus locally $\\mathcal I_D=(f)$ with $f$ a nonzerodivisor; off $D$ the ideal is the unit ideal. This proves that $D$ is Cartier and that one-function frames exist, without presuming regularity of the base. We will construct the global class rather than infer a global cohomology class from equality of local classes.",
+   "uses": [
+    "lem-pur-smooth-pair-local-coordinates",
+    "def-pur-conventions",
+    "sk-def-purity-conv",
+    "def-pur-frame-class",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-dimension-quotient-nonzerodivisor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE, lemma-etale-local-structure, applied to the first sentence of the blueprint proof"
+   }
+  },
+  {
+   "text": "For any effective Cartier divisor $E$ put $L_E=\\mathcal I_E^\\vee$ as in [def-pc-divisor-line-bundle]. On a chart $\\mathcal I_E=(f_a)$ write $e_a=f_a^{-1}$ for the dual basis, and put $s_E=f_ae_a$. On overlaps $e_b=(f_a/f_b)e_a$, so $f_be_b=f_ae_a$: these sections glue. On $W=T\\setminus E$ this section is nowhere zero and gives a specified trivialization $\\tau_E:\\mathcal O_W\\simeq L_E|_W$. By [lem-sc-line-bundle-torsor], $P_E=\\underline{\\operatorname{Isom}}(\\mathcal O_T,L_E)$ is a $\\mathbf G_m$-torsor, with the specified section $\\tau_E$ on $W$.",
+   "uses": [
+    "def-pc-divisor-line-bundle",
+    "lem-sc-line-bundle-torsor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md",
+    "place": "First sentence and final paragraph; canonical section on the complement"
+   }
+  },
+  {
+   "text": "Use [lem-amb-relative-torsor-cohomology] for $G=\\mathbf G_m$ to obtain $\\alpha_E=[(P_E,\\tau_E)]\\in H^1(T,W;\\mathbf G_m)$. Its forgotten-support image is $[P_E]$. This is a specified class, not an arbitrary lift of a Picard class. Replacing $f_a$ by $u_af_a$ changes $e_a$ to $u_a^{-1}e_a$ and leaves $s_E$ unchanged. Thus the pair and its relative class are independent of all local equations.",
+   "uses": [
+    "lem-amb-relative-torsor-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md",
+    "place": "First sentence: global well-definedness via a torsor with its specified section"
+   }
+  },
+  {
+   "text": "Put $m=\\ell^n$, which is invertible on $T$ and kills $A$ in the conventions and coefficient prescription of [def-pur-frame-class]. Apply [lem-amb-kummer-any-base] and the relative connecting map of [lem-amb-relative-torsor-cohomology] to form $\\beta_E=\\delta_{T,W}(\\alpha_E)\\in H^2(T,W;\\mu_m^{\\mathrm{et}})$. Its image in ordinary cohomology is $\\delta_T([P_E])$, by the relative lemma's compatibility with forgetting support. Only the exact sequence of abelian sheaves is used here, with no tensoring of $\\mathbf G_m$ over $\\mathbf Z/m\\mathbf Z$.",
    "uses": [
     "def-pur-frame-class",
-    "lem-pur-frame-independence",
-    "def-pur-support-cohomology",
-    "def-pur-affine-line-datum",
-    "lem-pur-kummer-additivity"
+    "lem-amb-kummer-any-base",
+    "lem-amb-relative-torsor-cohomology"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PL, lemma-kummer-sequence; relative connecting construction from the blueprint final paragraph"
+   }
+  },
+  {
+   "text": "Identify relative cohomology with supported cohomology using [def-pur-support-cohomology], with the localization maps of [thm-pur-with-support-exactness]. Here is the resolution justification on both small sites. The localized site over the open object $W$ is the small site of $W$: an object is a morphism factoring through $W$, and forgetting that factorization and pulling back along the open immersion are inverse; the covering families are unchanged [def-weil-pbc-etale-site, def-weil-pbc-proetale-site]. The slice restriction is exact by [lem-weil-pbc-site-pullback-abelian-exact] and preserves injectives by [new-over-pullback-preserves-injectives]. Thus, for an injective resolution $F\\to I^\\bullet$, the complexes $A^\\bullet=I^\\bullet(T)$ and $B^\\bullet=I^\\bullet(W)$ compute both derived global-section terms, with their restriction map $r$. By [lem-weil-pbc-injective-sheaf-mono-restriction], $r$ is degreewise surjective. The support complex is $K=\\ker r$. Its inclusion $k\\mapsto(k,0)$ into the signed relative complex $C^q=A^q\\oplus B^{q-1}$, $D(a,b)=(da,r(a)-db)$, is a quasi-isomorphism: the quotient is $B^q\\oplus B^{q-1}$ with differential $(x,y)\\mapsto(dx,x-dy)$, contracted by $(x,y)\\mapsto(y,0)$. The long exact sequence [lem-weil-pbc-complex-ses-homology-long-exact] then gives the assertion. This inclusion preserves the projection to $A$, hence forgetting support. Apply the canonical etale/pro-etale cohomology pullback [lem-cbc-abelian-etale-proetale-cohomology-comparison] to $T$ and $W$. The derived restriction square commutes because both maps restrict sections; its two vertical maps are quasi-isomorphisms, so the induced shifted-cone map is a quasi-isomorphism by the same long exact sequence. Apply next the roots coefficient morphism $\\sigma_T\\rho_T:\\nu_T^{-1}\\mu_m^{\\mathrm{et}}\\to A(1)_T$ of [def-pur-frame-class] and define $\\operatorname{cl}(E)$ to be the image of $\\beta_E$. These cone maps commute with projection to absolute sections, with restriction to etale neighbourhoods, and with inclusions of complements: the squares commute degreewise on sections and therefore on cones. This proves the needed forgetting, restriction and enlargement-of-support compatibilities, for every coefficient index $n\\geq1$.",
+   "uses": [
+    "thm-pur-with-support-exactness",
+    "def-pur-support-cohomology",
+    "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+    "def-pur-frame-class",
+    "lem-weil-pbc-injective-sheaf-mono-restriction",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "new-over-pullback-preserves-injectives",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md",
+    "place": "Support boundary and final paragraph; comparison performed on both terms of the relative cone"
+   }
+  },
+  {
+   "text": "Check the local formula, including both boundary signs. On a chart $U$ with $E_U=(f)$, the basis $e=f^{-1}$ trivializes $P_E$, and its specified section on $U_f$ has coordinate $f$. Use the resolution cone of [def-amb-relative-etale-cohomology] for the canonical relative torsor class and connecting maps of [lem-amb-relative-torsor-cohomology], in the signed relative model $C^q=A^q\\oplus B^{q-1}$ with $D(a,b)=(da,\\operatorname{res}a-db)$. To check the torsor identification, use the canonical extension $0\\to G\\to E_P\\to\\mathbf Z\\to0$ of [lem-sc-torsor-h1] and extend $G\\to I^0$ to $E_P\\to I^0$ by injectivity. Its differential factors through $\\mathbf Z$ as a cocycle $a$; the chosen open section maps to $b$ with $db=\\operatorname{res}a$. Changing the extension adds $(dx,\\operatorname{res}x)$, a relative boundary. Conversely the fibre of $d:I^0\\to I^1$ over $a$ is a $G$-torsor, with section $b$ on the complement. This computes the canonical relative class using the named absolute extension and its section. In particular the trivial torsor with section $f$ is represented by $(0,f)$, in additive notation for $\\mathbf G_m$. In this model the localization boundary is $[b]\\mapsto[(0,-b)]$: if $b$ lifts to $a$, adding $D(a,0)$ to $(0,-b)$ yields $(da,0)$, exactly the kernel-of-restriction connecting cocycle. Thus $\\alpha_{E_U}=-\\partial[f]$. Choose the degreewise split short exact sequence of injective resolutions for the Kummer sequence supplied by [lem-weil-pbc-injective-resolution-ses]. On complement sections it remains degreewise split, so the augmented degree-zero cocycle $f$ in the right-hand resolution has a lift $r$ in the middle resolution. Its differential lies in the left-hand resolution and represents $\\delta(f)$ under the usual connecting-map convention of [def-pur-frame-class]. Lifting $(0,f)$ to $(0,r)$ gives differential $(0,-dr)$, so $\\delta_{U,U_f}(\\alpha_{E_U})=[(0,-dr)]=\\partial\\delta(f)$. These computations are in resolutions or covering refinements, not an assumption that a fixed ordinary Cech cover computes all cohomology. After the coefficient map of step 5, this gives $\\operatorname{cl}(E)|_U=\\partial\\kappa(f)$. For smooth $E=D$, this is exactly the single-factor frame class of [def-pur-frame-class]; [lem-pur-frame-independence] agrees with the independence already supplied by the global pair construction.",
+   "uses": [
+    "lem-amb-relative-torsor-cohomology",
+    "def-pur-frame-class",
+    "lem-pur-frame-independence",
+    "def-amb-relative-etale-cohomology",
+    "lem-sc-torsor-h1",
+    "lem-weil-pbc-injective-resolution-ses"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md",
+    "place": "Clause (a), with explicit relative-cone boundary calculation"
+   }
+  },
+  {
+   "text": "For $E=D_1+D_2$ let $\\mathcal I_E=\\mathcal I_{D_1}\\mathcal I_{D_2}$. On simultaneous Cartier charts $f_1f_2$ is a nonzerodivisor because both factors are, so $E$ is Cartier even when it is not smooth; its complement is $W=T\\setminus(|D_1|\\cup|D_2|)$. Multiplication identifies the ideal tensor product with the product ideal on these bases, hence $L_E\\simeq L_{D_1}\\otimes L_{D_2}$, carrying $s_E$ to $s_{D_1}\\otimes s_{D_2}$. The frame torsor is therefore the contracted product by [lem-sc-line-bundle-torsor], including its specified section over $W$. To see addition in relative $H^1$ from precisely the stated naturality of [lem-amb-relative-torsor-cohomology], take the product torsor for $\\mathbf G_m\\times\\mathbf G_m$ and its pair of sections. The two projections give $(\\alpha_{D_1},\\alpha_{D_2})$ in relative cohomology, since the two-term restriction cone commutes with finite products. Push out along multiplication $\\mathbf G_m\\times\\mathbf G_m\\to\\mathbf G_m$: on these additive cohomology groups it is addition, and on torsors it is their contracted product. Thus $\\alpha_E=\\alpha_{D_1}+\\alpha_{D_2}$ in $H^1(T,W;\\mathbf G_m)$. Here the two summands have first been restricted to the common complement, which is exactly enlargement of support. The connecting and coefficient maps of steps 4-5 are homomorphisms, so their images give the required equality in $H^2_Z(T,A(1))$. This proves global additivity without a local-to-global injectivity claim for $H^2_Z$.",
+   "uses": [
+    "def-pc-divisor-line-bundle",
+    "lem-sc-line-bundle-torsor",
+    "lem-amb-relative-torsor-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md",
+    "place": "Clause (b), addition; correcting the source two-function frame to the product equation"
+   }
+  },
+  {
+   "text": "Finally, step 4 gives $\\operatorname{forget}(\\beta_D)=\\delta_T([P_D])$. Step 5 commutes with forgetting support, so $\\operatorname{forget}(\\operatorname{cl}(D))$ is the ordinary Kummer boundary of the frame-torsor class of $L_D=\\mathcal O_T(D)$, followed by exactly the same roots coefficient morphism. This is $c_1(\\mathcal O_T(D))$ by the definition in the statement. The torsor interpretation of the line bundle is [lem-sc-line-bundle-torsor], and the compatibility of the relative connecting map with forgetting is the explicit last assertion of [lem-amb-relative-torsor-cohomology]. The equality holds globally; it is not deduced from restriction of ordinary $H^2$ to trivializing opens.",
+   "uses": [
+    "lem-sc-line-bundle-torsor",
+    "lem-amb-relative-torsor-cohomology",
+    "def-pur-frame-class"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md",
+    "place": "Final paragraph: forget-support comparison with the ordinary Kummer connecting class"
+   }
   }
  ],
  "proof_deps": [
+  "lem-pur-smooth-pair-local-coordinates",
+  "def-pur-conventions",
+  "sk-def-purity-conv",
   "def-pur-frame-class",
-  "lem-pur-frame-independence",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+  "def-pc-divisor-line-bundle",
+  "lem-sc-line-bundle-torsor",
+  "lem-amb-relative-torsor-cohomology",
+  "lem-amb-kummer-any-base",
+  "thm-pur-with-support-exactness",
   "def-pur-support-cohomology",
-  "def-pur-affine-line-datum",
-  "lem-pur-kummer-additivity"
+  "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+  "lem-weil-pbc-injective-sheaf-mono-restriction",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "new-over-pullback-preserves-injectives",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-pur-frame-independence",
+  "def-amb-relative-etale-cohomology",
+  "lem-sc-torsor-h1",
+  "lem-weil-pbc-injective-resolution-ses"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-divisor-class.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md",
+  "place": "Proof, with the relative torsor construction, explicit sign computation, and global rather than local comparison"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kummer cycle class of an effective Cartier divisor in etale cohomology with supports maps to its first Chern class",
+   "results": "{\"t\": \"2026-10-16T23:53:04Z\", \"tool\": \"leanfinder\", \"query\": \"Kummer cycle class of an effective Cartier divisor in etale cohomology with supports maps to its first Chern class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.etaleLocus_eq_compl_support\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"WeierstrassCurve.Affine.Point.toClass_apply\", \"WeierstrassCurve.Affine.Point.toClass_some\", \"IsDedekindDomain.selmerGroup.fromUnit_ker\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away\"], \"digest\": \"87e33eee6164f3c1\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "kummerClass|cycleClass|firstChern|chernClass|cohomologyWithSupport",
+   "results": "{\"t\": \"2026-10-16T23:53:38Z\", \"tool\": \"grep\", \"query\": \"kummerClass|cycleClass|firstChern|chernClass|cohomologyWithSupport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kummer class effective Cartier divisor first Chern class cohomology with support",
+   "results": "{\"t\": \"2026-10-16T23:53:39Z\", \"tool\": \"leansearch\", \"query\": \"Kummer class effective Cartier divisor first Chern class cohomology with support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeromorphicOn.divisor\", \"Algebra.etaleLocus_eq_compl_support\", \"CochainComplex.HomComplex.CohomologyClass\", \"Algebra.Extension.H1Cotangent\", \"Algebra.formallyEtale_iff\", \"CochainComplex.HomComplex.CohomologyClass.mk_zero\", \"Algebra.unramifiedLocus_eq_compl_support\", \"CochainComplex.HomComplex.CohomologyClass.descAddMonoidHom_cohomologyClass\"], \"digest\": \"0f7ff2a20b60b3d6\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, Chern",
+   "results": "{\"t\": \"2026-10-16T23:53:39Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, Chern\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Chern'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "query rejected"
+  },
+  {
+   "tool": "grep",
+   "query": "kummer|chern|cohomology.*support",
+   "results": "{\"t\": \"2026-10-16T23:54:42Z\", \"tool\": \"grep\", \"query\": \"kummer|chern|cohomology.*support\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"cohomology\"",
+   "results": "{\"t\": \"2026-10-16T23:54:42Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, \\\"cohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.EllAdicCohomology\", \"AlgebraicGeometry.Scheme.instAddCommGroupEllAdicCohomology\", \"AlgebraicGeometry.Scheme.instSubsingletonEllAdicCohomologyOfIsEmptyCarrierCarrierCommRingCat\"], \"digest\": \"a96aa04d5a9a0988\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The first Chern class of a line bundle with a section invertible away from a closed subset has a canonical lift to cohomology supported on that subset",
+   "results": "{\"t\": \"2026-10-16T23:54:44Z\", \"tool\": \"leanfinder\", \"query\": \"The first Chern class of a line bundle with a section invertible away from a closed subset has a canonical lift to cohomology supported on that subset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.exists_const\", \"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"CategoryTheory.PresheafOfGroups.OneCocycle.class\", \"AlgebraicGeometry.RingedSpace.isUnit_res_basicOpen\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"CategoryTheory.PresheafOfGroups.H1\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"CategoryTheory.PresheafOfGroups.OneCocycle.IsCohomologous\"], \"digest\": \"5828d06a9082b7fa\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -79,5 +255,79 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-a1-kummer"
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-divisor-class",
+  "worker": "stage1",
+  "summary": "Constructed the supported divisor class globally from the Cartier line bundle with its specified section on the complement. Reused the existing relative torsor and Kummer interfaces; added one general smooth-pair coordinate lemma (Stacks 0FUE). Corrected the nonsmooth-sum domain, common support, product equation, arbitrary ramified coefficient index, and unsupported local-to-global inference for first Chern classes. The recovery review corrected the signed relative representative and made the source finite-type scheme convention explicit before invoking Noetherian permanence. Independent second reading supplied slice exactness/injectivity and an explicit contracted cone quotient, justified the torsor representative from its canonical extension, and cited split injective resolutions for the two boundary signs. The dry-run duplicate check exposed an existing exact dimension-drop lemma; the elementary Cartier corollary was removed from the new node and derived in step 1 using that existing node.",
+  "blueprint": "Realizes the first sentence (frames and well-defined class), clause (a) (local boundary), clause (b) (addition), and the final paragraph (forgetting support). The current main-20261015 text is unchanged in content but filed under sk-prop-an; the maintainer-owned unit binding is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-line-bundle-torsor",
+    "why": "Generic equivalence between line bundles and units torsors, including tensor/contracted product; needed to form the relative pair and its sum, not a replacement of the unit computation."
+   },
+   {
+    "node": "lem-amb-relative-torsor-cohomology",
+    "why": "Generic torsor-with-section classification and relative connecting maps supply a global lift and its compatibility; the unit provides no global relative Picard interface."
+   },
+   {
+    "node": "lem-amb-kummer-any-base",
+    "why": "Exact Kummer sequence for schemes of arbitrary dimension; the unit computation uses this sequence too."
+   },
+   {
+    "node": "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+    "why": "Generic comparison of the two small-site cohomologies on both terms of the restriction cone; no change of coefficient category is assumed."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type Noetherian permanence supplies the hypothesis of the smooth-pair Cartier corollary."
+   },
+   {
+    "node": "lem-weil-pbc-injective-sheaf-mono-restriction",
+    "why": "Generic injective restriction-surjectivity supplies the support kernel versus relative cone identification, not a purity theorem."
+   },
+   {
+    "node": "new-over-pullback-preserves-injectives",
+    "why": "Generic slice restriction preserves injectives on either small site; needed to compute the two derived section terms by one resolution, and no purity-unit statement supplies this resolution fact."
+   },
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "Generic exactness of inverse image ensures the slice restriction remains a resolution on either site."
+   },
+   {
+    "node": "lem-sc-torsor-h1",
+    "why": "The named canonical torsor extension fixes the signs of the explicit local relative representative; it is a generic torsor tool, not a substitute for a purity step."
+   },
+   {
+    "node": "lem-weil-pbc-injective-resolution-ses",
+    "why": "Generic split injective resolutions give actual lifts of the local Kummer cocycle; no unit-specific assertion supplies the horseshoe construction."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+    "why": "Exact generic Noetherian-local dimension-drop statement, reused successively in step 1 to deduce one equation from the source codimension convention; removes the elementary corollary from the new geometric node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-line-bundle-torsor",
+  "lem-amb-relative-torsor-cohomology",
+  "lem-amb-kummer-any-base",
+  "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-injective-sheaf-mono-restriction",
+  "new-over-pullback-preserves-injectives",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-sc-torsor-h1",
+  "lem-weil-pbc-injective-resolution-ses",
+  "lem-weil-pbc-dimension-quotient-nonzerodivisor"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-5b79500c8",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-5b79500c8 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every statement it cites (10 stmt_deps, 23 proof_deps, with their blueprint_update texts), and both blueprint versions (master and main-20261015, which have the same statement and proof). I also read Stacks 0FUE (more-morphisms lemma-etale-local-structure, statement and proof) and 067U (divisors lemma-immersion-smooth-into-smooth-regular-immersion), and the chapter and unit sk-prop-a1-kummer records. I confirm the STATEMENT-DISPUTED repairs. V(t)+V(t) on A^1 gives V(t^2), which is not smooth, so the source's sum lies outside its own domain. The frame (f1,f2) cuts out the intersection, not the sum. The P^1 argument for c1 fails: O(1) is trivial on both affines but c1 is nonzero. The repaired (b), stated for all Cartier divisors in H^2_{|D1|∪|D2|}, is a strengthening, not a weakening. The inline c1 matches the c1(O(1)) of def-amb-p1-trace, which the reviewed citer thm-pur-trace-normalization-transitivity uses. Steps: step 1 applies the dimension drop b times along the localized regular sequence (b=1 from the pure-codimension convention); I checked it, and it uses no regularity of B. In step 2 I checked the dual-basis transition by hand. In step 5 I checked the contraction of the cone quotient, and that r is surjective along an open monomorphism. In step 6 I recomputed the signs in the same model D(a,b)=(da,ra−db) used in the proof of lem-amb-relative-torsor-cohomology. The trivial torsor with section f is (0,f) and the localization boundary sends b to (0,−b), so the relative class is −∂[f]. The Kummer differential of the lift is (0,−dr), so the image is ∂δ(f) with a + sign, matching def-pur-frame-class. In step 7 the additivity follows from naturality under G_m×G_m projections and multiplication, and it is global. Step 8 is genuinely elementary. The new node lem-pur-smooth-pair-local-coordinates matches 0FUE together with the regular sequence from 067U in its proof. It holds on small cases (a point in A^1 gives b=1; Y=X gives b=0; Y empty is vacuous). It is not a restatement of a clause of the item. It is not a duplicate: I compared it with lem-sc-smooth-diagonal-regular-immersion, lem-pur-regular-immersion-linearization, sbc-thm-etale-local-normal-form (054L), sk-lem-geometry, lem-pur-dnc-section-geometry and lem-pur-etale-at-point-from-differentials. Route: every off-route proof dependency is either a declared generic tool_use, which I accept, or a Mathlib leaf or definition. No coefficient categories are silently identified, there is no cycle, and no SGA source is used. The one fix: the new node lacked lean_audit. I added the none/none record and moved blueprint after id; the statement is unchanged. Downstream note: thm-pur-rank-one-thom step 3 cites this item for base change along B'→B, which neither the blueprint nor this delivery states.; 1 file(s) fixed by the reviewer"
+ }
 }

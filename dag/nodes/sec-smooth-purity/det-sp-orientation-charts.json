@@ -3,53 +3,276 @@
  "blueprint": {
   "is": "det-sp-orientation-charts",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Diagonal orientation on a coordinate chart",
- "statement": "Let $f:X\\to Y$ be smooth of pure relative dimension $d$ and let $U\\subset X$\nbe open with an étale map $e:U\\to\\mathbf A^d_Y$ over $Y$. Then the\nrestriction to $U$ of the diagonal orientation\n$\\omega_f\\xrightarrow{\\sim}(\\mathbf Z/\\ell^n\\mathbf Z)_X(d)[2d]$ of\n[thm-pur-diagonal-dualizing-object] equals the affine-space orientation of\n$U$ given by its coordinate adjunction, i.e. the identification\n$\\omega_{f|_U}\\simeq e^*\\omega_{p_d}\\simeq(\\mathbf Z/\\ell^n\\mathbf Z)_U(d)[2d]$\nobtained from $e^!=e^*$ and integration on $\\mathbf A^d_Y$.",
+ "statement": "Work in the finite-coefficient purity setting [def-pur-conventions], with $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}(k)$, $E=\\mathbf Q_\\ell$, uniformizer $\\ell$, $n\\geq1$ and $\\Lambda=\\mathbf Z/\\ell^n\\mathbf Z$. Let $X,Y$ be finite-type $k$-schemes and let $f:X\\to Y$ be smooth, separated and of finite type, of pure relative dimension $d\\geq0$ [def-weil-scheme-morphism-properties, def-sbc-smooth-morphisms]. Let $j:U\\hookrightarrow X$ be an open subscheme and let $e:U\\to\\mathbf A^d_Y$ be an étale $Y$-morphism [def-weil-etale-morphism, def-sbc-affine-space]. Absolute separatedness of $Y$ is not assumed.\n\nUse the constructible exceptional inverse image [def-weil-exceptional-inverse-image], the derived pullbacks [def-weil-derived-pullback-tensor-hom] and the coefficient twists [def-coefficient-twists-detailed]. Write $p_d:\\mathbf A^d_Y\\to Y$ and $\\omega_h=Rh^!\\Lambda$ for each indicated smooth morphism $h$. Let $\\vartheta_f:\\omega_f\\xrightarrow{\\sim}\\Lambda_X(d)[2d]$ be the diagonal orientation of [thm-pur-diagonal-dualizing-object]: on separated target opens this is the composite $\\beta_f\\delta_f\\alpha_f^{-1}$, where $\\alpha_f:C(p_1,\\Delta)\\xrightarrow{\\sim}\\omega_f$ is [lem-pur-diagonal-base-change], $\\delta_f$ is the normalized section comparison [thm-pur-dnc-invariance], and $\\beta_f$ is the pullback to the zero section of vector-bundle purity [cor-pur-vector-bundle-purity], for the normal bundle of the diagonal. The section invariant is [def-pur-section-invariant].\n\nThen, under $Lj^*\\omega_f\\simeq\\omega_{f|_U}$, the map $Lj^*\\vartheta_f$ equals the coordinate-adjunction orientation\n$$\n\\omega_{f|_U}=R(p_de)^!\\Lambda_Y\\xrightarrow{\\sim}Le^*\\omega_{p_d}\\xrightarrow{Le^*\\vartheta^{\\mathrm{aff}}_{p_d}}\\Lambda_U(d)[2d].\n$$\nHere the first arrow uses composition of exceptional adjoints and the canonical étale identification $Re^!=Le^*$, and $\\vartheta^{\\mathrm{aff}}_{p_d}$ is the inverse of the comparison transposed from integration in the ordered affine coordinate tower, with the normalization specified in [lem-pur-projection-purity-agreement].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.md",
   "place": "node det-sp-orientation-charts, order None"
  },
  "stmt_deps": [
-  "thm-pur-diagonal-dualizing-object"
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "def-weil-etale-morphism",
+  "def-sbc-affine-space",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-coefficient-twists-detailed",
+  "thm-pur-diagonal-dualizing-object",
+  "lem-pur-diagonal-base-change",
+  "thm-pur-dnc-invariance",
+  "cor-pur-vector-bundle-purity",
+  "def-pur-section-invariant",
+  "lem-pur-projection-purity-agreement"
  ],
  "proof": [
   {
-   "text": "*Step 1: Cartesian square of centres.* The étale map\n$e\\times e:U\\times_YU\\to\\mathbf A^d_Y\\times_Y\\mathbf A^d_Y$ carries the\ndiagonal of $U$ into the diagonal of $\\mathbf A^d_Y$. The inverse image of the\nlatter is $U\\times_{\\mathbf A^d_Y}U$, in which the diagonal of $U$ is open and\nclosed because $e$ is separated and étale. Removing the other components (an\nopen subscheme of $U\\times_YU$ containing the diagonal) gives a Cartesian\nsquare of centres: the diagonal of $U$ is the inverse image of the diagonal of\n$\\mathbf A^d_Y$ under an étale map.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Step 2: normal bundles.* The induced map of normal bundles is the\ndifferential $T_{U/Y}\\xrightarrow{\\sim}e^*T_{\\mathbf A^d_Y/Y}$, an isomorphism of\nvector bundles (pullback of vector bundles), since $e$ is étale.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Step 3: the ingredients are pulled back.* For the dualizing complex: by\ncomposing adjunctions, $\\omega_{f|_U}=(p_d\\circ e)^!\\simeq e^!p_d^!$, and the\nexceptional inverse image along an étale map is its ordinary inverse image, so\n$\\omega_{f|_U}\\simeq e^*\\omega_{p_d}$. For the deformation comparison: the\ndeformation space of the centre in Step 1 maps étale to that of the diagonal of\n$\\mathbf A^d_Y$, the pulled-back comparison is the identity at $t=1$, and the\nuniqueness in the deformation lemma identifies it with the comparison for $U$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Step 4.* Vector-bundle integration is preserved by the linear isomorphism of\nStep 2. By [det-sp-orientation-vector-bundle] the diagonal orientation of the\ntrivial bundle $T_{\\mathbf A^d_Y/Y}$ is the vector-bundle orientation, i.e.\nintegration on $\\mathbf A^d_Y$. Combining Steps 1–3, the diagonal orientation\non $U$ is the pullback along $e$ of the affine-space orientation, which is the\naffine-space orientation of $U$ given by its coordinate adjunction.",
+   "text": "Domain and target localization. Cover $Y$ by affine opens $V$ and put $X_V=f^{-1}V$, $U_V=U\\cap X_V$ and $A_V=\\mathbf A^d_V$. These are the actual restrictions of $f,j,e$. Finite-type schemes over $k$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]; their open subschemes are Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Hence all these open inclusions are quasi-compact and finite type by [lem-weil-pbc-qc-open-immersion-finite-type]. Finite type for their structure maps follows by composing finite sets of algebra generators on affine charts [def-weil-finite-type-morphism]. The affine $V$ is separated over $k$ by [lem-weil-pbc-affine-morphism-permanence](3). Separatedness is preserved by base change [lem-pod-separated-finite-type-base-change] and composition [lem-weil-pbc-proper-fp-permanence](e); thus $X_V,U_V,A_V$ and their fibre products used below are separated finite-type $k$-schemes. The affine-space projection is smooth of dimension $d$ by [sbc-lem-affine-space-smooth]; the other projections have dimension $d$ by [lem-sbc-smooth-relative-dimension-permanence], and restricting their sources to the displayed opens preserves smoothness and the pointwise fibre dimension by [def-sbc-smooth-morphisms]. We first compare the maps on $U_V$, writing $Y,X,U,A$ for these restricted schemes. The final step checks that this suffices without absolute separatedness of the original $Y$.",
    "uses": [
-    "det-sp-orientation-vector-bundle"
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "sbc-lem-affine-space-smooth",
+    "def-sbc-smooth-morphisms"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Before Step 1: domain of the diagonal and DNC construction on affine target opens"
+   }
+  },
+  {
+   "text": "The chart is separated. Put $h=f|_U=p_de$. The diagonal of $h$ is the pullback of the closed immersion $\\Delta_f:X\\to X\\times_YX$ along $U\\times_YU\\to X\\times_YX$, so $h$ is separated by [def-weil-proper-morphism] and [lem-weil-pbc-proper-fp-permanence](b); this makes explicit the relative separatedness inherited from $f$. The map $\\Delta_e:U\\to U\\times_AU$ is the pullback of $\\Delta_h:U\\to U\\times_YU$ along $U\\times_AU\\to U\\times_YU$: the fibre-product equation says the two $U$-components coincide. Since $h$ is separated, $\\Delta_h$ is a closed immersion by [def-weil-proper-morphism], and its pullback is closed by [lem-weil-pbc-proper-fp-permanence](b). Thus $e$ is separated by that same definition. This proves the separatedness used in the blueprint instead of assuming that an arbitrary étale map is separated. Also $U$ is quasi-compact and $A$ quasi-separated, so $e$ is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](1); its local finite presentation, part of [def-weil-etale-morphism], makes it finite type.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Step 1: justification of the separated chart hypothesis"
+   }
+  },
+  {
+   "text": "Cartesian centres on a neighbourhood. Write $W=U\\times_YU$, $W_0=A\\times_YA$, and $q=e\\times e:W\\to W_0$. Each factor of $q$ is a base change of $e$, hence étale by [lem-weil-pbc-etale-scheme-base-change]; their composite is smooth of relative dimension $0+0=0$, hence étale, by [lem-sbc-smooth-relative-dimension-permanence](2), including its explicit dimension-zero étale case. The scheme-theoretic inverse image of $\\Delta_A$ is $Z=U\\times_AU$, a closed subscheme of $W$, since $\\Delta_A$ is closed. The projection $Z\\to U$ is the base change of $e$ along $e$, hence étale by [lem-weil-pbc-etale-scheme-base-change] and separated of finite type by [lem-pod-separated-finite-type-base-change] (Step 2), with section $\\Delta_U$. By [lem-weil-pbc-etale-section-clopen-immersion], that section is open and closed in $Z$. Thus $Z\\setminus\\Delta_U(U)$ is closed in $W$, and its complement $W^\\circ$ is an open neighbourhood of $\\Delta_U$. On $W^\\circ$ the inverse image of $\\Delta_A$ is exactly $\\Delta_U$ as a closed subscheme. The square of centres with top map $q^\\circ:W^\\circ\\to W_0$ and base map $e:U\\to A$ is therefore Cartesian. The restricted first projection $W^\\circ\\to U$ remains smooth of dimension $d$ and has closed section $\\Delta_U$. All objects are separated finite type by Step 1.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-pod-separated-finite-type-base-change",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-etale-section-clopen-immersion",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Step 1: Cartesian square of centres, with the complementary closed subscheme removed"
+   }
+  },
+  {
+   "text": "Normal bundles in that square. Both diagonals are regular closed immersions of codimension $d$ by [lem-pur-diagonal-regular-immersion]; restricting the ambient scheme near the closed image does not change its ideal modulo its square. Since the Cartesian ambient map $q^\\circ$ is étale, it is flat by [def-weil-etale-morphism]. Apply [lem-weil-pbc-closed-immersion-conormal-flat-base-change] to obtain $e^*(\\mathcal I_{\\Delta_A}/\\mathcal I_{\\Delta_A}^2)\\simeq\\mathcal I_{\\Delta_U}/\\mathcal I_{\\Delta_U}^2$. Here one must compare the whole graded algebras, not only their degree-one pieces. On affine ambient charts write the flat ring map as $R'\\to R$, the ideal of the affine diagonal as $I'$, and $I=I'R$; flatness on these charts is [lem-weil-pbc-flat-morphism-affine-criterion]. For every $m\\geq0$, $(I'R)^m=I'^mR$ by multiplying the ideal generators. Apply [lem-weil-pbc-flat-tensor-exact] to $0\\to I'^m\\to R'\\to R'/I'^m\\to0$ and to $0\\to I'^{m+1}\\to I'^m\\to I'^m/I'^{m+1}\\to0$. This identifies $(I'^m/I'^{m+1})\\otimes_{R'}R$ with $I^m/I^{m+1}$, by the actual map $[a]\\otimes r\\mapsto[ar]$. These maps respect multiplication and degree zero, and commute with restriction, so [lem-pur-conormal-graded-algebra] identifies the pulled-back graded algebra of the affine diagonal with the graded algebra of $\\Delta_U$. Taking the relative spectra described in [def-pur-normal-bundle] gives $N_{\\Delta_U/W}\\simeq U\\times_A N_{\\Delta_A/W_0}$: on these affine charts it is the displayed algebra isomorphism, and the affine descriptions and anti-equivalence in [lem-weil-pbc-affine-morphism-relative-spec](2),(3) glue it. The degree-zero augmentations correspond, so zero sections are preserved. Under [lem-pur-diagonal-regular-immersion] this is $T_{U/Y}\\simeq e^*T_{A/Y}$. It is the differential of $e$: a coordinate difference $x_i\\otimes1-1\\otimes x_i$ pulls back to the difference of its two pulled-back coordinates. Thus the normal map is the specific linear map induced by the Cartesian centres, not an arbitrarily chosen frame isomorphism.",
+   "uses": [
+    "lem-pur-diagonal-regular-immersion",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-closed-immersion-conormal-flat-base-change",
+    "def-pur-normal-bundle",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-pur-conormal-graded-algebra",
+    "lem-weil-pbc-affine-morphism-relative-spec"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Step 2: the induced normal map; Stacks Tag 0473 (morphisms-lemma-conormal-functorial-flat)"
+   }
+  },
+  {
+   "text": "Identify the source maps. The maps $p_d$ and $h$ are separated of finite type over the affine, hence quasi-compact and quasi-separated, target. Thus [thm-nagata-compactification] supplies the compactifiability required below; $\\Lambda$ is finite. The canonical adjoint identification, including its normalization, is [lem-amb-etale-adjoint-locality]: on ordinary étale derived categories $e^*p_d^{\\times}K\\simeq(p_de)^{\\times}K$. The definition [def-weil-exceptional-inverse-image] transports these ordinary adjoints to the finite constructible pro-étale category. In that category, [lem-pur-co-smooth-etale-locality] says an étale map has trivial dualizing object. The tensor formula and composition compatibility of [thm-pur-cohomological-smoothness](1),(4) therefore give $Re^!K\\simeq Le^*K$ and $c_e:\\omega_h\\xrightarrow{\\sim}Le^*\\omega_{p_d}$. The same applies to open inclusions, including $W^\\circ\\hookrightarrow W$. Write $\\alpha_h:C(p_{1,U},\\Delta_U)\\xrightarrow{\\sim}\\omega_h$ and $\\alpha_p:C(p_{1,A},\\Delta_A)\\xrightarrow{\\sim}\\omega_{p_d}$ for [lem-pur-diagonal-base-change]. The étale comparison of section invariants, using $q^\\circ\\Delta_U=\\Delta_A e$, gives a map $a:C(p_{1,U},\\Delta_U)\\xrightarrow{\\sim}Le^*C(p_{1,A},\\Delta_A)$. Here we restrict to $W^\\circ$ first, using the preceding open comparison. One has $(Le^*\\alpha_p)a=c_e\\alpha_h$: both sides are the comparison for the same diagram: $p_{1,A}q^\\circ=e p_{1,U}$, $p_{2,A}q^\\circ=e p_{2,U}$, $q^\\circ\\Delta_U=\\Delta_A e$, and $p_de=h$. More explicitly the base-change comparison in $\\alpha$ is the counit mate in [def-pur-co-smoothness](3); paste it with the étale-composition square. The two pastings have this same composite, so [lem-weil-pbc-mate-pasting](1),(2),(4) identifies their mates, giving the displayed equality.",
+   "uses": [
+    "lem-pur-co-smooth-etale-locality",
+    "thm-pur-cohomological-smoothness",
+    "lem-pur-diagonal-base-change",
+    "def-pur-co-smoothness",
+    "lem-weil-pbc-mate-pasting",
+    "lem-amb-etale-adjoint-locality",
+    "def-weil-exceptional-inverse-image",
+    "thm-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Step 3, first paragraph: exceptional composition, étale pullback, and the diagonal source comparison"
+   }
+  },
+  {
+   "text": "Compare the deformation arrows. Let $\\delta_h$ and $\\delta_p$ be the normalized DNC isomorphisms for these two diagonal sections. Factor the ambient map as $W^\\circ\\to U\\times_Y A\\to A\\times_Y A$, with first map $(p_{1,U},e p_{2,U})$ and second map $(e,1)$. The first map is étale over the same base $U$, and the inverse image of the graph section $u\\mapsto(u,e(u))$ is exactly $\\Delta_U$. The graph pair is the base change along $e:U\\to A$ of the affine diagonal pair. Apply the étale-localization compatibility of [thm-pur-dnc-invariance] to the first map and its base-change compatibility to the second map. These applications stay in the separated finite-type domain checked in Step 1. They identify $\\delta_h$ with $Le^*\\delta_p$ under $a$ and the normal-bundle identification of Step 4. In formulas, if $b:C(\\pi_U,z_U)\\xrightarrow{\\sim}Le^*C(\\pi_A,z_A)$ denotes that normal comparison, then $b\\delta_h=(Le^*\\delta_p)a$. The normalization is essential: in the coordinates of [lem-pur-dnc-section-geometry](2),(4), the deformation coordinates are $u_i=x_i/t$, and both comparisons are the identity on the standard section invariant. Hence it is precisely the uniquely normalized comparison of the cited theorem that is identified, with no residual scalar. This uses the theorem's stated étale locality, rather than assuming that an arbitrary chosen deformation isomorphism is functorial.",
+   "uses": [
+    "thm-pur-dnc-invariance",
+    "lem-pur-dnc-section-geometry",
+    "def-pur-section-invariant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Step 3, second paragraph: normalized DNC comparison under the Cartesian étale neighbourhood"
+   }
+  },
+  {
+   "text": "Compare the final arrows. Let $\\beta_h:C(\\pi_U,z_U)\\to\\Lambda_U(d)[2d]$ and $\\beta_p:C(\\pi_A,z_A)\\to\\Lambda_A(d)[2d]$ be the zero-section restrictions of vector-bundle purity. By the base-change and adjunction compatibility of [cor-pur-vector-bundle-purity], applied to the actual pullback bundle of Step 4, $\\beta_h=(Le^*\\beta_p)b$. The target identification is the canonical Tate pullback of [det-prop-sfb-cartesian-coefficients-twists]. This also respects the integration normalization: [lem-pur-vector-integration-site-comparison] identifies the inverse vector-bundle comparison with the integration-transposed map on the ordinary étale site. In a linear trivialization, changing its frame preserves that actual trace by [lem-amb-linear-trace-invariance]. Thus the identification in Step 4 does not change the orientation, and no determinant unit or sign is introduced.",
+   "uses": [
+    "cor-pur-vector-bundle-purity",
+    "det-prop-sfb-cartesian-coefficients-twists",
+    "lem-pur-vector-integration-site-comparison",
+    "lem-amb-linear-trace-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Step 4, first sentence: vector-bundle integration and the linear normal identification"
+   }
+  },
+  {
+   "text": "Multiply the three identities. By the specified diagonal construction, $\\vartheta_h=\\beta_h\\delta_h\\alpha_h^{-1}$. Steps 5--7 give\n$$\n\\vartheta_h=(Le^*\\beta_p)b\\delta_h\\alpha_h^{-1}=(Le^*\\beta_p)(Le^*\\delta_p)a\\alpha_h^{-1}=(Le^*(\\beta_p\\delta_p\\alpha_p^{-1}))c_e=(Le^*\\vartheta_{p_d})c_e.\n$$\nFor the vector bundle $p_d:A\\to Y$, [det-sp-orientation-vector-bundle] identifies $\\vartheta_{p_d}$ with its vector-bundle orientation. The coordinate normalization in [lem-pur-projection-purity-agreement], at $K=\\Lambda_Y$, identifies the same diagonal composite with the inverse of the ordered coordinate-adjunction comparison. Consequently $\\vartheta_{p_d}=\\vartheta^{\\mathrm{aff}}_{p_d}$, giving the required equality on $U_V$. This is equality of the displayed morphisms, since the first two equalities use the identities $b\\delta_h=(Le^*\\delta_p)a$ and $(Le^*\\alpha_p)a=c_e\\alpha_h$, not just isomorphism of their sources and targets.",
+   "uses": [
+    "det-sp-orientation-vector-bundle",
+    "lem-pur-projection-purity-agreement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Step 4: combining the three canonical factors and identifying the affine-space normalization"
+   }
+  },
+  {
+   "text": "Return to the original target. For $U_V\\hookrightarrow U$ and $X_V\\hookrightarrow X$, the diagonal pairs are the base changes along these open inclusions, after restricting their ambient schemes near the sections. The smooth source comparison restricts by [thm-pur-cohomological-smoothness](3),(4), the normalized deformation comparison restricts by [thm-pur-dnc-invariance], and the vector-bundle arrow restricts by [cor-pur-vector-bundle-purity]. Tate targets restrict by [det-prop-sfb-cartesian-coefficients-twists]. Therefore the orientations defined by these three factors on the separated target opens are the restrictions of $\\vartheta_f$ and of its open restriction to $U$, while the coordinate-adjunction map restricts to the coordinate-adjunction map for $e|_{U_V}$; for this last assertion use the actual base-change equality $t_{p_d,V}\\operatorname{Ex}_!=v^*t_{p_d,Y}$ in [lem-amb-affine-space-top-trace], transport it by [lem-pur-vector-integration-site-comparison], and take the counit mates using [lem-weil-pbc-mate-pasting]. Each open target and the original target is Noetherian, as checked in Step 1, so the trace statement applies. To justify detection of equality, compose each of the two candidate maps $Lj^*\\omega_f\\to\\Lambda_U(d)[2d]$ with $(Lj^*\\vartheta_f)^{-1}$, and shift by $-2d$. The resulting maps are endomorphisms of the sheaf $\\Lambda_U(d)$ in degree zero. By [lem-weil-pbc-derived-single-fully-faithful] these are ordinary sheaf maps. By [lem-weil-proetale-weakly-etale-localization], these restrictions are the ordinary restrictions to the localized pro-étale sites, with the same constant coefficient ring. They agree on the open cover $\\{U_V\\}$ by Step 8; the uniqueness assertion of [lem-pur-sheaf-hom-cover-gluing] makes them equal globally. Composing back proves the claimed equality. If $U$ is empty, the sheaf category has only zero objects and the conclusion is immediate. For $d=0$, normal bundles have rank zero, the standard DNC comparison is the identity, and the coordinate trace is the identity adjunction, as explicitly covered by [lem-pur-projection-purity-agreement].",
+   "uses": [
+    "thm-pur-cohomological-smoothness",
+    "thm-pur-dnc-invariance",
+    "cor-pur-vector-bundle-purity",
+    "det-prop-sfb-cartesian-coefficients-twists",
+    "lem-pur-projection-purity-agreement",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-pur-sheaf-hom-cover-gluing",
+    "lem-amb-affine-space-top-trace",
+    "lem-pur-vector-integration-site-comparison",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Open restriction, equality on arbitrary target opens, and rank-zero/empty cases"
+   }
   }
  ],
  "proof_deps": [
-  "det-sp-orientation-vector-bundle"
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "sbc-lem-affine-space-smooth",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "def-sbc-smooth-morphisms",
+  "lem-pur-diagonal-regular-immersion",
+  "lem-weil-pbc-closed-immersion-conormal-flat-base-change",
+  "def-pur-normal-bundle",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-pur-conormal-graded-algebra",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-pur-co-smooth-etale-locality",
+  "thm-pur-cohomological-smoothness",
+  "lem-pur-diagonal-base-change",
+  "def-pur-co-smoothness",
+  "lem-weil-pbc-mate-pasting",
+  "lem-amb-etale-adjoint-locality",
+  "def-weil-exceptional-inverse-image",
+  "thm-nagata-compactification",
+  "thm-pur-dnc-invariance",
+  "lem-pur-dnc-section-geometry",
+  "def-pur-section-invariant",
+  "cor-pur-vector-bundle-purity",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "lem-pur-vector-integration-site-comparison",
+  "lem-amb-linear-trace-invariance",
+  "det-sp-orientation-vector-bundle",
+  "lem-pur-projection-purity-agreement",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-amb-affine-space-top-trace",
+  "lem-weil-proetale-weakly-etale-localization"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Steps 1–4, expanded with the existing normalized DNC and integration comparison statements"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth separated morphism the diagonal deformation orientation equals the affine space orientation on an etale coordinate chart",
+   "results": "8 hits: affine diagonal property, local standard smooth charts, exists_etale_mvPolynomial, separated diagonal, IsEtale; none states an orientation comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.Etale",
+   "results": "AlgebraicGeometry.Etale.instSmooth in Mathlib.AlgebraicGeometry.Morphisms.Etale; only etale implies smooth.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "orientation|dualizing|deformationToNormal",
+   "results": "0 hits in AlgebraicGeometry.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of diagonal smooth purity orientation with etale affine space coordinates",
+   "results": "8 hits concerning affine coordinates, diagonal properties and etale implies smooth; none about diagonal/DNC orientation.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale pullback of smooth dualizing complexes preserves the orientation constructed by deformation to the normal bundle",
+   "results": "8 hits including KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale and isBaseChange_of_formallyEtale; useful normal geometry only, no six-functor orientation theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|dualizing|orientation|deformation.*normal",
+   "results": "25 hits: real circle orientation, Euclidean oriented geometry and an unrelated dualizing comment in HomotopyFiber; no scheme-purity orientation comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -75,5 +298,99 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-sp-orientation-charts",
+  "worker": "stage1",
+  "summary": "Made the inherited finite-coefficient, finite-type and relative-separatedness domain explicit (STATEMENT-DISPUTED in report). Expanded the Cartesian-neighbourhood, flat conormal, normalized DNC, mate-pasting and vector-integration comparisons and the equality-of-maps argument. Reused existing nodes throughout; no new nodes. No project Lean declaration states this item.",
+  "blueprint": "Steps 2–3 realize blueprint Step 1; Step 4 realizes Step 2; Steps 5–6 realize Step 3; Steps 7–8 realize Step 4. Steps 1 and 9 handle the restricted DNC domain and locality without imposing absolute separatedness of Y.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic domain, permanence or comparison lemma used only to verify the schemes and canonical maps in the diagonal/DNC route; the unit provides no substitute for this interface."
+   },
+   {
+    "node": "lem-pur-diagonal-base-change",
+    "why": "Canonical source identification for the diagonal section, used as a generic comparison interface in the orientation unit."
+   },
+   {
+    "node": "lem-pur-vector-integration-site-comparison",
+    "why": "Generic finite-coefficient comparison of the actual etale/pro-etale integration maps ensures that the integration normalization is the specified one."
+   },
+   {
+    "node": "lem-amb-linear-trace-invariance",
+    "why": "Generic invariance of affine-space integration under the linear isomorphism of normal bundles; it supplies no smooth purity construction."
+   },
+   {
+    "node": "lem-pur-projection-purity-agreement",
+    "why": "Identifies the same diagonal normalization at an affine-space projection with the specified ordered coordinate adjunction; no replacement of the diagonal/DNC route."
+   },
+   {
+    "node": "lem-pur-sheaf-hom-cover-gluing",
+    "why": "Generic unique gluing of ordinary sheaf morphisms detects equality after the final shift; it does not replace any geometric step."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic smooth relative-dimension calculation for affine space; checks the domain for the diagonal comparison."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Canonical ordinary-etale adjoint normalization for a separated finite-type etale chart; transported by the existing exceptional-functor definition."
+   },
+   {
+    "node": "lem-amb-affine-space-top-trace",
+    "why": "Generic base-change equality for the actual affine coordinate trace, used only to check restriction of the coordinate adjunction."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic identification of sheaf restriction to a pro-etale covering object with sheaves on the chart scheme; supports the final equality test."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "Generic algebra/relative-spectrum or compactification interface verifying the normal comparison or the adjoint-locality hypotheses; no geometric step of the diagonal/DNC route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic algebra/relative-spectrum or compactification interface verifying the normal comparison or the adjoint-locality hypotheses; no geometric step of the diagonal/DNC route is replaced."
+   },
+   {
+    "node": "lem-pur-conormal-graded-algebra",
+    "why": "Generic algebra/relative-spectrum or compactification interface verifying the normal comparison or the adjoint-locality hypotheses; no geometric step of the diagonal/DNC route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-relative-spec",
+    "why": "Generic algebra/relative-spectrum or compactification interface verifying the normal comparison or the adjoint-locality hypotheses; no geometric step of the diagonal/DNC route is replaced."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic algebra/relative-spectrum or compactification interface verifying the normal comparison or the adjoint-locality hypotheses; no geometric step of the diagonal/DNC route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-pur-diagonal-base-change",
+  "lem-pur-vector-integration-site-comparison",
+  "lem-amb-linear-trace-invariance",
+  "lem-pur-projection-purity-agreement",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "sbc-lem-affine-space-smooth",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-affine-space-top-trace",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-pur-conormal-graded-algebra",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "thm-nagata-compactification"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-c858ba909",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-c858ba909 (reviewer sub-agent of L); spot-checked: Read in full: the item, the main-20261015 chart statement and its 4-step proof, the unit sk-prop-sp-orientation, and the current statements of all 14 stmt_deps and 43 proof_deps. Checked Stacks 0473 (conormal flat base change), 024T (sections of unramified separated maps) and 02GO (étale base change) in the .tex. Statement: same conclusion as the blueprint. The restored domain (finite-type X,Y; separated finite-type f; E=Q_ell, Lambda=Z/ell^n) is exactly what thm-pur-diagonal-dualizing-object needs. It is not a weakening: the blueprint itself writes Z/ell^n and the unit itself says f is separated. Y is not assumed separated. Steps: Step 1 puts the work on affine target opens, which gives the separated finite-type domain thm-pur-dnc-invariance needs. Step 2 proves e is separated through the two diagonal pullbacks; the blueprint asserted this without proof. Step 3: q^{-1}(Delta_A)=U x_A U and the clopen diagonal give a correct Cartesian square on W°; tested with a non-injective chart. Step 4: degree-by-degree flat graded calculation and relative Spec, correct. Step 5: canonical e^*p^x = h^x through Nagata and lem-amb-etale-adjoint-locality; (Le^*alpha_p)a = c_e alpha_h follows from mate pasting. Step 6: the factorization W° -> U x_Y A -> A x_Y A is checked; its first map is an étale neighbourhood and its second a base change, which are exactly the two compatibilities stated in thm-pur-dnc-invariance. Step 7: vector-bundle base change and the integration normalization. Step 8: algebra recomputed; at K=Lambda, lem-pur-projection-purity-agreement gives theta_{p_d} = Gamma^{-1} = theta^aff. Step 9: equality reduced to a degree-0 sheaf automorphism, then fully faithfulness and cover gluing; U empty and d=0 covered. No new nodes, no duplicate (det-sp-finite-existence-chart states a different fact), no cycle, no SGA. Off-route uses from sk-thm-smooth-purity accepted as tools: lem-pur-diagonal-base-change, lem-pur-projection-purity-agreement, lem-pur-vector-integration-site-comparison. Fix (C1): Step 3 used separatedness of the base change Z->U without citing it; added lem-pod-separated-finite-type-base-change, already in proof_deps, in fixes/dag/nodes/sec-smooth-purity/det-sp-orientation-charts.json.; 1 file(s) fixed by the reviewer"
  }
 }

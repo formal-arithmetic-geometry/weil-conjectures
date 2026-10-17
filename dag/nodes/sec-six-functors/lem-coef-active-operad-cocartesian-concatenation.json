@@ -30,9 +30,107 @@
   "lem-coef-operadic-approximation-restriction",
   "lem-coef-symmetric-monoidal-segal-classification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S=N(\\mathsf{Fin}_*)$ and write $p_{\\mathcal C}:\\mathcal C^\\otimes\\to S$ for its operadic projection. The active maps form a subcategory of $\\mathsf{Fin}_*$, so restriction to them is a quasicategory: an inner-horn filler in $\\mathcal C^\\otimes$ lies over a chain of active maps, and its missing composite is active. Apply [lem-coef-active-operad-envelope-cocartesian] to $p_{\\mathcal C}$, taking $\\mathcal O^\\otimes=S$ (the commutative operad). Its equivalence-lifting hypothesis holds: base equivalences are permutations, hence inert; their operadic cocartesian lifts are equivalences. Indeed [lem-coef-infinity-cocartesian-mapping-criterion] makes precomposition by such a lift an equivalence on every target mapping space, since its base is invertible; applying this to the source and target gives an inverse component and the two inverse equations. The inverse-component criterion in [lem-coef-infinity-mapping-composition] gives an equivalence edge in the stated simplicial sense. The envelope $H_{\\mathcal C}=\\mathcal C^\\otimes\\times_S\\operatorname{Act}(S)$ is therefore a cocartesian fibration over $S$ and an infinity-operad. Its operadic Segal fibers and [lem-coef-symmetric-monoidal-segal-classification] make it a symmetric monoidal infinity category. In its fiber over $\\langle1\\rangle$, the active arrow out of $\\langle n\\rangle$ is the unique fold $\\mu_n$; a morphism $c\\to d$ lies in this fiber precisely when its pointed map $h$ satisfies $\\mu_m h=\\mu_n$, which says $h^{-1}(*)=\\{*\\}$. Thus this fiber is exactly $\\mathcal C^\\otimes_{\\mathrm{act}}$, on all simplices, including $n=0$.",
+   "uses": [
+    "lem-coef-active-operad-envelope-cocartesian",
+    "lem-coef-operadic-approximation-restriction",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-symmetric-monoidal-segal-classification",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 2.2.4.1, Remark 2.2.4.3 and Corollary 2.2.4.5, printed pp. 211-212; Definition 2.1.1.10 and Lemma 2.2.4.15."
+   }
+  },
+  {
+   "text": "For tuples $x$ of length $m$ and $y$ of length $n$, choose the tuple $z$ of their $m+n$ colors using the fiber Segal equivalence of [lem-coef-operadic-approximation-restriction]. Let $a:\\langle m+n\\rangle\\to\\langle2\\rangle$ send the first block to $1$ and the second to $2$. The object $(z,a)$ of $H_{\\mathcal C}$ has inert projections to $(x,\\mu_m)$ and $(y,\\mu_n)$: their source edges select the corresponding blocks. The envelope edge criterion makes these the cocartesian projections. Over the fold $\\mu_2$, the square whose source edge is $1_z$ and whose target arrow is $\\mu_{m+n}$ is again envelope-cocartesian, since $1_z$ is inert. Consequently the tensor in the active category sends $(x,y)$ to $z$, their concatenation. Every object of the envelope zero fiber has $a:\\langle0\\rangle\\to\\langle0\\rangle$ and its source lies in the terminal-equivalent operadic zero fiber, so its unit transport gives the empty tuple, uniquely up to its coherent equivalence. The classification [lem-coef-symmetric-monoidal-segal-classification] supplies the entire associativity, symmetry and unit coherence from the single cocartesian fibration, including empty blocks; no tensor operations or coherence maps are chosen independently. For an operad map $q$, the simplicial map $(c,a)\\mapsto(qc,a)$ on these envelopes preserves cocartesian edges by the envelope criterion because $q$ preserves inert edges. The same classification makes it strong symmetric monoidal. Its color-fiber restriction is exactly $q_{\\mathrm{act}}$, which proves coherent preservation of concatenation for every operad map, without assuming $q$ cocartesian.",
+   "uses": [
+    "lem-coef-active-operad-envelope-cocartesian",
+    "lem-coef-operadic-approximation-restriction",
+    "lem-coef-symmetric-monoidal-segal-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Construction 2.2.4.1, Lemma 2.2.4.15(4), Corollary 2.2.4.5 and Remark 2.2.4.6, printed pp. 211-212,216; explicit block-square computation."
+   }
+  },
+  {
+   "text": "Now assume $q:\\mathcal E^\\otimes\\to\\mathcal O^\\otimes$ cocartesian; put $p_E=p_Oq$ for their projections to $S$. We need two consequences of the mapping criterion. For an inert edge $v$ of $\\mathcal E^\\otimes$, both $v$ and $qv$ are cocartesian for $p_E$ and $p_O$, respectively, by the operad axioms and inert preservation in [lem-coef-operadic-approximation-restriction]. For every target $z$, stack the precomposition mapping squares for $q$ and $p_O$. Their outer rectangle is the $p_E$ square. The bottom square and outer rectangle are homotopy pullbacks; cancellation in [lem-coef-infinity-homotopy-pullback-pasting], applied after interchanging rows and columns, gives the top square as a homotopy pullback. By [lem-coef-infinity-cocartesian-mapping-criterion], $v$ is $q$-cocartesian. Conversely, if $v$ is $q$-cocartesian and $qv$ is inert, the two adjacent squares are homotopy pullbacks, so their outer rectangle is one. Thus $v$ is $p_E$-cocartesian over an inert pointed map, hence is inert. These arguments require only the inner fibrations $q,p_O,p_E$, all present here.",
+   "uses": [
+    "lem-coef-operadic-approximation-restriction",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-homotopy-pullback-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 2.2.4.8, printed p. 212; expanded cocartesian assertions for the inert sides using the mapping-square test and pasting."
+   }
+  },
+  {
+   "text": "Consider two active $q$-cocartesian arrows $e:x\\to y$ and $f:z\\to w$. Set $a=x\\oplus z$, $b=y\\oplus w$ and $g=e\\oplus f$. Let $s_1:a\\to x,s_2:a\\to z$ and $t_1:b\\to y,t_2:b\\to w$ be the inert block projections from step 2. There are coherent squares $t_1g\\simeq es_1$ and $t_2g\\simeq fs_2$: in the envelope model these are the inert projections of the tuple of morphisms $(e,f)$. Both composites $es_1,fs_2$ are $q$-cocartesian by step 3 and [lem-coef-infinity-cocartesian-composition-initiality]. Choose a $q$-cocartesian lift $\\gamma:a\\to u$ of $qg$. The $K=\\Delta^0$ fiber formula in [lem-coef-infinity-pointwise-cocartesian-transport], with the mapping criterion identifying its convention, factors $g$ as $\\delta\\gamma$ for a vertical edge $\\delta:u\\to b$ over $1_{qb}$, with its specified triangle. Put $r_j=t_j\\delta$. Then $r_1\\gamma\\simeq es_1$ and $r_2\\gamma\\simeq fs_2$. Cancellation in [lem-coef-infinity-cocartesian-composition-initiality] shows that $r_1,r_2$ are $q$-cocartesian. Since $qr_j=qt_j$ are inert, step 3 makes $r_j$ inert for $p_E$. The direction of each projection is from the concatenated object to a block; no inclusions into a concatenation are used.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 2.2.4.8, printed p. 212: choose the lift gamma and construct its inert projections; expanded comparison triangle."
+   }
+  },
+  {
+   "text": "Let $y$ and $w$ have lengths $k,l$, so $u,b$ lie over $\\langle k+l\\rangle$. For any color coordinate $i$ in the first block, compose $t_1$ and $r_1$ with the inert color projection $y\\to y_i$; for a coordinate in the second block use $w\\to w_i$. These composites are $p_E$-cocartesian by [lem-coef-infinity-cocartesian-composition-initiality] and the operad axioms. Apply [lem-coef-infinity-pointwise-cocartesian-transport] to the pullback of $p_E$ along the corresponding inert base edge $\\Delta^1\\to S$. This pullback is an inner fibration over the quasicategory $\\Delta^1$ and hence has quasicategorical total space. Every identity has its degenerate lift; the only nonidentity base edge is the chosen inert edge and has lifts from every source by the operad axiom. Its chosen lifts remain cocartesian: an outer-horn lifting problem in the pullback is the same problem for $p_E$ with its base coordinate fixed. Thus this pullback is cocartesian, and the mapping criterion identifies its convention with that of the pointwise-transport theorem. Write $d_i=y_i$ or $w_i$, and denote these two cocartesian composites by $R_i:u\\to d_i$ and $T_i:b\\to d_i$; they satisfy $T_i\\delta\\simeq R_i$. Let $\\rho_{i!}$ be transport along the chosen inert base edge. The transport theorem gives comparison equivalences $c_R:\\rho_{i!}u\\to d_i$ and $c_T:\\rho_{i!}b\\to d_i$: each compares two cocartesian lifts from the same source, so the initial-lift uniqueness assertion of [lem-coef-infinity-cocartesian-composition-initiality] makes it invertible. Compatibility of transport with precomposition identifies $c_T\\circ\\rho_{i!}(\\delta)\\simeq c_R$. Hence $\\rho_{i!}(\\delta)\\simeq c_T^{-1}c_R$, with inverse $c_R^{-1}c_T$, and this component is an equivalence. Thus every component of $\\delta$ under the fiber Segal equivalence $\\mathcal E^\\otimes_{\\langle k+l\\rangle}\\simeq(\\mathcal E^\\otimes_{\\langle1\\rangle})^{k+l}$ of [lem-coef-operadic-approximation-restriction] is an equivalence. An inverse is given componentwise under its quasi-inverse, so $\\delta$ is an equivalence. When $k+l=0$, that fiber is terminal and the same conclusion holds with no components. Finally the associative and unital composition classes of [lem-coef-infinity-mapping-composition] make precomposition by an equivalence and by its inverse homotopy-inverse maps on all target mapping spaces; therefore the mapping pullback square for $\\gamma$ is also the one for $\\delta\\gamma=g$, up to these equivalences. By [lem-coef-infinity-cocartesian-mapping-criterion], $g=e\\oplus f$ is $q$-cocartesian.",
+   "uses": [
+    "lem-coef-operadic-approximation-restriction",
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-infinity-pointwise-cocartesian-transport",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-mapping-composition",
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remark 2.2.4.8, printed p. 212: detect the vertical comparison under its inert color projections; nullary target case is the terminal zero fiber."
+   }
+  },
+  {
+   "text": "Induct on the number of given edges. For zero edges the concatenated arrow is the identity of the empty tuple and is cocartesian by the degenerate-edge clause of [lem-coef-infinity-cocartesian-composition-initiality]. For one edge it is the given edge. The induction step concatenates the first $r$ arrows, already active and cocartesian, with the next arrow and applies steps 4-5; a disjoint union of active pointed maps is active because no non-basepoint is sent to the basepoint. The associativity and permutation equivalences from step 2 identify all other parenthesizations and orders. Cocartesianness is unchanged by these equivalences: composing with their inverses identifies the mapping-square tests, using the associative and unital composition homotopies of [lem-coef-infinity-mapping-composition]. Identity arrows of any tuple $Z$ are active and cocartesian by the same degenerate-edge clause. Applying the binary case to $(e,1_Z)$ and $(1_Z,e)$ gives the two final assertions. Empty source blocks are allowed in all the finite pointed-set formulas, so nullary active arrows and the empty context have never been excluded.",
+   "uses": [
+    "lem-coef-infinity-cocartesian-composition-initiality",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Remarks 2.2.4.6 and 2.2.4.8, printed p. 212; explicit finite-family induction and identity specialization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-infinity-fibrations",
+  "lem-coef-active-operad-envelope-cocartesian",
+  "lem-coef-infinity-cocartesian-composition-initiality",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-homotopy-pullback-pasting",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pointwise-cocartesian-transport",
+  "lem-coef-operadic-approximation-restriction",
+  "lem-coef-symmetric-monoidal-segal-classification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Construction 2.2.4.1, Corollary 2.2.4.5, Remarks 2.2.4.6,2.2.4.8 and Lemma 2.2.4.15; printed pp. 211-212,216. Read online, not archived in literature/. Explicit envelope block calculation, inert mapping-square cancellation, and lift comparisons written here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -89,10 +187,31 @@
    "results": "{\"t\": \"2026-10-16T23:43:02Z\", \"tool\": \"leanfinder\", \"query\": \"The monoidal envelope of an infinity operad has tensor product given by juxtaposition of lists and preserves opcartesian lifts in an operadic fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AugmentedSimplexCategory.instMonoidalCategoryStruct\", \"AugmentedSimplexCategory.instMonoidalCategory\", \"AugmentedSimplexCategory.tensorObjOf\", \"AugmentedSimplexCategory.tensorObj\", \"SSet.instMonoidalClosed\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"AugmentedSimplexCategory.tensorHom\", \"CategoryTheory.SimplicialThickening.SimplicialCategory.comp\"], \"digest\": \"a9da3e64ffee1b0f\"}",
    "date": "2026-10-17",
    "verdict": "Second reading: no match. The broad source grep has zero hits. The semantic results concern ordinary categories (monadicity, comma adjoints or augmented-simplex tensor) and the cartesian tensor/enrichment of simplicial sets, not active-arrow concatenation or relative operadic boundary filling in quasicategories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A symmetric infinity operad has a symmetric monoidal envelope with tensor product concatenation of input lists and preserves active relative cocartesian arrows",
+   "results": "{\"t\": \"2026-10-17T00:50:53Z\", \"tool\": \"leanfinder\", \"query\": \"A symmetric infinity operad has a symmetric monoidal envelope with tensor product concatenation of input lists and preserves active relative cocartesian arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AugmentedSimplexCategory.instMonoidalCategory\", \"AugmentedSimplexCategory.instMonoidalCategoryStruct\", \"AugmentedSimplexCategory.tensorObj\", \"AugmentedSimplexCategory.tensorObjOf\", \"AugmentedSimplexCategory.tensorHom\", \"CategoryTheory.GradedObject.symmetricCategory\", \"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"AugmentedSimplexCategory.associator\"], \"digest\": \"340c085b53915e7c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:45-80 (ordinary categories and unique Hom-set lifts), AlgebraicTopology/SimplicialSet/StrictSegal.lean:14-25,40-58 (strict spine extensions), and AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean:39-76 (ordinary ordinal concatenation). None supplies an infinity-operadic envelope or coherent concatenation. FormalCoproducts.lean forwards to an ordinary categorical formal-coproduct construction. The whole-Mathlib operad grep has two bibliography hits only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsStronglyCocartesian\"",
+   "results": "{\"t\": \"2026-10-17T00:50:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsStronglyCocartesian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.isIso_of_base_isIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_isIso\", \"CategoryTheory.Functor.IsStronglyCocartesian.of_iso\", \"CategoryTheory.Functor.IsStronglyCocartesian.comp\", \"CategoryTheory.Functor.IsStronglyCocartesian.codomainIsoOfBaseIso\"], \"digest\": \"9c7259df0a46fbe2\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:45-80 (ordinary categories and unique Hom-set lifts), AlgebraicTopology/SimplicialSet/StrictSegal.lean:14-25,40-58 (strict spine extensions), and AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean:39-76 (ordinary ordinal concatenation). None supplies an infinity-operadic envelope or coherent concatenation. FormalCoproducts.lean forwards to an ordinary categorical formal-coproduct construction. The whole-Mathlib operad grep has two bibliography hits only."
+  },
+  {
+   "tool": "grep",
+   "query": "operad|operadic|monoidalEnvelope|MonoidalEnvelope",
+   "results": "{\"t\": \"2026-10-17T00:50:51Z\", \"tool\": \"grep\", \"query\": \"operad|operadic|monoidalEnvelope|MonoidalEnvelope\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"Mathlib/Algebra/NonAssoc/PreLie/Basic.lean\"], \"digest\": \"982cc56bbcd25910\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/FiberedCategory/Cocartesian.lean:45-80 (ordinary categories and unique Hom-set lifts), AlgebraicTopology/SimplicialSet/StrictSegal.lean:14-25,40-58 (strict spine extensions), and AlgebraicTopology/SimplexCategory/Augmented/Monoidal.lean:39-76 (ordinary ordinal concatenation). None supplies an infinity-operadic envelope or coherent concatenation. FormalCoproducts.lean forwards to an ordinary categorical formal-coproduct construction. The whole-Mathlib operad grep has two bibliography hits only."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-relative-operadic-terminal-active-mapping",
@@ -100,5 +219,20 @@
   "group": "Q47"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-active-operad-cocartesian-concatenation",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Constructed the coherent active concatenation through a generic active-arrow-envelope theorem, with explicit fiber identification, block tensor, unit and strong naturality. Expanded the binary cocartesian comparison through mapping-square cancellation and inert color projections, followed by finite induction including empty and nullary cases. One new statement-only generic envelope construction, not an item-clause restatement; all other foundations reuse existing nodes. No matching project Lean declaration or Mathlib leaf.",
+  "blueprint": "Realizes the inherited prop-coef-integral-exceptional-adjoint proof paragraph 2, finite-coefficient mapping-complex adjunction before inverse limit, through the existing terminal-active-mapping ancestry. Steps 1-2 realize HA Corollary 2.2.4.5 / Remark 2.2.4.6; steps 3-5 expand Remark 2.2.4.8; step 6 handles finite families and identity contexts."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-32fef26d1",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-32fef26d1 (reviewer sub-agent of L); spot-checked: PASS: I read the full mathematics, made no fixes and dropped no nodes. Source: HA (18 Sept 2017), using a copy already fetched by another review on this machine and placed in /tmp. Places read: Def 2.1.2.10, Constr 2.2.4.1, Rem 2.2.4.3, Prop 2.2.4.4, Cor 2.2.4.5, Rem 2.2.4.6 and 2.2.4.8 (printed pp. 211-212), and Lemma 2.2.4.15(1)-(4), Lemma 2.2.4.16 and the proof of 2.2.4.4 (pp. 216-217). New node lem-coef-active-operad-envelope-cocartesian: its hypotheses match HA's fibration of infinity-operads (inner fibration plus isofibration lift, i.e. a categorical fibration). Its conclusions are exactly Prop 2.2.4.4 and Lemma 2.2.4.15(3)-(4). It is statement-only, introduces its own objects, has correct blueprint ancestry and nine recorded searches. The rg duplicate search over envelope, 2.2.4, active and concatenation found no duplicate, and the node does not restate any item clause. Item: the statement matches HA 2.2.4.5-2.2.4.8. Its extra clause, that an operad map preserves concatenation, is true and proved in step 2 by the inert-source criterion. Step checks: step 1 identifies the fiber, mu_m h = mu_n iff h is active. Step 2 computes the block tensor and the unit. Step 3 uses pasting of mapping squares, so inert edges are q-cocartesian, with the converse. Step 4 factors g = delta gamma through a cocartesian lift and gets r_j q-cocartesian, then inert, by cancellation. Step 5 shows delta is an equivalence through the operad Segal equivalence, including k+l=0. Step 6 is a finite induction covering the identity contexts. Every cited statement says what its step takes from it. proof_deps equals the union of uses, the graph is acyclic, and every cited statement node is in unit sk-prop-sf-biduality-general, so no tool_uses are needed. Minor point: step 4 states the block-projection squares of e plus f briefly. Step 2 justifies them, so this is not a gap."
+ }
 }

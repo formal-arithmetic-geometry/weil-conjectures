@@ -32,9 +32,81 @@
   "def-cbc-enhanced-diagrams-cones",
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the functorial object-preserving locally Kan replacement $A\\to RA$ to the entire diagram and cocone. Its naturality makes $RC_j\\to RC$ a strictly compatible cocone, still identity on $O$. Every $C_j(x,y)\\to RC_j(x,y)$ and $C(x,y)\\to RC(x,y)$ is a weak homotopy equivalence, so the assumed colimiting mapping-space cocones remain colimiting after these natural identifications. The derived coherent nerves in the conclusion are exactly $N_{\\mathrm{hc}}(RC_j)$ and $N_{\\mathrm{hc}}(RC)$ by the definition $\\mathbf RN_{\\mathrm{hc}}(A)=N_{\\mathrm{hc}}(RA)$ in the cited comparison theorem. We work with these locally Kan categories from now on.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 1.3.4.10, pp.111-112; agent Segal-space proof of its mapping-space criterion"
+   }
+  },
+  {
+   "text": "Form the enriched Segal nerves $B(RC_j)$ and $B(RC)$ of the cited realization theorem. Their degree-$n$ spaces are coproducts indexed by the same discrete set $O^{n+1}$, with summands the products of the $n$ mapping spaces. This includes degree zero, where each summand is the point. Since all structure functors and all cocone legs are identity on $O$, none of these maps mixes the summand labels. Thus in each degree the specified cocone is the coproduct over fixed tuples of the specified product cocones.",
+   "uses": [
+    "lem-coef-segal-realization-coherent-nerve"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 1.3.4.10, pp.111-112; agent Segal-space proof of its mapping-space criterion"
+   }
+  },
+  {
+   "text": "Fix $n\\geq0$ and a tuple $(x_0,\\ldots,x_n)\\in O^{n+1}$. The hypothesis that $N(J)$-colimits in spaces commute with finite products applies to the $n$ mapping-space diagrams $j\\mapsto\\langle RC_j(x_{r-1},x_r)\\rangle$. By the mapping-space colimit hypothesis and Step 1, its canonical comparison gives\n$$\\operatorname{colim}_{j\\in N(J)}\\prod_{r=1}^n\\langle RC_j(x_{r-1},x_r)\\rangle\\simeq\\prod_{r=1}^n\\langle RC(x_{r-1},x_r)\\rangle.$$\nIt is precisely the map induced by the products of the given cocone legs. For $n=0$ this is the empty-product part of siftedness: the constant point cocone has colimit a point. No assertion about arbitrary pullbacks or complete-Segal object spaces is used.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 1.3.4.10, pp.111-112; agent Segal-space proof of its mapping-space criterion"
+   }
+  },
+  {
+   "text": "Write $I=O^{n+1}$, $P_{j,t}=\\prod_{r=1}^n\\langle RC_j(x_{r-1},x_r)\\rangle$ and $P_t=\\prod_{r=1}^n\\langle RC(x_{r-1},x_r)\\rangle$ for $t=(x_0,\\ldots,x_n)\\in I$. For a diagram $F$ of spaces let $\\operatorname{Coc}(F,T)$ be the space of coherent transformations $F\\to\\Delta T$. For every test space $T$, Step 3 and the dual mapping-space criterion of the cited cocone-calculus lemma give\n$$\\operatorname{Map}_{\\mathcal S}\\!\\left(\\coprod_{t\\in I}P_t,T\\right)\\simeq\\prod_{t\\in I}\\operatorname{Map}_{\\mathcal S}(P_t,T)\\simeq\\prod_{t\\in I}\\operatorname{Coc}(P_{\\bullet,t},T)\\simeq\\operatorname{Coc}\\!\\left(\\coprod_{t\\in I}P_{\\bullet,t},T\\right).$$\nHere $\\mathcal S=N_{\\mathrm{hc}}(\\mathbf{Kan})$ as in [def-coef-infinity-category-of-spaces], and all diagrams $P_{\\bullet,t}$ and $\\coprod_tP_{\\bullet,t}$ are strict functors $J\\to\\mathbf{Kan}$ regarded as coherent diagrams. The first equivalence holds because the coherent-nerve comparison identifies $\\operatorname{Map}_{\\mathcal S}(X,T)$ naturally with the Kan complex $\\operatorname{Fun}(X,T)$, and $\\operatorname{Fun}(\\coprod_tP_t,T)=\\prod_t\\operatorname{Fun}(P_t,T)$ as simplicial sets. For the last equivalence, an $m$-simplex of the right-pinched mapping space $\\operatorname{Coc}(F,T)$ is a map $N(J)\\times\\Delta^{m+1}\\to N_{\\mathrm{hc}}(\\mathbf{Kan})$, that is a simplicial functor $\\mathfrak C[N(J)\\times\\Delta^{m+1}]\\to\\mathbf{Kan}$, which is degenerate at $F$ on $N(J)\\times\\Delta^{\\{0,\\ldots,m\\}}$ and constant at $T$ on $N(J)\\times\\{m+1\\}$. Its remaining data are simplicial maps from the mapping simplicial sets of $\\mathfrak C[N(J)\\times\\Delta^{m+1}]$ into $\\operatorname{Fun}(F(j),T)$, compatible with composition. For $F=\\coprod_tP_{\\bullet,t}$ the target is $\\prod_t\\operatorname{Fun}(P_{j,t},T)$, the source-side composites act by the strict structure maps of $F$, which carry the $t$-th summand to the $t$-th summand, and the target side is the identity of $T$; so restricting to each summand and assembling by disjoint union are inverse bijections in every simplicial degree, compatible with the operators. This is the displayed isomorphism, on maps, homotopies and every higher compatibility. These operations respect structure maps because all of them preserve the tuple labels. The composite is the comparison induced by the actual coproduct cocone legs, since its $t$th component is precomposition with the corresponding product leg of Step 3. For $I=\\varnothing$, both sides are the point and the same comparison applies. The cocone-calculus criterion therefore makes $\\coprod_tP_{j,t}\\to\\coprod_tP_t$ colimiting. Thus $B(RC_j)\\to B(RC)$ is colimiting in every degree. The pointwise-colimit assertion of the realization theorem makes it a colimit cocone in $\\mathcal P_\\Delta$.",
+   "uses": [
+    "lem-coef-segal-realization-coherent-nerve",
+    "def-cbc-enhanced-diagrams-cones",
+    "def-coef-infinity-category-of-spaces",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 1.3.4.10, pp.111-112; agent Segal-space proof of its mapping-space criterion"
+   }
+  },
+  {
+   "text": "Apply $\\mathfrak L$ to the colimiting cocone of Step 4; the realization theorem says its image is colimiting in $\\mathrm{Cat}_\\infty$. The coherent natural equivalence $\\vartheta$ gives a map of this entire cocone to the cocone $\\mathbf RN_{\\mathrm{hc}}(RC_j)\\to\\mathbf RN_{\\mathrm{hc}}(RC)$, with equivalence components $\\vartheta_{RC_j}$ and $\\vartheta_{RC}$. This retains all legs and higher compatibility homotopies.\n\nTo identify the original specified cocone, write $\\eta_A:A\\to RA$ for the natural replacement map. It is a Dwyer--Kan equivalence: its mapping-set maps are weak equivalences and it fixes objects. The homotopy-theory identification of the coherent-nerve comparison therefore makes $e_A=\\mathbf RN_{\\mathrm{hc}}(\\eta_A):\\mathbf RN_{\\mathrm{hc}}(A)\\to\\mathbf RN_{\\mathrm{hc}}(RA)$ an equivalence. For every original leg $u_j:C_j\\to C$, naturality gives $\\eta_Cu_j=R(u_j)\\eta_{C_j}$, hence\n$$e_C\\,\\mathbf RN_{\\mathrm{hc}}(u_j)\\simeq\\mathbf RN_{\\mathrm{hc}}(R(u_j))\\,e_{C_j}.$$\nThe same equality holds for all structure maps and their composites, so $e$ is an equivalence of the original specified cocone with the twice-replaced one. The cited functor-calculus criterion makes these componentwise equivalences equivalences of coherent diagrams and cocones. Such an equivalence preserves the colimit property, because it identifies the mapping spaces to every test cocone and hence the condition of being initial. Thus the original cocone with apex $\\mathbf RN_{\\mathrm{hc}}(C)$ is colimiting. All displayed comparison maps are natural in maps of the original cocones, which proves the required naturality.",
+   "uses": [
+    "lem-coef-segal-realization-coherent-nerve",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Lemma 1.3.4.10, pp.111-112; agent Segal-space proof of its mapping-space criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-segal-realization-coherent-nerve",
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-category-of-spaces",
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Paragraph 2, enriched localization foundations for the derived coefficient adjunction. Agent Segal-space proof of HA Lemma 1.3.4.10, using complete-Segal reflection and the enriched-Segal comparison. HA and the Rezk/Bergner references were read online, not archived in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -77,10 +149,38 @@
    "results": "{\"t\": \"2026-10-16T20:18:56Z\", \"tool\": \"leanfinder\", \"query\": \"For a simplicial object in enriched categories with a fixed type of objects, realization is detected on enriched hom spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.SimplicialCategory.homEquiv'\", \"CategoryTheory.SimplicialCategory.sHom\", \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"SSet.stdSimplex.instDecidableEqHomObjSimplexCategoryOfOppositeOp\", \"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\", \"CategoryTheory.categoryOfEnrichedCategoryType\", \"SSet.QCat.catEnrichedOrdinaryCategory\"], \"digest\": \"287f8e2b02907cba\"}",
    "date": "2026-10-17",
    "verdict": "no match: the search returned simplicial enrichment definitions and the vertex-arrow bijection, not a homotopy-colimit criterion. Read SimplicialCategory/Basic.lean:48-70: sHom is defined at line 58 and homEquiv' at lines 65-66. Neither addresses colimits in the homotopy theory of simplicial categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sifted colimits of simplicial categories with fixed objects detected on mapping spaces",
+   "results": "{\"t\": \"2026-10-16T20:49:59Z\", \"tool\": \"leanfinder\", \"query\": \"sifted colimits of simplicial categories with fixed objects detected on mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instHasColimitsOfShape\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"SSet.hasColimits\", \"SSet.instBalanced\", \"CategoryTheory.IsSiftedOrEmpty\", \"CategoryTheory.IsSifted\", \"CategoryTheory.SimplicialCategory\", \"DeltaGenerated.hasColimits\"], \"digest\": \"63297bcca5177d7b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SimplicialObject/Basic.lean:73-80 (ordinary diagram colimits), CategoryTheory/Limits/Sifted.lean:48-68 (ordinary categorical siftedness and Type-valued colimits), and SimplicialNerve.lean:187-207 (definition of the coherent nerve only). None gives the fixed-object homotopy-colimit criterion or a one-line specialization of it."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialCategory\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-16T20:50:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialCategory\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SimplicialObject/Basic.lean:73-80 (ordinary diagram colimits), CategoryTheory/Limits/Sifted.lean:48-68 (ordinary categorical siftedness and Type-valued colimits), and SimplicialNerve.lean:187-207 (definition of the coherent nerve only). None gives the fixed-object homotopy-colimit criterion or a one-line specialization of it."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSifted|homotopyColimit|SimplicialCategory",
+   "results": "{\"t\": \"2026-10-16T20:50:00Z\", \"tool\": \"grep\", \"query\": \"IsSifted|homotopyColimit|SimplicialCategory\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Enriched/Ordinary/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Enrichment.lean\", \"Mathlib/CategoryTheory/Sites/Point/Basic.lean\", \"Mathlib/CategoryTheory/Filtered/Final.lean\", \"Mathlib/CategoryTheory/Filtered/Final.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\", \"Mathlib/CategoryTheory/Limits/Sifted.lean\"], \"digest\": \"c76f7241b0e8c093\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SimplicialObject/Basic.lean:73-80 (ordinary diagram colimits), CategoryTheory/Limits/Sifted.lean:48-68 (ordinary categorical siftedness and Type-valued colimits), and SimplicialNerve.lean:187-207 (definition of the coherent nerve only). None gives the fixed-object homotopy-colimit criterion or a one-line specialization of it."
+  },
+  {
+   "tool": "leansearch",
+   "query": "sifted colimits of simplicial categories with fixed objects are computed on mapping spaces",
+   "results": "{\"t\": \"2026-10-16T20:50:00Z\", \"tool\": \"leansearch\", \"query\": \"sifted colimits of simplicial categories with fixed objects are computed on mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instHasColimits\", \"SSet.hasColimits\", \"CategoryTheory.CosimplicialObject.instHasColimits\", \"CategoryTheory.IsSifted.of_colim_preservesFiniteProducts\", \"CategoryTheory.IsSifted.colim_preservesFiniteProducts_of_isSifted\", \"CategoryTheory.IsSifted.colim_preservesTerminal_of_isSifted\", \"CategoryTheory.IsSifted.colim_preservesLimitsOfShape_pempty_of_isSifted\", \"CategoryTheory.SimplicialCategory\"], \"digest\": \"10dce85065579ddf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read SimplicialObject/Basic.lean:73-80 (ordinary diagram colimits), CategoryTheory/Limits/Sifted.lean:48-68 (ordinary categorical siftedness and Type-valued colimits), and SimplicialNerve.lean:187-207 (definition of the coherent nerve only). None gives the fixed-object homotopy-colimit criterion or a one-line specialization of it."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-enriched-marked-realization",
@@ -100,5 +200,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-sifted-fixed-object-hocolimit",
+  "worker": "stage1",
+  "summary": "Landing-return repair on the current DAG: replaced any reliance on the absent space-diagram-coproduct-colimits path by an explicit mapping-space calculation in Step 4, using only the current enhanced cocone-calculus criterion. Reread every cited statement, checked the fixed-tuple labels and empty coproduct, and retained the coherent natural comparison and replacement squares in Step 5. One new statement-only realization/comparison node remains; all search records were verified and fresh alternate searches appended. The delivery tool rebuilds this overlay on current origin/newtargets-dag.",
+  "blueprint": "Realizes the HA 1.3.4.10 mappingwise-hocolimit ingredient named in the ancestry place: the fixed-object criterion underlying HA 1.3.4.14, used in the ancestor proof paragraph 2 before the derived inverse-limit calculation. The alternative proof is below the unit route and does not change the unit or chapter.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Generic mapping-space criterion for colimiting cocones in Step 4 and componentwise equivalences of coherent diagrams in Step 5; the definition alone does not state these facts. No coefficient-unit node supplies these general quasicategory tools without dependence on the item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N2-1df6bbec3",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-1df6bbec3 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-coef-segal-realization-coherent-nerve, every cited statement, the parent's use of the item (enriched-marked-realization step 2), the unit, the chapter and the ancestor proof paragraph 2 in full. The item statement is unchanged and matches the parent's use. Small cases tested: terminal J; empty J (excluded by the empty-product clause); empty O; the one-object bar case; and a discrete two-object J, which shows siftedness is needed. Steps 1-5 are correct: replacement R; tuple-labelled Segal nerve; sifted commutation with finite products including n=0; coproduct of colimiting cocones by the dual mapping-space criterion; realization plus theta; and the e_A = N_hc(R eta_A) Dwyer-Kan comparison, which identifies the specified cocone, not just its apex. The new node is true (Rezk Thm 7.2 complete-Segal localization; Bergner CSS functors sections 4-6 and Three models Thms 6.3/8.6). It is not a duplicate: I compared it with complete-segal-quasicategory-comparison, rezk-explicit-completion, complete-segal-dk-levelwise, rezk-local-model and algebroid-equivalence-nerve. It has no siftedness hypothesis, so it is not a restatement of the item. Neither it nor the item's other dependencies reach the item, so there is no cycle. Three small faults fixed in fixes/: (1) B3: the new node used 'the infinity category of small spaces' with no definition node; it now cites def-coef-infinity-category-of-spaces in the statement and stmt_deps. (2) C2: Step 4 called 'maps out of a disjoint union are families' elementary with no model of S cited. Every existing colimits-in-S node reaches the item, so the step now writes out the strict computation in S = N_hc(Kan) (Fun(coprod P_t,T) = prod Fun(P_t,T), and right-pinched simplices as functors C[N(J)xDelta^{m+1}] -> Kan with summand-preserving source maps) and adds def-coef-infinity-category-of-spaces and lem-coef-coherent-nerve-comparison to its uses; proof_deps is again the union of the uses. (3) Step 1 said 'by the cited realization theorem'; it now names the definition RN_hc(A)=N_hc(RA) in the cited comparison. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, as the generic cocone mapping-space and vertexwise-equivalence criterion. HA 1.3.4.10 and the Rezk/Bergner papers are not archived (listed as WANTED), and both proof_origin entries are correctly marked agent-written. No SGA cited; no target touched.; 2 file(s) fixed by the reviewer"
  }
 }

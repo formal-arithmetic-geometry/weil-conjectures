@@ -36,9 +36,123 @@
   "lem-coef-reedy-model-structure",
   "lem-coef-segal-homotopy-category-components"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the mapping simplicial sets, discrete representables $F(n)$, and constant simplicial spaces $cK$ of [lem-coef-simplicial-space-reedy-cartesian]. Let $G(n)\\subseteq F(n)$ be the union of consecutive edges and let $D(n)\\subseteq G(n)$ be the union of its $n+1$ vertices. Evaluation on the identity of $[n]$ identifies $\\operatorname{Map}(F(n),V)=V_n$: a simplex $v$ determines the map whose value on $\\alpha:[m]\\to[n]$ is $V(\\alpha)v$. Mapping out of the edge union identifies $\\operatorname{Map}(G(n),V)$ with the composable-edge product, since maps on the edges agree precisely at common vertices; likewise $\\operatorname{Map}(D(n),V)=V_0^{n+1}$. These are isomorphisms of simplicial sets commuting with restriction. For a fixed list $\\mathbf{x}=(x_0,\\ldots,x_n)$, write $T_n(\\mathbf{x})$ for the strict fiber of $V_n\\to V_0^{n+1}$ and $P_n(\\mathbf{x})=\\prod_{i=1}^n M(x_{i-1},x_i)$. The fiber of spine restriction is therefore the actual map $\\theta_n:T_n(\\mathbf{x})\\to P_n(\\mathbf{x})$.",
+   "uses": [
+    "lem-coef-simplicial-space-reedy-cartesian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Section 5.1, mapping fibers and the displayed fiberwise Segal comparison; explicit evaluation at the identity simplex"
+   }
+  },
+  {
+   "text": "All inclusions of the finite discrete shapes just defined are monomorphisms. The mapping assertion of [lem-coef-simplicial-space-reedy-cartesian], applied to the Reedy fibration $V\\to *$, makes each restriction a Kan fibration, and the mapping complex of each shape is Kan by taking the inclusion of the empty shape. In particular $V_1\\to V_0^2$ is a Kan fibration, so every $M(x,y)$ is Kan: lift a horn after pairing its fixed endpoint coordinates. The unrestricted spine restriction is a Kan fibration and is a weak equivalence by the Segal hypothesis. It is thus a trivial Kan fibration in [lem-coef-kan-quillen-right-proper]. Fixing vertices is a pullback of that trivial fibration: $T_n=V_n\\times_{\\operatorname{Map}(G(n),V)}P_n$. Any boundary lifting problem for this pullback projects to one for the unrestricted restriction, whose filler pairs with the prescribed $P_n$ coordinate. The boundary characterization of [lem-coef-kan-quillen-right-proper] proves that every $\\theta_n$, $n\\geq2$, is a trivial Kan fibration. The same pullback horn-lifting argument shows that restricting between any of our finite shapes while fixing all their vertices is a Kan fibration.",
+   "uses": [
+    "lem-coef-simplicial-space-reedy-cartesian",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Sections 2.4-2.5 and 5.1: unrestricted and fiberwise restriction fibrations; explicit pullback lifting"
+   }
+  },
+  {
+   "text": "A trivial Kan fibration $p:E\\to B$ lifts against every monomorphism: [lem-coef-kan-quillen-right-proper] states boundary lifting and that every monomorphism is a transfinite composite of pushouts of coproducts of boundaries, so extend a lift successively across these cells and glue at limits. In particular lifting against $\\varnothing\\to B$ gives a section. More generally, if $a,b:K\\to E$ satisfy $pa=pb=r$, lift the endpoint map $(a,b):K\\times\\partial\\Delta^1\\to E$ over $r\\operatorname{pr}_K:K\\times\\Delta^1\\to B$. Its left map is degreewise injective, so the filler is a simplicial homotopy $a\\simeq b$ over $B$. Apply this first with $p=\\theta_2$ to two sections: postcomposition by $d_1$ proves section independence of $c=d_1s$. Apply it again with $K=T_2$, $a=1_{T_2}$, $b=s\\theta_2$, and $r=\\theta_2$; postcomposition by $d_1$ gives $d_1\\simeq c\\theta_2$ for every section, as required.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Sections 5.1-5.3; explicit boundary-cylinder lift comparing choices (also the lifting argument of Stacks Tag 08NS, lemma-trivial-kan-homotopy)"
+   }
+  },
+  {
+   "text": "We will combine homotopies only with Kan targets. By [lem-cbc-kan-functor-space-kan], if $Q$ is Kan then $\\operatorname{Fun}(K,Q)$ is Kan for every simplicial set $K$. By the internal-functor definition of [def-cbc-enhanced-diagrams-cones], an edge of this complex is exactly a map $K\\times\\Delta^1\\to Q$, with its two vertex maps as endpoints. Two consecutive edges combine to one edge by filling $\\Lambda_1^2$; an edge $u\\to v$ can be reversed by filling the horn with edges $u\\to v$ and the degenerate edge $u\\to u$, obtaining $v\\to u$. Thus any finite chain of simplicial homotopies into $Q$ is a single simplicial homotopy. The same argument for $K=\\Delta^0$ converts any finite zigzag of edges in a Kan complex into a path of either desired orientation. Components are detected by such zigzags: all vertices of each simplex are linked by edges, while the union of simplices in any one vertex-edge equivalence class and its complement have closed preimages in every simplex of the realization. They give disjoint open-and-closed pieces of the realization, and each piece is path connected via its simplices and edge paths. Consequently equal mapping components give the vertex paths used below.",
+   "uses": [
+    "lem-cbc-kan-functor-space-kan",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Section 5.3: components and homotopies; explicit Kan horn compression of paths and mapping-space homotopies"
+   }
+  },
+  {
+   "text": "Fix $x,y,z,w$ and put $P=M(x,y)\\times M(y,z)\\times M(z,w)$, with coordinates $(a,b,h)$. Inside $F(3)$ let $A$ be the union of triangles $012$ and $023$ along their common edge $02$, and let $B$ be the union of triangles $123$ and $013$ along $13$. Their fixed-vertex mapping spaces $A_V,B_V$ are strict spaces of pairs of triangles agreeing on the common edge. Projection $A_V\\to T_2(x,y,z)\\times M(z,w)$ forgets triangle $023$ except for its prescribed edges $02,23$; it is the pullback of $\\theta_2$ for $(x,z,w)$ along $(t,h)\\mapsto(d_1t,h)$. Projection from that target to $P$ is $\\theta_2\\times1$, itself a pullback of a trivial fibration. Hence $A_V\\to P$ is trivial by successive boundary lifts. For $B_V$, first forget triangle $013$ except for its prescribed edges $01,13$, giving the pullback of $\\theta_2$ for $(x,y,w)$ over $M(x,y)\\times T_2(y,z,w)$; the subsequent projection is $1\\times\\theta_2$. Thus $B_V\\to P$ is also trivial. Restriction $r_A:T_3(x,y,z,w)\\to A_V$ is a Kan fibration by step 2 and satisfies $(A_V\\to P)r_A=\\theta_3$. Both maps to $P$ are weak equivalences; two-out-of-three from the model-category axioms in [lem-coef-reedy-model-structure] makes $r_A$ a weak equivalence, hence a trivial Kan fibration. The identical argument applies to $r_B$. The chosen sections define a map $P\\to A_V$ by the triangles $s_{x,y,z}(a,b)$ and $s_{x,z,w}(c(a,b),h)$, which agree exactly on $02$. Lifting it through $r_A$ yields $u_A:P\\to T_3$. Similarly the triangles $s_{y,z,w}(b,h)$ and $s_{x,y,w}(a,c(b,h))$ lift through $r_B$ to $u_B$. Both are sections of $\\theta_3$. Step 3 supplies a homotopy $u_A\\simeq u_B$; evaluating the long edge $03$ gives $c(c(a,b),h)\\simeq c(a,c(b,h))$. Indeed $03$ is the long edge of triangle $023$ on $u_A$ and of $013$ on $u_B$; these are the same edge restriction of $F(3)$ (equivalently $d_1d_1=d_1d_2$). This proves associativity as a homotopy of maps on the entire product $P$, for arbitrary choices of the sections.",
+   "uses": [
+    "lem-coef-simplicial-space-reedy-cartesian",
+    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Proposition 5.4 and Proposition 11.3: explicit parameterized two-triangle gluing and comparison, expanding the source diagrams"
+   }
+  },
+  {
+   "text": "For $K=M(x,y)$ the maps $K\\to T_2(x,x,y)$ given by $s_{x,x,y}(s_0x,-)$ and the degeneracy $s_0:K\\to T_2(x,x,y)$ have the same $\\theta_2$ projection $(s_0x,-)$. Step 3 compares them by a simplicial homotopy; applying $d_1$ and $d_1s_0=1$ proves $c(s_0x,-)\\simeq1_K$. For the other unit, compare $s_{x,y,y}(-,s_0y)$ and $s_1:K\\to T_2(x,y,y)$ over $(-,s_0y)$ and use $d_1s_1=1$. By [lem-coef-segal-homotopy-category-components], the chosen triangle $s(a,b)$ computes precisely the composition $[b]\\circ[a]$ in $hV$, and its degenerate arrows compute identities. Thus the maps just constructed have the asserted componentwise interpretation, and their associative and unital homotopies realize the corresponding laws of $hV$.",
+   "uses": [
+    "lem-coef-segal-homotopy-category-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Proposition 5.4, degeneracy proof of the unit laws, and Section 5.5, the homotopy category"
+   }
+  },
+  {
+   "text": "Let $f:x\\to y$ represent an isomorphism in $hV$. By [lem-coef-segal-homotopy-category-components], the inverse morphism is represented by a vertex $g\\in M(y,x)$ and satisfies $[c(f,g)]=[s_0x]$ and $[c(g,f)]=[s_0y]$; recall the order $c(a,b)=b\\circ a$. Steps 2 and 4 give vertex paths $\\alpha:\\Delta^1\\to M(x,x)$ from $c(f,g)$ to $s_0x$ and $\\beta:\\Delta^1\\to M(y,y)$ from $c(g,f)$ to $s_0y$. For each $z$ define $F:M(y,z)\\to M(x,z)$ by $F(k)=c(f,k)$ and $G:M(x,z)\\to M(y,z)$ by $G(l)=c(g,l)$. Associativity from step 5, restricted along the fixed vertices $g,f$, gives $GF(k)=c(g,c(f,k))\\simeq c(c(g,f),k)$. The actual map $(k,t)\\mapsto c(\\beta(t),k)$ homotopes the latter to $c(s_0y,k)$, and step 6 homotopes it to $k$. Likewise $FG(l)=c(f,c(g,l))\\simeq c(c(f,g),l)\\simeq c(s_0x,l)\\simeq l$, using the map $(l,t)\\mapsto c(\\alpha(t),l)$. Step 4 compresses each chain to a single simplicial homotopy, since its target mapping space is Kan. Therefore $G$ is a simplicial homotopy inverse to $F=f^*$.",
+   "uses": [
+    "lem-coef-segal-homotopy-category-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Sections 5.5 and 11.2, Proposition 11.3 and Corollary 11.5: explicit inverse equations and precomposition homotopies"
+   }
+  },
+  {
+   "text": "For each $w$ define $U:M(w,x)\\to M(w,y)$ by $U(k)=c(k,f)$ and $R:M(w,y)\\to M(w,x)$ by $R(l)=c(l,g)$. The associativity homotopy restricts to $RU(k)=c(c(k,f),g)\\simeq c(k,c(f,g))$. The map $(k,t)\\mapsto c(k,\\alpha(t))$ then gives $c(k,c(f,g))\\simeq c(k,s_0x)$, and the right unit homotopy gives $k$. Similarly $UR(l)=c(c(l,g),f)\\simeq c(l,c(g,f))\\simeq c(l,s_0y)\\simeq l$, using $(l,t)\\mapsto c(l,\\beta(t))$ and the right unit at $y$. Compress the two chains by step 4. This constructs a simplicial homotopy inverse $R$ for $U=f_*$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Section 11.2, Proposition 11.3 and Corollary 11.5: explicit postcomposition inverse homotopies"
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-simplicial-homotopy-equivalence-weak] to $(F,G)$ and $(U,R)$ with their two endpoint homotopies from steps 7 and 8. It implies that $f^*$ and $f_*$ are weak homotopy equivalences. Step 6 identifies their component functions with $[k]\\mapsto[k]\\circ[f]$ and $[k]\\mapsto[f]\\circ[k]$. Multiplying an isomorphism by $[f]$ gives an isomorphism. Conversely, if $[k]\\circ[f]$ is invertible, then $[k]=([k]\\circ[f])\\circ[g]$ is invertible; if $[f]\\circ[k]$ is invertible, then $[k]=[g]\\circ([f]\\circ[k])$ is invertible. This proves preservation and reflection of the invertible components. The constructions work for empty mapping complexes: all lifting assertions include dimension zero and a map out of the empty complex is unique; an assumed inverse class already supplies a representative when needed. No completeness or connectedness assumption has entered.",
+   "uses": [
+    "lem-cbc-simplicial-homotopy-equivalence-weak"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Corollary 11.5, plus the explicit componentwise inverse calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-cbc-kan-functor-space-kan",
+  "lem-cbc-simplicial-homotopy-equivalence-weak",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-reedy-model-structure",
+  "lem-coef-segal-homotopy-category-components",
+  "lem-coef-simplicial-space-reedy-cartesian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+  "place": "Parameterized expansion of Rezk Sections 5.1-5.5 and 11.2, Proposition 5.4, Proposition 11.3 and Corollary 11.5, read online 2026-10-17; explicit lifting and triangle-gluing argument supplied here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,10 +188,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.CostructuredArrow.preEquivalence\", \"module\": \"Mathlib.CategoryTheory.Comma.StructuredArrow.Basic\", \"type\": \"(f : CostructuredArrow G e) : CostructuredArrow (pre F G e) f ≌ CostructuredArrow F f.left\", \"doc\": \"For functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, $ G : \\\\mathcal{D} \\\\to \\\\mathcal{E} $, and an object $ e \\\\in \\\\mathcal{E} $, the precomposition functor establishes an equivalence between the costructur\"}\n  {\"name\": \"CategoryTheory.Functor.instIsEquivalenceLeftExtensionCompPrecomp\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Basic\", \"type\": \": IsEquivalence (LeftExtension.precomp L F G)\", \"doc\": \"The functor induced by precomposing with $ G $, mapping the left Kan extension of $ F $ along $ L $ to the left Kan extension of $ G \\\\circ F $ along $ G \\\\circ L $, is an equivalence of categories. Thi\"}\n  {\"name\": \"CategoryTheory.Functor.instIsEquivalenceObjWhiskeringLeft\", \"module\": \"Mathlib.CategoryTheory.Equivalence\", \"type\": \"(F : C ⥤ D) [IsEquivalence F] : IsEquivalence ((whiskeringLeft C D E).obj F)\", \"doc\": \"If $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is an equivalence of categories, then the precomposition functor $ - \\\\circ F : [\\\\mathcal{D}, \\\\mathcal{E}] \\\\to [\\\\mathcal{C}, \\\\mathcal{E}] $ is also an equivalence\"}\n  {\"name\": \"CategoryTheory.StructuredArrow.preEquivalence\", \"module\": \"Mathlib.CategoryTheory.Comma.StructuredArrow.Basic\", \"type\": \"(f : StructuredArrow e G) : StructuredArrow f (pre e F G) ≌ StructuredArrow f.right F\", \"doc\": \"Given functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{E} $, and an object $ f $ in the structured arrow category $ \\\\text{StructuredArrow}(e, G) $, this establishes an e\"}\n  {\"name\": \"CategoryTheory.StructuredArrow.isEquivalence_pre\", \"module\": \"Mathlib.CategoryTheory.Comma.StructuredArrow.Basic\", \"type\": \"(S : D) (F : B ⥤ C) (G : C ⥤ D) [F.IsEquivalence] : (pre S F G).IsEquivalence\", \"doc\": \"Given an object $ S $ in category $ \\\\mathcal{D} $, a functor $ F : \\\\mathcal{B} \\\\to \\\\mathcal{C} $ that is an equivalence of categories, and a functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the precomposi\"}\n  {\"name\": \"CategoryTheory.StructuredArrow.preEquivalence_inverse\", \"module\": \"Mathlib.CategoryTheory.Comma.StructuredArrow.Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {E : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} E] (F : CategoryTheory.Functor C D)\\n  {G : CategoryTheory.Functor D E} {e : E} (f : CategoryTheory.StructuredArrow e G),\\n\", \"doc\": \"Given functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{E} $, and an object $ f $ in the structured arrow category $ \\\\text{StructuredArrow}(e, G) $, the inverse of the pr\"}\n  {\"name\": \"CategoryTheory.CostructuredArrow.preEquivalence.inverse_obj_left_hom\", \"module\": \"Mathlib.CategoryTheory.Comma.StructuredArrow.Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {E : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} E] (F : CategoryTheory.Functor C D)\\n  {G : CategoryTheory.Functor D E} {e : E} (f : CategoryTheory.CostructuredArrow G e)\", \"doc\": \"For functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and an object $e \\\\in \\\\mathcal{E}$, the inverse of the precomposition equivalence between costructured arrow catego\"}\n  {\"name\": \"CategoryTheory.StructuredArrow.preEquivalence_functor\", \"module\": \"Mathlib.CategoryTheory.Comma.StructuredArrow.Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {E : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} E] (F : CategoryTheory.Functor C D)\\n  {G : CategoryTheory.Functor D E} {e : E} (f : CategoryTheory.StructuredArrow e G),\\n\", \"doc\": \"Given functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{E} $, and an object $ f $ in the structured arrow category $ \\\\text{StructuredArrow}(e, G) $, the functor component\"}\n",
    "date": "2026-10-17",
    "verdict": "no match: the Segal hits concern a single strict Segal simplicial set with a bijective spine map, not a Reedy fibrant simplicial space with weakly equivalent spine mapping spaces. Read Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:42-57,275-325 and Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean:34-35. Ordinary category equivalences and structured-arrow precomposition do not give weak equivalences of these Kan mapping complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition by an equivalence arrow of a Reedy fibrant Segal space gives weak homotopy equivalences of its mapping Kan complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"∀ (X : CategoryTheory.Cat), (CategoryTheory.Nerve.nerveFunctor₂.obj X).IsStrictSegal\", \"doc\": \"For any small category $\\\\mathcal{C}$, the 2-truncated simplicial set obtained by applying the nerve functor (which maps $\\\\mathcal{C}$ to its simplicial nerve and truncates at dimension 2) satisfies th\"}\n  {\"name\": \"CategoryTheory.Nerve.isStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).IsStrictSegal\", \"doc\": \"The nerve of any category satisfies the strict Segal condition, which ensures compatibility of its simplices with composition operations in higher categorical structures.\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"{X : SSet.Truncated 2} →\\n  {C : Type u} →\\n    [inst : CategoryTheory.SmallCategory C] →\\n      CategoryTheory.Functor X.HomotopyCategory C ≃ (X ⟶ (SSet.truncation 2).obj (CategoryTheory.nerve C))\", \"doc\": \"For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a natural equivalence between the category of functors from the homotopy category of $X$ to $\\\\mathcal{C}$ and the category o\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"{X : SSet.Truncated 2} →\\n  {C : Type u} →\\n    [inst : CategoryTheory.SmallCategory C] →\\n      CategoryTheory.Functor X.HomotopyCategory C → (X ⟶ (SSet.truncation 2).obj (CategoryTheory.nerve C))\", \"doc\": \"For a 2-truncated simplicial set $X$ and a category $\\\\mathcal{C}$, this function constructs a morphism from $X$ to the 2-truncated nerve of $\\\\mathcal{C}$ by lifting a functor $F: X.\\\\text{HomotopyCateg\"}\n  {\"name\": \"CategoryTheory.Nerve.strictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → (CategoryTheory.nerve C).StrictSegal\", \"doc\": \"The nerve of a category $\\\\mathcal{C}$ satisfies the strict Segal condition, meaning that for each $n \\\\in \\\\mathbb{N}$, the set of $n$-simplices decomposes as a product of $n$ copies of the set of 1-sim\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.homToNerveMk_comp\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"∀ {X : SSet.Truncated 2} {C : Type u} [inst : CategoryTheory.SmallCategory C] {D : Type u}\\n  [inst_1 : CategoryTheory.SmallCategory D] (F : CategoryTheory.Functor X.HomotopyCategory C)\\n  (G : CategoryTheory.Functor C D),\\n  SSet.Truncated.HomotopyCategory.homToNerveMk (F.comp G) =\\n    CategoryTheory.\", \"doc\": \"For any small category $\\\\mathcal{D}$ and functors $F : X.\\\\text{HomotopyCategory} \\\\to \\\\mathcal{C}$ and $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, the morphism $\\\\text{homToNerveMk}(F \\\\circ G)$ equals the compos\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"HomotopicalAlgebra.CategoryWithFibrations SSet\", \"doc\": \"The category of simplicial sets is equipped with a category with fibrations structure, where the fibrations are the morphisms satisfying the right lifting property with respect to all horn inclusions.\"}\n  {\"name\": \"SSet.OneTruncation₂.nerveEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] → SSet.OneTruncation₂ ((SSet.truncation 2).obj (CategoryTheory.nerve C)) ≃ C\", \"doc\": \"The 2-truncated nerve of a category $\\\\mathcal{C}$, obtained by restricting the nerve simplicial set to dimensions $\\\\leq 2$, is canonically equivalent to $\\\\mathcal{C}$. This establishes that the data o\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: StrictSegal.lean:42-57,275-325 describes bijective spines for a single simplicial set; it does not provide this Reedy fibrant Segal simplicial-space composition theorem. The generic model-category composition and ordinary categorical-equivalence hits do not supply its hypotheses or clauses. The grep hit is a reference to Rezk in a lifting-properties file."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial sections of a Segal comparison define associative unital composition up to simplicial homotopy",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Nerve.strictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → (CategoryTheory.nerve C).StrictSegal\", \"doc\": \"The nerve of a category $\\\\mathcal{C}$ satisfies the strict Segal condition, meaning that for each $n \\\\in \\\\mathbb{N}$, the set of $n$-simplices decomposes as a product of $n$ copies of the set of 1-sim\"}\n  {\"name\": \"SSet.StrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"SSet → Type u\", \"doc\": \"A type family over simplicial sets, where each instance represents a strict Segal space structure on a given simplicial set. A strict Segal space is a simplicial set equipped with additional structure\"}\n  {\"name\": \"SSet.IsStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"SSet → Prop\", \"doc\": \"A predicate on simplicial sets characterizing those that satisfy the strict Segal condition, which imposes constraints on the compatibility of simplices with composition operations in higher categoric\"}\n  {\"name\": \"SSet.StrictSegalCore\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"SSet → ℕ → Type u\", \"doc\": \"A type family parameterized by a simplicial set $X$ and a natural number $n$, representing the strict Segal condition at level $n$ for $X$. For each $n$, $\\\\text{StrictSegalCore}(X, n)$ encodes the req\"}\n  {\"name\": \"CategoryTheory.Nerve.isStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C], (CategoryTheory.nerve C).IsStrictSegal\", \"doc\": \"The nerve of any category satisfies the strict Segal condition, which ensures compatibility of its simplices with composition operations in higher categorical structures.\"}\n  {\"name\": \"SSet.StrictSegalCore.concat\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"{X : SSet} →\\n  {n : ℕ} →\\n    X.StrictSegalCore n →\\n      (x : X.obj (Opposite.op (SimplexCategory.mk 1))) →\\n        (s : X.obj (Opposite.op (SimplexCategory.mk n))) →\\n          CategoryTheory.SimplicialObject.δ X 0 x = X.map ((SimplexCategory.mk 0).const (SimplexCategory.mk n) 0).op s →\\n            \", \"doc\": \"Given a simplicial set $X$ satisfying the strict Segal condition at level $n$, an element $x$ in $X_1$, and an element $s$ in $X_n$ such that the face map $\\\\delta^0(x)$ equals the image of a constant \"}\n  {\"name\": \"CategoryTheory.Nerve.instIsStrictSegalObjCatTruncatedOfNatNatNerveFunctor₂\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal\", \"type\": \"∀ (X : CategoryTheory.Cat), (CategoryTheory.Nerve.nerveFunctor₂.obj X).IsStrictSegal\", \"doc\": \"For any small category $\\\\mathcal{C}$, the 2-truncated simplicial set obtained by applying the nerve functor (which maps $\\\\mathcal{C}$ to its simplicial nerve and truncates at dimension 2) satisfies th\"}\n  {\"name\": \"SSet.StrictSegal.isStrictSegal\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal\", \"type\": \"∀ {X : SSet} (sx : X.StrictSegal), X.IsStrictSegal\", \"doc\": \"If a simplicial set $X$ is equipped with a strict Segal space structure, then $X$ satisfies the strict Segal condition.\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: StrictSegal.lean:42-57,275-325 describes bijective spines for a single simplicial set; it does not provide this Reedy fibrant Segal simplicial-space composition theorem. The generic model-category composition and ordinary categorical-equivalence hits do not supply its hypotheses or clauses. The grep hit is a reference to Rezk in a lifting-properties file."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Segal\", \"comp\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: StrictSegal.lean:42-57,275-325 describes bijective spines for a single simplicial set; it does not provide this Reedy fibrant Segal simplicial-space composition theorem. The generic model-category composition and ordinary categorical-equivalence hits do not supply its hypotheses or clauses. The grep hit is a reference to Rezk in a lifting-properties file."
+  },
+  {
+   "tool": "grep",
+   "query": "SegalSpace|Rezk|hoequiv|Segal.*compos",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean\", \"line\": \"22\", \"text\": \"* [Charles Rezk, *Introduction to Quasi-categories*, Proposition 21.5][Rezk2022]\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: StrictSegal.lean:42-57,275-325 describes bijective spines for a single simplicial set; it does not provide this Reedy fibrant Segal simplicial-space composition theorem. The generic model-category composition and ordinary categorical-equivalence hits do not supply its hypotheses or clauses. The grep hit is a reference to Rezk in a lifting-properties file."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Precomposition and postcomposition with an equivalence in a Segal space induce weak equivalences on mapping spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.weakEquivalence_postcomp_iff\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Instances\", \"type\": \"[WeakEquivalence g] : WeakEquivalence (f ≫ g) ↔ WeakEquivalence f\", \"doc\": \"In a homotopical category, if $ g $ is a weak equivalence, then the composition $ f \\\\circ g $ is a weak equivalence if and only if $ f $ is a weak equivalence.\"}\n  {\"name\": \"HomotopicalAlgebra.RightHomotopyClass.precomp\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.RightHomotopy\", \"type\": \"[CategoryWithWeakEquivalences C] : RightHomotopyClass Y Z → (X ⟶ Y) → RightHomotopyClass X Z\", \"doc\": \"Given a category with weak equivalences, for objects $X,Y,Z$ and a morphism $f:X\\\\to Y$, precomposition with $f$ defines a function from the right homotopy classes $\\\\mathrm{Hom}(Y,Z)/\\\\sim$ to $\\\\mathrm{\"}\n  {\"name\": \"HomotopicalAlgebra.weakEquivalence_precomp_iff\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.Instances\", \"type\": \"[WeakEquivalence f] : WeakEquivalence (f ≫ g) ↔ WeakEquivalence g\", \"doc\": \"If $ f $ is a weak equivalence, then the composition $ g \\\\circ f $ is a weak equivalence if and only if $ g $ is a weak equivalence.\"}\n  {\"name\": \"MonoidHom.precompEquiv\", \"module\": \"Mathlib.Algebra.Group.Equiv.Basic\", \"type\": \"{α β : Type*} [Monoid α] [Monoid β] (e : α ≃* β) (γ : Type*) [Monoid γ] : (β →* γ) ≃ (α →* γ)\", \"doc\": \"For monoids $\\\\alpha$, $\\\\beta$, and $\\\\gamma$, given a multiplicative equivalence $e : \\\\alpha \\\\simeq^* \\\\beta$, precomposing monoid homomorphisms $\\\\beta \\\\to^* \\\\gamma$ with $e$ and $\\\\alpha \\\\to^* \\\\gamma$ w\"}\n  {\"name\": \"CategoryTheory.Functor.instIsEquivalenceObjWhiskeringLeft\", \"module\": \"Mathlib.CategoryTheory.Equivalence\", \"type\": \"(F : C ⥤ D) [IsEquivalence F] : IsEquivalence ((whiskeringLeft C D E).obj F)\", \"doc\": \"If $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is an equivalence of categories, then the precomposition functor $ - \\\\circ F : [\\\\mathcal{D}, \\\\mathcal{E}] \\\\to [\\\\mathcal{C}, \\\\mathcal{E}] $ is also an equivalence\"}\n  {\"name\": \"HomotopicalAlgebra.LeftHomotopyClass.postcomp\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.LeftHomotopy\", \"type\": \"[CategoryWithWeakEquivalences C] : LeftHomotopyClass X Y → (Y ⟶ Z) → LeftHomotopyClass X Z\", \"doc\": \"This function defines post-composition on left homotopy classes in a category with weak equivalences. For a left homotopy class $[f]$ of morphisms from an object $X$ to an object $Y$, and a morphism $\"}\n  {\"name\": \"Equiv.piCongrLeft'\", \"module\": \"Mathlib.Logic.Equiv.Basic\", \"type\": \"(P : α → Sort*) (e : α ≃ β) : (∀ a, P a) ≃ ∀ b, P (e.symm b)\", \"doc\": \"Given an equivalence $ e : \\\\alpha \\\\simeq \\\\beta $ and a family of types $ P : \\\\alpha \\\\to \\\\mathrm{Type} $, there is an equivalence between the function space $ \\\\prod_{a : \\\\alpha} P(a) $ and $ \\\\prod_{b :\"}\n  {\"name\": \"Equiv.piCongrLeft\", \"module\": \"Mathlib.Logic.Equiv.Basic\", \"type\": \": (∀ a, P (e a)) ≃ ∀ b, P b\", \"doc\": \"Given an equivalence $ e : \\\\alpha \\\\simeq \\\\beta $ and a family of types $ P : \\\\alpha \\\\to \\\\mathrm{Type} $, there is an equivalence between the function space $ \\\\prod_{a : \\\\alpha} P(e(a)) $ and the funct\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: StrictSegal.lean:42-57,275-325 describes bijective spines for a single simplicial set; it does not provide this Reedy fibrant Segal simplicial-space composition theorem. The generic model-category composition and ordinary categorical-equivalence hits do not supply its hypotheses or clauses. The grep hit is a reference to Rezk in a lifting-properties file."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-segal-equivalence-outer-horn",
@@ -85,5 +234,34 @@
   "group": "Q23"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-segal-composition-equivalences",
+  "worker": "stage1",
+  "summary": "Kept the full statement and gave a nine-step proof with no new nodes. The proof derives fiberwise trivial Segal fibrations, compares arbitrary lifts by endpoint-cylinder lifting, constructs associativity using the two pairs of triangles 012/023 and 123/013, proves both unit homotopies, and writes all four inverse-composition homotopies with correctly ordered inverse paths. Existing Kan functor-space and simplicial-homotopy-equivalence results handle homotopy concatenation and weak equivalences. Provisional elementary children were removed before delivery.",
+  "blueprint": "Proof paragraph 2, displayed derived coefficient adjunction: mapping-space foundation via the cosimplicial-frame and cofibrant-inversion chain; diagonal/coherent comparison. Additional Rezk Segal-space infrastructure for the diagonal criterion, not a literal claim of the ancestor paragraph. Rezk, A model for the homotopy theory of homotopy theory, Section 14, printed pp. 32-34: the displayed construction preceding Remark 14.1 and the proof of assertions (1) and (3), with Sections 4-6 for the definitions. Supporting lemma: The walking isomorphism classifies equivalence arrows of a Segal space. Specifically Rezk Section 11, Lemma 11.10: the equivalence-edge outer-horn restriction used for each finite alternating-word attachment in the proof of Theorem 6.2. Supporting fact for the outer-horn induction: Rezk Sections 5.3-5.5 and 11.2, Proposition 11.3 and Corollary 11.5, printed pp. 12-13,25. The section form spells out the zigzags in 11.2; it does not assert any outer-horn conclusion. This item supplies the Section 5.1-5.5/11.2 composition argument named by the ancestor chain; it does not assert an outer-horn result.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-kan-functor-space-kan",
+    "why": "Generic Kan closure of internal functor spaces allows finite homotopy chains to become single cylinder homotopies by dimension-two horn fills; no Segal route is replaced."
+   },
+   {
+    "node": "lem-cbc-simplicial-homotopy-equivalence-weak",
+    "why": "Generic passage from explicit simplicial homotopy inverse maps to realization weak equivalences; the Segal argument constructs all inverse data before using this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-kan-functor-space-kan",
+  "lem-cbc-simplicial-homotopy-equivalence-weak"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-ac74d7d7c",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-ac74d7d7c (reviewer sub-agent of L); spot-checked: I read the item and every cited node statement in full. I checked them against Rezk (Rochester PDF, fetched and run through pdftotext): §5.1 (map_W and the trivial fibrations φ_n), §5.3, Prop 5.4, §5.5, and §11.2 with Prop 11.3 and Cor 11.5 (printed pp. 11-13 and 25). The statement matches the source hypothesis by hypothesis: Reedy fibrant plus Segal, no completeness, and Rezk's conventions for f^* and f_*. I checked all nine steps. Step 2: the fixed-vertex fiber T_n is the pullback of the trivial spine fibration. Step 3: two lifts are compared by lifting the endpoint cylinder. Step 4: I checked the horn indices for composing and reversing edges in the Kan complex Fun(K,Q). Step 5: I checked the triangle pairs 012/023 and 123/013 face by face, that (A_V→P)∘r_A = θ3, two-out-of-three, and that edge 03 gives c(c(a,b),h) and c(a,c(b,h)); associativity holds as a homotopy over the whole product. Step 6: units via s0 and s1, using d2s0 = s0d1 and d0s1 = s0d0. Steps 7-8: the α/β inverse paths are in the right order for all four composites. Step 9: weak equivalences and preservation/reflection on components. Edge cases tested: the discrete nerve of a category, empty mapping fibers, empty V, repeated vertices, disconnected V0. There are no new nodes and no cycle; the only citer is lem-coef-segal-equivalence-outer-horn step 2, and the item supports exactly what that step uses. The DAG search found no duplicate. Accepted tool uses: lem-cbc-simplicial-homotopy-equivalence-weak, and lem-cbc-kan-functor-space-kan (a Mathlib leaf, so declaring it is redundant). The report has two inaccuracies with no effect on the files: it claims created.item was changed, but the file correctly keeps lem-coef-segal-equivalence-outer-horn/Q23, and it mentions a citations.json that is not in the delivery. Maintenance note: the future split of the unsplit lem-coef-segal-homotopy-category-components must not cite this item, or it will create a cycle. No fixes."
+ }
 }
