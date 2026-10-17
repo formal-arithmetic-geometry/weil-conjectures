@@ -231,5 +231,32 @@
   "group": "NW",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-6698d0b19 (reviewer sub-agent of L); spot-checked: I read the item, all four steps and every cited statement in full: symmetric-inert-active-orthogonality, operadic-approximation-restriction, the recognition node's operad definition, cocartesian-composition-initiality, the outer-horn lift node, def-coef-infinity-fibrations and def-cbc-enhanced-diagrams-cones. I also read the unit, the main-20261015 ancestor proof and the only node that cites this item. The statement is unchanged and true: it is HA Prop 2.1.2.4, with the closure and invariance clauses written out and nothing weakened. HA and HTT are not archived, so WANTED and proof_origin=agent are correct. No coefficient category or base-change morphism is involved, because the base is N(Fin_*). The orthogonality node (reviewed by Q63) already states the factorization and the orthogonality, and Q63 asked that this item be merged with it or cite it; this split cites it. No new nodes, so D1/D2 do not apply. A DFS over the dependencies of every cited node never reaches the item, so there is no cycle. Step 1: the operad definitions match clause by clause, and 'fixed universe' gives the 'small' the orthogonality node needs. Step 2: I checked the pointed-set calculations for composing active maps and composing inert maps. Equivalence edges are cocartesian because P is a quasicategory, so the Λ^n_0 filler from the outer-horn node is exactly the cocartesian definition. Inert edges are closed under composition by composition-initiality. Step 3: in the square Δ^1×Δ^1, both triangles respect the hypothesis that the first edge is cocartesian, and conjugating by pointed bijections preserves inert and active maps. Step 4 is a correct unpacking, and the orthogonality node states the contractible filler space itself. Small cases checked: ⟨0⟩→⟨n⟩ is active, ⟨n⟩→⟨0⟩ is inert, and bijections are both. Accepted tool_use: lem-cbc-inner-fibration-equivalence-outer-horn-lift (sk-prop-sf-cbc), a generic horn-lifting tool already accepted on composition-initiality. No SGA source. The Mathlib searches cover all three kinds (LeanSearch, Loogle/LeanFinder, grep) and none matches. No changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ad74ff50",
+  "group": "Q89",
+  "result": "pass",
+  "note": "All five theorem parts (factorization, equivalences in both classes, composition closure, invariance under equivalence of arrows, orthogonality as weak equivalence plus contractible fibres) match the node, using the dependency's notions (inert = cocartesian over an inert pointed map; active = base condition only). The orthogonality comparison is the canonical restriction t |-> (ti, at) from a tetrahedron to its square faces with edges 01=i and 23=a fixed; it is an equivalent model of the node's homotopy pullback, and the literal path formula is not usable because composition on right-pinched mapping spaces is not a strict map. Arity zero, degenerate cases and the single universe u checked. All helpers are real constructions; the only sorry is in the theorem; docstrings carry source and blueprint; lean.statement verbatim; node differs from live only in the lean field; no name clashes; report has both required sections. nt_compile --json: rc 0, 1.5 s, no diagnostics; probe confirmed the signature and axioms. Cosmetic: 7 'the project server' redactions of HA/HTT numbers in report.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OperadicInertActiveFactorization",
+  "declaration": "SSet.Enhanced.operadic_inert_active_factorization",
+  "declarations": [
+   "SSet.Enhanced.operadicOrthogonalitySquare",
+   "SSet.Enhanced.operadicOrthogonalityLeft",
+   "SSet.Enhanced.operadicOrthogonalityRight",
+   "SSet.Enhanced.operadicOrthogonalityBoundary",
+   "SSet.Enhanced.operadicOrthogonalityDiagrams",
+   "SSet.Enhanced.operadicDiagonalComparison",
+   "SSet.Enhanced.operadic_inert_active_factorization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/OperadicInertActiveFactorization.lean",
+  "statement": "theorem operadic_inert_active_factorization {P : SSet.{u}} (p : P ⟶ finStarBase.{u}) (hp : IsSymmetricInfinityOperad p) : (∀ h : Δ[1] ⟶ P, ∃ τ : Δ[2] ⟶ P, stdSimplex.δ 1 ≫ τ = h ∧ IsSymmetricInertEdge p (stdSimplex.δ 2 ≫ τ) ∧ IsActiveEdge p (stdSimplex.δ 0 ≫ τ)) ∧ (∀ e : Δ[1] ⟶ P, IsEquivalenceEdge P (SSet.yonedaEquiv e) → IsSymmetricInertEdge p e ∧ IsActiveEdge p e) ∧ (∀ τ : Δ[2] ⟶ P, (IsSymmetricInertEdge p (stdSimplex.δ 2 ≫ τ) → IsSymmetricInertEdge p (stdSimplex.δ 0 ≫ τ) → IsSymmetricInertEdge p (stdSimplex.δ 1 ≫ τ)) ∧ (IsActiveEdge p (stdSimplex.δ 2 ≫ τ) → IsActiveEdge p (stdSimplex.δ 0 ≫ τ) → IsActiveEdge p (stdSimplex.δ 1 ≫ τ))) ∧ (∀ e f : Δ[1] ⟶ P, AreNaturallyEquivalent e f → (IsSymmetricInertEdge p e ↔ IsSymmetricInertEdge p f) ∧ (IsActiveEdge p e ↔ IsActiveEdge p f)) ∧ ∀ i a : Δ[1] ⟶ P, IsSymmetricInertEdge p i → IsActiveEdge p a → IsWeakHomotopyEquivalence (operadicDiagonalComparison i a) ∧ ∀ s : (operadicOrthogonalityDiagrams operadicOrthogonalityLeft operadicOrthogonalityRight i a) _⦋0⦌, IsContractible (homotopyFiber (operadicDiagonalComparison i a) s)",
+  "branch": "newtargets-dag",
+  "by": "Q89",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
