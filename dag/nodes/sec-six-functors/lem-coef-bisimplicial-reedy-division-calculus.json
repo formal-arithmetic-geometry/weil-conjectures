@@ -54,12 +54,12 @@
    }
   },
   {
-   "text": "Apply [lem-coef-reedy-model-structure] to the small category $\\Delta^{\\mathrm{op}}$, first with the Kan model category of [lem-coef-kan-quillen-right-proper], then with the Joyal model category of [lem-coef-joyal-model-structure]. In either ground category cofibrations are monomorphisms. Here is the latching calculation, valid for either ordering of the two simplicial directions. Fix the inner degree and write $T$ for the resulting simplicial set in the outer degree. The latching colimit at $n$ maps to $T_n$ by the proper degeneracy surjections. The unique nondegenerate decomposition of [lem-weil-pbc-simplicial-set-nondegenerate-decomposition] identifies this map with the subset $D_nT$ of degenerate simplices: a representation $T(\\sigma)x$ reduces by decomposing $x$ to its unique nondegenerate ancestor, and that reduction is precisely an identification in the latching colimit. Two representations with the same image have the same ancestor and total surjection, so are identified there. This works for every inner degree. An inner operator sends $T(\\sigma)x$ to $T(\\sigma)$ of the image of $x$, since the two directions commute, so it preserves the degenerate subset. The canonical latching-to-$T_n$ maps are natural in these operators, hence their identifications with this subset commute with the operators as well; naturality of the chosen nondegenerate ancestors is not needed. If $i:X\\hookrightarrow Y$ is a monomorphism and $z\\in X_{n,q}$ has decomposition $z=Y(\\sigma)y$ in $Y$, choose an order-preserving section $t$ of $\\sigma$; then $y=Y(t)z$ belongs to $X$, since $X$ is a simplicial subset. Thus $X_{n,q}\\cap D_nY_{\\bullet,q}=D_nX_{\\bullet,q}$. The relative latching map is consequently the inclusion of the union $X_{n,q}\\cup D_nY_{\\bullet,q}$ into $Y_{n,q}$. It is injective, hence is a ground cofibration. Conversely the objectwise-cofibration clause of the Reedy node makes every Reedy cofibration a monomorphism. Thus the Reedy cofibrations are exactly the monomorphisms in both cases. At $n=0$ the latching category is empty and this is the inclusion $X_{0,q}\\hookrightarrow Y_{0,q}$.",
+   "text": "Apply [lem-coef-reedy-model-structure] to the small category $\\Delta^{\\mathrm{op}}$, with the Kan model category of [lem-coef-kan-quillen-right-proper] and, in the exchanged ordering of the two directions, the Joyal model category of [lem-coef-joyal-model-structure]. Both ground cofibration classes are monomorphisms. In each fixed inner degree, [lem-coef-simplicial-latching-degenerate-subset] identifies the outer latching map with the inclusion of the degenerate subset. Its naturality makes these identifications commute with every inner operator. For a monomorphism $i:X\\hookrightarrow Y$, identify $X$ with its image. If $z\\in X_{n,q}$ has $z=Y(\\sigma)y$ for a proper surjection $\\sigma$, choose an increasing section $t$ of $\\sigma$. Then $y=Y(t)z$ lies in $X$, so $X_{n,q}\\cap D_nY_{\\bullet,q}=D_nX_{\\bullet,q}$. Consequently the relative latching map is the inclusion $X_{n,q}\\cup D_nY_{\\bullet,q}\\hookrightarrow Y_{n,q}$ in every inner degree. It is a ground cofibration, so $i$ is Reedy cofibrant by the relative latching criterion. Conversely every Reedy cofibration is objectwise a ground cofibration by the Reedy node, hence a monomorphism. This proves the asserted cofibration classes in both orderings. At $n=0$ the new lemma gives the empty latching object, so the same argument includes degree zero.",
    "uses": [
     "lem-coef-reedy-model-structure",
     "lem-coef-kan-quillen-right-proper",
     "lem-coef-joyal-model-structure",
-    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+    "lem-coef-simplicial-latching-degenerate-subset"
    ],
    "elementary": false,
    "source": {
@@ -68,11 +68,12 @@
    }
   },
   {
-   "text": "Identify the matching maps without changing either direction. A simplex of $\\partial\\Delta^p$ is an order-preserving map to $[p]$ whose image is a proper subset. It factors uniquely through the injective map of that image, and all such injections have domain of degree $<p$. A map from $\\partial\\Delta^p\\boxtimes\\Delta^q$ to $X$ is therefore exactly a family of elements in the lower columns, compatible under these proper face maps: restrict to each face; conversely define the value at an arbitrary boundary simplex through its image face, with compatibility ensuring agreement on intersections. This identifies $\\partial\\Delta^p\\backslash X$ with the outer matching object $M_pX$. By step 1 the relative matching map of [lem-coef-reedy-model-structure] is precisely $\\langle\\delta_p\\backslash f\\rangle$. Its objectwise weak equivalences are $X_{p,\\bullet}\\to Y_{p,\\bullet}$ weak homotopy equivalences by [lem-coef-kan-quillen-right-proper]. This is the asserted vertical model. For the horizontal model a $p$-simplex of $X/\\partial\\Delta^q$ is a map $\\Delta^p\\boxtimes\\partial\\Delta^q\\to X$. Restricting to each proper injection $\\iota:[s]\\hookrightarrow[q]$ gives $x_\\iota\\in X_{p,s}$, with $X(1,\\theta)x_\\iota=x_{\\iota\\theta}$ for every injection $\\theta$ between these faces. Conversely, for a boundary simplex $\\beta:[t]\\to[q]$, write $\\beta=\\iota\\rho$ with $\\rho$ surjective and $\\iota$ its proper image injection; the prescribed value is $X(1,\\rho)x_\\iota$. For an arbitrary operator $\\gamma$, factor $\\rho\\gamma=\\theta\\rho_0$ into its image injection and surjection; the compatibility equation gives $X(1,\\gamma)X(1,\\rho)x_\\iota=X(1,\\rho_0)x_{\\iota\\theta}$, so the prescription is simplicial and inverse to restriction. This identifies $X/\\partial\\Delta^q$ with the matching object in $q$, naturally in $p$. Thus its relative matching map is $\\langle f/\\delta_q\\rangle$. Taking [lem-coef-joyal-model-structure] as ground model gives the stated Joyal fibrations and rowwise Joyal weak equivalences, hence the horizontal model. The empty boundary at degree zero gives the terminal matching object and the ordinary degree-zero component of $f$ in each case. Step 3 makes every initial map a cofibration, hence every object cofibrant. Both factorizations are functorial by the functorial-ground-factorization and functorial-extension clauses of the Reedy node, using the functorial Kan and Joyal factorizations. All indices are small in the fixed universes.",
+   "text": "By the division adjunction of step 1, $(\\partial\\Delta^p\\backslash X)_q$ is naturally $\\operatorname{Hom}_{\\mathrm{sSet}}(\\partial\\Delta^p,X_{\\bullet,q})$. Apply [lem-coef-boundary-proper-face-limit] to $T=X_{\\bullet,q}$: its naturality in $T$ assembles these sets into the outer matching object $M_pX$, and its restriction clause identifies the matching map with boundary restriction. Thus the relative matching map of [lem-coef-reedy-model-structure] is $\\langle\\delta_p\\backslash f\\rangle$. Objectwise weak equivalences are columnwise weak homotopy equivalences by [lem-coef-kan-quillen-right-proper], giving the vertical model. In the other ordering, step 1 identifies $(X/\\partial\\Delta^q)_p$ with $\\operatorname{Hom}_{\\mathrm{sSet}}(\\partial\\Delta^q,X_{p,\\bullet})$. The new lemma applied to $T=X_{p,\\bullet}$, naturally in $p$, identifies it with the matching object in $q$, with boundary restriction as matching map. The relative matching map is therefore $\\langle f/\\delta_q\\rangle$. The ground model of [lem-coef-joyal-model-structure] now gives the stated Joyal fibrations and rowwise Joyal weak equivalences. At degree zero the new lemma gives the terminal matching object and the component of $f$. Step 3 makes every initial map a cofibration, so every object is cofibrant. Functorial ground factorizations in the Kan and Joyal nodes yield functorial factorizations by the Reedy node's functorial-extension clause. All indices are small in the fixed universes.",
    "uses": [
     "lem-coef-reedy-model-structure",
     "lem-coef-kan-quillen-right-proper",
-    "lem-coef-joyal-model-structure"
+    "lem-coef-joyal-model-structure",
+    "lem-coef-boundary-proper-face-limit"
    ],
    "elementary": false,
    "source": {
@@ -119,11 +120,12 @@
  ],
  "proof_deps": [
   "def-weil-pbc-simplicial-set",
+  "lem-coef-boundary-proper-face-limit",
   "lem-coef-joyal-model-structure",
   "lem-coef-kan-quillen-right-proper",
   "lem-coef-reedy-model-structure",
-  "lem-coef-sset-anodyne-pushout-product",
-  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition"
+  "lem-coef-simplicial-latching-degenerate-subset",
+  "lem-coef-sset-anodyne-pushout-product"
  ],
  "proof_origin": {
   "by": "agent",
@@ -224,7 +226,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-segal-categorical-constancy",
@@ -237,17 +239,17 @@
   "date": "2026-10-17",
   "item": "lem-coef-bisimplicial-reedy-division-calculus",
   "worker": "stage1",
-  "summary": "Preserved the statement. Wrote seven proof steps for division, its lifting adjunctions, both Reedy cofibration/matching calculations, all-monomorphism division tests, and the vertical simplicial axiom. Reused six existing nodes; no new nodes. Checked Joyal–Tierney Section 2 online and the pinned Mathlib sources. No sorry-free attachment exists in the source checkout.",
+  "summary": "Q57 repair of the human re-split return: preserved the entire statement, Lean record, route, and proof steps 1, 2, 5, 6, 7. Extracted the proper-surjection latching identification and the boundary/proper-face-limit identification as two statement-only nodes, searched in Mathlib and the whole DAG/blueprint. Steps 3 and 4 now cite those smaller combinatorial facts and retain the model-structure argument. All non-elementary proof steps are at most 2000 characters.",
   "blueprint": "Supports prop-coef-integral-exceptional-adjoint proof paragraph 2, finite-coefficient derived mapping adjunction before R lim, through the existing enrichment-change and complete-Segal comparison chain. This item supplies only the Section 2 bisimplicial division/Reedy foundation, before the horizontal-regularity comparison and first-row Quillen equivalence.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-N9-399ebed8a",
-  "group": "N9",
+  "reviewer": "NT-cc-Q57-5080c9b2f",
+  "group": "Q57",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-399ebed8a (reviewer sub-agent of L); spot-checked: I read the item, all six cited statements, unit sk-prop-sf-biduality-general and the pinned Mathlib leaf (PushoutProduct.lean:95-103, Basic.lean:71-75). The imported statement is unchanged. I checked it against Joyal–Tierney §2 as I know it, because the paper is not archived (cited by URL, WANTED, origin agent): definitions before Prop 2.1, Props 2.1 and 2.5. It is true, including p=0, where ∂Δ^0\\X=* and the test is f_0. Step 1: the Yoneda currying formulas are inverse. Step 2: square and filler bijections hold. Step 3: the latching colimit for Δ^op injects onto D_nT by unique decomposition, using (σ,T(τ)y)∼(τσ,y). The section argument gives X_n∩D_nY=D_nX, so Reedy cofibrations are exactly the monos in both models. Step 4: matching objects ∂Δ^p\\X and X/∂Δ^q are correct; I checked the extension formula ργ=θρ_0. Functoriality comes from the Reedy node's extension clause. Step 5: the column of a⊠'b is copies of id plus copies of b, a trivial cofibration by the WFS; both converses hold. Step 6: columnwise currying for tensor and cotensor. Step 7: SM7 holds through the exact anodyne pushout-product leaf, with the symmetric case and both triviality clauses. Edge cases checked: U empty, U=U', V empty, identity b or f. proof_deps is the union of the uses. The walk from the cited nodes is acyclic. Off-unit inputs are only a definition and a Mathlib leaf, so no tool_uses and none accepted. No SGA. There are no new nodes. lem-coef-simplicial-space-reedy-cartesian overlaps only the vertical clauses and is not a duplicate. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-5080c9b2f (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes and the statements of the six cited nodes plus def-weil-pbc-category-colimit. Stacks 017R (simplicial.tex:1795-1815, tag map line 1590) checked. Joyal-Tierney Sec. 2 is not archived; it is recorded as WANTED and proof_origin is agent, which is correct. The statement's orientation checks out: Delta^p\\X is column X_{p,*} and <delta_p\\f> is the outer Reedy matching map with Kan values (vertical); X/Delta^q is row X_{*,q} with Joyal values (horizontal). Steps 1, 2 and 6 are elementary currying and pushout/pullback unpacking; I checked both directions and degrees. Step 3: J+ for Delta^op is the opposite of the proper surjections; the latching node gives D_n; the section argument gives X_n cap D_nY = D_nX, so the relative latching map is the union, a mono; the converse is the Reedy node's objectwise clause. Step 4: the boundary node gives M_p and the restriction matching map in both orderings; functoriality comes from the Reedy extension clause. Step 5: degreewise the map is a coproduct of identities and b, a trivial cofibration by WFS; both converses go through delta_p, with no fibrancy assumed. Step 7: columns are sSet pushout-products, anodyne by the Mathlib leaf (anodyne = Kan trivial cofibration via WFS), and both SM7 triviality clauses are checked. New nodes tested at n=0 and n=1, both true: latching injectivity reduces to unique nondegenerate decomposition, and the boundary bijection uses the unique surjection/proper-injection factorization. No duplicate found after reading matching-object-proper-faces, simplicial-matching-object, hom-object-standard-simplex, local-acyclic-matching-cover, brown-reedy and nondegenerate-decomposition. Neither new node restates a clause of the parent. Route stays in unit sk-prop-sf-biduality-general apart from definitions and Mathlib leaves; no tool_uses, no cycle, no SGA. Not a target node, so the base-change and coefficient checks do not apply. Overlap only: existing lem-coef-simplicial-space-reedy-cartesian already states the vertical cofibrations=monos and SM7; steps 3 and 7 reprove them validly. FIX: rewrote the tautological 'equivalently limit' sentence of lem-coef-boundary-proper-face-limit to name the diagram arrows T(theta) from index iota to index iota*theta; meaning unchanged (fixes/dag/nodes/sec-six-functors/lem-coef-boundary-proper-face-limit.json).; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicTopology.BisimplicialReedyDivisionCalculus",

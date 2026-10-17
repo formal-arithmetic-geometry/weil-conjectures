@@ -96,16 +96,43 @@
    }
   },
   {
-   "text": "The quotient $R_n$ is the coequalizer of the two projections from the coproduct, over i, of $B_i\\times_{(\\Delta^1)^{\\{i+1,\\ldots,n\\}}}B_i$, where $B_i\\subset K_n$ has coordinate i constantly 1. This fiber product is the nerve of the finite poset $D_i$ of pairs $(U,V)$ of subsets containing i whose coordinates strictly above i agree, ordered by inclusion in both entries: in each simplicial degree both descriptions are precisely pairs of chains with identical tails. Its realization maps continuously, by the two coordinate formulas of Step 6, to the ordinary topological fiber product of the faces $p_i=q_i=1$ over their common tail. This map is bijective. Given a pair $(p,q)$ in that fiber product, list the distinct positive values of all coordinates in both factors as $0<v_1<\\cdots<v_s=1$. At level $v_j$, take the pair $(\\{a:p_a\\geq v_j\\},\\{a:q_a\\geq v_j\\})$. Each pair belongs to $D_i$ because the tails agree and both i-coordinates are 1. Reversing these nested pairs and using weights $v_j-v_{j-1}$ reconstructs $(p,q)$. Conversely, after deleting zero weights and merging equal pairs, every strict-chain representation is recovered by these very coordinate levels, proving uniqueness. There are finitely many strict chains in $D_i$, so [lem-coef-standard-simplex-compact] and the finite-cover argument of Step 6 make its realization compact. Coordinate separation makes the target Hausdorff. Thus [lem-sfb-compact-hausdorff-surjection-quotient] makes this bijection a homeomorphism, and its two projections are exactly the ordinary coordinate projections. Now apply the small-colimit preservation and ordinary topological-colimit clauses of [lem-coef-realization-finite-limits] to the displayed coequalizer. It follows that $|Q^n|$ is the ordinary topological quotient of $E_n$ by allowing arbitrary changes to coordinates strictly below i whenever $p_i=1$, leaving the tail from i onwards fixed. Every equivalence class meets $C_n=\\{p\\in[0,1]^{n+1}:p_0=1\\}$: choose an index i with $p_i=1$ and change its lower coordinates to make $p_0=1$; if i=0 this already holds.",
+   "text": "For each $i$, let $B_i\\subset K_n$ be the subcube with coordinate $i$ constantly $1$, and put $A_i=(\\Delta^1)^{\\{i+1,\\ldots,n\\}}$. The quotient $R_n$ of Step 2 is the coequalizer of the two projections $\\coprod_{i=0}^n(B_i\\times_{A_i}B_i)\\rightrightarrows K_n$: a simplicial map from $K_n$ equalizes these projections precisely when it identifies every generating pair of the defining relation. This is exactly the mapping-out property of $R_n$. In each degree, $B_i\\times_{A_i}B_i$ consists of pairs of chains of subsets containing $i$ with identical tails above $i$. Pairing the chains identifies it with $N(D_{n,i})$, where $D_{n,i}$ is the poset of pairs $(U,V)$ containing $i$ and agreeing strictly above $i$, ordered by componentwise inclusion. Deleting or repeating entries commutes with this identification.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.2, explicit cubical quotient immediately before Remark 2.2.2.6, printed p.76 (PDF p.94); agent expansion of the relation-space comparison implicit in passage to geometric realization. No Stacks tag states this finite cubical triangulation."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-cube-relation-realization] with the current $n$ and $i$. It identifies $|N(D_{n,i})|$ homeomorphically with $T_{n,i}=\\{(p,q):p_i=q_i=1,\\ p_j=q_j\\ (j>i)\\}$ in the ordinary product of coordinate cubes. Its projection clause identifies the two realized maps to $|K_n|=E_n$ from Step 6 with $(p,q)\\mapsto p$ and $(p,q)\\mapsto q$. Thus the entire relation diagram, including its two arrows, is identified in ordinary topology; here $n$ is finite and $i\\in\\{0,\\ldots,n\\}$ as required by that lemma.",
    "uses": [
-    "lem-coef-realization-finite-limits",
-    "lem-coef-standard-simplex-compact",
-    "lem-sfb-compact-hausdorff-surjection-quotient"
+    "lem-coef-cube-relation-realization"
    ],
    "elementary": false,
    "source": {
     "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
-    "place": "Remark 2.2.2.6; realization of the explicit relation coequalizer"
+    "place": "Section 2.2.2, explicit cubical quotient immediately before Remark 2.2.2.6, printed p.76 (PDF p.94); agent expansion of the relation-space comparison implicit in passage to geometric realization. No Stacks tag states this finite cubical triangulation."
+   }
+  },
+  {
+   "text": "The coproduct and coequalizer in Step 7 are small: the coproduct has $n+1$ terms and every simplicial degree is a finite set. Apply the small-colimit preservation and ordinary-topological-colimit clauses of [lem-coef-realization-finite-limits]. Together with Steps 3, 6 and 8, they identify $|Q^n|=|R_n|$ with the ordinary topological coequalizer of $\\coprod_iT_{n,i}\\rightrightarrows E_n$. A continuous map from $E_n$ equalizes these arrows exactly when it is constant on their generated equivalence relation. Therefore $|Q^n|$ has precisely the quotient topology for changing coordinates strictly below $i$ whenever $p_i=1$, leaving every coordinate from $i$ onwards fixed.",
+   "uses": [
+    "lem-coef-realization-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.2, explicit cubical quotient immediately before Remark 2.2.2.6, printed p.76 (PDF p.94); agent expansion of the relation-space comparison implicit in passage to geometric realization. No Stacks tag states this finite cubical triangulation."
+   }
+  },
+  {
+   "text": "Every class in this quotient meets $C_n=\\{p\\in[0,1]^{n+1}:p_0=1\\}$. Indeed, $p\\in E_n$ has some $p_i=1$; if $i>0$, changing its zeroth coordinate to $1$ is one allowed generating relation at $i$, and if $i=0$ it already lies in $C_n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Section 2.2.2, explicit cubical quotient immediately before Remark 2.2.2.6, printed p.76 (PDF p.94); agent expansion of the relation-space comparison implicit in passage to geometric realization. No Stacks tag states this finite cubical triangulation."
    }
   },
   {
@@ -118,7 +145,7 @@
    }
   },
   {
-   "text": "The induced bijection in Step 8 is continuous because its composite with $E_n\\to|Q^n|$ is the displayed polynomial map. The space $|Q^n|$ is compact: an open cover pulls back along the quotient map from $|K_n|$ to a cover of the compact space of Step 6, and the resulting finite subcover descends since that map is onto. The simplex is Hausdorff by coordinate separation. Apply [lem-sfb-compact-hausdorff-surjection-quotient] to this continuous bijection: its inverse is continuous by the open-set characterization of a quotient map. Therefore it is a homeomorphism. This proves the topology assertion without claiming continuity of the individual division formulas at a zero denominator.",
+   "text": "The induced bijection in Step 11 is continuous because its composite with $E_n\\to|Q^n|$ is the displayed polynomial map. The space $|Q^n|$ is compact: an open cover pulls back along the quotient map from $|K_n|$ to a cover of the compact space of Step 6, and the resulting finite subcover descends since that map is onto. The simplex is Hausdorff by coordinate separation. Apply [lem-sfb-compact-hausdorff-surjection-quotient] to this continuous bijection: its inverse is continuous by the open-set characterization of a quotient map. Therefore it is a homeomorphism. This proves the topology assertion without claiming continuity of the individual division formulas at a zero denominator.",
    "uses": [
     "lem-sfb-compact-hausdorff-surjection-quotient"
    ],
@@ -129,7 +156,7 @@
    }
   },
   {
-   "text": "For an injection $\\alpha:[k]\\hookrightarrow[n]$, characteristic coordinates send p to $p'_{\\alpha(i)}=p_i$ and $p'_j=0$ at omitted indices. In the product formula of Step 8 all factors contributed by omitted indices are therefore 1, and $t'_{\\alpha(i)}=t_i$ while the other barycentric coordinates are 0. This is exactly the usual topological face inclusion. Hence the homeomorphisms commute with all injective monotone maps. No compatibility with degeneracies is asserted for these homeomorphisms.",
+   "text": "For an injection $\\alpha:[k]\\hookrightarrow[n]$, characteristic coordinates send p to $p'_{\\alpha(i)}=p_i$ and $p'_j=0$ at omitted indices. In the product formula of Step 11 all factors contributed by omitted indices are therefore 1, and $t'_{\\alpha(i)}=t_i$ while the other barycentric coordinates are 0. This is exactly the usual topological face inclusion. Hence the homeomorphisms commute with all injective monotone maps. No compatibility with degeneracies is asserted for these homeomorphisms.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -151,6 +178,7 @@
  ],
  "proof_deps": [
   "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-cube-relation-realization",
   "lem-coef-realization-finite-limits",
   "lem-coef-simplicial-interval-lifting",
   "lem-coef-standard-simplex-compact",
@@ -220,7 +248,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-pinched-rigidification-resolution",
@@ -233,8 +261,8 @@
   "date": "2026-10-17",
   "item": "lem-coef-pinched-cube-latching",
   "worker": "stage1",
-  "summary": "Eleven explicit steps compute the enriched pinch pushout by its universal property, identify quotient simplices by unique truncated-chain normal forms, prove proper-face intersections and injective latching maps, and construct realization homeomorphisms by the formula t_i=p_i product_{j>i}(1-p_j). A complete fiber calculation proves bijectivity, existing compact-simplex and compact-to-Hausdorff results prove continuity of the inverse, and coordinate insertion proves face compatibility. Reused existing realization and topology nodes; no new nodes, no statement change. Self-review replaced a false preliminary coordinate formula and an insufficient preliminary latching argument before acceptance.",
-  "blueprint": "The ancestor prop-coef-integral-exceptional-adjoint, proof paragraph 2, uses coherent finite coefficient adjunction diagrams. This technical branch below its pinched mapping resolution realizes the explicit Q description in HTT §2.2.2 (Steps 1–4), its proper-face cofibration input (Step 5), and Remark 2.2.2.6 (Steps 6–11).",
+  "summary": "Repair of the human return on old Step 7 (2080 characters): retain the statement, Lean record, route and every other argument; replace that step by four short steps. The coequalizer and nerve identification are explicit degreewise arguments. New statement-only lem-coef-cube-relation-realization supplies the hidden characteristic-coordinate homeomorphism and its projection compatibility. The existing realization-colimit theorem supplies passage to the ordinary quotient; meeting C_n is a single generating relation. One new unsplit node, no Mathlib leaves. Other steps unchanged except renumbered Step 8 references.",
+  "blueprint": "The same technical branch below prop-coef-integral-exceptional-adjoint paragraph 2 is retained: HTT §2.2.2 cubical description in Steps 1–4, latching injectivity in Step 5, realization coordinates in Step 6, relation-space comparison and quotient in Steps 7–10, and Remark 2.2.2.6 in Steps 11–14. The new node isolates the hidden finite-poset triangulation of returned Step 7.",
   "tool_uses": [
    {
     "node": "lem-coef-realization-finite-limits",
@@ -256,12 +284,12 @@
   "lem-coef-standard-simplex-compact"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-NL-131cc5be8",
-  "group": "NL",
+  "reviewer": "NT-cc-Q41-5d711df7f",
+  "group": "Q41",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-131cc5be8 (reviewer sub-agent of L); spot-checked: I read the item and all 11 steps in full against HTT §2.2.2 (printed pp. 75-78). HTT is not in literature/ (the WANTED line is correct), so I fetched the official PDF and extracted it locally. The statement matches the source: J^n and Q^n as defined there, the two quotient bullets, the max map, Remark 2.2.2.6 (face compatibility for injective maps only) and the cofibration input of 2.2.2.9; nothing is added, dropped or weakened. Steps 1-3: C preserves the pinch pushout by its mapping-out property. The normal form k=max I_0 holds in both cases i<k and i=k. The disjoint union of the H_i under the composition relation is in bijection with R_n, and no coherent-nerve result is used, so there is no circularity. Step 4: monotonicity preserves the relations and max. Step 5: proper faces meet in the face on U∩V, which gives injectivity of the latching colimit map; n=0 is empty. Steps 6-9: the identification |K_n|=E_n and the D_i fiber products are homeomorphisms by the compact/Hausdorff quotient leaf, with its hypotheses checked; realization of the coequalizer uses the colimit clauses of lem-coef-realization-finite-limits; the formula t_i=p_i∏_{j>i}(1-p_j) telescopes to 1, and its fibers are exactly the relation-at-k classes. Step 10: inserting zeros gives the standard face inclusion. Step 11: Q^0=Δ^0, and the straight-line homotopy proves weak contractibility. My own exact computations agree: for n≤3 and simplicial degree r≤2, the generated classes are exactly the normal forms, with the same count for the H_i quotient; for n≤5, random rational cases confirm the coordinate formula. There are no new nodes and no duplicate in the DAG. The cited nodes are in the item's unit or are Mathlib leaves, so no tool_use needs acceptance; the declared ones are harmless. No SGA source is used. No fixes were made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-5d711df7f (reviewer sub-agent of L); spot-checked: I read the item, all 14 of its steps, the new node lem-coef-cube-relation-realization and the full statement of every cited node. I checked them against HTT §2.2.2, printed pp. 75-77 (text extracted from the official PDF into /tmp/q06htt): the J^n/Q^n definitions, the subcube collapse, direct-image functoriality, the max map, Remark 2.2.2.6 (compatible with face maps only) and the cofibration input of 2.2.2.9. The item statement is unchanged and its Lean record is untouched. Old Step 7, returned at 2080 characters, is replaced by four steps. Step 7 (the coequalizer in sSet is computed degreewise, and B_i x_{A_i} B_i = N(D_{n,i})) is elementary and correct. Step 8 cites the new node with the n and i in force. Step 9 uses the same-unit lem-coef-realization-finite-limits (preserves small colimits; k-space colimits are topological), which gives the ordinary quotient of E_n. Step 10 is a single relation. I re-derived Steps 11-13 by hand: the telescoping identity sum_{h<=i} t_h = prod_{j>i}(1-p_j); t descends to the quotient; each t-fiber is exactly one relation-at-k class, because p_k=1 is forced; inserting zeros gives the standard face maps. The new node is true: D_{n,i} is the product of Boolean lattices 2^i x 2^i x 2^{n-i}, and the statement is the standard order triangulation of a cube in T coordinates. The edge cases n=0, i=0 and i=n hold. My exact-rational script checked threshold reconstruction for every n<=4 and every i, and t-fibers equal to single-step relation classes for n<=3. The new node is statement-only and self-contained with nerve and realization from def-cbc; its TeX is clean; it records six searches covering all three kinds; its blueprint.from and via are correct and same_as=[]. It does not restate a clause of the item and creates no cycle. My DAG search (characteristic coordinates, triangulation, Boolean or subset nerve, realization of products) found no duplicate. Declared tool_uses: a same-unit node and two Mathlib leaves, accepted. No SGA source is used, and no target, base-change morphism or coefficient category is involved. The new node lacks a lean_audit field; this is a cosmetic omission common in the DAG, and I made no change. No fixes were written."
  },
  "lean": {
   "module": "Sheaf.AlgebraicTopology.PinchedCubeLatching",

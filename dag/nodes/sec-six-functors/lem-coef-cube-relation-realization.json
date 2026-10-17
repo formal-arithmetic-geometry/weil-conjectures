@@ -1,0 +1,90 @@
+{
+ "id": "lem-coef-cube-relation-realization",
+ "kind": "statement",
+ "title": "Characteristic-coordinate realization of a cubical relation poset",
+ "statement": "Use ordinary nerves and geometric realization with the quotient topology of [def-cbc-enhanced-diagrams-cones]. Let $n\\geq0$ and $0\\leq i\\leq n$. Write $F_{n,i}$ for the inclusion poset of subsets $U\\subseteq\\{0,\\ldots,n\\}$ containing $i$, and $D_{n,i}$ for the poset of pairs $(U,V)\\in F_{n,i}\\times F_{n,i}$ such that $U\\cap\\{i+1,\\ldots,n\\}=V\\cap\\{i+1,\\ldots,n\\}$, ordered by inclusion in both entries. Give\n$$T_{n,i}=\\{(p,q)\\in[0,1]^{n+1}\\times[0,1]^{n+1}:p_i=q_i=1,\\ p_j=q_j\\text{ for every }j>i\\}$$\nthe subspace topology inherited from the finite real coordinate space. For a subset $U$, let $\\chi_U$ be its characteristic vector. The formula on a realized chain of pairs with barycentric weights $w_a$,\n$$[(U_0,V_0)\\subseteq\\cdots\\subseteq(U_r,V_r);(w_0,\\ldots,w_r)]\\longmapsto\\left(\\sum_{a=0}^r w_a\\chi_{U_a},\\sum_{a=0}^r w_a\\chi_{V_a}\\right),$$\nis well-defined and is a homeomorphism $|N(D_{n,i})|\\xrightarrow{\\sim}T_{n,i}$. If $c_{n,i}:|N(F_{n,i})|\\to[0,1]^{n+1}$ is given by $[U_\\bullet;w]\\mapsto\\sum_a w_a\\chi_{U_a}$, its composites with the realizations of the two poset projections $D_{n,i}\\to F_{n,i}$ are exactly the two coordinate projections of this homeomorphism.",
+ "source": {
+  "document": "https://people.math.harvard.edu/~lurie/papers/HTT.pdf",
+  "place": "Section 2.2.2, explicit cubical quotient immediately before Remark 2.2.2.6, printed p.76 (PDF p.94); agent expansion of the relation-space comparison implicit in passage to geometric realization. No Stacks tag states this finite cubical triangulation."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The realization of the nerve of pairs of subsets containing a fixed element and agreeing on a specified tail is homeomorphic by characteristic coordinates to the fiber product of two cube faces",
+   "results": "{\"t\": \"2026-10-17T08:35:41Z\", \"tool\": \"leanfinder\", \"query\": \"The realization of the nerve of pairs of subsets containing a fixed element and agreeing on a specified tail is homeomorphic by characteristic coordinates to the fiber product of two cube faces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.prodStdSimplex.isoNerve\", \"classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve\", \"SSet.prodStdSimplex.objEquiv\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.stdSimplex.isoNerve_hom_app_apply\", \"CategoryTheory.SimplicialObject.cechNerveEquiv_apply\", \"CategoryTheory.cechNerveTerminalFrom\", \"CategoryTheory.Arrow.cechNerve_obj\"], \"digest\": \"3aa9cd0e120a9827\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types concern nerves of products of standard simplices, Cech nerves, abstract pullbacks or the definition of realization; none supplies the characteristic-coordinate homeomorphism from the specified finite relation-poset realization to its ordinary Euclidean subspace. Read ProdStdSimplex.lean:45-67 and TopCat/Limits/Pullbacks.lean:31-87; the former has no realization theorem and the latter only identifies an already-topological pullback."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.nerve, SSet.toTop",
+   "results": "{\"t\": \"2026-10-17T08:35:30Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.nerve, SSet.toTop\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types concern nerves of products of standard simplices, Cech nerves, abstract pullbacks or the definition of realization; none supplies the characteristic-coordinate homeomorphism from the specified finite relation-poset realization to its ordinary Euclidean subspace. Read ProdStdSimplex.lean:45-67 and TopCat/Limits/Pullbacks.lean:31-87; the former has no realization theorem and the latter only identifies an already-topological pullback."
+  },
+  {
+   "tool": "grep",
+   "query": "nerve.*(realiz|toTop)|((realiz|toTop).*(nerve|pullback))|PreservesFiniteLimits.*toTop",
+   "results": "{\"t\": \"2026-10-17T08:35:30Z\", \"tool\": \"grep\", \"query\": \"nerve.*(realiz|toTop)|((realiz|toTop).*(nerve|pullback))|PreservesFiniteLimits.*toTop\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types concern nerves of products of standard simplices, Cech nerves, abstract pullbacks or the definition of realization; none supplies the characteristic-coordinate homeomorphism from the specified finite relation-poset realization to its ordinary Euclidean subspace. Read ProdStdSimplex.lean:45-67 and TopCat/Limits/Pullbacks.lean:31-87; the former has no realization theorem and the latter only identifies an already-topological pullback."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The geometric realization of the nerve of two Boolean cubes with matching coordinates is the ordinary topological pullback",
+   "results": "{\"t\": \"2026-10-17T08:35:30Z\", \"tool\": \"leansearch\", \"query\": \"The geometric realization of the nerve of two Boolean cubes with matching coordinates is the ordinary topological pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.pullbackIsoProdSubtype\", \"SSet.toTop\", \"CategoryTheory.Limits.Concrete.pullbackEquiv\", \"SSet.instFinitePullback\", \"CompHausLike.pullback\", \"TopCat.pullbackCone\", \"CategoryTheory.SimplicialObject.augmentedCechNerve.congr_simp\", \"TopCat.pullback_topology\"], \"digest\": \"0568ecadef2b3593\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types concern nerves of products of standard simplices, Cech nerves, abstract pullbacks or the definition of realization; none supplies the characteristic-coordinate homeomorphism from the specified finite relation-poset realization to its ordinary Euclidean subspace. Read ProdStdSimplex.lean:45-67 and TopCat/Limits/Pullbacks.lean:31-87; the former has no realization theorem and the latter only identifies an already-topological pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Characteristic functions triangulate the fiber product of two finite Boolean lattices over shared coordinates, and their nerve realization is homeomorphic to the ordinary cubical pullback",
+   "results": "{\"t\": \"2026-10-17T08:40:03Z\", \"tool\": \"leanfinder\", \"query\": \"Characteristic functions triangulate the fiber product of two finite Boolean lattices over shared coordinates, and their nerve realization is homeomorphic to the ordinary cubical pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.prodStdSimplex.isoNerve\", \"CategoryTheory.Arrow.cechNerve_map\", \"CategoryTheory.Arrow.cechNerve\", \"CategoryTheory.SimplicialObject.cechNerveEquiv\", \"CategoryTheory.SimplicialObject.cechNerveEquiv_apply\", \"CategoryTheory.Arrow.cechNerve_obj\", \"CategoryTheory.cechNerveTerminalFrom\", \"CategoryTheory.SimplicialObject.cechNerve_obj\"], \"digest\": \"3270081c41d59149\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types concern nerves of products of standard simplices, Cech nerves, abstract pullbacks or the definition of realization; none supplies the characteristic-coordinate homeomorphism from the specified finite relation-poset realization to its ordinary Euclidean subspace. Read ProdStdSimplex.lean:45-67 and TopCat/Limits/Pullbacks.lean:31-87; the former has no realization theorem and the latter only identifies an already-topological pullback."
+  },
+  {
+   "tool": "grep",
+   "query": "toTop|realization|Homeomorph",
+   "results": "{\"t\": \"2026-10-17T08:39:49Z\", \"tool\": \"grep\", \"query\": \"toTop|realization|Homeomorph\", \"sub\": \"AlgebraicTopology/SimplicialSet/ProdStdSimplex.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: returned types concern nerves of products of standard simplices, Cech nerves, abstract pullbacks or the definition of realization; none supplies the characteristic-coordinate homeomorphism from the specified finite relation-poset realization to its ordinary Euclidean subspace. Read ProdStdSimplex.lean:45-67 and TopCat/Limits/Pullbacks.lean:31-87; the former has no realization theorem and the latter only identifies an already-topological pullback."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-pinched-cube-latching",
+  "date": "2026-10-17",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Paragraph 2, displayed derived coefficient-adjunction and inverse-limit calculation, and the following naturality and triangle-identity sentences; foundational enhancement of finite coefficient adjunction diagrams. Technical input: Pinched simplices give a weakly equivalent mapping resolution. Smaller input: Cubical quotient and latching maps of pinched simplices. Returned Step 7: characteristic-coordinate comparison for the relation fiber products, needed to realize the cubical quotient.",
+   "via": [
+    "lem-coef-pinched-cube-latching",
+    "lem-coef-pinched-rigidification-resolution",
+    "lem-coef-coherent-nerve-comparison",
+    "lem-coef-hammock-infinity-localization",
+    "lem-coef-cosimplicial-frame-mapping",
+    "lem-coef-finite-reedy-localization",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
