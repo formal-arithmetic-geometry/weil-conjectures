@@ -14,8 +14,7 @@ open scoped MonObj
 namespace AlgebraicGeometry.GrpObj
 set_option backward.isDefEq.respectTransparency false
 /-- The structural residue map at the identity is bijective.
-Source: the rationality argument in `lem-ag-lie-identity-cotangent-dual`.
-(blueprint: lem-ag-lie-identity-residue-rational) -/
+Source: blueprint `sk-i-cartier`, the rationality of the identity point. -/
 theorem identity_residue_rational
     {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :
     let x := unitSection G (IsLocalRing.closedPoint k)
