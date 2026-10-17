@@ -10,9 +10,62 @@
  "stmt_deps": [
   "lem-coef-reedy-model-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=\\operatorname{const}Y_c$ and $f=i:A\\to B$. For every degree $n$, left-adjoint preservation of small colimits [lem-weil-pbc-left-adjoint-preserves-colimits] applied to the latching diagrams and then to the pushout span gives canonical isomorphisms\n$$L_n(TA)\\cong T(L_nA),\\qquad L_n(TB)\\cong T(L_nB),\\qquad (TA)_n\\amalg_{L_n(TA)}L_n(TB)\\cong T(A_n\\amalg_{L_nA}L_nB).$$\nThe relative latching map of $Tf$ is, under these isomorphisms, $T(\\lambda_n(f))$, where $\\lambda_n(f):A_n\\amalg_{L_nA}L_nB\\to B_n$ is the relative latching map in [lem-coef-reedy-model-structure]. Indeed both maps restrict to $T(f_n)$ on the first pushout summand and to the image under $T$ of the latching structure map on the second; uniqueness in the pushout universal property identifies them. The latching index categories are small subcategories of slices of the small category $\\Delta^{\\mathrm{op}}$, so the cited preservation statement applies, also to the empty latching diagram at $n=0$. Finally $TA=\\operatorname{const}(TY_c)$, since a functor preserves identities.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Hovey Definition 5.2.2 and Theorem 5.2.5, printed pp.124-126; Stacks 0038 (categories.tex, lemma-adjoint-exact), part (1), for both colimit comparisons."
+   }
+  },
+  {
+   "text": "Since $i$ is a Reedy trivial cofibration, every $\\lambda_n(i)$ is a trivial cofibration by [lem-coef-reedy-model-structure]. The hypothesis on $T$ makes $T(\\lambda_n(i))$ a trivial cofibration. The identification in step 1 and the same relative-latching criterion in $\\mathcal N^{\\Delta^{\\mathrm{op}}}$ show that $T(i):\\operatorname{const}(TY_c)\\to TB$ is a Reedy trivial cofibration. In particular every $T(i_n)$ is a weak equivalence, because Reedy weak equivalences are objectwise. This uses preservation of trivial cofibrations, and does not require a claim that $T$ preserves arbitrary weak equivalences or that $TB$ is Reedy fibrant.",
+   "uses": [
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Hovey Theorem 5.2.5, printed pp.125-126, trivial-cofibration criterion and objectwise weak equivalences."
+   }
+  },
+  {
+   "text": "Work in the Reedy model category $\\mathcal N^{\\Delta^{\\mathrm{op}}}$ of [lem-coef-reedy-model-structure]. Let $\\mathbf1$ be its terminal diagram. Form the commutative square with upper arrow $i'\\circ\\operatorname{const}(r):\\operatorname{const}(TY_c)\\to B'$, left arrow $T(i):\\operatorname{const}(TY_c)\\to TB$, right arrow $B'\\to\\mathbf1$, and lower arrow the unique map $TB\\to\\mathbf1$. It commutes by uniqueness of maps to a terminal object. The left arrow is a trivial cofibration by step 2 and the right arrow is a fibration by the assumed Reedy fibrancy of $B'$. The weak factorization system $(C\\cap W,F)$ of this model category therefore gives a diagonal $b:TB\\to B'$ with $b\\circ T(i)=i'\\circ\\operatorname{const}(r)$. This is a morphism in the functor category, hence is natural in every simplex map.",
+   "uses": [
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Hovey Theorem 5.2.5, printed pp.125-126, Reedy lifting axiom; compare the dual lifting construction of Lemma 5.5.1, printed p.133."
+   }
+  },
+  {
+   "text": "In degree zero the lift equation reads $b_0\\circ T(i_0)=i'_0\\circ r$. Both $i_0$ and $i'_0$ are identities by assumption, and $T$ preserves identities, so $b_0=r$. For every $n\\geq0$ the same equation is $b_n\\circ T(i_n)=i'_n\\circ r$. Here $T(i_n)$ is a weak equivalence by step 2, $i'_n$ is one by the assumed objectwise weak-equivalence coaugmentation, and $r$ is one since it is a trivial cofibration. Two-out-of-three in [lem-coef-reedy-model-structure] first makes $i'_n\\circ r$ a weak equivalence, then makes $b_n$ a weak equivalence. This proves every asserted clause with the prescribed degree-zero component.",
+   "uses": [
+    "lem-coef-reedy-model-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+    "place": "Hovey model-category two-out-of-three axiom (Definition 1.1.3), and Lemma 5.5.1, printed p.133, degree-zero comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-coef-reedy-model-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/hovey-model-cats.pdf",
+  "place": "Reedy lifting and relative-latching calculation from Hovey Theorem 5.2.5 (printed pp.125-126), read online; comparison as in the dual of Lemma 5.5.1 (p.133). The transport calculation is expanded using Stacks 0038. Hovey is not archived in literature/; WANTED is in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +108,59 @@
    "results": "0 hits; ; ; digest 4f53cda18c2baa0c",
    "date": "2026-10-17",
    "verdict": "no match: ordinary cosimplicial-object definitions, model-category axioms and natural transformations into the ordinary homotopy category do not supply this double-resolution or hammock comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "Reedy|simplicialFrame|simplicial_frame|latching [AlgebraicTopology]",
+   "results": "{\"t\": \"2026-10-17T11:19:20Z\", \"tool\": \"grep\", \"query\": \"Reedy|simplicialFrame|simplicial_frame|latching\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\", \"Mathlib/AlgebraicTopology/Reedy/Basic.lean\"], \"digest\": \"a3443c2fc9c6614c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern the abstract Reedy indexing structure, ground-category lifting, or cofibrant-object localization; none supplies the transported Reedy trivial cofibration and frame comparison. Pinned Reedy/Basic.lean lines 21-24 explicitly list construction of the Reedy model structure as TODO."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reedy trivial cofibration transported by a left adjoint preserving trivial cofibrations admits a lift to a fibrant simplicial object",
+   "results": "{\"t\": \"2026-10-17T11:19:20Z\", \"tool\": \"leansearch\", \"query\": \"Reedy trivial cofibration transported by a left adjoint preserving trivial cofibrations admits a lift to a fibrant simplicial object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.trivialCofibrations_sub_cofibrations\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.ModelCategory.instIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.ModelCategory.instIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"CategoryTheory.CommSq.instHasLift_1\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"CategoryTheory.CommSq.left_adjoint_hasLift_iff\"], \"digest\": \"9a7b458807a4ef1f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern the abstract Reedy indexing structure, ground-category lifting, or cofibrant-object localization; none supplies the transported Reedy trivial cofibration and frame comparison. Pinned Reedy/Basic.lean lines 21-24 explicitly list construction of the Reedy model structure as TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Reedy\"",
+   "results": "{\"t\": \"2026-10-17T11:19:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"Reedy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.Language.instToSnapshotTreeDynamicSnapshot\", \"Lean.Core.CoreM.parIterGreedy\", \"Lean.Core.CoreM.parIterGreedyWithCancel\", \"Lean.Meta.MetaM.parIterGreedy\", \"Lean.Meta.MetaM.parIterGreedyWithCancel\", \"Lean.Elab.Term.TermElabM.parIterGreedy\", \"Lean.Elab.Tactic.TacticM.parIterGreedy\", \"Lean.Elab.Term.TermElabM.parIterGreedyWithCancel\"], \"digest\": \"1680f2c64619fc1e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern the abstract Reedy indexing structure, ground-category lifting, or cofibrant-object localization; none supplies the transported Reedy trivial cofibration and frame comparison. Pinned Reedy/Basic.lean lines 21-24 explicitly list construction of the Reedy model structure as TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left Quillen functor preserves Reedy trivial cofibrations of simplicial objects and lifts a map into a Reedy fibrant simplicial frame",
+   "results": "{\"t\": \"2026-10-17T11:19:28Z\", \"tool\": \"leanfinder\", \"query\": \"A left Quillen functor preserves Reedy trivial cofibrations of simplicial objects and lifts a map into a Reedy fibrant simplicial frame\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrick\", \"HomotopicalAlgebra.ModelCategory.hasLiftingProperty_of_joyalTrickDual\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"HomotopicalAlgebra.BifibrantObject.homMk_homMk\", \"HomotopicalAlgebra.FibrantBrownFactorization.mk'_r\"], \"digest\": \"80dd09953b72aca7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern the abstract Reedy indexing structure, ground-category lifting, or cofibrant-object localization; none supplies the transported Reedy trivial cofibration and frame comparison. Pinned Reedy/Basic.lean lines 21-24 explicitly list construction of the Reedy model structure as TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor between model categories that is a left adjoint and preserves trivial cofibrations preserves trivial Reedy cofibrations by identifying relative latching maps",
+   "results": "{\"t\": \"2026-10-17T11:22:10Z\", \"tool\": \"leanfinder\", \"query\": \"A functor between model categories that is a left adjoint and preserves trivial cofibrations preserves trivial Reedy cofibrations by identifying relative latching maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.CofibrantObject.localizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsCofibrantObjFunctorWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLeftDerivabilityStructureWeakEquivalencesLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.localizerMorphism_functor\", \"HomotopicalAlgebra.CofibrantObject.instHasLeftResolutionsArrowArrowWeakEquivalencesArrowLocalizerMorphism\", \"HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences\", \"HomotopicalAlgebra.CofibrantObject.factorsThroughLocalization\", \"HomotopicalAlgebra.cofibrations_rlp\"], \"digest\": \"25dfb98e9d5b923b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern the abstract Reedy indexing structure, ground-category lifting, or cofibrant-object localization; none supplies the transported Reedy trivial cofibration and frame comparison. Pinned Reedy/Basic.lean lines 21-24 explicitly list construction of the Reedy model structure as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "Reedy|latching [CategoryTheory]",
+   "results": "{\"t\": \"2026-10-17T11:22:10Z\", \"tool\": \"grep\", \"query\": \"Reedy|latching\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern the abstract Reedy indexing structure, ground-category lifting, or cofibrant-object localization; none supplies the transported Reedy trivial cofibration and frame comparison. Pinned Reedy/Basic.lean lines 21-24 explicitly list construction of the Reedy model structure as TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.ReedyStructure",
+   "results": "{\"t\": \"2026-10-17T11:22:11Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.ReedyStructure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ReedyStructure\", \"HomotopicalAlgebra.ReedyStructure.deg\", \"HomotopicalAlgebra.ReedyStructure.skeletal\", \"HomotopicalAlgebra.ReedyStructure.degHom\", \"HomotopicalAlgebra.ReedyStructure.prop₁_of_iso\", \"HomotopicalAlgebra.ReedyStructure.prop₂_of_iso\", \"HomotopicalAlgebra.ReedyStructure.mapFactorizationData\", \"HomotopicalAlgebra.ReedyStructure.subsingleton_mapFactorizationData\"], \"digest\": \"1e53cfd144641e36\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern the abstract Reedy indexing structure, ground-category lifting, or cofibrant-object localization; none supplies the transported Reedy trivial cofibration and frame comparison. Pinned Reedy/Basic.lean lines 21-24 explicitly list construction of the Reedy model structure as TODO."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cosimplicial-frame-mapping",
@@ -82,5 +184,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-reedy-simplicial-frame-comparison",
+  "worker": "stage1",
+  "summary": "Preserved the complete statement. Identified transported relative latching maps using the existing Mathlib left-adjoint-colimit leaf, applied the existing Reedy trivial-cofibration criterion, wrote the terminal-object lifting square explicitly, and proved the prescribed endpoint and every componentwise weak equivalence by the lift equation and two-out-of-three. No new nodes. Audited both exact cited statements, the source, edge cases and all Mathlib hits.",
+  "blueprint": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md paragraph 2: derived coefficient adjunction in the displayed R Hom / R lim calculation. Through the recorded frame-mapping ancestry, these steps realize parent lem-coef-cosimplicial-frame-mapping step 14: transport of the special simplicial coaugmentation and its Reedy lift to the frame on Z. The chapter and unit route are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N8-6b15b8b3f",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-6b15b8b3f (reviewer sub-agent of L); spot-checked: I read the item in full: statement unchanged, 4 steps, no new nodes. I also read the full statements of both cited nodes (lem-coef-reedy-model-structure, which covers a general small Reedy J including Δ^op, the trivial-cofibration relative-latching criterion and objectwise W; and the Mathlib leaf lem-weil-pbc-left-adjoint-preserves-colimits, which matches Mathlib Adjunction/Limits.lean:92). I read parent lem-coef-cosimplicial-frame-mapping step 14, which applies the statement exactly, and ancestor prop-coef-integral-exceptional-adjoint.proof paragraph 2 (main-20261015). Step 1: T commutes with the finite latching colimits and the pushout, and the two maps are identified by the pushout universal property; the empty latching diagram at n=0 is covered. Step 2: T preserves C∩W, so T(λ_n i) is a trivial cofibration and T(i) is a Reedy trivial cofibration with objectwise weak equivalences. Step 3: lift against B'→1 in the (C∩W,F) system of N^{Δ^op}; the lift is a map of diagrams, so it is natural. Step 4: b_0=r from i_0=i'_0=1, and two-out-of-three applied twice gives b_n∈W. Small cases checked: n=0; n=1, where L_1=X_0 for Δ^op; T=id with B=B'; B=const Y_c. Hypotheses: Reedy fibrancy of B and fibrancy of Y_c and Z are extra but unused, and nothing is weakened. Route: both deps are in the same unit or a Mathlib leaf, so no tool_uses are needed. The graph is acyclic: only the parent cites the item. Duplicates: rg searches found none; reedy-left-frame-comparison is a distinct dual. The blueprint has no Reedy node, so same_as=[] is right. Hovey is not archived; it is cited by URL with proof_origin agent and a WANTED line. No SGA. Not a target node, so the base-change/coefficient check does not apply. Minor inaccuracy in the report only: it names citations.json/searches.jsonl, which are not in the commit. No fixes."
  }
 }

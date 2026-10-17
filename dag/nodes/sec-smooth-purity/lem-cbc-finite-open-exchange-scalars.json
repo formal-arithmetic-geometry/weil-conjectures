@@ -13,13 +13,95 @@
   "def-pc-sheaf-restrict-scalars",
   "def-weil-extension-by-zero-presheaf",
   "def-weil-presheaf-modules-sheafification",
+  "lem-cbc-proetale-extension-zero",
   "lem-cbc-proetale-extension-zero-base-change",
   "prop-weil-pbc-proetale-constant-exact",
   "lem-weil-pbc-site-morphism-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a homomorphism of finite commutative rings $a:B\\to C$ and a scheme morphism $h:T'\\to T$. By [def-weil-proetale-inverse-image], the underlying sheaf of the constant-coefficient pullback $h_C^*$ is the colimit-and-sheafification inverse image $h^{-1}$, and direct image $h_*$ is sectionwise, $(h_*\\mathcal G)(V)=\\mathcal G(u_h(V))$, with the action through $\\rho^h$. By [prop-weil-pbc-proetale-constant-exact], the $C_{T'}$-action on $h_C^*F$ is transported through the canonical constant structure map $c_C$. Restriction of scalars [def-pc-sheaf-restrict-scalars] leaves every underlying sheaf and map unchanged and composes the action with $a$. Since $\\rho^h$ and its adjoint $c$ send a constant section $b$ to the constant section $b$, they commute with $a$ (a map out of the constant sheaf is determined on constant sections). So the identity maps give natural identifications $\\operatorname{Res}_ah_C^*F=h_B^*\\operatorname{Res}_aF$ and $\\operatorname{Res}_ah_*G=h_*\\operatorname{Res}_aG$. The unit and counit of the module adjunction $h^*\\dashv h_*$ are the abelian $\\eta_h,\\varepsilon_h$ of [def-weil-proetale-inverse-image], which are linear for the transported actions. Hence, under these identities, $\\operatorname{Res}_a$ carries the $C$-unit and $C$-counit to the $B$-unit and $B$-counit. The same holds for identities and for composites of site morphisms.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "prop-weil-pbc-proetale-constant-exact",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Returned Step 7, coefficient-restriction identification for the finite pullbacks"
+   }
+  },
+  {
+   "text": "For $j$ and $j'$, the existing pro-etale extension-by-zero lemma [lem-cbc-proetale-extension-zero] says that extension is exact, is the left adjoint of inverse image, acts degreewise on complexes, and is compatible with restriction of scalars. Concretely, this compatibility is the identity on the direct-sum extension presheaf of [def-weil-extension-by-zero-presheaf]: restriction of scalars changes only the action, while [def-weil-presheaf-modules-sheafification] sheafifies the same underlying abelian presheaf and extends the action uniquely. The adjunction is the canonical one of Stacks 03DI (sites-modules, lemma-extension-by-zero). The adjunct of $\\alpha:F\\to j^{-1}G$ is induced by $s\\mapsto\\alpha(s)$ on the summand presheaf, and the unit $u_F:F\\to j^{-1}j_!F$ sends $s\\in F(V\\to U)$ to the image of $s$ in its summand. Neither formula refers to the coefficient ring. Therefore, under the identity identifications, $\\operatorname{Res}_a$ carries the $C$-unit, the $C$-counit and the $C$-adjuncts for $j_!\\dashv j^{-1}$ and $j'_!\\dashv j'^{-1}$ to the $B$-ones. These scalar comparisons are natural in complexes and chain maps.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Returned Step 7, direct-sum extension and scalar-restriction compatibility; Stacks Tag 03DI, sites-modules.tex lemma-extension-by-zero, adjunction construction in the proof"
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-proetale-extension-zero-base-change] with coefficient ring $C$ and with coefficient ring $B$. Its canonical map is the Beck-Chevalley exchange. Put $L_1=g^{-1}j_!$, $L_2=j'_!g_U^{-1}$, $R_1=j^{-1}g_*$ and $R_2=g_{U*}j'^{-1}$, with the composite adjunctions $L_i\\dashv R_i$ of the adjunctions in Step 1 and [lem-cbc-proetale-extension-zero]. The cartesian datum gives isomorphisms $a_V:V\\times_UU'\\cong V\\times_XX'$ and the sectionwise identification $t:R_1\\cong R_2$, $t_{M,V}=M(a_V)$. This is the functoriality of the composite base-change functors in [lem-weil-pbc-site-morphism-composition]. The canonical $\\beta$ is the unique map $L_1\\to L_2$ whose $L_1\\dashv R_1$ adjunct is $t^{-1}_{L_2F}\\circ\\eta_{2,F}$, with $\\eta_i$ the composite units. Now $t$ involves only sections and restriction maps, so it is unchanged by $\\operatorname{Res}_a$ [def-pc-sheaf-restrict-scalars]. By Steps 1 and 2, $\\operatorname{Res}_a$ carries every unit, counit and adjunct of the $C$-adjunctions to those of the $B$-adjunctions, compatibly with the identity identifications. Hence $\\operatorname{Res}_a(\\beta_{C,F})$ has $B$-adjunct $t^{-1}\\eta_{2,\\operatorname{Res}_aF}$. By uniqueness of adjuncts, $\\operatorname{Res}_a(\\beta_{C,F})=\\beta_{B,\\operatorname{Res}_aF}$. Naturality in $F$ and in $a$, including identities and composites, follows from the naturality of these units and of the identity identifications.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero-base-change",
+    "lem-cbc-proetale-extension-zero",
+    "lem-weil-pbc-site-morphism-composition",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Returned Step 7, finite exchange and coefficient restrictions"
+   }
+  },
+  {
+   "text": "Keep the notation of Step 3. By [lem-cbc-proetale-extension-zero-base-change], $\\beta$ is invertible. Its inverse is the conjugate of $t$: its $L_2\\dashv R_2$ adjunct is $t_{L_1F}\\circ\\eta_{1,F}$. Write $\\eta_{1,F}=j^{-1}(\\eta_{g,j_!F})\\circ u_F$ and $\\eta_{2,F}=g_{U*}(\\eta_{j'})\\circ\\eta_{g_U,F}$. Passing from the composite adjunct to the $j'_!\\dashv j'^{-1}$ adjunct applies the $g_U^{-1}\\dashv g_{U*}$ bijection. By naturality of $\\varepsilon_{g_U}$, the $j'_!\\dashv j'^{-1}$ adjunct of $\\beta^{-1}_F$ is\n$$g_U^{-1}F\\xrightarrow{g_U^{-1}u_F}g_U^{-1}j^{-1}j_!F\\xrightarrow{\\sigma_{j_!F}}j'^{-1}g^{-1}j_!F,$$\nwhere $\\sigma_G=\\varepsilon_{g_U,j'^{-1}g^{-1}G}\\circ g_U^{-1}(t_{g^{-1}G}\\circ j^{-1}\\eta_{g,G})$ is the mate of $t$. By [lem-weil-pbc-site-morphism-composition](2)-(4), the inverse images of the composite morphisms $j\\circ g_U$ and $g\\circ j'$ are $g_U^{-1}j^{-1}$ and $j'^{-1}g^{-1}$. Their direct images are the composites, and these are identified by the cartesian isomorphisms $a_V$; on $U$ the identification is $t$. The comparison of inverse images compatible with the adjunctions is unique by clause (3), and it is the mate of this direct-image identification. So $\\sigma$ is the site-composition comparison of the statement. This proves the displayed description of $\\beta_B^{-1}$, and likewise of $\\beta_C^{-1}$. By Steps 1-3, $\\operatorname{Res}_a$ carries the latter to the former.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "lem-weil-pbc-site-morphism-composition",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Returned Step 7, inverse adjoint-mate normalization"
+   }
+  },
+  {
+   "text": "All comparisons above are natural chain maps by the naturality in complexes in [lem-cbc-proetale-extension-zero-base-change] and by the degreewise construction in [lem-cbc-proetale-extension-zero]. Let $B_{n+1}\\to B_n$ be a coefficient transition and let $F_{n+1}\\to\\operatorname{Res}F_n$ be a strict linear transition. Applying the naturality square for $\\beta$ to this map, and then applying its inverse square, shows that the exchanges and inverse mates commute with that transition. Hence they assemble to inverse maps of the strict towers of underlying abelian sheaf complexes. Step 1 and the definition of restriction of scalars show that every square is linear for the compatible ring-sheaf actions, so the same maps are maps of towers over the coefficient sheaves. This proves the asserted tower, chain-map, identity, and composite compatibilities.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero-base-change",
+    "lem-cbc-proetale-extension-zero",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Returned Step 7, strict reduction-tower comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "prop-weil-pbc-proetale-constant-exact",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-cbc-proetale-extension-zero",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-weil-pbc-site-morphism-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Returned Step 7, finite exchange, coefficient restrictions, inverse mates, and strict tower transitions"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,7 +147,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-completed-extension-zero-comparison",
@@ -77,10 +159,39 @@
  "blueprint": {
   "from": {
    "node": "lem-cbc-completed-extension-zero-comparison",
-   "place": "Proof sentence identifying finite pullbacks of j_!K_n with j′_! pullbacks, before taking derived limits; extracted coefficient/mate compatibility of returned Step 7. Supporting source: Stacks Tag 03DI, sites-modules.tex lemma-extension-by-zero, direct-sum adjunction construction; coefficient compatibility is an agent-written refinement.",
+   "place": "Returned Step 7: finite exchange, coefficient restrictions, inverse adjoint mates, and strict reduction-tower transitions; supporting source Stacks Tag 03DI and the direct-sum adjunction construction.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-cbc-finite-open-exchange-scalars",
+  "worker": "stage1",
+  "summary": "Completed the one-level split of the finite open exchange statement. The proof derives coefficient compatibility for inverse images and extension by zero from the existing scalar, sheafification, and pro-etale extension nodes; transports the canonical finite base-change exchange; identifies its inverse adjoint mate by the extension adjunction and site-composition comparison; and checks strict chain and tower transitions. No new nodes or attachments were needed.",
+  "blueprint": "Realizes the returned Step 7 paragraph of lem-cbc-completed-extension-zero-comparison: finite exchange, coefficient restrictions, inverse adjoint-mate normalization, and strict reduction-tower compatibility.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Supplies the generic exact constant-coefficient inverse-image and transported module action used to compare pullbacks after restriction of scalars."
+   },
+   {
+    "node": "lem-weil-pbc-site-morphism-composition",
+    "why": "Supplies the generic site inverse-image composition and unit compatibility used to identify the cartesian comparison and the adjoint mate."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-pbc-site-morphism-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-fe9d5b3b0",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-fe9d5b3b0 (reviewer sub-agent of L); spot-checked: Read the item in full, all 9 cited statements, the full proofs of lem-cbc-proetale-extension-zero-base-change and lem-cbc-proetale-extension-zero, the parent lem-cbc-completed-extension-zero-comparison (its step 8 applies the item to P_b->P_a; steps 9 and 11 rely on the inverse-mate normalization), the main-20261015 blueprint statement and proof, Stacks 03DI (sites-modules.tex l.2058), and the unit and chapter records. The statement is true and keeps the parent's coefficient category (constant finite commutative rings, small pro-etale sites). beta runs g^{-1}j_! -> j'_!g_U^{-1} as in the base-change node, and the stated inverse mate is the correct one. No qc or constructibility hypothesis is needed. Small cases checked: a=id, zero ring, U empty, U=X, g=id, one-level tower, Z/l^n quotient towers. Not a duplicate: the base-change node has one ring; the underived-compatibility node gives the same mate normalization but on the etale site; strict-tower-proper-open-calculus has one fixed ring B; and no clause of the parent is restated. Faults, both E5: step 3 transported beta summand by summand and invoked an unnamed uniqueness, and step 4 asserted the mate computation without doing it. The fix rewrites steps 1-4 only. Step 1 adds h_* and the units and counits of h^* -| h_*. Step 2 shows the units and adjuncts are ring-independent, citing the 03DI construction. Step 3 now uses the Beck-Chevalley characterization: beta is the unique map with adjunct t^{-1}eta_2, where t_{M,V}=M(a_V) and Res_a fixes t and the units. Step 4 computes the j'_!-adjunct of beta^{-1} as sigma o g_U^{-1}u_F, with sigma the mate of t, and identifies sigma with the composition comparison via clause (3) of lem-weil-pbc-site-morphism-composition. I read the statement's 'canonical map' as the standard Beck-Chevalley exchange constructed in step 6 of the base-change node. The statement, stmt_deps and proof_deps union are unchanged, every step is under 2000 characters, and there is no cycle. Both declared tool_uses are accepted (prop-weil-pbc-proetale-constant-exact, lem-weil-pbc-site-morphism-composition). No SGA, no new nodes, nothing dropped.; 1 file(s) fixed by the reviewer"
  }
 }

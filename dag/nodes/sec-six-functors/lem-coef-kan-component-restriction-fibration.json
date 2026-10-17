@@ -10,9 +10,70 @@
  "stmt_deps": [
   "lem-coef-kan-quillen-right-proper"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check the constructions from the definitions in [def-weil-pbc-simplicial-set]. If $z\\in Z_n$ and $\\alpha:[m]\\to[n]$, the vertex $j$ of $Z(\\alpha)z$ is vertex $\\alpha(j)$ of $z$. Thus the condition defining $Z[S]$ is preserved by every simplicial operator. For vertices $a\\leq b$ of $z$, restriction along $[1]\\to[n]$, $0\\mapsto a$, $1\\mapsto b$, is an edge between them, so all vertices of a simplex have the same component. A simplicial map sends edges to edges and therefore induces a map on the equivalence classes defining $\\pi_0$. For $z\\in X[S]$, each vertex of $p(z)$ has class in $(\\pi_0p)(S)\\subseteq R$. Consequently the degreewise restrictions of $p$ give a simplicial map $p_{S,R}:X[S]\\to Y[R]$.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Construction of the component subcomplexes and restricted map; elementary argument by Q134, expanding the component restriction implicit in Section 12.2 and Lemma 13.9."
+   }
+  },
+  {
+   "text": "Use the horn-lifting characterization of Kan fibrations in [lem-coef-kan-quillen-right-proper]. Given a lifting square with top map $a:\\Lambda_i^n\\to X[S]$ and bottom map $b:\\Delta^n\\to Y[R]$, $n\\geq1$, compose with the inclusions in $X,Y$ and use the hypothesis on $p$ to obtain a filler $h:\\Delta^n\\to X$. The horn has a vertex $v$: any included face has dimension $n-1\\geq0$. Its image $h(v)=a(v)$ has component in $S$. Every other vertex $w$ is joined to $v$ by the image under $h$ of the edge of $\\Delta^n$ with those endpoints; hence $[h(w)]=[h(v)]\\in S$. Every simplex in the image of $h$ therefore has all vertices in $S$, so $h$ factors through $X[S]$. The two filler equations still hold in the subcomplexes, since their inclusions are degreewise injective. This supplies all horn lifts for $p_{S,R}$. In dimension one only one vertex lies in the horn; the filler edge supplies the other vertex and the same argument applies.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Horn lifting for the restricted map, including one-dimensional horns; elementary argument by Q134, expanding the component restriction implicit in Section 12.2 and Lemma 13.9."
+   }
+  },
+  {
+   "text": "Fix a vertex $y$ of $Y[R]$, and denote its totally degenerate $n$-simplex by $y_n$. The degree-$n$ strict fiber of the restricted map consists exactly of $x\\in X_n$ such that $p(x)=y_n$ and every vertex of $x$ has class in $S$. With the inherited operators these sets are $X_y\\cap X[S]$. Explicitly, the pullback property is checked by sending any pair of compatible maps to its degreewise pairs $(x,*)$; uniqueness and compatibility with operators hold in every degree. To see the union-of-components assertion, let $j:X_y\\to X$ be inclusion and put $T=(\\pi_0j)^{-1}(S)\\subseteq\\pi_0X_y$. Edges of $X_y$ are edges of $X$, so $\\pi_0j$ is well-defined. A simplex of $X_y$ has all its vertices in $T$ exactly when its vertices, regarded in $X$, have classes in $S$. Thus $X_y\\cap X[S]=(X_y)[T]$, with no injectivity assertion about $\\pi_0j$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Degreewise identification of strict fibers and their component subsets; elementary argument by Q134, expanding the component restriction implicit in Section 12.2 and Lemma 13.9."
+   }
+  },
+  {
+   "text": "The fibers in the preceding step are Kan without any fibrancy assumption on $Y$. Given a horn in $F=(p_{S,R})^{-1}(y)$, regard it as a horn in $X[S]$ and use as bottom simplex the constant simplex $\\Delta^n\\to Y[R]$ at $y$. Step 2 supplies a filler in $X[S]$ whose image is that constant simplex, so the filler lies in $F$. This proves the horn-filling condition, equivalently that $F\\to\\Delta^0$ is a Kan fibration and that $F$ is a Kan complex, using the fibrant-object convention of [lem-coef-kan-quillen-right-proper]. The identical argument with $p:X\\to Y$ proves that the ambient strict fiber $X_y$ is Kan as well.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Horn filling of the strict fibers over a constant vertex; elementary argument by Q134, expanding the component restriction implicit in Section 12.2 and Lemma 13.9."
+   }
+  },
+  {
+   "text": "Finally, if $Z$ is Kan, the unique map $Z\\to\\Delta^0$ is a Kan fibration by the fibrant-object convention of [lem-coef-kan-quillen-right-proper]. Apply step 2 to this map, the subset $S\\subseteq\\pi_0Z$, and $R=\\pi_0\\Delta^0$. It gives a Kan fibration $Z[S]\\to\\Delta^0$, so $Z[S]$ is Kan. All constructions use subsets and degreewise maps, hence preserve smallness. If a component subset or fiber is empty, a horn cannot map into it because $n\\geq1$ horns contain a vertex; its horn-filling condition is vacuous. An empty target has no vertices, so the fiber assertions in that case are vacuous too. Thus none of the empty cases requires an added hypothesis.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+    "place": "Kan component subcomplexes and the empty cases; elementary argument by Q134, expanding the component restriction implicit in Section 12.2 and Lemma 13.9."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-set",
+  "lem-coef-kan-quillen-right-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/rezk-segal-spaces.pdf",
+  "place": "Section 12.2 and Lemma 13.9, printed pp.28,31-32, read online 2026-10-17; Q134 supplies a direct horn-lifting proof of the auxiliary assertion, which is not stated verbatim there."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,10 +130,52 @@
    "results": "{\"t\": \"2026-10-17T08:54:44Z\", \"tool\": \"loogle\", \"query\": \"SSet.Subcomplex.fromPreimage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"SSet.Subcomplex.fromPreimage\", \"SSet.Subcomplex.fromPreimage_ι\", \"SSet.Subcomplex.fromPreimage_ι_assoc\", \"SSet.Subcomplex.fromPreimage_app_hom_apply_coe\"], \"digest\": \"b02fd83568b8107a\"}",
    "date": "2026-10-17",
    "verdict": "no match: horn lifting, arbitrary subcomplex preimages, or stability under base change; none asserts restriction of the source to an arbitrary union of components remains a Kan fibration. Read PiZero.lean:12-24,35-100, CategoryWithFibrations.lean:83-109 and Subcomplex.lean:225-275. The PiZero TODO explicitly lacks component subcomplexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrict a Kan fibration of simplicial sets to arbitrary unions of connected components in source and target",
+   "results": "{\"t\": \"2026-10-17T10:19:11Z\", \"tool\": \"leanfinder\", \"query\": \"Restrict a Kan fibration of simplicial sets to arbitrary unions of connected components in source and target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.Subcomplex.fromPreimage\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.Subcomplex.toRange\", \"SSet.KanComplex\"], \"digest\": \"18959f6eb4f4c786\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected PiZero.lean:12-24,39-100, CategoryWithFibrations.lean:75-103, Subcomplex.lean:225-275, and KanComplex.lean:36-52. The hits give the horn criterion, pi zero, arbitrary preimages or base-change stability; they do not give the source-component restriction. The component-subcomplex definition is still listed as a TODO in PiZero.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.KanComplex, SSet.Subcomplex",
+   "results": "{\"t\": \"2026-10-17T10:19:11Z\", \"tool\": \"loogle\", \"query\": \"SSet.KanComplex, SSet.Subcomplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected PiZero.lean:12-24,39-100, CategoryWithFibrations.lean:75-103, Subcomplex.lean:225-275, and KanComplex.lean:36-52. The hits give the horn criterion, pi zero, arbitrary preimages or base-change stability; they do not give the source-component restriction. The component-subcomplex definition is still listed as a TODO in PiZero.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "component|π₀|horn",
+   "results": "{\"t\": \"2026-10-17T10:19:12Z\", \"tool\": \"grep\", \"query\": \"component|π₀|horn\", \"sub\": \"AlgebraicTopology/SimplicialSet/PiZero.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"12\", \"14\", \"20\", \"21\", \"22\"], \"digest\": \"31afd03b8277d856\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected PiZero.lean:12-24,39-100, CategoryWithFibrations.lean:75-103, Subcomplex.lean:225-275, and KanComplex.lean:36-52. The hits give the horn criterion, pi zero, arbitrary preimages or base-change stability; they do not give the source-component restriction. The component-subcomplex definition is still listed as a TODO in PiZero.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A union of connected components of the source of a Kan fibration restricts to a Kan fibration with Kan strict fibers",
+   "results": "{\"t\": \"2026-10-17T10:19:12Z\", \"tool\": \"leansearch\", \"query\": \"A union of connected components of the source of a Kan fibration restricts to a Kan fibration with Kan strict fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.trivialFibrations_sub_fibrations\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"HomotopicalAlgebra.BifibrantObject.instIsFibrantObjBifibrantObjects\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"HomotopicalAlgebra.fibrations\", \"HomotopicalAlgebra.instFibrationFstOfIsFibrant\"], \"digest\": \"2073e8b3249b91db\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected PiZero.lean:12-24,39-100, CategoryWithFibrations.lean:75-103, Subcomplex.lean:225-275, and KanComplex.lean:36-52. The hits give the horn criterion, pi zero, arbitrary preimages or base-change stability; they do not give the source-component restriction. The component-subcomplex definition is still listed as a TODO in PiZero.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "component|preimage|fromPreimage",
+   "results": "{\"t\": \"2026-10-17T10:20:26Z\", \"tool\": \"grep\", \"query\": \"component|preimage|fromPreimage\", \"sub\": \"AlgebraicTopology/SimplicialSet/Subcomplex.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"116\", \"233\", \"235\", \"237\", \"240\"], \"digest\": \"3d55910eabd93ebf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected PiZero.lean:12-24,39-100, CategoryWithFibrations.lean:75-103, Subcomplex.lean:225-275, and KanComplex.lean:36-52. The hits give the horn criterion, pi zero, arbitrary preimages or base-change stability; they do not give the source-component restriction. The component-subcomplex definition is still listed as a TODO in PiZero.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Subcomplexes consisting of selected pi zero classes of a simplicial set inherit the horn lifting property from a fibration",
+   "results": "{\"t\": \"2026-10-17T10:20:28Z\", \"tool\": \"leanfinder\", \"query\": \"Subcomplexes consisting of selected pi zero classes of a simplicial set inherit the horn lifting property from a fibration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.horn_ι_mem_J\", \"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.fibration_iff\", \"SSet.KanComplex\"], \"digest\": \"3803520743dcc99d\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected PiZero.lean:12-24,39-100, CategoryWithFibrations.lean:75-103, Subcomplex.lean:225-275, and KanComplex.lean:36-52. The hits give the horn criterion, pi zero, arbitrary preimages or base-change stability; they do not give the source-component restriction. The component-subcomplex definition is still listed as a TODO in PiZero.lean."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-segal-cotensor-evaluation-dk",
@@ -103,5 +206,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-kan-component-restriction-fibration",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Supplied the component-subcomplex construction, direct horn lifting including dimension one, a degreewise strict-fiber identification, the inverse-image description of fiber components, and Kan filling for fibers and component subcomplexes. Checked all empty cases. Reused the simplicial-set definition and Kan horn characterization; no new nodes. Repeated Mathlib searches with two semantic phrasings and inspected the candidates.",
+  "blueprint": "Proof paragraph 2, displayed derived coefficient adjunction, mapping-space foundation through the cosimplicial-frame/cofibrant-inversion and Rezk-completion chain. Supporting the categorical-equivalence criterion used in Rezk Section 14, proof of assertions (1) and (3); this is additional Segal-space infrastructure, not a literal assertion of the blueprint paragraph. Specific supporting lemma for Proposition 13.8: Lemma 13.9, the three maps W -> W^E -> W. Repair of cotensor-evaluation-dk proof step 6: restrict the endpoint Kan fibration to the component subcomplexes C_1 and C_0^2, and identify its fibers as unions of fiber components."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q134-f13672875",
+  "group": "Q134",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-f13672875 (reviewer sub-agent of L); spot-checked: I read the whole item and found no fault, so I made no changes. The delivery has no new nodes, and its unchanged statement is true. I tested it on small cases: empty S or R, discrete maps, the identity on the non-Kan Δ^1 (which shows the Kan hypothesis on Z is needed only for the last clause), and a fiber whose two components lie in one component of X. Step 1 builds the component subcomplexes and the restricted map directly from the operators and natural transformations of def-weil-pbc-simplicial-set. Step 2 is correct: any horn with n>=1 contains a vertex (for n=1 it is the single vertex 1-i), edges of Δ^n carry its component to every vertex of the filler, and so the filler factors through X[S]; it uses only the horn-RLP clause of lem-coef-kan-quillen-right-proper, which is in the same unit. Step 3 is correct because Y[R]->Y is injective, and it never assumes π0j is injective. Steps 4 and 5 are correct: the filler over the constant simplex at y stays in the fiber, and step 2 applied to Z->Δ^0 gives Z[S] Kan, using the fibrant-object clause. All steps are rightly marked elementary and proof_deps matches. The parent's step 6 (lem-coef-segal-cotensor-evaluation-dk) uses exactly these clauses. There is no route departure, no tool_uses and no SGA. A repo-wide rg found no duplicate: segal-homotopy-category-components, enriched-marked-realization and kan-fibration-fiber-criterion state different facts, and blueprint_refs search returned 0 nodes. PiZero.lean's TODO confirms no Mathlib leaf. Rezk §12.2 / Lemma 13.9 is not archived; the WANTED line and the agent-written mark are correct. The item is not a target, so the base-change and coefficient-category checks do not apply."
  }
 }

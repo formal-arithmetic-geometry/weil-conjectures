@@ -1,0 +1,92 @@
+{
+ "id": "lem-coef-infinity-opposite-subdivision-kan-zigzag",
+ "kind": "statement",
+ "title": "Opposite simplicial sets and subdivision Kan zigzags",
+ "statement": "Use small simplicial sets, geometric realization, Kan complexes and weak homotopy equivalences of [def-cbc-enhanced-diagrams-cones], subdivision and its last-vertex map $\\lambda$ of [lem-coef-subdivision-face-poset-calculus] and [lem-coef-subdivision-last-vertex-equivalence], and the functor $E=\\operatorname{Ex}^{\\infty}$ with unit $j:T\\to ET$ of [lem-coef-ex-infinity-finite-products]. Define $T^{\\mathrm{op}}$ by replacing each simplex operator $\\alpha:[m]\\to[n]$ by $\\rho_n\\alpha\\rho_m$, where $\\rho_n(i)=n-i$.\nFor every $T$ there is a natural involutive isomorphism $\\eta_T:\\operatorname{Sd}T\\cong\\operatorname{Sd}(T^{\\mathrm{op}})$, sending a flag of nonempty subsets $(S_0\\subseteq\\cdots\\subseteq S_k)$ in a simplex of dimension $n$ to $(\\rho_nS_0\\subseteq\\cdots\\subseteq\\rho_nS_k)$ in the reversed simplex. The maps $\\lambda$ give a natural zigzag of weak homotopy equivalences\n$$T\\leftarrow\\operatorname{Sd}T\\xrightarrow{\\eta_T}\\operatorname{Sd}(T^{\\mathrm{op}})\\to T^{\\mathrm{op}}.$$\nThere is also a natural homeomorphism $|T^{\\mathrm{op}}|\\cong|T|$ given on realization representatives by reversing the barycentric coordinates. Thus opposite preserves and reflects weak homotopy equivalences and preserves Kan complexes.\nFor every Kan complex $T$, the zigzag\n$$T\\xrightarrow{j_T}ET\\xleftarrow{E\\lambda_T}E\\operatorname{Sd}T\\xrightarrow{E(\\lambda_{T^{\\mathrm{op}}}\\eta_T)}E(T^{\\mathrm{op}})\\xleftarrow{j_{T^{\\mathrm{op}}}}T^{\\mathrm{op}}$$\nhas only Kan complexes and weak homotopy equivalences. It is natural in $T$. All arrows commute with the maps induced by finite product projections, and the canonical finite-product comparison for $E$ is an isomorphism; no finite-product preservation by $\\operatorname{Sd}$ is asserted.\nFor maps of Kan complexes $u:U\\to W$, $v:V\\to W$, define $P(u,v)$ by the path-space formula $U\\times_{W,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,W)\\times_{\\operatorname{ev}_1,W}V$. Reversing the interval and exchanging the two endpoints gives a natural isomorphism $P(u,v)^{\\mathrm{op}}\\cong P(v^{\\mathrm{op}},u^{\\mathrm{op}})$, compatible with the constant-path comparisons of strictly commuting squares.",
+ "source": {
+  "document": "https://kerodon.net/tag/00YZ",
+  "place": "Proposition 3.3.4.8 supplies the last-vertex weak equivalence. The subdivision flag-reversal, realization homeomorphism and all-Kan zigzag are the explicit agent argument extracted from the retained item proof, old step 7; they are not all asserted in 00YZ. Archival Kerodon copy WANTED."
+ },
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-subdivision-face-poset-calculus",
+  "lem-coef-subdivision-last-vertex-equivalence",
+  "lem-coef-ex-infinity-finite-products"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every simplicial set is naturally weakly equivalent to its opposite via barycentric subdivision and Ex infinity, compatibly with finite products",
+   "results": "SimplicialObject.opEquivalence; SSet.opFunctor; SSet.opEquivalence; SimplexCategory.revEquivalence",
+   "date": "2026-10-17",
+   "verdict": "no match: SSet.opEquivalence is the categorical involution only; Op.lean explicitly lists the realization identification as TODO, and does not provide the subdivision weak-equivalence zigzag"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial set opposite has natural weak equivalence zigzag through subdivision and Ex infinity preserving products",
+   "results": "SSet.opEquivalence; CategoryTheory.hoFunctor.isIso_prodComparison_stdSimplex; SSet.KanComplex",
+   "date": "2026-10-17",
+   "verdict": "no match: no complete zigzag statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.opEquivalence",
+   "results": "SSet.opEquivalence and related declarations in Mathlib/AlgebraicTopology/SimplicialSet/Op.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: SSet.opEquivalence is the categorical involution only; Op.lean explicitly lists the realization identification as TODO, and does not provide the subdivision weak-equivalence zigzag"
+  },
+  {
+   "tool": "grep",
+   "query": "opFunctor|subdivision|ExInfty|ExInfinity|[Ss]d.*\\.op|[Rr]ealiz.*op",
+   "results": "Mathlib/AlgebraicTopology/SimplicialSet/Op.lean:42; Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean:45-54; no opposite-subdivision comparison",
+   "date": "2026-10-17",
+   "verdict": "no match: SSet.opEquivalence is the categorical involution only; Op.lean explicitly lists the realization identification as TODO, and does not provide the subdivision weak-equivalence zigzag"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial opposite preserves weak equivalences via barycentric coordinate reversal and subdivision gives a natural all Kan Ex infinity zigzag compatible with path pullbacks",
+   "results": "{\"t\": \"2026-10-17T09:32:17Z\", \"tool\": \"leanfinder\", \"query\": \"Simplicial opposite preserves weak equivalences via barycentric coordinate reversal and subdivision gives a natural all Kan Ex infinity zigzag compatible with path pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.opEquivalence\", \"SSet.opEquivalence_functor\", \"HomotopicalAlgebra.instWeakEquivalenceOppositeOp\", \"SSet.op\", \"HomotopicalAlgebra.weakEquivalences_unop_iff\", \"HomotopicalAlgebra.weakEquivalences_op_iff\", \"HomotopicalAlgebra.instHasTwoOutOfThreePropertyOppositeWeakEquivalences\", \"SSet.opFunctor\"], \"digest\": \"e7877cc971ed78cf\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits; they state path-object constructions, categorical pullbacks, or the opposite categorical involution, not the specified Kan path-pullback or natural subdivision zigzag theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Opposite simplicial sets have naturally homeomorphic realizations and a natural subdivision zigzag of weak equivalences with all Kan replacements",
+   "results": "{\"t\": \"2026-10-17T09:32:16Z\", \"tool\": \"leansearch\", \"query\": \"Opposite simplicial sets have naturally homeomorphic realizations and a natural subdivision zigzag of weak equivalences with all Kan replacements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.op\", \"SSet.opEquivalence\", \"SimplicialObject.opEquivalence\", \"SSet.opObjEquiv\", \"MulOpposite.opHomeomorph\", \"SSet.opFunctor\", \"SimplicialObject.opFunctor\", \"SSet.op_map\"], \"digest\": \"1ee9f868aa9e3414\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: read the hits; they state path-object constructions, categorical pullbacks, or the opposite categorical involution, not the specified Kan path-pullback or natural subdivision zigzag theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-infinity-relative-cone-equivalence",
+  "date": "2026-10-17",
+  "group": "Q130"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2 of prop-coef-integral-exceptional-adjoint: derived coefficient adjunction, via the stable enhancement and finite pushout grid of lem-coef-suspension-square-comparison; local cone filling in the mapping-space universal property of pointwise Kan diagrams. Proposition 7.1.6.9 (02X4); Proposition 7.2.2.9 (02XT), Corollary 7.2.2.2 and Corollary 7.2.1.13 specialized to indexing equivalences; Corollary 7.2.2.5 (02XV) and the mapping-space criterion, Proposition 5.1.2.1 (01TL), and the equivalence criterion, Proposition 5.1.1.9 (01TB); opposite duality of Definition 7.1.6.1 and Remark 7.1.6.2, using the natural pinch comparisons of 4.6.5.10. Supporting opposite mapping-space comparison from old item step 7: reversal of subdivision flags and realization coordinates, all-Kan natural zigzags, and interval reversal.",
+   "via": [
+    "lem-coef-infinity-relative-cone-equivalence",
+    "lem-coef-infinity-relative-kan-existence",
+    "lem-coef-infinity-kan-mapping-restriction",
+    "lem-coef-infinity-finite-poset-kan-extension",
+    "lem-coef-suspension-square-comparison",
+    "lem-coef-pointed-model-stability",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
