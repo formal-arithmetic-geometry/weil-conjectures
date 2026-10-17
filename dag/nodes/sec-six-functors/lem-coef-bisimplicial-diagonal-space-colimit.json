@@ -271,5 +271,34 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b85898b73",
+  "group": "Q117",
+  "result": "fix",
+  "note": "Read the node, its six proof steps, the source place (HTT A.2.9.21/29-31, 4.2.4.1), the dependency declarations (Enhanced cones, FiniteReedy diagram/object/transformation/IsLocalization, simplicial_model_nerve_localization, BousfieldKan.diagonal), the module and the report (Worker report and Second reading by Q117 both present). Two H3 faults. (1) The cocone was not identified with the coend cocone: any colimiting cocone with apex q(diag Z) was accepted, and the degree-zero leg was not specified. (2) The naturality apex edge d was existential, so the clause followed from colimiting alone and did not say q(diag f). Fixed in fixes/BisimplicialDiagonalSpaceColimit.lean: new coendInclusion (real data, naturality proved); new legs field, a Composes 2-simplex q(fst) then leg_n equal to q(coendInclusion Z n), which gives the n=0 clause; CoconeNaturality takes d explicitly and naturality sets it to q(whiskerLeft diag (uncurry.map f)); the docstring now has the node's six proof steps. The theorem signature and lean.statement are unchanged (checked verbatim). The lean-record.json adds coendInclusion to declarations; report.md has a section on the fix. Delivered and fixed modules compile clean with nt_compile.py per file. Edge cases checked: empty rows, n=0, r=0, universe u with apex universe u+1. The existential localization matches the dependency interface and is accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.BisimplicialDiagonalSpaceColimit",
+  "declaration": "SSet.BisimplicialDiagonalSpaceColimit.bisimplicial_diagonal_space_colimit",
+  "file": "lean/Sheaf/AlgebraicTopology/BisimplicialDiagonalSpaceColimit.lean",
+  "statement": "theorem bisimplicial_diagonal_space_colimit : ∃ (C : SSet.{u + 1}) (q : largeNerve.{u + 1, u, u + 1} SSet.{u} ⟶ C), IsLocalization (weakEquivalences SSet.{u}) q ∧ Nonempty (DiagonalColimitFamily q)",
+  "branch": "newtargets-dag",
+  "by": "Q117",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "SSet.BisimplicialDiagonalSpaceColimit.CoendPoint",
+   "SSet.BisimplicialDiagonalSpaceColimit.CoendRelation",
+   "SSet.BisimplicialDiagonalSpaceColimit.CoendDegree",
+   "SSet.BisimplicialDiagonalSpaceColimit.coendInclusion",
+   "SSet.BisimplicialDiagonalSpaceColimit.coconeEdge",
+   "SSet.BisimplicialDiagonalSpaceColimit.CoconeNaturality",
+   "SSet.BisimplicialDiagonalSpaceColimit.DiagonalColimitFamily",
+   "SSet.BisimplicialDiagonalSpaceColimit.bisimplicial_diagonal_space_colimit"
+  ],
+  "fixed_by": "NT-stage2-cc-b85898b73"
  }
 }
