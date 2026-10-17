@@ -49,12 +49,11 @@ theorem singleComplexOpenComparison_union
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
     (sq : IsPullback g' f' f g) [IsAffine S] [IsAffine S']
     [QuasiCompact f] [QuasiSeparated f]
-    (K : schemeDerivedCategory X) (hK : schemeDerivedQCohProperty X K)
-    (K' : schemeDerivedCategory X') (hK' : schemeDerivedQCohProperty X' K')
+    (K : schemeDerivedCategory X)
+    (K' : schemeDerivedCategory X')
     (φ : (derivedPullback g').obj K ⟶ K')
     (U V : X.Opens)
     (hUqc : IsCompact (U : Set X)) (hVqc : IsCompact (V : Set X))
-    (hUVqc : IsCompact ((U ⊓ V : X.Opens) : Set X))
     (hU : IsIso (singleComplexOpenComparison f f' g g' sq.w K K' φ U))
     (hV : IsIso (singleComplexOpenComparison f f' g g' sq.w K K' φ V))
     (hUV : IsIso (singleComplexOpenComparison f f' g g' sq.w K K' φ (U ⊓ V))) :
@@ -85,14 +84,6 @@ theorem singleComplexOpenComparison_union
   have : QuasiCompact W.ι := inferInstance
   have : QuasiCompact fW := inferInstance
   have : QuasiSeparated fW := inferInstance
-  have hKW : schemeDerivedQCohProperty W.toScheme KW :=
-    (derivedPullback_tensor_preserve_QCoh W.ι).1 K hK
-  have hKW' : schemeDerivedQCohProperty (pullback g' W.ι) KW' :=
-    (derivedPullback_tensor_preserve_QCoh (pullback.fst g' W.ι)).1 K' hK'
-  have hAqc : IsCompact (A : Set W.toScheme) := W.ι.isCompact_preimage hUqc
-  have hBqc : IsCompact (B : Set W.toScheme) := W.ι.isCompact_preimage hVqc
-  have hABqc : IsCompact ((A ⊓ B : W.toScheme.Opens) : Set W.toScheme) := by
-    simpa only [A, B, Scheme.Hom.preimage_inf] using W.ι.isCompact_preimage hUVqc
   have hcover : A ⊔ B = ⊤ := by
     change (W.ι ⁻¹ᵁ U) ⊔ (W.ι ⁻¹ᵁ V) = ⊤
     rw [← Scheme.Hom.preimage_sup]
@@ -108,7 +99,7 @@ theorem singleComplexOpenComparison_union
     simpa only [A, B, Scheme.Hom.preimage_inf] using
       (singleComplexOpenComparison_nested_isIso_iff f f' g g' sq.w K K' φ
         W (U ⊓ V) (inf_le_left.trans le_sup_left)).mp hUV
-  exact relativeMayerVietoris fW fW' g gW' sqW KW hKW KW' hKW' φW
-    A B hAqc hBqc hABqc hcover hA hB hAB
+  exact relativeMayerVietoris fW fW' g gW' sqW KW KW' φW
+    A B hcover hA hB hAB
 
 end AlgebraicGeometry

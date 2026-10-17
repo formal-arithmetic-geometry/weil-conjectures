@@ -62,10 +62,7 @@ theorem relativeMV_boundary_completion
     (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')
     (φ : (derivedPullback g').obj K ⟶ K')
     [IsAffine S] [IsAffine S'] [QuasiCompact f] [QuasiSeparated f]
-    (hK : schemeDerivedQCohProperty X K) (hK' : schemeDerivedQCohProperty X' K')
-    (U V : X.Opens)
-    (hUqc : IsCompact (U : Set X)) (hVqc : IsCompact (V : Set X))
-    (hUVqc : IsCompact ((U ⊓ V : X.Opens) : Set X)) (hcover : U ⊔ V = ⊤) :
+    (U V : X.Opens) (hcover : U ⊔ V = ⊤) :
     let a := relativeMVLocalArrow f f' g g' hpull K K' φ
     let aX := relativeMVGlobalArrow f f' g g' hpull K K' φ
     ∃ (δ : (a (U ⊓ V)).left ⟶ aX.left⟦(1 : ℤ)⟧)
@@ -77,8 +74,8 @@ theorem relativeMV_boundary_completion
       δ ≫ aX.hom⟦(1 : ℤ)⟧' = (a (U ⊓ V)).hom ≫ δ' := by
   classical
   obtain ⟨P, P', m, e₁, e₂, e₃, e₁', e₂', e₃', hP, hP', hf, hg, hf', hg', h₁, h₃⟩ :=
-    relativeMV_ses_presentation f f' g g' hpull K K' φ hK hK'
-      U V hUqc hVqc hUVqc hcover
+    relativeMV_ses_presentation f f' g g' hpull K K' φ
+      U V hcover
   let δ := e₃.inv ≫ DerivedCategory.triangleOfSESδ hP ≫ e₁.hom⟦(1 : ℤ)⟧'
   let δ' := e₃'.inv ≫ DerivedCategory.triangleOfSESδ hP' ≫ e₁'.hom⟦(1 : ℤ)⟧'
   refine ⟨δ, δ', ?_, ?_, ?_⟩

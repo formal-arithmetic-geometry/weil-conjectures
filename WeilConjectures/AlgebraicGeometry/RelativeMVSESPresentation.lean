@@ -66,10 +66,7 @@ theorem relativeMV_ses_presentation
     (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')
     (φ : (derivedPullback g').obj K ⟶ K')
     [IsAffine S] [IsAffine S'] [QuasiCompact f] [QuasiSeparated f]
-    (hK : schemeDerivedQCohProperty X K) (hK' : schemeDerivedQCohProperty X' K')
-    (U V : X.Opens)
-    (hUqc : IsCompact (U : Set X)) (hVqc : IsCompact (V : Set X))
-    (hUVqc : IsCompact ((U ⊓ V : X.Opens) : Set X)) (hcover : U ⊔ V = ⊤) :
+    (U V : X.Opens) (hcover : U ⊔ V = ⊤) :
     let a := relativeMVLocalArrow f f' g g' hpull K K' φ
     let aX := relativeMVGlobalArrow f f' g g' hpull K K' φ
     ∃ (P P' : ShortComplex (CochainComplex
@@ -92,8 +89,8 @@ theorem relativeMV_ses_presentation
       DerivedCategory.Q.map m.τ₃ ≫ e₃'.hom = e₃.hom ≫ (a (U ⊓ V)).hom := by
   obtain ⟨A, B, A', B', t, t', α, β, hc, e₁, e₂, e₃, e₁', e₂', e₃',
     hf, hg, hf', hg', h₁, h₃⟩ :=
-    relativeMV_cone_presentation f f' g g' hpull K K' φ hK hK'
-      U V hUqc hVqc hUVqc hcover
+    relativeMV_cone_presentation f f' g g' hpull K K' φ
+      U V hcover
   obtain ⟨P, P', m, d₁, d₂, d₃, d₁', d₂', d₃', hP, hP',
     kf, kg, kf', kg', k₁, k₃⟩ :=
     cone_diagram_ses_presentation A B A' B' t t' α β hc

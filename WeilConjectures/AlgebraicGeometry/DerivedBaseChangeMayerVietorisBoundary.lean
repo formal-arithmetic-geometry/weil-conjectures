@@ -80,10 +80,8 @@ theorem derivedBaseChange_mayerVietoris_connectingSquare
     [QuasiCompact f] [QuasiSeparated f]
     (hsq : IsPullback g' f' f g)
     (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')
-    (hK : schemeDerivedQCohProperty X K) (hK' : schemeDerivedQCohProperty X' K')
     (ψ : (derivedPullback g').obj K ⟶ K')
-    (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))
-    (hUV : IsCompact ((U ⊓ V : X.Opens) : Set X)) (hcover : U ⊔ V = ⊤) :
+    (U V : X.Opens) (hcover : U ⊔ V = ⊤) :
     ∃ (δ : (schemeDerivedDirectImage (U ⊓ V).ι).obj
           ((schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory.obj K) ⟶ K⟦(1 : ℤ)⟧)
       (δ' : (schemeDerivedDirectImage (g' ⁻¹ᵁ (U ⊓ V)).ι).obj
@@ -121,9 +119,9 @@ theorem derivedBaseChange_mayerVietoris_connectingSquare
     (Scheme.Hom.preimage_inf g').symm
     (by rw [← Scheme.Hom.preimage_sup, hcover, Scheme.Hom.preimage_top]) K'
   obtain ⟨hT, hT', hF, hG⟩ :=
-    mvBoundary_canonical_data f f' g g' hsq K K' U V hU hV hUV hcover hK hK' ψ
+    mvBoundary_canonical_data f f' g g' K K' U V hcover
   refine ⟨δ, δ', mvCanonicalSourceShift f g, mvCanonicalTargetShift f',
     hT, hT', hF, hG, ?_⟩
-  exact mvBoundary_equation f f' g g' hsq K K' U V hU hV hUV hcover hK hK' ψ
+  exact mvBoundary_equation f f' g g' hsq K K' U V hcover ψ
 
 end AlgebraicGeometry
