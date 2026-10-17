@@ -12,9 +12,202 @@
   "def-pc-flat-sheaf-modules",
   "def-pc-kflat-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the abelian category $\\mathcal A=\\operatorname{Mod}(\\mathcal O)$ [def-weil-sheaf-of-modules-category]. For any filtered module $E$ with the fixed bounds, choose flat epimorphisms $B_j\\twoheadrightarrow F^jE$ for $a\\le j\\le b$, using [lem-pc-sites-modules-functorial-flat-cover]. Put $Q(E)=\\bigoplus_{j=a}^b B_j$ with $F^pQ(E)=\\bigoplus_{j\\ge p}B_j$ and map it to $E$ by summing the chosen maps followed by inclusions. This is filtration preserving. Its restriction to $F^p$ is an epimorphism since the summand $B_p$ already maps epimorphically to $F^pE$; for $p<a$ use $B_a$, and for $p>b$ both sides are zero. Its grade $j$ is $B_j$. No lifting property of a flat module is asserted: this construction uses covers of the filtration steps, not lifts of maps from graded quotients.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-pc-sites-modules-functorial-flat-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EW (lemma-module-quotient-flat), applied to the finitely many filtration steps; explicit finite-sum construction"
+   }
+  },
+  {
+   "text": "Choose $N$ with $M^n=0$ for $n>N$. Set $P^n=0$ and $f^n=0$ there. We construct $P^n,d_P^n,f^n$ by descending induction. The induction invariant, in addition to the chain-map equations already defined, is that $Z^{n+1}(F^pP)\\to Z^{n+1}(F^pM)$ is an epimorphism for every $p$; it holds initially in degree $N+1$, where both are zero. Here $Z^i$ denotes the kernel of the outgoing differential. Define the module $T^n$ by the equations\n$$T^n=\\{(x,y)\\in M^n\\oplus P^{n+1}:d_P^{n+1}y=0,\\ f^{n+1}y=d_M^nx\\},\\qquad F^pT^n=T^n\\cap(F^pM^n\\oplus F^pP^{n+1}).$$\nThis is an intersection of kernels in $\\mathcal A$ and has the same finite filtration bounds. The projection $F^pT^n\\to F^pM^n$ is an epimorphism: it is the pullback of the epimorphism $Z^{n+1}(F^pP)\\to Z^{n+1}(F^pM)$ along $d_M^n$, which lands in the latter kernel because $d_M^2=0$. This is the elementary pullback-of-an-epimorphism calculation in an abelian category: the kernel of the pullback projection identifies with the kernel of the original epimorphism and its image is the entire target.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 077J (lemma-resolution-by-direct-sums-extensions-by-zero), bounded-above resolution construction made explicit for a fixed finite flag"
+   }
+  },
+  {
+   "text": "Apply the finite-sum cover of step 1 to $T^n$, using flat covers of each $F^jT^n$ from [lem-pc-sites-modules-functorial-flat-cover], and call the source $P^n$. Compose $P^n\\to T^n$ with its first and second projections to define $f^n$ and $d_P^n$. The two defining equations of $T^n$ give $d_P^{n+1}d_P^n=0$ and $f^{n+1}d_P^n=d_M^nf^n$. All maps preserve every $F^p$, and $F^pP^n\\to F^pM^n$ is epimorphic by step 2. The subobject $Z^n(F^pM)$ maps into $F^pT^n$ by $x\\mapsto(x,0)$. Pulling back the epimorphism $F^pP^n\\to F^pT^n$ along this map gives an epimorphism onto $Z^n(F^pM)$; its source maps into $Z^n(F^pP)$ since the second coordinate is zero. Thus the cycle epimorphism required for the next induction step holds. Induction on $N-n\\in\\mathbf N$ now defines the whole complex, with no choice at an infinite upper end. Every $P^n$ has the required split-flat finite filtration and $P$ vanishes above $N$.",
+   "uses": [
+    "lem-pc-sites-modules-functorial-flat-cover",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 077J (lemma-resolution-by-direct-sums-extensions-by-zero), downward construction using Tag 03EW at each degree"
+   }
+  },
+  {
+   "text": "Let $K=\\ker(f:P\\to M)$ with its induced filtration. For each $p,n$, a cycle $z$ in $F^pK^{n+1}$ defines the pair $(0,z)$ in $F^pT^n$. Pulling $F^pP^n\\twoheadrightarrow F^pT^n$ back to these pairs gives epimorphic lifts $x$ with $f^nx=0$ and $d_P^nx=z$. Consequently $d:F^pK^n\\to Z^{n+1}(F^pK)$ is an epimorphism, and $F^pK$ is acyclic. These are image/kernel calculations, so the lifts mean epimorphic base changes, not surjectivity on sections of an arbitrary site object. The sequence $0\\to F^pK\\to F^pP\\to F^pM\\to0$ is termwise short exact. Its cohomology sequence [lem-weil-pbc-complex-ses-homology-long-exact] shows that $F^pf$ is a quasi-isomorphism for every $p$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 077J (lemma-resolution-by-direct-sums-extensions-by-zero), acyclic-kernel verification for every filtration step"
+   }
+  },
+  {
+   "text": "Termwise strict surjectivity of $f$ implies\n$$0\\to\\operatorname{gr}^pK\\to\\operatorname{gr}^pP\\to\\operatorname{gr}^pM\\to0.$$\nIndeed, if a representative $x\\in F^pP$ maps into $F^{p+1}M$, use the epimorphism $F^{p+1}P\\to F^{p+1}M$ to subtract a lift; the difference lies in $F^pK$. The kernel of $F^pK\\to\\operatorname{gr}^pP$ is precisely $F^{p+1}K$. These statements again mean images in the abelian category. Apply [lem-weil-pbc-complex-ses-homology-long-exact] first to $0\\to F^{p+1}K\\to F^pK\\to\\operatorname{gr}^pK\\to0$: both filtration steps of $K$ are acyclic by step 4, so its grade is acyclic. Apply it a second time to the displayed sequence: $\\operatorname{gr}^pf$ is a quasi-isomorphism. This proves that the constructed strict epimorphism is a filtered quasi-isomorphism, rather than merely an underlying quasi-isomorphism.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05S1 (lemma-filtered-acyclic), graded quasi-isomorphisms; direct strict-kernel calculation and the long exact cohomology sequence"
+   }
+  },
+  {
+   "text": "In each degree the underlying module $P^n$ and every $(F^pP)^n$ are finite sums of the flat summands chosen in step 3, and $(\\operatorname{gr}^pP)^n$ is one of those summands. A finite sum is flat because tensor distributes over finite sums [lem-pc-sheaf-modules-tensor-closed], and the sum of a finite family of exact sequences is exact (kernels and images are their finite sums). All these complexes vanish above $N$. Therefore [lem-pc-bounded-above-flat-kflat-site] makes $P$, every $F^pP$, and every $\\operatorname{gr}^pP$ K-flat. In particular the two K-flatness assertions in the item hold. This uses the bounded-above theorem, not the existence theorem for unbounded K-flat replacements.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ (lemma-bounded-flat-K-flat); tensor additivity from Tag 03EO (lemma-internal-hom-adjoint-tensor)"
+   }
+  },
+  {
+   "text": "Let $\\mathcal H$ be the homotopy category of bounded-above complexes with filtrations in $[a,b]$. To check the cone-calculus hypotheses, form the dg category with degree-$r$ maps $\\prod_i\\operatorname{Hom}_F(X^i,Y^{i+r})$ and differential $\\partial h=d_Yh-(-1)^rhd_X$. Closed degree-zero maps are filtered chain maps and boundaries are filtered homotopies. Zero and direct sums give (A) of [lem-coef-dg-abc-homotopy-category-triangulated]. The shift has $X[r]^i=X^{i+r}$ and $d_{X[r]}=(-1)^rd_X$; it sends a degree-$s$ map $h$ to $(-1)^{rs}h$ with shifted indices. This commutes with $\\partial$, preserves composition, and composes by addition of shifts. Reindexing identifies $\\operatorname{Hom}_F(X,Y[r])$ with $\\operatorname{Hom}_F(X,Y)[r]$: in degree $s$ both differentials are $(-1)^rd_Yh-(-1)^shd_X$. This gives (B). For (C), take $C(f)^i=Y^i\\oplus X^{i+1}$ with the direct-sum filtration and differential $(y,x)\\mapsto(d_Yy+fx,-d_Xx)$. With section $s(x)=(0,x)$ and projection $\\pi(y,x)=y$, $\\pi\\partial s=f$, so this graded splitting has boundary $f[1]$ as (C) requires. These complexes remain bounded above and in the fixed interval. Thus that theorem makes $\\mathcal H$ triangulated with cone triangles. Increase the universe to make this dg category small.",
+   "uses": [
+    "lem-coef-dg-abc-homotopy-category-triangulated",
+    "def-sp-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09QJ (situation-ABC), 09QY (proposition-ABC-homotopy-category-triangulated), and 09QU (lemma-cone-homotopy)"
+   }
+  },
+  {
+   "text": "Let $\\mathcal S\\subset\\mathcal H$ consist of graded-acyclic complexes. Taking grades commutes with shifts, direct sums, filtered homotopies, and the displayed cone, since the cone filtration is a direct sum. A homotopy equivalence therefore induces homotopy equivalences on all grades, so $\\mathcal S$ is replete. If $X,Y\\in\\mathcal S$, then each $\\operatorname{gr}^pC(f)$ is the cone of a map between acyclic complexes. The split short exact cone sequence and [lem-weil-pbc-complex-ses-homology-long-exact] make it acyclic. Thus $\\mathcal S$ is a full triangulated subcategory containing zero. By [lem-pur-quasi-iso-cone-acyclic], the class of arrows whose cone is in $\\mathcal S$ is exactly the filtered quasi-isomorphisms $W$. Apply [lem-trf-triangulated-subcategory-cone-system]: $W$ admits a right calculus of fractions on $\\mathcal H$. No assertion about unbounded filtrations or an abelian category of filtered objects is needed.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients",
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "lem-trf-triangulated-subcategory-cone-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05S1 (lemma-filtered-acyclic) and 05RG (lemma-construct-multiplicative-system), restricted to the fixed interval and bounded-above complexes"
+   }
+  },
+  {
+   "text": "Let $\\mathcal B$ be the full subcategory of $\\mathcal H$ on bounded-above complexes whose filtered modules are degreewise split finite sums of flat sheaves in the stipulated grades. Its maps are all filtered chain maps modulo filtered homotopies, exactly the full subcategory meant in [lem-trf-right-fraction-dense-subcategory]. Steps 1–5 give a denominator $P\\to M$ with $P\\in\\mathcal B$ for every $M\\in\\mathcal H$; step 8 supplies the right calculus on $\\mathcal H$. That lemma now gives the equivalence\n$$\\mathcal B[(W\\cap\\operatorname{Arrows}(\\mathcal B))^{-1}]\\longrightarrow\\mathcal H[W^{-1}].$$\nIt remains to identify $\\mathcal H[W^{-1}]$ with the bounded-above finite filtered derived category of the statement, the localization of the category $\\mathcal K$ of filtered complexes and filtered chain maps at $W$. For a filtered complex $X$ let $\\operatorname{Cyl}X$ have terms $X^n\\oplus X^{n+1}\\oplus X^n$, direct-sum filtration and differential $(x,y,z)\\mapsto(dx+y,-dy,dz-y)$; it is bounded above with filtration in $[a,b]$. The projection $\\pi(x,y,z)=x+z$ and the inclusions $i_0(x)=(x,0,0)$, $i_1(z)=(0,0,z)$ are filtered chain maps with $\\pi i_0=\\pi i_1=1$, and $h(x,y,z)=(0,-z,0)$ is a filtered homotopy with $1-i_0\\pi=dh+hd$. Thus $\\pi$ is a filtered homotopy equivalence, so on every grade a homotopy equivalence, so $\\pi\\in W$, and $i_0,i_1$ have the same image $\\pi^{-1}$ in $\\mathcal K[W^{-1}]$. If $f-g=dk+kd$ with $k$ filtered, then $H(x,y,z)=fx+ky+gz$ is a filtered chain map $\\operatorname{Cyl}X\\to Y$ (its chain-map equation is exactly $f-g=dk+kd$) with $Hi_0=f$, $Hi_1=g$; hence $f$ and $g$ agree in $\\mathcal K[W^{-1}]$. So $\\mathcal K\\to\\mathcal K[W^{-1}]$ factors through the quotient $\\mathcal K\\to\\mathcal H$, and $W$ is well defined on homotopy classes since homotopic maps induce the same maps on graded cohomology. By clauses (1)--(3) of [lem-weil-pbc-localization-universal-property] applied to both localizations, the induced functors $\\mathcal H[W^{-1}]\\leftrightarrows\\mathcal K[W^{-1}]$ are mutually inverse up to unique isomorphism; so the category on the right is that derived category. The result localizes the split-flat models as well: it does not claim that maps out of a flat sheaf lift across arbitrary epimorphisms, or that flat models themselves are filtered K-projective.",
+   "uses": [
+    "lem-trf-right-fraction-dense-subcategory",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0GSL (lemma-localization-subcategory), right-fraction restriction argument"
+   }
+  },
+  {
+   "text": "For an inclusion $[a,b]\\subseteq[a',b']$, a filtered complex with the smaller bounds is the same filtered complex with the wider permitted bounds; no reindexing is performed. This inclusion sends split-flat objects to split-flat objects (use zero summands in the new grades) and preserves filtered quasi-isomorphisms. The square of the two inclusions of split-flat homotopy categories into all filtered homotopy categories commutes before localization. Its induced square commutes up to the unique comparison isomorphism after localization by [lem-weil-pbc-localization-universal-property], since both composites have that same precomposition. The equivalences of step 9 are precisely the functors induced by these inclusions, so they are compatible with interval inclusions. The same uniqueness makes these comparisons coherent for nested intervals.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG (lemma-properties-left-localization), universal property; natural-transformation clause of the cited node"
+   }
+  },
+  {
+   "text": "For the tensor assertion, exact filtered colimits and all small colimits in $\\operatorname{Mod}(\\mathcal O)$ are supplied by [lem-pur-ringed-site-grothendieck-abelian]. In particular, countable direct sums are exact: write the sum as the filtered colimit over finite subsets of the index set of the finite sums, take the corresponding finite sums of a family of short exact sequences, and apply exactness of that filtered colimit. The index category of finite subsets is small in the module universe. It follows that taking a quotient or a kernel in a countable direct sum of short exact sequences gives the direct sum of the corresponding quotients or kernels. This justifies passage to graded quotients in the direct-sum total complexes below; no finite-dimensionality or boundedness assumption on $W$ is imposed.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB (lemma-limits-colimits), exact filtered colimits; direct sums expressed as filtered colimits of finite sums"
+   }
+  },
+  {
+   "text": "Write the degreewise splitting as $P^i=\\bigoplus_{j=a}^bB_j^i$. For each $i,k,r$, the convolution submodule of $P^i\\otimes W^k$ is\n$$\\bigoplus_{j=a}^b B_j^i\\otimes F^{r-j}W^k.$$\nTo see this, expand $F^pP^i=\\bigoplus_{j\\ge p}B_j^i$. The terms with $p+q=r$ and $j\\ge p$ lie in the displayed summand because $q=r-p\\ge r-j$; conversely that summand occurs for $p=j,q=r-j$. Flatness [def-pc-flat-sheaf-modules] makes $B_j^i\\otimes F^qW^k\\to B_j^i\\otimes W^k$ injective and gives quotient $B_j^i\\otimes\\operatorname{gr}^qW^k$. Thus the $r$-th grade in bidegree $(i,k)$ is $\\bigoplus_j B_j^i\\otimes\\operatorname{gr}^{r-j}W^k$. Finite tensor additivity is [lem-pc-sheaf-modules-tensor-closed]; step 11 permits taking this quotient through the countable sum $i+k=n$. These are degreewise decompositions; no splitting of complexes is assumed.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03ER (definition-flat), tensor exactness; direct verification of the convolution associated grade, with total-complex convention Tag 06YL"
+   }
+  },
+  {
+   "text": "The degreewise identification of step 12 is an identification of complexes:\n$$\\operatorname{gr}^r\\operatorname{Tot}(P\\otimes W)\\cong\\bigoplus_{j=a}^b\\operatorname{Tot}(\\operatorname{gr}^jP\\otimes\\operatorname{gr}^{r-j}W).$$\nIndeed, $d_P$ sends a summand of grade $j$ only to grades $l\\ge j$. If $l>j$, its tensor with $F^{r-j}W$ lies in filtration $r+1$ since $l+(r-j)\\ge r+1$, so it vanishes in grade $r$. The surviving diagonal block is exactly $d_{\\operatorname{gr}^jP}$, while the other differential is $(-1)^i d_W$ on cochain bidegree $(i,k)$, as in [def-pc-tensor-complex-sheaves]. This checks the differential without choosing a chain-compatible splitting. Every $\\operatorname{gr}^{r-j}W$ is acyclic by hypothesis, and every $\\operatorname{gr}^jP$ is K-flat by step 6. The definition [def-pc-kflat-complex] makes each summand on the right acyclic; apply the explicit cochain swap of step 14 to put the K-flat factor second. That swap and its chain-map check are independent of the acyclicity conclusion. A finite sum of acyclic complexes is acyclic since its cycles and boundaries are the finite sums of the cycles and boundaries. This proves the assertion with $P$ first.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-kflat-complex",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YN (definition-K-flat), and the explicit grade calculation for the convolution filtration"
+   }
+  },
+  {
+   "text": "The symmetry of sheaf tensor [lem-pc-sheaf-modules-tensor-closed] induces a chain isomorphism $\\operatorname{Tot}(P\\otimes W)\\to\\operatorname{Tot}(W\\otimes P)$, sending a tensor in bidegree $(i,k)$ to $(-1)^{ik}$ times its swap. With the total differential of [def-pc-tensor-complex-sheaves], the two terms of the chain-map equation have signs $(-1)^{(i+1)k}$ and $(-1)^i(-1)^{i(k+1)}$ after swapping, which equal the corresponding signs $(-1)^{ik+k}$ and $(-1)^{ik}$ on the other side. This isomorphism exchanges the convolution summand indexed by $(p,q)$ with the one indexed by $(q,p)$, so it preserves each $F^r$ and induces isomorphisms on grades. The reversed tensor product is therefore graded acyclic as well. Empty or zero complexes cause no exception, and for $a=b$ the construction and all formulas have just one filtration grade.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YL, tensor total-complex convention; Koszul symmetry calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "def-weil-sheaf-of-modules-category",
+  "lem-coef-dg-abc-homotopy-category-triangulated",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-sites-modules-functorial-flat-cover",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-trf-right-fraction-dense-subcategory",
+  "lem-trf-triangulated-subcategory-cone-system",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit fixed-finite-flag adaptation of the bounded-above construction underlying Tag 077J and Tag 06YQ; localization by the right-fraction argument in Tag 0GSL; convolution grades checked directly. Varshavsky §5.2.1(b) provides the filtered-tensor motivation, not this resolution proof."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -64,10 +257,66 @@
    "results": "{\"t\": \"2026-10-17T05:32:27Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded above complex of finite flags of sheaves has a strict surjective resolution by degreewise split flags of flat sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"CochainComplex.cm5b.instIsStrictlyGEI\", \"SheafOfModules.isFinitePresentation\", \"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\", \"SheafOfModules.IsFinitePresentation\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"CochainComplex.cm5b\"], \"digest\": \"a7bd0794a8597da7\"}",
    "date": "2026-10-17",
    "verdict": "no match: the results are Grothendieck sheaf-category instances, ordinary injective factorizations, finite presentation, or ordinary quasi-isomorphism fractions; none constructs a strict finite-filtered split-flat resolution."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded above finite filtered complex of module sheaves strict flat split resolution K flat",
+   "results": "8 hits: CochainComplex.IsKProjective, CochainComplex.isKProjective_of_projective, CochainComplex.cm5b.instIsStrictlyGEI, Module.Flat.iff_forall_exists_factorization, Module.Flat.of_forall_exists_factorization, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, CochainComplex.isKInjective_of_injective",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary K-projective/K-injective and ring-module flatness criteria do not give the finite filtered sheaf replacement or localization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Filtration\"",
+   "results": "12 hits: Ideal.Filtration, Ideal.Filtration.Stable, Ideal.Filtration.instBot, Ideal.Filtration.instCompleteLattice, Ideal.Filtration.instInfSet, Ideal.Filtration.instInhabited, Ideal.Filtration.instMax, Ideal.Filtration.instMin",
+   "date": "2026-10-17",
+   "verdict": "no match: ideal-adic filtrations of ring modules, not filtered sheaf complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*resolution|filtered.*flat|filtered.*tensor",
+   "results": "11 hits: Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean, Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Filtered/Flat.lean, Mathlib/CategoryTheory/Filtered/Flat.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: filtered-colimit and representably flat functor declarations, not filtered resolutions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite filtered bounded above complex of sheaves admits a strict epimorphic split flat resolution",
+   "results": "8 hits: CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective, DerivedCategory.right_fac_of_isStrictlyLE, CategoryTheory.ShortComplex.Splitting.splitEpi_g, CategoryTheory.ShortComplex.Splitting.epi_g, HomologicalComplex.instHasFilteredColimitsOfSize, Module.Flat.rTensor_shortComplex_exact, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, HomologicalComplex.ab5OfSize",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary projective-derived representatives, flat ring-module tensor exactness and filtered colimits are insufficient for the stated filtered-sheaf theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded above finite filtered complex of module sheaves strict flat split resolution K flat",
+   "results": "8 hits: CochainComplex.IsKProjective, CochainComplex.isKProjective_of_projective, CochainComplex.cm5b.instIsStrictlyGEI, Module.Flat.iff_forall_exists_factorization, Module.Flat.of_forall_exists_factorization, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, CochainComplex.isKInjective_of_injective",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary K-projective/K-injective and ring-module flatness criteria do not give the finite filtered sheaf replacement or localization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Filtration\"",
+   "results": "12 hits: Ideal.Filtration, Ideal.Filtration.Stable, Ideal.Filtration.instBot, Ideal.Filtration.instCompleteLattice, Ideal.Filtration.instInfSet, Ideal.Filtration.instInhabited, Ideal.Filtration.instMax, Ideal.Filtration.instMin",
+   "date": "2026-10-17",
+   "verdict": "no match: ideal-adic filtrations of ring modules, not filtered sheaf complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*resolution|filtered.*flat|filtered.*tensor",
+   "results": "11 hits: Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean, Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Filtered/Flat.lean, Mathlib/CategoryTheory/Filtered/Flat.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: filtered-colimit and representably flat functor declarations, not filtered resolutions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite filtered bounded above complex of sheaves admits a strict epimorphic split flat resolution",
+   "results": "8 hits: CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective, DerivedCategory.right_fac_of_isStrictlyLE, CategoryTheory.ShortComplex.Splitting.splitEpi_g, CategoryTheory.ShortComplex.Splitting.epi_g, HomologicalComplex.instHasFilteredColimitsOfSize, Module.Flat.rTensor_shortComplex_exact, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, HomologicalComplex.ab5OfSize",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary projective-derived representatives, flat ring-module tensor exactness and filtered colimits are insufficient for the stated filtered-sheaf theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-filtered-operations-hom",
@@ -86,5 +335,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-finite-filtered-flat-resolution",
+  "worker": "stage1",
+  "summary": "Constructed strict split-flat replacements by downward induction with an explicit cycle-pair pullback, verified acyclic filtered kernels and graded quasi-isomorphisms, reused site K-flatness and generic cone calculus, and isolated only the categorical full-subcategory denominator criterion. Checked convolution grades and signs with arbitrary cochain-unbounded graded-acyclic second factor. No statement clause was changed. Independent second reading expanded the dg-shift signs and made the K-flat tensor-factor swap explicit; statements unchanged.",
+  "blueprint": "Realizes the Additivity paragraph of lem-trf-trace-triangle-compatibility through the filtered-tensor construction invoked by lem-trf-filtered-operations-hom; it makes precise the resolving models needed for Varshavsky §5.2.1(b).",
+  "tool_uses": [
+   {
+    "node": "def-pc-flat-sheaf-modules",
+    "why": "A generic definition or homological tool used with exactly its stated hypotheses; no fixed-finite-filtered resolution theorem is supplied by this unit."
+   },
+   {
+    "node": "def-pc-kflat-complex",
+    "why": "A generic definition or homological tool used with exactly its stated hypotheses; no fixed-finite-filtered resolution theorem is supplied by this unit."
+   },
+   {
+    "node": "def-sp-filtered-complex-subquotients",
+    "why": "A generic definition or homological tool used with exactly its stated hypotheses; no fixed-finite-filtered resolution theorem is supplied by this unit."
+   },
+   {
+    "node": "lem-coef-dg-abc-homotopy-category-triangulated",
+    "why": "Generic triangulation criterion applied to filtered chain complexes after checking zero, sums, shifts and cones."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Only the generic bounded-above K-flat criterion on a ringed site; filtered existence is proved here."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic sheaf tensor additivity and symmetry; the convolution argument is written here."
+   },
+   {
+    "node": "lem-pc-sites-modules-functorial-flat-cover",
+    "why": "Only supplies flat epimorphisms onto the module sheaves in the explicit induction; this unit has no flat-cover construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-sp-filtered-complex-subquotients",
+  "lem-coef-dg-abc-homotopy-category-triangulated",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-sites-modules-functorial-flat-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-4f4cf0f49",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-4f4cf0f49 (reviewer sub-agent of L); spot-checked: Read in full: the item (14 steps), the new node lem-trf-right-fraction-dense-subcategory, every cited statement, the parent's two steps that cite the item, def-trf-bounded-filtered-derived-category and the unit sk-i-additivity. Sources checked: Varshavsky §5.2.1(b) only points to Illusie V §2 for the filtered lifts, so the item is rightly marked agent-formulated with Illusie WANTED. Stacks 0GSL (statement and proof), 06YQ and 03EW(4) read; the other tags matched against their labels. Steps 1-5 (finite-sum flat covers of each filtration step, the pullback T^n, the cycle invariant, the acyclic kernel via the pair (0,z), the graded short exact sequences) checked line by line. Step 6 uses the 06YQ bounded-above flat K-flat node. Step 7: dg ABC hypotheses checked, including pi∂s=f for the cone. Step 8: cone class equals W, right calculus from the Mathlib-leaf cone-system node. Steps 10-14: interval compatibility, exact countable sums, the convolution grade formula, the off-diagonal blocks dying in grade r, and the Koszul swap signs, all correct. New node: true (dual of Kashiwara-Schapira 7.2.1, categorical core of 0GSL; axioms match Mathlib HasRightCalculusOfFractions); small cases checked; it restates no clause of the item; no duplicate in the DAG (lem-kun-finite-filtered-kflat-replacement only inlines the same argument for ring modules); no Mathlib match after reading Resolution.lean, LocalizerMorphism.lean and OfFunctorialResolutions.lean. FIX: step 9 claimed without proof that the localization of the homotopy category is the bounded-above filtered derived category, which this chapter defines by localizing complexes. Added the filtered-cylinder argument (signs checked; homotopic maps agree in K[W^-1]) and the localization universal property, and added lem-weil-pbc-localization-universal-property to the step's uses. Accepted tool uses: functorial flat cover, bounded-above flat K-flat, sheaf tensor closed, dg ABC triangulation. The three definition entries in tool_uses are unneeded but harmless. Outside this split: lem-pc-bounded-above-flat-kflat-site should cite 06YQ, not 06YS.; 1 file(s) fixed by the reviewer"
  }
 }
