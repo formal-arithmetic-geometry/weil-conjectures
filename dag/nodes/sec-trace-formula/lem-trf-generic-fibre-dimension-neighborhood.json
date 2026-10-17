@@ -14,9 +14,72 @@
   "def-kun-topological-krull-dimension",
   "def-sc-generic-point"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $Z=\\{x\\in X\\mid \\dim_x(X_{f(x)})>n\\}$. By [lem-weil-pbc-local-fibre-dimension-open], the locus where the local fibre dimension is at most $n$ is open, so $Z$ is closed. The hypothesis $\\dim X_\\eta=n$ implies that the generic fibre contains no point of $Z$, hence $Z\\cap f^{-1}(\\{\\eta\\})=\\emptyset$. Finite type gives a locally finite type, quasi-compact morphism by [def-weil-finite-type-morphism]. Apply [lem-sbc-generic-fibre-closed-avoidance] with $y=\\eta$ and $C=Z$. Since $\\eta$ is generic in the irreducible space $Y$, $\\overline{\\{\\eta\\}}=Y$, so after replacing the resulting open by a nonempty open $V_1$ containing $\\eta$, every fibre over $V_1$ is disjoint from $Z$. Its local dimensions are all at most $n$, so [lem-weil-pbc-dimension-supremum-local-dimensions] gives dimension at most $n$ (also for an empty fibre).",
+   "uses": [
+    "lem-weil-pbc-local-fibre-dimension-open",
+    "def-weil-finite-type-morphism",
+    "lem-sbc-generic-fibre-closed-avoidance",
+    "def-sc-generic-point",
+    "def-pc-scheme-fibre",
+    "def-kun-topological-krull-dimension",
+    "def-kun-topological-dimension-at-point",
+    "lem-weil-pbc-dimension-supremum-local-dimensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma Tag 05F7, proof lines 8417--8422: define the closed locus of local fibre dimension greater than n and remove it after applying Lemma 054W"
+   }
+  },
+  {
+   "text": "If $n=0$, the generic fibre is nonempty (the empty scheme has dimension below every nonnegative integer), so apply [lem-sbc-generic-closed-subset-fibre-nonempty] to the closed subset $C=X$ and obtain a nonempty open $V_2$ containing $\\eta$ over which every fibre is nonempty. If $n>0$, let $Z'=\\{x\\in X\\mid \\dim_x(X_{f(x)})>n-1\\}$. This is closed because it is the complement of the open bounded-dimension locus for $n-1$. By [lem-weil-pbc-dimension-supremum-local-dimensions], the supremum of the local dimensions of $X_\\eta$ is $n$. All are at most $n$; if none equalled $n$, all would be at most $n-1$, contradicting that supremum. Thus some point has local fibre dimension $n$, so $Z'\\cap f^{-1}(\\{\\eta\\})$ is nonempty. Apply [lem-sbc-generic-closed-subset-fibre-nonempty] to $Z'$ to obtain a nonempty open $V_2$ containing $\\eta$ such that every fibre over $V_2$ meets $Z'$.",
+   "uses": [
+    "lem-weil-pbc-local-fibre-dimension-open",
+    "lem-sbc-generic-closed-subset-fibre-nonempty",
+    "def-kun-topological-krull-dimension",
+    "def-pc-scheme-fibre",
+    "def-sc-generic-point",
+    "def-kun-topological-dimension-at-point",
+    "lem-weil-pbc-dimension-supremum-local-dimensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma Tag 05F7, proof lines 8423--8429: form the closed locus of local fibre dimension greater than n-1, note that its generic fibre is nonempty, and apply Lemma 05F5 (lemma-nonempty-generic-fibre)"
+   }
+  },
+  {
+   "text": "Put $V=V_1\\cap V_2$. It is a nonempty open containing $\\eta$. For $y\\in V$, Step 1 gives $\\dim X_y\\le n$. If $n=0$, Step 2 gives that $X_y$ is nonempty, so its dimension is at least $0$ and hence equals $0$. If $n>0$, Step 2 gives a point of $X_y$ whose local fibre dimension is greater than $n-1$; this local dimension is at most $n$ by Step 1, so it is a finite integer and is at least $n$. The dimension of the fibre is at least every local dimension, hence is at least $n$, and therefore equals $n$ by the upper bound. The same argument covers all points of $V$ and proves the claim.",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "def-sc-generic-point",
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma Tag 05F7, proof lines 8429--8432: intersect the two generic opens and compare the upper and lower local-dimension bounds"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-local-fibre-dimension-open",
+  "def-weil-finite-type-morphism",
+  "lem-sbc-generic-fibre-closed-avoidance",
+  "def-sc-generic-point",
+  "def-pc-scheme-fibre",
+  "def-kun-topological-krull-dimension",
+  "def-kun-topological-dimension-at-point",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-sbc-generic-closed-subset-fibre-nonempty"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma Tag 05F7 (lemma-dimension-in-neighbourhood), statement and proof lines 8411--8432"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,7 +111,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-generic-principal-coordinate-dimension-drop",
@@ -60,7 +123,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "the generic-open dimension argument in the ancestor route, corresponding to the application of Stacks Tag 05F7 after the complement of the bounded-dimension locus has smaller generic fibres",
+   "place": "the generic-open dimension argument in the ancestor route: remove the closed locus where local fibre dimension exceeds n, then spread the nonempty exact-n locus using the applications of Tags 054W and 055G corresponding to Stacks Tag 05F7",
    "via": [
     "lem-trf-generic-principal-coordinate-dimension-drop",
     "lem-trf-weak-relative-noether-normalization",
@@ -76,5 +139,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-generic-fibre-dimension-neighborhood",
+  "worker": "stage1",
+  "summary": "Kept the Tag 05F7 statement unchanged and expanded its proof into the bounded-local-dimension closed locus, generic-fibre avoidance, exact-dimension locus, and final comparison steps. Reused the existing DAG nodes for openness of bounded local fibre dimension, removal of a closed subset with empty generic fibre, and persistence of a closed subset meeting the generic fibre. The n=0 case is handled separately so the lower-dimension locus never uses an undefined negative natural number. No new nodes or attachments were needed. Maintainer repair: cite the existing supremum-of-local-dimensions theorem in Steps 1 and 2; explicitly deduce attainment at finite n; correct the Step 2 source tag to 05F5. The inherited 055G attribution in blueprint ancestry and the existing spreading node is not evidence for this argument.",
+  "blueprint": "Realizes the ancestor's generic-open dimension argument: the Tag 05F7 application after the bounded-dimension locus is made empty near the generic point, followed by the nonempty exact-dimension locus spread.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-local-fibre-dimension-open",
+    "why": "Supplies the upper-semicontinuity/open bounded-local-fibre-dimension input used to define the two closed loci."
+   },
+   {
+    "node": "lem-sbc-generic-fibre-closed-avoidance",
+    "why": "Removes the closed locus with empty generic fibre after shrinking the base."
+   },
+   {
+    "node": "lem-sbc-generic-closed-subset-fibre-nonempty",
+    "why": "Spreads a closed subset meeting the generic fibre to a nonempty intersection in every nearby fibre."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-local-fibre-dimension-open",
+  "lem-sbc-generic-fibre-closed-avoidance",
+  "lem-sbc-generic-closed-subset-fibre-nonempty"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NK-82e141ea7",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NK-82e141ea7 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, sources and unit/chapter route. Added existing Tag 0B7I citations for global/local dimension comparisons and explicit finite-dimension attainment; corrected the proof-source tag from 055G to 05F5. Statement unchanged. Corrected JSON and review.md written; dependency closure is acyclic with no missing citations.; 1 file(s) fixed by the reviewer"
  }
 }

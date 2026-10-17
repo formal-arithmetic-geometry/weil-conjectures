@@ -14,9 +14,87 @@
   "def-weil-pbc-ample-invertible-module",
   "def-pc-module-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every affine open $V\\subseteq T$, ampleness of $L|_{f^{-1}(V)}$ implies that $f^{-1}(V)$ is quasi-compact, by [def-weil-pbc-ample-invertible-module]. This is precisely the quasi-compactness condition on $f$ in [def-weil-finite-type-morphism]. Thus $f$ is quasi-compact; no finite type hypothesis is being added.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VH (definition-relatively-ample); the quasi-compactness already contained in absolute ampleness, Properties Tag 01PS."
+   }
+  },
+  {
+   "text": "Let $L'=g'^*L$. The pullback is invertible by clause (1) of [lem-weil-pbc-invertible-pullback-tensor]. The projection $f':X'\\to T'$ is quasi-compact by [lem-pc-quasi-compact-base-change], applied to the quasi-compact morphism $f$ from Step 1 and the arbitrary base map $g$.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-pc-quasi-compact-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0893; Schemes Tag 01K5 (lemma-quasi-compact-preserved-base-change); Modules Tag 0B8L (lemma-pullback-invertible)."
+   }
+  },
+  {
+   "text": "Choose affine open neighbourhoods $U'_i\\subseteq T'$ covering $T'$, each mapping into some affine open $U_i\\subseteq T$. Indeed, for a point $t'$ first choose an affine open $U_i$ containing $g(t')$, then an affine neighbourhood of $t'$ contained in the open $g^{-1}(U_i)$. This uses [lem-weil-pbc-affine-opens-basis], first on $T$ and then on $T'$. Put $Z_i=f^{-1}(U_i)$ and $Z'_i=(f')^{-1}(U'_i)$. The universal property [def-pc-fibre-product] identifies $Z'_i$ with $Z_i\\times_{U_i}U'_i$: a map to either scheme is a pair of maps to $X$ and $U'_i$ whose composites to $T$ agree, and the map to $X$ factors through $Z_i$ because the second map lands over $U_i$. The projection $a_i:Z'_i\\to Z_i$ is therefore the base change of $U'_i\\to U_i$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0893 (lemma-ample-base-change), proof."
+   }
+  },
+  {
+   "text": "The morphism $U'_i\\to U_i$ is affine by [lem-weil-pbc-morphism-affine-schemes-affine], since both its source and target are affine schemes. Its base change $a_i:Z'_i\\to Z_i$ is affine by clause (1) of [lem-weil-pbc-affine-morphism-permanence]. The hypothesis makes $L|_{Z_i}$ ample. Hence [lem-weil-pbc-pullback-ample-invertible] gives that $a_i^*(L|_{Z_i})$ is ample on $Z'_i$. The restriction of $L'$ to $Z'_i$ is this very pullback: the two composites $Z'_i\\to X$ agree, so functoriality of module pullback [def-pc-module-pullback] identifies their pullbacks of $L$. Thus $L'|_{Z'_i}$ is ample for every $i$.",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-pullback-ample-invertible",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0893 (lemma-ample-base-change), proof."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-scheme-relative-ample-affine-cover] to $h=f'$, $N=L'$, and the affine open covering $\\{U'_i\\}$ from Step 3. Its quasi-compactness and invertibility hypotheses hold by Step 2, and ampleness over each member holds by Step 4. It follows that $L'|_{(f')^{-1}(V')}$ is ample for every affine open $V'\\subseteq T'$, which is the assertion.",
+   "uses": [
+    "lem-trf-scheme-relative-ample-affine-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0893 (lemma-ample-base-change), first sentence of proof, applying Tag 01VJ (3) implies (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "def-pc-module-pullback",
+  "lem-trf-scheme-relative-ample-affine-cover"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0893 (lemma-ample-base-change), with the implicit quasi-compactness checked from 01PS and preserved by Schemes 01K5; affine pullback is 0892 (2), and locality is 01VJ (3) implies (1)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,7 +126,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-algebraic-space-ample-local",
@@ -77,5 +155,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-scheme-relative-ample-base-change",
+  "worker": "stage1",
+  "summary": "Kept the statement and its statement dependencies. Followed Stacks 0893: derive quasi-compactness from absolute ampleness, preserve it under base change, choose affine neighbourhoods mapping into affine neighbourhoods of the old base, apply existing affine-morphism permanence and affine pullback of ampleness, then use one new statement-only 01VJ affine-cover criterion. All cited statements were opened and every hypothesis checked.",
+  "blueprint": "Supplies the scheme-base-change step of lem-trf-algebraic-space-ample-local in the historical polarized-descent ancestry from lem-trf-local-term-locality; realizes the 0893 proof used by that step without altering any unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-pullback-ample-invertible",
+    "why": "Generic affine-pullback ampleness input 0892 (2) in the proof of 0893; this unit has no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-pullback-ample-invertible"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-NR-bceada0d2",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NR-bceada0d2 (reviewer sub-agent of L); spot-checked: Read all delivery mathematics and cited statements; verified Stacks 0893, 01VH, 01VJ and supporting sources. All five steps and the new locality lemma are correct; no duplicate, cycle, hidden hypothesis or long-step fault found. Added only omitted lean_audit and merged_into metadata to the new node under fixes/. Full checks are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

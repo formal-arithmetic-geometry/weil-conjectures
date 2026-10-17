@@ -15,9 +15,61 @@
   "def-weil-field",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\Gamma_L=L^\\times/O^\\times$ and $\\Gamma_K=K^\\times/R^\\times$. The inclusion $K\\subseteq L$ identifies $R=O\\cap K$ as the induced valuation subring, and [lem-trf-abhyankar-inequality] applies with $F=K$, valued field $L$, and valuation ring $O$. Its residue-field term is the assumed $\\operatorname{trdeg}_{\\kappa(R)}\\kappa(O)=1$, while $\\operatorname{trdeg}_K L=1$, so it gives $\\operatorname{rrk}(\\Gamma_L/\\Gamma_K)+1\\le1$ and hence $\\operatorname{rrk}(\\Gamma_L/\\Gamma_K)=0$.",
+   "uses": [
+    "lem-trf-abhyankar-inequality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§2.1, Lemma 2.1.2 and Proposition 4.3.1 proof, p. 27; local archival copy unavailable"
+   }
+  },
+  {
+   "text": "By [lem-trf-rational-rank-zero-torsion], the quotient group $\\Gamma_L/\\Gamma_K$ is torsion. Thus for every class $\\alpha\\in\\Gamma_L$ there is an integer $n\\ge1$ with $n\\alpha\\in\\Gamma_K$.",
+   "uses": [
+    "lem-trf-rational-rank-zero-torsion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1 proof, p. 27: “In particular, the group G ... is a torsion group”; local archival copy unavailable"
+   }
+  },
+  {
+   "text": "By [lem-trf-separably-closed-value-group-divisible], $\\Gamma_K$ is divisible. Fix $z\\in L^\\times$ and let $\\alpha=[z]\\in\\Gamma_L$. Choose $n$ with $n\\alpha\\in\\Gamma_K$, and choose $\\beta\\in\\Gamma_K$ with $n\\beta=n\\alpha$. The value group $\\Gamma_L$ is an ordered abelian group and therefore torsion-free, so $\\alpha=\\beta$. Choose $c\\in K^\\times$ representing $\\beta$; then $z/c\\in O^\\times$.",
+   "uses": [
+    "lem-trf-separably-closed-value-group-divisible",
+    "lem-trf-rational-rank-zero-torsion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1 proof, p. 27: divisibility of $|K^\\times|$ and equality $|R|=|O|$; local archival copy unavailable"
+   }
+  },
+  {
+   "text": "If $z\\in O\\setminus\\{0\\}$, the identity $c=z(z/c)^{-1}$ shows $c\\in O\\cap K=R$, so $c\\in R\\setminus\\{0\\}$. If moreover $z\\in\\mathfrak m_O\\setminus\\{0\\}$ and $c$ were a unit of $R$, then $c$ and $z/c$ would both be units of $O$, forcing $z$ to be a unit, a contradiction; hence $c\\in\\mathfrak m_R\\setminus\\{0\\}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.3.1 proof, p. 27, final choice of $\\pi\\in R$ and unit comparison; local archival copy unavailable"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-abhyankar-inequality",
+  "lem-trf-rational-rank-zero-torsion",
+  "lem-trf-separably-closed-value-group-divisible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Proposition 4.3.1 proof, p. 27, especially the Abhyankar, torsion, divisibility and unit steps; local archival copy unavailable"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,7 +108,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-single-valuation-semistable-extraction",
@@ -85,5 +137,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-residual-curve-value-group",
+  "worker": "stage1",
+  "summary": "Split the residual-curve value-group statement into the relative Abhyankar step, the zero-rational-rank torsion input, and divisibility of the value group of a separably closed valued field. The four proof steps then derive equality of value classes and the R/m_R refinements by explicit unit calculations. Temkin’s Proposition 4.3.1 proof was checked online; its PDF is unavailable in the local literature archive and is recorded as WANTED.",
+  "blueprint": "Realizes the ancestor proof branch through the Temkin Proposition 4.3.1 argument: relative Abhyankar gives rational rank zero, this gives torsion, separable closedness gives divisibility, and equal value groups yield the required unit representative."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N4-63706e036",
+  "group": "N4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N4-63706e036 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass. I repaired the item’s incorrect created metadata (it named another item/group) in fixes/dag/nodes/sec-trace-formula/lem-trf-residual-curve-value-group.json; the residue-field statement dependency is retained. No nodes were dropped.; 1 file(s) fixed by the reviewer"
  }
 }

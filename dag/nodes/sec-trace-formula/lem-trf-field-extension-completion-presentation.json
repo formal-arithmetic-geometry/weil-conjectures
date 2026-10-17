@@ -15,9 +15,104 @@
   "def-weil-pbc-multivariate-power-series",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let X=Spec(S) and Y=Spec(S\\otimes_kK), with x=\\mathfrak p and y=\\mathfrak q. Since a field is Noetherian and S is finite type over k, S is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]; the same lemma makes S\\otimes_kK Noetherian over K. The field-extension base-change lemma [lem-weil-pbc-field-extension-base-change-faithfully-flat] makes S\\to S\\otimes_kK faithfully flat, and [lem-weil-pbc-flat-local-ring-maps] gives a flat local map A\\to B of Noetherian local rings. The fibre B/(\\mathfrak pA)B is the localization of F\\otimes_kK at the kernel of its evaluation to K. The finite-separable tensor lemma [lem-weil-pbc-finite-separable-tensor-field-reduced] makes F\\otimes_kK reduced; it is finite over the field K, so this localization is a field. Hence (\\mathfrak pA)B=\\mathfrak qB, the maximal ideal of B. Finally [lem-weil-pbc-dimension-at-point-field-extension], applied to S and the prime q, gives dim(A)=dim(B). Thus the hypotheses on the local rings, residue extension, and equal dimensions in Stacks Tag 0C54 are satisfied.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-flat-local-ring-maps",
+    "lem-weil-pbc-finite-separable-tensor-field-reduced",
+    "lem-weil-pbc-dimension-at-point-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0C4Y and 0C50, and the dimension equality required in Tag 0C54."
+   }
+  },
+  {
+   "text": "The completion facts needed below follow from the existing completion lemmas. By [lem-weil-pbc-adic-completion-noetherian] and [lem-weil-pbc-local-completion-local-ring], both \\widehat A and \\widehat B are Noetherian local rings with residue fields F and K respectively; [lem-weil-pbc-adic-completion-mod-ideal] gives their adic completeness and identifies the completed maximal ideals with the kernels of the residue maps. The map A\\to B therefore induces a completion map \\widehat A\\to\\widehat B, and [lem-weil-pbc-flat-completion] says that this map is flat. The induced coefficient map on residues is precisely the given embedding \\iota:F\\hookrightarrow K.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-flat-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C54 proof, completion map and flatness paragraph, with Algebra Tags 05GG and More Algebra Tag 0C4G."
+   }
+  },
+  {
+   "text": "Write R_0=F[[t_1,\\ldots,t_n]] and let y_i be the image in \\widehat B of the chosen image of t_i in \\widehat A. The presentation of \\widehat A is surjective, so the images of the t_i generate the maximal ideal of \\widehat A; since (\\mathfrak pA)B=\\mathfrak qB, their images y_i generate the maximal ideal of \\widehat B. Apply the power-series universal property [lem-weil-pbc-power-series-universal-property-complete] with coefficient map K\\to\\widehat B and target ideal the completed maximal ideal. It gives a K-algebra map \\Psi:K[[t_1,\\ldots,t_n]]\\to\\widehat B sending each t_i to y_i.",
+   "uses": [
+    "lem-weil-pbc-power-series-universal-property-complete",
+    "lem-weil-pbc-adic-completion-mod-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C54 proof, construction of the map from the power-series presentation after field change."
+   }
+  },
+  {
+   "text": "Each $f_j$ maps to zero under $\\Psi$ because it already maps to zero in $\\widehat A$ and the completion map is compatible with $A\\to B$. Therefore $\\Psi$ factors through a $K$-algebra map $\\theta:K[[t_1,\\ldots,t_n]]/(f_1,\\ldots,f_s)\\to\\widehat B$. Apply [lem-weil-pbc-complete-source-surjective-mod-ideal] directly to $\\Psi$ with source ideal $(t_1,\\ldots,t_n)$: the full power-series source is complete by [lem-weil-pbc-power-series-field-cohen-regular-complete], its image ideal is the completed maximal ideal of $\\widehat B$ by Step 3 and [lem-weil-pbc-adic-completion-mod-ideal], and the reduction $K\\to K$ is the identity. Thus $\\Psi$ is surjective, and its factor $\\theta$ is surjective as well.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-complete-source-surjective-mod-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C54 proof, surjectivity of the coefficient-extended power-series map."
+   }
+  },
+  {
+   "text": "For injectivity, regard $R=\\widehat A$ as the quotient $F[[t_1,\\ldots,t_n]]/(f_1,\\ldots,f_s)$, let $T=K[[t_1,\\ldots,t_n]]/(f_1,\\ldots,f_s)$, and regard $\\widehat B$ as an $R$-module through the flat completion map of Step 2. The power-series lemma makes the ambient power-series ring Noetherian and local, so its quotient $T$ is Noetherian and local; the coefficient-extension map $R\\to T$ is therefore a local homomorphism. The ring $T$ is a finite $T$-module over itself. The map $\\theta:T\\to\\widehat B$ is $R$-linear, and its reduction modulo the maximal ideal of $R$ is the identity map $K\\to K$, hence injective. Applying [lem-weil-pbc-flat-mod-injective] with $M=\\widehat B$, $N=T$, and $u=\\theta$ proves that $\\theta$ is injective (the accompanying flat-cokernel conclusion is unnecessary here).",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-flat-completion",
+    "lem-weil-pbc-flat-mod-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C54 proof, final injectivity paragraph via Algebra Lemma 00ME (mod-injective)."
+   }
+  },
+  {
+   "text": "Thus \\theta is an isomorphism. It is a K-algebra map, it sends every variable t_i to the image of the selected element of \\widehat A, and its coefficient map is the prescribed embedding \\iota. Transporting the complete local structure across this isomorphism gives the asserted isomorphism of complete local K-algebras.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C54 conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-finite-separable-tensor-field-reduced",
+  "lem-weil-pbc-dimension-at-point-field-extension",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-flat-completion",
+  "lem-weil-pbc-power-series-universal-property-complete",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-complete-source-surjective-mod-ideal",
+  "lem-weil-pbc-flat-mod-injective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0C54, 0C4Y and 0C50, with the final injectivity argument using Algebra Tag 00ME."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -35,7 +130,7 @@
   },
   {
    "tool": "grep",
-   "query": "completion.*tensor|PowerSeries.*base change|AdicCompletion",
+   "query": "completion.*tensor|PowerSeries.*base change|AdicCompletion [RingTheory]",
    "results": "{\"t\": \"2026-10-17T19:18:29Z\", \"tool\": \"grep\", \"query\": \"completion.*tensor|PowerSeries.*base change|AdicCompletion\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Teichmuller.lean\", \"Mathlib/RingTheory/Teichmuller.lean\", \"Mathlib/RingTheory/Perfectoid/BDeRham.lean\", \"Mathlib/RingTheory/Perfectoid/BDeRham.lean\", \"Mathlib/RingTheory/Perfectoid/BDeRham.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\"], \"digest\": \"a10ca1b4fb347123\"}",
    "date": "2026-10-18",
    "verdict": "generalization: relevant general APIs only; no theorem with the stated hypotheses and conclusion"
@@ -49,7 +144,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-separable-closed-point-formal-presentation",
@@ -76,5 +171,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-field-extension-completion-presentation",
+  "worker": "stage1",
+  "summary": "Split the Tag 0C54 completion/base-change lemma without adding auxiliary nodes. The proof first verifies the finite-type local hypotheses, equal local dimensions, and maximal-ideal equality using existing field-extension, separability, and dimension nodes; it then constructs the coefficient-extended power-series map, proves surjectivity by completeness, and proves injectivity with the existing flat-mod-injective criterion.",
+  "blueprint": "Realizes the completion/base-change comparison in the descent/ascent paragraphs of the pointwise nodal ingredient.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q89-f1b0cb0f0",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q89-f1b0cb0f0 (reviewer sub-agent of L); spot-checked: Tag 0C54 and all cited DAG statements check out. Fixed step 4’s uncited quotient-completeness claim by applying complete-source surjectivity to the full power-series ring, and made step 5’s local/noetherian hypotheses explicit. Review and corrected DAG JSON are written under fixes/ and review.md.; 1 file(s) fixed by the reviewer"
  }
 }

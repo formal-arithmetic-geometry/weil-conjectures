@@ -11,9 +11,55 @@
   "def-pc-scheme",
   "def-weil-pbc-complete-intersection-over-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The affine cover by the $Z_i=\\operatorname{Spec}C_i$ makes the structure morphism $Z\\to\\operatorname{Spec}k$ locally of finite type: every point has a $Z_i$ neighbourhood whose coordinate algebra $C_i$ is finitely generated. Fix $z\\in Z$ and choose $i$ with $z\\in Z_i$. Applying [lem-trf-lci-pointwise-criterion] to the local-complete-intersection affine scheme $Z_i$ gives that its local ring at $z$ is a complete-intersection local ring. The local ring of $Z$ at $z$ is canonically the same because $Z_i$ is an open neighbourhood, so every local ring of $Z$ has this property.",
+   "uses": [
+    "lem-trf-lci-pointwise-criterion",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01UG and 01T2: the affine-cover definition of locally finite type and 01UG, (1) implies (3)."
+   }
+  },
+  {
+   "text": "Let $W\\subseteq Z$ be affine open and write $S=\\Gamma(W,\\mathcal O_Z)$. Apply [lem-weil-pbc-lft-affine-pairs] directly to the locally finite type structure morphism $Z\\to\\operatorname{Spec}k$ from step 1, with affine opens $U=W$ and $V=\\operatorname{Spec}k$. It gives that the induced $k$-algebra $S$ is finitely generated. At every point of $W$, its local ring is the local ring of $Z$ at the same point, hence is a complete-intersection local ring by step 1. This also covers $W=\\varnothing$, where $S$ is the zero ring.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-weil-pbc-complete-intersection-over-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T2 (lemma-locally-finite-type-characterize), applied to $W\\to\\operatorname{Spec}k$."
+   }
+  },
+  {
+   "text": "Apply the algebra part of [lem-trf-lci-pointwise-criterion] to the finitely generated $k$-algebra $S$. Every prime of $S$ is the point of $W$ corresponding to a local ring already identified in step 1, so all localizations $S_{\\mathfrak p}$ are complete-intersection local rings. The criterion gives that $S$ is a local complete intersection over $k$. If $W$ or $Z$ is empty this is the zero-ring convention in [def-weil-pbc-complete-intersection-over-field].",
+   "uses": [
+    "lem-trf-lci-pointwise-criterion",
+    "def-weil-pbc-complete-intersection-over-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SH (lemma-lci-global), equivalence of (1) and (2), together with Morphisms Tag 01UG for the local-ring interpretation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-complete-intersection-over-field",
+  "lem-trf-lci-pointwise-criterion",
+  "lem-weil-pbc-lft-affine-pairs"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01UG and 01T2, with Algebra Tag 00SH for the affine algebra criterion."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -59,7 +105,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-syntomic-geometric-fibres-affine-criterion",
@@ -71,8 +117,9 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Historical local-equation input to lem-trf-local-term-locality, proof (1)--(2), below lem-trf-nodal-etale-chart: the flat local-complete-intersection-fibre condition in the first sentence of Stacks 0C5F; affine locality of the field-scheme fibre condition used in Stacks 01UD/01UF.",
+   "place": "Historical local-equation input to lem-trf-local-term-locality, proof (1)--(2), below lem-trf-nodal-etale-chart: affine locality of the field-scheme local-complete-intersection condition used in Stacks 01UD/01UF.",
    "via": [
+    "lem-trf-lci-affine-open-locality",
     "lem-trf-syntomic-geometric-fibres-affine-criterion",
     "lem-trf-complete-intersection-fibres-limit-descent",
     "lem-trf-nodal-family-noetherian-approximation",
@@ -88,5 +135,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-lci-affine-open-locality",
+  "worker": "stage1",
+  "summary": "Split the affine-open locality lemma into three arguments. The cover first gives local finite type and, by the pointwise local-complete-intersection criterion (01UG), complete-intersection local rings on Z. Open restriction preserves those local rings; Tag 01T2 gives finite generation of the coordinate algebra of an affine open W, and Algebra Tag 00SH then gives its local-complete-intersection algebra property. Empty schemes and the zero ring are retained. Maintainer-reader repair: step 2 applies the affine-pair statement directly to Z with U=W, avoiding an extra open-restriction assertion; the new criterion cites the definitions of essentially finite type and prime localization, specifies the k-algebra isomorphism of 00SD, and repairs its final math delimiter.",
+  "blueprint": "The three steps realize the affine locality input below the nodal chart in the historical local-term route: 01UG pointwise locality, 01T2 finite generation on affine opens, and 00SH for the coordinate algebra.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lft-affine-pairs",
+    "why": "step 2 uses its affine-pair characterization to obtain finite generation of the coordinate ring of W; the trace-formula unit has no node giving this general locally-finite-type algebra criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lft-affine-pairs"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q49-c237116bf",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q49-c237116bf (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and checked Stacks 01UG, 01T2, 00SH and 00SD. Argument is sound, including empty schemes, zero rings and imperfect fields. Fixed missing definition citations, a math delimiter, and step 2’s affine-pair application. Whole corrected JSON files and concrete checks are recorded in fixes/ and review.md. No duplicates, cycles or prohibited proof machinery found.; 2 file(s) fixed by the reviewer"
  }
 }

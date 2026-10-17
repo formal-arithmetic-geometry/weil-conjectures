@@ -23,9 +23,201 @@
   "def-weil-pbc-multivariate-power-series",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First record that the generic point $\\eta$ is open in $S$. If $V=K$ this is immediate. Otherwise choose a nonzero $c$ in the smallest nonzero prime of $V$; every nonzero prime contains $c$, so $D(c)=\\{(0)\\}$ and $V[1/c]=K$. For any flat $S$-scheme, [lem-sc-flat-invertible-sections-torsion-free] with the structure sheaf says that affine coordinate rings inject into their generic localizations. Thus its generic fibre is a schematically dense open. Also $S$ is normal: if $z\\in K\\setminus V$ were integral over $V$, then $z^{-1}$ would be a nonunit of $V$, and multiplying its monic integral equation by $z^{-n}$ would give $1\\in(z^{-1})$. The same argument holds in all localizations of $V$, which are valuation rings.",
+   "uses": [
+    "lem-sc-flat-invertible-sections-torsion-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Section 4, finite-height base; explicit generic-density and normality calculations."
+   }
+  },
+  {
+   "text": "Form $P=X_1\\times_CX_2$. Its projections are proper by [lem-weil-pbc-proper-fp-permanence](b). Let $R\\hookrightarrow P$ be the reduced induced closed subscheme on the closure of $P_\\eta=C_\\eta$, using [lem-weil-pbc-reduced-induced-closed-subscheme]. Its projections $r_i:R\\to X_i$ are proper by clauses (a),(c) of the permanence node, and $R_\\eta=C_\\eta$ because this generic fibre is reduced. A dense open of a reduced scheme is schematically dense: a section vanishing there vanishes at each minimal prime and so belongs to the zero nilradical. Consequently $r_i$ are reduced modifications, with the generic isomorphism open supplied by Step 1 on $X_i$. Apply [lem-trf-valuation-horizontal-curve-models] to $r_i$: $R$ is a flat finitely presented $S$-curve, and the schematic closure $H$ of $D_\\eta$ makes $(R,H)\\to(X_i,D_i)$ an $\\eta$-modification of pairs. This node, rather than common-cover, supplies the reducedness and finite-component properties of $R$.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-trf-valuation-horizontal-curve-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.5.1, final paragraph, reduced common model; horizontal-model statements supply its curve and marking properties."
+   }
+  },
+  {
+   "text": "If $R$ is empty, the required pair is empty. Otherwise apply [lem-trf-valuation-strict-semistable-local-uniformization] to $R$, obtaining finitely many integral strict models $Y_a$ covering its centred valuations and identifying their generic fibres with opens of $R_\\eta$. The reduced curve $R$ is qcqs and has finitely many components by [lem-trf-valuation-horizontal-curve-models], so [lem-trf-birational-quasi-modification-common-cover] applies. It gives a reduced modification $p:R_1\\to R$, a finite open cover $R_1=\\bigcup_a U_a$, and modifications $U_a\\to Y_a$. Give $R_1$ the closure $H_1$ of $H_\\eta$; the horizontal-model node makes this a multipointed curve and $(R_1,H_1)\\to(R,H)$ an $\\eta$-modification, and identifies all marking restrictions with generic closures.",
+   "uses": [
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-horizontal-curve-models",
+    "lem-trf-birational-quasi-modification-common-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.5.1, first construction: Propositions 4.3.3 and 3.2.6."
+   }
+  },
+  {
+   "text": "The open restrictions used below are again finitely presented curves. Indeed a finite-type scheme over $S$ has a Noetherian underlying space: each of its finitely many fibres is a finite-type scheme over a field, hence Noetherian by [lem-weil-pbc-finite-type-over-noetherian]; a descending chain of closed subsets stabilizes on each fibre and hence on their finite union. Thus every open under consideration is quasi-compact, and its open immersion is of finite presentation. Discard empty $U_a$. Each $U_a$ is integral: its reduced modification to integral $Y_a$ has a schematically dense integral isomorphism open, forcing reducedness and irreducibility of the whole space. Its generic fibre is smooth and integral by the horizontal-model node. The same density argument makes any reduced $\\eta$-modification of $U_a$ integral.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-trf-valuation-horizontal-curve-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.5.1, restrictions to the finite common cover; finite-height topology made explicit."
+   }
+  },
+  {
+   "text": "For each $a$, apply [lem-trf-valuation-strict-semistable-cofinality] to $U_a\\to Y_a$, obtaining a strict curve $Z_a$ and an $\\eta$-modification $Z_a\\to U_a$. The smooth generic fibre and flatness show that $Z_a$ is reduced by [lem-trf-valuation-horizontal-curve-models] with empty marking. That node then gives its closure marking $G_a$ and an $\\eta$-modification $(Z_a,G_a)\\to(U_a,H_1|_{U_a})$. Apply [lem-trf-valuation-marking-semistable-separation] and use its actual output $(\\widetilde Z_a,\\widetilde G_a)$: this pair is semistable, including an etale marking off the nodes. Its composite to $(U_a,H_1|_{U_a})$ is proper by [lem-weil-pbc-proper-fp-permanence](a) and a generic isomorphism, hence an $\\eta$-modification by Step 1.",
+   "uses": [
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-horizontal-curve-models",
+    "lem-trf-valuation-marking-semistable-separation",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.5.1, application of Proposition 4.3.1 and Lemma 4.3.2."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-valuation-semistable-stable-contraction] to these semistable modifications, obtaining stable pair maps $s_a:(A_a,B_a)\\to(U_a,H_1|_{U_a})$. For $U=U_a\\cap U_b$, their target restrictions remain proper by [lem-weil-pbc-proper-fp-permanence](b), semistable by the same local rings, and $\\eta$-modifications by Step 1. They are stable relative to $U$: a fibre component contracted over a point of $U$ lies entirely in its inverse image and has exactly its old marking and nodal intersection points, so an exceptional component would already be exceptional before restriction. We now construct the comparisons on $U$ without invoking general stable uniqueness, whose existing proof depends on this item.",
+   "uses": [
+    "lem-trf-valuation-semistable-stable-contraction",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.5.1, Proposition 4.4.6 and restriction of local stable models."
+   }
+  },
+  {
+   "text": "Fix a nonempty $U=U_a\\cap U_b$ and put $V_b=A_b\\times_{U_b}U$. The map $V_b\\to U_a$ is separated and of finite type: it is the proper map to $U$ followed by a quasi-compact open immersion. Since $U_a$ is qcqs, [sk-thm-nagata-compactification] and [sk-def-nagata-sketch-data] give a dense compactification $V_b\\hookrightarrow\\overline V_b\\to U_a$. It restricts to $V_b$ over $U$: the open immersion $V_b\\to\\overline V_b|_U$ is proper by [lem-weil-pbc-proper-to-separated], as both target and source are over $U$ and $V_b\\to U$ is proper. Its image is therefore closed as well as open; schematic density forces its complement to be empty. Since $V_b$ is integral (Step 4 and generic density), schematic density also makes $\\overline V_b$ integral. The compactification is a reduced modification of $U_a$: over the nonempty dense open $U_\\eta$ it is the identity. The horizontal-model node makes it an $S$-curve and an isomorphism on all of $(U_a)_\\eta$.",
+   "uses": [
+    "sk-thm-nagata-compactification",
+    "sk-def-nagata-sketch-data",
+    "lem-weil-pbc-proper-to-separated",
+    "lem-trf-valuation-horizontal-curve-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Expansion of Corollary 4.4.3(ii) on target opens, using dense Nagata compactification; Stacks 01W6 proper-to-separated."
+   }
+  },
+  {
+   "text": "Take the reduced closure $M$ of the common generic fibre in $A_a\\times_{U_a}\\overline V_b$. As in Step 2, the reduced-induced-closed-subscheme and proper-permanence statements make $M\\to U_a$ a reduced modification. Its composite to $Y_a$ is also proper and a generic isomorphism, hence a modification. Apply [lem-trf-valuation-strict-semistable-cofinality] to this fixed strict target $Y_a$ and this modification $M\\to Y_a$, obtaining a strict $L\\to M$. The horizontal-model node, first with empty marking for reducedness and then for the closure of $(H_1|_{U_a})_\\eta$, makes it a marked $\\eta$-modification of $U_a$. Apply [lem-trf-valuation-marking-semistable-separation] to get a semistable pair $(N,J)$ dominating it. Restrict this pair to $U$. It maps to both $(A_a,B_a)|_U$ and $(A_b,B_b)|_U$ by $\\eta$-modifications. Properness follows by the construction and base change; the marking closures give the pair maps by the horizontal-model node, and agree with $B_a,B_b$ on $U$ by uniqueness of the flat generic closure. Thus the two restricted stable models have a common semistable dominating pair.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-horizontal-curve-models",
+    "lem-trf-valuation-marking-semistable-separation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Corollary 4.4.3(ii), common semistable domination over a fixed strict model, localized using Step 7."
+   }
+  },
+  {
+   "text": "By Step 1, $S$ is normal integral qcqs. The semistable curves $A_a|_U$ and $A_b|_U$ are reduced and $\\eta$-normal by [lem-trf-geometrically-reduced-eta-normal]. Apply [lem-trf-valuation-contracted-component-inclusion] to the common semistable pair of Step 8 and the two stable maps over $(U,H_1|_U)$. It gives the inclusion of contracted fibre components in each direction. The reduced-curve and smooth-generic hypotheses of [lem-trf-valuation-component-factorization] hold by the horizontal-model node, Step 4 and semistability; that node therefore gives maps in both directions between the curves, over $U$, inducing the prescribed generic identity. This uses the component statements themselves, not the circular general stable-uniqueness theorem.",
+   "uses": [
+    "lem-trf-geometrically-reduced-eta-normal",
+    "lem-trf-valuation-contracted-component-inclusion",
+    "lem-trf-valuation-component-factorization",
+    "lem-trf-valuation-horizontal-curve-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Corollary 4.4.3(i),(ii): apply the component inclusion and factorization criterion to the constructed common pair."
+   }
+  },
+  {
+   "text": "Two curve maps over $U$ into a stable model that agree generically agree everywhere. Its morphism to $U$ is proper, hence separated, so their equalizer is closed. Its ideal vanishes in the generic localization of the flat source, and [lem-sc-flat-invertible-sections-torsion-free] with the structure sheaf makes that ideal zero. Thus the comparisons in Step 9 are inverse isomorphisms, and are unique. Their restrictions to the source markings factor through the target markings: the pulled-back marking ideals vanish generically and hence vanish by the same injectivity on the flat marking. These factorizations respect the base marking because its closed immersion into $U$ is a monomorphism. We obtain a unique pair isomorphism $\\alpha_{ab}:(A_a,B_a)|_U\\simeq(A_b,B_b)|_U$. On empty intersections use the empty isomorphism. Uniqueness makes $\\alpha_{bc}\\alpha_{ab}=\\alpha_{ac}$ on every triple intersection.",
+   "uses": [
+    "lem-sc-flat-invertible-sections-torsion-free",
+    "def-weil-proper-morphism",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Corollary 4.4.3(ii) and Proposition 4.5.1, explicit pair comparisons and cocycle."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-glue-schemes] to the curves $A_a$ along their inverse images of $U_a\\cap U_b$ and the isomorphisms $\\alpha_{ab}$ of Step 10. Glue the closed markings $B_a$ in the same way. The local maps to $(R_1,H_1)$ agree on overlaps by construction and therefore glue; likewise the marking ideals agree and give a closed immersion $B\\hookrightarrow A$. Properness of $A\\to R_1$ is local on its target: finite type and closedness of the relative diagonal are checked on $U_a$, and after every base change the image of a closed set is closed because its intersections with the inverse images of all $U_a$ are closed images there. These are precisely the finite-type, separated and universally closed conditions of [def-weil-proper-morphism]. The local generic identities glue to the generic identity. The source $A$ is reduced locally, and its generic fibre is schematically dense locally, so $A\\to R_1$ is a reduced modification.",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.5.1, stable gluing; Stacks 01JB/01JC, lemma-glue/lemma-glue-schemes, with properness checked on the target cover."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-valuation-horizontal-curve-models] to $A\\to R_1$. It supplies finite presentation, flatness, pure fibre dimensions and the marking closure, and makes $(A,B)\\to(R_1,H_1)$ an $\\eta$-modification: on each open its closure equals the already glued flat marking $B_a$, by the uniqueness clause. The pair is semistable, since its geometric local rings and marking smoothness/etaleness are exactly those of $(A_a,B_a)$. Apply [lem-trf-valuation-marked-strictification] to this single global semistable pair, obtaining a strictly semistable pair $(W,E)\\to(A,B)$ by an $\\eta$-modification. This invocation is confined to strictifying an already semistable marked pair; no independently chosen strict local models are glued.",
+   "uses": [
+    "lem-trf-valuation-horizontal-curve-models",
+    "lem-trf-valuation-marked-strictification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.5.1 semistable gluing, followed by the strict-cofinality assertion of Remark 4.5.2."
+   }
+  },
+  {
+   "text": "Compose $(W,E)\\to(A,B)\\to(R_1,H_1)\\to(R,H)\\to(X_i,D_i)$. Both maps of each pair composite are proper by [lem-weil-pbc-proper-fp-permanence](a), and every generic map is the given identity. Step 1 makes the generic isomorphism opens schematically dense on source and target, proving that these are $\\eta$-modifications $q_i$. The identity $f_1r_1=f_2r_2$ holds in the original fibre product and hence persists after every refinement, giving $f_1q_1=f_2q_2$. No semistability of the input models was used. Empty marking causes no change: every closure and marking map is empty. At height zero the input pair maps are already isomorphisms and one can take the common smooth generic pair, which has the strict marked charts.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 4.5.1 final paragraph and Remark 4.5.2, common composite and generic identifications."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism",
+  "lem-sc-flat-invertible-sections-torsion-free",
+  "lem-trf-birational-quasi-modification-common-cover",
+  "lem-trf-geometrically-reduced-eta-normal",
+  "lem-trf-valuation-component-factorization",
+  "lem-trf-valuation-contracted-component-inclusion",
+  "lem-trf-valuation-horizontal-curve-models",
+  "lem-trf-valuation-marked-strictification",
+  "lem-trf-valuation-marking-semistable-separation",
+  "lem-trf-valuation-semistable-stable-contraction",
+  "lem-trf-valuation-strict-semistable-cofinality",
+  "lem-trf-valuation-strict-semistable-local-uniformization",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-proper-to-separated",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "sk-def-nagata-sketch-data",
+  "sk-thm-nagata-compactification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Online PDF read at Sections 1.2, 4.3--4.5 (especially Corollary 4.4.3(ii), Proposition 4.5.1 and Remark 4.5.2); local archive WANTED. Expansion includes dense compactification to make the local overlap comparison acyclic."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,7 +249,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-semistable-dominates-stable",
@@ -85,5 +277,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-valuation-common-strict-semistable-refinement",
+  "worker": "stage1",
+  "summary": "Repair preserves the strict statement. It constructs the reduced common marked model, produces stable local refinements using the actual marking-separation output, and proves overlap comparisons by compactification plus strict-target cofinality, component inclusion and component factorization, avoiding the circular general stable-uniqueness theorem. Properness is checked on the gluing cover. A new, smaller statement-only marked strictification lemma upgrades the single global semistable pair.",
+  "blueprint": "Historical nearby-cycle semistable-alteration branch beneath lem-trf-local-term-locality, Proof (1)--(2); expands Temkin Proposition 4.5.1 and Corollary 4.4.3(ii), then uses Remark 4.5.2. Unit/chapter statements and the current normal-cone route remain unchanged.",
+  "tool_uses": [
+   {
+    "node": "sk-thm-nagata-compactification",
+    "why": "Dense compactification extends a proper modification on an overlap to a modification over U_a, which has a fixed strict reference model; general compactification is a tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-sc-flat-invertible-sections-torsion-free",
+    "why": "Flat generic injectivity proves schematic density, marking factorization, and uniqueness of comparisons."
+   },
+   {
+    "node": "lem-weil-pbc-proper-to-separated",
+    "why": "Ensures the compactification is unchanged over the open on which the original morphism is already proper."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Constructs the reduced closures of generic fibres in the two explicit fibre products."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Finite-type fibres over fields have Noetherian topological spaces, so the finite-height total spaces have quasi-compact overlaps."
+   },
+   {
+    "node": "lem-weil-pbc-glue-schemes",
+    "why": "Glues the explicit curve and marking cocycles; it is the general scheme gluing tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-thm-nagata-compactification",
+  "lem-sc-flat-invertible-sections-torsion-free",
+  "lem-weil-pbc-proper-to-separated",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-glue-schemes"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q77-d0c4fcbfe",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q77-d0c4fcbfe (reviewer sub-agent of L); spot-checked: Read the governing documents, item, new node, unit/chapter, every cited statement, and Temkin’s cited PDF locations. Verified hypotheses, edge cases, dependencies, searches, route compliance, non-duplication, and all 13 proof steps. No repair is needed; review.md records the checks."
  }
 }

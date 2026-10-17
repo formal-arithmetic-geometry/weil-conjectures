@@ -14,9 +14,43 @@
   "def-weil-residue-field",
   "def-pc-geometrically-irreducible"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $T=\\operatorname{Spec}(\\kappa(x))$ and let $T\\to X$ be the canonical morphism associated to the point $x$. The hypothesis that $k$ is algebraically closed in $\\kappa(x)$ is exactly the hypothesis of [lem-zl-field-extension-algebraically-closed-geometric], applied to the field extension $\\kappa(x)/k$; hence $T$ is geometrically irreducible over $k$. After every field extension of $k$, the base change of $T$ is irreducible and therefore connected by [lem-pc-irreducible-space-connected]. Unfolding geometric connectedness in [def-pc-geometrically-irreducible] shows that $T$ is geometrically connected over $k$.",
+   "uses": [
+    "lem-zl-field-extension-algebraically-closed-geometric",
+    "lem-pc-irreducible-space-connected",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04KV, proof: set T = Spec(kappa(x)); the hypothesis makes T geometrically irreducible, hence geometrically connected."
+   }
+  },
+  {
+   "text": "The morphism $T\\to X$ is a morphism of schemes over $k$, $X$ is connected by hypothesis, and $T$ is geometrically connected by Step 1. Apply the connected-point criterion [lem-trf-geometrically-connected-image-criterion] (Stacks Tag 056R) to conclude that $X$ is geometrically connected over $k$.",
+   "uses": [
+    "lem-trf-geometrically-connected-image-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04KV, proof, via Tag 056R (lemma-geometrically-connected-criterion)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-field-extension-algebraically-closed-geometric",
+  "lem-pc-irreducible-space-connected",
+  "def-pc-geometrically-irreducible",
+  "lem-trf-geometrically-connected-image-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 04KV, lemma-geometrically-connected-if-connected-and-point, proof; uses Tag 056R and Tag 037P."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -45,10 +79,38 @@
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"Algebra.IsGeometricallyReduced\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\"]}",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "connected scheme over a field with a point whose residue field is algebraically closed over the base is geometrically connected",
+   "results": "8 hits: AlgebraicGeometry.isField_of_universallyClosed; AlgebraicGeometry.Scheme.SpecToEquivOfField; AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff; Algebra.IsGeometricallyReduced; AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass; AlgebraicGeometry.Scheme.instFieldCarrierResidueField; AlgebraicGeometry.IsIntegral; AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField; no exact criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "GeometricallyConnected, ConnectedSpace, residueField",
+   "results": "0 hits; loogle: unknown identifier 'GeometricallyConnected'.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricallyConnected.*connected|connected.*residueField (Mathlib/AlgebraicGeometry)",
+   "results": "5 hits in Mathlib/AlgebraicGeometry/Geometrically/Connected.lean: definition and base-change stability only; no connected-point criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "connected scheme with algebraically closed residue field point geometrically connected",
+   "results": "8 hits: Scheme.mk.noConfusion, Scheme.residueField, Scheme, Scheme.fromSpecResidueField, Scheme.SpecToEquivOfField_eq_iff, Scheme.SpecMap_residue_apply, Scheme.Hom.fiberToSpecResidueField_apply, Scheme.residueFieldCongr; no exact criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
  "created": {
@@ -60,7 +122,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "The component argument in the affine elementary-etale finite-over-smooth ingredient of the proof of lem-trf-local-term-locality; this intermediate fact supplies the indicated geometric component step.",
+   "place": "The connected-point criterion in the affine elementary-etale finite-over-smooth component argument: Tag 04KV/056R proves geometric connectedness of the component from its chosen point.",
    "via": [
     "lem-trf-smooth-component-pure-transcendental",
     "lem-trf-etale-finite-smooth-local-structure",
@@ -78,5 +140,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-connected-point-geometrically-connected",
+  "worker": "stage1",
+  "summary": "Split the Tag 04KV connected-point proof into the residue-field spectrum argument and the Tag 056R connected-image criterion. The first step applies the existing Tag 037P field-extension criterion and irreducible-implies-connected leaf; the second applies the new statement-only Tag 056R node. No statement change.",
+  "blueprint": "Realizes the connected-point criterion used in the affine elementary-etale finite-over-smooth ingredient of the Tag 057S route for lem-trf-local-term-locality, specifically the Tag 04KV proof and its Tag 056R input.",
+  "tool_uses": [
+   {
+    "node": "lem-zl-field-extension-algebraically-closed-geometric",
+    "why": "Step 1 uses the general Tag 037P theorem that a field extension with base algebraically closed in it is geometrically irreducible; no node in sk-i-curve-zero supplies this field-theoretic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-zl-field-extension-algebraically-closed-geometric"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N8-61eb29f38",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N8-61eb29f38 (reviewer sub-agent of L); spot-checked: Read both nodes fully and checked Stacks 04KV, 037P, 056R, cited definitions, route, duplicates, and edge cases. Mathematics accepted; corrected the new node’s missing lean_audit record. Full checks and accepted 037P tool use are recorded in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
