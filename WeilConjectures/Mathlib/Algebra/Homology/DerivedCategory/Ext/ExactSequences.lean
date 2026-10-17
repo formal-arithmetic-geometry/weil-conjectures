@@ -23,8 +23,6 @@ reduces statements about the maps `Ext^n(X, Y) ⟶ Ext^n(E X, E Y)` induced by e
 
 - `CategoryTheory.Abelian.Ext.mk₀_comp_mapExactFunctor_of_iso`: isomorphic exact functors
   induce the same maps on `Ext`-groups, up to the isomorphism.
-- `CategoryTheory.Abelian.Ext.mapExactFunctor_mapExactFunctor`: the map induced by a composite
-  of exact functors is the composite of the induced maps.
 - `CategoryTheory.Abelian.Ext.bijective_mk₀_comp_mapExactFunctor`: if `e : S ⟶ E A`
   induces a bijection `(A ⟶ N) ≃ (S ⟶ E N)` for all `N`, and `Ext^{n + 1}(S, E I) = 0` for
   injective `I`, then `x ↦ e ∘ E x` is a bijection `Ext^n(A, N) ≃ Ext^n(S, E N)`.
@@ -32,7 +30,7 @@ reduces statements about the maps `Ext^n(X, Y) ⟶ Ext^n(E X, E Y)` induced by e
 
 @[expose] public section
 
-universe w w' w'' v v' v'' u u' u''
+universe w w' v v' u u'
 
 namespace CategoryTheory.Abelian.Ext
 
@@ -82,25 +80,6 @@ lemma mk₀_comp_mapExactFunctor_of_iso [EnoughInjectives C] {F G : C ⥤ D} [F.
     congr 1
     exact (ShortComplex.ShortExact.extClass_naturality (hS.map_of_exact F) (hS.map_of_exact G)
       (S.mapNatTrans τ.hom)).symm
-
-/-- Pushing `Ext`-classes forward along a composite of exact functors. -/
-lemma mapExactFunctor_mapExactFunctor [EnoughInjectives C] {E : Type u''} [Category.{v''} E]
-    [Abelian E] [HasExt.{w''} E] (F : C ⥤ D) [F.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F] (G : D ⥤ E) [G.Additive]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G] [PreservesFiniteLimits (F ⋙ G)]
-    [PreservesFiniteColimits (F ⋙ G)] {X Y : C} {n : ℕ} (x : Ext X Y n) :
-    (x.mapExactFunctor F).mapExactFunctor G = x.mapExactFunctor (F ⋙ G) := by
-  induction n generalizing Y with
-  | zero =>
-    obtain ⟨f, rfl⟩ := (mk₀_bijective X Y).2 x
-    rw [mapExactFunctor_mk₀, mapExactFunctor_mk₀, mapExactFunctor_mk₀]
-    rfl
-  | succ n ih =>
-    obtain ⟨I, y, rfl⟩ := exists_comp_extClass_of_injective x
-    set S := ShortComplex.mk _ _ (cokernel.condition I.f)
-    have hS : S.ShortExact := { exact := ShortComplex.exact_cokernel I.f }
-    rw [mapExactFunctor_comp, mapExactFunctor_comp, mapExactFunctor_comp,
-      mapExactFunctor_extClass, mapExactFunctor_extClass, mapExactFunctor_extClass, ih]
 
 /-- Let `E : C ⥤ D` be an exact functor, `A : C` and `e : S ⟶ E A` such that `f ↦ e ≫ E f` is a
 bijection `(A ⟶ N) ≃ (S ⟶ E N)` for all `N`, and such that `Ext^{n + 1}(S, E I) = 0` for every

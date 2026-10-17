@@ -252,7 +252,7 @@ theorem exists_iso_of_isIso_adicBaseChangeTowerMap
     ∃ φ : c₁.pt ≅ R((h)_*[ModuleCat.{u + 1} R]).obj c₂.pt, ∀ n : ℕ,
       φ.hom ≫ R((h)_*[ModuleCat.{u + 1} R]).map (c₂.π.app (op n)) =
         c₁.π.app (op n) ≫ (adicBaseChangeTowerMap I sq K).app (op n) :=
-  hc₁.exists_iso_of_iso (adicBaseChangeTowerMap I sq K)
+  hc₁.exists_iso_of_iso (asIso (adicBaseChangeTowerMap I sq K))
     (c' := R((h)_*[ModuleCat.{u + 1} R]).mapCone c₂)
     (isHomotopyLimit_mapCone_rightDerivedLowerStar h hc₂)
 

@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Functor.OfSequence
-public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Basic
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Tower
 
 /-!
 # Existence of homotopy limits and levelwise isomorphisms of towers
@@ -19,8 +19,8 @@ compatible with the transition maps because the first map is killed by `1 - t`.
 
 It also records that a morphism of towers which is an isomorphism at every level induces an
 isomorphism on homotopy limits, whatever the choice of the map completing the morphism of Milnor
-triangles (`CategoryTheory.Pretriangulated.isIso_of_isIso_app`), and the corresponding statement
-for homotopy limit cones (`CategoryTheory.Pretriangulated.IsHomotopyLimit.exists_iso_of_iso`).
+triangles (`CategoryTheory.Pretriangulated.isIso_of_isIso_app`); the corresponding statement
+for homotopy limit cones is `CategoryTheory.Pretriangulated.IsHomotopyLimit.exists_iso_of_iso`.
 -/
 
 @[expose] public section
@@ -95,20 +95,5 @@ theorem isIso_of_isIso_app {F G : ℕᵒᵖ ⥤ C} {PF : Fan fun n : ℕ ↦ F.o
     (hu₃ : δX ≫ u⟦(1 : ℤ)⟧' = productTowerMap (PF := PF) hPG a ≫ δY) : IsIso u :=
   isIso_of_proIso hPF hPG hX hY a (fun n ↦ G.map (homOfLE n.le_succ).op ≫ inv (a.app (op n)))
     (fun n ↦ by simp) (fun n ↦ by simp [← NatTrans.naturality_assoc]) u hu₁ hu₃
-
-/-- A morphism of towers `a : F ⟶ G` which is an isomorphism at every level induces an
-isomorphism between the points of any homotopy limit cones of `F` and `G`, compatible with the
-legs and with `a`. -/
-theorem IsHomotopyLimit.exists_iso_of_iso {F G : ℕᵒᵖ ⥤ C} (a : F ⟶ G) [IsIso a] {c : Cone F}
-    {c' : Cone G} (hc : IsHomotopyLimit c) (hc' : IsHomotopyLimit c') :
-    ∃ e : c.pt ≅ c'.pt, ∀ n : ℕ, e.hom ≫ c'.π.app (op n) = c.π.app (op n) ≫ a.app (op n) := by
-  let c'' : Cone F := { pt := c'.pt, π := c'.π ≫ inv a }
-  have hc'' : IsHomotopyLimit c'' :=
-    hc'.of_iso (asIso a).symm _ (Iso.refl _) fun n ↦ by simp [c'']
-  obtain ⟨e, he⟩ := hc.exists_iso hc''
-  refine ⟨e, fun n ↦ ?_⟩
-  have := he n
-  simp only [c'', NatTrans.comp_app, NatIso.isIso_inv_app] at this
-  rw [← this, assoc, assoc, IsIso.inv_hom_id, comp_id]
 
 end CategoryTheory.Pretriangulated
