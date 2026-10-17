@@ -28,9 +28,119 @@
   "def-coef-complete-algebroid",
   "lem-coef-operadic-algebra-presentability"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The monoidal Yoneda theorem [lem-coef-monoidal-yoneda-embedding] equips the presheaf category P(C) with the Day convolution tensor, described as the left Kan extension of the external cartesian product along tensor on C. It proves that this tensor preserves small colimits in each variable and that the Yoneda functor has a fully faithful strong monoidal enhancement. The universe enlargement in that theorem lets the smallness conventions be those fixed in [def-coef-complete-algebroid].",
+   "uses": [
+    "lem-coef-monoidal-yoneda-embedding",
+    "def-coef-complete-algebroid"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/2311.13362v1",
+    "place": "Section 5, lines 360-379, and the Day universal-property paragraph preceding Proposition 5.1"
+   }
+  },
+  {
+   "text": "Use the right-fibration model of [lem-coef-day-relative-exponential-model]. With $S=N(\\Delta^{\\mathrm{op}})$ and the coherent classifying algebra $\\underline C:S\\to\\operatorname{Cat}_{\\mathcal U}^\\times$, put $Q_C=S\\times_{\\operatorname{Cat}_{\\mathcal U}^\\times}\\operatorname{RFib}^\\times$. This is the genuine infinity-categorical pullback of coherent functors, with its identification data. The cited model makes $Q_C\\to S$ monoidal cocartesian, with fibre $P(C)^n$, Day block operations and the stated inert-arrow criterion. Use this coherent Day structure as the $P(C)^\\otimes$ of step 1. Its hypotheses on spaces need no extra assumption: [lem-coef-infinity-presheaf-free-cocompletion] at the terminal category gives small colimits in $\\mathcal S$, and [lem-coef-space-presheaf-cocompletion] gives $X\\times-\\dashv\\operatorname{Map}(X,-)$. For $Y=\\operatorname{colim}_eY_e$, adjunction gives $\\operatorname{Map}(X\\times Y,Z)\\simeq\\lim_e\\operatorname{Map}(Y_e,\\operatorname{Map}(X,Z))\\simeq\\lim_e\\operatorname{Map}(X\\times Y_e,Z)$; the cocone criterion of [lem-coef-infinity-yoneda-presheaf-limits] proves separate product cocontinuity.\n\nLet $q:\\mathcal O\\to S$, and write $\\underline C_q=\\underline Cq$. Apply the total-product functor of [lem-coef-generalized-cartesian-product-cones] with target $\\operatorname{Cat}_{\\mathcal U}$ to obtain the coherent functor $D:\\mathcal O\\to\\operatorname{Cat}_{\\mathcal U}$, $D(o)=C^n$ over $[n]$. Its block maps are those of $C^\\otimes$. By [lem-coef-cocartesian-straightening], the cocartesian unstraightening of $D^{\\mathrm{op}}:o\\mapsto D(o)^{\\mathrm{op}}$ is $T=\\mathcal O\\times_S C^{\\mathrm{op},\\otimes}$; this takes fibrewise opposites and keeps the base fixed. This is also a generalized operad in the convention of [lem-coef-operadic-algebra-presentability]: inert lifts are pairs of inert lifts, the incidence diagrams are the products of the two incidence diagrams, and the zero fibre is the Kan space $\\mathcal O_{[0]}$.\n\nAn algebra $A:\\mathcal O\\to Q_C$ gives an inert-preserving $B_A:\\mathcal O\\to\\operatorname{RFib}^\\times$ together with its coherent identification $p^\\times B_A\\simeq\\underline C_q$. Apply the product-cone equivalence with target $\\operatorname{RFib}$ to get a monoid $\\Phi_A=\\Pi B_A:\\mathcal O\\to\\operatorname{RFib}$ over $D$; naturality in the finite-product-preserving $p$ gives the identification $p\\Phi_A\\simeq D$. The section-classification equivalence of the Day-model node now constructs an actual coherent $M_A:T\\to\\mathcal S$. At $(o;c_1,\\ldots,c_n)$ it is the fibre of the product right fibration $\\prod_i E_{A(o_i)}\\to C^n$, hence $\\prod_i A(o_i)(c_i)$. This constructs evaluation from the universal right-fibration family and includes every simplex. Its inert projections are product projections and its zero-degree value is a point, so $M_A$ is multiplicative. Equivalently, apply the classifier once to the universal product right fibration over $Q_C$, obtaining $\\epsilon_C:Q_C\\times_S C^{\\mathrm{op},\\otimes}\\to\\mathcal S$, and restrict it along $A\\times\\mathrm{id}$. Its product cones lift coherently to $\\mathcal S^\\times$ by [lem-coef-generalized-cartesian-product-cones].",
+   "uses": [
+    "lem-coef-day-relative-exponential-model",
+    "lem-coef-generalized-cartesian-product-cones",
+    "lem-coef-cocartesian-straightening",
+    "lem-coef-operadic-algebra-presentability",
+    "lem-coef-infinity-presheaf-free-cocompletion",
+    "lem-coef-space-presheaf-cocompletion",
+    "lem-coef-infinity-yoneda-presheaf-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Notation 6.1, Definition 6.14, Corollary 6.10; Proposition 6.18, first three equivalences. Evaluation via the section classifier cited in that proof, and the agent generalized-incidence formulation."
+   }
+  },
+  {
+   "text": "Conversely let $M:T\\to\\mathcal S$ be multiplicative. Apply the inverse of the section-classification equivalence in [lem-coef-day-relative-exponential-model] for the fixed coherent $D$ of step 2. It produces an actual coherent section $\\Phi_M:\\mathcal O\\to\\operatorname{RFib}$ over $D$, whose value at $o$ is a right fibration $E_o\\to C^n$ classifying $M(o;-)$, with all transition maps already present. We check the product condition on this section. The inert projections give a coherent square\n$$\\begin{matrix}E_o&\\longrightarrow&\\prod_iE_{o_i}\\\\\n\\downarrow&&\\downarrow\\\\\nD(o)&\\xrightarrow{\\sim}&\\prod_iD(o_i).\\end{matrix}$$\nThe lower equivalence is the product cone for $D$, and both vertical arrows are right fibrations. Pull the right-hand fibration back along the lower equivalence. By the space-transport classification [lem-coef-space-transport-classification], its comparison with $E_o$ is the transformation whose component at $(c_i)$ is precisely $M(o;(c_i))\\to\\prod_iM(o_i;c_i)$. These components are equivalences by multiplicativity. The componentwise equivalence criterion of [lem-cbc-enhanced-functor-cone-calculus] therefore makes this a presheaf equivalence, hence an equivalence of right fibrations. Cartesian transport in the Day-model node takes the lower base equivalence to an equivalence in $\\operatorname{RFib}$, so the original product comparison is an equivalence as well. At degree zero, $D(o)=*$ and $E_o$ is the terminal space because $M(o;*)$ is terminal. Thus $\\Phi_M$ is a monoid in $\\operatorname{RFib}$, over the fixed monoid $D$; this uses no terminality of $\\mathcal O_{[0]}$.\n\nApply the inverse product-cone equivalence of [lem-coef-generalized-cartesian-product-cones] with target $\\operatorname{RFib}$. It produces the whole coherent inert-preserving $B_M:\\mathcal O\\to\\operatorname{RFib}^\\times$. Its naturality under the product-preserving $p$ supplies $p^\\times B_M\\simeq\\underline C_q$, since the specified product-cone inverse for $D$ is $\\underline C_q$. The defining infinity-categorical pullback of $Q_C$ consequently gives $A_M:\\mathcal O\\to Q_C$. The inert criterion of the Day-model node says that it is an algebra. On a colour it is the presheaf $c\\mapsto M(o;c)$. For an output block $I_j$ of a base arrow, the right-fibration square supplies the natural transformation $\\prod_{i\\in I_j}A_M(o_i)(c_i)\\to A_M(o'_j)(\\bigotimes_{i\\in I_j}c_i)$, whose left-Kan adjunct is its Day operation. Composing with the presheaf map for $d_j\\to\\bigotimes_{i\\in I_j}c_i$ gives evaluation on a general arrow of $T$. Empty blocks give a map from the Day unit. These formulas describe the existing section and product-cone constructions; no simplex is manufactured by choosing unrelated decompositions at its edges.",
+   "uses": [
+    "lem-coef-day-relative-exponential-model",
+    "lem-coef-generalized-cartesian-product-cones",
+    "lem-coef-space-transport-classification",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Proposition 6.18, right-fibration square and fibrewise comparison at the end of the proof; Proposition 5.1 and Remark 5.16. Agent generalized-incidence extension includes each zero-degree object separately."
+   }
+  },
+  {
+   "text": "The constructions in steps 2 and 3 are inverse on infinity categories. More explicitly, the pullback defining $Q_C$ identifies its algebra category with the infinity-categorical fibre over $\\underline C_q$ of\n$$\\operatorname{Alg}_{\\mathcal O}(\\operatorname{RFib}^\\times)\\longrightarrow\\operatorname{Alg}_{\\mathcal O}(\\operatorname{Cat}_{\\mathcal U}^\\times);$$\nthe inert-arrow criterion in [lem-coef-day-relative-exponential-model] checks exactly the algebra condition in this identification. Naturality of [lem-coef-generalized-cartesian-product-cones] for $p$ identifies this fibre with the fibre over $D$ of $\\operatorname{Mon}_{\\mathcal O}(\\operatorname{RFib})\\to\\operatorname{Mon}_{\\mathcal O}(\\operatorname{Cat}_{\\mathcal U})$. The Day-model node's section classifier is an equivalence on the full category of sections over $D$, including all mapping spaces. The square checked in step 3 shows in both directions that its full subcategory of monoid sections corresponds exactly to the multiplicative functors $T\\to\\mathcal S$. Restrict that equivalence to these full subcategories. This proves the asserted equivalence, its evaluation on colours, and its inverse, including transformations and higher simplices. In particular the inverse comparisons come from specified units and counits of these functor-category equivalences, rather than independently chosen maps of coefficient objects. Their evaluations at every colour are the presheaf classification identities; at $[0]$ they are identities of terminal objects. The componentwise criterion of [lem-cbc-enhanced-functor-cone-calculus] detects them as equivalences. No essential-image factorization or identification with a raw relative exponential is used.\n\nAn operad map changes $D$ and $T$ by base change, so naturality follows from the two cited equivalences' base-change naturality. For a strong monoidal $H:C'\\to C$, cartesian transport of right fibrations restricts every coefficient presheaf along $H^{\\mathrm{op}}$, and products of those pullbacks are again the corresponding pullbacks. The coherent restriction and evaluation clause in the Day-model node therefore gives the lax monoidal map $Q_C\\to Q_{C'}$ and identifies its effect under the comparison with precomposition by $\\mathcal O\\times_S C'^{\\mathrm{op},\\otimes}\\to T$. Its block map is the adjunct of $\\prod_iF_i(Hc'_i)\\to G(\\bigotimes_iHc'_i)\\simeq G(H(\\bigotimes_ic'_i))$. All parameter simplices are part of the section and product-cone equivalences. This proves the required coefficient naturality without asserting that presheaf restriction is strong monoidal.",
+   "uses": [
+    "lem-coef-day-relative-exponential-model",
+    "lem-coef-generalized-cartesian-product-cones",
+    "lem-cbc-enhanced-functor-cone-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Proposition 6.18, Lemma 6.20 and Corollary 6.21; coherent-fibre proof follows the right-fibration construction, with generalized-operad naturality as in Haugseng 2311.13362 Section 5."
+   }
+  },
+  {
+   "text": "For the strong monoidal extension, use unital planar operation systems and their specified projection-pullback normal form from [lem-coef-monoidal-block-projection-coherence] for $C,P(C),\\mathcal V$; denote their reduced operations by $c_r,p_r,v_r$. First [lem-coef-infinity-presheaf-free-cocompletion] gives $L=F_!$ with $Lj\\simeq F$. For every $r\\geq0$, the finite-variable restriction equivalence in [lem-coef-infinity-relative-colimit-completion], with no relations on each copy of $C$, compares separately cocontinuous functors $P(C)^r\\to\\mathcal V$ with functors $C^r\\to\\mathcal V$, including all transformation spaces and compatibility homotopies. Its use requires only cocompleteness of $\\mathcal V$. On the $r$ reduced variables, $Lp_r$ and $v_r L^r$ preserve colimits separately: $L$ preserves colimits, the Day operations do so by step 1, and the operations of $\\mathcal V$ do so by the tensor hypothesis and induction. Their restrictions have the coherent equivalence $Lp_rj^r\\simeq L j c_r\\simeq F c_r\\simeq v_r F^r\\simeq v_rL^rj^r$, using the strong Yoneda enhancement from [lem-coef-monoidal-yoneda-embedding] and the strong structure of $F$. Lift these comparisons and their entire planar-tree compatibility diagrams through the finite-variable equivalences. For an $r$-input planar tree every external variable occurs exactly once; thus each composite on either side remains separately cocontinuous in precisely those $r$ variables, including when a subtree is nullary. Full faithfulness identifies the spaces of compatibility simplices with their already specified boundaries, and therefore lifts the coherent tree diagrams, grafting data, contractions and unary identities. The generic mapping-space fact used here is the first paragraph of [lem-cbc-enhanced-functor-cone-calculus]. For $r=0$ the restriction is the identity equivalence of $\\mathcal V$ and the comparison is $L j(\\mathbf1_C)\\simeq F(\\mathbf1_C)\\simeq\\mathbf1_{\\mathcal V}$; no cocontinuity of a constant functor on unused variables is claimed. Only after these reduced comparisons have been lifted, pull them back along the block projections specified by the normal-form lemma, including all its higher pullback data. Its final assertion turns them into a coherent transformation of the classifying diagrams with components $L^n$, hence a functor of unstraightenings preserving every cocartesian edge. This is the strong monoidal enhancement in [def-coef-monoidal-infinity-category]. The same lifting of complete coherent diagrams includes transformations of $F$.",
+   "uses": [
+    "lem-coef-monoidal-block-projection-coherence",
+    "lem-coef-infinity-presheaf-free-cocompletion",
+    "lem-coef-infinity-relative-colimit-completion",
+    "lem-coef-monoidal-yoneda-embedding",
+    "lem-cbc-enhanced-functor-cone-calculus",
+    "def-coef-monoidal-infinity-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Proposition 6.26 and Remark 6.27; agent reduced-planar-tree extension following the established monoidal-Yoneda split."
+   }
+  },
+  {
+   "text": "Define $R(v)(c)=\\operatorname{Map}_{\\mathcal V}(F(c),v)$; local smallness makes this a small-space-valued presheaf, and the mapping bifunctor of [lem-coef-space-transport-classification] makes it coherent in both variables. For a density cocone $G\\simeq\\operatorname{colim}_e j(c_e)$ from [lem-coef-space-yoneda-density], the cocone criterion of [lem-coef-infinity-yoneda-presheaf-limits] and Yoneda evaluation give $\\operatorname{Map}_{\\mathcal V}(F_!G,v)\\simeq\\lim_e\\operatorname{Map}_{\\mathcal V}(F(c_e),v)\\simeq\\operatorname{Map}_{P(C)}(G,R(v))$, with the limits over the opposite density diagram. Both comparisons are induced by the cocones, hence are natural in $G$ and $v$. Apply [lem-coef-cocartesian-relative-right-adjoint] over $\\Delta^{\\mathrm{op}}$ to the strong monoidal $F_!^\\otimes$ from step 5. On the fibre at $[n]$ its right adjoint is $R^n$: mapping spaces in a product are products, so the preceding adjunction applies in each factor; at $[0]$ both fibres are terminal. The theorem supplies the coherent relative unit and counit. For an inert map, both transport functors project to the same consecutive list of factors, so its mate comparison is the identity on the corresponding factors of $R^n$; hence the relative right adjoint preserves inert edges and is lax monoidal as defined in [def-coef-monoidal-infinity-category]. Explicitly $R(v)\\otimes_{\\mathrm{Day}}R(w)\\to R(v\\otimes w)$ is adjoint to $F_!(R(v)\\otimes_{\\mathrm{Day}}R(w))\\simeq F_!R(v)\\otimes F_!R(w)\\xrightarrow{\\varepsilon_v\\otimes\\varepsilon_w}v\\otimes w$, and its unit is adjoint to $F_!(\\mathbf1_{P(C)})\\simeq\\mathbf1_{\\mathcal V}$. The relative triangle and strong monoidal coherences supply their lax coherences. A transformation $F\\to F'$ gives $F_!\\to F'_!$ by free cocompletion and $R_{F'}\\to R_F$ by precomposition in the displayed mapping spaces; these are mates, including all higher transformations. This is the claimed naturality, with the right-adjoint variable contravariant.",
+   "uses": [
+    "lem-coef-space-transport-classification",
+    "lem-coef-space-yoneda-density",
+    "lem-coef-infinity-yoneda-presheaf-limits",
+    "lem-coef-cocartesian-relative-right-adjoint",
+    "def-coef-monoidal-infinity-category",
+    "lem-coef-infinity-presheaf-free-cocompletion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/pdf/2006.08269",
+    "place": "Proposition 6.26, printed pp.20-21, including the inert-projection mate calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-complete-algebroid",
+  "def-coef-monoidal-infinity-category",
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-cocartesian-relative-right-adjoint",
+  "lem-coef-cocartesian-straightening",
+  "lem-coef-day-relative-exponential-model",
+  "lem-coef-generalized-cartesian-product-cones",
+  "lem-coef-infinity-presheaf-free-cocompletion",
+  "lem-coef-infinity-relative-colimit-completion",
+  "lem-coef-infinity-yoneda-presheaf-limits",
+  "lem-coef-monoidal-block-projection-coherence",
+  "lem-coef-monoidal-yoneda-embedding",
+  "lem-coef-operadic-algebra-presentability",
+  "lem-coef-space-presheaf-cocompletion",
+  "lem-coef-space-transport-classification",
+  "lem-coef-space-yoneda-density"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/pdf/2006.08269",
+  "place": "Proposition 6.18 via the right-fibration pullback of Definition 6.14 and Corollary 6.10, with the generalized nonsymmetric product-cone lemma; Lemma 6.20 and Corollary 6.21 for naturality. This replaces the false Glasman essential-image exponential model. Steps 5-6 retain the reduced-planar-tree extension and relative right-adjoint argument for Proposition 6.26."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -80,10 +190,17 @@
    "results": "{\"t\": \"2026-10-16T19:46:36Z\", \"tool\": \"leanfinder\", \"query\": \"Day tensor product of presheaves and multiplicative functors over nonsymmetric operads\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.DayFunctor.term_⊛⥤_\", \"CategoryTheory.MonoidalCategory.DayConvolution.term_⊛_\", \"CategoryTheory.MonoidalCategory.DayFunctor.tensorDesc\", \"CategoryTheory.MonoidalCategory.DayConvolution\", \"CategoryTheory.MonoidalCategory.LawfulDayConvolutionMonoidalCategoryStruct.convolution₂\", \"CategoryTheory.MonoidalCategory.LawfulDayConvolutionMonoidalCategoryStruct.convolution\", \"CategoryTheory.MonoidalCategory.DayFunctor.inst\", \"CategoryTheory.MonoidalCategory.monoidalOfLawfulDayConvolutionMonoidalCategoryStruct\"], \"digest\": \"5a2d393b87b10700\"}",
    "date": "2026-10-16",
    "verdict": "no match: fresh second-reading search returned ordinary category declarations or simplicial-set/quasicategory constructions, not the stated coherent infinity-category theorem; the returned signatures use ordinary Hom sets and do not specialize to this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations between functors of several presheaf variables determined by representables and colimit preservation",
+   "results": "{\"t\": \"2026-10-16T23:34:52Z\", \"tool\": \"leanfinder\", \"query\": \"Natural transformations between functors of several presheaf variables determined by representables and colimit preservation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.uniqueExtensionAlongYoneda\", \"CategoryTheory.IndParallelPairPresentation.hf\", \"CategoryTheory.Presheaf.colimitOfRepresentable\", \"CategoryTheory.Presheaf.freeYonedaHomEquiv\", \"CategoryTheory.hom_ext_uliftCoyoneda\", \"CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.natTrans\", \"CategoryTheory.yonedaPairingExt\", \"CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.presheafHom\"], \"digest\": \"56d765b1e050830d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Limits/Presheaf.lean:361-384 and Monoidal/DayConvolution.lean:61-89 in the read-only source checkout. These use ordinary Category instances and Type-valued presheaves; neither states the coherent space-valued operadic equivalence."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-algebroid-segal-localization-model",
@@ -103,5 +220,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-operadic-day-convolution",
+  "worker": "stage1",
+  "summary": "Repair of returned head a1b820a8f1: replaced the false Glasman essential-image exponential by the coherent right-fibration Day pullback of Chu-Haugseng Section 6. Rewrote steps 2-4 using full section classification, product-cone equivalences and an explicit right-fibration square. Item statement and accepted steps 1,5,6 retained; source error and BZ counterexample recorded in report.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2: finite coefficient mapping-complex adjunction before R lim; Section 5 universal-property formula preceding Proposition 5.1; Chu--Haugseng Proposition 6.18, Corollary 6.21, Remark 6.24 and Proposition 6.26.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-enhanced-functor-cone-calculus",
+    "why": "Steps 3-5 use componentwise detection of coherent equivalences and equivalences on mapping spaces induced by functor-category equivalences. This is generic coherent-functor calculus, not a replacement for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-enhanced-functor-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-29163672e",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-29163672e (reviewer sub-agent of L); spot-checked: Read the item, both new nodes in full and every cited node's statement. Steps 1, 5 and 6 are unchanged from the version the previous reader accepted; I reread them. Source checked: Chu–Haugseng arXiv:2006.08269. I fetched it to /tmp only and read Prop 5.1, Lemmas 5.14–5.15 with proofs, Rem 5.16, Notation 6.1, Prop 6.2, Cor 6.8, Lemma 6.9, Cor 6.10, Rem 6.11, Def 6.14, Rem 6.15, Prop 6.16, Notation 6.17, Prop 6.18 with proof, Lemma 6.20, Cor 6.21, Rem 6.24 and Prop 6.26. I did not open GHN Prop 7.3; I checked its section-classification clause by hand. The item statement is unchanged and agrees with CH Prop 6.18, Cor 6.21, Rem 6.24 and Prop 6.26. lem-coef-day-relative-exponential-model is now the genuine CH §6 right-fibration pullback (Prop 6.2, Lemma 6.9, Cor 6.10, Def 6.14). Its section classifier is correct: a section of RFib over D is a family of presheaves F_k with maps F_k→h^*F_k', which is a functor on the unstraightening of D^op. Its inert criterion is correct for pullbacks of cocartesian fibrations. The nullary Day operation is y(1). In the BZ test the fixed fibre has components Z and the bad pr2 edge cannot occur. lem-coef-generalized-cartesian-product-cones honestly marks itself as an agent extension of CH Prop 5.1. The extension is true: the proofs of Lemmas 5.14–5.15 need only inert lifts in the source, and objects over [0] are forced to terminal values. Checked on Δ_X^op with X two points (enriched Segal objects), on empty and associative sources and on nullary operations. Steps 2–4 follow the equivalence chain in CH 6.18 line by line, including the right-fibration square, degree 0 without terminal 𝒪_[0], naturality in p, and base change and lax restriction for naturality. Step 2 applies the Yoneda node to Q_C: that node only asks for a Day structure whose tensor is the left Kan extension of the external product, and Q_C has this in every arity. No duplicates found in a DAG-wide rg (RFib, Day convolution, lax cartesian classification, cartesian envelope). Route: all dependencies are in unit sk-prop-sf-biduality-general except the declared tool use lem-cbc-enhanced-functor-cone-calculus, which I accept as generic. No SGA. One repair (B2): the Day-model node used the ordered-block functor without defining it. I added its definition ([r]↦⟨r⟩, i↦j iff a(j−1)<i≤a(j), otherwise the basepoint; blocks may be empty) in fixes/dag/nodes/sec-six-functors/lem-coef-day-relative-exponential-model.json. Only its statement changed. Details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
