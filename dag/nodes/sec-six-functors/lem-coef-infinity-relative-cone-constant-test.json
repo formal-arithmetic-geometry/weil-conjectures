@@ -60,37 +60,31 @@
    }
   },
   {
-   "text": "Assume now that the apex square is a homotopy pullback for every $z$. Fix $t=(z,g,\\beta)$ as in step 1. The assumption says\n$$M_D\\simeq C_D\\times^h_{C_B}M_B.$$\nApply homotopy-pullback invariance [lem-coef-kan-homotopy-pullback-invariance] to pull back this equivalence along $A_D\\to C_D$. In the resulting iterated pullbacks one can compute by fibrations, as follows. Replace $M_B\\to C_B$ by a weak equivalence followed by a Kan fibration $\\widehat M_B\\to C_B$, using [lem-coef-kan-quillen-right-proper]. The pullback $C_D\\times_{C_B}\\widehat M_B\\to C_D$ is already a fibration. The same statement and [lem-coef-kan-pullback-path-comparison] compute its homotopy pullbacks by strict pullbacks. Degreewise associativity now identifies both\n$$A_D\\times^h_{C_D}(C_D\\times^h_{C_B}M_B)\\quad\\hbox{and}\\quad A_D\\times^h_{A_B}(A_B\\times^h_{C_B}M_B)$$\nwith $A_D\\times_{C_B}\\widehat M_B$: the intermediate $C_D$ or $A_B$ coordinate is forced to be the image of the $A_D$ coordinate. For a specified commutation homotopy $H:Z\\times\\Delta^1\\to W$ between $ru$ and $vs$, use [lem-coef-space-path-fibration-replacement] on $r:Y\\to W$: the map $z\\mapsto(u(z),H(z,-))$ lands in $E_r=Y\\times_{W,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,W)$ and its terminal evaluation is exactly $vs(z)$. Thus the square with top map to $E_r$ strictly commutes, and $Y\\to E_r$ by constant paths is a weak equivalence. Apply this construction to the specified coherence squares before the fibration computations; projection back to $Y$ recovers the original maps and their specified paths. Strict invariance [lem-coef-kan-homotopy-pullback-invariance] and independence of replacement in [lem-coef-kan-quillen-right-proper] then justify the same calculation for those coherent squares. In particular no strictly commuting invariance assertion is applied directly to a merely homotopy-commuting square. The identifications preserve the comparison induced by $p$. Together with step 1 this proves\n$$\\operatorname{Map}_{\\operatorname{Fun}(K^{\\triangleleft},D)}(t,q)\\simeq A_D\\times^h_{A_B}\\operatorname{Map}_{\\operatorname{Fun}(K^{\\triangleleft},B)}(pt,pq).$$\nThis is exactly the all-diagrams square of [def-coef-infinity-relative-cone], for arbitrary $t$. Thus the constant-source criterion implies that $q$ is a $p$-limit diagram. No fibration hypothesis on $p$ has entered: only the auxiliary replacements of maps of Kan spaces were fibrations.",
+   "text": "Assume the apex square is a homotopy pullback for every $z$, and fix $t=(z,g,\\beta)$. Put $P_D=A_D\\times^h_{C_D}M_D$ and $P_B=A_B\\times^h_{C_B}M_B$, with the maps and coherence of step 1. Apply [lem-coef-infinity-homotopy-pullback-pasting] twice, in its transposed form, to the following two diagrams (rows are displayed in order):\n$$\\begin{array}{ccc}P_D&\\longrightarrow&A_D\\\\ \\downarrow&&\\downarrow\\\\ M_D&\\longrightarrow&C_D\\\\ \\downarrow&&\\downarrow\\\\ M_B&\\longrightarrow&C_B\\end{array}\\qquad\n\\begin{array}{ccc}P_D&\\longrightarrow&A_D\\\\ \\downarrow&&\\downarrow\\\\ P_B&\\longrightarrow&A_B\\\\ \\downarrow&&\\downarrow\\\\ M_B&\\longrightarrow&C_B.\\end{array}$$\nIn the first diagram the upper square is the defining path pullback and the lower square is the assumed apex square, so the outer rectangle is a homotopy pullback. In the second diagram the lower square is the defining path pullback; its outer rectangle is the one just obtained. Cancellation therefore makes its upper square a homotopy pullback. Transposing pasting is the same ordinary-pullback associativity in the path/fibration models; [lem-coef-kan-pullback-path-comparison] and [lem-coef-kan-homotopy-pullback-invariance] identify these models. The specified homotopy of each defining square is its path coordinate, and the outer homotopies concatenate with the coherence of $p$ supplied in step 1; thus the two outer rectangles use the same homotopy. Step 1 identifies the resulting square $P_D\\to A_D$ over $P_B\\to A_B$ with the all-source test of [def-coef-infinity-relative-cone]. Since $t$ is arbitrary, $q$ is a $p$-limit diagram. No map induced by $p$ is assumed to be a fibration.",
    "uses": [
-    "lem-coef-kan-homotopy-pullback-invariance",
-    "lem-coef-kan-quillen-right-proper",
+    "lem-coef-infinity-homotopy-pullback-pasting",
     "lem-coef-kan-pullback-path-comparison",
-    "def-coef-infinity-relative-cone",
-    "lem-coef-space-path-fibration-replacement"
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "def-coef-infinity-relative-cone"
    ],
    "elementary": false,
    "source": {
-    "document": "https://kerodon.net/tag/02X1",
-    "place": "Proposition 7.1.6.19, (3) implies (2); explicit pullback argument; agent proof using the existing varying-boundary join-cone mapping formula."
+    "document": "https://kerodon.net/tag/0110",
+    "place": "Proposition 3.4.1.11, transitivity and cancellation, applied twice to path-pullback squares, including their specified homotopies; agent mapping-space proof of the implication (3) implies (2) of Proposition 7.1.6.19 (02X1)."
    }
   },
   {
-   "text": "We give the opposite construction explicitly to prove the colimit assertion. For an operator $a:[m]\\to[n]$, write $\\rho_n(i)=n-i$ and replace $a$ by $\\rho_na\\rho_m$. This operation preserves composition, squares to the identity, and carries horn $i$ to horn $n-i$. Hence it preserves quasicategories and Kan complexes. Reversing the two join blocks in [def-coef-infinity-relative-cone] gives $(K^{\\triangleright})^{\\mathrm{op}}\\cong(K^{\\mathrm{op}})^{\\triangleleft}$; reversing product simplices gives $(\\operatorname{Fun}(K,D))^{\\mathrm{op}}\\cong\\operatorname{Fun}(K^{\\mathrm{op}},D^{\\mathrm{op}})$. Thus a cocone $f\\to\\Delta_Kx$ becomes a cone in $D^{\\mathrm{op}}$.\nFor the arrow spaces $U$ of [lem-coef-infinity-pinch-comparison], reversing the parameter simplex and exchanging the two interval endpoints gives the strict natural isomorphism $U_{D^{\\mathrm{op}}}(z,x)\\cong U_D(x,z)^{\\mathrm{op}}$. The opposite on the right is essential. To compare a Kan complex $T$ with $T^{\\mathrm{op}}$, use [lem-coef-subdivision-face-poset-calculus]: on the summand of $\\sigma:\\Delta^n\\to T$, send a flag $(S_0\\subseteq\\cdots\\subseteq S_k)$ to $(\\rho_nS_0\\subseteq\\cdots\\subseteq\\rho_nS_k)$ in the reversed simplex. Since $\\rho_na=(\\rho_na\\rho_m)\\rho_m$, this respects the colimit relations and gives a natural isomorphism $\\operatorname{Sd}T\\cong\\operatorname{Sd}(T^{\\mathrm{op}})$. The last-vertex maps are weak equivalences by [lem-coef-subdivision-last-vertex-equivalence], giving $T\\leftarrow\\operatorname{Sd}T\\cong\\operatorname{Sd}(T^{\\mathrm{op}})\\to T^{\\mathrm{op}}$. Apply [lem-coef-ex-infinity-finite-products] to obtain the all-Kan zigzag $T\\to\\operatorname{Ex}^{\\infty}T\\leftarrow\\operatorname{Ex}^{\\infty}\\operatorname{Sd}T\\cong\\operatorname{Ex}^{\\infty}\\operatorname{Sd}(T^{\\mathrm{op}})\\to\\operatorname{Ex}^{\\infty}(T^{\\mathrm{op}})\\leftarrow T^{\\mathrm{op}}$. Its arrows are weak equivalences: the unit is one, and naturality of the unit and two-out-of-three in the model structure of [lem-coef-kan-quillen-right-proper] show that $\\operatorname{Ex}^{\\infty}$ preserves weak equivalences. Combine this with the two pinch equivalences to obtain a natural zigzag of Kan weak equivalences $\\operatorname{Map}_{D^{\\mathrm{op}}}(z,x)\\simeq\\operatorname{Map}_D(x,z)$, also in the functor quasicategories.\nThe product compatibility needed for composition can be checked from the same cited statements. Put $R(T)=\\operatorname{Ex}^{\\infty}\\operatorname{Sd}T$ and $E(T)=\\operatorname{Ex}^{\\infty}T$. Product projections give $R(S\\times T)\\to R(S)\\times R(T)$, and the last-vertex maps give a commuting triangle from this map to $E(S)\\times E(T)=E(S\\times T)$. The direct arrow is a weak equivalence, since the last-vertex map is one and $E$ preserves weak equivalences as proved above. The arrow from $R(S)\\times R(T)$ is also a weak equivalence: it is a product of weak equivalences between Kan complexes, hence factors as two pullbacks along Kan fibrations to a point, to which right properness applies. Two-out-of-three proves that the product comparison is a weak equivalence. The subdivision reversal respects these product projections degree by degree, and $E$ preserves products. Thus the natural opposite zigzags identify products as well as individual mapping spaces in the homotopy category of Kan complexes.\nThese comparisons respect composition: in the triangle spaces $V(a,b,d)$ of [lem-coef-infinity-mapping-composition], reversal exchanges edges $01$ and $12$ and reverses $02$. Therefore it exchanges precomposition with postcomposition under the canonical composition classes. The calculation is by precomposition on every parameter simplex, so retains the associated higher homotopies. In particular the cone map becomes $u\\mapsto\\Delta_K(u)\\alpha$ on the colimit boundary space $\\operatorname{Map}_{\\operatorname{Fun}(K,D)}(f,\\Delta_Kz)$, and postcomposition by $p$ gives the specified base row.\nFor completeness reversal preserves weak equivalences: the degreewise formula $[\\sigma,(t_0,\\ldots,t_n)]\\mapsto[\\sigma,(t_n,\\ldots,t_0)]$ gives a natural homeomorphism $|T^{\\mathrm{op}}|\\cong|T|$, respecting the realization relations of [def-cbc-enhanced-diagrams-cones] by the same operator conjugation formula. Reversal also identifies $P(u,v)^{\\mathrm{op}}$ with $P(v^{\\mathrm{op}},u^{\\mathrm{op}})$, by exchanging factors and interval endpoints, and preserves the constant-path comparison. Thus reversal, followed by [lem-coef-kan-homotopy-pullback-invariance] along the all-Kan zigzags, preserves and reflects homotopy pullback tests. It takes the all-source test to the all-target test of [def-coef-infinity-relative-cone]; the quantifier over diagrams is unchanged because reversal is involutive. Applying the limit result to $p^{\\mathrm{op}}$ proves exactly the colimit assertion and constant-target equivalence.",
+   "text": "Apply the natural mapping-space equivalences of [lem-coef-infinity-op-mapping-reversal] to the testing squares for $p$ and $p^{\\mathrm{op}}$. That statement exchanges precomposition and postcomposition and compares their specified commutation homotopies, not only their maps on components. The all-Kan zigzag and path-pullback reversal of [lem-coef-infinity-opposite-subdivision-kan-zigzag], followed by [lem-coef-kan-homotopy-pullback-invariance], therefore preserve and reflect the homotopy-pullback test. Degreewise reversal exchanges the two ordered join blocks, giving $(K^{\\triangleright})^{\\mathrm{op}}=(K^{\\mathrm{op}})^{\\triangleleft}$; it also identifies the opposite functor simplicial sets, by reversing the parameter simplex. Hence a right cone and a constant target become a left cone and a constant source. Under these identifications, the reversed map $\\alpha\\Delta(u)$ is $\\Delta(u)\\alpha$, with its reversed coherence path. The limit result of steps 1--3 for $p^{\\mathrm{op}}$ is thus exactly the colimit and constant-target criteria of [def-coef-infinity-relative-cone]. Reversal twice restores the tests, so both implications follow.",
    "uses": [
-    "def-cbc-enhanced-diagrams-cones",
-    "def-coef-infinity-relative-cone",
-    "lem-coef-infinity-pinch-comparison",
-    "lem-coef-subdivision-face-poset-calculus",
-    "lem-coef-subdivision-last-vertex-equivalence",
-    "lem-coef-ex-infinity-finite-products",
-    "lem-coef-kan-quillen-right-proper",
-    "lem-coef-infinity-mapping-composition",
-    "lem-coef-kan-homotopy-pullback-invariance"
+    "lem-coef-infinity-opposite-subdivision-kan-zigzag",
+    "lem-coef-infinity-op-mapping-reversal",
+    "lem-coef-kan-homotopy-pullback-invariance",
+    "def-coef-infinity-relative-cone"
    ],
    "elementary": false,
    "source": {
     "document": "https://kerodon.net/tag/02X1",
-    "place": "Opposite dual of Proposition 7.1.6.19; agent proof using the existing varying-boundary join-cone mapping formula."
+    "place": "Opposite dual of Proposition 7.1.6.19; agent application of the existing composition-compatible mapping reversal, all-Kan opposite zigzag, and path-pullback invariance statements."
    }
   },
   {
@@ -107,19 +101,14 @@
   }
  ],
  "proof_deps": [
-  "lem-coef-infinity-join-cone-calculus",
-  "lem-cbc-enhanced-functor-cone-calculus",
-  "lem-coef-kan-pullback-path-comparison",
-  "lem-coef-kan-homotopy-pullback-invariance",
   "def-coef-infinity-relative-cone",
-  "lem-coef-kan-quillen-right-proper",
-  "lem-coef-space-path-fibration-replacement",
-  "def-cbc-enhanced-diagrams-cones",
-  "lem-coef-infinity-pinch-comparison",
-  "lem-coef-subdivision-face-poset-calculus",
-  "lem-coef-subdivision-last-vertex-equivalence",
-  "lem-coef-ex-infinity-finite-products",
-  "lem-coef-infinity-mapping-composition"
+  "lem-cbc-enhanced-functor-cone-calculus",
+  "lem-coef-infinity-homotopy-pullback-pasting",
+  "lem-coef-infinity-join-cone-calculus",
+  "lem-coef-infinity-op-mapping-reversal",
+  "lem-coef-infinity-opposite-subdivision-kan-zigzag",
+  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-kan-pullback-path-comparison"
  ],
  "proof_origin": {
   "by": "agent",
@@ -255,7 +244,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-relative-cone-equivalence",
@@ -280,8 +269,8 @@
   "date": "2026-10-17",
   "item": "lem-coef-infinity-relative-cone-constant-test",
   "worker": "stage1",
-  "summary": "Replaced the earlier unsupported fixed-boundary mapping-space argument and removed its never-delivered auxiliary node, whose comma clause repackaged the conclusion. Five steps use the existing varying-boundary join-cone formula, path-pullback invariance and fibration replacements to prove the constant-source criterion, then dualize and check naturality. No statement changes and no new nodes. Second reading expanded opposite duality with the subdivision/Ex-infinity zigzag and explicit composition and path reversal; no new node. Current resumption checked every dependency and added the existing path-fibration replacement citation with an explicit strictification of a specified square homotopy; no new nodes or statement changes. Independent second reading wrote out product compatibility for the opposite mapping-space zigzags, corrected an invalid Loogle-query verdict, and recorded a fresh representability search; creation provenance and the permitted split_report.tool_uses declaration are preserved.",
-  "blueprint": "Supporting constant-source/target mapping-space test in the ancestry of proof paragraph 2 of prop-coef-integral-exceptional-adjoint, via relative cone equivalence, relative Kan existence and suspension-square comparison. No unit or chapter route changed.",
+  "summary": "Maintainer correction: remove the two unnecessary new technical nodes. Step 3 now displays the two pasting/cancellation diagrams and applies the existing homotopy-pullback pasting theorem, retaining specified paths. Step 4 directly applies the existing composition- and coherence-compatible opposite mapping comparison and all-Kan path reversal. Statement, statement dependencies, Lean records, status and other proof steps are unchanged.",
+  "blueprint": "Supporting constant-source/target test for proof paragraph 2 of prop-coef-integral-exceptional-adjoint, through the inherited relative-cone and stable-enhancement ancestry. Steps 1--3 give the limit mapping-space test by cone calculus and two pullback pastings; step 4 gives its opposite dual; step 5 gives comparison naturality. No change to the unit or chapter route.",
   "tool_uses": [
    {
     "node": "lem-cbc-enhanced-functor-cone-calculus",
@@ -295,10 +284,10 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q37-ebd5f31fa",
-  "group": "Q37",
+  "reviewer": "NT-Codex-Q19-58ab29b50",
+  "group": "Q19",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-ebd5f31fa (reviewer sub-agent of L); spot-checked: Read the item, all 5 steps, all 13 cited statements and Kerodon 7.1.6.19 (02X1, read online; not archived, WANTED recorded). The item is (2)<=>(3) of 02X1 plus the apex form and colimit dual. The project defines a p-limit by condition (2). The statement assumes no fibration on p and allows any small K, as the source does. Step 1: substituting (z,g,beta) and (x,f,alpha) into the varying-boundary formula of lem-coef-infinity-join-cone-calculus gives A_D x^h_{C_D} M_D with maps a beta and alpha Delta(u). Step 2: for a constant source, beta=id is a fibration. The constant-path map is an equivalence by lem-coef-kan-pullback-path-comparison. It commutes strictly over C_D, so invariance applies and gives the apex square. Step 3: correct pasting through the fibrant replacement A_D x_{C_B} hat M_B, from right properness and the path comparison. Homotopy-commuting squares are made strict through E_r before strict invariance is used. Step 4: checked the operator reversal and U_{D^op}(z,x) = U_D(x,z)^op. Checked the Sd/last-vertex/Ex^infinity zigzag, product compatibility, and triangle-space reversal: alpha Delta(u) becomes Delta(u) alpha, which is the item's colimit variance. Step 5: elementary from join-cone naturality, and it does not claim restriction preserves universality. Edge cases: K empty gives a p-initial object; K a point; p=id; terminal B; empty mapping spaces. All consistent. No new nodes, no cycle (157-node closure excludes the item), proof_deps equals the union of step uses. Duplicate candidates (relative-cocone-parameters, relative-cone-initial-corner, fiber-relative-colimit-criterion, relative-limit-initial-components) state different results. No SGA. Not a target node, so no base-change or coefficient-category check applies. Accepted tool_use: lem-cbc-enhanced-functor-cone-calculus, for generic Kan mapping spaces and functor quasicategories. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q19-58ab29b50 (reviewer sub-agent of L); spot-checked: Read all delivery mathematics and checked Kerodon 02X1, pullback and opposite sources. Removed two unnecessary extraction nodes using existing pasting and coherent reversal statements. Corrected JSON and review.md written; statement unchanged; dependency closure acyclic.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.RelativeConeConstantTest",

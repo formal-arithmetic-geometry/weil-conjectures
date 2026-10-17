@@ -2,7 +2,7 @@
  "id": "lem-amb-shriek-open-exchange-adjoint",
  "kind": "statement",
  "title": "Open compact-support exchange is the extension-composition mate",
- "statement": "Let $A$ be a finite commutative ring. Work on the small etale sites with the ordinary unbounded derived categories $D(T_{\\mathrm{et}},A)$ [def-weil-pbc-derived-categories], exact constant-coefficient inverse image [prop-weil-pbc-inverse-image-modules-exact], and derived tensor [def-kun-derived-tensor]. All schemes mentioned are Noetherian [def-pc-scheme]. Compact-support direct image is the compactification-independent functor of [def-amb-etale-compact-support, lem-amb-unbounded-compact-support-comparisons]. Let $f:X\\to S$ be separated finite type and compactifiable [def-weil-scheme-morphism-properties], let $u:U\\hookrightarrow S$ be open, and put $X_U=X\\times_SU$, $v:X_U\\hookrightarrow X$, and $f_U:X_U\\to U$ [def-pc-fibre-product, def-weil-open-immersion]. Use termwise open extension $Du_!,Dv_!$ with the sum/evaluation adjunctions $Du_!\\dashv u^*$, $Dv_!\\dashv v^*$ [lem-asd-etale-compact-support-normalization, lem-amb-etale-adjoint-locality]. Under the normalized identification of compact support along an open with its extension by zero, let\n$$\\delta_M:Rf_!Dv_!M\\xrightarrow{\\sim}Du_!Rf_{U!}M$$\nbe $\\alpha_{u,f_U}^{-1}\\circ\\alpha_{f,v}$, for the composition comparisons of [lem-amb-unbounded-compact-support-comparisons] and $fv=uf_U$. Let $C_{f,u,F}:u^*Rf_!F\\xrightarrow{\\sim}Rf_{U!}v^*F$ be the canonical compact-support exchange. For every $F\\in D(X_{\\mathrm{et}},A)$, the morphism\n$$\\kappa_F=Rf_!(\\varepsilon_{v,F})\\circ\\delta_{v^*F}^{-1}:Du_!Rf_{U!}v^*F\\longrightarrow Rf_!F$$\nhas adjunct $C_{f,u,F}^{-1}$ under $Du_!\\dashv u^*$. Equivalently,\n$$\\kappa_F=\\varepsilon_{u,Rf_!F}\\circ Du_!(C_{f,u,F}^{-1}).$$\nHere $\\varepsilon_u,\\varepsilon_v$ are the evaluation counits. Thus the right-adjoint restriction isomorphism obtained by the Hom chain through $Dv_!$, $\\delta$, and $Du_!$ is paired with this specific exchange $C_{f,u}$ [thm-amb-etale-exceptional-adjoint]. No boundedness assumption on $F$ is made.",
+ "statement": "Let $A$ be a finite commutative ring. Work on the small etale sites with the ordinary unbounded derived categories $D(T_{\\mathrm{et}},A)$ [def-weil-pbc-derived-categories], exact constant-coefficient inverse image [prop-weil-pbc-inverse-image-modules-exact], and derived tensor [def-kun-derived-tensor]. All schemes mentioned are Noetherian [def-pc-scheme]. Compact-support direct image is the compactification-independent functor of [def-amb-etale-compact-support, lem-amb-unbounded-compact-support-comparisons]. Let $f:X\\to S$ be separated finite type and compactifiable [def-weil-scheme-morphism-properties], let $u:U\\hookrightarrow S$ be open, and put $X_U=X\\times_SU$, $v:X_U\\hookrightarrow X$, and $f_U:X_U\\to U$ [def-pc-fibre-product, def-weil-open-immersion]. Use termwise open extension $Du_!,Dv_!$ with the sum/evaluation adjunctions $Du_!\\dashv u^*$, $Dv_!\\dashv v^*$ [lem-weil-pbc-extension-by-zero-adjunction, lem-amb-etale-adjoint-locality]. Identify compact support along an open $w$ with $Dw_!$ using the compactification $(w,\\mathrm{id})$ and the refinement comparisons of [lem-amb-unbounded-compact-support-comparisons]. Under this normalized identification, let\n$$\\delta_M:Rf_!Dv_!M\\xrightarrow{\\sim}Du_!Rf_{U!}M$$\nbe $\\alpha_{u,f_U}^{-1}\\circ\\alpha_{f,v}$, for the composition comparisons of [lem-amb-unbounded-compact-support-comparisons] and $fv=uf_U$. Let $C_{f,u,F}:u^*Rf_!F\\xrightarrow{\\sim}Rf_{U!}v^*F$ be the canonical compact-support exchange. For every $F\\in D(X_{\\mathrm{et}},A)$, the morphism\n$$\\kappa_F=Rf_!(\\varepsilon_{v,F})\\circ\\delta_{v^*F}^{-1}:Du_!Rf_{U!}v^*F\\longrightarrow Rf_!F$$\nhas adjunct $C_{f,u,F}^{-1}$ under $Du_!\\dashv u^*$. Equivalently,\n$$\\kappa_F=\\varepsilon_{u,Rf_!F}\\circ Du_!(C_{f,u,F}^{-1}).$$\nHere $\\varepsilon_u,\\varepsilon_v$ are the evaluation counits. Thus the right-adjoint restriction isomorphism obtained by the Hom chain through $Dv_!$, $\\delta$, and $Du_!$ is paired with this specific exchange $C_{f,u}$ [thm-amb-etale-exceptional-adjoint]. No boundedness assumption on $F$ is made.",
  "source": {
   "document": "literature/stacks-project/more-etale.tex",
   "place": "Tags 0F7B (lemma-shriek-proper-and-open, its interchange), 0F7J (lemma-shriek-composition), 0F7L (lemma-base-change-shriek). Agent-written identification of the canonical exchange with the extension/composition mate from returned proof step 8."
@@ -17,13 +17,64 @@
   "def-weil-scheme-morphism-properties",
   "def-pc-fibre-product",
   "def-weil-open-immersion",
-  "lem-asd-etale-compact-support-normalization",
+  "lem-weil-pbc-extension-by-zero-adjunction",
   "lem-amb-etale-adjoint-locality",
   "thm-amb-etale-exceptional-adjoint"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a compactification $f=rj$ and its pullback along $u$, writing $b:\\overline X_U\\hookrightarrow\\overline X$, $j_U:X_U\\hookrightarrow\\overline X_U$ and $r_U:\\overline X_U\\to U$. Put $J=Dj_!$, $J'=Dj_{U!}$, $V=Dv_!$, $B=Db_!$, $L=Du_!$, $P=Rr_*$ and $P'=Rr_{U*}$. Let $a:JV\\xrightarrow{\\sim}BJ'$ be the open composition identification for $jv=bj_U$, with its adjunction normalization [lem-cbc-extension-zero-composition]. Open compact support is identified with termwise open extension by choosing $(w,\\mathrm{id})$; the candidate is literally $R\\mathrm{id}_*Dw_!\\cong Dw_!$, and the compact-support comparison theorem identifies any other choice with this one. No comparison for general etale morphisms is needed. The sheaf counit for an open is evaluation [lem-weil-pbc-extension-by-zero-adjunction], and its termwise derived adjunction is [lem-amb-etale-adjoint-locality]. Let $\\Gamma:LP'\\xrightarrow{\\sim}PB$ be the interchange for the cartesian square $(b,r_U,r,u)$. The specified tower formula for $\\alpha$ gives $\\delta_M^{-1}=P(a_M^{-1})\\circ\\Gamma_{J'M}$: for $\\alpha_{f,v}$ the tower square has identity bottom open and gives the open composition identification, while for $\\alpha_{u,f_U}$ it is precisely the square $(b,r_U,r,u)$. Thus this equality uses the specified composition comparisons, not arbitrary isomorphisms. All schemes here are Noetherian by the standing convention; the open maps are quasi-compact and finite type since their targets are Noetherian. Properness and the given compactification supply compactifications of $f_U$ and $fv$. The comparison and interchange statements therefore apply on the whole unbounded categories.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-amb-unbounded-proper-open-interchange",
+    "lem-cbc-extension-zero-composition",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-amb-etale-adjoint-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B (lemma-shriek-proper-and-open, case (b)), 0F7J (lemma-shriek-composition), and 0F7L (lemma-base-change-shriek)"
+   }
+  },
+  {
+   "text": "Here is the mate calculation with all maps specified. Write $E:u^*P\\to P'b^*$ for proper exchange and $e:b^*J\\xrightarrow{\\sim}J'v^*$ for the inverse open base-change comparison. Then $C_F=P'(e_F)\\circ E_{JF}$ by [lem-amb-unbounded-compact-support-comparisons]. The open comparison has the unit normalization of [lem-cbc-derived-extension-zero-base-change-underived-compatibility]; its degreewise equality descends to complexes. For $H=J'v^*F$ define $h=J(\\varepsilon_{v,F})\\circ a_{v^*F}^{-1}:BH\\to JF$. The sheaf evaluation counit, the adjunction-normalized open composition map $a$, and the unit-normalized comparison $e$ give\n$$e_F\\circ b^*h\\circ\\eta_{b,H}=1_H.$$\nIndeed, on an etale test object over $\\overline X_U$, both $b^*BH$ and $H$ are extension by zero from $X_U$. Restricting to $X_U$ identifies $a$ with the identity composition comparison, the restricted evaluation counit with the identity by the open triangle identity, and $e$ with the identity by its unit normalization. Equivalently this is the equality of maps from an open extension determined by their adjoints; the sheaf adjunction formula proves it before passage to complexes. Naturality makes the equality degreewise compatible with differentials, hence an equality in the derived category.\n\nThe cartesian clause of [lem-amb-unbounded-proper-open-interchange] says that the adjunct of $\\Gamma_H$ is $\\lambda_H^{-1}$, where $\\lambda_H=P'(\\eta_{b,H}^{-1})\\circ E_{BH}$. Consequently\n$$E_{BH}\\circ u^*(\\Gamma_H)\\circ\\eta_{u,P'H}=P'(\\eta_{b,H}).$$\nBy Step 1, $\\kappa_F=P(h)\\circ\\Gamma_H$. For its adjunct $m_F=u^*\\kappa_F\\circ\\eta_{u,P'H}$, naturality of $E$ with respect to $h$ now gives the fully typed calculation\n$$\\begin{aligned}\nC_F\\circ m_F\n&=P'(e_F)\\circ E_{JF}\\circ u^*P(h)\\circ u^*(\\Gamma_H)\\circ\\eta_{u,P'H}\\\\\n&=P'(e_F\\circ b^*h)\\circ E_{BH}\\circ u^*(\\Gamma_H)\\circ\\eta_{u,P'H}\\\\\n&=P'(e_F\\circ b^*h\\circ\\eta_{b,H})=1_{P'H}.\n\\end{aligned}$$\nSince $C_F$ is an isomorphism, $m_F=C_F^{-1}$. This calculation also fixes the inverse order: $C_F^{-1}=E_{JF}^{-1}\\circ P'(e_F^{-1})$.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-amb-unbounded-proper-open-interchange",
+    "lem-cbc-extension-zero-composition",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-cbc-derived-extension-zero-base-change-underived-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B (specified proper/open map), 0F7J (tower formula), 0F7L (proper exchange followed by inverse open comparison); etale-cohomology Tags 03S3, 03S6, 0F70 (open adjunction and its unit-normalized comparison). Agent-written explicit mate calculation."
+   }
+  },
+  {
+   "text": "The adjunction bijection for $Du_!\\dashv u^*$ is injective. Therefore the equality of adjuncts in Step 2 proves $\\kappa_F=\\varepsilon_{u,Rf_!F}\\circ Du_!(C_{f,u,F}^{-1})$. Every cited comparison and adjunction is constructed on the whole ordinary unbounded derived category, so the argument applies to arbitrary $F$ and uses no boundedness hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Formal adjunction bijection applied to Steps 1-2; unbounded torsion-ring scope of Tags 0F7H, 0F7B, 0F7L."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-amb-unbounded-proper-open-interchange",
+  "lem-cbc-extension-zero-composition",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-amb-etale-adjoint-locality",
+  "lem-cbc-derived-extension-zero-base-change-underived-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B, 0F7H, 0F7J, 0F7L; etale-cohomology Tags 03S3, 03S6, 0F70. Agent-written explicit mate calculation using only open-extension normalization."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,7 +114,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-amb-vector-bundle-purity",
@@ -75,10 +126,26 @@
  "blueprint": {
   "from": {
    "node": "thm-amb-vector-bundle-purity",
-   "place": "Proof paragraph 2, the ambient adjoint restriction and its identification with the affine-space counit; returned step 8 equations for delta, kappa, and C.",
+   "place": "Parent proof paragraph 2, returned Step 8: identification of the extension/composition comparison delta and its counit mate with the canonical compact-support exchange.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-amb-shriek-open-exchange-adjoint",
+  "worker": "stage1",
+  "summary": "Maintainer-reader repair: removed the unnecessary forbidden general etale normalization citation, choosing the identity-proper compactification for opens instead. Expanded the tower identification and mate calculation with a, h, E, e, Gamma and the equation C m = 1. Mathematical hypotheses and conclusion, including unbounded scope, are unchanged. No new nodes.",
+  "blueprint": "Realizes the parent theorem proof paragraph on restricting to a trivializing open, specifically the returned Step 8 identification of the extension/composition comparison delta, the map kappa, and the canonical exchange C.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q01-21e21c9f3",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q01-21e21c9f3 (reviewer sub-agent of L); spot-checked: Read the item and cited mathematics in full. Checked Stacks 0F7B–0F7L and 03S3/03S6/0F70. Removed the unnecessary SGA-based normalization citation and expanded the specified mate calculation to C·adj(κ)=1. Hypotheses and conclusion remain unchanged. Corrected JSON and review.md written; route and cycle checks passed.; 1 file(s) fixed by the reviewer"
  }
 }

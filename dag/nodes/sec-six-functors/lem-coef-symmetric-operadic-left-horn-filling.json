@@ -25,15 +25,11 @@
    }
   },
   {
-   "text": "We will also use the following consequence of the already cited ordinary cone calculus; it is an argument, not a new operadic existence assumption. For an inner fibration $p:C\\to D$, a fixed diagram $u:K\\to C$, and a relative colimit cocone $c$, the induced functor $C_{u/}\\to D_{pu/}$ is an inner fibration. Indeed [lem-cbc-relative-coslice-left-fibration] with $K_0=\\varnothing$ factors it as a left fibration to $C\\times_D D_{pu/}$ followed by the pullback of $p$. Its mapping space out of $c$ into a cocone $(z,\\beta)$ is the homotopy fiber, at $\\beta$, of the postcomposition map from $\\operatorname{Map}_C(c(*),z)$ to the space of cocones $u\\to\\Delta_K z$. This follows from the fixed-boundary mapping formula of [lem-coef-infinity-join-cone-calculus], reversed, and its join-slice comparison [lem-coef-join-slice-cocone-comparison]. The homotopy-pullback square of [lem-coef-infinity-relative-cone-constant-test] identifies this fiber, relative to every specified base cocone, with the corresponding mapping space in $D_{pu/}$. Homotopy-fiber comparisons are preserved by [lem-coef-kan-homotopy-pullback-invariance], applied to the path-pullback spans, retaining their specified paths. Thus $c$ is relative initial. Apply [lem-coef-infinity-relative-initial-boundary]: a map $K\\star\\partial\\Delta^r\\to C$ over a specified map $K\\star\\Delta^r\\to D$, whose first vertex cone is $c$, extends for every $r>0$. Opposite reversal of joins and universal cones in [lem-coef-infinity-relative-cone-equivalence] gives the dual: $\\partial\\Delta^r\\star K\\to C$ extends over $\\Delta^r\\star K$ if its final vertex cone is relative limiting. There is also a direct last-apex variant: $K\\star\\partial\\Delta^r$ extends when its last apex is $p$-final in $C$. Build $K$ by its nondegenerate simplices. At a $d$-simplex the new part has boundary $(\\partial\\Delta^d\\star\\Delta^r)\\cup(\\Delta^d\\star\\partial\\Delta^r)=\\partial\\Delta^{d+r+1}$. Its last vertex is the same relative-final apex. The dual boundary criterion of [lem-coef-infinity-relative-initial-boundary] fills this simplex over its prescribed base; union gives the result. The initial case $K=\\varnothing$ is that boundary criterion itself. All these statements fix the full boundary and base, and require $r>0$.",
+   "text": "For the ordinary cone extensions used below, [lem-coef-infinity-relative-limit-join-boundary] fills $\\partial\\Delta^r\\star K\\subset\\Delta^r\\star K$ over any specified base when the already specified final-vertex cone is relatively limiting and $r>0$. Its hypotheses allow arbitrary small $K$, including the empty shape, and it fixes the whole boundary exactly. Taking opposites and reversing the joins, as in [lem-coef-infinity-relative-cone-equivalence], gives the corresponding first-vertex relative-colimit version on $K\\star\\partial\\Delta^r$. For the separate last-apex case, [lem-coef-relative-final-apex-join-boundary] fills $K\\star\\partial\\Delta^r\\subset K\\star\\Delta^r$ when the last apex is relative-final in the target of the inner fibration. We will apply this to the nullary target in step 6; the limiting-cone version applies to step 9. These are relative boundary theorems, with no dimension-zero requirement or assertion that other universal cones exist.",
    "uses": [
-    "lem-cbc-relative-coslice-left-fibration",
-    "lem-coef-infinity-join-cone-calculus",
-    "lem-coef-join-slice-cocone-comparison",
-    "lem-coef-infinity-relative-cone-constant-test",
-    "lem-coef-infinity-relative-initial-boundary",
+    "lem-coef-infinity-relative-limit-join-boundary",
     "lem-coef-infinity-relative-cone-equivalence",
-    "lem-coef-kan-homotopy-pullback-invariance"
+    "lem-coef-relative-final-apex-join-boundary"
    ],
    "elementary": false,
    "source": {
@@ -55,9 +51,9 @@
    }
   },
   {
-   "text": "Here is the base filtration used to build the lift. In $N(\\mathrm{Fin}_*)\\times\\Delta^{\\{1,\\ldots,m\\}}$ call a morphism strongly inert if its simplex-coordinate is constant, its pointed map is inert and the injection of nonbasepoint fibers is increasing. Every morphism factors uniquely as strongly inert followed by active: first retain, in their existing order, just those inputs not sent to the basepoint, then apply the original map on those inputs. Call a nondegenerate simplex new if its coordinate image contains every vertex $1,\\ldots,m$, and closed if its last arity is $1$. Use semantic names for the following matching (the printed proof interchanges some group numbers). A closed all-active chain is an active seed. A chain with a neutral arrow has a partner obtained by replacing its last neutral arrow before its final active-then-strongly-inert suffix by its strongly-inert/active factorization; deleting the inserted vertex recovers the chain. More generally these paired chains allow an arbitrary prefix: the longer partner has a distinguished strongly inert arrow followed by a nonempty active block and then a strongly inert tail. Finally an open active-then-strongly-inert chain is paired with the closed chains obtained by appending each of its final color projections. A final arity $s$ gives exactly $s$ such output partners. Closed all-active chains are seeds; an open chain of final arity zero has no partner and is a nullary seed. To check exhaustion, read a chain backwards through its final strongly inert block and then its preceding active block. If nothing remains it is an active seed or an output chain. Otherwise its next arrow is neutral (the shorter member of the neutral pair) or strongly inert followed by a nonempty active block (the longer member). The increasing choice makes factorization and the neutral matching unique.\nFor $k\\geq0$, let $F_k$ be generated by the old boundary $N(\\mathrm{Fin}_*)\\times\\partial\\Delta^{\\{1,\\ldots,m\\}}$, all simplices of dimension $<k$, and the $k$-dimensional longer partners of both kinds. In the full base allow any initial coordinate-zero block whose remaining block lies in $F_k$, and pull this subset back to $M$, obtaining $M(k)$. Since $m\\geq2$, no new zero-dimensional simplex occurs. Thus $M(0)=M_{\\Lambda_0^m}$, the $M(k)$ are increasing, and their union is $M$. It remains to extend a lift from $M(k-1)$ to $M(k)$ for $k>0$.",
+   "text": "Apply [lem-coef-symmetric-operadic-base-matching] to $B=N(\\mathrm{Fin}_*)\\times\\Delta^m$. Use its strongly-inert/active normal form and semantic names for active seeds, nullary seeds, neutral pairs and output pairs. In particular a neutral pair inserts the normal-form factorization and has a strictly inner matched face; an output chain of final arity $s>0$ has exactly $s$ color-projection partners; an output chain of arity zero is a nullary seed. Let $F_k$ and $\\widehat F_k$ be the subsets supplied by that node, and put $M(k)=M\\times_B\\widehat F_k$. Its classification and filtration assertions give $M(0)=M_{\\Lambda_0^m}$, an increasing sequence with union $M$, and the four stated attachment types for $M(k-1)\\subseteq M(k)$, including arbitrary initial coordinate-zero blocks. Thus it remains to extend the lift across these types for every $k>0$. The rank order for the matched pairs is checked separately in step 7.",
    "uses": [
-    "def-coef-symmetric-operadic-family"
+    "lem-coef-symmetric-operadic-base-matching"
    ],
    "elementary": false,
    "source": {
@@ -66,16 +62,10 @@
    }
   },
   {
-   "text": "First adjoin the active seeds whose nondegenerate base image has dimension $k-1$. Well-order their actual lifted nondegenerate simplices $\\tau:\\Delta^r\\to M_+$ by nondecreasing actual dimension. At each stage put $X=M_0\\times_M M_{/\\tau}$. The initial-zero-block description and [lem-coef-quasicategory-simplex-join-attachment] express the actual attachment as a categorical trivial cofibration after adjoining $X\\star\\Delta^r$ along $X\\star\\partial\\Delta^r$; all previously attached simplices stay fixed. Indeed its proper positive-block faces lie in lower base dimension or earlier actual dimension; its zero-block faces are precisely the join-slice evaluation. To fill the model join, take the active subcategory $X_a$. By [lem-coef-symmetric-family-active-slice-calculus], $X_a\\hookrightarrow X$ has a left adjoint, so [lem-coef-cofinal-relative-join-slice-restriction] permits a lift on $X_a\\star\\Delta^r$ to be extended to $X\\star\\Delta^r$ while fixing its entire boundary. Restriction of the active join slice to $b=\\tau(0)$ is a trivial Kan fibration over the source by [lem-coef-initial-poset-slice-restriction], applied to $[r]$, its least vertex $0$, the quasicategory $M_{\\mathrm{act}}$, and its full coordinate-zero subcategory. It lifts all monomorphisms by that statement, hence is a trivial Joyal fibration by the weak factorization system of [lem-coef-joyal-model-structure]. It is therefore a functor equivalence by [lem-coef-joyal-quasicategory-characterizations]. The canonical first cone on $X_a$ is the pullback of the cone on $J_b$. Here $b$ has coordinate $1$, since the seed is new, so step 3 and the invariance in [lem-coef-operadic-colimit-finite-amalgamation] make that cone operadically $q$-colimiting. The final vertex of $\\tau$ has arity $1$. Therefore [lem-coef-operadic-colimit-active-join-boundary] fills the active join exactly. Its hypothesis $r>0$ holds because a new simplex projects onto all $m\\geq2$ positive-coordinate vertices. Use cofinal restriction to fill the full join, then [lem-coef-cocartesian-joyal-fibration] to extend across the comparison into the actual attachment. Repeating and taking unions fills all active seeds.",
+   "text": "First adjoin the active seeds of nondegenerate base dimension $k-1$, well-ordering their actual nondegenerate lifts $\\tau:\\Delta^r\\to M_+$ by nondecreasing actual dimension. Put $X=M_0\\times_M M_{/\\tau}$. The initial-zero-block description and [lem-coef-quasicategory-simplex-join-attachment] reduce the actual attachment to $X\\star\\partial\\Delta^r\\subset X\\star\\Delta^r$, followed by an injective categorical equivalence. All proper positive-block faces are in lower base dimension or earlier actual dimension, so the boundary lift is already fixed. The first vertex $b=\\tau(0)$ has coordinate $1$, and the final vertex has arity $1$. Step 3 supplies the operadically $q$-colimiting canonical cone on $J_b$ from $f_0$. By the first-cone comparison and local extension assertion of [lem-coef-symmetric-operadic-active-seed-attachment], this cone fills the model join over the specified $g$ without changing its boundary. The hypothesis $r>0$ holds because a new positive-coordinate simplex meets all $m\\geq2$ positive vertices. Finally [lem-coef-cocartesian-joyal-fibration] extends across the comparison into the actual attachment. Successor extension and compatible unions as in step 1 fill all active seeds.",
    "uses": [
     "lem-coef-quasicategory-simplex-join-attachment",
-    "lem-coef-symmetric-family-active-slice-calculus",
-    "lem-coef-cofinal-relative-join-slice-restriction",
-    "lem-coef-initial-poset-slice-restriction",
-    "lem-coef-joyal-model-structure",
-    "lem-coef-joyal-quasicategory-characterizations",
-    "lem-coef-operadic-colimit-finite-amalgamation",
-    "lem-coef-operadic-colimit-active-join-boundary",
+    "lem-coef-symmetric-operadic-active-seed-attachment",
     "lem-coef-cocartesian-joyal-fibration"
    ],
    "elementary": false,
@@ -124,13 +114,12 @@
    }
   },
   {
-   "text": "For an output pair, let $\\sigma'$ be the shorter open base simplex, whose last arity is $s>0$. Take all actual nondegenerate simplices $\\tau:\\Delta^r\\to M$ whose positive-coordinate tail maps surjectively onto $\\sigma'$, ordered by actual dimension; $\\tau$ may include an arbitrary initial coordinate-zero block. One attaches $\\tau$ together with its cones to all $s$ final color projections; its boundary and all other faces have been filled by step 7 or an earlier actual dimension. Form the pulled-back family over $\\Delta^r\\star I$, $I=\\{1,\\ldots,s\\}$. By [lem-coef-symmetric-family-inert-cone-initiality], the extension category is $J=\\coprod_{i\\in I}J_i$, with initial $t_i$ represented by a cocartesian inert extension of $\\tau$. The dual join-slice comparison in [lem-coef-quasicategory-simplex-join-attachment], glued over the already filled faces, reduces the actual attachment to $\\partial\\Delta^r\\star J\\subset\\Delta^r\\star J$. Its final-vertex cone is already prescribed, since $r>0$ (a new positive-coordinate simplex must meet all $m\\geq2$ vertices). Restrict that cone to the $t_i$. Its edges in $E$ are inert: they lie in the last vertex fiber and are already in the previously constructed domain, whose partial family map preserves the inherited inert edges. For every test object the two output-Segal squares in [def-coef-symmetric-operadic-family] say that these projection cones in $E$ and $O$ are limiting relative to $N(\\mathrm{Fin}_*)$. Pasting their homotopy pullbacks, with the common lower output-mapping-space diagram, gives\n$$\\operatorname{Map}_E(z,v)\\simeq \\left(\\prod_i\\operatorname{Map}_E(z,v_i)\\right)\\times^h_{\\prod_i\\operatorname{Map}_O(qz,qv_i)}\\operatorname{Map}_O(qz,qv).$$\nThis is exactly the $q$-limit test of [lem-coef-infinity-relative-cone-constant-test]; the pasting is licensed by [lem-coef-infinity-homotopy-pullback-pasting]. Hence the specified final-vertex cone on $I$ is $q$-limiting. [lem-coef-relative-limit-initial-components] transfers this property to the specified cone on $J$. The dual boundary argument of step 2 now fills $\\Delta^r\\star J$ exactly, and [lem-coef-cocartesian-joyal-fibration] fills the join-slice comparison to the actual attachment. Iterate over the actual simplices and over the ordered output pairs. There is no arbitrary relative-limit existence assertion here: the required cone is the already specified inert output cone.",
+   "text": "For an output pair let $\\sigma'$ be the shorter open base simplex, of final arity $s>0$. Order the actual nondegenerate simplices $\\tau:\\Delta^r\\to M$ whose positive-coordinate tails surject onto $\\sigma'$ by actual dimension, including their arbitrary initial zero blocks. The boundary and all other faces are already fixed by step 7 or earlier actual dimension. In the family pulled back over $\\Delta^r\\star I$, $I=\\{1,\\ldots,s\\}$, [lem-coef-symmetric-family-inert-cone-initiality] gives the extension category $J=\\coprod_iJ_i$ with initial $t_i$ represented by cocartesian inert extensions of $\\tau$. The dual comparison of [lem-coef-quasicategory-simplex-join-attachment], glued over fixed faces, reduces the actual attachment to $\\partial\\Delta^r\\star J\\subset\\Delta^r\\star J$. Here $r>0$ since the positive tail meets all $m\\geq2$ vertices. The final-vertex cone is therefore already prescribed. Its restriction to the $t_i$ consists of inert color projections: their edges lie in the last vertex fiber, and the existing partial family map preserves inert edges by [def-coef-symmetric-operadic-family]. Apply [lem-coef-inert-output-relative-limit] to this specified projection cone in $E$ and the given inert-preserving $q$; it is $q$-limiting. [lem-coef-relative-limit-initial-components] then makes the specified cone on $J$ $q$-limiting. The dual boundary theorem from step 2 fills the model join exactly, and [lem-coef-cocartesian-joyal-fibration] extends across the comparison. Iterate over these actual simplices and the ordered output pairs; the cone used throughout is prescribed, not a newly assumed relative limit.",
    "uses": [
     "lem-coef-symmetric-family-inert-cone-initiality",
     "lem-coef-quasicategory-simplex-join-attachment",
     "def-coef-symmetric-operadic-family",
-    "lem-coef-infinity-relative-cone-constant-test",
-    "lem-coef-infinity-homotopy-pullback-pasting",
+    "lem-coef-inert-output-relative-limit",
     "lem-coef-relative-limit-initial-components",
     "lem-coef-cocartesian-joyal-fibration"
    ],
@@ -156,23 +145,18 @@
   "lem-coef-cocartesian-joyal-fibration",
   "lem-coef-joyal-model-structure",
   "def-coef-symmetric-operadic-family",
-  "lem-cbc-relative-coslice-left-fibration",
-  "lem-coef-infinity-join-cone-calculus",
-  "lem-coef-join-slice-cocone-comparison",
-  "lem-coef-infinity-relative-cone-constant-test",
-  "lem-coef-infinity-relative-initial-boundary",
+  "lem-coef-infinity-relative-limit-join-boundary",
   "lem-coef-infinity-relative-cone-equivalence",
-  "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-relative-final-apex-join-boundary",
   "lem-coef-symmetric-family-active-slice-calculus",
   "lem-coef-operadic-colimit-finite-amalgamation",
+  "lem-coef-symmetric-operadic-base-matching",
   "lem-coef-quasicategory-simplex-join-attachment",
-  "lem-coef-cofinal-relative-join-slice-restriction",
-  "lem-coef-initial-poset-slice-restriction",
-  "lem-coef-joyal-quasicategory-characterizations",
-  "lem-coef-operadic-colimit-active-join-boundary",
+  "lem-coef-symmetric-operadic-active-seed-attachment",
   "lem-coef-infinity-homotopy-pullback-pasting",
   "lem-coef-infinity-cocartesian-inner-horn-comparison",
   "lem-coef-symmetric-family-inert-cone-initiality",
+  "lem-coef-inert-output-relative-limit",
   "lem-coef-relative-limit-initial-components"
  ],
  "proof_origin": {
@@ -225,7 +209,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-symmetric-operadic-extension-boundaries",
@@ -256,14 +240,9 @@
   "date": "2026-10-17",
   "item": "lem-coef-symmetric-operadic-left-horn-filling",
   "worker": "stage1",
-  "summary": "Preserved the statement and exact boundary/base requirements. Expanded the symmetric-operadic skeletal matching proof, promoted the colorwise hypothesis by finite amalgamation, isolated seven genuine slice/lifting lemmas, and reused existing ordinary cone, initial-component and Joyal tools. No Mathlib leaves, no finished project attachment, no Lean changes.",
-  "blueprint": "Proof paragraph 2, middle derived mapping-complex comparison before the inverse limit, through the coherent free-module criterion: the symmetric operadic zeroth-horn argument, HA Theorem 3.1.2.3(B). Steps 1-10 realize only the inherited local coherent extension input, using HA 3.1.2.3(B); no change to the unit route.",
-  "tool_uses": [
-   {
-    "node": "lem-cbc-relative-coslice-left-fibration",
-    "why": "The generic relative coslice inner-fibration calculation is used in step 2; no node of this unit states that lifting assertion."
-   }
-  ]
+  "summary": "Repair of the returned long steps 2, 4, 5 and 9: retained the statement, Lean metadata and six other proof steps verbatim; extracted final-apex join lifting, symmetric base matching, local active-seed extension and inert-output relative limits into four statement-only searched nodes, and reused the existing relative-limit join-boundary theorem. The skeletal HA route and exact boundary/base conditions are unchanged.",
+  "blueprint": "Inherited ancestor proof paragraph 2, through the coherent free-module criterion. The unchanged ten-step HA 3.1.2.3(B) route now cites four extracted local lemmas in the four returned steps; the other six proof steps are retained verbatim. The blueprint ancestor is a historical provenance link, not a claim that its current proof spells out this operadic argument.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-cbc-relative-coslice-left-fibration"
@@ -271,9 +250,9 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q120-77d4c5333",
-  "group": "Q120",
+  "reviewer": "NT-Codex-NM-44e1a281c",
+  "group": "NM",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-77d4c5333 (reviewer sub-agent of L); spot-checked: I read the item, all seven new nodes, every cited statement and HA (Sept 2017, local PDF copy, since HA is still WANTED in literature/): Thm 3.1.2.3 with its full proof on pp.329-341, Lemmas 3.1.2.4-3.1.2.5, Prop. 3.1.1.7-3.1.1.8 and Lemma 2.4.4.6. The item statement is HA 3.1.2.3(B) for a cocartesian q, unchanged and not weakened. Its colorwise hypothesis is weaker than Def. 3.1.2.2, and step 3 recovers the all-arity condition exactly as HA step (1) does, using 3.1.1.8 and inert preservation. Steps 1-10 follow HA pp.334-341. The renaming of the misprinted G(2)/G(3) groups is correct. I hand-checked the face cases for the rank ordering on m=2 examples, and the r>0, s=0, empty-J and nullary edge cases. Step 9 replaces HA's restriction argument with relative-limit-initial-components plus the dual boundary criterion, which is valid. The off-unit lemma lem-cbc-relative-coslice-left-fibration is accepted as a generic tool use. The new nodes on 3.1.2.5, active slices, inert initiality, 3.1.1.8, 3.1.1.7 and cofinal relative slices are true, self-contained, searched, and are not restatements of the item. The existing look-alikes are nonsymmetric Δ^op versions, a different setting, so they are not duplicates. One fault (C5/D): the new lem-coef-cocartesian-inner-horn-preimage duplicates the existing lem-coef-infinity-cocartesian-inner-horn-comparison (HA 2.4.4.6, same unit, same hypotheses and conclusion). It is dropped, and in the corrected item file both citations in step 8 and its uses and proof_deps now point to the existing node. Minor: the report says created was changed to Q120, but the file correctly keeps Q20/extension-boundaries; nothing to change.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NM-44e1a281c (reviewer sub-agent of L); spot-checked: Read the item, all new nodes, cited statements, unit/chapter route, report, delivery-errors A–F, and Higher Algebra Theorem 3.1.2.3(B) with its proof. Steps and hypotheses check out; edge cases m=2, s=0/1, empty joins, and r>0 were tested. No duplicates, cycles, route violations, false statements, or missing citations found. Review written to review.md."
  }
 }

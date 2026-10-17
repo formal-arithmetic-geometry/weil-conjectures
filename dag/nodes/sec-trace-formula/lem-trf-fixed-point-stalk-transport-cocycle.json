@@ -1,0 +1,91 @@
+{
+ "id": "lem-trf-fixed-point-stalk-transport-cocycle",
+ "kind": "statement",
+ "title": "Cocycle of the canonical fixed-point stalk transports",
+ "statement": "Use the global finite-field and finite-coefficient conventions of [def-trf-coefficient-conventions]: $k_0=\\mathbf F_q$, $k$ its fixed algebraic closure, $A=\\mathcal O_E/\\varpi_E^n$ with $n\\geq1$ and $\\ell\\ne\\operatorname{char}(k_0)$, $X_0$ separated of finite type over $k_0$, $X=X_0\\times_{k_0}k$ and $s=\\operatorname{Spec}k$. Let $\\Phi:X\\to X$ be the $k$-linear $q$-power scheme Frobenius and $g=g_\\gamma$ the geometric Galois-Frobenius automorphism [def-trf-scheme-frobenius]. Use the derived module pullbacks of [def-weil-derived-pullback-tensor-hom], and put $Q_j=L(\\Phi^j)^*$ and $P_j=L(g^j)^*$ for $j\\geq1$. Fix a $k$-morphism $z:s\\to X$ and a positive integer $d$ with $\\Phi^d z=z$. Write $J_z(L)=L_z=R\\Gamma(s_{\\mathrm{proet}},Lz^*L)$ for the ordinary derived geometric stalk [pur9-def-derived-stalk], for $L\\in D(X_{\\mathrm{proet}},A)$.\n\nFor each positive multiple $j$ of $d$, let $\\rho_{j,L}:J_z(L)\\xrightarrow{\\sim}J_z(Q_jL)$ be the canonical composition comparison $L(\\Phi^jz)^*\\cong Lz^*Q_j$, followed by derived sections, with its source identified using $\\Phi^jz=z$. The composition comparisons are those of [lem-weil-pbc-proetale-derived-pullback-composition], with canonical constant-coefficient identifications. Using the specified multiplicative natural isomorphism $\\kappa^{(j)}:Q_j\\xrightarrow{\\sim}P_j$ of [prop-trf-scheme-galois-comparison], put\n$$t_{j,L}=J_z(\\kappa^{(j)}_L)\\circ\\rho_{j,L}:J_z(L)\\xrightarrow{\\sim}J_z(P_jL).$$\nThen $t_j$ is natural in $L$: for every morphism $u:L\\to M$,\n$$J_z(P_j u)\\circ t_{j,L}=t_{j,M}\\circ J_z(u).$$\nFor positive multiples $a,b$ of $d$, let $c_{a,b}:P_{a+b}\\xrightarrow{\\sim}P_aP_b$ be the canonical pullback-composition comparison (using $g^{a+b}=g^b\\circ g^a$). Then\n$$J_z(c_{a,b,L})\\circ t_{a+b,L}=t_{a,P_bL}\\circ t_{b,L}.$$\nNo Weil structure on $L$, closed point below $z$, trace, or perfectness hypothesis is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-c-proper-global/lem-trf-frobenius-degree-formula.proof.md",
+  "place": "Step 1: the composite identification for m=rd is the r-fold iteration of the one for d; naturality of the canonical stalk identifications"
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-trf-scheme-frobenius",
+  "def-weil-derived-pullback-tensor-hom",
+  "pur9-def-derived-stalk",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "prop-trf-scheme-galois-comparison"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "stalk.*(cocycle|multiplic)|[Ff]robenius.*stalk|stalk.*[Ff]robenius",
+   "results": "0 hits: ; No fixed-point cocycle mixing scheme-Frobenius and Galois-Frobenius derived pullbacks. Read SheafOfModules.pullback_assoc, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:193, and PresheafOfModules.pullback_assoc, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean:142: these give underived pullback associativity only, not the specified Frobenius comparison on a derived geometric stalk.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*(coherence|assoc)|upperStarComp.*assoc",
+   "results": "25 hits: Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean, Mathlib/AlgebraicTopology/ModelCategory/JoyalTrick.lean, Mathlib/AlgebraicTopology/CechNerve.lean, Mathlib/Algebra/Ring/InjSurj.lean, Mathlib/Algebra/Ring/InjSurj.lean, Mathlib/Algebra/Ring/InjSurj.lean, Mathlib/Algebra/Ring/InjSurj.lean, Mathlib/Algebra/Ring/InjSurj.lean; No fixed-point cocycle mixing scheme-Frobenius and Galois-Frobenius derived pullbacks. Read SheafOfModules.pullback_assoc, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:193, and PresheafOfModules.pullback_assoc, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean:142: these give underived pullback associativity only, not the specified Frobenius comparison on a derived geometric stalk.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso, CategoryTheory.Functor.associator",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-17",
+   "verdict": "invalid query"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical stalk identifications for iterated pullback at a fixed geometric point commute with composition",
+   "results": "8 hits: AlgebraicGeometry.Scheme.stalkMap_comp, TopCat.Presheaf.germ_stalkPullbackHom, TopCat.Presheaf.stalkPullbackHom, AlgebraicGeometry.PresheafedSpace.stalkMap.comp, AlgebraicGeometry.Scheme.Hom.stalkMap_comp, AlgebraicGeometry.LocallyRingedSpace.stalkMap_comp, TopCat.Presheaf.stalkPullbackIso, TopCat.Presheaf.germToPullbackStalk; No fixed-point cocycle mixing scheme-Frobenius and Galois-Frobenius derived pullbacks. Read SheafOfModules.pullback_assoc, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:193, and PresheafOfModules.pullback_assoc, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean:142: these give underived pullback associativity only, not the specified Frobenius comparison on a derived geometric stalk.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical stalk transports from a fixed point of scheme Frobenius to geometric Galois pullbacks are natural and multiplicative under addition of positive iterate exponents",
+   "results": "8 hits: MonoidHom.map_iterate_frobeniusEquiv_symm, RingHom.map_iterate_frobeniusEquiv_symm, PerfectClosure.iterate_frobenius_mk, iterateFrobeniusEquiv_add, WittVector.StandardOneDimIsocrystal.frobenius_apply, IsPurelyInseparable.iterateFrobeniusₛₗ, iterateFrobeniusEquiv_symm_add, iterateFrobeniusEquiv_add_apply; No fixed-point cocycle mixing scheme-Frobenius and Galois-Frobenius derived pullbacks. Read SheafOfModules.pullback_assoc, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:193, and PresheafOfModules.pullback_assoc, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean:142: these give underived pullback associativity only, not the specified Frobenius comparison on a derived geometric stalk.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A multiplicative natural isomorphism between two derived pullback actions induces a cocycle of isomorphisms on a fixed geometric fiber",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.fiberPullbackEquiv, CategoryTheory.PreGaloisCategory.fiberPullbackEquiv_symm_fst_apply, CategoryTheory.Functor.IsFibered.pullbackPullbackIso, CategoryTheory.PreGaloisCategory.fiberPullbackEquiv_symm_snd_apply, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, CategoryTheory.PresheafOfGroups.OneCocycle.ev_symm, CategoryTheory.PresheafOfGroups.OneCocycle.IsCohomologous, Trivialization.pullback_apply; No fixed-point cocycle mixing scheme-Frobenius and Galois-Frobenius derived pullbacks. Read SheafOfModules.pullback_assoc, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:193, and PresheafOfModules.pullback_assoc, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean:142: these give underived pullback associativity only, not the specified Frobenius comparison on a derived geometric stalk.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality, CategoryTheory.Functor.associator",
+   "results": "0 hits: ; No fixed-point cocycle mixing scheme-Frobenius and Galois-Frobenius derived pullbacks. Read SheafOfModules.pullback_assoc, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:193, and PresheafOfModules.pullback_assoc, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean:142: these give underived pullback associativity only, not the specified Frobenius comparison on a derived geometric stalk.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-frobenius-degree-formula",
+  "date": "2026-10-17",
+  "group": "Q23"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-c-proper-global",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-frobenius-degree-formula",
+   "place": "Step 1: the composite identification for m=rd is the r-fold iteration of the one for d; naturality of the canonical stalk identifications",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

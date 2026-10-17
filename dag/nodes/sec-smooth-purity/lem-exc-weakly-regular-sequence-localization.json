@@ -1,0 +1,76 @@
+{
+ "id": "lem-exc-weakly-regular-sequence-localization",
+ "kind": "statement",
+ "title": "Weakly regular sequences are preserved by localization",
+ "statement": "Let $R$ be a commutative ring, let $T\\subseteq R$ be a multiplicative subset ($1\\in T$ and $st\\in T$ whenever $s,t\\in T$), and let $S=T^{-1}R$ be its ring localization [def-weil-pbc-module-localization]. Let $r\\geq0$ and $x_1,\\ldots,x_r\\in R$. Suppose that multiplication by $x_i$ on $R/(x_1,\\ldots,x_{i-1})$ is injective for every $1\\leq i\\leq r$ (the weak regularity condition (1) of [def-weil-pbc-regular-sequence]). Then multiplication by the image of $x_i$ on $S/(x_1,\\ldots,x_{i-1})S$ is injective for every $1\\leq i\\leq r$. No nonzero final quotient is asserted.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07P9, lemma-intersection-regular-with-closed: preservation of the chosen sequence on further localization. Exact weak-regularity formulation: Mathlib/RingTheory/Regular/Flat.lean, RingTheory.Sequence.IsWeaklyRegular.of_isLocalization, lines 59-61 (variables lines 28-29 and 51)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-regular-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A weakly regular sequence remains weakly regular after localization at a multiplicative set",
+   "results": "{\"t\": \"2026-10-17T08:05:17Z\", \"tool\": \"leanfinder\", \"query\": \"A weakly regular sequence remains weakly regular after localization at a multiplicative set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsWeaklyRegular.of_isLocalization\", \"RingTheory.Sequence.IsWeaklyRegular.of_isLocalizedModule\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"RingTheory.Sequence.isWeaklyRegular_map_algebraMap_iff\", \"IsLocalization.isRegular_mk'\", \"RingTheory.Sequence.IsRegular.toIsWeaklyRegular\", \"RingTheory.Sequence.IsWeaklyRegular.cons\"], \"digest\": \"e76046bc44cbb538\"}",
+   "date": "2026-10-17",
+   "verdict": "match: RingTheory.Sequence.IsWeaklyRegular.of_isLocalization, Mathlib/RingTheory/Regular/Flat.lean:59-61; read full variables and declaration at lines 28-61."
+  },
+  {
+   "tool": "loogle",
+   "query": "RingTheory.Sequence.IsWeaklyRegular, Module.Flat",
+   "results": "{\"t\": \"2026-10-17T08:05:05Z\", \"tool\": \"loogle\", \"query\": \"RingTheory.Sequence.IsWeaklyRegular, Module.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsWeaklyRegular.isWeaklyRegular_lTensor\", \"RingTheory.Sequence.IsWeaklyRegular.isWeaklyRegular_rTensor\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange\"], \"digest\": \"fee87f1c7dd2b564\"}",
+   "date": "2026-10-17",
+   "verdict": "generalization: IsWeaklyRegular.of_flat at Flat.lean:47-49; localization case read at lines 59-61."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem IsWeaklyRegular.of_isLocalization",
+   "results": "{\"t\": \"2026-10-17T08:06:26Z\", \"tool\": \"grep\", \"query\": \"theorem IsWeaklyRegular.of_isLocalization\", \"sub\": \"RingTheory/Regular\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Regular/Flat.lean\"], \"digest\": \"9cec537b345cffd2\"}",
+   "date": "2026-10-17",
+   "verdict": "match: RingTheory.Sequence.IsWeaklyRegular.of_isLocalization, Mathlib/RingTheory/Regular/Flat.lean:59-61; read full variables and declaration at lines 28-61."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weakly regular sequences are preserved by localization",
+   "results": "{\"t\": \"2026-10-17T08:05:05Z\", \"tool\": \"leansearch\", \"query\": \"Weakly regular sequences are preserved by localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsWeaklyRegular.of_isLocalization\", \"RingTheory.Sequence.IsWeaklyRegular.of_isLocalizedModule\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"RingTheory.Sequence.IsWeaklyRegular.mk\", \"LocalizationPreserves\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange\", \"RingTheory.Sequence.IsWeaklyRegular.isWeaklyRegular_lTensor\"], \"digest\": \"f16aa52a0c9fe466\"}",
+   "date": "2026-10-17",
+   "verdict": "match: RingTheory.Sequence.IsWeaklyRegular.of_isLocalization, Mathlib/RingTheory/Regular/Flat.lean:59-61; read full variables and declaration at lines 28-61."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "RingTheory.Sequence.IsWeaklyRegular.of_isLocalization",
+  "file": "Mathlib/RingTheory/Regular/Flat.lean",
+  "line": 59,
+  "how": "exact: lines 59-61, with variables at lines 28-29 and 51. Set S = Localization T. IsWeaklyRegular is precisely injectivity of each prefix-quotient multiplication (Regular/RegularSequence.lean:132-137). The ideal-prefix quotient and the module quotient for M = R agree directly because I • R = I. No nontriviality hypothesis or final-quotient assertion is present."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-exc-regular-locus-open-from-prime-quotients",
+  "date": "2026-10-17",
+  "group": "NA"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "thm-exc-curve-open-dimension-general",
+   "place": "Proof, second paragraph: \"finite-type field algebras are excellent\"; the J-2 condition for the ground field in the field-excellence input. Supporting the localization of the regular sequence in the J-1 proof (Stacks 07P9).",
+   "via": [
+    "lem-exc-regular-locus-open-from-prime-quotients",
+    "lem-exc-j2-residue-field-criterion",
+    "lem-exc-fields-excellent",
+    "lem-exc-field-algebra-strict-henselization-excellent"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -3,41 +3,123 @@
  "blueprint": {
   "is": "lem-wf-constant-twist-cohomology",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Projection formula for a constant twist",
- "statement": "In the setting of [def-wf-constant-weil-twist], let\n$h:X_0\\to Y_0$ be a\nseparated finite-type\nmorphism of separated finite-type $k_0$-schemes, let\n$\\mathcal K$ be a constructible $\\Qlb$-Weil complex on $X_0$, and\nlet $\\mathcal B_b$ be the\nconstant Weil twist on $Y_0$.\nThere is a Frobenius-compatible isomorphism\n\n$$\nRh_!\\bigl(\\mathcal K\\otimes h^*\\mathcal B_b\\bigr)\n\\;\\cong\\;Rh_!\\mathcal K\\otimes\\mathcal B_b.\n$$",
+ "statement": "Fix a finite field $k_0=\\mathbf F_q$ of characteristic $p$, an algebraic closure $k$ of $k_0$, a prime $\\ell\\ne p$, and an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$, using the Weil categories of [def-wf-weil-category]. Let\n$h:X_0\\to Y_0$ be a\nseparated finite-type\nmorphism of separated finite-type $k_0$-schemes, let\n$\\mathcal K$ be a constructible $\\Qlb$-Weil complex on $X_0$, and\nlet $b\\in\\Qlb^\\times$ and let $\\mathcal B_b$ be the\nconstant Weil twist of [def-wf-constant-weil-twist] on $Y_0$.\nThere is a Frobenius-compatible isomorphism\n\n$$\nRh_!\\bigl(\\mathcal K\\otimes h^*\\mathcal B_b\\bigr)\n\\;\\cong\\;Rh_!\\mathcal K\\otimes\\mathcal B_b.\n$$",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-wf-constant-twist-cohomology.md",
   "place": "node lem-wf-constant-twist-cohomology, order 2772"
  },
  "stmt_deps": [
   "def-wf-constant-weil-twist",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-wf-weil-category",
+  "def-wf-tensor-product",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-integral-rational-qbar-compact-support"
  ],
  "proof": [
   {
-   "text": "This is the projection formula for the compact-support direct image,\n[fix-prop-projection-formula] of the framework chapter, applied to the\nconstant rank-one twist $\\mathcal B_b$ of\n[def-wf-constant-weil-twist]; the projection formula is compatible\nwith the Frobenius descent data, so the identification is\nFrobenius-compatible.",
+   "text": "Write $X=X_0\\times_{k_0}k$, $Y=Y_0\\times_{k_0}k$, and $f=h\\times_{k_0}k$ for the geometric morphism. The coefficient object $\\mathcal B_b$ of [def-wf-constant-weil-twist] is a rank-one Weil sheaf, regarded in degree zero, so its underlying complex is bounded constructible. At $\\Qlb$ coefficients [def-weil-finite-tor-amplitude] defines $D^b_{ctf}(Y,\\Qlb)=D^b_c(Y,\\Qlb)$. Thus $L=\\mathcal B_b$ meets the finite-Tor input condition of the projection formula, while $K=\\mathcal K$ meets its bounded constructible input condition by hypothesis. No integrality or absolute-value condition on the nonzero scalar $b$ is required.",
    "uses": [
-    "fix-prop-projection-formula",
-    "def-wf-constant-weil-twist"
+    "def-wf-constant-weil-twist",
+    "def-weil-finite-tor-amplitude"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-wf-constant-twist-cohomology.proof.md",
+    "place": "Proof, application to the constant rank-one twist: input-domain check"
+   }
+  },
+  {
+   "text": "Apply [fix-prop-projection-formula] to the separated finite-type finite-field model $h:X_0\\to Y_0$, its geometric morphism $f$, and the inputs $K=\\mathcal K$, $L=\\mathcal B_b$ checked in step 1. Its algebraically closed coefficient clause gives $u:Rh_!\\mathcal K\\otimes^L\\mathcal B_b\\xrightarrow{\\sim}Rh_!(\\mathcal K\\otimes^L h^*\\mathcal B_b)$ in the Weil category itself. The theorem explicitly restricts to that category for geometric base changes of separated finite-type $k_0$-morphisms between separated finite-type $k_0$-schemes, precisely the hypotheses here; in particular $u$ is Frobenius-compatible. The tensor and pullback in this formula are the derived operations denoted by $\\otimes$ and $h^*$ in the item.",
+   "uses": [
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-wf-constant-twist-cohomology.proof.md",
+    "place": "Proof, projection formula for compact-support direct image and its Weil restriction"
+   }
+  },
+  {
+   "text": "Set $S=Rh_!\\mathcal K\\otimes\\mathcal B_b$ and $T=Rh_!(\\mathcal K\\otimes h^*\\mathcal B_b)$. In the notation of [def-wf-weil-category], Frobenius compatibility of $u:S\\to T$ reads $u\\varphi_S=\\varphi_T\\Phi_Y^*(u)$. Composing on the left with $u^{-1}$ and on the right with $\\Phi_Y^*(u^{-1})$ gives $\\varphi_S\\Phi_Y^*(u^{-1})=u^{-1}\\varphi_T$. Hence $u^{-1}:T\\to S$ is a Weil morphism, with inverse $u$, and is the required Frobenius-compatible isomorphism in the direction displayed in the statement. The same equations hold for common-stage morphism classes in the $\\Qlb$ category by its definition.",
+   "uses": [
+    "def-wf-weil-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-wf-constant-twist-cohomology.proof.md",
+    "place": "Proof, Frobenius compatibility: inverse of the Weil projection isomorphism"
+   }
   }
  ],
  "proof_deps": [
-  "fix-prop-projection-formula",
-  "def-wf-constant-weil-twist"
+  "def-weil-finite-tor-amplitude",
+  "def-wf-constant-weil-twist",
+  "def-wf-weil-category",
+  "fix-prop-projection-formula"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-wf-constant-twist-cohomology.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-wf-constant-twist-cohomology.proof.md",
+  "place": "Proof, expanded into domain check, existing projection formula, and inverse equation"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for compactly supported direct image of a constructible Weil complex tensored with a constant rank one Weil twist over a finite field",
+   "results": "8 hits: LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.ihomPoints_symm_comp, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf. Inspected returned types: unrelated condensed internal projectivity, constant sheaf composition, compact-support functions, or Lean structure projections; no Weil compact-support projection formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constantTwist|WeilComplex|projectionFormula",
+   "results": "0 hits in Mathlib.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support direct image of a Weil complex commutes with tensoring a constant rank one sheaf",
+   "results": "8 hits: CategoryTheory.constantCommuteCompose, CategoryTheory.constantSheafAdj_counit_w, HasCompactSupport.comp_isClosedEmbedding, HomologicalComplex.instIsSupportedOfIsStrictlySupported, CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf, SheafOfModules.sheafificationCompPullback, CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf, CompactlySupportedContinuousMap.instSMulCommClass. Inspected returned types: unrelated condensed internal projectivity, constant sheaf composition, compact-support functions, or Lean structure projections; no Weil compact-support projection formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Weil, projectionFormula",
+   "results": "Query rejected: unknown identifier Weil. No declaration comparison possible.",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.formula|ProjectionFormula|lowerShriek|WeilSheaf",
+   "results": "3 hits: Manifold/VectorBundle/CovariantDerivative/Basic.lean:146 comment on connections; RingTheory/WittVector/Identities.lean:20,98 Frobenius/Verschiebung identities. None is a derived sheaf formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\"",
+   "results": "12 hits: Lean.AuxParentProjectionInfo, Lean.ProjectionFunctionInfo, Lean.instInhabitedAuxParentProjectionInfo, Lean.instInhabitedProjectionFunctionInfo, Lean.instReprAuxParentProjectionInfo, Lean.instReprProjectionFunctionInfo, Lean.projectionFnInfoExt, Lean.AuxParentProjectionInfo.fromClass. Inspected returned types: unrelated condensed internal projectivity, constant sheaf composition, compact-support functions, or Lean structure projections; no Weil compact-support projection formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of schemes the derived direct image with compact support satisfies the projection formula Rf! (K tensor f* L) is isomorphic to Rf! K tensor L",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforward_assoc, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, SheafOfModules.pushforwardComp, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardNatIso, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app. Inspected returned types: module-sheaf pushforward composition, no derived compact support or Weil objects.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -101,5 +183,29 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here); Lean refresh 7d675a26 (L): moved from WeilConjectures.WeilSheaf.Tensor:127"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-wf-constant-twist-cohomology",
+  "worker": "stage1",
+  "summary": "Kept the source mathematical content, expanding its setting into explicit finite-field and coefficient data and expanded its projection-formula specialization into three checked steps. Explicitly checked the finite-Tor domain using the field-coefficient definition, used the existing all-stage projection formula including its Weil restriction, and wrote out the inverse Frobenius equation. No new nodes were needed; added explicit statement dependencies for the Weil category and derived operations. The upstream tagged Lean theorem covers sheaves and higher images only, not this whole-complex statement. Its open affine-finiteness declaration already has a DAG node.",
+  "blueprint": "main-20261015 lem-wf-constant-twist-cohomology.proof.md: first sentence (projection formula applied to the constant rank-one twist) is steps 1–2; final Frobenius-compatibility clause is steps 2–3.",
+  "tool_uses": [
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "General compact-support projection formula, including the Weil restriction, specialized to a constant rank-one twist. This is exactly the tool cited in the blueprint proof; no node of the weight-existence unit proves the six-functor formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "fix-prop-projection-formula"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q126-11db00220",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q126-11db00220 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements and source passages, and unit/chapter route. All three steps check out, including finite-Tor inputs and the inverse Frobenius equation. Accepted fix-prop-projection-formula as a generic tool use. No new nodes, duplicate, cycle, coefficient-category substitution, or repair found. Detailed checks recorded in review.md."
  }
 }

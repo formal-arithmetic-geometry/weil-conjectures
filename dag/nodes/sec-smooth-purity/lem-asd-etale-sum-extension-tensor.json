@@ -1,0 +1,83 @@
+{
+ "kind": "statement",
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "thm-asd-smooth-tensor",
+  "date": "2026-10-17",
+  "group": "Q54"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "id": "lem-asd-etale-sum-extension-tensor",
+ "title": "Tensor compatibility for etale sum extension",
+ "statement": "Let $A$ be a finite commutative ring and let $v:V\\to T$ be a separated etale morphism of finite type between Noetherian schemes (schemes admitting finite affine covers by spectra of Noetherian rings). On the entire ordinary etale derived categories of constant-$A$ module sheaves, for $B\\in D(T_{\\mathrm{et}},A)$ and $M\\in D(V_{\\mathrm{et}},A)$, the canonical map induced by the termwise sum-extension construction\n$$v_!(v^*B\\otimes_A^L M)\\longrightarrow B\\otimes_A^L v_!M$$\nis an isomorphism. Write $P_{B,M}$ for this comparison and $\\epsilon_C:v_!v^*C\\to C$ for the fold counit of $v_!\\dashv v^*$ [lem-amb-etale-adjoint-locality]. For every $C\\in D(T_{\\mathrm{et}},A)$ its counit compatibility is the identity\n$$(1_B\\otimes\\epsilon_C)\\circ P_{B,v^*C}=\\epsilon_{B\\otimes_A^LC}\\circ v_!(\\theta_{B,C}),$$\nwhere $\\theta_{B,C}:v^*B\\otimes_A^Lv^*C\\xrightarrow{\\sim}v^*(B\\otimes_A^LC)$ is the canonical tensor-pullback comparison. The assertion and this equality hold for arbitrary unbounded $B,M,C$. The notation and functors used here are the ones in [def-weil-pbc-derived-categories] [def-weil-pbc-etale-sum-extension] [def-weil-pbc-inverse-image] [def-kun-derived-tensor] [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] [prop-weil-pbc-inverse-image-modules-exact]. The scheme, Noetherian, etale, separated and finite-type notions are as in [def-pc-scheme] [def-weil-pbc-noetherian-ring] [def-weil-etale-morphism] [def-weil-proper-morphism] [def-weil-finite-type-morphism].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-asd-smooth-tensor.md",
+  "place": "Proof paragraph 3: the sum-extension stalk calculation and its fold-counit/tensor compatibility."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-pbc-inverse-image",
+  "def-kun-derived-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-amb-etale-adjoint-locality",
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-etale-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along an etale morphism commutes with tensoring a pulled back complex and its fold counit",
+   "results": "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex, Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange, Algebra.FormallyEtale.instTensorProduct, KaehlerDifferential.isBaseChange_of_formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, Algebra.Etale.baseChange, Algebra.Extension.tensorCotangent",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern Kähler differentials and formal-etale ring algebra, not sheaf sum extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor",
+   "results": "CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor",
+   "date": "2026-10-17",
+   "verdict": "generalization: generic monoidal-adjunction counit identity, not etale sum extension"
+  },
+  {
+   "tool": "grep",
+   "query": "sumExtension|extension.*zero.*tensor|tensor.*extension.*zero|lowerShriek",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale sum extension tensor product projection formula fold counit",
+   "results": "CoalgCat.MonoidalCategoryAux.counit_tensorObj, TensorProduct.counit_def, TensorProduct.counit_tmul, Bialgebra.TensorProduct.counit_eq_algHom_toLinearMap, Bialgebra.TensorProduct.counitAlgHom_def, Prod.counit_comp_inl, ModuleCat.RestrictionCoextensionAdj.counit', ModuleCat.ExtendRestrictScalarsAdj.counit_app",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern coalgebra counits and module change of rings, not etale sheaf extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor projection formula for the left adjoint extension by zero of sheaves along an etale morphism",
+   "results": "SheafOfModules.pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.PullbackConstruction.adjunction, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-17",
+   "verdict": "no match: sheaf pullback adjunction and condensed-module internal projectivity do not state tensor compatibility for etale sum extension"
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "thm-asd-smooth-tensor",
+   "place": "Proof paragraph 3: the sum-extension tensor/counit calculation and the normalized affine-space/etale tensor-mate factorization.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

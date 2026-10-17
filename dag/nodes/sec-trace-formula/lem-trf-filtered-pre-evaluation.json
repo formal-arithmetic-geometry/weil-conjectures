@@ -1,11 +1,134 @@
 {
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
- "status": "unsplit",
+ "status": "split",
  "mathlib_match": null,
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "All objects below are at the fixed finite stage $A=A_{E,n}$. The coefficient unit has Tor amplitude $[0,0]$. The finite-stage preservation assertions of [prop-functor-package] therefore put $\\omega_X=Ra_X^!A$, $D_XP=R\\mathcal Hom_A(P,\\omega_X)$, $G P=Rc_{1!}c_2^*P$ and $B=p_1^*Q\\otimes_A^Lp_2^*D_XP$ in their respective bounded constructible finite-Tor categories. This last equality is [def-trf-external-product]. In particular $L\\Delta^*B$ is in $D^b_{ctf}(X,A)$, so the right-adjoint fixed-square comparison may be evaluated on it. Every exceptional functor here uses precisely the constructible admissibility required in the statement. The triangulated lifts in [lem-trf-filtered-operations-hom] give the same domain checks grade by grade for finite filtered inputs; the finitely many tensor/Hom summands remain in these domains.",
+   "uses": [
+    "prop-functor-package",
+    "def-trf-external-product",
+    "lem-trf-filtered-operations-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.2.1(b); Lemma 5.3.2 proof, domains of the pre-evaluation factor"
+   }
+  },
+  {
+   "text": "Apply [sk-thm-sf-tensor-hom] with $f=c_1$, $M=c_2^*P$ and $N=Q$, and invert its canonical comparison. Taking derived global sections gives\n$$R\\operatorname{Hom}_X(GP,Q)\\simeq R\\Gamma(C,R\\mathcal Hom_A(c_2^*P,c_1^!Q)).$$\nHere [lem-sfb-derived-internal-hom-sections-model](2) identifies global sections of internal Hom with the global Hom complex, in both variables; [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] identifies $R\\Gamma(X,Rc_{1*}(-))$ with $R\\Gamma(C,-)$. Thus this is an isomorphism of complexes in the derived category of abelian groups, rather than merely the degree-zero adjunction bijection. The hypotheses of the tensor--Hom theorem hold by step 1 and the separated finite-type assumptions on $c_1$. Its comparison is natural in the two inputs and shift compatible.",
+   "uses": [
+    "sk-thm-sf-tensor-hom",
+    "lem-sfb-derived-internal-hom-sections-model",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 5.3.2 proof, first displayed composite and the exceptional adjunction immediately following it; global sections version"
+   }
+  },
+  {
+   "text": "The pullback compositor of [lem-weil-pbc-proetale-derived-pullback-composition] identifies $c^*p_2^*P$ with $c_2^*P$; the exceptional compositor in [def-trf-admissibility] identifies $c^!p_1^!Q$ with $c_1^!Q$. The constant coefficient identifications compose because both maps send a constant section $a$ to the constant section $a$. Apply [lem-trf-exceptional-internal-hom-exchange] with $M=p_2^*P$ and $N=p_1^!Q$, and then apply $c^!$ to the inverse of $\\kappa_{Q,P}$ from [thm-trf-kunneth-verdier]. This gives\n$$R\\mathcal Hom_A(c_2^*P,c_1^!Q)\\simeq c^!R\\mathcal Hom_A(p_2^*P,p_1^!Q)\\simeq c^!B.$$\nThe first argument is an ordinary pullback, as required by the exchange lemma. The exceptional hypotheses for the Künneth comparison are exactly those for $a_X$ and $p_1$ in the statement. Compose global sections of this comparison with step 2: the result is the specified $\\alpha_{P,Q}$, with the inverse Künneth comparison in the required direction.",
+   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-trf-admissibility",
+    "lem-trf-exceptional-internal-hom-exchange",
+    "thm-trf-kunneth-verdier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 5.3.2 proof, construction of Tr″ using the external-duality identification, with the two legs interchanged"
+   }
+  },
+  {
+   "text": "Let $\\eta:\\operatorname{id}\\to R\\Delta_*L\\Delta^*$ be the ordinary adjunction unit. Apply $c^!$ and then $R\\Gamma(C,-)$ to $\\eta_B$. For $N=L\\Delta^*B$, clause (2) of [thm-trf-fixed-point-base-change] gives\n$$c^!R\\Delta_*N\\xrightarrow{Bc}Ri_*d^!N.$$\nAfter taking global sections, use the inverse direct-image compositor of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] for $i:F\\to C$ and global sections. We obtain the middle arrows of the asserted composite with target $R\\Gamma(F,d^!L\\Delta^*B)$. The ordinary unit and the composition transformations are among those specified in [lem-trf-filtered-operations-hom]. In particular this uses the right-adjoint comparison $c^!R\\Delta_*\\to Ri_*d^!$, with exactly that orientation, and requires neither properness of $c$ nor a smoothness hypothesis on $\\Delta$.",
+   "uses": [
+    "thm-trf-fixed-point-base-change",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-trf-filtered-operations-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 5.3.2 proof, Tr″ before evaluation; §§5.2.1–5.2.2, ordinary unit and fixed-square exchange"
+   }
+  },
+  {
+   "text": "By [def-trf-external-product], apply the monoidal comparison of [lem-pur-derived-pullback-tensor-iso] to $\\Delta$ and the two factors of $B$. Since $p_1\\Delta=p_2\\Delta=\\operatorname{id}_X$, the inverses of the compositors of [lem-weil-pbc-proetale-derived-pullback-composition] give\n$$L\\Delta^*B\\simeq Q\\otimes_A^LD_XP.$$\nOn flat K-flat representatives interchange homogeneous sections $u\\in Q^a$, $v\\in(D_XP)^b$ by $u\\otimes v\\mapsto(-1)^{ab}v\\otimes u$. The tensor differential gives coefficients $(-1)^{ab}$ on $dv\\otimes u$ and $(-1)^{ab+b}$ on $v\\otimes du$ on either side, so this is a chain isomorphism, natural in both complexes, whose square is the identity. The resolving localization and natural-transformation descent in [lem-weil-pbc-site-derived-tensor-descent] descend it to the signed symmetry of derived tensor. This yields $L\\Delta^*B\\simeq D_XP\\otimes_A^LQ$. Apply $R\\Gamma(F,d^!(-))$ to obtain the final arrow.",
+   "uses": [
+    "def-trf-external-product",
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 5.3.2 proof, target of Tr″, identifying diagonal restriction with dual tensor before ev"
+   }
+  },
+  {
+   "text": "For $a:P'\\to P$ and $b:Q\\to Q'$, the map of external products is $b\\boxtimes D_Xa:B(P,Q)\\to B(P',Q')$. The adjunction comparison in step 2 and the exchange and Künneth comparisons in step 3 are natural in precisely these variables. Naturality of the unit says $(R\\Delta_*L\\Delta^*(b\\boxtimes D_Xa))\\eta_B=\\eta_{B'}(b\\boxtimes D_Xa)$; naturality of fixed-square exchange and the diagonal tensor comparison then gives\n$$T''_{P',Q'}\\circ R\\operatorname{Hom}_X(Ga,b)=R\\Gamma(F,d^!(D_Xa\\otimes b))\\circ T''_{P,Q}.$$\nThus the composite is contravariant in $P$ and covariant in $Q$. Its source and target are triangulated in each variable: use the triangulated operations and Hom/tensor lifts of [lem-trf-filtered-operations-hom], and then forget filtration (ordinary inputs may be placed in filtration degree zero). Contravariance uses the usual opposite triangulated structure; the tensor symmetry is the signed one of step 5.",
+   "uses": [
+    "lem-trf-filtered-operations-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "Lemma 5.3.2 proof, assertion that Tr″ is a morphism of bifunctors; §§5.2.1–5.2.2"
+   }
+  },
+  {
+   "text": "Use the filtered operations and compatible adjunction, composition and trace-construction transformations of [lem-trf-filtered-operations-hom]. Set $G^F=Rc_{1!}^Fc_2^{*F}$, $D_X^FP=R\\mathcal Hom^F(P,\\omega_X[0]_{\\mathrm{fil}})$ and $B^F=Q\\boxtimes^FD_X^FP$. For $P_p=\\operatorname{gr}^pP$, $Q_q=\\operatorname{gr}^qQ$, its tensor/Hom formulas give\n$$\\operatorname{gr}^rB^F=\\bigoplus_{q-p=r}Q_q\\boxtimes D_XP_p.$$\nIndeed $\\operatorname{gr}^{-p}D_X^FP=D_XP_p$, because $\\omega_X$ has only grade zero. Form the filtered versions of the adjunction, exceptional-Hom exchange and Künneth maps used in steps 2–3 from these compatible transformations. On grade $r$ their maps are the finite direct sums over $q-p=r$ of the ordinary maps for $(P_p,Q_q)$, by the displayed Hom/tensor formulas and the graded compatibility clause. Each component is an isomorphism by steps 2–3, using [sk-thm-sf-tensor-hom], [lem-trf-exceptional-internal-hom-exchange] and [thm-trf-kunneth-verdier]. The graded pieces detect zero cones by [lem-trf-filtered-operations-hom], so these filtered maps are isomorphisms and their inverses exist. Composing them in the same order defines $\\alpha^F_{P,Q}:R\\operatorname{Hom}^F_X(G^FP,Q)\\simeq R\\Gamma^F(C,c^{!F}B^F)$. Its underlying map is $\\alpha_{\\omega P,\\omega Q}$. This verifies the inversions needed for the filtered construction rather than inferring invertibility from the underlying map alone.",
+   "uses": [
+    "lem-trf-filtered-operations-hom",
+    "sk-thm-sf-tensor-hom",
+    "lem-trf-exceptional-internal-hom-exchange",
+    "thm-trf-kunneth-verdier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§5.2.2, adjunction and inversion of filtered isomorphisms; Lemma 5.3.2 proof, bifunctor Tr″"
+   }
+  },
+  {
+   "text": "Continue with the filtered unit $\\eta_{B^F}$ and filtered right-adjoint fixed-square exchange, followed by the filtered global direct-image compositor, all supplied by [lem-trf-filtered-operations-hom]. The exchange has the type of [thm-trf-fixed-point-base-change](2); its grade-$r$ map is that same comparison on $\\operatorname{gr}^rL\\Delta^*B^F$, hence is invertible by detection of zero cones. The filtered monoidal pullback/composition maps identify $L\\Delta^{*F}B^F$ with $Q\\otimes^FD_X^FP$. The signed swap of step 5 preserves the convolution filtration: a tensor of filtration degrees $u,v$ still has degree $u+v=v+u$ after the swap. It therefore defines the filtered signed symmetry, identifying the target with $D_X^FP\\otimes^FQ$. The resulting composite is $T''^F$ with target $R\\Gamma^F(F,d^{!F}(D_X^FP\\otimes^FQ))$, where sections mean $R\\operatorname{Hom}^F(A_F[0]_{\\mathrm{fil}},-)$. Every constituent is natural in the two independent filtered inputs, so the naturality equation of step 6 holds with all functors filtered. Forgetting filtration respects every constituent, its inverse and their composition by the compatibility clause of [lem-trf-filtered-operations-hom]. Thus $\\omega T''^F=T''$ under its specified source and target identifications. This proves the filtered and underlying assertions simultaneously.",
+   "uses": [
+    "lem-trf-filtered-operations-hom",
+    "thm-trf-fixed-point-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+    "place": "§§5.2.1(b)–5.2.2; Lemma 5.3.2 proof, displayed Tr″ factorization before evaluation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-functor-package",
+  "def-trf-external-product",
+  "lem-trf-filtered-operations-hom",
+  "sk-thm-sf-tensor-hom",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-trf-admissibility",
+  "lem-trf-exceptional-internal-hom-exchange",
+  "thm-trf-kunneth-verdier",
+  "thm-trf-fixed-point-base-change",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf",
+  "place": "§§5.2.1–5.2.2 and Lemma 5.3.2 proof, pp.42–43; global derived sections and interchanged ordinary/exceptional legs made explicit"
+ },
  "created": {
   "by": "worker",
   "item": "lem-trf-filtered-trace-additivity",
@@ -57,6 +180,48 @@
    "results": "8 hits; top declarations/files: AlgebraicGeometry.Scheme.Γevaluation_naturality_assoc, AlgebraicGeometry.Scheme.Γevaluation_naturality_apply, Module.Dual.eval_naturality, AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality_apply, AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality_assoc, AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality, AlgebraicGeometry.Scheme.evaluation_naturality, AlgebraicGeometry.LocallyRingedSpace.evaluation_naturality",
    "date": "2026-10-17",
    "verdict": "no match: hits generic evaluation and trace lemmas"
+  },
+  {
+   "tool": "grep",
+   "query": "pre.?evaluation|filtered.*trace|exceptional.*[Hh]om",
+   "results": "{\"t\": \"2026-10-17T14:10:02Z\", \"tool\": \"grep\", \"query\": \"pre.?evaluation|filtered.*trace|exceptional.*[Hh]om\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic evaluation, internal Hom, Ext, or triangulated-category declarations do not state the finite-coefficient filtered fixed-locus pre-evaluation composite"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatTrans",
+   "results": "{\"t\": \"2026-10-17T14:10:02Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.NatTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic evaluation, internal Hom, Ext, or triangulated-category declarations do not state the finite-coefficient filtered fixed-locus pre-evaluation composite"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural morphism from derived Hom of a correspondence to derived sections on its fixed point locus before evaluation",
+   "results": "{\"t\": \"2026-10-17T14:10:02Z\", \"tool\": \"leansearch\", \"query\": \"A natural morphism from derived Hom of a correspondence to derived sections on its fixed point locus before evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Γevaluation_naturality_assoc\", \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality\", \"AlgebraicGeometry.Scheme.evaluation_naturality_apply\", \"AlgebraicGeometry.Scheme.Γevaluation_naturality_apply\", \"smoothSheaf.evalHom\", \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality_assoc\", \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality_apply\", \"AlgebraicGeometry.Scheme.evaluation_naturality\"], \"digest\": \"6b30fa6f4134675b\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic evaluation, internal Hom, Ext, or triangulated-category declarations do not state the finite-coefficient filtered fixed-locus pre-evaluation composite"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered pre-evaluation for a cohomological correspondence via exceptional internal Hom and fixed locus base change",
+   "results": "{\"t\": \"2026-10-17T14:10:06Z\", \"tool\": \"leanfinder\", \"query\": \"Filtered pre-evaluation for a cohomological correspondence via exceptional internal Hom and fixed locus base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.diagram\", \"LightCondensed.ihom_map_val_app\", \"LightCondensed.ihomPoints\", \"LightCondensed.ihomPoints_symm_comp\", \"LightCondensed.ihomPoints_apply\", \"HomologicalComplex.evalCompCoyonedaCorepresentableBySingle\", \"LightCondensed.ihomPoints_symm_apply\", \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId\"], \"digest\": \"8b2777d70c8033e9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic evaluation, internal Hom, Ext, or triangulated-category declarations do not state the finite-coefficient filtered fixed-locus pre-evaluation composite"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|cohomologicalCorrespondence|filteredDerived|FilteredDerived",
+   "results": "{\"t\": \"2026-10-17T14:10:35Z\", \"tool\": \"grep\", \"query\": \"Verdier|cohomologicalCorrespondence|filteredDerived|FilteredDerived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Shift/CommShift.lean\", \"Mathlib/CategoryTheory/Shift/CommShift.lean\", \"Mathlib/CategoryTheory/Presentable/Directed.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/CategoryTheory/Sites/Point/Category.lean\", \"Mathlib/Algebra/Homology/SpectralObject/Page.lean\", \"Mathlib/Algebra/Homology/SpectralObject/Basic.lean\"], \"digest\": \"7b336f4d9b590802\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic evaluation, internal Hom, Ext, or triangulated-category declarations do not state the finite-coefficient filtered fixed-locus pre-evaluation composite"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lefschetz Verdier trace construction filtered derived bifunctors exceptional pullback tensor duality",
+   "results": "{\"t\": \"2026-10-17T14:10:44Z\", \"tool\": \"leanfinder\", \"query\": \"Lefschetz Verdier trace construction filtered derived bifunctors exceptional pullback tensor duality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Tor'\", \"CategoryTheory.Functor.map_distinguished_exact\", \"CategoryTheory.Functor.isHomological_of_localization\", \"CategoryTheory.Functor.IsHomological.exact\", \"CategoryTheory.Functor.map_distinguished_op_exact\", \"CategoryTheory.Tor\"], \"digest\": \"662c682ebdae5142\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic evaluation, internal Hom, Ext, or triangulated-category declarations do not state the finite-coefficient filtered fixed-locus pre-evaluation composite"
   }
  ],
  "source": {
@@ -73,5 +238,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-filtered-pre-evaluation",
+  "worker": "stage1",
+  "summary": "Expanded the pre-evaluation composite and its naturality and filtered lift in eight steps, using existing general six-operation, tensor, and filtered-operation nodes only. Checked independent inputs, constructible finite-Tor domains, inverse Künneth orientation, right-adjoint fixed-square orientation, Koszul symmetry, and filtered invertibility on every grade. No new nodes; no mathematical statement change (literal newline escapes normalized).",
+  "blueprint": "The ancestor lem-trf-local-term-locality proof paragraphs (1)–(2) invoke Varshavsky’s contracting theorem via localization trace additivity. This child realizes the general pre-evaluation/bifunctor portion of Varshavsky Lemma 5.3.2, pp.42–43, used by the parent lem-trf-filtered-trace-additivity; no change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "prop-functor-package",
+    "why": "Generic finite-stage constructible finite-Tor preservation gives the domains of every operation. The present unit does not restate this general tool."
+   },
+   {
+    "node": "lem-trf-filtered-operations-hom",
+    "why": "Generic filtered operations, compatible structural transformations, Hom/tensor grade formulas and zero detection provide the filtered calculus, not a replacement for localization additivity. The present unit does not restate this general tool."
+   },
+   {
+    "node": "sk-thm-sf-tensor-hom",
+    "why": "The enriched exceptional-adjunction comparison is needed at the level of global derived Hom complexes, not just Hom sets. The present unit does not restate this general tool."
+   },
+   {
+    "node": "lem-sfb-derived-internal-hom-sections-model",
+    "why": "Generic small-ringed-site model identifies global sections of internal Hom with the global Hom complex in both variables. The present unit does not restate this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic ringed-topos compositor removes the intermediate ordinary direct image after global sections. The present unit does not restate this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic ordinary pullback compositor supplies the leg and diagonal identifications with constant coefficients. The present unit does not restate this general tool."
+   },
+   {
+    "node": "lem-trf-exceptional-internal-hom-exchange",
+    "why": "The ordinary-first/exceptional-second internal-Hom exchange identifies the source with c! of the external duality object. The present unit does not restate this general tool."
+   },
+   {
+    "node": "thm-trf-kunneth-verdier",
+    "why": "The canonical Künneth–Verdier comparison identifies external product with internal Hom before diagonal restriction. The present unit does not restate this general tool."
+   },
+   {
+    "node": "thm-trf-fixed-point-base-change",
+    "why": "The existing fixed-square right-adjoint exchange supplies the middle comparison with the required orientation. The present unit does not restate this general tool."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Generic monoidal pullback comparison identifies diagonal restriction of an external product with the tensor product. The present unit does not restate this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic resolving localization descends the explicit signed chain symmetry and its naturality to derived tensor. The present unit does not restate this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-functor-package",
+  "lem-trf-filtered-operations-hom",
+  "sk-thm-sf-tensor-hom",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-trf-exceptional-internal-hom-exchange",
+  "thm-trf-kunneth-verdier",
+  "thm-trf-fixed-point-base-change",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q36-df8f5bb82",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q36-df8f5bb82 (reviewer sub-agent of L); spot-checked: Read all eight steps, every cited statement, relevant source passages, and the unit/chapter route. Base-change orientation, finite coefficient categories, filtered inverses, signs, and edge cases check out; no duplicate or cycle found. Corrected one malformed TeX escape in the coefficient hypothesis under fixes/dag/nodes/sec-trace-formula/lem-trf-filtered-pre-evaluation.json. Full findings and accepted tool_uses are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

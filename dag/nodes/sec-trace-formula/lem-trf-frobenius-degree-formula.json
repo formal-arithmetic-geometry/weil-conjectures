@@ -21,23 +21,34 @@
  ],
  "proof": [
   {
-   "text": "*Step 1: iteration at the chosen lift.* Put $d=d_x$, write $m=rd$ with $r\\geq1$, and denote by $z_n$ the rational point at level $n$ with geometric lift $\\bar x$ whenever $d\\mid n$. Clause (1) of [lem-trf-local-frobenius-conjugacy] says that $\\bar x$ is fixed by $\\Phi^n$ for all such positive $n$. Write $P_n=Lg_\\gamma^{n*}$ and use $K$ also for its underlying complex; every stalk below means the point fiber of the derived pullback, as in [def-trf-frobenius-operators]. Use the canonical composition comparison of [lem-weil-pbc-proetale-derived-pullback-composition], specialized to constant coefficients $A$ and the maps $\\bar x$, $\\Phi^n$, and $g_\\gamma^n$. Its coefficient-identification hypotheses hold for constant $A$. For any complex $L$, let\n$$\nt_{n,L}:L_{\\bar x}\\xrightarrow{\\sim}(P_nL)_{\\bar x}\n$$\nbe the inverse pullback-stalk identification at $\\Phi^n\\bar x=\\bar x$, followed by $\\kappa^{(n)}_{L,\\bar x}$ of [prop-trf-scheme-galois-comparison]. Thus $t_{n,K}=\\tau_{z_n,n}$ in [def-trf-frobenius-operators]. For positive multiples $a,b$ of $d$, the multiplicativity of $\\kappa^{(n)}$ and composition of pullback-stalk identifications give, under $P_{a+b}\\cong P_aP_b$,\n$$\nt_{a+b,K}=t_{a,P_bK}\\circ t_{b,K}.\n$$\nIndeed, the two arrows on the right identify the stalk first along $\\Phi^b$ and then along $\\Phi^a$; their composite identifies it along $\\Phi^{a+b}$, and the comparison factors combine to $\\kappa^{(a+b)}$. The canonical comparisons agree under reassociation: on the termwise pullback model specified by the composition node, both send a section to the same iterated inverse image, so applying the point fiber gives the same stalk arrow. Thus no extra choice of a stalk identification is involved. Naturality in $L$, applied to $\\varphi^{[b]}:P_bK\\to K$ from [def-trf-iterated-weil-map], gives the typed equality\n$$\n(P_a\\varphi^{[b]})_{\\bar x}\\circ t_{a,P_bK}\n=t_{a,K}\\circ\\varphi^{[b]}_{\\bar x}.\n$$\nThe cocycle identity [lem-trf-iterated-weil-cocycle] now yields\n$$\n\\begin{aligned}\nF_{z_{a+b},a+b}\n&=\\varphi^{[a]}_{\\bar x}\\circ(P_a\\varphi^{[b]})_{\\bar x}\n  \\circ t_{a,P_bK}\\circ t_{b,K}\\\\\n&=\\varphi^{[a]}_{\\bar x}\\circ t_{a,K}\\circ\n  \\varphi^{[b]}_{\\bar x}\\circ t_{b,K}\n=F_{z_a,a}\\circ F_{z_b,b}.\n\\end{aligned}\n$$\nFor $r=1$, $z_d=x_m$ and $F_{z_d,d}=F_x$. For $r\\geq2$, take $a=d$ and $b=(r-1)d>0$ in this equality. Induction gives $F_{z_m,m}=F_x^r$ on $K_{\\bar x}$; no level-zero operator or cocycle is used.",
+   "text": "*Step 1: the fixed-point transport cocycle.* Put $d=d_x$, write $m=rd$ with $r\\geq1$, and let $z_j$ be the level-$j$ rational point with geometric lift $\\bar x$ whenever $j>0$ and $d\\mid j$. Clause (1) of [lem-trf-local-frobenius-conjugacy] gives $\\Phi^j\\bar x=\\bar x$. Apply [lem-trf-fixed-point-stalk-transport-cocycle] with $z=\\bar x$ and with $P_j=L(g_\\gamma^j)^*$. Its coefficient hypotheses are exactly those of the item. On the underlying complex $K$, its $t_{j,K}$ is $\\tau_{z_j,j}$ of [def-trf-frobenius-operators]: both are the fixed-point composition identification followed by the same specified $\\kappa^{(j)}$. Thus, under the specified $P_{a+b}\\cong P_aP_b$ comparison,\n$$t_{a+b,K}=t_{a,P_bK}\\circ t_{b,K}$$\nfor positive multiples $a,b$ of $d$. The cited lemma also supplies naturality in the coefficient complex, with no Weil structure or perfectness needed for these transport identities.",
    "uses": [
-    "def-trf-frobenius-operators",
-    "prop-trf-scheme-galois-comparison",
-    "def-trf-iterated-weil-map",
-    "lem-trf-iterated-weil-cocycle",
     "lem-trf-local-frobenius-conjugacy",
-    "lem-weil-pbc-proetale-derived-pullback-composition"
+    "lem-trf-fixed-point-stalk-transport-cocycle",
+    "def-trf-frobenius-operators"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-c-proper-global/lem-trf-frobenius-degree-formula.proof.md",
-    "place": "Step 1: iteration at one lift"
+    "place": "Step 1, canonical stalk identifications and their composite"
    }
   },
   {
-   "text": "*Step 2: changing the lift and taking traces.* Given $y\\in X_0(\\mathbf F_{q^m})$ above $x$, clause (1) of [lem-trf-local-frobenius-conjugacy] gives $0\\leq i<d$ with $\\bar y=g_\\gamma^i\\bar x$. Its clauses (2) and (3) supply an isomorphism $T_i:K_{\\bar y}\\xrightarrow{\\sim}K_{\\bar x}$ and\n$$\nF_{y,m}=T_i^{-1}\\circ F_{z_m,m}\\circ T_i\n=T_i^{-1}\\circ F_x^r\\circ T_i.\n$$\nFor $i=0$ take $T_0=1$; no undefined $\\varphi^{[0]}$ is needed. Multiplying the displayed equality on the left by $T_i$ gives $T_i\\circ F_{y,m}=F_x^r\\circ T_i$. The stalk assertion of [prop-trf-compact-support-perfectness] puts both $K_{\\bar y}$ and $K_{\\bar x}$ in the perfect-complex category $D^b_{\\mathrm{fin}}(A)$: its hypothesis holds because the coefficient conventions give a separated finite-type structure map and $K\\in D^b_{ctf}(X,A)$. Apply clause (1) of [prop-trf-trace-formal-laws] with $P_1=K_{\\bar y}$, $P_2=K_{\\bar x}$, $w=T_i$, $v_1=F_{y,m}$ and $v_2=F_x^r$. This gives the asserted trace equality, since $r=m/d_x$.",
+   "text": "*Step 2: composing the operators and positive-exponent induction.* Write $\\varphi^{[j]}:P_jK\\to K$ for [def-trf-iterated-weil-map]. Naturality in [lem-trf-fixed-point-stalk-transport-cocycle], applied to $u=\\varphi^{[b]}:P_bK\\to K$, gives\n$$(P_a\\varphi^{[b]})_{\\bar x}\\circ t_{a,P_bK}=t_{a,K}\\circ\\varphi^{[b]}_{\\bar x}.$$\nFor $a,b>0$ divisible by $d$, use [lem-trf-iterated-weil-cocycle] and Step 1 in the defining formula of [def-trf-frobenius-operators]:\n$$\\begin{aligned}\nF_{z_{a+b},a+b}\n&=\\varphi^{[a]}_{\\bar x}\\circ(P_a\\varphi^{[b]})_{\\bar x}\\circ t_{a,P_bK}\\circ t_{b,K}\\\\\n&=\\varphi^{[a]}_{\\bar x}\\circ t_{a,K}\\circ\\varphi^{[b]}_{\\bar x}\\circ t_{b,K}\n=F_{z_a,a}\\circ F_{z_b,b}.\n\\end{aligned}$$\nInduct on $r\\geq1$ to prove $F_{z_{rd},rd}=F_x^r$. At $r=1$, $z_d=x_m$ and the equality is the definition of $F_x$. For $r>1$, apply the displayed composition law with $a=d$ and $b=(r-1)d>0$; the inductive hypothesis gives $F_{z_{rd},rd}=F_x\\circ F_x^{r-1}=F_x^r$. No zero-level operator or zero-exponent Weil cocycle is invoked.",
+   "uses": [
+    "def-trf-iterated-weil-map",
+    "lem-trf-fixed-point-stalk-transport-cocycle",
+    "lem-trf-iterated-weil-cocycle",
+    "def-trf-frobenius-operators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-c-proper-global/lem-trf-frobenius-degree-formula.proof.md",
+    "place": "Step 1, displayed calculation and induction on r"
+   }
+  },
+  {
+   "text": "*Step 3: changing the lift and taking traces.* Given $y\\in X_0(\\mathbf F_{q^m})$ above $x$, clause (1) of [lem-trf-local-frobenius-conjugacy] gives $0\\leq i<d$ with $\\bar y=G^i(\\bar x)=g_\\gamma^i\\circ\\bar x\\circ\\operatorname{Spec}(\\sigma^i),\\quad\\sigma(c)=c^q$. Its clauses (2) and (3) supply an isomorphism $T_i:K_{\\bar y}\\xrightarrow{\\sim}K_{\\bar x}$ and\n$$\nF_{y,m}=T_i^{-1}\\circ F_{z_m,m}\\circ T_i\n=T_i^{-1}\\circ F_x^r\\circ T_i.\n$$\nFor $i=0$ take $T_0=1$; no undefined $\\varphi^{[0]}$ is needed. Multiplying the displayed equality on the left by $T_i$ gives $T_i\\circ F_{y,m}=F_x^r\\circ T_i$. The stalk assertion of [prop-trf-compact-support-perfectness] puts both $K_{\\bar y}$ and $K_{\\bar x}$ in the perfect-complex category $D^b_{\\mathrm{fin}}(A)$: its hypothesis holds because the coefficient conventions give a separated finite-type structure map and $K\\in D^b_{ctf}(X,A)$. Apply clause (1) of [prop-trf-trace-formal-laws] with $P_1=K_{\\bar y}$, $P_2=K_{\\bar x}$, $w=T_i$, $v_1=F_{y,m}$ and $v_2=F_x^r$. This gives the asserted trace equality, since $r=m/d_x$.",
    "uses": [
     "lem-trf-local-frobenius-conjugacy",
     "prop-trf-compact-support-perfectness",
@@ -51,12 +62,11 @@
   }
  ],
  "proof_deps": [
+  "lem-trf-local-frobenius-conjugacy",
+  "lem-trf-fixed-point-stalk-transport-cocycle",
   "def-trf-frobenius-operators",
-  "prop-trf-scheme-galois-comparison",
   "def-trf-iterated-weil-map",
   "lem-trf-iterated-weil-cocycle",
-  "lem-trf-local-frobenius-conjugacy",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
   "prop-trf-compact-support-perfectness",
   "prop-trf-trace-formal-laws"
  ],
@@ -247,10 +257,38 @@
    "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.trace'",
    "date": "2026-10-17",
    "verdict": "invalid query"
+  },
+  {
+   "tool": "grep",
+   "query": "PerfectComplex.*trace|trace.*PerfectComplex|Weil.*stalk.*pow",
+   "results": "0 hits: ; No match for the categorical trace degree formula on finite-coefficient perfect derived stalks. LinearMap.trace_conj' at Mathlib/LinearAlgebra/Trace.lean:292 concerns ordinary module endomorphisms.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.trace, LinearEquiv.conj",
+   "results": "1 hits: LinearMap.trace_conj'; No match for the categorical trace degree formula on finite-coefficient perfect derived stalks. LinearMap.trace_conj' at Mathlib/LinearAlgebra/Trace.lean:292 concerns ordinary module endomorphisms.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Categorical trace degree formula for Frobenius operators on derived stalks of a strict Weil complex",
+   "results": "8 hits: DerivedCategory.right_fac_of_isStrictlyLE, Algebra.normalizedTrace_eq_of_fininteDimensional_apply, LinearMap.trace_eq_contract_of_basis, CategoryTheory.frobeniusMorphism, LinearMap.trace, Algebra.normalizedTrace_eq_of_finiteDimensional_apply, LinearMap.trace_eq_contract', LinearMap.trace_transpose'; No match for the categorical trace degree formula on finite-coefficient perfect derived stalks. LinearMap.trace_conj' at Mathlib/LinearAlgebra/Trace.lean:292 concerns ordinary module endomorphisms.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Trace of local Frobenius on a perfect stalk at extension degree m equals trace of the m divided by d power of the closed point Frobenius",
+   "results": "8 hits: trace_quotient_eq_trace_localization_quotient, Algebra.trace_quotient_mk, Algebra.trace_quotient_eq_of_isDedekindDomain, Algebra.trace_localization, FiniteField.algebraMap_trace_eq_sum_pow, Algebra.normalizedTrace_intermediateField, Algebra.normalizedTrace_trans_apply, Algebra.normalizedTrace_trans; No match for the categorical trace degree formula on finite-coefficient perfect derived stalks. LinearMap.trace_conj' at Mathlib/LinearAlgebra/Trace.lean:292 concerns ordinary module endomorphisms.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -282,13 +320,9 @@
   "date": "2026-10-17",
   "item": "lem-trf-frobenius-degree-formula",
   "worker": "stage1",
-  "summary": "Rechecked the earlier attempt against both current blueprint paragraphs, Stacks Tag 0D6D, and every cited statement. The proof uses typed stalk transports, explicit naturality and positive-exponent induction, then typed conjugacy and categorical trace invariance with stalk perfectness. The existing canonical derived-pullback composition theorem is cited directly. All nine quotations were verified against the shared DAG, and four additional authentic Mathlib searches were recorded. No new nodes.",
-  "blueprint": "Realizes both proof paragraphs of the current main-20261015 blueprint node lem-trf-frobenius-degree-formula.",
+  "summary": "Repair of the dedicated Q23 re-split handoff: extracted the naturality and composition law of fixed-point stalk transports into one statement-only node. Retained the explicit operator calculation and positive-exponent induction, then the existing conjugacy/perfect-trace argument. Corrected the description of the lift orbit to include source reparametrization as required by the current conjugacy statement. Statement, statement dependencies, Lean audit and inherited source metadata unchanged.",
+  "blueprint": "Current main-20261015 proof Step 1: new fixed-point-stalk-transport-cocycle supplies the hidden comparison lemma; item steps 1 and 2 apply it and perform the operator calculation and induction. Item step 3 retains blueprint Step 2, using the correctly reparametrized lift orbit.",
   "tool_uses": [
-   {
-    "node": "prop-trf-scheme-galois-comparison",
-    "why": "The blueprint proof explicitly uses its natural multiplicative comparison to compose canonical stalk transports; the proper-global unit has no replacement for this comparison."
-   },
    {
     "node": "lem-trf-iterated-weil-cocycle",
     "why": "The blueprint proof explicitly uses the cocycle of iterated Weil maps to factor the operator; the proper-global unit has no separate cocycle theorem."
@@ -300,10 +334,6 @@
    {
     "node": "prop-trf-trace-formal-laws",
     "why": "The blueprint proof explicitly uses categorical-trace conjugacy invariance after changing the lift; the proper-global unit has no separate trace-invariance theorem."
-   },
-   {
-    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
-    "why": "Canonical composition of derived pro-etale pullbacks supplies the fixed-point stalk identification used in the blueprint iteration argument. It is a general functoriality tool with constant coefficients, not a replacement of the unit route."
    }
   ]
  },
@@ -317,9 +347,9 @@
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q88-774595aca",
-  "group": "Q88",
+  "reviewer": "NT-Codex-Q23-cef8b0f5c",
+  "group": "Q23",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-774595aca (reviewer sub-agent of L); spot-checked: Read the item, all 11 cited statements, both blueprint versions (main-20261015 and master) and Stacks 0D6D (lemma-derived-pullback-composition); no fixes were written. Statement: it now states the setting (coefficients, strict Weil complex, lifts, categorical trace) explicitly and adds m>=1. Both sides of the formula are undefined for m<=0, so this is not a weakening, and the three citers keep everything they use. Step 1: t_{n,K} is exactly tau_{z_n,n} from def-trf-frobenius-operators. The identity t_{a+b}=t_{a,P_bK}∘t_{b,K} follows from the naturality of rho, the multiplicative kappa^{(m)} and the reassociation in the composition lemma. The naturality square and the cocycle for a,b>=1 give F_{z_{a+b}}=F_{z_a}F_{z_b}, and induction (base z_d=x_m) gives F_x^r with no exponent-zero operator. Step 2: conjugacy clauses (1)-(3) with z_0=x̄ give F_{y,m}=T_i^{-1}F_x^rT_i in the correct orientation, with T_0=1. The compact-support perfectness stalk clause puts both stalks in Perf(A); the main-20261015 blueprint confirms its D^b_fin means the categorical-trace category. Trace-formal-laws clause (1) then gives the equality. This also repairs the blueprint's untyped T_i^{-1}F_{z,d}T_i=F_{x_m,d_x}. Edge cases checked: K=0, X_0 empty, Spec F_q, m=d, d=2 with m=4. No cycle, no new nodes, no duplicate in the DAG. Accepted tool_uses: scheme-galois-comparison, iterated-weil-cocycle, trace-formal-laws, compact-support-perfectness (stalk clause only), and pbc derived-pullback-composition (generic, constant coefficients). No SGA source is used."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q23-cef8b0f5c (reviewer sub-agent of L); spot-checked: Read the item, new lemma, cited statements, blueprint sources and Stacks 0D6D. Verified transport normalization, operator composition, positive-exponent induction, conjugacy direction and perfect-stalk trace category. No duplicate, restated split or delivery-induced cycle found. No repairs needed; concrete checks and accepted tool uses are recorded in review.md."
  }
 }

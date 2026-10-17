@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "cor-zl-purity-smooth-proper",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Purity of smooth proper cohomology",
@@ -18,47 +18,149 @@
   "prop-weil-operations",
   "def-weil-algebraically-closed-coefficients",
   "def-weil-frobenius-detailed",
-  "def-weil-geometric-hypotheses"
+  "def-weil-geometric-hypotheses",
+  "def-weil-finite-field-fiber",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-constant-weil-structure"
  ],
  "proof": [
   {
-   "text": "This is the absolute case of [prop-zl-smooth-proper-relative-purity].\nTake $Y_0=\\Spec k_0$ and $f_0=a_X:X_0\\to\\Spec k_0$, the structure morphism of\n[def-weil-finite-field-fiber]: it is smooth and proper of pure relative\ndimension $d$, and [prop-zl-smooth-proper-relative-purity] imposes no\nadmissibility hypothesis on it or on the structure morphisms. Take\n$\\mathcal F_0=(\\Qlb)_{X_0}$, the constant Weil sheaf. It is\nlisse, and it is punctually $\\iota$-pure of weight $0$ in the sense of\n[def-weil-punctual-weights]: at every closed point $x$ the local\nFrobenius of [def-weil-local-frobenius-trace] is the identity of the\none-dimensional stalk, so its only eigenvalue is $1$ and\n$|\\iota(1)|=1=q_x^{0/2}$.",
+   "text": "Set $Y_0=\\operatorname{Spec}k_0$ and let $a_0:X_0\\to Y_0$ be the structure morphism. The finite-field and geometric conventions [def-weil-finite-field-fiber, def-weil-geometric-hypotheses] identify its geometric fibre with $X$; it is smooth and proper with pure relative dimension $d$, exactly the hypotheses of the relative theorem. Take the constant sheaf $\\mathcal F_0=(\\Qlb)_{X_0}$ with its canonical Weil structure [def-weil-constant-weil-structure]. It is lisse in [def-pod-lisse-l-adic-sheaves]: at $E=\\Ql$ use the constant rank-one systems $A_{E,n}$, whose reduction maps satisfy $A_{E,n+1}\\otimes_{A_{E,n+1}}A_{E,n}=A_{E,n}$; rationalize and then take the pair at that finite coefficient stage. Thus the lisse condition requires no geometric trivialization beyond the identity cover. The coefficient object used here is the completed integral unit and its scalar extensions, not the discrete constant sheaf of the infinite field: [lem-weil-constant-coefficient-objects-constructible], clauses (2)–(3), identifies its derived reductions with the finite constant coefficient sheaves and its rational image with the common-stage pair. These are the constant finite systems just displayed (constant finite sheaves remain constant under the site inverse image), so this supplies the required coefficient realization of the lisse constant object.",
    "uses": [
-    "prop-zl-smooth-proper-relative-purity",
     "def-weil-finite-field-fiber",
-    "def-weil-punctual-weights",
-    "def-weil-local-frobenius-trace"
+    "def-weil-geometric-hypotheses",
+    "def-weil-constant-weil-structure",
+    "def-pod-lisse-l-adic-sheaves",
+    "lem-weil-constant-coefficient-objects-constructible"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-smooth-proper-purity/cor-zl-purity-smooth-proper.proof.md",
+    "place": "Proof, first paragraph: choice of base, morphism and constant lisse sheaf"
+   }
   },
   {
-   "text": "The base $\\Spec k_0$ has a single closed point $y$, with $q_y=q$ and\ngeometric point $\\bar y=\\Spec k$; the geometric fibre of $a_X$ over it is\n$X$. The stalk of $R^{i}a_{X*}(\\Qlb)_{X_0}$ at $\\bar y$ is\n$H^{i}(X,\\Qlb)$, and the Weil isomorphism on $Ra_{X*}$ of\n[prop-weil-operations], iterated once ($y$ has degree $1$), is the action\non cohomology of the global geometric Frobenius of\n[def-weil-global-geometric-frobenius]; hence the local operator $F_y$ is\n$F$. Clause (b) of [prop-zl-smooth-proper-relative-purity] (with $w=0$)\ntherefore says that every eigenvalue $\\alpha$ of $F$ on $H^{i}(X,\\Qlb)$\nsatisfies $|\\iota(\\alpha)|=q^{i/2}$, which is $\\iota$-purity of weight $i$\nof $(H^{i}(X,\\Qlb),F)$ in the sense of\n[def-weil-frobenius-module-weights]. By clause (a) the canonical map\n$H_c^{i}(X,\\Qlb)\\to H^{i}(X,\\Qlb)$ is a Frobenius-equivariant isomorphism\n(the proper coincidence of [prop-weil-operations]), and a pure Frobenius\nmodule of weight $i$ is $\\iota$-mixed of weights at most $i$ (take $m=1$,\n$w_1=i$ in [def-weil-frobenius-module-weights]); this is the assertion on\n$H_c^{i}(X,\\Qlb)$.",
+   "text": "By [lem-zl-constant-sheaf-weight-zero], $\\mathcal F_0$ is punctually $\\iota$-pure of weight $0$. Apply [prop-zl-smooth-proper-relative-purity] with $f_0=a_0$, $w=0$. Its last paragraph explicitly states the absolute constant-coefficient conclusion: every eigenvalue $\\alpha$ of geometric Frobenius on $H^i(X,\\Qlb)$ satisfies $|\\iota(\\alpha)|=q^{i/2}$. Here the sole closed point of $Y_0$ has residue field $k_0$, degree $1$ and $q_y=q$; the fibre is $X$. Thus the absolute clause uses exactly the global geometric Frobenius $F$ fixed in the statement. Clause (a) also puts the direct-image sheaf in the lisse constructible category. The point-fibre/cohomology convention [def-weil-ordinary-compact-cohomology] takes these coefficient complexes to $D^b_{\\mathrm{fd}}(\\Qlb)$, so the cohomology spaces are finite-dimensional. The global operator [def-weil-global-geometric-frobenius] is the cohomology action of the displayed transport isomorphism followed by the Weil isomorphism, hence is invertible. Therefore these are Frobenius modules, and the eigenvalue equality is precisely purity of weight $i$ under [def-weil-frobenius-module-weights].",
    "uses": [
-    "prop-weil-operations",
-    "def-weil-global-geometric-frobenius",
+    "lem-zl-constant-sheaf-weight-zero",
     "prop-zl-smooth-proper-relative-purity",
+    "def-weil-ordinary-compact-cohomology",
+    "def-weil-global-geometric-frobenius",
     "def-weil-frobenius-module-weights"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-smooth-proper-purity/cor-zl-purity-smooth-proper.proof.md",
+    "place": "Proof, first paragraph (weight zero) and second paragraph through purity"
+   }
+  },
+  {
+   "text": "The structure morphism $a_X:X\\to\\operatorname{Spec}k$ is the base change of the proper $a_0$ along $\\operatorname{Spec}k\\to\\operatorname{Spec}k_0$, so it is proper by [lem-weil-pbc-proper-base-change]. Apply [prop-weil-proper-compact-coincidence] to its geometric fibre $X$ and constant coefficient object: $Ra_{X!}\\cong Ra_{X*}$, and hence $H_c^i(X,\\Qlb)\\cong H^i(X,\\Qlb)$. Equivariance is supplied by [prop-weil-operations], whose statement makes these comparison isomorphisms morphisms of Weil complexes and the induced cohomology maps Frobenius-equivariant. Equivalently, the isomorphism of Weil sheaves in clause (a) of [prop-zl-smooth-proper-relative-purity] at $a_0$ gives this same comparison after taking the geometric fibre over the unique point of $\\operatorname{Spec}k_0$. Thus the proper-coincidence identification in the conclusion preserves the Frobenius operators.",
+   "uses": [
+    "prop-weil-proper-compact-coincidence",
+    "prop-weil-operations",
+    "prop-zl-smooth-proper-relative-purity",
+    "lem-weil-pbc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-smooth-proper-purity/cor-zl-purity-smooth-proper.proof.md",
+    "place": "Proof, second paragraph: proper coincidence and Frobenius equivariance"
+   }
+  },
+  {
+   "text": "Write $V=H_c^i(X,\\Qlb)$ and identify it with $H^i(X,\\Qlb)$ by Step 3. Its eigenvalues are the same: an equivariant isomorphism sends a nonzero $\\alpha$-eigenvector to a nonzero $\\alpha$-eigenvector, and its inverse does the converse. Hence Step 2 makes $V$ pure of weight $i$. In the mixedness definition [def-weil-frobenius-module-weights], take $m=1$, $V_0=0$, $V_1=V$ and $w_1=i$. This is an $F$-stable filtration and its sole quotient is $V$; $w_1\\leq i$. It proves mixedness of weights at most $i$. If $V=0$ the same filtration is allowed (its inclusions need not be strict), or one can take $m=0$. All steps hold for every integer $i$ and $d\\geq0$; zero cohomology has no eigenvalues, so its purity condition is vacuous.",
+   "uses": [
+    "def-weil-frobenius-module-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-smooth-proper-purity/cor-zl-purity-smooth-proper.proof.md",
+    "place": "Proof, second paragraph, final sentence: pure implies mixed"
+   }
   }
  ],
  "proof_deps": [
-  "prop-zl-smooth-proper-relative-purity",
   "def-weil-finite-field-fiber",
-  "def-weil-punctual-weights",
-  "def-weil-local-frobenius-trace",
-  "prop-weil-operations",
+  "def-weil-geometric-hypotheses",
+  "def-weil-constant-weil-structure",
+  "def-pod-lisse-l-adic-sheaves",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "lem-zl-constant-sheaf-weight-zero",
+  "prop-zl-smooth-proper-relative-purity",
+  "def-weil-ordinary-compact-cohomology",
   "def-weil-global-geometric-frobenius",
-  "def-weil-frobenius-module-weights"
+  "def-weil-frobenius-module-weights",
+  "prop-weil-proper-compact-coincidence",
+  "prop-weil-operations",
+  "lem-weil-pbc-proper-base-change"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-smooth-proper-purity/cor-zl-purity-smooth-proper.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-smooth-proper-purity/cor-zl-purity-smooth-proper.proof.md",
+  "place": "Both paragraphs of the separate main-20261015 proof file; expanded constant-coefficient realization and proper-base-change hypotheses."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth proper cohomology over a finite field with constant l-adic coefficients is pure of weight equal to its cohomological degree",
+   "results": "WittVector.isocrystal_classification; Rep.FiniteCyclicGroup.moduleCatCochainComplex; AlgebraicTopology.isZero_singularHomologyFunctor_of_totallyDisconnectedSpace; Rep.FiniteCyclicGroup.groupCohomologyIsoEven; AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace; LocallyConstant.freeOfProfinite; Rep.FiniteCyclicGroup.groupCohomologyπEven_eq_zero_iff; ContinuousCohomology.homogeneousCochains",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern other notions, not l-adic cohomology purity"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]ure.*[Ww]eight|[Ww]eight.*[Pp]ure|[Pp]urity.*[Ff]robenius",
+   "results": "Mathlib/NumberTheory/SelbergSieve.lean; subdirectory all Mathlib",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern other notions, not l-adic cohomology purity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The l-adic cohomology of a smooth proper variety over a finite field is pure of weight i in degree i",
+   "results": "isPurelyInseparable_iff_finSepDegree_eq_one; IsPurelyInseparable.hasExponent_of_finiteDimensional; WittVector.StandardOneDimIsocrystal; LinearMap.polyCharpoly_coeff_isHomogeneous; IsPurelyInseparable; IsPurelyInseparable.insepDegree_eq; LibraryNote.Design_choices_about_smooth_algebraic_structures; Algebra.FormallySmooth.of_perfectField",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern other notions, not l-adic cohomology purity"
+  },
+  {
+   "tool": "loogle",
+   "query": "Frobenius, IsPureOfWeight",
+   "results": "No hits; loogle: unknown identifier 'Frobenius'",
+   "date": "2026-10-17",
+   "verdict": "invalid query: loogle: unknown identifier 'Frobenius'"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]robenius|[Ee]tale.*[Cc]ohomology|[Ww]eil.*[Cc]ohomology",
+   "results": "No hits; subdirectory AlgebraicGeometry",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "etale",
+   "results": "No hits; loogle: unknown identifier 'etale'",
+   "date": "2026-10-17",
+   "verdict": "invalid query: loogle: unknown identifier 'etale'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Eigenvalues of geometric Frobenius on etale cohomology of a smooth projective variety have complex absolute value q to the power i over two",
+   "results": "AlgHom.IsArithFrobAt.apply_of_pow_eq_one; WittVector.StandardOneDimIsocrystal.frobenius_apply; WittVector.exists_frobenius_solution_fractionRing; WittVector.isocrystal_classification; FiniteField.orderOf_frobeniusAlgHom; WittVector.instIsocrystalStandardOneDimIsocrystal; FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic; IsArithFrobAt.arithFrobAt",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern other notions, not l-adic cohomology purity"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.IsProper",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -98,5 +200,39 @@
   }
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-prop-smooth-proper-purity"
+ "unit": "sk-prop-smooth-proper-purity",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "cor-zl-purity-smooth-proper",
+  "worker": "stage1",
+  "summary": "Audited the absolute specialization of the existing relative theorem, made constant lisseness and weight-zero inputs explicit, separated proper coincidence from equivariance, and wrote the one-step mixed filtration including the zero case. No new nodes or statement changes.",
+  "blueprint": "Master proof first paragraph is realized by steps 1–2; its second paragraph by steps 2–4. The current main-20261015 statement is identical. This is the absolute specialization of the same-unit relative node, following the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-zl-constant-sheaf-weight-zero",
+    "why": "Generic weight-zero fact for the constant Weil sheaf; reused for the input of the same-unit relative-purity theorem."
+   },
+   {
+    "node": "prop-weil-proper-compact-coincidence",
+    "why": "Generic proper direct-image comparison, used only to identify compact and ordinary cohomology; the same-unit relative theorem also supplies this comparison in clause (a)."
+   },
+   {
+    "node": "lem-weil-constant-coefficient-objects-constructible",
+    "why": "Generic coefficient-object realization: the completed integral unit has the finite constant derived reductions used to check lisseness, and its rational image is the common-stage constant object. This supplies no purity argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-zl-constant-sheaf-weight-zero",
+  "prop-weil-proper-compact-coincidence",
+  "lem-weil-constant-coefficient-objects-constructible"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q99-c8dadf4bc",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q99-c8dadf4bc (reviewer sub-agent of L); spot-checked: Read the complete mathematics and cited sources. Added existing citations for derived constant-coefficient realization and properness after geometric base change; corrected provenance to the separate main-20261015 proof file. Statement unchanged; no new nodes or cycles. Full checks in review.md; corrected JSON under fixes/dag/nodes/sec-zeta-weil/.; 1 file(s) fixed by the reviewer"
+ }
 }
