@@ -29,104 +29,104 @@
   "def-coef-presentable-infinity-category",
   "def-cbc-enhanced-diagrams-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each arrow f:a→a′ of A, the functor H(fᵒᵖ):H(a′)→H(a) is a coherent right adjoint between presentable infinity categories. By the accessibility theorem for right adjoints, choose a regular cardinal ρ_f for which it preserves small ρ_f-filtered colimits.",
+   "uses": [
+    "lem-coef-presentable-right-adjoint-accessible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary 5.5.2.9(2) and Proposition 5.5.3.3"
+   }
+  },
+  {
+   "text": "The objects H(a) and arrows H(fᵒᵖ) form a small family. Applying the common-rank lemma to this family and the ranks ρ_f gives one uncountable infinite regular λ for which every H(a) is λ-accessible and every arrow preserves small λ-filtered colimits.",
+   "uses": [
+    "lem-coef-small-family-accessibility-rank"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Remark 5.4.2.13"
+   }
+  },
+  {
+   "text": "By step 2, H factors through Pr^{R,λ}_∞: its values are presentable and λ-accessible and its arrows admit left adjoints and preserve small λ-filtered colimits. Apply compact-object/Ind duality at the uncountable λ. Clause (2) turns H into a coherent functor A→Pr^{L,λ}_∞ with the same values, carrying f to a left adjoint of H(fᵒᵖ), which preserves λ-compact objects by clause (1). Composing with the quasi-inverse in clause (3) gives a coherent functor F₀:A→Cat^rex(λ)_∞ whose value F₀(a) is a small model of the full λ-compact subcategory of H(a), and whose arrow F₀(f) is the restriction of the left adjoint of H(fᵒᵖ). The same equivalences identify H(a) with Ind_λ(F₀(a)) and H(fᵒᵖ) with the right adjoint of the Ind extension of F₀(f), coherently in f and in all higher simplices.",
+   "uses": [
+    "lem-coef-compact-model-pr-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 5.5.7.2, Corollary 5.5.3.4, Notation 5.5.7.7, Propositions 5.5.7.8–5.5.7.10"
+   }
+  },
+  {
+   "text": "For each small F₀(a), the notation Ind_λ(F₀(a)) means the full subcategory of Fun(F₀(a)ᵒᵖ,S) spanned by small λ-filtered colimits of representables; since F₀(a) admits λ-small colimits, Ind_λ(F₀(a)) is presentable and the Yoneda embedding preserves λ-small colimits (lem-coef-ind-kappa-presentability). The filtered-completion theorem (lem-coef-ind-kappa-extension) gives the essentially unique λ-filtered-colimit-preserving extension u_! of j∘u for each arrow u=F₀(f), with its coherent transformation data, and its last clause shows that u_! preserves all small colimits because u preserves λ-small colimits and the target is presentable. By the adjoint functor theorem (lem-coef-presentable-infinity-adjoints) u_! has a right adjoint u^*, so u_! is a left adjoint as the statement asserts.",
+   "uses": [
+    "lem-coef-ind-kappa-presentability",
+    "lem-coef-ind-kappa-extension",
+    "lem-coef-presentable-infinity-adjoints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.harvard.edu/~lurie/papers/HTT.pdf",
+    "place": "Propositions 5.3.5.10–5.3.5.11, Definition 5.3.5.1 and Corollary 5.5.2.9(1)"
+   }
+  },
+  {
+   "text": "By clause (3) of the duality node, Ind_λ on Cat^rex(λ)_∞ sends u to the extension u_! of step 4, so composing it with the equivalence of clause (2) gives the coherent contravariant functor Ind^R_λ:C↦Ind_λ(C), u↦u^*. Since Ind_λ is quasi-inverse to the compact-object functor used in step 3, the objectwise identifications of step 3 assemble to a natural equivalence of coherent diagrams H≃Ind^R_λ∘F₀ᵒᵖ, including all higher simplices. The final mapping-space characterization of a left/right adjunction is the stated coherent unit-counit condition.",
+   "uses": [
+    "lem-coef-compact-model-pr-duality",
+    "lem-coef-ind-kappa-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1501.02161v3",
+    "place": "Theorem 10.3, final paragraph; Definition 10.4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-compact-model-pr-duality",
+  "lem-coef-ind-kappa-extension",
+  "lem-coef-ind-kappa-presentability",
+  "lem-coef-presentable-infinity-adjoints",
+  "lem-coef-presentable-right-adjoint-accessible",
+  "lem-coef-small-family-accessibility-rank"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://arxiv.org/html/1501.02161v3",
+  "place": "Theorem 10.3, final paragraph; HTT Proposition 5.5.7.2 and Propositions 5.5.7.8–5.5.7.10"
+ },
  "mathlib_searches": [
   {
-   "tool": "leanfinder",
-   "query": "Every small diagram of presentable infinity categories and right adjoints has a uniform regular cardinal lambda and is obtained by Ind completion of a coherent diagram of small lambda cocomplete compact subcategories with left adjoint transports",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.isCardinalPresentable_leftAdjoint_obj\", \"module\": \"Mathlib/CategoryTheory/Presentable/Adjunction\", \"type\": \"∀ {C : Type u} {D : Type u'} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (κ : Cardinal.{w})\\n  [inst_2 : Fact κ.IsRegular] (X : C) [CategoryTheory.IsCardinalPresentable X κ] [\", \"doc\": \"In an adjunction between categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, if an object $X \\\\in \\\\mathcal{C}$ is $\\\\kappa$-presentable and the right adjoint functor $G: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ is $\\\\kappa$\"}\n  {\"name\": \"CategoryTheory.Adjunction.isCardinalLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/Adjunction\", \"type\": \"∀ {C : Type u} {D : Type u'} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (κ : Cardinal.{w})\\n  [inst_2 : Fact κ.IsRegular] [CategoryTheory.IsCardinalLocallyPresentable C κ] [G\", \"doc\": \"If $\\\\mathcal{C}$ is a locally $\\\\kappa$-presentable category for a regular cardinal $\\\\kappa$, and $G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a $\\\\kappa$-accessible, full, and faithful functor, then $\\\\mathcal{D\"}\n  {\"name\": \"CategoryTheory.IsLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"(C : Type u) → [hC : CategoryTheory.Category.{v, u} C] → Prop\", \"doc\": \"A category $\\\\mathcal{C}$ is locally presentable if it is cocomplete and there exists a small set of $\\\\lambda$-presentable objects for some regular cardinal $\\\\lambda$, such that every object in $\\\\mathc\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.isRightAdjoint_ι_isLocal\", \"module\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [CategoryTheory.MorphismProperty.IsSmall.{w, v, u} W]\\n  [CategoryTheory.LocallySmall.{w, v, u} C],\\n  (∀ ⦃X Y : C⦄ (f : X ⟶ Y), W f → CategoryTheory.IsCard\", \"doc\": \"Let $\\\\mathcal{C}$ be a locally small category with all colimits, and let $W$ be a small morphism property in $\\\\mathcal{C}$. Suppose $\\\\kappa$ is a regular cardinal such that every morphism in $W$ has $\"}\n  {\"name\": \"CategoryTheory.IsPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/Basic\", \"type\": \"{C : Type u₁} → [CategoryTheory.Category.{v₁, u₁} C] → C → Prop\", \"doc\": \"An object $ X $ in a category $ \\\\mathcal{C} $ is presentable if the hom-functor $ \\\\text{Hom}(-, X) : \\\\mathcal{C} \\\\to \\\\text{Type} $ is accessible, meaning it preserves sufficiently filtered colimits. T\"}\n  {\"name\": \"CategoryTheory.IsLocallyFinitelyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable\", \"type\": \"(C : Type u) → [CategoryTheory.Category.{v, u} C] → Prop\", \"doc\": \"A category $ \\\\mathcal{C} $ is locally presentable with respect to the regular cardinal $ \\\\aleph_0 $.\"}\n  {\"name\": \"CategoryTheory.IsCardinalPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/Basic\", \"type\": \"{C : Type u₁} → [CategoryTheory.Category.{v₁, u₁} C] → C → (κ : Cardinal.{w}) → [Fact κ.IsRegular] → Prop\", \"doc\": \"An object $ X $ in a category is $ \\\\kappa $-presentable if the hom-functor $ \\\\text{Hom}(X, -) $ is $ \\\\kappa $-accessible, meaning it preserves colimits of diagrams indexed by $ \\\\kappa $-filtered categ\"}\n  {\"name\": \"CategoryTheory.isCardinalPresentable_iff\", \"module\": \"Mathlib/CategoryTheory/Presentable/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (κ : Cardinal.{w}) [inst_1 : Fact κ.IsRegular] (X : C),\\n  CategoryTheory.isCardinalPresentable C κ X ↔ CategoryTheory.IsCardinalPresentable X κ\", \"doc\": \"For an object $X$ in a category $\\\\mathcal{C}$, the property $\\\\text{isCardinalPresentable}\\\\, \\\\mathcal{C}\\\\, \\\\kappa\\\\, X$ is equivalent to the condition that the hom-functor $\\\\mathcal{C}(X, -)$ preserves \"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read the returned types and ordinary-category source declarations. Indization/Category.lean:68-85 uses Type-valued presheaves on an ordinary Category; Presentable/Adjunction.lean:41-46 and LocallyPresentable.lean:35-53 likewise concern ordinary categories. FiberedCategory/Fibered.lean:54-67 is ordinary fibered categories. None states this coherent quasicategorical theorem or a one-line specialization of it."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"IsAccessible\", \"IsRightAdjoint\"",
-   "results": "[loogle] OK 0 hit(s)",
-   "date": "2026-10-17",
-   "verdict": "no match: read the returned types and ordinary-category source declarations. Indization/Category.lean:68-85 uses Type-valued presheaves on an ordinary Category; Presentable/Adjunction.lean:41-46 and LocallyPresentable.lean:35-53 likewise concern ordinary categories. FiberedCategory/Fibered.lean:54-67 is ordinary fibered categories. None states this coherent quasicategorical theorem or a one-line specialization of it."
-  },
-  {
-   "tool": "grep",
-   "query": "IsRightAdjoint|IsCardinalAccessible|Indization",
-   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"line\": \"35\", \"text\": \"    [IsCardinalAccessibleCategory C κ] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"line\": \"42\", \"text\": \"namespace IsCardinalAccessibleCategory\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"line\": \"60\", \"text\": \"instance [IsCardinalAccessibleCategory C κ] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"line\": \"68\", \"text\": \"instance [IsCardinalAccessibleCategory C κ] (X : C) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Dense.lean\", \"line\": \"74\", \"text\": \"end IsCardinalAccessibleCategory\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/CardinalDirectedPoset.lean\", \"line\": \"436\", \"text\": \"instance : IsCardinalAccessibleCategory (CardinalDirectedPoset κ) κ where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean\", \"line\": \"16\", \"text\": \"and `IsCardinalAccessibleCategory C κ`). The existence of such a regular\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean\", \"line\": \"50\", \"text\": \"class IsCardinalAccessibleCategory : Prop\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean\", \"line\": \"53\", \"text\": \"instance [IsCardinalLocallyPresentable C κ] : IsCardinalAccessibleCategory C κ where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean\", \"line\": \"55\", \"text\": \"example (κ : Cardinal.{w}) [Fact κ.IsRegular] [IsCardinalAccessibleCategory C κ] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean\", \"line\": \"69\", \"text\": \"  IsCardinalAccessibleCategory.{w} C ℵ₀\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"line\": \"50\", \"text\": \"* `MorphismProperty.isRightAdjoint_ι_isLocal`: existence of the left adjoint\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"line\": \"95\", \"text\": \"lemma MorphismProperty.isCardinalAccessible_ι_isLocal\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"line\": \"99\", \"text\": \"    W.isLocal.ι.IsCardinalAccessible κ where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"line\": \"449\", \"text\": \"lemma isRightAdjoint_ι :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean\", \"line\": \"450\", \"text\": \"    W.isLocal.ι.IsRightAdjoint := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Finite.lean\", \"line\": \"38\", \"text\": \"abbrev Functor.IsFinitelyAccessible (F : C ⥤ D) : Prop := IsCardinalAccessible.{w} F ℵ₀\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Adjunction.lean\", \"line\": \"42\", \"text\": \"    [G.IsCardinalAccessible κ] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Adjunction.lean\", \"line\": \"44\", \"text\": \"  rw [isCardinalPresentable_iff_isCardinalAccessible_uliftCoyoneda_obj.{v}]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Adjunction.lean\", \"line\": \"45\", \"text\": \"  exact Functor.isCardinalAccessible_of_natIso\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Adjunction.lean\", \"line\": \"51\", \"text\": \"    [G.IsCardinalAccessible κ] [G.Full] [G.Faithful] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Adjunction.lean\", \"line\": \"70\", \"text\": \"    [G.IsCardinalAccessible κ] [G.Full] [G.Faithful] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Basic.lean\", \"line\": \"17\", \"text\": \"A functor `F : C ⥤ D` is `κ`-accessible (`Functor.IsCardinalAccessible`)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Basic.lean\", \"line\": \"21\", \"text\": \"a regular cardinal `κ` such that `Functor.IsCardinalAccessible`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Basic.lean\", \"line\": \"54\", \"text\": \"class IsCardinalAccessible : Prop where\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: read the returned types and ordinary-category source declarations. Indization/Category.lean:68-85 uses Type-valued presheaves on an ordinary Category; Presentable/Adjunction.lean:41-46 and LocallyPresentable.lean:35-53 likewise concern ordinary categories. FiberedCategory/Fibered.lean:54-67 is ordinary fibered categories. None states this coherent quasicategorical theorem or a one-line specialization of it."
-  },
-  {
    "tool": "leansearch",
-   "query": "Uniform compact generation cardinal for a small diagram in PrR of presentable infinity categories and right adjoints",
-   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.isCardinalPresentable_of_isColimit\", \"module\": \"Mathlib.CategoryTheory.Presentable.Limits\", \"type\": \"[LocallySmall.{w} C] {K : Type u'} [Category.{v'} K] [HasLimitsOfShape Kᵒᵖ (Type w)] {Y : K ⥤ C} (c : Cocone Y)\\n  (hc : IsColimit c) (κ : Cardinal.{w}) [Fact κ.IsRegular] (hK : HasCardinalLT (Arrow K) κ)\\n  [∀ k, IsCardinalPresentable (Y.obj k) κ] : IsCardinalPresentable c.pt κ\", \"doc\": \"In a locally small category $ \\\\mathcal{C} $, if $ \\\\mathcal{K} $ is a category with limits of shape $ \\\\mathcal{J} $, and $ Y : \\\\mathcal{K} \\\\to \\\\mathcal{C} $ is a functor such that each object $ Y(k) $ \"}\n  {\"name\": \"CategoryTheory.isCardinalPresentable_of_isColimit'\", \"module\": \"Mathlib.CategoryTheory.Presentable.Limits\", \"type\": \"{K : Type u'} [Category.{v'} K] {Y : K ⥤ C} (c : Cocone Y) (hc : IsColimit c) (κ : Cardinal.{w}) [Fact κ.IsRegular]\\n  [HasLimitsOfShape Kᵒᵖ (Type v)] (hK : HasCardinalLT (Arrow K) κ) [∀ k, IsCardinalPresentable (Y.obj k) κ] :\\n  IsCardinalPresentable c.pt κ\", \"doc\": \"Let $\\\\kappa$ be a regular cardinal. If $\\\\mathcal{K}$ is a small category such that $\\\\mathcal{K}^{\\\\text{op}}$ has all limits, and $Y: \\\\mathcal{K} \\\\to \\\\mathcal{C}$ is a diagram where each $Y(k)$ is $\\\\ka\"}\n  {\"name\": \"CategoryTheory.Adjunction.isCardinalFilteredGenerator\", \"module\": \"Mathlib.CategoryTheory.Presentable.Adjunction\", \"type\": \"{P : ObjectProperty C} (hP : P.IsCardinalFilteredGenerator κ) [G.IsCardinalAccessible κ] [G.Full] [G.Faithful] :\\n  (P.map F).IsCardinalFilteredGenerator κ\", \"doc\": \"Let $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $ form an adjunction. If $ P $ is a $ \\\\kappa $-filtered generator in $ \\\\mathcal{C} $ and the right adjoint $ G $ is $ \\\\kap\"}\n  {\"name\": \"CategoryTheory.IsCardinalLocallyPresentable.toHasCardinalFilteredGenerator\", \"module\": \"Mathlib.CategoryTheory.Presentable.LocallyPresentable\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {κ : Cardinal.{w}} {inst_1 : Fact κ.IsRegular}\\n  [self : CategoryTheory.IsCardinalLocallyPresentable C κ], CategoryTheory.HasCardinalFilteredGenerator C κ\", \"doc\": \"If $\\\\mathcal{C}$ is a locally presentable category with respect to a regular cardinal $\\\\kappa$, then $\\\\mathcal{C}$ admits a $\\\\kappa$-filtered generator, i.e., there exists a set of objects in $\\\\mathca\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.presentable\", \"module\": \"Mathlib.CategoryTheory.Presentable.CardinalFilteredPresentation\", \"type\": \"[LocallySmall.{w} C] (X : C) : IsPresentable.{w} X\", \"doc\": \"If an object $ X $ in a locally small category $ \\\\mathcal{C} $ satisfies the $ \\\\kappa $-filtered generator property for some regular cardinal $ \\\\kappa $, then $ X $ is presentable (i.e., its hom-funct\"}\n  {\"name\": \"CategoryTheory.IsCardinalLocallyPresentable.iff_exists_isStrongGenerator\", \"module\": \"Mathlib.CategoryTheory.Presentable.StrongGenerator\", \"type\": \"[HasColimitsOfSize.{w, w} C] [LocallySmall.{w} C] :\\n  IsCardinalLocallyPresentable C κ ↔\\n    ∃ (P : ObjectProperty C) (_ : ObjectProperty.Small.{w} P), P.IsStrongGenerator ∧ P ≤ isCardinalPresentable C κ\", \"doc\": \"A category $\\\\mathcal{C}$ is locally presentable with respect to a regular cardinal $\\\\kappa$ if and only if there exists a small property $P$ of objects in $\\\\mathcal{C}$ such that $P$ is a strong gener\"}\n  {\"name\": \"CategoryTheory.IsStrongGenerator.colimitsCardinalClosure_eq_isCardinalPresentable\", \"module\": \"Mathlib.CategoryTheory.Presentable.StrongGenerator\", \"type\": \"[HasColimitsOfSize.{w, w} C] [LocallySmall.{w} C] {P : ObjectProperty C} [ObjectProperty.Small.{w} P]\\n  (hS₁ : P.IsStrongGenerator) (hS₂ : P ≤ isCardinalPresentable C κ) :\\n  isCardinalPresentable C κ = P.colimitsCardinalClosure κ\", \"doc\": \"In a locally small category $\\\\mathcal{C}$ with all colimits of shape $\\\\mathcal{C}$, if $P$ is a small strong generator property and $P \\\\leq \\\\text{isCardinalPresentable}(\\\\mathcal{C}, \\\\kappa)$, then the\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.colimitsCardinalClosure\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.ColimitsCardinalClosure\", \"type\": \": ObjectProperty C\", \"doc\": \"Given an object property $P$ and a cardinal $\\\\kappa$, this defines the closure of $P$ under colimits indexed by small categories whose arrow category has cardinality strictly less than $\\\\kappa$. Speci\"}",
+   "query": "coherent compact model Ind right adjoint diagram presentable infinity categories",
+   "results": "CategoryTheory.MorphismProperty.isRightAdjoint_ι_isLocal; CategoryTheory.isRightAdjoint_of_preservesLimits_of_isCoseparating; CategoryTheory.rightAdjointOfCostructuredArrowTerminals; CategoryTheory.Adjunction.fullyFaithfulROfCompIsoId; CategoryTheory.Adjunction.functorialityRightAdjoint; CategoryTheory.Limits.instIsRightAdjointFunctorLim; CategoryTheory.Ind.colimitPresentationCompYoneda; CategoryTheory.Equivalence.instPrecoherentSmallModel (ordinary category theory; no coherent infinity result)",
    "date": "2026-10-17",
-   "verdict": "no match: read the returned types and ordinary-category source declarations. Indization/Category.lean:68-85 uses Type-valued presheaves on an ordinary Category; Presentable/Adjunction.lean:41-46 and LocallyPresentable.lean:35-53 likewise concern ordinary categories. FiberedCategory/Fibered.lean:54-67 is ordinary fibered categories. None states this coherent quasicategorical theorem or a one-line specialization of it."
+   "verdict": "no match"
   },
   {
    "tool": "leanfinder",
-   "query": "Duality between lambda accessible right adjoints and left adjoints preserving lambda compact objects in presentable infinity categories",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.isCardinalPresentable_leftAdjoint_obj\", \"module\": \"Mathlib/CategoryTheory/Presentable/Adjunction\", \"type\": \"∀ {C : Type u} {D : Type u'} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (κ : Cardinal.{w})\\n  [inst_2 : Fact κ.IsRegular] (X : C) [CategoryTheory.IsCardinalPresentable X κ] [\", \"doc\": \"In an adjunction between categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, if an object $X \\\\in \\\\mathcal{C}$ is $\\\\kappa$-presentable and the right adjoint functor $G: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ is $\\\\kappa$\"}\n  {\"name\": \"CategoryTheory.Adjunction.isCardinalLocallyPresentable\", \"module\": \"Mathlib/CategoryTheory/Presentable/Adjunction\", \"type\": \"∀ {C : Type u} {D : Type u'} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (κ : Cardinal.{w})\\n  [inst_2 : Fact κ.IsRegular] [CategoryTheory.IsCardinalLocallyPresentable C κ] [G\", \"doc\": \"If $\\\\mathcal{C}$ is a locally $\\\\kappa$-presentable category for a regular cardinal $\\\\kappa$, and $G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a $\\\\kappa$-accessible, full, and faithful functor, then $\\\\mathcal{D\"}\n  {\"name\": \"CategoryTheory.Adjunction.isCardinalAccessibleCategory\", \"module\": \"Mathlib/CategoryTheory/Presentable/Adjunction\", \"type\": \"∀ {C : Type u} {D : Type u'} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (κ : Cardinal.{w})\\n  [inst_2 : Fact κ.IsRegular] [CategoryTheory.IsCardinalAccessibleCategory C κ] [G\", \"doc\": \"If $\\\\mathcal{C}$ is a $\\\\kappa$-accessible category and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ is a $\\\\kappa$-accessible, full, and faithful functor in an adjunction, then $\\\\mathcal{D}$ is also a $\\\\kappa$-ac\"}\n  {\"name\": \"CategoryTheory.Adjunction.hasCardinalFilteredGenerator\", \"module\": \"Mathlib/CategoryTheory/Presentable/Adjunction\", \"type\": \"∀ {C : Type u} {D : Type u'} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) (κ : Cardinal.{w})\\n  [inst_2 : Fact κ.IsRegular] [CategoryTheory.HasCardinalFilteredGenerator C κ] [G\", \"doc\": \"If a category $\\\\mathcal{C}$ has a $\\\\kappa$-filtered generator and $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a $\\\\kappa$-accessible, full, and faithful functor, then $\\\\mathcal{D}$ also has a $\\\\kappa$-filtere\"}\n  {\"name\": \"CategoryTheory.Adjunction.isCardinalFilteredGenerator\", \"module\": \"Mathlib/CategoryTheory/Presentable/Adjunction\", \"type\": \"∀ {C : Type u} {D : Type u'} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) {κ : Cardinal.{w}}\\n  [inst_2 : Fact κ.IsRegular] {P : CategoryTheory.ObjectProperty C},\\n  P.IsCardina\", \"doc\": \"Let $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $ form an adjunction. If $ P $ is a $ \\\\kappa $-filtered generator in $ \\\\mathcal{C} $ and the right adjoint $ G $ is $ \\\\kap\"}\n  {\"name\": \"CategoryTheory.isCardinalPresentable_iff_isCardinalAccessible_coyoneda_obj\", \"module\": \"Mathlib/CategoryTheory/Presentable/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (X : C) (κ : Cardinal.{w}) [inst_1 : Fact κ.IsRegular],\\n  CategoryTheory.IsCardinalPresentable X κ ↔ (CategoryTheory.coyoneda.obj (Opposite.op X)).IsCardinalAccessible κ\", \"doc\": \"An object $X$ is κ-presentable if and only if the coyoneda embedding of its opposite object $X^\\\\text{op}$ is a κ-accessible functor, i.e., $X$ is κ-presentable ⇔ the coyoneda functor $\\\\text{Hom}(X, -)\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.isRightAdjoint_ι_isLocal\", \"module\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [CategoryTheory.MorphismProperty.IsSmall.{w, v, u} W]\\n  [CategoryTheory.LocallySmall.{w, v, u} C],\\n  (∀ ⦃X Y : C⦄ (f : X ⟶ Y), W f → CategoryTheory.IsCard\", \"doc\": \"Let $\\\\mathcal{C}$ be a locally small category with all colimits, and let $W$ be a small morphism property in $\\\\mathcal{C}$. Suppose $\\\\kappa$ is a regular cardinal such that every morphism in $W$ has $\"}\n  {\"name\": \"CategoryTheory.isCardinalPresentable_iff_isCardinalAccessible_uliftCoyoneda_obj\", \"module\": \"Mathlib/CategoryTheory/Presentable/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (X : C) (κ : Cardinal.{w}) [inst_1 : Fact κ.IsRegular],\\n  CategoryTheory.IsCardinalPresentable X κ ↔\\n    (CategoryTheory.uliftCoyoneda.{t, v₁, u₁}.obj (Opposite.op X)).IsCardinalAccessible κ\", \"doc\": \"An object $ X $ is $\\\\kappa$-presentable if and only if the universe-lifted Yoneda embedding of $ X^\\\\text{op} $ is a $\\\\kappa$-accessible functor, i.e., $ X $ is $\\\\kappa$-presentable $\\\\iff$ $\\\\text{ulift\"}",
+   "query": "small infinity diagram of presentable categories with right adjoint arrows compact model",
+   "results": "CategoryTheory.IsCardinalPresentable; CategoryTheory.FinallySmall.FilteredFinalModel; CategoryTheory.Adjunction.isCardinalPresentable_leftAdjoint_obj; CategoryTheory.isCardinalPresentable; CategoryTheory.IsPresentable; CategoryTheory.Limits.ColimitPresentation.isCardinalPresentable; CategoryTheory.IsCardinalLocallyPresentable; CategoryTheory.Limits.IndObjectPresentation.instSmallCategoryI (ordinary categories only)",
    "date": "2026-10-17",
-   "verdict": "no match: read the returned types and ordinary-category source declarations. Indization/Category.lean:68-85 uses Type-valued presheaves on an ordinary Category; Presentable/Adjunction.lean:41-46 and LocallyPresentable.lean:35-53 likewise concern ordinary categories. FiberedCategory/Fibered.lean:54-67 is ordinary fibered categories. None states this coherent quasicategorical theorem or a one-line specialization of it."
+   "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "def ran|def rightKanExtension|class IsRightKanExtension",
-   "results": "{\"t\": \"2026-10-16T21:51:16Z\", \"tool\": \"grep\", \"query\": \"def ran|def rightKanExtension|class IsRightKanExtension\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Subfunctor/Image.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean\"], \"digest\": \"f71b5695c3b959c5\"}",
+   "query": "Ind|right adjoint|compact",
+   "results": "Mathlib/CategoryTheory/CofilteredSystem.lean; Mathlib/CategoryTheory/MarkovCategory/Positive.lean; Mathlib/CategoryTheory/Widesubcategory.lean; Mathlib/CategoryTheory/Iso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean (ordinary-category occurrences; no infinity theorem)",
    "date": "2026-10-17",
-   "verdict": "no match: inspected Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:289-320 (ordinary right Kan extensions) and Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-43 and StrictBicategory.lean:49-60 (quasicategory definition and its Cat-enriched ordinary category). These do not state the required infinity-categorical accessibility or compact-diagram theorem."
-  },
-  {
-   "tool": "grep",
-   "query": "Indization|Quasicategory|quasicategory",
-   "results": "{\"t\": \"2026-10-16T21:51:16Z\", \"tool\": \"grep\", \"query\": \"Indization|Quasicategory|quasicategory\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\"], \"digest\": \"dd0c3f628e97cf10\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: inspected Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:289-320 (ordinary right Kan extensions) and Mathlib/AlgebraicTopology/Quasicategory/Basic.lean:34-43 and StrictBicategory.lean:49-60 (quasicategory definition and its Cat-enriched ordinary category). These do not state the required infinity-categorical accessibility or compact-diagram theorem."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A coherent diagram in PrR is reconstructed from compact objects for one uniform accessibility rank",
-   "results": "{\"t\": \"2026-10-16T22:30:52Z\", \"tool\": \"leanfinder\", \"query\": \"A coherent diagram in PrR is reconstructed from compact objects for one uniform accessibility rank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.indexFunctor\", \"Profinite.isIso_indexCone_lift\", \"Profinite.isoindexConeLift\", \"Profinite.NobelingProof.spanFunctor\", \"Profinite.indexCone\", \"LightDiagram'.toProfinite\", \"Profinite.instEffectivelyEnoughCompHausProfiniteToCompHaus\", \"LightDiagram\"], \"digest\": \"48e3284322a83f4a\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: independent second-reader search. Read the returned types: the compact-rank query returned Profinite diagrams, the extension query returned ordinary CategoryTheory Kan extensions and strict Segal coskeletons; Loogle found no match. Grep returned ordinary fiber-category constructions and unrelated compactly-generated topology. None gives the asserted coherent infinity-categorical theorem."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"IsAccessible\", \"Ind\"",
-   "results": "{\"t\": \"2026-10-16T22:30:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAccessible\\\", \\\"Ind\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: independent second-reader search. Read the returned types: the compact-rank query returned Profinite diagrams, the extension query returned ordinary CategoryTheory Kan extensions and strict Segal coskeletons; Loogle found no match. Grep returned ordinary fiber-category constructions and unrelated compactly-generated topology. None gives the asserted coherent infinity-categorical theorem."
-  },
-  {
-   "tool": "grep",
-   "query": "Ind.*[Ff]iber|[Ff]iber.*Ind|PrR|CompactlyGenerated",
-   "results": "{\"t\": \"2026-10-16T22:30:53Z\", \"tool\": \"grep\", \"query\": \"Ind.*[Ff]iber|[Ff]iber.*Ind|PrR|CompactlyGenerated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Logic/Equiv/Basic.lean\", \"Mathlib/Topology/Sets/Opens.lean\", \"Mathlib/Topology/Covering/Quotient.lean\", \"Mathlib/Topology/Irreducible.lean\", \"Mathlib/Topology/Maps/Proper/CompactlyGenerated.lean\", \"Mathlib/Topology/Maps/Proper/CompactlyGenerated.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\"], \"digest\": \"796faa4adc00ed70\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: independent second-reader search. Read the returned types: the compact-rank query returned Profinite diagrams, the extension query returned ordinary CategoryTheory Kan extensions and strict Segal coskeletons; Loogle found no match. Grep returned ordinary fiber-category constructions and unrelated compactly-generated topology. None gives the asserted coherent infinity-categorical theorem."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "uniform accessibility rank for a small diagram of right adjoint infinity functors",
-   "results": "{\"t\": \"2026-10-16T23:23:43Z\", \"tool\": \"leanfinder\", \"query\": \"uniform accessibility rank for a small diagram of right adjoint infinity functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.OrthogonalReflection.isRightAdjoint_ι\", \"CategoryTheory.MorphismProperty.isRightAdjoint_ι_isLocal\", \"CategoryTheory.Adjunction.isCardinalAccessibleCategory\", \"CategoryTheory.Adjunction.isCardinalLocallyPresentable\", \"CategoryTheory.Adjunction.isCardinalPresentable_leftAdjoint_obj\", \"CategoryTheory.Adjunction.hasCardinalFilteredGenerator\", \"CategoryTheory.solutionSetCondition_of_isRightAdjoint\", \"CategoryTheory.isRightAdjoint_of_preservesLimits_of_solutionSetCondition\"], \"digest\": \"e7e56af09ccbf68b\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: fresh second-reader search. Inspected the returned ordinary CategoryTheory adjunction, accessibility, Ind and fiber declarations and SSet.Quasicategory. Ordinary categories and Type-valued presheaves do not state this coherent infinity-category assertion; the quasicategory definition supplies no such theorem."
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Functor.IsRightAdjoint",
-   "results": "{\"t\": \"2026-10-16T23:23:44Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsRightAdjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsRightAdjoint\", \"CategoryTheory.Equivalence.isRightAdjoint_functor\", \"CategoryTheory.Equivalence.isRightAdjoint_inverse\", \"CategoryTheory.Functor.leftAdjoint\", \"CategoryTheory.Functor.isRightAdjoint_of_isEquivalence\", \"CategoryTheory.Adjunction.instIsLeftAdjointLeftAdjoint\", \"CategoryTheory.Adjunction.instIsRightAdjointRightAdjoint\", \"CategoryTheory.Adjunction.isRightAdjoint\"], \"digest\": \"f6ee0c0ae781a872\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: fresh second-reader search. Inspected the returned ordinary CategoryTheory adjunction, accessibility, Ind and fiber declarations and SSet.Quasicategory. Ordinary categories and Type-valued presheaves do not state this coherent infinity-category assertion; the quasicategory definition supplies no such theorem."
-  },
-  {
-   "tool": "grep",
-   "query": "Indization|IsCardinalAccessible|class.*Quasicategory",
-   "results": "{\"t\": \"2026-10-16T23:24:00Z\", \"tool\": \"grep\", \"query\": \"Indization|IsCardinalAccessible|class.*Quasicategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/CategoryTheory/Generator/Indization.lean\", \"Mathlib/CategoryTheory/Generator/Indization.lean\", \"Mathlib/CategoryTheory/Preadditive/Indization.lean\", \"Mathlib/CategoryTheory/Abelian/FreydMitchell.lean\", \"Mathlib/CategoryTheory/Abelian/FreydMitchell.lean\", \"Mathlib/CategoryTheory/Abelian/Indization.lean\"], \"digest\": \"ebd2005732f9a9c4\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: fresh second-reader search. Inspected the returned ordinary CategoryTheory adjunction, accessibility, Ind and fiber declarations and SSet.Quasicategory. Ordinary categories and Type-valued presheaves do not state this coherent infinity-category assertion; the quasicategory definition supplies no such theorem."
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-presentable-cartesian-fibration",
@@ -134,5 +134,20 @@
   "group": "N9"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-small-right-adjoint-diagram-compact-model",
+  "worker": "stage1",
+  "summary": "Replaced the prior unsplit draft with a five-step proof. Added three statement-only inputs: accessibility of right adjoints, simultaneous rank enlargement for a small family, and the compact-object/Ind duality theorem. The item proof then applies these inputs and the existing filtered Ind extension nodes, preserving variance and all higher coherence. Sources are GHN arXiv:1501.02161v3 and Lurie HTT; both are read online and WANTED in the local archive. No Lean declaration attaches to the item.",
+  "blueprint": "Theorem 10.3 final paragraph (uniform λ and compact-object diagram), Definition 10.4 (Ind^R), and HTT Proposition 5.5.7.2 plus Propositions 5.5.7.8–5.5.7.10."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-8b52ea31e",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-8b52ea31e (reviewer sub-agent of L); spot-checked: I read the item, the three new nodes and every cited node in full. Sources checked against read-only copies already on the server: HTT (5.2.2.1/5.2.2.5, 5.4.2.9–5.4.2.13, 5.4.7.7, 5.5.2.9, 5.5.3.1–5.5.3.4, 5.5.7.2, 5.5.7.7–5.5.7.10, A.2.6.3) and GHN 1501.02161 (the copy on hand numbers them Thm 9.3 final paragraph, Def 9.4 and Lemma 9.9, i.e. v3's 10.3/10.4). The item statement is unchanged and correct. The uncountable λ is needed because HTT 5.5.7.10 only gives the Ind/compact-object equivalence for κ>ω. Variance is correct: F0(f) is the restriction of the left adjoint of H(f^op). Edge cases checked: empty A, a single Sp, identity arrows. All three new nodes are true, statement-only, strictly smaller than the item, and not duplicates. I compared them with lem-coef-infinity-compact-approximation (finite families only), lem-coef-accessible-system-ranks and lem-coef-accessible-functor-presentability-ranks (ordinary categories), lem-coef-infinity-common-compactness-rank (families of objects), lem-coef-presentable-infinity-adjoints (adjoint existence only), and searched all blueprint nodes. Fixes applied: (1) B3: the rank lemma and the right-adjoint node used 'accessible functor', which no cited node defines; its meaning is now written inline, with the cardinals in U. (2) C4/B3: the duality node said only 'contravariantly equivalent' and used Ind_λ without a definition node. It now states three clauses: L preserves compact objects iff R is λ-continuous; the duality is the identity on objects and sends L to its right adjoint, including on diagrams; Ind_λ with u↦u_! is an equivalence inverse to taking compact objects. It also cites lem-coef-ind-kappa-presentability. (3) C1: step 4 claimed u_! is a left adjoint without a citation; it now also cites lem-coef-presentable-infinity-adjoints (same unit, no cycle). The texts of steps 3 and 5 now name those clauses. Source places are corrected (HTT 5.4.7.7; 5.4.2.9 and A.2.6.3; 5.2.2.5) and the new nodes' blueprint.from.place now names the place in the blueprint proof. All cited nodes are in unit sk-prop-sf-biduality-general, so there are no tool_uses. The report mentions a citations.json that is not in the delivery; this does not affect the DAG.; 4 file(s) fixed by the reviewer"
+ }
 }

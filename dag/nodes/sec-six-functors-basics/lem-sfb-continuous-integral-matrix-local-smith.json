@@ -10,9 +10,60 @@
  "stmt_deps": [
   "def-weil-l-adic-coefficient-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a point y₀ and an open neighbourhood on which the scalar cokernel isomorphism class is constant. At y₀, apply the scalar Smith statement to the image submodule of Aⁿ. Its diagonal inclusion has nonzero diagonal scalars (the inclusion is injective). The image is finite free, so choose lifts in Aᵐ of its diagonal basis; the resulting map from a free complement to the image is a section, and applying the same Smith statement to the kernel gives a kernel basis, so these lifts together with that basis form a basis of Aᵐ. Taking the cokernel of this diagonal presentation gives a direct sum of a free part and cyclic summands A/(πᵉ), with the exponent-zero summands equal to zero. For each k≥1, multiplication by π^(k−1) followed by reduction modulo πᵏ identifies the contribution of a free summand with one residue-field dimension and the contribution of A/(πᵉ) with one dimension exactly when e≥k. Hence the isomorphism class of P determines its free rank and, for every k, the number of exponents at least k. The same calculation for every z in the chosen neighbourhood shows that the positive exponents and the number of exponent-zero pivots are fixed there; m and n determine the remaining zero rows and columns. Choose the resulting fixed diagonal D.",
+   "uses": [
+    "lem-sc-dvr-saturation-line-smith-normal-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1 and the agent's constant-type Smith argument; scalar diagonalization uses Stacks Algebra Lemma 00PD in the finite-free form recorded by the cited Mathlib leaf."
+   }
+  },
+  {
+   "text": "If the fixed list is empty, every scalar specialization on the chosen neighbourhood has cokernel free of rank n, hence image of rank zero over the fraction field, so every matrix entry is zero because A is a domain; identity matrices give the required factorization. Otherwise let e be the smallest exponent. At y₀ the pointwise Smith equivalence of Step 1 writes D=L₀F(y₀)R₀ and F(y₀)=L₀⁻¹DR₀⁻¹ with constant invertible L₀,R₀: every entry of F(y₀) is an A-linear combination of entries of D, so has valuation at least e, and the entry πᵉ of D is an A-linear combination of entries of F(y₀), so some entry has valuation at most e. Hence some entry p of F has valuation exactly e at y₀. Permute rows and columns (a constant permutation) to put p in the upper-left corner. By [def-weil-l-adic-coefficient-extension] (A is a DVR, every nonzero element is uniquely a unit times a power of π), the set of a∈A of valuation e is πᵉA^×, which is open in the valuation topology because A^× and πᵉA are open; so the locus in the chosen neighbourhood on which p has valuation e is open, and we restrict to it. At each point z of this locus, the same two-sided argument applied to the pointwise Smith equivalence at z (whose diagonal is the fixed D by Step 1) shows that every entry of F(z) has valuation at least e=v(p(z)), so every entry is divisible by p(z) in A. Division by the nowhere-zero continuous p is continuous as an E-valued operation (E is a valued field, so inversion is continuous on E^×), and the quotient is A-valued, hence gives continuous integral coefficients. Left and right elementary matrices with these quotients clear the first column and then the first row; their inverses use the negatives of the same coefficients. The function u=p/πᵉ is continuous with values in A^×, and u⁻¹ is continuous for the same reason, so multiplying the first row by u⁻¹ (inverse: multiplying by u) replaces p by πᵉ. The resulting block diagonal matrix diag(πᵉ,F′) has cokernel A/(πᵉ)⊕coker F′(z). The residue-field dimensions of Step 1 (dim of π^(k−1)Q/π^kQ for each k≥1, and the free rank) are additive in direct sums, so coker F′(z) has the free rank and, for each k, the exponent counts of P_z minus the contribution of A/(πᵉ); since these determine the module, F′ has, at every point of the locus, exactly the original type with this least invariant factor removed (with n−1 rows and m−1 columns, so the number of exponent-zero pivots also drops by one when e=0).",
+   "uses": [
+    "lem-sc-dvr-saturation-line-smith-normal-form",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Continuous integral pivot and division argument in the proof of Theorem 6.12(2), finite E case; agent local constant-type Smith variant."
+   }
+  },
+  {
+   "text": "Induct on min(m,n), with the predicate that every continuous matrix of smaller minimum size whose scalar cokernel type is locally constant admits the asserted local reduction. After the first pivot, the residual block has smaller minimum size and, by Step 2, a constant scalar cokernel type given by the remaining exponents, so the induction hypothesis supplies continuous integral invertible row and column matrices reducing it to the remaining diagonal. Extend those matrices by identity on the pivot row and column and compose them with the elementary matrices from Step 2. Only finitely many pivots occur, so the products and their inverses remain entrywise continuous. This yields the asserted factorization on an open neighbourhood of y₀.",
+   "uses": [
+    "lem-sc-dvr-saturation-line-smith-normal-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Agent induction completing the local constant-type Smith argument."
+   }
+  },
+  {
+   "text": "The construction applies at every point, and the resulting neighbourhoods form an open cover. The cases m=0, n=0, r=0, one-point spaces, zero matrices, unit pivots (e=0), and mixed free/torsion cokernels are included by the same argument; no scheme or sheaf structure on Y is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1; edge cases added in the agent proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-dvr-saturation-line-smith-normal-form",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1 and the continuous integral pivot/division argument in the proof of Theorem 6.12(2), finite E case; local constant-type Smith argument written out in this split."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -79,7 +130,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-integral-lfp-constant-model-comparison",
@@ -98,5 +149,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-continuous-integral-matrix-local-smith",
+  "worker": "stage1",
+  "summary": "Split the continuous integral local Smith statement into the scalar invariant-factor calculation, continuous pivot division and clearing, induction on the matrix size, and the resulting open cover. The statement and hypotheses are unchanged; the only cited dependency is the existing Mathlib Smith normal form leaf. Maintainer reader fix (2026-10-17): Step 2 now proves that some entry has valuation exactly e (two-sided Smith-equivalence argument), cites [def-weil-l-adic-coefficient-extension] for the unit-times-power form and openness of the valuation-e locus, states the continuity of u⁻¹, and derives the residual cokernel type from additivity of the Step 1 invariants.",
+  "blueprint": "Realizes the ancestor proof's first-sentence clause: continuous Smith elimination supplies scalar presentations after descent of the pointwise module type."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N5-3c515e35a",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-3c515e35a (reviewer sub-agent of L); spot-checked: I read the whole item (an agent-written local Smith form for continuous O_E-matrices whose cokernel type is locally constant). I checked it against how the parent lem-sfb-integral-lfp-constant-model-comparison uses it in step index 4, against HRS 2305.18131 Example 3.1 and Theorem 6.12(2) (the pivot and continuous-division argument), and against the cited Mathlib leaf lem-sc-dvr-saturation-line-smith-normal-form (Submodule.exists_smith_normal_form_of_le, PID.lean:492). The statement is true. I tested it on 1x1 and 1x2 matrices, on the z->0 case (the hypothesis correctly excludes it), on empty and zero matrices, and on e=0. There are no new nodes. The DAG has no duplicate (I read the finite-continuous-ultrametric-pivot, continuous-field-matrix-elimination and integral-matrix-* nodes). Steps 1, 3 and 4 are correct. I repaired Step 2 in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-continuous-integral-matrix-local-smith.json: (1) a two-sided Smith-equivalence argument now shows that some entry has valuation exactly e at y0 and that every entry is divisible at each z; (2) the step now cites def-weil-l-adic-coefficient-extension for the unit-times-power-of-pi factorization and for the openness of pi^e A^x (added to uses and proof_deps); (3) the step now shows that u^{-1} is continuous and derives the residual cokernel type from the additivity of the Step 1 invariants. The statement is unchanged. No tool_uses are needed. The report mentions a citations.json that is not on the branch, which is harmless.; 1 file(s) fixed by the reviewer"
  }
 }
