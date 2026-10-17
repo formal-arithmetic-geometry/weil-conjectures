@@ -8,7 +8,6 @@ module
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 import WeilConjectures.FromJoel.Algebra.Homology.Embedding.CochainComplex
-import all Sheaf.Algebra.Homology.UpperTruncationStepSES
 
 /-! # Left exact functors and good upper truncation
 
@@ -57,7 +56,34 @@ theorem mapTruncLEComparison_ι (F : C ⥤ D) [F.Additive]
 private theorem inclusion_kernel (K : CochainComplex C ℤ) (q : ℤ) :
     ∃ h : (K.ιTruncLE q).f q ≫ K.d q (q + 1) = 0,
       Nonempty (IsLimit (KernelFork.ofι ((K.ιTruncLE q).f q) h)) := by
-  sorry
+  have hi : (K.truncLEXIsoCycles q).hom ≫ K.iCycles q = (K.ιTruncLE q).f q := by
+    have h : (K.op.πTruncGE (ComplexShape.embeddingUpIntLE q).op).f q =
+        K.op.pOpcycles q ≫
+          (K.op.truncGEXIsoOpcycles (ComplexShape.embeddingUpIntLE q).op
+            (i := 0) (by change q - 0 = q; omega) (by
+              simp [ComplexShape.Embedding.op_boundaryGE_iff,
+                ComplexShape.boundaryLE_embeddingUpIntLE_iff])).inv := by
+      rw [HomologicalComplex.πTruncGE,
+        ComplexShape.Embedding.liftExtend_f (ComplexShape.embeddingUpIntLE q).op
+          _ _ (i := 0) (by change q - 0 = q; omega),
+        HomologicalComplex.restrictionToTruncGE'_f_eq_iso_hom_pOpcycles_iso_inv
+          K.op (ComplexShape.embeddingUpIntLE q).op (i := 0)
+          (by change q - 0 = q; omega) (by simp [ComplexShape.Embedding.op_boundaryGE_iff,
+            ComplexShape.boundaryLE_embeddingUpIntLE_iff])]
+      simp [HomologicalComplex.truncGEXIsoOpcycles, Category.assoc]
+    simp only [truncLEXIsoCycles, HomologicalComplex.truncLEXIsoCycles,
+      ιTruncLE, HomologicalComplex.ιTruncLE, HomologicalComplex.unopFunctor_map_f,
+      Quiver.Hom.unop_op, h, Iso.trans_hom, Iso.symm_hom, Iso.unop_inv, CategoryTheory.unop_comp,
+      Category.assoc]
+    have hh := congrArg Quiver.Hom.unop
+      ((K.sc q).op_pOpcycles_opcyclesOpIso_hom)
+    change (K.opcyclesOpIso q).hom.unop ≫ (K.op.pOpcycles q).unop = K.iCycles q at hh
+    rw [← hh]
+    simp only [← CategoryTheory.unop_comp, Category.assoc, Iso.hom_inv_id_assoc]
+  have hz : (K.ιTruncLE q).f q ≫ K.d q (q + 1) = 0 := by
+    rw [← hi, Category.assoc, HomologicalComplex.iCycles_d, comp_zero]
+  exact ⟨hz, ⟨IsKernel.isoKernel (K.d q (q + 1)) ((K.ιTruncLE q).f q)
+    (K.cyclesIsKernel q (q + 1) (by simp)) (K.truncLEXIsoCycles q) hi⟩⟩
 
 instance mapTruncLEComparison_isIso (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]
     (K : CochainComplex C ℤ) (q : ℤ) : IsIso (mapTruncLEComparison F K q) := by

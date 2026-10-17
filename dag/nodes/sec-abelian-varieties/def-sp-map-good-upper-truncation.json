@@ -10,20 +10,26 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Construct the comparison as the inverse of the source truncation inclusion followed by truncation of the mapped inclusion. Naturality gives its compatibility with inclusions. Below q both inclusions are invertible. At q, the coordinate formula for the truncation inclusion identifies it with a kernel; preservation of kernels gives a unique isomorphism commuting with it. Above q both terms are zero. Apply the componentwise isomorphism criterion. Below the cut use the upstream CochainComplex.isIso_ιTruncLE_f; no local duplicate is needed.",
-   "uses": [
-    "lem-weil-pbc-truncation-step-ses"
-   ],
-   "elementary": false
+   "text": "Define the comparison by inverting the truncation inclusion of the mapped already-truncated complex, then applying truncation to the mapped inclusion. Naturality proves compatibility with the full inclusions.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "At the boundary q identify the truncation inclusion with the cycles inclusion composed with truncLEXIsoCycles. Compute the dual truncGE projection using liftExtend_f and restrictionToTruncGE′_f_eq_iso_hom_pOpcycles_iso_inv; the opcyclesOpIso compatibility gives the claimed identity after unop. The cycles inclusion kills the differential, and HomologicalComplex.cyclesIsKernel followed by IsKernel.isoKernel transports its kernel universal property to the truncation inclusion. This is a direct coordinate calculation from the Mathlib truncation definitions; it does not use the successive-truncation short exact sequence.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate the comparison in degree p. For p < q both truncation inclusions are isomorphisms by CochainComplex.isIso_ιTruncLE_f, and compatibility lets one cancel the target inclusion. For p = q, preservation of kernels gives two limiting kernel forks and therefore a unique isomorphism; compatibility and monicity identify it with the comparison component. For p > q both objects are zero. The componentwise isomorphism criterion completes the proof.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-truncation-step-ses"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Derived Categories and Homology",
-  "place": "Homology Tags 0118 and 012K; explicit Lean construction and compatibility proofs by K1"
+  "place": "Homology Tags 0118 and 012K; direct Mathlib kernel proof by J2. Boundary coordinate calculation follows the proved private truncLEXIsoCycles_comp_iCycles in WeilConjectures.Algebra.Homology.UpperTruncationStepSES, without importing that module."
  },
  "mathlib_searches": [
   {
@@ -98,13 +104,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261016T003200-L-3927483",
-  "kind": "interface",
+  "landing": "20261017T040221-L-2369387",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
