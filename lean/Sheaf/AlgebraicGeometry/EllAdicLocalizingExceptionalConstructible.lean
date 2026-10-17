@@ -6,11 +6,8 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.EllAdicProperLocalizingPushforward
-import Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
-import Sheaf.AlgebraicGeometry.EllAdicCondensedCoefficient
-import Sheaf.Paper.CondensedQbarLfpLocalTriviality
-import Sheaf.Paper.IntegralLfpLocalTorsionCharts
-import Sheaf.Paper.IntegralLfpLocallyFreeResolution
+import Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalBounded
+import Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology
 
 /-! # Constructibility of the localizing exceptional inverse image
 
@@ -74,6 +71,8 @@ theorem ellAdic_localizing_rightAdjoint_obj_boundedConstructible
     (K : (boundedConstructible (condensedRingObj Λ Y.left)).FullSubcategory) :
     boundedConstructible (condensedRingObj Λ Z.left)
       ((G.obj ((boundedConstructibleToLocalizing Λ Y.left).obj K)).obj) := by
-  sorry
+  rw [mem_boundedConstructible_iff]
+  exact ⟨ellAdic_localizing_rightAdjoint_obj_isBounded Λ ℓ g hΛ G adj K,
+    ellAdic_localizing_rightAdjoint_obj_homology_constructible Λ ℓ g hΛ G adj K⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing
