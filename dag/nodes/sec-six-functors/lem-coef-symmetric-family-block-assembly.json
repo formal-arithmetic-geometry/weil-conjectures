@@ -12,62 +12,177 @@
   "lem-coef-active-operad-cocartesian-concatenation",
   "lem-coef-infinity-slice-right-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $r_j$ for the input arity of $x_j$, $r=\\sum_j r_j$, $\\delta_j:b\\to b_j$ for the chosen inert edges, $q_j:\\langle r\\rangle\\to\\langle r_j\\rangle$ for the block projections, and $\\kappa_j:\\langle r_j\\rangle\\to\\langle1\\rangle$ for the active fold maps. The specified $p_j$ lie over $(q_j,\\mathrm{id}_0)$, and $a_j$ lies over $(\\kappa_j,0\\to t)$. Thus $a_jp_j$ lies over $(\\beta_j,0\\to t)$ where $\\beta_j=\\kappa_jq_j=\\rho_j\\alpha$. These are the component base maps of $(\\alpha,0\\to t)$. Stationarity holds because the source and target parameter of $p_j$ are both $0$; the inert edges $\\delta_j$ similarly have parameter $\\mathrm{id}_t$. This uses the inert-edge convention in [def-coef-symmetric-operadic-family] and the chosen concatenation of [lem-coef-active-operad-cocartesian-concatenation].",
+   "uses": [
+    "def-coef-symmetric-operadic-family",
+    "lem-coef-active-operad-cocartesian-concatenation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.3.2.10 and proof of Theorem 3.1.2.3(1), printed pp.253-254 and 336-337; agent expansion of the blockwise Segal argument."
+   }
+  },
+  {
+   "text": "For the fixed tuple put $P=\\operatorname{Map}_{M^\\otimes}(x,b)_{(\\alpha,0\\to t)}$ and $Q=\\prod_j\\operatorname{Map}_{M^\\otimes}(x,b_j)_{(\\beta_j,0\\to t)}$, where subscripts denote homotopy fibers over the specified base arrows. Postcomposition with $\\delta_j$ gives $E:P\\to Q$. The relative Segal homotopy-pullback square in [def-coef-symmetric-operadic-family], applied to $y=x$ and target $b$, identifies $P$ with $Q$: the mapping spaces in the nerve of the ordinary category $\\mathrm{Fin}_*\\times[n]$ are discrete sets of arrows, and taking the fiber over the single arrow $(\\alpha,0\\to t)$ gives exactly the displayed product of component fibers. This is a fiberwise application of the stated homotopy-pullback axiom, not an assertion that an unrestricted base mapping space is contractible.",
+   "uses": [
+    "def-coef-symmetric-operadic-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.3.2.10 and proof of Theorem 3.1.2.3(1), printed pp.253-254 and 336-337; agent expansion of the blockwise Segal argument."
+   }
+  },
+  {
+   "text": "The tuple $(a_jp_j)_j$ is a point $v$ of $Q$. An arrow together with the specified component triangles is precisely a point of $\\operatorname{hofib}_v(E)$, including its path data. Since $E$ is an equivalence, [lem-cbc-kan-fibration-fiber-criterion] says this homotopy fiber is contractible; in particular it is nonempty. Every resulting arrow lies over $\\alpha$. Its inverse image of the basepoint is just the basepoint, so it is active by [def-coef-symmetric-operadic-family]. This proves the objectwise assertion with all higher homotopies of its choices.",
+   "uses": [
+    "def-coef-symmetric-operadic-family",
+    "lem-cbc-kan-fibration-fiber-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.3.2.10 and proof of Theorem 3.1.2.3(1), printed pp.253-254 and 336-337; agent expansion of the blockwise Segal argument."
+   }
+  },
+  {
+   "text": "For coherence let $C=(M_{0,\\mathrm{act}}^\\otimes)^s$ and let $F:C\\to M_{0,\\mathrm{act}}^\\otimes$ be concatenation. Define contravariant space diagrams on $C$ by $P(\\mathbf x)=\\operatorname{Map}(F\\mathbf x,b)_{(\\alpha_{\\mathbf x},0\\to t)}$, $Q(\\mathbf x)=\\prod_j\\operatorname{Map}(F\\mathbf x,b_j)_{(\\rho_j\\alpha_{\\mathbf x},0\\to t)}$, and $R(\\mathbf x)=\\prod_j\\operatorname{Map}(x_j,b_j)_{(\\kappa_j,0\\to t)}$. The coherent mapping bifunctor and its pre/postcomposition compatibilities in [lem-coef-space-transport-classification] make these coherent diagrams: an active tuple $\\mathbf h$ preserves blocks, so $\\alpha_{\\mathbf x\\prime}F(\\mathbf h)=\\alpha_{\\mathbf x}$. By [lem-coef-active-operad-cocartesian-concatenation] and [lem-coef-active-concatenation-block-projections], $F(\\mathbf h)$ lies over the blockwise sum of the active base maps, and the block projections form coherent transformations $p_j:\\iota F\\Rightarrow\\iota\\,\\mathrm{pr}_j$, giving the coherent comparisons $p_j\\prime F(\\mathbf h)\\simeq h_jp_j$ with all higher simplices. Therefore composition defines transformations $E:P\\to Q$ by $(\\delta_j)_j$ and $V:R\\to Q$ by $(p_j)_j$, retaining all higher coherences.",
+   "uses": [
+    "def-coef-symmetric-operadic-family",
+    "lem-coef-active-operad-cocartesian-concatenation",
+    "lem-coef-space-transport-classification",
+    "lem-coef-active-concatenation-block-projections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.3.2.10 and proof of Theorem 3.1.2.3(1), printed pp.253-254 and 336-337; agent expansion of the blockwise Segal argument."
+   }
+  },
+  {
+   "text": "Each component of $E$ is the equivalence proved in Step 2. Apply [lem-coef-infinity-pointwise-equivalences] to $\\operatorname{Fun}(C^{\\mathrm{op}},\\mathcal S)$: $E$ is an equivalence there, so choose a coherent inverse $L:Q\\to P$ and its inverse homotopies. The transformation $LV:R\\to P$ now assigns assembled operations coherently. By the right-fibration classification and mapping-space formula of [lem-coef-space-transport-classification], it induces a functor between the total right fibrations representing $R$ and $P$, over $C$. The first total category is $\\prod_jJ_{b_j}$, since its vertex fibers are the active mapping spaces into the $b_j$ and its transports are precomposition. The second is the subcategory of the pullback $C\\times_{M_{0,\\mathrm{act}}^\\otimes}J_b$ selecting the base maps $\\alpha_{\\mathbf x}$. The join-slice identification in [lem-coef-infinity-slice-right-fibration] and the representable comparison in the transport statement give these identifications with coherent triangles, not only with homotopy classes. Composing with its projection to $J_b$ is the required functor.",
+   "uses": [
+    "lem-coef-infinity-pointwise-equivalences",
+    "lem-coef-space-transport-classification",
+    "lem-coef-infinity-slice-right-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.3.2.10 and proof of Theorem 3.1.2.3(1), printed pp.253-254 and 336-337; agent expansion of the blockwise Segal argument."
+   }
+  },
+  {
+   "text": "The inverse homotopy $E LV\\simeq V$ supplies the specified component triangles. For an edge $(h_j,\\tau_j)$ of the product slices, its image is an edge over $h=\\bigoplus_jh_j$, hence a triangle $a\\prime h\\simeq a$. Its $j$th component is the path $\\delta_j a\\prime h\\simeq a_j\\prime p_j\\prime h\\simeq a_j\\prime h_jp_j\\simeq a_jp_j\\simeq\\delta_j a$. Here the second comparison is the naturality square of [lem-coef-active-concatenation-block-projections] and $\\tau_j$ supplies the third. A source-change edge occurring in an incoming active slice is itself active: if a non-basepoint input were killed by $h_j$, the composite with the active $a_j\\prime$ would kill it, contradicting activity of $a_j$. Thus every edge of the input slices lies over $C$. Because $LV$ and its comparison with $V$ are coherent transformations and the transport comparison is coherent on mapping spaces, the same formula includes every higher simplex and all its faces and degeneracies.",
+   "uses": [
+    "def-coef-symmetric-operadic-family",
+    "lem-coef-active-operad-cocartesian-concatenation",
+    "lem-coef-space-transport-classification",
+    "lem-coef-active-concatenation-block-projections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.3.2.10 and proof of Theorem 3.1.2.3(1), printed pp.253-254 and 336-337; agent expansion of the blockwise Segal argument."
+   }
+  },
+  {
+   "text": "If $s=0$, the category $C$ and the empty products $Q,R$ are terminal, and $F$ selects the empty tuple. The relative Segal axiom at arity zero makes $P\\to Q=*$ an equivalence, so the preceding construction gives the functor from the terminal empty product. If an individual $r_j=0$, $q_j$ is still inert (the condition on its non-basepoint outputs is vacuous), $\\kappa_j$ is still active, and $\\rho_j\\alpha=\\kappa_jq_j$ still holds. No step used $r_j>0$. For $s=1$ the block projection is the identity up to its specified coherent equivalence, and Step 2 reduces to that equivalence. The empty-unit convention is supplied by [lem-coef-active-operad-cocartesian-concatenation], and the zero-output mapping-space condition by [def-coef-symmetric-operadic-family].",
+   "uses": [
+    "def-coef-symmetric-operadic-family",
+    "lem-coef-active-operad-cocartesian-concatenation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+    "place": "Definition 2.3.2.10 and proof of Theorem 3.1.2.3(1), printed pp.253-254 and 336-337; agent expansion of the blockwise Segal argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-symmetric-operadic-family",
+  "lem-cbc-kan-fibration-fiber-criterion",
+  "lem-coef-active-concatenation-block-projections",
+  "lem-coef-active-operad-cocartesian-concatenation",
+  "lem-coef-infinity-pointwise-equivalences",
+  "lem-coef-infinity-slice-right-fibration",
+  "lem-coef-space-transport-classification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://people.math.harvard.edu/~lurie/papers/HA.pdf",
+  "place": "Theorem 3.1.2.3(1), printed pp.336-337, expanded using Definition 2.3.2.10 and coherent space-valued transport. Online source inspected 2026-10-17; archival copy WANTED."
+ },
  "mathlib_searches": [
   {
-   "tool": "leanfinder",
-   "query": "Relative Segal mapping spaces assemble active arrows to each output block into an active arrow to the whole target in a symmetric operadic family",
-   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegalCore.concat\", \"SSet.Truncated.liftOfStrictSegal.app\", \"SSet.Truncated.liftOfStrictSegal.f₂\", \"SSet.StrictSegal.spineToSimplex_arrow\", \"SSet.StrictSegalCore.map_mkOfSucc_zero_concat\", \"SSet.StrictSegalCore.map_mkOfSucc_zero_spineToSimplex\", \"SSet.Truncated.StrictSegal.spineToSimplex_arrow\", \"SSet.StrictSegal.isPointwiseRightKanExtensionAt.strArrowMk₂\"]}",
-   "date": "2026-10-17",
-   "verdict": "no match: returned Mathlib declarations concern ordinary categories or strict simplicial Segal sets, not symmetric infinity-operadic families and their active slice statement."
-  },
-  {
-   "tool": "loogle",
-   "query": "Symmetric operad relative Segal square assembles block arrows into an active arrow",
-   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `operad`\", \"top\": []}",
-   "date": "2026-10-17",
-   "verdict": "Query rejected by Loogle (unknown identifier); not evidence of absence. The retained valid second Loogle pattern returned zero hits."
-  },
-  {
    "tool": "grep",
-   "query": "relative.*Segal|active.*block|concatenat.*active",
-   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "query": "active.*block|relative.*Segal|operad",
+   "results": "none",
    "date": "2026-10-17",
-   "verdict": "no match: returned Mathlib declarations concern ordinary categories or strict simplicial Segal sets, not symmetric infinity-operadic families and their active slice statement."
+   "verdict": "no match: Mathlib results concern ordinary categories or strict simplicial Segal sets, not symmetric infinity-operadic families and active block assembly."
   },
   {
    "tool": "leansearch",
-   "query": "Relative Segal mapping spaces assemble active arrows to each output block into an active arrow to the whole target in a symmetric operadic family",
-   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Nerve.strictSegal\", \"SSet.StrictSegal.ofCore\", \"SSet.StrictSegal\", \"SSet.RelativeMorphism.comp\", \"SSet.StrictSegal.casesOn\", \"SSet.StrictSegal.rec\", \"SSet.StrictSegal.spineToSimplex_arrow\", \"SSet.RelativeMorphism\"]}",
+   "query": "assemble a tuple of active operations with fixed output blocks into one active operation using a relative Segal condition",
+   "results": "CategoryTheory.Nerve.strictSegal; SSet.StrictSegalCore.concat.congr_simp; SSet.StrictSegal.ofCore; SSet.StrictSegalCore.map_mkOfSucc_zero_concat; SSet.StrictSegalCore.concat; SSet.StrictSegalCore.δ₀_concat; SSet.StrictSegalCore.mk; SSet.StrictSegalCore.recOn",
    "date": "2026-10-17",
-   "verdict": "no match: returned Mathlib declarations concern ordinary categories or strict simplicial Segal sets, not symmetric infinity-operadic families and their active slice statement."
-  },
-  {
-   "tool": "grep",
-   "query": "Operad|inert.*active|active.*inert",
-   "results": "{\"t\": \"2026-10-17T08:49:34Z\", \"tool\": \"grep\", \"query\": \"Operad|inert.*active|active.*inert\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Tactic/Linter/FlexibleLinter.lean\", \"Mathlib/Tactic/Linter/FlexibleLinter.lean\", \"Mathlib/Algebra/NonAssoc/PreLie/Basic.lean\", \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\"], \"digest\": \"a7770e5c22bc9905\"}",
-   "date": "2026-10-17",
-   "verdict": "No match: ordinary composable arrows or strict Segal spine concatenation do not give symmetric operadic block restriction or assembly. Loogle has no hits; grep returns incidental occurrences."
+   "verdict": "no match: Mathlib results concern ordinary categories or strict simplicial Segal sets, not symmetric infinity-operadic families and active block assembly."
   },
   {
    "tool": "loogle",
-   "query": "\"SSet\", \"Operad\"",
-   "results": "{\"t\": \"2026-10-17T08:49:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"SSet\\\", \\\"Operad\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "query": "SSet.StrictSegal, CategoryTheory.Nerve.strictSegal, SSet.Quasicategory",
+   "results": "none",
    "date": "2026-10-17",
-   "verdict": "No match: ordinary composable arrows or strict Segal spine concatenation do not give symmetric operadic block restriction or assembly. Loogle has no hits; grep returns incidental occurrences."
+   "verdict": "no match: Mathlib results concern ordinary categories or strict simplicial Segal sets, not symmetric infinity-operadic families and active block assembly."
   },
   {
    "tool": "leanfinder",
-   "query": "Tuples of incoming operations with fixed target colors assemble by the relative Segal axiom into one operation with the concatenated source in an operadic family",
-   "results": "{\"t\": \"2026-10-17T08:49:38Z\", \"tool\": \"leanfinder\", \"query\": \"Tuples of incoming operations with fixed target colors assemble by the relative Segal axiom into one operation with the concatenated source in an operadic family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.StrictSegalCore.concat\", \"SSet.StrictSegalCore.spineToSimplex_succ\", \"SSet.StrictSegalCore.map_mkOfSucc_zero_concat\", \"SSet.StrictSegalCore\", \"SSet.StrictSegal\", \"SSet.StrictSegalCore.δ₀_concat\", \"CategoryTheory.Nerve.strictSegal\", \"SSet.IsStrictSegal\"], \"digest\": \"3228dd8d1da8a090\"}",
+   "query": "Relative Segal mapping spaces assemble active arrows to each output block into an active arrow in a symmetric operadic family",
+   "results": "SSet.StrictSegalCore.concat; SSet.StrictSegal.spineToSimplex_arrow; SSet.Truncated.liftOfStrictSegal.app; SSet.Truncated.liftOfStrictSegal.f₂; SSet.StrictSegalCore; SSet.StrictSegalCore.map_mkOfSucc_zero_concat; SSet.StrictSegalCore.map_mkOfSucc_zero_spineToSimplex; SSet.Truncated.StrictSegal.spineToSimplex_arrow",
    "date": "2026-10-17",
-   "verdict": "No match: ordinary composable arrows or strict Segal spine concatenation do not give symmetric operadic block restriction or assembly. Loogle has no hits; grep returns incidental occurrences."
+   "verdict": "no match: Mathlib results concern ordinary categories or strict simplicial Segal sets, not symmetric infinity-operadic families and active block assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "StrictSegalCore|operadic|MonoidalEnvelope",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib results concern ordinary categories or strict simplicial Segal sets, not symmetric infinity-operadic families and active block assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Nerve.strictSegal, SSet.StrictSegalCore.concat",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib results concern ordinary categories or strict simplicial Segal sets, not symmetric infinity-operadic families and active block assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherent triangles of active arrows assemble under a symmetric operadic Segal mapping space equivalence",
+   "results": "CategoryTheory.Functor.mapTriangleCompIso; CochainComplex.mappingConeCompTriangleh_comm₁; CategoryTheory.Nerve.strictSegal; CategoryTheory.Triangulated.Octahedron; CategoryTheory.Pretriangulated.Triangle.functorIsoMk; CategoryTheory.Equivalence.IsTriangulated.symm; CategoryTheory.Pretriangulated.Triangle.functorHomMk; CategoryTheory.Pretriangulated.Triangle.functorIsoMk'",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib results concern ordinary categories or strict simplicial Segal sets, not symmetric infinity-operadic families and active block assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given active maps into each inert output block, the relative operadic Segal condition has a contractible lift to the whole target",
+   "results": "SSet.Truncated.liftOfStrictSegal; SSet.StrictSegalCore; SSet.StrictSegal.isStrictSegal; SSet.Truncated.liftOfStrictSegal.hσ'₀; SSet.IsStrictSegal; SSet.StrictSegal; SSet.StrictSegal.ofCore; SSet.Truncated.liftOfStrictSegal.app",
+   "date": "2026-10-17",
+   "verdict": "no match: Mathlib results concern ordinary categories or strict simplicial Segal sets, not symmetric infinity-operadic families and active block assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "StrictSegalCore|strictSegal",
+   "results": "{\"t\": \"2026-10-17T10:47:34Z\", \"tool\": \"grep\", \"query\": \"StrictSegalCore|strictSegal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Nerve.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean\"], \"digest\": \"1e710e625a1daf33\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: the source hits describe strict Segal simplicial sets and nerves of ordinary categories; none treats relative symmetric infinity-operadic families or incoming active slices."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-symmetric-family-active-slice-calculus",
@@ -95,5 +210,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-symmetric-family-block-assembly",
+  "worker": "stage1",
+  "summary": "Expanded the relative Segal block assembly into seven steps. Fixed the ill-typed component formula in the interrupted draft and replaced its unsupported coherence assertion with an explicit transformation of contravariant mapping-space diagrams, inverted by the existing pointwise-equivalence theorem and converted to a slice functor by existing space-valued transport. Contractibility is justified by the existing homotopy-fiber criterion. Statement unchanged; no new nodes.",
+  "blueprint": "The inherited prop-coef-integral-exceptional-adjoint proof paragraph 2, middle derived mapping-complex comparison, through HA Theorem 3.1.2.3(1), printed pp.336-337: Steps 1-3 realize relative Segal assembly, Steps 4-6 coherent slice functoriality, and Step 7 the empty-block cases.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-kan-fibration-fiber-criterion",
+    "why": "Step 3 uses only the general characterization of equivalences of spaces by contractible homotopy fibers; this is a homotopy-theoretic tool, not a replacement of the operadic unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-kan-fibration-fiber-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-66f30159a",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-66f30159a (reviewer sub-agent of L); spot-checked: Read the whole delivery: the item, all 7 steps, the statements of all 6 cited nodes, and the concatenation lemma's own proof steps. Also read the neighbours for duplicates (parent active-slice-calculus, sibling block-restriction, block-incidence-lifting, monoidal-block-projection-coherence), the unit sk-prop-sf-biduality-general and the chapter. HA Thm 3.1.2.3(1) is not in literature/; it is filed as WANTED and the proof is correctly marked by:agent, so I checked the argument against the cited statements instead. The statement is unchanged and true. Small cases pass: the trivial family, s=0, s=1 and empty blocks. Steps 1-3 (fiberwise relative Segal, then the homotopy-fiber criterion) are correct. Steps 5 and 7 are correct. I accept the tool use of lem-cbc-kan-fibration-fiber-criterion as a generic Kan-complex fact. The delivery creates no new nodes and does not restate or move the parent's clauses (no D1/D2). One fault (C3/C4): steps 4 and 6 need coherent naturality of the concatenation block projections, p'_jF(h)≃h_jp_j. The cited concatenation lemma's statement does not give this; it appears only inside that lemma's proof (its step 4). No DAG or blueprint node states it. Repair: a new statement-only unsplit node lem-coef-active-concatenation-block-projections (created.item = this item; source HA 2.2.4.1/2.2.4.6/2.2.4.9; blueprint.from = prop-coef-integral-exceptional-adjoint via this item; Mathlib grep recorded). Steps 4 and 6 now cite it and proof_deps is updated. Only Mathlib greps were run for the new node: LeanSearch, Loogle and LeanFinder cannot be reached from this machine, so the maintainer may need to add those searches if the preflight requires all three kinds. Corrected files are in fixes/dag/nodes/sec-six-functors/.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }
