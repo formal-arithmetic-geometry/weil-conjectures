@@ -1,0 +1,236 @@
+{
+ "id": "lem-coef-simplicial-fully-faithful-homotopy-image",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Paragraph 2 of prop-coef-integral-exceptional-adjoint.proof.md: \"use the reduction of integral compact supports ... and derived coefficient adjunction to compute\", and its displayed R Hom / R inverse-limit calculation. The essential-image test supplies the coherent diagram restriction in the enriched-diagram-rectification dependency chain.",
+   "via": [
+    "lem-coef-enriched-diagram-rectification",
+    "lem-coef-simplicial-presheaf-localization-comparison",
+    "lem-coef-combinatorial-localization-presentability",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Essential-image test on derived maps into simplicial categories",
+ "statement": "Use simplicial categories and the Bergner homotopy category $h\\mathrm{sCat}$ of [lem-coef-coherent-nerve-comparison]. For a simplicial category $T$, let $\\pi_0T$ have the objects of $T$ and the connected components of its mapping simplicial sets as morphisms. Let $j:T\\to T'$ be a simplicial functor inducing a weak homotopy equivalence $T(x,y)\\to T'(jx,jy)$ for every pair of objects. For every small simplicial category $I$, postcomposition is injective:\n$$j_*:\\operatorname{Hom}_{h\\mathrm{sCat}}(I,T)\\hookrightarrow\\operatorname{Hom}_{h\\mathrm{sCat}}(I,T').$$\nIts image consists exactly of the classes $a$ for which the induced functor $\\pi_0I\\to\\pi_0T'$, defined up to natural isomorphism, has essential image contained in that of $\\pi_0j$. Essential image means objects isomorphic to an object in the image. All categories and hom sets fit in a fixed sufficiently large universe. No essential-surjectivity hypothesis on $j$ is assumed.",
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Corollary A.3.4.11, printed p.889; maps in the Bergner homotopy category are tested on their induced ordinary homotopy-category functor. Read online; not archived in literature/. No Stacks tag states this simplicial homotopy-theoretic result."
+ },
+ "stmt_deps": [
+  "lem-coef-coherent-nerve-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use the functorial object-preserving replacements T→RT and T′→RT′ of [lem-coef-coherent-nerve-comparison]. Naturality gives the commuting square of mapping simplicial sets with horizontal maps T(x,y)→T′(jx,jy) and RT(x,y)→RT′(jx,jy). The vertical maps and the top map are weak homotopy equivalences, so two-out-of-three makes the bottom map a weak homotopy equivalence. Put X=N_hc(RT), Y=N_hc(RT′), and J=N_hc(Rj). The natural mapping-space comparisons in that node identify the bottom map with Map_X(x,y)→Map_Y(Jx,Jy). Thus J is fully faithful. Put A=N_hc(RI); no cofibrancy assumption on I is needed.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.3.4.11 and the mapping-space comparison preceding it, printed p.889."
+   }
+  },
+  {
+   "text": "Let Y₀ be the full subcategory of Y on the objects equivalent to Jx for some x∈X, and let i:Y₀→Y be the inclusion. By [lem-coef-infinity-full-essential-image], J factors as iJ₀ and J₀:X→Y₀ admits a coherent quasi-inverse K:Y₀→X, with coherent natural equivalences KJ₀≃1_X and J₀K≃1_Y₀. Its hypotheses hold because Step 1 proves full faithfulness and Y₀ is exactly the full replete essential image specified in that node.",
+   "uses": [
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01JX",
+    "place": "Theorem 4.8.4.1, applied by the existing full-essential-image node."
+   }
+  },
+  {
+   "text": "The derived coherent-nerve equivalence in [lem-coef-coherent-nerve-comparison] identifies Hom_{h sCat}(I,T) with coherent functors A→X modulo coherent natural equivalence, and identifies Hom_{h sCat}(I,T′) with coherent functors A→Y modulo coherent natural equivalence. These are the morphisms in the ordinary homotopy category of Cat_∞. Naturality identifies j_* with postcomposition by J. All objects and functor categories are taken in the sufficiently large universe of the statement. It therefore remains to check injectivity and the image criterion for these functors.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.3.4.11 and the Bergner-to-Joyal comparison, printed p.889."
+   }
+  },
+  {
+   "text": "By [def-cbc-enhanced-diagrams-cones], a full subcategory contains precisely all simplices with its specified vertices. Thus a simplicial map a:A→Y whose vertices lie in Y₀ factors literally as ia₀ with a₀:A→Y₀. Moreover an equivalence between iJ₀F and iJ₀G in Fun(A,Y) factors into Fun(A,Y₀): its transformation, its inverse, and the two inverse-triangle witnesses have all vertices among the values of J₀F and J₀G. (For a chain of such equivalences the same argument applies, since Y₀ is replete.) Applying K and whiskering KJ₀≃1_X from Step 2 yields F≃KJ₀F≃KJ₀G≃G, proving injectivity. For a functor a=ia₀ as above, put b=Ka₀. Whiskering J₀K≃1_Y₀ gives Jb=iJ₀Ka₀≃ia₀=a. Conversely every Jb has all vertices in Y₀. This proves that the image consists precisely of functors whose vertex values lie in Y₀, without choosing separate, potentially incompatible lifts of their arrows.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-infinity-full-essential-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.3.4.11, printed p.889, essential-image assertion; explicit full-subcategory argument in the coherent-nerve model, rather than the printed chunk proof."
+   }
+  },
+  {
+   "text": "The object-preserving replacement and mapping-space comparison in [lem-coef-coherent-nerve-comparison] identify π₀T with the ordinary homotopy category of X, and π₀T′ with that of Y, naturally for j; the same applies to I and A. Composition agrees because the comparison preserves enriched composition. An object y of Y lies in Y₀ exactly when y and Jx are isomorphic in its homotopy category for some x. Here the homotopy category of the quasicategory Y has as morphisms the components of the right-pinched mapping spaces Map_Y(y,y′) of [def-cbc-enhanced-diagrams-cones], that is, homotopy classes of edges, and a 2-simplex with edges f:y→y′, g:y′→y″ and long edge h says [h]=[g][f]. If f:y→Jx is an equivalence in the sense of [def-cbc-enhanced-diagrams-cones], its inverse g and the two triangle witnesses (2-simplices with edges (f,g,1_y) and (g,f,1_{Jx})) give [g][f]=[1_y] and [f][g]=[1_{Jx}]. Conversely let [f],[g] be inverse classes. Fill the inner horn Λ²₁ given by (f,g) to a 2-simplex σ with long edge h. Then [h]=[1_y], so h and 1_y lie in one component of the Kan complex Map_Y(y,y) and are joined by an edge (in either direction, the space being Kan). Such an edge is a homotopy between h and 1_y, and by the equivalence of the two forms of homotopy (Scholze, basic fact (2)) it gives a 2-simplex τ with edges h, 1_y and long edge 1_y. The inner horn Λ³₂ on vertices y,Jx,y,y with faces d₃=σ, d₁=τ and d₀ the degenerate 2-simplex on g fills in Y, and its face d₂ is a 2-simplex with edges (f,g,1_y). The other witness is obtained in the same way from [f][g]=[1_{Jx}]. This is Scholze's basic fact (3) of Lecture II. Thus the vertex condition of Step 4 is exactly the stated essential-image condition on π₀a. Equivalent coherent functors induce naturally isomorphic homotopy-category functors, by taking the components and naturality triangles of the coherent equivalence; hence this condition is independent of the representative of a. Combining Steps 3-4 proves both clauses, without essential surjectivity of j.",
+   "uses": [
+    "lem-coef-coherent-nerve-comparison",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Corollary A.3.4.11, printed p.889; for the equivalence/isomorphism comparison, literature/scholze-six-functor-formalisms.pdf, Lecture II, basic facts (2)-(3), printed p.14."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-coherent-nerve-comparison",
+  "lem-coef-infinity-full-essential-image",
+  "def-cbc-enhanced-diagrams-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Statement from Corollary A.3.4.11, printed p.889 (HTT not archived in literature/; WANTED in the report). The proof is an agent-written alternate proof via the coherent-nerve equivalence (Theorem 2.2.5.1, node lem-coef-coherent-nerve-comparison) and the existing full-essential-image lemma (Kerodon Theorem 4.8.4.1), not HTT's chunk proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A homotopically fully faithful functor of simplicial categories induces injections on hom sets from every simplicial category in the homotopy category with image determined by essential image",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.Truncated.HomotopyCategory.instFullFreeReflOneTruncation₂QuotientFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"∀ (V : SSet.Truncated 2), (SSet.Truncated.HomotopyCategory.quotientFunctor V).Full\", \"doc\": \"The canonical functor from the free reflexive quotient category of the 0-simplices and 1-simplices of a 2-truncated simplicial set $V$ to its homotopy category is full. This means that for any two obj\"}\n  {\"name\": \"ComplexShape.Embedding.instFaithfulHomotopyCategoryExtendHomotopyFunctor\", \"module\": \"Mathlib/Algebra/Homology/Embedding/ExtendHomotopy\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} (e : c.Embedding c') [inst : e.IsRelIff]\\n  (C : Type u_3) [inst_1 : CategoryTheory.Category.{v_1, u_3} C] [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : CategoryTheory.Preadditive C], (e.extendHomotopyFunctor \", \"doc\": \"The functor from the homotopy category of chain complexes with shape $ c $ to those with shape $ c' $, constructed by extending complexes and chain maps via a complex shape embedding $ e $ (using zero\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instFullHoCatToHoCat\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  HomotopicalAlgebra.CofibrantObject.toHoCat.Full\", \"doc\": \"The canonical functor from the full subcategory of cofibrant objects in a model category $\\\\mathcal{C}$ to its homotopy category of cofibrant objects is full. This means that for any pair of cofibrant \"}\n  {\"name\": \"ComplexShape.Embedding.instFullHomotopyCategoryExtendHomotopyFunctor\", \"module\": \"Mathlib/Algebra/Homology/Embedding/ExtendHomotopy\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} (e : c.Embedding c') [inst : e.IsRelIff]\\n  (C : Type u_3) [inst_1 : CategoryTheory.Category.{v_1, u_3} C] [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : CategoryTheory.Preadditive C], (e.extendHomotopyFunctor \", \"doc\": \"Given a complex shape embedding $ e : c \\to c' $, the induced functor between homotopy categories of chain complexes (constructed by extending complexes via $ e $ and passing to homotopy classes) is fu\"}\n  {\"name\": \"HomotopyCategory.instFaithfulFunctorHomologicalComplexObjWhiskeringLeftQuotient\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory\", \"type\": \"∀ {ι : Type u_2} (V : Type u) [inst : CategoryTheory.Category.{v, u} V] [inst_1 : CategoryTheory.Preadditive V]\\n  (c : ComplexShape ι) {D : Type u_3} [inst_2 : CategoryTheory.Category.{v_1, u_3} D],\\n  ((CategoryTheory.Functor.whiskeringLeft (HomologicalComplex V c) (HomotopyCategory V c) D).obj\\n    \", \"doc\": \"The functor obtained by composing the quotient functor from the category of chain complexes in a preadditive category $ V $ with shape $ c $ to its homotopy category, and then applying a functor to an\"}\n  {\"name\": \"SSet.Truncated.cosk.faithful\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/Basic\", \"type\": \"∀ (n : ℕ), (SSet.Truncated.cosk n).Faithful\", \"doc\": \"The coskeleton functor for n-truncated simplicial sets is faithful. This means that for any two n-truncated simplicial sets, the induced map on their hom-sets by the coskeleton functor is injective.\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.Truncated.sk.faithful\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (n : ℕ)\\n  [inst_1 :\\n    ∀ (F : CategoryTheory.Functor (SimplexCategory.Truncated n)ᵒᵖ C),\\n      (SimplexCategory.Truncated.inclusion n).op.HasLeftKanExtension F]\\n  [∀ (F : CategoryTheory.Functor (SimplexCategory.Truncated n)ᵒᵖ C),\\n      (Simpl\", \"doc\": \"The skeleton functor that extends n-truncated simplicial objects in a category $\\\\mathcal{C}$ to full simplicial objects via left Kan extension is faithful. This means that distinct natural transformat\"}\n  {\"name\": \"CategoryTheory.SimplicialObject.Truncated.cosk.faithful\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialObject/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (n : ℕ)\\n  [inst_1 :\\n    ∀ (F : CategoryTheory.Functor (SimplexCategory.Truncated n)ᵒᵖ C),\\n      (SimplexCategory.Truncated.inclusion n).op.HasRightKanExtension F]\\n  [∀ (F : CategoryTheory.Functor (SimplexCategory.Truncated n)ᵒᵖ C),\\n      (Simp\", \"doc\": \"The coskeleton functor from the category of n-truncated simplicial objects in a category C to the category of simplicial objects in C is faithful. This means that if two natural transformations betwee\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary full-subcategory and fully faithful instances concern Hom sets of ordinary categories. The asserted injection is on derived Hom sets in the Bergner localization, with an essential-image criterion; none of the hits states that result. Read the displayed hit types and SimplicialNerve.lean:14-34; the Bergner/DK grep has no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialCategory\", \"FullyFaithful\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary full-subcategory and fully faithful instances concern Hom sets of ordinary categories. The asserted injection is on derived Hom sets in the Bergner localization, with an essential-image criterion; none of the hits states that result. Read the displayed hit types and SimplicialNerve.lean:14-34; the Bergner/DK grep has no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "Bergner|homotopically.*fully.*faithful|Dwyer.?Kan",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary full-subcategory and fully faithful instances concern Hom sets of ordinary categories. The asserted injection is on derived Hom sets in the Bergner localization, with an essential-image criterion; none of the hits states that result. Read the displayed hit types and SimplicialNerve.lean:14-34; the Bergner/DK grep has no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived morphisms into a full simplicial subcategory are determined by essential image on objects",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.toEssImage\", \"module\": \"Mathlib.CategoryTheory.EssentialImage\", \"type\": \"(F : C ⥤ D) : C ⥤ F.EssImageSubcategory\", \"doc\": \"Given a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, this constructs the functor from $ \\\\mathcal{C} $ to the full subcategory of $ \\\\mathcal{D} $ consisting of objects isomorphic to $ F(X) $ for some o\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.homMk\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.FullSubcategory\", \"type\": \"{X Y : P.FullSubcategory} (f : X.obj ⟶ Y.obj) : X ⟶ Y\", \"doc\": \"Given objects $X$ and $Y$ in the full subcategory (satisfying property $P$) and a morphism $f : X.\\text{obj} \\to Y.\\text{obj}$ in the original category $\\\\mathcal{C}$, this function constructs the corresp\"}\n  {\"name\": \"CategoryTheory.Functor.EssImageSubcategory\", \"module\": \"Mathlib.CategoryTheory.EssentialImage\", \"type\": \"(F : C ⥤ D)\", \"doc\": \"Given a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, this is the full subcategory of $ \\\\mathcal{D} $ consisting of all objects isomorphic to $ F(X) $ for some object $ X $ in $ \\\\mathcal{C} $, together\"}\n  {\"name\": \"CategoryTheory.Functor.EssSurj.toEssImage\", \"module\": \"Mathlib.CategoryTheory.EssentialImage\", \"type\": \": EssSurj F.toEssImage\", \"doc\": \"For any functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the induced functor from $ \\\\mathcal{C} $ to the full subcategory of $ \\\\mathcal{D} $ consisting of objects isomorphic to $ F(X) $ for some $ X \\\\in \\\\\"}\n  {\"name\": \"CategoryTheory.Functor.toEssImageCompι\", \"module\": \"Mathlib.CategoryTheory.EssentialImage\", \"type\": \"(F : C ⥤ D) : F.toEssImage ⋙ F.essImage.ι ≅ F\", \"doc\": \"For any functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the composition of the functor from $ \\\\mathcal{C} $ to the essential image of $ F $ followed by the inclusion of the essential image into $ \\\\mathca\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.FullSubcategory\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.FullSubcategory\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → CategoryTheory.ObjectProperty C → Type u\", \"doc\": \"Given a category $\\\\mathcal{C}$ and a property $P$ on its objects, the full subcategory of $\\\\mathcal{C}$ consisting of all objects satisfying $P$ and all morphisms between them in $\\\\mathcal{C}$.\"}\n  {\"name\": \"CategoryTheory.Functor.Faithful.toEssImage\", \"module\": \"Mathlib.CategoryTheory.EssentialImage\", \"type\": \"(F : C ⥤ D) [Faithful F] : Faithful F.toEssImage\", \"doc\": \"If $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is a faithful functor, then the induced functor from $ \\\\mathcal{C} $ to the full subcategory of $ \\\\mathcal{D} $ consisting of objects isomorphic to $ F(X) $ for \"}\n  {\"name\": \"CategoryTheory.Functor.Full.toEssImage\", \"module\": \"Mathlib.CategoryTheory.EssentialImage\", \"type\": \"(F : C ⥤ D) [Full F] : Full F.toEssImage\", \"doc\": \"If $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is a full functor, then the induced functor from $ \\\\mathcal{C} $ to the full subcategory of $ \\\\mathcal{D} $ consisting of objects isomorphic to $ F(X) $ for some\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary full-subcategory and fully faithful instances concern Hom sets of ordinary categories. The asserted injection is on derived Hom sets in the Bergner localization, with an essential-image criterion; none of the hits states that result. Read the displayed hit types and SimplicialNerve.lean:14-34; the Bergner/DK grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fully faithful inclusion of infinity categories induces monomorphisms on equivalence classes of functors with prescribed essential image",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Ind.inclusion.fullyFaithful\", \"module\": \"Mathlib/CategoryTheory/Limits/Indization/Category\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → (CategoryTheory.Ind.inclusion C).FullyFaithful\", \"doc\": \"The canonical inclusion functor from the ind-category $\\\\mathrm{Ind}(\\\\mathcal{C})$ to the category of functors $\\\\mathcal{C}^\\\\mathrm{op} \\\\to \\\\mathrm{Type}\\\\, v$ is fully faithful, meaning that every natu\"}\n  {\"name\": \"CategoryTheory.fullyFaithfulInducedFunctor\", \"module\": \"Mathlib/CategoryTheory/InducedCategory\", \"type\": \"{C : Type u₁} →\\n  {D : Type u₂} →\\n    [inst : CategoryTheory.Category.{v, u₂} D] → (F : C → D) → (CategoryTheory.inducedFunctor F).FullyFaithful\", \"doc\": \"For any functor $ F : C \\to D $, the induced functor from the induced category (with objects from $ C $ and morphisms $ F(X) \\to F(Y) $ in $ D $) to $ D $ is fully faithful, meaning it is bijective on h\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.fullyFaithfulι\", \"module\": \"Mathlib/CategoryTheory/ObjectProperty/FullSubcategory\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → (P : CategoryTheory.ObjectProperty C) → P.ι.FullyFaithful\", \"doc\": \"The inclusion functor from the full subcategory (consisting of objects satisfying property $P$) to the original category $\\\\mathcal{C}$ is fully faithful. This means that for any two objects $X,Y$ in t\"}\n  {\"name\": \"CategoryTheory.MonoOver.fullyFaithfulForget\", \"module\": \"Mathlib/CategoryTheory/Subobject/MonoOver\", \"type\": \"{C : Type u₁} → [inst : CategoryTheory.Category.{v₁, u₁} C] → (X : C) → (CategoryTheory.MonoOver.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of monomorphisms into an object $X$ to the over category of $X$ is fully faithful. This means that for any two monomorphisms $f, g : t \\to X$, the morphisms betw\"}\n  {\"name\": \"SSet.modelCategoryQuillen.J_le_monomorphisms\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/CategoryWithFibrations\", \"type\": \"SSet.modelCategoryQuillen.J ≤ CategoryTheory.MorphismProperty.monomorphisms SSet\", \"doc\": \"In the category of simplicial sets, the morphism property generated by all horn inclusions (corresponding to the generating acyclic cofibrations in the Quillen model structure) is contained within the\"}\n  {\"name\": \"SimplexCategory.Truncated.inclusion.fullyFaithful\", \"module\": \"Mathlib/AlgebraicTopology/SimplexCategory/Defs\", \"type\": \"(n : ℕ) → (SimplexCategory.Truncated.inclusion n).op.FullyFaithful\", \"doc\": \"The opposite of the inclusion functor from the truncated simplex category $\\\\Delta_{\\\\leq n}$ to the simplex category $\\\\Delta$ is fully faithful, meaning it induces bijections on hom-sets between any pa\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.map_injective\", \"module\": \"Mathlib/CategoryTheory/Functor/FullyFaithful\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {F : CategoryTheory.Functor C D} (hF : F.FullyFaithful) {X Y : C} {f g : X ⟶ Y}, F.map f = F.map g → f = g\", \"doc\": \"For a fully faithful functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, if $ F(f) = F(g) $ for morphisms $ f, g : X \\\\to Y $ in $ \\\\mathcal{C} $, then $ f = g $. This establishes that the action of $ F $ on m\"}\n  {\"name\": \"CategoryTheory.Sieve.functorInclusion_is_mono\", \"module\": \"Mathlib/CategoryTheory/Sites/Sieves\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {X : C} {S : CategoryTheory.Sieve X},\\n  CategoryTheory.Mono S.functorInclusion\", \"doc\": \"For any sieve $ S $ on an object $ X $ in a category $ \\\\mathcal{C} $, the natural transformation from the sieve's associated functor $ S^\\\\dagger $ to the Yoneda embedding $ \\\\text{Hom}(-, X) $ is a mon\"}\n",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary full-subcategory and fully faithful instances concern Hom sets of ordinary categories. The asserted injection is on derived Hom sets in the Bergner localization, with an essential-image criterion; none of the hits states that result. Read the displayed hit types and SimplicialNerve.lean:14-34; the Bergner/DK grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homotopically fully faithful simplicial functor induces an injection on morphisms in the homotopy category, classified by essential image",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ComplexShape.Embedding.instFaithfulHomotopyCategoryExtendHomotopyFunctor\", \"module\": \"Mathlib/Algebra/Homology/Embedding/ExtendHomotopy\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} (e : c.Embedding c') [inst : e.IsRelIff]\\n  (C : Type u_3) [inst_1 : CategoryTheory.Category.{v_1, u_3} C] [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : CategoryTheory.Preadditive C], (e.extendHomotopyFunctor \", \"doc\": \"The functor from the homotopy category of chain complexes with shape $ c $ to those with shape $ c' $, constructed by extending complexes and chain maps via a complex shape embedding $ e $ (using zero\"}\n  {\"name\": \"SSet.hoFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"CategoryTheory.Functor SSet CategoryTheory.Cat\", \"doc\": \"The functor from the category of simplicial sets to the category of small categories, constructed as the composition of the 2-truncation functor and the homotopy category functor for 2-truncated simpl\"}\n  {\"name\": \"SSet.Truncated.mapHomotopyCategory\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"{V W : SSet.Truncated 2} → (V ⟶ W) → CategoryTheory.Functor V.HomotopyCategory W.HomotopyCategory\", \"doc\": \"Given a morphism $ f: V \\to W $ between 2-truncated simplicial sets, this is the induced functor from the homotopy category of $ V $ to the homotopy category of $ W $. It is constructed by lifting $ f \"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instFullHoCatToHoCat\", \"module\": \"Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  HomotopicalAlgebra.CofibrantObject.toHoCat.Full\", \"doc\": \"The canonical functor from the full subcategory of cofibrant objects in a model category $\\\\mathcal{C}$ to its homotopy category of cofibrant objects is full. This means that for any pair of cofibrant \"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory₂.mk.inj\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated\", \"type\": \"∀ {A : SSet.Truncated 2}\\n  {pt pt_1 : A.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.Truncated.Quasicategory₂._proof_1 })},\\n  { pt := pt } = { pt := pt_1 } → pt = pt_1\", \"doc\": \"For any 2-truncated simplicial set $ A $, if two 0-simplices $ pt $ and $ pt_1 $ map to the same object in the homotopy category of $ A $ via the canonical constructor, then $ pt = pt_1 $. In symbols:\"}\n  {\"name\": \"ComplexShape.Embedding.instFullHomotopyCategoryExtendHomotopyFunctor\", \"module\": \"Mathlib/Algebra/Homology/Embedding/ExtendHomotopy\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} (e : c.Embedding c') [inst : e.IsRelIff]\\n  (C : Type u_3) [inst_1 : CategoryTheory.Category.{v_1, u_3} C] [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : CategoryTheory.Preadditive C], (e.extendHomotopyFunctor \", \"doc\": \"Given a complex shape embedding $ e : c \\to c' $, the induced functor between homotopy categories of chain complexes (constructed by extending complexes via $ e $ and passing to homotopy classes) is fu\"}\n  {\"name\": \"CategoryTheory.nerveFunctor.faithful\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"CategoryTheory.nerveFunctor.Faithful\", \"doc\": \"The nerve functor from the category of small categories $\\\\mathsf{Cat}$ to the category of simplicial sets $\\\\mathsf{SSet}$ is faithful. This means that for any pair of small categories $\\\\mathcal{C}, \\\\m\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.functor_ext\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"∀ {V : SSet.Truncated 2} {D : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} D]\\n  {F G : CategoryTheory.Functor V.HomotopyCategory D}\\n  (h₁ :\\n    ∀ (x : V.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.OneTruncation₂._proof_1 })),\\n      F.obj (SSet.Truncated.HomotopyCategory.\", \"doc\": \"For a 2-truncated simplicial set $ V $ and any category $ \\\\mathcal{D} $, if two functors $ F, G : V.\\\\text{HomotopyCategory} \\\\to \\\\mathcal{D} $ satisfy (1) $ F(x) \\\\cong G(x) $ for all 0-simplices $ x \\\\i\"}\n",
+   "date": "2026-10-17",
+   "verdict": "no match: returned ordinary nerves, homotopy categories of simplicial sets and chain-complex embeddings, without the derived sCat essential-image theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Bergner|Dwyer.Kan|IChunk|chunk|projectiveModel|categoricalEquivalen|CategoricalEquivalen",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-17",
+   "verdict": "no match: no hits in AlgebraicTopology for the enriched model, Bergner, chunk, or Joyal categorical-equivalence vocabulary."
+  },
+  {
+   "tool": "grep",
+   "query": "Bergner|CatInfinity|QuasiCategory.*FullyFaithful|FullyFaithful.*QuasiCategory",
+   "results": "{\"t\": \"2026-10-16T18:53:06Z\", \"tool\": \"grep\", \"query\": \"Bergner|CatInfinity|QuasiCategory.*FullyFaithful|FullyFaithful.*QuasiCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "Second-reader search: no exact match. FullyFaithful.whiskeringRight in Mathlib/CategoryTheory/Whiskering.lean:116-125 was read; it assumes ordinary Category structures and hom-set full faithfulness. The nerve hits concern ordinary-category nerves. Neither states arbitrary simplicial-category derived Hom injectivity. The Bergner/CatInfinity/quasicategory grep returned zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FullyFaithful\", \"whiskeringRight\"",
+   "results": "{\"t\": \"2026-10-16T18:53:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"FullyFaithful\\\", \\\"whiskeringRight\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.FullyFaithful.whiskeringRight\", \"CategoryTheory.Functor.FullyFaithful.whiskeringRight_preimage_app\"], \"digest\": \"65a5011fb64b40d1\"}",
+   "date": "2026-10-17",
+   "verdict": "Second-reader search: no exact match. FullyFaithful.whiskeringRight in Mathlib/CategoryTheory/Whiskering.lean:116-125 was read; it assumes ordinary Category structures and hom-set full faithfulness. The nerve hits concern ordinary-category nerves. Neither states arbitrary simplicial-category derived Hom injectivity. The Bergner/CatInfinity/quasicategory grep returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Postcomposition with a fully faithful functor of quasicategories is fully faithful on functor categories and reflects natural equivalences",
+   "results": "{\"t\": \"2026-10-16T18:53:11Z\", \"tool\": \"leanfinder\", \"query\": \"Postcomposition with a fully faithful functor of quasicategories is fully faithful on functor categories and reflects natural equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.nerve.fullyFaithfulNerveFunctor₂\", \"CategoryTheory.StructuredArrow.isEquivalence_post\", \"CategoryTheory.CostructuredArrow.isEquivalence_post\", \"CategoryTheory.nerveFunctor.fullyfaithful\", \"CategoryTheory.Functor.FullyFaithful.whiskeringRight\", \"CategoryTheory.nerve.instFullCatTruncatedOfNatNatNerveFunctor₂\", \"CategoryTheory.StructuredArrow.instFullObjCompPostOfFaithful\", \"CategoryTheory.nerveFunctor.full\"], \"digest\": \"82e0e5cc0c5d8d47\"}",
+   "date": "2026-10-17",
+   "verdict": "Second-reader search: no exact match. FullyFaithful.whiskeringRight in Mathlib/CategoryTheory/Whiskering.lean:116-125 was read; it assumes ordinary Category structures and hom-set full faithfulness. The nerve hits concern ordinary-category nerves. Neither states arbitrary simplicial-category derived Hom injectivity. The Bergner/CatInfinity/quasicategory grep returned zero hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-enriched-diagram-rectification",
+  "date": "2026-10-16",
+  "group": "NA"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-simplicial-fully-faithful-homotopy-image",
+  "worker": "stage1",
+  "summary": "Five-step coherent-nerve proof of the simplicial specialization of HTT Corollary A.3.4.11. The existing full-essential-image lemma supplies the coherent inverse; full-subcategory simplices explicitly lift functors and equivalence witnesses. No new nodes. Maintainer reader (FIX): Step 5 converse written out by horn filling (Scholze Lecture II basic facts (2)-(3)); proof_origin set to agent since HTT is not in literature/ and the proof is not HTT's.",
+  "blueprint": "Paragraph 2 of main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, the derived coefficient adjunction and displayed R Hom / R inverse-limit calculation. Steps 1-5 prove the essential-image test used by lem-coef-enriched-diagram-rectification in that adjunction's foundation. The blueprint does not itself contain a sentence on rigidification.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-0e4b3ca6b",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-0e4b3ca6b (reviewer sub-agent of L); spot-checked: I read all five steps and the three cited statements in full: lem-coef-coherent-nerve-comparison, lem-coef-infinity-full-essential-image and def-cbc-enhanced-diagrams-cones. I also read the parent's Step 3 use of the item, the unit sk-prop-sf-biduality-general and paragraph 2 of the ancestor proof prop-coef-integral-exceptional-adjoint (main-20261015). The statement is unchanged and true. I checked it independently: a fully faithful J makes Fun(A,X)->Fun(A,Y) fully faithful, with replete essential image. Small cases checked: j=id, I empty, T empty with I nonempty, I=Delta^0, and j not injective on objects. HTT A.3.4.11 could not be opened: it is not in literature/ and network access is blocked. The proof does not depend on HTT, because it runs entirely through DAG nodes. Steps 1-4 are correct. Step 1 uses the functorial replacement, two-out-of-three and the natural mapping-space comparison. Step 2 meets the hypotheses of the full-essential-image node exactly. Step 3 rests on the coherent-nerve node's identification of h sCat with h Cat_inf, so morphisms are functors modulo natural equivalence. Step 4: I checked the vertices of the transformation, its inverse and both triangle witnesses on A x Delta^n, so the equivalence factors through Fun(A,Y0); whiskering and the image directions are also correct. Faults repaired: (1) E5/C1: the converse in Step 5 (an isomorphism in hY gives an equivalence with its inverse-triangle witnesses) was only asserted. I wrote it out by inner-horn filling (Lambda^2_1, then Lambda^3_2 with d3=sigma, d1=tau, d0=s1 g) and cited Scholze, Lecture II, basic facts (2)-(3), p.14, which I read; uses are unchanged. (2) proof_origin.by changed from document to agent: HTT is not in literature/ and the proof is not HTT's chunk proof. Other checks: no cycle; the route stays inside the unit, with only a definition node from outside; tool_uses is empty; there are no new nodes; and no duplicate was found among the Bergner and essential-image nodes. The corrected file is fixes/dag/nodes/sec-six-functors/lem-coef-simplicial-fully-faithful-homotopy-image.json, and review.md was written.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialFullyFaithfulHomotopyImage",
+  "declaration": "CategoryTheory.simplicial_fully_faithful_homotopy_image",
+  "declarations": [
+   "CategoryTheory.bergnerWeakEquivalences",
+   "CategoryTheory.BergnerHomotopyCategory",
+   "CategoryTheory.bergnerHomotopyFunctor",
+   "CategoryTheory.InEssentialImage",
+   "CategoryTheory.IsInBergnerEssentialImage",
+   "CategoryTheory.simplicial_fully_faithful_homotopy_image"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SimplicialFullyFaithfulHomotopyImage.lean",
+  "statement": "theorem simplicial_fully_faithful_homotopy_image (I T T' : CoherentNerve.SCat.{u}) (j : T ⟶ T') (hlocal : ∀ x y : T, SSet.Enhanced.IsWeakHomotopyEquivalence (j.map x y)) : Function.Injective (fun a : (bergnerHomotopyFunctor.obj I ⟶ bergnerHomotopyFunctor.obj T) => a ≫ bergnerHomotopyFunctor.map j) ∧ ∀ a : (bergnerHomotopyFunctor.obj I ⟶ bergnerHomotopyFunctor.obj T'), (IsInBergnerEssentialImage I T T' j a ↔ ∃ c : (bergnerHomotopyFunctor.obj I ⟶ bergnerHomotopyFunctor.obj T), a = c ≫ bergnerHomotopyFunctor.map j)",
+  "branch": "newtargets-dag",
+  "by": "Q33",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f8ba6fbc",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Commit 8f8ba6fb adds only the module, the node lean record (statement/deps/proof unchanged) and the report with Worker report + Second reading by Q33. Checked against node and HTT A.3.4.11 as recorded: SCat.{u} objects exact; hsCat = Mathlib MorphismProperty.Localization at the dependency's DwyerKanEquivalence (real data, no duplicate found in side/newtargets/Mathlib); pi0 isomorphism via the existing IsPiZeroIso; hlocal exact with no extra assumptions; injectivity on all localized Homs; image iff over arbitrary localized c. The IsInBergnerEssentialImage presentation (DK w, v, strict b) always exists by cofibrant/fibrant replacement and is presentation-independent because pi0 sends DK equivalences to equivalences, so it is exact. Edge cases (empty I/T, j=id, non-injective j, empty mapping sets, single universe u) OK. Gates: sorry only, source/blueprint docstrings, 5-step proof docstring, lean.statement verbatim, no pro-etale. nt_compile --json against the side overlay: clean, 1.2 s, no warnings."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}
