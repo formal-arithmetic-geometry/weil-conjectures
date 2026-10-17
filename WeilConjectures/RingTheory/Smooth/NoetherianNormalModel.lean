@@ -47,7 +47,6 @@ theorem exists_subring_smooth_model {A : Type u} [CommRing A] [IsDomain A] [IsLo
   refine ⟨P, P ⊗[A₀] B₀, inferInstance, inferInstance, fun x hx ↦ hEP (Or.inl hx), hnoeth, hloc,
     hint, hdom, inferInstance, ⟨e.trans (Algebra.TensorProduct.cancelBaseChange A₀ P A A B₀).symm⟩⟩
 
-
 /-- A smooth algebra `B` with a section `s : B → A` over an integrally closed local domain `A`
 descends, together with the section, to a smooth algebra `B₀` with a section `s₀` over a
 Noetherian integrally closed local subring `P ⊆ A` containing a given finite set `E` and
