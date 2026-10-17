@@ -218,5 +218,30 @@
   "group": "Q34",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-d9e3f576d (reviewer sub-agent of L); spot-checked: I read the item, both cited statements (def-cbc-enhanced-diagrams-cones and lem-coef-infinity-pinch-comparison, split and reviewed), the right-fibration-fibers definition of homotopy equivalence, both citers and the blueprint ancestor paragraph. The statement fits Kerodon Hom^L = C_{X/} x_C {Y}; the source is not archived, so WANTED is filed and proof_origin is agent. The left-pinch map λ(i,0)=0, λ(i,1)=i+1 is monotone and lands in U. I recomputed every step. Step 1: (αβ)^∨=α^∨β^∨, and reversal sends horn i to horn n-i, so D^op is a quasicategory and opposites of Kan complexes are Kan. Step 2: (α^L)^∨=(α^∨)^+, checked at j=k+1 and at j≤k, and the endpoints swap correctly. Step 3: h'(i,t)=h(m-i,1-t), compatible with α^∨×id. Step 4: r_{m+1}ρ_m(m-i,1-t)=λ_m(i,t) gives 0 and i+1, and maps of poset nerves agree once they agree on vertices. Step 5: the right-pinch theorem applied to D^op,b,a, with cylinder homotopies reversed through degreewise products and Δ^1≅(Δ^1)^op; this matches the cylinder notion of homotopy equivalence and allows empty spaces. Step 6: strict naturality by associativity. Edge cases m=0, m=1, a=b, empty spaces and the terminal quasicategory all pass. Same-unit route, no tool_uses. My own closure computation confirms the claimed cycle through lem-coef-simplicial-opposite-homotopy-calculus, and the right-pinch closure (95 nodes) does not contain the item, so the graph stays acyclic. No duplicate found by rg for left-pinch/01L5/Hom^L. Not a restated clause. Three kinds of Mathlib search are logged. No SGA. This is not a target node, so no base-change or coefficient-category issue arises. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LeftPinchComparison",
+  "declaration": "SSet.Enhanced.left_pinch_comparison",
+  "declarations": [
+   "SSet.Enhanced.leftMappingSpace",
+   "SSet.Enhanced.leftMappingSpaceMap",
+   "SSet.Enhanced.leftPinchPrism",
+   "SSet.Enhanced.left_pinch_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LeftPinchComparison.lean",
+  "statement": "theorem left_pinch_comparison : ∃ j : ∀ (D : SSet.{u}) [Quasicategory D] (a b : D _⦋0⦌), leftMappingSpace D a b ⟶ arrowMappingSpace D a b, ∀ (D : SSet.{u}) [Quasicategory D] (a b : D _⦋0⦌), (∀ (n : SimplexCategoryᵒᵖ) (s : (leftMappingSpace D a b).obj n), MonoidalClosed.uncurry (SSet.yonedaEquiv.symm ((j D a b ≫ arrowMappingSpaceInclusion D a b).app n s)) = leftPinchPrism n.unop.len ≫ SSet.yonedaEquiv.symm s.1) ∧ KanComplex (leftMappingSpace D a b) ∧ KanComplex (arrowMappingSpace D a b) ∧ (∃ r : arrowMappingSpace D a b ⟶ leftMappingSpace D a b, Nonempty (SSet.Homotopy (j D a b ≫ r) (𝟙 _)) ∧ Nonempty (SSet.Homotopy (r ≫ j D a b) (𝟙 _))) ∧ (∀ (E : SSet.{u}) [Quasicategory E] (f : D ⟶ E), j D a b ≫ arrowMappingSpaceInclusion D a b ≫ (ihom Δ[1]).map f = leftMappingSpaceMap f a b ≫ j E (f.app _ a) (f.app _ b) ≫ arrowMappingSpaceInclusion E (f.app _ a) (f.app _ b))",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The existential family is characterized degreewise by the explicit left prism. The conclusion states the two Kan conditions, an actual two-sided homotopy inverse, and strict naturality. Opposite reversal is the equivalent description explained in the six-step proof docstring, not an additional existential conclusion. Repair H3 of returned head 52787a4be96f removes the extra jR/Phi/Psi package. The existing prependFirst from InfinityCocartesianCompositionInitiality is reused."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-680d333a0",
+  "group": "NG",
+  "result": "fix",
+  "note": "Lean and mathematics pass; immutable module compiled cleanly in sandbox and library modes. Wrote review.md and fixes/lem-coef-infinity-left-pinch-comparison.report.md, replacing the author self-check with a genuine independent reading. No repository or branch changes."
  }
 }

@@ -187,5 +187,27 @@
   "group": "Q106",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q106-34c6e80ca (reviewer sub-agent of L); spot-checked: Reviewed the item, all cited node statements and sources, unit/chapter route, edge cases, DAG duplication/cycles, and archived target coefficient/base-change statements. No faults or repairs required."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartesianMarkedLiftGeneration",
+  "declaration": "SSet.Enhanced.cartesian_marked_lift_generation",
+  "declarations": [
+   "SSet.Enhanced.simplexLiftFiberInclusion",
+   "SSet.Enhanced.cartesian_marked_lift_generation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CartesianMarkedLiftGeneration.lean",
+  "statement": "theorem cartesian_marked_lift_generation (n : ℕ) (Y : SSet.{u}) (p : Y ⟶ Δ[n]) (hp : Marked.Over.relativeFibration false p) (B : ∀ j : Fin (n + 1), Set ((fiber p (stdSimplex.obj₀Equiv.symm j)) _⦋0⦌)) (hB : ∀ (j : Fin (n + 1)) (y : (fiber p (stdSimplex.obj₀Equiv.symm j)) _⦋0⦌), ∃ (b : B j) (v : Edge b.val y), IsEquivalenceEdge (fiber p (stdSimplex.obj₀Equiv.symm j)) v.edge) (c : ∀ (i j : Fin (n + 1)), i ≤ j → B j → (fiber p (stdSimplex.obj₀Equiv.symm i)) _⦋0⦌) (e : ∀ (i j : Fin (n + 1)) (hij : i ≤ j) (b : B j), Edge ((simplexLiftFiberInclusion p i).app _ (c i j hij b)) ((simplexLiftFiberInclusion p j).app _ b.val)) (he : ∀ (i j : Fin (n + 1)) (hij : i ≤ j) (b : B j), IsCartesianEdge p (SSet.yonedaEquiv.symm (e i j hij b).edge)) : (∀ (i j : Fin (n + 1)) (hij : i ≤ j) (x : (fiber p (stdSimplex.obj₀Equiv.symm i)) _⦋0⦌) (y : (fiber p (stdSimplex.obj₀Equiv.symm j)) _⦋0⦌) (d : Edge ((simplexLiftFiberInclusion p i).app _ x) ((simplexLiftFiberInclusion p j).app _ y)), IsCartesianEdge p (SSet.yonedaEquiv.symm d.edge) → ∃ (b : B j) (u : Edge (c i j hij b) x) (v : Edge b.val y), IsEquivalenceEdge (fiber p (stdSimplex.obj₀Equiv.symm i)) u.edge ∧ IsEquivalenceEdge (fiber p (stdSimplex.obj₀Equiv.symm j)) v.edge ∧ Truncated.HomotopyCategory.homMk (u.map (simplexLiftFiberInclusion p i)).toTruncated ≫ Truncated.HomotopyCategory.homMk d.toTruncated = Truncated.HomotopyCategory.homMk (e i j hij b).toTruncated ≫ Truncated.HomotopyCategory.homMk (v.map (simplexLiftFiberInclusion p j)).toTruncated) ∧ (∀ (i : Fin (n + 1)) (r' r : (fiber p (stdSimplex.obj₀Equiv.symm i)) _⦋0⦌) (s : Y _⦋0⦌) (u : Edge r' r) (a : Edge ((simplexLiftFiberInclusion p i).app _ r) s) (k : Edge ((simplexLiftFiberInclusion p i).app _ r') s), IsEquivalenceEdge (fiber p (stdSimplex.obj₀Equiv.symm i)) u.edge → Nonempty (Edge.CompStruct (u.map (simplexLiftFiberInclusion p i)) a k) → (IsCartesianEdge p (SSet.yonedaEquiv.symm k.edge) ↔ IsCartesianEdge p (SSet.yonedaEquiv.symm a.edge))) ∧ (∀ (j : Fin (n + 1)) (r : Y _⦋0⦌) (s s' : (fiber p (stdSimplex.obj₀Equiv.symm j)) _⦋0⦌) (a : Edge r ((simplexLiftFiberInclusion p j).app _ s)) (v : Edge s s') (k : Edge r ((simplexLiftFiberInclusion p j).app _ s')), IsEquivalenceEdge (fiber p (stdSimplex.obj₀Equiv.symm j)) v.edge → Nonempty (Edge.CompStruct a (v.map (simplexLiftFiberInclusion p j)) k) → (IsCartesianEdge p (SSet.yonedaEquiv.symm k.edge) ↔ IsCartesianEdge p (SSet.yonedaEquiv.symm a.edge))) ∧ (∀ (Z : SSet.{u}) (q : Z ⟶ Δ[n]), Marked.Over.relativeFibration false q → ∀ (f : Y ⟶ Z) (hf : f ≫ q = p), preservesCartesianEdges p q f hf ↔ ∀ (i j : Fin (n + 1)) (hij : i ≤ j) (b : B j), IsCartesianEdge q (SSet.yonedaEquiv.symm (e i j hij b).edge ≫ f)) ∧ (∀ (Z : SSet.{u}) (q : Z ⟶ Δ[n]), Marked.Over.relativeFibration false q → ∀ (f g : Y ⟶ Z) (hf : f ≫ q = p) (hg : g ≫ q = p) (a b : (fiber ((ihom Y).map q) (diagramVertex p)) _⦋0⦌) (τ : Edge a b), (pullback.snd (SSet.const (X := Δ[0]) (diagramVertex p)) ((ihom Y).map q)).app _ a = diagramVertex f → (pullback.snd (SSet.const (X := Δ[0]) (diagramVertex p)) ((ihom Y).map q)).app _ b = diagramVertex g → IsEquivalenceEdge (fiber ((ihom Y).map q) (diagramVertex p)) τ.edge → (preservesCartesianEdges p q f hf ↔ preservesCartesianEdges p q g hg))",
+  "branch": "newtargets-dag",
+  "by": "Q57",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3a9cf50a3",
+  "group": "Q57",
+  "result": "pass",
+  "note": "Statement, dependencies, source, edge cases, docstrings, sorry-only theorem proof, and exact declarations checked; sandbox and library per-file compilation both passed."
  }
 }

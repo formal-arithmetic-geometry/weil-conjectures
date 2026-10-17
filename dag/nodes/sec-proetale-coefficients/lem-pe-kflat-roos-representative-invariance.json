@@ -204,5 +204,50 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-1a68e04b8 (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, unit/chapter route, and cited local Stacks sources. All four steps establish the strict Roos quasi-isomorphism and augmentation-compatible comparison for arbitrary derived isomorphisms. Edge cases and dependency closure check out; no new nodes, cycles, or duplicate statements found. Accepted six declared generic tool uses. Detailed checks are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.KFlatRoosRepresentativeInvariance",
+  "declaration": "SheafOfModules.KFlatRoos.representativeInvariance",
+  "declarations": [
+   "SheafOfModules.KFlatRoos.Modules",
+   "SheafOfModules.KFlatRoos.algebraModule",
+   "SheafOfModules.KFlatRoos.algebraModuleMap_existsUnique",
+   "SheafOfModules.KFlatRoos.algebraModuleMap",
+   "SheafOfModules.KFlatRoos.tensorUnit_existsUnique",
+   "SheafOfModules.KFlatRoos.tensorUnit",
+   "SheafOfModules.KFlatRoos.levelModule",
+   "SheafOfModules.KFlatRoos.structure_compatible",
+   "SheafOfModules.KFlatRoos.levelMap",
+   "SheafOfModules.KFlatRoos.level",
+   "SheafOfModules.KFlatRoos.transition",
+   "SheafOfModules.KFlatRoos.product",
+   "SheafOfModules.KFlatRoos.oneSubShift",
+   "SheafOfModules.KFlatRoos.roosX",
+   "SheafOfModules.KFlatRoos.roosD",
+   "SheafOfModules.KFlatRoos.roosD_sq",
+   "SheafOfModules.KFlatRoos.roos",
+   "SheafOfModules.KFlatRoos.unitProduct",
+   "SheafOfModules.KFlatRoos.augmentation_comm",
+   "SheafOfModules.KFlatRoos.augmentation",
+   "SheafOfModules.KFlatRoos.productMap",
+   "SheafOfModules.KFlatRoos.roosMap_comm",
+   "SheafOfModules.KFlatRoos.roosMap",
+   "SheafOfModules.KFlatRoos.representativeInvariance"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/KFlatRoosRepresentativeInvariance.lean",
+  "statement": "theorem representativeInvariance [HasExactLimitsOfShape (Discrete ℕ) (Modules R)] [HasDerivedCategory.{w} (Modules R)] (P P' : CochainComplex (Modules R) ℤ) (hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P) (hP' : CochainComplex.IsKFlatIndependentCoefficients (R := R) P') (hflat : ∀ i : ℤ, SheafOfModules.IsFlatOnSite (R := R) (P.X i)) (hflat' : ∀ i : ℤ, SheafOfModules.IsFlatOnSite (R := R) (P'.X i)) : (∀ (a : P ⟶ P'), QuasiIso a → QuasiIso (roosMap B ι a) ∧ augmentation B ι P ≫ roosMap B ι a = a ≫ augmentation B ι P') ∧ (∀ (e : DerivedCategory.Q.{w}.obj P ≅ DerivedCategory.Q.obj P'), ∃ v : DerivedCategory.Q.{w}.obj (roos B ι P) ≅ DerivedCategory.Q.obj (roos B ι P'), DerivedCategory.Q.map (augmentation B ι P) ≫ v.hom = e.hom ≫ DerivedCategory.Q.map (augmentation B ι P')) ∧ (Nonempty (DerivedCategory.Q.{w}.obj P ≅ DerivedCategory.Q.obj P') → (QuasiIso (augmentation B ι P) ↔ QuasiIso (augmentation B ι P')))",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical scalar-extension tower and the exact stated Roos coordinates, differential, diagonal maps and tensor-unit augmentation are constructed in this module. The two choices are from uniqueness theorems prescribing every local section value. All three invariance clauses retain arbitrary derived isomorphisms and independent site/coefficient universes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-aaea74d30",
+  "group": "Q69",
+  "result": "fix",
+  "note": "Mathematics and declarations match the node; per-file compilation passed cleanly. Fixed H11 with a complete replacement report containing the independent second reading. Details in review.md; replacement report under fixes/."
  }
 }
