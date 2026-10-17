@@ -10,41 +10,137 @@
  "stmt_deps": [
   "lem-coef-adjunction-squiggle-normal-form"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
+ "proof": [
   {
-   "tool": "leanfinder",
-   "query": "Nondegenerate atomic arrows of the walking adjunction pair uniquely with fillable parents by removing a distinguished face",
-   "results": "{\"t\": \"2026-10-17T15:01:09Z\", \"tool\": \"leanfinder\", \"query\": \"Nondegenerate atomic arrows of the walking adjunction pair uniquely with fillable parents by removing a distinguished face\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling'\", \"SimplexCategoryGenRel.P_δ\", \"SSet.Quasicategory.hornFilling\", \"SSet.horn₃₂.exists_desc\", \"SimplexCategoryGenRel.P_σ\", \"SSet.horn₃₁.exists_desc\", \"SSet.S.IsUniquelyCodimOneFace.iff\", \"SimplexCategoryGenRel.faces\"], \"digest\": \"6ec4c85df3a1fc4f\"}",
-   "date": "2026-10-17",
-   "verdict": "no match: standard-simplex nonDegenerateEquiv and horn-colimit declarations concern arbitrary simplices, not the fillable-parent matching in the walking adjunction. The other hits are skeleton, realization and nerve adjunctions. Both semantic phrasings read."
+   "text": "Use the string model of [lem-coef-adjunction-squiggle-normal-form]. In degree $n$ encode $-$ by $0$ and $+$ by $n+1$. An atomic string has no endpoint in its interior. In degree zero it therefore has width one, so the only atomic strings are $(-,+)$ and $(+,-)$; just the former is fillable. If $n>0$, nondegeneracy requires an internal numerical letter, so $w\\geq2$ and the first internal letter $k=a_1$ satisfies $1\\leq k\\leq n$. For a fillable string it is the only occurrence of $k$.",
+   "uses": [
+    "lem-coef-adjunction-squiggle-normal-form"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Definition 4.1.1 and Observation 4.1.2 (pp. 832--834); own letterwise verification from the cited normal-form statement"
+   }
   },
   {
-   "tool": "loogle",
-   "query": "SSet, CategoryTheory.Adjunction",
-   "results": "{\"t\": \"2026-10-17T15:01:06Z\", \"tool\": \"loogle\", \"query\": \"SSet, CategoryTheory.Adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"SSet.coskAdj\", \"SSet.skAdj\", \"SSet.chainComplexFunctorAdjunction\", \"CategoryTheory.nerveAdjunction\", \"SSet.sdExAdjunction\", \"sSetTopAdj\"], \"digest\": \"7c4d6d1762cc088b\"}",
+   "text": "For a fillable $n$-arrow and $k<n$, the face formula of [lem-coef-adjunction-squiggle-normal-form] sends a letter $t$ to $q_k(t)=t$ for $t\\leq k$, and to $t-1$ for $t>k$. Only an adjacent pair $k,k+1$ could become equal. The sole $k$ is $a_1$, whose neighbours are $0$ and $a_2<k$; hence no such pair occurs and no reduction is required. The resulting string is atomic with the same width. Each level $1,\\ldots,n-1$ occurs: levels below $k$ come from themselves, level $k$ comes from $k$ and $k+1$, and levels above $k$ come from their successors. Nondegeneracy of $a$ supplies an occurrence of $k+1$ after the first internal position, so the resulting first letter $k$ repeats. Thus $d_k a$ is nondegenerate atomic and nonfillable.",
+   "uses": [
+    "lem-coef-adjunction-squiggle-normal-form"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Observation 4.1.2, first case (pp. 832--834); own letterwise verification from the cited normal-form statement"
+   }
+  },
+  {
+   "text": "If $k=n$, the same face formula changes the unique internal $n=a_1$ into the new endpoint $+$ and sends the old terminal $+$ to the new terminal $+$. Again no equal adjacent pair occurs, since $a_2<n$ and no other internal $n$ exists. The image is $(-,+,q_n(a_2),\\ldots,q_n(a_w))$. Concatenation in [lem-coef-adjunction-squiggle-normal-form] identifies this with $\\ell b$, where $b=(+,q_n(a_2),\\ldots,q_n(a_w))$. Its interior has no endpoint, its inequalities alternate, and it contains every level $1,\\ldots,n-1$; it is therefore nondegenerate atomic and is nonfillable because $b_0=+$. Its width is $w(a)-1$. This also covers $n=1$, when $a=(-,1,-)$ and $b=u$. Uniqueness of $b$ follows by deleting the fixed prefix $(-,+)$ of the concatenation, retaining its final $+$ as the first letter of $b$.",
+   "uses": [
+    "lem-coef-adjunction-squiggle-normal-form"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Observation 4.1.2, second case (pp. 832--834); own letterwise verification from the cited normal-form statement"
+   }
+  },
+  {
+   "text": "Let $b$ be nondegenerate atomic and nonfillable of degree $r$, with $b_0=-$. Necessarily $r>0$ and $j=b_1$ occurs at some later position. Retain $b_1=j$ and apply $t\\mapsto t$ for $t<j$, $t\\mapsto t+1$ for $t\\geq j$ to all subsequent letters, including the terminal endpoint when it is $+$. The latter moves from the code $r+1$ to $r+2$, as required in degree $r+1$. The new string $p$ still alternates: away from its first internal position the relabeling is strictly increasing, and its next letter remains below $j$. It is atomic of the same width. Every new level occurs: $j$ at the first internal position, $j+1$ at a later old occurrence of $j$, and all other levels from the old nondegeneracy. Only the first internal position contains $j$, so $p$ is fillable of depth $j<r+1$. The face formula in [lem-coef-adjunction-squiggle-normal-form] gives $d_jp=b$ letter by letter, without reduction; hence $p^-=b$.",
+   "uses": [
+    "lem-coef-adjunction-squiggle-normal-form"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Lemma 4.1.3, explicit coordinate verification (pp. 832--834); own letterwise verification from the cited normal-form statement"
+   }
+  },
+  {
+   "text": "Let instead $b_0=+$ and write its degree-$r$ string as $(+,b_1,\\ldots,b_w)$. In degree $r+1$ interpret any terminal $+$ as $r+2$, keep the internal numerical letters and terminal $-$ unchanged, and put $p=(-,r+1,b_1,\\ldots,b_w)$. The first two comparisons are $0<r+1>b_1$: if $w>1$ then $b_1\\leq r$, and if $w=1$ strict alternation forces $b=(+,-)$ and nondegeneracy forces $r=0$, so $b=u$, so $b_1=0$. The remaining inequalities alternate as before. There are no interior endpoints, every level $1,\\ldots,r$ occurs in the old interior, and the new level $r+1$ occurs only once. Thus $p$ is nondegenerate atomic fillable, of depth $r+1$ and width $w(b)+1$. By the face and concatenation formulas of [lem-coef-adjunction-squiggle-normal-form], $d_{r+1}p=\\ell b$, so $p^-=b$.",
+   "uses": [
+    "lem-coef-adjunction-squiggle-normal-form"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Lemma 4.1.4, explicit coordinate verification (pp. 832--834); own letterwise verification from the cited normal-form statement"
+   }
+  },
+  {
+   "text": "For uniqueness, let a fillable degree-$(r+1)$ string $c$ have child $b$. Steps 2 and 3 separate the cases: a child with target $-$ forces $k(c)<r+1$, and a child with target $+$ forces $k(c)=r+1$. In the first case $b_1=k(c)=j$. The only letter with two preimages under $q_j$ is $j$, whose preimages are $j,j+1$. Fillability forces the first internal preimage to be $j$ and every later preimage of $j$ to be $j+1$; every other preimage is forced. In the second case $q_{r+1}(c) = \\ell b$. Strip its initial $-$; all numerical entries of the remaining string have a unique preimage. The initial $+$ must lift to $r+1$ and the terminal $+$, if present, must lift to the terminal endpoint $r+2$, since atomicity excludes internal endpoints. These are precisely the strings constructed in steps 4 and 5. These letterwise arguments use the face model of [lem-coef-adjunction-squiggle-normal-form].",
+   "uses": [
+    "lem-coef-adjunction-squiggle-normal-form"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Lemmas 4.1.3--4.1.4, uniqueness; Definition 4.2.1 (pp. 832--834); own letterwise verification from the cited normal-form statement"
+   }
+  },
+  {
+   "text": "Steps 2 and 3 define the child of every positive-dimensional fillable arrow, with the stated target and width properties. Steps 4 and 5 construct a parent of every nonfillable nondegenerate atomic arrow, and step 6 proves its uniqueness. Thus taking child after parent is the identity, and taking parent after child is the identity by uniqueness applied to the original fillable arrow. This proves the asserted bijection in each degree $r\\geq0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://emilyriehl.github.io/files/adjunctions.pdf",
+    "place": "Definition 4.2.1, inverse equations (pp. 832--834); own letterwise verification from the cited normal-form statement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-adjunction-squiggle-normal-form"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-exceptional-adjoint.md",
+  "place": "Own coordinate proof for the finite enriched mapping-complex adjunction supporting construction; Riehl--Verity, Section 4.1 and Definition 4.2.1 read online, local archival copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fillable|squiggle|parental|atomic.*arrow",
+   "results": "{\"t\": \"2026-10-17T16:01:36Z\", \"tool\": \"grep\", \"query\": \"fillable|squiggle|parental|atomic.*arrow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
-   "verdict": "no match: standard-simplex nonDegenerateEquiv and horn-colimit declarations concern arbitrary simplices, not the fillable-parent matching in the walking adjunction. The other hits are skeleton, realization and nerve adjunctions. Both semantic phrasings read."
+   "verdict": "no match: hits concern general horns and simplices, free groups, or ordinary free/forgetful adjunctions, not the atomic string matching of the free strict adjunction."
   },
   {
    "tool": "leansearch",
    "query": "The nonfillable atomic simplices in the free adjunction biject with fillable simplices of one higher dimension",
-   "results": "{\"t\": \"2026-10-17T15:01:05Z\", \"tool\": \"leansearch\", \"query\": \"The nonfillable atomic simplices in the free adjunction biject with fillable simplices of one higher dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.coskAdj\", \"sSetTopAdj\", \"SSet.PtSimplex.MulStruct.δ_succ_castSucc_map_assoc\", \"SSet.stdSimplex.nonDegenerateEquiv\", \"SSet.skAdj\", \"CategoryTheory.SimplicialObject.skAdj\", \"SSet.stdSimplex.nonDegenerateEquiv_apply_apply\", \"FreeSimplexQuiver.Hom.casesOn\"], \"digest\": \"57700d7b055e4670\"}",
+   "results": "{\"t\": \"2026-10-17T16:01:37Z\", \"tool\": \"leansearch\", \"query\": \"The nonfillable atomic simplices in the free adjunction biject with fillable simplices of one higher dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.coskAdj\", \"sSetTopAdj\", \"SSet.PtSimplex.MulStruct.δ_succ_castSucc_map_assoc\", \"SSet.stdSimplex.nonDegenerateEquiv\", \"SSet.skAdj\", \"CategoryTheory.SimplicialObject.skAdj\", \"SSet.stdSimplex.nonDegenerateEquiv_apply_apply\", \"FreeSimplexQuiver.Hom.casesOn\"], \"digest\": \"57700d7b055e4670\"}",
    "date": "2026-10-17",
-   "verdict": "no match: standard-simplex nonDegenerateEquiv and horn-colimit declarations concern arbitrary simplices, not the fillable-parent matching in the walking adjunction. The other hits are skeleton, realization and nerve adjunctions. Both semantic phrasings read."
+   "verdict": "no match: hits concern general horns and simplices, free groups, or ordinary free/forgetful adjunctions, not the atomic string matching of the free strict adjunction."
   },
   {
-   "tool": "grep",
-   "query": "fillable|squiggle|parental|atomic.*arrow",
-   "results": "{\"t\": \"2026-10-17T15:01:05Z\", \"tool\": \"grep\", \"query\": \"fillable|squiggle|parental|atomic.*arrow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "tool": "loogle",
+   "query": "SSet, CategoryTheory.Adjunction",
+   "results": "{\"t\": \"2026-10-17T16:01:37Z\", \"tool\": \"loogle\", \"query\": \"SSet, CategoryTheory.Adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"SSet.coskAdj\", \"SSet.skAdj\", \"SSet.chainComplexFunctorAdjunction\", \"CategoryTheory.nerveAdjunction\", \"SSet.sdExAdjunction\", \"sSetTopAdj\"], \"digest\": \"7c4d6d1762cc088b\"}",
    "date": "2026-10-17",
-   "verdict": "no match: standard-simplex nonDegenerateEquiv and horn-colimit declarations concern arbitrary simplices, not the fillable-parent matching in the walking adjunction. The other hits are skeleton, realization and nerve adjunctions. Both semantic phrasings read."
+   "verdict": "no match: hits concern general horns and simplices, free groups, or ordinary free/forgetful adjunctions, not the atomic string matching of the free strict adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nondegenerate atomic arrows of the walking adjunction pair uniquely with fillable parents by removing a distinguished face",
+   "results": "{\"t\": \"2026-10-17T16:01:38Z\", \"tool\": \"leanfinder\", \"query\": \"Nondegenerate atomic arrows of the walking adjunction pair uniquely with fillable parents by removing a distinguished face\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.Quasicategory.hornFilling'\", \"SimplexCategoryGenRel.P_δ\", \"SSet.Quasicategory.hornFilling\", \"SSet.horn₃₂.exists_desc\", \"SimplexCategoryGenRel.P_σ\", \"SSet.horn₃₁.exists_desc\", \"SSet.S.IsUniquelyCodimOneFace.iff\", \"SimplexCategoryGenRel.faces\"], \"digest\": \"6ec4c85df3a1fc4f\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern general horns and simplices, free groups, or ordinary free/forgetful adjunctions, not the atomic string matching of the free strict adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"Free\"",
+   "results": "{\"t\": \"2026-10-17T16:01:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"Adjunction\\\", \\\"Free\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.freeAdjunctionUnit\", \"PresheafOfModules.freeAdjunction\", \"PresheafOfModules.freeAdjunctionUnit_app\", \"PresheafOfModules.freeAdjunction_homEquiv\", \"PresheafOfModules.freeAdjunction_unit_app\", \"CategoryTheory.Grpd.freeForgetAdjunction\", \"CategoryTheory.Grpd.freeForgetAdjunction_counit_app\", \"CategoryTheory.Grpd.freeForgetAdjunction_unit_app\"], \"digest\": \"530a665307f631a7\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern general horns and simplices, free groups, or ordinary free/forgetful adjunctions, not the atomic string matching of the free strict adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduced alternating strings for the free two category generated by an adjunction admit an inverse matching by splitting the first repeated turning level",
+   "results": "{\"t\": \"2026-10-17T16:01:53Z\", \"tool\": \"leanfinder\", \"query\": \"Reduced alternating strings for the free two category generated by an adjunction admit an inverse matching by splitting the first repeated turning level\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FreeGroup.Red.inv_of_red_of_ne\", \"FreeGroup.Red.Step.not_rev\", \"FreeGroup.Red.Step.not\", \"FreeGroup.invRev\", \"FreeGroup.reduce.not\", \"FreeGroup.Red.Step.cons_not_rev\", \"FreeGroup.reduce_invRev_left_cancel\", \"CategoryTheory.FreeMonoidalCategory.inverseAux\"], \"digest\": \"6358d4f0c8beb4f9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern general horns and simplices, free groups, or ordinary free/forgetful adjunctions, not the atomic string matching of the free strict adjunction."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-walking-adjunction-cell-filtration",
@@ -68,5 +164,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-coef-adjunction-fillable-parent-bijection",
+  "worker": "stage1",
+  "summary": "Complete letterwise proof from the existing squiggle normal-form statement; no new nodes. Checked distinguished faces without reduction, both target cases, parent nondegeneracy including the repeated first level, forced preimages for uniqueness, and inverse equations. The imported statement is unchanged. No sorry-free project declaration was found.",
+  "blueprint": "The inherited ancestry points to prop-coef-integral-exceptional-adjoint, proof paragraph 2 (finite enriched mapping-complex adjunction before inverse limit); this item supplies its supporting cell-matching calculation through the already recorded intermediate nodes. It realizes Riehl--Verity Definition 4.1.1, Observation 4.1.2, the parent constructions and uniqueness of Lemmas 4.1.3--4.1.4, and the bijection in Definition 4.2.1."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NE-c3eb11aac",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-c3eb11aac (reviewer sub-agent of L); spot-checked: I read all seven steps in full. Every step uses only clauses of the statement of lem-coef-adjunction-squiggle-normal-form, which is unsplit, in the same unit, and has no path back to the item: the alphabet with - and + coded as 0 and n+1, strict alternation, the face map with reduction, concatenation, the atomicity and nondegeneracy criteria, and freeness. The case k<n: k occurs only at position 1, between 0 and a_2<k, so the face needs no reduction; the child keeps the width and is nonfillable because an old k+1 becomes a second k. The case k=n: d_n a = l b with b=(+,a_2,...), width w-1. Parents: when b starts with -, shift every later letter t>=j to t+1; when b starts with +, the parent is (-,r+1,b_1,...) with a terminal + becoming r+2. Uniqueness comes from forced letter-by-letter preimages; the inverse equations follow. Checks against the cited statement: d_2 beta = l eta, eps maps to u, eta maps to beta. I also ran my own enumeration of all nondegenerate atomic strings in degrees 0 to 5, up to width 9. In every degree from 0 to 4 both inverse equations hold, and the target and width of the child are as stated (fillable/nonfillable counts 1/1, 1/1, 12/11, 172/122, 1069/571). There are no new nodes, and the statement is unchanged and agrees with how its two citers use it. A grep for fillable, squiggle and walking adjunction found no duplicate. No tool_uses; no SGA; not a target node, so no base-change or coefficient check applies. Riehl-Verity has no local copy: the report lists it as WANTED and the proof is marked agent-written. Two fixes: (1) proof_origin.document pointed to a path that does not exist (main-20261015 with the old unit directory); I replaced it with the existing master blueprint path, the one the ancestor node and the unit record use. (2) Step 5 gave atomicity as the reason r=0 when w=1; the reason is strict alternation together with nondegeneracy, and I corrected the wording. The details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

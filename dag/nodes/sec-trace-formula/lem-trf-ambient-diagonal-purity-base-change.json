@@ -17,9 +17,216 @@
   "def-kun-derived-tensor",
   "def-pur-derived-internal-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose $m\\geq1$ with $\\ell^mA=0$. The finite Tate-sheaf lemma gives the independence of $m$, local freeness of rank one and every pullback/tensor identification used below. Finite-type permanence makes $X$, $X\\times_YX$ and the base-changed schemes Noetherian. A Noetherian base is quasi-compact and quasi-separated, so Nagata supplies compactifications of the separated finite-type maps in the argument. The permanence of smooth relative dimension gives the dimensions of their base changes and composites. Therefore the ambient compact-support adjunctions and their unbounded composition and base-change comparisons apply, including to $p_1$ and to the vector-bundle and deformation maps of the section lemma. Set $\\omega_b=b^\\times A$.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "thm-nagata-compactification",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "Finite-stage argument; verification of the ordinary Noetherian ambient hypotheses"
+   }
+  },
+  {
+   "text": "Apply ambient smooth exceptional base change at $A_Y$ to the Cartesian self-base-change square of $h$. It gives $b:p_2^*\\omega_h\\xrightarrow{\\sim}\\omega_{p_1}$. Since $p_2\\Delta=1_X$, its pullback gives $j_h:\\omega_h\\xrightarrow{\\sim}\\Delta^*\\omega_{p_1}$. The diagonal is a regular closed immersion of codimension $r$ with normal bundle $T_{X/Y}$. Apply the finite-ring section-deformation lemma to $(p_1,\\Delta)$, obtaining $\\delta_h:\\Delta^*\\omega_{p_1}\\xrightarrow{\\sim}z^*\\omega_\\pi$, where $\\pi:T_{X/Y}\\to X$ and $z$ is zero. Vector-bundle purity at $A_X$ gives $v_\\pi:A_{T_{X/Y}}(r)[2r]\\xrightarrow{\\sim}\\omega_\\pi$. Define\n$$\\theta_h=z^*(v_\\pi^{-1})\\circ\\delta_h\\circ j_h:\\omega_h\\xrightarrow{\\sim}A_X(r)[2r],\\qquad a_h=\\theta_h^{-1}.$$\nEvery arrow has now been specified by the diagonal/deformation construction of the statement.",
+   "uses": [
+    "prop-asd-smooth-base-change",
+    "lem-pur-diagonal-regular-immersion",
+    "lem-trf-finite-ring-section-deformation",
+    "thm-amb-vector-bundle-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Orientation proof: diagonal, deformation and inverse vector-bundle purity"
+   }
+  },
+  {
+   "text": "Let $\\phi_h(M):h^*M\\otimes\\omega_h\\to h^\\times M$ be the transpose of inverse projection followed by $1\\otimes\\epsilon_h(A_Y)$. The ambient smooth-tensor theorem says exactly that this map is an isomorphism for every $M\\in D(Y_{\\mathrm{et}},A)$. Define $\\gamma_h(M)=\\phi_h(M)\\circ(1\\otimes a_h)$, inserting the tensor/shift reassociation. Naturality follows from the naturality of $\\phi_h$ and tensor. This proves the claimed unbounded purity formula without imposing a condition on $M$.",
+   "uses": [
+    "thm-asd-smooth-tensor",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "Finite-stage proof: orientation followed by the canonical tensor map"
+   }
+  },
+  {
+   "text": "For the base change $(u,v)$ of the question, put $b_h=c_{A_Y}:u^*\\omega_h\\xrightarrow{\\sim}\\omega_{h'}$. The ambient smooth base-change theorem specifies this as the transpose of the pulled-back counit through compact-support exchange, exactly the specified $c_M$. It also gives, for every unbounded $M$,\n$$c_M\\circ u^*\\phi_h(M)=\\phi_{h'}(v^*M)\\circ(1\\otimes b_h).$$\nIts hypotheses require a finite ring annihilated by an invertible integer, Noetherian schemes and smooth compactifiable $h$; Step 1 verified these. No finite-type assumption on $v$ is used.",
+   "uses": [
+    "prop-asd-smooth-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "Base-change factors (2): equality of the actual tensor maps"
+   }
+  },
+  {
+   "text": "The self-product square for $h'$ is the pullback of that for $h$. Coherent exceptional mates of compact-support exchange identify their maps $j_h$: pull back $p_2^*\\omega_h\\to\\omega_{p_1}$ and then restrict along the base-changed diagonal. The two possible orders agree by mate pasting and compatibility of unbounded compact-support exchange with composition. The section-deformation lemma identifies $u^*\\delta_h$ with $\\delta_{h'}$ under these same exceptional comparisons, including the normal-bundle comparison. Thus the first two factors of $\\theta_h$ commute with this base change.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting",
+    "lem-trf-finite-ring-section-deformation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Deformation and base-change factors (1), first two orientation factors"
+   }
+  },
+  {
+   "text": "For the last factor, locally trivialize $T_{X/Y}$. Vector-bundle integration is the specified affine-space counit on each trivializing open, and that counit commutes with arbitrary Noetherian base change. Consequently the two integration maps agree on the pulled-back cover. This is an equality of maps between objects concentrated in degree zero: locally both compact-support coefficient objects are isomorphic to $A$. Full faithfulness of the degree-zero embedding and sheaf-Hom gluing therefore give equality globally. Taking exceptional mates yields the same assertion for $v_\\pi$ and then for $z^*(v_\\pi^{-1})$. Together with Step 5 this is\n$$\\theta_{h'}b_h=u^*\\theta_h,\\qquad b_h\\,u^*a_h=a_{h'}.$$\nSubstitute the latter equality into Step 4 to obtain $c_Mu^*\\gamma_h(M)=\\gamma_{h'}(v^*M)$. Taking compact-support adjuncts proves the corresponding assertion for the smooth traces.",
+   "uses": [
+    "thm-amb-vector-bundle-purity",
+    "lem-amb-affine-space-top-trace",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-pur-sheaf-hom-cover-gluing",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "Base-change factors (1), vector-bundle factor and the final equality"
+   }
+  },
+  {
+   "text": "Here is the local normalization needed for composition. Choose a smooth coordinate chart $e:U\\to\\mathbf A^r_V$ for $h$, with $U,V$ affine opens. On $U\\times_VU$, the functions $e_j(x_2)-e_j(x_1)$ are etale coordinates for $p_1$ near the diagonal. Remove the other components of their zero locus, as in the section-deformation lemma. That lemma identifies $\\delta_h$ with the identity of the standard section line in these coordinates. Its normal-bundle identification is the differential of $e$. Linear invariance of vector-bundle integration and its affine-space normalization identify the third factor with the affine-space orientation. The base-change map $j_h$ is computed through the etale chart $w'=(x_1,e(x_2))$ to $\\mathbf A^r_U$, which carries $\\Delta$ to the section $\\sigma=(x,e(x))$, whereas the section lemma uses $w=(x_1,e(x_2)-e(x_1))=\\tau_{\\sigma}\\circ w'$, carrying $\\Delta$ to zero; here $\\tau_\\sigma$ is translation by $-e(x_1)$ on $\\mathbf A^r_U\\to U$. By the ambient translation lemma over the Noetherian base $U$, $\\tau_\\sigma$ preserves the coordinate-tower trace of $\\mathbf A^r_U$, so by mate pasting the trivializations of $\\omega_{p_1}$ obtained through $w$ and through $w'$ agree; this replaces the translation step of the vector-bundle orientation proof. The self-product squares for the coordinate factorization $h=p_re$ paste to the self-product square for $h$; mate pasting identifies $j_h$ with the etale restriction of the corresponding affine-space map. Hence $a_h|_U$ is the pullback of the ordered affine-space orientation through $e$, under the canonical etale comparison $e^*p_r^\\times\\cong( p_re)^\\times$. The tensor-mate identity for etale precomposition identifies $\\gamma_h(M)|_U$ with the same coordinate adjunction at every $M$. This calculation uses the finite-ring section lemma, rather than a fixed-field orientation theorem.",
+   "uses": [
+    "sbc-thm-etale-local-normal-form",
+    "lem-trf-finite-ring-section-deformation",
+    "lem-amb-linear-trace-invariance",
+    "thm-amb-vector-bundle-purity",
+    "lem-amb-etale-adjoint-locality",
+    "lem-asd-tensor-mate-etale-precomp",
+    "lem-weil-pbc-mate-pasting",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-trf-ambient-affine-translation-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Deformation coordinate normalization; orientation-charts proof Steps 1–4; translation: sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.proof.md, Step 1"
+   }
+  },
+  {
+   "text": "Let $f:X\\to Y$ and $g:Y\\to Z$ be composable morphisms satisfying the smooth hypotheses, of dimensions $d,e$. Write $q_{g,f}:(gf)^\\times\\xrightarrow{\\sim}f^\\times g^\\times$ for the adjunction comparison. The projection-composition identity and the composite counit $\\epsilon_g\\circ Rg_!\\epsilon_f$ give, on taking transposes,\n$$\\phi_{gf}(M)\\circ(1\\otimes s_{f,g})=q_{g,f}^{-1}\\circ f^\\times\\phi_g(M)\\circ\\phi_f(g^*M\\otimes\\omega_g),$$\nwhere $s_{f,g}=q_{g,f}^{-1}\\circ\\phi_f(\\omega_g): f^*\\omega_g\\otimes\\omega_f\\to\\omega_{gf}$, and the source on the left is $(gf)^*M\\otimes f^*\\omega_g\\otimes\\omega_f$. To see the equality, apply $R(gf)_!$ and the counit: replace its projection by the successive $f$ and $g$ projections, and replace its counit by the displayed composite counit. The two resulting maps are then the identical successive projection-and-counit composite. This proves the formal tensor part of composition.",
+   "uses": [
+    "lem-amb-shriek-tensor-composition",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting",
+    "thm-asd-smooth-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "Composition proof Step 2: explicit projection-and-counit transpose calculation"
+   }
+  },
+  {
+   "text": "Choose compatible affine smooth charts $U\\to\\mathbf A^d_V$ for $f$ and $V\\to\\mathbf A^e_W$ for $g$. Their composite chart is etale over $\\mathbf A^{d+e}_W$, ordered with the $d$ fibre coordinates before the $e$ base coordinates. Step 7 identifies the diagonal orientations with those chart orientations. The coordinate-tower adjunction in the affine-space trace lemma is defined by successively composing affine-line adjunctions. The tower with $d+e$ coordinates and the successive towers with $d$ and $e$ coordinates therefore have the same composite counit, with the unbounded compact-support composition comparisons inserted. Etale precomposition preserves those counits; mate pasting identifies their right-adjoint comparisons. Thus, on this cover,\n$$a_{gf}=s_{f,g}\\circ(f^*a_g\\otimes a_f).$$\nBoth sides are maps between equal shifts of rank-one locally constant sheaves by smooth tensor. Equality is consequently a sheaf-map equality, so full faithfulness and sheaf-Hom gluing give it globally. Step 8 now gives composition for every $\\gamma(M)$; taking adjuncts gives trace composition. The twist shifts $2d,2e$ are even, so interchanging them introduces no sign.",
+   "uses": [
+    "sbc-thm-etale-local-normal-form",
+    "lem-amb-affine-space-top-trace",
+    "lem-asd-tensor-mate-etale-precomp",
+    "lem-weil-pbc-mate-pasting",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "thm-asd-smooth-tensor",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-pur-sheaf-hom-cover-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "Composition proof Step 1: coordinate-tower comparison and global sheaf equality"
+   }
+  },
+  {
+   "text": "For $r=0$, the section and rank-zero vector-bundle factors in Step 2 are identities on the standard pairs. The etale proper-support comparison identifies compact-support direct image with exact sum extension, preserving its sum counit. The etale locality adjunction identifies its right adjoint with $h^*$. Under this identification $a_h$ is the identity at $A$, and the tensor-mate computation identifies $\\gamma_h(M)$ with the right-adjoint comparison preserving that sum counit. Its adjunct is therefore the etale sum/evaluation counit. In fact Steps 1–9 only used Noetherianity of the bases, not excellence. They therefore apply to the indicated geometric-field extensions and geometric fibres: a field is Noetherian since its only ideals are zero and the unit ideal. The base-change maps need not be of finite type.",
+   "uses": [
+    "lem-trf-finite-ring-section-deformation",
+    "lem-pur-etale-support-map-compatibility",
+    "lem-amb-etale-adjoint-locality",
+    "lem-asd-tensor-mate-etale-precomp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "Dimension-zero normalization and the indicated changes of base"
+   }
+  },
+  {
+   "text": "Finally, the proper projection formula and the open extension tensor identity give the compact-support projection isomorphism $Rh_!(T\\otimes h^*L)\\cong Rh_!T\\otimes L$ for all unbounded $T,L$. Use the ambient adjunction and the closed tensor--Hom adjunction to obtain, naturally in every test object $T$ on $X$,\n$$\\operatorname{Hom}(T,h^\\times R\\mathcal Hom(L,M))\\cong\\operatorname{Hom}(Rh_!T,R\\mathcal Hom(L,M))\\cong\\operatorname{Hom}(Rh_!T\\otimes L,M)$$\n$$\\cong\\operatorname{Hom}(Rh_!(T\\otimes h^*L),M)\\cong\\operatorname{Hom}(T\\otimes h^*L,h^\\times M)\\cong\\operatorname{Hom}(T,R\\mathcal Hom(h^*L,h^\\times M)).$$\nThis chain of bijections shows that its representing comparison is an isomorphism (apply its inverse to the identity of the target to construct a two-sided inverse). There is no dualizability assumption on $L$.",
+   "uses": [
+    "lem-amb-proper-coproducts-projection",
+    "lem-pur-etale-open-derived-tensor",
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "Exceptional internal-Hom comparison: formal unbounded projection adjunction"
+   }
+  },
+  {
+   "text": "To check the direction and normalization of this comparison, put $Q=R\\mathcal Hom(L,M)$ and take $T=h^\\times Q$ and the identity as the initial morphism in Step 11. Before the last tensor--Hom transpose its image is the exceptional adjunct of\n$$Rh_!(h^\\times Q\\otimes h^*L)\\xrightarrow{\\mathrm{PF}^{-1}}Rh_!h^\\times Q\\otimes L\\xrightarrow{\\epsilon_Q\\otimes1}Q\\otimes L\\xrightarrow{\\operatorname{ev}}M.$$\nThe exceptional tensor map in the statement is defined by exactly the first two arrows as an adjunct, with target $h^\\times(Q\\otimes L)$. Composing that adjunct with $h^\\times\\operatorname{ev}$ therefore gives the pairing in the question. Its tensor--Hom transpose is the isomorphism of Step 11, so it is precisely $H_h$ in the required direction.",
+   "uses": [
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "Exceptional internal-Hom comparison: evaluation-normalization calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-linear-trace-invariance",
+  "lem-amb-proper-coproducts-projection",
+  "lem-amb-shriek-tensor-composition",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-tensor-mate-etale-precomp",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-pur-diagonal-regular-immersion",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-pur-etale-support-map-compatibility",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-trf-ambient-affine-translation-trace",
+  "lem-trf-finite-ring-section-deformation",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-mate-pasting",
+  "prop-asd-smooth-base-change",
+  "sbc-thm-etale-local-normal-form",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-amb-vector-bundle-purity",
+  "thm-asd-smooth-tensor",
+  "thm-nagata-compactification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+  "place": "Finite-coefficient proof; orientation, DNC, base-change-factors and composition proofs. Extension to ordinary unbounded etale categories over Noetherian bases, using the existing ambient theorems."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +262,38 @@
    "results": "{\"t\": \"2026-10-17T15:24:21Z\", \"tool\": \"leanfinder\", \"query\": \"The normalized smooth etale trace from Kummer classes and vector bundle integration commutes with arbitrary scheme base change.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"RingHom.Etale.isStableUnderBaseChange\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange\", \"Algebra.Etale.baseChange\", \"Algebra.normalizedTrace_trans_apply\", \"Algebra.normalizedTrace_trans\"], \"digest\": \"c3110b12c58f5911\"}",
    "date": "2026-10-17",
    "verdict": "no match: read returned signatures; they concern scheme or ring descent, ordinary sheaf adjunctions, general derived categories, or compiler purity, not the stated etale theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*purity|purity.*smooth|dualizing.*deformation",
+   "results": "{\"t\": \"2026-10-17T15:55:49Z\", \"tool\": \"grep\", \"query\": \"smooth.*purity|purity.*smooth|dualizing.*deformation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected signatures concern ordinary scheme smoothness, normalization, affine coordinate morphisms, sheaf pullback adjunctions or compiler purity; none states the dualizing-section deformation comparison or normalized etale purity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right adjoint of compact support along a smooth morphism is pullback with Tate twist and dimension shift.",
+   "results": "{\"t\": \"2026-10-17T15:55:49Z\", \"tool\": \"leansearch\", \"query\": \"The right adjoint of compact support along a smooth morphism is pullback with Tate twist and dimension shift.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.pullback\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r\", \"SheafOfModules.PullbackConstruction.adjunction\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"TopCat.Sheaf.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"CategoryTheory.Over.pullbackIsRightAdjoint\"], \"digest\": \"df51b32445c55401\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected signatures concern ordinary scheme smoothness, normalization, affine coordinate morphisms, sheaf pullback adjunctions or compiler purity; none states the dualizing-section deformation comparison or normalized etale purity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"purity\"",
+   "results": "{\"t\": \"2026-10-17T15:55:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"purity\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.Compiler.LCNF.Purity\", \"Lean.Compiler.LCNF.tacticPurity_tac\", \"Lean.Compiler.LCNF.Purity.impure\", \"Lean.Compiler.LCNF.Purity.pure\", \"Lean.Compiler.LCNF.instDecidableEqPurity\", \"Lean.Compiler.LCNF.instHashablePurity\", \"Lean.Compiler.LCNF.instInhabitedPurity\", \"Lean.Compiler.LCNF.instToStringPurity\"], \"digest\": \"667f3aa43a499f0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected signatures concern ordinary scheme smoothness, normalization, affine coordinate morphisms, sheaf pullback adjunctions or compiler purity; none states the dualizing-section deformation comparison or normalized etale purity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth purity on ordinary unbounded etale derived categories is normalized by deformation of the diagonal and is compatible with arbitrary base change.",
+   "results": "{\"t\": \"2026-10-17T15:55:55Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth purity on ordinary unbounded etale derived categories is normalized by deformation of the diagonal and is compatible with arbitrary base change.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.Etale.formallyEtale\", \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\", \"Algebra.FormallyEtale.instFormallySmooth\"], \"digest\": \"390af11d5540269c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected signatures concern ordinary scheme smoothness, normalization, affine coordinate morphisms, sheaf pullback adjunctions or compiler purity; none states the dualizing-section deformation comparison or normalized etale purity"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nearby-duality-operation-squares",
@@ -80,5 +315,149 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-trf-ambient-diagonal-purity-base-change",
+  "worker": "stage1",
+  "summary": "Assembled the diagonal/deformation orientation from ambient Noetherian-base tensor, exceptional base change and vector-bundle purity. Isolated finite-ring normalized section deformation because the existing ordinary Noetherian section lemma is only for Z/ell^n. Proved the specified base-change, composition, etale and internal-Hom normalizations without restricting input complexes.",
+  "blueprint": "lem-trf-local-term-locality proof (2), normal-cone specialization: supplies the normalized ambient smooth purity used by nearby-duality operation squares, following main-20261015 smooth-purity, orientation, DNC and base-change-factor proofs.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-affine-space-top-trace",
+    "why": "Generic ambient/geometry/derived-category tool: its stated hypotheses apply to the ordinary Noetherian finite-coefficient setting in this proof; the contracting-correspondence unit provides no replacement for this input."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Generic ambient/geometry/derived-category tool: its stated hypotheses apply to the ordinary Noetherian finite-coefficient setting in this proof; the contracting-correspondence unit provides no replacement for this input."
+   },
+   {
+    "node": "lem-amb-linear-trace-invariance",
+    "why": "Generic ambient/geometry/derived-category tool: its stated hypotheses apply to the ordinary Noetherian finite-coefficient setting in this proof; the contracting-correspondence unit provides no replacement for this input."
+   },
+   {
+    "node": "lem-amb-proper-coproducts-projection",
+    "why": "Generic ambient/geometry/derived-category tool: its stated hypotheses apply to the ordinary Noetherian finite-coefficient setting in this proof; the contracting-correspondence unit provides no replacement for this input."
+   },
+   {
+    "node": "lem-amb-shriek-tensor-composition",
+    "why": "Generic ambient/geometry/derived-category tool: its stated hypotheses apply to the ordinary Noetherian finite-coefficient setting in this proof; the contracting-correspondence unit provides no replacement for this input."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Generic ambient/geometry/derived-category tool: its stated hypotheses apply to the ordinary Noetherian finite-coefficient setting in this proof; the contracting-correspondence unit provides no replacement for this input."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic ambient/geometry/derived-category tool: its stated hypotheses apply to the ordinary Noetherian finite-coefficient setting in this proof; the contracting-correspondence unit provides no replacement for this input."
+   },
+   {
+    "node": "lem-asd-tensor-mate-etale-precomp",
+    "why": "Generic ambient/geometry/derived-category tool: its stated hypotheses apply to the ordinary Noetherian finite-coefficient setting in this proof; the contracting-correspondence unit provides no replacement for this input."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Generic ambient/geometry/derived-category tool: its stated hypotheses apply to the ordinary Noetherian finite-coefficient setting in this proof; the contracting-correspondence unit provides no replacement for this input."
+   },
+   {
+    "node": "lem-pur-diagonal-regular-immersion",
+    "why": "Generic ambient/geometry/derived-category tool: its stated hypotheses apply to the ordinary Noetherian finite-coefficient setting in this proof; the contracting-correspondence unit provides no replacement for this input."
+   },
+   {
+    "node": "lem-pur-etale-open-derived-tensor",
+    "why": "Generic ambient/geometry/derived-category tool: its stated hypotheses apply to the ordinary Noetherian finite-coefficient setting in this proof; the contracting-correspondence unit provides no replacement for this input."
+   },
+   {
+    "node": "lem-pur-etale-support-map-compatibility",
+    "why": "Generic ambient/geometry/derived-category tool: its stated hypotheses apply to the ordinary Noetherian finite-coefficient setting in this proof; the contracting-correspondence unit provides no replacement for this input."
+   },
+   {
+    "node": "lem-pur-sheaf-hom-cover-gluing",
+    "why": "Generic ambient/geometry/derived-category tool: its stated hypotheses apply to the ordinary Noetherian finite-coefficient setting in this proof; the contracting-correspondence unit provides no replacement for this input."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic ambient/geometry/derived-category tool: its stated hypotheses apply to the ordinary Noetherian finite-coefficient setting in this proof; the contracting-correspondence unit provides no replacement for this input."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic ambient/geometry/derived-category tool: its stated hypotheses apply to the ordinary Noetherian finite-coefficient setting in this proof; the contracting-correspondence unit provides no replacement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-derived-single-fully-faithful",
+    "why": "Generic ambient/geometry/derived-category tool: its stated hypotheses apply to the ordinary Noetherian finite-coefficient setting in this proof; the contracting-correspondence unit provides no replacement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic ambient/geometry/derived-category tool: its stated hypotheses apply to the ordinary Noetherian finite-coefficient setting in this proof; the contracting-correspondence unit provides no replacement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic ambient/geometry/derived-category tool: its stated hypotheses apply to the ordinary Noetherian finite-coefficient setting in this proof; the contracting-correspondence unit provides no replacement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic ambient/geometry/derived-category tool: its stated hypotheses apply to the ordinary Noetherian finite-coefficient setting in this proof; the contracting-correspondence unit provides no replacement for this input."
+   },
+   {
+    "node": "prop-asd-smooth-base-change",
+    "why": "Generic ambient/geometry/derived-category tool: its stated hypotheses apply to the ordinary Noetherian finite-coefficient setting in this proof; the contracting-correspondence unit provides no replacement for this input."
+   },
+   {
+    "node": "sbc-thm-etale-local-normal-form",
+    "why": "Generic ambient/geometry/derived-category tool: its stated hypotheses apply to the ordinary Noetherian finite-coefficient setting in this proof; the contracting-correspondence unit provides no replacement for this input."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Generic ambient/geometry/derived-category tool: its stated hypotheses apply to the ordinary Noetherian finite-coefficient setting in this proof; the contracting-correspondence unit provides no replacement for this input."
+   },
+   {
+    "node": "thm-amb-vector-bundle-purity",
+    "why": "Generic ambient/geometry/derived-category tool: its stated hypotheses apply to the ordinary Noetherian finite-coefficient setting in this proof; the contracting-correspondence unit provides no replacement for this input."
+   },
+   {
+    "node": "thm-asd-smooth-tensor",
+    "why": "Generic ambient/geometry/derived-category tool: its stated hypotheses apply to the ordinary Noetherian finite-coefficient setting in this proof; the contracting-correspondence unit provides no replacement for this input."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic ambient/geometry/derived-category tool: its stated hypotheses apply to the ordinary Noetherian finite-coefficient setting in this proof; the contracting-correspondence unit provides no replacement for this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-linear-trace-invariance",
+  "lem-amb-proper-coproducts-projection",
+  "lem-amb-shriek-tensor-composition",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-tensor-mate-etale-precomp",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-pur-diagonal-regular-immersion",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-pur-etale-support-map-compatibility",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-mate-pasting",
+  "prop-asd-smooth-base-change",
+  "sbc-thm-etale-local-normal-form",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-amb-vector-bundle-purity",
+  "thm-asd-smooth-tensor",
+  "thm-nagata-compactification"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-ab643d593",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-ab643d593 (reviewer sub-agent of L); spot-checked: I read all 12 steps, both new nodes and every cited statement against main-20261015 (smooth-purity finite-ring proof, orientation, orientation-charts, orientation-vector-bundle and diagonal-dualizing-object proofs). The item statement is unchanged from the live DAG. The coefficient category is ordinary unbounded etale D(T_et,A) throughout and is never identified with the pro-etale one; no SGA source is used. Steps 1-6 and 8-12 hold: hypotheses checked (Noetherian bases, l invertible, Nagata, any Noetherian v). The tensor theorem covers every unbounded M. c_M is the beta of prop-asd-smooth-base-change. In r=0, D splits as A^1_S plus V' x G_m. Step 11 is a Yoneda argument over six natural bijections, and Step 12 gives its stated direction. One gap, repaired (C1/C4): Step 7 compares the base-change chart (x1,e(x2)) with the section lemma's chart (x1,e(x2)-e(x1)). These differ by translation on A^r_U, which needs translation invariance of the coordinate-tower trace; only GL_d invariance was cited. The blueprint does this in sk-prop-sp-orientation-vector-bundle.proof.md Step 1, and lem-pur-affine-translation-trace covers only bases of finite type over k. Fix: I added the statement-only node lem-trf-ambient-affine-translation-trace (finite A with NA=0, Noetherian base, ordinary etale) and cited it in Step 7; proof_deps updated. The worker's new node lem-trf-finite-ring-section-deformation is true (checked d=0 and the standard model; uniqueness holds because A^1 fibres are connected) and is a legitimate generalization of lem-pur-noetherian-etale-section-specialization, which is for Z/l^n only; O_E/varpi^n is not flat over Z/l^m. It does not restate a clause of the item. Tool uses accepted as declared.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }

@@ -12,9 +12,126 @@
   "def-coef-infinity-fibrations",
   "def-coef-coherent-adjunction-data"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix f:b→c, write R=f^* and L=L_f, and let i_b,i_c denote the fiber inclusions. The assumed coherent Cartesian restriction witness is h:Δ¹×E_c→E with endpoints i_b R and i_c, with Cartesian components r_y:Ry→y over f. For x∈E_b the unit η_x:x→RLx followed by r_{Lx}:RLx→Lx specifies an inner 2-horn in E. Its base is the degenerate triangle with successive edges id_b,f and long edge f. Since p is inner, fill this horn over that triangle and call its long edge u_x:x→Lx. Thus u_x lies exactly over f. The triangle and the Cartesian mapping-fiber equivalence for r_{Lx} identify u_x with η_x, with the chosen homotopy retained. Write H_a(v,z)=hofib_a(Map_E(v,z)→Map_B(pv,pz)) for the rest of the proof.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "def-coef-coherent-adjunction-data",
+    "lem-coef-infinity-cartesian-mapping-fiber",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02FP",
+    "place": "Proposition 6.2.5.4 (02FN), dualized unit construction; mapping-fiber formulation in 01TQ"
+   }
+  },
+  {
+   "text": "For y∈E_c, precomposition by u_x defines Map_{E_c}(Lx,y)→H_f(x,y). The Cartesian mapping-fiber equivalence for r_y identifies its target with Map_{E_b}(x,Ry). Under this identification the map sends v to R(v)∘η_x: indeed the coherent witness h gives v∘r_{Lx}≃r_y∘R(v), and the triangle in step 1 and associativity give v∘u_x≃r_y∘R(v)∘η_x. These are homotopies of mapping-space maps: naturality of h is supplied as a simplicial map on Δ¹×E_c, not merely as a pointwise equation. The adjunction mapping-equivalence node says exactly that v↦R(v)∘η_x is an equivalence, using the given coherent unit, counit and triangle homotopies. Consequently Map_{E_c}(Lx,y)→H_f(x,y) is an equivalence for every y.",
+   "uses": [
+    "lem-coef-infinity-adjunction-mapping-equivalence",
+    "lem-coef-infinity-cartesian-mapping-fiber",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02FP",
+    "place": "Proposition 6.2.5.7 (02FP), implication (2)⇒(1), local mapping-space calculation"
+   }
+  },
+  {
+   "text": "Fix z∈E_d and a vertex g∈Map_B(c,d); choose a p-Cartesian lift e:y→z over g, so y∈E_c. Choose a composite a=gf and its 2-simplex in B. The Cartesian mapping criterion for e with test object x says Map_E(x,y)≃Map_E(x,z)×^h_{Map_B(b,d)}Map_B(b,c). Take the homotopy fiber over f of the projection to Map_B(b,c). Pasting homotopy pullbacks identifies H_f(x,y)≃H_a(x,z). The Cartesian mapping-fiber statement for e with test object Lx gives Map_{E_c}(Lx,y)≃H_g(Lx,z). Under these two equivalences the map H_g(Lx,z)→H_a(x,z) induced by precomposition with u_x is the map of step 2: the square has horizontal arrows precomposition by u_x and vertical arrows postcomposition by e, and commutes up to the associativity homotopy. Thus this map of homotopy fibers is an equivalence. All equivalences here use path pullbacks with their specified commutation homotopies. The inner mapping-fiber node makes the mapping projections Kan fibrations, so the constant-path comparison also permits the strict mapping fiber when needed; no strict fiber is silently substituted for a homotopy fiber.",
+   "uses": [
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-cartesian-mapping-criterion",
+    "lem-coef-infinity-cartesian-mapping-fiber",
+    "lem-coef-infinity-homotopy-pullback-pasting",
+    "lem-coef-infinity-inner-mapping-fiber",
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-infinity-mapping-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02FP",
+    "place": "Proposition 6.2.5.7 (02FP), global comparison in the proof of (2)⇒(1)"
+   }
+  },
+  {
+   "text": "Put S=Map_B(c,d), T=Map_B(b,d), Y=Map_E(x,z) and X=Map_E(Lx,z). Precomposition with f gives S→T, and precomposition with u_x gives X→Y, with the homotopy-commuting square induced by p. Its comparison is k:X→P=Y×^h_T S. All four mapping spaces and the path pullback P are Kan by the mapping-fibrancy and path-pullback statements. Regard k as a map of spaces over S; the base map is id_S, a weak equivalence. Homotopy-pullback pasting identifies the homotopy fiber of P→S over g with H_{gf}(x,z), while that of X→S is H_g(Lx,z). The induced map is precisely step 3's equivalence, with the path coordinates retained. Homotopy-fiber detection therefore makes k a weak equivalence. This holds for every z, including empty S. The cocartesian mapping criterion now says that u_x is p-cocartesian.",
+   "uses": [
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-homotopy-pullback-pasting",
+    "lem-coef-spaces-homotopy-fiber-detection",
+    "lem-coef-kan-pullback-path-comparison",
+    "lem-coef-infinity-inner-mapping-fiber",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02FP",
+    "place": "Corollary 5.1.2.3 (01TQ) and Proposition 6.2.5.7 (02FP)"
+   }
+  },
+  {
+   "text": "The map p is already an inner fibration. For every edge f:b→c and every source x∈E_b, steps 1–4 give a p-cocartesian edge u_x over f with target L_fx. Substitution into the definition makes p a cocartesian fibration. Step 1 supplies the specified-unit clause for any prescribed adjunction L_f⊣f^*.",
+   "uses": [
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Definition 2.4.2.1 and its cocartesian dual, as stated in def-coef-infinity-fibrations."
+   }
+  },
+  {
+   "text": "To choose these edges coherently, take K=E_b in the fixed containing universe. Clause (1) of the edge-pullback mapping-fiber node states that p_K:Fun(K,E)→Fun(K,B) is an inner fibration. In Fun(K,E), the given coherent unit gives an edge i_b→i_bRL; restricting h along L gives an edge i_bRL→i_cL. Their images form the inner horn of the degenerate base triangle on the constant-diagram edge Δ_K f. Fill this horn using p_K. Its long edge is a map U:K×Δ¹→E, with endpoints i_b and i_cL and pU=f pr_{Δ¹}. Hence U factors degreewise through E_f. Evaluating the filled 2-simplex at each x gives precisely a triangle of the form in step 1. Choose the u_x by these evaluations; steps 2–4 apply to each of them and prove them cocartesian. Thus U witnesses the functor L itself as coherent covariant transport over f. No assertion that Fun(K,E_f)→Fun(K,E) is inner is required.",
+   "uses": [
+    "lem-coef-infinity-edge-pullback-mapping-fiber",
+    "def-coef-infinity-fibrations",
+    "def-coef-coherent-adjunction-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02FP",
+    "place": "Proposition 6.2.5.7 (02FP) and coherent transport construction in 019M"
+   }
+  },
+  {
+   "text": "Let T:E_b→E_c be any other covariant transport with a coherent witness of cocartesian edges. Opposite simplicial sets exchange the outer horn indices, so the defining horn conditions make p^op:E^op→B^op Cartesian. Reverse the parameter Δ¹ in the witnesses U for L and the witness for T, and take opposites in the fiber variable. These are coherent Cartesian witnesses over f^op:c→b, with source endpoint i_c∘L^op (respectively i_c∘T^op) and target endpoint the inclusion i_b:E_b^op→E^op. Their common domain is E_b^op. The transport-uniqueness node applies to p^op and gives a natural equivalence L^op≃T^op in Fun(E_b^op,E_c^op). Taking opposites (and reversing the equivalence if necessary) gives L≃T in Fun(E_b,E_c). Together with the actual witness U from step 6 this proves the claimed equivalence with covariant transport.",
+   "uses": [
+    "def-cbc-enhanced-cartesian-fibration",
+    "def-coef-infinity-fibrations",
+    "lem-coef-infinity-transport-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/02FP",
+    "place": "Proposition 6.2.5.7 (02FP), using the opposite of Proposition 6.2.5.4 (02FN)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-cartesian-fibration",
+  "def-coef-coherent-adjunction-data",
+  "def-coef-infinity-fibrations",
+  "lem-coef-infinity-adjunction-mapping-equivalence",
+  "lem-coef-infinity-cartesian-mapping-criterion",
+  "lem-coef-infinity-cartesian-mapping-fiber",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-edge-pullback-mapping-fiber",
+  "lem-coef-infinity-homotopy-pullback-pasting",
+  "lem-coef-infinity-inner-mapping-fiber",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-transport-uniqueness",
+  "lem-coef-kan-pullback-path-comparison",
+  "lem-coef-spaces-homotopy-fiber-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, mapping-complex adjunction before the derived inverse limit; Cartesian-to-cocartesian transport is supplied as the foundational coherent-fiber argument."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -51,10 +168,60 @@
    "results": "{\"t\": \"2026-10-17T07:19:12Z\", \"tool\": \"leanfinder\", \"query\": \"Adjunction units define cocartesian lifts for a cartesian fibration of quasicategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.homCartesianLift\", \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsCocartesian.universal_property\", \"CategoryTheory.Functor.IsCocartesian\"], \"digest\": \"968fceba8ee9e459\"}",
    "date": "2026-10-17",
    "verdict": "no match: read Mathlib/CategoryTheory/FiberedCategory/Fibered.lean:51-68 and Cocartesian.lean:45-84. These concern ordinary categories, strict hom lifts and set-valued unique factorization, not Cartesian fibrations of quasicategories or their mapping-space adjunctions. Both semantic phrasings return these ordinary-category facts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Cartesian fibration of quasicategories whose restriction functors admit left adjoints is cocartesian, with lifts induced by adjunction units",
+   "results": "{\"t\": \"2026-10-17T08:22:01Z\", \"tool\": \"leanfinder\", \"query\": \"A Cartesian fibration of quasicategories whose restriction functors admit left adjoints is cocartesian, with lifts induced by adjunction units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsStronglyCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"CategoryTheory.Functor.IsStronglyCocartesian\"], \"digest\": \"17d86153494a4590\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained actual results concern ordinary-category fibered functors or Over adjunctions, not Cartesian fibrations of quasicategories. Read Fibered.lean:51-68 and Cocartesian.lean:51-74; no one-line specialization to mapping-space adjunctions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Cartesian fibration of quasicategories is cocartesian if each pullback functor has a left adjoint",
+   "results": "{\"t\": \"2026-10-17T08:26:00Z\", \"tool\": \"leansearch\", \"query\": \"A Cartesian fibration of quasicategories is cocartesian if each pullback functor has a left adjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Over.pullbackIsRightAdjoint\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsFibered.of_exists_isStronglyCartesian\", \"CategoryTheory.instIsCartesianCompOfIsFibered\", \"CategoryTheory.Functor.IsCocartesian.mk\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"CategoryTheory.Functor.IsCartesian.mk\", \"CategoryTheory.Functor.IsPreFibered.pullbackMap.IsCartesian\"], \"digest\": \"f919fa9d9d27ab04\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained actual results concern ordinary-category fibered functors or Over adjunctions, not Cartesian fibrations of quasicategories. Read Fibered.lean:51-68 and Cocartesian.lean:51-74; no one-line specialization to mapping-space adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction units give universal outgoing edges over an arrow in a cartesian fibration of infinity categories",
+   "results": "{\"t\": \"2026-10-17T08:26:06Z\", \"tool\": \"leanfinder\", \"query\": \"Adjunction units give universal outgoing edges over an arrow in a cartesian fibration of infinity categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Over.postAdjunctionLeft_unit_app_left\", \"CategoryTheory.forgetAdjToOver_unit_app\", \"CategoryTheory.Over.postAdjunctionRight_unit_app\", \"CategoryTheory.MorphismProperty.Over.mapPullbackAdj_unit_app\", \"CategoryTheory.Over.mapPullbackAdj_unit_app\", \"CategoryTheory.ParametrizedAdjunction.liftStructEquiv\", \"CategoryTheory.rightAdjointOfCostructuredArrowTerminalsAux_apply\", \"CategoryTheory.Under.postAdjunctionRight_unit_app_right\"], \"digest\": \"27453f1088aa5a1e\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained actual results concern ordinary-category fibered functors or Over adjunctions, not Cartesian fibrations of quasicategories. Read Fibered.lean:51-68 and Cocartesian.lean:51-74; no one-line specialization to mapping-space adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian fibration left adjoint transport cocartesian lift",
+   "results": "{\"t\": \"2026-10-17T08:39:02Z\", \"tool\": \"leanfinder\", \"query\": \"Cartesian fibration left adjoint transport cocartesian lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_isCartesian\", \"CategoryTheory.Functor.IsCocartesian.map_isHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.isCocartesian_of_isStronglyCocartesian\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsPreFibered.exists_isCartesian'\", \"CategoryTheory.Functor.IsStronglyCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsStronglyCocartesian.map_isHomLift\"], \"digest\": \"feb7d1924caa19b9\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained actual results concern ordinary-category fibered functors or Over adjunctions, not Cartesian fibrations of quasicategories. Read Fibered.lean:51-68 and Cocartesian.lean:51-74; no one-line specialization to mapping-space adjunctions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsCartesian, CategoryTheory.Functor.IsCocartesian",
+   "results": "{\"t\": \"2026-10-17T08:39:02Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.IsCartesian, CategoryTheory.Functor.IsCocartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained actual results concern ordinary-category fibered functors or Over adjunctions, not Cartesian fibrations of quasicategories. Read Fibered.lean:51-68 and Cocartesian.lean:51-74; no one-line specialization to mapping-space adjunctions."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCartesian|IsCocartesian|leftAdjoint",
+   "results": "{\"t\": \"2026-10-17T08:39:02Z\", \"tool\": \"grep\", \"query\": \"IsCartesian|IsCocartesian|leftAdjoint\", \"sub\": \"CategoryTheory/FiberedCategory\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\"], \"digest\": \"6559cf367d861593\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained actual results concern ordinary-category fibered functors or Over adjunctions, not Cartesian fibrations of quasicategories. Read Fibered.lean:51-68 and Cocartesian.lean:51-74; no one-line specialization to mapping-space adjunctions.",
+   "subdirectory": "CategoryTheory/FiberedCategory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartesian fibration whose pullback functors have left adjoints is cocartesian",
+   "results": "{\"t\": \"2026-10-17T08:39:03Z\", \"tool\": \"leansearch\", \"query\": \"Cartesian fibration whose pullback functors have left adjoints is cocartesian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsPreFibered.pullbackMap.IsCartesian\", \"CategoryTheory.Over.pullbackIsRightAdjoint\", \"CategoryTheory.Functor.IsFibered.toIsPreFibered\", \"CategoryTheory.instIsCartesianCompOfIsFibered\", \"CategoryTheory.Functor.IsCocartesian\", \"CategoryTheory.Functor.IsFibered.of_exists_isStronglyCartesian\", \"CategoryTheory.Over.isLeftAdjoint_post\", \"HasFibers.pullbackMap.isCartesian\"], \"digest\": \"470479797fa63ec0\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: retained actual results concern ordinary-category fibered functors or Over adjunctions, not Cartesian fibrations of quasicategories. Read Fibered.lean:51-68 and Cocartesian.lean:51-74; no one-line specialization to mapping-space adjunctions."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-algebroid-cocontinuous-base-change",
@@ -98,5 +265,29 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "Stage-2 dependency module for the split step-7 argument. The recorded node had no Lean declaration; this module states its general Cartesian-fibration transport criterion exactly, with supplied restriction maps and coherent left adjoints, and its cocartesian-lift conclusion."
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cartesian-left-adjoint-transport",
+  "worker": "stage1",
+  "summary": "Seven explicit steps construct unit edges, compute local adjunct mapping equivalences, globalize over every g using Cartesian mapping squares and homotopy-fiber detection, build the coherent transport by inner lifting for p_K, and compare arbitrary covariant transports on opposites. Repaired witness variance and made the mapping-fiber comparisons explicit. All auxiliary results already have DAG nodes; no new node.",
+  "blueprint": "Realizes the Cartesian-to-cocartesian passage in paragraph 2 of prop-coef-integral-exceptional-adjoint.proof.md, before the derived inverse-limit calculation.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-enhanced-cartesian-fibration",
+    "why": "Step 7 uses its definition of opposite simplicial sets to reverse the Cartesian/cocartesian horn conditions; no geometric unit route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-cbc-enhanced-cartesian-fibration"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-78c2d2c10",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-78c2d2c10 (reviewer sub-agent of L); spot-checked: I read every step and every cited statement in full. Statement: matches Kerodon 02FP (Prop. 6.2.5.7, read online), direction (2)=>(1) plus the 'e_! left adjoint to e^*' clause. The base here is quasicategories, a special case of Kerodon's simplicial-set base. No hypothesis is added or dropped and the statement is not weakened; the item is not a target. Steps: (1) The inner horn (eta_x, r_{Lx}) over s_0(f) is filled to give u_x exactly over f; the Cartesian mapping-fiber node identifies u_x with eta_x. (2) The naturality square of h gives (u_x)^* ~ (r_y)_* o (v |-> R(v) eta_x); this is an equivalence by the adjunction mapping-equivalence node, whose triangle homotopies come from the 2-simplices of def-coef-coherent-adjunction-data. (3) For a Cartesian lift e over g, the Cartesian criterion plus pasting gives H_f(x,y) ~ H_{gf}(x,z), and the mapping-fiber node gives Map_{E_c}(Lx,y) ~ H_g(Lx,z); the square commutes by associativity. (4) Fiber detection is applied over id_S, so its weak-equivalence hypothesis holds; the cocartesian mapping criterion then makes u_x cocartesian. (5) The definition gives that p is a cocartesian fibration. (6) Clause (1) of the edge-pullback node (p_K is inner for K=E_b) gives a single coherent filler U. (7) Since p is cocartesian by step 5, p^op is Cartesian. The reversed witnesses U^op and T^op fit the hypotheses of lem-coef-infinity-transport-uniqueness exactly (b:=c, b':=b), so L ~ T. Checks: proof_deps equals the union of step uses; there is no cycle (DFS over 492 nodes); there are no new nodes; I found no duplicate (rg on 02FP/02FN/05Q8/2.4.4.3/3.6.6/bicartesian and on statements containing both 'cartesian fibration' and 'left adjoint'). Every cited statement is in unit sk-prop-sf-biduality-general. The off-unit citations are definitions only, and I accept the declared tool_use of def-cbc-enhanced-cartesian-fibration. No SGA. Small cases checked: B a point, f an identity, empty Map_B(c,d), ordinary bifibrations. No fixes were written."
  }
 }
