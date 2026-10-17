@@ -251,7 +251,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_pullbackFst
     subst hπ
     exact ⟨c ≪≫ (R(φ)^![ModuleCat.{u + 1} Λ]).mapIso
         (externalProductUnitRightIso Λ a (𝟙 _) M).symm ≪≫ e.symm ≪≫
-      externalProductMapIso _ a' b' ((rightDerivedUpperShriekIdIso Λ X).app M) (Iso.refl _)⟩
+      externalProductMapIso _ a' b' ((rightDerivedUpperShriekIdIso (ModuleCat.{u + 1} Λ) X).app M) (Iso.refl _)⟩
   have hφπ : pullback.mapOverBase (𝟙 X) b a (𝟙 (Spec (.of k))) ≫ π =
       pullback.fst (𝟙 X ≫ a) (b ≫ 𝟙 (Spec (.of k))) := by
     rw [hπ, pullback.mapOverBase_fst, Category.comp_id]

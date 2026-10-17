@@ -97,7 +97,7 @@ G(RΓ_c(X, K)^∨) ──G(β_K^♯)⁻¹──▶ G(RΓ(X, K^∨(d))[2d])
 RΓ_c(X, K')^∨ ─────(β_{K'}^♯)⁻¹───▶ RΓ(X, K'^∨(d))[2d]
 ```
 of the inverses of the tensor–internal-hom adjoints commutes, where the dual comparison is
-`CategoryTheory.MonoidalClosed.dualComparison G c_X e`. -/
+`CategoryTheory.MonoidalClosed.unitDualComparison G c_X e`. -/
 theorem map_inv_curry_poincarePairing_comp (hK : IsDualizable K) (hK' : IsDualizable K')
     (hPF : ∀ N, HasProjectionFormula A a K N) (hPF' : ∀ N, HasProjectionFormula A' a K' N)
     (cX : (R(a)_![A']).obj K' ⟶ G.obj ((R(a)_![A]).obj K))
@@ -109,7 +109,7 @@ theorem map_inv_curry_poincarePairing_comp (hK : IsDualizable K) (hK' : IsDualiz
     (h : (R(a)_![A']).obj K' ◁ cY ≫ poincarePairing a γ' K' =
       cX ▷ _ ≫ μ G _ _ ≫ G.map (poincarePairing a γ K) ≫ e) :
     G.map (isPerfectPairing_poincarePairing_of_hasProjectionFormula A a γ hK hPF).iso.inv ≫ cY =
-      dualComparison G cX e ≫
+      unitDualComparison G cX e ≫
         (isPerfectPairing_poincarePairing_of_hasProjectionFormula A' a γ' hK' hPF').iso.inv :=
   map_inv_curry_comp G _ _ cX cY e h
 
@@ -128,11 +128,11 @@ theorem isIso_of_map_poincarePairing (hK : IsDualizable K) (hK' : IsDualizable K
         ((DerivedCategory.coefficientDual A X).obj (op K))).obj T))⟦(2 * d : ℤ)⟧) ⟶
       ((R((a)_*[A'])).obj (((derivedTensor A' X).obj
         ((DerivedCategory.coefficientDual A' X).obj (op K'))).obj T'))⟦(2 * d : ℤ)⟧)
-    (e : G.obj (𝟙_ _) ⟶ 𝟙_ _) [IsIso (dualComparison G cX e)]
+    (e : G.obj (𝟙_ _) ⟶ 𝟙_ _) [IsIso (unitDualComparison G cX e)]
     (h : (R(a)_![A']).obj K' ◁ cY ≫ poincarePairing a γ' K' =
       cX ▷ _ ≫ μ G _ _ ≫ G.map (poincarePairing a γ K) ≫ e) :
     IsIso cY :=
-  isIso_of_map_curry_comp_dualComparison G
+  isIso_of_map_curry_comp_unitDualComparison G
     (isPerfectPairing_poincarePairing_of_hasProjectionFormula A a γ hK hPF)
     (isPerfectPairing_poincarePairing_of_hasProjectionFormula A' a γ' hK' hPF') cX cY e h
 

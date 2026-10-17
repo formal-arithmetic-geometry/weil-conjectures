@@ -28,7 +28,7 @@ Taking tensor–internal-hom adjoints, the square of adjoints
       ▼                          [X', 𝟙_ D]
       Y' ──────curry b'───────────▲
 ```
-commutes (`CategoryTheory.MonoidalClosed.map_curry_comp_dualComparison`), where the comparison
+commutes (`CategoryTheory.MonoidalClosed.map_curry_comp_unitDualComparison`), where the comparison
 `G [X, 𝟙_ C] ⟶ [G X, G 𝟙_ C] ⟶ [G X, 𝟙_ D] ⟶ [X', 𝟙_ D]` is built from
 `CategoryTheory.Functor.LaxMonoidal.ihomComparison`, `e` and `c_X`. For perfect pairings this is
 the square of the inverses of the adjoints (`CategoryTheory.MonoidalClosed.map_inv_curry_comp`).
@@ -51,32 +51,33 @@ maps `c_X : X' ⟶ G X` and `e : G 𝟙_ C ⟶ 𝟙_ D`: the composite
 G [X, 𝟙_ C] ──ihomComparison──▶ [G X, G 𝟙_ C] ──[G X, e]──▶ [G X, 𝟙_ D] ──pre c_X──▶ [X', 𝟙_ D]
 ```
 -/
-noncomputable def dualComparison {X : C} {X' : D} (cX : X' ⟶ G.obj X) (e : G.obj (𝟙_ C) ⟶ 𝟙_ D) :
+noncomputable def unitDualComparison {X : C} {X' : D} (cX : X' ⟶ G.obj X)
+    (e : G.obj (𝟙_ C) ⟶ 𝟙_ D) :
     G.obj ((ihom X).obj (𝟙_ C)) ⟶ (ihom X').obj (𝟙_ D) :=
   (ihomComparison G X).natTrans.app (𝟙_ C) ≫ (ihom (G.obj X)).map e ≫ (pre cX).app (𝟙_ D)
 
-lemma uncurry_dualComparison {X : C} {X' : D} (cX : X' ⟶ G.obj X) (e : G.obj (𝟙_ C) ⟶ 𝟙_ D) :
-    uncurry (dualComparison G cX e) =
+lemma uncurry_unitDualComparison {X : C} {X' : D} (cX : X' ⟶ G.obj X) (e : G.obj (𝟙_ C) ⟶ 𝟙_ D) :
+    uncurry (unitDualComparison G cX e) =
       cX ▷ _ ≫ μ G X _ ≫ G.map ((ihom.ev X).app (𝟙_ C)) ≫ e := by
-  rw [dualComparison, ← Category.assoc, uncurry_pre_app, uncurry_natural_right, uncurry_eq,
+  rw [unitDualComparison, ← Category.assoc, uncurry_pre_app, uncurry_natural_right, uncurry_eq,
     ihomComparison_ev, Category.assoc]
 
 /-- Blueprint `thm-pod-finite-reduction` (formal step): **the adjoints of compatible pairings
 form a commuting square.** If the pairings `b : X ⊗ Y ⟶ 𝟙_ C` and `b' : X' ⊗ Y' ⟶ 𝟙_ D` are
 compatible along the lax monoidal functor `G` through `c_X : X' ⟶ G X`, `c_Y : G Y ⟶ Y'` and
 `e : G 𝟙_ C ⟶ 𝟙_ D`, then `G (curry b)` followed by the dual comparison is `c_Y ≫ curry b'`. -/
-theorem map_curry_comp_dualComparison {X Y : C} {X' Y' : D} (b : X ⊗ Y ⟶ 𝟙_ C)
+theorem map_curry_comp_unitDualComparison {X Y : C} {X' Y' : D} (b : X ⊗ Y ⟶ 𝟙_ C)
     (b' : X' ⊗ Y' ⟶ 𝟙_ D) (cX : X' ⟶ G.obj X) (cY : G.obj Y ⟶ Y') (e : G.obj (𝟙_ C) ⟶ 𝟙_ D)
     (h : X' ◁ cY ≫ b' = cX ▷ G.obj Y ≫ μ G X Y ≫ G.map b ≫ e) :
-    G.map (curry b) ≫ dualComparison G cX e = cY ≫ curry b' := by
+    G.map (curry b) ≫ unitDualComparison G cX e = cY ≫ curry b' := by
   apply uncurry_injective
-  rw [uncurry_natural_left, uncurry_natural_left, uncurry_curry, h, uncurry_dualComparison,
+  rw [uncurry_natural_left, uncurry_natural_left, uncurry_curry, h, uncurry_unitDualComparison,
     whisker_exchange_assoc, μ_natural_right_assoc, ← G.map_comp_assoc, ← uncurry_eq,
     uncurry_curry]
 
 /-- Blueprint `thm-pod-finite-reduction`: Finite reduction of the Poincaré pairing, formal form.
 
-In the situation of `CategoryTheory.MonoidalClosed.map_curry_comp_dualComparison`, if both
+In the situation of `CategoryTheory.MonoidalClosed.map_curry_comp_unitDualComparison`, if both
 pairings are perfect, the square of the inverses of their adjoints commutes:
 ```
 G [X, 𝟙_ C] ──G (curry b)⁻¹──▶ G Y
@@ -90,25 +91,25 @@ theorem map_inv_curry_comp {X Y : C} {X' Y' : D} {b : X ⊗ Y ⟶ 𝟙_ C} {b' :
     (hb : IsPerfectPairing b) (hb' : IsPerfectPairing b') (cX : X' ⟶ G.obj X)
     (cY : G.obj Y ⟶ Y') (e : G.obj (𝟙_ C) ⟶ 𝟙_ D)
     (h : X' ◁ cY ≫ b' = cX ▷ G.obj Y ≫ μ G X Y ≫ G.map b ≫ e) :
-    G.map (hb.iso.inv) ≫ cY = dualComparison G cX e ≫ hb'.iso.inv := by
-  have := map_curry_comp_dualComparison G b b' cX cY e h
+    G.map (hb.iso.inv) ≫ cY = unitDualComparison G cX e ≫ hb'.iso.inv := by
+  have := map_curry_comp_unitDualComparison G b b' cX cY e h
   have h₁ : G.map hb.iso.hom = G.map (curry b) := rfl
   have h₂ : hb'.iso.hom = curry b' := rfl
   rw [← h₁, ← h₂] at this
   rw [Iso.eq_comp_inv, Category.assoc, ← this, ← G.map_comp_assoc, Iso.inv_hom_id, G.map_id,
     Category.id_comp]
 
-/-- In the situation of `CategoryTheory.MonoidalClosed.map_curry_comp_dualComparison`, if both
+/-- In the situation of `CategoryTheory.MonoidalClosed.map_curry_comp_unitDualComparison`, if both
 pairings are perfect and the dual comparison is an isomorphism, then so is `c_Y`. In blueprint
 `thm-pod-finite-reduction` this shows that the comparison map on ordinary global sections is an
 isomorphism. -/
-theorem isIso_of_map_curry_comp_dualComparison {X Y : C} {X' Y' : D} {b : X ⊗ Y ⟶ 𝟙_ C}
+theorem isIso_of_map_curry_comp_unitDualComparison {X Y : C} {X' Y' : D} {b : X ⊗ Y ⟶ 𝟙_ C}
     {b' : X' ⊗ Y' ⟶ 𝟙_ D} (hb : IsPerfectPairing b) (hb' : IsPerfectPairing b')
     (cX : X' ⟶ G.obj X) (cY : G.obj Y ⟶ Y') (e : G.obj (𝟙_ C) ⟶ 𝟙_ D)
-    [IsIso (dualComparison G cX e)]
+    [IsIso (unitDualComparison G cX e)]
     (h : X' ◁ cY ≫ b' = cX ▷ G.obj Y ≫ μ G X Y ≫ G.map b ≫ e) : IsIso cY := by
   have := map_inv_curry_comp G hb hb' cX cY e h
-  have e' : cY = G.map hb.iso.hom ≫ dualComparison G cX e ≫ hb'.iso.inv := by
+  have e' : cY = G.map hb.iso.hom ≫ unitDualComparison G cX e ≫ hb'.iso.inv := by
     rw [← this, ← G.map_comp_assoc, Iso.hom_inv_id, G.map_id, Category.id_comp]
   rw [e']
   infer_instance
