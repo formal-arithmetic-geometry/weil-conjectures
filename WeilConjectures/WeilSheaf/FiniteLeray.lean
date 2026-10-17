@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.WeilSheaf.Cohomology
+public import WeilConjectures.WeilSheaf.ProperCohomology.OpenImmersion
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.LowerStarComp
 public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
@@ -156,14 +157,6 @@ open Endofunctor
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   {X Y Z : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
   [Z.Over (Spec (CommRingCat.of k₀))]
-
-variable (k₀ l) in
-/-- The pushforwards of pro-étale Weil sheaves along equal morphisms are isomorphic. -/
-noncomputable def ProEtaleWeilSheaf.lowerStarCongr {φ ψ : X ⟶ Y} (h : φ = ψ)
-    [φ.IsOver (Spec (CommRingCat.of k₀))] [ψ.IsOver (Spec (CommRingCat.of k₀))] :
-    ProEtaleWeilSheaf.lowerStar k₀ l φ ≅ ProEtaleWeilSheaf.lowerStar k₀ l ψ := by
-  subst h
-  exact Iso.refl _
 
 /-- The pushforward of pro-étale Weil sheaves preserves K-injective complexes: it is right
 adjoint to the exact pullback. -/
