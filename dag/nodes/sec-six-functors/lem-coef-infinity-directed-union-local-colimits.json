@@ -27,7 +27,12 @@
   "place": "Proposition 4.2.3.4, Remark 4.2.3.9 and Corollary 4.2.3.10, printed pp. 249-253: local colimit comparison for a directed covering by simplicial subsets. Read online 2026-10-17; not archived in literature/ (WANTED). No Stacks tag states this quasicategorical result."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-relative-cone",
+  "lem-coef-infinity-pushout-join-saturation",
+  "lem-coef-infinity-cocone-restriction-initial",
+  "lem-coef-infinity-colimit-gluing",
+  "lem-coef-infinity-final-index-colimit"
  ],
  "proof": [
   {
@@ -256,5 +261,34 @@
   "group": "Q108",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-851e8c83a (reviewer sub-agent of L); spot-checked: Read the item, the new node, all seven cited node statements and the unit/chapter route. Also read the possible duplicates: relative-initial-boundary, join-slice-cocone-comparison, terminal-boundary-extension, fiber-cocone-simplex-extension, parameter-cone-extension, relative-join-simplex-extension, directed-cover-colimit-assembly (with proof), colimit-subdiagram-approximation and directed-cone-cover (with proof). Checked against HTT §4.2.3: Notation 4.2.3.1, Prop 4.2.3.4, Prop 4.2.3.8, Rem 4.2.3.9 and Cor 4.2.3.10. HTT is not archived and remains WANTED, so printed pages were not checked. The item statement is the directed-subset case of 4.2.3.10, with no cocompleteness, no weakening, and the empty K/K_i cases included. Tested: K=Δ¹ with I={0<1}; two points with I={0,1<2}; K=∅; some K_i empty. Step 1: M equals both cited K_F constructions degreewise and operatorwise; join representatives come from the fixed-boundary, fixed-vertex join-cone equivalence. Steps 3–7: every hypothesis of decomposition-local-colimit-cocones, directed-decomposition-right-anodyne and anodyne-cocones holds; the colimit criterion and H-compatibility are correct. No cycles. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus as a generic criterion. Fault (C1/C5): the new node lem-coef-infinity-universal-simplex-attachment is true but follows in a few lines from existing same-unit nodes, which the worker's search missed. These are lem-coef-join-slice-cocone-comparison (J_a is a quasicategory, and a vertex is initial iff its cocone is colimiting, L=∅ included) and lem-coef-infinity-relative-initial-boundary over Δ⁰ (an initial first vertex fills the boundary for n≥1). The parallel directed-cover-colimit-assembly step 2 makes the same calculation. Fixed: folded it into step 2 with an explicit pushout and join-slice identification, updated step 7, recomputed proof_deps, updated split_report.summary, and removed every citation of the dropped node. Note: the report says created.item was changed, but the file correctly keeps lem-coef-infinity-limits-products-pullbacks; left unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d83c4b18d",
+  "group": "Q50",
+  "result": "fix",
+  "note": "Read node, six stmt_deps and the declarations used (coconeCategory/IsColimiting/mappingSpaceMap/constantDiagrams, gluingCoconeApex/Restrict, coconeHomotopy, rightJoinPrismSimplex, rightJoinCone, orderedJoinFunctor/Inl/Inr), HTT 4.2.3.1/4.2.3.4/4.2.3.8-4.2.3.10. Every hypothesis and clause matches: collage = K_F degreewise; fixed-apex equivalence edges are true and no stronger than the source; restriction span of mapping spaces; colimiting iff; H clause. Edge cases empty K, empty U_i, degree 0 and universes ok. No hollow defs, docstrings ok, sorry only, node changed only in lean and stmt_deps (landed owners), lean.statement verbatim. Delivered file compiles clean (nt_compile 2.5 s). H4 fix: localUnionPostcomposeCocone duplicated the landed CategoryTheory.Spaces.mappedCocone (InfinityCategoryOfSpaces.lean:252, same apex and transformation); replaced it, added a public import, updated the docstring, record note and report. The fixed file compiles clean (3.8 s) and adds no DAG cycle. Observation: owners of orderedJoinInl/Inr and of mappedCocone are not in stmt_deps; a stage-2 fix cannot add them."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityDirectedUnionLocalColimits",
+  "declaration": "SSet.Enhanced.infinity_directed_union_local_colimits",
+  "declarations": [
+   "SSet.Enhanced.localUnionCell",
+   "SSet.Enhanced.localUnionCollage",
+   "SSet.Enhanced.localUnionShape",
+   "SSet.Enhanced.localUnionIndex",
+   "SSet.Enhanced.localUnionCone",
+   "SSet.Enhanced.LocalUnionCoconeComparison",
+   "SSet.Enhanced.infinity_directed_union_local_colimits"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityDirectedUnionLocalColimits.lean",
+  "statement": "theorem infinity_directed_union_local_colimits (K : SSet.{u}) (I : Type u) [PartialOrder I] [Nonempty I] (hdir : ∀ s : Finset I, ∃ j : I, ∀ i ∈ s, i ≤ j) (U : I → K.Subcomplex) (hmono : Monotone U) (hcover : iSup U = ⊤) (E : SSet.{max u v}) [Quasicategory E] (p : SSet.uliftFunctor.{v}.obj K ⟶ E) (lam : ∀ i : I, (coconeCategory (SSet.uliftFunctor.{v}.map (U i).ι ≫ p)) _⦋0⦌) (hlam : ∀ i : I, IsColimiting (SSet.uliftFunctor.{v}.map (U i).ι ≫ p) (lam i)) : ∃ q : SSet.uliftFunctor.{v}.obj (localUnionCollage U).toSSet ⟶ E, SSet.uliftFunctor.{v}.map (localUnionShape U) ≫ q = p ∧ (∀ i : I, (SSet.uliftFunctor.{v}.map (localUnionIndex U) ≫ q).app (op ⦋0⦌) (ULift.up (ComposableArrows.mk₀ i)) = (lam i).1.1) ∧ (∃ (μ : ∀ i : I, (coconeCategory (SSet.uliftFunctor.{v}.map (U i).ι ≫ p)) _⦋0⦌) (e : ∀ i : I, (coconeCategory (SSet.uliftFunctor.{v}.map (U i).ι ≫ p)) _⦋1⦌), (∀ i : I, (μ i).1.1 = (lam i).1.1) ∧ (∀ (i : I) (n : ℕ) (s : (U i).toSSet _⦋n⦌) (a : (Δ[1] : SSet.{u}) _⦋n⦌), (SSet.uliftFunctor.{v}.map (localUnionCone U i) ≫ q).app (op ⦋n⦌) (ULift.up (rightJoinPrismSimplex _ n s a)) = (coconeHomotopy (SSet.uliftFunctor.{v}.map (U i).ι ≫ p) (μ i)).app (op ⦋n⦌) (ULift.up s, stdSimplex.objEquiv.symm (stdSimplex.objEquiv a))) ∧ ∀ i : I, (coconeCategory (SSet.uliftFunctor.{v}.map (U i).ι ≫ p)).δ 1 (e i) = μ i ∧ (coconeCategory (SSet.uliftFunctor.{v}.map (U i).ι ≫ p)).δ 0 (e i) = lam i ∧ IsEquivalenceEdge (coconeCategory (SSet.uliftFunctor.{v}.map (U i).ι ≫ p)) (e i) ∧ (gluingCoconeApex (SSet.uliftFunctor.{v}.map (U i).ι ≫ p)).app _ (e i) = E.σ 0 (lam i).1.1) ∧ LocalUnionCoconeComparison U q ∧ ∀ (E' : SSet.{max u v}) [Quasicategory E'] (H : E ⟶ E'), (∀ i : I, IsColimiting ((SSet.uliftFunctor.{v}.map (U i).ι ≫ p) ≫ H) (Spaces.mappedCocone H (SSet.uliftFunctor.{v}.map (U i).ι ≫ p) (lam i))) → LocalUnionCoconeComparison U (q ≫ H)",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the canonical directed-subset collage and its actual restriction span, not a cocompleteness assumption or arbitrary comparison maps. Local join representatives are identified with the chosen coherent cocones by equivalence edges with degenerate apex. Added landed owners of the ordered join, right cone, canonical prism, cocone restriction and cocone homotopy to stmt_deps; no mathematical statement correction. The comparison and collage helpers are real constructions belonging to this statement. The image cocones of the functor clause are the landed CategoryTheory.Spaces.mappedCocone (def-coef-infinity-category-of-spaces); the reviewer replaced a duplicate local helper with it. The independent small-shape and target universes are connected only by Mathlib's canonical degreewise ULift.",
+  "fixed_by": "NT-stage2-cc-d83c4b18d"
  }
 }

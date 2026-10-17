@@ -1,0 +1,190 @@
+{
+ "id": "def-coef-infinity-presheaf-yoneda",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, finite-coefficient mapping-complex adjunction: the presheaf Yoneda construction used by the intermediate-presheaf Kan supporting fact.",
+   "via": [
+    "lem-coef-infinity-intermediate-presheaf-kan",
+    "lem-coef-infinity-relative-colimit-completion",
+    "lem-coef-cocomplete-monoidal-tensor",
+    "lem-coef-algebroid-bilinear-colimits",
+    "lem-coef-enriched-category-tensor-calculus",
+    "lem-coef-enhanced-localization-universal",
+    "lem-coef-dg-derived-quillen-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Coherent space-valued presheaves and their constructed Yoneda functor",
+ "statement": "Fix a universe $\\mathcal U$ and use simplicial sets and their order-reversing opposite, coherent functor simplicial sets and Kan complexes as in [def-cbc-enhanced-diagrams-cones], the subset-poset coherent nerve of [def-coef-coherent-nerve-infrastructure], and the infinity category $\\mathcal S_{\\mathcal U}$, singular-realization enrichment and enriched unit of [def-coef-infinity-category-of-spaces]. For a $\\mathcal U$-small simplicial set $D$, set $A=\\mathfrak C[D]$, using the simplex-colimit rigidification of [lem-coef-pinched-rigidification-resolution], and put $\\mathcal P(D)=\\operatorname{Fun}(D^{\\mathrm{op}},\\mathcal S_{\\mathcal U})$, formed in the next universe. Define the coherent Hom pairing $D^{\\mathrm{op}}\\times D\\to\\mathcal S_{\\mathcal U}$ as follows. For an $n$-simplex $(s,t)$, regard both $s$ and $t$ as enriched functors $\\mathfrak C[\\Delta^n]\\to A$ by the rigidification unit, with $s$ the underlying simplex before order reversal. At vertex $i$ take $\\operatorname{Sing}|A(s(n-i),t(i))|$. On the enriched Hom from $i$ to $j$, reflect its endpoint-containing subset paths by $k\\mapsto n-k$, apply $s$ to obtain the precomposing morphism $s(n-j)\\to s(n-i)$, and apply $t$ to the original paths to obtain the postcomposing morphism $t(i)\\to t(j)$. Apply the enriched unit $A\\to A^{\\mathrm{top}}$ to both morphisms; precomposition followed by postcomposition in $A^{\\mathrm{top}}$ gives the enriched map between the displayed Kan complexes. Reflection preserves singleton paths and carries unions to unions with reversed endpoints, so these maps obey the enriched identity and composition laws. Reflection commutes with image of subsets under reversed ordinal maps, and the rigidification unit is natural; consequently this formula commutes with every simplicial operator. Define $y_D:D\\to\\mathcal P(D)$ to be the exponential transpose of this Hom pairing. For a quasicategory this is the Yoneda functor $d\\mapsto\\operatorname{Map}_D(-,d)$ in the Sing-realization rigidification model. This definition claims neither full faithfulness nor density.",
+ "stmt_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-coherent-nerve-infrastructure",
+  "def-coef-infinity-category-of-spaces",
+  "lem-coef-pinched-rigidification-resolution"
+ ],
+ "source": {
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Definition 5.1.0.1 and Section 5.1.3, printed pp. 315 and 319-320, explicit Sing-realization Hom pairing and its exponential transpose; Section 1.1.5 for subset-poset rigidification."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Colimit preserving functors from space valued presheaves are left Kan extensions on intermediate full infinity subcategories",
+   "results": "{\"t\": \"2026-10-17T00:28:18Z\", \"tool\": \"leanfinder\", \"query\": \"Colimit preserving functors from space valued presheaves are left Kan extensions on intermediate full infinity subcategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isLeftKanExtension_of_preservesColimits\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeIdCompUliftYonedaOfPreservesColimitsOfSizeOfHasPointwiseLeftKanExtension\", \"CategoryTheory.Presheaf.isLeftKanExtension_along_uliftYoneda_iff\", \"CategoryTheory.Presheaf.preservesColimitsOfSize_of_isLeftKanExtension\", \"CategoryTheory.Presheaf.isLeftKanExtension_along_yoneda_iff\", \"CategoryTheory.Presheaf.preservesColimitsOfSize_leftKanExtension\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeLanOpHomCompULiftYonedaIsoULiftYonedaCompLan\"], \"digest\": \"ca97b1b296943f35\"}",
+   "date": "2026-10-17",
+   "verdict": "No coherent Yoneda construction or intermediate-quasicategory Kan mapping equivalence. Semantic hits and Loogle yoneda/IsLeftKanExtension are ordinary Type-valued presheaves; inspected Mathlib CategoryTheory/Limits/Presheaf.lean. EnrichedFunctor with yoneda has no hits; AlgebraicTopology grep has no hits. The existing project gives the rigidification and coherent covariant Hom, used here, but no contravariant Hom pairing or Yoneda transpose."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"yoneda\", \"IsLeftKanExtension\"",
+   "results": "{\"t\": \"2026-10-17T00:28:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"yoneda\\\", \\\"IsLeftKanExtension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeUliftYonedaUliftYonedaMap\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeYonedaYonedaMap\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeIdCompUliftYonedaOfPreservesColimitsOfSizeOfHasPointwiseLeftKanExtension\", \"CategoryTheory.Presheaf.isLeftKanExtension_along_uliftYoneda_iff\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeLanOpHomCompULiftYonedaIsoULiftYonedaCompLan\"], \"digest\": \"0028b11074a1f378\"}",
+   "date": "2026-10-17",
+   "verdict": "No coherent Yoneda construction or intermediate-quasicategory Kan mapping equivalence. Semantic hits and Loogle yoneda/IsLeftKanExtension are ordinary Type-valued presheaves; inspected Mathlib CategoryTheory/Limits/Presheaf.lean. EnrichedFunctor with yoneda has no hits; AlgebraicTopology grep has no hits. The existing project gives the rigidification and coherent covariant Hom, used here, but no contravariant Hom pairing or Yoneda transpose."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLeftKanExtension|isLeftKanExtension",
+   "results": "{\"t\": \"2026-10-17T00:28:19Z\", \"tool\": \"grep\", \"query\": \"IsLeftKanExtension|isLeftKanExtension\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\"], \"digest\": \"2926b3a7df5c572d\"}",
+   "date": "2026-10-17",
+   "verdict": "No coherent Yoneda construction or intermediate-quasicategory Kan mapping equivalence. Semantic hits and Loogle yoneda/IsLeftKanExtension are ordinary Type-valued presheaves; inspected Mathlib CategoryTheory/Limits/Presheaf.lean. EnrichedFunctor with yoneda has no hits; AlgebraicTopology grep has no hits. The existing project gives the rigidification and coherent covariant Hom, used here, but no contravariant Hom pairing or Yoneda transpose."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Enriched Yoneda functor for simplicial categories with Kan mapping spaces",
+   "results": "{\"t\": \"2026-10-17T00:31:42Z\", \"tool\": \"leanfinder\", \"query\": \"Enriched Yoneda functor for simplicial categories with Kan mapping spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instEnrichedCategorySSet\", \"CategoryTheory.SimplicialCategory.sHomFunctor\", \"CategoryTheory.SimplicialNerve\", \"SSet.QCat.catEnrichedOrdinaryCategory\", \"CategoryTheory.SimplicialCategory.sHom\", \"CategoryTheory.SimplicialThickening.functor\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\", \"CategoryTheory.SimplicialObject.instSimplicialCategorySSet\"], \"digest\": \"3a5e87ce2dad1b2e\"}",
+   "date": "2026-10-17",
+   "verdict": "No coherent Yoneda construction or intermediate-quasicategory Kan mapping equivalence. Semantic hits and Loogle yoneda/IsLeftKanExtension are ordinary Type-valued presheaves; inspected Mathlib CategoryTheory/Limits/Presheaf.lean. EnrichedFunctor with yoneda has no hits; AlgebraicTopology grep has no hits. The existing project gives the rigidification and coherent covariant Hom, used here, but no contravariant Hom pairing or Yoneda transpose."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedFunctor\"",
+   "results": "{\"t\": \"2026-10-17T00:31:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedFunctor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.EnrichedFunctor\", \"CategoryTheory.EnrichedFunctor.id\", \"CategoryTheory.EnrichedFunctor.instInhabited\", \"CategoryTheory.EnrichedFunctor.category\", \"CategoryTheory.EnrichedFunctor.obj\", \"CategoryTheory.EnrichedFunctor.id_obj\", \"CategoryTheory.enrichedFunctorTypeEquivFunctor\", \"CategoryTheory.EnrichedFunctor.comp\"], \"digest\": \"15a24ee1f26a48dc\"}",
+   "date": "2026-10-17",
+   "verdict": "No coherent Yoneda construction or intermediate-quasicategory Kan mapping equivalence. Semantic hits and Loogle yoneda/IsLeftKanExtension are ordinary Type-valued presheaves; inspected Mathlib CategoryTheory/Limits/Presheaf.lean. EnrichedFunctor with yoneda has no hits; AlgebraicTopology grep has no hits. The existing project gives the rigidification and coherent covariant Hom, used here, but no contravariant Hom pairing or Yoneda transpose."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The coherent Yoneda embedding of a small quasicategory into space valued presheaves constructed by the enriched Hom pairing",
+   "results": "{\"t\": \"2026-10-17T00:35:43Z\", \"tool\": \"leansearch\", \"query\": \"The coherent Yoneda embedding of a small quasicategory into space valued presheaves constructed by the enriched Hom pairing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.yonedaMon\", \"CategoryTheory.yoneda\", \"CommMonCat.coyoneda\", \"CategoryTheory.coyoneda\", \"CategoryTheory.yonedaPairing\", \"CategoryTheory.Presheaf.restrictedYoneda\", \"CategoryTheory.Yoneda.fullyFaithful\", \"CategoryTheory.coherentTopology.isSheaf_yoneda_obj\"], \"digest\": \"06687ce667be1dce\"}",
+   "date": "2026-10-17",
+   "verdict": "No coherent Yoneda construction or intermediate-quasicategory Kan mapping equivalence. Semantic hits and Loogle yoneda/IsLeftKanExtension are ordinary Type-valued presheaves; inspected Mathlib CategoryTheory/Limits/Presheaf.lean. EnrichedFunctor with yoneda has no hits; AlgebraicTopology grep has no hits. The existing project gives the rigidification and coherent covariant Hom, used here, but no contravariant Hom pairing or Yoneda transpose."
+  },
+  {
+   "tool": "grep",
+   "query": "infinityYoneda|infinityPresheaves|yonedaPairing|yoneda.*[Qq]uasicategory",
+   "results": "{\"t\": \"2026-10-17T00:35:43Z\", \"tool\": \"grep\", \"query\": \"infinityYoneda|infinityPresheaves|yonedaPairing|yoneda.*[Qq]uasicategory\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No coherent Yoneda construction or intermediate-quasicategory Kan mapping equivalence. Semantic hits and Loogle yoneda/IsLeftKanExtension are ordinary Type-valued presheaves; inspected Mathlib CategoryTheory/Limits/Presheaf.lean. EnrichedFunctor with yoneda has no hits; AlgebraicTopology grep has no hits. The existing project gives the rigidification and coherent covariant Hom, used here, but no contravariant Hom pairing or Yoneda transpose."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedFunctor\", \"yoneda\"",
+   "results": "{\"t\": \"2026-10-17T00:37:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedFunctor\\\", \\\"yoneda\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No coherent Yoneda construction or intermediate-quasicategory Kan mapping equivalence. Semantic hits and Loogle yoneda/IsLeftKanExtension are ordinary Type-valued presheaves; inspected Mathlib CategoryTheory/Limits/Presheaf.lean. EnrichedFunctor with yoneda has no hits; AlgebraicTopology grep has no hits. The existing project gives the rigidification and coherent covariant Hom, used here, but no contravariant Hom pairing or Yoneda transpose."
+  },
+  {
+   "tool": "grep",
+   "query": "infinityYoneda|infinityPresheaves|yonedaPairing|yoneda.*[Qq]uasicategory",
+   "results": "{\"t\": \"2026-10-17T00:39:27Z\", \"tool\": \"grep\", \"query\": \"infinityYoneda|infinityPresheaves|yonedaPairing|yoneda.*[Qq]uasicategory\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No coherent Yoneda construction or intermediate-quasicategory Kan mapping equivalence. Semantic hits and Loogle yoneda/IsLeftKanExtension are ordinary Type-valued presheaves; inspected Mathlib CategoryTheory/Limits/Presheaf.lean. EnrichedFunctor with yoneda has no hits; AlgebraicTopology grep has no hits. The existing project gives the rigidification and coherent covariant Hom, used here, but no contravariant Hom pairing or Yoneda transpose."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"yoneda\", \"IsLeftKanExtension\"",
+   "results": "{\"t\": \"2026-10-17T00:39:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"yoneda\\\", \\\"IsLeftKanExtension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeUliftYonedaUliftYonedaMap\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeYonedaYonedaMap\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeIdCompUliftYonedaOfPreservesColimitsOfSizeOfHasPointwiseLeftKanExtension\", \"CategoryTheory.Presheaf.isLeftKanExtension_along_uliftYoneda_iff\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeLanOpHomCompULiftYonedaIsoULiftYonedaCompLan\"], \"digest\": \"0028b11074a1f378\"}",
+   "date": "2026-10-17",
+   "verdict": "No coherent Yoneda construction or intermediate-quasicategory Kan mapping equivalence. Semantic hits and Loogle yoneda/IsLeftKanExtension are ordinary Type-valued presheaves; inspected Mathlib CategoryTheory/Limits/Presheaf.lean. EnrichedFunctor with yoneda has no hits; AlgebraicTopology grep has no hits. The existing project gives the rigidification and coherent covariant Hom, used here, but no contravariant Hom pairing or Yoneda transpose."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The coherent Yoneda embedding of a small quasicategory into space valued presheaves constructed by the enriched Hom pairing",
+   "results": "{\"t\": \"2026-10-17T00:39:28Z\", \"tool\": \"leansearch\", \"query\": \"The coherent Yoneda embedding of a small quasicategory into space valued presheaves constructed by the enriched Hom pairing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.yonedaMon\", \"CategoryTheory.yoneda\", \"CommMonCat.coyoneda\", \"CategoryTheory.coyoneda\", \"CategoryTheory.yonedaPairing\", \"CategoryTheory.Presheaf.restrictedYoneda\", \"CategoryTheory.Yoneda.fullyFaithful\", \"CategoryTheory.coherentTopology.isSheaf_yoneda_obj\"], \"digest\": \"06687ce667be1dce\"}",
+   "date": "2026-10-17",
+   "verdict": "No coherent Yoneda construction or intermediate-quasicategory Kan mapping equivalence. Semantic hits and Loogle yoneda/IsLeftKanExtension are ordinary Type-valued presheaves; inspected Mathlib CategoryTheory/Limits/Presheaf.lean. EnrichedFunctor with yoneda has no hits; AlgebraicTopology grep has no hits. The existing project gives the rigidification and coherent covariant Hom, used here, but no contravariant Hom pairing or Yoneda transpose."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Colimit preserving functors from space valued presheaves are left Kan extensions on intermediate full infinity subcategories",
+   "results": "{\"t\": \"2026-10-17T00:39:28Z\", \"tool\": \"leanfinder\", \"query\": \"Colimit preserving functors from space valued presheaves are left Kan extensions on intermediate full infinity subcategories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isLeftKanExtension_of_preservesColimits\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeIdCompUliftYonedaOfPreservesColimitsOfSizeOfHasPointwiseLeftKanExtension\", \"CategoryTheory.Presheaf.isLeftKanExtension_along_uliftYoneda_iff\", \"CategoryTheory.Presheaf.preservesColimitsOfSize_of_isLeftKanExtension\", \"CategoryTheory.Presheaf.isLeftKanExtension_along_yoneda_iff\", \"CategoryTheory.Presheaf.preservesColimitsOfSize_leftKanExtension\", \"instIsLeftKanExtensionSimplexCategoryTopCatSSetToTopInvFunctorToTopSimplex\", \"CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeLanOpHomCompULiftYonedaIsoULiftYonedaCompLan\"], \"digest\": \"ca97b1b296943f35\"}",
+   "date": "2026-10-17",
+   "verdict": "No coherent Yoneda construction or intermediate-quasicategory Kan mapping equivalence. Semantic hits and Loogle yoneda/IsLeftKanExtension are ordinary Type-valued presheaves; inspected Mathlib CategoryTheory/Limits/Presheaf.lean. EnrichedFunctor with yoneda has no hits; AlgebraicTopology grep has no hits. The existing project gives the rigidification and coherent covariant Hom, used here, but no contravariant Hom pairing or Yoneda transpose."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EnrichedFunctor\", \"yoneda\"",
+   "results": "{\"t\": \"2026-10-17T00:41:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"EnrichedFunctor\\\", \\\"yoneda\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "No coherent Yoneda construction or intermediate-quasicategory Kan mapping equivalence. Semantic hits and Loogle yoneda/IsLeftKanExtension are ordinary Type-valued presheaves; inspected Mathlib CategoryTheory/Limits/Presheaf.lean. EnrichedFunctor with yoneda has no hits; AlgebraicTopology grep has no hits. The existing project gives the rigidification and coherent covariant Hom, used here, but no contravariant Hom pairing or Yoneda transpose."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-infinity-intermediate-presheaf-kan",
+  "date": "2026-10-17",
+  "group": "Q63"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InfinityPresheafYoneda",
+  "declaration": "CategoryTheory.Spaces.infinityYoneda",
+  "declarations": [
+   "CategoryTheory.Spaces.YonedaSimplex",
+   "CategoryTheory.Spaces.yonedaReverse",
+   "CategoryTheory.Spaces.yonedaReversePaths",
+   "CategoryTheory.Spaces.yonedaPairValue",
+   "CategoryTheory.Spaces.yonedaPairMap",
+   "CategoryTheory.Spaces.yonedaPair_laws",
+   "CategoryTheory.Spaces.yonedaPairSimplex",
+   "CategoryTheory.Spaces.yonedaRigidSimplex",
+   "CategoryTheory.Spaces.yonedaPair_naturality",
+   "CategoryTheory.Spaces.yonedaPairing",
+   "CategoryTheory.Spaces.infinityPresheaves",
+   "CategoryTheory.Spaces.infinityYoneda"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InfinityPresheafYoneda.lean",
+  "statement": "def infinityYoneda (D : SSet.{u}) : SSet.uliftFunctor.{u + 1, u}.obj D ⟶ infinityPresheaves D",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Explicit subset-path reflection and pre/postcomposition in the existing singular-realization rigidification enrichment construct the whole coherent Hom pairing. Its exponential transpose is Yoneda. The only postponed proofs are its named enriched-functor laws and simplicial naturality; no data is sorry and no map is chosen from existence. Reuses existing infinityCategory, rigidification, topEnrichment and corepresentedValue."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-42a09f79d",
+  "group": "Q63",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-42a09f79d",
+  "group": "Q63",
+  "result": "pass",
+  "note": "Checked every clause of SSet.Enhanced.intermediate_presheaf_kan against the node: small universe u kept apart from the max(u+1) v ambient; P(D) = ihom(ulift opFunctor D, infinityCategory.{u}); E = fullSubcomplex P with hreplete and hy, equivalent to replete full containing the essential image; y_E = Subcomplex.lift; Z/H with hZ/hH over all I : SSet.{u}; G unrestricted. The conclusion is the actual mappingSpaceMap of MonoidalClosed.pre y_E being a weak equivalence, plus contractible homotopy fibres, parameter naturality and further-restriction compatibility. No extra hypotheses; node statement/proof/source equal the side DAG; lean.statement strings verbatim. New definition node def-coef-infinity-presheaf-yoneda is a genuine missing notion (no Lean Yoneda in Mathlib, upstream or lean/Sheaf; DAG Yoneda nodes are lean:null theorems). Construction checked against HTT 5.1.3 p.320 (Sing|C[D](s'(n-i),t(i))|, reflected-path precomposition then postcomposition, eComp argument order, opFunctor = rev); yonedaPair_naturality and yonedaPair_laws are true, postponed with proof docstrings, same pattern as landed corepresented_laws. Only sorry proofs (3), docstrings with source/blueprint, lines <= 100. nt_compile.py --json with both files: exit 0, no diagnostics (1.8 s and 1.6 s). Edge cases: empty D, point, E = representables or all of P(D), empty mapping spaces, n = 0, u/v universe choices. Informational: the private import of Sheaf.CategoryTheory.InfinityFullEssentialImage (landed 47 s after this commit) is the maintainer's post-build addition."
+ }
+}

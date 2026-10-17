@@ -27,7 +27,9 @@
  },
  "stmt_deps": [
   "def-cbc-enhanced-diagrams-cones",
-  "def-coef-infinity-category-of-spaces"
+  "def-coef-infinity-category-of-spaces",
+  "def-coef-infinity-presheaf-yoneda",
+  "lem-coef-infinity-sifted-colimit-calculus"
  ],
  "proof": [
   {
@@ -185,5 +187,33 @@
   "group": "Q03",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-59f36ff1e (reviewer sub-agent of L); spot-checked: Read the item, the new node and every cited statement in full (def-cbc, def-coef-infinity-category-of-spaces, yoneda-evaluation, full-essential-image, relative-cone-equivalence (1)-(4), kan-mapping-restriction, cbc functor-cone-calculus, def-coef-infinity-relative-cone). Also read the ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2 and the unit record. The item statement is true and unchanged; it follows HTT 5.1.5.3/5.1.5.5(1) and Kerodon 7.3.6.9. Small cases checked: D empty, D a point, E=A, E=P(D). The new node presheaf-representable-slice-density is HTT 5.1.5.3 in replete form and is true: A_{/F} is equivalent to D x_{P(D)} P(D)_{/F}, which is U-small. It is self-contained, statement-only and not a clause of the item. It is not a duplicate of space-yoneda-density, presheaf-free-cocompletion (where this appears only inside the proof), yoneda-presheaf-limits or accessible-compact-slice-density. Three repairable faults were fixed in fixes/.../lem-coef-infinity-intermediate-presheaf-kan.json. (1) C3/E5, step 1: full faithfulness was argued from an abstract identification Map(yd,yd') = y(d')(d), which does not show that the map induced by y is an equivalence. It now cites the Yoneda full-faithfulness clause of lem-coef-infinity-yoneda-presheaf-limits (same unit, no cycle), and yoneda-evaluation is dropped. (2) C1, step 2: relative-cone-equivalence(2) is about p-colimit diagrams, while the new node, H's hypothesis and kan-mapping-restriction use def-cbc colimiting cocones. The identification over Delta^0 is now written out through lem-coef-infinity-relative-cone-constant-test plus the cocone criterion of cone-calculus (the lower row is Delta^0 -> Delta^0, so the path pullback is the corner). (3) B3: the item's stmt_deps add def-coef-infinity-category-of-spaces for S_U. proof_deps are updated and the split_report is annotated. Accepted tool use: lem-cbc-enhanced-functor-cone-calculus (generic quasicategory calculus, steps 2 and 4). Steps 3-4 were checked against the kan-mapping-restriction hypotheses and the whiskering/precomposition argument, and are correct. HTT and Kerodon are not archived (WANTED already recorded). Citation quotes for steps 1-2 need refreshing.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-42a09f79d",
+  "group": "Q63",
+  "result": "pass",
+  "note": "Checked every clause of SSet.Enhanced.intermediate_presheaf_kan against the node: small universe u kept apart from the max(u+1) v ambient; P(D) = ihom(ulift opFunctor D, infinityCategory.{u}); E = fullSubcomplex P with hreplete and hy, equivalent to replete full containing the essential image; y_E = Subcomplex.lift; Z/H with hZ/hH over all I : SSet.{u}; G unrestricted. The conclusion is the actual mappingSpaceMap of MonoidalClosed.pre y_E being a weak equivalence, plus contractible homotopy fibres, parameter naturality and further-restriction compatibility. No extra hypotheses; node statement/proof/source equal the side DAG; lean.statement strings verbatim. New definition node def-coef-infinity-presheaf-yoneda is a genuine missing notion (no Lean Yoneda in Mathlib, upstream or lean/Sheaf; DAG Yoneda nodes are lean:null theorems). Construction checked against HTT 5.1.3 p.320 (Sing|C[D](s'(n-i),t(i))|, reflected-path precomposition then postcomposition, eComp argument order, opFunctor = rev); yonedaPair_naturality and yonedaPair_laws are true, postponed with proof docstrings, same pattern as landed corepresented_laws. Only sorry proofs (3), docstrings with source/blueprint, lines <= 100. nt_compile.py --json with both files: exit 0, no diagnostics (1.8 s and 1.6 s). Edge cases: empty D, point, E = representables or all of P(D), empty mapping spaces, n = 0, u/v universe choices. Informational: the private import of Sheaf.CategoryTheory.InfinityFullEssentialImage (landed 47 s after this commit) is the maintainer's post-build addition."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.IntermediatePresheafKan",
+  "declaration": "SSet.Enhanced.intermediate_presheaf_kan",
+  "declarations": [
+   "SSet.Enhanced.intermediatePresheafAmbient",
+   "SSet.Enhanced.intermediatePresheafSource",
+   "SSet.Enhanced.intermediatePresheafYoneda",
+   "SSet.Enhanced.intermediateYoneda",
+   "SSet.Enhanced.intermediatePresheafRestriction",
+   "SSet.Enhanced.intermediatePresheafMappingRestriction",
+   "SSet.Enhanced.intermediate_presheaf_kan"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/IntermediatePresheafKan.lean",
+  "statement": "theorem intermediate_presheaf_kan (D : SSet.{u}) [Quasicategory D] (P : (intermediatePresheafAmbient.{u, v} D) _⦋0⦌ → Prop) (hreplete : ∀ e : (intermediatePresheafAmbient.{u, v} D) _⦋1⦌, IsEquivalenceEdge (intermediatePresheafAmbient.{u, v} D) e → (P ((intermediatePresheafAmbient.{u, v} D).δ 1 e) ↔ P ((intermediatePresheafAmbient.{u, v} D).δ 0 e))) (hy : Subcomplex.range (intermediatePresheafYoneda.{u, v} D) ≤ fullSubcomplex (intermediatePresheafAmbient.{u, v} D) P) (Z : SSet.{max (u + 1) v}) [Quasicategory Z] (hZ : ∀ I : SSet.{u}, HasInfinityColimitsOfShape (SSet.uliftFunctor.{max (u + 1) v, u}.obj I) Z) (H : intermediatePresheafAmbient.{u, v} D ⟶ Z) (hH : ∀ I : SSet.{u}, PreservesInfinityColimitsOfShape (SSet.uliftFunctor.{max (u + 1) v, u}.obj I) H) (G : (fullSubcomplex (intermediatePresheafAmbient.{u, v} D) P).toSSet ⟶ Z) : IsWeakHomotopyEquivalence (intermediatePresheafMappingRestriction D P hy H G) ∧ (∀ b, IsContractible (homotopyFiber (intermediatePresheafMappingRestriction D P hy H G) b)) ∧ (∀ (K : SSet.{max (u + 1) v}) (T : K ⟶ (ihom (fullSubcomplex (intermediatePresheafAmbient D) P).toSSet).obj Z), MonoidalClosed.uncurry (T ≫ intermediatePresheafRestriction D P hy Z) = intermediateYoneda D P hy ▷ K ≫ MonoidalClosed.uncurry T) ∧ (∀ (Q : (intermediatePresheafAmbient.{u, v} D) _⦋0⦌ → Prop) (hQP : fullSubcomplex (intermediatePresheafAmbient D) Q ≤ fullSubcomplex (intermediatePresheafAmbient D) P) (hyQ : Subcomplex.range (intermediatePresheafYoneda.{u, v} D) ≤ fullSubcomplex (intermediatePresheafAmbient D) Q), (MonoidalClosed.pre (Subcomplex.homOfLE hQP)).app Z ≫ intermediatePresheafRestriction D Q hyQ Z = intermediatePresheafRestriction D P hy Z)",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Actual restriction on right-pinched transformation spaces, its contractible homotopy fibers, arbitrary simplicial-parameter naturality and further full-subcategory restriction. The independent ambient universe does not enlarge the small-colimit universe. Yoneda is explicitly constructed in the new definition node, not assumed or chosen."
  }
 }

@@ -25,7 +25,17 @@
   "place": "HTT Theorem 2.2.1.2 (contravariant straightening, printed p.74) and its covariant dual, together with Proposition 4.2.4.4 (coherent diagram comparison, printed p.258), for the full coherent classification. Kerodon Notation 7.4.2.1 and Theorem 7.4.2.4 with Remark 7.4.2.5 (05R5) specify the locally Kan fibration model and distinguish its homotopy-category comparison from the full upgrade. Kerodon Proposition 8.3.3.2 (03N2), Proposition 8.3.5.5 (03NK), and Subsection 5.6.6 (02HU) give the Hom-functor and identity/representable compatibilities. Read online, not archived in literature/. No matching Stacks tag."
  },
  "stmt_deps": [
-  "def-cbc-enhanced-diagrams-cones"
+  "def-cbc-enhanced-diagrams-cones",
+  "def-coef-infinity-fibrations",
+  "lem-coef-hammock-infinity-localization",
+  "lem-coef-infinity-arrow-target-right-fibration",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-infinity-pinch-comparison",
+  "lem-coef-infinity-pushout-join-saturation",
+  "lem-coef-infinity-slice-arrow-equivalence",
+  "lem-coef-infinity-slice-right-fibration",
+  "def-cbc-enhanced-cartesian-fibration",
+  "lem-coef-twisted-arrow-left-fibration"
  ],
  "proof": [
   {
@@ -264,5 +274,68 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-277fef557",
+  "group": "NF",
+  "result": "pass",
+  "note": "Clause-by-clause match: U∈U' as u and max(u+1) v with no resizing; S_U is the SimplicialNerve of Kan complexes with the canonical enrichment (checked by #synth and rfl). One classifier family T for every base and both variances: IsFunctorEquivalence and IsFullyFaithful to the coherent nerve of the enriched left/right fibration category with essentially-small fibers; the fiber clause gives a weak equivalence to F(a); Map ≃ Fun_{/A} on the actual over-base subcomplex, Kan for every pair. The canonical nerve comparison matches CoherentMappingComparison; its identity is definitionally eId (rfl probe). Coherent base change is one equivalence edge into CatInfinity with strict restriction and pullback edges; constants, small representatives and the right-fibration dual are present. The Hom bifunctor is normalized by twistedArrow, pinch, arrow and slice models, row/column/slice coherence, identity, and pre/postcomposition on whole triangle spaces with correct edge variances. Edge cases (empty A, Δ0, non-quasicategory bases, empty spaces) are kept. One sorry with the eight-step proof docstring; source and blueprint docstrings on every declaration; statement verbatim; declaration list exact; only the item node changed. nt_compile: no errors (3.9 s), and the probe imports compiled. Non-blocking: stmt_deps pushout-join-saturation and slice-right-fibration are unused leftovers; identical helpers exist in two unrelated lemma modules (spaceCategory, HasSmallMappingSpaces)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SpaceTransportClassification",
+  "declaration": "SSet.Enhanced.space_transport_classification",
+  "declarations": [
+   "SSet.Enhanced.smallSpaces",
+   "SSet.Enhanced.smallSpaceValue",
+   "SSet.Enhanced.IsEssentiallySmallSpace",
+   "SSet.Enhanced.transportOverHomSubcomplex",
+   "SSet.Enhanced.transportOverHom",
+   "SSet.Enhanced.TransportFibration",
+   "SSet.Enhanced.transportFibrationEnrichment",
+   "SSet.Enhanced.transportFibrations",
+   "SSet.Enhanced.transportFibrationValue",
+   "SSet.Enhanced.transportHomVertex",
+   "SSet.Enhanced.TransportOverEquivalence",
+   "SSet.Enhanced.transportSpaces",
+   "SSet.Enhanced.transportDomain",
+   "SSet.Enhanced.transportBaseMap",
+   "SSet.Enhanced.transportDomainVertex",
+   "SSet.Enhanced.transportDiagrams",
+   "SSet.Enhanced.smallTransportFibrations",
+   "SSet.Enhanced.transportValue",
+   "SSet.Enhanced.TransportClassifier",
+   "SSet.Enhanced.TransportClassifier.representative",
+   "SSet.Enhanced.TransportPullback",
+   "SSet.Enhanced.TransportPullback.nerveMap",
+   "SSet.Enhanced.TransportNerveComparison",
+   "SSet.Enhanced.TransportClassificationClauses",
+   "SSet.Enhanced.TransportSmallRepresentatives",
+   "SSet.Enhanced.transportHomRow",
+   "SSet.Enhanced.transportHomColumn",
+   "SSet.Enhanced.transportHomValue",
+   "SSet.Enhanced.transportSourceArrows",
+   "SSet.Enhanced.transportSourceTarget",
+   "SSet.Enhanced.transportThickEdge",
+   "SSet.Enhanced.transportSmallEdgeMap",
+   "SSet.Enhanced.transportPostTriangles",
+   "SSet.Enhanced.transportPreTriangles",
+   "SSet.Enhanced.HomTransportActions",
+   "SSet.Enhanced.HomTransport",
+   "SSet.Enhanced.TransportLocallySmall",
+   "SSet.Enhanced.transportCatEdgeMap",
+   "SSet.Enhanced.transportBaseNerve",
+   "SSet.Enhanced.transportBaseVertex",
+   "SSet.Enhanced.CoherentTransportBaseChange",
+   "SSet.Enhanced.space_transport_classification"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SpaceTransportClassification.lean",
+  "statement": "theorem space_transport_classification : Quasicategory transportSpaces.{u, v} ∧ ∃ T : ∀ (A : SSet.{max (u + 1) v}) (left : Bool), TransportClassifier.{u, v} A left, (∀ (A : SSet.{max (u + 1) v}) (left : Bool), TransportClassificationClauses (T A left)) ∧ (∀ left : Bool, Nonempty (CoherentTransportBaseChange T left)) ∧ TransportSmallRepresentatives T ∧ (∀ (E : SSet.{max (u + 1) v}) [Quasicategory E], TransportLocallySmall.{u, v} E → Nonempty (HomTransport E T))",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Explicit coherent-nerve presentations of spaces and the simplicially enriched category of fibrations. Helpers specify classification, coherent base change, and normalized Hom transport with independent coefficient and ambient universes. The final second reading uses the newly landed Q67 twistedArrow and twistedProjection directly; the duplicate dependency module and its node copy were removed. The proof-only import of the newly landed simplicial-model nerve localization is included. No natural-language statement or proof changed."
  }
 }
