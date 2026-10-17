@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-zl-open-closed-weight",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Open–closed weight devissage",
@@ -17,30 +17,95 @@
  ],
  "proof": [
   {
-   "text": "The localization triangle is the open–closed recollement triangle of\n[def-weil-open-closed-recollement], which exists for $\\Qlb$-Weil complexes by [prop-sf-open-closed-triangle-all-stages]; by hypothesis its two outer\nterms lie in $D_{\\le w}(X_0)$, so the extension stability of complex\nweights [lem-zl-complex-extension] gives $K\\in D_{\\le w}(X_0)$.\n(The closed-immersion term $i_*i^*K$ is a finite-pushforward, hence\nhas the same weights as $i^*K$ by [lem-zl-finite-pushforward].)",
+   "text": "Use the finite-field and coefficient conventions of [def-weil-complex-weights]: $X_0$ is separated of finite type over $k_0=\\mathbf F_q$, $k$ is its fixed algebraic closure, $\\ell\\ne\\operatorname{char}(k_0)$, $\\iota:\\Qlb\\xrightarrow{\\sim}\\mathbf C$ and $w\\in\\mathbf R$ are fixed, and $K$ is a bounded constructible $\\Qlb$-Weil complex on $X=X_0\\times_{k_0}k$. Base change the complementary immersions $j,i$ to $k$ and retain their names. Apply [prop-sf-open-closed-triangle-all-stages] with $\\Lambda=\\Qlb$. It supplies the distinguished triangle $A\\to K\\to B\\to A[1]$, where $A=j_!j^*K$ and $B=i_*i^*K$. Its final clause says all three arrows are Weil-equivariant, since both immersions descend to $k_0$. Thus $A$, $K$, $B$ are $\\Qlb$-Weil complexes in the sense of [def-weil-weil-sheaf-complex], built on $D^b_c(X,\\Qlb)=\\mathcal C_X$, the same category on which [def-weil-complex-weights] defines $D_{\\le w}(X_0)$; the three arrows are morphisms of Weil complexes, and the underlying triangle is distinguished in $D^b_c(X,\\Qlb)$. Since the category of Weil complexes carries no triangulated structure of its own, this is what a distinguished triangle in the constructible $\\Qlb$-Weil categories means. Its two outer objects are exactly those of the hypothesis.",
    "uses": [
-    "def-weil-open-closed-recollement",
-    "prop-sf-open-closed-triangle-all-stages",
-    "lem-zl-complex-extension",
-    "lem-zl-finite-pushforward"
+    "def-weil-complex-weights",
+    "def-weil-weil-sheaf-complex",
+    "prop-sf-open-closed-triangle-all-stages"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-open-closed-weight.proof.md",
+    "place": "Proof, first sentence: existence of the localization triangle for Qbar_l-Weil complexes."
+   }
+  },
+  {
+   "text": "The hypotheses give $A\\in D_{\\le w}(X_0)$ and $B\\in D_{\\le w}(X_0)$ for the same real number $w$. Apply [lem-zl-complex-extension] to the triangle of step 1, with $K^{\\prime}=A$ and $K^{\\prime\\prime}=B$. Its hypotheses ask that $K^{\\prime}$ and $K^{\\prime\\prime}$ lie in $D_{\\le w}(X_0)$ in the sense of [def-weil-complex-weights], a predicate defined only on the Weil complexes over $D^b_c(X,\\Qlb)$ described in step 1, so the lemma is applied to triangles of exactly those objects and no other coefficient category enters. Its conclusion is $K\\in D_{\\le w}(X_0)$, as required. No bound on the unpushed restriction $i^*K$ is needed: the assumed bound is already on $B=i_*i^*K$.",
+   "uses": [
+    "def-weil-complex-weights",
+    "lem-zl-complex-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-open-closed-weight.proof.md",
+    "place": "Proof, first sentence: extension stability applied to the two outer terms."
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-open-closed-recollement",
+  "def-weil-complex-weights",
+  "def-weil-weil-sheaf-complex",
   "prop-sf-open-closed-triangle-all-stages",
-  "lem-zl-complex-extension",
-  "lem-zl-finite-pushforward"
+  "lem-zl-complex-extension"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-open-closed-weight.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-open-closed-weight.proof.md",
+  "place": "Proof, first sentence; the optional finite-pushforward parenthesis is unused."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WeilComplex|MixedOfWeights|recollement|openClosed",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: generic t-structure or triangle-closure results do not supply the Weil weight predicate or its extension stability; the localization triangle and weight-extension theorem are existing DAG nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Upper weights of Weil complexes are closed under extensions along a distinguished localization triangle",
+   "results": "CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₂'; CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₁'; CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle; CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₃; HomotopyCategory.Pretriangulated.distinguishedTriangles; CategoryTheory.Triangulated.Localization.pretriangulated; CategoryTheory.Triangulated.Localization.instAdditiveLocalization'ShiftFunctorInt; CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization'",
+   "date": "2026-10-17",
+   "verdict": "no match: generic t-structure or triangle-closure results do not supply the Weil weight predicate or its extension stability; the localization triangle and weight-extension theorem are existing DAG nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilComplex\"",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match: generic t-structure or triangle-closure results do not supply the Weil weight predicate or its extension stability; the localization triangle and weight-extension theorem are existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a distinguished open closed localization triangle of constructible Weil complexes, upper weight bounds on both outer terms imply the same upper weight bound on the middle term",
+   "results": "CategoryTheory.Triangulated.TStructure.instIsGEObj₃ObjTriangleTriangleLTGE; CategoryTheory.Triangulated.TStructure.instIsLEObj₁ObjTriangleTriangleLTGEHSubIntOfNat; CategoryTheory.Triangulated.TStructure.isGE_of_GE; CategoryTheory.Triangulated.TStructure.triangleLTGE_distinguished; CategoryTheory.Triangulated.TStructure.isLE_of_LE; CategoryTheory.Triangulated.TStructure.le_of_isLE; CategoryTheory.Triangulated.TStructure.IsLE.le; CategoryTheory.Triangulated.TStructure.exists_triangle",
+   "date": "2026-10-17",
+   "verdict": "no match: generic t-structure or triangle-closure results do not supply the Weil weight predicate or its extension stability; the localization triangle and weight-extension theorem are existing DAG nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "ext_of_isTriangulatedClosed₂|class IsTriangulatedClosed₂|class IsTriangulatedClosed₁|class IsTriangulatedClosed₃",
+   "results": "Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Subcategory.lean; scope Mathlib/CategoryTheory/Triangulated",
+   "date": "2026-10-17",
+   "verdict": "no match: generic t-structure or triangle-closure results do not supply the Weil weight predicate or its extension stability; the localization triangle and weight-extension theorem are existing DAG nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "class IsTriangulatedClosed|lemma ext_of_isTriangulatedClosed|def IsTriangulatedClosed",
+   "results": "Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; scope Mathlib/CategoryTheory/Triangulated",
+   "date": "2026-10-17",
+   "verdict": "no match: generic t-structure or triangle-closure results do not supply the Weil weight predicate or its extension stability; the localization triangle and weight-extension theorem are existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mixed ell adic Weil complexes on a finite field scheme: extension by zero on an open and closed direct image form a triangle and weights at most w are stable under this triangle",
+   "results": "CategoryTheory.Triangulated.TStructure.IsGE; CategoryTheory.Triangulated.TStructure.ge; CategoryTheory.Triangulated.TStructure.le; DerivedCategory.TStructure.t; CategoryTheory.Triangulated.TStructure.instIsGEObj₃ObjTriangleTriangleLTGE; DerivedCategory.IsGE; DerivedCategory.IsLE; CategoryTheory.Triangulated.TStructure.exists_triangle",
+   "date": "2026-10-17",
+   "verdict": "no match: generic t-structure or triangle-closure results do not supply the Weil weight predicate or its extension stability; the localization triangle and weight-extension theorem are existing DAG nodes"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -117,5 +182,20 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-zl-open-closed-weight",
+  "worker": "stage1",
+  "summary": "Two-step split with no new nodes: obtain the distinguished Qbar_l-Weil localization triangle from the existing all-stages proposition, then apply the existing complex-weight extension theorem. Checked both blueprint snapshots and all three cited node statements. Kept the statement verbatim, made its weight-definition context explicit in the proof, and removed the unused finite-pushforward remark and the finite-only recollement definition from proof dependencies. Current source has sorry in of_openClosed; both legacy open audit entries already have existing DAG nodes. Mathlib searches returned generic triangulated/t-structure tools, not this weight assertion.",
+  "blueprint": "lem-zl-open-closed-weight, current main-20261015 proof first sentence: step 1 realizes its localization-triangle existence clause; step 2 realizes its application of lem-zl-complex-extension. The parenthetical finite-pushforward sentence is unnecessary to this implication, whose hypothesis already bounds the pushed closed term."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-bc023a751",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-bc023a751 (reviewer sub-agent of L); spot-checked: I read the full math: the item, both blueprint copies (main-20261015 proof.md and master order 2815, identical), unit sk-l-dl-general-excision, the chapter, and the full statements of def-weil-complex-weights, prop-sf-open-closed-triangle-all-stages and lem-zl-complex-extension. I also read the dropped def-weil-open-closed-recollement (finite level A_{E,n} only, so dropping it is correct) and lem-zl-finite-pushforward (it only preserves an upper bound and is not needed, because the hypothesis already bounds i_*i^*K). FormalSteps.lean:249 is sorry at 263, so there is nothing to attach. Step 1 hypotheses all hold: X is separated of finite type over k, the immersions are complementary, Lambda=Qbar is allowed, and the Weil-equivariance clause applies because X, Z, U and K descend to k_0. Step 2 matches the triangle orientation and the common bound w. Both statement uses are in units the excision unit cites, and there are no tool uses. Edge cases checked: K=0, U empty, Z empty, disjoint X. There are no new nodes and no duplicates. Repair: step 1 silently treated the C_X-based triangle as one in the Weil categories that lem-zl-complex-extension attributes to def-weil-pbc-qbar-category, a different chain (pbc rational and etale-origin integral stages) linked to C_X only by a same_as with no comparison theorem. That lemma's hypotheses are posed through def-weil-complex-weights, which is defined only on def-weil-weil-sheaf-complex objects over C_Y. So the coherent reading needs no comparison. The fixed item now states the category explicitly in steps 1 and 2, explains what 'distinguished' means for the non-triangulated Weil category, and adds def-weil-weil-sheaf-complex to the uses and def-weil-complex-weights to step 2. Maintenance follow-up: lem-zl-complex-extension's citation of def-weil-pbc-qbar-category should be corrected when it is split or when the two Qbar chains are merged.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -113,13 +113,15 @@
    }
   },
   {
-   "text": "For every small family $(M_a)$ of $R$-module sheaves the comparison $L\\otimes_R\\prod_aM_a\\to\\prod_a(L\\otimes_RM_a)$ is an isomorphism. Indeed, restrict to an object $U$ of a single covering trivializing $L$. By [def-pur-localized-ringed-site], restriction is evaluation on the over-site, and [lem-weil-pbc-module-sheaves-limits-sectionwise] shows that it commutes with the displayed product. Tensor restricts to tensor: by [def-pur-sheaf-tensor-product], both sides are obtained by sheafifying the sectionwise tensor presheaf, and on any object over $U$ the covering families in the localized site are exactly the original covering families. Where $L|_U\\cong R_U^{\\oplus r}$, the comparison is the coordinate reindexing isomorphism\n$$(\\prod_aM_a|_U)^{\\oplus r}\\cong\\prod_a(M_a|_U)^{\\oplus r}.$$\nFor finite $r$, the inverse groups together the $r$ coordinates for each $a$; this includes $r=0$ and the empty family. These inverses agree on overlaps because both invert the restriction of the same comparison; the sheaf axiom glues them to a global inverse. This local calculation requires neither a uniform rank nor a global free presentation.",
+   "text": "For every small family $(M_a)$ of $R$-module sheaves the comparison $L\\otimes_R\\prod_aM_a\\to\\prod_a(L\\otimes_RM_a)$ is an isomorphism. Indeed, restrict to an object $U$ of a single covering trivializing $L$. By [def-pur-localized-ringed-site], restriction is evaluation on the over-site, and [lem-weil-pbc-module-sheaves-limits-sectionwise] shows that it commutes with the displayed product. Tensor restricts to tensor: [lem-sfb-localized-site-tensor-restriction] gives $(L\\otimes_RN)|_U\\cong L|_U\\otimes_{R_U}N|_U$ naturally in $N$, so the comparison restricts to the comparison for $L|_U$ and the family $(M_a|_U)$. Where $L|_U\\cong R_U^{\\oplus r}$, additivity of tensor and its unit isomorphism [lem-pc-sheaf-modules-tensor-closed] identify $R_U^{\\oplus r}\\otimes_{R_U}N$ with $N^{\\oplus r}$ naturally in $N$, so the comparison is the coordinate reindexing isomorphism\n$$(\\prod_aM_a|_U)^{\\oplus r}\\cong\\prod_a(M_a|_U)^{\\oplus r}.$$\nFor finite $r$, the inverse groups together the $r$ coordinates for each $a$; this includes $r=0$ and the empty family. These inverses agree on overlaps because both invert the restriction of the same comparison; the sheaf axiom glues them to a global inverse. This local calculation requires neither a uniform rank nor a global free presentation.",
    "uses": [
     "def-pur-localized-ringed-site",
     "lem-weil-pbc-module-sheaves-limits-sectionwise",
-    "def-pur-sheaf-tensor-product"
+    "def-pur-sheaf-tensor-product",
+    "lem-sfb-localized-site-tensor-restriction",
+    "lem-pc-sheaf-modules-tensor-closed"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-formal-closed-support-ii/sk-lem-formal-closed-support-ii-limits.proof.md",
     "place": "Tensoring with L paragraph; explicit local finite-coordinate product argument"
@@ -170,14 +172,15 @@
   "lem-weil-pbc-left-adjoint-preserves-colimits",
   "def-pc-kflat-complex",
   "lem-weil-pbc-site-derived-tensor-descent",
+  "def-sfb-derived-tensor-modules",
+  "lem-sfb-derived-monoidal",
   "def-pur-localized-ringed-site",
   "def-pur-sheaf-tensor-product",
+  "lem-sfb-localized-site-tensor-restriction",
   "lem-weil-derived-limit-existence",
   "def-weil-derived-limit",
   "def-weil-triangulated-category",
-  "lem-sf-triangle-morphism-iso",
-  "def-sfb-derived-tensor-modules",
-  "lem-sfb-derived-monoidal"
+  "lem-sf-triangle-morphism-iso"
  ],
  "proof_origin": {
   "by": "agent",
@@ -271,7 +274,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -374,12 +377,12 @@
   "lem-sfb-derived-monoidal"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q37-59d5b6de5",
-  "group": "Q37",
+  "reviewer": "NT-cc-Q144-05413a78b",
+  "group": "Q144",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-59d5b6de5 (reviewer sub-agent of L); spot-checked: I read the whole delivery and the mathematics is correct; I repaired one citation gap in step 5. Statement: it keeps all seven functors, arbitrary small products, unbounded categories and every tower, for the admissible Λ list of the reviewed parent sk-lem-formal-closed-support-ii. The STATEMENT-DISPUTED correction is justified. Stacks derived.tex Tag 08TC (definition-derived-limit, lines 10442-10461) gives derived limits only up to non-unique isomorphism, and I checked the D(Ab) split-fiber automorphism (a,b)->(a,b+a). The new 'Roos triangle goes to Roos triangle, and every completing comparison is invertible' wording matches the reviewed parent, lem-pc-derived-functor-commutes-derived-limit and lem-cbc-exact-functor-rlim. No target is weakened. Steps checked against the cited statements: (1) sk-prop-sfb-cartesian-coefficients (final clause); the immersion-limit lemma, matching Stacks 09AA lemma-closed-immersion (1); Stacks 015F; det-pe-products-derived on source and target. (2) Unit naturality on projections and coordinatewise kernels give the product claim; the finite-limit argument gives left exactness without exactness of j_*. (3) Stacks 079P and 0BK6 (lines 9700-9705); the def-sfb-right-derived-functor value on K-injectives; target products are termwise. (4) Right derived functors are triangulated, and sk-lem-formal-closed-support (1) identifies RG with i^*fib. (5) Tensor exactness via the finite-free node, Stacks 03EO and left adjoints, plus K-flat descent (06YS/0G7D/06YT/06YU, labels checked). FIX here: the step identified only the descent node's tensor bifunctor, but the statement uses the derived tensor of def-sfb-derived-tensor-modules. I added lem-sfb-derived-monoidal (computed by K-flat resolutions) and the uniqueness/extension clause to identify the two, added both ids to the step's uses and to proof_deps, and declared lem-sfb-derived-monoidal in split_report.tool_uses. (6) Local finite-coordinate product argument; tested r=0, rank 1, different ranks on different components, the empty family and S empty. (7) Elementary and correct. (8) Index convention pr_n s = t_n pr_{n+1} matches 08TC; the 1-s square, the shift map and the connecting map are right; TR1, TR3 and Stacks 014A give invertibility. Edge cases Z empty, Z=X, L=0 and the zero tower all hold. No new nodes. The DAG search found no duplicate; the closest are the parent, lem-pc-derived-functor-commutes-derived-limit and lem-cbc-exact-functor-rlim. A dependency traversal of 2439 nodes found no cycle. No SGA is cited. Accepted tool_uses: all 14 the worker declared, plus lem-sfb-derived-monoidal. Note for later, not a fault of this delivery: the citer det-prop-diagonal-tower-limit still uses the old 'natural map' wording, but the corrected clause still supplies what it uses. Corrected file: fixes/dag/nodes/sec-six-functors-basics/det-formal-closed-support-ii-limits.json; details in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-05413a78b (reviewer sub-agent of L); spot-checked: I read the whole item in full. That is all eight steps, the statements of all 26 cited nodes, the unit, the blueprint main-20261015 statement and proof, and the Stacks sources 09AA, 0BK6, 08TC, 03DH and 03EL. The delivery only changes the status to split; the reviewed proof already existed. The statement is correct and keeps every target clause. The correction from 'natural map' to 'Roos triangles go to Roos triangles, and every completing comparison is invertible' is justified by 08TC, which gives derived limits only up to non-unique isomorphism; it is not a weakening. Steps 1–5, 7 and 8 check out against their cited statements. Step 3's direct computation of products of K-injectives avoids the blueprint's 'products of distinguished triangles' claim, which is not automatic. Long step 5 (2224 characters) is one argument and stays: L[0] is K-flat with flat terms, and the two derived-tensor bifunctors are identified by the uniqueness clause of the descent node together with lem-sfb-derived-monoidal. No existing comparison node was found. FIX (C1/C4): step 6 was marked elementary but used that restriction to a localized site commutes with the sheaf tensor product. In the DAG, sheafification is defined only by its universal property, and existing nodes cover only topological-space or Zariski opens, not S_proét. I added the statement-only node lem-sfb-localized-site-tensor-restriction (Stacks 03EL applied to the localization morphism of 03DH; unsplit; created.item = this item; same unit). Step 6 now cites it and also cites lem-pc-sheaf-modules-tensor-closed for R^r⊗N ≅ N^r; it is no longer marked elementary, and proof_deps is recomputed. I accept all 15 declared tool_uses. There is no duplicate, no cycle and no SGA citation, and the edge cases hold (Z=X, Z empty, S empty, L=0, zero tower). Unrelated to this delivery: the id def-weil-pbc-etale-morphism is missing but is cited by three other nodes; and det-prop-diagonal-tower-limit still uses the old natural-map wording.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
  "lean_audit": {
   "master": {

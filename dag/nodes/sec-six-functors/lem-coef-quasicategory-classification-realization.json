@@ -71,16 +71,31 @@
    }
   },
   {
-   "text": "Write $B=Q^\\simeq$ and $E=C(Q)_{1,\\bullet}$, with source $s$ and target $t$. Let $P_1=E$ and $P_k=P_{k-1}\\times_{B}E$, using the target of the last edge of $P_{k-1}$ and $s:E\\to B$. Define $H_1=E$ and $H_k=H_{k-1}\\times^h_B E$ with the same endpoint convention and the path model of [lem-coef-kan-pullback-path-comparison]; its endpoint to $B$ is $t$ of its last $E$ coordinate. We verify by induction that $P_k,H_k$ are Kan and that the constant-path map $c_k:P_k\\to H_k$ is a weak homotopy equivalence commuting strictly with that endpoint. For $k=1$ this is the identity on the Kan complex $E$ of step 2. Given the assertion for $k-1$, the projection $P_k\\to P_{k-1}$ is a pullback of the Kan fibration $s$ of step 2. Horn lifting is preserved by pullback (project the horn to $E$, lift against $s$ with the prescribed base, and pair the lift with the fixed $P_{k-1}$ simplex); filling a horn in the Kan base $P_{k-1}$ first proves that $P_k$ is Kan. The path-comparison node makes $H_k$ Kan. Its comparison\n$$P_k\\longrightarrow P_{k-1}\\times^h_B E$$\nis a weak equivalence because $s$ is a Kan fibration. Apply [lem-coef-kan-homotopy-pullback-invariance] to $c_{k-1}$, the identity of $E$ and the identity of $B$: its squares commute strictly, since all previous comparisons retain the last edge. It gives a weak equivalence $P_{k-1}\\times^h_B E\\to H_{k-1}\\times^h_B E=H_k$. The composite is exactly $c_k$, which inserts the constant path at every matched vertex and retains the last edge. The composite of weak homotopy equivalences is a weak homotopy equivalence directly from the definition: geometric realization preserves composition, and composites of bijections on components and isomorphisms on all based homotopy groups have those same properties. This completes the induction. Composing $r_n$ of step 3 with $c_n$ proves the homotopy Segal condition, with precisely the constant-path consecutive-edge map required by [lem-coef-segal-dk-diagonal-equivalence]; the levelwise Kan condition was established in step 2.",
+   "text": "Write $B=Q^\\simeq$ and $E=C(Q)_{1,\\bullet}$, with source $s$ and target $t$. Let $P_1=E$ and $P_k=P_{k-1}\\times_B E$, matching the target of the last edge to $s$. Let $H_1=E$ and $H_k=H_{k-1}\\times^h_B E$ with the same endpoint convention and the path model of [lem-coef-kan-pullback-path-comparison]. The finite-tower fibrancy lemma applies because both endpoint maps are Kan fibrations by step 2; it gives that all $P_k$ are Kan and retain Kan endpoint maps.",
    "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "lem-coef-kan-iterated-pullback-fibrancy",
+    "lem-coef-kan-pullback-path-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/joyal-tierney.pdf",
+    "place": "Proof of Proposition 4.10, printed p.301; setup of the strict and homotopy Segal pullback towers."
+   }
+  },
+  {
+   "text": "The finite-chain comparison lemma gives constant-path maps $c_k:P_k\\to H_k$ that are weak homotopy equivalences and commute strictly with the last endpoint. Its induction uses the one-step constant-path comparison for the Kan fibration $s$ and applies homotopy-pullback invariance to $c_{k-1}$, the identity of $E$, and the identity of $B$; the endpoint convention makes both squares commute. Thus $c_n\\circ r_n$ is the required consecutive-edge map, and it is a weak homotopy equivalence by composition. The levelwise Kan condition is step 2. Hence these comparisons give exactly the homotopy Segal condition defined in [lem-coef-segal-dk-diagonal-equivalence]. Composition preserves weak homotopy equivalences because it composes the induced component bijections and based homotopy-group isomorphisms.",
+   "uses": [
+    "lem-coef-kan-iterated-chain-comparison",
     "lem-coef-kan-pullback-path-comparison",
     "lem-coef-kan-homotopy-pullback-invariance",
+    "def-cbc-enhanced-diagrams-cones",
     "lem-coef-segal-dk-diagonal-equivalence"
    ],
    "elementary": false,
    "source": {
     "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/joyal-tierney.pdf",
-    "place": "Proof of Proposition 4.10, printed p.301; agent expansion from strict Segal pullbacks to the specified homotopy-pullback convention by explicit induction."
+    "place": "Proof of Proposition 4.10, printed p.301, Segal paragraph; finite induction expanded using Kerodon Propositions 3.4.0.7 and 3.4.0.9."
    }
   },
   {
@@ -112,6 +127,8 @@
   "lem-cbc-spine-inner-anodyne",
   "lem-coef-inner-anodyne-pushout-product",
   "lem-coef-kan-homotopy-pullback-invariance",
+  "lem-coef-kan-iterated-chain-comparison",
+  "lem-coef-kan-iterated-pullback-fibrancy",
   "lem-coef-kan-pullback-path-comparison",
   "lem-coef-kan-quillen-right-proper",
   "lem-coef-marked-anodyne-lifting-calculus",
@@ -231,7 +248,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-diagonal-coherent-nerve-comparison",
@@ -244,8 +261,8 @@
   "date": "2026-10-17",
   "item": "lem-coef-quasicategory-classification-realization",
   "worker": "stage1",
-  "summary": "Kept the statement unchanged and supplied six proof steps using only existing DAG nodes. Identified the columns with marked mapping cores, proved Segal restriction boundary lifting by the spine pushout product, compared strict and path-model iterated pullbacks by induction, checked the exact strict endpoint fiber and diagonal naturality. No new nodes or attachments. Re-ran Mathlib searches in two phrasings and read the candidates.",
-  "blueprint": "Realizes the inherited prop-coef-integral-exceptional-adjoint proof paragraph 2 derived-coefficient mapping-space foundation through the recorded diagonal/coherent-nerve ancestry: supplies the classification-space input of parent steps 2 and 3 and the evaluation map used in parent step 4. Main-20261015 ancestor proof read; no unit route or statement is replaced. Whole-blueprint classification and Segal searches found no same statement.",
+  "summary": "Repaired the returned split by extracting the overlong fourth step into two statement-only support nodes: finite iterated pullback fibrancy and the finite strict-to-path comparison. The item statement and Lean record are unchanged. Existing one-step path comparison and homotopy-pullback invariance remain cited; the endpoint induction and strict endpoint compatibility are now stated in the new node. Mathlib searches were run for both nodes with LeanSearch, LeanFinder, Loogle and grep.",
+  "blueprint": "Realizes the inherited prop-coef-integral-exceptional-adjoint proof paragraph 2 mapping-space foundation. The repaired fourth-step realization is split between the strict-tower fibrancy lemma and the finite-chain comparison lemma, followed by the existing Segal diagonal-equivalence node; the other steps retain the original classification-diagram route.",
   "tool_uses": [
    {
     "node": "lem-cbc-spine-inner-anodyne",
@@ -257,12 +274,12 @@
   "lem-cbc-spine-inner-anodyne"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q127-108dca502",
-  "group": "Q127",
+  "reviewer": "NT-cc-Q42-eb66bc070",
+  "group": "Q42",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-108dca502 (reviewer sub-agent of L); spot-checked: I read the whole item, and the statements of all 8 proof dependencies, the parent lem-coef-diagonal-coherent-nerve-comparison (the 3 steps that cite this item) and the ancestor prop-coef-integral-exceptional-adjoint (main-20261015, proof paragraph 2). The statement is unchanged and not weakened. It is not a target node, so the base-change and coefficient-category check does not apply. The sources (Joyal–Tierney Prop. 1.16/4.9/4.10, HTT 3.1.3.1) are not under literature/; the report lists them as WANTED and proof_origin is agent. Step 1 (the bisimplicial operators) is elementary and correct. Step 2: the marked edges of K^flat x (Delta^q)^sharp are exactly the edges of {v} x Delta^q, so Y(K)=Map^sharp(K^flat,Q^natural) exactly, and Map^flat equals Fun(K,Q). The cited marked-anodyne node states word for word that Map^sharp is the core and is Kan, and that restriction along an injective map is a Kan fibration. Step 3: Y(Sp[n]) is the strict iterated pullback. The domain of the boundary lifting problem is the union in the pushout-product node, with the spine inner anodyne and Q->* an inner fibration. Every vertex lies in the spine, so the vertical-equivalence condition is already met. The case m=0 is covered, and the Kan-model node's trivial-fibration characterization includes n=0. Step 4: the induction is set up explicitly. The path-comparison hypotheses hold (Kan inputs, s a Kan fibration), and the invariance squares commute strictly because the last E coordinate is kept. The resulting map is exactly the constant-path Segal map that lem-coef-segal-dk-diagonal-equivalence defines. Step 5: a simplex of the fiber has constant endpoint faces, so the strict fiber equals U_Q(x,y). Path comparison with V=Delta^0 gives the homotopy fiber of def-cbc. Step 6 (the diagonal map and its naturality) is elementary. Small cases checked: empty Q, the point, N([1]) (U(0,1) is a point, U(1,0) is empty), BG, and a discrete category. Duplicates: complete-segal-quasicategory-comparison (an infinity-categorical equivalence) and complete-segal-dk-levelwise (assumes Reedy fibrancy) state different things. The only spine node in the unit is the labelled-presheaf version. I accept the tool use of lem-cbc-spine-inner-anodyne (unit sk-prop-sf-cbc, already reviewed): it is a generic combinatorial lemma used as a black box and replaces no step of the unit's route. No proof dependency leads back to the item, so there is no cycle. proof_deps equals the union of the step uses. No SGA source is cited. The six Mathlib searches are recorded (match: none). No fixes; review.md written."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-eb66bc070 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and the statement of every cited node. Cited: def-cbc-enhanced-diagrams-cones, lem-coef-marked-anodyne-lifting-calculus, lem-cbc-spine-inner-anodyne, lem-coef-inner-anodyne-pushout-product, lem-coef-kan-quillen-right-proper, lem-coef-kan-pullback-path-comparison, lem-coef-kan-homotopy-pullback-invariance, lem-coef-segal-dk-diagonal-equivalence. Also read parent lem-coef-diagonal-coherent-nerve-comparison steps 2/3/8. The item statement is unchanged and matches the Q82 Lean record. Nothing is weakened. This is not a target node, so the base-change and coefficient-category check does not apply. Steps 1 and 7 are elementary and correct. Step 2 gets core = Map^sharp, Kan, and the restriction Kan fibrations verbatim from the marked calculus. Step 3: spine inner anodyne, pushout product with the boundary, Q to the point an inner fibration, every vertex in the spine, m=0 included, so r_n is a trivial fibration. Steps 4 and 5 replace the returned induction with two new statement-only nodes. lem-coef-kan-iterated-pullback-fibrancy: the projection is the pullback of s, t_k = t composed with the pullback of t_{k-1}, and P_k is Kan over a Kan base. True for k=1, E empty, B empty and B a point. lem-coef-kan-iterated-chain-comparison: by induction, the binary comparison for s and invariance along (c_{k-1}, id, id) commute strictly by the endpoint convention, and H_k is Kan. True for k=1, B a point, E = Fun(Delta^1,B), discrete inputs and empty E. Both nodes are generic, strictly smaller than the item, self-contained, with blueprint from/via and the three kinds of search. A search of dag/nodes found no duplicate. Def-coef-segal-space, segal-cartesian-exponent, reedy-cartesian and the binary path/invariance nodes differ. c_n composed with r_n is exactly the consecutive-edge map with constant paths of the Segal node. Step 6 gives the strict fiber equal to U_Q(x,y) and applies binary path comparison to E -> BxB at the point (x,y). The existing tool use of lem-cbc-spine-inner-anodyne is accepted. No new tool uses. proof_deps equals the union of uses, every step is at most 2000 characters, there is no cycle and no SGA. Joyal-Tierney and Kerodon 00T0/0329/032B are not archived (WANTED), so the source places could not be checked here. The content attributed to them is standard. Minor, non-blocking: step 3's inline note that P_n is Kan is redundant, and step 5 narrates the chain node's prospective induction. No fixes."
  },
  "lean_audit": {
   "master": {

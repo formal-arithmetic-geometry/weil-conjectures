@@ -21,36 +21,35 @@
  ],
  "proof": [
   {
-   "text": "Restricted structures and iterates. Since $g_X=\\operatorname{id}_{X_0}\\times\\operatorname{Spec}(\\gamma)$, the equalities $hg_W=g_Xh$ for $h=i,j$ are equalities of maps of fibre products. The open squares for all powers are Cartesian by [lem-trf-frobenius-open-square]; the closed Galois square is also Cartesian: base change of the subscheme $Z_0\\times_{k_0}k$ by the coefficient-field automorphism gives this same subscheme, with its same defining ideal. The finite-type scheme $X$ has a finite affine cover by finitely generated $k$-algebras. By [lem-sfb-finite-type-noetherian-spectrum] these affine spaces are Noetherian topologically, since $\\operatorname{Spec}k$ is a singleton. Restricting an ascending chain of opens to each of the finitely many affine opens shows that it stabilizes on $X$. Thus every open of $X$, in particular $U$, is quasi-compact: any open cover admits a maximal finite union by the ascending-chain condition, and maximality forces that union to be the covered open. Thus the open immersion $j$ is finite type (it is locally the identity and is quasi-compact); the closed immersion $i$ is finite type, locally being given by a ring quotient. Both are separated. By [thm-sf-ctf-stability](i), $Lh^*K\\in D^b_{ctf}(W,A)$. The displayed map $h^*\\varphi$ is a composite of isomorphisms, hence gives the strict Weil structure of [def-trf-strict-weil-complex]. Under the pullback-composition identifications [lem-weil-pbc-proetale-derived-pullback-composition], the product defining $(h^*\\varphi)^{[m]}$ in [def-trf-iterated-weil-map] is\n$Lh^*(\\varphi\\circ Lg_X^*\\varphi\\circ\\cdots\\circ Lg_X^{(m-1)*}\\varphi)\\circ c_{h,m}$.\nIndeed the case $m=1$ is its definition; multiplying by the next pulled-back factor replaces $c_{h,m}$ by $c_{h,m+1}$. This identity of comparisons is checked termwise on inverse-image sheaves, where both bracketings identify the inverse image along the same composite map, and descends to complexes. This proves clause 1. The same multiplication, using the recursion of [def-trf-frobenius-coefficient-morphism], proves the iterate formula for $h^*\\psi$, since naturality of the $q$-power scheme Frobenius [def-trf-scheme-frobenius] gives $h\\Phi_W=\\Phi_Xh$.",
+   "text": "Restricted structures and iterates. A finite affine cover of $X$ by finitely generated $k$-algebras has Noetherian underlying spaces by [lem-sfb-finite-type-noetherian-spectrum]. Restricting an ascending chain of opens to this finite cover proves stabilization on $X$. By [lem-sfb-noetherian-space-compact-subsets], every open is quasi-compact, and [lem-weil-pbc-qc-open-immersion-finite-type] makes $j$ finite type. The closed immersion $i$ is locally a quotient map of rings, hence finite type. Thus $i,j$ are separated finite-type maps and their sources are separated finite type over $k$. Apply [thm-sf-ctf-stability](i) to obtain $Lh^*K\\in D^b_{ctf}(W,A)$. The equality $hg_W=g_Xh$ follows from their fibre-product definitions. The open square is Cartesian by [lem-trf-frobenius-open-square]; the closed Galois square is Cartesian since the scalar automorphism preserves the defining ideal of $Z_0\\times_{k_0}k$. The canonical pullback identification followed by $Lh^*\\varphi$ is an isomorphism, giving the structure of [def-trf-strict-weil-complex]. Apply [lem-trf-pullback-coefficient-iterate-coherence] with $(t,u)=(g_X,\\varphi)$ to the product of [def-trf-iterated-weil-map]: its conclusion is exactly $(h^*\\varphi)^{[m]}=Lh^*\\varphi^{[m]}\\circ c_{h,m}$. For $t=\\Phi_X$, naturality of the scheme Frobenius [def-trf-scheme-frobenius] gives $h\\Phi_W=\\Phi_Xh$; applying the same lemma to the recursion of [def-trf-frobenius-coefficient-morphism] proves the stated formula for $h^*\\psi$.",
    "uses": [
-    "lem-trf-frobenius-open-square",
+    "lem-sfb-finite-type-noetherian-spectrum",
+    "lem-sfb-noetherian-space-compact-subsets",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
     "thm-sf-ctf-stability",
+    "lem-trf-frobenius-open-square",
     "def-trf-strict-weil-complex",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-trf-pullback-coefficient-iterate-coherence",
     "def-trf-iterated-weil-map",
-    "def-trf-frobenius-coefficient-morphism",
     "def-trf-scheme-frobenius",
-    "lem-sfb-finite-type-noetherian-spectrum"
+    "def-trf-frobenius-coefficient-morphism"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-global-additivity/prop-trf-trace-additivity-open-closed.proof.md",
-    "place": "Step 1"
+    "place": "Step 1; extracted canonical-comparison induction"
    }
   },
   {
-   "text": "Construct the localization filtration before taking derived compact cohomology. Write $S_X(C)$ for the filtered complex with $F^0C=C$, $F^1C=j_!j^*C$, $F^2C=0$. The open is quasi-compact by Step 1. Apply [lem-weil-pbc-proetale-ringed-open-closed], with constant ring sheaf $A_X$, in each degree: the counit and unit form a short exact sequence of complexes\n$0\\to j_!j^*C\\to C\\to i_*i^*C\\to0$.\nThus $\\omega S_X(C)=C$, $\\operatorname{gr}^1S_X(C)=j_!j^*C$, and $\\operatorname{gr}^0S_X(C)=i_*i^*C$. The constant-coefficient inverse images are exact by [def-weil-pbc-proetale-operations], and the cited localization lemma gives exactness of $j_!$ and $i_*$. Since these functors are exact, $S_X$ takes a quasi-isomorphism to a filtered quasi-isomorphism, so it descends to a functor on the ordinary derived category. Its underlying triangle is the specified localization triangle [prop-sf-open-closed-triangle-all-stages]. This is the explicit filtered section, not a triangulated category of strict Weil pairs.\n\nFix $t=g_X^m$ and $u=\\varphi^{[m]}:Lt^*K\\to K$. The open exchange [lem-trf-open-square-exchange] identifies the filtration on $Lt^*S_X(K)$ with that on $S_X(Lt^*K)$: on the total complex it is the identity, and on $F^1$ it is $b_t:Lt^*j_!j^*K\\simeq j_!Lt_U^*j^*K$. Compatibility with the inclusions is the counit identity: restriction to $U$ makes both maps the identity, and $j_!\\dashv j^*$ identifies their Hom sets. Therefore $S_X(u)$ gives an actual filtered morphism\n$\\widetilde u:Lt^*S_X(K)\\to S_X(K)$.\nIts total map is $u$ and its degree-1 graded map is $j_!(h^*\\varphi)^{[m]}\\circ b_t$ for $h=j$. Its degree-0 graded map is the map induced on the quotient, namely $i_*(i^*\\varphi)^{[m]}\\circ e_t$ with $e_t:Lt^*i_*\\to i_*Lt_Z^*$ the adjunction mate. To see the last identification, transpose it under $i^*\\dashv i_*$; the closed counit is invertible by [prop-weil-open-closed-recollement-adjunctions], and both transposes are $i^*u$ after $i^*Lt^*\\simeq Lt_Z^*i^*$. Thus it is the specified closed component, not merely a choice of third triangle map.",
+   "text": "Construct the localization filtration before taking derived compact cohomology. By [lem-trf-localization-filtered-section-exchange], $S_X(K)$ is the actual two-step filtered derived object represented by $F^0C=C$, $F^1C=j_!j^*C$, $F^2C=0$, with total $K$ and graded objects $j_!j^*K$, $Ri_*i^*K$. The open is quasi-compact by Step 1. The lemma identifies its underlying triangle with the specified localization triangle of [prop-sf-open-closed-triangle-all-stages]. Fix $t=g_X^m$, $u=\\varphi^{[m]}$. The same lemma gives the filtered comparison $\\alpha_t:Lt^*S_X(K)\\simeq S_X(Lt^*K)$ and the actual filtered morphism $\\widetilde u=S_X(u)\\circ\\alpha_t$. Its total map is $u$; its graded maps are $j_!(j^*\\varphi)^{[m]}\\circ b_t$ and $Ri_*(i^*\\varphi)^{[m]}\\circ e_t$, using Step 1. In particular the closed component is the induced quotient map with its specified adjunction mate; it is not an arbitrarily completed triangle morphism.",
    "uses": [
-    "prop-sf-open-closed-triangle-all-stages",
-    "lem-trf-open-square-exchange",
-    "prop-weil-open-closed-recollement-adjunctions",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "def-weil-pbc-proetale-operations"
+    "lem-trf-localization-filtered-section-exchange",
+    "prop-sf-open-closed-triangle-all-stages"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-global-additivity/prop-trf-trace-additivity-open-closed.proof.md",
-    "place": "Step 2; filtered section: Varshavsky §5.2.3; pro-etale exact sequence: Stacks Tags 09BM, 09AH"
+    "place": "Step 2; extracted filtered section and graded-mate identification"
    }
   },
   {
@@ -70,20 +69,18 @@
    }
   },
   {
-   "text": "Identify the two graded operators. For $h=j,i$, let $\\lambda_h:R\\Gamma_c(X,Rh_!N)\\simeq R\\Gamma_c(W,N)$ be the composition isomorphism of [prop-functor-package](3); For $i$, [lem-weil-pbc-closed-immersion-finite] gives finiteness and [lem-weil-pbc-finite-proper] gives properness, so that clause identifies $Ri_!=Ri_*$. Write $b_{t,h}:Lt^*Rh_!\\to Rh_!Lt_W^*$ for the open exchange, respectively the closed quotient mate of Step 2. Under $\\lambda_h$ the exchange for $a_X$ followed by $R\\Gamma_c(X,b_{t,h})$ is the exchange for $a_W=a_Xh$. More explicitly, suppressing the canonical point pullback, the equation needed is\n$$\n\\lambda_{h,Lt_W^*N}\\,R\\Gamma_c(X,b_{t,h})\\,\\beta_{t,Rh_!N}\n=\\beta_{t_W,N}\\,\\lambda_{h,N}.\n$$\nThis is the compact-support vertical-pasting equation of [lem-trf-filtered-derived-operation-lifts], for the square for $h$ above the square for $a_X$, with the composition comparisons $R(a_Xh)_!\\simeq Ra_{X!}Rh_!$ inserted. It is computed in compactifications: on the proper direct-image factors use [lem-weil-pbc-mate-pasting](2),(3), and on the open factors use the pasting property of [lem-trf-open-square-exchange]. The two pasted pullback squares identify the same composite inverse image. This does not regard $Ra_{X!}$ as a right adjoint to $La_X^*$; the adjunction-mate calculation is on the proper factors only. For the open square, $b_{t,j}$ is the open extension comparison; for the closed square, it is the transpose identified in Step 2. All the compactification-relative exchanges and composition comparisons in this calculation are the canonical ones covered by [lem-trf-filtered-derived-operation-lifts]. This argument uses arbitrary scheme inverse-image squares and thus also applies to the semilinear Galois maps; it does not apply a theorem requiring $k$-morphisms to them. Naturality in $N$ and the restricted-iterate formula of Step 1 now show that the degree-1 and degree-0 maps of $\\widetilde E$ are conjugate through $\\lambda_j,\\lambda_i$ to $F_{c,j^*K}^{\\,m}$ and $F_{c,i^*K}^{\\,m}$, by [lem-trf-frobenius-operator-compact-description].",
+   "text": "Identify the two graded operators. For $h=j,i$, use $\\lambda_h:R\\Gamma_c(X,Rh_!N)\\simeq R\\Gamma_c(W,N)$ from [prop-functor-package](3). For $i$, [lem-weil-pbc-closed-immersion-finite] and [lem-weil-pbc-finite-proper] justify $Ri_!=Ri_*$. Let $b_{t,h}$ be the open exchange or closed mate specified in Step 2. Apply the compact-support vertical-pasting equation in the statement of [lem-trf-filtered-derived-operation-lifts] to $W\\to X\\to s$ over $g_W^m,g_X^m,g_s^m$. Both inner squares are Cartesian by Step 1. After point evaluation the equation is\n$$\\lambda_{h,Lt_W^*N}R\\Gamma_c(X,b_{t,h})\\beta_{t,Rh_!N}=\\beta_{t_W,N}\\lambda_{h,N}.$$\nThe cited statement covers the actual compactification-derived exchanges, their composition identifications and filtered lifts, and permits scheme maps not linear over $k$. It therefore supplies precisely the compatibility previously computed inline. Naturality in $N$, Step 1 and [lem-trf-frobenius-operator-compact-description] identify the two graded maps of $\\widetilde E$ through $\\lambda_j,\\lambda_i$ with $F_{c,j^*K}^{\\,m}$ and $F_{c,i^*K}^{\\,m}$.",
    "uses": [
     "prop-functor-package",
-    "lem-weil-pbc-mate-pasting",
-    "lem-trf-filtered-derived-operation-lifts",
-    "lem-trf-frobenius-operator-compact-description",
-    "lem-trf-open-square-exchange",
     "lem-weil-pbc-closed-immersion-finite",
-    "lem-weil-pbc-finite-proper"
+    "lem-weil-pbc-finite-proper",
+    "lem-trf-filtered-derived-operation-lifts",
+    "lem-trf-frobenius-operator-compact-description"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-global-additivity/prop-trf-trace-additivity-open-closed.proof.md",
-    "place": "Step 4"
+    "place": "Step 4; existing compact-support vertical-pasting lemma replaces hidden argument"
    }
   },
   {
@@ -104,25 +101,59 @@
    }
   },
   {
-   "text": "Noninvertible Frobenius coefficient morphisms. Take instead $t=\\Phi_X^m$ and $u=\\psi_m$. Step 1 already proves the restriction and iterate assertions; the open square is Cartesian by [lem-trf-frobenius-open-square]. Thus Step 2 constructs the filtered morphism $Lt^*S_X(K)\\to S_X(K)$ without inverting $u$. The closed square need not be Cartesian. Let $e:L\\Phi_X^{m*}Ri_*\\to Ri_*L\\Phi_Z^{m*}$ be the ordinary mate for this commutative square, as in [def-exchange-projection]. Its adjoint under $i^*\\dashv Ri_*$ is the canonical identification $c'_{i,m}$. For $T_0\\in\\{X_0,Z_0\\}$ and $T=T_0\\times_{k_0}k$, the absolute $q$-power Frobenius of $T$ is $F_T^{(q)}=g_{\\sigma}\\circ\\Phi_T$ with $g_\\sigma$ the arithmetic Galois automorphism of [def-trf-scheme-frobenius]: on $A_0\\otimes_{k_0}k$ one has $a\\otimes b\\mapsto a\\otimes b^q\\mapsto a^q\\otimes b^q$, i.e. $(F_T^{(q)})^\\sharp=\\Phi_T^\\sharp\\circ(1\\otimes\\sigma)$, and both sides are morphisms of schemes agreeing on an affine cover. By [lem-pur-absolute-frobenius-universal-homeomorphism] $F_T^{(q)}$ is a universal homeomorphism, hence so is $\\Phi_T=g_\\sigma^{-1}F_T^{(q)}$ and so is every iterate $\\Phi_T^m$ (composites of universal homeomorphisms). By [lem-trf-proetale-topological-invariance], $\\Phi_X^{m,-1}\\dashv\\Phi^m_{X*}$ and $\\Phi_Z^{m,-1}\\dashv\\Phi^m_{Z*}$ are adjoint equivalences; these functors are exact on module sheaves, so they compute the derived functors. Hence $e$, the mate of the identity $\\Phi^m_{X*}i_*=i_*\\Phi^m_{Z*}$, is the composite of isomorphisms $\\Phi_X^{m,-1}i_*\\cong\\Phi_X^{m,-1}i_*\\Phi^m_{Z*}\\Phi_Z^{m,-1}=\\Phi_X^{m,-1}\\Phi^m_{X*}i_*\\Phi_Z^{m,-1}\\cong i_*\\Phi_Z^{m,-1}$, so $e$ is an isomorphism. Hence the pulled-back quotient is identified with $i_*L\\Phi_Z^{m*}i^*K$, and its coefficient map is the closed adjunction mate. No geometric-stalk criterion or Cartesian closed square is used.\n\nBy [lem-trf-scheme-frobenius-finite-radicial], $\\Phi_X$ is finite. Induction on $m$, with [lem-weil-pbc-finite-composition] at the induction step, gives finiteness of $t=\\Phi_X^m$; [lem-weil-pbc-finite-proper] therefore makes $t$ proper. Thus [prop-functor-package](3) gives $Rt_*=Rt_!$ and $a_Xt=a_X$. Define\n$\\beta_t:R\\Gamma_c(X,K)\\to R\\Gamma_c(X,Lt^*K)$\nby the unit $K\\to Rt_*Lt^*K$, the proper comparison and compact-support composition. Its filtered lift exists by [lem-trf-filtered-derived-operation-lifts]. By [prop-trf-graph-operator], forgetting the endomorphism $R\\Gamma_c^F(X,\\widetilde u)\\circ\\widetilde\\beta_t$ gives exactly $F_{c,m}(\\psi)$. Its graded maps are the same units with the restricted coefficient morphisms: for $h=j,i$ the equation of Step 4 follows from the composite unit $R_1\\eta_2L_1\\circ\\eta_1$ and mate-pasting [lem-weil-pbc-mate-pasting](2), applied to $th=ht_W$, followed by compact-support composition. Hence the graded operators are conjugate to $F_{c,m}(j^*\\psi)$ and $F_{c,m}(i^*\\psi)$ using [prop-trf-graph-operator] on $U,Z$. Apply the perfectness and filtered trace laws of Step 5. This proves clause 3 without any invertibility assumption on $\\psi$.",
+   "text": "Noninvertible Frobenius coefficient morphisms: geometry. Set $t=\\Phi_X^m$ and $u=\\psi_m$. Step 1 already supplies the restriction and iterate formulas, and [lem-trf-frobenius-open-square] makes the open square Cartesian. For $T=X,Z$, the affine formula of [def-trf-scheme-frobenius] gives $F_T^{(q)}=g_\\sigma\\Phi_T$: on $A_0\\otimes_{k_0}k$, both sides send $a\\otimes b$ to $a^q\\otimes b^q$. By [lem-pur-absolute-frobenius-universal-homeomorphism], absolute $q$-power Frobenius is a universal homeomorphism. Its composite with the inverse scalar automorphism is also a universal homeomorphism, since after any base change both factors are homeomorphisms. Thus each $\\Phi_T^m$ is a universal homeomorphism. Finiteness follows from [lem-trf-scheme-frobenius-finite-radicial] and induction using [lem-weil-pbc-finite-composition], also for $T=U$; [lem-weil-pbc-finite-proper] makes all three iterates proper.",
    "uses": [
-    "def-exchange-projection",
-    "lem-trf-proetale-topological-invariance",
-    "lem-trf-scheme-frobenius-finite-radicial",
     "lem-trf-frobenius-open-square",
-    "prop-functor-package",
-    "lem-trf-filtered-derived-operation-lifts",
-    "prop-trf-graph-operator",
-    "lem-weil-pbc-mate-pasting",
-    "lem-weil-pbc-finite-composition",
-    "lem-weil-pbc-finite-proper",
+    "def-trf-scheme-frobenius",
     "lem-pur-absolute-frobenius-universal-homeomorphism",
-    "def-trf-scheme-frobenius"
+    "lem-trf-scheme-frobenius-finite-radicial",
+    "lem-weil-pbc-finite-composition",
+    "lem-weil-pbc-finite-proper"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-global-additivity/prop-trf-trace-additivity-open-closed.proof.md",
-    "place": "Step 6"
+    "place": "Step 6, universal-homeomorphism and properness inputs"
+   }
+  },
+  {
+   "text": "The closed square may be non-Cartesian. By [lem-trf-proetale-topological-invariance], the inverse/direct image adjunctions for $t=\\Phi_X^m$ and $t_Z=\\Phi_Z^m$ are equivalences of topoi. Their equivalences extend to constant-$A$ modules by transporting the action, and are exact since equivalences preserve kernels and cokernels. They compute the derived functors of [def-weil-pbc-proetale-operations]. Apply [lem-weil-mate-iso-along-equivalences] with $L=L'=Li^*$, $R=R'=Ri_*$, $G=Lt^*$, and $G'=Lt_Z^*$. The natural isomorphism $\\theta:Li^*Lt^*\\simeq Lt_Z^*Li^*$ is the canonical comparison of [lem-weil-pbc-proetale-derived-pullback-composition] for $ti=it_Z$. Here $G$ is an equivalence and $G'$ is fully faithful, exactly the lemma's hypotheses. Its mate is $e_{t,i}:Lt^*Ri_*\\to Ri_*Lt_Z^*$, by the unit--square--counit definition of [def-weil-pbc-adjunction-mate], so it is invertible. Apply [lem-trf-localization-filtered-section-exchange] to obtain $\\widetilde u$ with the prescribed quotient map. No inverse of $u$ is used.",
+   "uses": [
+    "lem-trf-proetale-topological-invariance",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-mate-iso-along-equivalences",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-weil-pbc-adjunction-mate",
+    "lem-trf-localization-filtered-section-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-global-additivity/prop-trf-trace-additivity-open-closed.proof.md",
+    "place": "Step 6, extracted closed-comparison argument"
+   }
+  },
+  {
+   "text": "The proper-unit compatibility is [lem-trf-proper-unit-localization-composition], with $t=\\Phi_X^m$ and the proper restrictions of Step 6. Its $\\beta_t$ is the map induced by $K\\to Rt_*Lt^*K$, proper coincidence, and $a_Xt=a_X$. By [lem-trf-filtered-derived-operation-lifts] this map and the compact-cohomology operation have filtered lifts. Hence $R\\Gamma_c^F(X,\\widetilde u)\\circ\\widetilde\\beta_t$ is an actual filtered endomorphism. By [prop-trf-graph-operator] its total map is exactly $F_{c,m}(\\psi)$. The equation of the proper-unit lemma, followed by naturality for the restricted coefficient maps of Step 1, identifies its graded maps through $\\lambda_j,\\lambda_i$ with $F_{c,m}(j^*\\psi)$ and $F_{c,m}(i^*\\psi)$, again by [prop-trf-graph-operator]. This supplies the unit-pasting argument of the original Step 6 as a separate lemma rather than a claim that ordinary triangle maps admit a filtered lift.",
+   "uses": [
+    "lem-trf-proper-unit-localization-composition",
+    "lem-trf-filtered-derived-operation-lifts",
+    "prop-trf-graph-operator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-global-additivity/prop-trf-trace-additivity-open-closed.proof.md",
+    "place": "Step 6, unit-induced compact operator and its graded maps"
+   }
+  },
+  {
+   "text": "The perfectness argument of Step 5 applies to the same three coefficient complexes, independent of the chosen coefficient morphism. Apply filtered additivity and conjugacy invariance of [prop-trf-trace-formal-laws] to the filtered endomorphism of Step 8. Its total and graded identifications give the equality in clause 3. The construction used the coefficient morphism only by composition and functor action, and imposed no invertibility hypothesis on $\\psi$.",
+   "uses": [
+    "prop-trf-trace-formal-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-i-global-additivity/prop-trf-trace-additivity-open-closed.proof.md",
+    "place": "Step 6, application of the unchanged Step 5"
    }
   }
  ],
@@ -134,32 +165,34 @@
   "def-trf-scheme-frobenius",
   "def-trf-strict-weil-complex",
   "def-weil-finite-coefficient-point",
+  "def-weil-pbc-adjunction-mate",
   "def-weil-pbc-proetale-operations",
   "fix-lem-finite-tor-perfect",
+  "lem-pur-absolute-frobenius-universal-homeomorphism",
   "lem-sfb-finite-type-noetherian-spectrum",
+  "lem-sfb-noetherian-space-compact-subsets",
   "lem-trf-filtered-derived-operation-lifts",
   "lem-trf-frobenius-open-square",
   "lem-trf-frobenius-operator-compact-description",
-  "lem-trf-open-square-exchange",
+  "lem-trf-localization-filtered-section-exchange",
+  "lem-trf-proetale-topological-invariance",
+  "lem-trf-proper-unit-localization-composition",
+  "lem-trf-pullback-coefficient-iterate-coherence",
   "lem-trf-scheme-frobenius-finite-radicial",
+  "lem-weil-mate-iso-along-equivalences",
   "lem-weil-pbc-closed-immersion-finite",
   "lem-weil-pbc-finite-composition",
   "lem-weil-pbc-finite-proper",
-  "lem-weil-pbc-mate-pasting",
   "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
   "prop-functor-package",
   "prop-sf-open-closed-triangle-all-stages",
   "prop-trf-compact-support-perfectness",
   "prop-trf-graph-operator",
   "prop-trf-trace-formal-laws",
-  "prop-weil-open-closed-recollement-adjunctions",
   "sk-d-trace",
   "thm-nagata-compactification",
-  "thm-sf-ctf-stability",
-  "def-exchange-projection",
-  "lem-trf-proetale-topological-invariance",
-  "lem-pur-absolute-frobenius-universal-homeomorphism"
+  "thm-sf-ctf-stability"
  ],
  "proof_origin": {
   "by": "agent",
@@ -218,7 +251,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -267,20 +300,12 @@
   "date": "2026-10-17",
   "item": "prop-trf-trace-additivity-open-closed",
   "worker": "stage1",
-  "summary": "Repaired the earlier copy: explicitly construct the sheaf-level localization filtration and use one new generic filtered-operation lifting lemma, rather than infer filtered origin from a triangle morphism. Use general adjunction mates for semilinear Galois maps, and obtain the closed Frobenius comparison from the quotient instead of uncited stalk assertions. No statement change.",
-  "blueprint": "Steps 1–6 realize the six correspondingly numbered steps of the blueprint proposition and the single filtered-origin/graded-trace step of sk-i-global-additivity; the unit route is unchanged.",
+  "summary": "Repair of the human return: extracted canonical pullback/iterate coherence and the filtered localization section into separate statement-only nodes; used the existing filtered-operation vertical-pasting clause for Step 4; extracted proper-unit localization composition for Step 6 and separated its geometric and closed-mate checks. Statement and Lean record unchanged, and original Steps 3 and 5 retained verbatim.",
+  "blueprint": "Original Steps 1,2,4 cite extracted or existing lemma interfaces. Steps 3 and 5 are unchanged. Original Step 6 is Steps 6–9, retaining the universal-homeomorphism, proper-unit and filtered-trace route.",
   "tool_uses": [
-   {
-    "node": "lem-weil-pbc-mate-pasting",
-    "why": "General adjunction mate pasting and composite-unit formulas identify the graded operators; no node of the unit states this generic categorical calculation."
-   },
    {
     "node": "lem-weil-pbc-proetale-derived-pullback-composition",
     "why": "Supplies the canonical pullback comparisons for restrictions and iterates on the pro-etale sites."
-   },
-   {
-    "node": "lem-weil-pbc-proetale-ringed-open-closed",
-    "why": "Generic sheaf-level exact localization, needed to construct the filtration rather than infer it from a distinguished triangle."
    },
    {
     "node": "lem-sfb-finite-type-noetherian-spectrum",
@@ -297,10 +322,6 @@
    {
     "node": "lem-trf-frobenius-open-square",
     "why": "Generic geometric fact that the open square is Cartesian for scheme and Galois Frobenius, used for restrictions in this unit without replacing its filtered trace route."
-   },
-   {
-    "node": "lem-trf-open-square-exchange",
-    "why": "Generic extension-by-zero base change and its pasting law, required to identify the localization subcomplex under pullback."
    },
    {
     "node": "prop-trf-compact-support-perfectness",
@@ -327,12 +348,24 @@
     "why": "The scheme-Frobenius finiteness needed to make every iterate proper is supplied by this generic lemma from the Frobenius unit, not by the construction definition itself."
    },
    {
-    "node": "def-exchange-projection",
-    "why": "The canonical closed-square mate used to define the coefficient map in the non-Cartesian Frobenius square."
-   },
-   {
     "node": "lem-trf-proetale-topological-invariance",
     "why": "Pro-etale topos invariance for the universal-homeomorphism Frobenius iterates on X and Z: the adjoint equivalences make the closed-square mate e an isomorphism."
+   },
+   {
+    "node": "lem-sfb-noetherian-space-compact-subsets",
+    "why": "Generic topological compactness criterion for the complementary open; no trace-formula unit node states it."
+   },
+   {
+    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
+    "why": "Generic scheme input converting quasi-compactness into the finite-type hypothesis for pullback stability."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "Specifies the canonical mate in the non-Cartesian closed Frobenius square without the Cartesian hypothesis of def-exchange-projection."
+   },
+   {
+    "node": "lem-weil-mate-iso-along-equivalences",
+    "why": "Generic invertibility of the canonical closed mate when the horizontal inverse images are equivalences; used on the non-Cartesian closed scheme-Frobenius square."
    }
   ]
  },
@@ -352,14 +385,18 @@
   "thm-nagata-compactification",
   "lem-trf-scheme-frobenius-finite-radicial",
   "def-exchange-projection",
-  "lem-trf-proetale-topological-invariance"
+  "lem-trf-proetale-topological-invariance",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-mate-iso-along-equivalences"
  ],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q97-c6ac79a1b",
-  "group": "Q97",
+  "reviewer": "NT-cc-N6-fd58678a6",
+  "group": "N6",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-c6ac79a1b (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-trf-filtered-derived-operation-lifts, the unit sk-i-global-additivity, the main-20261015 proposition and its proof, and the statement of all 33 cited nodes. The item statement is unchanged and matches the source. The route is unchanged: a filtered origin, then the filtered trace law prop-trf-trace-formal-laws(2). The proof builds a real filtered object S_X from the pro-étale exact localization sequence, using that U is quasi-compact by lem-sfb-finite-type-noetherian-spectrum. I checked the F^1 identification termwise at sheaf level, and the gr^0 map by transposing along i^*⊣Ri_*. Filtered compact cohomology uses the new lemma with a Nagata compactification. The vertical-pasting equation identifies the graded operators for non-k-linear Galois maps, so fix-lem-exchanges is correctly avoided. Perfectness and conjugacy are correct. The new lemma is true and generic (Stacks 015Q/015S/05U2 filtered derived functors; I checked the adjunction clause and the order of composition in Ex_{!,fe}). It is not a duplicate of lem-trf-filtered-projective-model or of the lem-sp-ce-* nodes, and it does not restate a clause of the item. Small cases checked: U or Z empty, ψ=0, the non-Cartesian closed square for Z=V(t)⊂A^1 under Φ, and Ferrand's Z/4 example. Two repairs, files in fixes/. (1) Step 6 asserted that Φ is surjective on points with no citation. I replaced this with F_T^(q)=g_σ∘Φ_T plus lem-pur-absolute-frobenius-universal-homeomorphism (on route through sk-thm-sf-package), so every Φ^m is a universal homeomorphism, and wrote out the adjoint-equivalence argument that the mate e is an isomorphism. This dropped lem-pc-integral-radicial-surjective-universal-homeomorphism and added def-trf-scheme-frobenius; proof_deps and tool_uses are updated. (2) The new node lacked lean_audit; I added none/none. Tool uses accepted: mate-pasting, pullback-composition, ringed open-closed, Noetherian spectrum, finite-coefficient point, finite-tor-perfect, frobenius-open-square, open-square-exchange, compact-support-perfectness, the closed-immersion-finite, finite-proper and finite-composition nodes, Nagata, scheme-frobenius-finite-radicial, exchange-projection, proetale-topological-invariance.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-fd58678a6 (reviewer sub-agent of L); spot-checked: I read the item, the three new nodes, every cited statement, the unit sk-i-global-additivity, the main-20261015 proposition and its proof, Varshavsky Ex. 5.2.3 (pp. 43-44) and Stacks lemma-derived-pullback-composition (0D6D). (1) The item statement is word for word the main-20261015 text and is unchanged; the noninvertible-psi clause is not weakened. (2) The route follows the unit: a filtered origin, then prop-trf-trace-formal-laws(2) and (1). Blueprint Steps 1-5 are delivery Steps 1-5 and blueprint Step 6 is Steps 6-9. The blueprint used fix-lem-exchanges, which is for k-morphisms only; the delivery uses the vertical-pasting clause of lem-trf-filtered-derived-operation-lifts instead, which allows non-k-linear maps. Every cited statement off the route is declared as a tool use. (3) Step checks: every hypothesis is met. U is quasi-compact (Noetherian argument), j is finite type, ctf stability(i),(iii),(iv) apply, and both inner squares in the Galois case are Cartesian. (g_sigma Phi)^# sends a(x)b to a^q(x)b^q, which is the absolute Frobenius, so Phi^m is a universal homeomorphism; it is also finite and proper on X, Z and U. lem-weil-mate-iso-along-equivalences applies with G=Lt*, G'=Lt_Z*, and its mate has the right direction t*i_*->i_*t_Z*. In Step 8, prop-trf-graph-operator's T_c is the beta_t of the proper-unit lemma. The perfectness check (ctf(iv), finite-tor-perfect at id_s, Fib_s=Gamma(s,-)) is correct. (4) New nodes. iterate-coherence: the types check, the cocycle is coherence of the pullback comparisons, and I checked the iterate formula by induction using naturality of c_1. localization-filtered-section: alpha_t on F^1 needs only the Cartesian open square; the quotient map is an isomorphism by the five lemma and equals the theta-mate (unit compatibility plus termwise epi), so no Cartesian closed square is needed. I tested Z=V(t) in A^1 under Phi, U=X, U=empty and u=0. proper-unit composition: the types check, and both the closed case (double-mate agreement) and the open case (Rt_*j_! = j_!Rt_U*) hold. None of the three duplicates lem-trf-iterated-weil-cocycle, lem-trf-weil-shriek-iterates, lem-trf-invariant-localization-filtered-lift, lem-trf-finite-horizontal-shriek-mate or lem-trf-filtered-derived-operation-lifts, and none restates a clause of the item. B1-B9 hold. (5) FIX: the item's split_report.tool_uses still declared four nodes the repaired proof no longer cites (lem-weil-pbc-mate-pasting, lem-weil-pbc-proetale-ringed-open-closed, lem-trf-open-square-exchange, def-exchange-projection). The corrected item without them is in fixes/dag/nodes/sec-trace-formula/; nothing else is changed. The other 16 declared tool uses are accepted and listed in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

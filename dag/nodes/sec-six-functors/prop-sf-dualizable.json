@@ -74,23 +74,71 @@
    }
   },
   {
-   "text": "For completeness the passage from these terms to a bounded rational model uses a finite induction, not preservation of an unspecified infinite totalization. By [def-weil-site-perfect-complex] the local model is an actual bounded cochain complex $P$ of integral module sheaves on $U$, zero outside $[a,b]$, with $K|_U\\cong P$ after scalar localization, each term $F=P^r$ carrying maps $F\\xrightarrow{i}E_U^{\\oplus m}\\xrightarrow{p}F$, $pi=1$, in the localized category; since $F$ and $R_U^{\\oplus m}$ are modules in degree $0$, for some $N$ one has $i=\\varpi^{-N}i'$ and $p=\\varpi^{-N}p'$ with actual module maps $i',p'$. Form the reversed dual complex $D=\\mathcal Hom^\\bullet_{R_U}(P,R_U[0])$ of module sheaves: its degree-$j$ term is the underived module $\\mathcal Hom_{R_U}(P^{-j},R_U)$ and its differential is the signed transpose displayed in step 3, so $d_Dd_D=0$ by [def-pur-hom-complex]. For a term $F$, the comparison $c_F:\\mathcal Hom_{R_U}(F,R_U)[0]\\to\\mathcal Hom^\\bullet(F,I)$ induced by $R_U[0]\\to I$ is natural in module maps $F\\to G$ (both sides are precomposition), and $c_{R_U^{\\oplus m}}$ is an isomorphism because $\\mathcal Hom(R_U^{\\oplus m},-)$ is exact; after scalar localization $c_F$ is a retract of $c_{E_U^{\\oplus m}}$ along $i=\\varpi^{-N}i'$ and $p=\\varpi^{-N}p'$ (naturality for $i',p'$, then scalar-linearity), and a retract of an isomorphism is an isomorphism. Thus $\\mathcal Hom_{R_U}(F,R_U)\\cong H(F)$ rationally, and by step 4 each term of $D$ is, in the localized category, a direct summand of a finite sum of $E_U$. This comparison is the one used in degree zero below; the terms $H(P^{-j})$ of the reversed dual complex mean these module representatives. Let $P_{\\ge r}$ be the stupid tail of $P$. Its degreewise split sequence $0\\to P_{\\ge r+1}\\to P_{\\ge r}\\to P^r[-r]\\to0$ gives the usual cone triangle. Apply the contravariant exact functor $H$ of step 4. Dualizing the same split sequence of graded objects gives a cone triangle of reversed dual complexes. Use the Hom-complex construction with a fixed K-injective resolution of the unit, as specified in [def-pur-derived-internal-hom], to make the comparison on these finite cone models. In degree zero its comparison is induced by $R_U[0]\\to I$; on a displayed summand it is the restriction of the finite-free comparison along its two splitting maps. Naturality under a map $u:F\\to G$ of such terms is an equality of the two precompositions: postcomposing $\\phi\\circ u$ with $R_U\\to I$ equals precomposing the postcomposition of $\\phi$ with $u$. It holds for rational maps as well: write $u$ as a finite sum of integral maps with scalar coefficients, and apply the scalar-linear rule in [def-weil-derived-pullback-tensor-hom] to each summand. Applying this natural comparison to the finitely many Hom factors defining the local bounded cochain model gives the comparison from the reversed dual complex to $H(P_{\\ge r})$; its differential commutes with the comparison by that precomposition equality and the formula $d(\\phi)=d_I\\phi-(-1)^j\\phi d_P$. Thus this comparison is constructed using the specified Hom functor, rather than inferred from exactness alone. On the degreewise split sequence it commutes with the inclusion and projection since those maps select or discard the same graded factors. The only off-diagonal differential block is $d_P^r:P^r\\to P^{r+1}$. Its dual block is in degree $j=-r-1$ and sends $\\phi$ to $(-1)^r\\phi\\circ d_P^r$, by the displayed Hom differential. This is also the connecting block in the Hom triangle, with the Hom shift identification defined by that same differential convention. All other off-diagonal blocks are zero. Hence the comparison commutes with the connecting map as well and forms a morphism of the two triangles. At $r=b+1$ both objects are zero, and for the quotient $P^r[-r]$ the comparison is the unit/retract identification from step 4, shifted. Descending induction using [lem-sf-triangle-morphism-iso] proves that the comparison on every tail, and finally on $P$, is invertible. All matrices here are finite; their equalities are preserved by the scalar-linear operation rules of [def-weil-derived-pullback-tensor-hom]. Hence $(K^\\vee)|_U$ is rationally isomorphic to the bounded module complex $D$, zero outside $[-b,-a]$, whose terms are actual summands of finite sums of the rational unit. This proves rational site-perfectness locally, precisely as required by [def-weil-site-perfect-complex]; no global local-vanishing test in a raw scalar localization is being used.",
+   "text": "Keep the rational local model $P$ and write $R=R_U$. Fix $j:R[0]\\to I$ as in [def-pur-derived-internal-hom]. By [def-weil-site-perfect-complex], $P$ is an actual bounded cochain model, zero outside $[a,b]$, whose degree-zero terms become finite-free summands after localization. Apply [lem-sf-rational-term-hom-comparison] with $A=\\mathcal O_E$, $t=\\varpi_E$ and the completed coefficient sheaf $R$. For each $F=P^r$, the specified chain map $c_F:\\mathcal Hom_R(F,R)[0]\\to\\mathcal Hom_R^\\bullet(F[0],I)$ becomes an isomorphism after localization, and its source is a summand of a finite sum of the rational unit. The splittings here are rational; none is assumed to lift integrally.",
    "uses": [
-    "def-weil-derived-pullback-tensor-hom",
-    "def-pur-hom-complex",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-sf-triangle-morphism-iso",
     "def-weil-site-perfect-complex",
-    "def-pur-derived-internal-hom"
+    "def-pur-derived-internal-hom",
+    "lem-sf-rational-term-hom-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JJ, bounded termwise dual argument; Tag 08JC (lemma-RHom-triangulated), finite stupid-tail extension of that argument to scalar-localized models"
+    "place": "Tag 08JI (lemma-Rhom-complex-of-direct-summands-finite-free), finite-free/retract comparison extended to scalar-localized module terms; current blueprint prop-sf-dualizable.proof.md, middle sentence"
    }
   },
   {
-   "text": "For $\\Lambda=\\overline{\\mathbf Q}_\\ell$, [def-weil-site-perfect-complex] gives a site-perfect representative of $K$ over a finite coefficient field. By [def-weil-algebraically-closed-coefficients] and [def-weil-derived-pullback-tensor-hom], its internal dual in the common-stage category is represented, over that same field (or a finite common extension), by its rational internal dual. Steps 4--5 give local bounded finite-projective models for this rational dual. If a further finite field is chosen, the exact scalar-extension functor of [lem-weil-scalar-extension-exact-triangulated] preserves the finite cone construction; it also preserves finite sums and the splitting equation $pi=1$. The internal-Hom and unit comparisons of [lem-fix-operation-reduction] identify this extended dual with the common-stage dual. These models therefore establish the asserted perfectness at the algebraically closed stage too.",
+   "text": "Form the actual module complex $D=\\mathcal Hom_R^\\bullet(P,R[0])$ using [def-pur-hom-complex]. Its terms are $D^j=\\mathcal Hom_R(P^{-j},R)$ and its differential is $d_D^j(\\phi)=(-1)^{j+1}\\phi\\circ d_P^{-j-1}$. Thus $D$ vanishes outside $[-b,-a]$ and its differential squares to zero by the defining Hom formula. Step 5 supplies a rational finite-free summand presentation of each degree-zero module term. These are precisely the allowed rational terms of [def-weil-site-perfect-complex]. Define the comparison $c_P:\\mathcal Hom_R^\\bullet(P,R[0])\\to\\mathcal Hom_R^\\bullet(P,I)$ by postcomposition with $j$. It is a chain map by the functoriality in [def-pur-hom-complex].",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-weil-site-perfect-complex",
+    "lem-sf-rational-term-hom-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JI (lemma-Rhom-complex-of-direct-summands-finite-free), finite-free/retract comparison extended to scalar-localized module terms; current blueprint prop-sf-dualizable.proof.md, middle sentence"
+   }
+  },
+  {
+   "text": "Write $P_{\\ge r}$ for the stupid tail, equal to $P$ in degrees at least $r$ and zero below. The sequence $0\\to P_{\\ge r+1}\\to P_{\\ge r}\\to P^r[-r]\\to0$ is split degree by degree. Apply [lem-pc-stupid-tail-hom-short-exact] to the source $P_{\\ge r}$, its lowest degree $r$, and the target map $j:R[0]\\to I$. It gives the three maps $c_{P^r[-r]}$, $c_{P_{\\ge r}}$, $c_{P_{\\ge r+1}}$ as a morphism of two short exact sequences of Hom complexes. Apply [lem-weil-pbc-complex-ses-triangle] to this morphism. Its naturality clause includes the connecting square, so these three comparisons form a morphism of distinguished triangles. No compatibility is inferred merely from agreement of the objects.",
+   "uses": [
+    "lem-pc-stupid-tail-hom-short-exact",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
+    "place": "Tag 08JC (lemma-RHom-triangulated), termwise split Hom sequence; Tag 0152 (lemma-derived-canonical-delta-functor), naturality including connecting maps"
+   }
+  },
+  {
+   "text": "Apply the exact scalar-localization functor of [lem-weil-linear-scalar-localization-triangulated] to the triangle morphism in step 7. The target Hom complex $\\mathcal Hom_R^\\bullet(P_{\\ge r},I)$ represents $H(P_{\\ge r})$ by [def-pur-derived-internal-hom]. For the quotient, the defining Hom formula identifies $c_{P^r[-r]}$ with $c_{P^r}[r]$: the source is concentrated in degree $-r$, and the target differential is $d_I$ on maps from that single degree. The shift isomorphism multiplies a degree-$q$ component by $(-1)^{rq}$ on both sides, which commutes with postcomposition by $j$. Thus the localized quotient comparison is the shift of the isomorphism in step 5.",
+   "uses": [
+    "lem-weil-linear-scalar-localization-triangulated",
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex",
+    "lem-sf-rational-term-hom-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J7, Hom-complex construction; Tag 08JC, triangle compatibility; scalar-localization conventions of the operations definition"
+   }
+  },
+  {
+   "text": "The tail $P_{\\ge b+1}$ is zero, so its comparison is an isomorphism. Induct downward on $r$ from $b$ to $a$, with inductive claim that the localized map $c_{P_{\\ge r}}$ is invertible. In the triangle morphism of steps 7–8, the quotient comparison is invertible by step 5 and its shift calculation, and the next-tail comparison is invertible by the induction hypothesis. [lem-sf-triangle-morphism-iso] makes the middle comparison invertible. At $r=a$ this proves that $D$ represents the rational internal dual of $P$, hence of $K|_U$. Since step 6 gives its bounded finite-projective module terms, [def-weil-site-perfect-complex] gives rational site-perfectness. This uses finitely many tails and no infinite totalization or local-vanishing test in a raw scalar localization.",
+   "uses": [
+    "lem-sf-triangle-morphism-iso",
+    "def-weil-site-perfect-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, bounded dual model; finite stupid-tail induction expanding the blueprint middle sentence"
+   }
+  },
+  {
+   "text": "For $\\Lambda=\\overline{\\mathbf Q}_\\ell$, [def-weil-site-perfect-complex] gives a site-perfect representative of $K$ over a finite coefficient field. By [def-weil-algebraically-closed-coefficients] and [def-weil-derived-pullback-tensor-hom], its internal dual in the common-stage category is represented, over that same field (or a finite common extension), by its rational internal dual. Steps 4--9 give local bounded finite-projective models for this rational dual. If a further finite field is chosen, the exact scalar-extension functor of [lem-weil-scalar-extension-exact-triangulated] preserves the finite cone construction; it also preserves finite sums and the splitting equation $pi=1$. The internal-Hom and unit comparisons of [lem-fix-operation-reduction] identify this extended dual with the common-stage dual. These models therefore establish the asserted perfectness at the algebraically closed stage too.",
    "uses": [
     "def-weil-site-perfect-complex",
     "def-weil-algebraically-closed-coefficients",
@@ -125,6 +173,9 @@
   "def-pur-derived-internal-hom",
   "lem-pc-bounded-exact-term-hom-quasi-iso",
   "lem-weil-linear-scalar-localization-triangulated",
+  "lem-sf-rational-term-hom-comparison",
+  "lem-pc-stupid-tail-hom-short-exact",
+  "lem-weil-pbc-complex-ses-triangle",
   "lem-sf-triangle-morphism-iso",
   "def-weil-algebraically-closed-coefficients",
   "lem-weil-scalar-extension-exact-triangulated",
@@ -216,7 +267,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -248,8 +299,8 @@
   "date": "2026-10-17",
   "item": "prop-sf-dualizable",
   "worker": "stage1",
-  "summary": "Q60 checked current and master blueprint, the tagged Lean declaration (not an exact attachment), and Stacks 08JJ/08JI/08JB/08JC. Expanded the degree-zero argument into exactness of term Hom, bounded-Hom computation with its named existing lemma, and a signed bounded local dual model. Added separate rational finite-cone and common-stage arguments; evaluation now cites the operations node that actually states the adjunction. No new nodes. The inherited context shorthand was expanded to introduce all coefficient parameters, the scheme, datum and local perfectness convention; no hypothesis or conclusion changed. Second reading removed an unintended separatedness restriction on X, replaced the scheme-level slice adjunction by the direct unit Hom calculation, and made the rational finite-cone comparison use the specified Hom-complex construction and its naturality.",
-  "blueprint": "Realizes prop-sf-dualizable.proof.md first sentence (choose local bounded projective model), middle sentence (dual complex and perfection), and final sentence (adjunction evaluation); follows the unit finite-free/retract then bounded-complex route. This item states only the first two clauses of the unit, so it does not claim to realize biduality or the general Hom comparison.",
+  "summary": "Q60 checked current and master blueprint, the tagged Lean declaration (not an exact attachment), and Stacks 08JJ/08JI/08JB/08JC. Expanded the degree-zero argument into exactness of term Hom, bounded-Hom computation with its named existing lemma, and a signed bounded local dual model. Added separate rational finite-cone and common-stage arguments; evaluation now cites the operations node that actually states the adjunction. No new nodes. The inherited context shorthand was expanded to introduce all coefficient parameters, the scheme, datum and local perfectness convention; no hypothesis or conclusion changed. Second reading removed an unintended separatedness restriction on X, replaced the scheme-level slice adjunction by the direct unit Hom calculation, and made the rational finite-cone comparison use the specified Hom-complex construction and its naturality. Repaired the returned long step by extracting the localized term comparison into lem-sf-rational-term-hom-comparison and replacing the 4522-character induction with five short steps: term comparison, bounded Hom model, natural Hom short exact sequences, exact localization and quotient shift compatibility, and descending two-out-of-three induction.",
+  "blueprint": "Realizes prop-sf-dualizable.proof.md first sentence (choose local bounded projective model), middle sentence (dual complex and perfection), and final sentence (adjunction evaluation); follows the unit finite-free/retract then bounded-complex route. This item states only the first two clauses of the unit, so it does not claim to realize biduality or the general Hom comparison. The extracted lemma serves the finite-projective term comparison sentence in the local dual model; steps 5–9 realize the middle bounded-complex sentence by explicit stupid-tail induction.",
   "tool_uses": [
    {
     "node": "lem-pur-site-restriction-module-adjunction-exact",
@@ -278,6 +329,14 @@
    {
     "node": "lem-fix-operation-reduction",
     "why": "Identifies internal Hom and the coefficient unit under common-field scalar comparisons."
+   },
+   {
+    "node": "lem-pc-stupid-tail-hom-short-exact",
+    "why": "The generic ringed-site lemma supplies the actual natural short exact sequences of Hom complexes for the fixed resolution map, replacing the hidden triangle comparison argument."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Naturality of the derived short-exact-sequence triangle supplies the connecting-map square, which the unit does not separately state."
    }
   ]
  },
@@ -288,14 +347,16 @@
   "lem-weil-linear-scalar-localization-triangulated",
   "lem-sf-triangle-morphism-iso",
   "lem-weil-scalar-extension-exact-triangulated",
-  "lem-fix-operation-reduction"
+  "lem-fix-operation-reduction",
+  "lem-pc-stupid-tail-hom-short-exact",
+  "lem-weil-pbc-complex-ses-triangle"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "by": "L",
-  "reviewer": "NT-cc-Q60-e2c662db6",
-  "group": "Q60",
+  "reviewer": "NT-cc-Q88-e6bc36189",
+  "group": "Q88",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-e2c662db6 (reviewer sub-agent of L); spot-checked: Read the item in full. The delivery has no new nodes. Checked against the main-20261015 and master blueprint, the unit and chapter records, Stacks sites-cohomology 08JJ (l.13048), 08JI (l.11959), 08JB and 08JC, the statement of every cited node, and the Lean rendering of the rational clause of def-weil-site-perfect-complex (source only). The statement matches the blueprint and def-sf-datum with nothing weakened or added; the second reader rightly removed the extra separatedness of X. Steps 1-4, 6 and 7 pass. Signs and support [-b,-a] were recomputed from def-pur-hom-complex. The hypotheses of lem-pc-bounded-exact-term-hom-quasi-iso are met by step 2. Slice restriction comes from the ringed internal-Hom lemma, which has no boundedness assumption. The evaluation is the counit in sk-def-sf-operations (i). One fault, repaired: step 5 built a 'reversed dual complex with terms H(P^{-j})', which are derived objects, and never showed that the underived terms Hom(P^r,R) are rational summands. The corrected step 5 in fixes/dag/nodes/sec-six-functors/prop-sf-dualizable.json defines D=Hom^•(P,R_U[0]) with module terms. It proves c_F: Hom(F,R)[0]->Hom^•(F,I) is a rational isomorphism as a retract of c_{E^m}, using module-map representatives of i and p and naturality; the uses lists are unchanged. Test case: O+O/varpi, where the higher Ext is torsion. Tool uses accepted: lem-weil-pbc-ringed-internal-hom-exact-restriction (sk-def-sf-operations has no node for slice restriction or exactness of RHom), lem-pc-bounded-exact-term-hom-quasi-iso, lem-weil-scalar-extension-exact-triangulated, lem-fix-operation-reduction. No duplicates: lem-pod-coefficient-dual-perfect and thm-sf-dual-perfect work under the Poincare conventions. No SGA source used.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-e6bc36189 (reviewer sub-agent of L); spot-checked: I read the item, all 11 steps and the new node in full, the statement of every cited node, the unit and chapter records, the main-20261015 and master blueprint (identical statement), and Stacks 08JI (l.11959) and 08JJ (l.13048). The item statement and stmt_deps are byte-identical to the base and to the live node, which is still unsplit; nothing is weakened and no SGA is cited. Steps 1-3: slice restriction comes from lem-weil-pbc-ringed-internal-hom-exact-restriction; term Hom is exact as a retract of (-)^m; the hypotheses of lem-pc-bounded-exact-term-hom-quasi-iso hold; I recomputed the sign (-1)^{n+1} phi d_P^{-n-1} and the support [-b,-a] from def-pur-hom-complex. Steps 5-9: the new node is applied with A=O_E, t=varpi_E and R the completed sheaf; lem-pc-stupid-tail-hom-short-exact applies with k=r; lem-weil-pbc-complex-ses-triangle gives the connecting square; scalar localization is exact because D(R) is O_E-linear; the shift sign (-1)^{rq} commutes with postcomposition by j; the descending induction has an explicit base P_{>=b+1}=0 and claim and uses two-out-of-three (lem-sf-triangle-morphism-iso). Steps 10-11 are unchanged and correct: the common-stage comparisons come from lem-fix-operation-reduction, and evaluation is the counit in sk-def-sf-operations (i). The new node lem-sf-rational-term-hom-comparison is true (Q(c_F) is a retract of Q(c_{R^m}) = Q(j^m) by full faithfulness on degree-zero modules and linear extension) and was tested on t=0, t invertible, m=0, F=R and F=O+O/varpi, where the torsion Ext dies rationally. It is self-contained, statement-only, strictly smaller than the item and no restated clause. It duplicates nothing: lem-weil-pbc-ringed-site-bounded-free-rhom-model needs actual summands, lem-sf-hom-finite-projective needs separated X, and lem-pod-coefficient-dual-perfect and thm-sf-dual-perfect are under the Poincare conventions. Its id is absent from the live DAG. Fix: the new node lacked merged_into and lean_audit (brief section 3); the corrected whole file is in fixes/dag/nodes/sec-six-functors/lem-sf-rational-term-hom-comparison.json. Accepted tool_uses: lem-pur-site-restriction-module-adjunction-exact, lem-weil-pbc-ringed-internal-hom-exact-restriction, lem-pc-bounded-exact-term-hom-quasi-iso, lem-pc-stupid-tail-hom-short-exact, lem-weil-linear-scalar-localization-triangulated, lem-weil-scalar-extension-exact-triangulated, lem-fix-operation-reduction. The other two declared ones (lem-sf-triangle-morphism-iso, lem-weil-pbc-complex-ses-triangle) are Mathlib leaves and need no tool use.; 1 file(s) fixed by the reviewer"
  }
 }
