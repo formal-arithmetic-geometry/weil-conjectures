@@ -34,48 +34,154 @@
   "lem-coef-kan-quillen-right-proper",
   "lem-coef-sorted-simplicial-algebra-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $I_O$ be the identity-only category on $O$. For the composition-and-unit sorted theory, the free algebra $F_{xy}(K)$ on a simplicial set $K$ in sort $(x,y)$ is the degreewise path category of the graph with edges $K$ from $x$ to $y$ and no other edges: a simplicial functor out is exactly a simplicial map $K\\to C(x,y)$. Apply the boundary small-object factorization in [lem-coef-sorted-simplicial-algebra-model] to $I_O\\to C$, obtaining a relative boundary-cell map $j:I_O\\to F$ followed by a mappingwise trivial fibration $p:F\\to C$. Here is its degreewise description. In degree $q$, the simplices of $\\Delta^m$ outside its boundary are exactly the surjections $[q]\\twoheadrightarrow[m]$. A pushout of $F_{xy}(\\partial\\Delta^m)\\to F_{xy}(\\Delta^m)$ therefore freely adjoins one edge with endpoints $(x,y)$ for each such surjection; the other simplices are assigned to their prescribed old arrows. The pushout universal property verifies that there are no new relations among these new edges and the old category. A coproduct of cells tags these edges by their cells. At a limit stage every arrow is a finite word from preceding stages, so starting with $I_O$, the degree-$q$ category is free on the union of the tagged edges. Thus every $F_q$ is a free category $P(Q_q)$ on a small directed graph $Q_q$ on $O$, also for loops $x=y$ and $m=0$. Cofibrancy of $C$ means that $I_O\\to C$ lifts against $p$, giving $i:C\\to F$ with $pi=1_C$. No assertion that face maps preserve generators is needed.",
+   "uses": [
+    "lem-coef-sorted-simplicial-algebra-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 9.2 and Section 7.6: free retract reduction; boundary-cell argument written out using the sorted-model node"
+   }
+  },
+  {
+   "text": "Fix a small directed graph $Q$ on $O$, write $P=P(Q)$ for its path category, and let $u:P\\to G(P)$ be completion. Represent arrows of $G(P)$ by composable signed edge words, modulo insertion/deletion of adjacent inverse pairs: expansion of positive paths gives this presentation directly from completion's defining relations. Reduce a word by scanning left to right, cancelling the last stored letter when it is inverse to the next letter and appending otherwise. Appending $e$ and then $e^{-1}$ restores any reduced stack (if the first append cancels, reducedness prevents the second from cancelling again); hence the final output is invariant under each defining relation, also inside a longer word. Each scan deletes only inverse pairs and fixes reduced words, so every arrow has exactly one reduced signed word.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 3.7, total inversion special case; Section 3.2 signed-word presentation; agent-supplied comma-tree calculation"
+   }
+  },
+  {
+   "text": "For $b\\in O$, the comma category $E_b=(b\\downarrow u)$ has objects the reduced signed words $w:b\\to x$ and arrows $w\\to w'$ the positive edge words $a:x\\to x'$ satisfying $w'=\\operatorname{red}(wa)$. Define a directed graph $T_b$ on these objects with an edge $w\\to\\operatorname{red}(we)$ for each generating edge $e$ out of $x$. A positive word uniquely determines the successive lifted edges by its successive prefixes; conversely a lifted directed path records that positive word. These mutually inverse descriptions preserve concatenation and empty words, so $E_b=P(T_b)$. All sets are small, being sets of finite words in small sets.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 3.7, total inversion special case; Section 3.2 signed-word presentation; agent-supplied comma-tree calculation"
+   }
+  },
+  {
+   "text": "The underlying undirected graph of $T_b$ is a rooted tree, with root the empty word at $b$. Every edge changes length by exactly one, and each nonempty reduced word has precisely one edge to a shorter word: delete its final signed letter (a positive last letter gives an incoming lifted edge, a negative last letter an outgoing one). Thus there are no loops or parallel undirected edges, and a simple cycle would have a maximal-length vertex with two distinct shorter neighbors, impossible. Repeated deletion connects each vertex to the root, proving the tree assertion even when $Q$ has loops or parallel edges.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 3.7, total inversion special case; Section 3.2 signed-word presentation; agent-supplied comma-tree calculation"
+   }
+  },
+  {
+   "text": "For every nonempty finite connected subtree $H\\subseteq T_b$ containing the root, prove that $N(P(H))\\to *$ is a weak homotopy equivalence by induction on its number of vertices. A one-vertex tree has only its identity arrow, and its nerve is a point. Otherwise a longest simple path supplies a leaf $v$ different from the root; let $w$ be its unique neighbor and $H'=H\\setminus\\{v\\}$. The inclusion $J:P(H')\\to P(H)$ has a retraction $R$ sending $v$ to $w$, its incident edge to $1_w$, and fixing all other vertices and edges. This extends uniquely to words, so is a functor and $RJ=1$. If the edge points $v\\to w$, there is a natural transformation $1\\Rightarrow JR$ with this edge at $v$ and identities elsewhere. If it points $w\\to v$, there is instead $JR\\Rightarrow1$. For naturality, a directed path meeting a leaf can only start or finish there, and erasing the incident edge is exactly $R$; paths avoiding the leaf are fixed. The two functors therefore meet the hypotheses of [lem-coef-nerve-natural-homotopy-equivalence], which makes $NR$ a weak homotopy equivalence. The induction hypothesis and composition of weak equivalences from [lem-coef-kan-quillen-right-proper] give the assertion for $H$. This includes either edge orientation.",
+   "uses": [
+    "lem-coef-nerve-natural-homotopy-equivalence",
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 3.7; agent-supplied finite-tree contraction of the comma categories"
+   }
+  },
+  {
+   "text": "Let $\\mathcal H_b$ be the poset of finite connected subtrees of $T_b$ containing its root. It is a small nonempty directed poset: it contains the root alone, and the union of two such subtrees is again finite, connected, and a subtree. A simplex of $N(P(T_b))$ is a finite string of finite directed edge paths, hence lies in the finite subtree obtained by adjoining to its finitely many vertices their unique finite paths to the root. Path-word equality is literal equality, so no two distinct simplices at a finite stage are identified at a larger stage. This proves $\\operatorname{colim}_{H\\in\\mathcal H_b}N(P(H))=NE_b$, compatibly with deletion, composition, and identity insertion. The maps to the constant point diagram form a natural transformation of weak equivalences by Step 5. The filtered-colimit clause of [lem-coef-sset-gluing-filtered-equivalences] now gives $NE_b\\to *$ a weak homotopy equivalence. The constant point diagram has colimit a point since the index poset is nonempty and directed.",
+   "uses": [
+    "lem-coef-sset-gluing-filtered-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 3.7; agent-supplied finite-subtree exhaustion, avoiding any local finiteness assumption"
+   }
+  },
+  {
+   "text": "For each $b$ of the small groupoid $G(P)$, Step 6 proves precisely the weak contractibility of the nerve of $(b\\downarrow u)$. The left-aspherical nerve implication in [lem-coef-grothendieck-aspherical-base-change] therefore proves that the actual map $Nu:NP(Q)\\to NG(P(Q))$ is a weak homotopy equivalence. This reasoning chooses $b$ only after fixing a target object, so imposes no connectedness condition on $Q$. If $O$ is empty, both nerves are empty and the canonical map is the identity. Apply this result to $Q_q$ from Step 1 for every $q$: the ordinary nerve maps $B(F)_{\\bullet,q}\\to B(G(F))_{\\bullet,q}$ are weak homotopy equivalences. These maps form a morphism of bisimplicial sets because every simplicial operator of $F$ is a functor and the groupoid completion is functorial. The chosen generators need not be preserved by these operators.",
+   "uses": [
+    "lem-coef-grothendieck-aspherical-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 3.7, total inversion, and Proposition 9.2; agent-supplied Quillen-Theorem-A proof of the ordinary input"
+   }
+  },
+  {
+   "text": "Apply the exchanged-direction clause of [lem-coef-bisimplicial-diagonal-equivalence] to the weak equivalences $B(F)_{\\bullet,q}\\to B(G(F))_{\\bullet,q}$ of Step 7. Its diagonal is precisely the canonical map $NF\\to NG(F)$, so that map is a weak homotopy equivalence. By the universal property of groupoid completion, $i:C\\to F$ and $p:F\\to C$ extend functorially to $G(i)$ and $G(p)$, with $G(p)G(i)=1_{G(C)}$. Naturality of the completion maps gives commuting squares with $N(i),N(p),NG(i),NG(p)$. Thus $NC\\to NG(C)$ is an arrow-category retract of $NF\\to NG(F)$.",
+   "uses": [
+    "lem-coef-bisimplicial-diagonal-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 9.2 and Section 1.4(vii): diagonal and retract argument"
+   }
+  },
+  {
+   "text": "To finish, the retract of a weak homotopy equivalence is one, directly from the definition in [lem-coef-kan-quillen-right-proper]. Indeed, let $f:A\\to B$ be a retract of $g:X\\to Y$ with inclusions $i_A,i_B$ and retractions $r_A,r_B$. On path components, and on each based homotopy group at a basepoint $a\\in|A|$ and its image in $|X|$, the inverse to the induced map of $f$ is $r_{A*}g_*^{-1}i_{B*}$. The two commuting retract squares and $r_*i_*=1$ make both its composites identities. Realization preserves these retract equations by functoriality. Applying this to Step 8 proves the required canonical map $NC\\to NG(C)$ is a weak homotopy equivalence. If $O$ is empty the map is already the identity of the empty simplicial set. Isolated objects give singleton comma trees, and empty mapping sets and disconnected graphs are admitted throughout.",
+   "uses": [
+    "lem-coef-kan-quillen-right-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+    "place": "Proposition 9.2, retract conclusion; elementary component and based-homotopy-group calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-bisimplicial-diagonal-equivalence",
+  "lem-coef-grothendieck-aspherical-base-change",
+  "lem-coef-kan-quillen-right-proper",
+  "lem-coef-nerve-natural-homotopy-equivalence",
+  "lem-coef-sorted-simplicial-algebra-model",
+  "lem-coef-sset-gluing-filtered-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dwyer-kan-1.pdf",
+  "place": "Proposition 9.2, printed p.279, read online 2026-10-17; same free/retract–degreewise–diagonal route, with independent cell and comma-tree expansions to avoid existing DAG cycles. PDF not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "For a cofibrant simplicial category the diagonal nerve map to its degreewise groupoid completion is a weak homotopy equivalence",
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"{X : SSet.Truncated 2} →\\n  {C : Type u} →\\n    [inst : CategoryTheory.SmallCategory C] →\\n      CategoryTheory.Functor X.HomotopyCategory C ≃ (X ⟶ (SSet.truncation 2).obj (CategoryTheory.nerve C))\", \"doc\": \"For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a natural equivalence between the category of functors from the homotopy category of $X$ to $\\\\mathcal{C}$ and the category o\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.homToNerveMk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"{X : SSet.Truncated 2} →\\n  {C : Type u} →\\n    [inst : CategoryTheory.SmallCategory C] →\\n      CategoryTheory.Functor X.HomotopyCategory C → (X ⟶ (SSet.truncation 2).obj (CategoryTheory.nerve C))\", \"doc\": \"For a 2-truncated simplicial set $X$ and a category $\\\\mathcal{C}$, this function constructs a morphism from $X$ to the 2-truncated nerve of $\\\\mathcal{C}$ by lifting a functor $F: X.\\\\text{HomotopyCateg\"}\n  {\"name\": \"CategoryTheory.nerveFunctorCompHoFunctorIso\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"CategoryTheory.nerveFunctor.comp SSet.hoFunctor ≅ CategoryTheory.Functor.id CategoryTheory.Cat\", \"doc\": \"The composition of the nerve functor from small categories to 2-truncated simplicial sets and the homotopy category functor is naturally isomorphic to the identity functor on the category of small cat\"}\n  {\"name\": \"SSet.Truncated.nerve₂Adj\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"SSet.Truncated.hoFunctor₂ ⊣ CategoryTheory.Nerve.nerveFunctor₂\", \"doc\": \"The nerve functor from small categories to 2-truncated simplicial sets is left adjoint to the homotopy category functor. For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a n\"}\n  {\"name\": \"CategoryTheory.nerveAdjunction\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"SSet.hoFunctor ⊣ CategoryTheory.nerveFunctor\", \"doc\": \"The nerve functor from small categories to 2-truncated simplicial sets is left adjoint to the homotopy category functor. For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a n\"}\n  {\"name\": \"CategoryTheory.hoFunctor.instIsIsoCatProdComparisonSSetHoFunctorNerve\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"∀ (C D : Type u) [inst : CategoryTheory.Category.{u, u} C] [inst_1 : CategoryTheory.Category.{u, u} D],\\n  CategoryTheory.IsIso\\n    (CategoryTheory.Limits.prodComparison SSet.hoFunctor (CategoryTheory.nerve C) (CategoryTheory.nerve D))\", \"doc\": \"For any categories $ C $ and $ D $, the product comparison morphism induced by the homotopy category functor applied to the nerves of $ C $ and $ D $ is an isomorphism. This means the canonical morphi\"}\n  {\"name\": \"SSet.OneTruncation₂.nerveEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] → SSet.OneTruncation₂ ((SSet.truncation 2).obj (CategoryTheory.nerve C)) ≃ C\", \"doc\": \"The 2-truncated nerve of a category $\\\\mathcal{C}$, obtained by restricting the nerve simplicial set to dimensions $\\\\leq 2$, is canonically equivalent to $\\\\mathcal{C}$. This establishes that the data o\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.homToNerveMk_app_zero\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"∀ {X : SSet.Truncated 2} {C : Type u} [inst : CategoryTheory.SmallCategory C]\\n  (F : CategoryTheory.Functor X.HomotopyCategory C)\\n  (x : X.obj (Opposite.op { obj := SimplexCategory.mk 0, property := _proof_11✝ })),\\n  (SSet.Truncated.HomotopyCategory.homToNerveMk F).app\\n      (Opposite.op { obj := Si\", \"doc\": \"For a 2-truncated simplicial set $X$ and a category $\\\\mathcal{C}$, the component of the nerve-homotopy adjunction at 0-simplices states that applying the adjunction morphism $\\\\text{homToNerveMk}(F)$ t\"}\n",
    "date": "2026-10-17",
-   "verdict": "no match: hits concern the ordinary nerve / 2-truncated homotopy-category adjunction or cofibrant replacements in an arbitrary model category; none states preservation of the diagonal nerve by strict degreewise inversion. Read NerveAdjunction.lean:284–303, HomotopyCat.lean:523–526, CofibrantObjectHomotopy.lean:67–89."
+   "verdict": "no match: ordinary nerve and homotopy-category adjunctions or arbitrary-model-category cofibrant replacements do not assert that strict degreewise inversion preserves the diagonal nerve. Candidate declarations read in NerveAdjunction.lean:284–310, HomotopyCat.lean:510–532, and CofibrantObjectHomotopy.lean:55–98."
   },
   {
    "tool": "leansearch",
    "query": "Groupoid completion of a cofibrant simplicial category preserves the homotopy type of its classifying space",
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \": C ⥤ CofibrantObject.HoCat C\", \"doc\": \"The canonical functor from a model category $\\\\mathcal{C}$ to its homotopy category of cofibrant objects, which sends each object $X$ to its cofibrant replacement $X'$ and each morphism to its equivale\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.instIsLocalizedEquivalenceHoCatWeakEquivalencesToHoCatLocalizerMorphism\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \": (toHoCatLocalizerMorphism C).IsLocalizedEquivalence\", \"doc\": \"The canonical functor from the full subcategory of cofibrant objects in a model category to its homotopy category becomes an equivalence after localization with respect to weak equivalences. This mean\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.toHoCat\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \": CofibrantObject C ⥤ HoCat C\", \"doc\": \"The canonical functor from the full subcategory of cofibrant objects in a model category $\\\\mathcal{C}$ to its homotopy category of cofibrant objects, which maps each object to itself and each morphism\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.congr_simp\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : HomotopicalAlgebra.CategoryWithCofibrations C]\\n  [inst_2 : CategoryTheory.Limits.HasInitial C],\\n  HomotopicalAlgebra.CofibrantObject C = HomotopicalAlgebra.CofibrantObject C\", \"doc\": \"For a category $\\\\mathcal{C}$ with cofibrations and an initial object, the full subcategory of cofibrant objects is equal to itself under the given category and cofibration structures.\"}\n  {\"name\": \"HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution_functor\", \"module\": \"Mathlib.AlgebraicTopology.ModelCategory.CofibrantObjectHomotopy\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : HomotopicalAlgebra.ModelCategory C],\\n  (HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution C).functor =\\n    HomotopicalAlgebra.CofibrantObject.HoCat.resolution\", \"doc\": \"The morphism of localizers between the weak equivalences of a model category $\\\\mathcal{C}$ and the weak equivalences of its homotopy category of cofibrant objects, constructed via the resolution funct\"}\n  {\"name\": \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \": CategoryWithCofibrations SSet.{u}\", \"doc\": \"The category of simplicial sets is equipped with a category with cofibrations structure, where the cofibrations are defined as the monomorphisms in the category of simplicial sets.\"}\n  {\"name\": \"CategoryTheory.hoFunctor.preservesFiniteProducts\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.NerveAdjunction\", \"type\": \": PreservesFiniteProducts hoFunctor\", \"doc\": \"The functor from the category of simplicial sets to the category of small categories, which maps each simplicial set to its homotopy category by truncating at dimension 2 and quotienting by homotopy r\"}\n  {\"name\": \"SSet.modelCategoryQuillen.mono_of_cofibration\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.CategoryWithFibrations\", \"type\": \"[Cofibration f] : Mono f\", \"doc\": \"The category of simplicial sets is equipped with a category with cofibrations structure, where the cofibrations are defined as the monomorphisms in the category of simplicial sets.\"}\n",
    "date": "2026-10-17",
-   "verdict": "no match: hits concern the ordinary nerve / 2-truncated homotopy-category adjunction or cofibrant replacements in an arbitrary model category; none states preservation of the diagonal nerve by strict degreewise inversion. Read NerveAdjunction.lean:284–303, HomotopyCat.lean:523–526, CofibrantObjectHomotopy.lean:67–89."
+   "verdict": "no match: ordinary nerve and homotopy-category adjunctions or arbitrary-model-category cofibrant replacements do not assert that strict degreewise inversion preserves the diagonal nerve. Candidate declarations read in NerveAdjunction.lean:284–310, HomotopyCat.lean:510–532, and CofibrantObjectHomotopy.lean:55–98."
   },
   {
    "tool": "loogle",
    "query": "CategoryTheory.nerve, CategoryTheory.Groupoid",
    "results": "[loogle] OK 0 hit(s)\n",
    "date": "2026-10-17",
-   "verdict": "no match: hits concern the ordinary nerve / 2-truncated homotopy-category adjunction or cofibrant replacements in an arbitrary model category; none states preservation of the diagonal nerve by strict degreewise inversion. Read NerveAdjunction.lean:284–303, HomotopyCat.lean:523–526, CofibrantObjectHomotopy.lean:67–89."
+   "verdict": "no match: ordinary nerve and homotopy-category adjunctions or arbitrary-model-category cofibrant replacements do not assert that strict degreewise inversion preserves the diagonal nerve. Candidate declarations read in NerveAdjunction.lean:284–310, HomotopyCat.lean:510–532, and CofibrantObjectHomotopy.lean:55–98."
   },
   {
    "tool": "grep",
    "query": "groupoid.*completion|completion.*nerve|cofibrant.*nerve",
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-17",
-   "verdict": "no match: hits concern the ordinary nerve / 2-truncated homotopy-category adjunction or cofibrant replacements in an arbitrary model category; none states preservation of the diagonal nerve by strict degreewise inversion. Read NerveAdjunction.lean:284–303, HomotopyCat.lean:523–526, CofibrantObjectHomotopy.lean:67–89."
+   "verdict": "no match: ordinary nerve and homotopy-category adjunctions or arbitrary-model-category cofibrant replacements do not assert that strict degreewise inversion preserves the diagonal nerve. Candidate declarations read in NerveAdjunction.lean:284–310, HomotopyCat.lean:510–532, and CofibrantObjectHomotopy.lean:55–98."
   },
   {
    "tool": "leanfinder",
    "query": "The classifying space of a free simplicial category has the same homotopy type after formally inverting every arrow",
-   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.hoFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"CategoryTheory.Functor SSet CategoryTheory.Cat\", \"doc\": \"The functor from the category of simplicial sets to the category of small categories, constructed as the composition of the 2-truncation functor and the homotopy category functor for 2-truncated simpl\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.quotientFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"(V : SSet.Truncated 2) → CategoryTheory.Functor (CategoryTheory.Cat.FreeRefl (SSet.OneTruncation₂ V)) V.HomotopyCategory\", \"doc\": \"The canonical functor from the free reflexive quotient category of the 0-simplices and 1-simplices of a 2-truncated simplicial set $V$ to its homotopy category, constructed by quotienting out the homo\"}\n  {\"name\": \"SSet.hoFunctor.terminalIso\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"SSet.hoFunctor.obj (⊤_ SSet) ≅ ⊤_ CategoryTheory.Cat\", \"doc\": \"The homotopy category functor applied to the terminal object in the category of simplicial sets (the standard 0-simplex $\\\\Delta^0$) is isomorphic to the terminal object in the category of small catego\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"SSet.Truncated 2 → Type u\", \"doc\": \"For a 2-truncated simplicial set $ V $, this is the quotient category of the free reflexive quotient category $ \\\\text{FreeRefl}(\\\\text{OneTruncation}_2 V) $ by the homotopy relation $ \\\\text{HoRel}_2 $,\"}\n  {\"name\": \"CategoryTheory.hoFunctor.instIsLeftAdjointSSetCatHoFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"SSet.hoFunctor.IsLeftAdjoint\", \"doc\": \"The functor from the category of simplicial sets to the category of small categories, which maps each simplicial set to its homotopy category, is a left adjoint functor. This functor is constructed by\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"{X : SSet.Truncated 2} →\\n  {C : Type u} →\\n    [inst : CategoryTheory.SmallCategory C] →\\n      CategoryTheory.Functor X.HomotopyCategory C ≃ (X ⟶ (SSet.truncation 2).obj (CategoryTheory.nerve C))\", \"doc\": \"For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a natural equivalence between the category of functors from the homotopy category of $X$ to $\\\\mathcal{C}$ and the category o\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.mk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"{V : SSet.Truncated 2} →\\n  V.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.OneTruncation₂._proof_1 }) → V.HomotopyCategory\", \"doc\": \"The function maps a 0-simplex $ x $ in a 2-truncated simplicial set $ V $ to its equivalence class in the homotopy category $ V.\\text{HomotopyCategory} $, using the canonical quotient functor that iden\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.lift\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"{V : SSet.Truncated 2} →\\n  {D : Type u_1} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} D] →\\n      (obj : V.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.OneTruncation₂._proof_1 }) → D) →\\n        (map :\\n            {x y : V.obj (Opposite.op { obj := SimplexCategory.mk 0, proper\", \"doc\": \"Given a 2-truncated simplicial set $ V $ and a category $ D $, if a functor from the free reflexive quiver of $ V $'s 0-simplices to $ D $ preserves identities and compositions, this constructs a func\"}\n",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SSet.QCat\", \"module\": \"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of the category of simplicial sets consisting of all quasi-categories (simplicial sets where every inner horn admits a filler) and all morphisms between them.\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.quotientFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"(V : SSet.Truncated 2) → CategoryTheory.Functor (CategoryTheory.Cat.FreeRefl (SSet.OneTruncation₂ V)) V.HomotopyCategory\", \"doc\": \"The canonical functor from the free reflexive quotient category of the 0-simplices and 1-simplices of a 2-truncated simplicial set $V$ to its homotopy category, constructed by quotienting out the homo\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.morphismPropertyHomMk_eq_strictMap\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"∀ {V : SSet.Truncated 2},\\n  SSet.Truncated.HomotopyCategory.morphismPropertyHomMk V =\\n    (CategoryTheory.Cat.FreeRefl.morphismPropertyHomMk (SSet.OneTruncation₂ V)).strictMap\\n      (SSet.Truncated.HomotopyCategory.quotientFunctor V)\", \"doc\": \"For a 2-truncated simplicial set $ V $, the morphism property in its homotopy category that a morphism is generated by an edge (1-simplex) equals the strict image of the corresponding property in the \"}\n  {\"name\": \"SSet.instUniqueHomotopyCategoryObjTruncatedOfNatNatTruncationSimplexCategoryStdSimplexMk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"Unique ((SSet.truncation 2).obj (SSet.stdSimplex.obj (SimplexCategory.mk 0))).HomotopyCategory\", \"doc\": \"The homotopy category of the 2-truncated standard 0-simplex is a category with a single object and only the identity morphism, making it a terminal category. This instance asserts that this homotopy c\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.mk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"{V : SSet.Truncated 2} →\\n  V.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.OneTruncation₂._proof_1 }) → V.HomotopyCategory\", \"doc\": \"The function maps a 0-simplex $ x $ in a 2-truncated simplicial set $ V $ to its equivalence class in the homotopy category $ V.\\text{HomotopyCategory} $, using the canonical quotient functor that iden\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.functorEquiv\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction\", \"type\": \"{X : SSet.Truncated 2} →\\n  {C : Type u} →\\n    [inst : CategoryTheory.SmallCategory C] →\\n      CategoryTheory.Functor X.HomotopyCategory C ≃ (X ⟶ (SSet.truncation 2).obj (CategoryTheory.nerve C))\", \"doc\": \"For any 2-truncated simplicial set $X$ and category $\\\\mathcal{C}$, there is a natural equivalence between the category of functors from the homotopy category of $X$ to $\\\\mathcal{C}$ and the category o\"}\n  {\"name\": \"SSet.Truncated.HomotopyCategory.lift_obj_mk\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"∀ {V : SSet.Truncated 2} {D : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} D]\\n  (obj : V.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.OneTruncation₂._proof_1 }) → D)\\n  (map :\\n    {x y : V.obj (Opposite.op { obj := SimplexCategory.mk 0, property := SSet.OneTruncation₂._pro\", \"doc\": \"For a 2-truncated simplicial set $ V $, if $ F $ is a functor from its homotopy category to another category $ D $, then applying $ F $ to the equivalence class $[x]$ of a 0-simplex $ x $ in $ V $'s h\"}\n  {\"name\": \"SSet.hoFunctor\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/HomotopyCat\", \"type\": \"CategoryTheory.Functor SSet CategoryTheory.Cat\", \"doc\": \"The functor from the category of simplicial sets to the category of small categories, constructed as the composition of the 2-truncation functor and the homotopy category functor for 2-truncated simpl\"}\n",
    "date": "2026-10-17",
-   "verdict": "no match: hits concern the ordinary nerve / 2-truncated homotopy-category adjunction or cofibrant replacements in an arbitrary model category; none states preservation of the diagonal nerve by strict degreewise inversion. Read NerveAdjunction.lean:284–303, HomotopyCat.lean:523–526, CofibrantObjectHomotopy.lean:67–89."
+   "verdict": "no match: hits concern homotopy-category quotients, ordinary nerve adjunctions, and the category of quasicategories, not strict degreewise inversion of a cofibrant simplicial category. Read HomotopyCat.lean:510–532 and NerveAdjunction.lean:284–310."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cofibrant-homotopy-groupoid-completion",
@@ -83,5 +189,21 @@
   "group": "Q31"
  },
  "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-biduality-general"
+ "unit": "sk-prop-sf-biduality-general",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-cofibrant-completion-nerve-equivalence",
+  "worker": "stage1",
+  "summary": "Kept the statement and its three statement dependencies unchanged. Read Dwyer–Kan I Proposition 9.2 and Sections 1.4, 3.2–3.8, 7.4–7.6 online. The first server DAG check exposed cycles through the existing fixed-object free-calculus and free-category inversion lemmas; replaced their uses by explicit boundary-cell freeness and a complete independent comma-tree proof using existing natural-transformation, filtered-colimit and aspherical-nerve inputs. No new nodes or Mathlib leaves. The proof remains agent-written because the independent ordinary-input expansion is supplied here; source archive WANTED. Second reading separated the elementary normal-form, comma-path and tree checks into three steps and expanded the sorted-model citation to include its generating maps and weak-factorization properties.",
+  "blueprint": "Ancestral prop-coef-integral-exceptional-adjoint proof paragraph 2: mapping-space foundation for the displayed derived coefficient adjunction and inverse-limit computation, through the existing coherent-nerve / simplicial-interval ancestry. Realizes the Dwyer–Kan 9.2 nerve-preservation input of the parent lem-coef-cofibrant-homotopy-groupoid-completion; neither the unit statement nor its route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-5aedea7f3",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-5aedea7f3 (reviewer sub-agent of L); spot-checked: I read the item, all nine steps and the full statements of all seven cited nodes. Dwyer–Kan is not in literature/, so I fetched the scan read-only into /tmp and read printed p.269 (1.4(iv)–(vii), diagonal nerve), p.277 (7.3–7.5) and p.279 (9.1, and 9.2: 'If V in sO-Cat is cofibrant, then V->V[V^-1] induces NV ~ N(V[V^-1])'). The item statement matches 9.2 hypothesis by hypothesis: fixed O, cofibrant V, degreewise completion, diagonal nerve, no pi_0-groupoid condition. It is unchanged, and the archive stays WANTED with proof_origin agent. Step 1: the degree-q cell pushouts freely adjoin the surjections [q]->[m] as edges, colimits are degreewise, and the lift against the trivial fibration gives the retract; this is supported by the statement of the sorted-model node. Steps 2–4: the normal form, the identification (b|u)=P(T_b) and the tree argument are correct and elementary, including loops and parallel edges. Step 5: I checked the leaf-retraction naturality in both orientations against the nerve-natural node. Step 6: the filtered-colimit hypotheses hold on the small nonempty directed poset of finite rooted subtrees. Step 7: the Quillen A left-aspherical clause applies. Step 8: the exchanged-direction diagonal clause applies, and the retract squares follow from naturality. Step 9: the retract inverse and its basepoints check out. Small cases checked: empty O, identity-only category, one edge, one loop, parallel edges, isolated objects. There are no new nodes. proof_deps equals the union of the step uses, every dependency is in the unit sk-prop-sf-biduality-general, there is no cycle or merged dependency (167 nodes traversed), no SGA citation and no tool_uses. The existing lem-coef-free-category-groupoid-nerve states the ordinary claim of Steps 2–7, but citing it would close a cycle, so the inline proof is correct; I noted for the maintainer that its route could be reproved from these steps. No changes made."
+ }
 }

@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-pur-smooth-purity-naturality-cover",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Naturality and independence of the smooth purity map",
@@ -14,43 +14,160 @@
  },
  "stmt_deps": [
   "thm-pur-finite-coefficient-smooth-purity",
-  "def-pur-smooth-purity-map",
-  "def-sbc-smooth-morphisms",
-  "def-weil-pbc-proetale-site",
-  "def-weil-scheme-morphism-properties"
+  "def-pur-smooth-purity-map"
  ],
  "proof": [
   {
-   "text": "Naturality in $K$ is the naturality of the tensor formula\n[thm-pur-cohomological-smoothness], of the twist\nisomorphisms [def-coefficient-twists-detailed], and of the\nidentification of [thm-pur-diagonal-dualizing-object] (in the\nobject and in the morphism, all steps of the construction of\n[def-pur-smooth-purity-map] being canonical derived\ntransformations).\nThe independence of the choices: the construction contains no\nchoices at all – the identification of\n[thm-pur-diagonal-dualizing-object] is the unique one normalized\non the standard pairs and compatible with base change and etale\nlocalization ([thm-pur-dnc-invariance]), the tensor formula and\nthe twist isomorphisms are canonical, and the normalization of the\nfundamental class is the single one of the Kummer boundary of the\ncoordinate ([thm-pur-affine-line-orientation] and\n[thm-pur-rank-one-local-calculation]).",
+   "text": "Fix the finite coefficient ring $A=\\Lambda=A_{E,n}$ and the smooth separated $f:X\\to Y$ of pure relative dimension $d$ in the statement. Write $M_K=Lf^*K$, $T=\\Lambda_X(d)[2d]$, and $\\omega=Rf^!\\Lambda_Y$. By [def-pur-smooth-purity-map], the map is $\\gamma_K=\\theta_K(1_{M_K}\\otimes\\Pi_f^{-1})\\tau_K$, with the specified canonical orientation $\\Pi_f:\\omega\\xrightarrow{\\sim}T$. We first check naturality of $\\theta$. By [def-pur-co-smoothness], its adjoint is the map $a_K:Rf_!(M_K\\otimes^L\\omega)\\to K$ obtained successively from symmetry, $\\operatorname{PF}_{f,\\omega,K}^{-1}$, $\\varepsilon_{f,\\Lambda_Y}\\otimes1_K$, and the left unitor. For any $u:K\\to K'$ in $D^b_{ctf}(Y,\\Lambda)$ put $m=Lf^*u$. Naturality of the projection isomorphism in [fix-prop-projection-formula], and of the tensor symmetry and unitors, gives\n$$u\\,a_K=a_{K'}\\,Rf_!(m\\otimes1_\\omega).$$\nHere the counit at $\\Lambda_Y$ is a fixed morphism, so the counit part of this equality is simply $(\\varepsilon\\otimes1_{K'})(1\\otimes u)=(1\\otimes u)(\\varepsilon\\otimes1_K)$. Taking adjoints through the natural Hom bijection of [thm-sf-ambient-adjoint-class] gives\n$$Rf^!u\\,\\theta_K=\\theta_{K'}(m\\otimes1_\\omega).$$\nThe tensor formula of [thm-pur-cohomological-smoothness] ensures that these specified maps are isomorphisms on precisely the smooth finite-coefficient domain being used; no adjunction on arbitrary unbounded pro-etale objects is needed.",
    "uses": [
-    "thm-pur-cohomological-smoothness",
+    "def-pur-smooth-purity-map",
+    "def-pur-co-smoothness",
+    "fix-prop-projection-formula",
+    "thm-sf-ambient-adjoint-class",
+    "thm-pur-cohomological-smoothness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/prop-pur-smooth-purity-naturality-cover.proof.md",
+    "place": "First sentence: naturality of the tensor formula; expanded using the adjoint formula (Scholze, Six-Functor Formalisms, Definition 5.1, p. 32)."
+   }
+  },
+  {
+   "text": "The other two squares are formal. Let $L=\\Lambda_X(d)$, so that $K(d)$ means tensor with this fixed sheaf by [def-coefficient-twists-detailed]. The map $\\tau_K$ in [def-pur-smooth-purity-map] is the canonical identification $(M_K\\otimes^L L)[2d]\\to M_K\\otimes^L L[2d]$. On a K-flat tensor model it identifies each summand indexed by $(p,q)$ with the same summand after the shift. The total differential of [def-pc-tensor-complex-sheaves] is $d_P\\otimes1+(-1)^p1\\otimes d_L$; since $L$ is in degree zero and $2d$ is even, both shifted differentials agree. This identity commutes with every map in the first factor. It therefore descends to the canonical derived shift identification, and is natural for derived morphisms (equivalently, apply the identity to the arrows in a roof, then invert its quasi-isomorphism). Thus\n$$\\tau_{K'}(m\\otimes1_L)[2d]=(m\\otimes1_T)\\tau_K.$$\nBy the bifunctor law [lem-weil-derived-tensor-functorial], the two composites that apply $m$ in the first factor and $\\Pi_f^{-1}$ in the second are equal:\n$$(m\\otimes1_\\omega)(1\\otimes\\Pi_f^{-1})=(1\\otimes\\Pi_f^{-1})(m\\otimes1_T).$$\nBoth are exactly $m\\otimes\\Pi_f^{-1}$. The orientation is fixed with $f$, and does not vary with $K$.",
+   "uses": [
     "def-coefficient-twists-detailed",
+    "def-pur-smooth-purity-map",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-derived-tensor-functorial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/prop-pur-smooth-purity-naturality-cover.proof.md",
+    "place": "First sentence: twist reassociation and tensoring the fixed orientation; explicit naturality squares."
+   }
+  },
+  {
+   "text": "Paste the three equations of steps 1 and 2. With right-to-left composition they read\n$$\\begin{aligned}\nRf^!u\\,\\gamma_K\n&=\\theta_{K'}(m\\otimes1_\\omega)(1\\otimes\\Pi_f^{-1})\\tau_K\\\\\n&=\\theta_{K'}(1\\otimes\\Pi_f^{-1})(m\\otimes1_T)\\tau_K\\\\\n&=\\gamma_{K'}(m\\otimes1_L)[2d].\n\\end{aligned}$$\nThis is the required naturality square for every morphism $u:K\\to K'$; it is an equality of morphisms, not merely an isomorphism of their sources and targets.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/prop-pur-smooth-purity-naturality-cover.proof.md",
+    "place": "First sentence: compose the three naturality squares."
+   }
+  },
+  {
+   "text": "For independence, first keep the prescribed normalization of the orientation. The factor $\\Pi_f$ is the canonical isomorphism of [thm-pur-diagonal-dualizing-object], as specified in [def-pur-smooth-purity-map]. Its geometric construction uses the normalized DNC comparison: [thm-pur-dnc-invariance] says that the isomorphism of section invariants which is the identity on standard pairs is unique. Hence two choices of etale coordinates producing that comparison give the same morphism. The base $X$ of the normal bundle is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], applied to $X\\to\\operatorname{Spec}k$; the field $k$ is Noetherian since its only ideals are $0$ and $k$. The prime $\\ell$ is invertible on $X$, since $\\ell\\ne\\operatorname{char}k$. The vector-bundle integration used on the normal-bundle side is likewise the unique map restricting to the specified affine-space trace on every trivializing open, by [thm-amb-vector-bundle-purity]; replacing a trivializing cover or a bundle frame cannot replace that map. These are precisely the local choices in the diagonal/DNC construction named by the canonical orientation theorem. In particular we use its specified canonical $\\Pi_f$, and no selection of an arbitrary isomorphism $\\omega\\cong T$.",
+   "uses": [
     "thm-pur-diagonal-dualizing-object",
     "def-pur-smooth-purity-map",
     "thm-pur-dnc-invariance",
-    "thm-pur-affine-line-orientation",
-    "thm-pur-rank-one-local-calculation"
+    "thm-amb-vector-bundle-purity",
+    "lem-weil-pbc-finite-type-over-noetherian"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/prop-pur-smooth-purity-naturality-cover.proof.md",
+    "place": "Second sentence: canonical diagonal orientation, DNC uniqueness and the normalized vector-bundle comparison."
+   }
+  },
+  {
+   "text": "Changing a K-flat representative of $M_K$ does not change the tensor factors as derived objects: [lem-weil-derived-tensor-resolution-independent] supplies their canonical comparison, with identity and cocycle laws, without assuming a direct chain map between arbitrary K-flat resolutions. Under these comparisons the arrows tensoring $\\Pi_f^{-1}$ are the same bifunctorial arrow by [lem-weil-derived-tensor-functorial]. The shift reassociation is also the same: the summand identification in step 2 commutes with every tensor-model comparison arrow, hence with roofs and their inverses. Thus both the first and the middle factors in the composite defining $\\gamma_K$ are unaffected by resolution choices, after the specified canonical identifications.",
+   "uses": [
+    "lem-weil-derived-tensor-resolution-independent",
+    "lem-weil-derived-tensor-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/prop-pur-smooth-purity-naturality-cover.proof.md",
+    "place": "Second sentence: independence of tensor and twist models, using the ringed-site comparison rather than an unjustified direct lift."
+   }
+  },
+  {
+   "text": "Finally the adjoint formula $a_K$ of step 1 fixes the last factor uniquely: an adjunction Hom bijection is injective, so two candidates with that same adjoint equal $\\theta_K$. If a compactification or an etale-origin witness used to realize the operation is changed, [thm-sf-ambient-adjoint-class] identifies the Hom bijections canonically, independently of the witness and compatibly with compactification comparisons. The projection formula [fix-prop-projection-formula] is compatible with these compactification comparisons as well. The symmetry, fixed counit and unitors in $a_K$ are therefore identified with the same adjoint composite. Injectivity again identifies the resulting $\\theta_K$. Together with steps 4 and 5 this identifies each of the three factors, hence their composite $\\gamma_K$. For three choices the comparisons agree by the cocycle laws already cited, so the independence assertion is coherent and introduces no extra normalization.",
+   "uses": [
+    "thm-sf-ambient-adjoint-class",
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/prop-pur-smooth-purity-naturality-cover.proof.md",
+    "place": "Second sentence: independence of the adjoint tensor map and hence of the composite."
+   }
   }
  ],
  "proof_deps": [
+  "def-pur-smooth-purity-map",
+  "def-pur-co-smoothness",
+  "fix-prop-projection-formula",
+  "thm-sf-ambient-adjoint-class",
   "thm-pur-cohomological-smoothness",
   "def-coefficient-twists-detailed",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-derived-tensor-functorial",
   "thm-pur-diagonal-dualizing-object",
-  "def-pur-smooth-purity-map",
   "thm-pur-dnc-invariance",
-  "thm-pur-affine-line-orientation",
-  "thm-pur-rank-one-local-calculation"
+  "thm-amb-vector-bundle-purity",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-derived-tensor-resolution-independent"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/prop-pur-smooth-purity-naturality-cover.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/prop-pur-smooth-purity-naturality-cover.proof.md",
+  "place": "Complete expansion of the two proof sentences, using Scholze Definition 5.1 for the tensor-map transpose and the existing canonical diagonal/DNC route."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "smoothPurity|dualizingComplex|upperShriek|exceptionalInverseImage",
+   "results": "0 hits under Mathlib/; no exceptional inverse image or geometric smooth purity declaration.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The smooth purity map for sheaves is natural in the complex and independent of auxiliary choices",
+   "results": "Sheafification naturality, module pushforward/free-module identities and smooth-manifold sheaf definitions: SheafOfModules.pushforwardNatTrans_app_val_app_apply, CategoryTheory.GrothendieckTopology.toSheafify_naturality, smoothSheaf.eval, smoothSheaf.obj_eq, CategoryTheory.toSheafify_naturality, SheafOfModules.freeHomEquiv_comp_apply, smoothSheafCommGroup, smoothSheaf. No smooth-purity map.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"purity\"",
+   "results": "Only compiler LCNF purity declarations; none concerns sheaf purity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and independence of choices of the canonical smooth purity isomorphism for finite coefficient sheaves",
+   "results": "Smooth manifold sheaf evaluation/stalk identities and module-sheaf presentation maps: smoothSheafCommRing.ι_evalHom_assoc, smoothSheaf.ι_evalHom_assoc, smoothSheaf.ι_evalHom, smoothSheafCommRing.ι_evalHom, SheafOfModules.Presentation.map_π_eq, smoothSheafCommRing.ι_forgetStalk_inv, smoothSheafCommRing.ι_forgetStalk_inv_assoc, smoothSheafCommRing.ι_forgetStalk_inv_apply. These concern a different notion of smooth sheaf and do not state the item.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extraordinary|smooth.purity|Tate.twist",
+   "results": "0 hits under Mathlib/AlgebraicGeometry; no exceptional inverse image or geometric smooth purity declaration.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extraordinary pullback along a smooth morphism is naturally isomorphic to derived pullback tensor a Tate twist and a shift",
+   "results": "Ordinary scheme-module pullback pseudofunctor coherence and free-module pullback isomorphisms: AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, SheafOfModules.pullbackObjFreeIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackIso, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity. No exceptional inverse image, Tate orientation or smooth-purity theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -90,5 +207,39 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-thm-smooth-purity"
+ "unit": "sk-thm-smooth-purity",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-pur-smooth-purity-naturality-cover",
+  "worker": "stage1",
+  "summary": "Expanded the imported two-sentence argument into six steps: the adjoint calculation for tensor-map naturality, the explicit even-shift/tensor squares, their composite, canonical diagonal/DNC normalization, K-flat model comparisons, and compactification/witness compatibility of the adjoint. The statement is unchanged. Removed generic unused statement dependencies. All proof inputs are existing nodes; no new nodes or Lean writes. Checked exact Lean attachment candidates and two Mathlib phrasings; none states this proposition.",
+  "blueprint": "Realizes both sentences of main-20261015 prop-pur-smooth-purity-naturality-cover.proof.md: first sentence in steps 1–3, second sentence in steps 4–6. Retains the sk-thm-smooth-purity diagonal/DNC and vector-bundle route; no unit realization change, since this proposition is not the unit key statement.",
+  "tool_uses": [
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "Uses naturality and compactification compatibility of the already specified finite-coefficient projection transformation to verify the adjoint tensor square; no purity or DNC argument is replaced."
+   },
+   {
+    "node": "thm-sf-ambient-adjoint-class",
+    "why": "Uses the natural bounded-below etale-origin Hom bijection and its witness/refinement compatibility. The unit needs this general adjunction tool to interpret the tensor formula; no unrestricted ambient pro-etale adjoint is assumed."
+   },
+   {
+    "node": "lem-weil-derived-tensor-resolution-independent",
+    "why": "Generic pro-etale ringed-site K-flat resolution comparison with cocycle, needed to interpret equality under changing models; the purity unit contains no separate tensor-model comparison theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "fix-prop-projection-formula",
+  "thm-sf-ambient-adjoint-class",
+  "lem-weil-derived-tensor-resolution-independent"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NC-590668deb",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-590668deb (reviewer sub-agent of L); spot-checked: I read the full delivery: the item, the statements of all 13 cited nodes, and the DAG proofs of thm-pur-diagonal-dualizing-object and cor-pur-vector-bundle-purity. There are no new nodes and no fixes. The statement matches the main-20261015 and master blueprint text word for word, with no weakening. The coefficient ring is A_{E,n} on D^b_ctf, and Rf^! = ν^*f^×Rν_* is the R_c of thm-sf-ambient-adjoint-class(2). The theta in def-pur-co-smoothness clause 2 is the same composite as the blueprint's pur9-cs-def-phi. Step 1: transposing u∘a_K = a_{K'}∘Rf_!(m⊗1) uses PF naturality (fix-prop-projection-formula; its domains D^b_c(X) for ω and D^b_ctf(Y) for K both hold) and naturality of the Hom bijection in both variables. Steps 2–3: I re-checked the signs. Both differentials are d_P⊗1+(-1)^p 1⊗d_L with d_L=0 and an even shift. The bifunctor interchange law holds, and the pasted chain gives Rf^!u∘γ_K = γ_{K'}∘(Lf^*u)(d)[2d]. Step 4: the uniqueness clauses of DNC invariance and of t_π in thm-amb-vector-bundle-purity are in their statements. The base is Noetherian because it is finite type over the field k (Mathlib leaf), and ℓ ≠ char k. This agrees with the DAG proof's form θ_i = β_iδ_iα_i^{-1} glued over a cover. Steps 5–6 use the resolution comparison and the witness/compactification compatibility clauses as their statements give them. Edge cases d=0, empty X, and u = 0 or id all hold. There is no cycle: the dependency closure does not contain the item. Route: everything is on the unit route except fix-prop-projection-formula. I accept that one as a tool use; the other two declared tool uses are on the route and need no declaration. No SGA source is used."
+ }
 }

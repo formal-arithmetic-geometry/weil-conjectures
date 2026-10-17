@@ -3,32 +3,137 @@
  "blueprint": {
   "is": "d-curve-pieces",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "sk-d-curve-pieces"
+  ]
  },
  "kind": "definition",
  "title": "Curve coefficient pieces",
- "statement": "Fix the coefficient conventions of [def-trf-coefficient-conventions] and a\nWeil complex $(K,\\varphi)$ on $X=X_0\\times_{k_0}k$, where $X_0$ is smooth of\npure dimension one. Fix $m\\ge1$ and $x\\in X_0(\\mathbf F_{q^m})$, and on $X$\nlet $i:\\{\\bar x\\}\\hookrightarrow X$ and $j:U=X\\setminus\\{\\bar x\\}\\hookrightarrow X$.\nThe *curve pieces* of $K$ at $x$ are\n\n$$\nK^Z=Ri_*i^*K,\\qquad K^U=j_!j^*K,\n$$\n\nthe outer terms of the open–closed triangle\n$K^U\\to K\\to K^Z\\xrightarrow{+1}$ of [prop-sf-open-closed-triangle-all-stages].\nLet $\\Phi_m$ be the $m$-th power of the Frobenius of\n[def-trf-scheme-frobenius], $\\varphi_m$ the iterated Weil map of\n[def-trf-iterated-weil-map] (the scheme-Frobenius map\n$u_m:\\Phi_m^*K\\to K$), and $F_{x,m}$ the stalk Frobenius at $\\bar x$\nof [def-trf-frobenius-operators], which is the stalk map of $\\varphi_m$\nat the fixed point $\\bar x$. The morphism $\\Phi_m$ is finite and a\nuniversal homeomorphism fixing $\\bar x$, so $\\Phi_m^{-1}(U)=U$, the\nsquare of $j$ over $\\Phi_m$ is Cartesian with restriction\n$\\Phi_{m,U}:U\\to U$, and $\\Phi_mi=i$. The induced maps on the two\npieces are:\n\n- on the graph correspondence $(1,\\Phi_m)$ of [def-trf-graph-correspondence],\n  $u^Z=[i,i]_!(F_{x,m})$, the proper pushforward of\n  [def-trf-coefficient-pushforward] of the stalk map, along the proper\n  pushforward diagram $(i,i)$ from the point correspondence\n  $(\\operatorname{id},\\operatorname{id})$ on $\\{\\bar x\\}$ with coefficient\n  $F_{x,m}$ on $K_{\\bar x}$ to the graph $(1,\\Phi_m)$ (a diagram because\n  $1\\circ i=i\\circ\\operatorname{id}$ and $\\Phi_mi=i\\circ\\operatorname{id}$).\n  Both exceptional legs being identities, the exceptional half of\n  [def-trf-coefficient-pushforward] is the identity, and\n  $u^Z=Ri_*F_{x,m}\\circ\\gamma$, where\n  $\\gamma:\\Phi_m^*Ri_*i^*K\\to Ri_*i^*K$ is the ordinary half, the\n  composite of the unit of $i^*\\dashv Ri_*$ with $Ri_*$ of the counit,\n  through $i^*\\Phi_m^*=(\\Phi_mi)^*=i^*$;\n- $u^U$, the composite\n\n$$\n\\Phi_m^*j_!j^*K\\simeq j_!\\Phi_{m,U}^*j^*K\n\\xrightarrow{j_!j^*\\varphi_m}j_!j^*K,\n$$\n\n  whose first isomorphism is open $!$-base change for the Cartesian\n  square of $j$ over $\\Phi_m$ ([prop-functor-package], clause (4)).\n\nThe same construction applies verbatim when $\\varphi_m$ is replaced by a\nFrobenius coefficient morphism $v:\\Phi_m^*K\\to K$ in the sense of\n[def-trf-frobenius-coefficient-morphism] (no Weil structure and no\ninvertibility), with $F_{x,m}$ replaced by the stalk map\n$v_{\\bar x}:K_{\\bar x}\\cong(\\Phi_m^*K)_{\\bar x}\\to K_{\\bar x}$. It\nuses neither smoothness nor dimension one: it applies verbatim to any\nseparated finite-type $X_0$, and the smooth-curve case is the one needed\nfor the trace formula.",
+ "statement": "Fix the coefficient conventions of [def-trf-coefficient-conventions] and a\nstrict Weil complex $(K,\\varphi)$ of [def-trf-strict-weil-complex] on $X=X_0\\times_{k_0}k$, with this identification an isomorphism\nof $s=\\Spec k$-schemes as in [sk-d-weil], where $X_0$ is smooth of\npure dimension one. Fix $m\\ge1$ and $x\\in X_0(\\mathbf F_{q^m})$, and on $X$\nwrite $Z=\\Spec k$ and let $i=\\bar x:Z\\hookrightarrow X$ and\n$j:U=X\\setminus\\{\\bar x\\}\\hookrightarrow X$ be the reduced rational point\nand its complementary open immersion. Here $i$ is a section of the\nseparated structure morphism $X\\to\\Spec k$, hence a closed immersion by\n[lem-weil-pbc-section-separated-closed-immersion].\nThe *curve pieces* of $K$ at $x$ are\n\n$$\nK^Z=Ri_*i^*K,\\qquad K^U=j_!j^*K,\n$$\n\nusing the derived pullbacks of [def-weil-derived-pullback-tensor-hom].\nThese are the outer terms of the open–closed triangle\n$K^U\\to K\\to K^Z\\xrightarrow{+1}$ of [prop-sf-open-closed-triangle-all-stages].\nLet $\\Phi_m$ be the $m$-th power of the Frobenius of\n[def-trf-scheme-frobenius], $\\varphi_m$ the iterated Weil map of\n[def-trf-iterated-weil-map] (the scheme-Frobenius map\n$u_m:\\Phi_m^*K\\to K$), and $F_{x,m}$ the stalk Frobenius at $\\bar x$\nof [def-trf-frobenius-operators], which is the stalk map of $\\varphi_m$\nat the fixed point $\\bar x$, with the scheme-Frobenius stalk convention\nof [sk-d-weil]. More precisely, the endomorphism on $Li^*K$ is\n$Li^*\\varphi_m\\circ\\theta_K^{-1}$, where\n$\\theta:Li^*L\\Phi_m^*\\xrightarrow{\\sim}Li^*$ is the pullback\ncomposition identification of\n[lem-weil-pbc-proetale-derived-pullback-composition] for $\\Phi_mi=i$. In the notation\n$c_{i,\\Phi_m}:L(\\Phi_mi)^*\\xrightarrow{\\sim}Li^*L\\Phi_m^*$\nof [sk-d-weil], the inverse $\\theta_K^{-1}$ is inverse pullback\ncongruence $Li^*K\\xrightarrow{\\sim}L(\\Phi_mi)^*K$ followed by\n$c_{i,\\Phi_m}(K)$. Thus $Li^*\\varphi_m\\circ\\theta_K^{-1}$\nis exactly its fixed-$s$-point stalk composite, specialized to the\ncoefficient $u_m$ above. Its image under the point\nfibre equivalence [lem-weil-point-fibre-equivalence] of\n[def-weil-finite-coefficient-point] is the stalk-complex operator\n$F_{x,m}$. We use the same symbol for the endomorphism of $Li^*K$\nwhen applying $Ri_*$. The morphism $\\Phi_m$ is finite and a\nuniversal homeomorphism: finiteness follows by iterating the finite\nscheme Frobenius constructed in [def-trf-scheme-frobenius],\nwhose finiteness is stated by [lem-trf-scheme-frobenius-finite-radicial], using\n[lem-weil-pbc-finite-composition]. For the topological\nassertion, [prop-trf-frobenius-factorization] gives the equality of\n$k_0$-scheme morphisms\n$$\n\\operatorname{Fr}^{(q^m)}_X=g_\\sigma^m\\circ\\Phi_m,\n\\qquad\n\\Phi_m=(g_\\sigma^m)^{-1}\\circ\\operatorname{Fr}^{(q^m)}_X.\n$$\nHere $g_\\sigma$ is the arithmetic scalar automorphism of\n[def-trf-scheme-frobenius]. The absolute $q$-power Frobenius is a\nuniversal homeomorphism by the factorization clause of\n[prop-trf-scheme-galois-comparison]; hence so is its $m$-th iterate.\nAfter every base change, this iterate and the inverse scalar\nautomorphism are homeomorphisms, so their composite $\\Phi_m$ is a\nuniversal homeomorphism, in the sense of\n[def-weil-universal-homeomorphism]. The factorization is used over\n$k_0$; neither scalar Frobenius nor absolute Frobenius is being\nasserted to be a $k$-morphism. The point is fixed\nas a $k$-point by [thm-trf-frobenius-fixed-points]. Since the underlying\nmap of a universal homeomorphism is bijective, the only point over\n$\\bar x$ is $\\bar x$ itself. Taking complements gives\n$\\Phi_m^{-1}(U)=U$. Thus the\nsquare of $j$ over $\\Phi_m$ is Cartesian with restriction\n$\\Phi_{m,U}:U\\to U$, by [lem-weil-pbc-open-preimage-fibre-product],\nand $\\Phi_mi=i$. Only inverse-image stability of the open complement\nis used; no claim that the square of $i$ is Cartesian is made.\nThe composition identifications below are those of the ordinary\nadjunctions [fix-prop-adjunctions], clause (3).\nThe pieces lie in $D^b_{ctf}(X,A)$: $i^*$ and $i_*$ preserve this\nsubcategory by [prop-sf-localization-all-stages], clause (3'), and the\nlocalization triangle above rotates to\n$K^Z[-1]\\to K^U\\to K\\to K^Z$. Its outer vertices are in\n$D^b_{ctf}$, so [lem-weil-finite-ctf-triangulated] puts $K^U$ there too. The induced maps on the two\npieces are:\n\n- on the graph correspondence $(1,\\Phi_m)$ of [def-trf-graph-correspondence],\n  $u^Z=[i,i]_!(F_{x,m})$, the proper pushforward of\n  [def-trf-coefficient-pushforward] of the stalk map, along the proper\n  pushforward diagram $(i,i)$ (proper by [lem-weil-pbc-closed-immersion-proper])\n  from the point correspondence\n  $(\\operatorname{id},\\operatorname{id})$ on $\\{\\bar x\\}$ with coefficient\n  $F_{x,m}$ on $K_{\\bar x}$ to the graph $(1,\\Phi_m)$ (a diagram because\n  $1\\circ i=i\\circ\\operatorname{id}$ and $\\Phi_mi=i\\circ\\operatorname{id}$).\n  Both exceptional legs being identities, the exceptional half of\n  [def-trf-coefficient-pushforward] is the identity, and\n  $u^Z=Ri_*F_{x,m}\\circ\\gamma$, where\n  $\\gamma:\\Phi_m^*Ri_*i^*K\\to Ri_*i^*K$ is the ordinary half, the\n  composite of the unit of $i^*\\dashv Ri_*$ with $Ri_*$ of the counit,\n  through $i^*\\Phi_m^*=(\\Phi_mi)^*=i^*$. Explicitly, with\n  $K_Z=Li^*K$, ordinary unit $\\eta$ and counit $\\varepsilon$ of\n  [fix-prop-adjunctions], clause (1),\n  $$\n  \\gamma=\n  Ri_*(\\varepsilon_{K_Z})\\circ\n  Ri_*(\\theta_{Ri_*K_Z})\\circ\n  \\eta_{L\\Phi_m^*Ri_*K_Z}.\n  $$\n  This formula uses only the commutativity $\\Phi_mi=i$;\n- $u^U$, the composite\n\n$$\nL\\Phi_m^*j_!Lj^*K\n\\xrightarrow{\\mathrm{BC}_!} j_!L\\Phi_{m,U}^*Lj^*K\n\\xrightarrow{j_!\\alpha_K} j_!Lj^*L\\Phi_m^*K\n\\xrightarrow{j_!Lj^*\\varphi_m}j_!Lj^*K,\n$$\n\n  whose first isomorphism is open $!$-base change for the Cartesian\n  square of $j$ over $\\Phi_m$ ([prop-functor-package], clause (4)).\n  Here $\\alpha:L\\Phi_{m,U}^*Lj^*\\xrightarrow{\\sim}Lj^*L\\Phi_m^*$\n  is the pullback composition isomorphism of\n  [lem-weil-pbc-proetale-derived-pullback-composition] for\n  $j\\Phi_{m,U}=\\Phi_mj$. Thus the shorthand $j_!j^*\\varphi_m$\n  includes this explicitly displayed composition identification.\n\nFor an arbitrary morphism $v:L\\Phi_m^*K\\to K$ of the type used in\n[def-trf-frobenius-coefficient-morphism], take $K\\in D^b_{ctf}(X,A)$\nwithout choosing a Weil structure. Define the endomorphism on $Z$ by\n$$\nv_Z=Li^*v\\circ\\theta_K^{-1}:K_Z\\to K_Z,\n$$\nand its stalk-complex image by\n$v_{\\bar x}=\\operatorname{Fib}_s(v_Z)$. Keeping the same geometric\npoint, complement, $\\gamma$, $\\alpha$ and base-change isomorphism,\ndefine\n$$\nu^Z(v)=Ri_*v_Z\\circ\\gamma,\\qquad\nu^U(v)=j_!Lj^*v\\circ j_!\\alpha_K\\circ\\mathrm{BC}_!.\n$$\nThese formulas use functor action on $v$ and never its inverse.\nThey are defined for any separated finite-type $X_0$ under the coefficient\nconventions: the point is a closed section, scheme Frobenius is finite\nand a universal homeomorphism, its fixed point gives the stable open,\nand the cited localization results give both coefficient domains.\nNone of these conditions requires smoothness or dimension one; the\nsmooth-curve case is the one needed for the trace formula.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-curve-pieces/d-curve-pieces.md",
   "place": "node d-curve-pieces, order 2340"
  },
  "stmt_deps": [
   "def-trf-coefficient-conventions",
+  "def-trf-strict-weil-complex",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "def-weil-derived-pullback-tensor-hom",
   "prop-sf-open-closed-triangle-all-stages",
   "def-trf-scheme-frobenius",
+  "lem-trf-scheme-frobenius-finite-radicial",
+  "lem-weil-pbc-finite-composition",
   "def-trf-iterated-weil-map",
   "def-trf-frobenius-operators",
+  "sk-d-weil",
+  "lem-weil-point-fibre-equivalence",
+  "def-weil-finite-coefficient-point",
+  "prop-trf-scheme-galois-comparison",
+  "prop-trf-frobenius-factorization",
+  "def-weil-universal-homeomorphism",
+  "thm-trf-frobenius-fixed-points",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "fix-prop-adjunctions",
+  "prop-sf-localization-all-stages",
+  "lem-weil-finite-ctf-triangulated",
   "def-trf-graph-correspondence",
   "def-trf-coefficient-pushforward",
+  "lem-weil-pbc-closed-immersion-proper",
   "prop-functor-package",
-  "def-trf-frobenius-coefficient-morphism"
+  "def-trf-frobenius-coefficient-morphism",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "closedPiece|openPiece|Frobenius.*[Cc]oeff|localization[Tt]riangle",
+   "results": "25 hits: Mathlib/RingTheory/WittVector/FrobeniusFractionField.lean, Mathlib/RingTheory/WittVector/FrobeniusFractionField.lean, Mathlib/RingTheory/WittVector/FrobeniusFractionField.lean, Mathlib/RingTheory/WittVector/FrobeniusFractionField.lean, Mathlib/RingTheory/WittVector/FrobeniusFractionField.lean, Mathlib/RingTheory/WittVector/TeichmullerSeries.lean, Mathlib/RingTheory/WittVector/TeichmullerSeries.lean, Mathlib/RingTheory/WittVector/TeichmullerSeries.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: generic scheme, module restriction or triangulated-category results do not define the Frobenius coefficient pieces on the stated pro-etale constructible domain"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open closed localization triangle of derived constructible sheaves with Frobenius action",
+   "results": "8 hits: CategoryTheory.Triangulated.Localization.isTriangulated_functor, CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization', CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle, DerivedCategory.triangleOfSES, CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization, CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization, CategoryTheory.Triangulated.Localization.pretriangulated, DerivedCategory.instIsTriangulated",
+   "date": "2026-10-17",
+   "verdict": "no match: generic scheme, module restriction or triangulated-category results do not define the Frobenius coefficient pieces on the stated pro-etale constructible domain"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"frobenius\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: generic scheme, module restriction or triangulated-category results do not define the Frobenius coefficient pieces on the stated pro-etale constructible domain"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open and closed localization pieces of a derived constructible sheaf and induced Frobenius coefficient morphisms",
+   "results": "8 hits: AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, ModuleCat.Tilde.res_const, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.StructureSheaf.res_const, AlgebraicGeometry.StructureSheaf.res_const', ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_spec",
+   "date": "2026-10-17",
+   "verdict": "no match: generic scheme, module restriction or triangulated-category results do not define the Frobenius coefficient pieces on the stated pro-etale constructible domain"
+  },
+  {
+   "tool": "grep",
+   "query": "recollement|extension[Bb]y[Zz]ero|lowerShriek|[Ff]robenius",
+   "results": "Search in AlgebraicGeometry. 0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: generic scheme, module restriction or triangulated-category results do not define the Frobenius coefficient pieces on the stated pro-etale constructible domain"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero and direct image along complementary open and closed immersions with a pulled back endomorphism of a sheaf complex",
+   "results": "8 hits: AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.Scheme.Modules.restrict_map, AlgebraicGeometry.IsOpenImmersion.lift_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.ofRestrict_app, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app",
+   "date": "2026-10-17",
+   "verdict": "no match: generic scheme, module restriction or triangulated-category results do not define the Frobenius coefficient pieces on the stated pro-etale constructible domain"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived sheaf localization at a closed point, extension by zero of its open complement, and restriction of an endomorphism",
+   "results": "8 hits: ModuleCat.Tilde.localizationToStalk_mk, ModuleCat.Tilde.openToLocalization, ModuleCat.Tilde.toOpen_germ_apply, ModuleCat.Tilde.toStalk, ModuleCat.Tilde.toOpen_germ, ModuleCat.Tilde.exists_const, ModuleCat.Tilde.stalkToFiberLinearMap, AlgebraicGeometry.StructureSheaf.openToLocalization_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: ModuleCat.Tilde concerns ordinary quasicoherent module stalks; Sites.Localization concerns sheafification as categorical localization, not these derived open/closed coefficient pieces"
+  },
+  {
+   "tool": "grep",
+   "query": "recollement|localization.*[Ss]heaf|[Ss]heaf.*localization",
+   "results": "8 hits: Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Localization.lean, Mathlib/CategoryTheory/Sites/Localization.lean, Mathlib/CategoryTheory/Sites/Localization.lean, Mathlib/CategoryTheory/Sites/PreservesSheafification.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: ModuleCat.Tilde concerns ordinary quasicoherent module stalks; Sites.Localization concerns sheafification as categorical localization, not these derived open/closed coefficient pieces"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|[Rr]ecollement",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: extend_hom_app extends a morphism from a topological basis (Sites.lean lines 235–250); restrictFunctor restricts ordinary structure-sheaf modules (Modules/Sheaf.lean lines 340–355). Neither states these derived pro-etale coefficient pieces or their Frobenius maps; grep found no declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived category sheaf endomorphism induced on direct image of a closed restriction and extension by zero of the complementary open",
+   "results": "8 hits: TopCat.Sheaf.extend_hom_app, CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, AlgebraicGeometry.Scheme.ofRestrict_app, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, CategoryTheory.Sheaf.ΓRes_map, ModuleCat.Tilde.toOpen_res",
+   "date": "2026-10-17",
+   "verdict": "no match: extend_hom_app extends a morphism from a topological basis (Sites.lean lines 235–250); restrictFunctor restricts ordinary structure-sheaf modules (Modules/Sheaf.lean lines 340–355). Neither states these derived pro-etale coefficient pieces or their Frobenius maps; grep found no declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "closedPieceCoeff|openPieceCoeff|recollement|[Ee]xtension.*[Zz]ero",
+   "results": "25 hits: Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean, Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean, Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean, Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean, Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean, Mathlib/NumberTheory/Cyclotomic/Discriminant.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: the LeanFinder hits are ordinary structure-sheaf module restriction and pushforward adjunctions (Modules/Sheaf.lean lines 340–425); the grep hits concern cyclotomic extensions, multiplicative characters or abstract zero objects, not derived pro-etale open/closed Frobenius pieces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Recollement of constructible derived sheaves, closed immersion direct image and open extension by zero with commuting endomorphisms",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app",
+   "date": "2026-10-17",
+   "verdict": "no match: the LeanFinder hits are ordinary structure-sheaf module restriction and pushforward adjunctions (Modules/Sheaf.lean lines 340–425); the grep hits concern cyclotomic extensions, multiplicative characters or abstract zero objects, not derived pro-etale open/closed Frobenius pieces"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -57,5 +162,21 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-d-curve-pieces"
+ "unit": "sk-d-curve-pieces",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "d-curve-pieces",
+  "worker": "stage1",
+  "summary": "Repaired the sk-d-weil landing return on the current DAG: made the base-change identification explicitly an s-scheme identification and expanded theta inverse as the inverse fixed-point pullback congruence followed by c_{i,Phi_m}, exactly matching the current stalk composite. Revalidated its arbitrary-coefficient and bounded geometric domains while retaining the earlier factorization repair, all logged searches and all construction formulas. No new nodes or Mathlib leaves. The current scheme-Frobenius definition delegates finiteness to lem-trf-scheme-frobenius-finite-radicial; that existing theorem is now cited directly.",
+  "blueprint": "All paragraphs of d-curve-pieces and the definition in sk-d-curve-pieces: the two objects, closed proper coefficient pushforward, open base-change composite, and arbitrary coefficient-map generalization. The unit has no proof steps.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-d5a813f06",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-d5a813f06 (reviewer sub-agent of L); spot-checked: FIX with one citation repair; no mathematical fault found. Read the main-20261015 definition and unit (the definition text is identical to master), the full item, and all 26 dependency statements with their blueprint_update texts. Checked Stacks 01KT, 01JR and 0CC8 at their labels. The item is a definition with 0 new nodes and no proof steps, so I checked each construction clause instead. (1) Strict Weil complex is forced because def-trf-iterated-weil-map is defined only on strict pairs. The arbitrary non-invertible v paragraph and the smooth dimension-one hypothesis are kept, so the target is not weakened. (2) x̄ is a section of the separated map a_X, so it is a closed immersion (01KT). Only the underlying open-closed triangle is used, not the Weil-equivariant clause. (3) Φ_m is finite by lem-trf-scheme-frobenius-finite-radicial plus composition. It is a universal homeomorphism because Φ_m=(g_σ^m)^{-1}∘Fr^{(q^m)} over k_0 and absolute Frobenius is one. (4) thm-trf-frobenius-fixed-points gives Φ_m x̄=x̄. Injectivity gives Φ_m^{-1}(U)=U, and 01JR makes the open square Cartesian; the closed square is correctly not claimed Cartesian (A^1 example, ideal t^{q^m}). (5) prop-sf-localization (3') with c=0 gives K^Z in D^b_ctf. The rotated triangle and lem-weil-finite-ctf-triangulated give K^U. (6) Fib_s(Li^*u_m∘θ^{-1}) equals F_{x,m} of def-trf-frobenius-operators clause 2, via ρ and u_m=φ^[m]∘κ^(m), and matches the sk-d-weil stalk composite. (7) The closed map uses diagram (i,i), with b_1g=fc_1 and b_2g=fc_2 checked. The γ types match the ordinary half: η, then Ri_*θ, then Ri_*ε. δ is the identity modulo the ι identifications, consistent with the graph convention u=ι∘v. (8) The open map uses prop-functor-package (4) with g=Φ_m and f=j, on D^b_ctf, followed by j_!α and j_!j^*u_m; the types check. (9) The v-formulas never invert v and hold for any separated finite-type X_0. Small cases checked: K=0, v=0, m=1, X_0=Spec F_q with U empty, and a degree-m point that is not Φ_1-fixed. No duplicate: sk-d-curve-pieces is the imported unit node, correctly in same_as. No cycle (traversal of 13,987 nodes). No SGA citation. tool_uses is empty and none is accepted. Unit realization is correct. Fix (B3): θ and α use the pullback-composition isomorphism without citing the node that defines it, so I cited lem-weil-pbc-proetale-derived-pullback-composition at both places and added it to stmt_deps, in fixes/dag/nodes/sec-trace-formula/d-curve-pieces.json. Minor report inaccuracy: it says the item's source was repointed to main-20261015, but it still names master; the text is identical, so this is harmless and maintainer-owned.; 1 file(s) fixed by the reviewer"
+ }
 }

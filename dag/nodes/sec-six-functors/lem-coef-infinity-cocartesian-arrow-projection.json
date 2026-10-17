@@ -12,9 +12,90 @@
   "def-coef-infinity-fibrations",
   "def-weil-pbc-trivial-kan-fibration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-cbc-enhanced-diagrams-cones], a simplex of $Y$ has all its vertices cocartesian arrows. Its image under $\\theta$ therefore has all its vertices among the specified vertices of $Z$, so fullness makes $\\theta$ factor through $Z$. Each vertex of $Z$ has a preimage by the defining existence condition on that vertex. This establishes precisely the dimension-zero condition of [def-weil-pbc-trivial-kan-fibration], including when $Z$ is empty.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01VK",
+    "place": "Proposition 5.2.1.3, definition of the full vertex image; source-endpoint dual."
+   }
+  },
+  {
+   "text": "We first obtain the source-endpoint prism filtration from [lem-coef-infinity-right-prism-boundary]. Here are the order-reversal details, using the presheaf definition in [def-weil-pbc-simplicial-set]. For $\\alpha:[a]\\to[b]$, put $\\rho(\\alpha)(i)=b-\\alpha(a-i)$. This is monotone, $\\rho(\\beta\\alpha)=\\rho(\\beta)\\rho(\\alpha)$ and $\\rho^2=1$. Set $(K^{\\mathrm{op}})_a=K_a$ with operator $K(\\rho(\\alpha))$. This involutive operation preserves products, unions and pushout squares: it leaves their sets in every degree unchanged, and applying it twice recovers every map and every gluing problem. The isomorphism $(\\Delta^r)^{\\mathrm{op}}\\cong\\Delta^r$ sends an $a$-simplex $f$ to $i\\mapsto r-f(a-i)$. Thus it preserves boundaries, sends the horn indexed by $j$ to the horn indexed by $r-j$, and interchanges the two endpoints of $\\Delta^1$. Apply it to the cited filtration for $m=n$. In the resulting prism the stage indexed by $q$ attaches the simplex $T_k$ for $k=n-q$, whose ordered vertices are $((0,0),\\ldots,(0,k),(1,k),\\ldots,(1,n))$, along $\\Lambda_k^{n+1}$. The initial subcomplex is $A=(\\{0\\}\\times\\Delta^n)\\cup(\\Delta^1\\times\\partial\\Delta^n)$ and the attachment order is $k=n,n-1,\\ldots,0$. The identification on prism vertices is $(\\epsilon,i)\\mapsto(1-\\epsilon,n-i)$, and the horn index is $(n+1)-(q+1)=k$. These formulas follow directly from the standard simplices and products of [def-cbc-enhanced-diagrams-cones]; no reversal map $[n]\\to[n]$ is asserted to be monotone.",
+   "uses": [
+    "lem-coef-infinity-right-prism-boundary",
+    "def-weil-pbc-simplicial-set",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://kerodon.net/tag/01VK",
+    "place": "Proposition 5.2.1.3, prism filtration from Lemma 3.1.2.12 (Kerodon 00TH), with order-reversal dual spelled out."
+   }
+  },
+  {
+   "text": "Fix $n\\geq1$ and a lifting square $a:\\partial\\Delta^n\\to Y$, $b:\\Delta^n\\to Z$ with $\\theta a=b|_{\\partial\\Delta^n}$. By the explicit internal functor simplicial set and degreewise pullback of [def-cbc-enhanced-diagrams-cones], $b$ consists of $\\bar h:\\Delta^1\\times\\Delta^n\\to B$ and $s:\\Delta^n\\to E$ with $ps=\\bar h|_{\\{0\\}\\times\\Delta^n}$. The boundary datum gives $h_\\partial:\\Delta^1\\times\\partial\\Delta^n\\to E$ over $\\bar h$, with initial restriction $s|_{\\partial\\Delta^n}$. Glue $s$ and $h_\\partial$ to $h_A:A\\to E$. Their equality on the intersection makes this a degreewise well-defined map commuting with every simplicial operator. Every vertical edge over a vertex $i$ of $\\Delta^n$ is already in $A$ and is $p$-cocartesian: for $n\\geq1$ every vertex lies in the boundary, and $a$ takes values in $Y$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01VK",
+    "place": "Proposition 5.2.1.3, uncurrying the boundary lifting square, with endpoint 0 in the dual."
+   }
+  },
+  {
+   "text": "Use the filtration established in Step 2. Inductively extend $h_A$ across the attachments $T_n,T_{n-1},\\ldots,T_1$, requiring at every stage that its restriction to $A$ is exactly $h_A$ and that its composite with $p$ is exactly $\\bar h$. The base stage is $h_A$. At attachment $T_k$, $1\\leq k\\leq n$, the existing map on its attaching horn and $\\bar h|_{T_k}$ form a commutative lifting square for $\\Lambda_k^{n+1}\\subseteq\\Delta^{n+1}$. Since $0<k<n+1$, the definition of inner fibration in [def-coef-infinity-fibrations] supplies a filler. Glue that filler with the previously defined map along the attaching horn; the pushout from Step 2 gives the extended simplicial map. The two required equalities hold on both pieces and hence on their union. This proves the induction without altering any prescribed data.",
+   "uses": [
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01VK",
+    "place": "Proposition 5.2.1.3, induction through the inner-horn attachments; dual order."
+   }
+  },
+  {
+   "text": "The remaining attachment is $T_0$ along $\\Lambda_0^{n+1}$. Its first two vertices are $(0,0),(1,0)$, so the distinguished edge $\\{0,1\\}$ is exactly the vertical edge at vertex 0 of the original prism. It lies in $A$, and its image is the $p$-cocartesian edge fixed in Step 3. As $n+1\\geq2$, the cocartesian-edge definition in [def-coef-infinity-fibrations] gives a filler of this last outer-horn lifting problem over $\\bar h|_{T_0}$. Gluing along the horn as in Step 4 produces $h:\\Delta^1\\times\\Delta^n\\to E$ with $h|_A=h_A$ and $ph=\\bar h$ exactly.",
+   "uses": [
+    "def-coef-infinity-fibrations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01VK",
+    "place": "Proposition 5.2.1.3, last outer-horn attachment; cocartesian source-edge dual of the cartesian target-edge argument."
+   }
+  },
+  {
+   "text": "Curry $h$ using [def-cbc-enhanced-diagrams-cones] to obtain $c:\\Delta^n\\to\\operatorname{Fun}(\\Delta^1,E)$. Each vertex of $c$ is one of the vertical edges already fixed by $h_A$, hence is $p$-cocartesian; fullness therefore makes $c$ land in $Y$. Its boundary is $a$ because $h$ restricts to $h_\\partial$, and $\\theta c=b$ because $ph=\\bar h$ and $h|_{\\{0\\}\\times\\Delta^n}=s$. This is equality in $Z$, since its inclusion into $R$ is degreewise injective. Together with Step 1, these fillers for every $n\\geq1$ prove that $\\theta:Y\\to Z$ is a trivial Kan fibration in exactly the sense of [def-weil-pbc-trivial-kan-fibration]. The proof never requests a lift over a vertex outside $Z$.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://kerodon.net/tag/01VK",
+    "place": "Proposition 5.2.1.3, conclusion by currying and the full-subset condition, dualized."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-coef-infinity-right-prism-boundary",
+  "def-weil-pbc-simplicial-set",
+  "def-coef-infinity-fibrations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://kerodon.net/tag/01VK",
+  "place": "Proposition 5.2.1.3, opposite-category dual; online source read, archival copy WANTED. The explicit order-reversal and boundary-preservation details are supplied here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -85,10 +166,45 @@
    "results": "{\"t\": \"2026-10-17T00:34:48Z\", \"tool\": \"leanfinder\", \"query\": \"Relative extension of cocartesian lifts with a fixed source and a prescribed boundary for an inner fibration of simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsStronglyCocartesian.universal_property\", \"SSet.modelCategoryQuillen.J\", \"SSet.Quasicategory.hornFilling\", \"CategoryTheory.Functor.IsStronglyCocartesian.toIsHomLift\", \"SSet.KanComplex.hornFilling\"], \"digest\": \"7d2754adb8263d33\"}",
    "date": "2026-10-17",
    "verdict": "no match: returned simplicial-set results characterize a supplied Quillen fibration or fill an individual horn; ordinary IsCocartesian results concern ordinary categories. None proves the partial-image cocartesian-arrow projection has the boundary lifting property."
+  },
+  {
+   "tool": "grep",
+   "query": "cocartesian|cartesian|trivial.*fibration",
+   "results": "{\"t\": \"2026-10-17T01:54:31Z\", \"tool\": \"grep\", \"query\": \"cocartesian|cartesian|trivial.*fibration\", \"sub\": \"AlgebraicTopology/Quasicategory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean\"], \"digest\": \"16b6bbd98402e776\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category IsCocartesian declarations do not address quasicategories; SSet model-category I/J and horn-filling declarations assume lifting properties rather than prove this arrow projection has them. Read StrictBicategory.lean:20-40, FiberedCategory/Cocartesian.lean:40-85, SimplicialSet/CategoryWithFibrations.lean:40-105."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The simplicial set of cocartesian lifts projects by a trivial Kan fibration to the pairs of a source object and base edge admitting a lift",
+   "results": "{\"t\": \"2026-10-17T01:54:32Z\", \"tool\": \"leansearch\", \"query\": \"The simplicial set of cocartesian lifts projects by a trivial Kan fibration to the pairs of a source object and base edge admitting a lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsCocartesian.map.congr_simp\", \"CategoryTheory.Functor.IsStronglyCocartesian.toIsHomLift\", \"CategoryTheory.Functor.IsCocartesian.fac\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"CategoryTheory.Functor.IsCocartesian.toIsHomLift\", \"HomotopicalAlgebra.trivialFibrations_over_eq\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"HomotopicalAlgebra.instWeakEquivalenceFstOfIsStableUnderBaseChangeTrivialFibrationsOfFibration\"], \"digest\": \"3f10141417b7e285\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category IsCocartesian declarations do not address quasicategories; SSet model-category I/J and horn-filling declarations assume lifting properties rather than prove this arrow projection has them. Read StrictBicategory.lean:20-40, FiberedCategory/Cocartesian.lean:40-85, SimplicialSet/CategoryWithFibrations.lean:40-105."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cocartesian\", \"fibration\"",
+   "results": "{\"t\": \"2026-10-17T01:54:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cocartesian\\\", \\\"fibration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category IsCocartesian declarations do not address quasicategories; SSet model-category I/J and horn-filling declarations assume lifting properties rather than prove this arrow projection has them. Read StrictBicategory.lean:20-40, FiberedCategory/Cocartesian.lean:40-85, SimplicialSet/CategoryWithFibrations.lean:40-105."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an inner fibration the source and base-edge projection from the full simplicial subset of cocartesian arrows is a trivial Kan fibration onto its full vertex image",
+   "results": "{\"t\": \"2026-10-17T01:54:36Z\", \"tool\": \"leanfinder\", \"query\": \"For an inner fibration the source and base-edge projection from the full simplicial subset of cocartesian arrows is a trivial Kan fibration onto its full vertex image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.modelCategoryQuillen.J\", \"SSet.modelCategoryQuillen.I\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"SSet.modelCategoryQuillen.instCategoryWithFibrations\", \"SSet.modelCategoryQuillen.fibrations_eq\", \"SSet.modelCategoryQuillen.instCategoryWithCofibrations\", \"SSet.modelCategoryQuillen.cofibration_of_mono\", \"SSet.modelCategoryQuillen.fibration_iff\"], \"digest\": \"9a9d6c86fd423add\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category IsCocartesian declarations do not address quasicategories; SSet model-category I/J and horn-filling declarations assume lifting properties rather than prove this arrow projection has them. Read StrictBicategory.lean:20-40, FiberedCategory/Cocartesian.lean:40-85, SimplicialSet/CategoryWithFibrations.lean:40-105."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative extension of cocartesian lifts with a fixed source and a prescribed boundary for an inner fibration of simplicial sets",
+   "results": "{\"t\": \"2026-10-17T01:54:43Z\", \"tool\": \"leanfinder\", \"query\": \"Relative extension of cocartesian lifts with a fixed source and a prescribed boundary for an inner fibration of simplicial sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsStronglyCocartesian.map\", \"SSet.modelCategoryQuillen.instHasLiftingPropertyιHornHAddNatOfNatOfFibration\", \"CategoryTheory.Functor.IsCocartesian.map\", \"CategoryTheory.Functor.IsStronglyCocartesian.universal_property\", \"SSet.modelCategoryQuillen.J\", \"SSet.Quasicategory.hornFilling\", \"CategoryTheory.Functor.IsStronglyCocartesian.toIsHomLift\", \"SSet.KanComplex.hornFilling\"], \"digest\": \"7d2754adb8263d33\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary-category IsCocartesian declarations do not address quasicategories; SSet model-category I/J and horn-filling declarations assume lifting properties rather than prove this arrow projection has them. Read StrictBicategory.lean:20-40, FiberedCategory/Cocartesian.lean:40-85, SimplicialSet/CategoryWithFibrations.lean:40-105."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-infinity-reflection-assembly",
@@ -115,5 +231,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-cocartesian-arrow-projection",
+  "worker": "stage1",
+  "summary": "Proved the partial-image cocartesian-arrow projection by explicit prism induction. Reused the existing right-prism-boundary node through a fully specified order-reversal construction; no new nodes and no statement change. Verified the outer-horn edge, all boundary equalities, vertex-image restriction, current blueprint ancestry, absence of project attachment, and Mathlib searches.",
+  "blueprint": "Current main-20261015 prop-coef-integral-exceptional-adjoint.proof.md, paragraph 2, derived coefficient adjunction and its specified maps: supplies the horn-level coherence input for reflection-assembly through the existing blueprint.from chain. Historical chapter/unit and all provenance fields retained."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NS-bfc081123",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-bfc081123 (reviewer sub-agent of L); spot-checked: I read the item, all six steps, the full statements of the five cited nodes (including the proof of lem-coef-infinity-right-prism-boundary), the parent reflection-assembly step that uses the item, the unit record, and the main-20261015 ancestor prop-coef-integral-exceptional-adjoint proof paragraph 2. Kerodon 01VK and 00TH are not in literature/: they are correctly listed as WANTED and the proof is honestly marked agent. I checked the proof as a self-contained argument, so it does not rest on the online source. Statement: p is only an inner fibration, and Z is full on the vertices that have a cocartesian lift. Edge cases are consistent: for empty E, Y and Z are empty; for p=id, theta is an isomorphism; for E={0} in Delta^1, Z must omit the vertex with no lift. The parent uses the item exactly in this form. Step 1: vertex factorization through Z by fullness, and surjectivity. Step 2: reversing the right-prism filtration sends sigma_q to T_k with k=n-q, horn q+1 to horn k, and X_0 to A, so attachments run k=n down to 0. I checked by computer for n=1..5 that each T_k pulls the current stage back to exactly Lambda_k^{n+1} and that the stages cover the prism. Step 3: uncurrying and gluing on A are correct; n>=1 puts every vertical edge in A, where it is cocartesian. Step 4: horns Lambda_k^{n+1} with 1<=k<=n are inner, and both invariants are kept. Step 5: Lambda_0^{n+1} has the fixed cocartesian vertical edge at vertex 0 as its initial edge, and n+1>=2; I checked n=1 by hand. Step 6: currying lands in Y and gives the boundary a and theta c=b. proof_deps equals the union of the uses lists, and there is no cycle. Route: the only non-definition dependency is in the same unit, so no tool_uses are needed. No duplicate among the cocartesian and trivial-Kan nodes I read, and no SGA. Searches cover all three kinds. Minor, no change: the report wrongly says created.item was corrected, but the kept value reflection-assembly is right; the item has no lean_audit, which is a maintainer field. No fixes were made."
  }
 }

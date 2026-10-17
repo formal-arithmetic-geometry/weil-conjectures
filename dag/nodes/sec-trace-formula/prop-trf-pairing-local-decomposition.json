@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-trf-pairing-local-decomposition",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Decomposition of the pairing into local terms",
@@ -17,32 +17,47 @@
   "def-trf-correspondence-between-pairs",
   "def-trf-local-term-pair",
   "lem-trf-integration-component-sum",
-  "def-trf-local-term"
+  "def-trf-local-term",
+  "def-trf-integration",
+  "def-trf-dualizing-complex",
+  "def-trf-categorical-trace"
  ],
  "proof": [
   {
-   "text": "Apply [lem-trf-integration-component-sum] to $T=E$, the finite\ndecomposition $E=\\coprod_{\\beta\\in B}\\beta$ and\n$\\tau=\\langle u,v\\rangle_{\\mathrm{LV}}$: it shows that $E$ is proper\nover $s$, so that $\\int_E$ of [def-trf-integration] is defined, and\nthat\n\n$$\n\\int_E\\langle u,v\\rangle_{\\mathrm{LV}}\n=\\sum_{\\beta\\in B}\\int_\\beta\\bigl(\\langle u,v\\rangle_{\\mathrm{LV}}|_\\beta\\bigr)\n=\\sum_{\\beta\\in B}\\LT_\\beta(u,v),\n$$\n\nthe last equality being the definition of the local terms in\n[def-trf-local-term-pair]; for\n$E=\\emptyset$ the lemma gives $0=0$. When $v=1_K$, so that\n$\\langle u,1_K\\rangle_{\\mathrm{LV}}=\\Tr_c(u)$ by\n[lem-trf-trace-class-diagonal-pairing], the restriction to a component\n$\\beta\\subseteq\\Fix(c)$ is the composite used in [def-trf-local-term],\nwhence $\\LT_\\beta(u,1_K)=\\LT_\\beta(u)$, as also recorded in\n[def-trf-local-term-pair].",
+   "text": "The opposite-pair conventions of [def-trf-supported-pairing] in the statement make $E$ separated of finite type over $s$, with the finite coefficient ring $A=A_{E,n}$ and a defined section $A_E\\to\\omega_{E,A}$. Thus the separated-finite-type and coefficient hypotheses of [lem-trf-integration-component-sum] hold. The dualizing complexes and integrals are those of the current [def-trf-integration]: the exceptional functor and counit are restricted to the full constructible finite-Tor categories, and the proper comparison is applied to their bounded etale-origin inputs. The admissibility conventions of the supported-pairing and local-term definitions supply these domains; no ambient exceptional adjoint is required. Apply [lem-trf-integration-component-sum] to $T=E$, the finite\ndecomposition $E=\\coprod_{\\beta\\in B}\\beta$ and\n$\\tau=\\langle u,v\\rangle_{\\mathrm{LV}}$: it shows that $E$ is proper\nover $s$, so that $\\int_E$ of [def-trf-integration] is defined, and\nthat\n\n$$\n\\int_E\\langle u,v\\rangle_{\\mathrm{LV}}\n=\\sum_{\\beta\\in B}\\int_\\beta\\bigl(\\langle u,v\\rangle_{\\mathrm{LV}}|_\\beta\\bigr)\n=\\sum_{\\beta\\in B}\\LT_\\beta(u,v),\n$$\n\nthe last equality being the definition of the local terms in\n[def-trf-local-term-pair]; if $E=\\emptyset$, apply the lemma first with its empty-index decomposition to obtain $\\int_E\\langle u,v\\rangle_{\\mathrm{LV}}=0$. Every displayed piece $\\beta$ is then empty; applying the same empty-index case to each $\\beta$ gives $\\LT_\\beta(u,v)=0$, so the displayed sum is also zero even when $B$ is nonempty. In the diagonal specialization take $(Y,L)=(X,K)$ and $(D,d,v)=(X,\\Delta_X,1_K)$, so that\n$\\langle u,1_K\\rangle_{\\mathrm{LV}}=\\Tr_c(u)$ by\n[lem-trf-trace-class-diagonal-pairing], the restriction to a component\n$\\beta\\subseteq\\Fix(c)$ is the composite used in [def-trf-local-term],\nwhence $\\LT_\\beta(u,1_K)=\\LT_\\beta(u)$, as also recorded in\n[def-trf-local-term-pair].",
    "uses": [
+    "def-trf-supported-pairing",
     "lem-trf-integration-component-sum",
     "def-trf-integration",
     "def-trf-local-term-pair",
     "lem-trf-trace-class-diagonal-pairing",
     "def-trf-local-term"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-local/prop-trf-pairing-local-decomposition.proof.md",
+    "place": "proof paragraph 1"
+   }
   },
   {
-   "text": "For the point case, $E=s$, $B=\\{s\\}$, and $j_s$ and the structure map\n$a_s$ are identities. Then $\\omega_{s,A}=Ra_s^!A=A$ by\n[def-trf-dualizing-complex], the restriction to the sole component is\nthe section itself, and both adjunction maps in [def-trf-integration]\n(the unit of $La_s^*\\dashv Ra_{s*}$ and the counit of\n$Ra_{s!}\\dashv Ra_s^!$) are identities, so $\\int_s$ is the\nidentification $\\Hom_{D(s,A)}(A,A)=A$. Hence\n$\\LT_s(w,1_P)=\\langle w,1_P\\rangle_{\\mathrm{LV}}$, which equals\n$\\tr_A(1_P\\circ w\\mid P)=\\tr_A(w\\mid P)$ by the point normalization\n[prop-trf-pairing-point-normalization].",
+   "text": "For the point case, $E=s$, $B=\\{s\\}$, and $j_s$ and the structure map $a_s$ are identities. By [def-trf-dualizing-complex], $\\omega_{s,A}=R\\operatorname{id}_s^!A_s$, canonically identified with $A_s$ by the identity-morphism adjunction comparison; restriction to the sole component is the section itself. Use precisely the proper comparison $P_a:Ra_*\\xrightarrow{\\sim}Ra_!$ and the constructible counit $\\varepsilon_a(A_s)$ in the current [def-trf-integration]. Here $Ra_*$ and $La^*$ have their canonical identity identifications. Write $\\lambda:A_s\\xrightarrow{\\sim}Ra^!A_s$ for the corresponding exceptional identity comparison, so that $\\varepsilon_a(A_s)\\circ Ra_!\\lambda\\circ P_a(A_s)=1_{A_s}$; this is the identity-adjunction counit equation, with the proper comparison included. For a section $\\tau=\\lambda\\circ t$, naturality of $P_a$ gives\n$$\n\\varepsilon_a(A_s)\\circ Ra_!\\tau\\circ P_a(A_s)\n=\\varepsilon_a(A_s)\\circ Ra_!\\lambda\\circ P_a(A_s)\\circ t=t.\n$$\nThe ordinary unit is the identity in these coordinates. Thus the derived composite defining $\\int_s\\tau$ is $R\\Gamma(s,t):A[0]\\to A[0]$, and the scalar prescribed by [def-trf-integration] is $H^0(R\\Gamma(s,t))(1)$. In particular this integral is the usual scalar of the section under the canonical identity comparisons, without requiring chosen compactification candidates to be literally equal. Apply this to $\\tau=\\langle w,1_P\\rangle_{\\mathrm{LV}}$. The point normalization [prop-trf-pairing-point-normalization], with $Q=P$, $u=w$, $v=1_P$, identifies its scalar with $\\tr_A(1_P\\circ w\\mid P)=\\tr_A(w\\mid P)$. The definitions [def-trf-local-term] and [def-trf-local-term-pair] identify $\\LT_s(w,1_P)$ with this integral. Finally the diagonal specialization proved in step 1, for $X=s$, $K=P$, $u=w$, gives $\\LT_s(w)=\\LT_s(w,1_P)$.",
    "uses": [
     "def-trf-dualizing-complex",
     "def-trf-integration",
-    "prop-trf-pairing-point-normalization"
+    "prop-trf-pairing-point-normalization",
+    "def-trf-local-term",
+    "def-trf-local-term-pair"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-local/prop-trf-pairing-local-decomposition.proof.md",
+    "place": "proof paragraph 2"
+   }
   }
  ],
  "proof_deps": [
   "lem-trf-integration-component-sum",
+  "def-trf-supported-pairing",
   "def-trf-integration",
   "def-trf-local-term-pair",
   "lem-trf-trace-class-diagonal-pairing",
@@ -52,12 +67,92 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-p-local/prop-trf-pairing-local-decomposition.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-local/prop-trf-pairing-local-decomposition.proof.md",
+  "place": "proof paragraphs 1–2; specialization to the existing component-sum theorem and point normalization"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite disjoint union integration equals sum of Lefschetz Verdier pairing local terms",
+   "results": "BoxIntegral.integralSum_disjUnion; torusIntegral_succAbove; BoxIntegral.integralSum; MeasureTheory.integral_biUnion_eq_sum_powerset; BoxIntegral.integralSum_biUnionTagged; BoxIntegral.integralSum_sub_partitions; MeasureTheory.integral_finset; BoxIntegral.integralSum_fiberwise",
+   "date": "2026-10-17",
+   "verdict": "no match: returned analytical integrals, structure-sheaf coproducts, or algebra traces do not state six-functor integration of the supported pairing and point normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory, Fintype, Finset.sum, integral_eq_sum_localTerm",
+   "results": "loogle: unknown identifier 'CategoryTheory'",
+   "date": "2026-10-17",
+   "verdict": "invalid query: unknown identifier; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "integral_eq_sum_localTerm|localTerm|supportedPairing",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "subdirectory": "Mathlib"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite disjoint union integration equals sum of Lefschetz Verdier pairing local terms",
+   "results": "MeasureTheory.integral_fintype_iUnion; MeasureTheory.lintegral_biUnion_finset₀; MeasureTheory.integral_iUnion_fintype; MeasureTheory.integral_biUnion_finset; MeasureTheory.lmarginal_union'; MeasureTheory.integral_finset_biUnion; MeasureTheory.lintegral_biUnion_finset; Finset.sum_biUnion",
+   "date": "2026-10-17",
+   "verdict": "no match: returned analytical integrals, structure-sheaf coproducts, or algebra traces do not state six-functor integration of the supported pairing and point normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite coproduct of proper schemes integration of Borel Moore sections is sum of component traces",
+   "results": "AlgebraicGeometry.Scheme.coprodPresheafObjIso; AlgebraicGeometry.ι_sigmaSpec; AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_fst_assoc; AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_fst; AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_snd_assoc; AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_snd; AlgebraicGeometry.ι_sigmaSpec_assoc; AlgebraicGeometry.coprodSpec_coprodMk",
+   "date": "2026-10-17",
+   "verdict": "no match: returned analytical integrals, structure-sheaf coproducts, or algebra traces do not state six-functor integration of the supported pairing and point normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.trace",
+   "results": "loogle: unknown identifier 'CategoryTheory.MonoidalCategory.trace'",
+   "date": "2026-10-17",
+   "verdict": "invalid query: unknown identifier; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]efschetz|[Bb]orel.?[Mm]oore|[Ll]ocal[Tt]erm",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite coproduct of proper schemes integration of Borel Moore sections is sum of component traces",
+   "results": "AlgebraicGeometry.instHasFiniteCoproductsScheme; Algebra.trace_prod; AlgebraicGeometry.Scheme.coprodPresheafObjIso; AlgebraicGeometry.coprodSpec; Algebra.trace_prod_apply; AlgebraicGeometry.instMonoCoprodScheme; AlgebraicGeometry.instHasFiniteCoproductsOverSchemeTopMorphismProperty; AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite",
+   "date": "2026-10-17",
+   "verdict": "no match: returned analytical integrals, structure-sheaf coproducts, or algebra traces do not state six-functor integration of the supported pairing and point normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "MeasureTheory.integral_iUnion_fintype",
+   "results": "MeasureTheory.integral_iUnion_fintype",
+   "date": "2026-10-17",
+   "verdict": "no match: returned analytical integrals, structure-sheaf coproducts, or algebra traces do not state six-functor integration of the supported pairing and point normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "BorelMoore|[Ll]efschetz|[Vv]erdier|localTerm",
+   "results": "Mathlib/CategoryTheory/Shift/CommShift.lean; Mathlib/CategoryTheory/Shift/CommShift.lean; Mathlib/CategoryTheory/Presentable/Directed.lean; Mathlib/CategoryTheory/Localization/Triangulated.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Triangle.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean",
+   "date": "2026-10-17",
+   "verdict": "no match among 25 returned hits: Verdier bibliography, triangulated localization and Lefschetz principle references, with no supported-pairing integration declaration"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck duality integration counit finite disjoint clopen decomposition trace of a perfect complex",
+   "results": "Condensed.profiniteSolidCounit; CompHausLike.LocallyConstant.adjunction_counit; CompHausLike.LocallyConstant.adjunction_left_triangle; CompHausLike.LocallyConstant.incl_of_counitAppApp; LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor; CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor; CompHausLike.LocallyConstant.counitAppApp; CompHausLike.LocallyConstant.counit_app_val",
+   "date": "2026-10-17",
+   "verdict": "no match: returned condensed-module adjunctions do not state geometric integration or pairing normalization"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -90,5 +185,21 @@
   }
  },
  "chapter": "sec-trace-formula",
- "unit": "sk-p-local"
+ "unit": "sk-p-local",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-trf-pairing-local-decomposition",
+  "worker": "stage1",
+  "summary": "Kept the imported statement exactly. The existing integration-component-sum lemma supplies properness, the component restriction, the empty case, and the integral decomposition; the local-term-pair definition identifies each summand and the trace-class diagonal lemma handles v=1_K. The point case is reduced directly to the integration and dualizing-complex definitions and the existing point-normalization proposition. No new nodes or Mathlib leaves were needed. Resumed review supplied a source for each proof step, made the separated-finite-type/coefficient hypotheses explicit at the application, and spelled out the final point equality using the diagonal specialization already proved in step 1. Fresh citation audit added def-trf-supported-pairing explicitly for the geometric and coefficient setup, and search records were refreshed with the exact queries logged in this run. Second reading made the empty-support argument explicit even for nonempty indexing of empty pieces, specified the diagonal support, expanded citation excerpts to include applicable hypotheses, and recorded independent Mathlib searches. Repair of the returned landing: re-read every current cited statement, replaced both obsolete integration excerpts, made the constructible exceptional domain and proper comparison explicit, and expanded the point calculation to include P_a and the prescribed H^0(-)(1) scalar extraction. The statement, dependency list, original searches and unit realization remain unchanged.",
+  "blueprint": "Realizes the two paragraphs of the current main-20261015 proof: application of lem-trf-integration-component-sum and the point case using prop-trf-pairing-point-normalization.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q109-fbe4b9c56",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-fbe4b9c56 (reviewer sub-agent of L); spot-checked: Read the whole delivery. The item statement is verbatim the main-20261015 text (order 2693; the master order-2349 statement is identical). It uses the finite-coefficient pro-étale D^b_ctf category throughout, the same one as def-trf-integration, def-trf-dualizing-complex and def-trf-local-term-pair, and has no base-change morphism (not a target). Step 1: every hypothesis of lem-trf-integration-component-sum holds. E=C×_Z D is separated of finite type by def-trf-supported-pairing, the clopen proper pieces are the item's hypotheses, and def-trf-dualizing-complex supplies admissibility. The lemma's restriction (pullback, then dimension-0 open purity, then the dualizing-composition iso) is arrow for arrow the restriction of def-trf-local-term and def-trf-local-term-pair, so each summand is LT_β(u,v). The empty case is right even for nonempty B with empty pieces. The diagonal clause follows from lem-trf-trace-class-diagonal-pairing. Step 2: for a=id_s, λ is the adjunct of P_a^{-1}, so ε∘Ra_!λ∘P_a=1, and naturality of P_a gives ∫_s(λ∘t)=H^0(t)(1). I recomputed this. The identification ω_s=A_s is the same one prop-trf-pairing-point-normalization uses, and that proposition with Q=P, u=w, v=1_P gives tr_A(w|P). Step 1 with c=(id,id), Fix=s gives LT_s(w)=LT_s(w,1_P). Small cases checked: empty B; empty pieces; one piece; two points (a+b); P=A[0] gives a; P=A[1] gives −a; P=0. The cited statements are on the sk-p-local unit route (sk-d-trace-class and sk-p-pairing are reachable). No cycles, no new nodes, no duplicates: lem-trf-local-term-point is related but not restated, and the component-sum lemma is the cited generalization. The unit realized fields are correct. No tool_uses are declared, none are needed and none are accepted; no SGA is used. Fix (B3): the statement uses ∫, ω and tr_A, but def-trf-integration, def-trf-dualizing-complex and def-trf-categorical-trace were missing from stmt_deps. I added them in fixes/dag/nodes/sec-trace-formula/prop-trf-pairing-local-decomposition.json and changed nothing else.; 1 file(s) fixed by the reviewer"
+ }
 }

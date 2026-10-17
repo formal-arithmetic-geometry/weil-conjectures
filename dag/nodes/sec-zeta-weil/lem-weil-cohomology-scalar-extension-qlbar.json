@@ -4,10 +4,10 @@
   "is": null,
   "from": {
    "node": "prop-arithmetic-roots",
-   "place": "step 4 of its split (source: statement, 'hence an eigenvalue of $F_{i,\\ell'}$ on $H^i(X,\\overline{\\mathbf Q}_{\\ell'})$, the ordinary cohomology group after scalar extension' (the ## Proof gives no argument; written out here))",
+   "place": "prop-arithmetic-roots, statement: 'hence an eigenvalue of $F_{i,\\ell'}$ on $H^i(X,\\overline{\\mathbf Q}_{\\ell'})$, the ordinary cohomology group after scalar extension'; expanded Step 4 of its existing split. Also the scalar-extension display of prop-weight-purity.",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Scalar extension of ordinary cohomology to the algebraic closure of $\\mathbf Q_\\ell$",
@@ -23,11 +23,130 @@
   "def-weil-geometric-hypotheses",
   "def-weil-global-geometric-frobenius",
   "def-weil-ordinary-compact-cohomology",
-  "def-weil-smooth-proper-cohomological-family"
+  "def-weil-smooth-proper-cohomological-family",
+  "def-weil-coefficient-cohomology-modules",
+  "def-weil-constant-weil-structure",
+  "def-weil-vector-space-scalar-extension",
+  "def-weil-characteristic-polynomial",
+  "def-weil-root-multiplicity",
+  "def-weil-reverse-characteristic-polynomial",
+  "def-weil-endomorphism-determinant"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $K=(\\Ql)_X$, $s=\\operatorname{Spec}k$ and $C=\\RGamma(X,K)=\\operatorname{Fib}_s(Ra_{X*}K)$. The canonical constant Weil object at $\\Qlb$ is represented by $(\\Ql,(K,\\theta_{\\Ql}))$, so its underlying object is $(\\Ql,K)$ by [def-weil-constant-weil-structure]. The common-stage convention for the direct image [def-weil-derived-direct-image] and the explicit stagewise point functor [def-weil-finite-coefficient-point] give $Ra_{X*}(\\Ql,K)=(\\Ql,Ra_{X*}K)$ and $\\operatorname{Fib}_s(\\Ql,Ra_{X*}K)=(\\Ql,C)$. Thus, by [def-weil-ordinary-compact-cohomology], $\\RGamma(X,(\\Qlb)_X)$ is the object $(\\Ql,C)$ of the point coefficient category. This identifies the representative used in the statement without taking a tensor product of sheaves with an infinite coefficient field.",
+   "uses": [
+    "def-weil-constant-weil-structure",
+    "def-weil-derived-direct-image",
+    "def-weil-finite-coefficient-point",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rh/prop-arithmetic-roots.md",
+    "place": "statement, ordinary cohomology after scalar extension; expand the common-stage coefficient conventions at the finite stage E=Ql"
+   }
+  },
+  {
+   "text": "For every $i\\in\\mathbf Z$, [def-weil-coefficient-cohomology-modules] defines the cohomology of the pair $(\\Ql,C)$ to be $\\mathrm H^i(C)\\otimes_{\\Ql}\\Qlb$. Since $\\mathrm H^i(C)=H^i(X,\\Ql)$ by [def-weil-ordinary-compact-cohomology], this gives an isomorphism $\\xi_i:H^i(X,\\Ql)\\otimes_{\\Ql}\\Qlb\\xrightarrow{\\sim}H^i(X,\\Qlb)$. At the chosen stage it is the identity on this displayed tensor product; in a complex model after scalar extension its formula is $[z]\\otimes b\\mapsto[z\\otimes b]$. The natural and tower-compatible isomorphism of [lem-weil-cohomology-commutes-scalar-extension], together with the tensor tower identification in [def-weil-vector-space-scalar-extension], gives the same map if a larger finite coefficient stage or a different complex representative is used. It is therefore the canonical comparison induced by scalar extension, for every integer i.",
+   "uses": [
+    "def-weil-coefficient-cohomology-modules",
+    "def-weil-ordinary-compact-cohomology",
+    "lem-weil-cohomology-commutes-scalar-extension",
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rh/prop-arithmetic-roots.md",
+    "place": "statement, scalar-extension identification; its degreewise meaning in the stagewise coefficient category"
+   }
+  },
+  {
+   "text": "Write $\\tau_K:\\RGamma(X,K)\\to\\RGamma(X,Lg_X^*K)$ for ordinary Frobenius transport [def-weil-frobenius-cohomology-transport]. It is the composite of the point transport $\\iota_{Ra_{X*}K}$ and the point functor applied to $\\operatorname{FrEx}_{X,*}(K)$. For the representative $(\\Ql,K)$, [def-weil-frobenius-point-transport] explicitly represents the first map over $\\Ql$, and [def-weil-frobenius-square-exchange] explicitly represents the second over the same field. Apply the stagewise point functor [def-weil-finite-coefficient-point]. In its target category $D^b_{\\mathrm{fd}}(\\Qlb)$, let $J_{\\Ql}$ be the stage functor of [def-weil-point-fd-qlbar-category], using its scalar-extension unit isomorphisms to identify stage arrows with their representatives. Composition there is composition over a common field, so $\\tau_{(\\Ql,K)}=J_{\\Ql}(\\tau_K)$. By [def-weil-constant-weil-structure], the constant Weil map is represented by $\\theta_{\\Ql}$; hence $\\RGamma(\\theta_{\\Qlb})=J_{\\Ql}(\\RGamma(\\theta_{\\Ql}))$. Consequently the defining composite of [def-weil-global-geometric-frobenius], interpreted at this common stage, gives $F_{\\Qlb}=J_{\\Ql}(\\RGamma(\\theta_{\\Ql}))\\circ J_{\\Ql}(\\tau_K)=J_{\\Ql}(\\RGamma(\\theta_{\\Ql})\\circ\\tau_K)=J_{\\Ql}(F_\\ell)$. This checks the transport arrow as well as the Weil-structure arrow, with the geometric Frobenius convention fixed throughout.",
+   "uses": [
+    "def-weil-frobenius-cohomology-transport",
+    "def-weil-frobenius-point-transport",
+    "def-weil-frobenius-square-exchange",
+    "def-weil-finite-coefficient-point",
+    "def-weil-point-fd-qlbar-category",
+    "def-weil-constant-weil-structure",
+    "def-weil-global-geometric-frobenius"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rh/prop-arithmetic-roots.md",
+    "place": "statement, eigenvalue on ordinary cohomology after scalar extension; compute both arrows in the global geometric Frobenius composite at its field of definition"
+   }
+  },
+  {
+   "text": "Apply the cohomology functor of [def-weil-coefficient-cohomology-modules] to the equality in Step 3. Under $\\xi_i$, a morphism represented by $f$ over $\\Ql$ acts by $\\mathrm H^i(f)\\otimes1$: for a chain-map representative the formula is $[z]\\otimes b\\mapsto[f(z)]\\otimes b$, by naturality in [lem-weil-cohomology-commutes-scalar-extension] and the tensor-map formula in [def-weil-vector-space-scalar-extension]. To check arbitrary derived morphisms, write $\\eta_C:\\mathrm H^i(C)\\otimes_{\\Ql}\\Qlb\\xrightarrow{\\sim}\\mathrm H^i(C\\otimes_{\\Ql}\\Qlb)$ for that lemma's isomorphism. For a chain map $u:C\\to D$, naturality reads $\\eta_D(\\mathrm H^i(u)\\otimes1)=\\mathrm H^i(u\\otimes1)\\eta_C$. If u is a quasi-isomorphism, the lemma makes $u\\otimes1$ a quasi-isomorphism too. Multiplying this equality by the inverse cohomology maps gives $\\eta_C(\\mathrm H^i(u)^{-1}\\otimes1)=\\mathrm H^i(u\\otimes1)^{-1}\\eta_D$. The equality is also preserved by composition. Since the derived category is the localization at quasi-isomorphisms [def-weil-abstract-derived-category], these equations establish naturality on its morphisms, including inverses of quasi-isomorphisms. With $f=F_\\ell$, it follows that $F_{\\Qlb}\\xi_i=\\xi_i(\\mathrm H^i(F_\\ell)\\otimes1)$. These are exactly the induced actions on the cohomology groups in [def-weil-global-geometric-frobenius].",
+   "uses": [
+    "def-weil-coefficient-cohomology-modules",
+    "lem-weil-cohomology-commutes-scalar-extension",
+    "def-weil-vector-space-scalar-extension",
+    "def-weil-global-geometric-frobenius",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rh/prop-arithmetic-roots.md",
+    "place": "statement, Frobenius-equivariant scalar extension; expand the induced morphism on cohomology"
+   }
+  },
+  {
+   "text": "For $0\\leq i\\leq2d$, [def-weil-smooth-proper-cohomological-family] identifies $V_{i,\\ell}$ with $H^i(X,\\Ql)$ and $F_{i,\\ell}$ with $\\mathrm H^i(F_\\ell)$. The space is finite-dimensional by [prop-cohomological-finiteness], applied to the constant Weil sheaf with $E=\\Ql$ and the given smooth proper geometrically connected $X_0$. Thus Step 4 proves $F_{\\Qlb}=\\xi_i(F_{i,\\ell}\\otimes1)\\xi_i^{-1}$ on $H^i(X,\\Qlb)$, the required conjugacy. If $(v_1,\\ldots,v_n)$ is a $\\Ql$-basis of $V_{i,\\ell}$, [def-weil-vector-space-scalar-extension] makes $(v_j\\otimes1)$ a $\\Qlb$-basis; its image under $\\xi_i$ is a basis of $H^i(X,\\Qlb)$. If $F_{i,\\ell}v_j=\\sum_r a_{rj}v_r$, equivariance gives $F_{\\Qlb}\\xi_i(v_j\\otimes1)=\\sum_r a_{rj}\\xi_i(v_r\\otimes1)$. The two operators over $\\Qlb$ therefore have exactly the same matrix A, and A is the coefficientwise image of the original matrix over $\\Ql$.",
+   "uses": [
+    "def-weil-smooth-proper-cohomological-family",
+    "prop-cohomological-finiteness",
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rh/prop-arithmetic-roots.md",
+    "place": "statement, final eigenvalue assertion; identify the smooth-proper cohomological family and choose the corresponding tensor and transported bases"
+   }
+  },
+  {
+   "text": "Use the bases of Step 5. By [def-weil-characteristic-polynomial], the two $\\Qlb$-operators have the same characteristic polynomial $\\det(U I_n-A)$. An eigenvalue means a scalar $\\lambda$ with a nonzero vector v satisfying $Fv=\\lambda v$; the equation is carried in both directions by the invertible map $\\xi_i$, so their eigenvalues agree. Their algebraic multiplicities, the root multiplicities of this common characteristic polynomial [def-weil-root-multiplicity], agree as well. By [def-weil-reverse-characteristic-polynomial] and [def-weil-endomorphism-determinant], both reverse characteristic polynomials over $\\Qlb$ are $\\det(I_n-TA)$. Moreover the permutation formula $\\det B=\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_j B_{\\sigma(j),j}$ commutes with coefficient inclusion $\\Ql\\hookrightarrow\\Qlb$, since a ring homomorphism preserves each finite product and sum. Thus $\\det(1-TF_{i,\\ell}\\mid V_{i,\\ell})$, read in $\\Qlb[T]$, equals $\\det(1-TF_{\\Qlb}\\mid H^i(X,\\Qlb))$. When n=0 the empty product is 1, and the assertions about eigenvalues and multiplicities are empty, so this argument includes zero cohomology spaces.",
+   "uses": [
+    "def-weil-characteristic-polynomial",
+    "def-weil-root-multiplicity",
+    "def-weil-reverse-characteristic-polynomial",
+    "def-weil-endomorphism-determinant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rh/prop-arithmetic-roots.md",
+    "place": "statement, scalar-extension eigenvalues with multiplicities and determinant polynomial; finite determinant calculation in corresponding bases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-constant-weil-structure",
+  "def-weil-derived-direct-image",
+  "def-weil-finite-coefficient-point",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-coefficient-cohomology-modules",
+  "lem-weil-cohomology-commutes-scalar-extension",
+  "def-weil-vector-space-scalar-extension",
+  "def-weil-frobenius-cohomology-transport",
+  "def-weil-frobenius-point-transport",
+  "def-weil-frobenius-square-exchange",
+  "def-weil-point-fd-qlbar-category",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-abstract-derived-category",
+  "def-weil-smooth-proper-cohomological-family",
+  "prop-cohomological-finiteness",
+  "def-weil-characteristic-polynomial",
+  "def-weil-root-multiplicity",
+  "def-weil-reverse-characteristic-polynomial",
+  "def-weil-endomorphism-determinant"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-rh/prop-arithmetic-roots.md",
+  "place": "the ordinary-cohomology-after-scalar-extension clause has no proof in the current blueprint; expanded from the existing common-stage coefficient, Frobenius-transport and cohomology definitions"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -42,10 +161,66 @@
    "results": "Matrix.charpoly_map (Mathlib/LinearAlgebra/Matrix/Charpoly/Basic.lean:175) and Mathlib/LinearAlgebra/Charpoly/BaseChange.lean: the characteristic polynomial of a linear map is unchanged by base change of the field",
    "date": "2026-10-09",
    "verdict": "no match: covers only the linear-algebra tail (a conjugate or base-changed operator has the same characteristic polynomial), not the cohomological identification"
+  },
+  {
+   "tool": "grep",
+   "query": "EllAdicCohomology|etale.*[Cc]ohomology|[Ff]robenius.*[Cc]ohomology",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: no stagewise Qlbar ordinary-cohomology comparison compatible with geometric Frobenius; the integral ell-adic definition and field-theory hits do not state the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of l-adic cohomology to an algebraic closure is Frobenius equivariant",
+   "results": "8 hits: FiniteField.frobeniusAlgEquivOfAlgebraic, FiniteField.frobeniusAlgEquivOfAlgebraic_apply, FiniteField.frobeniusAlgEquivOfAlgebraic.congr_simp, IntermediateField.extendScalars, algebraicClosure.le_restrictScalars, FiniteField.coe_frobeniusAlgEquivOfAlgebraic, FiniteField.frobeniusAlgEquivOfAlgebraic_symm_apply, PadicComplex.instIsScalarTowerPadicPadicAlgCl",
+   "date": "2026-10-17",
+   "verdict": "no match: no stagewise Qlbar ordinary-cohomology comparison compatible with geometric Frobenius; the integral ell-adic definition and field-theory hits do not state the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a finite-stage derived vector space over an algebraic closure is the tensor product of its cohomology at its field of definition",
+   "results": "8 hits: Algebra.Extension.tensorH1Cotangent, groupCohomology.H1ofAutOnUnitsUnique, groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units, groupCohomologyIsoExt, Algebra.Extension.instIsScalarTowerH1CotangentOfCotangent, Algebra.Extension.H1Cotangent.map_eq, Algebra.Extension.instModuleH1CotangentOfIsScalarTowerCotangent, Algebra.H1Cotangent.mapEquiv",
+   "date": "2026-10-17",
+   "verdict": "no match: no stagewise Qlbar ordinary-cohomology comparison compatible with geometric Frobenius; the integral ell-adic definition and field-theory hits do not state the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.EllAdicCohomology",
+   "results": "3 hits: AlgebraicGeometry.Scheme.EllAdicCohomology, AlgebraicGeometry.Scheme.instAddCommGroupEllAdicCohomology, AlgebraicGeometry.Scheme.instSubsingletonEllAdicCohomologyOfIsEmptyCarrierCarrierCommRingCat",
+   "date": "2026-10-17",
+   "verdict": "no match: no stagewise Qlbar ordinary-cohomology comparison compatible with geometric Frobenius; the integral ell-adic definition and field-theory hits do not state the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary ell-adic cohomology with algebraically closed coefficients is scalar extension of rational ell-adic cohomology, compatibly with geometric Frobenius",
+   "results": "8 hits: PadicComplex.instIsScalarTowerPadicPadicAlgCl, PadicComplex.instAlgebraPadic, BDeRhamPlus, PadicInt.algebra, WittVector.isocrystal_classification, WittVector.StandardOneDimIsocrystal, WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.IsocrystalEquiv.mk.inj",
+   "date": "2026-10-17",
+   "verdict": "no match: no stagewise Qlbar ordinary-cohomology comparison compatible with geometric Frobenius; the integral ell-adic definition and field-theory hits do not state the item"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*cohomology|frobenius.*[Ss]calar",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second reading; integral ell-adic cohomology, coefficient Frobenius and isocrystal declarations do not state the common-stage rational/algebraically closed cohomology comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EllAdicCohomology\"",
+   "results": "3 hits: AlgebraicGeometry.Scheme.EllAdicCohomology, AlgebraicGeometry.Scheme.instAddCommGroupEllAdicCohomology, AlgebraicGeometry.Scheme.instSubsingletonEllAdicCohomologyOfIsEmptyCarrierCarrierCommRingCat",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second reading; integral ell-adic cohomology, coefficient Frobenius and isocrystal declarations do not state the common-stage rational/algebraically closed cohomology comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of coefficients of derived global sections of a constant sheaf preserves the geometric Frobenius action",
+   "results": "8 hits: PreTilt.coeff_frobenius, PreTilt.coeff_frobeniusEquiv_symm, PreTilt.coeff_iterate_frobeniusEquiv_symm, Perfection.coeff_frobenius, WittVector.IsocrystalHom.frob_equivariant, Perfection.coeff_frobeniusEquiv_symm, Perfection.coeff_iterate_frobenius, AlgebraicGeometry.StructureSheaf.to_global_factors_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: independent second reading; integral ell-adic cohomology, coefficient Frobenius and isocrystal declarations do not state the common-stage rational/algebraically closed cohomology comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +240,34 @@
   }
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-thm-rh"
+ "unit": "sk-thm-rh",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-cohomology-scalar-extension-qlbar",
+  "worker": "stage1",
+  "summary": "Kept the statement verbatim. Expanded the stage-Ql representative of the constant Weil object, ordinary direct image and point evaluation; identified its cohomology by the existing stagewise definition; computed both arrows in Frobenius transport and checked the induced morphism on cohomology using the existing natural scalar-extension lemma. The finite-dimensional tail uses matching tensor/transported bases and the finite determinant formula, including the zero space. Searched the whole DAG, blueprint and project Lean; no exact attachment or whole-item Mathlib match. No new nodes. Second reading corrected the point-category composition citation and stage-functor unit identifications, and expanded the localization naturality equation.",
+  "blueprint": "Realizes the ordinary-cohomology-after-scalar-extension clause in the statement of prop-arithmetic-roots, used in Step 4 of its split, and the identifications assumed in prop-weight-purity. The current main-20261015 version has the same clause but no proof. The sk-thm-rh unit and chapter route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-cohomology-commutes-scalar-extension",
+    "why": "Generic natural and tower-compatible cohomology comparison for complexes of vector spaces, used to interpret the existing stagewise coefficient-cohomology functor on representatives and morphisms; no lemma of sk-thm-rh supplies this linear homological algebra interface."
+   },
+   {
+    "node": "prop-cohomological-finiteness",
+    "why": "Finite-dimensionality of ordinary Ql cohomology of the constant Weil sheaf; this is the explicit input of the existing smooth-proper cohomological family, not a replacement of the arithmetic-roots or weight route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-cohomology-commutes-scalar-extension",
+  "prop-cohomological-finiteness"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NH-7edd8dd45",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-7edd8dd45 (reviewer sub-agent of L); spot-checked: Read the item, all 19 proof deps and 14 stmt deps (statements and blueprint_update texts), the source prop-arithmetic-roots.md and .proof.md in main-20261015 (the clause has no proof there, so the agent origin is right), unit sk-thm-rh and the chapter. Step 1: constant-weil clause 5, the common-stage clause of derived-direct-image and Fib_s clause 4 give RGamma(X,(Qlb)_X)=(Ql,C); proper means separated finite type and l!=p. Step 2: the coefficient-cohomology-modules display makes xi_i the identity at stage Ql, and the lemma's tower clause gives independence of stage. Step 3: the Qlb paragraphs of point-transport and square-exchange, Fib_s on morphisms and functoriality of J_L in point-fd-qlbar-category give F_Qlb=J_Ql(F_l), in the right category D^b_fd(Qlb). Step 4: the naturality, quasi-isomorphism and localization algebra is correct. Step 5: family definition, finiteness (E=Ql, constant Weil sheaf) and extended basis give the same matrix. Step 6: same char/reverse polynomial, root multiplicity, the permutation formula under Ql->Qlb, and n=0. Tested d=0, i outside [0,2d] and a Jordan block. No new nodes; rg found no duplicate statement; proof_deps equals the union of uses; no cycle; no SGA. Both tool_uses accepted; both units are in sk-thm-rh's transitive route. Caveat, not a fault of this delivery: def-weil-global-geometric-frobenius is stated only for finite E; the item reads F_Qlb as the same composite at Qlb, which Step 3 shows equals the stage image of F_l. Maintainer may extend that definition to Qlb. No fixes."
+ }
 }
