@@ -11,9 +11,107 @@
   "def-weil-pbc-category-colimit",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The scalar compatibility makes all $a_{ij}$ and $q_i$ morphisms of $R$-module sheaves: for example $a_{ij}(s_i(r)x)=s_j(r)a_{ij}(x)$. By [lem-weil-pbc-module-sheaves-colimits-forgetful], form a colimit $(L,(b_i:A_i\\to L))$ in $\\operatorname{Mod}(R)$. Its existence applies in the coefficient universe after choosing a $w$-small site skeleton; the hypothesis of essential smallness guarantees sheafification there. Thus a map of module sheaves out of $L$ is determined by its composites with every $b_i$. The module cocone $q_i$ induces a unique $R$-linear map $u:L\\to A$ with $u b_i=q_i$. We will construct a ring structure on this very $L$, then use the given ring-colimit property of $A$ to prove $u$ invertible.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Agent argument using Tag 03DB (lemma-limits-colimits), Tag 03EP (lemma-tensor-commute-colimits), item (2), and the tensor construction in Section 03EK (section-tensor-product)"
+   }
+  },
+  {
+   "text": "For $i,j\\in I$, choose $k\\ge i,j$. Multiplication in $A_k$ is $R$-bilinear for the action through $s_k$, so the formula\n$$c_{ij}(x\\otimes y)=b_k\\bigl(a_{ik}(x)a_{jk}(y)\\bigr)$$\ndefines a morphism $c_{ij}:A_i\\otimes_R A_j\\to L$. Here the formula is first a map from the sectionwise presheaf tensor, then extends uniquely to its module sheafification by [def-pur-sheaf-tensor-product] and [def-weil-presheaf-modules-sheafification]. If $k'$ is another upper bound, choose $h\\ge k,k'$; applying $b_h a_{kh}=b_k$ and multiplicativity of $a_{kh}$ identifies both formulas with $b_h(a_{ih}(x)a_{jh}(y))$. Thus $c_{ij}$ is independent of the choice. For $i\\le i'$ the same calculation in a common upper bound gives $c_{i'j}(a_{ii'}\\otimes1)=c_{ij}$, and likewise in $j$. These are equalities of sheaf maps because they agree on the sectionwise tensor generators before sheafification.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Agent argument using Tag 03DB (lemma-limits-colimits), Tag 03EP (lemma-tensor-commute-colimits), item (2), and the tensor construction in Section 03EK (section-tensor-product)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-independent-sheaf-tensor-colimits] twice to the compatible maps $c_{ij}$. The required preservation in the first variable follows from the balanced swap $x\\otimes y\\mapsto y\\otimes x$, whose inverse is the same swap, for the tensor of [def-pur-sheaf-tensor-product]. First, for each $j$, obtain $d_j:L\\otimes_R A_j\\to L$ with $d_j(b_i\\otimes1)=c_{ij}$. Compatibility of the $d_j$ follows by this same colimit uniqueness after precomposing every $b_i\\otimes1$. Second, obtain a unique $\\mu:L\\otimes_R L\\to L$ with $\\mu(1\\otimes b_j)=d_j$. In particular $\\mu(b_i\\otimes b_j)=c_{ij}$. Moreover, equality of two maps out of $L\\otimes_R L$ can be checked after all $b_i\\otimes b_j$: first fix $j$ and use the first-variable colimit uniqueness, then use the second-variable uniqueness. All the diagrams used here have index $I$ in $w$, as the tensor-preservation statement requires.",
+   "uses": [
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Agent argument using Tag 03DB (lemma-limits-colimits), Tag 03EP (lemma-tensor-commute-colimits), item (2), and the tensor construction in Section 03EK (section-tensor-product)"
+   }
+  },
+  {
+   "text": "Fix $i_0\\in I$ and put $e=b_{i_0}(1)\\in L(U)$ for every site object $U$, with compatible restrictions. For any $i$, a common upper bound and the unital transition maps give $b_i(1)=e$. The multiplication $\\mu$ is commutative: its two orders agree after $b_i\\otimes b_j$ by commutativity in a common $A_k$, so step 3 gives equality. It is associative as well. Repeatedly use [lem-weil-pbc-independent-sheaf-tensor-colimits] in the three variables to check the two maps out of $(L\\otimes_R L)\\otimes_R L$ after $b_i\\otimes b_j\\otimes b_t$. For $k\\ge i,j,t$ their values are respectively $b_k((a_{ik}(x)a_{jk}(y))a_{tk}(z))$ and $b_k(a_{ik}(x)(a_{jk}(y)a_{tk}(z)))$; these agree. The associativity identifications are those of the sheafified sectionwise tensor [def-pur-sheaf-tensor-product]. Finally, multiplying $b_i(x)$ by $e=b_i(1)$ on either side gives $b_i(x)$; equality on all $b_i$ proves the two unit laws on $L$. Bilinearity gives distributivity. Thus the underlying abelian sheaf $L$ is a sheaf of unital commutative rings, and every $b_i$ is a unital ring-sheaf map, since $\\mu(b_i\\otimes b_i)(x\\otimes y)=b_i(xy)$.",
+   "uses": [
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Agent argument using Tag 03DB (lemma-limits-colimits), Tag 03EP (lemma-tensor-commute-colimits), item (2), and the tensor construction in Section 03EK (section-tensor-product)"
+   }
+  },
+  {
+   "text": "Define $s_L:R\\to L$ by $s_L(r)=r e$. For any $i$, $R$-linearity of $b_i$ gives $s_L(r)=b_i(s_i(r))$, so $s_L=b_i s_i$ and is a unital ring map. The original $R$-action on $L$ equals multiplication through $s_L$: after $b_i$, both actions send $(r,x)$ to $b_i(s_i(r)x)$. More explicitly the two $R$-linear maps $L\\to L$, for a local scalar $r$, agree on all $b_i$ locally; equivalently the two maps $R\\otimes_R L\\to L$ agree after $1\\otimes b_i$, by tensor preservation. By [lem-weil-pbc-independent-sheaf-tensor-colimits], $u\\mu$ and $\\mu_A(u\\otimes u)$ agree if they agree after every $b_i\\otimes b_j$. In a common stage $k$ both evaluate to $q_k(a_{ik}(x)a_{jk}(y))$, since $q_k$ is a ring map. Also $u(e)=q_{i_0}(1)=1$. Hence $u$ is a unital ring map as well as an $R$-linear map.",
+   "uses": [
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Agent argument using Tag 03DB (lemma-limits-colimits), Tag 03EP (lemma-tensor-commute-colimits), item (2), and the tensor construction in Section 03EK (section-tensor-product)"
+   }
+  },
+  {
+   "text": "The ring cocone $(b_i)$ and the given ring-colimit property of $(A,(q_i))$ now give a unique unital ring-sheaf map $v:A\\to L$ with $v q_i=b_i$. It is $R$-linear for the original module structure on $L$: choosing $i_0$ gives $v s=v q_{i_0}s_{i_0}=b_{i_0}s_{i_0}=s_L$, and consequently $v(s(r)x)=s_L(r)v(x)=r\\,v(x)$. Therefore $vu$ is a map of $R$-module sheaves, and $(vu)b_i=b_i$ for every $i$; module-colimit uniqueness implies $vu=1_L$. Both $uv$ and $1_A$ are unital ring-sheaf maps and have composite $q_i$ with every $q_i$; the given ring-colimit uniqueness implies $uv=1_A$. Thus $u$ is an isomorphism of $R$-module sheaves, carrying exactly the legs $b_i$ to $q_i$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Agent argument using Tag 03DB (lemma-limits-colimits), Tag 03EP (lemma-tensor-commute-colimits), item (2), and the tensor construction in Section 03EK (section-tensor-product)"
+   }
+  },
+  {
+   "text": "For a module cocone $f_i:A_i\\to M$, let $g:L\\to M$ be its unique factorization through the module colimit. Then $f=gv:A\\to M$ is $R$-linear and $fq_i=gb_i=f_i$. If another $R$-linear map $f':A\\to M$ has the same composites, $f'u$ and $g$ agree on all $b_i$, so $f'u=g$ and $f'=gv$. This proves existence and uniqueness for the specified cocone, as claimed.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Agent argument using Tag 03DB (lemma-limits-colimits), Tag 03EP (lemma-tensor-commute-colimits), item (2), and the tensor construction in Section 03EK (section-tensor-product)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-category-colimit",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Agent argument using Tag 03DB (lemma-limits-colimits), Tag 03EP (lemma-tensor-commute-colimits), item (2), and the tensor construction in Section 03EK (section-tensor-product)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -81,10 +179,62 @@
    "date": "2026-10-17",
    "verdict": "no match: source inspection finds only abstract-ring or module/presheaf colimits, not the directed ring-sheaf to module-sheaf comparison on an arbitrary site",
    "subdirectory": "CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesFilteredColimits|PreservesFilteredColimits|commutative.*algebra",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary algebraic categories or existence of module-sheaf colimits, not the ring-sheaf to R-module-sheaf comparison",
+   "subdirectory": "Algebra/Category/ModuleCat/Sheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Directed colimits of sheaves of commutative algebras are colimits of underlying module sheaves",
+   "results": "8 hits: SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat, AlgebraicGeometry.LocallyRingedSpace.coproductCofanIsColimit, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, PresheafOfModules.colimitPresheafOfModules, CategoryTheory.Sheaf.createsColimitOfIsSheaf, PresheafOfModules.hasColimit, ModuleCat.directLimitIsColimit, AlgebraicGeometry.LocallyRingedSpace.instHasColimits",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary algebraic categories or existence of module-sheaf colimits, not the ring-sheaf to R-module-sheaf comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CommRingCat, \"preservesFilteredColimits\"",
+   "results": "3 hits: CommRingCat.FilteredColimits.forget_preservesFilteredColimits, CommRingCat.FilteredColimits.forget₂Ring_preservesFilteredColimits, CommRingCat.preservesFilteredColimits_coyoneda",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary algebraic categories or existence of module-sheaf colimits, not the ring-sheaf to R-module-sheaf comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The forgetful functor from sheaves of commutative R-algebras on a site to sheaves of R-modules preserves directed colimits",
+   "results": "8 hits: SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, SheafOfModules.isColimitFreeCofan, AlgebraicGeometry.Scheme.Modules.instHasColimits, SheafOfModules.Presentation.isColimit, PresheafOfModules.toPresheaf_preservesColimit, SheafOfModules.forgetToSheafModuleCat, instHasColimitsCondensedMod",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary algebraic categories or existence of module-sheaf colimits, not the ring-sheaf to R-module-sheaf comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "colimit|Colimit",
+   "results": "0 hits:  (nonexistent subdirectory; not evidence of absence)",
+   "date": "2026-10-17",
+   "verdict": "no match: invalid subdirectory; not evidence of absence",
+   "subdirectory": "CategoryTheory/Monoidal/Mon"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimits of commutative monoid objects in a cocomplete symmetric monoidal category are created by the forgetful functor when tensor preserves colimits separately",
+   "results": "8 hits: CommMonCat.FilteredColimits.forget_preservesFilteredColimits, CommMonCat.FilteredColimits.forget₂Mon_preservesFilteredColimits, CommMonCat.FilteredColimits.colimitCoconeIsColimit, CommMonCat.FilteredColimits.colimitCommMonoid, CommMonCat.FilteredColimits.colimit, MonCat.FilteredColimits.forget_preservesFilteredColimits, CommMonCat.FilteredColimits.M, CommMonCat.FilteredColimits.colimitCocone",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary algebraic categories or existence of module-sheaf colimits, not the ring-sheaf to R-module-sheaf comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "colimit|Colimit",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern ordinary algebraic categories or existence of module-sheaf colimits, not the ring-sheaf to R-module-sheaf comparison",
+   "subdirectory": "CategoryTheory/Monoidal/Mon.lean"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-qlbar-flat",
@@ -101,5 +251,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-directed-ring-sheaf-module-colimit",
+  "worker": "stage1",
+  "summary": "Constructed multiplication on the actual module colimit by compatible common-stage products and separate tensor-colimit preservation. Verified ring laws by iterated colimit uniqueness, matched the scalar action, and used the original ring universal property to construct an inverse. No new nodes and no statement change.",
+  "blueprint": "lem-sfb-qlbar-flat.proof.md, first sentence: the ring-sheaf colimit, compatibly with the E_X-module structures. Steps 1–7 supply precisely the ring-to-module comparison used there.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "why": "Generic tensor preservation for module sheaves with independent site and coefficient universes; the coefficient-compatibility unit has no statement proving this generic site theorem."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic existence and universal property of module-sheaf colimits, used to construct L; it supplies a basic categorical tool, not a substitute coefficient route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q149-a7ffa91f5",
+  "group": "Q149",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-a7ffa91f5 (reviewer sub-agent of L); spot-checked: PASS: I read the item and all 7 steps in full, plus every cited statement: lem-weil-pbc-module-sheaves-colimits-forgetful clause (2), lem-weil-pbc-independent-sheaf-tensor-colimits, def-pur-sheaf-tensor-product, def-weil-presheaf-modules-sheafification, def-weil-sheaf-of-modules-category and def-weil-pbc-category-colimit. I checked them against Stacks sites-modules.tex 03DB (lemma-limits-colimits, l.1358), 03EP(2) (lemma-tensor-commute-colimits, l.4001) and section 03EK. The statement is unchanged and matches its use in step 3 of lem-sfb-qlbar-flat. It serves the first sentence of the main-20261015 proof lem-sfb-qlbar-flat.proof.md (unit sk-prop-sfb-finite-extension-compatibility), and the chapter is untouched. Every step is correct: (1) the scalar compatibilities make a_ij and q_i R-linear, giving the module colimit L and u with u b_i = q_i; (2) the common-stage products are R(U)-balanced, extend through sheafification, and do not depend on the chosen upper bound; (3) swap plus 03EP(2) gives mu, and maps out of L⊗L are detected on b_i⊗b_j; (4) the unit e = b_i(1) uses nonemptiness, and commutativity, associativity in a stage above three indices, the unit laws and distributivity all hold; (5) s_L = b_i s_i, the R-action is multiplication through s_L, and u is a unital ring map; (6) the ring-colimit property gives v with v s = s_L, so v is R-linear, vu = 1 by module uniqueness and uv = 1 by ring uniqueness; (7) f = g v gives existence and uniqueness. Small cases checked: singleton I, R = 0, non-injective transitions, incomparable indices. Empty I is correctly excluded, since the ring colimit there is sheafified Z while the module colimit is 0. No new nodes. Duplicate scan: lem-weil-pbc-sheaf-algebras-directed-colimit concerns topological spaces only, and the filtered module-sheaf nodes state different things. Mathlib has only AlgCat/CommRingCat filtered-colimit preservation (AlgCat/FilteredColimits.lean:92,95). I accept both declared tool_uses (lem-weil-pbc-module-sheaves-colimits-forgetful and lem-weil-pbc-independent-sheaf-tensor-colimits) as generic infrastructure that the parent already uses as accepted tools. No SGA citation. No fixes. Minor: the report mentions citations.json and searches.jsonl, which are sandbox logs not in the branch; not a fault."
  }
 }
