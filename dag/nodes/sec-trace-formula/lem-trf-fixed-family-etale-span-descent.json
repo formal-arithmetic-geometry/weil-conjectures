@@ -284,5 +284,27 @@
   "group": "N2",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N2-a53dd3394 (reviewer sub-agent of L); spot-checked: Mathematics and all nine proof steps check out against the cited DAG statements and Stacks sources; no route-pivot or SGA violation, duplicate, false statement, or long hidden lemma found. The delivered node has null stmt_deps and proof_deps metadata. Corrected complete JSON is under fixes/dag/nodes/sec-trace-formula/lem-trf-fixed-family-etale-span-descent.json; review.md records the checks.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1db4a223d",
+  "group": "N7",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, canonical helper, docstrings, edge cases, route-pivot compliance, report sections, and scompile evidence all checked successfully."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FixedFamilyEtaleSpanDescent",
+  "declaration": "AlgebraicGeometry.exists_fixedFamily_etale_span_descent",
+  "declarations": [
+   "AlgebraicGeometry.fixedFamilyLimitProjection",
+   "AlgebraicGeometry.exists_fixedFamily_etale_span_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FixedFamilyEtaleSpanDescent.lean",
+  "statement": "theorem exists_fixedFamily_etale_span_descent {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ i : Iᵒᵖ, IsAffine (D.obj i)] (L : Cone D) (hL : IsLimit L) (b : L.pt) (hb : ∀ i : I, IsIso ((L.π.app (op i)).residueFieldMap b)) (i₀ : I) (P₀ Q₀ : Scheme.{u}) [IsAffine P₀] [IsAffine Q₀] (fP : P₀ ⟶ D.obj (op i₀)) (fQ : Q₀ ⟶ D.obj (op i₀)) [LocallyOfFinitePresentation fP] [LocallyOfFinitePresentation fQ] (U : Scheme.{u}) [IsAffine U] (fU : U ⟶ L.pt) [LocallyOfFinitePresentation fU] (u : U) (hu : fU u = b) (a : U ⟶ pullback fP (L.π.app (op i₀))) (c : U ⟶ pullback fQ (L.π.app (op i₀))) [Etale a] [Etale c] (ha : a ≫ pullback.snd fP (L.π.app (op i₀)) = fU) (hc : c ≫ pullback.snd fQ (L.π.app (op i₀)) = fU) (haκ : IsIso (a.residueFieldMap u)) (hcκ : IsIso (c.residueFieldMap u)) : ∃ (j : I) (hj : i₀ ≤ j) (Uj : Scheme.{u}) (fUj : Uj ⟶ D.obj (op j)), IsAffine Uj ∧ LocallyOfFinitePresentation fUj ∧ ∃ (aj : Uj ⟶ pullback fP (D.map (homOfLE hj).op)) (cj : Uj ⟶ pullback fQ (D.map (homOfLE hj).op)), Etale aj ∧ Etale cj ∧ aj ≫ pullback.snd fP (D.map (homOfLE hj).op) = fUj ∧ cj ≫ pullback.snd fQ (D.map (homOfLE hj).op) = fUj ∧ ∃ e : pullback fUj (L.π.app (op j)) ≅ U, e.hom ≫ fU = pullback.snd fUj (L.π.app (op j)) ∧ e.hom ≫ a ≫ fixedFamilyLimitProjection D L i₀ j hj fP = pullback.fst fUj (L.π.app (op j)) ≫ aj ∧ e.hom ≫ c ≫ fixedFamilyLimitProjection D L i₀ j hj fQ = pullback.fst fUj (L.π.app (op j)) ≫ cj ∧ aj ((e.inv ≫ pullback.fst fUj (L.π.app (op j))) u) = fixedFamilyLimitProjection D L i₀ j hj fP (a u) ∧ cj ((e.inv ≫ pullback.fst fUj (L.π.app (op j))) u) = fixedFamilyLimitProjection D L i₀ j hj fQ (c u) ∧ IsIso ((fixedFamilyLimitProjection D L i₀ j hj fP).residueFieldMap (a u)) ∧ IsIso ((fixedFamilyLimitProjection D L i₀ j hj fQ).residueFieldMap (c u)) ∧ IsIso ((e.inv ≫ pullback.fst fUj (L.π.app (op j))).residueFieldMap u) ∧ IsIso (aj.residueFieldMap ((e.inv ≫ pullback.fst fUj (L.π.app (op j))) u)) ∧ IsIso (cj.residueFieldMap ((e.inv ≫ pullback.fst fUj (L.π.app (op j))) u))",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
