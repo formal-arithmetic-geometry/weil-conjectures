@@ -236,5 +236,27 @@
   "group": "Q29",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-8394cd28b (reviewer sub-agent of L); spot-checked: Read the item, all 4 steps and every cited statement in full; review written to review.md. Step 1: lem-weil-pbc-ring-sheaves-grothendieck and lem-sp-grothendieck-enough-injectives give enough injectives on the four small sites. det-pe-classical-sheaves-modules (any discrete commutative ring) gives H ≅ ν^*G with no finiteness condition. Step 2: lem-weil-pbc-etale-inverse-image-restriction(1) gives the restriction isomorphism. lem-pe-constant-left-module-inverse-image keeps the same constant scalars; A-linearity from naturality is elementary. lem-sfb-etale-module-affine-bound has the same k, ℓ, A, ℓ^aA=0, W and d_X/e_X conventions as the item. Step 3: the affine formula of sk-prop-sf-comparison with K=G[0] (bounded below) and the one-object cofiltered presentation (W is affine and étale, so a pro-étale affine). Clause (2) of lem-weil-pbc-right-derived-plus-injective links RΓ to injective resolutions. Only the bounded-below comparison is used, never the unbounded one, so there is no circularity with lem-sfb-unbounded-site-comparison. The cycle check is clean. Step 4: lem-weil-pbc-proetale-restriction-injectives applies because objects of X_proét are weakly étale; it matches Stacks 03F3 (sites-cohomology l.608). This is the input of the Fixed-degree truncation paragraph, lines 16-26 of the main-20261015 unit proof. Small cases: algebraically closed field (true cd 0 ≤ 1), F_q (cd 1, nothing claimed at q=1), empty X/W, non-finitely-generated G. The statement is true and not weakened. No new nodes and no duplicates (det-pe-unbounded-classical-bounds(1) is abelian cohomology on U_proét, not module-valued evaluation on the ambient site). Batch-5 flag on lem-sfb-etale-module-affine-bound: in the closure of every proof_dep, the only sec-poincare-duality node is lem-pod-separated-finite-type-base-change. That node is a Mathlib leaf saying separated + finite type is stable under base change, a general scheme fact. It is not a step of the trace formula or of Poincaré duality, and neither assumption states it or the cohomological-dimension bound it feeds. No closure meets sec-trace-formula. So the citation is genuinely outside the assumptions. I accept the six generic tool_uses as declared. No SGA. No changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c26b57a79",
+  "group": "Q72",
+  "result": "fix",
+  "note": "Mathematical statement, dependencies, universes, edge cases and verbatim signature checked; per-file compilation passed without diagnostics. Repaired H11 with a complete replacement report in fixes containing the substantive independent second reading. Lean and node records need no changes; details are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.ClassicalModuleAffineEvaluationBound",
+  "declaration": "AlgebraicGeometry.ProEtale.classical_module_affine_evaluation_bound",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.proEtaleConstantModuleEvaluation",
+   "AlgebraicGeometry.ProEtale.classical_module_affine_evaluation_bound"
+  ],
+  "file": "lean/Sheaf/SixFunctors/ClassicalModuleAffineEvaluationBound.lean",
+  "statement": "theorem classical_module_affine_evaluation_bound (k : Type u) [Field k] (_hk : Finite k ∨ IsAlgClosed k) (ℓ : ℕ) (_hℓ : ℓ.Prime) (_hℓk : IsUnit (ℓ : k)) (A : Type u) [CommRing A] [Finite A] (a : ℕ) (_ha : 1 ≤ a) (_hA : (ℓ : A) ^ a = 0) (X : Scheme.{u}) [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] (W : X.Etale) [IsAffine W.left] (H : ringedSiteModules.{u + 1} ((constantSheaf (Scheme.ProEt.topology X) RingCat.{u + 1}).obj (RingCat.of (ULift.{u + 1, u} A)))) (_hH : IsClassicalModuleSheaf H) (I : InjectiveResolution H) (q : ℤ) (_hq : (2 * ((topologicalKrullDim X).unbotD 0).toNat + 1 : ℕ) < q) : IsZero ((((proEtaleConstantModuleEvaluation X A (Scheme.ProEt.mk W.hom)).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).homology q.toNat)",
+  "branch": "newtargets-dag",
+  "by": "Q72",
+  "date": "2026-10-17",
+  "existing": false
  }
 }

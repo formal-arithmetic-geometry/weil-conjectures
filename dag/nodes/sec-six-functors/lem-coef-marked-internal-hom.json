@@ -228,5 +228,28 @@
   "group": "Q103",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-cb93a5fc1 (reviewer sub-agent of L); spot-checked: I read the item in full: its statement, steps 1-7, source, searches, blueprint and split_report. I also read the full statements of def-cbc-enhanced-diagrams-cones, def-weil-pbc-simplicial-set and def-weil-size-convention, the parent lem-coef-marked-point-cartesian-model (its step 7 cites only this item, for Y^X and the exponential adjunction), and the unit and chapter records. The statement matches the opening paragraph of HTT §3.1.3: Map^flat as the underlying simplicial set, with edges marked when they extend over (Delta^1)^sharp. It has no extra hypotheses and is not weakened. HTT is not in literature/, so the WANTED line and proof_origin=agent follow the §4 procedure. I recomputed every formula: restriction and degeneracy marking (step 1); functoriality, including marked edges (step 2); simpliciality and marking of evaluation, with Y(alpha)h_n(x,id)=h_m(X(alpha)x,alpha) (step 3); simpliciality of the transpose using Z(alpha beta)=Z(beta)Z(alpha), and the flat test through Z(c_v)z=s_0(Z(v)z) (step 4); the three-edge sharp check and its converse through (g_1z)_1(e,alpha)=F_1(Z(alpha)z,e) (step 5); both inverse identities and naturality in Z, X and Y (step 6); and the universe bound, where N is in U is left implicit but holds (step 7). All steps are genuinely elementary against the cited definitions, and proof_deps equals the union of the uses lists. Edge cases X empty, Y empty, X=(Delta^0)^sharp, and X=(Delta^1)^sharp with Y=(Delta^1)^flat all check out. There are no new nodes. An rg search for marked/sSet^+/Y^X found no duplicate: lem-coef-marked-sharp-enrichment, lem-coef-cat-infinity-colimits-cartesian-closure, lem-cbc-enhanced-relative-exponential and lem-coef-marked-anodyne-lifting-calculus all state other things. The item uses only definitions, so there are no route or tool_uses issues and nothing from SGA or Stacks. It is not a target node, so the base-change and coefficient checks do not apply. Minor point: source.place also names HTT Cor. 3.1.4.4, which the proof does not use; I made no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e23266b5b",
+  "group": "Q46",
+  "result": "fix",
+  "note": "Mathematics, exact signature, markings, universes and per-file compilation pass. Wrote review.md and a complete replacement report under fixes/ correcting H11: worker self-check replaced by independent clause-by-clause reading."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.MarkedInternalHom",
+  "declaration": "SSet.Marked.marked_internal_hom",
+  "declarations": [
+   "SSet.Marked.internalHomMap",
+   "SSet.Marked.marked_internal_hom"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/MarkedInternalHom.lean",
+  "statement": "theorem marked_internal_hom : ∃ E : ∀ X Y Z : Marked.{u}, (Z ⟶ internalHom X Y) ≃ (product Z X ⟶ Y), (∀ X Y : Marked.{u}, internalHomMap (𝟙 X) (𝟙 Y) = 𝟙 (internalHom X Y)) ∧ (∀ (X X' X'' Y Y' Y'' : Marked.{u}) (a : X' ⟶ X) (a' : X'' ⟶ X') (b : Y ⟶ Y') (b' : Y' ⟶ Y''), internalHomMap (a' ≫ a) (b ≫ b') = internalHomMap a b ≫ internalHomMap a' b') ∧ (∀ (X Y Z : Marked.{u}) (g : Z ⟶ internalHom X Y) (n : SimplexCategoryᵒᵖ) (z : Z.underlying.obj n) (x : X.underlying.obj n), (E X Y Z g).val.app n (z, x) = (g.val.app n z).val.app n (x, stdSimplex.objEquiv.symm (𝟙 n.unop))) ∧ (∀ (X Y Z : Marked.{u}) (F : product Z X ⟶ Y) (n m : SimplexCategoryᵒᵖ) (z : Z.underlying.obj n) (x : X.underlying.obj m) (a : m.unop ⟶ n.unop), (((E X Y Z).symm F).val.app n z).val.app m (x, stdSimplex.objEquiv.symm a) = F.val.app m (Z.underlying.map a.op z, x)) ∧ (∀ (X X' Y Y' Z Z' : Marked.{u}) (a : X' ⟶ X) (b : Y ⟶ Y') (c : Z' ⟶ Z) (g : Z ⟶ internalHom X Y), E X' Y' Z' (c ≫ g ≫ internalHomMap a b) = productMap c a ≫ E X Y Z g ≫ b) ∧ (∀ (X Y Z : Marked.{u}) (g : Z.underlying ⟶ (internalHom X Y).underlying), (∀ z ∈ Z.marking, g.app _ z ∈ (internalHom X Y).marking) ↔ ∀ z ∈ Z.marking, ∀ x ∈ X.marking, (g.app _ z).val.app _ (x, stdSimplex.objEquiv.symm (𝟙 ⦋1⦌)) ∈ Y.marking)",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the exact marked objects, flat and sharp markings, degreewise product, flat mapping simplicial set, and internalHom already defined in MarkedPointCartesianModel. The theorem states the normalized evaluation and inverse transpose formulas, all three naturalities, functor laws and marking criterion without assuming its downstream model-structure theorem. No construction is duplicated."
  }
 }
