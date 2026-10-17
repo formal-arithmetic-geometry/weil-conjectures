@@ -15,9 +15,69 @@
   "lem-coef-kan-nerve-pullback-recognition",
   "lem-coef-infinity-cocartesian-mapping-criterion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $T$ is a functor equivalence in the sense of [def-cbc-enhanced-diagrams-cones], choose a quasi-inverse $S:F\\to E$ and a coherent natural equivalence $\\eta:TS\\to\\mathrm{id}_F$, an equivalence edge of $\\operatorname{Fun}(F,F)$ with inverse edge $\\eta'$ and the two inverse-triangle $2$-simplices. Fix a vertex $w\\in F$ and put $z=S(w)$. Evaluation at $w$ is a simplicial map $\\operatorname{Fun}(F,F)\\to F$; it sends $\\eta,\\eta'$ and the two $2$-simplices to an edge $u:Tz\\to w$, an edge $u':w\\to Tz$ and $2$-simplices with boundary triples $(u,u',\\mathrm{id}_{Tz})$ and $(u',u,\\mathrm{id}_w)$, so $u$ is an equivalence edge of $F$. Applying the simplicial map $q$ to these data makes $q(u)$ an equivalence edge of $B$, and $qT=p$ gives $q(Tz)=p(z)$. The edge $u$ and its inverse data are retained for step 3.",
+   "uses": [
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3 (dual), essential-surjectivity step; the definition of a functor equivalence and its coherent inverse triangles."
+   }
+  },
+  {
+   "text": "Write $e:x\\to y$, $a=T(x)$, $b=T(y)$ and $s=T(e):a\\to b$; then $q(s)=p(e)$ by $qT=p$. Fix universes $\\mathcal U\\in\\mathcal U'$ with $F,B$ $\\mathcal U$-small, so that their mapping spaces are $\\mathcal U$-small. The Hom-bifunctor node [lem-coef-infinity-hom-bifunctor-functoriality], applied to $q:F\\to B$, gives coherent Hom bifunctors $H_F,H_B$ and a coherent natural transformation $q_*:H_F\\to H_B\\circ(q^{\\mathrm{op}}\\times q)$, that is, a simplicial map $\\Delta^1\\times F^{\\mathrm{op}}\\times F\\to\\mathcal S_{\\mathcal U}$. Precompose it with $\\mathrm{id}_{\\Delta^1}\\times s^{\\mathrm{op}}\\times\\mathrm{id}_F$, where $s^{\\mathrm{op}}:\\Delta^1\\to F^{\\mathrm{op}}$ is the edge $s$ read in $F^{\\mathrm{op}}$ from $b$ to $a$. By the definition $\\operatorname{Fun}(K,\\mathscr C)_n=\\operatorname{Hom}(K\\times\\Delta^n,\\mathscr C)$ this is the same as a simplicial map $\\Phi:F\\to\\operatorname{Fun}(\\Delta^1\\times\\Delta^1,\\mathcal S_{\\mathcal U})$, with $\\Phi(\\sigma)$ the composite of $\\mathrm{id}\\times\\sigma$ with that map for each simplex $\\sigma:\\Delta^n\\to F$. For a vertex $v$, $\\Phi(v)$ is the coherent square with corners $H_F(b,v)$, $H_F(a,v)$, $H_B(qb,qv)$, $H_B(qa,qv)$, whose horizontal edges are the first-variable actions of $s$ and $q(s)$ and whose vertical edges are the components of $q_*$, with the naturality simplices of $q_*$ as its commutation datum. By the Hom-bifunctor node these values are the right-pinched spaces $\\operatorname{Map}_F(b,v)$, $\\operatorname{Map}_F(a,v)$, $\\operatorname{Map}_B(q(b),q(v))$, $\\operatorname{Map}_B(q(a),q(v))$, the first-variable actions are precomposition with $s$ and $q(s)$ in the canonical composition classes of [lem-coef-infinity-mapping-composition], and the components of $q_*$ are the maps applying $q$ to simplices. Thus $\\Phi(v)$ is a coherent square presenting the criterion square of [lem-coef-infinity-cocartesian-mapping-criterion] for the inner fibration $q$, the edge $s=T(e)$ and the test vertex $v$, with the commutation datum supplied by the coherent naturality of $q_*$ and not only by the four corners.",
+   "uses": [
+    "lem-coef-infinity-hom-bifunctor-functoriality",
+    "lem-coef-infinity-mapping-composition",
+    "lem-coef-infinity-cocartesian-mapping-criterion",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3 (dual), mapping-square criterion and functoriality of the Hom bifunctor in the test variable."
+   }
+  },
+  {
+   "text": "The simplicial map $\\Phi$ carries $u$, $u'$ and the two inverse-triangle $2$-simplices of step 1 to an edge $\\Phi(u):\\Phi(Tz)\\to\\Phi(w)$, an edge back and $2$-simplices witnessing that they are inverse; so $\\Phi(u)$ is an equivalence edge of $\\operatorname{Fun}(\\Delta^1\\times\\Delta^1,\\mathcal S_{\\mathcal U})=\\operatorname{Fun}(N([1]\\times[1]),\\mathcal S_{\\mathcal U})$, an equivalence of whole coherent square diagrams. On corners it is postcomposition with $u$ in $F$ and with $q(u)$ in $B$, and its higher simplices are the composition and naturality homotopies of the Hom bifunctors. The whole-square invariance clause of [lem-coef-kan-nerve-pullback-recognition] therefore gives: $\\Phi(Tz)$ is cartesian if and only if $\\Phi(w)$ is cartesian.",
+   "uses": [
+    "lem-coef-kan-nerve-pullback-recognition",
+    "def-cbc-enhanced-diagrams-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3 (dual), transport along an equivalence of test objects."
+   }
+  },
+  {
+   "text": "For each vertex $v$ of $F$, the clause of [lem-coef-kan-nerve-pullback-recognition] on an equivalence between a coherent square and a strict or specified homotopy-commuting presentation, applied to the presentation of step 2, says that $\\Phi(v)$ is cartesian if and only if the canonical map from $\\operatorname{Map}_F(b,v)$ to the path-space fiber product $\\operatorname{Map}_F(a,v)\\times_{D,\\operatorname{ev}_0}\\operatorname{Fun}(\\Delta^1,D)\\times_{\\operatorname{ev}_1,D}\\operatorname{Map}_B(q(b),q(v))$ with $D=\\operatorname{Map}_B(q(a),q(v))$, built with the given commutation datum, is a weak homotopy equivalence. This is exactly the meaning of homotopy pullback in [lem-coef-infinity-cocartesian-mapping-criterion]. By hypothesis this holds for $v=Tz$, so $\\Phi(Tz)$ is cartesian. By step 3 $\\Phi(w)$ is cartesian, so the criterion square for $T(e)$ at $w$ is a homotopy pullback. Since $w$ was arbitrary, this is the conclusion. When $w=Tz'$ already, nothing needs proving; when $e$ is degenerate the same argument applies unchanged; when $F$ has no vertices the conclusion is vacuous.",
+   "uses": [
+    "lem-coef-kan-nerve-pullback-recognition",
+    "lem-coef-infinity-cocartesian-mapping-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+    "place": "Proposition 2.4.4.3 (dual), final essential-image transport conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-enhanced-diagrams-cones",
+  "lem-coef-infinity-cocartesian-mapping-criterion",
+  "lem-coef-infinity-hom-bifunctor-functoriality",
+  "lem-coef-infinity-mapping-composition",
+  "lem-coef-kan-nerve-pullback-recognition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.math.ias.edu/~lurie/papers/HTT.pdf",
+  "place": "Proposition 2.4.4.3 (dual), essential-image transport of the mapping-square cocartesian criterion; source read online and not archived locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -85,7 +145,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-cartesian-simplex-inverse-extension",
@@ -113,5 +173,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-infinity-equivalence-preserves-cocartesian-edges",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and supplied four proof steps (reviewer correction of the delivered six). Essential surjectivity of the functor equivalence gives an equivalence u:Tz->w; the Hom-bifunctor transformation q_* restricted along T(e) gives a coherent functor from F to coherent squares whose value at each test vertex presents the cocartesian criterion square; it carries u to an equivalence of whole squares, and whole-square pullback invariance transfers the homotopy-pullback property from Tz to w. No new nodes; no Lean attachment.",
+  "blueprint": "Realizes the inherited prop-coef-integral-exceptional-adjoint paragraph-2 ancestry, specifically the essential-image test-object transport in the mapping-square marking argument extracted from HTT Proposition 2.4.4.3 (dual), after the image-test comparison and before applying the cocartesian mapping criterion.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-e3e0247bb",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-e3e0247bb (reviewer sub-agent of L); spot-checked: I read the whole item, the full statement of every cited node (def-cbc-enhanced-diagrams-cones, def-coef-infinity-fibrations, hom-bifunctor-functoriality, mapping-composition, kan-nerve-pullback-recognition, cocartesian-mapping-criterion) and the citer's steps 9-15 (lem-coef-cartesian-simplex-inverse-extension). Step 11 of the citer supplies exactly the hypotheses: functor equivalence T, strict qT=p, inner fibrations. Step 14 needs the conclusion at every w in F. The statement was kept word for word and it is true. I tested it on B=Δ^0, on w=Tz, on degenerate e and on empty E,F. Source: HTT 2.4.4.3 (dual), not archived (the WANTED entry is correct); I checked the mathematics independently. Two repairable faults. (1) E4/E5: steps 2-4 were garbled and unused. 'C_{Tz}(e)' has no meaning, because e is an edge of E and Tz is a vertex of F. Step 4 derives a reflection statement (in effect that e is p-cocartesian) that the item does not assert and steps 5-6 never use. Step 3's full-faithfulness argument through S was also loose. (2) C4/E5: step 5 asserted a coherent whole-square equivalence from composition homotopies alone. That gives only homotopy-level associativity and nothing for the vertical q_* maps. The Hom-bifunctor transformation q_*, which is what supplies the coherence, was not cited there. Fix: the proof is rewritten in 4 steps. (1) Evaluation of TS≃id at w gives an equivalence edge u:Tz→w, and q(u) is an equivalence. (2) q_* from hom-bifunctor-functoriality, restricted along T(e)^op, gives a simplicial map Φ:F→Fun(Δ^1×Δ^1,S_U); Φ(v) presents the criterion square, and I checked the variance. (3) Φ(u) is an equivalence of whole squares, so whole-square invariance applies. (4) The recognition theorem's presentation clause matches the criterion node's path-space definition of homotopy pullback, so the property moves from Tz to w. proof_deps are the same 5 nodes and split_report.summary was updated. No new node, no node dropped, no tool_uses: every cited statement is in unit sk-prop-sf-biduality-general and def-cbc is a definition. rg found no duplicate; lem-coef-infinity-cocartesian-image-criterion and lem-coef-infinity-full-essential-image state different things. No cycle, no SGA, and the recorded Mathlib searches show no match.; 1 file(s) fixed by the reviewer"
  }
 }

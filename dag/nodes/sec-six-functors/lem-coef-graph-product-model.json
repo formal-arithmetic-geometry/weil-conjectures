@@ -10,9 +10,140 @@
  "stmt_deps": [
   "lem-coef-projective-chains-monoidal-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a universe $\\mathcal U$ containing $R$ and the small set $S$, and work with complexes having $\\mathcal U$-small underlying modules. Put $T=S\\times S$. The projective model supplied by [lem-coef-projective-cochain-monoidal-model] is combinatorial, with the conventions in [lem-coef-combinatorial-localization-presentability]: in particular $\\mathbf V$ has small Hom sets, all small limits and colimits, is locally presentable, and has two functorial weak factorization systems. Use its quasi-isomorphisms $W$, cofibrations $C$, and degreewise-surjective fibrations $F$ throughout; no monoidal localization assertion is needed.",
+   "uses": [
+    "lem-coef-projective-cochain-monoidal-model",
+    "lem-coef-combinatorial-localization-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Remark 10.2: input model; agent unpacking of the two cited model-structure statements."
+   }
+  },
+  {
+   "text": "A morphism of graphs $X\\to Y$ is a family $(f_t:X_t\\to Y_t)_{t\\in T}$, with identities and composition taken in each coordinate. For a small diagram $D$, form $(\\lim D)_t=\\lim D_t$ and $(\\operatorname{colim}D)_t=\\operatorname{colim}D_t$ in $\\mathbf V$. A graph cone (respectively cocone) is precisely a family of coordinate cones (respectively cocones); their unique universal maps assemble to the unique graph map. These formulas prove completeness and cocompleteness, including the empty limits and colimits. Since $T$ is small, the product of the coordinate Hom sets is still $\\mathcal U$-small.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Remark 10.2; agent coordinate universal-property calculation from Step 1."
+   }
+  },
+  {
+   "text": "Let $D_T$ be the discrete category on $T$: its only arrows are identities. A functor $D_T^{\\mathrm{op}}\\to\\mathbf V$ is exactly a family of objects indexed by $T$, and a natural transformation is exactly a family of maps, since its identity naturality equations impose no condition. Sending a family to this functor and evaluating back are inverse on objects and maps. Thus the graph category is the presheaf category $\\operatorname{Fun}(D_T^{\\mathrm{op}},\\mathbf V)$ under this identification. Apply [lem-coef-presheaf-local-presentability]: $D_T$ is $\\mathcal U$-small, $\\mathbf V$ is locally presentable by Step 1, and its pullbacks exist by Step 1. The resulting local presentability is relative to the same $\\mathcal U$.",
+   "uses": [
+    "lem-coef-presheaf-local-presentability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Presentable/Presheaf.lean",
+    "place": "Lines 90-96; agent identification with presheaves on the discrete category."
+   }
+  },
+  {
+   "text": "Define $W_T,C_T,F_T$ to mean membership in $W,C,F$ at every coordinate. Two-out-of-three for $W_T$ and retract closure of all three classes follow by evaluating each equation or retract diagram at $t$ and applying the corresponding model axiom of Step 1. In a graph lifting square, each coordinate is a lifting square in $\\mathbf V$. If its left map is in $C_T$ and its right map is in $F_T\\cap W_T$, choose the coordinate fillers; their family fills the graph square. The same argument applies to $C_T\\cap W_T$ against $F_T$. There are no extra naturality conditions between distinct coordinates.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Remarks 10.2 and 2.3; agent verification of weak equivalences, retracts, and lifting axioms."
+   }
+  },
+  {
+   "text": "Apply each of the two functorial factorizations of Step 1 to every $f_t$, and use the resulting family of middle objects and maps to factor $f$. This gives $C_T$ followed by $F_T\\cap W_T$, and $C_T\\cap W_T$ followed by $F_T$. On a square between graph maps, take the componentwise middle-object map; the two factorization equations and the identity and composition laws hold because they do at every $t$. These are functorial graph factorizations. To check that the classes are mutually characterized by lifting, factor any map having the proposed left lifting property and lift against its right factor: write $f=pc$ and the lift $h$ satisfies $hf=c$, $ph=1$. The pairs $(1,h)$ and $(1,p)$ exhibit $f$ as an arrow-category retract of $c$. Retract closure from Step 4 puts it in the proposed left class. Dually, if $f$ has the proposed right lifting property, factor $f=pc$ and lift against $c$ to obtain $h$ with $hc=1$ and $fh=p$; the pairs $(c,1)$ and $(h,1)$ exhibit $f$ as a retract of $p$. Together with Steps 2 and 4 this proves the product model axioms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Remarks 10.2 and 2.3; agent factorization and retract argument using the model axioms in Step 1."
+   }
+  },
+  {
+   "text": "Take the generating sets $I=\\{S^{n+1}\\hookrightarrow D^n:n\\in\\mathbf Z\\}$ and $J=\\{0\\to D^n:n\\in\\mathbf Z\\}$ from [lem-coef-projective-cochain-monoidal-model]. For $t\\in T$, define $L_t(A)$ to have coordinate $A$ at $t$ and $0$ elsewhere, and define $L_t(u)$ to have coordinate $u$ at $t$ and $1_0:0\\to0$ elsewhere. A map $L_t(A)\\to X$ consists of its arbitrary $t$-component $A\\to X_t$ and the unique maps from $0$ in every other coordinate. This gives a bijection $\\operatorname{Hom}(L_t(A),X)=\\operatorname{Hom}(A,X_t)$ compatible with precomposition and postcomposition. Put $I_T=\\{L_t(i):t\\in T,i\\in I\\}$ and $J_T=\\{L_t(j):t\\in T,j\\in J\\}$. These are small sets; the off-coordinate initial map is precisely $1_0$, not a map with a nonzero target.",
+   "uses": [
+    "lem-coef-projective-cochain-monoidal-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Remark 2.3, single-coordinate left adjoints, applied to T=S squared; standard chain generators from the cited node."
+   }
+  },
+  {
+   "text": "The bijection in Step 6 identifies a square with left side $L_t(i)$ and right side $p$ with a square having left side $i$ and right side $p_t$, and identifies their fillers. Since $I$ and $J$ generate the two lifting systems in $\\mathbf V$ by [lem-coef-projective-cochain-monoidal-model], it follows that $I_T^{\\pitchfork}=F_T\\cap W_T$ and $J_T^{\\pitchfork}=F_T$. Step 5 therefore identifies ${}^{\\pitchfork}(I_T^{\\pitchfork})=C_T$ and ${}^{\\pitchfork}(J_T^{\\pitchfork})=C_T\\cap W_T$. This proves that the proposed sets generate the lifting classes; the next two steps verify smallness and cellular generation as well.",
+   "uses": [
+    "lem-coef-projective-cochain-monoidal-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Remark 2.3; agent lifting-square calculation, not an appeal to a separate product-model theorem."
+   }
+  },
+  {
+   "text": "Let $K$ index all domains of maps in $I_T$ and $J_T$, retaining repetitions, so $K$ is small. In the locally presentable graph category of Step 3, [lem-coef-object-presentability-rank] gives, for each such domain $A_k$, an infinite regular $\\tau_k\\in\\mathcal U$ such that $\\operatorname{Hom}(A_k,-)$ preserves all small $\\tau_k$-filtered colimits. Let $X_k$ be the set of ordinals below the initial ordinal of cardinality $\\tau_k$. Apply [lem-coef-small-family-regular-bound] to $(X_k)_{k\\in K}$ to get an infinite regular $\\lambda\\in\\mathcal U$ with $|\\coprod_kX_k|<\\lambda$. The injection $x\\mapsto(k,x)$ shows $\\tau_k\\leq|\\coprod_kX_k|<\\lambda$ for every $k$. This also applies to the empty family.",
+   "uses": [
+    "lem-coef-object-presentability-rank",
+    "lem-coef-small-family-regular-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean",
+    "place": "Lines 93-105; common bound from Mathlib/SetTheory/Cardinal/HasCardinalLT.lean:201-206."
+   }
+  },
+  {
+   "text": "The ordinal category $\\lambda$ is $\\tau_k$-filtered for each $k$: the images of the objects of a diagram with fewer than $\\tau_k$ morphisms are fewer than $\\lambda$ ordinals below $\\lambda$, and their supremum is below $\\lambda$ by regularity. That supremum is an upper bound and supplies the cocone; for the empty diagram use $0$. Hence Step 8 gives preservation by $\\operatorname{Hom}(A_k,-)$ of every $\\lambda$-indexed colimit, in particular of the cellular chains required by [lem-coef-small-object-cell-factorization]. Apply that node once to $I_T$ and once to $J_T$. Step 2 supplies all small colimits and small Hom sets, Step 6 supplies small generating sets, and Step 8 supplies the small regular cardinal. It gives functorial cellular factorizations and identifies the left lifting classes as retracts of the respective cell maps. With Step 7 these are exactly the two weak factorization systems of Step 5. Thus the model is cofibrantly generated; with Step 3 it is combinatorial in the convention of Step 1.",
+   "uses": [
+    "lem-coef-small-object-cell-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean",
+    "place": "Lines 76-88,318-330,412,460-469,508-515; agent regular-ordinal filteredness check."
+   }
+  },
+  {
+   "text": "For the generators in [lem-coef-projective-cochain-monoidal-model], the spheres $S^m$ are dg-projective: their terms are free or zero, and their Hom complex into an acyclic complex is that complex reindexed, with the shift sign, hence is acyclic. Its cofibration criterion makes $0\\to S^m$ a cofibration. The composite $0\\to S^{n+1}\\hookrightarrow D^n$ is also a cofibration: two successive left-lifting fillers give a filler for their composite. Also $0$ is cofibrant since $1_0$ lifts against every map. Thus the sources and targets of both $I$ and $J$ are cofibrant. The map $0\\to L_t(A)$ has component $0\\to A$ at $t$ and $1_0$ elsewhere, so Step 4 makes $L_t(A)$ cofibrant whenever $A$ is. Consequently $I_T$ and $J_T$ have cofibrant sources and targets. In particular the generating-cofibration condition for tractability in [lem-coef-projective-chains-monoidal-model] holds, as does the stronger convention requiring cofibrant sources for both generating sets.",
+   "uses": [
+    "lem-coef-projective-cochain-monoidal-model",
+    "lem-coef-projective-chains-monoidal-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Remark 2.3; agent check of the explicit projective generators and cofibrant sources; tractability convention from the cited chain-model node."
+   }
+  },
+  {
+   "text": "For a pushout of $f:A\\to A'$ along $i:A\\to B$ in the graph category, Step 2 identifies its $t$-component with $B_t\\amalg_{A_t}A'_t$. If $f\\in W_T$ and $i\\in C_T$, [lem-coef-projective-chains-monoidal-model] applies to this coordinate pushout over the given commutative ring $R$ and makes $B_t\\to B_t\\amalg_{A_t}A'_t$ a weak equivalence. This holds for every $t$, so the graph pushout map is in $W_T$. The product model is therefore left proper. Local presentability (Step 3), generation (Steps 7-9), and the cofibrant generators (Step 10) give tractability. If $S$ is empty the category has one object and one map, both generating sets are empty, and every assertion is vacuous or a terminal-category universal property. For singleton $S$ every construction reduces to the original chain model.",
+   "uses": [
+    "lem-coef-projective-chains-monoidal-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://msp.org/agt/2011/11-3/agt-v11-n3-p13-p.pdf",
+    "place": "Remark 10.2, agent left-properness pushout calculation and tractability check; the source states right properness, whereas left properness here uses the cited chain-model input."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-projective-cochain-monoidal-model",
+  "lem-coef-combinatorial-localization-presentability",
+  "lem-coef-presheaf-local-presentability",
+  "lem-coef-object-presentability-rank",
+  "lem-coef-small-family-regular-bound",
+  "lem-coef-small-object-cell-factorization",
+  "lem-coef-projective-chains-monoidal-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Proof paragraph 2, coherent finite-level mapping-complex adjunction before R lim, via the inherited fixed-object dg free-model ancestry. Full coordinate and cardinal argument written here; Muro Remarks 10.2 and 2.3 read online, archive not in literature/."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +187,58 @@
    "results": "{\"t\": \"2026-10-17T08:42:34Z\", \"tool\": \"grep\", \"query\": \"(inst.*ModelCategory|ModelCategory.*(Pi|Functor|Prod)|LocallyPresentable)\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/Opposite.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Basic.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/Over.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\"], \"digest\": \"da18ce1b246dd330\"}",
    "date": "2026-10-17",
    "verdict": "no match: Read the hits: general model-category classes, projective resolutions, and products do not supply the complete graph-model assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "ModelCategory.*(Pi|Prod|Functor)|(Pi|Prod|Functor).*ModelCategory|CombinatorialModel",
+   "sub": "AlgebraicTopology",
+   "results": "{\"t\": \"2026-10-17T15:03:38Z\", \"tool\": \"grep\", \"query\": \"ModelCategory.*(Pi|Prod|Functor)|(Pi|Prod|Functor).*ModelCategory|CombinatorialModel\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\"], \"digest\": \"d1f2094acc3aae51\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read hits and ModelCategory/Basic.lean:47-75, ModelCategory/Instances.lean:115-170. Model-category constructors and closure of fibrations under products inside a fixed category do not construct the product category model with these generators and presentability."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The product model category on a small family of chain complexes is combinatorial and left proper",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T15:03:39Z\", \"tool\": \"leansearch\", \"query\": \"The product model category on a small family of chain complexes is combinatorial and left proper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomotopicalAlgebra.ModelCategory.mk\", \"CategoryTheory.pi\", \"SSet.Subcomplex.prod\", \"HomotopicalAlgebra.ModelCategory.cm1a\", \"HomotopicalAlgebra.ModelCategory.categoryWithCofibrations\", \"HomotopicalAlgebra.ModelCategory.categoryWithFibrations\"], \"digest\": \"b2d7615674b25727\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read hits and ModelCategory/Basic.lean:47-75, ModelCategory/Instances.lean:115-170. Model-category constructors and closure of fibrations under products inside a fixed category do not construct the product category model with these generators and presentability."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopicalAlgebra.ModelCategory",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T15:03:39Z\", \"tool\": \"loogle\", \"query\": \"HomotopicalAlgebra.ModelCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory\", \"HomotopicalAlgebra.ModelCategory.categoryWithCofibrations\", \"HomotopicalAlgebra.ModelCategory.categoryWithFibrations\", \"HomotopicalAlgebra.ModelCategory.categoryWithWeakEquivalences\", \"HomotopicalAlgebra.ModelCategory.cm1a\", \"HomotopicalAlgebra.ModelCategory.cm1b\", \"HomotopicalAlgebra.ModelCategory.cm2\", \"HomotopicalAlgebra.ModelCategory.cm3a\"], \"digest\": \"9db1e647f605debb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read hits and ModelCategory/Basic.lean:47-75, ModelCategory/Instances.lean:115-170. Model-category constructors and closure of fibrations under products inside a fixed category do not construct the product category model with these generators and presentability."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The small product of chain complex model categories has a coordinatewise cofibrantly generated model structure with single-coordinate generating maps",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T15:03:42Z\", \"tool\": \"leanfinder\", \"query\": \"The small product of chain complex model categories has a coordinatewise cofibrantly generated model structure with single-coordinate generating maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.instFibrationMapOfIsWeakFactorizationSystemTrivialCofibrationsFibrations\", \"HomotopicalAlgebra.PathObject.instIsCofibrantPOfIsVeryGood\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_trivialFibrations\", \"HomotopicalAlgebra.ModelCategory.cm1a\", \"HomotopicalAlgebra.ModelCategory.cm1b\"], \"digest\": \"057a141803b97244\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read hits and ModelCategory/Basic.lean:47-75, ModelCategory/Instances.lean:115-170. Model-category constructors and closure of fibrations under products inside a fixed category do not construct the product category model with these generators and presentability."
+  },
+  {
+   "tool": "grep",
+   "query": "model.*structure|ModelCategory|combinatorial",
+   "sub": "CategoryTheory/Pi",
+   "results": "{\"t\": \"2026-10-17T15:04:09Z\", \"tool\": \"grep\", \"query\": \"model.*structure|ModelCategory|combinatorial\", \"sub\": \"CategoryTheory/Pi\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read hits and ModelCategory/Basic.lean:47-75, ModelCategory/Instances.lean:115-170. Model-category constructors and closure of fibrations under products inside a fixed category do not construct the product category model with these generators and presentability."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of functors from a discrete small category to a model category carries pointwise weak equivalences fibrations and cofibrations",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-17T15:04:12Z\", \"tool\": \"leanfinder\", \"query\": \"The category of functors from a discrete small category to a model category carries pointwise weak equivalences fibrations and cofibrations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.ModelCategory.categoryWithFibrations\", \"HomotopicalAlgebra.instWeakEquivalenceMapOfIsWeakFactorizationSystemCofibrationsTrivialFibrations\", \"HomotopicalAlgebra.ModelCategory.categoryWithWeakEquivalences\", \"HomotopicalAlgebra.ModelCategory.categoryWithCofibrations\", \"HomotopicalAlgebra.ModelCategory.mk'\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations\", \"HomotopicalAlgebra.isStableUnderProductsOfShape_trivialFibrations\", \"HomotopicalAlgebra.ModelCategory\"], \"digest\": \"28d7c0f5cbc52a55\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: Read hits and ModelCategory/Basic.lean:47-75, ModelCategory/Instances.lean:115-170. Model-category constructors and closure of fibrations under products inside a fixed category do not construct the product category model with these generators and presentability."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-coef-fixed-object-dg-free-model",
@@ -84,5 +263,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-graph-product-model",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Wrote the coordinate universal properties, model axioms, functorial factorizations, discrete-presheaf presentability, single-coordinate generating maps and their exact lifting tests, common-cardinal smallness and cellular generation, cofibrant sources, left properness and tractability. Reused seven existing nodes, no new nodes. No attachment, no Lean writes or builds.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, main-20261015 proof paragraph 2: infrastructure for the coherent finite-level mapping-complex adjunction, through lem-coef-fixed-object-dg-free-model and the inherited ancestry. No unit route replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-de1bf9c33",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-de1bf9c33 (reviewer sub-agent of L); spot-checked: I read the item, all 11 steps and the full statements of its 7 cited nodes, and checked the Mathlib lines behind the leaves: Presheaf.lean:90-96, HasCardinalLT.lean:199-206 and IsCardinalForSmallObjectArgument.lean:76-88. The statement is unchanged and true. It holds for any commutative R. Left properness and tractability come from the chains-model node, which uses the cochain-node model that Step 1 cites. The initial map off the chosen coordinate is id_0. Edge cases S empty (terminal category, empty generating sets), S a singleton, S infinite and R=0 all hold. Steps 4-5: the classes, lifts and factorizations work coordinatewise. I checked the retract argument both ways (f=pc with hf=c, ph=1; and hc=1, fh=p), so these are genuine weak factorization systems. Step 3: the graph category is presheaves on the discrete category T, which meets the presheaf leaf's hypotheses (small C, pullbacks). Steps 6-7: the single-coordinate adjunction gives I_T^pitchfork = F_T and W_T together, and J_T^pitchfork = F_T. Steps 8-9: the common regular lambda bound and the tau_k-filteredness of lambda are correct, and they are stronger than the Mathlib smallness class requires. Step 10: S^m is dg-projective because Hom(S^m,E) is E shifted, so D^n and 0 are cofibrant and the generators have cofibrant sources and targets. Step 11: left properness follows coordinate by coordinate. The delivery has no new nodes. The closest DAG candidate, lem-coef-dg-product-localization, lacks left properness, tractability and the generators, so it is not a duplicate. Every cited node is in unit sk-prop-sf-biduality-general, so no tool_uses are needed. There is no cycle and no SGA citation. Muro Remarks 2.3 and 10.2 are not in literature/, so I could not check them. The worker recorded them as WANTED and marked the proof as agent-written, and I verified the mathematics without that source. I made no fixes."
  }
 }

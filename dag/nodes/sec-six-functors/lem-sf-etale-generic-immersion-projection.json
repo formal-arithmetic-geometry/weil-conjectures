@@ -2,7 +2,7 @@
  "id": "lem-sf-etale-generic-immersion-projection",
  "kind": "statement",
  "title": "Projection formula for an immersion extension by zero",
- "statement": "Let $A$ be a finite commutative ring and let $s:S\\hookrightarrow X$ be an immersion with a chosen factorization $S\\xrightarrow{i}U\\xrightarrow{j}X$, where $i$ is closed and $j$ is open [def-weil-closed-immersion, def-weil-open-immersion]. Put $Rs_!=j_!i_*$, $Rs^!=Ri^!j^*$ and let $Rs_*$ denote ordinary derived direct image; $j_!$ is exact extension by zero [lem-cbc-open-closed-recollement], and $Ri^!$ is the ambient right adjoint of $i_*$ [lem-exc-closed-ambient]. Use ordinary unbounded derived categories $D(T_{\\mathrm{et}},A)$ of sheaves of modules over the constant ring sheaf $A_T$ on small etale sites [def-weil-pbc-derived-categories], derived tensor $\\otimes_A^L$ [def-kun-derived-tensor], and derived internal Hom $\\mathscr H_T(U,V)=R\\mathcal Hom_{A_T}(U,V)$ [def-pur-derived-internal-hom]. Scheme inverse images on these categories are exact constant-coefficient inverse images [prop-weil-pbc-inverse-image-modules-exact]. For every $C\\in D(X_{\\mathrm{et}},A)$ and $P\\in D(S_{\\mathrm{et}},A)$ the canonical projection map\n$$\\pi_{s,C,P}:C\\otimes_A^LRs_!P\\longrightarrow Rs_!(s^*C\\otimes_A^LP)$$\nis an isomorphism natural in both inputs. For a cartesian pullback square with $s':S'\\hookrightarrow X'$ and projections $g_X,g_S$, under the canonical tensor identifications and the canonical extension-by-zero base-change isomorphism $b_P:g_X^*Rs_!P\\cong Rs'_!g_S^*P$, $g_X^*\\pi_{s,C,P}$ is $\\pi_{s',g_X^*C,g_S^*P}$.",
+ "statement": "Let $A$ be a finite commutative ring and let $s:S\\hookrightarrow X$ be an immersion with a chosen factorization $S\\xrightarrow{i}U\\xrightarrow{j}X$, where $i$ is closed and $j$ is open [def-weil-closed-immersion, def-weil-open-immersion]. Put $Rs_!=j_!i_*$, $Rs^!=Ri^!j^*$ and let $Rs_*$ denote ordinary derived direct image; $j_!$ is exact extension by zero [lem-cbc-open-closed-recollement], and $Ri^!$ is the ambient right adjoint of $i_*$ [lem-exc-closed-ambient]. Use ordinary unbounded derived categories $D(T_{\\mathrm{et}},A)$ of sheaves of modules over the constant ring sheaf $A_T$ on small etale sites [def-weil-pbc-derived-categories], derived tensor $\\otimes_A^L$ [def-kun-derived-tensor], and derived internal Hom $\\mathscr H_T(U,V)=R\\mathcal Hom_{A_T}(U,V)$ [def-pur-derived-internal-hom]. Scheme inverse images on these categories are exact constant-coefficient inverse images [prop-weil-pbc-inverse-image-modules-exact]. For every $C\\in D(X_{\\mathrm{et}},A)$ and $P\\in D(S_{\\mathrm{et}},A)$ the canonical projection map\n$$\\pi_{s,C,P}:C\\otimes_A^LRs_!P\\longrightarrow Rs_!(s^*C\\otimes_A^LP)$$\nis an isomorphism natural in both inputs. For a cartesian pullback square with $s':S'\\hookrightarrow X'$ and projections $g_X,g_S$, under the canonical tensor identifications and the canonical extension-by-zero base-change isomorphism $b_P:g_X^*Rs_!P\\cong Rs'_!g_S^*P$, composed of the open extension-by-zero base change and the finite (closed-immersion) exchange isomorphism $g_U^*i_*\\cong i'_*g_S^*$ [lemma-weil-pbc-finite-exchange], $g_X^*\\pi_{s,C,P}$ is $\\pi_{s',g_X^*C,g_S^*P}$.",
  "source": {
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Tag 0E8I (lemma-j-shriek-and-tensor); agent derived immersion projection formula and cartesian compatibility, with closed-support detection as in etale-cohomology.tex, Tag 0A45 (lemma-cohomology-with-support-triangle)."
@@ -16,11 +16,112 @@
   "def-weil-open-immersion",
   "def-pc-base-change",
   "lem-cbc-open-closed-recollement",
-  "lem-exc-closed-ambient"
+  "lem-exc-closed-ambient",
+  "lemma-weil-pbc-finite-exchange"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because a closed immersion is finite, its direct image is exact; the open extension-by-zero and all constant-coefficient inverse images in the statement are exact as well. Choose K-flat resolutions with flat terms for the complexes $C$ and $P$ by [lem-pc-kflat-resolution]. Exact inverse image preserves these resolutions and [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] computes all derived tensors by their total tensor complexes and supplies the canonical pullback-tensor comparisons. Thus the desired comparison can be checked on flat-term representatives, and all subsequent sheaf maps descend canonically to the unbounded derived categories.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-finite",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-cbc-open-closed-recollement",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 01WN/03S2, 0E8I; exactness and K-flat reduction used in the proof"
+   }
+  },
+  {
+   "text": "For a flat-term complex $P$ and a term of $C$, the canonical sheaf map $(j^*C)\\otimes_A i_*P\\to i_*(i^*j^*C\\otimes_A P)$ is an isomorphism on every geometric stalk. Indeed a finite closed fibre is empty or a singleton, so [lemma-weil-pbc-finite-stalk-formula] and [lemma-openclosed-stalk-lowerstar] identify the target stalk with the tensor of the two corresponding stalks; the inverse-image germ isomorphism [lem-weil-pbc-inverse-image-stalk-germ] identifies $(i^*j^*C)_{\\bar z}$ with $(j^*C)_{i\\bar z}$, and [lem-pod-etale-stalk-tensor-scalar] identifies this tensor with the stalk of the source. [lemma-weil-pbc-geometric-stalk-conservative] then gives the sheaf isomorphism. Applying this degreewise and totalizing, with the K-flat computation of Step 1, yields the natural derived isomorphism $j^*C\\otimes_A^L i_*P\\cong i_*(i^*j^*C\\otimes_A^L P)$.",
+   "uses": [
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lemma-openclosed-stalk-lowerstar",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-pod-etale-stalk-tensor-scalar",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A45, support-stalk calculation, combined with sites-modules.tex Tag 0E8I"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-etale-open-derived-tensor] to the open immersion $j$ with $E=i_*P$ and $N=C$, and use the symmetry of the derived tensor. Its target is $j_!(i_*P\\otimes_A^Lj^*C)$. Substitute the closed isomorphism of Step 2 and the canonical composition/monoidal identifications [lem-kun-inverse-image-monoidal, lem-kun-derived-pullback-composition-monoidal] to identify this target with $j_!i_*(s^*C\\otimes_A^LP)=Rs_!(s^*C\\otimes_A^LP)$. The resulting composite is exactly the canonical projection map $\\pi_{s,C,P}$. Every comparison used is natural, so this proves that $\\pi_{s,C,P}$ is a natural isomorphism.",
+   "uses": [
+    "lem-pur-etale-open-derived-tensor",
+    "lem-kun-inverse-image-monoidal",
+    "lem-kun-derived-pullback-composition-monoidal",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; composition identifications from the derived pullback conventions"
+   }
+  },
+  {
+   "text": "For a Cartesian pullback, the closed square is again a closed immersion. At each geometric point of $U'$ the finite fibre is empty or a singleton, and the finite exchange isomorphism $g_U^*i_*\\cong i'_*g_S^*$, compatible with the stalk formula [lemma-weil-pbc-finite-exchange], the closed-pushforward stalk identification [lemma-openclosed-stalk-lowerstar], and the inverse-image germ isomorphism [lem-weil-pbc-inverse-image-stalk-germ] carry the Step 2 closed tensor map to the corresponding primed map. The inverse-image monoidal comparison and the pullback-composition equation [lem-kun-inverse-image-monoidal, lem-kun-derived-pullback-composition-monoidal] identify all tensor and restriction associators. Therefore the closed isomorphism of Step 2 is compatible with pullback; geometric-stalk conservativity proves equality of the canonical maps globally.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-kun-inverse-image-monoidal",
+    "lem-kun-derived-pullback-composition-monoidal",
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lemma-weil-pbc-finite-exchange",
+    "lemma-openclosed-stalk-lowerstar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03S6 and 0A45; stalk and germ compatibility in the Cartesian square"
+   }
+  },
+  {
+   "text": "Use the open projection/base-change identity [lem-asd-open-projection-exchange] with $a=g_X$, $E=i_*P$, and $N=C$. Its $d$-map is precisely the canonical comparison from the pulled-back closed tensor object to the closed tensor object on $S'$ by Step 4. The base-change map for the open extension is the inverse of the module mate by [lem-cbc-derived-extension-zero-base-change-underived-compatibility], hence agrees with the specified $b_P$ under the canonical identifications. Compose the identity with the closed compatibility of Step 4 and the monoidal and composition comparisons [lem-kun-inverse-image-monoidal, lem-kun-derived-pullback-composition-monoidal]. The resulting equality is exactly $g_X^*\\pi_{s,C,P}=\\pi_{s',g_X^*C,g_S^*P}$ under the tensor and $b_P$ identifications.",
+   "uses": [
+    "lem-asd-open-projection-exchange",
+    "lem-cbc-derived-extension-zero-base-change-underived-compatibility",
+    "lem-kun-inverse-image-monoidal",
+    "lem-kun-derived-pullback-composition-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03S6 and 0GL1; ordinary-etale projection/base-change compatibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-open-projection-exchange",
+  "lem-cbc-derived-extension-zero-base-change-underived-compatibility",
+  "lem-cbc-open-closed-recollement",
+  "lem-kun-derived-pullback-composition-monoidal",
+  "lem-kun-inverse-image-monoidal",
+  "lem-pc-kflat-resolution",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lemma-openclosed-stalk-lowerstar",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lemma-weil-pbc-finite-exchange",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0GL1 and 03S6; expanded proof of the immersion projection comparison"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -80,7 +181,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-etale-generic-exchange-algclosed",
@@ -92,12 +193,42 @@
  "blueprint": {
   "from": {
    "node": "thm-weil-etale-geometric-biduality",
-   "place": "Proof paragraph 4, \"The induction hypothesis over ... together with [lem-weil-geometric-generic-duality]\"; immersion tensor projection used to normalize stratum Hom",
+   "place": "Proof paragraph 4, immersion tensor projection used to normalize stratum Hom",
    "via": [
-    "lem-sf-etale-generic-exchange-algclosed"
+    "lem-pur-etale-open-derived-tensor",
+    "lem-asd-open-projection-exchange"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-etale-generic-immersion-projection",
+  "worker": "stage1",
+  "summary": "Expanded the immersion projection statement into five cited proof steps. No new nodes are needed: the closed tensor calculation is a stalkwise argument, while the open tensor and open base-change identities are existing generic ordinary-etale nodes.",
+  "blueprint": "Realizes proof paragraph 4 of thm-weil-etale-geometric-biduality: normalize the locally closed immersion through its closed-then-open factorization, prove the closed tensor comparison by geometric stalks, apply the open extension-by-zero tensor formula, and transport the result through Cartesian base change.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-etale-open-derived-tensor",
+    "why": "Generic ordinary-etale open-extension tensor isomorphism used in Step 3."
+   },
+   {
+    "node": "lem-asd-open-projection-exchange",
+    "why": "Generic ordinary-etale open tensor/base-change identity used in Step 5."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-etale-open-derived-tensor",
+  "lem-asd-open-projection-exchange"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q151-b625be46f",
+  "group": "Q151",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-b625be46f (reviewer sub-agent of L); spot-checked: I read the item, all five steps, every cited statement, the unit sk-prop-sf-biduality-general and the sources: Stacks 0E8I sites-modules.tex:4051, 0GL1 sites-cohomology.tex:4578, 0A45 etale-cohomology.tex:14072. The statement is true and keeps the item's setting: A is a finite commutative ring, the category is ordinary unbounded D(T_et,A), and Rs_!=j_!i_*. No hypothesis is added. Edge cases checked: S empty, i=id (0GL1), j=id (closed stalk computation), s=id, and base change with S' empty. Steps 1, 3 and 5 are correct. Step 1: K-flat C makes j^*C and i^*j^*C K-flat, so the derived tensors are total tensors. Step 3 uses lem-pur-etale-open-derived-tensor with K=i_*P. Step 5 uses lem-asd-open-projection-exchange with a=g_X, and lem-cbc-derived-extension-zero-base-change-underived-compatibility identifies its open base-change map with the open factor of b_P. I repaired three missing citations: (1) Step 2 identifies the stalk of i^*j^*C without citing lem-weil-pbc-inverse-image-stalk-germ; added. (2) Step 4 uses the closed-pushforward stalk identification without citing lemma-openclosed-stalk-lowerstar; added. (3) Step 4 and the statement's b_P need the global closed exchange isomorphism g_U^*i_* ≅ i'_*g_S^*, and stalkwise matching does not give a sheaf map. The existing lemma-weil-pbc-finite-exchange states it: it is on the route (sk-thm-p1), closed in slopmaster2, and creates no cycle. I added it to stmt_deps and Step 4 and named it as a factor of b_P. The statement's content is unchanged. Batch-5 check: lem-pod-etale-stalk-tensor-scalar (sec-poincare-duality) is genuinely outside both assumed statements. It is the generic fact that the stalk of a tensor is the tensor of the stalks, with scalar extension (Stacks 008B/007K). It was created for the lisse tensor infrastructure and is not a step of the Poincare duality or trace formula proofs. Its 65-node closure contains no other sec-poincare-duality or sec-trace-formula node, and many non-PD nodes already cite it, including the parent thm-weil-etale-geometric-biduality. I kept it. Accepted tool uses: lem-pur-etale-open-derived-tensor and lem-asd-open-projection-exchange (both declared), plus the generic cbc, kun, recollement and stalk nodes. The corrected item is in fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
  }
 }
