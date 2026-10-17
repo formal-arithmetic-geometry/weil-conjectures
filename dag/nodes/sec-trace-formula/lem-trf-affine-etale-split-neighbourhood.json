@@ -316,5 +316,24 @@
   "group": "Q28",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-18ca0c524 (reviewer sub-agent of L); spot-checked: I read the whole item against Stacks 04HM (etale.tex l.1820), 04HJ (l.1794, which uses 025G) and 04HU (third paragraph, etale-cohomology.tex l.3660-3680), and I read every cited node's statement. The statement is true and unchanged. Small cases tested: U empty gives n=0; U=S gives n=1; R->C with Omega=C gives n=2 although the fibre has one point; S disjoint union D(t) over A^1 is not finite but the item still applies. Step checks: (1) the affine source gives separatedness, and etale gives unramified. (2) The fibre is affine (01I4), quasi-compact (00E8) and discrete (02GL node, Lean closed), hence finite. (3) The 04HI node is used through its statement only, including its 'in particular' clause. (4) The pieces are etale by 02GO/02GP/02GN. (5) Closed immersion implies monomorphism, marked elementary; the argument is correct. (6) Flat+lfp+mono gives an open immersion (025G leaf), as in 04HJ. (7) Shrink to an affine T inside the intersection of the images, using 01IT and 01JR. (8) The fibre of T is finite. (9) Removing the closures of the other fibre points leaves t, by discreteness; this also works for nonclosed s. (10) Restrict to V; W has no point over s. (11) The lift comes from the 03PR leaf with the explicit jointly surjective family {V->S, id_S}, keeping the same Omega. (12) The bijection follows from the universal property with v-bar fixed. Off-unit statements are Mathlib leaves or Lean-closed, so no tool_uses are needed. The delivery creates no new nodes. There is no cycle: none of the 164 nodes reachable from the deps reaches the item. No other node states 04HM. proof_deps equals the union of the step uses. Searches were recorded with all three kinds. No fixes were needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cc82a0750",
+  "group": "NV",
+  "result": "fix",
+  "note": "The statement matches the node and Stacks 04HM/04HU clause by clause: affine S and U, etale f, an IsAlgClosed geometric point with hs; an affine pointed etale neighbourhood (the Elements object of pointSmallEtale written out, no private copy); n : ℕ; an etale remainder W; a pullback decomposition over V; the V-fibre over s is exactly the image of bar_v; no point of W lies over s; the lift bijection E is pinned to the copy maps a i. No extra assumptions; universes forced by the recorded geometric-point form; n=0 and U=∅ can be expressed. The lean.statement matches the file verbatim, and only the node's lean field changed. No duplicate: slopmaster2 SplitNeighborhood is finite-etale only; side 02LN/02LP/residue-point splittings are different statements. Imports are Mathlib only. Proof is sorry. The second reading matches each clause (acceptable under H11). Finding H8: the theorem docstring lacked the node's proof step by step; fixed by the complete replacement fixes/AffineEtaleSplitNeighbourhood.lean (full source place, 12 steps with cited nodes, statement byte-identical). nt_compile --json: delivered file clean in 3.9 s, fixed file clean in 8.2 s, max line 95."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineEtaleSplitNeighbourhood",
+  "declaration": "AlgebraicGeometry.exists_affine_etale_split_neighbourhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineEtaleSplitNeighbourhood.lean",
+  "statement": "theorem exists_affine_etale_split_neighbourhood {S U : Scheme.{u}} [IsAffine S] [IsAffine U] (f : U ⟶ S) [Etale f] (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (bar_s : Spec (.of Ω) ⟶ S) (s : S) (hs : bar_s (IsLocalRing.closedPoint Ω) = s) : ∃ (V : Scheme.{u}) (g : V ⟶ S) (_ : IsAffine V) (_ : Etale g), ∃ (bar_v : Spec (.of Ω) ⟶ V), bar_v ≫ g = bar_s ∧ ∃ (n : ℕ) (W : Scheme.{u}) (w : W ⟶ V) (_ : Etale w), ∃ (e : pullback f g ≅ (∐ fun _ : Fin n => V) ⨿ W), e.hom ≫ coprod.desc (Sigma.desc (fun _ : Fin n => 𝟙 V)) w = pullback.snd f g ∧ (∀ x : V, g x = s ↔ x = bar_v (IsLocalRing.closedPoint Ω)) ∧ (∀ x : W, (w ≫ g) x ≠ s) ∧ ∃ (a : Fin n → (Spec (.of Ω) ⟶ U)), (∀ i : Fin n, a i = bar_v ≫ Sigma.ι (fun _ : Fin n => V) i ≫ coprod.inl ≫ e.inv ≫ pullback.fst f g) ∧ ∃ (ha : ∀ i : Fin n, a i ≫ f = bar_s), ∃ (E : Fin n ≃ {q : Spec (.of Ω) ⟶ U // q ≫ f = bar_s}), ∀ i : Fin n, E i = ⟨a i, ha i⟩",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-cc82a0750"
  }
 }

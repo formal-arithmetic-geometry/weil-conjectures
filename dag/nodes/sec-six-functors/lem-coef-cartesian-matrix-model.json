@@ -263,5 +263,35 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-46b9970d8 (reviewer sub-agent of L); spot-checked: I read all of it: the item, its 12 steps and the statements of all 9 cited nodes. I fetched Muro's AGT 2011 paper from msp.org read-only and checked it at the cited places. Def 10.1 (p.1595) gives the tensor (M⊗N)(x,y)=∐_z M(z,y)⊗N(x,z), the same index order as P⋆Q. The two right adjoints Hom_l and Hom_r (p.1596) match R_P and L_Q exactly. Remark 10.2 gives the coordinatewise product model and presentable generators. The remark after Def 9.1 (p.1591) says that when all objects are cofibrant the monoid axiom follows from the pushout-product axiom, which is Step 11's argument. Prop 10.3 is not needed. I recomputed both bracketings of the associator (∐_{u,v} P(v,t)×Q(u,v)×T(s,u)), the unitors (only u=t, resp. u=s survive, using 0×X≅0), both Hom bijections, and the coordinatewise pushout-product comparison as a coproduct of base pushout products. The coproduct-of-lifting argument, the K=^□F_D closure via the lifting-class-closure and transfinite-left-lifting Mathlib leaves, the lifting tests in Step 1 and the hypotheses of the presheaf, rank and regular-bound leaves all hold. Edge cases S=∅, |S|=1 and |S|=2 check out. proof_deps equals the union of the step uses. The route stays in sk-prop-sf-biduality-general plus definitions and Mathlib leaves, no SGA is cited, and no tool_uses are needed. There are no new nodes. The rg search found no duplicate, and the parent joyal-fixed-object-rectification uses exactly the stated conclusions. No changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-24d7a2f30",
+  "group": "Q13",
+  "result": "pass",
+  "note": "The node changes only in lean; the statement is verbatim (1 occurrence) and all 10 declarations exist. Hypotheses match the node with nothing stronger: combinatorial .{u,v,v} as in the dependency, all objects cofibrant (tractable follows), left proper via pushout.inr, pushout-product formulation identical to the dependency, S : Type v with no nonemptiness. Every conclusion clause is present: coordinatewise C/F/W; combinatorial .{max u v,v,v}; left proper, tractable, all cofibrant; generators for arbitrary I,J (checked true); coordinatewise limits and colimits; tensor in Muro Def 10.1 factor order; the associator and both unitor summands are canonical (recomputed); R_P and L_Q formulas and adjunctions; cofibrant unit; pushout product; NonsymmetricMonoidAxiom. Pi.monoidalCategory is not in scope, so it cannot shadow the tensor. Edge cases S empty, singleton, empty I/J OK. No hollow definition; only sorry; docstrings have the source place, blueprint tag and 12 steps. The nt_compile --json overlay compiled clean (8.5 s, no errors or warnings); axioms propext/sorryAx/choice/Quot.sound. The second reading is honestly the same session but substantive."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartesianMatrixModel",
+  "declaration": "HomotopicalAlgebra.cartesianMatrixModel",
+  "declarations": [
+   "HomotopicalAlgebra.matrixConvolution",
+   "HomotopicalAlgebra.matrixConvolutionRightHom",
+   "HomotopicalAlgebra.matrixConvolutionLeftHom",
+   "HomotopicalAlgebra.matrixRightHomMap",
+   "HomotopicalAlgebra.matrixLeftHomMap",
+   "HomotopicalAlgebra.matrixSupportedArrow",
+   "HomotopicalAlgebra.matrixEvaluation",
+   "HomotopicalAlgebra.matrixTensorInclusion",
+   "HomotopicalAlgebra.CartesianMatrixModelData",
+   "HomotopicalAlgebra.cartesianMatrixModel"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CartesianMatrixModel.lean",
+  "statement": "theorem cartesianMatrixModel {V : Type u} [Category.{v} V] [ModelCategory V] [HasLimits V] [HasColimits V] [CartesianMonoidalCategory V] [MonoidalClosed V] (_hV : CombinatorialModelCategory.{u, v, v} V) (_hcof : ∀ X : V, IsCofibrant X) (_hleft : ∀ {A B X : V} (e : A ⟶ B) (i : A ⟶ X), WeakEquivalence e → Cofibration i → WeakEquivalence (pushout.inr e i)) (_hprod : ∀ f g : Arrow V, Cofibration f.hom → Cofibration g.hom → Cofibration ((MonoidalCategory.Arrow.pushoutProduct.obj f).obj g).hom ∧ (WeakEquivalence f.hom ∨ WeakEquivalence g.hom → WeakEquivalence ((MonoidalCategory.Arrow.pushoutProduct.obj f).obj g).hom)) (S : Type v) : Nonempty (CartesianMatrixModelData V S)",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
