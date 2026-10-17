@@ -78,7 +78,7 @@ theorem exists_flat_single_open_locus
       SheafOfModules.IsFlat ((Modules.restrictFunctor W.ι).obj
         ((DerivedCategory.homologyFunctor
           (SheafOfModules.{u} (moduleRings T.toRingedSpace)) i).obj E)) ∧
-      Nonempty ((derivedPullback W.ι).obj E ≅
+      Nonempty ((AlgebraicGeometry.derivedPullback W.ι).obj E ≅
         (DerivedCategory.singleFunctor
           (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) i).obj
             ((Modules.restrictFunctor W.ι).obj ((DerivedCategory.homologyFunctor
@@ -101,7 +101,7 @@ theorem exists_flat_single_open_locus
   have hzero (q : ℕ) (hq : q ≠ i) :
       IsZero ((restrictFunctor W.ι).obj (M q)) := by
     exact isZero_restrict_union (M q) U (fun a ↦ (a.property.choose_spec).isZero q hq)
-  let D := (derivedPullback W.ι).obj E
+  let D := (AlgebraicGeometry.derivedPullback W.ι).obj E
   let B := SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)
   have hc (n : ℤ) :
       Nonempty ((DerivedCategory.homologyFunctor B n).obj D ≅
